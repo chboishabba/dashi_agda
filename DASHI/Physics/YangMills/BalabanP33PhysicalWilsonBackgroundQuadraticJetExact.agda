@@ -53,13 +53,22 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalWilsonBackgroundQuadraticJetExa
 -- The fluctuation-only projection is definitionally the existing physical
 -- right-exponential two-jet.  Thus this module genuinely extends, rather than
 -- replaces, the already machine-checked Wilson Hessian carrier.
+--
+-- SOURCE-TRIVIALIZATION BOUNDARY
+--
+-- CMP99 writes its local background expansion in its own left/right group
+-- convention.  The identification of this repository-native right-exponential
+-- mixed jet with CMP99's printed D_background Delta is therefore kept as a
+-- separate conditional theorem below; it is not silently assumed here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
+open import Data.List.Base using (length)
 open import Data.Rational.Base as ℚ using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair; Axis4)
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Hodge4
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonJetExact as Jet
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonBackgroundQuadraticJetExact as Mixed
@@ -75,7 +84,7 @@ positiveLinkBackgroundQuadraticJet :
   Plaquette.RationalSU2Background4 →
   Physical.PhysicalSU2BondField4 →
   Physical.PhysicalSU2BondField4 →
-  Hodge4.Site4 → Hodge4.Axis4 →
+  Hodge4.Site4 → Axis4 →
   Mixed.QuaternionBackgroundQuadraticFactorJet
 positiveLinkBackgroundQuadraticJet
     background backgroundField fluctuationField site axis =
@@ -98,7 +107,7 @@ inverseLinkBackgroundQuadraticJet :
   Plaquette.RationalSU2Background4 →
   Physical.PhysicalSU2BondField4 →
   Physical.PhysicalSU2BondField4 →
-  Hodge4.Site4 → Hodge4.Axis4 →
+  Hodge4.Site4 → Axis4 →
   Mixed.QuaternionBackgroundQuadraticFactorJet
 inverseLinkBackgroundQuadraticJet
     background backgroundField fluctuationField site axis =
@@ -156,7 +165,7 @@ plaquetteBackgroundQuadraticFactorJets :
   Physical.PhysicalSU2BondField4 →
   Physical.PhysicalSU2BondField4 →
   Plaquette.Plaquette4 →
-  Agda.Builtin.List.List Mixed.QuaternionBackgroundQuadraticFactorJet
+  List Mixed.QuaternionBackgroundQuadraticFactorJet
 plaquetteBackgroundQuadraticFactorJets
     background backgroundField fluctuationField (pair site axes) =
   let
@@ -211,7 +220,7 @@ plaquetteWilsonBackgroundQuadraticIs64Atoms
 
 plaquetteWilsonBackgroundQuadraticAtomCountExact :
   ∀ background backgroundField fluctuationField site axes →
-  Agda.Builtin.List.length
+  length
     (Mixed.backgroundFluctuationSecondTerms
       (plaquetteBackgroundQuadraticFactorJets
         background backgroundField fluctuationField (pair site axes)))
@@ -272,6 +281,7 @@ physicalWilsonBackgroundQuadratic64AtomLevel = machineChecked
 
 -- Source-facing identification still required: show this right-exponential
 -- mixed coefficient is exactly D_background of the existing physical Wilson
--- Hessian inside CMP99's quadratic operator A(U), including normalization.
+-- Hessian inside CMP99's quadratic operator A(U), including normalization and
+-- the source's left/right trivialization convention.
 cmp99WilsonHessianBackgroundDerivativeIdentificationLevel : ProofLevel
 cmp99WilsonHessianBackgroundDerivativeIdentificationLevel = conditional
