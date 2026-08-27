@@ -27,7 +27,7 @@ module DASHI.Physics.YangMills.BalabanA1HistoryUniformRemainderAntiDoubleCountEx
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; -_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
