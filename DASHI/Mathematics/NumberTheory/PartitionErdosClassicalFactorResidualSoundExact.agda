@@ -13,9 +13,11 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Data.List.Membership.Propositional.Properties using (∈-map⁻; ∈-++⁻)
 open import Data.List.Relation.Unary.Any as Any using ()
-open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+open import Data.Nat.Base using (_≤_; _∸_; z≤n; s≤s)
+import Data.Nat.Properties as NatP
 open import Data.Product using (_,_)
 open import Data.Sum.Base using (inj₁; inj₂)
+open import Data.Vec.Base using (Vec)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact as Product
@@ -24,14 +26,14 @@ import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualEnume
 import DASHI.Mathematics.NumberTheory.PartitionErdosFiniteKeyCardinalityExact as Cardinality
 import DASHI.Mathematics.NumberTheory.PartitionErdosFiniteKeyEnumerationExact as Key
 import DASHI.Mathematics.NumberTheory.FinitePositiveFactorPairExact as Positive
-import DASHI.Mathematics.NumberTheory.PartitionMultiplicityEnumerationExact as Enumeration
+import DASHI.Mathematics.NumberTheory.PartitionMultiplicityCarrierExact as Partition
 
 residualsForVectorSound :
   ∀ {n r : Nat}
     (bound : r ≤ n)
     (pair : Positive.PositiveFactorPair r)
-    (vector : Data.Vec.Base.Vec Nat (n Data.Nat.Base.∸ r)) →
-  Cardinality.Partition.weightedMass vector ≡ n Data.Nat.Base.∸ r →
+    (vector : Vec Nat (n ∸ r)) →
+  Partition.weightedMass vector ≡ n ∸ r →
   ∀ {residual : Key.ResidualKey n} →
   residual ∈ Classical.residualsForVector bound pair vector →
   Admissible.residualTotal residual ≡ n
@@ -96,7 +98,7 @@ classicalFactorResidualEnumerationSound :
   residual ∈ Classical.classicalFactorResidualEnumeration n →
   Admissible.residualTotal residual ≡ n
 classicalFactorResidualEnumerationSound {n} =
-  classicalResidualsUpToSound Data.Nat.Properties.≤-refl
+  classicalResidualsUpToSound NatP.≤-refl
 
 ------------------------------------------------------------------------
 -- The classical list is therefore contained in the admissible normal form.
