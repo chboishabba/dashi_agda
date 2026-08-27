@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannG21ActualZetaHeightSeparationBoundary as Height
+import DASHI.Analysis.RiemannG21ScaledHyperbolicMonotonicityBridgeExact as Scaled
 import DASHI.Analysis.RiemannG21TwoPointCovarianceShadowExact as Cov
 import DASHI.Analysis.RiemannG21TwoHeightMomentRatioTargetExact as Moment
 import DASHI.Analysis.RiemannG21SymmetricSampleBlockReductionExact as Block
@@ -11,6 +12,8 @@ import DASHI.Analysis.RiemannG21OffLinePoleQuotientTransversalityExact as Trans
 
 data ParityFrontierArrow : Set where
   actualZetaStrictHeightSeparation : ParityFrontierArrow
+  scaledXTanhXMonotonicity : ParityFrontierArrow
+  scaledXCothXMonotonicity : ParityFrontierArrow
   coshRelativeOuterUpweight : ParityFrontierArrow
   sinhRelativeOuterUpweight : ParityFrontierArrow
   finiteCovarianceDecomposition : ParityFrontierArrow
@@ -36,17 +39,27 @@ open ParityFrontierEntry public
 strictHeightEntry : ParityFrontierEntry
 strictHeightEntry = parityFrontierEntry
   actualZetaStrictHeightSeparation sourceAudited
-  "The actual-zeta companion definition uses 0 < Re rho < 1, so off-line height |alpha| is strictly below pole height 1/2. The older abstract ZeroConfig retains only closed-strip bounds."
+  "The actual-zeta companion definition uses 0 < Re rho < 1, so an off-line height |alpha| satisfies 0 < |alpha| < 1/2. The older abstract ZeroConfig retains only closed-strip bounds."
+
+xTanhEntry : ParityFrontierEntry
+xTanhEntry = parityFrontierEntry
+  scaledXTanhXMonotonicity analyticOpen
+  "Prove x -> x tanh x strictly increasing on x > 0. The standard derivative is tanh x + x sech^2 x > 0. This single scalar theorem supplies the cosh log-derivative ordering after x = height * radius."
+
+xCothEntry : ParityFrontierEntry
+xCothEntry = parityFrontierEntry
+  scaledXCothXMonotonicity analyticOpen
+  "Prove x -> x coth x strictly increasing on x > 0. The derivative reduces to (sinh x cosh x - x)/sinh^2 x > 0. This supplies the odd/sinh log-derivative ordering."
 
 coshWeightEntry : ParityFrontierEntry
 coshWeightEntry = parityFrontierEntry
   coshRelativeOuterUpweight analyticOpen
-  "Prove that raising height from |alpha| to 1/2 relatively upweights larger positive radius for the even cosh weight."
+  "Use strict increase of x tanh x to show that raising height from |alpha| to 1/2 relatively upweights larger positive radius for the even cosh weight."
 
 sinhWeightEntry : ParityFrontierEntry
 sinhWeightEntry = parityFrontierEntry
   sinhRelativeOuterUpweight analyticOpen
-  "Prove the analogous relative outer upweighting for the positive odd-sector sinh weight."
+  "Use strict increase of x coth x to prove the analogous relative outer upweighting for the positive odd-sector sinh weight."
 
 finiteCovarianceEntry : ParityFrontierEntry
 finiteCovarianceEntry = parityFrontierEntry
@@ -75,12 +88,16 @@ transversalityEntry = parityFrontierEntry
 
 canonicalParityFrontier : List ParityFrontierEntry
 canonicalParityFrontier =
-  strictHeightEntry ∷ coshWeightEntry ∷ sinhWeightEntry
+  strictHeightEntry ∷ xTanhEntry ∷ xCothEntry
+  ∷ coshWeightEntry ∷ sinhWeightEntry
   ∷ finiteCovarianceEntry ∷ momentRatioEntry ∷ remainderEntry
   ∷ blockEntry ∷ transversalityEntry ∷ []
 
 strictHeightBoundary : Height.ActualZetaHeightBoundary
 strictHeightBoundary = Height.canonicalActualZetaHeightBoundary
+
+scaledHyperbolicBoundary : Scaled.ScaledHyperbolicMonotonicityBoundary
+scaledHyperbolicBoundary = Scaled.canonicalScaledHyperbolicMonotonicityBoundary
 
 momentCriterionWitness : Moment.CrossProductSeparation
 momentCriterionWitness = Moment.canonicalMomentCrossProductSeparation
@@ -97,10 +114,17 @@ record ParityAnalyticFrontierBoundary : Set where
     strictActualZetaHeightSeparationAvailable : Bool
     strictActualZetaHeightSeparationAvailableIsTrue :
       strictActualZetaHeightSeparationAvailable ≡ true
+    scaledLogDerivativeReductionDerived : Bool
+    scaledLogDerivativeReductionDerivedIsTrue :
+      scaledLogDerivativeReductionDerived ≡ true
     finiteCovarianceAlgebraDerived : Bool
     finiteCovarianceAlgebraDerivedIsTrue : finiteCovarianceAlgebraDerived ≡ true
     parityBlockReductionDerived : Bool
     parityBlockReductionDerivedIsTrue : parityBlockReductionDerived ≡ true
+    actualXTanhXMonotonicityDerived : Bool
+    actualXTanhXMonotonicityDerivedIsFalse : actualXTanhXMonotonicityDerived ≡ false
+    actualXCothXMonotonicityDerived : Bool
+    actualXCothXMonotonicityDerivedIsFalse : actualXCothXMonotonicityDerived ≡ false
     actualCoshWeightMonotonicityDerived : Bool
     actualCoshWeightMonotonicityDerivedIsFalse : actualCoshWeightMonotonicityDerived ≡ false
     actualSinhWeightMonotonicityDerived : Bool
@@ -113,5 +137,13 @@ record ParityAnalyticFrontierBoundary : Set where
 canonicalParityAnalyticFrontierBoundary : ParityAnalyticFrontierBoundary
 canonicalParityAnalyticFrontierBoundary =
   parityAnalyticFrontierBoundary
-    true refl true refl true refl
-    false refl false refl false refl false refl
+    true refl
+    true refl
+    true refl
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
