@@ -5,6 +5,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannG21ActualZetaHeightSeparationBoundary as Height
 import DASHI.Analysis.RiemannG21ScaledHyperbolicMonotonicityBridgeExact as Scaled
+import DASHI.Analysis.RiemannG21MathlibHyperbolicReceiptBoundary as MathlibReceipt
 import DASHI.Analysis.RiemannG21TwoPointCovarianceShadowExact as Cov
 import DASHI.Analysis.RiemannG21TwoHeightMomentRatioTargetExact as Moment
 import DASHI.Analysis.RiemannG21SymmetricSampleBlockReductionExact as Block
@@ -12,6 +13,7 @@ import DASHI.Analysis.RiemannG21OffLinePoleQuotientTransversalityExact as Trans
 
 data ParityFrontierArrow : Set where
   actualZetaStrictHeightSeparation : ParityFrontierArrow
+  mathlibAtomicHyperbolicTheoremsLocated : ParityFrontierArrow
   scaledXTanhXMonotonicity : ParityFrontierArrow
   scaledXCothXMonotonicity : ParityFrontierArrow
   coshRelativeOuterUpweight : ParityFrontierArrow
@@ -41,6 +43,11 @@ strictHeightEntry = parityFrontierEntry
   actualZetaStrictHeightSeparation sourceAudited
   "The actual-zeta companion definition uses 0 < Re rho < 1, so an off-line height |alpha| satisfies 0 < |alpha| < 1/2. The older abstract ZeroConfig retains only closed-strip bounds."
 
+mathlibReceiptEntry : ParityFrontierEntry
+mathlibReceiptEntry = parityFrontierEntry
+  mathlibAtomicHyperbolicTheoremsLocated sourceAudited
+  "Mathlib owns Real.self_lt_sinh_iff, Real.sinh_pos_iff, Real.cosh_pos, Real.tanh_eq_sinh_div_cosh and Real.sinh_two_mul. These support the atomic real-analysis route but are not counted as Agda theorems until transported or independently reproved."
+
 xTanhEntry : ParityFrontierEntry
 xTanhEntry = parityFrontierEntry
   scaledXTanhXMonotonicity analyticOpen
@@ -49,7 +56,7 @@ xTanhEntry = parityFrontierEntry
 xCothEntry : ParityFrontierEntry
 xCothEntry = parityFrontierEntry
   scaledXCothXMonotonicity analyticOpen
-  "Prove x -> x coth x strictly increasing on x > 0. The derivative reduces to (sinh x cosh x - x)/sinh^2 x > 0. This supplies the odd/sinh log-derivative ordering."
+  "Prove x -> x coth x strictly increasing on x > 0. The derivative reduces to (sinh x cosh x - x)/sinh^2 x > 0; Mathlib's self_lt_sinh theorem at 2x plus sinh_two_mul supplies the key numerator inequality on the Lean side."
 
 coshWeightEntry : ParityFrontierEntry
 coshWeightEntry = parityFrontierEntry
@@ -88,7 +95,8 @@ transversalityEntry = parityFrontierEntry
 
 canonicalParityFrontier : List ParityFrontierEntry
 canonicalParityFrontier =
-  strictHeightEntry ∷ xTanhEntry ∷ xCothEntry
+  strictHeightEntry ∷ mathlibReceiptEntry
+  ∷ xTanhEntry ∷ xCothEntry
   ∷ coshWeightEntry ∷ sinhWeightEntry
   ∷ finiteCovarianceEntry ∷ momentRatioEntry ∷ remainderEntry
   ∷ blockEntry ∷ transversalityEntry ∷ []
@@ -98,6 +106,10 @@ strictHeightBoundary = Height.canonicalActualZetaHeightBoundary
 
 scaledHyperbolicBoundary : Scaled.ScaledHyperbolicMonotonicityBoundary
 scaledHyperbolicBoundary = Scaled.canonicalScaledHyperbolicMonotonicityBoundary
+
+mathlibHyperbolicReceiptBoundary : MathlibReceipt.MathlibHyperbolicReceiptBoundary
+mathlibHyperbolicReceiptBoundary =
+  MathlibReceipt.canonicalMathlibHyperbolicReceiptBoundary
 
 momentCriterionWitness : Moment.CrossProductSeparation
 momentCriterionWitness = Moment.canonicalMomentCrossProductSeparation
@@ -114,6 +126,9 @@ record ParityAnalyticFrontierBoundary : Set where
     strictActualZetaHeightSeparationAvailable : Bool
     strictActualZetaHeightSeparationAvailableIsTrue :
       strictActualZetaHeightSeparationAvailable ≡ true
+    mathlibAtomicHyperbolicTheoremsLocated : Bool
+    mathlibAtomicHyperbolicTheoremsLocatedIsTrue :
+      mathlibAtomicHyperbolicTheoremsLocated ≡ true
     scaledLogDerivativeReductionDerived : Bool
     scaledLogDerivativeReductionDerivedIsTrue :
       scaledLogDerivativeReductionDerived ≡ true
@@ -137,6 +152,7 @@ record ParityAnalyticFrontierBoundary : Set where
 canonicalParityAnalyticFrontierBoundary : ParityAnalyticFrontierBoundary
 canonicalParityAnalyticFrontierBoundary =
   parityAnalyticFrontierBoundary
+    true refl
     true refl
     true refl
     true refl
