@@ -38,7 +38,7 @@ open FormalSystemRevision public
 
 -- Merely exhibiting a historical revision does not prove that the two
 -- presentations generate the same derivations, preserve an interpretation,
--- or are conservative over one another.  Such certificates are explicit.
+-- or are conservative over one another.  Such a certificate is explicit.
 record DerivationalRevisionCertificate
     (before after : FormalSystemPresentation)
     (revision : FormalSystemRevision before after) : Set₁ where
@@ -47,19 +47,6 @@ record DerivationalRevisionCertificate
     BeforeDerivation : Set
     AfterDerivation : Set
     translateDerivation : BeforeDerivation → AfterDerivation
-
-record BidirectionalRevisionCertificate
-    (before after : FormalSystemPresentation)
-    (revision : FormalSystemRevision before after) : Set₁ where
-  constructor bidirectionalRevisionCertificate
-  field
-    forward : DerivationalRevisionCertificate before after revision
-    reverse : DerivationalRevisionCertificate after before
-      (formalSystemRevision
-        (ChangedSymbol revision)
-        (ChangedRule revision)
-        (λ changed → changed)
-        (λ changed → changed))
 
 ------------------------------------------------------------------------
 -- Positive count balance: useful when a source describes additions/removals
