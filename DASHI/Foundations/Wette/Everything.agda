@@ -1,18 +1,6 @@
 module DASHI.Foundations.Wette.Everything where
 
 -- Eduard Wette reconstruction rollup.
---
--- Keep historical provenance, primary-text acquisition and extraction,
--- historical signature and rule-revision/transcription surfaces, recovery
--- frontier, source representation, executable-machine semantics, arithmetic
--- transition certification, finite mixed-rule traces, proof-carrying finite
--- derivability and composition, proof translations / equiconsistency
--- boundaries, generic formal-claim transport and deduction-indexed
--- interpretation geometry, translated Bernays obstruction, invariant-based
--- consistency obstruction, representation/kernel transport, composed certified
--- arithmetic kernels, concrete arithmetic-machine witnesses, and
--- metamathematical claim boundaries separate so no stronger conclusion is
--- imported merely by importing the arithmetic coding layer.
 
 import DASHI.Foundations.WetteHistoricalSourceAtlasExact
 import DASHI.Foundations.WettePrimaryTextAcquisitionPlanExact
@@ -26,6 +14,9 @@ import DASHI.Foundations.Wette1969CriticalRuleDependencyExact
 import DASHI.Foundations.Wette1969SubstitutionOrderExact
 import DASHI.Foundations.Wette1969CriticalPremiseTypingExact
 import DASHI.Foundations.Wette1969Rule9324x25PremiseTemplateExact
+import DASHI.Foundations.Wette1969Rule915PredicateProducerExact
+import DASHI.Foundations.Wette1969Rule83TupleDerivationExact
+import DASHI.Foundations.Wette1969Rule8112FreshnessDerivationExact
 import DASHI.Foundations.Wette1969SchematicSubstitutionFreshnessExact
 import DASHI.Foundations.Wette1969OrderedTuplePredicateSubstitutionExact
 import DASHI.Foundations.Wette1969QuantifierCaptureSafetyExact
@@ -36,6 +27,8 @@ import DASHI.Foundations.Wette1969ProofCarryingRuleApplicationExact
 import DASHI.Foundations.Wette1969FiniteDerivationContextExact
 import DASHI.Foundations.Wette1969DerivationClosureExact
 import DASHI.Foundations.Wette1969Rule828To9324x25DerivationExact
+import DASHI.Foundations.Wette1969CriticalPremiseLocalDerivationExact
+import DASHI.Foundations.Wette1969CriticalPremiseConcreteProducerChainExact
 import DASHI.Foundations.Wette1969CompletenessInterpretationBridgeExact
 import DASHI.Foundations.Wette1970PrimaryTextExtractionExact
 import DASHI.Foundations.WetteHistoricalRecoveryFrontierExact
