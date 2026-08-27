@@ -5,11 +5,12 @@ open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
 -- SOURCE REGISTRY: path-integral experiments, stationary action,
--- diffraction/source-scale selection, caustics, and finite-source Kelvin wakes.
+-- diffraction/source-scale selection, caustics, finite-source Kelvin wakes,
+-- and relational phase-sensitive recoil readout.
 --
 -- Author/title/venue/DOI metadata is explicit and every source carries a
--- bounded role.  Experimental support for path-amplitude composition is not
--- promoted into TSFV or an ontology of independent trajectories.
+-- bounded role.  Experimental support is not promoted into TSFV unless a
+-- separate derivation is constructed.
 ------------------------------------------------------------------------
 
 record SourceReference : Set where
@@ -59,6 +60,15 @@ wenEtAl2026Dataset = sourceReference
   2026
   "10.5061/dryad.x0k6djj14"
   "reproducibility data for more than 1.4 million (17^5) reconstructed path amplitudes and the reported postulate tests"
+
+wuEtAl2026MolecularRecoil : SourceReference
+wuEtAl2026MolecularRecoil = sourceReference
+  "Zhenlin Wu; Tim Duka; Mariano Isaza-Monsalve; Miriam Kautzky; Vojtech Svarc; Andrea Turci; Rene Nardi; Marcin Gronowski; Michal Tomza; Brandon J. Furey; Philipp Schindler"
+  "Infrared absorption spectroscopy of a single polyatomic molecular ion"
+  "Nature"
+  2026
+  "10.1038/s41586-026-10915-8"
+  "single-photon absorption spectroscopy using molecular recoil on a shared motional mode and entanglement-assisted phase-sensitive atomic-qubit readout; supports relational observer amplification, while the authors report that their model does not fully reproduce the absolute effective absorption magnitude"
 
 bornWolfPrinciplesOfOptics : SourceReference
 bornWolfPrinciplesOfOptics = sourceReference
