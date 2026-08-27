@@ -17,6 +17,11 @@ on:
       - 'DASHI/Core/IntersectionalConstraintGeometryExact.agda'
       - 'DASHI/Core/IntersectionalBinaryInteractionBridgeExact.agda'
       - 'DASHI/Core/FeministRechartingSourceBridgeExact.agda'
+      - 'DASHI/Core/TernaryRoleCarrierExact.agda'
+      - 'DASHI/Core/LacanFregeTernaryRoleChartExact.agda'
+      - 'DASHI/Core/IrigarayLabialRelationalCarrierExact.agda'
+      - 'DASHI/Core/DifferenceWithoutHierarchyExact.agda'
+      - 'DASHI/Core/LacanIrigarayTernaryGrammarBridgeExact.agda'
       - 'DASHI/Core/DialecticalStageSpectrumExact.agda'
       - 'DASHI/Core/ContextualDialecticRoleExact.agda'
       - 'DASHI/Core/EpistemicSuspensionExact.agda'
@@ -78,6 +83,11 @@ jobs:
             DASHI/Core/IntersectionalConstraintGeometryExact.agda
             DASHI/Core/IntersectionalBinaryInteractionBridgeExact.agda
             DASHI/Core/FeministRechartingSourceBridgeExact.agda
+            DASHI/Core/TernaryRoleCarrierExact.agda
+            DASHI/Core/LacanFregeTernaryRoleChartExact.agda
+            DASHI/Core/IrigarayLabialRelationalCarrierExact.agda
+            DASHI/Core/DifferenceWithoutHierarchyExact.agda
+            DASHI/Core/LacanIrigarayTernaryGrammarBridgeExact.agda
             DASHI/Core/DialecticalStageSpectrumExact.agda
             DASHI/Core/ContextualDialecticRoleExact.agda
             DASHI/Core/EpistemicSuspensionExact.agda
@@ -125,6 +135,11 @@ jobs:
               DASHI/Core/IntersectionalConstraintGeometryExact.agda
               DASHI/Core/IntersectionalBinaryInteractionBridgeExact.agda
               DASHI/Core/FeministRechartingSourceBridgeExact.agda
+              DASHI/Core/TernaryRoleCarrierExact.agda
+              DASHI/Core/LacanFregeTernaryRoleChartExact.agda
+              DASHI/Core/IrigarayLabialRelationalCarrierExact.agda
+              DASHI/Core/DifferenceWithoutHierarchyExact.agda
+              DASHI/Core/LacanIrigarayTernaryGrammarBridgeExact.agda
               DASHI/Core/NumberRoleProvenanceAtlasExact.agda
               DASHI/Core/DialecticalStageSpectrumExact.agda
               DASHI/Core/ContextualDialecticRoleExact.agda
