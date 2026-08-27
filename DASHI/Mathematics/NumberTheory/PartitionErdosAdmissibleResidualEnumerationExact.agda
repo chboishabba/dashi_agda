@@ -18,15 +18,12 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosAdmissibleResidualEnumeratio
 -- j in {0,...,n-1}, u : Fin(v), then retain exactly the keys satisfying
 --
 --   mass(mu) + (j+1)*v = n.
---
--- This is the finite analogue of the repo's exact-shell pattern: unique raw
--- carrier -> exact decidable filter -> unique admissible enumeration.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
-open import Data.Fin.Base using (toℕ)
+open import Data.Fin.Base using (Fin; toℕ)
 import Data.Fin.Properties as FinP
 open import Data.List.Base using (map)
 open import Data.List.Membership.Propositional using (_∈_)
@@ -36,8 +33,10 @@ import Data.List.Relation.Unary.AllPairs.Core as AllPairs
 open import Data.List.Relation.Unary.Unique.Propositional using (Unique)
 import Data.List.Relation.Unary.Unique.Propositional.Properties as UniqueP
 open import Data.Nat.Properties using (_≟_)
+open import Data.Product using (Σ; _×_)
+open import Data.Vec.Base using (Vec)
 open import Relation.Nullary.Decidable.Core using (yes; no)
-open import Relation.Binary.PropositionalEquality using (_≢_; subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Mathematics.NumberTheory.FiniteAllFinEnumerationExact as Finite
 import DASHI.Mathematics.NumberTheory.FiniteDependentPairEnumerationExact as Dep
@@ -59,18 +58,18 @@ finitePredecessorsUnique n =
 -- Raw finite residual carrier.
 
 predecessorUnitEnumeration :
-  ∀ {n} (index : Data.Fin.Base.Fin n) →
-  List (Nat Data.Product.× Data.Fin.Base.Fin (Partition.partValue index))
+  ∀ {n} (index : Fin n) →
+  List (Nat × Fin (Partition.partValue index))
 predecessorUnitEnumeration {n} index =
   Dep.dependentPairs
     (finitePredecessors n)
     (λ _ → Finite.allFin (Partition.partValue index))
 
 indexResidualEnumeration :
-  ∀ {n} (vector : Data.Vec.Base.Vec Nat n) →
+  ∀ {n} (vector : Vec Nat n) →
   List
-    (Data.Product.Σ (Data.Fin.Base.Fin n) λ index →
-      Nat Data.Product.× Data.Fin.Base.Fin (Partition.partValue index))
+    (Σ (Fin n) λ index →
+      Nat × Fin (Partition.partValue index))
 indexResidualEnumeration {n} vector =
   Dep.dependentPairs
     (Finite.allFin n)
@@ -83,7 +82,7 @@ rawResidualEnumeration n =
     indexResidualEnumeration
 
 predecessorUnitUnique :
-  ∀ {n} (index : Data.Fin.Base.Fin n) →
+  ∀ {n} (index : Fin n) →
   Unique (predecessorUnitEnumeration index)
 predecessorUnitUnique {n} index =
   Dep.dependentPairsUnique
@@ -92,7 +91,7 @@ predecessorUnitUnique {n} index =
     (λ _ → Finite.allFinUnique (Partition.partValue index))
 
 indexResidualUnique :
-  ∀ {n} (vector : Data.Vec.Base.Vec Nat n) →
+  ∀ {n} (vector : Vec Nat n) →
   Unique (indexResidualEnumeration vector)
 indexResidualUnique {n} vector =
   Dep.dependentPairsUnique
