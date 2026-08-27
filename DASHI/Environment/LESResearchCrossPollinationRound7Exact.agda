@@ -102,10 +102,10 @@ lesChoiceCannotDescendThroughCoarsePresentSummary =
 lesFutureConeSurface : HistoryChoice.HistoryConditionedFutureConeSurface
 lesFutureConeSurface =
   record
-    { History = ManagementHistory
-    ; Observation = CoarsePresentSummary
+    { FutureHistory = ManagementHistory
+    ; FutureObservation = CoarsePresentSummary
     ; FutureConeCode = ContinuationConeCode
-    ; observe = observeManagementHistory
+    ; observeFutureHistory = observeManagementHistory
     ; futureCone = futureConeForManagementHistory
     ; futureReading =
         "A coarse current environmental summary need not determine the continuation cone when prior commitments differ."
@@ -115,9 +115,9 @@ lesFutureConeWitness :
   HistoryChoice.SameObservationDifferentFutureCone lesFutureConeSurface
 lesFutureConeWitness =
   record
-    { leftHistory = shortHorizonConfiguration
-    ; rightHistory = longHorizonConfiguration
-    ; sameObservation = refl
+    { futureLeftHistory = shortHorizonConfiguration
+    ; futureRightHistory = longHorizonConfiguration
+    ; futureSameObservation = refl
     ; futureConesDiffer = λ ()
     }
 
