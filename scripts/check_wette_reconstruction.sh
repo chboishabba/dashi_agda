@@ -5,6 +5,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 FILES=(
+  DASHI/Core/FormalClaimTransportGeometryExact.agda
   DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
   DASHI/Foundations/WetteArithmeticRepresentationExact.agda
   DASHI/Foundations/WetteConstructiveAutomatonExact.agda
@@ -12,6 +13,7 @@ FILES=(
   DASHI/Foundations/WetteFiniteDeductionTraceExact.agda
   DASHI/Foundations/WetteFiniteDerivationCompositionExact.agda
   DASHI/Foundations/WetteFiniteCalculusTranslationExact.agda
+  DASHI/Foundations/WetteFormalClaimTransportBridgeExact.agda
   DASHI/Foundations/WetteRepresentationKernelBridgeExact.agda
   DASHI/Foundations/WetteCertifiedArithmeticKernelExact.agda
   DASHI/Foundations/WetteFRACTRANCrossPollinationExact.agda
@@ -38,6 +40,14 @@ for file in "${FILES[@]}"; do
 done
 
 # Provenance / promotion-boundary guards.
+grep -q 'existenceOfRepresentationMapTransportsEveryClaimIsFalse' \
+  DASHI/Core/FormalClaimTransportGeometryExact.agda
+grep -q 'comparisonAxesAreDefinitionallyTotallyOrderedIsFalse' \
+  DASHI/Core/FormalClaimTransportGeometryExact.agda
+grep -q 'relativeCompletenessIsDefinitionallyNextLinearLevelIsFalse' \
+  DASHI/Foundations/WetteFormalClaimTransportBridgeExact.agda
+grep -q 'proofTranslationCoordinateImpliesSemanticSoundnessCoordinateIsFalse' \
+  DASHI/Foundations/WetteFormalClaimTransportBridgeExact.agda
 grep -q 'doi:10.1007/978-3-642-86745-3_9' \
   DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
 grep -q 'doi:10.2307/2272630' \
@@ -66,10 +76,12 @@ grep -q 'contradictionInOrdinaryArithmeticProvedIsFalse' \
   DASHI/Foundations/WetteConsistencyClaimBoundaryExact.agda
 
 scripts/run_agda29_parallel_check.sh \
+  DASHI/Core/FormalClaimTransportGeometryExact.agda \
   DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda \
   DASHI/Foundations/WetteFiniteDeductionTraceExact.agda \
   DASHI/Foundations/WetteFiniteDerivationCompositionExact.agda \
   DASHI/Foundations/WetteFiniteCalculusTranslationExact.agda \
+  DASHI/Foundations/WetteFormalClaimTransportBridgeExact.agda \
   DASHI/Foundations/WetteFiniteDerivabilityBernaysBridgeExact.agda \
   DASHI/Foundations/WetteTranslatedBernaysObstructionExact.agda \
   DASHI/Foundations/WetteFiniteTraceConsistencyObstructionExact.agda \
