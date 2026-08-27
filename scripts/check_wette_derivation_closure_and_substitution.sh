@@ -13,7 +13,9 @@ FILES=(
   DASHI/Foundations/Wette1969QuantifierCaptureSafetyExact.agda
   DASHI/Foundations/Wette1969RecursorBindingScopeExact.agda
   DASHI/Foundations/Wette1969DependentTwoStageSubstitutionExact.agda
+  DASHI/Foundations/Wette1969Rule9324x25PremiseTemplateExact.agda
   DASHI/Foundations/Wette1969Rule9324x25ComputationalSideConditionsExact.agda
+  DASHI/Foundations/Wette1969Rule828To9324x25DerivationExact.agda
 )
 
 FORBIDDEN_PATTERN='\{![^}]*!\}|(^|[[:space:]=:(])\?([[:space:];,)}]|$)|^[[:space:]]*postulate([[:space:]]|$)|--allow-unsolved-metas|\{-# OPTIONS[^#]*--(unsafe|type-in-type|no-positivity-check|no-termination-check|rewriting)([[:space:]]|#)|=[[:space:]]*_[[:space:]]*$'
@@ -56,8 +58,17 @@ grep -q 'pairedFourPlaceIIJudgementNowReproducedIsTrue' DASHI/Foundations/Wette1
 grep -q 'sourceOrderV2ToV3ThenW2ToRecursivePredicatePreservedIsTrue' DASHI/Foundations/Wette1969DependentTwoStageSubstitutionExact.agda
 grep -q 'typedIIFormulaIsAlreadyHistoricalDerivabilityProofIsFalse' DASHI/Foundations/Wette1969DependentTwoStageSubstitutionExact.agda
 
+grep -q 'premise4HasIndependentPairedSubstituendAndReplacementIsTrue' DASHI/Foundations/Wette1969Rule9324x25PremiseTemplateExact.agda
+grep -q 'freshTupleIsDefinitionallyWholePremise4ReplacementIsFalse' DASHI/Foundations/Wette1969Rule9324x25PremiseTemplateExact.agda
+
 grep -q 'premise3FreshnessFragmentNowComputationallyCertifiableIsTrue' DASHI/Foundations/Wette1969Rule9324x25ComputationalSideConditionsExact.agda
 grep -q 'computationalCertificateIsAlreadyHistoricalDerivabilityProofIsFalse' DASHI/Foundations/Wette1969Rule9324x25ComputationalSideConditionsExact.agda
+
+grep -q 'rule828ConclusionDefinitionallyMatchesCriticalPremise4IsTrue' DASHI/Foundations/Wette1969Rule828To9324x25DerivationExact.agda
+grep -q 'pairedIIPremiseGeneratedInsideDerivationContextIsTrue' DASHI/Foundations/Wette1969Rule828To9324x25DerivationExact.agda
+grep -q 'firstThreeCriticalPremisesPersistAcrossRule828IsTrue' DASHI/Foundations/Wette1969Rule828To9324x25DerivationExact.agda
+grep -q 'certified828Then9324And9325TracesNowConstructibleIsTrue' DASHI/Foundations/Wette1969Rule828To9324x25DerivationExact.agda
+grep -q 'criticalPremise4StillMustBeSuppliedExternallyAfterRule828IsFalse' DASHI/Foundations/Wette1969Rule828To9324x25DerivationExact.agda
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Foundations/Wette1969DerivationClosureExact.agda \
@@ -67,4 +78,6 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Foundations/Wette1969QuantifierCaptureSafetyExact.agda \
   DASHI/Foundations/Wette1969RecursorBindingScopeExact.agda \
   DASHI/Foundations/Wette1969DependentTwoStageSubstitutionExact.agda \
-  DASHI/Foundations/Wette1969Rule9324x25ComputationalSideConditionsExact.agda
+  DASHI/Foundations/Wette1969Rule9324x25PremiseTemplateExact.agda \
+  DASHI/Foundations/Wette1969Rule9324x25ComputationalSideConditionsExact.agda \
+  DASHI/Foundations/Wette1969Rule828To9324x25DerivationExact.agda
