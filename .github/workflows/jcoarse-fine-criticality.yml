@@ -26,6 +26,7 @@ on:
       - 'DASHI/Core/RelationalEpistemicProcessSourceBridgeExact.agda'
       - 'DASHI/Core/DeclaredRealizedIntegrityResidualExact.agda'
       - 'DASHI/Core/SolisSituatedIntegrityBridgeExact.agda'
+      - 'DASHI/Core/SituatedIntegrityNonfactorabilityExact.agda'
       - 'DASHI/Biology/JCoarseFineBranchingCriticalityExact.agda'
       - 'DASHI/Biology/JCoarseFineDepthDecompositionBridgeExact.agda'
       - 'DASHI/Governance/TypedBranchingOptionConeBridgeExact.agda'
@@ -83,6 +84,7 @@ jobs:
             DASHI/Core/RelationalEpistemicProcessSourceBridgeExact.agda
             DASHI/Core/DeclaredRealizedIntegrityResidualExact.agda
             DASHI/Core/SolisSituatedIntegrityBridgeExact.agda
+            DASHI/Core/SituatedIntegrityNonfactorabilityExact.agda
             DASHI/Biology/JCoarseFineBranchingCriticalityExact.agda
             DASHI/Biology/JCoarseFineDepthDecompositionBridgeExact.agda
             DASHI/Governance/TypedBranchingOptionConeBridgeExact.agda
@@ -127,6 +129,7 @@ jobs:
               DASHI/Core/RelationalEpistemicProcessSourceBridgeExact.agda
               DASHI/Core/DeclaredRealizedIntegrityResidualExact.agda
               DASHI/Core/SolisSituatedIntegrityBridgeExact.agda
+              DASHI/Core/SituatedIntegrityNonfactorabilityExact.agda
               DASHI/Biology/JCoarseFineBranchingCriticalityExact.agda
               DASHI/Biology/JCoarseFineDepthDecompositionBridgeExact.agda
               DASHI/Governance/TypedBranchingOptionConeBridgeExact.agda
