@@ -18,6 +18,7 @@ import DASHI.Foundations.WetteHistoricalSourceAtlasExact
 import DASHI.Foundations.WettePrimaryTextAcquisitionPlanExact
 import DASHI.Foundations.Wette1969PrimaryTextExtractionExact
 import DASHI.Foundations.Wette1969HistoricalSignatureExact
+import DASHI.Foundations.Wette1969JudgementConstructorsExact
 import DASHI.Foundations.Wette1969RuleRevisionExact
 import DASHI.Foundations.Wette1969InitialRuleTranscriptionExact
 import DASHI.Foundations.Wette1969CriticalRuleDependencyExact
