@@ -21,6 +21,8 @@ import DASHI.Core.IntersectionalBinaryInteractionBridgeExact
 import DASHI.Core.FeministRechartingSourceBridgeExact
 import DASHI.Core.TernaryRoleCarrierExact
 import DASHI.Core.LacanFregeTernaryRoleChartExact
+import DASHI.Core.LacanS2RoleSeparationExact
+import DASHI.Core.LacanSexuationTernarySeparationExact
 import DASHI.Core.IrigarayLabialRelationalCarrierExact
 import DASHI.Core.DifferenceWithoutHierarchyExact
 import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact
@@ -28,9 +30,9 @@ import DASHI.Core.LacanIrigarayTernaryGrammarBridgeExact
 import DASHI.Core.FeministLabialRechartingCapstoneExact
 import DASHI.Core.RelationalRoleGrammarExact
 import DASHI.Core.CriticalRelationalGrammarSourceRegistryExact
-import DASHI.Core.LacanS2RoleSeparationExact
 import DASHI.Core.CriticalThirdnessRoleGrammarExact
 import DASHI.Core.CriticalGrammarRelabellingBoundaryExact
+import DASHI.Core.TrinhSubjectInMakingNoncollapseExact
 import DASHI.Core.BadiouVoidCountAsOneBoundaryExact
 import DASHI.Core.LugonesPurityCurdlingNonfactorabilityExact
 import DASHI.Core.SocialEcologyHierarchyProjectionBoundaryExact
