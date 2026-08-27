@@ -10,7 +10,7 @@ module DASHI.Mathematics.NumberTheory.GradedFamilyPointingResidualExact where
 -- equality for proof-bearing carriers.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Product using (Σ; _,_)
 
@@ -102,8 +102,8 @@ literalAsExtensional family decomposition = record
   { Residual = GradedFamilyResidualDecomposition.Residual decomposition
   ; PointedEquivalent = _≡_
   ; ResidualEquivalent = _≡_
-  ; pointedReflexive = λ _ → Agda.Builtin.Equality.refl
-  ; residualReflexive = λ _ → Agda.Builtin.Equality.refl
+  ; pointedReflexive = λ _ → refl
+  ; residualReflexive = λ _ → refl
   ; delete = GradedFamilyResidualDecomposition.delete decomposition
   ; insert = GradedFamilyResidualDecomposition.insert decomposition
   ; deleteInsert = GradedFamilyResidualDecomposition.deleteInsert decomposition
