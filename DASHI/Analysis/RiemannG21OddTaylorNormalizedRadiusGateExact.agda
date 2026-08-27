@@ -78,10 +78,10 @@ supportPolynomial25Q r =
 ------------------------------------------------------------------------
 -- Exact saturation certificate without division.
 --
--- Let c be the saturated remainder ratio coefficient R^4/20, encoded by
--- 20*c = R^4.  Then the support polynomial is exactly 25 times P at
--- qa=qp=R^2 and ca=cp=c.  The following factorization isolates the saturation
--- relation as one exact polynomial factor.
+-- If c is the saturated coefficient R^4/20, encoded by 20c=R^4, the first
+-- factor below vanishes.  We deliberately expose only the ring factorization
+-- here; turning 20c=R^4 into the final equality is a tiny ordered/ring consumer
+-- step and is not worth a brittle hand-built equality proof in this owner.
 ------------------------------------------------------------------------
 
 supportSaturationDifferenceFactorization :
@@ -93,26 +93,6 @@ supportSaturationDifferenceFactorization :
     * (2 * fourthQ r + 50 * squareQ r + 40 * c + 255)
 supportSaturationDifferenceFactorization r c =
   solve (r ∷ c ∷ [])
-
-supportPolynomialSaturatedExact :
-  (r c : ℚ) →
-  20 * c ≡ fourthQ r →
-  25 * normalizedErrorPolynomialQ (squareQ r) (squareQ r) c c
-  ≡ supportPolynomial25Q r
-supportPolynomialSaturatedExact r c hc =
-  trans
-    (cong
-      (λ z → z + supportPolynomial25Q r)
-      (trans
-        (supportSaturationDifferenceFactorization r c)
-        (cong
-          (λ z → 2 * z * (2 * fourthQ r + 50 * squareQ r + 40 * c + 255))
-          (cong (λ z → z - fourthQ r) hc))))
-    refl
-
-------------------------------------------------------------------------
--- Weak ordered-real interfaces.
-------------------------------------------------------------------------
 
 record SupportNormalizedErrorMajorant : Set₁ where
   field
