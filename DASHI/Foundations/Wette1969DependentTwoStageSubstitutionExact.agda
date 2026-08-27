@@ -43,7 +43,7 @@ juxtapose left right =
   Signature.binaryWordTerm Signature.juxtapositionFunctor refl left right
 
 ------------------------------------------------------------------------
--- First stage: tuple substitution.
+-- First stage: V2 -> V3 in the source/definiens.
 ------------------------------------------------------------------------
 
 record TupleSubstitutionStage : Set where
@@ -67,7 +67,7 @@ firstStageII stage =
     (intermediate stage)
 
 ------------------------------------------------------------------------
--- Second stage is genuinely dependent on the first.
+-- Second stage: W2 -> recursive predicate in the actual first-stage result.
 ------------------------------------------------------------------------
 
 record PredicateSubstitutionStage (first : TupleSubstitutionStage) : Set where
@@ -106,10 +106,10 @@ open DependentTwoStageSubstitution public
 ------------------------------------------------------------------------
 -- Wette's special paired four-place II surface.
 --
--- The paired substituend is u(V2,W2); the paired substitute is u(V3,R), where
--- R is the recursively defined predicate.  By Wette's p.148 reading and rule
--- 8.2.8, the first components are substituted first and the second components
--- second.  This is exactly the 1.632 order.
+-- Rule 8.2.8 and p.148 pair the substituends as u(V2,W2) and the substitutes
+-- as u(V3,R).  The p.148 convention interprets this four-place II by performing
+-- the first component substitution and then the second.  Section 1.632 fixes
+-- these components for 9.3.24/25 exactly as V2->V3 followed by W2->R.
 ------------------------------------------------------------------------
 
 pairedSubstituend : DependentTwoStageSubstitution → WordTerm
@@ -133,7 +133,7 @@ pairedII stages =
     (result (second stages))
 
 ------------------------------------------------------------------------
--- Literal transcription of rule 8.2.8's sequential-composition shape.
+-- Literal source-level rule 8.2.8 composition schema.
 ------------------------------------------------------------------------
 
 rule8-2-8Address : Revision.HistoricalRuleAddress
