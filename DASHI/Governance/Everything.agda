@@ -47,12 +47,15 @@ import DASHI.Governance.RevolutionaryAdjunctRegression
 
 -- Safe-and-just development / provisioning geometry.  Empirical source claims,
 -- allocation conventions, vector observations and causal interpretation remain
--- explicitly separated.
+-- explicitly separated.  Fanning 2022 extends the 2018 carrier through time
+-- without pretending the national panel is still an identical 7 x 11 object.
 import DASHI.Governance.SafeJustSourceRegistryExact
 import DASHI.Governance.SafeJustIndicatorSystemExact
 import DASHI.Governance.PlanetaryBoundaryAllocationExact
 import DASHI.Governance.ProvisioningGeometryExact
 import DASHI.Governance.ONeill2018MethodsBoundaryExact
+import DASHI.Governance.Fanning2022TemporalIndicatorExact
+import DASHI.Governance.Fanning2022ProjectionBoundaryExact
 
 -- Provenance-bearing policy routing, corrective reachability and source-bounded
 -- application surfaces assembled as one focused tranche.
