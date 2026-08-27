@@ -10,10 +10,6 @@ import DASHI.Analysis.RiemannG21PrimePairKernelExact as Pair
 import DASHI.Analysis.RiemannG21TwoByTwoMixedObstructionExact as Mixed2
 import DASHI.Analysis.RiemannG21AugmentedDeterminantFiniteExact as Det3
 
--- G21 is a post-G20 architecture: three samples of two channels are first
--- quotiented by the known one-dimensional pole profile, and only then is an
--- exterior orientation read from the residual two-dimensional quotient.
-
 data G21Obligation : Set where
   commonPoleProfileFactorization : G21Obligation
   augmentedDeterminantPoleQuotientIdentity : G21Obligation
@@ -39,34 +35,42 @@ record G21ObligationEntry : Set where
 
 open G21ObligationEntry public
 
+commonPoleEntry : G21ObligationEntry
 commonPoleEntry =
   g21ObligationEntry commonPoleProfileFactorization analyticInterfaceOpen
     "Choose literal Weil channels whose deterministic pole responses factor through one common profile m(x)."
 
+poleQuotientIdentityEntry : G21ObligationEntry
 poleQuotientIdentityEntry =
   g21ObligationEntry augmentedDeterminantPoleQuotientIdentity analyticInterfaceOpen
     "Prove on the literal Weil carrier that the 3x3 augmented determinant equals det[E1;E2;m], annihilating pure-pole and mixed pole/error terms before estimation."
 
+zeroRankEntry : G21ObligationEntry
 zeroRankEntry =
   g21ObligationEntry offLineZeroRankTwoInPoleQuotient analyticInterfaceOpen
     "For an off-critical-line zero, prove the two residual zero channels remain rank two after quotienting by the pole profile, preferably with an explicit determinant floor."
 
+explicitFormulaEntry : G21ObligationEntry
 explicitFormulaEntry =
   g21ObligationEntry literalTwoChannelExplicitFormulaExpansion arithmeticInterfaceOpen
     "Substitute both literal explicit formulas before majorization and derive the surviving double von-Mangoldt pair expression exactly."
 
+diagonalZeroEntry : G21ObligationEntry
 diagonalZeroEntry =
   g21ObligationEntry literalPrimePairDiagonalZero arithmeticInterfaceOpen
     "For a derivative/contrastive channel derive the log(n/m)-type factor and prove K(n,n)=0 on the literal pair kernel."
 
+nonseparableEntry : G21ObligationEntry
 nonseparableEntry =
   g21ObligationEntry literalPrimePairRelationalNonseparability arithmeticInterfaceOpen
     "Prove a rectangle violation and preferably a nonzero 2x2 minor for the literal pair kernel."
 
+swapEntry : G21ObligationEntry
 swapEntry =
   g21ObligationEntry exactSwapReindexBeforeMajorization arithmeticInterfaceOpen
     "Split the exact pair carrier into diagonal and swapped off-diagonal fibres and reindex before any absolute-value bound."
 
+scaleEntry : G21ObligationEntry
 scaleEntry =
   g21ObligationEntry primePairScaleDecision arithmeticInterfaceOpen
     "Compare the trivial surviving pair scale with the zero-side determinant floor and kill the lane immediately if the ratio diverges."
@@ -108,28 +112,21 @@ record G21CurrentBoundary : Set where
     newObserverUsesPoleQuotientExteriorCoordinate : Bool
     newObserverUsesPoleQuotientExteriorCoordinateIsTrue :
       newObserverUsesPoleQuotientExteriorCoordinate ≡ true
-
     twoByTwoMixedTermObstructionDerived : Bool
     twoByTwoMixedTermObstructionDerivedIsTrue :
       twoByTwoMixedTermObstructionDerived ≡ true
-
     finiteThreeByThreePoleQuotientMechanismDerived : Bool
     finiteThreeByThreePoleQuotientMechanismDerivedIsTrue :
       finiteThreeByThreePoleQuotientMechanismDerived ≡ true
-
     literalAugmentedDeterminantIdentityDerived : Bool
     literalAugmentedDeterminantIdentityDerivedIsFalse :
       literalAugmentedDeterminantIdentityDerived ≡ false
-
     offLineZeroRankTwoDerived : Bool
     offLineZeroRankTwoDerivedIsFalse : offLineZeroRankTwoDerived ≡ false
-
     literalPrimePairKernelDerived : Bool
     literalPrimePairKernelDerivedIsFalse : literalPrimePairKernelDerived ≡ false
-
     favorableScaleGateDerived : Bool
     favorableScaleGateDerivedIsFalse : favorableScaleGateDerived ≡ false
-
     riemannHypothesisDerived : Bool
     riemannHypothesisDerivedIsFalse : riemannHypothesisDerived ≡ false
 
