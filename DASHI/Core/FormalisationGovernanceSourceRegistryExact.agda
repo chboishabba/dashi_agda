@@ -50,8 +50,8 @@ beethamLegitimacy : SourceReference
 beethamLegitimacy = source-reference
   "David Beetham"
   "The Legitimation of Power"
-  "Macmillan 1991; Palgrave Macmillan 2nd ed. 2013"
-  "ISBN 9780230279337; no DOI asserted"
+  "Macmillan 1991; Bloomsbury Academic 2nd ed. 2013"
+  "DOI 10.1007/978-1-349-21599-7; 2nd-ed. ISBN 9780230279728"
   "rule-conformity, justificatory belief and consent as distinct legitimacy evidence dimensions"
 
 plumwoodMastery : SourceReference
