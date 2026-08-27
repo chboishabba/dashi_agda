@@ -8,3 +8,4 @@ import DASHI.Core.FallacyObstructionEverything
 import DASHI.Core.HistoryConditionedChoiceExact
 import DASHI.Core.RelationalTensionCompressionExact
 import DASHI.Core.RelationalObserverGainExact
+import DASHI.Core.RelationalHistoryFabricExact
