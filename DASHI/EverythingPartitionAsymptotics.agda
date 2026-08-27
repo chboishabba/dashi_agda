@@ -12,15 +12,17 @@ module DASHI.EverythingPartitionAsymptotics where
 -- The analytic layer uses the exact git-pinned `vendor/bishop` submodule.
 -- Existing Yang--Mills Bishop geometric and polynomial-weighted finite-sum
 -- machinery is reused directly for the Erdos degree-one kernel.  Square-root
--- realization is reduced to exact rational approximants constructed above the
--- vendored `Real.mkℝ` carrier.
+-- realization is reduced to exact Nat/rational approximants constructed above
+-- the vendored `Real.mkℝ` carrier.
 ------------------------------------------------------------------------
 
 import DASHI.Foundations.BishopVendoredSubmoduleProvenanceExact
 import DASHI.Foundations.BishopRegularRationalApproximationExact
 import DASHI.Foundations.BishopNatSquareRootApproximationExact
 import DASHI.Foundations.BishopNatSquareRootFloorApproximationExact
+import DASHI.Foundations.BishopNatSquareRootRationalCrossPrecisionExact
 import DASHI.Mathematics.NumberTheory.FiniteNatFloorSquareRootExact
+import DASHI.Mathematics.NumberTheory.FiniteNatFractionOrderExact
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact
 import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact
 import DASHI.Mathematics.NumberTheory.FiniteProductCardinalityExact
