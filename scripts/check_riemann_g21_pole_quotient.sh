@@ -14,6 +14,7 @@ sources=(
   DASHI/Analysis/RiemannG21LiteralPoleRankAuditExact.agda
   DASHI/Analysis/RiemannG21PoleMainModeSeparationExact.agda
   DASHI/Analysis/RiemannG21ConjugateHeightSourceBridgeExact.agda
+  DASHI/Analysis/RiemannG21SymmetricSampleBlockReductionExact.agda
   DASHI/Analysis/RiemannG21OffLinePoleQuotientTransversalityExact.agda
   DASHI/Analysis/RiemannG21PrimePairKernelExact.agda
   DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda
@@ -52,6 +53,10 @@ require_pattern DASHI/Analysis/RiemannG21ConjugateHeightSourceBridgeExact.agda \
   'TwoHeightExteriorTarget'
 require_pattern DASHI/Analysis/RiemannG21ConjugateHeightSourceBridgeExact.agda \
   'alphaVsZeroSensitivityImpliesAlphaVsHalfTransversalityIsFalse'
+require_pattern DASHI/Analysis/RiemannG21SymmetricSampleBlockReductionExact.agda \
+  'SymmetricSampleTwoHeightAdmission'
+require_pattern DASHI/Analysis/RiemannG21SymmetricSampleBlockReductionExact.agda \
+  'evenOnlyOddMinorFails'
 require_pattern DASHI/Analysis/RiemannG21OffLinePoleQuotientTransversalityExact.agda \
   'OffLinePoleQuotientTransversality'
 require_pattern DASHI/Analysis/RiemannG21PrimePairKernelExact.agda \
@@ -59,9 +64,11 @@ require_pattern DASHI/Analysis/RiemannG21PrimePairKernelExact.agda \
 require_pattern DASHI/Analysis/RiemannG21PrimePairKernelExact.agda \
   'RankOneMinorObstruction'
 require_pattern DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda \
-  'poleToPrimeMainModeTransport'
+  'symmetricSampleParityBlockReduction'
 require_pattern DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda \
-  'offLinePoleQuotientTransversality'
+  'actualTaperEvenHeightMinor'
+require_pattern DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda \
+  'actualTaperOddHeightMinor'
 require_pattern DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda \
   'riemannHypothesisDerivedIsFalse'
 
