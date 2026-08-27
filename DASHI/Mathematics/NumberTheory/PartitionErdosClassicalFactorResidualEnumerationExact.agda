@@ -27,10 +27,12 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Fin.Base using (Fin; fromℕ<)
 import Data.Fin.Properties as FinP
 open import Data.List.Base using (map; _++_)
+open import Data.List.Membership.Propositional using (_∈_)
 open import Data.Nat.Base using (_≤_; _∸_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
+open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 import Data.Vec.Base as Vec
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 import DASHI.Mathematics.NumberTheory.FiniteAllFinEnumerationExact as Finite
 import DASHI.Mathematics.NumberTheory.FiniteNatVectorZeroPaddingExact as Pad
@@ -251,6 +253,76 @@ classicalFactorResidualEnumeration :
   (n : Nat) → List (Key.ResidualKey n)
 classicalFactorResidualEnumeration n =
   classicalResidualsUpTo n n NatP.≤-refl
+
+------------------------------------------------------------------------
+-- Inclusion of any positive r-block in the increasing-r enumeration.
+
+splitPositiveBound :
+  ∀ {r current : Nat} →
+  suc zero ≤ r → r ≤ suc current →
+  (r ≤ current) ⊎ (r ≡ suc current)
+splitPositiveBound {zero} () bound
+splitPositiveBound {suc r} {zero} positive (s≤s r≤0) =
+  inj₂ (cong suc (NatP.n≤0⇒n≡0 r≤0))
+splitPositiveBound {suc r} {suc current} positive (s≤s r≤suc) =
+  case splitPositiveBound {r = suc r} {current = current}
+         positive r≤suc of λ where
+    (inj₁ earlier) → inj₁ (s≤s earlier)
+    (inj₂ equality) → inj₂ (cong suc equality)
+  where
+  case : ∀ {A B C : Set} → A ⊎ B → (A ⊎ B → C) → C
+  case choice f = f choice
+
+residualBlockMemberUpTo :
+  ∀ {n current r : Nat}
+    (currentBound : current ≤ n)
+    (positive : suc zero ≤ r)
+    (rBound : r ≤ current)
+    {residual : Key.ResidualKey n} →
+  residual ∈ residualBlock positive
+      (NatP.≤-trans rBound currentBound) →
+  residual ∈ classicalResidualsUpTo n current currentBound
+residualBlockMemberUpTo {current = zero} currentBound positive () member
+residualBlockMemberUpTo {n} {suc current} {r}
+    currentBound positive rBound member
+  with splitPositiveBound positive rBound
+... | inj₁ earlier =
+  Product.appendMemberLeft
+    (residualBlockMemberUpTo
+      (dropPositiveBound currentBound)
+      positive earlier
+      transportedMember)
+  where
+  transportedMember :
+    _ ∈ residualBlock positive
+      (NatP.≤-trans earlier (dropPositiveBound currentBound))
+  transportedMember =
+    subst
+      (λ bound → _ ∈ residualBlock positive bound)
+      (NatP.≤-irrelevant
+        (NatP.≤-trans rBound currentBound)
+        (NatP.≤-trans earlier (dropPositiveBound currentBound)))
+      member
+... | inj₂ refl =
+  Product.appendMemberRight
+    (classicalResidualsUpTo n current (dropPositiveBound currentBound))
+    transportedMember
+  where
+  canonicalPositive : suc zero ≤ suc current
+  canonicalPositive = s≤s z≤n
+
+  transportedMember :
+    _ ∈ residualBlock canonicalPositive currentBound
+  transportedMember =
+    subst
+      (λ p → _ ∈ residualBlock p currentBound)
+      (NatP.≤-irrelevant positive canonicalPositive)
+      (subst
+        (λ bound → _ ∈ residualBlock positive bound)
+        (NatP.≤-irrelevant
+          (NatP.≤-trans NatP.≤-refl currentBound)
+          currentBound)
+        member)
 
 ------------------------------------------------------------------------
 -- This owner constructs the conventional finite list.  Its fold evaluation and
