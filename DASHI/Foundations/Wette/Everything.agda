@@ -15,6 +15,8 @@ module DASHI.Foundations.Wette.Everything where
 
 import DASHI.Foundations.WetteHistoricalSourceAtlasExact
 import DASHI.Foundations.WettePrimaryTextAcquisitionPlanExact
+import DASHI.Foundations.Wette1969PrimaryTextExtractionExact
+import DASHI.Foundations.Wette1969CompletenessInterpretationBridgeExact
 import DASHI.Foundations.Wette1970PrimaryTextExtractionExact
 import DASHI.Foundations.WetteHistoricalRecoveryFrontierExact
 import DASHI.Foundations.WetteHistoricalRecoveryGeometryBridgeExact
