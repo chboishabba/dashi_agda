@@ -17,25 +17,18 @@ module DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceRegression where
 -- Communications in Mathematical Physics 99 (1985), 389--434.
 -- DOI: 10.1007/BF01240355
 --
--- This root deliberately keeps the current mathematical distinction visible:
+-- Current Row-A1 dependency history:
 --
---   source transcription / dependency recut
---       !=
---   literal source sign / source response data
---       !=
---   quantitative uniform Row-A1 closure.
+--   source transcription
+--     -> direct p=0 beta projection / trace-log route
+--     -> seagull-sign + one-step history refinement
+--     -> one bubble-entry + summable-history refinement
+--     -> explicit corner V_00 scalar + Cauchy interaction pair + D-summability
+--        reduced-margin cutset.
 --
--- Parallel Lean RequestProject returns have proved generic finite-dimensional
--- trace-log Hessian algebra, constrained-propagator annihilation/Ward
--- cancellation, third-order beta-projection annihilation, Fourier trace
--- reduction, paramagnetic-seagull positivity criteria, the obstruction for a
--- purely diamagnetic affine-Gram second variation, chain-rule generation of
--- geometric history-response decay, the separation of pointwise positivity
--- from a uniform Gaussian floor, a one-entry sufficient Gaussian-floor bound,
--- and the weaker criterion that uniform summability of the literal history
--- kernel is enough for the final debt.  Those results guide this Agda dependency
--- graph, but are NOT labelled Agda machineChecked here: cross-prover success is
--- not an Agda kernel receipt.
+-- Parallel Lean RequestProject returns prove the downstream finite-dimensional
+-- algebra and quantitative implications.  Those results guide this Agda graph
+-- but do NOT become Agda machineChecked merely because Lean built them.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -44,10 +37,11 @@ open import DASHI.Physics.YangMills.BalabanCMP109SourceTranscriptionExact
 open import DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceCutsetExact
 open import DASHI.Physics.YangMills.BalabanCMP109SeagullHistorySourceRefinementExact
 open import DASHI.Physics.YangMills.BalabanCMP109UniformFloorSummableHistoryRefinementExact
+open import DASHI.Physics.YangMills.BalabanCMP109ReducedMarginSourceCutsetExact
 open import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound82FiveAnalyticLeafExact
 
 ------------------------------------------------------------------------
--- Regression-visible status aliases
+-- Regression-visible dependency levels
 ------------------------------------------------------------------------
 
 sourceTranscriptionRegressionLevel : ProofLevel
@@ -63,6 +57,34 @@ seagullHistoryDependencyRefinementRegressionLevel =
 uniformFloorSummableHistoryDependencyRegressionLevel : ProofLevel
 uniformFloorSummableHistoryDependencyRegressionLevel =
   cmp109UniformFloorSummableHistoryDependencyLevel
+
+reducedMarginDependencyRefinementRegressionLevel : ProofLevel
+reducedMarginDependencyRefinementRegressionLevel =
+  cmp109ReducedMarginDependencyRefinementLevel
+
+------------------------------------------------------------------------
+-- Current Row-A1 source blockers
+------------------------------------------------------------------------
+
+literalCornerFirstVariationScalarRegressionLevel : ProofLevel
+literalCornerFirstVariationScalarRegressionLevel =
+  cmp109LiteralCornerFirstVariationScalarLevel
+
+literalCauchyInteractionPairRegressionLevel : ProofLevel
+literalCauchyInteractionPairRegressionLevel =
+  cmp109LiteralCauchyInteractionPairLevel
+
+literalUniformHistorySummabilityRegressionLevel : ProofLevel
+literalUniformHistorySummabilityRegressionLevel =
+  cmp109LiteralUniformHistorySummabilityLevel
+
+currentA1ResidualObligationRegressionLevel : ProofLevel
+currentA1ResidualObligationRegressionLevel =
+  cmp109A1ResidualObligationLevel
+
+------------------------------------------------------------------------
+-- Historical / ancestry-visible older blockers
+------------------------------------------------------------------------
 
 literalParamagneticSeagullSignRegressionLevel : ProofLevel
 literalParamagneticSeagullSignRegressionLevel =
@@ -83,9 +105,6 @@ literalSummableHistoryKernelRegressionLevel =
 literalFiniteGInteractionDebtRegressionLevel : ProofLevel
 literalFiniteGInteractionDebtRegressionLevel = cmp109LiteralFiniteGInteractionDebtLevel
 
-currentLiteralA1PackageRegressionLevel : ProofLevel
-currentLiteralA1PackageRegressionLevel = cmp109CurrentLiteralA1SourcePackageLevel
-
 ------------------------------------------------------------------------
 -- Scoreboards
 ------------------------------------------------------------------------
@@ -94,6 +113,6 @@ currentLiteralA1PackageRegressionLevel = cmp109CurrentLiteralA1SourcePackageLeve
 round82HistoricalLeafCountRegression : Nat
 round82HistoricalLeafCountRegression = round82ActualNewAnalyticLeafCount
 
--- Current frozen research scoreboard from the source-facing A/B/C/D recut.
+-- Current frozen research scoreboard from the A/B/C/D recut.
 currentFrozenResearchCountRegression : Nat
-currentFrozenResearchCountRegression = frozenResearchCount
+currentFrozenResearchCountRegression = currentFrozenResearchCount
