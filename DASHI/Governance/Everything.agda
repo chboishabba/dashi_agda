@@ -58,6 +58,8 @@ import DASHI.Governance.Fanning2022ProjectionBoundaryExact
 import DASHI.Governance.Fanning2022ForecastAuthorityExact
 import DASHI.Governance.Fanning2022MissingnessAndBalancedSampleExact
 import DASHI.Governance.Fanning2022DataRealizationExact
+import DASHI.Governance.Fanning2022SupplementaryDataAuthorityExact
+import DASHI.Governance.Fanning2022LiteralDataToFigureCommutationExact
 import DASHI.Governance.Fanning2022MethodsRegression
 
 -- Consumer-indexed adequacy / Kallis review-evidence layer.
