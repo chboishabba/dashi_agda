@@ -9,10 +9,6 @@ import DASHI.Analysis.RiemannG21TwoHeightMomentRatioTargetExact as Moment
 import DASHI.Analysis.RiemannG21SymmetricSampleBlockReductionExact as Block
 import DASHI.Analysis.RiemannG21OffLinePoleQuotientTransversalityExact as Trans
 
-------------------------------------------------------------------------
--- Exact ownership map for the zero-side analytic frontier.
-------------------------------------------------------------------------
-
 data ParityFrontierArrow : Set where
   actualZetaStrictHeightSeparation : ParityFrontierArrow
   coshRelativeOuterUpweight : ParityFrontierArrow
@@ -45,27 +41,27 @@ strictHeightEntry = parityFrontierEntry
 coshWeightEntry : ParityFrontierEntry
 coshWeightEntry = parityFrontierEntry
   coshRelativeOuterUpweight analyticOpen
-  "Prove that raising height from |alpha| to 1/2 relatively upweights larger positive radius for the even cosh weight. This is the monotone-likelihood-ratio input for the even moment ratio."
+  "Prove that raising height from |alpha| to 1/2 relatively upweights larger positive radius for the even cosh weight."
 
 sinhWeightEntry : ParityFrontierEntry
 sinhWeightEntry = parityFrontierEntry
   sinhRelativeOuterUpweight analyticOpen
-  "Prove the analogous relative outer upweighting for the positive odd-sector sinh weight. It is a separate theorem from the even/cosh statement."
+  "Prove the analogous relative outer upweighting for the positive odd-sector sinh weight."
 
 finiteCovarianceEntry : ParityFrontierEntry
 finiteCovarianceEntry = parityFrontierEntry
   finiteCovarianceDecomposition structurallyDerived
-  "The two-support cross-multiplied mean difference is exactly delta-q times the relative-weight determinant; this is proved by rational ring normalization."
+  "The two-support cross-multiplied mean difference is exactly delta-q times the relative-weight determinant; the owning theorem is proved by rational ring normalization in RiemannG21TwoPointCovarianceShadowExact."
 
 momentRatioEntry : ParityFrontierEntry
 momentRatioEntry = parityFrontierEntry
   continuumMomentRatioSeparation analyticOpen
-  "Lift relative weight monotonicity from finite covariance to the source taper integrals, obtaining nonzero cross-products M2(alpha)M0(1/2)-M0(alpha)M2(1/2) and N3(alpha)N1(1/2)-N1(alpha)N3(1/2)."
+  "Lift relative weight monotonicity from finite covariance to the source taper integrals, obtaining nonzero even and odd moment cross-products between heights |alpha| and 1/2."
 
 remainderEntry : ParityFrontierEntry
 remainderEntry = parityFrontierEntry
   taylorRemainderToFiniteRadiusMinors analyticOpen
-  "Control the r-expansion remainder strongly enough that moment-ratio separation yields nonzero parity minors at two explicit finite symmetric sample radii."
+  "Control the small-radius expansion remainder strongly enough that moment-ratio separation yields nonzero parity minors at two explicit symmetric sample radii."
 
 blockEntry : ParityFrontierEntry
 blockEntry = parityFrontierEntry
@@ -79,24 +75,12 @@ transversalityEntry = parityFrontierEntry
 
 canonicalParityFrontier : List ParityFrontierEntry
 canonicalParityFrontier =
-  strictHeightEntry
-  ∷ coshWeightEntry
-  ∷ sinhWeightEntry
-  ∷ finiteCovarianceEntry
-  ∷ momentRatioEntry
-  ∷ remainderEntry
-  ∷ blockEntry
-  ∷ transversalityEntry
-  ∷ []
-
-------------------------------------------------------------------------
--- Concrete structural returns from the constituent owners.
-------------------------------------------------------------------------
+  strictHeightEntry ∷ coshWeightEntry ∷ sinhWeightEntry
+  ∷ finiteCovarianceEntry ∷ momentRatioEntry ∷ remainderEntry
+  ∷ blockEntry ∷ transversalityEntry ∷ []
 
 strictHeightBoundary : Height.ActualZetaHeightBoundary
 strictHeightBoundary = Height.canonicalActualZetaHeightBoundary
-
-finiteMomentCrossProductIdentity = Cov.twoPointMomentCrossProductDecomposition
 
 momentCriterionWitness : Moment.CrossProductSeparation
 momentCriterionWitness = Moment.canonicalMomentCrossProductSeparation
@@ -113,36 +97,21 @@ record ParityAnalyticFrontierBoundary : Set where
     strictActualZetaHeightSeparationAvailable : Bool
     strictActualZetaHeightSeparationAvailableIsTrue :
       strictActualZetaHeightSeparationAvailable ≡ true
-
     finiteCovarianceAlgebraDerived : Bool
     finiteCovarianceAlgebraDerivedIsTrue : finiteCovarianceAlgebraDerived ≡ true
-
     parityBlockReductionDerived : Bool
     parityBlockReductionDerivedIsTrue : parityBlockReductionDerived ≡ true
-
     actualCoshWeightMonotonicityDerived : Bool
-    actualCoshWeightMonotonicityDerivedIsFalse :
-      actualCoshWeightMonotonicityDerived ≡ false
-
+    actualCoshWeightMonotonicityDerivedIsFalse : actualCoshWeightMonotonicityDerived ≡ false
     actualSinhWeightMonotonicityDerived : Bool
-    actualSinhWeightMonotonicityDerivedIsFalse :
-      actualSinhWeightMonotonicityDerived ≡ false
-
+    actualSinhWeightMonotonicityDerivedIsFalse : actualSinhWeightMonotonicityDerived ≡ false
     actualMomentRatioSeparationDerived : Bool
-    actualMomentRatioSeparationDerivedIsFalse :
-      actualMomentRatioSeparationDerived ≡ false
-
+    actualMomentRatioSeparationDerivedIsFalse : actualMomentRatioSeparationDerived ≡ false
     finiteRadiusParityMinorsDerived : Bool
-    finiteRadiusParityMinorsDerivedIsFalse :
-      finiteRadiusParityMinorsDerived ≡ false
+    finiteRadiusParityMinorsDerivedIsFalse : finiteRadiusParityMinorsDerived ≡ false
 
 canonicalParityAnalyticFrontierBoundary : ParityAnalyticFrontierBoundary
 canonicalParityAnalyticFrontierBoundary =
   parityAnalyticFrontierBoundary
-    true refl
-    true refl
-    true refl
-    false refl
-    false refl
-    false refl
-    false refl
+    true refl true refl true refl
+    false refl false refl false refl false refl
