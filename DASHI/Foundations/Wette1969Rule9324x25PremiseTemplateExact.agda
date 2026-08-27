@@ -35,6 +35,8 @@ import DASHI.Foundations.Wette1969HistoricalSignatureExact as Signature
 import DASHI.Foundations.Wette1969JudgementConstructorsExact as Judgment
 import DASHI.Foundations.Wette1969CriticalRuleDependencyExact as Critical
 import DASHI.Foundations.Wette1969CriticalPremiseTypingExact as CriticalTyping
+import DASHI.Foundations.Wette1969InitialRuleTranscriptionExact as RuleBody
+import DASHI.Foundations.Wette1969RuleRevisionExact as Revision
 
 WordTerm = Signature.WordTerm
 Formula = Signature.Formula
@@ -124,6 +126,57 @@ freshTupleIsPremise2TupleAndPremise4Replacement :
 freshTupleIsPremise2TupleAndPremise4Replacement parameters =
   freshTupleWord parameters
 
+------------------------------------------------------------------------
+-- Shared-premise pair -> two atomic historical rule bodies.
+--
+-- Wette prints 9.3.24 and 9.3.25 after one common list of four premises.  His
+-- convention is that this abbreviates two rules.  Once the two conclusion
+-- formulae are supplied, the existing HistoricalRuleBody carrier can therefore
+-- assemble the pair without introducing a second rule representation.
+------------------------------------------------------------------------
+
+record Rule9324x25ConclusionParameters : Set where
+  constructor rule9324x25ConclusionParameters
+  field
+    leftConclusion : Formula
+    rightConclusion : Formula
+
+open Rule9324x25ConclusionParameters public
+
+rule9-3-24Template :
+  Rule9324x25PremiseParameters →
+  Rule9324x25ConclusionParameters →
+  RuleBody.HistoricalRuleBody
+rule9-3-24Template premises conclusions =
+  RuleBody.historicalRuleBody
+    Revision.rule9-3-24
+    4
+    (premiseVector premises)
+    (leftConclusion conclusions)
+
+rule9-3-25Template :
+  Rule9324x25PremiseParameters →
+  Rule9324x25ConclusionParameters →
+  RuleBody.HistoricalRuleBody
+rule9-3-25Template premises conclusions =
+  RuleBody.historicalRuleBody
+    Revision.rule9-3-25
+    4
+    (premiseVector premises)
+    (rightConclusion conclusions)
+
+rule9324TemplateHasFourPremises :
+  (premises : Rule9324x25PremiseParameters) →
+  (conclusions : Rule9324x25ConclusionParameters) →
+  RuleBody.premiseCount (rule9-3-24Template premises conclusions) ≡ 4
+rule9324TemplateHasFourPremises premises conclusions = refl
+
+rule9325TemplateHasFourPremises :
+  (premises : Rule9324x25PremiseParameters) →
+  (conclusions : Rule9324x25ConclusionParameters) →
+  RuleBody.premiseCount (rule9-3-25Template premises conclusions) ≡ 4
+rule9325TemplateHasFourPremises premises conclusions = refl
+
 record Wette1969Rule9324x25PremiseTemplateBoundary : Set where
   constructor wette1969Rule9324x25PremiseTemplateBoundary
   field
@@ -139,18 +192,23 @@ record Wette1969Rule9324x25PremiseTemplateBoundary : Set where
     templateRealizesRecoveredPremiseKindsIsTrue :
       templateRealizesRecoveredPremiseKinds ≡ true
 
+    sharedPremisePairCanAssembleAtomicRuleBodies : Bool
+    sharedPremisePairCanAssembleAtomicRuleBodiesIsTrue :
+      sharedPremisePairCanAssembleAtomicRuleBodies ≡ true
+
     parameterizedTemplateIsAlreadyLiteralOCRPerfectTranscription : Bool
     parameterizedTemplateIsAlreadyLiteralOCRPerfectTranscriptionIsFalse :
       parameterizedTemplateIsAlreadyLiteralOCRPerfectTranscription ≡ false
 
-    premiseTemplateAlreadySuppliesRuleConclusions : Bool
-    premiseTemplateAlreadySuppliesRuleConclusionsIsFalse :
-      premiseTemplateAlreadySuppliesRuleConclusions ≡ false
+    premiseTemplateAlreadySuppliesHistoricalConclusionArguments : Bool
+    premiseTemplateAlreadySuppliesHistoricalConclusionArgumentsIsFalse :
+      premiseTemplateAlreadySuppliesHistoricalConclusionArguments ≡ false
 
 canonicalWette1969Rule9324x25PremiseTemplateBoundary :
   Wette1969Rule9324x25PremiseTemplateBoundary
 canonicalWette1969Rule9324x25PremiseTemplateBoundary =
   wette1969Rule9324x25PremiseTemplateBoundary
+    true refl
     true refl
     true refl
     true refl
