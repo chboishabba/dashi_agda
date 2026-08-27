@@ -16,12 +16,12 @@ open import Data.Empty using (⊥; ⊥-elim)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Data.List.Relation.Unary.Any as Any using ()
 import Data.List.Relation.Unary.All as All
-open import Data.Nat.Base using (_≤_)
+open import Data.Nat.Base using (_≤_; _<_)
 open import Data.Nat.Divisibility using (_∣_; _∣?_; divides)
 import Data.Nat.Properties as NatP
 open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
 open import Relation.Nullary.Decidable.Core using (yes; no)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact as Hecke
 import DASHI.Mathematics.NumberTheory.FiniteFactorPairDivisorSumExact as Factor
@@ -48,6 +48,33 @@ positiveNotZero positive refl = caseImpossible positive
   where
   caseImpossible : suc zero ≤ zero → ⊥
   caseImpossible ()
+
+------------------------------------------------------------------------
+-- Quotient/predecessor order bounds used by residual finite enumeration.
+
+copiesBoundByProduct :
+  ∀ {r : Nat} (pair : PositiveFactorPair r) →
+  suc (predecessor pair) ≤ r
+copiesBoundByProduct
+  (positiveFactorPair zero () divisorBound predecessor productExact)
+copiesBoundByProduct
+  (positiveFactorPair (suc divisorPredecessor)
+    divisorPositive divisorBound predecessor productExact) =
+  subst
+    (λ target → suc predecessor ≤ target)
+    (sym productExact)
+    (NatP.m≤m*n (suc predecessor) (suc divisorPredecessor))
+
+predecessorBelowProduct :
+  ∀ {r : Nat} (pair : PositiveFactorPair r) →
+  predecessor pair < r
+predecessorBelowProduct pair =
+  NatP.<-≤-trans
+    (NatP.n<1+n (predecessor pair))
+    (copiesBoundByProduct pair)
+
+------------------------------------------------------------------------
+-- Executable divisibility refinement.
 
 positiveFactorPairsFrom :
   (r : Nat) →
