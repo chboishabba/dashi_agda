@@ -70,6 +70,10 @@ halfRiemannRoleDistinctFromThreeAdicMinusHalfRole :
   riemannCriticalRealPart ≡ threeAdicMinusHalfRole → ⊥
 halfRiemannRoleDistinctFromThreeAdicMinusHalfRole ()
 
+powerupRoleDistinctFromHalfThresholdRole :
+  decimalTenPercentPowerupRole ≡ dyadicScreenCut → ⊥
+powerupRoleDistinctFromHalfThresholdRole ()
+
 ------------------------------------------------------------------------
 -- Exact shared-scalar compatibility, without role identification.
 ------------------------------------------------------------------------
@@ -247,7 +251,7 @@ fivePointFivePowerupEntry =
     "5.5"
     decimalTenPercentPowerupRole
     "supplied DASHI +10% / stage-refinement reconstruction notes"
-    "first repeated-digit fine refinement of coarse 5"
+    "first repeated-digit fine refinement of coarse 5; distinct from the scalar 0.5 commitment threshold"
     "decimalRefinementNumerator d5 1 = 55, interpreted over denominator 10"
     "DASHI.Core.DecimalResidualRefinementExact"
     historicalSourceMeaning
