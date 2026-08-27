@@ -2,6 +2,8 @@ module DASHI.Governance.IndigenousEnvironmentalAuthorityRound2CapstoneExact wher
 
 open import DASHI.Core.Prelude
 import DASHI.Governance.IndigenousEnvironmentalAuthorityCapstoneExact as Base
+import DASHI.Governance.NavdanyaSeedSovereigntyNonseparabilityExact as Seed
+import DASHI.Governance.CaceresAuthorityWithoutEnforcementExact as Caceres
 import DASHI.Governance.ThomasIntersectionalEnvironmentalismExact as Thomas
 import DASHI.Governance.CaceresDefenderPatternBridgeExact as Defenders
 import DASHI.Governance.EscazuProtectionEnforcementGapExact as Escazu
@@ -20,7 +22,7 @@ import DASHI.Governance.KunmingMontrealTarget3AuthorityBoundaryExact as GBF
 ------------------------------------------------------------------------
 
 baseSeedNonseparability :
-  Base.Seed.control Base.Seed.enclosedSeed ≡ Base.Seed.control Base.Seed.communitySeed → ⊥
+  Seed.control Seed.enclosedSeed ≡ Seed.control Seed.communitySeed → ⊥
 baseSeedNonseparability = Base.sameSeedMaterialDoesNotRecoverCommunityControl
 
 ThomasFrameworkDoesNotBecomeCausalLaw :
@@ -28,7 +30,7 @@ ThomasFrameworkDoesNotBecomeCausalLaw :
 ThomasFrameworkDoesNotBecomeCausalLaw = Thomas.empiricalLawNotPromoted
 
 CaceresStandingStillNotEnforcement :
-  Defenders.Caceres.EffectiveEnforcement Defenders.Caceres.victimStanding → ⊥
+  Caceres.EffectiveEnforcement Caceres.victimStanding → ⊥
 CaceresStandingStillNotEnforcement = Defenders.caseStandingStillDoesNotConstructEnforcement
 
 EscazuTreatyStillNotImplementation :
