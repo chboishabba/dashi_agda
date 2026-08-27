@@ -13,6 +13,17 @@ on:
       - 'DASHI/Governance/NavdanyaSeedSovereigntyNonseparabilityExact.agda'
       - 'DASHI/Governance/IndigenousEnvironmentalAuthorityCapstoneExact.agda'
       - 'DASHI/Governance/IndigenousEnvironmentalAuthorityRegression.agda'
+      - 'DASHI/Governance/EnvironmentalAuthoritySourceRegistryRound2Exact.agda'
+      - 'DASHI/Governance/ThomasIntersectionalEnvironmentalismExact.agda'
+      - 'DASHI/Governance/CaceresDefenderPatternBridgeExact.agda'
+      - 'DASHI/Governance/EscazuProtectionEnforcementGapExact.agda'
+      - 'DASHI/Governance/ShivaBtCottonSuicideClaimContestedExact.agda'
+      - 'DASHI/Governance/BudjBimAquacultureAuthorityExact.agda'
+      - 'DASHI/Governance/MithakaArchaeologicalEvidenceExact.agda'
+      - 'DASHI/Governance/DarkEmuClaimStatusDecompositionExact.agda'
+      - 'DASHI/Governance/KunmingMontrealTarget3AuthorityBoundaryExact.agda'
+      - 'DASHI/Governance/IndigenousEnvironmentalAuthorityRound2CapstoneExact.agda'
+      - 'DASHI/Governance/IndigenousEnvironmentalAuthorityRound2Regression.agda'
       - 'DASHI/Core/Everything.agda'
       - 'DASHI/Governance/Everything.agda'
       - '.github/workflows/indigenous-environmental-authority.yml'
@@ -46,6 +57,17 @@ jobs:
             DASHI/Governance/NavdanyaSeedSovereigntyNonseparabilityExact.agda
             DASHI/Governance/IndigenousEnvironmentalAuthorityCapstoneExact.agda
             DASHI/Governance/IndigenousEnvironmentalAuthorityRegression.agda
+            DASHI/Governance/EnvironmentalAuthoritySourceRegistryRound2Exact.agda
+            DASHI/Governance/ThomasIntersectionalEnvironmentalismExact.agda
+            DASHI/Governance/CaceresDefenderPatternBridgeExact.agda
+            DASHI/Governance/EscazuProtectionEnforcementGapExact.agda
+            DASHI/Governance/ShivaBtCottonSuicideClaimContestedExact.agda
+            DASHI/Governance/BudjBimAquacultureAuthorityExact.agda
+            DASHI/Governance/MithakaArchaeologicalEvidenceExact.agda
+            DASHI/Governance/DarkEmuClaimStatusDecompositionExact.agda
+            DASHI/Governance/KunmingMontrealTarget3AuthorityBoundaryExact.agda
+            DASHI/Governance/IndigenousEnvironmentalAuthorityRound2CapstoneExact.agda
+            DASHI/Governance/IndigenousEnvironmentalAuthorityRound2Regression.agda
           )
           if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|sorry|admit)\b' "${files[@]}"; then
             echo 'Forbidden trust-boundary token found.' >&2
@@ -64,5 +86,6 @@ jobs:
           export AGDA_JOBS=2
           scripts/run_agda29_parallel_check.sh \
             DASHI/Governance/IndigenousEnvironmentalAuthorityRegression.agda \
-            DASHI/Governance/IndigenousEnvironmentalAuthorityCapstoneExact.agda \
+            DASHI/Governance/IndigenousEnvironmentalAuthorityRound2Regression.agda \
+            DASHI/Governance/IndigenousEnvironmentalAuthorityRound2CapstoneExact.agda \
             DASHI/Governance/Everything.agda
