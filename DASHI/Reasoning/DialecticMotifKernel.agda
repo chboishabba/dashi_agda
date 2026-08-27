@@ -263,16 +263,17 @@ atLeast5 (suc (suc (suc (suc (suc _))))) = true
 stableAndMirrorSound : State9 → Bool
 stableAndMirrorSound s = isZeroNat (σ s) && isZeroNat (Δm s)
 
+classifyPos3 : State9 → Motif
+classifyPos3 s with at s mirror future | stableAndMirrorSound s | atLeast3 (σ s)
+... | T.neg | _     | _     = M2
+... | _     | true  | _     = M1
+... | _     | false | true  = M7
+... | _     | false | false = M5
+
 classifyLocal : State9 → Motif
 classifyLocal s with presentBackbone s
 ... | backbone T.neg T.neg T.neg = M9
-... | backbone T.pos T.pos T.pos with at s mirror future
-...   | T.neg = M2
-...   | _ with stableAndMirrorSound s
-...     | true = M1
-...     | false with atLeast3 (σ s)
-...       | true = M7
-...       | false = M5
+... | backbone T.pos T.pos T.pos = classifyPos3 s
 ... | backbone T.pos T.neg T.pos = M3
 ... | backbone T.pos T.pos T.neg = M5
 ... | backbone T.neg T.pos T.pos = M4

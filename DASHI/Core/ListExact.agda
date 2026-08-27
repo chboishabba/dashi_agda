@@ -15,5 +15,4 @@ listCountAppend :
   (xs ys : List A) →
   listCount (append xs ys) ≡ listCount xs + listCount ys
 listCountAppend [] ys = refl
-listCountAppend (x ∷ xs) ys with listCountAppend xs ys
-... | refl = refl
+listCountAppend (x ∷ xs) ys rewrite listCountAppend xs ys = refl
