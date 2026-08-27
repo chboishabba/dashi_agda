@@ -78,6 +78,96 @@ record ContextualAlternativeDescription : Set₁ where
 open ContextualAlternativeDescription public
 
 ------------------------------------------------------------------------
+-- Finite exact witness mirroring the source's grouping logic.
+--
+-- Context AB|C groups NL1+NL2 as one alternative and NL3 as the other.
+-- Context A|BC groups NL1 as one alternative and NL2+NL3 as the other.
+-- At the balanced phase setting phi_A = phi_C = pi, the paper's grouped
+-- amplitudes alpha = a exp(i phi_A)+b and beta=b+c exp(i phi_C) can both
+-- vanish.  If one illegitimately promotes each grouped zero to a unique-origin
+-- narrative, the first partition points to NL3 while the second points to NL1.
+-- We encode only that finite incompatibility pattern, not the optical numbers.
+------------------------------------------------------------------------
+
+data ThreeSourceSetup : Set where
+  sameThreeCrystalExperiment : ThreeSourceSetup
+
+data GroupingContext : Set where
+  groupingABGivenC groupingAGivenBC : GroupingContext
+
+data GroupedAlternative : Set where
+  groupedAB sourceC sourceA groupedBC : GroupedAlternative
+
+data AmplitudeStatus : Set where
+  groupedAmplitudeZero remainingAmplitudeNonzero : AmplitudeStatus
+
+data OriginNarrative : Set where
+  naiveOriginNL3 naiveOriginNL1 : OriginNarrative
+
+contextAlternative : GroupingContext → GroupedAlternative → Set
+contextAlternative groupingABGivenC groupedAB = ⊤
+contextAlternative groupingABGivenC sourceC = ⊤
+contextAlternative groupingABGivenC _ = ⊥
+contextAlternative groupingAGivenBC sourceA = ⊤
+contextAlternative groupingAGivenBC groupedBC = ⊤
+contextAlternative groupingAGivenBC _ = ⊥
+
+contextAmplitude : GroupingContext → GroupedAlternative → AmplitudeStatus
+contextAmplitude groupingABGivenC groupedAB = groupedAmplitudeZero
+contextAmplitude groupingABGivenC sourceC = remainingAmplitudeNonzero
+contextAmplitude groupingABGivenC _ = groupedAmplitudeZero
+contextAmplitude groupingAGivenBC sourceA = remainingAmplitudeNonzero
+contextAmplitude groupingAGivenBC groupedBC = groupedAmplitudeZero
+contextAmplitude groupingAGivenBC _ = groupedAmplitudeZero
+
+naiveNarrative : GroupingContext → OriginNarrative
+naiveNarrative groupingABGivenC = naiveOriginNL3
+naiveNarrative groupingAGivenBC = naiveOriginNL1
+
+naiveNarrativesDiffer :
+  naiveNarrative groupingABGivenC ≡ naiveNarrative groupingAGivenBC → ⊥
+naiveNarrativesDiffer ()
+
+contextGroupingsDiffer : groupingABGivenC ≡ groupingAGivenBC → ⊥
+contextGroupingsDiffer ()
+
+firstGroupingHasZeroCombinedAmplitude :
+  contextAmplitude groupingABGivenC groupedAB ≡ groupedAmplitudeZero
+firstGroupingHasZeroCombinedAmplitude = refl
+
+secondGroupingHasZeroCombinedAmplitude :
+  contextAmplitude groupingAGivenBC groupedBC ≡ groupedAmplitudeZero
+secondGroupingHasZeroCombinedAmplitude = refl
+
+record ThreeSourceContextualWitness : Set where
+  constructor threeSourceContextualWitness
+  field
+    physicalSetup : ThreeSourceSetup
+    firstContext secondContext : GroupingContext
+    firstContextIsABGivenC : firstContext ≡ groupingABGivenC
+    secondContextIsAGivenBC : secondContext ≡ groupingAGivenBC
+    samePhysicalSetupAcrossGroupings : physicalSetup ≡ sameThreeCrystalExperiment
+    firstGroupedZero :
+      contextAmplitude firstContext groupedAB ≡ groupedAmplitudeZero
+    secondGroupedZero :
+      contextAmplitude secondContext groupedBC ≡ groupedAmplitudeZero
+    naiveOriginInterpretationsIncompatible :
+      naiveNarrative firstContext ≡ naiveNarrative secondContext → ⊥
+
+canonicalThreeSourceContextualWitness : ThreeSourceContextualWitness
+canonicalThreeSourceContextualWitness =
+  threeSourceContextualWitness
+    sameThreeCrystalExperiment
+    groupingABGivenC
+    groupingAGivenBC
+    refl
+    refl
+    refl
+    refl
+    refl
+    naiveNarrativesDiffer
+
+------------------------------------------------------------------------
 -- Nonpromotion ledger used by G21.
 ------------------------------------------------------------------------
 
@@ -91,6 +181,10 @@ record AlternativeNonpromotionBoundary : Set where
     multipleValidAlternativeGroupingsCanExist : Bool
     multipleValidAlternativeGroupingsCanExistIsTrue :
       multipleValidAlternativeGroupingsCanExist ≡ true
+
+    exactThreeSourceContextualWitnessConstructed : Bool
+    exactThreeSourceContextualWitnessConstructedIsTrue :
+      exactThreeSourceContextualWitnessConstructed ≡ true
 
     zeroGroupedAmplitudeImpliesNoUnderlyingContribution : Bool
     zeroGroupedAmplitudeImpliesNoUnderlyingContributionIsFalse :
@@ -113,6 +207,7 @@ record AlternativeNonpromotionBoundary : Set where
 canonicalAlternativeNonpromotionBoundary : AlternativeNonpromotionBoundary
 canonicalAlternativeNonpromotionBoundary =
   alternativeNonpromotionBoundary
+    true refl
     true refl
     true refl
     false refl
