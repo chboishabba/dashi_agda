@@ -10,6 +10,7 @@ module DASHI.Governance.HistoryObserverAuthorityOptionConeCapstoneExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.ObserverAffordanceIncomparabilityExact as Incomparable
 import DASHI.Core.RelationalityGradeSeparationExact as Grades
 import DASHI.Governance.HistoryConditionedSocialEcologyOptionConeExact as HistoryEcology
@@ -21,14 +22,14 @@ import DASHI.Governance.OptionConeCoercionExact as Cone
 ------------------------------------------------------------------------
 
 observerCannotRecoverAffordance :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
+  INF.FactorsThrough
     Incomparable.squareObservation Incomparable.squareAffordance → ⊥
 observerCannotRecoverAffordance =
   Incomparable.observationDoesNotDetermineAffordance
     Incomparable.canonicalObserverAffordanceIncomparability
 
 affordanceCannotRecoverObserver :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
+  INF.FactorsThrough
     Incomparable.squareAffordance Incomparable.squareObservation → ⊥
 affordanceCannotRecoverObserver =
   Incomparable.affordanceDoesNotDetermineObservation
