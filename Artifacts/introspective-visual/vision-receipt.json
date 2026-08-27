@@ -1,0 +1,53 @@
+{
+  "all_expected_edges_detected": true,
+  "claim_boundary": "OpenCV observations are empirical receipts; they do not certify semantic faithfulness without the separately proved rendering/extraction contract.",
+  "edges": [
+    {
+      "detected": true,
+      "from": "source",
+      "occupancy": 0.4538,
+      "to": "projection"
+    },
+    {
+      "detected": true,
+      "from": "source",
+      "occupancy": 0.4538,
+      "to": "fibre"
+    },
+    {
+      "detected": true,
+      "from": "projection",
+      "occupancy": 0.4538,
+      "to": "refinement"
+    },
+    {
+      "detected": true,
+      "from": "fibre",
+      "occupancy": 0.4538,
+      "to": "refinement"
+    }
+  ],
+  "image": {
+    "height": 320,
+    "width": 320
+  },
+  "nodes": {
+    "fibre": [
+      84.403,
+      235.349
+    ],
+    "projection": [
+      235.349,
+      84.403
+    ],
+    "refinement": [
+      235.378,
+      235.378
+    ],
+    "source": [
+      84.43,
+      84.43
+    ]
+  },
+  "schema": "dashi.introspective-vision-receipt.v1"
+}
