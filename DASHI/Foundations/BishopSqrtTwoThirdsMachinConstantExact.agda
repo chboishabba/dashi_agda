@@ -16,7 +16,7 @@ module DASHI.Foundations.BishopSqrtTwoThirdsMachinConstantExact where
 -- been identified with a trigonometric period is needed for this construction.
 ------------------------------------------------------------------------
 
-open import Data.Integer.Base using (+_; nonNeg)
+open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; _/_)
 import Data.Rational.Unnormalised.Properties as ℚP
 
@@ -25,7 +25,7 @@ import RealProperties as BishopP
 
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 import DASHI.Foundations.BishopMachinPiRationalWindowExact as PiWindow
-import DASHI.Foundations.BishopNatSquareRootApproximationExact as NatRootApprox
+import DASHI.Foundations.BishopNatSquareRootNonnegativeExact as NatRootNN
 import DASHI.Foundations.BishopNatSquareRootRegularFloorExact as NatRoot
 import DASHI.Foundations.BishopNatSquareRootSemanticSquareExact as NatRootSquare
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -103,14 +103,7 @@ sqrtTwoThirdsNonnegative =
       (BishopP.p≤q⇒p⋆≤q⋆
         (+ 0 / 1) oneThird
         (ℚP.nonNegative⁻¹ oneThird)))
-    (importedRootNonnegative 6)
-  where
-  importedRootNonnegative :
-    (n : Agda.Builtin.Nat.Nat) →
-    BishopReal.NonNegative (NatRoot.canonicalFloorSquareRootReal n)
-  importedRootNonnegative n =
-    let open import DASHI.Foundations.BishopNatSquareRootNonnegativeExact
-    in canonicalFloorSquareRootNonnegative n
+    (NatRootNN.canonicalFloorSquareRootNonnegative 6)
 
 bishopSqrtTwoThirdsConstructionLevel : ProofLevel
 bishopSqrtTwoThirdsConstructionLevel = machineChecked
