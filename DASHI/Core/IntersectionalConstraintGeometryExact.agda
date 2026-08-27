@@ -1,32 +1,40 @@
 module DASHI.Core.IntersectionalConstraintGeometryExact where
 
 ------------------------------------------------------------------------
--- PRIMARY CONCEPTUAL SOURCE
+-- PRIMARY CONCEPTUAL SOURCES
+--
+-- Kimberle Crenshaw,
+-- "Demarginalizing the Intersection of Race and Sex: A Black Feminist
+-- Critique of Antidiscrimination Doctrine, Feminist Theory and Antiracist
+-- Politics", University of Chicago Legal Forum 1989(1), Article 8.
+-- Stable original journal record; no DOI is asserted here.
 --
 -- Kimberle Crenshaw,
 -- "Mapping the Margins: Intersectionality, Identity Politics, and Violence
 -- against Women of Color", Stanford Law Review 43(6), 1241--1299 (1991).
 -- DOI: 10.2307/1229039.
 --
+-- SOURCE SCOPE
+--
+-- The 1989 paper is the direct conceptual source for the warning that an
+-- intersectional experience is not adequately reconstructed by summing
+-- independently modelled single-axis experiences.  The 1991 paper supplies the
+-- structural/political/representational intersectionality context.
+--
 -- CROSS-POLLINATION
 --
 -- Reuse DASHI.Core.IntersectionalNonFactorability rather than define another
 -- factorisation calculus.  The supplied 2026-08-27 discussion asks for a
 -- ceteris-paribus geometry in which a second non-redundant power relation can
--- further restrict an already constrained position.  This file provides a
--- finite schematic witness of that theorem shape.
+-- further restrict an already constrained position, with genuinely nonlinear
+-- interaction allowed.
 --
 -- IMPORTANT BOUNDARY
 --
 -- The constructors below name *constraint regimes*, not intrinsic properties
--- or universal empirical rankings of demographic identities.  The theorem is:
---
---   same declared single-axis projection
---   + an additional non-redundant constraint in the joint regime
---   -> different action-relevant outcome / one additional depth step.
---
--- Any application to concrete populations requires its own evidence that the
--- stated constraints are active, comparable, held-fixed, and non-redundant.
+-- or universal empirical rankings of demographic identities.  Any application
+-- to concrete populations requires separate evidence that the stated
+-- constraints are active, comparable, held-fixed, and non-redundant.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -92,8 +100,6 @@ sexualityAxisCannotRecoverJointConstraint =
   INF.witnessRulesOutEveryFlatFactorisation
     canonicalJointConstraintNonFactorability
 
--- Even arbitrary recharting of the single sexuality-axis label cannot repair
--- the missing joint relation.
 rechartedSexualityAxisCannotRecoverJointConstraint :
   ∀ {Chart : Set} →
   (rechart : SexualityAxisObservation → Chart) →
@@ -104,8 +110,7 @@ rechartedSexualityAxisCannotRecoverJointConstraint rechart =
     rechart canonicalJointConstraintNonFactorability
 
 ------------------------------------------------------------------------
--- Observer-refinement statement: adding the joint relation strictly refines
--- the held-fixed marginal observer.
+-- Observer-refinement statement.
 ------------------------------------------------------------------------
 
 sexualityPlusJointStrictlyRefinesSexuality :
@@ -122,8 +127,8 @@ sexualityPlusJointStrictlyRefinesSexuality =
     jointConstraintDiffers
 
 ------------------------------------------------------------------------
--- Explicit finite depth metric for the *declared schematic model only*.
--- The exact result is a successor relation rather than a universal scalar law.
+-- A small declared depth coordinate remains available as one schematic view,
+-- but it is NOT the primary semantics of intersectionality.
 ------------------------------------------------------------------------
 
 constraintDepth : ConstraintRegime → Nat
@@ -144,9 +149,7 @@ jointConstraintAddsOneDepthStep :
 jointConstraintAddsOneDepthStep = refl
 
 ------------------------------------------------------------------------
--- A tiny affordance witness makes "more constrained" operational rather than
--- merely numeric: an action remains available under the one-relation regime
--- and is blocked under the declared two-relation regime.
+-- Operational affordance witness.
 ------------------------------------------------------------------------
 
 data Affordance : Set where
@@ -169,6 +172,83 @@ privateRelationHeldFixed :
   ≡ available heteronormativePlusPatriarchal privateRelation
 privateRelationHeldFixed = refl
 
+------------------------------------------------------------------------
+-- Nonlinear interaction witness.
+--
+-- Each marginal relation alone leaves `publicRecognition` open in this finite
+-- specimen, while their joint configuration closes it.  Therefore the joint
+-- affordance is not reconstructed by simply conjoining independently evaluated
+-- marginal affordances.  This is a finite theorem shape for interaction, not an
+-- empirical law about any demographic group.
+------------------------------------------------------------------------
+
+data AxisConfiguration : Set where
+  neitherAxis heteronormativeAxis patriarchalAxis jointAxes : AxisConfiguration
+
+heteronormativeMarginal : AxisConfiguration → Bool
+heteronormativeMarginal neitherAxis = false
+heteronormativeMarginal heteronormativeAxis = true
+heteronormativeMarginal patriarchalAxis = false
+heteronormativeMarginal jointAxes = true
+
+patriarchalMarginal : AxisConfiguration → Bool
+patriarchalMarginal neitherAxis = false
+patriarchalMarginal heteronormativeAxis = false
+patriarchalMarginal patriarchalAxis = true
+patriarchalMarginal jointAxes = true
+
+_and_ : Bool → Bool → Bool
+true and true = true
+true and false = false
+false and true = false
+false and false = false
+
+-- Marginal-only model: each individual axis, considered in isolation, leaves
+-- the selected affordance open; conjunction therefore predicts it remains open.
+marginalPublicRecognition : AxisConfiguration → Bool
+marginalPublicRecognition neitherAxis = true
+marginalPublicRecognition heteronormativeAxis = true
+marginalPublicRecognition patriarchalAxis = true
+marginalPublicRecognition jointAxes =
+  marginalPublicRecognition heteronormativeAxis
+  and marginalPublicRecognition patriarchalAxis
+
+-- Actual finite joint-response specimen with an interaction term.
+interactionPublicRecognition : AxisConfiguration → Bool
+interactionPublicRecognition neitherAxis = true
+interactionPublicRecognition heteronormativeAxis = true
+interactionPublicRecognition patriarchalAxis = true
+interactionPublicRecognition jointAxes = false
+
+marginalModelPredictsJointOpen :
+  marginalPublicRecognition jointAxes ≡ true
+marginalModelPredictsJointOpen = refl
+
+interactionModelMakesJointClosed :
+  interactionPublicRecognition jointAxes ≡ false
+interactionModelMakesJointClosed = refl
+
+jointInteractionIsNotRecoveredByMarginalConjunction :
+  marginalPublicRecognition jointAxes
+  ≡ interactionPublicRecognition jointAxes → ⊥
+jointInteractionIsNotRecoveredByMarginalConjunction ()
+
+-- The two models agree on every single-axis configuration, isolating the
+-- difference to the declared interaction itself.
+heteronormativeSingleAxisHeldFixed :
+  marginalPublicRecognition heteronormativeAxis
+  ≡ interactionPublicRecognition heteronormativeAxis
+heteronormativeSingleAxisHeldFixed = refl
+
+patriarchalSingleAxisHeldFixed :
+  marginalPublicRecognition patriarchalAxis
+  ≡ interactionPublicRecognition patriarchalAxis
+patriarchalSingleAxisHeldFixed = refl
+
+------------------------------------------------------------------------
+-- Boundary.
+------------------------------------------------------------------------
+
 record IntersectionalConstraintGeometryBoundary : Set where
   constructor intersectional-constraint-geometry-boundary
   field
@@ -184,11 +264,19 @@ record IntersectionalConstraintGeometryBoundary : Set where
     rechartingCollapsedAxisRecoversJointRelation : Bool
     rechartingCollapsedAxisRecoversJointRelationIsFalse :
       rechartingCollapsedAxisRecoversJointRelation ≡ false
+    scalarDepthIsPrimaryIntersectionalSemantics : Bool
+    scalarDepthIsPrimaryIntersectionalSemanticsIsFalse :
+      scalarDepthIsPrimaryIntersectionalSemantics ≡ false
+    jointAffordanceMustEqualMarginalConjunction : Bool
+    jointAffordanceMustEqualMarginalConjunctionIsFalse :
+      jointAffordanceMustEqualMarginalConjunction ≡ false
 
 canonicalIntersectionalConstraintGeometryBoundary :
   IntersectionalConstraintGeometryBoundary
 canonicalIntersectionalConstraintGeometryBoundary =
   intersectional-constraint-geometry-boundary
+    false refl
+    false refl
     false refl
     false refl
     false refl
