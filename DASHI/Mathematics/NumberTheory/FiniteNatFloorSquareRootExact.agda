@@ -14,12 +14,13 @@ module DASHI.Mathematics.NumberTheory.FiniteNatFloorSquareRootExact where
 -- This owner is arithmetic-neutral with respect to the later Bishop use.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong; subst)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Empty using (⊥-elim)
 open import Data.Nat.Base using (_≤_; _<_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
 open import Data.Sum.Base using (inj₁; inj₂)
+open import Relation.Binary.PropositionalEquality using (_≢_; cong; subst)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 
 ------------------------------------------------------------------------
