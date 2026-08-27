@@ -13,6 +13,7 @@ open import DASHI.Core.Prelude
 import DASHI.Core.TernaryRoleCarrierExact as Ternary
 import DASHI.Core.RelationalRoleGrammarExact as Grammar
 import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.LacanFregeTernaryRoleChartExact as Lacan
 import DASHI.Core.LacanIrigarayTernaryGrammarBridgeExact as LacanIrigaray
 import DASHI.Core.LacanS2RoleSeparationExact as LacanS2
 import DASHI.Core.CriticalThirdnessRoleGrammarExact as Thirdness
@@ -76,7 +77,7 @@ anzalduaBhabhaNotRelatedByTernaryRelabelling =
 
 lacanBhabhaGraphsRelabelExactly :
   (left right : Ternary.TernaryRoleCode) →
-  DASHI.Core.LacanFregeTernaryRoleChartExact.lacanOneCentredEdge left right
+  Lacan.lacanOneCentredEdge left right
   ≡ Thirdness.bhabhaGenerativeEdge
       (Ternary.permute Ternary.swap01Permutation left)
       (Ternary.permute Ternary.swap01Permutation right)
