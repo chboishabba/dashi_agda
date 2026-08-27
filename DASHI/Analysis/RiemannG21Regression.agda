@@ -1,6 +1,7 @@
 module DASHI.Analysis.RiemannG21Regression where
 
 import DASHI.Analysis.RiemannG21LiteralPoleRankAuditExact as PoleAudit
+import DASHI.Analysis.RiemannG21ConjugateHeightSourceBridgeExact as Heights
 import DASHI.Analysis.RiemannG21PrimePairKernelExact as Pair
 import DASHI.Analysis.RiemannG21TwoByTwoMixedObstructionExact as Mixed2
 import DASHI.Analysis.RiemannG21AugmentedDeterminantFiniteExact as Det3
@@ -18,6 +19,11 @@ regressionRobustFourSampleResidualDimension :
   PoleAudit.residualDimension PoleAudit.genericTwoPoleFourSampleCase ≡ 2
 regressionRobustFourSampleResidualDimension =
   G21.robustFourSampleResidualDimension
+
+regressionConjugacyDoesNotForceHeightSeparation :
+  Heights.responseAtHeight Heights.canonicalCollapsedConjugateFamily Heights.lowHeight
+  ≡ Heights.responseAtHeight Heights.canonicalCollapsedConjugateFamily Heights.highHeight
+regressionConjugacyDoesNotForceHeightSeparation = Heights.collapsedHeightResponsesEqual
 
 regressionTwoByTwoNoGo :
   Mixed2.det2Code Mixed2.responseLeft Mixed2.responseRight
@@ -46,6 +52,14 @@ regressionRankOneNotDerived :
   ≡ false
 regressionRankOneNotDerived =
   G21.G21CurrentBoundary.rankOnePoleReductionDerivedIsFalse
+    G21.canonicalG21CurrentBoundary
+
+regressionTransversalityNotDerived :
+  G21.G21CurrentBoundary.literalPoleQuotientTransversalityDerived
+    G21.canonicalG21CurrentBoundary
+  ≡ false
+regressionTransversalityNotDerived =
+  G21.G21CurrentBoundary.literalPoleQuotientTransversalityDerivedIsFalse
     G21.canonicalG21CurrentBoundary
 
 regressionRHBoundary :
