@@ -13,8 +13,12 @@ sources=(
   DASHI/Analysis/RiemannG21AugmentedDeterminantFiniteExact.agda
   DASHI/Analysis/RiemannG21LiteralPoleRankAuditExact.agda
   DASHI/Analysis/RiemannG21PoleMainModeSeparationExact.agda
+  DASHI/Analysis/RiemannG21ActualZetaHeightSeparationBoundary.agda
   DASHI/Analysis/RiemannG21ConjugateHeightSourceBridgeExact.agda
   DASHI/Analysis/RiemannG21SymmetricSampleBlockReductionExact.agda
+  DASHI/Analysis/RiemannG21TwoHeightMomentRatioTargetExact.agda
+  DASHI/Analysis/RiemannG21TwoPointCovarianceShadowExact.agda
+  DASHI/Analysis/RiemannG21ParityMinorAnalyticFrontierExact.agda
   DASHI/Analysis/RiemannG21OffLinePoleQuotientTransversalityExact.agda
   DASHI/Analysis/RiemannG21PrimePairKernelExact.agda
   DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda
@@ -49,6 +53,8 @@ require_pattern DASHI/Analysis/RiemannG21LiteralPoleRankAuditExact.agda \
   'genericTwoPoleFourSampleCase'
 require_pattern DASHI/Analysis/RiemannG21PoleMainModeSeparationExact.agda \
   'MainModeTransportBridge'
+require_pattern DASHI/Analysis/RiemannG21ActualZetaHeightSeparationBoundary.agda \
+  'offLineHeightCannotReachPoleHeightForActualZetaIsTrue'
 require_pattern DASHI/Analysis/RiemannG21ConjugateHeightSourceBridgeExact.agda \
   'TwoHeightExteriorTarget'
 require_pattern DASHI/Analysis/RiemannG21ConjugateHeightSourceBridgeExact.agda \
@@ -57,6 +63,14 @@ require_pattern DASHI/Analysis/RiemannG21SymmetricSampleBlockReductionExact.agda
   'SymmetricSampleTwoHeightAdmission'
 require_pattern DASHI/Analysis/RiemannG21SymmetricSampleBlockReductionExact.agda \
   'evenOnlyOddMinorFails'
+require_pattern DASHI/Analysis/RiemannG21TwoHeightMomentRatioTargetExact.agda \
+  'ActualTaperMomentRatioProducer'
+require_pattern DASHI/Analysis/RiemannG21TwoPointCovarianceShadowExact.agda \
+  'twoPointMomentCrossProductDecomposition'
+require_pattern DASHI/Analysis/RiemannG21ParityMinorAnalyticFrontierExact.agda \
+  'coshRelativeOuterUpweight'
+require_pattern DASHI/Analysis/RiemannG21ParityMinorAnalyticFrontierExact.agda \
+  'taylorRemainderToFiniteRadiusMinors'
 require_pattern DASHI/Analysis/RiemannG21OffLinePoleQuotientTransversalityExact.agda \
   'OffLinePoleQuotientTransversality'
 require_pattern DASHI/Analysis/RiemannG21PrimePairKernelExact.agda \
@@ -73,4 +87,5 @@ require_pattern DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda \
   'riemannHypothesisDerivedIsFalse'
 
 DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh \
-  DASHI/Analysis/RiemannG21Regression.agda
+  DASHI/Analysis/RiemannG21Regression.agda \
+  DASHI/Analysis/RiemannG21ParityMinorAnalyticFrontierExact.agda
