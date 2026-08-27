@@ -1,0 +1,61 @@
+module DASHI.Papers.NavierStokes.TheoremInterfaceRound117Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound117Exact as R117
+
+round117PaperActualQuarticCellExpansionClosed : Bool
+round117PaperActualQuarticCellExpansionClosed = R117.round117ActualQuarticCellExpansionClosed
+
+round117PaperActualCrossSelectedPartnerConstructed : Bool
+round117PaperActualCrossSelectedPartnerConstructed = R117.round117ActualCrossSelectedPartnerConstructed
+
+round117PaperLiteralCrossSelectedDefectEvaluated : Bool
+round117PaperLiteralCrossSelectedDefectEvaluated = R117.round117LiteralCrossSelectedDefectEvaluated
+
+round117PaperResidualReciprocityClosed : Bool
+round117PaperResidualReciprocityClosed = R117.round117ResidualReciprocityClosed
+
+round117PaperCrossSelectedDefectSimplifiedOrPaid : Bool
+round117PaperCrossSelectedDefectSimplifiedOrPaid = R117.round117CrossSelectedDefectSimplifiedOrPaid
+
+round117PaperCriticalSobolevSimonUpgradeClosed : Bool
+round117PaperCriticalSobolevSimonUpgradeClosed = R117.round117PhysicalCriticalSobolevSimonUpgradeClosed
+
+round117PaperMathematicalPackageCount : Nat
+round117PaperMathematicalPackageCount = R117.round117CurrentMathematicalPackageCount
+
+round117PaperVisibleSubleafCount : Nat
+round117PaperVisibleSubleafCount = R117.round117CurrentVisibleSubleafCount
+
+round117PaperActualQuarticCellExpansionClosedIsTrue : round117PaperActualQuarticCellExpansionClosed ≡ true
+round117PaperActualQuarticCellExpansionClosedIsTrue = refl
+
+round117PaperActualCrossSelectedPartnerConstructedIsTrue : round117PaperActualCrossSelectedPartnerConstructed ≡ true
+round117PaperActualCrossSelectedPartnerConstructedIsTrue = refl
+
+round117PaperLiteralCrossSelectedDefectEvaluatedIsTrue : round117PaperLiteralCrossSelectedDefectEvaluated ≡ true
+round117PaperLiteralCrossSelectedDefectEvaluatedIsTrue = refl
+
+round117PaperResidualReciprocityClosedIsTrue : round117PaperResidualReciprocityClosed ≡ true
+round117PaperResidualReciprocityClosedIsTrue = refl
+
+round117PaperCrossSelectedDefectSimplifiedOrPaidIsFalse : round117PaperCrossSelectedDefectSimplifiedOrPaid ≡ false
+round117PaperCrossSelectedDefectSimplifiedOrPaidIsFalse = refl
+
+round117PaperCriticalSobolevSimonUpgradeClosedIsFalse : round117PaperCriticalSobolevSimonUpgradeClosed ≡ false
+round117PaperCriticalSobolevSimonUpgradeClosedIsFalse = refl
+
+round117PaperMathematicalPackageCountIsTwo : round117PaperMathematicalPackageCount ≡ 2
+round117PaperMathematicalPackageCountIsTwo = refl
+
+round117PaperVisibleSubleafCountIsTwo : round117PaperVisibleSubleafCount ≡ 2
+round117PaperVisibleSubleafCountIsTwo = refl
+
+round117PaperClayPromotion : Bool
+round117PaperClayPromotion = false
+
+round117PaperClayPromotionIsFalse : round117PaperClayPromotion ≡ false
+round117PaperClayPromotionIsFalse = refl
