@@ -1,0 +1,51 @@
+name: DASHI partition asymptotics Agda check
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "DASHI/EverythingPartitionAsymptotics.agda"
+      - "DASHI/Mathematics/NumberTheory/Finite*Exact.agda"
+      - "DASHI/Mathematics/NumberTheory/Graded*Exact.agda"
+      - "DASHI/Mathematics/NumberTheory/Partition*Exact.agda"
+      - "DASHI/Moonshine/RankOneFockMultiplicityGradingBridgeExact.agda"
+      - ".github/workflows/partition-asymptotics-agda.yml"
+
+concurrency:
+  group: dashi-global-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  partition-asymptotics-agda:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+
+      - name: Typecheck partition asymptotics surface directly
+        run: |
+          nix develop -c agda \
+            -i . \
+            -l standard-library \
+            DASHI/EverythingPartitionAsymptotics.agda \
+            2>&1 | tee partition-asymptotics-check.log
+
+      - name: Run authoritative aggregate Agda check
+        run: nix build .#check -L --out-link result-partition-asymptotics
+
+      - name: Upload Agda check logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: partition-asymptotics-agda-check-log
+          path: |
+            partition-asymptotics-check.log
+            result-partition-asymptotics/check.log
+          if-no-files-found: ignore
