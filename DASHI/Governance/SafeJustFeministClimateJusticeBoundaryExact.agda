@@ -1,6 +1,7 @@
 module DASHI.Governance.SafeJustFeministClimateJusticeBoundaryExact where
 
 open import DASHI.Core.Prelude
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Consumer
 import DASHI.Governance.FeministClimateJusticeSourceRegistryExact as Sources
 import DASHI.Governance.WaringProductionBoundaryNonfactorabilityExact as WaringGeneric
 import DASHI.Governance.FeministClimateJusticeResidualBundleExact as ResidualGeneric
@@ -107,7 +108,7 @@ countedOutputDoesNotRecoverProvisioning :
 countedOutputDoesNotRecoverProvisioning ()
 
 strongWaringNonfactorabilityAvailable :
-  DASHI.Core.ConsumerDescentMinimalObserverExact.FactorsThrough
+  Consumer.FactorsThrough
     WaringGeneric.accountObserver WaringGeneric.provisioningContribution → ⊥
 strongWaringNonfactorabilityAvailable =
   WaringGeneric.provisioningDoesNotDescendThroughAccountingBoundary
