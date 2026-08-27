@@ -2,15 +2,18 @@ module DASHI.EverythingPartitionAsymptotics where
 
 ------------------------------------------------------------------------
 -- Focused typecheck/import surface for the Hardy--Ramanujan / Erdos / Newman
--- partition lane.  The current finite layer includes generic graded pointing,
--- unique multiplicity enumeration, literal deletion/reinsertion, extensional
--- whole-family residual equivalence, canonical residual normalization, exact
+-- partition lane.  The finite layer now includes generic graded pointing,
+-- proof-free exact key enumeration, strict deletion-fibre instantiation,
 -- factor-pair -> sigma1 regrouping, and the rank-one Fock occupation-grading
 -- bridge.  Bishop analysis remains downstream.
 ------------------------------------------------------------------------
 
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact
 import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact
+import DASHI.Mathematics.NumberTheory.FiniteAllFinEnumerationExact
+import DASHI.Mathematics.NumberTheory.FiniteDependentPairEnumerationExact
+import DASHI.Mathematics.NumberTheory.FiniteDependentPairCardinalityExact
+import DASHI.Mathematics.NumberTheory.FiniteExactKeyReindexExact
 import DASHI.Mathematics.NumberTheory.FiniteWeightUnitExpansionExact
 import DASHI.Mathematics.NumberTheory.FiniteNatVectorCoordinateUpdateExact
 import DASHI.Mathematics.NumberTheory.FiniteVectorPrefixSplitExact
@@ -28,6 +31,10 @@ import DASHI.Mathematics.NumberTheory.PartitionErdosCellBijectionExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosCellRoundTripExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosGradedFamilyInstanceExact
 import DASHI.Mathematics.NumberTheory.PartitionGradedPointingInstanceExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosFiniteKeyEnumerationExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosFiniteKeyRoundTripExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosFiniteKeyCardinalityExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosFiniteKeySystemExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalResidualExpansionExact
 import DASHI.Mathematics.NumberTheory.PartitionDivisorSumRecurrencePrefixExact
 import DASHI.Mathematics.NumberTheory.PartitionDivisorSumRegroupingExact
