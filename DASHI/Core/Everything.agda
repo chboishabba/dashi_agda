@@ -16,3 +16,4 @@ import DASHI.Core.CategoryAuthorityAuditExact
 import DASHI.Core.MultiaxialResidualBundleExact
 import DASHI.Core.RecognitionConstitutionNonfactorabilityExact
 import DASHI.Core.SituatedClaimAuthoritySystemExact
+import DASHI.Core.KnowledgeContentAuthoritySeparationExact
