@@ -136,23 +136,29 @@ plusHelicalModeNormSquareActsAsPhysicalNormSquare {F = F} {E = E} {I = I}
     eigen = Helical.helicalCurlEigenvaluePlus laws k value
     transverse = Helical.helicalProjectorDivergenceFree laws Helical.plus k value
     squared = Helical.curlSymbolSquaredOnTransverse laws k h transverse
+    nested :
+      C3.complex3Scale (C3.realEmbed F m)
+        (C3.complex3Scale (C3.realEmbed F m) h)
+      ≡ C3.complex3Scale
+          (C3.realEmbed F (C3.normSquared I k)) h
+    nested =
+      trans
+        (cong (C3.complex3Scale (C3.realEmbed F m)) (sym eigen))
+        (trans
+          (sym (curlSymbolScale E k (C3.realEmbed F m) h))
+          (trans
+            (cong (Helical.curlSymbol E k) (sym eigen))
+            squared))
   in
   trans
-    (sym
-      (trans
-        (cong
-          (λ coefficient → C3.complex3Scale coefficient h)
-          (realEmbedSquareMultiply m))
-        (sym
-          (Linear.complex3ScaleAssociative
-            (C3.realEmbed F m) (C3.realEmbed F m) h))))
+    (cong
+      (λ coefficient → C3.complex3Scale coefficient h)
+      (sym (realEmbedSquareMultiply m)))
     (trans
-      (cong (Helical.curlSymbol E k) (sym eigen))
-      (trans
-        (curlSymbolScale E k (C3.realEmbed F m) h)
-        (trans
-          (cong (C3.complex3Scale (C3.realEmbed F m)) eigen)
-          squared))))
+      (sym
+        (Linear.complex3ScaleAssociative
+          (C3.realEmbed F m) (C3.realEmbed F m) h))
+      nested)
 
 minusHelicalModeNormSquareActsAsPhysicalNormSquare :
   ∀ {r} {F : C3.RealField r}
@@ -178,23 +184,29 @@ minusHelicalModeNormSquareActsAsPhysicalNormSquare {F = F} {E = E} {I = I}
     eigen = Helical.helicalCurlEigenvalueMinus laws k value
     transverse = Helical.helicalProjectorDivergenceFree laws Helical.minus k value
     squared = Helical.curlSymbolSquaredOnTransverse laws k h transverse
+    nested :
+      C3.complex3Scale (C3.realEmbed F minusM)
+        (C3.complex3Scale (C3.realEmbed F minusM) h)
+      ≡ C3.complex3Scale
+          (C3.realEmbed F (C3.normSquared I k)) h
+    nested =
+      trans
+        (cong (C3.complex3Scale (C3.realEmbed F minusM)) (sym eigen))
+        (trans
+          (sym (curlSymbolScale E k (C3.realEmbed F minusM) h))
+          (trans
+            (cong (Helical.curlSymbol E k) (sym eigen))
+            squared))
   in
   trans
-    (sym
-      (trans
-        (cong
-          (λ coefficient → C3.complex3Scale coefficient h)
-          (minusRealSquareMultiply m))
-        (sym
-          (Linear.complex3ScaleAssociative
-            (C3.realEmbed F minusM) (C3.realEmbed F minusM) h))))
+    (cong
+      (λ coefficient → C3.complex3Scale coefficient h)
+      (sym (minusRealSquareMultiply m)))
     (trans
-      (cong (Helical.curlSymbol E k) (sym eigen))
-      (trans
-        (curlSymbolScale E k (C3.realEmbed F minusM) h)
-        (trans
-          (cong (C3.complex3Scale (C3.realEmbed F minusM)) eigen)
-          squared))))
+      (sym
+        (Linear.complex3ScaleAssociative
+          (C3.realEmbed F minusM) (C3.realEmbed F minusM) h))
+      nested)
 
 round126CurlScalarLinearityClosed : Bool
 round126CurlScalarLinearityClosed = true
