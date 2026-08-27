@@ -21,7 +21,7 @@ module DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceRegression where
 --
 --   source transcription / dependency recut
 --       !=
---   literal source sign / one-step response data
+--   literal source sign / source response data
 --       !=
 --   quantitative uniform Row-A1 closure.
 --
@@ -29,8 +29,11 @@ module DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceRegression where
 -- trace-log Hessian algebra, constrained-propagator annihilation/Ward
 -- cancellation, third-order beta-projection annihilation, Fourier trace
 -- reduction, paramagnetic-seagull positivity criteria, the obstruction for a
--- purely diamagnetic affine-Gram second variation, and chain-rule generation of
--- geometric history-response decay.  Those results guide this Agda dependency
+-- purely diamagnetic affine-Gram second variation, chain-rule generation of
+-- geometric history-response decay, the separation of pointwise positivity
+-- from a uniform Gaussian floor, a one-entry sufficient Gaussian-floor bound,
+-- and the weaker criterion that uniform summability of the literal history
+-- kernel is enough for the final debt.  Those results guide this Agda dependency
 -- graph, but are NOT labelled Agda machineChecked here: cross-prover success is
 -- not an Agda kernel receipt.
 ------------------------------------------------------------------------
@@ -40,6 +43,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 open import DASHI.Physics.YangMills.BalabanCMP109SourceTranscriptionExact
 open import DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceCutsetExact
 open import DASHI.Physics.YangMills.BalabanCMP109SeagullHistorySourceRefinementExact
+open import DASHI.Physics.YangMills.BalabanCMP109UniformFloorSummableHistoryRefinementExact
 open import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound82FiveAnalyticLeafExact
 
 ------------------------------------------------------------------------
@@ -56,26 +60,40 @@ seagullHistoryDependencyRefinementRegressionLevel : ProofLevel
 seagullHistoryDependencyRefinementRegressionLevel =
   cmp109SeagullHistoryDependencyRefinementLevel
 
+uniformFloorSummableHistoryDependencyRegressionLevel : ProofLevel
+uniformFloorSummableHistoryDependencyRegressionLevel =
+  cmp109UniformFloorSummableHistoryDependencyLevel
+
 literalParamagneticSeagullSignRegressionLevel : ProofLevel
 literalParamagneticSeagullSignRegressionLevel =
   cmp109LiteralParamagneticSeagullSignLevel
+
+literalUniformBubbleEntryRegressionLevel : ProofLevel
+literalUniformBubbleEntryRegressionLevel =
+  cmp109LiteralUniformBubbleEntryLevel
 
 literalUniformGaussianFloorRegressionLevel : ProofLevel
 literalUniformGaussianFloorRegressionLevel =
   cmp109LiteralUniformGaussianFloorLevel
 
-literalOneStepHistoryResponseRegressionLevel : ProofLevel
-literalOneStepHistoryResponseRegressionLevel =
-  cmp109LiteralOneStepHistoryResponseLevel
-
-literalGaussianBetaZRegressionLevel : ProofLevel
-literalGaussianBetaZRegressionLevel = cmp109LiteralGaussianBetaZLevel
+literalSummableHistoryKernelRegressionLevel : ProofLevel
+literalSummableHistoryKernelRegressionLevel =
+  cmp109LiteralSummableHistoryKernelLevel
 
 literalFiniteGInteractionDebtRegressionLevel : ProofLevel
 literalFiniteGInteractionDebtRegressionLevel = cmp109LiteralFiniteGInteractionDebtLevel
 
-literalHistoryResponseDecayRegressionLevel : ProofLevel
-literalHistoryResponseDecayRegressionLevel = cmp109LiteralHistoryResponseDecayLevel
+currentLiteralA1PackageRegressionLevel : ProofLevel
+currentLiteralA1PackageRegressionLevel = cmp109CurrentLiteralA1SourcePackageLevel
 
-round82LeafCountRegression : Nat
-round82LeafCountRegression = round82ActualNewAnalyticLeafCount
+------------------------------------------------------------------------
+-- Scoreboards
+------------------------------------------------------------------------
+
+-- Historical Round82 cutset retained for ancestry/audit only.
+round82HistoricalLeafCountRegression : Nat
+round82HistoricalLeafCountRegression = round82ActualNewAnalyticLeafCount
+
+-- Current frozen research scoreboard from the source-facing A/B/C/D recut.
+currentFrozenResearchCountRegression : Nat
+currentFrozenResearchCountRegression = frozenResearchCount
