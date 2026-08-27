@@ -1,10 +1,10 @@
 module DASHI.Reasoning.StructuralMetaphorTaskCompressionExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Reasoning.MetaphorAlignmentMisunderstanding as Metaphor
