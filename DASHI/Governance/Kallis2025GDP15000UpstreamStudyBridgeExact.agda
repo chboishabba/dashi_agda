@@ -1,7 +1,6 @@
 module DASHI.Governance.Kallis2025GDP15000UpstreamStudyBridgeExact where
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.String using (String)
 
 import DASHI.Governance.SafeJustSourceRegistryExact as Sources
 import DASHI.Governance.Kallis2025EvidenceAtlasExact as Atlas
@@ -35,7 +34,6 @@ collste2021 = Sources.sourceReference
   "Human well-being in the Anthropocene: limits to growth"
   "Global Sustainability 4:e30"
   2021
-  "DOI"
   "10.1017/sus.2021.26"
   "peer-reviewed cross-regional empirical study"
   "upstream source for the approximately US$15,000 2011-PPP SDG 1-7 pattern; not a context-free causal income threshold or policy mandate"
