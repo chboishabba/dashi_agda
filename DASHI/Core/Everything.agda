@@ -5,3 +5,13 @@ module DASHI.Core.Everything where
 import DASHI.Core.FallacyObstructionEverything
 import DASHI.Core.TrajectoryResidueExact
 import DASHI.Core.GeneratorCoverageReachabilityExact
+import DASHI.Core.FormalClaimTransportGeometryExact
+import DASHI.Core.FormalizationRecoverySourceRegistryExact
+import DASHI.Core.FormalizationRecoveryGeometryExact
+import DASHI.Core.SourceAcquisitionGeometryExact
+import DASHI.Core.DeductionIndexedInterpretationExact
+import DASHI.Core.FormalSystemRevisionGeometryExact
+import DASHI.Core.RulePremiseDependencyGeometryExact
+import DASHI.Core.OrderedSubstitutionGeometryExact
+import DASHI.Core.RulePremiseTypingGeometryExact
+import DASHI.Core.ProofCarryingRuleApplicationExact
