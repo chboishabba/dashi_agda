@@ -4,8 +4,8 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
--- SOURCE REGISTRY: path-integral experiments, stationary action, and
--- finite-source Kelvin-wake mode selection.
+-- SOURCE REGISTRY: path-integral experiments, stationary action,
+-- diffraction/source-scale selection, and finite-source Kelvin wakes.
 --
 -- Author/title/venue/DOI metadata is explicit and every source carries a
 -- bounded role.  Experimental support for path-amplitude composition is not
@@ -59,6 +59,15 @@ wenEtAl2026Dataset = sourceReference
   2026
   "10.5061/dryad.x0k6djj14"
   "reproducibility data for more than 1.4 million (17^5) reconstructed path amplitudes and the reported postulate tests"
+
+bornWolfPrinciplesOfOptics : SourceReference
+bornWolfPrinciplesOfOptics = sourceReference
+  "Max Born; Emil Wolf"
+  "Principles of Optics: Electromagnetic Theory of Propagation, Interference and Diffraction of Light"
+  "Cambridge University Press, seventh expanded edition"
+  1999
+  "10.1017/CBO9781139644181"
+  "classical optics authority for interference, diffraction, aperture-scale dependence, steepest descent and stationary-phase methods; not a source for TSFV or a claim that wavelength/aperture ratio alone fixes an ontology"
 
 rabaudMoisy2013 : SourceReference
 rabaudMoisy2013 = sourceReference
