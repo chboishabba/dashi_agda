@@ -2,6 +2,7 @@ module DASHI.Analysis.RiemannG21Regression where
 
 import DASHI.Analysis.RiemannG21LiteralPoleRankAuditExact as PoleAudit
 import DASHI.Analysis.RiemannG21ConjugateHeightSourceBridgeExact as Heights
+import DASHI.Analysis.RiemannG21SymmetricSampleBlockReductionExact as Blocks
 import DASHI.Analysis.RiemannG21PrimePairKernelExact as Pair
 import DASHI.Analysis.RiemannG21TwoByTwoMixedObstructionExact as Mixed2
 import DASHI.Analysis.RiemannG21AugmentedDeterminantFiniteExact as Det3
@@ -21,8 +22,19 @@ regressionRobustFourSampleResidualDimension = G21.robustFourSampleResidualDimens
 regressionConjugacyDoesNotForceHeightSeparation :
   Heights.responseAtHeight Heights.canonicalCollapsedConjugateFamily Heights.lowHeight
   ≡ Heights.responseAtHeight Heights.canonicalCollapsedConjugateFamily Heights.highHeight
-regressionConjugacyDoesNotForceHeightSeparation =
-  G21.conjugateHeightSymmetryDoesNotForceSeparation
+regressionConjugacyDoesNotForceHeightSeparation = G21.conjugateHeightSymmetryDoesNotForceSeparation
+
+regressionEvenMinorGate :
+  Blocks.MinorNonzero (Blocks.evenMinor Blocks.toyOffLineResponse Blocks.toyPoleResponse)
+regressionEvenMinorGate = tt
+
+regressionOddMinorGate :
+  Blocks.MinorNonzero (Blocks.oddMinor Blocks.toyOffLineResponse Blocks.toyPoleResponse)
+regressionOddMinorGate = tt
+
+regressionEvenAloneDoesNotForceOdd :
+  Blocks.MinorNonzero (Blocks.oddMinor Blocks.evenOnlyOffLine Blocks.evenOnlyPole) → ⊥
+regressionEvenAloneDoesNotForceOdd = Blocks.evenOnlyOddMinorFails
 
 regressionTwoByTwoNoGo :
   Mixed2.det2Code Mixed2.responseLeft Mixed2.responseRight
