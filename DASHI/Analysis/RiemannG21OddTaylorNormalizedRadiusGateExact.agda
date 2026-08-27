@@ -59,22 +59,6 @@ errorCoefficientMassFactorization :
 errorCoefficientMassFactorization n1a n1p qa qp ca cp =
   solve (n1a ∷ n1p ∷ qa ∷ qp ∷ ca ∷ cp ∷ [])
 
-------------------------------------------------------------------------
--- Support-only polynomial majorant target.
---
--- If R=L/2 and support domination yields
---
---   qa,qp <= R^2,
---   ca,cp <= R^4/20,
---
--- then the expanded P satisfies the sufficient bound
---
---   25 P <= 510 R^4 + 100 R^6 + 4 R^8.
---
--- We construct the right-hand polynomial exactly here; the ordered-real
--- inequality from the support bounds remains a separate analytic producer.
-------------------------------------------------------------------------
-
 squareQ : ℚ → ℚ
 squareQ x = x * x
 
@@ -91,6 +75,45 @@ supportPolynomial25Q : ℚ → ℚ
 supportPolynomial25Q r =
   510 * fourthQ r + 100 * sixthQ r + 4 * eighthQ r
 
+------------------------------------------------------------------------
+-- Exact saturation certificate without division.
+--
+-- Let c be the saturated remainder ratio coefficient R^4/20, encoded by
+-- 20*c = R^4.  Then the support polynomial is exactly 25 times P at
+-- qa=qp=R^2 and ca=cp=c.  The following factorization isolates the saturation
+-- relation as one exact polynomial factor.
+------------------------------------------------------------------------
+
+supportSaturationDifferenceFactorization :
+  (r c : ℚ) →
+  25 * normalizedErrorPolynomialQ (squareQ r) (squareQ r) c c
+    - supportPolynomial25Q r
+  ≡
+  2 * (20 * c - fourthQ r)
+    * (2 * fourthQ r + 50 * squareQ r + 40 * c + 255)
+supportSaturationDifferenceFactorization r c =
+  solve (r ∷ c ∷ [])
+
+supportPolynomialSaturatedExact :
+  (r c : ℚ) →
+  20 * c ≡ fourthQ r →
+  25 * normalizedErrorPolynomialQ (squareQ r) (squareQ r) c c
+  ≡ supportPolynomial25Q r
+supportPolynomialSaturatedExact r c hc =
+  trans
+    (cong
+      (λ z → z + supportPolynomial25Q r)
+      (trans
+        (supportSaturationDifferenceFactorization r c)
+        (cong
+          (λ z → 2 * z * (2 * fourthQ r + 50 * squareQ r + 40 * c + 255))
+          (cong (λ z → z - fourthQ r) hc))))
+    refl
+
+------------------------------------------------------------------------
+-- Weak ordered-real interfaces.
+------------------------------------------------------------------------
+
 record SupportNormalizedErrorMajorant : Set₁ where
   field
     Scalar : Set
@@ -98,11 +121,9 @@ record SupportNormalizedErrorMajorant : Set₁ where
     multiply : Scalar → Scalar → Scalar
     times25 : Scalar → Scalar
     LessOrEqual : Scalar → Scalar → Set
-
     supportMomentBounds : Set
     errorPolynomialMajorized :
       LessOrEqual (times25 errorPolynomial) supportPolynomial
-
     reading : String
 
 record NormalizedOddRadiusGate : Set₁ where
@@ -113,15 +134,12 @@ record NormalizedOddRadiusGate : Set₁ where
     multiply : Scalar → Scalar → Scalar
     times36 : Scalar → Scalar
     StrictBelow : Scalar → Scalar → Set
-
     errorPolynomialFormula : Set
     ratioGapFormula : Set
-
     normalizedSmallRadiusGate :
       StrictBelow
         (multiply errorPolynomial radiusSquared)
         (times36 ratioGap)
-
     reading : String
 
 record SupportOnlyOddRadiusGate : Set₁ where
@@ -131,12 +149,10 @@ record SupportOnlyOddRadiusGate : Set₁ where
     multiply : Scalar → Scalar → Scalar
     times900 : Scalar → Scalar
     StrictBelow : Scalar → Scalar → Set
-
     sufficientGate :
       StrictBelow
         (multiply supportPolynomial radiusSquared)
         (times900 ratioGap)
-
     reading : String
 
 record NormalizedRadiusGateBoundary : Set where
@@ -151,6 +167,9 @@ record NormalizedRadiusGateBoundary : Set where
     normalizedErrorPolynomialExpansionDerived : Bool
     normalizedErrorPolynomialExpansionDerivedIsTrue :
       normalizedErrorPolynomialExpansionDerived ≡ true
+    supportSaturationFactorizationDerived : Bool
+    supportSaturationFactorizationDerivedIsTrue :
+      supportSaturationFactorizationDerived ≡ true
     supportOnlyPolynomialConstructed : Bool
     supportOnlyPolynomialConstructedIsTrue : supportOnlyPolynomialConstructed ≡ true
     massFreeRadiusGateConstructed : Bool
@@ -168,5 +187,5 @@ record NormalizedRadiusGateBoundary : Set where
 canonicalNormalizedRadiusGateBoundary : NormalizedRadiusGateBoundary
 canonicalNormalizedRadiusGateBoundary =
   normalizedRadiusGateBoundary
-    true refl true refl true refl true refl true refl
+    true refl true refl true refl true refl true refl true refl
     false refl false refl false refl
