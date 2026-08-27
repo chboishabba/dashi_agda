@@ -2,15 +2,14 @@ module DASHI.Foundations.RationalDirectedDifferenceAbsoluteBoundExact where
 
 ------------------------------------------------------------------------
 -- DIRECTED ERROR BOUNDS -> ABSOLUTE ERROR BOUND
---
--- In any use below all arithmetic is the standard-library unnormalised
--- rational arithmetic used by the pinned Bishop Real carrier.
 ------------------------------------------------------------------------
 
 open import Data.Rational.Unnormalised as ℚ using
-  (ℚᵘ; _+_; _-_; -_; _≤_; _≃_; ∣_∣; NonNegative)
+  (ℚᵘ; 0ℚᵘ; _+_; _-_; -_; _≤_; _≃_; ∣_∣; NonNegative)
 import Data.Rational.Unnormalised.Properties as ℚP
 open import Data.Sum.Base using (inj₁; inj₂)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
+import NonReflectiveQ as ℚSolver
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -32,7 +31,7 @@ differenceUpperFromRight {x} {y} {leftError} {rightError} x≤y+r =
       ≃⟨ ℚP.≃-sym (ℚP.+-assoc y (ℚ.- y) rightError) ⟩
     (y ℚ.- y) ℚ.+ rightError
       ≃⟨ ℚP.+-congˡ rightError (ℚP.+-inverseʳ y) ⟩
-    ℚ.0ℚᵘ ℚ.+ rightError
+    0ℚᵘ ℚ.+ rightError
       ≃⟨ ℚP.+-identityˡ rightError ⟩
     rightError
       ≤⟨ ℚP.p≤q+p rightError leftError ⟩
@@ -57,7 +56,7 @@ differenceUpperFromLeft {x} {y} {leftError} {rightError} y≤x+l =
       ≃⟨ ℚP.≃-sym (ℚP.+-assoc x (ℚ.- x) leftError) ⟩
     (x ℚ.- x) ℚ.+ leftError
       ≃⟨ ℚP.+-congˡ leftError (ℚP.+-inverseʳ x) ⟩
-    ℚ.0ℚᵘ ℚ.+ leftError
+    0ℚᵘ ℚ.+ leftError
       ≃⟨ ℚP.+-identityˡ leftError ⟩
     leftError
       ≤⟨ ℚP.p≤p+q leftError rightError ⟩
@@ -67,20 +66,10 @@ differenceUpperFromLeft {x} {y} {leftError} {rightError} y≤x+l =
 negDifferenceEquivalentReverse :
   ∀ x y → ℚ.- (x ℚ.- y) ℚ.≃ (y ℚ.- x)
 negDifferenceEquivalentReverse x y =
-  let open ℚP.≤-Reasoning in
-  begin-equality
-    ℚ.- (x ℚ.- y)
-      ≡⟨ ℚP.neg-distrib-+ x (ℚ.- y) ⟩
-    (ℚ.- x) ℚ.+ (ℚ.- (ℚ.- y))
-      ≃⟨ ℚP.+-congˡ (ℚ.- (ℚ.- y)) (ℚP.≃-refl {ℚ.- x}) ⟩
-    (ℚ.- x) ℚ.+ (ℚ.- (ℚ.- y))
-      ≃⟨ ℚP.+-congˡ (ℚ.- (ℚ.- y)) (ℚP.≃-refl {ℚ.- x}) ⟩
-    (ℚ.- x) ℚ.+ (ℚ.- (ℚ.- y))
-      ≃⟨ ℚP.+-congʳ (ℚ.- x) (ℚP.neg-involutive y) ⟩
-    (ℚ.- x) ℚ.+ y
-      ≃⟨ ℚP.+-comm (ℚ.- x) y ⟩
-    y ℚ.- x
-  ∎
+  let open ℚSolver in
+  solve 2
+    (λ x′ y′ → ⊝ (x′ ⊖ y′) ⊜ (y′ ⊖ x′))
+    ℚP.≃-refl x y
 
 absoluteDifferenceBound :
   ∀ {x y leftError rightError : ℚᵘ} →
@@ -97,14 +86,12 @@ absoluteDifferenceBound {x} {y} {leftError} {rightError} x≤y+r y≤x+l
     (sym absoluteIsPositive)
     (differenceUpperFromRight x≤y+r)
 ... | inj₂ absoluteIsNegative =
-  ℚP.≤-respˡ-≃
-    (ℚP.≃-sym (negDifferenceEquivalentReverse x y))
-    (subst
-      (λ value → value ℚ.≤ leftError ℚ.+ rightError)
-      (sym absoluteIsNegative)
+  subst
+    (λ value → value ℚ.≤ leftError ℚ.+ rightError)
+    (sym absoluteIsNegative)
+    (ℚP.≤-respˡ-≃
+      (ℚP.≃-sym (negDifferenceEquivalentReverse x y))
       (differenceUpperFromLeft y≤x+l))
-  where
-  open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 rationalDirectedDifferenceAbsoluteBoundLevel : ProofLevel
 rationalDirectedDifferenceAbsoluteBoundLevel = machineChecked
