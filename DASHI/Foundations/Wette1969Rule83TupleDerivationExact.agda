@@ -17,6 +17,7 @@ module DASHI.Foundations.Wette1969Rule83TupleDerivationExact where
 
 open import DASHI.Core.Prelude
 open import Data.Vec using (Vec) renaming ([] to []ᵥ; _∷_ to _∷ᵥ_)
+import Data.Fin as Fin
 
 import DASHI.Core.ProofCarryingRuleApplicationExact as PCRA
 import DASHI.Foundations.Wette1969HistoricalSignatureExact as Signature
@@ -93,10 +94,6 @@ rule832ExtendsDistinctTupleByFreshVariable :
         (successor arity)
         (juxtapose tuple variable)
 rule832ExtendsDistinctTupleByFreshVariable arity tuple variable = refl
-
-------------------------------------------------------------------------
--- Proof-carrying applications in the finite historical context.
-------------------------------------------------------------------------
 
 emptyPremisesHold :
   (context : Context) →
