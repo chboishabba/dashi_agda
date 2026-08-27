@@ -73,6 +73,7 @@ import DASHI.Governance.Kallis2025ClaimAuthorityRoutingExact
 import DASHI.Governance.SafeJustQualifiedClaimPromotionExact
 import DASHI.Governance.SafeJustSocialIndicatorJusticeBoundaryExact
 import DASHI.Governance.SafeJustConsumerAdequacyResidualBridgeExact
+import DASHI.Governance.SafeJustConsumerAdequacyResidualRegression
 
 -- Provenance-bearing policy routing, corrective reachability and source-bounded
 -- application surfaces assembled as one focused tranche.
