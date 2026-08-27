@@ -183,3 +183,18 @@ import DASHI.Biology.ConsciousAccessRound6CrossPollinationRegression
 -- Residual dependency cross-pollination: coarse neural measurement, local
 -- separating probes, effective topology, and capability-preserving decoupling.
 import DASHI.Biology.NeuralResidualDependencyBridgeExact
+
+------------------------------------------------------------------------
+-- Conscious-access round seven: Aristotle theorem return and structural gates.
+
+import DASHI.Biology.TernaryCanonicalOrientationExact
+import DASHI.Biology.TernaryFixedTransverseFiniteExact
+import DASHI.Biology.TernaryRotationReflectionSeparationExact
+import DASHI.Biology.NondegenerateObserverAdmissionExact
+import DASHI.Biology.NeuralFixedTransverseObserverBridgeExact
+import DASHI.Biology.CyclotomicPhaseAmplitudeBoundaryExact
+import DASHI.Biology.EqualCardinalityStructureBoundaryExact
+import DASHI.Biology.OggTernaryEquivariantLabellingNoGoExact
+import DASHI.Biology.OperatorStructureAdmissionBoundaryExact
+import DASHI.Biology.ConsciousAccessRound7AristotleSourceBridge
+import DASHI.Biology.ConsciousAccessRound7AristotleRegression
