@@ -7,16 +7,18 @@ module DASHI.Foundations.Wette1969Rule9324x25ComputationalSideConditionsExact wh
 -- DOI: 10.1007/978-3-642-86745-3_9.
 --
 -- This module connects the concrete schematic evaluator to the recovered
--- parameterized 9.3.24/25 premise surface.  It deliberately discharges only
--- the fragment justified by the current evaluator:
+-- parameterized 9.3.24/25 premise surface. It discharges only the computational
+-- fragment justified by the current evaluator:
 --   * premise 3 when the fresh tuple parameter is represented by one schematic
 --     word variable and that variable does not occur in the freshness context;
 --   * premise 4 when the recovered substitution source/result are related by
 --     exact schematic instantiation under a supplied environment.
 --
--- These are computational side-condition certificates, not derivability proofs
--- for Wette's historical premise formulae.  The latter remain owned by the
--- finite derivation-context / proof-carrying rule application lane.
+-- These certificates establish the relevant syntactic side condition, but they
+-- are not automatically formula-membership/derivability proofs in Wette's
+-- historical calculus. The proof-carrying finite-context lane owns that second
+-- step. This distinction prevents a meta-level evaluator from silently becoming
+-- an extra historical inference rule.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
