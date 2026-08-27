@@ -25,10 +25,11 @@ open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base using
+  (ℚ; 0ℚ; _+_; _*_; _≤_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 record ModalEnergyDissipation {a : Level} (Mode : Set a) : Set a where
   constructor modal-energy-dissipation
@@ -55,17 +56,23 @@ pairKernelNonnegative :
     (M : ModalEnergyDissipation Mode) left right →
   0ℚ ≤ pairKernel M left right
 pairKernelNonnegative M left right =
-  ℚP.+-mono-≤
-    (let
+  ℚP.+-mono-≤ first second
+  where
+  first : 0ℚ ≤ dissipation M left * energy M right
+  first =
+    let
       instance
-        dNN = Data.Rational.Base.nonNegative (dissipationNonnegative M left)
-        eNN = Data.Rational.Base.nonNegative (energyNonnegative M right)
-      in ℚP.nonNegative⁻¹ (dissipation M left * energy M right))
-    (let
+        dNN = nonNegative (dissipationNonnegative M left)
+        eNN = nonNegative (energyNonnegative M right)
+    in ℚP.nonNegative⁻¹ (dissipation M left * energy M right)
+
+  second : 0ℚ ≤ energy M left * dissipation M right
+  second =
+    let
       instance
-        eNN = Data.Rational.Base.nonNegative (energyNonnegative M left)
-        dNN = Data.Rational.Base.nonNegative (dissipationNonnegative M right)
-      in ℚP.nonNegative⁻¹ (energy M left * dissipation M right))
+        eNN = nonNegative (energyNonnegative M left)
+        dNN = nonNegative (dissipationNonnegative M right)
+    in ℚP.nonNegative⁻¹ (energy M left * dissipation M right)
 
 selectedInner :
   ∀ {a} {Mode : Set a} →
@@ -95,30 +102,18 @@ selectedInnerBelowFull M select left (right ∷ rest) with select left right
     (selectedInnerBelowFull M select left rest)
 ... | false =
   let
-    kernelNN = pairKernelNonnegative M left right
     tail = selectedInnerBelowFull M select left rest
     addKernel :
-      selectedInner M select left rest
+      fullInner M left rest
       ≤ pairKernel M left right + fullInner M left rest
     addKernel =
-      ℚP.≤-trans tail
-        (subst
-          (λ lower → lower ≤ pairKernel M left right + fullInner M left rest)
-          (ℚP.+-identityˡ (fullInner M left rest))
-          (ℚP.+-mono-≤ kernelNN ℚP.≤-refl))
-  in addKernel
+      subst
+        (λ lower → lower ≤ pairKernel M left right + fullInner M left rest)
+        (ℚP.+-identityˡ (fullInner M left rest))
+        (ℚP.+-mono-≤ (pairKernelNonnegative M left right) ℚP.≤-refl)
+  in
+  ℚP.≤-trans tail addKernel
 
-selectedPairSum :
-  ∀ {a} {Mode : Set a} →
-  ModalEnergyDissipation Mode →
-  (Mode → Mode → Bool) → List Mode → ℚ
-selectedPairSum M select [] = 0ℚ
-selectedPairSum M select (left ∷ rest) =
-  selectedInner M select left (left ∷ rest)
-  + selectedPairSum M select rest
-
--- The useful physical fold needs all ordered pairs, not only the triangular
--- suffix used above.  Keep a fixed complete `all` list while folding lefts.
 selectedOrderedPairSum :
   ∀ {a} {Mode : Set a} →
   ModalEnergyDissipation Mode →
@@ -187,13 +182,13 @@ fullOrderedPairFactorization M [] rights
         | ℚP.+-identityʳ 0ℚ = refl
 fullOrderedPairFactorization M (left ∷ lefts) rights =
   trans
-    (cong (_+ fullOrderedPairSum M lefts rights)
+    (cong
+      (_+ (fullOrderedPairSum M lefts rights))
       (fullInnerFactorization M left rights))
     (trans
       (cong
-        (λ tail →
-          (dissipation M left * sumEnergy M rights
-            + energy M left * sumDissipation M rights) + tail)
+        ((dissipation M left * sumEnergy M rights
+          + energy M left * sumDissipation M rights) +_)
         (fullOrderedPairFactorization M lefts rights))
       (solve
         ( dissipation M left ∷ energy M left
