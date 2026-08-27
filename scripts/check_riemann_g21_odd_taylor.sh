@@ -8,11 +8,13 @@ bash scripts/check_riemann_g21_pole_quotient.sh
 
 sources=(
   DASHI/Analysis/StrictKernelMomentRatioTwoSupportExact.agda
+  DASHI/Analysis/SupportMomentDominationExact.agda
   DASHI/Analysis/RiemannG21OddTaylorDeterminantExact.agda
   DASHI/Analysis/RiemannG21OddTaylorRemainderDeterminantExact.agda
   DASHI/Analysis/RiemannG21OddTaylorOrderBudgetExact.agda
   DASHI/Analysis/RiemannG21OddTaylorSourceBudgetBoundary.agda
   DASHI/Analysis/RiemannG21OddTaylorDeterminantConstantExact.agda
+  DASHI/Analysis/RiemannG21OddTaylorNormalizedRadiusGateExact.agda
   DASHI/Analysis/RiemannG21OddTaylorQuantitativeFrontierExact.agda
   DASHI/Analysis/RiemannG21OddTaylorRegression.agda
   DASHI/Analysis/RiemannG21StrictTP2TrancheReceipt.agda
@@ -39,6 +41,8 @@ require_pattern() {
 
 require_pattern DASHI/Analysis/StrictKernelMomentRatioTwoSupportExact.agda 'twoSupportTP2MomentIdentity'
 require_pattern DASHI/Analysis/StrictKernelMomentRatioTwoSupportExact.agda 'oddTwoSupportCompositionIdentity'
+require_pattern DASHI/Analysis/SupportMomentDominationExact.agda 'finiteMoment3BoundExact'
+require_pattern DASHI/Analysis/SupportMomentDominationExact.agda 'actualTaperN5DominationDerivedInAgdaIsFalse'
 require_pattern DASHI/Analysis/RiemannG21OddTaylorDeterminantExact.agda 'oddCubicDeterminantDoubleRadius'
 require_pattern DASHI/Analysis/RiemannG21OddTaylorDeterminantExact.agda 'doubleRadiusSignalCoefficientDerivedIsTrue'
 require_pattern DASHI/Analysis/RiemannG21OddTaylorRemainderDeterminantExact.agda 'oddDeterminantErrorIdentity'
@@ -48,18 +52,27 @@ require_pattern DASHI/Analysis/RiemannG21OddTaylorSourceBudgetBoundary.agda 'Zet
 require_pattern DASHI/Analysis/RiemannG21OddTaylorSourceBudgetBoundary.agda 'fifthOrderSineRemainderLocatedOrDerivedIsFalse'
 require_pattern DASHI/Analysis/RiemannG21OddTaylorDeterminantConstantExact.agda 'determinantErrorConstantQ'
 require_pattern DASHI/Analysis/RiemannG21OddTaylorDeterminantConstantExact.agda 'explicitRationalCoefficientConstructedIsTrue'
+require_pattern DASHI/Analysis/RiemannG21OddTaylorNormalizedRadiusGateExact.agda 'oddMarginRatioFactorization'
+require_pattern DASHI/Analysis/RiemannG21OddTaylorNormalizedRadiusGateExact.agda 'errorCoefficientMassFactorization'
+require_pattern DASHI/Analysis/RiemannG21OddTaylorNormalizedRadiusGateExact.agda 'normalizedErrorPolynomialExpanded'
+require_pattern DASHI/Analysis/RiemannG21OddTaylorNormalizedRadiusGateExact.agda 'supportPolynomial25Q'
+require_pattern DASHI/Analysis/RiemannG21OddTaylorNormalizedRadiusGateExact.agda 'supportPolynomialMajorantDerivedInAgdaIsFalse'
 require_pattern DASHI/Analysis/RiemannG21OddTaylorQuantitativeFrontierExact.agda 'doubleRadiusCoefficient36DerivedIsTrue'
 require_pattern DASHI/Analysis/RiemannG21OddTaylorQuantitativeFrontierExact.agda 'relativeErrorDegreeGapTwoDerivedIsTrue'
-require_pattern DASHI/Analysis/RiemannG21OddTaylorQuantitativeFrontierExact.agda 'explicitDeterminantErrorCoefficientConstructedIsTrue'
+require_pattern DASHI/Analysis/RiemannG21OddTaylorQuantitativeFrontierExact.agda 'massNormalizedErrorPolynomialDerivedIsTrue'
+require_pattern DASHI/Analysis/RiemannG21OddTaylorQuantitativeFrontierExact.agda 'supportOnlyPolynomialConstructedIsTrue'
+require_pattern DASHI/Analysis/RiemannG21OddTaylorQuantitativeFrontierExact.agda 'actualSupportMomentDominationDerivedIsFalse'
 require_pattern DASHI/Analysis/RiemannG21OddTaylorQuantitativeFrontierExact.agda 'determinantR6InequalityDerivedIsFalse'
 require_pattern DASHI/Analysis/RiemannG21OddTaylorQuantitativeFrontierExact.agda 'finiteOddMinorSignDerivedIsFalse'
 
 DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh \
   DASHI/Analysis/StrictKernelMomentRatioTwoSupportExact.agda \
+  DASHI/Analysis/SupportMomentDominationExact.agda \
   DASHI/Analysis/RiemannG21OddTaylorDeterminantExact.agda \
   DASHI/Analysis/RiemannG21OddTaylorRemainderDeterminantExact.agda \
   DASHI/Analysis/RiemannG21OddTaylorOrderBudgetExact.agda \
   DASHI/Analysis/RiemannG21OddTaylorSourceBudgetBoundary.agda \
   DASHI/Analysis/RiemannG21OddTaylorDeterminantConstantExact.agda \
+  DASHI/Analysis/RiemannG21OddTaylorNormalizedRadiusGateExact.agda \
   DASHI/Analysis/RiemannG21OddTaylorQuantitativeFrontierExact.agda \
   DASHI/Analysis/RiemannG21OddTaylorRegression.agda
