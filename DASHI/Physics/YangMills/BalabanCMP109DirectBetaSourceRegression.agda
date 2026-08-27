@@ -23,12 +23,29 @@ module DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceRegression where
 --     -> direct p=0 beta projection / trace-log route
 --     -> seagull-sign + one-step history refinement
 --     -> one bubble-entry + summable-history refinement
---     -> explicit corner V_00 scalar + Cauchy interaction pair + D-summability
---        reduced-margin cutset.
+--     -> explicit corner V_00 scalar + generic Cauchy/history reduced margin
+--     -> CROSS-POLLINATION:
+--          reuse five-channel quartic current-step remainder
+--          + reuse localized irrelevant-memory shell tail.
 --
--- Parallel Lean RequestProject returns prove the downstream finite-dimensional
--- algebra and quantitative implications.  Those results guide this Agda graph
--- but do NOT become Agda machineChecked merely because Lean built them.
+-- This last step deletes the generic A,K,rho,D parameterization from the
+-- shortest physical route.  Once the literal physical channel/localization
+-- inputs are instantiated, the existing Agda compilers already give
+--
+--   betaInt >= - C_beta gamma^4
+--   irrelevantMemory <= C_H gamma / 2.
+--
+-- The remaining primary Gaussian source task is exact: CMP109 (1.5) delegates
+-- its background-dependent quadratic operators to Sect. D of reference [13],
+-- which is the CMP99 background-propagator paper.  The literal first-variation
+-- corner datum must therefore be obtained by differentiating that SAME CMP99
+-- Delta(U), including the averaging/gauge-fixing constraint dependence entering
+-- CMP109's constrained Gaussian, then Fourier-evaluating the result at the
+-- project corner q=(0,1/2,0,0).
+--
+-- Parallel Lean RequestProject returns prove additional downstream
+-- finite-dimensional algebra.  Those results guide this Agda graph but do NOT
+-- become Agda machineChecked merely because Lean built them.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -38,6 +55,7 @@ open import DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceCutsetExact
 open import DASHI.Physics.YangMills.BalabanCMP109SeagullHistorySourceRefinementExact
 open import DASHI.Physics.YangMills.BalabanCMP109UniformFloorSummableHistoryRefinementExact
 open import DASHI.Physics.YangMills.BalabanCMP109ReducedMarginSourceCutsetExact
+open import DASHI.Physics.YangMills.BalabanCMP109A1CrossPollinatedDebtProducersExact
 open import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound82FiveAnalyticLeafExact
 
 ------------------------------------------------------------------------
@@ -63,47 +81,66 @@ reducedMarginDependencyRefinementRegressionLevel =
   cmp109ReducedMarginDependencyRefinementLevel
 
 ------------------------------------------------------------------------
--- Current Row-A1 source blockers
+-- Current shortest Row-A1 source blockers
 ------------------------------------------------------------------------
 
+-- Gaussian: literal CMP99/CMP109 first background variation at the explicit
+-- project corner; no global Brillouin lower bound is required.
 literalCornerFirstVariationScalarRegressionLevel : ProofLevel
 literalCornerFirstVariationScalarRegressionLevel =
   cmp109LiteralCornerFirstVariationScalarLevel
 
-literalCauchyInteractionPairRegressionLevel : ProofLevel
-literalCauchyInteractionPairRegressionLevel =
-  cmp109LiteralCauchyInteractionPairLevel
+-- Current-step nonlinear debt: instantiate the existing five physical channels
+-- through cubic cancellation and fourth-order quotient majorants.
+literalFiveChannelTaylorInstantiationRegressionLevel : ProofLevel
+literalFiveChannelTaylorInstantiationRegressionLevel =
+  cmp109LiteralFiveChannelTaylorInstantiationLevel
 
-literalUniformHistorySummabilityRegressionLevel : ProofLevel
-literalUniformHistorySummabilityRegressionLevel =
-  cmp109LiteralUniformHistorySummabilityLevel
+literalFiveChannelQuotientMajorantRegressionLevel : ProofLevel
+literalFiveChannelQuotientMajorantRegressionLevel =
+  cmp109LiteralFiveChannelQuotientMajorantLevel
 
-currentA1ResidualObligationRegressionLevel : ProofLevel
-currentA1ResidualObligationRegressionLevel =
-  cmp109A1ResidualObligationLevel
+-- Historical debt: instantiate the existing localized/irrelevant-memory shell
+-- influence.  Do not assign exponential forgetting to the marginal coupling.
+literalIrrelevantMemoryInfluenceRegressionLevel : ProofLevel
+literalIrrelevantMemoryInfluenceRegressionLevel =
+  cmp109LiteralIrrelevantMemoryInfluenceLevel
+
+crossPollinatedA1DebtPackageRegressionLevel : ProofLevel
+crossPollinatedA1DebtPackageRegressionLevel =
+  cmp109CrossPollinatedA1DebtPackageLevel
+
+------------------------------------------------------------------------
+-- Machine-checked reused debt compilers
+------------------------------------------------------------------------
+
+fiveChannelQuarticDebtReuseRegressionLevel : ProofLevel
+fiveChannelQuarticDebtReuseRegressionLevel =
+  cmp109FiveChannelQuarticDebtReuseLevel
+
+localizedIrrelevantMemoryDebtReuseRegressionLevel : ProofLevel
+localizedIrrelevantMemoryDebtReuseRegressionLevel =
+  cmp109LocalizedIrrelevantMemoryDebtReuseLevel
 
 ------------------------------------------------------------------------
 -- Historical / ancestry-visible older blockers
 ------------------------------------------------------------------------
 
-literalParamagneticSeagullSignRegressionLevel : ProofLevel
-literalParamagneticSeagullSignRegressionLevel =
+literalCauchyInteractionPairHistoricalLevel : ProofLevel
+literalCauchyInteractionPairHistoricalLevel =
+  cmp109LiteralCauchyInteractionPairLevel
+
+literalUniformHistorySummabilityHistoricalLevel : ProofLevel
+literalUniformHistorySummabilityHistoricalLevel =
+  cmp109LiteralUniformHistorySummabilityLevel
+
+literalParamagneticSeagullSignHistoricalLevel : ProofLevel
+literalParamagneticSeagullSignHistoricalLevel =
   cmp109LiteralParamagneticSeagullSignLevel
 
-literalUniformBubbleEntryRegressionLevel : ProofLevel
-literalUniformBubbleEntryRegressionLevel =
+literalUniformBubbleEntryHistoricalLevel : ProofLevel
+literalUniformBubbleEntryHistoricalLevel =
   cmp109LiteralUniformBubbleEntryLevel
-
-literalUniformGaussianFloorRegressionLevel : ProofLevel
-literalUniformGaussianFloorRegressionLevel =
-  cmp109LiteralUniformGaussianFloorLevel
-
-literalSummableHistoryKernelRegressionLevel : ProofLevel
-literalSummableHistoryKernelRegressionLevel =
-  cmp109LiteralSummableHistoryKernelLevel
-
-literalFiniteGInteractionDebtRegressionLevel : ProofLevel
-literalFiniteGInteractionDebtRegressionLevel = cmp109LiteralFiniteGInteractionDebtLevel
 
 ------------------------------------------------------------------------
 -- Scoreboards
