@@ -18,9 +18,11 @@ import DASHI.Foundations.WetteHistoricalSourceAtlasExact as Source
 -- now been inspected directly. Exact transcription has begun: the 1969
 -- signature is typed with source arities; rules 0.1/0.2 have exact bodies; the
 -- p.193 revision surface is represented; and the source-stated dependency,
--- substitution-order, and premise-judgement typing geometry of critical rules
--- 9.1.5 and 9.3.24/25 is now typed. The complete `transcriptionExtracted`
--- stage remains uninhabited.
+-- substitution-order, premise-judgement typing, and complete typed 9.3.24/25
+-- premise/conclusion template are represented.  Both 9.3.24 and 9.3.25 now
+-- inhabit the HistoricalRuleBody carrier end-to-end as parameterized source
+-- templates. OCR-sensitive compound words remain transcription obligations, so
+-- the complete `transcriptionExtracted` stage remains uninhabited.
 ------------------------------------------------------------------------
 
 currentWetteRecoveryProfile : Recovery.RecoveryStageProfile
@@ -62,6 +64,9 @@ critical915And9324x25SubstitutionOrderRecovered = tt
 
 critical915And9324x25PremiseKindsRecovered : ⊤
 critical915And9324x25PremiseKindsRecovered = tt
+
+rule9324x25ConclusionTemplatesAndBodiesRecovered : ⊤
+rule9324x25ConclusionTemplatesAndBodiesRecovered = tt
 
 criticalLate1974FormalObjectsStillUnrecovered : ⊤
 criticalLate1974FormalObjectsStillUnrecovered = tt
@@ -126,6 +131,10 @@ record WetteHistoricalRecoveryGeometryBoundary : Set where
     criticalPremiseTypingGeometryNowRecoveredIsTrue :
       criticalPremiseTypingGeometryNowRecovered ≡ true
 
+    rule9324x25CompleteTypedTemplatesNowRecovered : Bool
+    rule9324x25CompleteTypedTemplatesNowRecoveredIsTrue :
+      rule9324x25CompleteTypedTemplatesNowRecovered ≡ true
+
     primaryInspectionEqualsCompleteHistoricalTranscription : Bool
     primaryInspectionEqualsCompleteHistoricalTranscriptionIsFalse :
       primaryInspectionEqualsCompleteHistoricalTranscription ≡ false
@@ -150,6 +159,7 @@ canonicalWetteHistoricalRecoveryGeometryBoundary :
   WetteHistoricalRecoveryGeometryBoundary
 canonicalWetteHistoricalRecoveryGeometryBoundary =
   wetteHistoricalRecoveryGeometryBoundary
+    true refl
     true refl
     true refl
     true refl
