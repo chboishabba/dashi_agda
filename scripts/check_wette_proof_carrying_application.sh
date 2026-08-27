@@ -46,3 +46,5 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Core/ProofCarryingRuleApplicationExact.agda \
   DASHI/Foundations/Wette1969ProofCarryingRuleApplicationExact.agda \
   DASHI/Foundations/Wette1969FiniteDerivationContextExact.agda
+
+bash scripts/check_wette_derivation_closure_and_substitution.sh
