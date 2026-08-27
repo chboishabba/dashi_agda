@@ -130,3 +130,9 @@ jobs:
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNClayFrontierRound113Validation.agda
+
+      - name: Type-check Round114 antisymmetry-defect frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound114Validation.agda
