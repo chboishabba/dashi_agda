@@ -22,45 +22,32 @@ module DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceRegression where
 --   source transcription
 --     -> direct p=0 beta projection / trace-log route
 --     -> seagull-sign + history refinement
---     -> one-entry/summability reduction
---     -> generic corner/Cauchy/history reduced margin
---     -> debt CROSS-POLLINATION:
---          five-channel quartic current-step remainder
---          + localized irrelevant-memory shell tail
---     -> Gaussian SOURCE CORRECTION:
---          differentiate the same CMP99/CMP98 constrained carrier as W/Q/R
---          + certify one mixed Lorentz/color positive-MEASURE momentum patch
---     -> corrected Lean cross-prover margin:
---          W patch lower bound must pay |Q|+|R|
---          + marginal memory is separately budgeted unless source-removed.
+--     -> positive-measure patch correction
+--     -> W/Q/R constrained first-variation decomposition
+--     -> five-channel quartic current-step remainder
+--     -> HISTORY ANTI-DOUBLE-COUNTING:
+--          beta_j is projected from current E^(j+1), which already depends on
+--          preceding couplings; if the five-channel remainder bound is uniform
+--          over the admissible history, history is an argument of betaInt, not a
+--          second additive final debt.
 --
--- The corner q=(0,1/2,0,0) single-mode witness is no longer authoritative.
--- The parallel Lean lane now proves both obstructions: the relevant Wilson cubic
--- diagonal component vanishes at the Brillouin boundary, and a fixed-cardinality
--- Fourier set cannot provide a normalized volume-uniform floor.
+-- Hence the highest-alpha final A1 margin can collapse to
 --
--- Existing Agda debt compilers already give, once literally instantiated,
+--   b_patch - C_beta gamma^4 > 0
 --
---   betaInt >= - C_beta gamma^4
---   irrelevantMemory <= C_H gamma / 2.
+-- PROVIDED the physical five-channel instantiation is uniform over the full
+-- admissible preceding-coupling history.  Localization/history estimates may be
+-- used internally to prove that uniformity, but must not then be subtracted a
+-- second time.
 --
--- The current full physical margin is therefore
---
---   b_patch
---   - C_beta gamma^4
---   - (C_H gamma / 2 + H_marg) B > 0.
---
--- The zero-marginal, unit-budget expression
---
---   b_patch - C_beta gamma^4 - C_H gamma/2
---
--- is only a specialization.  H_marg may be deleted only by a source theorem
--- proving that the marginal contribution vanishes or is already included in the
--- current local remainder.  No global near/far estimate is required.
+-- The Gaussian W channel is D_background of the Wilson HESSIAN, hence a mixed
+-- third Wilson variation.  The existing literal first-variation plaquette owner
+-- is useful coordinate/support infrastructure but is not itself W.  A literal
+-- third-variation/right-exponential source weld remains open.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel; conditional)
 open import DASHI.Physics.YangMills.BalabanCMP109SourceTranscriptionExact
 open import DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceCutsetExact
 open import DASHI.Physics.YangMills.BalabanCMP109SeagullHistorySourceRefinementExact
@@ -70,6 +57,7 @@ open import DASHI.Physics.YangMills.BalabanCMP109A1CrossPollinatedDebtProducersE
 open import DASHI.Physics.YangMills.BalabanCMP109GaussianPositivePatchCorrectionExact
 open import DASHI.Physics.YangMills.BalabanCMP109GaussianFirstVariationSourceDecompositionExact
 open import DASHI.Physics.YangMills.BalabanCMP109CorrectedPatchMarginCrossProverExact
+open import DASHI.Physics.YangMills.BalabanA1HistoryUniformRemainderAntiDoubleCountExact
 open import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound82FiveAnalyticLeafExact
 
 ------------------------------------------------------------------------
@@ -79,6 +67,11 @@ open import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound82FiveAnalyticLe
 literalWilsonHessianVariationRegressionLevel : ProofLevel
 literalWilsonHessianVariationRegressionLevel =
   cmp109LiteralWilsonHessianVariationCurrentLevel
+
+-- Sharper description of the same W seam: D_background Delta is a mixed third
+-- Wilson variation, not the already-existing first action variation.
+literalWilsonMixedThirdVariationRegressionLevel : ProofLevel
+literalWilsonMixedThirdVariationRegressionLevel = conditional
 
 literalAveragingConstraintVariationRegressionLevel : ProofLevel
 literalAveragingConstraintVariationRegressionLevel =
@@ -96,7 +89,7 @@ literalMixedVertexPositivePatchRegressionLevel =
   cmp109LiteralPositivePatchCurrentLevel
 
 ------------------------------------------------------------------------
--- Current shortest Row-A1 debt / history source blockers
+-- Current shortest Row-A1 remainder/history blocker
 ------------------------------------------------------------------------
 
 literalFiveChannelTaylorInstantiationRegressionLevel : ProofLevel
@@ -107,17 +100,40 @@ literalFiveChannelQuotientMajorantRegressionLevel : ProofLevel
 literalFiveChannelQuotientMajorantRegressionLevel =
   cmp109LiteralFiveChannelCurrentLevel
 
-literalIrrelevantMemoryInfluenceRegressionLevel : ProofLevel
-literalIrrelevantMemoryInfluenceRegressionLevel =
+-- Highest-alpha source weld: the current five-channel betaInt must be bounded
+-- uniformly over the complete admissible preceding-coupling history.
+literalFiveChannelUniformOverHistoryRegressionLevel : ProofLevel
+literalFiveChannelUniformOverHistoryRegressionLevel =
+  cmp109LiteralFiveChannelUniformOverHistoryLevel
+
+------------------------------------------------------------------------
+-- Machine-checked reused Agda compilers
+------------------------------------------------------------------------
+
+historyUniformAntiDoubleCountRegressionLevel : ProofLevel
+historyUniformAntiDoubleCountRegressionLevel =
+  historyUniformCurrentRemainderAntiDoubleCountLevel
+
+positivePatchArithmeticRegressionLevel : ProofLevel
+positivePatchArithmeticRegressionLevel = positivePatchArithmeticLevel
+
+fiveChannelQuarticDebtReuseRegressionLevel : ProofLevel
+fiveChannelQuarticDebtReuseRegressionLevel =
+  cmp109FiveChannelQuarticDebtReuseLevel
+
+------------------------------------------------------------------------
+-- Conditional fallback if history-uniform five-channel control fails
+------------------------------------------------------------------------
+
+-- These remain available as a failure-closed fallback, but are no longer the
+-- preferred final margin when the current betaInt is already history-uniform.
+literalIrrelevantMemoryInfluenceFallbackLevel : ProofLevel
+literalIrrelevantMemoryInfluenceFallbackLevel =
   cmp109LiteralLocalizedMemoryCurrentLevel
 
-literalMarginalMemoryBoundRegressionLevel : ProofLevel
-literalMarginalMemoryBoundRegressionLevel =
+literalMarginalMemoryBoundFallbackLevel : ProofLevel
+literalMarginalMemoryBoundFallbackLevel =
   cmp109LiteralMarginalMemoryBoundCurrentLevel
-
-correctedPatchMarginSourcePackageRegressionLevel : ProofLevel
-correctedPatchMarginSourcePackageRegressionLevel =
-  cmp109CorrectedPatchMarginSourcePackageLevel
 
 ------------------------------------------------------------------------
 -- Cross-prover-only theorem surfaces from the parallel Lean lane
@@ -139,49 +155,9 @@ wqrInterferenceCrossProverRegressionLevel : ProofLevel
 wqrInterferenceCrossProverRegressionLevel =
   cmp109WQRInterferenceCrossProverLevel
 
-correctedMarginCompilerCrossProverRegressionLevel : ProofLevel
-correctedMarginCompilerCrossProverRegressionLevel =
-  cmp109CorrectedMarginCompilerCrossProverLevel
-
 universalCoefficientCircularityCrossProverRegressionLevel : ProofLevel
 universalCoefficientCircularityCrossProverRegressionLevel =
   cmp109UniversalCoefficientCircularityAuditCrossProverLevel
-
-------------------------------------------------------------------------
--- Machine-checked reused Agda compilers
-------------------------------------------------------------------------
-
-positivePatchArithmeticRegressionLevel : ProofLevel
-positivePatchArithmeticRegressionLevel = positivePatchArithmeticLevel
-
-fiveChannelQuarticDebtReuseRegressionLevel : ProofLevel
-fiveChannelQuarticDebtReuseRegressionLevel =
-  cmp109FiveChannelQuarticDebtReuseLevel
-
-localizedIrrelevantMemoryDebtReuseRegressionLevel : ProofLevel
-localizedIrrelevantMemoryDebtReuseRegressionLevel =
-  cmp109LocalizedIrrelevantMemoryDebtReuseLevel
-
-------------------------------------------------------------------------
--- Historical / ancestry-visible older blockers
-------------------------------------------------------------------------
-
--- The single-corner scalar remains a useful finite-data regression only.
-literalCornerFirstVariationScalarHistoricalLevel : ProofLevel
-literalCornerFirstVariationScalarHistoricalLevel =
-  cmp109LiteralCornerFirstVariationScalarLevel
-
-literalCauchyInteractionPairHistoricalLevel : ProofLevel
-literalCauchyInteractionPairHistoricalLevel =
-  cmp109LiteralCauchyInteractionPairLevel
-
-literalUniformHistorySummabilityHistoricalLevel : ProofLevel
-literalUniformHistorySummabilityHistoricalLevel =
-  cmp109LiteralUniformHistorySummabilityLevel
-
-literalParamagneticSeagullSignHistoricalLevel : ProofLevel
-literalParamagneticSeagullSignHistoricalLevel =
-  cmp109LiteralParamagneticSeagullSignLevel
 
 ------------------------------------------------------------------------
 -- Scoreboards
