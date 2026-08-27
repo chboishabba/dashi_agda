@@ -122,19 +122,55 @@ insertDeleteUnit :
 insertDeleteUnit cell = refl
 
 ------------------------------------------------------------------------
--- Conversely, insert then delete recovers the residual vector unconditionally.
+-- Full literal cell-key round trip.  Once the source vector is rewritten by
+-- the add-after-subtract theorem, the only non-definitional coordinate is the
+-- reconstructed occurrence; Fin.toNat injectivity closes it.
 
- deleteInsertResidualVector :
+insertDeleteKey :
+  ∀ {n} (cell : Key.CellKey n) →
+  insertKey (Key.deleteKey cell) ≡ cell
+insertDeleteKey (vector , index , occurrence , unit)
+  with insertDeleteVector (vector , index , occurrence , unit)
+... | refl =
+  cong
+    (λ recoveredOccurrence → vector , index , recoveredOccurrence , unit)
+    (FinP.toℕ-injective
+      (insertedOccurrenceToNat
+        (Key.deleteKey (vector , index , occurrence , unit))))
+
+deleteKeyInjective :
+  ∀ {n} {left right : Key.CellKey n} →
+  Key.deleteKey left ≡ Key.deleteKey right → left ≡ right
+deleteKeyInjective {left = left} {right = right} equality =
+  trans
+    (sym (insertDeleteKey left))
+    (trans
+      (cong insertKey equality)
+      (insertDeleteKey right))
+
+------------------------------------------------------------------------
+-- Conversely, insert then delete recovers the residual key literally.
+
+deleteInsertResidualVector :
   ∀ {n} (residual : Key.ResidualKey n) →
   Key.residualVector (Key.deleteKey (insertKey residual))
   ≡ Key.residualVector residual
- deleteInsertResidualVector residual =
+deleteInsertResidualVector residual =
   Update.subtractAfterAddAt
     (Key.residualCopies residual)
     (Key.residualIndex residual)
     (Key.residualVector residual)
 
+deleteInsertKey :
+  ∀ {n} (residual : Key.ResidualKey n) →
+  Key.deleteKey (insertKey residual) ≡ residual
+deleteInsertKey (vector , index , predecessor , unit)
+  with deleteInsertResidualVector (vector , index , predecessor , unit)
+... | refl =
+  cong
+    (λ recoveredPredecessor → vector , index , recoveredPredecessor , unit)
+    (insertedOccurrenceToNat (vector , index , predecessor , unit))
+
 ------------------------------------------------------------------------
--- The remaining strict-list theorem is key equality/injectivity assembled from
--- these coordinate round trips.  No partition proof field is involved.
+-- The proof-free cell and residual carriers are now literally isomorphic.
 ------------------------------------------------------------------------
