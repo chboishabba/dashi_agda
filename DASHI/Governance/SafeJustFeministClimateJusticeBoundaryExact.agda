@@ -1,56 +1,38 @@
 module DASHI.Governance.SafeJustFeministClimateJusticeBoundaryExact where
 
 open import DASHI.Core.Prelude
+import DASHI.Governance.FeministClimateJusticeSourceRegistryExact as Sources
+import DASHI.Governance.WaringProductionBoundaryNonfactorabilityExact as WaringGeneric
+import DASHI.Governance.FeministClimateJusticeResidualBundleExact as ResidualGeneric
 
 ------------------------------------------------------------------------
--- FEMINIST ECONOMICS / FEMINIST CLIMATE JUSTICE SOURCE BOUNDARY
+-- FEMINIST ECONOMICS / FEMINIST CLIMATE JUSTICE COMPATIBILITY BOUNDARY
 --
--- Bounded source roles only.  The finite witnesses below are DASHI theorem
--- constructions motivated by the cited literature; the authors are not
--- credited with these Nat/Bool encodings.
+-- This file predates the stronger generic/source-specific tranche and is kept as
+-- a compact compatibility surface for existing #625 regression names.  Generic
+-- theorem ownership now lives in:
 --
--- Marilyn Power, "Social Provisioning as a Starting Point for Feminist
--- Economics", Feminist Economics 10(3) (2004), 3--19,
--- DOI 10.1080/1354570042000267608.
+--   Core/MeasurementBoundaryNonfactorabilityExact
+--   Core/ResponsibilityBurdenNonfactorabilityExact
+--   Core/PoliticalContestabilityExact
+--   Core/CategoryAuthorityAuditExact
+--   Core/MultiaxialResidualBundleExact
 --
--- Marilyn Waring, If Women Counted (1988); retrospective source:
--- "Twenty-Five Years of Counting for Nothing: Waring's Critique of National
--- Accounts", Feminist Economics 23(2),
--- DOI 10.1080/13545701.2016.1178854.
+-- and the source-specific bridges under Governance.
 --
--- Sherilyn MacGregor, "'Gender and climate change': from impacts to
--- discourses", Journal of the Indian Ocean Region 6(2) (2010),
--- DOI 10.1080/19480881.2010.536669.
--- Sherilyn MacGregor, "Only Resist: Feminist Ecological Citizenship and the
--- Post-politics of Climate Change", Hypatia 29(3) (2014),
--- DOI 10.1111/hypa.12065.
---
--- Farhana Sultana, "The Unbearable Heaviness of Climate Coloniality",
--- Political Geography 99 (2022), 102638,
--- DOI 10.1016/j.polgeo.2022.102638.
---
--- Margaret Alston, Sascha Fuller & Nikita Kwarney,
--- "Women and climate change in Vanuatu, Pacific Islands Region" (2023),
--- DOI 10.1080/0966369X.2023.2229530.
---
--- George Carter & Elise Howard, "Pacific women in climate change
--- negotiations", Small States & Territories 3(2) (2020), 303--318.
---
--- Kathryn Yusoff, A Billion Black Anthropocenes or None (2018),
--- University of Minnesota Press, DOI 10.5749/9781452962054.
---
--- Wangari Maathai, Nobel Peace Prize lecture (2004).
+-- Source identifiers are owned by FeministClimateJusticeSourceRegistryExact.
+-- In particular, Kathryn Yusoff's 2018 book is cited by verified ISBN
+-- 9781517907532 (paperback) / 9781452961057 (eBook); NO DOI is asserted here.
 ------------------------------------------------------------------------
 
 data FeministClimateSource : Set where
-  power2004 waring1988 macgregor2010 macgregor2014 sultana2022
+  power2004 waring1988 macgregor2014 sultana2022
   alstonFullerKwarney2023 carterHoward2020 yusoff2018 maathai2004
   : FeministClimateSource
 
 data SourceRole : Set where
   socialProvisioningMethodology
   productionBoundaryCritique
-  measurableImpactCritique
   postPoliticalAuthorityCritique
   climateColoniality
   situatedLivedOutcome
@@ -71,9 +53,6 @@ powerProvisioningRole = sourceRoleEntry power2004 socialProvisioningMethodology
 waringRole : SourceRoleEntry
 waringRole = sourceRoleEntry waring1988 productionBoundaryCritique
 
-macgregorImpactRole : SourceRoleEntry
-macgregorImpactRole = sourceRoleEntry macgregor2010 measurableImpactCritique
-
 macgregorPostPoliticalRole : SourceRoleEntry
 macgregorPostPoliticalRole = sourceRoleEntry macgregor2014 postPoliticalAuthorityCritique
 
@@ -86,12 +65,25 @@ yusoffRole = sourceRoleEntry yusoff2018 categoryNeutralityCritique
 maathaiRole : SourceRoleEntry
 maathaiRole = sourceRoleEntry maathai2004 bottomUpSituatedAuthority
 
+verifiedPowerSource : Sources.SourceReference
+verifiedPowerSource = Sources.power2004
+
+verifiedWaringSource : Sources.SourceReference
+verifiedWaringSource = Sources.waring1988
+
+verifiedMacGregorSource : Sources.SourceReference
+verifiedMacGregorSource = Sources.macGregor2014
+
+verifiedSultanaSource : Sources.SourceReference
+verifiedSultanaSource = Sources.sultana2022
+
+verifiedYusoffSource : Sources.SourceReference
+verifiedYusoffSource = Sources.yusoff2018
+
 ------------------------------------------------------------------------
--- Waring-style production-boundary non-factorability witness.
---
--- countedOutput is a deliberately tiny shadow of a national-accounts observer:
--- an unpaid-care state and a no-activity state both map to zero counted output,
--- while their provisioning contributions differ.
+-- Legacy finite Waring shadow retained for compatibility.
+-- The theorem-bearing factorization obstruction is now owned by
+-- WaringProductionBoundaryNonfactorabilityExact.
 ------------------------------------------------------------------------
 
 data ActivityState : Set where
@@ -114,8 +106,15 @@ countedOutputDoesNotRecoverProvisioning :
   provisioningContribution noActivity ≡ provisioningContribution unpaidCare → ⊥
 countedOutputDoesNotRecoverProvisioning ()
 
+strongWaringNonfactorabilityAvailable :
+  DASHI.Core.ConsumerDescentMinimalObserverExact.FactorsThrough
+    WaringGeneric.accountObserver WaringGeneric.provisioningContribution → ⊥
+strongWaringNonfactorabilityAvailable =
+  WaringGeneric.provisioningDoesNotDescendThroughAccountingBoundary
+
 ------------------------------------------------------------------------
--- Climate-justice authority coordinates.
+-- Legacy residual-kind names retained for regression compatibility.  The full
+-- five-coordinate residual contract is owned by FeministClimateJusticeResidualBundleExact.
 ------------------------------------------------------------------------
 
 data ResidualKind : Set where
@@ -134,9 +133,8 @@ categoricalAuthorityResidualDiffersFromMissingData :
   categoricalAuthorityResidual ≡ epistemicResidual → ⊥
 categoricalAuthorityResidualDiffersFromMissingData ()
 
-------------------------------------------------------------------------
--- Source-bounded non-promotions.
-------------------------------------------------------------------------
+fiveAxisResidualBundleAvailable : ResidualGeneric.ClimateJusticeResidualBundle
+fiveAxisResidualBundleAvailable = ResidualGeneric.canonicalClimateJusticeResiduals
 
 record FeministClimateJusticeBoundary : Set where
   constructor feministClimateJusticeBoundary
