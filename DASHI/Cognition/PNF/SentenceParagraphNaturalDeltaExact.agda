@@ -71,6 +71,35 @@ record SentenceParagraphFusionNaturality
 open SentenceParagraphFusionNaturality public
 
 ------------------------------------------------------------------------
+-- B1.1 boundary-admission naturality.
+--
+-- Emitted local semantic structure and admitted boundary structure are not the
+-- same type of claim.  For example, a sentence solver may emit an object that
+-- is not promoted into the sentence interface.  The authoritative B1.1 square
+-- therefore compares admission after semantic transport with transport of the
+-- already-admitted sentence boundary.
+------------------------------------------------------------------------
+
+record SentenceParagraphBoundaryAdmissionNaturality
+    {SentenceAddress ParagraphAddress SentenceDelta ParagraphDelta : Set}
+    (architecture :
+      SentenceParagraphDeltaArchitecture
+        SentenceAddress ParagraphAddress SentenceDelta ParagraphDelta)
+    (SentenceBoundaryDelta ParagraphBoundaryDelta : Set) : Set₁ where
+  field
+    admitSentenceDelta : SentenceDelta → SentenceBoundaryDelta
+    admitParagraphDelta : ParagraphDelta → ParagraphBoundaryDelta
+    transportBoundaryDelta : SentenceBoundaryDelta → ParagraphBoundaryDelta
+
+    boundaryAdmissionNaturality :
+      (delta : SentenceDelta) →
+      admitParagraphDelta (transportDelta architecture delta)
+        ≡
+      transportBoundaryDelta (admitSentenceDelta delta)
+
+open SentenceParagraphBoundaryAdmissionNaturality public
+
+------------------------------------------------------------------------
 -- Work receipt: sentence->paragraph work is charged to emitted delta members.
 -- There is no sentence-interior rescan term in the admitted B1 path.
 ------------------------------------------------------------------------
