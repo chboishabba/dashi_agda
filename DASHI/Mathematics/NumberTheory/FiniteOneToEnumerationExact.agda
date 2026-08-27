@@ -4,8 +4,8 @@ module DASHI.Mathematics.NumberTheory.FiniteOneToEnumerationExact where
 -- FINITE POSITIVE PREFIX RECEIPTS
 --
 -- The shared Hecke helper `oneTo n` enumerates 1,...,n.  This owner records
--- the exact completeness/order facts needed by the partition residual grouping
--- layer.
+-- the exact completeness/order/uniqueness facts needed by the partition
+-- residual grouping layer.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -16,6 +16,8 @@ open import Data.List.Membership.Propositional using (_∈_)
 open import Data.List.Membership.Propositional.Properties using (∈-++⁻)
 open import Data.List.Relation.Unary.Any as Any using ()
 import Data.List.Relation.Unary.All as All
+import Data.List.Relation.Unary.AllPairs.Core as AllPairs
+open import Data.List.Relation.Unary.Unique.Propositional using (Unique)
 open import Data.Nat.Base using (_≤_; _<_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
 open import Data.Product using (_×_; _,_)
@@ -24,6 +26,7 @@ open import Relation.Nullary.Decidable.Core using (yes; no)
 open import Relation.Binary.PropositionalEquality using (_≢_; cong; subst)
 
 import DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact as Hecke
+import DASHI.Mathematics.NumberTheory.FiniteDependentPairEnumerationExact as Dep
 import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact as Product
 
 oneToUpperBound :
@@ -84,6 +87,31 @@ oneToComplete {suc n} {suc r} positive bound
     (oneToComplete
       positive
       (strictFromLeDifferent bound different))
+
+------------------------------------------------------------------------
+-- Duplicate-freedom of 1,...,n.
+
+singletonUnique : (value : Nat) → Unique (value ∷ [])
+singletonUnique value = AllPairs._∷_ All.[] AllPairs.[]
+
+oneToUnique : (n : Nat) → Unique (Hecke.oneTo n)
+oneToUnique zero = AllPairs.[]
+oneToUnique (suc n) =
+  Dep.uniqueAppendDisjoint
+    (oneToUnique n)
+    (singletonUnique (suc n))
+    cross
+  where
+  cross :
+    ∀ {left right : Nat} →
+    left ∈ Hecke.oneTo n →
+    right ∈ (suc n ∷ []) →
+    left ≢ right
+  cross leftMember (Any.here refl) equality =
+    NatP.1+n≰n
+      (subst (λ value → value ≤ n) equality
+        (oneToUpperBound leftMember))
+  cross leftMember (Any.there ()) equality
 
 ------------------------------------------------------------------------
 -- Pure finite list/order facts.
