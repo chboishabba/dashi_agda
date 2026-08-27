@@ -11,6 +11,7 @@ on:
       - 'DASHI/Biology/SocialEcologicalAffordanceConeExact.agda'
       - 'DASHI/Biology/TrustedFriendRelationalScaffoldingExact.agda'
       - 'DASHI/Biology/TrustedFriendRelationalGateExact.agda'
+      - 'DASHI/Biology/TrustedFriendEcologyInteractionExact.agda'
       - 'DASHI/Biology/NeuroqueerRelationshipEcologyExact.agda'
       - 'DASHI/Biology/SolisProjectProvenanceExact.agda'
       - 'DASHI/Biology/SolisSystemSensitivityBoundaryExact.agda'
@@ -55,6 +56,7 @@ jobs:
             DASHI/Biology/SocialEcologicalAffordanceConeExact.agda
             DASHI/Biology/TrustedFriendRelationalScaffoldingExact.agda
             DASHI/Biology/TrustedFriendRelationalGateExact.agda
+            DASHI/Biology/TrustedFriendEcologyInteractionExact.agda
             DASHI/Biology/NeuroqueerRelationshipEcologyExact.agda
             DASHI/Biology/SolisProjectProvenanceExact.agda
             DASHI/Biology/SolisSystemSensitivityBoundaryExact.agda
@@ -83,6 +85,7 @@ jobs:
             targets=(
               DASHI/Biology/AuDHDInteractionGeometryExact.agda
               DASHI/Biology/TrustedFriendRelationalGateExact.agda
+              DASHI/Biology/TrustedFriendEcologyInteractionExact.agda
               DASHI/Biology/NeurodivergentSocialEcologyCrossPollinationExact.agda
               DASHI/Biology/DomainEverything.agda
             )
