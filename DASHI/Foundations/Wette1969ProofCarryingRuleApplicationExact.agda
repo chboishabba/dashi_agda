@@ -9,33 +9,30 @@ module DASHI.Foundations.Wette1969ProofCarryingRuleApplicationExact where
 -- DOI: 10.1007/978-3-642-86745-3_9
 --
 -- Repo cross-pollination:
---   PR #221's FiniteAdmissibleCoding carries an admissibility proof together
---   with every selected control.  The generic
---   DASHI.Core.ProofCarryingRuleApplicationExact owner extracts that pattern
---   for formal calculi.  This module applies it to Wette's typed historical
---   rule bodies.
+--   * TypedDependencyCore already owns DependentActionSystem and
+--     AdmissibleAction;
+--   * PR #610 uses that owner to enforce "admissibility before optimization";
+--   * PR #221 carries admissibility proofs with selected controls.
 --
--- A historical rule body is not itself an executable transition.  Application
--- requires evidence that every premise is available/derivable in the current
--- context.  The result state is then obtained by extending that context with
--- the rule conclusion.  No semantic truth or substitution evaluator is
--- manufactured here.
+-- The generic ProofCarryingRuleApplicationExact owner now reuses that substrate
+-- directly.  This module instantiates it with Wette's historical rule bodies.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 open import Data.Fin using (Fin)
 open import Data.Vec using (lookup)
 
+import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Core.ProofCarryingRuleApplicationExact as PCRA
 import DASHI.Foundations.Wette1969HistoricalSignatureExact as Signature
 import DASHI.Foundations.Wette1969InitialRuleTranscriptionExact as RuleBody
 import DASHI.Foundations.Wette1969Rule9324x25PremiseTemplateExact as Rule9324x25
 
 ------------------------------------------------------------------------
--- Context interface.  `Derives` is intentionally abstract: a later historical
--- reconstruction may instantiate it by membership in a finite derivation state,
--- closure under already reconstructed rules, or another source-justified
--- notion.  This module needs only premise evidence and conclusion extension.
+-- Context interface.  `Derives` is deliberately abstract: later source work
+-- may instantiate it by finite-context membership, closure under reconstructed
+-- rules, or another historically justified notion.
 ------------------------------------------------------------------------
 
 record HistoricalContextSystem : Set₁ where
@@ -56,26 +53,46 @@ PremisesHold contexts context rule =
   (index : Fin (RuleBody.premiseCount rule)) →
   Derives contexts context (lookup (RuleBody.premises rule) index)
 
+------------------------------------------------------------------------
+-- Existing TypedDependencyCore substrate.
+--
+-- Precondition = every historical premise is available.
+-- Postcondition = the resulting context is exactly extension by the historical
+-- conclusion.  The proof-bearing AdmissibleAction therefore owns both legality
+-- and the actual reached context.
+------------------------------------------------------------------------
+
 historicalRuleApplicationSystem :
-  HistoricalContextSystem → PCRA.RuleApplicationSystem
-historicalRuleApplicationSystem contexts =
-  PCRA.ruleApplicationSystem
+  (contexts : HistoricalContextSystem) →
+  PCRA.RuleApplicationSystem
     (Context contexts)
     RuleBody.HistoricalRuleBody
-    (PremisesHold contexts)
-    apply
-  where
-    apply :
-      (context : Context contexts) →
-      (rule : RuleBody.HistoricalRuleBody) →
-      PremisesHold contexts context rule →
-      Context contexts
-    apply context rule premiseEvidence =
-      extend contexts context (RuleBody.conclusion rule)
+historicalRuleApplicationSystem contexts = record
+  { Precondition = PremisesHold contexts
+  ; Postcondition = λ before rule after →
+      after ≡ extend contexts before (RuleBody.conclusion rule)
+  ; actionLabel = λ rule → "Wette 1969 historical rule"
+  }
+
+certifyHistoricalRule :
+  (contexts : HistoricalContextSystem) →
+  (context : Context contexts) →
+  (rule : RuleBody.HistoricalRuleBody) →
+  PremisesHold contexts context rule →
+  Dependency.AdmissibleAction
+    (historicalRuleApplicationSystem contexts)
+    context
+    rule
+certifyHistoricalRule contexts context rule premiseEvidence = record
+  { precondition = premiseEvidence
+  ; after = extend contexts context (RuleBody.conclusion rule)
+  ; postcondition = refl
+  ; dependencyReceipt = "all historical rule premises carried at source context"
+  }
 
 ------------------------------------------------------------------------
--- 9.3.24 and 9.3.25 become genuine selected proof-carrying transitions once
--- their four premise proofs are supplied at a context.
+-- 9.3.24 and 9.3.25 become selected proof-carrying transitions once their four
+-- premise proofs are supplied at the current context.
 ------------------------------------------------------------------------
 
 selectRule9324 :
@@ -90,7 +107,9 @@ selectRule9324 :
 selectRule9324 contexts context premises conclusions evidence =
   PCRA.selectedRuleApplication
     (Rule9324x25.rule9-3-24 premises conclusions)
-    evidence
+    (certifyHistoricalRule contexts context
+      (Rule9324x25.rule9-3-24 premises conclusions)
+      evidence)
 
 selectRule9325 :
   (contexts : HistoricalContextSystem) →
@@ -104,12 +123,9 @@ selectRule9325 :
 selectRule9325 contexts context premises conclusions evidence =
   PCRA.selectedRuleApplication
     (Rule9324x25.rule9-3-25 premises conclusions)
-    evidence
-
-------------------------------------------------------------------------
--- Applying either selected rule extends the context by its historical
--- conclusion.  These equalities are definitional regression receipts.
-------------------------------------------------------------------------
+    (certifyHistoricalRule contexts context
+      (Rule9324x25.rule9-3-25 premises conclusions)
+      evidence)
 
 applyRule9324ExtendsByHistoricalConclusion :
   (contexts : HistoricalContextSystem) →
@@ -120,7 +136,6 @@ applyRule9324ExtendsByHistoricalConclusion :
     PremisesHold contexts context (Rule9324x25.rule9-3-24 premises conclusions)) →
   PCRA.applySelected
     (historicalRuleApplicationSystem contexts)
-    context
     (selectRule9324 contexts context premises conclusions evidence)
   ≡ extend contexts context (Rule9324x25.rule9-3-24Conclusion conclusions)
 applyRule9324ExtendsByHistoricalConclusion
@@ -135,7 +150,6 @@ applyRule9325ExtendsByHistoricalConclusion :
     PremisesHold contexts context (Rule9324x25.rule9-3-25 premises conclusions)) →
   PCRA.applySelected
     (historicalRuleApplicationSystem contexts)
-    context
     (selectRule9325 contexts context premises conclusions evidence)
   ≡ extend contexts context (Rule9324x25.rule9-3-25Conclusion conclusions)
 applyRule9325ExtendsByHistoricalConclusion
@@ -144,6 +158,10 @@ applyRule9325ExtendsByHistoricalConclusion
 record Wette1969ProofCarryingApplicationBoundary : Set where
   constructor wette1969ProofCarryingApplicationBoundary
   field
+    typedDependencyCoreReusedForHistoricalAdmissibility : Bool
+    typedDependencyCoreReusedForHistoricalAdmissibilityIsTrue :
+      typedDependencyCoreReusedForHistoricalAdmissibility ≡ true
+
     historicalRuleSelectionCarriesAllPremiseEvidence : Bool
     historicalRuleSelectionCarriesAllPremiseEvidenceIsTrue :
       historicalRuleSelectionCarriesAllPremiseEvidence ≡ true
@@ -168,6 +186,7 @@ canonicalWette1969ProofCarryingApplicationBoundary :
   Wette1969ProofCarryingApplicationBoundary
 canonicalWette1969ProofCarryingApplicationBoundary =
   wette1969ProofCarryingApplicationBoundary
+    true refl
     true refl
     true refl
     false refl
