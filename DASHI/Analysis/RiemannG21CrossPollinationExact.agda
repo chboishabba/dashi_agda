@@ -6,14 +6,6 @@ open import Agda.Builtin.String using (String)
 import DASHI.Analysis.RiemannG21PoleQuotientedExteriorExact as G21
 import DASHI.Analysis.RiemannG21PrimePairKernelExact as Pair
 
-------------------------------------------------------------------------
--- Bounded architectural cross-pollination.
---
--- These records document theorem-pattern reuse from open draft PRs without
--- introducing cross-draft imports.  G21 is stacked only on the RH branch
--- underlying PR #604.  The donor PRs remain independent branches.
-------------------------------------------------------------------------
-
 data DonorLane : Set where
   partitionFiniteReindexPR614 : DonorLane
   coarseFineRechartPR620 : DonorLane
@@ -32,52 +24,37 @@ open CrossPollinationRole public
 
 pr614Role : CrossPollinationRole
 pr614Role =
-  crossPollinationRole
-    partitionFiniteReindexPR614
-    614
-    false refl
-    "Use the exact finite-product/permutation lesson: split the pair carrier into diagonal and swapped off-diagonal fibres and reindex before absolute-value majorization. G21 does not import the draft #614 modules."
+  crossPollinationRole partitionFiniteReindexPR614 614 false refl
+    "Use the exact finite-product/permutation lesson: split the pair carrier into diagonal and swapped off-diagonal fibres and reindex before absolute-value majorization. No draft #614 module is imported."
 
 pr620Role : CrossPollinationRole
 pr620Role =
-  crossPollinationRole
-    coarseFineRechartPR620
-    620
-    false refl
-    "Use the observer lesson that post-composition of an already-collapsed coordinate cannot recover a missing direction: G21 introduces three samples and quotients the known pole direction before taking an exterior residual coordinate. G21 does not import draft #620."
+  crossPollinationRole coarseFineRechartPR620 620 false refl
+    "Use the observer lesson that a collapsed coordinate is not repaired by post-composition. The literal source audit revealed two pole coordinates, so robust G21 now introduces enough sample dimensions to quotient both rather than pretending one was absent. No draft #620 module is imported."
 
 pr621Role : CrossPollinationRole
 pr621Role =
-  crossPollinationRole
-    nonseparableTransitionPR621
-    621
-    false refl
-    "Use the nonseparability admission lesson: a pair-valued prime kernel must additionally violate endpoint-separable and rank-one identities. G21 instantiates its own narrow arithmetic gate and does not import draft #621."
+  crossPollinationRole nonseparableTransitionPR621 621 false refl
+    "Use the nonseparability lesson: a pair-valued prime kernel must violate endpoint-separable and rank-one identities. G21 instantiates its own narrow arithmetic gate and imports no draft #621 module."
 
 canonicalCrossPollinationRoles : List CrossPollinationRole
-canonicalCrossPollinationRoles =
-  pr614Role ∷ pr620Role ∷ pr621Role ∷ []
-
-------------------------------------------------------------------------
--- Concrete theorem-pattern returns in this branch.
-------------------------------------------------------------------------
+canonicalCrossPollinationRoles = pr614Role ∷ pr620Role ∷ pr621Role ∷ []
 
 swapInvolutionReturned :
-  {A : Set} →
-  (p : Pair.Pair A) →
-  Pair.swapPair (Pair.swapPair p) ≡ p
+  {A : Set} → (p : Pair.Pair A) → Pair.swapPair (Pair.swapPair p) ≡ p
 swapInvolutionReturned = Pair.swapPairInvolutive
 
 relationalPairAdmissionReturned : Pair.PrimePairRelationalAdmission
 relationalPairAdmissionReturned = Pair.canonicalToyPrimePairRelationalAdmission
 
-newExteriorCoordinateReturned : Bool
-newExteriorCoordinateReturned =
-  G21.G21CurrentBoundary.newObserverUsesPoleQuotientExteriorCoordinate
+robustRankTwoExteriorCarrierReturned : Bool
+robustRankTwoExteriorCarrierReturned =
+  G21.G21CurrentBoundary.robustRankTwoFourSampleCarrierConstructed
     G21.canonicalG21CurrentBoundary
 
-newExteriorCoordinateReturnedIsTrue : newExteriorCoordinateReturned ≡ true
-newExteriorCoordinateReturnedIsTrue = refl
+robustRankTwoExteriorCarrierReturnedIsTrue :
+  robustRankTwoExteriorCarrierReturned ≡ true
+robustRankTwoExteriorCarrierReturnedIsTrue = refl
 
 record CrossPollinationBoundary : Set where
   constructor crossPollinationBoundary
@@ -85,11 +62,9 @@ record CrossPollinationBoundary : Set where
     donorArchitectureIsProofOfRiemannClaim : Bool
     donorArchitectureIsProofOfRiemannClaimIsFalse :
       donorArchitectureIsProofOfRiemannClaim ≡ false
-
     sharedTheoremShapeIdentifiesDomains : Bool
     sharedTheoremShapeIdentifiesDomainsIsFalse :
       sharedTheoremShapeIdentifiesDomains ≡ false
-
     draftDonorPRCreatesHiddenDependency : Bool
     draftDonorPRCreatesHiddenDependencyIsFalse :
       draftDonorPRCreatesHiddenDependency ≡ false
