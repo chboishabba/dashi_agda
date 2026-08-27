@@ -1,7 +1,7 @@
 module DASHI.Foundations.Wette1969Rule9324x25PremiseTemplateExact where
 
 ------------------------------------------------------------------------
--- WETTE 1969 RULE 9.3.24/25 PREMISE TEMPLATE
+-- WETTE 1969 RULE 9.3.24/25 COMPLETE TYPED TEMPLATE
 --
 -- Eduard Wette,
 -- "Definition eines (relativ vollständigen) formalen Systems konstruktiver
@@ -9,22 +9,19 @@ module DASHI.Foundations.Wette1969Rule9324x25PremiseTemplateExact where
 -- DOI: 10.1007/978-3-642-86745-3_9
 --
 -- Primary source loci:
---   printed p.145: the four common premises of 9.3.24/25;
---   printed p.148: meanings/arities of p, u_x, freshness and substitution;
---   printed p.155: premise 3 is the freshness guard and premise 4 performs
---                  ordered substitution, with V3 first replacing V2.
+--   printed p.145: four common premises and two conclusions of 9.3.24/25;
+--   printed p.148: meanings/arities of p, u_x, freshness, substitution and L;
+--   printed p.155, section 1.632: premise 3 is the freshness guard, premise 4
+--     performs ordered substitution, and the pair is described unofficially as
+--     the two directions of the relative conditional bisubjunction between the
+--     substituted definiens and the recursively defined predicate instance.
 --
--- The scan/OCR does not yet justify pretending every compound word occurring
--- in the printed rule has been transcribed character-for-character.  What the
--- source does determine reliably is the argument-sharing skeleton below:
---   * one arity word is shared by the predicate-schema and fresh-tuple premises;
---   * the fresh tuple is also the replacement tuple in premise 4;
---   * premise 3 tests that same fresh tuple against the surrounding definition
---     context;
---   * premise 4 is a four-place substitution judgement with an explicit result.
---
--- This is therefore an exact typed *template* for the source-visible skeleton,
--- not yet the final literal rule body.
+-- The scan/OCR does not justify pretending every compound word has already
+-- been transcribed character-for-character.  What the source does determine
+-- reliably is both the argument-sharing skeleton of the four premises and the
+-- nested-implication skeleton of the two conclusions.  This module therefore
+-- completes the typed rule template and constructs both HistoricalRuleBody
+-- values end-to-end, while leaving OCR-sensitive compound words as parameters.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -41,10 +38,6 @@ import DASHI.Foundations.Wette1969RuleRevisionExact as Revision
 WordTerm = Signature.WordTerm
 Formula = Signature.Formula
 
-------------------------------------------------------------------------
--- Source-visible parameter skeleton.
-------------------------------------------------------------------------
-
 record Rule9324x25PremiseParameters : Set where
   constructor rule9324x25PremiseParameters
   field
@@ -57,10 +50,6 @@ record Rule9324x25PremiseParameters : Set where
     substitutionResultWord : WordTerm
 
 open Rule9324x25PremiseParameters public
-
-------------------------------------------------------------------------
--- Four typed premise bodies in source order.
-------------------------------------------------------------------------
 
 premiseAt : Rule9324x25PremiseParameters → Critical.Premise9324x25 → Formula
 premiseAt parameters Critical.recursivePredicateFormation =
@@ -90,12 +79,6 @@ premiseVector parameters =
   premiseAt parameters Critical.orderedSubstitutionCondition ∷ᵥ
   []ᵥ
 
-------------------------------------------------------------------------
--- The template is a full realization of the already recovered premise-kind
--- specification.  Notice what is proved: relator classification only.  The
--- parameters are not asserted to be the final character-perfect source terms.
-------------------------------------------------------------------------
-
 rule9324x25TemplateRealizesPremiseTyping :
   (parameters : Rule9324x25PremiseParameters) →
   Typing.RealizesPremiseTypeSpecification
@@ -117,68 +100,121 @@ rule9324x25TemplateRealizesPremiseTyping parameters =
     agrees Critical.variableFreshnessCondition = refl
     agrees Critical.orderedSubstitutionCondition = refl
 
-------------------------------------------------------------------------
--- Source-significant argument sharing.
-------------------------------------------------------------------------
-
 freshTupleIsPremise2TupleAndPremise4Replacement :
   (parameters : Rule9324x25PremiseParameters) → WordTerm
 freshTupleIsPremise2TupleAndPremise4Replacement parameters =
   freshTupleWord parameters
 
 ------------------------------------------------------------------------
--- Shared-premise pair -> two atomic historical rule bodies.
+-- Conclusion argument template.
 --
--- Wette prints 9.3.24 and 9.3.25 after one common list of four premises.  His
--- convention is that this abbreviates two rules.  Once the two conclusion
--- formulae are supplied, the existing HistoricalRuleBody carrier can therefore
--- assemble the pair without introducing a second rule representation.
+-- The printed p.145 conclusions share the outer derivability judgement L and
+-- exchange the direction of the innermost implication.  Section 1.632 explains
+-- the same pair unofficially as a relative conditional bisubjunction: under
+-- U1 and the condition instantiated at the fresh tuple, the substituted
+-- definiens U2 and the recursively defined predicate instance imply one another.
 ------------------------------------------------------------------------
 
 record Rule9324x25ConclusionParameters : Set where
   constructor rule9324x25ConclusionParameters
   field
-    leftConclusion : Formula
-    rightConclusion : Formula
+    hypothesisWord : WordTerm
+    conditionAtFreshTupleWord : WordTerm
+    substitutedDefiniensWord : WordTerm
+    recursivePredicateAtFreshTupleWord : WordTerm
 
 open Rule9324x25ConclusionParameters public
 
-rule9-3-24Template :
+implicationWord : WordTerm → WordTerm → WordTerm
+implicationWord left right =
+  Signature.binaryWordTerm Signature.implicationFunctor refl left right
+
+conditionalDirection : WordTerm → WordTerm → WordTerm → WordTerm
+conditionalDirection condition from to =
+  implicationWord condition (implicationWord from to)
+
+rule9-3-24Conclusion : Rule9324x25ConclusionParameters → Formula
+rule9-3-24Conclusion parameters =
+  Judgment.implies
+    (hypothesisWord parameters)
+    (conditionalDirection
+      (conditionAtFreshTupleWord parameters)
+      (substitutedDefiniensWord parameters)
+      (recursivePredicateAtFreshTupleWord parameters))
+
+rule9-3-25Conclusion : Rule9324x25ConclusionParameters → Formula
+rule9-3-25Conclusion parameters =
+  Judgment.implies
+    (hypothesisWord parameters)
+    (conditionalDirection
+      (conditionAtFreshTupleWord parameters)
+      (recursivePredicateAtFreshTupleWord parameters)
+      (substitutedDefiniensWord parameters))
+
+rule9324ConclusionHasImplicationRelator :
+  (parameters : Rule9324x25ConclusionParameters) →
+  Signature.relator (rule9-3-24Conclusion parameters)
+    ≡ Signature.implicationDerivabilityRelator
+rule9324ConclusionHasImplicationRelator parameters = refl
+
+rule9325ConclusionHasImplicationRelator :
+  (parameters : Rule9324x25ConclusionParameters) →
+  Signature.relator (rule9-3-25Conclusion parameters)
+    ≡ Signature.implicationDerivabilityRelator
+rule9325ConclusionHasImplicationRelator parameters = refl
+
+------------------------------------------------------------------------
+-- End-to-end historical rule bodies.
+------------------------------------------------------------------------
+
+rule9-3-24 :
   Rule9324x25PremiseParameters →
   Rule9324x25ConclusionParameters →
   RuleBody.HistoricalRuleBody
-rule9-3-24Template premises conclusions =
+rule9-3-24 premises conclusions =
   RuleBody.historicalRuleBody
     Revision.rule9-3-24
     4
     (premiseVector premises)
-    (leftConclusion conclusions)
+    (rule9-3-24Conclusion conclusions)
 
-rule9-3-25Template :
+rule9-3-25 :
   Rule9324x25PremiseParameters →
   Rule9324x25ConclusionParameters →
   RuleBody.HistoricalRuleBody
-rule9-3-25Template premises conclusions =
+rule9-3-25 premises conclusions =
   RuleBody.historicalRuleBody
     Revision.rule9-3-25
     4
     (premiseVector premises)
-    (rightConclusion conclusions)
+    (rule9-3-25Conclusion conclusions)
 
-rule9324TemplateHasFourPremises :
+rule9324HasFourPremises :
   (premises : Rule9324x25PremiseParameters) →
   (conclusions : Rule9324x25ConclusionParameters) →
-  RuleBody.premiseCount (rule9-3-24Template premises conclusions) ≡ 4
-rule9324TemplateHasFourPremises premises conclusions = refl
+  RuleBody.premiseCount (rule9-3-24 premises conclusions) ≡ 4
+rule9324HasFourPremises premises conclusions = refl
 
-rule9325TemplateHasFourPremises :
+rule9325HasFourPremises :
   (premises : Rule9324x25PremiseParameters) →
   (conclusions : Rule9324x25ConclusionParameters) →
-  RuleBody.premiseCount (rule9-3-25Template premises conclusions) ≡ 4
-rule9325TemplateHasFourPremises premises conclusions = refl
+  RuleBody.premiseCount (rule9-3-25 premises conclusions) ≡ 4
+rule9325HasFourPremises premises conclusions = refl
 
-record Wette1969Rule9324x25PremiseTemplateBoundary : Set where
-  constructor wette1969Rule9324x25PremiseTemplateBoundary
+rule9324HasHistoricalAddress :
+  (premises : Rule9324x25PremiseParameters) →
+  (conclusions : Rule9324x25ConclusionParameters) →
+  RuleBody.address (rule9-3-24 premises conclusions) ≡ Revision.rule9-3-24
+rule9324HasHistoricalAddress premises conclusions = refl
+
+rule9325HasHistoricalAddress :
+  (premises : Rule9324x25PremiseParameters) →
+  (conclusions : Rule9324x25ConclusionParameters) →
+  RuleBody.address (rule9-3-25 premises conclusions) ≡ Revision.rule9-3-25
+rule9325HasHistoricalAddress premises conclusions = refl
+
+record Wette1969Rule9324x25TemplateBoundary : Set where
+  constructor wette1969Rule9324x25TemplateBoundary
   field
     fourPremiseTemplateNowConstructible : Bool
     fourPremiseTemplateNowConstructibleIsTrue :
@@ -192,22 +228,27 @@ record Wette1969Rule9324x25PremiseTemplateBoundary : Set where
     templateRealizesRecoveredPremiseKindsIsTrue :
       templateRealizesRecoveredPremiseKinds ≡ true
 
-    sharedPremisePairCanAssembleAtomicRuleBodies : Bool
-    sharedPremisePairCanAssembleAtomicRuleBodiesIsTrue :
-      sharedPremisePairCanAssembleAtomicRuleBodies ≡ true
+    conclusionDirectionTemplatesRecovered : Bool
+    conclusionDirectionTemplatesRecoveredIsTrue :
+      conclusionDirectionTemplatesRecovered ≡ true
+
+    bothHistoricalRuleBodiesNowConstructibleEndToEnd : Bool
+    bothHistoricalRuleBodiesNowConstructibleEndToEndIsTrue :
+      bothHistoricalRuleBodiesNowConstructibleEndToEnd ≡ true
 
     parameterizedTemplateIsAlreadyLiteralOCRPerfectTranscription : Bool
     parameterizedTemplateIsAlreadyLiteralOCRPerfectTranscriptionIsFalse :
       parameterizedTemplateIsAlreadyLiteralOCRPerfectTranscription ≡ false
 
-    premiseTemplateAlreadySuppliesHistoricalConclusionArguments : Bool
-    premiseTemplateAlreadySuppliesHistoricalConclusionArgumentsIsFalse :
-      premiseTemplateAlreadySuppliesHistoricalConclusionArguments ≡ false
+    typedRuleBodiesAlreadySupplyExecutableSubstitutionEvaluator : Bool
+    typedRuleBodiesAlreadySupplyExecutableSubstitutionEvaluatorIsFalse :
+      typedRuleBodiesAlreadySupplyExecutableSubstitutionEvaluator ≡ false
 
-canonicalWette1969Rule9324x25PremiseTemplateBoundary :
-  Wette1969Rule9324x25PremiseTemplateBoundary
-canonicalWette1969Rule9324x25PremiseTemplateBoundary =
-  wette1969Rule9324x25PremiseTemplateBoundary
+canonicalWette1969Rule9324x25TemplateBoundary :
+  Wette1969Rule9324x25TemplateBoundary
+canonicalWette1969Rule9324x25TemplateBoundary =
+  wette1969Rule9324x25TemplateBoundary
+    true refl
     true refl
     true refl
     true refl
