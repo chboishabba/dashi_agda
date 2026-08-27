@@ -4,6 +4,7 @@ module DASHI.Governance.Fanning2022MethodsRegression where
 -- Focused elaboration root for the source-exact Fanning 2022 method chain:
 --
 -- national indicator/time authority
+--   -> social-indicator revision authority
 --   -> normalization authority
 --   -> clipped shortfall/overshoot components
 --   -> within-domain averaging boundary
@@ -13,6 +14,7 @@ module DASHI.Governance.Fanning2022MethodsRegression where
 
 open import DASHI.Core.Prelude
 import DASHI.Governance.Fanning2022TemporalIndicatorExact as Temporal
+import DASHI.Governance.Fanning2022SocialIndicatorRevisionExact as SocialRevision
 import DASHI.Governance.Fanning2022NormalizationExact as Normalization
 import DASHI.Governance.Fanning2022ProjectionBoundaryExact as Projection
 import DASHI.Governance.Fanning2022ForecastAuthorityExact as Forecast
@@ -22,6 +24,16 @@ nationalBioCountReceipt = refl
 
 socialVocabularyCountReceipt : Temporal.fanningSocialVocabularyCount ≡ 11
 socialVocabularyCountReceipt = refl
+
+longevityMeasurementRevisionReceipt :
+  SocialRevision.healthyLifeExpectancy ≡ SocialRevision.overallLifeExpectancy → ⊥
+longevityMeasurementRevisionReceipt =
+  SocialRevision.earlierAndLongitudinalLongevityMeasuresDiffer
+
+povertyThresholdRevisionReceipt :
+  SocialRevision.extremePoverty190 ≡ SocialRevision.broaderPoverty550 → ⊥
+povertyThresholdRevisionReceipt =
+  SocialRevision.earlierAndLongitudinalPovertyLinesDiffer
 
 normalizationAuthoritySeparation :
   Normalization.biophysicalNormalizationAuthority ≡
