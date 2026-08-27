@@ -102,6 +102,7 @@ import DASHI.Governance.SmithResearchAgendaAuthorityBoundaryExact
 import DASHI.Governance.MoretonRobinsonRecognitionSovereigntyBoundaryExact
 import DASHI.Governance.WhyteKinshipTemporalityBoundaryExact
 import DASHI.Governance.FeministRecognitionAuthorityCrossPollinationExact
+import DASHI.Governance.SituatedIndigenousFeministAuthorityRegression
 
 -- Provenance-bearing policy routing, corrective reachability and source-bounded
 -- application surfaces assembled as one focused tranche.
