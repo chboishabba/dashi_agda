@@ -1,6 +1,8 @@
 module DASHI.Governance.IndigenousEnvironmentalAuthorityCapstoneExact where
 
 open import DASHI.Core.Prelude
+import DASHI.Core.RecognitionConstitutionNonfactorabilityExact as Recognition
+import DASHI.Governance.IndigenousAuthorityEnvelopeExact as Envelope
 import DASHI.Governance.CulturalFireAuthorityEnvelopeBridgeExact as Fire
 import DASHI.Governance.NativeTitleAuthorityLayerExact as NativeTitle
 import DASHI.Governance.IPCCAR6IndigenousKnowledgeIntegrationAuditExact as IPCC
@@ -18,11 +20,9 @@ import DASHI.Governance.FirstNationsOwnedEvidenceContractExact as Evidence
 ------------------------------------------------------------------------
 
 culturalFireTechniqueDoesNotTransferAuthority :
-  DASHI.Governance.IndigenousAuthorityEnvelopeExact.AuthorityEnvelope.sovereignStanding
-    Fire.externalTechniqueEnvelope ≡
-  DASHI.Governance.IndigenousAuthorityEnvelopeExact.originatingAuthority → ⊥
-culturalFireTechniqueDoesNotTransferAuthority =
-  Fire.externalTechniqueIsNotOriginatingAuthority
+  Envelope.AuthorityEnvelope.sovereignStanding Fire.externalTechniqueEnvelope ≡
+  Envelope.originatingAuthority → ⊥
+culturalFireTechniqueDoesNotTransferAuthority = Fire.externalTechniqueIsNotOriginatingAuthority
 
 traditionalOwnerCommunityIsNotRntbc :
   NativeTitle.traditionalOwnerCommunity ≡ NativeTitle.registeredNativeTitleBodyCorporate → ⊥
@@ -34,25 +34,19 @@ ipccIntegrationIsUneven = IPCC.wgiiChapter14StrongerThanWgi
 
 recognizedVictimStandingDoesNotConstructEnforcement :
   Caceres.EffectiveEnforcement Caceres.victimStanding → ⊥
-recognizedVictimStandingDoesNotConstructEnforcement =
-  Caceres.victimStandingDoesNotConstructEnforcement
+recognizedVictimStandingDoesNotConstructEnforcement = Caceres.victimStandingDoesNotConstructEnforcement
 
 sameSeedMaterialDoesNotRecoverCommunityControl :
   Seed.control Seed.enclosedSeed ≡ Seed.control Seed.communitySeed → ⊥
 sameSeedMaterialDoesNotRecoverCommunityControl = Seed.sameMaterialDoesNotRecoverControl
 
 settlerRecognitionDoesNotExhaustSovereignty :
-  DASHI.Core.RecognitionConstitutionNonfactorabilityExact.FactorsThroughRecognition
-    Moreton.recognitionSystem → ⊥
-settlerRecognitionDoesNotExhaustSovereignty =
-  Moreton.settlerRecognitionCannotExhaustSovereignAuthority
+  Recognition.FactorsThroughRecognition Moreton.recognitionSystem → ⊥
+settlerRecognitionDoesNotExhaustSovereignty = Moreton.settlerRecognitionCannotExhaustSovereignAuthority
 
 externalHistoricalSourceDoesNotCreateLandAuthority :
-  Evidence.AuthorizedFor
-    Evidence.externalHistoricalReconstruction
-    Evidence.landManagementAuthority → ⊥
-externalHistoricalSourceDoesNotCreateLandAuthority =
-  Evidence.externalHistorianDoesNotBecomeLandManagementAuthority
+  Evidence.AuthorizedFor Evidence.externalHistoricalReconstruction Evidence.landManagementAuthority → ⊥
+externalHistoricalSourceDoesNotCreateLandAuthority = Evidence.externalHistorianDoesNotBecomeLandManagementAuthority
 
 record IndigenousEnvironmentalAuthorityBoundary : Set where
   constructor indigenousEnvironmentalAuthorityBoundary
