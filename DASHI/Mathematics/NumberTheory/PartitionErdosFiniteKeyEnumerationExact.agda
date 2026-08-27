@@ -20,14 +20,12 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Fin.Base using (Fin; toℕ)
-open import Data.List.Base using (allFin)
 open import Data.List.Membership.Propositional using (_∈_)
-open import Data.List.Membership.Propositional.Properties using (∈-allFin)
 open import Data.List.Relation.Unary.Unique.Propositional using (Unique)
-import Data.List.Relation.Unary.Unique.Propositional.Properties as UniqueP
 open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
 open import Data.Vec.Base using (Vec)
 
+import DASHI.Mathematics.NumberTheory.FiniteAllFinEnumerationExact as Finite
 import DASHI.Mathematics.NumberTheory.FiniteDependentPairEnumerationExact as Dep
 import DASHI.Mathematics.NumberTheory.FiniteNatVectorCoordinateUpdateExact as Update
 import DASHI.Mathematics.NumberTheory.PartitionMultiplicityCarrierExact as Partition
@@ -81,8 +79,8 @@ occurrenceUnitEnumeration :
       Fin (Partition.partValue index))
 occurrenceUnitEnumeration vector index =
   Dep.dependentPairs
-    (allFin (Partition.lookupMultiplicity index vector))
-    (λ _ → allFin (Partition.partValue index))
+    (Finite.allFin (Partition.lookupMultiplicity index vector))
+    (λ _ → Finite.allFin (Partition.partValue index))
 
 partCellEnumeration :
   ∀ {n} (vector : Vec Nat n) →
@@ -92,7 +90,7 @@ partCellEnumeration :
       Fin (Partition.partValue index))
 partCellEnumeration {n} vector =
   Dep.dependentPairs
-    (allFin n)
+    (Finite.allFin n)
     (occurrenceUnitEnumeration vector)
 
 cellKeyEnumeration : (n : Nat) → List (CellKey n)
@@ -103,16 +101,16 @@ cellKeyEnumeration n =
 
 ------------------------------------------------------------------------
 -- Duplicate-freedom is inherited compositionally from the canonical partition
--- vector list and stdlib `allFin` fibres.
+-- vector list and the canonical allFin fibres.
 
 occurrenceUnitUnique :
   ∀ {n} (vector : Vec Nat n) (index : Fin n) →
   Unique (occurrenceUnitEnumeration vector index)
 occurrenceUnitUnique vector index =
   Dep.dependentPairsUnique
-    (λ _ → allFin (Partition.partValue index))
-    (UniqueP.allFin⁺ (Partition.lookupMultiplicity index vector))
-    (λ _ → UniqueP.allFin⁺ (Partition.partValue index))
+    (λ _ → Finite.allFin (Partition.partValue index))
+    (Finite.allFinUnique (Partition.lookupMultiplicity index vector))
+    (λ _ → Finite.allFinUnique (Partition.partValue index))
 
 partCellUnique :
   ∀ {n} (vector : Vec Nat n) →
@@ -120,7 +118,7 @@ partCellUnique :
 partCellUnique {n} vector =
   Dep.dependentPairsUnique
     (occurrenceUnitEnumeration vector)
-    (UniqueP.allFin⁺ n)
+    (Finite.allFinUnique n)
     (occurrenceUnitUnique vector)
 
 cellKeyEnumerationUnique :
@@ -144,11 +142,11 @@ cellKeyListed (vector , index , occurrence , unit) vectorMember =
     vectorMember
     (Dep.dependentPairsMember
       (occurrenceUnitEnumeration vector)
-      (∈-allFin index)
+      (Finite.allFinComplete index)
       (Dep.dependentPairsMember
-        (λ _ → allFin (Partition.partValue index))
-        (∈-allFin occurrence)
-        (∈-allFin unit)))
+        (λ _ → Finite.allFin (Partition.partValue index))
+        (Finite.allFinComplete occurrence)
+        (Finite.allFinComplete unit)))
 
 ------------------------------------------------------------------------
 -- Deletion normal form.  Store the occurrence predecessor j literally; the
