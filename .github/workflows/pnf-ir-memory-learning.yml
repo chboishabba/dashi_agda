@@ -5,6 +5,11 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
     paths:
       - 'DASHI/Cognition/PNF/**'
+      - 'DASHI/Core/NonFactorabilityCompositionExact.agda'
+      - 'DASHI/Governance/LegalDecisionDoubleProjectionExact.agda'
+      - 'DASHI/Governance/LegalDecisionFibreDynamicsExact.agda'
+      - 'DASHI/Governance/DecisionPotentialAuthorityOrthogonalityExact.agda'
+      - 'DASHI/Governance/Everything.agda'
       - 'DASHI/Cognition/Utterance/All.agda'
       - 'DASHI/Foundations/InverseLimitClopenRefinement.agda'
       - 'DASHI/Foundations/DerivedCoarseDynamics.agda'
@@ -16,7 +21,7 @@ on:
       - '.github/workflows/pnf-ir-memory-learning.yml'
 
 concurrency:
-  group: dashi-global-${{ github.ref }}
+  group: pnf-ir-memory-learning-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -31,7 +36,6 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Restore Agda 2.9 shadow cache
         uses: actions/cache@v4
         with:
@@ -43,9 +47,13 @@ jobs:
         run: |
           set +e
           (
+            set -euo pipefail
             export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
             export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export XDG_CACHE_HOME="$RUNNER_TEMP/dashi-cache"
+            export DASHI_STATUS_DIR="$RUNNER_TEMP/dashi-status"
             export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export DASHI_NO_TMUX=1
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-pnf-ir-memory-learning-check.log"
             export AGDA_JOBS=2
             targets=(
@@ -60,6 +68,21 @@ jobs:
               DASHI/Cognition/PNF/ExtractorBoundary.agda
               DASHI/Cognition/PNF/AttractorMeasurementValidation.agda
               DASHI/Cognition/PNF/NashiDecisionProofBridge.agda
+              DASHI/Cognition/PNF/DecisionPotentialFibreExact.agda
+              DASHI/Cognition/PNF/UnifiedDecisionDynamicsExact.agda
+              DASHI/Cognition/PNF/NoncommutativeDecisionUpdateQQExact.agda
+              DASHI/Cognition/PNF/ActiveInferenceFibreBoundaryExact.agda
+              DASHI/Cognition/PNF/DecisionAutonomyExact.agda
+              DASHI/Cognition/PNF/DecisionOutcomeLearningFeedbackExact.agda
+              DASHI/Cognition/PNF/AttentionValueActuationSeparationExact.agda
+              DASHI/Cognition/PNF/DynamicDecisionFieldCompetitionExact.agda
+              DASHI/Cognition/PNF/DecisionActionProjectionNonFactorabilityExact.agda
+              DASHI/Cognition/PNF/DecisionFibrePotentialHyperformalismExact.agda
+              DASHI/Cognition/PNF/DecisionFibrePotentialRegression.agda
+              DASHI/Core/NonFactorabilityCompositionExact.agda
+              DASHI/Governance/LegalDecisionDoubleProjectionExact.agda
+              DASHI/Governance/LegalDecisionFibreDynamicsExact.agda
+              DASHI/Governance/DecisionPotentialAuthorityOrthogonalityExact.agda
               DASHI/Foundations/InverseLimitClopenRefinement.agda
               DASHI/Foundations/DerivedCoarseDynamics.agda
               DASHI/NumberTheory/ThreeAdicCompletionCutset.agda

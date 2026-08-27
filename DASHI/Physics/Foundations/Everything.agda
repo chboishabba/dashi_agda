@@ -27,6 +27,25 @@ import DASHI.Physics.Foundations.UnifiedEffectiveActionBoundary
 import DASHI.Physics.Foundations.FiniteHistoryOrientationExact
 import DASHI.Physics.Foundations.HistoryWeightFiltrationExact
 import DASHI.Physics.Foundations.FiniteHistoryFunctionalExact
+import DASHI.Physics.Foundations.HistoryLocalActionAccumulationExact
+import DASHI.Physics.Foundations.TransitionActionNonseparabilityExact
+import DASHI.Physics.Foundations.ActionPhaseLiftBoundaryExact
+import DASHI.Physics.Foundations.BidirectionallyAdmissibleHistoryFibreExact
+import DASHI.Physics.Foundations.BidirectionalAdmissibleActionRealizationExact
+import DASHI.Physics.Foundations.TrajectoryProjectionCausticExact
+import DASHI.Physics.Foundations.CoupledTrajectoryCoherenceExact
+import DASHI.Physics.Foundations.StationaryCoherenceClassificationExact
+import DASHI.Physics.Foundations.ContextConditionedTrajectoryWeightExact
+import DASHI.Physics.Foundations.WavelengthSourceScaleSelectionExact
+import DASHI.Physics.Foundations.PathIntegralExperimentalSourceRegistryExact
+import DASHI.Physics.Foundations.TSFVFeynmanDerivationObligationsExact
+
+-- Generic downstream consumers of history/projection information.  These live
+-- in Core because their non-descent laws are not physics-specific.
+import DASHI.Core.HistoryConditionedChoiceExact
+import DASHI.Core.RelationalTensionCompressionExact
+import DASHI.Core.RelationalObserverGainExact
+
 import DASHI.Physics.Foundations.FormalReceiptBoundaryExact
 import DASHI.Physics.Foundations.FiniteResidueCycleReachabilityExact
 import DASHI.Physics.Foundations.FiniteWeightedTernaryKernelExact

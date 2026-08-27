@@ -2,7 +2,7 @@ module DASHI.Pressure where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Nat using (_≤_; _⊔_)
+open import Data.Nat using (_≤_; _⊔_; z≤n; s≤s)
 open import Data.Nat.Properties as NatP using
   ( ≤-refl
   ; ≤-trans
@@ -80,6 +80,59 @@ join-level critical low = refl
 join-level critical medium = refl
 join-level critical high = refl
 join-level critical critical = refl
+
+------------------------------------------------------------------------
+-- Saturation at `critical` is monotone.  The upper index is split at the same
+-- four thresholds as `fromLevel`, so both sides reduce to literal Nat orders.
+------------------------------------------------------------------------
+
+fromLevel-monotone :
+  ∀ {a b : Nat} → a ≤ b → fromLevel a ⊑p fromLevel b
+fromLevel-monotone {zero} {b} a≤b = z≤n
+
+fromLevel-monotone {suc zero} {zero} ()
+fromLevel-monotone {suc zero} {suc zero} a≤b = s≤s z≤n
+fromLevel-monotone {suc zero} {suc (suc zero)} a≤b = s≤s z≤n
+fromLevel-monotone {suc zero} {suc (suc (suc zero))} a≤b = s≤s z≤n
+fromLevel-monotone {suc zero} {suc (suc (suc (suc b)))} a≤b = s≤s z≤n
+
+fromLevel-monotone {suc (suc zero)} {zero} ()
+fromLevel-monotone {suc (suc zero)} {suc zero} (s≤s ())
+fromLevel-monotone {suc (suc zero)} {suc (suc zero)} a≤b =
+  s≤s (s≤s z≤n)
+fromLevel-monotone {suc (suc zero)} {suc (suc (suc zero))} a≤b =
+  s≤s (s≤s z≤n)
+fromLevel-monotone {suc (suc zero)} {suc (suc (suc (suc b)))} a≤b =
+  s≤s (s≤s z≤n)
+
+fromLevel-monotone {suc (suc (suc zero))} {zero} ()
+fromLevel-monotone {suc (suc (suc zero))} {suc zero} (s≤s ())
+fromLevel-monotone
+  {suc (suc (suc zero))}
+  {suc (suc zero)} (s≤s (s≤s ()))
+fromLevel-monotone
+  {suc (suc (suc zero))}
+  {suc (suc (suc zero))} a≤b =
+  s≤s (s≤s (s≤s z≤n))
+fromLevel-monotone
+  {suc (suc (suc zero))}
+  {suc (suc (suc (suc b)))} a≤b =
+  s≤s (s≤s (s≤s z≤n))
+
+fromLevel-monotone {suc (suc (suc (suc a)))} {zero} ()
+fromLevel-monotone
+  {suc (suc (suc (suc a)))}
+  {suc zero} (s≤s ())
+fromLevel-monotone
+  {suc (suc (suc (suc a)))}
+  {suc (suc zero)} (s≤s (s≤s ()))
+fromLevel-monotone
+  {suc (suc (suc (suc a)))}
+  {suc (suc (suc zero))} (s≤s (s≤s (s≤s ())))
+fromLevel-monotone
+  {suc (suc (suc (suc a)))}
+  {suc (suc (suc (suc b)))} a≤b =
+  s≤s (s≤s (s≤s (s≤s z≤n)))
 
 toLevel-injective : ∀ {a b} → toLevel a ≡ toLevel b → a ≡ b
 toLevel-injective {none} {none} _ = refl

@@ -1,0 +1,9 @@
+module DASHI.Physics.Closure.NSTriadKNClayFrontierRound109Validation where
+
+-- Focused kernel root for the Round109 self/external Waleffe frontier.
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound108Validation
+import DASHI.Physics.Closure.NSTriadKNSelfPhaseSquareMassSignAuditRound109Exact
+import DASHI.Physics.Closure.NSTriadKNExternalCrossTriadRemainderRound109Exact
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound109Exact
+import DASHI.Papers.NavierStokes.TheoremInterfaceRound109Exact

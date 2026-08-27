@@ -1,0 +1,55 @@
+name: Wette reconstruction Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Core/FormalClaimTransportGeometryExact.agda'
+      - 'DASHI/Core/FormalizationRecoverySourceRegistryExact.agda'
+      - 'DASHI/Core/FormalizationRecoveryGeometryExact.agda'
+      - 'DASHI/Core/SourceAcquisitionGeometryExact.agda'
+      - 'DASHI/Core/DeductionIndexedInterpretationExact.agda'
+      - 'DASHI/Core/FormalSystemRevisionGeometryExact.agda'
+      - 'DASHI/Core/RulePremiseDependencyGeometryExact.agda'
+      - 'DASHI/Core/OrderedSubstitutionGeometryExact.agda'
+      - 'DASHI/Core/RulePremiseTypingGeometryExact.agda'
+      - 'DASHI/Core/ProofCarryingRuleApplicationExact.agda'
+      - 'DASHI/Core/Everything.agda'
+      - 'DASHI/Foundations/Wette*.agda'
+      - 'DASHI/Foundations/Wette/**'
+      - 'DASHI/Foundations/Everything.agda'
+      - 'scripts/check_wette_reconstruction.sh'
+      - 'scripts/check_wette_source_acquisition.sh'
+      - 'scripts/check_wette_critical_rules.sh'
+      - 'scripts/check_wette_substitution_order.sh'
+      - 'scripts/check_wette_premise_typing.sh'
+      - 'scripts/check_wette_proof_carrying_application.sh'
+      - '.github/workflows/wette-reconstruction-agda.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: dashi-global-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    env:
+      AGDA_BIN: agda
+      DASHI_REPO_ROOT: ${{ github.workspace }}
+      AGDA_LOG_PATH: ${{ github.workspace }}/.cache/wette-reconstruction-agda.log
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Materialize Agda source dependencies
+        run: git submodule update --init --depth 1 DCHoTT-Agda cubical
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Run focused Wette source and typecheck audit
+        run: |
+          nix develop .# --command bash scripts/check_wette_source_acquisition.sh
+          nix develop .# --command bash scripts/check_wette_critical_rules.sh
+          nix develop .# --command bash scripts/check_wette_substitution_order.sh
+          nix develop .# --command bash scripts/check_wette_premise_typing.sh
+          nix develop .# --command bash scripts/check_wette_proof_carrying_application.sh
+          nix develop .# --command bash scripts/check_wette_reconstruction.sh

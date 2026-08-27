@@ -1,0 +1,90 @@
+name: Embodied wave cross-pollination Agda check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - 'DASHI/Biology/SymmetryResolvedEmbodiedWaveControlExact.agda'
+      - 'DASHI/Biology/QuaternionOrbitEmbodiedReachNonfactorabilityExact.agda'
+      - 'DASHI/Biology/TranslationInvariantCompletionAccessibilityNonfactorabilityExact.agda'
+      - 'DASHI/Biology/EmbodiedWaveCubieHolonomyExact.agda'
+      - 'DASHI/Biology/TwoBoundarySymmetryResolvedModeSectionExact.agda'
+      - 'DASHI/Biology/BodyIndexedHarmonicWreathActionExact.agda'
+      - 'DASHI/Biology/IntrospectiveSymmetryResolvedHyperformalismExact.agda'
+      - 'DASHI/Biology/EmbodiedWaveCrossPollinationRegression.agda'
+      - 'DASHI/Core/IntersectionalNonFactorability.agda'
+      - 'scripts/introspective_embodied_hyperfabric_v3.py'
+      - 'artifacts/introspective-embodied-hyperfabric-opencv-v3.json'
+      - '.github/workflows/embodied-wave-cross-pollination.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: embodied-wave-cross-pollination-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-cross-pollination:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reproduce symmetry-aware observer
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install --disable-pip-version-check --quiet numpy opencv-python-headless
+          python3 scripts/introspective_embodied_hyperfabric_v3.py > introspective-v3.log
+          python3 - <<'PY'
+          import json
+          want=json.load(open('artifacts/introspective-embodied-hyperfabric-opencv-v3.json'))
+          got=json.load(open('artifacts/introspective-embodied-hyperfabric-v3/opencv_symmetry_observations.json'))
+          for key in ['observed_supervoxel_count','observed_fibres_per_supervoxel','observed_edges',
+                      'source_like_route_recovered','rotational_route_recovered',
+                      'biology_inferred_from_pixels','phenomenal_consciousness_inferred_from_pixels']:
+              assert got[key] == want[key], (key,got[key],want[key])
+          for g,w in zip(got['mode_observations'],want['mode_observations']):
+              for key in ['box','recovered_vector_count','chirality','gate_class']:
+                  assert g[key] == w[key], (key,g[key],w[key])
+              for key in ['divergence_proxy','curl_proxy','orientation_angle_deg','gate_fill_ratio']:
+                  assert abs(g[key]-w[key]) <= 0.01, (key,g[key],w[key])
+          PY
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check embodied wave cross-pollination root
+        id: agda
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export XDG_CACHE_HOME="$RUNNER_TEMP/dashi-cache"
+            export DASHI_STATUS_DIR="$RUNNER_TEMP/dashi-status"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export DASHI_NO_TMUX=1
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-embodied-wave-cross-pollination.log"
+            export AGDA_JOBS=2
+            scripts/run_agda29_parallel_check.sh \
+              DASHI/Biology/EmbodiedWaveCrossPollinationRegression.agda
+          ) > embodied-wave-cross-pollination-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 360 embodied-wave-cross-pollination-check.log
+          exit 0
+      - name: Upload focused logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: embodied-wave-cross-pollination-logs
+          path: |
+            embodied-wave-cross-pollination-check.log
+            introspective-v3.log
+          if-no-files-found: error
+      - name: Fail on Agda error
+        if: steps.agda.outputs.status != '0'
+        run: exit 1

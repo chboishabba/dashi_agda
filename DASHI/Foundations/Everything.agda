@@ -5,3 +5,5 @@ module DASHI.Foundations.Everything where
 -- subdomain rollups rather than flattening the whole Foundations directory.
 
 import DASHI.Foundations.UBP.Everything
+import DASHI.Foundations.Wette.Everything
+import DASHI.Foundations.CoarseFineRefinementEverything

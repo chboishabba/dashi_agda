@@ -4,6 +4,7 @@ module DASHI.Moonshine.Monster3BHighestAlphaValidation where
 -- Cumulative kernel root for the Monster 3B highest-alpha lane.
 ------------------------------------------------------------------------
 
+import DASHI.Algebra.TriadicDepthOneCharacters as C3Exact
 import DASHI.Moonshine.Monster3BNormalizerBridge as Normalizer
 import DASHI.Moonshine.Monster3BCyclicFourierDyadicBridgeExact as Fourier
 import DASHI.Moonshine.Monster3BHeisenbergMultiplicityExact as Heisenberg
@@ -20,6 +21,10 @@ import DASHI.Moonshine.Monster3BConformalLinePlacementExact as Conformal
 import DASHI.Moonshine.Monster3BFiniteProjectorModelExact as Projector
 import DASHI.Moonshine.Monster3BFiniteWeightProjectorExact as WeightProjector
 import DASHI.Moonshine.Monster3BMultiplicityCharacterProjectorExact as Character
+import DASHI.Moonshine.C3FourierConjugationExact as C3Fourier
+import DASHI.Moonshine.C3CyclotomicRealDescentExact as C3Real
+import DASHI.Moonshine.SSP15AffineC3TranslationExact as SSP42
+import DASHI.Moonshine.MonsterReducedNonaryBoundaryExact as ReducedNonary
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (_+_; _*_)
@@ -148,3 +153,35 @@ multiplicityCharacterTargetDegreeSplits :
   ≡ Character.multiplicityDegree
 multiplicityCharacterTargetDegreeSplits =
   Character.multiplicityTwelvePlusSeventyEight
+
+------------------------------------------------------------------------
+-- New C3 / SSP15 / reduced-nonary frontier.
+
+zetaSquareIsInverseInHighestAlphaRoot :
+  C3Fourier.zetaSquared ≡ C3Fourier.inversePhase C3Fourier.zeta
+zetaSquareIsInverseInHighestAlphaRoot =
+  C3Fourier.zetaSquaredIsInverseZeta
+
+conjugateFourierRowsAreExplicit :
+  C3Fourier.conjugateRow C3Fourier.chi1 ≡ C3Fourier.chi2
+conjugateFourierRowsAreExplicit = C3Fourier.chi1ConjugateIsChi2
+
+ssp42VerticalTranslationIsInverseC3Phase :
+  (mode : SSP42.MobileComplementMode3) →
+  SSP42.advance12 (SSP42.advance42 mode) ≡ mode
+ssp42VerticalTranslationIsInverseC3Phase = SSP42.advance12After42
+
+ssp42GridReachesMonsterFactorTriple : 47 * 59 * 71 ≡ 196883
+ssp42GridReachesMonsterFactorTriple =
+  SSP42.largestThreeOggProductIsMonsterDimension
+
+cyclotomicTraceIsConjugationInvariant :
+  (phase : C3Exact.C3Phase) →
+  C3Real.cyclotomicTrace (C3Fourier.inversePhase phase)
+  ≡ C3Real.cyclotomicTrace phase
+cyclotomicTraceIsConjugationInvariant = C3Real.traceIsConjugationInvariant
+
+localisedReducedBoundaryStillGivesFiftyThree :
+  ReducedNonary.reducedSixByNine ≡ 53
+localisedReducedBoundaryStillGivesFiftyThree =
+  ReducedNonary.reducedSixByNineIsFiftyThree

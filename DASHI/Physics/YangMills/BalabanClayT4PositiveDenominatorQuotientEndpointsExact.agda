@@ -38,7 +38,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_; 1/_; Positive; NonNegative; NonPositive; NonZero)
 import Data.Rational.Properties as ℚP
-import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
   (cong; subst; subst₂; sym; trans)
 
@@ -135,18 +134,20 @@ reciprocalAntitonePositive lower upper lowerPositive upperPositive lowerBelowUpp
     scaleUpperInverse : scale * upperInverse ≡ lower
     scaleUpperInverse =
       trans
-        (ℚRing.solve-∀ lower upper upperInverse)
+        (ℚP.*-assoc lower upper upperInverse)
         (trans
           (cong (lower *_) (positiveReciprocalRightInverse upper upperPositive))
-          (ℚRing.solve-∀ lower))
+          (ℚP.*-identityʳ lower))
 
     scaleLowerInverse : scale * lowerInverse ≡ upper
     scaleLowerInverse =
       trans
-        (ℚRing.solve-∀ lower upper lowerInverse)
+        (cong (_* lowerInverse) (ℚP.*-comm lower upper))
         (trans
-          (cong (upper *_) (positiveReciprocalRightInverse lower lowerPositive))
-          (ℚRing.solve-∀ upper))
+          (ℚP.*-assoc upper lower lowerInverse)
+          (trans
+            (cong (upper *_) (positiveReciprocalRightInverse lower lowerPositive))
+            (ℚP.*-identityʳ upper)))
 
     scaled : scale * upperInverse ≤ scale * lowerInverse
     scaled = subst₂ _≤_
@@ -174,18 +175,18 @@ dividePositiveNumeratorMonotone lower upper denominator denominatorPositive lowe
 
 dividePositiveDenominatorAntitoneNonnegative :
   ∀ numerator lowerDenominator upperDenominator
-    (numeratorNonnegative : 0ℚ ≤ numerator)
+    (numeratorAtLeastZero : 0ℚ ≤ numerator)
     (lowerPositive : 0ℚ < lowerDenominator)
     (upperPositive : 0ℚ < upperDenominator) →
   lowerDenominator ≤ upperDenominator →
   dividePositive numerator upperDenominator upperPositive
   ≤ dividePositive numerator lowerDenominator lowerPositive
 dividePositiveDenominatorAntitoneNonnegative numerator lowerDenominator upperDenominator
-    numeratorNonnegative lowerPositive upperPositive lowerBelowUpper =
+    numeratorAtLeastZero lowerPositive upperPositive lowerBelowUpper =
   let
     instance
       numeratorIsNonnegative : NonNegative numerator
-      numeratorIsNonnegative = ℚ.nonNegative numeratorNonnegative
+      numeratorIsNonnegative = ℚ.nonNegative numeratorAtLeastZero
   in
   ℚP.*-monoˡ-≤-nonNeg numerator
     (reciprocalAntitonePositive
@@ -194,18 +195,18 @@ dividePositiveDenominatorAntitoneNonnegative numerator lowerDenominator upperDen
 
 dividePositiveDenominatorMonotoneNonpositive :
   ∀ numerator lowerDenominator upperDenominator
-    (numeratorNonpositive : numerator ≤ 0ℚ)
+    (numeratorAtMostZero : numerator ≤ 0ℚ)
     (lowerPositive : 0ℚ < lowerDenominator)
     (upperPositive : 0ℚ < upperDenominator) →
   lowerDenominator ≤ upperDenominator →
   dividePositive numerator lowerDenominator lowerPositive
   ≤ dividePositive numerator upperDenominator upperPositive
 dividePositiveDenominatorMonotoneNonpositive numerator lowerDenominator upperDenominator
-    numeratorNonpositive lowerPositive upperPositive lowerBelowUpper =
+    numeratorAtMostZero lowerPositive upperPositive lowerBelowUpper =
   let
     instance
       numeratorIsNonpositive : NonPositive numerator
-      numeratorIsNonpositive = ℚ.nonPositive numeratorNonpositive
+      numeratorIsNonpositive = ℚ.nonPositive numeratorAtMostZero
   in
   ℚP.*-monoˡ-≤-nonPos numerator
     (reciprocalAntitonePositive
@@ -218,19 +219,16 @@ quotientLowerEndpoint :
   (denominatorLower denominatorUpper : ℚ) →
   (denominatorLowerPositive : 0ℚ < denominatorLower) →
   denominatorLower ≤ denominatorUpper → ℚ
-quotientLowerEndpoint {numeratorLower}
-    (numeratorNonnegative _)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
+quotientLowerEndpoint {numeratorLower} {numeratorUpper} signCase
+    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered
+  with signCase
+... | numeratorNonnegative _ =
   dividePositive numeratorLower denominatorUpper
     (upperDenominatorPositive
       denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered)
-quotientLowerEndpoint {numeratorLower}
-    (numeratorNonpositive _)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
+... | numeratorNonpositive _ =
   dividePositive numeratorLower denominatorLower denominatorLowerPositive
-quotientLowerEndpoint {numeratorLower}
-    (numeratorStraddlesZero _ _)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
+... | numeratorStraddlesZero _ _ =
   dividePositive numeratorLower denominatorLower denominatorLowerPositive
 
 quotientUpperEndpoint :
@@ -239,19 +237,16 @@ quotientUpperEndpoint :
   (denominatorLower denominatorUpper : ℚ) →
   (denominatorLowerPositive : 0ℚ < denominatorLower) →
   denominatorLower ≤ denominatorUpper → ℚ
-quotientUpperEndpoint {numeratorUpper}
-    (numeratorNonnegative _)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
+quotientUpperEndpoint {numeratorLower} {numeratorUpper} signCase
+    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered
+  with signCase
+... | numeratorNonnegative _ =
   dividePositive numeratorUpper denominatorLower denominatorLowerPositive
-quotientUpperEndpoint {numeratorUpper}
-    (numeratorNonpositive _)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
+... | numeratorNonpositive _ =
   dividePositive numeratorUpper denominatorUpper
     (upperDenominatorPositive
       denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered)
-quotientUpperEndpoint {numeratorUpper}
-    (numeratorStraddlesZero _ _)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
+... | numeratorStraddlesZero _ _ =
   dividePositive numeratorUpper denominatorLower denominatorLowerPositive
 
 record LiesBetween (lower value upper : ℚ) : Set where

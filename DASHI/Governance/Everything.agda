@@ -9,6 +9,7 @@ import DASHI.Governance.PermacultureEvolutionTests
 import DASHI.Governance.CaseyITIRNixBridge
 import DASHI.Governance.CaseyITIRNixBridgeTests
 import DASHI.Core.RequiredObserverAxisJoinAdequacyExact
+import DASHI.Core.NonFactorabilityCompositionExact
 import DASHI.Governance.AuthorityMandateCore
 import DASHI.Governance.CouncilDelegationGraph
 import DASHI.Governance.ExternalLegitimacyBoundary
@@ -33,17 +34,54 @@ import DASHI.Governance.RequiredAxisJusticeRegression
 import DASHI.Governance.ArgumentLevelAuthorityRoutingExact
 import DASHI.Governance.ArgumentHyperformalism369Regression
 import DASHI.Governance.OptionConeCoercionExact
+import DASHI.Governance.TypedBranchingOptionConeBridgeExact
+import DASHI.Governance.SituatedIntegrityOptionConeBridgeExact
+import DASHI.Governance.HistoryConditionedSocialEcologyOptionConeExact
+import DASHI.Governance.ObserverValuationAuthoritySeparationExact
+import DASHI.Governance.HistoryObserverAuthorityOptionConeCapstoneExact
+import DASHI.Governance.CapabilityFunctioningNonDescentExact
+import DASHI.Governance.RecognitionDistributionRepresentationAxesExact
+import DASHI.Governance.LegitimacyEvidenceSeparationExact
+import DASHI.Governance.AuthorityRepairLegitimacySeparationExact
+import DASHI.Governance.FormalisationGovernanceCapstoneExact
 import DASHI.Governance.JusticeCrossPollinationBridgeExact
 import DASHI.Governance.InverseJusticeAttractorExact
 import DASHI.Governance.SecondOrderJusticeGrammarExact
 import DASHI.Governance.ClosedAuthorityInverseJusticeExact
 import DASHI.Governance.SituatedInverseJusticeRegression
+-- Contested ambient authority / legal-epistemic power convergence.
+import DASHI.Governance.ContestedAmbientAuthorityHyperformalismExact
+import DASHI.Governance.ContestedAmbientAuthorityRegression
+import DASHI.Governance.ContestedJurisdictionPermissionExact
+import DASHI.Governance.InstitutionalNoticeActuationCulpabilityExact
+import DASHI.Governance.InstitutionalVerificationFibreRequiredAxisExact
+import DASHI.Governance.LegalArgumentRequiredAxis369BridgeExact
+import DASHI.Governance.EpistemicCaptureProfessionalClosureExact
+import DASHI.Governance.InstitutionPreservingRechartAntiSublationExact
+import DASHI.Governance.OppositionInterfaceAntiDomesticationExact
+import DASHI.Governance.EpistemicErrorAllocationChillingBridgeExact
+import DASHI.Governance.PeaceJusticeResidualNonFactorabilityExact
+import DASHI.Governance.HyperformalTernaryCarrierEquivalenceExact
+import DASHI.Governance.HyperformalNonFactorabilityTransportExact
+import DASHI.Governance.FibrewiseInstitutionalPowerEverything
+import DASHI.Governance.LegalDecisionDoubleProjectionExact
+import DASHI.Governance.LegalDecisionFibreDynamicsExact
+import DASHI.Governance.DecisionPotentialAuthorityOrthogonalityExact
 import DASHI.Governance.RevolutionarySourceAtlas
 import DASHI.Governance.RevolutionaryPracticeBraid
 import DASHI.Governance.TraumaMemorySublationBoundary
 import DASHI.Governance.CabarlahTraumaProjectionBridgeExact
 import DASHI.Governance.ComparativeCrisisClimateAtlas
 import DASHI.Governance.RevolutionaryAdjunctRegression
+
+-- Safe-and-just development / provisioning geometry.  Empirical source claims,
+-- allocation conventions, vector observations and causal interpretation remain
+-- explicitly separated.
+import DASHI.Governance.SafeJustSourceRegistryExact
+import DASHI.Governance.SafeJustIndicatorSystemExact
+import DASHI.Governance.PlanetaryBoundaryAllocationExact
+import DASHI.Governance.ProvisioningGeometryExact
+import DASHI.Governance.ONeill2018MethodsBoundaryExact
 
 -- Provenance-bearing policy routing, corrective reachability and source-bounded
 -- application surfaces assembled as one focused tranche.
