@@ -1,6 +1,7 @@
 module DASHI.Core.RecognitionConstitutionNonfactorabilityExact where
 
 open import DASHI.Core.Prelude
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Consumer
 
 ------------------------------------------------------------------------
 -- RECOGNITION != CONSTITUTION
@@ -11,11 +12,13 @@ open import DASHI.Core.Prelude
 -- institutional bridges are interpretations of this owner, not its authors.
 ------------------------------------------------------------------------
 
-record RecognitionSystem (State Recognition Authority : Set) : Set where
+record RecognitionSystem (State Recognition Authority : Set) : Set₁ where
   constructor recognitionSystem
   field
     recognize : State → Recognition
     authority : State → Authority
+
+open RecognitionSystem public
 
 record RecognitionCollision
   {State Recognition Authority : Set}
@@ -23,31 +26,39 @@ record RecognitionCollision
   constructor recognitionCollision
   field
     left right : State
-    sameRecognition : RecognitionSystem.recognize system left ≡
-                      RecognitionSystem.recognize system right
-    differentAuthority : RecognitionSystem.authority system left ≡
-                         RecognitionSystem.authority system right → ⊥
+    sameRecognition : recognize system left ≡ recognize system right
+    differentAuthority : authority system left ≡ authority system right → ⊥
 
-FactorsThroughRecognition :
-  {State Recognition Authority : Set} →
-  RecognitionSystem State Recognition Authority → Set
-FactorsThroughRecognition {Recognition = Recognition} {Authority = Authority} system =
-  Σ (Recognition → Authority) (λ recover →
-    (x : _) → recover (RecognitionSystem.recognize system x) ≡
-              RecognitionSystem.authority system x)
+open RecognitionCollision public
+
+collisionGivesConsumerNonDescent :
+  ∀ {State Recognition Authority : Set}
+    {system : RecognitionSystem State Recognition Authority} →
+  RecognitionCollision system →
+  Consumer.ConsumerNonDescentWitness
+    (recognize system)
+    (authority system)
+collisionGivesConsumerNonDescent witness =
+  Consumer.consumerNonDescentWitness
+    (left witness)
+    (right witness)
+    (sameRecognition witness)
+    (differentAuthority witness)
 
 collisionBlocksAuthorityFactorization :
-  {State Recognition Authority : Set} →
-  {system : RecognitionSystem State Recognition Authority} →
+  ∀ {State Recognition Authority : Set}
+    {system : RecognitionSystem State Recognition Authority} →
   RecognitionCollision system →
-  FactorsThroughRecognition system → ⊥
-collisionBlocksAuthorityFactorization witness (recover , factors) =
-  RecognitionCollision.differentAuthority witness
-    (trans
-      (sym (factors (RecognitionCollision.left witness)))
-      (trans
-        (cong recover (RecognitionCollision.sameRecognition witness))
-        (factors (RecognitionCollision.right witness))))
+  Consumer.FactorsThrough (recognize system) (authority system) → ⊥
+collisionBlocksAuthorityFactorization witness =
+  Consumer.nonDescentWitnessBlocksFactorization
+    (collisionGivesConsumerNonDescent witness)
+
+FactorsThroughRecognition :
+  ∀ {State Recognition Authority : Set} →
+  RecognitionSystem State Recognition Authority → Set₁
+FactorsThroughRecognition system =
+  Consumer.FactorsThrough (recognize system) (authority system)
 
 ------------------------------------------------------------------------
 -- Finite regression witness: lack of recognition does not determine absence
