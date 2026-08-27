@@ -5,6 +5,7 @@ on:
     paths:
       - 'DASHI/Trading/**.agda'
       - 'DASHI/Core/IntersectionalNonFactorability.agda'
+      - 'DASHI/Core/DeclaredRealizedIntegrityResidualExact.agda'
       - 'Docs/support/reference/DashiTradeDreamOptionConeRoadmap.md'
       - '.github/workflows/dashitrade-dream-option-cone.yml'
   workflow_dispatch:
@@ -31,6 +32,7 @@ jobs:
           set -euo pipefail
           files=(
             DASHI/Trading/DashiTradeDreamOptionConeExact.agda
+            DASHI/Trading/TradingDeclaredRealizedViabilityBridgeExact.agda
             DASHI/Trading/DashiTradeDreamRegression.agda
             DASHI/Trading/Everything.agda
           )
@@ -55,6 +57,7 @@ jobs:
             export AGDA_JOBS=2
             scripts/run_agda29_parallel_check.sh \
               DASHI/Trading/DashiTradeDreamOptionConeExact.agda \
+              DASHI/Trading/TradingDeclaredRealizedViabilityBridgeExact.agda \
               DASHI/Trading/DashiTradeDreamRegression.agda \
               DASHI/Trading/Everything.agda
           ) > agda-dashitrade-dream-check.log 2>&1
