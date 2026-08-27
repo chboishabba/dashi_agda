@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKN*.agda'
-      - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound10*.agda'
+      - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound1*.agda'
       - 'scripts/ns_triad_signed_frontier_lab.py'
       - 'scripts/check_ns_triad_completion_identities.py'
       - 'scripts/check_ns_triad_clay_frontier.py'
@@ -112,3 +112,9 @@ jobs:
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNClayFrontierRound110Validation.agda
+
+      - name: Type-check Round111 external-residual commutator/Bony frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound111Validation.agda
