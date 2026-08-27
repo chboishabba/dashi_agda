@@ -45,20 +45,57 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound82FiveAnalyticLeafExa
 -- the selected-background reproof.  It is NOT a claim that the cited source
 -- theorem has been reproved by DASHI.
 --
--- A1 SHARPENING
+-- A1 SHARPENING -- CURRENT SOURCE-FACING ROUTE
 --
--- CMP109 also makes the remaining beta difficulty more precise.  At the end of
--- Sect. 5 Bałaban says beta_j depends on all preceding effective couplings, even
--- though the coefficient is extracted locally from the polarization tensor.
--- `BalabanBetaHistoryLocalizedInfluenceExact` therefore replaces a dangerous
--- history-length times local-error estimate by a summable shell influence:
+-- CMP109 Sect. 5 makes the beta difficulty more precise than the older
+-- Wilson/FP/Haar near/far wording suggested.
 --
---   influence_d <= C gamma (1/4) 2^-d
---     ==> total history defect <= C gamma / 2.
+--   * Eq. (5.42) defines beta from the off-diagonal mixed p=0 second derivative
+--     of the polarization tensor.
+--   * Eq. (5.38) puts the remainder at third and higher lattice-derivative order.
 --
--- Thus A1 no longer needs a bound growing with the number of RG steps.  It needs
--- the literal constrained Gaussian coefficient plus one cutoff-uniform localized
--- history-influence estimate for the same Wilson/FP/Haar polarization scalar.
+-- Therefore global control of the entire polarization tensor is not logically
+-- required merely to determine the beta coefficient.  The shortest A1a route is
+-- now source-native and determinant-first:
+--
+--   CMP109 constrained Gaussian operator (1.4)--(1.5)
+--     -> exact D^2 log det
+--     -> constrained Ward cancellation inside the trace
+--     -> U=1 Fourier symbols
+--     -> one scalar Brillouin trace/sum
+--     -> betaZ_j.
+--
+-- The old global near/far polarization machinery remains a fallback enclosure
+-- after the literal scalar exists; it is not the mandatory first gate.
+--
+-- At finite coupling the source-native coefficient splits conceptually into the
+-- Gaussian leading contribution plus the nonlinear fluctuation contribution
+-- from (2.12)--(2.13).  The remaining A1a quantitative work is therefore:
+--
+--   betaZ_j >= b_Z > 0
+--   |betaInt_j| <= C_int g_j^rho
+--
+-- with rho and uniformity derived from the source rather than inserted from
+-- perturbative folklore.
+--
+-- CMP109 also says after (5.42) that beta_j depends on all preceding effective
+-- couplings although the notation beta_j(g_(j-1)) suppresses that dependence.
+-- Thus the shortest A1b target is coefficient-relative history response decay,
+-- e.g.
+--
+--   |R_{j,k}| <= C_R theta^(j-k),   theta < 1,
+--
+-- or any equivalent uniformly summable source-native response estimate.  A
+-- contraction theorem for the entire RG state is stronger than required if the
+-- beta response itself is summable.
+--
+-- The Row-A1 physical closure margin is therefore organized by THREE quantities:
+--
+--   b_Z
+--   finite-g interaction debt
+--   history-response debt
+--
+-- and A1 closes once the literal same-trajectory margin is strictly positive.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -77,10 +114,15 @@ round82ActualNewAnalyticLeafCount = 5
 -- FIVE LIVE NEW-ANALYSIS THEOREMS
 ------------------------------------------------------------------------
 
--- A1. Literal Wilson + reduced Faddeev--Popov + Haar coefficient on arbitrary
--- compact simple G.  The universal/zero-history Gaussian coefficient is already
--- separated; the new compiler makes the arbitrary preceding history harmless
--- once its shell influence is summable uniformly.
+-- A1. Literal compact-simple positive beta on the source trajectory.  The
+-- shortest current source-facing decomposition is:
+--
+--   (i)   positive constrained-Gaussian betaZ from the direct p=0 second jet;
+--   (ii)  uniformly small finite-g nonlinear interaction debt;
+--   (iii) uniformly summable history-response debt.
+--
+-- The older global Wilson/FP/Haar near/far scalar route remains a valid fallback
+-- numerical enclosure but is not counted as an additional independent leaf.
 literalCompactSimplePositiveBetaLevel : ProofLevel
 literalCompactSimplePositiveBetaLevel = conditional
 

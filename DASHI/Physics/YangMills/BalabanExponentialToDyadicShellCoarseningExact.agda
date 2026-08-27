@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanExponentialToDyadicShellCoarseningExact where
 
 ------------------------------------------------------------------------
--- ROUND71: SOURCE EXPONENTIAL LOCALISATION -> DYADIC UNIFIED-NORM SHELL
+-- ROUND71 / ROUND83: SOURCE EXPONENTIAL LOCALISATION -> DYADIC SHELL
 --
 -- PRIMARY SOURCES / CALIBRATION
 --
@@ -52,10 +52,9 @@ module DASHI.Physics.YangMills.BalabanExponentialToDyadicShellCoarseningExact wh
 --
 -- DASHI CONTRIBUTION
 --
--- The source gives exponential localization; the unified norm currently uses
--- the convenient dyadic shell (1/2)^d.  These are not different physical
--- estimates.  Once one coarse shell width has been chosen so that the source
--- per-shell decay factor q satisfies
+-- The source gives exponential localization; the unified norm uses the
+-- convenient dyadic shell (1/2)^d.  Once a coarse shell width has been chosen
+-- so that the source per-shell decay factor q satisfies
 --
 --       0 <= q <= 1/2,
 --
@@ -63,10 +62,19 @@ module DASHI.Physics.YangMills.BalabanExponentialToDyadicShellCoarseningExact wh
 --
 --       q^d <= (1/2)^d
 --
--- for every shell depth.  Thus the remaining standard-analysis step is only
--- to choose/certify a shell width R with exp(-delta R) <= 1/2 for the positive
--- source localization rate delta.  No new Yang--Mills decay theorem is needed
--- after that source-native rate has been instantiated.
+-- for every shell depth.
+--
+-- ROUND83 TRUST-BOUNDARY CORRECTION
+--
+-- Choosing such a shell width is NOT a new physical Yang--Mills theorem.  For
+-- any positive source exponent delta, ordinary Archimedean/exponential analysis
+-- gives an integer R with
+--
+--       R >= log 2 / delta,
+--
+-- hence exp(-delta R) <= 1/2.  The source-specific content is positivity of
+-- delta; the coarse-width choice is standard real analysis.  It is therefore
+-- classified `standardImported` below rather than `conditional`.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
@@ -157,10 +165,13 @@ sourceExponentialShellIsDyadic dataSet depth =
 exponentialToDyadicShellCompilerLevel : ProofLevel
 exponentialToDyadicShellCompilerLevel = machineChecked
 
--- Source/standard-analysis seam only: for the positive background-propagator
--- CMP 99(3) / CMP 109 / CMP 116 localization exponent delta, choose a coarse
--- shell width R and certify the numerical inequality exp(-delta R) <= 1/2 in
--- the source normalization.  Once that one scalar inequality is available,
--- every shell-depth comparison above is exact downstream algebra.
+-- Standard calculus/Archimedean seam: delta>0 -> choose R with
+-- exp(-delta R)<=1/2.  No group, gauge-field, RG, or cutoff datum is used in
+-- this implication.
+sourceExponentialRateToDyadicWidthLevel : ProofLevel
+sourceExponentialRateToDyadicWidthLevel = standardImported
+
+-- Backward-compatible status name retained for imports.  The corrected trust
+-- classification is standardImported, not a physical conditional.
 physicalSourceExponentialRateToHalfLevel : ProofLevel
-physicalSourceExponentialRateToHalfLevel = conditional
+physicalSourceExponentialRateToHalfLevel = standardImported
