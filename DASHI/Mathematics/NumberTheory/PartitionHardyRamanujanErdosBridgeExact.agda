@@ -3,10 +3,9 @@ module DASHI.Mathematics.NumberTheory.PartitionHardyRamanujanErdosBridgeExact wh
 ------------------------------------------------------------------------
 -- Partition asymptotics integration surface.
 --
--- This owner connects the already-machine-checked finite partition/Euler
--- coefficient bridge to the two historically distinct asymptotic routes.
--- It deliberately does not promote the infinite generating-function or
--- asymptotic boundaries until their analytic obligations are discharged.
+-- This owner connects the finite partition/Euler coefficient bridge to the
+-- historically distinct Hardy--Ramanujan, Erdos and Newman routes.  Analytic
+-- promotion remains explicit and typed.
 --
 -- Sources:
 --   G. H. Hardy and S. Ramanujan (1918), "Asymptotic Formulae in
@@ -29,12 +28,13 @@ open import Data.Empty using (⊥)
 import DASHI.Mathematics.NumberTheory.PartitionGeneratingFunctionExact as GF
 import DASHI.Mathematics.NumberTheory.PartitionAsymptoticRouteSeparationExact as Routes
 import DASHI.Mathematics.NumberTheory.PartitionErdosFiniteDoubleCountBridgeExact as Erdos
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopUpperMajorantBoundaryExact as ErdosUpper
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as BishopSeries
 import DASHI.Foundations.SpectralCountingComplexity as Counting
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
--- The finite combinatorial bridge is already closed.
+-- The finite coefficient bridge is closed on its current certified prefix.
 
 partitionPrefix : List Nat
 partitionPrefix = GF.partitionCoefficientPrefix
@@ -49,7 +49,7 @@ finitePartitionEulerBridgeLevel : ProofLevel
 finitePartitionEulerBridgeLevel = machineChecked
 
 ------------------------------------------------------------------------
--- Proof-method independence is also closed at the route-identity level.
+-- Proof-method independence is closed at the route-identity level.
 
 hardyRamanujanRouteIsNotErdosRoute :
   Routes.hardyRamanujanCircleRoute ≡ Routes.erdosElementaryRoute → ⊥
@@ -64,16 +64,11 @@ routeSeparationLevel : ProofLevel
 routeSeparationLevel = machineChecked
 
 ------------------------------------------------------------------------
--- Cross-pollination dependencies.
+-- Completion interface.
 --
--- BishopPowerSeriesElementaryBridgeExact already owns constructive convergent
--- series and the exp/log elementary-function boundary.  SpectralCountingComplexity
--- already owns the repo pattern "principal term + controlled remainder".
---
--- The Erdos route now additionally reuses the finite permutation/fold pattern
--- extracted from the NS Galerkin lane.  Consequently the generic residual
--- identity is derived from an explicit deletion-fibre system rather than
--- postulated as an opaque Set.
+-- The Erdos upper stage is no longer one opaque Set.  It must supply concrete
+-- Bishop majorant data and the typed recurrence/kernel/cancellation obligations
+-- isolated by PartitionErdosBishopUpperMajorantBoundaryExact.
 
 record PartitionAsymptoticCompletion : Set₁ where
   field
@@ -86,10 +81,16 @@ record PartitionAsymptoticCompletion : Set₁ where
     etaTransformationInstantiated : Set
     hardyRamanujanSharpLimit : Set
 
-    -- Erdos / elementary route.  The finite residual identity itself is now
-    -- derived from this combinatorial object.
+    -- Erdos / elementary route.  The finite residual identity itself is
+    -- derived from the explicit deletion-fibre system; the upper exponential
+    -- stage is typed over the concrete Bishop carrier.
     erdosDeletionFibreSystem : Erdos.ErdosDeletionFibreSystem
-    elementaryRealUpperBound : Set
+    erdosUpperMajorantData : ErdosUpper.ErdosBishopUpperMajorantData
+    erdosUpperMajorantAnalyticInputs :
+      ErdosUpper.ErdosBishopUpperMajorantAnalyticInputs erdosUpperMajorantData
+
+    -- Lower exponential control and convergence to a positive unknown
+    -- prefactor remain to be decomposed at the same level of precision.
     elementaryRealLowerBound : Set
     positiveUnknownConstantLimit : Set
 
