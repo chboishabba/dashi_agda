@@ -1,36 +1,5 @@
 module DASHI.Analysis.RiemannG21OddTaylorDeterminantExact where
 
-------------------------------------------------------------------------
--- Exact cubic-truncation factorization for the G21 odd parity minor.
---
--- Write the odd response schematically as
---
---   B_y(r) = - r N1(y) + r^3 N3(y)/6 + R_y(r).
---
--- To avoid division in the algebraic core, define the six-times truncated
--- response
---
---   T_y(r) = -6 r N1(y) + r^3 N3(y).
---
--- Then the 2x2 determinant of the truncated responses factors exactly as
---
---   det T =
---     6 r1 r2 (r2^2-r1^2)
---       * (N3(a) N1(p) - N1(a) N3(p)).
---
--- Equivalently, if the strict TP2 continuum margin is oriented as
---
---   Delta = N1(a) N3(p) - N3(a) N1(p) > 0,
---
--- then
---
---   det T = - 6 r1 r2 (r2^2-r1^2) Delta.
---
--- The linear-linear contribution and cubic-cubic contribution cancel
--- identically before any estimate.  This is the determinant-level Taylor
--- structure that the remainder analysis should preserve.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
@@ -42,6 +11,9 @@ square x = x * x
 
 cube : ℚ → ℚ
 cube x = x * x * x
+
+fourth : ℚ → ℚ
+fourth x = square x * square x
 
 oddCubicScaled : ℚ → ℚ → ℚ → ℚ
 oddCubicScaled r n1 n3 =
@@ -79,6 +51,26 @@ oddCubicDeterminantAsNegativeMargin :
 oddCubicDeterminantAsNegativeMargin r1 r2 n1a n3a n1p n3p =
   solve (r1 ∷ r2 ∷ n1a ∷ n3a ∷ n1p ∷ n3p ∷ [])
 
+------------------------------------------------------------------------
+-- Concrete symmetric-radius choice r2 = 2 r1.
+--
+-- The cubic signal becomes exactly
+--
+--   -36 r^4 Delta_odd.
+--
+-- This is the preferred quantitative normalization for the next remainder
+-- gate because the first determinant error has radius degree at least six.
+------------------------------------------------------------------------
+
+oddCubicDeterminantDoubleRadius :
+  (r n1a n3a n1p n3p : ℚ) →
+  oddCubicDeterminant r (2 * r) n1a n3a n1p n3p
+  ≡
+  (0 - (36 * fourth r))
+    * oddMomentPositiveMargin n1a n3a n1p n3p
+oddCubicDeterminantDoubleRadius r n1a n3a n1p n3p =
+  solve (r ∷ n1a ∷ n3a ∷ n1p ∷ n3p ∷ [])
+
 linearPartScaled : ℚ → ℚ → ℚ
 linearPartScaled r n1 = 0 - ((6 * r) * n1)
 
@@ -107,6 +99,9 @@ record OddTaylorDeterminantBoundary : Set where
     cubicDeterminantFactorizationDerived : Bool
     cubicDeterminantFactorizationDerivedIsTrue :
       cubicDeterminantFactorizationDerived ≡ true
+    doubleRadiusSignalCoefficientDerived : Bool
+    doubleRadiusSignalCoefficientDerivedIsTrue :
+      doubleRadiusSignalCoefficientDerived ≡ true
     linearLinearCancellationDerived : Bool
     linearLinearCancellationDerivedIsTrue :
       linearLinearCancellationDerived ≡ true
@@ -123,4 +118,4 @@ record OddTaylorDeterminantBoundary : Set where
 canonicalOddTaylorDeterminantBoundary : OddTaylorDeterminantBoundary
 canonicalOddTaylorDeterminantBoundary =
   oddTaylorDeterminantBoundary
-    true refl true refl true refl false refl false refl
+    true refl true refl true refl true refl false refl false refl
