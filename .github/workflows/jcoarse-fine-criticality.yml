@@ -8,6 +8,7 @@ on:
       - 'DASHI/Core/CoarseFineDepthDecompositionExact.agda'
       - 'DASHI/Core/FiniteBranchingCriticalityExact.agda'
       - 'DASHI/Core/FiniteTypedBranchingKernelExact.agda'
+      - 'DASHI/Core/FiniteTypedBranchingReachabilityBridgeExact.agda'
       - 'DASHI/Core/LogisticFoldCriticalityExact.agda'
       - 'DASHI/Core/NumberRoleProvenanceAtlasExact.agda'
       - 'DASHI/Core/IntersectionalNonFactorability.agda'
@@ -63,6 +64,7 @@ jobs:
             DASHI/Core/CoarseFineDepthDecompositionExact.agda
             DASHI/Core/FiniteBranchingCriticalityExact.agda
             DASHI/Core/FiniteTypedBranchingKernelExact.agda
+            DASHI/Core/FiniteTypedBranchingReachabilityBridgeExact.agda
             DASHI/Core/LogisticFoldCriticalityExact.agda
             DASHI/Core/NumberRoleProvenanceAtlasExact.agda
             DASHI/Core/IntersectionalConstraintGeometryExact.agda
@@ -104,6 +106,7 @@ jobs:
               DASHI/Core/CoarseFineDepthDecompositionExact.agda
               DASHI/Core/FiniteBranchingCriticalityExact.agda
               DASHI/Core/FiniteTypedBranchingKernelExact.agda
+              DASHI/Core/FiniteTypedBranchingReachabilityBridgeExact.agda
               DASHI/Core/LogisticFoldCriticalityExact.agda
               DASHI/Core/IntersectionalNonFactorability.agda
               DASHI/Core/IntersectionalConstraintGeometryExact.agda
