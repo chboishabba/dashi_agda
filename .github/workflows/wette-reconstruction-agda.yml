@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - 'DASHI/Core/FormalClaimTransportGeometryExact.agda'
+      - 'DASHI/Core/FormalizationRecoverySourceRegistryExact.agda'
+      - 'DASHI/Core/FormalizationRecoveryGeometryExact.agda'
+      - 'DASHI/Core/SourceAcquisitionGeometryExact.agda'
       - 'DASHI/Core/Everything.agda'
       - 'DASHI/Foundations/Wette*.agda'
       - 'DASHI/Foundations/Wette/**'
