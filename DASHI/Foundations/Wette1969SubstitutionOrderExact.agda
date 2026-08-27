@@ -9,28 +9,12 @@ module DASHI.Foundations.Wette1969SubstitutionOrderExact where
 -- DOI: 10.1007/978-3-642-86745-3_9
 --
 -- Primary source locus: printed p.155, section 1.632.
---
--- Wette explicitly contrasts two situations:
---   * in premises 24 and 25 of 9.1.5 the substitution order is irrelevant,
---     under the stated variable/freeness conditions;
---   * in premise 4 of 9.3.24/25 the order matters: first replace the old
---     variable tuple by the new tuple in the definiens, then replace the
---     predicate mark by the recursively defined predicate.  Reversing that
---     order can also replace variables free in the surrounding data.
---
--- This module transcribes that source-level order requirement.  It does not
--- claim an extensional non-commutation theorem for a yet-unreconstructed
--- historical substitution evaluator.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
 import DASHI.Core.OrderedSubstitutionGeometryExact as Order
 import DASHI.Foundations.Wette1969RuleRevisionExact as Revision
-
-------------------------------------------------------------------------
--- The two operations named by Wette's explanation of premise 4 in 9.3.24/25.
-------------------------------------------------------------------------
 
 data CriticalSubstitutionOperation : Set where
   replaceVariableTuple : CriticalSubstitutionOperation
@@ -44,16 +28,7 @@ rule9324x25RequiredPlan =
 
 rule9324x25OrderAssignment : Order.SourceOrderAssignment CriticalSubstitutionOperation
 rule9324x25OrderAssignment =
-  Order.sourceOrderAssignment
-    rule9324x25RequiredPlan
-    Order.orderRequired
-
-------------------------------------------------------------------------
--- The contrast inside 9.1.5 is source-significant.  Wette says premises 24
--- and 25 are order-independent because the substituted and substituting
--- variable tuples consist of distinct variables and the predicate substitutes
--- contain no anonymously free variables.
-------------------------------------------------------------------------
+  Order.sourceOrderAssignment rule9324x25RequiredPlan Order.orderRequired
 
 data Rule915SubstitutionOperation : Set where
   replace915VariableTuple : Rule915SubstitutionOperation
@@ -61,9 +36,7 @@ data Rule915SubstitutionOperation : Set where
 
 rule915Premises24x25Plan : Order.OrderedOperationPlan Rule915SubstitutionOperation
 rule915Premises24x25Plan =
-  Order.orderedOperationPlan
-    replace915VariableTuple
-    replace915PredicateParameter
+  Order.orderedOperationPlan replace915VariableTuple replace915PredicateParameter
 
 rule915Premises24x25OrderAssignment :
   Order.SourceOrderAssignment Rule915SubstitutionOperation
@@ -72,30 +45,24 @@ rule915Premises24x25OrderAssignment =
     rule915Premises24x25Plan
     Order.orderIndependentUnderConditions
 
-------------------------------------------------------------------------
--- Source locations are attached explicitly so this object can later connect
--- to the exact formula-body transcription without changing its evidence role.
-------------------------------------------------------------------------
-
-record SubstitutionOrderSourceReceipt : Set where
-  constructor substitutionOrderSourceReceipt
+-- The contrast itself is an exact source-level fact: the same calculus uses
+-- both a conditionally order-independent substitution pair (9.1.5 premises
+-- 24/25) and an order-sensitive pair (9.3.24/25 premise 4).
+record SourceOrderContrast : Set where
+  constructor sourceOrderContrast
   field
-    recursiveApplicationRuleLeft : Revision.HistoricalRuleAddress
-    recursiveApplicationRuleRight : Revision.HistoricalRuleAddress
-    orderedPremiseNumber : Nat
-    orderIndependentRule : Revision.HistoricalRuleAddress
-    orderIndependentPremiseLeft : Nat
-    orderIndependentPremiseRight : Nat
+    conditionallyIndependentRule : Revision.HistoricalRuleAddress
+    conditionallyIndependentPremiseLeft : Nat
+    conditionallyIndependentPremiseRight : Nat
+    orderedRuleLeft : Revision.HistoricalRuleAddress
+    orderedRuleRight : Revision.HistoricalRuleAddress
+    orderedPremise : Nat
 
-canonicalSubstitutionOrderSourceReceipt : SubstitutionOrderSourceReceipt
-canonicalSubstitutionOrderSourceReceipt =
-  substitutionOrderSourceReceipt
-    Revision.rule9-3-24
-    Revision.rule9-3-25
-    4
-    Revision.rule9-1-5
-    24
-    25
+canonicalSourceOrderContrast : SourceOrderContrast
+canonicalSourceOrderContrast =
+  sourceOrderContrast
+    Revision.rule9-1-5 24 25
+    Revision.rule9-3-24 Revision.rule9-3-25 4
 
 record Wette1969SubstitutionOrderBoundary : Set where
   constructor wette1969SubstitutionOrderBoundary
