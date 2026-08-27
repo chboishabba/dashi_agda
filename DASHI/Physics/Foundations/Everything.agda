@@ -34,6 +34,12 @@ import DASHI.Physics.Foundations.StationaryCoherenceClassificationExact
 import DASHI.Physics.Foundations.ContextConditionedTrajectoryWeightExact
 import DASHI.Physics.Foundations.WavelengthSourceScaleSelectionExact
 import DASHI.Physics.Foundations.PathIntegralExperimentalSourceRegistryExact
+
+-- Generic downstream consumers of history/projection information.  These live
+-- in Core because their non-descent laws are not physics-specific.
+import DASHI.Core.HistoryConditionedChoiceExact
+import DASHI.Core.RelationalTensionCompressionExact
+
 import DASHI.Physics.Foundations.FormalReceiptBoundaryExact
 import DASHI.Physics.Foundations.FiniteResidueCycleReachabilityExact
 import DASHI.Physics.Foundations.FiniteWeightedTernaryKernelExact
