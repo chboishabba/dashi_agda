@@ -10,6 +10,8 @@ on:
       - 'DASHI/Core/PoliticalContestabilityExact.agda'
       - 'DASHI/Core/CategoryAuthorityAuditExact.agda'
       - 'DASHI/Core/MultiaxialResidualBundleExact.agda'
+      - 'DASHI/Core/RecognitionConstitutionNonfactorabilityExact.agda'
+      - 'DASHI/Core/SituatedClaimAuthoritySystemExact.agda'
       - 'DASHI/Core/Everything.agda'
       - 'DASHI/Governance/SafeJustSourceRegistryExact.agda'
       - 'DASHI/Governance/SafeJustIndicatorSystemExact.agda'
@@ -36,6 +38,7 @@ on:
       - 'DASHI/Governance/FeministClimateJusticeSourceRegistryExact.agda'
       - 'DASHI/Governance/WaringProductionBoundaryNonfactorabilityExact.agda'
       - 'DASHI/Governance/FeministSocialProvisioningInterpretationExact.agda'
+      - 'DASHI/Governance/MacGregorMeasurableImpactObserverBoundaryExact.agda'
       - 'DASHI/Governance/MacGregorPostPoliticalAuthorityBoundaryExact.agda'
       - 'DASHI/Governance/SultanaClimateColonialityResidualExact.agda'
       - 'DASHI/Governance/PacificWomenNegotiationContributionNonDescentExact.agda'
@@ -46,7 +49,14 @@ on:
       - 'DASHI/Governance/FeministClimateQualifiedPromotionExact.agda'
       - 'DASHI/Governance/FeministClimateJusticeSafeJustCapstoneExact.agda'
       - 'DASHI/Governance/FeministClimateJusticeSafeJustRegression.agda'
+      - 'DASHI/Governance/IndigenousAuthoritySourceRegistryExact.agda'
+      - 'DASHI/Governance/IndigenousAuthorityEnvelopeExact.agda'
       - 'DASHI/Governance/FirstNationsOwnedEvidenceContractExact.agda'
+      - 'DASHI/Governance/SmithResearchAgendaAuthorityBoundaryExact.agda'
+      - 'DASHI/Governance/MoretonRobinsonRecognitionSovereigntyBoundaryExact.agda'
+      - 'DASHI/Governance/WhyteKinshipTemporalityBoundaryExact.agda'
+      - 'DASHI/Governance/FeministRecognitionAuthorityCrossPollinationExact.agda'
+      - 'DASHI/Governance/SituatedIndigenousFeministAuthorityRegression.agda'
       - 'DASHI/Governance/SafeJustQualifiedClaimPromotionExact.agda'
       - 'DASHI/Governance/SafeJustSocialIndicatorJusticeBoundaryExact.agda'
       - 'DASHI/Governance/SafeJustConsumerAdequacyResidualBridgeExact.agda'
@@ -88,6 +98,8 @@ jobs:
             DASHI/Core/PoliticalContestabilityExact.agda
             DASHI/Core/CategoryAuthorityAuditExact.agda
             DASHI/Core/MultiaxialResidualBundleExact.agda
+            DASHI/Core/RecognitionConstitutionNonfactorabilityExact.agda
+            DASHI/Core/SituatedClaimAuthoritySystemExact.agda
             DASHI/Governance/SafeJustSourceRegistryExact.agda
             DASHI/Governance/SafeJustIndicatorSystemExact.agda
             DASHI/Governance/PlanetaryBoundaryAllocationExact.agda
@@ -113,6 +125,7 @@ jobs:
             DASHI/Governance/FeministClimateJusticeSourceRegistryExact.agda
             DASHI/Governance/WaringProductionBoundaryNonfactorabilityExact.agda
             DASHI/Governance/FeministSocialProvisioningInterpretationExact.agda
+            DASHI/Governance/MacGregorMeasurableImpactObserverBoundaryExact.agda
             DASHI/Governance/MacGregorPostPoliticalAuthorityBoundaryExact.agda
             DASHI/Governance/SultanaClimateColonialityResidualExact.agda
             DASHI/Governance/PacificWomenNegotiationContributionNonDescentExact.agda
@@ -123,7 +136,14 @@ jobs:
             DASHI/Governance/FeministClimateQualifiedPromotionExact.agda
             DASHI/Governance/FeministClimateJusticeSafeJustCapstoneExact.agda
             DASHI/Governance/FeministClimateJusticeSafeJustRegression.agda
+            DASHI/Governance/IndigenousAuthoritySourceRegistryExact.agda
+            DASHI/Governance/IndigenousAuthorityEnvelopeExact.agda
             DASHI/Governance/FirstNationsOwnedEvidenceContractExact.agda
+            DASHI/Governance/SmithResearchAgendaAuthorityBoundaryExact.agda
+            DASHI/Governance/MoretonRobinsonRecognitionSovereigntyBoundaryExact.agda
+            DASHI/Governance/WhyteKinshipTemporalityBoundaryExact.agda
+            DASHI/Governance/FeministRecognitionAuthorityCrossPollinationExact.agda
+            DASHI/Governance/SituatedIndigenousFeministAuthorityRegression.agda
             DASHI/Governance/SafeJustQualifiedClaimPromotionExact.agda
             DASHI/Governance/SafeJustSocialIndicatorJusticeBoundaryExact.agda
             DASHI/Governance/SafeJustConsumerAdequacyResidualBridgeExact.agda
@@ -148,27 +168,18 @@ jobs:
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-safe-just-provisioning-check.log"
             export AGDA_JOBS=2
             targets=(
-              DASHI/Core/MeasurementBoundaryNonfactorabilityExact.agda
-              DASHI/Core/ResponsibilityBurdenNonfactorabilityExact.agda
-              DASHI/Core/PoliticalContestabilityExact.agda
-              DASHI/Core/CategoryAuthorityAuditExact.agda
-              DASHI/Core/MultiaxialResidualBundleExact.agda
-              DASHI/Governance/WaringProductionBoundaryNonfactorabilityExact.agda
-              DASHI/Governance/FeministSocialProvisioningInterpretationExact.agda
-              DASHI/Governance/MacGregorPostPoliticalAuthorityBoundaryExact.agda
-              DASHI/Governance/SultanaClimateColonialityResidualExact.agda
-              DASHI/Governance/PacificWomenNegotiationContributionNonDescentExact.agda
-              DASHI/Governance/VanuatuGenderedRecoveryObserverBoundaryExact.agda
-              DASHI/Governance/YusoffGeologicCategoryAuthorityBoundaryExact.agda
-              DASHI/Governance/MaathaiSituatedProvisioningAuthorityExact.agda
-              DASHI/Governance/FeministClimateJusticeResidualBundleExact.agda
-              DASHI/Governance/FeministClimateQualifiedPromotionExact.agda
-              DASHI/Governance/FeministClimateJusticeSafeJustCapstoneExact.agda
-              DASHI/Governance/FeministClimateJusticeSafeJustRegression.agda
-              DASHI/Governance/Kallis2025ClaimByClaimEvidenceRealizationExact.agda
-              DASHI/Governance/Kallis2025ClaimEvidenceRegression.agda
+              DASHI/Core/RecognitionConstitutionNonfactorabilityExact.agda
+              DASHI/Core/SituatedClaimAuthoritySystemExact.agda
+              DASHI/Governance/IndigenousAuthoritySourceRegistryExact.agda
+              DASHI/Governance/IndigenousAuthorityEnvelopeExact.agda
               DASHI/Governance/FirstNationsOwnedEvidenceContractExact.agda
-              DASHI/Governance/SafeJustFeministClimateJusticeRegression.agda
+              DASHI/Governance/SmithResearchAgendaAuthorityBoundaryExact.agda
+              DASHI/Governance/MoretonRobinsonRecognitionSovereigntyBoundaryExact.agda
+              DASHI/Governance/WhyteKinshipTemporalityBoundaryExact.agda
+              DASHI/Governance/FeministRecognitionAuthorityCrossPollinationExact.agda
+              DASHI/Governance/SituatedIndigenousFeministAuthorityRegression.agda
+              DASHI/Governance/FeministClimateJusticeSafeJustRegression.agda
+              DASHI/Governance/Kallis2025ClaimEvidenceRegression.agda
               DASHI/Governance/Fanning2022MethodsRegression.agda
               DASHI/Governance/Everything.agda
             )
