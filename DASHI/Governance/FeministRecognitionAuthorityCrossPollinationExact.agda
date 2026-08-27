@@ -8,8 +8,16 @@ import DASHI.Core.RecognitionConstitutionNonfactorabilityExact as Recognition
 --
 -- Internal theorem-pattern provenance:
 --   PR #620: IntersectionalNonFactorability, PositiveRecharting and the
---            FeministRechartingSourceBridge; later repo commits add Irigaray
---            labial/relational and Lacan-Irigaray grammar/capstone work.
+--            FeministRechartingSourceBridge.
+--   Recent #620-line commits add:
+--     * IrigarayLabialRelationalCarrierExact -- reciprocal contact, neither-one-
+--       nor-two role boundary, endpoint nonseparability;
+--     * LacanIrigarayTernaryGrammarBridgeExact -- same finite carrier does not
+--       imply same relational grammar, and no enumerated ternary relabelling
+--       identifies the two finite graphs;
+--     * RepresentationSubjectPositionNonfactorabilityExact -- representability,
+--       speech surface and exchange visibility do not recover originating
+--       subject-position/authority.
 --   PR #598: CapabilityRecognitionExact -- capability present != socially
 --            legible != recognized; non-recognition != absence of capability.
 --   PR #603: contested ambient authority / anti-sublation -- recognition or
@@ -40,6 +48,7 @@ data TheoremPattern : Set where
   recognitionConstitutionSeparation
   subjectPositionNonfactorability
   relationalMultiplicity
+  sameCarrierDifferentGrammar
   : TheoremPattern
 
 data SourceRegister : Set where
@@ -56,6 +65,10 @@ record CrossPollinationRole : Set where
 irigarayRechartRole : CrossPollinationRole
 irigarayRechartRole =
   crossPollinationRole irigarayRegister relationalMultiplicity true
+
+irigarayGrammarRole : CrossPollinationRole
+irigarayGrammarRole =
+  crossPollinationRole irigarayRegister sameCarrierDifferentGrammar true
 
 crenshawInteractionRole : CrossPollinationRole
 crenshawInteractionRole =
@@ -74,8 +87,7 @@ whyteHistoryRole =
   crossPollinationRole whyteRegister erasedCoordinateNonfactorability true
 
 ------------------------------------------------------------------------
--- Common finite theorem shape: a visible/recognized code can collide while a
--- situated coordinate differs.  Domain adapters choose the interpretation.
+-- Common recognition theorem shape.
 ------------------------------------------------------------------------
 
 data SituatedState : Set where leftState rightState : SituatedState
@@ -101,6 +113,32 @@ visibleSurfaceDoesNotExhaustSituatedCoordinate :
 visibleSurfaceDoesNotExhaustSituatedCoordinate =
   Recognition.collisionBlocksAuthorityFactorization commonCollision
 
+------------------------------------------------------------------------
+-- Same carrier != same relational grammar.
+-- This is a small source-neutral shadow of the stronger exhaustive finite
+-- relabelling obstruction already implemented on the #620 lineage.
+------------------------------------------------------------------------
+
+data SharedCode : Set where code0 code1 code2 : SharedCode
+
+oneCentredEdge : SharedCode → SharedCode → Bool
+oneCentredEdge code1 code0 = true
+oneCentredEdge code1 code2 = true
+oneCentredEdge _ _ = false
+
+reciprocalEdge : SharedCode → SharedCode → Bool
+reciprocalEdge code1 code2 = true
+reciprocalEdge code2 code1 = true
+reciprocalEdge _ _ = false
+
+sameCarrierIdentityChartDoesNotPreserveGrammar :
+  ((left right : SharedCode) → oneCentredEdge left right ≡ reciprocalEdge left right) → ⊥
+sameCarrierIdentityChartDoesNotPreserveGrammar preservation =
+  trueNotFalse (preservation code1 code0)
+  where
+  trueNotFalse : true ≡ false → ⊥
+  trueNotFalse ()
+
 record FeministRecognitionCrossPollinationBoundary : Set where
   constructor feministRecognitionCrossPollinationBoundary
   field
@@ -110,6 +148,9 @@ record FeministRecognitionCrossPollinationBoundary : Set where
     symbolicRelabelingRepairsErasedCoordinate : Bool
     symbolicRelabelingRepairsErasedCoordinateIsFalse :
       symbolicRelabelingRepairsErasedCoordinate ≡ false
+    sameCarrierImpliesSameRelationalGrammar : Bool
+    sameCarrierImpliesSameRelationalGrammarIsFalse :
+      sameCarrierImpliesSameRelationalGrammar ≡ false
     recognitionCreatesCapabilityOrAuthority : Bool
     recognitionCreatesCapabilityOrAuthorityIsFalse :
       recognitionCreatesCapabilityOrAuthority ≡ false
@@ -123,4 +164,5 @@ record FeministRecognitionCrossPollinationBoundary : Set where
 canonicalFeministRecognitionCrossPollinationBoundary :
   FeministRecognitionCrossPollinationBoundary
 canonicalFeministRecognitionCrossPollinationBoundary =
-  feministRecognitionCrossPollinationBoundary false refl false refl false refl false refl false refl
+  feministRecognitionCrossPollinationBoundary
+    false refl false refl false refl false refl false refl false refl
