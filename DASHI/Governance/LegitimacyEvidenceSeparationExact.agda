@@ -4,9 +4,9 @@ module DASHI.Governance.LegitimacyEvidenceSeparationExact where
 -- LEGITIMACY EVIDENCE SEPARATION
 --
 -- SOURCE CALIBRATION
--- David Beetham, The Legitimation of Power, Macmillan, 1991;
--- 2nd ed. Palgrave Macmillan, 2013. ISBN 9780230279337.
--- No DOI asserted for the book.
+-- David Beetham, The Legitimation of Power, Macmillan, 1991.
+-- DOI 10.1007/978-1-349-21599-7.
+-- Second edition: Bloomsbury Academic, 2013, ISBN 9780230279728.
 --
 -- Beetham motivates distinct rule-conformity, justificatory-belief and consent
 -- dimensions of legitimacy. The records/countermodels below are DASHI
