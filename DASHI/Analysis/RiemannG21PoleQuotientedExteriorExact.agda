@@ -9,6 +9,7 @@ import DASHI.Analysis.PoleQuotientedExteriorDeskTestExact as RankOneExterior
 import DASHI.Analysis.PoleRankTwoQuotientedExteriorDeskTestExact as RankTwoExterior
 import DASHI.Analysis.RiemannG21LiteralPoleRankAuditExact as PoleAudit
 import DASHI.Analysis.RiemannG21PoleMainModeSeparationExact as MainMode
+import DASHI.Analysis.RiemannG21ConjugateHeightSourceBridgeExact as Heights
 import DASHI.Analysis.RiemannG21OffLinePoleQuotientTransversalityExact as ZeroTrans
 import DASHI.Analysis.RiemannWeilOffLineHyperbolicBlockExact as Hyperbolic
 import DASHI.Analysis.RiemannG21PrimePairKernelExact as Pair
@@ -21,6 +22,8 @@ data G21Obligation : Set where
   optionalRankOnePoleReduction : G21Obligation
   rankTwoFourSamplePoleQuotientIdentity : G21Obligation
   sourceOffLineHyperbolicPair : G21Obligation
+  conjugateHeightSourceGeometry : G21Obligation
+  twoHeightTaperTransversality : G21Obligation
   offLinePoleQuotientTransversality : G21Obligation
   literalTwoChannelExplicitFormulaExpansion : G21Obligation
   literalPrimePairDiagonalZero : G21Obligation
@@ -69,10 +72,20 @@ sourceHyperbolicEntry =
   g21ObligationEntry sourceOffLineHyperbolicPair structurallyDerived
     "PR #604 already owns the source-native off-line reflection pair as a two-direction hyperbolic block with one positive and one negative direction."
 
+heightGeometryEntry : G21ObligationEntry
+heightGeometryEntry =
+  g21ObligationEntry conjugateHeightSourceGeometry sourceAudited
+    "The companion taper family has h_fk(z)=phiHat(z-tau_k), and its real-even Fourier theorem makes evaluations at conjugate imaginary heights conjugate response vectors. Pole and off-line reflection pairs therefore share one conjugate-height response grammar."
+
+twoHeightEntry : G21ObligationEntry
+twoHeightEntry =
+  g21ObligationEntry twoHeightTaperTransversality analyticInterfaceOpen
+    "Prove the actual taper response pair at off-line height alpha is exterior-transverse to the nuisance conjugate pair at pole height 1/2. Existing alpha-vs-zero cosh coercivity does not imply this alpha-vs-half determinant theorem."
+
 zeroTransversalityEntry : G21ObligationEntry
 zeroTransversalityEntry =
   g21ObligationEntry offLinePoleQuotientTransversality analyticInterfaceOpen
-    "The new zero-side theorem is not source signature (1,1) but transversality: the two off-line response directions must remain independent modulo the full nuisance pole/main-mode span. The four-vector exterior criterion is now explicit and executable."
+    "Lift two-height taper nondegeneracy into the selected four-sample observer: the two off-line response directions must remain independent modulo the full nuisance pole/main-mode span."
 
 explicitFormulaEntry : G21ObligationEntry
 explicitFormulaEntry =
@@ -102,9 +115,9 @@ scaleEntry =
 canonicalG21Obligations : List G21ObligationEntry
 canonicalG21Obligations =
   poleAuditEntry ∷ mainModeTransportEntry ∷ rankOneReductionEntry
-  ∷ rankTwoQuotientEntry ∷ sourceHyperbolicEntry ∷ zeroTransversalityEntry
-  ∷ explicitFormulaEntry ∷ diagonalZeroEntry ∷ nonseparableEntry
-  ∷ swapEntry ∷ scaleEntry ∷ []
+  ∷ rankTwoQuotientEntry ∷ sourceHyperbolicEntry ∷ heightGeometryEntry
+  ∷ twoHeightEntry ∷ zeroTransversalityEntry ∷ explicitFormulaEntry
+  ∷ diagonalZeroEntry ∷ nonseparableEntry ∷ swapEntry ∷ scaleEntry ∷ []
 
 optimizedThreeSampleResidualDimension :
   PoleAudit.residualDimension PoleAudit.rankOneThreeSampleCase ≡ 2
@@ -121,14 +134,17 @@ robustFourSampleResidualDimension =
   PoleAudit.fourSamplesSupportTwoResidualDimensionsWithoutRankOneReduction
 
 sourceOffLinePairHasPositiveDirection :
-  Hyperbolic.positiveIndexBeforePullback
-    ZeroTrans.canonicalSourceHyperbolicPair ≡ 1
+  Hyperbolic.positiveIndexBeforePullback ZeroTrans.canonicalSourceHyperbolicPair ≡ 1
 sourceOffLinePairHasPositiveDirection = ZeroTrans.sourceHasPositiveDirection
 
 sourceOffLinePairHasNegativeDirection :
-  Hyperbolic.negativeIndexBeforePullback
-    ZeroTrans.canonicalSourceHyperbolicPair ≡ 1
+  Hyperbolic.negativeIndexBeforePullback ZeroTrans.canonicalSourceHyperbolicPair ≡ 1
 sourceOffLinePairHasNegativeDirection = ZeroTrans.sourceHasNegativeDirection
+
+conjugateHeightSymmetryDoesNotForceSeparation :
+  Heights.responseAtHeight Heights.canonicalCollapsedConjugateFamily Heights.lowHeight
+  ≡ Heights.responseAtHeight Heights.canonicalCollapsedConjugateFamily Heights.highHeight
+conjugateHeightSymmetryDoesNotForceSeparation = Heights.collapsedHeightResponsesEqual
 
 zeroTransversalityCriterionIsNonVacuous : ZeroTrans.OffLinePoleQuotientTransversality
 zeroTransversalityCriterionIsNonVacuous = ZeroTrans.canonicalToyTransversality
@@ -166,6 +182,10 @@ record G21CurrentBoundary : Set where
     robustRankTwoFourSampleCarrierConstructedIsTrue : robustRankTwoFourSampleCarrierConstructed ≡ true
     sourceOffLineHyperbolicPairOwned : Bool
     sourceOffLineHyperbolicPairOwnedIsTrue : sourceOffLineHyperbolicPairOwned ≡ true
+    conjugateHeightGeometrySourceAudited : Bool
+    conjugateHeightGeometrySourceAuditedIsTrue : conjugateHeightGeometrySourceAudited ≡ true
+    twoHeightTaperTransversalityDerived : Bool
+    twoHeightTaperTransversalityDerivedIsFalse : twoHeightTaperTransversalityDerived ≡ false
     literalPoleQuotientTransversalityDerived : Bool
     literalPoleQuotientTransversalityDerivedIsFalse : literalPoleQuotientTransversalityDerived ≡ false
     literalPrimePairKernelDerived : Bool
@@ -183,6 +203,8 @@ canonicalG21CurrentBoundary =
     false refl
     true refl
     true refl
+    true refl
+    false refl
     false refl
     false refl
     false refl
