@@ -16,6 +16,7 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.LacanIrigarayTernaryGrammarBridgeExact as LacanIrigaray
 import DASHI.Core.LacanS2RoleSeparationExact as LacanS2
 import DASHI.Core.CriticalThirdnessRoleGrammarExact as Thirdness
+import DASHI.Core.CriticalGrammarRelabellingBoundaryExact as Relabel
 import DASHI.Core.IrigarayLabialRelationalCarrierExact as Irigaray
 import DASHI.Core.LugonesPurityCurdlingNonfactorabilityExact as Lugones
 import DASHI.Core.BadiouVoidCountAsOneBoundaryExact as Badiou
@@ -52,7 +53,7 @@ badiouVoid≠observerZero : badiouVoidRole ≡ coarseObserverZeroRole → ⊥
 badiouVoid≠observerZero ()
 
 ------------------------------------------------------------------------
--- The strongest same-carrier grammar separations are kept live.
+-- Carrier/grammar/semantics form three distinct comparison levels.
 ------------------------------------------------------------------------
 
 lacanIrigarayNotRelatedByTernaryRelabelling :
@@ -66,6 +67,20 @@ anzalduaAndBhabhaSameCarrierDifferentGrammar :
     Thirdness.anzalduaPluralEdge Thirdness.bhabhaGenerativeEdge
 anzalduaAndBhabhaSameCarrierDifferentGrammar =
   Thirdness.anzaldua≠bhabhaGrammar
+
+anzalduaBhabhaNotRelatedByTernaryRelabelling :
+  (permutation : Ternary.TernaryPermutation) →
+  Relabel.AnzalduaBhabhaPreserving permutation → ⊥
+anzalduaBhabhaNotRelatedByTernaryRelabelling =
+  Relabel.noAnzalduaBhabhaTernaryRelabelling
+
+lacanBhabhaGraphsRelabelExactly :
+  (left right : Ternary.TernaryRoleCode) →
+  DASHI.Core.LacanFregeTernaryRoleChartExact.lacanOneCentredEdge left right
+  ≡ Thirdness.bhabhaGenerativeEdge
+      (Ternary.permute Ternary.swap01Permutation left)
+      (Ternary.permute Ternary.swap01Permutation right)
+lacanBhabhaGraphsRelabelExactly = Relabel.lacanBhabhaSwap01
 
 ------------------------------------------------------------------------
 -- Non-ternary theorem surfaces remain non-ternary.
@@ -110,6 +125,9 @@ record CriticalRelationalGrammarBoundary : Set where
     hierarchyFollowsNumericCarrierOrder : Bool
     hierarchyFollowsNumericCarrierOrderIsFalse :
       hierarchyFollowsNumericCarrierOrder ≡ false
+    graphIsomorphismImpliesSemanticIdentity : Bool
+    graphIsomorphismImpliesSemanticIdentityIsFalse :
+      graphIsomorphismImpliesSemanticIdentity ≡ false
     socialObserverApprovalEqualsMaterialAffordance : Bool
     socialObserverApprovalEqualsMaterialAffordanceIsFalse :
       socialObserverApprovalEqualsMaterialAffordance ≡ false
@@ -120,4 +138,4 @@ record CriticalRelationalGrammarBoundary : Set where
 canonicalCriticalRelationalGrammarBoundary : CriticalRelationalGrammarBoundary
 canonicalCriticalRelationalGrammarBoundary =
   critical-relational-grammar-boundary
-    false refl false refl false refl false refl false refl false refl false refl
+    false refl false refl false refl false refl false refl false refl false refl false refl
