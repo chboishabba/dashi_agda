@@ -71,6 +71,8 @@ import DASHI.Governance.SafeJustForecastConsumerAdequacyExact
 import DASHI.Governance.SafeJustEpistemicResidualLedgerExact
 import DASHI.Governance.Kallis2025ClaimAuthorityRoutingExact
 import DASHI.Governance.Kallis2025EvidenceAtlasExact
+import DASHI.Governance.Kallis2025ClaimByClaimEvidenceRealizationExact
+import DASHI.Governance.Kallis2025ClaimEvidenceRegression
 import DASHI.Governance.SafeJustFeministClimateJusticeBoundaryExact
 import DASHI.Governance.SafeJustFeministClimateJusticeRegression
 import DASHI.Governance.SafeJustQualifiedClaimPromotionExact
@@ -97,6 +99,11 @@ import DASHI.Governance.FeministClimateJusticeResidualBundleExact
 import DASHI.Governance.FeministClimateQualifiedPromotionExact
 import DASHI.Governance.FeministClimateJusticeSafeJustCapstoneExact
 import DASHI.Governance.FeministClimateJusticeSafeJustRegression
+
+-- First Nations evidence-authority discipline.  This owner contains no
+-- substantive cultural claim; it only blocks external reconstruction from
+-- silently becoming First Nations situated-knowledge or land-authority evidence.
+import DASHI.Governance.FirstNationsOwnedEvidenceContractExact
 
 -- Provenance-bearing policy routing, corrective reachability and source-bounded
 -- application surfaces assembled as one focused tranche.
