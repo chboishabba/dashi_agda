@@ -18,6 +18,7 @@ sources=(
   DASHI/Analysis/RiemannG21SymmetricSampleBlockReductionExact.agda
   DASHI/Analysis/RiemannG21HyperbolicWeightMonotonicityTargetExact.agda
   DASHI/Analysis/RiemannG21ScaledHyperbolicMonotonicityBridgeExact.agda
+  DASHI/Analysis/RiemannG21MathlibHyperbolicReceiptBoundary.agda
   DASHI/Analysis/RiemannG21TwoHeightMomentRatioTargetExact.agda
   DASHI/Analysis/RiemannG21TwoPointCovarianceShadowExact.agda
   DASHI/Analysis/RiemannG21ParityMinorAnalyticFrontierExact.agda
@@ -62,12 +63,17 @@ require_pattern DASHI/Analysis/RiemannG21HyperbolicWeightMonotonicityTargetExact
 require_pattern DASHI/Analysis/RiemannG21ScaledHyperbolicMonotonicityBridgeExact.agda 'scaledTanhStrictlyIncreasing'
 require_pattern DASHI/Analysis/RiemannG21ScaledHyperbolicMonotonicityBridgeExact.agda 'scaledCothStrictlyIncreasing'
 require_pattern DASHI/Analysis/RiemannG21ScaledHyperbolicMonotonicityBridgeExact.agda 'sinhCoshDominatesIdentity'
+require_pattern DASHI/Analysis/RiemannG21MathlibHyperbolicReceiptBoundary.agda 'Real.self_lt_sinh_iff'
+require_pattern DASHI/Analysis/RiemannG21MathlibHyperbolicReceiptBoundary.agda 'Real.tanh_eq_sinh_div_cosh'
+require_pattern DASHI/Analysis/RiemannG21MathlibHyperbolicReceiptBoundary.agda 'leanProofTermImportedIntoAgdaIsFalse'
 require_pattern DASHI/Analysis/RiemannG21TwoHeightMomentRatioTargetExact.agda 'ActualTaperMomentRatioProducer'
 require_pattern DASHI/Analysis/RiemannG21TwoPointCovarianceShadowExact.agda 'twoPointMomentCrossProductDecomposition'
 require_pattern DASHI/Analysis/RiemannG21ParityMinorAnalyticFrontierExact.agda 'scaledXTanhXMonotonicity'
 require_pattern DASHI/Analysis/RiemannG21ParityMinorAnalyticFrontierExact.agda 'scaledXCothXMonotonicity'
 require_pattern DASHI/Analysis/RiemannG21ParityMinorAnalyticFrontierExact.agda 'taylorRemainderToFiniteRadiusMinors'
 require_pattern DASHI/Analysis/RiemannG21ContextualAlternativeNonpromotionExact.agda '10.1038/s41467-026-69034-7'
+require_pattern DASHI/Analysis/RiemannG21ContextualAlternativeNonpromotionExact.agda 'canonicalThreeSourceContextualWitness'
+require_pattern DASHI/Analysis/RiemannG21ContextualAlternativeNonpromotionExact.agda 'naiveNarrativesDiffer'
 require_pattern DASHI/Analysis/RiemannG21ContextualAlternativeNonpromotionExact.agda 'zeroGroupedAmplitudeImpliesNoUnderlyingContributionIsFalse'
 require_pattern DASHI/Analysis/RiemannG21ContextualAlternativeNonpromotionExact.agda 'paperProvesRiemannHypothesisIsFalse'
 require_pattern DASHI/Analysis/RiemannG21OffLinePoleQuotientTransversalityExact.agda 'OffLinePoleQuotientTransversality'
@@ -81,4 +87,5 @@ require_pattern DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda 'riema
 DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh \
   DASHI/Analysis/RiemannG21Regression.agda \
   DASHI/Analysis/RiemannG21ParityMinorAnalyticFrontierExact.agda \
+  DASHI/Analysis/RiemannG21MathlibHyperbolicReceiptBoundary.agda \
   DASHI/Analysis/RiemannG21ContextualAlternativeNonpromotionExact.agda
