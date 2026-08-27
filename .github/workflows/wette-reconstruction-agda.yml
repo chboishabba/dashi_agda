@@ -10,6 +10,7 @@ on:
       - 'DASHI/Core/DeductionIndexedInterpretationExact.agda'
       - 'DASHI/Core/FormalSystemRevisionGeometryExact.agda'
       - 'DASHI/Core/RulePremiseDependencyGeometryExact.agda'
+      - 'DASHI/Core/OrderedSubstitutionGeometryExact.agda'
       - 'DASHI/Core/Everything.agda'
       - 'DASHI/Foundations/Wette*.agda'
       - 'DASHI/Foundations/Wette/**'
@@ -17,6 +18,7 @@ on:
       - 'scripts/check_wette_reconstruction.sh'
       - 'scripts/check_wette_source_acquisition.sh'
       - 'scripts/check_wette_critical_rules.sh'
+      - 'scripts/check_wette_substitution_order.sh'
       - '.github/workflows/wette-reconstruction-agda.yml'
   workflow_dispatch:
 
@@ -43,4 +45,5 @@ jobs:
         run: |
           nix develop .# --command bash scripts/check_wette_source_acquisition.sh
           nix develop .# --command bash scripts/check_wette_critical_rules.sh
+          nix develop .# --command bash scripts/check_wette_substitution_order.sh
           nix develop .# --command bash scripts/check_wette_reconstruction.sh
