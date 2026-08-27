@@ -52,6 +52,9 @@ import DASHI.Core.FormalisationAbuseLintExact
 import DASHI.Core.FormalisationCompatibilityExact
 import DASHI.Core.KernelSemanticClosureBoundaryExact
 import DASHI.Core.FormalisationGovernanceSourceRegistryExact
+import DASHI.Core.ConsumerIndexedTranslationRealisationExact
+import DASHI.Core.ResidualObligationPropagationExact
+import DASHI.Core.TranslationRealisationCrossPollinationExact
 import DASHI.Core.DialecticalStageSpectrumExact
 import DASHI.Core.ContextualDialecticRoleExact
 import DASHI.Core.EpistemicSuspensionExact
