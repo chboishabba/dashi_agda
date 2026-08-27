@@ -34,21 +34,25 @@ module DASHI.Physics.Closure.NSTriadKNClayFrontierRound108Exact where
 --   * renaming the interior adverse-production bill as signed forcing is
 --     algebraically equivalent, not a smaller theorem;
 --   * the whole-interval phase normal form removes masks, but its simple
---     quadratic-plus-cubic corrected energy is not globally coercive.
+--     quadratic-plus-cubic corrected energy is not globally coercive;
+--   * the SELF Waleffe phase forcing is already exact signed square-mass
+--     geometry and must not be taxed as opaque external forcing.
 --
 -- Therefore neither `UniformWienerL4Expenditure` nor a direct resonant-shell
 -- Schur absorption theorem is the live arbitrary-data endpoint.
 --
 -- SURVIVING NONLINEAR DISCOVERY WALL
 --
---   PhysicalLiteralSignedSelfExternalWaleffeForcingMechanism
+--   PhysicalExternalCrossTriadForcingRemainderPayment
 --
--- Substitute the LITERAL Navier--Stokes self/external Waleffe forcing into the
+-- Extract the already-exact self Waleffe square-mass contribution.  Substitute
+-- the remaining genuinely EXTERNAL cross-triad Navier--Stokes forcing into the
 -- signed, gap-weighted phase normal form and prove an independent same-
 -- trajectory cutoff-uniform endpoint / integrable-remainder payment.  The
 -- proof must use actual phase/network/time structure; it cannot be obtained by
 -- taking positive parts, a global Wiener ceiling, direct quartic-to-quadratic
--- absorption, unmasked cancellation alone, or a renamed forcing budget.
+-- absorption, unmasked cancellation alone, taxation of the exact self term,
+-- or a renamed forcing budget.
 --
 -- Once such a theorem produces the Round104 signed-critical family with
 -- positive retained viscosity, the existing compiler yields the uniform
@@ -58,7 +62,7 @@ module DASHI.Physics.Closure.NSTriadKNClayFrontierRound108Exact where
 --
 -- The theorem-sized countdown remains TWO:
 --
---   A. PhysicalLiteralSignedSelfExternalWaleffeForcingMechanism;
+--   A. PhysicalExternalCrossTriadForcingRemainderPayment;
 --   B. PhysicalCriticalSobolevSimonUpgrade.
 --
 -- No Clay promotion is asserted.
@@ -91,16 +95,24 @@ round108PositivePartOfNetworkForcingRequired =
 round108DirectGapWeightedQuarticSchurRequired : Bool
 round108DirectGapWeightedQuarticSchurRequired = false
 
+round108SelfWaleffePhaseProjectedCrossMassClosed : Bool
+round108SelfWaleffePhaseProjectedCrossMassClosed =
+  Audit.round108SelfWaleffePhaseProjectedCrossMassClosed
+
+round108SelfPhaseMayBeTaxedAsArbitraryExternalForcing : Bool
+round108SelfPhaseMayBeTaxedAsArbitraryExternalForcing =
+  Audit.round108SelfPhaseMayBeTaxedAsArbitraryExternalForcing
+
 round108SignedCriticalCompilerReused : Bool
 round108SignedCriticalCompilerReused =
   Critical.round104SignedProductionToUniformBarrierCompilerClosed
 
-round108PhysicalLiteralSignedSelfExternalWaleffeForcingMechanismClosed : Bool
-round108PhysicalLiteralSignedSelfExternalWaleffeForcingMechanismClosed =
-  Audit.round108LiteralSignedSelfExternalForcingMechanismClosed
+round108PhysicalExternalCrossTriadForcingRemainderPaymentClosed : Bool
+round108PhysicalExternalCrossTriadForcingRemainderPaymentClosed =
+  Audit.round108PhysicalExternalCrossTriadForcingRemainderPaymentClosed
 
 -- The Round107 positive-forcing budget remains a valid sufficient route, but
--- is no longer the canonical highest-alpha target after the signed audit.
+-- is no longer the canonical highest-alpha target after the signed/self audit.
 round108PhysicalWeightedPositiveWaleffeNetworkForcingBudgetClosed : Bool
 round108PhysicalWeightedPositiveWaleffeNetworkForcingBudgetClosed =
   R107.round107PhysicalWeightedPositiveWaleffeNetworkForcingBudgetClosed
@@ -136,13 +148,21 @@ round108DirectGapWeightedQuarticSchurRequiredIsFalse :
   round108DirectGapWeightedQuarticSchurRequired ≡ false
 round108DirectGapWeightedQuarticSchurRequiredIsFalse = refl
 
+round108SelfWaleffePhaseProjectedCrossMassClosedIsTrue :
+  round108SelfWaleffePhaseProjectedCrossMassClosed ≡ true
+round108SelfWaleffePhaseProjectedCrossMassClosedIsTrue = refl
+
+round108SelfPhaseMayBeTaxedAsArbitraryExternalForcingIsFalse :
+  round108SelfPhaseMayBeTaxedAsArbitraryExternalForcing ≡ false
+round108SelfPhaseMayBeTaxedAsArbitraryExternalForcingIsFalse = refl
+
 round108SignedCriticalCompilerReusedIsTrue :
   round108SignedCriticalCompilerReused ≡ true
 round108SignedCriticalCompilerReusedIsTrue = refl
 
-round108PhysicalLiteralSignedSelfExternalWaleffeForcingMechanismClosedIsFalse :
-  round108PhysicalLiteralSignedSelfExternalWaleffeForcingMechanismClosed ≡ false
-round108PhysicalLiteralSignedSelfExternalWaleffeForcingMechanismClosedIsFalse = refl
+round108PhysicalExternalCrossTriadForcingRemainderPaymentClosedIsFalse :
+  round108PhysicalExternalCrossTriadForcingRemainderPaymentClosed ≡ false
+round108PhysicalExternalCrossTriadForcingRemainderPaymentClosedIsFalse = refl
 
 round108PhysicalWeightedPositiveWaleffeNetworkForcingBudgetClosedIsFalse :
   round108PhysicalWeightedPositiveWaleffeNetworkForcingBudgetClosed ≡ false
