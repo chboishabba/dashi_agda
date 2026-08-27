@@ -13,18 +13,14 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosBishopUpperMajorantBoundaryE
 -- The finite recurrence is already closed in
 -- PartitionErdosDivisorSumRecurrenceExact.  This owner isolates what remains
 -- to turn that recurrence into an exponential majorant over the concrete
--- Bishop real carrier.
+-- Bishop real carrier supplied by the pinned `vendor/bishop` submodule.
 --
 -- The intended source argument proves
 --
 --   p(n) < exp(c sqrt(n)),  c = pi sqrt(2/3),
 --
 -- by combining the recurrence with a square-root tangent estimate and a
--- weighted geometric/exponential kernel bound.  We do NOT postulate a new real
--- carrier here: order and exp are the existing Bishop objects.  Generic finite
--- Bishop geometric control is also already available in the Step-V lane; the
--- remaining quantitative gap is its degree-one weighted reciprocal-square
--- specialization, together with square root and Basel.
+-- weighted geometric/exponential kernel bound.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -36,6 +32,8 @@ open import Data.Nat.Base using (_≤_)
 import DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact as Hecke
 import DASHI.Foundations.BishopConstructiveRealBridgeExact as Bishop
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
+import DASHI.Foundations.BishopNatSquareRootApproximationExact as SquareRoot
+import DASHI.Foundations.BishopVendoredSubmoduleProvenanceExact as Vendored
 import DASHI.Mathematics.NumberTheory.FiniteDivisorSumExact as Divisor
 import DASHI.Mathematics.NumberTheory.PartitionDivisorSumRegroupingExact as Regroup
 import DASHI.Mathematics.NumberTheory.PartitionErdosDivisorSumRecurrenceExact as Recurrence
@@ -69,8 +67,11 @@ record ErdosBishopUpperMajorantData : Set₁ where
     natEmbedNonnegative : ∀ n →
       Bishop.BishopLessEqual Bishop.bishopZero (natEmbed n)
 
-    -- Missing concrete square-root realization on the Bishop carrier.
-    sqrtNat : Nat → Bishop.Bishopℝ
+    -- Square root is no longer an arbitrary Bishop-valued function.  Each Nat
+    -- radicand must supply a regular rational interval approximation, which is
+    -- realized through the exact vendored `Real.mkℝ` constructor.
+    sqrtApproximation :
+      (n : Nat) → SquareRoot.BishopNatSquareRootApproximation n
 
     -- Positive exponential scale.  A later specialization identifies this
     -- with the Machin-pi realization of pi*sqrt(2/3).
@@ -79,6 +80,11 @@ record ErdosBishopUpperMajorantData : Set₁ where
       Bishop.BishopStrictLess Bishop.bishopZero erdosConstant
 
 open ErdosBishopUpperMajorantData public
+
+sqrtNat : ErdosBishopUpperMajorantData → Nat → Bishop.Bishopℝ
+sqrtNat dataSet n =
+  SquareRoot.bishopNatSquareRootCandidate
+    (sqrtApproximation dataSet n)
 
 exponentialMajorant :
   ErdosBishopUpperMajorantData → Nat → Bishop.Bishopℝ
@@ -172,11 +178,14 @@ finiteGeometricInfrastructureReceipt =
 
 ------------------------------------------------------------------------
 -- Source-route decomposition for the still-missing sharp kernel theorem.
+-- Square-root *realization* now descends to rational approximation existence;
+-- the tangent inequality and sharp kernel estimates remain analytic leaves.
 
 data ErdosKernelProofRole : Set where
-  bishopSquareRootConstruction : ErdosKernelProofRole
+  bishopSquareRootApproximationExistence : ErdosKernelProofRole
   squareRootTangentInequality : ErdosKernelProofRole
   exponentialAdditivityAndMonotonicity : ErdosKernelProofRole
+  degreeOneWeightedGeometricPointwiseDomination : ErdosKernelProofRole
   degreeOneWeightedGeometricReciprocalSquareBound : ErdosKernelProofRole
   baselSumPiSquaredOverSix : ErdosKernelProofRole
   constantPiSqrtTwoThirdsIdentification : ErdosKernelProofRole
