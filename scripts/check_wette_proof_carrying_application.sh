@@ -5,6 +5,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 FILES=(
+  DASHI/Core/TypedDependencyCore.agda
   DASHI/Core/ProofCarryingRuleApplicationExact.agda
   DASHI/Foundations/Wette1969Rule9324x25PremiseTemplateExact.agda
   DASHI/Foundations/Wette1969ProofCarryingRuleApplicationExact.agda
@@ -20,11 +21,14 @@ for file in "${FILES[@]}"; do
   fi
 done
 
+grep -q 'record AdmissibleAction' DASHI/Core/TypedDependencyCore.agda
+grep -q 'typedDependencyCoreOwnsAdmissibilityIsTrue' DASHI/Core/ProofCarryingRuleApplicationExact.agda
 grep -q 'selectedRuleCarriesApplicationProofIsTrue' DASHI/Core/ProofCarryingRuleApplicationExact.agda
 grep -q 'laterTraceStepsAreIndexedByReachedStateIsTrue' DASHI/Core/ProofCarryingRuleApplicationExact.agda
 grep -q 'ruleLabelAloneImpliesAdmissibilityIsFalse' DASHI/Core/ProofCarryingRuleApplicationExact.agda
 
 grep -q 'DOI: 10.1007/978-3-642-86745-3_9' DASHI/Foundations/Wette1969ProofCarryingRuleApplicationExact.agda
+grep -q 'typedDependencyCoreReusedForHistoricalAdmissibilityIsTrue' DASHI/Foundations/Wette1969ProofCarryingRuleApplicationExact.agda
 grep -q 'historicalRuleSelectionCarriesAllPremiseEvidenceIsTrue' DASHI/Foundations/Wette1969ProofCarryingRuleApplicationExact.agda
 grep -q 'rules9324And9325NowLiftToCertifiedContextTransitionsIsTrue' DASHI/Foundations/Wette1969ProofCarryingRuleApplicationExact.agda
 grep -q 'bareHistoricalRuleBodyIsAlreadyAdmissibleAtEveryContextIsFalse' DASHI/Foundations/Wette1969ProofCarryingRuleApplicationExact.agda
