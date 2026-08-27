@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+
+# First preserve the full #604 predecessor contract.
+bash scripts/check_riemann_reflection_orbit_defect_2026.sh
+
+sources=(
+  DASHI/Analysis/PoleQuotientedExteriorDeskTestExact.agda
+  DASHI/Analysis/PoleRankTwoQuotientedExteriorDeskTestExact.agda
+  DASHI/Analysis/RiemannG21TwoByTwoMixedObstructionExact.agda
+  DASHI/Analysis/RiemannG21AugmentedDeterminantFiniteExact.agda
+  DASHI/Analysis/RiemannG21LiteralPoleRankAuditExact.agda
+  DASHI/Analysis/RiemannG21PoleMainModeSeparationExact.agda
+  DASHI/Analysis/RiemannG21OffLinePoleQuotientTransversalityExact.agda
+  DASHI/Analysis/RiemannG21PrimePairKernelExact.agda
+  DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda
+  DASHI/Analysis/RiemannG21CrossPollinationExact.agda
+  DASHI/Analysis/RiemannG21Regression.agda
+)
+
+for source in "${sources[@]}"; do
+  test -s "$source" || { echo "missing or empty source: $source" >&2; exit 1; }
+  if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|--allow-unsolved-metas|--no-termination-check|--no-positivity-check|--type-in-type|--omega-in-omega|--rewriting|--unsafe|TERMINATING|NON_COVERING|NO_POSITIVITY_CHECK|NO_UNIVERSE_CHECK' "$source"; then
+    echo "forbidden trust escape in $source" >&2
+    exit 1
+  fi
+  if grep -Pzoq '(?s)\{!.*?!\}' "$source"; then
+    echo "forbidden multiline hole in $source" >&2
+    exit 1
+  fi
+done
+
+require_pattern() {
+  grep -F "$2" "$1" >/dev/null || {
+    echo "missing required marker '$2' in $1" >&2
+    exit 1
+  }
+}
+
+require_pattern DASHI/Analysis/RiemannG21TwoByTwoMixedObstructionExact.agda \
+  'rankOnePoleDoesNotKillMixedTwoByTwoDeterminant'
+require_pattern DASHI/Analysis/RiemannG21AugmentedDeterminantFiniteExact.agda \
+  'augmentedPoleQuotientPreservesSignedDeterminant'
+require_pattern DASHI/Analysis/RiemannG21LiteralPoleRankAuditExact.agda \
+  'genericTwoPoleFourSampleCase'
+require_pattern DASHI/Analysis/RiemannG21PoleMainModeSeparationExact.agda \
+  'MainModeTransportBridge'
+require_pattern DASHI/Analysis/RiemannG21OffLinePoleQuotientTransversalityExact.agda \
+  'OffLinePoleQuotientTransversality'
+require_pattern DASHI/Analysis/RiemannG21PrimePairKernelExact.agda \
+  'RectangleNonseparabilityWitness'
+require_pattern DASHI/Analysis/RiemannG21PrimePairKernelExact.agda \
+  'RankOneMinorObstruction'
+require_pattern DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda \
+  'poleToPrimeMainModeTransport'
+require_pattern DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda \
+  'offLinePoleQuotientTransversality'
+require_pattern DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda \
+  'riemannHypothesisDerivedIsFalse'
+
+DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh \
+  DASHI/Analysis/RiemannG21Regression.agda
