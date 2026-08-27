@@ -4,20 +4,13 @@ module DASHI.Foundations.BishopNatSquareRootSemanticSquareExact where
 -- SEMANTIC SQUARE LAW FOR THE CONSTRUCTED NAT ROOT
 --
 -- The real is the canonical floor-approximation `Real.mkℝ` value.  We prove
--- directly against vendor/bishop's setoid equality.  At product precision
+-- directly against vendor/bishop's setoid equality.  Bishop multiplication
+-- samples x*x at precision
 --
---   t = 2 * (K x ⊔ K x) * n
+--   2 * (K x ⊔ K x) * n = 2 * K x * n.
 --
--- Real.agda defines seq (x*x) n = a_t^2.  The floor interval gives
---
---   a_t^2 <= N <= (a_t + 1/t)^2,
---
--- while the canonical bound |a_t| < K x <= K x ⊔ K x gives
---
---   (a_t + 1/t)^2 <= a_t^2 + 2/n.
---
--- Hence |seq (x*x) n - N| <= 2/n, exactly the constructor requirement for
--- `Real._≃_`.
+-- The floor interval and the canonical bound at that exact precision give the
+-- required |seq(x*x,n)-N| <= 2/n certificate for `Real._≃_`.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -31,6 +24,7 @@ open import Data.Rational.Unnormalised as ℚ using
 import Data.Rational.Unnormalised.Properties as ℚP
 import NonReflectiveQ as ℚSolver
 import Real as BishopReal
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Foundations.BishopNatSquareRootApproximationExact as Approximation
 import DASHI.Foundations.BishopNatSquareRootCanonicalApproximationExact as Canonical
@@ -82,8 +76,6 @@ canonicalApproximationBelowScale radicand precision scale K≤scale =
     KBelowScale = Fraction.natFractionLe K≤scale
   in
   ℚP.≤-trans aBelowK KBelowScale
-  where
-  open import Relation.Binary.PropositionalEquality using (subst)
 
 upperIntervalSquareBelowTwoOver :
   (radicand scale precision : Nat) →
@@ -214,14 +206,13 @@ canonicalFloorSquareRootSquaresToNat :
     (BishopReal._⋆ (Approximation.natAsRational radicand))
 canonicalFloorSquareRootSquaresToNat radicand =
   let x = Regular.canonicalFloorSquareRootReal radicand in
+  rewrite NatP.⊔-idem (BishopReal.K x) in
   BishopReal.*≃* λ {(suc precision-1) →
-    let
-      precision = suc precision-1
-      scale = BishopReal.K x NatP.⊔ BishopReal.K x
-      K≤scale = NatP.m≤m⊔n (BishopReal.K x) (BishopReal.K x)
-    in
     squareErrorAtVendorProductPrecision
-      radicand scale precision K≤scale}
+      radicand
+      (BishopReal.K x)
+      (suc precision-1)
+      NatP.≤-refl}
 
 bishopNatSquareRootSemanticSquareLevel : ProofLevel
 bishopNatSquareRootSemanticSquareLevel = machineChecked
