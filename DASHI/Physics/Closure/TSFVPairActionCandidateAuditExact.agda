@@ -2,6 +2,7 @@ module DASHI.Physics.Closure.TSFVPairActionCandidateAuditExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
+open import Data.List using (_++_)
 
 import DASHI.Physics.Foundations.HistoryLocalActionAccumulationExact as Action
 import DASHI.Physics.Closure.ChemistryRightLimitsQuotientCrossBandCouplingRequirement as CrossBand
@@ -122,7 +123,7 @@ canonicalCandidateComparison =
 
 pairTraceAdditivityAvailable :
   (left right : List (Action.Step pairLocalActionSystem)) →
-  Action.historyAction pairLocalActionSystem (left Data.List.++ right)
+  Action.historyAction pairLocalActionSystem (left ++ right)
   ≡
   Action.historyAction pairLocalActionSystem left
   + Action.historyAction pairLocalActionSystem right
