@@ -29,6 +29,8 @@ import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact
 import DASHI.Core.LacanIrigarayTernaryGrammarBridgeExact
 import DASHI.Core.FeministLabialRechartingCapstoneExact
 import DASHI.Core.RelationalRoleGrammarExact
+import DASHI.Core.ObserverAffordanceIncomparabilityExact
+import DASHI.Core.RelationalityGradeSeparationExact
 import DASHI.Core.CriticalRelationalGrammarSourceRegistryExact
 import DASHI.Core.CriticalThirdnessRoleGrammarExact
 import DASHI.Core.CriticalGrammarRelabellingBoundaryExact
