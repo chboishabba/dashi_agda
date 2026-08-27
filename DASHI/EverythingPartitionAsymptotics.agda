@@ -4,6 +4,7 @@ module DASHI.EverythingPartitionAsymptotics where
 -- Focused typecheck/import surface for the Hardy--Ramanujan / Erdos / Newman
 -- partition lane.  The finite layer now includes generic graded pointing,
 -- proof-free exact key enumeration, strict deletion-fibre instantiation,
+-- independent admissible residual normal form, exact residual permutation,
 -- factor-pair -> sigma1 regrouping, and the rank-one Fock occupation-grading
 -- bridge.  Bishop analysis remains downstream.
 ------------------------------------------------------------------------
@@ -17,6 +18,8 @@ import DASHI.Mathematics.NumberTheory.FiniteExactKeyReindexExact
 import DASHI.Mathematics.NumberTheory.FiniteWeightUnitExpansionExact
 import DASHI.Mathematics.NumberTheory.FiniteNatVectorCoordinateUpdateExact
 import DASHI.Mathematics.NumberTheory.FiniteVectorPrefixSplitExact
+import DASHI.Mathematics.NumberTheory.FiniteOneToEnumerationExact
+import DASHI.Mathematics.NumberTheory.FinitePositiveFactorPairExact
 import DASHI.Mathematics.NumberTheory.GradedMultiplicityPointingResidualExact
 import DASHI.Mathematics.NumberTheory.GradedFamilyPointingResidualExact
 import DASHI.Mathematics.NumberTheory.FiniteDivisorSumExact
@@ -35,6 +38,9 @@ import DASHI.Mathematics.NumberTheory.PartitionErdosFiniteKeyEnumerationExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosFiniteKeyRoundTripExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosFiniteKeyCardinalityExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosFiniteKeySystemExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosAdmissibleResidualEnumerationExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosResidualKeyPermutationExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosAdmissibleResidualIdentityExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalResidualExpansionExact
 import DASHI.Mathematics.NumberTheory.PartitionDivisorSumRecurrencePrefixExact
 import DASHI.Mathematics.NumberTheory.PartitionDivisorSumRegroupingExact
