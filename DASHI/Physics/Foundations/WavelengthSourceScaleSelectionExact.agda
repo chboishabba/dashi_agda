@@ -92,8 +92,8 @@ canonicalReducedWakeFroudeCoordinate =
     refl
 
 ------------------------------------------------------------------------
--- Aperture/slit and wake coordinates are the same generic mathematical role
--- without being identified as the same physical law.
+-- Aperture/slit and wake coordinates share a generic mathematical ratio
+-- architecture without being identified as the same physical law.
 ------------------------------------------------------------------------
 
 canonicalApertureScaleCoordinate : SourceScaleCoordinate
@@ -161,9 +161,9 @@ canonicalScaleConditionedWeightBridge =
 record WavelengthSourceScaleBoundary : Set where
   constructor wavelengthSourceScaleBoundary
   field
-    sameRatioRoleMeansSamePhysicalLaw : Bool
-    sameRatioRoleMeansSamePhysicalLawIsFalse :
-      sameRatioRoleMeansSamePhysicalLaw ≡ false
+    sameGenericRatioShapeMeansSamePhysicalLaw : Bool
+    sameGenericRatioShapeMeansSamePhysicalLawIsFalse :
+      sameGenericRatioShapeMeansSamePhysicalLaw ≡ false
 
     scaleRatioChangesAdmissibilityByDefinition : Bool
     scaleRatioChangesAdmissibilityByDefinitionIsFalse :
