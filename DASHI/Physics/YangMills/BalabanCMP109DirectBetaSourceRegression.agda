@@ -29,25 +29,34 @@ module DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceRegression where
 --          + localized irrelevant-memory shell tail
 --     -> Gaussian SOURCE CORRECTION:
 --          differentiate the same CMP99/CMP98 constrained carrier as W/Q/R
---          + certify one mixed Lorentz/color positive-MEASURE momentum patch.
+--          + certify one mixed Lorentz/color positive-MEASURE momentum patch
+--     -> corrected Lean cross-prover margin:
+--          W patch lower bound must pay |Q|+|R|
+--          + marginal memory is separately budgeted unless source-removed.
 --
--- The corner q=(0,1/2,0,0) single-mode witness is no longer authoritative:
--- Wilson cubic-vertex sine factors can vanish at Brillouin-boundary momenta, and
--- one discrete mode cannot by itself provide a normalized volume-uniform floor.
--- The correct highest-alpha Gaussian target is ONE positive-volume box plus
--- complement nonnegativity, reusing the configured box infrastructure.
+-- The corner q=(0,1/2,0,0) single-mode witness is no longer authoritative.
+-- The parallel Lean lane now proves both obstructions: the relevant Wilson cubic
+-- diagonal component vanishes at the Brillouin boundary, and a fixed-cardinality
+-- Fourier set cannot provide a normalized volume-uniform floor.
 --
 -- Existing Agda debt compilers already give, once literally instantiated,
 --
 --   betaInt >= - C_beta gamma^4
 --   irrelevantMemory <= C_H gamma / 2.
 --
--- Hence the shortest current physical margin is
+-- The current full physical margin is therefore
 --
---   b_patch - C_beta gamma^4 - C_H gamma/2 > 0,
+--   b_patch
+--   - C_beta gamma^4
+--   - (C_H gamma / 2 + H_marg) B > 0.
 --
--- where b_patch is the lower contribution of one source-coherent normalized
--- Gaussian momentum box.  No global near/far estimate is required.
+-- The zero-marginal, unit-budget expression
+--
+--   b_patch - C_beta gamma^4 - C_H gamma/2
+--
+-- is only a specialization.  H_marg may be deleted only by a source theorem
+-- proving that the marginal contribution vanishes or is already included in the
+-- current local remainder.  No global near/far estimate is required.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -60,6 +69,7 @@ open import DASHI.Physics.YangMills.BalabanCMP109ReducedMarginSourceCutsetExact
 open import DASHI.Physics.YangMills.BalabanCMP109A1CrossPollinatedDebtProducersExact
 open import DASHI.Physics.YangMills.BalabanCMP109GaussianPositivePatchCorrectionExact
 open import DASHI.Physics.YangMills.BalabanCMP109GaussianFirstVariationSourceDecompositionExact
+open import DASHI.Physics.YangMills.BalabanCMP109CorrectedPatchMarginCrossProverExact
 open import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound82FiveAnalyticLeafExact
 
 ------------------------------------------------------------------------
@@ -68,25 +78,25 @@ open import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound82FiveAnalyticLe
 
 literalWilsonHessianVariationRegressionLevel : ProofLevel
 literalWilsonHessianVariationRegressionLevel =
-  cmp109LiteralWilsonHessianVariationLevel
+  cmp109LiteralWilsonHessianVariationCurrentLevel
 
 literalAveragingConstraintVariationRegressionLevel : ProofLevel
 literalAveragingConstraintVariationRegressionLevel =
-  cmp109LiteralAveragingConstraintVariationLevel
+  cmp109LiteralAveragingConstraintVariationCurrentLevel
 
 literalGaugeProjectionVariationRegressionLevel : ProofLevel
 literalGaugeProjectionVariationRegressionLevel =
-  cmp109LiteralGaugeProjectionVariationLevel
+  cmp109LiteralGaugeProjectionVariationCurrentLevel
 
 literalWQRAssemblyRegressionLevel : ProofLevel
-literalWQRAssemblyRegressionLevel = cmp109LiteralWQRAssemblyLevel
+literalWQRAssemblyRegressionLevel = cmp109LiteralWQRAssemblyCurrentLevel
 
 literalMixedVertexPositivePatchRegressionLevel : ProofLevel
 literalMixedVertexPositivePatchRegressionLevel =
-  cmp109LiteralMixedVertexPositivePatchLevel
+  cmp109LiteralPositivePatchCurrentLevel
 
 ------------------------------------------------------------------------
--- Current shortest Row-A1 debt source blockers
+-- Current shortest Row-A1 debt / history source blockers
 ------------------------------------------------------------------------
 
 literalFiveChannelTaylorInstantiationRegressionLevel : ProofLevel
@@ -95,18 +105,50 @@ literalFiveChannelTaylorInstantiationRegressionLevel =
 
 literalFiveChannelQuotientMajorantRegressionLevel : ProofLevel
 literalFiveChannelQuotientMajorantRegressionLevel =
-  cmp109LiteralFiveChannelQuotientMajorantLevel
+  cmp109LiteralFiveChannelCurrentLevel
 
 literalIrrelevantMemoryInfluenceRegressionLevel : ProofLevel
 literalIrrelevantMemoryInfluenceRegressionLevel =
-  cmp109LiteralIrrelevantMemoryInfluenceLevel
+  cmp109LiteralLocalizedMemoryCurrentLevel
 
-crossPollinatedA1DebtPackageRegressionLevel : ProofLevel
-crossPollinatedA1DebtPackageRegressionLevel =
-  cmp109CrossPollinatedA1DebtPackageLevel
+literalMarginalMemoryBoundRegressionLevel : ProofLevel
+literalMarginalMemoryBoundRegressionLevel =
+  cmp109LiteralMarginalMemoryBoundCurrentLevel
+
+correctedPatchMarginSourcePackageRegressionLevel : ProofLevel
+correctedPatchMarginSourcePackageRegressionLevel =
+  cmp109CorrectedPatchMarginSourcePackageLevel
 
 ------------------------------------------------------------------------
--- Machine-checked reused compilers
+-- Cross-prover-only theorem surfaces from the parallel Lean lane
+------------------------------------------------------------------------
+
+wilsonCubicCornerDisqualificationCrossProverRegressionLevel : ProofLevel
+wilsonCubicCornerDisqualificationCrossProverRegressionLevel =
+  cmp109WilsonCubicCornerDisqualificationCrossProverLevel
+
+singleModeUniformFloorNoGoCrossProverRegressionLevel : ProofLevel
+singleModeUniformFloorNoGoCrossProverRegressionLevel =
+  cmp109SingleModeUniformFloorNoGoCrossProverLevel
+
+quarterPatchLowerBoundCrossProverRegressionLevel : ProofLevel
+quarterPatchLowerBoundCrossProverRegressionLevel =
+  cmp109QuarterPatchLowerBoundCrossProverLevel
+
+wqrInterferenceCrossProverRegressionLevel : ProofLevel
+wqrInterferenceCrossProverRegressionLevel =
+  cmp109WQRInterferenceCrossProverLevel
+
+correctedMarginCompilerCrossProverRegressionLevel : ProofLevel
+correctedMarginCompilerCrossProverRegressionLevel =
+  cmp109CorrectedMarginCompilerCrossProverLevel
+
+universalCoefficientCircularityCrossProverRegressionLevel : ProofLevel
+universalCoefficientCircularityCrossProverRegressionLevel =
+  cmp109UniversalCoefficientCircularityAuditCrossProverLevel
+
+------------------------------------------------------------------------
+-- Machine-checked reused Agda compilers
 ------------------------------------------------------------------------
 
 positivePatchArithmeticRegressionLevel : ProofLevel
