@@ -22,7 +22,9 @@ on:
       - 'DASHI/Core/LacanFregeTernaryRoleChartExact.agda'
       - 'DASHI/Core/IrigarayLabialRelationalCarrierExact.agda'
       - 'DASHI/Core/DifferenceWithoutHierarchyExact.agda'
+      - 'DASHI/Core/RepresentationSubjectPositionNonfactorabilityExact.agda'
       - 'DASHI/Core/LacanIrigarayTernaryGrammarBridgeExact.agda'
+      - 'DASHI/Core/FeministLabialRechartingCapstoneExact.agda'
       - 'DASHI/Core/DialecticalStageSpectrumExact.agda'
       - 'DASHI/Core/ContextualDialecticRoleExact.agda'
       - 'DASHI/Core/EpistemicSuspensionExact.agda'
@@ -89,7 +91,9 @@ jobs:
             DASHI/Core/LacanFregeTernaryRoleChartExact.agda
             DASHI/Core/IrigarayLabialRelationalCarrierExact.agda
             DASHI/Core/DifferenceWithoutHierarchyExact.agda
+            DASHI/Core/RepresentationSubjectPositionNonfactorabilityExact.agda
             DASHI/Core/LacanIrigarayTernaryGrammarBridgeExact.agda
+            DASHI/Core/FeministLabialRechartingCapstoneExact.agda
             DASHI/Core/DialecticalStageSpectrumExact.agda
             DASHI/Core/ContextualDialecticRoleExact.agda
             DASHI/Core/EpistemicSuspensionExact.agda
@@ -142,7 +146,9 @@ jobs:
               DASHI/Core/LacanFregeTernaryRoleChartExact.agda
               DASHI/Core/IrigarayLabialRelationalCarrierExact.agda
               DASHI/Core/DifferenceWithoutHierarchyExact.agda
+              DASHI/Core/RepresentationSubjectPositionNonfactorabilityExact.agda
               DASHI/Core/LacanIrigarayTernaryGrammarBridgeExact.agda
+              DASHI/Core/FeministLabialRechartingCapstoneExact.agda
               DASHI/Core/NumberRoleProvenanceAtlasExact.agda
               DASHI/Core/DialecticalStageSpectrumExact.agda
               DASHI/Core/ContextualDialecticRoleExact.agda
