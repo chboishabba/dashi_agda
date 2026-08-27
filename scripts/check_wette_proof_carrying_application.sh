@@ -9,6 +9,8 @@ FILES=(
   DASHI/Core/ProofCarryingRuleApplicationExact.agda
   DASHI/Foundations/Wette1969Rule9324x25PremiseTemplateExact.agda
   DASHI/Foundations/Wette1969ProofCarryingRuleApplicationExact.agda
+  DASHI/Foundations/Wette1969FiniteDerivationContextExact.agda
+  DASHI/Foundations/WetteFiniteDeductionTraceExact.agda
 )
 
 FORBIDDEN_PATTERN='\{![^}]*!\}|(^|[[:space:]=:(])\?([[:space:];,)}]|$)|^[[:space:]]*postulate([[:space:]]|$)|--allow-unsolved-metas|\{-# OPTIONS[^#]*--(unsafe|type-in-type|no-positivity-check|no-termination-check|rewriting)([[:space:]]|#)|=[[:space:]]*_[[:space:]]*$'
@@ -34,6 +36,13 @@ grep -q 'rules9324And9325NowLiftToCertifiedContextTransitionsIsTrue' DASHI/Found
 grep -q 'bareHistoricalRuleBodyIsAlreadyAdmissibleAtEveryContextIsFalse' DASHI/Foundations/Wette1969ProofCarryingRuleApplicationExact.agda
 grep -q 'certifiedContextTransitionAlreadyImplementsHistoricalSubstitutionIsFalse' DASHI/Foundations/Wette1969ProofCarryingRuleApplicationExact.agda
 
+grep -q 'finiteContextMonotonicallyAccumulatesConclusionsIsTrue' DASHI/Foundations/Wette1969FiniteDerivationContextExact.agda
+grep -q 'proofCarryingTraceErasesToExistingFiniteTraceIsTrue' DASHI/Foundations/Wette1969FiniteDerivationContextExact.agda
+grep -q 'certifiedTraceProducesExistingFiniteDerivationWitnessIsTrue' DASHI/Foundations/Wette1969FiniteDerivationContextExact.agda
+grep -q 'boolMachineAdmissibilityIsHistoricalRuleAuthorityIsFalse' DASHI/Foundations/Wette1969FiniteDerivationContextExact.agda
+grep -q 'finiteContextMembershipIsAlreadySemanticTruthIsFalse' DASHI/Foundations/Wette1969FiniteDerivationContextExact.agda
+
 scripts/run_agda29_parallel_check.sh \
   DASHI/Core/ProofCarryingRuleApplicationExact.agda \
-  DASHI/Foundations/Wette1969ProofCarryingRuleApplicationExact.agda
+  DASHI/Foundations/Wette1969ProofCarryingRuleApplicationExact.agda \
+  DASHI/Foundations/Wette1969FiniteDerivationContextExact.agda
