@@ -166,3 +166,9 @@ jobs:
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNClayFrontierRound123Validation.agda
+
+      - name: Type-check Round126 HH radial-gap frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound126Validation.agda
