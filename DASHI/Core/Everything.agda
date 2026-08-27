@@ -9,10 +9,13 @@ import DASHI.Core.CoarseFineDepthDecompositionExact
 import DASHI.Core.FiniteBranchingCriticalityExact
 import DASHI.Core.FiniteTypedBranchingKernelExact
 import DASHI.Core.FiniteTypedBranchingReachabilityBridgeExact
+import DASHI.Core.BinaryInteractionNonseparabilityExact
+import DASHI.Core.FiniteTypedBranchingInteractionBridgeExact
 import DASHI.Core.LogisticFoldCriticalityExact
 import DASHI.Core.NumberRoleProvenanceAtlasExact
 import DASHI.Core.IntersectionalNonFactorability
 import DASHI.Core.IntersectionalConstraintGeometryExact
+import DASHI.Core.IntersectionalBinaryInteractionBridgeExact
 import DASHI.Core.FeministRechartingSourceBridgeExact
 import DASHI.Core.DialecticalStageSpectrumExact
 import DASHI.Core.ContextualDialecticRoleExact
