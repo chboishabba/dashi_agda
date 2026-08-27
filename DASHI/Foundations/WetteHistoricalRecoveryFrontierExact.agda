@@ -6,6 +6,7 @@ module DASHI.Foundations.WetteHistoricalRecoveryFrontierExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.SourceAcquisitionGeometryExact as Acquisition
 import DASHI.Foundations.WetteHistoricalSourceAtlasExact as Source
 import DASHI.Foundations.WettePrimaryTextAcquisitionPlanExact as AcquisitionPlan
 
@@ -34,22 +35,52 @@ record RecoveryTarget : Set where
 
 open RecoveryTarget public
 
+grammarTarget : RecoveryTarget
 grammarTarget = recoveryTarget formulaGrammar Source.wette1969ConstructiveArithmetic false false
+
+generatorTarget : RecoveryTarget
 generatorTarget = recoveryTarget generatorVocabulary Source.wette1969ConstructiveArithmetic false false
+
+admissibilityTarget : RecoveryTarget
 admissibilityTarget = recoveryTarget admissibilityOrLegality Source.wette1969ConstructiveArithmetic false false
+
+baseStateTarget : RecoveryTarget
 baseStateTarget = recoveryTarget axiomOrBaseState Source.wette1969ConstructiveArithmetic false false
+
+codingTarget : RecoveryTarget
 codingTarget = recoveryTarget codingConvention Source.wette1969ConstructiveArithmetic false false
+
+relativeCompletenessTarget : RecoveryTarget
 relativeCompletenessTarget = recoveryTarget relativeCompletenessMeaning Source.wette1969ConstructiveArithmetic false false
+
+consistencySentenceTarget : RecoveryTarget
 consistencySentenceTarget = recoveryTarget consistencySentence Source.wette1974Contradiction false false
+
+contradictionSentenceTarget : RecoveryTarget
 contradictionSentenceTarget = recoveryTarget contradictionSentence Source.wette1974Contradiction false false
+
+reductionTarget : RecoveryTarget
 reductionTarget = recoveryTarget consistencyToContradictionReduction Source.wette1974Contradiction false false
+
+comparisonArithmeticTarget : RecoveryTarget
 comparisonArithmeticTarget = recoveryTarget comparisonArithmetic Source.wette1974CanonicalSystemAbstract false false
+
+comparisonTranslationTarget : RecoveryTarget
 comparisonTranslationTarget = recoveryTarget comparisonTranslation Source.wette1974CanonicalSystemAbstract false false
+
+contradictionPreservationTarget : RecoveryTarget
 contradictionPreservationTarget = recoveryTarget contradictionPreservation Source.wette1974CanonicalSystemAbstract false false
+
+semanticBridgeTarget : RecoveryTarget
 semanticBridgeTarget = recoveryTarget semanticOrReflectionBridge Source.bernays1971Commentary false false
 
+lateCanonicalSystemAcquisition : Acquisition.SourceAcquisitionTarget
 lateCanonicalSystemAcquisition = AcquisitionPlan.wette1974CanonicalSystemAcquisition
+
+lateSimplificationAcquisition : Acquisition.SourceAcquisitionTarget
 lateSimplificationAcquisition = AcquisitionPlan.wette1976SimplifyingComplicationAcquisition
+
+lateContradictionPaperAcquisition : Acquisition.SourceAcquisitionTarget
 lateContradictionPaperAcquisition = AcquisitionPlan.wette1974ContradictionAcquisition
 
 record WetteHistoricalRecoveryBoundary : Set where
