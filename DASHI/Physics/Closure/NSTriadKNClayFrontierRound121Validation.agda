@@ -1,0 +1,5 @@
+module DASHI.Physics.Closure.NSTriadKNClayFrontierRound121Validation where
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound120Validation
+import DASHI.Physics.Closure.NSTriadKNExternalPureCommutatorBonySumRound121Exact
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound121Exact
