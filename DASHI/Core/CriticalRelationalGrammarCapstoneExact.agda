@@ -12,6 +12,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.TernaryRoleCarrierExact as Ternary
 import DASHI.Core.RelationalRoleGrammarExact as Grammar
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.LacanIrigarayTernaryGrammarBridgeExact as LacanIrigaray
 import DASHI.Core.LacanS2RoleSeparationExact as LacanS2
 import DASHI.Core.CriticalThirdnessRoleGrammarExact as Thirdness
@@ -51,7 +52,7 @@ badiouVoid≠observerZero : badiouVoidRole ≡ coarseObserverZeroRole → ⊥
 badiouVoid≠observerZero ()
 
 ------------------------------------------------------------------------
--- The two strongest same-carrier grammar separations are kept live.
+-- The strongest same-carrier grammar separations are kept live.
 ------------------------------------------------------------------------
 
 lacanIrigarayNotRelatedByTernaryRelabelling :
@@ -78,14 +79,12 @@ badiouCountSurfaceHasNontrivialFibre : Badiou.CountAsOneCollision
 badiouCountSurfaceHasNontrivialFibre = Badiou.canonicalCountAsOneCollision
 
 coarseZeroDoesNotDetermineFuture :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    ZeroFibre.zeroObserver ZeroFibre.futureClass → ⊥
+  INF.FactorsThrough ZeroFibre.zeroObserver ZeroFibre.futureClass → ⊥
 coarseZeroDoesNotDetermineFuture =
   ZeroFibre.zeroObservationCannotRecoverFutureClass
 
 inclusiveRhetoricDoesNotDetermineAccessibility :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    Ecology.feministObserver Ecology.realizedRemain → ⊥
+  INF.FactorsThrough Ecology.feministObserver Ecology.realizedRemain → ⊥
 inclusiveRhetoricDoesNotDetermineAccessibility =
   Ecology.inclusiveReadingCannotRecoverRealizedAffordance
 
