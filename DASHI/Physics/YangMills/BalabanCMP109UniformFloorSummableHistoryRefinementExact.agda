@@ -102,7 +102,7 @@ record CMP109BubbleEntryProducesGaussianFloor
     -- paramagnetic seagull + literal bubble identity + one entry lower bound
     -- imply betaZ_j >= c^2/2.
     halfEntrySquareIsSourceNormalization : Set
-    gaussianFloorFromEntry : ∀ scale → Set
+    gaussianFloorFromEntry : ∀ scale : Scale → Set
 
 open CMP109BubbleEntryProducesGaussianFloor public
 
@@ -123,7 +123,7 @@ record CMP109LiteralSummableHistoryKernel
     -- Uniform source-facing summability:
     --   sum_{k<j} |R_{j,k}| <= D.
     -- The finite sum implementation lives in the concrete arithmetic consumer.
-    uniformResponseSummability : ∀ j → Set
+    uniformResponseSummability : ∀ j : Scale → Set
     cutoffVolumeScaleUniform : Set
 
 open CMP109LiteralSummableHistoryKernel public
