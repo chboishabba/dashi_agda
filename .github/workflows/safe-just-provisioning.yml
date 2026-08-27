@@ -29,6 +29,8 @@ on:
       - 'DASHI/Governance/SafeJustEpistemicResidualLedgerExact.agda'
       - 'DASHI/Governance/Kallis2025ClaimAuthorityRoutingExact.agda'
       - 'DASHI/Governance/Kallis2025EvidenceAtlasExact.agda'
+      - 'DASHI/Governance/Kallis2025ClaimByClaimEvidenceRealizationExact.agda'
+      - 'DASHI/Governance/Kallis2025ClaimEvidenceRegression.agda'
       - 'DASHI/Governance/SafeJustFeministClimateJusticeBoundaryExact.agda'
       - 'DASHI/Governance/SafeJustFeministClimateJusticeRegression.agda'
       - 'DASHI/Governance/FeministClimateJusticeSourceRegistryExact.agda'
@@ -44,6 +46,7 @@ on:
       - 'DASHI/Governance/FeministClimateQualifiedPromotionExact.agda'
       - 'DASHI/Governance/FeministClimateJusticeSafeJustCapstoneExact.agda'
       - 'DASHI/Governance/FeministClimateJusticeSafeJustRegression.agda'
+      - 'DASHI/Governance/FirstNationsOwnedEvidenceContractExact.agda'
       - 'DASHI/Governance/SafeJustQualifiedClaimPromotionExact.agda'
       - 'DASHI/Governance/SafeJustSocialIndicatorJusticeBoundaryExact.agda'
       - 'DASHI/Governance/SafeJustConsumerAdequacyResidualBridgeExact.agda'
@@ -103,6 +106,8 @@ jobs:
             DASHI/Governance/SafeJustEpistemicResidualLedgerExact.agda
             DASHI/Governance/Kallis2025ClaimAuthorityRoutingExact.agda
             DASHI/Governance/Kallis2025EvidenceAtlasExact.agda
+            DASHI/Governance/Kallis2025ClaimByClaimEvidenceRealizationExact.agda
+            DASHI/Governance/Kallis2025ClaimEvidenceRegression.agda
             DASHI/Governance/SafeJustFeministClimateJusticeBoundaryExact.agda
             DASHI/Governance/SafeJustFeministClimateJusticeRegression.agda
             DASHI/Governance/FeministClimateJusticeSourceRegistryExact.agda
@@ -118,6 +123,7 @@ jobs:
             DASHI/Governance/FeministClimateQualifiedPromotionExact.agda
             DASHI/Governance/FeministClimateJusticeSafeJustCapstoneExact.agda
             DASHI/Governance/FeministClimateJusticeSafeJustRegression.agda
+            DASHI/Governance/FirstNationsOwnedEvidenceContractExact.agda
             DASHI/Governance/SafeJustQualifiedClaimPromotionExact.agda
             DASHI/Governance/SafeJustSocialIndicatorJusticeBoundaryExact.agda
             DASHI/Governance/SafeJustConsumerAdequacyResidualBridgeExact.agda
@@ -159,6 +165,9 @@ jobs:
               DASHI/Governance/FeministClimateQualifiedPromotionExact.agda
               DASHI/Governance/FeministClimateJusticeSafeJustCapstoneExact.agda
               DASHI/Governance/FeministClimateJusticeSafeJustRegression.agda
+              DASHI/Governance/Kallis2025ClaimByClaimEvidenceRealizationExact.agda
+              DASHI/Governance/Kallis2025ClaimEvidenceRegression.agda
+              DASHI/Governance/FirstNationsOwnedEvidenceContractExact.agda
               DASHI/Governance/SafeJustFeministClimateJusticeRegression.agda
               DASHI/Governance/Fanning2022MethodsRegression.agda
               DASHI/Governance/Everything.agda
