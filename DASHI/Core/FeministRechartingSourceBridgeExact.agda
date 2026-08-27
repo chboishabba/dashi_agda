@@ -5,32 +5,30 @@ module DASHI.Core.FeministRechartingSourceBridgeExact where
 --
 -- This file does not collapse distinct feminist projects into one doctrine.
 -- It records bounded source roles for the representation move discussed in the
--- supplied DASHI reconstruction, then points that discussion at the generic
--- theorem already owned by IntersectionalNonFactorability:
---
---   if a coarse chart has erased a distinction, arbitrary post-composition /
---   relabelling of that chart cannot reconstruct the erased phenomenon.
+-- supplied DASHI reconstruction, then points that discussion at generic DASHI
+-- non-factorability and observer-refinement theorems.
 --
 -- SOURCES
 --
 -- Luce Irigaray, "This Sex Which Is Not One", Cornell University Press, 1985
--- English edition. ISBN 9780801493317.  Used here as source context for the
--- critique of a representational economy whose privileged coordinates already
--- render the feminine through a masculine/phallocentric measure.
+-- English edition. ISBN 9780801493317.  Source context for critique of a
+-- representational economy whose privileged coordinates render the feminine
+-- through a masculine/phallocentric measure and for positive multiplicity not
+-- reducible to sign reversal inside that inherited chart.
 --
 -- Helene Cixous, "The Laugh of the Medusa", Signs 1(4) (1976), 875--893.
--- DOI: 10.1086/493306.  Used here as source context for generative expressive
--- practice rather than mere occupancy of an inherited discursive slot.
+-- DOI: 10.1086/493306.  Source context for generative expressive practice
+-- rather than mere occupancy of an inherited discursive slot.
 --
 -- Audre Lorde, "Uses of the Erotic: The Erotic as Power", Out & Out Books,
 -- 1978. ISBN 9780918314093.  A later anthology chapter is available as DOI
--- 10.1093/oso/9780198782506.003.0032.  Used here as source context for a
--- positive endogenous capacity/power reading rather than deficiency alone.
+-- 10.1093/oso/9780198782506.003.0032.  Source context for positive endogenous
+-- capacity/power rather than deficiency alone.
 --
 -- Monique Wittig, "One Is Not Born a Woman", Feminist Issues 1(2) (1981),
 -- 47--54.  Stable original bibliographic record retained; a later Oxford
--- anthology chapter has DOI 10.1093/oso/9780192892706.003.0036.  Used here as
--- source context for challenging the category-producing social relation.
+-- anthology chapter has DOI 10.1093/oso/9780192892706.003.0036.  Source context
+-- for challenging the category-producing social relation itself.
 --
 -- These source roles motivate, but do not themselves prove, the DASHI theorem.
 ------------------------------------------------------------------------
@@ -41,6 +39,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
 
 ------------------------------------------------------------------------
 -- Typed source roles keep the theories distinct.
@@ -96,7 +95,8 @@ wittigSource =
     categoryRelationCritique
 
 ------------------------------------------------------------------------
--- Mathematical bridge.
+-- Negative theorem: post-composition of an already-collapsed chart cannot
+-- reconstruct a distinction that the old chart erased.
 ------------------------------------------------------------------------
 
 mereRechartingCannotRecover :
@@ -111,8 +111,10 @@ mereRechartingCannotRecover =
   INF.rechartingCannotRecoverErasedPhenomenon
 
 ------------------------------------------------------------------------
--- A positive repair is therefore typed as *adding a residual observer*, not as
--- a claim that any specific feminist theory uniquely determines that residual.
+-- Positive repair: add an actual residual observer and require a concrete
+-- collision/separation witness.  This is stronger than merely storing a
+-- residual function: the new chart must demonstrably distinguish something the
+-- inherited chart collapsed.
 ------------------------------------------------------------------------
 
 record PositiveRecharting
@@ -121,8 +123,71 @@ record PositiveRecharting
   constructor positive-recharting
   field
     residual : Situated → Residual
+    left right : Situated
+    oldChartCollision : flatten left ≡ flatten right
+    positiveResidualSeparation : residual left ≡ residual right → ⊥
 
 open PositiveRecharting public
+
+positiveRechartingStrictlyRefinesInheritedChart :
+  ∀ {Situated Flat Residual : Set}
+    {flatten : Situated → Flat} →
+  (repair : PositiveRecharting flatten) →
+  Observer.StrictRefinement
+    flatten
+    (Observer.pairObserver flatten (residual repair))
+positiveRechartingStrictlyRefinesInheritedChart repair =
+  Observer.strictPairRefinement
+    _
+    (residual repair)
+    (left repair)
+    (right repair)
+    (oldChartCollision repair)
+    (positiveResidualSeparation repair)
+
+------------------------------------------------------------------------
+-- Tiny schematic witness: a one-coordinate inherited chart collapses two
+-- positive modes; the added residual distinguishes them.  The constructor names
+-- are formal placeholders, not a claim that any source uniquely supplies these
+-- exact coordinates.
+------------------------------------------------------------------------
+
+data SchematicSituated : Set where
+  positiveModeA positiveModeB : SchematicSituated
+
+data InheritedOne : Set where
+  inheritedOne : InheritedOne
+
+data PositiveMultiplicity : Set where
+  multiplicityA multiplicityB : PositiveMultiplicity
+
+inheritedChart : SchematicSituated → InheritedOne
+inheritedChart positiveModeA = inheritedOne
+inheritedChart positiveModeB = inheritedOne
+
+positiveMultiplicity : SchematicSituated → PositiveMultiplicity
+positiveMultiplicity positiveModeA = multiplicityA
+positiveMultiplicity positiveModeB = multiplicityB
+
+canonicalPositiveRecharting : PositiveRecharting inheritedChart
+canonicalPositiveRecharting =
+  positive-recharting
+    positiveMultiplicity
+    positiveModeA
+    positiveModeB
+    refl
+    (λ ())
+
+canonicalPositiveRechartingIsStrict :
+  Observer.StrictRefinement
+    inheritedChart
+    (Observer.pairObserver inheritedChart positiveMultiplicity)
+canonicalPositiveRechartingIsStrict =
+  positiveRechartingStrictlyRefinesInheritedChart canonicalPositiveRecharting
+
+------------------------------------------------------------------------
+-- Boundary.
+------------------------------------------------------------------------
 
 record FeministRechartingBoundary : Set where
   constructor feminist-recharting-boundary
@@ -139,10 +204,14 @@ record FeministRechartingBoundary : Set where
     positiveResidualUniquelySpecifiedBySources : Bool
     positiveResidualUniquelySpecifiedBySourcesIsFalse :
       positiveResidualUniquelySpecifiedBySources ≡ false
+    positiveRepairRequiresObservableRefinementWitness : Bool
+    positiveRepairRequiresObservableRefinementWitnessIsFalse :
+      positiveRepairRequiresObservableRefinementWitness ≡ false
 
 canonicalFeministRechartingBoundary : FeministRechartingBoundary
 canonicalFeministRechartingBoundary =
   feminist-recharting-boundary
+    false refl
     false refl
     false refl
     false refl
