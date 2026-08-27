@@ -151,6 +151,50 @@ canonicalShakespeareAnchors =
   ∷ []
 
 ------------------------------------------------------------------------
+-- Short primary-text cues.  Shakespeare is cited by act/scene because line
+-- numbering varies across editions.  These are textual anchors, not evidence
+-- that Shakespeare himself proposed a topological theory.
+------------------------------------------------------------------------
+
+record ShakespeareLineCue : Set where
+  constructor shakespeareLineCue
+  field
+    cuePlay : Play
+    cueActScene : String
+    cueText : String
+    cueUse : String
+
+open ShakespeareLineCue public
+
+wintersTaleFaithCue : ShakespeareLineCue
+wintersTaleFaithCue =
+  shakespeareLineCue wintersTale "5.3"
+    "It is required / You do awake your faith."
+    "Recognition requires a changed epistemic stance; the scene stages return without simply undoing the intervening history."
+
+tempestVirtueCue : ShakespeareLineCue
+tempestVirtueCue =
+  shakespeareLineCue tempest "5.1"
+    "The rarer action is / In virtue than in vengeance."
+    "Prospero's final transition is a reconfiguration of relation and action, not restoration by reversal."
+
+hamletMousetrapCue : ShakespeareLineCue
+hamletMousetrapCue =
+  shakespeareLineCue hamlet "2.2"
+    "The play's the thing / Wherein I'll catch the conscience of the king."
+    "Hamlet turns a provenance hypothesis into a planned perturbation/observation test."
+
+learNothingCue : ShakespeareLineCue
+learNothingCue =
+  shakespeareLineCue kingLear "1.1"
+    "Nothing will come of nothing."
+    "Lear's opening test compresses a rich filial relation into a coarse public-performance criterion."
+
+canonicalShakespeareLineCues : List ShakespeareLineCue
+canonicalShakespeareLineCues =
+  wintersTaleFaithCue ∷ tempestVirtueCue ∷ hamletMousetrapCue ∷ learNothingCue ∷ []
+
+------------------------------------------------------------------------
 -- Winter's Tale / Lear finite transfer specimen.
 ------------------------------------------------------------------------
 
@@ -250,6 +294,10 @@ record ShakespeareLiteraryTopologyBoundary : Set where
     wintersTaleAndLearAreFatimasRepresentativePolesIsTrue :
       wintersTaleAndLearAreFatimasRepresentativePoles ≡ true
 
+    shakespeareLineCuesAreFatimaQuotations : Bool
+    shakespeareLineCuesAreFatimaQuotationsIsFalse :
+      shakespeareLineCuesAreFatimaQuotations ≡ false
+
     returnMeansReset : Bool
     returnMeansResetIsFalse : returnMeansReset ≡ false
 
@@ -270,6 +318,7 @@ canonicalShakespeareLiteraryTopologyBoundary =
   shakespeareLiteraryTopologyBoundary
     false refl
     true refl
+    false refl
     false refl
     false refl
     false refl
