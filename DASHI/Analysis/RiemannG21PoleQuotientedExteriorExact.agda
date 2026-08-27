@@ -10,6 +10,7 @@ import DASHI.Analysis.PoleRankTwoQuotientedExteriorDeskTestExact as RankTwoExter
 import DASHI.Analysis.RiemannG21LiteralPoleRankAuditExact as PoleAudit
 import DASHI.Analysis.RiemannG21PoleMainModeSeparationExact as MainMode
 import DASHI.Analysis.RiemannG21OffLinePoleQuotientTransversalityExact as ZeroTrans
+import DASHI.Analysis.RiemannWeilOffLineHyperbolicBlockExact as Hyperbolic
 import DASHI.Analysis.RiemannG21PrimePairKernelExact as Pair
 import DASHI.Analysis.RiemannG21TwoByTwoMixedObstructionExact as Mixed2
 import DASHI.Analysis.RiemannG21AugmentedDeterminantFiniteExact as Det3
@@ -120,15 +121,12 @@ robustFourSampleResidualDimension =
   PoleAudit.fourSamplesSupportTwoResidualDimensionsWithoutRankOneReduction
 
 sourceOffLinePairHasPositiveDirection :
-  HyperbolicPositive : Set
-sourceOffLinePairHasPositiveDirection = ⊤
-  where
-  HyperbolicPositive =
-    ZeroTrans.Hyperbolic.positiveIndexBeforePullback
-      ZeroTrans.canonicalSourceHyperbolicPair ≡ 1
+  Hyperbolic.positiveIndexBeforePullback
+    ZeroTrans.canonicalSourceHyperbolicPair ≡ 1
+sourceOffLinePairHasPositiveDirection = ZeroTrans.sourceHasPositiveDirection
 
 sourceOffLinePairHasNegativeDirection :
-  ZeroTrans.Hyperbolic.negativeIndexBeforePullback
+  Hyperbolic.negativeIndexBeforePullback
     ZeroTrans.canonicalSourceHyperbolicPair ≡ 1
 sourceOffLinePairHasNegativeDirection = ZeroTrans.sourceHasNegativeDirection
 
