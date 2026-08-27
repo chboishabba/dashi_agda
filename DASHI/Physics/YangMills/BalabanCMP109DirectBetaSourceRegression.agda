@@ -27,36 +27,50 @@ module DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceRegression where
 --
 -- Hence the authoritative first variation is
 --
---     D(C* A C) = C'* A C + C* A' C + C* A C',
+--     D(C* A C) = C'* A C + C* A' C + C* A C'.
 --
--- not an abstract derivative of a moving delta-constraint.  A' contains the
--- literal background derivative of the CMP99 quadratic operator (the Wilson
--- Hessian contribution is a mixed third Wilson variation); C' is determined by
--- differentiating the eliminated-coordinate equation Q(U) C(U) = 0.
+-- The Wilson part of A' is now represented by a literal physical mixed
+-- background/fluctuation jet.  Its four-link plaquette product has exactly
+-- 4^3=64 noncommutative Leibniz atoms, and the scalar Wilson coefficient is
+-- proved equal to their exact finite sum.  A separate quaternion theorem bridges
+-- CMP99's left-background tangent convention to the repository's right-
+-- exponential physical Hessian convention.
+--
+-- C' is governed by the differentiated eliminated-coordinate identity
+--
+--     Q C' = - Q' C.
 --
 -- On the remainder side, beta_j is projected from the current E^(j+1), which
 -- already depends on preceding couplings.  If the five-channel quartic bound is
--- uniform over the admissible history, history is an argument of betaInt rather
--- than a second additive final debt.  The final margin then collapses to
+-- uniform over admissible history, history is an argument of betaInt rather than
+-- a second additive final debt.  The final margin is then
 --
 --     b_patch - C_beta gamma^4 > 0.
 --
--- Existing quartic absorption algebra proves positivity once
--- C_beta gamma^4 <= b_patch/2.  Thus explicit decimal C_beta is not intrinsically
--- required: a finite history-uniform C_beta and a positive source-uniform patch
--- floor are sufficient once a small-coupling threshold is produced.
+-- Explicit small-coupling arithmetic is no longer open: for b>0, C_beta>=0,
+--
+--     gamma* = (1/2) b / (C_beta + b)
+--
+-- satisfies C_beta gamma*^4 <= b/2.  Thus no fourth-root construction or
+-- numerical search for gamma is needed after the two literal source constants
+-- b_patch and C_beta have been produced uniformly on the same RG family.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel; conditional)
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 open import DASHI.Physics.YangMills.BalabanCMP109SourceTranscriptionExact
 open import DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceCutsetExact
 open import DASHI.Physics.YangMills.BalabanCMP109A1CrossPollinatedDebtProducersExact
 open import DASHI.Physics.YangMills.BalabanCMP109GaussianPositivePatchCorrectionExact
 open import DASHI.Physics.YangMills.BalabanCMP109CorrectedPatchMarginCrossProverExact
 open import DASHI.Physics.YangMills.BalabanCMP109FixedConstraintCoordinateGaussianExact
+open import DASHI.Physics.YangMills.BalabanCMP109EliminatedCoordinateDerivativeExact
 open import DASHI.Physics.YangMills.BalabanA1HistoryUniformRemainderAntiDoubleCountExact
+open import DASHI.Physics.YangMills.BalabanA1ExplicitSmallCouplingQuarticAbsorptionExact
 open import DASHI.Physics.YangMills.BalabanCMP109QRConstraintAnnihilatorReductionExact
+open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonBackgroundQuadraticJetExact
+open import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonBackgroundQuadraticJetExact
+open import DASHI.Physics.YangMills.BalabanP33WilsonBackgroundTrivializationBridgeExact
 open import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound82FiveAnalyticLeafExact
 
 ------------------------------------------------------------------------
@@ -66,6 +80,12 @@ open import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound82FiveAnalyticLe
 literalCoordinateEmbeddingVariationRegressionLevel : ProofLevel
 literalCoordinateEmbeddingVariationRegressionLevel =
   cmp109LiteralCoordinateEmbeddingVariationLevel
+
+literalQPrimeRegressionLevel : ProofLevel
+literalQPrimeRegressionLevel = cmp99LiteralQPrimeLevel
+
+literalCPrimeFromConstraintRegressionLevel : ProofLevel
+literalCPrimeFromConstraintRegressionLevel = cmp109LiteralCPrimeFromConstraintLevel
 
 literalQuadraticOperatorVariationRegressionLevel : ProofLevel
 literalQuadraticOperatorVariationRegressionLevel =
@@ -79,11 +99,20 @@ literalCoordinateJacobianContributionRegressionLevel : ProofLevel
 literalCoordinateJacobianContributionRegressionLevel =
   cmp109LiteralCoordinateJacobianContributionLevel
 
--- Within A', D_background Delta_Wilson is a mixed THIRD variation of the Wilson
--- action.  Existing literal first/second plaquette jets are ancestry, not this
--- final producer.
-literalWilsonMixedThirdVariationRegressionLevel : ProofLevel
-literalWilsonMixedThirdVariationRegressionLevel = conditional
+-- The generic and physical noncommutative mixed-third Wilson bookkeeping is no
+-- longer open.  The remaining source seam is the exact CMP99 normalization /
+-- operator identification inside A'(U).
+wilsonBackgroundQuadratic64AtomRegressionLevel : ProofLevel
+wilsonBackgroundQuadratic64AtomRegressionLevel =
+  physicalWilsonBackgroundQuadratic64AtomLevel
+
+wilsonBackgroundTrivializationRegressionLevel : ProofLevel
+wilsonBackgroundTrivializationRegressionLevel =
+  wilsonBackgroundMixedJetTrivializationLevel
+
+literalWilsonHessianBackgroundDerivativeIdentificationRegressionLevel : ProofLevel
+literalWilsonHessianBackgroundDerivativeIdentificationRegressionLevel =
+  cmp99WilsonHessianBackgroundDerivativeIdentificationLevel
 
 literalMixedVertexPositivePatchRegressionLevel : ProofLevel
 literalMixedVertexPositivePatchRegressionLevel =
@@ -113,12 +142,20 @@ historyUniformAntiDoubleCountRegressionLevel : ProofLevel
 historyUniformAntiDoubleCountRegressionLevel =
   historyUniformCurrentRemainderAntiDoubleCountLevel
 
+explicitSmallCouplingQuarticAbsorptionRegressionLevel : ProofLevel
+explicitSmallCouplingQuarticAbsorptionRegressionLevel =
+  explicitSmallCouplingQuarticAbsorptionLevel
+
 positivePatchArithmeticRegressionLevel : ProofLevel
 positivePatchArithmeticRegressionLevel = positivePatchArithmeticLevel
 
 fiveChannelQuarticDebtReuseRegressionLevel : ProofLevel
 fiveChannelQuarticDebtReuseRegressionLevel =
   cmp109FiveChannelQuarticDebtReuseLevel
+
+eliminatedCoordinateDerivativeAlgebraRegressionLevel : ProofLevel
+eliminatedCoordinateDerivativeAlgebraRegressionLevel =
+  eliminatedCoordinateDerivativeAlgebraLevel
 
 qrConstraintAnnihilatorReductionRegressionLevel : ProofLevel
 qrConstraintAnnihilatorReductionRegressionLevel =
