@@ -8,6 +8,7 @@ FILES=(
   DASHI/Foundations/Wette1969FiniteDerivationContextExact.agda
   DASHI/Foundations/Wette1969DerivationClosureExact.agda
   DASHI/Foundations/Wette1969SchematicSubstitutionFreshnessExact.agda
+  DASHI/Foundations/Wette1969OrderedTuplePredicateSubstitutionExact.agda
   DASHI/Foundations/Wette1969Rule9324x25ComputationalSideConditionsExact.agda
 )
 
@@ -22,21 +23,27 @@ for file in "${FILES[@]}"; do
 done
 
 grep -q 'certifiedConclusionGeneratesLaterMembershipEvidenceIsTrue' DASHI/Foundations/Wette1969DerivationClosureExact.agda
-grep -q 'priorPremiseEvidencePersistsAcrossCertifiedExtensionIsTrue' DASHI/Foundations/Wette1969DerivationClosureExact.agda
+grep -q 'priorFormulaePersistAcrossWholeCertifiedTraceIsTrue' DASHI/Foundations/Wette1969DerivationClosureExact.agda
+grep -q 'earlierCertifiedConclusionsPersistToTraceTargetIsTrue' DASHI/Foundations/Wette1969DerivationClosureExact.agda
 grep -q 'finiteClosureAlreadyDecidesAllHistoricalPremisesIsFalse' DASHI/Foundations/Wette1969DerivationClosureExact.agda
 
 grep -q 'DOI: 10.1007/978-3-642-86745-3_9' DASHI/Foundations/Wette1969SchematicSubstitutionFreshnessExact.agda
 grep -q 'schematicWordVariableSubstitutionNowExecutableIsTrue' DASHI/Foundations/Wette1969SchematicSubstitutionFreshnessExact.agda
 grep -q 'freshnessCertificatesNowProofRelevantIsTrue' DASHI/Foundations/Wette1969SchematicSubstitutionFreshnessExact.agda
 grep -q 'evaluatorAlreadyImplementsFullObjectLanguageTupleSubstitutionIsFalse' DASHI/Foundations/Wette1969SchematicSubstitutionFreshnessExact.agda
-grep -q 'evaluatorAlreadyProvesCaptureAvoidanceForPredicateBindersIsFalse' DASHI/Foundations/Wette1969SchematicSubstitutionFreshnessExact.agda
+
+grep -q 'tupleThenPredicateOrderNowExecutableIsTrue' DASHI/Foundations/Wette1969OrderedTuplePredicateSubstitutionExact.agda
+grep -q 'structuralOrderSensitivityWitnessNowExistsIsTrue' DASHI/Foundations/Wette1969OrderedTuplePredicateSubstitutionExact.agda
+grep -q 'sourceOrderRequirementNowHasConcreteComputationalWitnessIsTrue' DASHI/Foundations/Wette1969OrderedTuplePredicateSubstitutionExact.agda
+grep -q 'boundedStructuralNonCommutationIsFullHistoricalSubstitutionTheoremIsFalse' DASHI/Foundations/Wette1969OrderedTuplePredicateSubstitutionExact.agda
 
 grep -q 'premise3FreshnessFragmentNowComputationallyCertifiableIsTrue' DASHI/Foundations/Wette1969Rule9324x25ComputationalSideConditionsExact.agda
-grep -q 'premise4SchematicSubstitutionFragmentNowComputationallyCertifiableIsTrue' DASHI/Foundations/Wette1969Rule9324x25ComputationalSideConditionsExact.agda
+grep -q 'premise4SourceOrderedTuplePredicateFragmentNowCertifiableIsTrue' DASHI/Foundations/Wette1969Rule9324x25ComputationalSideConditionsExact.agda
 grep -q 'computationalCertificateIsAlreadyHistoricalDerivabilityProofIsFalse' DASHI/Foundations/Wette1969Rule9324x25ComputationalSideConditionsExact.agda
-grep -q 'schematicFragmentIsAlreadyFullTuplePredicateSubstitutionIsFalse' DASHI/Foundations/Wette1969Rule9324x25ComputationalSideConditionsExact.agda
+grep -q 'orderedStructuralFragmentIsAlreadyBindingAwareHistoricalSubstitutionIsFalse' DASHI/Foundations/Wette1969Rule9324x25ComputationalSideConditionsExact.agda
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Foundations/Wette1969DerivationClosureExact.agda \
   DASHI/Foundations/Wette1969SchematicSubstitutionFreshnessExact.agda \
+  DASHI/Foundations/Wette1969OrderedTuplePredicateSubstitutionExact.agda \
   DASHI/Foundations/Wette1969Rule9324x25ComputationalSideConditionsExact.agda
