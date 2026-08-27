@@ -27,3 +27,4 @@ import DASHI.Core.RelationalEpistemicProcessSourceBridgeExact
 import DASHI.Core.DeclaredRealizedIntegrityResidualExact
 import DASHI.Core.SolisSituatedIntegrityBridgeExact
 import DASHI.Core.SituatedIntegrityNonfactorabilityExact
+import DASHI.Core.SolisInquiryPipelineExact
