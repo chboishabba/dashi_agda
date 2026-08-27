@@ -12,6 +12,7 @@ FILES=(
   DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
   DASHI/Foundations/WettePrimaryTextAcquisitionPlanExact.agda
   DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda
+  DASHI/Foundations/Wette1969HistoricalSignatureExact.agda
   DASHI/Foundations/Wette1969CompletenessInterpretationBridgeExact.agda
   DASHI/Foundations/Wette1970PrimaryTextExtractionExact.agda
   DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda
@@ -65,6 +66,8 @@ grep -q 'unverified1974DOIFabricatedIsFalse' DASHI/Foundations/WetteHistoricalSo
 grep -q 'DOI: 10.1007/978-3-642-86745-3_9' DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda
 grep -q 'historicalRuleSetFullyTranscribedIntoAgdaIsFalse' DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda
 grep -q 'hauptsatz2SubstitutionDomainIsDeductionDependentIsTrue' DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda
+grep -q 'modifiedP193SignatureUsedAsCanonicalAuditSurfaceIsTrue' DASHI/Foundations/Wette1969HistoricalSignatureExact.agda
+grep -q 'signatureTranscriptionAlreadySuppliesAll97RuleBodiesIsFalse' DASHI/Foundations/Wette1969HistoricalSignatureExact.agda
 grep -q 'hauptsatz2IsDefinitionallyFormulaOnlyTranslationIsFalse' DASHI/Foundations/Wette1969CompletenessInterpretationBridgeExact.agda
 grep -q 'sourceClaimIsAlreadyPointwiseProofCertificateIsFalse' DASHI/Foundations/Wette1969CompletenessInterpretationBridgeExact.agda
 grep -q 'DOI: 10.1111/j.1746-8361.1970.tb01221.x' DASHI/Foundations/Wette1970PrimaryTextExtractionExact.agda
@@ -98,6 +101,7 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda \
   DASHI/Foundations/WettePrimaryTextAcquisitionPlanExact.agda \
   DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda \
+  DASHI/Foundations/Wette1969HistoricalSignatureExact.agda \
   DASHI/Foundations/Wette1969CompletenessInterpretationBridgeExact.agda \
   DASHI/Foundations/Wette1970PrimaryTextExtractionExact.agda \
   DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda \
