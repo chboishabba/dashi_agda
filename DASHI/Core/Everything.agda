@@ -17,6 +17,11 @@ import DASHI.Core.IntersectionalNonFactorability
 import DASHI.Core.IntersectionalConstraintGeometryExact
 import DASHI.Core.IntersectionalBinaryInteractionBridgeExact
 import DASHI.Core.FeministRechartingSourceBridgeExact
+import DASHI.Core.TernaryRoleCarrierExact
+import DASHI.Core.LacanFregeTernaryRoleChartExact
+import DASHI.Core.IrigarayLabialRelationalCarrierExact
+import DASHI.Core.DifferenceWithoutHierarchyExact
+import DASHI.Core.LacanIrigarayTernaryGrammarBridgeExact
 import DASHI.Core.DialecticalStageSpectrumExact
 import DASHI.Core.ContextualDialecticRoleExact
 import DASHI.Core.EpistemicSuspensionExact
