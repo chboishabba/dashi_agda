@@ -26,7 +26,7 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 record ObserverAffordanceIncomparability
     {State Observation Affordance : Set}
     (observe : State → Observation)
-    (affordance : State → Affordance) : Set where
+    (affordance : State → Affordance) : Set₁ where
   constructor observer-affordance-incomparability
   field
     observationCannotRecoverAffordance :
