@@ -20,8 +20,10 @@ import DASHI.Core.DualEffectInformationActionExact
 import DASHI.Core.EvidenceReliabilityPolarityExact
 import DASHI.Core.FiniteRankedRefinementStabilizationExact
 import DASHI.Core.GenericFuturePartitionRefinementExact
+import DASHI.Core.HistoryConditionedChoiceExact
 import DASHI.Core.IdentifiabilityActiveInformationExact
 import DASHI.Core.IndexedRobustnessExact
+import DASHI.Core.RelationalTensionCompressionExact
 import DASHI.Core.ReopenableConsumerInterventionCrossDomainRegression
 import DASHI.Core.ReopenableConsumerInterventionKernelExact
 import DASHI.Core.ReopenableHypothesisForestExact
@@ -35,6 +37,7 @@ import DASHI.Environment.LESResearchCrossPollinationRound3Exact
 import DASHI.Environment.LESResearchCrossPollinationRound4Exact
 import DASHI.Environment.LESResearchCrossPollinationRound5Exact
 import DASHI.Environment.LESResearchCrossPollinationRound6Exact
+import DASHI.Environment.LESResearchCrossPollinationRound7Exact
 import DASHI.Geometry.AdaptiveWearableCompilerExact
 import DASHI.Geometry.EmpiricalROMRiskFieldExact
 import DASHI.Geometry.WearableBehaviouralSearchExact
