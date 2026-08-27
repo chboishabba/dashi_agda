@@ -8,25 +8,15 @@ module DASHI.Physics.Closure.NSTriadKNExternalPureCommutatorSwapPairingRound122E
 -- vector is a pure multiplier-difference commutator.  Round121 preserves the
 -- signed sum through the four-way Bony partition.
 --
--- This module closes the finite reindexing identity that mirrors the new Lean
--- `two_mul_externalResidue_eq_pairing` calculation without introducing any
--- division or free-action/orbit-cardinality hypothesis.
---
 -- For every complex-valued incidence functional V on the COMPLETE physical
 -- cutoff enumeration X,
 --
---   sum_X V + sum_X V
---     = sum_X (V tau + V (swap tau)).
+--   sum_X V + sum_X V = sum_X (V tau + V (swap tau)).
 --
--- The only structural input is the already machine-checked Round38 theorem
--- that swap is an exact permutation of the physical enumeration.  Stabilizers
--- are harmless: no quotient and no assumption that every orbit has size two
--- is used.
---
--- Specialising V to a fixed-test quartic Galerkin cell and using Round120 gives
--- an exact full-carrier representation by paired pure commutator cells.  The
--- remaining nonlinear problem is analytic: estimate the resulting signed
--- Bony-class sums at H^(1/2)-critical scale uniformly in the cutoff.
+-- This uses only the Round38 exact swap permutation.  No division, free-action
+-- assumption, or orbit-cardinality theorem is needed.  Specialising V to a
+-- fixed-test quartic cell and using Round120 gives the exact pure-commutator
+-- fold required before the remaining critical Bony-class estimate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -35,7 +25,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (map)
 import Data.List.Relation.Binary.Permutation.Propositional as Perm
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
@@ -78,9 +68,7 @@ foldPermutationInvariant {F = F} value
     (Perm.swap {ys = ys} x y permutation) =
   trans
     (cong
-      (λ tail →
-        C3.complexAdd (value x)
-          (C3.complexAdd (value y) tail))
+      (λ tail → C3.complexAdd (value x) (C3.complexAdd (value y) tail))
       (foldPermutationInvariant value permutation))
     (R.solve 3
       (λ x y tail →
@@ -101,8 +89,7 @@ foldPointwiseAdd :
 foldPointwiseAdd {F = F} left right [] =
   R.solve 0
     (R.Κ (C3.complexZero F)
-      R.⊜
-      (R.Κ (C3.complexZero F) R.⊕ R.Κ (C3.complexZero F)))
+      R.⊜ (R.Κ (C3.complexZero F) R.⊕ R.Κ (C3.complexZero F)))
     refl
   where module R = Ring.Solver F
 foldPointwiseAdd {F = F} left right (tau ∷ rest) =
@@ -156,8 +143,7 @@ twiceFullPhysicalFoldEqualsSwapPairedFold value cutoff =
         (foldComplex value (Physical.physicalTriadEnumeration cutoff)))
       (sym (fullPhysicalSwapFoldInvariant value cutoff)))
     (sym
-      (foldPointwiseAdd
-        value
+      (foldPointwiseAdd value
         (λ tau → value (Symmetry.swapTriad tau))
         (Physical.physicalTriadEnumeration cutoff)))
 
@@ -168,8 +154,7 @@ quarticValue :
   Audit.FiniteComplex3GalerkinSystem F E I →
   C3.Complex3 F →
   Physical.PhysicalTriadIncidence → C3.Complex F
-quarticValue system testCross tau =
-  R120.quarticCell system tau testCross
+quarticValue system testCross tau = R120.quarticCell system tau testCross
 
 pairedPureCommutatorValue :
   ∀ {r} {F : C3.RealField r}
@@ -181,8 +166,7 @@ pairedPureCommutatorValue :
   Physical.PhysicalTriadIncidence → C3.Complex F
 pairedPureCommutatorValue system helical testCross tau =
   C3.hermitianPairing3
-    (R120.pureCommutatorVector system tau (helical tau))
-    testCross
+    (R120.pureCommutatorVector system tau (helical tau)) testCross
 
 pairedQuarticValueIsPureCommutatorValue :
   ∀ {r} {F : C3.RealField r}
@@ -226,8 +210,7 @@ twiceFullQuarticFoldEqualsPureCommutatorFold :
   ≡ foldComplex
       (pairedPureCommutatorValue system helical testCross)
       (Physical.physicalTriadEnumeration cutoff)
-twiceFullQuarticFoldEqualsPureCommutatorFold
-    system helical testCross cutoff =
+twiceFullQuarticFoldEqualsPureCommutatorFold system helical testCross cutoff =
   trans
     (twiceFullPhysicalFoldEqualsSwapPairedFold
       (quarticValue system testCross) cutoff)
