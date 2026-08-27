@@ -29,7 +29,9 @@ module DASHI.Core.FiniteTypedBranchingInteractionBridgeExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.BinaryInteractionNonseparabilityExact as Interaction
+import DASHI.Core.FiniteTypedBranchingKernelExact as Kernel
 import DASHI.Core.FiniteTypedBranchingReachabilityBridgeExact as Branch
+import DASHI.Core.AdmissibleReachability as Reach
 
 ------------------------------------------------------------------------
 -- Reuse the existing route kernel as a generic binary response surface.
@@ -90,17 +92,17 @@ record BranchCountInteractionReachabilitySeparation : Set₁ where
   constructor branch-count-interaction-reachability-separation
   field
     sameLocalRowMass :
-      Branch.Kernel.rowScaledMass Branch.routeKernel Branch.trapStart
-      ≡ Branch.Kernel.rowScaledMass Branch.routeKernel Branch.escapeStart
+      Kernel.rowScaledMass Branch.routeKernel Branch.trapStart
+      ≡ Kernel.rowScaledMass Branch.routeKernel Branch.escapeStart
     sameLocalRegime :
-      Branch.Kernel.rowRegime Branch.routeKernel Branch.trapStart
-      ≡ Branch.Kernel.rowRegime Branch.routeKernel Branch.escapeStart
+      Kernel.rowRegime Branch.routeKernel Branch.trapStart
+      ≡ Kernel.rowRegime Branch.routeKernel Branch.escapeStart
     kernelNotEndpointAdditive :
       Interaction.NonseparableAdditiveInteraction routeInteractionSurface
     trapCannotReachGoal :
-      Branch.Reach.Reachable Branch.routeSystem Branch.trapStart Branch.escapeGoal → ⊥
+      Reach.Reachable Branch.routeSystem Branch.trapStart Branch.escapeGoal → ⊥
     escapeCanReachGoal :
-      Branch.Reach.Reachable Branch.routeSystem Branch.escapeStart Branch.escapeGoal
+      Reach.Reachable Branch.routeSystem Branch.escapeStart Branch.escapeGoal
 
 canonicalBranchCountInteractionReachabilitySeparation :
   BranchCountInteractionReachabilitySeparation
