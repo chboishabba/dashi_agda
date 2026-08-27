@@ -5,8 +5,9 @@ module DASHI.EverythingPartitionAsymptotics where
 -- partition lane.  The finite layer includes generic graded pointing,
 -- proof-free exact key enumeration, strict deletion-fibre instantiation,
 -- independent/classical residual normal forms and exact permutations,
--- arbitrary-n factor-pair and sigma1 recurrences, coarse finite growth
--- envelopes, and the rank-one Fock occupation-grading bridge.
+-- arbitrary-n factor-pair and sigma1 recurrences, exact Nat majorant
+-- cancellation, coarse finite growth envelopes, and the rank-one Fock
+-- occupation-grading bridge.
 --
 -- The first genuine analytic frontier is typed over the concrete Bishop
 -- real/exp substrate.  Existing Yang--Mills Bishop finite-geometric machinery
@@ -59,6 +60,7 @@ import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalAdmissibleMembershi
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualUniqueExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualPermutationExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosDivisorSumRecurrenceExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosNatMajorantBootstrapExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosBishopGeometricKernelBridgeExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosBishopUpperMajorantBoundaryExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalResidualExpansionExact
