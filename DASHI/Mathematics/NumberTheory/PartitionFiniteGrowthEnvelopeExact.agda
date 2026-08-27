@@ -16,8 +16,9 @@ module DASHI.Mathematics.NumberTheory.PartitionFiniteGrowthEnvelopeExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Nat.Base using (_≤_; z≤n)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
+open import Data.Nat.Properties using (_≟_)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 open import Relation.Binary.PropositionalEquality using (subst; trans)
 import Data.Vec.Base as Vec
@@ -53,9 +54,9 @@ selectMassLengthBound :
   ≤ Reindex.listLength vectors
 selectMassLengthBound {n} [] = z≤n
 selectMassLengthBound {n} (vector ∷ vectors)
-  with Partition.weightedMass vector Data.Nat.Properties.≟ n
+  with Partition.weightedMass vector ≟ n
 ... | yes massExact =
-  Data.Nat.Base.s≤s (selectMassLengthBound vectors)
+  s≤s (selectMassLengthBound vectors)
 ... | no notMass =
   NatP.≤-step (selectMassLengthBound vectors)
 
