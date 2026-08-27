@@ -2,9 +2,9 @@ module DASHI.Environment.LESRelationalHistoryFabricBridgeExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Core.RelationalHistoryFabricExact as Fabric
 import DASHI.Environment.LESResearchCrossPollinationRound7Exact as LES7
 import DASHI.Environment.ThreeSistersLESRelationalComplementarityBridgeExact as ThreeSisters
@@ -122,8 +122,7 @@ historyEssentialAtFixedIsolatedRelation =
     }
 
 historyAxisBlocksPresentOnlyFutureModel :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    observePlanning jointFutureCone → ⊥
+  NonFactor.FactorsThrough observePlanning jointFutureCone → ⊥
 historyAxisBlocksPresentOnlyFutureModel =
   Fabric.historyEssentialBlocksPresentOnlyFutureModel
     historyEssentialAtFixedIsolatedRelation
@@ -145,46 +144,40 @@ relationEssentialAtFixedShortHistory =
     }
 
 relationAxisBlocksPresentOnlyFutureModel :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    observePlanning jointFutureCone → ⊥
+  NonFactor.FactorsThrough observePlanning jointFutureCone → ⊥
 relationAxisBlocksPresentOnlyFutureModel =
   Fabric.relationEssentialBlocksPresentOnlyFutureModel
     relationEssentialAtFixedShortHistory
 
 ------------------------------------------------------------------------
--- Strong propagation specimen.
+-- Partial propagation is intentionally weaker than the generic full chain.
 --
--- This uses the synthetic short/long contrast only.  The relation coordinate is
--- held fixed so the witness is genuinely history-conditioned rather than a
--- disguised joint-coordinate change.
+-- With relation held fixed, the synthetic LES history contrast changes gate,
+-- reachable code and future cone.  It does NOT change the relation-derived
+-- affordance code in this bridge.  This blocks accidental promotion of the
+-- product witness into a causal claim that history changes Three Sisters
+-- complementarity itself.
 ------------------------------------------------------------------------
 
-historyPropagationAtFixedRelation :
-  Fabric.HistoryPropagationWitness lesRelationalHistoryFabric
-historyPropagationAtFixedRelation =
-  record
-    { propagationLeft = shortRelated
-    ; propagationRight = longRelated
-    ; propagationSameObservation = refl
-    ; propagationHistoryDiffers = λ ()
-    ; propagationGateDiffers = λ ()
-    ; propagationReachableDiffers = λ ()
-    ; propagationAffordanceDiffers = λ eq → impossibleAffordanceEquality eq
-    ; propagationFutureDiffers = λ ()
-    }
-  where
-    -- The synthetic bridge does not claim history changes the empirical
-    -- ecological complementarity code itself.  Therefore no positive
-    -- history->affordance propagation witness is actually available here.
-    -- This helper is deliberately uninhabited and makes that mismatch visible.
-    data NoHistoryOnlyAffordanceDifference : Set where
-    impossibleAffordanceEquality :
-      relatedAffordance ≡ relatedAffordance → ⊥
-    impossibleAffordanceEquality refl =
-      noHistoryOnlyAffordanceDifference
-      where
-        noHistoryOnlyAffordanceDifference : ⊥
-        noHistoryOnlyAffordanceDifference = ?
+historyChangesGateAtFixedRelatedRelation :
+  gateCode shortRelated ≡ gateCode longRelated → ⊥
+historyChangesGateAtFixedRelatedRelation ()
+
+historyChangesReachableAtFixedRelatedRelation :
+  reachableCode shortRelated ≡ reachableCode longRelated → ⊥
+historyChangesReachableAtFixedRelatedRelation ()
+
+historyPreservesRelationDerivedAffordance :
+  affordanceCode shortRelated ≡ affordanceCode longRelated
+historyPreservesRelationDerivedAffordance = refl
+
+historyChangesFutureAtFixedRelatedRelation :
+  jointFutureCone shortRelated ≡ jointFutureCone longRelated → ⊥
+historyChangesFutureAtFixedRelatedRelation ()
+
+relationChangesAffordanceAtFixedShortHistory :
+  affordanceCode shortIsolated ≡ affordanceCode shortRelated → ⊥
+relationChangesAffordanceAtFixedShortHistory ()
 
 ------------------------------------------------------------------------
 -- Boundary.
@@ -201,6 +194,10 @@ record LESRelationalHistoryFabricBoundary : Set where
     threeSistersComplementarityProvesLESPathDependenceIsFalse :
       threeSistersComplementarityProvesLESPathDependence ≡ false
 
+    historyAutomaticallyChangesRelationalAffordance : Bool
+    historyAutomaticallyChangesRelationalAffordanceIsFalse :
+      historyAutomaticallyChangesRelationalAffordance ≡ false
+
     syntheticProductIsEmpiricalAgriculturalModel : Bool
     syntheticProductIsEmpiricalAgriculturalModelIsFalse :
       syntheticProductIsEmpiricalAgriculturalModel ≡ false
@@ -213,6 +210,7 @@ canonicalLESRelationalHistoryFabricBoundary :
   LESRelationalHistoryFabricBoundary
 canonicalLESRelationalHistoryFabricBoundary =
   lesRelationalHistoryFabricBoundary
+    false refl
     false refl
     false refl
     false refl
