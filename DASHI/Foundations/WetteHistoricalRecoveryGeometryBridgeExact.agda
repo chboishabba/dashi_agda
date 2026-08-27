@@ -11,20 +11,6 @@ import DASHI.Core.FormalizationRecoverySourceRegistryExact as Calibration
 import DASHI.Foundations.WetteHistoricalRecoveryFrontierExact as Frontier
 import DASHI.Foundations.WetteHistoricalSourceAtlasExact as Source
 
-------------------------------------------------------------------------
--- Programme-level recovery profile.
---
--- Wette 1969 and 1970 primary texts plus the 1972 Kreisel/Zucker review have
--- now been inspected directly. Exact transcription has begun: the 1969
--- signature is typed with source arities; rules 0.1/0.2 have exact bodies; the
--- p.193 revision surface is represented; the critical dependency/order/typing
--- geometry is typed; 9.3.24/25 have complete parameterized HistoricalRuleBody
--- templates; and those rules now lift through proof-carrying finite derivation
--- contexts into the repo's existing mixed-generator finite-trace semantics.
--- OCR-sensitive compound words and the rest of the 97-rule calculus remain
--- transcription obligations, so `transcriptionExtracted` remains uninhabited.
-------------------------------------------------------------------------
-
 currentWetteRecoveryProfile : Recovery.RecoveryStageProfile
 currentWetteRecoveryProfile =
   Recovery.recoveryStageProfile supports
@@ -70,6 +56,12 @@ rule9324x25ConclusionTemplatesAndBodiesRecovered = tt
 
 finiteDerivationContextAndTraceErasureRecovered : ⊤
 finiteDerivationContextAndTraceErasureRecovered = tt
+
+derivationClosureFromPriorCertifiedStepsRecovered : ⊤
+derivationClosureFromPriorCertifiedStepsRecovered = tt
+
+schematicSubstitutionAndFreshnessEvaluatorRecovered : ⊤
+schematicSubstitutionAndFreshnessEvaluatorRecovered = tt
 
 criticalLate1974FormalObjectsStillUnrecovered : ⊤
 criticalLate1974FormalObjectsStillUnrecovered = tt
@@ -142,6 +134,18 @@ record WetteHistoricalRecoveryGeometryBoundary : Set where
     finiteDerivationContextBridgeNowRecoveredIsTrue :
       finiteDerivationContextBridgeNowRecovered ≡ true
 
+    derivationClosureFromPriorStepsNowRecovered : Bool
+    derivationClosureFromPriorStepsNowRecoveredIsTrue :
+      derivationClosureFromPriorStepsNowRecovered ≡ true
+
+    schematicSubstitutionFreshnessEvaluatorNowRecovered : Bool
+    schematicSubstitutionFreshnessEvaluatorNowRecoveredIsTrue :
+      schematicSubstitutionFreshnessEvaluatorNowRecovered ≡ true
+
+    fullHistoricalTuplePredicateSubstitutionNowRecovered : Bool
+    fullHistoricalTuplePredicateSubstitutionNowRecoveredIsFalse :
+      fullHistoricalTuplePredicateSubstitutionNowRecovered ≡ false
+
     primaryInspectionEqualsCompleteHistoricalTranscription : Bool
     primaryInspectionEqualsCompleteHistoricalTranscriptionIsFalse :
       primaryInspectionEqualsCompleteHistoricalTranscription ≡ false
@@ -174,6 +178,9 @@ canonicalWetteHistoricalRecoveryGeometryBoundary =
     true refl
     true refl
     true refl
+    true refl
+    true refl
+    false refl
     false refl
     false refl
     true refl
