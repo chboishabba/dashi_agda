@@ -20,15 +20,16 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosBishopUpperMajorantBoundaryE
 --   p(n) < exp(c sqrt(n)),  c = pi sqrt(2/3),
 --
 -- by combining the recurrence with a square-root tangent estimate and a
--- geometric/exponential kernel bound.  We do NOT postulate a new real carrier
--- here: order and exp are the existing Bishop objects.  Square root and the
--- sharp kernel inequality remain explicit inputs because the current Bishop
--- adapter does not yet own them.
+-- weighted geometric/exponential kernel bound.  We do NOT postulate a new real
+-- carrier here: order and exp are the existing Bishop objects.  Generic finite
+-- Bishop geometric control is also already available in the Step-V lane; the
+-- remaining quantitative gap is its degree-one weighted reciprocal-square
+-- specialization, together with square root and Basel.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; suc; _*_; _∸_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_; _∸_)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Data.Nat.Base using (_≤_)
 
@@ -38,6 +39,7 @@ import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Mathematics.NumberTheory.FiniteDivisorSumExact as Divisor
 import DASHI.Mathematics.NumberTheory.PartitionDivisorSumRegroupingExact as Regroup
 import DASHI.Mathematics.NumberTheory.PartitionErdosDivisorSumRecurrenceExact as Recurrence
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopGeometricKernelBridgeExact as GeometricBridge
 
 ------------------------------------------------------------------------
 -- Finite Bishop-valued folds.  This is only list recursion over the concrete
@@ -132,6 +134,7 @@ record ErdosBishopUpperMajorantAnalyticInputs
 
     -- This is the genuine Erdos analytic kernel inequality.  The historical
     -- proof derives it from sqrt concavity/tangent control, exponential laws,
+    -- the degree-one weighted geometric estimate
     -- e^{-x}/(1-e^{-x})^2 < 1/x^2, and the Basel sum.
     erdosKernelEstimate : ∀ n →
       Bishop.BishopLessEqual
@@ -144,7 +147,7 @@ record ErdosBishopUpperMajorantAnalyticInputs
     -- explicitly from the kernel estimate so ordered-field plumbing cannot be
     -- confused with the source-specific analytic inequality.
     positiveNatScaleCancel : ∀ {n : Nat} →
-      suc 0 ≤ n →
+      suc zero ≤ n →
       ∀ {left right : Bishop.Bishopℝ} →
       Bishop.BishopLessEqual
         (Bishop.bishopMul (natEmbed dataSet n) left)
@@ -162,20 +165,19 @@ finiteRecurrenceReceipt :
   n * Regroup.partitionCount n ≡ Regroup.divisorSumRHS n
 finiteRecurrenceReceipt = Recurrence.canonicalErdosDivisorSumRecurrence
 
+finiteGeometricInfrastructureReceipt :
+  GeometricBridge.ErdosWeightedGeometricFrontier
+finiteGeometricInfrastructureReceipt =
+  GeometricBridge.currentWeightedGeometricFrontier
+
 ------------------------------------------------------------------------
--- Source-route decomposition for the still-missing kernel theorem.
---
--- These are deliberately named as theorem roles rather than asserted facts.
--- A future concrete realization should inhabit each role on Bishop reals and
--- derive `erdosKernelEstimate`, rather than simply supplying the latter as a
--- black box.
+-- Source-route decomposition for the still-missing sharp kernel theorem.
 
 data ErdosKernelProofRole : Set where
   bishopSquareRootConstruction : ErdosKernelProofRole
   squareRootTangentInequality : ErdosKernelProofRole
   exponentialAdditivityAndMonotonicity : ErdosKernelProofRole
-  geometricDerivativeKernelIdentity : ErdosKernelProofRole
-  exponentialKernelReciprocalSquareBound : ErdosKernelProofRole
+  degreeOneWeightedGeometricReciprocalSquareBound : ErdosKernelProofRole
   baselSumPiSquaredOverSix : ErdosKernelProofRole
   constantPiSqrtTwoThirdsIdentification : ErdosKernelProofRole
 
