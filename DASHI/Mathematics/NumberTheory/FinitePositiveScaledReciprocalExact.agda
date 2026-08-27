@@ -2,9 +2,6 @@ module DASHI.Mathematics.NumberTheory.FinitePositiveScaledReciprocalExact where
 
 ------------------------------------------------------------------------
 -- POSITIVE SCALE / RECIPROCAL ARITHMETIC
---
--- These are the exact rational identities used by Bishop's accelerated real
--- multiplication index t = 2 * scale * n.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (refl)
@@ -16,7 +13,6 @@ open import Data.Nat.Base using (NonZero)
 import Data.Nat.Properties as NatP
 open import Data.Rational.Unnormalised as ℚ using
   (ℚᵘ; _/_; _+_; _*_; _≤_; _≃_; *≤*; *≡*)
-import Data.Rational.Unnormalised.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -54,6 +50,21 @@ doubleScaledReciprocalEquivalent scale precision =
           ((con (+ 2) :* s :* n) :* (con (+ 2) :* s :* n))))
       refl
       (+ scale)
+      (+ precision))
+
+oneOverPlusOneOverEquivalentTwoOver :
+  (precision : Nat) → .{{_ : NonZero precision}} →
+  ((+ 1 / precision) ℚ.+ (+ 1 / precision))
+  ℚ.≃
+  (+ 2 / precision)
+oneOverPlusOneOverEquivalentTwoOver precision =
+  ℚ.*≡*
+    (solve 1
+      (λ n →
+        ((con (+ 1) :* n :+ con (+ 1) :* n) :* n)
+        :=
+        (con (+ 2) :* (n :* n)))
+      refl
       (+ precision))
 
 precisionBelowProductPrecision :
