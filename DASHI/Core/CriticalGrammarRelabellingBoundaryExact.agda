@@ -51,29 +51,32 @@ AnzalduaBhabhaPreserving permutation =
       (Ternary.permute permutation left)
       (Ternary.permute permutation right)
 
+trueNotFalse : true ≡ false → ⊥
+trueNotFalse ()
+
 identityFails : AnzalduaBhabhaPreserving Ternary.identityPermutation → ⊥
 identityFails preservation =
-  (λ ()) (preservation Ternary.code1 Ternary.code0)
+  trueNotFalse (preservation Ternary.code1 Ternary.code0)
 
 swap01Fails : AnzalduaBhabhaPreserving Ternary.swap01Permutation → ⊥
 swap01Fails preservation =
-  (λ ()) (preservation Ternary.code0 Ternary.code1)
+  trueNotFalse (preservation Ternary.code0 Ternary.code1)
 
 swap02Fails : AnzalduaBhabhaPreserving Ternary.swap02Permutation → ⊥
 swap02Fails preservation =
-  (λ ()) (preservation Ternary.code0 Ternary.code2)
+  trueNotFalse (preservation Ternary.code0 Ternary.code2)
 
 swap12Fails : AnzalduaBhabhaPreserving Ternary.swap12Permutation → ⊥
 swap12Fails preservation =
-  (λ ()) (preservation Ternary.code1 Ternary.code0)
+  trueNotFalse (preservation Ternary.code1 Ternary.code0)
 
 cycle012Fails : AnzalduaBhabhaPreserving Ternary.cycle012Permutation → ⊥
 cycle012Fails preservation =
-  (λ ()) (preservation Ternary.code0 Ternary.code1)
+  trueNotFalse (preservation Ternary.code0 Ternary.code1)
 
 cycle021Fails : AnzalduaBhabhaPreserving Ternary.cycle021Permutation → ⊥
 cycle021Fails preservation =
-  (λ ()) (preservation Ternary.code0 Ternary.code2)
+  trueNotFalse (preservation Ternary.code0 Ternary.code2)
 
 noAnzalduaBhabhaTernaryRelabelling :
   (permutation : Ternary.TernaryPermutation) →
