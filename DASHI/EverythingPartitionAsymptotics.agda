@@ -7,7 +7,8 @@ module DASHI.EverythingPartitionAsymptotics where
 -- The analytic layer is built directly over the exact git-pinned
 -- `vendor/bishop` submodule.  The canonical Nat square-root candidate is now a
 -- `Real.mkℝ` value obtained from executable floor-square-root rational
--- approximants with source-level cross-precision regularity.
+-- approximants with source-level cross-precision regularity and a direct
+-- vendored `NonNegative` proof.
 ------------------------------------------------------------------------
 
 import DASHI.Foundations.BishopVendoredSubmoduleProvenanceExact
@@ -17,6 +18,7 @@ import DASHI.Foundations.BishopNatSquareRootFloorApproximationExact
 import DASHI.Foundations.BishopNatSquareRootRationalCrossPrecisionExact
 import DASHI.Foundations.RationalDirectedDifferenceAbsoluteBoundExact
 import DASHI.Foundations.BishopNatSquareRootRegularFloorExact
+import DASHI.Foundations.BishopNatSquareRootNonnegativeExact
 import DASHI.Mathematics.NumberTheory.FiniteNatFloorSquareRootExact
 import DASHI.Mathematics.NumberTheory.FiniteNatFractionOrderExact
 import DASHI.Mathematics.NumberTheory.FiniteNatSuccessorFractionExact
