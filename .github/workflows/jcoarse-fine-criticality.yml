@@ -9,10 +9,13 @@ on:
       - 'DASHI/Core/FiniteBranchingCriticalityExact.agda'
       - 'DASHI/Core/FiniteTypedBranchingKernelExact.agda'
       - 'DASHI/Core/FiniteTypedBranchingReachabilityBridgeExact.agda'
+      - 'DASHI/Core/BinaryInteractionNonseparabilityExact.agda'
+      - 'DASHI/Core/FiniteTypedBranchingInteractionBridgeExact.agda'
       - 'DASHI/Core/LogisticFoldCriticalityExact.agda'
       - 'DASHI/Core/NumberRoleProvenanceAtlasExact.agda'
       - 'DASHI/Core/IntersectionalNonFactorability.agda'
       - 'DASHI/Core/IntersectionalConstraintGeometryExact.agda'
+      - 'DASHI/Core/IntersectionalBinaryInteractionBridgeExact.agda'
       - 'DASHI/Core/FeministRechartingSourceBridgeExact.agda'
       - 'DASHI/Core/DialecticalStageSpectrumExact.agda'
       - 'DASHI/Core/ContextualDialecticRoleExact.agda'
@@ -68,9 +71,12 @@ jobs:
             DASHI/Core/FiniteBranchingCriticalityExact.agda
             DASHI/Core/FiniteTypedBranchingKernelExact.agda
             DASHI/Core/FiniteTypedBranchingReachabilityBridgeExact.agda
+            DASHI/Core/BinaryInteractionNonseparabilityExact.agda
+            DASHI/Core/FiniteTypedBranchingInteractionBridgeExact.agda
             DASHI/Core/LogisticFoldCriticalityExact.agda
             DASHI/Core/NumberRoleProvenanceAtlasExact.agda
             DASHI/Core/IntersectionalConstraintGeometryExact.agda
+            DASHI/Core/IntersectionalBinaryInteractionBridgeExact.agda
             DASHI/Core/FeministRechartingSourceBridgeExact.agda
             DASHI/Core/DialecticalStageSpectrumExact.agda
             DASHI/Core/ContextualDialecticRoleExact.agda
@@ -112,9 +118,12 @@ jobs:
               DASHI/Core/FiniteBranchingCriticalityExact.agda
               DASHI/Core/FiniteTypedBranchingKernelExact.agda
               DASHI/Core/FiniteTypedBranchingReachabilityBridgeExact.agda
+              DASHI/Core/BinaryInteractionNonseparabilityExact.agda
+              DASHI/Core/FiniteTypedBranchingInteractionBridgeExact.agda
               DASHI/Core/LogisticFoldCriticalityExact.agda
               DASHI/Core/IntersectionalNonFactorability.agda
               DASHI/Core/IntersectionalConstraintGeometryExact.agda
+              DASHI/Core/IntersectionalBinaryInteractionBridgeExact.agda
               DASHI/Core/FeministRechartingSourceBridgeExact.agda
               DASHI/Core/NumberRoleProvenanceAtlasExact.agda
               DASHI/Core/DialecticalStageSpectrumExact.agda
