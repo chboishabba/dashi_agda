@@ -11,3 +11,4 @@ import DASHI.Reasoning.StructuralMetaphorSourceRegistryExact
 import DASHI.Reasoning.StructuralMetaphorTaskCompressionExact
 import DASHI.Reasoning.ConsumerRelativeMetaphorTransferFitnessExact
 import DASHI.Reasoning.StructuralTransferBreakdownExact
+import DASHI.Reasoning.MetaphorTransferResidualExact
