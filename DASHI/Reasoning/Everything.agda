@@ -9,3 +9,7 @@ import DASHI.Reasoning.AccessBiasFallacySeparationExact
 import DASHI.Reasoning.AristotleMCGSHypergraphExact
 import DASHI.Reasoning.AristotleMCGSIntrospectiveSpecimen
 import DASHI.Reasoning.AristotleMCGSRecoveredWitness
+import DASHI.Reasoning.FolkLawEpistemicAuthorityCaptureExact
+import DASHI.Reasoning.EpistemicAuthorityIntrospectiveVisualReceiptExact
+import DASHI.Reasoning.FolkLawEpistemicAuthorityBroadExact
+import DASHI.Reasoning.EpistemicAuthorityBroadVisualFindingExact
