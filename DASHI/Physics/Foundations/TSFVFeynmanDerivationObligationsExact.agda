@@ -70,14 +70,14 @@ tsfvAdmissibilityObligation = derivationObligation
 tsfvNonseparableTransitionActionObligation : DerivationObligation
 tsfvNonseparableTransitionActionObligation = derivationObligation
   tsfvToNonseparableTransitionAction
-  structuralCandidateOnly
-  "Two structural local-action candidates have now been audited: the v3 candidate is T-invariant but destination-only, while the Candidate256 I× candidate is pair-valued but provably endpoint-separable. A TSFV-originating local term that is both transformation-compatible and genuinely nonseparable in the transition pair remains open."
+  derived
+  "A structural Candidate256 transition kernel is now derived from the existing quotient U-coordinate mismatch geometry. It is genuinely nonseparable on the canonical left/right witness and exactly invariant under simultaneous Candidate256 T on both endpoints. This closes only the structural nonseparable-kernel arrow; it is not yet a calibrated physical action."
 
 tsfvActionObligation : DerivationObligation
 tsfvActionObligation = derivationObligation
   tsfvToPhysicalAction
   structuralCandidateOnly
-  "Additive finite-history action machinery and audited TSFV structural candidates now exist, but physical action units, dynamical/Lagrangian origin, nonseparable transition geometry, continuum control and empirical calibration remain open."
+  "Additive finite-history action machinery now consumes a derived T-invariant nonseparable TSFV transition kernel, but physical action units, a dynamical/Lagrangian origin, continuum control and empirical calibration remain open."
 
 actionPhaseObligation : DerivationObligation
 actionPhaseObligation = derivationObligation
@@ -130,8 +130,8 @@ record TSFVFeynmanDerivationBoundary : Set where
       structuralActionCandidateConstructed ≡ true
 
     nonseparableTransitionActionDerived : Bool
-    nonseparableTransitionActionDerivedIsFalse :
-      nonseparableTransitionActionDerived ≡ false
+    nonseparableTransitionActionDerivedIsTrue :
+      nonseparableTransitionActionDerived ≡ true
 
     actionToPhaseCalibrationSupplied : Bool
     actionToPhaseCalibrationSuppliedIsFalse :
@@ -150,7 +150,7 @@ canonicalTSFVFeynmanDerivationBoundary =
   tsfvFeynmanDerivationBoundary
     true refl
     true refl
-    false refl
+    true refl
     false refl
     false refl
     false refl
