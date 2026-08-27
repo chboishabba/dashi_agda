@@ -59,8 +59,8 @@ import DASHI.Physics.Closure.NSTriadKNExternalCrossTriadRemainderRound109Exact a
 import DASHI.Physics.Closure.NSTriadKNSelfPhaseSquareMassSignAuditRound109Exact as Self
 import DASHI.Physics.Closure.NSTriadKNUniformGalerkinSignedCriticalProductionRound104Exact as Critical
 
-round109Round108SignedRouteAuditRetained : Bool
-round109Round108SignedRouteAuditRetained =
+round109PositivePartOfNetworkForcingRequired : Bool
+round109PositivePartOfNetworkForcingRequired =
   R108.round108PositivePartOfNetworkForcingRequired
 
 round109LiteralExternalOutputFiberResidualClosed : Bool
@@ -111,11 +111,9 @@ round109CurrentTheoremSizedPackageCount = 2
 round109CurrentAnalyticLeafCount : Nat
 round109CurrentAnalyticLeafCount = 3
 
--- Round108 proves the positive-part route is not required, hence this retained
--- value is intentionally false.
-round109Round108SignedRouteAuditRetainedIsFalse :
-  round109Round108SignedRouteAuditRetained ≡ false
-round109Round108SignedRouteAuditRetainedIsFalse = refl
+round109PositivePartOfNetworkForcingRequiredIsFalse :
+  round109PositivePartOfNetworkForcingRequired ≡ false
+round109PositivePartOfNetworkForcingRequiredIsFalse = refl
 
 round109LiteralExternalOutputFiberResidualClosedIsTrue :
   round109LiteralExternalOutputFiberResidualClosed ≡ true
