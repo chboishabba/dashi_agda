@@ -2,19 +2,12 @@ module DASHI.Foundations.WetteHistoricalRecoveryFrontierExact where
 
 ------------------------------------------------------------------------
 -- WETTE HISTORICAL RECOVERY FRONTIER
---
--- The generic architecture is now mostly present.  The remaining high-value
--- work is source extraction: identify the exact historical objects needed to
--- instantiate the existing formal interfaces rather than inventing replacements.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
 import DASHI.Foundations.WetteHistoricalSourceAtlasExact as Source
-
-------------------------------------------------------------------------
--- What must be recovered from the historical corpus.
-------------------------------------------------------------------------
+import DASHI.Foundations.WettePrimaryTextAcquisitionPlanExact as AcquisitionPlan
 
 data RecoveryObject : Set where
   formulaGrammar : RecoveryObject
@@ -41,137 +34,43 @@ record RecoveryTarget : Set where
 
 open RecoveryTarget public
 
-------------------------------------------------------------------------
--- Priority targets.
---
--- 1969 is the main construction source.  The 1970 retrospective is valuable
--- for Wette's own programmatic description.  The 1974 contradiction paper is
--- the best currently verified target for the consistency deduction, while the
--- reported 1974 canonical-system and 1976 simplification abstracts are marked
--- as pending primary verification in the source atlas.
-------------------------------------------------------------------------
+grammarTarget = recoveryTarget formulaGrammar Source.wette1969ConstructiveArithmetic false false
+generatorTarget = recoveryTarget generatorVocabulary Source.wette1969ConstructiveArithmetic false false
+admissibilityTarget = recoveryTarget admissibilityOrLegality Source.wette1969ConstructiveArithmetic false false
+baseStateTarget = recoveryTarget axiomOrBaseState Source.wette1969ConstructiveArithmetic false false
+codingTarget = recoveryTarget codingConvention Source.wette1969ConstructiveArithmetic false false
+relativeCompletenessTarget = recoveryTarget relativeCompletenessMeaning Source.wette1969ConstructiveArithmetic false false
+consistencySentenceTarget = recoveryTarget consistencySentence Source.wette1974Contradiction false false
+contradictionSentenceTarget = recoveryTarget contradictionSentence Source.wette1974Contradiction false false
+reductionTarget = recoveryTarget consistencyToContradictionReduction Source.wette1974Contradiction false false
+comparisonArithmeticTarget = recoveryTarget comparisonArithmetic Source.wette1974CanonicalSystemAbstract false false
+comparisonTranslationTarget = recoveryTarget comparisonTranslation Source.wette1974CanonicalSystemAbstract false false
+contradictionPreservationTarget = recoveryTarget contradictionPreservation Source.wette1974CanonicalSystemAbstract false false
+semanticBridgeTarget = recoveryTarget semanticOrReflectionBridge Source.bernays1971Commentary false false
 
-grammarTarget : RecoveryTarget
-grammarTarget =
-  recoveryTarget
-    formulaGrammar
-    Source.wette1969ConstructiveArithmetic
-    false false
-
-generatorTarget : RecoveryTarget
-generatorTarget =
-  recoveryTarget
-    generatorVocabulary
-    Source.wette1969ConstructiveArithmetic
-    false false
-
-admissibilityTarget : RecoveryTarget
-admissibilityTarget =
-  recoveryTarget
-    admissibilityOrLegality
-    Source.wette1969ConstructiveArithmetic
-    false false
-
-baseStateTarget : RecoveryTarget
-baseStateTarget =
-  recoveryTarget
-    axiomOrBaseState
-    Source.wette1969ConstructiveArithmetic
-    false false
-
-codingTarget : RecoveryTarget
-codingTarget =
-  recoveryTarget
-    codingConvention
-    Source.wette1969ConstructiveArithmetic
-    false false
-
-relativeCompletenessTarget : RecoveryTarget
-relativeCompletenessTarget =
-  recoveryTarget
-    relativeCompletenessMeaning
-    Source.wette1969ConstructiveArithmetic
-    false false
-
-consistencySentenceTarget : RecoveryTarget
-consistencySentenceTarget =
-  recoveryTarget
-    consistencySentence
-    Source.wette1974Contradiction
-    false false
-
-contradictionSentenceTarget : RecoveryTarget
-contradictionSentenceTarget =
-  recoveryTarget
-    contradictionSentence
-    Source.wette1974Contradiction
-    false false
-
-reductionTarget : RecoveryTarget
-reductionTarget =
-  recoveryTarget
-    consistencyToContradictionReduction
-    Source.wette1974Contradiction
-    false false
-
-comparisonArithmeticTarget : RecoveryTarget
-comparisonArithmeticTarget =
-  recoveryTarget
-    comparisonArithmetic
-    Source.wette1974CanonicalSystemAbstract
-    false false
-
-comparisonTranslationTarget : RecoveryTarget
-comparisonTranslationTarget =
-  recoveryTarget
-    comparisonTranslation
-    Source.wette1974CanonicalSystemAbstract
-    false false
-
-contradictionPreservationTarget : RecoveryTarget
-contradictionPreservationTarget =
-  recoveryTarget
-    contradictionPreservation
-    Source.wette1974CanonicalSystemAbstract
-    false false
-
-semanticBridgeTarget : RecoveryTarget
-semanticBridgeTarget =
-  recoveryTarget
-    semanticOrReflectionBridge
-    Source.bernays1971Commentary
-    false false
-
-------------------------------------------------------------------------
--- Recovery sequencing is dependency-aware rather than vocabulary-driven.
-------------------------------------------------------------------------
+lateCanonicalSystemAcquisition = AcquisitionPlan.wette1974CanonicalSystemAcquisition
+lateSimplificationAcquisition = AcquisitionPlan.wette1976SimplifyingComplicationAcquisition
+lateContradictionPaperAcquisition = AcquisitionPlan.wette1974ContradictionAcquisition
 
 record WetteHistoricalRecoveryBoundary : Set where
   constructor wetteHistoricalRecoveryBoundary
   field
     genericArchitectureAlreadyAvailable : Bool
-    genericArchitectureAlreadyAvailableIsTrue :
-      genericArchitectureAlreadyAvailable ≡ true
-
+    genericArchitectureAlreadyAvailableIsTrue : genericArchitectureAlreadyAvailable ≡ true
     exactHistoricalGrammarRecovered : Bool
-    exactHistoricalGrammarRecoveredIsFalse :
-      exactHistoricalGrammarRecovered ≡ false
-
+    exactHistoricalGrammarRecoveredIsFalse : exactHistoricalGrammarRecovered ≡ false
     exactHistoricalConsistencyReductionRecovered : Bool
-    exactHistoricalConsistencyReductionRecoveredIsFalse :
-      exactHistoricalConsistencyReductionRecovered ≡ false
-
+    exactHistoricalConsistencyReductionRecoveredIsFalse : exactHistoricalConsistencyReductionRecovered ≡ false
     exactHistoricalComparisonTranslationRecovered : Bool
-    exactHistoricalComparisonTranslationRecoveredIsFalse :
-      exactHistoricalComparisonTranslationRecovered ≡ false
-
+    exactHistoricalComparisonTranslationRecoveredIsFalse : exactHistoricalComparisonTranslationRecovered ≡ false
+    latePrimaryTextAccessRoutesLocated : Bool
+    latePrimaryTextAccessRoutesLocatedIsTrue : latePrimaryTextAccessRoutesLocated ≡ true
+    accessRouteKnowledgeCountsAsPrimaryTextInspection : Bool
+    accessRouteKnowledgeCountsAsPrimaryTextInspectionIsFalse : accessRouteKnowledgeCountsAsPrimaryTextInspection ≡ false
     relativeCompletenessShouldBeDefinedBeforeSourceRecovery : Bool
-    relativeCompletenessShouldBeDefinedBeforeSourceRecoveryIsFalse :
-      relativeCompletenessShouldBeDefinedBeforeSourceRecovery ≡ false
-
+    relativeCompletenessShouldBeDefinedBeforeSourceRecoveryIsFalse : relativeCompletenessShouldBeDefinedBeforeSourceRecovery ≡ false
     sourceExtractionPrecedesTheoremDischarge : Bool
-    sourceExtractionPrecedesTheoremDischargeIsTrue :
-      sourceExtractionPrecedesTheoremDischarge ≡ true
+    sourceExtractionPrecedesTheoremDischargeIsTrue : sourceExtractionPrecedesTheoremDischarge ≡ true
 
 canonicalWetteHistoricalRecoveryBoundary : WetteHistoricalRecoveryBoundary
 canonicalWetteHistoricalRecoveryBoundary =
@@ -179,6 +78,8 @@ canonicalWetteHistoricalRecoveryBoundary =
     true refl
     false refl
     false refl
+    false refl
+    true refl
     false refl
     false refl
     true refl
