@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.Foundations.ContextConditionedTrajectoryWeightExact as Weight
 import DASHI.Physics.Foundations.WavelengthSourceScaleSelectionExact as Scale
 import DASHI.Physics.Foundations.PathIntegralExperimentalSourceRegistryExact as Sources
+import DASHI.Interop.QuantumPathLightTransportAnalogyDischarge as QL
 import DASHI.Interop.StationaryPhaseMirrorGratingToyReceipt as Toy
 import DASHI.Physics.Closure.LightTransportFibreClosure as Light
 import DASHI.Physics.Closure.QuantumPathFibreObservationQuotient as Quantum
@@ -44,7 +45,7 @@ apertureAndWakeModeRolesAreDistinct ()
 
 stationaryPhaseOpticsReceipt :
   Toy.StationaryPhaseMirrorGratingToyReceipt
-    Toy.QL.canonicalQuantumPathLightTransportAnalogyDischarge
+    QL.canonicalQuantumPathLightTransportAnalogyDischarge
 stationaryPhaseOpticsReceipt =
   Toy.canonicalStationaryPhaseMirrorGratingToyReceipt
 
