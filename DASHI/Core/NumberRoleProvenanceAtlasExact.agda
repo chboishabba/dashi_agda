@@ -41,6 +41,7 @@ import DASHI.Mathematics.NumberTheory.RiemannXiSymmetryExact as RH
 data NumberRole : Set where
   dyadicScreenCut
   historicalDecimalComparison
+  decimalTenPercentPowerupRole
   branchingCriticalAvailability
   logisticFoldCriticalPoint
   riemannCriticalRealPart
@@ -92,6 +93,14 @@ fiveEighteenthsHistoricalEquation :
   Branch.affineQuarterTenthFixedPointEquation 5 18
 fiveEighteenthsHistoricalEquation =
   Branch.fiveEighteenthsSolvesAffineQuarterTenth
+
+fivePointFiveHistoricalNumerator :
+  Decimal.decimalRefinementNumerator Decimal.d5 1 ≡ 55
+fivePointFiveHistoricalNumerator = Decimal.fiveDepthOne
+
+ninePointNineHistoricalNumerator :
+  Decimal.decimalRefinementNumerator Decimal.d9 1 ≡ 99
+ninePointNineHistoricalNumerator = Decimal.nineDepthOne
 
 nineDecimalDepthTwo :
   Decimal.decimalRefinementNumerator Decimal.d9 2 ≡ 999
@@ -232,6 +241,28 @@ nineTenthsHistoricalEntry =
     "DASHI.Biology.JCoarseFineBranchingCriticalityExact"
     retrospectiveAnalogy
 
+fivePointFivePowerupEntry : NumberProvenanceEntry
+fivePointFivePowerupEntry =
+  number-provenance-entry
+    "5.5"
+    decimalTenPercentPowerupRole
+    "supplied DASHI +10% / stage-refinement reconstruction notes"
+    "first repeated-digit fine refinement of coarse 5"
+    "decimalRefinementNumerator d5 1 = 55, interpreted over denominator 10"
+    "DASHI.Core.DecimalResidualRefinementExact"
+    historicalSourceMeaning
+
+ninePointNinePowerupEntry : NumberProvenanceEntry
+ninePointNinePowerupEntry =
+  number-provenance-entry
+    "9.9"
+    decimalTenPercentPowerupRole
+    "supplied DASHI +10% / coarse-fine reconstruction notes"
+    "first repeated-digit fine refinement of coarse 9"
+    "decimalRefinementNumerator d9 1 = 99, interpreted over denominator 10"
+    "DASHI.Core.DecimalResidualRefinementExact"
+    historicalSourceMeaning
+
 fiveEighteenthsEntry : NumberProvenanceEntry
 fiveEighteenthsEntry =
   number-provenance-entry
@@ -320,10 +351,14 @@ record NumberRoleProvenanceBoundary : Set where
     positiveHalfIdentifiedWithThreeAdicMinusHalf : Bool
     positiveHalfIdentifiedWithThreeAdicMinusHalfIsFalse :
       positiveHalfIdentifiedWithThreeAdicMinusHalf ≡ false
+    fivePointFiveIdentifiedWithHalfThreshold : Bool
+    fivePointFiveIdentifiedWithHalfThresholdIsFalse :
+      fivePointFiveIdentifiedWithHalfThreshold ≡ false
 
 canonicalNumberRoleProvenanceBoundary : NumberRoleProvenanceBoundary
 canonicalNumberRoleProvenanceBoundary =
   number-role-provenance-boundary
+    false refl
     false refl
     false refl
     false refl
