@@ -12,60 +12,52 @@ open import DASHI.Core.Prelude
 
 regressionGenericThreeSampleResidualDimension :
   PoleAudit.residualDimension PoleAudit.genericTwoPoleThreeSampleCase ≡ 1
-regressionGenericThreeSampleResidualDimension =
-  G21.literalGenericThreeSampleResidualDimension
+regressionGenericThreeSampleResidualDimension = G21.literalGenericThreeSampleResidualDimension
 
 regressionRobustFourSampleResidualDimension :
   PoleAudit.residualDimension PoleAudit.genericTwoPoleFourSampleCase ≡ 2
-regressionRobustFourSampleResidualDimension =
-  G21.robustFourSampleResidualDimension
+regressionRobustFourSampleResidualDimension = G21.robustFourSampleResidualDimension
 
 regressionConjugacyDoesNotForceHeightSeparation :
   Heights.responseAtHeight Heights.canonicalCollapsedConjugateFamily Heights.lowHeight
   ≡ Heights.responseAtHeight Heights.canonicalCollapsedConjugateFamily Heights.highHeight
-regressionConjugacyDoesNotForceHeightSeparation = Heights.collapsedHeightResponsesEqual
+regressionConjugacyDoesNotForceHeightSeparation =
+  G21.conjugateHeightSymmetryDoesNotForceSeparation
 
 regressionTwoByTwoNoGo :
   Mixed2.det2Code Mixed2.responseLeft Mixed2.responseRight
-  ≡ Mixed2.det2Code Mixed2.commonPole Mixed2.commonPole
-  → ⊥
+  ≡ Mixed2.det2Code Mixed2.commonPole Mixed2.commonPole → ⊥
 regressionTwoByTwoNoGo = G21.naiveTwoByTwoRankOnePoleGateRejected
 
 regressionConditionalThreeByThreePoleQuotient :
   Det3.SameSignedDeterminant
     (Det3.det3 Det3.response₁ Det3.response₂ Det3.poleProfile)
     (Det3.det3 Det3.residual₁ Det3.residual₂ Det3.poleProfile)
-regressionConditionalThreeByThreePoleQuotient =
-  G21.finiteThreeByThreeRankOneMechanism
+regressionConditionalThreeByThreePoleQuotient = G21.finiteThreeByThreeRankOneMechanism
 
 regressionPairAdmission : Pair.PrimePairRelationalAdmission
 regressionPairAdmission = Pair.canonicalToyPrimePairRelationalAdmission
 
 regressionCrossPollinationObserver :
   Cross.robustRankTwoExteriorCarrierReturned ≡ true
-regressionCrossPollinationObserver =
-  Cross.robustRankTwoExteriorCarrierReturnedIsTrue
+regressionCrossPollinationObserver = Cross.robustRankTwoExteriorCarrierReturnedIsTrue
 
 regressionRankOneNotDerived :
-  G21.G21CurrentBoundary.rankOnePoleReductionDerived
-    G21.canonicalG21CurrentBoundary
-  ≡ false
+  G21.G21CurrentBoundary.rankOnePoleReductionDerived G21.canonicalG21CurrentBoundary ≡ false
 regressionRankOneNotDerived =
-  G21.G21CurrentBoundary.rankOnePoleReductionDerivedIsFalse
-    G21.canonicalG21CurrentBoundary
+  G21.G21CurrentBoundary.rankOnePoleReductionDerivedIsFalse G21.canonicalG21CurrentBoundary
+
+regressionTwoHeightNotDerived :
+  G21.G21CurrentBoundary.twoHeightTaperTransversalityDerived G21.canonicalG21CurrentBoundary ≡ false
+regressionTwoHeightNotDerived =
+  G21.G21CurrentBoundary.twoHeightTaperTransversalityDerivedIsFalse G21.canonicalG21CurrentBoundary
 
 regressionTransversalityNotDerived :
-  G21.G21CurrentBoundary.literalPoleQuotientTransversalityDerived
-    G21.canonicalG21CurrentBoundary
-  ≡ false
+  G21.G21CurrentBoundary.literalPoleQuotientTransversalityDerived G21.canonicalG21CurrentBoundary ≡ false
 regressionTransversalityNotDerived =
-  G21.G21CurrentBoundary.literalPoleQuotientTransversalityDerivedIsFalse
-    G21.canonicalG21CurrentBoundary
+  G21.G21CurrentBoundary.literalPoleQuotientTransversalityDerivedIsFalse G21.canonicalG21CurrentBoundary
 
 regressionRHBoundary :
-  G21.G21CurrentBoundary.riemannHypothesisDerived
-    G21.canonicalG21CurrentBoundary
-  ≡ false
+  G21.G21CurrentBoundary.riemannHypothesisDerived G21.canonicalG21CurrentBoundary ≡ false
 regressionRHBoundary =
-  G21.G21CurrentBoundary.riemannHypothesisDerivedIsFalse
-    G21.canonicalG21CurrentBoundary
+  G21.G21CurrentBoundary.riemannHypothesisDerivedIsFalse G21.canonicalG21CurrentBoundary
