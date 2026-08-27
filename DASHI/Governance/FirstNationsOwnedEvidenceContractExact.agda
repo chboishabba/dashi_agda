@@ -1,15 +1,25 @@
 module DASHI.Governance.FirstNationsOwnedEvidenceContractExact where
 
 open import DASHI.Core.Prelude
+import DASHI.Governance.IndigenousAuthoritySourceRegistryExact as Sources
+import DASHI.Governance.IndigenousAuthorityEnvelopeExact as Envelope
 
 ------------------------------------------------------------------------
--- FIRST NATIONS-OWNED EVIDENCE AUTHORITY CONTRACT
+-- FIRST NATIONS EVIDENCE AUTHORITY: COMPATIBILITY / ROUTING BOUNDARY
 --
--- This is an authority/governance owner only.  It contains no substantive
--- claim about any First Nations knowledge system, land practice or community.
--- Its purpose is to prevent an external reconstruction, however useful as
--- background, from being silently promoted into First Nations epistemic
--- authority.
+-- Structural calibration:
+-- - FNIGC OCAP®: Ownership, Control, Access, Possession; specifically First
+--   Nations. Stable institutional source; no DOI asserted.
+-- - Carroll et al. 2020, CARE Principles for Indigenous Data Governance,
+--   DOI 10.5334/dsj-2020-043.
+-- - Local Contexts TK Labels: Provenance / Protocol / Permission families;
+--   stable institutional source, no DOI asserted.
+--
+-- IMPORTANT CORRECTION: provenance/ownership alone does NOT authorize every
+-- situated, land-management or normative use.  The richer
+-- IndigenousAuthorityEnvelopeExact carries governance, protocol and permission
+-- separately.  This module retains the older provenance/use vocabulary only as
+-- a compatibility surface for clearly bounded routes.
 ------------------------------------------------------------------------
 
 data EvidenceProvenance : Set where
@@ -28,21 +38,10 @@ data EvidenceUse : Set where
   normativeAuthority
   : EvidenceUse
 
+-- Only low-authority background/comparison routes are inhabited here.
+-- Higher-authority uses must use the richer envelope/protocol/permission
+-- machinery rather than provenance alone.
 data AuthorizedFor : EvidenceProvenance → EvidenceUse → Set where
-  ownedSituatedKnowledge :
-    AuthorizedFor firstNationsOwned situatedKnowledgeAuthority
-  ownedLandManagement :
-    AuthorizedFor firstNationsOwned landManagementAuthority
-  ownedNormative :
-    AuthorizedFor firstNationsOwned normativeAuthority
-  coauthoredSituatedKnowledge :
-    AuthorizedFor firstNationsCoAuthored situatedKnowledgeAuthority
-  coauthoredLandManagement :
-    AuthorizedFor firstNationsCoAuthored landManagementAuthority
-  institutionalSituatedKnowledge :
-    AuthorizedFor firstNationsInstitutional situatedKnowledgeAuthority
-  institutionalLandManagement :
-    AuthorizedFor firstNationsInstitutional landManagementAuthority
   externalHistoricalBackground :
     AuthorizedFor externalHistoricalReconstruction bibliographicBackground
   externalHistoricalComparison :
@@ -51,6 +50,18 @@ data AuthorizedFor : EvidenceProvenance → EvidenceUse → Set where
     AuthorizedFor externalSecondaryInterpretation bibliographicBackground
   externalSecondaryComparison :
     AuthorizedFor externalSecondaryInterpretation comparativeContext
+
+ownedProvenanceAloneDoesNotAuthorizeSituatedKnowledge :
+  AuthorizedFor firstNationsOwned situatedKnowledgeAuthority → ⊥
+ownedProvenanceAloneDoesNotAuthorizeSituatedKnowledge ()
+
+ownedProvenanceAloneDoesNotAuthorizeLandManagement :
+  AuthorizedFor firstNationsOwned landManagementAuthority → ⊥
+ownedProvenanceAloneDoesNotAuthorizeLandManagement ()
+
+ownedProvenanceAloneDoesNotAuthorizeNormativeAuthority :
+  AuthorizedFor firstNationsOwned normativeAuthority → ⊥
+ownedProvenanceAloneDoesNotAuthorizeNormativeAuthority ()
 
 externalHistorianDoesNotBecomeSituatedAuthority :
   AuthorizedFor externalHistoricalReconstruction situatedKnowledgeAuthority → ⊥
@@ -64,10 +75,6 @@ externalSecondaryDoesNotBecomeNormativeAuthority :
   AuthorizedFor externalSecondaryInterpretation normativeAuthority → ⊥
 externalSecondaryDoesNotBecomeNormativeAuthority ()
 
-------------------------------------------------------------------------
--- A claim route must carry the authority actually used.
-------------------------------------------------------------------------
-
 record EvidenceRoute : Set₁ where
   constructor evidenceRoute
   field
@@ -80,12 +87,23 @@ externalHistoricalBackgroundRoute =
   evidenceRoute externalHistoricalReconstruction bibliographicBackground
     externalHistoricalBackground
 
+careSource : Sources.SourceReference
+careSource = Sources.care2020
+
+ocapSource : Sources.SourceReference
+ocapSource = Sources.ocapFNIGC
+
+localContextsSource : Sources.SourceReference
+localContextsSource = Sources.localContextsTK
+
 record FirstNationsEvidenceBoundary : Set where
   constructor firstNationsEvidenceBoundary
   field
-    externalReconstructionEqualsFirstNationsOwnedEvidence : Bool
-    externalReconstructionEqualsFirstNationsOwnedEvidenceIsFalse :
-      externalReconstructionEqualsFirstNationsOwnedEvidence ≡ false
+    provenanceAloneDeterminesPermission : Bool
+    provenanceAloneDeterminesPermissionIsFalse : provenanceAloneDeterminesPermission ≡ false
+    ownershipAloneSelfAuthorizesNormativeUse : Bool
+    ownershipAloneSelfAuthorizesNormativeUseIsFalse :
+      ownershipAloneSelfAuthorizesNormativeUse ≡ false
     externalReconstructionSelfAuthorizesSituatedKnowledge : Bool
     externalReconstructionSelfAuthorizesSituatedKnowledgeIsFalse :
       externalReconstructionSelfAuthorizesSituatedKnowledge ≡ false
@@ -95,10 +113,10 @@ record FirstNationsEvidenceBoundary : Set where
     externalSecondarySourceSelfAuthorizesNormativeClaim : Bool
     externalSecondarySourceSelfAuthorizesNormativeClaimIsFalse :
       externalSecondarySourceSelfAuthorizesNormativeClaim ≡ false
-    sourceOwnershipAndClaimUseAreSeparatelyTyped : Bool
-    sourceOwnershipAndClaimUseAreSeparatelyTypedIsTrue :
-      sourceOwnershipAndClaimUseAreSeparatelyTyped ≡ true
+    ocapIsUniversalAllIndigenousFramework : Bool
+    ocapIsUniversalAllIndigenousFrameworkIsFalse :
+      ocapIsUniversalAllIndigenousFramework ≡ false
 
 canonicalFirstNationsEvidenceBoundary : FirstNationsEvidenceBoundary
 canonicalFirstNationsEvidenceBoundary =
-  firstNationsEvidenceBoundary false refl false refl false refl false refl true refl
+  firstNationsEvidenceBoundary false refl false refl false refl false refl false refl false refl
