@@ -13,6 +13,7 @@ open import Agda.Builtin.String using (String)
 
 data ObligationStatus : Set where
   interfaceOnly : ObligationStatus
+  structuralCandidateOnly : ObligationStatus
   finiteShadowOnly : ObligationStatus
   sourceBackedBoundaryOnly : ObligationStatus
   kernelReceiptMissing : ObligationStatus
@@ -72,8 +73,8 @@ tsfvAdmissibilityObligation = derivationObligation
 tsfvActionObligation : DerivationObligation
 tsfvActionObligation = derivationObligation
   tsfvToPhysicalAction
-  interfaceOnly
-  "A TSFV-originating construction of the physical action functional S[gamma] remains open."
+  structuralCandidateOnly
+  "A concrete additive finite-history candidate now exists from the bounded TSFV v3 address valuation and is exactly T-invariant, but physical action units, dynamical origin, continuum control and empirical calibration remain open."
 
 actionPhaseObligation : DerivationObligation
 actionPhaseObligation = derivationObligation
@@ -120,6 +121,10 @@ record TSFVFeynmanDerivationBoundary : Set where
     architectureCompatibleWithFeynmanIsTrue :
       architectureCompatibleWithFeynman ≡ true
 
+    structuralActionCandidateConstructed : Bool
+    structuralActionCandidateConstructedIsTrue :
+      structuralActionCandidateConstructed ≡ true
+
     tsfvCurrentlyDerivesFeynmanPropagator : Bool
     tsfvCurrentlyDerivesFeynmanPropagatorIsFalse :
       tsfvCurrentlyDerivesFeynmanPropagator ≡ false
@@ -131,6 +136,7 @@ record TSFVFeynmanDerivationBoundary : Set where
 canonicalTSFVFeynmanDerivationBoundary : TSFVFeynmanDerivationBoundary
 canonicalTSFVFeynmanDerivationBoundary =
   tsfvFeynmanDerivationBoundary
+    true refl
     true refl
     false refl
     false refl
