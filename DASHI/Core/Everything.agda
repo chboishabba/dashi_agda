@@ -30,6 +30,7 @@ import DASHI.Core.RelationalRoleGrammarExact
 import DASHI.Core.CriticalRelationalGrammarSourceRegistryExact
 import DASHI.Core.LacanS2RoleSeparationExact
 import DASHI.Core.CriticalThirdnessRoleGrammarExact
+import DASHI.Core.CriticalGrammarRelabellingBoundaryExact
 import DASHI.Core.BadiouVoidCountAsOneBoundaryExact
 import DASHI.Core.LugonesPurityCurdlingNonfactorabilityExact
 import DASHI.Core.SocialEcologyHierarchyProjectionBoundaryExact
