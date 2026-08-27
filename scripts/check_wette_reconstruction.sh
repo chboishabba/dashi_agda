@@ -17,6 +17,7 @@ FILES=(
   DASHI/Foundations/WettePrimaryTextAcquisitionPlanExact.agda
   DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda
   DASHI/Foundations/Wette1969HistoricalSignatureExact.agda
+  DASHI/Foundations/Wette1969JudgementConstructorsExact.agda
   DASHI/Foundations/Wette1969RuleRevisionExact.agda
   DASHI/Foundations/Wette1969InitialRuleTranscriptionExact.agda
   DASHI/Foundations/Wette1969CriticalRuleDependencyExact.agda
@@ -65,6 +66,8 @@ grep -q 'historicalRevisionIsNotDefinitionallyDerivationalEquivalenceIsTrue' DAS
 grep -q 'sourceRequiredOrderAlreadyProvesSemanticNonCommutationIsFalse' DASHI/Core/OrderedSubstitutionGeometryExact.agda
 grep -q 'premiseKindsCanBeRecoveredBeforeBodiesIsTrue' DASHI/Core/RulePremiseTypingGeometryExact.agda
 grep -q 'typedRequirementIsAlreadyExactPremiseBodyIsFalse' DASHI/Core/RulePremiseTypingGeometryExact.agda
+grep -q 'allHistoricalRelatorAritiesHaveTypedConstructorsIsTrue' DASHI/Foundations/Wette1969JudgementConstructorsExact.agda
+grep -q 'constructorLayerAddsSemanticTruthIsFalse' DASHI/Foundations/Wette1969JudgementConstructorsExact.agda
 grep -q 'rule9324x25OrderRequirementRecoveredIsTrue' DASHI/Foundations/Wette1969SubstitutionOrderExact.agda
 grep -q 'sourceOrderRequirementAlreadySuppliesHistoricalSubstitutionEvaluatorIsFalse' DASHI/Foundations/Wette1969SubstitutionOrderExact.agda
 grep -q 'rule9324x25FourPremiseKindsRecoveredIsTrue' DASHI/Foundations/Wette1969CriticalPremiseTypingExact.agda
@@ -76,6 +79,7 @@ grep -q 'historicalRuleSetFullyTranscribedIntoAgdaIsFalse' DASHI/Foundations/Wet
 grep -q 'formulaRelatorArityEnforcedByTypeIsTrue' DASHI/Foundations/Wette1969HistoricalSignatureExact.agda
 grep -q 'p193RevisionTranscribedIsTrue' DASHI/Foundations/Wette1969RuleRevisionExact.agda
 grep -q 'firstRuleBodiesTranscribedIsTrue' DASHI/Foundations/Wette1969InitialRuleTranscriptionExact.agda
+grep -q 'sharedJudgementConstructorOwnerReusedIsTrue' DASHI/Foundations/Wette1969InitialRuleTranscriptionExact.agda
 grep -q 'premise18InductionRoleRecoveredIsTrue' DASHI/Foundations/Wette1969CriticalRuleDependencyExact.agda
 grep -q 'premise27IndependenceRoleRecoveredIsTrue' DASHI/Foundations/Wette1969CriticalRuleDependencyExact.agda
 grep -q 'hauptsatz2IsDefinitionallyFormulaOnlyTranslationIsFalse' DASHI/Foundations/Wette1969CompletenessInterpretationBridgeExact.agda
@@ -106,6 +110,7 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Foundations/WettePrimaryTextAcquisitionPlanExact.agda \
   DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda \
   DASHI/Foundations/Wette1969HistoricalSignatureExact.agda \
+  DASHI/Foundations/Wette1969JudgementConstructorsExact.agda \
   DASHI/Foundations/Wette1969RuleRevisionExact.agda \
   DASHI/Foundations/Wette1969InitialRuleTranscriptionExact.agda \
   DASHI/Foundations/Wette1969CriticalRuleDependencyExact.agda \
