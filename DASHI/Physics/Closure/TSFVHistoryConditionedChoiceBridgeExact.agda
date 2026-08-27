@@ -8,6 +8,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.HistoryConditionedChoiceExact as Choice
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Physics.Foundations.FiniteHistoryFunctionalExact as History
+import DASHI.Physics.Foundations.TrajectoryProjectionCausticExact as Projection
 import DASHI.Physics.Closure.TSFVBidirectionalCausticBridgeExact as Caustic
 
 ------------------------------------------------------------------------
@@ -79,7 +80,7 @@ causticSameObservationDifferentChoice =
     ; rightHistory = History.historyACB
     ; historiesDistinct = Caustic.historyABCAndACBAreDistinct
     ; samePresentObservation =
-        Caustic.Caustic.sharedProjection Caustic.historyDistinctSharedProjection
+        Projection.sharedProjection Caustic.historyDistinctSharedProjection
     ; choicesDiffer = abcAndAcbChoicesDiffer
     }
 
