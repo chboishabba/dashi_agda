@@ -18,29 +18,15 @@ import DASHI.Governance.SafeJustSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data EvidenceCluster : Set where
-  resourceLimits
-  planetaryBoundaries
-  decoupling
-  wellbeingAndGDP
-  ecologicalMacroeconomics
-  policyPackages
-  growthDependencies
-  provisioningSystems
-  globalNorthSouthRelations
-  politicsOfTransition
+  resourceLimits planetaryBoundaries decoupling wellbeingAndGDP
+  ecologicalMacroeconomics policyPackages growthDependencies
+  provisioningSystems globalNorthSouthRelations politicsOfTransition
   : EvidenceCluster
 
 data EvidenceClass : Set where
-  empiricalCrossNational
-  empiricalHistorical
-  modelScenario
-  modelReview
-  caseStudy
-  policyExperiment
-  theoreticalSynthesis
-  politicalEconomyAnalysis
-  unresolvedResearchFrontier
-  : EvidenceClass
+  empiricalCrossNational empiricalHistorical modelScenario modelReview
+  caseStudy policyExperiment theoreticalSynthesis politicalEconomyAnalysis
+  unresolvedResearchFrontier : EvidenceClass
 
 record EvidenceAnchor : Set where
   constructor evidenceAnchor
@@ -84,6 +70,10 @@ workingTimeCarbonAssociation : EvidenceAnchor
 workingTimeCarbonAssociation =
   evidenceAnchor policyPackages empiricalHistorical 129 Routing.empiricalSynthesis
 
+growthDependencyCaseStudy : EvidenceAnchor
+growthDependencyCaseStudy =
+  evidenceAnchor growthDependencies caseStudy 153 Routing.empiricalSynthesis
+
 provisioningSystemsOwner : EvidenceAnchor
 provisioningSystemsOwner =
   evidenceAnchor provisioningSystems empiricalCrossNational 185 Routing.empiricalSynthesis
@@ -96,6 +86,10 @@ unequalExchangeOwner : EvidenceAnchor
 unequalExchangeOwner =
   evidenceAnchor globalNorthSouthRelations politicalEconomyAnalysis 190 Routing.empiricalSynthesis
 
+postDevelopmentOwner : EvidenceAnchor
+postDevelopmentOwner =
+  evidenceAnchor globalNorthSouthRelations theoreticalSynthesis 195 Routing.conceptualFraming
+
 gdp15000Owner : EvidenceAnchor
 gdp15000Owner =
   evidenceAnchor wellbeingAndGDP empiricalCrossNational 98 Routing.empiricalRestatement
@@ -103,9 +97,6 @@ gdp15000Owner =
 ------------------------------------------------------------------------
 -- Review-level frontier distinctions.
 ------------------------------------------------------------------------
-
-data EvidenceStatus : Set where
-  supportedContestedOpen : EvidenceStatus
 
 record ClusterBoundary : Set where
   constructor clusterBoundary
