@@ -7,6 +7,7 @@ cd "$ROOT"
 FILES=(
   DASHI/Core/FormalClaimTransportGeometryExact.agda
   DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
+  DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda
   DASHI/Foundations/WetteArithmeticRepresentationExact.agda
   DASHI/Foundations/WetteConstructiveAutomatonExact.agda
   DASHI/Foundations/WetteArithmeticTransitionBridgeExact.agda
@@ -52,8 +53,14 @@ grep -q 'doi:10.1007/978-3-642-86745-3_9' \
   DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
 grep -q 'doi:10.2307/2272630' \
   DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
+grep -q 'secondaryReportedJSLItemsPromotedToPrimaryWithoutCheckIsFalse' \
+  DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
 grep -q 'unverified1974DOIFabricatedIsFalse' \
   DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
+grep -q 'relativeCompletenessShouldBeDefinedBeforeSourceRecoveryIsFalse' \
+  DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda
+grep -q 'sourceExtractionPrecedesTheoremDischargeIsTrue' \
+  DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda
 grep -q 'historicalWetteCodecRecoveredIsFalse' \
   DASHI/Foundations/WetteArithmeticRepresentationExact.agda
 grep -q 'fractranMachineIsHistoricalWetteMachineIsFalse' \
@@ -78,6 +85,7 @@ grep -q 'contradictionInOrdinaryArithmeticProvedIsFalse' \
 scripts/run_agda29_parallel_check.sh \
   DASHI/Core/FormalClaimTransportGeometryExact.agda \
   DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda \
+  DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda \
   DASHI/Foundations/WetteFiniteDeductionTraceExact.agda \
   DASHI/Foundations/WetteFiniteDerivationCompositionExact.agda \
   DASHI/Foundations/WetteFiniteCalculusTranslationExact.agda \
