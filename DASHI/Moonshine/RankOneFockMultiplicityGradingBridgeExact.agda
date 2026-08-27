@@ -24,6 +24,7 @@ open import Data.Fin.Base using (Fin)
 
 import DASHI.Mathematics.NumberTheory.PartitionMultiplicityCarrierExact as Partition
 import DASHI.Mathematics.NumberTheory.PartitionGradedPointingInstanceExact as Pointing
+import DASHI.Mathematics.NumberTheory.GradedMultiplicityPointingResidualExact as GenericPointing
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
 
 ------------------------------------------------------------------------
@@ -58,8 +59,7 @@ occupationEnergyIsGrade = Partition.massExact
 occupationPointedCellCountIsGrade :
   ∀ {n : Nat} (state : RankOneOccupationState n) →
   Reindex.listLength
-    (DASHI.Mathematics.NumberTheory.GradedMultiplicityPointingResidualExact.pointedCells
-      (Pointing.partitionPointingSystem state))
+    (GenericPointing.pointedCells (Pointing.partitionPointingSystem state))
   ≡ n
 occupationPointedCellCountIsGrade = Pointing.partitionPointedCellsHaveGrade
 
