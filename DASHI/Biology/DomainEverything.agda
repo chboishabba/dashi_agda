@@ -27,6 +27,8 @@ import DASHI.Biology.NeuroqueerRelationshipEcologyExact
 import DASHI.Biology.SolisProjectProvenanceExact
 import DASHI.Biology.SolisSystemSensitivityBoundaryExact
 import DASHI.Biology.NeurodivergentSocialEcologyCrossPollinationExact
+import DASHI.Biology.JCoarseFineBranchingCriticalityExact
+import DASHI.Biology.JCoarseFineDepthDecompositionBridgeExact
 
 -- Existing thematic Biology aggregates that were previously floating outside
 -- the authoritative domain spine.
