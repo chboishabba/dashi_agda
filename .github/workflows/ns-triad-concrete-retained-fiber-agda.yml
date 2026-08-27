@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKN*.agda'
+      - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound10*.agda'
       - 'scripts/ns_triad_signed_frontier_lab.py'
       - 'scripts/check_ns_triad_completion_identities.py'
       - 'scripts/check_ns_triad_clay_frontier.py'
@@ -63,3 +64,27 @@ jobs:
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNClayFrontierRound102Validation.agda
+
+      - name: Type-check Round103 radial-flux frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound103Validation.agda
+
+      - name: Type-check Round104 packet-flux frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound104Validation.agda
+
+      - name: Type-check Round105 Waleffe phase frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound105Validation.agda
+
+      - name: Type-check Round106 cross-route frontier alignment
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound106Validation.agda
