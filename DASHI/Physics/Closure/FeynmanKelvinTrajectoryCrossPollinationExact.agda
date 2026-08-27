@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.Foundations.CoupledTrajectoryCoherenceExact as Coupled
 import DASHI.Physics.Foundations.StationaryCoherenceClassificationExact as Stationary
 import DASHI.Physics.Foundations.ContextConditionedTrajectoryWeightExact as ContextWeight
+import DASHI.Physics.Foundations.WavelengthSourceScaleSelectionExact as Scale
 import DASHI.Physics.Foundations.PathIntegralExperimentalSourceRegistryExact as Sources
 import DASHI.Physics.Foundations.FiniteHistoryFunctionalExact as History
 import DASHI.Physics.Closure.QuantumPathFibreObservationQuotient as Quantum
@@ -15,12 +16,14 @@ import DASHI.Physics.Closure.W4SurrogateScaleSettingBoundary as Surrogate
 ------------------------------------------------------------------------
 -- Cross-pollination owner for the 2023/2026 single-photon path-integral
 -- experiments, the existing DASHI path-fibre/history machinery, TSFV's
--- representative/invariant boundary, and finite-source Kelvin wakes.
+-- representative/invariant boundary, aperture/source-scale weighting, and
+-- finite-source Kelvin wakes.
 --
 -- The architecture is:
 --
 --   law/background + experimental/source context
 --     -> structured admissible trajectory family
+--     -> wavelength/source-scale coordinate
 --     -> context-conditioned weights
 --     -> action/phase coordinates
 --     -> stationary/coherent loci or caustics
@@ -45,6 +48,7 @@ data NotEstablishedLayer : Set where
   universalMinimumNotEstablished : NotEstablishedLayer
   universalMetricShortestNotEstablished : NotEstablishedLayer
   quantumEntanglementOfAllContextNotEstablished : NotEstablishedLayer
+  universalWavelengthScaleSelectionLawNotEstablished : NotEstablishedLayer
 
 canonicalExperimentalSupport : List ExperimentalSupportLayer
 canonicalExperimentalSupport =
@@ -64,6 +68,7 @@ canonicalNotEstablished =
   ∷ universalMinimumNotEstablished
   ∷ universalMetricShortestNotEstablished
   ∷ quantumEntanglementOfAllContextNotEstablished
+  ∷ universalWavelengthScaleSelectionLawNotEstablished
   ∷ []
 
 ------------------------------------------------------------------------
@@ -124,6 +129,33 @@ outerAndDominantWakeRolesAreDistinct :
 outerAndDominantWakeRolesAreDistinct ()
 
 ------------------------------------------------------------------------
+-- Wavelength/source-size cross-pollination.
+--
+-- Aperture diffraction and finite-source wakes consume the same generic
+-- ratio/weighting architecture while retaining different physical roles.
+-- For deep-water wakes the reduced wavelength/source coordinate U^2/(gL)
+-- is exactly the squared-Froude coordinate before the conventional 2*pi
+-- wavelength factor is restored in a real-valued physical layer.
+------------------------------------------------------------------------
+
+apertureScaleCoordinate : Scale.SourceScaleCoordinate
+apertureScaleCoordinate = Scale.canonicalApertureScaleCoordinate
+
+wakeScaleCoordinate : Scale.SourceScaleCoordinate
+wakeScaleCoordinate = Scale.canonicalWakeScaleCoordinate
+
+reducedWakeAndFroudeShareCoordinate :
+  Scale.reducedWavelengthRatio Scale.canonicalReducedWakeFroudeCoordinate
+  ≡
+  Scale.froudeSquaredRatio Scale.canonicalReducedWakeFroudeCoordinate
+reducedWakeAndFroudeShareCoordinate =
+  Scale.sameReducedCoordinate Scale.canonicalReducedWakeFroudeCoordinate
+
+apertureAndWakeScaleRolesRemainDistinct :
+  Scale.role apertureScaleCoordinate ≡ Scale.role wakeScaleCoordinate → ⊥
+apertureAndWakeScaleRolesRemainDistinct ()
+
+------------------------------------------------------------------------
 -- Aggregate bridge reusing existing owners.
 
 record FeynmanKelvinTrajectoryBridge : Set₁ where
@@ -135,6 +167,9 @@ record FeynmanKelvinTrajectoryBridge : Set₁ where
     stationaryCoherenceSurface : Stationary.StationaryCoherenceSurface
     contextConditionedWeightSurface :
       ContextWeight.ContextConditionedTrajectoryWeight
+    wavelengthSourceScaleBoundary : Scale.WavelengthSourceScaleBoundary
+    scaleConditionedWeightBridge :
+      Scale.ScaleConditionedWeightBridge contextConditionedWeightSurface
 
     finiteHistoryBoundary : History.FiniteHistoryFunctionalBoundary
     quantumPathSurface : Quantum.QuantumPathFibreObservationQuotient
@@ -143,6 +178,7 @@ record FeynmanKelvinTrajectoryBridge : Set₁ where
     photonPropagator2023Source : Sources.SourceReference
     photonPostulates2026Source : Sources.SourceReference
     photonPostulates2026Dataset : Sources.SourceReference
+    opticsDiffractionSource : Sources.SourceReference
     shipWake2013Source : Sources.SourceReference
     kelvinWake2014Source : Sources.SourceReference
 
@@ -169,6 +205,10 @@ record FeynmanKelvinTrajectoryBridge : Set₁ where
     finiteSourceWeightingEqualsAdmissibilityIsFalse :
       finiteSourceWeightingEqualsAdmissibility ≡ false
 
+    apertureRatioAndWakeRatioAreSamePhysicalLaw : Bool
+    apertureRatioAndWakeRatioAreSamePhysicalLawIsFalse :
+      apertureRatioAndWakeRatioAreSamePhysicalLaw ≡ false
+
     experimentValidatesTSFV : Bool
     experimentValidatesTSFVIsFalse : experimentValidatesTSFV ≡ false
 
@@ -187,6 +227,10 @@ canonicalFeynmanKelvinTrajectoryBridge =
         Stationary.canonicalStationaryCoherenceSurface
     ; contextConditionedWeightSurface =
         ContextWeight.canonicalContextConditionedTrajectoryWeight
+    ; wavelengthSourceScaleBoundary =
+        Scale.canonicalWavelengthSourceScaleBoundary
+    ; scaleConditionedWeightBridge =
+        Scale.canonicalScaleConditionedWeightBridge
     ; finiteHistoryBoundary =
         History.canonicalFiniteHistoryFunctionalBoundary
     ; quantumPathSurface =
@@ -199,6 +243,8 @@ canonicalFeynmanKelvinTrajectoryBridge =
         Sources.wenEtAl2026
     ; photonPostulates2026Dataset =
         Sources.wenEtAl2026Dataset
+    ; opticsDiffractionSource =
+        Sources.bornWolfPrinciplesOfOptics
     ; shipWake2013Source =
         Sources.rabaudMoisy2013
     ; kelvinWake2014Source =
@@ -227,10 +273,14 @@ canonicalFeynmanKelvinTrajectoryBridge =
         false
     ; finiteSourceWeightingEqualsAdmissibilityIsFalse =
         refl
+    ; apertureRatioAndWakeRatioAreSamePhysicalLaw =
+        false
+    ; apertureRatioAndWakeRatioAreSamePhysicalLawIsFalse =
+        refl
     ; experimentValidatesTSFV =
         false
     ; experimentValidatesTSFVIsFalse =
         refl
     ; bridgeReading =
-        "Wen et al. experimentally support the finite path-amplitude/action-phase/coherent-composition layer; DASHI reuses relational path fibres, finite histories, context-conditioned weighting, stationary classification, and TSFV invariant structure without promoting reconstructed paths to independent ontology or the experiments to TSFV validation."
+        "Wen et al. experimentally support the finite path-amplitude/action-phase/coherent-composition layer; DASHI reuses relational path fibres, finite histories, wavelength/source-scale conditioning, context-dependent weighting, stationary classification, and TSFV invariant structure without promoting reconstructed paths to independent ontology, aperture/wake scale analogies to identical physical laws, or the experiments to TSFV validation."
     }
