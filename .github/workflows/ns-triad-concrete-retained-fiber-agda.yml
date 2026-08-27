@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKN*.agda'
+      - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound1*.agda'
       - 'scripts/ns_triad_signed_frontier_lab.py'
       - 'scripts/check_ns_triad_completion_identities.py'
       - 'scripts/check_ns_triad_clay_frontier.py'
@@ -63,3 +64,75 @@ jobs:
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNClayFrontierRound102Validation.agda
+
+      - name: Type-check Round103 radial-flux frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound103Validation.agda
+
+      - name: Type-check Round104 packet-flux frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound104Validation.agda
+
+      - name: Type-check Round105 Waleffe phase frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound105Validation.agda
+
+      - name: Type-check Round106 cross-route frontier alignment
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound106Validation.agda
+
+      - name: Type-check Round107 Serrin-Wiener forcing reduction
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound107Validation.agda
+
+      - name: Type-check Round108 critical-scaling and signed forcing audit
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound108Validation.agda
+
+      - name: Type-check Round109 self-external Waleffe frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound109Validation.agda
+
+      - name: Type-check Round110 internal-payment external-residue frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound110Validation.agda
+
+      - name: Type-check Round111 external-residual commutator/Bony frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound111Validation.agda
+
+      - name: Type-check Round112 same-functional external Waleffe frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound112Validation.agda
+
+      - name: Type-check Round113 weighted shared-mode reindex frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound113Validation.agda
+
+      - name: Type-check Round114 antisymmetry-defect frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound114Validation.agda
