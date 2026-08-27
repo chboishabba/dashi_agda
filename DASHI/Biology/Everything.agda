@@ -54,6 +54,12 @@ import DASHI.Biology.StudentVoiceEpistemicAgencyBridge
 import DASHI.Biology.StudentIdentifiedSupportStrategiesBridge
 import DASHI.Biology.EcologyOfDataHyperfabricBridge
 import DASHI.Biology.ParentAllyshipMultiObserverBridge
+import DASHI.Biology.ParentalFearIndependentMobilityExact
+import DASHI.Biology.ParentalFearSourceAttributionExact
+import DASHI.Biology.ParentalFearObserverRefinementExact
+import DASHI.Biology.ParentalFearConsumerSufficiencyBridgeExact
+import DASHI.Biology.ParentalFearDynamicQuotientBridgeExact
+import DASHI.Biology.ParentalFearIntegratedFormalismExact
 import DASHI.Biology.InterpretiveCodingSystem
 import DASHI.Biology.CrossPaperDialecticalDevelopment
 import DASHI.Biology.AliceBrownCorpusLoom
