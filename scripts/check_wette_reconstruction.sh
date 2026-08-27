@@ -79,6 +79,7 @@ grep -q 'allHistoricalRelatorAritiesHaveTypedConstructorsIsTrue' DASHI/Foundatio
 grep -q 'objectVariableConstructorRecoveredFromRule3IsTrue' DASHI/Foundations/Wette1969ObjectVariableMarkWordsExact.agda
 grep -q 'predicateMarkConstructorRecoveredFromRule4IsTrue' DASHI/Foundations/Wette1969ObjectVariableMarkWordsExact.agda
 grep -q 'objectSyntaxSeparatedFromRuleSchematicWordVariablesIsTrue' DASHI/Foundations/Wette1969ObjectVariableMarkWordsExact.agda
+grep -q 'proofRelevantObjectSyntaxRecognitionNowAvailableIsTrue' DASHI/Foundations/Wette1969ObjectVariableMarkWordsExact.agda
 
 grep -q 'rule9324x25OrderRequirementRecoveredIsTrue' DASHI/Foundations/Wette1969SubstitutionOrderExact.agda
 grep -q 'rule9324x25FourPremiseKindsRecoveredIsTrue' DASHI/Foundations/Wette1969CriticalPremiseTypingExact.agda
