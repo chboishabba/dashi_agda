@@ -34,3 +34,4 @@ import DASHI.Physics.Closure.FeynmanKelvinTrajectoryCrossPollinationExact
 import DASHI.Physics.Closure.ApertureWakeModeSelectionBridgeExact
 import DASHI.Physics.Closure.TSFVBidirectionalCausticBridgeExact
 import DASHI.Physics.Closure.TSFVHistoryConditionedChoiceBridgeExact
+import DASHI.Physics.Closure.SinglePhotonRecoilRelationalObserverBridgeExact
