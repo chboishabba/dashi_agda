@@ -16,6 +16,8 @@ open import Data.Empty using (⊥; ⊥-elim)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Data.List.Relation.Unary.Any as Any using ()
 import Data.List.Relation.Unary.All as All
+import Data.List.Relation.Unary.AllPairs.Core as AllPairs
+open import Data.List.Relation.Unary.Unique.Propositional using (Unique)
 open import Data.Nat.Base using (_≤_; _<_)
 open import Data.Nat.Divisibility using (_∣_; _∣?_; divides)
 import Data.Nat.Properties as NatP
@@ -141,6 +143,83 @@ positiveFactorPairWeightSumEqualsFactor :
 positiveFactorPairWeightSumEqualsFactor r positive =
   positivePairsFromWeightEqualsFactorPairsFrom
     r positive (Hecke.oneTo r) (OneTo.oneToAllBounds r)
+
+------------------------------------------------------------------------
+-- Duplicate-freedom of the scan follows from candidate-divisor freshness.
+
+pairDivisorMemberCandidates :
+  (r : Nat) (positive : suc zero ≤ r)
+  (candidates : List Nat)
+  (bounds : All.All (λ d → (suc zero ≤ d) × (d ≤ r)) candidates) →
+  ∀ {pair : PositiveFactorPair r} →
+  pair ∈ positiveFactorPairsFrom r positive candidates bounds →
+  divisor pair ∈ candidates
+pairDivisorMemberCandidates r positive [] All.[] ()
+pairDivisorMemberCandidates
+    r positive (d ∷ ds) (All._∷_ bounds rest) member
+  with d ∣? r
+... | no _ =
+  Any.there
+    (pairDivisorMemberCandidates r positive ds rest member)
+... | yes dividesProof with _∣_.quotient dividesProof
+...   | zero =
+  ⊥-elim
+    (positiveNotZero positive
+      (trans (_∣_.equality dividesProof) refl))
+...   | suc predecessor with member
+...     | Any.here equality = Any.here (cong divisor equality)
+...     | Any.there tailMember =
+  Any.there
+    (pairDivisorMemberCandidates r positive ds rest tailMember)
+
+positiveFactorPairsFromUnique :
+  (r : Nat) (positive : suc zero ≤ r)
+  (candidates : List Nat)
+  (bounds : All.All (λ d → (suc zero ≤ d) × (d ≤ r)) candidates) →
+  Unique candidates →
+  Unique (positiveFactorPairsFrom r positive candidates bounds)
+positiveFactorPairsFromUnique r positive [] All.[] AllPairs.[] = AllPairs.[]
+positiveFactorPairsFromUnique
+    r positive (d ∷ ds) (All._∷_ bounds rest)
+    (AllPairs._∷_ fresh tailUnique)
+  with d ∣? r
+... | no _ =
+  positiveFactorPairsFromUnique r positive ds rest tailUnique
+... | yes dividesProof with _∣_.quotient dividesProof
+...   | zero =
+  ⊥-elim
+    (positiveNotZero positive
+      (trans (_∣_.equality dividesProof) refl))
+...   | suc predecessor =
+  AllPairs._∷_
+    headFresh
+    (positiveFactorPairsFromUnique r positive ds rest tailUnique)
+  where
+  head : PositiveFactorPair r
+  head =
+    positiveFactorPair
+      d (proj₁ bounds) (proj₂ bounds)
+      predecessor (_∣_.equality dividesProof)
+
+  headFresh :
+    All.All
+      (λ pair → head ≡ pair → ⊥)
+      (positiveFactorPairsFrom r positive ds rest)
+  headFresh =
+    All.tabulate λ member equality →
+      All.lookup fresh
+        (pairDivisorMemberCandidates r positive ds rest member)
+        (cong divisor equality)
+
+positiveFactorPairsUnique :
+  (r : Nat) (positive : suc zero ≤ r) →
+  Unique (positiveFactorPairs r positive)
+positiveFactorPairsUnique r positive =
+  positiveFactorPairsFromUnique
+    r positive
+    (Hecke.oneTo r)
+    (OneTo.oneToAllBounds r)
+    (OneTo.oneToUnique r)
 
 ------------------------------------------------------------------------
 -- Coordinate completeness of the proof-bearing scan.
