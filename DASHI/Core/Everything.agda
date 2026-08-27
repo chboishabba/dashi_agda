@@ -8,3 +8,4 @@ import DASHI.Core.FormalizationRecoverySourceRegistryExact
 import DASHI.Core.FormalizationRecoveryGeometryExact
 import DASHI.Core.SourceAcquisitionGeometryExact
 import DASHI.Core.DeductionIndexedInterpretationExact
+import DASHI.Core.FormalSystemRevisionGeometryExact
