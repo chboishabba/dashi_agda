@@ -3,7 +3,9 @@ module DASHI.Analysis.RiemannG21Regression where
 import DASHI.Analysis.RiemannG21LiteralPoleRankAuditExact as PoleAudit
 import DASHI.Analysis.RiemannG21ConjugateHeightSourceBridgeExact as Heights
 import DASHI.Analysis.RiemannG21SymmetricSampleBlockReductionExact as Blocks
+import DASHI.Analysis.RiemannG21ScaledHyperbolicMonotonicityBridgeExact as Scaled
 import DASHI.Analysis.RiemannG21ParityMinorAnalyticFrontierExact as Frontier
+import DASHI.Analysis.RiemannG21ContextualAlternativeNonpromotionExact as Context
 import DASHI.Analysis.RiemannG21PrimePairKernelExact as Pair
 import DASHI.Analysis.RiemannG21TwoByTwoMixedObstructionExact as Mixed2
 import DASHI.Analysis.RiemannG21AugmentedDeterminantFiniteExact as Det3
@@ -45,6 +47,30 @@ regressionStrictHeightSourceAudited =
   Frontier.ParityAnalyticFrontierBoundary.strictActualZetaHeightSeparationAvailableIsTrue
     Frontier.canonicalParityAnalyticFrontierBoundary
 
+regressionScaledLogDerivativeReductionDerived :
+  Frontier.ParityAnalyticFrontierBoundary.scaledLogDerivativeReductionDerived
+    Frontier.canonicalParityAnalyticFrontierBoundary
+  ≡ true
+regressionScaledLogDerivativeReductionDerived =
+  Frontier.ParityAnalyticFrontierBoundary.scaledLogDerivativeReductionDerivedIsTrue
+    Frontier.canonicalParityAnalyticFrontierBoundary
+
+regressionXTanhStillOpen :
+  Scaled.ScaledHyperbolicMonotonicityBoundary.actualXTanhXMonotonicityDerived
+    Scaled.canonicalScaledHyperbolicMonotonicityBoundary
+  ≡ false
+regressionXTanhStillOpen =
+  Scaled.ScaledHyperbolicMonotonicityBoundary.actualXTanhXMonotonicityDerivedIsFalse
+    Scaled.canonicalScaledHyperbolicMonotonicityBoundary
+
+regressionXCothStillOpen :
+  Scaled.ScaledHyperbolicMonotonicityBoundary.actualXCothXMonotonicityDerived
+    Scaled.canonicalScaledHyperbolicMonotonicityBoundary
+  ≡ false
+regressionXCothStillOpen =
+  Scaled.ScaledHyperbolicMonotonicityBoundary.actualXCothXMonotonicityDerivedIsFalse
+    Scaled.canonicalScaledHyperbolicMonotonicityBoundary
+
 regressionFiniteCovarianceDerived :
   Frontier.ParityAnalyticFrontierBoundary.finiteCovarianceAlgebraDerived
     Frontier.canonicalParityAnalyticFrontierBoundary
@@ -60,6 +86,30 @@ regressionActualMomentRatioStillOpen :
 regressionActualMomentRatioStillOpen =
   Frontier.ParityAnalyticFrontierBoundary.actualMomentRatioSeparationDerivedIsFalse
     Frontier.canonicalParityAnalyticFrontierBoundary
+
+regressionContextualAlternativeBoundary :
+  Context.AlternativeNonpromotionBoundary.multipleValidAlternativeGroupingsCanExist
+    Context.canonicalAlternativeNonpromotionBoundary
+  ≡ true
+regressionContextualAlternativeBoundary =
+  Context.AlternativeNonpromotionBoundary.multipleValidAlternativeGroupingsCanExistIsTrue
+    Context.canonicalAlternativeNonpromotionBoundary
+
+regressionZeroGroupedAmplitudeNoOntologyPromotion :
+  Context.AlternativeNonpromotionBoundary.zeroGroupedAmplitudeImpliesNoUnderlyingContribution
+    Context.canonicalAlternativeNonpromotionBoundary
+  ≡ false
+regressionZeroGroupedAmplitudeNoOntologyPromotion =
+  Context.AlternativeNonpromotionBoundary.zeroGroupedAmplitudeImpliesNoUnderlyingContributionIsFalse
+    Context.canonicalAlternativeNonpromotionBoundary
+
+regressionAttachedPaperDoesNotProveRH :
+  Context.AlternativeNonpromotionBoundary.paperProvesRiemannHypothesis
+    Context.canonicalAlternativeNonpromotionBoundary
+  ≡ false
+regressionAttachedPaperDoesNotProveRH =
+  Context.AlternativeNonpromotionBoundary.paperProvesRiemannHypothesisIsFalse
+    Context.canonicalAlternativeNonpromotionBoundary
 
 regressionTwoByTwoNoGo :
   Mixed2.det2Code Mixed2.responseLeft Mixed2.responseRight
