@@ -3,21 +3,26 @@ module DASHI.Analysis.RiemannG21OddTaylorQuantitativeFrontierExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
+import DASHI.Analysis.SupportMomentDominationExact as Support
 import DASHI.Analysis.RiemannG21OddTaylorDeterminantExact as Taylor
 import DASHI.Analysis.RiemannG21OddTaylorRemainderDeterminantExact as Remainder
 import DASHI.Analysis.RiemannG21OddTaylorOrderBudgetExact as Order
 import DASHI.Analysis.RiemannG21OddTaylorSourceBudgetBoundary as Source
 import DASHI.Analysis.RiemannG21OddTaylorDeterminantConstantExact as Constant
+import DASHI.Analysis.RiemannG21OddTaylorNormalizedRadiusGateExact as Normalized
 import DASHI.Analysis.RiemannG21DeterminantMarginTransferExact as Margin
 
 data OddTaylorQuantitativeArrow : Set where
   compactSupportAndPositivity : OddTaylorQuantitativeArrow
+  supportMomentDomination : OddTaylorQuantitativeArrow
   fifthOrderSineRemainder : OddTaylorQuantitativeArrow
   integratedOddR5Remainder : OddTaylorQuantitativeArrow
   doubleRadiusCubicSignal : OddTaylorQuantitativeArrow
   exactSixTermDeterminantError : OddTaylorQuantitativeArrow
   radiusDegreeGapTwo : OddTaylorQuantitativeArrow
   explicitDeterminantErrorCoefficient : OddTaylorQuantitativeArrow
+  massNormalizedErrorPolynomial : OddTaylorQuantitativeArrow
+  supportOnlyErrorPolynomial : OddTaylorQuantitativeArrow
   determinantR6Inequality : OddTaylorQuantitativeArrow
   divisionFreeSmallRadiusGate : OddTaylorQuantitativeArrow
   finiteOddMinorSign : OddTaylorQuantitativeArrow
@@ -36,6 +41,11 @@ supportEntry : QuantitativeEntry
 supportEntry = quantitativeEntry
   compactSupportAndPositivity sourceAudited
   "The companion taper owners prove 0<=phi<=1, supp(phi) subset [-L/2,L/2], compact support, integrability and integral phi<=L."
+
+supportMomentEntry : QuantitativeEntry
+supportMomentEntry = quantitativeEntry
+  supportMomentDomination analyticOpen
+  "Use the positive common odd weight on 0<=u<=R=L/2 to prove N3(y)<=R^2 N1(y) and N5(y)<=R^4 N1(y). The generic compact-support theorem shape and finite regression are already extracted."
 
 sineRemainderEntry : QuantitativeEntry
 sineRemainderEntry = quantitativeEntry
@@ -67,27 +77,40 @@ coefficientEntry = quantitativeEntry
   explicitDeterminantErrorCoefficient structurallyDerived
   "RiemannG21OddTaylorDeterminantConstantExact constructs a concrete rational C_det coefficient from the r and 2r truncation constants and the two fifth-order remainder coefficients."
 
+normalizedEntry : QuantitativeEntry
+normalizedEntry = quantitativeEntry
+  massNormalizedErrorPolynomial structurallyDerived
+  "Both Delta_odd and C_det factor through N1(a)N1(p); rational ring normalization constructs the mass-free error polynomial P(qa,qp,ca,cp) and the ratio gap qp-qa."
+
+supportPolynomialEntry : QuantitativeEntry
+supportPolynomialEntry = quantitativeEntry
+  supportOnlyErrorPolynomial structurallyDerived
+  "After the target support bounds qa,qp<=R^2 and ca,cp<=R^4/20, the sufficient support polynomial is 25P <= 510R^4+100R^6+4R^8. The polynomial itself is constructed; the ordered-real majorization remains open."
+
 r6InequalityEntry : QuantitativeEntry
 r6InequalityEntry = quantitativeEntry
   determinantR6Inequality analyticOpen
-  "Prove the six exact determinant-error terms are bounded in magnitude by the constructed C_det r^6 using the actual taper N5 bounds and 0<r<=1."
+  "Prove the six exact determinant-error terms are bounded by the constructed C_det r^6 using the actual taper support-moment and fifth-order remainder bounds for 0<r<=1."
 
 smallRadiusEntry : QuantitativeEntry
 smallRadiusEntry = quantitativeEntry
   divisionFreeSmallRadiusGate analyticOpen
-  "Choose r>0 satisfying C_det r^2 < 36 Delta_odd. This is the exact division-free sign-preservation condition after canceling the common r^4 scale."
+  "A support-only sufficient gate is (510R^4+100R^6+4R^8) r^2 < 900(qp-qa), with R=L/2. This is mass-free and division-free once qp-qa>0 is supplied by strict TP2 moment ordering."
 
 finiteSignEntry : QuantitativeEntry
 finiteSignEntry = quantitativeEntry
   finiteOddMinorSign analyticOpen
-  "Combine the strict continuum odd margin, exact -36r^4 signal, and C_det r^6 determinant remainder bound to obtain the actual finite-radius odd minor with preserved strict sign."
+  "Combine the strict continuum odd ratio gap, exact -36r^4 signal, and determinant R6 bound to obtain the actual finite-radius odd minor with preserved strict sign."
 
 canonicalOddTaylorQuantitativeFrontier : List QuantitativeEntry
 canonicalOddTaylorQuantitativeFrontier =
-  supportEntry ∷ sineRemainderEntry ∷ integratedRemainderEntry
+  supportEntry ∷ supportMomentEntry ∷ sineRemainderEntry ∷ integratedRemainderEntry
   ∷ doubleRadiusEntry ∷ sixTermEntry ∷ degreeGapEntry
-  ∷ coefficientEntry ∷ r6InequalityEntry
-  ∷ smallRadiusEntry ∷ finiteSignEntry ∷ []
+  ∷ coefficientEntry ∷ normalizedEntry ∷ supportPolynomialEntry
+  ∷ r6InequalityEntry ∷ smallRadiusEntry ∷ finiteSignEntry ∷ []
+
+supportBoundary : Support.SupportMomentDominationBoundary
+supportBoundary = Support.canonicalSupportMomentDominationBoundary
 
 sourceBoundary : Source.OddTaylorSourceBudgetBoundary
 sourceBoundary = Source.canonicalOddTaylorSourceBudgetBoundary
@@ -103,6 +126,9 @@ orderBudget = Order.canonicalOddTaylorOrderBudget
 
 constantBoundary : Constant.OddDeterminantConstantBoundary
 constantBoundary = Constant.canonicalOddDeterminantConstantBoundary
+
+normalizedBoundary : Normalized.NormalizedRadiusGateBoundary
+normalizedBoundary = Normalized.canonicalNormalizedRadiusGateBoundary
 
 marginBoundary : Margin.DeterminantMarginBoundary
 marginBoundary = Margin.canonicalDeterminantMarginBoundary
@@ -121,6 +147,12 @@ record OddTaylorQuantitativeBoundary : Set where
     explicitDeterminantErrorCoefficientConstructed : Bool
     explicitDeterminantErrorCoefficientConstructedIsTrue :
       explicitDeterminantErrorCoefficientConstructed ≡ true
+    massNormalizedErrorPolynomialDerived : Bool
+    massNormalizedErrorPolynomialDerivedIsTrue : massNormalizedErrorPolynomialDerived ≡ true
+    supportOnlyPolynomialConstructed : Bool
+    supportOnlyPolynomialConstructedIsTrue : supportOnlyPolynomialConstructed ≡ true
+    actualSupportMomentDominationDerived : Bool
+    actualSupportMomentDominationDerivedIsFalse : actualSupportMomentDominationDerived ≡ false
     fifthOrderSineRemainderDerived : Bool
     fifthOrderSineRemainderDerivedIsFalse : fifthOrderSineRemainderDerived ≡ false
     determinantR6InequalityDerived : Bool
@@ -134,4 +166,5 @@ canonicalOddTaylorQuantitativeBoundary : OddTaylorQuantitativeBoundary
 canonicalOddTaylorQuantitativeBoundary =
   oddTaylorQuantitativeBoundary
     true refl true refl true refl true refl true refl
-    false refl false refl false refl false refl
+    true refl true refl
+    false refl false refl false refl false refl false refl
