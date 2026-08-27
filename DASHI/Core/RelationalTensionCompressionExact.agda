@@ -140,4 +140,4 @@ canonicalRelationalTensionCompressionBoundary =
     false refl
     false refl
     false refl
-    "Holding tension is represented only as retaining an unresolved relational residual instead of prematurely collapsing it into a binary consumer; the resulting bookkeeping burden is structural, not an empirical neural-energy theorem."
+    "Holding tension is represented as retaining an unresolved relational residual rather than prematurely collapsing it into a binary consumer. The bookkeeping burden is structural; empirical neural-energy or neurotype claims require separate evidence."
