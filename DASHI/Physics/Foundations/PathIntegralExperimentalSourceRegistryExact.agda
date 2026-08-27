@@ -67,7 +67,7 @@ bornWolfPrinciplesOfOptics = sourceReference
   "Cambridge University Press, seventh expanded edition"
   1999
   "10.1017/CBO9781139644181"
-  "classical optics authority for interference, diffraction, aperture-scale dependence, steepest descent and stationary-phase methods; not a source for TSFV or a claim that wavelength/aperture ratio alone fixes an ontology"
+  "classical optics authority for interference, diffraction, aperture-scale dependence, and stationary-phase/steepest-descent methods; supports the optics consumer role only and does not identify aperture diffraction with Kelvin-wake physics"
 
 rabaudMoisy2013 : SourceReference
 rabaudMoisy2013 = sourceReference
