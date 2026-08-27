@@ -11,6 +11,8 @@ FILES=(
   DASHI/Core/DeductionIndexedInterpretationExact.agda
   DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
   DASHI/Foundations/WettePrimaryTextAcquisitionPlanExact.agda
+  DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda
+  DASHI/Foundations/Wette1969CompletenessInterpretationBridgeExact.agda
   DASHI/Foundations/Wette1970PrimaryTextExtractionExact.agda
   DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda
   DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
@@ -47,6 +49,7 @@ done
 
 grep -q 'existenceOfRepresentationMapTransportsEveryClaimIsFalse' DASHI/Core/FormalClaimTransportGeometryExact.agda
 grep -q 'comparisonAxesAreDefinitionallyTotallyOrderedIsFalse' DASHI/Core/FormalClaimTransportGeometryExact.agda
+grep -q 'interpretationSpecificationIsAlreadyPointwiseProofCertificateIsFalse' DASHI/Core/DeductionIndexedInterpretationExact.agda
 grep -q 'pointwiseProofFamilyIsDefinitionallyUniformInternalProofIsFalse' DASHI/Core/DeductionIndexedInterpretationExact.agda
 grep -q 'formulaOnlyTranslationIsDefinitionallyEnoughForEveryDeductionIndexedInterpretationIsFalse' DASHI/Core/DeductionIndexedInterpretationExact.agda
 grep -q 'arxiv:2508.00459v2' DASHI/Core/FormalizationRecoverySourceRegistryExact.agda
@@ -59,6 +62,11 @@ grep -q 'doi:10.1007/978-3-642-86745-3_9' DASHI/Foundations/WetteHistoricalSourc
 grep -q 'doi:10.2307/2272630' DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
 grep -q 'secondaryReportedJSLItemsPromotedToPrimaryWithoutCheckIsFalse' DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
 grep -q 'unverified1974DOIFabricatedIsFalse' DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
+grep -q 'DOI: 10.1007/978-3-642-86745-3_9' DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda
+grep -q 'historicalRuleSetFullyTranscribedIntoAgdaIsFalse' DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda
+grep -q 'hauptsatz2SubstitutionDomainIsDeductionDependentIsTrue' DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda
+grep -q 'hauptsatz2IsDefinitionallyFormulaOnlyTranslationIsFalse' DASHI/Foundations/Wette1969CompletenessInterpretationBridgeExact.agda
+grep -q 'sourceClaimIsAlreadyPointwiseProofCertificateIsFalse' DASHI/Foundations/Wette1969CompletenessInterpretationBridgeExact.agda
 grep -q 'DOI: 10.1111/j.1746-8361.1970.tb01221.x' DASHI/Foundations/Wette1970PrimaryTextExtractionExact.agda
 grep -q 'compactRuleCount' DASHI/Foundations/Wette1970PrimaryTextExtractionExact.agda
 grep -q 'historicalHauptsatz2NeedsDeductionIndexedInterfaceIsTrue' DASHI/Foundations/Wette1970PrimaryTextExtractionExact.agda
@@ -66,8 +74,9 @@ grep -q 'formulaOnlyFiniteCalculusTranslationAlreadyRecoversHauptsatz2IsFalse' D
 grep -q 'pointwiseInterpretationProofAlreadySuppliesUniformInternalTheoremIsFalse' DASHI/Foundations/Wette1970PrimaryTextExtractionExact.agda
 grep -q 'relativeCompletenessShouldBeDefinedBeforeSourceRecoveryIsFalse' DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda
 grep -q 'sourceExtractionPrecedesTheoremDischargeIsTrue' DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda
-grep -q 'somePrimarySourcesNowInspectedIsTrue' DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
-grep -q 'partialInspectionEqualsCriticalFormalObjectRecoveryIsFalse' DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
+grep -q 'central1969And1970PrimarySourcesNowInspectedIsTrue' DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
+grep -q 'primaryInspectionEqualsCompleteHistoricalTranscriptionIsFalse' DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
+grep -q 'partialExtractionEqualsCriticalFormalObjectRecoveryIsFalse' DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
 grep -q 'relativeCompletenessIsDefinitionallyNextLinearLevelIsFalse' DASHI/Foundations/WetteFormalClaimTransportBridgeExact.agda
 grep -q 'proofTranslationCoordinateImpliesSemanticSoundnessCoordinateIsFalse' DASHI/Foundations/WetteFormalClaimTransportBridgeExact.agda
 grep -q 'historicalWetteCodecRecoveredIsFalse' DASHI/Foundations/WetteArithmeticRepresentationExact.agda
@@ -88,6 +97,8 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Core/DeductionIndexedInterpretationExact.agda \
   DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda \
   DASHI/Foundations/WettePrimaryTextAcquisitionPlanExact.agda \
+  DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda \
+  DASHI/Foundations/Wette1969CompletenessInterpretationBridgeExact.agda \
   DASHI/Foundations/Wette1970PrimaryTextExtractionExact.agda \
   DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda \
   DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda \
