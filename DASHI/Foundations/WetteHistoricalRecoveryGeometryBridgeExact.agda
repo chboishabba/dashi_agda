@@ -227,3 +227,15 @@ schematicSubstitutionFreshnessEvaluatorNowRecoveredIsTrue :
   WetteHistoricalRecoveryGeometryBoundary.schematicSubstitutionFreshnessFragmentNowRecovered
     canonicalWetteHistoricalRecoveryGeometryBoundary ≡ true
 schematicSubstitutionFreshnessEvaluatorNowRecoveredIsTrue = refl
+
+-- Compatibility receipts retained for the broad reconstruction checker while
+-- the recovery vocabulary has become more precise.
+fullHistoricalTuplePredicateSubstitutionNowRecoveredIsFalse :
+  WetteHistoricalRecoveryGeometryBoundary.fullHistoricalTuplePredicateSubstitutionEvaluatorNowRecovered
+    canonicalWetteHistoricalRecoveryGeometryBoundary ≡ false
+fullHistoricalTuplePredicateSubstitutionNowRecoveredIsFalse = refl
+
+bindingAwareCaptureAvoidanceNowRecoveredIsFalse :
+  WetteHistoricalRecoveryGeometryBoundary.fullRecursorAwareCaptureAvoidingEvaluatorNowRecovered
+    canonicalWetteHistoricalRecoveryGeometryBoundary ≡ false
+bindingAwareCaptureAvoidanceNowRecoveredIsFalse = refl
