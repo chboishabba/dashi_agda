@@ -216,6 +216,30 @@ multiplyRightCong carrier multiplier left right pointwise row column =
     (λ middle → multiplier row middle * right middle column)
     (λ middle → cong (multiplier row middle *_) (pointwise middle column))
 
+multiplyOverAddExact : ∀ {Index}
+  (carrier : Matrix.FiniteRationalCoordinates Index)
+  multiplier left right row column →
+  Matrix.multiplyMatrix carrier multiplier (matrixAdd left right) row column
+  ≡ matrixAdd
+      (Matrix.multiplyMatrix carrier multiplier left)
+      (Matrix.multiplyMatrix carrier multiplier right)
+      row column
+multiplyOverAddExact carrier multiplier left right row column =
+  trans
+    (Sums.sumRationalCong
+      (Matrix.coordinates carrier)
+      (λ middle → multiplier row middle * (left middle column + right middle column))
+      (λ middle →
+        multiplier row middle * left middle column
+          + multiplier row middle * right middle column)
+      (λ middle →
+        ℚRing.solve-∀
+          (multiplier row middle) (left middle column) (right middle column)))
+    (Sums.sumRationalAdd
+      (Matrix.coordinates carrier)
+      (λ middle → multiplier row middle * left middle column)
+      (λ middle → multiplier row middle * right middle column))
+
 traceLeftIdentity : ∀ {Index}
   (carrier : Matrix.FiniteRationalCoordinates Index) matrix →
   matrixTrace carrier
@@ -331,12 +355,7 @@ tangentialConnectionTraceExact dataSet =
       (restrictedOperator dataSet) (basisGenerator dataSet)
   in
   trans
-    (traceCong c _ _
-      (λ row column →
-        Sums.sumRationalAdd
-          (Matrix.coordinates c)
-          (λ middle → inv row middle * left middle column)
-          (λ middle → inv row middle * right middle column)))
+    (traceCong c _ _ (multiplyOverAddExact c inv left right))
     (trans
       (traceAdd c
         (Matrix.multiplyMatrix c inv left)
