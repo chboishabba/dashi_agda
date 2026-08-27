@@ -93,9 +93,11 @@ record CMP109LiteralGaussianBetaProducer
     brillouinReductionExact : Set
 
     -- Physical theorem required from the literal calculation.
-    UniformPositive : Scalar → Set
+    LessEqual : Scalar → Scalar → Set
+    Positive : Scalar → Set
     positiveLowerBound : Scalar
-    betaZUniformlyPositive : ∀ scale → UniformPositive positiveLowerBound
+    positiveLowerBoundIsPositive : Positive positiveLowerBound
+    betaZLowerBound : ∀ scale → LessEqual positiveLowerBound (betaZ scale)
 
 open CMP109LiteralGaussianBetaProducer public
 
