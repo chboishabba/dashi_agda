@@ -5,6 +5,7 @@ on:
     paths:
       - 'DASHI/Biology/AutisticInformationProcessingLandscapeExact.agda'
       - 'DASHI/Biology/NeurotypeProcessingGeometryExact.agda'
+      - 'DASHI/Biology/ProcessingGeometryActionGateExact.agda'
       - 'DASHI/Biology/AuDHDInteractionGeometryExact.agda'
       - 'DASHI/Biology/PsilautNetworkResponseGeometryExact.agda'
       - 'DASHI/Biology/NeurodivergentSocialEcologySourceRegistryExact.agda'
@@ -50,6 +51,7 @@ jobs:
           files=(
             DASHI/Biology/AutisticInformationProcessingLandscapeExact.agda
             DASHI/Biology/NeurotypeProcessingGeometryExact.agda
+            DASHI/Biology/ProcessingGeometryActionGateExact.agda
             DASHI/Biology/AuDHDInteractionGeometryExact.agda
             DASHI/Biology/PsilautNetworkResponseGeometryExact.agda
             DASHI/Biology/NeurodivergentSocialEcologySourceRegistryExact.agda
@@ -83,6 +85,7 @@ jobs:
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-neurodivergent-social-ecology-check.log"
             export AGDA_JOBS=2
             targets=(
+              DASHI/Biology/ProcessingGeometryActionGateExact.agda
               DASHI/Biology/AuDHDInteractionGeometryExact.agda
               DASHI/Biology/TrustedFriendRelationalGateExact.agda
               DASHI/Biology/TrustedFriendEcologyInteractionExact.agda
