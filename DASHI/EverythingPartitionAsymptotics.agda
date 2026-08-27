@@ -8,8 +8,9 @@ module DASHI.EverythingPartitionAsymptotics where
 -- arbitrary-n factor-pair and sigma1 recurrences, coarse finite growth
 -- envelopes, and the rank-one Fock occupation-grading bridge.
 --
--- The first genuine analytic frontier is now typed explicitly over the concrete
--- Bishop real/exp substrate by PartitionErdosBishopUpperMajorantBoundaryExact.
+-- The first genuine analytic frontier is typed over the concrete Bishop
+-- real/exp substrate.  Existing Yang--Mills Bishop finite-geometric machinery
+-- is explicitly reused for the Erdos weighted-kernel route.
 ------------------------------------------------------------------------
 
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact
@@ -58,6 +59,7 @@ import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalAdmissibleMembershi
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualUniqueExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualPermutationExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosDivisorSumRecurrenceExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopGeometricKernelBridgeExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosBishopUpperMajorantBoundaryExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalResidualExpansionExact
 import DASHI.Mathematics.NumberTheory.PartitionDivisorSumRecurrencePrefixExact
