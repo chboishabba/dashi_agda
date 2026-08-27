@@ -142,3 +142,9 @@ jobs:
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNClayFrontierRound115Validation.agda
+
+      - name: Type-check Round117 reciprocal cross-selected partner frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound117Validation.agda
