@@ -2,26 +2,16 @@ module DASHI.Foundations.BishopNatSquareRootCanonicalApproximationExact where
 
 ------------------------------------------------------------------------
 -- CANONICAL CERTIFICATE FOR THE VENDORED BISHOP NAT SQUARE ROOT
---
--- For N and positive precision n, let
---
---   k = floor(sqrt(N n^2)),   a_n = k/n.
---
--- The finite Nat owner supplies
---
---   k^2 <= N n^2 <= (k+1)^2,
---
--- while BishopNatSquareRootRegularFloorExact supplies the cross-precision
--- regularity required by vendor/bishop::Real.mkℝ.  This module packages those
--- results into the single BishopNatSquareRootApproximation record.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc; _*_)
 open import Data.Integer.Base as ℤ using (+_; +≤+)
 open import Data.Nat.Base using (NonZero; z≤n)
 open import Data.Rational.Unnormalised as ℚ using
   (ℚᵘ; 0ℚᵘ; _/_; _+_; _*_; _≤_; NonNegative; nonNegative; *≤*)
 import Data.Rational.Unnormalised.Properties as ℚP
+import Real as BishopReal
 
 import DASHI.Foundations.BishopNatSquareRootApproximationExact as Approximation
 import DASHI.Foundations.BishopNatSquareRootFloorApproximationExact as Floor
@@ -104,7 +94,7 @@ canonicalNatSquareRootApproximation radicand = record
       radicandBelowCanonicalUpperSquare radicand
   }
 
-canonicalNatSquareRootCandidate : Nat → Approximation.BishopReal.ℝ
+canonicalNatSquareRootCandidate : Nat → BishopReal.ℝ
 canonicalNatSquareRootCandidate radicand =
   Approximation.bishopNatSquareRootCandidate
     (canonicalNatSquareRootApproximation radicand)
