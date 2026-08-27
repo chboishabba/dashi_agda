@@ -16,6 +16,13 @@ module DASHI.Core.IrigarayLabialRelationalCarrierExact where
 -- two".  DASHI formalises that phrase as a role/classification boundary, NOT as
 -- a theorem about set cardinality or a universal biological ontology.
 --
+-- IMPORTANT ADDRESSING BOUNDARY
+--
+-- Irigaray does not source-number the lips as "1" and "2".  `code1/code2` and
+-- `firstLocalLipAspect/secondLocalLipAspect` are DASHI-local addresses used to
+-- make reciprocal contact finite and checkable.  They must not be promoted to
+-- an Irigarayan ordinal ontology.
+--
 -- CROSS-POLLINATION
 --
 -- Reuse BinaryInteractionNonseparabilityExact for the exact theorem that a
@@ -167,15 +174,6 @@ neitherIsNotMasterCenter = refl
 
 ------------------------------------------------------------------------
 -- Exact endpoint-nonseparability witness.
---
--- Contact/off-diagonal response:
---
---   0 1
---   1 0
---
--- This is the existing generic mismatch theorem shape, instantiated here as a
--- labial contact surface.  It proves only structural nonseparability of this
--- finite response, not a universal empirical theory of sexuality.
 ------------------------------------------------------------------------
 
 labialContactResponse : LipAspect → LipAspect → Nat
@@ -221,6 +219,9 @@ record IrigarayLabialBoundary : Set where
   field
     neitherMeansCardinalityZero : Bool
     neitherMeansCardinalityZeroIsFalse : neitherMeansCardinalityZero ≡ false
+    sourceNumbersLipsAsFirstAndSecond : Bool
+    sourceNumbersLipsAsFirstAndSecondIsFalse :
+      sourceNumbersLipsAsFirstAndSecond ≡ false
     twoLipsMeansIndependentProduct : Bool
     twoLipsMeansIndependentProductIsFalse :
       twoLipsMeansIndependentProduct ≡ false
@@ -237,6 +238,7 @@ record IrigarayLabialBoundary : Set where
 canonicalIrigarayLabialBoundary : IrigarayLabialBoundary
 canonicalIrigarayLabialBoundary =
   irigaray-labial-boundary
+    false refl
     false refl
     false refl
     false refl
