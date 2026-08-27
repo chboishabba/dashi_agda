@@ -63,6 +63,12 @@ schematicSubstitutionAndFreshnessEvaluatorFragmentRecovered = tt
 orderedTupleThenPredicateStructuralEvaluatorRecovered : ⊤
 orderedTupleThenPredicateStructuralEvaluatorRecovered = tt
 
+quantifierCaptureCriterionRecovered : ⊤
+quantifierCaptureCriterionRecovered = tt
+
+recursorBindingScopePartitionRecovered : ⊤
+recursorBindingScopePartitionRecovered = tt
+
 criticalLate1974FormalObjectsStillUnrecovered : ⊤
 criticalLate1974FormalObjectsStillUnrecovered = tt
 
@@ -135,11 +141,20 @@ record WetteHistoricalRecoveryGeometryBoundary : Set where
     structuralOrderSensitivityWitnessNowRecovered : Bool
     structuralOrderSensitivityWitnessNowRecoveredIsTrue : structuralOrderSensitivityWitnessNowRecovered ≡ true
 
+    sourceQuantifierCaptureCriterionNowRecovered : Bool
+    sourceQuantifierCaptureCriterionNowRecoveredIsTrue : sourceQuantifierCaptureCriterionNowRecovered ≡ true
+
+    recursorBindingScopePartitionNowRecovered : Bool
+    recursorBindingScopePartitionNowRecoveredIsTrue : recursorBindingScopePartitionNowRecovered ≡ true
+
+    exactRecursorBinderTargetParserNowRecovered : Bool
+    exactRecursorBinderTargetParserNowRecoveredIsFalse : exactRecursorBinderTargetParserNowRecovered ≡ false
+
     fullHistoricalTuplePredicateSubstitutionNowRecovered : Bool
     fullHistoricalTuplePredicateSubstitutionNowRecoveredIsFalse : fullHistoricalTuplePredicateSubstitutionNowRecovered ≡ false
 
-    bindingAwareCaptureAvoidanceNowRecovered : Bool
-    bindingAwareCaptureAvoidanceNowRecoveredIsFalse : bindingAwareCaptureAvoidanceNowRecovered ≡ false
+    bindingAwareCaptureAvoidingEvaluatorNowRecovered : Bool
+    bindingAwareCaptureAvoidingEvaluatorNowRecoveredIsFalse : bindingAwareCaptureAvoidingEvaluatorNowRecovered ≡ false
 
     primaryInspectionEqualsCompleteHistoricalTranscription : Bool
     primaryInspectionEqualsCompleteHistoricalTranscriptionIsFalse : primaryInspectionEqualsCompleteHistoricalTranscription ≡ false
@@ -172,6 +187,9 @@ canonicalWetteHistoricalRecoveryGeometryBoundary =
     true refl
     true refl
     true refl
+    true refl
+    true refl
+    false refl
     false refl
     false refl
     false refl
