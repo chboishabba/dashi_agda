@@ -1,0 +1,51 @@
+module DASHI.Papers.NavierStokes.TheoremInterfaceRound130Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound130Exact as Frontier
+
+round130PaperSignedBonyWeldExact : Bool
+round130PaperSignedBonyWeldExact = Frontier.round130SignedBonyWeldClosed
+
+round130PaperHHSquareGapLowOutputIdentityExact : Bool
+round130PaperHHSquareGapLowOutputIdentityExact =
+  Frontier.round130HHSquareGapLowOutputIdentityClosed
+
+round130PaperBonyPartnerEquivarianceExact : Bool
+round130PaperBonyPartnerEquivarianceExact =
+  Frontier.round130AuthoritativeBonyTagSwapClosed
+
+round130PaperCriticalCommutatorPaymentClosed : Bool
+round130PaperCriticalCommutatorPaymentClosed =
+  Frontier.round130PhysicalClasswiseCriticalCommutatorPaymentClosed
+
+round130PaperCriticalSobolevSimonUpgradeClosed : Bool
+round130PaperCriticalSobolevSimonUpgradeClosed =
+  Frontier.round130PhysicalCriticalSobolevSimonUpgradeClosed
+
+round130PaperMathematicalPackageCount : Nat
+round130PaperMathematicalPackageCount = Frontier.round130CurrentMathematicalPackageCount
+
+round130PaperClayPromotion : Bool
+round130PaperClayPromotion = Frontier.round130ClayPromotion
+
+round130PaperBonyPartnerEquivarianceExactIsTrue :
+  round130PaperBonyPartnerEquivarianceExact ≡ true
+round130PaperBonyPartnerEquivarianceExactIsTrue = refl
+
+round130PaperHHSquareGapLowOutputIdentityExactIsTrue :
+  round130PaperHHSquareGapLowOutputIdentityExact ≡ true
+round130PaperHHSquareGapLowOutputIdentityExactIsTrue = refl
+
+round130PaperCriticalCommutatorPaymentClosedIsFalse :
+  round130PaperCriticalCommutatorPaymentClosed ≡ false
+round130PaperCriticalCommutatorPaymentClosedIsFalse = refl
+
+round130PaperCriticalSobolevSimonUpgradeClosedIsFalse :
+  round130PaperCriticalSobolevSimonUpgradeClosed ≡ false
+round130PaperCriticalSobolevSimonUpgradeClosedIsFalse = refl
+
+round130PaperClayPromotionIsFalse : round130PaperClayPromotion ≡ false
+round130PaperClayPromotionIsFalse = refl
