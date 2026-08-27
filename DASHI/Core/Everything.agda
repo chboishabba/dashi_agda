@@ -8,6 +8,7 @@ import DASHI.Core.DecimalStageResidualBarrierExact
 import DASHI.Core.CoarseFineDepthDecompositionExact
 import DASHI.Core.FiniteBranchingCriticalityExact
 import DASHI.Core.FiniteTypedBranchingKernelExact
+import DASHI.Core.FiniteTypedBranchingReachabilityBridgeExact
 import DASHI.Core.LogisticFoldCriticalityExact
 import DASHI.Core.NumberRoleProvenanceAtlasExact
 import DASHI.Core.IntersectionalNonFactorability
