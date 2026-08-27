@@ -5,6 +5,7 @@ on:
     paths:
       - 'DASHI/Core/DecimalResidualRefinementExact.agda'
       - 'DASHI/Core/DecimalStageResidualBarrierExact.agda'
+      - 'DASHI/Core/CoarseFineDepthDecompositionExact.agda'
       - 'DASHI/Core/FiniteBranchingCriticalityExact.agda'
       - 'DASHI/Core/FiniteTypedBranchingKernelExact.agda'
       - 'DASHI/Core/LogisticFoldCriticalityExact.agda'
@@ -25,6 +26,7 @@ on:
       - 'DASHI/Core/DeclaredRealizedIntegrityResidualExact.agda'
       - 'DASHI/Core/SolisSituatedIntegrityBridgeExact.agda'
       - 'DASHI/Biology/JCoarseFineBranchingCriticalityExact.agda'
+      - 'DASHI/Biology/JCoarseFineDepthDecompositionBridgeExact.agda'
       - 'DASHI/Core/Everything.agda'
       - 'DASHI/Biology/DomainEverything.agda'
       - '.github/workflows/jcoarse-fine-criticality.yml'
@@ -58,6 +60,7 @@ jobs:
           files=(
             DASHI/Core/DecimalResidualRefinementExact.agda
             DASHI/Core/DecimalStageResidualBarrierExact.agda
+            DASHI/Core/CoarseFineDepthDecompositionExact.agda
             DASHI/Core/FiniteBranchingCriticalityExact.agda
             DASHI/Core/FiniteTypedBranchingKernelExact.agda
             DASHI/Core/LogisticFoldCriticalityExact.agda
@@ -77,6 +80,7 @@ jobs:
             DASHI/Core/DeclaredRealizedIntegrityResidualExact.agda
             DASHI/Core/SolisSituatedIntegrityBridgeExact.agda
             DASHI/Biology/JCoarseFineBranchingCriticalityExact.agda
+            DASHI/Biology/JCoarseFineDepthDecompositionBridgeExact.agda
           )
           if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|sorry|admit)\b' "${files[@]}"; then
             echo 'Forbidden trust-boundary token found in new tranche.' >&2
@@ -97,6 +101,7 @@ jobs:
             targets=(
               DASHI/Core/DecimalResidualRefinementExact.agda
               DASHI/Core/DecimalStageResidualBarrierExact.agda
+              DASHI/Core/CoarseFineDepthDecompositionExact.agda
               DASHI/Core/FiniteBranchingCriticalityExact.agda
               DASHI/Core/FiniteTypedBranchingKernelExact.agda
               DASHI/Core/LogisticFoldCriticalityExact.agda
@@ -117,6 +122,7 @@ jobs:
               DASHI/Core/DeclaredRealizedIntegrityResidualExact.agda
               DASHI/Core/SolisSituatedIntegrityBridgeExact.agda
               DASHI/Biology/JCoarseFineBranchingCriticalityExact.agda
+              DASHI/Biology/JCoarseFineDepthDecompositionBridgeExact.agda
               DASHI/Core/Everything.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
