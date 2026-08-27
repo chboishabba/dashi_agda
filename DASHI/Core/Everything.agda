@@ -26,6 +26,16 @@ import DASHI.Core.DifferenceWithoutHierarchyExact
 import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact
 import DASHI.Core.LacanIrigarayTernaryGrammarBridgeExact
 import DASHI.Core.FeministLabialRechartingCapstoneExact
+import DASHI.Core.RelationalRoleGrammarExact
+import DASHI.Core.CriticalRelationalGrammarSourceRegistryExact
+import DASHI.Core.LacanS2RoleSeparationExact
+import DASHI.Core.CriticalThirdnessRoleGrammarExact
+import DASHI.Core.BadiouVoidCountAsOneBoundaryExact
+import DASHI.Core.LugonesPurityCurdlingNonfactorabilityExact
+import DASHI.Core.SocialEcologyHierarchyProjectionBoundaryExact
+import DASHI.Core.CriticalSocialEcologyObserverRegimeExact
+import DASHI.Core.ZeroValueFibreNontrivialityExact
+import DASHI.Core.CriticalRelationalGrammarCapstoneExact
 import DASHI.Core.DialecticalStageSpectrumExact
 import DASHI.Core.ContextualDialecticRoleExact
 import DASHI.Core.EpistemicSuspensionExact
