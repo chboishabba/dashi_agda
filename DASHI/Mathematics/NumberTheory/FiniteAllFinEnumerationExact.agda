@@ -20,8 +20,8 @@ import Data.List.Relation.Unary.All as All
 import Data.List.Relation.Unary.AllPairs.Core as AllPairs
 open import Data.List.Relation.Unary.Unique.Propositional using (Unique)
 import Data.List.Relation.Unary.Unique.Propositional.Properties as UniqueP
-open import Data.Product using (Σ; _,_)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Data.Product using (Σ; _×_; _,_)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact as Product
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
