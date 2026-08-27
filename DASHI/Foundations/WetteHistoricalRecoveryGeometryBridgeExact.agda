@@ -60,8 +60,8 @@ finiteDerivationContextAndTraceErasureRecovered = tt
 derivationClosureFromPriorCertifiedStepsRecovered : ⊤
 derivationClosureFromPriorCertifiedStepsRecovered = tt
 
-schematicSubstitutionAndFreshnessEvaluatorRecovered : ⊤
-schematicSubstitutionAndFreshnessEvaluatorRecovered = tt
+schematicSubstitutionAndFreshnessEvaluatorFragmentRecovered : ⊤
+schematicSubstitutionAndFreshnessEvaluatorFragmentRecovered = tt
 
 criticalLate1974FormalObjectsStillUnrecovered : ⊤
 criticalLate1974FormalObjectsStillUnrecovered = tt
@@ -138,9 +138,9 @@ record WetteHistoricalRecoveryGeometryBoundary : Set where
     derivationClosureFromPriorStepsNowRecoveredIsTrue :
       derivationClosureFromPriorStepsNowRecovered ≡ true
 
-    schematicSubstitutionFreshnessEvaluatorNowRecovered : Bool
-    schematicSubstitutionFreshnessEvaluatorNowRecoveredIsTrue :
-      schematicSubstitutionFreshnessEvaluatorNowRecovered ≡ true
+    schematicSubstitutionFreshnessFragmentNowRecovered : Bool
+    schematicSubstitutionFreshnessFragmentNowRecoveredIsTrue :
+      schematicSubstitutionFreshnessFragmentNowRecovered ≡ true
 
     fullHistoricalTuplePredicateSubstitutionNowRecovered : Bool
     fullHistoricalTuplePredicateSubstitutionNowRecoveredIsFalse :
