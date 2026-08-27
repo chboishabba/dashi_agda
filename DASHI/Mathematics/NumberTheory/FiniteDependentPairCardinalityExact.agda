@@ -18,6 +18,7 @@ open import Data.Product using (Σ; _,_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Mathematics.NumberTheory.FiniteDependentPairEnumerationExact as Dep
+import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact as Product
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
 
 mapLength :
@@ -33,6 +34,22 @@ appendLength :
 appendLength [] ys = refl
 appendLength (_ ∷ xs) ys =
   cong (1 +_) (appendLength xs ys)
+
+concatMapLength :
+  ∀ {A B : Set}
+    (f : A → List B) (xs : List A) →
+  Reindex.listLength (Product.concatMap f xs)
+  ≡ Reindex.foldNat (λ x → Reindex.listLength (f x)) xs
+concatMapLength f [] = refl
+concatMapLength f (x ∷ xs) =
+  trans
+    (appendLength (f x) (Product.concatMap f xs))
+    (cong₂ _+_ refl (concatMapLength f xs))
+  where
+  cong₂ : ∀ {A B C : Set} (g : A → B → C)
+    {a a' : A} {b b' : B} →
+    a ≡ a' → b ≡ b' → g a b ≡ g a' b'
+  cong₂ g refl refl = refl
 
 pairBlockLength :
   ∀ {A : Set} {B : A → Set}
