@@ -3,6 +3,8 @@ name: Wette reconstruction Agda
 on:
   pull_request:
     paths:
+      - 'DASHI/Core/FormalClaimTransportGeometryExact.agda'
+      - 'DASHI/Core/Everything.agda'
       - 'DASHI/Foundations/Wette*.agda'
       - 'DASHI/Foundations/Wette/**'
       - 'DASHI/Foundations/Everything.agda'
