@@ -4,29 +4,23 @@ module DASHI.Physics.Closure.NSTriadKNExternalWaleffeFullSwapAntisymmetryRound11
 -- ROUND119 / FULL THREE-SLOT EXTERNAL WALEFFE SWAP ANTISYMMETRY
 --
 -- Round118 proves the K-slot quartic cell changes sign when the SELECTED
--- incidence is swapped.  The same fact actually holds for the complete
--- three-slot external Waleffe amplitude forcing once the P/Q forcing slots are
--- exchanged with the selected inputs.
+-- incidence is swapped.  The same fact holds for the complete three-slot
+-- external Waleffe amplitude forcing once the P/Q forcing slots are exchanged
+-- with the selected inputs.
 --
--- The exact physical transformation is
---
---   tau=(p,q->k)  |->  swap(tau)=(q,p->k),
+--   tau=(p,q->k) |-> swap(tau)=(q,p->k),
 --
 --   extK(swap tau) = extK(tau),
 --   extP(swap tau) = extQ(tau),
 --   extQ(swap tau) = extP(tau),
 --
--- and therefore
+-- hence
 --
 --   F_ext(swap tau) = - F_ext(tau).
 --
--- This is stronger than the Round118 K-cell diagnostic and avoids residual-list
--- bookkeeping entirely: the self/external split itself is swap-covariant.
--- Reality conjugation remains a different, same-sign symmetry.
---
--- Boundary: the Round105 adverse-phase payment takes positive parts after a
--- sign orientation.  Hence this signed cancellation is only exploitable by a
--- consumer that preserves the complete signed swap orbit until after summation.
+-- This signed cancellation is only exploitable by a consumer that preserves
+-- the complete swap orbit until after summation.  A per-cell positive part does
+-- not cancel with the positive part of its negative.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -43,10 +37,21 @@ import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Algebra
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws as Additive
 import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact as Cross
 import DASHI.Physics.Closure.NSTriadKNWaleffeAmplitudeDampedNetworkTangentRound94Exact as Tangent
 import DASHI.Physics.Closure.NSTriadKNPhysicalSelectedTriadNetworkSplitRound95Exact as Split
 import DASHI.Physics.Closure.NSTriadKNExternalOutputFibreSelfOrbitRemovalRound111Exact as Residual
 import DASHI.Physics.Closure.NSTriadKNExternalWaleffeSelectedSwapAntisymmetryRound118Exact as R118
+
+complex3AddCommutative :
+  ∀ {r} {F : C3.RealField r} (u v : C3.Complex3 F) →
+  C3.complex3Add u v ≡ C3.complex3Add v u
+complex3AddCommutative
+    (C3.complex3 ux uy uz) (C3.complex3 vx vy vz) =
+  Algebra.complex3Ext
+    (Algebra.complexAddCommutative ux vx)
+    (Algebra.complexAddCommutative uy vy)
+    (Algebra.complexAddCommutative uz vz)
 
 pEnergyLegSwapIsQEnergyLeg :
   (tau : Physical.PhysicalTriadIncidence) →
@@ -88,7 +93,7 @@ selfForcingKSwapInvariant system tau =
         (cong (Audit.projectedOrderedTerm system)
           (Round38.swapTriadInvolutiveExact tau)))
       (trans
-        (Algebra.complex3AddCommutative second first)
+        (complex3AddCommutative second first)
         (sym (Residual.selfForcingKIsTwoSelectedOrderedTerms system tau))))
 
 selfForcingPSwapIsQ :
@@ -156,39 +161,34 @@ networkForcingSwapPQIsNegative :
       (Tangent.networkForcing uK uP uQ fK fP fQ)
 networkForcingSwapPQIsNegative {F = F} uK uP uQ fK fP fQ =
   let
-    a = C3.hermitianPairing3 fK
-      (R118.crossAnticommutative uP uQ |> id)
-    A = C3.hermitianPairing3 fK
-      (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross uP uQ)
-    B = C3.hermitianPairing3 uK
-      (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross fP uQ)
-    C = C3.hermitianPairing3 uK
-      (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross uP fQ)
+    A = C3.hermitianPairing3 fK (Cross.complex3Cross uP uQ)
+    B = C3.hermitianPairing3 uK (Cross.complex3Cross fP uQ)
+    C = C3.hermitianPairing3 uK (Cross.complex3Cross uP fQ)
   in
   trans
     (cong₂ C3.complexAdd
       (cong₂ C3.complexAdd
         (trans
-          (cong (C3.hermitianPairing3 fK) (R118.crossAnticommutative uP uQ))
+          (cong (C3.hermitianPairing3 fK)
+            (R118.crossAnticommutative uP uQ))
           (Additive.hermitianPairingNegateRight fK
-            (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross uP uQ)))
+            (Cross.complex3Cross uP uQ)))
         (trans
-          (cong (C3.hermitianPairing3 uK) (R118.crossAnticommutative uP fQ))
+          (cong (C3.hermitianPairing3 uK)
+            (R118.crossAnticommutative uP fQ))
           (Additive.hermitianPairingNegateRight uK
-            (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross uP fQ))))
+            (Cross.complex3Cross uP fQ))))
       (trans
-        (cong (C3.hermitianPairing3 uK) (R118.crossAnticommutative fP uQ))
+        (cong (C3.hermitianPairing3 uK)
+          (R118.crossAnticommutative fP uQ))
         (Additive.hermitianPairingNegateRight uK
-          (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross fP uQ))))
+          (Cross.complex3Cross fP uQ))))
     (R.solve 3
-      (λ A B C → ((R.⊝ A) R.⊕ (R.⊝ C)) R.⊕ (R.⊝ B)
+      (λ A B C →
+        ((R.⊝ A) R.⊕ (R.⊝ C)) R.⊕ (R.⊝ B)
         R.⊜ R.⊝ ((A R.⊕ B) R.⊕ C))
       refl A B C)
-  where
-  module R = Ring.Solver F
-  infixl 0 _|>_
-  _|>_ : ∀ {a b : Set} → a → (a → b) → b
-  x |> f = f x
+  where module R = Ring.Solver F
 
 externalAmplitudeForcingSwapIsNegative :
   ∀ {r} {F : C3.RealField r}
@@ -198,34 +198,17 @@ externalAmplitudeForcingSwapIsNegative :
     (tau : Physical.PhysicalTriadIncidence) →
   Split.externalAmplitudeForcing system (Symmetry.swapTriad tau)
   ≡ C3.complexNegate (Split.externalAmplitudeForcing system tau)
-externalAmplitudeForcingSwapIsNegative system tau =
-  trans
-    (cong₂
-      (λ p q →
-        Tangent.networkForcing
-          (Audit.velocityAt system (Physical.k tau)) p q
-          (Split.externalForcingK system (Symmetry.swapTriad tau))
-          (Split.externalForcingP system (Symmetry.swapTriad tau))
-          (Split.externalForcingQ system (Symmetry.swapTriad tau)))
-      refl refl)
-    (trans
-      (cong
-        (λ args →
-          Tangent.networkForcing
-            (Audit.velocityAt system (Physical.k tau))
-            (Audit.velocityAt system (Physical.q tau))
-            (Audit.velocityAt system (Physical.p tau))
-            (Split.externalForcingK system tau)
-            (Split.externalForcingQ system tau)
-            (Split.externalForcingP system tau))
-        refl)
-      (networkForcingSwapPQIsNegative
-        (Audit.velocityAt system (Physical.k tau))
-        (Audit.velocityAt system (Physical.p tau))
-        (Audit.velocityAt system (Physical.q tau))
-        (Split.externalForcingK system tau)
-        (Split.externalForcingP system tau)
-        (Split.externalForcingQ system tau)))
+externalAmplitudeForcingSwapIsNegative system tau
+  rewrite externalForcingKSwapInvariant system tau
+        | externalForcingPSwapIsQ system tau
+        | externalForcingQSwapIsP system tau =
+  networkForcingSwapPQIsNegative
+    (Audit.velocityAt system (Physical.k tau))
+    (Audit.velocityAt system (Physical.p tau))
+    (Audit.velocityAt system (Physical.q tau))
+    (Split.externalForcingK system tau)
+    (Split.externalForcingP system tau)
+    (Split.externalForcingQ system tau)
 
 round119ExternalModeForcingSwapCovarianceClosed : Bool
 round119ExternalModeForcingSwapCovarianceClosed = true
