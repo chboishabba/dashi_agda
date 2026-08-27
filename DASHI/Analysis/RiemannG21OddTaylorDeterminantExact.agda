@@ -45,7 +45,7 @@ cube x = x * x * x
 
 oddCubicScaled : ℚ → ℚ → ℚ → ℚ
 oddCubicScaled r n1 n3 =
-  (0ℚ - ((6ℚ * r) * n1)) + cube r * n3
+  (0 - ((6 * r) * n1)) + cube r * n3
 
 oddCubicDeterminant :
   ℚ → ℚ →
@@ -65,7 +65,7 @@ oddCubicDeterminantFactorization :
   (r1 r2 n1a n3a n1p n3p : ℚ) →
   oddCubicDeterminant r1 r2 n1a n3a n1p n3p
   ≡
-  (6ℚ * r1 * r2 * (square r2 - square r1))
+  (6 * r1 * r2 * (square r2 - square r1))
     * (n3a * n1p - n1a * n3p)
 oddCubicDeterminantFactorization r1 r2 n1a n3a n1p n3p =
   solve (r1 ∷ r2 ∷ n1a ∷ n3a ∷ n1p ∷ n3p ∷ [])
@@ -74,19 +74,13 @@ oddCubicDeterminantAsNegativeMargin :
   (r1 r2 n1a n3a n1p n3p : ℚ) →
   oddCubicDeterminant r1 r2 n1a n3a n1p n3p
   ≡
-  (0ℚ - (6ℚ * r1 * r2 * (square r2 - square r1)))
+  (0 - (6 * r1 * r2 * (square r2 - square r1)))
     * oddMomentPositiveMargin n1a n3a n1p n3p
 oddCubicDeterminantAsNegativeMargin r1 r2 n1a n3a n1p n3p =
   solve (r1 ∷ r2 ∷ n1a ∷ n3a ∷ n1p ∷ n3p ∷ [])
 
-------------------------------------------------------------------------
--- Exact cancellation receipts.  These are recorded separately because they
--- explain why a determinant-relative Taylor bound is substantially better
--- than four independent entrywise approximations.
-------------------------------------------------------------------------
-
 linearPartScaled : ℚ → ℚ → ℚ
-linearPartScaled r n1 = 0ℚ - ((6ℚ * r) * n1)
+linearPartScaled r n1 = 0 - ((6 * r) * n1)
 
 cubicPart : ℚ → ℚ → ℚ
 cubicPart r n3 = cube r * n3
