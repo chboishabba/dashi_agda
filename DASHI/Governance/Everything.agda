@@ -92,9 +92,7 @@ import DASHI.Governance.FeministClimateQualifiedPromotionExact
 import DASHI.Governance.FeministClimateJusticeSafeJustCapstoneExact
 import DASHI.Governance.FeministClimateJusticeSafeJustRegression
 
--- Indigenous authority and recognition/constitution synthesis.  CARE, OCAP®,
--- Local Contexts, Smith, Moreton-Robinson and Whyte retain distinct source
--- roles; internal PR patterns are retrospective DASHI cross-pollination only.
+-- Indigenous authority and recognition/constitution synthesis.
 import DASHI.Governance.IndigenousAuthoritySourceRegistryExact
 import DASHI.Governance.IndigenousAuthorityEnvelopeExact
 import DASHI.Governance.FirstNationsOwnedEvidenceContractExact
@@ -103,6 +101,19 @@ import DASHI.Governance.MoretonRobinsonRecognitionSovereigntyBoundaryExact
 import DASHI.Governance.WhyteKinshipTemporalityBoundaryExact
 import DASHI.Governance.FeministRecognitionAuthorityCrossPollinationExact
 import DASHI.Governance.SituatedIndigenousFeministAuthorityRegression
+
+-- Indigenous environmental authority / legal-recognition / knowledge-system
+-- instantiations.  These consume the existing authority envelope instead of
+-- flattening cultural permission, legal representation and knowledge content.
+import DASHI.Governance.IndigenousEnvironmentalJusticeSourceRegistryExact
+import DASHI.Governance.SteffensenCulturalFireAuthorityExact
+import DASHI.Governance.CulturalFireAuthorityEnvelopeBridgeExact
+import DASHI.Governance.NativeTitleAuthorityLayerExact
+import DASHI.Governance.IPCCAR6IndigenousKnowledgeIntegrationAuditExact
+import DASHI.Governance.CaceresAuthorityWithoutEnforcementExact
+import DASHI.Governance.NavdanyaSeedSovereigntyNonseparabilityExact
+import DASHI.Governance.IndigenousEnvironmentalAuthorityCapstoneExact
+import DASHI.Governance.IndigenousEnvironmentalAuthorityRegression
 
 -- Provenance-bearing policy routing, corrective reachability and source-bounded
 -- application surfaces assembled as one focused tranche.
