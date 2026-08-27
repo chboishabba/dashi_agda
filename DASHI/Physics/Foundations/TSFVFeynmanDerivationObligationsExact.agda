@@ -25,6 +25,7 @@ data DerivationArrow : Set where
   quantitativeStationaryPhase : DerivationArrow
   realPhysicalScaleCalibration : DerivationArrow
   tsfvToPhysicalAdmissibility : DerivationArrow
+  tsfvToNonseparableTransitionAction : DerivationArrow
   tsfvToPhysicalAction : DerivationArrow
   actionToPhaseOverHbar : DerivationArrow
   phaseToFeynmanAmplitudeMeasure : DerivationArrow
@@ -70,11 +71,17 @@ tsfvAdmissibilityObligation = derivationObligation
   interfaceOnly
   "A TSFV-originating theorem must explain why the physically relevant histories are admissible rather than merely accepting a supplied admissibility fibre."
 
+tsfvNonseparableTransitionActionObligation : DerivationObligation
+tsfvNonseparableTransitionActionObligation = derivationObligation
+  tsfvToNonseparableTransitionAction
+  structuralCandidateOnly
+  "Two structural local-action candidates have now been audited: the v3 candidate is T-invariant but destination-only, while the Candidate256 I× candidate is pair-valued but provably endpoint-separable. A TSFV-originating local term that is both transformation-compatible and genuinely nonseparable in the transition pair remains open."
+
 tsfvActionObligation : DerivationObligation
 tsfvActionObligation = derivationObligation
   tsfvToPhysicalAction
   structuralCandidateOnly
-  "A concrete additive finite-history candidate now exists from the bounded TSFV v3 address valuation and is exactly T-invariant, but physical action units, dynamical origin, continuum control and empirical calibration remain open."
+  "Additive finite-history action machinery and audited TSFV structural candidates now exist, but physical action units, dynamical/Lagrangian origin, nonseparable transition geometry, continuum control and empirical calibration remain open."
 
 actionPhaseObligation : DerivationObligation
 actionPhaseObligation = derivationObligation
@@ -107,6 +114,7 @@ canonicalRemainingObligations =
   ∷ stationaryPhaseObligation
   ∷ physicalScaleObligation
   ∷ tsfvAdmissibilityObligation
+  ∷ tsfvNonseparableTransitionActionObligation
   ∷ tsfvActionObligation
   ∷ actionPhaseObligation
   ∷ amplitudeMeasureObligation
@@ -125,6 +133,10 @@ record TSFVFeynmanDerivationBoundary : Set where
     structuralActionCandidateConstructedIsTrue :
       structuralActionCandidateConstructed ≡ true
 
+    nonseparableTransitionActionDerived : Bool
+    nonseparableTransitionActionDerivedIsFalse :
+      nonseparableTransitionActionDerived ≡ false
+
     tsfvCurrentlyDerivesFeynmanPropagator : Bool
     tsfvCurrentlyDerivesFeynmanPropagatorIsFalse :
       tsfvCurrentlyDerivesFeynmanPropagator ≡ false
@@ -138,5 +150,6 @@ canonicalTSFVFeynmanDerivationBoundary =
   tsfvFeynmanDerivationBoundary
     true refl
     true refl
+    false refl
     false refl
     false refl
