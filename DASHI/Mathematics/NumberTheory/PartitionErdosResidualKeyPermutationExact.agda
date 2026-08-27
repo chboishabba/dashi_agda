@@ -17,15 +17,17 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosResidualKeyPermutationExact 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Data.Empty using (⊥-elim)
 open import Data.Fin.Base using (Fin; fromℕ<; toℕ)
 import Data.Fin.Properties as FinP
-open import Data.List.Base using (map)
 open import Data.List.Membership.Propositional using (_∈_)
-open import Data.List.Membership.Propositional.Properties using (∈-map⁺)
+open import Data.List.Membership.Propositional.Properties using (∈-map⁺; ∈-map⁻)
 open import Data.List.Relation.Unary.Any as Any using ()
+import Data.List.Relation.Binary.Permutation.Propositional as Perm
+open import Data.Nat.Base using (_≤_; _<_)
 import Data.Nat.Properties as NatP
 open import Data.Nat.Properties using (_≟_)
-open import Data.Vec.Base using (Vec)
+open import Data.Product using (_,_)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
@@ -56,7 +58,7 @@ selectAdmissibleComplete {n} {residual} {residuals = head ∷ tail}
   with Admissible.residualTotal head ≟ n
 ... | yes _ = Any.here equality
 ... | no contradiction =
-  Data.Empty.⊥-elim
+  ⊥-elim
     (contradiction
       (subst
         (λ candidate → Admissible.residualTotal candidate ≡ n)
@@ -73,7 +75,7 @@ selectAdmissibleComplete {n} {residual} {residuals = head ∷ tail}
 
 finitePredecessorListed :
   ∀ {n} (predecessor : Nat) →
-  predecessor NatP.< n →
+  predecessor < n →
   predecessor ∈ Admissible.finitePredecessors n
 finitePredecessorListed predecessor bound =
   subst
@@ -132,11 +134,11 @@ deletedCellAdmissible {n} cell cellMember =
       (RoundTrip.cellCopiesAvailable cell)
 
   residualMass≤n :
-    Partition.weightedMass (Key.residualVector (Key.deleteKey cell)) NatP.≤ n
+    Partition.weightedMass (Key.residualVector (Key.deleteKey cell)) ≤ n
   residualMass≤n =
     subst
       (λ upper →
-        Partition.weightedMass (Key.residualVector (Key.deleteKey cell)) NatP.≤ upper)
+        Partition.weightedMass (Key.residualVector (Key.deleteKey cell)) ≤ upper)
       deletionExact
       (NatP.m≤m+n
         (Partition.weightedMass (Key.residualVector (Key.deleteKey cell)))
@@ -146,7 +148,7 @@ deletedCellAdmissible {n} cell cellMember =
   residualPointwiseBound :
     ∀ index →
     Partition.lookupMultiplicity index (Key.residualVector (Key.deleteKey cell))
-    NatP.≤ n
+    ≤ n
   residualPointwiseBound index =
     NatP.≤-trans
       (Partition.coordinate≤weightedMass
@@ -162,7 +164,7 @@ deletedCellAdmissible {n} cell cellMember =
         (Key.residualVector (Key.deleteKey cell))
         residualPointwiseBound)
 
-  predecessor<n : Key.residualPredecessor (Key.deleteKey cell) NatP.< n
+  predecessor<n : Key.residualPredecessor (Key.deleteKey cell) < n
   predecessor<n =
     NatP.<-≤-trans
       (FinP.toℕ<n (Key.cellOccurrence cell))
@@ -235,8 +237,7 @@ imageToAdmissible :
   residual ∈ System.residualKeyEnumeration n →
   residual ∈ Admissible.admissibleResidualEnumeration n
 imageToAdmissible {residual = residual} member
-  with Data.List.Membership.Propositional.Properties.∈-map⁻
-         Key.deleteKey member
+  with ∈-map⁻ Key.deleteKey member
 ... | cell , cellMember , residualEqualsDeleted =
   subst
     (λ candidate → candidate ∈ Admissible.admissibleResidualEnumeration _)
@@ -252,8 +253,7 @@ admissibleToImage {residual = residual} =
 
 residualNormalFormPermutation :
   (n : Nat) →
-  System.residualKeyEnumeration n
-  Data.List.Relation.Binary.Permutation.Propositional.↭
+  System.residualKeyEnumeration n Perm.↭
   Admissible.admissibleResidualEnumeration n
 residualNormalFormPermutation n =
   Reindex.uniqueMembershipEquivalenceToPermutation
