@@ -60,6 +60,8 @@ on:
       - 'DASHI/Governance/SafeJustQualifiedClaimPromotionExact.agda'
       - 'DASHI/Governance/SafeJustSocialIndicatorJusticeBoundaryExact.agda'
       - 'DASHI/Governance/SafeJustConsumerAdequacyResidualBridgeExact.agda'
+      - 'DASHI/Governance/SafeJustSituatedClaimAuthorityBridgeExact.agda'
+      - 'DASHI/Governance/SafeJustSituatedClaimAuthorityRegression.agda'
       - 'DASHI/Governance/Everything.agda'
       - '.github/workflows/safe-just-provisioning.yml'
   workflow_dispatch:
@@ -147,6 +149,8 @@ jobs:
             DASHI/Governance/SafeJustQualifiedClaimPromotionExact.agda
             DASHI/Governance/SafeJustSocialIndicatorJusticeBoundaryExact.agda
             DASHI/Governance/SafeJustConsumerAdequacyResidualBridgeExact.agda
+            DASHI/Governance/SafeJustSituatedClaimAuthorityBridgeExact.agda
+            DASHI/Governance/SafeJustSituatedClaimAuthorityRegression.agda
           )
           if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|sorry|admit)\b' "${files[@]}"; then
             echo 'Forbidden trust-boundary token found in safe-and-just provisioning tranche.' >&2
@@ -178,6 +182,8 @@ jobs:
               DASHI/Governance/WhyteKinshipTemporalityBoundaryExact.agda
               DASHI/Governance/FeministRecognitionAuthorityCrossPollinationExact.agda
               DASHI/Governance/SituatedIndigenousFeministAuthorityRegression.agda
+              DASHI/Governance/SafeJustSituatedClaimAuthorityBridgeExact.agda
+              DASHI/Governance/SafeJustSituatedClaimAuthorityRegression.agda
               DASHI/Governance/FeministClimateJusticeSafeJustRegression.agda
               DASHI/Governance/Kallis2025ClaimEvidenceRegression.agda
               DASHI/Governance/Fanning2022MethodsRegression.agda
