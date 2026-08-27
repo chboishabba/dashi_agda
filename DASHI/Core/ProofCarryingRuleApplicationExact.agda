@@ -27,11 +27,6 @@ RuleApplication :
   RuleApplicationSystem State Rule → State → Rule → Set
 RuleApplication = Dependency.AdmissibleAction
 
-------------------------------------------------------------------------
--- A selected rule is exactly a rule label paired with an existing
--- TypedDependencyCore admissibility witness.
-------------------------------------------------------------------------
-
 record SelectedRuleApplication
     {State Rule : Set}
     (system : RuleApplicationSystem State Rule)
@@ -76,6 +71,39 @@ runCertifiedTrace system {state} done = state
 runCertifiedTrace system (choose selected rest) =
   runCertifiedTrace system rest
 
+------------------------------------------------------------------------
+-- Certified-trace composition.
+--
+-- The right trace is indexed by the *actual target* of the left trace.  This
+-- is the reusable dependent sequencing operation needed by historical
+-- reconstruction lanes: a producer trace can manufacture evidence/state that a
+-- later consumer trace is then permitted to use, without flattening either
+-- trace to an untyped list of rule labels first.
+------------------------------------------------------------------------
+
+appendCertifiedTrace :
+  {State Rule : Set} →
+  {system : RuleApplicationSystem State Rule} →
+  {state : State} →
+  (left : CertifiedRuleTrace system state) →
+  CertifiedRuleTrace system (runCertifiedTrace system left) →
+  CertifiedRuleTrace system state
+appendCertifiedTrace done right = right
+appendCertifiedTrace (choose selected rest) right =
+  choose selected (appendCertifiedTrace rest right)
+
+runAppendCertifiedTrace :
+  {State Rule : Set} →
+  {system : RuleApplicationSystem State Rule} →
+  {state : State} →
+  (left : CertifiedRuleTrace system state) →
+  (right : CertifiedRuleTrace system (runCertifiedTrace system left)) →
+  runCertifiedTrace system (appendCertifiedTrace left right)
+    ≡ runCertifiedTrace system right
+runAppendCertifiedTrace done right = refl
+runAppendCertifiedTrace (choose selected rest) right =
+  runAppendCertifiedTrace rest right
+
 record ProofCarryingRuleApplicationBoundary : Set where
   constructor proofCarryingRuleApplicationBoundary
   field
@@ -91,6 +119,10 @@ record ProofCarryingRuleApplicationBoundary : Set where
     laterTraceStepsAreIndexedByReachedStateIsTrue :
       laterTraceStepsAreIndexedByReachedState ≡ true
 
+    certifiedTracesComposeAtActualReachedState : Bool
+    certifiedTracesComposeAtActualReachedStateIsTrue :
+      certifiedTracesComposeAtActualReachedState ≡ true
+
     ruleLabelAloneImpliesAdmissibility : Bool
     ruleLabelAloneImpliesAdmissibilityIsFalse :
       ruleLabelAloneImpliesAdmissibility ≡ false
@@ -103,6 +135,7 @@ canonicalProofCarryingRuleApplicationBoundary :
   ProofCarryingRuleApplicationBoundary
 canonicalProofCarryingRuleApplicationBoundary =
   proofCarryingRuleApplicationBoundary
+    true refl
     true refl
     true refl
     true refl
