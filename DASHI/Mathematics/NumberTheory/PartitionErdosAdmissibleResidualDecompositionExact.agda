@@ -13,12 +13,16 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosAdmissibleResidualDecomposit
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Data.Fin.Base using (toℕ)
+import Data.Fin.Properties as FinP
 open import Data.Nat.Base using (_≤_; _∸_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
 open import Data.Vec.Base using (Vec)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
+import DASHI.Mathematics.NumberTheory.FiniteNatVectorZeroPaddingExact as Pad
 import DASHI.Mathematics.NumberTheory.FinitePositiveFactorPairExact as Factor
+import DASHI.Mathematics.NumberTheory.FiniteVectorPrefixSplitExact as Split
 import DASHI.Mathematics.NumberTheory.PartitionAmbientMultiplicityDeletionExact as Ambient
 import DASHI.Mathematics.NumberTheory.PartitionAmbientMultiplicityNormalizationExact as Normalize
 import DASHI.Mathematics.NumberTheory.PartitionErdosAdmissibleResidualEnumerationExact as Admissible
@@ -155,6 +159,95 @@ canonicalResidualPartition residual totalExact =
     (residualAmbientPartition residual totalExact)
 
 ------------------------------------------------------------------------
+-- Literal reconstruction of the ambient residual representation.
+
+transportForwardBackward :
+  ∀ {left right : Nat}
+    (equality : left ≡ right)
+    (vector : Vec Nat right) →
+  Classical.transportVectorForward equality
+    (Normalize.transportVectorToDecomposition equality vector)
+  ≡ vector
+transportForwardBackward refl vector = refl
+
+canonicalPaddingRecoversResidualVector :
+  ∀ {n : Nat} (residual : Key.ResidualKey n) →
+  (totalExact : Admissible.residualTotal residual ≡ n) →
+  Classical.padResidualVector
+    (residualDecrementAtMostGrade residual totalExact)
+    (Partition.multiplicities
+      (canonicalResidualPartition residual totalExact))
+  ≡ Key.residualVector residual
+canonicalPaddingRecoversResidualVector {n} residual totalExact =
+  trans
+    (cong
+      (Classical.transportVectorForward decomposition)
+      appendCanonicalZeroEqualsTransported)
+    (transportForwardBackward decomposition (Key.residualVector residual))
+  where
+  decrement : Nat
+  decrement = residualDecrement residual
+
+  bound : decrement ≤ n
+  bound = residualDecrementAtMostGrade residual totalExact
+
+  decomposition : (n ∸ decrement) + decrement ≡ n
+  decomposition = Classical.differencePlus bound
+
+  ambient :
+    Ambient.AmbientMultiplicityPartition
+      ((n ∸ decrement) + decrement)
+      (n ∸ decrement)
+  ambient = residualAmbientPartition residual totalExact
+
+  transported : Vec Nat ((n ∸ decrement) + decrement)
+  transported = Ambient.ambientMultiplicities ambient
+
+  prefix : Vec Nat (n ∸ decrement)
+  prefix = Split.takePrefix (n ∸ decrement) decrement transported
+
+  appendCanonicalZeroEqualsTransported :
+    Split.appendVec prefix (Split.zeroVec decrement) ≡ transported
+  appendCanonicalZeroEqualsTransported =
+    trans
+      (cong
+        (Split.appendVec prefix)
+        (sym (Normalize.ambientTailZero ambient)))
+      (Split.splitReconstruct (n ∸ decrement) decrement transported)
+
+------------------------------------------------------------------------
+-- The factor-pair coordinate reconstructed from an admissible residual returns
+-- the original ambient Fin index exactly.
+
+sucInjective : ∀ {left right : Nat} → suc left ≡ suc right → left ≡ right
+sucInjective refl = refl
+
+residualFactorAmbientIndex :
+  ∀ {n : Nat} (residual : Key.ResidualKey n) →
+  (totalExact : Admissible.residualTotal residual ≡ n) →
+  Classical.ambientDivisorIndex
+    (residualDecrementAtMostGrade residual totalExact)
+    (residualFactorPair residual)
+  ≡ Key.residualIndex residual
+residualFactorAmbientIndex residual totalExact =
+  FinP.toℕ-injective
+    (trans
+      (Pad.widenFinToNat bound
+        (Classical.divisorIndex (residualFactorPair residual)))
+      divisorIndexToNat)
+  where
+  bound : residualDecrement residual ≤ _
+  bound = residualDecrementAtMostGrade residual totalExact
+
+  divisorIndexToNat :
+    toℕ (Classical.divisorIndex (residualFactorPair residual))
+    ≡ toℕ (Key.residualIndex residual)
+  divisorIndexToNat =
+    sucInjective
+      (Classical.divisorIndexPartValue (residualFactorPair residual))
+
+------------------------------------------------------------------------
 -- Every admissible key therefore determines exactly the classical semantic
--- coordinates r, (v,k), a canonical partition of n-r, and unit u.
+-- coordinates r, (v,k), a canonical partition of n-r, and unit u, and the
+-- classical padding/index maps recover its ambient representation literally.
 ------------------------------------------------------------------------
