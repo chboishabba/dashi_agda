@@ -5,6 +5,7 @@ module DASHI.Core.Everything where
 import DASHI.Core.FallacyObstructionEverything
 import DASHI.Core.DecimalResidualRefinementExact
 import DASHI.Core.DecimalStageResidualBarrierExact
+import DASHI.Core.CoarseFineDepthDecompositionExact
 import DASHI.Core.FiniteBranchingCriticalityExact
 import DASHI.Core.FiniteTypedBranchingKernelExact
 import DASHI.Core.LogisticFoldCriticalityExact
