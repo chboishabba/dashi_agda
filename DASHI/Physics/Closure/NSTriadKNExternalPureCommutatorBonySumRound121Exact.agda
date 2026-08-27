@@ -57,10 +57,11 @@ foldComplexEqualsFourWayBonyFold :
   foldComplex value items ≡ fourWayBonyFold value items
 foldComplexEqualsFourWayBonyFold {F = F} value [] =
   R.solve 0
-    (((R.Κ (C3.complexZero F) R.⊕ R.Κ (C3.complexZero F))
-      R.⊕
-      (R.Κ (C3.complexZero F) R.⊕ R.Κ (C3.complexZero F)))
-      R.⊜ R.Κ (C3.complexZero F))
+    (R.Κ (C3.complexZero F)
+      R.⊜
+      ((R.Κ (C3.complexZero F) R.⊕ R.Κ (C3.complexZero F))
+        R.⊕
+        (R.Κ (C3.complexZero F) R.⊕ R.Κ (C3.complexZero F))))
     refl
   where module R = Ring.Solver F
 foldComplexEqualsFourWayBonyFold {F = F} value (tau ∷ rest)
