@@ -7,9 +7,11 @@ on:
       - 'DASHI/Core/CriticalRelationalGrammarSourceRegistryExact.agda'
       - 'DASHI/Core/LacanFregeTernaryRoleChartExact.agda'
       - 'DASHI/Core/LacanS2RoleSeparationExact.agda'
+      - 'DASHI/Core/LacanSexuationTernarySeparationExact.agda'
       - 'DASHI/Core/IrigarayLabialRelationalCarrierExact.agda'
       - 'DASHI/Core/CriticalThirdnessRoleGrammarExact.agda'
       - 'DASHI/Core/CriticalGrammarRelabellingBoundaryExact.agda'
+      - 'DASHI/Core/TrinhSubjectInMakingNoncollapseExact.agda'
       - 'DASHI/Core/BadiouVoidCountAsOneBoundaryExact.agda'
       - 'DASHI/Core/LugonesPurityCurdlingNonfactorabilityExact.agda'
       - 'DASHI/Core/SocialEcologyHierarchyProjectionBoundaryExact.agda'
@@ -50,9 +52,11 @@ jobs:
             DASHI/Core/CriticalRelationalGrammarSourceRegistryExact.agda
             DASHI/Core/LacanFregeTernaryRoleChartExact.agda
             DASHI/Core/LacanS2RoleSeparationExact.agda
+            DASHI/Core/LacanSexuationTernarySeparationExact.agda
             DASHI/Core/IrigarayLabialRelationalCarrierExact.agda
             DASHI/Core/CriticalThirdnessRoleGrammarExact.agda
             DASHI/Core/CriticalGrammarRelabellingBoundaryExact.agda
+            DASHI/Core/TrinhSubjectInMakingNoncollapseExact.agda
             DASHI/Core/BadiouVoidCountAsOneBoundaryExact.agda
             DASHI/Core/LugonesPurityCurdlingNonfactorabilityExact.agda
             DASHI/Core/SocialEcologyHierarchyProjectionBoundaryExact.agda
@@ -78,8 +82,10 @@ jobs:
             export AGDA_JOBS=2
             targets=(
               DASHI/Core/LacanS2RoleSeparationExact.agda
+              DASHI/Core/LacanSexuationTernarySeparationExact.agda
               DASHI/Core/CriticalThirdnessRoleGrammarExact.agda
               DASHI/Core/CriticalGrammarRelabellingBoundaryExact.agda
+              DASHI/Core/TrinhSubjectInMakingNoncollapseExact.agda
               DASHI/Core/BadiouVoidCountAsOneBoundaryExact.agda
               DASHI/Core/LugonesPurityCurdlingNonfactorabilityExact.agda
               DASHI/Core/SocialEcologyHierarchyProjectionBoundaryExact.agda
