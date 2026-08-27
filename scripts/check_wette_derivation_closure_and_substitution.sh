@@ -40,7 +40,11 @@ done
 grep -q 'certifiedTracesComposeAtActualReachedStateIsTrue' DASHI/Core/ProofCarryingRuleApplicationExact.agda
 
 grep -q 'rule915AddressCountAndPredicateOutputNowTypedIsTrue' DASHI/Foundations/Wette1969Rule915PredicateProducerExact.agda
+grep -q 'firstSevenPremiseBodiesNowLiteralSourceConstructorsIsTrue' DASHI/Foundations/Wette1969Rule915PredicateProducerExact.agda
+grep -q 'modifiedPremise6UsesP193NoPredicateQuantificationConditionIsTrue' DASHI/Foundations/Wette1969Rule915PredicateProducerExact.agda
+grep -q 'remainingTwentyLPremisesStillExplicitTranscriptionObligationsIsTrue' DASHI/Foundations/Wette1969Rule915PredicateProducerExact.agda
 grep -q 'allTwentySevenPremiseBodiesNowLiteralOCRPerfectIsFalse' DASHI/Foundations/Wette1969Rule915PredicateProducerExact.agda
+
 grep -q 'rules831And832NowLiteralHistoricalBodiesIsTrue' DASHI/Foundations/Wette1969Rule83TupleDerivationExact.agda
 grep -q 'rules8112And8113NowLiteralHistoricalBodiesIsTrue' DASHI/Foundations/Wette1969Rule8112FreshnessDerivationExact.agda
 
