@@ -22,8 +22,10 @@ module DASHI.Analysis.RiemannG21TwoPointCovarianceShadowExact where
 -- Samuel Karlin.  The theorem below is proved directly by rational algebra.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Product using (_×_)
 open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
@@ -42,10 +44,6 @@ twoPointMomentCrossProductDecomposition :
 twoPointMomentCrossProductDecomposition q0 dq a0 a1 b0 b1 =
   solve (q0 ∷ dq ∷ a0 ∷ a1 ∷ b0 ∷ b1 ∷ [])
 
-------------------------------------------------------------------------
--- Same algebra, named for the two G21 parity sectors.
-------------------------------------------------------------------------
-
 evenMomentCovarianceIdentity :
   (q0 dq coshA0 coshA1 coshP0 coshP1 : ℚ) →
   m2 q0 dq coshP0 coshP1 * m0 coshA0 coshA1
@@ -61,10 +59,6 @@ oddMomentCovarianceIdentity :
   m2 q0 dq sinhA0 sinhA1 * m0 sinhP0 sinhP1
     + dq * (sinhP1 * sinhA0 - sinhP0 * sinhA1)
 oddMomentCovarianceIdentity = twoPointMomentCrossProductDecomposition
-
-------------------------------------------------------------------------
--- Analytic bridge still required.
-------------------------------------------------------------------------
 
 record ActualTaperRelativeWeightMonotonicity : Set₁ where
   field
