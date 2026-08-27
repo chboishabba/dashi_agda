@@ -14,7 +14,8 @@ module DASHI.Physics.Closure.NSTriadKNCriticalCompactnessSerrinRound29Exact wher
 --
 -- Author: Jacques Simon.
 -- Title: "Compact Sets in the Space L^p(0,T;B)".
--- DOI: 10.1007/BF00281418.
+-- Annali di Matematica Pura ed Applicata 146 (1987), 65--96.
+-- DOI: 10.1007/BF01762360.
 --
 -- DASHI CONTRIBUTION
 --
@@ -22,6 +23,15 @@ module DASHI.Physics.Closure.NSTriadKNCriticalCompactnessSerrinRound29Exact wher
 -- exact quantitative critical-to-Serrin budget algebra. The physical negative
 -- Sobolev estimate, Aubin-Lions-Simon compactness and periodic Serrin
 -- continuation remain separate producers.
+--
+-- ROUND104 RECEIPT / SAME-LIMIT REPAIR
+--
+-- The original abstract Aubin--Lions target stored proposition *types* as Set
+-- fields without requiring inhabitants.  Round104 pairs every named analytic
+-- proposition with a proof witness and additionally makes the target own an
+-- actual `limitingState : LimitState`.  This prevents a later same-solution
+-- compiler from proving only that two LIMIT TYPES coincide while silently
+-- continuing a different element of that type.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -97,14 +107,34 @@ record CriticalAubinLionsTarget : Set₁ where
   field
     GalerkinSequence : Set
     LimitState : Set
+    limitingState : LimitState
 
     uniformLInfinityHOneHalf : Set
+    uniformLInfinityHOneHalfWitness : uniformLInfinityHOneHalf
+
     uniformL2HThreeHalf : Set
+    uniformL2HThreeHalfWitness : uniformL2HThreeHalf
+
     uniformTimeDerivativeNegativeHalf : Set
+    uniformTimeDerivativeNegativeHalfWitness : uniformTimeDerivativeNegativeHalf
 
     strongL2HOneHalfCompactness : Set
+    strongL2HOneHalfCompactnessWitness : strongL2HOneHalfCompactness
+
     quadraticTermConvergence : Set
+    quadraticTermConvergenceWitness : quadraticTermConvergence
+
     initialTraceRecovered : Set
+    initialTraceRecoveredWitness : initialTraceRecovered
+
+    limitingEquationRecovered : Set
+    limitingEquationRecoveredWitness : limitingEquationRecovered
+
+    weakStarLowerSemicontinuity : Set
+    weakStarLowerSemicontinuityWitness : weakStarLowerSemicontinuity
+
+    weakDissipationLowerSemicontinuity : Set
+    weakDissipationLowerSemicontinuityWitness : weakDissipationLowerSemicontinuity
 
 open CriticalAubinLionsTarget public
 
@@ -122,6 +152,12 @@ open PeriodicSerrinContinuationTarget public
 criticalToSerrinQuantitativeReducerClosed : Bool
 criticalToSerrinQuantitativeReducerClosed = true
 
+round104CriticalAubinLionsTargetRequiresWitnesses : Bool
+round104CriticalAubinLionsTargetRequiresWitnesses = true
+
+round104CriticalAubinLionsTargetOwnsLimitElement : Bool
+round104CriticalAubinLionsTargetOwnsLimitElement = true
+
 physicalNegativeNormTimeDerivativeClosed : Bool
 physicalNegativeNormTimeDerivativeClosed = false
 
@@ -134,6 +170,14 @@ periodicSerrinContinuationInstantiated = false
 criticalToSerrinQuantitativeReducerClosedIsTrue :
   criticalToSerrinQuantitativeReducerClosed ≡ true
 criticalToSerrinQuantitativeReducerClosedIsTrue = refl
+
+round104CriticalAubinLionsTargetRequiresWitnessesIsTrue :
+  round104CriticalAubinLionsTargetRequiresWitnesses ≡ true
+round104CriticalAubinLionsTargetRequiresWitnessesIsTrue = refl
+
+round104CriticalAubinLionsTargetOwnsLimitElementIsTrue :
+  round104CriticalAubinLionsTargetOwnsLimitElement ≡ true
+round104CriticalAubinLionsTargetOwnsLimitElementIsTrue = refl
 
 physicalNegativeNormTimeDerivativeClosedIsFalse :
   physicalNegativeNormTimeDerivativeClosed ≡ false
