@@ -87,12 +87,12 @@ attachSituatedResearchUse :
   BAUProjectionDatum datum →
   Figure.FigureCommutationAdmission datum literal →
   LiteralSituatedQualifiedResearchUse datum literal
-attachSituatedResearchUse projection admission =
+attachSituatedResearchUse {literal = literal} projection admission =
   literalSituatedQualifiedResearchUse
     projection
     admission
     Authority.fanningQualifiedResearchUse
-    _
+    literal
     refl
 
 literalSourceSurvivesQualifiedResearchUse :
