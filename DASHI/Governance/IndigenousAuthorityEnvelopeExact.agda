@@ -1,7 +1,6 @@
 module DASHI.Governance.IndigenousAuthorityEnvelopeExact where
 
 open import DASHI.Core.Prelude
-import DASHI.Core.SituatedClaimAuthoritySystemExact as Situated
 import DASHI.Governance.IndigenousAuthoritySourceRegistryExact as Sources
 
 ------------------------------------------------------------------------
@@ -38,17 +37,15 @@ record AuthorityEnvelope : Set where
 
 communityResearchEnvelope : AuthorityEnvelope
 communityResearchEnvelope =
-  authorityEnvelope communityOrigin communityControlled protocolSpecified collaborationPermitted originatingAuthority
+  authorityEnvelope
+    communityOrigin communityControlled protocolSpecified
+    collaborationPermitted originatingAuthority
 
 externalPublishedDescription : AuthorityEnvelope
 externalPublishedDescription =
-  authorityEnvelope externalDescription externalGovernance protocolUnspecified permissionUnspecified externalObserverStanding
-
-provenanceIdentityDoesNotDeterminePermission :
-  {left right : AuthorityEnvelope} →
-  AuthorityEnvelope.provenance left ≡ AuthorityEnvelope.provenance right →
-  AuthorityEnvelope.permission left ≡ AuthorityEnvelope.permission right → Set
-provenanceIdentityDoesNotDeterminePermission _ _ = ⊤
+  authorityEnvelope
+    externalDescription externalGovernance protocolUnspecified
+    permissionUnspecified externalObserverStanding
 
 externalDescriptionIsNotOriginatingAuthority :
   AuthorityEnvelope.sovereignStanding externalPublishedDescription ≡ originatingAuthority → ⊥
