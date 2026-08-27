@@ -1,0 +1,57 @@
+module DASHI.Papers.NavierStokes.TheoremInterfaceRound115Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound115Exact as R115
+
+round115PaperActualExternalWaleffeQuarticCellExpansionClosed : Bool
+round115PaperActualExternalWaleffeQuarticCellExpansionClosed =
+  R115.round115ActualExternalWaleffeQuarticCellExpansionClosed
+
+round115PaperPhysicalQuarticCellPartnerDefectIdentified : Bool
+round115PaperPhysicalQuarticCellPartnerDefectIdentified =
+  R115.round115PhysicalExternalQuarticCellPartnerDefectIdentified
+
+round115PaperExternalQuantitativePaymentClosed : Bool
+round115PaperExternalQuantitativePaymentClosed =
+  R115.round115PhysicalExternalResidualCutoffUniformQuantitativePaymentClosed
+
+round115PaperCriticalSobolevSimonUpgradeClosed : Bool
+round115PaperCriticalSobolevSimonUpgradeClosed =
+  R115.round115PhysicalCriticalSobolevSimonUpgradeClosed
+
+round115PaperMathematicalPackageCount : Nat
+round115PaperMathematicalPackageCount = R115.round115CurrentMathematicalPackageCount
+
+round115PaperVisibleSubleafCount : Nat
+round115PaperVisibleSubleafCount = R115.round115CurrentVisibleSubleafCount
+
+round115PaperActualExternalWaleffeQuarticCellExpansionClosedIsTrue :
+  round115PaperActualExternalWaleffeQuarticCellExpansionClosed ≡ true
+round115PaperActualExternalWaleffeQuarticCellExpansionClosedIsTrue = refl
+
+round115PaperPhysicalQuarticCellPartnerDefectIdentifiedIsFalse :
+  round115PaperPhysicalQuarticCellPartnerDefectIdentified ≡ false
+round115PaperPhysicalQuarticCellPartnerDefectIdentifiedIsFalse = refl
+
+round115PaperExternalQuantitativePaymentClosedIsFalse :
+  round115PaperExternalQuantitativePaymentClosed ≡ false
+round115PaperExternalQuantitativePaymentClosedIsFalse = refl
+
+round115PaperCriticalSobolevSimonUpgradeClosedIsFalse :
+  round115PaperCriticalSobolevSimonUpgradeClosed ≡ false
+round115PaperCriticalSobolevSimonUpgradeClosedIsFalse = refl
+
+round115PaperMathematicalPackageCountIsTwo : round115PaperMathematicalPackageCount ≡ 2
+round115PaperMathematicalPackageCountIsTwo = refl
+
+round115PaperVisibleSubleafCountIsThree : round115PaperVisibleSubleafCount ≡ 3
+round115PaperVisibleSubleafCountIsThree = refl
+
+round115PaperClayPromotion : Bool
+round115PaperClayPromotion = false
+
+round115PaperClayPromotionIsFalse : round115PaperClayPromotion ≡ false
+round115PaperClayPromotionIsFalse = refl
