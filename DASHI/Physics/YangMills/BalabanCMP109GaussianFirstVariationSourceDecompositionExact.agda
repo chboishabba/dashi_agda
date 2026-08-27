@@ -13,7 +13,7 @@ module DASHI.Physics.YangMills.BalabanCMP109GaussianFirstVariationSourceDecompos
 -- Tadeusz Bałaban,
 -- "Averaging Operations for Lattice Gauge Theories",
 -- Communications in Mathematical Physics 98 (1985), 17--51.
--- DOI: 10.1007/BF01239013.
+-- DOI: 10.1007/BF01211042.
 --
 -- Tadeusz Bałaban,
 -- "Propagators for Lattice Gauge Theories in a Background Field",
@@ -47,6 +47,7 @@ module DASHI.Physics.YangMills.BalabanCMP109GaussianFirstVariationSourceDecompos
 -- contour-log/trivialisation part of (Q); do not reprove BCH calculus here.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP109LeftRightInverseDexpCancellationExact as Dexp
 import DASHI.Physics.YangMills.BalabanCMP109GaussianPositivePatchCorrectionExact as Patch
