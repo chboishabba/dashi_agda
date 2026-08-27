@@ -16,6 +16,8 @@ on:
       - 'DASHI/Governance/Fanning2022NormalizationExact.agda'
       - 'DASHI/Governance/Fanning2022ProjectionBoundaryExact.agda'
       - 'DASHI/Governance/Fanning2022ForecastAuthorityExact.agda'
+      - 'DASHI/Governance/Fanning2022MissingnessAndBalancedSampleExact.agda'
+      - 'DASHI/Governance/Fanning2022DataRealizationExact.agda'
       - 'DASHI/Governance/Fanning2022MethodsRegression.agda'
       - 'DASHI/Governance/SafeJustProvisioningCapabilityFunctioningBridgeExact.agda'
       - 'DASHI/Governance/SafeJustForecastConsumerAdequacyExact.agda'
@@ -67,6 +69,8 @@ jobs:
             DASHI/Governance/Fanning2022NormalizationExact.agda
             DASHI/Governance/Fanning2022ProjectionBoundaryExact.agda
             DASHI/Governance/Fanning2022ForecastAuthorityExact.agda
+            DASHI/Governance/Fanning2022MissingnessAndBalancedSampleExact.agda
+            DASHI/Governance/Fanning2022DataRealizationExact.agda
             DASHI/Governance/Fanning2022MethodsRegression.agda
             DASHI/Governance/SafeJustProvisioningCapabilityFunctioningBridgeExact.agda
             DASHI/Governance/SafeJustForecastConsumerAdequacyExact.agda
@@ -107,6 +111,8 @@ jobs:
               DASHI/Governance/Fanning2022NormalizationExact.agda
               DASHI/Governance/Fanning2022ProjectionBoundaryExact.agda
               DASHI/Governance/Fanning2022ForecastAuthorityExact.agda
+              DASHI/Governance/Fanning2022MissingnessAndBalancedSampleExact.agda
+              DASHI/Governance/Fanning2022DataRealizationExact.agda
               DASHI/Governance/Fanning2022MethodsRegression.agda
               DASHI/Governance/SafeJustProvisioningCapabilityFunctioningBridgeExact.agda
               DASHI/Governance/SafeJustForecastConsumerAdequacyExact.agda
