@@ -71,7 +71,7 @@ data DemoCategoryAuthorized : DemoCommunity → DemoCategory → Set where
   categoryReceipt : DemoCategoryAuthorized community category
 
 data DemoProvenance : DemoClaim → DemoCommunity → Set where
-  provenanceReceipt : DemoProvenance claim community
+  demoProvenanceReceipt : DemoProvenance claim community
 
 data DemoProtocol : DemoCommunity → DemoClaim → DemoUse → Set where
   studyProtocol : DemoProtocol community claim studyUse
@@ -100,7 +100,9 @@ demoSystem = situatedClaimAuthoritySystem
 
 studyQualified :
   QualifiedUse demoSystem claim community researchConsumer studyUse attributionObligation
-studyQualified = qualifiedUse descriptiveAdequacy provenanceReceipt studyProtocol studyPermission attributionSatisfied
+studyQualified =
+  qualifiedUse descriptiveAdequacy demoProvenanceReceipt studyProtocol
+    studyPermission attributionSatisfied
 
 studyPermissionDoesNotBecomeInterventionPermission :
   DemoPermission community claim researchConsumer interventionUse → ⊥
