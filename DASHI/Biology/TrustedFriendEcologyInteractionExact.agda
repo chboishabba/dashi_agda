@@ -113,6 +113,16 @@ repairedFriendAddsNoAvailabilityUnit :
   ≡ remainCode repairedCondition aloneCondition + 0
 repairedFriendAddsNoAvailabilityUnit = refl
 
+highDemandFriendChangesRemain :
+  remainCode highDemandCondition trustedFriendCondition
+  ≡ remainCode highDemandCondition aloneCondition → ⊥
+highDemandFriendChangesRemain ()
+
+repairedFriendLeavesRemainCodeUnchanged :
+  remainCode repairedCondition trustedFriendCondition
+  ≡ remainCode repairedCondition aloneCondition
+repairedFriendLeavesRemainCodeUnchanged = refl
+
 ------------------------------------------------------------------------
 -- No context-free additive "friend bonus" fits both environments.
 --
@@ -143,19 +153,6 @@ noContextFreeFriendBonus model with bonus model
 ...   | ()
 ... | suc n with repairedFit model
 ...   | ()
-
-------------------------------------------------------------------------
--- Difference-of-effect statement without subtraction.
-------------------------------------------------------------------------
-
-friendEffectDependsOnEcology :
-  (remainCode highDemandCondition trustedFriendCondition
-    ≡ remainCode highDemandCondition aloneCondition)
-  ≡
-  (remainCode repairedCondition trustedFriendCondition
-    ≡ remainCode repairedCondition aloneCondition)
-  → ⊥
-friendEffectDependsOnEcology ()
 
 ------------------------------------------------------------------------
 -- Scope / source boundary.
