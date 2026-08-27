@@ -1,6 +1,7 @@
 module DASHI.Governance.CulturalFireAuthorityEnvelopeBridgeExact where
 
 open import DASHI.Core.Prelude
+import DASHI.Core.KnowledgeContentAuthoritySeparationExact as Knowledge
 import DASHI.Governance.IndigenousAuthorityEnvelopeExact as Envelope
 import DASHI.Governance.SteffensenCulturalFireAuthorityExact as Fire
 
@@ -38,7 +39,7 @@ externalTechniqueHasNoInterventionPermission :
 externalTechniqueHasNoInterventionPermission ()
 
 sourceLevelPracticeWithoutAuthority :
-  DASHI.Core.KnowledgeContentAuthoritySeparationExact.PracticeWithoutAuthority Fire.system
+  Knowledge.PracticeWithoutAuthority Fire.system
 sourceLevelPracticeWithoutAuthority = Fire.trainedTechniqueWithoutAuthority
 
 record CulturalFireEnvelopeBoundary : Set where
