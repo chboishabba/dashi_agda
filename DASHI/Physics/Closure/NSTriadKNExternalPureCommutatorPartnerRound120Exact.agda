@@ -30,6 +30,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -48,7 +49,7 @@ record PhysicalHelicalOutputPair
     (tau : Physical.PhysicalTriadIncidence) : Set r where
   constructor physical-helical-output-pair
   field
-    outputNonzero : C3.NonZeroMode (Physical.k tau)
+    outputNonzero : Z3.NonZeroMode (Physical.k tau)
     signedEigenP signedEigenQ : C3.Complex F
     curlEigenP :
       Conv.curlFromWave
