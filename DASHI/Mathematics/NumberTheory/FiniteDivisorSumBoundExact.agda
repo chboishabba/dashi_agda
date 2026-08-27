@@ -15,12 +15,12 @@ module DASHI.Mathematics.NumberTheory.FiniteDivisorSumBoundExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
-open import Data.List.Base using (_++_; filter)
+open import Data.List.Base using (filter)
 import Data.List.Relation.Unary.All as All
 open import Data.Nat.Base using (_≤_; z≤n)
 open import Data.Nat.Divisibility using (_∣?_)
 import Data.Nat.Properties as NatP
-open import Data.Product using (proj₂)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
@@ -39,6 +39,17 @@ oneToLength (suc n) =
   trans
     (Card.appendLength (Hecke.oneTo n) (suc n ∷ []))
     (cong suc (oneToLength n))
+
+------------------------------------------------------------------------
+-- Drop the positive-coordinate component from the existing oneTo bounds.
+
+upperBoundsOnly :
+  ∀ {n : Nat} {candidates : List Nat} →
+  All.All (λ d → (suc zero ≤ d) × (d ≤ n)) candidates →
+  All.All (λ d → d ≤ n) candidates
+upperBoundsOnly All.[] = All.[]
+upperBoundsOnly (All._∷_ bounds rest) =
+  All._∷_ (proj₂ bounds) (upperBoundsOnly rest)
 
 ------------------------------------------------------------------------
 -- Filtering a bounded candidate list by divisibility cannot make its element
@@ -83,7 +94,7 @@ sigma1QuadraticBound n =
     (divisorFilteredFoldBound
       n
       (Hecke.oneTo n)
-      (All.map proj₂ (OneTo.oneToAllBounds n)))
+      (upperBoundsOnly (OneTo.oneToAllBounds n)))
 
 ------------------------------------------------------------------------
 -- This is only a finite coarse envelope.  The sharp average order and the
