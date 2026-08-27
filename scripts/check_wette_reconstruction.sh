@@ -76,6 +76,7 @@ grep -q 'hauptsatz2IsDefinitionallyFormulaOnlyTranslationIsFalse' DASHI/Foundati
 grep -q 'DOI: 10.1111/j.1746-8361.1970.tb01221.x' DASHI/Foundations/Wette1970PrimaryTextExtractionExact.agda
 grep -q 'relativeCompletenessShouldBeDefinedBeforeSourceRecoveryIsFalse' DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda
 grep -q 'partialHistoricalTranscriptionNowStartedIsTrue' DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
+grep -q 'criticalSubstitutionOrderGeometryNowRecoveredIsTrue' DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
 grep -q 'historicalWetteCodecRecoveredIsFalse' DASHI/Foundations/WetteArithmeticRepresentationExact.agda
 grep -q 'fractranMachineIsHistoricalWetteMachineIsFalse' DASHI/Foundations/WetteFRACTRANCrossPollinationExact.agda
 grep -q 'ordinaryArithmeticInconsistencyEstablishedIsFalse' DASHI/Foundations/WetteBernaysConsistencyDeductionBoundaryExact.agda
