@@ -17,7 +17,7 @@ module DASHI.Foundations.Wette1969CriticalRuleDependencyExact where
 -- Kreisel--Zucker source calibration:
 -- JSL 37(1), 1972, pp.203--204, DOI 10.2307/2272630.
 --
--- This module transcribes dependency structure stated by Wette.  It does not
+-- This module transcribes dependency structure stated by Wette. It does not
 -- claim that the OCR representation of every symbolic formula in 9.1.5 has
 -- already been recovered exactly.
 ------------------------------------------------------------------------
@@ -115,7 +115,7 @@ premise10SupportsIndependence = s10-27
 ------------------------------------------------------------------------
 
 record Critical915SourceMeaning : Set where
-  constructor critical915SourceMeaning
+  constructor mkCritical915SourceMeaning
   field
     rule : Revision.HistoricalRuleAddress
     inductionPremiseNumber : Nat
@@ -123,11 +123,11 @@ record Critical915SourceMeaning : Set where
 
 critical915SourceMeaning : Critical915SourceMeaning
 critical915SourceMeaning =
-  critical915SourceMeaning Revision.rule9-1-5 18 27
+  mkCritical915SourceMeaning Revision.rule9-1-5 18 27
 
 ------------------------------------------------------------------------
 -- 9.3.24 and 9.3.25 are printed with the same four premises followed by two
--- conclusions.  Wette explains that premise 3 is a freshness condition, while
+-- conclusions. Wette explains that premise 3 is a freshness condition, while
 -- premise 4 is an ordered substitution condition: first substitute the new
 -- variable tuple for the old tuple in the definiens, then substitute the
 -- recursively defined predicate for the predicate mark.
@@ -156,7 +156,7 @@ shared9324x25Surface =
     rightRecursiveApplication
 
 record CriticalApplicationSurface : Set where
-  constructor criticalApplicationSurface
+  constructor mkCriticalApplicationSurface
   field
     leftRule : Revision.HistoricalRuleAddress
     rightRule : Revision.HistoricalRuleAddress
@@ -166,7 +166,7 @@ record CriticalApplicationSurface : Set where
 
 criticalApplicationSurface : CriticalApplicationSurface
 criticalApplicationSurface =
-  criticalApplicationSurface
+  mkCriticalApplicationSurface
     Revision.rule9-3-24
     Revision.rule9-3-25
     4
