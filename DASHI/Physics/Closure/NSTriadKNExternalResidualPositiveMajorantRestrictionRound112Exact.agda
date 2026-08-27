@@ -24,7 +24,7 @@ open import Data.List.Membership.Propositional using (_∈_)
 import Data.List.Relation.Unary.Any as Any
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _≤_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (_≢_; subst; sym)
+open import Relation.Binary.PropositionalEquality using (_≢_; subst)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
@@ -58,7 +58,7 @@ sumRemoveAtBelowOriginal :
 sumRemoveAtBelowOriginal value valueNN (Any.here refl) =
   subst
     (λ lower → lower ≤ value _ + sumMajorant value _)
-    (sym (ℚP.+-identityˡ (sumMajorant value _)))
+    (ℚP.+-identityˡ (sumMajorant value _))
     (ℚP.+-mono-≤ (valueNN _) ℚP.≤-refl)
 sumRemoveAtBelowOriginal value valueNN (Any.there membership) =
   ℚP.+-mono-≤ ℚP.≤-refl
