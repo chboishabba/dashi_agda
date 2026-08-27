@@ -27,6 +27,8 @@ import DASHI.Physics.Foundations.UnifiedEffectiveActionBoundary
 import DASHI.Physics.Foundations.FiniteHistoryOrientationExact
 import DASHI.Physics.Foundations.HistoryWeightFiltrationExact
 import DASHI.Physics.Foundations.FiniteHistoryFunctionalExact
+import DASHI.Physics.Foundations.BidirectionallyAdmissibleHistoryFibreExact
+import DASHI.Physics.Foundations.TrajectoryProjectionCausticExact
 import DASHI.Physics.Foundations.CoupledTrajectoryCoherenceExact
 import DASHI.Physics.Foundations.StationaryCoherenceClassificationExact
 import DASHI.Physics.Foundations.ContextConditionedTrajectoryWeightExact
