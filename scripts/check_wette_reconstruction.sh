@@ -6,8 +6,11 @@ cd "$ROOT"
 
 FILES=(
   DASHI/Core/FormalClaimTransportGeometryExact.agda
+  DASHI/Core/FormalizationRecoverySourceRegistryExact.agda
+  DASHI/Core/FormalizationRecoveryGeometryExact.agda
   DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
   DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda
+  DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
   DASHI/Foundations/WetteArithmeticRepresentationExact.agda
   DASHI/Foundations/WetteConstructiveAutomatonExact.agda
   DASHI/Foundations/WetteArithmeticTransitionBridgeExact.agda
@@ -45,6 +48,18 @@ grep -q 'existenceOfRepresentationMapTransportsEveryClaimIsFalse' \
   DASHI/Core/FormalClaimTransportGeometryExact.agda
 grep -q 'comparisonAxesAreDefinitionallyTotallyOrderedIsFalse' \
   DASHI/Core/FormalClaimTransportGeometryExact.agda
+grep -q 'arxiv:2508.00459v2' \
+  DASHI/Core/FormalizationRecoverySourceRegistryExact.agda
+grep -q 'doi:10.3929/ethz-b-000387100' \
+  DASHI/Core/FormalizationRecoverySourceRegistryExact.agda
+grep -q 'arxiv:1807.05641' \
+  DASHI/Core/FormalizationRecoverySourceRegistryExact.agda
+grep -q 'provisionalJournalDOIPromotedWithoutVerificationIsFalse' \
+  DASHI/Core/FormalizationRecoverySourceRegistryExact.agda
+grep -q 'translationAndReconstructionAreSeparateObligationsIsTrue' \
+  DASHI/Core/FormalizationRecoveryGeometryExact.agda
+grep -q 'sourceLocatedMeansFormalObjectRecoveredIsFalse' \
+  DASHI/Core/FormalizationRecoveryGeometryExact.agda
 grep -q 'relativeCompletenessIsDefinitionallyNextLinearLevelIsFalse' \
   DASHI/Foundations/WetteFormalClaimTransportBridgeExact.agda
 grep -q 'proofTranslationCoordinateImpliesSemanticSoundnessCoordinateIsFalse' \
@@ -61,6 +76,10 @@ grep -q 'relativeCompletenessShouldBeDefinedBeforeSourceRecoveryIsFalse' \
   DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda
 grep -q 'sourceExtractionPrecedesTheoremDischargeIsTrue' \
   DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda
+grep -q 'bibliographicLocationIsNotPrimaryTextInspectionIsTrue' \
+  DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
+grep -q 'calibrationLiteratureReplacesWettePrimarySourcesIsFalse' \
+  DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
 grep -q 'historicalWetteCodecRecoveredIsFalse' \
   DASHI/Foundations/WetteArithmeticRepresentationExact.agda
 grep -q 'fractranMachineIsHistoricalWetteMachineIsFalse' \
@@ -84,8 +103,11 @@ grep -q 'contradictionInOrdinaryArithmeticProvedIsFalse' \
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Core/FormalClaimTransportGeometryExact.agda \
+  DASHI/Core/FormalizationRecoverySourceRegistryExact.agda \
+  DASHI/Core/FormalizationRecoveryGeometryExact.agda \
   DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda \
   DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda \
+  DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda \
   DASHI/Foundations/WetteFiniteDeductionTraceExact.agda \
   DASHI/Foundations/WetteFiniteDerivationCompositionExact.agda \
   DASHI/Foundations/WetteFiniteCalculusTranslationExact.agda \
