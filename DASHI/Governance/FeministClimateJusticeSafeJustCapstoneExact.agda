@@ -3,6 +3,8 @@ module DASHI.Governance.FeministClimateJusticeSafeJustCapstoneExact where
 open import DASHI.Core.Prelude
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Consumer
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
+import DASHI.Core.ResponsibilityBurdenNonfactorabilityExact as Geometry
+import DASHI.Core.MultiaxialResidualBundleExact as Multi
 import DASHI.Governance.WaringProductionBoundaryNonfactorabilityExact as Waring
 import DASHI.Governance.FeministSocialProvisioningInterpretationExact as Power
 import DASHI.Governance.MacGregorPostPoliticalAuthorityBoundaryExact as MacGregor
@@ -38,10 +40,8 @@ qualifiedTechnicalSynthesisDoesNotSupplyDepoliticizedMandate =
 
 aggregateDoesNotDetermineClimateResponsibility :
   Consumer.FactorsThrough
-    (DASHI.Core.ResponsibilityBurdenNonfactorabilityExact.aggregateObserver
-      Sultana.climateJusticeGeometry)
-    (DASHI.Core.ResponsibilityBurdenNonfactorabilityExact.contribution
-      Sultana.climateJusticeGeometry) → ⊥
+    (Geometry.aggregateObserver Sultana.climateJusticeGeometry)
+    (Geometry.contribution Sultana.climateJusticeGeometry) → ⊥
 aggregateDoesNotDetermineClimateResponsibility =
   Sultana.aggregateDoesNotRecoverResponsibility
 
@@ -66,7 +66,7 @@ maathaiPositiveSituatedAuthorityPath : Maathai.SituatedProvisioningAuthorityPath
 maathaiPositiveSituatedAuthorityPath = Maathai.canonicalMaathaiPath
 
 fiveAxisResidualCarriage :
-  DASHI.Core.MultiaxialResidualBundleExact.ResidualCarriageReceipt
+  Multi.ResidualCarriageReceipt
     Residual.researchSynthesisResidualContract
     Residual.canonicalClimateJusticeResiduals
 fiveAxisResidualCarriage = Residual.canonicalResidualCarriage
