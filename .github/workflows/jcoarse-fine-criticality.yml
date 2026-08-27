@@ -28,8 +28,10 @@ on:
       - 'DASHI/Core/SolisSituatedIntegrityBridgeExact.agda'
       - 'DASHI/Biology/JCoarseFineBranchingCriticalityExact.agda'
       - 'DASHI/Biology/JCoarseFineDepthDecompositionBridgeExact.agda'
+      - 'DASHI/Governance/TypedBranchingOptionConeBridgeExact.agda'
       - 'DASHI/Core/Everything.agda'
       - 'DASHI/Biology/DomainEverything.agda'
+      - 'DASHI/Governance/Everything.agda'
       - '.github/workflows/jcoarse-fine-criticality.yml'
 
 concurrency:
@@ -83,6 +85,7 @@ jobs:
             DASHI/Core/SolisSituatedIntegrityBridgeExact.agda
             DASHI/Biology/JCoarseFineBranchingCriticalityExact.agda
             DASHI/Biology/JCoarseFineDepthDecompositionBridgeExact.agda
+            DASHI/Governance/TypedBranchingOptionConeBridgeExact.agda
           )
           if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|sorry|admit)\b' "${files[@]}"; then
             echo 'Forbidden trust-boundary token found in new tranche.' >&2
@@ -126,6 +129,7 @@ jobs:
               DASHI/Core/SolisSituatedIntegrityBridgeExact.agda
               DASHI/Biology/JCoarseFineBranchingCriticalityExact.agda
               DASHI/Biology/JCoarseFineDepthDecompositionBridgeExact.agda
+              DASHI/Governance/TypedBranchingOptionConeBridgeExact.agda
               DASHI/Core/Everything.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
