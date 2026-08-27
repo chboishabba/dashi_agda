@@ -11,6 +11,7 @@ on:
       - 'DASHI/Core/FiniteTypedBranchingReachabilityBridgeExact.agda'
       - 'DASHI/Core/BinaryInteractionNonseparabilityExact.agda'
       - 'DASHI/Core/FiniteTypedBranchingInteractionBridgeExact.agda'
+      - 'DASHI/Core/TrajectoryEndpointNonfactorabilityExact.agda'
       - 'DASHI/Core/LogisticFoldCriticalityExact.agda'
       - 'DASHI/Core/NumberRoleProvenanceAtlasExact.agda'
       - 'DASHI/Core/IntersectionalNonFactorability.agda'
@@ -78,6 +79,7 @@ jobs:
             DASHI/Core/FiniteTypedBranchingReachabilityBridgeExact.agda
             DASHI/Core/BinaryInteractionNonseparabilityExact.agda
             DASHI/Core/FiniteTypedBranchingInteractionBridgeExact.agda
+            DASHI/Core/TrajectoryEndpointNonfactorabilityExact.agda
             DASHI/Core/LogisticFoldCriticalityExact.agda
             DASHI/Core/NumberRoleProvenanceAtlasExact.agda
             DASHI/Core/IntersectionalConstraintGeometryExact.agda
@@ -130,6 +132,7 @@ jobs:
               DASHI/Core/FiniteTypedBranchingReachabilityBridgeExact.agda
               DASHI/Core/BinaryInteractionNonseparabilityExact.agda
               DASHI/Core/FiniteTypedBranchingInteractionBridgeExact.agda
+              DASHI/Core/TrajectoryEndpointNonfactorabilityExact.agda
               DASHI/Core/LogisticFoldCriticalityExact.agda
               DASHI/Core/IntersectionalNonFactorability.agda
               DASHI/Core/IntersectionalConstraintGeometryExact.agda
