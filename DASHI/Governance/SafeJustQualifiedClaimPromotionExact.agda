@@ -20,7 +20,7 @@ record QualifiedSynthesisPromotion : Set₁ where
     projectionReceipt : Forecast.BAUProjectionReceipt
     forecastAdequacy : Adequacy.AdequateFor projectionReceipt Adequacy.forecastConsumer
     claimRoute : Routing.ClaimRoute
-    routeIsSynthesis : Routing.ClaimRoute.role claimRoute ≡ Routing.empiricalSynthesis
+    routeIsSynthesis : Routing.role claimRoute ≡ Routing.empiricalSynthesis
     blueWaterResidual :
       Residual.Carries Residual.kallisSynthesisStage Residual.missingNationalBlueWaterSeries
     projectionResidual :
