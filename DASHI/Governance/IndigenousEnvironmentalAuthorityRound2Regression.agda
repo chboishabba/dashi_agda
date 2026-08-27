@@ -1,0 +1,27 @@
+module DASHI.Governance.IndigenousEnvironmentalAuthorityRound2Regression where
+
+open import DASHI.Core.Prelude
+import DASHI.Governance.IndigenousEnvironmentalAuthorityRound2CapstoneExact as Capstone
+import DASHI.Governance.ShivaBtCottonSuicideClaimContestedExact as Shiva
+import DASHI.Governance.DarkEmuClaimStatusDecompositionExact as DarkEmu
+import DASHI.Governance.EscazuProtectionEnforcementGapExact as Escazu
+import DASHI.Governance.KunmingMontrealTarget3AuthorityBoundaryExact as GBF
+
+shivaCausalClaimRemainsContested : Shiva.ClaimStatus Shiva.btCottonNationalSuicideCausal
+shivaCausalClaimRemainsContested = Capstone.ShivaStructuralClaimDoesNotPromoteBtCausation
+
+darkEmuMaterialAndFramingRemainSeparate :
+  DarkEmu.ClaimStatus DarkEmu.localMaterialPractice ×
+  DarkEmu.ClaimStatus DarkEmu.classificatoryLabel
+darkEmuMaterialAndFramingRemainSeparate =
+  Capstone.DarkEmuLocalPracticeCanBeSupportedWhileFramingContested
+
+escazuInstrumentNotEnforcement :
+  Escazu.ProtectionSystemState.enforcement Escazu.formalProtectionWithContinuingRisk ≡
+  Escazu.effectiveProtection → ⊥
+escazuInstrumentNotEnforcement = Capstone.EscazuTreatyStillNotImplementation
+
+gbfCoverageNotAuthority :
+  GBF.Target3State.authority GBF.coverageWithoutAuthorityTransfer ≡
+  GBF.originatingCommunityAuthority → ⊥
+gbfCoverageNotAuthority = Capstone.GBFCoverageDoesNotCreateTerritorialAuthority
