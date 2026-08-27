@@ -2,16 +2,11 @@ module DASHI.Foundations.BishopExponentialPositiveOrderExact where
 
 ------------------------------------------------------------------------
 -- POSITIVE-SIDE ORDER LAWS FOR THE CONCRETE BISHOP EXPONENTIAL
---
--- These laws use only the concrete factorial series constructed in
--- BishopExponentialSeriesConvergenceExact and the order-limit theorems already
--- proved in the pinned Bishop Sequence.agda.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised as ℚ using (0ℚᵘ; 1ℚᵘ; _/_)
-import Data.Rational.Unnormalised.Properties as ℚP
 
 import Real as BishopReal
 import RealProperties as BishopP
@@ -91,7 +86,6 @@ expPartialSumsIncreasing :
 expPartialSumsIncreasing {x} xNonnegative n =
   let
     partial = BishopSequence.SeriesOf (Exp.expTerm x) n
-    nextTerm = Exp.expTerm x n
   in
   BishopP.≤-respˡ-≃
     (BishopP.≃-symm (BishopP.+-identityʳ partial))
@@ -122,24 +116,38 @@ oneBelowOnePlusPositive {x} zeroBelowX =
     (BishopP.≃-symm (BishopP.+-identityʳ BishopReal.1ℝ))
     (BishopP.+-monoʳ-< BishopReal.1ℝ zeroBelowX)
 
+oneBelowOrEqualOnePlusNonnegative :
+  ∀ {x : BishopReal.ℝ} →
+  BishopReal.NonNegative x →
+  BishopReal._≤_ BishopReal.1ℝ (BishopReal._+_ BishopReal.1ℝ x)
+oneBelowOrEqualOnePlusNonnegative {x} xNonnegative =
+  BishopP.≤-respˡ-≃
+    (BishopP.≃-symm (BishopP.+-identityʳ BishopReal.1ℝ))
+    (BishopP.+-monoʳ-≤ BishopReal.1ℝ
+      (BishopP.nonNegx⇒0≤x xNonnegative))
+
+secondPartialSumBelowExp :
+  ∀ {x : BishopReal.ℝ} →
+  BishopReal.NonNegative x →
+  BishopReal._≤_
+    (BishopSequence.SeriesOf (Exp.expTerm x) 2)
+    (Exp.bishopExp x)
+secondPartialSumBelowExp {x} xNonnegative =
+  BishopSequence.xₙisIncreasing⇒xₙ≤limxₙ
+    (expPartialSumsIncreasing xNonnegative)
+    (expSeriesConvergent x)
+    2
+
 bishopExpAtLeastOneOnNonnegative :
   ∀ {x : BishopReal.ℝ} →
   BishopReal.NonNegative x →
   BishopReal._≤_ BishopReal.1ℝ (Exp.bishopExp x)
 bishopExpAtLeastOneOnNonnegative {x} xNonnegative =
   BishopP.≤-trans
-    (BishopP.≤-reflexive
-      (BishopP.≃-symm (expFirstTwoTerms x)))
-    (BishopSequence.xₙisIncreasing⇒xₙ≤limxₙ
-      (expPartialSumsIncreasing xNonnegative)
-      (expSeriesConvergent x)
-      2)
-  |> BishopP.≤-respˡ-≃
-      (BishopP.+-identityʳ BishopReal.1ℝ)
-  where
-  infixl 0 _|>_
-  _|>_ : ∀ {A B : Set} → A → (A → B) → B
-  value |> f = f value
+    (oneBelowOrEqualOnePlusNonnegative xNonnegative)
+    (BishopP.≤-respˡ-≃
+      (expFirstTwoTerms x)
+      (secondPartialSumBelowExp xNonnegative))
 
 bishopExpStrictlyAboveOneOnPositive :
   ∀ {x : BishopReal.ℝ} →
@@ -150,11 +158,8 @@ bishopExpStrictlyAboveOneOnPositive {x} zeroBelowX =
     (oneBelowOnePlusPositive zeroBelowX)
     (BishopP.≤-respˡ-≃
       (expFirstTwoTerms x)
-      (BishopSequence.xₙisIncreasing⇒xₙ≤limxₙ
-        (expPartialSumsIncreasing
-          (BishopP.pos⇒nonNeg (BishopP.0<x⇒posx zeroBelowX)))
-        (expSeriesConvergent x)
-        2))
+      (secondPartialSumBelowExp
+        (BishopP.pos⇒nonNeg (BishopP.0<x⇒posx zeroBelowX))))
 
 bishopExponentialZeroLevel : ProofLevel
 bishopExponentialZeroLevel = machineChecked
