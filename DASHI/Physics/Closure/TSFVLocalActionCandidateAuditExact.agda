@@ -2,6 +2,7 @@ module DASHI.Physics.Closure.TSFVLocalActionCandidateAuditExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
+open import Data.List using (_++_)
 
 import DASHI.Physics.Foundations.HistoryLocalActionAccumulationExact as Action
 import DASHI.Physics.Foundations.TSFVFeynmanDerivationObligationsExact as Obligations
@@ -30,15 +31,26 @@ tsfvLocalActionSystem =
         "Structural TSFV candidate: each finite step contributes the bounded v3 depth of the destination quotient representative; accumulation is additive by construction, not yet physical action."
     }
 
+tsfvLocalActionTInvariant :
+  (left right : Surrogate.Candidate256QuotientClass) →
+  Action.localAction
+    tsfvLocalActionSystem
+    (TSFV.candidate256QuotientT left)
+    (TSFV.candidate256QuotientT right)
+  ≡
+  Action.localAction tsfvLocalActionSystem left right
+tsfvLocalActionTInvariant left right
+  rewrite TSFV.candidate256AddressNegationCompatibility right =
+  TSFV.v3AddressNegationInvariant
+    TSFV.candidate256TritValuationFuel
+    (TSFV.candidate256IntegerAddress right)
+
 tsfvLocalActionSymmetry : Action.LocalActionSymmetry tsfvLocalActionSystem
 tsfvLocalActionSymmetry =
   record
     { transform = TSFV.candidate256QuotientT
     ; transformInvolutive = TSFV.candidate256QuotientTInvolutive
-    ; localActionInvariant = λ left right →
-        TSFV.v3AddressNegationInvariant
-          TSFV.candidate256TritValuationFuel
-          (TSFV.candidate256IntegerAddress right)
+    ; localActionInvariant = tsfvLocalActionTInvariant
     }
 
 ------------------------------------------------------------------------
