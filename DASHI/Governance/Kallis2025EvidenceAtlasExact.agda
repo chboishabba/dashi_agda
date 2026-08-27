@@ -39,64 +39,46 @@ record EvidenceAnchor : Set where
 -- Selected literal anchors from the review's numbered bibliography.
 -- They are representative routing points, not an exhaustive bibliography.
 materialFootprintCoupling : EvidenceAnchor
-materialFootprintCoupling =
-  evidenceAnchor decoupling empiricalCrossNational 47 Routing.empiricalSynthesis
+materialFootprintCoupling = evidenceAnchor decoupling empiricalCrossNational 47 Routing.empiricalSynthesis
 
 materialDecouplingReview : EvidenceAnchor
-materialDecouplingReview =
-  evidenceAnchor decoupling modelReview 48 Routing.empiricalSynthesis
+materialDecouplingReview = evidenceAnchor decoupling modelReview 48 Routing.empiricalSynthesis
 
 optimisticTechnologyProjection : EvidenceAnchor
-optimisticTechnologyProjection =
-  evidenceAnchor decoupling modelScenario 49 Routing.empiricalSynthesis
+optimisticTechnologyProjection = evidenceAnchor decoupling modelScenario 49 Routing.empiricalSynthesis
 
 postGrowthMitigationScenario : EvidenceAnchor
-postGrowthMitigationScenario =
-  evidenceAnchor decoupling modelScenario 66 Routing.empiricalSynthesis
+postGrowthMitigationScenario = evidenceAnchor decoupling modelScenario 66 Routing.empiricalSynthesis
 
 lowGrowCanada : EvidenceAnchor
-lowGrowCanada =
-  evidenceAnchor ecologicalMacroeconomics modelScenario 126 Routing.empiricalSynthesis
+lowGrowCanada = evidenceAnchor ecologicalMacroeconomics modelScenario 126 Routing.empiricalSynthesis
 
 eurogreenFrance : EvidenceAnchor
-neurogreenFrance =
-  evidenceAnchor ecologicalMacroeconomics modelScenario 127 Routing.empiricalSynthesis
+neurogreenFrance = evidenceAnchor ecologicalMacroeconomics modelScenario 127 Routing.empiricalSynthesis
 
 policyPackageSynthesis : EvidenceAnchor
-policyPackageSynthesis =
-  evidenceAnchor policyPackages theoreticalSynthesis 139 Routing.empiricalSynthesis
+policyPackageSynthesis = evidenceAnchor policyPackages theoreticalSynthesis 139 Routing.empiricalSynthesis
 
 workingTimeCarbonAssociation : EvidenceAnchor
-workingTimeCarbonAssociation =
-  evidenceAnchor policyPackages empiricalHistorical 129 Routing.empiricalSynthesis
+workingTimeCarbonAssociation = evidenceAnchor policyPackages empiricalHistorical 129 Routing.empiricalSynthesis
 
 growthDependencyCaseStudy : EvidenceAnchor
-growthDependencyCaseStudy =
-  evidenceAnchor growthDependencies caseStudy 153 Routing.empiricalSynthesis
+growthDependencyCaseStudy = evidenceAnchor growthDependencies caseStudy 153 Routing.empiricalSynthesis
 
 provisioningSystemsOwner : EvidenceAnchor
-provisioningSystemsOwner =
-  evidenceAnchor provisioningSystems empiricalCrossNational 185 Routing.empiricalSynthesis
+provisioningSystemsOwner = evidenceAnchor provisioningSystems empiricalCrossNational 185 Routing.empiricalSynthesis
 
 lowEnergyNeedSatisfactionOwner : EvidenceAnchor
-lowEnergyNeedSatisfactionOwner =
-  evidenceAnchor provisioningSystems empiricalCrossNational 186 Routing.empiricalSynthesis
+lowEnergyNeedSatisfactionOwner = evidenceAnchor provisioningSystems empiricalCrossNational 186 Routing.empiricalSynthesis
 
 unequalExchangeOwner : EvidenceAnchor
-unequalExchangeOwner =
-  evidenceAnchor globalNorthSouthRelations politicalEconomyAnalysis 190 Routing.empiricalSynthesis
+unequalExchangeOwner = evidenceAnchor globalNorthSouthRelations politicalEconomyAnalysis 190 Routing.empiricalSynthesis
 
 postDevelopmentOwner : EvidenceAnchor
-postDevelopmentOwner =
-  evidenceAnchor globalNorthSouthRelations theoreticalSynthesis 195 Routing.conceptualFraming
+postDevelopmentOwner = evidenceAnchor globalNorthSouthRelations theoreticalSynthesis 195 Routing.conceptualFraming
 
 gdp15000Owner : EvidenceAnchor
-gdp15000Owner =
-  evidenceAnchor wellbeingAndGDP empiricalCrossNational 98 Routing.empiricalRestatement
-
-------------------------------------------------------------------------
--- Review-level frontier distinctions.
-------------------------------------------------------------------------
+gdp15000Owner = evidenceAnchor wellbeingAndGDP empiricalCrossNational 98 Routing.empiricalRestatement
 
 record ClusterBoundary : Set where
   constructor clusterBoundary
@@ -105,39 +87,30 @@ record ClusterBoundary : Set where
     reviewMaySynthesize : Bool
     reviewMaySynthesizeIsTrue : reviewMaySynthesize ≡ true
     synthesisAloneIdentifiesCausalMechanism : Bool
-    synthesisAloneIdentifiesCausalMechanismIsFalse :
-      synthesisAloneIdentifiesCausalMechanism ≡ false
+    synthesisAloneIdentifiesCausalMechanismIsFalse : synthesisAloneIdentifiesCausalMechanism ≡ false
 
 canonicalProvisioningClusterBoundary : ClusterBoundary
-canonicalProvisioningClusterBoundary =
-  clusterBoundary provisioningSystems true refl false refl
+canonicalProvisioningClusterBoundary = clusterBoundary provisioningSystems true refl false refl
 
 canonicalDecouplingClusterBoundary : ClusterBoundary
-canonicalDecouplingClusterBoundary =
-  clusterBoundary decoupling true refl false refl
+canonicalDecouplingClusterBoundary = clusterBoundary decoupling true refl false refl
 
 record KallisEvidenceAtlasBoundary : Set where
   constructor kallisEvidenceAtlasBoundary
   field
     allReviewClaimsShareOneEvidenceClass : Bool
-    allReviewClaimsShareOneEvidenceClassIsFalse :
-      allReviewClaimsShareOneEvidenceClass ≡ false
+    allReviewClaimsShareOneEvidenceClassIsFalse : allReviewClaimsShareOneEvidenceClass ≡ false
     modelScenarioEqualsHistoricalObservation : Bool
-    modelScenarioEqualsHistoricalObservationIsFalse :
-      modelScenarioEqualsHistoricalObservation ≡ false
+    modelScenarioEqualsHistoricalObservationIsFalse : modelScenarioEqualsHistoricalObservation ≡ false
     empiricalAssociationEqualsPolicyMandate : Bool
-    empiricalAssociationEqualsPolicyMandateIsFalse :
-      empiricalAssociationEqualsPolicyMandate ≡ false
+    empiricalAssociationEqualsPolicyMandateIsFalse : empiricalAssociationEqualsPolicyMandate ≡ false
     globalNorthSouthQuestionIsClosedByTheReview : Bool
-    globalNorthSouthQuestionIsClosedByTheReviewIsFalse :
-      globalNorthSouthQuestionIsClosedByTheReview ≡ false
+    globalNorthSouthQuestionIsClosedByTheReviewIsFalse : globalNorthSouthQuestionIsClosedByTheReview ≡ false
     politicsOfTransitionIsClosedByTheReview : Bool
-    politicsOfTransitionIsClosedByTheReviewIsFalse :
-      politicsOfTransitionIsClosedByTheReview ≡ false
+    politicsOfTransitionIsClosedByTheReviewIsFalse : politicsOfTransitionIsClosedByTheReview ≡ false
 
 canonicalKallisEvidenceAtlasBoundary : KallisEvidenceAtlasBoundary
-canonicalKallisEvidenceAtlasBoundary =
-  kallisEvidenceAtlasBoundary false refl false refl false refl false refl false refl
+canonicalKallisEvidenceAtlasBoundary = kallisEvidenceAtlasBoundary false refl false refl false refl false refl false refl
 
 source : Sources.SourceReference
 source = Sources.kallis2025
