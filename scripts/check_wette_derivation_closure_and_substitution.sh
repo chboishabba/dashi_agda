@@ -38,6 +38,7 @@ grep -q 'boundedStructuralNonCommutationIsFullHistoricalSubstitutionTheoremIsFal
 grep -q 'objectVariableConstructorRecoveredFromRule3IsTrue' DASHI/Foundations/Wette1969ObjectVariableMarkWordsExact.agda
 grep -q 'predicateMarkConstructorRecoveredFromRule4IsTrue' DASHI/Foundations/Wette1969ObjectVariableMarkWordsExact.agda
 grep -q 'objectSyntaxSeparatedFromRuleSchematicWordVariablesIsTrue' DASHI/Foundations/Wette1969ObjectVariableMarkWordsExact.agda
+grep -q 'proofRelevantObjectSyntaxRecognitionNowAvailableIsTrue' DASHI/Foundations/Wette1969ObjectVariableMarkWordsExact.agda
 
 grep -q 'sourceQuantifierCaptureCriterionNowTypedIsTrue' DASHI/Foundations/Wette1969QuantifierCaptureSafetyExact.agda
 grep -q 'directCaptureRiskRefutesSafetyIsTrue' DASHI/Foundations/Wette1969QuantifierCaptureSafetyExact.agda
