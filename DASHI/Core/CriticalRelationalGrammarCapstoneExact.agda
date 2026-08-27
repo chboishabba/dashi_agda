@@ -4,7 +4,7 @@ module DASHI.Core.CriticalRelationalGrammarCapstoneExact where
 -- CRITICAL RELATIONAL GRAMMAR CAPSTONE
 --
 -- This module assembles the cross-pollinated theorem surfaces without claiming
--- a master critical-theory ontology.  Historical sources remain bounded in
+-- a master critical-theory ontology. Historical sources remain bounded in
 -- CriticalRelationalGrammarSourceRegistryExact.
 ------------------------------------------------------------------------
 
@@ -16,9 +16,11 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.LacanFregeTernaryRoleChartExact as Lacan
 import DASHI.Core.LacanIrigarayTernaryGrammarBridgeExact as LacanIrigaray
 import DASHI.Core.LacanS2RoleSeparationExact as LacanS2
+import DASHI.Core.LacanSexuationTernarySeparationExact as Sexuation
 import DASHI.Core.CriticalThirdnessRoleGrammarExact as Thirdness
 import DASHI.Core.CriticalGrammarRelabellingBoundaryExact as Relabel
 import DASHI.Core.IrigarayLabialRelationalCarrierExact as Irigaray
+import DASHI.Core.TrinhSubjectInMakingNoncollapseExact as Trinh
 import DASHI.Core.LugonesPurityCurdlingNonfactorabilityExact as Lugones
 import DASHI.Core.BadiouVoidCountAsOneBoundaryExact as Badiou
 import DASHI.Core.SocialEcologyHierarchyProjectionBoundaryExact as Hierarchy
@@ -87,6 +89,15 @@ lacanBhabhaGraphsRelabelExactly = Relabel.lacanBhabhaSwap01
 -- Non-ternary theorem surfaces remain non-ternary.
 ------------------------------------------------------------------------
 
+lacanFregeCountIsNotSexuation :
+  Sexuation.fregeDerivedCountSurface ≡ Sexuation.sexuationFormulaSurface → ⊥
+lacanFregeCountIsNotSexuation = Sexuation.fregeCount≠sexuation
+
+trinhCategoryDoesNotRecoverSubjectFormation :
+  INF.FactorsThrough Trinh.publicCategory Trinh.subjectFormation → ⊥
+trinhCategoryDoesNotRecoverSubjectFormation =
+  Trinh.publicCategoryCannotRecoverSubjectFormation
+
 lugonesAntiPureFactorisation : Lugones.PureEndpointFactorisation → ⊥
 lugonesAntiPureFactorisation =
   Lugones.curdledWitnessBlocksPureEndpointFactorisation
@@ -117,6 +128,8 @@ record CriticalRelationalGrammarBoundary : Set where
     everyThirdnessTheoryUsesTernaryCarrierNatively : Bool
     everyThirdnessTheoryUsesTernaryCarrierNativelyIsFalse :
       everyThirdnessTheoryUsesTernaryCarrierNatively ≡ false
+    lacanFregeCountIsSexuation : Bool
+    lacanFregeCountIsSexuationIsFalse : lacanFregeCountIsSexuation ≡ false
     badiouCountAsOneIsTernaryRole : Bool
     badiouCountAsOneIsTernaryRoleIsFalse :
       badiouCountAsOneIsTernaryRole ≡ false
@@ -139,4 +152,4 @@ record CriticalRelationalGrammarBoundary : Set where
 canonicalCriticalRelationalGrammarBoundary : CriticalRelationalGrammarBoundary
 canonicalCriticalRelationalGrammarBoundary =
   critical-relational-grammar-boundary
-    false refl false refl false refl false refl false refl false refl false refl false refl
+    false refl false refl false refl false refl false refl false refl false refl false refl false refl
