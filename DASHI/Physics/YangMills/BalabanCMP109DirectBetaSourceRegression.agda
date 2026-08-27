@@ -20,40 +20,56 @@ module DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceRegression where
 -- CURRENT HIGHEST-ALPHA SOURCE ROUTE
 --
 -- CMP109 Sect. 2 linearizes the nonlinear fluctuation averaging before the
--- Gaussian stage.  The delta constraint is then the fixed linear delta(Q B'),
--- constrained coordinates are eliminated as B' = C(U) B, and the covariance is
+-- Gaussian stage.  Constrained coordinates are eliminated as B'=C(U)B and the
+-- covariance is
 --
 --     (C(U)^* A(U) C(U))^-1.
 --
--- Hence the authoritative first variation is
+-- Hence
 --
---     D(C* A C) = C'* A C + C* A' C + C* A C'.
+--     D(C*AC) = C'*AC + C*A'C + C*AC'.
 --
--- The Wilson part of A' is now represented by a literal physical mixed
--- background/fluctuation jet.  Its four-link plaquette product has exactly
--- 4^3=64 noncommutative Leibniz atoms, and the scalar Wilson coefficient is
--- proved equal to their exact finite sum.  A separate quaternion theorem bridges
--- CMP99's left-background tangent convention to the repository's right-
--- exponential physical Hessian convention.
+-- This root now uses the source-native split rather than the older W/Q/R patch:
 --
--- C' is governed by the differentiated eliminated-coordinate identity
+--   middle physical term  = C*A'C,
+--   tangential C'          = C K, cancelled with induced volume Jacobian,
+--   normal C'              = genuine constrained-subspace motion.
 --
---     Q C' = - Q' C.
+-- The Wilson part of A' has a literal physical mixed s t^2 quaternion jet.  A
+-- four-link plaquette contains exactly 4^3=64 noncommutative Leibniz atoms and
+-- the Wilson scalar coefficient is proved equal to their finite sum.  CMP99's
+-- left-background tangent convention is bridged exactly to the repository's
+-- right-exponential physical Hessian convention.
 --
--- On the remainder side, beta_j is projected from the current E^(j+1), which
--- already depends on preceding couplings.  If the five-channel quartic bound is
--- uniform over admissible history, history is an argument of betaInt rather than
--- a second additive final debt.  The final margin is then
+-- C' obeys Q C'=-Q'C.  Since CMP99's C is identity off selected eliminated
+-- pivot bonds, each pivot derivative is exactly
 --
---     b_patch - C_beta gamma^4 > 0.
+--     C'_c = - a_c^-1 (Q' C)_c.
 --
--- Explicit small-coupling arithmetic is no longer open: for b>0, C_beta>=0,
+-- Pure tangential coordinate motion is no longer an analytic debt: exact finite
+-- rational trace algebra proves
 --
---     gamma* = (1/2) b / (C_beta + b)
+--   tr(Ahat^-1(K^T Ahat + Ahat K)) = 2 tr K.
 --
--- satisfies C_beta gamma*^4 <= b/2.  Thus no fourth-root construction or
--- numerical search for gamma is needed after the two literal source constants
--- b_patch and C_beta have been produced uniformly on the same RG family.
+-- Once the source change-of-variables density is identified with the induced
+-- coordinate volume, this cancels its +tr K Jacobian response.  The active
+-- positive-patch floor is therefore
+--
+--     b_fixed = b_middle - B_normal,
+--
+-- not b_W - |Q|-|R|.
+--
+-- On the finite-g side, if the five-channel betaInt bound is uniform over the
+-- admissible preceding-coupling history, history is an argument of the CURRENT
+-- remainder rather than a second additive final debt.  Then
+--
+--     beta >= b_fixed - C_beta gamma^4.
+--
+-- Explicit small-coupling arithmetic is closed constructively:
+--
+--     gamma* = (1/2) b_fixed / (C_beta + b_fixed)
+--
+-- absorbs C_beta gamma*^4 into b_fixed/2 whenever b_fixed>0 and C_beta>=0.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -61,31 +77,40 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 open import DASHI.Physics.YangMills.BalabanCMP109SourceTranscriptionExact
 open import DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceCutsetExact
 open import DASHI.Physics.YangMills.BalabanCMP109A1CrossPollinatedDebtProducersExact
-open import DASHI.Physics.YangMills.BalabanCMP109GaussianPositivePatchCorrectionExact
 open import DASHI.Physics.YangMills.BalabanCMP109CorrectedPatchMarginCrossProverExact
 open import DASHI.Physics.YangMills.BalabanCMP109FixedConstraintCoordinateGaussianExact
 open import DASHI.Physics.YangMills.BalabanCMP109EliminatedCoordinateDerivativeExact
+open import DASHI.Physics.YangMills.BalabanCMP99EliminatedPivotDerivativeExact
 open import DASHI.Physics.YangMills.BalabanA1HistoryUniformRemainderAntiDoubleCountExact
 open import DASHI.Physics.YangMills.BalabanA1ExplicitSmallCouplingQuarticAbsorptionExact
 open import DASHI.Physics.YangMills.BalabanCMP109QRConstraintAnnihilatorReductionExact
 open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonBackgroundQuadraticJetExact
 open import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonBackgroundQuadraticJetExact
 open import DASHI.Physics.YangMills.BalabanP33WilsonBackgroundTrivializationBridgeExact
+open import DASHI.Physics.YangMills.BalabanFiniteRationalTraceConnectionCancellationExact
+open import DASHI.Physics.YangMills.BalabanCMP109FixedCoordinateGaussianPositivePatchExact
 open import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound82FiveAnalyticLeafExact
 
 ------------------------------------------------------------------------
 -- Current authoritative Gaussian source blockers
 ------------------------------------------------------------------------
 
+-- Literal one-step averaging derivative and its iteration are now the upstream
+-- source leaves for normal constrained-subspace motion.
+literalCMP98OneStepQPrimeRegressionLevel : ProofLevel
+literalCMP98OneStepQPrimeRegressionLevel = cmp99LiteralQPrimeLevel
+
+literalEliminatedPivotCoefficientRegressionLevel : ProofLevel
+literalEliminatedPivotCoefficientRegressionLevel =
+  cmp99LiteralEliminatedPivotCoefficientLevel
+
+literalEliminatedPivotDerivativeRegressionLevel : ProofLevel
+literalEliminatedPivotDerivativeRegressionLevel =
+  cmp99LiteralEliminatedPivotDerivativeLevel
+
 literalCoordinateEmbeddingVariationRegressionLevel : ProofLevel
 literalCoordinateEmbeddingVariationRegressionLevel =
   cmp109LiteralCoordinateEmbeddingVariationLevel
-
-literalQPrimeRegressionLevel : ProofLevel
-literalQPrimeRegressionLevel = cmp99LiteralQPrimeLevel
-
-literalCPrimeFromConstraintRegressionLevel : ProofLevel
-literalCPrimeFromConstraintRegressionLevel = cmp109LiteralCPrimeFromConstraintLevel
 
 literalQuadraticOperatorVariationRegressionLevel : ProofLevel
 literalQuadraticOperatorVariationRegressionLevel =
@@ -95,13 +120,19 @@ literalRestrictedThreeTermVariationRegressionLevel : ProofLevel
 literalRestrictedThreeTermVariationRegressionLevel =
   cmp109LiteralRestrictedThreeTermVariationLevel
 
-literalCoordinateJacobianContributionRegressionLevel : ProofLevel
-literalCoordinateJacobianContributionRegressionLevel =
-  cmp109LiteralCoordinateJacobianContributionLevel
+-- Tangential C' trace algebra is closed; only the source SAME-OBJECT measure
+-- identification remains.
+literalInducedCoordinateVolumeJacobianRegressionLevel : ProofLevel
+literalInducedCoordinateVolumeJacobianRegressionLevel =
+  cmp109LiteralInducedCoordinateVolumeJacobianLevel
 
--- The generic and physical noncommutative mixed-third Wilson bookkeeping is no
--- longer open.  The remaining source seam is the exact CMP99 normalization /
--- operator identification inside A'(U).
+literalNormalConnectionPatchBudgetRegressionLevel : ProofLevel
+literalNormalConnectionPatchBudgetRegressionLevel =
+  cmp99LiteralNormalConnectionPatchBudgetLevel
+
+-- The generic and physical mixed-third Wilson bookkeeping and tangent
+-- trivialization are no longer open.  The remaining Wilson source seams are
+-- CMP99 operator normalization and the Fourier symbol of the same 64 atoms.
 wilsonBackgroundQuadratic64AtomRegressionLevel : ProofLevel
 wilsonBackgroundQuadratic64AtomRegressionLevel =
   physicalWilsonBackgroundQuadratic64AtomLevel
@@ -114,12 +145,16 @@ literalWilsonHessianBackgroundDerivativeIdentificationRegressionLevel : ProofLev
 literalWilsonHessianBackgroundDerivativeIdentificationRegressionLevel =
   cmp99WilsonHessianBackgroundDerivativeIdentificationLevel
 
-literalMixedVertexPositivePatchRegressionLevel : ProofLevel
-literalMixedVertexPositivePatchRegressionLevel =
-  cmp109LiteralPositivePatchCurrentLevel
+literalMixedWilson64AtomFourierSymbolRegressionLevel : ProofLevel
+literalMixedWilson64AtomFourierSymbolRegressionLevel =
+  cmp99LiteralMixedWilson64AtomFourierSymbolLevel
+
+literalFixedCoordinatePositivePatchRegressionLevel : ProofLevel
+literalFixedCoordinatePositivePatchRegressionLevel =
+  cmp109FixedCoordinateGaussianPositivePatchLevel
 
 ------------------------------------------------------------------------
--- Current remainder/history blocker
+-- Current remainder/history blockers
 ------------------------------------------------------------------------
 
 literalFiveChannelTaylorInstantiationRegressionLevel : ProofLevel
@@ -146,9 +181,6 @@ explicitSmallCouplingQuarticAbsorptionRegressionLevel : ProofLevel
 explicitSmallCouplingQuarticAbsorptionRegressionLevel =
   explicitSmallCouplingQuarticAbsorptionLevel
 
-positivePatchArithmeticRegressionLevel : ProofLevel
-positivePatchArithmeticRegressionLevel = positivePatchArithmeticLevel
-
 fiveChannelQuarticDebtReuseRegressionLevel : ProofLevel
 fiveChannelQuarticDebtReuseRegressionLevel =
   cmp109FiveChannelQuarticDebtReuseLevel
@@ -156,6 +188,17 @@ fiveChannelQuarticDebtReuseRegressionLevel =
 eliminatedCoordinateDerivativeAlgebraRegressionLevel : ProofLevel
 eliminatedCoordinateDerivativeAlgebraRegressionLevel =
   eliminatedCoordinateDerivativeAlgebraLevel
+
+eliminatedPivotDerivativeAlgebraRegressionLevel : ProofLevel
+eliminatedPivotDerivativeAlgebraRegressionLevel =
+  cmp99EliminatedPivotDerivativeAlgebraLevel
+
+tangentialConnectionTraceRegressionLevel : ProofLevel
+tangentialConnectionTraceRegressionLevel =
+  tangentialConnectionTraceCancellationLevel
+
+fixedCoordinatePatchArithmeticRegressionLevel : ProofLevel
+fixedCoordinatePatchArithmeticRegressionLevel = fixedCoordinatePatchArithmeticLevel
 
 qrConstraintAnnihilatorReductionRegressionLevel : ProofLevel
 qrConstraintAnnihilatorReductionRegressionLevel =
@@ -165,11 +208,16 @@ qrConstraintAnnihilatorReductionRegressionLevel =
 -- Conditional simplification / fallback paths
 ------------------------------------------------------------------------
 
--- KKT annihilation may simplify the C' connection terms, but only after the KKT
--- projector is identified with the SAME fixed-coordinate constrained Gaussian.
+-- KKT annihilation may simplify the remaining NORMAL C' contribution, but only
+-- after its projector is identified with the same fixed-coordinate Gaussian.
 kktProjectionToConstrainedTraceWeldRegressionLevel : ProofLevel
 kktProjectionToConstrainedTraceWeldRegressionLevel =
   cmp109KKTProjectionToConstrainedTraceWeldLevel
+
+-- Old W/Q/R patch is retained only as ancestry/cross-prover regression.  It is
+-- no longer the authoritative source consumer after the C*AC recut.
+historicalWQRPositivePatchRegressionLevel : ProofLevel
+historicalWQRPositivePatchRegressionLevel = cmp109LiteralPositivePatchCurrentLevel
 
 -- If history-uniform current-remainder control fails, the older explicit
 -- localized/marginal history budget remains available as a failure-closed path.
