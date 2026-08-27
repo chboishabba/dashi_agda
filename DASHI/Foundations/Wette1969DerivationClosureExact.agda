@@ -15,6 +15,10 @@ import DASHI.Foundations.Wette1969InitialRuleTranscriptionExact as RuleBody
 import DASHI.Foundations.Wette1969ProofCarryingRuleApplicationExact as Historical
 import DASHI.Foundations.Wette1969FiniteDerivationContextExact as Finite
 
+historicalApplicationSystem :
+  PCRA.RuleApplicationSystem
+    Finite.DerivationContext
+    RuleBody.HistoricalRuleBody
 historicalApplicationSystem =
   Historical.historicalRuleApplicationSystem
     Finite.finiteHistoricalContextSystem
@@ -81,10 +85,6 @@ premisesPersistAcrossCertifiedStep context selected later premises index =
     context selected
     (lookup (RuleBody.premises later) index)
     (premises index)
-
-------------------------------------------------------------------------
--- Trace-wide monotone closure.
-------------------------------------------------------------------------
 
 certifiedTracePreservesPriorFormula :
   {context : Finite.DerivationContext} →
