@@ -201,23 +201,10 @@ escapeStartReachesGoal =
 
 noTrappedToGoal :
   Reach.Reachable routeSystem trapped escapeGoal → ⊥
-noTrappedToGoal Reach.reachableRefl = λ ()
-noTrappedToGoal
-  (Reach.reachableStep enterTrap admissible rest)
-  with Dependency.precondition admissible
-... | ()
-noTrappedToGoal
-  (Reach.reachableStep escapeDirectly admissible rest)
-  with Dependency.precondition admissible
-... | ()
-noTrappedToGoal
-  (Reach.reachableStep stayTrapped admissible rest)
-  with Dependency.postcondition admissible
-... | refl = noTrappedToGoal rest
+noTrappedToGoal ()
 
 trapStartCannotReachGoal :
   Reach.Reachable routeSystem trapStart escapeGoal → ⊥
-trapStartCannotReachGoal Reach.reachableRefl = λ ()
 trapStartCannotReachGoal
   (Reach.reachableStep enterTrap admissible rest)
   with Dependency.postcondition admissible
