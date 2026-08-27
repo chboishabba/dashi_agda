@@ -14,7 +14,9 @@ module DASHI.Foundations.Wette1969FiniteDerivationContextExact where
 --   * WetteFiniteDeductionTraceExact already owns mixed-generator finite runs;
 --   * this module instantiates the previously abstract HistoricalContextSystem
 --     by a finite monotone list of formulae and proves that certified historical
---     traces erase to the existing Wette finite-trace semantics.
+--     traces erase to the existing Wette finite-trace semantics;
+--   * Wette1969DerivationClosureExact builds on this owner to generate later
+--     premise-membership evidence from conclusions of earlier certified steps.
 --
 -- This is an operational derivation-context model only. Membership in the
 -- context means "already available in this finite derivation state"; it is not
@@ -31,10 +33,6 @@ import DASHI.Foundations.Wette1969InitialRuleTranscriptionExact as RuleBody
 import DASHI.Foundations.Wette1969ProofCarryingRuleApplicationExact as Historical
 import DASHI.Foundations.WetteConstructiveAutomatonExact as Automaton
 import DASHI.Foundations.WetteFiniteDeductionTraceExact as Trace
-
-------------------------------------------------------------------------
--- Finite monotone formula contexts.
-------------------------------------------------------------------------
 
 DerivationContext : Set
 DerivationContext = List Signature.Formula
@@ -67,19 +65,6 @@ oldFormulaRemainsAvailable :
     formula
 oldFormulaRemainsAvailable context new formula evidence = there evidence
 
-------------------------------------------------------------------------
--- Existing WetteMachineSpec / finite trace instance.
---
--- Generator = historical rule body.
--- State     = finite derivation context.
--- Step      = prepend the rule conclusion.
---
--- The Bool-valued WetteMachineSpec `admissible` field is intentionally trivial
--- here because actual rule legality lives in the proof-relevant
--- TypedDependencyCore precondition. This prevents Bool from becoming a second
--- competing admissibility authority.
-------------------------------------------------------------------------
-
 finiteContextMachine : Automaton.WetteMachineSpec
 finiteContextMachine = record
   { State = DerivationContext
@@ -97,10 +82,6 @@ finiteContextSimulation = record
   ; stepCommutes = λ rule context → refl
   }
 
-------------------------------------------------------------------------
--- Forget proof witnesses, retain only the historical generator sequence.
-------------------------------------------------------------------------
-
 eraseCertifiedRules :
   {context : DerivationContext} →
   PCRA.CertifiedRuleTrace
@@ -111,10 +92,6 @@ eraseCertifiedRules PCRA.done = []
 eraseCertifiedRules (PCRA.choose selected rest) =
   PCRA.selectedRule selected ∷ eraseCertifiedRules rest
 
-------------------------------------------------------------------------
--- Run congruence for the existing finite-trace owner.
-------------------------------------------------------------------------
-
 runFiniteContextCong :
   (rules : List RuleBody.HistoricalRuleBody) →
   {left right : DerivationContext} →
@@ -122,15 +99,6 @@ runFiniteContextCong :
   Trace.runSyntax finiteContextSimulation rules left
     ≡ Trace.runSyntax finiteContextSimulation rules right
 runFiniteContextCong rules refl = refl
-
-------------------------------------------------------------------------
--- Certified dependent trace -> existing mixed-generator finite trace.
---
--- The only non-definitional seam is exactly the TypedDependencyCore
--- postcondition carried by each selected action: its reached state is proved to
--- be extension by the historical conclusion. That proof transports the
--- induction hypothesis onto the ordinary list-run state.
-------------------------------------------------------------------------
 
 certifiedTraceErasesToFiniteRun :
   {context : DerivationContext} →
@@ -153,11 +121,6 @@ certifiedTraceErasesToFiniteRun
         (Dependency.postcondition
           (PCRA.applicationProof selected))))
     (certifiedTraceErasesToFiniteRun rest)
-
-------------------------------------------------------------------------
--- Every certified trace therefore supplies an existing finite derivation
--- witness from its source context to its certified target context.
-------------------------------------------------------------------------
 
 certifiedTraceToFiniteDerivationWitness :
   {context : DerivationContext} →
