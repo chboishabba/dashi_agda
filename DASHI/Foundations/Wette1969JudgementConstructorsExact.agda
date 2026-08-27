@@ -22,78 +22,87 @@ import DASHI.Foundations.Wette1969HistoricalSignatureExact as Signature
 WordTerm = Signature.WordTerm
 Formula = Signature.Formula
 
-unaryJudgement : Signature.HistoricalRelator → WordTerm → Formula
-unaryJudgement relator term =
-  Signature.historicalFormula relator (term ∷ᵥ []ᵥ)
-
-binaryJudgement :
-  Signature.HistoricalRelator → WordTerm → WordTerm → Formula
-binaryJudgement relator left right =
-  Signature.historicalFormula relator (left ∷ᵥ right ∷ᵥ []ᵥ)
-
-ternaryJudgement :
-  Signature.HistoricalRelator →
-  WordTerm → WordTerm → WordTerm → Formula
-ternaryJudgement relator first second third =
-  Signature.historicalFormula relator
-    (first ∷ᵥ second ∷ᵥ third ∷ᵥ []ᵥ)
-
-quaternaryJudgement :
-  Signature.HistoricalRelator →
-  WordTerm → WordTerm → WordTerm → WordTerm → Formula
-quaternaryJudgement relator first second third fourth =
-  Signature.historicalFormula relator
-    (first ∷ᵥ second ∷ᵥ third ∷ᵥ fourth ∷ᵥ []ᵥ)
-
 naturalNumber : WordTerm → Formula
-naturalNumber = unaryJudgement Signature.naturalNumberRelator
+naturalNumber term =
+  Signature.historicalFormula Signature.naturalNumberRelator
+    (term ∷ᵥ []ᵥ)
 
 naturalVariable : WordTerm → Formula
-naturalVariable = unaryJudgement Signature.naturalVariableRelator
+naturalVariable term =
+  Signature.historicalFormula Signature.naturalVariableRelator
+    (term ∷ᵥ []ᵥ)
 
 naturalTerm : WordTerm → Formula
-naturalTerm = unaryJudgement Signature.naturalTermRelator
+naturalTerm term =
+  Signature.historicalFormula Signature.naturalTermRelator
+    (term ∷ᵥ []ᵥ)
 
 assertionSchema : WordTerm → Formula
-assertionSchema = unaryJudgement Signature.assertionSchemaRelator
+assertionSchema term =
+  Signature.historicalFormula Signature.assertionSchemaRelator
+    (term ∷ᵥ []ᵥ)
 
 assertionSchemaNoPredicateQuantification : WordTerm → Formula
-assertionSchemaNoPredicateQuantification =
-  unaryJudgement Signature.assertionSchemaNoPredicateQuantificationRelator
+assertionSchemaNoPredicateQuantification term =
+  Signature.historicalFormula
+    Signature.assertionSchemaNoPredicateQuantificationRelator
+    (term ∷ᵥ []ᵥ)
 
 unequal : WordTerm → WordTerm → Formula
-unequal = binaryJudgement Signature.inequalityRelator
+unequal left right =
+  Signature.historicalFormula Signature.inequalityRelator
+    (left ∷ᵥ right ∷ᵥ []ᵥ)
 
 duplicates : WordTerm → WordTerm → Formula
-duplicates = binaryJudgement Signature.duplicationRelator
+duplicates left right =
+  Signature.historicalFormula Signature.duplicationRelator
+    (left ∷ᵥ right ∷ᵥ []ᵥ)
 
 predicateMarkArity : WordTerm → WordTerm → Formula
-predicateMarkArity = binaryJudgement Signature.predicateMarkArityRelator
+predicateMarkArity arity mark =
+  Signature.historicalFormula Signature.predicateMarkArityRelator
+    (arity ∷ᵥ mark ∷ᵥ []ᵥ)
 
 termTuple : WordTerm → WordTerm → Formula
-termTuple = binaryJudgement Signature.termTupleRelator
+termTuple arity tuple =
+  Signature.historicalFormula Signature.termTupleRelator
+    (arity ∷ᵥ tuple ∷ᵥ []ᵥ)
 
 freeForSyntax : WordTerm → WordTerm → Formula
-freeForSyntax = binaryJudgement Signature.freeForSyntaxRelator
+freeForSyntax left right =
+  Signature.historicalFormula Signature.freeForSyntaxRelator
+    (left ∷ᵥ right ∷ᵥ []ᵥ)
 
 distinctVariableTuple : WordTerm → WordTerm → Formula
-distinctVariableTuple = binaryJudgement Signature.distinctVariableTupleRelator
+distinctVariableTuple arity tuple =
+  Signature.historicalFormula Signature.distinctVariableTupleRelator
+    (arity ∷ᵥ tuple ∷ᵥ []ᵥ)
 
 predicateSchema : WordTerm → WordTerm → Formula
-predicateSchema = binaryJudgement Signature.predicateSchemaRelator
+predicateSchema arity schema =
+  Signature.historicalFormula Signature.predicateSchemaRelator
+    (arity ∷ᵥ schema ∷ᵥ []ᵥ)
 
 implies : WordTerm → WordTerm → Formula
-implies = binaryJudgement Signature.implicationDerivabilityRelator
+implies antecedent consequent =
+  Signature.historicalFormula Signature.implicationDerivabilityRelator
+    (antecedent ∷ᵥ consequent ∷ᵥ []ᵥ)
 
 abbreviates : WordTerm → WordTerm → Formula
-abbreviates = binaryJudgement Signature.abbreviationRelator
+abbreviates abbreviation expanded =
+  Signature.historicalFormula Signature.abbreviationRelator
+    (abbreviation ∷ᵥ expanded ∷ᵥ []ᵥ)
 
 juxtapositionResult : WordTerm → WordTerm → WordTerm → Formula
-juxtapositionResult = ternaryJudgement Signature.juxtapositionResultRelator
+juxtapositionResult left right result =
+  Signature.historicalFormula Signature.juxtapositionResultRelator
+    (left ∷ᵥ right ∷ᵥ result ∷ᵥ []ᵥ)
 
 substitution :
   WordTerm → WordTerm → WordTerm → WordTerm → Formula
-substitution = quaternaryJudgement Signature.substitutionRelator
+substitution substitutedIn source replacement result =
+  Signature.historicalFormula Signature.substitutionRelator
+    (substitutedIn ∷ᵥ source ∷ᵥ replacement ∷ᵥ result ∷ᵥ []ᵥ)
 
 ------------------------------------------------------------------------
 -- Regression facts: the constructor selected really is the expected relator.
