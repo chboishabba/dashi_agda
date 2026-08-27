@@ -37,4 +37,5 @@ import DASHI.Physics.Closure.TSFVHistoryConditionedChoiceBridgeExact
 import DASHI.Physics.Closure.SinglePhotonRecoilRelationalObserverBridgeExact
 import DASHI.Physics.Closure.TSFVLocalActionCandidateAuditExact
 import DASHI.Physics.Closure.TSFVPairActionCandidateAuditExact
+import DASHI.Physics.Closure.TSFVNonseparableTransitionKernelExact
 import DASHI.Physics.Closure.TSFVActionPhaseWeightSeparationExact
