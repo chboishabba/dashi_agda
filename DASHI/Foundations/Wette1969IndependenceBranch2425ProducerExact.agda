@@ -2,12 +2,6 @@ module DASHI.Foundations.Wette1969IndependenceBranch2425ProducerExact where
 
 ------------------------------------------------------------------------
 -- WETTE 9.1.5 DEFINIENS-INDEPENDENCE BRANCH: INTERNAL 24/25 PRODUCTION
---
--- The independence branch uses shared premises 10--15 and premises 19--27.
--- Premises 24/25 are now source-exact paired II templates and can be generated
--- by certified historical 8.2 derivations.  This module removes them from the
--- externally supplied branch evidence while preserving all earlier evidence
--- through the two dependent producer traces.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -44,6 +38,13 @@ record Premise2425ProducerChain
 
 open Premise2425ProducerChain public
 
+contextAfter24 :
+  {initial : Context} → {later : Later.Rule915LaterParameters} →
+  Premise2425ProducerChain initial later → Context
+contextAfter24 chain =
+  PCRA.runCertifiedTrace historicalSystem
+    (CertifiedTwoStage.pairedTrace (derivation24 chain))
+
 finalContext :
   {initial : Context} → {later : Later.Rule915LaterParameters} →
   Premise2425ProducerChain initial later → Context
@@ -51,29 +52,29 @@ finalContext chain =
   PCRA.runCertifiedTrace historicalSystem
     (CertifiedTwoStage.pairedTrace (derivation25 chain))
 
+premise24AtFirstTarget :
+  {initial : Context} → {later : Later.Rule915LaterParameters} →
+  (chain : Premise2425ProducerChain initial later) →
+  Later.premise24 later Finite.∈Context contextAfter24 chain
+premise24AtFirstTarget {later = later} chain
+  rewrite sym (stages24Matches chain) =
+  CertifiedTwoStage.pairedIIAvailable (derivation24 chain)
+
 premise24AtFinal :
   {initial : Context} → {later : Later.Rule915LaterParameters} →
   (chain : Premise2425ProducerChain initial later) →
   Later.premise24 later Finite.∈Context finalContext chain
-premise24AtFinal chain =
+premise24AtFinal {later = later} chain =
   Closure.certifiedTracePreservesPriorFormula
     (CertifiedTwoStage.pairedTrace (derivation25 chain))
-    (Later.premise24 _)
-    premise24AtFirstTarget
-  where
-    premise24AtFirstTarget :
-      Later.premise24 _ Finite.∈Context
-        PCRA.runCertifiedTrace historicalSystem
-          (CertifiedTwoStage.pairedTrace (derivation24 chain))
-    premise24AtFirstTarget
-      rewrite sym (stages24Matches chain) =
-      CertifiedTwoStage.pairedIIAvailable (derivation24 chain)
+    (Later.premise24 later)
+    (premise24AtFirstTarget chain)
 
 premise25AtFinal :
   {initial : Context} → {later : Later.Rule915LaterParameters} →
   (chain : Premise2425ProducerChain initial later) →
   Later.premise25 later Finite.∈Context finalContext chain
-premise25AtFinal chain
+premise25AtFinal {later = later} chain
   rewrite sym (stages25Matches chain) =
   CertifiedTwoStage.pairedIIAvailable (derivation25 chain)
 
@@ -128,23 +129,30 @@ transportNon2425 trace evidence =
     (Closure.certifiedTracePreservesPriorFormula trace _ (e26 evidence))
     (Closure.certifiedTracePreservesPriorFormula trace _ (e27 evidence))
 
+finalNon2425Evidence :
+  {initial : Context} →
+  {firstSeven : Rule915.Rule915FirstSevenParameters} →
+  {later : Later.Rule915LaterParameters} →
+  IndependenceNon2425Evidence initial firstSeven later →
+  (chain : Premise2425ProducerChain initial later) →
+  IndependenceNon2425Evidence (finalContext chain) firstSeven later
+finalNon2425Evidence evidence chain =
+  transportNon2425
+    (CertifiedTwoStage.pairedTrace (derivation25 chain))
+    (transportNon2425
+      (CertifiedTwoStage.pairedTrace (derivation24 chain))
+      evidence)
+
 independenceBranchAfter2425 :
   {initial : Context} →
   (firstSeven : Rule915.Rule915FirstSevenParameters) →
   (later : Later.Rule915LaterParameters) →
-  IndependenceNon2425Evidence initial firstSeven later →
+  (evidence : IndependenceNon2425Evidence initial firstSeven later) →
   (chain : Premise2425ProducerChain initial later) →
-  let transcription = Later.completeTypedTranscription firstSeven later
-      finalNon2425 =
-        transportNon2425
-          (CertifiedTwoStage.pairedTrace (derivation25 chain))
-          (transportNon2425
-            (CertifiedTwoStage.pairedTrace (derivation24 chain))
-            _)
-  in Obligations.DefiniensIndependenceBranch
-       (finalContext chain)
-       transcription
-       (shared finalNon2425)
+  Obligations.DefiniensIndependenceBranch
+    (finalContext chain)
+    (Later.completeTypedTranscription firstSeven later)
+    (shared (finalNon2425Evidence evidence chain))
 independenceBranchAfter2425 firstSeven later evidence chain =
   Obligations.definiensIndependenceBranch
     (e19 finalEvidence)
@@ -157,12 +165,7 @@ independenceBranchAfter2425 firstSeven later evidence chain =
     (e26 finalEvidence)
     (e27 finalEvidence)
   where
-    after24Evidence =
-      transportNon2425
-        (CertifiedTwoStage.pairedTrace (derivation24 chain)) evidence
-    finalEvidence =
-      transportNon2425
-        (CertifiedTwoStage.pairedTrace (derivation25 chain)) after24Evidence
+    finalEvidence = finalNon2425Evidence evidence chain
 
 record Wette1969IndependenceBranch2425ProducerBoundary : Set where
   constructor wette1969IndependenceBranch2425ProducerBoundary
