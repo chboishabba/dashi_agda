@@ -4,17 +4,9 @@ module DASHI.Foundations.Wette1969Rule915TwoProofCutsetExact where
 -- WETTE 1969 RULE 9.1.5: TWO DECISIVE L-PROOF CUTSET
 --
 -- Section 1.632 identifies premises 18 and 27 as the two decisive substantive
--- L obligations.  All other premises are formation, freshness, tuple,
--- concatenation, substitution, or abbreviation scaffolding that makes those
--- two proof obligations and the recursive predicate construction admissible.
---
--- This module turns that source statement into an exact evidence cutset:
--- once the syntactic scaffold p01--p17,p19--p26 is available, the only remaining
--- premise evidence needed to certify 9.1.5 is p18 plus p27.
---
--- This is NOT a theorem that p18/p27 are easy, nor that the scaffold is already
--- generated from the empty context.  It is a precise reduction of the rule's
--- local admissibility interface.
+-- L obligations. Once the formation/freshness/tuple/concatenation/substitution/
+-- abbreviation scaffold is available, the only remaining premise evidence
+-- needed by 9.1.5 is therefore the proof of premise 18 plus the proof of 27.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -27,6 +19,7 @@ import DASHI.Foundations.Wette1969Rule915CertifiedObligationApplicationExact as 
 import DASHI.Foundations.Wette1969FiniteDerivationContextExact as Finite
 import DASHI.Foundations.Wette1969DerivationClosureExact as Closure
 
+WordTerm = Later.WordTerm
 Context = Finite.DerivationContext
 historicalSystem = Closure.historicalApplicationSystem
 
@@ -36,27 +29,13 @@ record Rule915SyntacticScaffoldEvidence
     (later : Later.Rule915LaterParameters) : Set where
   constructor rule915SyntacticScaffoldEvidence
   field
-    p01 : Rule915.exactFirstSevenFormula firstSeven
-            DASHI.Foundations.Wette1969CriticalRuleDependencyExact.p01
-            Finite.∈Context context
-    p02 : Rule915.exactFirstSevenFormula firstSeven
-            DASHI.Foundations.Wette1969CriticalRuleDependencyExact.p02
-            Finite.∈Context context
-    p03 : Rule915.exactFirstSevenFormula firstSeven
-            DASHI.Foundations.Wette1969CriticalRuleDependencyExact.p03
-            Finite.∈Context context
-    p04 : Rule915.exactFirstSevenFormula firstSeven
-            DASHI.Foundations.Wette1969CriticalRuleDependencyExact.p04
-            Finite.∈Context context
-    p05 : Rule915.exactFirstSevenFormula firstSeven
-            DASHI.Foundations.Wette1969CriticalRuleDependencyExact.p05
-            Finite.∈Context context
-    p06 : Rule915.exactFirstSevenFormula firstSeven
-            DASHI.Foundations.Wette1969CriticalRuleDependencyExact.p06
-            Finite.∈Context context
-    p07 : Rule915.exactFirstSevenFormula firstSeven
-            DASHI.Foundations.Wette1969CriticalRuleDependencyExact.p07
-            Finite.∈Context context
+    p01 : Rule915.premise915-01 firstSeven Finite.∈Context context
+    p02 : Rule915.premise915-02 firstSeven Finite.∈Context context
+    p03 : Rule915.premise915-03 firstSeven Finite.∈Context context
+    p04 : Rule915.premise915-04 firstSeven Finite.∈Context context
+    p05 : Rule915.premise915-05 firstSeven Finite.∈Context context
+    p06 : Rule915.premise915-06 firstSeven Finite.∈Context context
+    p07 : Rule915.premise915-07 firstSeven Finite.∈Context context
 
     p08 : Later.premise08 later Finite.∈Context context
     p09 : Later.premise09 later Finite.∈Context context
@@ -122,15 +101,17 @@ selectRule915FromTwoProofCutset :
   {context : Context} →
   (firstSeven : Rule915.Rule915FirstSevenParameters) →
   (later : Later.Rule915LaterParameters) →
+  (recursivePredicate : WordTerm) →
   Rule915SyntacticScaffoldEvidence context firstSeven later →
   Rule915MajorProofEvidence context later →
   PCRA.SelectedRuleApplication historicalSystem context
-selectRule915FromTwoProofCutset {context} firstSeven later scaffold major =
+selectRule915FromTwoProofCutset
+  {context} firstSeven later recursivePredicate scaffold major =
   Certified915.selectRule915FromObligationEvidence
     context
     (Later.completeTypedTranscription firstSeven later)
     (Later.arityWord later)
-    (Later.definiensSchemaWord later)
+    recursivePredicate
     (cutsetToObligationEvidence firstSeven later scaffold major)
 
 record Wette1969Rule915TwoProofCutsetBoundary : Set where
