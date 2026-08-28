@@ -10,7 +10,8 @@ module DASHI.EverythingPartitionAsymptotics where
 -- approximants with source-level cross-precision regularity and a direct
 -- vendored `NonNegative` proof.  The current analytic tranche also includes
 -- the semantic square law, division-free tangent estimate, concrete factorial
--- exponential series, and Machin-pi sqrt(2/3) constant construction.
+-- exponential series, native Cauchy tail control, finite rectangle products,
+-- positive-side exponential order, and Machin-pi sqrt(2/3) construction.
 ------------------------------------------------------------------------
 
 import DASHI.Foundations.BishopVendoredSubmoduleProvenanceExact
@@ -26,7 +27,10 @@ import DASHI.Foundations.BishopSquareNonnegativeExact
 import DASHI.Foundations.BishopNatSquareRootSemanticSquareExact
 import DASHI.Foundations.BishopNatSquareRootTangentExact
 import DASHI.Foundations.BishopFiniteSeriesExtensionalityExact
+import DASHI.Foundations.BishopAbsoluteSeriesTailExact
+import DASHI.Foundations.BishopFiniteSeriesRectangleProductExact
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact
+import DASHI.Foundations.BishopExponentialPositiveOrderExact
 import DASHI.Foundations.BishopSqrtTwoThirdsMachinConstantExact
 import DASHI.Mathematics.NumberTheory.FiniteNatFloorSquareRootExact
 import DASHI.Mathematics.NumberTheory.FiniteNatFractionOrderExact
