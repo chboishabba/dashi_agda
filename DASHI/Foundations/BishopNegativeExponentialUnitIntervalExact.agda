@@ -4,6 +4,8 @@ module DASHI.Foundations.BishopNegativeExponentialUnitIntervalExact where
 -- exp(-x) IS A CONSTRUCTIVE UNIT-INTERVAL RATIO FOR 0 < x <= 1
 ------------------------------------------------------------------------
 
+open import Data.Rational.Unnormalised using (1ℚᵘ)
+
 import Real as BishopReal
 import RealProperties as BishopP
 import Sequence as BishopSequence
@@ -24,7 +26,7 @@ open PositiveUnitIntervalPoint public
 xSquareBelowX :
   ∀ {x} → PositiveUnitIntervalPoint x →
   BishopReal._≤_ (Bracket.square x) x
-xSquareBelowX inputs =
+xSquareBelowX {x} inputs =
   let
     point = unitPoint inputs
     raw =
@@ -117,8 +119,8 @@ negativeExpUnitRatio :
   Geometric.BishopUnitIntervalRatio
     (Exp.bishopExp (BishopReal.- x))
 negativeExpUnitRatio inputs = record
-  { Geometric.ratioNonnegative = negativeExpNonnegative inputs
-  ; Geometric.ratioBelowOne = negativeExpBelowOne inputs
+  { ratioNonnegative = negativeExpNonnegative inputs
+  ; ratioBelowOne = negativeExpBelowOne inputs
   }
 
 bishopNegativeExponentialUnitIntervalLevel : ProofLevel
