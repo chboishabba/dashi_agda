@@ -2,20 +2,11 @@ module DASHI.Physics.Closure.NSTriadKNCriticalRawCurlCompleteWeldRound171Exact w
 
 ------------------------------------------------------------------------
 -- ROUND171 / COMPLETE EIGHT-CHANNEL PRODUCTION -> RAW-CURL RADIAL-GAP FORM
---
--- This composes R144, R170 and R169 on the same physical triad.  Under an
--- explicit calibration identifying the abstract reciprocal radii with the
--- helical modeNorm/inverseModeNorm scalars, the complete eight-helicity
--- critical production is EXACTLY
---
---   (r_p-r_q) C_k + (r_q-r_k) C_p + (r_k-r_p) C_q,
---
--- where C_j is the literal RAW curl insertion in slot j.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong3; trans)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -23,6 +14,7 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as He
 import DASHI.Physics.Closure.NSTriadKNHelicityWalshMomentRound139Exact as R139
 import DASHI.Physics.Closure.NSTriadKNHelicityWalshPhysicalAmplitudeRound140Exact as R140
 import DASHI.Physics.Closure.NSTriadKNCriticalHelicitySlotCommutatorRound138Exact as R138
+import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNCriticalNormalizedCurlDoubleCommutatorRound144Exact as R144
 import DASHI.Physics.Closure.NSTriadKNCriticalNormalizedCurlRadiusCancellationRound147Exact as R147
 import DASHI.Physics.Closure.NSTriadKNCriticalRawCurlRadialGapRound169Exact as R169
@@ -30,8 +22,12 @@ import DASHI.Physics.Closure.NSTriadKNCriticalRawCurlPhysicalWeldRound170Exact a
 
 record PhysicalRadiusCalibration
     {r} {F : C3.RealField r}
-    (S : Helical.HelicalModeScalars F)
-    (T : R144.PhysicalNormalizedCurlTriad _ _ S _ _) : Set r where
+    {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E}
+    {S : Helical.HelicalModeScalars F}
+    {L : Helical.PeriodicHelicalProjectorLaws F E I S}
+    {H : R142.HelicalHalfCalibration S}
+    (T : R144.PhysicalNormalizedCurlTriad E I S L H) : Set r where
   constructor physical-radius-calibration
   field
     radii : R147.ReciprocalRadiusTriple F
@@ -50,9 +46,9 @@ completeCriticalProductionIsRawCurlGapForm :
     {I : C3.ModeInverseSquare F E}
     {S : Helical.HelicalModeScalars F}
     {L : Helical.PeriodicHelicalProjectorLaws F E I S}
-    {H : DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact.HelicalHalfCalibration S}
+    {H : R142.HelicalHalfCalibration S}
     (T : R144.PhysicalNormalizedCurlTriad E I S L H)
-    (C : PhysicalRadiusCalibration S T) →
+    (C : PhysicalRadiusCalibration T) →
   R139.eightChannelCriticalProduction
     (R147.radiusK (radii C))
     (R147.radiusP (radii C))
@@ -74,10 +70,7 @@ completeCriticalProductionIsRawCurlGapForm {E = E} {S = S} T C =
       (R147.radiusQ (radii C)) T)
     (trans normalizedToInverseRaw
       (R169.normalizedSlotProductionIsRawCurlGapProduction
-        (radii C)
-        (R170.rawCurlSlotK E (R144.k T) (R144.uK T) (R144.uP T) (R144.uQ T))
-        (R170.rawCurlSlotP E (R144.p T) (R144.uK T) (R144.uP T) (R144.uQ T))
-        (R170.rawCurlSlotQ E (R144.q T) (R144.uK T) (R144.uP T) (R144.uQ T))))
+        (radii C) rawK rawP rawQ))
   where
   rawK = R170.rawCurlSlotK E (R144.k T) (R144.uK T) (R144.uP T) (R144.uQ T)
   rawP = R170.rawCurlSlotP E (R144.p T) (R144.uK T) (R144.uP T) (R144.uQ T)
@@ -91,8 +84,7 @@ completeCriticalProductionIsRawCurlGapForm {E = E} {S = S} T C =
       (R144.normalizedCurlSlotK E S (R144.k T) (R144.uK T) (R144.uP T) (R144.uQ T))
       (R144.normalizedCurlSlotP E S (R144.p T) (R144.uK T) (R144.uP T) (R144.uQ T))
       (R144.normalizedCurlSlotQ E S (R144.q T) (R144.uK T) (R144.uP T) (R144.uQ T))
-    ≡
-    R169.normalizedSlotProductionFromRaw (radii C) rawK rawP rawQ
+    ≡ R169.normalizedSlotProductionFromRaw (radii C) rawK rawP rawQ
   normalizedToInverseRaw
     rewrite inverseKMeaning C | inversePMeaning C | inverseQMeaning C
           | R170.normalizedSlotKFactorsInverse E S (R144.k T) (R144.uK T) (R144.uP T) (R144.uQ T)
