@@ -4,6 +4,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Cognition.PNF.AffectedBoundaryLocalReductionExact
+open import DASHI.Cognition.PNF.DreamFlowRuntimeComplexityExact
+  using (hierarchyTransportWork)
 
 ------------------------------------------------------------------------
 -- Concrete normalization witnesses for the C3b work equations.
