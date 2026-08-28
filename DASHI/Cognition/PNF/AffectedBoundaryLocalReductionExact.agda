@@ -64,6 +64,14 @@ record ParentLocalReducer
       touchedKeyCount (affected delta) ≡ 0 →
       reduceAffected state delta ≡ state
 
+    -- Work performed is not itself semantic change.  If the reduced parent
+    -- state is extensionally unchanged, hierarchy transport must stop here.
+    noParentChangeEmitsNoDelta :
+      (state : ParentState) →
+      (delta : ChildDelta) →
+      reduceAffected state delta ≡ state →
+      emittedDeltaCount state delta ≡ 0
+
 open ParentLocalReducer public
 
 ------------------------------------------------------------------------
@@ -136,6 +144,8 @@ data LookupIsIndependentBoundaryEvidence : Set where
 
 data AccumulatedParentStateRescanRequired : Set where
 
+data WorkPerformedCountsAsSemanticChange : Set where
+
 unaffectedKeyNeedNotReduce : UnaffectedKeyRequiresReduction → ⊥
 unaffectedKeyNeedNotReduce ()
 
@@ -147,3 +157,6 @@ lookupIsNotIndependentEvidence ()
 
 accumulatedParentStateNeedNotRescan : AccumulatedParentStateRescanRequired → ⊥
 accumulatedParentStateNeedNotRescan ()
+
+workDoesNotManufactureSemanticDelta : WorkPerformedCountsAsSemanticChange → ⊥
+workDoesNotManufactureSemanticDelta ()
