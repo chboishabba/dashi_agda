@@ -43,6 +43,7 @@ open import Agda.Primitive using (lzero)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Physics.Closure.NSTriadKNCriticalCompactnessSerrinRound29Exact as Critical
 import DASHI.Physics.Closure.NSTriadKNCriticalAubinLionsExponentWeldRound102Exact as Exponents
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalGalerkinSimonWeldRound104Exact as R104
 import DASHI.Physics.Closure.NSConcreteAubinLionsNonlinearLimitWitnesses as Concrete
@@ -55,15 +56,12 @@ record StandardCriticalSimonFacts
     (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S)
     (barrier : R104.CriticalBarrierTopology S X) : Set₁ where
   field
-    -- Standard Sobolev/Holder estimate plus the Galerkin equation.
     TimeDerivativeHMinusHalf : Set
     timeDerivativeHMinusHalf : TimeDerivativeHMinusHalf
 
-    -- Simon compactness for H^(3/2) compact-> H^(1/2) -> H^(-1/2).
     StrongCriticalSimon : Set
     strongCriticalSimon : StrongCriticalSimon
 
-    -- Weak-* extraction in L^infinity H^(1/2) and norm lower semicontinuity.
     WeakStarCriticalLiminf : Set
     weakStarCriticalLiminf : WeakStarCriticalLiminf
 
@@ -95,7 +93,7 @@ standardFactsGivePhysicalCriticalLimit :
   (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S)
   (barrier : R104.CriticalBarrierTopology S X) →
   StandardCriticalSimonFacts S X barrier →
-  _
+  Critical.CriticalAubinLionsTarget
 standardFactsGivePhysicalCriticalLimit X barrier facts =
   R104.physicalCriticalGalerkinSimonWeld X barrier
     (standardFactsInstantiateCriticalSobolevSimonUpgrade X barrier facts)
@@ -110,9 +108,6 @@ round148NoAdditionalNonlinearDiscoveryEstimateNeededAfterABarrier = true
 round148PackageBReducedToStandardPublishedAnalysis : Bool
 round148PackageBReducedToStandardPublishedAnalysis = true
 
--- Formal source instantiation is still kept separate from the mathematical
--- dependency reduction.  This flag must not be flipped merely because the
--- theorems are standard literature.
 round148AgdaAnalyticSourceInstancesInstalled : Bool
 round148AgdaAnalyticSourceInstancesInstalled = false
 
