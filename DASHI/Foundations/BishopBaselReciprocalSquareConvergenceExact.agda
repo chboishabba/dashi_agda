@@ -16,7 +16,7 @@ module DASHI.Foundations.BishopBaselReciprocalSquareConvergenceExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
-open import Data.Integer.Base as ℤ using (+_)
+open import Data.Integer.Base as ℤ using (+_; -[1+_])
 open import Data.Integer.Solver renaming (module +-*-Solver to ℤSolver)
 open ℤSolver using (solve; _:+_; _:*_; con; _:=_)
 import Data.Nat.Properties as NatP
@@ -29,7 +29,6 @@ import Real as BishopReal
 import RealProperties as BishopP
 import Sequence as BishopSequence
 
-import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 embed : ℚᵘ → BishopReal.ℝ
@@ -66,23 +65,22 @@ telescopingSuccessorAsProductReciprocal n =
     (solve 1
       (λ m →
         (((m :* (con (+ 1) :+ m))
-           :- (m :* m))
+           :+ (con (-[1+ 0]) :* (m :* m)))
           :* (m :* (con (+ 1) :+ m)))
         :=
         ((con (+ 1) :* (m :* (con (+ 1) :+ m)))
           :* ((m :* (con (+ 1) :+ m)))))
       refl
       (+ suc n))
-  where
-    infixl 6 _:-_
-    _:-_ = λ a b → a :+ (con (-[1+ 0]) :* b)
 
 successorSquareDenominatorAboveProduct :
   ∀ n →
   suc n * suc (suc n)
   NatP.≤ suc (suc n) * suc (suc n)
 successorSquareDenominatorAboveProduct n =
-  NatP.*-monoˡ-≤ (suc (suc n)) (NatP.n≤1+n (suc n))
+  NatP.*-monoˡ-≤
+    (suc (suc n))
+    (NatP.n≤1+n (suc n))
 
 baselBelowTelescopingRational :
   ∀ n →
@@ -235,7 +233,7 @@ telescopingSeriesConvergent =
     shiftedConverges =
       BishopSequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
         (λ {(suc n) →
-          BishopP.≃-symm (partialTelescopingClosedForm (suc n))})
+          partialTelescopingClosedForm (suc n)})
         closedConverges
   in
   two ,
