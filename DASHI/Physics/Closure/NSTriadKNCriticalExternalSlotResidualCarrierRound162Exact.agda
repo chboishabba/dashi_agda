@@ -22,7 +22,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Data.List.Membership.Propositional using (_∈_)
-open import Relation.Binary.PropositionalEquality using (_≢_; cong3; trans)
+open import Relation.Binary.PropositionalEquality using (_≢_)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
@@ -35,7 +35,6 @@ import DASHI.Physics.Closure.NSTriadKNExternalOutputFibreSelfOrbitRemovalRound11
 import DASHI.Physics.Closure.NSTriadKNCriticalNormalizedCurlSlotTangentRound157Exact as R157
 import DASHI.Physics.Closure.NSTriadKNCriticalSecondSlotDifferenceTangentRound159Exact as R159
 
--- Local ternary congruence avoids depending on a library spelling.
 cong₃ :
   ∀ {a b c d} {A : Set a} {B : Set b} {C : Set c} {D : Set d}
     (f : A → B → C → D) {x x' y y' z z'} →
@@ -53,17 +52,11 @@ record ThreeLegExternalResidualWitness
     kMember : tau ∈ Audit.concreteTriadsAt system (Physical.k tau)
     kSwapMember : Symmetry.swapTriad tau ∈ Audit.concreteTriadsAt system (Physical.k tau)
     kSwapDifferent : Symmetry.swapTriad tau ≢ tau
-
-    pMember : Orbit.pEnergyLeg tau ∈
-      Audit.concreteTriadsAt system (Physical.k (Orbit.pEnergyLeg tau))
-    pSwapMember : Symmetry.swapTriad (Orbit.pEnergyLeg tau) ∈
-      Audit.concreteTriadsAt system (Physical.k (Orbit.pEnergyLeg tau))
+    pMember : Orbit.pEnergyLeg tau ∈ Audit.concreteTriadsAt system (Physical.k (Orbit.pEnergyLeg tau))
+    pSwapMember : Symmetry.swapTriad (Orbit.pEnergyLeg tau) ∈ Audit.concreteTriadsAt system (Physical.k (Orbit.pEnergyLeg tau))
     pSwapDifferent : Symmetry.swapTriad (Orbit.pEnergyLeg tau) ≢ Orbit.pEnergyLeg tau
-
-    qMember : Orbit.qEnergyLeg tau ∈
-      Audit.concreteTriadsAt system (Physical.k (Orbit.qEnergyLeg tau))
-    qSwapMember : Symmetry.swapTriad (Orbit.qEnergyLeg tau) ∈
-      Audit.concreteTriadsAt system (Physical.k (Orbit.qEnergyLeg tau))
+    qMember : Orbit.qEnergyLeg tau ∈ Audit.concreteTriadsAt system (Physical.k (Orbit.qEnergyLeg tau))
+    qSwapMember : Symmetry.swapTriad (Orbit.qEnergyLeg tau) ∈ Audit.concreteTriadsAt system (Physical.k (Orbit.qEnergyLeg tau))
     qSwapDifferent : Symmetry.swapTriad (Orbit.qEnergyLeg tau) ≢ Orbit.qEnergyLeg tau
 
 open ThreeLegExternalResidualWitness public
@@ -75,8 +68,7 @@ kResidualVector :
     {tau : Physical.PhysicalTriadIncidence} →
   ThreeLegExternalResidualWitness system tau → C3.Complex3 F
 kResidualVector {system = system} {tau = tau} W =
-  R111.externalResidualVector system tau
-    (kMember W) (kSwapMember W) (kSwapDifferent W)
+  R111.externalResidualVector system tau (kMember W) (kSwapMember W) (kSwapDifferent W)
 
 pResidualVector :
   ∀ {r} {F : C3.RealField r}
@@ -117,8 +109,7 @@ externalForcingPIsResidualVector :
     (W : ThreeLegExternalResidualWitness system tau) →
   R95.externalForcingP system tau ≡ pResidualVector W
 externalForcingPIsResidualVector system tau W =
-  R111.externalForcingKIsSelfOrbitRemovedOutputFibre
-    system (Orbit.pEnergyLeg tau)
+  R111.externalForcingKIsSelfOrbitRemovedOutputFibre system (Orbit.pEnergyLeg tau)
     (pMember W) (pSwapMember W) (pSwapDifferent W)
 
 externalForcingQIsResidualVector :
@@ -129,8 +120,7 @@ externalForcingQIsResidualVector :
     (W : ThreeLegExternalResidualWitness system tau) →
   R95.externalForcingQ system tau ≡ qResidualVector W
 externalForcingQIsResidualVector system tau W =
-  R111.externalForcingKIsSelfOrbitRemovedOutputFibre
-    system (Orbit.qEnergyLeg tau)
+  R111.externalForcingKIsSelfOrbitRemovedOutputFibre system (Orbit.qEnergyLeg tau)
     (qMember W) (qSwapMember W) (qSwapDifferent W)
 
 externalKQSlotForcingIsLiteralResidualFibres :
@@ -145,17 +135,12 @@ externalKQSlotForcingIsLiteralResidualFibres :
       uQ = Audit.velocityAt system (Physical.q tau)
   in
   R157.slotDifferenceNetworkForcing E S (Physical.k tau) (Physical.q tau)
-    uK uP uQ
-    (R95.externalForcingK system tau)
-    (R95.externalForcingP system tau)
-    (R95.externalForcingQ system tau)
-  ≡
-  R157.slotDifferenceNetworkForcing E S (Physical.k tau) (Physical.q tau)
-    uK uP uQ
-    (kResidualVector W) (pResidualVector W) (qResidualVector W)
-externalKQSlotForcingIsLiteralResidualFibres S system tau W =
+    uK uP uQ (R95.externalForcingK system tau) (R95.externalForcingP system tau) (R95.externalForcingQ system tau)
+  ≡ R157.slotDifferenceNetworkForcing E S (Physical.k tau) (Physical.q tau)
+    uK uP uQ (kResidualVector W) (pResidualVector W) (qResidualVector W)
+externalKQSlotForcingIsLiteralResidualFibres {E = E} S system tau W =
   cong₃
-    (R157.slotDifferenceNetworkForcing _ S (Physical.k tau) (Physical.q tau)
+    (R157.slotDifferenceNetworkForcing E S (Physical.k tau) (Physical.q tau)
       (Audit.velocityAt system (Physical.k tau))
       (Audit.velocityAt system (Physical.p tau))
       (Audit.velocityAt system (Physical.q tau)))
@@ -175,17 +160,12 @@ externalPQSlotForcingIsLiteralResidualFibres :
       uQ = Audit.velocityAt system (Physical.q tau)
   in
   R159.slotPQDifferenceNetworkForcing E S (Physical.p tau) (Physical.q tau)
-    uK uP uQ
-    (R95.externalForcingK system tau)
-    (R95.externalForcingP system tau)
-    (R95.externalForcingQ system tau)
-  ≡
-  R159.slotPQDifferenceNetworkForcing E S (Physical.p tau) (Physical.q tau)
-    uK uP uQ
-    (kResidualVector W) (pResidualVector W) (qResidualVector W)
-externalPQSlotForcingIsLiteralResidualFibres S system tau W =
+    uK uP uQ (R95.externalForcingK system tau) (R95.externalForcingP system tau) (R95.externalForcingQ system tau)
+  ≡ R159.slotPQDifferenceNetworkForcing E S (Physical.p tau) (Physical.q tau)
+    uK uP uQ (kResidualVector W) (pResidualVector W) (qResidualVector W)
+externalPQSlotForcingIsLiteralResidualFibres {E = E} S system tau W =
   cong₃
-    (R159.slotPQDifferenceNetworkForcing _ S (Physical.p tau) (Physical.q tau)
+    (R159.slotPQDifferenceNetworkForcing E S (Physical.p tau) (Physical.q tau)
       (Audit.velocityAt system (Physical.k tau))
       (Audit.velocityAt system (Physical.p tau))
       (Audit.velocityAt system (Physical.q tau)))
@@ -195,22 +175,17 @@ externalPQSlotForcingIsLiteralResidualFibres S system tau W =
 
 round162ThreeLegExternalForcingResidualCarrierClosed : Bool
 round162ThreeLegExternalForcingResidualCarrierClosed = true
-
 round162BothExternalSlotForcingDifferencesOnLiteralResidualFibres : Bool
 round162BothExternalSlotForcingDifferencesOnLiteralResidualFibres = true
-
 round162OpaqueFullMinusSelfSubtractionRemains : Bool
 round162OpaqueFullMinusSelfSubtractionRemains = false
-
 round162ExternalResidualQuadraticVariationPaymentClosed : Bool
 round162ExternalResidualQuadraticVariationPaymentClosed = false
-
 round162PackageAClosed : Bool
 round162PackageAClosed = false
 
 round162BothExternalSlotForcingDifferencesOnLiteralResidualFibresIsTrue :
   round162BothExternalSlotForcingDifferencesOnLiteralResidualFibres ≡ true
 round162BothExternalSlotForcingDifferencesOnLiteralResidualFibresIsTrue = refl
-
 round162PackageAClosedIsFalse : round162PackageAClosed ≡ false
 round162PackageAClosedIsFalse = refl
