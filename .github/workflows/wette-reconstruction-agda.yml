@@ -24,6 +24,7 @@ on:
       - 'scripts/check_wette_premise_typing.sh'
       - 'scripts/check_wette_proof_carrying_application.sh'
       - 'scripts/check_wette_derivation_closure_and_substitution.sh'
+      - 'scripts/check_wette_rule915_cutset.sh'
       - '.github/workflows/wette-reconstruction-agda.yml'
   workflow_dispatch:
 
@@ -54,4 +55,5 @@ jobs:
           nix develop .# --command bash scripts/check_wette_premise_typing.sh
           nix develop .# --command bash scripts/check_wette_proof_carrying_application.sh
           nix develop .# --command bash scripts/check_wette_derivation_closure_and_substitution.sh
+          nix develop .# --command bash scripts/check_wette_rule915_cutset.sh
           nix develop .# --command bash scripts/check_wette_reconstruction.sh
