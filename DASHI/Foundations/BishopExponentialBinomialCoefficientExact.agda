@@ -14,8 +14,10 @@ module DASHI.Foundations.BishopExponentialBinomialCoefficientExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Integer.Base using (+_)
+import Data.Nat.Base as ℕ
 open import Data.Nat.Combinatorics using (_C_)
-open import Data.Rational.Unnormalised using (1ℚᵘ)
+open import Data.Rational.Unnormalised using (1ℚᵘ; _/_)
 
 import Algebra.Properties.CommutativeSemiring.Binomial as Binomial
 import Algebra.Properties.Semiring.Exp as SemiringExp
@@ -65,9 +67,13 @@ natRealIsNaturalScaleOne zero = BishopP.≃-refl
 natRealIsNaturalScaleOne (suc n) =
   BishopP.≃-trans
     (NatReal.natRealSuccessor n)
-    (BishopP.+-cong
-      (natRealIsNaturalScaleOne n)
-      BishopP.≃-refl)
+    (BishopP.≃-trans
+      (BishopP.+-cong
+        (natRealIsNaturalScaleOne n)
+        BishopP.≃-refl)
+      (BishopP.+-comm
+        (BishopSemiringMult._×_ n BishopReal.1ℝ)
+        BishopReal.1ℝ))
 
 naturalScaleAsEmbeddedMultiply :
   ∀ n value →
@@ -88,11 +94,11 @@ naturalScaleAsEmbeddedMultiply n value =
 
 embeddedInverseFactorialProductBinomial :
   ∀ {n k : Nat} →
-  k Data.Nat.Base.≤ n →
+  k ℕ.≤ n →
   BishopReal._≃_
     (BishopReal._*_
       (Exp.embed (Exp.inverseFactorial k))
-      (Exp.embed (Exp.inverseFactorial (n Data.Nat.Base.∸ k))))
+      (Exp.embed (Exp.inverseFactorial (n ℕ.∸ k))))
     (BishopReal._*_
       (NatReal.natReal (n C k))
       (Exp.embed (Exp.inverseFactorial n)))
@@ -101,7 +107,7 @@ embeddedInverseFactorialProductBinomial {n} {k} k≤n =
     (BishopP.≃-symm
       (BishopP.⋆-distrib-*
         (Exp.inverseFactorial k)
-        (Exp.inverseFactorial (n Data.Nat.Base.∸ k))))
+        (Exp.inverseFactorial (n ℕ.∸ k))))
     (BishopP.≃-trans
       (BishopP.⋆-cong
         (Coeff.inverseFactorialProductBinomial k≤n))
@@ -115,24 +121,24 @@ embeddedInverseFactorialProductBinomial {n} {k} k≤n =
 
 expConvolutionTermBinomial :
   ∀ left right n k →
-  k Data.Nat.Base.≤ n →
+  k ℕ.≤ n →
   BishopReal._≃_
     (BishopReal._*_
       (Exp.expTerm left k)
-      (Exp.expTerm right (n Data.Nat.Base.∸ k)))
+      (Exp.expTerm right (n ℕ.∸ k)))
     (BishopReal._*_
       (BishopReal._*_
         (NatReal.natReal (n C k))
         (BishopReal._*_
           (BishopReal.pow left k)
-          (BishopReal.pow right (n Data.Nat.Base.∸ k))))
+          (BishopReal.pow right (n ℕ.∸ k))))
       (Exp.embed (Exp.inverseFactorial n)))
 expConvolutionTermBinomial left right n k k≤n =
   let
     leftPower = BishopReal.pow left k
-    rightPower = BishopReal.pow right (n Data.Nat.Base.∸ k)
+    rightPower = BishopReal.pow right (n ℕ.∸ k)
     leftCoeff = Exp.embed (Exp.inverseFactorial k)
-    rightCoeff = Exp.embed (Exp.inverseFactorial (n Data.Nat.Base.∸ k))
+    rightCoeff = Exp.embed (Exp.inverseFactorial (n ℕ.∸ k))
     commonCoeff = Exp.embed (Exp.inverseFactorial n)
     chooseReal = NatReal.natReal (n C k)
     open BishopP.ℝ-Solver
