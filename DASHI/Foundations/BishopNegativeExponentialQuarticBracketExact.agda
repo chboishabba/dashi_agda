@@ -10,7 +10,9 @@ module DASHI.Foundations.BishopNegativeExponentialQuarticBracketExact where
 --   exp(-x) <= 1-x+x^2/2-x^3/6+x^4/24.
 --
 -- These are exact Bishop-real inequalities obtained from concrete partial
--- sums, not imported Taylor axioms.
+-- sums, not imported Taylor axioms.  As in the existing YM low-order Taylor
+-- owner, partial sums are first normalized in magnitude coordinates and only
+-- then identified with the explicit polynomial.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (zero; suc)
@@ -22,6 +24,7 @@ import RealProperties as BishopP
 
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopNegativeExponentialInterlacingExact as NegExp
+import DASHI.Physics.YangMills.BalabanBishopAlternatingInterlacingFromDecreasingTermsExact as Alt
 import DASHI.Physics.YangMills.BalabanBishopAlternatingBracketFromMonotoneLimitsExact as Bracket
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -57,11 +60,13 @@ upperQuartic x =
 magnitudeZero :
   ∀ {x} → NegExp.UnitIntervalPoint x →
   BishopReal._≃_ (Exp.expMagnitudeTerm x zero) BishopReal.1ℝ
-magnitudeZero point =
-  let open BishopP.ℝ-Solver
-  in solve 0
-    (Κ (+ 1 / 1) ⊗ Κ 1ℚᵘ ⊜ Κ 1ℚᵘ)
-    BishopP.≃-refl
+magnitudeZero {x} point =
+  BishopP.≃-trans
+    (BishopP.*-congˡ (NegExp.powerAbsIsPower point zero))
+    (let open BishopP.ℝ-Solver
+     in solve 0
+        (Κ (+ 1 / 1) ⊗ Κ 1ℚᵘ ⊜ Κ 1ℚᵘ)
+        BishopP.≃-refl)
 
 magnitudeOne :
   ∀ {x} → NegExp.UnitIntervalPoint x →
@@ -117,57 +122,139 @@ magnitudeFour {x} point =
           ⊜ Κ (+ 1 / 24) ⊗ ((x′ ⊗ x′) ⊗ (x′ ⊗ x′)))
         BishopP.≃-refl x)
 
+upperZeroEquivalentMagnitudeZero :
+  (dataSet : Alt.AlternatingDecreasingSeriesData) →
+  BishopReal._≃_
+    (Alt.upperPartial dataSet zero)
+    (Alt.magnitude dataSet zero)
+upperZeroEquivalentMagnitudeZero dataSet =
+  BishopP.≃-trans
+    (let open BishopP.ℝ-Solver
+     in solve 1
+        (λ upper → upper ⊜ upper ⊖ Κ 0ℚᵘ)
+        BishopP.≃-refl
+        (Alt.upperPartial dataSet zero))
+    (Alt.upperMinusLowerIsEvenMagnitude dataSet zero)
+
+lowerOneEquivalentMagnitudeDifference :
+  (dataSet : Alt.AlternatingDecreasingSeriesData) →
+  BishopReal._≃_
+    (Alt.lowerPartial dataSet (suc zero))
+    (BishopReal._-_
+      (Alt.magnitude dataSet zero)
+      (Alt.magnitude dataSet (suc zero)))
+lowerOneEquivalentMagnitudeDifference dataSet =
+  BishopP.≃-trans
+    (Alt.lowerSuccessorExpansion dataSet zero)
+    (let open BishopP.ℝ-Solver
+     in solve 2
+        (λ first second →
+          Κ 0ℚᵘ ⊕ (first ⊖ second) ⊜ first ⊖ second)
+        BishopP.≃-refl
+        (Alt.magnitude dataSet zero)
+        (Alt.magnitude dataSet (suc zero)))
+
+upperOneEquivalentMagnitudes :
+  (dataSet : Alt.AlternatingDecreasingSeriesData) →
+  BishopReal._≃_
+    (Alt.upperPartial dataSet (suc zero))
+    (BishopReal._+_
+      (BishopReal._-_
+        (Alt.magnitude dataSet zero)
+        (Alt.magnitude dataSet (suc zero)))
+      (Alt.magnitude dataSet 2))
+upperOneEquivalentMagnitudes dataSet =
+  BishopP.≃-trans
+    (Alt.upperSuccessorExpansion dataSet zero)
+    (BishopP.+-cong
+      (BishopP.+-congˡ
+        (BishopReal.- (Alt.magnitude dataSet (suc zero)))
+        (upperZeroEquivalentMagnitudeZero dataSet))
+      BishopP.≃-refl)
+
+upperTwoEquivalentMagnitudes :
+  (dataSet : Alt.AlternatingDecreasingSeriesData) →
+  BishopReal._≃_
+    (Alt.upperPartial dataSet 2)
+    (BishopReal._+_
+      (BishopReal._-_
+        (BishopReal._+_
+          (BishopReal._-_
+            (Alt.magnitude dataSet zero)
+            (Alt.magnitude dataSet 1))
+          (Alt.magnitude dataSet 2))
+        (Alt.magnitude dataSet 3))
+      (Alt.magnitude dataSet 4))
+upperTwoEquivalentMagnitudes dataSet =
+  BishopP.≃-trans
+    (Alt.upperSuccessorExpansion dataSet (suc zero))
+    (BishopP.+-cong
+      (BishopP.+-congˡ
+        (BishopReal.- (Alt.magnitude dataSet 3))
+        (upperOneEquivalentMagnitudes dataSet))
+      BishopP.≃-refl)
+
 lowerPartialOne :
   ∀ {x} (point : NegExp.UnitIntervalPoint x) →
   BishopReal._≃_
-    (Bracket.lowerPartial (NegExp.negativeExponentialInterlacing point) 1)
+    (Alt.lowerPartial
+      (NegExp.negativeExponentialAlternatingData point) 1)
     (lowerLinear x)
 lowerPartialOne {x} point =
-  let
-    dataSet = NegExp.negativeExponentialAlternatingData point
+  let dataSet = NegExp.negativeExponentialAlternatingData point
   in
   BishopP.≃-trans
-    (BishopP.+-cong
-      (BishopP.+-identityˡ BishopReal.0ℝ)
-      (NegExp.oddTermIsNegativeMagnitude point zero))
-    (let open BishopP.ℝ-Solver
-     in solve 2
-        (λ m0 m1 → (Κ 0ℚᵘ ⊕ m0) ⊕ (⊝ m1) ⊜ Κ 1ℚᵘ ⊖ x)
-        BishopP.≃-refl
-        (Exp.expMagnitudeTerm x zero)
-        (Exp.expMagnitudeTerm x 1))
+    (lowerOneEquivalentMagnitudeDifference dataSet)
+    (BishopP.≃-trans
+      (BishopP.+-cong
+        (magnitudeZero point)
+        (BishopP.-‿cong (magnitudeOne point)))
+      (let open BishopP.ℝ-Solver
+       in solve 1
+          (λ x′ → Κ 1ℚᵘ ⊖ x′ ⊜ Κ 1ℚᵘ ⊖ x′)
+          BishopP.≃-refl x))
 
 upperPartialOne :
   ∀ {x} (point : NegExp.UnitIntervalPoint x) →
   BishopReal._≃_
-    (Bracket.upperPartial (NegExp.negativeExponentialInterlacing point) 1)
+    (Alt.upperPartial
+      (NegExp.negativeExponentialAlternatingData point) 1)
     (upperQuadratic x)
 upperPartialOne {x} point =
-  let open BishopP.ℝ-Solver
-  in solve 1
-    (λ x′ →
-      (((Κ 0ℚᵘ ⊕ Κ (+ 1 / 1)) ⊕ (⊝ x′))
-        ⊕ (Κ (+ 1 / 2) ⊗ (x′ ⊗ x′)))
-      ⊜ (Κ 1ℚᵘ ⊖ x′) ⊕ (Κ (+ 1 / 2) ⊗ (x′ ⊗ x′)))
-    BishopP.≃-refl x
+  let dataSet = NegExp.negativeExponentialAlternatingData point
+  in
+  BishopP.≃-trans
+    (upperOneEquivalentMagnitudes dataSet)
+    (BishopP.≃-trans
+      (BishopP.+-cong
+        (BishopP.+-cong
+          (magnitudeZero point)
+          (BishopP.-‿cong (magnitudeOne point)))
+        (magnitudeTwo point))
+      BishopP.≃-refl)
 
 upperPartialTwo :
   ∀ {x} (point : NegExp.UnitIntervalPoint x) →
   BishopReal._≃_
-    (Bracket.upperPartial (NegExp.negativeExponentialInterlacing point) 2)
+    (Alt.upperPartial
+      (NegExp.negativeExponentialAlternatingData point) 2)
     (upperQuartic x)
 upperPartialTwo {x} point =
-  let open BishopP.ℝ-Solver
-  in solve 1
-    (λ x′ →
-      (((((Κ 0ℚᵘ ⊕ Κ (+ 1 / 1)) ⊕ (⊝ x′))
-          ⊕ (Κ (+ 1 / 2) ⊗ (x′ ⊗ x′)))
-          ⊕ (⊝ (Κ (+ 1 / 6) ⊗ ((x′ ⊗ x′) ⊗ x′))))
-          ⊕ (Κ (+ 1 / 24) ⊗ ((x′ ⊗ x′) ⊗ (x′ ⊗ x′))))
-      ⊜ (((Κ 1ℚᵘ ⊖ x′) ⊕ (Κ (+ 1 / 2) ⊗ (x′ ⊗ x′)))
-          ⊖ (Κ (+ 1 / 6) ⊗ ((x′ ⊗ x′) ⊗ x′)))
-          ⊕ (Κ (+ 1 / 24) ⊗ ((x′ ⊗ x′) ⊗ (x′ ⊗ x′))))
-    BishopP.≃-refl x
+  let dataSet = NegExp.negativeExponentialAlternatingData point
+  in
+  BishopP.≃-trans
+    (upperTwoEquivalentMagnitudes dataSet)
+    (BishopP.≃-trans
+      (BishopP.+-cong
+        (BishopP.+-cong
+          (BishopP.+-cong
+            (BishopP.+-cong
+              (magnitudeZero point)
+              (BishopP.-‿cong (magnitudeOne point)))
+            (magnitudeTwo point))
+          (BishopP.-‿cong (magnitudeThree point)))
+        (magnitudeFour point))
+      BishopP.≃-refl)
 
 negativeExpAboveLinear :
   ∀ {x} (point : NegExp.UnitIntervalPoint x) →
