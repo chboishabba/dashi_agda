@@ -2,31 +2,17 @@ module DASHI.Physics.Closure.NSTriadKNHHDualDefectScalarCompilerRound175Exact wh
 
 ------------------------------------------------------------------------
 -- ROUND175 / DUAL-DEFECT SCALAR COMPILER
---
--- After the R174 vector estimate, the HH pointwise problem has the scalar form
---
---   raw <= 24 A M + 2 B M,
---
--- where A is the scaled angular-defect square, B is the radial-gap square,
--- M is the quadratic velocity mass, and R146 gives A+B=K with K=r_k^2.
--- Since A,B,M are nonnegative,
---
---   raw <= 24 K M.
---
--- This file closes that ordered algebra exactly.  The remaining physical weld
--- is to prove the premise `raw <= 24 A M + 2 B M` from the dual-defect vector
--- factorization, choosing the smaller high radius so no radius ratio appears.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; nonNegative)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
-import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPhysicalOrderedTransferSquaredMajorantRound96Exact as R96
 
 six twelve twentyFour : ℚ
@@ -48,12 +34,9 @@ dualDefectToOutputCompiler raw angular radial output mass
 
     coefficientGap : ℚ
     coefficientGap = twentyFour - two
-      where open import Data.Rational.Base using (_-_)
 
     coefficientGapNN : 0ℚ ≤ coefficientGap
-    coefficientGapNN = Rational.squareNonnegative
-      (1ℚ + 1ℚ + 1ℚ)
-      -- 22 >= 0 is stronger than needed; normalize below by ring equality.
+    coefficientGapNN = toWitness {a? = 0ℚ ℚP.≤? coefficientGap} _
 
     radialMassNN : 0ℚ ≤ radial * mass
     radialMassNN = R96.productNonnegative radialNN massNN
@@ -61,26 +44,24 @@ dualDefectToOutputCompiler raw angular radial output mass
     extraRadialNN : 0ℚ ≤ coefficientGap * (radial * mass)
     extraRadialNN = R96.productNonnegative coefficientGapNN radialMassNN
 
-    raiseCoefficient :
-      twentyFour * angular * mass + two * radial * mass
-      ≤ twentyFour * angular * mass + twentyFour * radial * mass
-    raiseCoefficient =
-      let
-        base = twentyFour * angular * mass + two * radial * mass
-        targetExtra = coefficientGap * (radial * mass)
-        addExtra : base ≤ base + targetExtra
-        addExtra =
-          subst (base ≤_) (ℚP.+-identityʳ base)
-            (ℚP.+-mono-≤ ℚP.≤-refl extraRadialNN)
-        normalization :
-          base + targetExtra
-          ≡ twentyFour * angular * mass + twentyFour * radial * mass
-        normalization = solve (angular ∷ radial ∷ mass ∷ [])
-      in subst (base ≤_) normalization addExtra
+    base = twentyFour * angular * mass + two * radial * mass
+    raised = twentyFour * angular * mass + twentyFour * radial * mass
 
-    factor :
-      twentyFour * angular * mass + twentyFour * radial * mass
-      ≡ twentyFour * (angular + radial) * mass
+    addExtra : base ≤ base + coefficientGap * (radial * mass)
+    addExtra =
+      let
+        zeroToExtra = extraRadialNN
+        shifted = ℚP.+-monoʳ-≤ base zeroToExtra
+      in subst (base ≤_) (ℚP.+-identityʳ base) shifted
+
+    normalization :
+      base + coefficientGap * (radial * mass) ≡ raised
+    normalization = solve (angular ∷ radial ∷ mass ∷ [])
+
+    raiseCoefficient : base ≤ raised
+    raiseCoefficient = subst (base ≤_) normalization addExtra
+
+    factor : raised ≡ twentyFour * (angular + radial) * mass
     factor = solve (angular ∷ radial ∷ mass ∷ [])
 
     finalMeaning :
@@ -91,13 +72,12 @@ dualDefectToOutputCompiler raw angular radial output mass
         (λ selected → twentyFour * (angular + radial) * mass
           ≡ twentyFour * selected * mass)
         complement refl
+
+    raisedToFinal : raised ≡ twentyFour * output * mass
+    raisedToFinal = trans factor finalMeaning
   in
   ℚP.≤-trans rawBound
-    (subst
-      (λ upper →
-        twentyFour * angular * mass + two * radial * mass ≤ upper)
-      (trans factor finalMeaning)
-      raiseCoefficient)
+    (subst (base ≤_) raisedToFinal raiseCoefficient)
 
 round175DualDefectScalarCompilerClosed : Bool
 round175DualDefectScalarCompilerClosed = true
