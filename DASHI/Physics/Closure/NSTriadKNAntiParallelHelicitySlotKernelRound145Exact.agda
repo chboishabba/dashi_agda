@@ -7,25 +7,19 @@ module DASHI.Physics.Closure.NSTriadKNAntiParallelHelicitySlotKernelRound145Exac
 --   Fabian Waleffe, Physics of Fluids A 4 (1992), DOI 10.1063/1.858309.
 --   Constantin--Majda, CMP 115 (1988), DOI 10.1007/BF01218019.
 --
--- The dominant HH slot commutator from Round144 contains
+-- The p/q normalized-curl slot difference has vector kernel
 --
---   (S_p u_p) x u_q - u_p x (S_q u_q),
+--   (P x a) x b - a x (Q x b).
 --
--- with S_j = i \hat j x.  Before the common factor i, the vector kernel is
+-- Exact BAC-CAB algebra gives
 --
---   (P x a) x b - a x (Q x b),
+--   a(P.b) + b(a.Q) - (P+Q)(a.b).
 --
--- where P,Q are the normalized high-frequency directions.
---
--- The exact vector identity is
---
---   (P x a) x b - a x (Q x b)
---     = a (P.b) + b (a.Q) - (P+Q) (a.b).
---
--- If a is transverse to P and b transverse to Q, the two first scalar factors
--- can also be written using P+Q, so EVERY term contains the anti-parallel
--- defect Sigma=P+Q.  Hence the p/q slot commutator vanishes exactly at the
--- anti-parallel HH endpoint P=-Q, without taking absolute values.
+-- If a.P=0 and b.Q=0, the first two scalar factors can be replaced by
+-- (P+Q).b and a.(P+Q).  Thus every term factors through the anti-parallel
+-- defect Sigma=P+Q.  The endpoint Sigma=0 is then a separate zero-normalizing
+-- corollary; this file deliberately does not mark that corollary closed until
+-- a kernel receipt checks the zero normalization on the exact C3 carrier.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -34,9 +28,10 @@ open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
+import DASHI.Physics.Closure.NSTriadKNComplex3AlgebraLaws as Algebra
+import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws as Additive
 import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
 import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact as Cross
-import DASHI.Physics.Closure.NSTriadKNProjectedHelicalSelfForcingVectorRound106Exact as R106
 
 antiParallelDefect :
   ∀ {r} {F : C3.RealField r} →
@@ -142,64 +137,23 @@ slotKernelFactorsThroughAntiParallelDefect {F = F} P Q a b T =
       (cong₂ C3.complex3Add
         (cong (λ scalar → C3.complex3Scale scalar a)
           (trans
-            (Field.bilinearDotAddLeft P Q b)
+            (Additive.bilinearDot3LeftAdd P Q b)
             (cong (C3.complexAdd (C3.bilinearDot3 P b))
               (trans
-                (Field.bilinearDot3Commutative Q b)
+                (Algebra.bilinearDot3Commutative Q b)
                 (bTransverseQ T)))))
         (cong (λ scalar → C3.complex3Scale scalar b)
           (trans
-            (Field.bilinearDot3RightAdd a P Q)
+            (Algebra.bilinearDot3RightAdd a P Q)
             (cong (λ left → C3.complexAdd left (C3.bilinearDot3 a Q))
               (aTransverseP T)))))
       refl)
 
-antiParallelEndpointCancelsSlotKernel :
-  ∀ {r} {F : C3.RealField r}
-    (P Q a b : C3.Complex3 F) →
-  TransverseHighPair P Q a b →
-  antiParallelDefect P Q ≡ C3.complex3Zero F →
-  slotKernel P Q a b ≡ C3.complex3Zero F
-antiParallelEndpointCancelsSlotKernel {F = F} P Q a b T defectZero =
-  trans
-    (slotKernelFactorsThroughAntiParallelDefect P Q a b T)
-    (trans
-      (cong
-        (λ sigma →
-          C3.complex3Subtract
-            (C3.complex3Add
-              (C3.complex3Scale (C3.bilinearDot3 sigma b) a)
-              (C3.complex3Scale (C3.bilinearDot3 a sigma) b))
-            (C3.complex3Scale (C3.bilinearDot3 a b) sigma))
-        defectZero)
-      endpoint)
-  where
-  endpoint :
-    C3.complex3Subtract
-      (C3.complex3Add
-        (C3.complex3Scale
-          (C3.bilinearDot3 (C3.complex3Zero F) b) a)
-        (C3.complex3Scale
-          (C3.bilinearDot3 a (C3.complex3Zero F)) b))
-      (C3.complex3Scale
-        (C3.bilinearDot3 a b) (C3.complex3Zero F))
-    ≡ C3.complex3Zero F
-  endpoint =
-    R.solve 12
-      (λ ax ay az bx by bz →
-        R.Κ (C3.complex3Zero F) R.⊜ R.Κ (C3.complex3Zero F))
-      refl
-      (C3.x a) (C3.y a) (C3.z a)
-      (C3.x b) (C3.y b) (C3.z b)
-      (C3.x a) (C3.y a) (C3.z a)
-      (C3.x b) (C3.y b) (C3.z b)
-    where module R = Field.VectorSolver F
-
 round145HighHighSlotKernelAntiParallelFactorizationClosed : Bool
 round145HighHighSlotKernelAntiParallelFactorizationClosed = true
 
-round145AntiParallelEndpointCancelsSlotKernel : Bool
-round145AntiParallelEndpointCancelsSlotKernel = true
+round145AntiParallelEndpointZeroNormalizationClosed : Bool
+round145AntiParallelEndpointZeroNormalizationClosed = false
 
 round145IntraShellL2AggregationClosed : Bool
 round145IntraShellL2AggregationClosed = false
@@ -210,6 +164,10 @@ round145PackageAClosed = false
 round145HighHighSlotKernelAntiParallelFactorizationClosedIsTrue :
   round145HighHighSlotKernelAntiParallelFactorizationClosed ≡ true
 round145HighHighSlotKernelAntiParallelFactorizationClosedIsTrue = refl
+
+round145AntiParallelEndpointZeroNormalizationClosedIsFalse :
+  round145AntiParallelEndpointZeroNormalizationClosed ≡ false
+round145AntiParallelEndpointZeroNormalizationClosedIsFalse = refl
 
 round145PackageAClosedIsFalse : round145PackageAClosed ≡ false
 round145PackageAClosedIsFalse = refl
