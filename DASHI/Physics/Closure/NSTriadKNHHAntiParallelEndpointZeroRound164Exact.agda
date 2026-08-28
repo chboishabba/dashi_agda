@@ -3,20 +3,38 @@ module DASHI.Physics.Closure.NSTriadKNHHAntiParallelEndpointZeroRound164Exact wh
 ------------------------------------------------------------------------
 -- ROUND164 / EXACT ZERO OF THE HH HELICITY-SLOT KERNEL AT ANTI-PARALLELITY
 --
--- Round145 factors the p/q normalized-curl slot kernel through the defect
--- Sigma = P+Q.  Here we close the endpoint Sigma=0 exactly on the same C3
--- carrier.  No norm, angle, division, or square root is used.
+-- Round145 factors the p/q normalized-curl slot kernel through Sigma=P+Q.
+-- This closes the endpoint Sigma=0 exactly on the same C3 carrier.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
-import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAlgebraProgram as Hermitian
 import DASHI.Physics.Closure.NSTriadKNProjectedHelicalSelfForcingVectorRound106Exact as R106
 import DASHI.Physics.Closure.NSTriadKNAntiParallelHelicitySlotKernelRound145Exact as R145
+
+bilinearDot3ZeroLeft :
+  ∀ {r} {F : C3.RealField r} (v : C3.Complex3 F) →
+  C3.bilinearDot3 (C3.complex3Zero F) v ≡ C3.complexZero F
+bilinearDot3ZeroLeft {F = F} (C3.complex3 vx vy vz)
+  rewrite Field.complexMultiplyZeroLeft vx
+        | Field.complexMultiplyZeroLeft vy
+        | Field.complexMultiplyZeroLeft vz
+        | Field.complexAddZeroLeft (C3.complexZero F)
+        | Field.complexAddZeroLeft (C3.complexZero F) = refl
+
+bilinearDot3ZeroRight :
+  ∀ {r} {F : C3.RealField r} (v : C3.Complex3 F) →
+  C3.bilinearDot3 v (C3.complex3Zero F) ≡ C3.complexZero F
+bilinearDot3ZeroRight {F = F} (C3.complex3 vx vy vz)
+  rewrite Field.complexMultiplyZeroRight vx
+        | Field.complexMultiplyZeroRight vy
+        | Field.complexMultiplyZeroRight vz
+        | Field.complexAddZeroLeft (C3.complexZero F)
+        | Field.complexAddZeroLeft (C3.complexZero F) = refl
 
 slotKernelZeroAtAntiParallelEndpoint :
   ∀ {r} {F : C3.RealField r}
@@ -41,8 +59,8 @@ slotKernelZeroAtAntiParallelEndpoint {F = F} P Q a b T defectZero =
         (R145.antiParallelDefect P Q))
     ≡ C3.complex3Zero F
   endpoint rewrite defectZero
-                   | Hermitian.bilinearDot3ZeroLeft F b
-                   | Hermitian.bilinearDot3ZeroRight F a
+                   | bilinearDot3ZeroLeft b
+                   | bilinearDot3ZeroRight a
                    | R106.complex3ScaleZeroScalar a
                    | R106.complex3ScaleZeroScalar b
                    | R106.complex3ScaleZeroVector (C3.bilinearDot3 a b)
