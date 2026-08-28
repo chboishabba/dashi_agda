@@ -11,6 +11,7 @@ module DASHI.Foundations.BishopBaselFiniteProductCoefficientLimitExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Unnormalised using (0ℚᵘ)
+import Data.Rational.Unnormalised.Properties as ℚP
 
 import Real as BishopReal
 import RealProperties as BishopP
@@ -36,7 +37,7 @@ finiteProductLinearIsNegativePrefix :
     (embeddedNegativeBaselPrefix count)
 finiteProductLinearIsNegativePrefix count =
   BishopP.⋆-cong
-    (BishopP.≃-reflexive
+    (ℚP.≃-reflexive
       (Finite.finiteSineProductLinearIsNegativeBaselPrefix count))
 
 negativePrefixIsNegativeBaselPartial :
@@ -52,9 +53,8 @@ negativePrefixIsNegativeBaselPartial zero =
     BishopP.≃-refl
 negativePrefixIsNegativeBaselPartial (suc count) =
   let
-    old = embeddedNegativeBaselPrefix count
-    term = Basel.baselTerm count
     partial = BishopSequence.SeriesOf Basel.baselTerm count
+    term = Basel.baselTerm count
     open BishopP.ℝ-Solver
   in
   BishopP.≃-trans
