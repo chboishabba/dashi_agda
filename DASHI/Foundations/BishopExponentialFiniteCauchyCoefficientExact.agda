@@ -16,7 +16,7 @@ open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Fin.Base using (Fin; toℕ)
 import Data.Fin.Properties as FinP
 import Data.Nat.Base as ℕ
-open import Data.Rational.Unnormalised using (1ℚᵘ)
+import Data.Nat.Combinatorics as Comb
 
 import Algebra.Properties.Semiring.Sum as SemiringSum
 
@@ -25,6 +25,7 @@ import RealProperties as BishopP
 
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopExponentialBinomialCoefficientExact as Coeff
+import DASHI.Foundations.BishopFiniteDegreeOneGeometricIdentityExact as NatReal
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 module BishopSum = SemiringSum BishopP.+-*-semiring
@@ -68,7 +69,7 @@ convolutionTermIsScaledBinomial left right n index =
     rightPower = BishopReal.pow right (n ℕ.∸ k)
     stdLeftPower = Coeff.BishopSemiringExp._^_ left k
     stdRightPower = Coeff.BishopSemiringExp._^_ right (n ℕ.∸ k)
-    choose = n Data.Nat.Combinatorics.C k
+    choose = n Comb.C k
     common = Exp.embed (Exp.inverseFactorial n)
 
     powers :
@@ -84,7 +85,7 @@ convolutionTermIsScaledBinomial left right n index =
     chooseTerm :
       BishopReal._≃_
         (BishopReal._*_
-          (DASHI.Foundations.BishopFiniteDegreeOneGeometricIdentityExact.natReal choose)
+          (NatReal.natReal choose)
           (BishopReal._*_ leftPower rightPower))
         (Coeff.BishopBinomial.binomialTerm left right n index)
     chooseTerm =
