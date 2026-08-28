@@ -16,9 +16,10 @@ module DASHI.Foundations.BishopNatSquareRootDividedTangentExact where
 
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Integer.Base using (+_)
-open import Data.Nat.Base using (_≤_)
+open import Data.Nat.Base using (_≤_; _∸_)
 open import Data.Rational.Unnormalised as ℚ using (0ℚᵘ; _/_)
 import Data.Rational.Unnormalised.Properties as ℚP
+open import Data.Sum.Base using (inj₂)
 
 import Inverse as BishopInverse
 import Real as BishopReal
@@ -60,8 +61,7 @@ denominatorNonzero :
   ∀ {n : Nat} → suc 0 ≤ n →
   BishopReal._≄0 (denominator n)
 denominatorNonzero nPositive =
-  Data.Sum.Base.inj₂
-    (BishopP.posx⇒0<x (denominatorPositive nPositive))
+  inj₂ (BishopP.posx⇒0<x (denominatorPositive nPositive))
 
 inverseDenominator :
   (n : Nat) → suc 0 ≤ n → BishopReal.ℝ
@@ -83,7 +83,7 @@ crossAsDenominatorOrder :
   r ≤ n →
   BishopReal._≤_
     (BishopReal._+_
-      (BishopReal._*_ (denominator n) (rootNat (n Agda.Builtin.Nat.∸ r)))
+      (BishopReal._*_ (denominator n) (rootNat (n ∸ r)))
       (embedNat r))
     (BishopReal._*_ (denominator n) (rootNat n))
 crossAsDenominatorOrder {n} {r} r≤n =
@@ -94,30 +94,25 @@ crossAsDenominatorOrder {n} {r} r≤n =
         (BishopReal._*_ Tangent.two (Tangent.embedNat n))
         (BishopReal._*_ (denominator n) (rootNat n))
     rightSquare =
-      let open BishopP.ℝ-Solver
-      in
       BishopP.≃-trans
         (BishopP.*-congˡ
           (BishopP.≃-symm
             (Square.canonicalFloorSquareRootSquaresToNat n)))
-        (solve 2
-          (λ two′ root′ → two′ ⊗ (root′ ⊗ root′)
-            ⊜ (two′ ⊗ root′) ⊗ root′)
-          BishopP.≃-refl Tangent.two (rootNat n))
+        (BishopP.*-assoc
+          Tangent.two (rootNat n) (rootNat n))
     leftAssoc :
       BishopReal._≃_
         (BishopReal._+_
           (BishopReal._*_ Tangent.two
-            (BishopReal._*_ (rootNat n) (rootNat (n Agda.Builtin.Nat.∸ r))))
+            (BishopReal._*_ (rootNat n) (rootNat (n ∸ r))))
           (embedNat r))
         (BishopReal._+_
-          (BishopReal._*_ (denominator n) (rootNat (n Agda.Builtin.Nat.∸ r)))
+          (BishopReal._*_ (denominator n) (rootNat (n ∸ r)))
           (embedNat r))
     leftAssoc =
       BishopP.+-congʳ
-        (BishopP.≃-symm
-          (BishopP.*-assoc
-            Tangent.two (rootNat n) (rootNat (n Agda.Builtin.Nat.∸ r))))
+        (BishopP.*-assoc
+          Tangent.two (rootNat n) (rootNat (n ∸ r)))
   in
   BishopP.≤-respʳ-≃ rightSquare
     (BishopP.≤-respˡ-≃ leftAssoc raw)
@@ -128,7 +123,7 @@ dividedTangentAdditive :
   r ≤ n →
   BishopReal._≤_
     (BishopReal._+_
-      (rootNat (n Agda.Builtin.Nat.∸ r))
+      (rootNat (n ∸ r))
       (BishopReal._*_
         (inverseDenominator n nPositive)
         (embedNat r)))
@@ -148,26 +143,24 @@ dividedTangentAdditive {n} {r} nPositive r≤n =
       BishopReal._≃_
         (BishopReal._*_ inv
           (BishopReal._+_
-            (BishopReal._*_ denom (rootNat (n Agda.Builtin.Nat.∸ r)))
+            (BishopReal._*_ denom (rootNat (n ∸ r)))
             (embedNat r)))
         (BishopReal._+_
-          (rootNat (n Agda.Builtin.Nat.∸ r))
+          (rootNat (n ∸ r))
           (BishopReal._*_ inv (embedNat r)))
     leftNormalize =
-      let open BishopP.ℝ-Solver
-      in
       BishopP.≃-trans
         (BishopP.*-distribˡ-+
           inv
-          (BishopReal._*_ denom (rootNat (n Agda.Builtin.Nat.∸ r)))
+          (BishopReal._*_ denom (rootNat (n ∸ r)))
           (embedNat r))
         (BishopP.+-cong
           (BishopP.≃-trans
             (BishopP.≃-symm
-              (BishopP.*-assoc inv denom (rootNat (n Agda.Builtin.Nat.∸ r))))
+              (BishopP.*-assoc inv denom (rootNat (n ∸ r))))
             (BishopP.≃-trans
               (BishopP.*-congʳ inverseLaw)
-              (BishopP.*-identityˡ (rootNat (n Agda.Builtin.Nat.∸ r)))))
+              (BishopP.*-identityˡ (rootNat (n ∸ r)))))
           BishopP.≃-refl)
     rightNormalize :
       BishopReal._≃_
