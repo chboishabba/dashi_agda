@@ -4,6 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
 
+open import DASHI.Cognition.PNF.ComplexityArithmetic
 open import DASHI.Cognition.PNF.DreamFlowRuntimeComplexityExact
 open import DASHI.Cognition.PNF.ParentInterfaceReduction
 open import DASHI.Cognition.PNF.SparseFibredFrontier
@@ -24,14 +25,14 @@ record BoundaryKey : Set where
   constructor boundaryKey
   field
     keyFamily : BoundaryKeyFamily
-    keyA keyB : Nat
+    keyA keyB keyC : Nat
 
 open BoundaryKey public
 
 record AffectedBoundaryKeys : Set where
   constructor affectedBoundaryKeys
   field
-    inputDeltaAtoms : Nat
+    inputBoundaryDeltaAtoms : Nat
     affectedObjectKeys : Nat
     affectedFactorKeys : Nat
     affectedDemandKeys : Nat
@@ -118,6 +119,8 @@ record DeltaNativeLookupBoundary : Set where
     sparseBoundary : SparseFibredFrontierBoundary
     changedAdmittedExportCount : Nat
     changedLookupProjectionCount : Nat
+    lookupChangesDoNotExceedAdmittedChanges :
+      changedLookupProjectionCount ≤ᶜ changedAdmittedExportCount
 
 open DeltaNativeLookupBoundary public
 
