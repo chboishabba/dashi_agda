@@ -18,13 +18,15 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosBishopGeometricKernelBridgeE
 -- brackets for the Bishop exponential.  It does not require global exp-add.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; suc; zero)
+open import Agda.Builtin.Nat using (suc; zero)
 
 import Real as BishopReal
 
 import DASHI.Foundations.BishopVendoredSubmoduleProvenanceExact as Vendored
 import DASHI.Foundations.BishopFiniteDegreeOneGeometricIdentityExact as DirectIdentity
 import DASHI.Foundations.BishopNegativeExponentialFiniteDegreeOneKernelExact as DirectKernel
+import DASHI.Foundations.BishopNegativeExponentialReciprocalSquareExact as Cross
+import DASHI.Foundations.BishopNegativeExponentialReciprocalSquareDivisionExact as Division
 import DASHI.Foundations.BishopNegativeExponentialUnitIntervalExact as Unit
 import DASHI.Physics.YangMills.BalabanStepVFiniteGeometricBackendExact as StepV
 import DASHI.Physics.YangMills.BalabanStepVFiniteGeometricInductionExact as Induction
@@ -64,16 +66,11 @@ pointwiseDominationClosesFiniteWeightedSum =
 
 directFiniteErdosKernel :
   ∀ {x} →
-  Unit.PositiveUnitIntervalPoint x →
+  (inputs : Unit.PositiveUnitIntervalPoint x) →
   ∀ cutoff →
   BishopReal._<_
-    (DirectIdentity.weightedPartial
-      (DASHI.Foundations.BishopNegativeExponentialReciprocalSquareExact.q x)
-      cutoff)
-    (DASHI.Foundations.BishopNegativeExponentialReciprocalSquareDivisionExact.inverseSquare
-      x
-      (DASHI.Foundations.BishopNegativeExponentialReciprocalSquareDivisionExact.xNonzero
-        _))
+    (DirectIdentity.weightedPartial (Cross.q x) cutoff)
+    (Division.inverseSquare x (Division.xNonzero inputs))
 directFiniteErdosKernel inputs cutoff =
   DirectKernel.finiteNegativeExponentialDegreeOneKernel inputs cutoff
 
@@ -113,8 +110,12 @@ currentWeightedGeometricFrontier =
 --     sum_{v=1}^N v q^v < 1/x^2.
 --
 -- This bypasses the old generic pointwise-domination socket for the actual
--- Erdos ratio.  The next partition-specific question is whether the x generated
--- by the square-root tangent reduction is in this unit interval throughout the
--- consumer range, or whether the finite convolution needs a small/large-x
--- split.
+-- Erdos ratio.  The remaining partition-specific weld is the exponential shift
+-- comparison supplied by the square-root tangent estimate:
+--
+--   exp(c sqrt(n-r))
+--     <= exp(c sqrt(n)) * exp(-r c/(2 sqrt(n))).
+--
+-- That is where the native Bishop Cauchy-product / exp-additivity theorem now
+-- has highest alpha.
 ------------------------------------------------------------------------
