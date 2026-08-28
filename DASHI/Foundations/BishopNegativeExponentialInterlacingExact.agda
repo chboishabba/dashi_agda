@@ -9,7 +9,11 @@ module DASHI.Foundations.BishopNegativeExponentialInterlacingExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ)
+open import Data.Integer.Base using (+_)
+import Data.Integer.Properties as ℤP
+import Data.Nat.Properties as ℕP
+open import Data.Rational.Unnormalised as ℚ using (0ℚᵘ; 1ℚᵘ; _/_)
+import Data.Rational.Unnormalised.Properties as ℚP
 
 import Real as BishopReal
 import RealProperties as BishopP
@@ -17,6 +21,7 @@ import Sequence as BishopSequence
 
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Signs
+import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineInterlacingExact as SignParity
 import DASHI.Physics.YangMills.BalabanBishopAlternatingInterlacingFromDecreasingTermsExact as Alt
 import DASHI.Physics.YangMills.BalabanBishopAlternatingBracketFromMonotoneLimitsExact as Bracket
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -34,14 +39,20 @@ absIsSelf point =
   BishopP.0≤x⇒∣x∣≃x
     (BishopP.nonNegx⇒0≤x (nonnegative point))
 
+reciprocalNonnegative : ∀ n →
+  BishopReal.NonNegative (Exp.embed (+ 1 / suc n))
+reciprocalNonnegative n =
+  BishopP.0≤x⇒nonNegx
+    (BishopP.p≤q⇒p⋆≤q⋆
+      0ℚᵘ (+ 1 / suc n)
+      (ℚP.nonNegative⁻¹ (+ 1 / suc n)))
+
 unitReciprocalBelowOne : ∀ n →
   BishopReal._≤_ (Exp.embed (+ 1 / suc n)) BishopReal.1ℝ
 unitReciprocalBelowOne n =
   BishopP.p≤q⇒p⋆≤q⋆
     (+ 1 / suc n) 1ℚᵘ
-    (Data.Rational.Unnormalised.Properties.*≤*
-      (Data.Integer.Properties.+≤+
-        (Data.Nat.Properties.n≤1+n n)))
+    (ℚ.*≤* (ℤP.+≤+ (ℕP.n≤1+n n)))
 
 magnitudeRatioBelowOne :
   ∀ {x} → UnitIntervalPoint x → ∀ n →
@@ -53,24 +64,22 @@ magnitudeRatioBelowOne :
 magnitudeRatioBelowOne {x} point n =
   let
     reciprocal = Exp.embed (+ 1 / suc n)
-    reciprocalNN =
-      Exp.embeddedInverseFactorialNonnegative zero
-    x≤1 = belowOne point
-    reciprocal≤1 = unitReciprocalBelowOne n
-    product≤one =
+    raw :
+      BishopReal._≤_
+        (BishopReal._*_ x reciprocal)
+        (BishopReal._*_ BishopReal.1ℝ BishopReal.1ℝ)
+    raw =
       BishopP.*-mono-≤
         (nonnegative point)
-        (BishopP.0≤x⇒nonNegx
-          (BishopP.p≤q⇒p⋆≤q⋆
-            0ℚᵘ (+ 1 / suc n)
-            (Data.Rational.Unnormalised.Properties.nonNegative⁻¹ (+ 1 / suc n))))
-        x≤1 reciprocal≤1
+        (reciprocalNonnegative n)
+        (belowOne point)
+        (unitReciprocalBelowOne n)
   in
-  BishopP.≤-respˡ-≃
-    (BishopP.*-congʳ (absIsSelf point))
-    (BishopP.≤-respʳ-≃
-      (BishopP.*-identityˡ BishopReal.1ℝ)
-      product≤one)
+  BishopP.≤-respʳ-≃
+    (BishopP.*-identityˡ BishopReal.1ℝ)
+    (BishopP.≤-respˡ-≃
+      (BishopP.*-congʳ (absIsSelf point))
+      raw)
 
 magnitudeDecreasing :
   ∀ {x} → UnitIntervalPoint x → ∀ n →
@@ -114,6 +123,15 @@ powNegativeByAlternatingSign x (suc n) =
         ⊜ (s ⊗ (⊝ Κ 1ℚᵘ)) ⊗ (p ⊗ x′))
       BishopP.≃-refl sign power x)
 
+powerAbsIsPower :
+  ∀ {x} → UnitIntervalPoint x → ∀ n →
+  BishopReal._≃_
+    (BishopReal.∣_∣ (BishopReal.pow x n))
+    (BishopReal.pow x n)
+powerAbsIsPower {x} point n =
+  BishopP.nonNegx⇒∣x∣≃x
+    (BishopSequence.nonNegx⇒nonNegxⁿ n (nonnegative point))
+
 negativeExpTermIsAlternatingMagnitude :
   ∀ {x} → UnitIntervalPoint x → ∀ n →
   BishopReal._≃_
@@ -122,35 +140,52 @@ negativeExpTermIsAlternatingMagnitude :
       (Signs.alternatingSign n)
       (Exp.expMagnitudeTerm x n))
 negativeExpTermIsAlternatingMagnitude {x} point n =
+  let
+    sign = Signs.alternatingSign n
+    power = BishopReal.pow x n
+    coefficient = Exp.embed (Exp.inverseFactorial n)
+    open BishopP.ℝ-Solver
+  in
   BishopP.≃-trans
     (BishopP.*-congʳ (powNegativeByAlternatingSign x n))
-    (let
-      sign = Signs.alternatingSign n
-      power = BishopReal.pow x n
-      coefficient = Exp.embed (Exp.inverseFactorial n)
-      open BishopP.ℝ-Solver
-     in
-     BishopP.≃-trans
-       (solve 3
-         (λ s p c → (s ⊗ p) ⊗ c ⊜ s ⊗ (c ⊗ p))
-         BishopP.≃-refl sign power coefficient)
-       (BishopP.*-congˡ
-         (BishopP.*-congˡ
-           (BishopP.≃-symm (absIsSelf point |> powerAbs n)))))
-  where
-  infixl 0 _|>_
-  _|>_ : ∀ {A B : Set} → A → (A → B) → B
-  value |> f = f value
+    (BishopP.≃-trans
+      (solve 3
+        (λ s p c → (s ⊗ p) ⊗ c ⊜ s ⊗ (c ⊗ p))
+        BishopP.≃-refl sign power coefficient)
+      (BishopP.*-congˡ
+        (BishopP.*-congˡ
+          (BishopP.≃-symm (powerAbsIsPower point n)))))
 
-  powerAbs : ∀ n →
-    BishopReal._≃_ (BishopReal.∣_∣ x) x →
-    BishopReal._≃_
-      (BishopReal.∣_∣ (BishopReal.pow x n))
-      (BishopReal.pow x n)
-  powerAbs n absx=x =
-    BishopP.≃-trans
-      (BishopSequence.∣xⁿ∣≃∣x∣ⁿ x n)
-      (BishopP.pow-cong n absx=x)
+evenTermIsMagnitude :
+  ∀ {x} → UnitIntervalPoint x → ∀ index →
+  BishopReal._≃_
+    (Exp.expTerm (BishopReal.- x) (Alt.double index))
+    (Exp.expMagnitudeTerm x (Alt.double index))
+evenTermIsMagnitude {x} point index =
+  BishopP.≃-trans
+    (negativeExpTermIsAlternatingMagnitude point (Alt.double index))
+    (BishopP.≃-trans
+      (BishopP.*-congʳ (SignParity.alternatingSignEven index))
+      (BishopP.*-identityˡ
+        (Exp.expMagnitudeTerm x (Alt.double index))))
+
+oddTermIsNegativeMagnitude :
+  ∀ {x} → UnitIntervalPoint x → ∀ index →
+  BishopReal._≃_
+    (Exp.expTerm (BishopReal.- x) (suc (Alt.double index)))
+    (BishopReal.-
+      (Exp.expMagnitudeTerm x (suc (Alt.double index))))
+oddTermIsNegativeMagnitude {x} point index =
+  BishopP.≃-trans
+    (negativeExpTermIsAlternatingMagnitude point
+      (suc (Alt.double index)))
+    (BishopP.≃-trans
+      (BishopP.*-congʳ (SignParity.alternatingSignOdd index))
+      (let open BishopP.ℝ-Solver
+       in solve 1
+          (λ m → (⊝ Κ 1ℚᵘ) ⊗ m ⊜ ⊝ m)
+          BishopP.≃-refl
+          (Exp.expMagnitudeTerm x (suc (Alt.double index)))))
 
 negativeExponentialAlternatingData :
   ∀ {x} → UnitIntervalPoint x →
@@ -161,13 +196,8 @@ negativeExponentialAlternatingData {x} point = record
   ; representedLimit = Exp.bishopExp (BishopReal.- x)
   ; magnitudeNonnegative = Exp.expMagnitudeNonnegative x
   ; magnitudeDecreasing = magnitudeDecreasing point
-  ; evenTermIsPositiveMagnitude = λ index →
-      BishopP.≃-trans
-        (negativeExpTermIsAlternatingMagnitude point (Alt.double index))
-        (BishopP.*-congʳ
-          (Signs.alternatingSignAbsOne index))
-  ; oddTermIsNegativeMagnitude = λ index →
-      negativeExpTermIsAlternatingMagnitude point (suc (Alt.double index))
+  ; evenTermIsPositiveMagnitude = evenTermIsMagnitude point
+  ; oddTermIsNegativeMagnitude = oddTermIsNegativeMagnitude point
   ; seriesConvergesToRepresentedLimit =
       Exp.bishopExpConverges (BishopReal.- x)
   }
