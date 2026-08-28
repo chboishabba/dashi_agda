@@ -5,13 +5,12 @@ module DASHI.EverythingPartitionAsymptotics where
 -- partition lane.
 --
 -- The analytic layer is built directly over the exact git-pinned
--- `vendor/bishop` submodule.  The canonical Nat square-root candidate is now a
--- `Real.mkℝ` value obtained from executable floor-square-root rational
--- approximants with source-level cross-precision regularity and a direct
--- vendored `NonNegative` proof.  The current analytic tranche also includes
--- the semantic square law, division-free tangent estimate, concrete factorial
--- exponential series, native Cauchy tail control, finite rectangle products,
--- positive-side exponential order, and Machin-pi sqrt(2/3) construction.
+-- `vendor/bishop` submodule.  Current source includes the semantic square law,
+-- division-free root tangent estimate, concrete factorial exponential series,
+-- native Cauchy-tail and finite-rectangle owners, negative-exponential
+-- alternating interlacing, sharp finite degree-one geometric identity/bound,
+-- the direct exp(-x) reciprocal-square kernel, and the Machin-pi sqrt(2/3)
+-- constant construction.
 ------------------------------------------------------------------------
 
 import DASHI.Foundations.BishopVendoredSubmoduleProvenanceExact
@@ -31,6 +30,14 @@ import DASHI.Foundations.BishopAbsoluteSeriesTailExact
 import DASHI.Foundations.BishopFiniteSeriesRectangleProductExact
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact
 import DASHI.Foundations.BishopExponentialPositiveOrderExact
+import DASHI.Foundations.BishopFiniteDegreeOneGeometricIdentityExact
+import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact
+import DASHI.Foundations.BishopNegativeExponentialInterlacingExact
+import DASHI.Foundations.BishopNegativeExponentialQuarticBracketExact
+import DASHI.Foundations.BishopNegativeExponentialUnitIntervalExact
+import DASHI.Foundations.BishopNegativeExponentialReciprocalSquareExact
+import DASHI.Foundations.BishopNegativeExponentialReciprocalSquareDivisionExact
+import DASHI.Foundations.BishopNegativeExponentialFiniteDegreeOneKernelExact
 import DASHI.Foundations.BishopSqrtTwoThirdsMachinConstantExact
 import DASHI.Mathematics.NumberTheory.FiniteNatFloorSquareRootExact
 import DASHI.Mathematics.NumberTheory.FiniteNatFractionOrderExact
