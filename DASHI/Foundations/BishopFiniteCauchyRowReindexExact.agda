@@ -15,7 +15,7 @@ module DASHI.Foundations.BishopFiniteCauchyRowReindexExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Fin.Base using (Fin; toℕ)
+open import Data.Fin.Base using (toℕ)
 import Data.Nat.Base as ℕ
 
 import Algebra.Properties.Semiring.Sum as SemiringSum
@@ -166,9 +166,10 @@ triangleIsMertensRow left right (suc count) =
   let
     a0 = left zero
     b0 = right zero
-    shiftedRightSum = FinSum.finSum (shift right) count
+    scaledSum =
+      FinSum.finSum
+        (λ n → BishopReal._*_ a0 (right (suc n))) count
     shiftedTriangle = trianglePartial (shift left) right count
-    shiftedRow = mertensRowPartial (shift left) right count
     open BishopP.ℝ-Solver
   in
   BishopP.≃-trans
@@ -178,33 +179,24 @@ triangleIsMertensRow left right (suc count) =
         (cauchyCoefficientZero left right)
         (shiftedCoefficientSum left right count))
       (BishopP.≃-trans
-        (BishopP.+-congˡ
-          shiftedTriangle
-          (BishopP.+-congˡ
-            (FinSum.finSum
-              (λ n → BishopReal._*_ a0 (right (suc n))) count)
-            BishopP.≃-refl))
+        (solve 3
+          (λ head scaled tail →
+            head ⊕ (scaled ⊕ tail)
+            ⊜ (head ⊕ scaled) ⊕ tail)
+          BishopP.≃-refl
+          (BishopReal._*_ a0 b0)
+          scaledSum
+          shiftedTriangle)
         (BishopP.≃-trans
-          (solve 4
-            (λ head scaled tail →
-              head ⊕ (scaled ⊕ tail)
-              ⊜ (head ⊕ scaled) ⊕ tail)
-            BishopP.≃-refl
-            (BishopReal._*_ a0 b0)
-            (FinSum.finSum
-              (λ n → BishopReal._*_ a0 (right (suc n))) count)
-            shiftedTriangle
-            BishopReal.0ℝ)
-          (BishopP.≃-trans
-            (BishopP.+-cong
-              (BishopP.≃-trans
-                (BishopP.+-congˡ
-                  (BishopReal._*_ a0 b0)
-                  (scaledShiftedRightSum left right count))
-                (headAndShiftedRightIsPrefix left right count))
-              (triangleIsMertensRow (shift left) right count))
-            (BishopP.≃-symm
-              (mertensRowHead left right count))))))
+          (BishopP.+-cong
+            (BishopP.≃-trans
+              (BishopP.+-congʳ
+                (BishopReal._*_ a0 b0)
+                (scaledShiftedRightSum left right count))
+              (headAndShiftedRightIsPrefix left right count))
+            (triangleIsMertensRow (shift left) right count))
+          (BishopP.≃-symm
+            (mertensRowHead left right count)))))
 
 bishopFiniteCauchyRowReindexLevel : ProofLevel
 bishopFiniteCauchyRowReindexLevel = machineChecked
