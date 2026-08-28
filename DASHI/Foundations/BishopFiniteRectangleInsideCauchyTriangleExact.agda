@@ -22,6 +22,7 @@ import RealProperties as BishopP
 import Sequence as BishopSequence
 
 import DASHI.Foundations.BishopFinSumSeriesBridgeExact as FinSum
+import DASHI.Foundations.BishopFiniteSeriesExtensionalityExact as Ext
 import DASHI.Foundations.BishopFiniteSeriesRectangleProductExact as Rectangle
 import DASHI.Foundations.BishopFiniteCauchyRowReindexExact as Row
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -100,7 +101,7 @@ finPrefixMonotone {terms} termNonnegative {small} {large} small≤large =
   BishopP.≤-respʳ-≃
     (BishopP.≃-symm (FinSum.finSumIsSeriesOf terms large))
     (BishopP.≤-respˡ-≃
-      (FinSum.finSumIsSeriesOf terms small)
+      (BishopP.≃-symm (FinSum.finSumIsSeriesOf terms small))
       (BishopSequence.isIncreasing⇒isIncreasing₂
         (partialSumsIncreasing termNonnegative)
         large small small≤large))
@@ -122,7 +123,7 @@ rectangleSumIsNativeRows :
     (Rectangle.rectangleSum left right height width)
     (rectangleNativeRows left right height width)
 rectangleSumIsNativeRows left right height width =
-  DASHI.Foundations.BishopFiniteSeriesExtensionalityExact.finiteSumCongruent
+  Ext.finiteSumCongruent
     (λ index →
       BishopP.*-congˡ
         (BishopP.≃-symm
@@ -211,7 +212,8 @@ rectangleInsideTriangle
       (allRowsIsMertensRow left right (height + width))
       (BishopP.≤-trans
         (BishopP.≤-respˡ-≃
-          (rectangleSumIsNativeRows left right height width)
+          (BishopP.≃-symm
+            (rectangleSumIsNativeRows left right height width))
           (rectangleRowsBelowTriangleRows
             leftNonnegative rightNonnegative height width))
         (firstRowsBelowAllRows
@@ -230,8 +232,7 @@ rectangleProductInsideTriangle :
 rectangleProductInsideTriangle
     {left} {right} leftNonnegative rightNonnegative height width =
   BishopP.≤-respˡ-≃
-    (BishopP.≃-symm
-      (Rectangle.rectangleProduct left right height width))
+    (Rectangle.rectangleProduct left right height width)
     (rectangleInsideTriangle
       leftNonnegative rightNonnegative height width)
 
