@@ -17,7 +17,8 @@ module DASHI.Foundations.BishopFiniteDegreeOneGeometricIdentityExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ; _/_)
 
 import Real as BishopReal
 import RealProperties as BishopP
@@ -39,8 +40,7 @@ natRealSuccessor n =
       (BishopP.⋆-distrib-+
         (NatEmbed.natAsRational n)
         (+ 1 / 1))
-      (BishopP.+-cong BishopP.≃-refl
-        (BishopP.≃-reflexive (λ _ → Data.Rational.Unnormalised.Properties.≃-refl))))
+      (BishopP.+-cong BishopP.≃-refl BishopP.≃-refl))
 
 weightedPartial : BishopReal.ℝ → Nat → BishopReal.ℝ
 weightedPartial q zero = BishopReal.0ℝ
@@ -87,6 +87,8 @@ finiteDegreeOneGeometricIdentity q (suc count) =
     coefficient = natReal (suc count)
     n = natReal count
     p = BishopReal.pow q (suc count)
+    pq = BishopReal._*_ p q
+    pqq = BishopReal._*_ pq q
     open BishopP.ℝ-Solver
 
     distributed :
@@ -118,9 +120,7 @@ finiteDegreeOneGeometricIdentity q (suc count) =
             (BishopReal._-_
               q
               (BishopReal._*_ coefficient p))
-            (BishopReal._*_
-              n
-              (BishopReal._*_ p q)))
+            (BishopReal._*_ n pq))
           (BishopReal._*_
             (square gap)
             (BishopReal._*_ coefficient p)))
@@ -129,16 +129,14 @@ finiteDegreeOneGeometricIdentity q (suc count) =
         (finiteDegreeOneGeometricIdentity q count)
         BishopP.≃-refl
 
-    finalAlgebra :
+    algebraBeforeCoefficientTransport :
       BishopReal._≃_
         (BishopReal._+_
           (BishopReal._+_
             (BishopReal._-_
               q
               (BishopReal._*_ coefficient p))
-            (BishopReal._*_
-              n
-              (BishopReal._*_ p q)))
+            (BishopReal._*_ n pq))
           (BishopReal._*_
             (square gap)
             (BishopReal._*_ coefficient p)))
@@ -146,31 +144,62 @@ finiteDegreeOneGeometricIdentity q (suc count) =
           (BishopReal._-_
             q
             (BishopReal._*_
-              (natReal (suc (suc count)))
-              (BishopReal._*_ p q)))
-          (BishopReal._*_
-            (natReal (suc count))
+              (BishopReal._+_ coefficient BishopReal.1ℝ)
+              pq))
+          (BishopReal._*_ coefficient pqq))
+    algebraBeforeCoefficientTransport =
+      solve 4
+        (λ q′ n′ c p′ →
+          ((q′ ⊖ (c ⊗ p′)) ⊕ (n′ ⊗ (p′ ⊗ q′)))
+            ⊕ (((Κ 1ℚᵘ ⊖ q′) ⊗ (Κ 1ℚᵘ ⊖ q′)) ⊗ (c ⊗ p′))
+          ⊜ (q′ ⊖ ((c ⊕ Κ 1ℚᵘ) ⊗ (p′ ⊗ q′)))
+            ⊕ (c ⊗ ((p′ ⊗ q′) ⊗ q′)))
+        BishopP.≃-refl q n coefficient p
+
+    nextCoefficient :
+      BishopReal._≃_
+        (BishopReal._+_ coefficient BishopReal.1ℝ)
+        (natReal (suc (suc count)))
+    nextCoefficient =
+      BishopP.≃-symm (natRealSuccessor (suc count))
+
+    nextCoefficientProduct :
+      BishopReal._≃_
+        (BishopReal._*_
+          (BishopReal._+_ coefficient BishopReal.1ℝ)
+          pq)
+        (BishopReal._*_
+          (natReal (suc (suc count)))
+          pq)
+    nextCoefficientProduct = BishopP.*-congʳ nextCoefficient
+
+    coefficientTransport :
+      BishopReal._≃_
+        (BishopReal._+_
+          (BishopReal._-_
+            q
             (BishopReal._*_
-              (BishopReal._*_ p q)
-              q)))
-    finalAlgebra =
-      BishopP.≃-trans
-        (solve 4
-          (λ q′ n′ c p′ →
-            ((q′ ⊖ (c ⊗ p′)) ⊕ (n′ ⊗ (p′ ⊗ q′)))
-              ⊕ (((Κ 1ℚᵘ ⊖ q′) ⊗ (Κ 1ℚᵘ ⊖ q′)) ⊗ (c ⊗ p′))
-            ⊜ (q′ ⊖ ((c ⊕ Κ 1ℚᵘ) ⊗ (p′ ⊗ q′)))
-              ⊕ (c ⊗ ((p′ ⊗ q′) ⊗ q′)))
-          BishopP.≃-refl q n coefficient p)
-        (BishopP.+-cong
-          (BishopP.+-congˡ
-            (BishopP._*_
-              (BishopReal._*_ p q))
-            (BishopP.≃-symm (natRealSuccessor (suc count))))
-          BishopP.≃-refl)
+              (BishopReal._+_ coefficient BishopReal.1ℝ)
+              pq))
+          (BishopReal._*_ coefficient pqq))
+        (BishopReal._+_
+          (BishopReal._-_
+            q
+            (BishopReal._*_
+              (natReal (suc (suc count)))
+              pq))
+          (BishopReal._*_ coefficient pqq))
+    coefficientTransport =
+      BishopP.+-congˡ
+        (BishopReal._*_ coefficient pqq)
+        (BishopP.+-congʳ q
+          (BishopP.-‿cong nextCoefficientProduct))
   in
   BishopP.≃-trans distributed
-    (BishopP.≃-trans afterIH finalAlgebra)
+    (BishopP.≃-trans afterIH
+      (BishopP.≃-trans
+        algebraBeforeCoefficientTransport
+        coefficientTransport))
 
 bishopFiniteDegreeOneGeometricIdentityLevel : ProofLevel
 bishopFiniteDegreeOneGeometricIdentityLevel = machineChecked
