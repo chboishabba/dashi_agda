@@ -179,8 +179,14 @@ jobs:
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNClayFrontierRound128Validation.agda
 
-      - name: Type-check Round130 classwise partner-equivariant frontier
+      - name: Type-check Round130 Bony partner-equivariance frontier
         run: >-
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNClayFrontierRound130Validation.agda
+
+      - name: Type-check Round132 HH collinear-extremal cancellation frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound132Validation.agda
