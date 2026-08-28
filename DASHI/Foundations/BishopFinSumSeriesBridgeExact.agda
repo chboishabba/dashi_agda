@@ -9,7 +9,7 @@ module DASHI.Foundations.BishopFinSumSeriesBridgeExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Fin.Base using (Fin; toℕ)
+open import Data.Fin.Base using (toℕ)
 
 import Algebra.Properties.Semiring.Sum as SemiringSum
 import Real as BishopReal
@@ -24,6 +24,15 @@ finSum : (Nat → BishopReal.ℝ) → Nat → BishopReal.ℝ
 finSum terms count =
   BishopSum.sum (λ index → terms (toℕ index))
 
+finSumSuccessor :
+  (terms : Nat → BishopReal.ℝ) →
+  ∀ count →
+  BishopReal._≃_
+    (finSum terms (suc count))
+    (BishopReal._+_ (finSum terms count) (terms count))
+finSumSuccessor terms count =
+  BishopSum.sum-init-last (λ index → terms (toℕ index))
+
 finSumIsSeriesOf :
   (terms : Nat → BishopReal.ℝ) →
   ∀ count →
@@ -32,9 +41,11 @@ finSumIsSeriesOf :
     (BishopSequence.SeriesOf terms count)
 finSumIsSeriesOf terms zero = BishopP.≃-refl
 finSumIsSeriesOf terms (suc count) =
-  BishopP.+-cong
-    BishopP.≃-refl
-    (finSumIsSeriesOf (λ n → terms (suc n)) count)
+  BishopP.≃-trans
+    (finSumSuccessor terms count)
+    (BishopP.+-congˡ
+      (terms count)
+      (finSumIsSeriesOf terms count))
 
 bishopFinSumSeriesBridgeLevel : ProofLevel
 bishopFinSumSeriesBridgeLevel = machineChecked
