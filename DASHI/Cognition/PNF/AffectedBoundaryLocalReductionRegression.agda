@@ -26,11 +26,16 @@ trivialLocalReducer = record
   ; reduceAffected = λ state _ → state
   ; emittedDeltaCount = λ _ _ → 0
   ; noAffectedKeysPreserveState = λ _ _ _ → refl
+  ; noParentChangeEmitsNoDelta = λ _ _ _ → refl
   }
 
 zeroAffectedPreservesConcreteParent :
   reduceAffected trivialLocalReducer (parentState 9) irrelevantDelta ≡ parentState 9
 zeroAffectedPreservesConcreteParent = refl
+
+unchangedParentEmitsNoConcreteDelta :
+  emittedDeltaCount trivialLocalReducer (parentState 9) irrelevantDelta ≡ 0
+unchangedParentEmitsNoConcreteDelta = refl
 
 threeDeltasTwoLevels : DeltaNativeHierarchyReceipt
 threeDeltasTwoLevels =
