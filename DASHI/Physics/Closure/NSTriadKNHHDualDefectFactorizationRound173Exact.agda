@@ -2,17 +2,6 @@ module DASHI.Physics.Closure.NSTriadKNHHDualDefectFactorizationRound173Exact whe
 
 ------------------------------------------------------------------------
 -- ROUND173 / COMPLETE ALGEBRAIC HH DUAL-DEFECT FACTORIZATION
---
--- Compose Round172 with Round145.  For transverse high inputs the raw p/q curl
--- slot difference is a sum of exactly TWO owners:
---
---   angular owner = r_p * K(P,Q,a,b),    K factors through Sigma=P+Q,
---   radial owner  = (r_p-r_q) * [a x (Q x b)].
---
--- Therefore no term survives when both defects vanish, and there is no
--- intermediate-angle residual at the algebraic level.  The remaining task is
--- purely quantitative: obtain the spatially critical finite-l2 bound for these
--- two owners and sum it on the literal Bony/residual carrier.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -24,16 +13,25 @@ import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exa
 import DASHI.Physics.Closure.NSTriadKNAntiParallelHelicitySlotKernelRound145Exact as R145
 import DASHI.Physics.Closure.NSTriadKNHHDualDefectRawCurlKernelRound172Exact as R172
 
+sub : ∀ {r} {F : C3.RealField r} →
+  C3.Carrier F → C3.Carrier F → C3.Carrier F
+sub {F = F} x y = C3.add F x (C3.negate F y)
+
+realScale : ∀ {r} {F : C3.RealField r} →
+  C3.Carrier F → C3.Complex3 F → C3.Complex3 F
+realScale {F = F} scalar value =
+  C3.complex3Scale (C3.realEmbed F scalar) value
+
 rawDirectionalSlotKernelFactorsThroughDualDefects :
   ∀ {r} {F : C3.RealField r}
     (rp rq : C3.Carrier F)
     (P Q a b : C3.Complex3 F)
     (T : R145.TransverseHighPair P Q a b) →
   R172.rawDirectionalSlotKernel
-    (R172.realScale rp P) (R172.realScale rq Q) a b
+    (realScale rp P) (realScale rq Q) a b
   ≡
   C3.complex3Add
-    (R172.realScale rp
+    (realScale rp
       (C3.complex3Subtract
         (C3.complex3Add
           (C3.complex3Scale
@@ -43,7 +41,7 @@ rawDirectionalSlotKernelFactorsThroughDualDefects :
         (C3.complex3Scale
           (C3.bilinearDot3 a b)
           (R145.antiParallelDefect P Q))))
-    (R172.realScale (R172.sub rp rq)
+    (realScale (sub rp rq)
       (Cross.complex3Cross a (Cross.complex3Cross Q b)))
 rawDirectionalSlotKernelFactorsThroughDualDefects rp rq P Q a b T =
   trans
@@ -51,8 +49,8 @@ rawDirectionalSlotKernelFactorsThroughDualDefects rp rq P Q a b T =
     (cong
       (λ angular →
         C3.complex3Add
-          (R172.realScale rp angular)
-          (R172.realScale (R172.sub rp rq)
+          (realScale rp angular)
+          (realScale (sub rp rq)
             (Cross.complex3Cross a (Cross.complex3Cross Q b))))
       (R145.slotKernelFactorsThroughAntiParallelDefect P Q a b T))
 
