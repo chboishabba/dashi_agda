@@ -7,10 +7,10 @@ module DASHI.EverythingPartitionAsymptotics where
 -- The analytic layer is built directly over the exact git-pinned
 -- `vendor/bishop` submodule.  Current source includes the semantic square law,
 -- division-free root tangent estimate, concrete factorial exponential series,
--- native Cauchy-tail and finite-rectangle owners, finite binomial/Cauchy
--- coefficient identification, negative-exponential alternating interlacing,
--- sharp finite degree-one geometric identity/bound, the direct exp(-x)
--- reciprocal-square kernel, and the Machin-pi sqrt(2/3) constant construction.
+-- native Cauchy-tail/rectangle/triangle owners, finite binomial coefficient
+-- identification, the all-positive cubic translation/geometric kernel route,
+-- and a bidirectional Basel lane whose remaining middle seam is isolated as a
+-- sine-product coefficient-limit theorem.
 ------------------------------------------------------------------------
 
 import DASHI.Foundations.BishopVendoredSubmoduleProvenanceExact
@@ -28,10 +28,18 @@ import DASHI.Foundations.BishopNatSquareRootTangentExact
 import DASHI.Foundations.BishopFiniteSeriesExtensionalityExact
 import DASHI.Foundations.BishopAbsoluteSeriesTailExact
 import DASHI.Foundations.BishopFiniteSeriesRectangleProductExact
+import DASHI.Foundations.BishopFinSumSeriesBridgeExact
+import DASHI.Foundations.BishopFiniteCauchyRowReindexExact
+import DASHI.Foundations.BishopFiniteRectangleInsideCauchyTriangleExact
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact
 import DASHI.Foundations.BishopExponentialPositiveOrderExact
 import DASHI.Foundations.BishopExponentialBinomialCoefficientExact
 import DASHI.Foundations.BishopExponentialFiniteCauchyCoefficientExact
+import DASHI.Foundations.BishopExponentialCubicTranslationLowerExact
+import DASHI.Foundations.BishopCubicTranslationGeometricRatioExact
+import DASHI.Foundations.BishopGeometricReciprocalSquareFromCrossExact
+import DASHI.Foundations.BishopCubicTranslationFiniteDegreeOneKernelExact
+import DASHI.Foundations.BishopCubicTranslationIteratedExact
 import DASHI.Foundations.BishopFiniteDegreeOneGeometricIdentityExact
 import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact
 import DASHI.Foundations.BishopNegativeExponentialInterlacingExact
@@ -41,6 +49,11 @@ import DASHI.Foundations.BishopNegativeExponentialReciprocalSquareExact
 import DASHI.Foundations.BishopNegativeExponentialReciprocalSquareDivisionExact
 import DASHI.Foundations.BishopNegativeExponentialFiniteDegreeOneKernelExact
 import DASHI.Foundations.BishopSqrtTwoThirdsMachinConstantExact
+import DASHI.Foundations.BishopBaselFiniteSineProductCoefficientExact
+import DASHI.Foundations.BishopBaselReciprocalSquareConvergenceExact
+import DASHI.Foundations.BishopBaselMachinSineQuadraticCoefficientExact
+import DASHI.Foundations.BishopBaselFiniteProductCoefficientLimitExact
+import DASHI.Foundations.BishopBaselSineProductCoefficientBoundaryExact
 import DASHI.Mathematics.NumberTheory.FiniteNatFloorSquareRootExact
 import DASHI.Mathematics.NumberTheory.FiniteNatFractionOrderExact
 import DASHI.Mathematics.NumberTheory.FiniteNatSuccessorFractionExact
