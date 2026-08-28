@@ -7,10 +7,10 @@ module DASHI.EverythingPartitionAsymptotics where
 -- The analytic layer is built directly over the exact git-pinned
 -- `vendor/bishop` submodule.  Current source includes the semantic square law,
 -- division-free root tangent estimate, concrete factorial exponential series,
--- native Cauchy-tail and finite-rectangle owners, negative-exponential
--- alternating interlacing, sharp finite degree-one geometric identity/bound,
--- the direct exp(-x) reciprocal-square kernel, and the Machin-pi sqrt(2/3)
--- constant construction.
+-- native Cauchy-tail and finite-rectangle owners, finite binomial/Cauchy
+-- coefficient identification, negative-exponential alternating interlacing,
+-- sharp finite degree-one geometric identity/bound, the direct exp(-x)
+-- reciprocal-square kernel, and the Machin-pi sqrt(2/3) constant construction.
 ------------------------------------------------------------------------
 
 import DASHI.Foundations.BishopVendoredSubmoduleProvenanceExact
@@ -30,6 +30,8 @@ import DASHI.Foundations.BishopAbsoluteSeriesTailExact
 import DASHI.Foundations.BishopFiniteSeriesRectangleProductExact
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact
 import DASHI.Foundations.BishopExponentialPositiveOrderExact
+import DASHI.Foundations.BishopExponentialBinomialCoefficientExact
+import DASHI.Foundations.BishopExponentialFiniteCauchyCoefficientExact
 import DASHI.Foundations.BishopFiniteDegreeOneGeometricIdentityExact
 import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact
 import DASHI.Foundations.BishopNegativeExponentialInterlacingExact
@@ -44,6 +46,7 @@ import DASHI.Mathematics.NumberTheory.FiniteNatFractionOrderExact
 import DASHI.Mathematics.NumberTheory.FiniteNatSuccessorFractionExact
 import DASHI.Mathematics.NumberTheory.FiniteNatRationalEmbeddingExact
 import DASHI.Mathematics.NumberTheory.FinitePositiveScaledReciprocalExact
+import DASHI.Mathematics.NumberTheory.FiniteBinomialInverseFactorialExact
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact
 import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact
 import DASHI.Mathematics.NumberTheory.FiniteProductCardinalityExact
