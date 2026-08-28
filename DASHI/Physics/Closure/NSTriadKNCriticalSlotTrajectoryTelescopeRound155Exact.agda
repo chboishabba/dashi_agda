@@ -12,17 +12,15 @@ module DASHI.Physics.Closure.NSTriadKNCriticalSlotTrajectoryTelescopeRound155Exa
 --
 -- Round154 proves that a common slot component is invisible.  This file adds
 -- the dynamic counterpart.  An additive trajectory is a finite sequence of
--- exact reopening steps
---
---      y = x + delta.
+-- exact reopening steps y = x + delta.
 --
 -- The endpoint is exactly start + sum(delta), and because the Round138 slot
 -- production is linear in each of the three slot amplitudes (with fixed radial
 -- coefficients), the COMPLETE endpoint production is
 --
---      P(end) = P(start) + P(total residual K,
---                                total residual P,
---                                total residual Q).
+--   P(end) = P(start) + P(total residual K,
+--                             total residual P,
+--                             total residual Q).
 --
 -- No absolute value is taken stepwise.  This is the finite algebra needed to
 -- make the remaining A theorem a trajectory/quadratic-variation estimate
@@ -31,7 +29,7 @@ module DASHI.Physics.Closure.NSTriadKNCriticalSlotTrajectoryTelescopeRound155Exa
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
@@ -62,13 +60,8 @@ trajectoryTelescopes :
     (T : AdditiveTrajectory F x z) →
   z ≡ C3.add F x (residualTotal T)
 trajectoryTelescopes {F = F} (stop x) =
-  trans refl (symmetryOfZero x)
-  where
-  symmetryOfZero : (value : C3.Carrier F) →
-    value ≡ C3.add F value (C3.zero F)
-  symmetryOfZero value =
-    Relation.Binary.PropositionalEquality.sym (Field.realAddZeroRight F value)
-trajectoryTelescopes {F = F} (step {x = x} {y = y} delta equality rest) =
+  sym (Field.realAddZeroRight F x)
+trajectoryTelescopes {F = F} (step {x = x} delta equality rest) =
   trans
     (trajectoryTelescopes rest)
     (trans
