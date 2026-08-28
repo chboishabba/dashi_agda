@@ -29,6 +29,7 @@ module DASHI.Physics.Closure.NSTriadKNCriticalNormalizedCurlRadiusCancellationRo
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
@@ -51,6 +52,21 @@ record ReciprocalRadiusTriple
 
 open ReciprocalRadiusTriple public
 
+cancelRadiusInverseAgainstFactor :
+  ∀ {r} {F : C3.RealField r}
+    (radius inverse factor : C3.Carrier F) →
+  C3.multiply F radius inverse ≡ C3.one F →
+  C3.multiply F (C3.multiply F radius factor) inverse ≡ factor
+cancelRadiusInverseAgainstFactor {F = F} radius inverse factor inverseLaw =
+  trans
+    (R.solve 3
+      (λ r f i → (r R.⊗ f) R.⊗ i R.⊜ (r R.⊗ i) R.⊗ f)
+      refl radius factor inverse)
+    (trans
+      (cong (λ product → C3.multiply F product factor) inverseLaw)
+      (C3.multiplyOneLeft F factor))
+  where module R = Field.Solver F
+
 criticalKTimesInverseIsOppositeRadialGap :
   ∀ {r} {F : C3.RealField r}
     (R : ReciprocalRadiusTriple F) →
@@ -59,14 +75,11 @@ criticalKTimesInverseIsOppositeRadialGap :
       (radiusK R) (radiusP R) (radiusQ R))
     (inverseK R)
   ≡ sub (radiusP R) (radiusQ R)
-criticalKTimesInverseIsOppositeRadialGap {F = F} R =
-  let module P = Field.Solver F in
-  P.solve 4
-    (λ rk rp rq ik →
-      ((rk P.⊗ (rp P.⊕ (P.⊝ rq))) P.⊗ ik)
-      P.⊜ (rp P.⊕ (P.⊝ rq)))
+criticalKTimesInverseIsOppositeRadialGap R =
+  cancelRadiusInverseAgainstFactor
+    (radiusK R) (inverseK R)
+    (sub (radiusP R) (radiusQ R))
     (radiusInverseK R)
-    (radiusK R) (radiusP R) (radiusQ R) (inverseK R)
 
 criticalPTimesInverseIsOppositeRadialGap :
   ∀ {r} {F : C3.RealField r}
@@ -76,14 +89,11 @@ criticalPTimesInverseIsOppositeRadialGap :
       (radiusK R) (radiusP R) (radiusQ R))
     (inverseP R)
   ≡ sub (radiusQ R) (radiusK R)
-criticalPTimesInverseIsOppositeRadialGap {F = F} R =
-  let module P = Field.Solver F in
-  P.solve 4
-    (λ rk rp rq ip →
-      ((rp P.⊗ (rq P.⊕ (P.⊝ rk))) P.⊗ ip)
-      P.⊜ (rq P.⊕ (P.⊝ rk)))
+criticalPTimesInverseIsOppositeRadialGap R =
+  cancelRadiusInverseAgainstFactor
+    (radiusP R) (inverseP R)
+    (sub (radiusQ R) (radiusK R))
     (radiusInverseP R)
-    (radiusK R) (radiusP R) (radiusQ R) (inverseP R)
 
 criticalQTimesInverseIsOppositeRadialGap :
   ∀ {r} {F : C3.RealField r}
@@ -93,14 +103,11 @@ criticalQTimesInverseIsOppositeRadialGap :
       (radiusK R) (radiusP R) (radiusQ R))
     (inverseQ R)
   ≡ sub (radiusK R) (radiusP R)
-criticalQTimesInverseIsOppositeRadialGap {F = F} R =
-  let module P = Field.Solver F in
-  P.solve 4
-    (λ rk rp rq iq →
-      ((rq P.⊗ (rk P.⊕ (P.⊝ rp))) P.⊗ iq)
-      P.⊜ (rk P.⊕ (P.⊝ rp)))
+criticalQTimesInverseIsOppositeRadialGap R =
+  cancelRadiusInverseAgainstFactor
+    (radiusQ R) (inverseQ R)
+    (sub (radiusK R) (radiusP R))
     (radiusInverseQ R)
-    (radiusK R) (radiusP R) (radiusQ R) (inverseQ R)
 
 round147CriticalRadiusCancelsNormalizedCurlDenominator : Bool
 round147CriticalRadiusCancelsNormalizedCurlDenominator = true
