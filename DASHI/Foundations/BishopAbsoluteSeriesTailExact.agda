@@ -10,8 +10,10 @@ module DASHI.Foundations.BishopAbsoluteSeriesTailExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.Integer.Base using (+_)
 import Data.Nat.Base as ℕ
-open import Data.Product.Base using (_,_; proj₁; proj₂)
+open import Data.Product.Base using (proj₁; proj₂)
+open import Data.Rational.Unnormalised using (_/_)
 
 import Real as BishopReal
 import RealProperties as BishopP
