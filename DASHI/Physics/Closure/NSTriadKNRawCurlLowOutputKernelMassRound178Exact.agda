@@ -15,10 +15,9 @@ module DASHI.Physics.Closure.NSTriadKNRawCurlLowOutputKernelMassRound178Exact wh
 --
 --   ||K||^2 <= 9 |k|^2 ||u_p||^2 ||u_q||^2.
 --
--- This is the first fully quantitative same-object consequence of the raw-curl
--- output factorization.  The constant is deliberately crude; the important
--- point is the LITERAL LOW OUTPUT |k|^2 and the absence of a high-leg or
--- fibre-cardinality factor.
+-- The constant is deliberately crude.  The decisive fact is that the ONLY
+-- frequency in the majorant is the literal low output |k|^2: there is no
+-- high-leg frequency and no convolution-fibre/cardinality factor.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -27,7 +26,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -36,7 +35,8 @@ import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation as Separation
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3HermitianCauchyRound74Exact as HC
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAlgebraProgram as Hermitian
-import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact as Cross
+import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
+import DASHI.Physics.Closure.NSTriadKNAntiParallelHelicitySlotKernelRound145Exact as R145
 import DASHI.Physics.Closure.NSTriadKNPhysicalOrderedTransferSquaredMajorantRound96Exact as R96
 import DASHI.Physics.Closure.NSTriadKNPressureHessianOrderedTermRationalBoundRound85Exact as R85
 import DASHI.Physics.Closure.NSTriadKNRawCurlOutputDefectFactorizationRound176Exact as R176
@@ -47,6 +47,16 @@ F = Rational.rationalRealField
 three nine : ℚ
 three = 1ℚ + (1ℚ + 1ℚ)
 nine = three * three
+
+oneNN : 0ℚ ≤ 1ℚ
+oneNN =
+  subst
+    (0ℚ ≤_)
+    (solve [])
+    (Separation.complexModulusSquaredNonnegative (C3.complex 1ℚ 0ℚ))
+
+threeNN : 0ℚ ≤ three
+threeNN = Rational.addNonnegative oneNN (Rational.addNonnegative oneNN oneNN)
 
 ones : C3.Complex3 F
 ones = C3.complex3
@@ -126,14 +136,15 @@ threeVectorSumNormSquaredBound
       ( L2.complexModulusSquared ux ∷ L2.complexModulusSquared uy ∷ L2.complexModulusSquared uz
       ∷ L2.complexModulusSquared vx ∷ L2.complexModulusSquared vy ∷ L2.complexModulusSquared vz
       ∷ L2.complexModulusSquared wx ∷ L2.complexModulusSquared wy ∷ L2.complexModulusSquared wz ∷ [])
-  in subst
-      (λ upper →
-        L2.complex3NormSquared
+  in
+  subst
+    (λ upper →
+      L2.complex3NormSquared
+        (C3.complex3Add
           (C3.complex3Add
-            (C3.complex3Add
-              (C3.complex3 ux uy uz) (C3.complex3 vx vy vz))
-            (C3.complex3 wx wy wz)) ≤ upper)
-      rearrange added
+            (C3.complex3 ux uy uz) (C3.complex3 vx vy vz))
+          (C3.complex3 wx wy wz)) ≤ upper)
+    rearrange added
 
 scaleVectorMassBound :
   (scalar : C3.Complex F) (value : C3.Complex3 F)
@@ -153,7 +164,8 @@ scaleVectorMassBound scalar value scalarUpper valueMass upper scalarBound valueM
     (subst
       (λ left → left ≤ scalarUpper * valueMass)
       (R85.complex3ScaleNormSquared scalar value)
-      (subst (λ right → L2.complexModulusSquared scalar * right ≤ scalarUpper * valueMass)
+      (subst
+        (λ right → L2.complexModulusSquared scalar * right ≤ scalarUpper * valueMass)
         valueMeaning productBound))
     endpoint
 
@@ -163,8 +175,8 @@ rawLowOutputKernelMassBound :
   {p q k : Z3.FourierMode}
   (uP uQ : C3.Complex3 F) →
   Z3.Resonance p q k →
-  DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure.Transverse E p uP →
-  DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure.Transverse E q uQ →
+  Helical.Transverse E p uP →
+  Helical.Transverse E q uQ →
   L2.complex3NormSquared
     (R145.slotKernel (C3.modeVector E p) (C3.modeVector E q) uP uQ)
   ≤ nine * C3.normSquared I k
@@ -225,7 +237,9 @@ rawLowOutputKernelMassBound E I {p} {q} {k} uP uQ resonance pTrans qTrans =
         upperNN = R96.productNonnegative k2NN' eQNN
         endpoint : (k2 * eQ) * eP ≤ base
         endpoint = subst (_≤ base) (solve (k2 ∷ eP ∷ eQ ∷ [])) ℚP.≤-refl
-      in scaleVectorMassBound alpha uP (k2 * eQ) eP base alphaBound refl upperNN ePNN endpoint
+      in
+      scaleVectorMassBound alpha uP (k2 * eQ) eP base
+        alphaBound refl upperNN ePNN endpoint
 
     yBound : L2.complex3NormSquared y ≤ base
     yBound =
@@ -233,7 +247,9 @@ rawLowOutputKernelMassBound E I {p} {q} {k} uP uQ resonance pTrans qTrans =
         upperNN = R96.productNonnegative k2NN' ePNN
         endpoint : (k2 * eP) * eQ ≤ base
         endpoint = subst (_≤ base) (solve (k2 ∷ eP ∷ eQ ∷ [])) ℚP.≤-refl
-      in scaleVectorMassBound beta uQ (k2 * eP) eQ base betaBound refl upperNN eQNN endpoint
+      in
+      scaleVectorMassBound beta uQ (k2 * eP) eQ base
+        betaBound refl upperNN eQNN endpoint
 
     rawZ = C3.complex3Scale gamma waveK
     zNormMeaning : L2.complex3NormSquared z ≡ L2.complex3NormSquared rawZ
@@ -249,8 +265,10 @@ rawLowOutputKernelMassBound E I {p} {q} {k} uP uQ resonance pTrans qTrans =
         upperNN = R96.productNonnegative ePNN eQNN
         endpoint : (eP * eQ) * k2 ≤ base
         endpoint = subst (_≤ base) (solve (k2 ∷ eP ∷ eQ ∷ [])) ℚP.≤-refl
-      in scaleVectorMassBound gamma waveK (eP * eQ) k2 base gammaBound
-          (R96.modeVectorNormSquaredMeaning E I k) upperNN k2NN' endpoint
+      in
+      scaleVectorMassBound gamma waveK (eP * eQ) k2 base
+        gammaBound (R96.modeVectorNormSquaredMeaning E I k)
+        upperNN k2NN' endpoint
 
     zBound : L2.complex3NormSquared z ≤ base
     zBound = subst (_≤ base) zNormMeaning zBoundRaw
@@ -260,13 +278,6 @@ rawLowOutputKernelMassBound E I {p} {q} {k} uP uQ resonance pTrans qTrans =
       L2.complex3NormSquared x + L2.complex3NormSquared y + L2.complex3NormSquared z
       ≤ base + base + base
     termsBound = ℚP.+-mono-≤ (ℚP.+-mono-≤ xBound yBound) zBound
-
-    threeNN : 0ℚ ≤ three
-    threeNN = Rational.addNonnegative
-      (ℚP.<⇒≤ (ℚP.positive⁻¹ 1ℚ))
-      (Rational.addNonnegative
-        (ℚP.<⇒≤ (ℚP.positive⁻¹ 1ℚ))
-        (ℚP.<⇒≤ (ℚP.positive⁻¹ 1ℚ)))
 
     scaledTerms =
       let instance threeNNI = nonNegative threeNN
