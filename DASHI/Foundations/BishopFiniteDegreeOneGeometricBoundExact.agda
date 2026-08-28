@@ -21,7 +21,7 @@ module DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Integer.Base using (+_)
+open import Data.Integer.Base as ℤ using (+_)
 import Data.Nat.Properties as ℕP
 open import Data.Rational.Unnormalised as ℚ using (0ℚᵘ; 1ℚᵘ)
 import Data.Rational.Unnormalised.Properties as ℚP
@@ -51,7 +51,7 @@ natRealBelowSuccessor n =
   BishopP.p≤q⇒p⋆≤q⋆
     (NatEmbed.natAsRational n)
     (NatEmbed.natAsRational (suc n))
-    (ℚ.*≤* (Data.Integer.Properties.+-mono-≤ (ℕP.n≤1+n n)))
+    (ℚ.*≤* (ℤ.+≤+ (ℕP.n≤1+n n)))
 
 record BishopUnitIntervalRatio (q : BishopReal.ℝ) : Set₁ where
   field
@@ -195,10 +195,14 @@ scaledWeightedPartialBelowRatio :
       (Identity.weightedPartial q count))
     q
 scaledWeightedPartialBelowRatio {q} inputs count =
+  let
+    scaledToRight =
+      BishopP.≃-trans
+        (Identity.finiteDegreeOneGeometricIdentity q count)
+        (identityRightIsQMinusCorrection q count)
+  in
   BishopP.≤-respˡ-≃
-    (BishopP.≃-trans
-      (Identity.finiteDegreeOneGeometricIdentity q count)
-      (identityRightIsQMinusCorrection q count))
+    (BishopP.≃-symm scaledToRight)
     (qMinusCorrectionBelowQ inputs count)
 
 oneMinusPositive :
@@ -310,9 +314,7 @@ finiteDegreeOneGeometricBound {q} inputs count =
       BishopP.*-comm inverseSquare q
   in
   BishopP.≤-respʳ-≃ rightCommute
-    (BishopP.≤-respˡ-≃
-      (BishopP.≃-symm leftCancel)
-      scaled)
+    (BishopP.≤-respˡ-≃ leftCancel scaled)
 
 bishopFiniteDegreeOneGeometricBoundLevel : ProofLevel
 bishopFiniteDegreeOneGeometricBoundLevel = machineChecked
