@@ -2,27 +2,12 @@ module DASHI.Physics.Closure.NSTriadKNHHAntiParallelQuadraticKernelNormRound174E
 
 ------------------------------------------------------------------------
 -- ROUND174 / RATIONAL L2 BOUND FOR THE HH QUADRATIC ANTI-PARALLEL KERNEL
---
--- R145 gives, for transverse a,b,
---
---   K = a (Sigma.b) + b (a.Sigma) - Sigma (a.b),  Sigma=P+Q.
---
--- Bilinear Cauchy bounds each of the three terms by
---
---   ||Sigma||^2 ||a||^2 ||b||^2.
---
--- A radical-free three-vector square estimate then gives the concrete bound
---
---   ||K||^2 <= 12 ||Sigma||^2 ||a||^2 ||b||^2.
---
--- The constant is not optimized.  The important fact is the exact angular
--- defect factor with no cardinality, square root, or inverse angle.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -41,7 +26,6 @@ two four twelve : ℚ
 two = 1ℚ + 1ℚ
 four = two + two
 twelve = four + four + four
-  where open import Data.Rational.Base using (1ℚ)
 
 norm : C3.Complex3 F → ℚ
 norm = L2.complex3NormSquared
@@ -115,10 +99,10 @@ normThreeBelowFourSum x y z =
     first = normAddBelowTwo (C3.complex3Add x y) z
     xy = normAddBelowTwo x y
     zNN = Separation.complex3NormSquaredNonnegative z
+    oneNN : 0ℚ ≤ 1ℚ
+    oneNN = Rational.squareNonnegative 1ℚ
     twoNN : 0ℚ ≤ two
-    twoNN = Rational.addNonnegative
-      (Rational.squareNonnegative 1ℚ) (Rational.squareNonnegative 1ℚ)
-      where open import Data.Rational.Base using (1ℚ)
+    twoNN = Rational.addNonnegative oneNN oneNN
 
     scaledXY :
       two * norm (C3.complex3Add x y)
@@ -138,14 +122,10 @@ normThreeBelowFourSum x y z =
     endpoint =
       let
         zGap : 0ℚ ≤ two * norm z
-        zGap =
-          let
-            instance tNN = nonNegative twoNN
-            zNNI = nonNegative zNN
-          in ℚP.nonNegative⁻¹ (two * norm z)
+        zGap = R96.productNonnegative twoNN zNN
         algebra :
           four * (norm x + norm y + norm z)
-          ≡ two * (two * norm x + two * norm y) + two * norm z
+          ≡ (two * (two * norm x + two * norm y) + two * norm z)
              + two * norm z
         algebra = solve (norm x ∷ norm y ∷ norm z ∷ [])
         addGap :
@@ -167,9 +147,9 @@ normThreeBelowFourSum x y z =
   in ℚP.≤-trans first (ℚP.≤-trans combine endpoint)
 
 scaleTermBound : (scalar : C3.Complex F) (v : C3.Complex3 F) (upper : ℚ) →
-  mod2 scalar ≤ upper → 0ℚ ≤ norm v → 0ℚ ≤ upper →
+  mod2 scalar ≤ upper → 0ℚ ≤ norm v →
   norm (C3.complex3Scale scalar v) ≤ upper * norm v
-scaleTermBound scalar v upper scalarBound vNN upperNN =
+scaleTermBound scalar v upper scalarBound vNN =
   subst
     (λ lower → lower ≤ upper * norm v)
     (sym (normScale scalar v))
@@ -180,8 +160,7 @@ kernelNormBelowTwelveAngularProduct :
   (P Q a b : C3.Complex3 F) →
   R145.TransverseHighPair P Q a b →
   norm (R145.slotKernel P Q a b)
-  ≤ twelve *
-      (norm (R145.antiParallelDefect P Q) * norm a * norm b)
+  ≤ twelve * (norm (R145.antiParallelDefect P Q) * norm a * norm b)
 kernelNormBelowTwelveAngularProduct P Q a b T =
   let
     sigma = R145.antiParallelDefect P Q
@@ -198,23 +177,19 @@ kernelNormBelowTwelveAngularProduct P Q a b T =
     as = R96.rationalBilinearDotCauchy a sigma
     ab = R96.rationalBilinearDotCauchy a b
 
-    sbUpperNN = R96.productNonnegative sNN bNN
-    asUpperNN = R96.productNonnegative aNN sNN
-    abUpperNN = R96.productNonnegative aNN bNN
-
     xBound : norm x ≤ (norm sigma * norm b) * norm a
     xBound = scaleTermBound (C3.bilinearDot3 sigma b) a
-      (norm sigma * norm b) sb aNN sbUpperNN
+      (norm sigma * norm b) sb aNN
 
     yBound : norm y ≤ (norm a * norm sigma) * norm b
     yBound = scaleTermBound (C3.bilinearDot3 a sigma) b
-      (norm a * norm sigma) as bNN asUpperNN
+      (norm a * norm sigma) as bNN
 
     zBase :
       norm (C3.complex3Scale (C3.bilinearDot3 a b) sigma)
       ≤ (norm a * norm b) * norm sigma
     zBase = scaleTermBound (C3.bilinearDot3 a b) sigma
-      (norm a * norm b) ab sNN abUpperNN
+      (norm a * norm b) ab sNN
 
     zBound : norm z ≤ (norm a * norm b) * norm sigma
     zBound = subst
@@ -224,40 +199,35 @@ kernelNormBelowTwelveAngularProduct P Q a b T =
 
     three = normThreeBelowFourSum x y z
 
+    sumBound :
+      norm x + norm y + norm z
+      ≤ (norm sigma * norm b) * norm a
+        + (norm a * norm sigma) * norm b
+        + (norm a * norm b) * norm sigma
+    sumBound = ℚP.+-mono-≤ (ℚP.+-mono-≤ xBound yBound) zBound
+
+    oneNN : 0ℚ ≤ 1ℚ
+    oneNN = Rational.squareNonnegative 1ℚ
+    twoNN = Rational.addNonnegative oneNN oneNN
+    fourNN = Rational.addNonnegative twoNN twoNN
+    scaled =
+      let instance fNN = nonNegative fourNN
+      in ℚP.*-monoˡ-≤-nonNeg four sumBound
+
+    algebra :
+      four *
+        ((norm sigma * norm b) * norm a
+          + (norm a * norm sigma) * norm b
+          + (norm a * norm b) * norm sigma)
+      ≡ twelve * (norm sigma * norm a * norm b)
+    algebra = solve (norm sigma ∷ norm a ∷ norm b ∷ [])
+
     termSumBound :
       four * (norm x + norm y + norm z)
       ≤ twelve * (norm sigma * norm a * norm b)
-    termSumBound =
-      let
-        sumBound :
-          norm x + norm y + norm z
-          ≤ (norm sigma * norm b) * norm a
-            + (norm a * norm sigma) * norm b
-            + (norm a * norm b) * norm sigma
-        sumBound = ℚP.+-mono-≤ (ℚP.+-mono-≤ xBound yBound) zBound
-
-        fourNN : 0ℚ ≤ four
-        fourNN = Rational.addNonnegative
-          (Rational.addNonnegative
-            (Rational.squareNonnegative 1ℚ) (Rational.squareNonnegative 1ℚ))
-          (Rational.addNonnegative
-            (Rational.squareNonnegative 1ℚ) (Rational.squareNonnegative 1ℚ))
-          where open import Data.Rational.Base using (1ℚ)
-
-        scaled =
-          let instance fNN = nonNegative fourNN
-          in ℚP.*-monoˡ-≤-nonNeg four sumBound
-
-        algebra :
-          four *
-            ((norm sigma * norm b) * norm a
-              + (norm a * norm sigma) * norm b
-              + (norm a * norm b) * norm sigma)
-          ≡ twelve * (norm sigma * norm a * norm b)
-        algebra = solve (norm sigma ∷ norm a ∷ norm b ∷ [])
-      in subst
-          (λ upper → four * (norm x + norm y + norm z) ≤ upper)
-          algebra scaled
+    termSumBound = subst
+      (λ upper → four * (norm x + norm y + norm z) ≤ upper)
+      algebra scaled
 
     factorMeaning = R145.slotKernelFactorsThroughAntiParallelDefect P Q a b T
     rhsMeaning :
@@ -270,7 +240,7 @@ kernelNormBelowTwelveAngularProduct P Q a b T =
   subst
     (λ selected → norm selected ≤
       twelve * (norm sigma * norm a * norm b))
-    (trans factorMeaning rhsMeaning)
+    (sym (trans factorMeaning rhsMeaning))
     (ℚP.≤-trans three termSumBound)
 
 round174QuadraticKernelAngularL2BoundClosed : Bool
