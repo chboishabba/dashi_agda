@@ -6,18 +6,16 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosBishopGeometricKernelBridgeE
 -- P. Erdos (1942), DOI 10.2307/1968802, reduces the upper exponential bound
 -- to a degree-one weighted geometric/exponential kernel.
 --
--- The real carrier is the exact repository submodule at `vendor/bishop`;
--- BishopVendoredSubmoduleProvenanceExact records the gitlink provenance.
+-- The real carrier is the exact repository submodule at `vendor/bishop`.
 --
--- Reuse already present on this branch:
+-- The branch now owns two routes:
 --
---   unweighted finite Bishop geometric supersolution        [machine checked]
---   generic polynomial-weighted finite summation theorem    [machine checked]
---   degree-one adapter from pointwise domination            [implemented]
+--   * the older generic Step-V polynomial-weighted domination adapter;
+--   * a sharper direct finite route for q = exp(-x), 0 < x <= 1.
 --
--- Therefore the missing Erdos theorem is no longer "construct a weighted
--- geometric series".  It is the specific pointwise/reciprocal-square estimate
--- linking the exp(-x) ratio to the sharp kernel used by the partition proof.
+-- The direct route proves every cutoff sum W_N(q) is < 1/x^2 by combining an
+-- exact finite weighted-geometric identity with concrete alternating-series
+-- brackets for the Bishop exponential.  It does not require global exp-add.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; suc; zero)
@@ -25,6 +23,9 @@ open import Agda.Builtin.Nat using (Nat; suc; zero)
 import Real as BishopReal
 
 import DASHI.Foundations.BishopVendoredSubmoduleProvenanceExact as Vendored
+import DASHI.Foundations.BishopFiniteDegreeOneGeometricIdentityExact as DirectIdentity
+import DASHI.Foundations.BishopNegativeExponentialFiniteDegreeOneKernelExact as DirectKernel
+import DASHI.Foundations.BishopNegativeExponentialUnitIntervalExact as Unit
 import DASHI.Physics.YangMills.BalabanStepVFiniteGeometricBackendExact as StepV
 import DASHI.Physics.YangMills.BalabanStepVFiniteGeometricInductionExact as Induction
 import DASHI.Physics.YangMills.BalabanStepVBishopFiniteGeometricExact as BishopGeometric
@@ -41,8 +42,7 @@ bishopKernelLaws : Induction.GeometricSemiringLaws bishopKernel
 bishopKernelLaws = BishopGeometric.bishopGeometricSemiringLaws
 
 ------------------------------------------------------------------------
--- Erdos needs the degree-one member of the generic polynomially weighted
--- geometric family: terms are schematically v*q^v.
+-- Generic degree-one Step-V route retained for reuse.
 
 ErdosDegreeOneWeightedGeometricBound : BishopReal.ℝ → Set₁
 ErdosDegreeOneWeightedGeometricBound ratio =
@@ -60,7 +60,27 @@ pointwiseDominationClosesFiniteWeightedSum =
   DegreeOne.erdosDegreeOneWeightedBound
 
 ------------------------------------------------------------------------
--- Existing finite summation infrastructure is concrete and checked.
+-- Sharper concrete exp(-x) route.
+
+directFiniteErdosKernel :
+  ∀ {x} →
+  Unit.PositiveUnitIntervalPoint x →
+  ∀ cutoff →
+  BishopReal._<_
+    (DirectIdentity.weightedPartial
+      (DASHI.Foundations.BishopNegativeExponentialReciprocalSquareExact.q x)
+      cutoff)
+    (DASHI.Foundations.BishopNegativeExponentialReciprocalSquareDivisionExact.inverseSquare
+      x
+      (DASHI.Foundations.BishopNegativeExponentialReciprocalSquareDivisionExact.xNonzero
+        _))
+directFiniteErdosKernel inputs cutoff =
+  DirectKernel.finiteNegativeExponentialDegreeOneKernel inputs cutoff
+
+------------------------------------------------------------------------
+-- Existing finite summation infrastructure is concrete and checked in its
+-- pre-existing owners.  The direct negative-exponential tranche is source
+-- implemented on this branch and remains pending the focused receipt.
 
 finiteBishopGeometricInfrastructureLevel : ProofLevel
 finiteBishopGeometricInfrastructureLevel =
@@ -76,23 +96,25 @@ degreeOneFiniteSummationLevel =
 data ErdosWeightedGeometricFrontier : Set where
   unweightedBishopGeometricClosed : ErdosWeightedGeometricFrontier
   weightedFiniteSummationClosed : ErdosWeightedGeometricFrontier
-  degreeOnePointwiseDominationPending : ErdosWeightedGeometricFrontier
-  degreeOneBishopReciprocalSquareBoundPending : ErdosWeightedGeometricFrontier
+  genericDegreeOnePointwiseDominationPending : ErdosWeightedGeometricFrontier
+  directNegativeExponentialFiniteKernelImplemented : ErdosWeightedGeometricFrontier
+  directNegativeExponentialFiniteKernelValidated : ErdosWeightedGeometricFrontier
 
 currentWeightedGeometricFrontier : ErdosWeightedGeometricFrontier
 currentWeightedGeometricFrontier =
-  degreeOnePointwiseDominationPending
+  directNegativeExponentialFiniteKernelImplemented
 
 ------------------------------------------------------------------------
--- Source target for the eventual sharper specialization:
+-- Current direct source theorem:
 --
---   q = exp(-x), x > 0
+--   q = exp(-x), 0 < x <= 1
 --
---   sum_{v>=1} v q^v
---     = q / (1-q)^2
---     < 1/x^2.
+--   forall N,
+--     sum_{v=1}^N v q^v < 1/x^2.
 --
--- The finite weighted-summation bureaucracy is already discharged by the
--- generic Step-V owner.  What remains is the concrete Bishop exponential /
--- inverse inequality (or an equivalent direct finite bound).
+-- This bypasses the old generic pointwise-domination socket for the actual
+-- Erdos ratio.  The next partition-specific question is whether the x generated
+-- by the square-root tangent reduction is in this unit interval throughout the
+-- consumer range, or whether the finite convolution needs a small/large-x
+-- split.
 ------------------------------------------------------------------------
