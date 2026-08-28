@@ -9,6 +9,7 @@ FILES=(
   DASHI/Foundations/Wette1969FiniteDerivationContextExact.agda
   DASHI/Foundations/Wette1969DerivationClosureExact.agda
   DASHI/Foundations/Wette1969Rule915PredicateProducerExact.agda
+  DASHI/Foundations/Wette1969Rule915MajorObligationTemplatesExact.agda
   DASHI/Foundations/Wette1969Rule915ObligationSubgraphsExact.agda
   DASHI/Foundations/Wette1969Rule915CertifiedObligationApplicationExact.agda
   DASHI/Foundations/Wette1969Rule915ObligationProducerChainExact.agda
@@ -45,6 +46,11 @@ grep -q 'certifiedTracesComposeAtActualReachedStateIsTrue' DASHI/Core/ProofCarry
 
 grep -q 'firstSevenPremiseBodiesNowLiteralSourceConstructorsIsTrue' DASHI/Foundations/Wette1969Rule915PredicateProducerExact.agda
 grep -q 'remainingTwentyLPremisesStillExplicitTranscriptionObligationsIsTrue' DASHI/Foundations/Wette1969Rule915PredicateProducerExact.agda
+
+grep -q 'premise18OuterLShapeNowRecoveredIsTrue' DASHI/Foundations/Wette1969Rule915MajorObligationTemplatesExact.agda
+grep -q 'premise27OuterLShapeNowRecoveredIsTrue' DASHI/Foundations/Wette1969Rule915MajorObligationTemplatesExact.agda
+grep -q 'bothMajorObligationsShareDefinitionPrerequisiteAntecedentIsTrue' DASHI/Foundations/Wette1969Rule915MajorObligationTemplatesExact.agda
+grep -q 'quantifiedConsequentWordsNowLiteralOCRPerfectIsFalse' DASHI/Foundations/Wette1969Rule915MajorObligationTemplatesExact.agda
 
 grep -q 'premises10To15OwnedByOneSharedEvidenceObjectIsTrue' DASHI/Foundations/Wette1969Rule915ObligationSubgraphsExact.agda
 grep -q 'inductionAndIndependenceBranchesRemainDistinctIsTrue' DASHI/Foundations/Wette1969Rule915ObligationSubgraphsExact.agda
@@ -89,6 +95,7 @@ grep -q 'DOI: 10.1007/978-3-642-86745-3_9' DASHI/Foundations/Wette1969Rule915Pre
 scripts/run_agda29_parallel_check.sh \
   DASHI/Core/ProofCarryingRuleApplicationExact.agda \
   DASHI/Foundations/Wette1969Rule915PredicateProducerExact.agda \
+  DASHI/Foundations/Wette1969Rule915MajorObligationTemplatesExact.agda \
   DASHI/Foundations/Wette1969Rule915ObligationSubgraphsExact.agda \
   DASHI/Foundations/Wette1969Rule915CertifiedObligationApplicationExact.agda \
   DASHI/Foundations/Wette1969Rule915ObligationProducerChainExact.agda \
