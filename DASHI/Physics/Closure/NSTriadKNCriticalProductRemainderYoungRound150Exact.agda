@@ -3,26 +3,17 @@ module DASHI.Physics.Closure.NSTriadKNCriticalProductRemainderYoungRound150Exact
 ------------------------------------------------------------------------
 -- ROUND150 / PRODUCT-REMAINDER COMPILER FOR THE LAST A ESTIMATE
 --
--- The Round104 compiler needs an integrated estimate
+-- The Round104 compiler needs
 --
 --   Production <= absorbedCoefficient * Dcrit + finiteRemainder.
 --
--- A high-alpha way to obtain it is not to estimate Production directly, but
--- to expose each signed aggregate as a product of a critical-dissipation factor
--- a and a companion factor b whose square is integrable from lower-order
--- information.  Weighted Young then gives, for theta>0 and thetaInv=1/theta,
+-- If a signed aggregate is bounded by 2ab, with a the critical-dissipation
+-- factor and b a companion whose square has a cutoff-uniform time budget,
+-- weighted Young gives
 --
---   2 a b <= theta a^2 + thetaInv b^2.
+--   2ab <= theta a^2 + theta^{-1} b^2.
 --
--- This file proves that step exactly over rationals, without square roots.  It
--- therefore turns the remaining PDE discovery problem into the more precise
--- question:
---
---   can the COMPLETE signed double-commutator production be represented with
---   a companion b having a cutoff-uniform L^2_t square budget?
---
--- If yes, Round104 absorbs the theta a^2 part and the b^2 budget is the allowed
--- data/history-dependent finite-horizon remainder.
+-- The proof below is exact over rationals and needs no square-root operation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -30,7 +21,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 
@@ -74,33 +65,34 @@ weightedYoungDifferenceIdentity :
   ≡ weightedYoungDefect W a b
 weightedYoungDifferenceIdentity W a b =
   let
-    rearrange :
+    t = theta W
+    i = thetaInv W
+    unitLaw = reciprocalLaw W
+
+    unitized :
       weightedYoungUpper W a b - twoAB a b
       ≡
-      (theta W * thetaInv W)
-        * (theta W * L2.square a)
-        + thetaInv W * L2.square b
-        - twoAB a b
-    rearrange =
-      subst
-        (λ unit →
-          weightedYoungUpper W a b - twoAB a b
-          ≡ unit * (theta W * L2.square a)
-            + thetaInv W * L2.square b - twoAB a b)
-        (reciprocalLaw W)
-        (solve
-          (theta W ∷ thetaInv W ∷ a ∷ b ∷ []))
+      (t * i) * (t * L2.square a)
+      + i * L2.square b
+      - (t * i) * twoAB a b
+    unitized =
+      trans
+        (solve (t ∷ i ∷ a ∷ b ∷ []))
+        (cong
+          (λ unit →
+            unit * (t * L2.square a)
+            + i * L2.square b
+            - unit * twoAB a b)
+          (sym unitLaw))
 
-    factor :
-      (theta W * thetaInv W)
-        * (theta W * L2.square a)
-        + thetaInv W * L2.square b
-        - twoAB a b
+    factorized :
+      (t * i) * (t * L2.square a)
+      + i * L2.square b
+      - (t * i) * twoAB a b
       ≡ weightedYoungDefect W a b
-    factor =
-      solve (theta W ∷ thetaInv W ∷ a ∷ b ∷ [])
+    factorized = solve (t ∷ i ∷ a ∷ b ∷ [])
   in
-  trans rearrange factor
+  trans unitized factorized
 
 weightedYoung :
   (W : PositiveReciprocalWeight) (a b : ℚ) →
@@ -108,6 +100,7 @@ weightedYoung :
 weightedYoung W a b =
   let
     defectNN = weightedYoungDefectNonnegative W a b
+
     shifted :
       twoAB a b + 0ℚ
       ≤ twoAB a b + weightedYoungDefect W a b
@@ -120,12 +113,10 @@ weightedYoung W a b =
       twoAB a b + weightedYoungDefect W a b
       ≡ weightedYoungUpper W a b
     rightMeaning =
-      let
-        identity = weightedYoungDifferenceIdentity W a b
-      in
-      solve
-        (twoAB a b ∷ weightedYoungDefect W a b
-          ∷ weightedYoungUpper W a b ∷ [])
+      trans
+        (cong (twoAB a b +_)
+          (sym (weightedYoungDifferenceIdentity W a b)))
+        (solve (twoAB a b ∷ weightedYoungUpper W a b ∷ []))
   in
   subst
     (λ left → left ≤ twoAB a b + weightedYoungDefect W a b)
