@@ -20,10 +20,11 @@ module DASHI.Foundations.BishopExponentialCubicTranslationLowerExact where
 -- is used.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.Nat using (Nat; suc; _+_)
+open import Data.Fin.Base using (toℕ)
 open import Data.Integer.Base using (+_)
 import Data.Nat.Properties as NatP
-open import Data.Rational.Unnormalised using (1ℚᵘ; _/_)
+open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ; _/_)
 open import Relation.Binary.PropositionalEquality using (cong)
 
 import Algebra.Properties.Semiring.Sum as SemiringSum
@@ -90,7 +91,7 @@ expTriangleIsPartialSum left right total =
     (BishopSum.sum-cong-≋
       (λ index →
         Coeff.finiteExponentialCauchyCoefficient
-          left right (Data.Fin.Base.toℕ index)))
+          left right (toℕ index)))
     (FinSum.finSumIsSeriesOf
       (Exp.expTerm (BishopReal._+_ left right)) total)
 
@@ -159,7 +160,7 @@ leftProductConvergent z x =
     constantFactor =
       cubicTranslationFactor x ,
       BishopSequence.xₙ≃c⇒xₙ→c
-        (λ {(Agda.Builtin.Nat.suc n) → BishopP.≃-refl})
+        (λ {(suc n) → BishopP.≃-refl})
   in
   BishopReal._*_ (Exp.bishopExp z) (cubicTranslationFactor x) ,
   BishopSequence.xₙyₙ→x₀y₀ expZ constantFactor
