@@ -18,7 +18,7 @@ fiveTransitions =
     refl
     refl
     4
-    (s≤sᶜ (s≤sᶜ (s≤sᶜ (s≤sᶜ z≤ᶜ))))
+    (s≤s (s≤s (s≤s (s≤s z≤n))))
     2
     2
     4
