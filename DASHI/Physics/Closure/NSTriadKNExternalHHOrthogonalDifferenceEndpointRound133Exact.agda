@@ -42,7 +42,7 @@ module DASHI.Physics.Closure.NSTriadKNExternalHHOrthogonalDifferenceEndpointRoun
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Integer using (ℤ; +_; _*_; _+_)
+open import Data.Integer using (ℤ; +_; _*_; _+_; _-_)
 import Data.Integer.Tactic.RingSolver as IntRS
 import Tactic.RingSolver.NonReflective as NR
 open import Relation.Binary.PropositionalEquality using (subst; trans)
