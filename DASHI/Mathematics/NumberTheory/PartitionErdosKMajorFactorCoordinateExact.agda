@@ -55,37 +55,39 @@ residualPositive
 residualPositive
   (kMajorFactorCoordinate (suc copiesPredecessor) (suc divisorPredecessor)
     copiesPositive copiesBound divisorPositive divisorBound productBound) =
-  NatP.m≤m*n (suc copiesPredecessor) (suc divisorPredecessor)
+  NatP.≤-trans
+    copiesPositive
+    (NatP.m≤m*n (suc copiesPredecessor) (suc divisorPredecessor))
 
 asPositiveFactorPair :
   ∀ {n} (coordinate : KMajorFactorCoordinate n) →
   Factor.PositiveFactorPair (residual coordinate)
-asPositiveFactorPair coordinate =
+asPositiveFactorPair
+  (kMajorFactorCoordinate zero divisor () copiesBound
+    divisorPositive divisorBound productBound)
+asPositiveFactorPair
+  (kMajorFactorCoordinate (suc copiesPredecessor) zero
+    copiesPositive copiesBound () divisorBound productBound)
+asPositiveFactorPair
+  (kMajorFactorCoordinate (suc copiesPredecessor) (suc divisorPredecessor)
+    copiesPositive copiesBound divisorPositive divisorBound productBound) =
   Factor.positiveFactorPair
-    (divisor coordinate)
-    (divisorPositive coordinate)
+    (suc divisorPredecessor)
+    divisorPositive
     divisor≤product
-    (copiesPredecessor coordinate)
+    copiesPredecessor
     refl
   where
-  copiesPredecessor : KMajorFactorCoordinate _ → Nat
-  copiesPredecessor
-    (kMajorFactorCoordinate zero divisor () copiesBound
-      divisorPositive divisorBound productBound)
-  copiesPredecessor
-    (kMajorFactorCoordinate (suc predecessor) divisor
-      copiesPositive copiesBound divisorPositive divisorBound productBound) =
-    predecessor
-
-  divisor≤product : divisor coordinate ≤ residual coordinate
-  divisor≤product with coordinate
-  ... | kMajorFactorCoordinate zero divisor () copiesBound
-          divisorPositive divisorBound productBound
-  ... | kMajorFactorCoordinate (suc predecessor) zero
-          copiesPositive copiesBound () divisorBound productBound
-  ... | kMajorFactorCoordinate (suc predecessor) (suc divisorPredecessor)
-          copiesPositive copiesBound divisorPositive divisorBound productBound =
-        NatP.m≤n*m (suc divisorPredecessor) (suc predecessor)
+  divisor≤product :
+    suc divisorPredecessor
+    ≤ suc copiesPredecessor * suc divisorPredecessor
+  divisor≤product =
+    NatP.≤-trans
+      (NatP.m≤m*n (suc divisorPredecessor) (suc copiesPredecessor))
+      (NatP.≤-reflexive
+        (NatP.*-comm
+          (suc divisorPredecessor)
+          (suc copiesPredecessor)))
 
 ------------------------------------------------------------------------
 -- Executable k-major scan.  `oneTo n` supplies positivity/boundedness of both
