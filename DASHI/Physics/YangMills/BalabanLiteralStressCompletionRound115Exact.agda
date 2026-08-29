@@ -3,10 +3,6 @@ module DASHI.Physics.YangMills.BalabanLiteralStressCompletionRound115Exact where
 
 ------------------------------------------------------------------------
 -- ROUND115: ONE LITERAL STRESS COORDINATE COMPILES ALL DOWNSTREAM MACHINERY
---
--- Round114 makes telescope, shell/coefficient, and marked-completion data three
--- views of one selected stress coordinate.  This file exposes the downstream
--- consequences in one carrier so consumers do not need to reassemble them.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -21,6 +17,7 @@ import DASHI.Physics.YangMills.BalabanContinuumScaleLocalObservableCauchyExact a
 import DASHI.Physics.YangMills.BalabanTopDownSummableRGIncrementExact as Sum
 import DASHI.Physics.YangMills.BalabanCMP119CompatibleLocalExpectationFlowExact as Source
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
+import DASHI.Physics.YangMills.BalabanMarkedSourceCoefficientEnergyHilbertCompilerExact as Hilbert
 import DASHI.Physics.YangMills.BalabanMarkedSourceNuclearCompositeFieldExact as Marked
 import DASHI.Physics.YangMills.BalabanMarkedSourceCompositeStressFieldExact as StressMarked
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
@@ -78,7 +75,7 @@ compiledStressFiniteHilbertData :
     {Y : Top.LiteralYangMillsConstruction C S}
     {group : Top.CompactSimpleGroup C}
     (coordinate : R114.LiteralStressCoordinate Y group) →
-  Nat → R112.Hilbert.FiniteMarkedSourceHilbertData
+  Nat → Hilbert.FiniteMarkedSourceHilbertData
 compiledStressFiniteHilbertData coordinate =
   R112.stressFiniteHilbertData
     (coefficientShell (compileLiteralStressCoordinate coordinate))
@@ -101,8 +98,5 @@ compiledStressCompletionIsLiteralClayStressDerivative coordinate =
 literalStressCompletionCompilerLevel : ProofLevel
 literalStressCompletionCompilerLevel = machineChecked
 
--- No new analysis remains between a correctly instantiated Round114 coordinate
--- and these consequences.  Physical work lives entirely in constructing that
--- one source-exact coordinate and its three views.
 literalStressCoordinatePhysicalInstantiationRound115Level : ProofLevel
 literalStressCoordinatePhysicalInstantiationRound115Level = conditional
