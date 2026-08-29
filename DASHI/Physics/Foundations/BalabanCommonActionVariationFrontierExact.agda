@@ -13,15 +13,11 @@ import DASHI.Physics.YangMills.Balaban1989Theorem1UVStabilityExact as Balaban
 -- BIDI frontier: use the literal beta-driven Balaban effective-density flow as
 -- the QFT-side producer for the common-action variation theorem.
 --
--- Existing machine-checked producer:
---   beta history -> literal effective-density flow, with the same coupling
---   trajectory and conditional CMP122 Section-2 preservation/bounds.
---
--- Missing physical analysis:
---   metric variation of that SAME density -> total QFT stress-energy.
---
--- This module makes that missing theorem exact and proves that, once supplied,
--- it constructs `QFTVariationIdentification` for the common-action compiler.
+-- Cross-pollination with live YM PR #635 sharpens an important distinction:
+-- CMP109 Eq.(5.1) / Round103 controls a physical gauge-background B-Hessian,
+-- not the spacetime metric variation defining stress-energy.  Therefore the
+-- metric variation below remains a separate physical theorem even when the
+-- Round103 differentiated carrier is available.
 ------------------------------------------------------------------------
 
 record BalabanQFTVariationReceipt
@@ -36,16 +32,13 @@ record BalabanQFTVariationReceipt
       Balaban.Balaban1989Theorem1Witness
         (BetaDensity.betaDrivenCompleteDensityFlow inputs)
 
-    -- Applications identify each candidate/regime pair with the literal RG
-    -- scale whose density is being varied.  This prevents a parallel-flow
-    -- substitution at the final QFT weld.
     scaleFor : Weld.Candidate U → Weld.Regime U → Nat
 
+    -- This is specifically the metric/source variation needed by the QFT/GR
+    -- weld.  It must not be instantiated merely by the CMP109 B-Hessian.
     metricVariationOfDensity :
       BetaDensity.Density inputs → Weld.SharedStressEnergy U
 
-    -- The common effective-source variation is literally the metric variation
-    -- of the density from the beta-driven Balaban flow at the selected scale.
     commonVariationIsBalabanDensityVariation :
       ∀ candidate regime →
       Weld.qftRegime U regime →
@@ -57,8 +50,6 @@ record BalabanQFTVariationReceipt
           (BetaDensity.betaDrivenCompleteDensityFlow inputs)
           (scaleFor candidate regime))
 
-    -- The same density variation is the TOTAL QFT stress-energy, not merely one
-    -- compact-simple gauge-sector stress tensor.
     balabanDensityVariationIsTotalQFTStress :
       ∀ candidate regime →
       Weld.qftRegime U regime →
@@ -76,12 +67,6 @@ record BalabanQFTVariationReceipt
         (Weld.qftTotalStressShared U candidate)
 
 open BalabanQFTVariationReceipt public
-
-------------------------------------------------------------------------
--- Compiler: once the two genuine variational identifications are proved on the
--- same beta-driven density flow, the generic common-action QFT identification
--- follows by equality transitivity.
-------------------------------------------------------------------------
 
 balabanReceiptBuildsQFTVariationIdentification :
   ∀ {U : Weld.UnifiedCandidate}
@@ -102,12 +87,6 @@ balabanReceiptBuildsQFTVariationIdentification variation inputs receipt = record
           (balabanDensityVariationIsTotalQFTStress
             receipt candidate regime qftAtRegime)
   }
-
-------------------------------------------------------------------------
--- Existing source authority supplies density-class preservation and bounds on
--- the exact flow, but not the metric derivative.  These helper theorems expose
--- that distinction explicitly.
-------------------------------------------------------------------------
 
 balabanSection2FormAvailable :
   ∀ {U : Weld.UnifiedCandidate}
@@ -137,10 +116,6 @@ balabanSection2BoundsAvailable :
 balabanSection2BoundsAvailable receipt scale =
   Balaban.effectiveDensitiesSatisfySection2Bounds (theorem1 receipt) scale
 
-------------------------------------------------------------------------
--- Honest frontier classification.
-------------------------------------------------------------------------
-
 record BalabanCommonVariationBoundary : Set where
   constructor balabanCommonVariationBoundary
   field
@@ -152,6 +127,14 @@ record BalabanCommonVariationBoundary : Set where
     betaCouplingIdentityAloneDefinesStressTensorIsFalse :
       betaCouplingIdentityAloneDefinesStressTensor ≡ false
 
+    cmp109BackgroundHessianIsMetricVariation : Bool
+    cmp109BackgroundHessianIsMetricVariationIsFalse :
+      cmp109BackgroundHessianIsMetricVariation ≡ false
+
+    backgroundHessianTransportMayDropSubstitutionCurvature : Bool
+    backgroundHessianTransportMayDropSubstitutionCurvatureIsFalse :
+      backgroundHessianTransportMayDropSubstitutionCurvature ≡ false
+
     oneGaugeSectorStressIsTotalQFTStress : Bool
     oneGaugeSectorStressIsTotalQFTStressIsFalse :
       oneGaugeSectorStressIsTotalQFTStress ≡ false
@@ -162,4 +145,10 @@ record BalabanCommonVariationBoundary : Set where
 
 canonicalBalabanCommonVariationBoundary : BalabanCommonVariationBoundary
 canonicalBalabanCommonVariationBoundary =
-  balabanCommonVariationBoundary false refl false refl false refl true refl
+  balabanCommonVariationBoundary
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    true refl
