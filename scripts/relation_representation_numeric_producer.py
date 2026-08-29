@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Deterministic tiny numerical producer for relation-representation receipts.
 
-This is an executable fixture, not an LLM experiment.  It computes the same
-finite spectral / rotation / affine / local-sensitivity values reified by
-DASHI.Reasoning.NumericalRelationProducerReceiptExact.
+This is an executable fixture, not an LLM experiment. It computes the same
+finite spectral / SVD / rotation / affine / local-sensitivity values reified by
+DASHI.Reasoning.FiniteRelationLinearAlgebraProducerExact and
+DASHI.Reasoning.FiniteRelationSVDJacobianProducerExact.
 
 No NumPy dependency is required so the receipt can run in the focused CI lane.
 """
@@ -65,6 +66,16 @@ def build_receipt():
             pair["eigenvalue"] * v for v in pair["vector"]
         ]
 
+    # Literal exact SVD of X = diag(3,1): U=I, Sigma=diag(3,1), V=I.
+    identity = [[1, 0], [0, 1]]
+    singular_values = [3, 1]
+    sigma = [[3, 0], [0, 1]]
+    reconstructed = matmul(matmul(identity, sigma), transpose(identity))
+    svd_reconstruction_error = sqerr(reconstructed, residuals)
+    assert svd_reconstruction_error == 0
+    assert singular_values[0] ** 2 == eigenpairs[0]["eigenvalue"]
+    assert singular_values[1] ** 2 == eigenpairs[1]["eigenvalue"]
+
     rotation = [[0, -1], [1, 0]]
     rotation_inputs = [[1, 0], [0, 1], [-1, 0], [0, -1]]
     rotation_outputs = [matvec(rotation, x) for x in rotation_inputs]
@@ -89,6 +100,13 @@ def build_receipt():
             "gram": gram_matrix,
             "eigenpairs": eigenpairs,
             "spectral_gap": eigenpairs[0]["eigenvalue"] - eigenpairs[1]["eigenvalue"],
+        },
+        "svd": {
+            "matrix": residuals,
+            "u": identity,
+            "singular_values": singular_values,
+            "v": identity,
+            "reconstruction_error": svd_reconstruction_error,
         },
         "rotation": {
             "matrix": rotation,
