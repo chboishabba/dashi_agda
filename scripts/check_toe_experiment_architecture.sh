@@ -13,13 +13,16 @@ FILES=(
   DASHI/Programmes/ResearchProgrammeExact.agda
   DASHI/Programmes/CFDExact.agda
   DASHI/Programmes/BrainExact.agda
+  DASHI/Programmes/BrainHemibrainExperimentExact.agda
   DASHI/Programmes/QuantumExact.agda
+  DASHI/Programmes/QuantumFalsifiableTargetExact.agda
   DASHI/Programmes/DashifineExact.agda
   DASHI/Programmes/GrokkingExact.agda
   DASHI/Programmes/CoreReferenceExact.agda
   DASHI/Programmes/FRACDASHExact.agda
   DASHI/Programmes/TestHarnessExact.agda
   DASHI/Programmes/RTXExact.agda
+  DASHI/Programmes/RTXLightTransportRefinementExact.agda
   DASHI/Programmes/Everything.agda
   DASHI/Programmes/ResearchProgrammeValidation.agda
 )
@@ -55,6 +58,15 @@ for witness in \
     exit 1
   }
 done
+
+# Substantive satellite sockets.  These names are intentionally theorem-facing,
+# not documentation-only markers.
+grep -q '^HemibrainMeasurementClosesPrediction :' DASHI/Programmes/BrainHemibrainExperimentExact.agda
+grep -q '^hemibrainReceiptDoesNotRemoveMeasurementObligation :' DASHI/Programmes/BrainHemibrainExperimentExact.agda
+grep -q '^falsifiableTargetRefutesCurrentEquivalence :' DASHI/Programmes/QuantumFalsifiableTargetExact.agda
+grep -q '^iteratedRefinementPreservesObservation :' DASHI/Programmes/RTXLightTransportRefinementExact.agda
+grep -q 'lowerMDLIsPhysicalTruthIsFalse' DASHI/Programmes/RTXLightTransportRefinementExact.agda
+grep -q 'discriminatorAloneIsQuantumGravityTheoryIsFalse' DASHI/Programmes/QuantumFalsifiableTargetExact.agda
 
 if ! command -v agda >/dev/null 2>&1; then
   echo "Agda executable not available; static TOE experiment/programme checks passed, kernel typecheck not run." >&2
