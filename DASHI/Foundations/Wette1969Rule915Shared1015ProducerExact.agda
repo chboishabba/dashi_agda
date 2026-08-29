@@ -33,50 +33,21 @@ sharedTarget : {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParame
   Shared1015ProducerChain initial firstSeven later → Context
 sharedTarget chain = Producer.producerTarget (produce15 chain)
 
-sharedTail14 chain = PCRA.appendCertifiedTrace
-  (Producer.producerTrace (produce14 chain))
-  (Producer.producerTrace (produce15 chain))
-sharedTail13 chain = PCRA.appendCertifiedTrace
-  (Producer.producerTrace (produce13 chain)) (sharedTail14 chain)
-sharedTail12 chain = PCRA.appendCertifiedTrace
-  (Producer.producerTrace (produce12 chain)) (sharedTail13 chain)
-sharedTail11 chain = PCRA.appendCertifiedTrace
-  (Producer.producerTrace (produce11 chain)) (sharedTail12 chain)
-
-sharedTrace : {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : Later.Rule915LaterParameters} →
-  (chain : Shared1015ProducerChain initial firstSeven later) →
-  PCRA.CertifiedRuleTrace historicalSystem initial
-sharedTrace chain = PCRA.appendCertifiedTrace
-  (Producer.producerTrace (produce10 chain)) (sharedTail11 chain)
-
-sharedRunTarget : {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : Later.Rule915LaterParameters} →
-  Shared1015ProducerChain initial firstSeven later → Context
-sharedRunTarget chain = PCRA.runCertifiedTrace historicalSystem (sharedTrace chain)
-
-sharedRunTargetEqualsLastProducerTarget :
+sharedPreservesPriorFormula :
   {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
   {later : Later.Rule915LaterParameters} →
   (chain : Shared1015ProducerChain initial firstSeven later) →
-  sharedRunTarget chain ≡ sharedTarget chain
-sharedRunTargetEqualsLastProducerTarget chain =
-  trans (PCRA.runAppendCertifiedTrace
-    (Producer.producerTrace (produce10 chain)) (sharedTail11 chain))
-  (trans (PCRA.runAppendCertifiedTrace
-    (Producer.producerTrace (produce11 chain)) (sharedTail12 chain))
-  (trans (PCRA.runAppendCertifiedTrace
-    (Producer.producerTrace (produce12 chain)) (sharedTail13 chain))
-  (trans (PCRA.runAppendCertifiedTrace
-    (Producer.producerTrace (produce13 chain)) (sharedTail14 chain))
-    (PCRA.runAppendCertifiedTrace
-      (Producer.producerTrace (produce14 chain))
-      (Producer.producerTrace (produce15 chain))))))
+  (formula : Later.Formula) →
+  formula Finite.∈Context initial →
+  formula Finite.∈Context sharedTarget chain
+sharedPreservesPriorFormula chain formula evidence =
+  Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce15 chain)) formula
+    (Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce14 chain)) formula
+      (Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce13 chain)) formula
+        (Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce12 chain)) formula
+          (Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce11 chain)) formula
+            (Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce10 chain)) formula evidence)))))
 
-p10AtTarget : {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : Later.Rule915LaterParameters} →
-  (chain : Shared1015ProducerChain initial firstSeven later) →
-  Later.premise10 later Finite.∈Context sharedTarget chain
 p10AtTarget chain =
   Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce15 chain)) _
     (Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce14 chain)) _
@@ -85,10 +56,6 @@ p10AtTarget chain =
           (Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce11 chain)) _
             (Producer.producedAtTarget (produce10 chain))))))
 
-p11AtTarget : {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : Later.Rule915LaterParameters} →
-  (chain : Shared1015ProducerChain initial firstSeven later) →
-  Later.premise11 later Finite.∈Context sharedTarget chain
 p11AtTarget chain =
   Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce15 chain)) _
     (Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce14 chain)) _
@@ -96,38 +63,42 @@ p11AtTarget chain =
         (Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce12 chain)) _
           (Producer.producedAtTarget (produce11 chain)))))
 
-p12AtTarget : {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : Later.Rule915LaterParameters} →
-  (chain : Shared1015ProducerChain initial firstSeven later) →
-  Later.premise12 later Finite.∈Context sharedTarget chain
 p12AtTarget chain =
   Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce15 chain)) _
     (Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce14 chain)) _
       (Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce13 chain)) _
         (Producer.producedAtTarget (produce12 chain))))
 
-p13AtTarget : {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : Later.Rule915LaterParameters} →
-  (chain : Shared1015ProducerChain initial firstSeven later) →
-  Later.premise13 later Finite.∈Context sharedTarget chain
 p13AtTarget chain =
   Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce15 chain)) _
     (Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce14 chain)) _
       (Producer.producedAtTarget (produce13 chain)))
 
-p14AtTarget : {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : Later.Rule915LaterParameters} →
-  (chain : Shared1015ProducerChain initial firstSeven later) →
-  Later.premise14 later Finite.∈Context sharedTarget chain
 p14AtTarget chain = Closure.certifiedTracePreservesPriorFormula
   (Producer.producerTrace (produce15 chain)) _
   (Producer.producedAtTarget (produce14 chain))
 
-p15AtTarget : {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : Later.Rule915LaterParameters} →
-  (chain : Shared1015ProducerChain initial firstSeven later) →
-  Later.premise15 later Finite.∈Context sharedTarget chain
 p15AtTarget chain = Producer.producedAtTarget (produce15 chain)
+
+-- Explicit signatures keep the target dependency visible to Agda and readers.
+p10AtTarget : {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters} → (chain : Shared1015ProducerChain initial firstSeven later) →
+  Later.premise10 later Finite.∈Context sharedTarget chain
+p11AtTarget : {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters} → (chain : Shared1015ProducerChain initial firstSeven later) →
+  Later.premise11 later Finite.∈Context sharedTarget chain
+p12AtTarget : {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters} → (chain : Shared1015ProducerChain initial firstSeven later) →
+  Later.premise12 later Finite.∈Context sharedTarget chain
+p13AtTarget : {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters} → (chain : Shared1015ProducerChain initial firstSeven later) →
+  Later.premise13 later Finite.∈Context sharedTarget chain
+p14AtTarget : {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters} → (chain : Shared1015ProducerChain initial firstSeven later) →
+  Later.premise14 later Finite.∈Context sharedTarget chain
+p15AtTarget : {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters} → (chain : Shared1015ProducerChain initial firstSeven later) →
+  Later.premise15 later Finite.∈Context sharedTarget chain
 
 sharedEvidenceAtTarget : {initial : Context}
   {firstSeven : Rule915.Rule915FirstSevenParameters}
@@ -138,15 +109,6 @@ sharedEvidenceAtTarget : {initial : Context}
 sharedEvidenceAtTarget chain = Obligations.shared1015Evidence
   (p10AtTarget chain) (p11AtTarget chain) (p12AtTarget chain)
   (p13AtTarget chain) (p14AtTarget chain) (p15AtTarget chain)
-
-sharedEvidenceAtRunTarget : {initial : Context}
-  {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : Later.Rule915LaterParameters} →
-  (chain : Shared1015ProducerChain initial firstSeven later) →
-  Obligations.Shared1015Evidence (sharedRunTarget chain)
-    (Later.completeTypedTranscription firstSeven later)
-sharedEvidenceAtRunTarget chain
-  rewrite sharedRunTargetEqualsLastProducerTarget chain = sharedEvidenceAtTarget chain
 
 record Wette1969Rule915Shared1015ProducerBoundary : Set where
   constructor wette1969Rule915Shared1015ProducerBoundary
