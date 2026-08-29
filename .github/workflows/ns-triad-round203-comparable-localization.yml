@@ -14,9 +14,11 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNComparableOutputResidualPaymentRound211Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNResonantOutputShellTriangleRound212Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNComparableFixedOutputTwoSidedCollarRound213Exact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound213Exact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound213Validation.agda'
-      - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound213Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNComparableConstantBandGramNoGoRound214Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNThreeClassPositiveResidualCompilerRound215Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound215Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound215Validation.agda'
+      - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound215Exact.agda'
       - 'scripts/check_ns_triad_clay_frontier.py'
       - 'scripts/run_agda29_parallel_check.sh'
       - 'flake.nix'
@@ -85,14 +87,26 @@ jobs:
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNComparableFixedOutputTwoSidedCollarRound213Exact.agda
 
-      - name: Type-check Round213 frontier validation
+      - name: Type-check Round214 constant-band no-go
         run: >-
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNClayFrontierRound213Validation.agda
+          DASHI/Physics/Closure/NSTriadKNComparableConstantBandGramNoGoRound214Exact.agda
 
-      - name: Type-check Round213 paper interface
+      - name: Type-check Round215 positive three-class compiler
         run: >-
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
-          DASHI/Papers/NavierStokes/TheoremInterfaceRound213Exact.agda
+          DASHI/Physics/Closure/NSTriadKNThreeClassPositiveResidualCompilerRound215Exact.agda
+
+      - name: Type-check Round215 frontier validation
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound215Validation.agda
+
+      - name: Type-check Round215 paper interface
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Papers/NavierStokes/TheoremInterfaceRound215Exact.agda
