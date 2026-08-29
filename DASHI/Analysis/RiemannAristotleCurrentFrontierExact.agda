@@ -47,8 +47,6 @@ record AristotleCurrentFrontier : Set where
     finalRHImplicationClosed : Bool
     finalRHImplicationClosedIsFalse : finalRHImplicationClosed ≡ false
 
-    -- Explicit-cutoff tranche. These are additive compatibility fields; the
-    -- older public projections above are intentionally retained.
     deterministicProjectiveSchurKernelCheckedInLean : Bool
     deterministicProjectiveSchurKernelCheckedInLeanIsTrue : deterministicProjectiveSchurKernelCheckedInLean ≡ true
     explicitFarShellCutoffBoundClosedInLean : Bool
@@ -68,7 +66,6 @@ record AristotleCurrentFrontier : Set where
     jointFiniteNearFarMarginClosed : Bool
     jointFiniteNearFarMarginClosedIsFalse : jointFiniteNearFarMarginClosed ≡ false
 
-    -- Bidi refinement after inspecting the literal finite carrier.
     finiteNearCarrierReflectionStableInLeanSource : Bool
     finiteNearCarrierReflectionStableInLeanSourceIsTrue : finiteNearCarrierReflectionStableInLeanSource ≡ true
     finiteNearSummandAlreadyReflectionPaired : Bool
@@ -82,6 +79,16 @@ record AristotleCurrentFrontier : Set where
     conjugationOrbitCompressionOwned : Bool
     conjugationOrbitCompressionOwnedIsFalse : conjugationOrbitCompressionOwned ≡ false
 
+    -- Cross-lane reuse: generic finite Gram algebra already exists in NS Round180.
+    round180ExactFiniteGramLedgerReusedForRH : Bool
+    round180ExactFiniteGramLedgerReusedForRHIsTrue : round180ExactFiniteGramLedgerReusedForRH ≡ true
+    rhToRound180CarrierAdapterClosedInAgda : Bool
+    rhToRound180CarrierAdapterClosedInAgdaIsTrue : rhToRound180CarrierAdapterClosedInAgda ≡ true
+    literalRHPostSchurCellsIdentifiedWithRound180Carrier : Bool
+    literalRHPostSchurCellsIdentifiedWithRound180CarrierIsFalse : literalRHPostSchurCellsIdentifiedWithRound180Carrier ≡ false
+    signedRHGramDebtEstimateClosed : Bool
+    signedRHGramDebtEstimateClosedIsFalse : signedRHGramDebtEstimateClosed ≡ false
+
     boundedReading : String
 
 open AristotleCurrentFrontier public
@@ -94,4 +101,5 @@ canonicalAristotleCurrentFrontier =
     false refl false refl false refl false refl false refl false refl false refl
     true refl true refl true refl true refl true refl true refl false refl false refl false refl
     true refl true refl true refl false refl false refl false refl
-    "The explicit-cutoff Lean tranche closes the infinite S2 tail and constructs the literal finite nearOffFinset carrier on D_off. Source inspection further shows that nearOffFinset is reflection-stable because membership depends only on the ordinate gap, while reflection preserves the ordinate; the stored summand is already Z_sigma + Z_Rsigma, so reflection compression is exhausted and the odd-height channel is already cancelled. Agda now owns both the finite-near perturbation compiler and a finite signed Gram ledger that rewrites the post-Schur near energy as diagonal mass plus a signed twice-cross covariance term. The first unproved S2 analytic theorem is therefore the literal finite Gram identity/instantiation together with a signed bound on its cross term strong enough that the diagonal plus covariance budget, plus the explicit far error, lies below the S1 cluster margin. No conjugation-orbit theorem is claimed because no checked conjugation carrier API was identified. S1, the finite signed covariance estimate, the joint margin, and low-ordinate certification remain open. RH is not derived."
+    true refl true refl false refl false refl
+    "The explicit-cutoff Lean tranche closes the infinite S2 tail and constructs the literal finite reflection-paired near carrier on D_off. Bidi reuse across the repo shows that the generic finite Gram theorem is already machine-checked in NS Round180: ||sum cells||^2 = cellMassSum + signed gramDebt, with no absolute-value or cardinality loss. The new RH adapter proves that once the literal three-taper post-Schur near contributions are identified with the same exact Complex3 carrier, Round180 supplies the Gram identity automatically. Thus the live S2 mathematics is narrower again: G1 identify the literal RH post-Schur near contributions with Round180 cells; G2 bound the resulting signed Gram debt strongly enough that diagonal mass plus signed covariance, together with the explicit far-error energy, lies below the S1 cluster margin. Reflection compression is already exhausted; no conjugation-orbit claim is made without a checked source API. S1, G1, G2, the joint margin, and low-ordinate certification remain open. RH is not derived."
