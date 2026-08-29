@@ -45,6 +45,7 @@ import DASHI.Environment.LESObservationSourceRegistryExact
 import DASHI.Environment.LESSituatedSocioEcologicalHyperfabricExact
 import DASHI.Environment.LESSituatedObservationInteractionExact
 import DASHI.Environment.LESObserverContextDiscoveryConeExact
+import DASHI.Environment.LESDomainBasisBidiFrontierExact
 import DASHI.Geometry.AdaptiveWearableCompilerExact
 import DASHI.Geometry.EmpiricalROMRiskFieldExact
 import DASHI.Geometry.WearableBehaviouralSearchExact
