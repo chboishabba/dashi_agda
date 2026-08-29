@@ -1,0 +1,71 @@
+module DASHI.Analysis.RiemannG21OddTaylorRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Analysis.RiemannG21OddTaylorDeterminantExact as Taylor
+import DASHI.Analysis.RiemannG21OddTaylorRemainderDeterminantExact as Remainder
+import DASHI.Analysis.RiemannG21DeterminantMarginTransferExact as Margin
+
+regressionCubicFactorizationDerived :
+  Taylor.OddTaylorDeterminantBoundary.cubicDeterminantFactorizationDerived
+    Taylor.canonicalOddTaylorDeterminantBoundary
+  ≡ true
+regressionCubicFactorizationDerived =
+  Taylor.OddTaylorDeterminantBoundary.cubicDeterminantFactorizationDerivedIsTrue
+    Taylor.canonicalOddTaylorDeterminantBoundary
+
+regressionLinearLinearCancellationDerived :
+  Taylor.OddTaylorDeterminantBoundary.linearLinearCancellationDerived
+    Taylor.canonicalOddTaylorDeterminantBoundary
+  ≡ true
+regressionLinearLinearCancellationDerived =
+  Taylor.OddTaylorDeterminantBoundary.linearLinearCancellationDerivedIsTrue
+    Taylor.canonicalOddTaylorDeterminantBoundary
+
+regressionCubicCubicCancellationDerived :
+  Taylor.OddTaylorDeterminantBoundary.cubicCubicCancellationDerived
+    Taylor.canonicalOddTaylorDeterminantBoundary
+  ≡ true
+regressionCubicCubicCancellationDerived =
+  Taylor.OddTaylorDeterminantBoundary.cubicCubicCancellationDerivedIsTrue
+    Taylor.canonicalOddTaylorDeterminantBoundary
+
+regressionSixTermRemainderIdentityDerived :
+  Remainder.OddTaylorRemainderBoundary.exactSixTermDeterminantErrorDerived
+    Remainder.canonicalOddTaylorRemainderBoundary
+  ≡ true
+regressionSixTermRemainderIdentityDerived =
+  Remainder.OddTaylorRemainderBoundary.exactSixTermDeterminantErrorDerivedIsTrue
+    Remainder.canonicalOddTaylorRemainderBoundary
+
+regressionEntrywiseErrorsNotRequired :
+  Remainder.OddTaylorRemainderBoundary.fourIndependentEntryErrorsRequired
+    Remainder.canonicalOddTaylorRemainderBoundary
+  ≡ false
+regressionEntrywiseErrorsNotRequired =
+  Remainder.OddTaylorRemainderBoundary.fourIndependentEntryErrorsRequiredIsFalse
+    Remainder.canonicalOddTaylorRemainderBoundary
+
+regressionStrictSignStillOpen :
+  Taylor.OddTaylorDeterminantBoundary.strictSignFromOrderedRadiiAndMarginDerived
+    Taylor.canonicalOddTaylorDeterminantBoundary
+  ≡ false
+regressionStrictSignStillOpen =
+  Taylor.OddTaylorDeterminantBoundary.strictSignFromOrderedRadiiAndMarginDerivedIsFalse
+    Taylor.canonicalOddTaylorDeterminantBoundary
+
+regressionActualRemainderBoundStillOpen :
+  Remainder.OddTaylorRemainderBoundary.actualRemainderMagnitudeBoundDerived
+    Remainder.canonicalOddTaylorRemainderBoundary
+  ≡ false
+regressionActualRemainderBoundStillOpen =
+  Remainder.OddTaylorRemainderBoundary.actualRemainderMagnitudeBoundDerivedIsFalse
+    Remainder.canonicalOddTaylorRemainderBoundary
+
+regressionMarginTransferStillOpen :
+  Margin.DeterminantMarginBoundary.actualTaylorMarginTransferDerived
+    Margin.canonicalDeterminantMarginBoundary
+  ≡ false
+regressionMarginTransferStillOpen =
+  Margin.DeterminantMarginBoundary.actualTaylorMarginTransferDerivedIsFalse
+    Margin.canonicalDeterminantMarginBoundary

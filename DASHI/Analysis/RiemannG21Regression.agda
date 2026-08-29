@@ -1,0 +1,222 @@
+module DASHI.Analysis.RiemannG21Regression where
+
+import DASHI.Analysis.RiemannG21LiteralPoleRankAuditExact as PoleAudit
+import DASHI.Analysis.RiemannG21ConjugateHeightSourceBridgeExact as Heights
+import DASHI.Analysis.RiemannG21SymmetricSampleBlockReductionExact as Blocks
+import DASHI.Analysis.RiemannG21ScaledHyperbolicMonotonicityBridgeExact as Scaled
+import DASHI.Analysis.StrictKernelMomentRatioExact as TP2
+import DASHI.Analysis.RiemannG21OddSinhTP2Exact as OddTP2
+import DASHI.Analysis.RiemannG21DeterminantMarginTransferExact as Margin
+import DASHI.Analysis.RiemannG21ParityMinorAnalyticFrontierExact as Frontier
+import DASHI.Analysis.RiemannG21ContextualAlternativeNonpromotionExact as Context
+import DASHI.Analysis.RiemannG21ContextualAlternativeFiniteInstanceExact as ContextInstance
+import DASHI.Analysis.RiemannG21PrimePairKernelExact as Pair
+import DASHI.Analysis.RiemannG21TwoByTwoMixedObstructionExact as Mixed2
+import DASHI.Analysis.RiemannG21AugmentedDeterminantFiniteExact as Det3
+import DASHI.Analysis.RiemannG21PoleQuotientedExteriorExact as G21
+import DASHI.Analysis.RiemannG21CrossPollinationExact as Cross
+
+open import DASHI.Core.Prelude
+
+regressionGenericThreeSampleResidualDimension :
+  PoleAudit.residualDimension PoleAudit.genericTwoPoleThreeSampleCase ≡ 1
+regressionGenericThreeSampleResidualDimension = G21.literalGenericThreeSampleResidualDimension
+
+regressionRobustFourSampleResidualDimension :
+  PoleAudit.residualDimension PoleAudit.genericTwoPoleFourSampleCase ≡ 2
+regressionRobustFourSampleResidualDimension = G21.robustFourSampleResidualDimension
+
+regressionConjugacyDoesNotForceHeightSeparation :
+  Heights.responseAtHeight Heights.canonicalCollapsedConjugateFamily Heights.lowHeight
+  ≡ Heights.responseAtHeight Heights.canonicalCollapsedConjugateFamily Heights.highHeight
+regressionConjugacyDoesNotForceHeightSeparation = G21.conjugateHeightSymmetryDoesNotForceSeparation
+
+regressionEvenMinorGate :
+  Blocks.MinorNonzero (Blocks.evenMinor Blocks.toyOffLineResponse Blocks.toyPoleResponse)
+regressionEvenMinorGate = tt
+
+regressionOddMinorGate :
+  Blocks.MinorNonzero (Blocks.oddMinor Blocks.toyOffLineResponse Blocks.toyPoleResponse)
+regressionOddMinorGate = tt
+
+regressionEvenAloneDoesNotForceOdd :
+  Blocks.MinorNonzero (Blocks.oddMinor Blocks.evenOnlyOffLine Blocks.evenOnlyPole) → ⊥
+regressionEvenAloneDoesNotForceOdd = Blocks.evenOnlyOddMinorFails
+
+regressionStrictHeightSourceAudited :
+  Frontier.ParityAnalyticFrontierBoundary.strictActualZetaHeightSeparationAvailable
+    Frontier.canonicalParityAnalyticFrontierBoundary
+  ≡ true
+regressionStrictHeightSourceAudited =
+  Frontier.ParityAnalyticFrontierBoundary.strictActualZetaHeightSeparationAvailableIsTrue
+    Frontier.canonicalParityAnalyticFrontierBoundary
+
+regressionScaledLogDerivativeReductionDerived :
+  Frontier.ParityAnalyticFrontierBoundary.scaledLogDerivativeReductionDerived
+    Frontier.canonicalParityAnalyticFrontierBoundary
+  ≡ true
+regressionScaledLogDerivativeReductionDerived =
+  Frontier.ParityAnalyticFrontierBoundary.scaledLogDerivativeReductionDerivedIsTrue
+    Frontier.canonicalParityAnalyticFrontierBoundary
+
+regressionGenericTP2OwnerConstructed :
+  TP2.StrictKernelMomentRatioBoundary.strictTP2InterfaceConstructed
+    TP2.canonicalStrictKernelMomentRatioBoundary
+  ≡ true
+regressionGenericTP2OwnerConstructed =
+  TP2.StrictKernelMomentRatioBoundary.strictTP2InterfaceConstructedIsTrue
+    TP2.canonicalStrictKernelMomentRatioBoundary
+
+regressionFiniteTP2Witness :
+  TP2.finiteKernel TP2.lowH TP2.innerU * TP2.finiteKernel TP2.highH TP2.outerU
+  ≡ TP2.finiteKernel TP2.lowH TP2.outerU * TP2.finiteKernel TP2.highH TP2.innerU
+  → ⊥
+regressionFiniteTP2Witness = TP2.finiteTP2MinorDistinct
+
+regressionFiniteMomentSignWitness :
+  TP2.finiteLowM0 * TP2.finiteHighMQ
+  ≡ TP2.finiteLowMQ * TP2.finiteHighM0
+  → ⊥
+regressionFiniteMomentSignWitness = TP2.finiteMomentCrossProductStrictlySeparated
+
+regressionActualSinhTP2StillOpen :
+  OddTP2.OddSinhTP2Boundary.sinhTP2DerivedInAgda OddTP2.canonicalOddSinhTP2Boundary
+  ≡ false
+regressionActualSinhTP2StillOpen =
+  OddTP2.OddSinhTP2Boundary.sinhTP2DerivedInAgdaIsFalse OddTP2.canonicalOddSinhTP2Boundary
+
+regressionActualOddMomentSignStillOpen :
+  OddTP2.OddSinhTP2Boundary.continuumOddMomentStrictSignDerived OddTP2.canonicalOddSinhTP2Boundary
+  ≡ false
+regressionActualOddMomentSignStillOpen =
+  OddTP2.OddSinhTP2Boundary.continuumOddMomentStrictSignDerivedIsFalse OddTP2.canonicalOddSinhTP2Boundary
+
+regressionDirectMarginInterfaceConstructed :
+  Margin.DeterminantMarginBoundary.directDeterminantErrorTargetConstructed
+    Margin.canonicalDeterminantMarginBoundary
+  ≡ true
+regressionDirectMarginInterfaceConstructed =
+  Margin.DeterminantMarginBoundary.directDeterminantErrorTargetConstructedIsTrue
+    Margin.canonicalDeterminantMarginBoundary
+
+regressionEntrywiseBoundsNotRequired :
+  Margin.DeterminantMarginBoundary.entrywiseTriangleBoundRequiredByInterface
+    Margin.canonicalDeterminantMarginBoundary
+  ≡ false
+regressionEntrywiseBoundsNotRequired =
+  Margin.DeterminantMarginBoundary.entrywiseTriangleBoundRequiredByInterfaceIsFalse
+    Margin.canonicalDeterminantMarginBoundary
+
+regressionXCothStillOpen :
+  Scaled.ScaledHyperbolicMonotonicityBoundary.actualXCothXMonotonicityDerived
+    Scaled.canonicalScaledHyperbolicMonotonicityBoundary
+  ≡ false
+regressionXCothStillOpen =
+  Scaled.ScaledHyperbolicMonotonicityBoundary.actualXCothXMonotonicityDerivedIsFalse
+    Scaled.canonicalScaledHyperbolicMonotonicityBoundary
+
+regressionFiniteCovarianceDerived :
+  Frontier.ParityAnalyticFrontierBoundary.finiteCovarianceAlgebraDerived
+    Frontier.canonicalParityAnalyticFrontierBoundary
+  ≡ true
+regressionFiniteCovarianceDerived =
+  Frontier.ParityAnalyticFrontierBoundary.finiteCovarianceAlgebraDerivedIsTrue
+    Frontier.canonicalParityAnalyticFrontierBoundary
+
+regressionFiniteRadiusMinorsStillOpen :
+  Frontier.ParityAnalyticFrontierBoundary.finiteRadiusParityMinorsDerived
+    Frontier.canonicalParityAnalyticFrontierBoundary
+  ≡ false
+regressionFiniteRadiusMinorsStillOpen =
+  Frontier.ParityAnalyticFrontierBoundary.finiteRadiusParityMinorsDerivedIsFalse
+    Frontier.canonicalParityAnalyticFrontierBoundary
+
+regressionContextualAlternativeBoundary :
+  Context.AlternativeNonpromotionBoundary.multipleValidAlternativeGroupingsCanExist
+    Context.canonicalAlternativeNonpromotionBoundary
+  ≡ true
+regressionContextualAlternativeBoundary =
+  Context.AlternativeNonpromotionBoundary.multipleValidAlternativeGroupingsCanExistIsTrue
+    Context.canonicalAlternativeNonpromotionBoundary
+
+regressionConcreteContextInstance :
+  ContextInstance.ContextualAlternativeFiniteInstanceBoundary.genericInterfaceInhabited
+    ContextInstance.canonicalContextualAlternativeFiniteInstanceBoundary
+  ≡ true
+regressionConcreteContextInstance =
+  ContextInstance.ContextualAlternativeFiniteInstanceBoundary.genericInterfaceInhabitedIsTrue
+    ContextInstance.canonicalContextualAlternativeFiniteInstanceBoundary
+
+regressionSameObservationAcrossGroupings :
+  ContextInstance.ContextualAlternativeFiniteInstanceBoundary.sameAggregateObservationAcrossGroupings
+    ContextInstance.canonicalContextualAlternativeFiniteInstanceBoundary
+  ≡ true
+regressionSameObservationAcrossGroupings =
+  ContextInstance.ContextualAlternativeFiniteInstanceBoundary.sameAggregateObservationAcrossGroupingsIsTrue
+    ContextInstance.canonicalContextualAlternativeFiniteInstanceBoundary
+
+regressionIncompatibleNarrativesWitnessed :
+  ContextInstance.ContextualAlternativeFiniteInstanceBoundary.incompatibleNarrativesWitnessed
+    ContextInstance.canonicalContextualAlternativeFiniteInstanceBoundary
+  ≡ true
+regressionIncompatibleNarrativesWitnessed =
+  ContextInstance.ContextualAlternativeFiniteInstanceBoundary.incompatibleNarrativesWitnessedIsTrue
+    ContextInstance.canonicalContextualAlternativeFiniteInstanceBoundary
+
+regressionPhysicalOriginUniquenessNotDerived :
+  ContextInstance.ContextualAlternativeFiniteInstanceBoundary.physicalOriginUniquenessDerived
+    ContextInstance.canonicalContextualAlternativeFiniteInstanceBoundary
+  ≡ false
+regressionPhysicalOriginUniquenessNotDerived =
+  ContextInstance.ContextualAlternativeFiniteInstanceBoundary.physicalOriginUniquenessDerivedIsFalse
+    ContextInstance.canonicalContextualAlternativeFiniteInstanceBoundary
+
+regressionAttachedPaperDoesNotProveRH :
+  Context.AlternativeNonpromotionBoundary.paperProvesRiemannHypothesis
+    Context.canonicalAlternativeNonpromotionBoundary
+  ≡ false
+regressionAttachedPaperDoesNotProveRH =
+  Context.AlternativeNonpromotionBoundary.paperProvesRiemannHypothesisIsFalse
+    Context.canonicalAlternativeNonpromotionBoundary
+
+regressionTwoByTwoNoGo :
+  Mixed2.det2Code Mixed2.responseLeft Mixed2.responseRight
+  ≡ Mixed2.det2Code Mixed2.commonPole Mixed2.commonPole → ⊥
+regressionTwoByTwoNoGo = G21.naiveTwoByTwoRankOnePoleGateRejected
+
+regressionConditionalThreeByThreePoleQuotient :
+  Det3.SameSignedDeterminant
+    (Det3.det3 Det3.response₁ Det3.response₂ Det3.poleProfile)
+    (Det3.det3 Det3.residual₁ Det3.residual₂ Det3.poleProfile)
+regressionConditionalThreeByThreePoleQuotient = G21.finiteThreeByThreeRankOneMechanism
+
+regressionPairAdmission : Pair.PrimePairRelationalAdmission
+regressionPairAdmission = Pair.canonicalToyPrimePairRelationalAdmission
+
+regressionCrossPollinationObserver : Cross.robustRankTwoExteriorCarrierReturned ≡ true
+regressionCrossPollinationObserver = Cross.robustRankTwoExteriorCarrierReturnedIsTrue
+
+regressionRankOneNotDerived :
+  G21.G21CurrentBoundary.rankOnePoleReductionDerived G21.canonicalG21CurrentBoundary ≡ false
+regressionRankOneNotDerived =
+  G21.G21CurrentBoundary.rankOnePoleReductionDerivedIsFalse G21.canonicalG21CurrentBoundary
+
+regressionEvenMinorNotDerived :
+  G21.G21CurrentBoundary.actualTaperEvenHeightMinorDerived G21.canonicalG21CurrentBoundary ≡ false
+regressionEvenMinorNotDerived =
+  G21.G21CurrentBoundary.actualTaperEvenHeightMinorDerivedIsFalse G21.canonicalG21CurrentBoundary
+
+regressionOddMinorNotDerived :
+  G21.G21CurrentBoundary.actualTaperOddHeightMinorDerived G21.canonicalG21CurrentBoundary ≡ false
+regressionOddMinorNotDerived =
+  G21.G21CurrentBoundary.actualTaperOddHeightMinorDerivedIsFalse G21.canonicalG21CurrentBoundary
+
+regressionTransversalityNotDerived :
+  G21.G21CurrentBoundary.literalPoleQuotientTransversalityDerived G21.canonicalG21CurrentBoundary ≡ false
+regressionTransversalityNotDerived =
+  G21.G21CurrentBoundary.literalPoleQuotientTransversalityDerivedIsFalse G21.canonicalG21CurrentBoundary
+
+regressionRHBoundary :
+  G21.G21CurrentBoundary.riemannHypothesisDerived G21.canonicalG21CurrentBoundary ≡ false
+regressionRHBoundary =
+  G21.G21CurrentBoundary.riemannHypothesisDerivedIsFalse G21.canonicalG21CurrentBoundary
