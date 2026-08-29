@@ -38,6 +38,8 @@ FILES=(
   DASHI/Analysis/RiemannAristotleFiniteNearOrderedPairGramDebtExact.agda
   DASHI/Analysis/RiemannAristotleThreeTaperSchurKernelBilinearExact.agda
   DASHI/Analysis/RiemannAristotleFiniteNearSchurKernelCovarianceTargetExact.agda
+  DASHI/Analysis/RiemannAristotleDeterminantCovarianceCompilerExact.agda
+  DASHI/Analysis/RiemannAristotleG2DeterminantCovarianceRegression.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 )
@@ -78,6 +80,8 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotleFiniteNearOrderedPairGramDebtExact.agda
   agda DASHI/Analysis/RiemannAristotleThreeTaperSchurKernelBilinearExact.agda
   agda DASHI/Analysis/RiemannAristotleFiniteNearSchurKernelCovarianceTargetExact.agda
+  agda DASHI/Analysis/RiemannAristotleDeterminantCovarianceCompilerExact.agda
+  agda DASHI/Analysis/RiemannAristotleG2DeterminantCovarianceRegression.agda
   agda DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 else
   echo "agda executable not present; trust scan only" >&2
