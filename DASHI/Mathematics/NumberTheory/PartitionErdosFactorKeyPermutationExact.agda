@@ -31,6 +31,7 @@ open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans
 
 import DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact as Hecke
 import DASHI.Mathematics.NumberTheory.FiniteOneToEnumerationExact as OneTo
+import DASHI.Mathematics.NumberTheory.FinitePositiveFactorPairExact as Factor
 import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact as Product
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
 import DASHI.Mathematics.NumberTheory.PartitionErdosFactorCoordinateKeyExact as Key
@@ -60,12 +61,9 @@ kMajorFactorKeysUnique n =
 positiveKeyMatchesKMajor :
   ∀ {n : Nat}
     (coordinate : KMajor.KMajorFactorCoordinate n)
-    {pair : DASHI.Mathematics.NumberTheory.FinitePositiveFactorPairExact.PositiveFactorPair
-      (KMajor.residual coordinate)} →
-  DASHI.Mathematics.NumberTheory.FinitePositiveFactorPairExact.divisor pair
-    ≡ KMajor.divisor coordinate →
-  DASHI.Mathematics.NumberTheory.FinitePositiveFactorPairExact.predecessor pair
-    ≡ KMajor.copiesPredecessor coordinate →
+    {pair : Factor.PositiveFactorPair (KMajor.residual coordinate)} →
+  Factor.divisor pair ≡ KMajor.divisor coordinate →
+  Factor.predecessor pair ≡ KMajor.copiesPredecessor coordinate →
   Key.positiveFactorKey pair ≡ Key.kMajorFactorKey coordinate
 positiveKeyMatchesKMajor coordinate divisorExact predecessorExact =
   Key.factorCoordinateKeyExtensional
@@ -84,7 +82,7 @@ transportBlockPositive :
     {key : Key.FactorCoordinateKey} →
   key ∈ ResidualMajor.residualFactorKeyBlock r leftPositive →
   key ∈ ResidualMajor.residualFactorKeyBlock r rightPositive
-transportBlockPositive {r} {leftPositive} {rightPositive} member =
+transportBlockPositive {r} {leftPositive} {rightPositive} {key} member =
   subst
     (λ positive → key ∈ ResidualMajor.residualFactorKeyBlock r positive)
     (NatP.≤-irrelevant leftPositive rightPositive)
