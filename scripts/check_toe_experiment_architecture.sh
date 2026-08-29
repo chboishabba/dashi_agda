@@ -10,6 +10,8 @@ FILES=(
   DASHI/Core/RobustExperimentInferenceFrontierExact.agda
   DASHI/Core/TOEExperimentArchitectureValidation.agda
   DASHI/Physics/Foundations/PhysicalTheoryExperimentDiscriminationExact.agda
+  DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
+  DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryValidation.agda
   DASHI/Programmes/ResearchProgrammeExact.agda
   DASHI/Programmes/BidirectionalSatelliteCorrectionExact.agda
   DASHI/Programmes/ExecutableReceiptSchemaExact.agda
@@ -61,6 +63,18 @@ grep -q 'calibratedFitDeterminesModelAdequacyIsFalse' DASHI/Core/RobustExperimen
 grep -q 'repairThatFitsTrainingIsScientificallySupportedIsFalse' DASHI/Core/RobustExperimentInferenceFrontierExact.agda
 grep -q 'sharedMathematicsIsPhysicalUnificationIsFalse' DASHI/Physics/Foundations/PhysicalTheoryExperimentDiscriminationExact.agda
 grep -q 'candidateFitIsEstablishedTheoryRecoveryIsFalse' DASHI/Physics/Foundations/PhysicalTheoryExperimentDiscriminationExact.agda
+
+grep -q '^actualGRStressEnergy :' DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
+grep -q '^actualQFTStressTensor :' DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
+grep -q 'sameStressEnergyOnOverlap' DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
+grep -q 'recoveryAfterCoarseGrainingCommutes' DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
+grep -q '^sameCandidateRecoveryImpliesPhysicalPromotion :' DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
+grep -q '^currentGeometryLimitStillOpen :' DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
+grep -q '^currentQuantumLimitStillOpen :' DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
+grep -q '^currentCommonCoarseGrainingStillOpen :' DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
+grep -q '^currentBackreactionConsistencyStillOpen :' DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
+grep -q '^currentCorrectionControlStillOpen :' DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
+grep -q '^promotionFromSameCandidateRecovery :' DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryValidation.agda
 
 for witness in \
   cfdOwner brainOwner quantumOwner dashifineOwner grokkingOwner \
@@ -115,10 +129,11 @@ if ! command -v agda >/dev/null 2>&1; then
 fi
 
 agda -i . -i /usr/share/agda-stdlib DASHI/Core/TOEExperimentArchitectureValidation.agda
+agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryValidation.agda
 agda -i . -i /usr/share/agda-stdlib DASHI/Programmes/ResearchProgrammeValidation.agda
 agda -i . -i /usr/share/agda-stdlib DASHI/Programmes/BidirectionalSatelliteValidation.agda
 agda -i . -i /usr/share/agda-stdlib DASHI/Programmes/Everything.agda
 agda -i . -i /usr/share/agda-stdlib DASHI/Core/Everything.agda
 agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/Everything.agda
 
-echo "TOE experiment, cross-repository programme, and BIDI correction checks passed."
+echo "TOE experiment, same-candidate QFT/GR recovery, cross-repository programme, and BIDI correction checks passed."
