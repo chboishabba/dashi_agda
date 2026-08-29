@@ -29,7 +29,6 @@ import DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact as Hecke
 import DASHI.Mathematics.NumberTheory.FiniteDependentPairEnumerationExact as Dep
 import DASHI.Mathematics.NumberTheory.FiniteOneToEnumerationExact as OneTo
 import DASHI.Mathematics.NumberTheory.FinitePositiveFactorPairExact as Factor
-import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact as Product
 import DASHI.Mathematics.NumberTheory.PartitionErdosFactorCoordinateKeyExact as Key
 
 residualFactorKeyBlock :
@@ -89,7 +88,6 @@ residualFactorKeyBlockUnique :
   Unique (residualFactorKeyBlock r positive)
 residualFactorKeyBlockUnique r positive =
   UniqueP.map⁺
-    Key.positiveFactorKey
     Key.positiveFactorKeyInjective
     (Factor.positiveFactorPairsUnique r positive)
 
