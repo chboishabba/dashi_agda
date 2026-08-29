@@ -12,14 +12,11 @@ import DASHI.Planning.NetworkFlowCapacityCongestionExact as Network
 import DASHI.Architecture.LiteralBuildingPhysicsAdmissibilityExact as Building
 import DASHI.Planning.SourceBoundPlanningCaseAtlasExact as Cases
 import DASHI.Planning.NonSubstitutionalReparationExact as Repair
+import DASHI.Planning.CollectiveTerritorialConsentExact as Consent
 import DASHI.Core.IntersectionalNonFactorability as INF
 
 ------------------------------------------------------------------------
 -- BIDI CAPSTONE
---
--- Backward consumers first: a planning branch is not closed merely because a
--- local institutional surface says so.  The following aliases force the ten
--- ranked seams to remain live in one validation/import surface.
 ------------------------------------------------------------------------
 
 wrongdoerStillCannotCloseLandReturn :
@@ -28,8 +25,7 @@ wrongdoerStillCannotCloseLandReturn = Closure.wrongdoerCannotCertifyLandReturn
 
 newEvidenceStillReopensIrreversibleAction :
   Irreversible.IrreversibleActionGate
-    DASHI.Planning.CollectiveTerritorialConsentExact.withdrawableConsent
-    Irreversible.materiallyChangedEvidence → ⊥
+    Consent.withdrawableConsent Irreversible.materiallyChangedEvidence → ⊥
 newEvidenceStillReopensIrreversibleAction =
   Irreversible.materialChangeReopensIrreversibleDecision
 
