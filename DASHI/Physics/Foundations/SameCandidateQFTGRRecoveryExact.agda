@@ -35,8 +35,6 @@ record UnifiedCandidate : Set₂ where
     Measurement : Set
     SharedStressEnergy : Set
 
-    -- Small promotion-token carriers.  They are not evidence by themselves;
-    -- the detailed receipts below must emit inhabitants of them.
     GRRecoveryToken : Set
     QFTRecoveryToken : Set
     StressEnergyWeldToken : Set
@@ -47,13 +45,9 @@ record UnifiedCandidate : Set₂ where
     microscopicState : Candidate → Effective.JointMicroscopicState
     coarseGrain : Candidate → Regime → Candidate
 
-    -- Literal GR target already owned by the repository, together with an
-    -- actual recovery operation from the SAME microscopic state.
     grTarget : Candidate → GR.EinsteinContinuumClosure
     recoverGR : Effective.JointMicroscopicState → GR.EinsteinContinuumClosure
 
-    -- Literal constructive-QFT target already owned by the repository, again
-    -- recovered from the SAME microscopic state.
     qftCarriers : QFT.LiteralYangMillsCarriers
     qftSemantics : QFT.LiteralYangMillsSemantics qftCarriers
     qftTarget : Candidate →
@@ -61,12 +55,9 @@ record UnifiedCandidate : Set₂ where
     recoverQFT : Effective.JointMicroscopicState →
       QFT.LiteralYangMillsConstruction qftCarriers qftSemantics
 
-    -- UV/IR labels do not prove a limit.  Applications declare the regimes.
     grRegime : Regime → Set
     qftRegime : Regime → Set
 
-    -- Thin explicit convention transports into one common stress/source
-    -- carrier.  The weld below compares the actual existing target objects.
     grStressToShared :
       ∀ candidate →
       FCG.ContinuumGeometry.Tensor2
@@ -75,7 +66,20 @@ record UnifiedCandidate : Set₂ where
             (grTarget candidate))) →
       SharedStressEnergy
 
-    qftStressToShared : QFT.StressTensor qftCarriers → SharedStressEnergy
+    -- The literal YM construction is indexed by compact simple gauge group.
+    -- Those sector stresses must be aggregated before comparison with the
+    -- total Einstein source.
+    qftSectorStressToShared :
+      QFT.CompactSimpleGroup qftCarriers →
+      QFT.StressTensor qftCarriers →
+      SharedStressEnergy
+
+    qftTotalStressShared : Candidate → SharedStressEnergy
+
+    QFTStressAggregation :
+      Candidate →
+      (QFT.CompactSimpleGroup qftCarriers → SharedStressEnergy) →
+      SharedStressEnergy → Set
 
     BackreactionConsistent : Candidate → Regime → Set
     CorrectionsControlled : Candidate → Regime → Set
@@ -85,10 +89,6 @@ record UnifiedCandidate : Set₂ where
     measurementTests : Measurement → Observable → Set
 
 open UnifiedCandidate public
-
-------------------------------------------------------------------------
--- Helpers exposing the literal source objects consumed by the weld.
-------------------------------------------------------------------------
 
 actualGRStressEnergy :
   ∀ (U : UnifiedCandidate) (candidate : Candidate U) →
@@ -107,9 +107,12 @@ actualQFTStressTensor :
 actualQFTStressTensor U candidate group =
   QFT.stressTensor (qftTarget U candidate) group
 
-------------------------------------------------------------------------
--- Literal recovery receipts.
-------------------------------------------------------------------------
+actualQFTSectorStressShared :
+  ∀ (U : UnifiedCandidate) (candidate : Candidate U) →
+  QFT.CompactSimpleGroup (qftCarriers U) →
+  SharedStressEnergy U
+actualQFTSectorStressShared U candidate group =
+  qftSectorStressToShared U group (actualQFTStressTensor U candidate group)
 
 record GRRecoveryReceipt (U : UnifiedCandidate) : Set₁ where
   field
@@ -183,24 +186,21 @@ record QFTRecoveryReceipt (U : UnifiedCandidate) : Set₁ where
 
 open QFTRecoveryReceipt public
 
-------------------------------------------------------------------------
--- Cross-sector receipts that neither separate recovery lane can supply alone.
-------------------------------------------------------------------------
-
 record SameStressEnergyWeld (U : UnifiedCandidate) : Set₁ where
   field
-    -- The actual StressEnergy field from Bianchi/Lovelock and the actual
-    -- stressTensor field from the literal QFT construction must agree after
-    -- explicit convention transport, on the same candidate and overlap regime.
+    qftStressAggregation : ∀ candidate →
+      QFTStressAggregation U candidate
+        (actualQFTSectorStressShared U candidate)
+        (qftTotalStressShared U candidate)
+
     sameStressEnergyOnOverlap :
-      ∀ candidate regime group →
+      ∀ candidate regime →
       grRegime U regime →
       qftRegime U regime →
       grStressToShared U (coarseGrain U candidate regime)
         (actualGRStressEnergy U (coarseGrain U candidate regime))
       ≡
-      qftStressToShared U
-        (actualQFTStressTensor U (coarseGrain U candidate regime) group)
+      qftTotalStressShared U (coarseGrain U candidate regime)
 
     stressWeldPromotionToken : StressEnergyWeldToken U
 
@@ -212,7 +212,6 @@ record CommonRegimeRecovery (U : UnifiedCandidate) : Set₁ where
     overlapIsGR : grRegime U overlapRegime
     overlapIsQFT : qftRegime U overlapRegime
 
-    -- Both sectors are evaluated after exactly the same coarse-graining map.
     backreactionConsistency : ∀ candidate →
       BackreactionConsistent U
         (coarseGrain U candidate overlapRegime) overlapRegime
@@ -246,10 +245,6 @@ record FalsifiableMeasurementReceipt
 
 open FalsifiableMeasurementReceipt public
 
-------------------------------------------------------------------------
--- The complete same-candidate BIDI receipt.
-------------------------------------------------------------------------
-
 record SameCandidateQFTGRRecovery (U : UnifiedCandidate) : Set₁ where
   field
     grRecovery : GRRecoveryReceipt U
@@ -260,12 +255,6 @@ record SameCandidateQFTGRRecovery (U : UnifiedCandidate) : Set₁ where
     falsifiableMeasurement : FalsifiableMeasurementReceipt U novelObservable
 
 open SameCandidateQFTGRRecovery public
-
-------------------------------------------------------------------------
--- Exact low-universe handoff to the Stage-6/7 physical promotion consumer.
--- Detailed recovery evidence remains in the rich receipts above; only tokens
--- emitted by those receipts cross the generic promotion boundary.
-------------------------------------------------------------------------
 
 physicalCandidateFromUnified :
   (U : UnifiedCandidate) → Physical.FundamentalPhysicalCandidate
@@ -292,10 +281,6 @@ sameCandidateRecoveryImpliesPhysicalPromotion recovery =
     , ( NovelObservableReceipt.novelPromotionToken (novelObservable recovery)
       , FalsifiableMeasurementReceipt.measurementPromotionToken
           (falsifiableMeasurement recovery) ) )
-
-------------------------------------------------------------------------
--- Fail-closed current-state theorem.
-------------------------------------------------------------------------
 
 currentGeometryLimitStillOpen :
   Effective.geometryLimitProved Effective.currentEffectiveRecoveryReceipt ≡ false
