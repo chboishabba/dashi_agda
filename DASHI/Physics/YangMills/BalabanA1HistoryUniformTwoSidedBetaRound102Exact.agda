@@ -3,27 +3,13 @@ module DASHI.Physics.YangMills.BalabanA1HistoryUniformTwoSidedBetaRound102Exact 
 
 ------------------------------------------------------------------------
 -- ROUND102 A CAPSTONE: HISTORY-UNIFORM FIVE-CHANNEL ABSOLUTE BOUND -> TWO-SIDED BETA
---
--- On the SAME current CMP109 coefficient, assume
---
---     beta = betaZ + betaInt,
---     b <= betaZ <= B,
---     |betaInt| <= C_h g_h^4,
---
--- uniformly over admitted histories, with C_h <= C.  Choose the constructive
--- gamma* = (1/2)b/(C+b) and require g_h <= gamma*.  The existing quartic
--- absorption then gives
---
---     b/2 <= beta <= B + b/2.
---
--- This supplies both slopes wanted by the frozen Row-A consumer from one
--- literal finite-g channel package.  History is not subtracted a second time.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; _<_)
+  (ℚ; 0ℚ; _+_; -_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -32,6 +18,7 @@ import DASHI.Physics.YangMills.BalabanYM4FiveChannelQuarticBetaAdapterExact as F
 import DASHI.Physics.YangMills.BalabanYM4FiveChannelQuarticAbsoluteBetaRound102Exact as AbsFive
 import DASHI.Physics.YangMills.BalabanA1ExplicitSmallCouplingQuarticAbsorptionRound101Exact as Absorb
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
 
 record HistoryUniformTwoSidedBetaData (History Cell : Set) : Set₁ where
   field
@@ -93,20 +80,19 @@ interactionDebtBelowHalfFloor :
 interactionDebtBelowHalfFloor dataSet history =
   let
     data = AbsFive.lowerData (interaction dataSet history)
-    coefficient = Five.coefficientTotal data
     g = gamma dataSet history
-    gNN = gammaNonnegative dataSet history
     canonical = canonicalGamma dataSet
     canonicalNN = Absorb.gammaStarNonnegative
       (uniformCoefficient dataSet) (gaussianFloor dataSet)
       (uniformCoefficientNonnegative dataSet) (gaussianFloorPositive dataSet)
 
     fourthBelow = Beta.power4Monotone
-      g canonical gNN canonicalNN (historyGammaBelowCanonical dataSet history)
+      g canonical
+      (gammaNonnegative dataSet history)
+      canonicalNN
+      (historyGammaBelowCanonical dataSet history)
 
-    fourthNN =
-      DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2.squareNonnegative (g * g)
-
+    fourthNN = FiniteL2.squareNonnegative (g * g)
     coefficientStep = Norm.scaleRight fourthNN (coefficientUniform dataSet history)
     powerStep = Norm.scaleNonnegative
       (uniformCoefficient dataSet)
@@ -180,7 +166,7 @@ halfFloorBelowBeta dataSet history =
       in
       subst
         (λ left → left ≤ gaussianFloor dataSet + (- debt))
-        (Data.Rational.Tactic.RingSolver.solve-∀ (gaussianFloor dataSet))
+        (ℚRing.solve-∀ (gaussianFloor dataSet))
         added
   in
   ℚP.≤-trans halfBelowFloorMinusDebt
@@ -212,8 +198,5 @@ betaBelowGaussianCeilingPlusHalfFloor dataSet history =
 historyUniformTwoSidedBetaRound102Level : ProofLevel
 historyUniformTwoSidedBetaRound102Level = machineChecked
 
--- Physical source leaf: instantiate the Gaussian two-sided enclosure and SAME
--- five-channel absolute quotient majorant uniformly over the actual admissible
--- CMP109 histories.  Once that is done, the two pointwise beta slopes are exact.
 literalHistoryUniformTwoSidedCMP109BetaLevel : ProofLevel
 literalHistoryUniformTwoSidedCMP109BetaLevel = conditional
