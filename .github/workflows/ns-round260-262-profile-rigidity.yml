@@ -1,0 +1,41 @@
+name: NS Round260-262 periodic profiles and rigidity
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNPeriodicFractionalProfileSourceRound260Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNNonlinearProfileMixedDefectSourceRound261Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCriticalElementRigiditySourceRound262Exact.agda'
+      - '.github/workflows/ns-round260-262-profile-rigidity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  profile-rigidity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Type-check Round260 periodic fractional profile source
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNPeriodicFractionalProfileSourceRound260Exact.agda
+
+      - name: Type-check Round261 nonlinear mixed-defect profile source
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNNonlinearProfileMixedDefectSourceRound261Exact.agda
+
+      - name: Type-check Round262 critical-element rigidity source
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNCriticalElementRigiditySourceRound262Exact.agda
