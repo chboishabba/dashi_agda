@@ -2,10 +2,6 @@ module DASHI.Foundations.BishopFinitePermutationFoldExact where
 
 ------------------------------------------------------------------------
 -- BISHOP-VALUED FINITE FOLDS RESPECT EXACT LIST PERMUTATIONS
---
--- Number-theory already owns the Nat-valued version.  This companion is the
--- analytic-neutral setoid analogue needed to reuse exact finite carrier
--- permutations after embedding weights into Bishop reals.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List; []; _∷_)
@@ -57,6 +53,20 @@ bishopFoldMap weight f (x ∷ xs) =
   BishopP.+-congˡ
     (weight (f x))
     (bishopFoldMap weight f xs)
+
+bishopFoldPointwise :
+  ∀ {A : Set}
+    (left right : A → BishopReal.ℝ) →
+  ∀ xs →
+  (∀ x → BishopReal._≤_ (left x) (right x)) →
+  BishopReal._≤_
+    (bishopFold left xs)
+    (bishopFold right xs)
+bishopFoldPointwise left right [] pointwise = BishopP.≤-refl
+bishopFoldPointwise left right (x ∷ xs) pointwise =
+  BishopP.+-mono-≤
+    (pointwise x)
+    (bishopFoldPointwise left right xs pointwise)
 
 bishopFoldPermutationInvariant :
   ∀ {A : Set}
