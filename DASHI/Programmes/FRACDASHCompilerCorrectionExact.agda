@@ -38,9 +38,10 @@ finiteTraceCommutes :
   compile compiler (iterate n sourceStep state) ≡
   iterate n targetStep (compile compiler state)
 finiteTraceCommutes compiler zero state = refl
-finiteTraceCommutes {targetStep = targetStep} compiler (suc n) state =
+finiteTraceCommutes {sourceStep = sourceStep} {targetStep = targetStep}
+    compiler (suc n) state =
   trans
-    (oneStepCommutes compiler (iterate n _ state))
+    (oneStepCommutes compiler (iterate n sourceStep state))
     (cong targetStep (finiteTraceCommutes compiler n state))
 
 ------------------------------------------------------------------------
