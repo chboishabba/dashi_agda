@@ -1,27 +1,31 @@
 module DASHI.Physics.Closure.NSTriadKNCriticalProfileSelectionESSInstanceRound267Exact where
 
 ------------------------------------------------------------------------
--- ROUND267 / LEAVES F + G*: PROFILE MINIMIZATION + ESS RIGIDITY
+-- ROUND267 / F + G*: CONDITIONAL COMPILER AND NO-PROMOTION BOUNDARY
 --
--- SOURCES
--- Gallagher--Koch--Planchon, Math. Ann. 355 (2013), 1527--1559,
--- DOI 10.1007/s00208-012-0830-0:
--- profile decomposition plus the critical-element method yields a minimal bad
--- profile with compactness modulo Navier--Stokes symmetries.
+-- IMPORTANT CORRECTION
+-- Gallagher--Koch--Planchon construct critical elements for a minimal
+-- singularity/global-regularity failure threshold.  Our first-hit/profile lane
+-- starts from failure of a mixed-helicity spacetime budget. Those are not the
+-- same badness predicate.
 --
--- Escauriaza--Seregin--Sverak, Russian Math. Surveys 58 (2003), 211--250,
--- DOI 10.1070/RM2003v058n02ABEH000609, together with their backward uniqueness
--- theorem for parabolic equations:
--- the compact critical element has the regularity/terminal-vorticity structure
--- needed for backward uniqueness, hence must be trivial.
+-- Likewise, Escauriaza--Seregin--Sverak backward uniqueness requires the
+-- regularity/terminal-vanishing structure of the critical solution used in
+-- their endpoint argument. A nonzero mixed defect does not by itself imply
+-- terminal vorticity vanishing.
 --
--- BIDI COMPRESSION
--- Round261 makes the literal mixed defect asymptotically additive across
--- orthogonal profiles. Therefore a nonzero bad sequence cannot disappear into
--- cross-profile interference. The GKP minimization selects one nonzero
--- obstruction-carrying profile; its compactness is exactly the input to the
--- ESS rigidity step. F and G* are consequently one published critical-element
--- theorem chain, not two independent new PDE estimates.
+-- Therefore neither of these promotions is source-justified:
+--
+--   mixed-defect obstruction profile
+--     => GKP minimal singular critical element,
+--
+--   mixed-defect critical profile
+--     => ESS terminal-vanishing/backward-uniqueness hypotheses.
+--
+-- The record below remains useful as the exact CONDITIONAL compiler: if a new
+-- theorem supplies those two bridges on the same selected profile, Round257
+-- gives the contradiction mechanically.  The physical instances are
+-- deliberately marked false.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -40,17 +44,18 @@ record CriticalProfileSelectionESSInstance
     profileDecomposition : R256.DefectProfileDecomposition Profile
     mixedDefectProfileTheorem : R261.NonlinearMixedDefectProfileTheorem Profile
 
+    -- OPEN F bridge: this must be a critical profile for the SAME mixed-defect
+    -- badness criterion, not merely a GKP singularity-critical profile.
     selectedCriticalProfile : R256.SingleCriticalDefectProfile Profile
+
+    -- OPEN G* bridge: ESS hypotheses must be proved for that SAME selected
+    -- profile; they do not follow from nonzero mixed defect alone.
     essRigidity : R262.ESSCriticalElementRigidity Profile
 
-    -- Same-object identification: ESS is applied to the profile selected by
-    -- the GKP minimization, not an unrelated critical element.
     essElementIsSelectedProfile :
       R262.element essRigidity
       ≡ R256.criticalProfile selectedCriticalProfile
 
-    -- Published rigidity chain: zero vorticity/trivial velocity contradicts
-    -- the nonzero obstruction selected from the asymptotically additive defect.
     zeroContradictsSelectedObstruction :
       R262.backwardUniquenessForcesZeroVorticity essRigidity →
       R262.nonzeroMixedDefectObstruction essRigidity → ⊥
@@ -85,21 +90,32 @@ criticalSelectedProfileImpossible :
 criticalSelectedProfileImpossible A =
   R257.criticalElementImpossible (buildRound257RigidityAuthority A)
 
-round267LeafFMinimalNonzeroProfileSourceInstantiated : Bool
-round267LeafFMinimalNonzeroProfileSourceInstantiated = true
+round267ConditionalFGCompilerClosed : Bool
+round267ConditionalFGCompilerClosed = true
 
-round267LeafGESShypothesesAndRigiditySourceInstantiated : Bool
-round267LeafGESShypothesesAndRigiditySourceInstantiated = true
+round267MixedDefectBadnessAutomaticallyGivesGKPCriticalElement : Bool
+round267MixedDefectBadnessAutomaticallyGivesGKPCriticalElement = false
 
-round267SameSelectedProfileFlowsIntoESS : Bool
-round267SameSelectedProfileFlowsIntoESS = true
+round267MixedDefectCriticalProfileAutomaticallyMeetsESSHypotheses : Bool
+round267MixedDefectCriticalProfileAutomaticallyMeetsESSHypotheses = false
 
-round267ExternalProfileAndESSAnalysisKernelDerivedHere : Bool
-round267ExternalProfileAndESSAnalysisKernelDerivedHere = false
+round267PhysicalLeafFInstalled : Bool
+round267PhysicalLeafFInstalled = false
 
-round267CriticalElementContradictionCompiled : Bool
-round267CriticalElementContradictionCompiled = true
+round267PhysicalLeafGstarInstalled : Bool
+round267PhysicalLeafGstarInstalled = false
 
-round267CriticalElementContradictionCompiledIsTrue :
-  round267CriticalElementContradictionCompiled ≡ true
-round267CriticalElementContradictionCompiledIsTrue = refl
+round267PackageAClosed : Bool
+round267PackageAClosed = false
+
+round267ConditionalFGCompilerClosedIsTrue :
+  round267ConditionalFGCompilerClosed ≡ true
+round267ConditionalFGCompilerClosedIsTrue = refl
+
+round267PhysicalLeafFInstalledIsFalse :
+  round267PhysicalLeafFInstalled ≡ false
+round267PhysicalLeafFInstalledIsFalse = refl
+
+round267PhysicalLeafGstarInstalledIsFalse :
+  round267PhysicalLeafGstarInstalled ≡ false
+round267PhysicalLeafGstarInstalledIsFalse = refl
