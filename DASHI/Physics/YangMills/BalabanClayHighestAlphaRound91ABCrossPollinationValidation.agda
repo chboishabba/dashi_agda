@@ -9,6 +9,7 @@ import DASHI.Physics.YangMills.BalabanRowASixthSensitivityFromCubicTelescopeExac
 import DASHI.Physics.YangMills.BalabanRowADirectSensitivityCumulativeExact as ADirect
 import DASHI.Physics.YangMills.BalabanRowADirectQFromTubeExact as ADirectQ
 import DASHI.Physics.YangMills.BalabanRowAIrrelevantHistorySensitivityCumulativeExact as AHistory
+import DASHI.Physics.YangMills.BalabanRowAExplicitQAssemblyExact as AQ
 import DASHI.Physics.YangMills.BalabanBetaPrefixSensitivityToTubeContractionExact as Shoot
 import DASHI.Physics.YangMills.BalabanIrrelevantRGMemoryContractionExact as Memory
 import DASHI.Physics.YangMills.BalabanRowBActivityEntropyToShellEnergyExact as B
@@ -39,6 +40,13 @@ rowACumulativeIrrelevantHistoryBudgetRound92Level : ProofLevel
 rowACumulativeIrrelevantHistoryBudgetRound92Level =
   AHistory.rowAIrrelevantHistoryInputSensitivityLevel
 
+rowAExplicitQAssemblyRound94Level : ProofLevel
+rowAExplicitQAssemblyRound94Level = AQ.rowAExplicitQAssemblyAlgebraLevel
+
+rowAExplicitQSubunitSensitivityRound94Level : ProofLevel
+rowAExplicitQSubunitSensitivityRound94Level =
+  AQ.rowAExplicitQSubunitSensitivityLevel
+
 rowAShootingContractionAlgebraRound91Level : ProofLevel
 rowAShootingContractionAlgebraRound91Level =
   Shoot.betaPrefixSensitivityToTubeContractionLevel
@@ -47,18 +55,12 @@ rowAIrrelevantMemoryGeometricCompilerRound91Level : ProofLevel
 rowAIrrelevantMemoryGeometricCompilerRound91Level =
   Memory.irrelevantRGMemoryContractionCompilerLevel
 
--- Physical Row-A seams have now been compressed to source instantiation of the
--- direct derivative/tube response and irrelevant-history response constants,
--- followed by the strict scalar inequality qDirect+qHistory<1 on the SAME
--- generated source trajectory.
-rowALiteralDirectInverseSquareSensitivityRound93Level : ProofLevel
-rowALiteralDirectInverseSquareSensitivityRound93Level = conditional
-
-rowALiteralHistorySensitivityRound93Level : ProofLevel
-rowALiteralHistorySensitivityRound93Level = conditional
-
-rowALiteralCombinedQStrictlyBelowOneRound93Level : ProofLevel
-rowALiteralCombinedQStrictlyBelowOneRound93Level = conditional
+-- Physical Row-A seam after Round94: instantiate the literal direct derivative,
+-- tube response and irrelevant-history response on the same generated trajectory;
+-- identify their split with the literal cumulative beta difference; prove the
+-- one scalar inequality qDirect+qHistory<1.  Shooting algebra is downstream.
+rowALiteralExplicitQAssemblyRound94Level : ProofLevel
+rowALiteralExplicitQAssemblyRound94Level = conditional
 
 rowBActivityEntropyProductRound91Level : ProofLevel
 rowBActivityEntropyProductRound91Level =
@@ -76,32 +78,32 @@ rowBGeometricShellSummationRound91Level : ProofLevel
 rowBGeometricShellSummationRound91Level =
   Shell.markedSourceGeometricShellSummationLevel
 
-rowBLiteralCMP116DifferentiatedActivityRound91Level : ProofLevel
-rowBLiteralCMP116DifferentiatedActivityRound91Level = conditional
+rowBLiteralCMP116DifferentiatedActivityRound94Level : ProofLevel
+rowBLiteralCMP116DifferentiatedActivityRound94Level = conditional
 
-rowBLiteralCMP116ShellEntropyRound91Level : ProofLevel
-rowBLiteralCMP116ShellEntropyRound91Level = conditional
+rowBLiteralCMP116ShellEntropyRound94Level : ProofLevel
+rowBLiteralCMP116ShellEntropyRound94Level = conditional
 
-rowBLiteralCMP116CombinedRatioRound91Level : ProofLevel
-rowBLiteralCMP116CombinedRatioRound91Level = conditional
+rowBLiteralCMP116CombinedRatioRound94Level : ProofLevel
+rowBLiteralCMP116CombinedRatioRound94Level = conditional
 
-rowBCSameShellHessianDominationRound91Level : ProofLevel
-rowBCSameShellHessianDominationRound91Level = conditional
+rowBCSameShellHessianDominationRound94Level : ProofLevel
+rowBCSameShellHessianDominationRound94Level = conditional
 
 rowCPerShellIntegralSummationCompilerRound91Level : ProofLevel
 rowCPerShellIntegralSummationCompilerRound91Level =
   CTemporal.polchinskiShellIntegralDebtCompilerLevel
 
-round91FrozenResearchCountStillFour = R87.round87ShortestClayAnalyticCount
+round94FrozenResearchCountStillFour = R87.round87ShortestClayAnalyticCount
 
-rowACompletionRound93Level : ProofLevel
-rowACompletionRound93Level = conditional
+rowACompletionRound94Level : ProofLevel
+rowACompletionRound94Level = conditional
 
-rowBCompletionRound93Level : ProofLevel
-rowBCompletionRound93Level = conditional
+rowBCompletionRound94Level : ProofLevel
+rowBCompletionRound94Level = conditional
 
-rowCCompletionRound93Level : ProofLevel
-rowCCompletionRound93Level = conditional
+rowCCompletionRound94Level : ProofLevel
+rowCCompletionRound94Level = conditional
 
-rowDCompletionRound93Level : ProofLevel
-rowDCompletionRound93Level = conditional
+rowDCompletionRound94Level : ProofLevel
+rowDCompletionRound94Level = conditional
