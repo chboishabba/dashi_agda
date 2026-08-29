@@ -122,9 +122,29 @@ record CMP109GaussianFirstVariationCalculation
     gaugeProjectionSymbolDerivedFromCMP99Constraint : Set
 
     -- Same-object assembly into the operator used by the Gaussian trace-log.
+    -- Round112 strengthens the former opaque `Set` receipt into the literal
+    -- pointwise equation the A1 two-jet consumer needs.  No numerical content is
+    -- added: an inhabitant must now prove that the constrained symbol is exactly
+    -- W+Q+R in its declared scalar convention.
+    add : Scalar → Scalar → Scalar
     literalConstrainedFirstVariationSymbol :
       Momentum → Lorentz → Lorentz → Lorentz → Color → Color → Color → Scalar
-    WQRAssemblyExact : Set
+    WQRAssemblyExact :
+      ∀ momentum output input backgroundDirection outputColor inputColor backgroundColor →
+      literalConstrainedFirstVariationSymbol
+          momentum output input backgroundDirection
+          outputColor inputColor backgroundColor
+      ≡ add
+          (wilsonFirstVariationSymbol
+            momentum output input backgroundDirection
+            outputColor inputColor backgroundColor)
+          (add
+            (averagingFirstVariationSymbol
+              momentum output input backgroundDirection
+              outputColor inputColor backgroundColor)
+            (gaugeProjectionFirstVariationSymbol
+              momentum output input backgroundDirection
+              outputColor inputColor backgroundColor))
 
     -- Do not use one Brillouin-boundary point.  Produce one positive-measure box
     -- on which a mixed Lorentz/color component stays uniformly away from zero.
@@ -139,6 +159,11 @@ open CMP109GaussianFirstVariationCalculation public
 
 cmp109GaussianFirstVariationSourceDecompositionLevel : ProofLevel
 cmp109GaussianFirstVariationSourceDecompositionLevel = machineChecked
+
+-- The W/Q/R assembly is now equality-bearing at the formal interface.  Its
+-- literal source instantiation remains a physical theorem.
+cmp109WQRAssemblyInterfaceLevel : ProofLevel
+cmp109WQRAssemblyInterfaceLevel = machineChecked
 
 cmp109LiteralWilsonHessianVariationLevel : ProofLevel
 cmp109LiteralWilsonHessianVariationLevel = conditional
