@@ -9,6 +9,9 @@ FILES=(
   DASHI/Core/ActionabilityCostedExperimentChoiceExact.agda
   DASHI/Core/CommonExperimentRealisationExact.agda
   DASHI/Core/DiscriminatorSynthesisExact.agda
+  DASHI/Core/CoarseFineRelativeFibreExact.agda
+  DASHI/Core/ConsumerDecisionAdequacyFromReductionExact.agda
+  DASHI/Core/ConsumerAdequacyJointPolicyBidiCompilerExact.agda
   DASHI/Core/SequentialConsumerExperimentPlannerExact.agda
   DASHI/Core/SequentialRobustActionabilityPlannerExact.agda
   DASHI/Core/SequentialRelationalExperimentPlannerExact.agda
@@ -16,11 +19,13 @@ FILES=(
   DASHI/Core/ConsumerReductionJointPolicyBridgeExact.agda
   DASHI/Core/JointSequentialInformationFidelityFixtureExact.agda
   DASHI/Core/SequentialExperimentPlanningValidation.agda
+  DASHI/Biology/JCoarseFineConsumerReductionBridgeExact.agda
   DASHI/Physics/Foundations/GRQFTDiscriminatorSynthesisExact.agda
   DASHI/Physics/Foundations/GRQFTSequentialExperimentPlannerExact.agda
   DASHI/Environment/LESDiscriminatorSynthesisExact.agda
   DASHI/Environment/LESSequentialExperimentPlannerExact.agda
   DASHI/Environment/LESJointSequentialMeasurementFidelityPolicyExact.agda
+  DASHI/Environment/LESProofDerivedDecisionAdequacyExact.agda
   DASHI/Environment/LESAdaptiveConsumerLoopCrossPollinationExact.agda
 )
 
@@ -33,6 +38,27 @@ for file in "${FILES[@]}"; do
     exit 1
   fi
 done
+
+grep -q '^fromProvenanceBearingQuotient :' DASHI/Core/CoarseFineRelativeFibreExact.agda
+grep -q '^coarseProjectionRetainsRelativeFineResidual :' DASHI/Core/CoarseFineRelativeFibreExact.agda
+grep -q '^fineSensitivityRefutesCoarseOnlyReduction :' DASHI/Core/CoarseFineRelativeFibreExact.agda
+grep -q 'fineMeansOnlyHigherComputeCostIsFalse' DASHI/Core/CoarseFineRelativeFibreExact.agda
+
+grep -q '^exactReducedDecisionSelectsSameIntervention :' DASHI/Core/ConsumerDecisionAdequacyFromReductionExact.agda
+grep -q '^approximateReducedDecisionSelectsSameIntervention :' DASHI/Core/ConsumerDecisionAdequacyFromReductionExact.agda
+grep -q '^data DerivedDecisionAdequacy' DASHI/Core/ConsumerDecisionAdequacyFromReductionExact.agda
+grep -q '^record FirstOrderAdequacyInterface' DASHI/Core/ConsumerDecisionAdequacyFromReductionExact.agda
+grep -q 'firstOrderPolicyTokenMayExistWithoutRichAdequacyProofIsFalse' DASHI/Core/ConsumerDecisionAdequacyFromReductionExact.agda
+
+grep -q '^exactROMActBranch :' DASHI/Core/ConsumerAdequacyJointPolicyBidiCompilerExact.agda
+grep -q '^approximateROMActBranch :' DASHI/Core/ConsumerAdequacyJointPolicyBidiCompilerExact.agda
+grep -q '^counterexampleOpensFidelityBranch :' DASHI/Core/ConsumerAdequacyJointPolicyBidiCompilerExact.agda
+grep -q 'missingCertificateAloneOpensFidelityBranchIsFalse' DASHI/Core/ConsumerAdequacyJointPolicyBidiCompilerExact.agda
+
+grep -q '^jCoarseFineReopening :' DASHI/Biology/JCoarseFineConsumerReductionBridgeExact.agda
+grep -q '^jFineSensitiveConsumerRefutesJCoarseOnly :' DASHI/Biology/JCoarseFineConsumerReductionBridgeExact.agda
+grep -q '^jCoarseExactReductionRetainingJFine :' DASHI/Biology/JCoarseFineConsumerReductionBridgeExact.agda
+grep -q 'jFineIsMerelyAnotherNameForMaximumComputeFidelityIsFalse' DASHI/Biology/JCoarseFineConsumerReductionBridgeExact.agda
 
 grep -q '^data SequentialConsumerPlan' DASHI/Core/SequentialConsumerExperimentPlannerExact.agda
 grep -q '^OutcomePossible :' DASHI/Core/SequentialConsumerExperimentPlannerExact.agda
@@ -57,6 +83,10 @@ grep -q '^record LESSequentialActionabilityExperiment' DASHI/Environment/LESSequ
 grep -q '^record LESJointMeasurementFidelityCampaign' DASHI/Environment/LESJointSequentialMeasurementFidelityPolicyExact.agda
 grep -q '^record LESFidelityUnlocksControl' DASHI/Environment/LESJointSequentialMeasurementFidelityPolicyExact.agda
 grep -q '^bucketToRichardsFidelityMove :' DASHI/Environment/LESJointSequentialMeasurementFidelityPolicyExact.agda
-grep -q 'richerModelAutomaticallyCreatesNewEmpiricalEvidenceIsFalse' DASHI/Environment/LESAdaptiveConsumerLoopCrossPollinationExact.agda
+grep -q '^record LESDecisionAdequacyBridge' DASHI/Environment/LESProofDerivedDecisionAdequacyExact.agda
+grep -q '^lesExactROMActBranch :' DASHI/Environment/LESProofDerivedDecisionAdequacyExact.agda
+grep -q '^lesApproximateROMActBranch :' DASHI/Environment/LESProofDerivedDecisionAdequacyExact.agda
+grep -q 'policyDecisionAdequacyMayBeFreeOfROMOrMarginProofIsFalse' DASHI/Environment/LESAdaptiveConsumerLoopCrossPollinationExact.agda
+grep -q 'fineStateMeansOnlyMoreExpensiveModelIsFalse' DASHI/Environment/LESAdaptiveConsumerLoopCrossPollinationExact.agda
 
 scripts/run_agda29_parallel_check.sh DASHI/Core/SequentialExperimentPlanningValidation.agda
