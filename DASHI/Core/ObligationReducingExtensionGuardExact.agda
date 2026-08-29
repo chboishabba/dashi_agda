@@ -25,9 +25,9 @@ record DischargeReceipt (Obligation : Set)
                         (liveBefore liveAfter : Obligation → Set) : Set where
   constructor dischargeReceipt
   field
-    obligation : Obligation
-    wasLive : liveBefore obligation
-    isClosedAfter : liveAfter obligation → ⊥
+    dischargedObligation : Obligation
+    wasLive : liveBefore dischargedObligation
+    isClosedAfter : liveAfter dischargedObligation → ⊥
 
 open DischargeReceipt public
 
@@ -37,9 +37,9 @@ record StrictObserverRefinementReceipt
     (newObserve : Fine → New) : Set where
   constructor strictObserverRefinementReceipt
   field
-    left right : Fine
-    oldCollision : oldObserve left ≡ oldObserve right
-    newSeparation : newObserve left ≡ newObserve right → ⊥
+    collisionLeft collisionRight : Fine
+    oldCollision : oldObserve collisionLeft ≡ oldObserve collisionRight
+    newSeparation : newObserve collisionLeft ≡ newObserve collisionRight → ⊥
 
 open StrictObserverRefinementReceipt public
 
@@ -47,9 +47,9 @@ record ExposureReceipt (Obligation : Set)
                        (visibleBefore visibleAfter : Obligation → Set) : Set where
   constructor exposureReceipt
   field
-    obligation : Obligation
-    wasNotVisible : visibleBefore obligation → ⊥
-    isVisibleAfter : visibleAfter obligation
+    exposedObligation : Obligation
+    wasNotVisible : visibleBefore exposedObligation → ⊥
+    isVisibleAfter : visibleAfter exposedObligation
 
 open ExposureReceipt public
 
