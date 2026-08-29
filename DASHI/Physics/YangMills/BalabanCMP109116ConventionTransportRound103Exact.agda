@@ -2,11 +2,16 @@
 module DASHI.Physics.YangMills.BalabanCMP109116ConventionTransportRound103Exact where
 
 ------------------------------------------------------------------------
--- ROUND103 BC1: DO NOT HIDE NORMALIZATION / PROJECTION CONVENTIONS
+-- ROUND103 BC1: EXPLICIT NORMALIZATION / PROJECTION TRANSPORT
+--
+-- The general carrier permits genuinely different configuration/tangent
+-- coordinates plus a scalar normalization.  The identity specialization has
+-- literally the same types/maps and normalization one; therefore no decorative
+-- `Set` fields are needed to assert what the executable data already enforce.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 1ℝ; _*ℝ_; *-comm; mulOneʳ)
@@ -56,19 +61,12 @@ cmp116MarkedHessianIsTransportedCMP109 dataSet =
   markedHessianTransportExact dataSet
 
 oneTimes : ∀ x → 1ℝ *ℝ x ≡ x
-oneTimes x =
-  trans (*-comm 1ℝ x) (mulOneʳ x)
+oneTimes x = trans (*-comm 1ℝ x) (mulOneʳ x)
 
 record IdentityConventionAlignment : Set₁ where
   field
     Configuration Tangent : Set
     e2 markedHessian : Configuration → Tangent → Tangent → ℝ
-
-    sameBackgroundCoordinate : Set
-    sameSourceTangentCoordinate : Set
-    sameConstrainedProjection : Set
-    sameBlockingNormalization : Set
-
     markedHessianIsE2 : ∀ configuration u v →
       markedHessian configuration u v ≡ e2 configuration u v
 
