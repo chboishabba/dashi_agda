@@ -1,15 +1,24 @@
 module DASHI.Programmes.Everything where
 
 import DASHI.Programmes.ResearchProgrammeExact
+import DASHI.Programmes.BidirectionalSatelliteCorrectionExact
 import DASHI.Programmes.CFDExact
+import DASHI.Programmes.CFDChartCorrectionExact
 import DASHI.Programmes.BrainExact
 import DASHI.Programmes.BrainHemibrainExperimentExact
+import DASHI.Programmes.BrainKernelSemanticsCorrectionExact
 import DASHI.Programmes.QuantumExact
 import DASHI.Programmes.QuantumFalsifiableTargetExact
 import DASHI.Programmes.DashifineExact
+import DASHI.Programmes.DashifineBenchmarkCorrectionExact
 import DASHI.Programmes.GrokkingExact
+import DASHI.Programmes.GrokkingValidationCorrectionExact
 import DASHI.Programmes.CoreReferenceExact
+import DASHI.Programmes.CoreReferenceCorrectionExact
 import DASHI.Programmes.FRACDASHExact
+import DASHI.Programmes.FRACDASHCompilerCorrectionExact
 import DASHI.Programmes.TestHarnessExact
+import DASHI.Programmes.TestHarnessEvidenceCorrectionExact
 import DASHI.Programmes.RTXExact
 import DASHI.Programmes.RTXLightTransportRefinementExact
+import DASHI.Programmes.BidirectionalSatelliteValidation
