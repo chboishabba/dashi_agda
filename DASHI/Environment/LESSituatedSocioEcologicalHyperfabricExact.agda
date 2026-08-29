@@ -7,6 +7,7 @@ import DASHI.Core.PredictionEnvelopeExact as Prediction
 import DASHI.Core.RequiredAxisSupportSquareExact as Support
 import DASHI.Culture.KimmererTwoEyedSeeingInterpretationBoundaryExact as Kimmerer
 import DASHI.Culture.ProvenancePreservingCulturalHyperfabric as Cultural
+import DASHI.Environment.LESRelationalHistoryFabricBridgeExact as LESFabric
 import DASHI.Governance.JusticeRequiredAxisEvidenceExact as JusticeEvidence
 import DASHI.Governance.RecognitionDistributionRepresentationAxesExact as Fraser
 import DASHI.Governance.RequiredAxisAuthorityRoutingExact as Authority
@@ -21,6 +22,7 @@ import DASHI.Governance.SituatedAuthorityRoutingExact as Routing
 --   * Kimmerer / Two-Eyed Seeing provenance-preserving coordination;
 --   * Fraser's redistribution / recognition / representation separation;
 --   * provenance-preserving cultural hyperfabric;
+--   * LES relational-history fabric (history + ecological relation axes);
 --   * Stage-6 prediction envelopes over evidence fibres;
 --   * required-axis authority routing.
 --
@@ -29,12 +31,6 @@ import DASHI.Governance.SituatedAuthorityRoutingExact as Routing
 -- specimen into an empirical environmental, Indigenous, political or legal
 -- model.
 ------------------------------------------------------------------------
-
--- A situated environmental planning point carries both a knowledge history and
--- a participation configuration.  The ecological observation below is
--- intentionally coarse: both knowledge histories converge on the same observed
--- environmental condition, while provenance and justice-relevant coordinates
--- remain independently available upstairs.
 
 SituatedEnvironmentalState : Set
 SituatedEnvironmentalState =
@@ -72,9 +68,8 @@ justiceCoordinate state =
   justiceDistribution state ,
     (justiceRecognition state , justiceRepresentation state)
 
--- This is deliberately called a planning distinction rather than a decision or
--- welfare score.  It records which distinctions a downstream planning consumer
--- may require; it does not rank or normatively aggregate them.
+-- This is deliberately a planning distinction, not a welfare score or a
+-- normative ranking.
 
 PlanningDistinction : Set
 PlanningDistinction = Kimmerer.Provenance × JusticeCoordinate
@@ -85,7 +80,7 @@ planningDistinction state =
 
 ------------------------------------------------------------------------
 -- Single/coarse projections are not sufficient for the joint planning
--- distinction.  These are exact finite non-factorability witnesses.
+-- distinction.
 ------------------------------------------------------------------------
 
 indigenousLowDistribution : SituatedEnvironmentalState
@@ -170,11 +165,6 @@ representationAloneCannotRecoverPlanningDistinction =
 
 ------------------------------------------------------------------------
 -- Provenance-preserving cultural hyperfabric instantiation.
---
--- The existing cultural owner deliberately separates memory, practice,
--- relation, knowledge, material relation and provenance fibres.  Here the
--- concrete values remain on SituatedEnvironmentalState while the hyperfabric
--- records which kinds of fibre are available at each situated point.
 ------------------------------------------------------------------------
 
 data LESBase : Set where
@@ -219,9 +209,7 @@ lesProjectionWithPlanningResidual =
     }
 
 ------------------------------------------------------------------------
--- Stage-6 evidence fibre: the full retained distinction is sufficient for the
--- matching downstream consumer, while the coarse ecological observation is
--- not.  No probability semantics are introduced.
+-- Stage-6 evidence fibre for the provenance + justice subfabric.
 ------------------------------------------------------------------------
 
 planningEvidenceCompatible :
@@ -244,9 +232,6 @@ fullPlanningEvidenceHasUniqueEnvelope evidence =
   Prediction.pointIdentifiableImpliesEnvelopeUnique
     (fullPlanningEvidenceIsPointIdentifying evidence)
 
--- Equality of a coarse ecological observation cannot close this envelope:
--- the Indigenous/scientific provenance contrast already provides a witness.
-
 coarseCompatible :
   Prediction.Compatible
     Kimmerer.SharedEcologicalObservation SituatedEnvironmentalState
@@ -268,9 +253,139 @@ coarseObservationIsNotPointIdentifying identifiable =
       refl)
 
 ------------------------------------------------------------------------
+-- Full LES product: ecological history/relation fabric × provenance/justice.
+--
+-- This is the highest-alpha composition in this tranche.  Four independently
+-- relevant axes coexist in one situated state:
+--
+--   management history
+--   ecological relational organisation
+--   knowledge provenance
+--   justice coordinates
+--
+-- A single coarse present summary can erase all four kinds of distinction.
+------------------------------------------------------------------------
+
+FullLESSituatedState : Set
+FullLESSituatedState =
+  LESFabric.SituatedPlanningState × SituatedEnvironmentalState
+
+FullCoarseObservation : Set
+FullCoarseObservation =
+  LESFabric.CoarsePlanningObservation × Kimmerer.SharedEcologicalObservation
+
+fullCoarseObservation : FullLESSituatedState → FullCoarseObservation
+fullCoarseObservation state =
+  LESFabric.observePlanning (proj₁ state) ,
+    coarseEcologicalObservation (proj₂ state)
+
+FullPlanningSignature : Set
+FullPlanningSignature =
+  LESFabric.JointFutureConeCode × PlanningDistinction
+
+fullPlanningSignature : FullLESSituatedState → FullPlanningSignature
+fullPlanningSignature state =
+  LESFabric.jointFutureCone (proj₁ state) ,
+    planningDistinction (proj₂ state)
+
+shortIsolatedIndigenous : FullLESSituatedState
+shortIsolatedIndigenous =
+  LESFabric.shortIsolated , indigenousLowDistribution
+
+longIsolatedIndigenous : FullLESSituatedState
+longIsolatedIndigenous =
+  LESFabric.longIsolated , indigenousLowDistribution
+
+shortRelatedIndigenous : FullLESSituatedState
+shortRelatedIndigenous =
+  LESFabric.shortRelated , indigenousLowDistribution
+
+shortIsolatedScientific : FullLESSituatedState
+shortIsolatedScientific =
+  LESFabric.shortIsolated , scientificLowDistribution
+
+shortIsolatedIndigenousHighDistribution : FullLESSituatedState
+shortIsolatedIndigenousHighDistribution =
+  LESFabric.shortIsolated , indigenousHighDistribution
+
+historyRemainsEssentialInsideFullLESFabric :
+  INF.NonFactorabilityWitness fullCoarseObservation fullPlanningSignature
+historyRemainsEssentialInsideFullLESFabric =
+  INF.nonFactorabilityWitness
+    shortIsolatedIndigenous
+    longIsolatedIndigenous
+    refl
+    (λ ())
+
+relationRemainsEssentialInsideFullLESFabric :
+  INF.NonFactorabilityWitness fullCoarseObservation fullPlanningSignature
+relationRemainsEssentialInsideFullLESFabric =
+  INF.nonFactorabilityWitness
+    shortIsolatedIndigenous
+    shortRelatedIndigenous
+    refl
+    (λ ())
+
+provenanceRemainsEssentialInsideFullLESFabric :
+  INF.NonFactorabilityWitness fullCoarseObservation fullPlanningSignature
+provenanceRemainsEssentialInsideFullLESFabric =
+  INF.nonFactorabilityWitness
+    shortIsolatedIndigenous
+    shortIsolatedScientific
+    refl
+    (λ ())
+
+justiceRemainsEssentialInsideFullLESFabric :
+  INF.NonFactorabilityWitness fullCoarseObservation fullPlanningSignature
+justiceRemainsEssentialInsideFullLESFabric =
+  INF.nonFactorabilityWitness
+    shortIsolatedIndigenous
+    shortIsolatedIndigenousHighDistribution
+    refl
+    (λ ())
+
+fullCoarseSummaryCannotRecoverFullPlanningSignature :
+  INF.FactorsThrough fullCoarseObservation fullPlanningSignature → ⊥
+fullCoarseSummaryCannotRecoverFullPlanningSignature =
+  INF.witnessRulesOutEveryFlatFactorisation
+    historyRemainsEssentialInsideFullLESFabric
+
+-- Recharting the coarse summary cannot repair any erased axis.  One explicit
+-- history witness is enough to rule out every post-composed recharting.
+
+rechartingFullCoarseSummaryCannotRecoverFullPlanningSignature :
+  ∀ {Recharted : Set} →
+  (rechart : FullCoarseObservation → Recharted) →
+  INF.FactorsThrough
+    (λ state → rechart (fullCoarseObservation state))
+    fullPlanningSignature →
+  ⊥
+rechartingFullCoarseSummaryCannotRecoverFullPlanningSignature rechart =
+  INF.rechartingCannotRecoverErasedPhenomenon
+    rechart historyRemainsEssentialInsideFullLESFabric
+
+fullEvidenceCompatible :
+  Prediction.Compatible FullPlanningSignature FullLESSituatedState
+fullEvidenceCompatible evidence state =
+  fullPlanningSignature state ≡ evidence
+
+fullLESEvidenceIsPointIdentifying :
+  (evidence : FullPlanningSignature) →
+  Prediction.PointIdentifiable
+    fullEvidenceCompatible fullPlanningSignature evidence
+fullLESEvidenceIsPointIdentifying evidence left right leftCompatible rightCompatible =
+  trans leftCompatible (sym rightCompatible)
+
+fullLESEvidenceHasUniqueEnvelope :
+  (evidence : FullPlanningSignature) →
+  Prediction.EnvelopeUnique
+    fullEvidenceCompatible fullPlanningSignature evidence
+fullLESEvidenceHasUniqueEnvelope evidence =
+  Prediction.pointIdentifiableImpliesEnvelopeUnique
+    (fullLESEvidenceIsPointIdentifying evidence)
+
+------------------------------------------------------------------------
 -- Epistemic/predictive adequacy and intervention authority remain separate.
--- An LES promotion package requires both a point-identifiability receipt and an
--- independently admissible situated authority route.
 ------------------------------------------------------------------------
 
 record LESInterventionPromotion
@@ -312,9 +427,6 @@ resolvedRoutingEvidencePlusInterpretationYieldsPromotion
     (Authority.requiredAxisEvidenceYieldsAdmissibleRoute
       resolved interpretation)
 
--- No theorem is permitted to turn predictive identification into authority by
--- itself.  The type below is deliberately uninhabited.
-
 data PredictionIdentifiabilityAutomaticallyPromotesAuthority : Set where
 
 predictionIdentifiabilityDoesNotSelfPromoteToAuthority :
@@ -340,6 +452,10 @@ record LESSituatedSocioEcologicalBoundary : Set where
     anySingleJusticeAxisIsPlanningSufficientIsFalse :
       anySingleJusticeAxisIsPlanningSufficient ≡ false
 
+    managementHistoryAndEcologicalRelationAreRedundantAxes : Bool
+    managementHistoryAndEcologicalRelationAreRedundantAxesIsFalse :
+      managementHistoryAndEcologicalRelationAreRedundantAxes ≡ false
+
     coordinatedKnowledgeRequiresEpistemicFusion : Bool
     coordinatedKnowledgeRequiresEpistemicFusionIsFalse :
       coordinatedKnowledgeRequiresEpistemicFusion ≡ false
@@ -356,6 +472,7 @@ canonicalLESSituatedSocioEcologicalBoundary :
   LESSituatedSocioEcologicalBoundary
 canonicalLESSituatedSocioEcologicalBoundary =
   lesSituatedSocioEcologicalBoundary
+    false refl
     false refl
     false refl
     false refl
