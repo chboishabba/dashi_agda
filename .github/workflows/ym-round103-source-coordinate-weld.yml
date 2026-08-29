@@ -1,4 +1,4 @@
-name: YM Round107-108 stress-continuum Agda
+name: YM Round107-109 stress-continuum Agda
 
 on:
   pull_request:
@@ -8,16 +8,21 @@ on:
       - 'DASHI/Physics/YangMills/BalabanFirstVariationStressContinuumRound107Validation.agda'
       - 'DASHI/Physics/YangMills/BalabanUniformPotentialToFirstVariationConvergenceRound108Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanUniformPotentialToFirstVariationConvergenceRound108Validation.agda'
+      - 'DASHI/Physics/YangMills/BalabanSameFamilyStressCauchySchwingerRound109Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanSameFamilyStressCauchySchwingerRound109Validation.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP116SubstitutedActivityFirstVariationRound105Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP116FirstVariationStressPairingRound105Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalMetricSourceDomainRound106Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalMetricStressRepresentationRound106Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP119CompatibleLocalExpectationFlowExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanTopDownSummableRGIncrementExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanMarkedSourceCompositeStressFieldExact.agda'
       - 'scripts/check_ym_round103_source_coordinate_weld.sh'
       - '.github/workflows/ym-round103-source-coordinate-weld.yml'
   workflow_dispatch:
 
 concurrency:
-  group: ym-round107-108-${{ github.event.pull_request.number || github.ref }}
+  group: ym-round107-109-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -31,21 +36,21 @@ jobs:
           submodules: false
       - uses: cachix/install-nix-action@v27
       - uses: DeterminateSystems/magic-nix-cache-action@v9
-      - name: Check Round107-108 stress-continuum compiler
+      - name: Check Round107-109 stress-continuum compiler
         env:
           AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
           DASHI_REPO_ROOT: ${{ github.workspace }}
-          DASHI_AGDA29_CACHE_ROOT: ${{ runner.temp }}/dashi-agda29-round108
-          DASHI_STATUS_DIR: ${{ runner.temp }}/dashi-agda29-round108/status
-          XDG_CACHE_HOME: ${{ runner.temp }}/dashi-xdg-round108
-          AGDA_LOG_PATH: ${{ github.workspace }}/ym-round108-agda.log
+          DASHI_AGDA29_CACHE_ROOT: ${{ runner.temp }}/dashi-agda29-round109
+          DASHI_STATUS_DIR: ${{ runner.temp }}/dashi-agda29-round109/status
+          XDG_CACHE_HOME: ${{ runner.temp }}/dashi-xdg-round109
+          AGDA_LOG_PATH: ${{ github.workspace }}/ym-round109-agda.log
           AGDA_JOBS: '4'
           DASHI_NO_TMUX: '1'
         run: bash scripts/check_ym_round103_source_coordinate_weld.sh
-      - name: Upload Round108 Agda log
+      - name: Upload Round109 Agda log
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ym-round107-108-stress-continuum-agda-log
-          path: ym-round108-agda*.log
+          name: ym-round107-109-stress-continuum-agda-log
+          path: ym-round109-agda*.log
           if-no-files-found: warn
