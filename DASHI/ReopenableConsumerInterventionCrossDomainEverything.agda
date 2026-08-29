@@ -18,6 +18,7 @@ import DASHI.Core.ConsumerSafeFidelityEscalationExact
 import DASHI.Core.ConsumerRelativeReductionKernelExact
 import DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact
 import DASHI.Core.ConsumerRelativeReductionSearchExact
+import DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact
 import DASHI.Core.CounterexampleGuidedConsumerRefinementExact
 import DASHI.Core.DualEffectInformationActionExact
 import DASHI.Core.EvidenceReliabilityPolarityExact
@@ -55,6 +56,7 @@ import DASHI.Environment.LESSituatedObservationInteractionExact
 import DASHI.Environment.LESObserverContextDiscoveryConeExact
 import DASHI.Environment.LESDomainBasisBidiFrontierExact
 import DASHI.Environment.LESConsumerRelativeMechanismReductionExact
+import DASHI.Environment.LESApproximateFidelityReductionExact
 import DASHI.Environment.LESAdaptiveSPACModelSearchExact
 import DASHI.Environment.LESModelFibreRobustInterventionExact
 import DASHI.Environment.LESFluidPhysicsCouplingExact
