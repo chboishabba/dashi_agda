@@ -53,15 +53,30 @@ eliminationAlgebraDoesNotCloseStrictBudget :
     F.canonicalAristotleCurrentFrontier ≡ false
 eliminationAlgebraDoesNotCloseStrictBudget = refl
 
+nearFarCompositionCompilerClosed :
+  F.AristotleCurrentFrontier.nearFarShellCompositionCompilerClosedInAgda
+    F.canonicalAristotleCurrentFrontier ≡ true
+nearFarCompositionCompilerClosed = refl
+
+quantitativeFarShellEnvelopeOpen :
+  F.AristotleCurrentFrontier.quantitativeFarShellEnvelopeClosed
+    F.canonicalAristotleCurrentFrontier ≡ false
+quantitativeFarShellEnvelopeOpen = refl
+
+finiteSignedNearCoreOpen :
+  F.AristotleCurrentFrontier.finiteSignedNearShellCoreClosed
+    F.canonicalAristotleCurrentFrontier ≡ false
+finiteSignedNearCoreOpen = refl
+
+combinedNearFarMarginOpen :
+  F.AristotleCurrentFrontier.combinedNearFarMarginClosed
+    F.canonicalAristotleCurrentFrontier ≡ false
+combinedNearFarMarginOpen = refl
+
 deterministicThreeTaperConstructionOpen :
   F.AristotleCurrentFrontier.deterministicNuisanceThreeTaperConstructionClosed
     F.canonicalAristotleCurrentFrontier ≡ false
 deterministicThreeTaperConstructionOpen = refl
-
-strictSignedWholeOffCarrierCancellationOpen :
-  F.AristotleCurrentFrontier.strictSignedWholeOffCarrierCancellationClosed
-    F.canonicalAristotleCurrentFrontier ≡ false
-strictSignedWholeOffCarrierCancellationOpen = refl
 
 lowOrdinateComplementOpen :
   F.AristotleCurrentFrontier.lowOrdinateComplementCertified
