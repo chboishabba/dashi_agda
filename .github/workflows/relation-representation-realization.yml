@@ -8,6 +8,7 @@ on:
       - 'DASHI/Reasoning/RelationRepresentationRealizationExact.agda'
       - 'DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda'
       - 'DASHI/Reasoning/RelationRepresentationExperimentProtocolExact.agda'
+      - 'DASHI/Reasoning/FiniteRelationLinearAlgebraProducerExact.agda'
       - 'DASHI/Reasoning/EigenslurFlourishingRelationBoundaryExact.agda'
       - 'DASHI/Reasoning/RelationRepresentationCrossPollinationExact.agda'
       - 'DASHI/Reasoning/HumourRelationRepresentationCrossPollinationExact.agda'
