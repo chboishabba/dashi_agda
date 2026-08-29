@@ -14,6 +14,7 @@ import DASHI.Physics.YangMills.BalabanBetaPrefixSensitivityToTubeContractionExac
 import DASHI.Physics.YangMills.BalabanIrrelevantRGMemoryContractionExact as Memory
 import DASHI.Physics.YangMills.BalabanRowBActivityEntropyToShellEnergyExact as B
 import DASHI.Physics.YangMills.BalabanMarkedSourceGeometricShellEnergyExact as Shell
+import DASHI.Physics.YangMills.BalabanRowBCMarkedShellToCurvatureDebtExact as BC
 import DASHI.Physics.YangMills.BalabanPolchinskiShellIntegralDebtExact as CTemporal
 
 rowAInverseSquareSplitAlgebraRound91Level : ProofLevel
@@ -55,10 +56,6 @@ rowAIrrelevantMemoryGeometricCompilerRound91Level : ProofLevel
 rowAIrrelevantMemoryGeometricCompilerRound91Level =
   Memory.irrelevantRGMemoryContractionCompilerLevel
 
--- Physical Row-A seam after Round94: instantiate the literal direct derivative,
--- tube response and irrelevant-history response on the same generated trajectory;
--- identify their split with the literal cumulative beta difference; prove the
--- one scalar inequality qDirect+qHistory<1.  Shooting algebra is downstream.
 rowALiteralExplicitQAssemblyRound94Level : ProofLevel
 rowALiteralExplicitQAssemblyRound94Level = conditional
 
@@ -86,6 +83,14 @@ rowBLiteralCMP116ShellEntropyRound94Level = conditional
 
 rowBLiteralCMP116CombinedRatioRound94Level : ProofLevel
 rowBLiteralCMP116CombinedRatioRound94Level = conditional
+
+rowBCMarkedShellToCurvatureCarrierRound94Level : ProofLevel
+rowBCMarkedShellToCurvatureCarrierRound94Level =
+  BC.rowBCMarkedShellToCurvatureCarrierLevel
+
+rowBCMarkedShellToUniformCurvatureDebtRound94Level : ProofLevel
+rowBCMarkedShellToUniformCurvatureDebtRound94Level =
+  BC.rowBCMarkedShellToUniformCurvatureDebtLevel
 
 rowBCSameShellHessianDominationRound94Level : ProofLevel
 rowBCSameShellHessianDominationRound94Level = conditional
