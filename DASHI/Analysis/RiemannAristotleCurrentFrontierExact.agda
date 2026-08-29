@@ -37,15 +37,30 @@ module DASHI.Analysis.RiemannAristotleCurrentFrontierExact where
 --
 --   ||E D_off||^2 <= B_far < ||E D_cluster||^2
 --
--- is exactly the desired contradiction under an off-line target.  It is NOT an
--- invalid target theorem.  The associated no-go says only that the strict
--- inequality cannot be obtained from Schur/elimination algebra itself, since
--- that algebra identifies the two residual vectors.  The strict upper bound
--- must come from real cancellation analysis of the signed off-ordinate carrier.
+-- is exactly the desired contradiction under an off-line target.  The no-go
+-- says only that Schur/elimination algebra cannot manufacture that strict bound.
 --
--- The newest Lean tranche solves a prerequisite for that analysis: the signed
--- reflection far tail is absolutely convergent with a uniform delta^-2 shell
--- envelope.  Convergence is now closed; strict cancellation is not.
+-- NEW AGDA S2 COMPILATION LAYER
+--
+-- Absolute convergence now permits an explicit shell cutoff J.  The infinite
+-- cancellation theorem has been factored into
+--
+--   R_off <= R_near(J) + R_far(J)
+--         <= B_near(J) + B_far(J)
+--          < M_cluster.
+--
+-- `RiemannAristotleNearFarShellBudgetCompilerExact` proves this implication and
+-- connects it directly to the whole-carrier contradiction.  The accompanying
+-- producer sockets require:
+--
+--   * a quantitative curvature-times-tail envelope for the truly far shells;
+--   * a FINITE SIGNED near-shell aggregate bound;
+--   * one shared cutoff J;
+--   * the strict combined budget margin.
+--
+-- The compiler does not prove either analytic producer.  In particular the
+-- finite near core is not allowed to regress to the exhausted absolute W(t)
+-- majorant.
 --
 -- HIGHEST-ALPHA LIVE CUTSET
 --
@@ -53,14 +68,16 @@ module DASHI.Analysis.RiemannAristotleCurrentFrontierExact where
 --       vectors have rank two and the off-line cluster survives the quotient
 --       with an explicit positive Schur margin;
 --
---   S2. use the kernel-checked reflection-pair curvature + shell summability
---       machinery to prove an explicit analytic bound B_far for the WHOLE
---       post-Schur off-ordinate carrier, with
+--   S2a. choose an explicit shell cutoff J and instantiate the kernel-checked
+--        curvature/delta^-2 machinery as a quantitative B_far(J);
 --
---         ||E D_off||^2 <= B_far < ||E D_cluster||^2;
+--   S2b. bound the finitely many nearby shells as one signed oscillatory core,
+--        obtaining B_near(J), and prove
 --
---       because the exact balance also gives equality of those residual norms,
---       S1+S2 produce the contradiction rather than a further decomposition;
+--          B_near(J) + B_far(J) < M_cluster;
+--
+--       the new Agda near/far compiler then yields the required strict whole-
+--       carrier inequality mechanically;
 --
 --   S3. certify the complementary low-ordinate region, or replace the split by
 --       a universal construction;
@@ -112,12 +129,21 @@ record AristotleCurrentFrontier : Set where
     eliminationAlgebraAloneClosesStrictBudgetIsFalse :
       eliminationAlgebraAloneClosesStrictBudget ≡ false
 
+    nearFarShellCompositionCompilerClosedInAgda : Bool
+    nearFarShellCompositionCompilerClosedInAgdaIsTrue :
+      nearFarShellCompositionCompilerClosedInAgda ≡ true
+    quantitativeFarShellEnvelopeClosed : Bool
+    quantitativeFarShellEnvelopeClosedIsFalse :
+      quantitativeFarShellEnvelopeClosed ≡ false
+    finiteSignedNearShellCoreClosed : Bool
+    finiteSignedNearShellCoreClosedIsFalse :
+      finiteSignedNearShellCoreClosed ≡ false
+    combinedNearFarMarginClosed : Bool
+    combinedNearFarMarginClosedIsFalse : combinedNearFarMarginClosed ≡ false
+
     deterministicNuisanceThreeTaperConstructionClosed : Bool
     deterministicNuisanceThreeTaperConstructionClosedIsFalse :
       deterministicNuisanceThreeTaperConstructionClosed ≡ false
-    strictSignedWholeOffCarrierCancellationClosed : Bool
-    strictSignedWholeOffCarrierCancellationClosedIsFalse :
-      strictSignedWholeOffCarrierCancellationClosed ≡ false
     lowOrdinateComplementCertified : Bool
     lowOrdinateComplementCertifiedIsFalse :
       lowOrdinateComplementCertified ≡ false
@@ -141,8 +167,11 @@ canonicalAristotleCurrentFrontier =
     true refl
     true refl
     false refl
+    true refl
     false refl
     false refl
     false refl
     false refl
-    "The newest kernel-checked Lean tranche closes uniform reflection-pair curvature control and absolute summability/convergence of the literal signed off-ordinate carrier. Source audit confirms that `D_off` is the complement of the target same-ordinate fibre, so the whole-carrier strict B_far inequality remains the correct contradiction target. The elimination algebra cannot prove that strict inequality because it identifies the post-Schur cluster and off-carrier residual vectors; genuine signed cancellation analysis must. The live research cutset is the deterministic three-taper rank/survival construction, the explicit strict whole-tail cancellation estimate, and low-ordinate certification before the existing RH compiler fires."
+    false refl
+    false refl
+    "The kernel-checked Lean tranche closes absolute convergence and uniform curvature control of the reflection-paired off-ordinate carrier. Agda now owns the exact cutoff compiler that turns a finite signed near-core budget plus a quantitative summable far-shell budget at one cutoff J into the strict whole-carrier bound and contradiction. The remaining S2 mathematics is therefore producer-side only: instantiate an explicit B_far(J), estimate the finite signed nearby shells as B_near(J), and beat the surviving S1 cluster margin. S1 deterministic three-taper construction and low-ordinate certification remain open; RH is not derived."
