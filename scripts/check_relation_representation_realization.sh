@@ -8,6 +8,7 @@ FILES=(
   DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
   DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
   DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
+  DASHI/Reasoning/RelationRepresentationExternalReceiptAdmissionExact.agda
   DASHI/Reasoning/RelationRepresentationAdequacyExact.agda
   DASHI/Reasoning/RelationRepresentationRealizationExact.agda
   DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda
@@ -41,6 +42,14 @@ grep -q '"reconstruction_error": 0' Artifacts/relation-representation/numeric-pr
 grep -q '"squared_error": 0' Artifacts/relation-representation/numeric-producer-receipt.json
 grep -q '"state_dependent": true' Artifacts/relation-representation/numeric-producer-receipt.json
 
+test -s scripts/validate_relation_representation_external_receipt.py
+test -s Artifacts/relation-representation/external-study-receipt-template.json
+python3 scripts/validate_relation_representation_external_receipt.py \
+  --allow-template Artifacts/relation-representation/external-study-receipt-template.json
+
+grep -q 'dashi.relation-representation.external-study-receipt.v1' Artifacts/relation-representation/external-study-receipt-template.json
+grep -q 'rise-2510.09790' Artifacts/relation-representation/external-study-receipt-template.json
+
 grep -q '10.52202/085713-1438' DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
 grep -q '10.48550/arXiv.2510.09790' DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
 grep -q '10.48550/arXiv.2605.05115' DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
@@ -66,6 +75,12 @@ grep -q 'certifiedSensitivityStage' DASHI/Reasoning/RelationRepresentationTOEInf
 grep -q 'robustnessDiscrepancyStage' DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
 grep -q 'heldOutValidationStage' DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
 grep -q 'stage67OwnersShouldBeReusedAfterMerge' DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
+
+grep -q 'ExternalStudyReceipt' DASHI/Reasoning/RelationRepresentationExternalReceiptAdmissionExact.agda
+grep -q 'ReceiptPackageCheck' DASHI/Reasoning/RelationRepresentationExternalReceiptAdmissionExact.agda
+grep -q 'ReceiptReproductionCheck' DASHI/Reasoning/RelationRepresentationExternalReceiptAdmissionExact.agda
+grep -q 'checkedReceiptCanFeedStage67EvidenceLayer' DASHI/Reasoning/RelationRepresentationExternalReceiptAdmissionExact.agda
+grep -q 'currentExternalPayloadPresence' DASHI/Reasoning/RelationRepresentationExternalReceiptAdmissionExact.agda
 
 grep -q 'sameRetainedRelationStateGivesSameObservationAfterEveryTrace' DASHI/Reasoning/RelationRepresentationAdequacyExact.agda
 grep -q 'RepresentationRealizationWitness' DASHI/Reasoning/RelationRepresentationRealizationExact.agda
@@ -98,6 +113,7 @@ grep -q 'externalFixtureDoesNotClaimEmpiricalEmbeddings' DASHI/Reasoning/Relatio
 if command -v agda >/dev/null 2>&1; then
   agda -i . -i src DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
   agda -i . -i src DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
+  agda -i . -i src DASHI/Reasoning/RelationRepresentationExternalReceiptAdmissionExact.agda
   agda -i . -i src DASHI/Reasoning/FiniteRelationLinearAlgebraProducerExact.agda
   agda -i . -i src DASHI/Reasoning/FiniteRelationSVDJacobianProducerExact.agda
   agda -i . -i src DASHI/Reasoning/RelationRepresentationRegression.agda
