@@ -25,7 +25,8 @@ module DASHI.Physics.YangMills.BalabanYM4RowAWardFloorCanonicalGateExact where
 ------------------------------------------------------------------------
 
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _<_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _+_; _*_; _/_; _<_)
 import Data.Rational.Properties as ℚP
 open import Relation.Nullary.Decidable using (toWitness)
 
