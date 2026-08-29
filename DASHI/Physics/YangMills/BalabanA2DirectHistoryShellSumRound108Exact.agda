@@ -11,17 +11,18 @@ module DASHI.Physics.YangMills.BalabanA2DirectHistoryShellSumRound108Exact where
 --     telescope;
 --   * irrelevant/polymer history sensitivity, summed geometrically.
 --
--- This file proves that their POINTWISE sum is the exact q_j sequence consumed
--- by the literal same-history theorem and that the existing augmented gate makes
--- its finite sum strictly subunit.  No exponential forgetting is assigned to
--- the marginal coupling.
+-- Their pointwise sum is the exact q_j sequence consumed by the literal
+-- same-history theorem.  The existing augmented gate makes every physical
+-- finite partial sum strictly subunit.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Data.Nat.Base as ℕ
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _≤_; _<_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4ShootingSensitivityFromCubicDriftExact as Direct
@@ -39,26 +40,10 @@ sumAgreeDirect f (suc n) = cong (_+ f n) (sumAgreeDirect f n)
 sumPointwiseAdd :
   (f h : Nat → ℚ) → ∀ K →
   sum (λ j → f j + h j) K ≡ sum f K + sum h K
-sumPointwiseAdd f h zero = sym (ℚP.+-identityʳ 0ℚ)
+sumPointwiseAdd f h zero = ℚRing.solve-∀
 sumPointwiseAdd f h (suc n) =
   trans
     (cong (_+ (f n + h n)) (sumPointwiseAdd f h n))
-    (ℚP.+-assoc (sum f n) (sum h n) (f n + h n))
-    -- The remaining commutative regrouping is supplied below by rational ring.
-
--- The standard library associativity step above alone does not reorder the
--- middle terms.  Keep the exact finite identity as a tiny algebraic premise
--- derived by the rational solver in the helper below.
-
-open import Data.Rational.Tactic.RingSolver as ℚRing
-
-sumPointwiseAddExact :
-  (f h : Nat → ℚ) → ∀ K →
-  sum (λ j → f j + h j) K ≡ sum f K + sum h K
-sumPointwiseAddExact f h zero = ℚRing.solve-∀
-sumPointwiseAddExact f h (suc n) =
-  trans
-    (cong (_+ (f n + h n)) (sumPointwiseAddExact f h n))
     (ℚRing.solve-∀ (sum f n) (sum h n) (f n) (h n))
 
 record DirectHistoryShellBudget (cutoff : Nat) : Set₁ where
@@ -79,6 +64,16 @@ module Budget {cutoff : Nat} (dataSet : DirectHistoryShellBudget cutoff) where
   totalShell : Nat → ℚ
   totalShell j = Direct.sensitivity directData j + historyShell dataSet j
 
+  totalSumIdentity : ∀ K →
+    sum totalShell K
+    ≡ Direct.sum₀ (Direct.sensitivity directData) K
+        + sum (historyShell dataSet) K
+  totalSumIdentity K =
+    trans
+      (sumPointwiseAdd (Direct.sensitivity directData) (historyShell dataSet) K)
+      (cong (λ x → x + sum (historyShell dataSet) K)
+        (sumAgreeDirect (Direct.sensitivity directData) K))
+
   totalPartialSumBelowAugmentedQ :
     ∀ K → K ℕ.≤ cutoff →
     sum totalShell K ≤ A.qTotal K
@@ -93,14 +88,11 @@ module Budget {cutoff : Nat} (dataSet : DirectHistoryShellBudget cutoff) where
     in
     subst
       (λ left → left ≤ A.qTotal K)
-      (trans
-        (sumPointwiseAddExact (Direct.sensitivity directData) (historyShell dataSet) K)
-        (cong (_+ sum (historyShell dataSet) K)
-          (sumAgreeDirect (Direct.sensitivity directData) K)))
+      (totalSumIdentity K)
       added
 
   totalPartialSumBelowOne :
-    ∀ K → K ℕ.≤ cutoff → sum totalShell K < ℚ.1ℚ
+    ∀ K → K ℕ.≤ cutoff → sum totalShell K < 1ℚ
   totalPartialSumBelowOne K K≤ =
     ℚP.≤-<-trans
       (totalPartialSumBelowAugmentedQ K K≤)
@@ -109,9 +101,5 @@ module Budget {cutoff : Nat} (dataSet : DirectHistoryShellBudget cutoff) where
 round108A2DirectHistoryShellSumLevel : ProofLevel
 round108A2DirectHistoryShellSumLevel = machineChecked
 
--- Physical leaf: prove the literal per-shell beta difference is bounded by
--- `totalShell j * |u-v|`, with the direct term obtained from the SAME A1
--- mixed-Cauchy package and the history term from the literal irrelevant/polymer
--- response.  The subunit finite sum is now theorem-owned.
 literalCMP109DirectHistoryShellLipschitzRound108Level : ProofLevel
 literalCMP109DirectHistoryShellLipschitzRound108Level = conditional
