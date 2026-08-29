@@ -31,9 +31,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Data.Rational.Base using (ℚ; _+_; _≤_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
-import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNBlockGramCovarianceTelescopeRound201Exact as R201
 
@@ -128,8 +127,6 @@ totalResidualBudgetClosesGroupedMass blocks budget =
     (λ left → left ≤ R201.cellMassAcrossBlocks blocks + residualBudget budget)
     (R201.blockGramCovarianceTelescope blocks)
     debtBound
-  where
-  open import Relation.Binary.PropositionalEquality using (sym)
 
 round202GramNegativityRequired : Bool
 round202GramNegativityRequired = false
