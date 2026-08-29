@@ -8,19 +8,16 @@ import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact as Weld
 import DASHI.Physics.Foundations.CommonEffectiveActionVariationExact as Variation
 
 ------------------------------------------------------------------------
--- BIDI GR-side compression.
+-- BIDI GR-side variational compression.
 --
--- The generic common-action layer asks for
+-- The primitive metric theorem is functional:
 --
---   GR StressEnergy = common metric variation.
+--     delta_g S_common[h] = <G , h>
 --
--- But the existing literal GR closure already owns
---
---   EinsteinTensor = StressEnergy.
---
--- Therefore the genuinely variational theorem can target the geometrically
--- natural Einstein tensor.  The source equality then follows by the existing
--- field equation rather than being proved a second time.
+-- on an admitted metric-perturbation domain.  A separate separation theorem for
+-- the declared pairing then recovers the tensor equality between the common
+-- source tensor and Einstein tensor.  Finally the already-owned field equation
+-- G = T transports that equality to the literal GR stress-energy source.
 ------------------------------------------------------------------------
 
 actualGREinsteinTensor :
@@ -45,18 +42,79 @@ record EinsteinTensorVariationReceipt
     {U : Weld.UnifiedCandidate}
     (variation : Variation.CommonEffectiveActionVariation U) : Set₁ where
   field
-    -- Natural variational target: the common source variation equals the
-    -- transported Einstein tensor on the same coarse-grained candidate.
-    commonVariationEqualsEinsteinTensor :
-      ∀ candidate regime →
+    MetricPerturbation VariationScalar : Set
+
+    AdmissibleMetricPerturbation :
+      Weld.Candidate U → Weld.Regime U → MetricPerturbation → Set
+
+    stressMetricPairing :
+      Weld.SharedStressEnergy U → MetricPerturbation → VariationScalar
+
+    commonMetricFirstVariation :
+      Weld.Candidate U → Weld.Regime U → MetricPerturbation → VariationScalar
+
+    -- The tensor-valued common effective source represents the same functional.
+    effectiveSourceRepresentsCommonMetricVariation :
+      ∀ candidate regime perturbation →
       Weld.grRegime U regime →
-      Variation.effectiveSourceVariation variation
-        (Weld.coarseGrain U candidate regime) regime
+      AdmissibleMetricPerturbation candidate regime perturbation →
+      stressMetricPairing
+        (Variation.effectiveSourceVariation variation
+          (Weld.coarseGrain U candidate regime) regime)
+        perturbation
+      ≡ commonMetricFirstVariation candidate regime perturbation
+
+    -- Genuine GR variational theorem: the common action first variation is the
+    -- Einstein-tensor pairing on the same coarse-grained geometry.
+    commonMetricVariationEqualsEinsteinPairing :
+      ∀ candidate regime perturbation →
+      Weld.grRegime U regime →
+      AdmissibleMetricPerturbation candidate regime perturbation →
+      commonMetricFirstVariation candidate regime perturbation
       ≡
-      Weld.grStressToShared U (Weld.coarseGrain U candidate regime)
-        (actualGREinsteinTensor U (Weld.coarseGrain U candidate regime))
+      stressMetricPairing
+        (Weld.grStressToShared U (Weld.coarseGrain U candidate regime)
+          (actualGREinsteinTensor U
+            (Weld.coarseGrain U candidate regime)))
+        perturbation
+
+    -- Faithfulness/nondegeneracy on the admitted perturbation language.  This
+    -- is the exact theorem that permits equality of all pairings to become
+    -- equality of the represented stress tensors.
+    pairingSeparatesStressOnAdmittedDomain :
+      ∀ candidate regime left right →
+      (∀ perturbation →
+        AdmissibleMetricPerturbation candidate regime perturbation →
+        stressMetricPairing left perturbation
+        ≡ stressMetricPairing right perturbation) →
+      left ≡ right
 
 open EinsteinTensorVariationReceipt public
+
+commonVariationEqualsEinsteinTensor :
+  ∀ {U : Weld.UnifiedCandidate}
+    (variation : Variation.CommonEffectiveActionVariation U)
+    (receipt : EinsteinTensorVariationReceipt variation)
+    candidate regime →
+  Weld.grRegime U regime →
+  Variation.effectiveSourceVariation variation
+    (Weld.coarseGrain U candidate regime) regime
+  ≡
+  Weld.grStressToShared U (Weld.coarseGrain U candidate regime)
+    (actualGREinsteinTensor U (Weld.coarseGrain U candidate regime))
+commonVariationEqualsEinsteinTensor variation receipt candidate regime grAtRegime =
+  pairingSeparatesStressOnAdmittedDomain
+    receipt candidate regime
+    (Variation.effectiveSourceVariation variation
+      (Weld.coarseGrain U candidate regime) regime)
+    (Weld.grStressToShared U (Weld.coarseGrain U candidate regime)
+      (actualGREinsteinTensor U (Weld.coarseGrain U candidate regime)))
+    (λ perturbation admissible →
+      trans
+        (effectiveSourceRepresentsCommonMetricVariation
+          receipt candidate regime perturbation grAtRegime admissible)
+        (commonMetricVariationEqualsEinsteinPairing
+          receipt candidate regime perturbation grAtRegime admissible))
 
 ------------------------------------------------------------------------
 -- Compiler through the literal field equation G = T.
@@ -78,17 +136,12 @@ einsteinTensorVariationBuildsGRIdentification variation receipt = record
               (actualGRFieldEquation U selected)
           variationToEinstein =
             commonVariationEqualsEinsteinTensor
-              receipt candidate regime grAtRegime
+              variation receipt candidate regime grAtRegime
         in
         trans
           (sym fieldEquationShared)
           (sym variationToEinstein)
   }
-
-------------------------------------------------------------------------
--- Boundary: G = T is already in the literal GR target; deriving G from the
--- common action remains the actual variational/continuum theorem.
-------------------------------------------------------------------------
 
 record EinsteinVariationBoundary : Set where
   constructor einsteinVariationBoundary
@@ -97,14 +150,22 @@ record EinsteinVariationBoundary : Set where
     fieldEquationAloneDerivesCommonActionIsFalse :
       fieldEquationAloneDerivesCommonAction ≡ false
 
-    commonVariationEqualsEinsteinTensorIsStillPhysicalTheorem : Bool
-    commonVariationEqualsEinsteinTensorIsStillPhysicalTheoremIsTrue :
-      commonVariationEqualsEinsteinTensorIsStillPhysicalTheorem ≡ true
+    tensorNameAloneDeterminesMetricVariationFunctional : Bool
+    tensorNameAloneDeterminesMetricVariationFunctionalIsFalse :
+      tensorNameAloneDeterminesMetricVariationFunctional ≡ false
 
-    einsteinVariationPlusFieldEquationBuildsGRSourceIdentification : Bool
-    einsteinVariationPlusFieldEquationBuildsGRSourceIdentificationIsTrue :
-      einsteinVariationPlusFieldEquationBuildsGRSourceIdentification ≡ true
+    equalityOfPairingsImpliesTensorEqualityWithoutSeparationTheorem : Bool
+    equalityOfPairingsImpliesTensorEqualityWithoutSeparationTheoremIsFalse :
+      equalityOfPairingsImpliesTensorEqualityWithoutSeparationTheorem ≡ false
+
+    commonMetricVariationEqualsEinsteinPairingIsStillPhysicalTheorem : Bool
+    commonMetricVariationEqualsEinsteinPairingIsStillPhysicalTheoremIsTrue :
+      commonMetricVariationEqualsEinsteinPairingIsStillPhysicalTheorem ≡ true
+
+    einsteinVariationPlusSeparationPlusFieldEquationBuildsGRSource : Bool
+    einsteinVariationPlusSeparationPlusFieldEquationBuildsGRSourceIsTrue :
+      einsteinVariationPlusSeparationPlusFieldEquationBuildsGRSource ≡ true
 
 canonicalEinsteinVariationBoundary : EinsteinVariationBoundary
 canonicalEinsteinVariationBoundary =
-  einsteinVariationBoundary false refl true refl true refl
+  einsteinVariationBoundary false refl false refl false refl true refl true refl
