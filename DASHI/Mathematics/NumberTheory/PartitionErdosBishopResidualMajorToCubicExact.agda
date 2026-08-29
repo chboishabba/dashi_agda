@@ -10,6 +10,7 @@ open import Data.Nat.Base using (_≤_)
 import Real as BishopReal
 import RealProperties as BishopP
 
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopCubicStepRateExact as Rate
 import DASHI.Mathematics.NumberTheory.PartitionErdosBishopFactorKeyAnalyticReindexExact as Reindex
 import DASHI.Mathematics.NumberTheory.PartitionErdosBishopKMajorCoordinateSumDominationExact as KSum
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -20,8 +21,7 @@ residualMajorAnalyticFactorSumBelowCubic :
   BishopReal._≤_
     (Reindex.residualMajorAnalyticFactorSum n)
     (KSum.kMajorCoordinateCubicSum
-      (DASHI.Mathematics.NumberTheory.PartitionErdosBishopCubicStepRateExact.canonicalErdosStepRate
-        n nPositive))
+      (Rate.canonicalErdosStepRate n nPositive))
 residualMajorAnalyticFactorSumBelowCubic {n} nPositive =
   BishopP.≤-respˡ-≃
     (Reindex.residualMajorIsCoordinateResidualSum n)
