@@ -24,11 +24,12 @@ module DASHI.Physics.YangMills.BalabanHeatDoobWeightedGeneratorCovarianceExact w
 -- same-object identity.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using (List)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -38,6 +39,7 @@ import DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact as Power
 import DASHI.Physics.YangMills.BalabanThreeHalvesMetricWeightExact as Metric
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact as Shared
 import DASHI.Physics.YangMills.BalabanRootedKPToExponentialWeightedHessianExact as Hess
+import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
 record HeatDoobWeightedGeneratorCovarianceSplit
     (Scale Volume Root Site : Set) : Set₁ where
@@ -100,10 +102,23 @@ weightedSplitPointwise :
   ≤ Metric.metricWeight (metric dataSet) x y
       * (staticInfluence dataSet x y + covarianceInfluence dataSet x y)
 weightedSplitPointwise dataSet x y =
-  DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact.scaleNonnegative
+  Norm.scaleNonnegative
     (Metric.metricWeight (metric dataSet) x y)
     (Metric.metricWeightNonnegative (metric dataSet) x y)
     (generatorSplit dataSet x y)
+
+sumDistribute :
+  ∀ {A : Set} (xs : List A) (weight static covariance : A → ℚ) →
+  Sums.sumRational xs (λ a → weight a * (static a + covariance a))
+  ≡ Sums.sumRational xs (λ a → weight a * static a)
+      + Sums.sumRational xs (λ a → weight a * covariance a)
+sumDistribute [] weight static covariance = refl
+sumDistribute (a ∷ as) weight static covariance
+  rewrite sumDistribute as weight static covariance =
+  ℚRing.solve-∀
+    (weight a) (static a) (covariance a)
+    (Sums.sumRational as (λ x → weight x * static x))
+    (Sums.sumRational as (λ x → weight x * covariance x))
 
 weightedDynamicRowBound :
   ∀ {Scale Volume Root Site}
@@ -121,47 +136,22 @@ weightedDynamicRowBound dataSet x =
         * (staticInfluence dataSet x y + covarianceInfluence dataSet x y))
       (weightedSplitPointwise dataSet x)
 
-    distribute :
-      Sums.sumRational (sites dataSet)
-        (λ y → Metric.metricWeight (metric dataSet) x y
-          * (staticInfluence dataSet x y + covarianceInfluence dataSet x y))
-      ≡
-      Sums.sumRational (sites dataSet)
-        (λ y → Metric.metricWeight (metric dataSet) x y * staticInfluence dataSet x y)
-      +
-      Sums.sumRational (sites dataSet)
-        (λ y → Metric.metricWeight (metric dataSet) x y * covarianceInfluence dataSet x y)
-    distribute = sumDistribute (sites dataSet)
-      (λ y → Metric.metricWeight (metric dataSet) x y * staticInfluence dataSet x y)
-      (λ y → Metric.metricWeight (metric dataSet) x y * covarianceInfluence dataSet x y)
-      (λ y → Data.Rational.Tactic.RingSolver.solve-∀
-        (Metric.metricWeight (metric dataSet) x y)
-        (staticInfluence dataSet x y)
-        (covarianceInfluence dataSet x y))
+    distribute = sumDistribute
+      (sites dataSet)
+      (Metric.metricWeight (metric dataSet) x)
+      (staticInfluence dataSet x)
+      (covarianceInfluence dataSet x)
 
     components = ℚP.+-mono-≤
       (staticWeightedRowBound dataSet x)
       (covarianceWeightedRowBound dataSet x)
   in
-  ℚP.≤-trans pointwise (subst
-    (λ left → left ≤ Shared.hessianAnalyticConstant (shared dataSet) + covarianceRowMass dataSet)
-    distribute components)
-  where
-    sumDistribute :
-      ∀ {A : Set} (xs : List A) (f g : A → ℚ) →
-      (∀ a →
-        Metric.metricWeight (metric dataSet) x a
-          * (staticInfluence dataSet x a + covarianceInfluence dataSet x a)
-        ≡ f a + g a) →
-      Sums.sumRational xs
-        (λ a → Metric.metricWeight (metric dataSet) x a
-          * (staticInfluence dataSet x a + covarianceInfluence dataSet x a))
-      ≡ Sums.sumRational xs f + Sums.sumRational xs g
-    sumDistribute [] f g pointwise = refl
-    sumDistribute (a Agda.Builtin.List.∷ as) f g pointwise
-      rewrite pointwise a | sumDistribute as f g pointwise =
-      Data.Rational.Tactic.RingSolver.solve-∀
-        (f a) (g a) (Sums.sumRational as f) (Sums.sumRational as g)
+  ℚP.≤-trans pointwise
+    (subst
+      (λ left → left ≤
+        Shared.hessianAnalyticConstant (shared dataSet) + covarianceRowMass dataSet)
+      distribute
+      components)
 
 asWeightedDynamicMajorant :
   ∀ {Scale Volume Root Site} →
@@ -195,9 +185,9 @@ allDynamicWeightedPowerRows :
   Weighted.weightedPowerRow (asWeightedDynamicMajorant dataSet) n x
   ≤ Power.rationalPower
       (Shared.hessianAnalyticConstant (shared dataSet) + covarianceRowMass dataSet)
-      (Agda.Builtin.Nat.suc n)
-allDynamicWeightedPowerRows dataSet = Weighted.weightedPowerRowBound
-  (asWeightedDynamicMajorant dataSet)
+      (suc n)
+allDynamicWeightedPowerRows dataSet =
+  Weighted.weightedPowerRowBound (asWeightedDynamicMajorant dataSet)
 
 heatDoobWeightedGeneratorCovarianceCompilerLevel : ProofLevel
 heatDoobWeightedGeneratorCovarianceCompilerLevel = machineChecked
