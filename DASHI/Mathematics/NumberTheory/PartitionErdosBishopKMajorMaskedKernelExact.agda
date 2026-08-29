@@ -21,6 +21,7 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosBishopKMajorMaskedKernelExac
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Nat.Base using (_≤_)
 import Data.Nat.Properties as NatP
+open import Relation.Nullary.Decidable.Core using (yes; no)
 
 import Real as BishopReal
 import RealProperties as BishopP
@@ -39,9 +40,6 @@ import DASHI.Foundations.BishopNatRealPositiveExact as NatPositive
 import DASHI.Foundations.BishopPositiveNatScaleReciprocalSquareExact as NatScaleReciprocal
 import DASHI.Mathematics.NumberTheory.PartitionErdosBishopCubicStepRateExact as Rate
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-
-------------------------------------------------------------------------
--- One fixed k-block.
 
 blockStep :
   ∀ {n} {nPositive : suc zero ≤ n} →
@@ -94,9 +92,8 @@ maskedBlockTerm :
   Nat → Nat → BishopReal.ℝ
 maskedBlockTerm {n = n} rate predecessor index
   with (suc predecessor * suc index) NatP.≤? n
-... | Relation.Nullary.Decidable.Core.yes _ =
-  fullBlockTerm rate predecessor index
-... | Relation.Nullary.Decidable.Core.no _ = BishopReal.0ℝ
+... | yes _ = fullBlockTerm rate predecessor index
+... | no _ = BishopReal.0ℝ
 
 maskedTermBelowFull :
   ∀ {grade n} {nPositive : suc zero ≤ grade}
@@ -107,8 +104,8 @@ maskedTermBelowFull :
     (fullBlockTerm rate predecessor index)
 maskedTermBelowFull {n = n} rate predecessor index
   with (suc predecessor * suc index) NatP.≤? n
-... | Relation.Nullary.Decidable.Core.yes _ = BishopP.≤-refl
-... | Relation.Nullary.Decidable.Core.no _ =
+... | yes _ = BishopP.≤-refl
+... | no _ =
   BishopP.nonNegx⇒0≤x
     (fullBlockTermNonnegative rate predecessor index)
 
@@ -165,9 +162,6 @@ maskedBlockBelowWeightedPartial rate cutoff predecessor count =
     (fullBlockIsWeightedPartial rate predecessor count)
     (maskedBlockBelowFull rate cutoff predecessor count)
 
-------------------------------------------------------------------------
--- The k-block is bounded by the literal Basel term times the common x_n^-2.
-
 blockBaselBound :
   ∀ {n} {nPositive : suc zero ≤ n}
     (rate : Rate.ErdosStepRate n nPositive) →
@@ -182,8 +176,7 @@ blockBaselBound :
 blockBaselBound {n} rate predecessor =
   let
     stepPositive = blockStepPositive rate predecessor
-    fullKernel =
-      Kernel.cubicFiniteDegreeOneKernel stepPositive n
+    fullKernel = Kernel.cubicFiniteDegreeOneKernel stepPositive n
     normalizedKernel =
       BishopP.<-respʳ-≃
         (NatScaleReciprocal.natScaleSuccessorReciprocalSquare
@@ -193,9 +186,6 @@ blockBaselBound {n} rate predecessor =
   BishopP.≤-<-trans
     (maskedBlockBelowWeightedPartial rate n predecessor n)
     normalizedKernel
-
-------------------------------------------------------------------------
--- Sum all k=1,...,n blocks and factor out x_n^-2.
 
 kMajorMaskedKernel :
   ∀ {n} {nPositive : suc zero ≤ n} →
