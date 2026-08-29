@@ -28,9 +28,10 @@ module DASHI.Physics.Closure.NSTriadKNBlockGramResidualBudgetRound202Exact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; _+_; _≤_)
 import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
@@ -94,37 +95,27 @@ totalResidualBudgetClosesGroupedMass :
   ≤ R201.cellMassAcrossBlocks blocks + residualBudget budget
 totalResidualBudgetClosesGroupedMass blocks budget =
   let
+    mass = R201.cellMassAcrossBlocks blocks
+    within = R201.withinBlockGramDebt blocks
+    between = R201.betweenBlockGramDebt blocks
+
     regrouped :
-      R201.cellMassAcrossBlocks blocks
-        + R201.withinBlockGramDebt blocks
-        + R201.betweenBlockGramDebt blocks
-      ≡ R201.cellMassAcrossBlocks blocks
-        + (R201.withinBlockGramDebt blocks + R201.betweenBlockGramDebt blocks)
-    regrouped = ℚP.+-assoc
-      (R201.cellMassAcrossBlocks blocks)
-      (R201.withinBlockGramDebt blocks)
-      (R201.betweenBlockGramDebt blocks)
+      mass + within + between ≡ mass + (within + between)
+    regrouped = solve (mass ∷ within ∷ between ∷ [])
 
     shifted :
-      R201.cellMassAcrossBlocks blocks
-        + (R201.withinBlockGramDebt blocks + R201.betweenBlockGramDebt blocks)
-      ≤ R201.cellMassAcrossBlocks blocks + residualBudget budget
-    shifted = ℚP.+-monoʳ-≤
-      (R201.cellMassAcrossBlocks blocks)
-      (totalDebtBound budget)
+      mass + (within + between) ≤ mass + residualBudget budget
+    shifted = ℚP.+-monoʳ-≤ mass (totalDebtBound budget)
 
     debtBound :
-      R201.cellMassAcrossBlocks blocks
-        + R201.withinBlockGramDebt blocks
-        + R201.betweenBlockGramDebt blocks
-      ≤ R201.cellMassAcrossBlocks blocks + residualBudget budget
+      mass + within + between ≤ mass + residualBudget budget
     debtBound = subst
-      (λ left → left ≤ R201.cellMassAcrossBlocks blocks + residualBudget budget)
+      (λ left → left ≤ mass + residualBudget budget)
       (sym regrouped)
       shifted
   in
   subst
-    (λ left → left ≤ R201.cellMassAcrossBlocks blocks + residualBudget budget)
+    (λ left → left ≤ mass + residualBudget budget)
     (R201.blockGramCovarianceTelescope blocks)
     debtBound
 
