@@ -122,17 +122,17 @@ doubleAdd :
   double D a +D double D b ≡ double D (a +D b)
 doubleAdd D a b =
   trans
-    (sym (G1.addAssoc S a a (double D b)))
+    (G1.addAssoc S a a (double D b))
     (trans
       (cong (G1.addScalar S a)
-        (G1.addAssoc S a b b))
+        (sym (G1.addAssoc S a b b)))
       (trans
         (cong (G1.addScalar S a)
           (cong (λ x → x +D b) (G1.addComm S a b)))
         (trans
           (cong (G1.addScalar S a)
-            (sym (G1.addAssoc S b a b)))
-          (G1.addAssoc S a b (a +D b)))))
+            (G1.addAssoc S b a b))
+          (sym (G1.addAssoc S a b (a +D b))))))
   where
     S = gramStructure D
 
