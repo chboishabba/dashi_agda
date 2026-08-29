@@ -4,6 +4,8 @@ open import DASHI.Core.Prelude
 
 import DASHI.Analysis.ResidualBudgetMarginCompilerExact as Budget
 import DASHI.Analysis.RiemannAristotleWindowSchurCrossProverSyncExact as Sync
+import DASHI.Analysis.RiemannAristotleSharedWindowCertificateExact as Shared
+import DASHI.Analysis.CertifiedFiniteCarrierReindexExact as Reindex
 
 leanProofRemainsDistinctFromAgdaProof :
   Sync.AristotleAgdaSyncBoundary.leanProofIsAgdaProof
@@ -44,3 +46,43 @@ residualNeedNotBeNonPositive :
   Budget.ResidualBudgetMarginBoundary.residualMustBeNonPositive
     Budget.canonicalResidualBudgetMarginBoundary ≡ false
 residualNeedNotBeNonPositive = refl
+
+sharedWindowConstructedOnce :
+  Shared.SharedWindowBudgetCutset.windowConstructionSharedOnce
+    Shared.canonicalSharedWindowBudgetCutset ≡ true
+sharedWindowConstructedOnce = refl
+
+sharedResponseEnvelopeConstructedOnce :
+  Shared.SharedWindowBudgetCutset.responseEnvelopeSharedOnce
+    Shared.canonicalSharedWindowBudgetCutset ≡ true
+sharedResponseEnvelopeConstructedOnce = refl
+
+oneSymbolicEndpointComparisonRemains :
+  Shared.SharedWindowBudgetCutset.oneSymbolicBudgetComparisonRemains
+    Shared.canonicalSharedWindowBudgetCutset ≡ true
+oneSymbolicEndpointComparisonRemains = refl
+
+endpointComparisonNotFabricated :
+  Shared.SharedWindowBudgetCutset.endpointComparisonDerivedHere
+    Shared.canonicalSharedWindowBudgetCutset ≡ false
+endpointComparisonNotFabricated = refl
+
+parallelAbstractCarrierRejected :
+  Reindex.CertifiedCarrierReindexBoundary.estimateParallelAbstractCarrierInstead
+    Reindex.canonicalCertifiedCarrierReindexBoundary ≡ false
+parallelAbstractCarrierRejected = refl
+
+exactReindexPreferred :
+  Reindex.CertifiedCarrierReindexBoundary.exactReindexBeforeInnerEstimatePreferred
+    Reindex.canonicalCertifiedCarrierReindexBoundary ≡ true
+exactReindexPreferred = refl
+
+boolReindexRoundTripFalse :
+  Reindex.ExactCarrierReindex.decode Reindex.boolSwapReindex
+    (Reindex.ExactCarrierReindex.encode Reindex.boolSwapReindex false) ≡ false
+boolReindexRoundTripFalse = refl
+
+boolReindexRoundTripTrue :
+  Reindex.ExactCarrierReindex.decode Reindex.boolSwapReindex
+    (Reindex.ExactCarrierReindex.encode Reindex.boolSwapReindex true) ≡ true
+boolReindexRoundTripTrue = refl
