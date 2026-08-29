@@ -1,22 +1,10 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCMP116FirstGradientCovarianceInstantiationRound102Exact where
 
-------------------------------------------------------------------------
--- ROUND102 B->C: SHARED FIRST-GRADIENT CARRIER -> COVARIANCE SHELL/ROW
---
--- This removes covariance decay as an independent premise.  The hessian-mark
--- analytic shell is source-native and finite Cauchy differentiation preserves
--- its localization.  A first-gradient response below that shell therefore has
--- the already-owned 1/2 geometric decay and weighted-row constant.  Multiplying
--- by one uniform companion-gradient bound gives the genuine Heat/Doob covariance
--- debt through the standard bounded covariance inequality.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
-import Data.Rational.Properties as ℚP
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -26,10 +14,6 @@ import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact as Shared
 import DASHI.Physics.YangMills.BalabanHeatDoobGradientCovarianceMarkedCauchyExact as Cov
 import DASHI.Physics.YangMills.BalabanThreeHalvesMetricWeightExact as Metric
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
-
-------------------------------------------------------------------------
--- Temporal shell instantiation
-------------------------------------------------------------------------
 
 record CMP116TemporalFirstGradientCovariance
     (Scale Volume Root : Set) : Set₁ where
@@ -88,10 +72,6 @@ asTemporalGradientCovariance dataSet = record
       covarianceBelowTwoGradientProducts dataSet
   }
 
-------------------------------------------------------------------------
--- Spatial row instantiation
-------------------------------------------------------------------------
-
 record CMP116SpatialFirstGradientCovariance
     (Scale Volume Root Site : Set) : Set₁ where
   field
@@ -112,8 +92,6 @@ record CMP116SpatialFirstGradientCovariance
 
     rowDepth : Site → Nat
 
-    -- Literal finite-row identification of the first derivative with the SAME
-    -- CMP116 weighted marked response.
     weightedGradientRowIsMarkedPartial : ∀ x →
       Sums.sumRational sites
         (λ y → Metric.metricWeight metric x y * localizedGradient x y)
@@ -153,7 +131,7 @@ asSpatialGradientCovariance dataSet = record
         subst
           (λ left → left ≤
             Shared.hessianAnalyticConstant (First.shared (firstGradient dataSet)))
-          (weightedGradientRowIsMarkedPartial dataSet x)
+          (sym (weightedGradientRowIsMarkedPartial dataSet x))
           (First.firstGradientWeightedPartialBelowSharedConstant
             (firstGradient dataSet)
             (scale dataSet) (volume dataSet) (root dataSet) (rowDepth dataSet x))
@@ -167,8 +145,5 @@ cmp116FirstGradientToTemporalCovarianceLevel = machineChecked
 cmp116FirstGradientToSpatialCovarianceLevel : ProofLevel
 cmp116FirstGradientToSpatialCovarianceLevel = machineChecked
 
--- Remaining physical content is now exactly source/coordinate identification of
--- the first derivative and the standard conditional covariance product bound.
--- No separate covariance localization estimate remains.
 literalCMP116FirstGradientHeatDoobIdentificationLevel : ProofLevel
 literalCMP116FirstGradientHeatDoobIdentificationLevel = conditional
