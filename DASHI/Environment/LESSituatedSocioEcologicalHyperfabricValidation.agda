@@ -1,5 +1,7 @@
 module DASHI.Environment.LESSituatedSocioEcologicalHyperfabricValidation where
 
+import DASHI.Physics.Units.SI
+import DASHI.Environment.LESEnvironmentSIQuantityBridgeExact
 import DASHI.Environment.LESObservationSourceRegistryExact
 import DASHI.Environment.LESSituatedSocioEcologicalHyperfabricExact
 import DASHI.Environment.LESSituatedObservationInteractionExact
