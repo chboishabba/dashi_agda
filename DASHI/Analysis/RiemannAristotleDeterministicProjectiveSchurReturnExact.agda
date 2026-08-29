@@ -1,42 +1,29 @@
 module DASHI.Analysis.RiemannAristotleDeterministicProjectiveSchurReturnExact where
 
 ------------------------------------------------------------------------
--- BIDI RETURN: USE THREE-TAPER SCHUR ON DETERMINISTIC PROJECTIVE NUISANCES
+-- BIDI RETURN: DETERMINISTIC PROJECTIVE SCHUR ELIMINATION
 --
--- Backward requirement:
+-- The newest supplied Zeta23Bridge tree imports
+-- `LiteralWeilDeterministicProjectiveSchur` from the aggregate root, and the
+-- supplied session reports
 --
--- An off-line horizontal displacement may be arbitrarily small.  Therefore a
--- uniform contradiction cannot rely only on separate positive O(r^2) Gamma and
--- pole budgets whose coefficients need not vanish with that displacement.
+--   lake build Zeta23Bridge
 --
--- Forward infrastructure:
+-- successful (8883 jobs).  Therefore the previously source-only Lean Schur
+-- compiler is now part of a reported kernel-checked aggregate build.
 --
--- The Lean bridge already owns exact multi-taper Gram--Schmidt elimination and
--- the coordinatewise short-taper identity
+-- Its mathematical content remains:
 --
 --   D_cluster = D_off + D_Gamma + D_pole
 --
--- with the prime projective defect exactly zero at high ordinate.
---
--- New Lean source owner:
---
---   LiteralWeilDeterministicProjectiveSchur.lean
---
--- vectorizes three short tapers and, provided the deterministic pole and Gamma
--- response vectors are independent, proves exactly
+-- on three short tapers (prime projective defect = 0), and under deterministic
+-- nuisance rank two,
 --
 --   elim2 D_pole D_Gamma D_cluster
 --     = elim2 D_pole D_Gamma D_off.
 --
--- Thus Gamma and pole can in principle be removed with ZERO residual debt.  The
--- remaining analytic construction socket is a three-taper family for which:
---
---   * D_pole != 0;
---   * perp(D_pole,D_Gamma) != 0;
---   * the projected off-line cluster survives with a quantitative margin.
---
--- The source is not machine-checked in this return and is not transported as an
--- Agda proof.
+-- This Agda file records provenance/status only.  The Lean proof terms are not
+-- transported into Agda.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -47,9 +34,13 @@ record DeterministicProjectiveSchurReturn : Set where
   field
     sourceImplementedInLean : Bool
     sourceImplementedInLeanIsTrue : sourceImplementedInLean ≡ true
+
     machineCheckedInLeanForThisReturn : Bool
-    machineCheckedInLeanForThisReturnIsFalse :
-      machineCheckedInLeanForThisReturn ≡ false
+    machineCheckedInLeanForThisReturnIsTrue :
+      machineCheckedInLeanForThisReturn ≡ true
+
+    aggregateLeanBuildJobsReported : String
+
     transportedIntoAgda : Bool
     transportedIntoAgdaIsFalse : transportedIntoAgda ≡ false
 
@@ -77,14 +68,15 @@ canonicalDeterministicProjectiveSchurReturn : DeterministicProjectiveSchurReturn
 canonicalDeterministicProjectiveSchurReturn =
   deterministic-projective-schur-return
     true refl
+    true refl
+    "8883"
     false refl
     false refl
     false refl
     false refl
     false refl
     false refl
-    false refl
-    "The highest-leverage use of the three-taper Schur machinery is now deterministic: eliminate the projective pole and Gamma response vectors exactly. In the high-ordinate short-support lane prime is already zero, so after this Schur step the only residual carrier is the signed off-ordinate zero fibre. What remains is to construct a three-taper family with deterministic nuisance rank two and surviving off-line cluster response."
+    "The newest supplied aggregate Lean build now kernel-checks the deterministic projective Schur compiler. Prime debt is exactly zero in the high-ordinate short-support lane and Gamma/pole are eliminated exactly once their response vectors have rank two. The remaining construction socket is still analytic: build the short three-taper family with deterministic nuisance rank two and a surviving off-line cluster margin."
 
 record DeterministicProjectiveSchurBoundary : Set where
   constructor deterministic-projective-schur-boundary
