@@ -16,10 +16,12 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound103SourceCoordinateWe
 --   D² commutes with finite sum; CMP109 (5.1) = D_B² of that same action;
 --   hence Pi/E^(2) = sum of CMP116 physical composite B-Hessians.
 --
--- Round105 cross-pollination boundary:
---   D_B² V_eff is a gauge/background-field Hessian, not automatically the
---   spacetime metric variation needed for stress-energy.  An explicit
---   metric-variation transport is therefore a separate conditional theorem.
+-- Round105 cross-pollination:
+--   D_B² V_eff is a gauge/background Hessian, not the metric variation defining
+--   stress-energy.  For the same substituted CMP116 activity, the FIRST
+--   variation is instead D_A E[A' u].  Thus stress transport should target the
+--   first-variation carrier and separately identify metric perturbations with
+--   the relevant background tangent.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -31,6 +33,7 @@ import DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound
 import DASHI.Physics.YangMills.BalabanCMP109116SourceContinuationRound103Exact as Continue
 import DASHI.Physics.YangMills.BalabanCMP109Equation51LocalizedHessianRound103Exact as Eq51
 import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityHessianRound103Exact as Chain
+import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityFirstVariationRound105Exact as First
 import DASHI.Physics.YangMills.BalabanCMP109116ConventionTransportRound103Exact as Transport
 import DASHI.Physics.YangMills.BalabanCMP116CommonAnalyticRadiusRound103Exact as Radius
 import DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact as Carrier
@@ -85,6 +88,15 @@ bcSubstitutedActivityChainRuleRound103Level : ProofLevel
 bcSubstitutedActivityChainRuleRound103Level =
   Chain.cmp116PhysicalHessianSplitLevel
 
+-- First-order chain-rule carrier needed by stress-energy variation.
+bcSubstitutedActivityFirstVariationRound105Level : ProofLevel
+bcSubstitutedActivityFirstVariationRound105Level =
+  First.cmp116SubstitutedFirstVariationCompilerLevel
+
+bcMetricToBackgroundFirstVariationTransportRound105Level : ProofLevel
+bcMetricToBackgroundFirstVariationTransportRound105Level =
+  First.metricToBackgroundFirstVariationTransportLevel
+
 bcConventionTransportRound103Level : ProofLevel
 bcConventionTransportRound103Level =
   Transport.cmp109116ConventionTransportLevel
@@ -105,8 +117,6 @@ bcPhysicalCompositeHessianMarkedShellRound103Level : ProofLevel
 bcPhysicalCompositeHessianMarkedShellRound103Level =
   Shell.physicalCompositeHessianMarkedShellCompilerLevel
 
--- Cross-programme correction: the strict Round103 B-Hessian can be reused by
--- a metric/stress calculation only after an explicit transport theorem.
 bcBackgroundHessianToMetricVariationRound105Level : ProofLevel
 bcBackgroundHessianToMetricVariationRound105Level =
   Metric.metricVariationTransportFromRound103Level
