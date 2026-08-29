@@ -9,10 +9,10 @@ open import DASHI.Cognition.PNF.DirectDeltaCompilerArchitectureExact
 ------------------------------------------------------------------------
 -- G1--G4 activation cut.
 --
--- This module is deliberately narrower than the architecture constitution.
--- It separates the executable G1/G2 seam from the still-required durable G4
--- evidence migration.  In particular, installing a direct code path is not
--- sufficient evidence that production has retired parser-token persistence.
+-- The live direct path now has executable packed parsing/local solve and an
+-- executable stable source-evidence carrier.  Production certification is
+-- still deliberately withheld until bounded direct/reference parity and the
+-- production-default cutover have their own receipts.
 ------------------------------------------------------------------------
 
 data GateState : Set where
@@ -35,10 +35,15 @@ record DirectSentenceActivation : Set where
     sentenceLocalDBCrossingsZero : sentenceLocalDBCrossings ≡ 0
     localSolveExecutable : localSolveGate ≡ executable
 
-    -- G3/G4 are not promoted merely because G1/G2 exist.  They require their
-    -- own runtime receipts before production certification.
+    -- G3 remains a certification gate: direct/reference equality is over the
+    -- consumer-visible semantic observation and must be supplied by a bounded
+    -- runtime parity receipt.
     parityNotYetCertified : parityGate ≡ inactive
-    tokenRetirementNotYetCertified : tokenRetirementGate ≡ inactive
+
+    -- G4 mechanism is now executable: the direct path can publish stable typed
+    -- source evidence without parser sentence/token/entity projection.  This
+    -- does NOT by itself make the whole direct route production-certified.
+    tokenRetirementExecutable : tokenRetirementGate ≡ executable
 
 open DirectSentenceActivation public
 
@@ -48,7 +53,7 @@ sensibLawPackedDirectSeam =
     executable
     executable
     inactive
-    inactive
+    executable
     refl
     0
     refl
@@ -76,9 +81,9 @@ record DurableSupportIdentityBoundary : Set where
 
 open DurableSupportIdentityBoundary public
 
--- A complete G4 witness has this shape.  The runtime must construct it from
--- the durable source-evidence carrier; this file does not fabricate that
--- receipt while support relations still depend on parser token ids.
+-- Executable G4 carrier shape.  A concrete runtime receipt may instantiate the
+-- same boundary with measured counters; semantic identity is stable source
+-- evidence rather than a parser-token surrogate.
 completeTokenRetirementShape : DurableSupportIdentityBoundary
 completeTokenRetirementShape =
   durableSupportIdentityBoundary stableTypedSourceEvidence 0 refl
