@@ -1,0 +1,72 @@
+module DASHI.Papers.NavierStokes.TheoremInterfaceRound220Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound220Exact as R220
+
+round220PaperPhysicalResonanceRadiusAdapterClosed : Bool
+round220PaperPhysicalResonanceRadiusAdapterClosed =
+  R220.round220PhysicalResonanceRadiusAdapterClosed
+
+round220PaperPhysicalSelectorEDAdapterClosed : Bool
+round220PaperPhysicalSelectorEDAdapterClosed =
+  R220.round220PhysicalSelectorEDAdapterClosed
+
+round220PaperCoherentOnlyCompanionCompilerClosed : Bool
+round220PaperCoherentOnlyCompanionCompilerClosed =
+  R220.round220CoherentOnlyCompanionCompilerClosed
+
+round220PaperInternalSelfPortClosed : Bool
+round220PaperInternalSelfPortClosed =
+  R220.round220InternalSelfPaymentAgdaSameObjectPortClosed
+
+round220PaperCoherentGramResidualBudgetClosed : Bool
+round220PaperCoherentGramResidualBudgetClosed =
+  R220.round220PhysicalCoherentGramResidualBudgetClosed
+
+round220PaperNovelMathematicalLeafCount : Nat
+round220PaperNovelMathematicalLeafCount = R220.round220NovelMathematicalLeafCount
+
+round220PaperFormalPortGapCount : Nat
+round220PaperFormalPortGapCount = R220.round220FormalPortGapCount
+
+round220PaperPackageAClosed : Bool
+round220PaperPackageAClosed = R220.round220PackageAClosed
+
+round220PaperClayPromotion : Bool
+round220PaperClayPromotion = R220.round220ClayPromotion
+
+round220PaperPhysicalResonanceRadiusAdapterClosedIsTrue :
+  round220PaperPhysicalResonanceRadiusAdapterClosed ≡ true
+round220PaperPhysicalResonanceRadiusAdapterClosedIsTrue = refl
+
+round220PaperPhysicalSelectorEDAdapterClosedIsTrue :
+  round220PaperPhysicalSelectorEDAdapterClosed ≡ true
+round220PaperPhysicalSelectorEDAdapterClosedIsTrue = refl
+
+round220PaperCoherentOnlyCompanionCompilerClosedIsTrue :
+  round220PaperCoherentOnlyCompanionCompilerClosed ≡ true
+round220PaperCoherentOnlyCompanionCompilerClosedIsTrue = refl
+
+round220PaperInternalSelfPortClosedIsFalse :
+  round220PaperInternalSelfPortClosed ≡ false
+round220PaperInternalSelfPortClosedIsFalse = refl
+
+round220PaperCoherentGramResidualBudgetClosedIsFalse :
+  round220PaperCoherentGramResidualBudgetClosed ≡ false
+round220PaperCoherentGramResidualBudgetClosedIsFalse = refl
+
+round220PaperNovelMathematicalLeafCountIsOne :
+  round220PaperNovelMathematicalLeafCount ≡ 1
+round220PaperNovelMathematicalLeafCountIsOne = refl
+
+round220PaperFormalPortGapCountIsOne : round220PaperFormalPortGapCount ≡ 1
+round220PaperFormalPortGapCountIsOne = refl
+
+round220PaperPackageAClosedIsFalse : round220PaperPackageAClosed ≡ false
+round220PaperPackageAClosedIsFalse = refl
+
+round220PaperClayPromotionIsFalse : round220PaperClayPromotion ≡ false
+round220PaperClayPromotionIsFalse = refl

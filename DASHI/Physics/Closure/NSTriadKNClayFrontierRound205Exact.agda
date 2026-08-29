@@ -1,0 +1,59 @@
+module DASHI.Physics.Closure.NSTriadKNClayFrontierRound205Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound204Exact as R204
+import DASHI.Physics.Closure.NSTriadKNComparableRawCurlPartnerMassRound205Exact as R205
+
+round205ComparableShellLocalizationClosed : Bool
+round205ComparableShellLocalizationClosed =
+  R204.round204ComparableShellLocalizationClosed
+
+round205ActualLocalizedCCRawCurlPartnerConstructed : Bool
+round205ActualLocalizedCCRawCurlPartnerConstructed =
+  R205.round205ActualLocalizedCCRawCurlPartnerConstructed
+
+round205LocalizedCCPartnerMassBoundClosed : Bool
+round205LocalizedCCPartnerMassBoundClosed =
+  R205.round205LocalizedCCPartnerMassBoundClosed
+
+round205LocalizedCCBetweenPartnerCovariancePaid : Bool
+round205LocalizedCCBetweenPartnerCovariancePaid = false
+
+round205PhysicalCCResidualBudgetClosed : Bool
+round205PhysicalCCResidualBudgetClosed = false
+
+round205PhysicalFLResidualBudgetClosed : Bool
+round205PhysicalFLResidualBudgetClosed = false
+
+round205PhysicalHHResidualBudgetClosed : Bool
+round205PhysicalHHResidualBudgetClosed = false
+
+round205PackageAClosed : Bool
+round205PackageAClosed = false
+
+round205ClayPromotion : Bool
+round205ClayPromotion = false
+
+round205ComparableShellLocalizationClosedIsTrue :
+  round205ComparableShellLocalizationClosed ≡ true
+round205ComparableShellLocalizationClosedIsTrue = refl
+
+round205ActualLocalizedCCRawCurlPartnerConstructedIsTrue :
+  round205ActualLocalizedCCRawCurlPartnerConstructed ≡ true
+round205ActualLocalizedCCRawCurlPartnerConstructedIsTrue = refl
+
+round205LocalizedCCPartnerMassBoundClosedIsTrue :
+  round205LocalizedCCPartnerMassBoundClosed ≡ true
+round205LocalizedCCPartnerMassBoundClosedIsTrue = refl
+
+round205LocalizedCCBetweenPartnerCovariancePaidIsFalse :
+  round205LocalizedCCBetweenPartnerCovariancePaid ≡ false
+round205LocalizedCCBetweenPartnerCovariancePaidIsFalse = refl
+
+round205PackageAClosedIsFalse : round205PackageAClosed ≡ false
+round205PackageAClosedIsFalse = refl
+
+round205ClayPromotionIsFalse : round205ClayPromotion ≡ false
+round205ClayPromotionIsFalse = refl

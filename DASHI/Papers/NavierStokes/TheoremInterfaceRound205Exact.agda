@@ -1,0 +1,46 @@
+module DASHI.Papers.NavierStokes.TheoremInterfaceRound205Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound205Exact as R205
+
+round205PaperComparableLocalizationClosed : Bool
+round205PaperComparableLocalizationClosed =
+  R205.round205ComparableShellLocalizationClosed
+
+round205PaperActualLocalizedCCRawCurlPartnerConstructed : Bool
+round205PaperActualLocalizedCCRawCurlPartnerConstructed =
+  R205.round205ActualLocalizedCCRawCurlPartnerConstructed
+
+round205PaperLocalizedCCPartnerMassBoundClosed : Bool
+round205PaperLocalizedCCPartnerMassBoundClosed =
+  R205.round205LocalizedCCPartnerMassBoundClosed
+
+round205PaperPhysicalCCResidualBudgetClosed : Bool
+round205PaperPhysicalCCResidualBudgetClosed =
+  R205.round205PhysicalCCResidualBudgetClosed
+
+round205PaperPackageAClosed : Bool
+round205PaperPackageAClosed = R205.round205PackageAClosed
+
+round205PaperClayPromotion : Bool
+round205PaperClayPromotion = R205.round205ClayPromotion
+
+round205PaperActualLocalizedCCRawCurlPartnerConstructedIsTrue :
+  round205PaperActualLocalizedCCRawCurlPartnerConstructed ≡ true
+round205PaperActualLocalizedCCRawCurlPartnerConstructedIsTrue = refl
+
+round205PaperLocalizedCCPartnerMassBoundClosedIsTrue :
+  round205PaperLocalizedCCPartnerMassBoundClosed ≡ true
+round205PaperLocalizedCCPartnerMassBoundClosedIsTrue = refl
+
+round205PaperPhysicalCCResidualBudgetClosedIsFalse :
+  round205PaperPhysicalCCResidualBudgetClosed ≡ false
+round205PaperPhysicalCCResidualBudgetClosedIsFalse = refl
+
+round205PaperPackageAClosedIsFalse : round205PaperPackageAClosed ≡ false
+round205PaperPackageAClosedIsFalse = refl
+
+round205PaperClayPromotionIsFalse : round205PaperClayPromotion ≡ false
+round205PaperClayPromotionIsFalse = refl

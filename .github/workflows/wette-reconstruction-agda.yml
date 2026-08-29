@@ -26,6 +26,7 @@ on:
       - 'scripts/check_wette_derivation_closure_and_substitution.sh'
       - 'scripts/check_wette_rule915_cutset.sh'
       - 'scripts/check_wette_rule915_premise18_resolution.sh'
+      - 'scripts/check_wette_rule915_major_trace_join.sh'
       - '.github/workflows/wette-reconstruction-agda.yml'
   workflow_dispatch:
 
@@ -58,4 +59,5 @@ jobs:
           nix develop .# --command bash scripts/check_wette_derivation_closure_and_substitution.sh
           nix develop .# --command bash scripts/check_wette_rule915_cutset.sh
           nix develop .# --command bash scripts/check_wette_rule915_premise18_resolution.sh
+          nix develop .# --command bash scripts/check_wette_rule915_major_trace_join.sh
           nix develop .# --command bash scripts/check_wette_reconstruction.sh
