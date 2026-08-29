@@ -12,6 +12,9 @@ import DASHI.Core.ExperimentalCoordinateDesignExact
 import DASHI.Core.ActionabilityCostedExperimentChoiceExact
 import DASHI.Core.CommonExperimentRealisationExact
 import DASHI.Core.DiscriminatorSynthesisExact
+import DASHI.Core.SequentialConsumerExperimentPlannerExact
+import DASHI.Core.SequentialRobustActionabilityPlannerExact
+import DASHI.Core.SequentialRelationalExperimentPlannerExact
 import DASHI.Biology.Physical.C3Cube27ConsumerReductionAdapterExact
 import DASHI.Physics.Units.SI
 import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact
@@ -30,6 +33,7 @@ import DASHI.Environment.LESSPACFidelityCounterexampleFixturesExact
 import DASHI.Environment.LESModelFibreRobustInterventionExact
 import DASHI.Environment.LESAdaptiveConsumerLoopCrossPollinationExact
 import DASHI.Environment.LESDiscriminatorSynthesisExact
+import DASHI.Environment.LESSequentialExperimentPlannerExact
 import DASHI.Environment.LESFluidPhysicsCouplingExact
 import DASHI.Environment.LESBioelectricGaugeChemistryExact
 import DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact
