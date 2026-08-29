@@ -192,7 +192,7 @@ betaBelowGaussianCeilingPlusHalfFloor dataSet history =
   in
   subst
     (λ left → left ≤ gaussianCeiling dataSet + Beta.half * gaussianFloor dataSet)
-    (betaExact dataSet history)
+    (sym (betaExact dataSet history))
     summed
 
 historyUniformTwoSidedBetaRound102Level : ProofLevel
