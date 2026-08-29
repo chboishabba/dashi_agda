@@ -14,6 +14,7 @@ import DASHI.Reasoning.RelationRepresentationAdequacyExact as Adequacy
 import DASHI.Reasoning.RelationRepresentationRealizationExact as Realization
 import DASHI.Reasoning.BidirectionalRelationRepresentationBridgeExact as Bidi
 import DASHI.Reasoning.RelationRepresentationExperimentProtocolExact as Protocol
+import DASHI.Reasoning.FiniteRelationLinearAlgebraProducerExact as Producer
 import DASHI.Reasoning.EigenslurFlourishingRelationBoundaryExact as Domain
 import DASHI.Reasoning.RelationRepresentationCrossPollinationExact as Cross
 import DASHI.Reasoning.HumourRelationRepresentationCrossPollinationExact as HumourCross
@@ -38,6 +39,9 @@ bidirectionalBoundary = Bidi.canonicalBidirectionalRelationBridgeBoundary
 protocolBoundary : Protocol.RelationExperimentProtocolBoundary
 protocolBoundary = Protocol.canonicalRelationExperimentProtocolBoundary
 
+producerBoundary : Producer.FiniteRelationProducerBoundary
+producerBoundary = Producer.canonicalFiniteRelationProducerBoundary
+
 domainBoundary : Domain.EigenslurFlourishingBoundary
 domainBoundary = Domain.canonicalEigenslurFlourishingBoundary
 
@@ -46,6 +50,48 @@ humourBoundary = HumourCross.canonicalHumourRelationRepresentationBoundary
 
 neuralBoundary : NeuralCross.NeuralSpectralRelationBoundary
 neuralBoundary = NeuralCross.canonicalNeuralSpectralRelationBoundary
+
+------------------------------------------------------------------------
+-- Exact finite producer receipts.
+------------------------------------------------------------------------
+
+principalEigenpairReceipt :
+  Producer.matVec Producer.sampleGram Producer.principalAxis
+  ≡ Producer.scaleVec 9 Producer.principalAxis
+principalEigenpairReceipt =
+  Producer.ExactEigenpair.eigenEquation Producer.principalEigenpair
+
+secondaryEigenpairReceipt :
+  Producer.matVec Producer.sampleGram Producer.secondaryAxis
+  ≡ Producer.scaleVec 1 Producer.secondaryAxis
+secondaryEigenpairReceipt =
+  Producer.ExactEigenpair.eigenEquation Producer.secondaryEigenpair
+
+finiteSpectralGapIsEight : Producer.spectralGapCode ≡ 8
+finiteSpectralGapIsEight = Producer.spectralGapCodeIsEight
+
+rankOneOuterProductStillExact :
+  Producer.outer Producer.rankOneLeft Producer.rankOneRight
+  ≡ Producer.rankOneMatrix
+rankOneOuterProductStillExact = Producer.rankOneOuterProductReceipt
+
+quarterTurnStillOrderFour :
+  (p : Producer.AxisPhase4) →
+  Producer.quarterTurn
+    (Producer.quarterTurn
+      (Producer.quarterTurn
+        (Producer.quarterTurn p))) ≡ p
+quarterTurnStillOrderFour = Producer.quarterTurnFourth
+
+affineProducerStillExact :
+  Producer.affineDemo (Producer.vec2 2 3) ≡ Producer.vec2 5 11
+affineProducerStillExact = Producer.affineDemoAt23
+
+finiteDifferenceSensitivityIsStateDependent :
+  Producer.forwardDifference Producer.squareMap 2
+  ≡ Producer.forwardDifference Producer.squareMap 3 → ⊥
+finiteDifferenceSensitivityIsStateDependent =
+  Producer.localSensitivityChangesWithState
 
 ------------------------------------------------------------------------
 -- Existing phase/amplitude owner remains a concrete operator-coordinate
@@ -74,7 +120,7 @@ equalAmplitudeDoesNotCollapsePhase :
 equalAmplitudeDoesNotCollapsePhase = Phase.differentPhaseWitness
 
 ------------------------------------------------------------------------
--- New concrete negative regressions.
+-- Concrete negative regressions.
 ------------------------------------------------------------------------
 
 propertyCodeNotPreciseRelation :
