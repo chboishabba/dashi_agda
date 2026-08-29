@@ -15,6 +15,7 @@ import DASHI.Reasoning.RelationRepresentationRealizationExact as Realization
 import DASHI.Reasoning.BidirectionalRelationRepresentationBridgeExact as Bidi
 import DASHI.Reasoning.RelationRepresentationExperimentProtocolExact as Protocol
 import DASHI.Reasoning.FiniteRelationLinearAlgebraProducerExact as Producer
+import DASHI.Reasoning.FiniteRelationSVDJacobianProducerExact as SVD
 import DASHI.Reasoning.EigenslurFlourishingRelationBoundaryExact as Domain
 import DASHI.Reasoning.RelationRepresentationCrossPollinationExact as Cross
 import DASHI.Reasoning.HumourRelationRepresentationCrossPollinationExact as HumourCross
@@ -42,6 +43,9 @@ protocolBoundary = Protocol.canonicalRelationExperimentProtocolBoundary
 producerBoundary : Producer.FiniteRelationProducerBoundary
 producerBoundary = Producer.canonicalFiniteRelationProducerBoundary
 
+svdJacobianBoundary : SVD.SVDJacobianProducerBoundary
+svdJacobianBoundary = SVD.canonicalSVDJacobianProducerBoundary
+
 domainBoundary : Domain.EigenslurFlourishingBoundary
 domainBoundary = Domain.canonicalEigenslurFlourishingBoundary
 
@@ -59,13 +63,13 @@ principalEigenpairReceipt :
   Producer.matVec Producer.sampleGram Producer.principalAxis
   ≡ Producer.scaleVec 9 Producer.principalAxis
 principalEigenpairReceipt =
-  Producer.ExactEigenpair.eigenEquation Producer.principalEigenpair
+  Producer.eigenEquation Producer.principalEigenpair
 
 secondaryEigenpairReceipt :
   Producer.matVec Producer.sampleGram Producer.secondaryAxis
   ≡ Producer.scaleVec 1 Producer.secondaryAxis
 secondaryEigenpairReceipt =
-  Producer.ExactEigenpair.eigenEquation Producer.secondaryEigenpair
+  Producer.eigenEquation Producer.secondaryEigenpair
 
 finiteSpectralGapIsEight : Producer.spectralGapCode ≡ 8
 finiteSpectralGapIsEight = Producer.spectralGapCodeIsEight
@@ -92,6 +96,41 @@ finiteDifferenceSensitivityIsStateDependent :
   ≡ Producer.forwardDifference Producer.squareMap 3 → ⊥
 finiteDifferenceSensitivityIsStateDependent =
   Producer.localSensitivityChangesWithState
+
+------------------------------------------------------------------------
+-- Literal tiny SVD receipts: X = U Sigma V^T for X = diag(3,1), with the
+-- singular action equations and squared-scale/Gram relation kept exact.
+------------------------------------------------------------------------
+
+principalSVDReceipt :
+  Producer.matVec SVD.sampleDataMatrix Producer.principalAxis
+  ≡ Producer.scaleVec 3 Producer.principalAxis
+principalSVDReceipt = SVD.principalSVDActionReceipt
+
+secondarySVDReceipt :
+  Producer.matVec SVD.sampleDataMatrix Producer.secondaryAxis
+  ≡ Producer.scaleVec 1 Producer.secondaryAxis
+secondarySVDReceipt = SVD.secondarySVDActionReceipt
+
+principalSingularSquareIsNine :
+  SVD.singularScale1 SVD.canonicalSampleSVD
+  * SVD.singularScale1 SVD.canonicalSampleSVD ≡ 9
+principalSingularSquareIsNine =
+  SVD.principalSingularScaleSquaresToGramEigenvalue
+
+secondarySingularSquareIsOne :
+  SVD.singularScale2 SVD.canonicalSampleSVD
+  * SVD.singularScale2 SVD.canonicalSampleSVD ≡ 1
+secondarySingularSquareIsOne =
+  SVD.secondarySingularScaleSquaresToGramEigenvalue
+
+jacobianStillRequiresDifferentiableCarrier :
+  SVD.derivativeExistenceReceiptSupplied SVD.emptyJacobianProducerObligation ≡ false
+jacobianStillRequiresDifferentiableCarrier = refl
+
+externalFixtureDoesNotClaimEmpiricalEmbeddings :
+  SVD.empiricalEmbeddingsLoaded SVD.canonicalExternalNumericalReceiptContract ≡ false
+externalFixtureDoesNotClaimEmpiricalEmbeddings = refl
 
 ------------------------------------------------------------------------
 -- Existing phase/amplitude owner remains a concrete operator-coordinate
