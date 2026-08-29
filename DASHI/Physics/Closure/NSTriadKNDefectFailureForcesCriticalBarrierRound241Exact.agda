@@ -51,8 +51,8 @@ record CriticalBarrierDefectPayment : Set where
     dissipationIntegral : ℚ
     dissipationBound : ℚ
 
-    interpolationConstantNN : 0ℚ ≤ interpolationConstant
-    criticalBarrierNN : 0ℚ ≤ criticalBarrier
+    scaledBarrierNN :
+      0ℚ ≤ interpolationConstant * criticalBarrier
 
     defectReducedToBarrierTimesDissipation :
       defectIntegral
@@ -71,17 +71,8 @@ boundedCriticalBarrierPaysDefect P =
   let
     scale = interpolationConstant P * criticalBarrier P
 
-    instance interpolationNNI : NonNegative (interpolationConstant P)
-    interpolationNNI = nonNegative (interpolationConstantNN P)
-
-    instance barrierNNI : NonNegative (criticalBarrier P)
-    barrierNNI = nonNegative (criticalBarrierNN P)
-
-    scaleNN : 0ℚ ≤ scale
-    scaleNN = ℚP.*-nonNegative
-
     instance scaleNNI : NonNegative scale
-    scaleNNI = nonNegative scaleNN
+    scaleNNI = nonNegative (scaledBarrierNN P)
   in
   ℚP.≤-trans
     (defectReducedToBarrierTimesDissipation P)
