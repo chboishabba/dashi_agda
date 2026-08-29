@@ -30,8 +30,20 @@ reflectionOnlyCancellationRejected = refl
 g2dScalarized : G2.g2dReducedToSingleSignedScalarDeterminantSum G2.canonicalAristotleG2CurrentCut ≡ true
 g2dScalarized = refl
 
-g2dOrdinateCancellationOpen : G2.g2dAdditionalOrdinatePhaseCancellationBoundClosed G2.canonicalAristotleG2CurrentCut ≡ false
-g2dOrdinateCancellationOpen = refl
+g2eDeterminantTaperCompressed : G2.g2eDeterminantTaperKernelCompressionClosed G2.canonicalAristotleG2CurrentCut ≡ true
+g2eDeterminantTaperCompressed = refl
+
+targetCenteredSymmetryUnavailable : G2.functionalAndConjugationSymmetriesGiveTargetCenteredGapPairing G2.canonicalAristotleG2CurrentCut ≡ false
+targetCenteredSymmetryUnavailable = refl
+
+localCountPhaseBlind : G2.localZeroCountControlsRemainingOscillatoryPhase G2.canonicalAristotleG2CurrentCut ≡ false
+localCountPhaseBlind = refl
+
+montgomeryVaughanNotDirectClosure : G2.montgomeryVaughanDirectlyClosesLocalZeroCosineSum G2.canonicalAristotleG2CurrentCut ≡ false
+montgomeryVaughanNotDirectClosure = refl
+
+g2eTargetCenteredExponentialSumOpen : G2.g2eTargetCenteredLocalZeroExponentialSumBoundClosed G2.canonicalAristotleG2CurrentCut ≡ false
+g2eTargetCenteredExponentialSumOpen = refl
 
 noGenericGramSchurAlgebraLeft : G2.genericGramOrSchurAlgebraRemaining G2.canonicalAristotleG2CurrentCut ≡ false
 noGenericGramSchurAlgebraLeft = refl
