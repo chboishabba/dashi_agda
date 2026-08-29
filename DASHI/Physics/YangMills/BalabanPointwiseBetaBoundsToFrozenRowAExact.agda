@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanPointwiseBetaBoundsToFrozenRowAExact where
 
 ------------------------------------------------------------------------
@@ -11,25 +12,22 @@ module DASHI.Physics.YangMills.BalabanPointwiseBetaBoundsToFrozenRowAExact where
 --
 --   forward: the literal CMP109 producer naturally aims at pointwise bounds
 --
---          betaLower <= betaCorrection_j <= betaUpper.
+--          betaLower <= betaCorrection_(j+1) <= betaUpper,    j < K.
 --
--- The finite prefix and arbitrary terminal-tail estimates are therefore not new
--- analytic theorems.  This file proves them by finite ordered-additive induction.
--- In particular, once the same generated dynamics has a uniform positive
--- pointwise lower beta bound and a finite pointwise upper beta bound, the
--- `betaTerminalTailBilateral` field of the frozen completion is automatic.
---
--- IMPORTANT: this does NOT construct the source beta bounds or the tuned
--- observation-scale window.  It removes duplicate cumulative estimates after
--- those literal source facts exist.
+-- The finite prefix and terminal-tail estimates are therefore not new analytic
+-- theorems.  This file derives them by exact finite ordered-additive induction.
+-- The pointwise premise is required ONLY on the physical shells `suc j <= K`;
+-- the total-function extension of `betaCorrection` beyond the cutoff is never
+-- constrained.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
-open import Data.Nat.Base as ℕ using (_≤_; _+_)
+open import Data.Nat.Base as ℕ using (_≤_; _+_; z≤n; s≤s)
 open import Data.Product using (_×_; _,_)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   ( ℝ ; 0ℝ ; _+ℝ_ ; _≤ℝ_ ; _<ℝ_
@@ -47,60 +45,99 @@ import DASHI.Physics.YangMills.BalabanIntervalDeterminantAlgebra as Interval
 import DASHI.Physics.YangMills.BalabanClayFrozenFourCompletionContractExact as Frozen
 import DASHI.Physics.YangMills.CompactLieProofLevel as Level
 
+------------------------------------------------------------------------
+-- Tiny Nat algebra kept local so the cutoff semantics do not depend on hidden
+-- simplifier behaviour.
+------------------------------------------------------------------------
+
+nat≤Trans : ∀ {a b c : Nat} → a ≤ b → b ≤ c → a ≤ c
+nat≤Trans z≤n _ = z≤n
+nat≤Trans (s≤s ab) (s≤s bc) = s≤s (nat≤Trans ab bc)
+
+natPred≤Suc : ∀ n → n ≤ suc n
+natPred≤Suc zero = z≤n
+natPred≤Suc (suc n) = s≤s (natPred≤Suc n)
+
+addRightSuc : ∀ a b → a + suc b ≡ suc (a + b)
+addRightSuc zero b = refl
+addRightSuc (suc a) b = cong suc (addRightSuc a b)
+
+addRightZero : ∀ a → a + zero ≡ a
+addRightZero zero = refl
+addRightZero (suc a) = cong suc (addRightZero a)
+
+addComm : ∀ a b → a + b ≡ b + a
+addComm zero b = sym (addRightZero b)
+addComm (suc a) b =
+  trans (cong suc (addComm a b)) (sym (addRightSuc b a))
+
+addRightMonoSucc : ∀ a b → a + b ≤ a + suc b
+addRightMonoSucc zero b = natPred≤Suc b
+addRightMonoSucc (suc a) b = s≤s (addRightMonoSucc a b)
+
+currentShellWithin :
+  ∀ {K} k n → k + suc n ≤ K → suc (n + k) ≤ K
+currentShellWithin {K} k n endWithin =
+  subst
+    (λ index → index ≤ K)
+    (trans (addRightSuc k n) (cong suc (addComm k n)))
+    endWithin
+
+previousIntervalWithin :
+  ∀ {K} k n → k + suc n ≤ K → k + n ≤ K
+previousIntervalWithin k n endWithin =
+  nat≤Trans (addRightMonoSucc k n) endWithin
+
 linear : ℝ → Nat → ℝ
 linear slope zero = 0ℝ
 linear slope (suc n) = linear slope n +ℝ slope
 
-linearZero : ∀ slope → linear slope zero ≡ 0ℝ
-linearZero slope = refl
-
-linearStep : ∀ slope n → linear slope (suc n) ≡ linear slope n +ℝ slope
-linearStep slope n = refl
-
 ------------------------------------------------------------------------
--- Pointwise bounds generate every finite interval bound.
+-- Pointwise bounds generate every finite interval bound, but only when the
+-- interval lies inside the declared physical cutoff.
 ------------------------------------------------------------------------
 
 intervalLowerFromPointwise :
-  (beta : Nat → ℝ) (lower : ℝ) →
-  (∀ j → lower ≤ℝ beta (suc j)) →
-  ∀ k n →
+  (K : Nat) (beta : Nat → ℝ) (lower : ℝ) →
+  (∀ j → suc j ≤ K → lower ≤ℝ beta (suc j)) →
+  ∀ k n → k + n ≤ K →
   linear lower n ≤ℝ Interval.intervalSum beta k n
-intervalLowerFromPointwise beta lower pointwise k zero = ≤ℝ-refl
-intervalLowerFromPointwise beta lower pointwise k (suc n) =
+intervalLowerFromPointwise K beta lower pointwise k zero inside = ≤ℝ-refl
+intervalLowerFromPointwise K beta lower pointwise k (suc n) inside =
   +-mono-≤
-    (intervalLowerFromPointwise beta lower pointwise k n)
-    (pointwise (n + k))
+    (intervalLowerFromPointwise K beta lower pointwise k n
+      (previousIntervalWithin k n inside))
+    (pointwise (n + k) (currentShellWithin k n inside))
 
 intervalUpperFromPointwise :
-  (beta : Nat → ℝ) (upper : ℝ) →
-  (∀ j → beta (suc j) ≤ℝ upper) →
-  ∀ k n →
+  (K : Nat) (beta : Nat → ℝ) (upper : ℝ) →
+  (∀ j → suc j ≤ K → beta (suc j) ≤ℝ upper) →
+  ∀ k n → k + n ≤ K →
   Interval.intervalSum beta k n ≤ℝ linear upper n
-intervalUpperFromPointwise beta upper pointwise k zero = ≤ℝ-refl
-intervalUpperFromPointwise beta upper pointwise k (suc n) =
+intervalUpperFromPointwise K beta upper pointwise k zero inside = ≤ℝ-refl
+intervalUpperFromPointwise K beta upper pointwise k (suc n) inside =
   +-mono-≤
-    (intervalUpperFromPointwise beta upper pointwise k n)
-    (pointwise (n + k))
+    (intervalUpperFromPointwise K beta upper pointwise k n
+      (previousIntervalWithin k n inside))
+    (pointwise (n + k) (currentShellWithin k n inside))
 
 prefixUpperFromPointwise :
+  (K : Nat)
   (step : Trajectory.BalabanInverseSquareCouplingStep)
   (upper : ℝ) →
-  (∀ j → Trajectory.betaCorrection step (suc j) ≤ℝ upper) →
-  ∀ k →
+  (∀ j → suc j ≤ K →
+    Trajectory.betaCorrection step (suc j) ≤ℝ upper) →
+  ∀ k → k ≤ K →
   Budget.betaPrefixSum step k ≤ℝ linear upper k
-prefixUpperFromPointwise step upper pointwise zero = ≤ℝ-refl
-prefixUpperFromPointwise step upper pointwise (suc k) =
+prefixUpperFromPointwise K step upper pointwise zero k≤K = ≤ℝ-refl
+prefixUpperFromPointwise K step upper pointwise (suc k) sk≤K =
   +-mono-≤
-    (prefixUpperFromPointwise step upper pointwise k)
-    (pointwise k)
+    (prefixUpperFromPointwise K step upper pointwise k
+      (nat≤Trans (natPred≤Suc k) sk≤K))
+    (pointwise k sk≤K)
 
 ------------------------------------------------------------------------
 -- Minimal data before the old prefix-estimate wrapper.
---
--- This is deliberately weaker than `BalabanRenormalisedCouplingConstruction`:
--- it does NOT ask for `actualPrefixEstimate`.  Pointwise upper beta control plus
--- the bare inverse-square budget constructs that field below.
 ------------------------------------------------------------------------
 
 record PointwiseBetaTunedFamily : Set₁ where
@@ -125,18 +162,17 @@ record PointwiseBetaTunedFamily : Set₁ where
     betaLowerBelowUpper : betaLower ≤ℝ betaUpper
 
     pointwiseBetaLower :
-      ∀ K j →
+      ∀ K j → suc j ≤ K →
       betaLower ≤ℝ
         Trajectory.betaCorrection (BetaLaw.step (dynamics K)) (suc j)
 
     pointwiseBetaUpper :
-      ∀ K j →
+      ∀ K j → suc j ≤ K →
       Trajectory.betaCorrection (BetaLaw.step (dynamics K)) (suc j)
         ≤ℝ betaUpper
 
-    -- This is the actual tuning/bare-coordinate input.  The prefix majorant is
-    -- fixed here to the linear upper envelope generated above, so no second
-    -- analytic prefix estimate remains.
+    -- This is the true remaining tuning/bare-coordinate input.  The prefix
+    -- majorant itself is fixed to the linear envelope generated above.
     bareBudget :
       ∀ K k → k ≤ K →
       Budget.gammaInverseSquare (threshold K) +ℝ linear betaUpper k
@@ -173,10 +209,11 @@ pointwisePrefixBudget family K = record
   { Budget.BalabanBetaPrefixBound.prefixMajorant = linear (betaUpper family)
   ; Budget.BalabanBetaPrefixBound.betaPrefixControlled =
       λ k k≤K → prefixUpperFromPointwise
+        K
         (BetaLaw.step (dynamics family K))
         (betaUpper family)
         (pointwiseBetaUpper family K)
-        k
+        k k≤K
   ; Budget.BalabanBetaPrefixBound.bareCouplingBudget = bareBudget family K
   ; Budget.BalabanBetaPrefixBound.sourceAuthorityId = sourceAuthorityId family
   ; Budget.BalabanBetaPrefixBound.theoremLocator = theoremLocator family
@@ -250,17 +287,23 @@ pointwiseFrozenRowA family = record
   ; Frozen.LiteralCompactSimplePositiveBetaCompletion.upperLinearStep = λ n → refl
   ; Frozen.LiteralCompactSimplePositiveBetaCompletion.betaTerminalTailBilateral =
       λ K k n k+n≡K →
+        let
+          inside : k + n ≤ K
+          inside = subst (λ endpoint → endpoint ≤ K) k+n≡K ℕ.≤-refl
+        in
         intervalLowerFromPointwise
+          K
           (Trajectory.betaCorrection (BetaLaw.step (dynamics family K)))
           (betaLower family)
           (pointwiseBetaLower family K)
-          k n
+          k n inside
         ,
         intervalUpperFromPointwise
+          K
           (Trajectory.betaCorrection (BetaLaw.step (dynamics family K)))
           (betaUpper family)
           (pointwiseBetaUpper family K)
-          k n
+          k n inside
   }
 
 pointwiseBetaBoundsToPrefixLevel : Level.ProofLevel
@@ -269,10 +312,10 @@ pointwiseBetaBoundsToPrefixLevel = Level.machineChecked
 pointwiseBetaBoundsToFrozenRowACompilerLevel : Level.ProofLevel
 pointwiseBetaBoundsToFrozenRowACompilerLevel = Level.machineChecked
 
--- Remaining physical source facts on this shortest route are now exactly:
+-- Remaining physical source facts on this shortest route are exactly:
 --   * actual CMP109 generated dynamics;
---   * uniform literal pointwise betaLower/betaUpper on those dynamics;
---   * the tuned bare/observation window and its threshold coordinate meaning.
+--   * uniform pointwise two-sided beta bounds on shells j<K;
+--   * tuned bare/observation window and threshold coordinate meaning.
 -- Prefix summation and frozen terminal-tail bilaterality are downstream.
 literalPointwiseBetaTunedFamilyLevel : Level.ProofLevel
 literalPointwiseBetaTunedFamilyLevel = Level.conditional
