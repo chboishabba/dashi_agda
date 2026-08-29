@@ -8,6 +8,7 @@ FILES=(
   DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
   DASHI/Reasoning/RelationRepresentationAdequacyExact.agda
   DASHI/Reasoning/RelationRepresentationRealizationExact.agda
+  DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda
   DASHI/Reasoning/EigenslurFlourishingRelationBoundaryExact.agda
   DASHI/Reasoning/RelationRepresentationCrossPollinationExact.agda
   DASHI/Reasoning/RelationRepresentationRegression.agda
@@ -42,6 +43,10 @@ grep -q 'RepresentationRealizationWitness' DASHI/Reasoning/RelationRepresentatio
 grep -q 'representationCollisionBlocksRealization' DASHI/Reasoning/RelationRepresentationRealizationExact.agda
 grep -q 'propertyCodeCannotRealizePreciseRelation' DASHI/Reasoning/RelationRepresentationRealizationExact.agda
 grep -q 'compactRelationCannotRealizeSituatedMeaning' DASHI/Reasoning/RelationRepresentationRealizationExact.agda
+
+grep -q 'BidirectionalRelationBridge' DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda
+grep -q 'collisionReopensBidirectionalCut' DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda
+grep -q 'bothReceiptsMustUseSameEncoding' DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda
 
 grep -q 'functioningDoesNotRecoverCapability' DASHI/Reasoning/EigenslurFlourishingRelationBoundaryExact.agda
 grep -q 'coarsePositiveCodeCannotRealizeAgency' DASHI/Reasoning/EigenslurFlourishingRelationBoundaryExact.agda
