@@ -37,6 +37,15 @@ record PairedPrimeActivityInterface : Set₁ where
 
 open PairedPrimeActivityInterface public
 
+AllInactive :
+  (interface : PairedPrimeActivityInterface) →
+  State interface →
+  List (Rule interface) → Set
+AllInactive interface state [] = ⊤
+AllInactive interface state (rule ∷ rest) =
+  (Active interface state (denominatorTag interface rule) → ⊥)
+  × AllInactive interface state rest
+
 record ActivePrefixSelectionReceipt
     (interface : PairedPrimeActivityInterface)
     (state : State interface)
@@ -44,11 +53,7 @@ record ActivePrefixSelectionReceipt
     (intended : Rule interface) : Set₁ where
   constructor activePrefixSelectionReceipt
   field
-    earlierInactive :
-      (rule : Rule interface) →
-      rule ∈ prefix →
-      Active interface state (denominatorTag interface rule) → ⊥
-
+    earlierInactive : AllInactive interface state prefix
     intendedActive :
       Active interface state (denominatorTag interface intended)
 
@@ -58,20 +63,16 @@ inactiveListGivesBlockedPrefix :
   (interface : PairedPrimeActivityInterface) →
   (state : State interface) →
   (prefix : List (Rule interface)) →
-  ((rule : Rule interface) →
-    rule ∈ prefix →
-    Active interface state (denominatorTag interface rule) → ⊥) →
+  AllInactive interface state prefix →
   Numeric.PrefixBlocked (applies interface) state prefix
 inactiveListGivesBlockedPrefix interface state [] inactive = tt
-inactiveListGivesBlockedPrefix interface state (rule ∷ rest) inactive =
+inactiveListGivesBlockedPrefix interface state (rule ∷ rest)
+    (ruleInactive , restInactive) =
   (λ appliesRule →
-      inactive rule (Data.List.Membership.Propositional.here refl)
+      ruleInactive
         (applicableImpliesActive interface state rule appliesRule))
   ,
-  inactiveListGivesBlockedPrefix interface state rest
-    (λ later laterInRest →
-      inactive later
-        (Data.List.Membership.Propositional.there laterInRest))
+  inactiveListGivesBlockedPrefix interface state rest restInactive
 
 activityReceiptYieldsFirstApplicableStep :
   (interface : PairedPrimeActivityInterface) →
