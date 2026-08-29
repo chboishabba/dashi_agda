@@ -79,9 +79,6 @@ record AristotleCurrentFrontier : Set where
     conjugationOrbitCompressionOwned : Bool
     conjugationOrbitCompressionOwnedIsFalse : conjugationOrbitCompressionOwned ≡ false
 
-    -- Historical NS-specialized reuse. Round180 itself is rational Complex3,
-    -- so a DIRECT literal RH-real -> Round180-rational identification remains
-    -- false. It is retained as a boundary regression, not used as G1 closure.
     round180ExactFiniteGramLedgerReusedForRH : Bool
     round180ExactFiniteGramLedgerReusedForRHIsTrue : round180ExactFiniteGramLedgerReusedForRH ≡ true
     rhToRound180CarrierAdapterClosedInAgda : Bool
@@ -89,9 +86,6 @@ record AristotleCurrentFrontier : Set where
     literalRHPostSchurCellsIdentifiedWithRound180Carrier : Bool
     literalRHPostSchurCellsIdentifiedWithRound180CarrierIsFalse : literalRHPostSchurCellsIdentifiedWithRound180Carrier ≡ false
 
-    -- Correct G1 closure: extract Round180's finite telescope to a scalar-
-    -- generic exact Gram carrier, then weld the literal three-coordinate RH
-    -- post-Schur cell to that generic carrier. No R -> Q coercion is used.
     genericFiniteSignedGramTelescopeExtractedInAgda : Bool
     genericFiniteSignedGramTelescopeExtractedInAgdaIsTrue :
       genericFiniteSignedGramTelescopeExtractedInAgda ≡ true
@@ -99,7 +93,6 @@ record AristotleCurrentFrontier : Set where
     literalRHPostSchurGenericGramWeldClosedInAgdaIsTrue :
       literalRHPostSchurGenericGramWeldClosedInAgda ≡ true
 
-    -- G2 bidi decomposition.
     finiteGramDebtExpandedToOrderedPairCovarianceInAgda : Bool
     finiteGramDebtExpandedToOrderedPairCovarianceInAgdaIsTrue :
       finiteGramDebtExpandedToOrderedPairCovarianceInAgda ≡ true
@@ -109,6 +102,14 @@ record AristotleCurrentFrontier : Set where
     literalLeanElim2MatrixIdentifiedInAgda : Bool
     literalLeanElim2MatrixIdentifiedInAgdaIsFalse :
       literalLeanElim2MatrixIdentifiedInAgda ≡ false
+
+    determinantScalarizationCompilerClosedInAgda : Bool
+    determinantScalarizationCompilerClosedInAgdaIsTrue :
+      determinantScalarizationCompilerClosedInAgda ≡ true
+    literalLeanBilinearDeterminantIdentitySupplied : Bool
+    literalLeanBilinearDeterminantIdentitySuppliedIsFalse :
+      literalLeanBilinearDeterminantIdentitySupplied ≡ false
+
     signedRHGramDebtEstimateClosed : Bool
     signedRHGramDebtEstimateClosedIsFalse : signedRHGramDebtEstimateClosed ≡ false
 
@@ -126,5 +127,7 @@ canonicalAristotleCurrentFrontier =
     true refl true refl true refl false refl false refl false refl
     true refl true refl false refl
     true refl true refl
-    true refl true refl false refl false refl
-    "The explicit-cutoff Lean tranche closes the infinite S2 tail and constructs the literal finite reflection-paired near carrier on D_off. G1 is closed at the type-correct scalar-generic level: the finite diagonal-plus-signed-Gram identity is inherited without identifying RH reals with NS rationals. G2 is now decomposed bidirectionally as well. RiemannAristotleFiniteNearOrderedPairGramDebtExact expands the finite Gram debt exactly to the signed ordered-pair covariance sum, with no absolute values. RiemannAristotleThreeTaperSchurKernelBilinearExact keeps the deterministic Schur map explicit and expands each post-Schur covariance in the raw three-taper coordinates. The reflection-pair Lean source already identifies each raw coordinate with the 4*g*cosh(a*u)*cos(delta*u) kernel and cancels the odd sinh*sin channel. The remaining representation seam is literal source provenance: identify Lean's actual elim2 with one fixed three-dimensional Schur operator E. After that, the only live S2 analysis is the signed finite oscillatory covariance bound strong enough to beat the remaining cluster margin. S1, the literal elim2 coefficient weld, the G2 signed covariance estimate, the joint margin, and low-ordinate certification remain open. RH is not derived."
+    true refl true refl false refl
+    true refl false refl
+    false refl
+    "The explicit-cutoff Lean tranche closes the infinite S2 tail and constructs the literal finite reflection-paired near carrier on D_off. G1 is closed at the type-correct scalar-generic level. G2a now expands finite Gram debt exactly to the signed ordered-pair covariance sum; G2b keeps the deterministic Schur map explicit and expands every post-Schur covariance in raw three-taper coordinates. The reflection-pair Lean source supplies each raw coordinate through the 4*g*cosh(a*u)*cos(delta*u) kernel with the odd sinh*sin channel already cancelled. A stronger one-dimensional compiler is also ready: if Lean supplies the exact bilinear determinant identity <E x,E y> = det(n1,n2,x) det(n1,n2,y) / wedgeSq(n1,n2), Agda automatically converts the whole finite Schur covariance to a scalar determinant covariance. That identity is not claimed here. The remaining leaves are therefore source-identification of the literal elim2/determinant bilinear form and the genuine signed finite oscillatory covariance estimate; S1, the joint margin, low-ordinate certification, and RH remain open."
