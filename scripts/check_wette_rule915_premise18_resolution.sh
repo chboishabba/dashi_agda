@@ -6,6 +6,7 @@ cd "$ROOT"
 
 FILES=(
   DASHI/Foundations/Wette1969Rule915CanonicalP145PremisesExact.agda
+  DASHI/Foundations/Wette1969Rule915CanonicalP145TypedWeldExact.agda
   DASHI/Foundations/Wette1969Rule93ImplicationFamilyExact.agda
   DASHI/Foundations/Wette1969Rule93CompleteCandidateAuditExact.agda
   DASHI/Foundations/Wette1969Rule939ImplicationIntroductionExact.agda
@@ -31,6 +32,10 @@ grep -q 'allTwentySevenP145PremisesNowOneConcreteTypedVectorIsTrue' DASHI/Founda
 grep -q 'premise18DenseWordNoLongerOpaqueInCanonicalP145SurfaceIsTrue' DASHI/Foundations/Wette1969Rule915CanonicalP145PremisesExact.agda
 grep -q 'premise27DenseWordNoLongerOpaqueInCanonicalP145SurfaceIsTrue' DASHI/Foundations/Wette1969Rule915CanonicalP145PremisesExact.agda
 grep -q 'thisModuleClaimsDerivabilityOfAnyPremiseIsFalse' DASHI/Foundations/Wette1969Rule915CanonicalP145PremisesExact.agda
+
+grep -q 'allTwentySevenExistingTypedSlotsPointwiseMatchP145IsTrue' DASHI/Foundations/Wette1969Rule915CanonicalP145TypedWeldExact.agda
+grep -q 'premise18And27NoLongerNeedOpaqueWordParametersForCanonicalP145InstanceIsTrue' DASHI/Foundations/Wette1969Rule915CanonicalP145TypedWeldExact.agda
+grep -q 'bridgeIntroducesParallelRule915SemanticsIsFalse' DASHI/Foundations/Wette1969Rule915CanonicalP145TypedWeldExact.agda
 
 grep -q 'exhaustiveNamedThirtyCandidateAuditNowExistsIsTrue' DASHI/Foundations/Wette1969Rule93ImplicationFamilyExact.agda
 grep -q 'allThirtyPrintedCandidatesHaveExplicitConstructorsIsTrue' DASHI/Foundations/Wette1969Rule93CompleteCandidateAuditExact.agda
@@ -61,6 +66,7 @@ grep -q 'arbitraryRelationRIsAutomaticallyHandledBy9323IsFalse' DASHI/Foundation
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Foundations/Wette1969Rule915CanonicalP145PremisesExact.agda \
+  DASHI/Foundations/Wette1969Rule915CanonicalP145TypedWeldExact.agda \
   DASHI/Foundations/Wette1969Rule93ImplicationFamilyExact.agda \
   DASHI/Foundations/Wette1969Rule93CompleteCandidateAuditExact.agda \
   DASHI/Foundations/Wette1969Rule939ImplicationIntroductionExact.agda \
