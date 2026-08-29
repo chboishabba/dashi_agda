@@ -11,10 +11,10 @@ module DASHI.Physics.YangMills.BalabanA2RationalSensitivityToRealContractionRoun
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Data.Nat.Properties as ℕP
-open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; _<_)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; _+_; _<_)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_; _-ℝ_; absℝ; _≤ℝ_; _<ℝ_)
@@ -29,7 +29,7 @@ record OrderedAdditiveRationalRealEmbedding : Set₁ where
     base : Embed.OrderedRationalRealEmbedding
     oneExact : Embed.embed base 1ℚ ≡ 1ℝ
     addExact : ∀ a b →
-      Embed.embed base (a ℚ.+ b)
+      Embed.embed base (a + b)
       ≡ Embed.embed base a +ℝ Embed.embed base b
 
 open OrderedAdditiveRationalRealEmbedding public
@@ -39,8 +39,8 @@ sumEmbedExact :
   (q : Nat → ℚ) → ∀ n →
   Embed.embed (base embedding) (Rational.sum₀ q n)
   ≡ Literal.sumReal (λ j → Embed.embed (base embedding) (q j)) n
-sumEmbedExact embedding q Nat.zero = Embed.zeroExact (base embedding)
-sumEmbedExact embedding q (Nat.suc n) =
+sumEmbedExact embedding q zero = Embed.zeroExact (base embedding)
+sumEmbedExact embedding q (suc n) =
   trans
     (addExact embedding (Rational.sum₀ q n) (q n))
     (cong (λ x → x +ℝ Embed.embed (base embedding) (q n))
@@ -50,8 +50,8 @@ sumRealPointwiseExact :
   (f g : Nat → ℝ) →
   (pointwise : ∀ j → f j ≡ g j) → ∀ n →
   Literal.sumReal f n ≡ Literal.sumReal g n
-sumRealPointwiseExact f g pointwise Nat.zero = refl
-sumRealPointwiseExact f g pointwise (Nat.suc n) =
+sumRealPointwiseExact f g pointwise zero = refl
+sumRealPointwiseExact f g pointwise (suc n) =
   trans
     (cong (λ x → x +ℝ f n) (sumRealPointwiseExact f g pointwise n))
     (cong (λ x → Literal.sumReal g n +ℝ x) (pointwise n))
@@ -66,15 +66,16 @@ record RationallyCertifiedLiteralSensitivity
     -- Same physical shell coefficient, merely represented in two scalar carriers.
     shellSensitivityExact : ∀ j →
       Literal.shellSensitivity (Literal.shells literal) j
-      ≡ Embed.embed (base embedding) (Rational.CumulativeSensitivityData.sensitivity rational j)
+      ≡ Embed.embed (base embedding)
+          (Rational.CumulativeSensitivityData.sensitivity rational j)
 
 open RationallyCertifiedLiteralSensitivity public
 
 rationalQ :
   ∀ {TubePoint K} → RationallyCertifiedLiteralSensitivity TubePoint K → ℚ
-rationalQ dataSet =
+rationalQ {K = K} dataSet =
   Rational.sum₀
-    (Rational.CumulativeSensitivityData.sensitivity (rational dataSet)) _
+    (Rational.CumulativeSensitivityData.sensitivity (rational dataSet)) K
 
 realQ :
   ∀ {TubePoint K} → RationallyCertifiedLiteralSensitivity TubePoint K → ℝ
@@ -109,7 +110,7 @@ realQBelowOne {K = K} dataSet =
       (rational dataSet) K ℕP.≤-refl
     embedded = Embed.strictOrderPreserving (base (embedding dataSet)) qBelow
   in
-  Relation.Binary.PropositionalEquality.subst
+  subst
     (λ right → realQ dataSet <ℝ right)
     (oneExact (embedding dataSet))
     embedded
