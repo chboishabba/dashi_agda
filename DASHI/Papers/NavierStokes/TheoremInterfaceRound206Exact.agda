@@ -1,0 +1,50 @@
+module DASHI.Papers.NavierStokes.TheoremInterfaceRound206Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound206Exact as R206
+
+round206PaperLocalizedCCPartnerMassBoundClosed : Bool
+round206PaperLocalizedCCPartnerMassBoundClosed =
+  R206.round206LocalizedCCPartnerMassBoundClosed
+
+round206PaperExactCompressedGramLedgerClosed : Bool
+round206PaperExactCompressedGramLedgerClosed =
+  R206.round206LocalizedCCExactCompressedGramLedgerClosed
+
+round206PaperAbstractCarrierGapRemains : Bool
+round206PaperAbstractCarrierGapRemains =
+  R206.round206LocalizedCCAbstractCarrierGapRemains
+
+round206PaperBetweenPartnerDebtPaid : Bool
+round206PaperBetweenPartnerDebtPaid =
+  R206.round206LocalizedCCBetweenPartnerDebtQuantitativelyPaid
+
+round206PaperPhysicalCCResidualBudgetClosed : Bool
+round206PaperPhysicalCCResidualBudgetClosed =
+  R206.round206PhysicalCCResidualBudgetClosed
+
+round206PaperPackageAClosed : Bool
+round206PaperPackageAClosed = R206.round206PackageAClosed
+
+round206PaperClayPromotion : Bool
+round206PaperClayPromotion = R206.round206ClayPromotion
+
+round206PaperExactCompressedGramLedgerClosedIsTrue :
+  round206PaperExactCompressedGramLedgerClosed ≡ true
+round206PaperExactCompressedGramLedgerClosedIsTrue = refl
+
+round206PaperAbstractCarrierGapRemainsIsFalse :
+  round206PaperAbstractCarrierGapRemains ≡ false
+round206PaperAbstractCarrierGapRemainsIsFalse = refl
+
+round206PaperBetweenPartnerDebtPaidIsFalse :
+  round206PaperBetweenPartnerDebtPaid ≡ false
+round206PaperBetweenPartnerDebtPaidIsFalse = refl
+
+round206PaperPackageAClosedIsFalse : round206PaperPackageAClosed ≡ false
+round206PaperPackageAClosedIsFalse = refl
+
+round206PaperClayPromotionIsFalse : round206PaperClayPromotion ≡ false
+round206PaperClayPromotionIsFalse = refl
