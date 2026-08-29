@@ -14,16 +14,10 @@ import DASHI.Planning.DataCentreUrbanResourceConflictExact as DataCentre
 import DASHI.PlanningArchitectureSituatedCrossPollinationValidation as SituatedValidation
 import DASHI.Planning.ConsentReparationPNFValidation as ConsentRepairValidation
 import DASHI.Planning.ConsentReparationPNFBoundary as ConsentRepairBoundary
+import DASHI.Planning.PlanningBIDICapstoneExact as BIDICapstone
 
 ------------------------------------------------------------------------
 -- VALIDATION SURFACE
---
--- The tranche intentionally proves non-collapse / no-auto-promotion results at
--- the seams where planning errors are easiest to hide.  Importing the situated
--- validation root checks the hostile-architecture, BC policy-bundle, Alice
--- epistemic-governance, LES hyperfabric and anti-sublation welds.  The consent
--- / reparation / PNF validation adds refusal/withdrawal, authority non-descent
--- and non-substitutional repair to the same cumulative surface.
 ------------------------------------------------------------------------
 
 planningStagesRemainDistinct : Planning.proposed ≡ Planning.approved → ⊥
@@ -81,3 +75,9 @@ compensationStillDoesNotCloseAuthorityRepair :
   ConsentRepairBoundary.ConsentReparationPNFBoundary.compensationIsAuthorityRestoration
     ConsentRepairBoundary.canonicalConsentReparationPNFBoundary ≡ false
 compensationStillDoesNotCloseAuthorityRepair = refl
+
+rankedBIDICapstoneIsImported :
+  BIDICapstone.Cases.CaseSource.freshness
+    BIDICapstone.Cases.trumpIranPalestineLiveSourceBoundary ≡
+  BIDICapstone.Cases.liveRefreshRequired
+rankedBIDICapstoneIsImported = refl
