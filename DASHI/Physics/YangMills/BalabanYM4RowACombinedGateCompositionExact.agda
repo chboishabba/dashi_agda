@@ -15,15 +15,15 @@ module DASHI.Physics.YangMills.BalabanYM4RowACombinedGateCompositionExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Data.Nat.Base as ℕ
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _≤_; _<_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_; _≤_; _<_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4RowAGateCompositionExact as Gate
 import DASHI.Physics.YangMills.BalabanYM4RowACombinedSmallCouplingGateExact as One
 import DASHI.Physics.YangMills.BalabanYM4CubicCouplingDriftTelescopeExact as Cubic
-import DASHI.Physics.YangMills.BalabanYM4ShootingSensitivityFromCubicDriftExact as Shooting
 
 record CombinedRowAGateData (cutoff : Nat) : Set₁ where
   field
@@ -49,7 +49,7 @@ record CombinedRowAGateData (cutoff : Nat) : Set₁ where
       betaGauss j + betaInteraction j
       ≡ inverseSquare j - inverseSquare (suc j)
 
-    couplingTube : ∀ K → coupling K - coupling 0 ≤ tubeWidth
+    couplingTube : ∀ K → coupling K - coupling zero ≤ tubeWidth
 
     combinedSmallness :
       (interactionConstant + derivativeBound) * couplingCap < gaussianFloor
