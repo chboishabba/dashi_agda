@@ -14,6 +14,7 @@ files=(
   DASHI/Physics/YangMills/BalabanCMP109116SourceContinuationRound103Exact.agda
   DASHI/Physics/YangMills/BalabanCMP109Equation51LocalizedHessianRound103Exact.agda
   DASHI/Physics/YangMills/BalabanCMP116SubstitutedActivityHessianRound103Exact.agda
+  DASHI/Physics/YangMills/BalabanCMP116SubstitutedActivityFirstVariationRound105Exact.agda
   DASHI/Physics/YangMills/BalabanCMP109116ConventionTransportRound103Exact.agda
   DASHI/Physics/YangMills/BalabanCMP116CommonAnalyticRadiusRound103Exact.agda
   DASHI/Physics/YangMills/BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact.agda
@@ -33,6 +34,9 @@ grep -q 'round103FrozenResearchCountStillFour' "$target"
 grep -q 'a1Equation51FiveChannelSameObjectCompilerLevel' DASHI/Physics/YangMills/BalabanA1Equation51FiveChannelSameObjectRound103Exact.agda
 grep -q 'a2ShellToCumulativeSensitivityLevel' DASHI/Physics/YangMills/BalabanA2LiteralSameHistoryPrefixSensitivityRound103Exact.agda
 grep -q 'physicalHessianSplitsIntrinsicPlusSubstitution' DASHI/Physics/YangMills/BalabanCMP116SubstitutedActivityHessianRound103Exact.agda
+grep -q '^substitutedFirstVariation :' DASHI/Physics/YangMills/BalabanCMP116SubstitutedActivityFirstVariationRound105Exact.agda
+grep -q 'secondSubstitutionCurvatureAppearsInFirstVariationIsFalse' DASHI/Physics/YangMills/BalabanCMP116SubstitutedActivityFirstVariationRound105Exact.agda
+grep -q 'explicitMetricToBackgroundTangentTransportStillNeededIsTrue' DASHI/Physics/YangMills/BalabanCMP116SubstitutedActivityFirstVariationRound105Exact.agda
 grep -q 'polarizationIsLocalizedCompositeHessianSum' DASHI/Physics/YangMills/BalabanCMP109Equation51LocalizedHessianRound103Exact.agda
 grep -q 'cmp109PolarizationIsCMP116PhysicalMarkedHessian' DASHI/Physics/YangMills/BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact.agda
 grep -q 'covarianceDefinition' DASHI/Physics/YangMills/BalabanHeatDoobSameDensityLogHessianRound103Exact.agda
@@ -40,7 +44,8 @@ grep -q 'heatDoobHessianIsStaticMinusCovariance' DASHI/Physics/YangMills/Balaban
 grep -q 'cmp109BackgroundHessianIsMetricVariationByDefinitionIsFalse' DASHI/Physics/YangMills/BalabanBackgroundHessianMetricVariationBoundaryRound105Exact.agda
 grep -q 'cmp109PolarizationIsStressTensorByDefinitionIsFalse' DASHI/Physics/YangMills/BalabanBackgroundHessianMetricVariationBoundaryRound105Exact.agda
 grep -q 'substitutionCurvatureMayBeDroppedWithoutProofIsFalse' DASHI/Physics/YangMills/BalabanBackgroundHessianMetricVariationBoundaryRound105Exact.agda
-grep -q 'bcBackgroundHessianToMetricVariationRound105Level' "$target"
+grep -q 'bcSubstitutedActivityFirstVariationRound105Level' "$target"
+grep -q 'bcMetricToBackgroundFirstVariationTransportRound105Level' "$target"
 
 # Regression against receipt-shuffling in the strict new seams.
 ! grep -q 'sameBlockingScaleConvention : Set' DASHI/Physics/YangMills/BalabanCMP109116SourceContinuationRound103Exact.agda
