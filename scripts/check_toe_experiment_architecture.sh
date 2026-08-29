@@ -12,6 +12,7 @@ FILES=(
   DASHI/Physics/Foundations/PhysicalTheoryExperimentDiscriminationExact.agda
   DASHI/Programmes/ResearchProgrammeExact.agda
   DASHI/Programmes/BidirectionalSatelliteCorrectionExact.agda
+  DASHI/Programmes/ExecutableReceiptSchemaExact.agda
   DASHI/Programmes/CFDExact.agda
   DASHI/Programmes/CFDChartCorrectionExact.agda
   DASHI/Programmes/BrainExact.agda
@@ -27,6 +28,7 @@ FILES=(
   DASHI/Programmes/CoreReferenceCorrectionExact.agda
   DASHI/Programmes/FRACDASHExact.agda
   DASHI/Programmes/FRACDASHCompilerCorrectionExact.agda
+  DASHI/Programmes/FRACDASHNumericInterpreterTargetExact.agda
   DASHI/Programmes/TestHarnessExact.agda
   DASHI/Programmes/TestHarnessEvidenceCorrectionExact.agda
   DASHI/Programmes/RTXExact.agda
@@ -78,6 +80,11 @@ grep -q 'twoPointPerfectTimingFitIsUniversalLawIsFalse' DASHI/Programmes/Grokkin
 grep -q 'backendFingerprintEqualityIsStateEqualityIsFalse' DASHI/Programmes/CoreReferenceCorrectionExact.agda
 grep -q '^finiteTraceCommutes :' DASHI/Programmes/FRACDASHCompilerCorrectionExact.agda
 grep -q '^finiteTraceReadoutCorrect :' DASHI/Programmes/FRACDASHCompilerCorrectionExact.agda
+grep -q '^blockedPrefixChoosesNext :' DASHI/Programmes/FRACDASHNumericInterpreterTargetExact.agda
+grep -q '^receiptYieldsFirstApplicableStep :' DASHI/Programmes/FRACDASHNumericInterpreterTargetExact.agda
+grep -q 'remainingGapIsFloatingPointApproximationIsFalse' DASHI/Programmes/FRACDASHNumericInterpreterTargetExact.agda
+grep -q 'finiteRunObservationIsGlobalTheoremIsFalse' DASHI/Programmes/ExecutableReceiptSchemaExact.agda
+grep -q 'selectedGramIsUniformFrameTheoremIsFalse' DASHI/Programmes/ExecutableReceiptSchemaExact.agda
 grep -q '^receiptPlusUniquenessPinsPrediction :' DASHI/Programmes/TestHarnessEvidenceCorrectionExact.agda
 grep -q 'lowerMDLIsPhysicalTruthIsFalse' DASHI/Programmes/RTXLightTransportRefinementExact.agda
 grep -q 'discriminatorAloneIsQuantumGravityTheoryIsFalse' DASHI/Programmes/QuantumFalsifiableTargetExact.agda
