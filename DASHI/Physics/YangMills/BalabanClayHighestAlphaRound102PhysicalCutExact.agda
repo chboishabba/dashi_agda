@@ -4,32 +4,29 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound102PhysicalCutExact w
 ------------------------------------------------------------------------
 -- ROUND102: CURRENT SHORTEST PHYSICAL BIDI CUT
 --
--- A, backward from the frozen completion:
---   SAME CMP109 mixed beta scalar
---   + history-uniform two-sided Gaussian/five-channel enclosure
---   + canonical Q->R ordered transport
---   + q<1 source shooting sensitivity
---     -> pointwise real beta slopes
---     -> cumulative beta interval
---     -> shooting tube self-map automatically
---     -> Banach fixed point
---     -> exact terminal renormalised inverse-square coordinate/coupling
---     -> prefix + terminal tails / frozen Row-A compiler.
+-- A:
+--   Ward/constrained Gaussian + SAME history-uniform absolute five-channel data
+--     -> rational b/2 <= beta <= B+b/2
+--     -> canonical ordered Q->R transport
+--     -> exact CMP109 (5.42) mixed-derivative bounds
+--     -> cumulative beta shooting interval is automatically invariant
+--   plus SAME-history q<1 response sensitivity
+--     -> standard closed-interval Banach fixed point
+--     -> exact terminal renormalised inverse-square coordinate and coupling.
 --
--- B/C, forward from CMP109/CMP116:
---   ONE differentiated effective-density carrier
---   + SAME hessian-mark analytic shell reused by first gradients
---   + standard bounded-gradient covariance inequality
---     -> temporal Heat/Doob curvature debt
---     -> dynamic weighted influence row
---     -> every weighted power
---     -> entrywise weighted quasi-locality
---     -> positive Dyson quasi-local series.
+-- B/C:
+--   ONE CMP109/CMP116 differentiated effective-density carrier
+--   + first gradient below the SAME hessian-mark analytic shell
+--     -> first-gradient 1/2 shell + weighted row
+--   + standard bounded conditional covariance inequality
+--     -> covariance 1/2 shell + weighted row
+--     -> actual Heat/Doob curvature debt
+--     -> dynamic weighted influence powers
+--     -> entrywise quasi-local powers + positive Dyson series.
 --
--- The false generic eta=H / dynamic=static shortcut remains superseded.  The
--- covariance is genuine; its localization reduces to first-gradient Cauchy data.
--- Frozen A/B/C/D count remains four until literal source completion predicates
--- are inhabited.
+-- No covariance term is erased.  No row is promoted merely because these
+-- compilers exist.  The frozen count remains four until literal source instances
+-- inhabit the physical completion predicates.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -38,10 +35,13 @@ import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound101BidiCompletionCutE
 import DASHI.Physics.YangMills.BalabanYM4FiveChannelQuarticAbsoluteBetaRound102Exact as ATwoChannel
 import DASHI.Physics.YangMills.BalabanA1HistoryUniformTwoSidedBetaRound102Exact as ATwo
 import DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact as AReal
+import DASHI.Physics.YangMills.BalabanRationalCertificateFamilyToLiteralCMP109BoundsRound102Exact as AFamily
 import DASHI.Physics.YangMills.BalabanRowAShootingTubeFromBetaBoundsRound102Exact as ATube
+import DASHI.Physics.YangMills.BalabanRowAClosedTubeBanachAssemblyRound102Exact as ABanach
 import DASHI.Physics.YangMills.BalabanRowAShootingFixedPointTerminalExactRound102 as AShoot
 import DASHI.Physics.YangMills.BalabanCMP109116SameDifferentiatedCarrierRound102Exact as Same
 import DASHI.Physics.YangMills.BalabanCMP116FirstGradientSharedMarkedExact as GradMarked
+import DASHI.Physics.YangMills.BalabanCMP116FirstGradientCovarianceInstantiationRound102Exact as GradInst
 import DASHI.Physics.YangMills.BalabanHeatDoobGradientCovarianceMarkedCauchyExact as GradCov
 import DASHI.Physics.YangMills.BalabanCMP116GradientCovarianceToHeatDoobDebtExact as Temporal
 import DASHI.Physics.YangMills.BalabanCMP116GradientCovarianceToWeightedHeatDoobExact as Spatial
@@ -64,9 +64,17 @@ rowARationalCertificateToRealSlopesRound102Level : ProofLevel
 rowARationalCertificateToRealSlopesRound102Level =
   AReal.rationalCertificateToRealBetaSlopeLevel
 
+rowARationalFamilyToLiteralCMP109BoundsRound102Level : ProofLevel
+rowARationalFamilyToLiteralCMP109BoundsRound102Level =
+  AFamily.rationalCertificateFamilyToLiteralCMP109BoundsLevel
+
 rowATwoSidedBetaMakesShootingTubeInvariantRound102Level : ProofLevel
 rowATwoSidedBetaMakesShootingTubeInvariantRound102Level =
   ATube.shootingTubeFromBetaBoundsLevel
+
+rowAClosedTubeBanachAssemblyRound102Level : ProofLevel
+rowAClosedTubeBanachAssemblyRound102Level =
+  ABanach.closedTubeBanachAssemblyLevel
 
 rowAShootingFixedPointTerminalCoordinateRound102Level : ProofLevel
 rowAShootingFixedPointTerminalCoordinateRound102Level =
@@ -76,11 +84,10 @@ rowAShootingFixedPointTerminalCouplingRound102Level : ProofLevel
 rowAShootingFixedPointTerminalCouplingRound102Level =
   AShoot.shootingFixedPointTerminalCouplingLevel
 
--- Remaining literal A source instantiation is now concentrated in:
---   * SAME-object Ward/Gaussian + absolute five-channel certificate for (5.42);
---   * SAME-history q<1 shooting sensitivity.
--- Two-sided beta bounds themselves give the closed shooting tube; Banach is
--- standard analysis; the fixed point gives the exact terminal target.
+-- Actual source-facing A seam after all current algebraic/standard-analysis
+-- collapse: SAME-object finite evaluator identification for CMP109 (5.42) and
+-- SAME-history q<1 sensitivity.  The two-sided beta bounds themselves give the
+-- closed shooting tube; the fixed point gives the terminal target exactly.
 rowAPhysicalSourceInstantiationRound102Level : ProofLevel
 rowAPhysicalSourceInstantiationRound102Level = conditional
 
@@ -99,6 +106,14 @@ rowBCFirstGradientReusesCMP116MarkedShellRound102Level =
 rowBCFirstGradientWeightedRowRound102Level : ProofLevel
 rowBCFirstGradientWeightedRowRound102Level =
   GradMarked.cmp116FirstGradientWeightedRowLevel
+
+rowBCFirstGradientInstantiatesTemporalCovarianceRound102Level : ProofLevel
+rowBCFirstGradientInstantiatesTemporalCovarianceRound102Level =
+  GradInst.cmp116FirstGradientToTemporalCovarianceLevel
+
+rowBCFirstGradientInstantiatesSpatialCovarianceRound102Level : ProofLevel
+rowBCFirstGradientInstantiatesSpatialCovarianceRound102Level =
+  GradInst.cmp116FirstGradientToSpatialCovarianceLevel
 
 rowBCTemporalGradientCovarianceShellRound102Level : ProofLevel
 rowBCTemporalGradientCovarianceShellRound102Level =
@@ -124,9 +139,10 @@ rowCPositiveWeightedDysonSeriesRound102Level : ProofLevel
 rowCPositiveWeightedDysonSeriesRound102Level =
   Dyson.weightedPositiveDysonSeriesCompilerLevel
 
--- Remaining literal B/C source instantiation is ONE CMP109/116 differentiated
--- density/coordinate plus first-gradient Cauchy identification on its common
--- analytic radius.  Covariance shell/row propagation is downstream.
+-- Actual source-facing B/C seam after all current collapse: instantiate ONE
+-- literal differentiated CMP109/CMP116 density/coordinate and its first-gradient
+-- Cauchy response on the common positive radius, then identify the conditional
+-- Heat/Doob covariance with the standard product expression on that SAME density.
 rowBCPhysicalSourceInstantiationRound102Level : ProofLevel
 rowBCPhysicalSourceInstantiationRound102Level = conditional
 
