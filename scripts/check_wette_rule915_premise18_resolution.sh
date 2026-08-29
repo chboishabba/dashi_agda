@@ -52,6 +52,7 @@ grep -q 'rule9323BodyTranscribedFromPrintedP145IsTrue' DASHI/Foundations/Wette19
 grep -q 'rule9323AutomaticallyProvesArbitraryPredecessorInductionIsFalse' DASHI/Foundations/Wette1969Rule9323InductionExact.agda
 
 grep -q 'p145PrintsTheComplete931Through9330SurfaceIsTrue' DASHI/Foundations/Wette1969Rule915MajorPDFSourceAuditExact.agda
+grep -q 'p145AllTwentySevenPremiseWordsNowDirectlyTranscribedElsewhereIsTrue' DASHI/Foundations/Wette1969Rule915MajorPDFSourceAuditExact.agda
 grep -q 'p158ErratumIdentifiesNewPremise18TerminalRuleIsFalse' DASHI/Foundations/Wette1969Rule915MajorPDFSourceAuditExact.agda
 grep -q 'implicationProducingRulesMustBeSoughtOnP145NotInventedFromP158ErratumIsTrue' DASHI/Foundations/Wette1969Rule915MajorPDFSourceAuditExact.agda
 
