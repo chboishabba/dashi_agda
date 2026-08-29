@@ -282,19 +282,16 @@ sameCandidateRecoveryImpliesPhysicalPromotion :
   SameCandidateQFTGRRecovery U →
   Physical.PhysicalPromotionGate (physicalCandidateFromUnified U)
 sameCandidateRecoveryImpliesPhysicalPromotion recovery =
-  GRRecoveryReceipt.grPromotionToken (grRecovery recovery)
-  ,
-  ( SameStressEnergyWeld.stressWeldPromotionToken (stressEnergyWeld recovery)
-  , CommonRegimeRecovery.regimePromotionToken (regimeRecovery recovery) )
-  ,
-  ( QFTRecoveryReceipt.qftPromotionToken (qftRecovery recovery)
-  ,
-    ( SameStressEnergyWeld.stressWeldPromotionToken (stressEnergyWeld recovery)
+  ( GRRecoveryReceipt.grPromotionToken (grRecovery recovery)
+  , ( SameStressEnergyWeld.stressWeldPromotionToken (stressEnergyWeld recovery)
     , CommonRegimeRecovery.regimePromotionToken (regimeRecovery recovery) ) )
   ,
-  ( NovelObservableReceipt.novelPromotionToken (novelObservable recovery)
-  , FalsifiableMeasurementReceipt.measurementPromotionToken
-      (falsifiableMeasurement recovery) )
+  ( ( QFTRecoveryReceipt.qftPromotionToken (qftRecovery recovery)
+    , ( SameStressEnergyWeld.stressWeldPromotionToken (stressEnergyWeld recovery)
+      , CommonRegimeRecovery.regimePromotionToken (regimeRecovery recovery) ) )
+    , ( NovelObservableReceipt.novelPromotionToken (novelObservable recovery)
+      , FalsifiableMeasurementReceipt.measurementPromotionToken
+          (falsifiableMeasurement recovery) ) )
 
 ------------------------------------------------------------------------
 -- Fail-closed current-state theorem.
