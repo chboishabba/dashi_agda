@@ -18,13 +18,6 @@ run :
 run step [] state = state
 run step (action ∷ rest) state = run step rest (step action state)
 
-------------------------------------------------------------------------
--- Consumer-relative reduced-order model.
---
--- Safety is semantic/dynamical: the declared consumer observation factors
--- through the reduction and the reduction commutes with every admitted action.
-------------------------------------------------------------------------
-
 record ConsumerRelativeReduction
     (Fine Action Observation : Set) : Set₁ where
   constructor consumerRelativeReduction
@@ -35,12 +28,10 @@ record ConsumerRelativeReduction
     reducedStep : Action → Reduced → Reduced
     fineObserve : Fine → Observation
     reducedObserve : Reduced → Observation
-
     stepCommutes :
       (action : Action) (state : Fine) →
       encode (fineStep action state)
       ≡ reducedStep action (encode state)
-
     observationFactors :
       (state : Fine) →
       fineObserve state ≡ reducedObserve (encode state)
@@ -89,10 +80,6 @@ encodedEqualityImpliesConsumerFutureEquality rom encodedEq actions =
         encodedEq)
       (sym (consumerFuturePreserved rom actions _)))
 
-------------------------------------------------------------------------
--- Exact reopening is optional and stronger than consumer sufficiency.
-------------------------------------------------------------------------
-
 record ExactResidualReopening
     {Fine Action Observation : Set}
     (rom : ConsumerRelativeReduction Fine Action Observation) : Set₁ where
@@ -106,13 +93,21 @@ record ExactResidualReopening
 open ExactResidualReopening public
 
 ------------------------------------------------------------------------
--- Optional symmetry layer.
---
--- A reduction can be perfectly valid without any inhabitant of this record.
--- If an application has a genuine symmetry, this records the commuting square
--- rather than inferring symmetry from a repeated number, cardinality or visual
--- pattern.
+-- Explicit target realization.  Consumer safety and even exact reopening do
+-- not by themselves identify the reduced coordinates with an external target
+-- phenomenon; that identification gets its own commuting witness.
 ------------------------------------------------------------------------
+
+record ReductionRealizationWitness
+    {Fine Action Observation Target : Set}
+    (rom : ConsumerRelativeReduction Fine Action Observation)
+    (target : Fine → Target) : Set₁ where
+  constructor reductionRealizationWitness
+  field
+    realize : Reduced rom → Target
+    realizationCommutes : (state : Fine) → target state ≡ realize (encode rom state)
+
+open ReductionRealizationWitness public
 
 record SymmetryAction (State : Set) : Set₁ where
   constructor symmetryAction
@@ -157,8 +152,25 @@ symmetryPreservesEncodedEquality {rom = rom} {fineSymmetry = fineSymmetry}
       (sym (encodeEquivariant compatible g _)))
 
 ------------------------------------------------------------------------
--- Measurement refinement / active discrimination.
+-- Symmetry can also fail.  This is the exact "ask the symmetry question"
+-- interface: a candidate symmetry is useful only if the equivariance square
+-- closes; a witnessed failure is positive evidence not to force that symmetry.
 ------------------------------------------------------------------------
+
+record SymmetryIncompatibilityWitness
+    {Fine ReducedState Symmetry : Set}
+    (encode : Fine → ReducedState)
+    (fineAct : Symmetry → Fine → Fine)
+    (reducedAct : Symmetry → ReducedState → ReducedState) : Set where
+  constructor symmetryIncompatibilityWitness
+  field
+    symmetry : Symmetry
+    state : Fine
+    equivarianceWouldFail :
+      encode (fineAct symmetry state)
+      ≡ reducedAct symmetry (encode state) → ⊥
+
+open SymmetryIncompatibilityWitness public
 
 record MeasurementDiscriminator
     {Fine Action Observation : Set}
@@ -191,10 +203,6 @@ refinedEvidenceDescendsToOldEvidence :
   RefinedEvidence refinement state → OldEvidence refinement state
 refinedEvidenceDescendsToOldEvidence refinement = proj₁
 
-------------------------------------------------------------------------
--- Equifinality / mechanism-realization boundary.
-------------------------------------------------------------------------
-
 record MechanisticEquifinalityWitness
     {Fine Action Observation : Set}
     (rom : ConsumerRelativeReduction Fine Action Observation) : Set₁ where
@@ -207,10 +215,6 @@ record MechanisticEquifinalityWitness
     differentMechanism : mechanism left ≡ mechanism right → ⊥
 
 open MechanisticEquifinalityWitness public
-
-------------------------------------------------------------------------
--- Interventions are transitions, not observations conditioned on a value.
-------------------------------------------------------------------------
 
 record InterventionCompatibleReduction
     {Fine Action Observation : Set}
@@ -242,11 +246,6 @@ interventionConsumerPreserved {rom = rom} compatible intervention state =
     (cong (reducedObserve rom)
       (interventionCommutes compatible intervention state))
 
-------------------------------------------------------------------------
--- History-sensitive failure witness: same current consumer surface, different
--- admitted future.  This is the generic hysteresis/path-dependence diagnostic.
-------------------------------------------------------------------------
-
 record HistorySensitiveFutureWitness
     {Fine Action Observation : Set}
     (fineStep : Action → Fine → Fine)
@@ -262,11 +261,6 @@ record HistorySensitiveFutureWitness
 
 open HistorySensitiveFutureWitness public
 
-------------------------------------------------------------------------
--- Multi-fidelity escalation: a low-fidelity collision that a higher-fidelity
--- consumer code separates is an exact reason to escalate for that pair.
-------------------------------------------------------------------------
-
 record FidelityEscalationWitness
     {Fine Action LowObservation HighObservation : Set}
     (low : ConsumerRelativeReduction Fine Action LowObservation)
@@ -280,10 +274,26 @@ record FidelityEscalationWitness
 open FidelityEscalationWitness public
 
 ------------------------------------------------------------------------
--- Spatial / scale aggregation is not special-cased. It is safe precisely when
--- it inhabits ConsumerRelativeReduction for the declared action/consumer pair;
--- this named alias lets scale-aware applications state that intent explicitly.
+-- Falsification surface inspired by the repo's broader proof-search discipline:
+-- a candidate compression is rejected by one collision whose declared future
+-- consumer separates.  No global metric or statistical threshold is needed.
 ------------------------------------------------------------------------
+
+record CandidateReductionFailure
+    {Fine Action Observation CandidateCode : Set}
+    (fineStep : Action → Fine → Fine)
+    (observe : Fine → Observation)
+    (candidate : Fine → CandidateCode) : Set where
+  constructor candidateReductionFailure
+  field
+    left right : Fine
+    candidateCollides : candidate left ≡ candidate right
+    separatingTrace : List Action
+    futureConsumerSeparates :
+      observe (run fineStep separatingTrace left)
+      ≡ observe (run fineStep separatingTrace right) → ⊥
+
+open CandidateReductionFailure public
 
 ScaleSafeReduction : Set → Set → Set → Set₁
 ScaleSafeReduction = ConsumerRelativeReduction
