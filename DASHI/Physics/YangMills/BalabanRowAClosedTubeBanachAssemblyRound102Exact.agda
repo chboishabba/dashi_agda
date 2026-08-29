@@ -3,24 +3,14 @@ module DASHI.Physics.YangMills.BalabanRowAClosedTubeBanachAssemblyRound102Exact 
 
 ------------------------------------------------------------------------
 -- ROUND102 A: INVARIANT BETA TUBE + q<1 -> SHOOTING FIXED POINT
---
--- Two-sided beta bounds already make the shooting interval invariant.  The
--- response-kernel lane supplies the remaining q<1 contraction estimate.  The
--- only theorem between those facts and a fixed point is the standard Banach
--- contraction theorem on a closed real interval.
---
--- This module keeps that theorem as a standard-analysis interface and proves the
--- source-specific assembly: once a fixed point is returned, it is converted to
--- `LiteralFiniteCutoffShootingFixedPoint`, whose terminal inverse-square
--- coordinate is exactly the selected renormalised target.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat)
-open import Data.Product using (Σ; _,_; proj₁; proj₂)
+open import Agda.Builtin.Nat using (Nat; zero)
+open import Data.Product using (Σ; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _-ℝ_)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _+ℝ_; _-ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanRowAShootingTubeFromBetaBoundsRound102Exact as Tube
 import DASHI.Physics.YangMills.BalabanRowAShootingFixedPointTerminalExactRound102 as Terminal
@@ -31,10 +21,6 @@ import DASHI.Physics.YangMills.BalabanInverseSquareCouplingBudget as Budget
 record ClosedTubeContractionData (Point : Set) : Set₁ where
   field
     tube : Tube.ShootingTubeBounds Point
-
-    -- Exact contraction predicate in the caller's real metric.  The existing
-    -- q<1 sensitivity lane instantiates this; no metric structure is duplicated
-    -- here merely to restate Banach's theorem.
     Contraction : Set
     contraction : Contraction
 
@@ -59,7 +45,7 @@ record LiteralCMP109ClosedTubeShooting (K : Nat) : Set₁ where
 
     initialCoordinateExact : ∀ point →
       Trajectory.inverseSquaredCoupling
-          (BetaLaw.step (dynamicsAt point)) 0
+          (BetaLaw.step (dynamicsAt point)) zero
       ≡ Tube.coordinate (tube contractionData) point
 
     cumulativeIsLiteralBetaPrefix : ∀ point →
@@ -67,8 +53,7 @@ record LiteralCMP109ClosedTubeShooting (K : Nat) : Set₁ where
       ≡ Budget.betaPrefixSum (BetaLaw.step (dynamicsAt point)) K
 
     arithmetic : Budget.InverseSquareBudgetArithmetic
-    addThenSubtractRight : ∀ a b →
-      (a DASHI.Foundations.RealAnalysisAxioms.+ℝ b) -ℝ b ≡ a
+    addThenSubtractRight : ∀ a b → (a +ℝ b) -ℝ b ≡ a
 
 open LiteralCMP109ClosedTubeShooting public
 
@@ -103,14 +88,12 @@ asLiteralFiniteCutoffFixedPoint banach {K} dataSet =
 
     shootingEquation :
       Tube.coordinate sourceTube point
-      ≡ Tube.renormalisedInverseSquare sourceTube
-          DASHI.Foundations.RealAnalysisAxioms.+ℝ prefix
+      ≡ Tube.renormalisedInverseSquare sourceTube +ℝ prefix
     shootingEquation =
       trans fixedCoordinate
         (trans mapEquation
           (cong
-            (Tube.renormalisedInverseSquare sourceTube
-              DASHI.Foundations.RealAnalysisAxioms.+ℝ_)
+            (Tube.renormalisedInverseSquare sourceTube +ℝ_)
             cumulativeExact))
   in
   record
@@ -134,8 +117,5 @@ closedTubeBanachAssemblyLevel = machineChecked
 closedRealIntervalBanachPrincipleLevel : ProofLevel
 closedRealIntervalBanachPrincipleLevel = standardImported
 
--- Physical A tuning input remaining after this assembly: instantiate the
--- contraction predicate with the SAME CMP109 history map.  Two-sided beta bounds
--- already supply tube invariance and the terminal target is exact after Banach.
 literalCMP109ClosedTubeContractionInstantiationLevel : ProofLevel
 literalCMP109ClosedTubeContractionInstantiationLevel = conditional
