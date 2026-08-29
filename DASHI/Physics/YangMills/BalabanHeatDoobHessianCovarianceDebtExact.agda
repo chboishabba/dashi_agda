@@ -29,6 +29,7 @@ open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Nullary.Decidable using (toWitness)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
@@ -39,12 +40,14 @@ import DASHI.Physics.YangMills.BalabanUnifiedSeventeenThirtySecondTailModulusExa
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact as Shared
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticGeometricShellExact as Geom
 
+halfBelowTheta : Geo.half ≤ Iter.theta
+halfBelowTheta = toWitness {a? = Geo.half ℚP.≤? Iter.theta} _
+
 halfPowerBelowThetaPower : ∀ n → Geo.halfPower n ≤ Iter.thetaPower n
 halfPowerBelowThetaPower zero = ℚP.≤-refl
 halfPowerBelowThetaPower (suc n) =
   ℚP.*-mono-≤
-    Geo.halfNonnegative
-    (ℚP.≤-trans Geo.halfNonnegative (ℚP.<⇒≤ Iter.thetaPositive))
+    Geo.halfNonnegative halfBelowTheta
     (Geo.halfPowerNonnegative n)
     (halfPowerBelowThetaPower n)
 
