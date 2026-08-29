@@ -30,8 +30,13 @@ import DASHI.Cognition.PNF.PackedOperatorFamilyAdmissionExact
 import DASHI.Cognition.PNF.DirectDeltaCompilerArchitectureExact
 import DASHI.Cognition.PNF.DirectDeltaCompilerArchitectureRegression
 
--- Activation cut for the live packed sentence compiler.  G1/G2 may be
--- executable before G3/G4 are production-certified; this import keeps that
--- distinction theorem-visible rather than allowing an installed code path to
--- masquerade as completed activation.
+-- Temporal synthesis of the same architecture over a parser event stream.
+-- Each available parser event advances the ordinary delta-native authority;
+-- end-of-sentence work is only the unresolved outward frontier, not a second
+-- whole-sentence semantic compile.
+import DASHI.Cognition.PNF.StreamingSemanticPacmanKernelExact
+
+-- Activation cut for the live packed sentence compiler.  G1/G2 and the stable
+-- G4 evidence mechanism are executable; G3 parity plus the production-default
+-- cutover still guard full production certification.
 import DASHI.Cognition.PNF.DirectDeltaCompilerActivationExact
