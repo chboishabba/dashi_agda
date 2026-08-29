@@ -14,6 +14,7 @@ import DASHI.Core.RobustExperimentInferenceFrontierExact
 import DASHI.Core.ConsumerRelativeReductionKernelExact
 import DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact
 import DASHI.Core.ConsumerRelativeReductionSearchExact
+import DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact
 import DASHI.Core.RobustInterventionAcrossHypothesesExact
 import DASHI.Core.FormalizationRecoverySourceRegistryExact
 import DASHI.Core.FormalizationRecoveryGeometryExact
