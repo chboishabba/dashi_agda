@@ -9,8 +9,9 @@ module DASHI.EverythingPartitionAsymptotics where
 -- division-free root tangent estimate, concrete factorial exponential series,
 -- native Cauchy-tail/rectangle/triangle owners, finite binomial coefficient
 -- identification, the all-positive cubic translation/geometric kernel route,
--- and a bidirectional Basel lane whose remaining middle seam is isolated as a
--- sine-product coefficient-limit theorem.
+-- exact residual-major <-> k-major factor reindexing, and a bidirectional
+-- Basel lane whose remaining middle seam is isolated as a sine-product
+-- coefficient-limit theorem.
 ------------------------------------------------------------------------
 
 import DASHI.Foundations.BishopVendoredSubmoduleProvenanceExact
@@ -29,6 +30,7 @@ import DASHI.Foundations.BishopFiniteSeriesExtensionalityExact
 import DASHI.Foundations.BishopAbsoluteSeriesTailExact
 import DASHI.Foundations.BishopFiniteSeriesRectangleProductExact
 import DASHI.Foundations.BishopFinSumSeriesBridgeExact
+import DASHI.Foundations.BishopFiniteSeriesCommonFactorExact
 import DASHI.Foundations.BishopFiniteCauchyRowReindexExact
 import DASHI.Foundations.BishopFiniteRectangleInsideCauchyTriangleExact
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact
@@ -38,6 +40,8 @@ import DASHI.Foundations.BishopExponentialFiniteCauchyCoefficientExact
 import DASHI.Foundations.BishopExponentialCubicTranslationLowerExact
 import DASHI.Foundations.BishopCubicTranslationGeometricRatioExact
 import DASHI.Foundations.BishopGeometricReciprocalSquareFromCrossExact
+import DASHI.Foundations.BishopInverseSquareProductExact
+import DASHI.Foundations.BishopNatRealPositiveExact
 import DASHI.Foundations.BishopCubicTranslationFiniteDegreeOneKernelExact
 import DASHI.Foundations.BishopCubicTranslationIteratedExact
 import DASHI.Foundations.BishopFiniteDegreeOneGeometricIdentityExact
@@ -51,9 +55,13 @@ import DASHI.Foundations.BishopNegativeExponentialFiniteDegreeOneKernelExact
 import DASHI.Foundations.BishopSqrtTwoThirdsMachinConstantExact
 import DASHI.Foundations.BishopBaselFiniteSineProductCoefficientExact
 import DASHI.Foundations.BishopBaselReciprocalSquareConvergenceExact
+import DASHI.Foundations.BishopNatRealReciprocalSquareBaselExact
+import DASHI.Foundations.BishopBaselFiniteCommonFactorExact
+import DASHI.Foundations.BishopBaselFinitePrefixBelowLimitExact
 import DASHI.Foundations.BishopBaselMachinSineQuadraticCoefficientExact
 import DASHI.Foundations.BishopBaselFiniteProductCoefficientLimitExact
 import DASHI.Foundations.BishopBaselSineProductCoefficientBoundaryExact
+import DASHI.Foundations.BishopPositiveNatScaleReciprocalSquareExact
 import DASHI.Mathematics.NumberTheory.FiniteNatFloorSquareRootExact
 import DASHI.Mathematics.NumberTheory.FiniteNatFractionOrderExact
 import DASHI.Mathematics.NumberTheory.FiniteNatSuccessorFractionExact
@@ -107,10 +115,24 @@ import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualUniqu
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualPermutationExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosDivisorSumRecurrenceExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosNatMajorantBootstrapExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosKMajorFactorCoordinateExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosKMajorFactorCoordinateCompletenessExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosKMajorFactorCoordinateUniqueExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosKMajorPositiveFactorBridgeExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosFactorCoordinateKeyExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosResidualMajorFactorKeyExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosFactorKeyPermutationExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosBishopDegreeOneDominationExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosBishopGeometricKernelBridgeExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosBishopUpperMajorantBoundaryExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosBishopFactorPairFiniteKernelExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopFactorPairInverseSquareNormalizationExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopFactorPairNormalizedKernelExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopFactorPairBaselKernelExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopKMajorMaskedKernelExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopKMajorBaselLimitKernelExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopStepConstantCancellationExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopKMajorPiKernelExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalResidualExpansionExact
 import DASHI.Mathematics.NumberTheory.PartitionDivisorSumRecurrencePrefixExact
 import DASHI.Mathematics.NumberTheory.PartitionDivisorSumRegroupingExact

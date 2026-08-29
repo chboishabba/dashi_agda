@@ -1,0 +1,65 @@
+module DASHI.Physics.Closure.NSTriadKNClayFrontierRound209Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound206Exact as R206
+import DASHI.Physics.Closure.NSTriadKNComparableFixedOutputCarrierRound207Exact as R207
+import DASHI.Physics.Closure.NSTriadKNComparableOutputL2CarrierRound208Exact as R208
+import DASHI.Physics.Closure.NSTriadKNComparableOutputGramTelescopeRound209Exact as R209
+
+round209LocalizedCCPartnerMassBoundClosed : Bool
+round209LocalizedCCPartnerMassBoundClosed =
+  R206.round206LocalizedCCPartnerMassBoundClosed
+
+round209ComparableGramScopedToOneOutput : Bool
+round209ComparableGramScopedToOneOutput =
+  R207.round207ComparableGramScopedToOneOutput
+
+round209DistinctOutputsRecombinedByFourierL2 : Bool
+round209DistinctOutputsRecombinedByFourierL2 =
+  R208.round208DistinctOutputsRecombinedByFourierL2
+
+round209CrossOutputCovarianceEliminatedByCarrier : Bool
+round209CrossOutputCovarianceEliminatedByCarrier =
+  R209.round209CrossOutputCovarianceEliminatedByCarrier
+
+round209OnlySameOutputComparableDebtRemains : Bool
+round209OnlySameOutputComparableDebtRemains =
+  R209.round209OnlySameOutputComparableDebtRemains
+
+round209SameOutputComparableDebtQuantitativelyPaid : Bool
+round209SameOutputComparableDebtQuantitativelyPaid = false
+
+round209PhysicalCCResidualBudgetClosed : Bool
+round209PhysicalCCResidualBudgetClosed = false
+
+round209PhysicalFLResidualBudgetClosed : Bool
+round209PhysicalFLResidualBudgetClosed = false
+
+round209PhysicalHHResidualBudgetClosed : Bool
+round209PhysicalHHResidualBudgetClosed = false
+
+round209PackageAClosed : Bool
+round209PackageAClosed = false
+
+round209ClayPromotion : Bool
+round209ClayPromotion = false
+
+round209ComparableGramScopedToOneOutputIsTrue :
+  round209ComparableGramScopedToOneOutput ≡ true
+round209ComparableGramScopedToOneOutputIsTrue = refl
+
+round209CrossOutputCovarianceEliminatedByCarrierIsTrue :
+  round209CrossOutputCovarianceEliminatedByCarrier ≡ true
+round209CrossOutputCovarianceEliminatedByCarrierIsTrue = refl
+
+round209SameOutputComparableDebtQuantitativelyPaidIsFalse :
+  round209SameOutputComparableDebtQuantitativelyPaid ≡ false
+round209SameOutputComparableDebtQuantitativelyPaidIsFalse = refl
+
+round209PackageAClosedIsFalse : round209PackageAClosed ≡ false
+round209PackageAClosedIsFalse = refl
+
+round209ClayPromotionIsFalse : round209ClayPromotion ≡ false
+round209ClayPromotionIsFalse = refl
