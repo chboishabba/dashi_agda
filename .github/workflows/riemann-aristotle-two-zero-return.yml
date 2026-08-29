@@ -23,6 +23,8 @@ on:
       - 'DASHI/Analysis/RiemannAristotleFiniteNearOrderedPairGramDebtExact.agda'
       - 'DASHI/Analysis/RiemannAristotleThreeTaperSchurKernelBilinearExact.agda'
       - 'DASHI/Analysis/RiemannAristotleFiniteNearSchurKernelCovarianceTargetExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleDeterminantCovarianceCompilerExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleG2DeterminantCovarianceRegression.agda'
       - 'DASHI/Analysis/RiemannAristotleDeterministicProjectiveSchurReturnExact.agda'
       - 'DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda'
       - 'DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda'
