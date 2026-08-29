@@ -2,23 +2,6 @@ module DASHI.Physics.YangMills.BalabanRowADirectQFromTubeExact where
 
 ------------------------------------------------------------------------
 -- ROW A: SIXTH-ORDER TUBE BUDGET -> EXPLICIT DIRECT LIPSCHITZ CONSTANT
---
--- Upstream exact algebra gives a cumulative direct sensitivity estimate
---
---   bStar * S_direct <= (2 C gamma^3) * tubeWidth.
---
--- If the generated tube width itself is Lipschitz in the shooting input,
---
---   tubeWidth <= T * |delta u|,
---
--- and bInv*bStar=1, then
---
---   S_direct <= qDirect * |delta u|,
---   qDirect = bInv * (2 C gamma^3) * T.
---
--- This module proves that ordered-rational implication exactly.  The physical
--- tasks are reduced to the source values C,T,bStar and the same-tube
--- identification; no Banach/fixed-point algebra is repeated here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -26,7 +9,7 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _*_; _≤_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
@@ -86,6 +69,8 @@ directTubeBudgetGivesInputSensitivity dataSet =
     w = tubeWidth dataSet
     d = inputDistance dataSet
     s = cumulativeDirect dataSet
+    amplitude = Cubic.twoℚ * C * Sixth.cube g
+    prefactor = inv * amplitude
 
     twoNN : 0ℚ ≤ Cubic.twoℚ
     twoNN = ℚP.nonNegative⁻¹ Cubic.twoℚ
@@ -96,8 +81,7 @@ directTubeBudgetGivesInputSensitivity dataSet =
         (mulNN (gammaNonnegative dataSet) (gammaNonnegative dataSet))
         (gammaNonnegative dataSet)
 
-    amplitudeNN :
-      0ℚ ≤ Cubic.twoℚ * C * Sixth.cube g
+    amplitudeNN : 0ℚ ≤ amplitude
     amplitudeNN =
       mulNN
         (mulNN twoNN (coefficientNonnegative dataSet))
@@ -107,37 +91,46 @@ directTubeBudgetGivesInputSensitivity dataSet =
       inv (marginInverseNonnegative dataSet)
       (cumulativeTubeBudget dataSet)
 
-    cancelMargin :
-      inv * (m * s) ≡ s
-    cancelMargin =
+    associated : inv * (m * s) ≡ (inv * m) * s
+    associated = sym (ℚP.*-assoc inv m s)
+
+    cancelled : (inv * m) * s ≡ s
+    cancelled =
       subst
-        (λ left → left * s ≡ s)
-        (marginInverseIdentity dataSet)
+        (λ factor → factor * s ≡ s)
+        (sym (marginInverseIdentity dataSet))
         (ℚP.*-identityˡ s)
 
-    afterCancel :
-      s ≤ inv * ((Cubic.twoℚ * C * Sixth.cube g) * w)
+    cancelMargin : inv * (m * s) ≡ s
+    cancelMargin = trans associated cancelled
+
+    afterCancel : s ≤ inv * (amplitude * w)
     afterCancel =
       subst
-        (λ left → left ≤ inv * ((Cubic.twoℚ * C * Sixth.cube g) * w))
+        (λ left → left ≤ inv * (amplitude * w))
         cancelMargin scaledBudget
 
-    prefactorNN :
-      0ℚ ≤ inv * (Cubic.twoℚ * C * Sixth.cube g)
+    afterReassociate : s ≤ prefactor * w
+    afterReassociate =
+      subst
+        (λ upper → s ≤ upper)
+        (ℚRing.solve-∀ inv amplitude w)
+        afterCancel
+
+    prefactorNN : 0ℚ ≤ prefactor
     prefactorNN = mulNN (marginInverseNonnegative dataSet) amplitudeNN
 
+    widthScaled : prefactor * w ≤ prefactor * (T * d)
     widthScaled = Norm.scaleNonnegative
-      (inv * (Cubic.twoℚ * C * Sixth.cube g))
-      prefactorNN
-      (tubeWidthBelowInput dataSet)
+      prefactor prefactorNN (tubeWidthBelowInput dataSet)
+
+    throughWidth : s ≤ prefactor * (T * d)
+    throughWidth = ℚP.≤-trans afterReassociate widthScaled
   in
-  ℚP.≤-trans
-    afterCancel
-    (subst
-      (λ upper →
-        inv * ((Cubic.twoℚ * C * Sixth.cube g) * w) ≤ upper)
-      (ℚRing.solve-∀ inv C g T w d)
-      widthScaled)
+  subst
+    (λ upper → s ≤ upper)
+    (ℚRing.solve-∀ inv amplitude T d)
+    throughWidth
 
 rowADirectTubeToInputSensitivityAlgebraLevel : ProofLevel
 rowADirectTubeToInputSensitivityAlgebraLevel = machineChecked
