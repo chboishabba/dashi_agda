@@ -1,0 +1,47 @@
+module DASHI.Papers.NavierStokes.TheoremInterfaceRound123Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound123Exact as Frontier
+
+round123PaperPureCommutatorCarrierExact : Bool
+round123PaperPureCommutatorCarrierExact = Frontier.round123PureExternalCommutatorClosed
+
+round123PaperSwapPairingExact : Bool
+round123PaperSwapPairingExact = Frontier.round123SwapPermutationPairingClosed
+
+round123PaperSignedBonyWeldExact : Bool
+round123PaperSignedBonyWeldExact = Frontier.round123SignedPureCommutatorBonyWeldClosed
+
+round123PaperCriticalCommutatorPaymentClosed : Bool
+round123PaperCriticalCommutatorPaymentClosed = Frontier.round123PhysicalClasswiseCriticalCommutatorPaymentClosed
+
+round123PaperCriticalSobolevSimonUpgradeClosed : Bool
+round123PaperCriticalSobolevSimonUpgradeClosed = Frontier.round123PhysicalCriticalSobolevSimonUpgradeClosed
+
+round123PaperMathematicalPackageCount : Nat
+round123PaperMathematicalPackageCount = Frontier.round123CurrentMathematicalPackageCount
+
+round123PaperClayPromotion : Bool
+round123PaperClayPromotion = Frontier.round123ClayPromotion
+
+round123PaperPureCommutatorCarrierExactIsTrue :
+  round123PaperPureCommutatorCarrierExact ≡ true
+round123PaperPureCommutatorCarrierExactIsTrue = refl
+
+round123PaperSignedBonyWeldExactIsTrue :
+  round123PaperSignedBonyWeldExact ≡ true
+round123PaperSignedBonyWeldExactIsTrue = refl
+
+round123PaperCriticalCommutatorPaymentClosedIsFalse :
+  round123PaperCriticalCommutatorPaymentClosed ≡ false
+round123PaperCriticalCommutatorPaymentClosedIsFalse = refl
+
+round123PaperCriticalSobolevSimonUpgradeClosedIsFalse :
+  round123PaperCriticalSobolevSimonUpgradeClosed ≡ false
+round123PaperCriticalSobolevSimonUpgradeClosedIsFalse = refl
+
+round123PaperClayPromotionIsFalse : round123PaperClayPromotion ≡ false
+round123PaperClayPromotionIsFalse = refl

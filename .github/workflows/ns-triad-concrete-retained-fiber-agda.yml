@@ -136,3 +136,87 @@ jobs:
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNClayFrontierRound114Validation.agda
+
+      - name: Type-check Round115 actual quartic Waleffe cell frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound115Validation.agda
+
+      - name: Type-check Round117 reciprocal cross-selected partner frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound117Validation.agda
+
+      - name: Type-check Round120 pure external commutator frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound120Validation.agda
+
+      - name: Type-check Round121 signed Bony-sum frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound121Validation.agda
+
+      - name: Type-check Round123 exact paired-Bony weld frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound123Validation.agda
+
+      - name: Type-check Round126 HH radial-gap frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound126Validation.agda
+
+      - name: Type-check Round128 HH polynomial numerator frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound128Validation.agda
+
+      - name: Type-check Round130 Bony partner-equivariance frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound130Validation.agda
+
+      - name: Type-check Round132 HH collinear-extremal cancellation frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound132Validation.agda
+
+      - name: Type-check Round185 three-class Gram frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound185Validation.agda
+
+      - name: Type-check Round193 complete double-commutator frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound193Validation.agda
+
+      - name: Type-check Round200 homogeneity-correct quartic frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound200Exact.agda
+
+      - name: Type-check Round201 block-Gram covariance frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound201Validation.agda
+
+      - name: Type-check Round202 quantitative residual-budget frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound202Validation.agda

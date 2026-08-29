@@ -1,0 +1,7 @@
+module DASHI.Physics.Closure.NSTriadKNClayFrontierRound132Validation where
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound130Validation
+import DASHI.Physics.Closure.NSTriadKNOutputTransverseCrossLerayCancellationRound131Exact
+import DASHI.Physics.Closure.NSTriadKNExternalHHCollinearExtremalCancellationRound132Exact
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound132Exact
+import DASHI.Papers.NavierStokes.TheoremInterfaceRound132Exact

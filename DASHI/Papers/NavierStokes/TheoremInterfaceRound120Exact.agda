@@ -1,0 +1,67 @@
+module DASHI.Papers.NavierStokes.TheoremInterfaceRound120Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound120Exact as R120
+
+round120PaperPureMultiplierDifferenceVectorClosed : Bool
+round120PaperPureMultiplierDifferenceVectorClosed =
+  R120.round120PureMultiplierDifferenceVectorClosed
+
+round120PaperPureQuarticCommutatorPairingClosed : Bool
+round120PaperPureQuarticCommutatorPairingClosed =
+  R120.round120PureQuarticCommutatorPairingClosed
+
+round120PaperIndependentAntisymmetryDefectSurvives : Bool
+round120PaperIndependentAntisymmetryDefectSurvives =
+  R120.round120IndependentAntisymmetryDefectSurvives
+
+round120PaperUnrestrictedCriticalExternalCommutatorPaymentClosed : Bool
+round120PaperUnrestrictedCriticalExternalCommutatorPaymentClosed =
+  R120.round120PhysicalUnrestrictedCriticalExternalCommutatorPaymentClosed
+
+round120PaperCriticalSobolevSimonUpgradeClosed : Bool
+round120PaperCriticalSobolevSimonUpgradeClosed =
+  R120.round120PhysicalCriticalSobolevSimonUpgradeClosed
+
+round120PaperMathematicalPackageCount : Nat
+round120PaperMathematicalPackageCount = R120.round120CurrentMathematicalPackageCount
+
+round120PaperVisibleSubleafCount : Nat
+round120PaperVisibleSubleafCount = R120.round120CurrentVisibleSubleafCount
+
+round120PaperPureMultiplierDifferenceVectorClosedIsTrue :
+  round120PaperPureMultiplierDifferenceVectorClosed ≡ true
+round120PaperPureMultiplierDifferenceVectorClosedIsTrue = refl
+
+round120PaperPureQuarticCommutatorPairingClosedIsTrue :
+  round120PaperPureQuarticCommutatorPairingClosed ≡ true
+round120PaperPureQuarticCommutatorPairingClosedIsTrue = refl
+
+round120PaperIndependentAntisymmetryDefectSurvivesIsFalse :
+  round120PaperIndependentAntisymmetryDefectSurvives ≡ false
+round120PaperIndependentAntisymmetryDefectSurvivesIsFalse = refl
+
+round120PaperUnrestrictedCriticalExternalCommutatorPaymentClosedIsFalse :
+  round120PaperUnrestrictedCriticalExternalCommutatorPaymentClosed ≡ false
+round120PaperUnrestrictedCriticalExternalCommutatorPaymentClosedIsFalse = refl
+
+round120PaperCriticalSobolevSimonUpgradeClosedIsFalse :
+  round120PaperCriticalSobolevSimonUpgradeClosed ≡ false
+round120PaperCriticalSobolevSimonUpgradeClosedIsFalse = refl
+
+round120PaperMathematicalPackageCountIsTwo :
+  round120PaperMathematicalPackageCount ≡ 2
+round120PaperMathematicalPackageCountIsTwo = refl
+
+round120PaperVisibleSubleafCountIsTwo :
+  round120PaperVisibleSubleafCount ≡ 2
+round120PaperVisibleSubleafCountIsTwo = refl
+
+round120PaperClayPromotion : Bool
+round120PaperClayPromotion = false
+
+round120PaperClayPromotionIsFalse : round120PaperClayPromotion ≡ false
+round120PaperClayPromotionIsFalse = refl

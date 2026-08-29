@@ -1,0 +1,53 @@
+module DASHI.Papers.NavierStokes.TheoremInterfaceRound133Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound133Exact as Frontier
+
+round133PaperCollinearExtremalCancellationExact : Bool
+round133PaperCollinearExtremalCancellationExact =
+  Frontier.round133CollinearExtremalQuarticCancellationClosed
+
+round133PaperOutputOrthogonalSquareGapZeroExact : Bool
+round133PaperOutputOrthogonalSquareGapZeroExact =
+  Frontier.round133OutputOrthogonalDifferenceSquareGapZeroClosed
+
+round133PaperOutputOrthogonalPluckerSaturationExact : Bool
+round133PaperOutputOrthogonalPluckerSaturationExact =
+  Frontier.round133OutputOrthogonalDifferencePluckerSaturationClosed
+
+round133PaperBothHHGeometricEndpointsSeparatedExact : Bool
+round133PaperBothHHGeometricEndpointsSeparatedExact =
+  Frontier.round133BothHHGeometricEndpointsSeparatedExactly
+
+round133PaperIntermediateAngleSignedHHPaymentClosed : Bool
+round133PaperIntermediateAngleSignedHHPaymentClosed =
+  Frontier.round133IntermediateAngleSignedHHPaymentClosed
+
+round133PaperCriticalSobolevSimonUpgradeClosed : Bool
+round133PaperCriticalSobolevSimonUpgradeClosed =
+  Frontier.round133PhysicalCriticalSobolevSimonUpgradeClosed
+
+round133PaperMathematicalPackageCount : Nat
+round133PaperMathematicalPackageCount =
+  Frontier.round133CurrentMathematicalPackageCount
+
+round133PaperClayPromotion : Bool
+round133PaperClayPromotion = Frontier.round133ClayPromotion
+
+round133PaperBothHHGeometricEndpointsSeparatedExactIsTrue :
+  round133PaperBothHHGeometricEndpointsSeparatedExact ≡ true
+round133PaperBothHHGeometricEndpointsSeparatedExactIsTrue = refl
+
+round133PaperIntermediateAngleSignedHHPaymentClosedIsFalse :
+  round133PaperIntermediateAngleSignedHHPaymentClosed ≡ false
+round133PaperIntermediateAngleSignedHHPaymentClosedIsFalse = refl
+
+round133PaperCriticalSobolevSimonUpgradeClosedIsFalse :
+  round133PaperCriticalSobolevSimonUpgradeClosed ≡ false
+round133PaperCriticalSobolevSimonUpgradeClosedIsFalse = refl
+
+round133PaperClayPromotionIsFalse : round133PaperClayPromotion ≡ false
+round133PaperClayPromotionIsFalse = refl

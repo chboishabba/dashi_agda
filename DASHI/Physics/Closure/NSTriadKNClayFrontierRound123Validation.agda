@@ -1,0 +1,7 @@
+module DASHI.Physics.Closure.NSTriadKNClayFrontierRound123Validation where
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound121Validation
+import DASHI.Physics.Closure.NSTriadKNExternalPureCommutatorSwapPairingRound122Exact
+import DASHI.Physics.Closure.NSTriadKNExternalPureCommutatorBonyWeldRound123Exact
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound123Exact
+import DASHI.Papers.NavierStokes.TheoremInterfaceRound123Exact

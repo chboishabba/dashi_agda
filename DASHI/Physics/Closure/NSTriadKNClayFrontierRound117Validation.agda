@@ -1,0 +1,7 @@
+module DASHI.Physics.Closure.NSTriadKNClayFrontierRound117Validation where
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound115Validation
+import DASHI.Physics.Closure.NSTriadKNExternalWaleffeCrossSelectedPartnerRound116Exact
+import DASHI.Physics.Closure.NSTriadKNExternalResidualReciprocityRound117Exact
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound117Exact
+import DASHI.Papers.NavierStokes.TheoremInterfaceRound117Exact

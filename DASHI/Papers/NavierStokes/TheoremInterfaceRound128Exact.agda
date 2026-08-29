@@ -1,0 +1,69 @@
+module DASHI.Papers.NavierStokes.TheoremInterfaceRound128Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound128Exact as Frontier
+
+round128PaperPhysicalSignedBonyWeldExact : Bool
+round128PaperPhysicalSignedBonyWeldExact =
+  Frontier.round128PhysicalToSignedBonyWeldClosed
+
+round128PaperHHOutputRadialGeometryExact : Bool
+round128PaperHHOutputRadialGeometryExact =
+  Frontier.round128HHOutputRadialGeometryClosed
+
+round128PaperSameHelicityGapProductExact : Bool
+round128PaperSameHelicityGapProductExact =
+  Frontier.round128SameHelicityGapProductFactorizationClosed
+
+round128PaperHHSquareGapGramIdentityExact : Bool
+round128PaperHHSquareGapGramIdentityExact =
+  Frontier.round128HHSquareGapGramIdentityClosed
+
+round128PaperHHPolynomialLowHighNumeratorExact : Bool
+round128PaperHHPolynomialLowHighNumeratorExact =
+  Frontier.round128HHPolynomialLowHighNumeratorIdentityClosed
+
+round128PaperHHOrderedRealTransportClosed : Bool
+round128PaperHHOrderedRealTransportClosed =
+  Frontier.round128HHOrderedRealTransportAndCancellationClosed
+
+round128PaperCriticalCommutatorPaymentClosed : Bool
+round128PaperCriticalCommutatorPaymentClosed =
+  Frontier.round128PhysicalClasswiseCriticalCommutatorPaymentClosed
+
+round128PaperCriticalSobolevSimonUpgradeClosed : Bool
+round128PaperCriticalSobolevSimonUpgradeClosed =
+  Frontier.round128PhysicalCriticalSobolevSimonUpgradeClosed
+
+round128PaperMathematicalPackageCount : Nat
+round128PaperMathematicalPackageCount =
+  Frontier.round128CurrentMathematicalPackageCount
+
+round128PaperClayPromotion : Bool
+round128PaperClayPromotion = Frontier.round128ClayPromotion
+
+round128PaperHHSquareGapGramIdentityExactIsTrue :
+  round128PaperHHSquareGapGramIdentityExact ≡ true
+round128PaperHHSquareGapGramIdentityExactIsTrue = refl
+
+round128PaperHHPolynomialLowHighNumeratorExactIsTrue :
+  round128PaperHHPolynomialLowHighNumeratorExact ≡ true
+round128PaperHHPolynomialLowHighNumeratorExactIsTrue = refl
+
+round128PaperHHOrderedRealTransportClosedIsFalse :
+  round128PaperHHOrderedRealTransportClosed ≡ false
+round128PaperHHOrderedRealTransportClosedIsFalse = refl
+
+round128PaperCriticalCommutatorPaymentClosedIsFalse :
+  round128PaperCriticalCommutatorPaymentClosed ≡ false
+round128PaperCriticalCommutatorPaymentClosedIsFalse = refl
+
+round128PaperCriticalSobolevSimonUpgradeClosedIsFalse :
+  round128PaperCriticalSobolevSimonUpgradeClosed ≡ false
+round128PaperCriticalSobolevSimonUpgradeClosedIsFalse = refl
+
+round128PaperClayPromotionIsFalse : round128PaperClayPromotion ≡ false
+round128PaperClayPromotionIsFalse = refl

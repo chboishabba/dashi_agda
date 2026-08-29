@@ -1,0 +1,69 @@
+module DASHI.Papers.NavierStokes.TheoremInterfaceRound126Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound126Exact as Frontier
+
+round126PaperPhysicalSignedBonyWeldExact : Bool
+round126PaperPhysicalSignedBonyWeldExact =
+  Frontier.round126ExactPhysicalToSignedBonyWeldClosed
+
+round126PaperHHMaxNormRadialGapBelowOutputExact : Bool
+round126PaperHHMaxNormRadialGapBelowOutputExact =
+  Frontier.round126HHMaxNormRadialGapBelowLowOutputClosed
+
+round126PaperHHEuclideanSquareGapLowOutputFactorExact : Bool
+round126PaperHHEuclideanSquareGapLowOutputFactorExact =
+  Frontier.round126HHEuclideanSquareGapLowOutputFactorClosed
+
+round126PaperHelicalModeNormSquareActionExact : Bool
+round126PaperHelicalModeNormSquareActionExact =
+  Frontier.round126HelicalModeNormSquareActionClosed
+
+round126PaperHHOrderedRealEigenvalueGapTransportClosed : Bool
+round126PaperHHOrderedRealEigenvalueGapTransportClosed =
+  Frontier.round126HHOrderedRealEigenvalueGapTransportClosed
+
+round126PaperCriticalCommutatorPaymentClosed : Bool
+round126PaperCriticalCommutatorPaymentClosed =
+  Frontier.round126PhysicalClasswiseCriticalCommutatorPaymentClosed
+
+round126PaperCriticalSobolevSimonUpgradeClosed : Bool
+round126PaperCriticalSobolevSimonUpgradeClosed =
+  Frontier.round126PhysicalCriticalSobolevSimonUpgradeClosed
+
+round126PaperMathematicalPackageCount : Nat
+round126PaperMathematicalPackageCount =
+  Frontier.round126CurrentMathematicalPackageCount
+
+round126PaperClayPromotion : Bool
+round126PaperClayPromotion = Frontier.round126ClayPromotion
+
+round126PaperHHMaxNormRadialGapBelowOutputExactIsTrue :
+  round126PaperHHMaxNormRadialGapBelowOutputExact ≡ true
+round126PaperHHMaxNormRadialGapBelowOutputExactIsTrue = refl
+
+round126PaperHHEuclideanSquareGapLowOutputFactorExactIsTrue :
+  round126PaperHHEuclideanSquareGapLowOutputFactorExact ≡ true
+round126PaperHHEuclideanSquareGapLowOutputFactorExactIsTrue = refl
+
+round126PaperHelicalModeNormSquareActionExactIsTrue :
+  round126PaperHelicalModeNormSquareActionExact ≡ true
+round126PaperHelicalModeNormSquareActionExactIsTrue = refl
+
+round126PaperHHOrderedRealEigenvalueGapTransportClosedIsFalse :
+  round126PaperHHOrderedRealEigenvalueGapTransportClosed ≡ false
+round126PaperHHOrderedRealEigenvalueGapTransportClosedIsFalse = refl
+
+round126PaperCriticalCommutatorPaymentClosedIsFalse :
+  round126PaperCriticalCommutatorPaymentClosed ≡ false
+round126PaperCriticalCommutatorPaymentClosedIsFalse = refl
+
+round126PaperCriticalSobolevSimonUpgradeClosedIsFalse :
+  round126PaperCriticalSobolevSimonUpgradeClosed ≡ false
+round126PaperCriticalSobolevSimonUpgradeClosedIsFalse = refl
+
+round126PaperClayPromotionIsFalse : round126PaperClayPromotion ≡ false
+round126PaperClayPromotionIsFalse = refl

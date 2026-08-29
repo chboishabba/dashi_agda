@@ -1,0 +1,59 @@
+module DASHI.Papers.NavierStokes.TheoremInterfaceRound132Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound132Exact as Frontier
+
+round132PaperSignedBonyWeldExact : Bool
+round132PaperSignedBonyWeldExact = Frontier.round132SignedBonyWeldClosed
+
+round132PaperHHSquareGapLowOutputIdentityExact : Bool
+round132PaperHHSquareGapLowOutputIdentityExact =
+  Frontier.round132HHSquareGapLowOutputIdentityClosed
+
+round132PaperCollinearExtremalQuarticCancellationExact : Bool
+round132PaperCollinearExtremalQuarticCancellationExact =
+  Frontier.round132CollinearExtremalQuarticCancellationClosed
+
+round132PaperUnsquaredEuclideanOutputGapAgdaPortClosed : Bool
+round132PaperUnsquaredEuclideanOutputGapAgdaPortClosed =
+  Frontier.round132UnconditionalUnsquaredEuclideanOutputGapAgdaPortClosed
+
+round132PaperIntermediateAngleSignedHHPaymentClosed : Bool
+round132PaperIntermediateAngleSignedHHPaymentClosed =
+  Frontier.round132IntermediateAngleSignedHHPaymentClosed
+
+round132PaperCriticalCommutatorPaymentClosed : Bool
+round132PaperCriticalCommutatorPaymentClosed =
+  Frontier.round132PhysicalClasswiseCriticalCommutatorPaymentClosed
+
+round132PaperCriticalSobolevSimonUpgradeClosed : Bool
+round132PaperCriticalSobolevSimonUpgradeClosed =
+  Frontier.round132PhysicalCriticalSobolevSimonUpgradeClosed
+
+round132PaperMathematicalPackageCount : Nat
+round132PaperMathematicalPackageCount = Frontier.round132CurrentMathematicalPackageCount
+
+round132PaperClayPromotion : Bool
+round132PaperClayPromotion = Frontier.round132ClayPromotion
+
+round132PaperCollinearExtremalQuarticCancellationExactIsTrue :
+  round132PaperCollinearExtremalQuarticCancellationExact ≡ true
+round132PaperCollinearExtremalQuarticCancellationExactIsTrue = refl
+
+round132PaperUnsquaredEuclideanOutputGapAgdaPortClosedIsFalse :
+  round132PaperUnsquaredEuclideanOutputGapAgdaPortClosed ≡ false
+round132PaperUnsquaredEuclideanOutputGapAgdaPortClosedIsFalse = refl
+
+round132PaperIntermediateAngleSignedHHPaymentClosedIsFalse :
+  round132PaperIntermediateAngleSignedHHPaymentClosed ≡ false
+round132PaperIntermediateAngleSignedHHPaymentClosedIsFalse = refl
+
+round132PaperCriticalCommutatorPaymentClosedIsFalse :
+  round132PaperCriticalCommutatorPaymentClosed ≡ false
+round132PaperCriticalCommutatorPaymentClosedIsFalse = refl
+
+round132PaperClayPromotionIsFalse : round132PaperClayPromotion ≡ false
+round132PaperClayPromotionIsFalse = refl
