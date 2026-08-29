@@ -6,6 +6,7 @@ import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaEx
 import DASHI.Physics.YangMills.BalabanRowAInverseSquareSensitivityDecompositionExact as A
 import DASHI.Physics.YangMills.BalabanRowAInverseSquareChainSensitivityExact as AChain
 import DASHI.Physics.YangMills.BalabanRowASixthSensitivityFromCubicTelescopeExact as ASixth
+import DASHI.Physics.YangMills.BalabanRowADirectSensitivityCumulativeExact as ADirect
 import DASHI.Physics.YangMills.BalabanBetaPrefixSensitivityToTubeContractionExact as Shoot
 import DASHI.Physics.YangMills.BalabanIrrelevantRGMemoryContractionExact as Memory
 import DASHI.Physics.YangMills.BalabanRowBActivityEntropyToShellEnergyExact as B
@@ -23,6 +24,10 @@ rowAInverseSquareChainG6SuppressionRound91Level =
 rowASixthSensitivityFromCubicTubeRound92Level : ProofLevel
 rowASixthSensitivityFromCubicTubeRound92Level =
   ASixth.rowASixthFromCubicTubeAlgebraLevel
+
+rowACumulativeDirectG6BudgetRound92Level : ProofLevel
+rowACumulativeDirectG6BudgetRound92Level =
+  ADirect.rowADirectSixthTubeBudgetAlgebraLevel
 
 rowAShootingContractionAlgebraRound91Level : ProofLevel
 rowAShootingContractionAlgebraRound91Level =
@@ -48,6 +53,10 @@ rowBActivityEntropyProductRound91Level =
 rowBActivityEntropyToGeometricShellRound91Level : ProofLevel
 rowBActivityEntropyToGeometricShellRound91Level =
   B.rowBActivityEntropyToGeometricShellLevel
+
+rowBActivityEntropyUniformSummationRound92Level : ProofLevel
+rowBActivityEntropyUniformSummationRound92Level =
+  B.rowBActivityEntropyUniformSummationLevel
 
 rowBGeometricShellSummationRound91Level : ProofLevel
 rowBGeometricShellSummationRound91Level =
