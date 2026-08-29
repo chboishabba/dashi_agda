@@ -40,7 +40,8 @@ consultationOnlyCannotGateIrreversibleAction gate =
 
 materialChangeReopensIrreversibleDecision :
   IrreversibleActionGate Consent.withdrawableConsent materiallyChangedEvidence → ⊥
-materialChangeReopensIrreversibleDecision gate = evidenceStillCurrent gate
+materialChangeReopensIrreversibleDecision gate with evidenceStillCurrent gate
+... | ()
 
 record IrreversibleActionBoundary : Set where
   constructor irreversibleActionBoundary
