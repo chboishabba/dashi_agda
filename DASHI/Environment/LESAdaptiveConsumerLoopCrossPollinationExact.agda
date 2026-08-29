@@ -10,7 +10,9 @@ import DASHI.Core.ConsumerRelativeMinimalFidelityExact as Minimal
 import DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact as Approx
 import DASHI.Core.ConsumerReductionDependencyReopeningExact as Reopening
 import DASHI.Core.RobustInterventionAcrossHypothesesExact as Robust
+import DASHI.Core.DiscriminatorSynthesisExact as Synthesis
 import DASHI.Environment.LESSPACFidelityCounterexampleFixturesExact as Fixtures
+import DASHI.Environment.LESDiscriminatorSynthesisExact as LESSynthesis
 
 adaptiveConsumerLoopOwner : String
 adaptiveConsumerLoopOwner = "DASHI.Core.AdaptiveConsumerModelLoopExact"
@@ -33,6 +35,12 @@ robustInterventionOwner = "DASHI.Core.RobustInterventionAcrossHypothesesExact"
 selectiveReopeningOwner : String
 selectiveReopeningOwner = "DASHI.Core.ConsumerReductionDependencyReopeningExact"
 
+discriminatorSynthesisOwner : String
+discriminatorSynthesisOwner = "DASHI.Core.DiscriminatorSynthesisExact"
+
+lesDiscriminatorSynthesisOwner : String
+lesDiscriminatorSynthesisOwner = "DASHI.Environment.LESDiscriminatorSynthesisExact"
+
 finiteSPACCounterexampleOwner : String
 finiteSPACCounterexampleOwner = "DASHI.Environment.LESSPACFidelityCounterexampleFixturesExact"
 
@@ -51,6 +59,12 @@ robustBoundaryImported = Robust.canonicalRobustInterventionBoundary
 reopeningBoundaryImported : Reopening.ReductionDependencyReopeningBoundary
 reopeningBoundaryImported = Reopening.canonicalReductionDependencyReopeningBoundary
 
+discriminatorBoundaryImported : Synthesis.DiscriminatorSynthesisBoundary
+discriminatorBoundaryImported = Synthesis.canonicalDiscriminatorSynthesisBoundary
+
+lesDiscriminatorBoundaryImported : LESSynthesis.LESDiscriminatorSynthesisBoundary
+lesDiscriminatorBoundaryImported = LESSynthesis.canonicalLESDiscriminatorSynthesisBoundary
+
 fixtureBoundaryImported : Fixtures.SPACFidelityCounterexampleBoundary
 fixtureBoundaryImported = Fixtures.canonicalSPACFidelityCounterexampleBoundary
 
@@ -65,6 +79,9 @@ record LESAdaptiveConsumerArchitectureCutset : Set where
     robustInterventionBranchTyped authorityRemainsSeparateFromRobustness : Bool
     discriminatingMeasurementOrFidelityBranchTyped evidenceUpdateTyped : Bool
     selectiveDependencyReopeningTyped minimalSufficientFidelityCertificateTyped : Bool
+    pairwiseDiscriminatorSynthesisTyped prospectiveConsumerClosingBundleTyped : Bool
+    observerJoinRefinementTyped nuisanceRobustSeparatorTyped : Bool
+    optionalSymmetryInvariantExperimentTyped lesActionabilitySynthesisTyped : Bool
     bucketHydraulicCounterexampleFixturePresent : Bool
     richardsPlantHistoryCounterexampleFixturePresent : Bool
     hydraulicSPACNutrientCounterexampleFixturePresent : Bool
@@ -74,7 +91,8 @@ canonicalLESAdaptiveConsumerArchitectureCutset : LESAdaptiveConsumerArchitecture
 canonicalLESAdaptiveConsumerArchitectureCutset =
   lesAdaptiveConsumerArchitectureCutset
     true true true true true true true true true true
-    true true true true true true true true true
+    true true true true true true true true true true
+    true true true true true
 
 record LESAdaptiveConsumerArchitectureBoundary : Set where
   constructor lesAdaptiveConsumerArchitectureBoundary
@@ -91,6 +109,9 @@ record LESAdaptiveConsumerArchitectureBoundary : Set where
     unresolvedModelFibreAlwaysBlocksActionIsFalse : unresolvedModelFibreAlwaysBlocksAction ≡ false
     robustActionAutomaticallyAuthorized : Bool
     robustActionAutomaticallyAuthorizedIsFalse : robustActionAutomaticallyAuthorized ≡ false
+    pairwiseDiscriminatorAutomaticallyClosesWholeDecisionFibre : Bool
+    pairwiseDiscriminatorAutomaticallyClosesWholeDecisionFibreIsFalse :
+      pairwiseDiscriminatorAutomaticallyClosesWholeDecisionFibre ≡ false
     oneChangedDependencyReopensEntireRepository : Bool
     oneChangedDependencyReopensEntireRepositoryIsFalse : oneChangedDependencyReopensEntireRepository ≡ false
     syntheticCounterexampleFixtureIsPhysicalValidation : Bool
@@ -99,4 +120,5 @@ record LESAdaptiveConsumerArchitectureBoundary : Set where
 canonicalLESAdaptiveConsumerArchitectureBoundary : LESAdaptiveConsumerArchitectureBoundary
 canonicalLESAdaptiveConsumerArchitectureBoundary =
   lesAdaptiveConsumerArchitectureBoundary
-    false refl false refl false refl false refl false refl false refl false refl false refl
+    false refl false refl false refl false refl false refl false refl
+    false refl false refl false refl
