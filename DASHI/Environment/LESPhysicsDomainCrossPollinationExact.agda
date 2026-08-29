@@ -8,16 +8,10 @@ import DASHI.Environment.LESDomainBasisBidiFrontierExact as Basis
 import DASHI.Environment.LESFluidPhysicsCouplingExact as Fluid
 import DASHI.Environment.LESBioelectricGaugeChemistryExact as Bioelectric
 import DASHI.Environment.LESEnvironmentSIQuantityBridgeExact as EnvironmentSI
-import DASHI.Physics.SIQuantitiesExact as SI
+import DASHI.Physics.Units.SI as SI
 
 ------------------------------------------------------------------------
 -- LES PHYSICS -> DOMAIN BIDI ASSEMBLY
---
--- Existing physical theorem/geometry owner
---      + literal application reduction / identification receipt
---      + typed SI quantity surface
---      + domain validation receipt
---      -> application mechanism socket.
 ------------------------------------------------------------------------
 
 data PhysicsReuseLane : Set where
@@ -58,20 +52,16 @@ stage7TargetObligations : List Robust.RobustnessObligation
 stage7TargetObligations = Basis.stage7Obligations
 
 siQuantityArchitectureOwner : String
-siQuantityArchitectureOwner =
-  "DASHI.Physics.SIQuantitiesExact; BIPM DOI 10.59161/AUEZ1291"
+siQuantityArchitectureOwner = "DASHI.Physics.Units.SI; BIPM DOI 10.59161/AUEZ1291"
 
 environmentSIBridgeOwner : String
-environmentSIBridgeOwner =
-  "DASHI.Environment.LESEnvironmentSIQuantityBridgeExact"
+environmentSIBridgeOwner = "DASHI.Environment.LESEnvironmentSIQuantityBridgeExact"
 
--- Imports above are intentional authority welds, not documentation-only labels.
 siVoltageDimension : SI.Dimension
-siVoltageDimension = SI.voltageDimension
+siVoltageDimension = SI.Voltage
 
 environmentWaterDimension : SI.Dimension
-environmentWaterDimension =
-  EnvironmentSI.dimension EnvironmentSI.waterLitresSI
+environmentWaterDimension = EnvironmentSI.dimension EnvironmentSI.waterLitresSI
 
 record LESPhysicsCrossPollinationCutset : Set where
   constructor lesPhysicsCrossPollinationCutset
@@ -82,7 +72,7 @@ record LESPhysicsCrossPollinationCutset : Set where
     bioelectricChemistryLaneReferenced : Bool
     suNGaugeLaneReferencedWithBoundary : Bool
     electrochemicalFieldSocketTyped : Bool
-    canonicalSIDimensionOwnerPresent : Bool
+    canonicalSIUnitsOwnerPresent : Bool
     environmentalPhysicalUnitsWeldedToSI : Bool
 
     applicationFluidReductionStillNeedsDomainReceipt : Bool
@@ -104,30 +94,16 @@ record LESPhysicsCrossPollinationBoundary : Set where
   constructor lesPhysicsCrossPollinationBoundary
   field
     physicalTheoremOwnerIsApplicationModel : Bool
-    physicalTheoremOwnerIsApplicationModelIsFalse :
-      physicalTheoremOwnerIsApplicationModel ≡ false
-
+    physicalTheoremOwnerIsApplicationModelIsFalse : physicalTheoremOwnerIsApplicationModel ≡ false
     sharedMathematicalStructureIsSharedEmpiricalMechanism : Bool
-    sharedMathematicalStructureIsSharedEmpiricalMechanismIsFalse :
-      sharedMathematicalStructureIsSharedEmpiricalMechanism ≡ false
-
+    sharedMathematicalStructureIsSharedEmpiricalMechanismIsFalse : sharedMathematicalStructureIsSharedEmpiricalMechanism ≡ false
     sameObjectIdentificationMayReplaceDuplicateApplicationProof : Bool
-    sameObjectIdentificationMayReplaceDuplicateApplicationProofIsTrue :
-      sameObjectIdentificationMayReplaceDuplicateApplicationProof ≡ true
-
+    sameObjectIdentificationMayReplaceDuplicateApplicationProofIsTrue : sameObjectIdentificationMayReplaceDuplicateApplicationProof ≡ true
     reductionReceiptStillNeedsRegimeValidation : Bool
-    reductionReceiptStillNeedsRegimeValidationIsTrue :
-      reductionReceiptStillNeedsRegimeValidation ≡ true
-
+    reductionReceiptStillNeedsRegimeValidationIsTrue : reductionReceiptStillNeedsRegimeValidation ≡ true
     siDimensionTypingReplacesConstitutivePhysics : Bool
-    siDimensionTypingReplacesConstitutivePhysicsIsFalse :
-      siDimensionTypingReplacesConstitutivePhysics ≡ false
+    siDimensionTypingReplacesConstitutivePhysicsIsFalse : siDimensionTypingReplacesConstitutivePhysics ≡ false
 
 canonicalLESPhysicsCrossPollinationBoundary : LESPhysicsCrossPollinationBoundary
 canonicalLESPhysicsCrossPollinationBoundary =
-  lesPhysicsCrossPollinationBoundary
-    false refl
-    false refl
-    true refl
-    true refl
-    false refl
+  lesPhysicsCrossPollinationBoundary false refl false refl true refl true refl false refl
