@@ -3,50 +3,37 @@ module DASHI.Analysis.RiemannAristotleCurrentFrontierExact where
 ------------------------------------------------------------------------
 -- AUTHORITATIVE CURRENT FRONTIER FOR THE ARISTOTLE / RH LANE
 --
--- This module is intentionally small.  It exists so future workers do not
--- reconstruct the live cutset from older historical status modules.
---
--- Closed in the Lean owner:
+-- Closed infrastructure in the Lean owner:
 --
 --   * normalized positive-width one-selected-zero Schur admission;
 --   * exact three-taper / two-selected-zero Gram-Schmidt elimination;
---   * explicit positive taper-triple construction for three strictly ordered
---     positive height moduli;
+--   * explicit positive taper-triple construction PROVIDED three actual zeros
+--     have strictly ordered positive horizontal heights;
 --   * small-radius target survival and positive residual norm-square;
---   * exact invariance under re-adding the two selected nuisance responses.
+--   * exact invariance under re-adding those two selected nuisance responses.
 --
--- Returned architectural facts in Agda:
+-- Bidirectional correction:
 --
---   * estimates stay attached to the certified literal carrier;
---   * exact reindexing may change presentation only;
---   * exactly eliminated selected directions require no residual budget;
---   * the generic final compiler only needs a literal projected far-tail bound
---     strictly below the usable target margin.
+-- The RH contradiction starts from ONE hypothetical off-line zero.  That does
+-- not supply two additional actual zeros with smaller distinct positive
+-- horizontal heights.  Therefore the inhabited two-zero theorem is optional
+-- local cancellation infrastructure, not by itself the universal E -> RH lane.
 --
--- OPEN:
+-- For the universal lane, the selected nuisance directions should be modes
+-- present for every target.  The literal pole pair is the natural existing G21
+-- candidate.  Its four-sample quotient criterion is already explicit, but the
+-- literal Weil pole-quotient transversality theorem is still open.
 --
---   A. literal projected unselected-zero tail estimate after the exact two-zero
---      quotient, using a mechanism stronger than the exhausted absolute W(t)
---      majorant;
---   B. remaining prime/Gamma contribution in the same projected coordinates
---      (short-support annihilation may kill the prime term only in the lanes
---      where its support hypotheses remain compatible with the taper family);
---   C. a single domain-level composition theorem that identifies the literal
---      far residual with A+B and supplies B_far < strictSignalMargin;
---   D. final implication into the existing unweakened RH statement.
+-- Consequently the highest-alpha universal cutset is now:
 --
--- Highest-alpha strategy note:
+--   U1. literal target transversality modulo deterministic pole nuisance modes;
+--   U2. exact post-quotient explicit-formula carrier identity;
+--   U3. signed/clustered projected unselected-zero tail estimate;
+--   U4. projected prime/Gamma payment in those same coordinates;
+--   U5. far-tail < target margin and off-line contradiction -> existing RH.
 --
---   The next theorem should not estimate the old absolute off-ordinate mass.
---   It should expose the actual projected response of each unselected zero in
---   the certified three-taper quotient coordinates, preserve signed/projective
---   structure as long as possible, and only majorize after exact projection.
---   If a shell/height decomposition is needed, it should be performed on that
---   literal projected carrier and then reindexed exactly for summation.
---
--- Equal height-modulus degeneracy remains visible: the current 3x3 height gate
--- requires three strictly ordered positive height moduli.  No theorem here
--- removes that degeneracy or derives RH.
+-- The A/D/E composition compiler is already owned separately.  U1/U3/U4 are
+-- the genuinely mathematical sockets.  No theorem here derives RH.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -63,6 +50,14 @@ record AristotleCurrentFrontier : Set where
     selectedTwoZeroResidualDebtRequired : Bool
     selectedTwoZeroResidualDebtRequiredIsFalse :
       selectedTwoZeroResidualDebtRequired ≡ false
+
+    twoZeroUniversalWitnessProductionClosed : Bool
+    twoZeroUniversalWitnessProductionClosedIsFalse :
+      twoZeroUniversalWitnessProductionClosed ≡ false
+    literalPoleQuotientTransversalityClosed : Bool
+    literalPoleQuotientTransversalityClosedIsFalse :
+      literalPoleQuotientTransversalityClosed ≡ false
+
     projectedUnselectedZeroTailClosed : Bool
     projectedUnselectedZeroTailClosedIsFalse :
       projectedUnselectedZeroTailClosed ≡ false
@@ -91,4 +86,7 @@ canonicalAristotleCurrentFrontier =
     false refl
     false refl
     false refl
-    "The finite selected-carrier algebra and inhabited two-zero/three-taper construction are closed in Lean. The highest-alpha open work is now literal projected far-tail control in the exact quotient coordinates, followed by domain composition and the final unweakened RH implication."
+    false refl
+    false refl
+    false refl
+    "Two-zero/three-taper exact elimination is closed but conditional on extra ordered zero witnesses and is not the universal RH bridge. The highest-alpha universal lane is literal target transversality modulo deterministic pole nuisance modes, then the exact projected carrier, signed zero-tail control, prime/Gamma payment, and the already-owned margin/RH compiler."
