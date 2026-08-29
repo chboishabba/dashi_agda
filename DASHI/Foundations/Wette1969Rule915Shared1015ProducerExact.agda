@@ -1,14 +1,5 @@
 module DASHI.Foundations.Wette1969Rule915Shared1015ProducerExact where
 
-------------------------------------------------------------------------
--- WETTE 9.1.5 SHARED 10--15 PRODUCER
---
--- Every slot is required to be the conclusion of an actual certified historical
--- rule application.  The six producers are sequenced once; their conclusions
--- are transported to one final context and packaged as the single shared
--- 10--15 evidence object consumed by both premise 18 and premise 27 branches.
-------------------------------------------------------------------------
-
 open import DASHI.Core.Prelude
 
 import DASHI.Core.ProofCarryingRuleApplicationExact as PCRA
@@ -69,6 +60,11 @@ p10AtTarget chain =
           (Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce11 chain)) _
             (Producer.producedAtTarget (produce10 chain))))))
 
+p11AtTarget :
+  {initial : Context} → {firstSeven : Rule915.Rule915FirstSevenParameters} →
+  {later : Later.Rule915LaterParameters} →
+  (chain : Shared1015ProducerChain initial firstSeven later) →
+  Later.premise11 later Finite.∈Context sharedTarget chain
 p11AtTarget chain =
   Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce15 chain)) _
     (Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce14 chain)) _
@@ -76,21 +72,41 @@ p11AtTarget chain =
         (Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce12 chain)) _
           (Producer.producedAtTarget (produce11 chain)))))
 
+p12AtTarget :
+  {initial : Context} → {firstSeven : Rule915.Rule915FirstSevenParameters} →
+  {later : Later.Rule915LaterParameters} →
+  (chain : Shared1015ProducerChain initial firstSeven later) →
+  Later.premise12 later Finite.∈Context sharedTarget chain
 p12AtTarget chain =
   Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce15 chain)) _
     (Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce14 chain)) _
       (Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce13 chain)) _
         (Producer.producedAtTarget (produce12 chain))))
 
+p13AtTarget :
+  {initial : Context} → {firstSeven : Rule915.Rule915FirstSevenParameters} →
+  {later : Later.Rule915LaterParameters} →
+  (chain : Shared1015ProducerChain initial firstSeven later) →
+  Later.premise13 later Finite.∈Context sharedTarget chain
 p13AtTarget chain =
   Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce15 chain)) _
     (Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce14 chain)) _
       (Producer.producedAtTarget (produce13 chain)))
 
+p14AtTarget :
+  {initial : Context} → {firstSeven : Rule915.Rule915FirstSevenParameters} →
+  {later : Later.Rule915LaterParameters} →
+  (chain : Shared1015ProducerChain initial firstSeven later) →
+  Later.premise14 later Finite.∈Context sharedTarget chain
 p14AtTarget chain =
   Closure.certifiedTracePreservesPriorFormula (Producer.producerTrace (produce15 chain)) _
     (Producer.producedAtTarget (produce14 chain))
 
+p15AtTarget :
+  {initial : Context} → {firstSeven : Rule915.Rule915FirstSevenParameters} →
+  {later : Later.Rule915LaterParameters} →
+  (chain : Shared1015ProducerChain initial firstSeven later) →
+  Later.premise15 later Finite.∈Context sharedTarget chain
 p15AtTarget chain = Producer.producedAtTarget (produce15 chain)
 
 sharedEvidenceAtTarget :
