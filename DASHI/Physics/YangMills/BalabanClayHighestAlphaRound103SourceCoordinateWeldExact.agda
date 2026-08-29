@@ -4,34 +4,35 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound103SourceCoordinateWe
 ------------------------------------------------------------------------
 -- ROUND103: BIDI SOURCE-COORDINATE WELD
 --
--- A1 is now factored through the actual CMP109 Sect.5 off-diagonal two-jet:
---   actual (5.42) mixed derivative
---     = embedded negative mixed coefficient of the Eq.(5.1) jet,
---   Ward/five-channel evaluator = beta coefficient of that SAME jet,
---   exact mixed-jet extraction -> literal two-sided CMP109 beta bounds.
--- A2 remains the same-history q<1 source sensitivity; all shooting/tuning
--- algebra after that estimate is already theorem-owned.
+-- A1:
+--   Eq.(5.1) off-diagonal two-jet + SAME Ward/five-channel beta evaluator
+--   -> exact (5.42) same-object equality -> two-sided literal CMP109 bounds.
+-- A2:
+--   shellwise sensitivities between pairs of literal generated CMP109 histories
+--   -> finite triangle theorem -> cumulative prefix Lipschitz estimate.
+--   The mixed-Cauchy/cubic-drift/irrelevant-response gate supplies the remaining
+--   cutoff-uniform subunit coefficient; cumulative Lipschitzness is no longer a
+--   separate physical theorem.
 --
 -- BC1:
 --   Part-I effective action = Part-II localized PHYSICAL composite sum;
---   D² commutes with the finite localized sum;
---   CMP109 (5.1) = D_B² of the same action;
+--   D² commutes with finite sum; CMP109 (5.1) = D_B² of that same action;
 --   hence Pi/E^(2) = sum of CMP116 physical composite B-Hessians;
---   one common positive analytic radius controls the differentiated shell.
+--   one evidence-bearing common positive analytic radius controls all coordinates.
 --
--- Critical correction: CMP116 first writes E(X,U,J,A) and then substitutes
--- A=A(B), so D_B²(E∘A) contains intrinsic Hessian plus substitution-curvature
--- term.  Bare A-Hessian is not silently identified with CMP109.
+-- CMP116 substitution correction:
+--   D_B²(E∘A) = intrinsic A-Hessian term + substitution-curvature term.
 --
 -- BC2:
---   Heat/Doob log-Hessian = conditional static Hessian - gradient covariance
--- on the SAME literal finite-cutoff density.
+--   Heat/Doob expectation and covariance are typed directly over the SAME strict
+--   carrier potential; Hess V_t = E_t Hess V - Cov_t(grad V,grad V).
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound102PhysicalCutExact as R102
 import DASHI.Physics.YangMills.BalabanA1Equation51FiveChannelSameObjectRound103Exact as A1
+import DASHI.Physics.YangMills.BalabanA2LiteralSameHistoryPrefixSensitivityRound103Exact as A2
 import DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound103Exact as Finite
 import DASHI.Physics.YangMills.BalabanCMP109116SourceContinuationRound103Exact as Continue
 import DASHI.Physics.YangMills.BalabanCMP109Equation51LocalizedHessianRound103Exact as Eq51
@@ -58,12 +59,14 @@ rowARationalFamilyToLiteralCMP109BoundsRound103Level : ProofLevel
 rowARationalFamilyToLiteralCMP109BoundsRound103Level =
   R102.rowARationalFamilyToLiteralCMP109BoundsRound102Level
 
+rowAShellToCumulativeSameHistorySensitivityRound103Level : ProofLevel
+rowAShellToCumulativeSameHistorySensitivityRound103Level =
+  A2.a2ShellToCumulativeSensitivityLevel
+
 rowAClosedTubeBanachAssemblyRound103Level : ProofLevel
 rowAClosedTubeBanachAssemblyRound103Level =
   R102.rowAClosedTubeBanachAssemblyRound102Level
 
--- Physical A leaves: bind the Eq.(5.1) off-diagonal jet and finite Ward/five-
--- channel evaluator on the SAME generated history, then prove same-history q<1.
 rowAPhysicalSourceInstantiationRound103Level : ProofLevel
 rowAPhysicalSourceInstantiationRound103Level = conditional
 
