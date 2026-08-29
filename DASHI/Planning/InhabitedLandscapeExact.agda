@@ -21,12 +21,10 @@ record InhabitedLandscape : Set₁ where
     Activity   : Set
     Network    : Set
 
-    Role        : Place → Function → Set
+    Role         : Place → Function → Set
     PermittedUse : Place → Activity → Set
     ObservedUse  : Place → Time → Activity → Set
     ConnectedBy  : Network → Place → Place → Set
-
-open InhabitedLandscape public
 
 data Place : Set where
   marketGarden communityHall creek : Place
@@ -107,21 +105,21 @@ landscape =
     }
 
 marketGardenIsGenuinelyMultifunctional :
-  Role landscape marketGarden home ×
-  (Role landscape marketGarden workplace ×
-  (Role landscape marketGarden foodProduction ×
-  (Role landscape marketGarden ecologicalPatch ×
-   Role landscape marketGarden commercialEnterprise)))
+  InhabitedLandscape.Role landscape marketGarden home ×
+  (InhabitedLandscape.Role landscape marketGarden workplace ×
+  (InhabitedLandscape.Role landscape marketGarden foodProduction ×
+  (InhabitedLandscape.Role landscape marketGarden ecologicalPatch ×
+   InhabitedLandscape.Role landscape marketGarden commercialEnterprise)))
 marketGardenIsGenuinelyMultifunctional = tt , (tt , (tt , (tt , tt)))
 
 observedUseNeedNotBePermittedUse :
-  ObservedUse landscape creek drySeason recreationUse ×
-  (PermittedUse landscape creek recreationUse → ⊥)
+  InhabitedLandscape.ObservedUse landscape creek drySeason recreationUse ×
+  (InhabitedLandscape.PermittedUse landscape creek recreationUse → ⊥)
 observedUseNeedNotBePermittedUse = tt , (λ permitted → permitted)
 
 networkRelativeConnectivityDiffers :
-  ConnectedBy landscape euclidean marketGarden creek ×
-  (ConnectedBy landscape road marketGarden creek → ⊥)
+  InhabitedLandscape.ConnectedBy landscape euclidean marketGarden creek ×
+  (InhabitedLandscape.ConnectedBy landscape road marketGarden creek → ⊥)
 networkRelativeConnectivityDiffers = tt , (λ roadConnection → roadConnection)
 
 ------------------------------------------------------------------------
