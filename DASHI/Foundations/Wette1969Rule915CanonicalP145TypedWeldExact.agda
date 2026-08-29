@@ -3,7 +3,7 @@ module DASHI.Foundations.Wette1969Rule915CanonicalP145TypedWeldExact where
 ------------------------------------------------------------------------
 -- WETTE 1969 RULE 9.1.5: CANONICAL p.145 -> EXISTING TYPED ARCHITECTURE
 --
--- The canonical p.145 premise vector is not a parallel semantics.  This module
+-- The canonical p.145 premise vector is not a parallel semantics. This module
 -- instantiates the repository's existing Rule915FirstSevenParameters and
 -- Rule915LaterParameters with exactly the nineteen source metavariables and the
 -- dense p.145 words, then proves pointwise identity at every one of the 27 slots.
@@ -19,14 +19,7 @@ import DASHI.Foundations.Wette1969Rule915CanonicalP145PremisesExact as P145
 canonicalFirstSeven : Rule915.Rule915FirstSevenParameters
 canonicalFirstSeven =
   Rule915.rule915FirstSevenParameters
-    P145.V
-    P145.W
-    P145.W2
-    P145.V2
-    P145.V1
-    P145.W1
-    P145.U
-    P145.U1
+    P145.V P145.W P145.W2 P145.V2 P145.V1 P145.W1 P145.U P145.U1
 
 canonicalLater : Later.Rule915LaterParameters
 canonicalLater =
@@ -121,6 +114,9 @@ record Wette1969Rule915CanonicalP145TypedWeldBoundary : Set where
     premise18And27NoLongerNeedOpaqueWordParametersForCanonicalP145Instance : Bool
     premise18And27NoLongerNeedOpaqueWordParametersForCanonicalP145InstanceIsTrue :
       premise18And27NoLongerNeedOpaqueWordParametersForCanonicalP145Instance ≡ true
+    criterion1All27SourceExactPremisesTiedToActualP145Rule : Bool
+    criterion1All27SourceExactPremisesTiedToActualP145RuleIsTrue :
+      criterion1All27SourceExactPremisesTiedToActualP145Rule ≡ true
     bridgeIntroducesParallelRule915Semantics : Bool
     bridgeIntroducesParallelRule915SemanticsIsFalse :
       bridgeIntroducesParallelRule915Semantics ≡ false
@@ -129,4 +125,4 @@ canonicalWette1969Rule915CanonicalP145TypedWeldBoundary :
   Wette1969Rule915CanonicalP145TypedWeldBoundary
 canonicalWette1969Rule915CanonicalP145TypedWeldBoundary =
   wette1969Rule915CanonicalP145TypedWeldBoundary
-    true refl true refl true refl true refl false refl
+    true refl true refl true refl true refl true refl false refl
