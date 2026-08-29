@@ -32,16 +32,32 @@ record DensityAnchoredCanonicalMetricStress
       domain representation coordinate) : Set₁ where
   field
     densitySource : R121.LiteralDensityNormalizedStressSource inputs
-    backgroundScale : Chain.Background activity → Nat
+
+    -- One source scale for this finite action slice.  Background variation does
+    -- not silently move us to a different RG scale.
+    selectedScale : Scale
+    sourceScaleIndex : Scale → Nat
+
     metricPerturbationToDensityPerturbation :
       Domain.MetricPerturbation domain → R121.MetricPerturbation densitySource
+
     normalizedSourceIsLiteralDensity :
       ∀ background perturbation →
       R119.normalizedSource metricWeld background perturbation
       ≡ R121.crossDataAt densitySource
-          (backgroundScale background)
+          (sourceScaleIndex selectedScale)
           (metricPerturbationToDensityPerturbation perturbation)
 open DensityAnchoredCanonicalMetricStress public
+
+selectedDensityScale :
+  ∀ {trajectory split inputs C S Y group Scale Volume activity domain representation coordinate metricWeld} →
+  DensityAnchoredCanonicalMetricStress
+    {trajectory = trajectory} {split = split} {inputs = inputs}
+    {C = C} {S = S} {Y = Y} {group = group}
+    {Scale = Scale} {Volume = Volume} {activity = activity}
+    {domain = domain} {representation = representation} {coordinate = coordinate}
+    metricWeld → Nat
+selectedDensityScale dataSet = sourceScaleIndex dataSet (selectedScale dataSet)
 
 canonicalMetricCrossNumeratorIsLiteralDensityCrossNumerator :
   ∀ {trajectory split inputs C S Y group Scale Volume activity domain representation coordinate metricWeld}
@@ -56,7 +72,7 @@ canonicalMetricCrossNumeratorIsLiteralDensityCrossNumerator :
     (R119.normalizedSource metricWeld background perturbation)
   ≡ R116.sourceDerivativeCrossNumerator
       (R121.crossDataAt (densitySource dataSet)
-        (backgroundScale dataSet background)
+        (selectedDensityScale dataSet)
         (metricPerturbationToDensityPerturbation dataSet perturbation))
 canonicalMetricCrossNumeratorIsLiteralDensityCrossNumerator
     dataSet background perturbation =
@@ -75,7 +91,7 @@ canonicalMetricConnectedInsertionIsOnLiteralDensity :
   R116.connectedInsertionNumerator
     (R119.normalizedSource metricWeld background perturbation)
   ≡ R121.connectedInsertionNumerator (densitySource dataSet)
-      (BetaDensity.densityAt inputs (backgroundScale dataSet background))
+      (BetaDensity.densityAt inputs (selectedDensityScale dataSet))
       (metricPerturbationToDensityPerturbation dataSet perturbation)
 canonicalMetricConnectedInsertionIsOnLiteralDensity
     dataSet background perturbation =
