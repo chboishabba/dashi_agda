@@ -17,13 +17,13 @@ module DASHI.Physics.YangMills.BalabanBC1PhysicalCompositeChainRuleRound118Exact
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using (List)
 open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _+ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound103Exact as Finite
 import DASHI.Physics.YangMills.BalabanCMP109116SourceContinuationRound103Exact as Source
+import DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact as Carrier
 import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityHessianRound103Exact as Chain
 import DASHI.Physics.YangMills.BalabanBC1CanonicalCarrierCompilerRound115Exact as BC1
 
@@ -43,8 +43,6 @@ record BC1PhysicalCompositeComponentFamily
       Source.Tangent (BC1.source inputs) →
       Chain.BackgroundTangent (physicalActivity component)
 
-    -- SAME local function after A=A(B), on the exact scale/volume selected by
-    -- the BC1 carrier.
     localizedActivityIsPhysicalComposite :
       ∀ component background →
       Source.cmp116PhysicalLocalizedActivity
@@ -54,9 +52,6 @@ record BC1PhysicalCompositeComponentFamily
           (Chain.substitution (physicalActivity component)
             (toPhysicalBackground component background))
 
-    -- The second variation used by the finite localized action is the PHYSICAL
-    -- B-second variation of that same substituted component, not the intrinsic
-    -- A-Hessian alone.
     localizedD2IsPhysicalCompositeD2 :
       ∀ component background u v →
       Finite.secondVariation (BC1.calculus inputs)
@@ -102,15 +97,12 @@ record BC1PhysicalCompositeInputs : Set₁ where
 
 open BC1PhysicalCompositeInputs public
 
--- The global same-potential equality remains Round115's theorem.  Round118 adds
--- the stronger componentwise fact that every summand differentiated inside that
--- equality contains both chain-rule contributions.
 bc1GlobalHessianIsSamePotentialD2 :
   (dataSet : BC1PhysicalCompositeInputs) →
   ∀ background u v →
   let inputs = canonical dataSet
   in
-  DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact.cmp116PhysicalMarkedHessian
+  Carrier.cmp116PhysicalMarkedHessian
       (BC1.bc1CanonicalCarrier inputs) background u v
   ≡ Finite.secondVariation (BC1.calculus inputs)
       (Source.cmp109EffectivePotential
@@ -125,9 +117,5 @@ bc1PhysicalCompositeChainRuleCompilerLevel = machineChecked
 bc1PhysicalCompositeSamePotentialCompilerLevel : ProofLevel
 bc1PhysicalCompositeSamePotentialCompilerLevel = machineChecked
 
--- Remaining source/repository seam: instantiate the component family from the
--- literal CMP116 A=A(B) activities and their first/second substitution
--- derivatives.  The chain rule itself is source-standard and already imported;
--- no permission remains to replace it by a bare A-Hessian.
 literalBC1PhysicalCompositeComponentInstantiationLevel : ProofLevel
 literalBC1PhysicalCompositeComponentInstantiationLevel = conditional
