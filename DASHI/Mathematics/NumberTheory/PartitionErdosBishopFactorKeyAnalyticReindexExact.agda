@@ -2,14 +2,6 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosBishopFactorKeyAnalyticReind
 
 ------------------------------------------------------------------------
 -- BISHOP ANALYTIC WEIGHT ON THE EXACT FACTOR-KEY REINDEX
---
--- Attach the proof-free analytic weight
---
---   (r,k,v) |-> v* exp(c sqrt(n-r))
---
--- to the common factor key.  The already-certified residual-major <-> k-major
--- permutation then gives a literal Bishop-real equality of the two finite
--- presentations before any analytic domination is applied.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -21,8 +13,10 @@ import DASHI.Foundations.BishopCubicTranslationIteratedExact as Iterated
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopFinitePermutationFoldExact as Fold
 import DASHI.Mathematics.NumberTheory.PartitionErdosBishopCubicStepRateExact as Rate
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopKMajorCoordinateDominationExact as Coordinate
 import DASHI.Mathematics.NumberTheory.PartitionErdosFactorCoordinateKeyExact as Key
 import DASHI.Mathematics.NumberTheory.PartitionErdosFactorKeyPermutationExact as Permutation
+import DASHI.Mathematics.NumberTheory.PartitionErdosKMajorFactorCoordinateExact as KMajor
 import DASHI.Mathematics.NumberTheory.PartitionErdosResidualMajorFactorKeyExact as ResidualMajor
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -64,6 +58,31 @@ kMajorEqualsResidualMajorAnalyticFactorSum n =
   Fold.bishopFoldPermutationInvariant
     (factorAnalyticWeight n)
     (Permutation.kMajorResidualMajorFactorKeyPermutation n)
+
+kMajorKeySumIsCoordinateResidualSum :
+  ∀ n →
+  BishopReal._≃_
+    (kMajorAnalyticFactorSum n)
+    (Fold.bishopFold
+      (Coordinate.coordinateResidualWeight n)
+      (KMajor.kMajorFactorCoordinates n))
+kMajorKeySumIsCoordinateResidualSum n =
+  Fold.bishopFoldMap
+    (factorAnalyticWeight n)
+    Key.kMajorFactorKey
+    (KMajor.kMajorFactorCoordinates n)
+
+residualMajorIsCoordinateResidualSum :
+  ∀ n →
+  BishopReal._≃_
+    (residualMajorAnalyticFactorSum n)
+    (Fold.bishopFold
+      (Coordinate.coordinateResidualWeight n)
+      (KMajor.kMajorFactorCoordinates n))
+residualMajorIsCoordinateResidualSum n =
+  BishopP.≃-trans
+    (residualMajorEqualsKMajorAnalyticFactorSum n)
+    (kMajorKeySumIsCoordinateResidualSum n)
 
 partitionErdosBishopFactorKeyAnalyticReindexLevel : ProofLevel
 partitionErdosBishopFactorKeyAnalyticReindexLevel = machineChecked
