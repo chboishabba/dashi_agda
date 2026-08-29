@@ -96,9 +96,19 @@ Static adequacy, dynamic adequacy, or geometric fit cannot manufacture this witn
 
 This is structurally analogous to the TSFV realization boundary: a constructed history/action representation and a constructed target object do not justify arbitrary carrier identification.
 
-## Eigenslur / flourishing adapter
+## Eigenslur / flourishing experiment protocol
 
-`EigenslurFlourishingRelationBoundaryExact` keeps the motivating experiment thin.
+`RelationRepresentationExperimentProtocolExact` turns the motivating discussion into an explicit candidate-search protocol:
+
+```text
+offset
+-> rotation
+-> affine
+-> nonlinear
+-> contextual
+```
+
+Escalation is a permission to test a richer family after a declared-consumer collision, not an ordering of truth or normative merit. The protocol separately records matched-pairing, comparison geometry, held-out target/context/model/checkpoint scope, consumer names, dynamic-trace requirements and target-realization requirements.
 
 For eigenslur-style work the schema is:
 
@@ -117,7 +127,7 @@ matched neutral or baseline action-state
 inside the same declared situation
 ```
 
-The adapter does not force either experiment into a fixed translation. Rotation, affine, nonlinear, quotient, and manifold-constrained candidates remain admissible.
+`EigenslurFlourishingRelationBoundaryExact` does not force either experiment into a fixed translation. Rotation, affine, nonlinear, quotient, and manifold-constrained candidates remain admissible.
 
 The finite ethical regression constructs a coarse positive code that is exactly sufficient for a coarse valence task but collapses an agency distinction. Therefore positive/beneficial-looking outcome compression is not sufficient for a richer flourishing consumer.
 
@@ -128,6 +138,67 @@ DASHI.Governance.CapabilityFunctioningNonDescentExact
 ```
 
 so realized functioning still does not recover capability.
+
+## Producer construction frontier
+
+The tranche now includes exact producer mathematics rather than only representation interfaces.
+
+`FiniteRelationLinearAlgebraProducerExact` provides:
+
+- a two-dimensional exact Gram/eigenpair specimen from residual rows `(3,0)` and `(0,1)`;
+- `X^T X = diag(9,1)` with exact principal/secondary eigenpairs and spectral-gap code `8`;
+- an exact outer-product rank-one construction, while reusing `BinaryInteractionNonseparabilityExact` for the independent nonzero-minor obstruction;
+- an exact order-four finite rotation carrier;
+- an exact affine producer `(u,v) -> (2u+1,3v+2)` with `(2,3) -> (5,11)`;
+- a state-dependent finite-difference witness for `n -> n^2`, with local differences `5` and `7` at adjacent points;
+- an explicit manifold-producer obligation rather than a fabricated smooth-manifold theorem.
+
+The mathematical neighbourhood for the finite matrix/rank language is Roger A. Horn and Charles R. Johnson, *Matrix Analysis*, 2nd ed., Cambridge University Press (2013), DOI `10.1017/CBO9781139020411`. The finite specimens and producer interfaces are DASHI constructions, not attributed theorems of Horn--Johnson.
+
+`FiniteRelationSVDJacobianProducerExact` strengthens the spectral specimen to a literal tiny SVD:
+
+```text
+X = diag(3,1)
+U = I
+Sigma = diag(3,1)
+V = I
+```
+
+with exact left/right axis orthogonality, singular-action equations, and
+
+```text
+3^2 = 9
+1^2 = 1
+```
+
+connecting singular scales to the Gram eigenvalues. This is an exact 2x2 SVD receipt, not a generic SVD algorithm.
+
+The same module keeps a fail-closed `JacobianProducerObligation`. A genuine Jacobian producer must separately supply a differentiable carrier, scalar/normed-space structure, perturbation coordinates, derivative-existence and derivative-matrix receipts, and identification with the empirical activation carrier. The present finite difference is explicitly a pre-Jacobian sensitivity witness, not a derivative theorem.
+
+### Executable numerical receipt
+
+`scripts/relation_representation_numeric_producer.py` deterministically recomputes the committed fixture
+
+```text
+Artifacts/relation-representation/numeric-producer-receipt.json
+```
+
+and the focused checker fails if they disagree. The receipt includes:
+
+- the finite residual matrix and Gram matrix;
+- both exact eigenpairs and spectral gap;
+- the matching `U`, `Sigma`, `V` tiny SVD with zero reconstruction error;
+- the signed 90-degree rotation fixture with zero squared error;
+- the affine fixture with zero squared error;
+- finite differences `5` and `7`, recording state-dependent local sensitivity.
+
+This executable fixture is deliberately **not** advertised as an empirical embedding/LLM result. `ExternalNumericalReceiptContract` records `empiricalEmbeddingsLoaded = false` and `relationSemanticsRealized = false`. Real embedding/activation arrays are the next producer frontier and must enter through an explicit data/provenance receipt rather than replacing this fixture by assertion.
+
+## Neural, spectral, and humour cross-pollination
+
+`NeuralSpectralRelationCrossPollinationExact` consumes an existing neural finite witness: the same coarse fMRI-like observation can retain different Laplacian/relational variation. That collision blocks realization through the coarse code and reopens the candidate search without claiming that rotation has thereby been empirically established.
+
+`HumourRelationRepresentationCrossPollinationExact` consumes the existing Brown/Pryce/Pabel source-preservation and plural-consumer dynamic-safety architecture. A currently positive three-Cs surface can be dynamically safe for one consumer while a long-term-equity consumer has a terminalisation defect. Source framework and later DASHI reinterpretation remain separately typed.
 
 ## Phase/operator precedent
 
@@ -197,6 +268,31 @@ Imported role: a previously successful generalizing checkpoint can later collaps
 
 Imported role: conceptual residual/dominant-component formulation and the explicit admission that `eigen-` properly suggests an operator. The essay's `contempt is low-rank; craft is full-rank` language remains source rhetoric/hypothesis, not a theorem in DASHI.
 
+## Current producer boundary
+
+Implemented now:
+
+```text
+exact finite Gram/eigenpair producer
+exact tiny SVD producer
+exact finite rank-one construction + independent minor obstruction
+exact finite rotation producer
+exact affine producer
+deterministic executable numerical fixture
+state-dependent finite-difference sensitivity receipt
+```
+
+Still intentionally open:
+
+```text
+real embedding/activation ingestion + provenance
+numerical SVD/rotation/affine fit on those actual arrays
+held-out transfer receipts on real data
+smooth/manifold chart and geodesic realization on the actual carrier
+true Jacobian/derivative receipt on a differentiable representation space
+consumer and target-domain realization for any empirical relation code
+```
+
 ## Claim boundary
 
 This tranche does not claim:
@@ -212,4 +308,6 @@ realization -> normative authority
 eigenslur residual -> context-free slur
 positive valence -> flourishing
 flourishing -> rank one
+finite SVD fixture -> empirical LLM SVD
+finite difference -> Jacobian
 ```
