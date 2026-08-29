@@ -5,20 +5,32 @@ open import DASHI.Core.Prelude
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.PredictionEnvelopeExact as Prediction
 import DASHI.Culture.KimmererTwoEyedSeeingInterpretationBoundaryExact as Kimmerer
+import DASHI.Environment.LESObservationSourceRegistryExact as Sources
 import DASHI.Environment.LESSituatedSocioEcologicalHyperfabricExact as LES
 
 ------------------------------------------------------------------------
 -- SITUATED OBSERVE-AND-INTERACT FOR LES
 --
--- Source calibration / interpretation boundary:
--- The supplied permaculture material identifies "Observe and Interact" as a
--- canonical design principle and emphasizes place-specific, time-indexed,
--- iterative observation before stronger design commitments.  The same supplied
--- discussion also stresses that Indigenous/local knowledge is situated and
--- relational, so shared observations must not erase provenance, governance or
--- epistemic history.  The exact finite constructions below are DASHI
--- mathematics; they are not attributed to Holmgren, Kimmerer or any supplied
--- secondary source.
+-- SOURCE CALIBRATION
+--
+-- David Holmgren,
+-- Permaculture: Principles & Pathways Beyond Sustainability,
+-- Holmgren Design Services, 2002.
+-- ISBN 9780646418445.
+-- Typed attribution: Sources.holmgren2002.
+--
+-- Source import:
+-- Holmgren's Observe and Interact principle motivates observation/interaction
+-- as a design orientation.  The Kimmerer / Two-Eyed Seeing provenance boundary
+-- is inherited through the existing typed Culture owner and recorded here as
+-- Sources.kimmererTypedOwner rather than re-created as an anonymous sensor.
+--
+-- DASHI extension:
+-- SituatedObservation, its site/season/method/provenance coordinates, all
+-- non-factorability theorems, Stage-6 evidence-fibre interpretation and the
+-- ObserveInteractCycle below are repository-native formal constructions.  No
+-- cited source is credited with these Agda theorems or with an empirical LES
+-- dynamics result.
 ------------------------------------------------------------------------
 
 data Site : Set where
@@ -50,7 +62,6 @@ record SituatedObservation : Set where
 
 open SituatedObservation public
 
--- A deliberately lossy public surface: it keeps only the reading.
 anonymousReading : SituatedObservation → EcologicalReading
 anonymousReading = reading
 
@@ -156,7 +167,6 @@ anonymousReadingCannotRecoverProvenance =
       refl
       (λ ()))
 
--- Re-labelling an anonymous reading still cannot reconstruct what was erased.
 rechartingAnonymousReadingCannotRecoverSituatedSignature :
   ∀ {Recharted : Set} →
   (rechart : EcologicalReading → Recharted) →
@@ -175,11 +185,6 @@ rechartingAnonymousReadingCannotRecoverSituatedSignature rechart =
 
 ------------------------------------------------------------------------
 -- Stage-6 evidence geometry.
---
--- A situated observation is not "more true" merely because it carries more
--- coordinates.  It is a strictly richer evidence carrier for consumers that
--- require those coordinates.  Full situated evidence point-identifies the
--- matching signature; anonymous reading does not.
 ------------------------------------------------------------------------
 
 situatedCompatible :
@@ -222,10 +227,6 @@ anonymousEvidenceDoesNotPointIdentifySignature identifiable =
 
 ------------------------------------------------------------------------
 -- Observe -> interact -> observe again.
---
--- "Interact" is represented as a small, typed probe whose response becomes
--- additional evidence.  This is epistemically useful without implying that an
--- observation or probe creates authority to intervene.
 ------------------------------------------------------------------------
 
 record ObserveInteractCycle : Set where
@@ -272,8 +273,6 @@ cycleEvidence : ObserveInteractCycle → CycleEvidence
 cycleEvidence cycle =
   situatedObservationSignature (after cycle) , response cycle
 
--- A response adds an explicit evidence coordinate rather than overwriting the
--- pre-existing situated observation.
 cycleEvidenceRetainsAfterObservation :
   (cycle : ObserveInteractCycle) →
   proj₁ (cycleEvidence cycle) ≡ situatedObservationSignature (after cycle)
@@ -281,9 +280,6 @@ cycleEvidenceRetainsAfterObservation cycle = refl
 
 ------------------------------------------------------------------------
 -- Cross-pollination with the full LES planning carrier.
---
--- The observation principle supplies richer evidence; it does not replace the
--- history/relation/provenance/justice signature already retained by LES #637.
 ------------------------------------------------------------------------
 
 record SituatedObservationForLESPlanning : Set where
@@ -303,9 +299,6 @@ lesObservationPlanningSignature :
 lesObservationPlanningSignature state =
   situatedObservationSignature (environmentalObservation state) ,
     LES.fullPlanningSignature (planningState state)
-
--- The observation layer and planning layer remain jointly retained.  Neither
--- is definitionally substituted for the other.
 
 record ObserveInteractPlanningBoundary : Set where
   constructor observeInteractPlanningBoundary
