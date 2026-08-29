@@ -20,8 +20,8 @@ module DASHI.Physics.YangMills.BalabanBackgroundHessianMetricVariationBoundaryRo
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCMP109116SourceContinuationRound103Exact as Source
 import DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact as Carrier
 
 record MetricVariationTransport
@@ -31,18 +31,18 @@ record MetricVariationTransport
     MetricVariationValue : Set
 
     metricVariation :
-      Carrier.Source.Background (Carrier.source dataSet) →
+      Source.Background (Carrier.source dataSet) →
       MetricPerturbation → MetricVariationValue
 
     metricPerturbationToBackgroundTangent :
-      Carrier.Source.Background (Carrier.source dataSet) →
+      Source.Background (Carrier.source dataSet) →
       MetricPerturbation →
-      Carrier.Source.Tangent (Carrier.source dataSet)
+      Source.Tangent (Carrier.source dataSet)
 
     backgroundHessianReadout :
-      Carrier.Source.Background (Carrier.source dataSet) →
-      Carrier.Source.Tangent (Carrier.source dataSet) →
-      Carrier.Source.Tangent (Carrier.source dataSet) →
+      Source.Background (Carrier.source dataSet) →
+      Source.Tangent (Carrier.source dataSet) →
+      Source.Tangent (Carrier.source dataSet) →
       MetricVariationValue
 
     -- This is the genuine bridge theorem.  It is intentionally not derived
