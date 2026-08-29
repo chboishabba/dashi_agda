@@ -26,14 +26,20 @@ for file in "${FILES[@]}"; do
   fi
 done
 
+grep -q 'exhaustiveNamedThirtyCandidateAuditNowExistsIsTrue' DASHI/Foundations/Wette1969Rule93ImplicationFamilyExact.agda
 grep -q 'allThirtyPrintedCandidatesHaveExplicitConstructorsIsTrue' DASHI/Foundations/Wette1969Rule93CompleteCandidateAuditExact.agda
 grep -q 'allThirtyPrintedPremiseCountsRecordedIsTrue' DASHI/Foundations/Wette1969Rule93CompleteCandidateAuditExact.agda
+grep -q 'allThirtyCandidatesHaveSourceRoleClassificationIsTrue' DASHI/Foundations/Wette1969Rule93CompleteCandidateAuditExact.agda
 grep -q 'rule939IsUniqueExplicitDirectImplicationBuilderInThisClassificationIsTrue' DASHI/Foundations/Wette1969Rule93CompleteCandidateAuditExact.agda
 grep -q 'non939CandidatesAreRejectedWithoutUnificationIsFalse' DASHI/Foundations/Wette1969Rule93CompleteCandidateAuditExact.agda
 
 grep -q 'rule939BodyTranscribedFromPrintedP145IsTrue' DASHI/Foundations/Wette1969Rule939ImplicationIntroductionExact.agda
 grep -q 'rule9323BodyTranscribedFromPrintedP145IsTrue' DASHI/Foundations/Wette1969Rule9323InductionExact.agda
 grep -q 'rule9323AutomaticallyProvesArbitraryPredecessorInductionIsFalse' DASHI/Foundations/Wette1969Rule9323InductionExact.agda
+
+grep -q 'p145PrintsTheComplete931Through9330SurfaceIsTrue' DASHI/Foundations/Wette1969Rule915MajorPDFSourceAuditExact.agda
+grep -q 'p158ErratumIdentifiesNewPremise18TerminalRuleIsFalse' DASHI/Foundations/Wette1969Rule915MajorPDFSourceAuditExact.agda
+grep -q 'implicationProducingRulesMustBeSoughtOnP145NotInventedFromP158ErratumIsTrue' DASHI/Foundations/Wette1969Rule915MajorPDFSourceAuditExact.agda
 
 grep -q 'p145OuterConsequentRecoveredAsTwoNestedImplicationsIsTrue' DASHI/Foundations/Wette1969Rule915Premise18ImplicationSpineExact.agda
 grep -q 'p145SpineRecoveryByItselfProvesCoreLeafIsFalse' DASHI/Foundations/Wette1969Rule915Premise18ImplicationSpineExact.agda
