@@ -9,6 +9,8 @@ import DASHI.Environment.LESFluidPhysicsCouplingExact as Fluid
 import DASHI.Environment.LESBioelectricGaugeChemistryExact as Bioelectric
 import DASHI.Environment.LESEnvironmentSIQuantityBridgeExact as EnvironmentSI
 import DASHI.Physics.Units.SI as SI
+import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact as EM
+import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact as PNP
 
 ------------------------------------------------------------------------
 -- LES PHYSICS -> DOMAIN BIDI ASSEMBLY
@@ -57,11 +59,24 @@ siQuantityArchitectureOwner = "DASHI.Physics.Units.SI; BIPM DOI 10.59161/AUEZ129
 environmentSIBridgeOwner : String
 environmentSIBridgeOwner = "DASHI.Environment.LESEnvironmentSIQuantityBridgeExact"
 
+u1Owner : String
+u1Owner = "DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact"
+
+pnpOwner : String
+pnpOwner =
+  "DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact; DOI 10.3390/electrochem2020014"
+
 siVoltageDimension : SI.Dimension
 siVoltageDimension = SI.Voltage
 
 environmentWaterDimension : SI.Dimension
 environmentWaterDimension = EnvironmentSI.dimension EnvironmentSI.waterLitresSI
+
+u1BoundaryImported : EM.U1ElectromagneticBoundary
+u1BoundaryImported = EM.canonicalU1ElectromagneticBoundary
+
+pnpBoundaryImported : PNP.PNPElectrodiffusionBoundary
+pnpBoundaryImported = PNP.canonicalPNPElectrodiffusionBoundary
 
 record LESPhysicsCrossPollinationCutset : Set where
   constructor lesPhysicsCrossPollinationCutset
@@ -71,14 +86,17 @@ record LESPhysicsCrossPollinationCutset : Set where
     reactionTransportWeldTyped : Bool
     bioelectricChemistryLaneReferenced : Bool
     suNGaugeLaneReferencedWithBoundary : Bool
-    electrochemicalFieldSocketTyped : Bool
     canonicalSIUnitsOwnerPresent : Bool
     environmentalPhysicalUnitsWeldedToSI : Bool
+    independentU1ApplicationOwnerPresent : Bool
+    pnpElectrodiffusionOwnerPresent : Bool
+    bioelectricPNPWeldTyped : Bool
 
     applicationFluidReductionStillNeedsDomainReceipt : Bool
-    quantitativeElectromagneticU1OwnerStillNeeded : Bool
-    electrodiffusionMembraneMechanismStillNeeded : Bool
+    applicationMaxwellConstitutiveReceiptsStillNeeded : Bool
+    applicationPNPParametersAndBoundaryDataStillNeeded : Bool
     plantFluidPhysiologyWeldStillNeeded : Bool
+    fungalSoilIonExchangeWeldStillNeeded : Bool
     atmosphereHydrologyConstitutiveWeldsStillNeeded : Bool
     stage7ValidationStillNeeded : Bool
 
@@ -87,8 +105,8 @@ open LESPhysicsCrossPollinationCutset public
 canonicalLESPhysicsCrossPollinationCutset : LESPhysicsCrossPollinationCutset
 canonicalLESPhysicsCrossPollinationCutset =
   lesPhysicsCrossPollinationCutset
-    true true true true true true true true
-    true true true true true true
+    true true true true true true true true true true
+    true true true true true true true
 
 record LESPhysicsCrossPollinationBoundary : Set where
   constructor lesPhysicsCrossPollinationBoundary
@@ -103,7 +121,15 @@ record LESPhysicsCrossPollinationBoundary : Set where
     reductionReceiptStillNeedsRegimeValidationIsTrue : reductionReceiptStillNeedsRegimeValidation ≡ true
     siDimensionTypingReplacesConstitutivePhysics : Bool
     siDimensionTypingReplacesConstitutivePhysicsIsFalse : siDimensionTypingReplacesConstitutivePhysics ≡ false
+    genericPNPReceiptIsUniversalPlantFungalNeuralModel : Bool
+    genericPNPReceiptIsUniversalPlantFungalNeuralModelIsFalse : genericPNPReceiptIsUniversalPlantFungalNeuralModel ≡ false
 
 canonicalLESPhysicsCrossPollinationBoundary : LESPhysicsCrossPollinationBoundary
 canonicalLESPhysicsCrossPollinationBoundary =
-  lesPhysicsCrossPollinationBoundary false refl false refl true refl true refl false refl
+  lesPhysicsCrossPollinationBoundary
+    false refl
+    false refl
+    true refl
+    true refl
+    false refl
+    false refl
