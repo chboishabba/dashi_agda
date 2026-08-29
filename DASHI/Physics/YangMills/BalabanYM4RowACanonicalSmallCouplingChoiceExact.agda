@@ -25,6 +25,7 @@ open import Data.Rational.Base as ℚ using
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Nullary.Decidable using (toWitness)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT4PositiveDenominatorQuotientEndpointsExact as Quot
@@ -65,8 +66,8 @@ sourceSlopePlusOnePositive dataSet =
   in
   ℚP.≤-<-trans slopeNN
     (subst
-      (λ right → sourceSlope dataSet < right)
-      (ℚRing.solve-∀ (sourceSlope dataSet))
+      (λ left → left < sourceSlope dataSet + 1ℚ)
+      (ℚP.+-identityʳ (sourceSlope dataSet))
       (ℚP.+-monoʳ-< (sourceSlope dataSet) onePositive))
 
 canonicalDenominatorPositive :
@@ -118,7 +119,6 @@ sourceSlopeStrictlyBelowDenominator :
 sourceSlopeStrictlyBelowDenominator dataSet =
   let
     S = sourceSlope dataSet
-    SNN = sourceSlopeNonnegative dataSet
 
     first : S < S + 1ℚ
     first =
@@ -131,18 +131,25 @@ sourceSlopeStrictlyBelowDenominator dataSet =
 
     tailPositive = sourceSlopePlusOnePositive dataSet
 
+    oneBelowTwo : 1ℚ < Cubic.twoℚ
+    oneBelowTwo = toWitness {a? = 1ℚ ℚP.<? Cubic.twoℚ} _
+
+    multiplied :
+      (S + 1ℚ) * 1ℚ < (S + 1ℚ) * Cubic.twoℚ
+    multiplied =
+      let instance tailPos : Positive (S + 1ℚ); tailPos = ℚ.positive tailPositive
+      in ℚP.*-monoʳ-<-pos (S + 1ℚ) oneBelowTwo
+
     tailBelowTwiceTail :
       S + 1ℚ < Cubic.twoℚ * (S + 1ℚ)
     tailBelowTwiceTail =
-      let
-        oneBelowTwo : 1ℚ < Cubic.twoℚ
-        oneBelowTwo = ℚP.<-respˡ-≡ (ℚP.*-identityˡ 1ℚ) (ℚP.positive⁻¹ 1ℚ)
-      in
-      let instance tailPos : Positive (S + 1ℚ); tailPos = ℚ.positive tailPositive
-      in subst
+      subst
         (λ left → left < Cubic.twoℚ * (S + 1ℚ))
-        (ℚP.*-identityˡ (S + 1ℚ))
-        (ℚP.*-monoˡ-<-pos (S + 1ℚ) oneBelowTwo)
+        (ℚP.*-identityʳ (S + 1ℚ))
+        (subst
+          (λ right → (S + 1ℚ) * 1ℚ < right)
+          (ℚP.*-comm (S + 1ℚ) Cubic.twoℚ)
+          multiplied)
   in
   ℚP.<-trans first tailBelowTwiceTail
 
