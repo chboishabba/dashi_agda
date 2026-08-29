@@ -1,0 +1,4 @@
+module DASHI.Physics.Electromagnetism.Everything where
+
+import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact
+import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact
