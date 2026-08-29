@@ -1,0 +1,16 @@
+{
+  "schema": "dashi.relation-representation.external-study-receipt.v1",
+  "status": "template",
+  "study_key": "rise-2510.09790",
+  "source": {
+    "authors": "Michael Freenor; Lauren Alvarez",
+    "title": "Steering Embedding Models with Geometric Rotation: Mapping Semantic Relationships Across Languages and Models",
+    "identifier": "DOI 10.48550/arXiv.2510.09790"
+  },
+  "model_or_system_identity": "",
+  "model_revision_or_weight_hash": "",
+  "code_revision": "",
+  "environment_digest": "",
+  "payloads": [],
+  "notes": "Template only. It is intentionally incomplete and is not an empirical receipt, reproduction, semantic realization, or Stage-6/7 inference result."
+}
