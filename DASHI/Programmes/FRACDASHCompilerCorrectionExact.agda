@@ -38,13 +38,13 @@ finiteTraceCommutes :
   compile compiler (iterate n sourceStep state) ≡
   iterate n targetStep (compile compiler state)
 finiteTraceCommutes compiler zero state = refl
-finiteTraceCommutes compiler (suc n) state =
+finiteTraceCommutes {targetStep = targetStep} compiler (suc n) state =
   trans
     (oneStepCommutes compiler (iterate n _ state))
-    (cong _ (finiteTraceCommutes compiler n state))
+    (cong targetStep (finiteTraceCommutes compiler n state))
 
 ------------------------------------------------------------------------
--- Decoder/abstraction correctness composes with the finite simulation.
+-- Decoder/source-readout correctness composes with finite simulation.
 ------------------------------------------------------------------------
 
 record ObservableCompiler
@@ -55,10 +55,10 @@ record ObservableCompiler
   field
     stepCompiler : OneStepCompiler Source Target sourceStep targetStep
     decode : Target → Observation
-    abstract : Source → Observation
+    sourceReadout : Source → Observation
     readoutCommutes :
       (state : Source) →
-      decode (compile stepCompiler state) ≡ abstract state
+      decode (compile stepCompiler state) ≡ sourceReadout state
 
 open ObservableCompiler public
 
@@ -73,12 +73,12 @@ finiteTraceReadoutCorrect :
     (iterate n targetStep
       (compile (stepCompiler compiler) state))
   ≡
-  abstract compiler (iterate n sourceStep state)
-finiteTraceReadoutCorrect compiler n state =
+  sourceReadout compiler (iterate n sourceStep state)
+finiteTraceReadoutCorrect {sourceStep = sourceStep} compiler n state =
   trans
     (cong (decode compiler)
       (sym (finiteTraceCommutes (stepCompiler compiler) n state)))
-    (readoutCommutes compiler (iterate n _ state))
+    (readoutCommutes compiler (iterate n sourceStep state))
 
 record FRACDASHCompilerCorrectionBoundary : Set where
   constructor fracdashCompilerCorrectionBoundary
