@@ -1,0 +1,24 @@
+module DASHI.Governance.SafeJustConsumerAdequacyResidualRegression where
+
+open import DASHI.Core.Prelude
+import DASHI.Governance.SafeJustConsumerAdequacyResidualBridgeExact as Bridge
+import DASHI.Governance.SafeJustQualifiedClaimPromotionExact as Promotion
+import DASHI.Governance.SafeJustEpistemicResidualLedgerExact as Residual
+import DASHI.Governance.SafeJustForecastConsumerAdequacyExact as Adequacy
+import DASHI.Governance.Fanning2022ForecastAuthorityExact as Forecast
+
+forecastConsumerReceipt :
+  Adequacy.AdequateFor Forecast.canonicalProjectionReceipt Adequacy.forecastConsumer
+forecastConsumerReceipt = Bridge.forecastReceiptAdequateForForecastConsumer
+
+projectionResidualReceipt :
+  Residual.Carries Residual.kallisSynthesisStage Residual.projectionIsNotObservation
+projectionResidualReceipt = Bridge.projectionResidualSurvivesIntoSynthesis
+
+qualifiedPromotionReceipt : Promotion.QualifiedSynthesisPromotion
+qualifiedPromotionReceipt = Bridge.qualifiedPromotionRetainsResiduals
+
+causalPromotionStillBlocked :
+  Adequacy.AdequateFor
+    Forecast.canonicalProjectionReceipt Adequacy.causalMechanismConsumer → ⊥
+causalPromotionStillBlocked = Bridge.forecastReceiptNotCausalAuthority
