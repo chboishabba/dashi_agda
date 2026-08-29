@@ -1,26 +1,23 @@
 module DASHI.Environment.LESPhysicsDomainCrossPollinationExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 
 import DASHI.Core.RobustExperimentInferenceFrontierExact as Robust
 import DASHI.Environment.LESDomainBasisBidiFrontierExact as Basis
 import DASHI.Environment.LESFluidPhysicsCouplingExact as Fluid
 import DASHI.Environment.LESBioelectricGaugeChemistryExact as Bioelectric
+import DASHI.Environment.LESEnvironmentSIQuantityBridgeExact as EnvironmentSI
+import DASHI.Physics.SIQuantitiesExact as SI
 
 ------------------------------------------------------------------------
 -- LES PHYSICS -> DOMAIN BIDI ASSEMBLY
 --
--- Recent NS/YM proof PRs repeatedly gain leverage by preferring same-object /
--- source-identification adapters over duplicate estimates.  This LES owner
--- applies the same discipline at the application boundary:
---
---   existing physical theorem/geometry owner
---            + literal application reduction / identification receipt
---            + domain validation receipt
---            -> application mechanism socket
---
--- No theorem here claims that a physical proof lane automatically supplies a
--- hydrology, atmosphere, chemistry, cell or neural model.
+-- Existing physical theorem/geometry owner
+--      + literal application reduction / identification receipt
+--      + typed SI quantity surface
+--      + domain validation receipt
+--      -> application mechanism socket.
 ------------------------------------------------------------------------
 
 data PhysicsReuseLane : Set where
@@ -37,21 +34,13 @@ record PhysicsToDomainWeld : Set where
     physicsOwner : String
     domainOwner : String
     sameCarrierOrReductionReference : String
+    siQuantityReference : String
     constitutiveReference : String
     boundaryGeometryReference : String
     scaleRegimeReference : String
     validationReference : String
 
 open PhysicsToDomainWeld public
-
-------------------------------------------------------------------------
--- Backward target from Stage 7.
---
--- The physical-domain weld is useful only when it can populate a real domain
--- state/evolution/observation surface.  We therefore keep the existing generic
--- DomainMechanismSocket as the exact downstream target rather than inventing a
--- second inference architecture here.
-------------------------------------------------------------------------
 
 record MechanisticDomainRealization : Set₁ where
   constructor mechanisticDomainRealization
@@ -68,9 +57,21 @@ open MechanisticDomainRealization public
 stage7TargetObligations : List Robust.RobustnessObligation
 stage7TargetObligations = Basis.stage7Obligations
 
-------------------------------------------------------------------------
--- Current shortest architecture cut.
-------------------------------------------------------------------------
+siQuantityArchitectureOwner : String
+siQuantityArchitectureOwner =
+  "DASHI.Physics.SIQuantitiesExact; BIPM DOI 10.59161/AUEZ1291"
+
+environmentSIBridgeOwner : String
+environmentSIBridgeOwner =
+  "DASHI.Environment.LESEnvironmentSIQuantityBridgeExact"
+
+-- Imports above are intentional authority welds, not documentation-only labels.
+siVoltageDimension : SI.Dimension
+siVoltageDimension = SI.voltageDimension
+
+environmentWaterDimension : SI.Dimension
+environmentWaterDimension =
+  EnvironmentSI.dimension EnvironmentSI.waterLitresSI
 
 record LESPhysicsCrossPollinationCutset : Set where
   constructor lesPhysicsCrossPollinationCutset
@@ -81,10 +82,11 @@ record LESPhysicsCrossPollinationCutset : Set where
     bioelectricChemistryLaneReferenced : Bool
     suNGaugeLaneReferencedWithBoundary : Bool
     electrochemicalFieldSocketTyped : Bool
+    canonicalSIDimensionOwnerPresent : Bool
+    environmentalPhysicalUnitsWeldedToSI : Bool
 
     applicationFluidReductionStillNeedsDomainReceipt : Bool
     quantitativeElectromagneticU1OwnerStillNeeded : Bool
-    dimensionedElectricalQuantityOwnerStillNeeded : Bool
     electrodiffusionMembraneMechanismStillNeeded : Bool
     plantFluidPhysiologyWeldStillNeeded : Bool
     atmosphereHydrologyConstitutiveWeldsStillNeeded : Bool
@@ -95,8 +97,8 @@ open LESPhysicsCrossPollinationCutset public
 canonicalLESPhysicsCrossPollinationCutset : LESPhysicsCrossPollinationCutset
 canonicalLESPhysicsCrossPollinationCutset =
   lesPhysicsCrossPollinationCutset
+    true true true true true true true true
     true true true true true true
-    true true true true true true true
 
 record LESPhysicsCrossPollinationBoundary : Set where
   constructor lesPhysicsCrossPollinationBoundary
@@ -117,6 +119,10 @@ record LESPhysicsCrossPollinationBoundary : Set where
     reductionReceiptStillNeedsRegimeValidationIsTrue :
       reductionReceiptStillNeedsRegimeValidation ≡ true
 
+    siDimensionTypingReplacesConstitutivePhysics : Bool
+    siDimensionTypingReplacesConstitutivePhysicsIsFalse :
+      siDimensionTypingReplacesConstitutivePhysics ≡ false
+
 canonicalLESPhysicsCrossPollinationBoundary : LESPhysicsCrossPollinationBoundary
 canonicalLESPhysicsCrossPollinationBoundary =
   lesPhysicsCrossPollinationBoundary
@@ -124,3 +130,4 @@ canonicalLESPhysicsCrossPollinationBoundary =
     false refl
     true refl
     true refl
+    false refl
