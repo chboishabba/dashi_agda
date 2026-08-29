@@ -21,10 +21,9 @@ import DASHI.Physics.Foundations.PhysicalTheoryExperimentDiscriminationExact as 
 --   the existing joint microscopic/effective-action carrier, the continuum GR
 --   closure, and the literal constructive-QFT carrier.
 --
--- The point of this file is NOT to assert that the current kernel already
--- supplies these receipts.  It makes the missing same-candidate mathematics
--- literal, and proves that once those receipts are inhabited they feed the
--- physical-promotion gate without an additional semantic jump.
+-- No physical recovery theorem is asserted here.  The module makes the exact
+-- same-candidate receipts literal and proves that their conjunction feeds the
+-- physical-promotion consumer without another semantic jump.
 ------------------------------------------------------------------------
 
 record UnifiedCandidate : Set₂ where
@@ -36,39 +35,68 @@ record UnifiedCandidate : Set₂ where
     Measurement : Set
     SharedStressEnergy : Set
 
-    -- The same microscopic candidate is interpreted by the already-existing
-    -- joint geometry/matter producer.
     microscopicState : Candidate → Effective.JointMicroscopicState
+    coarseGrain : Candidate → Regime → Candidate
 
-    -- Literal GR target already owned by the repository.
+    -- Literal GR target already owned by the repository, together with an
+    -- actual recovery operation from the SAME microscopic state.
     grTarget : Candidate → GR.EinsteinContinuumClosure
+    recoverGR : Effective.JointMicroscopicState → GR.EinsteinContinuumClosure
 
-    -- Literal constructive-QFT target already owned by the repository.
+    -- Literal constructive-QFT target already owned by the repository, again
+    -- recovered from the SAME microscopic state.
     qftCarriers : QFT.LiteralYangMillsCarriers
     qftSemantics : QFT.LiteralYangMillsSemantics qftCarriers
     qftTarget : Candidate →
       QFT.LiteralYangMillsConstruction qftCarriers qftSemantics
+    recoverQFT : Effective.JointMicroscopicState →
+      QFT.LiteralYangMillsConstruction qftCarriers qftSemantics
 
-    -- UV/IR names are not used as proofs.  Applications declare the actual
-    -- regimes on which the recovery theorems hold.
+    -- UV/IR labels do not prove a limit.  Applications declare the regimes.
     grRegime : Regime → Set
     qftRegime : Regime → Set
 
-    -- Both recovered sectors must map their stress/source object into ONE
-    -- shared carrier before equality can even be asked.
-    grStressEnergy : Candidate → SharedStressEnergy
-    qftStressEnergy : Candidate → SharedStressEnergy
+    -- Thin explicit convention transports into one common stress/source
+    -- carrier.  The weld below compares the actual existing target objects.
+    grStressToShared :
+      ∀ candidate →
+      FCG.ContinuumGeometry.Tensor2
+        (FCG.ContinuumLorentzClosure.geometry
+          (GR.EinsteinContinuumClosure.lorentzContinuum
+            (grTarget candidate))) →
+      SharedStressEnergy
 
-    -- The source identifications prevent an arbitrary common carrier from
-    -- being mistaken for the actual Einstein source or QFT stress tensor.
-    grStressRepresentsRecoveredEinsteinSource : Candidate → Set
-    qftStressRepresentsRecoveredQFTStressTensor : Candidate → Set
+    qftStressToShared : QFT.StressTensor qftCarriers → SharedStressEnergy
+
+    BackreactionConsistent : Candidate → Regime → Set
+    CorrectionsControlled : Candidate → Regime → Set
 
     unifiedPredicts : Candidate → Observable → Set
     establishedGRQFTPredicts : Observable → Set
     measurementTests : Measurement → Observable → Set
 
 open UnifiedCandidate public
+
+------------------------------------------------------------------------
+-- Helpers exposing the literal source objects consumed by the weld.
+------------------------------------------------------------------------
+
+actualGRStressEnergy :
+  ∀ (U : UnifiedCandidate) (candidate : Candidate U) →
+  FCG.ContinuumGeometry.Tensor2
+    (FCG.ContinuumLorentzClosure.geometry
+      (GR.EinsteinContinuumClosure.lorentzContinuum
+        (grTarget U candidate)))
+actualGRStressEnergy U candidate =
+  GR.EinsteinTensorData.StressEnergy
+    (GR.EinsteinContinuumClosure.tensors (grTarget U candidate))
+
+actualQFTStressTensor :
+  ∀ (U : UnifiedCandidate) (candidate : Candidate U) →
+  QFT.CompactSimpleGroup (qftCarriers U) →
+  QFT.StressTensor (qftCarriers U)
+actualQFTStressTensor U candidate group =
+  QFT.stressTensor (qftTarget U candidate) group
 
 ------------------------------------------------------------------------
 -- Literal recovery receipts.
@@ -99,10 +127,14 @@ record GRRecoveryReceipt (U : UnifiedCandidate) : Set₁ where
     correctionBoundProved :
       Geometry.correctionBoundProved geometryAdapter ≡ true
 
-    -- The produced object is the repository's literal continuum Einstein
-    -- closure, not merely a similarly named metric model.
-    sameGRTarget : ∀ candidate → Set
-    sameGRTargetProved : ∀ candidate → sameGRTarget candidate
+    -- The recovery operation must commute with the candidate interpretation.
+    recoveryCommutes : ∀ candidate →
+      recoverGR U (microscopicState U candidate) ≡ grTarget U candidate
+
+    recoveryAfterCoarseGrainingCommutes :
+      ∀ candidate regime → grRegime U regime →
+      recoverGR U (microscopicState U (coarseGrain U candidate regime))
+        ≡ grTarget U (coarseGrain U candidate regime)
 
 open GRRecoveryReceipt public
 
@@ -129,10 +161,13 @@ record QFTRecoveryReceipt (U : UnifiedCandidate) : Set₁ where
     continuumLimitProved :
       Quantum.continuumLimitProved quantumAdapter ≡ true
 
-    -- Again, the recovery theorem must land in the same literal QFT object
-    -- carried by U, rather than in a merely analogous finite gauge system.
-    sameQFTTarget : ∀ candidate → Set
-    sameQFTTargetProved : ∀ candidate → sameQFTTarget candidate
+    recoveryCommutes : ∀ candidate →
+      recoverQFT U (microscopicState U candidate) ≡ qftTarget U candidate
+
+    recoveryAfterCoarseGrainingCommutes :
+      ∀ candidate regime → qftRegime U regime →
+      recoverQFT U (microscopicState U (coarseGrain U candidate regime))
+        ≡ qftTarget U (coarseGrain U candidate regime)
 
 open QFTRecoveryReceipt public
 
@@ -142,38 +177,35 @@ open QFTRecoveryReceipt public
 
 record SameStressEnergyWeld (U : UnifiedCandidate) : Set₁ where
   field
-    grSourceIdentification :
-      ∀ candidate → grStressRepresentsRecoveredEinsteinSource U candidate
-    qftStressIdentification :
-      ∀ candidate → qftStressRepresentsRecoveredQFTStressTensor U candidate
-
-    -- Same candidate + same declared overlap regime + same shared stress/source
-    -- carrier.  This is the literal missing seam.
+    -- The actual StressEnergy field from Bianchi/Lovelock and the actual
+    -- stressTensor field from the literal QFT construction must agree after
+    -- explicit convention transport, on the same candidate and overlap regime.
     sameStressEnergyOnOverlap :
-      ∀ candidate regime →
+      ∀ candidate regime group →
       grRegime U regime →
       qftRegime U regime →
-      grStressEnergy U candidate ≡ qftStressEnergy U candidate
+      grStressToShared U (coarseGrain U candidate regime)
+        (actualGRStressEnergy U (coarseGrain U candidate regime))
+      ≡
+      qftStressToShared U
+        (actualQFTStressTensor U (coarseGrain U candidate regime) group)
 
 open SameStressEnergyWeld public
 
 record CommonRegimeRecovery (U : UnifiedCandidate) : Set₁ where
   field
-    grRegimeInhabited : Set
-    qftRegimeInhabited : Set
-    overlapRegimeInhabited : Set
+    overlapRegime : Regime U
+    overlapIsGR : grRegime U overlapRegime
+    overlapIsQFT : qftRegime U overlapRegime
 
-    grRegimeWitness : grRegimeInhabited
-    qftRegimeWitness : qftRegimeInhabited
-    overlapRegimeWitness : overlapRegimeInhabited
+    -- Both sectors are evaluated after exactly the same coarse-graining map.
+    backreactionConsistency : ∀ candidate →
+      BackreactionConsistent U
+        (coarseGrain U candidate overlapRegime) overlapRegime
 
-    commonCoarseGrainingProved : Set
-    backreactionConsistencyProved : Set
-    correctionsControlled : Set
-
-    commonCoarseGrainingReceipt : commonCoarseGrainingProved
-    backreactionConsistencyReceipt : backreactionConsistencyProved
-    correctionsControlledReceipt : correctionsControlled
+    correctionControl : ∀ candidate →
+      CorrectionsControlled U
+        (coarseGrain U candidate overlapRegime) overlapRegime
 
 open CommonRegimeRecovery public
 
@@ -245,11 +277,6 @@ sameCandidateRecoveryImpliesPhysicalPromotion recovery =
 
 ------------------------------------------------------------------------
 -- Fail-closed current-state theorem.
---
--- The existing effective-action receipt still records every bridge bit as
--- false.  This theorem deliberately does not manufacture a recovery witness
--- from it.  The next mathematical work is to replace those false bits by
--- theorem-bearing receipts on this exact interface.
 ------------------------------------------------------------------------
 
 currentGeometryLimitStillOpen :
