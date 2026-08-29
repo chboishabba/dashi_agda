@@ -3,33 +3,35 @@ module DASHI.Physics.Closure.NSTriadKNMixedHelicitySpacetimeFrontierRound228Exac
 ------------------------------------------------------------------------
 -- ROUND228 / FINAL ANALYTIC PACKAGE-A LEAF
 --
--- R223--R227 prove, on the complete physical quadratic-kernel fibre,
+-- R223--R227 prove on the physical quadratic-kernel carrier
 --
 --   Q_companion(N,t)
 --     = 16 * sum_k || sum_{p+q=k} u_p+(t) x u_q-(t) ||^2.
 --
--- Therefore the remaining arbitrary-data theorem is exactly a cutoff-uniform
--- spacetime estimate for the mixed-helicity convolution mass.
+-- The output sum below is the literal `modes` list of the finite Galerkin
+-- system at cutoff N.  No arbitrary support list is allowed in the research
+-- target.
 --
--- IMPORTANT AUTHORITY CORRECTION TO ROUND222:
--- The time-integration operator is a MODULE PARAMETER here.  The budget record
+-- AUTHORITY CORRECTION TO ROUND222:
+-- The time-integration operator is a MODULE PARAMETER.  The budget record
 -- cannot choose its own integration functional.  A future continuous-time PDE
 -- receipt must instantiate this module with an independently owned physical
--- integration model.  No zero-functional loophole can by itself promote A.
+-- integration model.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; _≤_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact as R225
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityCompanionMassRound226Exact as R226
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityGlobalCompanionRound227Exact as R227
 
 F : C3.RealField _
@@ -48,45 +50,59 @@ module PhysicalTimeIntegral
       L : Helical.PeriodicHelicalProjectorLaws F E I S
       H : R142.HelicalHalfCalibration S
 
-      velocity : Time → Z3.FourierMode → C3.Complex3 F
-      velocityTransverse :
-        (t : Time) (mode : Z3.FourierMode) →
-        Helical.Transverse E mode (velocity t mode)
+      -- Literal finite Galerkin system at every cutoff and time.
+      systemAt : Nat → Time → Audit.FiniteComplex3GalerkinSystem F E I
+      systemCutoffAgreement :
+        (cutoff : Nat) (t : Time) →
+        Audit.cutoff (systemAt cutoff t) ≡ cutoff
 
-      -- Exact finite Fourier output support used at each Galerkin cutoff.
-      outputs : Nat → List Z3.FourierMode
+      velocityTransverse :
+        (cutoff : Nat) (t : Time) (mode : Z3.FourierMode) →
+        Helical.Transverse E mode (Audit.velocity (systemAt cutoff t) mode)
 
   open PhysicalMixedHelicityTrajectory public
 
   helicityDataAt :
-    (T : PhysicalMixedHelicityTrajectory) → (t : Time) →
+    (T : PhysicalMixedHelicityTrajectory) →
+    (cutoff : Nat) (t : Time) →
     R225.PhysicalFixedOutputHelicityData
-      (E T) (I T) (S T) (L T) (H T) (velocity T t)
-  helicityDataAt T t =
-    R225.physical-fixed-output-helicity-data (velocityTransverse T t)
+      (E T) (I T) (S T) (L T) (H T)
+      (Audit.velocity (systemAt T cutoff t))
+  helicityDataAt T cutoff t =
+    R225.physical-fixed-output-helicity-data
+      (velocityTransverse T cutoff t)
 
   mixedHelicityMass :
     (T : PhysicalMixedHelicityTrajectory) → Nat → Time → ℚ
   mixedHelicityMass T cutoff t =
     R227.globalMixedHelicityMass
       {E = E T} {I = I T}
-      (S T) (velocity T t) cutoff (outputs T cutoff)
+      (S T)
+      (Audit.velocity (systemAt T cutoff t))
+      cutoff
+      (Audit.modes (systemAt T cutoff t))
 
   companionMass :
     (T : PhysicalMixedHelicityTrajectory) → Nat → Time → ℚ
   companionMass T cutoff t =
     R227.globalCompanionMass
-      (E T) (S T) (velocity T t) cutoff (outputs T cutoff)
+      (E T) (S T)
+      (Audit.velocity (systemAt T cutoff t))
+      cutoff
+      (Audit.modes (systemAt T cutoff t))
 
   companionMassPointwiseIsSixteenMixed :
     (T : PhysicalMixedHelicityTrajectory) →
     (cutoff : Nat) (t : Time) →
     companionMass T cutoff t
-    ≡ R227.R226.sixteen * mixedHelicityMass T cutoff t
+    ≡ R226.sixteen * mixedHelicityMass T cutoff t
   companionMassPointwiseIsSixteenMixed T cutoff t =
     R227.globalCompanionMassIsSixteenMixedHelicityMass
-      (E T) (I T) (S T) (L T) (H T) (velocity T t)
-      (helicityDataAt T t) cutoff (outputs T cutoff)
+      (E T) (I T) (S T) (L T) (H T)
+      (Audit.velocity (systemAt T cutoff t))
+      (helicityDataAt T cutoff t)
+      cutoff
+      (Audit.modes (systemAt T cutoff t))
 
   record PhysicalMixedHelicitySpacetimeBudget
       (T : PhysicalMixedHelicityTrajectory) : Set where
@@ -110,6 +126,9 @@ round228FixedOutputMixedHelicityCollapseClosed = true
 
 round228GlobalCompanionMixedHelicityIdentityClosed : Bool
 round228GlobalCompanionMixedHelicityIdentityClosed = true
+
+round228UsesLiteralGalerkinOutputModes : Bool
+round228UsesLiteralGalerkinOutputModes = true
 
 round228Round222SelfChosenIntegrationAuthorityAccepted : Bool
 round228Round222SelfChosenIntegrationAuthorityAccepted = false
@@ -140,6 +159,10 @@ round228FixedOutputMixedHelicityCollapseClosedIsTrue = refl
 round228GlobalCompanionMixedHelicityIdentityClosedIsTrue :
   round228GlobalCompanionMixedHelicityIdentityClosed ≡ true
 round228GlobalCompanionMixedHelicityIdentityClosedIsTrue = refl
+
+round228UsesLiteralGalerkinOutputModesIsTrue :
+  round228UsesLiteralGalerkinOutputModes ≡ true
+round228UsesLiteralGalerkinOutputModesIsTrue = refl
 
 round228Round222SelfChosenIntegrationAuthorityAcceptedIsFalse :
   round228Round222SelfChosenIntegrationAuthorityAccepted ≡ false
