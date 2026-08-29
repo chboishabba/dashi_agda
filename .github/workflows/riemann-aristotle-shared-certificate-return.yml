@@ -1,0 +1,21 @@
+name: Riemann Aristotle shared certificate return
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Analysis/RiemannAristotleSharedWindowCertificateExact.agda'
+      - 'DASHI/Analysis/CertifiedFiniteCarrierReindexExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleSharedCertificateReturnExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleSharedCertificateReturnRegression.agda'
+      - 'DASHI/Analysis/RiemannAristotleWindowSchurCrossProverRegression.agda'
+      - 'scripts/check_riemann_aristotle_shared_certificate_return.sh'
+      - '.github/workflows/riemann-aristotle-shared-certificate-return.yml'
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check shared-certificate return
+        run: bash scripts/check_riemann_aristotle_shared_certificate_return.sh
