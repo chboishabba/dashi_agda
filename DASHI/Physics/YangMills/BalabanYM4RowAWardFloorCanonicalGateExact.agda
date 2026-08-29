@@ -10,23 +10,19 @@ module DASHI.Physics.YangMills.BalabanYM4RowAWardFloorCanonicalGateExact where
 --                     beta_Z >= 1 / 8388608.
 --
 -- This module treats only the exact rational arithmetic of that value.  It does
--- NOT claim the remaining same-object identification with CMP109/CMP99; that
--- identification stays explicit below.
+-- NOT claim the remaining same-object identification with CMP109/CMP99.
 --
--- Combining the fixed positive floor with the existing normalized-interaction
--- mixed-Cauchy package means the canonical small-coupling cap becomes a
--- definition of the source package alone:
+-- The local normalized-interaction Cauchy package supplies C and L_local.  The
+-- full generated trajectory may additionally carry a propagated/history
+-- sensitivity L_history.  Given that one nonnegative history constant, the
+-- canonical cap is a definition:
 --
---   gamma* = b_Ward / (2 (C + L + 1)).
---
--- Thus once the literal source interaction package and the Ward-patch
--- same-object theorem are supplied, no additional positive-floor variable or
--- small-coupling search remains.
+--   gamma* = b_Ward / (2 (C + L_local + L_history + 1)).
 ------------------------------------------------------------------------
 
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _*_; _/_; _<_)
+  (ℚ; 0ℚ; _+_; _*_; _/_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Relation.Nullary.Decidable using (toWitness)
 
@@ -42,32 +38,49 @@ wardGaussianFloorPositive =
   toWitness {a? = 0ℚ ℚP.<? wardGaussianFloor} _
 
 wardCauchySourceConstants :
-  Mixed.MixedInteractionCauchyData → Cauchy.RowACauchySourceConstants
-wardCauchySourceConstants mixed = record
+  (mixed : Mixed.MixedInteractionCauchyData) →
+  (historyConstant : ℚ) →
+  0ℚ ≤ historyConstant →
+  Cauchy.RowACauchySourceConstants
+wardCauchySourceConstants mixed historyConstant historyNN = record
   { Cauchy.RowACauchySourceConstants.gaussianFloor = wardGaussianFloor
   ; Cauchy.RowACauchySourceConstants.gaussianFloorPositive =
       wardGaussianFloorPositive
   ; Cauchy.RowACauchySourceConstants.mixedInteraction = mixed
+  ; Cauchy.RowACauchySourceConstants.historyDerivativeConstant = historyConstant
+  ; Cauchy.RowACauchySourceConstants.historyDerivativeConstantNonnegative = historyNN
   }
 
-wardCanonicalGamma : Mixed.MixedInteractionCauchyData → ℚ
-wardCanonicalGamma mixed =
-  Cauchy.canonicalSourceGamma (wardCauchySourceConstants mixed)
+wardCanonicalGamma :
+  (mixed : Mixed.MixedInteractionCauchyData) →
+  (historyConstant : ℚ) →
+  0ℚ ≤ historyConstant → ℚ
+wardCanonicalGamma mixed historyConstant historyNN =
+  Cauchy.canonicalSourceGamma
+    (wardCauchySourceConstants mixed historyConstant historyNN)
 
 wardCanonicalGammaPositive :
   (mixed : Mixed.MixedInteractionCauchyData) →
-  0ℚ < wardCanonicalGamma mixed
-wardCanonicalGammaPositive mixed =
-  Cauchy.canonicalSourceGammaPositive (wardCauchySourceConstants mixed)
+  (historyConstant : ℚ) →
+  (historyNN : 0ℚ ≤ historyConstant) →
+  0ℚ < wardCanonicalGamma mixed historyConstant historyNN
+wardCanonicalGammaPositive mixed historyConstant historyNN =
+  Cauchy.canonicalSourceGammaPositive
+    (wardCauchySourceConstants mixed historyConstant historyNN)
 
 wardCanonicalGammaPaysCombinedGate :
   (mixed : Mixed.MixedInteractionCauchyData) →
-  (Cauchy.sourceInteractionConstant (wardCauchySourceConstants mixed)
-    + Cauchy.sourceDerivativeConstant (wardCauchySourceConstants mixed))
-    * wardCanonicalGamma mixed
+  (historyConstant : ℚ) →
+  (historyNN : 0ℚ ≤ historyConstant) →
+  let source = wardCauchySourceConstants mixed historyConstant historyNN
+  in
+  (Cauchy.sourceInteractionConstant source
+    + Cauchy.sourceDerivativeConstant source)
+    * wardCanonicalGamma mixed historyConstant historyNN
   < wardGaussianFloor
-wardCanonicalGammaPaysCombinedGate mixed =
-  Cauchy.canonicalSourceGammaPaysCombinedGate (wardCauchySourceConstants mixed)
+wardCanonicalGammaPaysCombinedGate mixed historyConstant historyNN =
+  Cauchy.canonicalSourceGammaPaysCombinedGate
+    (wardCauchySourceConstants mixed historyConstant historyNN)
 
 wardGaussianFloorArithmeticLevel : ProofLevel
 wardGaussianFloorArithmeticLevel = machineChecked
@@ -75,12 +88,14 @@ wardGaussianFloorArithmeticLevel = machineChecked
 wardFloorToCanonicalSmallCouplingLevel : ProofLevel
 wardFloorToCanonicalSmallCouplingLevel = machineChecked
 
--- Physical/source seam: identify the exact Gaussian contribution in the
--- literal CMP109/CMP99 constrained shell with the Ward-transverse positive patch
--- carrying the displayed lower bound, and instantiate the normalized-interaction
--- mixed-Cauchy package on the SAME generated trajectory.
+-- Physical/source seams: identify the literal Gaussian contribution with the
+-- Ward-transverse patch, instantiate the local mixed-Cauchy package, and derive
+-- the finite propagated/history response on the same generated trajectory.
 literalCMP109WardGaussianFloorIdentificationLevel : ProofLevel
 literalCMP109WardGaussianFloorIdentificationLevel = conditional
 
 literalCMP109MixedInteractionCauchyInstantiationLevel : ProofLevel
 literalCMP109MixedInteractionCauchyInstantiationLevel = conditional
+
+literalCMP109HistorySensitivityInstantiationLevel : ProofLevel
+literalCMP109HistorySensitivityInstantiationLevel = conditional
