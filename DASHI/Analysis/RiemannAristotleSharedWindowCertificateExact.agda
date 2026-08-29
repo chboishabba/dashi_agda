@@ -8,8 +8,9 @@ module DASHI.Analysis.RiemannAristotleSharedWindowCertificateExact where
 -- depend on that same certificate rather than reassembling loosely related facts.
 --
 -- This is an Agda architecture owner.  It does not claim that Lean theorem terms
--- have been transported into Agda, nor does it close Aristotle's analytic endpoint
--- comparison by itself.
+-- have been transported into Agda.  The earlier one-symbolic-endpoint-comparison
+-- cutset has now been closed in Lean; this module records the shared certificate
+-- architecture and current cross-prover state separately.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -62,7 +63,9 @@ record SharedWindowBudgetCutset : Set where
     endpointPolynomialTransportMechanical : Bool
     endpointPolynomialTransportMechanicalIsTrue : endpointPolynomialTransportMechanical ≡ true
     oneSymbolicBudgetComparisonRemains : Bool
-    oneSymbolicBudgetComparisonRemainsIsTrue : oneSymbolicBudgetComparisonRemains ≡ true
+    oneSymbolicBudgetComparisonRemainsIsFalse : oneSymbolicBudgetComparisonRemains ≡ false
+    endpointComparisonClosedInLean : Bool
+    endpointComparisonClosedInLeanIsTrue : endpointComparisonClosedInLean ≡ true
     endpointComparisonDerivedHere : Bool
     endpointComparisonDerivedHereIsFalse : endpointComparisonDerivedHere ≡ false
     leanProofTransportedIntoAgda : Bool
@@ -71,4 +74,4 @@ record SharedWindowBudgetCutset : Set where
 canonicalSharedWindowBudgetCutset : SharedWindowBudgetCutset
 canonicalSharedWindowBudgetCutset =
   shared-window-budget-cutset
-    true refl true refl true refl true refl false refl false refl
+    true refl true refl true refl false refl true refl false refl false refl
