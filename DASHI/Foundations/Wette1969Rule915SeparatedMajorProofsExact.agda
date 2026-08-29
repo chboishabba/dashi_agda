@@ -12,6 +12,7 @@ module DASHI.Foundations.Wette1969Rule915SeparatedMajorProofsExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Foundations.Wette1969Rule915PredicateProducerExact as Rule915
 import DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact as Later
 import DASHI.Foundations.Wette1969Rule915ObligationSubgraphsExact as Obligations
 import DASHI.Foundations.Wette1969Rule915GeneratedScaffoldExact as Generated
@@ -22,40 +23,51 @@ Context = Finite.DerivationContext
 
 record PredecessorInductionDischarge
     (context : Context)
+    (firstSeven : Rule915.Rule915FirstSevenParameters)
     (later : Later.Rule915LaterParameters)
     (shared : Obligations.Shared1015Evidence context
-      (Later.completeTypedTranscription
-        -- first-seven values are irrelevant to slots 10--15; the actual
-        -- coherent application supplies them at the final weld.
-        _ later)) : Set where
+      (Later.completeTypedTranscription firstSeven later)) : Set where
   constructor predecessorInductionDischarge
   field
     inductionScaffold : Generated.InductionScaffoldEvidence context later
     proof18 : Later.premise18 later Finite.∈Context context
+open PredecessorInductionDischarge public
 
--- A direct dependent record over the shared object is more useful at the final
--- weld than attempting to synthesize premise 18 generically.  Wette explicitly
--- treats the derivation as something to be attempted for the chosen R.
+record DefiniensIndependenceDischarge
+    (context : Context)
+    (firstSeven : Rule915.Rule915FirstSevenParameters)
+    (later : Later.Rule915LaterParameters)
+    (shared : Obligations.Shared1015Evidence context
+      (Later.completeTypedTranscription firstSeven later)) : Set where
+  constructor definiensIndependenceDischarge
+  field
+    independenceScaffold : Generated.IndependenceScaffoldEvidence context later
+    proof27 : Later.premise27 later Finite.∈Context context
+open DefiniensIndependenceDischarge public
 
 record SharedMajorDischarges
     (context : Context)
+    (firstSeven : Rule915.Rule915FirstSevenParameters)
     (later : Later.Rule915LaterParameters) : Set where
   constructor sharedMajorDischarges
   field
-    shared1015Witness : Set
-    predecessorInductionProof : Later.premise18 later Finite.∈Context context
-    definiensIndependenceProof : Later.premise27 later Finite.∈Context context
+    shared1015 : Obligations.Shared1015Evidence context
+      (Later.completeTypedTranscription firstSeven later)
+    induction : PredecessorInductionDischarge context firstSeven later shared1015
+    independence : DefiniensIndependenceDischarge context firstSeven later shared1015
 
 open SharedMajorDischarges public
 
 asTwoProofEvidence :
-  {context : Context} → {later : Later.Rule915LaterParameters} →
-  SharedMajorDischarges context later →
+  {context : Context} →
+  {firstSeven : Rule915.Rule915FirstSevenParameters} →
+  {later : Later.Rule915LaterParameters} →
+  (discharge : SharedMajorDischarges context firstSeven later) →
   Cutset.Rule915MajorProofEvidence context later
 asTwoProofEvidence discharge =
   Cutset.rule915MajorProofEvidence
-    (predecessorInductionProof discharge)
-    (definiensIndependenceProof discharge)
+    (proof18 (induction discharge))
+    (proof27 (independence discharge))
 
 record Wette1969Rule915SeparatedMajorProofsBoundary : Set where
   constructor wette1969Rule915SeparatedMajorProofsBoundary
@@ -63,6 +75,9 @@ record Wette1969Rule915SeparatedMajorProofsBoundary : Set where
     premise18And27RemainSeparateProofObjects : Bool
     premise18And27RemainSeparateProofObjectsIsTrue :
       premise18And27RemainSeparateProofObjects ≡ true
+    bothMajorProofsAreIndexedByOneShared1015Object : Bool
+    bothMajorProofsAreIndexedByOneShared1015ObjectIsTrue :
+      bothMajorProofsAreIndexedByOneShared1015Object ≡ true
     majorProofsAreNotManufacturedBySyntacticScaffold : Bool
     majorProofsAreNotManufacturedBySyntacticScaffoldIsTrue :
       majorProofsAreNotManufacturedBySyntacticScaffold ≡ true
@@ -73,4 +88,5 @@ record Wette1969Rule915SeparatedMajorProofsBoundary : Set where
 canonicalWette1969Rule915SeparatedMajorProofsBoundary :
   Wette1969Rule915SeparatedMajorProofsBoundary
 canonicalWette1969Rule915SeparatedMajorProofsBoundary =
-  wette1969Rule915SeparatedMajorProofsBoundary true refl true refl true refl
+  wette1969Rule915SeparatedMajorProofsBoundary
+    true refl true refl true refl true refl
