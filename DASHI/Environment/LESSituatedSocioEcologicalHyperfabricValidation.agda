@@ -12,4 +12,5 @@ import DASHI.Environment.LESDomainBasisBidiFrontierExact
 import DASHI.Environment.LESFluidPhysicsCouplingExact
 import DASHI.Environment.LESBioelectricGaugeChemistryExact
 import DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact
+import DASHI.Environment.SoilBiogeochemistryProcessNetworkExact
 import DASHI.Environment.LESPhysicsDomainCrossPollinationExact
