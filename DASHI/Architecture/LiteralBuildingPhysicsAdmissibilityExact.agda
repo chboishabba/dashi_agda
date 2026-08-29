@@ -45,7 +45,8 @@ open WholeBuildingAdmissible public
 
 oneFailedSubsystemBlocksWholeBuildingClosure :
   WholeBuildingAdmissible locallyGoodButEgressFails → ⊥
-oneFailedSubsystemBlocksWholeBuildingClosure admissible = egressPasses admissible
+oneFailedSubsystemBlocksWholeBuildingClosure admissible with egressPasses admissible
+... | ()
 
 data Opening : Set where opening : Opening
 data SafeEgress : Opening → Set where
