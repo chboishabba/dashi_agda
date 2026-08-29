@@ -6,9 +6,10 @@ module DASHI.Physics.YangMills.BalabanCMP109116ConventionTransportRound103Exact 
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 1ℝ; _*ℝ_; mulOneˡ)
+open import DASHI.Foundations.RealAnalysisAxioms using
+  (ℝ; 1ℝ; _*ℝ_; *-comm; mulOneʳ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 record CMP109116ConventionTransport : Set₁ where
@@ -23,9 +24,6 @@ record CMP109116ConventionTransport : Set₁ where
 
     backgroundToCMP109 : CMP116Configuration → CMP109Configuration
     tangentToCMP109 : CMP116Tangent → CMP109Tangent
-
-    -- All block-volume, field-rescaling and source-normalization differences
-    -- live here.  A nontrivial scalar cannot disappear by notation.
     normalizationScale : ℝ
 
     markedHessianTransportExact : ∀ configuration u v →
@@ -57,13 +55,15 @@ cmp116MarkedHessianIsTransportedCMP109 :
 cmp116MarkedHessianIsTransportedCMP109 dataSet =
   markedHessianTransportExact dataSet
 
+oneTimes : ∀ x → 1ℝ *ℝ x ≡ x
+oneTimes x =
+  trans (*-comm 1ℝ x) (mulOneʳ x)
+
 record IdentityConventionAlignment : Set₁ where
   field
     Configuration Tangent : Set
     e2 markedHessian : Configuration → Tangent → Tangent → ℝ
 
-    -- Results of the four source checks.  They remain named evidence even after
-    -- the executable maps below have collapsed to identities.
     sameBackgroundCoordinate : Set
     sameSourceTangentCoordinate : Set
     sameConstrainedProjection : Set
@@ -90,7 +90,7 @@ identityConventionAsTransport dataSet = record
       λ configuration u v →
         trans
           (markedHessianIsE2 dataSet configuration u v)
-          (sym (mulOneˡ (e2 dataSet configuration u v)))
+          (sym (oneTimes (e2 dataSet configuration u v)))
   }
 
 cmp109116ConventionTransportLevel : ProofLevel
