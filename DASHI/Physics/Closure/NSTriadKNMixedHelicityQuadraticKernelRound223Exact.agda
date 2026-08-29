@@ -14,14 +14,14 @@ module DASHI.Physics.Closure.NSTriadKNMixedHelicityQuadraticKernelRound223Exact 
 --     = 2 (uP+ x uQ- - uP- x uQ+).
 --
 -- Thus the same-helicity ++ and -- channels cancel EXACTLY at one physical
--- pair.  Round167 identifies this slot difference with i times the authoritative
+-- pair. Round167 identifies this slot difference with i times the authoritative
 -- quadratic companion kernel, so the A-facing kernel is a mixed-helicity
 -- object before any FL/HH/CC estimate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -29,8 +29,8 @@ import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
 import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact as Cross
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
-import DASHI.Physics.Closure.NSTriadKNWaleffeAmplitudeDampedNetworkTangentRound94Exact as R94
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
+import DASHI.Physics.Closure.NSTriadKNAntiParallelHelicitySlotKernelRound145Exact as R145
 import DASHI.Physics.Closure.NSTriadKNCriticalSlotQuadraticKernelRound167Exact as R167
 
 helicityTotal :
@@ -129,17 +129,6 @@ record PhysicalHelicityPair
 
 open PhysicalHelicityPair public
 
-pPlus pMinus qPlus qMinus :
-  ∀ {r} {F : C3.RealField r}
-    {E : C3.IntegerEmbedding F}
-    {I : C3.ModeInverseSquare F E}
-    {S : Helical.HelicalModeScalars F} →
-  Helical.HelicitySign → Z3.FourierMode → C3.Complex3 F → C3.Complex3 F
-pPlus {E = E} {I = I} {S = S} _ p u = Helical.helicalProjectorPlus E I S p u
-pMinus {E = E} {I = I} {S = S} _ p u = Helical.helicalProjectorMinus E I S p u
-qPlus {E = E} {I = I} {S = S} _ q u = Helical.helicalProjectorPlus E I S q u
-qMinus {E = E} {I = I} {S = S} _ q u = Helical.helicalProjectorMinus E I S q u
-
 physicalNormalizedCurlSlotDifferenceIsDoubleMixedHelicity :
   ∀ {r} {F : C3.RealField r}
     {E : C3.IntegerEmbedding F}
@@ -183,7 +172,7 @@ iQuadraticKernelIsDoubleMixedHelicity :
     (uP uQ : C3.Complex3 F)
     (P : PhysicalHelicityPair E I S L H p q uP uQ) →
   C3.complex3Scale (C3.complexI F)
-    (R167.R145.slotKernel
+    (R145.slotKernel
       (R167.normalizedDirection E S p)
       (R167.normalizedDirection E S q)
       uP uQ)
