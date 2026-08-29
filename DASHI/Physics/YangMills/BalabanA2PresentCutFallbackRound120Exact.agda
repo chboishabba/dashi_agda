@@ -19,21 +19,16 @@ module DASHI.Physics.YangMills.BalabanA2PresentCutFallbackRound120Exact where
 --   cubic telescope,
 --   -----------------------------
 --   q_marg + q_history < 1.
---
--- This file deliberately adds no new estimate; it freezes the BIDI route choice
--- and exposes the already machine-checked full-prefix consumer from the actual
--- Ward response producer.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+import Data.Nat.Base as ℕ
 open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; _<_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4WardQuarticResponseProducerAdapterExact as Producer
 import DASHI.Physics.YangMills.BalabanA2WardResponseBidiClosureRound113Exact as R113
 import DASHI.Physics.YangMills.BalabanA2SharedMarkedHistoryDerivativeRound116Exact as R116
-import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact as Shared
-import DASHI.Physics.YangMills.BalabanYM4ShootingSensitivityFromCubicDriftExact as Direct
 import DASHI.Physics.YangMills.BalabanYM4RowAAugmentedShootingGateExact as Aug
 
 presentCutTotalSensitivity :
@@ -48,7 +43,7 @@ presentCutTotalSensitivity dataSet K =
 presentCutTotalSensitivityBelowOne :
   ∀ {cutoff}
     (dataSet : Producer.WardQuarticResponseProducer cutoff)
-    K → K Data.Nat.Base.≤ cutoff →
+    K → K ℕ.≤ cutoff →
   presentCutTotalSensitivity dataSet K < 1ℚ
 presentCutTotalSensitivityBelowOne dataSet K K≤ =
   R113.totalSameHistorySensitivityPrefixBelowOne dataSet K K≤
@@ -66,16 +61,10 @@ a2PresentCutFallbackCompilerLevel = machineChecked
 a2PresentCutFullSubunitLevel : ProofLevel
 a2PresentCutFullSubunitLevel = machineChecked
 
--- Optional shortcut remains visible but is NOT used by the authoritative
--- present-cut compiler unless this literal equality is established.
 a2OptionalBetaMarkDerivativeIdentificationLevel : ProofLevel
 a2OptionalBetaMarkDerivativeIdentificationLevel =
   R116.literalCMP116BetaMarkIsGeneratedHistoryDerivativeLevel
 
--- Exact surviving physical producer: construct `WardQuarticResponseProducer`
--- from the literal generated CMP109/CMP119 trajectory and identify the actual
--- beta difference with marginal + propagated irrelevant response.  All scalar
--- summation/contraction arithmetic after that source binding is paid above.
 literalA2WardResponseProducerLevel : ProofLevel
 literalA2WardResponseProducerLevel = Producer.literalWardQuarticResponseProducerLevel
 
