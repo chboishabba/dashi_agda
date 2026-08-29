@@ -20,7 +20,7 @@ module DASHI.Physics.YangMills.BalabanA1ExplicitSmallCouplingQuarticAbsorptionRo
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_; NonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -103,8 +103,7 @@ gammaStarBelowHalf coefficient floor coefficientNN floorPositive =
     dInverse : d * reciprocal ≡ 1ℚ
     dInverse = Quotient.positiveReciprocalRightInverse d dPositive
     floorReciprocalBelowOne : floor * reciprocal ≤ 1ℚ
-    floorReciprocalBelowOne =
-      subst (λ right → floor * reciprocal ≤ right) dInverse scaledFloor
+    floorReciprocalBelowOne = subst (λ right → floor * reciprocal ≤ right) dInverse scaledFloor
     scaledHalf = Norm.scaleNonnegative Beta.half
       (ℚP.nonNegative⁻¹ Beta.half) floorReciprocalBelowOne
   in
@@ -123,8 +122,6 @@ gammaStarBelowOne coefficient floor coefficientNN floorPositive =
   ℚP.≤-trans
     (gammaStarBelowHalf coefficient floor coefficientNN floorPositive)
     (ℚP.nonNegative⁻¹ (1ℚ - Beta.half))
-  where
-    open import Data.Rational.Base using (_-_)
 
 power4BelowSelfOnUnitInterval : ∀ gamma →
   0ℚ ≤ gamma → gamma ≤ 1ℚ → Beta.power4 gamma ≤ gamma
@@ -169,11 +166,12 @@ coefficientTimesGammaStarBelowHalfFloor coefficient floor coefficientNN floorPos
       trans
         (ℚRing.solve-∀ d Beta.half floor reciprocal)
         (trans
-          (cong (Beta.half * floor *_)
-            (Quotient.positiveReciprocalRightInverse d dPositive))
+          (cong (Beta.half * floor *_) (Quotient.positiveReciprocalRightInverse d dPositive))
           (ℚP.*-identityʳ (Beta.half * floor)))
   in
-  subst (λ right → coefficient * gamma ≤ right) identifyRight scaled
+  subst
+    (λ right → coefficient * gamma ≤ right)
+    identifyRight scaled
 
 explicitQuarticAbsorption :
   ∀ coefficient floor coefficientNN floorPositive →
