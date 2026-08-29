@@ -3,14 +3,12 @@ module DASHI.Physics.Foundations.SharedEffectiveSourceRecoveryExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact as Weld
-import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as QFT
 
 ------------------------------------------------------------------------
 -- BIDI source seam.
 --
--- The previous tranche made equality of the literal GR source and literal QFT
--- stress tensor an explicit obligation.  This module factors that equality
--- through ONE effective source produced from the SAME coarse-grained candidate.
+-- The literal GR source and the TOTAL QFT stress-energy factor through ONE
+-- effective source produced from the SAME coarse-grained candidate:
 --
 --       literal GR StressEnergy
 --                |
@@ -18,22 +16,21 @@ import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Q
 --       shared effective source
 --                |
 --                v
---       literal QFT stressTensor
+--       total QFT stress-energy
+--                ^
+--                |
+--       aggregation of literal group-indexed QFT stresses
 --
--- Therefore the cross-sector weld is derived by equality transitivity once the
--- two sector-identification theorems are supplied.  The weld itself is not a
--- new independent physical assumption.
+-- Thus the cross-sector equality is algebraic after the genuinely physical
+-- factorisation and aggregation receipts are supplied.
 ------------------------------------------------------------------------
 
 record SharedEffectiveSourceTheory (U : Weld.UnifiedCandidate) : Set₁ where
   constructor sharedEffectiveSourceTheory
   field
-    -- One source functional/output at one candidate and one declared regime.
     effectiveSource :
       Weld.Candidate U → Weld.Regime U → Weld.SharedStressEnergy U
 
-    -- Optional finite/microscopic provenance is represented as a literal
-    -- commutation law, not by the name "effective action" alone.
     sourceAfterCoarseGraining :
       Weld.Candidate U → Weld.Regime U → Weld.SharedStressEnergy U
 
@@ -43,10 +40,6 @@ record SharedEffectiveSourceTheory (U : Weld.UnifiedCandidate) : Set₁ where
       ≡ effectiveSource (Weld.coarseGrain U candidate regime) regime
 
 open SharedEffectiveSourceTheory public
-
-------------------------------------------------------------------------
--- Sector factorisations through the common source.
-------------------------------------------------------------------------
 
 record GRSourceFactorisation
     {U : Weld.UnifiedCandidate}
@@ -66,21 +59,22 @@ record QFTSourceFactorisation
     {U : Weld.UnifiedCandidate}
     (source : SharedEffectiveSourceTheory U) : Set₁ where
   field
-    qftSourceFactorises :
-      ∀ candidate regime group →
+    -- Literal group-indexed QFT stresses genuinely compose to the declared
+    -- total stress-energy; the aggregation rule is application-owned.
+    qftStressAggregates : ∀ candidate →
+      Weld.QFTStressAggregation U candidate
+        (Weld.actualQFTSectorStressShared U candidate)
+        (Weld.qftTotalStressShared U candidate)
+
+    -- The common effective source is then identified with the TOTAL QFT source.
+    qftTotalSourceFactorises :
+      ∀ candidate regime →
       Weld.qftRegime U regime →
       effectiveSource source (Weld.coarseGrain U candidate regime) regime
       ≡
-      Weld.qftStressToShared U
-        (Weld.actualQFTStressTensor U
-          (Weld.coarseGrain U candidate regime) group)
+      Weld.qftTotalStressShared U (Weld.coarseGrain U candidate regime)
 
 open QFTSourceFactorisation public
-
-------------------------------------------------------------------------
--- The same-object theorem: two factorisations through one source imply the
--- literal stress-energy weld required by the unification consumer.
-------------------------------------------------------------------------
 
 sharedSourceImpliesSameStressEnergy :
   ∀ {U : Weld.UnifiedCandidate}
@@ -90,23 +84,17 @@ sharedSourceImpliesSameStressEnergy :
   Weld.StressEnergyWeldToken U →
   Weld.SameStressEnergyWeld U
 sharedSourceImpliesSameStressEnergy source grFactor qftFactor token = record
-  { Weld.SameStressEnergyWeld.sameStressEnergyOnOverlap =
-      λ candidate regime group grAtRegime qftAtRegime →
+  { Weld.SameStressEnergyWeld.qftStressAggregation =
+      QFTSourceFactorisation.qftStressAggregates qftFactor
+  ; Weld.SameStressEnergyWeld.sameStressEnergyOnOverlap =
+      λ candidate regime grAtRegime qftAtRegime →
         trans
           (GRSourceFactorisation.grSourceFactorises
             grFactor candidate regime grAtRegime)
-          (QFTSourceFactorisation.qftSourceFactorises
-            qftFactor candidate regime group qftAtRegime)
+          (QFTSourceFactorisation.qftTotalSourceFactorises
+            qftFactor candidate regime qftAtRegime)
   ; Weld.SameStressEnergyWeld.stressWeldPromotionToken = token
   }
-
-------------------------------------------------------------------------
--- Common-regime source dynamics.
---
--- Backreaction and correction control remain physical theorems.  What this
--- layer enforces is that they are stated on the SAME coarse-grained candidate
--- and the SAME overlap regime used by the stress-source factorisation.
-------------------------------------------------------------------------
 
 record SharedSourceRegimeControl
     {U : Weld.UnifiedCandidate}
@@ -144,10 +132,6 @@ sharedSourceControlImpliesCommonRegimeRecovery control = record
   ; Weld.CommonRegimeRecovery.regimePromotionToken = regimeToken control
   }
 
-------------------------------------------------------------------------
--- Combined cross-sector compiler.
-------------------------------------------------------------------------
-
 record SharedSourceCrossSectorReceipt
     (U : Weld.UnifiedCandidate) : Set₁ where
   field
@@ -172,15 +156,6 @@ sharedSourceCrossSectorReceiptCompiles receipt =
   ,
   sharedSourceControlImpliesCommonRegimeRecovery (regimeControl receipt)
 
-------------------------------------------------------------------------
--- Why this is a genuine compression of the frontier.
---
--- Once an application proves the two factorisations, stress-energy equality is
--- downstream algebra.  The remaining mathematics is therefore concentrated in
--- deriving ONE effective source from the microscopic candidate and proving its
--- GR and QFT identifications under one coarse-graining convention.
-------------------------------------------------------------------------
-
 record SharedSourceBoundary : Set where
   constructor sharedSourceBoundary
   field
@@ -192,10 +167,14 @@ record SharedSourceBoundary : Set where
     separateGRAndQFTSourceFitsProveSameObjectIsFalse :
       separateGRAndQFTSourceFitsProveSameObject ≡ false
 
-    twoExactFactorisationsThroughOneSourceProveWeld : Bool
-    twoExactFactorisationsThroughOneSourceProveWeldIsTrue :
-      twoExactFactorisationsThroughOneSourceProveWeld ≡ true
+    oneGaugeSectorStressEqualsTotalEinsteinSource : Bool
+    oneGaugeSectorStressEqualsTotalEinsteinSourceIsFalse :
+      oneGaugeSectorStressEqualsTotalEinsteinSource ≡ false
+
+    exactAggregationAndTwoFactorisationsProveWeld : Bool
+    exactAggregationAndTwoFactorisationsProveWeldIsTrue :
+      exactAggregationAndTwoFactorisationsProveWeld ≡ true
 
 canonicalSharedSourceBoundary : SharedSourceBoundary
 canonicalSharedSourceBoundary =
-  sharedSourceBoundary false refl false refl true refl
+  sharedSourceBoundary false refl false refl false refl true refl
