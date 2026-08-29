@@ -1,6 +1,7 @@
 module DASHI.Environment.LESBioelectricGaugeChemistryExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 
 import DASHI.Biology.Levin.BioelectricChemistryWaveAdapter as Bioelectric
 import DASHI.Chemistry.ExistingContentBridge as ChemistryReuse
@@ -30,14 +31,6 @@ data GaugeSector : Set where
   abelianElectromagneticSector
   nonAbelianYangMillsSector
   : GaugeSector
-
-------------------------------------------------------------------------
--- Quantitative electrochemical socket.
---
--- Scalar remains application-selectable (exact rational, interval, measured
--- value with uncertainty, etc.), while electrical and concentration quantities
--- are dimension-indexed by the BIPM-calibrated SI owner.
-------------------------------------------------------------------------
 
 record ElectrochemicalFieldSocket : Set₁ where
   constructor electrochemicalFieldSocket
@@ -77,13 +70,6 @@ record BioelectricChemistryWeld : Set₁ where
 
 open BioelectricChemistryWeld public
 
-------------------------------------------------------------------------
--- A stronger application can explicitly combine a chemistry transition with a
--- bioelectric field socket.  This records the exact coupling seam without
--- pretending the generic chemistry transition kernel has electrodiffusion
--- semantics by definition.
-------------------------------------------------------------------------
-
 record ElectrochemicalTransitionWeld
     (socket : ElectrochemicalFieldSocket) : Set₁ where
   constructor electrochemicalTransitionWeld
@@ -97,10 +83,6 @@ record ElectrochemicalTransitionWeld
     timeEvolutionReference : String
 
 open ElectrochemicalTransitionWeld public
-
-------------------------------------------------------------------------
--- Explicit YM provenance boundary.
-------------------------------------------------------------------------
 
 yangMillsGaugeOwner : String
 yangMillsGaugeOwner = "DASHI.Geometry.Gauge.SUNPrimitives"
