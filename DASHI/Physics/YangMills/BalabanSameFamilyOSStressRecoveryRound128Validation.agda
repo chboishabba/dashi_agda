@@ -1,0 +1,33 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanSameFamilyOSStressRecoveryRound128Validation where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanDensityToLiteralFiniteMeasureRound124Exact as R124
+import DASHI.Physics.YangMills.BalabanLiteralFiniteMeasureStressLaneRound125Exact as R125
+import DASHI.Physics.YangMills.BalabanLiteralSchwingerStressRecoveryRound126Exact as R126
+import DASHI.Physics.YangMills.BalabanOSLiteralSchwingerWeldRound127Exact as R127
+import DASHI.Physics.YangMills.BalabanSameFamilyOSStressRecoveryRound128Exact as R128
+
+round124DensityToLiteralFiniteMeasureCompiler : ProofLevel
+round124DensityToLiteralFiniteMeasureCompiler =
+  R124.balabanDensityLiteralFiniteMeasureCompilerLevel
+
+round125LiteralFiniteMeasureStressCompiler : ProofLevel
+round125LiteralFiniteMeasureStressCompiler =
+  R125.literalFiniteMeasureStressLaneCompilerLevel
+
+round126LiteralSchwingerStressRecoveryCompiler : ProofLevel
+round126LiteralSchwingerStressRecoveryCompiler =
+  R126.literalBalabanSchwingerStressRecoveryCompilerLevel
+
+round127OSLiteralSchwingerWeldCompiler : ProofLevel
+round127OSLiteralSchwingerWeldCompiler =
+  R127.osLiteralSchwingerWeldCompilerLevel
+
+round128SameFamilyOSStressCompiler : ProofLevel
+round128SameFamilyOSStressCompiler =
+  R128.sameFamilyOSStressRecoveryCompilerLevel
+
+round128PhysicalRecoveryStillConditional : ProofLevel
+round128PhysicalRecoveryStillConditional =
+  R128.literalBalabanSameFamilyOSStressRecoveryLevel
