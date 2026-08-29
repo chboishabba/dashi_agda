@@ -15,6 +15,7 @@ import DASHI.Core.CompositionalComplianceExact
 import DASHI.Core.ConsumerIndexedGovernedTransitionExact
 import DASHI.Core.ConsumerObserverJoinResidualExact
 import DASHI.Core.ConsumerSafeFidelityEscalationExact
+import DASHI.Core.ConsumerRelativeReductionKernelExact
 import DASHI.Core.CounterexampleGuidedConsumerRefinementExact
 import DASHI.Core.DualEffectInformationActionExact
 import DASHI.Core.EvidenceReliabilityPolarityExact
@@ -32,6 +33,7 @@ import DASHI.Core.SelectiveAuthorityCertificateExact
 import DASHI.Core.StructuredResidualProductExact
 import DASHI.Core.TypedEvidenceDependencyExact
 import DASHI.Core.TypedIntervalEventTransitionExact
+import DASHI.Biology.Physical.C3Cube27ConsumerReductionAdapterExact
 import DASHI.Physics.Units.SI
 import DASHI.Environment.LESResearchCrossPollinationExact
 import DASHI.Environment.LESResearchCrossPollinationRound2Exact
@@ -49,6 +51,7 @@ import DASHI.Environment.LESSituatedSocioEcologicalHyperfabricExact
 import DASHI.Environment.LESSituatedObservationInteractionExact
 import DASHI.Environment.LESObserverContextDiscoveryConeExact
 import DASHI.Environment.LESDomainBasisBidiFrontierExact
+import DASHI.Environment.LESConsumerRelativeMechanismReductionExact
 import DASHI.Environment.LESFluidPhysicsCouplingExact
 import DASHI.Environment.LESBioelectricGaugeChemistryExact
 import DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact
@@ -56,6 +59,7 @@ import DASHI.Environment.SoilBiogeochemistryProcessNetworkExact
 import DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact
 import DASHI.Environment.SoilPlantAtmosphereContinuumExact
 import DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact
+import DASHI.Environment.FiniteSPACCalibrationExperimentExact
 import DASHI.Environment.LESPhysicsDomainCrossPollinationExact
 import DASHI.Geometry.AdaptiveWearableCompilerExact
 import DASHI.Geometry.EmpiricalROMRiskFieldExact
