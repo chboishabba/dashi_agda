@@ -4,6 +4,7 @@ import DASHI.Core.ConsumerRelativeReductionKernelExact
 import DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact
 import DASHI.Core.ConsumerRelativeReductionSearchExact
 import DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact
+import DASHI.Core.ConsumerReductionDependencyReopeningExact
 import DASHI.Core.RobustInterventionAcrossHypothesesExact
 import DASHI.Biology.Physical.C3Cube27ConsumerReductionAdapterExact
 import DASHI.Physics.Units.SI
