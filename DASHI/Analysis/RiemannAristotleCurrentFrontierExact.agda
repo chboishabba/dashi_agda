@@ -99,6 +99,16 @@ record AristotleCurrentFrontier : Set where
     literalRHPostSchurGenericGramWeldClosedInAgdaIsTrue :
       literalRHPostSchurGenericGramWeldClosedInAgda ≡ true
 
+    -- G2 bidi decomposition.
+    finiteGramDebtExpandedToOrderedPairCovarianceInAgda : Bool
+    finiteGramDebtExpandedToOrderedPairCovarianceInAgdaIsTrue :
+      finiteGramDebtExpandedToOrderedPairCovarianceInAgda ≡ true
+    threeTaperSchurKernelBilinearCompilerClosedInAgda : Bool
+    threeTaperSchurKernelBilinearCompilerClosedInAgdaIsTrue :
+      threeTaperSchurKernelBilinearCompilerClosedInAgda ≡ true
+    literalLeanElim2MatrixIdentifiedInAgda : Bool
+    literalLeanElim2MatrixIdentifiedInAgdaIsFalse :
+      literalLeanElim2MatrixIdentifiedInAgda ≡ false
     signedRHGramDebtEstimateClosed : Bool
     signedRHGramDebtEstimateClosedIsFalse : signedRHGramDebtEstimateClosed ≡ false
 
@@ -116,5 +126,5 @@ canonicalAristotleCurrentFrontier =
     true refl true refl true refl false refl false refl false refl
     true refl true refl false refl
     true refl true refl
-    false refl
-    "The explicit-cutoff Lean tranche closes the infinite S2 tail and constructs the literal finite reflection-paired near carrier on D_off. Bidi reuse exposed a type boundary in the first Round180 idea: NS Round180 is specialized to rational Complex3 whereas literal RH responses are real, so direct RH-real -> Round180-rational identification remains correctly false. The reusable mathematics has now been extracted instead: FiniteSignedGramTelescopeExact proves the exact finite diagonal-plus-signed-Gram-debt identity over any exact polarized additive carrier, and RiemannAristotleLiteralPostSchurFiniteGramWeldExact maps the literal three-coordinate RH post-Schur shape definitionally into that generic theorem. Thus G1 is closed without an R-to-Q coercion. The only live S2 cancellation theorem is G2: bound the finite signed RH gramDebt strongly enough that diagonal mass plus signed covariance, together with the explicit far-error energy, lies below the surviving S1 cluster margin. S1, G2, the joint margin, and low-ordinate certification remain open. RH is not derived."
+    true refl true refl false refl false refl
+    "The explicit-cutoff Lean tranche closes the infinite S2 tail and constructs the literal finite reflection-paired near carrier on D_off. G1 is closed at the type-correct scalar-generic level: the finite diagonal-plus-signed-Gram identity is inherited without identifying RH reals with NS rationals. G2 is now decomposed bidirectionally as well. RiemannAristotleFiniteNearOrderedPairGramDebtExact expands the finite Gram debt exactly to the signed ordered-pair covariance sum, with no absolute values. RiemannAristotleThreeTaperSchurKernelBilinearExact keeps the deterministic Schur map explicit and expands each post-Schur covariance in the raw three-taper coordinates. The reflection-pair Lean source already identifies each raw coordinate with the 4*g*cosh(a*u)*cos(delta*u) kernel and cancels the odd sinh*sin channel. The remaining representation seam is literal source provenance: identify Lean's actual elim2 with one fixed three-dimensional Schur operator E. After that, the only live S2 analysis is the signed finite oscillatory covariance bound strong enough to beat the remaining cluster margin. S1, the literal elim2 coefficient weld, the G2 signed covariance estimate, the joint margin, and low-ordinate certification remain open. RH is not derived."
