@@ -31,6 +31,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exa
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNExternalWaleffeQuarticCellExpansionRound115Exact as R115
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
+import DASHI.Physics.Closure.NSTriadKNCriticalNormalizedCurlSlotTangentRound157Exact as R157
 import DASHI.Physics.Closure.NSTriadKNCriticalSecondSlotDifferenceTangentRound159Exact as R159
 import DASHI.Physics.Closure.NSTriadKNCriticalExternalSlotResidualCarrierRound162Exact as R162
 import DASHI.Physics.Closure.NSTriadKNCriticalExternalSlotCellExpansionRound163Exact as R163
@@ -190,7 +191,7 @@ externalDoubleCommutatorSignedCellFoldIsResidualForcing :
   externalDoubleCommutatorSignedCellFold S cK cP system tau W
   ≡
   R190.weightedTwoChannel cK cP
-    (R159.slotPQDifferenceNetworkForcing E S (Physical.p tau) (Physical.q tau)
+    (R157.slotDifferenceNetworkForcing E S (Physical.k tau) (Physical.q tau)
       (Audit.velocityAt system (Physical.k tau))
       (Audit.velocityAt system (Physical.p tau))
       (Audit.velocityAt system (Physical.q tau))
