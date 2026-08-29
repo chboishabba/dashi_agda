@@ -22,6 +22,8 @@ import DASHI.Core.ConsumerRelativeMinimalFidelityExact
 import DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact
 import DASHI.Core.ConsumerReductionDependencyReopeningExact
 import DASHI.Core.AdaptiveConsumerModelLoopExact
+import DASHI.Core.ExperimentalCoordinateDesignExact
+import DASHI.Core.ActionabilityCostedExperimentChoiceExact
 import DASHI.Core.CounterexampleGuidedConsumerRefinementExact
 import DASHI.Core.DualEffectInformationActionExact
 import DASHI.Core.EvidenceReliabilityPolarityExact
@@ -42,6 +44,7 @@ import DASHI.Core.TypedEvidenceDependencyExact
 import DASHI.Core.TypedIntervalEventTransitionExact
 import DASHI.Biology.Physical.C3Cube27ConsumerReductionAdapterExact
 import DASHI.Physics.Units.SI
+import DASHI.Physics.Foundations.GRQFTExperimentDesignCrossPollinationExact
 import DASHI.Environment.LESResearchCrossPollinationExact
 import DASHI.Environment.LESResearchCrossPollinationRound2Exact
 import DASHI.Environment.LESResearchCrossPollinationRound3Exact
