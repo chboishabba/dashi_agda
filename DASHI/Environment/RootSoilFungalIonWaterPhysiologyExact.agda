@@ -59,12 +59,12 @@ data PlantNutrientAcquisitionPathway : Set where
   mycorrhizalPathway
   : PlantNutrientAcquisitionPathway
 
+directAndMycorrhizalPathwaysDistinct :
+  directRootPathway ≡ mycorrhizalPathway → ⊥
+directAndMycorrhizalPathwaysDistinct ()
+
 ------------------------------------------------------------------------
 -- Root-water mechanics.
---
--- Water potential has pressure dimension. A radial volumetric flux divided by
--- area has velocity dimension, so the existing SI Pressure/Velocity carriers
--- are sufficient without inventing another quantity system.
 ------------------------------------------------------------------------
 
 record RootWaterTransportReceipt : Set₁ where
@@ -91,10 +91,6 @@ open RootWaterTransportReceipt public
 
 ------------------------------------------------------------------------
 -- Direct soil -> root ion interface.
---
--- The strongest reusable weld is same-species identity between the soil-pore
--- PNP problem and the root-interface PNP problem. Application-specific flux
--- orientation, membrane transport and conservation still need receipts.
 ------------------------------------------------------------------------
 
 record RootSoilIonInterface : Set₁ where
@@ -123,6 +119,32 @@ record RootSoilIonInterface : Set₁ where
 open RootSoilIonInterface public
 
 ------------------------------------------------------------------------
+-- Water and ions need a literal common application state, not just parallel
+-- records whose time/geometry happen to have similar labels.
+------------------------------------------------------------------------
+
+record RootWaterIonStateWeld
+    (water : RootWaterTransportReceipt)
+    (ions : RootSoilIonInterface) : Set₁ where
+  constructor rootWaterIonStateWeld
+  field
+    CoupledState : Set
+    waterState : CoupledState → RootWaterState water
+    rootIonState :
+      CoupledState →
+      PNP.CoupledState (PNP.fluxLaw (rootElectrodiffusion ions))
+    soilIonState :
+      CoupledState →
+      PNP.CoupledState (PNP.fluxLaw (soilPoreElectrodiffusion ions))
+
+    commonGeometryReference : String
+    commonTimeReference : String
+    waterIonDrivingCouplingReference : String
+    stateSynchronizationValidationReference : String
+
+open RootWaterIonStateWeld public
+
+------------------------------------------------------------------------
 -- Root chemistry and conservation ledger.
 ------------------------------------------------------------------------
 
@@ -146,9 +168,8 @@ record RootSoilChemistryConservationWeld : Set₁ where
 open RootSoilChemistryConservationWeld public
 
 ------------------------------------------------------------------------
--- Base root-soil mechanism. Fungal symbiosis is an extension rather than a
--- mandatory field because not every plant/soil state should be silently
--- classified as mycorrhizal.
+-- Base root-soil mechanism. Fungal symbiosis remains an extension because not
+-- every plant/soil state should be silently classified as mycorrhizal.
 ------------------------------------------------------------------------
 
 record RootSoilIonWaterMechanism : Set₁ where
@@ -157,11 +178,11 @@ record RootSoilIonWaterMechanism : Set₁ where
     rootFunctionalGroup : Ecology.FunctionalGroup
     waterTransport : RootWaterTransportReceipt
     ionInterface : RootSoilIonInterface
+    coupledWaterIonState : RootWaterIonStateWeld waterTransport ionInterface
     chemistryConservation : RootSoilChemistryConservationWeld
 
     rootAnatomyReference : String
     transporterOrChannelReference : String
-    waterIonCouplingReference : String
     growthOrDemandCouplingReference : String
     scaleCompatibilityReference : String
 
@@ -169,12 +190,6 @@ open RootSoilIonWaterMechanism public
 
 ------------------------------------------------------------------------
 -- Mycorrhizal extension.
---
--- FunctionalEcology already owns compatibility/biosecurity gating. The
--- extension consumes that candidate and separately requires a fungal PNP
--- application receipt. This makes the direct-root and fungal pathways explicit
--- without claiming that one can infer fungal nutrient delivery from plant
--- tissue concentration alone.
 ------------------------------------------------------------------------
 
 record MycorrhizalIonWaterExtension
@@ -202,10 +217,6 @@ open MycorrhizalIonWaterExtension public
 
 ------------------------------------------------------------------------
 -- Stage-7 realization seam.
---
--- The domain-specific physiology receipts do not create a second inference
--- architecture. A concrete model must still inhabit the existing generic
--- DomainMechanismSocket from the bidi frontier.
 ------------------------------------------------------------------------
 
 record RootSoilFungalDomainRealization : Set₁ where
@@ -257,6 +268,10 @@ record RootSoilFungalPhysiologyBoundary : Set where
     plantTissueNutrientContentDeterminesMycorrhizalPathwayFluxIsFalse :
       plantTissueNutrientContentDeterminesMycorrhizalPathwayFlux ≡ false
 
+    parallelWaterIonRecordsProveSameDynamicState : Bool
+    parallelWaterIonRecordsProveSameDynamicStateIsFalse :
+      parallelWaterIonRecordsProveSameDynamicState ≡ false
+
     rootSoilFungalMechanismNeedsSharedSpeciesAndConservationReceipts : Bool
     rootSoilFungalMechanismNeedsSharedSpeciesAndConservationReceiptsIsTrue :
       rootSoilFungalMechanismNeedsSharedSpeciesAndConservationReceipts ≡ true
@@ -268,6 +283,7 @@ record RootSoilFungalPhysiologyBoundary : Set where
 canonicalRootSoilFungalPhysiologyBoundary : RootSoilFungalPhysiologyBoundary
 canonicalRootSoilFungalPhysiologyBoundary =
   rootSoilFungalPhysiologyBoundary
+    false refl
     false refl
     false refl
     false refl
