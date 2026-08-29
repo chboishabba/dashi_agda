@@ -2,13 +2,6 @@ module DASHI.Physics.Closure.NSTriadKNBidiCriticalElementPackageARound259Exact w
 
 ------------------------------------------------------------------------
 -- ROUND259 / COMPLETE BIDI LOGICAL SPINE TO THE AUTHORITATIVE PACKAGE-A BUDGET
---
--- Correct polarity:
---   bad unbounded cutoff sequence
---     -> selected first-hit/profile critical element
---     -> rigidity contradiction.
--- Hence no bad sequence exists.  A separately owned sequential boundedness
--- principle converts that negation into the literal Round240 physical budget.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc; _⊔_)
@@ -16,12 +9,14 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Rational.Base using (ℚ)
-open import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier using (Complex3)
+
+import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact as R240
 import DASHI.Physics.Closure.NSTriadKNCriticalElementBackwardUniquenessRound257Exact as R257
 import DASHI.Physics.Closure.NSTriadKNPackageASequentialBoundRound258Exact as R258
 
+F : C3.RealField _
 F = Rational.rationalRealField
 
 module CompleteBidi
@@ -29,8 +24,8 @@ module CompleteBidi
     (initialTime : Time)
     (integrateTo : (Time → ℚ) → Time → ℚ)
     (DerivativeOf :
-      (Time → Complex3 F) →
-      (Time → Complex3 F) → Set) where
+      (Time → C3.Complex3 F) →
+      (Time → C3.Complex3 F) → Set) where
 
   module Dyn = R240.PhysicalNSDynamics Time initialTime integrateTo DerivativeOf
   module Pkg = R258.PackageASequential Time initialTime integrateTo DerivativeOf
