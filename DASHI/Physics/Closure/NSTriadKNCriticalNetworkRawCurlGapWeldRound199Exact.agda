@@ -22,7 +22,7 @@ module DASHI.Physics.Closure.NSTriadKNCriticalNetworkRawCurlGapWeldRound199Exact
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
@@ -32,6 +32,7 @@ import DASHI.Physics.Closure.NSTriadKNCriticalNormalizedCurlDoubleCommutatorRoun
 import DASHI.Physics.Closure.NSTriadKNCriticalNormalizedCurlRadiusCancellationRound147Exact as R147
 import DASHI.Physics.Closure.NSTriadKNCriticalRawCurlCompleteWeldRound171Exact as R171
 import DASHI.Physics.Closure.NSTriadKNCriticalDoubleCommutatorTangentRound190Exact as R190
+import DASHI.Physics.Closure.NSTriadKNCriticalDoubleCommutatorSymmetricSlotsRound195Exact as R195
 import DASHI.Physics.Closure.NSTriadKNCriticalDoubleCommutatorNetworkSlotsRound196Exact as R196
 import DASHI.Physics.Closure.NSTriadKNCriticalNetworkSlotInverseFactorRound197Exact as R197
 import DASHI.Physics.Closure.NSTriadKNCriticalNetworkRadiusCancellationRound198Exact as R198
@@ -68,15 +69,6 @@ completeCriticalNetworkForcingIsRawCurlGapForm :
       (R144.uK T) (R144.uP T) (R144.uQ T) fK fP fQ)
 completeCriticalNetworkForcingIsRawCurlGapForm {E = E} {S = S}
     T C fK fP fQ =
-  let
-    R = R171.radii C
-    rawK = R197.rawNetworkSlotK E (R144.k T)
-      (R144.uK T) (R144.uP T) (R144.uQ T) fK fP fQ
-    rawP = R197.rawNetworkSlotP E (R144.p T)
-      (R144.uK T) (R144.uP T) (R144.uQ T) fK fP fQ
-    rawQ = R197.rawNetworkSlotQ E (R144.q T)
-      (R144.uK T) (R144.uP T) (R144.uQ T) fK fP fQ
-  in
   trans
     (R196.completeDoubleCommutatorForcingIsCyclicThreeSlot
       E S
@@ -95,9 +87,28 @@ completeCriticalNetworkForcingIsRawCurlGapForm {E = E} {S = S}
     (R144.uK T) (R144.uP T) (R144.uQ T) fK fP fQ
 
   normalizedNetworkToInverseRaw :
-    R198.rawNetworkGapProduction R rawK rawP rawQ
-    ≡ R198.rawNetworkGapProduction R rawK rawP rawQ
-  normalizedNetworkToInverseRaw = refl
+    R195.complexCriticalSlotProduction
+      (R147.radiusK R) (R147.radiusP R) (R147.radiusQ R)
+      (R196.networkSlotK E S (R144.k T)
+        (R144.uK T) (R144.uP T) (R144.uQ T) fK fP fQ)
+      (R196.networkSlotP E S (R144.p T)
+        (R144.uK T) (R144.uP T) (R144.uQ T) fK fP fQ)
+      (R196.networkSlotQ E S (R144.q T)
+        (R144.uK T) (R144.uP T) (R144.uQ T) fK fP fQ)
+    ≡
+    R195.complexCriticalSlotProduction
+      (R147.radiusK R) (R147.radiusP R) (R147.radiusQ R)
+      (C3.complexMultiply (C3.realEmbed F (R147.inverseK R)) rawK)
+      (C3.complexMultiply (C3.realEmbed F (R147.inverseP R)) rawP)
+      (C3.complexMultiply (C3.realEmbed F (R147.inverseQ R)) rawQ)
+  normalizedNetworkToInverseRaw
+    rewrite R171.inverseKMeaning C | R171.inversePMeaning C | R171.inverseQMeaning C
+          | R197.networkSlotKFactorsInverse E S (R144.k T)
+              (R144.uK T) (R144.uP T) (R144.uQ T) fK fP fQ
+          | R197.networkSlotPFactorsInverse E S (R144.p T)
+              (R144.uK T) (R144.uP T) (R144.uQ T) fK fP fQ
+          | R197.networkSlotQFactorsInverse E S (R144.q T)
+              (R144.uK T) (R144.uP T) (R144.uQ T) fK fP fQ = refl
 
 round199PhysicalNetworkRawCurlGapWeldClosed : Bool
 round199PhysicalNetworkRawCurlGapWeldClosed = true
