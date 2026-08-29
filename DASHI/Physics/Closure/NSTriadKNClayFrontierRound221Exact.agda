@@ -1,0 +1,75 @@
+module DASHI.Physics.Closure.NSTriadKNClayFrontierRound221Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; zero)
+
+import DASHI.Physics.Closure.NSTriadKNPhysicalRawCurlCellEDAdapterRound219Exact as R219
+import DASHI.Physics.Closure.NSTriadKNCoherentGramOnlyCompanionCompilerRound220Exact as R220
+import DASHI.Physics.Closure.NSTriadKNAuthoritativePackageAPathRound221Exact as R221
+
+round221PhysicalResonanceRadiusAdapterClosed : Bool
+round221PhysicalResonanceRadiusAdapterClosed =
+  R219.round219PhysicalResonanceRadiusAdapterClosed
+
+round221PhysicalSelectorEDAdapterClosed : Bool
+round221PhysicalSelectorEDAdapterClosed =
+  R219.round219PhysicalSelectorEDAdapterClosed
+
+round221CoherentOnlyCompanionCompilerClosed : Bool
+round221CoherentOnlyCompanionCompilerClosed =
+  R220.round220CoherentResidualIsOnlyCompanionLeaf
+
+round221OldInternalSelfPortIsActiveAGate : Bool
+round221OldInternalSelfPortIsActiveAGate =
+  R221.round221InternalSelfPortRequiredForAuthoritativeAPath
+
+round221ActiveRoutineCompletionSeamCount : Nat
+round221ActiveRoutineCompletionSeamCount =
+  R221.round221ActiveRoutineCompletionSeamCount
+
+round221PhysicalCoherentGramResidualBudgetClosed : Bool
+round221PhysicalCoherentGramResidualBudgetClosed = false
+
+round221NovelMathematicalLeafCount : Nat
+round221NovelMathematicalLeafCount = 1
+
+round221PackageAClosed : Bool
+round221PackageAClosed = false
+
+round221ClayPromotion : Bool
+round221ClayPromotion = false
+
+round221PhysicalResonanceRadiusAdapterClosedIsTrue :
+  round221PhysicalResonanceRadiusAdapterClosed ≡ true
+round221PhysicalResonanceRadiusAdapterClosedIsTrue = refl
+
+round221PhysicalSelectorEDAdapterClosedIsTrue :
+  round221PhysicalSelectorEDAdapterClosed ≡ true
+round221PhysicalSelectorEDAdapterClosedIsTrue = refl
+
+round221CoherentOnlyCompanionCompilerClosedIsTrue :
+  round221CoherentOnlyCompanionCompilerClosed ≡ true
+round221CoherentOnlyCompanionCompilerClosedIsTrue = refl
+
+round221OldInternalSelfPortIsActiveAGateIsFalse :
+  round221OldInternalSelfPortIsActiveAGate ≡ false
+round221OldInternalSelfPortIsActiveAGateIsFalse = refl
+
+round221ActiveRoutineCompletionSeamCountIsZero :
+  round221ActiveRoutineCompletionSeamCount ≡ zero
+round221ActiveRoutineCompletionSeamCountIsZero = refl
+
+round221PhysicalCoherentGramResidualBudgetClosedIsFalse :
+  round221PhysicalCoherentGramResidualBudgetClosed ≡ false
+round221PhysicalCoherentGramResidualBudgetClosedIsFalse = refl
+
+round221NovelMathematicalLeafCountIsOne :
+  round221NovelMathematicalLeafCount ≡ 1
+round221NovelMathematicalLeafCountIsOne = refl
+
+round221PackageAClosedIsFalse : round221PackageAClosed ≡ false
+round221PackageAClosedIsFalse = refl
+
+round221ClayPromotionIsFalse : round221ClayPromotion ≡ false
+round221ClayPromotionIsFalse = refl
