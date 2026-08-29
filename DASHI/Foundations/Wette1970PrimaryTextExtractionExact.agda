@@ -100,6 +100,51 @@ canonicalWette1970ProgrammeFacts =
     false refl
 
 ------------------------------------------------------------------------
+-- Errata for the 1969 chapter printed in Wette 1970.
+--
+-- The bibliography entry for the 1969 chapter includes a list of Druckfehler.
+-- One item is source-critical for the current 9.1.5 major-proof search:
+--
+--   S. 158, Zeile 1 v. u.: Implikations-Relator tief stellen.
+--
+-- Thus page 158 definitely contains an implication-relator occurrence whose
+-- typography matters.  The erratum does NOT identify the surrounding rule
+-- number, does not say that this occurrence concludes premise 18, and does not
+-- replace direct inspection of the 1969 page.
+------------------------------------------------------------------------
+
+record Wette1970ErrataFor1969 : Set where
+  constructor wette1970ErrataFor1969
+  field
+    implicationRelatorCorrectionPage : Nat
+    implicationRelatorCorrectionIsLastLine : Bool
+    implicationRelatorMustBeSetLow : Bool
+
+    erratumIdentifiesSurrounding1969RuleNumber : Bool
+    erratumIdentifiesPremise18TerminalRule : Bool
+    erratumReplacesDirect1969PageInspection : Bool
+
+open Wette1970ErrataFor1969 public
+
+canonicalWette1970ErrataFor1969 : Wette1970ErrataFor1969
+canonicalWette1970ErrataFor1969 =
+  wette1970ErrataFor1969
+    158
+    true
+    true
+    false
+    false
+    false
+
+implicationRelatorCorrectionIsOnPage158 :
+  implicationRelatorCorrectionPage canonicalWette1970ErrataFor1969 ≡ 158
+implicationRelatorCorrectionIsOnPage158 = refl
+
+implicationRelatorErratumDoesNotIdentifyPremise18TerminalRule :
+  erratumIdentifiesPremise18TerminalRule canonicalWette1970ErrataFor1969 ≡ false
+implicationRelatorErratumDoesNotIdentifyPremise18TerminalRule = refl
+
+------------------------------------------------------------------------
 -- Kreisel/Zucker 1972 contemporary-review extraction.
 --
 -- Their review states that Hauptsatz 2 uses "relativ vollstaendig" in the
