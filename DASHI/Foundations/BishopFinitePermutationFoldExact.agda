@@ -9,6 +9,7 @@ module DASHI.Foundations.BishopFinitePermutationFoldExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.List.Base using (map; _++_)
 import Data.List.Relation.Binary.Permutation.Propositional as Perm
 
 import Real as BishopReal
@@ -20,6 +21,42 @@ bishopFold : ∀ {A : Set} → (A → BishopReal.ℝ) → List A → BishopReal.
 bishopFold weight [] = BishopReal.0ℝ
 bishopFold weight (x ∷ xs) =
   BishopReal._+_ (weight x) (bishopFold weight xs)
+
+bishopFoldAppend :
+  ∀ {A : Set}
+    (weight : A → BishopReal.ℝ) →
+  ∀ xs ys →
+  BishopReal._≃_
+    (bishopFold weight (xs ++ ys))
+    (BishopReal._+_
+      (bishopFold weight xs)
+      (bishopFold weight ys))
+bishopFoldAppend weight [] ys =
+  BishopP.≃-symm (BishopP.+-identityˡ (bishopFold weight ys))
+bishopFoldAppend weight (x ∷ xs) ys =
+  BishopP.≃-trans
+    (BishopP.+-congˡ
+      (weight x)
+      (bishopFoldAppend weight xs ys))
+    (BishopP.≃-symm
+      (BishopP.+-assoc
+        (weight x)
+        (bishopFold weight xs)
+        (bishopFold weight ys)))
+
+bishopFoldMap :
+  ∀ {A B : Set}
+    (weight : B → BishopReal.ℝ)
+    (f : A → B) →
+  ∀ xs →
+  BishopReal._≃_
+    (bishopFold weight (map f xs))
+    (bishopFold (λ x → weight (f x)) xs)
+bishopFoldMap weight f [] = BishopP.≃-refl
+bishopFoldMap weight f (x ∷ xs) =
+  BishopP.+-congˡ
+    (weight (f x))
+    (bishopFoldMap weight f xs)
 
 bishopFoldPermutationInvariant :
   ∀ {A : Set}
