@@ -23,15 +23,11 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 
-import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
-import DASHI.Physics.Closure.NSTriadKNComplex3AlgebraLaws as Algebra
 import DASHI.Physics.Closure.NSTriadKNCriticalHelicitySlotCommutatorRound138Exact as R138
 import DASHI.Physics.Closure.NSTriadKNCriticalNormalizedCurlRadiusCancellationRound147Exact as R147
 import DASHI.Physics.Closure.NSTriadKNCriticalDoubleCommutatorSymmetricSlotsRound195Exact as R195
-import DASHI.Physics.Closure.NSTriadKNCriticalDoubleCommutatorNetworkSlotsRound196Exact as R196
-import DASHI.Physics.Closure.NSTriadKNCriticalNetworkSlotInverseFactorRound197Exact as R197
 
 private
   sub : ∀ {r} {F : C3.RealField r} →
@@ -69,7 +65,7 @@ scaledCriticalKCancel :
       (C3.realEmbed F (sub (R147.radiusP R) (R147.radiusQ R))) z
 scaledCriticalKCancel {F = F} R z =
   trans
-    (sym (Algebra.complexMultiplyAssociative
+    (sym (Field.complexMultiplyAssociative
       (C3.realEmbed F
         (R138.criticalRadialCoefficientK
           (R147.radiusK R) (R147.radiusP R) (R147.radiusQ R)))
@@ -95,7 +91,7 @@ scaledCriticalPCancel :
       (C3.realEmbed F (sub (R147.radiusQ R) (R147.radiusK R))) z
 scaledCriticalPCancel {F = F} R z =
   trans
-    (sym (Algebra.complexMultiplyAssociative
+    (sym (Field.complexMultiplyAssociative
       (C3.realEmbed F
         (R138.criticalRadialCoefficientP
           (R147.radiusK R) (R147.radiusP R) (R147.radiusQ R)))
@@ -121,7 +117,7 @@ scaledCriticalQCancel :
       (C3.realEmbed F (sub (R147.radiusK R) (R147.radiusP R))) z
 scaledCriticalQCancel {F = F} R z =
   trans
-    (sym (Algebra.complexMultiplyAssociative
+    (sym (Field.complexMultiplyAssociative
       (C3.realEmbed F
         (R138.criticalRadialCoefficientQ
           (R147.radiusK R) (R147.radiusP R) (R147.radiusQ R)))
