@@ -1,13 +1,13 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.BalabanContinuumProducerValidation where
 
-open import DASHI.Core.Prelude
+open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.Foundations.BalabanAllSectorContinuumProducerExact as Producer
 import DASHI.Physics.Foundations.CommonActionQFTGRContinuumProducerCompilerExact as Compiler
 
-balabanContinuumProducerCompiler : Producer.ProofLevel
+balabanContinuumProducerCompiler : ProofLevel
 balabanContinuumProducerCompiler = Producer.balabanContinuumProducerCompilerLevel
 
-commonMetricContinuumProducerCompiler : Compiler.ProofLevel
+commonMetricContinuumProducerCompiler : ProofLevel
 commonMetricContinuumProducerCompiler =
   Compiler.commonActionQFTGRContinuumProducerCompilerLevel
