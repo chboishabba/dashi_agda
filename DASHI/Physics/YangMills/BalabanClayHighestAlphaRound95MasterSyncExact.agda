@@ -1,9 +1,9 @@
 module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound95MasterSyncExact where
 
 ------------------------------------------------------------------------
--- ROUND95--97: MASTER-FIRST BIDIRECTIONAL HIGHEST-ALPHA FRONTIER
+-- ROUND95--98: MASTER-FIRST BIDIRECTIONAL HIGHEST-ALPHA FRONTIER
 --
--- Proof search is now explicitly bidirectional:
+-- Proof search is explicitly bidirectional:
 --
 --   backward: inspect the literal A/B/C/D completion consumers and ask for the
 --             weakest quantitative object that actually closes the next edge;
@@ -12,30 +12,55 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound95MasterSyncExact whe
 --
 -- ROW A
 -- -----
--- * normalized-interaction Cauchy data gives C and L_local;
--- * the Ward patch fixes the Gaussian arithmetic floor at 1/8388608 pending
---   literal same-object identification;
--- * irrelevant/polymer history is separated from the marginal running coupling;
--- * contractive irrelevant memory + a Lipschitz beta projection + initial-input
---   response D0 <= S |delta u| gives cutoff-uniform history sensitivity 2 L S;
--- * if S <= S0 gamma then q_history <= H gamma, H = 2 L S0;
--- * direct + history shooting therefore closes under the single scalar gate
+-- Local data already provide the positive Ward candidate floor b, interaction
+-- debt C and direct current-coupling derivative L_local.  The marginal running
+-- coupling is never assigned artificial exponential forgetting.
 --
---       (C + L_local + b H) gamma < b,
+-- Round96 produced one history route:
 --
---   with gamma chosen canonically downstream.
+--   initial irrelevant response D0 <= S |delta u|,
+--   S <= S0 gamma
+--       -> q_history <= H gamma
+--       -> (C + L_local + b H) gamma < b pays shooting.
 --
--- Thus the live A sensitivity leaf is source-native: prove the initial
--- irrelevant/polymer response to the inverse-square shooting input is O(gamma)
--- on the SAME uniform analytic tube, while completing the Ward-floor and
--- normalized-interaction same-object welds.
+-- Round98 adds the more source-shaped response-kernel route suggested by the
+-- parallel Lean producer.  If propagated irrelevant sensitivity obeys
+--
+--       r_(n+1) <= R s_n + (1/2) r_n,
+--
+-- the exact potential sum r + 2 r_n gives
+--
+--       sum r_n <= 2 R sum s_n.
+--
+-- If the direct history injection is quartically suppressed,
+--
+--       s_j <= D g_j^4,
+--
+-- the SAME positive inverse-square drift already used by Row A yields
+--
+--       sum s_j <= D gamma (2 gamma_tube / b_*).
+--
+-- Multiplying the response debt by the shooting margin b_* cancels the reciprocal
+-- and leaves at most 4 R D gamma^2.  Therefore for gamma<=1 the whole direct +
+-- propagated-history gate follows from ONE linearized inequality
+--
+--       (C + L_local + 4 R D) gamma < b.
+--
+-- The existing canonical rational choice is reused with effective derivative
+-- L_local + 4 R D; if b<=1 (in particular the fixed Ward floor), the canonical
+-- gamma is automatically <=1/2.  Hence no independent q<1, summability, or
+-- sufficiently-small-gamma existence theorem remains after literal source
+-- instantiation.  The shortest A leaf is now to prove the literal response-kernel
+-- inequality and its quartic direct injection (or use the older O(gamma) route
+-- if the source yields that more directly), together with same-object Ward and
+-- interaction identification.
 --
 -- ROW B
 -- -----
 -- The shared CMP116 marked analytic carrier itself gives r=1/2 geometric decay
 -- for beta-history, physical Hessian and composite marks.  Geometric shell
--- summation is therefore downstream after literal marked-coordinate/radius
--- identification.  Stress can reuse the composite mark after source identity.
+-- summation is downstream after literal marked-coordinate/radius identification.
+-- Stress can reuse the composite mark after source identity.
 --
 -- ROW B -> C, TEMPORAL
 -- --------------------
@@ -43,25 +68,23 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound95MasterSyncExact whe
 -- curvature-debt envelope whenever the SAME-density Heat/Doob negative Hessian
 -- shell is pointwise dominated by that mark.
 --
--- ROW B -> C, SPATIAL (ROUND97 BIDI FUSION)
--- -------------------------------------------
--- Row C finite-speed propagation does not need a second all-depth locality
--- theorem.  Backwards inspection shows it needs one finite nonnegative influence
--- majorant M with a uniform row mass.  Forward CMP116 control already supplies
--- the exponentially weighted Hessian row constant C_H.  Round97 therefore asks
--- only for the SAME derivative-generator row comparison
+-- ROW B -> C, SPATIAL
+-- -------------------
+-- Backwards inspection of the finite-speed consumer asks only for one finite
+-- nonnegative influence majorant M with a uniform row mass.  Forward CMP116
+-- control already supplies the exponentially weighted Hessian constant C_H.
+-- The physical bridge is therefore only
 --
---                   sum_y M(x,y) <= C_H.
+--                   sum_y M(x,y) <= C_H
 --
--- A new exact compiler proves nonnegative entries imply nonnegative every matrix
--- power, then the existing row-mass induction gives
+-- on the SAME derivative generator.  Round97 proves nonnegative entries imply
+-- nonnegative every matrix power and then reuses the existing row induction:
 --
 --                   row(M^n) <= C_H^n.
 --
--- Thus positivity of all Dyson powers and their row bounds are no longer
--- physical inputs.  The remaining spatial seam is same-density generator-to-
--- marked-Hessian identification plus the already-declared stochastic covariance
--- representation/relaxation inputs.
+-- Positivity/all-power bounds are no longer physical inputs.  Same-density
+-- generator-to-marked-Hessian identification and the stochastic covariance/
+-- relaxation source estimates remain the live spatial pieces.
 --
 -- The frozen four-row count remains four.  A row decrements only on an inhabited
 -- literal physical completion predicate or a theorem eliminating that whole row.
@@ -82,6 +105,11 @@ import DASHI.Physics.YangMills.BalabanYM4RowAIrrelevantHistoryLinearCouplingExac
 import DASHI.Physics.YangMills.BalabanYM4RowAAugmentedShootingGateExact as AAugmented
 import DASHI.Physics.YangMills.BalabanYM4RowAAugmentedCanonicalHistoryGateExact as AHistoryGate
 import DASHI.Physics.YangMills.BalabanYM4RowAAugmentedCanonicalChoiceExact as AHistoryChoice
+import DASHI.Physics.YangMills.BalabanYM4BetaResponseKernelSummationExact as AResponse
+import DASHI.Physics.YangMills.BalabanYM4FiniteBetaResponseKernelBudgetExact as AFiniteResponse
+import DASHI.Physics.YangMills.BalabanYM4QuarticSourceSensitivityBudgetExact as AQuarticBudget
+import DASHI.Physics.YangMills.BalabanYM4QuarticResponseCanonicalGateExact as AQuarticGate
+import DASHI.Physics.YangMills.BalabanYM4QuarticResponseCanonicalChoiceExact as AQuarticChoice
 
 import DASHI.Physics.YangMills.BalabanRowBActivityEntropyToShellEnergyExact as B
 import DASHI.Physics.YangMills.BalabanMarkedSourceGeometricShellEnergyExact as BSum
@@ -94,7 +122,7 @@ import DASHI.Physics.YangMills.BalabanFiniteInfluenceNonnegativePowersExact as C
 import DASHI.Physics.YangMills.BalabanSharedMarkedHessianToFiniteInfluenceExact as CInfluence
 
 ------------------------------------------------------------------------
--- A: local source constants + explicit Ward floor + isolated history response
+-- A: direct/history shooting and response-kernel collapse
 ------------------------------------------------------------------------
 
 rowACubicShootingSensitivityAlgebraRound95Level : ProofLevel
@@ -118,10 +146,6 @@ rowAOneSmallnessGateCompositionRound95Level =
 rowACanonicalGammaPositiveRound95Level : ProofLevel
 rowACanonicalGammaPositiveRound95Level =
   ACanonical.rowACanonicalGammaPositiveLevel
-
-rowACanonicalGammaPaysCombinedGateRound95Level : ProofLevel
-rowACanonicalGammaPaysCombinedGateRound95Level =
-  ACanonical.rowACanonicalGammaPaysCombinedGateLevel
 
 rowALocalCauchyConstantsToCanonicalGateRound96Level : ProofLevel
 rowALocalCauchyConstantsToCanonicalGateRound96Level =
@@ -151,8 +175,45 @@ rowAHistoryAugmentedCanonicalChoiceRound96Level : ProofLevel
 rowAHistoryAugmentedCanonicalChoiceRound96Level =
   AHistoryChoice.rowAAugmentedCanonicalChoiceLevel
 
-rowALiteralFiniteSourceConstantsRound97Level : ProofLevel
-rowALiteralFiniteSourceConstantsRound97Level = conditional
+rowAResponseKernelPotentialRound98Level : ProofLevel
+rowAResponseKernelPotentialRound98Level =
+  AResponse.betaResponseKernelPotentialLevel
+
+rowAResponseKernelFiniteBudgetRound98Level : ProofLevel
+rowAResponseKernelFiniteBudgetRound98Level =
+  AFiniteResponse.finiteBetaResponseKernelBudgetLevel
+
+rowAQuarticInjectionToFiniteBudgetRound98Level : ProofLevel
+rowAQuarticInjectionToFiniteBudgetRound98Level =
+  AQuarticBudget.quarticSourceSensitivityToFiniteBudgetLevel
+
+rowAQuarticResponseMarginCancellationRound98Level : ProofLevel
+rowAQuarticResponseMarginCancellationRound98Level =
+  AQuarticGate.rowAQuarticResponseMarginCancellationLevel
+
+rowAQuarticResponseSingleGateRound98Level : ProofLevel
+rowAQuarticResponseSingleGateRound98Level =
+  AQuarticGate.rowAQuarticResponseSingleLinearGateLevel
+
+rowAQuarticResponseCanonicalChoiceRound98Level : ProofLevel
+rowAQuarticResponseCanonicalChoiceRound98Level =
+  AQuarticChoice.rowAQuarticResponseCanonicalChoiceLevel
+
+rowAQuarticResponseCanonicalCapAtMostOneRound98Level : ProofLevel
+rowAQuarticResponseCanonicalCapAtMostOneRound98Level =
+  AQuarticChoice.rowAQuarticResponseCanonicalCapAtMostOneLevel
+
+-- Current physical A seam after Round98:
+--  1. literal CMP109/CMP99 Ward-patch -> mixed-beta-jet same-object floor;
+--  2. literal normalized interaction mixed-Cauchy constants C,L_local;
+--  3. literal irrelevant/polymer response kernel on the same generated history;
+--  4. preferably prove its direct injection <= D g_j^4 (or use the alternative
+--     initial-response O(gamma) route if that is source-native and weaker);
+--  5. literal recurrence/trajectory identification.
+-- All finite summation, margin cancellation, q<1 algebra and small-coupling
+-- choice are downstream theorem-owned constructions.
+rowALiteralSourceInstantiationRound98Level : ProofLevel
+rowALiteralSourceInstantiationRound98Level = conditional
 
 ------------------------------------------------------------------------
 -- B: shared CMP116 marked control already gives geometric r = 1/2 shells
@@ -182,8 +243,8 @@ rowBCompositeGeometricHalfRound96Level : ProofLevel
 rowBCompositeGeometricHalfRound96Level =
   BShared.sharedCompositeGeometricShellLevel
 
-rowBLiteralCMP116SharedMarkedInstantiationRound97Level : ProofLevel
-rowBLiteralCMP116SharedMarkedInstantiationRound97Level = conditional
+rowBLiteralCMP116SharedMarkedInstantiationRound98Level : ProofLevel
+rowBLiteralCMP116SharedMarkedInstantiationRound98Level = conditional
 
 ------------------------------------------------------------------------
 -- B -> C temporal fusion
@@ -205,8 +266,8 @@ rowBSharedHessianPaysCurvatureDebtRound96Level : ProofLevel
 rowBSharedHessianPaysCurvatureDebtRound96Level =
   BCHessian.sharedHessianToUniformCurvatureDebtLevel
 
-rowBCSameDensityTemporalDominationRound97Level : ProofLevel
-rowBCSameDensityTemporalDominationRound97Level = conditional
+rowBCSameDensityTemporalDominationRound98Level : ProofLevel
+rowBCSameDensityTemporalDominationRound98Level = conditional
 
 ------------------------------------------------------------------------
 -- B -> C spatial fusion: one Hessian row -> all finite influence powers
@@ -228,30 +289,23 @@ rowBSharedHessianToAllInfluencePowerRowsRound97Level : ProofLevel
 rowBSharedHessianToAllInfluencePowerRowsRound97Level =
   CInfluence.sharedMarkedHessianToAllInfluencePowerRowsLevel
 
--- Current spatial physical seam after the BIDI fusion:
--- identify the literal absolute derivative generator of the SAME compact-group
--- Heat/Doob dynamics with the finite majorant and prove its one-row sum is below
--- the already-required shared CMP116 hessian constant.  The all-power Dyson row
--- bounds are downstream exact finite algebra.  The stochastic covariance split
--- and same-density temporal relaxation remain the other declared inputs to the
--- existing spatial-clustering compiler.
-rowBCSameDensityGeneratorRowIdentificationRound97Level : ProofLevel
-rowBCSameDensityGeneratorRowIdentificationRound97Level = conditional
+rowBCSameDensityGeneratorRowIdentificationRound98Level : ProofLevel
+rowBCSameDensityGeneratorRowIdentificationRound98Level = conditional
 
 ------------------------------------------------------------------------
 -- Frozen four-row authority remains unchanged
 ------------------------------------------------------------------------
 
-round97FrozenResearchCountStillFour = R87.round87ShortestClayAnalyticCount
+round98FrozenResearchCountStillFour = R87.round87ShortestClayAnalyticCount
 
-rowACompletionRound97Level : ProofLevel
-rowACompletionRound97Level = conditional
+rowACompletionRound98Level : ProofLevel
+rowACompletionRound98Level = conditional
 
-rowBCompletionRound97Level : ProofLevel
-rowBCompletionRound97Level = conditional
+rowBCompletionRound98Level : ProofLevel
+rowBCompletionRound98Level = conditional
 
-rowCCompletionRound97Level : ProofLevel
-rowCCompletionRound97Level = conditional
+rowCCompletionRound98Level : ProofLevel
+rowCCompletionRound98Level = conditional
 
-rowDCompletionRound97Level : ProofLevel
-rowDCompletionRound97Level = conditional
+rowDCompletionRound98Level : ProofLevel
+rowDCompletionRound98Level = conditional
