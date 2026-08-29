@@ -10,6 +10,7 @@ import DASHI.Core.PluralConsumerProjectionSafety as Plural
 import DASHI.Biology.HumourOnlineEngagementFramework as Humour
 import DASHI.Biology.HumourEpistemicAgencyHyperfabricBridge as HumourAgency
 import DASHI.Reasoning.RelationRepresentationSourceRegistryExact as Sources
+import DASHI.Reasoning.RelationRepresentationStudyValidationObligationsExact as Validation
 import DASHI.Reasoning.RelationRepresentationAdequacyExact as Adequacy
 import DASHI.Reasoning.RelationRepresentationRealizationExact as Realization
 import DASHI.Reasoning.BidirectionalRelationRepresentationBridgeExact as Bidi
@@ -27,6 +28,9 @@ import DASHI.Reasoning.NeuralSpectralRelationCrossPollinationExact as NeuralCros
 
 sourceBoundary : Sources.RelationRepresentationAttributionBoundary
 sourceBoundary = Sources.canonicalRelationRepresentationAttributionBoundary
+
+studyValidationBoundary : Validation.StudyValidationBoundary
+studyValidationBoundary = Validation.canonicalStudyValidationBoundary
 
 adequacyBoundary : Adequacy.RelationRepresentationAdequacyBoundary
 adequacyBoundary = Adequacy.canonicalRelationRepresentationAdequacyBoundary
@@ -54,6 +58,35 @@ humourBoundary = HumourCross.canonicalHumourRelationRepresentationBoundary
 
 neuralBoundary : NeuralCross.NeuralSpectralRelationBoundary
 neuralBoundary = NeuralCross.canonicalNeuralSpectralRelationBoundary
+
+------------------------------------------------------------------------
+-- External-study validation readiness remains fail-closed.
+------------------------------------------------------------------------
+
+relationDecoderPayloadStillAbsent :
+  Validation.relationDecoderRawPayloadPresent
+    Validation.currentExternalStudyPayloadAvailability ≡ false
+relationDecoderPayloadStillAbsent = refl
+
+risePayloadStillAbsent :
+  Validation.riseRawPayloadPresent
+    Validation.currentExternalStudyPayloadAvailability ≡ false
+risePayloadStillAbsent = refl
+
+recosPayloadStillAbsent :
+  Validation.recosRawPayloadPresent
+    Validation.currentExternalStudyPayloadAvailability ≡ false
+recosPayloadStillAbsent = refl
+
+manifoldPayloadStillAbsent :
+  Validation.manifoldSteeringRawPayloadPresent
+    Validation.currentExternalStudyPayloadAvailability ≡ false
+manifoldPayloadStillAbsent = refl
+
+externalRawPayloadCouldPopulateProducerInterfaces :
+  Validation.exactRawPayloadCouldPopulateProducerInterfaces
+    Validation.canonicalStudyValidationBoundary ≡ true
+externalRawPayloadCouldPopulateProducerInterfaces = refl
 
 ------------------------------------------------------------------------
 -- Exact finite producer receipts.
@@ -149,8 +182,8 @@ equalPhaseDoesNotCollapseAmplitude :
 equalPhaseDoesNotCollapseAmplitude = Phase.differentAmplitudeWitness
 
 sameAmplitudeCanRetainDifferentPhase :
-  Phase.amplitude Phase.sameAmplitudeDifferentPhaseA
-  ≡ Phase.amplitude Phase.sameAmplitudeDifferentPhaseB
+  Phase.amplitude Phase.sameAmplitudeDifferentAmplitudeA
+  ≡ Phase.amplitude Phase.sameAmplitudeDifferentAmplitudeB
 sameAmplitudeCanRetainDifferentPhase = Phase.sameAmplitudeWitness
 
 equalAmplitudeDoesNotCollapsePhase :
