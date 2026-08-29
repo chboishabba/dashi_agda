@@ -1,0 +1,52 @@
+name: NS Round203 comparable localization Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNComparableShellLocalizationRound203Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound203Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound203Validation.agda'
+      - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound203Exact.agda'
+      - 'scripts/check_ns_triad_clay_frontier.py'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'flake.nix'
+      - 'flake.lock'
+      - '.github/workflows/ns-triad-round203-comparable-localization.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  round203-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Reject frontier holes and postulates
+        run: python3 scripts/check_ns_triad_clay_frontier.py
+
+      - name: Type-check Round203 localization owner
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNComparableShellLocalizationRound203Exact.agda
+
+      - name: Type-check Round203 frontier validation
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound203Validation.agda
+
+      - name: Type-check Round203 paper interface
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Papers/NavierStokes/TheoremInterfaceRound203Exact.agda
