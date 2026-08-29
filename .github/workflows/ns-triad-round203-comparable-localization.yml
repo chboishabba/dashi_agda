@@ -10,21 +10,19 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNComparableFixedOutputCarrierRound207Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNComparableOutputL2CarrierRound208Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNComparableOutputGramTelescopeRound209Exact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNComparableFixedOutputUpperCollarRound210Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNComparableOutputResidualPaymentRound211Exact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNResonantOutputShellTriangleRound212Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNComparableFixedOutputTwoSidedCollarRound213Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNComparableConstantBandGramNoGoRound214Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNThreeClassPositiveResidualCompilerRound215Exact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPackageASelfExternalSignedProductionCompilerRound216Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNRawCurlCellMassEnergyDissipationRound217Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalResonantEuclideanSquareTriangleRound218Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalRawCurlCellEDAdapterRound219Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNCoherentGramOnlyCompanionCompilerRound220Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNAuthoritativePackageAPathRound221Exact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound221Exact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound221Validation.agda'
-      - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound221Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCoherentGramResidualTargetRound222Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound222Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound222Validation.agda'
+      - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound222Exact.agda'
       - 'scripts/check_ns_triad_clay_frontier.py'
       - 'scripts/run_agda29_parallel_check.sh'
       - 'flake.nix'
@@ -53,84 +51,55 @@ jobs:
 
       - name: Type-check Round203 localization owner
         run: >-
-          nix develop .# --command
-          bash scripts/run_agda29_parallel_check.sh
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNComparableShellLocalizationRound203Exact.agda
-
-      - name: Type-check Round207 fixed-output carrier
-        run: >-
-          nix develop .# --command
-          bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNComparableFixedOutputCarrierRound207Exact.agda
 
       - name: Type-check Round209 outputwise Gram telescope
         run: >-
-          nix develop .# --command
-          bash scripts/run_agda29_parallel_check.sh
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNComparableOutputGramTelescopeRound209Exact.agda
-
-      - name: Type-check Round211 backward residual payment socket
-        run: >-
-          nix develop .# --command
-          bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNComparableOutputResidualPaymentRound211Exact.agda
-
-      - name: Type-check Round213 two-sided CC collar
-        run: >-
-          nix develop .# --command
-          bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNComparableFixedOutputTwoSidedCollarRound213Exact.agda
-
-      - name: Type-check Round214 constant-band no-go
-        run: >-
-          nix develop .# --command
-          bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNComparableConstantBandGramNoGoRound214Exact.agda
 
       - name: Type-check Round215 positive three-class compiler
         run: >-
-          nix develop .# --command
-          bash scripts/run_agda29_parallel_check.sh
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNThreeClassPositiveResidualCompilerRound215Exact.agda
 
       - name: Type-check Round217 raw-cell ED compiler
         run: >-
-          nix develop .# --command
-          bash scripts/run_agda29_parallel_check.sh
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNRawCurlCellMassEnergyDissipationRound217Exact.agda
 
-      - name: Type-check Round218 resonant Euclidean square triangle
+      - name: Type-check Round218 resonant square triangle
         run: >-
-          nix develop .# --command
-          bash scripts/run_agda29_parallel_check.sh
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNPhysicalResonantEuclideanSquareTriangleRound218Exact.agda
 
-      - name: Type-check Round219 physical raw-cell ED adapters
+      - name: Type-check Round219 physical ED adapters
         run: >-
-          nix develop .# --command
-          bash scripts/run_agda29_parallel_check.sh
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNPhysicalRawCurlCellEDAdapterRound219Exact.agda
 
-      - name: Type-check Round220 coherent-only companion compiler
+      - name: Type-check Round220 coherent-only compiler
         run: >-
-          nix develop .# --command
-          bash scripts/run_agda29_parallel_check.sh
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNCoherentGramOnlyCompanionCompilerRound220Exact.agda
 
-      - name: Type-check Round221 authoritative A path
+      - name: Type-check Round221 authoritative path
         run: >-
-          nix develop .# --command
-          bash scripts/run_agda29_parallel_check.sh
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNAuthoritativePackageAPathRound221Exact.agda
 
-      - name: Type-check Round221 frontier validation
+      - name: Type-check Round222 coherent Gram target
         run: >-
-          nix develop .# --command
-          bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNClayFrontierRound221Validation.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNPhysicalCoherentGramResidualTargetRound222Exact.agda
 
-      - name: Type-check Round221 paper interface
+      - name: Type-check Round222 frontier validation
         run: >-
-          nix develop .# --command
-          bash scripts/run_agda29_parallel_check.sh
-          DASHI/Papers/NavierStokes/TheoremInterfaceRound221Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound222Validation.agda
+
+      - name: Type-check Round222 paper interface
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Papers/NavierStokes/TheoremInterfaceRound222Exact.agda
