@@ -3,12 +3,14 @@ module DASHI.Programmes.BidirectionalSatelliteValidation where
 open import DASHI.Core.Prelude
 
 open import DASHI.Programmes.BidirectionalSatelliteCorrectionExact
+open import DASHI.Programmes.ExecutableReceiptSchemaExact
 open import DASHI.Programmes.BrainKernelSemanticsCorrectionExact
 open import DASHI.Programmes.CFDChartCorrectionExact
 open import DASHI.Programmes.DashifineBenchmarkCorrectionExact
 open import DASHI.Programmes.GrokkingValidationCorrectionExact
 open import DASHI.Programmes.CoreReferenceCorrectionExact
 open import DASHI.Programmes.FRACDASHCompilerCorrectionExact
+open import DASHI.Programmes.FRACDASHNumericInterpreterTargetExact
 open import DASHI.Programmes.TestHarnessEvidenceCorrectionExact
 open import DASHI.Programmes.BrainHemibrainExperimentExact
 open import DASHI.Programmes.QuantumFalsifiableTargetExact
@@ -58,6 +60,34 @@ fracdashOneStepLiftsToFiniteTrace :
 fracdashOneStepLiftsToFiniteTrace =
   FRACDASHCompilerCorrectionBoundary.oneStepCommutationYieldsFiniteTraceCommutationIsTrue
     canonicalFRACDASHCompilerCorrectionBoundary
+
+fracdashFirstApplicablePolicyFormalised :
+  FRACDASHNumericInterpreterBoundary.firstApplicablePolicyFormalised
+    canonicalFRACDASHNumericInterpreterBoundary ≡ true
+fracdashFirstApplicablePolicyFormalised =
+  FRACDASHNumericInterpreterBoundary.firstApplicablePolicyFormalisedIsTrue
+    canonicalFRACDASHNumericInterpreterBoundary
+
+fracdashNumericGapNotFloatingPoint :
+  FRACDASHNumericInterpreterBoundary.remainingGapIsFloatingPointApproximation
+    canonicalFRACDASHNumericInterpreterBoundary ≡ false
+fracdashNumericGapNotFloatingPoint =
+  FRACDASHNumericInterpreterBoundary.remainingGapIsFloatingPointApproximationIsFalse
+    canonicalFRACDASHNumericInterpreterBoundary
+
+finiteExecutableObservationNotGlobalTheorem :
+  ExecutableReceiptBoundary.finiteRunObservationIsGlobalTheorem
+    canonicalExecutableReceiptBoundary ≡ false
+finiteExecutableObservationNotGlobalTheorem =
+  ExecutableReceiptBoundary.finiteRunObservationIsGlobalTheoremIsFalse
+    canonicalExecutableReceiptBoundary
+
+selectedCFDGramNotUniformFrame :
+  ExecutableReceiptBoundary.selectedGramIsUniformFrameTheorem
+    canonicalExecutableReceiptBoundary ≡ false
+selectedCFDGramNotUniformFrame =
+  ExecutableReceiptBoundary.selectedGramIsUniformFrameTheoremIsFalse
+    canonicalExecutableReceiptBoundary
 
 testHarnessArtifactNotProof :
   TestHarnessEvidenceCorrectionBoundary.plotOrMetricIsProofByItself
