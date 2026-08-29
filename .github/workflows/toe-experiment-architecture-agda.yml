@@ -11,8 +11,11 @@ on:
       - 'DASHI/Physics/Foundations/PhysicalTheoryExperimentDiscriminationExact.agda'
       - 'DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda'
       - 'DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryValidation.agda'
+      - 'DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryExact.agda'
+      - 'DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryValidation.agda'
       - 'DASHI/Physics/Foundations/Everything.agda'
       - 'scripts/check_toe_experiment_architecture.sh'
+      - 'scripts/check_shared_effective_source_recovery.sh'
       - '.github/workflows/toe-experiment-architecture-agda.yml'
   workflow_dispatch:
 
@@ -36,3 +39,5 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Run focused TOE experiment architecture audit
         run: nix develop .# --command bash scripts/check_toe_experiment_architecture.sh
+      - name: Run shared effective-source QFT/GR audit
+        run: nix develop .# --command bash scripts/check_shared_effective_source_recovery.sh
