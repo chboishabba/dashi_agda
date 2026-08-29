@@ -3,25 +3,16 @@ module DASHI.Physics.YangMills.BalabanCMP109116SourceContinuationRound103Exact w
 
 ------------------------------------------------------------------------
 -- ROUND103 BC1 SOURCE CONTINUATION
+-- Tadeusz Bałaban, CMP109 (1987), DOI 10.1007/BF01215223;
+-- CMP116 (1988), DOI 10.1007/BF01239022.
 --
--- Tadeusz Bałaban,
---   Part I: Commun. Math. Phys. 109 (1987), 249--301,
---   DOI 10.1007/BF01215223.
---   Part II: Commun. Math. Phys. 116 (1988), 1--22,
---   DOI 10.1007/BF01239022.
---
--- Part II explicitly calls CMP109 "the first paper", starts from the fluctuation
--- field effective action constructed there, localizes its terms, and states that
--- the resulting exponentiated cluster expansion completes the construction of
--- the sequence of effective actions.  Sect.1 furthermore writes the local source
--- object as E(X,U,J,A) followed by the literal analytic substitutions in A.
---
--- Therefore the correct same-object carrier is the PHYSICAL COMPOSITE localized
--- activity after those substitutions, not the bare A-coordinate activity.
+-- Part II explicitly continues/localizes the fluctuation-field effective action
+-- from Part I.  We choose each Part-II local activity AFTER its literal analytic
+-- A=A(B) substitution, so Scale, Volume and Background are shared by type rather
+-- than asserted later by opaque convention labels.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List)
-open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -33,15 +24,12 @@ record CMP109116LiteralEffectiveActionContinuation : Set₁ where
 
     components : Scale → Volume → List Component
 
-    -- CMP116 local term AFTER the source's A=A(B) substitution.  Its domain is
-    -- the physical background coordinate differentiated in CMP109 Sect.5.
     cmp116PhysicalLocalizedActivity :
       Scale → Volume → Component → Background → ℝ
 
-    -- The actual finite-cutoff effective action E^(j) of CMP109.
     cmp109EffectivePotential : Scale → Volume → Background → ℝ
 
-    -- Published Part-I/Part-II same-action statement at the chosen scale/volume.
+    -- The actual evidence-bearing Part-I/Part-II same-action statement.
     effectivePotentialIsLocalizedCompositeSum :
       ∀ scale volume background →
       cmp109EffectivePotential scale volume background
@@ -50,11 +38,6 @@ record CMP109116LiteralEffectiveActionContinuation : Set₁ where
             (cmp116PhysicalLocalizedActivity scale volume)
             (components scale volume))
           background
-
-    -- Scale/volume/background conventions are literal, not merely equivalent.
-    sameBlockingScaleConvention : Set
-    sameFiniteVolumeConvention : Set
-    sameBackgroundConfigurationConvention : Set
 
 open CMP109116LiteralEffectiveActionContinuation public
 
@@ -77,16 +60,11 @@ atScaleVolume source scale volume = record
 cmp109116SourceContinuationPackagingLevel : ProofLevel
 cmp109116SourceContinuationPackagingLevel = machineChecked
 
--- These source statements are directly stated by CMP116's relationship to Part I
--- and by its Sect.1 localization construction.  They are external source facts,
--- not locally promotable physical completion evidence by themselves.
 cmp116PartIIContinuesPartIEffectiveActionLevel : ProofLevel
 cmp116PartIIContinuesPartIEffectiveActionLevel = standardImported
 
 cmp116LocalizedCompositeActivitySourceLevel : ProofLevel
 cmp116LocalizedCompositeActivitySourceLevel = standardImported
 
--- Repository-level physical instantiation still requires binding the source's
--- symbols to our actual finite-cutoff generated action, scale and volume types.
 literalRepositoryCMP109116ContinuationInstantiationLevel : ProofLevel
 literalRepositoryCMP109116ContinuationInstantiationLevel = conditional
