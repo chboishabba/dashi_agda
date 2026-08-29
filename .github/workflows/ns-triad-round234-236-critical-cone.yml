@@ -1,0 +1,49 @@
+name: NS Round234-236 critical cone
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNDeepFarLowCriticalShoulderRound234Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNDeepHHNullCriticalShoulderRound235Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNParabolicCriticalFrequencyConeRound236Exact.agda'
+      - 'scripts/audit_opposite_helicity_symbol_round232.py'
+      - 'scripts/audit_mixed_helicity_forcing_work_round233.py'
+      - '.github/workflows/ns-triad-round234-236-critical-cone.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  critical-cone:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Audit Round232 opposite-helicity symbol regimes
+        run: python3 scripts/audit_opposite_helicity_symbol_round232.py
+
+      - name: Audit Round233 physical forcing-work sign and homogeneity
+        run: python3 scripts/audit_mixed_helicity_forcing_work_round233.py
+
+      - name: Type-check Round234 deep far-low threshold
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNDeepFarLowCriticalShoulderRound234Exact.agda
+
+      - name: Type-check Round235 deep HH null threshold
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNDeepHHNullCriticalShoulderRound235Exact.agda
+
+      - name: Type-check Round236 parabolic critical cone
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNParabolicCriticalFrequencyConeRound236Exact.agda
