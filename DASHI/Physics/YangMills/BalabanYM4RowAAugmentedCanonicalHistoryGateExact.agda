@@ -25,7 +25,7 @@ module DASHI.Physics.YangMills.BalabanYM4RowAAugmentedCanonicalHistoryGateExact 
 ------------------------------------------------------------------------
 
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _<_)
+  (ℚ; 0ℚ; _+_; _-_; -_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -85,15 +85,22 @@ interactionPartBelowCombined dataSet =
           hNonnegative = ℚ.nonNegative (historySlopeNonnegative dataSet)
       in ℚP.nonNegative⁻¹ (b * H)
 
+    cBelowCL : C ≤ C + L
+    cBelowCL =
+      subst
+        (λ left → left ≤ C + L)
+        (ℚP.+-identityʳ C)
+        (ℚP.+-monoʳ-≤ C (localDerivativeNonnegative dataSet))
+
+    clBelow : C + L ≤ C + L + b * H
+    clBelow =
+      subst
+        (λ left → left ≤ C + L + b * H)
+        (ℚP.+-identityʳ (C + L))
+        (ℚP.+-monoʳ-≤ (C + L) bHNN)
+
     cBelow : C ≤ C + L + b * H
-    cBelow =
-      ℚP.≤-trans
-        (subst (λ right → C ≤ right)
-          (ℚP.+-identityʳ C)
-          (ℚP.+-monoʳ-≤ C (localDerivativeNonnegative dataSet)))
-        (subst (λ left → C + L ≤ left)
-          (ℚP.+-identityʳ (C + L))
-          (ℚP.+-monoʳ-≤ (C + L) bHNN))
+    cBelow = ℚP.≤-trans cBelowCL clBelow
   in
   Norm.scaleʳ-nonNeg (couplingCapNonnegative dataSet) cBelow
 
@@ -106,7 +113,6 @@ betaMarginPositive dataSet =
     CgBelowCombined = interactionPartBelowCombined dataSet
     CgBelowB : Cg < gaussianFloor dataSet
     CgBelowB = ℚP.≤-<-trans CgBelowCombined (combinedSmallness dataSet)
-
     shifted = ℚP.+-monoʳ-< (- Cg) CgBelowB
   in
   subst
@@ -122,21 +128,38 @@ betaMarginBelowGaussian :
   betaMargin dataSet ≤ gaussianFloor dataSet
 betaMarginBelowGaussian dataSet =
   let
-    CgNN : 0ℚ ≤ interactionConstant dataSet * couplingCap dataSet
+    b = gaussianFloor dataSet
+    Cg = interactionConstant dataSet * couplingCap dataSet
+
+    CgNN : 0ℚ ≤ Cg
     CgNN =
       let instance cNN = ℚ.nonNegative (interactionConstantNonnegative dataSet)
           gNN = ℚ.nonNegative (couplingCapNonnegative dataSet)
-      in ℚP.nonNegative⁻¹
-        (interactionConstant dataSet * couplingCap dataSet)
+      in ℚP.nonNegative⁻¹ Cg
+
+    negBelowZeroRaw : 0ℚ + (- Cg) ≤ Cg + (- Cg)
+    negBelowZeroRaw = ℚP.+-monoʳ-≤ (- Cg) CgNN
+
+    negBelowZero : - Cg ≤ 0ℚ
+    negBelowZero =
+      subst
+        (λ left → left ≤ 0ℚ)
+        (ℚP.+-identityˡ (- Cg))
+        (subst
+          (λ right → 0ℚ + (- Cg) ≤ right)
+          (ℚRing.solve-∀ Cg)
+          negBelowZeroRaw)
+
+    shifted : b + (- Cg) ≤ b + 0ℚ
+    shifted = ℚP.+-monoʳ-≤ b negBelowZero
   in
   subst
-    (λ left → left ≤ gaussianFloor dataSet)
-    (ℚRing.solve-∀
-      (gaussianFloor dataSet)
-      (interactionConstant dataSet * couplingCap dataSet))
-    (ℚP.+-monoˡ-≤-nonNeg
-      (gaussianFloor dataSet)
-      (ℚP.neg-nonPos CgNN))
+    (λ left → left ≤ b)
+    (ℚRing.solve-∀ b Cg)
+    (subst
+      (λ right → b + (- Cg) ≤ right)
+      (ℚP.+-identityʳ b)
+      shifted)
 
 localDerivativeTubeBound :
   (dataSet : AugmentedHistorySmallCouplingGate) →
@@ -154,9 +177,6 @@ historyBudgetBound :
   ≤ gaussianFloor dataSet * historySlope dataSet * couplingCap dataSet
 historyBudgetBound dataSet =
   let
-    marginNN : 0ℚ ≤ betaMargin dataSet
-    marginNN = ℚP.<⇒≤ (betaMarginPositive dataSet)
-
     first :
       betaMargin dataSet * historyConstant dataSet
       ≤ gaussianFloor dataSet * historyConstant dataSet
@@ -218,7 +238,6 @@ capBudgetBelowBetaMargin dataSet =
     b = gaussianFloor dataSet
     H = historySlope dataSet
     g = couplingCap dataSet
-
     combined = combinedSmallness dataSet
     shifted = ℚP.+-monoʳ-< (-(C * g)) combined
   in
