@@ -30,11 +30,12 @@ module DASHI.Physics.YangMills.BalabanYM4QuarticSourceSensitivityBudgetExact whe
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Data.Nat.Base as ℕ
+import Data.Nat.Properties as ℕP
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_; NonNegative)
+  (ℚ; 0ℚ; _*_; _≤_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
@@ -72,10 +73,6 @@ record QuarticSourceSensitivityData
     couplingNonnegative : ∀ j → 0ℚ ≤ Direct.coupling direct j
     couplingBelowCap : ∀ j → j ℕ.< cutoff →
       Direct.coupling direct j ≤ couplingCap
-
-    sourceSensitivityIsKernelSource : ∀ j →
-      Kernel.sourceSensitivity kernel j
-      ≡ Kernel.sourceSensitivity kernel j
 
     sourceQuartic : ∀ j → j ℕ.< cutoff →
       Kernel.sourceSensitivity kernel j
@@ -123,7 +120,6 @@ sourceBelowCapTimesCube :
 sourceBelowCapTimesCube dataSet j j< =
   let
     D = sourceCoefficient dataSet
-    g4 = power4 (Direct.coupling (direct dataSet) j)
     first = sourceQuartic dataSet j j<
     scaled = Norm.scaleNonnegative
       D (sourceCoefficientNonnegative dataSet)
@@ -131,7 +127,8 @@ sourceBelowCapTimesCube dataSet j j< =
   in
   ℚP.≤-trans first
     (subst
-      (λ right → D * g4 ≤ right)
+      (λ right →
+        D * power4 (Direct.coupling (direct dataSet) j) ≤ right)
       (ℚRing.solve-∀
         D (couplingCap dataSet)
         (Cubic.cube (Direct.coupling (direct dataSet) j)))
@@ -149,16 +146,19 @@ sourcePartialBelowCapTimesCubes dataSet zero K≤ =
     (λ right → 0ℚ ≤ right)
     (sym (ℚP.*-zeroʳ (sourceCoefficient dataSet * couplingCap dataSet)))
     ℚP.≤-refl
-sourcePartialBelowCapTimesCubes dataSet (suc n) sucN≤ =
+sourcePartialBelowCapTimesCubes {kernel} dataSet (suc n) sucN≤ =
   let
+    n<cutoff : n ℕ.< _
+    n<cutoff = sucN≤
+
     previous = sourcePartialBelowCapTimesCubes
-      dataSet n (ℕ.<⇒≤ sucN≤)
-    current = sourceBelowCapTimesCube dataSet n sucN≤
+      dataSet n (ℕP.<⇒≤ n<cutoff)
+    current = sourceBelowCapTimesCube dataSet n n<cutoff
     added = ℚP.+-mono-≤ previous current
   in
   subst
     (λ right →
-      Kernel.sum₀ (Kernel.sourceSensitivity _) (suc n) ≤ right)
+      Kernel.sum₀ (Kernel.sourceSensitivity kernel) (suc n) ≤ right)
     (ℚRing.solve-∀
       (sourceCoefficient dataSet)
       (couplingCap dataSet)
@@ -192,21 +192,20 @@ cubicSumUniform dataSet K K≤ =
     invNN = ℚP.<⇒≤
       (Quot.positiveReciprocalPositive margin (Direct.marginPositive (direct dataSet)))
 
+    scaled : inv * (margin * sum) ≤ inv * upper
     scaled = Norm.scaleNonnegative inv invNN
       (Direct.cubicSumBound (direct dataSet) K K≤)
 
+    rightInverse : margin * inv ≡ Data.Rational.Base.1ℚ
+    rightInverse = Quot.positiveReciprocalRightInverse
+      margin (Direct.marginPositive (direct dataSet))
+
     leftIdentity : inv * (margin * sum) ≡ sum
     leftIdentity =
-      let
-        rightInverse = Quot.positiveReciprocalRightInverse
-          margin (Direct.marginPositive (direct dataSet))
-      in
-      subst
-        (λ selected → inv * (margin * sum) ≡ selected * sum)
-        (ℚP.*-comm inv margin)
-        (subst
-          (λ selected → margin * inv * sum ≡ selected * sum)
-          rightInverse
+      trans
+        (ℚRing.solve-∀ inv margin sum)
+        (trans
+          (cong (_* sum) rightInverse)
           (ℚP.*-identityˡ sum))
   in
   subst
