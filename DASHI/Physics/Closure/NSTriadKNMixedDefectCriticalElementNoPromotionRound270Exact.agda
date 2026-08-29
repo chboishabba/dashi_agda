@@ -1,29 +1,19 @@
 module DASHI.Physics.Closure.NSTriadKNMixedDefectCriticalElementNoPromotionRound270Exact where
 
 ------------------------------------------------------------------------
--- ROUND270 / EXACT RESEARCH SEAM AFTER A B C D* H
+-- ROUND270 / EXACT RESEARCH SEAM AFTER A B C D* F H
 --
--- The surviving mathematical gap is NOT periodic Sobolev theory, Galerkin
--- energy, first-hit continuity, static profile decomposition, or sequential
--- boundedness. It is the promotion from a mixed-defect obstruction to the
--- specific nonlinear critical element on which ESS rigidity can act.
+-- R271 adapts the standard concentration-compactness/minimal-threshold
+-- argument to the mixed-defect badness predicate itself, so F is no longer the
+-- fundamental gap. The surviving theorem is G*:
 --
--- Two genuinely new implications would suffice:
+--   mixed-defect-minimal compact NS critical element
+--     -> terminal vorticity vanishing/decay + ESS coefficient class.
 --
---   F_new:
---     first-hit mixed-defect bad sequence
---       -> one SAME-profile nonlinear NS critical element
---          minimal for the mixed-defect badness criterion
---          and compact modulo NS symmetries;
---
---   G_new:
---     that SAME mixed-defect critical element
---       -> terminal vorticity vanishing/decay + ESS coefficient class.
---
--- GKP proves the analogous critical-element selection for a singularity /
--- regularity-failure threshold. ESS proves rigidity once its terminal and
--- coefficient hypotheses hold. Neither published theorem identifies those
--- hypotheses with our mixed-defect badness predicate automatically.
+-- ESS proves backward uniqueness ONCE those hypotheses hold. Known GKP/ESS
+-- results do not derive them merely from compactness modulo symmetry and
+-- nonzero mixed defect. Promoting them automatically would smuggle the open
+-- regularity step into a source citation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -41,17 +31,14 @@ round270FiniteDimensionalFirstHitLeafCResolved = true
 round270StaticFirstHitProfileLeafDstarResolved : Bool
 round270StaticFirstHitProfileLeafDstarResolved = true
 
+round270MixedDefectCriticalElementLeafFResolvedByRound271 : Bool
+round270MixedDefectCriticalElementLeafFResolvedByRound271 = true
+
 round270SequentialBoundednessLeafHResolved : Bool
 round270SequentialBoundednessLeafHResolved = true
 
-round270MixedDefectToNonlinearCriticalElementFOpen : Bool
-round270MixedDefectToNonlinearCriticalElementFOpen = true
-
 round270MixedDefectCriticalElementToESSHypothesesGstarOpen : Bool
 round270MixedDefectCriticalElementToESSHypothesesGstarOpen = true
-
-round270KnownGKPAutomaticallyClosesF : Bool
-round270KnownGKPAutomaticallyClosesF = false
 
 round270KnownESSAutomaticallyClosesGstar : Bool
 round270KnownESSAutomaticallyClosesGstar = false
@@ -62,9 +49,9 @@ round270PackageAClosed = false
 round270ClayPromotion : Bool
 round270ClayPromotion = false
 
-round270KnownGKPAutomaticallyClosesFIsFalse :
-  round270KnownGKPAutomaticallyClosesF ≡ false
-round270KnownGKPAutomaticallyClosesFIsFalse = refl
+round270MixedDefectCriticalElementLeafFResolvedByRound271IsTrue :
+  round270MixedDefectCriticalElementLeafFResolvedByRound271 ≡ true
+round270MixedDefectCriticalElementLeafFResolvedByRound271IsTrue = refl
 
 round270KnownESSAutomaticallyClosesGstarIsFalse :
   round270KnownESSAutomaticallyClosesGstar ≡ false
