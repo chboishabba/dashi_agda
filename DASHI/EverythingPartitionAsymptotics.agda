@@ -9,8 +9,9 @@ module DASHI.EverythingPartitionAsymptotics where
 -- division-free root tangent estimate, concrete factorial exponential series,
 -- native Cauchy-tail/rectangle/triangle owners, finite binomial coefficient
 -- identification, the all-positive cubic translation/geometric kernel route,
--- and a bidirectional Basel lane whose remaining middle seam is isolated as a
--- sine-product coefficient-limit theorem.
+-- exact residual-major <-> k-major factor reindexing, and a bidirectional
+-- Basel lane whose remaining middle seam is isolated as a sine-product
+-- coefficient-limit theorem.
 ------------------------------------------------------------------------
 
 import DASHI.Foundations.BishopVendoredSubmoduleProvenanceExact
@@ -56,9 +57,11 @@ import DASHI.Foundations.BishopBaselFiniteSineProductCoefficientExact
 import DASHI.Foundations.BishopBaselReciprocalSquareConvergenceExact
 import DASHI.Foundations.BishopNatRealReciprocalSquareBaselExact
 import DASHI.Foundations.BishopBaselFiniteCommonFactorExact
+import DASHI.Foundations.BishopBaselFinitePrefixBelowLimitExact
 import DASHI.Foundations.BishopBaselMachinSineQuadraticCoefficientExact
 import DASHI.Foundations.BishopBaselFiniteProductCoefficientLimitExact
 import DASHI.Foundations.BishopBaselSineProductCoefficientBoundaryExact
+import DASHI.Foundations.BishopPositiveNatScaleReciprocalSquareExact
 import DASHI.Mathematics.NumberTheory.FiniteNatFloorSquareRootExact
 import DASHI.Mathematics.NumberTheory.FiniteNatFractionOrderExact
 import DASHI.Mathematics.NumberTheory.FiniteNatSuccessorFractionExact
@@ -126,6 +129,10 @@ import DASHI.Mathematics.NumberTheory.PartitionErdosBishopFactorPairFiniteKernel
 import DASHI.Mathematics.NumberTheory.PartitionErdosBishopFactorPairInverseSquareNormalizationExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosBishopFactorPairNormalizedKernelExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosBishopFactorPairBaselKernelExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopKMajorMaskedKernelExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopKMajorBaselLimitKernelExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopStepConstantCancellationExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopKMajorPiKernelExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalResidualExpansionExact
 import DASHI.Mathematics.NumberTheory.PartitionDivisorSumRecurrencePrefixExact
 import DASHI.Mathematics.NumberTheory.PartitionDivisorSumRegroupingExact
