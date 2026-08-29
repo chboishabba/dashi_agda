@@ -6,11 +6,20 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound95MasterSyncExact whe
 -- This root starts from current master, not the old long-lived Round61 PR
 -- branch.  Master already contains the stronger Row-A gate composition and
 -- cubic-telescope shooting sensitivity algebra.  Round95 sharpens that further:
--- on a source tube with width <= gamma, BOTH Row-A numerical gates follow from
+-- BOTH Row-A numerical gates follow from one source smallness inequality
 --
 --                     (C + L) gamma < b_-.
 --
--- It also advances B and the B->C temporal fusion:
+-- Moreover gamma is no longer an existential tuning parameter.  Given a
+-- positive floor b_- and finite nonnegative C,L, choose canonically
+--
+--                 gamma = b_- / (2 (C + L + 1)).
+--
+-- Exact rational arithmetic proves this gamma is positive and pays the combined
+-- gate.  Thus the remaining A-side scalar work is source identification of the
+-- positive floor and finite source constants on the literal same trajectory.
+--
+-- Round95 also advances B and the B->C temporal fusion:
 --
 --   differentiated activity A a^n
 --   × shell entropy B e^n
@@ -36,13 +45,14 @@ import DASHI.Physics.YangMills.BalabanYM4RowAGateCompositionExact as A
 import DASHI.Physics.YangMills.BalabanYM4ShootingSensitivityFromCubicDriftExact as AShoot
 import DASHI.Physics.YangMills.BalabanYM4RowACombinedSmallCouplingGateExact as AOne
 import DASHI.Physics.YangMills.BalabanYM4RowACombinedGateCompositionExact as ACompose
+import DASHI.Physics.YangMills.BalabanYM4RowACanonicalSmallCouplingChoiceExact as ACanonical
 import DASHI.Physics.YangMills.BalabanRowBActivityEntropyToShellEnergyExact as B
 import DASHI.Physics.YangMills.BalabanMarkedSourceGeometricShellEnergyExact as BSum
 import DASHI.Physics.YangMills.BalabanRowBCMarkedShellToCurvatureDebtExact as BC
 import DASHI.Physics.YangMills.BalabanRowBCMarkedShellToPolchinskiIntegralDebtExact as BCIntegral
 
 ------------------------------------------------------------------------
--- A: two numerical gates collapse to one source smallness inequality
+-- A: two numerical gates collapse to one canonical small-coupling choice
 ------------------------------------------------------------------------
 
 rowACubicShootingSensitivityAlgebraRound95Level : ProofLevel
@@ -63,15 +73,23 @@ rowAOneSmallnessGateCompositionRound95Level : ProofLevel
 rowAOneSmallnessGateCompositionRound95Level =
   ACompose.rowAOneSmallnessGateCompositionLevel
 
--- Physical A seam after Round95: identify the literal positive floor b_- and
--- finite interaction/derivative constants C,L on one source tube, arrange
--- tubeWidth <= gamma, and prove the single strict inequality
---
---                         (C + L) gamma < b_-.
---
--- Positivity and shooting contraction then share the same small-coupling choice.
-rowALiteralOneGateInstantiationRound95Level : ProofLevel
-rowALiteralOneGateInstantiationRound95Level = conditional
+rowACanonicalGammaPositiveRound95Level : ProofLevel
+rowACanonicalGammaPositiveRound95Level =
+  ACanonical.rowACanonicalGammaPositiveLevel
+
+rowACanonicalGammaPaysCombinedGateRound95Level : ProofLevel
+rowACanonicalGammaPaysCombinedGateRound95Level =
+  ACanonical.rowACanonicalGammaPaysCombinedGateLevel
+
+-- Physical A seam after Round95: derive on the literal source trajectory
+--   * b_- > 0,
+--   * finite C >= 0,
+--   * finite L >= 0,
+-- and identify the source tube with width no larger than the canonical gamma.
+-- The existence and arithmetic of a sufficiently-small coupling cap are now
+-- theorem-owned rather than a second physical estimate.
+rowALiteralFiniteSourceConstantsRound95Level : ProofLevel
+rowALiteralFiniteSourceConstantsRound95Level = conditional
 
 ------------------------------------------------------------------------
 -- B: source activity × entropy is now the only geometric-shell producer
