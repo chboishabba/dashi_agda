@@ -3,102 +3,56 @@ module DASHI.Analysis.RiemannAristotleCurrentFrontierRegression where
 open import DASHI.Core.Prelude
 import DASHI.Analysis.RiemannAristotleCurrentFrontierExact as F
 
-universalEvenConeConstructionClosed :
-  F.AristotleCurrentFrontier.universalEvenConeConstructionClosedInLean
-    F.canonicalAristotleCurrentFrontier ≡ true
-universalEvenConeConstructionClosed = refl
+evenConeClosed : F.AristotleCurrentFrontier.universalEvenConeConstructionClosedInLean F.canonicalAristotleCurrentFrontier ≡ true
+evenConeClosed = refl
 
-twoRadiusDiscriminatorClosed :
-  F.AristotleCurrentFrontier.twoRadiusOffLineDiscriminatorClosedInLean
-    F.canonicalAristotleCurrentFrontier ≡ true
-twoRadiusDiscriminatorClosed = refl
+twoRadiusClosed : F.AristotleCurrentFrontier.twoRadiusOffLineDiscriminatorClosedInLean F.canonicalAristotleCurrentFrontier ≡ true
+twoRadiusClosed = refl
 
-primeProjectiveDebtZero :
-  F.AristotleCurrentFrontier.highOrdinatePrimeProjectiveDebtZeroInLean
-    F.canonicalAristotleCurrentFrontier ≡ true
-primeProjectiveDebtZero = refl
+primeZero : F.AristotleCurrentFrontier.highOrdinatePrimeProjectiveDebtZeroInLean F.canonicalAristotleCurrentFrontier ≡ true
+primeZero = refl
 
-targetLeadingCoefficientClosed :
-  F.AristotleCurrentFrontier.targetLeadingCoefficientAndRemainderClosedInLean
-    F.canonicalAristotleCurrentFrontier ≡ true
-targetLeadingCoefficientClosed = refl
+deterministicSchurKernelChecked : F.AristotleCurrentFrontier.deterministicProjectiveSchurKernelCheckedInLean F.canonicalAristotleCurrentFrontier ≡ true
+deterministicSchurKernelChecked = refl
 
-reflectionPairKernelClosed :
-  F.AristotleCurrentFrontier.reflectionPairKernelClosedInLean
-    F.canonicalAristotleCurrentFrontier ≡ true
-reflectionPairKernelClosed = refl
+explicitFarCutoffClosed : F.AristotleCurrentFrontier.explicitFarShellCutoffBoundClosedInLean F.canonicalAristotleCurrentFrontier ≡ true
+explicitFarCutoffClosed = refl
 
-reflectionFarTailConvergent :
-  F.AristotleCurrentFrontier.reflectionFarTailAbsoluteConvergenceClosedInLean
-    F.canonicalAristotleCurrentFrontier ≡ true
-reflectionFarTailConvergent = refl
+explicitFarDecayClosed : F.AristotleCurrentFrontier.explicitFarShellTendsToZeroClosedInLean F.canonicalAristotleCurrentFrontier ≡ true
+explicitFarDecayClosed = refl
 
-uniformCurvatureClosed :
-  F.AristotleCurrentFrontier.uniformReflectionCarrierCurvatureClosedInLean
-    F.canonicalAristotleCurrentFrontier ≡ true
-uniformCurvatureClosed = refl
+finiteNearCarrierClosed : F.AristotleCurrentFrontier.finiteSignedNearCarrierClosedInLean F.canonicalAristotleCurrentFrontier ≡ true
+finiteNearCarrierClosed = refl
 
-latestLeanBridgeKernelChecked :
-  F.AristotleCurrentFrontier.latestLeanBridgeBuildKernelChecked
-    F.canonicalAristotleCurrentFrontier ≡ true
-latestLeanBridgeKernelChecked = refl
+literalDoffCutoffClosed : F.AristotleCurrentFrontier.literalDoffCutoffCarrierClosedInLean F.canonicalAristotleCurrentFrontier ≡ true
+literalDoffCutoffClosed = refl
 
-wholeCarrierStrictBudgetIsContradictionTarget :
-  F.AristotleCurrentFrontier.wholePostSchurCarrierStrictBudgetIsContradictionTarget
-    F.canonicalAristotleCurrentFrontier ≡ true
-wholeCarrierStrictBudgetIsContradictionTarget = refl
+latestLeanBuildChecked : F.AristotleCurrentFrontier.latestLeanBridgeBuildKernelChecked F.canonicalAristotleCurrentFrontier ≡ true
+latestLeanBuildChecked = refl
 
-eliminationAlgebraDoesNotCloseStrictBudget :
-  F.AristotleCurrentFrontier.eliminationAlgebraAloneClosesStrictBudget
-    F.canonicalAristotleCurrentFrontier ≡ false
-eliminationAlgebraDoesNotCloseStrictBudget = refl
+nearFarCompilerClosed : F.AristotleCurrentFrontier.nearFarShellCompositionCompilerClosedInAgda F.canonicalAristotleCurrentFrontier ≡ true
+nearFarCompilerClosed = refl
 
-nearFarCompositionCompilerClosed :
-  F.AristotleCurrentFrontier.nearFarShellCompositionCompilerClosedInAgda
-    F.canonicalAristotleCurrentFrontier ≡ true
-nearFarCompositionCompilerClosed = refl
-
-allowanceCompilerClosed :
-  F.AristotleCurrentFrontier.nearFarAllowanceCompilerClosedInAgda
-    F.canonicalAristotleCurrentFrontier ≡ true
+allowanceCompilerClosed : F.AristotleCurrentFrontier.nearFarAllowanceCompilerClosedInAgda F.canonicalAristotleCurrentFrontier ≡ true
 allowanceCompilerClosed = refl
 
-jointCutoffCompilerClosed :
-  F.AristotleCurrentFrontier.jointCutoffCompilerClosedInAgda
-    F.canonicalAristotleCurrentFrontier ≡ true
-jointCutoffCompilerClosed = refl
+finiteSchurPerturbationCompilerClosed : F.AristotleCurrentFrontier.finiteNearCoreSchurPerturbationCompilerClosedInAgda F.canonicalAristotleCurrentFrontier ≡ true
+finiteSchurPerturbationCompilerClosed = refl
 
-quantitativeFarShellEnvelopeOpen :
-  F.AristotleCurrentFrontier.quantitativeFarShellEnvelopeClosed
-    F.canonicalAristotleCurrentFrontier ≡ false
-quantitativeFarShellEnvelopeOpen = refl
+leanFormulaNotPromotedToAgdaProof : F.AristotleCurrentFrontier.explicitLeanTailFormulaTransportedAsAgdaProof F.canonicalAristotleCurrentFrontier ≡ false
+leanFormulaNotPromotedToAgdaProof = refl
 
-explicitFarTailModulusOpen :
-  F.AristotleCurrentFrontier.explicitFarTailModulusTransportedToAgda
-    F.canonicalAristotleCurrentFrontier ≡ false
-explicitFarTailModulusOpen = refl
+finiteNearSchurCancellationOpen : F.AristotleCurrentFrontier.finiteSignedNearSchurCancellationClosed F.canonicalAristotleCurrentFrontier ≡ false
+finiteNearSchurCancellationOpen = refl
 
-finiteSignedNearCoreOpen :
-  F.AristotleCurrentFrontier.finiteSignedNearShellCoreClosed
-    F.canonicalAristotleCurrentFrontier ≡ false
-finiteSignedNearCoreOpen = refl
+jointFiniteMarginOpen : F.AristotleCurrentFrontier.jointFiniteNearFarMarginClosed F.canonicalAristotleCurrentFrontier ≡ false
+jointFiniteMarginOpen = refl
 
-jointNearFarCutoffStillOpen :
-  F.AristotleCurrentFrontier.jointNearFarCutoffFound
-    F.canonicalAristotleCurrentFrontier ≡ false
-jointNearFarCutoffStillOpen = refl
+threeTaperConstructionOpen : F.AristotleCurrentFrontier.deterministicNuisanceThreeTaperConstructionClosed F.canonicalAristotleCurrentFrontier ≡ false
+threeTaperConstructionOpen = refl
 
-deterministicThreeTaperConstructionOpen :
-  F.AristotleCurrentFrontier.deterministicNuisanceThreeTaperConstructionClosed
-    F.canonicalAristotleCurrentFrontier ≡ false
-deterministicThreeTaperConstructionOpen = refl
+lowOrdinateOpen : F.AristotleCurrentFrontier.lowOrdinateComplementCertified F.canonicalAristotleCurrentFrontier ≡ false
+lowOrdinateOpen = refl
 
-lowOrdinateComplementOpen :
-  F.AristotleCurrentFrontier.lowOrdinateComplementCertified
-    F.canonicalAristotleCurrentFrontier ≡ false
-lowOrdinateComplementOpen = refl
-
-rhStillOpen :
-  F.AristotleCurrentFrontier.finalRHImplicationClosed
-    F.canonicalAristotleCurrentFrontier ≡ false
-rhStillOpen = refl
+rhOpen : F.AristotleCurrentFrontier.finalRHImplicationClosed F.canonicalAristotleCurrentFrontier ≡ false
+rhOpen = refl
