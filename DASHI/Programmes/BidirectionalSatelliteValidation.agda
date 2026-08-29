@@ -14,11 +14,6 @@ open import DASHI.Programmes.BrainHemibrainExperimentExact
 open import DASHI.Programmes.QuantumFalsifiableTargetExact
 open import DASHI.Programmes.RTXLightTransportRefinementExact
 
-------------------------------------------------------------------------
--- BIDI programme receipts.  This root intentionally validates both the generic
--- correction compiler and the repo-specific anti-promotion boundaries.
-------------------------------------------------------------------------
-
 bidiNeedsReceipts : correctedModelStillNeedsReceipt cfdBIDIAudit ≡ true
 bidiNeedsReceipts = correctedModelStillNeedsReceiptIsTrue cfdBIDIAudit
 
