@@ -5,6 +5,7 @@ import DASHI.Core.ActionabilityCostedExperimentChoiceExact
 import DASHI.Core.CommonExperimentRealisationExact
 import DASHI.Core.DiscriminatorSynthesisExact
 import DASHI.Core.CoarseFineRelativeFibreExact
+import DASHI.Core.RelativeFineModelFidelityOrthogonalityExact
 import DASHI.Core.ConsumerDecisionAdequacyFromReductionExact
 import DASHI.Core.ConsumerAdequacyJointPolicyBidiCompilerExact
 import DASHI.Core.SequentialConsumerExperimentPlannerExact
