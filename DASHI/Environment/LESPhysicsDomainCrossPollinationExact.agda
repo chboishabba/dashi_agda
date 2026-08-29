@@ -18,35 +18,20 @@ import DASHI.Physics.Units.SI as SI
 import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact as EM
 import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact as PNP
 
-------------------------------------------------------------------------
--- LES PHYSICS -> DOMAIN BIDI ASSEMBLY
-------------------------------------------------------------------------
-
 data PhysicsReuseLane : Set where
-  fluidMechanicsLane
-  gaugeElectromagneticLane
-  reactionTransportLane
-  bioelectricElectrochemicalLane
-  rootSoilFungalPhysiologyLane
-  soilBiogeochemistryLane
-  plantHydraulicAtmosphereCarbonLane
-  soilPlantAtmosphereContinuumLane
-  constitutiveSPACCalibrationLane
+  fluidMechanicsLane gaugeElectromagneticLane reactionTransportLane
+  bioelectricElectrochemicalLane rootSoilFungalPhysiologyLane
+  soilBiogeochemistryLane plantHydraulicAtmosphereCarbonLane
+  soilPlantAtmosphereContinuumLane constitutiveSPACCalibrationLane
   : PhysicsReuseLane
 
 record PhysicsToDomainWeld : Set where
   constructor physicsToDomainWeld
   field
     lane : PhysicsReuseLane
-    physicsOwner : String
-    domainOwner : String
-    sameCarrierOrReductionReference : String
-    siQuantityReference : String
-    constitutiveReference : String
-    boundaryGeometryReference : String
-    scaleRegimeReference : String
-    validationReference : String
-
+    physicsOwner domainOwner sameCarrierOrReductionReference : String
+    siQuantityReference constitutiveReference boundaryGeometryReference : String
+    scaleRegimeReference validationReference : String
 open PhysicsToDomainWeld public
 
 record MechanisticDomainRealization : Set₁ where
@@ -54,11 +39,8 @@ record MechanisticDomainRealization : Set₁ where
   field
     mechanism : Basis.DomainMechanismSocket
     physicsWelds : List PhysicsToDomainWeld
-    discrepancyModelReference : String
-    experimentDesignReference : String
-    identifiabilityReference : String
-    heldOutValidationReference : String
-
+    discrepancyModelReference experimentDesignReference : String
+    identifiabilityReference heldOutValidationReference : String
 open MechanisticDomainRealization public
 
 stage7TargetObligations : List Robust.RobustnessObligation
@@ -71,35 +53,28 @@ environmentSIBridgeOwner : String
 environmentSIBridgeOwner = "DASHI.Environment.LESEnvironmentSIQuantityBridgeExact"
 
 physicalProcessSourceRegistryOwner : String
-physicalProcessSourceRegistryOwner =
-  "DASHI.Environment.LESPhysicalProcessSourceRegistryExact"
+physicalProcessSourceRegistryOwner = "DASHI.Environment.LESPhysicalProcessSourceRegistryExact"
 
 u1Owner : String
 u1Owner = "DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact"
 
 pnpOwner : String
-pnpOwner =
-  "DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact; DOI 10.3390/electrochem2020014"
+pnpOwner = "DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact; DOI 10.3390/electrochem2020014"
 
 rootSoilFungalOwner : String
-rootSoilFungalOwner =
-  "DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact; DOI 10.1023/A:1026439226716 + 10.1104/pp.114.246124 + 10.1146/annurev-arplant-042110-103846"
+rootSoilFungalOwner = "DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact; DOI 10.1023/A:1026439226716 + 10.1104/pp.114.246124 + 10.1146/annurev-arplant-042110-103846"
 
 soilBiogeochemistryOwner : String
-soilBiogeochemistryOwner =
-  "DASHI.Environment.SoilBiogeochemistryProcessNetworkExact; DOI 10.1016/j.soilbio.2009.02.031"
+soilBiogeochemistryOwner = "DASHI.Environment.SoilBiogeochemistryProcessNetworkExact; DOI 10.1016/j.soilbio.2009.02.031"
 
 plantHydraulicOwner : String
-plantHydraulicOwner =
-  "DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact; DOI 10.1007/978-3-662-04931-0 + 10.1007/BF00386231 + 10.1111/pce.12823"
+plantHydraulicOwner = "DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact; DOI 10.1007/978-3-662-04931-0 + 10.1007/BF00386231 + 10.1111/pce.12823"
 
 spacOwner : String
-spacOwner =
-  "DASHI.Environment.SoilPlantAtmosphereContinuumExact; DOI 10.2134/agronj2003.1362"
+spacOwner = "DASHI.Environment.SoilPlantAtmosphereContinuumExact; DOI 10.2134/agronj2003.1362"
 
 constitutiveCalibrationOwner : String
-constitutiveCalibrationOwner =
-  "DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact; DOI 10.1063/1.1745010 + 10.1029/WR012i003p00513 + 10.2136/sssaj1980.03615995004400050002x + 10.1111/j.1365-2486.2010.02375.x"
+constitutiveCalibrationOwner = "DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact; DOI 10.1063/1.1745010 + 10.1029/WR012i003p00513 + 10.2136/sssaj1980.03615995004400050002x + 10.1111/j.1365-2486.2010.02375.x"
 
 siVoltageDimension : SI.Dimension
 siVoltageDimension = SI.Voltage
@@ -134,32 +109,19 @@ constitutiveBoundaryImported = Constitutive.canonicalConstitutiveHydrologyPlantB
 record LESPhysicsCrossPollinationCutset : Set where
   constructor lesPhysicsCrossPollinationCutset
   field
-    navierStokesLaneReferenced : Bool
-    certifiedSpatialTransportReferenced : Bool
-    reactionTransportWeldTyped : Bool
-    bioelectricChemistryLaneReferenced : Bool
-    suNGaugeLaneReferencedWithBoundary : Bool
-    canonicalSIUnitsOwnerPresent : Bool
-    environmentalPhysicalUnitsWeldedToSI : Bool
-    independentU1ApplicationOwnerPresent : Bool
-    pnpElectrodiffusionOwnerPresent : Bool
-    bioelectricPNPWeldTyped : Bool
-    rootSoilFungalIonWaterArchitecturePresent : Bool
-    rootSoilSameSpeciesWeldTyped : Bool
-    mycorrhizalExtensionTyped : Bool
-    soilCarbonNitrogenProcessArchitecturePresent : Bool
-    soilPlantFungalBiogeochemistryWeldTyped : Bool
-    plantHydraulicAtmosphereCarbonArchitecturePresent : Bool
-    wholePlantSameStateWeldTyped : Bool
-    atmosphereWindLeafBoundaryWeldTyped : Bool
-    soilPlantAtmosphereContinuumArchitecturePresent : Bool
-    spacBiogeochemistryFeedbackWeldTyped : Bool
-    typedPhysicalProcessSourceRegistryPresent : Bool
-    richardsPorousFlowReceiptTyped : Bool
-    soilRetentionConductivityCalibrationTyped : Bool
-    xylemConstitutiveCalibrationTyped : Bool
-    stomatalPhotosynthesisCalibrationTyped : Bool
-    constitutiveSPACCommonStateTyped : Bool
+    navierStokesLaneReferenced certifiedSpatialTransportReferenced : Bool
+    reactionTransportWeldTyped bioelectricChemistryLaneReferenced : Bool
+    suNGaugeLaneReferencedWithBoundary canonicalSIUnitsOwnerPresent : Bool
+    environmentalPhysicalUnitsWeldedToSI independentU1ApplicationOwnerPresent : Bool
+    pnpElectrodiffusionOwnerPresent bioelectricPNPWeldTyped : Bool
+    rootSoilFungalIonWaterArchitecturePresent rootSoilSameSpeciesWeldTyped : Bool
+    mycorrhizalExtensionTyped soilCarbonNitrogenProcessArchitecturePresent : Bool
+    soilPlantFungalBiogeochemistryWeldTyped plantHydraulicAtmosphereCarbonArchitecturePresent : Bool
+    wholePlantSameStateWeldTyped atmosphereWindLeafBoundaryWeldTyped : Bool
+    soilPlantAtmosphereContinuumArchitecturePresent spacBiogeochemistryFeedbackWeldTyped : Bool
+    typedPhysicalProcessSourceRegistryPresent richardsPorousFlowReceiptTyped : Bool
+    soilRetentionConductivityCalibrationTyped xylemConstitutiveCalibrationTyped : Bool
+    stomatalPhotosynthesisCalibrationTyped constitutiveSPACCommonStateTyped : Bool
 
     applicationFluidReductionStillNeedsDomainReceipt : Bool
     applicationMaxwellConstitutiveReceiptsStillNeeded : Bool
@@ -171,7 +133,6 @@ record LESPhysicsCrossPollinationCutset : Set where
     soilHydraulicConstitutiveReceiptStillNeeded : Bool
     atmosphereHydrologyConstitutiveWeldsStillNeeded : Bool
     stage7ValidationStillNeeded : Bool
-
 open LESPhysicsCrossPollinationCutset public
 
 canonicalLESPhysicsCrossPollinationCutset : LESPhysicsCrossPollinationCutset
@@ -198,36 +159,20 @@ record LESPhysicsCrossPollinationBoundary : Set where
     genericPNPReceiptIsUniversalPlantFungalNeuralModel : Bool
     genericPNPReceiptIsUniversalPlantFungalNeuralModelIsFalse : genericPNPReceiptIsUniversalPlantFungalNeuralModel ≡ false
     rootSoilFungalArchitectureIsUniversalParameterisation : Bool
-    rootSoilFungalArchitectureIsUniversalParameterisationIsFalse :
-      rootSoilFungalArchitectureIsUniversalParameterisation ≡ false
+    rootSoilFungalArchitectureIsUniversalParameterisationIsFalse : rootSoilFungalArchitectureIsUniversalParameterisation ≡ false
     soilCNProcessGrammarIsUniversalSoilModel : Bool
-    soilCNProcessGrammarIsUniversalSoilModelIsFalse :
-      soilCNProcessGrammarIsUniversalSoilModel ≡ false
+    soilCNProcessGrammarIsUniversalSoilModelIsFalse : soilCNProcessGrammarIsUniversalSoilModel ≡ false
     wholePlantHydraulicWeldIsUniversalCropModel : Bool
-    wholePlantHydraulicWeldIsUniversalCropModelIsFalse :
-      wholePlantHydraulicWeldIsUniversalCropModel ≡ false
+    wholePlantHydraulicWeldIsUniversalCropModelIsFalse : wholePlantHydraulicWeldIsUniversalCropModel ≡ false
     spacWeldEliminatesStorageAndHysteresis : Bool
-    spacWeldEliminatesStorageAndHysteresisIsFalse :
-      spacWeldEliminatesStorageAndHysteresis ≡ false
+    spacWeldEliminatesStorageAndHysteresisIsFalse : spacWeldEliminatesStorageAndHysteresis ≡ false
     typedSourceRegistryPromotesExternalClaimsToProof : Bool
-    typedSourceRegistryPromotesExternalClaimsToProofIsFalse :
-      typedSourceRegistryPromotesExternalClaimsToProof ≡ false
+    typedSourceRegistryPromotesExternalClaimsToProofIsFalse : typedSourceRegistryPromotesExternalClaimsToProof ≡ false
     fittedConstitutiveCalibrationIsHeldOutValidation : Bool
-    fittedConstitutiveCalibrationIsHeldOutValidationIsFalse :
-      fittedConstitutiveCalibrationIsHeldOutValidation ≡ false
+    fittedConstitutiveCalibrationIsHeldOutValidationIsFalse : fittedConstitutiveCalibrationIsHeldOutValidation ≡ false
 
 canonicalLESPhysicsCrossPollinationBoundary : LESPhysicsCrossPollinationBoundary
 canonicalLESPhysicsCrossPollinationBoundary =
   lesPhysicsCrossPollinationBoundary
-    false refl
-    false refl
-    true refl
-    true refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
+    false refl false refl true refl true refl false refl false refl
+    false refl false refl false refl false refl false refl false refl
