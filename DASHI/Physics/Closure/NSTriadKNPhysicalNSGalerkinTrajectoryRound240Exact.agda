@@ -64,9 +64,6 @@ module PhysicalNSDynamics
         Audit.ExactProjectedGalerkinEquation
           (Base.systemAt stateTrajectory cutoff t)
 
-      -- The separately supplied ODE derivative must be the actual derivative
-      -- of the time-indexed velocity curve.  `DerivativeOf` is externally
-      -- fixed by the continuous-time analytic model.
       velocityCurveDerivative :
         (cutoff : Nat) (mode : Z3.FourierMode) →
         DerivativeOf
@@ -120,8 +117,8 @@ module PhysicalNSDynamics
     PhysicalNSMixedHelicitySpacetimeBudget T →
     Base.PhysicalMixedHelicitySpacetimeBudget (forgetDynamics T)
   correctedBudgetForgetsToRound228 T B = record
-    { Base.cutoffIndependentBound = cutoffIndependentBound B
-    ; Base.integratedMixedHelicityBound = integratedMixedHelicityBound B
+    { cutoffIndependentBound = cutoffIndependentBound B
+    ; integratedMixedHelicityBound = integratedMixedHelicityBound B
     }
 
 round240Round228TrajectoryOwnsProjectedODE : Bool
