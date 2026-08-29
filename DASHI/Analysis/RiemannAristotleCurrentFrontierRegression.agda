@@ -23,25 +23,45 @@ twoZeroUniversalWitnessesStillOpen :
     F.canonicalAristotleCurrentFrontier ≡ false
 twoZeroUniversalWitnessesStillOpen = refl
 
-poleQuotientTransversalityStillOpen :
-  F.AristotleCurrentFrontier.literalPoleQuotientTransversalityClosed
-    F.canonicalAristotleCurrentFrontier ≡ false
-poleQuotientTransversalityStillOpen = refl
+universalEvenConePoleQuotientClosed :
+  F.AristotleCurrentFrontier.universalEvenConePoleQuotientClosedInLean
+    F.canonicalAristotleCurrentFrontier ≡ true
+universalEvenConePoleQuotientClosed = refl
 
-unselectedZeroTailStillOpen :
-  F.AristotleCurrentFrontier.projectedUnselectedZeroTailClosed
-    F.canonicalAristotleCurrentFrontier ≡ false
-unselectedZeroTailStillOpen = refl
+highOrdinatePrimeExactlyZero :
+  F.AristotleCurrentFrontier.highOrdinatePrimeVectorZeroClosedInLean
+    F.canonicalAristotleCurrentFrontier ≡ true
+highOrdinatePrimeExactlyZero = refl
 
-primeGammaTailStillOpen :
-  F.AristotleCurrentFrontier.projectedPrimeGammaTailClosed
-    F.canonicalAristotleCurrentFrontier ≡ false
-primeGammaTailStillOpen = refl
+reflectionPairKernelImplemented :
+  F.AristotleCurrentFrontier.reflectionPairKernelSourceImplementedInLean
+    F.canonicalAristotleCurrentFrontier ≡ true
+reflectionPairKernelImplemented = refl
 
-farTailCompositionStillOpen :
-  F.AristotleCurrentFrontier.literalFarTailCompositionClosed
+reflectionSymmetrizedCarrierImplemented :
+  F.AristotleCurrentFrontier.reflectionSymmetrizedCarrierSourceImplementedInLean
+    F.canonicalAristotleCurrentFrontier ≡ true
+reflectionSymmetrizedCarrierImplemented = refl
+
+newReflectionKernelReceiptStillPending :
+  F.AristotleCurrentFrontier.newReflectionSourceMachineChecked
     F.canonicalAristotleCurrentFrontier ≡ false
-farTailCompositionStillOpen = refl
+newReflectionKernelReceiptStillPending = refl
+
+signedReflectionTailStillOpen :
+  F.AristotleCurrentFrontier.signedReflectionTailEstimateClosed
+    F.canonicalAristotleCurrentFrontier ≡ false
+signedReflectionTailStillOpen = refl
+
+gammaPaymentStillOpen :
+  F.AristotleCurrentFrontier.projectedGammaPaymentClosed
+    F.canonicalAristotleCurrentFrontier ≡ false
+gammaPaymentStillOpen = refl
+
+lowOrdinateComplementStillOpen :
+  F.AristotleCurrentFrontier.lowOrdinateComplementCertified
+    F.canonicalAristotleCurrentFrontier ≡ false
+lowOrdinateComplementStillOpen = refl
 
 equalHeightDegeneracyStillVisible :
   F.AristotleCurrentFrontier.equalHeightDegeneracyRemoved
