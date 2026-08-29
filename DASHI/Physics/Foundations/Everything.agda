@@ -28,6 +28,8 @@ import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact
 import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryValidation
 import DASHI.Physics.Foundations.SharedEffectiveSourceRecoveryExact
 import DASHI.Physics.Foundations.SharedEffectiveSourceRecoveryValidation
+import DASHI.Physics.Foundations.CommonEffectiveActionVariationExact
+import DASHI.Physics.Foundations.CommonEffectiveActionVariationValidation
 import DASHI.Physics.Foundations.FiniteHistoryOrientationExact
 import DASHI.Physics.Foundations.HistoryWeightFiltrationExact
 import DASHI.Physics.Foundations.FiniteHistoryFunctionalExact
