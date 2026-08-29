@@ -9,7 +9,7 @@ import DASHI.Reasoning.DASHIgGrokkingEmpiricalBridgeExact as Empirical
 -- DASHIg AS A CONCRETE STAGE-6/7 SPECIMEN
 --
 -- This is deliberately a local finite specimen while PR #636 remains on a
--- sibling branch.  It mirrors the prediction-envelope / experiment-
+-- sibling branch. It mirrors the prediction-envelope / experiment-
 -- discrimination semantics without duplicating those generic owners.
 --
 -- Current evidence consists only of the pinned preliminary Phase-2 surface.
@@ -114,9 +114,22 @@ geometryMeasurementClosesWinnerEnvelope plainWinsHeldOut plainWinsHeldOut hx hy 
 plainMeasurementClosesWinnerEnvelope :
   PointIdentifiable refinedCompatible futureWinner plainHeldOutEvidence
 plainMeasurementClosesWinnerEnvelope geometryVariantWinsHeldOut geometryVariantWinsHeldOut (_ , ()) hy
-plainMeasurementClosesWinnerEnvelope geometryVariantWinsHeldOut plainWinsHeldOut hx hy = refl
-plainMeasurementClosesWinnerEnvelope plainWinsHeldOut geometryVariantWinsHeldOut hx hy = refl
+plainMeasurementClosesWinnerEnvelope geometryVariantWinsHeldOut plainWinsHeldOut (_ , ()) hy
+plainMeasurementClosesWinnerEnvelope plainWinsHeldOut geometryVariantWinsHeldOut hx (_ , ())
 plainMeasurementClosesWinnerEnvelope plainWinsHeldOut plainWinsHeldOut hx hy = refl
+
+------------------------------------------------------------------------
+-- Tie the specimen back to the pinned empirical source rather than allowing a
+-- detached abstract example to masquerade as the experiment itself.
+------------------------------------------------------------------------
+
+pinnedProducerCommit : String
+pinnedProducerCommit = Empirical.commit Empirical.canonicalDASHIgPhase2Source
+
+prelimRunCountReceipt :
+  (Empirical.runCount Empirical.leechDerivativePrelim ≡ 2)
+  × (Empirical.runCount Empirical.plainDerivativePrelim ≡ 2)
+prelimRunCountReceipt = Empirical.bothDerivativeSummariesAreTwoRunPrelims
 
 ------------------------------------------------------------------------
 -- Interpretation boundary.
