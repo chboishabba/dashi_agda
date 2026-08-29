@@ -25,13 +25,23 @@ module DASHI.Physics.YangMills.BalabanYM4RowAAugmentedCanonicalHistoryGateExact 
 ------------------------------------------------------------------------
 
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _-_; -_; _*_; _≤_; _<_)
+  (ℚ; 0ℚ; _+_; _-_; -_; _*_; _≤_; _<_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
+
+scaleRightNonnegative : ∀ {left right scale : ℚ} →
+  0ℚ ≤ scale → left ≤ right → left * scale ≤ right * scale
+scaleRightNonnegative {scale = scale} scaleNN leftBelowRight =
+  let
+    instance
+      scaleNonnegative : NonNegative scale
+      scaleNonnegative = ℚ.nonNegative scaleNN
+  in
+  ℚP.*-monoʳ-≤-nonNeg scale leftBelowRight
 
 record AugmentedHistorySmallCouplingGate : Set where
   field
@@ -74,7 +84,6 @@ interactionPartBelowCombined dataSet =
     L = localDerivative dataSet
     b = gaussianFloor dataSet
     H = historySlope dataSet
-    g = couplingCap dataSet
 
     bNN : 0ℚ ≤ b
     bNN = ℚP.<⇒≤ (gaussianFloorPositive dataSet)
@@ -102,7 +111,7 @@ interactionPartBelowCombined dataSet =
     cBelow : C ≤ C + L + b * H
     cBelow = ℚP.≤-trans cBelowCL clBelow
   in
-  Norm.scaleʳ-nonNeg (couplingCapNonnegative dataSet) cBelow
+  scaleRightNonnegative (couplingCapNonnegative dataSet) cBelow
 
 betaMarginPositive :
   (dataSet : AugmentedHistorySmallCouplingGate) →
@@ -180,7 +189,7 @@ historyBudgetBound dataSet =
     first :
       betaMargin dataSet * historyConstant dataSet
       ≤ gaussianFloor dataSet * historyConstant dataSet
-    first = Norm.scaleʳ-nonNeg
+    first = scaleRightNonnegative
       (historyConstantNonnegative dataSet)
       (betaMarginBelowGaussian dataSet)
 
@@ -266,9 +275,5 @@ rowAHistorySuppressedCombinedSmallnessLevel = machineChecked
 rowAHistorySuppressedAugmentedGateLevel : ProofLevel
 rowAHistorySuppressedAugmentedGateLevel = machineChecked
 
--- Physical seam: prove the literal propagated irrelevant-history shooting
--- sensitivity satisfies q_history <= H gamma with finite source H.  Once that
--- O(gamma) response is identified, one source smallness choice pays both direct
--- and history sensitivity simultaneously.
 literalRowAHistorySensitivityLinearInCouplingLevel : ProofLevel
 literalRowAHistorySensitivityLinearInCouplingLevel = conditional
