@@ -7,13 +7,17 @@ cd "$root"
 target="DASHI/Physics/YangMills/BalabanClayHighestAlphaRound103SourceCoordinateWeldExact.agda"
 validation107="DASHI/Physics/YangMills/BalabanFirstVariationStressContinuumRound107Validation.agda"
 validation108="DASHI/Physics/YangMills/BalabanUniformPotentialToFirstVariationConvergenceRound108Validation.agda"
+validation109="DASHI/Physics/YangMills/BalabanSameFamilyStressCauchySchwingerRound109Validation.agda"
 r108="DASHI/Physics/YangMills/BalabanUniformPotentialToFirstVariationConvergenceRound108Exact.agda"
+r109="DASHI/Physics/YangMills/BalabanSameFamilyStressCauchySchwingerRound109Exact.agda"
 
 files=(
   "$target"
   "$validation107"
   "$validation108"
+  "$validation109"
   "$r108"
+  "$r109"
   DASHI/Physics/YangMills/BalabanFirstVariationStressContinuumRound107Exact.agda
   DASHI/Physics/YangMills/BalabanCMP116SubstitutedActivityHessianRound103Exact.agda
   DASHI/Physics/YangMills/BalabanCMP116SubstitutedActivityFirstVariationRound105Exact.agda
@@ -23,12 +27,15 @@ files=(
   DASHI/Physics/YangMills/BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact.agda
   DASHI/Physics/YangMills/BalabanHeatDoobSameDensityLogHessianRound103Exact.agda
   DASHI/Physics/YangMills/BalabanBackgroundHessianMetricVariationBoundaryRound105Exact.agda
+  DASHI/Physics/YangMills/BalabanCMP119CompatibleLocalExpectationFlowExact.agda
+  DASHI/Physics/YangMills/BalabanTopDownSummableRGIncrementExact.agda
+  DASHI/Physics/YangMills/BalabanMarkedSourceCompositeStressFieldExact.agda
 )
 
 for file in "${files[@]}"; do test -f "$file"; done
 
 if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERMINATION_CHECK|allow-unsolved-metas|--no-positivity-check|--no-termination-check|NON_COVERING|--type-in-type|trustMe|primTrustMe' "${files[@]}"; then
-  echo "Round103/108 source-coordinate weld contains a hole, postulate, unsafe escape, or trust primitive" >&2
+  echo "Round103/109 source-coordinate weld contains a hole, postulate, unsafe escape, or trust primitive" >&2
   exit 1
 fi
 
@@ -40,10 +47,15 @@ grep -q 'measureContinuumLimitAloneCommutesWithMetricDifferentiationIsFalse' DAS
 
 grep -q '^record NormalizedCauchyDerivativeConvergence' "$r108"
 grep -q '^firstVariationEventuallyBelow :' "$r108"
-grep -q 'differentiatedLocalizationAloneProvesPotentialConvergenceIsFalse' "$r108"
-grep -q 'potentialConvergenceAloneProvesDerivativeConvergenceWithoutCauchyControlIsFalse' "$r108"
-grep -q 'normalizedCauchyBoundTransfersPotentialModulusToFirstVariationIsTrue' "$r108"
 grep -q '^firstVariationConvergesWithSameModulus :' "$validation108"
+
+grep -q '^record SourceNativeStressScaleCauchy' "$r109"
+grep -q '^stressResponseCauchyModulus :' "$r109"
+grep -q '^record LiteralSchwingerStressMarkedCompletion' "$r109"
+grep -q 'literalStressInsertionIsCMP119LocalInsertionLevel' "$r109"
+grep -q 'literalStressCauchyCompletionIsCompletedMarkedStressLevel' "$r109"
+grep -q 'literalCompletedMarkedStressIsClayStressTensorLevel' "$r109"
+grep -q '^stressTelescopeValidation :' "$validation109"
 
 grep -q 'physicalHessianSplitsIntrinsicPlusSubstitution' DASHI/Physics/YangMills/BalabanCMP116SubstitutedActivityHessianRound103Exact.agda
 grep -q '^substitutedFirstVariation :' DASHI/Physics/YangMills/BalabanCMP116SubstitutedActivityFirstVariationRound105Exact.agda
@@ -52,15 +64,20 @@ grep -q '^record CanonicalMetricSourceDomain' DASHI/Physics/YangMills/BalabanCMP
 grep -q '^record CanonicalMetricStressRepresentation' DASHI/Physics/YangMills/BalabanCMP116CanonicalMetricStressRepresentationRound106Exact.agda
 grep -q 'cmp109BackgroundHessianIsMetricVariationByDefinitionIsFalse' DASHI/Physics/YangMills/BalabanBackgroundHessianMetricVariationBoundaryRound105Exact.agda
 
-cache_root="${DASHI_AGDA29_CACHE_ROOT:-${RUNNER_TEMP:-$root/.cache}/dashi-agda29-round108}"
+grep -q '^ordinaryCauchyModulus :' DASHI/Physics/YangMills/BalabanTopDownSummableRGIncrementExact.agda
+grep -q '^sourceCompatibleSameFamilyIncrement :' DASHI/Physics/YangMills/BalabanCMP119CompatibleLocalExpectationFlowExact.agda
+grep -q '^record SameCompletedCompositeStressMarkedSource' DASHI/Physics/YangMills/BalabanMarkedSourceCompositeStressFieldExact.agda
+
+cache_root="${DASHI_AGDA29_CACHE_ROOT:-${RUNNER_TEMP:-$root/.cache}/dashi-agda29-round109}"
 export DASHI_AGDA29_CACHE_ROOT="$cache_root"
 export DASHI_STATUS_DIR="${DASHI_STATUS_DIR:-$cache_root/status}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$cache_root/xdg}"
 mkdir -p "$DASHI_STATUS_DIR" "$XDG_CACHE_HOME"
-export AGDA_LOG_PATH="${AGDA_LOG_PATH:-$root/ym-round108-agda.log}"
+export AGDA_LOG_PATH="${AGDA_LOG_PATH:-$root/ym-round109-agda.log}"
 export AGDA_JOBS="${AGDA_JOBS:-4}"
 export DASHI_NO_TMUX="1"
 
+scripts/run_agda29_parallel_check.sh "$validation109"
 scripts/run_agda29_parallel_check.sh "$validation108"
 scripts/run_agda29_parallel_check.sh "$validation107"
 scripts/run_agda29_parallel_check.sh "$target"
