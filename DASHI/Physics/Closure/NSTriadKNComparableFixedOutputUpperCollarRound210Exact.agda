@@ -28,7 +28,8 @@ open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Nat.Base using (_≤_)
 import Data.Nat.Properties as NatP
 open import Data.Sum.Base using (inj₁; inj₂)
-open import Relation.Binary.PropositionalEquality using (subst; cong; sym; trans)
+open import Function.Base using (case_of_)
+open import Relation.Binary.PropositionalEquality using (subst; cong)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -70,6 +71,18 @@ record FixedOutputComparableUpperCollar
 
 open FixedOutputComparableUpperCollar public
 
+oneCollarToTwo :
+  ∀ {m k : Nat} →
+  m ≤ k + Shell.Csep →
+  m ≤ k + twoCsep
+oneCollarToTwo {m} {k} oneCollar =
+  subst
+    (m ≤_)
+    (NatP.+-assoc k Shell.Csep Shell.Csep)
+    (NatP.≤-trans
+      oneCollar
+      (NatP.m≤m+n (k + Shell.Csep) Shell.Csep))
+
 fixedOutputComparableUpperCollar :
   ∀ {E : C3.IntegerEmbedding F}
     {I : C3.ModeInverseSquare F E}
@@ -86,28 +99,6 @@ fixedOutputComparableUpperCollar {output = output} entry =
     outputShellAgreement :
       Shell.shellIndex (Physical.k tau) ≡ Shell.shellIndex output
     outputShellAgreement = cong Shell.shellIndex (R207.outputAgreement entry)
-
-    pToOutputPlusC :
-      Shell.shellIndex (Physical.p tau)
-      ≤ Shell.shellIndex output + Shell.Csep →
-      Shell.shellIndex (Physical.p tau)
-      ≤ Shell.shellIndex output + twoCsep
-    pToOutputPlusC pBound =
-      NatP.≤-trans pBound
-        (NatP.+-monoʳ-≤
-          (Shell.shellIndex output + Shell.Csep)
-          (NatP.m≤m+n Shell.Csep Shell.Csep))
-
-    qToOutputPlusC :
-      Shell.shellIndex (Physical.q tau)
-      ≤ Shell.shellIndex output + Shell.Csep →
-      Shell.shellIndex (Physical.q tau)
-      ≤ Shell.shellIndex output + twoCsep
-    qToOutputPlusC qBound =
-      NatP.≤-trans qBound
-        (NatP.+-monoʳ-≤
-          (Shell.shellIndex output + Shell.Csep)
-          (NatP.m≤m+n Shell.Csep Shell.Csep))
 
     outputAnchor = R203.oneInputNotFarAboveOutput collar
   in
@@ -137,7 +128,7 @@ fixedOutputComparableUpperCollar {output = output} entry =
           qViaP
       in
       fixed-output-comparable-upper-collar
-        (pToOutputPlusC pNearOutput)
+        (oneCollarToTwo pNearOutput)
         qFinal
 
     (inj₂ qNearK) →
@@ -166,7 +157,7 @@ fixedOutputComparableUpperCollar {output = output} entry =
       in
       fixed-output-comparable-upper-collar
         pFinal
-        (qToOutputPlusC qNearOutput)
+        (oneCollarToTwo qNearOutput)
 
 round210BothCCInputsUpperLocalizedToFixedOutput : Bool
 round210BothCCInputsUpperLocalizedToFixedOutput = true
