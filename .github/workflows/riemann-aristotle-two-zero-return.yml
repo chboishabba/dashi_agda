@@ -28,6 +28,8 @@ on:
       - 'DASHI/Analysis/RiemannAristotleG2cPolarizationCompilerExact.agda'
       - 'DASHI/Analysis/RiemannAristotleG2dReflectionDuplicateNoGoExact.agda'
       - 'DASHI/Analysis/RiemannAristotleG2dScalarDeterminantSumTargetExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleG2eDeterminantTaperKernelExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleG2eTargetCenteredSymmetryNoGoExact.agda'
       - 'DASHI/Analysis/RiemannAristotleG2CurrentCutExact.agda'
       - 'DASHI/Analysis/RiemannAristotleG2CurrentCutRegression.agda'
       - 'DASHI/Analysis/RiemannAristotleDeterministicProjectiveSchurReturnExact.agda'
