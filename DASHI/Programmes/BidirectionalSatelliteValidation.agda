@@ -5,22 +5,28 @@ open import DASHI.Core.Prelude
 open import DASHI.Programmes.BidirectionalSatelliteCorrectionExact
 open import DASHI.Programmes.ExecutableReceiptSchemaExact
 open import DASHI.Programmes.BrainKernelSemanticsCorrectionExact
+open import DASHI.Programmes.BrainCoarsePersistenceNoGoExact
 open import DASHI.Programmes.CFDChartCorrectionExact
 open import DASHI.Programmes.CFDAdvancedNSFrontierExact
 open import DASHI.Programmes.DashifineBenchmarkCorrectionExact
+open import DASHI.Programmes.DashifineWaveProjectionFamilyExact
 open import DASHI.Programmes.GrokkingValidationCorrectionExact
 open import DASHI.Programmes.GrokkingHeldOutToleranceExact
 open import DASHI.Programmes.CoreReferenceCorrectionExact
 open import DASHI.Programmes.CoreExecutableParityReceiptExact
+open import DASHI.Programmes.CoreCarrierReferenceCorrespondenceExact
 open import DASHI.Programmes.FRACDASHCompilerCorrectionExact
 open import DASHI.Programmes.FRACDASHNumericInterpreterTargetExact
 open import DASHI.Programmes.TestHarnessEvidenceCorrectionExact
 open import DASHI.Programmes.TestHarnessFamilyReceiptExact
+open import DASHI.Programmes.TestHarnessSelectedFamiliesExact
 open import DASHI.Programmes.BrainHemibrainExperimentExact
 open import DASHI.Programmes.QuantumFalsifiableTargetExact
 open import DASHI.Programmes.QuantumExecutablePromotionReceiptExact
+open import DASHI.Programmes.QuantumCHSHDiscriminatorExact
 open import DASHI.Programmes.RTXLightTransportRefinementExact
 open import DASHI.Programmes.RTXExecutableLightTransportReceiptExact
+open import DASHI.Programmes.RTXQuantitativeRefinementExact
 
 bidiNeedsReceipts : correctedModelStillNeedsReceipt cfdBIDIAudit ≡ true
 bidiNeedsReceipts = correctedModelStillNeedsReceiptIsTrue cfdBIDIAudit
@@ -31,6 +37,20 @@ brainKernelNoAutomaticIdempotence :
 brainKernelNoAutomaticIdempotence =
   BrainKernelCorrectionBoundary.localSignKernelIsAutomaticallyIdempotentIsFalse
     canonicalBrainKernelCorrectionBoundary
+
+brainZeroCoarseDefectNotPersistence :
+  BrainCoarsePersistenceBoundary.zeroCoarseDefectImpliesConsumerPersistence
+    canonicalBrainCoarsePersistenceBoundary ≡ false
+brainZeroCoarseDefectNotPersistence =
+  BrainCoarsePersistenceBoundary.zeroCoarseDefectImpliesConsumerPersistenceIsFalse
+    canonicalBrainCoarsePersistenceBoundary
+
+brainErasureBlocksTransport :
+  BrainCoarsePersistenceBoundary.coarseErasureBlocksConsumerTransport
+    canonicalBrainCoarsePersistenceBoundary ≡ true
+brainErasureBlocksTransport =
+  BrainCoarsePersistenceBoundary.coarseErasureBlocksConsumerTransportIsTrue
+    canonicalBrainCoarsePersistenceBoundary
 
 cfdNoClosureRecoveryOfLostInformation :
   CFDChartCorrectionBoundary.closureModelCanRecoverDiscardedClaimInformation
@@ -66,6 +86,13 @@ dashifineNoUniversalPromotion :
 dashifineNoUniversalPromotion =
   DashifineBenchmarkCorrectionBoundary.oneTaskDominanceIsUniversalLearningIsFalse
     canonicalDashifineBenchmarkCorrectionBoundary
+
+dashifineOriginalWinDoesNotFillProjectionFamily :
+  DashifineWaveProjectionBoundary.originalWaveWinFillsProjectedTaskReceipts
+    canonicalDashifineWaveProjectionBoundary ≡ false
+dashifineOriginalWinDoesNotFillProjectionFamily =
+  DashifineWaveProjectionBoundary.originalWaveWinFillsProjectedTaskReceiptsIsFalse
+    canonicalDashifineWaveProjectionBoundary
 
 grokkingNoMSEPromotion :
   GrokkingValidationCorrectionBoundary.lowMSEFitIsExactFamilyIdentity
@@ -108,6 +135,13 @@ coreReferenceCommutationCarriesClaims :
 coreReferenceCommutationCarriesClaims =
   CoreExecutableParityBoundary.referenceCommutationCanCarryFormalClaimsIsTrue
     canonicalCoreExecutableParityBoundary
+
+coreCarrierSquareIsLiteral :
+  CoreCarrierReferenceBoundary.supportSignCarrierHasLiteralFormalCorrespondence
+    canonicalCoreCarrierReferenceBoundary ≡ true
+coreCarrierSquareIsLiteral =
+  CoreCarrierReferenceBoundary.supportSignCarrierHasLiteralFormalCorrespondenceIsTrue
+    canonicalCoreCarrierReferenceBoundary
 
 fracdashOneStepLiftsToFiniteTrace :
   FRACDASHCompilerCorrectionBoundary.oneStepCommutationYieldsFiniteTraceCommutation
@@ -158,6 +192,13 @@ testHarnessNeedsFamilyIndex =
   TestHarnessFamilyBoundary.oneGlobalBenchmarkPassedBooleanIsSufficientIsFalse
     canonicalTestHarnessFamilyBoundary
 
+testHarnessPhase3LogNotUniversalTheorem :
+  TestHarnessSelectedFamiliesBoundary.phase3CompleteLogIsUniversalLearningTheorem
+    canonicalTestHarnessSelectedFamiliesBoundary ≡ false
+testHarnessPhase3LogNotUniversalTheorem =
+  TestHarnessSelectedFamiliesBoundary.phase3CompleteLogIsUniversalLearningTheoremIsFalse
+    canonicalTestHarnessSelectedFamiliesBoundary
+
 bidiNamingCannotRepairLoss :
   BidirectionalSatelliteCorrectionBoundary.correctedNamingAloneRepairsInformationLoss
     canonicalBidirectionalSatelliteCorrectionBoundary ≡ false
@@ -186,6 +227,13 @@ quantumExperimentStillNeedsPhysicalGate =
   QuantumExecutablePromotionBoundary.experimentReceiptStillNeedsPhysicalPromotionGateIsTrue
     canonicalQuantumExecutablePromotionBoundary
 
+quantumCHSHViolationSplitsClasses :
+  QuantumCHSHBoundary.classifiedViolationSplitsCandidateClasses
+    canonicalQuantumCHSHBoundary ≡ true
+quantumCHSHViolationSplitsClasses =
+  QuantumCHSHBoundary.classifiedViolationSplitsCandidateClassesIsTrue
+    canonicalQuantumCHSHBoundary
+
 rtxMDLNotPhysicalTruth :
   RTXRefinementBoundary.lowerMDLIsPhysicalTruth
     canonicalRTXRefinementBoundary ≡ false
@@ -206,3 +254,10 @@ rtxHeldOutReceiptSupportsApproximation :
 rtxHeldOutReceiptSupportsApproximation =
   RTXExecutableBoundary.heldOutObservationReceiptCanSupportApproximationClaimIsTrue
     canonicalRTXExecutableBoundary
+
+rtxQuantitativeBudgetComposes :
+  RTXQuantitativeRefinementBoundary.perStepApproximationBudgetComposes
+    canonicalRTXQuantitativeRefinementBoundary ≡ true
+rtxQuantitativeBudgetComposes =
+  RTXQuantitativeRefinementBoundary.perStepApproximationBudgetComposesIsTrue
+    canonicalRTXQuantitativeRefinementBoundary
