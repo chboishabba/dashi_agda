@@ -33,6 +33,8 @@ record DirectTubeToInputSensitivity : Set₁ where
     margin marginInverse : ℚ
     coefficient gamma tubeResponse : ℚ
 
+    cumulativeDirectNonnegative : 0ℚ ≤ cumulativeDirect
+    inputDistanceNonnegative : 0ℚ ≤ inputDistance
     marginInverseNonnegative : 0ℚ ≤ marginInverse
     coefficientNonnegative : 0ℚ ≤ coefficient
     gammaNonnegative : 0ℚ ≤ gamma
@@ -54,6 +56,31 @@ directSensitivityConstant dataSet =
   marginInverse dataSet
     * (Cubic.twoℚ * coefficient dataSet * Sixth.cube (gamma dataSet))
     * tubeResponse dataSet
+
+directSensitivityConstantNonnegative :
+  (dataSet : DirectTubeToInputSensitivity) →
+  0ℚ ≤ directSensitivityConstant dataSet
+directSensitivityConstantNonnegative dataSet =
+  let
+    twoNN : 0ℚ ≤ Cubic.twoℚ
+    twoNN = ℚP.nonNegative⁻¹ Cubic.twoℚ
+
+    gammaCubeNN : 0ℚ ≤ Sixth.cube (gamma dataSet)
+    gammaCubeNN =
+      mulNN
+        (mulNN (gammaNonnegative dataSet) (gammaNonnegative dataSet))
+        (gammaNonnegative dataSet)
+
+    amplitudeNN :
+      0ℚ ≤ Cubic.twoℚ * coefficient dataSet * Sixth.cube (gamma dataSet)
+    amplitudeNN =
+      mulNN
+        (mulNN twoNN (coefficientNonnegative dataSet))
+        gammaCubeNN
+  in
+  mulNN
+    (mulNN (marginInverseNonnegative dataSet) amplitudeNN)
+    (tubeResponseNonnegative dataSet)
 
 directTubeBudgetGivesInputSensitivity :
   (dataSet : DirectTubeToInputSensitivity) →
