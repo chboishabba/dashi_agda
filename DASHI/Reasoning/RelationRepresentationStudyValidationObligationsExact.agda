@@ -47,6 +47,9 @@ data ValidationArtifact : Set where
   syntheticGenerationPromptAndModel
   deduplicationOrCollisionReceipt
   checkpointSeries
+  weightOrParameterSnapshots
+  spectralDiagnosticReceipt
+  alternativeDiagnosticReceipt
   interventionTrajectory
   fittedGeometryOrManifold
   outputDistributionTrajectory
@@ -68,9 +71,6 @@ open StudyValidationProfile public
 
 ------------------------------------------------------------------------
 -- Christ, Csiszárik, Becsó, Varga (NeurIPS 2025)
--- The paper studies GPT-J, Llama 3.1 8B, and GPT-NeoX-20B; relation triplets;
--- affine LRE decoders W_R v_S + b_R; output-head top-1 faithfulness;
--- cross-evaluation across relations; and tensor-network compression.
 ------------------------------------------------------------------------
 
 christRelationDecoderValidation : StudyValidationProfile
@@ -95,10 +95,8 @@ christRelationDecoderValidation =
     "Even exact reproduction would not by itself establish that the fitted operators are complete semantic relations, causal mechanisms, or socially/normatively authoritative representations."
 
 ------------------------------------------------------------------------
--- Freenor & Alvarez (ICLR 2026 / arXiv:2510.09790)
--- RISE uses paired neutral/transformed sentences, three embedding models,
--- BLiMP/SICK plus a synthetic multilingual dataset, seven languages, MDV and
--- Procrustes baselines, and held-out rotor-alignment scores.
+-- Freenor & Alvarez (arXiv:2510.09790; submitted/under-review ICLR 2026
+-- version observed separately, not promoted here to accepted publication).
 ------------------------------------------------------------------------
 
 riseRotationValidation : StudyValidationProfile
@@ -126,15 +124,13 @@ riseRotationValidation =
 
 ------------------------------------------------------------------------
 -- Xinbo Ai (2026), recos.
--- Eleven embedding model families x seven STS/SICK-R datasets; recos/cos/dot;
--- Spearman correlation to human scores plus nonparametric/mixed-effects tests.
 ------------------------------------------------------------------------
 
 recosValidation : StudyValidationProfile
 recosValidation =
   studyValidationProfile
     Sources.ai2026
-    "To check recos versus cosine/dot-product, preserve exact model checkpoints for Word2Vec, FastText, GloVe, BERT, SGPT, DPR, E5, BGE, GTE, SPECTER and CLIP-ViT; exact STS12-16, STS-B and SICK-R data/labels; preprocessing and embedding arrays; metric implementations; all 77 model-dataset score tables; Spearman correlations; and reported paired statistical-analysis inputs."
+    "To check recos versus cosine/dot-product, preserve exact model checkpoints for Word2Vec, FastText, GloVe, BERT, SGPT, DPR, E5, BGE, GTE, SPECTER and CLIP-ViT; exact STS12-16, STS-B and SICK-R data/labels; preprocessing and embedding arrays; metric implementations; all model-dataset score tables; Spearman correlations; and reported paired statistical-analysis inputs."
     ( exactModelIdentity
     ∷ modelRevisionOrWeightHash
     ∷ datasetIdentityAndVersion
@@ -159,7 +155,7 @@ magnitudeAwareValidation : StudyValidationProfile
 magnitudeAwareValidation =
   studyValidationProfile
     Sources.parupudi2025
-    "To check OS/HTS, preserve exact revisions of all-MiniLM-L6-v2, all-mpnet-base-v2, paraphrase-mpnet-base-v2 and BAAI/bge-large-en-v1.5; the eight benchmark datasets/splits and targets; raw sentence embeddings; OS, HTS, cosine and dot-product implementations; task-wise prediction errors/MSE; and Wilcoxon signed-rank inputs/results."
+    "To check OS/HTS, preserve exact model revisions, benchmark datasets/splits and targets, raw sentence embeddings, OS/HTS/cosine/dot-product implementations, task-wise prediction errors/MSE, and the reported paired significance-analysis inputs/results."
     ( exactModelIdentity
     ∷ modelRevisionOrWeightHash
     ∷ datasetIdentityAndVersion
@@ -184,7 +180,7 @@ calibratedSimilarityValidation : StudyValidationProfile
 calibratedSimilarityValidation =
   studyValidationProfile
     Sources.tacheny2026
-    "To check calibrated cosine, preserve the exact pretrained embedding model/revision, human similarity-judgment corpus and calibration/evaluation split, raw embeddings and cosine scores, fitted isotonic-regression map, calibrated scores, calibration-error/bias calculations, rank-correlation results, and the seven perturbation-test outputs used for local stability."
+    "To check calibrated cosine, preserve the exact pretrained embedding model/revision, human similarity-judgment corpus and calibration/evaluation split, raw embeddings and cosine scores, fitted isotonic-regression map, calibrated scores, calibration-error/bias calculations, rank-correlation results, and perturbation-test outputs used for local stability."
     ( exactModelIdentity
     ∷ modelRevisionOrWeightHash
     ∷ datasetIdentityAndVersion
@@ -209,7 +205,7 @@ manifoldSteeringValidation : StudyValidationProfile
 manifoldSteeringValidation =
   studyValidationProfile
     Sources.wurgaftEtAl2026
-    "To check manifold steering, preserve exact model/task revisions, activation extraction locations and arrays, output probability distributions, fitted activation manifold M_h and behavior manifold M_y including fitting hyperparameters, linear-steering baseline paths, manifold intervention trajectories, output-behavior trajectories, reverse optimization from behavior paths to activation paths, and complete seeds/code/environment provenance."
+    "To check manifold steering, preserve exact model/task revisions, activation extraction locations and arrays, output probability distributions, fitted activation and behavior manifolds including fitting hyperparameters, linear-steering baseline paths, manifold intervention trajectories, output-behavior trajectories, reverse optimization from behavior paths to activation paths, and complete seeds/code/environment provenance."
     ( exactModelIdentity
     ∷ modelRevisionOrWeightHash
     ∷ datasetIdentityAndVersion
@@ -226,7 +222,7 @@ manifoldSteeringValidation =
     ∷ randomSeedsAndEnvironment
     ∷ codeRevision
     ∷ [] )
-    "These artifacts would permit refitting M_h/M_y, replaying linear and manifold-respecting interventions, and checking the reported bidirectional alignment between activation-space and behavior-space trajectories."
+    "These artifacts would permit refitting the activation/behavior manifolds, replaying linear and manifold-respecting interventions, and checking the reported bidirectional alignment between activation-space and behavior-space trajectories."
     "A reproduced intervention result would not by itself prove that the fitted manifold is a semantic ontology, that every representation is smoothly manifold-like, or that the geometry realizes a social/ethical target."
 
 ------------------------------------------------------------------------
@@ -237,7 +233,7 @@ differentialEquivalenceValidation : StudyValidationProfile
 differentialEquivalenceValidation =
   studyValidationProfile
     Sources.dhimanEtAl2026
-    "To check approximate-FDE compression, preserve trained network architecture/weights, exact translation into the polynomial ODE representation, epsilon tolerance, computed aggregation partition/lumping, synthetic-system ground truth or public-regression dataset splits, compressed weights/model, parameter counts, predictive MSE, magnitude-pruning and Wanda baseline configurations, plus code/seeds/environment."
+    "To check approximate-FDE compression, preserve trained network architecture/weights, exact translation into the polynomial ODE representation, epsilon tolerance, computed aggregation partition/lumping, synthetic-system ground truth or public-regression dataset splits, compressed weights/model, parameter counts, predictive error, declared pruning baselines, plus code/seeds/environment."
     ( exactModelIdentity
     ∷ modelRevisionOrWeightHash
     ∷ datasetIdentityAndVersion
@@ -256,6 +252,38 @@ differentialEquivalenceValidation =
     "Approximate dynamical equivalence sufficient for the compression experiment would not establish semantic identity or preservation of every downstream consumer."
 
 ------------------------------------------------------------------------
+-- Prakash & Martin (2026), anti-grokking / WeightWatcher.
+--
+-- Reported setup: long-run training for two canonical grokking systems
+-- (three-layer MLP on a subset of MNIST and a transformer on modular addition),
+-- checkpointed train/test behavior, WeightWatcher/HTSR diagnostics including
+-- Correlation Traps and alpha, plus alternative diagnostics; the paper also
+-- reports related large-model pathologies.  The profile below is limited to
+-- reproducing those reported diagnostics and phase observations.
+------------------------------------------------------------------------
+
+grokkingDynamicValidation : StudyValidationProfile
+grokkingDynamicValidation =
+  studyValidationProfile
+    Sources.prakashMartin2026
+    "To check the reported anti-grokking result, preserve the exact MLP/transformer architectures and initializations, MNIST-subset and modular-addition dataset definitions/splits, complete long-training schedules and checkpoint series, weight/parameter snapshots, train/test accuracy trajectories, exact WeightWatcher version/configuration, empirical spectral-density/Correlation-Trap outputs, HTSR alpha trajectories, alternative diagnostic trajectories, seeds/environment, and code revision. Any large-model comparison additionally requires exact model/checkpoint identity and the diagnostic extraction settings used there."
+    ( exactModelIdentity
+    ∷ modelRevisionOrWeightHash
+    ∷ datasetIdentityAndVersion
+    ∷ trainValidationTestSplit
+    ∷ preprocessingReceipt
+    ∷ checkpointSeries
+    ∷ weightOrParameterSnapshots
+    ∷ rawPredictionOrSimilarityScores
+    ∷ spectralDiagnosticReceipt
+    ∷ alternativeDiagnosticReceipt
+    ∷ randomSeedsAndEnvironment
+    ∷ codeRevision
+    ∷ [] )
+    "These artifacts would permit replay of the extended training trajectories and independent checking of whether post-generalization test collapse co-occurs with the reported WeightWatcher spectral signals while training fit remains saturated."
+    "Reproducing that phase pattern would not prove a universal grokking law, that Correlation Traps are the unique causal mechanism, or that one spectral diagnostic is a semantic/future-safety certificate for unrelated models."
+
+------------------------------------------------------------------------
 -- Readiness state: the studies tell us what to ask for; this repository branch
 -- does not contain the corresponding external empirical payloads.
 ------------------------------------------------------------------------
@@ -270,13 +298,14 @@ record ExternalStudyPayloadAvailability : Set where
     calibratedSimilarityRawPayloadPresent : Bool
     manifoldSteeringRawPayloadPresent : Bool
     differentialEquivalenceRawPayloadPresent : Bool
+    grokkingRawPayloadPresent : Bool
     availabilityReading : String
 
 currentExternalStudyPayloadAvailability : ExternalStudyPayloadAvailability
 currentExternalStudyPayloadAvailability =
   externalStudyPayloadAvailability
-    false false false false false false false
-    "The branch contains source-bounded method profiles and tiny synthetic producer receipts, but not the external studies' raw model/data/activation payloads required for independent empirical reproduction."
+    false false false false false false false false
+    "The branch contains source-bounded method profiles and tiny synthetic producer receipts, but not the external studies' raw model/data/activation/checkpoint payloads required for independent empirical reproduction."
 
 record StudyValidationBoundary : Set where
   constructor studyValidationBoundary
