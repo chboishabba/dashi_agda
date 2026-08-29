@@ -63,7 +63,7 @@ lowOrdinateOpen = refl
 rhOpen : F.AristotleCurrentFrontier.finalRHImplicationClosed F.canonicalAristotleCurrentFrontier ≡ false
 rhOpen = refl
 
--- New explicit-cutoff tranche.
+-- Explicit-cutoff tranche.
 deterministicSchurKernelChecked : F.AristotleCurrentFrontier.deterministicProjectiveSchurKernelCheckedInLean F.canonicalAristotleCurrentFrontier ≡ true
 deterministicSchurKernelChecked = refl
 
@@ -90,3 +90,22 @@ finiteNearSchurCancellationOpen = refl
 
 jointFiniteMarginOpen : F.AristotleCurrentFrontier.jointFiniteNearFarMarginClosed F.canonicalAristotleCurrentFrontier ≡ false
 jointFiniteMarginOpen = refl
+
+-- Bidi finite-orbit / Gram refinement.
+finiteNearReflectionStable : F.AristotleCurrentFrontier.finiteNearCarrierReflectionStableInLeanSource F.canonicalAristotleCurrentFrontier ≡ true
+finiteNearReflectionStable = refl
+
+nearSummandAlreadyReflectionPaired : F.AristotleCurrentFrontier.finiteNearSummandAlreadyReflectionPaired F.canonicalAristotleCurrentFrontier ≡ true
+nearSummandAlreadyReflectionPaired = refl
+
+finiteGramCompilerClosed : F.AristotleCurrentFrontier.finiteNearGramCancellationCompilerClosedInAgda F.canonicalAristotleCurrentFrontier ≡ true
+finiteGramCompilerClosed = refl
+
+literalGramInstantiationOpen : F.AristotleCurrentFrontier.literalFiniteNearGramIdentityInstantiated F.canonicalAristotleCurrentFrontier ≡ false
+literalGramInstantiationOpen = refl
+
+signedCrossEstimateOpen : F.AristotleCurrentFrontier.signedFiniteNearCrossTermEstimateClosed F.canonicalAristotleCurrentFrontier ≡ false
+signedCrossEstimateOpen = refl
+
+conjugationCompressionNotClaimed : F.AristotleCurrentFrontier.conjugationOrbitCompressionOwned F.canonicalAristotleCurrentFrontier ≡ false
+conjugationCompressionNotClaimed = refl
