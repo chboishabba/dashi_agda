@@ -28,8 +28,6 @@ import DASHI.Core.RobustInterventionAcrossHypothesesExact as Robust
 
 CertifiedAdequacyJointPolicy :
   ∀ {ModelState Fine Action Summary Intervention Hypothesis Outcome}
-    {fineStep : Action → Fine → Fine}
-    {observe : Fine → Summary}
     (system : Robust.HypothesisInterventionSystem
       Hypothesis Intervention Outcome)
     (Authority : Intervention → Set)
@@ -71,9 +69,10 @@ actFromDerivedAdequacy :
   Authority intervention →
   CertifiedAdequacyJointPolicy
     system Authority ExactRealises ApproxRealises interface live model
-actFromDerivedAdequacy interface robust proof authority =
+actFromDerivedAdequacy {intervention = intervention}
+    interface robust proof authority =
   Joint.actNow
-    _
+    intervention
     robust
     (Adequacy.proofToToken interface proof)
     authority
@@ -135,12 +134,6 @@ approximateROMActBranch interface model realised decide decisionAdequacy robust 
   actFromDerivedAdequacy interface robust
     (Adequacy.approximateAdequate model realised decide decisionAdequacy)
     authority
-
-------------------------------------------------------------------------
--- Failure direction.  A real counterexample can be retained in the reduction
--- search and compiled to the runtime model-coordinate transition.  A missing
--- certificate alone is not enough.
-------------------------------------------------------------------------
 
 counterexampleOpensFidelityBranch :
   ∀ {Fine Action Observation ModelCode}
