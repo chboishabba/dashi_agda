@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound95MasterSyncExact where
 
 ------------------------------------------------------------------------
--- ROUND95--99: MASTER-FIRST BIDIRECTIONAL HIGHEST-ALPHA FRONTIER
+-- ROUND95--100: MASTER-FIRST BIDIRECTIONAL HIGHEST-ALPHA FRONTIER
 --
 -- Proof search is explicitly bidirectional:
 --
@@ -16,7 +16,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound95MasterSyncExact whe
 -- direct current-coupling derivative L_local.  Marginal coupling is never given
 -- fake exponential forgetting.
 --
--- Round98 adds the response-kernel route matching the parallel Lean producer:
+-- Round98 added the response-kernel route matching the parallel Lean producer:
 --
 --       r_(n+1) <= R s_n + (1/2) r_n
 --         -> sum r_n <= 2 R sum s_n.
@@ -25,22 +25,16 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound95MasterSyncExact whe
 --
 --       s_j <= D g_j^4,
 --
--- the SAME inverse-square drift gives
---
---       sum s_j <= D gamma (2 gamma_tube / b_*).
---
--- Multiplying by the shooting margin cancels b_*^{-1}, leaving at most
--- 4 R D gamma^2.  For gamma<=1 the complete direct+history gate therefore follows
--- from the single linearized inequality
+-- the SAME inverse-square drift gives a finite source-sensitivity budget.  After
+-- multiplying by the shooting margin, the reciprocal cancels and the whole
+-- direct+history gate is paid by
 --
 --       (C + L_local + 4 R D) gamma < b.
 --
--- The canonical rational choice is reused with effective derivative
--- L_local+4RD.  With the fixed Ward floor b=1/8388608, gamma<=1/2 follows by
--- exact arithmetic.  `WardQuarticResponseProducer` now packages the whole
--- numerical path: once the literal trajectory supplies mixed-Cauchy data, the
--- response kernel, quartic injection and recurrence/cap identities, the strict
--- shooting gate is constructed automatically.
+-- The Ward-specialised canonical choice fixes b=1/8388608 and chooses gamma from
+-- C,L_local,R,D, with gamma<=1/2 theorem-exactly.  The source-facing producer
+-- adapter therefore leaves only literal response-kernel/quartic-injection and
+-- recurrence/same-object identities.
 --
 -- ROW B
 -- -----
@@ -48,32 +42,37 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound95MasterSyncExact whe
 -- beta-history, physical Hessian and composite marks.  Geometric summation is
 -- downstream after literal marked-coordinate/radius identification.
 --
--- ROW B -> C, TEMPORAL
--- --------------------
--- Since 1/2 <= 17/32, the same physical Hessian mark pays the temporal curvature
--- debt whenever the SAME-density Heat/Doob negative Hessian shell is pointwise
--- dominated by that mark.
+-- ROW B -> C, TEMPORAL (ROUND100 SAME-OBJECT REDUCTION)
+-- -----------------------------------------------------
+-- The old adapter requested eta_n <= H_n.  The higher-alpha route notices that
+-- the intended same-density Heat/Doob negative Hessian shell should be the SAME
+-- differentiated physical Hessian shell already carried by CMP116.  A new exact
+-- adapter proves that once source analysis supplies the identity
 --
--- ROW B -> C, SPATIAL (ROUND99)
--- --------------------------------
--- The earlier unweighted row reduction was useful but discarded information.
--- CMP116 actually gives an exponentially weighted Hessian row.  Round99 keeps
--- that weight all the way through the finite Dyson algebra.
+--       eta_n = H_n,
 --
--- For a finite nonnegative generator M and a submultiplicative weight w,
+-- the comparison is reflexive and all 17/32 debt summation is downstream.  If
+-- source structure yields only domination, the older weaker adapter remains.
 --
---       sum_y w(x,y) M(x,y) <= C_H
+-- ROW B -> C, SPATIAL (ROUND100 SAME-OBJECT REDUCTION)
+-- ----------------------------------------------------
+-- Round99 retained the full exponential weight and proved
 --
--- now implies for every positive matrix power
+--   sum_y (3/2)^d M(x,y) <= C_H
+--       -> sum_y (3/2)^d M^n(x,y) <= C_H^n.
 --
---       sum_y w(x,y) M^n(x,y) <= C_H^n.
+-- Round100 pushes one step further: the shared CMP116 carrier already proves its
+-- own weighted physical Hessian partial row <= C_H.  Hence the preferred source
+-- task is not to reprove the numerical row bound, but to identify the literal
+-- Heat/Doob derivative-generator weighted row with that SAME marked Hessian row:
 --
--- The weight used by the existing Hessian lane is w=(3/2)^distance.  Exact Agda
--- arithmetic now proves ordinary Nat triangle inequality implies w>=1 and
--- w(x,z)<=w(x,y)w(y,z).  Therefore the preferred physical C-spatial leaf is only
--- the SAME-density, SAME-metric row comparison between the absolute covariant
--- derivative generator and the already-required CMP116 Hessian mark.  Weight
--- algebra, power positivity and all-power propagation are theorem-owned.
+--   weightedGeneratorRow(x)
+--       = weightedCMP116HessianPartial(rowDepth(x)).
+--
+-- Once this same-object identity lands, the C_H row bound and every weighted
+-- Dyson-power bound follow automatically.  This is the PR-inspired pattern used
+-- elsewhere in DASHI: source/representation identity first, quantitative compiler
+-- second; never duplicate a bound that the identified object already owns.
 --
 -- The frozen four-row count remains four.  A row decrements only on an inhabited
 -- literal physical completion predicate or a theorem eliminating that whole row.
@@ -106,12 +105,13 @@ import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticGeometricShellExact as
 import DASHI.Physics.YangMills.BalabanRowBCMarkedShellToCurvatureDebtExact as BC
 import DASHI.Physics.YangMills.BalabanRowBCMarkedShellToPolchinskiIntegralDebtExact as BCIntegral
 import DASHI.Physics.YangMills.BalabanSharedMarkedHessianToCurvatureDebtExact as BCHessian
+import DASHI.Physics.YangMills.BalabanSharedMarkedHessianCurvatureIdentityExact as BCCurvIdentity
 import DASHI.Physics.YangMills.BalabanFiniteInfluenceNonnegativePowersExact as CPositive
-import DASHI.Physics.YangMills.BalabanSharedMarkedHessianToFiniteInfluenceExact as CInfluence
 import DASHI.Physics.YangMills.BalabanFiniteWeightedInfluencePowerExact as CWeighted
 import DASHI.Physics.YangMills.BalabanThreeHalvesMetricWeightExact as CMetric
 import DASHI.Physics.YangMills.BalabanSharedMarkedHessianToWeightedInfluenceExact as CWeightedBridge
 import DASHI.Physics.YangMills.BalabanSharedMarkedMetricInfluenceExact as CMetricBridge
+import DASHI.Physics.YangMills.BalabanSharedMarkedHessianGeneratorRowExact as CGeneratorIdentity
 
 ------------------------------------------------------------------------
 -- A: direct/history shooting and response-kernel collapse
@@ -171,16 +171,8 @@ rowAWardQuarticCanonicalChoiceRound99Level = AWardQuartic.wardQuarticResponseCan
 rowAWardQuarticProducerToShootingRound99Level : ProofLevel
 rowAWardQuarticProducerToShootingRound99Level = AProducer.rowAWardQuarticResponseProducerToShootingLevel
 
--- Current physical A seam after Round99:
---  1. literal CMP109/CMP99 Ward patch -> mixed beta jet same-object floor;
---  2. literal normalized interaction mixed-Cauchy package;
---  3. literal irrelevant/polymer response kernel;
---  4. literal direct history injection <= D g_j^4 (or the older O(gamma)
---     initial-response route if source-native and weaker);
---  5. exact recurrence/cap identification for the generated trajectory.
--- The finite constants, summation, q<1 margin and canonical cap are downstream.
-rowALiteralSourceInstantiationRound99Level : ProofLevel
-rowALiteralSourceInstantiationRound99Level = conditional
+rowALiteralSourceInstantiationRound100Level : ProofLevel
+rowALiteralSourceInstantiationRound100Level = conditional
 
 ------------------------------------------------------------------------
 -- B: shared CMP116 marked control already gives geometric r = 1/2 shells
@@ -204,40 +196,37 @@ rowBHessianGeometricHalfRound96Level = BShared.sharedHessianGeometricShellLevel
 rowBCompositeGeometricHalfRound96Level : ProofLevel
 rowBCompositeGeometricHalfRound96Level = BShared.sharedCompositeGeometricShellLevel
 
-rowBLiteralCMP116SharedMarkedInstantiationRound99Level : ProofLevel
-rowBLiteralCMP116SharedMarkedInstantiationRound99Level = conditional
+rowBLiteralCMP116SharedMarkedInstantiationRound100Level : ProofLevel
+rowBLiteralCMP116SharedMarkedInstantiationRound100Level = conditional
 
 ------------------------------------------------------------------------
--- B -> C temporal fusion
+-- B -> C temporal: same-object identity is preferred over a second bound
 ------------------------------------------------------------------------
 
 rowBCMarkedShellToCurvatureCarrierRound95Level : ProofLevel
 rowBCMarkedShellToCurvatureCarrierRound95Level = BC.rowBCMarkedShellToCurvatureCarrierLevel
 
-rowBCMarkedShellToUniformCurvatureDebtRound95Level : ProofLevel
-rowBCMarkedShellToUniformCurvatureDebtRound95Level = BC.rowBCMarkedShellToUniformCurvatureDebtLevel
-
-rowBCMarkedShellToIntegratedDebtRound95Level : ProofLevel
-rowBCMarkedShellToIntegratedDebtRound95Level = BCIntegral.rowBCMarkedShellToUniformIntegratedCurvatureDebtLevel
-
 rowBSharedHessianPaysCurvatureDebtRound96Level : ProofLevel
 rowBSharedHessianPaysCurvatureDebtRound96Level = BCHessian.sharedHessianToUniformCurvatureDebtLevel
 
-rowBCSameDensityTemporalDominationRound99Level : ProofLevel
-rowBCSameDensityTemporalDominationRound99Level = conditional
+rowBCSameObjectCurvatureToHessianRound100Level : ProofLevel
+rowBCSameObjectCurvatureToHessianRound100Level = BCCurvIdentity.sameObjectCurvatureToHessianDominationLevel
+
+rowBCSameObjectCurvatureUniformDebtRound100Level : ProofLevel
+rowBCSameObjectCurvatureUniformDebtRound100Level = BCCurvIdentity.sameObjectCurvatureToUniformDebtLevel
+
+-- Preferred temporal source seam: literal same-density Heat/Doob curvature shell
+-- identity with the CMP116 physical Hessian shell.  Older mere-domination route
+-- remains available if equality is too strong source-wise.
+rowBCSameDensityTemporalIdentityRound100Level : ProofLevel
+rowBCSameDensityTemporalIdentityRound100Level = conditional
 
 ------------------------------------------------------------------------
--- B -> C spatial fusion: retain metric exponential weight through all powers
+-- B -> C spatial: same-object weighted generator/Hessian identity
 ------------------------------------------------------------------------
 
 rowCInfluencePowerPositivityRound97Level : ProofLevel
 rowCInfluencePowerPositivityRound97Level = CPositive.finiteInfluencePowerPositivityLevel
-
-rowCInfluencePowerRowMassRound97Level : ProofLevel
-rowCInfluencePowerRowMassRound97Level = CPositive.finiteInfluencePowerRowMassFromSingleMajorantLevel
-
-rowBSharedHessianToFiniteInfluenceCarrierRound97Level : ProofLevel
-rowBSharedHessianToFiniteInfluenceCarrierRound97Level = CInfluence.sharedMarkedHessianToFiniteInfluenceCarrierLevel
 
 rowCWeightedInfluenceAllPowerRowsRound99Level : ProofLevel
 rowCWeightedInfluenceAllPowerRowsRound99Level = CWeighted.finiteWeightedInfluenceAllPowerRowLevel
@@ -251,29 +240,34 @@ rowBSharedHessianToWeightedInfluenceRound99Level = CWeightedBridge.sharedMarkedH
 rowBSharedMetricHessianToAllWeightedRowsRound99Level : ProofLevel
 rowBSharedMetricHessianToAllWeightedRowsRound99Level = CMetricBridge.sharedMarkedMetricToAllWeightedPowerRowsLevel
 
--- Preferred C-spatial physical seam:
--- identify the literal same-density absolute derivative generator and the
--- CMP116 Hessian mark on the actual integer lattice/block metric, and prove the
--- single weighted row inequality.  Metric-weight algebra and all finite Dyson
--- power propagation are theorem-owned.  Same-density temporal relaxation and
--- the covariance representation are the remaining stochastic ingredients.
-rowBCSameDensityWeightedGeneratorRowRound99Level : ProofLevel
-rowBCSameDensityWeightedGeneratorRowRound99Level = conditional
+rowCSameObjectGeneratorRowBoundRound100Level : ProofLevel
+rowCSameObjectGeneratorRowBoundRound100Level = CGeneratorIdentity.sameObjectGeneratorRowToUniformWeightedBoundLevel
+
+rowCSameObjectGeneratorAllPowerRowsRound100Level : ProofLevel
+rowCSameObjectGeneratorAllPowerRowsRound100Level = CGeneratorIdentity.sameObjectGeneratorRowToAllDysonPowerRowsLevel
+
+-- Preferred spatial source seam: identify the SAME Heat/Doob derivative
+-- generator weighted row with the weighted CMP116 Hessian partial row on the
+-- actual lattice/block metric.  The C_H inequality and all-power propagation are
+-- then downstream.  Same-density temporal relaxation and covariance split remain
+-- the other stochastic inputs to the existing clustering compiler.
+rowBCSameDensityGeneratorHessianIdentityRound100Level : ProofLevel
+rowBCSameDensityGeneratorHessianIdentityRound100Level = conditional
 
 ------------------------------------------------------------------------
 -- Frozen four-row authority remains unchanged
 ------------------------------------------------------------------------
 
-round99FrozenResearchCountStillFour = R87.round87ShortestClayAnalyticCount
+round100FrozenResearchCountStillFour = R87.round87ShortestClayAnalyticCount
 
-rowACompletionRound99Level : ProofLevel
-rowACompletionRound99Level = conditional
+rowACompletionRound100Level : ProofLevel
+rowACompletionRound100Level = conditional
 
-rowBCompletionRound99Level : ProofLevel
-rowBCompletionRound99Level = conditional
+rowBCompletionRound100Level : ProofLevel
+rowBCompletionRound100Level = conditional
 
-rowCCompletionRound99Level : ProofLevel
-rowCCompletionRound99Level = conditional
+rowCCompletionRound100Level : ProofLevel
+rowCCompletionRound100Level = conditional
 
-rowDCompletionRound99Level : ProofLevel
-rowDCompletionRound99Level = conditional
+rowDCompletionRound100Level : ProofLevel
+rowDCompletionRound100Level = conditional
