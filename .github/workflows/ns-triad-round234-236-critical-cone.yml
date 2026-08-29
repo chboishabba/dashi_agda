@@ -1,4 +1,4 @@
-name: NS Round234-236 critical cone
+name: NS Round234-239 critical cone and profiles
 
 on:
   pull_request:
@@ -6,6 +6,9 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNDeepFarLowCriticalShoulderRound234Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNDeepHHNullCriticalShoulderRound235Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNParabolicCriticalFrequencyConeRound236Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNMixedHelicityScaleNormalizedDefectRound237Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNProfileExtractionCircularityRound238Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNOrthogonalProfileMixedDefectRound239Exact.agda'
       - 'scripts/audit_opposite_helicity_symbol_round232.py'
       - 'scripts/audit_mixed_helicity_forcing_work_round233.py'
       - '.github/workflows/ns-triad-round234-236-critical-cone.yml'
@@ -47,3 +50,18 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNParabolicCriticalFrequencyConeRound236Exact.agda
+
+      - name: Type-check Round237 scale-normalized defect
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNMixedHelicityScaleNormalizedDefectRound237Exact.agda
+
+      - name: Type-check Round238 profile extraction circularity audit
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNProfileExtractionCircularityRound238Exact.agda
+
+      - name: Type-check Round239 orthogonal profile defect reduction
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNOrthogonalProfileMixedDefectRound239Exact.agda
