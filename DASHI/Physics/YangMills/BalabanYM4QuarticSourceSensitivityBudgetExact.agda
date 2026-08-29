@@ -32,7 +32,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Data.Nat.Base as ℕ
 import Data.Nat.Properties as ℕP
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _*_; _≤_; NonNegative)
+  (ℚ; 0ℚ; 1ℚ; _*_; _≤_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -146,9 +146,9 @@ sourcePartialBelowCapTimesCubes dataSet zero K≤ =
     (λ right → 0ℚ ≤ right)
     (sym (ℚP.*-zeroʳ (sourceCoefficient dataSet * couplingCap dataSet)))
     ℚP.≤-refl
-sourcePartialBelowCapTimesCubes {kernel} dataSet (suc n) sucN≤ =
+sourcePartialBelowCapTimesCubes {kernel} {cutoff} dataSet (suc n) sucN≤ =
   let
-    n<cutoff : n ℕ.< _
+    n<cutoff : n ℕ.< cutoff
     n<cutoff = sucN≤
 
     previous = sourcePartialBelowCapTimesCubes
@@ -196,7 +196,7 @@ cubicSumUniform dataSet K K≤ =
     scaled = Norm.scaleNonnegative inv invNN
       (Direct.cubicSumBound (direct dataSet) K K≤)
 
-    rightInverse : margin * inv ≡ Data.Rational.Base.1ℚ
+    rightInverse : margin * inv ≡ 1ℚ
     rightInverse = Quot.positiveReciprocalRightInverse
       margin (Direct.marginPositive (direct dataSet))
 
