@@ -6,16 +6,21 @@ open import DASHI.Programmes.BidirectionalSatelliteCorrectionExact
 open import DASHI.Programmes.ExecutableReceiptSchemaExact
 open import DASHI.Programmes.BrainKernelSemanticsCorrectionExact
 open import DASHI.Programmes.CFDChartCorrectionExact
+open import DASHI.Programmes.CFDAdvancedNSFrontierExact
 open import DASHI.Programmes.DashifineBenchmarkCorrectionExact
 open import DASHI.Programmes.GrokkingValidationCorrectionExact
 open import DASHI.Programmes.GrokkingHeldOutToleranceExact
 open import DASHI.Programmes.CoreReferenceCorrectionExact
+open import DASHI.Programmes.CoreExecutableParityReceiptExact
 open import DASHI.Programmes.FRACDASHCompilerCorrectionExact
 open import DASHI.Programmes.FRACDASHNumericInterpreterTargetExact
 open import DASHI.Programmes.TestHarnessEvidenceCorrectionExact
+open import DASHI.Programmes.TestHarnessFamilyReceiptExact
 open import DASHI.Programmes.BrainHemibrainExperimentExact
 open import DASHI.Programmes.QuantumFalsifiableTargetExact
+open import DASHI.Programmes.QuantumExecutablePromotionReceiptExact
 open import DASHI.Programmes.RTXLightTransportRefinementExact
+open import DASHI.Programmes.RTXExecutableLightTransportReceiptExact
 
 bidiNeedsReceipts : correctedModelStillNeedsReceipt cfdBIDIAudit ≡ true
 bidiNeedsReceipts = correctedModelStillNeedsReceiptIsTrue cfdBIDIAudit
@@ -33,6 +38,27 @@ cfdNoClosureRecoveryOfLostInformation :
 cfdNoClosureRecoveryOfLostInformation =
   CFDChartCorrectionBoundary.closureModelCanRecoverDiscardedClaimInformationIsFalse
     canonicalCFDChartCorrectionBoundary
+
+cfdAdvancedFrontierNotSelectedFrame :
+  CFDAdvancedNSFrontierBoundary.selectedDictionaryFrameBoundClosesCurrentNSFrontier
+    canonicalCFDAdvancedNSFrontierBoundary ≡ false
+cfdAdvancedFrontierNotSelectedFrame =
+  CFDAdvancedNSFrontierBoundary.selectedDictionaryFrameBoundClosesCurrentNSFrontierIsFalse
+    canonicalCFDAdvancedNSFrontierBoundary
+
+cfdAdvancedFrontierIntegratedCoherentBudget :
+  CFDAdvancedNSFrontierBoundary.currentNSFrontierIsCutoffUniformIntegratedCoherentBudget
+    canonicalCFDAdvancedNSFrontierBoundary ≡ true
+cfdAdvancedFrontierIntegratedCoherentBudget =
+  CFDAdvancedNSFrontierBoundary.currentNSFrontierIsCutoffUniformIntegratedCoherentBudgetIsTrue
+    canonicalCFDAdvancedNSFrontierBoundary
+
+cfdAdvancedFrontierDynamicCovarianceWall :
+  CFDAdvancedNSFrontierBoundary.dynamicCovarianceWallIsLiveAnalyticFrontier
+    canonicalCFDAdvancedNSFrontierBoundary ≡ true
+cfdAdvancedFrontierDynamicCovarianceWall =
+  CFDAdvancedNSFrontierBoundary.dynamicCovarianceWallIsLiveAnalyticFrontierIsTrue
+    canonicalCFDAdvancedNSFrontierBoundary
 
 dashifineNoUniversalPromotion :
   DashifineBenchmarkCorrectionBoundary.oneTaskDominanceIsUniversalLearning
@@ -68,6 +94,20 @@ coreFingerprintNotSemanticEquality :
 coreFingerprintNotSemanticEquality =
   CoreReferenceCorrectionBoundary.backendFingerprintEqualityIsStateEqualityIsFalse
     canonicalCoreReferenceCorrectionBoundary
+
+coreExecutableFingerprintStillNotSemanticEquality :
+  CoreExecutableParityBoundary.matchingFingerprintIsSemanticEquality
+    canonicalCoreExecutableParityBoundary ≡ false
+coreExecutableFingerprintStillNotSemanticEquality =
+  CoreExecutableParityBoundary.matchingFingerprintIsSemanticEqualityIsFalse
+    canonicalCoreExecutableParityBoundary
+
+coreReferenceCommutationCarriesClaims :
+  CoreExecutableParityBoundary.referenceCommutationCanCarryFormalClaims
+    canonicalCoreExecutableParityBoundary ≡ true
+coreReferenceCommutationCarriesClaims =
+  CoreExecutableParityBoundary.referenceCommutationCanCarryFormalClaimsIsTrue
+    canonicalCoreExecutableParityBoundary
 
 fracdashOneStepLiftsToFiniteTrace :
   FRACDASHCompilerCorrectionBoundary.oneStepCommutationYieldsFiniteTraceCommutation
@@ -111,6 +151,13 @@ testHarnessArtifactNotProof =
   TestHarnessEvidenceCorrectionBoundary.plotOrMetricIsProofByItselfIsFalse
     canonicalTestHarnessEvidenceCorrectionBoundary
 
+testHarnessNeedsFamilyIndex :
+  TestHarnessFamilyBoundary.oneGlobalBenchmarkPassedBooleanIsSufficient
+    canonicalTestHarnessFamilyBoundary ≡ false
+testHarnessNeedsFamilyIndex =
+  TestHarnessFamilyBoundary.oneGlobalBenchmarkPassedBooleanIsSufficientIsFalse
+    canonicalTestHarnessFamilyBoundary
+
 bidiNamingCannotRepairLoss :
   BidirectionalSatelliteCorrectionBoundary.correctedNamingAloneRepairsInformationLoss
     canonicalBidirectionalSatelliteCorrectionBoundary ≡ false
@@ -125,9 +172,37 @@ quantumDiscriminatorNotTheory =
   QuantumTargetBoundary.discriminatorAloneIsQuantumGravityTheoryIsFalse
     canonicalQuantumTargetBoundary
 
+quantumRuntimeAcceptanceNotTheory :
+  QuantumExecutablePromotionBoundary.runtimeAcceptedMeansEstablishedPhysicalTheory
+    canonicalQuantumExecutablePromotionBoundary ≡ false
+quantumRuntimeAcceptanceNotTheory =
+  QuantumExecutablePromotionBoundary.runtimeAcceptedMeansEstablishedPhysicalTheoryIsFalse
+    canonicalQuantumExecutablePromotionBoundary
+
+quantumExperimentStillNeedsPhysicalGate :
+  QuantumExecutablePromotionBoundary.experimentReceiptStillNeedsPhysicalPromotionGate
+    canonicalQuantumExecutablePromotionBoundary ≡ true
+quantumExperimentStillNeedsPhysicalGate =
+  QuantumExecutablePromotionBoundary.experimentReceiptStillNeedsPhysicalPromotionGateIsTrue
+    canonicalQuantumExecutablePromotionBoundary
+
 rtxMDLNotPhysicalTruth :
   RTXRefinementBoundary.lowerMDLIsPhysicalTruth
     canonicalRTXRefinementBoundary ≡ false
 rtxMDLNotPhysicalTruth =
   RTXRefinementBoundary.lowerMDLIsPhysicalTruthIsFalse
     canonicalRTXRefinementBoundary
+
+rtxMAENotPhysicalTruth :
+  RTXExecutableBoundary.lowerValidationMAEIsPhysicalTruth
+    canonicalRTXExecutableBoundary ≡ false
+rtxMAENotPhysicalTruth =
+  RTXExecutableBoundary.lowerValidationMAEIsPhysicalTruthIsFalse
+    canonicalRTXExecutableBoundary
+
+rtxHeldOutReceiptSupportsApproximation :
+  RTXExecutableBoundary.heldOutObservationReceiptCanSupportApproximationClaim
+    canonicalRTXExecutableBoundary ≡ true
+rtxHeldOutReceiptSupportsApproximation =
+  RTXExecutableBoundary.heldOutObservationReceiptCanSupportApproximationClaimIsTrue
+    canonicalRTXExecutableBoundary
