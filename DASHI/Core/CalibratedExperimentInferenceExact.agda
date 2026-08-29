@@ -105,14 +105,14 @@ record CoverageProcedure
     (Parameter Observation : Set) : Set₁ where
   constructor coverageProcedure
   field
-    Contains : Observation → Parameter → Set
+    coverageContains : Observation → Parameter → Set
     CoverageWitness : Set
 
 record CredibleProcedure
     (Parameter Observation : Set) : Set₁ where
   constructor credibleProcedure
   field
-    Contains : Observation → Parameter → Set
+    credibleContains : Observation → Parameter → Set
     PosteriorMassWitness : Set
 
 ------------------------------------------------------------------------
