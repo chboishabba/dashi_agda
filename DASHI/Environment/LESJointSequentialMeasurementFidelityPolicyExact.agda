@@ -14,10 +14,9 @@ import DASHI.Environment.LESAdaptiveSPACModelSearchExact as SPAC
 ------------------------------------------------------------------------
 -- LES JOINT MEASUREMENT / FIDELITY POLICY
 --
--- The live hypothesis carrier is the actual fine LES mechanism state.  Model
--- fidelity is tracked independently as a tiered SPAC reduction candidate.
--- Measurements can refine the state fibre; fidelity can remove a declared
--- model-adequacy obstruction but cannot become empirical evidence by itself.
+-- The live hypothesis carrier is the actual fine LES mechanism state.  Runtime
+-- model state is the first-order SPAC fidelity tier; the proof-bearing candidate
+-- records stay in the portfolio that justifies transitions between those tiers.
 ------------------------------------------------------------------------
 
 LESJointPolicy :
@@ -28,16 +27,16 @@ LESJointPolicy :
       (Basis.Observation mechanism)) →
   (Authority : Basis.Control mechanism → Set) →
   (DecisionAdequate :
-    SPAC.TieredSPACCandidate mechanism →
+    SPAC.SPACFidelityTier →
     Basis.Control mechanism → Set) →
   (Basis.State mechanism → Set) →
-  SPAC.TieredSPACCandidate mechanism →
+  SPAC.SPACFidelityTier →
   Set₁
 LESJointPolicy {mechanism}
     system Authority DecisionAdequate live model =
   Joint.JointSequentialPolicy
     system Authority
-    (SPAC.TieredSPACCandidate mechanism)
+    SPAC.SPACFidelityTier
     DecisionAdequate
     live model
 
@@ -54,9 +53,7 @@ bucketToRichardsFidelityMove :
     (SPAC.candidate (SPAC.bucket portfolio)) →
   (transitionCost : Nat) →
   String →
-  Joint.FidelityMove
-    (SPAC.TieredSPACCandidate mechanism)
-    (SPAC.bucket portfolio)
+  Joint.FidelityMove SPAC.SPACFidelityTier SPAC.empiricalWaterBalance
 bucketToRichardsFidelityMove portfolio failure transitionCost costReference =
   Joint.fidelityMove
     (Choice.informationMove
@@ -66,7 +63,7 @@ bucketToRichardsFidelityMove portfolio failure transitionCost costReference =
       costReference
       "retained bucket counterexample")
     refl
-    (SPAC.richards portfolio)
+    SPAC.richardsPorousFlow
     "bucket model erased a future-relevant soil-hydraulic distinction"
     "candidate refutation supplied to bucketToRichardsFidelityMove"
 
@@ -77,9 +74,7 @@ richardsToSPACFidelityMove :
     (SPAC.candidate (SPAC.richards portfolio)) →
   (transitionCost : Nat) →
   String →
-  Joint.FidelityMove
-    (SPAC.TieredSPACCandidate mechanism)
-    (SPAC.richards portfolio)
+  Joint.FidelityMove SPAC.SPACFidelityTier SPAC.richardsPorousFlow
 richardsToSPACFidelityMove portfolio failure transitionCost costReference =
   Joint.fidelityMove
     (Choice.informationMove
@@ -89,7 +84,7 @@ richardsToSPACFidelityMove portfolio failure transitionCost costReference =
       costReference
       "retained Richards counterexample")
     refl
-    (SPAC.spac portfolio)
+    SPAC.hydraulicSPAC
     "soil-only model erased a future-relevant plant hydraulic distinction"
     "candidate refutation supplied to richardsToSPACFidelityMove"
 
@@ -100,9 +95,7 @@ spacToElectroBiogeochemicalFidelityMove :
     (SPAC.candidate (SPAC.spac portfolio)) →
   (transitionCost : Nat) →
   String →
-  Joint.FidelityMove
-    (SPAC.TieredSPACCandidate mechanism)
-    (SPAC.spac portfolio)
+  Joint.FidelityMove SPAC.SPACFidelityTier SPAC.hydraulicSPAC
 spacToElectroBiogeochemicalFidelityMove
     portfolio failure transitionCost costReference =
   Joint.fidelityMove
@@ -113,21 +106,16 @@ spacToElectroBiogeochemicalFidelityMove
       costReference
       "retained hydraulic-SPAC counterexample")
     refl
-    (SPAC.electroBiogeochemical portfolio)
+    SPAC.electroBiogeochemicalSPAC
     "hydraulic SPAC erased a future-relevant nutrient/electrochemical distinction"
     "candidate refutation supplied to spacToElectroBiogeochemicalFidelityMove"
-
-------------------------------------------------------------------------
--- Application receipt that a specific fidelity increase, not a measurement,
--- removes the remaining model-adequacy obstruction for a declared control.
-------------------------------------------------------------------------
 
 record LESFidelityUnlocksControl
     {mechanism : Basis.DomainMechanismSocket}
     (DecisionAdequate :
-      SPAC.TieredSPACCandidate mechanism →
+      SPAC.SPACFidelityTier →
       Basis.Control mechanism → Set)
-    (from : SPAC.TieredSPACCandidate mechanism)
+    (from : SPAC.SPACFidelityTier)
     (control : Basis.Control mechanism) : Set₁ where
   constructor lesFidelityUnlocksControl
   field
@@ -148,10 +136,10 @@ record LESJointMeasurementFidelityCampaign
       (Basis.Observation mechanism)
     Authority : Basis.Control mechanism → Set
     DecisionAdequate :
-      SPAC.TieredSPACCandidate mechanism →
+      SPAC.SPACFidelityTier →
       Basis.Control mechanism → Set
     live : Basis.State mechanism → Set
-    initialModel : SPAC.TieredSPACCandidate mechanism
+    initialModel : SPAC.SPACFidelityTier
     policy : LESJointPolicy
       system Authority DecisionAdequate live initialModel
     worstCaseCostBound : Nat
@@ -168,6 +156,10 @@ open LESJointMeasurementFidelityCampaign public
 record LESJointMeasurementFidelityBoundary : Set where
   constructor lesJointMeasurementFidelityBoundary
   field
+    fullTieredCandidateRecordMustBeRuntimeModelState : Bool
+    fullTieredCandidateRecordMustBeRuntimeModelStateIsFalse :
+      fullTieredCandidateRecordMustBeRuntimeModelState ≡ false
+
     richerModelAutomaticallyShrinksEmpiricalStateFibre : Bool
     richerModelAutomaticallyShrinksEmpiricalStateFibreIsFalse :
       richerModelAutomaticallyShrinksEmpiricalStateFibre ≡ false
@@ -192,4 +184,4 @@ canonicalLESJointMeasurementFidelityBoundary :
   LESJointMeasurementFidelityBoundary
 canonicalLESJointMeasurementFidelityBoundary =
   lesJointMeasurementFidelityBoundary
-    false refl true refl true refl true refl true refl
+    false refl false refl true refl true refl true refl true refl
