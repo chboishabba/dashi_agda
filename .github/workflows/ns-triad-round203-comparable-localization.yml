@@ -20,9 +20,15 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNCoherentGramOnlyCompanionCompilerRound220Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNAuthoritativePackageAPathRound221Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCoherentGramResidualTargetRound222Exact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound222Exact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound222Validation.agda'
-      - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound222Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNMixedHelicityQuadraticKernelRound223Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNMixedHelicityFixedOutputSwapRound224Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNMixedHelicityCompanionMassRound226Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNMixedHelicityGlobalCompanionRound227Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNMixedHelicitySpacetimeFrontierRound228Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound228Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound228Validation.agda'
+      - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound228Exact.agda'
       - 'scripts/check_ns_triad_clay_frontier.py'
       - 'scripts/run_agda29_parallel_check.sh'
       - 'flake.nix'
@@ -89,17 +95,42 @@ jobs:
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNAuthoritativePackageAPathRound221Exact.agda
 
-      - name: Type-check Round222 coherent Gram target
+      - name: Type-check Round223 mixed-helicity pair collapse
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNPhysicalCoherentGramResidualTargetRound222Exact.agda
+          DASHI/Physics/Closure/NSTriadKNMixedHelicityQuadraticKernelRound223Exact.agda
 
-      - name: Type-check Round222 frontier validation
+      - name: Type-check Round224 fixed-output swap reindexing
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNClayFrontierRound222Validation.agda
+          DASHI/Physics/Closure/NSTriadKNMixedHelicityFixedOutputSwapRound224Exact.agda
 
-      - name: Type-check Round222 paper interface
+      - name: Type-check Round225 fixed-output mixed-helicity collapse
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Papers/NavierStokes/TheoremInterfaceRound222Exact.agda
+          DASHI/Physics/Closure/NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact.agda
+
+      - name: Type-check Round226 mixed-helicity companion mass
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNMixedHelicityCompanionMassRound226Exact.agda
+
+      - name: Type-check Round227 global mixed-helicity companion
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNMixedHelicityGlobalCompanionRound227Exact.agda
+
+      - name: Type-check Round228 spacetime frontier
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNMixedHelicitySpacetimeFrontierRound228Exact.agda
+
+      - name: Type-check Round228 frontier validation
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound228Validation.agda
+
+      - name: Type-check Round228 paper interface
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Papers/NavierStokes/TheoremInterfaceRound228Exact.agda
