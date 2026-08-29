@@ -5,9 +5,14 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
 FILES=(
+  DASHI/Analysis/RiemannAristotleWindowSchurCrossProverSyncExact.agda
+  DASHI/Analysis/RiemannAristotleWindowSchurCrossProverRegression.agda
+  DASHI/Analysis/RiemannAristotleSharedWindowCertificateExact.agda
   DASHI/Analysis/RiemannAristotleTwoZeroThreeTaperReturnExact.agda
   DASHI/Analysis/RiemannAristotleTwoZeroThreeTaperReturnRegression.agda
   DASHI/Analysis/ExactSelectedEliminationFarTailCompilerExact.agda
+  DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda
+  DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 )
 
 for f in "${FILES[@]}"; do
@@ -18,8 +23,10 @@ for f in "${FILES[@]}"; do
 done
 
 if command -v agda >/dev/null 2>&1; then
+  agda DASHI/Analysis/RiemannAristotleWindowSchurCrossProverRegression.agda
   agda DASHI/Analysis/RiemannAristotleTwoZeroThreeTaperReturnRegression.agda
   agda DASHI/Analysis/ExactSelectedEliminationFarTailCompilerExact.agda
+  agda DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 else
   echo "agda executable not present; trust scan only" >&2
 fi
