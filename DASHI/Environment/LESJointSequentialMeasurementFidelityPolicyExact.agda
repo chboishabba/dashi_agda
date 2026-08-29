@@ -16,8 +16,8 @@ import DASHI.Environment.LESAdaptiveSPACModelSearchExact as SPAC
 --
 -- The live hypothesis carrier is the actual fine LES mechanism state.  Model
 -- fidelity is tracked independently as a tiered SPAC reduction candidate.
--- Measurements can refine the state fibre; a fidelity escalation cannot do so
--- without subsequently confronting observations.
+-- Measurements can refine the state fibre; fidelity can remove a declared
+-- model-adequacy obstruction but cannot become empirical evidence by itself.
 ------------------------------------------------------------------------
 
 LESJointPolicy :
@@ -27,13 +27,18 @@ LESJointPolicy :
       (Basis.Control mechanism)
       (Basis.Observation mechanism)) →
   (Authority : Basis.Control mechanism → Set) →
+  (DecisionAdequate :
+    SPAC.TieredSPACCandidate mechanism →
+    Basis.Control mechanism → Set) →
   (Basis.State mechanism → Set) →
   SPAC.TieredSPACCandidate mechanism →
   Set₁
-LESJointPolicy {mechanism} system Authority live model =
+LESJointPolicy {mechanism}
+    system Authority DecisionAdequate live model =
   Joint.JointSequentialPolicy
     system Authority
     (SPAC.TieredSPACCandidate mechanism)
+    DecisionAdequate
     live model
 
 measurementAsLESEvidenceMove :
@@ -41,12 +46,6 @@ measurementAsLESEvidenceMove :
   Synthesis.ExperimentBundle (Basis.State mechanism) →
   Joint.EvidenceMove (Basis.State mechanism)
 measurementAsLESEvidenceMove = Joint.bundleAsEvidenceMove
-
-------------------------------------------------------------------------
--- Counterexample-driven SPAC fidelity transitions.
--- The transition cost is an application measurement/resource estimate, not the
--- candidate's abstract cost rank.
-------------------------------------------------------------------------
 
 bucketToRichardsFidelityMove :
   ∀ {mechanism}
@@ -119,9 +118,24 @@ spacToElectroBiogeochemicalFidelityMove
     "candidate refutation supplied to spacToElectroBiogeochemicalFidelityMove"
 
 ------------------------------------------------------------------------
--- Campaign receipt: one policy may interleave measurements and fidelity moves
--- and may terminate early at a robust independently authorised control.
+-- Application receipt that a specific fidelity increase, not a measurement,
+-- removes the remaining model-adequacy obstruction for a declared control.
 ------------------------------------------------------------------------
+
+record LESFidelityUnlocksControl
+    {mechanism : Basis.DomainMechanismSocket}
+    (DecisionAdequate :
+      SPAC.TieredSPACCandidate mechanism →
+      Basis.Control mechanism → Set)
+    (from : SPAC.TieredSPACCandidate mechanism)
+    (control : Basis.Control mechanism) : Set₁ where
+  constructor lesFidelityUnlocksControl
+  field
+    unlock : Joint.FidelityUnlocksDecision DecisionAdequate from control
+    consumerReference : String
+    validationReference : String
+
+open LESFidelityUnlocksControl public
 
 record LESJointMeasurementFidelityCampaign
     (mechanism : Basis.DomainMechanismSocket)
@@ -133,13 +147,18 @@ record LESJointMeasurementFidelityCampaign
       (Basis.Control mechanism)
       (Basis.Observation mechanism)
     Authority : Basis.Control mechanism → Set
+    DecisionAdequate :
+      SPAC.TieredSPACCandidate mechanism →
+      Basis.Control mechanism → Set
     live : Basis.State mechanism → Set
     initialModel : SPAC.TieredSPACCandidate mechanism
-    policy : LESJointPolicy system Authority live initialModel
+    policy : LESJointPolicy
+      system Authority DecisionAdequate live initialModel
     worstCaseCostBound : Nat
     costCertificate : Joint.JointPolicyCostAtMost policy worstCaseCostBound
     measurementLibraryReference : String
     fidelityCostReference : String
+    modelAdequacyReference : String
     robustConsumerReference : String
     authorityReference : String
     heldOutValidationReference : String
@@ -161,6 +180,10 @@ record LESJointMeasurementFidelityBoundary : Set where
     counterexampleCanJustifyRicherModelStateIsTrue :
       counterexampleCanJustifyRicherModelState ≡ true
 
+    fidelityCanUnlockModelAdequacyWithoutNewEvidence : Bool
+    fidelityCanUnlockModelAdequacyWithoutNewEvidenceIsTrue :
+      fidelityCanUnlockModelAdequacyWithoutNewEvidence ≡ true
+
     robustAuthorisedControlMayStopBeforeMaximumFidelity : Bool
     robustAuthorisedControlMayStopBeforeMaximumFidelityIsTrue :
       robustAuthorisedControlMayStopBeforeMaximumFidelity ≡ true
@@ -168,4 +191,5 @@ record LESJointMeasurementFidelityBoundary : Set where
 canonicalLESJointMeasurementFidelityBoundary :
   LESJointMeasurementFidelityBoundary
 canonicalLESJointMeasurementFidelityBoundary =
-  lesJointMeasurementFidelityBoundary false refl true refl true refl true refl
+  lesJointMeasurementFidelityBoundary
+    false refl true refl true refl true refl true refl
