@@ -1,0 +1,51 @@
+module DASHI.Papers.NavierStokes.TheoremInterfaceRound217Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound217Exact as R217
+
+round217PaperCellMassEDCompilerClosed : Bool
+round217PaperCellMassEDCompilerClosed = R217.round217RawCellMassEDCompilerClosed
+
+round217PaperNoCardinalityCellMassCompilerClosed : Bool
+round217PaperNoCardinalityCellMassCompilerClosed =
+  R217.round217FiniteCellMassNoCardinalityCompilerClosed
+
+round217PaperPhysicalCellMassPaymentClosed : Bool
+round217PaperPhysicalCellMassPaymentClosed = R217.round217PhysicalCellMassEDPaymentClosed
+
+round217PaperCoherentGramResidualBudgetClosed : Bool
+round217PaperCoherentGramResidualBudgetClosed = R217.round217CoherentGramResidualBudgetClosed
+
+round217PaperNovelMathematicalLeafCount : Nat
+round217PaperNovelMathematicalLeafCount = R217.round217NovelMathematicalLeafCount
+
+round217PaperPackageAClosed : Bool
+round217PaperPackageAClosed = R217.round217PackageAClosed
+
+round217PaperClayPromotion : Bool
+round217PaperClayPromotion = R217.round217ClayPromotion
+
+round217PaperCellMassEDCompilerClosedIsTrue :
+  round217PaperCellMassEDCompilerClosed ≡ true
+round217PaperCellMassEDCompilerClosedIsTrue = refl
+
+round217PaperPhysicalCellMassPaymentClosedIsFalse :
+  round217PaperPhysicalCellMassPaymentClosed ≡ false
+round217PaperPhysicalCellMassPaymentClosedIsFalse = refl
+
+round217PaperCoherentGramResidualBudgetClosedIsFalse :
+  round217PaperCoherentGramResidualBudgetClosed ≡ false
+round217PaperCoherentGramResidualBudgetClosedIsFalse = refl
+
+round217PaperNovelMathematicalLeafCountIsOne :
+  round217PaperNovelMathematicalLeafCount ≡ 1
+round217PaperNovelMathematicalLeafCountIsOne = refl
+
+round217PaperPackageAClosedIsFalse : round217PaperPackageAClosed ≡ false
+round217PaperPackageAClosedIsFalse = refl
+
+round217PaperClayPromotionIsFalse : round217PaperClayPromotion ≡ false
+round217PaperClayPromotionIsFalse = refl

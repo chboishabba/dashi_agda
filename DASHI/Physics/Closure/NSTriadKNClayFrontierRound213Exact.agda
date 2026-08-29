@@ -1,0 +1,55 @@
+module DASHI.Physics.Closure.NSTriadKNClayFrontierRound213Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Physics.Closure.NSTriadKNResonantOutputShellTriangleRound212Exact as R212
+import DASHI.Physics.Closure.NSTriadKNComparableFixedOutputTwoSidedCollarRound213Exact as R213
+
+round213ConcreteResonantOutputShellTriangleClosed : Bool
+round213ConcreteResonantOutputShellTriangleClosed =
+  R212.round212ConcreteResonantOutputShellTriangleClosed
+
+round213FixedOutputCCTwoSidedCollarClosed : Bool
+round213FixedOutputCCTwoSidedCollarClosed =
+  R213.round213FixedOutputCCTwoSidedCollarClosed
+
+round213CCTwoSidedCollarCutoffIndependent : Bool
+round213CCTwoSidedCollarCutoffIndependent =
+  R213.round213CCTwoSidedCollarCutoffIndependent
+
+round213ConstantBandSameOutputConvolutionPaymentClosed : Bool
+round213ConstantBandSameOutputConvolutionPaymentClosed = false
+
+round213PhysicalCCResidualBudgetClosed : Bool
+round213PhysicalCCResidualBudgetClosed = false
+
+round213PhysicalFLResidualBudgetClosed : Bool
+round213PhysicalFLResidualBudgetClosed = false
+
+round213PhysicalHHResidualBudgetClosed : Bool
+round213PhysicalHHResidualBudgetClosed = false
+
+round213PackageAClosed : Bool
+round213PackageAClosed = false
+
+round213ClayPromotion : Bool
+round213ClayPromotion = false
+
+round213ConcreteResonantOutputShellTriangleClosedIsTrue :
+  round213ConcreteResonantOutputShellTriangleClosed ≡ true
+round213ConcreteResonantOutputShellTriangleClosedIsTrue = refl
+
+round213FixedOutputCCTwoSidedCollarClosedIsTrue :
+  round213FixedOutputCCTwoSidedCollarClosed ≡ true
+round213FixedOutputCCTwoSidedCollarClosedIsTrue = refl
+
+round213ConstantBandSameOutputConvolutionPaymentClosedIsFalse :
+  round213ConstantBandSameOutputConvolutionPaymentClosed ≡ false
+round213ConstantBandSameOutputConvolutionPaymentClosedIsFalse = refl
+
+round213PackageAClosedIsFalse : round213PackageAClosed ≡ false
+round213PackageAClosedIsFalse = refl
+
+round213ClayPromotionIsFalse : round213ClayPromotion ≡ false
+round213ClayPromotionIsFalse = refl
