@@ -16,66 +16,37 @@ module DASHI.Analysis.RiemannAristotleNearFarShellProducerSocketsExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Rational.Base using (ℚ; _*_; _≤_; _<_)
-
-------------------------------------------------------------------------
--- Truly far shells: this is where absolute estimates are allowed.
---
--- A concrete Lean/Agda analytic producer should identify `curvatureConstant`
--- with the uniform C2 pair-weight bound and `tailMass` with the explicit tail
--- of the unit-shell delta^-2 majorant beyond `cutoff`.
-------------------------------------------------------------------------
+open import Data.Rational.Base using (ℚ; _*_; _≤_)
 
 record FarShellQuantitativeEnvelope : Set where
   constructor far-shell-quantitative-envelope
   field
-    cutoff : Nat
+    farCutoff : Nat
     farContribution curvatureConstant tailMass farBudget : ℚ
-
     farContributionBound : farContribution ≤ farBudget
-    curvatureTailBudgetIdentity :
-      farBudget ≡ curvatureConstant * tailMass
+    curvatureTailBudgetIdentity : farBudget ≡ curvatureConstant * tailMass
 
 open FarShellQuantitativeEnvelope public
-
-------------------------------------------------------------------------
--- Nearby shells: finite, but cancellation-sensitive.
---
--- `nearShellCount` is deliberately explicit.  The domain owner must show that
--- its chosen shell window really reduces the difficult part to this finite
--- carrier, and must bound the SIGNED aggregate rather than the sum of absolute
--- shell masses.
-------------------------------------------------------------------------
 
 record FiniteSignedNearShellCore : Set where
   constructor finite-signed-near-shell-core
   field
-    cutoff nearShellCount : Nat
+    nearCutoff nearShellCount : Nat
     signedNearContribution nearBudget : ℚ
-
     nearCarrierFinite : Bool
     nearCarrierFiniteIsTrue : nearCarrierFinite ≡ true
-
     signedAggregateBound : signedNearContribution ≤ nearBudget
 
 open FiniteSignedNearShellCore public
-
-------------------------------------------------------------------------
--- Compatibility receipt: the two producer objects must use the SAME cutoff.
-------------------------------------------------------------------------
 
 record CompatibleNearFarProducers
     (near : FiniteSignedNearShellCore)
     (far : FarShellQuantitativeEnvelope) : Set where
   constructor compatible-near-far-producers
   field
-    sameCutoff : cutoff near ≡ cutoff far
+    sameCutoff : nearCutoff near ≡ farCutoff far
 
 open CompatibleNearFarProducers public
-
-------------------------------------------------------------------------
--- Research-status boundary.
-------------------------------------------------------------------------
 
 record NearFarProducerBoundary : Set where
   constructor near-far-producer-boundary
@@ -83,28 +54,19 @@ record NearFarProducerBoundary : Set where
     uniformCurvatureSourceOwnedInLean : Bool
     uniformCurvatureSourceOwnedInLeanIsTrue :
       uniformCurvatureSourceOwnedInLean ≡ true
-
     deltaSquaredTailSummabilityOwnedInLean : Bool
     deltaSquaredTailSummabilityOwnedInLeanIsTrue :
       deltaSquaredTailSummabilityOwnedInLean ≡ true
-
     explicitNumericFarTailEnvelopeTransportedToAgda : Bool
     explicitNumericFarTailEnvelopeTransportedToAgdaIsFalse :
       explicitNumericFarTailEnvelopeTransportedToAgda ≡ false
-
     finiteSignedNearShellEstimateClosed : Bool
     finiteSignedNearShellEstimateClosedIsFalse :
       finiteSignedNearShellEstimateClosed ≡ false
-
     nearAbsoluteMajorantAcceptedAsCompletion : Bool
     nearAbsoluteMajorantAcceptedAsCompletionIsFalse :
       nearAbsoluteMajorantAcceptedAsCompletion ≡ false
 
 canonicalNearFarProducerBoundary : NearFarProducerBoundary
 canonicalNearFarProducerBoundary =
-  near-far-producer-boundary
-    true refl
-    true refl
-    false refl
-    false refl
-    false refl
+  near-far-producer-boundary true refl true refl false refl false refl false refl
