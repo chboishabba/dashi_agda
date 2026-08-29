@@ -9,41 +9,87 @@ open import Agda.Builtin.String using (String)
 --
 -- Generic admission rule for new conceptual / architectural layers.
 --
--- A new layer is promotion-relevant only when it demonstrably changes the
--- live obligation surface by one of three routes:
+-- A new layer is promotion-relevant only when it carries one of three actual
+-- receipts:
 --
---   * discharges a previously live obligation;
---   * strictly refines an observer / representation so a previously hidden
---     distinction becomes available;
---   * exposes a new live empirical or mathematical obligation that was hidden
---     by the previous chart.
+--   * a live obligation disappears from the after-frontier;
+--   * an old observer collision is separated by a new observer;
+--   * an obligation hidden by the old chart becomes explicitly visible in the
+--     refined frontier.
 --
--- Mere renaming, commentary, parallel vocabulary, or extra abstraction does
--- not itself advance the proof / experiment frontier.
+-- Mere renaming, commentary, parallel vocabulary, or extra abstraction has no
+-- promotion constructor.
 ------------------------------------------------------------------------
 
-data ExtensionEffect : Set where
-  dischargesLiveObligation
-  strictlyRefinesRequiredObserver
-  exposesPreviouslyHiddenObligation
-  scaffoldingOnly
+record DischargeReceipt (Obligation : Set)
+                        (liveBefore liveAfter : Obligation → Set) : Set where
+  constructor dischargeReceipt
+  field
+    obligation : Obligation
+    wasLive : liveBefore obligation
+    isClosedAfter : liveAfter obligation → ⊥
 
-record ExtensionAdmission : Set where
+open DischargeReceipt public
+
+record StrictObserverRefinementReceipt
+    (Fine Old New : Set)
+    (oldObserve : Fine → Old)
+    (newObserve : Fine → New) : Set where
+  constructor strictObserverRefinementReceipt
+  field
+    left right : Fine
+    oldCollision : oldObserve left ≡ oldObserve right
+    newSeparation : newObserve left ≡ newObserve right → ⊥
+
+open StrictObserverRefinementReceipt public
+
+record ExposureReceipt (Obligation : Set)
+                       (visibleBefore visibleAfter : Obligation → Set) : Set where
+  constructor exposureReceipt
+  field
+    obligation : Obligation
+    wasNotVisible : visibleBefore obligation → ⊥
+    isVisibleAfter : visibleAfter obligation
+
+open ExposureReceipt public
+
+data ExtensionProgressReceipt : Set₁ where
+  discharged :
+    {Obligation : Set} →
+    {liveBefore liveAfter : Obligation → Set} →
+    DischargeReceipt Obligation liveBefore liveAfter →
+    ExtensionProgressReceipt
+
+  refined :
+    {Fine Old New : Set} →
+    {oldObserve : Fine → Old} →
+    {newObserve : Fine → New} →
+    StrictObserverRefinementReceipt Fine Old New oldObserve newObserve →
+    ExtensionProgressReceipt
+
+  exposed :
+    {Obligation : Set} →
+    {visibleBefore visibleAfter : Obligation → Set} →
+    ExposureReceipt Obligation visibleBefore visibleAfter →
+    ExtensionProgressReceipt
+
+data ExtensionStatus : Set₁ where
+  theoremBearingProgress : ExtensionProgressReceipt → ExtensionStatus
+  scaffoldingOnly : ExtensionStatus
+
+record ExtensionAdmission : Set₁ where
   constructor extensionAdmission
   field
     extensionName : String
-    effect : ExtensionEffect
-    liveObligationReference : String
+    status : ExtensionStatus
     evidenceReceiptReference : String
     sourceOrInternalProvenance : String
 
 open ExtensionAdmission public
 
 PromotionRelevant : ExtensionAdmission → Set
-PromotionRelevant admission with effect admission
-... | dischargesLiveObligation = ⊤
-... | strictlyRefinesRequiredObserver = ⊤
-... | exposesPreviouslyHiddenObligation = ⊤
+PromotionRelevant admission with status admission
+... | theoremBearingProgress receipt = ⊤
 ... | scaffoldingOnly = ⊥
 
 record ObligationReducingGuardBoundary : Set where
@@ -93,32 +139,46 @@ commentaryOnly =
     "commentary-only layer"
     scaffoldingOnly
     "none"
-    "none"
     "internal explanatory scaffolding"
 
 commentaryOnlyCannotPromote : PromotionRelevant commentaryOnly → ⊥
 commentaryOnlyCannotPromote ()
 
+data FineExample : Set where
+  leftExample rightExample : FineExample
+
+data OldExample : Set where
+  oldCollapsed : OldExample
+
+data NewExample : Set where
+  newLeft newRight : NewExample
+
+oldExampleObserve : FineExample → OldExample
+oldExampleObserve leftExample = oldCollapsed
+oldExampleObserve rightExample = oldCollapsed
+
+newExampleObserve : FineExample → NewExample
+newExampleObserve leftExample = newLeft
+newExampleObserve rightExample = newRight
+
+newExampleSeparation : newLeft ≡ newRight → ⊥
+newExampleSeparation ()
+
+canonicalRefinementReceipt :
+  StrictObserverRefinementReceipt
+    FineExample OldExample NewExample
+    oldExampleObserve newExampleObserve
+canonicalRefinementReceipt =
+  strictObserverRefinementReceipt
+    leftExample rightExample refl newExampleSeparation
+
 witnessedRefinement : ExtensionAdmission
 witnessedRefinement =
   extensionAdmission
     "witnessed observer refinement"
-    strictlyRefinesRequiredObserver
-    "consumer collision on current observer"
-    "strict refinement witness"
+    (theoremBearingProgress (refined canonicalRefinementReceipt))
+    "strict observer-refinement receipt"
     "internal theorem-bearing refinement"
 
 witnessedRefinementIsPromotionRelevant : PromotionRelevant witnessedRefinement
 witnessedRefinementIsPromotionRelevant = tt
-
-newlyExposedLeaf : ExtensionAdmission
-newlyExposedLeaf =
-  extensionAdmission
-    "newly exposed analytic leaf"
-    exposesPreviouslyHiddenObligation
-    "hidden residual after exact decomposition"
-    "same-object decomposition receipt"
-    "internal theorem-bearing frontier reduction"
-
-newlyExposedLeafIsPromotionRelevant : PromotionRelevant newlyExposedLeaf
-newlyExposedLeafIsPromotionRelevant = tt
