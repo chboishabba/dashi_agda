@@ -7,11 +7,17 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
--- Type-indexed SI dimensions.
+-- PRIMARY SOURCE
 --
--- Exponent order:
--- length, mass, time, electric current, thermodynamic temperature,
--- amount of substance, luminous intensity.
+-- Bureau International des Poids et Mesures (BIPM),
+-- The International System of Units (SI), 9th edition (2019),
+-- official brochure revision 4.01 (June 2026).
+-- DOI: 10.59161/AUEZ1291.
+--
+-- Source boundary:
+-- BIPM supplies the SI base quantities/units and derived-unit relations.
+-- The type-indexed Agda representation is a DASHI formal reconstruction.
+------------------------------------------------------------------------
 
 record Dimension : Set where
   constructor dim
@@ -73,7 +79,21 @@ MolarEntropy       = dim (pos 2) one minusTwo zeroI minusOne minusOne zeroI
 MolarConcentration = dim minusThree zeroI zeroI zeroI zeroI one zeroI
 
 ------------------------------------------------------------------------
+-- Additional coherent dimensions needed by fluid / transport / bioelectric
+-- applications.  These are dimension expressions, not claims of constitutive
+-- law or measured value.
+------------------------------------------------------------------------
+
+Density DynamicViscosity VolumetricFlowRate DiffusionCoefficient ElectricField : Dimension
+Density              = dim minusThree one zeroI zeroI zeroI zeroI zeroI
+DynamicViscosity     = dim minusOne one minusOne zeroI zeroI zeroI zeroI
+VolumetricFlowRate   = dim (pos 3) zeroI minusOne zeroI zeroI zeroI zeroI
+DiffusionCoefficient = dim (pos 2) zeroI minusOne zeroI zeroI zeroI zeroI
+ElectricField        = dim one one minusThree minusOne zeroI zeroI zeroI
+
+------------------------------------------------------------------------
 -- Decimal scale and exact signed fixed-point quantity.
+------------------------------------------------------------------------
 
 record DecimalScale : Set where
   constructor tenTo
@@ -103,8 +123,8 @@ posQ : ∀ {d s} → Nat → Quantity d s
 posQ n = quantity false n
 
 ------------------------------------------------------------------------
--- SI base and named derived units. The dimension index prevents mixing units
--- of unlike physical kind even when their numeric carriers coincide.
+-- SI base and named derived units.
+------------------------------------------------------------------------
 
 record Unit (d : Dimension) : Set where
   constructor mkUnit
@@ -197,8 +217,24 @@ joulePerMoleKelvin = mkUnit "J mol⁻¹ K⁻¹" "joule per mole kelvin"
 molePerCubicMetre : Unit MolarConcentration
 molePerCubicMetre = mkUnit "mol m⁻³" "mole per cubic metre"
 
+kilogramPerCubicMetre : Unit Density
+kilogramPerCubicMetre = mkUnit "kg m⁻³" "kilogram per cubic metre"
+
+pascalSecond : Unit DynamicViscosity
+pascalSecond = mkUnit "Pa s" "pascal second"
+
+cubicMetrePerSecond : Unit VolumetricFlowRate
+cubicMetrePerSecond = mkUnit "m³ s⁻¹" "cubic metre per second"
+
+squareMetrePerSecond : Unit DiffusionCoefficient
+squareMetrePerSecond = mkUnit "m² s⁻¹" "square metre per second"
+
+voltPerMetre : Unit ElectricField
+voltPerMetre = mkUnit "V m⁻¹" "volt per metre"
+
 ------------------------------------------------------------------------
 -- Typed measurement and authority metadata.
+------------------------------------------------------------------------
 
 record Measurement (d : Dimension) (s : DecimalScale) : Set where
   constructor measurement
@@ -213,3 +249,6 @@ same-dimension-only x y = x ≡ y → x ≡ y
 
 same-dimension-only-proof : ∀ {d s} (x y : Quantity d s) → same-dimension-only x y
 same-dimension-only-proof x y eq = eq
+
+siSourceDOI : String
+siSourceDOI = "10.59161/AUEZ1291"
