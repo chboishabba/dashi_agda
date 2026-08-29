@@ -9,6 +9,8 @@ on:
       - 'DASHI/Core/TOEExperimentArchitectureValidation.agda'
       - 'DASHI/Core/Everything.agda'
       - 'DASHI/Physics/Foundations/PhysicalTheoryExperimentDiscriminationExact.agda'
+      - 'DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda'
+      - 'DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryValidation.agda'
       - 'DASHI/Physics/Foundations/Everything.agda'
       - 'scripts/check_toe_experiment_architecture.sh'
       - '.github/workflows/toe-experiment-architecture-agda.yml'
