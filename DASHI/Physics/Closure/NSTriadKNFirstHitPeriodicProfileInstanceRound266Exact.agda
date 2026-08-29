@@ -17,7 +17,7 @@ module DASHI.Physics.Closure.NSTriadKNFirstHitPeriodicProfileInstanceRound266Exa
 -- the same bounded sequence manufactured by Round242/265.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; _⊔_)
+open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
@@ -35,7 +35,7 @@ record FirstHitPeriodicProfileInstance
     (TorusState : Set ℓTorus)
     (EuclideanState : Set ℓEuclid)
     (stateAt : Nat → Time → TorusState)
-    : Set (Level.suc (ℓTorus ⊔ ℓEuclid)) where
+    : Set (lsuc (ℓTorus ⊔ ℓEuclid)) where
   field
     -- The sequence to which the source theorem is applied.
     profiledInput : Nat → TorusState
@@ -44,15 +44,15 @@ record FirstHitPeriodicProfileInstance
       profiledInput n
       ≡ stateAt (R242.selectedCutoff S n) (R242.selectedTime S n)
 
-    -- R260 is stated with equal-level carriers; an analytic realization may
-    -- use a common ambient universe for torus and Euclidean states.
-    CommonState : Set ℓTorus
+    -- R260 is stated with equal-level carriers; embed both state types into one
+    -- common analytic carrier before applying the source theorem.
+    CommonState : Set (ℓTorus ⊔ ℓEuclid)
     torusIntoCommon : TorusState → CommonState
     euclideanIntoCommon : EuclideanState → CommonState
     periodicProfileTheorem :
       R260.PeriodicFractionalProfileTheorem CommonState CommonState
 
-    sourceTheoremAppliedToProfiledInput : Set ℓTorus
+    sourceTheoremAppliedToProfiledInput : Set (ℓTorus ⊔ ℓEuclid)
 
 open FirstHitPeriodicProfileInstance public
 
