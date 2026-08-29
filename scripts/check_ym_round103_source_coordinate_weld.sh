@@ -19,12 +19,13 @@ files=(
   DASHI/Physics/YangMills/BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact.agda
   DASHI/Physics/YangMills/BalabanCMP116PhysicalCompositeHessianMarkedShellRound103Exact.agda
   DASHI/Physics/YangMills/BalabanHeatDoobSameDensityLogHessianRound103Exact.agda
+  DASHI/Physics/YangMills/BalabanBackgroundHessianMetricVariationBoundaryRound105Exact.agda
 )
 
 for file in "${files[@]}"; do test -f "$file"; done
 
 if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERMINATION_CHECK|allow-unsolved-metas|--no-positivity-check|--no-termination-check|NON_COVERING|--type-in-type|trustMe|primTrustMe' "${files[@]}"; then
-  echo "Round103 source-coordinate weld contains a hole, postulate, unsafe escape, or trust primitive" >&2
+  echo "Round103/105 source-coordinate weld contains a hole, postulate, unsafe escape, or trust primitive" >&2
   exit 1
 fi
 
@@ -36,6 +37,10 @@ grep -q 'polarizationIsLocalizedCompositeHessianSum' DASHI/Physics/YangMills/Bal
 grep -q 'cmp109PolarizationIsCMP116PhysicalMarkedHessian' DASHI/Physics/YangMills/BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact.agda
 grep -q 'covarianceDefinition' DASHI/Physics/YangMills/BalabanHeatDoobSameDensityLogHessianRound103Exact.agda
 grep -q 'heatDoobHessianIsStaticMinusCovariance' DASHI/Physics/YangMills/BalabanHeatDoobSameDensityLogHessianRound103Exact.agda
+grep -q 'cmp109BackgroundHessianIsMetricVariationByDefinitionIsFalse' DASHI/Physics/YangMills/BalabanBackgroundHessianMetricVariationBoundaryRound105Exact.agda
+grep -q 'cmp109PolarizationIsStressTensorByDefinitionIsFalse' DASHI/Physics/YangMills/BalabanBackgroundHessianMetricVariationBoundaryRound105Exact.agda
+grep -q 'substitutionCurvatureMayBeDroppedWithoutProofIsFalse' DASHI/Physics/YangMills/BalabanBackgroundHessianMetricVariationBoundaryRound105Exact.agda
+grep -q 'bcBackgroundHessianToMetricVariationRound105Level' "$target"
 
 # Regression against receipt-shuffling in the strict new seams.
 ! grep -q 'sameBlockingScaleConvention : Set' DASHI/Physics/YangMills/BalabanCMP109116SourceContinuationRound103Exact.agda
