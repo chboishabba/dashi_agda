@@ -1,30 +1,28 @@
 module DASHI.Analysis.RiemannAristotleFarTailCutoffSelectorExact where
 
 ------------------------------------------------------------------------
--- S2a CUTOFF SELECTION: SUMMABLE FAR TAIL -> AVAILABLE MARGIN
+-- S2a/S2b JOINT CUTOFF SELECTION
 --
--- Forward input:
---   a quantitative far-tail budget law B_far(J) together with the genuine
---   tail property that every positive allowance can eventually be beaten.
+-- The far tail decreases as the cutoff moves outward, but the finite signed
+-- near core changes at the same time.  Therefore far-tail summability alone
+-- must NOT be presented as an automatic selector for the final cutoff.
 --
--- Backward input:
---   a near-core budget and a cluster margin, together with an explicit positive
---   allowance epsilon satisfying
+-- Forward capability:
+--   a far-tail budget law B_far(J) with eventual smallness.
 --
---       B_near + epsilon < M_cluster.
+-- Backward requirement:
+--   at ONE common J, the near producer leaves a positive allowance epsilon and
 --
--- Meeting theorem:
---   choose J so that B_far(J) < epsilon.  Then automatically
+--       B_near(J) + epsilon < M_cluster,
+--       B_far(J) < epsilon.
 --
---       B_near + B_far(J) < M_cluster.
---
--- This module does not assert that bare convergence supplies a numerical
--- modulus.  A concrete analytic owner must provide the `chooseCutoff` field.
+-- The theorem below composes those two inequalities.  A domain producer still
+-- has to find the common J; this module does not hide that coupled search.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Product using (Σ; _,_; proj₁; proj₂)
-open import Data.Rational.Base using (ℚ; _+_; _≤_; _<_)
+open import Data.Product using (Σ; proj₁; proj₂)
+open import Data.Rational.Base using (ℚ; _+_; _<_)
 import Data.Rational.Properties as ℚP
 
 record FarTailDecayLaw : Set where
@@ -32,50 +30,64 @@ record FarTailDecayLaw : Set where
   field
     farBudgetAt : Nat → ℚ
 
-    -- Exact quantitative content required from the summable-tail producer.
-    -- It may come from an explicit shell-tail formula or a constructive modulus.
-    chooseCutoff :
+    -- Eventual smallness supplied by a quantitative shell-tail theorem or a
+    -- constructive modulus extracted from the actual summable majorant.
+    chooseFarCutoff :
       (allowance : ℚ) →
       (+ 0 / 1) < allowance →
       Σ Nat (λ J → farBudgetAt J < allowance)
 
 open FarTailDecayLaw public
 
-record RemainingMarginAllowance : Set where
-  constructor remaining-margin-allowance
+------------------------------------------------------------------------
+-- One common cutoff where the growing finite core and shrinking far tail fit
+-- simultaneously below the surviving cluster margin.
+------------------------------------------------------------------------
+
+record JointNearFarCutoffCertificate (law : FarTailDecayLaw) : Set where
+  constructor joint-near-far-cutoff-certificate
   field
+    cutoff : Nat
     nearBudget clusterMargin allowance : ℚ
+
     allowancePositive : (+ 0 / 1) < allowance
-    allowanceFitsRemainingMargin :
+    farFitsAllowance : farBudgetAt law cutoff < allowance
+    nearPlusAllowanceBelowCluster :
       nearBudget + allowance < clusterMargin
 
-open RemainingMarginAllowance public
+open JointNearFarCutoffCertificate public
 
-selectedCutoff :
-  FarTailDecayLaw → RemainingMarginAllowance → Nat
-selectedCutoff law margin =
-  proj₁ (chooseCutoff law (allowance margin) (allowancePositive margin))
-
-selectedFarBudgetBelowAllowance :
+jointCombinedBudgetBelowCluster :
   (law : FarTailDecayLaw) →
-  (margin : RemainingMarginAllowance) →
-  farBudgetAt law (selectedCutoff law margin) < allowance margin
-selectedFarBudgetBelowAllowance law margin =
-  proj₂ (chooseCutoff law (allowance margin) (allowancePositive margin))
-
-selectedCombinedBudgetBelowClusterMargin :
-  (law : FarTailDecayLaw) →
-  (margin : RemainingMarginAllowance) →
-  nearBudget margin + farBudgetAt law (selectedCutoff law margin)
-    < clusterMargin margin
-selectedCombinedBudgetBelowClusterMargin law margin =
+  (d : JointNearFarCutoffCertificate law) →
+  nearBudget d + farBudgetAt law (cutoff d) < clusterMargin d
+jointCombinedBudgetBelowCluster law d =
   ℚP.<-trans
-    (ℚP.+-monoʳ-< (nearBudget margin)
-      (selectedFarBudgetBelowAllowance law margin))
-    (allowanceFitsRemainingMargin margin)
+    (ℚP.+-monoʳ-< (nearBudget d) (farFitsAllowance d))
+    (nearPlusAllowanceBelowCluster d)
 
 ------------------------------------------------------------------------
--- Boundary: summability and an explicit cutoff modulus are different claims.
+-- Far-only selector remains useful as a producer helper, but it is explicitly
+-- not the final coupled cutoff selector.
+------------------------------------------------------------------------
+
+farOnlySelectedCutoff :
+  (law : FarTailDecayLaw) →
+  (allowance : ℚ) →
+  (+ 0 / 1) < allowance → Nat
+farOnlySelectedCutoff law allowance positive =
+  proj₁ (chooseFarCutoff law allowance positive)
+
+farOnlySelectedCutoffFits :
+  (law : FarTailDecayLaw) →
+  (allowance : ℚ) →
+  (positive : (+ 0 / 1) < allowance) →
+  farBudgetAt law (farOnlySelectedCutoff law allowance positive) < allowance
+farOnlySelectedCutoffFits law allowance positive =
+  proj₂ (chooseFarCutoff law allowance positive)
+
+------------------------------------------------------------------------
+-- Research boundary.
 ------------------------------------------------------------------------
 
 record FarTailCutoffSelectorBoundary : Set where
@@ -85,18 +97,27 @@ record FarTailCutoffSelectorBoundary : Set where
     absoluteSummabilityKnownInLeanIsTrue :
       absoluteSummabilityKnownInLean ≡ true
 
-    genericCutoffSelectionCompilerClosed : Bool
-    genericCutoffSelectionCompilerClosedIsTrue :
-      genericCutoffSelectionCompilerClosed ≡ true
+    farTailEventualSmallnessIsCorrectProducerShape : Bool
+    farTailEventualSmallnessIsCorrectProducerShapeIsTrue :
+      farTailEventualSmallnessIsCorrectProducerShape ≡ true
+
+    farTailDecayAloneSelectsFinalJointCutoff : Bool
+    farTailDecayAloneSelectsFinalJointCutoffIsFalse :
+      farTailDecayAloneSelectsFinalJointCutoff ≡ false
+
+    jointNearFarCutoffCompilerClosed : Bool
+    jointNearFarCutoffCompilerClosedIsTrue :
+      jointNearFarCutoffCompilerClosed ≡ true
 
     explicitLeanTailModulusTransportedToAgda : Bool
     explicitLeanTailModulusTransportedToAgdaIsFalse :
       explicitLeanTailModulusTransportedToAgda ≡ false
 
-    cutoffMayIgnoreNearBudgetAndClusterMargin : Bool
-    cutoffMayIgnoreNearBudgetAndClusterMarginIsFalse :
-      cutoffMayIgnoreNearBudgetAndClusterMargin ≡ false
-
 canonicalFarTailCutoffSelectorBoundary : FarTailCutoffSelectorBoundary
 canonicalFarTailCutoffSelectorBoundary =
-  far-tail-cutoff-selector-boundary true refl true refl false refl false refl
+  far-tail-cutoff-selector-boundary
+    true refl
+    true refl
+    false refl
+    true refl
+    false refl
