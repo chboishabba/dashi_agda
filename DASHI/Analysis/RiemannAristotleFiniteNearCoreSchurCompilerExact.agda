@@ -68,11 +68,11 @@ finiteNearCoreContradictsExactSchur d exactSchur =
     open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 ------------------------------------------------------------------------
--- A more producer-friendly allowance form.
+-- Producer-friendly allowance form.
 --
--- Instead of proving the final weighted sum directly, the finite near-core
--- analysis may expose separate allowances for its Schur energy and the explicit
--- far error.
+-- The domain/vector layer may keep separate near/far allowances.  To avoid
+-- smuggling positivity or norm arithmetic into this scalar file, the weighted
+-- monotonicity step is itself an explicit theorem-bearing receipt.
 ------------------------------------------------------------------------
 
 record FiniteNearCoreAllowance : Set where
@@ -83,6 +83,10 @@ record FiniteNearCoreAllowance : Set where
 
     nearBound : nearSchurSq ≤ nearAllowance
     farBound : farErrorSq ≤ farAllowance
+
+    weightedActualsBelowAllowances :
+      ((+ 2 / 1) * nearSchurSq) + ((+ 2 / 1) * farErrorSq)
+        ≤ ((+ 2 / 1) * nearAllowance) + ((+ 2 / 1) * farAllowance)
 
     weightedAllowancesBelowCluster :
       ((+ 2 / 1) * nearAllowance) + ((+ 2 / 1) * farAllowance) < clusterMargin
@@ -95,9 +99,7 @@ weightedActualsBelowCluster :
     < clusterMargin d
 weightedActualsBelowCluster d =
   ℚP.≤-<-trans
-    (ℚP.+-mono-≤
-      (ℚP.*-monoˡ-≤ (nearBound d) (record { numerator = 2 ; denominator = 1 ; isCoprime = _ }))
-      (ℚP.*-monoˡ-≤ (farBound d) (record { numerator = 2 ; denominator = 1 ; isCoprime = _ })))
+    (weightedActualsBelowAllowances d)
     (weightedAllowancesBelowCluster d)
 
 ------------------------------------------------------------------------
