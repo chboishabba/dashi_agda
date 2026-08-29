@@ -3,16 +3,15 @@ module DASHI.Foundations.Wette1969Rule915Premise18BackwardSearchExact where
 ------------------------------------------------------------------------
 -- WETTE 1969 RULE 9.1.5: PREMISE-18 BACKWARD SEARCH NORMAL FORM
 --
--- The repository does not yet contain the complete historical rule catalogue,
--- so it would be unsound to enumerate all possible final rules for premise 18.
--- What we can require exactly is a terminal-production certificate:
+-- The complete source address carrier for the thirty implication rules 9.3.1--30
+-- is now recovered separately.  Their dense bodies are only partly transcribed,
+-- so this generic owner still does not pretend to decide every possible
+-- schematic unification.  What it requires exactly is a terminal-production
+-- certificate:
 --
 --   certified prefix trace
 --   + one actual certified historical rule at the reached context
---   + equality identifying that rule's conclusion with the recovered premise 18
---
--- This is the correct proof-search normal form for backward reasoning while the
--- source recovery of the remaining rule families is still incomplete.
+--   + equality identifying that rule's conclusion with recovered premise 18.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -161,23 +160,21 @@ record Wette1969Rule915Premise18BackwardSearchBoundary : Set where
     backwardCandidateEndsInActualCertifiedHistoricalRule : Bool
     backwardCandidateEndsInActualCertifiedHistoricalRuleIsTrue :
       backwardCandidateEndsInActualCertifiedHistoricalRule ≡ true
-
     terminalRuleMustConcludeRecoveredPremise18Exactly : Bool
     terminalRuleMustConcludeRecoveredPremise18ExactlyIsTrue :
       terminalRuleMustConcludeRecoveredPremise18Exactly ≡ true
-
     terminalPremise18RuleMustHaveHistoricalLRelator : Bool
     terminalPremise18RuleMustHaveHistoricalLRelatorIsTrue :
       terminalPremise18RuleMustHaveHistoricalLRelator ≡ true
-
     arbitraryCertifiedPrefixBeforeTerminalStepIsAllowed : Bool
     arbitraryCertifiedPrefixBeforeTerminalStepIsAllowedIsTrue :
       arbitraryCertifiedPrefixBeforeTerminalStepIsAllowed ≡ true
-
-    currentRepositoryEnumeratesAllHistoricalTerminalRulesForPremise18 : Bool
-    currentRepositoryEnumeratesAllHistoricalTerminalRulesForPremise18IsFalse :
-      currentRepositoryEnumeratesAllHistoricalTerminalRulesForPremise18 ≡ false
-
+    allThirty93AddressesNowEnumeratedElsewhere : Bool
+    allThirty93AddressesNowEnumeratedElsewhereIsTrue :
+      allThirty93AddressesNowEnumeratedElsewhere ≡ true
+    allThirtyDenseBodiesAlreadyTranscribedAndUnifiedHere : Bool
+    allThirtyDenseBodiesAlreadyTranscribedAndUnifiedHereIsFalse :
+      allThirtyDenseBodiesAlreadyTranscribedAndUnifiedHere ≡ false
     backwardSearchInterfaceManufacturesPremise18Derivation : Bool
     backwardSearchInterfaceManufacturesPremise18DerivationIsFalse :
       backwardSearchInterfaceManufacturesPremise18Derivation ≡ false
@@ -186,9 +183,4 @@ canonicalWette1969Rule915Premise18BackwardSearchBoundary :
   Wette1969Rule915Premise18BackwardSearchBoundary
 canonicalWette1969Rule915Premise18BackwardSearchBoundary =
   wette1969Rule915Premise18BackwardSearchBoundary
-    true refl
-    true refl
-    true refl
-    true refl
-    false refl
-    false refl
+    true refl true refl true refl true refl true refl false refl false refl
