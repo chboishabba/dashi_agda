@@ -27,6 +27,17 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound101BidiCompletionCutE
 -- for constructing the tuning window; it is not an irreducible field of the
 -- frozen endpoint.
 --
+-- A further PR583 cross-pollination removes a false additive history debt from
+-- the final pointwise beta margin.  CMP109 history is already an ARGUMENT of the
+-- current beta coefficient.  If the current five-channel finite-g bound is
+-- uniform over the admissible generated history, then
+--
+--     beta >= b_gauss - C_beta gamma^4
+--
+-- directly.  Localized/history response estimates may be used to prove that
+-- uniformity or to tune the shooting map, but subtracting them again from this
+-- current beta would double count the same dependency.
+--
 -- TRUE CURRENT A SOURCE OBJECT
 -- ----------------------------
 -- The two-sided estimate should be proved directly on
@@ -76,6 +87,7 @@ import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound95MasterSyncExact as 
 import DASHI.Physics.YangMills.BalabanPointwiseBetaBoundsToFrozenRowAExact as APointwise
 import DASHI.Physics.YangMills.BalabanVacuumPolarisationPointwiseBetaBoundsExact as AVP
 import DASHI.Physics.YangMills.BalabanVacuumPolarisationTunedFamilyToFrozenRowAExact as ATuned
+import DASHI.Physics.YangMills.BalabanA1HistoryUniformRemainderAntiDoubleCountRound101Exact as AHistoryUniform
 import DASHI.Physics.YangMills.BalabanHeatDoobHessianCovarianceDebtExact as CTemporal
 import DASHI.Physics.YangMills.BalabanHeatDoobWeightedGeneratorCovarianceExact as CSpatial
 
@@ -90,6 +102,10 @@ rowACMP109BetaIsLiteralMixedDerivativeRound101Level =
 rowALiteralDerivativeBoundsToPointwiseBetaRound101Level : ProofLevel
 rowALiteralDerivativeBoundsToPointwiseBetaRound101Level =
   AVP.literalDerivativeBoundsToPointwiseBetaLevel
+
+rowAHistoryUniformCurrentRemainderAntiDoubleCountRound101Level : ProofLevel
+rowAHistoryUniformCurrentRemainderAntiDoubleCountRound101Level =
+  AHistoryUniform.historyUniformCurrentRemainderAntiDoubleCountLevel
 
 rowAPointwiseBoundsToPrefixRound101Level : ProofLevel
 rowAPointwiseBoundsToPrefixRound101Level =
@@ -107,6 +123,8 @@ rowALiteralMixedDerivativeTunedFamilyToFrozenRound101Level =
 --   (A1) construct the actual generated CMP109 dynamics;
 --   (A2) prove a uniform positive lower and finite upper bound on its exact
 --        (5.42) mixed vacuum-polarisation derivative over the admitted history;
+--        the five-channel finite-g lower bound may be proved UNIFORMLY over that
+--        history, without a second final history subtraction;
 --   (A3) construct the tuned bare/observation window in the inverse-square
 --        coordinate.  Response-kernel/quartic shooting is one route to A3.
 -- Prefix and terminal-tail bounds are not separate leaves.
