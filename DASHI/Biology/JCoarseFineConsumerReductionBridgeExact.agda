@@ -1,7 +1,6 @@
 module DASHI.Biology.JCoarseFineConsumerReductionBridgeExact where
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.String using (String)
 
 import DASHI.Core.CoarseFineRelativeFibreExact as Fibre
 import DASHI.Core.ConsumerRelativeReductionKernelExact as Reduction
@@ -41,15 +40,15 @@ jAddressDepthSplitsCoarsePlusFine :
 jAddressDepthSplitsCoarsePlusFine =
   Modular.jAbsoluteAddressDepthReconstructs
 
+canonicalEvaluation : Evaluation.PointedCoarseFineEvaluation
+canonicalEvaluation = Evaluation.canonicalJCoarseFineEvaluation
+
 jFineEvaluationHasSection :
-  (fine : Evaluation.Fine canonical) →
-  Evaluation.evaluateAtDistinguished canonical
-    (Evaluation.section canonical fine)
+  (fine : Evaluation.Fine canonicalEvaluation) →
+  Evaluation.evaluateAtDistinguished canonicalEvaluation
+    (Evaluation.section canonicalEvaluation fine)
   ≡ fine
-jFineEvaluationHasSection = Evaluation.evaluateSection canonical
-  where
-    canonical : Evaluation.PointedCoarseFineEvaluation
-    canonical = Evaluation.canonicalJCoarseFineEvaluation
+jFineEvaluationHasSection = Evaluation.evaluateSection canonicalEvaluation
 
 ------------------------------------------------------------------------
 -- A consumer that distinguishes two absolute J states in the same coarse fibre
