@@ -26,6 +26,9 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNMixedHelicityCompanionMassRound226Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNMixedHelicityGlobalCompanionRound227Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNMixedHelicitySpacetimeFrontierRound228Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNMixedHelicityViscousCovarianceNoGoRound229Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNMixedHelicityForcingSwapRound230Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNMixedHelicityDampedProductTangentRound231Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound228Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound228Validation.agda'
       - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound228Exact.agda'
@@ -124,6 +127,21 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNMixedHelicitySpacetimeFrontierRound228Exact.agda
+
+      - name: Type-check Round229 viscous covariance no-go
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNMixedHelicityViscousCovarianceNoGoRound229Exact.agda
+
+      - name: Type-check Round230 mixed-helicity forcing swap
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNMixedHelicityForcingSwapRound230Exact.agda
+
+      - name: Type-check Round231 damped mixed-helicity tangent
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNMixedHelicityDampedProductTangentRound231Exact.agda
 
       - name: Type-check Round228 frontier validation
         run: >-
