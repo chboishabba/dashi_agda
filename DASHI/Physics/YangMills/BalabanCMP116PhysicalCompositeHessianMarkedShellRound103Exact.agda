@@ -1,6 +1,15 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCMP116PhysicalCompositeHessianMarkedShellRound103Exact where
 
+------------------------------------------------------------------------
+-- ROUND103 BC1: PHYSICAL COMPOSITE B-HESSIAN -> EXISTING CMP116 HESSIAN MARK
+--
+-- `radiusData` carries actual common-domain membership witnesses for every
+-- scale/volume.  The only extra physical evidence required here is the exact
+-- identification of the physical composite-Hessian shell with the already-owned
+-- shared hessian mark.
+------------------------------------------------------------------------
+
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
@@ -26,8 +35,6 @@ record PhysicalCompositeHessianMarkedShell
     physicalShellIsSharedHessianShell : ∀ scale volume root depth →
       physicalCompositeHessianShell scale volume root depth
       ≡ Shared.hessianInfluenceShell shared scale volume root depth
-
-    physicalHessianUsesCommonRadius : Scale → Volume → Set
 
 open PhysicalCompositeHessianMarkedShell public
 
