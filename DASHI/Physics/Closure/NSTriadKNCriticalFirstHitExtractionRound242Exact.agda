@@ -30,9 +30,10 @@ module DASHI.Physics.Closure.NSTriadKNCriticalFirstHitExtractionRound242Exact wh
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; _≤_)
+import Data.Rational.Properties as ℚP
 
 record ThresholdCrossing (Time : Set)
     (criticalSize : Nat → Time → ℚ)
@@ -88,7 +89,7 @@ selectedCriticalSizeBounded :
     criticalSize (selectedCutoff S n) (selectedTime S n) ≤ threshold
 selectedCriticalSizeBounded S n
   rewrite selectedCriticalSizeExact S n =
-  Data.Rational.Base.≤-refl
+  ℚP.≤-refl
 
 firstHitLawBuildsCriticalSequence :
   ∀ {Time Before criticalSize threshold}
