@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound103SourceCoordinateWeldExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanA1Equation51FiveChannelSameObjectRound103Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP109116FiniteEffectiveActionHessianRound103Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP109116SourceContinuationRound103Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP109Equation51LocalizedHessianRound103Exact.agda'
