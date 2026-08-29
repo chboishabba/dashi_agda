@@ -3,22 +3,10 @@ module DASHI.Physics.YangMills.BalabanCMP109116ConventionTransportRound103Exact 
 
 ------------------------------------------------------------------------
 -- ROUND103 BC1: DO NOT HIDE NORMALIZATION / PROJECTION CONVENTIONS
---
--- A literal equality between CMP109 E^(2) and the CMP116 marked Hessian is only
--- correct after four convention axes are aligned:
---
---   background/configuration,
---   field/source tangent coordinate,
---   constrained/gauge projection,
---   blocking/rescaling normalization.
---
--- This file makes the most general thin transport explicit.  If all maps are
--- identities and the normalization is one, the transport collapses to literal
--- equality.  Otherwise downstream consumers can use the transported Hessian
--- without pretending that a proportionality/conjugacy is definitional.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 1ℝ; _*ℝ_; mulOneˡ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -33,16 +21,13 @@ record CMP109116ConventionTransport : Set₁ where
     cmp116MarkedHessian :
       CMP116Configuration → CMP116Tangent → CMP116Tangent → ℝ
 
-    -- Background / source-coordinate transport.
     backgroundToCMP109 : CMP116Configuration → CMP109Configuration
     tangentToCMP109 : CMP116Tangent → CMP109Tangent
 
-    -- This scalar owns all block-volume, field-rescaling and source-normalization
-    -- convention differences.  A nontrivial value is not silently erased.
+    -- All block-volume, field-rescaling and source-normalization differences
+    -- live here.  A nontrivial scalar cannot disappear by notation.
     normalizationScale : ℝ
 
-    -- Exact source convention statement after constrained/gauge projection has
-    -- been included in `tangentToCMP109`.
     markedHessianTransportExact : ∀ configuration u v →
       cmp116MarkedHessian configuration u v
       ≡ normalizationScale *ℝ
@@ -77,8 +62,8 @@ record IdentityConventionAlignment : Set₁ where
     Configuration Tangent : Set
     e2 markedHessian : Configuration → Tangent → Tangent → ℝ
 
-    -- These are the results of the four explicit convention checks, not
-    -- assumptions inferred from notation.
+    -- Results of the four source checks.  They remain named evidence even after
+    -- the executable maps below have collapsed to identities.
     sameBackgroundCoordinate : Set
     sameSourceTangentCoordinate : Set
     sameConstrainedProjection : Set
@@ -103,13 +88,9 @@ identityConventionAsTransport dataSet = record
   ; CMP109116ConventionTransport.normalizationScale = 1ℝ
   ; CMP109116ConventionTransport.markedHessianTransportExact =
       λ configuration u v →
-        let
-          same = markedHessianIsE2 dataSet configuration u v
-        in
-        -- `1 * x = x` is oriented opposite to the desired RHS.
-        Agda.Builtin.Equality.trans same
-          (Agda.Builtin.Equality.sym
-            (mulOneˡ (e2 dataSet configuration u v)))
+        trans
+          (markedHessianIsE2 dataSet configuration u v)
+          (sym (mulOneˡ (e2 dataSet configuration u v)))
   }
 
 cmp109116ConventionTransportLevel : ProofLevel
@@ -118,9 +99,5 @@ cmp109116ConventionTransportLevel = machineChecked
 identityConventionCollapseLevel : ProofLevel
 identityConventionCollapseLevel = machineChecked
 
--- Physical source task: determine whether CMP109 and CMP116 really inhabit the
--- identity specialization.  If not, inhabit the general transport with the
--- literal scale/projection map instead.  No source-normalization mismatch can be
--- hidden downstream.
 literalCMP109116ConventionAlignmentLevel : ProofLevel
 literalCMP109116ConventionAlignmentLevel = conditional
