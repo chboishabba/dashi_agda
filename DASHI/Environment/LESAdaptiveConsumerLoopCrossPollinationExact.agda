@@ -13,9 +13,11 @@ import DASHI.Core.RobustInterventionAcrossHypothesesExact as Robust
 import DASHI.Core.DiscriminatorSynthesisExact as Synthesis
 import DASHI.Core.SequentialConsumerExperimentPlannerExact as Sequential
 import DASHI.Core.SequentialRobustActionabilityPlannerExact as SequentialAction
+import DASHI.Core.JointSequentialInformationFidelityPolicyExact as Joint
 import DASHI.Environment.LESSPACFidelityCounterexampleFixturesExact as Fixtures
 import DASHI.Environment.LESDiscriminatorSynthesisExact as LESSynthesis
 import DASHI.Environment.LESSequentialExperimentPlannerExact as LESSequential
+import DASHI.Environment.LESJointSequentialMeasurementFidelityPolicyExact as LESJoint
 
 adaptiveConsumerLoopOwner : String
 adaptiveConsumerLoopOwner = "DASHI.Core.AdaptiveConsumerModelLoopExact"
@@ -47,11 +49,17 @@ sequentialExperimentPlannerOwner = "DASHI.Core.SequentialConsumerExperimentPlann
 sequentialActionabilityPlannerOwner : String
 sequentialActionabilityPlannerOwner = "DASHI.Core.SequentialRobustActionabilityPlannerExact"
 
+jointSequentialPolicyOwner : String
+jointSequentialPolicyOwner = "DASHI.Core.JointSequentialInformationFidelityPolicyExact"
+
 lesDiscriminatorSynthesisOwner : String
 lesDiscriminatorSynthesisOwner = "DASHI.Environment.LESDiscriminatorSynthesisExact"
 
 lesSequentialExperimentOwner : String
 lesSequentialExperimentOwner = "DASHI.Environment.LESSequentialExperimentPlannerExact"
+
+lesJointMeasurementFidelityOwner : String
+lesJointMeasurementFidelityOwner = "DASHI.Environment.LESJointSequentialMeasurementFidelityPolicyExact"
 
 finiteSPACCounterexampleOwner : String
 finiteSPACCounterexampleOwner = "DASHI.Environment.LESSPACFidelityCounterexampleFixturesExact"
@@ -80,11 +88,17 @@ sequentialBoundaryImported = Sequential.canonicalSequentialExperimentPlannerBoun
 sequentialActionBoundaryImported : SequentialAction.SequentialActionabilityPlannerBoundary
 sequentialActionBoundaryImported = SequentialAction.canonicalSequentialActionabilityPlannerBoundary
 
+jointBoundaryImported : Joint.JointSequentialPolicyBoundary
+jointBoundaryImported = Joint.canonicalJointSequentialPolicyBoundary
+
 lesDiscriminatorBoundaryImported : LESSynthesis.LESDiscriminatorSynthesisBoundary
 lesDiscriminatorBoundaryImported = LESSynthesis.canonicalLESDiscriminatorSynthesisBoundary
 
 lesSequentialBoundaryImported : LESSequential.LESSequentialExperimentBoundary
 lesSequentialBoundaryImported = LESSequential.canonicalLESSequentialExperimentBoundary
+
+lesJointBoundaryImported : LESJoint.LESJointMeasurementFidelityBoundary
+lesJointBoundaryImported = LESJoint.canonicalLESJointMeasurementFidelityBoundary
 
 fixtureBoundaryImported : Fixtures.SPACFidelityCounterexampleBoundary
 fixtureBoundaryImported = Fixtures.canonicalSPACFidelityCounterexampleBoundary
@@ -108,6 +122,11 @@ record LESAdaptiveConsumerArchitectureCutset : Set where
     worstCaseSequentialCostCertificateTyped : Bool
     sequentialPlanMayStopAtConsumerClosureWithoutWorldIdentity : Bool
     sequentialActionabilityPlanMayStopAtRobustAuthorisedControl : Bool
+    jointMeasurementFidelityPolicyTyped : Bool
+    fidelityTransitionKeepsLiveFibreTyped : Bool
+    evidenceTransitionRefinesLiveFibreTyped : Bool
+    jointWorstCaseCostObjectiveTyped : Bool
+    jointPolicyMayStopAtRobustAuthorisedControl : Bool
     bucketHydraulicCounterexampleFixturePresent : Bool
     richardsPlantHistoryCounterexampleFixturePresent : Bool
     hydraulicSPACNutrientCounterexampleFixturePresent : Bool
@@ -119,6 +138,7 @@ canonicalLESAdaptiveConsumerArchitectureCutset =
     true true true true true true true true true true
     true true true true true true true true true true
     true true true true true true true true true true
+    true true true true true
 
 record LESAdaptiveConsumerArchitectureBoundary : Set where
   constructor lesAdaptiveConsumerArchitectureBoundary
@@ -144,6 +164,9 @@ record LESAdaptiveConsumerArchitectureBoundary : Set where
     robustAuthorisedActionRequiresFullModelIdentification : Bool
     robustAuthorisedActionRequiresFullModelIdentificationIsFalse :
       robustAuthorisedActionRequiresFullModelIdentification ≡ false
+    richerModelAutomaticallyCreatesNewEmpiricalEvidence : Bool
+    richerModelAutomaticallyCreatesNewEmpiricalEvidenceIsFalse :
+      richerModelAutomaticallyCreatesNewEmpiricalEvidence ≡ false
     oneChangedDependencyReopensEntireRepository : Bool
     oneChangedDependencyReopensEntireRepositoryIsFalse : oneChangedDependencyReopensEntireRepository ≡ false
     syntheticCounterexampleFixtureIsPhysicalValidation : Bool
@@ -153,4 +176,4 @@ canonicalLESAdaptiveConsumerArchitectureBoundary : LESAdaptiveConsumerArchitectu
 canonicalLESAdaptiveConsumerArchitectureBoundary =
   lesAdaptiveConsumerArchitectureBoundary
     false refl false refl false refl false refl false refl false refl
-    false refl false refl false refl false refl false refl
+    false refl false refl false refl false refl false refl false refl
