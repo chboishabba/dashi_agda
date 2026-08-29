@@ -2,7 +2,7 @@
 module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound103SourceCoordinateWeldExact where
 
 ------------------------------------------------------------------------
--- ROUND103: BIDI SOURCE-COORDINATE WELD
+-- ROUND103/105: BIDI SOURCE-COORDINATE WELD
 --
 -- A1:
 --   Eq.(5.1) off-diagonal two-jet + SAME Ward/five-channel beta evaluator
@@ -10,22 +10,16 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound103SourceCoordinateWe
 -- A2:
 --   shellwise sensitivities between pairs of literal generated CMP109 histories
 --   -> finite triangle theorem -> cumulative prefix Lipschitz estimate.
---   The mixed-Cauchy/cubic-drift/irrelevant-response gate supplies the remaining
---   cutoff-uniform subunit coefficient; cumulative Lipschitzness is no longer a
---   separate physical theorem.
 --
 -- BC1:
 --   Part-I effective action = Part-II localized PHYSICAL composite sum;
 --   D² commutes with finite sum; CMP109 (5.1) = D_B² of that same action;
---   hence Pi/E^(2) = sum of CMP116 physical composite B-Hessians;
---   one evidence-bearing common positive analytic radius controls all coordinates.
+--   hence Pi/E^(2) = sum of CMP116 physical composite B-Hessians.
 --
--- CMP116 substitution correction:
---   D_B²(E∘A) = intrinsic A-Hessian term + substitution-curvature term.
---
--- BC2:
---   Heat/Doob expectation and covariance are typed directly over the SAME strict
---   carrier potential; Hess V_t = E_t Hess V - Cov_t(grad V,grad V).
+-- Round105 cross-pollination boundary:
+--   D_B² V_eff is a gauge/background-field Hessian, not automatically the
+--   spacetime metric variation needed for stress-energy.  An explicit
+--   metric-variation transport is therefore a separate conditional theorem.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -42,6 +36,7 @@ import DASHI.Physics.YangMills.BalabanCMP116CommonAnalyticRadiusRound103Exact as
 import DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact as Carrier
 import DASHI.Physics.YangMills.BalabanCMP116PhysicalCompositeHessianMarkedShellRound103Exact as Shell
 import DASHI.Physics.YangMills.BalabanHeatDoobSameDensityLogHessianRound103Exact as Heat
+import DASHI.Physics.YangMills.BalabanBackgroundHessianMetricVariationBoundaryRound105Exact as Metric
 
 ------------------------------------------------------------------------
 -- A
@@ -109,6 +104,12 @@ bcCMP109EqualsCMP116PhysicalHessianRound103Level =
 bcPhysicalCompositeHessianMarkedShellRound103Level : ProofLevel
 bcPhysicalCompositeHessianMarkedShellRound103Level =
   Shell.physicalCompositeHessianMarkedShellCompilerLevel
+
+-- Cross-programme correction: the strict Round103 B-Hessian can be reused by
+-- a metric/stress calculation only after an explicit transport theorem.
+bcBackgroundHessianToMetricVariationRound105Level : ProofLevel
+bcBackgroundHessianToMetricVariationRound105Level =
+  Metric.metricVariationTransportFromRound103Level
 
 bc1LiteralSourceInstantiationRound103Level : ProofLevel
 bc1LiteralSourceInstantiationRound103Level = conditional
