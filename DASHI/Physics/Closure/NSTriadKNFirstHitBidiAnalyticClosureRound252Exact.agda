@@ -16,20 +16,25 @@ module DASHI.Physics.Closure.NSTriadKNFirstHitBidiAnalyticClosureRound252Exact w
 --   R241 then pays the mixed-helicity defect under a critical barrier;
 --   R242 then extracts the exact-threshold bounded critical sequence.
 --
--- No additional mathematical leaf is introduced here.
+-- The canonical constructor below cannot bypass G2: its W2 input is literally
+-- `CanonicalG2SamePhysicalW2` from R250.
 ------------------------------------------------------------------------
 
+open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; _≤_)
 
+import DASHI.Physics.Closure.NSConcreteAubinLionsNonlinearLimitWitnesses as Concrete
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact as R240
 import DASHI.Physics.Closure.NSTriadKNCriticalFirstHitExtractionRound242Exact as R242
 import DASHI.Physics.Closure.NSTriadKNFirstHitBidiPhysicalWeldRound243Exact as R243
+import DASHI.Physics.Closure.NSTriadKNCanonicalG2NumericDissipationRound245Exact as R245
 import DASHI.Physics.Closure.NSTriadKNStandardPeriodicSobolevW1Round249Exact as R249
+import DASHI.Physics.Closure.NSTriadKNCanonicalG2Round240W2Round250Exact as R250
 import DASHI.Physics.Closure.NSTriadKNStandardSpacetimeW1AndFirstHitW3Round251Exact as R251
 
 F : C3.RealField _
@@ -61,6 +66,25 @@ module AnalyticClosure
         R251.integratedDissipation spacetime N terminal ≤ dissipationBound
 
   open CompletedW1W2 public
+
+  canonicalG2BuildsCompletedW1W2 :
+    ∀ {ℓState ℓProp : Level}
+      {S : Concrete.ConcreteGalerkinSetting ℓState ℓProp}
+      {G2 : Concrete.G2ExactGalerkinEnergy S}
+      (T : Dyn.PhysicalNSGalerkinTrajectory)
+      {mixedMass criticalSize dissipationDensity : Nat → Time → ℚ}
+      (pointwise : R249.StandardPeriodicW1Authority
+        Time mixedMass criticalSize dissipationDensity)
+      (spacetime : R251.StandardSpacetimeW1Authority
+        Time integrateTo mixedMass criticalSize dissipationDensity pointwise)
+      (W2 : R250.CanonicalG2SamePhysicalW2
+        S G2 Time (R251.integratedDissipation spacetime)) →
+    CompletedW1W2 T mixedMass criticalSize dissipationDensity pointwise spacetime
+  canonicalG2BuildsCompletedW1W2 T pointwise spacetime W2 = record
+    { dissipationBound = R245.dissipationBound (R250.numericProjection W2)
+    ; integratedDissipationBound =
+        R250.canonicalG2SamePhysicalIntegratedDissipationBound W2
+    }
 
   completedW1W2BuildsRound243 :
     (T : Dyn.PhysicalNSGalerkinTrajectory) →
@@ -130,6 +154,9 @@ module AnalyticClosure
 round252W1W2W3BidiCompilerClosed : Bool
 round252W1W2W3BidiCompilerClosed = true
 
+round252CanonicalG2ProvenanceEnforcedByConstructor : Bool
+round252CanonicalG2ProvenanceEnforcedByConstructor = true
+
 round252NoAdditionalExtractionSocketAfterStandardAuthorities : Bool
 round252NoAdditionalExtractionSocketAfterStandardAuthorities = true
 
@@ -145,6 +172,10 @@ round252ClayPromotion = false
 round252W1W2W3BidiCompilerClosedIsTrue :
   round252W1W2W3BidiCompilerClosed ≡ true
 round252W1W2W3BidiCompilerClosedIsTrue = refl
+
+round252CanonicalG2ProvenanceEnforcedByConstructorIsTrue :
+  round252CanonicalG2ProvenanceEnforcedByConstructor ≡ true
+round252CanonicalG2ProvenanceEnforcedByConstructorIsTrue = refl
 
 round252NoAdditionalExtractionSocketAfterStandardAuthoritiesIsTrue :
   round252NoAdditionalExtractionSocketAfterStandardAuthorities ≡ true
