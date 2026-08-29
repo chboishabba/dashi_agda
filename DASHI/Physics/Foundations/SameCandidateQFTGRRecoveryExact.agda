@@ -136,15 +136,15 @@ record GRRecoveryReceipt (U : UnifiedCandidate) : Set₁ where
     correctionBoundProved :
       Geometry.correctionBoundProved geometryAdapter ≡ true
 
-    recoveryCommutes : ∀ candidate →
+    grRecoveryCommutes : ∀ candidate →
       recoverGR U (microscopicState U candidate) ≡ grTarget U candidate
 
-    recoveryAfterCoarseGrainingCommutes :
+    grRecoveryAfterCoarseGrainingCommutes :
       ∀ candidate regime → grRegime U regime →
       recoverGR U (microscopicState U (coarseGrain U candidate regime))
         ≡ grTarget U (coarseGrain U candidate regime)
 
-    promotionToken : GRRecoveryToken U
+    grPromotionToken : GRRecoveryToken U
 
 open GRRecoveryReceipt public
 
@@ -171,15 +171,15 @@ record QFTRecoveryReceipt (U : UnifiedCandidate) : Set₁ where
     continuumLimitProved :
       Quantum.continuumLimitProved quantumAdapter ≡ true
 
-    recoveryCommutes : ∀ candidate →
+    qftRecoveryCommutes : ∀ candidate →
       recoverQFT U (microscopicState U candidate) ≡ qftTarget U candidate
 
-    recoveryAfterCoarseGrainingCommutes :
+    qftRecoveryAfterCoarseGrainingCommutes :
       ∀ candidate regime → qftRegime U regime →
       recoverQFT U (microscopicState U (coarseGrain U candidate regime))
         ≡ qftTarget U (coarseGrain U candidate regime)
 
-    promotionToken : QFTRecoveryToken U
+    qftPromotionToken : QFTRecoveryToken U
 
 open QFTRecoveryReceipt public
 
@@ -202,7 +202,7 @@ record SameStressEnergyWeld (U : UnifiedCandidate) : Set₁ where
       qftStressToShared U
         (actualQFTStressTensor U (coarseGrain U candidate regime) group)
 
-    promotionToken : StressEnergyWeldToken U
+    stressWeldPromotionToken : StressEnergyWeldToken U
 
 open SameStressEnergyWeld public
 
@@ -221,7 +221,7 @@ record CommonRegimeRecovery (U : UnifiedCandidate) : Set₁ where
       CorrectionsControlled U
         (coarseGrain U candidate overlapRegime) overlapRegime
 
-    promotionToken : RegimeRecoveryToken U
+    regimePromotionToken : RegimeRecoveryToken U
 
 open CommonRegimeRecovery public
 
@@ -231,7 +231,7 @@ record NovelObservableReceipt (U : UnifiedCandidate) : Set₁ where
     observable : Observable U
     predictedByUnifiedCandidate : unifiedPredicts U candidate observable
     excludedByEstablishedGRQFT : ¬ (establishedGRQFTPredicts U observable)
-    promotionToken : NovelObservableToken U
+    novelPromotionToken : NovelObservableToken U
 
 open NovelObservableReceipt public
 
@@ -242,7 +242,7 @@ record FalsifiableMeasurementReceipt
     measurement : Measurement U
     testsNovelObservable :
       measurementTests U measurement (NovelObservableReceipt.observable novel)
-    promotionToken : FalsifiableMeasurementToken U
+    measurementPromotionToken : FalsifiableMeasurementToken U
 
 open FalsifiableMeasurementReceipt public
 
@@ -272,8 +272,8 @@ physicalCandidateFromUnified :
 physicalCandidateFromUnified U =
   Physical.fundamentalPhysicalCandidate
     (Candidate U)
-    (GRRecoveryToken U × StressEnergyWeldToken U × RegimeRecoveryToken U)
-    (QFTRecoveryToken U × StressEnergyWeldToken U × RegimeRecoveryToken U)
+    (GRRecoveryToken U × (StressEnergyWeldToken U × RegimeRecoveryToken U))
+    (QFTRecoveryToken U × (StressEnergyWeldToken U × RegimeRecoveryToken U))
     (NovelObservableToken U)
     (FalsifiableMeasurementToken U)
 
@@ -282,17 +282,19 @@ sameCandidateRecoveryImpliesPhysicalPromotion :
   SameCandidateQFTGRRecovery U →
   Physical.PhysicalPromotionGate (physicalCandidateFromUnified U)
 sameCandidateRecoveryImpliesPhysicalPromotion recovery =
-  ( GRRecoveryReceipt.promotionToken (grRecovery recovery)
-  , SameStressEnergyWeld.promotionToken (stressEnergyWeld recovery)
-  , CommonRegimeRecovery.promotionToken (regimeRecovery recovery) )
+  GRRecoveryReceipt.grPromotionToken (grRecovery recovery)
   ,
-  ( QFTRecoveryReceipt.promotionToken (qftRecovery recovery)
-  , SameStressEnergyWeld.promotionToken (stressEnergyWeld recovery)
-  , CommonRegimeRecovery.promotionToken (regimeRecovery recovery) )
+  ( SameStressEnergyWeld.stressWeldPromotionToken (stressEnergyWeld recovery)
+  , CommonRegimeRecovery.regimePromotionToken (regimeRecovery recovery) )
   ,
-  NovelObservableReceipt.promotionToken (novelObservable recovery)
+  ( QFTRecoveryReceipt.qftPromotionToken (qftRecovery recovery)
   ,
-  FalsifiableMeasurementReceipt.promotionToken (falsifiableMeasurement recovery)
+    ( SameStressEnergyWeld.stressWeldPromotionToken (stressEnergyWeld recovery)
+    , CommonRegimeRecovery.regimePromotionToken (regimeRecovery recovery) ) )
+  ,
+  ( NovelObservableReceipt.novelPromotionToken (novelObservable recovery)
+  , FalsifiableMeasurementReceipt.measurementPromotionToken
+      (falsifiableMeasurement recovery) )
 
 ------------------------------------------------------------------------
 -- Fail-closed current-state theorem.
