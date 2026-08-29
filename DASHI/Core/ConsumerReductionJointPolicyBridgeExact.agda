@@ -10,25 +10,25 @@ import DASHI.Core.JointSequentialInformationFidelityPolicyExact as Joint
 ------------------------------------------------------------------------
 -- CONSUMER-REDUCTION ESCALATION -> JOINT FIDELITY POLICY
 --
--- A consumer-specific reduction counterexample can justify moving to a richer
--- model candidate.  The move changes model state only; empirical hypothesis
--- refinement still requires an evidence-producing move elsewhere in the joint
--- policy.
+-- ReductionCandidate itself lives in Set₁ because it contains a code type.
+-- The joint planner intentionally keeps its runtime model coordinate first-order
+-- (`ModelCode : Set`).  This bridge therefore transports the proof-bearing
+-- escalation edge onto an application-declared first-order model code rather
+-- than pretending the full candidate record is the runtime state.
 ------------------------------------------------------------------------
 
 reductionEscalationAsFidelityMove :
-  ∀ {Fine Action Observation}
+  ∀ {Fine Action Observation ModelCode}
     {fineStep : Action → Fine → Fine}
     {observe : Fine → Observation}
     {from to : Search.ReductionCandidate
       Fine Action Observation fineStep observe} →
   Search.ReductionEscalationEdge from to →
+  (fromCode toCode : ModelCode) →
   (transitionCost : Nat) →
   String →
-  Joint.FidelityMove
-    (Search.ReductionCandidate Fine Action Observation fineStep observe)
-    from
-reductionEscalationAsFidelityMove {to = to} edge transitionCost costReference =
+  Joint.FidelityMove ModelCode fromCode
+reductionEscalationAsFidelityMove edge fromCode toCode transitionCost costReference =
   Joint.fidelityMove
     (Choice.informationMove
       Choice.increaseFidelity
@@ -37,20 +37,17 @@ reductionEscalationAsFidelityMove {to = to} edge transitionCost costReference =
       costReference
       "consumer-specific escalation from retained counterexample")
     refl
-    to
+    toCode
     (Search.escalationReasonReference edge)
     (Search.retainedCounterexampleReference edge)
-
-------------------------------------------------------------------------
--- The edge itself still carries the substantive reason for escalation: the
--- cheaper model was refuted for the declared consumer and the declared cost
--- order is nondecreasing.  The transition-cost parameter above is intentionally
--- separate from Search.costRank, which is only a candidate ordering.
-------------------------------------------------------------------------
 
 record ReductionJointPolicyBridgeBoundary : Set where
   constructor reductionJointPolicyBridgeBoundary
   field
+    fullReductionCandidateMustBeRuntimeModelState : Bool
+    fullReductionCandidateMustBeRuntimeModelStateIsFalse :
+      fullReductionCandidateMustBeRuntimeModelState ≡ false
+
     candidateCostRankIsAutomaticallyIncrementalRuntimeCost : Bool
     candidateCostRankIsAutomaticallyIncrementalRuntimeCostIsFalse :
       candidateCostRankIsAutomaticallyIncrementalRuntimeCost ≡ false
@@ -65,4 +62,5 @@ record ReductionJointPolicyBridgeBoundary : Set where
 
 canonicalReductionJointPolicyBridgeBoundary : ReductionJointPolicyBridgeBoundary
 canonicalReductionJointPolicyBridgeBoundary =
-  reductionJointPolicyBridgeBoundary false refl true refl false refl
+  reductionJointPolicyBridgeBoundary
+    false refl false refl true refl false refl
