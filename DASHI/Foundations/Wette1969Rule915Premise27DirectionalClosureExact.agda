@@ -15,8 +15,8 @@ module DASHI.Foundations.Wette1969Rule915Premise27DirectionalClosureExact where
 -- where H = ((U1 ∧ V1V3) ∧ U6).
 --
 -- Rule 9.3.5 combines those directions under the same antecedent, and two
--- actual 9.3.9 steps curry U6 and V1V3.  This module executes that historical
--- suffix.  It does not manufacture either directional leaf.
+-- actual 9.3.9 steps curry U6 and V1V3. This module executes that historical
+-- suffix. It does not manufacture either directional leaf.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -24,7 +24,9 @@ open import DASHI.Core.Prelude
 import DASHI.Core.ProofCarryingRuleApplicationExact as PCRA
 import DASHI.Foundations.Wette1969HistoricalSignatureExact as Signature
 import DASHI.Foundations.Wette1969JudgementConstructorsExact as Judgment
+import DASHI.Foundations.Wette1969CriticalRuleDependencyExact as Critical
 import DASHI.Foundations.Wette1969Rule915PredicateProducerExact as Rule915
+import DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact as Later
 import DASHI.Foundations.Wette1969Rule915CanonicalP145PremisesExact as P145
 import DASHI.Foundations.Wette1969Rule915CanonicalP145TypedWeldExact as Weld
 import DASHI.Foundations.Wette1969Rule915SourceExactScaffoldCutsetExact as Source
@@ -59,16 +61,15 @@ fullDirectionalAntecedent = P145.conjunction firstAntecedent P145.U6
 record Premise27DirectionalLeafAttempt
     {initial : Context}
     (firstSeven : Rule915.Rule915FirstSevenParameters)
-    (later : DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact.Rule915LaterParameters)
+    (later : Later.Rule915LaterParameters)
     (scaffold : Source.SourceExactScaffoldInputs initial firstSeven later) : Set₁ where
   constructor premise27DirectionalLeafAttempt
   field
     canonicalFirstSevenIdentity : firstSeven ≡ Weld.canonicalFirstSeven
     canonicalLaterIdentity : later ≡ Weld.canonicalLater
-
-    prefix : PCRA.CertifiedRuleTrace historicalSystem
-      (Source.sourceExactScaffoldTarget scaffold)
-
+    prefix :
+      PCRA.CertifiedRuleTrace historicalSystem
+        (Source.sourceExactScaffoldTarget scaffold)
     leftDirectionEvidence :
       Judgment.implies fullDirectionalAntecedent leftDirection Finite.∈Context
         (PCRA.runCertifiedTrace historicalSystem prefix)
@@ -79,17 +80,15 @@ record Premise27DirectionalLeafAttempt
 open Premise27DirectionalLeafAttempt public
 
 prefixTarget :
-  {initial : Context}
-  {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact.Rule915LaterParameters}
+  {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters}
   {scaffold : Source.SourceExactScaffoldInputs initial firstSeven later} →
   Premise27DirectionalLeafAttempt firstSeven later scaffold → Context
 prefixTarget attempt = PCRA.runCertifiedTrace historicalSystem (prefix attempt)
 
 combineDirections :
-  {initial : Context}
-  {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact.Rule915LaterParameters}
+  {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters}
   {scaffold : Source.SourceExactScaffoldInputs initial firstSeven later} →
   (attempt : Premise27DirectionalLeafAttempt firstSeven later scaffold) →
   PCRA.SelectedRuleApplication historicalSystem (prefixTarget attempt)
@@ -101,17 +100,15 @@ combineDirections attempt =
     (rightDirectionEvidence attempt)
 
 combinedTarget :
-  {initial : Context}
-  {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact.Rule915LaterParameters}
+  {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters}
   {scaffold : Source.SourceExactScaffoldInputs initial firstSeven later} →
   Premise27DirectionalLeafAttempt firstSeven later scaffold → Context
 combinedTarget attempt = PCRA.applySelected historicalSystem (combineDirections attempt)
 
 combinedEvidence :
-  {initial : Context}
-  {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact.Rule915LaterParameters}
+  {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters}
   {scaffold : Source.SourceExactScaffoldInputs initial firstSeven later} →
   (attempt : Premise27DirectionalLeafAttempt firstSeven later scaffold) →
   Judgment.implies fullDirectionalAntecedent directionPair Finite.∈Context
@@ -120,9 +117,8 @@ combinedEvidence attempt =
   Closure.certifiedConclusionAvailable (prefixTarget attempt) (combineDirections attempt)
 
 curryU6 :
-  {initial : Context}
-  {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact.Rule915LaterParameters}
+  {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters}
   {scaffold : Source.SourceExactScaffoldInputs initial firstSeven later} →
   (attempt : Premise27DirectionalLeafAttempt firstSeven later scaffold) →
   PCRA.SelectedRuleApplication historicalSystem (combinedTarget attempt)
@@ -133,17 +129,15 @@ curryU6 attempt =
     (combinedEvidence attempt)
 
 u6Target :
-  {initial : Context}
-  {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact.Rule915LaterParameters}
+  {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters}
   {scaffold : Source.SourceExactScaffoldInputs initial firstSeven later} →
   Premise27DirectionalLeafAttempt firstSeven later scaffold → Context
 u6Target attempt = PCRA.applySelected historicalSystem (curryU6 attempt)
 
 u6Evidence :
-  {initial : Context}
-  {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact.Rule915LaterParameters}
+  {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters}
   {scaffold : Source.SourceExactScaffoldInputs initial firstSeven later} →
   (attempt : Premise27DirectionalLeafAttempt firstSeven later scaffold) →
   Judgment.implies firstAntecedent (P145.implication P145.U6 directionPair)
@@ -152,9 +146,8 @@ u6Evidence attempt =
   Closure.certifiedConclusionAvailable (combinedTarget attempt) (curryU6 attempt)
 
 curryCondition :
-  {initial : Context}
-  {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact.Rule915LaterParameters}
+  {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters}
   {scaffold : Source.SourceExactScaffoldInputs initial firstSeven later} →
   (attempt : Premise27DirectionalLeafAttempt firstSeven later scaffold) →
   PCRA.SelectedRuleApplication historicalSystem (u6Target attempt)
@@ -166,17 +159,15 @@ curryCondition attempt =
     (u6Evidence attempt)
 
 finalTarget :
-  {initial : Context}
-  {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact.Rule915LaterParameters}
+  {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters}
   {scaffold : Source.SourceExactScaffoldInputs initial firstSeven later} →
   Premise27DirectionalLeafAttempt firstSeven later scaffold → Context
 finalTarget attempt = PCRA.applySelected historicalSystem (curryCondition attempt)
 
 canonicalPremise27AtFinalTarget :
-  {initial : Context}
-  {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact.Rule915LaterParameters}
+  {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters}
   {scaffold : Source.SourceExactScaffoldInputs initial firstSeven later} →
   (attempt : Premise27DirectionalLeafAttempt firstSeven later scaffold) →
   P145.p145Premise Critical.p27 Finite.∈Context (finalTarget attempt)
@@ -184,9 +175,8 @@ canonicalPremise27AtFinalTarget attempt =
   Closure.certifiedConclusionAvailable (u6Target attempt) (curryCondition attempt)
 
 suffix :
-  {initial : Context}
-  {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact.Rule915LaterParameters}
+  {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters}
   {scaffold : Source.SourceExactScaffoldInputs initial firstSeven later} →
   (attempt : Premise27DirectionalLeafAttempt firstSeven later scaffold) →
   PCRA.CertifiedRuleTrace historicalSystem (prefixTarget attempt)
@@ -196,36 +186,34 @@ suffix attempt =
       (PCRA.choose (curryCondition attempt) PCRA.done))
 
 premise27Trace :
-  {initial : Context}
-  {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact.Rule915LaterParameters}
+  {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters}
   {scaffold : Source.SourceExactScaffoldInputs initial firstSeven later} →
   (attempt : Premise27DirectionalLeafAttempt firstSeven later scaffold) →
-  PCRA.CertifiedRuleTrace historicalSystem (Source.sourceExactScaffoldTarget scaffold)
+  PCRA.CertifiedRuleTrace historicalSystem
+    (Source.sourceExactScaffoldTarget scaffold)
 premise27Trace attempt = PCRA.appendCertifiedTrace (prefix attempt) (suffix attempt)
 
 premise27AtTraceTarget :
-  {initial : Context}
-  {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact.Rule915LaterParameters}
+  {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters}
   {scaffold : Source.SourceExactScaffoldInputs initial firstSeven later} →
   (attempt : Premise27DirectionalLeafAttempt firstSeven later scaffold) →
-  DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact.premise27 later
-    Finite.∈Context (PCRA.runCertifiedTrace historicalSystem (premise27Trace attempt))
+  Later.premise27 later Finite.∈Context
+    (PCRA.runCertifiedTrace historicalSystem (premise27Trace attempt))
 premise27AtTraceTarget {later = later} attempt
   rewrite PCRA.runAppendCertifiedTrace (prefix attempt) (suffix attempt)
   with canonicalFirstSevenIdentity attempt | canonicalLaterIdentity attempt
 ... | refl | refl = canonicalPremise27AtFinalTarget attempt
 
 closePremise27 :
-  {initial : Context}
-  {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact.Rule915LaterParameters}
+  {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
+  {later : Later.Rule915LaterParameters}
   {scaffold : Source.SourceExactScaffoldInputs initial firstSeven later} →
   (attempt : Premise27DirectionalLeafAttempt firstSeven later scaffold) →
   Join.CertifiedMajorTrace
     (Source.sourceExactScaffoldTarget scaffold)
-    (DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact.premise27 later)
+    (Later.premise27 later)
 closePremise27 attempt =
   Join.certifiedMajorTrace (premise27Trace attempt) (premise27AtTraceTarget attempt)
 
