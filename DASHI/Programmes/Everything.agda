@@ -1,0 +1,12 @@
+module DASHI.Programmes.Everything where
+
+import DASHI.Programmes.ResearchProgrammeExact
+import DASHI.Programmes.CFDExact
+import DASHI.Programmes.BrainExact
+import DASHI.Programmes.QuantumExact
+import DASHI.Programmes.DashifineExact
+import DASHI.Programmes.GrokkingExact
+import DASHI.Programmes.CoreReferenceExact
+import DASHI.Programmes.FRACDASHExact
+import DASHI.Programmes.TestHarnessExact
+import DASHI.Programmes.RTXExact
