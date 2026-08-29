@@ -6,6 +6,7 @@ import DASHI.Biology.CyclotomicPhaseAmplitudeBoundaryExact as Phase
 import DASHI.Cognition.PNF.LLMGrokkingLearningFutureExact as Grok
 import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 import DASHI.Core.PluralConsumerProjectionSafety as Plural
+import DASHI.Biology.HumourOnlineEngagementFramework as Humour
 import DASHI.Biology.HumourEpistemicAgencyHyperfabricBridge as HumourAgency
 import DASHI.Reasoning.RelationRepresentationSourceRegistryExact as Sources
 import DASHI.Reasoning.RelationRepresentationAdequacyExact as Adequacy
@@ -88,6 +89,10 @@ positiveCodeNotAgency = Domain.coarsePositiveCodeCannotRealizeAgency
 -- Alice Brown / humour source and dynamic consumer boundary.
 ------------------------------------------------------------------------
 
+humourSourceStillPrecedesLaterCorrection :
+  Humour.sourceFrameworkPreservedBeforeLaterCorrection
+    Humour.canonicalHumourFrameworkSourceSurface
+  ≡ true
 humourSourceStillPrecedesLaterCorrection =
   HumourCross.humourSourceExplicitlyPreservedBeforeLaterCorrection
 
