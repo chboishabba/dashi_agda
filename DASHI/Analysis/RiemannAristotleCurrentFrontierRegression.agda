@@ -3,70 +3,80 @@ module DASHI.Analysis.RiemannAristotleCurrentFrontierRegression where
 open import DASHI.Core.Prelude
 import DASHI.Analysis.RiemannAristotleCurrentFrontierExact as F
 
-oneZeroClosed :
-  F.AristotleCurrentFrontier.oneZeroEndpointClosedInLean
+universalEvenConeConstructionClosed :
+  F.AristotleCurrentFrontier.universalEvenConeConstructionClosedInLean
     F.canonicalAristotleCurrentFrontier ≡ true
-oneZeroClosed = refl
+universalEvenConeConstructionClosed = refl
 
-twoZeroClosed :
-  F.AristotleCurrentFrontier.inhabitedTwoZeroThreeTaperClosedInLean
+twoRadiusDiscriminatorClosed :
+  F.AristotleCurrentFrontier.twoRadiusOffLineDiscriminatorClosedInLean
     F.canonicalAristotleCurrentFrontier ≡ true
-twoZeroClosed = refl
+twoRadiusDiscriminatorClosed = refl
 
-selectedDebtRetired :
-  F.AristotleCurrentFrontier.selectedTwoZeroResidualDebtRequired
+primeProjectiveDebtZero :
+  F.AristotleCurrentFrontier.highOrdinatePrimeProjectiveDebtZeroInLean
+    F.canonicalAristotleCurrentFrontier ≡ true
+primeProjectiveDebtZero = refl
+
+gammaQuadraticEnvelopeClosed :
+  F.AristotleCurrentFrontier.gammaProjectiveQuadraticEnvelopeClosedInLean
+    F.canonicalAristotleCurrentFrontier ≡ true
+gammaQuadraticEnvelopeClosed = refl
+
+poleQuadraticEnvelopeClosed :
+  F.AristotleCurrentFrontier.poleProjectiveQuadraticEnvelopeClosedInLean
+    F.canonicalAristotleCurrentFrontier ≡ true
+poleQuadraticEnvelopeClosed = refl
+
+targetLeadingCoefficientClosed :
+  F.AristotleCurrentFrontier.targetLeadingCoefficientAndRemainderClosedInLean
+    F.canonicalAristotleCurrentFrontier ≡ true
+targetLeadingCoefficientClosed = refl
+
+conditionalThreeTaperClosed :
+  F.AristotleCurrentFrontier.conditionalTwoZeroThreeTaperClosedInLean
+    F.canonicalAristotleCurrentFrontier ≡ true
+conditionalThreeTaperClosed = refl
+
+conditionalThreeTaperNotUniversal :
+  F.AristotleCurrentFrontier.conditionalTwoZeroIsUniversalRHBridge
     F.canonicalAristotleCurrentFrontier ≡ false
-selectedDebtRetired = refl
-
-twoZeroUniversalWitnessesStillOpen :
-  F.AristotleCurrentFrontier.twoZeroUniversalWitnessProductionClosed
-    F.canonicalAristotleCurrentFrontier ≡ false
-twoZeroUniversalWitnessesStillOpen = refl
-
-universalEvenConePoleQuotientClosed :
-  F.AristotleCurrentFrontier.universalEvenConePoleQuotientClosedInLean
-    F.canonicalAristotleCurrentFrontier ≡ true
-universalEvenConePoleQuotientClosed = refl
-
-highOrdinatePrimeExactlyZero :
-  F.AristotleCurrentFrontier.highOrdinatePrimeVectorZeroClosedInLean
-    F.canonicalAristotleCurrentFrontier ≡ true
-highOrdinatePrimeExactlyZero = refl
+conditionalThreeTaperNotUniversal = refl
 
 reflectionPairKernelImplemented :
   F.AristotleCurrentFrontier.reflectionPairKernelSourceImplementedInLean
     F.canonicalAristotleCurrentFrontier ≡ true
 reflectionPairKernelImplemented = refl
 
-reflectionSymmetrizedCarrierImplemented :
-  F.AristotleCurrentFrontier.reflectionSymmetrizedCarrierSourceImplementedInLean
+reflectionProjectiveCarrierImplemented :
+  F.AristotleCurrentFrontier.reflectionSymmetrizedProjectiveCarrierSourceImplementedInLean
     F.canonicalAristotleCurrentFrontier ≡ true
-reflectionSymmetrizedCarrierImplemented = refl
+reflectionProjectiveCarrierImplemented = refl
 
-newReflectionKernelReceiptStillPending :
-  F.AristotleCurrentFrontier.newReflectionSourceMachineChecked
+deterministicSchurCompilerImplemented :
+  F.AristotleCurrentFrontier.deterministicProjectiveSchurCompilerSourceImplementedInLean
+    F.canonicalAristotleCurrentFrontier ≡ true
+deterministicSchurCompilerImplemented = refl
+
+newBidiLeanReceiptPending :
+  F.AristotleCurrentFrontier.newBidiLeanSourceMachineChecked
     F.canonicalAristotleCurrentFrontier ≡ false
-newReflectionKernelReceiptStillPending = refl
+newBidiLeanReceiptPending = refl
 
-signedReflectionTailStillOpen :
-  F.AristotleCurrentFrontier.signedReflectionTailEstimateClosed
+deterministicThreeTaperConstructionOpen :
+  F.AristotleCurrentFrontier.deterministicNuisanceThreeTaperConstructionClosed
     F.canonicalAristotleCurrentFrontier ≡ false
-signedReflectionTailStillOpen = refl
+deterministicThreeTaperConstructionOpen = refl
 
-gammaPaymentStillOpen :
-  F.AristotleCurrentFrontier.projectedGammaPaymentClosed
+signedPostSchurTailOpen :
+  F.AristotleCurrentFrontier.signedPostSchurOffOrdinateEstimateClosed
     F.canonicalAristotleCurrentFrontier ≡ false
-gammaPaymentStillOpen = refl
+signedPostSchurTailOpen = refl
 
-lowOrdinateComplementStillOpen :
+lowOrdinateComplementOpen :
   F.AristotleCurrentFrontier.lowOrdinateComplementCertified
     F.canonicalAristotleCurrentFrontier ≡ false
-lowOrdinateComplementStillOpen = refl
-
-equalHeightDegeneracyStillVisible :
-  F.AristotleCurrentFrontier.equalHeightDegeneracyRemoved
-    F.canonicalAristotleCurrentFrontier ≡ false
-equalHeightDegeneracyStillVisible = refl
+lowOrdinateComplementOpen = refl
 
 rhStillOpen :
   F.AristotleCurrentFrontier.finalRHImplicationClosed
