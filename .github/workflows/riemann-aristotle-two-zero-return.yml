@@ -29,6 +29,7 @@ on:
       - 'DASHI/Analysis/RiemannAristotleG2dReflectionDuplicateNoGoExact.agda'
       - 'DASHI/Analysis/RiemannAristotleG2dScalarDeterminantSumTargetExact.agda'
       - 'DASHI/Analysis/RiemannAristotleG2CurrentCutExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleG2CurrentCutRegression.agda'
       - 'DASHI/Analysis/RiemannAristotleDeterministicProjectiveSchurReturnExact.agda'
       - 'DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda'
       - 'DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda'
