@@ -11,24 +11,29 @@ module DASHI.Analysis.RiemannAristotleFiniteNearSchurKernelCovarianceTargetExact
 --     = 4 g_m(u) cosh(a u) cos(delta u).
 --
 -- Hence one raw finite near zero/reflection-pair contribution is a real
--- three-coordinate vector
---
---   k_sigma = (k_0(sigma), k_1(sigma), k_2(sigma)).
+-- three-coordinate vector k_sigma.
 --
 -- Backward consumer:
 --
--- G2 now needs only the signed finite covariance of the POST-SCHUR cells
+-- G2 needs only the signed finite covariance of POST-SCHUR cells
 --
 --   sum_{sigma != tau} <E k_sigma, E k_tau>.
 --
--- The important seam is E: the deterministic two-nuisance Schur map is fixed
--- and linear on the three-taper response space.  We must not silently replace
--- E k_sigma by k_sigma.  This module therefore records the exact research
--- target after all generic Gram algebra has been compiled away.
+-- Agda now owns two representation routes after this point:
 --
--- A future source-native producer may express E by its literal 3x3 coefficients
--- and expand <E k_sigma,E k_tau> = k_sigma^T (E^T E) k_tau.  No positivity or
--- absolute majorant is assumed here.
+--   (1) a fixed 3x3 Schur-matrix bilinear compiler;
+--   (2) a stronger conditional one-dimensional determinant compiler.
+--
+-- The second route would identify
+--
+--   <E x,E y>
+--     = det(n1,n2,x) det(n1,n2,y) / wedgeSq(n1,n2).
+--
+-- That bilinear determinant identity is NOT promoted here: the source evidence
+-- currently establishes exact double Gram-Schmidt elimination and determinant
+-- survival, but this return has not located a checked theorem with precisely
+-- the bilinear identity. Once supplied, only the signed scalar determinant
+-- covariance estimate remains.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -60,9 +65,17 @@ record FiniteNearSchurKernelCovarianceTarget : Set where
     replacePostSchurCellByRawKernelCellAllowedIsFalse :
       replacePostSchurCellByRawKernelCellAllowed ≡ false
 
-    literalSchurKernelCoordinateExpansionClosed : Bool
-    literalSchurKernelCoordinateExpansionClosedIsFalse :
-      literalSchurKernelCoordinateExpansionClosed ≡ false
+    fixedMatrixCoordinateCompilerClosed : Bool
+    fixedMatrixCoordinateCompilerClosedIsTrue :
+      fixedMatrixCoordinateCompilerClosed ≡ true
+
+    determinantScalarizationCompilerReady : Bool
+    determinantScalarizationCompilerReadyIsTrue :
+      determinantScalarizationCompilerReady ≡ true
+
+    literalBilinearDeterminantIdentityOwned : Bool
+    literalBilinearDeterminantIdentityOwnedIsFalse :
+      literalBilinearDeterminantIdentityOwned ≡ false
 
     signedFiniteSchurKernelCovarianceEstimateClosed : Bool
     signedFiniteSchurKernelCovarianceEstimateClosedIsFalse :
@@ -83,6 +96,8 @@ canonicalFiniteNearSchurKernelCovarianceTarget =
     true refl
     true refl
     false refl
+    true refl
+    true refl
     false refl
     false refl
-    "G2 has been reduced to a finite signed ordered-pair covariance. Each raw three-taper coordinate is source-owned by the reflection-pair cosine/cosh kernel, with the odd sinh*sin channel already cancelled. The remaining representation seam is the fixed deterministic Schur map E: one must expand <E k_sigma,E k_tau> in the literal kernel coordinates (equivalently via E^T E) before proving the signed finite covariance upper bound. No absolute W(t) route and no replacement E=identity is admitted."
+    "G2 is now an explicit finite signed ordered-pair covariance. Each raw three-taper coordinate is source-owned by the reflection-pair cosine/cosh kernel, with the odd sinh*sin channel already cancelled. The fixed-matrix Schur-coordinate compiler is closed. A stronger one-dimensional determinant covariance compiler is also ready, but the exact Lean bilinear identity <E x,E y> = det(n1,n2,x) det(n1,n2,y) / wedgeSq(n1,n2) is not claimed without a checked source theorem. After that source identity, the only analytic leaf is the signed finite oscillatory determinant covariance bound."
