@@ -1,0 +1,59 @@
+module DASHI.Physics.Closure.NSTriadKNClayFrontierRound206Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound205Exact as R205
+import DASHI.Physics.Closure.NSTriadKNComparablePartnerGramFrontierRound206Exact as R206
+
+round206LocalizedCCPartnerMassBoundClosed : Bool
+round206LocalizedCCPartnerMassBoundClosed =
+  R205.round205LocalizedCCPartnerMassBoundClosed
+
+round206LocalizedCCExactCompressedGramLedgerClosed : Bool
+round206LocalizedCCExactCompressedGramLedgerClosed =
+  R206.round206LocalizedCCExactCompressedGramLedgerClosed
+
+round206LocalizedCCAbstractCarrierGapRemains : Bool
+round206LocalizedCCAbstractCarrierGapRemains =
+  R206.round206LocalizedCCAbstractCarrierGapRemains
+
+round206LocalizedCCBetweenPartnerDebtQuantitativelyPaid : Bool
+round206LocalizedCCBetweenPartnerDebtQuantitativelyPaid = false
+
+round206PhysicalCCResidualBudgetClosed : Bool
+round206PhysicalCCResidualBudgetClosed = false
+
+round206PhysicalFLResidualBudgetClosed : Bool
+round206PhysicalFLResidualBudgetClosed = false
+
+round206PhysicalHHResidualBudgetClosed : Bool
+round206PhysicalHHResidualBudgetClosed = false
+
+round206PackageAClosed : Bool
+round206PackageAClosed = false
+
+round206ClayPromotion : Bool
+round206ClayPromotion = false
+
+round206LocalizedCCPartnerMassBoundClosedIsTrue :
+  round206LocalizedCCPartnerMassBoundClosed ≡ true
+round206LocalizedCCPartnerMassBoundClosedIsTrue = refl
+
+round206LocalizedCCExactCompressedGramLedgerClosedIsTrue :
+  round206LocalizedCCExactCompressedGramLedgerClosed ≡ true
+round206LocalizedCCExactCompressedGramLedgerClosedIsTrue = refl
+
+round206LocalizedCCAbstractCarrierGapRemainsIsFalse :
+  round206LocalizedCCAbstractCarrierGapRemains ≡ false
+round206LocalizedCCAbstractCarrierGapRemainsIsFalse = refl
+
+round206LocalizedCCBetweenPartnerDebtQuantitativelyPaidIsFalse :
+  round206LocalizedCCBetweenPartnerDebtQuantitativelyPaid ≡ false
+round206LocalizedCCBetweenPartnerDebtQuantitativelyPaidIsFalse = refl
+
+round206PackageAClosedIsFalse : round206PackageAClosed ≡ false
+round206PackageAClosedIsFalse = refl
+
+round206ClayPromotionIsFalse : round206ClayPromotion ≡ false
+round206ClayPromotionIsFalse = refl
