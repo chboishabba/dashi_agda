@@ -1,0 +1,129 @@
+{
+  "affine": {
+    "bias": [
+      1,
+      2
+    ],
+    "input": [
+      2,
+      3
+    ],
+    "matrix": [
+      [
+        2,
+        0
+      ],
+      [
+        0,
+        3
+      ]
+    ],
+    "output": [
+      5,
+      11
+    ],
+    "squared_error": 0
+  },
+  "finite_difference": {
+    "forward_differences": [
+      5,
+      7
+    ],
+    "map": "n -> n^2",
+    "points": [
+      2,
+      3
+    ],
+    "state_dependent": true
+  },
+  "purpose": "deterministic finite producer fixture; not an empirical LLM/ethics result",
+  "rotation": {
+    "inputs": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        -1,
+        0
+      ],
+      [
+        0,
+        -1
+      ]
+    ],
+    "matrix": [
+      [
+        0,
+        -1
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "outputs": [
+      [
+        0,
+        1
+      ],
+      [
+        -1,
+        0
+      ],
+      [
+        0,
+        -1
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "squared_error": 0
+  },
+  "schema": "dashi.relation-representation.numeric-producer.v1",
+  "spectral": {
+    "eigenpairs": [
+      {
+        "eigenvalue": 9,
+        "vector": [
+          1,
+          0
+        ]
+      },
+      {
+        "eigenvalue": 1,
+        "vector": [
+          0,
+          1
+        ]
+      }
+    ],
+    "gram": [
+      [
+        9,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "residuals": [
+      [
+        3,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "spectral_gap": 8
+  }
+}
