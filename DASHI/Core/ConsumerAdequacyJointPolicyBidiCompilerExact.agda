@@ -14,16 +14,11 @@ import DASHI.Core.RobustInterventionAcrossHypothesesExact as Robust
 ------------------------------------------------------------------------
 -- BIDI COMPILER
 --
--- Forward direction:
---   exact ROM / approximate margin certificate
---     -> rich decision adequacy
---     -> first-order policy token
---     -> robust + authority -> act.
---
--- Backward/failure direction:
---   consumer-specific counterexample
---     -> reduction escalation edge
---     -> runtime fidelity move.
+-- Forward:
+--   candidate -> exact certificate / approximate margin certificate
+--     -> decision adequacy -> robustness -> authority -> act.
+-- Backward:
+--   candidate -> consumer counterexample -> escalation edge -> fidelity move.
 ------------------------------------------------------------------------
 
 CertifiedAdequacyJointPolicy :
@@ -71,9 +66,7 @@ actFromDerivedAdequacy :
     system Authority ExactRealises ApproxRealises interface live model
 actFromDerivedAdequacy {intervention = intervention}
     interface robust proof authority =
-  Joint.actNow
-    intervention
-    robust
+  Joint.actNow intervention robust
     (Adequacy.proofToToken interface proof)
     authority
 
@@ -105,6 +98,44 @@ exactROMActBranch interface rom realised decide decisionAdequacy robust authorit
   actFromDerivedAdequacy interface robust
     (Adequacy.exactAdequate rom realised decide decisionAdequacy)
     authority
+
+------------------------------------------------------------------------
+-- Exact candidate-search receipt -> exact ROM -> decision adequacy -> act.
+-- This closes the forward chain from the actual ReductionCandidate surface.
+------------------------------------------------------------------------
+
+certifiedCandidateActBranch :
+  ∀ {ModelState Fine Action Summary Intervention Hypothesis Outcome}
+    {fineStep : Action → Fine → Fine}
+    {observe : Fine → Summary}
+    {candidate : Search.ReductionCandidate Fine Action Summary fineStep observe}
+    {system : Robust.HypothesisInterventionSystem
+      Hypothesis Intervention Outcome}
+    {Authority : Intervention → Set}
+    {ExactRealises :
+      ModelState →
+      Reduction.ConsumerRelativeReduction Fine Action Summary → Set}
+    {ApproxRealises :
+      ModelState →
+      Approx.ApproximateTraceReduction Fine Action Summary → Set}
+    (interface : Adequacy.FirstOrderAdequacyInterface
+      ExactRealises ApproxRealises)
+    {live : Hypothesis → Set}
+    {runtimeModel : ModelState}
+    {intervention : Intervention}
+    (certificate : Search.CandidateCertification candidate) →
+  ExactRealises runtimeModel (Search.certificationAsReduction certificate) →
+  (decide : Summary → Intervention) →
+  Adequacy.ExactDecisionAdequacy
+    (Search.certificationAsReduction certificate) decide intervention →
+  Robust.RobustlyNoWorseThanBaseline system live intervention →
+  Authority intervention →
+  CertifiedAdequacyJointPolicy
+    system Authority ExactRealises ApproxRealises interface live runtimeModel
+certifiedCandidateActBranch interface certificate realised decide adequacy robust authority =
+  exactROMActBranch interface
+    (Search.certificationAsReduction certificate)
+    realised decide adequacy robust authority
 
 approximateROMActBranch :
   ∀ {ModelState Fine Action Summary Intervention Hypothesis Outcome}
@@ -152,22 +183,21 @@ counterexampleOpensFidelityBranch =
 record ConsumerAdequacyBidiCompilerBoundary : Set where
   constructor consumerAdequacyBidiCompilerBoundary
   field
+    candidateCertificationCanFeedPolicyAdequacy : Bool
+    candidateCertificationCanFeedPolicyAdequacyIsTrue :
+      candidateCertificationCanFeedPolicyAdequacy ≡ true
     exactCertificateCanFeedPolicyAdequacy : Bool
     exactCertificateCanFeedPolicyAdequacyIsTrue :
       exactCertificateCanFeedPolicyAdequacy ≡ true
-
     approximateMarginCertificateCanFeedPolicyAdequacy : Bool
     approximateMarginCertificateCanFeedPolicyAdequacyIsTrue :
       approximateMarginCertificateCanFeedPolicyAdequacy ≡ true
-
     missingCertificateAloneOpensFidelityBranch : Bool
     missingCertificateAloneOpensFidelityBranchIsFalse :
       missingCertificateAloneOpensFidelityBranch ≡ false
-
     consumerCounterexampleCanOpenFidelityBranch : Bool
     consumerCounterexampleCanOpenFidelityBranchIsTrue :
       consumerCounterexampleCanOpenFidelityBranch ≡ true
-
     robustnessOrAdequacyCreatesAuthority : Bool
     robustnessOrAdequacyCreatesAuthorityIsFalse :
       robustnessOrAdequacyCreatesAuthority ≡ false
@@ -176,4 +206,4 @@ canonicalConsumerAdequacyBidiCompilerBoundary :
   ConsumerAdequacyBidiCompilerBoundary
 canonicalConsumerAdequacyBidiCompilerBoundary =
   consumerAdequacyBidiCompilerBoundary
-    true refl true refl false refl true refl false refl
+    true refl true refl true refl false refl true refl false refl
