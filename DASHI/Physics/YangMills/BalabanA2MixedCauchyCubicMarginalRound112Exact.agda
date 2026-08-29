@@ -41,7 +41,9 @@ module DASHI.Physics.YangMills.BalabanA2MixedCauchyCubicMarginalRound112Exact wh
 
 open import Agda.Builtin.Nat using (Nat)
 import Data.Nat.Base as ℕ
+import Data.Nat.Properties as ℕP
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_)
+import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4CubicCouplingDriftTelescopeExact as Cubic
@@ -99,8 +101,6 @@ asCumulativeSensitivityData dataSet = record
   ; Shoot.CumulativeSensitivityData.sensitivityCubic = λ _ → ℚP.≤-refl
   ; Shoot.CumulativeSensitivityData.contractionGate = marginalContractionGate dataSet
   }
-  where
-    import Data.Rational.Properties as ℚP
 
 marginalCumulativeSensitivityBelowOne :
   ∀ {cutoff}
@@ -118,9 +118,7 @@ marginalFullPrefixBelowOne :
     (dataSet : MixedCauchyMarginalSensitivityData cutoff) →
   Shoot.sum₀ (marginalSensitivity dataSet) cutoff < 1ℚ
 marginalFullPrefixBelowOne {cutoff} dataSet =
-  marginalCumulativeSensitivityBelowOne dataSet cutoff ℕ.≤-refl
-  where
-    import Data.Nat.Properties as ℕ
+  marginalCumulativeSensitivityBelowOne dataSet cutoff ℕP.≤-refl
 
 ------------------------------------------------------------------------
 -- Authority boundary
