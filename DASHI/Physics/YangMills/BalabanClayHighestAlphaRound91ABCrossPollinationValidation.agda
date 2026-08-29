@@ -7,6 +7,7 @@ import DASHI.Physics.YangMills.BalabanRowAInverseSquareSensitivityDecompositionE
 import DASHI.Physics.YangMills.BalabanRowAInverseSquareChainSensitivityExact as AChain
 import DASHI.Physics.YangMills.BalabanRowASixthSensitivityFromCubicTelescopeExact as ASixth
 import DASHI.Physics.YangMills.BalabanRowADirectSensitivityCumulativeExact as ADirect
+import DASHI.Physics.YangMills.BalabanRowAIrrelevantHistorySensitivityCumulativeExact as AHistory
 import DASHI.Physics.YangMills.BalabanBetaPrefixSensitivityToTubeContractionExact as Shoot
 import DASHI.Physics.YangMills.BalabanIrrelevantRGMemoryContractionExact as Memory
 import DASHI.Physics.YangMills.BalabanRowBActivityEntropyToShellEnergyExact as B
@@ -28,6 +29,10 @@ rowASixthSensitivityFromCubicTubeRound92Level =
 rowACumulativeDirectG6BudgetRound92Level : ProofLevel
 rowACumulativeDirectG6BudgetRound92Level =
   ADirect.rowADirectSixthTubeBudgetAlgebraLevel
+
+rowACumulativeIrrelevantHistoryBudgetRound92Level : ProofLevel
+rowACumulativeIrrelevantHistoryBudgetRound92Level =
+  AHistory.rowAIrrelevantHistoryInputSensitivityLevel
 
 rowAShootingContractionAlgebraRound91Level : ProofLevel
 rowAShootingContractionAlgebraRound91Level =
