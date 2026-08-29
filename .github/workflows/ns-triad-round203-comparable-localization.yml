@@ -7,6 +7,9 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNComparableResidualProducerBoundaryRound204Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNComparableRawCurlPartnerMassRound205Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNComparablePartnerGramFrontierRound206Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNComparableFixedOutputCarrierRound207Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNComparableOutputL2CarrierRound208Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNComparableOutputGramTelescopeRound209Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound203Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound203Validation.agda'
       - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound204Exact.agda'
@@ -15,10 +18,13 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound205Validation.agda'
       - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound206Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound206Validation.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound209Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound209Validation.agda'
       - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound203Exact.agda'
       - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound204Exact.agda'
       - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound205Exact.agda'
       - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound206Exact.agda'
+      - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound209Exact.agda'
       - 'scripts/check_ns_triad_clay_frontier.py'
       - 'scripts/run_agda29_parallel_check.sh'
       - 'flake.nix'
@@ -81,8 +87,32 @@ jobs:
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNClayFrontierRound206Validation.agda
 
-      - name: Type-check Round206 paper interface
+      - name: Type-check Round207 fixed-output carrier
         run: >-
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
-          DASHI/Papers/NavierStokes/TheoremInterfaceRound206Exact.agda
+          DASHI/Physics/Closure/NSTriadKNComparableFixedOutputCarrierRound207Exact.agda
+
+      - name: Type-check Round208 outer Fourier L2 carrier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNComparableOutputL2CarrierRound208Exact.agda
+
+      - name: Type-check Round209 outputwise Gram telescope
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNComparableOutputGramTelescopeRound209Exact.agda
+
+      - name: Type-check Round209 frontier validation
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound209Validation.agda
+
+      - name: Type-check Round209 paper interface
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Papers/NavierStokes/TheoremInterfaceRound209Exact.agda
