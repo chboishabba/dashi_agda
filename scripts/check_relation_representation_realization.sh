@@ -11,6 +11,7 @@ FILES=(
   DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda
   DASHI/Reasoning/EigenslurFlourishingRelationBoundaryExact.agda
   DASHI/Reasoning/RelationRepresentationCrossPollinationExact.agda
+  DASHI/Reasoning/HumourRelationRepresentationCrossPollinationExact.agda
   DASHI/Reasoning/RelationRepresentationRegression.agda
   DASHI/Reasoning/Everything.agda
 )
@@ -52,8 +53,14 @@ grep -q 'functioningDoesNotRecoverCapability' DASHI/Reasoning/EigenslurFlourishi
 grep -q 'coarsePositiveCodeCannotRealizeAgency' DASHI/Reasoning/EigenslurFlourishingRelationBoundaryExact.agda
 grep -q 'flourishingRequiresRankOneDirection' DASHI/Reasoning/EigenslurFlourishingRelationBoundaryExact.agda
 
+grep -q 'humourSourceDoesNotClaimEpistemicAgency' DASHI/Reasoning/HumourRelationRepresentationCrossPollinationExact.agda
+grep -q 'corpusLoomRetainsHumourSourceBeforeDialecticalCorrection' DASHI/Reasoning/HumourRelationRepresentationCrossPollinationExact.agda
+grep -q 'humourDynamicConsumerSafetyAsymmetry' DASHI/Reasoning/HumourRelationRepresentationCrossPollinationExact.agda
+grep -q 'oneHumourConsumerSafetyDoesNotEstablishPluralSafety' DASHI/Reasoning/HumourRelationRepresentationCrossPollinationExact.agda
+
 grep -q 'grokkingCurrentFitDoesNotCloseLearningFuture' DASHI/Reasoning/RelationRepresentationCrossPollinationExact.agda
 grep -q 'equalAmplitudeDoesNotCollapsePhase' DASHI/Reasoning/RelationRepresentationRegression.agda
+grep -q 'humourCurrentPositiveSurfaceDoesNotEstablishPluralFutureSafety' DASHI/Reasoning/RelationRepresentationRegression.agda
 
 if command -v agda >/dev/null 2>&1; then
   agda -i . -i src DASHI/Reasoning/RelationRepresentationRegression.agda
