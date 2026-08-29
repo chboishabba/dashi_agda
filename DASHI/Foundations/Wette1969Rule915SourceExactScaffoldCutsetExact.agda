@@ -3,17 +3,15 @@ module DASHI.Foundations.Wette1969Rule915SourceExactScaffoldCutsetExact where
 ------------------------------------------------------------------------
 -- WETTE 1969 RULE 9.1.5: SOURCE-EXACT GENERATED SCAFFOLD -> TWO PROOFS
 --
--- This is the capstone for the compressed §1.632 tranche.
+--   F1--7         actual historical conclusion producers
+--   S10--15       one shared sequence of actual historical conclusions
+--   S8,9,16,17    induction-side syntactic producers
+--   S19--26       independence-side syntactic producers
+--   D18 + D27     the only two substantive proof sockets
 --
---   F1--7  : formation trace/evidence
---   S10--15: one shared sequence of actual historical conclusions
---   S8,9,16,17: induction-side syntactic producers
---   S19--26: independence-side syntactic producers
---   D18 + D27: the only two substantive proof sockets
---
--- Premise 9 is explicitly included.  Freshness slots are not asserted for
--- arbitrary words: callers must supply actual historical conclusion producers,
--- which can be built from atomic J receipts through the reconstructed J spine.
+-- Premise 9 is explicitly included. Freshness slots cannot be satisfied merely
+-- by arbitrary membership: the strong producer layer requires a certified
+-- historical rule whose conclusion is the requested formula.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -23,6 +21,7 @@ import DASHI.Foundations.Wette1969Rule915PredicateProducerExact as Rule915
 import DASHI.Foundations.Wette1969Rule915LaterPremiseTemplatesExact as Later
 import DASHI.Foundations.Wette1969Rule915ObligationSubgraphsExact as Obligations
 import DASHI.Foundations.Wette1969Rule915GeneratedScaffoldExact as Generated
+import DASHI.Foundations.Wette1969Rule915FormationProducerExact as Formation
 import DASHI.Foundations.Wette1969Rule915Shared1015ProducerExact as Shared
 import DASHI.Foundations.Wette1969Rule915InductionScaffoldProducerExact as Induction
 import DASHI.Foundations.Wette1969Rule915IndependenceScaffoldProducerExact as Independence
@@ -40,15 +39,11 @@ record SourceExactScaffoldInputs
     (later : Later.Rule915LaterParameters) : Set₁ where
   constructor sourceExactScaffoldInputs
   field
-    formationTrace : PCRA.CertifiedRuleTrace historicalSystem initial
-    formationProduced :
-      Obligations.FirstSevenEvidence
-        (PCRA.runCertifiedTrace historicalSystem formationTrace)
-        (Later.completeTypedTranscription firstSeven later)
+    formation : Formation.FormationProducerChain initial firstSeven later
 
     shared1015 :
       Shared.Shared1015ProducerChain
-        (PCRA.runCertifiedTrace historicalSystem formationTrace)
+        (Formation.formationTarget formation)
         firstSeven later
 
     inductionScaffold :
@@ -69,8 +64,8 @@ asGeneratedScaffoldChain :
   Generated.Rule915GeneratedScaffoldChain initial firstSeven later
 asGeneratedScaffoldChain firstSeven later inputs =
   Generated.rule915GeneratedScaffoldChain
-    (formationTrace inputs)
-    (formationProduced inputs)
+    (Formation.formationTrace (formation inputs))
+    (Formation.formationEvidenceAtTarget (formation inputs))
     (Shared.sharedTrace (shared1015 inputs))
     (Shared.sharedEvidenceAtTarget (shared1015 inputs))
     (Induction.inductionScaffoldTrace (inductionScaffold inputs))
@@ -150,9 +145,9 @@ record Wette1969Rule915SourceExactScaffoldCutsetBoundary : Set where
     premise9CorrectionIsBuiltIntoGeneratedScaffold : Bool
     premise9CorrectionIsBuiltIntoGeneratedScaffoldIsTrue :
       premise9CorrectionIsBuiltIntoGeneratedScaffold ≡ true
-    everyLaterNonMajorSlotMustBeActualHistoricalConclusion : Bool
-    everyLaterNonMajorSlotMustBeActualHistoricalConclusionIsTrue :
-      everyLaterNonMajorSlotMustBeActualHistoricalConclusion ≡ true
+    everyNonMajorSlot1To27MustBeActualHistoricalConclusion : Bool
+    everyNonMajorSlot1To27MustBeActualHistoricalConclusionIsTrue :
+      everyNonMajorSlot1To27MustBeActualHistoricalConclusion ≡ true
     shared1015IsOneObjectConsumedByBothMajorBranches : Bool
     shared1015IsOneObjectConsumedByBothMajorBranchesIsTrue :
       shared1015IsOneObjectConsumedByBothMajorBranches ≡ true
