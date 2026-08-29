@@ -24,6 +24,8 @@ import DASHI.Core.ConsumerReductionDependencyReopeningExact
 import DASHI.Core.AdaptiveConsumerModelLoopExact
 import DASHI.Core.ExperimentalCoordinateDesignExact
 import DASHI.Core.ActionabilityCostedExperimentChoiceExact
+import DASHI.Core.CommonExperimentRealisationExact
+import DASHI.Core.DiscriminatorSynthesisExact
 import DASHI.Core.CounterexampleGuidedConsumerRefinementExact
 import DASHI.Core.DualEffectInformationActionExact
 import DASHI.Core.EvidenceReliabilityPolarityExact
@@ -45,6 +47,7 @@ import DASHI.Core.TypedIntervalEventTransitionExact
 import DASHI.Biology.Physical.C3Cube27ConsumerReductionAdapterExact
 import DASHI.Physics.Units.SI
 import DASHI.Physics.Foundations.GRQFTExperimentDesignCrossPollinationExact
+import DASHI.Physics.Foundations.GRQFTDiscriminatorSynthesisExact
 import DASHI.Environment.LESResearchCrossPollinationExact
 import DASHI.Environment.LESResearchCrossPollinationRound2Exact
 import DASHI.Environment.LESResearchCrossPollinationRound3Exact
@@ -67,6 +70,7 @@ import DASHI.Environment.LESAdaptiveSPACModelSearchExact
 import DASHI.Environment.LESSPACFidelityCounterexampleFixturesExact
 import DASHI.Environment.LESModelFibreRobustInterventionExact
 import DASHI.Environment.LESAdaptiveConsumerLoopCrossPollinationExact
+import DASHI.Environment.LESDiscriminatorSynthesisExact
 import DASHI.Environment.LESFluidPhysicsCouplingExact
 import DASHI.Environment.LESBioelectricGaugeChemistryExact
 import DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact
