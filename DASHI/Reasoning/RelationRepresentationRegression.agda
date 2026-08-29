@@ -5,12 +5,15 @@ open import DASHI.Core.Prelude
 import DASHI.Biology.CyclotomicPhaseAmplitudeBoundaryExact as Phase
 import DASHI.Cognition.PNF.LLMGrokkingLearningFutureExact as Grok
 import DASHI.Core.FutureObservationLanguageQuotientExact as Future
+import DASHI.Core.PluralConsumerProjectionSafety as Plural
+import DASHI.Biology.HumourEpistemicAgencyHyperfabricBridge as HumourAgency
 import DASHI.Reasoning.RelationRepresentationSourceRegistryExact as Sources
 import DASHI.Reasoning.RelationRepresentationAdequacyExact as Adequacy
 import DASHI.Reasoning.RelationRepresentationRealizationExact as Realization
 import DASHI.Reasoning.BidirectionalRelationRepresentationBridgeExact as Bidi
 import DASHI.Reasoning.EigenslurFlourishingRelationBoundaryExact as Domain
 import DASHI.Reasoning.RelationRepresentationCrossPollinationExact as Cross
+import DASHI.Reasoning.HumourRelationRepresentationCrossPollinationExact as HumourCross
 
 ------------------------------------------------------------------------
 -- Focused regression: keep the exact seams live in one typecheck target.
@@ -30,6 +33,9 @@ bidirectionalBoundary = Bidi.canonicalBidirectionalRelationBridgeBoundary
 
 domainBoundary : Domain.EigenslurFlourishingBoundary
 domainBoundary = Domain.canonicalEigenslurFlourishingBoundary
+
+humourBoundary : HumourCross.HumourRelationRepresentationBoundary
+humourBoundary = HumourCross.canonicalHumourRelationRepresentationBoundary
 
 ------------------------------------------------------------------------
 -- Existing phase/amplitude owner remains a concrete operator-coordinate
@@ -77,6 +83,18 @@ positiveCodeNotAgency :
   Realization.RepresentationRealizationWitness
     Domain.coarsePositiveCode Domain.agencyStatus → ⊥
 positiveCodeNotAgency = Domain.coarsePositiveCodeCannotRealizeAgency
+
+------------------------------------------------------------------------
+-- Alice Brown / humour source and dynamic consumer boundary.
+------------------------------------------------------------------------
+
+humourSourceStillPrecedesLaterCorrection =
+  HumourCross.humourSourceExplicitlyPreservedBeforeLaterCorrection
+
+humourCurrentPositiveSurfaceDoesNotEstablishPluralFutureSafety :
+  Plural.PluralDynamicSafety HumourAgency.humourProjectionFamily → ⊥
+humourCurrentPositiveSurfaceDoesNotEstablishPluralFutureSafety =
+  HumourCross.oneHumourConsumerSafetyDoesNotEstablishPluralSafety
 
 ------------------------------------------------------------------------
 -- Existing learning-future result stays wired through the capstone.
