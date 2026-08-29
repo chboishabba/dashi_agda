@@ -4,24 +4,17 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound103SourceCoordinateWe
 ------------------------------------------------------------------------
 -- ROUND103/105: BIDI SOURCE-COORDINATE WELD
 --
--- A1:
---   Eq.(5.1) off-diagonal two-jet + SAME Ward/five-channel beta evaluator
---   -> exact (5.42) same-object equality -> two-sided literal CMP109 bounds.
--- A2:
---   shellwise sensitivities between pairs of literal generated CMP109 histories
---   -> finite triangle theorem -> cumulative prefix Lipschitz estimate.
+-- A1/A2 and BC1/BC2 remain the frozen Clay frontier.
 --
--- BC1:
---   Part-I effective action = Part-II localized PHYSICAL composite sum;
---   D² commutes with finite sum; CMP109 (5.1) = D_B² of that same action;
---   hence Pi/E^(2) = sum of CMP116 physical composite B-Hessians.
+-- Round105 cross-pollination adds a downstream stress-energy consumer without
+-- altering that scoreboard.  The key separation is:
 --
--- Round105 cross-pollination:
---   D_B² V_eff is a gauge/background Hessian, not the metric variation defining
---   stress-energy.  For the same substituted CMP116 activity, the FIRST
---   variation is instead D_A E[A' u].  Thus stress transport should target the
---   first-variation carrier and separately identify metric perturbations with
---   the relevant background tangent.
+--   * CMP109 polarization = second gauge/background variation;
+--   * stress-energy = first metric/source variation;
+--   * the first variation can reuse the existing CMP116 first-gradient marked
+--     shell and weighted-row control;
+--   * only metric->source-coordinate identification and stress pairing remain
+--     new physical leaves for that downstream consumer.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -34,6 +27,7 @@ import DASHI.Physics.YangMills.BalabanCMP109116SourceContinuationRound103Exact a
 import DASHI.Physics.YangMills.BalabanCMP109Equation51LocalizedHessianRound103Exact as Eq51
 import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityHessianRound103Exact as Chain
 import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityFirstVariationRound105Exact as First
+import DASHI.Physics.YangMills.BalabanCMP116FirstVariationStressPairingRound105Exact as Stress
 import DASHI.Physics.YangMills.BalabanCMP109116ConventionTransportRound103Exact as Transport
 import DASHI.Physics.YangMills.BalabanCMP116CommonAnalyticRadiusRound103Exact as Radius
 import DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact as Carrier
@@ -88,7 +82,6 @@ bcSubstitutedActivityChainRuleRound103Level : ProofLevel
 bcSubstitutedActivityChainRuleRound103Level =
   Chain.cmp116PhysicalHessianSplitLevel
 
--- First-order chain-rule carrier needed by stress-energy variation.
 bcSubstitutedActivityFirstVariationRound105Level : ProofLevel
 bcSubstitutedActivityFirstVariationRound105Level =
   First.cmp116SubstitutedFirstVariationCompilerLevel
@@ -96,6 +89,21 @@ bcSubstitutedActivityFirstVariationRound105Level =
 bcMetricToBackgroundFirstVariationTransportRound105Level : ProofLevel
 bcMetricToBackgroundFirstVariationTransportRound105Level =
   First.metricToBackgroundFirstVariationTransportLevel
+
+-- Existing first-gradient Cauchy/localization machinery already pays the
+-- analytic shell for a stress first variation.  No new stress-specific decay
+-- theorem is required.
+bcStressReusesFirstGradientMarkedShellRound105Level : ProofLevel
+bcStressReusesFirstGradientMarkedShellRound105Level =
+  Stress.cmp116StressReusesFirstGradientMarkedShellLevel
+
+bcStressMetricSourceCoordinateWeldRound105Level : ProofLevel
+bcStressMetricSourceCoordinateWeldRound105Level =
+  Stress.literalCMP116MetricSourceCoordinateWeldLevel
+
+bcFirstVariationStressPairingRound105Level : ProofLevel
+bcFirstVariationStressPairingRound105Level =
+  Stress.literalCMP116FirstVariationStressPairingLevel
 
 bcConventionTransportRound103Level : ProofLevel
 bcConventionTransportRound103Level =
