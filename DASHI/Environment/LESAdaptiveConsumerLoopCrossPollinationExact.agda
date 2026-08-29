@@ -11,8 +11,11 @@ import DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact as Approx
 import DASHI.Core.ConsumerReductionDependencyReopeningExact as Reopening
 import DASHI.Core.RobustInterventionAcrossHypothesesExact as Robust
 import DASHI.Core.DiscriminatorSynthesisExact as Synthesis
+import DASHI.Core.SequentialConsumerExperimentPlannerExact as Sequential
+import DASHI.Core.SequentialRobustActionabilityPlannerExact as SequentialAction
 import DASHI.Environment.LESSPACFidelityCounterexampleFixturesExact as Fixtures
 import DASHI.Environment.LESDiscriminatorSynthesisExact as LESSynthesis
+import DASHI.Environment.LESSequentialExperimentPlannerExact as LESSequential
 
 adaptiveConsumerLoopOwner : String
 adaptiveConsumerLoopOwner = "DASHI.Core.AdaptiveConsumerModelLoopExact"
@@ -38,8 +41,17 @@ selectiveReopeningOwner = "DASHI.Core.ConsumerReductionDependencyReopeningExact"
 discriminatorSynthesisOwner : String
 discriminatorSynthesisOwner = "DASHI.Core.DiscriminatorSynthesisExact"
 
+sequentialExperimentPlannerOwner : String
+sequentialExperimentPlannerOwner = "DASHI.Core.SequentialConsumerExperimentPlannerExact"
+
+sequentialActionabilityPlannerOwner : String
+sequentialActionabilityPlannerOwner = "DASHI.Core.SequentialRobustActionabilityPlannerExact"
+
 lesDiscriminatorSynthesisOwner : String
 lesDiscriminatorSynthesisOwner = "DASHI.Environment.LESDiscriminatorSynthesisExact"
+
+lesSequentialExperimentOwner : String
+lesSequentialExperimentOwner = "DASHI.Environment.LESSequentialExperimentPlannerExact"
 
 finiteSPACCounterexampleOwner : String
 finiteSPACCounterexampleOwner = "DASHI.Environment.LESSPACFidelityCounterexampleFixturesExact"
@@ -62,8 +74,17 @@ reopeningBoundaryImported = Reopening.canonicalReductionDependencyReopeningBound
 discriminatorBoundaryImported : Synthesis.DiscriminatorSynthesisBoundary
 discriminatorBoundaryImported = Synthesis.canonicalDiscriminatorSynthesisBoundary
 
+sequentialBoundaryImported : Sequential.SequentialExperimentPlannerBoundary
+sequentialBoundaryImported = Sequential.canonicalSequentialExperimentPlannerBoundary
+
+sequentialActionBoundaryImported : SequentialAction.SequentialActionabilityPlannerBoundary
+sequentialActionBoundaryImported = SequentialAction.canonicalSequentialActionabilityPlannerBoundary
+
 lesDiscriminatorBoundaryImported : LESSynthesis.LESDiscriminatorSynthesisBoundary
 lesDiscriminatorBoundaryImported = LESSynthesis.canonicalLESDiscriminatorSynthesisBoundary
+
+lesSequentialBoundaryImported : LESSequential.LESSequentialExperimentBoundary
+lesSequentialBoundaryImported = LESSequential.canonicalLESSequentialExperimentBoundary
 
 fixtureBoundaryImported : Fixtures.SPACFidelityCounterexampleBoundary
 fixtureBoundaryImported = Fixtures.canonicalSPACFidelityCounterexampleBoundary
@@ -82,6 +103,11 @@ record LESAdaptiveConsumerArchitectureCutset : Set where
     pairwiseDiscriminatorSynthesisTyped prospectiveConsumerClosingBundleTyped : Bool
     observerJoinRefinementTyped nuisanceRobustSeparatorTyped : Bool
     optionalSymmetryInvariantExperimentTyped lesActionabilitySynthesisTyped : Bool
+    outcomeAdaptiveSequentialExperimentTreeTyped : Bool
+    impossibleMeasurementOutcomesPrunedByRealizabilityWitness : Bool
+    worstCaseSequentialCostCertificateTyped : Bool
+    sequentialPlanMayStopAtConsumerClosureWithoutWorldIdentity : Bool
+    sequentialActionabilityPlanMayStopAtRobustAuthorisedControl : Bool
     bucketHydraulicCounterexampleFixturePresent : Bool
     richardsPlantHistoryCounterexampleFixturePresent : Bool
     hydraulicSPACNutrientCounterexampleFixturePresent : Bool
@@ -92,7 +118,7 @@ canonicalLESAdaptiveConsumerArchitectureCutset =
   lesAdaptiveConsumerArchitectureCutset
     true true true true true true true true true true
     true true true true true true true true true true
-    true true true true true
+    true true true true true true true true true true
 
 record LESAdaptiveConsumerArchitectureBoundary : Set where
   constructor lesAdaptiveConsumerArchitectureBoundary
@@ -112,6 +138,12 @@ record LESAdaptiveConsumerArchitectureBoundary : Set where
     pairwiseDiscriminatorAutomaticallyClosesWholeDecisionFibre : Bool
     pairwiseDiscriminatorAutomaticallyClosesWholeDecisionFibreIsFalse :
       pairwiseDiscriminatorAutomaticallyClosesWholeDecisionFibre ≡ false
+    sequentialPlanningRequiresFixedMeasurementOrder : Bool
+    sequentialPlanningRequiresFixedMeasurementOrderIsFalse :
+      sequentialPlanningRequiresFixedMeasurementOrder ≡ false
+    robustAuthorisedActionRequiresFullModelIdentification : Bool
+    robustAuthorisedActionRequiresFullModelIdentificationIsFalse :
+      robustAuthorisedActionRequiresFullModelIdentification ≡ false
     oneChangedDependencyReopensEntireRepository : Bool
     oneChangedDependencyReopensEntireRepositoryIsFalse : oneChangedDependencyReopensEntireRepository ≡ false
     syntheticCounterexampleFixtureIsPhysicalValidation : Bool
@@ -121,4 +153,4 @@ canonicalLESAdaptiveConsumerArchitectureBoundary : LESAdaptiveConsumerArchitectu
 canonicalLESAdaptiveConsumerArchitectureBoundary =
   lesAdaptiveConsumerArchitectureBoundary
     false refl false refl false refl false refl false refl false refl
-    false refl false refl false refl
+    false refl false refl false refl false refl false refl
