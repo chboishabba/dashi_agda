@@ -2,17 +2,7 @@
 module DASHI.Physics.YangMills.BalabanNormalizedStressInsertionRound116Exact where
 
 ------------------------------------------------------------------------
--- ROUND116: DIVISION-FREE NORMALIZED SOURCE DERIVATIVE -> STRESS INSERTION
---
--- CMP119 expands numerator and denominator of one normalized local expectation
--- together.  The repository already owns the division-free cross numerator
---
---                     N' Z - N Z'.
---
--- Rather than introducing an inverse/quotient theorem, represent the physical
--- first source derivative by this connected cross numerator.  Once the literal
--- metric/source variation identifies the surviving connected numerator with the
--- stress insertion, the same CMP119 insertion can feed the Round109 telescope.
+-- ROUND116: DIVISION-FREE NORMALIZED SOURCE DERIVATIVE -> LITERAL CMP119 INSERTION
 ------------------------------------------------------------------------
 
 open import Data.Rational.Base as ℚ using (ℚ; _*_; _-_)
@@ -20,6 +10,7 @@ open import Relation.Binary.PropositionalEquality using (_≡_; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationCrossNumeratorExact as Cross
+import DASHI.Physics.YangMills.BalabanCMP119CompatibleLocalExpectationFlowExact as Source
 
 record NormalizedSourceDerivativeCrossData : Set₁ where
   field
@@ -27,8 +18,6 @@ record NormalizedSourceDerivativeCrossData : Set₁ where
     numeratorDerivative denominatorDerivative : ℚ
     connectedInsertionNumerator : ℚ
 
-    -- Physical/source identification after common vacuum pieces cancel in the
-    -- normalized numerator/denominator pair.
     crossNumeratorIsConnectedInsertion :
       Cross.normalizedCrossNumerator
         numerator denominator numeratorDerivative denominatorDerivative
@@ -51,16 +40,26 @@ record MetricStressNormalizedInsertionWeld : Set₁ where
   field
     normalizedSource : NormalizedSourceDerivativeCrossData
     metricFirstVariationCrossNumerator : ℚ
-    cmp119StressInsertionNumerator : ℚ
+
+    -- Literal CMP119 identity, not merely a rational value with a suggestive
+    -- name.  The evaluator exposes the normalized insertion numerator for the
+    -- exact source-native insertion pair consumed by the telescope lane.
+    source : Source.CMP119CompatibleLocalExpectationFlow
+    stressInsertion : Source.SourceNativeOrdinaryCharacteristicPair source
+    localInsertionNumerator : Source.LocalInsertionPair source → ℚ
 
     metricVariationIsNormalizedCrossNumerator :
       metricFirstVariationCrossNumerator
       ≡ sourceDerivativeCrossNumerator normalizedSource
 
-    connectedInsertionIsCMP119StressInsertion :
+    connectedInsertionIsSelectedCMP119StressInsertion :
       connectedInsertionNumerator normalizedSource
-      ≡ cmp119StressInsertionNumerator
+      ≡ localInsertionNumerator (Source.pair stressInsertion)
 open MetricStressNormalizedInsertionWeld public
+
+cmp119StressInsertionNumerator : MetricStressNormalizedInsertionWeld → ℚ
+cmp119StressInsertionNumerator dataSet =
+  localInsertionNumerator dataSet (Source.pair (stressInsertion dataSet))
 
 metricVariationCrossNumeratorIsCMP119StressInsertion :
   (dataSet : MetricStressNormalizedInsertionWeld) →
@@ -72,15 +71,13 @@ metricVariationCrossNumeratorIsCMP119StressInsertion dataSet =
     (trans
       (sourceDerivativeCrossNumeratorIsConnectedInsertion
         (normalizedSource dataSet))
-      (connectedInsertionIsCMP119StressInsertion dataSet))
+      (connectedInsertionIsSelectedCMP119StressInsertion dataSet))
 
 normalizedStressInsertionCompilerLevel : ProofLevel
 normalizedStressInsertionCompilerLevel = machineChecked
 
--- Remaining physical source binding: on the literal finite Balaban density,
--- identify the metric/source derivative numerator and denominator with the
--- CMP119 normalized local-insertion pair and prove that the surviving connected
--- cross numerator is the selected stress insertion.  The cancellation algebra
--- and downstream telescope are already owned.
+-- Remaining physical source binding: instantiate numerator/denominator and their
+-- metric derivatives on the literal finite Balaban density, and identify the
+-- surviving connected cross numerator with the exact CMP119 insertion object.
 literalMetricVariationToCMP119StressInsertionLevel : ProofLevel
 literalMetricVariationToCMP119StressInsertionLevel = conditional
