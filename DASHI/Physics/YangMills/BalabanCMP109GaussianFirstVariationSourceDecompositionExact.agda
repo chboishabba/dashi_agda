@@ -4,58 +4,38 @@ module DASHI.Physics.YangMills.BalabanCMP109GaussianFirstVariationSourceDecompos
 -- ROW A1: SOURCE-EXACT FIRST-VARIATION DECOMPOSITION
 --
 -- PRIMARY SOURCES
+-- Tadeusz Bałaban, CMP109 (1987), DOI 10.1007/BF01215223.
+-- Tadeusz Bałaban, CMP98  (1985), DOI 10.1007/BF01211042.
+-- Tadeusz Bałaban, CMP99  (1985), DOI 10.1007/BF01240355.
 --
--- Tadeusz Bałaban,
--- "Renormalization Group Approach to Lattice Gauge Field Theories. I.",
--- Communications in Mathematical Physics 109 (1987), 249--301.
--- DOI: 10.1007/BF01215223.
---
--- Tadeusz Bałaban,
--- "Averaging Operations for Lattice Gauge Theories",
--- Communications in Mathematical Physics 98 (1985), 17--51.
--- DOI: 10.1007/BF01211042.
---
--- Tadeusz Bałaban,
--- "Propagators for Lattice Gauge Theories in a Background Field",
--- Communications in Mathematical Physics 99 (1985), 389--434.
--- DOI: 10.1007/BF01240355.
+-- The record below is the source interface itself.  It deliberately does NOT
+-- contain fields of the form `fooIsCMP99 : Set`: such a field would merely rename
+-- the physical binding rather than express it.  Concrete callers must provide
+-- the actual operators/variations and the calculation record must identify their
+-- Fourier symbols pointwise.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanCMP109LeftRightInverseDexpCancellationExact as Dexp
-import DASHI.Physics.YangMills.BalabanCMP109GaussianPositivePatchCorrectionExact as Patch
 
 record CMP109GaussianFirstVariationSourceDecomposition
     (Background Variation Operator ConstrainedOperator : Set) : Set₁ where
   field
+    -- Source objects: CMP99 Wilson Hessian/background propagator sector,
+    -- CMP98/99 averaging constraint, gauge projection, and the CMP109 (1.4)--(1.5)
+    -- constrained quadratic carrier.
     cmp99WilsonHessian : Background → Operator
     cmp99AveragingConstraint : Background → Operator
     cmp99GaugeProjection : Background → Operator
     cmp109ConstrainedQuadratic : Background → ConstrainedOperator
 
+    -- Their literal first background variations.
     wilsonHessianVariation : Background → Variation → Operator
     averagingConstraintVariation : Background → Variation → Operator
     gaugeProjectionVariation : Background → Variation → Operator
     constrainedQuadraticVariation : Background → Variation → ConstrainedOperator
 
-    wilsonHessianIsCMP99Delta : Set
-    averagingConstraintIsCMP98CMP99Q : Set
-    gaugeProjectionIsCMP99GaugeFixing : Set
-    constrainedQuadraticIsCMP109Equation14And15Carrier : Set
-    constrainedVariationAssembledFromWQR : Set
-
 open CMP109GaussianFirstVariationSourceDecomposition public
-
-------------------------------------------------------------------------
--- Finite calculation checklist for the physical producer.
---
--- Round117 removes three opaque "symbol derived from ..." receipts.  A caller
--- must now supply the actual Fourier-symbol operation and prove pointwise that W,
--- Q and R are the symbols of the corresponding source first variations.  The
--- constrained symbol is likewise tied pointwise to the constrained quadratic
--- variation before the W+Q+R assembly equality is used.
-------------------------------------------------------------------------
 
 record CMP109GaussianFirstVariationCalculation
     (Background Variation Operator ConstrainedOperator Momentum Lorentz Color Scalar : Set)
@@ -100,9 +80,6 @@ record CMP109GaussianFirstVariationCalculation
           flatBackground backgroundVariation
           momentum output input backgroundDirection outputColor inputColor backgroundColor
 
-    cmp98TrivialisationUsesExistingDexpCancellation :
-      Dexp.cmp109LiteralLeftRightDexpIdentificationLevel ≡ conditional
-
     gaugeProjectionFirstVariationSymbol :
       Momentum → Lorentz → Lorentz → Lorentz → Color → Color → Color → Scalar
     gaugeProjectionSymbolDerivedFromCMP99Constraint :
@@ -128,6 +105,7 @@ record CMP109GaussianFirstVariationCalculation
           flatBackground backgroundVariation
           momentum output input backgroundDirection outputColor inputColor backgroundColor
 
+    -- Exact W+Q+R assembly on the constrained source symbol.
     WQRAssemblyExact :
       ∀ momentum output input backgroundDirection outputColor inputColor backgroundColor →
       literalConstrainedFirstVariationSymbol
@@ -145,9 +123,6 @@ record CMP109GaussianFirstVariationCalculation
               momentum output input backgroundDirection
               outputColor inputColor backgroundColor))
 
-    positivePatch : Patch.CMP109LiteralGaussianPositivePatch
-    patchUsesLiteralConstrainedFirstVariation : Set
-
 open CMP109GaussianFirstVariationCalculation public
 
 cmp109GaussianFirstVariationSourceDecompositionLevel : ProofLevel
@@ -159,6 +134,9 @@ cmp109WQRSourceSymbolInterfaceLevel = machineChecked
 cmp109WQRAssemblyInterfaceLevel : ProofLevel
 cmp109WQRAssemblyInterfaceLevel = machineChecked
 
+-- Physical source work is no longer represented by opaque receipt fields in the
+-- record.  It consists precisely in constructing the source operator/variation
+-- functions above and their pointwise Fourier-symbol/WQR equalities.
 cmp109LiteralWilsonHessianVariationLevel : ProofLevel
 cmp109LiteralWilsonHessianVariationLevel = conditional
 
@@ -170,6 +148,3 @@ cmp109LiteralGaugeProjectionVariationLevel = conditional
 
 cmp109LiteralWQRAssemblyLevel : ProofLevel
 cmp109LiteralWQRAssemblyLevel = conditional
-
-cmp109LiteralMixedVertexPositivePatchLevel : ProofLevel
-cmp109LiteralMixedVertexPositivePatchLevel = conditional
