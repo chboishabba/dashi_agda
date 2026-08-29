@@ -43,8 +43,8 @@ open EvidenceMove public
 RefineLive :
   ∀ {Hypothesis} →
   (Hypothesis → Set) →
-  EvidenceMove Hypothesis →
-  Observation →
+  (move : EvidenceMove Hypothesis) →
+  Observation move →
   Hypothesis → Set
 RefineLive live move observed hypothesis =
   live hypothesis × supports move hypothesis observed
