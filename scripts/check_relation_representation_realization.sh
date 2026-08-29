@@ -9,9 +9,11 @@ FILES=(
   DASHI/Reasoning/RelationRepresentationAdequacyExact.agda
   DASHI/Reasoning/RelationRepresentationRealizationExact.agda
   DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda
+  DASHI/Reasoning/RelationRepresentationExperimentProtocolExact.agda
   DASHI/Reasoning/EigenslurFlourishingRelationBoundaryExact.agda
   DASHI/Reasoning/RelationRepresentationCrossPollinationExact.agda
   DASHI/Reasoning/HumourRelationRepresentationCrossPollinationExact.agda
+  DASHI/Reasoning/NeuralSpectralRelationCrossPollinationExact.agda
   DASHI/Reasoning/RelationRepresentationRegression.agda
   DASHI/Reasoning/Everything.agda
 )
@@ -49,6 +51,12 @@ grep -q 'BidirectionalRelationBridge' DASHI/Reasoning/BidirectionalRelationRepre
 grep -q 'collisionReopensBidirectionalCut' DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda
 grep -q 'bothReceiptsMustUseSameEncoding' DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda
 
+grep -q 'CandidateConsumerFailure' DASHI/Reasoning/RelationRepresentationExperimentProtocolExact.agda
+grep -q 'ReopenedCandidateSearch' DASHI/Reasoning/RelationRepresentationExperimentProtocolExact.agda
+grep -q 'targetHeldOut' DASHI/Reasoning/RelationRepresentationExperimentProtocolExact.agda
+grep -q 'temporalCheckpointHeldOut' DASHI/Reasoning/RelationRepresentationExperimentProtocolExact.agda
+grep -q 'collisionReopensCandidateSearch' DASHI/Reasoning/RelationRepresentationExperimentProtocolExact.agda
+
 grep -q 'functioningDoesNotRecoverCapability' DASHI/Reasoning/EigenslurFlourishingRelationBoundaryExact.agda
 grep -q 'coarsePositiveCodeCannotRealizeAgency' DASHI/Reasoning/EigenslurFlourishingRelationBoundaryExact.agda
 grep -q 'flourishingRequiresRankOneDirection' DASHI/Reasoning/EigenslurFlourishingRelationBoundaryExact.agda
@@ -58,9 +66,14 @@ grep -q 'corpusLoomRetainsHumourSourceBeforeDialecticalCorrection' DASHI/Reasoni
 grep -q 'humourDynamicConsumerSafetyAsymmetry' DASHI/Reasoning/HumourRelationRepresentationCrossPollinationExact.agda
 grep -q 'oneHumourConsumerSafetyDoesNotEstablishPluralSafety' DASHI/Reasoning/HumourRelationRepresentationCrossPollinationExact.agda
 
+grep -q 'neuralCoarseCompressionLosesVariation' DASHI/Reasoning/NeuralSpectralRelationCrossPollinationExact.agda
+grep -q 'neuralSearchMayReopenFromOffsetToRotation' DASHI/Reasoning/NeuralSpectralRelationCrossPollinationExact.agda
+grep -q 'cleanupRetainsSymmetryAdaptedModes' DASHI/Reasoning/NeuralSpectralRelationCrossPollinationExact.agda
+
 grep -q 'grokkingCurrentFitDoesNotCloseLearningFuture' DASHI/Reasoning/RelationRepresentationCrossPollinationExact.agda
 grep -q 'equalAmplitudeDoesNotCollapsePhase' DASHI/Reasoning/RelationRepresentationRegression.agda
 grep -q 'humourCurrentPositiveSurfaceDoesNotEstablishPluralFutureSafety' DASHI/Reasoning/RelationRepresentationRegression.agda
+grep -q 'neuralConsumerCollisionReopensCandidateSearch' DASHI/Reasoning/RelationRepresentationRegression.agda
 
 if command -v agda >/dev/null 2>&1; then
   agda -i . -i src DASHI/Reasoning/RelationRepresentationRegression.agda
