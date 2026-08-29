@@ -22,8 +22,8 @@ open NormalizedTrajectoryFamily public
 ExactSharedFamilyLaw :
   ∀ {Member Time Accuracy : Set} →
   NormalizedTrajectoryFamily Member Time Accuracy → Set
-ExactSharedFamilyLaw family =
-  (member : _) → (time : _) →
+ExactSharedFamilyLaw {Member} {Time} family =
+  (member : Member) → (time : Time) →
   normalizedTrajectory family member time ≡ referenceCurve family time
 
 record HeldOutFamilyExtension
