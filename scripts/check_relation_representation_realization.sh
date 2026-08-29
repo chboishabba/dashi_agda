@@ -26,11 +26,15 @@ grep -q '10.52202/085713-1438' DASHI/Reasoning/RelationRepresentationSourceRegis
 grep -q '10.48550/arXiv.2510.09790' DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
 grep -q '10.48550/arXiv.2605.05115' DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
 grep -q '10.48550/arXiv.2602.05266' DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
+grep -q '10.48550/arXiv.2509.19323' DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
+grep -q '10.48550/arXiv.2601.16907' DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
 grep -q '10.48550/arXiv.2606.01402' DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
 grep -q '10.48550/arXiv.2602.02859' DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
 
 grep -q 'manifoldConstrainedTransformation' DASHI/Reasoning/RelationRepresentationAdequacyExact.agda
 grep -q 'ordinalConcordanceGeometry' DASHI/Reasoning/RelationRepresentationAdequacyExact.agda
+grep -q 'magnitudeAwareGeometry' DASHI/Reasoning/RelationRepresentationAdequacyExact.agda
+grep -q 'calibratedMonotoneGeometry' DASHI/Reasoning/RelationRepresentationAdequacyExact.agda
 grep -q 'sameRetainedRelationStateGivesSameObservationAfterEveryTrace' DASHI/Reasoning/RelationRepresentationAdequacyExact.agda
 grep -q 'relationRepresentationCommutesWithEveryDeclaredTrace' DASHI/Reasoning/RelationRepresentationAdequacyExact.agda
 
