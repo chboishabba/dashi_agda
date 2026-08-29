@@ -2,6 +2,7 @@ module DASHI.Programmes.Everything where
 
 import DASHI.Programmes.ResearchProgrammeExact
 import DASHI.Programmes.BidirectionalSatelliteCorrectionExact
+import DASHI.Programmes.ExecutableReceiptSchemaExact
 import DASHI.Programmes.CFDExact
 import DASHI.Programmes.CFDChartCorrectionExact
 import DASHI.Programmes.BrainExact
@@ -17,6 +18,7 @@ import DASHI.Programmes.CoreReferenceExact
 import DASHI.Programmes.CoreReferenceCorrectionExact
 import DASHI.Programmes.FRACDASHExact
 import DASHI.Programmes.FRACDASHCompilerCorrectionExact
+import DASHI.Programmes.FRACDASHNumericInterpreterTargetExact
 import DASHI.Programmes.TestHarnessExact
 import DASHI.Programmes.TestHarnessEvidenceCorrectionExact
 import DASHI.Programmes.RTXExact
