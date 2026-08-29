@@ -3,70 +3,69 @@ module DASHI.Analysis.RiemannAristotleCurrentFrontierExact where
 ------------------------------------------------------------------------
 -- AUTHORITATIVE CURRENT FRONTIER FOR THE ARISTOTLE / RH LANE
 --
--- This owner is maintained bidirectionally: forward from exact source owners
--- and backward from what a uniform off-line contradiction actually needs.
+-- Maintained bidirectionally: forward from exact source owners and backward
+-- from the unweakened RH contradiction.
 --
--- CLOSED IN THE LEAN OWNER / EXISTING BRIDGE
+-- CLOSED IN LEAN / EXISTING BRIDGE
 --
---  * the positive same-ordinate even-cone construction exists for every target
---    at nonzero ordinate and annihilates the base pole class;
---  * the two-radius cluster height defect is the actual off-line discriminator:
---    it is strictly positive if the fibre contains an off-line zero and exactly
---    zero when the fibre is entirely on-line;
---  * in the high-ordinate short-support lane, the prime channel (and hence its
---    projective defect) is exactly zero;
---  * Gamma and pole projective defects already have explicit O(r^2) envelopes;
---  * the target zero defect already has an exact r^2 leading coefficient plus
---    an explicit r^4 remainder, so the old radius-scaling mismatch is closed;
---  * generic multi-taper Schur algebra eliminates two selected response vectors
---    exactly.
+--  * universal positive same-ordinate observer construction;
+--  * two-radius cluster height defect: positive for an off-line fibre and zero
+--    for an entirely critical-line fibre;
+--  * high-ordinate prime projective defect exactly zero;
+--  * deterministic Gamma/pole projective response vectors and generic exact
+--    two-nuisance Schur algebra;
+--  * target defect has exact r^2 leading coefficient plus r^4 remainder;
+--  * functional-equation reflection pairing cancels the odd-height channel;
+--  * reflection-symmetrized far-zero carrier has a uniform curvature envelope;
+--  * unit ordinate shells plus unconditional local zero counts prove absolute
+--    summability of the m_rho/(Im rho-t)^2 carrier and hence absolute
+--    convergence of the reflection far tail for every compactly supported C2
+--    real-even taper.
 --
--- BIDI CORRECTIONS
+-- NEW BIDI CORRECTION FROM THE 2026-08-30 LEAN SESSION
 --
---  1. The conditional three-zero / three-taper theorem is not the universal RH
---     bridge: one hypothetical off-line zero does not manufacture two additional
---     smaller positive-height zeros.
+-- The proposed socket
 --
---  2. One-radius even-cone positivity is a universal observer construction but
---     is not itself an off-line signal; on-line fibres are positive there too.
---     The two-radius projective height defect is the signal consumed by E.
+--   ||E D_off||^2 <= B_far <
+--     det3(D_pole,D_Gamma,D_cluster)^2 / wedgeSq(D_pole,D_Gamma)
 --
---  3. Because the horizontal displacement can be arbitrarily small, a final
---     uniform proof cannot simply absorb fixed positive Gamma/pole coefficient
---     budgets below a target coefficient that tends to zero with displacement.
---     The highest-leverage use of the Schur machinery is therefore to eliminate
---     the deterministic projective pole and Gamma response vectors EXACTLY.
+-- cannot be the final strict-budget theorem when the deterministic Schur
+-- identity gives
 --
--- NEW SOURCE-LEVEL LEAN RETURNS (new kernel receipt pending)
+--   E D_cluster = E D_off.
 --
---  * functional-equation reflection pairs cancel the odd-height sinh*sin term
---    exactly and leave a signed cosine kernel in the ordinate gap;
---  * exact involutive symmetrization rewrites the entire off-ordinate projective
---    carrier using those signed pair kernels, without choosing orbit reps;
---  * `LiteralWeilDeterministicProjectiveSchur` vectorizes three short tapers and
---    proves, once the deterministic pole/Gamma vectors are independent,
+-- The right-hand margin is precisely ||E D_cluster||^2, hence the same real
+-- quantity as ||E D_off||^2.  No upper bound on the whole post-Schur carrier can
+-- be strictly below that same quantity.
 --
---      elim2 D_pole D_Gamma D_cluster = elim2 D_pole D_Gamma D_off.
+-- Therefore the literal zero carrier must be split first:
 --
---    Thus prime, Gamma and pole can all have ZERO residual debt in the intended
---    high-ordinate lane: prime by support, Gamma/pole by exact Schur elimination.
+--   D_off = D_targetCluster + D_remainder,
 --
--- HIGHEST-ALPHA REMAINING CUTSET
+-- in the SAME post-Schur coordinates.  The strict estimate applies only to the
+-- genuine remainder.  Absolute convergence now guarantees that this remainder
+-- is mathematically well-defined; it does not by itself provide cancellation.
 --
---   S1. construct three short positive tapers for every high target ordinate so
---       that the projective pole/Gamma nuisance vectors have rank two AND the
---       off-line same-ordinate cluster survives their Schur quotient with a
---       quantitative margin;
+-- HIGHEST-ALPHA LIVE CUTSET
 --
---   S2. prove a signed estimate for the exact reflection-symmetrized off-ordinate
---       zero carrier AFTER that deterministic Schur quotient.  Do not return to
---       the exhausted absolute W(t) majorant;
+--   T1. literal post-Schur target/remainder identity on the actual zero carrier;
 --
---   S3. certify the complementary low-ordinate region independently (or replace
---       the high/low split by a universal construction);
+--   T2. construct/retain a quantitative target lower margin for the target
+--       same-ordinate cluster in those exact coordinates;
 --
---   S4. feed S1+S2+S3 into the already-owned exact margin contradiction and the
---       repository's existing, unweakened RH proposition.
+--   T3. prove a signed cancellation estimate for the genuine reflection-
+--       symmetrized remainder, strictly below that target margin.  The new Lean
+--       curvature/shell work closes convergence and supplies the summable
+--       delta^-2 envelope, but not this strict inequality;
+--
+--   T4. close the deterministic short three-taper rank/survival construction if
+--       it is still used to eliminate Gamma/pole exactly;
+--
+--   T5. certify the complementary low-ordinate region, or replace the split by
+--       a universal construction;
+--
+--   T6. invoke the already-owned target/remainder margin contradiction and the
+--       repository's existing unweakened RH proposition.
 --
 -- No theorem here derives RH.
 ------------------------------------------------------------------------
@@ -89,41 +88,35 @@ record AristotleCurrentFrontier : Set where
     highOrdinatePrimeProjectiveDebtZeroInLeanIsTrue :
       highOrdinatePrimeProjectiveDebtZeroInLean ≡ true
 
-    gammaProjectiveQuadraticEnvelopeClosedInLean : Bool
-    gammaProjectiveQuadraticEnvelopeClosedInLeanIsTrue :
-      gammaProjectiveQuadraticEnvelopeClosedInLean ≡ true
-    poleProjectiveQuadraticEnvelopeClosedInLean : Bool
-    poleProjectiveQuadraticEnvelopeClosedInLeanIsTrue :
-      poleProjectiveQuadraticEnvelopeClosedInLean ≡ true
     targetLeadingCoefficientAndRemainderClosedInLean : Bool
     targetLeadingCoefficientAndRemainderClosedInLeanIsTrue :
       targetLeadingCoefficientAndRemainderClosedInLean ≡ true
 
-    conditionalTwoZeroThreeTaperClosedInLean : Bool
-    conditionalTwoZeroThreeTaperClosedInLeanIsTrue :
-      conditionalTwoZeroThreeTaperClosedInLean ≡ true
-    conditionalTwoZeroIsUniversalRHBridge : Bool
-    conditionalTwoZeroIsUniversalRHBridgeIsFalse :
-      conditionalTwoZeroIsUniversalRHBridge ≡ false
+    reflectionPairKernelClosedInLean : Bool
+    reflectionPairKernelClosedInLeanIsTrue : reflectionPairKernelClosedInLean ≡ true
+    reflectionFarTailAbsoluteConvergenceClosedInLean : Bool
+    reflectionFarTailAbsoluteConvergenceClosedInLeanIsTrue :
+      reflectionFarTailAbsoluteConvergenceClosedInLean ≡ true
+    uniformReflectionCarrierCurvatureClosedInLean : Bool
+    uniformReflectionCarrierCurvatureClosedInLeanIsTrue :
+      uniformReflectionCarrierCurvatureClosedInLean ≡ true
+    latestLeanBridgeBuildKernelChecked : Bool
+    latestLeanBridgeBuildKernelCheckedIsTrue :
+      latestLeanBridgeBuildKernelChecked ≡ true
 
-    reflectionPairKernelSourceImplementedInLean : Bool
-    reflectionPairKernelSourceImplementedInLeanIsTrue :
-      reflectionPairKernelSourceImplementedInLean ≡ true
-    reflectionSymmetrizedProjectiveCarrierSourceImplementedInLean : Bool
-    reflectionSymmetrizedProjectiveCarrierSourceImplementedInLeanIsTrue :
-      reflectionSymmetrizedProjectiveCarrierSourceImplementedInLean ≡ true
-    deterministicProjectiveSchurCompilerSourceImplementedInLean : Bool
-    deterministicProjectiveSchurCompilerSourceImplementedInLeanIsTrue :
-      deterministicProjectiveSchurCompilerSourceImplementedInLean ≡ true
-    newBidiLeanSourceMachineChecked : Bool
-    newBidiLeanSourceMachineCheckedIsFalse : newBidiLeanSourceMachineChecked ≡ false
+    wholePostSchurCarrierStrictBudgetValid : Bool
+    wholePostSchurCarrierStrictBudgetValidIsFalse :
+      wholePostSchurCarrierStrictBudgetValid ≡ false
 
+    literalTargetRemainderSplitClosed : Bool
+    literalTargetRemainderSplitClosedIsFalse :
+      literalTargetRemainderSplitClosed ≡ false
+    strictSignedRemainderCancellationClosed : Bool
+    strictSignedRemainderCancellationClosedIsFalse :
+      strictSignedRemainderCancellationClosed ≡ false
     deterministicNuisanceThreeTaperConstructionClosed : Bool
     deterministicNuisanceThreeTaperConstructionClosedIsFalse :
       deterministicNuisanceThreeTaperConstructionClosed ≡ false
-    signedPostSchurOffOrdinateEstimateClosed : Bool
-    signedPostSchurOffOrdinateEstimateClosedIsFalse :
-      signedPostSchurOffOrdinateEstimateClosed ≡ false
     lowOrdinateComplementCertified : Bool
     lowOrdinateComplementCertifiedIsFalse :
       lowOrdinateComplementCertified ≡ false
@@ -144,13 +137,11 @@ canonicalAristotleCurrentFrontier =
     true refl
     true refl
     true refl
-    false refl
-    true refl
-    true refl
     true refl
     false refl
     false refl
     false refl
     false refl
     false refl
-    "The off-line signal is the already-owned two-radius cluster height defect, not one-radius positivity. High-ordinate prime debt is exactly zero, Gamma and pole are deterministic projective nuisances, and new Lean source closes the exact compiler that Schur-eliminates those two vectors. The live research cutset is now: construct a short three-taper deterministic-nuisance rank-two observer with surviving off-line cluster; bound only the resulting signed reflection-symmetrized off-ordinate zero carrier; certify the complementary low-ordinate region; then invoke the existing margin/RH compiler."
+    false refl
+    "The newest kernel-checked Lean tranche closes uniform reflection-pair curvature control and absolute summability/convergence of the literal far zero carrier. Bidirectional checking also kills the old whole-carrier B_far socket: after deterministic Schur, D_cluster and D_off have the same residual vector, so that whole carrier cannot be budgeted strictly below its own Schur margin. The live target is now a literal target-cluster plus genuine-remainder decomposition, followed by a signed cancellation estimate on the convergent remainder only, together with the deterministic three-taper construction and low-ordinate certification before the existing final RH compiler can fire."
