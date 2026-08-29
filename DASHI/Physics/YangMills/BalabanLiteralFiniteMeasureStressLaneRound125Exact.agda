@@ -1,10 +1,6 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanLiteralFiniteMeasureStressLaneRound125Exact where
 
-------------------------------------------------------------------------
--- ROUND125: THE STRESS-GENERATING DENSITY IS THE LITERAL CLAY FINITE MEASURE
-------------------------------------------------------------------------
-
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -54,15 +50,13 @@ selectedStressDensityIsLiteralClayFiniteMeasure :
     (BetaDensity.densityAt inputs selectedScale)
   ≡ Top.finiteMeasure Y group
       (R124.cutoffAtScale (measureWeld dataSet) selectedScale)
-selectedStressDensityIsLiteralClayFiniteMeasure dataSet =
+selectedStressDensityIsLiteralClayFiniteMeasure
+    {stressLane = stressLane} dataSet =
   R124.densityAtScaleIsLiteralFiniteMeasure (measureWeld dataSet)
-    (R122.selectedDensityScale (R123.densityAnchor _))
+    (R122.selectedDensityScale (R123.densityAnchor stressLane))
 
 literalFiniteMeasureStressLaneCompilerLevel : ProofLevel
 literalFiniteMeasureStressLaneCompilerLevel = machineChecked
 
--- Physical finite-family seam: instantiate the density->measure and scale->cutoff
--- maps for the literal Balaban construction. Once supplied, the exact density
--- differentiated in Round123 is on the finite-measure family consumed by Clay.
 literalBalabanStressDensityIsClayFiniteMeasureLevel : ProofLevel
 literalBalabanStressDensityIsClayFiniteMeasureLevel = conditional
