@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Biology.CyclotomicPhaseAmplitudeBoundaryExact as Phase
 import DASHI.Cognition.PNF.LLMGrokkingLearningFutureExact as Grok
+import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 import DASHI.Reasoning.RelationRepresentationSourceRegistryExact as Sources
 import DASHI.Reasoning.RelationRepresentationAdequacyExact as Adequacy
 import DASHI.Reasoning.RelationRepresentationRealizationExact as Realization
@@ -77,5 +78,12 @@ positiveCodeNotAgency = Domain.coarsePositiveCodeCannotRealizeAgency
 -- Existing learning-future result stays wired through the capstone.
 ------------------------------------------------------------------------
 
+grokkingCurrentFitStillNotLearningFuture :
+  Future.FutureObservationEquivalent
+    Grok.learningSystem
+    Grok.generalizationVisible
+    Grok.structuredBefore
+    Grok.memorizerBefore
+  → ⊥
 grokkingCurrentFitStillNotLearningFuture =
   Cross.grokkingCurrentFitDoesNotCloseLearningFuture
