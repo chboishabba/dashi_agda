@@ -42,13 +42,31 @@ record AristotleG2CurrentCut : Set where
     g2dReducedToSingleSignedScalarDeterminantSumIsTrue :
       g2dReducedToSingleSignedScalarDeterminantSum ≡ true
 
-    g2dAdditionalOrdinatePhaseCancellationBoundClosed : Bool
-    g2dAdditionalOrdinatePhaseCancellationBoundClosedIsFalse :
-      g2dAdditionalOrdinatePhaseCancellationBoundClosed ≡ false
+    g2eDeterminantTaperKernelCompressionClosed : Bool
+    g2eDeterminantTaperKernelCompressionClosedIsTrue :
+      g2eDeterminantTaperKernelCompressionClosed ≡ true
+
+    functionalAndConjugationSymmetriesGiveTargetCenteredGapPairing : Bool
+    functionalAndConjugationSymmetriesGiveTargetCenteredGapPairingIsFalse :
+      functionalAndConjugationSymmetriesGiveTargetCenteredGapPairing ≡ false
+
+    localZeroCountControlsRemainingOscillatoryPhase : Bool
+    localZeroCountControlsRemainingOscillatoryPhaseIsFalse :
+      localZeroCountControlsRemainingOscillatoryPhase ≡ false
+
+    montgomeryVaughanDirectlyClosesLocalZeroCosineSum : Bool
+    montgomeryVaughanDirectlyClosesLocalZeroCosineSumIsFalse :
+      montgomeryVaughanDirectlyClosesLocalZeroCosineSum ≡ false
+
+    g2eTargetCenteredLocalZeroExponentialSumBoundClosed : Bool
+    g2eTargetCenteredLocalZeroExponentialSumBoundClosedIsFalse :
+      g2eTargetCenteredLocalZeroExponentialSumBoundClosed ≡ false
 
     genericGramOrSchurAlgebraRemaining : Bool
     genericGramOrSchurAlgebraRemainingIsFalse :
       genericGramOrSchurAlgebraRemaining ≡ false
+
+    firstGenuinelyNewAnalyticTheorem : String
 
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
@@ -69,7 +87,12 @@ canonicalAristotleG2CurrentCut =
     true refl
     false refl
     true refl
+    true refl
     false refl
     false refl
     false refl
-    "G1, G2a and G2b are closed at source level. G2c is no longer an open mathematical identity: ThreeTaperSchurMargin.lean already owns normSqP(elim2 x)=det3(n1,n2,x)^2/wedgeSq, and exact polarization plus elim2/determinant additivity yields the bilinear determinant formula. A fresh Lean kernel receipt for that stitched theorem is still absent. The G2d bidi audit rejects reflection-only cancellation because each stored near cell is already reflection paired and hence reflection invariant, producing positive duplicate covariance on a non-fixed reflection orbit. The final analytic leaf is therefore one additional signed ordinate/phase cancellation estimate for the scalar responses d_sigma=det3(n1,n2,k_sigma), equivalently a bound on sum d_sigma strong enough to beat the cluster determinant margin after the explicit far error. No generic Gram or Schur algebra remains, and RH is not derived."
+    false refl
+    false refl
+    "Bound the target-centered local zero exponential sum S_q(t,J)=integral q(u) * sum_{sigma in near(t,J)} m_sigma cosh(a_sigma u) cos((b_sigma-t)u) strongly enough that S_q(t,J)^2 / wedgeSq(n1,n2), together with the explicit far error, lies strictly below the surviving cluster determinant margin."
+    false refl
+    "The bidi cut is complete through all reusable algebra. G1, G2a and G2b are closed source-level. G2c is mathematically derived from the already checked ThreeTaperSchurMargin norm/determinant identity by polarization; only a fresh Lean kernel receipt for that stitched bilinear theorem remains. Reflection-only Gram cancellation is refuted because the finite near cells are already reflection paired and reflection invariant. G2e then moves the one-dimensional determinant through the common reflection-pair kernel, producing one fixed compactly supported determinant taper q(u): d_sigma = m_sigma integral 4 q(u) cosh(a_sigma u) cos((b_sigma-t)u). Functional reflection preserves the ordinate, conjugation is centered at ordinate zero rather than arbitrary t, the local zero count is phase-blind, and the bundled Montgomery-Vaughan inequality does not directly control this local zero cosine sum. Therefore the first genuinely new analytic theorem is exactly a target-centered local zero exponential-sum cancellation estimate for this q-weighted carrier. No generic Gram, Schur, reflection, tail, or count algebra remains, and RH is not derived."
