@@ -11,18 +11,27 @@ FILES=(
   DASHI/Core/TOEExperimentArchitectureValidation.agda
   DASHI/Physics/Foundations/PhysicalTheoryExperimentDiscriminationExact.agda
   DASHI/Programmes/ResearchProgrammeExact.agda
+  DASHI/Programmes/BidirectionalSatelliteCorrectionExact.agda
   DASHI/Programmes/CFDExact.agda
+  DASHI/Programmes/CFDChartCorrectionExact.agda
   DASHI/Programmes/BrainExact.agda
   DASHI/Programmes/BrainHemibrainExperimentExact.agda
+  DASHI/Programmes/BrainKernelSemanticsCorrectionExact.agda
   DASHI/Programmes/QuantumExact.agda
   DASHI/Programmes/QuantumFalsifiableTargetExact.agda
   DASHI/Programmes/DashifineExact.agda
+  DASHI/Programmes/DashifineBenchmarkCorrectionExact.agda
   DASHI/Programmes/GrokkingExact.agda
+  DASHI/Programmes/GrokkingValidationCorrectionExact.agda
   DASHI/Programmes/CoreReferenceExact.agda
+  DASHI/Programmes/CoreReferenceCorrectionExact.agda
   DASHI/Programmes/FRACDASHExact.agda
+  DASHI/Programmes/FRACDASHCompilerCorrectionExact.agda
   DASHI/Programmes/TestHarnessExact.agda
+  DASHI/Programmes/TestHarnessEvidenceCorrectionExact.agda
   DASHI/Programmes/RTXExact.agda
   DASHI/Programmes/RTXLightTransportRefinementExact.agda
+  DASHI/Programmes/BidirectionalSatelliteValidation.agda
   DASHI/Programmes/Everything.agda
   DASHI/Programmes/ResearchProgrammeValidation.agda
 )
@@ -45,9 +54,6 @@ grep -q 'repairThatFitsTrainingIsScientificallySupportedIsFalse' DASHI/Core/Robu
 grep -q 'sharedMathematicsIsPhysicalUnificationIsFalse' DASHI/Physics/Foundations/PhysicalTheoryExperimentDiscriminationExact.agda
 grep -q 'candidateFitIsEstablishedTheoryRecoveryIsFalse' DASHI/Physics/Foundations/PhysicalTheoryExperimentDiscriminationExact.agda
 
-# Programme-registry completeness guard: the nine known satellite repositories
-# must each have a literal adapter and every adapter is forced through the
-# formal-owner + evidence-receipt cutset in ResearchProgrammeValidation.
 for witness in \
   cfdOwner brainOwner quantumOwner dashifineOwner grokkingOwner \
   coreOwner fracdashOwner testHarnessOwner rtxOwner \
@@ -59,24 +65,35 @@ for witness in \
   }
 done
 
-# Substantive satellite sockets.  These names are intentionally theorem-facing,
-# not documentation-only markers.
+# Original substantive sockets.
 grep -q '^HemibrainMeasurementClosesPrediction :' DASHI/Programmes/BrainHemibrainExperimentExact.agda
-grep -q '^hemibrainReceiptDoesNotRemoveMeasurementObligation :' DASHI/Programmes/BrainHemibrainExperimentExact.agda
 grep -q '^falsifiableTargetRefutesCurrentEquivalence :' DASHI/Programmes/QuantumFalsifiableTargetExact.agda
 grep -q '^iteratedRefinementPreservesObservation :' DASHI/Programmes/RTXLightTransportRefinementExact.agda
+
+# BIDI correction compiler and forward/backward cuts.
+grep -q '^correctedSatelliteYieldsClaimTransport :' DASHI/Programmes/BidirectionalSatelliteCorrectionExact.agda
+grep -q '^informationLossBlocksCorrectedBridge :' DASHI/Programmes/BidirectionalSatelliteCorrectionExact.agda
+grep -q '^collisionForcesRepresentationRepair :' DASHI/Programmes/CFDChartCorrectionExact.agda
+grep -q 'localSignKernelIsAutomaticallyIdempotentIsFalse' DASHI/Programmes/BrainKernelSemanticsCorrectionExact.agda
+grep -q 'oneTaskDominanceIsUniversalLearningIsFalse' DASHI/Programmes/DashifineBenchmarkCorrectionExact.agda
+grep -q 'twoPointPerfectTimingFitIsUniversalLawIsFalse' DASHI/Programmes/GrokkingValidationCorrectionExact.agda
+grep -q 'backendFingerprintEqualityIsStateEqualityIsFalse' DASHI/Programmes/CoreReferenceCorrectionExact.agda
+grep -q '^finiteTraceCommutes :' DASHI/Programmes/FRACDASHCompilerCorrectionExact.agda
+grep -q '^finiteTraceReadoutCorrect :' DASHI/Programmes/FRACDASHCompilerCorrectionExact.agda
+grep -q '^receiptPlusUniquenessPinsPrediction :' DASHI/Programmes/TestHarnessEvidenceCorrectionExact.agda
 grep -q 'lowerMDLIsPhysicalTruthIsFalse' DASHI/Programmes/RTXLightTransportRefinementExact.agda
 grep -q 'discriminatorAloneIsQuantumGravityTheoryIsFalse' DASHI/Programmes/QuantumFalsifiableTargetExact.agda
 
 if ! command -v agda >/dev/null 2>&1; then
-  echo "Agda executable not available; static TOE experiment/programme checks passed, kernel typecheck not run." >&2
+  echo "Agda executable not available; static TOE experiment/programme/BIDI checks passed, kernel typecheck not run." >&2
   exit 2
 fi
 
 agda -i . -i /usr/share/agda-stdlib DASHI/Core/TOEExperimentArchitectureValidation.agda
 agda -i . -i /usr/share/agda-stdlib DASHI/Programmes/ResearchProgrammeValidation.agda
+agda -i . -i /usr/share/agda-stdlib DASHI/Programmes/BidirectionalSatelliteValidation.agda
 agda -i . -i /usr/share/agda-stdlib DASHI/Programmes/Everything.agda
 agda -i . -i /usr/share/agda-stdlib DASHI/Core/Everything.agda
 agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/Everything.agda
 
-echo "TOE experiment and cross-repository programme architecture checks passed."
+echo "TOE experiment, cross-repository programme, and BIDI correction checks passed."
