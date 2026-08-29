@@ -31,6 +31,7 @@ import RealProperties as BishopP
 import DASHI.Foundations.BishopSqrtTwoThirdsMachinConstantExact as Constant
 import DASHI.Foundations.BishopErdosMachinConstantPositiveExact as ConstantPositive
 import DASHI.Foundations.BishopNatSquareRootDividedTangentExact as Tangent
+import DASHI.Foundations.BishopNatSquareRootNonnegativeExact as RootNN
 import DASHI.Foundations.BishopCubicTranslationIteratedExact as Iterated
 import DASHI.Foundations.BishopCubicTranslationGeometricRatioExact as Ratio
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -89,17 +90,14 @@ residualExponentNonnegative :
 residualExponentNonnegative n r =
   BishopP.nonNegx,y⇒nonNegx*y
     (BishopP.pos⇒nonNeg ConstantPositive.erdosMachinConstantPositive)
-    (BishopP.0≤x⇒nonNegx
-      (BishopP.nonNegx⇒0≤x
-        (DASHI.Foundations.BishopNatSquareRootNonnegativeExact.canonicalFloorSquareRootNonnegative
-          (n ∸ r))))
+    (RootNN.canonicalFloorSquareRootNonnegative (n ∸ r))
 
 shiftedResidualExponent :
   ∀ {n} {nPositive : suc 0 ≤ n} →
   ErdosStepRate n nPositive → Nat → BishopReal.ℝ
-shiftedResidualExponent rate r =
+shiftedResidualExponent {n} rate r =
   Iterated.shiftedBase
-    (residualExponent _ r)
+    (residualExponent n r)
     (step rate)
     r
 
