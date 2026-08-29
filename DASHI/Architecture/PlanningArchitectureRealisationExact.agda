@@ -16,27 +16,28 @@ record PlanningArchitectureInterface : Set₁ where
     Plan   : Set
     Design : Set
 
-    PlanAdmits           : Plan → Design → Set
-    PhysicallyFeasible   : Design → Set
-    CodeCompliant        : Design → Set
+    PlanAdmits            : Plan → Design → Set
+    PhysicallyFeasible    : Design → Set
+    CodeCompliant         : Design → Set
     EnvironmentAdmissible : Design → Set
-    EconomicallyViable   : Design → Set
-    SociallyDesired      : Design → Set
-
-open PlanningArchitectureInterface public
+    EconomicallyViable    : Design → Set
+    SociallyDesired       : Design → Set
 
 record FullyAdmissibleRealisation
     (interface : PlanningArchitectureInterface)
-    (plan : Plan interface)
-    (design : Design interface) : Set where
+    (plan : PlanningArchitectureInterface.Plan interface)
+    (design : PlanningArchitectureInterface.Design interface) : Set where
   field
-    planningAdmissible : PlanAdmits interface plan design
-    physicallyFeasible : PhysicallyFeasible interface design
-    codeCompliant : CodeCompliant interface design
-    environmentallyAdmissible : EnvironmentAdmissible interface design
-    economicallyViable : EconomicallyViable interface design
-
-open FullyAdmissibleRealisation public
+    planningAdmissible :
+      PlanningArchitectureInterface.PlanAdmits interface plan design
+    physicallyFeasible :
+      PlanningArchitectureInterface.PhysicallyFeasible interface design
+    codeCompliant :
+      PlanningArchitectureInterface.CodeCompliant interface design
+    environmentallyAdmissible :
+      PlanningArchitectureInterface.EnvironmentAdmissible interface design
+    economicallyViable :
+      PlanningArchitectureInterface.EconomicallyViable interface design
 
 data Plan : Set where
   nominalPlan : Plan
@@ -78,11 +79,13 @@ interface =
     }
 
 planningAdmissibilityDoesNotImplyPhysicalRealisability :
-  PlanAdmits interface nominalPlan paperDesign ×
-  (PhysicallyFeasible interface paperDesign → ⊥)
+  PlanningArchitectureInterface.PlanAdmits interface nominalPlan paperDesign ×
+  (PlanningArchitectureInterface.PhysicallyFeasible
+      interface paperDesign → ⊥)
 planningAdmissibilityDoesNotImplyPhysicalRealisability =
   tt , (λ feasible → feasible)
 
 architectureCanExposePlanLevelInfeasibility :
-  (PhysicallyFeasible interface paperDesign → ⊥)
+  (PlanningArchitectureInterface.PhysicallyFeasible
+      interface paperDesign → ⊥)
 architectureCanExposePlanLevelInfeasibility feasible = feasible
