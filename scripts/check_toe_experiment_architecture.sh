@@ -21,26 +21,32 @@ FILES=(
   DASHI/Programmes/BrainExact.agda
   DASHI/Programmes/BrainHemibrainExperimentExact.agda
   DASHI/Programmes/BrainKernelSemanticsCorrectionExact.agda
+  DASHI/Programmes/BrainCoarsePersistenceNoGoExact.agda
   DASHI/Programmes/QuantumExact.agda
   DASHI/Programmes/QuantumFalsifiableTargetExact.agda
   DASHI/Programmes/QuantumExecutablePromotionReceiptExact.agda
+  DASHI/Programmes/QuantumCHSHDiscriminatorExact.agda
   DASHI/Programmes/DashifineExact.agda
   DASHI/Programmes/DashifineBenchmarkCorrectionExact.agda
+  DASHI/Programmes/DashifineWaveProjectionFamilyExact.agda
   DASHI/Programmes/GrokkingExact.agda
   DASHI/Programmes/GrokkingValidationCorrectionExact.agda
   DASHI/Programmes/GrokkingHeldOutToleranceExact.agda
   DASHI/Programmes/CoreReferenceExact.agda
   DASHI/Programmes/CoreReferenceCorrectionExact.agda
   DASHI/Programmes/CoreExecutableParityReceiptExact.agda
+  DASHI/Programmes/CoreCarrierReferenceCorrespondenceExact.agda
   DASHI/Programmes/FRACDASHExact.agda
   DASHI/Programmes/FRACDASHCompilerCorrectionExact.agda
   DASHI/Programmes/FRACDASHNumericInterpreterTargetExact.agda
   DASHI/Programmes/TestHarnessExact.agda
   DASHI/Programmes/TestHarnessEvidenceCorrectionExact.agda
   DASHI/Programmes/TestHarnessFamilyReceiptExact.agda
+  DASHI/Programmes/TestHarnessSelectedFamiliesExact.agda
   DASHI/Programmes/RTXExact.agda
   DASHI/Programmes/RTXLightTransportRefinementExact.agda
   DASHI/Programmes/RTXExecutableLightTransportReceiptExact.agda
+  DASHI/Programmes/RTXQuantitativeRefinementExact.agda
   DASHI/Programmes/BidirectionalSatelliteValidation.agda
   DASHI/Programmes/Everything.agda
   DASHI/Programmes/ResearchProgrammeValidation.agda
@@ -99,13 +105,19 @@ grep -q 'currentNSFrontierIsCutoffUniformIntegratedCoherentBudgetIsTrue' DASHI/P
 grep -q 'dynamicCovarianceWallIsLiveAnalyticFrontierIsTrue' DASHI/Programmes/CFDAdvancedNSFrontierExact.agda
 grep -q 'joinByIdentityAdapterAfterNSBranchMergeIsTrue' DASHI/Programmes/CFDAdvancedNSFrontierExact.agda
 grep -q 'localSignKernelIsAutomaticallyIdempotentIsFalse' DASHI/Programmes/BrainKernelSemanticsCorrectionExact.agda
+grep -q '^hemibrainCoarseErasureBlocksConsumerTransport :' DASHI/Programmes/BrainCoarsePersistenceNoGoExact.agda
+grep -q 'zeroCoarseDefectImpliesConsumerPersistenceIsFalse' DASHI/Programmes/BrainCoarsePersistenceNoGoExact.agda
 grep -q 'oneTaskDominanceIsUniversalLearningIsFalse' DASHI/Programmes/DashifineBenchmarkCorrectionExact.agda
+grep -q '^waveProjectionReceiptYieldsFamilyDominance :' DASHI/Programmes/DashifineWaveProjectionFamilyExact.agda
+grep -q 'originalWaveWinFillsProjectedTaskReceiptsIsFalse' DASHI/Programmes/DashifineWaveProjectionFamilyExact.agda
 grep -q 'twoPointPerfectTimingFitIsUniversalLawIsFalse' DASHI/Programmes/GrokkingValidationCorrectionExact.agda
 grep -q '^combinedApproximateFamilyLaw :' DASHI/Programmes/GrokkingHeldOutToleranceExact.agda
 grep -q 'postHocToleranceIsIndependentValidationIsFalse' DASHI/Programmes/GrokkingHeldOutToleranceExact.agda
 grep -q 'backendFingerprintEqualityIsStateEqualityIsFalse' DASHI/Programmes/CoreReferenceCorrectionExact.agda
 grep -q 'matchingFingerprintIsSemanticEqualityIsFalse' DASHI/Programmes/CoreExecutableParityReceiptExact.agda
 grep -q 'referenceCommutationCanCarryFormalClaimsIsTrue' DASHI/Programmes/CoreExecutableParityReceiptExact.agda
+grep -q '^referenceFoldCommutes :' DASHI/Programmes/CoreCarrierReferenceCorrespondenceExact.agda
+grep -q '^referenceUnfoldCommutes :' DASHI/Programmes/CoreCarrierReferenceCorrespondenceExact.agda
 grep -q '^finiteTraceCommutes :' DASHI/Programmes/FRACDASHCompilerCorrectionExact.agda
 grep -q '^finiteTraceReadoutCorrect :' DASHI/Programmes/FRACDASHCompilerCorrectionExact.agda
 grep -q '^blockedPrefixChoosesNext :' DASHI/Programmes/FRACDASHNumericInterpreterTargetExact.agda
@@ -116,11 +128,16 @@ grep -q 'selectedGramIsUniformFrameTheoremIsFalse' DASHI/Programmes/ExecutableRe
 grep -q '^receiptPlusUniquenessPinsPrediction :' DASHI/Programmes/TestHarnessEvidenceCorrectionExact.agda
 grep -q 'oneGlobalBenchmarkPassedBooleanIsSufficientIsFalse' DASHI/Programmes/TestHarnessFamilyReceiptExact.agda
 grep -q 'familyIndexedTypedReceiptCanEnterPredictionEnvelopeIsTrue' DASHI/Programmes/TestHarnessFamilyReceiptExact.agda
+grep -q 'phase3CompleteLogIsUniversalLearningTheoremIsFalse' DASHI/Programmes/TestHarnessSelectedFamiliesExact.agda
 grep -q 'runtimeAcceptedMeansEstablishedPhysicalTheoryIsFalse' DASHI/Programmes/QuantumExecutablePromotionReceiptExact.agda
 grep -q 'experimentReceiptStillNeedsPhysicalPromotionGateIsTrue' DASHI/Programmes/QuantumExecutablePromotionReceiptExact.agda
+grep -q '^chshViolationRefutesCandidateEquivalence :' DASHI/Programmes/QuantumCHSHDiscriminatorExact.agda
+grep -q 'chshCalibrationDischargesPhysicalPromotionGateIsFalse' DASHI/Programmes/QuantumCHSHDiscriminatorExact.agda
 grep -q 'lowerMDLIsPhysicalTruthIsFalse' DASHI/Programmes/RTXLightTransportRefinementExact.agda
 grep -q 'lowerValidationMAEIsPhysicalTruthIsFalse' DASHI/Programmes/RTXExecutableLightTransportReceiptExact.agda
 grep -q 'heldOutObservationReceiptCanSupportApproximationClaimIsTrue' DASHI/Programmes/RTXExecutableLightTransportReceiptExact.agda
+grep -q '^iteratedRefinementWithinDepthBudget :' DASHI/Programmes/RTXQuantitativeRefinementExact.agda
+grep -q 'benchmarkQuantileImprovementIsExactPreservationIsFalse' DASHI/Programmes/RTXQuantitativeRefinementExact.agda
 grep -q 'discriminatorAloneIsQuantumGravityTheoryIsFalse' DASHI/Programmes/QuantumFalsifiableTargetExact.agda
 
 if ! command -v agda >/dev/null 2>&1; then
@@ -136,4 +153,4 @@ agda -i . -i /usr/share/agda-stdlib DASHI/Programmes/Everything.agda
 agda -i . -i /usr/share/agda-stdlib DASHI/Core/Everything.agda
 agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/Everything.agda
 
-echo "TOE experiment, same-candidate QFT/GR recovery, cross-repository programme, and BIDI correction checks passed."
+echo "TOE experiment, same-candidate QFT/GR recovery, cross-repository programme, and literal BIDI weld checks passed."
