@@ -3,84 +3,75 @@ module DASHI.Analysis.RiemannAristotleCurrentFrontierExact where
 ------------------------------------------------------------------------
 -- AUTHORITATIVE CURRENT FRONTIER FOR THE ARISTOTLE / RH LANE
 --
--- Maintained bidirectionally: forward from exact source owners and backward
--- from the unweakened RH contradiction.
+-- Maintained bidirectionally: forward from machine-checked Lean owners and
+-- backward from the unweakened RH contradiction.
 --
--- CLOSED IN LEAN / EXISTING BRIDGE
+-- NEWEST KERNEL-CHECKED LEAN ADVANCE (2026-08-30)
 --
---  * universal positive same-ordinate observer construction;
---  * two-radius cluster height defect: positive for an off-line fibre and zero
---    for an entirely critical-line fibre;
---  * high-ordinate prime projective defect exactly zero;
---  * deterministic Gamma/pole projective response vectors and generic exact
---    two-nuisance Schur algebra;
---  * target defect has exact r^2 leading coefficient plus r^4 remainder;
---  * reflection pairing cancels the odd-height channel;
---  * uniform reflection-pair curvature control;
---  * unit ordinate shells + unconditional local zero counts prove absolute
---    summability of the delta^-2 carrier and absolute convergence of the signed
---    reflection far tail;
---  * the supplied Lean session reports a successful full bridge build and only
---    the standard Mathlib axioms in the capstone audit.
+-- The supplied Zeta23Bridge session reports `lake build Zeta23Bridge`
+-- successful (8883 jobs) and the capstone axiom audit returning only
+-- propext/Classical.choice/Quot.sound.
 --
--- SOURCE-AUDITED STRICT CONTRADICTION TARGET
+-- It now owns, for every cutoff J >= 1,
 --
--- `D_off` is the complement of `SameOrd t`.  After short-support prime
--- annihilation and exact deterministic Schur elimination,
+--   farShellBound A |t| J
+--     = 18 A log(|t|+4)/J + 72 A/sqrt(J),
 --
---     E D_cluster = E D_off.
+-- together with:
 --
--- Hence a genuine analytic theorem
+--   * a proof that the literal zero tail is bounded by that expression;
+--   * convergence of this explicit bound to zero and arbitrary-accuracy cutoff
+--     selection;
+--   * a genuinely finite signed near shell carrier;
+--   * transport of the decomposition onto the literal offOrdProjectiveDefect:
 --
---     ||E D_off||^2 <= B < ||E D_cluster||^2
+--       |D_off(g,t,r) - 1/2 nearSignedSum(t,J)|
+--         <= 1/2 C farShellBound A |t| J.
 --
--- is exactly the contradiction target.  Elimination algebra cannot manufacture
--- the strict inequality; signed zero analysis must.
+-- The aggregate root also imports LiteralWeilDeterministicProjectiveSchur, so
+-- the previously source-only deterministic Schur compiler is now part of this
+-- reported kernel-checked Lean build.
 --
--- AGDA S2 COMPILATION NOW CLOSED
+-- BIDI CONSEQUENCE
 --
--- The convergent infinite carrier is cut at one explicit shell cutoff J:
+-- The infinite part of S2 is no longer a research socket.  For a three-taper
+-- observer, let E denote exact elimination of the deterministic pole/Gamma
+-- response vectors and let D_near(J) be the three-vector of finite signed near
+-- sums.  Write
 --
---     R_off <= R_near(J) + R_far(J)
---           <= B_near(J) + B_far(J)
---            < M_cluster.
+--   X = E D_off,
+--   N = E D_near(J),
+--   F = E (D_off - D_near(J)).
 --
--- Agda now owns:
+-- Then X = N + F, and the remaining finite theorem may be targeted through
 --
---  * near/far scalar budget composition;
---  * producer sockets for a finite SIGNED near core and quantitative far tail;
---  * same-cutoff compatibility;
---  * an allowance compiler: if
+--   ||X||^2 <= 2 ||N||^2 + 2 ||F||^2.
 --
---        B_far(J) < epsilon
---        B_near(J) + epsilon < M_cluster,
+-- The far term F is mechanically controlled by the explicit cutoff theorem plus
+-- Schur contraction.  Therefore the genuinely open S2 object is the finite
+-- signed post-Schur near-core energy ||N||^2, not the infinite zero tail.
 --
---    then the strict whole-carrier bound and contradiction follow;
---  * a far-tail decay-law interface expressing eventual smallness.
+-- CURRENT RESEARCH CUTSET
 --
--- Important bidi correction: far-tail decay alone does NOT choose the final J,
--- because B_near also changes with J.  A concrete producer must find one common
--- cutoff where the growing finite core and shrinking far tail fit simultaneously.
+--   S1. construct a short three-taper family such that the deterministic
+--       pole/Gamma vectors have rank two and the off-line same-ordinate cluster
+--       survives with an explicit positive Schur margin M_cluster;
 --
--- HIGHEST-ALPHA LIVE CUTSET
+--   S2a. CLOSED IN LEAN: explicit far-shell cutoff formula and literal D_off
+--        finite-near/far decomposition;
 --
---   S1. construct the short three-taper family so deterministic pole/Gamma
---       vectors have rank two and the off-line cluster survives the quotient
---       with an explicit positive Schur margin M_cluster;
+--   S2b. prove a signed bound on the FINITE post-Schur near vector
 --
---   S2a. expose a quantitative tail law B_far(J) / modulus from the existing
---        kernel-checked curvature + shell summability theorem;
+--          ||E D_near(J)||^2 <= B_near(J)
 --
---   S2b. for candidate J, evaluate/bound the finitely many nearby shells as one
---        signed oscillatory core B_near(J);
+--        for a jointly chosen cutoff J;
 --
---   S2c. find ONE J and epsilon with
+--   S2c. combine that finite bound with the explicit Lean far remainder so that
 --
---          B_far(J) < epsilon
---          B_near(J) + epsilon < M_cluster;
+--          2 B_near(J) + 2 B_error(J) < M_cluster.
 --
---        after which the Agda allowance/near-far compilers close S2 and fire the
---        whole-carrier contradiction mechanically;
+--        `RiemannAristotleFiniteNearCoreSchurCompilerExact` then closes the
+--        strict off-carrier contradiction mechanically;
 --
 --   S3. certify the complementary low-ordinate region, or replace the split by
 --       a universal construction;
@@ -108,60 +99,65 @@ record AristotleCurrentFrontier : Set where
     highOrdinatePrimeProjectiveDebtZeroInLeanIsTrue :
       highOrdinatePrimeProjectiveDebtZeroInLean ≡ true
 
-    targetLeadingCoefficientAndRemainderClosedInLean : Bool
-    targetLeadingCoefficientAndRemainderClosedInLeanIsTrue :
-      targetLeadingCoefficientAndRemainderClosedInLean ≡ true
+    deterministicProjectiveSchurKernelCheckedInLean : Bool
+    deterministicProjectiveSchurKernelCheckedInLeanIsTrue :
+      deterministicProjectiveSchurKernelCheckedInLean ≡ true
 
-    reflectionPairKernelClosedInLean : Bool
-    reflectionPairKernelClosedInLeanIsTrue : reflectionPairKernelClosedInLean ≡ true
-    reflectionFarTailAbsoluteConvergenceClosedInLean : Bool
-    reflectionFarTailAbsoluteConvergenceClosedInLeanIsTrue :
-      reflectionFarTailAbsoluteConvergenceClosedInLean ≡ true
-    uniformReflectionCarrierCurvatureClosedInLean : Bool
-    uniformReflectionCarrierCurvatureClosedInLeanIsTrue :
-      uniformReflectionCarrierCurvatureClosedInLean ≡ true
+    explicitFarShellCutoffBoundClosedInLean : Bool
+    explicitFarShellCutoffBoundClosedInLeanIsTrue :
+      explicitFarShellCutoffBoundClosedInLean ≡ true
+
+    explicitFarShellTendsToZeroClosedInLean : Bool
+    explicitFarShellTendsToZeroClosedInLeanIsTrue :
+      explicitFarShellTendsToZeroClosedInLean ≡ true
+
+    finiteSignedNearCarrierClosedInLean : Bool
+    finiteSignedNearCarrierClosedInLeanIsTrue :
+      finiteSignedNearCarrierClosedInLean ≡ true
+
+    literalDoffCutoffCarrierClosedInLean : Bool
+    literalDoffCutoffCarrierClosedInLeanIsTrue :
+      literalDoffCutoffCarrierClosedInLean ≡ true
+
     latestLeanBridgeBuildKernelChecked : Bool
     latestLeanBridgeBuildKernelCheckedIsTrue :
       latestLeanBridgeBuildKernelChecked ≡ true
 
-    wholePostSchurCarrierStrictBudgetIsContradictionTarget : Bool
-    wholePostSchurCarrierStrictBudgetIsContradictionTargetIsTrue :
-      wholePostSchurCarrierStrictBudgetIsContradictionTarget ≡ true
-    eliminationAlgebraAloneClosesStrictBudget : Bool
-    eliminationAlgebraAloneClosesStrictBudgetIsFalse :
-      eliminationAlgebraAloneClosesStrictBudget ≡ false
-
     nearFarShellCompositionCompilerClosedInAgda : Bool
     nearFarShellCompositionCompilerClosedInAgdaIsTrue :
       nearFarShellCompositionCompilerClosedInAgda ≡ true
+
     nearFarAllowanceCompilerClosedInAgda : Bool
     nearFarAllowanceCompilerClosedInAgdaIsTrue :
       nearFarAllowanceCompilerClosedInAgda ≡ true
-    jointCutoffCompilerClosedInAgda : Bool
-    jointCutoffCompilerClosedInAgdaIsTrue :
-      jointCutoffCompilerClosedInAgda ≡ true
 
-    quantitativeFarShellEnvelopeClosed : Bool
-    quantitativeFarShellEnvelopeClosedIsFalse :
-      quantitativeFarShellEnvelopeClosed ≡ false
-    explicitFarTailModulusTransportedToAgda : Bool
-    explicitFarTailModulusTransportedToAgdaIsFalse :
-      explicitFarTailModulusTransportedToAgda ≡ false
-    finiteSignedNearShellCoreClosed : Bool
-    finiteSignedNearShellCoreClosedIsFalse :
-      finiteSignedNearShellCoreClosed ≡ false
-    jointNearFarCutoffFound : Bool
-    jointNearFarCutoffFoundIsFalse : jointNearFarCutoffFound ≡ false
+    finiteNearCoreSchurPerturbationCompilerClosedInAgda : Bool
+    finiteNearCoreSchurPerturbationCompilerClosedInAgdaIsTrue :
+      finiteNearCoreSchurPerturbationCompilerClosedInAgda ≡ true
+
+    explicitLeanTailFormulaTransportedAsAgdaProof : Bool
+    explicitLeanTailFormulaTransportedAsAgdaProofIsFalse :
+      explicitLeanTailFormulaTransportedAsAgdaProof ≡ false
+
+    finiteSignedNearSchurCancellationClosed : Bool
+    finiteSignedNearSchurCancellationClosedIsFalse :
+      finiteSignedNearSchurCancellationClosed ≡ false
+
+    jointFiniteNearFarMarginClosed : Bool
+    jointFiniteNearFarMarginClosedIsFalse :
+      jointFiniteNearFarMarginClosed ≡ false
 
     deterministicNuisanceThreeTaperConstructionClosed : Bool
     deterministicNuisanceThreeTaperConstructionClosedIsFalse :
       deterministicNuisanceThreeTaperConstructionClosed ≡ false
+
     lowOrdinateComplementCertified : Bool
     lowOrdinateComplementCertifiedIsFalse :
       lowOrdinateComplementCertified ≡ false
 
     finalRHImplicationClosed : Bool
     finalRHImplicationClosedIsFalse : finalRHImplicationClosed ≡ false
+
     boundedReading : String
 
 open AristotleCurrentFrontier public
@@ -178,7 +174,6 @@ canonicalAristotleCurrentFrontier =
     true refl
     true refl
     true refl
-    false refl
     true refl
     true refl
     true refl
@@ -188,5 +183,4 @@ canonicalAristotleCurrentFrontier =
     false refl
     false refl
     false refl
-    false refl
-    "Lean closes convergence and uniform curvature of the signed reflection tail. Agda now closes the full S2 composition logic, including a remaining-allowance compiler and a joint-cutoff boundary: far-tail decay alone cannot choose J because the finite signed near core changes with J. The remaining S2 work is producer-side: expose an explicit B_far(J)/modulus, bound the finite signed B_near(J), and find one common J where their total beats the S1 cluster margin. S1 and low-ordinate certification remain open; RH is not derived."
+    "The newest kernel-checked Lean tranche closes the explicit far-shell modulus, arbitrary-accuracy cutoff selection, the finite signed near carrier, and the literal D_off finite-near/far decomposition. The deterministic projective Schur compiler is also now inside the reported aggregate build. Agda therefore moves the first unproved S2 theorem to the finite post-Schur near-core energy: bound ||E D_near(J)||^2 strongly enough that its weighted sum with the explicit far-error energy lies below the surviving S1 cluster margin. The infinite zero tail is no longer the research bottleneck. S1 and low-ordinate certification remain open; RH is not derived."
