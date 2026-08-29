@@ -9,11 +9,14 @@ FILES=(
   DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
   DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
   DASHI/Reasoning/RelationRepresentationExternalReceiptAdmissionExact.agda
+  DASHI/Reasoning/ImplementationExperimentProvenanceExact.agda
   DASHI/Reasoning/DASHIgGrokkingEmpiricalBridgeExact.agda
+  DASHI/Reasoning/DASHIgGrokkingStage67SpecimenExact.agda
   DASHI/Reasoning/RelationRepresentationAdequacyExact.agda
   DASHI/Reasoning/RelationRepresentationRealizationExact.agda
   DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda
   DASHI/Reasoning/RelationRepresentationExperimentProtocolExact.agda
+  DASHI/Reasoning/RelationRepresentationCandidateDiscriminationExact.agda
   DASHI/Reasoning/FiniteRelationLinearAlgebraProducerExact.agda
   DASHI/Reasoning/FiniteRelationSVDJacobianProducerExact.agda
   DASHI/Reasoning/EigenslurFlourishingRelationBoundaryExact.agda
@@ -41,6 +44,12 @@ grep -q 'bothDerivativeSummariesAreTwoRunPrelims' DASHI/Reasoning/DASHIgGrokking
 grep -q 'dashigPrelimIsPrakashMartinReproduction' DASHI/Reasoning/DASHIgGrokkingEmpiricalBridgeExact.agda
 grep -q 'dashigDerivativeComparisonRemainsTwoRunPrelim' DASHI/Reasoning/RelationRepresentationRegression.agda
 
+grep -q 'mirrorOwnershipImpliesImplementationAuthorship' DASHI/Reasoning/ImplementationExperimentProvenanceExact.agda
+grep -q 'canonicalLeechDASHIgProvenance' DASHI/Reasoning/ImplementationExperimentProvenanceExact.agda
+grep -q 'heldOutContextSeparatesOffsetFromAffine' DASHI/Reasoning/RelationRepresentationCandidateDiscriminationExact.agda
+grep -q 'localPerturbationSeparatesOffsetFromRotation' DASHI/Reasoning/RelationRepresentationCandidateDiscriminationExact.agda
+grep -q 'bestFitFamilyIsSemanticRealization' DASHI/Reasoning/RelationRepresentationCandidateDiscriminationExact.agda
+
 grep -q 'grokkingDynamicValidation' DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
 grep -q 'spectralDiagnosticIsCausalMechanismByDefault' DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
 grep -q 'ExternalStudyReceipt' DASHI/Reasoning/RelationRepresentationExternalReceiptAdmissionExact.agda
@@ -49,10 +58,13 @@ grep -q 'oneHumourConsumerSafetyDoesNotEstablishPluralSafety' DASHI/Reasoning/Hu
 grep -q 'neuralSearchMayReopenFromOffsetToRotation' DASHI/Reasoning/NeuralSpectralRelationCrossPollinationExact.agda
 
 if command -v agda >/dev/null 2>&1; then
+  agda -i . -i src DASHI/Reasoning/ImplementationExperimentProvenanceExact.agda
   agda -i . -i src DASHI/Reasoning/DASHIgGrokkingEmpiricalBridgeExact.agda
+  agda -i . -i src DASHI/Reasoning/DASHIgGrokkingStage67SpecimenExact.agda
   agda -i . -i src DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
   agda -i . -i src DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
   agda -i . -i src DASHI/Reasoning/RelationRepresentationExternalReceiptAdmissionExact.agda
+  agda -i . -i src DASHI/Reasoning/RelationRepresentationCandidateDiscriminationExact.agda
   agda -i . -i src DASHI/Reasoning/FiniteRelationLinearAlgebraProducerExact.agda
   agda -i . -i src DASHI/Reasoning/FiniteRelationSVDJacobianProducerExact.agda
   agda -i . -i src DASHI/Reasoning/RelationRepresentationRegression.agda
