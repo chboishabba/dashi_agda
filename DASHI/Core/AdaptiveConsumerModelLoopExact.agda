@@ -5,6 +5,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.ConsumerRelativeReductionSearchExact as Search
 import DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact as Approx
+import DASHI.Core.AdaptiveFidelityConsumerMarginExact as Fidelity
 import DASHI.Core.PredictionEnvelopeExact as Envelope
 import DASHI.Core.RobustInterventionAcrossHypothesesExact as Robust
 import DASHI.Core.ConsumerIndexedGovernedTransitionExact as Governed
@@ -26,9 +27,9 @@ import DASHI.Core.AffectedDependencyClosureExact as Dependency
 --   -> new evidence
 --   -> selectively reopen only dependency-affected certificates.
 --
--- This module deliberately composes existing theorem owners instead of creating
--- a second future-equivalence, fidelity, evidence, intervention, authority or
--- dependency calculus.
+-- This composes existing theorem owners instead of creating a second
+-- future-equivalence, fidelity, evidence, intervention, authority or dependency
+-- calculus.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
@@ -74,13 +75,9 @@ approximateAssessmentPreservesDeclaredDecision :
     {decide : Observation → Decision} →
   Approx.ApproximateDecisionCertificate model decide →
   (input : Approx.TraceInput Fine Action) →
-  decide
-    (DASHI.Core.AdaptiveFidelityConsumerMarginExact.low
-      (Approx.approximateTraceFidelityPair model) input)
+  decide (Fidelity.low (Approx.approximateTraceFidelityPair model) input)
   ≡
-  decide
-    (DASHI.Core.AdaptiveFidelityConsumerMarginExact.high
-      (Approx.approximateTraceFidelityPair model) input)
+  decide (Fidelity.high (Approx.approximateTraceFidelityPair model) input)
 approximateAssessmentPreservesDeclaredDecision =
   Approx.approximateReductionDecisionSafe
 
@@ -107,10 +104,6 @@ open ReopenableReductionPortfolio public
 
 ------------------------------------------------------------------------
 -- 3. Live evidence fibre and intervention branch.
---
--- Hypotheses are fine states compatible with current evidence.  The action
--- branch is explicitly separate from authority: robust model-relative decision
--- support does not itself authorize execution.
 ------------------------------------------------------------------------
 
 record LiveEvidenceFibre
@@ -122,6 +115,11 @@ record LiveEvidenceFibre
     evidenceReference : String
 
 open LiveEvidenceFibre public
+
+LiveDeclared :
+  ∀ {Evidence Fine} →
+  LiveEvidenceFibre Evidence Fine → Fine → Set
+LiveDeclared fibre = compatible fibre (evidence fibre)
 
 record AuthorityGate (Intervention : Set) : Set₁ where
   constructor authorityGate
@@ -177,58 +175,11 @@ record SelectiveCertificateReopening
 open SelectiveCertificateReopening public
 
 ------------------------------------------------------------------------
--- 5. Whole loop package.  This is intentionally an architecture carrier rather
--- than an automatic controller: applications still supply the consumer,
--- evidence fibre, intervention preference relation, authority and dependencies.
-------------------------------------------------------------------------
-
-record AdaptiveConsumerModelLoop : Set₂ where
-  constructor adaptiveConsumerModelLoop
-  field
-    Fine Action Observation Decision Evidence Intervention Outcome Artifact : Set
-
-    fineStep : Action → Fine → Fine
-    observe : Fine → Observation
-
-    candidate : Search.ReductionCandidate
-      Fine Action Observation fineStep observe
-    assessment : ConsumerAssessment {Decision = Decision} candidate
-    portfolio : ReopenableReductionPortfolio
-      {fineStep = fineStep} {observe = observe}
-
-    liveFibre : LiveEvidenceFibre Evidence Fine
-
-    interventionSystem : Robust.HypothesisInterventionSystem
-      Fine Intervention Outcome
-    authorityGate : AuthorityGate Intervention
-    decisionBranch : AdaptiveDecisionBranch
-      interventionSystem
-      (Envelope.Compatible._compatible_ (compatible liveFibre) (evidence liveFibre))
-      authorityGate
-
-    evidenceUpdate : EvidenceUpdate Evidence
-
-    Depends : Artifact → Artifact → Set
-    changedArtifact : Artifact
-    selectiveReopening :
-      SelectiveCertificateReopening Artifact Depends changedArtifact
-
-    consumerReference : String
-    experimentLanguageReference : String
-    validationReference : String
-
-------------------------------------------------------------------------
--- Since projections out of a record field are syntactically awkward for the
--- dependent fibre above, expose the live-declaration helper explicitly.
-------------------------------------------------------------------------
-
-LiveDeclared :
-  ∀ {Evidence Fine} →
-  LiveEvidenceFibre Evidence Fine → Fine → Set
-LiveDeclared fibre = compatible fibre (evidence fibre)
-
-------------------------------------------------------------------------
--- A less dependent application-facing capstone using LiveDeclared directly.
+-- 5. Whole-loop receipt.
+--
+-- The record intentionally does not decide which of the exact / approximate /
+-- refuted branches holds, nor whether the intervention or measurement branch is
+-- chosen.  Those are proof-relevant application inputs.
 ------------------------------------------------------------------------
 
 record AdaptiveConsumerLoopReceipt : Set₂ where
@@ -245,6 +196,7 @@ record AdaptiveConsumerLoopReceipt : Set₂ where
       {fineStep = fineStep} {observe = observe}
 
     liveFibre : LiveEvidenceFibre Evidence Fine
+
     interventionSystem : Robust.HypothesisInterventionSystem
       Fine Intervention Outcome
     authorityGate : AuthorityGate Intervention
