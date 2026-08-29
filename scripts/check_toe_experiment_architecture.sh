@@ -65,12 +65,10 @@ for witness in \
   }
 done
 
-# Original substantive sockets.
 grep -q '^HemibrainMeasurementClosesPrediction :' DASHI/Programmes/BrainHemibrainExperimentExact.agda
 grep -q '^falsifiableTargetRefutesCurrentEquivalence :' DASHI/Programmes/QuantumFalsifiableTargetExact.agda
 grep -q '^iteratedRefinementPreservesObservation :' DASHI/Programmes/RTXLightTransportRefinementExact.agda
 
-# BIDI correction compiler and forward/backward cuts.
 grep -q '^correctedSatelliteYieldsClaimTransport :' DASHI/Programmes/BidirectionalSatelliteCorrectionExact.agda
 grep -q '^informationLossBlocksCorrectedBridge :' DASHI/Programmes/BidirectionalSatelliteCorrectionExact.agda
 grep -q '^collisionForcesRepresentationRepair :' DASHI/Programmes/CFDChartCorrectionExact.agda
