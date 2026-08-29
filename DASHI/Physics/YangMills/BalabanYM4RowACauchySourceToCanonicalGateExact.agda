@@ -33,7 +33,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc)
 import Data.Nat.Base as ℕ
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _<_)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; -_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -154,7 +154,7 @@ record CauchyCanonicalRowATrajectory (cutoff : Nat) : Set₁ where
       ≤ betaInteraction j
 
     inverseSquareRelation : ∀ j →
-      inverseSquare j * (coupling j * coupling j) ≡ (+ 1 / 1)
+      inverseSquare j * (coupling j * coupling j) ≡ 1ℚ
 
     couplingMonotone : ∀ j → coupling j ≤ coupling (suc j)
 
