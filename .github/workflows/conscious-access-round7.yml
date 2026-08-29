@@ -1,0 +1,39 @@
+name: conscious-access-round7
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Biology/TernaryCanonicalOrientationExact.agda'
+      - 'DASHI/Biology/TernaryFixedTransverseFiniteExact.agda'
+      - 'DASHI/Biology/TernaryRotationReflectionSeparationExact.agda'
+      - 'DASHI/Biology/NondegenerateObserverAdmissionExact.agda'
+      - 'DASHI/Biology/NeuralFixedTransverseObserverBridgeExact.agda'
+      - 'DASHI/Biology/CyclotomicPhaseAmplitudeBoundaryExact.agda'
+      - 'DASHI/Biology/EqualCardinalityStructureBoundaryExact.agda'
+      - 'DASHI/Biology/OggTernaryEquivariantLabellingNoGoExact.agda'
+      - 'DASHI/Biology/OperatorStructureAdmissionBoundaryExact.agda'
+      - 'DASHI/Biology/ConsciousAccessRound7AristotleSourceBridge.agda'
+      - 'DASHI/Biology/ConsciousAccessRound7AristotleRegression.agda'
+      - 'DASHI/Biology/Everything.agda'
+      - 'Docs/support/reference/ConsciousAccessRound7AristotleReturn.md'
+      - 'scripts/check_conscious_access_round7.sh'
+      - '.github/workflows/conscious-access-round7.yml'
+  workflow_dispatch:
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check Round Seven Aristotle return
+        env:
+          AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
+          DASHI_REPO_ROOT: ${{ github.workspace }}
+          DASHI_AGDA29_CACHE_ROOT: ${{ runner.temp }}/dashi-agda29
+          AGDA_LOG_PATH: ${{ github.workspace }}/agda-conscious-access-round7.log
+          AGDA_JOBS: '8'
+        run: bash scripts/check_conscious_access_round7.sh
