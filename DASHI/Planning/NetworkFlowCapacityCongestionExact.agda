@@ -1,7 +1,7 @@
 module DASHI.Planning.NetworkFlowCapacityCongestionExact where
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 
 ------------------------------------------------------------------------
 -- NETWORK FLOW / CAPACITY / CONGESTION
