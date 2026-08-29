@@ -8,10 +8,6 @@ import DASHI.Environment.LESDomainBasisBidiFrontierExact as Basis
 
 ------------------------------------------------------------------------
 -- REPOSITORY-NATIVE LES ADAPTER
---
--- The generic reduction kernel lives in DASHI.Core and is intentionally not an
--- environmental special case.  This module only instantiates its questions on
--- an LES DomainMechanismSocket.
 ------------------------------------------------------------------------
 
 MechanismReduction : Basis.DomainMechanismSocket → Set₁
@@ -35,8 +31,22 @@ record LESReductionRealization
 open LESReductionRealization public
 
 ------------------------------------------------------------------------
--- Exact active-experiment question.
+-- A reduced code can be consumer-safe without being a mechanistic realization.
+-- The latter receives an explicit commuting witness.
 ------------------------------------------------------------------------
+
+record LESMechanismRealizationWitness
+    (mechanism : Basis.DomainMechanismSocket)
+    (rom : MechanismReduction mechanism) : Set₁ where
+  constructor lesMechanismRealizationWitness
+  field
+    TargetMechanism : Set
+    targetMechanism : Basis.State mechanism → TargetMechanism
+    realization : Reduction.ReductionRealizationWitness rom targetMechanism
+    realizationAuthorityReference : String
+    validationReference : String
+
+open LESMechanismRealizationWitness public
 
 record LESExperimentDiscriminator
     (mechanism : Basis.DomainMechanismSocket)
@@ -51,12 +61,6 @@ record LESExperimentDiscriminator
       ≡ Basis.experimentObserve mechanism experiment right → ⊥
 
 open LESExperimentDiscriminator public
-
-------------------------------------------------------------------------
--- Prediction-envelope closure remains consumer-relative.  An experiment is
--- valuable when the measured fibre closes the declared prediction, not merely
--- when it produces a numerically different sensor reading.
-------------------------------------------------------------------------
 
 record LESMeasurementEnvelopeQuestion
     (mechanism : Basis.DomainMechanismSocket) : Set₁ where
@@ -78,11 +82,6 @@ record LESMeasurementEnvelopeQuestion
 
 open LESMeasurementEnvelopeQuestion public
 
-------------------------------------------------------------------------
--- Online assimilation is exact fibre intersection at this layer.  Weighting,
--- Bayesian semantics or correlated error models can be attached separately.
-------------------------------------------------------------------------
-
 record LESAssimilationStep
     (mechanism : Basis.DomainMechanismSocket) : Set₁ where
   constructor lesAssimilationStep
@@ -100,10 +99,6 @@ record LESAssimilationStep
 
 open LESAssimilationStep public
 
-------------------------------------------------------------------------
--- Mechanistic equifinality.
-------------------------------------------------------------------------
-
 record LESMechanismEquifinality
     (mechanism : Basis.DomainMechanismSocket)
     (rom : MechanismReduction mechanism) : Set₁ where
@@ -116,12 +111,6 @@ record LESMechanismEquifinality
     distinctMechanism : mechanismLabel left ≡ mechanismLabel right → ⊥
 
 open LESMechanismEquifinality public
-
-------------------------------------------------------------------------
--- A control in DomainMechanismSocket is already an intervention-like state
--- transition.  Consumer safety under arbitrary finite control traces is thus
--- inherited mechanically from the generic reduction theorem.
-------------------------------------------------------------------------
 
 controlTraceConsumerSafe :
   (mechanism : Basis.DomainMechanismSocket) →
@@ -136,19 +125,27 @@ controlTraceConsumerSafe :
 controlTraceConsumerSafe mechanism rom = Reduction.consumerFuturePreserved rom
 
 ------------------------------------------------------------------------
--- Environmental hysteresis/path dependence is a generic future-separation
--- witness instantiated on the mechanism's native evolution and observation.
+-- Intervention semantics are deliberately separate from passive observation.
 ------------------------------------------------------------------------
+
+record LESInterventionReduction
+    (mechanism : Basis.DomainMechanismSocket)
+    (rom : MechanismReduction mechanism) : Set₁ where
+  constructor lesInterventionReduction
+  field
+    compatible : Reduction.InterventionCompatibleReduction rom
+    interventionAuthorityReference : String
+    manipulatedMechanismReference : String
+    counterfactualComparisonReference : String
+    validationReference : String
+
+open LESInterventionReduction public
 
 LESHistorySensitiveFuture : Basis.DomainMechanismSocket → Set
 LESHistorySensitiveFuture mechanism =
   Reduction.HistorySensitiveFutureWitness
     (Basis.evolve mechanism)
     (Basis.observe mechanism)
-
-------------------------------------------------------------------------
--- Multi-fidelity and spatial-scale aliases.
-------------------------------------------------------------------------
 
 record LESFidelityEscalation
     (mechanism : Basis.DomainMechanismSocket)
@@ -177,28 +174,50 @@ record LESScaleSafeAggregation
 
 open LESScaleSafeAggregation public
 
+------------------------------------------------------------------------
+-- Cheap-model falsification before escalation: if one candidate code collapses
+-- two states whose declared future consumer separates, the candidate is not a
+-- safe ROM for that consumer/action language.
+------------------------------------------------------------------------
+
+record LESCandidateReductionFailure
+    (mechanism : Basis.DomainMechanismSocket) : Set₁ where
+  constructor lesCandidateReductionFailure
+  field
+    CandidateCode : Set
+    candidate : Basis.State mechanism → CandidateCode
+    failure : Reduction.CandidateReductionFailure
+      (Basis.evolve mechanism)
+      (Basis.observe mechanism)
+      candidate
+    rejectedReductionReference : String
+    nextFidelityReference : String
+
+open LESCandidateReductionFailure public
+
 record LESConsumerReductionBoundary : Set where
   constructor lesConsumerReductionBoundary
   field
     smallReconstructionErrorAloneProvesConsumerSafety : Bool
     smallReconstructionErrorAloneProvesConsumerSafetyIsFalse :
       smallReconstructionErrorAloneProvesConsumerSafety ≡ false
-
     sameFitImpliesSameMechanism : Bool
     sameFitImpliesSameMechanismIsFalse : sameFitImpliesSameMechanism ≡ false
-
     extraMeasurementAlwaysAddsInformation : Bool
     extraMeasurementAlwaysAddsInformationIsFalse :
       extraMeasurementAlwaysAddsInformation ≡ false
-
     spatialAveragingAutomaticallyCommutesWithDynamics : Bool
     spatialAveragingAutomaticallyCommutesWithDynamicsIsFalse :
       spatialAveragingAutomaticallyCommutesWithDynamics ≡ false
-
     controlConditioningEqualsIntervention : Bool
     controlConditioningEqualsInterventionIsFalse :
       controlConditioningEqualsIntervention ≡ false
-
+    consumerSafetyAutomaticallyProvesMechanismRealization : Bool
+    consumerSafetyAutomaticallyProvesMechanismRealizationIsFalse :
+      consumerSafetyAutomaticallyProvesMechanismRealization ≡ false
+    failedCheapReductionShouldBeForcedToFit : Bool
+    failedCheapReductionShouldBeForcedToFitIsFalse :
+      failedCheapReductionShouldBeForcedToFit ≡ false
     symmetryIsOptionalAndMustBeWitnessed : Bool
     symmetryIsOptionalAndMustBeWitnessedIsTrue :
       symmetryIsOptionalAndMustBeWitnessed ≡ true
@@ -208,4 +227,4 @@ open LESConsumerReductionBoundary public
 canonicalLESConsumerReductionBoundary : LESConsumerReductionBoundary
 canonicalLESConsumerReductionBoundary =
   lesConsumerReductionBoundary
-    false refl false refl false refl false refl false refl true refl
+    false refl false refl false refl false refl false refl false refl false refl true refl
