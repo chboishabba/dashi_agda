@@ -23,6 +23,9 @@ FILES=(
   DASHI/Analysis/RiemannAristotleDeterministicProjectiveSchurReturnExact.agda
   DASHI/Analysis/RiemannAristotleProjectedZeroTailSummabilityReturnExact.agda
   DASHI/Analysis/RiemannAristotleWholeCarrierCancellationCompilerExact.agda
+  DASHI/Analysis/RiemannAristotleNearFarShellBudgetCompilerExact.agda
+  DASHI/Analysis/RiemannAristotleNearFarShellProducerSocketsExact.agda
+  DASHI/Analysis/RiemannAristotleNearFarShellCompositionExact.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 )
@@ -48,6 +51,9 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotleDeterministicProjectiveSchurReturnExact.agda
   agda DASHI/Analysis/RiemannAristotleProjectedZeroTailSummabilityReturnExact.agda
   agda DASHI/Analysis/RiemannAristotleWholeCarrierCancellationCompilerExact.agda
+  agda DASHI/Analysis/RiemannAristotleNearFarShellBudgetCompilerExact.agda
+  agda DASHI/Analysis/RiemannAristotleNearFarShellProducerSocketsExact.agda
+  agda DASHI/Analysis/RiemannAristotleNearFarShellCompositionExact.agda
   agda DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 else
   echo "agda executable not present; trust scan only" >&2
