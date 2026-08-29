@@ -11,10 +11,6 @@ module DASHI.Physics.Closure.NSTriadKNMixedHelicityCompanionMassRound226Exact wh
 -- squared norm, while four copies multiply squared norm by 16. Hence
 --
 --   ||sum K_pq||^2 = 16 ||sum (u_p+ x u_q-)||^2.
---
--- This removes the Gram-debt representation from the final analytic statement:
--- it remains useful bookkeeping, but the physical companion itself is exactly
--- a mixed-helicity convolution mass.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -30,7 +26,6 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
-import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
@@ -91,13 +86,9 @@ complex3ScaleIZero :
   ≡ C3.complex3Zero F
 complex3ScaleIZero =
   Field.complex3Ext
-    (R.solve 0
-      ((C3.complexI F R.⊗ C3.complexZero F) R.⊜ C3.complexZero F) refl)
-    (R.solve 0
-      ((C3.complexI F R.⊗ C3.complexZero F) R.⊜ C3.complexZero F) refl)
-    (R.solve 0
-      ((C3.complexI F R.⊗ C3.complexZero F) R.⊜ C3.complexZero F) refl)
-  where module R = Ring.Solver F
+    (Field.complexMultiplyZeroRight (C3.complexI F))
+    (Field.complexMultiplyZeroRight (C3.complexI F))
+    (Field.complexMultiplyZeroRight (C3.complexI F))
 
 quadraticKernelCell :
   (E : C3.IntegerEmbedding F)
