@@ -39,7 +39,6 @@ grep -q '^continuumStressCompilerLevel :' "$validation"
 grep -q 'bcStressContinuumCompilerRound107Level' "$target"
 grep -q 'bcLiteralFirstVariationContinuumInterchangeRound107Level' "$target"
 
-# Keep prior source-coordinate distinctions live.
 grep -q 'physicalHessianSplitsIntrinsicPlusSubstitution' DASHI/Physics/YangMills/BalabanCMP116SubstitutedActivityHessianRound103Exact.agda
 grep -q '^substitutedFirstVariation :' DASHI/Physics/YangMills/BalabanCMP116SubstitutedActivityFirstVariationRound105Exact.agda
 grep -q '^sourceDerivativeBelowExistingMarkedShell :' DASHI/Physics/YangMills/BalabanCMP116FirstVariationStressPairingRound105Exact.agda
@@ -56,4 +55,5 @@ export AGDA_LOG_PATH="${AGDA_LOG_PATH:-$root/ym-round107-agda.log}"
 export AGDA_JOBS="${AGDA_JOBS:-4}"
 export DASHI_NO_TMUX="1"
 
-scripts/run_agda29_parallel_check.sh "$validation" "$target"
+scripts/run_agda29_parallel_check.sh "$validation"
+scripts/run_agda29_parallel_check.sh "$target"
