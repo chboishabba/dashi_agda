@@ -1,27 +1,9 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanA1Equation51FiveChannelSameObjectRound103Exact where
 
-------------------------------------------------------------------------
--- ROUND103 A1: EXPOSE THE TWO SOURCE-NATIVE SAME-OBJECT EQUALITIES
---
--- Instead of one opaque
---
---   finiteEvaluator = exact CMP109 (5.42) scalar,
---
--- factor it through CMP109's published Sect.5 two-jet:
---
---   actual mixed derivative
---      = embed(- mixed coefficient of literal Eq.(5.1) off-diagonal two-jet),
---
---   beta of that Ward/transverse two-jet
---      = history-uniform finite Gaussian + five-channel evaluator.
---
--- The existing mixed-jet theorem then proves the composite equality consumed by
--- Round102's rational-certificate-to-literal-CMP109 adapter.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Rational.Base using (-_)
 import Data.Nat.Base as ℕ
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -38,15 +20,10 @@ record Equation51FiveChannelSameObjectData (History Cell : Set) : Set₁ where
     embedding : Real.OrderedRationalRealEmbedding
     certificate : Cert.HistoryUniformTwoSidedBetaData History Cell
     historyWitness : History
-
     dynamics : (K : Nat) → BetaLaw.BalabanCutoffCouplingDynamics K
     historyForShell : ∀ K k → k ℕ.< K → History
-
-    -- Literal CMP109 off-diagonal two-jet after Ward/symmetry reduction.
     jetData : ∀ K k → k ℕ.< K → Jet.CMP109OffDiagonalSecondJetData
 
-    -- Eq.(5.1)/(5.39--5.42) source-coordinate equality: the actual real mixed
-    -- derivative is the embedding of the negative mixed two-jet coefficient.
     actualDerivativeIsEmbeddedNegativeMixedJet :
       ∀ K k (k<K : k ℕ.< K) →
       BetaLaw.negativeOffDiagonalSecondMomentumDerivative
@@ -55,8 +32,6 @@ record Equation51FiveChannelSameObjectData (History Cell : Set) : Set₁ where
           (- Jet.mixedDerivativeCoefficient
               (Jet.fullOffDiagonalTwoJet (jetData K k k<K)))
 
-    -- Finite Ward/Gaussian/five-channel evaluator is the beta coefficient in the
-    -- SAME jet, uniformly over the generated admitted history.
     jetBetaIsCertifiedEvaluator :
       ∀ K k (k<K : k ℕ.< K) →
       Jet.beta (jetData K k k<K)
@@ -101,9 +76,6 @@ asLiteralCMP109RationalCertificateFamily dataSet = record
 a1Equation51FiveChannelSameObjectCompilerLevel : ProofLevel
 a1Equation51FiveChannelSameObjectCompilerLevel = machineChecked
 
--- The two remaining source equalities are now individually inspectable:
--- (i) Eq.(5.1) polarization -> literal off-diagonal two-jet/mixed momentum jet;
--- (ii) Ward/constrained-Gaussian + five-channel evaluator -> beta of that SAME jet.
 literalCMP109Equation51OffDiagonalJetIdentificationLevel : ProofLevel
 literalCMP109Equation51OffDiagonalJetIdentificationLevel = conditional
 
