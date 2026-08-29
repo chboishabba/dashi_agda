@@ -89,6 +89,22 @@ luminousIntensityDimension : Dimension
 luminousIntensityDimension = dimension zeroE zeroE zeroE zeroE zeroE zeroE oneE
 
 ------------------------------------------------------------------------
+-- The seven SI base units.
+------------------------------------------------------------------------
+
+data SIBaseUnit : Set where
+  metre kilogram second ampere kelvin mole candela : SIBaseUnit
+
+baseUnitDimension : SIBaseUnit → Dimension
+baseUnitDimension metre = lengthDimension
+baseUnitDimension kilogram = massDimension
+baseUnitDimension second = timeDimension
+baseUnitDimension ampere = electricCurrentDimension
+baseUnitDimension kelvin = temperatureDimension
+baseUnitDimension mole = amountDimension
+baseUnitDimension candela = luminousIntensityDimension
+
+------------------------------------------------------------------------
 -- Derived dimensions needed by the present LES physics/chemistry cutset.
 ------------------------------------------------------------------------
 
@@ -147,6 +163,38 @@ electricFieldDimension : Dimension
 electricFieldDimension = dimension oneE oneE minusThreeE minusOneE zeroE zeroE zeroE
 
 ------------------------------------------------------------------------
+-- Named SI derived units used by the current architecture.
+------------------------------------------------------------------------
+
+data SIDerivedUnit : Set where
+  joule watt coulomb volt ohm siemens farad pascal : SIDerivedUnit
+
+derivedUnitDimension : SIDerivedUnit → Dimension
+derivedUnitDimension joule = energyDimension
+derivedUnitDimension watt = powerDimension
+derivedUnitDimension coulomb = electricChargeDimension
+derivedUnitDimension volt = voltageDimension
+derivedUnitDimension ohm = electricResistanceDimension
+derivedUnitDimension siemens = electricConductanceDimension
+derivedUnitDimension farad = capacitanceDimension
+derivedUnitDimension pascal = pressureDimension
+
+-- Source-level defining dimension checks are theorem-owned by construction.
+coulombIsAmpereSecondDimension :
+  derivedUnitDimension coulomb ≡ electricChargeDimension
+coulombIsAmpereSecondDimension = refl
+
+voltHasVoltageDimension : derivedUnitDimension volt ≡ voltageDimension
+voltHasVoltageDimension = refl
+
+ohmHasResistanceDimension :
+  derivedUnitDimension ohm ≡ electricResistanceDimension
+ohmHasResistanceDimension = refl
+
+pascalHasPressureDimension : derivedUnitDimension pascal ≡ pressureDimension
+pascalHasPressureDimension = refl
+
+------------------------------------------------------------------------
 -- Quantity values are indexed by dimension.  The scalar representation is an
 -- application parameter: exact rationals, intervals, floating values, measured
 -- values with uncertainty, etc. can reuse the same dimensional type.
@@ -158,6 +206,15 @@ record Quantity (Scalar : Set) (dimension : Dimension) : Set where
     magnitude : Scalar
 
 open Quantity public
+
+Length : Set → Set
+Length Scalar = Quantity Scalar lengthDimension
+
+Mass : Set → Set
+Mass Scalar = Quantity Scalar massDimension
+
+Time : Set → Set
+Time Scalar = Quantity Scalar timeDimension
 
 Current : Set → Set
 Current Scalar = Quantity Scalar electricCurrentDimension
