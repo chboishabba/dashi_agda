@@ -9,14 +9,6 @@ import DASHI.Core.ProvenanceBearingQuotient as Provenance
 
 ------------------------------------------------------------------------
 -- COARSE / RELATIVE-FINE FIBRE KERNEL
---
--- A fine state need not be understood as merely "a more expensive coarse
--- state".  It may instead decompose into a coarse coordinate plus residual
--- fine information living over that coarse coordinate.
---
--- This is deliberately a thin consumer-reduction adapter over the repository's
--- existing FibreRestrictionCore / ProvenanceBearingQuotient architecture, not a
--- replacement quotient theory.
 ------------------------------------------------------------------------
 
 record CoarseFineReopening (FineState : Set) : Set₁ where
@@ -32,11 +24,6 @@ record CoarseFineReopening (FineState : Set) : Set₁ where
 
 open CoarseFineReopening public
 
-------------------------------------------------------------------------
--- Existing canonical provenance-bearing quotients instantiate this geometry
--- directly: coarse = surface, relative fine = receipt.
-------------------------------------------------------------------------
-
 fromProvenanceBearingQuotient :
   ∀ {core : CanonicalFibre.FibreRestrictionCore} →
   Provenance.ProvenanceBearingQuotient core →
@@ -51,9 +38,41 @@ fromProvenanceBearingQuotient {core} quotient =
     (Provenance.reopenExact quotient)
 
 ------------------------------------------------------------------------
--- A coarse projection is sufficient only if both dynamics and the declared
--- consumer factor through it.
+-- Exact reopening makes the relative-fine coordinate substantive: coarse plus
+-- relative fine determines the fine state.  This is the generic analogue of
+-- the existing provenance surface+receipt theorem and the JCoarse/JFine address
+-- reconstruction surface.
 ------------------------------------------------------------------------
+
+coarseAndRelativeFineDetermineState :
+  ∀ {FineState}
+    (geometry : CoarseFineReopening FineState)
+    {left right : FineState} →
+  coarse geometry left ≡ coarse geometry right →
+  relativeFine geometry left ≡ relativeFine geometry right →
+  left ≡ right
+coarseAndRelativeFineDetermineState geometry {left} {right}
+    sameCoarse sameFine =
+  trans
+    (sym (reopenExact geometry left))
+    (trans
+      (cong
+        (λ c → reopen geometry c (relativeFine geometry left))
+        sameCoarse)
+      (trans
+        (cong (reopen geometry (coarse geometry right)) sameFine)
+        (reopenExact geometry right)))
+
+relativeFineMustChangeInsideNontrivialCoarseFibre :
+  ∀ {FineState}
+    (geometry : CoarseFineReopening FineState)
+    {left right : FineState} →
+  coarse geometry left ≡ coarse geometry right →
+  (left ≡ right → ⊥) →
+  relativeFine geometry left ≡ relativeFine geometry right → ⊥
+relativeFineMustChangeInsideNontrivialCoarseFibre geometry sameCoarse different
+    sameFine =
+  different (coarseAndRelativeFineDetermineState geometry sameCoarse sameFine)
 
 record CoarseDynamicsClosure
     {FineState Action : Set}
@@ -119,12 +138,6 @@ coarseProjectionRetainsRelativeFineResidual geometry dynamics consumer =
     (reopen geometry)
     (reopenExact geometry)
 
-------------------------------------------------------------------------
--- Conversely, a fine-sensitive consumer gives an immediate proof that the
--- coarse projection is insufficient.  No statement that the fine residual is
--- intrinsically more important is needed: the failure is consumer-relative.
-------------------------------------------------------------------------
-
 record FineSensitiveConsumer
     {FineState Observation : Set}
     (geometry : CoarseFineReopening FineState)
@@ -160,27 +173,24 @@ record CoarseFineRelativeFibreBoundary : Set where
     thisReplacesCanonicalProvenanceQuotient : Bool
     thisReplacesCanonicalProvenanceQuotientIsFalse :
       thisReplacesCanonicalProvenanceQuotient ≡ false
-
     canonicalProvenanceReceiptCanInstantiateRelativeFine : Bool
     canonicalProvenanceReceiptCanInstantiateRelativeFineIsTrue :
       canonicalProvenanceReceiptCanInstantiateRelativeFine ≡ true
-
+    coarsePlusRelativeFineDeterminesFineState : Bool
+    coarsePlusRelativeFineDeterminesFineStateIsTrue :
+      coarsePlusRelativeFineDeterminesFineState ≡ true
     fineMeansOnlyHigherComputeCost : Bool
     fineMeansOnlyHigherComputeCostIsFalse :
       fineMeansOnlyHigherComputeCost ≡ false
-
     fineMayBeRelativeResidualOverCoarse : Bool
     fineMayBeRelativeResidualOverCoarseIsTrue :
       fineMayBeRelativeResidualOverCoarse ≡ true
-
     coarseProjectionMayBeExactForOneConsumer : Bool
     coarseProjectionMayBeExactForOneConsumerIsTrue :
       coarseProjectionMayBeExactForOneConsumer ≡ true
-
     sameCoarseMayFailForFineSensitiveConsumer : Bool
     sameCoarseMayFailForFineSensitiveConsumerIsTrue :
       sameCoarseMayFailForFineSensitiveConsumer ≡ true
-
     discardingFineResidualIsRequiredWhenCoarseIsSafe : Bool
     discardingFineResidualIsRequiredWhenCoarseIsSafeIsFalse :
       discardingFineResidualIsRequiredWhenCoarseIsSafe ≡ false
@@ -188,4 +198,4 @@ record CoarseFineRelativeFibreBoundary : Set where
 canonicalCoarseFineRelativeFibreBoundary : CoarseFineRelativeFibreBoundary
 canonicalCoarseFineRelativeFibreBoundary =
   coarseFineRelativeFibreBoundary
-    false refl true refl false refl true refl true refl true refl false refl
+    false refl true refl true refl false refl true refl true refl true refl false refl
