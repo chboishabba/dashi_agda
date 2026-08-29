@@ -29,3 +29,9 @@ import DASHI.Cognition.PNF.PackedOperatorFamilyAdmissionExact
 -- the mandatory internal execution bus.
 import DASHI.Cognition.PNF.DirectDeltaCompilerArchitectureExact
 import DASHI.Cognition.PNF.DirectDeltaCompilerArchitectureRegression
+
+-- Activation cut for the live packed sentence compiler.  G1/G2 may be
+-- executable before G3/G4 are production-certified; this import keeps that
+-- distinction theorem-visible rather than allowing an installed code path to
+-- masquerade as completed activation.
+import DASHI.Cognition.PNF.DirectDeltaCompilerActivationExact
