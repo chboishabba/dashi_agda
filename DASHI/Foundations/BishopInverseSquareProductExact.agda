@@ -9,9 +9,9 @@ module DASHI.Foundations.BishopInverseSquareProductExact where
 --
 -- The vendored inverse API exposes the canonical inverse and its cancellation
 -- law, but this owner deliberately does not depend on a named inverse-of-product
--- theorem.  Instead the candidate x^-1*y^-1 is shown to cancel x*y, and inverse
--- uniqueness is derived algebraically from cancellation.  This makes the
--- receipt reusable by Erdős/Basel and other reciprocal-kernel lanes.
+-- theorem.  Instead candidates are characterized by cancellation and inverse
+-- uniqueness is derived algebraically.  This also yields congruence under the
+-- Bishop real setoid, keeping nonzero witnesses out of semantic identity.
 ------------------------------------------------------------------------
 
 import Inverse as BishopInverse
@@ -75,6 +75,54 @@ inverseFromCancellation value candidate nonzero candidateLaw =
         (BishopP.≃-trans
           (BishopP.*-congˡ actualLaw)
           (BishopP.*-identityʳ candidate))))
+
+------------------------------------------------------------------------
+-- Inverse and reciprocal-square congruence under Bishop setoid equality.
+
+inverseCongruentPositive :
+  ∀ {x y} →
+  (xPositive : BishopReal._<_ BishopReal.0ℝ x) →
+  (yPositive : BishopReal._<_ BishopReal.0ℝ y) →
+  BishopReal._≃_ x y →
+  BishopReal._≃_
+    (inverse x (Reciprocal.xNonzero xPositive))
+    (inverse y (Reciprocal.xNonzero yPositive))
+inverseCongruentPositive {x} {y} xPositive yPositive equality =
+  inverseFromCancellation
+    x
+    (inverse y yNonzero)
+    xNonzero
+    candidateCancels
+  where
+  xNonzero : BishopReal._≄0 x
+  xNonzero = Reciprocal.xNonzero xPositive
+
+  yNonzero : BishopReal._≄0 y
+  yNonzero = Reciprocal.xNonzero yPositive
+
+  candidateCancels :
+    BishopReal._≃_
+      (BishopReal._*_
+        (inverse y yNonzero)
+        x)
+      BishopReal.1ℝ
+  candidateCancels =
+    BishopP.≃-trans
+      (BishopP.*-congˡ equality)
+      (BishopInverse.*-inverseˡ y yNonzero)
+
+inverseSquareCongruentPositive :
+  ∀ {x y} →
+  (xPositive : BishopReal._<_ BishopReal.0ℝ x) →
+  (yPositive : BishopReal._<_ BishopReal.0ℝ y) →
+  BishopReal._≃_ x y →
+  BishopReal._≃_
+    (Reciprocal.inverseSquare x (Reciprocal.xNonzero xPositive))
+    (Reciprocal.inverseSquare y (Reciprocal.xNonzero yPositive))
+inverseSquareCongruentPositive xPositive yPositive equality =
+  BishopP.*-cong
+    (inverseCongruentPositive xPositive yPositive equality)
+    (inverseCongruentPositive xPositive yPositive equality)
 
 ------------------------------------------------------------------------
 -- Product inverse by direct cancellation.
@@ -158,7 +206,6 @@ inverseSquareProduct {x} {y} xPositive yPositive =
   let
     xNonzero = Reciprocal.xNonzero xPositive
     yNonzero = Reciprocal.xNonzero yPositive
-    xyNonzero = productNonzero xPositive yPositive
     productInverse = inverseProduct xPositive yPositive
     open BishopP.ℝ-Solver
   in
