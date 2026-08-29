@@ -5,6 +5,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 FILES=(
+  DASHI/Foundations/Wette1969Rule915CanonicalP145PremisesExact.agda
   DASHI/Foundations/Wette1969Rule93ImplicationFamilyExact.agda
   DASHI/Foundations/Wette1969Rule93CompleteCandidateAuditExact.agda
   DASHI/Foundations/Wette1969Rule939ImplicationIntroductionExact.agda
@@ -25,6 +26,11 @@ for file in "${FILES[@]}"; do
     exit 1
   fi
 done
+
+grep -q 'allTwentySevenP145PremisesNowOneConcreteTypedVectorIsTrue' DASHI/Foundations/Wette1969Rule915CanonicalP145PremisesExact.agda
+grep -q 'premise18DenseWordNoLongerOpaqueInCanonicalP145SurfaceIsTrue' DASHI/Foundations/Wette1969Rule915CanonicalP145PremisesExact.agda
+grep -q 'premise27DenseWordNoLongerOpaqueInCanonicalP145SurfaceIsTrue' DASHI/Foundations/Wette1969Rule915CanonicalP145PremisesExact.agda
+grep -q 'thisModuleClaimsDerivabilityOfAnyPremiseIsFalse' DASHI/Foundations/Wette1969Rule915CanonicalP145PremisesExact.agda
 
 grep -q 'exhaustiveNamedThirtyCandidateAuditNowExistsIsTrue' DASHI/Foundations/Wette1969Rule93ImplicationFamilyExact.agda
 grep -q 'allThirtyPrintedCandidatesHaveExplicitConstructorsIsTrue' DASHI/Foundations/Wette1969Rule93CompleteCandidateAuditExact.agda
@@ -54,6 +60,7 @@ grep -q 'genericScaffoldAutomaticallySuppliesFive9323PremisesIsFalse' DASHI/Foun
 grep -q 'arbitraryRelationRIsAutomaticallyHandledBy9323IsFalse' DASHI/Foundations/Wette1969Rule915Premise18Rule9323ResolutionExact.agda
 
 scripts/run_agda29_parallel_check.sh \
+  DASHI/Foundations/Wette1969Rule915CanonicalP145PremisesExact.agda \
   DASHI/Foundations/Wette1969Rule93ImplicationFamilyExact.agda \
   DASHI/Foundations/Wette1969Rule93CompleteCandidateAuditExact.agda \
   DASHI/Foundations/Wette1969Rule939ImplicationIntroductionExact.agda \
