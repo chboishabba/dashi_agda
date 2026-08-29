@@ -17,6 +17,7 @@ FILES=(
   DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda
   DASHI/Reasoning/RelationRepresentationExperimentProtocolExact.agda
   DASHI/Reasoning/RelationRepresentationCandidateDiscriminationExact.agda
+  DASHI/Reasoning/RelationRepresentationMechanismSocketExact.agda
   DASHI/Reasoning/FiniteRelationLinearAlgebraProducerExact.agda
   DASHI/Reasoning/FiniteRelationSVDJacobianProducerExact.agda
   DASHI/Reasoning/EigenslurFlourishingRelationBoundaryExact.agda
@@ -49,6 +50,10 @@ grep -q 'canonicalLeechDASHIgProvenance' DASHI/Reasoning/ImplementationExperimen
 grep -q 'heldOutContextSeparatesOffsetFromAffine' DASHI/Reasoning/RelationRepresentationCandidateDiscriminationExact.agda
 grep -q 'localPerturbationSeparatesOffsetFromRotation' DASHI/Reasoning/RelationRepresentationCandidateDiscriminationExact.agda
 grep -q 'bestFitFamilyIsSemanticRealization' DASHI/Reasoning/RelationRepresentationCandidateDiscriminationExact.agda
+grep -q 'RelationMechanismSocket' DASHI/Reasoning/RelationRepresentationMechanismSocketExact.agda
+grep -q 'experimentObservationCommutes' DASHI/Reasoning/RelationRepresentationMechanismSocketExact.agda
+grep -q 'explicitDiscrepancyCarrierRequiredForStage7' DASHI/Reasoning/RelationRepresentationMechanismSocketExact.agda
+grep -q 'realActivationStateCarrierSupplied' DASHI/Reasoning/RelationRepresentationMechanismSocketExact.agda
 
 grep -q 'grokkingDynamicValidation' DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
 grep -q 'spectralDiagnosticIsCausalMechanismByDefault' DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
@@ -65,6 +70,7 @@ if command -v agda >/dev/null 2>&1; then
   agda -i . -i src DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
   agda -i . -i src DASHI/Reasoning/RelationRepresentationExternalReceiptAdmissionExact.agda
   agda -i . -i src DASHI/Reasoning/RelationRepresentationCandidateDiscriminationExact.agda
+  agda -i . -i src DASHI/Reasoning/RelationRepresentationMechanismSocketExact.agda
   agda -i . -i src DASHI/Reasoning/FiniteRelationLinearAlgebraProducerExact.agda
   agda -i . -i src DASHI/Reasoning/FiniteRelationSVDJacobianProducerExact.agda
   agda -i . -i src DASHI/Reasoning/RelationRepresentationRegression.agda
