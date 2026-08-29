@@ -1,0 +1,28 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanCanonicalMetricStressLaneRound120Validation where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanNormalizedStressInsertionRound116Exact as R116
+import DASHI.Physics.YangMills.BalabanLiteralStressCoordinateSourceWeldRound117Exact as R117
+import DASHI.Physics.YangMills.BalabanCanonicalMetricToCMP119StressRound118Exact as R118
+import DASHI.Physics.YangMills.BalabanCanonicalMetricSelectedStressRound119Exact as R119
+import DASHI.Physics.YangMills.BalabanCanonicalMetricStressLaneRound120Exact as R120
+
+round116NormalizedInsertionCompiler : ProofLevel
+round116NormalizedInsertionCompiler = R116.normalizedStressInsertionCompilerLevel
+
+round117OneCoordinateSourceWeldCompiler : ProofLevel
+round117OneCoordinateSourceWeldCompiler = R117.literalStressCoordinateSourceWeldCompilerLevel
+
+round118CanonicalMetricCMP119Compiler : ProofLevel
+round118CanonicalMetricCMP119Compiler = R118.canonicalMetricCMP119StressCompilerLevel
+
+round119ExactSelectedInsertionCompiler : ProofLevel
+round119ExactSelectedInsertionCompiler = R119.canonicalMetricSelectedStressCompilerLevel
+
+round120FullMetricStressLaneCompiler : ProofLevel
+round120FullMetricStressLaneCompiler = R120.canonicalMetricLiteralStressLaneCompilerLevel
+
+round120PhysicalInstantiationStillConditional : ProofLevel
+round120PhysicalInstantiationStillConditional =
+  R120.literalCanonicalMetricStressLaneInstantiationLevel
