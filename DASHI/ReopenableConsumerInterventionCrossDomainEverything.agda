@@ -32,6 +32,7 @@ import DASHI.Core.SelectiveAuthorityCertificateExact
 import DASHI.Core.StructuredResidualProductExact
 import DASHI.Core.TypedEvidenceDependencyExact
 import DASHI.Core.TypedIntervalEventTransitionExact
+import DASHI.Physics.Units.SI
 import DASHI.Environment.LESResearchCrossPollinationExact
 import DASHI.Environment.LESResearchCrossPollinationRound2Exact
 import DASHI.Environment.LESResearchCrossPollinationRound3Exact
@@ -41,6 +42,7 @@ import DASHI.Environment.LESResearchCrossPollinationRound6Exact
 import DASHI.Environment.LESResearchCrossPollinationRound7Exact
 import DASHI.Environment.ThreeSistersLESRelationalComplementarityBridgeExact
 import DASHI.Environment.LESRelationalHistoryFabricBridgeExact
+import DASHI.Environment.LESEnvironmentSIQuantityBridgeExact
 import DASHI.Environment.LESObservationSourceRegistryExact
 import DASHI.Environment.LESSituatedSocioEcologicalHyperfabricExact
 import DASHI.Environment.LESSituatedObservationInteractionExact
