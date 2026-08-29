@@ -5,6 +5,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 FILES=(
+  DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
   DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryExact.agda
   DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryValidation.agda
 )
@@ -19,10 +20,14 @@ for file in "${FILES[@]}"; do
   fi
 done
 
+grep -q '^actualQFTSectorStressShared :' DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
+grep -q 'qftStressAggregation' DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
+grep -q 'qftTotalStressShared' DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
 grep -q '^sharedSourceImpliesSameStressEnergy :' DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryExact.agda
 grep -q '^sharedSourceControlImpliesCommonRegimeRecovery :' DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryExact.agda
 grep -q '^sharedSourceCrossSectorReceiptCompiles :' DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryExact.agda
-grep -q 'twoExactFactorisationsThroughOneSourceProveWeldIsTrue' DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryExact.agda
+grep -q 'exactAggregationAndTwoFactorisationsProveWeldIsTrue' DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryExact.agda
+grep -q 'oneGaugeSectorStressEqualsTotalEinsteinSourceIsFalse' DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryExact.agda
 grep -q 'separateGRAndQFTSourceFitsProveSameObjectIsFalse' DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryExact.agda
 grep -q '^sharedSourceProducesStressWeld :' DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryValidation.agda
 grep -q '^sharedSourceProducesCommonRegime :' DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryValidation.agda
@@ -35,4 +40,4 @@ fi
 agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryValidation.agda
 agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/Everything.agda
 
-echo "Shared effective-source QFT/GR BIDI checks passed."
+echo "Shared effective-source and total-QFT-stress BIDI checks passed."
