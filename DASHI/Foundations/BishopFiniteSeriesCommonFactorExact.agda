@@ -10,9 +10,11 @@ module DASHI.Foundations.BishopFiniteSeriesCommonFactorExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Rational.Unnormalised using (0ℚᵘ)
 
 import Real as BishopReal
 import RealProperties as BishopP
+import Sequence as BishopSequence
 
 import DASHI.Foundations.BishopFinSumSeriesBridgeExact as FinSum
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -33,8 +35,6 @@ finSumCommonFactor terms factor zero =
   in solve 1
     (λ f → Κ 0ℚᵘ ⊜ Κ 0ℚᵘ ⊗ f)
     BishopP.≃-refl factor
-  where
-  open import Data.Rational.Unnormalised using (0ℚᵘ)
 finSumCommonFactor terms factor (suc count) =
   BishopP.≃-trans
     (FinSum.finSumSuccessor
@@ -82,17 +82,13 @@ seriesOfCommonFactor :
       (λ index → BishopReal._*_ (terms index) factor)
       count)
     (BishopReal._*_
-      (importSequence terms count)
+      (BishopSequence.SeriesOf terms count)
       factor)
 seriesOfCommonFactor terms factor count =
   BishopP.≃-trans
     (finSumCommonFactor terms factor count)
     (BishopP.*-congʳ
       (FinSum.finSumIsSeriesOf terms count))
-  where
-  importSequence : (Nat → BishopReal.ℝ) → Nat → BishopReal.ℝ
-  importSequence terms count =
-    FinSum.finSum terms count
 
 bishopFiniteSeriesCommonFactorLevel : ProofLevel
 bishopFiniteSeriesCommonFactorLevel = machineChecked
