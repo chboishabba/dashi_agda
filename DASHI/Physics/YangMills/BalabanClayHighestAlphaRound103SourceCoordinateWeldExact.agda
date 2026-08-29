@@ -4,29 +4,34 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound103SourceCoordinateWe
 ------------------------------------------------------------------------
 -- ROUND103: BIDI SOURCE-COORDINATE WELD
 --
--- A remains the Round102 two-leaf source cut:
---   A1 literal Ward/five-channel evaluator = CMP109 (5.42), two-sided;
---   A2 same-history cumulative beta sensitivity q<1.
+-- A1 is now factored through the actual CMP109 Sect.5 off-diagonal two-jet:
+--   actual (5.42) mixed derivative
+--     = embedded negative mixed coefficient of the Eq.(5.1) jet,
+--   Ward/five-channel evaluator = beta coefficient of that SAME jet,
+--   exact mixed-jet extraction -> literal two-sided CMP109 beta bounds.
+-- A2 remains the same-history q<1 source sensitivity; all shooting/tuning
+-- algebra after that estimate is already theorem-owned.
 --
--- BC1 is now decomposed without opaque same-object Set sockets:
+-- BC1:
 --   Part-I effective action = Part-II localized PHYSICAL composite sum;
---   finite D² commutes with that finite sum;
---   CMP109 (5.1) = D_B² of the same effective action;
---   therefore Pi/E^(2) = sum of CMP116 physical composite B-Hessians;
---   one common positive analytic radius supplies the differentiated shell;
---   any normalization/projection mismatch must pass the explicit transport.
+--   D² commutes with the finite localized sum;
+--   CMP109 (5.1) = D_B² of the same action;
+--   hence Pi/E^(2) = sum of CMP116 physical composite B-Hessians;
+--   one common positive analytic radius controls the differentiated shell.
 --
 -- Critical correction: CMP116 first writes E(X,U,J,A) and then substitutes
--- A=A(B).  Thus D_B²(E∘A) contains both intrinsic Hessian and substitution
--- curvature terms.  The bare A-Hessian is not silently identified with CMP109.
+-- A=A(B), so D_B²(E∘A) contains intrinsic Hessian plus substitution-curvature
+-- term.  Bare A-Hessian is not silently identified with CMP109.
 --
--- BC2: on this strict carrier, the Heat/Doob log-Hessian is the conditional
--- expected static Hessian minus covariance of first gradients on the SAME density.
+-- BC2:
+--   Heat/Doob log-Hessian = conditional static Hessian - gradient covariance
+-- on the SAME literal finite-cutoff density.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound102PhysicalCutExact as R102
+import DASHI.Physics.YangMills.BalabanA1Equation51FiveChannelSameObjectRound103Exact as A1
 import DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound103Exact as Finite
 import DASHI.Physics.YangMills.BalabanCMP109116SourceContinuationRound103Exact as Continue
 import DASHI.Physics.YangMills.BalabanCMP109Equation51LocalizedHessianRound103Exact as Eq51
@@ -38,8 +43,12 @@ import DASHI.Physics.YangMills.BalabanCMP116PhysicalCompositeHessianMarkedShellR
 import DASHI.Physics.YangMills.BalabanHeatDoobSameDensityLogHessianRound103Exact as Heat
 
 ------------------------------------------------------------------------
--- A: unchanged shortest literal source cut from Round102
+-- A
 ------------------------------------------------------------------------
+
+rowAEquation51FiveChannelSameObjectRound103Level : ProofLevel
+rowAEquation51FiveChannelSameObjectRound103Level =
+  A1.a1Equation51FiveChannelSameObjectCompilerLevel
 
 rowAHistoryUniformTwoSidedBetaRound103Level : ProofLevel
 rowAHistoryUniformTwoSidedBetaRound103Level =
@@ -53,11 +62,13 @@ rowAClosedTubeBanachAssemblyRound103Level : ProofLevel
 rowAClosedTubeBanachAssemblyRound103Level =
   R102.rowAClosedTubeBanachAssemblyRound102Level
 
+-- Physical A leaves: bind the Eq.(5.1) off-diagonal jet and finite Ward/five-
+-- channel evaluator on the SAME generated history, then prove same-history q<1.
 rowAPhysicalSourceInstantiationRound103Level : ProofLevel
 rowAPhysicalSourceInstantiationRound103Level = conditional
 
 ------------------------------------------------------------------------
--- BC1: literal same differentiated carrier
+-- BC1
 ------------------------------------------------------------------------
 
 bcFiniteSecondVariationSumRound103Level : ProofLevel
@@ -100,7 +111,7 @@ bc1LiteralSourceInstantiationRound103Level : ProofLevel
 bc1LiteralSourceInstantiationRound103Level = conditional
 
 ------------------------------------------------------------------------
--- BC2: same-density Heat/Doob identity
+-- BC2
 ------------------------------------------------------------------------
 
 bc2SameDensityHeatDoobIdentityRound103Level : ProofLevel
