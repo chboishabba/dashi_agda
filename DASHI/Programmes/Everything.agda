@@ -14,6 +14,7 @@ import DASHI.Programmes.DashifineExact
 import DASHI.Programmes.DashifineBenchmarkCorrectionExact
 import DASHI.Programmes.GrokkingExact
 import DASHI.Programmes.GrokkingValidationCorrectionExact
+import DASHI.Programmes.GrokkingHeldOutToleranceExact
 import DASHI.Programmes.CoreReferenceExact
 import DASHI.Programmes.CoreReferenceCorrectionExact
 import DASHI.Programmes.FRACDASHExact
