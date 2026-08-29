@@ -9,6 +9,7 @@ import DASHI.Environment.LESFluidPhysicsCouplingExact as Fluid
 import DASHI.Environment.LESBioelectricGaugeChemistryExact as Bioelectric
 import DASHI.Environment.LESEnvironmentSIQuantityBridgeExact as EnvironmentSI
 import DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact as RootSoilFungal
+import DASHI.Environment.SoilBiogeochemistryProcessNetworkExact as SoilBio
 import DASHI.Physics.Units.SI as SI
 import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact as EM
 import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact as PNP
@@ -23,6 +24,7 @@ data PhysicsReuseLane : Set where
   reactionTransportLane
   bioelectricElectrochemicalLane
   rootSoilFungalPhysiologyLane
+  soilBiogeochemistryLane
   : PhysicsReuseLane
 
 record PhysicsToDomainWeld : Set where
@@ -72,6 +74,10 @@ rootSoilFungalOwner : String
 rootSoilFungalOwner =
   "DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact; DOI 10.1023/A:1026439226716 + 10.1104/pp.114.246124 + 10.1146/annurev-arplant-042110-103846"
 
+soilBiogeochemistryOwner : String
+soilBiogeochemistryOwner =
+  "DASHI.Environment.SoilBiogeochemistryProcessNetworkExact; DOI 10.1016/j.soilbio.2009.02.031"
+
 siVoltageDimension : SI.Dimension
 siVoltageDimension = SI.Voltage
 
@@ -86,6 +92,9 @@ pnpBoundaryImported = PNP.canonicalPNPElectrodiffusionBoundary
 
 rootSoilFungalBoundaryImported : RootSoilFungal.RootSoilFungalPhysiologyBoundary
 rootSoilFungalBoundaryImported = RootSoilFungal.canonicalRootSoilFungalPhysiologyBoundary
+
+soilBiogeochemistryBoundaryImported : SoilBio.SoilBiogeochemistryBoundary
+soilBiogeochemistryBoundaryImported = SoilBio.canonicalSoilBiogeochemistryBoundary
 
 record LESPhysicsCrossPollinationCutset : Set where
   constructor lesPhysicsCrossPollinationCutset
@@ -103,12 +112,15 @@ record LESPhysicsCrossPollinationCutset : Set where
     rootSoilFungalIonWaterArchitecturePresent : Bool
     rootSoilSameSpeciesWeldTyped : Bool
     mycorrhizalExtensionTyped : Bool
+    soilCarbonNitrogenProcessArchitecturePresent : Bool
+    soilPlantFungalBiogeochemistryWeldTyped : Bool
 
     applicationFluidReductionStillNeedsDomainReceipt : Bool
     applicationMaxwellConstitutiveReceiptsStillNeeded : Bool
     applicationPNPParametersAndBoundaryDataStillNeeded : Bool
     plantFluidPhysiologyWeldStillNeeded : Bool
     fungalSoilIonExchangeWeldStillNeeded : Bool
+    soilBiogeochemistryParameterisationStillNeeded : Bool
     atmosphereHydrologyConstitutiveWeldsStillNeeded : Bool
     stage7ValidationStillNeeded : Bool
 
@@ -117,8 +129,8 @@ open LESPhysicsCrossPollinationCutset public
 canonicalLESPhysicsCrossPollinationCutset : LESPhysicsCrossPollinationCutset
 canonicalLESPhysicsCrossPollinationCutset =
   lesPhysicsCrossPollinationCutset
-    true true true true true true true true true true true true true
-    true true true true true true true
+    true true true true true true true true true true true true true true true
+    true true true true true true true true
 
 record LESPhysicsCrossPollinationBoundary : Set where
   constructor lesPhysicsCrossPollinationBoundary
@@ -138,6 +150,9 @@ record LESPhysicsCrossPollinationBoundary : Set where
     rootSoilFungalArchitectureIsUniversalParameterisation : Bool
     rootSoilFungalArchitectureIsUniversalParameterisationIsFalse :
       rootSoilFungalArchitectureIsUniversalParameterisation ≡ false
+    soilCNProcessGrammarIsUniversalSoilModel : Bool
+    soilCNProcessGrammarIsUniversalSoilModelIsFalse :
+      soilCNProcessGrammarIsUniversalSoilModel ≡ false
 
 canonicalLESPhysicsCrossPollinationBoundary : LESPhysicsCrossPollinationBoundary
 canonicalLESPhysicsCrossPollinationBoundary =
@@ -146,6 +161,7 @@ canonicalLESPhysicsCrossPollinationBoundary =
     false refl
     true refl
     true refl
+    false refl
     false refl
     false refl
     false refl
