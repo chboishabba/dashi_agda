@@ -18,6 +18,10 @@ import DASHI.Planning.PlanningBIDICapstoneExact as BIDICapstone
 
 ------------------------------------------------------------------------
 -- VALIDATION SURFACE
+--
+-- Importing the BIDI capstone forces the ranked authority/consent/sequential-
+-- bridge/history/authority-fabric/PNF/repair/network/building/source-case
+-- tranche into the same cumulative module graph.
 ------------------------------------------------------------------------
 
 planningStagesRemainDistinct : Planning.proposed ≡ Planning.approved → ⊥
@@ -75,9 +79,3 @@ compensationStillDoesNotCloseAuthorityRepair :
   ConsentRepairBoundary.ConsentReparationPNFBoundary.compensationIsAuthorityRestoration
     ConsentRepairBoundary.canonicalConsentReparationPNFBoundary ≡ false
 compensationStillDoesNotCloseAuthorityRepair = refl
-
-rankedBIDICapstoneIsImported :
-  BIDICapstone.Cases.CaseSource.freshness
-    BIDICapstone.Cases.trumpIranPalestineLiveSourceBoundary ≡
-  BIDICapstone.Cases.liveRefreshRequired
-rankedBIDICapstoneIsImported = refl
