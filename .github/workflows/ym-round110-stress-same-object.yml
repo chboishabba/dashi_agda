@@ -1,4 +1,4 @@
-name: YM Round110-115 stress completion Agda
+name: YM Round109-120 canonical metric stress Agda
 
 on:
   pull_request:
@@ -11,6 +11,15 @@ on:
       - 'DASHI/Physics/YangMills/BalabanLiteralStressCoordinateRound114Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanLiteralStressCompletionRound115Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanLiteralStressCompletionRound115Validation.agda'
+      - 'DASHI/Physics/YangMills/BalabanNormalizedStressInsertionRound116Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanLiteralStressCoordinateSourceWeldRound117Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCanonicalMetricToCMP119StressRound118Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCanonicalMetricSelectedStressRound119Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCanonicalMetricStressLaneRound120Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCanonicalMetricStressLaneRound120Validation.agda'
+      - 'DASHI/Physics/YangMills/BalabanNormalizedExpectationCrossNumeratorExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalMetricSourceDomainRound106Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalMetricStressRepresentationRound106Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP119CompatibleLocalExpectationFlowExact.agda'
       - 'DASHI/Physics/YangMills/BalabanTopDownSummableRGIncrementExact.agda'
       - 'DASHI/Physics/YangMills/BalabanRowBActivityEntropyToShellEnergyExact.agda'
@@ -24,7 +33,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: ym-round110-115-${{ github.event.pull_request.number || github.ref }}
+  group: ym-round109-120-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -38,21 +47,21 @@ jobs:
           submodules: false
       - uses: cachix/install-nix-action@v27
       - uses: DeterminateSystems/magic-nix-cache-action@v9
-      - name: Check Round110-115 stress completion chain
+      - name: Check Round109-120 canonical metric stress lane
         env:
           AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
           DASHI_REPO_ROOT: ${{ github.workspace }}
-          DASHI_AGDA29_CACHE_ROOT: ${{ runner.temp }}/dashi-agda29-round115
-          DASHI_STATUS_DIR: ${{ runner.temp }}/dashi-agda29-round115/status
-          XDG_CACHE_HOME: ${{ runner.temp }}/dashi-xdg-round115
-          AGDA_LOG_PATH: ${{ github.workspace }}/ym-round115-agda.log
+          DASHI_AGDA29_CACHE_ROOT: ${{ runner.temp }}/dashi-agda29-round120
+          DASHI_STATUS_DIR: ${{ runner.temp }}/dashi-agda29-round120/status
+          XDG_CACHE_HOME: ${{ runner.temp }}/dashi-xdg-round120
+          AGDA_LOG_PATH: ${{ github.workspace }}/ym-round120-agda.log
           AGDA_JOBS: '4'
           DASHI_NO_TMUX: '1'
         run: bash scripts/check_ym_round110_stress_same_object.sh
-      - name: Upload Round115 Agda log
+      - name: Upload Round120 Agda log
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ym-round110-115-stress-completion-agda-log
-          path: ym-round115-agda*.log
+          name: ym-round109-120-canonical-metric-stress-agda-log
+          path: ym-round120-agda*.log
           if-no-files-found: warn
