@@ -29,6 +29,8 @@ import DASHI.Core.DiscriminatorSynthesisExact
 import DASHI.Core.SequentialConsumerExperimentPlannerExact
 import DASHI.Core.SequentialRobustActionabilityPlannerExact
 import DASHI.Core.SequentialRelationalExperimentPlannerExact
+import DASHI.Core.JointSequentialInformationFidelityPolicyExact
+import DASHI.Core.ConsumerReductionJointPolicyBridgeExact
 import DASHI.Core.SequentialExperimentPlanningValidation
 import DASHI.Core.CounterexampleGuidedConsumerRefinementExact
 import DASHI.Core.DualEffectInformationActionExact
@@ -77,6 +79,7 @@ import DASHI.Environment.LESModelFibreRobustInterventionExact
 import DASHI.Environment.LESAdaptiveConsumerLoopCrossPollinationExact
 import DASHI.Environment.LESDiscriminatorSynthesisExact
 import DASHI.Environment.LESSequentialExperimentPlannerExact
+import DASHI.Environment.LESJointSequentialMeasurementFidelityPolicyExact
 import DASHI.Environment.LESFluidPhysicsCouplingExact
 import DASHI.Environment.LESBioelectricGaugeChemistryExact
 import DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact
