@@ -47,8 +47,8 @@ record AristotleCurrentFrontier : Set where
     finalRHImplicationClosed : Bool
     finalRHImplicationClosedIsFalse : finalRHImplicationClosed ≡ false
 
-    -- New 2026-08-30 explicit-cutoff tranche.  These are additive compatibility
-    -- fields; the older public projections above are intentionally retained.
+    -- Explicit-cutoff tranche. These are additive compatibility fields; the
+    -- older public projections above are intentionally retained.
     deterministicProjectiveSchurKernelCheckedInLean : Bool
     deterministicProjectiveSchurKernelCheckedInLeanIsTrue : deterministicProjectiveSchurKernelCheckedInLean ≡ true
     explicitFarShellCutoffBoundClosedInLean : Bool
@@ -68,6 +68,20 @@ record AristotleCurrentFrontier : Set where
     jointFiniteNearFarMarginClosed : Bool
     jointFiniteNearFarMarginClosedIsFalse : jointFiniteNearFarMarginClosed ≡ false
 
+    -- Bidi refinement after inspecting the literal finite carrier.
+    finiteNearCarrierReflectionStableInLeanSource : Bool
+    finiteNearCarrierReflectionStableInLeanSourceIsTrue : finiteNearCarrierReflectionStableInLeanSource ≡ true
+    finiteNearSummandAlreadyReflectionPaired : Bool
+    finiteNearSummandAlreadyReflectionPairedIsTrue : finiteNearSummandAlreadyReflectionPaired ≡ true
+    finiteNearGramCancellationCompilerClosedInAgda : Bool
+    finiteNearGramCancellationCompilerClosedInAgdaIsTrue : finiteNearGramCancellationCompilerClosedInAgda ≡ true
+    literalFiniteNearGramIdentityInstantiated : Bool
+    literalFiniteNearGramIdentityInstantiatedIsFalse : literalFiniteNearGramIdentityInstantiated ≡ false
+    signedFiniteNearCrossTermEstimateClosed : Bool
+    signedFiniteNearCrossTermEstimateClosedIsFalse : signedFiniteNearCrossTermEstimateClosed ≡ false
+    conjugationOrbitCompressionOwned : Bool
+    conjugationOrbitCompressionOwnedIsFalse : conjugationOrbitCompressionOwned ≡ false
+
     boundedReading : String
 
 open AristotleCurrentFrontier public
@@ -79,4 +93,5 @@ canonicalAristotleCurrentFrontier =
     true refl false refl true refl true refl true refl
     false refl false refl false refl false refl false refl false refl false refl
     true refl true refl true refl true refl true refl true refl false refl false refl false refl
-    "The newest kernel-checked Lean tranche closes an explicit every-cutoff far-shell modulus, its decay to zero, a genuinely finite signed near carrier, and transport of that decomposition onto literal D_off. The deterministic projective Schur compiler is also now covered by the reported 8883-job aggregate build. Agda preserves the previous near/far compiler API and adds a finite post-Schur perturbation consumer. The first unproved S2 theorem is now a signed bound on ||E D_near(J)||^2 strong enough that, together with the explicit far-error energy, it lies below the surviving S1 cluster margin. The infinite zero tail is no longer the research bottleneck; S1, the finite signed near-Schur estimate, the joint margin, and low-ordinate certification remain open. RH is not derived."
+    true refl true refl true refl false refl false refl false refl
+    "The explicit-cutoff Lean tranche closes the infinite S2 tail and constructs the literal finite nearOffFinset carrier on D_off. Source inspection further shows that nearOffFinset is reflection-stable because membership depends only on the ordinate gap, while reflection preserves the ordinate; the stored summand is already Z_sigma + Z_Rsigma, so reflection compression is exhausted and the odd-height channel is already cancelled. Agda now owns both the finite-near perturbation compiler and a finite signed Gram ledger that rewrites the post-Schur near energy as diagonal mass plus a signed twice-cross covariance term. The first unproved S2 analytic theorem is therefore the literal finite Gram identity/instantiation together with a signed bound on its cross term strong enough that the diagonal plus covariance budget, plus the explicit far error, lies below the S1 cluster margin. No conjugation-orbit theorem is claimed because no checked conjugation carrier API was identified. S1, the finite signed covariance estimate, the joint margin, and low-ordinate certification remain open. RH is not derived."
