@@ -11,13 +11,13 @@ import DASHI.Core.DiscriminatorSynthesisExact as Synthesis
 -- SEQUENTIAL CONSUMER-RELATIVE EXPERIMENT PLANNING
 --
 -- A one-shot experiment need not close the declared prediction/decision
--- consumer.  This module therefore makes the next experiment depend on the
--- realised observation and carries the refined compatible-state fibre down the
--- corresponding branch.
+-- consumer.  The next experiment may therefore depend on the realised outcome,
+-- with the compatible-state fibre refined along that branch.
 --
--- The terminal condition is consumer point-identifiability, not identity of the
--- full hidden world state.  No probability distribution or expected utility is
--- assumed; cost below is a worst-case proof bound over all declared outcomes.
+-- Terminal success is consumer point-identifiability, not full hidden-world
+-- identity.  No probability model is assumed.  Cost certificates below are
+-- worst-case bounds over all outcomes that are actually compatible with the
+-- current fibre.
 ------------------------------------------------------------------------
 
 private
@@ -32,8 +32,16 @@ RefineByBundle :
 RefineByBundle compatible bundle outcome world =
   compatible world × Synthesis.observe bundle world ≡ outcome
 
+OutcomePossible :
+  (compatible : World → Set) →
+  (bundle : Synthesis.ExperimentBundle World) →
+  Synthesis.Observation bundle → Set
+OutcomePossible compatible bundle outcome =
+  Σ World λ world → RefineByBundle compatible bundle outcome world
+
 ------------------------------------------------------------------------
--- Observation-dependent experiment tree.
+-- Observation-dependent experiment tree.  Impossible measurement outcomes do
+-- not generate proof obligations; every compatible/realizable branch does.
 ------------------------------------------------------------------------
 
 data SequentialConsumerPlan
@@ -41,36 +49,34 @@ data SequentialConsumerPlan
     (World → Set) → Set₁ where
   closeConsumer :
     ∀ {compatible} →
-    Envelope.PointIdentifiable (λ (_ : ⊤) world → compatible world)
-      consumer tt →
+    (∀ left right →
+      compatible left →
+      compatible right →
+      consumer left ≡ consumer right) →
     SequentialConsumerPlan consumer compatible
 
   askThen :
     ∀ {compatible}
       (bundle : Synthesis.ExperimentBundle World) →
       ((outcome : Synthesis.Observation bundle) →
+        OutcomePossible compatible bundle outcome →
         SequentialConsumerPlan consumer
           (RefineByBundle compatible bundle outcome)) →
     SequentialConsumerPlan consumer compatible
 
-------------------------------------------------------------------------
--- The terminal constructor really closes exactly the requested consumer.
-------------------------------------------------------------------------
-
 terminalConsumerIdentifiable :
   ∀ {consumer : World → Prediction}
-    {compatible : World → Set}
-    (identifiable :
-      Envelope.PointIdentifiable (λ (_ : ⊤) world → compatible world)
-        consumer tt) →
+    {compatible : World → Set} →
+  (∀ left right →
+    compatible left →
+    compatible right →
+    consumer left ≡ consumer right) →
   SequentialConsumerPlan consumer compatible
 terminalConsumerIdentifiable = closeConsumer
 
 ------------------------------------------------------------------------
--- Worst-case cumulative cost certificate.
---
--- `PlanCostAtMost plan budget` is proof-relevant.  At a branching experiment,
--- every possible outcome branch must fit under the declared total bound.
+-- Worst-case cumulative cost.  Every realizable outcome branch must stay under
+-- the common declared total budget.
 ------------------------------------------------------------------------
 
 data PlanCostAtMost
@@ -86,16 +92,14 @@ data PlanCostAtMost
     ∀ {bundle continuations budget}
       (branchBudget : Synthesis.Observation bundle → Nat) →
       ((outcome : Synthesis.Observation bundle) →
-        PlanCostAtMost (continuations outcome) (branchBudget outcome)) →
+        (possible : OutcomePossible compatible bundle outcome) →
+        PlanCostAtMost
+          (continuations outcome possible)
+          (branchBudget outcome)) →
       ((outcome : Synthesis.Observation bundle) →
+        OutcomePossible compatible bundle outcome →
         Synthesis.cost bundle + branchBudget outcome ≤ budget) →
     PlanCostAtMost (askThen bundle continuations) budget
-
-------------------------------------------------------------------------
--- Minimality compares certified worst-case bounds over an application-declared
--- plan library.  This is minimax resource cost, not a probability-weighted
--- expected cost and not scientific truth.
-------------------------------------------------------------------------
 
 record CertifiedSequentialPlan
     (consumer : World → Prediction)
@@ -126,8 +130,9 @@ record MinimalSequentialConsumerPlan
 open MinimalSequentialConsumerPlan public
 
 ------------------------------------------------------------------------
--- One-shot prospective closure embeds into the sequential language as a tree
--- of depth one: ask the bundle, then close on every possible outcome.
+-- A one-shot prospectively consumer-closing bundle is a depth-one sequential
+-- plan.  The branch's realizability witness supplies exactly the true state
+-- needed by the existing Stage-6 prospective-closure theorem.
 ------------------------------------------------------------------------
 
 oneShotConsumerClosingPlan :
@@ -139,43 +144,13 @@ oneShotConsumerClosingPlan :
   Synthesis.ProspectivelyClosesConsumer compatible consumer bundle →
   SequentialConsumerPlan consumer (compatible evidence)
 oneShotConsumerClosingPlan compatible consumer evidence bundle closes =
-  askThen bundle λ outcome →
-    closeConsumer (closes evidenceWitness compatibilityWitness)
-  where
-    evidenceWitness : World
-    evidenceWitness = ?
-
-    compatibilityWitness : compatible evidence evidenceWitness
-    compatibilityWitness = ?
-
-------------------------------------------------------------------------
--- The generic one-shot embedding above cannot choose a true world from mere
--- evidence.  The honest executable embedding therefore takes the witnessed
--- current state explicitly.  This is the form applications should use.
-------------------------------------------------------------------------
-
-oneShotConsumerClosingPlanFromWitness :
-  ∀ {Evidence : Set}
-    (compatible : Envelope.Compatible Evidence World)
-    (consumer : World → Prediction)
-    (evidence : Evidence)
-    (witness : World) →
-    compatible evidence witness →
-    (bundle : Synthesis.ExperimentBundle World) →
-    Synthesis.ProspectivelyClosesConsumer compatible consumer bundle →
-  SequentialConsumerPlan consumer (compatible evidence)
-oneShotConsumerClosingPlanFromWitness
-    compatible consumer evidence witness witnessCompatible bundle closes =
-  askThen bundle λ outcome →
-    closeConsumer
-      (record
-        { unique = λ left right leftCompatible rightCompatible →
-            Envelope.PointIdentifiable.unique
-              (closes evidence witness witnessCompatible)
-              left right
-              (proj₁ leftCompatible , proj₂ leftCompatible)
-              (proj₁ rightCompatible , proj₂ rightCompatible)
-        })
+  askThen bundle λ outcome possible →
+    closeConsumer λ left right leftCompatible rightCompatible →
+      closes
+        evidence
+        (proj₁ possible)
+        (proj₁ (proj₂ possible))
+        left right leftCompatible rightCompatible
 
 ------------------------------------------------------------------------
 -- Boundary.
@@ -192,6 +167,10 @@ record SequentialExperimentPlannerBoundary : Set where
     nextExperimentMayDependOnObservedOutcomeIsTrue :
       nextExperimentMayDependOnObservedOutcome ≡ true
 
+    impossibleOutcomeCreatesContinuationObligation : Bool
+    impossibleOutcomeCreatesContinuationObligationIsFalse :
+      impossibleOutcomeCreatesContinuationObligation ≡ false
+
     terminalConsumerClosureRequiresFullWorldIdentity : Bool
     terminalConsumerClosureRequiresFullWorldIdentityIsFalse :
       terminalConsumerClosureRequiresFullWorldIdentity ≡ false
@@ -203,4 +182,4 @@ record SequentialExperimentPlannerBoundary : Set where
 canonicalSequentialExperimentPlannerBoundary : SequentialExperimentPlannerBoundary
 canonicalSequentialExperimentPlannerBoundary =
   sequentialExperimentPlannerBoundary
-    false refl true refl false refl false refl
+    false refl true refl false refl false refl false refl
