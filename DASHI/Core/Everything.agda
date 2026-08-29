@@ -12,6 +12,9 @@ import DASHI.Core.PredictionEnvelopeExact
 import DASHI.Core.CalibratedExperimentInferenceExact
 import DASHI.Core.RobustExperimentInferenceFrontierExact
 import DASHI.Core.ConsumerRelativeReductionKernelExact
+import DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact
+import DASHI.Core.ConsumerRelativeReductionSearchExact
+import DASHI.Core.RobustInterventionAcrossHypothesesExact
 import DASHI.Core.FormalizationRecoverySourceRegistryExact
 import DASHI.Core.FormalizationRecoveryGeometryExact
 import DASHI.Core.SourceAcquisitionGeometryExact
