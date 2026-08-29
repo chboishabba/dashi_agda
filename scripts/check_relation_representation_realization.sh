@@ -27,6 +27,15 @@ for f in "${FILES[@]}"; do
   fi
 done
 
+test -s scripts/relation_representation_numeric_producer.py
+test -s Artifacts/relation-representation/numeric-producer-receipt.json
+python3 scripts/relation_representation_numeric_producer.py
+
+grep -q 'dashi.relation-representation.numeric-producer.v1' Artifacts/relation-representation/numeric-producer-receipt.json
+grep -q '"spectral_gap": 8' Artifacts/relation-representation/numeric-producer-receipt.json
+grep -q '"squared_error": 0' Artifacts/relation-representation/numeric-producer-receipt.json
+grep -q '"state_dependent": true' Artifacts/relation-representation/numeric-producer-receipt.json
+
 grep -q '10.52202/085713-1438' DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
 grep -q '10.48550/arXiv.2510.09790' DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
 grep -q '10.48550/arXiv.2605.05115' DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
