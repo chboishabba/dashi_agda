@@ -1,45 +1,101 @@
 module DASHI.Physics.Foundations.CommonActionQFTGRVariationCompilerExact where
 
+open import DASHI.Core.Prelude
+
 import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact as Weld
 import DASHI.Physics.Foundations.CommonEffectiveActionVariationExact as Variation
 import DASHI.Physics.Foundations.EinsteinCommonActionVariationFrontierExact as EinsteinVariation
 import DASHI.Physics.Foundations.BalabanCommonActionVariationFrontierExact as BalabanVariation
 
-------------------------------------------------------------------------
--- Final BIDI stress compiler, corrected sectorwise.
---
--- GR side:
---   common metric variation = Einstein tensor
---   + literal field equation G = T
---   -> common variation = literal GR source.
---
--- QFT side:
---   for every compact simple group G,
---     metric variation of the SAME beta-driven Balaban sector density
---       = literal sector stress T^(G)
---   + explicit aggregation of all literal sector stresses
---   + common variation = that aggregate
---   -> common variation = literal total QFT source.
---
--- No single pure-YM sector is identified with total gravitating stress.
-------------------------------------------------------------------------
+record CommonMetricVariationLanguage
+    {U : Weld.UnifiedCandidate}
+    {variation : Variation.CommonEffectiveActionVariation U}
+    (grReceipt : EinsteinVariation.EinsteinTensorVariationReceipt variation)
+    (qftReceipt : BalabanVariation.BalabanAllSectorVariationReceipt variation)
+    : Set₁ where
+  field
+    MetricPerturbation VariationScalar : Set
+    commonStressMetricPairing :
+      Weld.SharedStressEnergy U → MetricPerturbation → VariationScalar
+    toGRPerturbation :
+      MetricPerturbation → EinsteinVariation.MetricPerturbation grReceipt
+    toQFTPerturbation :
+      MetricPerturbation → BalabanVariation.MetricPerturbation qftReceipt
+    fromGRScalar : EinsteinVariation.VariationScalar grReceipt → VariationScalar
+    fromQFTScalar : BalabanVariation.VariationScalar qftReceipt → VariationScalar
+
+    grPairingCommutes :
+      ∀ stress perturbation →
+      commonStressMetricPairing stress perturbation
+      ≡ fromGRScalar
+          (EinsteinVariation.stressMetricPairing grReceipt
+            stress (toGRPerturbation perturbation))
+
+    qftPairingCommutes :
+      ∀ stress perturbation →
+      commonStressMetricPairing stress perturbation
+      ≡ fromQFTScalar
+          (BalabanVariation.stressMetricPairing qftReceipt
+            stress (toQFTPerturbation perturbation))
+
+    CommonAdmissibleMetricPerturbation :
+      Weld.Candidate U → Weld.Regime U → MetricPerturbation → Set
+
+    commonAdmissibleImpliesGRAdmissible :
+      ∀ candidate regime perturbation →
+      CommonAdmissibleMetricPerturbation candidate regime perturbation →
+      EinsteinVariation.AdmissibleMetricPerturbation grReceipt
+        candidate regime (toGRPerturbation perturbation)
+
+    commonAdmissibleImpliesQFTAdmissible :
+      ∀ candidate regime perturbation →
+      CommonAdmissibleMetricPerturbation candidate regime perturbation →
+      BalabanVariation.CommonAdmissibleMetricPerturbation qftReceipt
+        candidate regime (toQFTPerturbation perturbation)
+open CommonMetricVariationLanguage public
 
 commonEinsteinAndBalabanVariationImpliesStressWeld :
   ∀ {U : Weld.UnifiedCandidate}
-    (variation : Variation.CommonEffectiveActionVariation U) →
-  EinsteinVariation.EinsteinTensorVariationReceipt variation →
-  BalabanVariation.BalabanAllSectorVariationReceipt variation →
+    (variation : Variation.CommonEffectiveActionVariation U)
+    (grReceipt : EinsteinVariation.EinsteinTensorVariationReceipt variation)
+    (qftReceipt : BalabanVariation.BalabanAllSectorVariationReceipt variation) →
+  CommonMetricVariationLanguage grReceipt qftReceipt →
   Weld.StressEnergyWeldToken U →
   Weld.SameStressEnergyWeld U
 commonEinsteinAndBalabanVariationImpliesStressWeld
-    variation einsteinReceipt balabanReceipt token =
+    variation grReceipt qftReceipt commonLanguage token =
   Variation.commonVariationImpliesStressWeld
     variation
     (EinsteinVariation.einsteinTensorVariationBuildsGRIdentification
-      variation einsteinReceipt)
+      variation grReceipt)
     (BalabanVariation.balabanSectorFamilyBuildsQFTVariationIdentification
-      variation balabanReceipt)
+      variation qftReceipt)
     token
+
+stressWeldImpliesCommonMetricPairingEquality :
+  ∀ {U : Weld.UnifiedCandidate}
+    {variation : Variation.CommonEffectiveActionVariation U}
+    (grReceipt : EinsteinVariation.EinsteinTensorVariationReceipt variation)
+    (qftReceipt : BalabanVariation.BalabanAllSectorVariationReceipt variation)
+    (commonLanguage : CommonMetricVariationLanguage grReceipt qftReceipt)
+    (weld : Weld.SameStressEnergyWeld U) →
+  ∀ candidate regime perturbation →
+  Weld.grRegime U regime →
+  Weld.qftRegime U regime →
+  commonStressMetricPairing commonLanguage
+    (Weld.grStressToShared U (Weld.coarseGrain U candidate regime)
+      (Weld.actualGRStressEnergy U (Weld.coarseGrain U candidate regime)))
+    perturbation
+  ≡ commonStressMetricPairing commonLanguage
+      (Weld.qftTotalStressShared U (Weld.coarseGrain U candidate regime))
+      perturbation
+stressWeldImpliesCommonMetricPairingEquality
+    grReceipt qftReceipt commonLanguage weld candidate regime perturbation
+    grAtRegime qftAtRegime =
+  cong
+    (λ stress → commonStressMetricPairing commonLanguage stress perturbation)
+    (Weld.sameStressEnergyOnOverlap weld
+      candidate regime grAtRegime qftAtRegime)
 
 record CommonActionQFTGRCompilerBoundary : Set where
   constructor commonActionQFTGRCompilerBoundary
@@ -47,15 +103,16 @@ record CommonActionQFTGRCompilerBoundary : Set where
     separateExtraStressWeldTheoremStillNeededAfterBothReceipts : Bool
     separateExtraStressWeldTheoremStillNeededAfterBothReceiptsIsFalse :
       separateExtraStressWeldTheoremStillNeededAfterBothReceipts ≡ false
-
+    independentGRAndQFTMetricLanguagesAutomaticallyMeanSameVariation : Bool
+    independentGRAndQFTMetricLanguagesAutomaticallyMeanSameVariationIsFalse :
+      independentGRAndQFTMetricLanguagesAutomaticallyMeanSameVariation ≡ false
     onePureYangMillsSectorCanStandForTotalQFTStress : Bool
     onePureYangMillsSectorCanStandForTotalQFTStressIsFalse :
       onePureYangMillsSectorCanStandForTotalQFTStress ≡ false
-
-    einsteinAndSectorwiseBalabanVariationReceiptsCompileDirectly : Bool
-    einsteinAndSectorwiseBalabanVariationReceiptsCompileDirectlyIsTrue :
-      einsteinAndSectorwiseBalabanVariationReceiptsCompileDirectly ≡ true
+    sharedMetricLanguagePlusBothReceiptsCompilesStressWeld : Bool
+    sharedMetricLanguagePlusBothReceiptsCompilesStressWeldIsTrue :
+      sharedMetricLanguagePlusBothReceiptsCompilesStressWeld ≡ true
 
 canonicalCommonActionQFTGRCompilerBoundary : CommonActionQFTGRCompilerBoundary
 canonicalCommonActionQFTGRCompilerBoundary =
-  commonActionQFTGRCompilerBoundary false refl false refl true refl
+  commonActionQFTGRCompilerBoundary false refl false refl false refl true refl
