@@ -35,6 +35,15 @@ module DASHI.Analysis.RiemannAristotleCurrentFrontierExact where
 --      far residual with A+B and supplies B_far < strictSignalMargin;
 --   D. final implication into the existing unweakened RH statement.
 --
+-- Highest-alpha strategy note:
+--
+--   The next theorem should not estimate the old absolute off-ordinate mass.
+--   It should expose the actual projected response of each unselected zero in
+--   the certified three-taper quotient coordinates, preserve signed/projective
+--   structure as long as possible, and only majorize after exact projection.
+--   If a shell/height decomposition is needed, it should be performed on that
+--   literal projected carrier and then reindexed exactly for summation.
+--
 -- Equal height-modulus degeneracy remains visible: the current 3x3 height gate
 -- requires three strictly ordered positive height moduli.  No theorem here
 -- removes that degeneracy or derives RH.
@@ -82,4 +91,4 @@ canonicalAristotleCurrentFrontier =
     false refl
     false refl
     false refl
-    "The finite selected-carrier algebra and inhabited two-zero/three-taper construction are closed in Lean. The highest-alpha open work is now literal projected far-tail control, followed by domain composition and the final unweakened RH implication."
+    "The finite selected-carrier algebra and inhabited two-zero/three-taper construction are closed in Lean. The highest-alpha open work is now literal projected far-tail control in the exact quotient coordinates, followed by domain composition and the final unweakened RH implication."
