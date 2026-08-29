@@ -1,10 +1,6 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact where
 
-------------------------------------------------------------------------
--- ROUND102 A REPRESENTATION BRIDGE
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; _≤_; _<_; Positive)
@@ -12,7 +8,7 @@ import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 0ℝ; _≤ℝ_; _<ℝ_; ≤ℝ-trans)
+  (ℝ; 0ℝ; _≤ℝ_; _<ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanA1HistoryUniformTwoSidedBetaRound102Exact as Cert
 import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaLowerRemainderExact as Beta
@@ -55,6 +51,9 @@ realUpperSlope embedding certificate =
     (Cert.gaussianCeiling certificate
       + Beta.half * Cert.gaussianFloor certificate)
 
+rationalHalfPositive : 0ℚ < Beta.half
+rationalHalfPositive = ℚP.positive⁻¹ Beta.half
+
 rationalLowerPositive :
   ∀ {History Cell}
     (certificate : Cert.HistoryUniformTwoSidedBetaData History Cell) →
@@ -62,10 +61,10 @@ rationalLowerPositive :
 rationalLowerPositive certificate =
   let
     instance
-      halfPositive : Positive Beta.half
-      halfPositive = ℚ.positive (ℚP.positive⁻¹ Beta.half)
-      floorPositive : Positive (Cert.gaussianFloor certificate)
-      floorPositive = ℚ.positive (Cert.gaussianFloorPositive certificate)
+      halfPositiveInstance : Positive Beta.half
+      halfPositiveInstance = ℚ.positive rationalHalfPositive
+      floorPositiveInstance : Positive (Cert.gaussianFloor certificate)
+      floorPositiveInstance = ℚ.positive (Cert.gaussianFloorPositive certificate)
   in
   ℚP.positive⁻¹ (Beta.half * Cert.gaussianFloor certificate)
 
