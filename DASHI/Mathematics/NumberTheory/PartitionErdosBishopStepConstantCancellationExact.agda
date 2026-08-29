@@ -15,13 +15,6 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosBishopStepConstantCancellati
 -- and hence, for positive n,
 --
 --   (pi_M^2 / 6) * x_n^(-2) ~= n*.
---
--- The proof uses the actual constructed root and Machin pi.  The key scalar
--- normalization is simply
---
---   (2 sqrt n)^(-1) * sqrt n ~= 1/2,
---
--- obtained from the vendored inverse cancellation law.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; suc)
@@ -33,6 +26,7 @@ import Inverse as BishopInverse
 import Real as BishopReal
 import RealProperties as BishopP
 
+import DASHI.Foundations.BishopBaselMachinSineQuadraticCoefficientExact as SineCoeff
 import DASHI.Foundations.BishopBaselSineProductCoefficientBoundaryExact as BaselBoundary
 import DASHI.Foundations.BishopGeometricReciprocalSquareFromCrossExact as Reciprocal
 import DASHI.Foundations.BishopNatSquareRootDividedTangentExact as Tangent
@@ -75,9 +69,7 @@ inverseDenominatorTimesRootIsHalf {n} nPositive =
       BishopP.≃-refl inv root)
     (BishopP.≃-trans
       (BishopP.*-congˡ inverseLaw)
-      (BishopP.≃-trans
-        (BishopP.*-identityʳ half)
-        BishopP.≃-refl))
+      (BishopP.*-identityʳ half))
 
 canonicalStepSquareWeightedByNat :
   ∀ {n : Nat} →
@@ -91,7 +83,7 @@ canonicalStepSquareWeightedByNat :
 canonicalStepSquareWeightedByNat {n} nPositive =
   let
     rate = Rate.canonicalErdosStepRate n nPositive
-    pi = Constant.Machin.bishopMachinPi
+    pi = SineCoeff.machinPi
     s = Constant.sqrtTwoThirds
     root = Tangent.rootNat n
     inv = Tangent.inverseDenominator n nPositive
