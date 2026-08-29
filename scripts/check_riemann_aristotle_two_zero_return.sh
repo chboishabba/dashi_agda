@@ -43,6 +43,8 @@ FILES=(
   DASHI/Analysis/RiemannAristotleG2cPolarizationCompilerExact.agda
   DASHI/Analysis/RiemannAristotleG2dReflectionDuplicateNoGoExact.agda
   DASHI/Analysis/RiemannAristotleG2dScalarDeterminantSumTargetExact.agda
+  DASHI/Analysis/RiemannAristotleG2eDeterminantTaperKernelExact.agda
+  DASHI/Analysis/RiemannAristotleG2eTargetCenteredSymmetryNoGoExact.agda
   DASHI/Analysis/RiemannAristotleG2CurrentCutExact.agda
   DASHI/Analysis/RiemannAristotleG2CurrentCutRegression.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda
@@ -90,6 +92,8 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotleG2cPolarizationCompilerExact.agda
   agda DASHI/Analysis/RiemannAristotleG2dReflectionDuplicateNoGoExact.agda
   agda DASHI/Analysis/RiemannAristotleG2dScalarDeterminantSumTargetExact.agda
+  agda DASHI/Analysis/RiemannAristotleG2eDeterminantTaperKernelExact.agda
+  agda DASHI/Analysis/RiemannAristotleG2eTargetCenteredSymmetryNoGoExact.agda
   agda DASHI/Analysis/RiemannAristotleG2CurrentCutRegression.agda
   agda DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 else
