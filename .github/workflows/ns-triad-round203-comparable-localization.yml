@@ -29,9 +29,11 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNMixedHelicityViscousCovarianceNoGoRound229Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNMixedHelicityForcingSwapRound230Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNMixedHelicityDampedProductTangentRound231Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNOppositeHelicityDyadicDecisionRound232Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound228Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound228Validation.agda'
       - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound228Exact.agda'
+      - 'scripts/audit_opposite_helicity_symbol_round232.py'
       - 'scripts/check_ns_triad_clay_frontier.py'
       - 'scripts/run_agda29_parallel_check.sh'
       - 'flake.nix'
@@ -57,6 +59,9 @@ jobs:
 
       - name: Reject frontier holes and postulates
         run: python3 scripts/check_ns_triad_clay_frontier.py
+
+      - name: Audit Round232 opposite-helicity symbol regimes
+        run: python3 scripts/audit_opposite_helicity_symbol_round232.py
 
       - name: Type-check Round203 localization owner
         run: >-
@@ -142,6 +147,11 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNMixedHelicityDampedProductTangentRound231Exact.agda
+
+      - name: Type-check Round232 dyadic decision algebra
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNOppositeHelicityDyadicDecisionRound232Exact.agda
 
       - name: Type-check Round228 frontier validation
         run: >-
