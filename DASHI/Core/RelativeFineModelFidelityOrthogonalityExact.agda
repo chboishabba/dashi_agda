@@ -3,17 +3,17 @@ module DASHI.Core.RelativeFineModelFidelityOrthogonalityExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Choice
 import DASHI.Core.CoarseFineRelativeFibreExact as Fibre
 import DASHI.Core.JointSequentialInformationFidelityPolicyExact as Joint
 
 ------------------------------------------------------------------------
 -- RELATIVE-FINE INFORMATION != COMPUTATIONAL/MODEL FIDELITY
 --
--- The coarse/fine fibre architecture and the adaptive-fidelity architecture
--- answer different questions.  Relative fine information is a coordinate of
--- the world/reopening receipt over a coarse surface.  Model fidelity is a
--- coordinate of the representation/computation used to reason about that
--- world.  Neither coordinate is definitionally a function of the other.
+-- The coarse/fine fibre architecture and adaptive-fidelity architecture answer
+-- different questions. Relative fine information is a coordinate of the world
+-- or reopening receipt over a coarse surface. Model fidelity is a coordinate of
+-- the representation/computation used to reason about that world.
 ------------------------------------------------------------------------
 
 record RelativeFineModelState
@@ -27,11 +27,6 @@ record RelativeFineModelState
 
 open RelativeFineModelState public
 
-------------------------------------------------------------------------
--- Changing the model while holding the world fixed preserves both its coarse
--- surface and its relative-fine reopening coordinate by definitional equality.
-------------------------------------------------------------------------
-
 modelChangeKeepsWorldCoordinates :
   ∀ {World ModelState}
     (geometry : Fibre.CoarseFineReopening World)
@@ -40,11 +35,6 @@ modelChangeKeepsWorldCoordinates :
   Fibre.coarse geometry world ≡ Fibre.coarse geometry world
   × Fibre.relativeFine geometry world ≡ Fibre.relativeFine geometry world
 modelChangeKeepsWorldCoordinates geometry world leftModel rightModel = refl , refl
-
-------------------------------------------------------------------------
--- Conversely, two worlds can share a coarse coordinate while differing in
--- relative-fine information at exactly the same runtime model fidelity.
-------------------------------------------------------------------------
 
 record FineDifferenceAtFixedModel
     {World ModelState : Set}
@@ -59,12 +49,6 @@ record FineDifferenceAtFixedModel
     witnessReference : String
 
 open FineDifferenceAtFixedModel public
-
-------------------------------------------------------------------------
--- A joint-policy fidelity move changes only the model coordinate.  It cannot
--- erase or reconstruct a relative-fine distinction without an additional
--- theorem connecting that model to the fine-world carrier.
-------------------------------------------------------------------------
 
 record FidelityMoveWithFineWorld
     {World ModelState : Set}
@@ -88,12 +72,53 @@ fidelityMoveKeepsRelativeFineCoordinate :
 fidelityMoveKeepsRelativeFineCoordinate move = refl
 
 ------------------------------------------------------------------------
--- This gives the planner two genuinely different repair moves:
---
---   expose/refine the missing relative-fine information  (value of information)
---   increase/change model fidelity                         (value of computation)
---
--- A consumer-specific proof decides which is required.
+-- Relative-fine disclosure is an evidence move, not a fidelity move.  The
+-- application still supplies its resource cost and calibration/realisation
+-- reference; the generic theorem only says what information is disclosed.
+------------------------------------------------------------------------
+
+relativeFineEvidenceMove :
+  ∀ {World}
+    (geometry : Fibre.CoarseFineReopening World) →
+  (measurementCost : Nat) →
+  String →
+  String →
+  Joint.EvidenceMove World
+relativeFineEvidenceMove geometry measurementCost resourceRef calibrationRef =
+  Joint.evidenceMove
+    (Choice.informationMove
+      Choice.takeMeasurement
+      measurementCost
+      "disclose relative-fine reopening coordinate"
+      resourceRef
+      calibrationRef)
+    Joint.measurementEvidence
+    (Fibre.RelativeFine geometry)
+    (λ world observed → Fibre.relativeFine geometry world ≡ observed)
+    "relative-fine fibre observation"
+    calibrationRef
+
+relativeFineObservationRefinesWithoutChangingModel :
+  ∀ {World ModelState}
+    (geometry : Fibre.CoarseFineReopening World)
+    (live : World → Set)
+    (model : ModelState)
+    (measurementCost : Nat)
+    (resourceRef calibrationRef : String)
+    (observed : Fibre.RelativeFine geometry) →
+  Joint.RefineLive
+    live
+    (relativeFineEvidenceMove geometry measurementCost resourceRef calibrationRef)
+    observed
+  ≡
+  (λ world → live world × Fibre.relativeFine geometry world ≡ observed)
+relativeFineObservationRefinesWithoutChangingModel
+    geometry live model measurementCost resourceRef calibrationRef observed = refl
+
+------------------------------------------------------------------------
+-- The planner therefore has two different repair moves for a coarse collision:
+-- reveal/refine the missing relative-fine coordinate (value of information),
+-- or increase/change model fidelity (value of computation).
 ------------------------------------------------------------------------
 
 record RelativeFineOrFidelityObstruction
@@ -125,10 +150,15 @@ record RelativeFineModelFidelityBoundary : Set where
     fineResidualDifferenceAutomaticallyRequiresMoreComputeIsFalse :
       fineResidualDifferenceAutomaticallyRequiresMoreCompute ≡ false
 
+    relativeFineCanBeDisclosedAsEvidenceAtFixedModel : Bool
+    relativeFineCanBeDisclosedAsEvidenceAtFixedModelIsTrue :
+      relativeFineCanBeDisclosedAsEvidenceAtFixedModel ≡ true
+
     fineInformationAndModelFidelityCanBeOptimizedJointly : Bool
     fineInformationAndModelFidelityCanBeOptimizedJointlyIsTrue :
       fineInformationAndModelFidelityCanBeOptimizedJointly ≡ true
 
 canonicalRelativeFineModelFidelityBoundary : RelativeFineModelFidelityBoundary
 canonicalRelativeFineModelFidelityBoundary =
-  relativeFineModelFidelityBoundary false refl false refl false refl true refl
+  relativeFineModelFidelityBoundary
+    false refl false refl false refl true refl true refl
