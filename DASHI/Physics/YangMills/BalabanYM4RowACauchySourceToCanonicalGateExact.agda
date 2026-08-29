@@ -2,7 +2,7 @@
 module DASHI.Physics.YangMills.BalabanYM4RowACauchySourceToCanonicalGateExact where
 
 ------------------------------------------------------------------------
--- ROW A: ONE MIXED-CAUCHY SOURCE PACKAGE -> C, L -> CANONICAL SMALL COUPLING
+-- ROW A: MIXED-CAUCHY LOCAL CONSTANTS + HISTORY RESPONSE -> CANONICAL GATE
 --
 -- Current master already proves, from one normalized interaction package,
 --
@@ -10,23 +10,22 @@ module DASHI.Physics.YangMills.BalabanYM4RowACauchySourceToCanonicalGateExact wh
 --
 -- and from its mixed coupling derivative package,
 --
---   |d_g beta_int| <= L.
+--   |d_g beta_int| <= L_local.
 --
--- Round95 already proves that any positive Gaussian floor b and finite
--- nonnegative C,L admit the explicit cap
+-- The full history-dependent beta law may still have an additional generated
+-- history response.  We therefore keep a separate nonnegative
+-- `historyDerivativeConstant` and define
 --
---       gamma* = b / (2 (C + L + 1))
+--   L_total = L_local + L_history.
 --
--- with (C+L) gamma* < b.  This file removes the remaining artificial seam
--- between those source-derived constants and the canonical Row-A gate.
+-- This avoids falsely identifying the local mixed-Cauchy derivative with the
+-- derivative of the full CMP109/CMP122 generated trajectory.  Once the literal
+-- history-response estimate is supplied, Round95's canonical small-coupling
+-- theorem chooses
 --
--- The only physical data left in this carrier are therefore:
---   * the SAME literal mixed-Cauchy package for the normalized interaction;
---   * a literal positive Gaussian floor;
---   * the literal trajectory identifications/inequalities.
+--   gamma* = b / (2 (C + L_total + 1))
 --
--- No independent existence assumptions for C, L, or sufficiently small gamma
--- remain after this conversion.
+-- and pays both the positivity and shooting gates automatically.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -44,7 +43,7 @@ import DASHI.Physics.YangMills.BalabanYM4RowACanonicalSmallCouplingChoiceExact a
 import DASHI.Physics.YangMills.BalabanYM4RowACombinedGateCompositionExact as Combined
 
 ------------------------------------------------------------------------
--- Source constants are definitions of the already-proved Cauchy majorants.
+-- Source constants.
 ------------------------------------------------------------------------
 
 record RowACauchySourceConstants : Set where
@@ -52,6 +51,12 @@ record RowACauchySourceConstants : Set where
     gaussianFloor : ℚ
     gaussianFloorPositive : 0ℚ < gaussianFloor
     mixedInteraction : Mixed.MixedInteractionCauchyData
+
+    -- Only the genuinely propagated/history part remains external to the local
+    -- mixed-Cauchy package.  It is a source-derived finite constant, not an
+    -- artificial exponential-forgetting law for the marginal coupling.
+    historyDerivativeConstant : ℚ
+    historyDerivativeConstantNonnegative : 0ℚ ≤ historyDerivativeConstant
 
 open RowACauchySourceConstants public
 
@@ -61,8 +66,13 @@ interactionData source = Mixed.base (mixedInteraction source)
 sourceInteractionConstant : RowACauchySourceConstants → ℚ
 sourceInteractionConstant source = H.interactionConstant (interactionData source)
 
+sourceLocalDerivativeConstant : RowACauchySourceConstants → ℚ
+sourceLocalDerivativeConstant source =
+  Mixed.interactionDerivativeConstant (mixedInteraction source)
+
 sourceDerivativeConstant : RowACauchySourceConstants → ℚ
-sourceDerivativeConstant source = Mixed.interactionDerivativeConstant (mixedInteraction source)
+sourceDerivativeConstant source =
+  sourceLocalDerivativeConstant source + historyDerivativeConstant source
 
 sourceInteractionConstantNonnegative :
   (source : RowACauchySourceConstants) →
@@ -77,10 +87,10 @@ sourceInteractionConstantNonnegative source =
   in
   H.mulNN (H.numeratorCoefficientNN dataSet) reciprocalNN
 
-sourceDerivativeConstantNonnegative :
+sourceLocalDerivativeConstantNonnegative :
   (source : RowACauchySourceConstants) →
-  0ℚ ≤ sourceDerivativeConstant source
-sourceDerivativeConstantNonnegative source =
+  0ℚ ≤ sourceLocalDerivativeConstant source
+sourceLocalDerivativeConstantNonnegative source =
   let
     mixed = mixedInteraction source
     base = Mixed.base mixed
@@ -90,6 +100,14 @@ sourceDerivativeConstantNonnegative source =
       (Quot.positiveReciprocalPositive denominator denominatorPositive)
   in
   H.mulNN (Mixed.betaDerivativeNumeratorConstantNN mixed) reciprocalNN
+
+sourceDerivativeConstantNonnegative :
+  (source : RowACauchySourceConstants) →
+  0ℚ ≤ sourceDerivativeConstant source
+sourceDerivativeConstantNonnegative source =
+  ℚP.+-mono-≤
+    (sourceLocalDerivativeConstantNonnegative source)
+    (historyDerivativeConstantNonnegative source)
 
 asFiniteRowASourceConstants :
   RowACauchySourceConstants → Choice.FiniteRowASourceConstants
@@ -126,7 +144,7 @@ canonicalSourceGammaPaysCombinedGate source =
     (asFiniteRowASourceConstants source)
 
 ------------------------------------------------------------------------
--- Literal trajectory carrier.  C,L,gamma are no longer fields.
+-- Literal trajectory carrier.  C,L_total,gamma are no longer free fields.
 ------------------------------------------------------------------------
 
 record CauchyCanonicalRowATrajectory (cutoff : Nat) : Set₁ where
@@ -147,8 +165,6 @@ record CauchyCanonicalRowATrajectory (cutoff : Nat) : Set₁ where
     gaussianLower : ∀ j →
       gaussianFloor source ≤ betaGauss j
 
-    -- The interaction lower bound is exactly the coefficient produced by the
-    -- normalized log-Hessian Cauchy package above.
     interactionLower : ∀ j →
       - (sourceInteractionConstant source * coupling j)
       ≤ betaInteraction j
@@ -225,15 +241,16 @@ module CanonicalGate {cutoff : Nat}
 -- Authority boundary
 ------------------------------------------------------------------------
 
-rowACauchyConstantsToCanonicalGammaLevel : ProofLevel
-rowACauchyConstantsToCanonicalGammaLevel = machineChecked
+rowACauchyLocalConstantsToCanonicalGammaLevel : ProofLevel
+rowACauchyLocalConstantsToCanonicalGammaLevel = machineChecked
 
 rowACauchyCanonicalGateCompositionLevel : ProofLevel
 rowACauchyCanonicalGateCompositionLevel = machineChecked
 
--- Remaining physical seam is now source-native: construct the literal
--- `MixedInteractionCauchyData` and the literal positive Gaussian floor on the
--- same CMP109/CMP119/CMP122 trajectory, and identify that trajectory with the
--- fields above.  Finite C,L and small-gamma existence are downstream theorems.
+-- Remaining physical seam is source-native: instantiate the literal mixed
+-- interaction Cauchy package and positive Gaussian floor, derive the propagated
+-- history response constant on the SAME generated trajectory, and identify the
+-- trajectory with the fields above.  Local C and L_local plus small-gamma
+-- existence are downstream theorems.
 literalRowACauchyCanonicalTrajectoryLevel : ProofLevel
 literalRowACauchyCanonicalTrajectoryLevel = conditional
