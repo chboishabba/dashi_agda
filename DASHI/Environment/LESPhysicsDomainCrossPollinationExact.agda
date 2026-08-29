@@ -8,6 +8,7 @@ import DASHI.Environment.LESDomainBasisBidiFrontierExact as Basis
 import DASHI.Environment.LESFluidPhysicsCouplingExact as Fluid
 import DASHI.Environment.LESBioelectricGaugeChemistryExact as Bioelectric
 import DASHI.Environment.LESEnvironmentSIQuantityBridgeExact as EnvironmentSI
+import DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact as RootSoilFungal
 import DASHI.Physics.Units.SI as SI
 import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact as EM
 import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact as PNP
@@ -21,6 +22,7 @@ data PhysicsReuseLane : Set where
   gaugeElectromagneticLane
   reactionTransportLane
   bioelectricElectrochemicalLane
+  rootSoilFungalPhysiologyLane
   : PhysicsReuseLane
 
 record PhysicsToDomainWeld : Set where
@@ -66,6 +68,10 @@ pnpOwner : String
 pnpOwner =
   "DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact; DOI 10.3390/electrochem2020014"
 
+rootSoilFungalOwner : String
+rootSoilFungalOwner =
+  "DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact; DOI 10.1023/A:1026439226716 + 10.1104/pp.114.246124 + 10.1146/annurev-arplant-042110-103846"
+
 siVoltageDimension : SI.Dimension
 siVoltageDimension = SI.Voltage
 
@@ -77,6 +83,9 @@ u1BoundaryImported = EM.canonicalU1ElectromagneticBoundary
 
 pnpBoundaryImported : PNP.PNPElectrodiffusionBoundary
 pnpBoundaryImported = PNP.canonicalPNPElectrodiffusionBoundary
+
+rootSoilFungalBoundaryImported : RootSoilFungal.RootSoilFungalPhysiologyBoundary
+rootSoilFungalBoundaryImported = RootSoilFungal.canonicalRootSoilFungalPhysiologyBoundary
 
 record LESPhysicsCrossPollinationCutset : Set where
   constructor lesPhysicsCrossPollinationCutset
@@ -91,6 +100,9 @@ record LESPhysicsCrossPollinationCutset : Set where
     independentU1ApplicationOwnerPresent : Bool
     pnpElectrodiffusionOwnerPresent : Bool
     bioelectricPNPWeldTyped : Bool
+    rootSoilFungalIonWaterArchitecturePresent : Bool
+    rootSoilSameSpeciesWeldTyped : Bool
+    mycorrhizalExtensionTyped : Bool
 
     applicationFluidReductionStillNeedsDomainReceipt : Bool
     applicationMaxwellConstitutiveReceiptsStillNeeded : Bool
@@ -105,7 +117,7 @@ open LESPhysicsCrossPollinationCutset public
 canonicalLESPhysicsCrossPollinationCutset : LESPhysicsCrossPollinationCutset
 canonicalLESPhysicsCrossPollinationCutset =
   lesPhysicsCrossPollinationCutset
-    true true true true true true true true true true
+    true true true true true true true true true true true true true
     true true true true true true true
 
 record LESPhysicsCrossPollinationBoundary : Set where
@@ -123,6 +135,9 @@ record LESPhysicsCrossPollinationBoundary : Set where
     siDimensionTypingReplacesConstitutivePhysicsIsFalse : siDimensionTypingReplacesConstitutivePhysics ≡ false
     genericPNPReceiptIsUniversalPlantFungalNeuralModel : Bool
     genericPNPReceiptIsUniversalPlantFungalNeuralModelIsFalse : genericPNPReceiptIsUniversalPlantFungalNeuralModel ≡ false
+    rootSoilFungalArchitectureIsUniversalParameterisation : Bool
+    rootSoilFungalArchitectureIsUniversalParameterisationIsFalse :
+      rootSoilFungalArchitectureIsUniversalParameterisation ≡ false
 
 canonicalLESPhysicsCrossPollinationBoundary : LESPhysicsCrossPollinationBoundary
 canonicalLESPhysicsCrossPollinationBoundary =
@@ -131,5 +146,6 @@ canonicalLESPhysicsCrossPollinationBoundary =
     false refl
     true refl
     true refl
+    false refl
     false refl
     false refl
