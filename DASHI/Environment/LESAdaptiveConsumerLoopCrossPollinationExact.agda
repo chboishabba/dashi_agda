@@ -10,6 +10,7 @@ import DASHI.Core.ConsumerRelativeMinimalFidelityExact as Minimal
 import DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact as Approx
 import DASHI.Core.ConsumerReductionDependencyReopeningExact as Reopening
 import DASHI.Core.CoarseFineRelativeFibreExact as FineFibre
+import DASHI.Core.RelativeFineModelFidelityOrthogonalityExact as Orthogonal
 import DASHI.Core.ConsumerDecisionAdequacyFromReductionExact as Adequacy
 import DASHI.Core.ConsumerAdequacyJointPolicyBidiCompilerExact as Bidi
 import DASHI.Core.RobustInterventionAcrossHypothesesExact as Robust
@@ -40,6 +41,9 @@ approximateFidelityOwner = "DASHI.Core.ConsumerRelativeApproximateFidelityBridge
 
 relativeFineFibreOwner : String
 relativeFineFibreOwner = "DASHI.Core.CoarseFineRelativeFibreExact"
+
+relativeFineModelOrthogonalityOwner : String
+relativeFineModelOrthogonalityOwner = "DASHI.Core.RelativeFineModelFidelityOrthogonalityExact"
 
 proofDerivedAdequacyOwner : String
 proofDerivedAdequacyOwner = "DASHI.Core.ConsumerDecisionAdequacyFromReductionExact"
@@ -92,6 +96,9 @@ approximateBoundaryImported = Approx.canonicalConsumerApproximateFidelityBoundar
 fineFibreBoundaryImported : FineFibre.CoarseFineRelativeFibreBoundary
 fineFibreBoundaryImported = FineFibre.canonicalCoarseFineRelativeFibreBoundary
 
+orthogonalityBoundaryImported : Orthogonal.RelativeFineModelFidelityBoundary
+orthogonalityBoundaryImported = Orthogonal.canonicalRelativeFineModelFidelityBoundary
+
 adequacyBoundaryImported : Adequacy.ConsumerDecisionAdequacyBoundary
 adequacyBoundaryImported = Adequacy.canonicalConsumerDecisionAdequacyBoundary
 
@@ -140,6 +147,7 @@ record LESAdaptiveConsumerArchitectureCutset : Set where
     approximateBranchMapsToDecisionSafety counterexampleBranchRefutesConsumerCandidate : Bool
     relativeFineResidualFibreTyped canonicalProvenanceQuotientBridgeTyped : Bool
     coarseSafeReductionMayRetainFineResidualTyped : Bool
+    relativeFineAndModelFidelityOrthogonalTyped : Bool
     proofDerivedDecisionAdequacyTyped : Bool
     exactCertificateFeedsDecisionAdequacyTyped : Bool
     approximateMarginFeedsDecisionAdequacyTyped : Bool
@@ -173,6 +181,7 @@ canonicalLESAdaptiveConsumerArchitectureCutset =
     true true true true true true true true true true
     true true true true true true true true true true
     true true true true true true true true true true
+    true true true
 
 record LESAdaptiveConsumerArchitectureBoundary : Set where
   constructor lesAdaptiveConsumerArchitectureBoundary
@@ -180,6 +189,9 @@ record LESAdaptiveConsumerArchitectureBoundary : Set where
     fineStateMeansOnlyMoreExpensiveModel : Bool
     fineStateMeansOnlyMoreExpensiveModelIsFalse :
       fineStateMeansOnlyMoreExpensiveModel ≡ false
+    relativeFineInformationEqualsModelFidelity : Bool
+    relativeFineInformationEqualsModelFidelityIsFalse :
+      relativeFineInformationEqualsModelFidelity ≡ false
     consumerSafeCoarseProjectionRequiresDiscardingFineResidual : Bool
     consumerSafeCoarseProjectionRequiresDiscardingFineResidualIsFalse :
       consumerSafeCoarseProjectionRequiresDiscardingFineResidual ≡ false
@@ -218,6 +230,6 @@ record LESAdaptiveConsumerArchitectureBoundary : Set where
 canonicalLESAdaptiveConsumerArchitectureBoundary : LESAdaptiveConsumerArchitectureBoundary
 canonicalLESAdaptiveConsumerArchitectureBoundary =
   lesAdaptiveConsumerArchitectureBoundary
-    false refl false refl false refl
     false refl false refl false refl false refl false refl false refl
     false refl false refl false refl false refl false refl false refl
+    false refl false refl false refl false refl
