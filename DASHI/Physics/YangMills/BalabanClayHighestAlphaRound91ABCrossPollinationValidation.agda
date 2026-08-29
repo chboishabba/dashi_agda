@@ -7,6 +7,7 @@ import DASHI.Physics.YangMills.BalabanRowAInverseSquareSensitivityDecompositionE
 import DASHI.Physics.YangMills.BalabanRowAInverseSquareChainSensitivityExact as AChain
 import DASHI.Physics.YangMills.BalabanRowASixthSensitivityFromCubicTelescopeExact as ASixth
 import DASHI.Physics.YangMills.BalabanRowADirectSensitivityCumulativeExact as ADirect
+import DASHI.Physics.YangMills.BalabanRowADirectQFromTubeExact as ADirectQ
 import DASHI.Physics.YangMills.BalabanRowAIrrelevantHistorySensitivityCumulativeExact as AHistory
 import DASHI.Physics.YangMills.BalabanBetaPrefixSensitivityToTubeContractionExact as Shoot
 import DASHI.Physics.YangMills.BalabanIrrelevantRGMemoryContractionExact as Memory
@@ -30,6 +31,10 @@ rowACumulativeDirectG6BudgetRound92Level : ProofLevel
 rowACumulativeDirectG6BudgetRound92Level =
   ADirect.rowADirectSixthTubeBudgetAlgebraLevel
 
+rowADirectTubeToQConstantRound93Level : ProofLevel
+rowADirectTubeToQConstantRound93Level =
+  ADirectQ.rowADirectTubeToInputSensitivityAlgebraLevel
+
 rowACumulativeIrrelevantHistoryBudgetRound92Level : ProofLevel
 rowACumulativeIrrelevantHistoryBudgetRound92Level =
   AHistory.rowAIrrelevantHistoryInputSensitivityLevel
@@ -42,14 +47,18 @@ rowAIrrelevantMemoryGeometricCompilerRound91Level : ProofLevel
 rowAIrrelevantMemoryGeometricCompilerRound91Level =
   Memory.irrelevantRGMemoryContractionCompilerLevel
 
-rowALiteralDirectInverseSquareSensitivityRound91Level : ProofLevel
-rowALiteralDirectInverseSquareSensitivityRound91Level = conditional
+-- Physical Row-A seams have now been compressed to source instantiation of the
+-- direct derivative/tube response and irrelevant-history response constants,
+-- followed by the strict scalar inequality qDirect+qHistory<1 on the SAME
+-- generated source trajectory.
+rowALiteralDirectInverseSquareSensitivityRound93Level : ProofLevel
+rowALiteralDirectInverseSquareSensitivityRound93Level = conditional
 
-rowALiteralHistorySensitivityRound91Level : ProofLevel
-rowALiteralHistorySensitivityRound91Level = conditional
+rowALiteralHistorySensitivityRound93Level : ProofLevel
+rowALiteralHistorySensitivityRound93Level = conditional
 
-rowALiteralCombinedQStrictlyBelowOneRound91Level : ProofLevel
-rowALiteralCombinedQStrictlyBelowOneRound91Level = conditional
+rowALiteralCombinedQStrictlyBelowOneRound93Level : ProofLevel
+rowALiteralCombinedQStrictlyBelowOneRound93Level = conditional
 
 rowBActivityEntropyProductRound91Level : ProofLevel
 rowBActivityEntropyProductRound91Level =
@@ -85,14 +94,14 @@ rowCPerShellIntegralSummationCompilerRound91Level =
 
 round91FrozenResearchCountStillFour = R87.round87ShortestClayAnalyticCount
 
-rowACompletionRound91Level : ProofLevel
-rowACompletionRound91Level = conditional
+rowACompletionRound93Level : ProofLevel
+rowACompletionRound93Level = conditional
 
-rowBCompletionRound91Level : ProofLevel
-rowBCompletionRound91Level = conditional
+rowBCompletionRound93Level : ProofLevel
+rowBCompletionRound93Level = conditional
 
-rowCCompletionRound91Level : ProofLevel
-rowCCompletionRound91Level = conditional
+rowCCompletionRound93Level : ProofLevel
+rowCCompletionRound93Level = conditional
 
-rowDCompletionRound91Level : ProofLevel
-rowDCompletionRound91Level = conditional
+rowDCompletionRound93Level : ProofLevel
+rowDCompletionRound93Level = conditional
