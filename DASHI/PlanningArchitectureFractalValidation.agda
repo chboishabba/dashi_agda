@@ -11,12 +11,15 @@ import DASHI.Planning.NestedSituatedPlanningExact as Nested
 import DASHI.Planning.InhabitedLandscapeExact as Landscape
 import DASHI.Architecture.SemiconductorBuiltEnvironmentCrossPollinationExact as Semiconductor
 import DASHI.Planning.DataCentreUrbanResourceConflictExact as DataCentre
+import DASHI.PlanningArchitectureSituatedCrossPollinationValidation as SituatedValidation
 
 ------------------------------------------------------------------------
 -- VALIDATION SURFACE
 --
 -- The tranche intentionally proves non-collapse / no-auto-promotion results at
--- the seams where planning errors are easiest to hide.
+-- the seams where planning errors are easiest to hide.  Importing the situated
+-- validation root also checks the hostile-architecture, BC policy-bundle,
+-- Alice epistemic-governance, LES hyperfabric and anti-sublation welds.
 ------------------------------------------------------------------------
 
 planningStagesRemainDistinct : Planning.proposed ≡ Planning.approved → ⊥
