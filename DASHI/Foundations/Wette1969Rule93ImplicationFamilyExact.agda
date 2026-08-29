@@ -47,29 +47,15 @@ record Wette1969Rule93ImplicationFamilyBoundary : Set where
     sourceCalls93TheThirtyImplicationRules : Bool
     sourceCalls93TheThirtyImplicationRulesIsTrue :
       sourceCalls93TheThirtyImplicationRules ≡ true
-
     finiteCarrierHasThirtyAddresses : Bool
-    finiteCarrierHasThirtyAddressesIsTrue :
-      finiteCarrierHasThirtyAddresses ≡ true
-
+    finiteCarrierHasThirtyAddressesIsTrue : finiteCarrierHasThirtyAddresses ≡ true
     carrierRunsFrom931Through9330 : Bool
-    carrierRunsFrom931Through9330IsTrue :
-      carrierRunsFrom931Through9330 ≡ true
-
+    carrierRunsFrom931Through9330IsTrue : carrierRunsFrom931Through9330 ≡ true
     allThirtyDenseRuleBodiesAlreadyTranscribed : Bool
-    allThirtyDenseRuleBodiesAlreadyTranscribedIsFalse :
-      allThirtyDenseRuleBodiesAlreadyTranscribed ≡ false
-
+    allThirtyDenseRuleBodiesAlreadyTranscribedIsFalse : allThirtyDenseRuleBodiesAlreadyTranscribed ≡ false
     finiteAddressRecoveryAlreadyDecidesPremise18 : Bool
-    finiteAddressRecoveryAlreadyDecidesPremise18IsFalse :
-      finiteAddressRecoveryAlreadyDecidesPremise18 ≡ false
+    finiteAddressRecoveryAlreadyDecidesPremise18IsFalse : finiteAddressRecoveryAlreadyDecidesPremise18 ≡ false
 
-canonicalWette1969Rule93ImplicationFamilyBoundary :
-  Wette1969Rule93ImplicationFamilyBoundary
+canonicalWette1969Rule93ImplicationFamilyBoundary : Wette1969Rule93ImplicationFamilyBoundary
 canonicalWette1969Rule93ImplicationFamilyBoundary =
-  wette1969Rule93ImplicationFamilyBoundary
-    true refl
-    true refl
-    true refl
-    false refl
-    false refl
+  wette1969Rule93ImplicationFamilyBoundary true refl true refl true refl false refl false refl
