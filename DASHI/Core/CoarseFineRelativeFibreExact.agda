@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.ConsumerRelativeReductionKernelExact as Reduction
 import DASHI.Core.FibreRestrictionCore as CanonicalFibre
 import DASHI.Core.ProvenanceBearingQuotient as Provenance
+import DASHI.Core.ObserverFactorizedRefinementExact as Factorized
 
 ------------------------------------------------------------------------
 -- COARSE / RELATIVE-FINE FIBRE KERNEL
@@ -37,13 +38,6 @@ fromProvenanceBearingQuotient {core} quotient =
     (Provenance.reopen quotient)
     (Provenance.reopenExact quotient)
 
-------------------------------------------------------------------------
--- Exact reopening makes the relative-fine coordinate substantive: coarse plus
--- relative fine determines the fine state.  This is the generic analogue of
--- the existing provenance surface+receipt theorem and the JCoarse/JFine address
--- reconstruction surface.
-------------------------------------------------------------------------
-
 coarseAndRelativeFineDetermineState :
   ∀ {FineState}
     (geometry : CoarseFineReopening FineState)
@@ -73,6 +67,40 @@ relativeFineMustChangeInsideNontrivialCoarseFibre :
 relativeFineMustChangeInsideNontrivialCoarseFibre geometry sameCoarse different
     sameFine =
   different (coarseAndRelativeFineDetermineState geometry sameCoarse sameFine)
+
+------------------------------------------------------------------------
+-- Observer-refinement weld from PR #584's canonical lattice.
+--
+-- Adding the retained fine coordinate gives a factorized refinement of the
+-- coarse observer, and exact reopening makes the pair observer separating.
+------------------------------------------------------------------------
+
+coarseFineObserver :
+  ∀ {FineState} →
+  (geometry : CoarseFineReopening FineState) →
+  FineState → Coarse geometry × RelativeFine geometry
+coarseFineObserver geometry state =
+  coarse geometry state , relativeFine geometry state
+
+coarseFactorsThroughCoarseFineObserver :
+  ∀ {FineState}
+    (geometry : CoarseFineReopening FineState) →
+  Factorized.FactorizedRefinement
+    (coarse geometry)
+    (coarseFineObserver geometry)
+coarseFactorsThroughCoarseFineObserver geometry =
+  Factorized.factorizedRefinement proj₁ (λ state → refl)
+
+coarseFineObserverSeparating :
+  ∀ {FineState}
+    (geometry : CoarseFineReopening FineState)
+    (left right : FineState) →
+  coarseFineObserver geometry left ≡ coarseFineObserver geometry right →
+  left ≡ right
+coarseFineObserverSeparating geometry left right same =
+  coarseAndRelativeFineDetermineState geometry
+    (cong proj₁ same)
+    (cong proj₂ same)
 
 record CoarseDynamicsClosure
     {FineState Action : Set}
@@ -179,6 +207,12 @@ record CoarseFineRelativeFibreBoundary : Set where
     coarsePlusRelativeFineDeterminesFineState : Bool
     coarsePlusRelativeFineDeterminesFineStateIsTrue :
       coarsePlusRelativeFineDeterminesFineState ≡ true
+    coarseFinePairRefinesCoarseObserver : Bool
+    coarseFinePairRefinesCoarseObserverIsTrue :
+      coarseFinePairRefinesCoarseObserver ≡ true
+    coarseFinePairIsSeparatingWithExactReopening : Bool
+    coarseFinePairIsSeparatingWithExactReopeningIsTrue :
+      coarseFinePairIsSeparatingWithExactReopening ≡ true
     fineMeansOnlyHigherComputeCost : Bool
     fineMeansOnlyHigherComputeCostIsFalse :
       fineMeansOnlyHigherComputeCost ≡ false
@@ -198,4 +232,5 @@ record CoarseFineRelativeFibreBoundary : Set where
 canonicalCoarseFineRelativeFibreBoundary : CoarseFineRelativeFibreBoundary
 canonicalCoarseFineRelativeFibreBoundary =
   coarseFineRelativeFibreBoundary
-    false refl true refl true refl false refl true refl true refl true refl false refl
+    false refl true refl true refl true refl true refl
+    false refl true refl true refl true refl false refl
