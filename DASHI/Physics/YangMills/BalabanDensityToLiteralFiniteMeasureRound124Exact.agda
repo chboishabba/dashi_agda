@@ -1,16 +1,6 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanDensityToLiteralFiniteMeasureRound124Exact where
 
-------------------------------------------------------------------------
--- ROUND124: BETA-DRIVEN EFFECTIVE DENSITY IS THE LITERAL CLAY FINITE MEASURE
---
--- The literal Clay construction already owns the finite-cutoff family
--- `finiteMeasure Y G : Cutoff -> FiniteMeasure`.  The Balaban complete-density
--- flow owns `densityAt k` on the exact beta history.  A source-exact QFT recovery
--- must identify these families; otherwise stress convergence could occur on a
--- parallel density unrelated to the finite measures used by the Schwinger limit.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
@@ -29,7 +19,6 @@ record BalabanDensityLiteralFiniteMeasureWeld
   field
     cutoffAtScale : Nat → Top.Cutoff C
     densityToFiniteMeasure : BetaDensity.Density inputs → Top.FiniteMeasure C
-
     densityAtScaleIsLiteralFiniteMeasure : ∀ scale →
       densityToFiniteMeasure (BetaDensity.densityAt inputs scale)
       ≡ Top.finiteMeasure Y group (cutoffAtScale scale)
@@ -43,8 +32,8 @@ literalFiniteMeasureAtBalabanScale :
       {trajectory = trajectory} {split = split} {inputs = inputs}
       Y group) →
   Nat → Top.FiniteMeasure C
-literalFiniteMeasureAtBalabanScale dataSet scale =
-  Top.finiteMeasure _ _ (cutoffAtScale dataSet scale)
+literalFiniteMeasureAtBalabanScale {Y = Y} {group = group} dataSet scale =
+  Top.finiteMeasure Y group (cutoffAtScale dataSet scale)
 
 balabanDensityMapsToLiteralFiniteMeasure :
   ∀ {trajectory split inputs C S}
@@ -62,8 +51,5 @@ balabanDensityMapsToLiteralFiniteMeasure dataSet =
 balabanDensityLiteralFiniteMeasureCompilerLevel : ProofLevel
 balabanDensityLiteralFiniteMeasureCompilerLevel = machineChecked
 
--- Physical BC1/QFT recovery seam: instantiate the measure construction and
--- cutoff map so the complete-density trajectory is literally the finite measure
--- family consumed by `IsContinuumLimitOf` in the Clay target.
 literalBalabanDensityIsClayFiniteMeasureLevel : ProofLevel
 literalBalabanDensityIsClayFiniteMeasureLevel = conditional
