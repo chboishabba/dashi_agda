@@ -21,8 +21,9 @@ module DASHI.Physics.YangMills.BalabanYM4BetaResponseKernelToAugmentedShootingEx
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+import Data.Nat.Base as ℕ
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _*_; _≤_; _<_ ; NonNegative)
+  (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_; NonNegative)
 import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -105,9 +106,9 @@ responseKernelCumulativeHistoryBound dataSet =
 responseKernelTotalShootingSensitivityBelowOne :
   ∀ {cutoff}
     (dataSet : ResponseKernelAugmentedShootingData cutoff)
-    K → K Data.Nat.Base.≤ cutoff →
+    K → K ℕ.≤ cutoff →
   Aug.Augmented.qTotal (asAugmentedShootingData dataSet) K
-  < (+ 1 / 1)
+  < 1ℚ
 responseKernelTotalShootingSensitivityBelowOne dataSet =
   Aug.Augmented.qTotalBelowOne (asAugmentedShootingData dataSet)
 
