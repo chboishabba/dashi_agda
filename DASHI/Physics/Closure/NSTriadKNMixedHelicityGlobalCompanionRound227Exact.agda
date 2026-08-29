@@ -2,15 +2,6 @@ module DASHI.Physics.Closure.NSTriadKNMixedHelicityGlobalCompanionRound227Exact 
 
 ------------------------------------------------------------------------
 -- ROUND227 / GLOBAL FINITE COMPANION MASS = 16 * MIXED HELICITY CONVOLUTION
---
--- Round226 is outputwise.  Fourier L2 aggregation has no cross-output Gram
--- debt, so summing the exact identity over any finite output list gives
---
---   Q_companion
---     = 16 sum_k || sum_{p+q=k} u_p+ x u_q- ||^2.
---
--- Thus the final Package-A analytic leaf can be stated directly as a uniform
--- time-integrated mixed-helicity convolution estimate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -18,7 +9,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_)
-open import Relation.Binary.PropositionalEquality using (cong₂)
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong₂; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -33,10 +25,6 @@ import DASHI.Physics.Closure.NSTriadKNMixedHelicityCompanionMassRound226Exact as
 
 F : C3.RealField _
 F = Rational.rationalRealField
-
-sumRational : List ℚ → ℚ
-sumRational [] = 0ℚ
-sumRational (x ∷ xs) = x + sumRational xs
 
 mapSum :
   (f : Z3.FourierMode → ℚ) → List Z3.FourierMode → ℚ
@@ -59,9 +47,10 @@ mixedOutputMass :
   (S : Helical.HelicalModeScalars F)
   (velocity : Z3.FourierMode → C3.Complex3 F) →
   Nat → Z3.FourierMode → ℚ
-mixedOutputMass S velocity cutoff output =
+mixedOutputMass {E = E} {I = I} S velocity cutoff output =
   L2.complex3NormSquared
-    (R224.foldVector (R224.mixedPlusMinus S velocity)
+    (R224.foldVector
+      (R224.mixedPlusMinus {E = E} {I = I} S velocity)
       (Output.physicalOutputFiber cutoff output))
 
 globalCompanionMass :
@@ -78,8 +67,8 @@ globalMixedHelicityMass :
   (S : Helical.HelicalModeScalars F)
   (velocity : Z3.FourierMode → C3.Complex3 F) →
   Nat → List Z3.FourierMode → ℚ
-globalMixedHelicityMass S velocity cutoff outputs =
-  mapSum (mixedOutputMass S velocity cutoff) outputs
+globalMixedHelicityMass {E = E} {I = I} S velocity cutoff outputs =
+  mapSum (mixedOutputMass {E = E} {I = I} S velocity cutoff) outputs
 
 globalCompanionMassIsSixteenMixedHelicityMass :
   (E : C3.IntegerEmbedding F)
@@ -91,16 +80,28 @@ globalCompanionMassIsSixteenMixedHelicityMass :
   (P : R225.PhysicalFixedOutputHelicityData E I S L H velocity)
   (cutoff : Nat) (outputs : List Z3.FourierMode) →
   globalCompanionMass E S velocity cutoff outputs
-  ≡ R226.sixteen * globalMixedHelicityMass S velocity cutoff outputs
+  ≡ R226.sixteen *
+      globalMixedHelicityMass {E = E} {I = I} S velocity cutoff outputs
 globalCompanionMassIsSixteenMixedHelicityMass
     E I S L H velocity P cutoff [] = refl
 globalCompanionMassIsSixteenMixedHelicityMass
     E I S L H velocity P cutoff (output ∷ outputs) =
-  cong₂ _+_
-    (R226.fixedOutputCompanionMassIsSixteenMixedHelicityMass
-      E I S L H velocity P cutoff output)
-    (globalCompanionMassIsSixteenMixedHelicityMass
-      E I S L H velocity P cutoff outputs)
+  let
+    headEquality =
+      R226.fixedOutputCompanionMassIsSixteenMixedHelicityMass
+        E I S L H velocity P cutoff output
+    tailEquality =
+      globalCompanionMassIsSixteenMixedHelicityMass
+        E I S L H velocity P cutoff outputs
+    combined = cong₂ _+_ headEquality tailEquality
+    headMixed = mixedOutputMass {E = E} {I = I} S velocity cutoff output
+    tailMixed = globalMixedHelicityMass {E = E} {I = I} S velocity cutoff outputs
+    distribute :
+      R226.sixteen * headMixed + R226.sixteen * tailMixed
+      ≡ R226.sixteen * (headMixed + tailMixed)
+    distribute = solve (R226.sixteen ∷ headMixed ∷ tailMixed ∷ [])
+  in
+  trans combined distribute
 
 round227GlobalCompanionIsMixedHelicityConvolutionMass : Bool
 round227GlobalCompanionIsMixedHelicityConvolutionMass = true
