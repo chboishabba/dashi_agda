@@ -13,6 +13,8 @@ on:
       - 'DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryValidation.agda'
       - 'DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryExact.agda'
       - 'DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryValidation.agda'
+      - 'DASHI/Physics/Foundations/CommonEffectiveActionVariationExact.agda'
+      - 'DASHI/Physics/Foundations/CommonEffectiveActionVariationValidation.agda'
       - 'DASHI/Physics/Foundations/Everything.agda'
       - 'scripts/check_toe_experiment_architecture.sh'
       - 'scripts/check_shared_effective_source_recovery.sh'
