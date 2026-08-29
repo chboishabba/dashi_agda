@@ -108,14 +108,25 @@ signedCrossEstimateOpen = refl
 conjugationCompressionNotClaimed : F.AristotleCurrentFrontier.conjugationOrbitCompressionOwned F.canonicalAristotleCurrentFrontier ≡ false
 conjugationCompressionNotClaimed = refl
 
+-- Historical rational Round180 adapter remains a valid specialized compiler,
+-- but direct identification of literal RH reals with its rational carrier is
+-- deliberately false.
 round180GramLedgerReused : F.AristotleCurrentFrontier.round180ExactFiniteGramLedgerReusedForRH F.canonicalAristotleCurrentFrontier ≡ true
 round180GramLedgerReused = refl
 
 rhRound180AdapterClosed : F.AristotleCurrentFrontier.rhToRound180CarrierAdapterClosedInAgda F.canonicalAristotleCurrentFrontier ≡ true
 rhRound180AdapterClosed = refl
 
-literalRHCellsStillNeedIdentification : F.AristotleCurrentFrontier.literalRHPostSchurCellsIdentifiedWithRound180Carrier F.canonicalAristotleCurrentFrontier ≡ false
-literalRHCellsStillNeedIdentification = refl
+directRHRealToRound180RationalIdentificationRejected : F.AristotleCurrentFrontier.literalRHPostSchurCellsIdentifiedWithRound180Carrier F.canonicalAristotleCurrentFrontier ≡ false
+directRHRealToRound180RationalIdentificationRejected = refl
 
+-- Correct G1 closure.
+genericFiniteGramTelescopeExtracted : F.AristotleCurrentFrontier.genericFiniteSignedGramTelescopeExtractedInAgda F.canonicalAristotleCurrentFrontier ≡ true
+genericFiniteGramTelescopeExtracted = refl
+
+literalRHGenericGramWeldClosed : F.AristotleCurrentFrontier.literalRHPostSchurGenericGramWeldClosedInAgda F.canonicalAristotleCurrentFrontier ≡ true
+literalRHGenericGramWeldClosed = refl
+
+-- G2 remains the first signed analytic theorem.
 signedRHGramDebtStillOpen : F.AristotleCurrentFrontier.signedRHGramDebtEstimateClosed F.canonicalAristotleCurrentFrontier ≡ false
 signedRHGramDebtStillOpen = refl
