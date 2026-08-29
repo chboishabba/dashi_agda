@@ -69,42 +69,24 @@ postSchurDotIsDeterminantProduct :
       (multiply S (determinant S x) (determinant S y))
       (wedgeSq S)
 postSchurDotIsDeterminantProduct S x y =
-  doubleCancel S _ _
-    (trans
-      (polarization S x y)
-      (trans
-        (cong
-          (λ q → subtract S (subtract S q (normSq S x)) (normSq S y))
-          (trans
-            (normSqIsDeterminantRatio S (addCell S x y))
-            (cong
-              (λ d → divide S (multiply S d d) (wedgeSq S))
-              (determinantAdd S x y))))
-        (trans
-          (cong
-            (λ q → subtract S q (normSq S y))
-            (cong
-              (subtract S
-                (divide S
-                  (multiply S
-                    (add S (determinant S x) (determinant S y))
-                    (add S (determinant S x) (determinant S y)))
-                  (wedgeSq S)))
-              (normSqIsDeterminantRatio S x)))
-          (trans
-            (cong
-              (subtract S
-                (subtract S
-                  (divide S
-                    (multiply S
-                      (add S (determinant S x) (determinant S y))
-                      (add S (determinant S x) (determinant S y)))
-                    (wedgeSq S))
-                  (divide S
-                    (multiply S (determinant S x) (determinant S x))
-                    (wedgeSq S))))
-              (normSqIsDeterminantRatio S y))
-            (determinantRatioPolarizes S (determinant S x) (determinant S y))))))
+  doubleCancel S _ _ proof
+  where
+    proof :
+      add S (dot S x y) (dot S x y)
+      ≡ add S
+          (divide S
+            (multiply S (determinant S x) (determinant S y))
+            (wedgeSq S))
+          (divide S
+            (multiply S (determinant S x) (determinant S y))
+            (wedgeSq S))
+    proof
+      rewrite polarization S x y
+            | normSqIsDeterminantRatio S (addCell S x y)
+            | determinantAdd S x y
+            | normSqIsDeterminantRatio S x
+            | normSqIsDeterminantRatio S y =
+      determinantRatioPolarizes S (determinant S x) (determinant S y)
 
 record G2cPolarizationBoundary : Set where
   constructor g2c-polarization-boundary
