@@ -4,9 +4,9 @@ module DASHI.Foundations.Wette1969Rule93ImplicationFamilyExact where
 -- WETTE 1969: THE FINITE 9.3 IMPLICATION-RULE SEARCH CARRIER
 --
 -- Direct inspection of printed p.145 and Wette's discussion in 1.61 fixes the
--- implication-rule family as exactly 9.3.1--30.  This module recovers the
--- source-stable finite address carrier without pretending that all thirty dense
--- historical rule bodies have already been transcribed.
+-- implication-rule family as exactly 9.3.1--30.  This module owns the compact
+-- Fin-30 address carrier.  The exhaustive named census / source-role audit is
+-- carried by Wette1969Rule93CompleteCandidateAuditExact.
 --
 -- Primary source:
 -- Eduard Wette, 1969, DOI 10.1007/978-3-642-86745-3_9,
@@ -51,11 +51,17 @@ record Wette1969Rule93ImplicationFamilyBoundary : Set where
     finiteCarrierHasThirtyAddressesIsTrue : finiteCarrierHasThirtyAddresses ≡ true
     carrierRunsFrom931Through9330 : Bool
     carrierRunsFrom931Through9330IsTrue : carrierRunsFrom931Through9330 ≡ true
-    allThirtyDenseRuleBodiesAlreadyTranscribed : Bool
-    allThirtyDenseRuleBodiesAlreadyTranscribedIsFalse : allThirtyDenseRuleBodiesAlreadyTranscribed ≡ false
-    finiteAddressRecoveryAlreadyDecidesPremise18 : Bool
-    finiteAddressRecoveryAlreadyDecidesPremise18IsFalse : finiteAddressRecoveryAlreadyDecidesPremise18 ≡ false
+    exhaustiveNamedThirtyCandidateAuditNowExists : Bool
+    exhaustiveNamedThirtyCandidateAuditNowExistsIsTrue :
+      exhaustiveNamedThirtyCandidateAuditNowExists ≡ true
+    everyDenseRuleBodyAlreadyTranscribed : Bool
+    everyDenseRuleBodyAlreadyTranscribedIsFalse :
+      everyDenseRuleBodyAlreadyTranscribed ≡ false
+    finiteAddressRecoveryAloneProvesPremise18 : Bool
+    finiteAddressRecoveryAloneProvesPremise18IsFalse :
+      finiteAddressRecoveryAloneProvesPremise18 ≡ false
 
 canonicalWette1969Rule93ImplicationFamilyBoundary : Wette1969Rule93ImplicationFamilyBoundary
 canonicalWette1969Rule93ImplicationFamilyBoundary =
-  wette1969Rule93ImplicationFamilyBoundary true refl true refl true refl false refl false refl
+  wette1969Rule93ImplicationFamilyBoundary
+    true refl true refl true refl true refl false refl false refl
