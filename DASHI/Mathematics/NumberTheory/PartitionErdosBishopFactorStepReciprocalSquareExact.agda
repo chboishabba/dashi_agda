@@ -17,6 +17,7 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosBishopFactorStepReciprocalSq
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.Nat.Base using (_≤_)
 open import Data.Rational.Unnormalised as ℚ using (0ℚᵘ)
 import Data.Rational.Unnormalised.Properties as ℚP
 
@@ -47,7 +48,7 @@ copiesRealPositive pair =
       (NatEmbed.natAsRational (FactorResidual.factorCopies pair)))
 
 factorStepAsProduct :
-  ∀ {n r} {nPositive : suc 0 Data.Nat.Base.≤ n}
+  ∀ {n r} {nPositive : suc 0 ≤ n}
     (rate : Rate.ErdosStepRate n nPositive)
     (pair : Factor.PositiveFactorPair r) →
   BishopReal._≃_
@@ -61,7 +62,7 @@ factorStepAsProduct rate pair =
     (Rate.step rate)
 
 factorStepInverseSquareAsProductInverseSquare :
-  ∀ {n r} {nPositive : suc 0 Data.Nat.Base.≤ n}
+  ∀ {n r} {nPositive : suc 0 ≤ n}
     (rate : Rate.ErdosStepRate n nPositive)
     (pair : Factor.PositiveFactorPair r) →
   let
@@ -92,7 +93,7 @@ factorStepInverseSquareAsProductInverseSquare rate pair =
   BishopP.*-cong inverseAgreement inverseAgreement
 
 factorStepReciprocalSquareNormalization :
-  ∀ {n r} {nPositive : suc 0 Data.Nat.Base.≤ n}
+  ∀ {n r} {nPositive : suc 0 ≤ n}
     (rate : Rate.ErdosStepRate n nPositive)
     (pair : Factor.PositiveFactorPair r) →
   let
