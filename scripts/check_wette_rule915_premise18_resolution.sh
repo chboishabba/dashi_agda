@@ -40,5 +40,4 @@ grep -q 'genericScaffoldAutomaticallySuppliesFive9323PremisesIsFalse' DASHI/Foun
 grep -q 'exactP145Premise27ReducedToTwoDirectionalLeavesIsTrue' DASHI/Foundations/Wette1969Rule915Premise27DirectionalClosureExact.agda
 grep -q 'closureUsesOneRule935AndTwoRule939StepsIsTrue' DASHI/Foundations/Wette1969Rule915Premise27DirectionalClosureExact.agda
 grep -q 'closureManufacturesEitherDirectionalLeafIsFalse' DASHI/Foundations/Wette1969Rule915Premise27DirectionalClosureExact.agda
-
 scripts/run_agda29_parallel_check.sh "${FILES[@]}"
