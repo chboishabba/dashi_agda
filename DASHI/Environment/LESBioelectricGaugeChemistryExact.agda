@@ -8,6 +8,8 @@ import DASHI.Chemistry.ExistingContentBridge as ChemistryReuse
 import DASHI.Chemistry.TransitionKernel as Chemistry
 import DASHI.Geometry.Gauge.SUNPrimitives as SUN
 import DASHI.Physics.Units.SI as SI
+import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact as EM
+import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact as PNP
 
 ------------------------------------------------------------------------
 -- LES BIOELECTRIC / GAUGE / CHEMISTRY CROSS-POLLINATION
@@ -74,8 +76,36 @@ record ElectrochemicalTransitionWeld
 
 open ElectrochemicalTransitionWeld public
 
+------------------------------------------------------------------------
+-- Stronger cross-pollination: the bioelectric application can now consume the
+-- independent U(1) and PNP owners directly. This closes the architecture gap
+-- between a generic "membrane potential is relevant" carrier and a typed
+-- electrodiffusion mechanism, while still requiring application validation.
+------------------------------------------------------------------------
+
+record BioelectricElectrodiffusionWeld : Set₁ where
+  constructor bioelectricElectrodiffusionWeld
+  field
+    bioelectricChemistry : BioelectricChemistryWeld
+    u1Reduction : EM.U1ApplicationReduction
+    pnpApplication : PNP.ElectrodiffusionApplicationReceipt
+    membranePotentialIdentificationReference : String
+    ionicSpeciesIdentificationReference : String
+    membraneInterfaceIdentificationReference : String
+    neuralOrCellularValidationReference : String
+
+open BioelectricElectrodiffusionWeld public
+
 yangMillsGaugeOwner : String
 yangMillsGaugeOwner = "DASHI.Geometry.Gauge.SUNPrimitives"
+
+u1ElectromagneticOwner : String
+u1ElectromagneticOwner =
+  "DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact"
+
+pnpElectrodiffusionOwner : String
+pnpElectrodiffusionOwner =
+  "DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact; DOI 10.3390/electrochem2020014"
 
 siQuantityOwner : String
 siQuantityOwner = "DASHI.Physics.Units.SI; BIPM DOI 10.59161/AUEZ1291"
@@ -101,9 +131,22 @@ record LESBioelectricGaugeBoundary : Set where
     nernstSurfaceAloneIsCellularElectrodynamicsIsFalse : nernstSurfaceAloneIsCellularElectrodynamics ≡ false
     electrochemicalSocketUsesCanonicalSIQuantities : Bool
     electrochemicalSocketUsesCanonicalSIQuantitiesIsTrue : electrochemicalSocketUsesCanonicalSIQuantities ≡ true
-    bioelectricMechanismNeedsFieldChemistryMembraneWeld : Bool
-    bioelectricMechanismNeedsFieldChemistryMembraneWeldIsTrue : bioelectricMechanismNeedsFieldChemistryMembraneWeld ≡ true
+    independentU1OwnerNowReferenced : Bool
+    independentU1OwnerNowReferencedIsTrue : independentU1OwnerNowReferenced ≡ true
+    pnpElectrodiffusionOwnerNowReferenced : Bool
+    pnpElectrodiffusionOwnerNowReferencedIsTrue : pnpElectrodiffusionOwnerNowReferenced ≡ true
+    bioelectricMechanismNeedsApplicationValidation : Bool
+    bioelectricMechanismNeedsApplicationValidationIsTrue : bioelectricMechanismNeedsApplicationValidation ≡ true
 
 canonicalLESBioelectricGaugeBoundary : LESBioelectricGaugeBoundary
 canonicalLESBioelectricGaugeBoundary =
-  lesBioelectricGaugeBoundary false refl false refl false refl false refl false refl true refl true refl
+  lesBioelectricGaugeBoundary
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    true refl
+    true refl
+    true refl
+    true refl
