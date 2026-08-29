@@ -3,23 +3,18 @@ module DASHI.Physics.YangMills.BalabanClayPresentCutPhysicalCompilerRound122Exac
 
 ------------------------------------------------------------------------
 -- ROUND122: ONE BIDI PHYSICAL INPUT OBJECT FOR THE ENTIRE PRESENT CUT
---
--- The point of this module is to prevent a final round of receipt shuffling.
--- A1, A2, BC1 and BC2 are not four unrelated abstract consumers: BC2 must use
--- the exact BC1 carrier, and every downstream theorem is compiled from explicit
--- evidence-bearing source objects.
---
--- This record is therefore the irreducible present-cut source contract.  It does
--- not claim the physical inputs exist merely because their types are written.
--- Instead, once an implementation inhabits this ONE record, the mathematical
--- arrows requested in the present cut are all theorem-generated below.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 import Data.Nat.Base as ℕ
 open import Data.Rational.Base as ℚ using (1ℚ; _<_)
+open import DASHI.Foundations.RealAnalysisAxioms using (_-ℝ_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCutoffBetaLaw as BetaLaw
+import DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact as Real
+import DASHI.Physics.YangMills.BalabanA1HistoryUniformTwoSidedBetaRound102Exact as Cert
 import DASHI.Physics.YangMills.BalabanA1FiveChannelEvaluatorBidiRound117Exact as A1
 import DASHI.Physics.YangMills.BalabanA1Equation51FiveChannelSameObjectRound103Exact as A1Old
 import DASHI.Physics.YangMills.BalabanYM4WardQuarticResponseProducerAdapterExact as A2Producer
@@ -31,7 +26,6 @@ import DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound
 import DASHI.Physics.YangMills.BalabanCMP109116SourceContinuationRound103Exact as Source
 import DASHI.Physics.YangMills.BalabanBC2CompactGroupSameDensityRound119Exact as BC2
 import DASHI.Physics.YangMills.BalabanHeatDoobSameDensityLogHessianRound103Exact as Heat
-import DASHI.Physics.YangMills.BalabanYM4RowAAugmentedShootingGateExact as Aug
 
 record PresentCutPhysicalSourceInputs
     (History Cell : Set) (cutoff : Nat) : Set₁ where
@@ -40,15 +34,13 @@ record PresentCutPhysicalSourceInputs
     -- W/Q/R plus the exact finite-g five-channel evaluator.
     a1 : A1.A1ReducedSameObjectInputs History Cell
 
-    -- A2: the explicit response-kernel route chosen after the betaMark audit.
+    -- A2: explicit response-kernel route selected after auditing betaMark.
     a2 : A2Producer.WardQuarticResponseProducer cutoff
 
-    -- BC1: actual CMP109->CMP116 continuation, Eq.(5.1), finite analytic demands
-    -- and the full A=A(B) physical component chain rule.
+    -- BC1: exact continuation/Eq.(5.1)/finite demands/full A=A(B) chain rule.
     bc1 : BC1Chain.BC1PhysicalCompositeInputs
 
-    -- BC2 is FORCED to run on the exact BC1 carrier by its type.  There is no
-    -- second potential/density equality field to forget or fake later.
+    -- BC2 is forced to use the EXACT BC1 carrier by type.
     bc2 : BC2.CompactGroupHeatDoobOnCarrier
       (BC1.bc1CanonicalCarrier (BC1Chain.canonical bc1))
 
@@ -69,12 +61,11 @@ a1Equation542MixedDerivativeExact :
   ∀ {History Cell cutoff}
     (dataSet : PresentCutPhysicalSourceInputs History Cell cutoff)
     K k (k<K : k ℕ.< K) →
-  DASHI.Physics.YangMills.BalabanCutoffBetaLaw.negativeOffDiagonalSecondMomentumDerivative
-    (DASHI.Physics.YangMills.BalabanCutoffBetaLaw.vacuumPolarisationCoefficient
+  BetaLaw.negativeOffDiagonalSecondMomentumDerivative
+    (BetaLaw.vacuumPolarisationCoefficient
       (A1.dynamics (a1 dataSet) K)) k
-  ≡ DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact.embed
-      (A1.embedding (a1 dataSet))
-      (DASHI.Physics.YangMills.BalabanA1HistoryUniformTwoSidedBetaRound102Exact.beta
+  ≡ Real.embed (A1.embedding (a1 dataSet))
+      (Cert.beta
         (A1.certificate (a1 dataSet))
         (A1.historyForShell (a1 dataSet) K k k<K))
 a1Equation542MixedDerivativeExact dataSet =
@@ -135,9 +126,8 @@ bc2HessianIsSameStaticMinusCovariance :
   BC2.heatDoobHessian (bc2 dataSet) time background u v
   ≡ Heat.conditionalExpectedStaticHessian
       (bc2SameDensityCalculus dataSet) time background u v
-    DASHI.Foundations.RealAnalysisAxioms.-ℝ
-      Heat.conditionalGradientCovariance
-        (bc2SameDensityCalculus dataSet) time background u v
+    -ℝ Heat.conditionalGradientCovariance
+      (bc2SameDensityCalculus dataSet) time background u v
 bc2HessianIsSameStaticMinusCovariance dataSet =
   BC2.compactGroupHessianIsStaticMinusCovariance (bc2 dataSet)
 
@@ -156,9 +146,7 @@ presentCutBC2CompilerLevel = machineChecked
 presentCutEndToEndCompilerLevel : ProofLevel
 presentCutEndToEndCompilerLevel = machineChecked
 
--- This is now the only honest frontier statement for the present cut: construct
--- the exact source object above from the literal finite-cutoff Yang--Mills
--- implementation and primary-source identities.  There is no additional hidden
--- consumer-side mathematics after that construction.
+-- Only honest frontier statement for this cut: inhabit the exact source record
+-- above from the finite-cutoff Yang--Mills implementation and primary sources.
 literalPresentCutPhysicalSourceInputsLevel : ProofLevel
 literalPresentCutPhysicalSourceInputsLevel = conditional
