@@ -60,9 +60,9 @@ premise18AttemptAtTypedSlot :
     (Source.sourceExactScaffoldTarget scaffold)
     (Later.premise18 later)
 premise18AttemptAtTypedSlot {later = later} attempts
-  rewrite Recovery.premise18PureFormulaMatchesTypedSlot
-    later (pureWordRecovery attempts) =
-  premise18Attempt attempts
+  with Recovery.premise18PureFormulaMatchesTypedSlot
+    later (pureWordRecovery attempts)
+... | refl = premise18Attempt attempts
 
 premise27AttemptAtTypedSlot :
   {initial : Context} →
@@ -74,9 +74,9 @@ premise27AttemptAtTypedSlot :
     (Source.sourceExactScaffoldTarget scaffold)
     (Later.premise27 later)
 premise27AttemptAtTypedSlot {later = later} attempts
-  rewrite Recovery.premise27PureFormulaMatchesTypedSlot
-    later (pureWordRecovery attempts) =
-  premise27Attempt attempts
+  with Recovery.premise27PureFormulaMatchesTypedSlot
+    later (pureWordRecovery attempts)
+... | refl = premise27Attempt attempts
 
 asIndependentMajorTraceInputs :
   {initial : Context} →
