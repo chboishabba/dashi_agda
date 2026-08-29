@@ -37,7 +37,7 @@ open ObligationDischarged public
 compensationDoesNotDischargeDispossessionLandReturn :
   ObligationDischarged Repair.compensationOnly dispossessionHarm Repair.landReturnAxis → ⊥
 compensationDoesNotDischargeDispossessionLandReturn discharged =
-  Repair.compensationOnlyLandOpen (axisRepaired discharged)
+  compensationOnlyLandOpen (axisRepaired discharged)
   where
   compensationOnlyLandOpen :
     Repair.ReparativeBundle.status Repair.compensationOnly Repair.landReturnAxis ≡ Repair.repaired → ⊥
