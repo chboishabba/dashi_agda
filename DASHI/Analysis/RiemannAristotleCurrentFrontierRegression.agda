@@ -63,7 +63,6 @@ lowOrdinateOpen = refl
 rhOpen : F.AristotleCurrentFrontier.finalRHImplicationClosed F.canonicalAristotleCurrentFrontier ≡ false
 rhOpen = refl
 
--- Explicit-cutoff tranche.
 deterministicSchurKernelChecked : F.AristotleCurrentFrontier.deterministicProjectiveSchurKernelCheckedInLean F.canonicalAristotleCurrentFrontier ≡ true
 deterministicSchurKernelChecked = refl
 
@@ -91,7 +90,6 @@ finiteNearSchurCancellationOpen = refl
 jointFiniteMarginOpen : F.AristotleCurrentFrontier.jointFiniteNearFarMarginClosed F.canonicalAristotleCurrentFrontier ≡ false
 jointFiniteMarginOpen = refl
 
--- Bidi finite-orbit / Gram refinement.
 finiteNearReflectionStable : F.AristotleCurrentFrontier.finiteNearCarrierReflectionStableInLeanSource F.canonicalAristotleCurrentFrontier ≡ true
 finiteNearReflectionStable = refl
 
@@ -109,3 +107,15 @@ signedCrossEstimateOpen = refl
 
 conjugationCompressionNotClaimed : F.AristotleCurrentFrontier.conjugationOrbitCompressionOwned F.canonicalAristotleCurrentFrontier ≡ false
 conjugationCompressionNotClaimed = refl
+
+round180GramLedgerReused : F.AristotleCurrentFrontier.round180ExactFiniteGramLedgerReusedForRH F.canonicalAristotleCurrentFrontier ≡ true
+round180GramLedgerReused = refl
+
+rhRound180AdapterClosed : F.AristotleCurrentFrontier.rhToRound180CarrierAdapterClosedInAgda F.canonicalAristotleCurrentFrontier ≡ true
+rhRound180AdapterClosed = refl
+
+literalRHCellsStillNeedIdentification : F.AristotleCurrentFrontier.literalRHPostSchurCellsIdentifiedWithRound180Carrier F.canonicalAristotleCurrentFrontier ≡ false
+literalRHCellsStillNeedIdentification = refl
+
+signedRHGramDebtStillOpen : F.AristotleCurrentFrontier.signedRHGramDebtEstimateClosed F.canonicalAristotleCurrentFrontier ≡ false
+signedRHGramDebtStillOpen = refl
