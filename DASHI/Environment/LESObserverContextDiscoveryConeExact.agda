@@ -46,10 +46,6 @@ record DiscoveryConeExpansion
 
 open DiscoveryConeExpansion public
 
--- A successful discovery-cone expansion cannot itself be only a relabelling
--- of the old observer.  If it factors through the coarse observation, it cannot
--- split the witnessed collision.
-
 successfulExpansionCannotFactorThroughOldObserver :
   ∀ {World Coarse Refined Output}
     {coarse : World → Coarse}
@@ -113,7 +109,6 @@ dirtProjection = observeSoil dirtFrame
 soilProjection : SoilWorld → SoilDistinction
 soilProjection = observeSoil soilFrame
 
--- In this finite witness the downstream consumer needs the richer distinction.
 soilConsumer : SoilWorld → SoilDistinction
 soilConsumer = soilProjection
 
@@ -124,10 +119,6 @@ dirtConsumerDefect =
     livingRelationalSoil
     refl
     (λ ())
-
--- Therefore "dirt" is not a consumer-sufficient PNF for this declared
--- consumer.  It may still be sufficient for another consumer; no global claim
--- about the lexical category is made.
 
 dirtCannotServeAsSoilConsumerPNF :
   Core.ConsumerDescent dirtProjection soilConsumer → ⊥
@@ -161,10 +152,6 @@ soilDiscoveryConeExpansion =
     soilRefinesDirt
     soilProjectionSplitsDirtDefect
 
--- This is the exact finite form of "you cannot know what you do not know to
--- look for": once the current observer has collapsed the pair, no function of
--- that coarse reading can manufacture the missing living-system distinction.
-
 noDirtRechartCanRecoverSoilDistinction :
   (rechart : DirtReading → SoilDistinction) →
   ((state : SoilWorld) → soilProjection state ≡ rechart (dirtProjection state)) →
@@ -174,7 +161,7 @@ noDirtRechartCanRecoverSoilDistinction rechart factors =
     soilDiscoveryConeExpansion rechart factors
 
 ------------------------------------------------------------------------
--- UNKNOWN-UNKNOWN / OBSERVER-INadequacy SHAPE
+-- UNKNOWN-UNKNOWN / OBSERVER-INADEQUACY SHAPE
 --
 -- A consumer collision witnesses something stronger than parameter uncertainty:
 -- the declared observation language is missing a distinction required by that
@@ -184,7 +171,10 @@ noDirtRechartCanRecoverSoilDistinction rechart factors =
 ------------------------------------------------------------------------
 
 soilCounterexampleGuidedRefinement :
-  CG.CounterexampleGuidedRefinement dirtProjection soilConsumer
+  CG.CounterexampleGuidedRefinement
+    {Refined = SoilDistinction}
+    dirtProjection
+    soilConsumer
 soilCounterexampleGuidedRefinement =
   CG.counterexampleGuidedRefinement
     dirtConsumerDefect
