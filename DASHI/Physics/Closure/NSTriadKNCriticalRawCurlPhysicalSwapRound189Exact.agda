@@ -27,6 +27,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Algebra
 import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws as Additive
 import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact as Cross
+import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicityWalshPhysicalAmplitudeRound140Exact as R140
 import DASHI.Physics.Closure.NSTriadKNCriticalRawCurlRadialGapRound169Exact as R169
 import DASHI.Physics.Closure.NSTriadKNCriticalRawCurlPhysicalWeldRound170Exact as R170
@@ -90,7 +91,7 @@ rawCurlSlotKSwapSign :
   R170.rawCurlSlotK E k uK uQ uP
   ≡ C3.negate F (R170.rawCurlSlotK E k uK uP uQ)
 rawCurlSlotKSwapSign E k uK uP uQ =
-  realAmplitudeSwapPQ (R170.Helical.curlSymbol E k uK) uP uQ
+  realAmplitudeSwapPQ (Helical.curlSymbol E k uK) uP uQ
 
 rawCurlSlotPSwapIsNegQ :
   ∀ {r} {F : C3.RealField r}
@@ -99,7 +100,7 @@ rawCurlSlotPSwapIsNegQ :
   R170.rawCurlSlotP E q uK uQ uP
   ≡ C3.negate F (R170.rawCurlSlotQ E q uK uP uQ)
 rawCurlSlotPSwapIsNegQ E q uK uP uQ =
-  realAmplitudeSwapPQ uK uP (R170.Helical.curlSymbol E q uQ)
+  realAmplitudeSwapPQ uK uP (Helical.curlSymbol E q uQ)
 
 rawCurlSlotQSwapIsNegP :
   ∀ {r} {F : C3.RealField r}
@@ -108,7 +109,7 @@ rawCurlSlotQSwapIsNegP :
   R170.rawCurlSlotQ E p uK uQ uP
   ≡ C3.negate F (R170.rawCurlSlotP E p uK uP uQ)
 rawCurlSlotQSwapIsNegP E p uK uP uQ =
-  realAmplitudeSwapPQ uK (R170.Helical.curlSymbol E p uP) uQ
+  realAmplitudeSwapPQ uK (Helical.curlSymbol E p uP) uQ
 
 physicalRawCurlProductionSwapInvariant :
   ∀ {r} {F : C3.RealField r}
