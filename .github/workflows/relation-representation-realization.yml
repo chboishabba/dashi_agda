@@ -15,6 +15,8 @@ on:
       - 'DASHI/Reasoning/NeuralSpectralRelationCrossPollinationExact.agda'
       - 'DASHI/Reasoning/RelationRepresentationRegression.agda'
       - 'DASHI/Reasoning/Everything.agda'
+      - 'Artifacts/relation-representation/numeric-producer-receipt.json'
+      - 'scripts/relation_representation_numeric_producer.py'
       - 'Docs/support/reference/RelationRepresentationRealization.md'
       - 'scripts/check_relation_representation_realization.sh'
       - '.github/workflows/relation-representation-realization.yml'
