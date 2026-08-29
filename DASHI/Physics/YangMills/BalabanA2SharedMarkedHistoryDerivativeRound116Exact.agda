@@ -26,7 +26,8 @@ module DASHI.Physics.YangMills.BalabanA2SharedMarkedHistoryDerivativeRound116Exa
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_; NonNegative)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _+_; _*_; _≤_; _<_; NonNegative)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst)
 
