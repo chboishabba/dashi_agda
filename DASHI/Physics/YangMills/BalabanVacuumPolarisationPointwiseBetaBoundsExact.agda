@@ -24,7 +24,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc)
 import Data.Nat.Base as ℕ
 
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_; _<ℝ_)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _≤ℝ_; _<ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanEffectiveCouplingTrajectory as Trajectory
@@ -35,7 +35,7 @@ record LiteralVacuumPolarisationPointwiseBounds
     (dynamics : BetaLaw.BalabanCutoffCouplingDynamics K) : Set₁ where
   field
     betaLower betaUpper : ℝ
-    betaLowerPositive : DASHI.Foundations.RealAnalysisAxioms.0ℝ <ℝ betaLower
+    betaLowerPositive : 0ℝ <ℝ betaLower
     betaLowerBelowUpper : betaLower ≤ℝ betaUpper
 
     derivativeLower :
