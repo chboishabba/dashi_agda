@@ -6,6 +6,7 @@ on:
       - 'DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda'
       - 'DASHI/Reasoning/RelationRepresentationAdequacyExact.agda'
       - 'DASHI/Reasoning/RelationRepresentationRealizationExact.agda'
+      - 'DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda'
       - 'DASHI/Reasoning/EigenslurFlourishingRelationBoundaryExact.agda'
       - 'DASHI/Reasoning/RelationRepresentationCrossPollinationExact.agda'
       - 'DASHI/Reasoning/RelationRepresentationRegression.agda'
