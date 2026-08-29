@@ -24,7 +24,8 @@ module DASHI.Physics.YangMills.BalabanYM4RowALiteralProducerAdapterExact where
 -- exactly the source-native pieces above.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _+_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -131,11 +132,6 @@ canonicalLiteralGammaPaysAugmentedSmallness dataSet =
   Choice.canonicalAugmentedGammaPaysCombinedSmallness
     (asFiniteAugmentedSource dataSet)
 
--- The actual history sensitivity produced by the irrelevant-memory compiler is
--- already below H*gamma, provided the linear-response carrier uses the same
--- coupling cap as the canonical source choice.  Equality of those two caps is
--- deliberately left as a same-object trajectory identification rather than
--- hidden in this adapter.
 sourceHistorySensitivityLinearInDeclaredCoupling :
   (dataSet : LiteralRowAProducerPieces) →
   Input.historySensitivityConstant (inputResponse dataSet)
@@ -152,17 +148,5 @@ rowALiteralProducerCanonicalGammaLevel = machineChecked
 rowALiteralProducerHistorySlopeLevel : ProofLevel
 rowALiteralProducerHistorySlopeLevel = machineChecked
 
--- Source/same-object frontier after this weld:
---
--- * identify the Ward Gaussian object in the literal CMP109/CMP99 shell;
--- * instantiate `MixedInteractionCauchyData` for the literal normalized
---   interaction on the same shell family;
--- * instantiate the contractive irrelevant coordinate and beta projection;
--- * prove its INITIAL shooting-input response is O(gamma) on the same analytic
---   tube and identify that declared gamma with `canonicalLiteralGamma`;
--- * identify the recurrence trajectory itself.
---
--- All scalar constants, history summation, q<1 algebra and small-coupling choice
--- are then downstream machine-checked constructions.
 literalRowAProducerSameObjectIdentificationLevel : ProofLevel
 literalRowAProducerSameObjectIdentificationLevel = conditional
