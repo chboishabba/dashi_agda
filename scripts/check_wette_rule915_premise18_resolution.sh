@@ -37,6 +37,7 @@ grep -q 'thisModuleClaimsDerivabilityOfAnyPremiseIsFalse' DASHI/Foundations/Wett
 
 grep -q 'allTwentySevenExistingTypedSlotsPointwiseMatchP145IsTrue' DASHI/Foundations/Wette1969Rule915CanonicalP145TypedWeldExact.agda
 grep -q 'premise18And27NoLongerNeedOpaqueWordParametersForCanonicalP145InstanceIsTrue' DASHI/Foundations/Wette1969Rule915CanonicalP145TypedWeldExact.agda
+grep -q 'criterion1All27SourceExactPremisesTiedToActualP145RuleIsTrue' DASHI/Foundations/Wette1969Rule915CanonicalP145TypedWeldExact.agda
 grep -q 'bridgeIntroducesParallelRule915SemanticsIsFalse' DASHI/Foundations/Wette1969Rule915CanonicalP145TypedWeldExact.agda
 
 grep -q 'exhaustiveNamedThirtyCandidateAuditNowExistsIsTrue' DASHI/Foundations/Wette1969Rule93ImplicationFamilyExact.agda
