@@ -6,6 +6,8 @@ import DASHI.Analysis.ResidualBudgetMarginCompilerExact as Budget
 import DASHI.Analysis.RiemannAristotleWindowSchurCrossProverSyncExact as Sync
 import DASHI.Analysis.RiemannAristotleSharedWindowCertificateExact as Shared
 import DASHI.Analysis.CertifiedFiniteCarrierReindexExact as Reindex
+import DASHI.Analysis.RiemannAristotleTwoZeroThreeTaperReturnExact as TwoZero
+import DASHI.Analysis.ExactSelectedEliminationFarTailCompilerExact as Far
 
 leanProofRemainsDistinctFromAgdaProof :
   Sync.AristotleAgdaSyncBoundary.leanProofIsAgdaProof
@@ -27,10 +29,25 @@ residualSignNotRequired :
     Sync.canonicalAristotleAgdaSyncBoundary ≡ false
 residualSignNotRequired = refl
 
-normalizedEndpointTransportStillOpen :
+normalizedEndpointTransportClosedInLean :
   Sync.AristotleAgdaSyncBoundary.normalizedEndpointTransportClosed
+    Sync.canonicalAristotleAgdaSyncBoundary ≡ true
+normalizedEndpointTransportClosedInLean = refl
+
+twoZeroThreeTaperClosedInLean :
+  Sync.AristotleAgdaSyncBoundary.inhabitedTwoZeroThreeTaperClosedInLean
+    Sync.canonicalAristotleAgdaSyncBoundary ≡ true
+twoZeroThreeTaperClosedInLean = refl
+
+selectedTwoZeroDebtRetired :
+  Sync.AristotleAgdaSyncBoundary.selectedTwoZeroResidualDebtRequired
     Sync.canonicalAristotleAgdaSyncBoundary ≡ false
-normalizedEndpointTransportStillOpen = refl
+selectedTwoZeroDebtRetired = refl
+
+projectedFarTailStillOpen :
+  Sync.AristotleAgdaSyncBoundary.projectedFarTailBudgetClosed
+    Sync.canonicalAristotleAgdaSyncBoundary ≡ false
+projectedFarTailStillOpen = refl
 
 riemannHypothesisStillNotDerived :
   Sync.AristotleAgdaSyncBoundary.riemannHypothesisDerived
@@ -57,15 +74,20 @@ sharedResponseEnvelopeConstructedOnce :
     Shared.canonicalSharedWindowBudgetCutset ≡ true
 sharedResponseEnvelopeConstructedOnce = refl
 
-oneSymbolicEndpointComparisonRemains :
+oneSymbolicEndpointComparisonRetired :
   Shared.SharedWindowBudgetCutset.oneSymbolicBudgetComparisonRemains
-    Shared.canonicalSharedWindowBudgetCutset ≡ true
-oneSymbolicEndpointComparisonRemains = refl
+    Shared.canonicalSharedWindowBudgetCutset ≡ false
+oneSymbolicEndpointComparisonRetired = refl
 
-endpointComparisonNotFabricated :
+endpointComparisonClosedInLean :
+  Shared.SharedWindowBudgetCutset.endpointComparisonClosedInLean
+    Shared.canonicalSharedWindowBudgetCutset ≡ true
+endpointComparisonClosedInLean = refl
+
+endpointComparisonNotReprovedInAgda :
   Shared.SharedWindowBudgetCutset.endpointComparisonDerivedHere
     Shared.canonicalSharedWindowBudgetCutset ≡ false
-endpointComparisonNotFabricated = refl
+endpointComparisonNotReprovedInAgda = refl
 
 parallelAbstractCarrierRejected :
   Reindex.CertifiedCarrierReindexBoundary.estimateParallelAbstractCarrierInstead
@@ -86,3 +108,18 @@ boolReindexRoundTripTrue :
   Reindex.ExactCarrierReindex.decode Reindex.boolSwapReindex
     (Reindex.ExactCarrierReindex.encode Reindex.boolSwapReindex true) ≡ true
 boolReindexRoundTripTrue = refl
+
+leanTwoZeroExactEliminationOwned :
+  TwoZero.TwoZeroThreeTaperReturn.twoSelectedNuisancesEliminatedExactly
+    TwoZero.canonicalTwoZeroThreeTaperReturn ≡ true
+leanTwoZeroExactEliminationOwned = refl
+
+localSelectedResidualDebtIsZero :
+  TwoZero.TwoZeroFarTailFrontier.localSelectedResidualDebt
+    TwoZero.canonicalTwoZeroFarTailFrontier ≡ false
+localSelectedResidualDebtIsZero = refl
+
+farTailEstimateNotProducedByCompiler :
+  Far.ExactSelectedFarTailBoundary.farTailEstimateProducedByCompiler
+    Far.canonicalExactSelectedFarTailBoundary ≡ false
+farTailEstimateNotProducedByCompiler = refl
