@@ -13,6 +13,8 @@ FILES=(
   DASHI/Analysis/ExactSelectedEliminationFarTailCompilerExact.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
+  DASHI/Analysis/RiemannAristotleABCDECompilerExact.agda
+  DASHI/Analysis/RiemannAristotleABCDECompilerRegression.agda
 )
 
 for f in "${FILES[@]}"; do
@@ -27,6 +29,7 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotleTwoZeroThreeTaperReturnRegression.agda
   agda DASHI/Analysis/ExactSelectedEliminationFarTailCompilerExact.agda
   agda DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
+  agda DASHI/Analysis/RiemannAristotleABCDECompilerRegression.agda
 else
   echo "agda executable not present; trust scan only" >&2
 fi
