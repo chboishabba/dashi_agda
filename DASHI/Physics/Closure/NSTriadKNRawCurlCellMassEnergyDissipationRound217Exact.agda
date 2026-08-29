@@ -17,42 +17,41 @@ module DASHI.Physics.Closure.NSTriadKNRawCurlCellMassEnergyDissipationRound217Ex
 --   M_pq <= 18 ((|p|^2 E_p) E_q + E_p (|q|^2 E_q)).
 --
 -- The right hand side is exactly eighteen times the Round109 modal
--- energy-dissipation pair kernel.  Hence after any physical Boolean selector,
+-- energy-dissipation pair kernel. Hence after any physical Boolean selector,
 -- Round109's no-cardinality selected-pair theorem gives
 --
 --   sum M_pq <= 36 E D.
 --
 -- This pays the INCOHERENT / cell-mass portion of the quartic companion with
--- the ordinary energy-dissipation product.  It does not pay coherent Gram
+-- the ordinary energy-dissipation product. It does not pay coherent Gram
 -- covariance; that remains the genuine signed-network leaf.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; nonNegative)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNRawCurlLowOutputKernelMassRound178Exact as R178
+import DASHI.Physics.Closure.NSTriadKNPhysicalOrderedTransferSquaredMajorantRound96Exact as R96
 
- two eighteen thirtySix : ℚ
- two = 1ℚ + 1ℚ
- eighteen = R178.nine * two
- thirtySix = eighteen * two
+two eighteen thirtySix : ℚ
+two = 1ℚ + 1ℚ
+eighteen = R178.nine * two
+thirtySix = eighteen * two
 
- twoNN : 0ℚ ≤ two
- twoNN = Rational.addNonnegative R178.oneNN R178.oneNN
+twoNN : 0ℚ ≤ two
+twoNN = Rational.addNonnegative R178.oneNN R178.oneNN
 
- eighteenNN : 0ℚ ≤ eighteen
- eighteenNN = R178.R96.productNonnegative R178.threeNN R178.threeNN
-   |> λ nineNN → R178.R96.productNonnegative nineNN twoNN
-   where
-   infixl 0 _|>_
-   _|>_ : ∀ {a b : Set} → a → (a → b) → b
-   x |> f = f x
+nineNN : 0ℚ ≤ R178.nine
+nineNN = R96.productNonnegative R178.threeNN R178.threeNN
+
+eighteenNN : 0ℚ ≤ eighteen
+eighteenNN = R96.productNonnegative nineNN twoNN
 
 record RawCellRadialData : Set where
   constructor raw-cell-radial-data
@@ -87,7 +86,7 @@ rawCellMassBelowEighteenEDKernel C =
     pqNN = Rational.addNonnegative (pSquareNN C) (qSquareNN C)
 
     radialUpperNN : 0ℚ ≤ two * (pSquare C + qSquare C)
-    radialUpperNN = R178.R96.productNonnegative twoNN pqNN
+    radialUpperNN = R96.productNonnegative twoNN pqNN
 
     firstScale :
       outputSquare C * energyP C
@@ -99,10 +98,10 @@ rawCellMassBelowEighteenEDKernel C =
         (resonantSquareTriangle C) ℚP.≤-refl
 
     leftNN : 0ℚ ≤ outputSquare C * energyP C
-    leftNN = R178.R96.productNonnegative (outputSquareNN C) (energyPNN C)
+    leftNN = R96.productNonnegative (outputSquareNN C) (energyPNN C)
 
     rightNN : 0ℚ ≤ (two * (pSquare C + qSquare C)) * energyP C
-    rightNN = R178.R96.productNonnegative radialUpperNN (energyPNN C)
+    rightNN = R96.productNonnegative radialUpperNN (energyPNN C)
 
     secondScale :
       (outputSquare C * energyP C) * energyQ C
@@ -112,16 +111,13 @@ rawCellMassBelowEighteenEDKernel C =
         leftNN (energyQNN C) rightNN (energyQNN C)
         firstScale ℚP.≤-refl
 
-    nineNN : 0ℚ ≤ R178.nine
-    nineNN = R178.R96.productNonnegative R178.threeNN R178.threeNN
-
     leftTripleNN :
       0ℚ ≤ (outputSquare C * energyP C) * energyQ C
-    leftTripleNN = R178.R96.productNonnegative leftNN (energyQNN C)
+    leftTripleNN = R96.productNonnegative leftNN (energyQNN C)
 
     rightTripleNN :
       0ℚ ≤ ((two * (pSquare C + qSquare C)) * energyP C) * energyQ C
-    rightTripleNN = R178.R96.productNonnegative rightNN (energyQNN C)
+    rightTripleNN = R96.productNonnegative rightNN (energyQNN C)
 
     scaled :
       R178.nine * ((outputSquare C * energyP C) * energyQ C)
@@ -242,6 +238,10 @@ round217RawCellMassToEDKernelClosedIsTrue = refl
 round217SelectedCellMassNoCardinalityTaxClosedIsTrue :
   round217SelectedCellMassNoCardinalityTaxClosed ≡ true
 round217SelectedCellMassNoCardinalityTaxClosedIsTrue = refl
+
+round217CellMassPortionOfQuarticCompanionPaidIsTrue :
+  round217CellMassPortionOfQuarticCompanionPaid ≡ true
+round217CellMassPortionOfQuarticCompanionPaidIsTrue = refl
 
 round217CoherentGramResidualPaidIsFalse :
   round217CoherentGramResidualPaid ≡ false
