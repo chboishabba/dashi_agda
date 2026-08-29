@@ -11,13 +11,18 @@ FILES=(
   DASHI/Analysis/RiemannAristotleTwoZeroThreeTaperReturnExact.agda
   DASHI/Analysis/RiemannAristotleTwoZeroThreeTaperReturnRegression.agda
   DASHI/Analysis/ExactSelectedEliminationFarTailCompilerExact.agda
-  DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda
-  DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
   DASHI/Analysis/RiemannAristotleABCDECompilerExact.agda
   DASHI/Analysis/RiemannAristotleABCDECompilerRegression.agda
   DASHI/Analysis/RiemannAristotleTwoZeroUniversalRHBoundary.agda
   DASHI/Analysis/RiemannAristotleTwoZeroUniversalRHBoundaryRegression.agda
   DASHI/Analysis/RiemannAristotleProjectedCarrierLeanReturnExact.agda
+  DASHI/Analysis/RiemannAristotleUniversalEvenConeBidiExact.agda
+  DASHI/Analysis/ReflectionPairSignedKernelCompilerExact.agda
+  DASHI/Analysis/RiemannAristotleReflectionPairKernelReturnExact.agda
+  DASHI/Analysis/RiemannAristotleReflectionSymmetrizationReturnExact.agda
+  DASHI/Analysis/RiemannAristotleDeterministicProjectiveSchurReturnExact.agda
+  DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda
+  DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 )
 
 for f in "${FILES[@]}"; do
@@ -31,10 +36,15 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotleWindowSchurCrossProverRegression.agda
   agda DASHI/Analysis/RiemannAristotleTwoZeroThreeTaperReturnRegression.agda
   agda DASHI/Analysis/ExactSelectedEliminationFarTailCompilerExact.agda
-  agda DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
   agda DASHI/Analysis/RiemannAristotleABCDECompilerRegression.agda
   agda DASHI/Analysis/RiemannAristotleTwoZeroUniversalRHBoundaryRegression.agda
   agda DASHI/Analysis/RiemannAristotleProjectedCarrierLeanReturnExact.agda
+  agda DASHI/Analysis/RiemannAristotleUniversalEvenConeBidiExact.agda
+  agda DASHI/Analysis/ReflectionPairSignedKernelCompilerExact.agda
+  agda DASHI/Analysis/RiemannAristotleReflectionPairKernelReturnExact.agda
+  agda DASHI/Analysis/RiemannAristotleReflectionSymmetrizationReturnExact.agda
+  agda DASHI/Analysis/RiemannAristotleDeterministicProjectiveSchurReturnExact.agda
+  agda DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 else
   echo "agda executable not present; trust scan only" >&2
 fi
