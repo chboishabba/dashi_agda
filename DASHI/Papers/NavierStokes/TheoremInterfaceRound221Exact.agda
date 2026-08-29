@@ -1,0 +1,74 @@
+module DASHI.Papers.NavierStokes.TheoremInterfaceRound221Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; zero)
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound221Exact as R221
+
+round221PaperResonanceRadiusAdapterClosed : Bool
+round221PaperResonanceRadiusAdapterClosed =
+  R221.round221PhysicalResonanceRadiusAdapterClosed
+
+round221PaperSelectorEDAdapterClosed : Bool
+round221PaperSelectorEDAdapterClosed =
+  R221.round221PhysicalSelectorEDAdapterClosed
+
+round221PaperCoherentOnlyCompanionCompilerClosed : Bool
+round221PaperCoherentOnlyCompanionCompilerClosed =
+  R221.round221CoherentOnlyCompanionCompilerClosed
+
+round221PaperOldInternalSelfPortIsActiveAGate : Bool
+round221PaperOldInternalSelfPortIsActiveAGate =
+  R221.round221OldInternalSelfPortIsActiveAGate
+
+round221PaperActiveRoutineCompletionSeamCount : Nat
+round221PaperActiveRoutineCompletionSeamCount =
+  R221.round221ActiveRoutineCompletionSeamCount
+
+round221PaperCoherentGramResidualBudgetClosed : Bool
+round221PaperCoherentGramResidualBudgetClosed =
+  R221.round221PhysicalCoherentGramResidualBudgetClosed
+
+round221PaperNovelMathematicalLeafCount : Nat
+round221PaperNovelMathematicalLeafCount = R221.round221NovelMathematicalLeafCount
+
+round221PaperPackageAClosed : Bool
+round221PaperPackageAClosed = R221.round221PackageAClosed
+
+round221PaperClayPromotion : Bool
+round221PaperClayPromotion = R221.round221ClayPromotion
+
+round221PaperResonanceRadiusAdapterClosedIsTrue :
+  round221PaperResonanceRadiusAdapterClosed ≡ true
+round221PaperResonanceRadiusAdapterClosedIsTrue = refl
+
+round221PaperSelectorEDAdapterClosedIsTrue :
+  round221PaperSelectorEDAdapterClosed ≡ true
+round221PaperSelectorEDAdapterClosedIsTrue = refl
+
+round221PaperCoherentOnlyCompanionCompilerClosedIsTrue :
+  round221PaperCoherentOnlyCompanionCompilerClosed ≡ true
+round221PaperCoherentOnlyCompanionCompilerClosedIsTrue = refl
+
+round221PaperOldInternalSelfPortIsActiveAGateIsFalse :
+  round221PaperOldInternalSelfPortIsActiveAGate ≡ false
+round221PaperOldInternalSelfPortIsActiveAGateIsFalse = refl
+
+round221PaperActiveRoutineCompletionSeamCountIsZero :
+  round221PaperActiveRoutineCompletionSeamCount ≡ zero
+round221PaperActiveRoutineCompletionSeamCountIsZero = refl
+
+round221PaperCoherentGramResidualBudgetClosedIsFalse :
+  round221PaperCoherentGramResidualBudgetClosed ≡ false
+round221PaperCoherentGramResidualBudgetClosedIsFalse = refl
+
+round221PaperNovelMathematicalLeafCountIsOne :
+  round221PaperNovelMathematicalLeafCount ≡ 1
+round221PaperNovelMathematicalLeafCountIsOne = refl
+
+round221PaperPackageAClosedIsFalse : round221PaperPackageAClosed ≡ false
+round221PaperPackageAClosedIsFalse = refl
+
+round221PaperClayPromotionIsFalse : round221PaperClayPromotion ≡ false
+round221PaperClayPromotionIsFalse = refl
