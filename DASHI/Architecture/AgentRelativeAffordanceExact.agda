@@ -18,8 +18,6 @@ record AffordanceSystem : Set₁ where
     GeometricallyReachable : Environment → Activity → Set
     Affords                : Environment → Agent → Activity → Set
 
-open AffordanceSystem public
-
 data Environment : Set where
   stairOnlyConnection : Environment
 
@@ -47,25 +45,25 @@ architectureAffordanceSystem =
     }
 
 geometricallyReachable :
-  GeometricallyReachable architectureAffordanceSystem
+  AffordanceSystem.GeometricallyReachable architectureAffordanceSystem
     stairOnlyConnection reachUpperLevel
 geometricallyReachable = tt
 
 usableForOneAgent :
-  Affords architectureAffordanceSystem
+  AffordanceSystem.Affords architectureAffordanceSystem
     stairOnlyConnection stairUser reachUpperLevel
 usableForOneAgent = tt
 
 notUsableForOtherAgent :
-  Affords architectureAffordanceSystem
+  AffordanceSystem.Affords architectureAffordanceSystem
     stairOnlyConnection stepFreeUser reachUpperLevel → ⊥
 notUsableForOtherAgent affordance = affordance
 
 geometricReachabilityDoesNotImplyAgentRelativeUsability :
-  GeometricallyReachable architectureAffordanceSystem
+  AffordanceSystem.GeometricallyReachable architectureAffordanceSystem
       stairOnlyConnection reachUpperLevel
   ×
-  (Affords architectureAffordanceSystem
+  (AffordanceSystem.Affords architectureAffordanceSystem
       stairOnlyConnection stepFreeUser reachUpperLevel → ⊥)
 geometricReachabilityDoesNotImplyAgentRelativeUsability =
   geometricallyReachable , notUsableForOtherAgent
