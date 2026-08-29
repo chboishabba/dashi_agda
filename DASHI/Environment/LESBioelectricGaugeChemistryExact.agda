@@ -6,6 +6,7 @@ import DASHI.Biology.Levin.BioelectricChemistryWaveAdapter as Bioelectric
 import DASHI.Chemistry.ExistingContentBridge as ChemistryReuse
 import DASHI.Chemistry.TransitionKernel as Chemistry
 import DASHI.Geometry.Gauge.SUNPrimitives as SUN
+import DASHI.Physics.SIQuantitiesExact as SI
 
 ------------------------------------------------------------------------
 -- LES BIOELECTRIC / GAUGE / CHEMISTRY CROSS-POLLINATION
@@ -20,7 +21,7 @@ import DASHI.Geometry.Gauge.SUNPrimitives as SUN
 --
 -- The correct reuse boundary is NOT "bioelectricity = Yang-Mills".  A real
 -- bioelectric application needs an independently supplied electromagnetic /
--- electrochemical law surface, unit discipline, membrane geometry and
+-- electrochemical law surface, SI dimension discipline, membrane geometry and
 -- experiment receipts.  The YM lane is evidence that gauge structure is an
 -- established repository concept, not authority for a U(1) biological model.
 ------------------------------------------------------------------------
@@ -30,21 +31,29 @@ data GaugeSector : Set where
   nonAbelianYangMillsSector
   : GaugeSector
 
+------------------------------------------------------------------------
+-- Quantitative electrochemical socket.
+--
+-- Scalar remains application-selectable (exact rational, interval, measured
+-- value with uncertainty, etc.), while electrical and concentration quantities
+-- are dimension-indexed by the BIPM-calibrated SI owner.
+------------------------------------------------------------------------
+
 record ElectrochemicalFieldSocket : Set₁ where
   constructor electrochemicalFieldSocket
   field
-    Charge : Set
-    Potential : Set
-    Current : Set
-    Concentration : Set
+    Scalar : Set
     FieldState : Set
     MembraneState : Set
+    ConcentrationState : Set
 
-    potentialFromField : FieldState → Potential
-    ionicCurrent : MembraneState → Concentration → Current
-    chargeCarrier : Concentration → Charge
+    potentialFromField : FieldState → SI.Voltage Scalar
+    ionicCurrent : MembraneState → ConcentrationState → SI.Current Scalar
+    chargeCarrier : ConcentrationState → SI.Charge Scalar
+    amountConcentration : ConcentrationState → SI.Concentration Scalar
+    electricField : FieldState → SI.ElectricField Scalar
 
-    unitSystemReference : String
+    siQuantityOwnerReference : String
     electromagneticLawReference : String
     electrochemicalPotentialReference : String
     membraneTransportReference : String
@@ -80,6 +89,7 @@ record ElectrochemicalTransitionWeld
   constructor electrochemicalTransitionWeld
   field
     chemicalTransition : Chemistry.Transition
+    diffusionCoefficient : SI.DiffusionCoefficient (Scalar socket)
     fieldStateCouplingReference : String
     chargeConservationReference : String
     concentrationFluxReference : String
@@ -94,6 +104,9 @@ open ElectrochemicalTransitionWeld public
 
 yangMillsGaugeOwner : String
 yangMillsGaugeOwner = "DASHI.Geometry.Gauge.SUNPrimitives"
+
+siQuantityOwner : String
+siQuantityOwner = "DASHI.Physics.SIQuantitiesExact; BIPM DOI 10.59161/AUEZ1291"
 
 yangMillsPromotionImported : Bool
 yangMillsPromotionImported = SUN.clayYangMillsPromoted
@@ -116,13 +129,17 @@ record LESBioelectricGaugeBoundary : Set where
     membranePotentialBoolIsQuantitativeVoltageIsFalse :
       membranePotentialBoolIsQuantitativeVoltage ≡ false
 
-    chargeLabelIsDimensionedChargeQuantity : Bool
-    chargeLabelIsDimensionedChargeQuantityIsFalse :
-      chargeLabelIsDimensionedChargeQuantity ≡ false
+    chemistryChargeLabelIsDimensionedChargeQuantity : Bool
+    chemistryChargeLabelIsDimensionedChargeQuantityIsFalse :
+      chemistryChargeLabelIsDimensionedChargeQuantity ≡ false
 
     nernstSurfaceAloneIsCellularElectrodynamics : Bool
     nernstSurfaceAloneIsCellularElectrodynamicsIsFalse :
       nernstSurfaceAloneIsCellularElectrodynamics ≡ false
+
+    electrochemicalSocketUsesTypedSIQuantities : Bool
+    electrochemicalSocketUsesTypedSIQuantitiesIsTrue :
+      electrochemicalSocketUsesTypedSIQuantities ≡ true
 
     bioelectricMechanismNeedsFieldChemistryMembraneWeld : Bool
     bioelectricMechanismNeedsFieldChemistryMembraneWeldIsTrue :
@@ -136,4 +153,5 @@ canonicalLESBioelectricGaugeBoundary =
     false refl
     false refl
     false refl
+    true refl
     true refl
