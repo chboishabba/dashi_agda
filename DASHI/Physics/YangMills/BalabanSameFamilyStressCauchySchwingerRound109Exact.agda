@@ -25,9 +25,10 @@ module DASHI.Physics.YangMills.BalabanSameFamilyStressCauchySchwingerRound109Exa
 --   completed marked stress  = literal `stressTensor Y G`.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; subst)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; _≤_; _*_)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP119CompatibleLocalExpectationFlowExact as Source
@@ -102,16 +103,6 @@ record LiteralSchwingerStressMarkedCompletion
             completedSources))
       ≡ Top.stressTensor Y group
 open LiteralSchwingerStressMarkedCompletion public
-
-record Round109Boundary : Set where
-  field
-    sourceTelescopeAlreadyGivesStressCauchyAfterInsertionWeld : Set
-    sourceTelescopeAlreadyGivesStressCauchyAfterInsertionWeldWitness :
-      sourceTelescopeAlreadyGivesStressCauchyAfterInsertionWeld
-
-    finiteCauchySequenceAloneIdentifiesLiteralSchwingerStress : Set
-    finiteCauchySequenceAloneIdentifiesLiteralSchwingerStressNotAutomatic :
-      finiteCauchySequenceAloneIdentifiesLiteralSchwingerStress → Set
 
 -- Proven/source-owned pieces.
 sourceCompatibleLocalExpectationTelescopeLevel : ProofLevel
