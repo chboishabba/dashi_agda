@@ -7,6 +7,7 @@ on:
       - 'DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda'
       - 'DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda'
       - 'DASHI/Reasoning/RelationRepresentationExternalReceiptAdmissionExact.agda'
+      - 'DASHI/Reasoning/DASHIgGrokkingEmpiricalBridgeExact.agda'
       - 'DASHI/Reasoning/RelationRepresentationAdequacyExact.agda'
       - 'DASHI/Reasoning/RelationRepresentationRealizationExact.agda'
       - 'DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda'
