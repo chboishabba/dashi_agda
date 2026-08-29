@@ -12,6 +12,7 @@ FILES=(
   DASHI/Physics/Foundations/BalabanCommonActionVariationValidation.agda
   DASHI/Physics/Foundations/BalabanAllSectorContinuumProducerExact.agda
   DASHI/Physics/Foundations/BalabanNativeSectorRecoveryTransportExact.agda
+  DASHI/Physics/Foundations/BalabanTransportedSectorFamilyProducerExact.agda
   DASHI/Physics/Foundations/BalabanContinuumProducerValidation.agda
   DASHI/Physics/Foundations/EinsteinCommonActionVariationFrontierExact.agda
   DASHI/Physics/Foundations/EinsteinCommonActionVariationValidation.agda
@@ -31,6 +32,7 @@ done
 qft=DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
 producer=DASHI/Physics/Foundations/BalabanAllSectorContinuumProducerExact.agda
 transport=DASHI/Physics/Foundations/BalabanNativeSectorRecoveryTransportExact.agda
+family=DASHI/Physics/Foundations/BalabanTransportedSectorFamilyProducerExact.agda
 gr=DASHI/Physics/Foundations/EinsteinCommonActionVariationFrontierExact.agda
 cap=DASHI/Physics/Foundations/CommonActionQFTGRVariationCompilerExact.agda
 producerCap=DASHI/Physics/Foundations/CommonActionQFTGRContinuumProducerCompilerExact.agda
@@ -52,6 +54,11 @@ grep -q '^transportedSectorContinuumFirstVariation :' "$transport"
 grep -q '^transportedSectorVariationIsActualSharedStressPairing :' "$transport"
 grep -q 'nativeYMStressIsSharedStressByCarrierNameIsFalse' "$transport"
 grep -q 'nativeYMMetricPerturbationIsCommonPerturbationByNameIsFalse' "$transport"
+
+grep -q '^record TransportedBalabanSectorFamily' "$family"
+grep -q '^transportedSectorIdentityWithCommonPairing :' "$family"
+grep -q '^transportedSectorFamilyToContinuumProducer :' "$family"
+grep -q 'sectorEndpointTransportAutomaticallyProvidesAggregationIsFalse' "$family"
 
 grep -q 'effectiveSourceRepresentsCommonMetricVariation' "$gr"
 grep -q 'commonMetricVariationEqualsEinsteinPairing' "$gr"
@@ -78,4 +85,4 @@ agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/BalabanContinuumPr
 agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/EinsteinCommonActionVariationValidation.agda
 agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/Everything.agda
 
-echo "Legacy and endpoint-only Balaban-QFT, native-to-shared sector transport, pairing-exact Einstein-GR, and common-metric weld checks passed."
+echo "Legacy and endpoint-only Balaban-QFT, native-to-shared sector transport, explicit sector-family aggregation, pairing-exact Einstein-GR, and common-metric weld checks passed."
