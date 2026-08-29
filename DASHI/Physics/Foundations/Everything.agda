@@ -34,6 +34,7 @@ import DASHI.Physics.Foundations.BalabanCommonActionVariationFrontierExact
 import DASHI.Physics.Foundations.BalabanCommonActionVariationValidation
 import DASHI.Physics.Foundations.EinsteinCommonActionVariationFrontierExact
 import DASHI.Physics.Foundations.EinsteinCommonActionVariationValidation
+import DASHI.Physics.Foundations.CommonActionQFTGRVariationCompilerExact
 import DASHI.Physics.Foundations.FiniteHistoryOrientationExact
 import DASHI.Physics.Foundations.HistoryWeightFiltrationExact
 import DASHI.Physics.Foundations.FiniteHistoryFunctionalExact
