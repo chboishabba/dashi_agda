@@ -18,9 +18,26 @@ module DASHI.Physics.Closure.NSTriadKNProfileExtractionCircularityRound238Exact 
 -- This is useful only AFTER a noncircular extraction theorem has produced
 -- controlled profiles.
 --
--- The next genuine theorem must therefore be an inverse/extraction statement
--- driven by failure of the Q_+- budget itself, not by an assumed critical
--- H^{1/2} bound.
+-- ROUND240 AUTHORITY CLARIFICATION
+--
+-- The bad object is a CUTOFF FAMILY, not an arbitrary sequence of continuum
+-- initial data.  Failure of the intended estimate has the shape
+--
+--   N_n -> infinity,
+--   integral Q_+-(u_{N_n}) -> infinity
+--
+-- for one viscosity and one compatible initial Fourier datum.  A standard
+-- Kenig--Merle/Gallagher threshold theorem for continuum initial data does not
+-- automatically convert this cutoff failure into an H^{1/2}-bounded profile
+-- sequence.  The missing bridge is therefore more specific:
+--
+--   cutoff-uniform defect failure
+--       -> selected times/scales/cores
+--       -> bounded critical rescaled state sequence
+--       -> standard profile decomposition.
+--
+-- Only after that bridge closes may Round239's published orthogonal-profile
+-- decoupling and a single-profile rigidity theorem be applied.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -40,6 +57,12 @@ round238UsingUniformHOneHalfToProduceUniformHOneHalfWouldBeCircular = true
 
 round238PeriodicShrinkingProfilesHaveVanishingEnergyScaleWeight : Bool
 round238PeriodicShrinkingProfilesHaveVanishingEnergyScaleWeight = true
+
+round238CutoffFailureIsAlreadyContinuumCriticalSequence : Bool
+round238CutoffFailureIsAlreadyContinuumCriticalSequence = false
+
+round238CutoffFailureToBoundedCriticalStateSequenceClosed : Bool
+round238CutoffFailureToBoundedCriticalStateSequenceClosed = false
 
 round238DefectDrivenInverseProfileExtractionClosed : Bool
 round238DefectDrivenInverseProfileExtractionClosed = false
@@ -64,6 +87,14 @@ round238StandardCriticalProfileDecompositionMayBeAssumedForPackageAIsFalse = ref
 round238UsingUniformHOneHalfToProduceUniformHOneHalfWouldBeCircularIsTrue :
   round238UsingUniformHOneHalfToProduceUniformHOneHalfWouldBeCircular ≡ true
 round238UsingUniformHOneHalfToProduceUniformHOneHalfWouldBeCircularIsTrue = refl
+
+round238CutoffFailureIsAlreadyContinuumCriticalSequenceIsFalse :
+  round238CutoffFailureIsAlreadyContinuumCriticalSequence ≡ false
+round238CutoffFailureIsAlreadyContinuumCriticalSequenceIsFalse = refl
+
+round238CutoffFailureToBoundedCriticalStateSequenceClosedIsFalse :
+  round238CutoffFailureToBoundedCriticalStateSequenceClosed ≡ false
+round238CutoffFailureToBoundedCriticalStateSequenceClosedIsFalse = refl
 
 round238DefectDrivenInverseProfileExtractionClosedIsFalse :
   round238DefectDrivenInverseProfileExtractionClosed ≡ false
