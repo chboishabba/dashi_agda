@@ -27,8 +27,10 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCoherentGramResidualTargetRound222
 --   whose time integral is bounded uniformly in the Galerkin cutoff N.
 --
 -- This file freezes that statement as the unique active Package-A research
--- target. The actual analytic integral is intentionally represented by a
--- proof-bearing interface rather than postulated as a theorem.
+-- target. The integration operator is kept abstract so later analytic models
+-- may use the repository's eventual Bochner/Lebesgue/time-discretisation
+-- carrier, but the bound is syntactically tied to the ACTUAL coherent
+-- majorant and quantified over every cutoff and terminal time.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -89,12 +91,6 @@ sliceCompanionBound slice =
 
 ------------------------------------------------------------------------
 -- Cutoff-uniform integrated research target.
---
--- `IntegratedCoherentMajorantBound` is deliberately an externally inhabited
--- proposition supplied by the eventual PDE theorem. Its interpretation is
--- fixed here by the data it ranges over: same physical slices, same coherent
--- majorant, all cutoffs, all terminal times. No stronger pointwise theorem is
--- smuggled into the interface.
 ------------------------------------------------------------------------
 
 record PhysicalCoherentGramResidualBudget : Set₁ where
@@ -105,12 +101,23 @@ record PhysicalCoherentGramResidualBudget : Set₁ where
 
     slice : Cutoff → Time → PhysicalCoherentGramSlice
 
-    -- Cutoff-independent control value; it may depend on terminal time and
+    -- Abstract time-integration functional.  It is intentionally not assigned
+    -- analytic axioms here; those belong to the future concrete time carrier.
+    -- What matters for the frontier is that the theorem below applies it to
+    -- the literal coherent majorant produced by `slice`.
+    integrateTo :
+      (Cutoff → Time → ℚ) → Cutoff → Time → ℚ
+
+    -- Cutoff-independent control value. It may depend on terminal time and
     -- initial data through the chosen analytic model, but not on the cutoff.
     coherentIntegralBound : Time → ℚ
 
-    IntegratedCoherentMajorantBound : Set
-    integratedCoherentMajorantBound : IntegratedCoherentMajorantBound
+    integratedCoherentMajorantBound :
+      (N : Cutoff) → (T : Time) →
+      integrateTo
+        (λ cutoff time → coherentMajorant (slice cutoff time))
+        N T
+      ≤ coherentIntegralBound T
 
 open PhysicalCoherentGramResidualBudget public
 
@@ -127,6 +134,12 @@ companionSliceAvailableFromPhysicalBudget :
       + coherentMajorant (slice budget N t)
 companionSliceAvailableFromPhysicalBudget budget N t =
   sliceCompanionBound (slice budget N t)
+
+round222IntegratedBudgetQuantifiesEveryCutoff : Bool
+round222IntegratedBudgetQuantifiesEveryCutoff = true
+
+round222IntegratedBudgetUsesActualCoherentMajorant : Bool
+round222IntegratedBudgetUsesActualCoherentMajorant = true
 
 ------------------------------------------------------------------------
 -- Scope flags.
@@ -156,6 +169,14 @@ round222ClayPromotion = false
 round222ResearchTargetExactlyCoherentGramResidualIsTrue :
   round222ResearchTargetExactlyCoherentGramResidual ≡ true
 round222ResearchTargetExactlyCoherentGramResidualIsTrue = refl
+
+round222IntegratedBudgetQuantifiesEveryCutoffIsTrue :
+  round222IntegratedBudgetQuantifiesEveryCutoff ≡ true
+round222IntegratedBudgetQuantifiesEveryCutoffIsTrue = refl
+
+round222IntegratedBudgetUsesActualCoherentMajorantIsTrue :
+  round222IntegratedBudgetUsesActualCoherentMajorant ≡ true
+round222IntegratedBudgetUsesActualCoherentMajorantIsTrue = refl
 
 round222RequiresGramNegativityIsFalse :
   round222RequiresGramNegativity ≡ false
