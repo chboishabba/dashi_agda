@@ -5,9 +5,14 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.RobustExperimentInferenceFrontierExact as Robust
 import DASHI.Core.ConsumerRelativeReductionKernelExact as Reduction
+import DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact as ReductionCanonical
+import DASHI.Core.ConsumerRelativeReductionSearchExact as ReductionSearch
+import DASHI.Core.RobustInterventionAcrossHypothesesExact as RobustIntervention
 import DASHI.Biology.Physical.C3Cube27ConsumerReductionAdapterExact as C3Reduction
 import DASHI.Environment.LESDomainBasisBidiFrontierExact as Basis
 import DASHI.Environment.LESConsumerRelativeMechanismReductionExact as LESReduction
+import DASHI.Environment.LESAdaptiveSPACModelSearchExact as AdaptiveSPAC
+import DASHI.Environment.LESModelFibreRobustInterventionExact as FibreIntervention
 import DASHI.Environment.LESFluidPhysicsCouplingExact as Fluid
 import DASHI.Environment.LESBioelectricGaugeChemistryExact as Bioelectric
 import DASHI.Environment.LESEnvironmentSIQuantityBridgeExact as EnvironmentSI
@@ -63,8 +68,20 @@ physicalProcessSourceRegistryOwner = "DASHI.Environment.LESPhysicalProcessSource
 consumerRelativeReductionOwner : String
 consumerRelativeReductionOwner = "DASHI.Core.ConsumerRelativeReductionKernelExact"
 
+consumerRelativeReductionCanonicalOwner : String
+consumerRelativeReductionCanonicalOwner = "DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact"
+
+consumerRelativeReductionSearchOwner : String
+consumerRelativeReductionSearchOwner = "DASHI.Core.ConsumerRelativeReductionSearchExact"
+
 lesReductionAdapterOwner : String
 lesReductionAdapterOwner = "DASHI.Environment.LESConsumerRelativeMechanismReductionExact"
+
+adaptiveSPACModelSearchOwner : String
+adaptiveSPACModelSearchOwner = "DASHI.Environment.LESAdaptiveSPACModelSearchExact"
+
+modelFibreRobustInterventionOwner : String
+modelFibreRobustInterventionOwner = "DASHI.Environment.LESModelFibreRobustInterventionExact"
 
 finiteSPACExperimentOwner : String
 finiteSPACExperimentOwner = "DASHI.Environment.FiniteSPACCalibrationExperimentExact"
@@ -181,6 +198,59 @@ canonicalLESPhysicsCrossPollinationCutset =
     true true true true true true
     true true true true true true true true true true true true true
     true true true false true true true false true true true
+
+------------------------------------------------------------------------
+-- New reduction-search / actionability cut.  Kept separate from the older
+-- physical cutset so the theorem surface can evolve without destabilising its
+-- constructor arity.
+------------------------------------------------------------------------
+
+record LESReductionSearchCrossPollinationCutset : Set where
+  constructor lesReductionSearchCrossPollinationCutset
+  field
+    certifiedROMMapsToCanonicalFutureEquivalence : Bool
+    candidateFutureCounterexampleRefutesSafety : Bool
+    measurementDiscriminatorReusesActiveInformation : Bool
+    symmetryOrbitCanBeProvedConsumerInvisible : Bool
+    visibleSymmetryCannotBeSilentlyQuotiented : Bool
+    reductionCandidatesUseReopenableHypothesisStatus : Bool
+    deferredCandidateIsNotRefuted : Bool
+    adaptiveSPACPortfolioTyped : Bool
+    bucketToRichardsCounterexampleEscalationTyped : Bool
+    richardsToSPACCounterexampleEscalationTyped : Bool
+    spacToElectroBiogeochemicalEscalationTyped : Bool
+    evidenceFibreRobustInterventionTyped : Bool
+    evidenceRefinementPreservesExistingRobustControl : Bool
+    measurementCanUnlockControlAfterHypothesisRefinement : Bool
+
+open LESReductionSearchCrossPollinationCutset public
+
+canonicalLESReductionSearchCrossPollinationCutset :
+  LESReductionSearchCrossPollinationCutset
+canonicalLESReductionSearchCrossPollinationCutset =
+  lesReductionSearchCrossPollinationCutset
+    true true true true true true true
+    true true true true true true true
+
+reductionCanonicalBoundaryImported :
+  ReductionCanonical.ConsumerReductionCanonicalBridgeBoundary
+reductionCanonicalBoundaryImported =
+  ReductionCanonical.canonicalConsumerReductionCanonicalBridgeBoundary
+
+reductionSearchBoundaryImported : ReductionSearch.ReductionSearchBoundary
+reductionSearchBoundaryImported = ReductionSearch.canonicalReductionSearchBoundary
+
+adaptiveSPACBoundaryImported : AdaptiveSPAC.LESAdaptiveSPACModelSearchBoundary
+adaptiveSPACBoundaryImported = AdaptiveSPAC.canonicalLESAdaptiveSPACModelSearchBoundary
+
+robustInterventionBoundaryImported : RobustIntervention.RobustInterventionBoundary
+robustInterventionBoundaryImported =
+  RobustIntervention.canonicalRobustInterventionBoundary
+
+modelFibreInterventionBoundaryImported :
+  FibreIntervention.LESModelFibreInterventionBoundary
+modelFibreInterventionBoundaryImported =
+  FibreIntervention.canonicalLESModelFibreInterventionBoundary
 
 record LESPhysicsCrossPollinationBoundary : Set where
   constructor lesPhysicsCrossPollinationBoundary
