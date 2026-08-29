@@ -8,6 +8,7 @@ on:
       - 'DASHI/Core/CommonExperimentRealisationExact.agda'
       - 'DASHI/Core/DiscriminatorSynthesisExact.agda'
       - 'DASHI/Core/CoarseFineRelativeFibreExact.agda'
+      - 'DASHI/Core/RelativeFineModelFidelityOrthogonalityExact.agda'
       - 'DASHI/Core/ConsumerDecisionAdequacyFromReductionExact.agda'
       - 'DASHI/Core/ConsumerAdequacyJointPolicyBidiCompilerExact.agda'
       - 'DASHI/Core/SequentialConsumerExperimentPlannerExact.agda'
