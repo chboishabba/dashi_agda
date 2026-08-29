@@ -60,7 +60,7 @@ interactionPartBelowCombined dataSet =
     cBelowSum : C ≤ C + L
     cBelowSum =
       subst
-        (λ right → C ≤ right)
+        (λ left → left ≤ C + L)
         (ℚP.+-identityʳ C)
         (ℚP.+-monoʳ-≤ C (derivativeBoundNonnegative dataSet))
   in
