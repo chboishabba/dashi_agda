@@ -1,0 +1,41 @@
+name: NS Round253-259 bidi analytic profile rigidity Package A
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalW1W2W3InstantiationRound253Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNDefectFailureThresholdCrossingRound254Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNTorusEuclideanProfileDichotomyRound255Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNProfileDefectDecouplingCriticalElementRound256Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCriticalElementBackwardUniquenessRound257Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPackageASequentialBoundRound258Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNBidiCriticalElementPackageARound259Exact.agda'
+      - '.github/workflows/ns-round253-259-profile-rigidity-packagea.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bidi-profile-rigidity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: DeterminateSystems/nix-installer-action@v3
+      - name: Type-check Round253 physical W1 W2 W3 instances
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNPhysicalW1W2W3InstantiationRound253Exact.agda
+      - name: Type-check Round254 threshold crossing selector
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNDefectFailureThresholdCrossingRound254Exact.agda
+      - name: Type-check Round255 torus/Euclidean profile dichotomy
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNTorusEuclideanProfileDichotomyRound255Exact.agda
+      - name: Type-check Round256 defect decoupling critical element
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNProfileDefectDecouplingCriticalElementRound256Exact.agda
+      - name: Type-check Round257 backward uniqueness rigidity
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNCriticalElementBackwardUniquenessRound257Exact.agda
+      - name: Type-check Round258 authoritative Package A bound
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNPackageASequentialBoundRound258Exact.agda
+      - name: Type-check Round259 complete bidi Package A compiler
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNBidiCriticalElementPackageARound259Exact.agda
