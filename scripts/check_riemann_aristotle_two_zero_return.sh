@@ -44,6 +44,7 @@ FILES=(
   DASHI/Analysis/RiemannAristotleG2dReflectionDuplicateNoGoExact.agda
   DASHI/Analysis/RiemannAristotleG2dScalarDeterminantSumTargetExact.agda
   DASHI/Analysis/RiemannAristotleG2CurrentCutExact.agda
+  DASHI/Analysis/RiemannAristotleG2CurrentCutRegression.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 )
@@ -89,7 +90,7 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotleG2cPolarizationCompilerExact.agda
   agda DASHI/Analysis/RiemannAristotleG2dReflectionDuplicateNoGoExact.agda
   agda DASHI/Analysis/RiemannAristotleG2dScalarDeterminantSumTargetExact.agda
-  agda DASHI/Analysis/RiemannAristotleG2CurrentCutExact.agda
+  agda DASHI/Analysis/RiemannAristotleG2CurrentCutRegression.agda
   agda DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 else
   echo "agda executable not present; trust scan only" >&2
