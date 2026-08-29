@@ -49,11 +49,11 @@ open TerminalHistoricalProduction public
 
 terminalOneStepTrace :
   {start : Context} {goal : Formula} →
-  TerminalHistoricalProduction start goal →
+  (production : TerminalHistoricalProduction start goal) →
   PCRA.CertifiedRuleTrace
     historicalSystem
     (PCRA.runCertifiedTrace historicalSystem
-      (prefix _))
+      (prefix production))
 terminalOneStepTrace production =
   PCRA.choose (terminalRule production) PCRA.done
 
