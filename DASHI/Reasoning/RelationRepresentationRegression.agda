@@ -182,8 +182,8 @@ equalPhaseDoesNotCollapseAmplitude :
 equalPhaseDoesNotCollapseAmplitude = Phase.differentAmplitudeWitness
 
 sameAmplitudeCanRetainDifferentPhase :
-  Phase.amplitude Phase.sameAmplitudeDifferentAmplitudeA
-  ≡ Phase.amplitude Phase.sameAmplitudeDifferentAmplitudeB
+  Phase.amplitude Phase.sameAmplitudeDifferentPhaseA
+  ≡ Phase.amplitude Phase.sameAmplitudeDifferentPhaseB
 sameAmplitudeCanRetainDifferentPhase = Phase.sameAmplitudeWitness
 
 equalAmplitudeDoesNotCollapsePhase :
