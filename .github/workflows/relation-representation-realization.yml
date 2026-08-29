@@ -1,0 +1,58 @@
+name: relation-representation-realization
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Core/ObligationReducingExtensionGuardExact.agda'
+      - 'DASHI/Core/Everything.agda'
+      - 'DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda'
+      - 'DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda'
+      - 'DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda'
+      - 'DASHI/Reasoning/RelationRepresentationExternalReceiptAdmissionExact.agda'
+      - 'DASHI/Reasoning/ImplementationExperimentProvenanceExact.agda'
+      - 'DASHI/Reasoning/DASHIgGrokkingEmpiricalBridgeExact.agda'
+      - 'DASHI/Reasoning/DASHIgGrokkingStage67SpecimenExact.agda'
+      - 'DASHI/Reasoning/RelationRepresentationAdequacyExact.agda'
+      - 'DASHI/Reasoning/RelationRepresentationRealizationExact.agda'
+      - 'DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda'
+      - 'DASHI/Reasoning/RelationRepresentationExperimentProtocolExact.agda'
+      - 'DASHI/Reasoning/RelationRepresentationCandidateDiscriminationExact.agda'
+      - 'DASHI/Reasoning/RelationRepresentationFrontierProgressGuardExact.agda'
+      - 'DASHI/Reasoning/RelationRepresentationMechanismSocketExact.agda'
+      - 'DASHI/Reasoning/FiniteRelationLinearAlgebraProducerExact.agda'
+      - 'DASHI/Reasoning/FiniteRelationSVDJacobianProducerExact.agda'
+      - 'DASHI/Reasoning/EigenslurFlourishingRelationBoundaryExact.agda'
+      - 'DASHI/Reasoning/RelationRepresentationCrossPollinationExact.agda'
+      - 'DASHI/Reasoning/HumourRelationRepresentationCrossPollinationExact.agda'
+      - 'DASHI/Reasoning/NeuralSpectralRelationCrossPollinationExact.agda'
+      - 'DASHI/Reasoning/RelationRepresentationRegression.agda'
+      - 'DASHI/Reasoning/Everything.agda'
+      - 'Artifacts/relation-representation/numeric-producer-receipt.json'
+      - 'Artifacts/relation-representation/external-study-receipt-template.json'
+      - 'scripts/relation_representation_numeric_producer.py'
+      - 'scripts/validate_relation_representation_external_receipt.py'
+      - 'scripts/check_dashig_grokking_stage67.sh'
+      - 'Docs/support/reference/RelationRepresentationRealization.md'
+      - 'scripts/check_relation_representation_realization.sh'
+      - '.github/workflows/relation-representation-realization.yml'
+  workflow_dispatch:
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check relation representation realization
+        env:
+          AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
+          DASHI_REPO_ROOT: ${{ github.workspace }}
+          DASHI_AGDA29_CACHE_ROOT: ${{ runner.temp }}/dashi-agda29
+          AGDA_LOG_PATH: ${{ github.workspace }}/agda-relation-representation-realization.log
+          AGDA_JOBS: '8'
+        run: |
+          bash scripts/check_relation_representation_realization.sh
+          bash scripts/check_dashig_grokking_stage67.sh
