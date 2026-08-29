@@ -3,12 +3,6 @@ module DASHI.Physics.YangMills.BalabanCanonicalMetricStressLaneRound120Exact whe
 
 ------------------------------------------------------------------------
 -- ROUND120: ONE SOURCE-EXACT METRIC-STRESS LANE FROM FINITE CMP116 TO CLAY
---
--- Round119 ties the Round106 canonical metric first variation to the exact
--- CMP119 insertion selected by one Round114 coordinate.  Round115 compiles that
--- same coordinate to the source telescope, Hilbert data, and literal Clay
--- stress derivative endpoint.  This file exposes the combined lane without
--- identifying carriers that genuinely live at different stages/topologies.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -20,6 +14,7 @@ import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityHessianRound103Ex
 import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityFirstVariationRound105Exact as First
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106Exact as Domain
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as StressRep
+import DASHI.Physics.YangMills.BalabanCanonicalMetricToCMP119StressRound118Exact as R118
 import DASHI.Physics.YangMills.BalabanCanonicalMetricSelectedStressRound119Exact as R119
 import DASHI.Physics.YangMills.BalabanLiteralStressCoordinateRound114Exact as R114
 import DASHI.Physics.YangMills.BalabanLiteralStressCompletionRound115Exact as R115
@@ -51,17 +46,6 @@ record CanonicalMetricLiteralStressLane
         domain representation coordinate
 open CanonicalMetricLiteralStressLane public
 
-compiledCoordinate :
-  ∀ {C S Y group Scale Volume activity domain representation} →
-  CanonicalMetricLiteralStressLane
-    {C = C} {S = S} {Y = Y} {group = group}
-    {Scale = Scale} {Volume = Volume} {activity = activity}
-    domain representation →
-  R115.CompiledLiteralStressCompletion
-    (coordinate
-      {domain = domain} {representation = representation})
-compiledCoordinate lane = R115.compileLiteralStressCoordinate (coordinate lane)
-
 finiteMetricVariationIsSelectedCMP119Insertion :
   ∀ {C S Y group Scale Volume activity}
     {domain : Domain.CanonicalMetricSourceDomain Scale Volume activity}
@@ -73,11 +57,11 @@ finiteMetricVariationIsSelectedCMP119Insertion :
   Domain.AdmissibleMetricPerturbation domain perturbation →
   let weld = metricSelectedStress lane
       insertion =
-        R119.R118.normalizedInsertion
+        R118.normalizedInsertion
           (R119.asRound118CanonicalMetricWeld weld)
           background perturbation
   in
-  R119.R118.readoutToRational (R119.asRound118CanonicalMetricWeld weld)
+  R118.readoutToRational (R119.asRound118CanonicalMetricWeld weld)
     (StressRep.firstVariationReadout representation
       (First.substitutedFirstVariation activity background
         (Domain.metricPerturbationToBackgroundTangent
@@ -140,7 +124,5 @@ selectedStressCompletionIsLiteralClayStressDerivative lane =
 canonicalMetricLiteralStressLaneCompilerLevel : ProofLevel
 canonicalMetricLiteralStressLaneCompilerLevel = machineChecked
 
--- One physical source-exact instantiation now feeds the whole finite-to-continuum
--- stress lane.  No independent Cauchy, Hilbert, or endpoint theorem remains.
 literalCanonicalMetricStressLaneInstantiationLevel : ProofLevel
 literalCanonicalMetricStressLaneInstantiationLevel = conditional
