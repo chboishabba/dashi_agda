@@ -133,9 +133,9 @@ symmetryOrbitCollapsesInReduction :
   (state : Fine) →
   Reduction.encode rom (Reduction.act fineSymmetry g state)
   ≡ Reduction.encode rom state
-symmetryOrbitCollapsesInReduction invisible g state =
+symmetryOrbitCollapsesInReduction {compatible = compatible} invisible g state =
   trans
-    (Reduction.encodeEquivariant _ g state)
+    (Reduction.encodeEquivariant compatible g state)
     (reducedOrbitFixed invisible g state)
 
 symmetryOrbitIsCanonicalFutureEquivalent :
@@ -154,9 +154,9 @@ symmetryOrbitIsCanonicalFutureEquivalent :
     (Reduction.fineObserve rom)
     (Reduction.act fineSymmetry g state)
     state
-symmetryOrbitIsCanonicalFutureEquivalent invisible actionLabel g state =
+symmetryOrbitIsCanonicalFutureEquivalent {rom = rom} invisible actionLabel g state =
   Future.kernelContainedInFutureEquivalence
-    (canonicalFutureSafety _ actionLabel)
+    (canonicalFutureSafety rom actionLabel)
     (symmetryOrbitCollapsesInReduction invisible g state)
 
 consumerVisibleSymmetryCannotBeQuotiented :
