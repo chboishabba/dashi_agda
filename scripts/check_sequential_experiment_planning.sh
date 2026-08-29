@@ -10,6 +10,7 @@ FILES=(
   DASHI/Core/CommonExperimentRealisationExact.agda
   DASHI/Core/DiscriminatorSynthesisExact.agda
   DASHI/Core/CoarseFineRelativeFibreExact.agda
+  DASHI/Core/RelativeFineModelFidelityOrthogonalityExact.agda
   DASHI/Core/ConsumerDecisionAdequacyFromReductionExact.agda
   DASHI/Core/ConsumerAdequacyJointPolicyBidiCompilerExact.agda
   DASHI/Core/SequentialConsumerExperimentPlannerExact.agda
@@ -43,6 +44,10 @@ grep -q '^fromProvenanceBearingQuotient :' DASHI/Core/CoarseFineRelativeFibreExa
 grep -q '^coarseProjectionRetainsRelativeFineResidual :' DASHI/Core/CoarseFineRelativeFibreExact.agda
 grep -q '^fineSensitivityRefutesCoarseOnlyReduction :' DASHI/Core/CoarseFineRelativeFibreExact.agda
 grep -q 'fineMeansOnlyHigherComputeCostIsFalse' DASHI/Core/CoarseFineRelativeFibreExact.agda
+grep -q '^relativeFineEvidenceMove :' DASHI/Core/RelativeFineModelFidelityOrthogonalityExact.agda
+grep -q '^modelChangeKeepsWorldCoordinates :' DASHI/Core/RelativeFineModelFidelityOrthogonalityExact.agda
+grep -q 'relativeFineInformationEqualsModelFidelityIsFalse' DASHI/Core/RelativeFineModelFidelityOrthogonalityExact.agda
+grep -q 'relativeFineCanBeDisclosedAsEvidenceAtFixedModelIsTrue' DASHI/Core/RelativeFineModelFidelityOrthogonalityExact.agda
 
 grep -q '^exactReducedDecisionSelectsSameIntervention :' DASHI/Core/ConsumerDecisionAdequacyFromReductionExact.agda
 grep -q '^approximateReducedDecisionSelectsSameIntervention :' DASHI/Core/ConsumerDecisionAdequacyFromReductionExact.agda
@@ -88,5 +93,6 @@ grep -q '^lesExactROMActBranch :' DASHI/Environment/LESProofDerivedDecisionAdequ
 grep -q '^lesApproximateROMActBranch :' DASHI/Environment/LESProofDerivedDecisionAdequacyExact.agda
 grep -q 'policyDecisionAdequacyMayBeFreeOfROMOrMarginProofIsFalse' DASHI/Environment/LESAdaptiveConsumerLoopCrossPollinationExact.agda
 grep -q 'fineStateMeansOnlyMoreExpensiveModelIsFalse' DASHI/Environment/LESAdaptiveConsumerLoopCrossPollinationExact.agda
+grep -q 'relativeFineInformationEqualsModelFidelityIsFalse' DASHI/Environment/LESAdaptiveConsumerLoopCrossPollinationExact.agda
 
 scripts/run_agda29_parallel_check.sh DASHI/Core/SequentialExperimentPlanningValidation.agda
