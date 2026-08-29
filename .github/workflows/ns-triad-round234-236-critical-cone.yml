@@ -1,4 +1,4 @@
-name: NS Round234-242 critical cone profiles trajectory and extraction
+name: NS Round234-243 critical cone profiles trajectory extraction and bidi weld
 
 on:
   pull_request:
@@ -12,6 +12,7 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNDefectFailureForcesCriticalBarrierRound241Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNCriticalFirstHitExtractionRound242Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNFirstHitBidiPhysicalWeldRound243Exact.agda'
       - 'scripts/audit_opposite_helicity_symbol_round232.py'
       - 'scripts/audit_mixed_helicity_forcing_work_round233.py'
       - '.github/workflows/ns-triad-round234-236-critical-cone.yml'
@@ -83,3 +84,8 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNCriticalFirstHitExtractionRound242Exact.agda
+
+      - name: Type-check Round243 same-trajectory bidi physical weld
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNFirstHitBidiPhysicalWeldRound243Exact.agda
