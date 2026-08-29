@@ -6,6 +6,9 @@ import DASHI.Core.ConsumerRelativeReductionSearchExact
 import DASHI.Core.ConsumerRelativeMinimalFidelityExact
 import DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact
 import DASHI.Core.ConsumerReductionDependencyReopeningExact
+import DASHI.Core.CoarseFineRelativeFibreExact
+import DASHI.Core.ConsumerDecisionAdequacyFromReductionExact
+import DASHI.Core.ConsumerAdequacyJointPolicyBidiCompilerExact
 import DASHI.Core.RobustInterventionAcrossHypothesesExact
 import DASHI.Core.AdaptiveConsumerModelLoopExact
 import DASHI.Core.ExperimentalCoordinateDesignExact
@@ -17,6 +20,7 @@ import DASHI.Core.SequentialRobustActionabilityPlannerExact
 import DASHI.Core.SequentialRelationalExperimentPlannerExact
 import DASHI.Core.JointSequentialInformationFidelityPolicyExact
 import DASHI.Core.ConsumerReductionJointPolicyBridgeExact
+import DASHI.Biology.JCoarseFineConsumerReductionBridgeExact
 import DASHI.Biology.Physical.C3Cube27ConsumerReductionAdapterExact
 import DASHI.Physics.Units.SI
 import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact
@@ -37,6 +41,7 @@ import DASHI.Environment.LESAdaptiveConsumerLoopCrossPollinationExact
 import DASHI.Environment.LESDiscriminatorSynthesisExact
 import DASHI.Environment.LESSequentialExperimentPlannerExact
 import DASHI.Environment.LESJointSequentialMeasurementFidelityPolicyExact
+import DASHI.Environment.LESProofDerivedDecisionAdequacyExact
 import DASHI.Environment.LESFluidPhysicsCouplingExact
 import DASHI.Environment.LESBioelectricGaugeChemistryExact
 import DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact
