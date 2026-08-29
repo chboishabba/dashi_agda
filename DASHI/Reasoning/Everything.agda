@@ -24,6 +24,7 @@ import DASHI.Reasoning.MetaphorTransferResidualExact
 -- Relation-representation / dynamic adequacy / realization layer.
 import DASHI.Reasoning.RelationRepresentationSourceRegistryExact
 import DASHI.Reasoning.RelationRepresentationStudyValidationObligationsExact
+import DASHI.Reasoning.RelationRepresentationTOEInferenceHandoffExact
 import DASHI.Reasoning.RelationRepresentationAdequacyExact
 import DASHI.Reasoning.RelationRepresentationRealizationExact
 import DASHI.Reasoning.BidirectionalRelationRepresentationBridgeExact
