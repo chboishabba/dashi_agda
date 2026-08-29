@@ -2,25 +2,9 @@ module DASHI.Foundations.BishopCubicTranslationIteratedExact where
 
 ------------------------------------------------------------------------
 -- ITERATED CUBIC TRANSLATION
---
--- The one-step theorem gives, for z>=0 and x>0,
---
---   D3(x) * exp(z) <= exp(z+x).
---
--- With q=D3(x)^-1 this becomes
---
---   exp(z) <= q * exp(z+x).
---
--- Iterating yields
---
---   exp(z) <= q^r * exp(z_r),
---   z_0=z, z_{r+1}=z_r+x.
---
--- This is the exact translation law needed by the Erdos residual estimate and
--- does not use global exp-additivity.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised using (0ℚᵘ; _/_)
 
@@ -36,7 +20,7 @@ import DASHI.Mathematics.NumberTheory.FiniteNatRationalEmbeddingExact as NatEmbe
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
--- Repeated addition and its canonical Nat-embedding normalization.
+-- Repeated addition and canonical Nat embedding.
 
 natReal : Nat → BishopReal.ℝ
 natReal n = Exp.embed (NatEmbed.natAsRational n)
@@ -52,15 +36,20 @@ natRealSuccessor : ∀ n →
 natRealSuccessor n =
   BishopP.≃-trans
     (BishopP.⋆-cong (NatEmbed.natAsRationalSuccessor n))
-    (BishopP.≃-trans
-      (BishopP.⋆-distrib-+
-        (NatEmbed.natAsRational n)
-        (+ 1 / 1))
-      (BishopP.+-cong BishopP.≃-refl
-        (let open BishopP.ℝ-Solver
-         in solve 0
-           (Κ (+ 1 / 1) ⊜ Κ (+ 1 / 1))
-           BishopP.≃-refl)))
+    (BishopP.⋆-distrib-+
+      (NatEmbed.natAsRational n)
+      (+ 1 / 1))
+
+natRealMul : ∀ left right →
+  BishopReal._≃_
+    (natReal (left * right))
+    (BishopReal._*_ (natReal left) (natReal right))
+natRealMul left right =
+  BishopP.≃-trans
+    (BishopP.⋆-cong (NatEmbed.natAsRationalMul left right))
+    (BishopP.⋆-distrib-*
+      (NatEmbed.natAsRational left)
+      (NatEmbed.natAsRational right))
 
 natScaleAsEmbeddedNatMul : ∀ n x →
   BishopReal._≃_
@@ -85,6 +74,44 @@ natScaleAsEmbeddedNatMul (suc n) x =
          BishopP.≃-refl (natReal n) x)
       (BishopP.*-congʳ
         (BishopP.≃-symm (natRealSuccessor n))))
+
+nestedNatScaleProduct : ∀ outer inner x →
+  BishopReal._≃_
+    (natScale outer (natScale inner x))
+    (natScale (outer * inner) x)
+nestedNatScaleProduct outer inner x =
+  BishopP.≃-trans
+    (natScaleAsEmbeddedNatMul outer (natScale inner x))
+    (BishopP.≃-trans
+      (BishopP.*-congˡ
+        (natScaleAsEmbeddedNatMul inner x))
+      (BishopP.≃-trans
+        (let open BishopP.ℝ-Solver
+         in solve 3
+           (λ outer′ inner′ x′ →
+             outer′ ⊗ (inner′ ⊗ x′)
+             ⊜ (outer′ ⊗ inner′) ⊗ x′)
+           BishopP.≃-refl (natReal outer) (natReal inner) x)
+        (BishopP.≃-trans
+          (BishopP.*-congʳ
+            (BishopP.≃-symm (natRealMul outer inner)))
+          (BishopP.≃-symm
+            (natScaleAsEmbeddedNatMul (outer * inner) x)))))
+
+natScalePositiveSuccessor :
+  ∀ {x} → BishopReal.Positive x →
+  ∀ n → BishopReal.Positive (natScale (suc n) x)
+natScalePositiveSuccessor xPositive zero =
+  BishopP.pos-cong
+    (BishopP.≃-symm (BishopP.+-identityˡ x))
+    xPositive
+natScalePositiveSuccessor xPositive (suc n) =
+  BishopP.posx,y⇒posx+y
+    (natScalePositiveSuccessor xPositive n)
+    xPositive
+
+------------------------------------------------------------------------
+-- Recursive translation state.
 
 shiftedBase : BishopReal.ℝ → BishopReal.ℝ → Nat → BishopReal.ℝ
 shiftedBase z x zero = z
@@ -113,6 +140,9 @@ shiftedBaseNonnegative zNN xNN (suc n) =
   BishopP.nonNegx,y⇒nonNegx+y
     (shiftedBaseNonnegative zNN xNN n) xNN
 
+------------------------------------------------------------------------
+-- One-step and iterated cubic translation.
+
 oneStepReciprocalTranslation :
   ∀ {z x} →
   (zNN : BishopReal.NonNegative z) →
@@ -124,10 +154,12 @@ oneStepReciprocalTranslation :
       (Exp.bishopExp (BishopReal._+_ z x)))
 oneStepReciprocalTranslation {z} {x} zNN xPositive =
   let
-    xNN = BishopP.pos⇒nonNeg (BishopP.0<x⇒posx xPositive)
     qx = Ratio.q x xPositive
     d = Ratio.d3 x
-    translated = Cubic.cubicTranslationLower zNN xNN
+    translated =
+      Cubic.cubicTranslationLower
+        zNN
+        (BishopP.pos⇒nonNeg (BishopP.0<x⇒posx xPositive))
     scaled =
       BishopP.*-monoˡ-≤-nonNeg translated
         (BishopP.pos⇒nonNeg
