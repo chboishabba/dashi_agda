@@ -3,11 +3,6 @@ module DASHI.Physics.YangMills.BalabanLiteralStressCoordinateRound114Exact where
 
 ------------------------------------------------------------------------
 -- ROUND114: ONE PHYSICAL STRESS COORDINATE FEEDS TELESCOPE AND COMPLETION
---
--- A BIDI guard against a subtle false closure: the CMP119 Cauchy insertion and
--- the Row-B / marked-source completion must be views of the SAME differentiated
--- physical stress coordinate.  It is not enough to have one insertion that
--- telescopes and another stress-like field that completes.
 ------------------------------------------------------------------------
 
 open import Relation.Binary.PropositionalEquality using (_≡_)
@@ -15,6 +10,9 @@ open import Relation.Binary.PropositionalEquality using (_≡_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanSameFamilyStressCauchySchwingerRound109Exact as R109
 import DASHI.Physics.YangMills.BalabanStressSameObjectProvenanceRound110Exact as R110
+import DASHI.Physics.YangMills.BalabanCharacteristicNuclearContinuityTransportExact as Nuclear
+import DASHI.Physics.YangMills.BalabanMarkedSourceNuclearCompositeFieldExact as Marked
+import DASHI.Physics.YangMills.BalabanMarkedSourceCompositeStressFieldExact as StressMarked
 import DASHI.Physics.YangMills.BalabanStressShellEnergyToHilbertRound112Exact as R112
 import DASHI.Physics.YangMills.BalabanStressShellPartitionEnergyRound113Exact as R113
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
@@ -34,19 +32,21 @@ record LiteralStressCoordinate
     asMarkedCompletion :
       StressCoordinate → R109.LiteralSchwingerStressMarkedCompletion Y group
 
-    MetricPerturbation Response : Set
-    cmp119CompletedResponse : MetricPerturbation → Response
-    completedMarkedStressResponse : MetricPerturbation → Response
-    literalStressPairing :
-      Top.StressTensor C → MetricPerturbation → Response
+    -- The completion of the selected CMP119 insertion must literally be the
+    -- field functional of the marked completion selected by the same coordinate.
+    cmp119CompletedResponse :
+      let completion = asMarkedCompletion coordinate
+      in
+      Nuclear.Test (R109.continuityScale completion) →
+      Nuclear.Value (R109.continuityScale completion)
 
-    cauchyCompletionIsCompletedMarkedStress : ∀ perturbation →
-      cmp119CompletedResponse perturbation
-      ≡ completedMarkedStressResponse perturbation
-
-    completedMarkedStressIsLiteralStressPairing : ∀ perturbation →
-      completedMarkedStressResponse perturbation
-      ≡ literalStressPairing (Top.stressTensor Y group) perturbation
+    cauchyCompletionIsActualMarkedStressFunctional :
+      let completion = asMarkedCompletion coordinate
+          sources = R109.completedSources completion
+          fields = StressMarked.sameCompletedMarkedSourcesGiveCompositeAndStressFields sources
+      in
+      cmp119CompletedResponse
+      ≡ Marked.fieldFunctional (StressMarked.stressField fields)
 open LiteralStressCoordinate public
 
 asSameObjectProvenance :
@@ -60,19 +60,10 @@ asSameObjectProvenance dataSet = record
       asCMP119Cauchy dataSet (coordinate dataSet)
   ; R110.LiteralStressSameObjectProvenance.markedCompletion =
       asMarkedCompletion dataSet (coordinate dataSet)
-  ; R110.LiteralStressSameObjectProvenance.MetricPerturbation =
-      MetricPerturbation dataSet
-  ; R110.LiteralStressSameObjectProvenance.Response = Response dataSet
   ; R110.LiteralStressSameObjectProvenance.cmp119CompletedResponse =
       cmp119CompletedResponse dataSet
-  ; R110.LiteralStressSameObjectProvenance.completedMarkedStressResponse =
-      completedMarkedStressResponse dataSet
-  ; R110.LiteralStressSameObjectProvenance.literalStressPairing =
-      literalStressPairing dataSet
-  ; R110.LiteralStressSameObjectProvenance.cauchyCompletionIsCompletedMarkedStress =
-      cauchyCompletionIsCompletedMarkedStress dataSet
-  ; R110.LiteralStressSameObjectProvenance.completedMarkedStressIsLiteralStressPairing =
-      completedMarkedStressIsLiteralStressPairing dataSet
+  ; R110.LiteralStressSameObjectProvenance.cauchyCompletionIsActualMarkedStressFunctional =
+      cauchyCompletionIsActualMarkedStressFunctional dataSet
   }
 
 asStressCoefficientShellIdentification :
@@ -85,23 +76,26 @@ asStressCoefficientShellIdentification dataSet =
   R113.asRound112StressCoefficientShellIdentification
     (asShellPartition dataSet (coordinate dataSet))
 
-sameCoordinateCompletedResponseIsLiteralStressPairing :
+sameCoordinateCompletedResponseIsLiteralStressDerivative :
   ∀ {C S}
     {Y : Top.LiteralYangMillsConstruction C S}
     {group : Top.CompactSimpleGroup C}
-    (dataSet : LiteralStressCoordinate Y group)
-    perturbation →
-  cmp119CompletedResponse dataSet perturbation
-  ≡ literalStressPairing dataSet (Top.stressTensor Y group) perturbation
-sameCoordinateCompletedResponseIsLiteralStressPairing dataSet =
-  R110.completedCMP119StressIsLiteralClayStressPairing
+    (dataSet : LiteralStressCoordinate Y group) →
+  let completion = asMarkedCompletion dataSet (coordinate dataSet)
+      sources = R109.completedSources completion
+      stressData = StressMarked.stressData sources
+  in
+  cmp119CompletedResponse dataSet
+  ≡ Marked.sourceDerivative stressData (Top.stressTensor Y group)
+sameCoordinateCompletedResponseIsLiteralStressDerivative dataSet =
+  R110.completedCMP119StressIsLiteralClayStressDerivative
     (asSameObjectProvenance dataSet)
 
 literalStressCoordinateCompilerLevel : ProofLevel
 literalStressCoordinateCompilerLevel = machineChecked
 
--- This is now the central physical BIDI leaf for the stress-continuum lane:
--- instantiate ONE literal differentiated CMP116 stress coordinate whose CMP119,
--- shell/coefficient, and marked-completion views are the three views above.
+-- Central physical BIDI leaf: instantiate ONE literal differentiated CMP116
+-- stress coordinate whose CMP119, shell/coefficient, and marked-completion views
+-- are exactly the three views above.
 literalCMP116StressCoordinateInstantiationLevel : ProofLevel
 literalCMP116StressCoordinateInstantiationLevel = conditional
