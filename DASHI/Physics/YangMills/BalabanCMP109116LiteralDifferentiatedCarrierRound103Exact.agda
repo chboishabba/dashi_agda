@@ -26,20 +26,45 @@ record LiteralDifferentiatedEffectiveDensityCarrier : Set₁ where
     scale : Source.Scale source
     volume : Source.Volume source
 
+    -- This record now contains actual membership witnesses for every scale and
+    -- volume, so there is no second local "inside domain" receipt here.
     radiusData :
       Radius.CMP116CommonAnalyticRadius
         (Source.Scale source) (Source.Volume source)
 
-    backgroundInsideCommonDomain :
-      Radius.backgroundCoordinateInside radiusData scale volume
-    sourceInsideCommonDomain :
-      Radius.sourceCoordinateInside radiusData scale volume
-    localActivityInsideCommonDomain :
-      Radius.localActivityCoordinateInside radiusData scale volume
-    substitutedBackgroundInsideCommonDomain :
-      Radius.substitutedBackgroundInside radiusData scale volume
-
 open LiteralDifferentiatedEffectiveDensityCarrier public
+
+backgroundInsideCommonDomain :
+  (dataSet : LiteralDifferentiatedEffectiveDensityCarrier) →
+  Radius.BackgroundCoordinateInside
+    (radiusData dataSet) (scale dataSet) (volume dataSet)
+backgroundInsideCommonDomain dataSet =
+  Radius.backgroundCoordinateInside
+    (radiusData dataSet) (scale dataSet) (volume dataSet)
+
+sourceInsideCommonDomain :
+  (dataSet : LiteralDifferentiatedEffectiveDensityCarrier) →
+  Radius.SourceCoordinateInside
+    (radiusData dataSet) (scale dataSet) (volume dataSet)
+sourceInsideCommonDomain dataSet =
+  Radius.sourceCoordinateInside
+    (radiusData dataSet) (scale dataSet) (volume dataSet)
+
+localActivityInsideCommonDomain :
+  (dataSet : LiteralDifferentiatedEffectiveDensityCarrier) →
+  Radius.LocalActivityCoordinateInside
+    (radiusData dataSet) (scale dataSet) (volume dataSet)
+localActivityInsideCommonDomain dataSet =
+  Radius.localActivityCoordinateInside
+    (radiusData dataSet) (scale dataSet) (volume dataSet)
+
+substitutedBackgroundInsideCommonDomain :
+  (dataSet : LiteralDifferentiatedEffectiveDensityCarrier) →
+  Radius.SubstitutedBackgroundInside
+    (radiusData dataSet) (scale dataSet) (volume dataSet)
+substitutedBackgroundInsideCommonDomain dataSet =
+  Radius.substitutedBackgroundInside
+    (radiusData dataSet) (scale dataSet) (volume dataSet)
 
 finiteAction :
   LiteralDifferentiatedEffectiveDensityCarrier →
@@ -98,6 +123,8 @@ cmp116MarkedHessianIsSecondVariationOfEffectivePotential dataSet background u v 
     (sym (cmp109PolarizationIsCMP116PhysicalMarkedHessian dataSet background u v))
     (cmp109PolarizationIsSecondVariationOfEffectivePotential dataSet background u v)
 
+-- Compatibility only.  All Round103 source equalities are proved before entering
+-- the older permissive Round102 alias carrier.
 asLegacySameDifferentiatedCarrier :
   (dataSet : LiteralDifferentiatedEffectiveDensityCarrier) →
   Legacy.SameDifferentiatedEffectiveDensityCarrier
