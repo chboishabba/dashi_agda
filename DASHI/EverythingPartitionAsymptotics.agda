@@ -2,16 +2,67 @@ module DASHI.EverythingPartitionAsymptotics where
 
 ------------------------------------------------------------------------
 -- Focused typecheck/import surface for the Hardy--Ramanujan / Erdos / Newman
--- partition lane.  The finite layer now includes generic graded pointing,
--- proof-free exact key enumeration, strict deletion-fibre instantiation,
--- independent admissible residual normal form, exact residual permutations,
--- classical r=k*v residual enumeration/counting/completeness/uniqueness,
--- arbitrary-n factor-pair and sigma1 recurrences, and the rank-one Fock
--- occupation-grading bridge.  Bishop analysis remains downstream.
+-- partition lane.
+--
+-- The analytic layer is built directly over the exact git-pinned
+-- `vendor/bishop` submodule.  Current source includes the semantic square law,
+-- division-free root tangent estimate, concrete factorial exponential series,
+-- native Cauchy-tail/rectangle/triangle owners, finite binomial coefficient
+-- identification, the all-positive cubic translation/geometric kernel route,
+-- and a bidirectional Basel lane whose remaining middle seam is isolated as a
+-- sine-product coefficient-limit theorem.
 ------------------------------------------------------------------------
 
+import DASHI.Foundations.BishopVendoredSubmoduleProvenanceExact
+import DASHI.Foundations.BishopRegularRationalApproximationExact
+import DASHI.Foundations.BishopNatSquareRootApproximationExact
+import DASHI.Foundations.BishopNatSquareRootFloorApproximationExact
+import DASHI.Foundations.BishopNatSquareRootRationalCrossPrecisionExact
+import DASHI.Foundations.RationalDirectedDifferenceAbsoluteBoundExact
+import DASHI.Foundations.BishopNatSquareRootRegularFloorExact
+import DASHI.Foundations.BishopNatSquareRootNonnegativeExact
+import DASHI.Foundations.BishopNatSquareRootCanonicalApproximationExact
+import DASHI.Foundations.BishopSquareNonnegativeExact
+import DASHI.Foundations.BishopNatSquareRootSemanticSquareExact
+import DASHI.Foundations.BishopNatSquareRootTangentExact
+import DASHI.Foundations.BishopFiniteSeriesExtensionalityExact
+import DASHI.Foundations.BishopAbsoluteSeriesTailExact
+import DASHI.Foundations.BishopFiniteSeriesRectangleProductExact
+import DASHI.Foundations.BishopFinSumSeriesBridgeExact
+import DASHI.Foundations.BishopFiniteCauchyRowReindexExact
+import DASHI.Foundations.BishopFiniteRectangleInsideCauchyTriangleExact
+import DASHI.Foundations.BishopExponentialSeriesConvergenceExact
+import DASHI.Foundations.BishopExponentialPositiveOrderExact
+import DASHI.Foundations.BishopExponentialBinomialCoefficientExact
+import DASHI.Foundations.BishopExponentialFiniteCauchyCoefficientExact
+import DASHI.Foundations.BishopExponentialCubicTranslationLowerExact
+import DASHI.Foundations.BishopCubicTranslationGeometricRatioExact
+import DASHI.Foundations.BishopGeometricReciprocalSquareFromCrossExact
+import DASHI.Foundations.BishopCubicTranslationFiniteDegreeOneKernelExact
+import DASHI.Foundations.BishopCubicTranslationIteratedExact
+import DASHI.Foundations.BishopFiniteDegreeOneGeometricIdentityExact
+import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact
+import DASHI.Foundations.BishopNegativeExponentialInterlacingExact
+import DASHI.Foundations.BishopNegativeExponentialQuarticBracketExact
+import DASHI.Foundations.BishopNegativeExponentialUnitIntervalExact
+import DASHI.Foundations.BishopNegativeExponentialReciprocalSquareExact
+import DASHI.Foundations.BishopNegativeExponentialReciprocalSquareDivisionExact
+import DASHI.Foundations.BishopNegativeExponentialFiniteDegreeOneKernelExact
+import DASHI.Foundations.BishopSqrtTwoThirdsMachinConstantExact
+import DASHI.Foundations.BishopBaselFiniteSineProductCoefficientExact
+import DASHI.Foundations.BishopBaselReciprocalSquareConvergenceExact
+import DASHI.Foundations.BishopBaselMachinSineQuadraticCoefficientExact
+import DASHI.Foundations.BishopBaselFiniteProductCoefficientLimitExact
+import DASHI.Foundations.BishopBaselSineProductCoefficientBoundaryExact
+import DASHI.Mathematics.NumberTheory.FiniteNatFloorSquareRootExact
+import DASHI.Mathematics.NumberTheory.FiniteNatFractionOrderExact
+import DASHI.Mathematics.NumberTheory.FiniteNatSuccessorFractionExact
+import DASHI.Mathematics.NumberTheory.FiniteNatRationalEmbeddingExact
+import DASHI.Mathematics.NumberTheory.FinitePositiveScaledReciprocalExact
+import DASHI.Mathematics.NumberTheory.FiniteBinomialInverseFactorialExact
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact
 import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact
+import DASHI.Mathematics.NumberTheory.FiniteProductCardinalityExact
 import DASHI.Mathematics.NumberTheory.FiniteAllFinEnumerationExact
 import DASHI.Mathematics.NumberTheory.FiniteDependentPairEnumerationExact
 import DASHI.Mathematics.NumberTheory.FiniteDependentPairCardinalityExact
@@ -25,10 +76,12 @@ import DASHI.Mathematics.NumberTheory.FinitePositiveFactorPairExact
 import DASHI.Mathematics.NumberTheory.GradedMultiplicityPointingResidualExact
 import DASHI.Mathematics.NumberTheory.GradedFamilyPointingResidualExact
 import DASHI.Mathematics.NumberTheory.FiniteDivisorSumExact
+import DASHI.Mathematics.NumberTheory.FiniteDivisorSumBoundExact
 import DASHI.Mathematics.NumberTheory.FiniteFactorPairDivisorSumExact
 import DASHI.Mathematics.NumberTheory.PartitionMarkedUnitEnumerationExact
 import DASHI.Mathematics.NumberTheory.PartitionMultiplicityCarrierExact
 import DASHI.Mathematics.NumberTheory.PartitionMultiplicityEnumerationExact
+import DASHI.Mathematics.NumberTheory.PartitionFiniteGrowthEnvelopeExact
 import DASHI.Mathematics.NumberTheory.PartitionMultiplicityDeletionMassExact
 import DASHI.Mathematics.NumberTheory.PartitionAmbientMultiplicityDeletionExact
 import DASHI.Mathematics.NumberTheory.PartitionAmbientMultiplicityNormalizationExact
@@ -53,6 +106,11 @@ import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalAdmissibleMembershi
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualUniqueExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualPermutationExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosDivisorSumRecurrenceExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosNatMajorantBootstrapExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopDegreeOneDominationExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopGeometricKernelBridgeExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopUpperMajorantBoundaryExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopFactorPairFiniteKernelExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalResidualExpansionExact
 import DASHI.Mathematics.NumberTheory.PartitionDivisorSumRecurrencePrefixExact
 import DASHI.Mathematics.NumberTheory.PartitionDivisorSumRegroupingExact
