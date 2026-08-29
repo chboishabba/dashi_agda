@@ -16,6 +16,7 @@ import DASHI.Physics.YangMills.BalabanCutoffBetaLaw as BetaLaw
 import DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact as Real
 import DASHI.Physics.YangMills.BalabanA1HistoryUniformTwoSidedBetaRound102Exact as Cert
 import DASHI.Physics.YangMills.BalabanA1FiveChannelEvaluatorBidiRound117Exact as A1
+import DASHI.Physics.YangMills.BalabanA1WQRPhysicalJetRound123Exact as A1WQR
 import DASHI.Physics.YangMills.BalabanA1Equation51FiveChannelSameObjectRound103Exact as A1Old
 import DASHI.Physics.YangMills.BalabanYM4WardQuarticResponseProducerAdapterExact as A2Producer
 import DASHI.Physics.YangMills.BalabanA2PresentCutFallbackRound120Exact as A2
@@ -30,9 +31,9 @@ import DASHI.Physics.YangMills.BalabanHeatDoobSameDensityLogHessianRound103Exact
 record PresentCutPhysicalSourceInputs
     (History Cell : Set) (cutoff : Nat) : Set₁ where
   field
-    -- A1: one physical two-jet whose current source decomposition is Gaussian
-    -- W/Q/R plus the exact finite-g five-channel evaluator.
-    a1 : A1.A1ReducedSameObjectInputs History Cell
+    -- A1 now literally carries the W/Q/R source calculation as well as the
+    -- Gaussian+five-channel physical two-jet.
+    a1 : A1WQR.A1WQRPhysicalJetInputs History Cell
 
     -- A2: explicit response-kernel route selected after auditing betaMark.
     a2 : A2Producer.WardQuarticResponseProducer cutoff
@@ -46,8 +47,14 @@ record PresentCutPhysicalSourceInputs
 
 open PresentCutPhysicalSourceInputs public
 
+a1Reduced :
+  ∀ {History Cell cutoff} →
+  PresentCutPhysicalSourceInputs History Cell cutoff →
+  A1.A1ReducedSameObjectInputs History Cell
+a1Reduced dataSet = A1WQR.reduced (a1 dataSet)
+
 ------------------------------------------------------------------------
--- A1: five-channel evaluator and Eq.(5.42) are generated.
+-- A1: W/Q/R Gaussian coefficient, five-channel evaluator and Eq.(5.42).
 ------------------------------------------------------------------------
 
 a1SameObjectData :
@@ -55,7 +62,19 @@ a1SameObjectData :
   PresentCutPhysicalSourceInputs History Cell cutoff →
   A1Old.Equation51FiveChannelSameObjectData History Cell
 a1SameObjectData dataSet =
-  A1.asEquation51FiveChannelSameObjectData (a1 dataSet)
+  A1.asEquation51FiveChannelSameObjectData (a1Reduced dataSet)
+
+a1GaussianWQRCoefficientExact :
+  ∀ {History Cell cutoff}
+    (dataSet : PresentCutPhysicalSourceInputs History Cell cutoff)
+    K k (k<K : k ℕ.< K) →
+  Cert.betaZ (A1.certificate (a1Reduced dataSet))
+      (A1.historyForShell (a1Reduced dataSet) K k k<K)
+  ≡ - (A1WQR.wilsonMixedCoefficient (a1 dataSet) K k k<K
+      + (A1WQR.averagingMixedCoefficient (a1 dataSet) K k k<K
+        + A1WQR.gaugeMixedCoefficient (a1 dataSet) K k k<K))
+a1GaussianWQRCoefficientExact dataSet =
+  A1WQR.a1WQRGaussianCoefficientExact (a1 dataSet)
 
 a1Equation542MixedDerivativeExact :
   ∀ {History Cell cutoff}
@@ -63,11 +82,11 @@ a1Equation542MixedDerivativeExact :
     K k (k<K : k ℕ.< K) →
   BetaLaw.negativeOffDiagonalSecondMomentumDerivative
     (BetaLaw.vacuumPolarisationCoefficient
-      (A1.dynamics (a1 dataSet) K)) k
-  ≡ Real.embed (A1.embedding (a1 dataSet))
+      (A1.dynamics (a1Reduced dataSet) K)) k
+  ≡ Real.embed (A1.embedding (a1Reduced dataSet))
       (Cert.beta
-        (A1.certificate (a1 dataSet))
-        (A1.historyForShell (a1 dataSet) K k k<K))
+        (A1.certificate (a1Reduced dataSet))
+        (A1.historyForShell (a1Reduced dataSet) K k k<K))
 a1Equation542MixedDerivativeExact dataSet =
   A1Old.mixedDerivativeExact (a1SameObjectData dataSet)
 
@@ -146,7 +165,5 @@ presentCutBC2CompilerLevel = machineChecked
 presentCutEndToEndCompilerLevel : ProofLevel
 presentCutEndToEndCompilerLevel = machineChecked
 
--- Only honest frontier statement for this cut: inhabit the exact source record
--- above from the finite-cutoff Yang--Mills implementation and primary sources.
 literalPresentCutPhysicalSourceInputsLevel : ProofLevel
 literalPresentCutPhysicalSourceInputsLevel = conditional
