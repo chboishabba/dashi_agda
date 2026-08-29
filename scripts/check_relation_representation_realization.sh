@@ -6,6 +6,8 @@ cd "$ROOT"
 
 FILES=(
   DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
+  DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
+  DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
   DASHI/Reasoning/RelationRepresentationAdequacyExact.agda
   DASHI/Reasoning/RelationRepresentationRealizationExact.agda
   DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda
@@ -48,6 +50,23 @@ grep -q '10.48550/arXiv.2601.16907' DASHI/Reasoning/RelationRepresentationSource
 grep -q '10.48550/arXiv.2606.01402' DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
 grep -q '10.48550/arXiv.2602.02859' DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
 
+grep -q 'christRelationDecoderValidation' DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
+grep -q 'riseRotationValidation' DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
+grep -q 'recosValidation' DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
+grep -q 'magnitudeAwareValidation' DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
+grep -q 'calibratedSimilarityValidation' DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
+grep -q 'manifoldSteeringValidation' DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
+grep -q 'differentialEquivalenceValidation' DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
+grep -q 'currentExternalStudyPayloadAvailability' DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
+
+grep -q 'evidenceFibreStage' DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
+grep -q 'predictionEnvelopeStage' DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
+grep -q 'calibratedInferenceStage' DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
+grep -q 'certifiedSensitivityStage' DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
+grep -q 'robustnessDiscrepancyStage' DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
+grep -q 'heldOutValidationStage' DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
+grep -q 'stage67OwnersShouldBeReusedAfterMerge' DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
+
 grep -q 'sameRetainedRelationStateGivesSameObservationAfterEveryTrace' DASHI/Reasoning/RelationRepresentationAdequacyExact.agda
 grep -q 'RepresentationRealizationWitness' DASHI/Reasoning/RelationRepresentationRealizationExact.agda
 grep -q 'collisionReopensBidirectionalCut' DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda
@@ -77,6 +96,8 @@ grep -q 'principalSVDReceipt' DASHI/Reasoning/RelationRepresentationRegression.a
 grep -q 'externalFixtureDoesNotClaimEmpiricalEmbeddings' DASHI/Reasoning/RelationRepresentationRegression.agda
 
 if command -v agda >/dev/null 2>&1; then
+  agda -i . -i src DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
+  agda -i . -i src DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
   agda -i . -i src DASHI/Reasoning/FiniteRelationLinearAlgebraProducerExact.agda
   agda -i . -i src DASHI/Reasoning/FiniteRelationSVDJacobianProducerExact.agda
   agda -i . -i src DASHI/Reasoning/RelationRepresentationRegression.agda
