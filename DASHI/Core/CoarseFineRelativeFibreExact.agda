@@ -4,14 +4,19 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.ConsumerRelativeReductionKernelExact as Reduction
+import DASHI.Core.FibreRestrictionCore as CanonicalFibre
+import DASHI.Core.ProvenanceBearingQuotient as Provenance
 
 ------------------------------------------------------------------------
 -- COARSE / RELATIVE-FINE FIBRE KERNEL
 --
 -- A fine state need not be understood as merely "a more expensive coarse
 -- state".  It may instead decompose into a coarse coordinate plus residual
--- fine information living over that coarse coordinate.  This module abstracts
--- that pattern without importing any JCoarse/JFine-specific semantics.
+-- fine information living over that coarse coordinate.
+--
+-- This is deliberately a thin consumer-reduction adapter over the repository's
+-- existing FibreRestrictionCore / ProvenanceBearingQuotient architecture, not a
+-- replacement quotient theory.
 ------------------------------------------------------------------------
 
 record CoarseFineReopening (FineState : Set) : Set₁ where
@@ -26,6 +31,24 @@ record CoarseFineReopening (FineState : Set) : Set₁ where
       reopen (coarse state) (relativeFine state) ≡ state
 
 open CoarseFineReopening public
+
+------------------------------------------------------------------------
+-- Existing canonical provenance-bearing quotients instantiate this geometry
+-- directly: coarse = surface, relative fine = receipt.
+------------------------------------------------------------------------
+
+fromProvenanceBearingQuotient :
+  ∀ {core : CanonicalFibre.FibreRestrictionCore} →
+  Provenance.ProvenanceBearingQuotient core →
+  CoarseFineReopening (CanonicalFibre.Carrier core)
+fromProvenanceBearingQuotient {core} quotient =
+  coarseFineReopening
+    (CanonicalFibre.Surface core)
+    (Provenance.Receipt quotient)
+    (CanonicalFibre.project core)
+    (Provenance.receipt quotient)
+    (Provenance.reopen quotient)
+    (Provenance.reopenExact quotient)
 
 ------------------------------------------------------------------------
 -- A coarse projection is sufficient only if both dynamics and the declared
@@ -67,13 +90,15 @@ coarseProjectionAsExactReduction :
     (dynamics : CoarseDynamicsClosure geometry fineStep) →
     (consumer : CoarseConsumerFactorisation geometry fineObserve) →
   Reduction.ConsumerRelativeReduction FineState Action Observation
-coarseProjectionAsExactReduction geometry dynamics consumer =
+coarseProjectionAsExactReduction
+    {fineStep = fineStep} {fineObserve = fineObserve}
+    geometry dynamics consumer =
   Reduction.consumerRelativeReduction
     (Coarse geometry)
     (coarse geometry)
-    _
+    fineStep
     (coarseStep dynamics)
-    _
+    fineObserve
     (coarseObserve consumer)
     (stepCommutes dynamics)
     (observationFactors consumer)
@@ -129,16 +154,17 @@ fineSensitivityRefutesCoarseOnlyReduction geometry witness =
     []
     (consumerSeparates witness)
 
-------------------------------------------------------------------------
--- Relative-fine difference and absolute-state difference are deliberately
--- distinct notions.  Fine data may be essential for one consumer and invisible
--- for another.  The geometry therefore supports both exact coarse reduction and
--- fine-sensitive refutation, depending on the declared consumer.
-------------------------------------------------------------------------
-
 record CoarseFineRelativeFibreBoundary : Set where
   constructor coarseFineRelativeFibreBoundary
   field
+    thisReplacesCanonicalProvenanceQuotient : Bool
+    thisReplacesCanonicalProvenanceQuotientIsFalse :
+      thisReplacesCanonicalProvenanceQuotient ≡ false
+
+    canonicalProvenanceReceiptCanInstantiateRelativeFine : Bool
+    canonicalProvenanceReceiptCanInstantiateRelativeFineIsTrue :
+      canonicalProvenanceReceiptCanInstantiateRelativeFine ≡ true
+
     fineMeansOnlyHigherComputeCost : Bool
     fineMeansOnlyHigherComputeCostIsFalse :
       fineMeansOnlyHigherComputeCost ≡ false
@@ -162,4 +188,4 @@ record CoarseFineRelativeFibreBoundary : Set where
 canonicalCoarseFineRelativeFibreBoundary : CoarseFineRelativeFibreBoundary
 canonicalCoarseFineRelativeFibreBoundary =
   coarseFineRelativeFibreBoundary
-    false refl true refl true refl true refl false refl
+    false refl true refl false refl true refl true refl true refl false refl
