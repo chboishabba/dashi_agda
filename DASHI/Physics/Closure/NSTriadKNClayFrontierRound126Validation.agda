@@ -1,0 +1,8 @@
+module DASHI.Physics.Closure.NSTriadKNClayFrontierRound126Validation where
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound123Validation
+import DASHI.Physics.Closure.NSTriadKNExternalHHOutputRadialGapRound124Exact
+import DASHI.Physics.Closure.NSTriadKNExternalHHEuclideanSquareGapFactorRound125Exact
+import DASHI.Physics.Closure.NSTriadKNHelicalModeNormSquareActionRound126Exact
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound126Exact
+import DASHI.Papers.NavierStokes.TheoremInterfaceRound126Exact
