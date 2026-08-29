@@ -31,7 +31,7 @@ module DASHI.Analysis.ResidualBudgetMarginCompilerExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; _≤_; _<_)
+open import Data.Rational.Base using (ℚ; _+_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 
 record ResidualBudgetMargin : Set where
