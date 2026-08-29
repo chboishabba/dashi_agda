@@ -3,22 +3,11 @@ module DASHI.Physics.YangMills.BalabanCMP116GradientCovarianceToWeightedHeatDoob
 
 ------------------------------------------------------------------------
 -- ROUND102 B->C SPATIAL CAPSTONE
---
--- Compose:
---   CMP116 static weighted Hessian row
---   + first-gradient covariance weighted row
---   -> dynamic Heat/Doob weighted row
---   -> all weighted Dyson powers.
---
--- This is the quasi-local replacement for a strict nearest-neighbour generator
--- route.  The remaining physical source content is literal identification of the
--- static response with CMP116 and first-gradient bounds on the same density.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact as Shared
@@ -44,7 +33,6 @@ record CMP116GradientCovarianceWeightedHeatDoobData
     dynamicNonnegative : ∀ x y → 0ℚ ≤ dynamicInfluence x y
     staticNonnegative : ∀ x y → 0ℚ ≤ staticInfluence x y
 
-    -- Same dynamic/static/covariance differential split.
     generatorSplit : ∀ x y →
       dynamicInfluence x y
       ≤ staticInfluence x y
@@ -52,8 +40,6 @@ record CMP116GradientCovarianceWeightedHeatDoobData
 
     rowDepth : Site → Nat
 
-    -- Literal source identification of the static weighted response with the
-    -- already-controlled CMP116 hessian partial row.
     staticRowIsMarkedHessianPartial : ∀ x →
       Sums.sumRational (Grad.sites gradientCovariance)
         (λ y →
