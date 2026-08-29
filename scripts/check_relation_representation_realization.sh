@@ -11,6 +11,7 @@ FILES=(
   DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda
   DASHI/Reasoning/RelationRepresentationExperimentProtocolExact.agda
   DASHI/Reasoning/FiniteRelationLinearAlgebraProducerExact.agda
+  DASHI/Reasoning/FiniteRelationSVDJacobianProducerExact.agda
   DASHI/Reasoning/EigenslurFlourishingRelationBoundaryExact.agda
   DASHI/Reasoning/RelationRepresentationCrossPollinationExact.agda
   DASHI/Reasoning/HumourRelationRepresentationCrossPollinationExact.agda
@@ -33,6 +34,8 @@ python3 scripts/relation_representation_numeric_producer.py
 
 grep -q 'dashi.relation-representation.numeric-producer.v1' Artifacts/relation-representation/numeric-producer-receipt.json
 grep -q '"spectral_gap": 8' Artifacts/relation-representation/numeric-producer-receipt.json
+grep -q '"singular_values"' Artifacts/relation-representation/numeric-producer-receipt.json
+grep -q '"reconstruction_error": 0' Artifacts/relation-representation/numeric-producer-receipt.json
 grep -q '"squared_error": 0' Artifacts/relation-representation/numeric-producer-receipt.json
 grep -q '"state_dependent": true' Artifacts/relation-representation/numeric-producer-receipt.json
 
@@ -59,14 +62,23 @@ grep -q 'affineDemoAt23' DASHI/Reasoning/FiniteRelationLinearAlgebraProducerExac
 grep -q 'localSensitivityChangesWithState' DASHI/Reasoning/FiniteRelationLinearAlgebraProducerExact.agda
 grep -q 'ManifoldProducerObligation' DASHI/Reasoning/FiniteRelationLinearAlgebraProducerExact.agda
 
+grep -q 'ExactSVD2' DASHI/Reasoning/FiniteRelationSVDJacobianProducerExact.agda
+grep -q 'canonicalSampleSVD' DASHI/Reasoning/FiniteRelationSVDJacobianProducerExact.agda
+grep -q 'principalSingularScaleSquaresToGramEigenvalue' DASHI/Reasoning/FiniteRelationSVDJacobianProducerExact.agda
+grep -q 'ExternalNumericalReceiptContract' DASHI/Reasoning/FiniteRelationSVDJacobianProducerExact.agda
+grep -q 'JacobianProducerObligation' DASHI/Reasoning/FiniteRelationSVDJacobianProducerExact.agda
+grep -q 'finiteDifferencePreJacobianWitness' DASHI/Reasoning/FiniteRelationSVDJacobianProducerExact.agda
+
 grep -q 'functioningDoesNotRecoverCapability' DASHI/Reasoning/EigenslurFlourishingRelationBoundaryExact.agda
 grep -q 'oneHumourConsumerSafetyDoesNotEstablishPluralSafety' DASHI/Reasoning/HumourRelationRepresentationCrossPollinationExact.agda
 grep -q 'neuralSearchMayReopenFromOffsetToRotation' DASHI/Reasoning/NeuralSpectralRelationCrossPollinationExact.agda
 grep -q 'grokkingCurrentFitDoesNotCloseLearningFuture' DASHI/Reasoning/RelationRepresentationCrossPollinationExact.agda
-grep -q 'finiteDifferenceSensitivityIsStateDependent' DASHI/Reasoning/RelationRepresentationRegression.agda
+grep -q 'principalSVDReceipt' DASHI/Reasoning/RelationRepresentationRegression.agda
+grep -q 'externalFixtureDoesNotClaimEmpiricalEmbeddings' DASHI/Reasoning/RelationRepresentationRegression.agda
 
 if command -v agda >/dev/null 2>&1; then
   agda -i . -i src DASHI/Reasoning/FiniteRelationLinearAlgebraProducerExact.agda
+  agda -i . -i src DASHI/Reasoning/FiniteRelationSVDJacobianProducerExact.agda
   agda -i . -i src DASHI/Reasoning/RelationRepresentationRegression.agda
   agda -i . -i src DASHI/Reasoning/Everything.agda
 else
