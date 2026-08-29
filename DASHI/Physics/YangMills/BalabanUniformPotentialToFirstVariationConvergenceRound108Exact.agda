@@ -4,16 +4,12 @@ module DASHI.Physics.YangMills.BalabanUniformPotentialToFirstVariationConvergenc
 ------------------------------------------------------------------------
 -- ROUND108: NORMALIZED CAUCHY TRANSFER
 --
--- CMP116 already supplies the source fact that finite derivatives are obtained
--- by Cauchy formula on a common analytic domain.  After absorbing the fixed
--- inverse-radius factor into a normalized potential error, the derivative error
--- is bounded by that potential error.  Therefore any explicit convergence
--- modulus for the potentials is automatically a convergence modulus for the
--- first variations.
---
--- This does NOT prove uniform convergence of the Balaban effective potentials,
--- nor the literal Cauchy estimate on the physical family.  It removes the
--- duplicate downstream task "prove derivative convergence separately".
+-- CMP116 Sect.1 supplies differentiated localization through Cauchy formula on
+-- a common analytic domain.  Round104 supplies a canonical positive common
+-- radius from the finite normalized CMP116 demands.  After absorbing the fixed
+-- inverse-radius Cauchy cost into a normalized potential error, the derivative
+-- error is bounded by that potential error.  Hence the same convergence modulus
+-- transfers mechanically from potentials to first variations.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -23,6 +19,8 @@ open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExact as Source
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonRadiusRound104Exact as Canon
 
 record NormalizedCauchyDerivativeConvergence : Set where
   field
@@ -32,17 +30,14 @@ record NormalizedCauchyDerivativeConvergence : Set where
     potentialErrorNonnegative : ∀ n → 0ℚ ≤ potentialError n
     firstVariationErrorNonnegative : ∀ n → 0ℚ ≤ firstVariationError n
 
-    -- The physical Cauchy estimate after normalising by the common radius.
     firstVariationErrorBelowPotentialError : ∀ n →
       firstVariationError n ≤ potentialError n
 
-    -- Explicit modulus of uniform potential convergence.
     potentialConvergenceModulus : ℚ → Nat
     potentialEventuallyBelow : ∀ tolerance →
       0ℚ < tolerance →
       ∀ n → potentialConvergenceModulus tolerance ≤ n →
       potentialError n < tolerance
-
 open NormalizedCauchyDerivativeConvergence public
 
 firstVariationConvergenceModulus :
@@ -67,6 +62,10 @@ record Round108Boundary : Set where
     differentiatedLocalizationAloneProvesPotentialConvergenceIsFalse :
       differentiatedLocalizationAloneProvesPotentialConvergence ≡ false
 
+    canonicalPositiveRadiusAloneProvesPotentialConvergence : Bool
+    canonicalPositiveRadiusAloneProvesPotentialConvergenceIsFalse :
+      canonicalPositiveRadiusAloneProvesPotentialConvergence ≡ false
+
     potentialConvergenceAloneProvesDerivativeConvergenceWithoutCauchyControl : Bool
     potentialConvergenceAloneProvesDerivativeConvergenceWithoutCauchyControlIsFalse :
       potentialConvergenceAloneProvesDerivativeConvergenceWithoutCauchyControl ≡ false
@@ -77,7 +76,19 @@ record Round108Boundary : Set where
 
 canonicalRound108Boundary : Round108Boundary
 canonicalRound108Boundary =
-  round108Boundary false refl false refl true refl
+  round108Boundary false refl false refl false refl true refl
+
+-- Provenance: differentiated localization/Cauchy control is source-owned; the
+-- canonical-radius arithmetic is already machine checked.  What remains is the
+-- literal binding of the potential-error sequence to the physical Balaban
+-- continuum family and its uniform convergence modulus.
+cmp116DifferentiatedLocalizationSourceLevel : ProofLevel
+cmp116DifferentiatedLocalizationSourceLevel =
+  Source.cmp116DifferentiatedActivityLocalizationLevel
+
+cmp116CanonicalCommonRadiusCompilerRound108Level : ProofLevel
+cmp116CanonicalCommonRadiusCompilerRound108Level =
+  Canon.cmp116CanonicalCommonRadiusCompilerLevel
 
 normalizedCauchyDerivativeConvergenceCompilerLevel : ProofLevel
 normalizedCauchyDerivativeConvergenceCompilerLevel = machineChecked
