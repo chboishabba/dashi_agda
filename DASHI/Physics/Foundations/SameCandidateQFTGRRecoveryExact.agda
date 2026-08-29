@@ -35,6 +35,15 @@ record UnifiedCandidate : Set₂ where
     Measurement : Set
     SharedStressEnergy : Set
 
+    -- Small promotion-token carriers.  They are not evidence by themselves;
+    -- the detailed receipts below must emit inhabitants of them.
+    GRRecoveryToken : Set
+    QFTRecoveryToken : Set
+    StressEnergyWeldToken : Set
+    RegimeRecoveryToken : Set
+    NovelObservableToken : Set
+    FalsifiableMeasurementToken : Set
+
     microscopicState : Candidate → Effective.JointMicroscopicState
     coarseGrain : Candidate → Regime → Candidate
 
@@ -127,7 +136,6 @@ record GRRecoveryReceipt (U : UnifiedCandidate) : Set₁ where
     correctionBoundProved :
       Geometry.correctionBoundProved geometryAdapter ≡ true
 
-    -- The recovery operation must commute with the candidate interpretation.
     recoveryCommutes : ∀ candidate →
       recoverGR U (microscopicState U candidate) ≡ grTarget U candidate
 
@@ -135,6 +143,8 @@ record GRRecoveryReceipt (U : UnifiedCandidate) : Set₁ where
       ∀ candidate regime → grRegime U regime →
       recoverGR U (microscopicState U (coarseGrain U candidate regime))
         ≡ grTarget U (coarseGrain U candidate regime)
+
+    promotionToken : GRRecoveryToken U
 
 open GRRecoveryReceipt public
 
@@ -169,6 +179,8 @@ record QFTRecoveryReceipt (U : UnifiedCandidate) : Set₁ where
       recoverQFT U (microscopicState U (coarseGrain U candidate regime))
         ≡ qftTarget U (coarseGrain U candidate regime)
 
+    promotionToken : QFTRecoveryToken U
+
 open QFTRecoveryReceipt public
 
 ------------------------------------------------------------------------
@@ -190,6 +202,8 @@ record SameStressEnergyWeld (U : UnifiedCandidate) : Set₁ where
       qftStressToShared U
         (actualQFTStressTensor U (coarseGrain U candidate regime) group)
 
+    promotionToken : StressEnergyWeldToken U
+
 open SameStressEnergyWeld public
 
 record CommonRegimeRecovery (U : UnifiedCandidate) : Set₁ where
@@ -207,6 +221,8 @@ record CommonRegimeRecovery (U : UnifiedCandidate) : Set₁ where
       CorrectionsControlled U
         (coarseGrain U candidate overlapRegime) overlapRegime
 
+    promotionToken : RegimeRecoveryToken U
+
 open CommonRegimeRecovery public
 
 record NovelObservableReceipt (U : UnifiedCandidate) : Set₁ where
@@ -215,6 +231,7 @@ record NovelObservableReceipt (U : UnifiedCandidate) : Set₁ where
     observable : Observable U
     predictedByUnifiedCandidate : unifiedPredicts U candidate observable
     excludedByEstablishedGRQFT : ¬ (establishedGRQFTPredicts U observable)
+    promotionToken : NovelObservableToken U
 
 open NovelObservableReceipt public
 
@@ -225,6 +242,7 @@ record FalsifiableMeasurementReceipt
     measurement : Measurement U
     testsNovelObservable :
       measurementTests U measurement (NovelObservableReceipt.observable novel)
+    promotionToken : FalsifiableMeasurementToken U
 
 open FalsifiableMeasurementReceipt public
 
@@ -244,7 +262,9 @@ record SameCandidateQFTGRRecovery (U : UnifiedCandidate) : Set₁ where
 open SameCandidateQFTGRRecovery public
 
 ------------------------------------------------------------------------
--- Exact handoff to the Stage-6/7 physical promotion consumer.
+-- Exact low-universe handoff to the Stage-6/7 physical promotion consumer.
+-- Detailed recovery evidence remains in the rich receipts above; only tokens
+-- emitted by those receipts cross the generic promotion boundary.
 ------------------------------------------------------------------------
 
 physicalCandidateFromUnified :
@@ -252,28 +272,27 @@ physicalCandidateFromUnified :
 physicalCandidateFromUnified U =
   Physical.fundamentalPhysicalCandidate
     (Candidate U)
-    (GRRecoveryReceipt U × SameStressEnergyWeld U × CommonRegimeRecovery U)
-    (QFTRecoveryReceipt U × SameStressEnergyWeld U × CommonRegimeRecovery U)
-    (NovelObservableReceipt U)
-    (Σ (NovelObservableReceipt U) λ novel →
-       FalsifiableMeasurementReceipt U novel)
+    (GRRecoveryToken U × StressEnergyWeldToken U × RegimeRecoveryToken U)
+    (QFTRecoveryToken U × StressEnergyWeldToken U × RegimeRecoveryToken U)
+    (NovelObservableToken U)
+    (FalsifiableMeasurementToken U)
 
 sameCandidateRecoveryImpliesPhysicalPromotion :
   ∀ {U : UnifiedCandidate} →
   SameCandidateQFTGRRecovery U →
   Physical.PhysicalPromotionGate (physicalCandidateFromUnified U)
 sameCandidateRecoveryImpliesPhysicalPromotion recovery =
-  ( grRecovery recovery
-  , stressEnergyWeld recovery
-  , regimeRecovery recovery )
+  ( GRRecoveryReceipt.promotionToken (grRecovery recovery)
+  , SameStressEnergyWeld.promotionToken (stressEnergyWeld recovery)
+  , CommonRegimeRecovery.promotionToken (regimeRecovery recovery) )
   ,
-  ( qftRecovery recovery
-  , stressEnergyWeld recovery
-  , regimeRecovery recovery )
+  ( QFTRecoveryReceipt.promotionToken (qftRecovery recovery)
+  , SameStressEnergyWeld.promotionToken (stressEnergyWeld recovery)
+  , CommonRegimeRecovery.promotionToken (regimeRecovery recovery) )
   ,
-  novelObservable recovery
+  NovelObservableReceipt.promotionToken (novelObservable recovery)
   ,
-  (novelObservable recovery , falsifiableMeasurement recovery)
+  FalsifiableMeasurementReceipt.promotionToken (falsifiableMeasurement recovery)
 
 ------------------------------------------------------------------------
 -- Fail-closed current-state theorem.
