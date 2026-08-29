@@ -24,6 +24,7 @@ FILES=(
   DASHI/Programmes/DashifineBenchmarkCorrectionExact.agda
   DASHI/Programmes/GrokkingExact.agda
   DASHI/Programmes/GrokkingValidationCorrectionExact.agda
+  DASHI/Programmes/GrokkingHeldOutToleranceExact.agda
   DASHI/Programmes/CoreReferenceExact.agda
   DASHI/Programmes/CoreReferenceCorrectionExact.agda
   DASHI/Programmes/FRACDASHExact.agda
@@ -77,6 +78,8 @@ grep -q '^collisionForcesRepresentationRepair :' DASHI/Programmes/CFDChartCorrec
 grep -q 'localSignKernelIsAutomaticallyIdempotentIsFalse' DASHI/Programmes/BrainKernelSemanticsCorrectionExact.agda
 grep -q 'oneTaskDominanceIsUniversalLearningIsFalse' DASHI/Programmes/DashifineBenchmarkCorrectionExact.agda
 grep -q 'twoPointPerfectTimingFitIsUniversalLawIsFalse' DASHI/Programmes/GrokkingValidationCorrectionExact.agda
+grep -q '^combinedApproximateFamilyLaw :' DASHI/Programmes/GrokkingHeldOutToleranceExact.agda
+grep -q 'postHocToleranceIsIndependentValidationIsFalse' DASHI/Programmes/GrokkingHeldOutToleranceExact.agda
 grep -q 'backendFingerprintEqualityIsStateEqualityIsFalse' DASHI/Programmes/CoreReferenceCorrectionExact.agda
 grep -q '^finiteTraceCommutes :' DASHI/Programmes/FRACDASHCompilerCorrectionExact.agda
 grep -q '^finiteTraceReadoutCorrect :' DASHI/Programmes/FRACDASHCompilerCorrectionExact.agda
