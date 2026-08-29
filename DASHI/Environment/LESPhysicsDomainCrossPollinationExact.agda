@@ -7,10 +7,13 @@ import DASHI.Core.RobustExperimentInferenceFrontierExact as Robust
 import DASHI.Core.ConsumerRelativeReductionKernelExact as Reduction
 import DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact as ReductionCanonical
 import DASHI.Core.ConsumerRelativeReductionSearchExact as ReductionSearch
+import DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact as ApproximateReduction
+import DASHI.Core.ConsumerReductionDependencyReopeningExact as ReductionReopening
 import DASHI.Core.RobustInterventionAcrossHypothesesExact as RobustIntervention
 import DASHI.Biology.Physical.C3Cube27ConsumerReductionAdapterExact as C3Reduction
 import DASHI.Environment.LESDomainBasisBidiFrontierExact as Basis
 import DASHI.Environment.LESConsumerRelativeMechanismReductionExact as LESReduction
+import DASHI.Environment.LESApproximateFidelityReductionExact as LESApproximate
 import DASHI.Environment.LESAdaptiveSPACModelSearchExact as AdaptiveSPAC
 import DASHI.Environment.LESModelFibreRobustInterventionExact as FibreIntervention
 import DASHI.Environment.LESFluidPhysicsCouplingExact as Fluid
@@ -74,8 +77,17 @@ consumerRelativeReductionCanonicalOwner = "DASHI.Core.ConsumerRelativeReductionC
 consumerRelativeReductionSearchOwner : String
 consumerRelativeReductionSearchOwner = "DASHI.Core.ConsumerRelativeReductionSearchExact"
 
+approximateFidelityReductionOwner : String
+approximateFidelityReductionOwner = "DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact"
+
+reductionDependencyReopeningOwner : String
+reductionDependencyReopeningOwner = "DASHI.Core.ConsumerReductionDependencyReopeningExact"
+
 lesReductionAdapterOwner : String
 lesReductionAdapterOwner = "DASHI.Environment.LESConsumerRelativeMechanismReductionExact"
+
+lesApproximateReductionAdapterOwner : String
+lesApproximateReductionAdapterOwner = "DASHI.Environment.LESApproximateFidelityReductionExact"
 
 adaptiveSPACModelSearchOwner : String
 adaptiveSPACModelSearchOwner = "DASHI.Environment.LESAdaptiveSPACModelSearchExact"
@@ -200,9 +212,7 @@ canonicalLESPhysicsCrossPollinationCutset =
     true true true false true true true false true true true
 
 ------------------------------------------------------------------------
--- New reduction-search / actionability cut.  Kept separate from the older
--- physical cutset so the theorem surface can evolve without destabilising its
--- constructor arity.
+-- Reduction-search / actionability cut.
 ------------------------------------------------------------------------
 
 record LESReductionSearchCrossPollinationCutset : Set where
@@ -215,6 +225,11 @@ record LESReductionSearchCrossPollinationCutset : Set where
     visibleSymmetryCannotBeSilentlyQuotiented : Bool
     reductionCandidatesUseReopenableHypothesisStatus : Bool
     deferredCandidateIsNotRefuted : Bool
+    exactROMEmbedsAsEqualityDiscrepancySpecialCase : Bool
+    approximateDecisionMarginRouteTyped : Bool
+    approximateRouteNeedNotExactlyCommuteAtStateLevel : Bool
+    selectiveDependencyReopeningTyped : Bool
+    staleCertificateIsReopenableNotRefuted : Bool
     adaptiveSPACPortfolioTyped : Bool
     bucketToRichardsCounterexampleEscalationTyped : Bool
     richardsToSPACCounterexampleEscalationTyped : Bool
@@ -230,6 +245,7 @@ canonicalLESReductionSearchCrossPollinationCutset :
 canonicalLESReductionSearchCrossPollinationCutset =
   lesReductionSearchCrossPollinationCutset
     true true true true true true true
+    true true true true true
     true true true true true true true
 
 reductionCanonicalBoundaryImported :
@@ -239,6 +255,20 @@ reductionCanonicalBoundaryImported =
 
 reductionSearchBoundaryImported : ReductionSearch.ReductionSearchBoundary
 reductionSearchBoundaryImported = ReductionSearch.canonicalReductionSearchBoundary
+
+approximateReductionBoundaryImported :
+  ApproximateReduction.ConsumerApproximateFidelityBoundary
+approximateReductionBoundaryImported =
+  ApproximateReduction.canonicalConsumerApproximateFidelityBoundary
+
+lesApproximateReductionBoundaryImported : LESApproximate.LESApproximateReductionBoundary
+lesApproximateReductionBoundaryImported =
+  LESApproximate.canonicalLESApproximateReductionBoundary
+
+reductionReopeningBoundaryImported :
+  ReductionReopening.ReductionDependencyReopeningBoundary
+reductionReopeningBoundaryImported =
+  ReductionReopening.canonicalReductionDependencyReopeningBoundary
 
 adaptiveSPACBoundaryImported : AdaptiveSPAC.LESAdaptiveSPACModelSearchBoundary
 adaptiveSPACBoundaryImported = AdaptiveSPAC.canonicalLESAdaptiveSPACModelSearchBoundary
