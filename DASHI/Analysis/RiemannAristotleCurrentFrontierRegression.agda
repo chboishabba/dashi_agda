@@ -18,6 +18,16 @@ selectedDebtRetired :
     F.canonicalAristotleCurrentFrontier ≡ false
 selectedDebtRetired = refl
 
+twoZeroUniversalWitnessesStillOpen :
+  F.AristotleCurrentFrontier.twoZeroUniversalWitnessProductionClosed
+    F.canonicalAristotleCurrentFrontier ≡ false
+twoZeroUniversalWitnessesStillOpen = refl
+
+poleQuotientTransversalityStillOpen :
+  F.AristotleCurrentFrontier.literalPoleQuotientTransversalityClosed
+    F.canonicalAristotleCurrentFrontier ≡ false
+poleQuotientTransversalityStillOpen = refl
+
 unselectedZeroTailStillOpen :
   F.AristotleCurrentFrontier.projectedUnselectedZeroTailClosed
     F.canonicalAristotleCurrentFrontier ≡ false
