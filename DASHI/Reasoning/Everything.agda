@@ -20,3 +20,11 @@ import DASHI.Reasoning.StructuralMetaphorTaskCompressionExact
 import DASHI.Reasoning.ConsumerRelativeMetaphorTransferFitnessExact
 import DASHI.Reasoning.StructuralTransferBreakdownExact
 import DASHI.Reasoning.MetaphorTransferResidualExact
+
+-- Relation-representation / dynamic adequacy / realization layer.
+import DASHI.Reasoning.RelationRepresentationSourceRegistryExact
+import DASHI.Reasoning.RelationRepresentationAdequacyExact
+import DASHI.Reasoning.RelationRepresentationRealizationExact
+import DASHI.Reasoning.EigenslurFlourishingRelationBoundaryExact
+import DASHI.Reasoning.RelationRepresentationCrossPollinationExact
+import DASHI.Reasoning.RelationRepresentationRegression
