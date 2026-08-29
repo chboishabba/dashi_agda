@@ -78,16 +78,16 @@ bidiNamingCannotRepairLoss =
   BidirectionalSatelliteCorrectionBoundary.correctedNamingAloneRepairsInformationLossIsFalse
     canonicalBidirectionalSatelliteCorrectionBoundary
 
--- Existing substantive sockets remain part of the same correction surface.
-brainStillNeedsMeasurementClosure :
-  HemibrainMeasurementClosesPrediction → HemibrainMeasurementClosesPrediction
-brainStillNeedsMeasurementClosure receipt = receipt
+quantumDiscriminatorNotTheory :
+  QuantumTargetBoundary.discriminatorAloneIsQuantumGravityTheory
+    canonicalQuantumTargetBoundary ≡ false
+quantumDiscriminatorNotTheory =
+  QuantumTargetBoundary.discriminatorAloneIsQuantumGravityTheoryIsFalse
+    canonicalQuantumTargetBoundary
 
-quantumDiscriminatorSocketPresent :
-  ∀ {Theory Experiment Observation : Set}
-    {language : DASHI.Physics.Foundations.PhysicalTheoryExperimentDiscriminationExact.Language Experiment}
-    {predicts : DASHI.Physics.Foundations.PhysicalTheoryExperimentDiscriminationExact.Predictions Theory Experiment Observation}
-    {left right : Theory} →
-  FalsifiableQuantumTarget language predicts left right →
-  ¬ (DASHI.Physics.Foundations.PhysicalTheoryExperimentDiscriminationExact.EquivalentOn language predicts left right)
-quantumDiscriminatorSocketPresent = falsifiableTargetRefutesCurrentEquivalence
+rtxMDLNotPhysicalTruth :
+  RTXRefinementBoundary.lowerMDLIsPhysicalTruth
+    canonicalRTXRefinementBoundary ≡ false
+rtxMDLNotPhysicalTruth =
+  RTXRefinementBoundary.lowerMDLIsPhysicalTruthIsFalse
+    canonicalRTXRefinementBoundary
