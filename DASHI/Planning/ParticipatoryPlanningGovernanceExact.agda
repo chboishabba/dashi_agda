@@ -3,6 +3,7 @@ module DASHI.Planning.ParticipatoryPlanningGovernanceExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.EpistemicInquiryGovernance as Inquiry
+import DASHI.Governance.ContestedAmbientAuthorityHyperformalismExact as Ambient
 import DASHI.Governance.OppositionInterfaceAntiDomesticationExact as Opposition
 
 ------------------------------------------------------------------------
@@ -83,8 +84,7 @@ admittedObjectionDoesNotAutomaticallyAlterAdmissionRule =
   Opposition.recognisedOppositionCannotAutomaticallyAlterRule
 
 planningConsultationDoesNotExhaustExteriorOpposition :
-  Opposition.Ambient.LeftExhaustive
-    Opposition.oppositionAdministrativeInterface → ⊥
+  Ambient.LeftExhaustive Opposition.oppositionAdministrativeInterface → ⊥
 planningConsultationDoesNotExhaustExteriorOpposition =
   Opposition.oppositionInterfaceIsNotExhaustive
 
