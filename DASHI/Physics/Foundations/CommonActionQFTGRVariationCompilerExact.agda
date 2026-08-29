@@ -4,12 +4,9 @@ import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact as Weld
 import DASHI.Physics.Foundations.CommonEffectiveActionVariationExact as Variation
 import DASHI.Physics.Foundations.EinsteinCommonActionVariationFrontierExact as EinsteinVariation
 import DASHI.Physics.Foundations.BalabanCommonActionVariationFrontierExact as BalabanVariation
-import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
-import DASHI.Physics.YangMills.BalabanYM4BetaSplitPositivityExact as Split
-import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
 
 ------------------------------------------------------------------------
--- Final BIDI stress compiler.
+-- Final BIDI stress compiler, corrected sectorwise.
 --
 -- GR side:
 --   common metric variation = Einstein tensor
@@ -17,40 +14,32 @@ import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as 
 --   -> common variation = literal GR source.
 --
 -- QFT side:
---   common variation = metric variation of the SAME beta-driven Balaban density
---   + density variation = total QFT stress
---   + exact sector aggregation
+--   for every compact simple group G,
+--     metric variation of the SAME beta-driven Balaban sector density
+--       = literal sector stress T^(G)
+--   + explicit aggregation of all literal sector stresses
+--   + common variation = that aggregate
 --   -> common variation = literal total QFT source.
 --
--- The generic common-action compiler then proves the QFT/GR stress weld.
+-- No single pure-YM sector is identified with total gravitating stress.
 ------------------------------------------------------------------------
 
 commonEinsteinAndBalabanVariationImpliesStressWeld :
   ∀ {U : Weld.UnifiedCandidate}
-    (variation : Variation.CommonEffectiveActionVariation U)
-    {trajectory : Flow.SourceNormalizedCouplingTrajectory}
-    {split : Split.FiniteLatticeBetaSplit trajectory}
-    (inputs : BetaDensity.BetaDrivenCompleteDensityInputs {trajectory} {split}) →
+    (variation : Variation.CommonEffectiveActionVariation U) →
   EinsteinVariation.EinsteinTensorVariationReceipt variation →
-  BalabanVariation.BalabanQFTVariationReceipt variation inputs →
+  BalabanVariation.BalabanAllSectorVariationReceipt variation →
   Weld.StressEnergyWeldToken U →
   Weld.SameStressEnergyWeld U
 commonEinsteinAndBalabanVariationImpliesStressWeld
-    variation inputs einsteinReceipt balabanReceipt token =
+    variation einsteinReceipt balabanReceipt token =
   Variation.commonVariationImpliesStressWeld
     variation
     (EinsteinVariation.einsteinTensorVariationBuildsGRIdentification
       variation einsteinReceipt)
-    (BalabanVariation.balabanReceiptBuildsQFTVariationIdentification
-      variation inputs balabanReceipt)
+    (BalabanVariation.balabanSectorFamilyBuildsQFTVariationIdentification
+      variation balabanReceipt)
     token
-
-------------------------------------------------------------------------
--- Frontier classification: after this compiler, no additional cross-sector
--- stress equality is required.  Remaining work is exactly the two variational
--- identifications plus the QFT aggregation/continuum authority carried by the
--- Balaban receipt.
-------------------------------------------------------------------------
 
 record CommonActionQFTGRCompilerBoundary : Set where
   constructor commonActionQFTGRCompilerBoundary
@@ -59,10 +48,14 @@ record CommonActionQFTGRCompilerBoundary : Set where
     separateExtraStressWeldTheoremStillNeededAfterBothReceiptsIsFalse :
       separateExtraStressWeldTheoremStillNeededAfterBothReceipts ≡ false
 
-    einsteinAndBalabanVariationReceiptsCompileDirectly : Bool
-    einsteinAndBalabanVariationReceiptsCompileDirectlyIsTrue :
-      einsteinAndBalabanVariationReceiptsCompileDirectly ≡ true
+    onePureYangMillsSectorCanStandForTotalQFTStress : Bool
+    onePureYangMillsSectorCanStandForTotalQFTStressIsFalse :
+      onePureYangMillsSectorCanStandForTotalQFTStress ≡ false
+
+    einsteinAndSectorwiseBalabanVariationReceiptsCompileDirectly : Bool
+    einsteinAndSectorwiseBalabanVariationReceiptsCompileDirectlyIsTrue :
+      einsteinAndSectorwiseBalabanVariationReceiptsCompileDirectly ≡ true
 
 canonicalCommonActionQFTGRCompilerBoundary : CommonActionQFTGRCompilerBoundary
 canonicalCommonActionQFTGRCompilerBoundary =
-  commonActionQFTGRCompilerBoundary false refl true refl
+  commonActionQFTGRCompilerBoundary false refl false refl true refl
