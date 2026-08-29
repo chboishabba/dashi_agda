@@ -1,0 +1,51 @@
+name: YM Round131 common metric sector recovery Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanDensityToLiteralFiniteMeasureRound124Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanLiteralFiniteMeasureStressLaneRound125Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanLiteralSchwingerStressRecoveryRound126Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanOSLiteralSchwingerWeldRound127Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanSameFamilyOSStressRecoveryRound128Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanSectorQFTRecoveryExportRound129Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanContinuumMetricStressPairingRound130Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCommonMetricSectorRecoveryRound131Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCommonMetricSectorRecoveryRound131Validation.agda'
+      - 'scripts/check_ym_round131_common_metric_sector_recovery.sh'
+      - '.github/workflows/ym-round131-common-metric-sector-recovery.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ym-round131-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  agda:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          submodules: false
+      - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Check Round131 common metric sector recovery
+        env:
+          AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
+          DASHI_REPO_ROOT: ${{ github.workspace }}
+          DASHI_AGDA29_CACHE_ROOT: ${{ runner.temp }}/dashi-agda29-round131
+          DASHI_STATUS_DIR: ${{ runner.temp }}/dashi-agda29-round131/status
+          XDG_CACHE_HOME: ${{ runner.temp }}/dashi-xdg-round131
+          AGDA_LOG_PATH: ${{ github.workspace }}/ym-round131-agda.log
+          AGDA_JOBS: '4'
+          DASHI_NO_TMUX: '1'
+        run: bash scripts/check_ym_round131_common_metric_sector_recovery.sh
+      - name: Upload Round131 Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ym-round131-common-metric-sector-recovery-agda-log
+          path: ym-round131-agda*.log
+          if-no-files-found: warn
