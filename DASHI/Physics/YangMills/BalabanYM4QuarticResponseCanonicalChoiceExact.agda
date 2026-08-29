@@ -18,6 +18,7 @@ module DASHI.Physics.YangMills.BalabanYM4QuarticResponseCanonicalChoiceExact whe
 -- coupling choice or numerical search is required.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_; Positive; NonNegative)
 import Data.Rational.Properties as ℚP
@@ -26,6 +27,7 @@ open import Relation.Binary.PropositionalEquality using (subst)
 open import Relation.Nullary.Decidable using (toWitness)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import DASHI.Physics.YangMills.BalabanClayT4PositiveDenominatorQuotientEndpointsExact as Quot
 import DASHI.Physics.YangMills.BalabanYM4CubicCouplingDriftTelescopeExact as Cubic
@@ -74,8 +76,6 @@ effectiveDerivativeNonnegative dataSet =
       (sourceCoefficientNonnegative dataSet)
   in
   ℚP.+-mono-≤ (localDerivativeNonnegative dataSet) responsePartNN
-  where
-  import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 
 asCanonicalSourceConstants :
   FiniteQuarticResponseConstants → Choice.FiniteRowASourceConstants
@@ -119,13 +119,17 @@ denominatorAtLeastTwo :
 denominatorAtLeastTwo dataSet =
   let
     source = asCanonicalSourceConstants dataSet
+    S = Choice.sourceSlope source
     slopeNN = Choice.sourceSlopeNonnegative source
-    oneBelow : 1ℚ ≤ Choice.sourceSlope source + 1ℚ
+
+    oneBelow : 1ℚ ≤ S + 1ℚ
     oneBelow =
-      subst
-        (λ left → left ≤ Choice.sourceSlope source + 1ℚ)
-        (ℚP.+-identityˡ 1ℚ)
-        (ℚP.+-monoˡ-≤ 1ℚ slopeNN)
+      let
+        raw : 0ℚ + 1ℚ ≤ S + 1ℚ
+        raw = ℚP.+-mono-≤ slopeNN ℚP.≤-refl
+      in
+      subst (λ left → left ≤ S + 1ℚ) (ℚP.+-identityˡ 1ℚ) raw
+
     twoNN : 0ℚ ≤ Cubic.twoℚ
     twoNN = ℚP.nonNegative⁻¹ Cubic.twoℚ
   in
@@ -152,8 +156,7 @@ canonicalReciprocalAtMostHalf dataSet =
     halfAsReciprocal = refl
   in
   subst
-    (λ right →
-      Quot.positiveReciprocal D Dpos ≤ right)
+    (λ right → Quot.positiveReciprocal D Dpos ≤ right)
     halfAsReciprocal
     anti
 
@@ -165,7 +168,6 @@ canonicalQuarticResponseGammaAtMostHalf dataSet =
     source = asCanonicalSourceConstants dataSet
     D = Choice.canonicalDenominator source
     Dpos = Choice.canonicalDenominatorPositive source
-    reciprocal = Quot.positiveReciprocal D Dpos
 
     first = Norm.scaleNonnegative
       (gaussianFloor dataSet)
