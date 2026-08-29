@@ -30,6 +30,19 @@ record FactorCoordinateKey : Set where
 
 open FactorCoordinateKey public
 
+factorCoordinateKeyExtensional :
+  ∀ {left right : FactorCoordinateKey} →
+  residual left ≡ residual right →
+  copies left ≡ copies right →
+  divisor left ≡ divisor right →
+  left ≡ right
+factorCoordinateKeyExtensional
+    {left = factorCoordinateKey r k v}
+    {right = factorCoordinateKey r' k' v'}
+    residualExact copiesExact divisorExact
+  with residualExact | copiesExact | divisorExact
+... | refl | refl | refl = refl
+
 kMajorFactorKey :
   ∀ {n} → KMajor.KMajorFactorCoordinate n → FactorCoordinateKey
 kMajorFactorKey coordinate =
