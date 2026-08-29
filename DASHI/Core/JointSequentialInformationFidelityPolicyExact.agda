@@ -11,22 +11,17 @@ import DASHI.Core.RobustInterventionAcrossHypothesesExact as Robust
 ------------------------------------------------------------------------
 -- JOINT SEQUENTIAL INFORMATION / FIDELITY / ACTION POLICY
 --
--- This owner fuses the previously separate sequential information tree and
--- adaptive model-fidelity search without collapsing their semantics.
---
--- Evidence-producing moves refine the live hypothesis fibre by a declared
--- observation relation.  Fidelity moves change the active model state but do
--- NOT, by themselves, remove hypotheses.  A terminal action still requires an
--- independent robustness proof and an independent authority witness.
+-- Evidence-producing moves refine the live hypothesis fibre.  Fidelity moves
+-- change the active model state but do NOT, by themselves, remove hypotheses.
+-- To make fidelity semantically consequential rather than decorative, terminal
+-- action additionally requires `DecisionAdequate model intervention`: an
+-- application-supplied certificate that the current model state is sufficient
+-- for the declared intervention consumer.
 ------------------------------------------------------------------------
 
 private
   variable
     Hypothesis Intervention Outcome ModelState : Set
-
-------------------------------------------------------------------------
--- Only move kinds that can actually return evidence inhabit this witness.
-------------------------------------------------------------------------
 
 data EvidenceCapableKind : Choice.InformationMoveKind → Set where
   measurementEvidence : EvidenceCapableKind Choice.takeMeasurement
@@ -62,10 +57,6 @@ EvidenceOutcomePossible :
 EvidenceOutcomePossible live move observed =
   Σ Hypothesis λ hypothesis → RefineLive live move observed hypothesis
 
-------------------------------------------------------------------------
--- Fidelity transitions change the model/representation coordinate only.
-------------------------------------------------------------------------
-
 record FidelityMove (ModelState : Set) (current : ModelState) : Set where
   constructor fidelityMove
   field
@@ -76,12 +67,6 @@ record FidelityMove (ModelState : Set) (current : ModelState) : Set where
     retainedCounterexampleOrNeedReference : String
 
 open FidelityMove public
-
-------------------------------------------------------------------------
--- Deterministic experiment bundles embed as evidence moves.  This preserves
--- the existing measurement semantics while the relational carrier above also
--- supports set-valued theory predictions.
-------------------------------------------------------------------------
 
 bundleAsEvidenceMove :
   ∀ {Hypothesis} →
@@ -97,26 +82,25 @@ bundleAsEvidenceMove bundle =
     (Synthesis.calibrationReference bundle)
 
 ------------------------------------------------------------------------
--- Joint policy.  The two recursive constructors intentionally update different
--- coordinates:
---
---   evidenceThen  : live fibre changes, model state stays fixed
---   fidelityThen  : model state changes, live fibre stays fixed
+-- Joint policy.  Evidence and fidelity update orthogonal coordinates.
 ------------------------------------------------------------------------
 
 data JointSequentialPolicy
     (system : Robust.HypothesisInterventionSystem
       Hypothesis Intervention Outcome)
     (Authority : Intervention → Set)
-    (ModelState : Set) :
+    (ModelState : Set)
+    (DecisionAdequate : ModelState → Intervention → Set) :
     (Hypothesis → Set) → ModelState → Set₁ where
 
   actNow :
     ∀ {live model}
       (intervention : Intervention) →
       Robust.RobustlyNoWorseThanBaseline system live intervention →
+      DecisionAdequate model intervention →
       Authority intervention →
-    JointSequentialPolicy system Authority ModelState live model
+    JointSequentialPolicy
+      system Authority ModelState DecisionAdequate live model
 
   evidenceThen :
     ∀ {live model}
@@ -124,39 +108,60 @@ data JointSequentialPolicy
       ((observed : Observation move) →
         EvidenceOutcomePossible live move observed →
         JointSequentialPolicy
-          system Authority ModelState
+          system Authority ModelState DecisionAdequate
           (RefineLive live move observed)
           model) →
-    JointSequentialPolicy system Authority ModelState live model
+    JointSequentialPolicy
+      system Authority ModelState DecisionAdequate live model
 
   fidelityThen :
     ∀ {live model}
       (move : FidelityMove ModelState model) →
       JointSequentialPolicy
-        system Authority ModelState
+        system Authority ModelState DecisionAdequate
         live
         (nextModel move) →
-    JointSequentialPolicy system Authority ModelState live model
+    JointSequentialPolicy
+      system Authority ModelState DecisionAdequate live model
 
 ------------------------------------------------------------------------
--- Worst-case cumulative resource bound.  Evidence branches are bounded over
--- every realizable outcome; deterministic fidelity transitions have one child.
+-- A fidelity transition can remove a model-adequacy obstruction without being
+-- new empirical evidence.  This is the exact reason such a move can matter in
+-- a joint policy.
 ------------------------------------------------------------------------
+
+record FidelityUnlocksDecision
+    {ModelState Intervention : Set}
+    (DecisionAdequate : ModelState → Intervention → Set)
+    (from : ModelState)
+    (intervention : Intervention) : Set₁ where
+  constructor fidelityUnlocksDecision
+  field
+    move : FidelityMove ModelState from
+    blockedBefore : DecisionAdequate from intervention → ⊥
+    adequateAfter : DecisionAdequate (nextModel move) intervention
+    adequacyReference : String
+
+open FidelityUnlocksDecision public
 
 data JointPolicyCostAtMost
     {system : Robust.HypothesisInterventionSystem
       Hypothesis Intervention Outcome}
     {Authority : Intervention → Set}
     {ModelState : Set}
+    {DecisionAdequate : ModelState → Intervention → Set}
     {live : Hypothesis → Set}
     {model : ModelState} :
-    JointSequentialPolicy system Authority ModelState live model →
+    JointSequentialPolicy
+      system Authority ModelState DecisionAdequate live model →
     Nat → Set₁ where
 
   actCost :
-    ∀ {intervention robust authority budget} →
+    ∀ {intervention robust adequate authority budget} →
     zero ≤ budget →
-    JointPolicyCostAtMost (actNow intervention robust authority) budget
+    JointPolicyCostAtMost
+      (actNow intervention robust adequate authority)
+      budget
 
   evidenceCost :
     ∀ {move continuations budget}
@@ -182,11 +187,13 @@ record CertifiedJointSequentialPolicy
       Hypothesis Intervention Outcome)
     (Authority : Intervention → Set)
     (ModelState : Set)
+    (DecisionAdequate : ModelState → Intervention → Set)
     (live : Hypothesis → Set)
     (model : ModelState) : Set₂ where
   constructor certifiedJointSequentialPolicy
   field
-    policy : JointSequentialPolicy system Authority ModelState live model
+    policy : JointSequentialPolicy
+      system Authority ModelState DecisionAdequate live model
     worstCaseCostBound : Nat
     costCertificate : JointPolicyCostAtMost policy worstCaseCostBound
     policyReference : String
@@ -198,27 +205,24 @@ record MinimalJointSequentialPolicy
       Hypothesis Intervention Outcome)
     (Authority : Intervention → Set)
     (ModelState : Set)
+    (DecisionAdequate : ModelState → Intervention → Set)
     (live : Hypothesis → Set)
     (model : ModelState)
     (Declared : CertifiedJointSequentialPolicy
-      system Authority ModelState live model → Set) : Set₂ where
+      system Authority ModelState DecisionAdequate live model → Set) : Set₂ where
   constructor minimalJointSequentialPolicy
   field
     selected : CertifiedJointSequentialPolicy
-      system Authority ModelState live model
+      system Authority ModelState DecisionAdequate live model
     selectedDeclared : Declared selected
     minimalWorstCaseCost :
       (alternative : CertifiedJointSequentialPolicy
-        system Authority ModelState live model) →
+        system Authority ModelState DecisionAdequate live model) →
       Declared alternative →
       worstCaseCostBound selected ≤ worstCaseCostBound alternative
     comparisonReference : String
 
 open MinimalJointSequentialPolicy public
-
-------------------------------------------------------------------------
--- Structural consequences.
-------------------------------------------------------------------------
 
 robustActionSurvivesEvidenceMove :
   ∀ {system : Robust.HypothesisInterventionSystem
@@ -248,6 +252,10 @@ record JointSequentialPolicyBoundary : Set where
     evidenceMoveMayRefineLiveHypothesesIsTrue :
       evidenceMoveMayRefineLiveHypotheses ≡ true
 
+    fidelityCanRemoveModelAdequacyObstruction : Bool
+    fidelityCanRemoveModelAdequacyObstructionIsTrue :
+      fidelityCanRemoveModelAdequacyObstruction ≡ true
+
     measurementAndFidelityMayShareOneSequentialCostObjective : Bool
     measurementAndFidelityMayShareOneSequentialCostObjectiveIsTrue :
       measurementAndFidelityMayShareOneSequentialCostObjective ≡ true
@@ -256,11 +264,11 @@ record JointSequentialPolicyBoundary : Set where
     modelEscalationAutomaticallyCreatesNewWorldEvidenceIsFalse :
       modelEscalationAutomaticallyCreatesNewWorldEvidence ≡ false
 
-    robustSupportAutomaticallyCreatesAuthority : Bool
-    robustSupportAutomaticallyCreatesAuthorityIsFalse :
-      robustSupportAutomaticallyCreatesAuthority ≡ false
+    robustSupportAndModelAdequacyAutomaticallyCreateAuthority : Bool
+    robustSupportAndModelAdequacyAutomaticallyCreateAuthorityIsFalse :
+      robustSupportAndModelAdequacyAutomaticallyCreateAuthority ≡ false
 
 canonicalJointSequentialPolicyBoundary : JointSequentialPolicyBoundary
 canonicalJointSequentialPolicyBoundary =
   jointSequentialPolicyBoundary
-    false refl true refl true refl false refl false refl
+    false refl true refl true refl true refl false refl false refl
