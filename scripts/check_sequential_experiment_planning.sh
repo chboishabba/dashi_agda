@@ -12,11 +12,14 @@ FILES=(
   DASHI/Core/SequentialConsumerExperimentPlannerExact.agda
   DASHI/Core/SequentialRobustActionabilityPlannerExact.agda
   DASHI/Core/SequentialRelationalExperimentPlannerExact.agda
+  DASHI/Core/JointSequentialInformationFidelityPolicyExact.agda
+  DASHI/Core/ConsumerReductionJointPolicyBridgeExact.agda
   DASHI/Core/SequentialExperimentPlanningValidation.agda
   DASHI/Physics/Foundations/GRQFTDiscriminatorSynthesisExact.agda
   DASHI/Physics/Foundations/GRQFTSequentialExperimentPlannerExact.agda
   DASHI/Environment/LESDiscriminatorSynthesisExact.agda
   DASHI/Environment/LESSequentialExperimentPlannerExact.agda
+  DASHI/Environment/LESJointSequentialMeasurementFidelityPolicyExact.agda
   DASHI/Environment/LESAdaptiveConsumerLoopCrossPollinationExact.agda
 )
 
@@ -37,9 +40,16 @@ grep -q '^data SequentialActionabilityPlan' DASHI/Core/SequentialRobustActionabi
 grep -q '^robustActionSurvivesMeasuredRefinement :' DASHI/Core/SequentialRobustActionabilityPlannerExact.agda
 grep -q '^data SequentialRelationalPlan' DASHI/Core/SequentialRelationalExperimentPlannerExact.agda
 grep -q 'everyHypothesisMustPredictOneDeterministicOutcomeIsFalse' DASHI/Core/SequentialRelationalExperimentPlannerExact.agda
+grep -q '^data JointSequentialPolicy' DASHI/Core/JointSequentialInformationFidelityPolicyExact.agda
+grep -q '^data EvidenceCapableKind' DASHI/Core/JointSequentialInformationFidelityPolicyExact.agda
+grep -q '^bundleAsEvidenceMove :' DASHI/Core/JointSequentialInformationFidelityPolicyExact.agda
+grep -q 'fidelityMoveAloneRefinesEmpiricalHypothesisFibreIsFalse' DASHI/Core/JointSequentialInformationFidelityPolicyExact.agda
+grep -q '^reductionEscalationAsFidelityMove :' DASHI/Core/ConsumerReductionJointPolicyBridgeExact.agda
 grep -q '^record SequentialPhysicalExperimentProgramme' DASHI/Physics/Foundations/GRQFTSequentialExperimentPlannerExact.agda
 grep -q '^record LESSequentialConsumerExperiment' DASHI/Environment/LESSequentialExperimentPlannerExact.agda
 grep -q '^record LESSequentialActionabilityExperiment' DASHI/Environment/LESSequentialExperimentPlannerExact.agda
-grep -q 'sequentialPlanningRequiresFixedMeasurementOrderIsFalse' DASHI/Environment/LESAdaptiveConsumerLoopCrossPollinationExact.agda
+grep -q '^record LESJointMeasurementFidelityCampaign' DASHI/Environment/LESJointSequentialMeasurementFidelityPolicyExact.agda
+grep -q '^bucketToRichardsFidelityMove :' DASHI/Environment/LESJointSequentialMeasurementFidelityPolicyExact.agda
+grep -q 'richerModelAutomaticallyCreatesNewEmpiricalEvidenceIsFalse' DASHI/Environment/LESAdaptiveConsumerLoopCrossPollinationExact.agda
 
 scripts/run_agda29_parallel_check.sh DASHI/Core/SequentialExperimentPlanningValidation.agda
