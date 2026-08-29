@@ -1,6 +1,8 @@
 module DASHI.Environment.LESSituatedSocioEcologicalHyperfabricValidation where
 
 import DASHI.Physics.Units.SI
+import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact
+import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact
 import DASHI.Environment.LESEnvironmentSIQuantityBridgeExact
 import DASHI.Environment.LESObservationSourceRegistryExact
 import DASHI.Environment.LESSituatedSocioEcologicalHyperfabricExact
