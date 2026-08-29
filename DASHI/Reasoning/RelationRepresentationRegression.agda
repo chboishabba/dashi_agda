@@ -3,6 +3,7 @@ module DASHI.Reasoning.RelationRepresentationRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.CyclotomicPhaseAmplitudeBoundaryExact as Phase
+import DASHI.Biology.NeuralRepresentationLaplacianExact as Neural
 import DASHI.Cognition.PNF.LLMGrokkingLearningFutureExact as Grok
 import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 import DASHI.Core.PluralConsumerProjectionSafety as Plural
@@ -12,9 +13,11 @@ import DASHI.Reasoning.RelationRepresentationSourceRegistryExact as Sources
 import DASHI.Reasoning.RelationRepresentationAdequacyExact as Adequacy
 import DASHI.Reasoning.RelationRepresentationRealizationExact as Realization
 import DASHI.Reasoning.BidirectionalRelationRepresentationBridgeExact as Bidi
+import DASHI.Reasoning.RelationRepresentationExperimentProtocolExact as Protocol
 import DASHI.Reasoning.EigenslurFlourishingRelationBoundaryExact as Domain
 import DASHI.Reasoning.RelationRepresentationCrossPollinationExact as Cross
 import DASHI.Reasoning.HumourRelationRepresentationCrossPollinationExact as HumourCross
+import DASHI.Reasoning.NeuralSpectralRelationCrossPollinationExact as NeuralCross
 
 ------------------------------------------------------------------------
 -- Focused regression: keep the exact seams live in one typecheck target.
@@ -32,11 +35,17 @@ realizationBoundary = Realization.canonicalRelationRepresentationRealizationBoun
 bidirectionalBoundary : Bidi.BidirectionalRelationBridgeBoundary
 bidirectionalBoundary = Bidi.canonicalBidirectionalRelationBridgeBoundary
 
+protocolBoundary : Protocol.RelationExperimentProtocolBoundary
+protocolBoundary = Protocol.canonicalRelationExperimentProtocolBoundary
+
 domainBoundary : Domain.EigenslurFlourishingBoundary
 domainBoundary = Domain.canonicalEigenslurFlourishingBoundary
 
 humourBoundary : HumourCross.HumourRelationRepresentationBoundary
 humourBoundary = HumourCross.canonicalHumourRelationRepresentationBoundary
+
+neuralBoundary : NeuralCross.NeuralSpectralRelationBoundary
+neuralBoundary = NeuralCross.canonicalNeuralSpectralRelationBoundary
 
 ------------------------------------------------------------------------
 -- Existing phase/amplitude owner remains a concrete operator-coordinate
@@ -100,6 +109,22 @@ humourCurrentPositiveSurfaceDoesNotEstablishPluralFutureSafety :
   Plural.PluralDynamicSafety HumourAgency.humourProjectionFamily → ⊥
 humourCurrentPositiveSurfaceDoesNotEstablishPluralFutureSafety =
   HumourCross.oneHumourConsumerSafetyDoesNotEstablishPluralSafety
+
+------------------------------------------------------------------------
+-- Neural / spectral representation stress test.
+------------------------------------------------------------------------
+
+sameCoarseNeuralObservationStillLosesRelationalVariation :
+  Realization.RepresentationRealizationWitness
+    Neural.fmriLikeObservation Neural.laplacianVariation → ⊥
+sameCoarseNeuralObservationStillLosesRelationalVariation =
+  NeuralCross.neuralCoarseObservationCannotRealizeVariation
+
+neuralConsumerCollisionReopensCandidateSearch :
+  Protocol.ReopenedCandidateSearch
+    Neural.fmriLikeObservation Neural.laplacianVariation
+neuralConsumerCollisionReopensCandidateSearch =
+  NeuralCross.neuralSearchMayReopenFromOffsetToRotation
 
 ------------------------------------------------------------------------
 -- Existing learning-future result stays wired through the capstone.
