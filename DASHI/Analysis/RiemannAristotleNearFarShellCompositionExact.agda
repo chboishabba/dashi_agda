@@ -2,18 +2,6 @@ module DASHI.Analysis.RiemannAristotleNearFarShellCompositionExact where
 
 ------------------------------------------------------------------------
 -- S2 COMPOSITION: ANALYTIC PRODUCERS -> WHOLE-CARRIER CONTRADICTION
---
--- This is the exact meeting point of the bidi search.
---
--- Forward:
---   * a finite signed near-shell producer;
---   * a quantitative summable far-shell producer.
---
--- Backward:
---   * their combined budget must lie below the surviving cluster Schur margin.
---
--- Once those meet at one cutoff J, the existing whole-carrier contradiction
--- fires mechanically.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -31,7 +19,6 @@ record NearFarAnalyticClosure : Set where
 
     offResidualSq clusterMargin : ℚ
 
-    -- Domain-specific literal carrier estimate at the chosen cutoff.
     offSplitBound :
       offResidualSq
         ≤ Socket.signedNearContribution near
@@ -46,7 +33,7 @@ compiledNearFarBudget :
   (d : NearFarAnalyticClosure) → Budget.NearFarShellBudget
 compiledNearFarBudget d =
   record
-    { cutoff = Socket.cutoff (near d)
+    { cutoff = Socket.nearCutoff (near d)
     ; offResidualSq = offResidualSq d
     ; nearContribution = Socket.signedNearContribution (near d)
     ; farContribution = Socket.farContribution (far d)
@@ -79,20 +66,13 @@ record NearFarCompositionBoundary : Set where
   field
     compositionCompilerClosed : Bool
     compositionCompilerClosedIsTrue : compositionCompilerClosed ≡ true
-
     farAnalyticProducerClosed : Bool
     farAnalyticProducerClosedIsFalse : farAnalyticProducerClosed ≡ false
-
     nearSignedProducerClosed : Bool
     nearSignedProducerClosedIsFalse : nearSignedProducerClosed ≡ false
-
     strictCombinedMarginClosed : Bool
     strictCombinedMarginClosedIsFalse : strictCombinedMarginClosed ≡ false
 
 canonicalNearFarCompositionBoundary : NearFarCompositionBoundary
 canonicalNearFarCompositionBoundary =
-  near-far-composition-boundary
-    true refl
-    false refl
-    false refl
-    false refl
+  near-far-composition-boundary true refl false refl false refl false refl
