@@ -20,52 +20,53 @@ module DASHI.Analysis.RiemannAristotleCurrentFrontierExact where
 --  * unit ordinate shells plus unconditional local zero counts prove absolute
 --    summability of the m_rho/(Im rho-t)^2 carrier and hence absolute
 --    convergence of the reflection far tail for every compactly supported C2
---    real-even taper.
+--    real-even taper;
+--  * the newest supplied session reports `lake build Zeta23Bridge` successful
+--    and the extended axiom audit returning only the standard Mathlib axioms.
 --
--- NEW BIDI CORRECTION FROM THE 2026-08-30 LEAN SESSION
+-- SOURCE-AUDITED BIDI READING OF THE STRICT MARGIN SOCKET
 --
--- The proposed socket
---
---   ||E D_off||^2 <= B_far <
---     det3(D_pole,D_Gamma,D_cluster)^2 / wedgeSq(D_pole,D_Gamma)
---
--- cannot be the final strict-budget theorem when the deterministic Schur
--- identity gives
+-- `D_off` is defined on the complement of `SameOrd t`; it does NOT contain the
+-- target same-ordinate cluster.  After short-support prime annihilation and
+-- exact deterministic Schur elimination, the literal explicit-formula balance
+-- gives
 --
 --   E D_cluster = E D_off.
 --
--- The right-hand margin is precisely ||E D_cluster||^2, hence the same real
--- quantity as ||E D_off||^2.  No upper bound on the whole post-Schur carrier can
--- be strictly below that same quantity.
+-- Therefore a genuine analytic theorem
 --
--- Therefore the literal zero carrier must be split first:
+--   ||E D_off||^2 <= B_far < ||E D_cluster||^2
 --
---   D_off = D_targetCluster + D_remainder,
+-- is exactly the desired contradiction under an off-line target.  It is NOT an
+-- invalid target theorem.  The associated no-go says only that the strict
+-- inequality cannot be obtained from Schur/elimination algebra itself, since
+-- that algebra identifies the two residual vectors.  The strict upper bound
+-- must come from real cancellation analysis of the signed off-ordinate carrier.
 --
--- in the SAME post-Schur coordinates.  The strict estimate applies only to the
--- genuine remainder.  Absolute convergence now guarantees that this remainder
--- is mathematically well-defined; it does not by itself provide cancellation.
+-- The newest Lean tranche solves a prerequisite for that analysis: the signed
+-- reflection far tail is absolutely convergent with a uniform delta^-2 shell
+-- envelope.  Convergence is now closed; strict cancellation is not.
 --
 -- HIGHEST-ALPHA LIVE CUTSET
 --
---   T1. literal post-Schur target/remainder identity on the actual zero carrier;
+--   S1. construct the short three-taper family so deterministic pole/Gamma
+--       vectors have rank two and the off-line cluster survives the quotient
+--       with an explicit positive Schur margin;
 --
---   T2. construct/retain a quantitative target lower margin for the target
---       same-ordinate cluster in those exact coordinates;
+--   S2. use the kernel-checked reflection-pair curvature + shell summability
+--       machinery to prove an explicit analytic bound B_far for the WHOLE
+--       post-Schur off-ordinate carrier, with
 --
---   T3. prove a signed cancellation estimate for the genuine reflection-
---       symmetrized remainder, strictly below that target margin.  The new Lean
---       curvature/shell work closes convergence and supplies the summable
---       delta^-2 envelope, but not this strict inequality;
+--         ||E D_off||^2 <= B_far < ||E D_cluster||^2;
 --
---   T4. close the deterministic short three-taper rank/survival construction if
---       it is still used to eliminate Gamma/pole exactly;
+--       because the exact balance also gives equality of those residual norms,
+--       S1+S2 produce the contradiction rather than a further decomposition;
 --
---   T5. certify the complementary low-ordinate region, or replace the split by
+--   S3. certify the complementary low-ordinate region, or replace the split by
 --       a universal construction;
 --
---   T6. invoke the already-owned target/remainder margin contradiction and the
---       repository's existing unweakened RH proposition.
+--   S4. invoke the already-owned whole-carrier cancellation contradiction and
+--       the repository's existing unweakened RH proposition.
 --
 -- No theorem here derives RH.
 ------------------------------------------------------------------------
@@ -104,19 +105,19 @@ record AristotleCurrentFrontier : Set where
     latestLeanBridgeBuildKernelCheckedIsTrue :
       latestLeanBridgeBuildKernelChecked ≡ true
 
-    wholePostSchurCarrierStrictBudgetValid : Bool
-    wholePostSchurCarrierStrictBudgetValidIsFalse :
-      wholePostSchurCarrierStrictBudgetValid ≡ false
+    wholePostSchurCarrierStrictBudgetIsContradictionTarget : Bool
+    wholePostSchurCarrierStrictBudgetIsContradictionTargetIsTrue :
+      wholePostSchurCarrierStrictBudgetIsContradictionTarget ≡ true
+    eliminationAlgebraAloneClosesStrictBudget : Bool
+    eliminationAlgebraAloneClosesStrictBudgetIsFalse :
+      eliminationAlgebraAloneClosesStrictBudget ≡ false
 
-    literalTargetRemainderSplitClosed : Bool
-    literalTargetRemainderSplitClosedIsFalse :
-      literalTargetRemainderSplitClosed ≡ false
-    strictSignedRemainderCancellationClosed : Bool
-    strictSignedRemainderCancellationClosedIsFalse :
-      strictSignedRemainderCancellationClosed ≡ false
     deterministicNuisanceThreeTaperConstructionClosed : Bool
     deterministicNuisanceThreeTaperConstructionClosedIsFalse :
       deterministicNuisanceThreeTaperConstructionClosed ≡ false
+    strictSignedWholeOffCarrierCancellationClosed : Bool
+    strictSignedWholeOffCarrierCancellationClosedIsFalse :
+      strictSignedWholeOffCarrierCancellationClosed ≡ false
     lowOrdinateComplementCertified : Bool
     lowOrdinateComplementCertifiedIsFalse :
       lowOrdinateComplementCertified ≡ false
@@ -138,10 +139,10 @@ canonicalAristotleCurrentFrontier =
     true refl
     true refl
     true refl
+    true refl
     false refl
     false refl
     false refl
     false refl
     false refl
-    false refl
-    "The newest kernel-checked Lean tranche closes uniform reflection-pair curvature control and absolute summability/convergence of the literal far zero carrier. Bidirectional checking also kills the old whole-carrier B_far socket: after deterministic Schur, D_cluster and D_off have the same residual vector, so that whole carrier cannot be budgeted strictly below its own Schur margin. The live target is now a literal target-cluster plus genuine-remainder decomposition, followed by a signed cancellation estimate on the convergent remainder only, together with the deterministic three-taper construction and low-ordinate certification before the existing final RH compiler can fire."
+    "The newest kernel-checked Lean tranche closes uniform reflection-pair curvature control and absolute summability/convergence of the literal signed off-ordinate carrier. Source audit confirms that `D_off` is the complement of the target same-ordinate fibre, so the whole-carrier strict B_far inequality remains the correct contradiction target. The elimination algebra cannot prove that strict inequality because it identifies the post-Schur cluster and off-carrier residual vectors; genuine signed cancellation analysis must. The live research cutset is the deterministic three-taper rank/survival construction, the explicit strict whole-tail cancellation estimate, and low-ordinate certification before the existing RH compiler fires."
