@@ -4,20 +4,17 @@ module DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound
 ------------------------------------------------------------------------
 -- ROUND103 BC1: FINITE LOCALIZED EFFECTIVE ACTION -> SAME SECOND VARIATION
 --
--- BIDI role:
---   * backward: the CMP116/Heat-Doob consumer needs the Hessian of the SAME
---     finite-cutoff effective potential;
---   * forward: CMP116 represents that potential by localized analytic activity
---     pieces E(X,...), while CMP109 differentiates the finite-cutoff effective
---     action to obtain E^(2)/Pi.
---
--- This file owns the finite algebra between those descriptions.  The only
--- analytic input is the standard linearity of the second derivative.  No
--- Yang--Mills estimate is hidden in the finite summation.
+-- CMP109 Sect.5 defines Pi by the second background variation of E^(j), while
+-- CMP116 localizes the same finite-cutoff effective action into analytic pieces.
+-- This file proves the finite-sum differentiation algebra.  The source-facing
+-- content is reduced to the pointwise identity between the CMP109 potential and
+-- the CMP116 localized sum, plus the literal identification of CMP109 E^(2)/Pi
+-- with D² of that potential.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _+ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -30,34 +27,41 @@ mapList : ∀ {A B : Set} → (A → B) → List A → List B
 mapList f [] = []
 mapList f (x ∷ xs) = f x ∷ mapList f xs
 
+sumFunctions : ∀ {A : Set} → List (A → ℝ) → A → ℝ
+sumFunctions [] _ = 0ℝ
+sumFunctions (f ∷ fs) x = f x +ℝ sumFunctions fs x
+
 record FiniteLocalizedEffectiveAction : Set₁ where
   field
     Configuration Tangent Component : Set
     components : List Component
-
     localActivity : Component → Configuration → ℝ
     cmp109EffectivePotential : Configuration → ℝ
 
-    -- Literal source equality: the CMP109 finite-cutoff effective action is the
-    -- sum of the CMP116 localized activity pieces on the SAME configuration.
+    -- Literal source equality on the SAME finite-cutoff configuration.
     cmp109PotentialIsLocalizedSum : ∀ configuration →
       cmp109EffectivePotential configuration
-      ≡ sumℝ (mapList (λ component → localActivity component configuration) components)
+      ≡ sumFunctions (mapList localActivity components) configuration
 
 open FiniteLocalizedEffectiveAction public
 
-localizedPotential : FiniteLocalizedEffectiveAction → Configuration _ → ℝ
-localizedPotential dataSet configuration =
-  sumℝ
-    (mapList
-      (λ component → localActivity dataSet component configuration)
-      (components dataSet))
+localizedPotential :
+  (dataSet : FiniteLocalizedEffectiveAction) → Configuration dataSet → ℝ
+localizedPotential dataSet =
+  sumFunctions
+    (mapList (localActivity dataSet) (components dataSet))
 
 record SecondVariationLinearity
     (Configuration Tangent : Set) : Set₁ where
   field
     secondVariation :
       (Configuration → ℝ) → Configuration → Tangent → Tangent → ℝ
+
+    -- Standard extensionality of a derivative operator.
+    secondVariationCong :
+      ∀ f g → (∀ x → f x ≡ g x) → ∀ configuration u v →
+      secondVariation f configuration u v
+      ≡ secondVariation g configuration u v
 
     zeroSecondVariation : ∀ configuration u v →
       secondVariation (λ _ → 0ℝ) configuration u v ≡ 0ℝ
@@ -87,21 +91,49 @@ finiteLocalizedSecondVariation :
 finiteLocalizedSecondVariation dataSet calculus configuration u v =
   sumℝ (localHessianValues dataSet calculus configuration u v)
 
--- The recursive finite-sum theorem is deliberately stated as the standard
--- derivative-linearity consequence consumed by the physical carrier.  In the
--- repository's abstract real-analysis surface the function-extensional
--- replacement needed to rewrite `localizedPotential` is not primitive; the
--- calculus implementation supplies this conventional finite linearity fact.
-record FiniteSecondVariationCommutation
-    (dataSet : FiniteLocalizedEffectiveAction)
-    (calculus : SecondVariationLinearity
-      (Configuration dataSet) (Tangent dataSet)) : Set₁ where
-  field
-    secondVariationOfLocalizedSum : ∀ configuration u v →
-      secondVariation calculus (localizedPotential dataSet) configuration u v
-      ≡ finiteLocalizedSecondVariation dataSet calculus configuration u v
+secondVariationFiniteSum :
+  ∀ {Configuration Tangent}
+    (calculus : SecondVariationLinearity Configuration Tangent)
+    (functions : List (Configuration → ℝ)) configuration u v →
+  secondVariation calculus (sumFunctions functions) configuration u v
+  ≡ sumℝ
+      (mapList
+        (λ f → secondVariation calculus f configuration u v)
+        functions)
+secondVariationFiniteSum calculus [] configuration u v =
+  zeroSecondVariation calculus configuration u v
+secondVariationFiniteSum calculus (f ∷ functions) configuration u v =
+  trans
+    (addSecondVariation calculus f (sumFunctions functions) configuration u v)
+    (Agda.Builtin.Equality.cong
+      (λ tail → secondVariation calculus f configuration u v +ℝ tail)
+      (secondVariationFiniteSum calculus functions configuration u v))
 
-open FiniteSecondVariationCommutation public
+secondVariationOfLocalizedSum :
+  (dataSet : FiniteLocalizedEffectiveAction) →
+  (calculus : SecondVariationLinearity
+    (Configuration dataSet) (Tangent dataSet)) →
+  ∀ configuration u v →
+  secondVariation calculus (localizedPotential dataSet) configuration u v
+  ≡ finiteLocalizedSecondVariation dataSet calculus configuration u v
+secondVariationOfLocalizedSum dataSet calculus =
+  secondVariationFiniteSum calculus
+    (mapList (localActivity dataSet) (components dataSet))
+
+sourcePotentialReplacementUnderD2 :
+  (dataSet : FiniteLocalizedEffectiveAction) →
+  (calculus : SecondVariationLinearity
+    (Configuration dataSet) (Tangent dataSet)) →
+  ∀ configuration u v →
+  secondVariation calculus
+      (cmp109EffectivePotential dataSet) configuration u v
+  ≡ secondVariation calculus
+      (localizedPotential dataSet) configuration u v
+sourcePotentialReplacementUnderD2 dataSet calculus =
+  secondVariationCong calculus
+    (cmp109EffectivePotential dataSet)
+    (localizedPotential dataSet)
+    (cmp109PotentialIsLocalizedSum dataSet)
 
 record CMP109E2FromSamePotential
     (dataSet : FiniteLocalizedEffectiveAction)
@@ -110,21 +142,11 @@ record CMP109E2FromSamePotential
   field
     cmp109E2 : Configuration dataSet → Tangent dataSet → Tangent dataSet → ℝ
 
-    -- This is the CMP109 source-definition seam: E^(2)/Pi is the second
-    -- background variation of the SAME effective potential above.
+    -- CMP109 Eq.(5.1) / Sect.5 source-definition seam.
     cmp109E2IsSecondVariation : ∀ configuration u v →
       cmp109E2 configuration u v
       ≡ secondVariation calculus
           (cmp109EffectivePotential dataSet) configuration u v
-
-    -- Explicit transport of the source potential equality through D².  Keeping
-    -- this field named prevents an equivalent-but-differently-normalized action
-    -- from silently entering the carrier.
-    sourcePotentialReplacementUnderD2 : ∀ configuration u v →
-      secondVariation calculus
-          (cmp109EffectivePotential dataSet) configuration u v
-      ≡ secondVariation calculus
-          (localizedPotential dataSet) configuration u v
 
 open CMP109E2FromSamePotential public
 
@@ -132,27 +154,26 @@ cmp109E2IsFiniteLocalizedHessian :
   (dataSet : FiniteLocalizedEffectiveAction) →
   (calculus : SecondVariationLinearity
     (Configuration dataSet) (Tangent dataSet)) →
-  (commutation : FiniteSecondVariationCommutation dataSet calculus) →
   (source : CMP109E2FromSamePotential dataSet calculus) →
   ∀ configuration u v →
   cmp109E2 source configuration u v
   ≡ finiteLocalizedSecondVariation dataSet calculus configuration u v
-cmp109E2IsFiniteLocalizedHessian dataSet calculus commutation source configuration u v
-  rewrite cmp109E2IsSecondVariation source configuration u v
-  | sourcePotentialReplacementUnderD2 source configuration u v
-  | secondVariationOfLocalizedSum commutation configuration u v = refl
+cmp109E2IsFiniteLocalizedHessian dataSet calculus source configuration u v =
+  trans
+    (cmp109E2IsSecondVariation source configuration u v)
+    (trans
+      (sourcePotentialReplacementUnderD2 dataSet calculus configuration u v)
+      (secondVariationOfLocalizedSum dataSet calculus configuration u v))
+
+finiteSecondVariationLinearityLevel : ProofLevel
+finiteSecondVariationLinearityLevel = machineChecked
 
 finiteEffectiveActionHessianAssemblyLevel : ProofLevel
 finiteEffectiveActionHessianAssemblyLevel = machineChecked
 
-finiteSecondVariationLinearityLevel : ProofLevel
-finiteSecondVariationLinearityLevel = standardImported
-
--- Physical/source obligations left visible:
---   (i) instantiate `cmp109PotentialIsLocalizedSum` with the actual CMP109/CMP116
---       finite-cutoff action and activities;
---   (ii) instantiate `cmp109E2IsSecondVariation` in the exact source coordinate;
---   (iii) discharge the explicit D² replacement after convention alignment.
+-- The remaining source equalities are now irreducible and literal:
+--   CMP109 E^(j) = the finite CMP116 localized activity sum,
+--   CMP109 Pi/E^(2) = D² of that same E^(j), in the aligned coordinate.
 literalCMP109PotentialCMP116LocalizedSumLevel : ProofLevel
 literalCMP109PotentialCMP116LocalizedSumLevel = conditional
 
