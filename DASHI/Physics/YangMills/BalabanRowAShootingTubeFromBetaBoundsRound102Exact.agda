@@ -3,21 +3,6 @@ module DASHI.Physics.YangMills.BalabanRowAShootingTubeFromBetaBoundsRound102Exac
 
 ------------------------------------------------------------------------
 -- ROUND102 A: TWO-SIDED CUMULATIVE BETA BOUNDS MAKE THE SHOOTING TUBE INVARIANT
---
--- If
---
---      lowerPrefix <= B_K(u) <= upperPrefix
---
--- for every admitted shooting input u and
---
---      T_K(u) = u_R + B_K(u),
---
--- then T_K maps the closed interval
---
---      [u_R + lowerPrefix, u_R + upperPrefix]
---
--- into itself.  Pointwise CMP109 beta bounds already generate the cumulative
--- prefix bounds, so no independent endpoint-bracketing theorem is required.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -74,7 +59,7 @@ mapBelowUpperEndpoint :
 mapBelowUpperEndpoint dataSet u =
   subst
     (λ left → left ≤ℝ upperEndpoint dataSet)
-    (mapFormula dataSet u)
+    (sym (mapFormula dataSet u))
     (+-mono-≤ ≤ℝ-refl (cumulativeUpper dataSet u))
 
 mapInsideTube :
@@ -87,7 +72,5 @@ mapInsideTube dataSet u =
 shootingTubeFromBetaBoundsLevel : ProofLevel
 shootingTubeFromBetaBoundsLevel = machineChecked
 
--- Physical input is not endpoint bracketing: it is the SAME-history two-sided
--- beta estimate already needed by frozen Row A, plus q<1 for the shooting map.
 literalCMP109BetaBoundsGiveShootingSelfMapLevel : ProofLevel
 literalCMP109BetaBoundsGiveShootingSelfMapLevel = machineChecked
