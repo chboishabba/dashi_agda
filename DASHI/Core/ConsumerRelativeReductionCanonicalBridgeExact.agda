@@ -96,6 +96,85 @@ canonicalFutureKernelSubrelation rom actionLabel =
     (canonicalFutureSafety rom actionLabel)
 
 ------------------------------------------------------------------------
+-- Optional symmetry quotient theorem.
+--
+-- Equivariance alone does NOT mean the symmetry should be quotiented out.  The
+-- reduced action must additionally fix the represented state for the declared
+-- consumer.  Only then is the fine symmetry orbit consumer-future invisible.
+------------------------------------------------------------------------
+
+record ConsumerInvisibleSymmetry
+    {Fine Action Observation : Set}
+    {rom : Reduction.ConsumerRelativeReduction Fine Action Observation}
+    {fineSymmetry : Reduction.SymmetryAction Fine}
+    {reducedSymmetry : Reduction.SymmetryAction (Reduction.Reduced rom)}
+    (compatible :
+      Reduction.SymmetryCompatibleReduction rom fineSymmetry reducedSymmetry) : Set₁ where
+  constructor consumerInvisibleSymmetry
+  field
+    reducedOrbitFixed :
+      (g : Reduction.Symmetry fineSymmetry) (state : Fine) →
+      Reduction.act reducedSymmetry
+        (Reduction.symmetryMap compatible g)
+        (Reduction.encode rom state)
+      ≡ Reduction.encode rom state
+
+open ConsumerInvisibleSymmetry public
+
+symmetryOrbitCollapsesInReduction :
+  ∀ {Fine Action Observation}
+    {rom : Reduction.ConsumerRelativeReduction Fine Action Observation}
+    {fineSymmetry : Reduction.SymmetryAction Fine}
+    {reducedSymmetry : Reduction.SymmetryAction (Reduction.Reduced rom)}
+    {compatible :
+      Reduction.SymmetryCompatibleReduction rom fineSymmetry reducedSymmetry} →
+  ConsumerInvisibleSymmetry compatible →
+  (g : Reduction.Symmetry fineSymmetry) →
+  (state : Fine) →
+  Reduction.encode rom (Reduction.act fineSymmetry g state)
+  ≡ Reduction.encode rom state
+symmetryOrbitCollapsesInReduction invisible g state =
+  trans
+    (Reduction.encodeEquivariant _ g state)
+    (reducedOrbitFixed invisible g state)
+
+symmetryOrbitIsCanonicalFutureEquivalent :
+  ∀ {Fine Action Observation}
+    {rom : Reduction.ConsumerRelativeReduction Fine Action Observation}
+    {fineSymmetry : Reduction.SymmetryAction Fine}
+    {reducedSymmetry : Reduction.SymmetryAction (Reduction.Reduced rom)}
+    {compatible :
+      Reduction.SymmetryCompatibleReduction rom fineSymmetry reducedSymmetry} →
+  ConsumerInvisibleSymmetry compatible →
+  (actionLabel : Action → String) →
+  (g : Reduction.Symmetry fineSymmetry) →
+  (state : Fine) →
+  Future.FutureObservationEquivalent
+    (Canonical.deterministicSystem (Reduction.fineStep rom) actionLabel)
+    (Reduction.fineObserve rom)
+    (Reduction.act fineSymmetry g state)
+    state
+symmetryOrbitIsCanonicalFutureEquivalent invisible actionLabel g state =
+  Future.kernelContainedInFutureEquivalence
+    (canonicalFutureSafety _ actionLabel)
+    (symmetryOrbitCollapsesInReduction invisible g state)
+
+consumerVisibleSymmetryCannotBeQuotiented :
+  ∀ {Fine Action Observation}
+    (rom : Reduction.ConsumerRelativeReduction Fine Action Observation) →
+  {left right : Fine} →
+  Reduction.encode rom left ≡ Reduction.encode rom right →
+  (Reduction.fineObserve rom left ≡ Reduction.fineObserve rom right → ⊥) →
+  ⊥
+consumerVisibleSymmetryCannotBeQuotiented rom sameCode visibleDifference =
+  visibleDifference
+    (trans
+      (Reduction.observationFactors rom _)
+      (trans
+        (cong (Reduction.reducedObserve rom) sameCode)
+        (sym (Reduction.observationFactors rom _))))
+
+------------------------------------------------------------------------
 -- Active measurement discrimination is already the repo's generic
 -- DistinguishingExperiment theorem with a singleton experiment language.
 ------------------------------------------------------------------------
@@ -189,6 +268,9 @@ record ConsumerReductionCanonicalBridgeBoundary : Set where
   field
     certifiedReductionKernelIsCanonicalFutureSafe : Bool
     symmetryCompatibilityIsJustAnotherIntertwiningReceipt : Bool
+    invisibleSymmetryNeedsReducedOrbitFixedness : Bool
+    invisibleSymmetryOrbitIsCanonicalFutureEquivalent : Bool
+    consumerVisibleSymmetryCannotBeSilentlyQuotiented : Bool
     oneFutureCounterexampleRefutesCandidateFutureSafety : Bool
     measurementSplitterReusesActiveInformationSemantics : Bool
     canonicalFutureSafetyImpliesMechanisticRealization : Bool
@@ -199,4 +281,4 @@ canonicalConsumerReductionCanonicalBridgeBoundary :
   ConsumerReductionCanonicalBridgeBoundary
 canonicalConsumerReductionCanonicalBridgeBoundary =
   consumerReductionCanonicalBridgeBoundary
-    true true true true false refl
+    true true true true true true true false refl
