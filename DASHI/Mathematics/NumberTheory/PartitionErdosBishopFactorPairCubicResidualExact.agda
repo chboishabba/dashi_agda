@@ -8,10 +8,10 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosBishopFactorPairCubicResidua
 -- tangent bound from PartitionErdosBishopCubicStepRateExact applies.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; suc; _*_)
 open import Data.Nat.Base using (_≤_)
 import Data.Nat.Properties as NatP
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; cong; sym; trans)
 
 import Real as BishopReal
 import RealProperties as BishopP
@@ -54,11 +54,11 @@ factorNestedScaleIsResidualScale :
       (factorDivisor pair)
       (factorStep rate pair))
     (Iterated.natScale r (Rate.step rate))
-factorNestedScaleIsResidualScale rate pair =
+factorNestedScaleIsResidualScale {r = r} rate pair =
   let
     k = factorCopies pair
     v = factorDivisor pair
-    productReverse : v NatP.* k ≡ _
+    productReverse : v * k ≡ r
     productReverse =
       trans
         (NatP.*-comm v k)
