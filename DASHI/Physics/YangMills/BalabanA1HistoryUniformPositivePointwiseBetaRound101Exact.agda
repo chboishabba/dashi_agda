@@ -26,7 +26,8 @@ module DASHI.Physics.YangMills.BalabanA1HistoryUniformPositivePointwiseBetaRound
 -- summation theorem.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _-_; _*_; _≤_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _+_; _-_; -_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -38,6 +39,7 @@ import DASHI.Physics.YangMills.BalabanCMP109A1CrossPollinatedDebtProducersExact 
 import DASHI.Physics.YangMills.BalabanYM4FiveChannelQuarticBetaAdapterExact as Five
 import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaLowerRemainderExact as Beta
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
 
 record UniformHistoryPositiveBetaData (History Cell : Set) : Set₁ where
   field
@@ -84,7 +86,6 @@ historyDebtBelowCanonicalDebt dataSet history =
     coefficient = Debt.fiveChannelInteractionCoefficient producer
     gamma = Debt.gamma producer
 
-    coefficientNN = Five.coefficientTotalNN (Debt.dataSet producer)
     gammaNN = Debt.gammaNonnegative producer
     canonicalNN = Absorb.gammaStarNonnegative
       (uniformCoefficient dataSet)
@@ -93,25 +94,29 @@ historyDebtBelowCanonicalDebt dataSet history =
       (gaussianFloorPositive dataSet)
 
     fourthNN : 0ℚ ≤ Beta.power4 gamma
-    fourthNN =
-      let squareNN = DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2.squareNonnegative gamma
-      in DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2.squareNonnegative (gamma * gamma)
-
-    canonicalFourthNN : 0ℚ ≤ Beta.power4 (canonicalGamma dataSet)
-    canonicalFourthNN =
-      let squareNN = DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2.squareNonnegative (canonicalGamma dataSet)
-      in DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2.squareNonnegative
-          (canonicalGamma dataSet * canonicalGamma dataSet)
+    fourthNN = FiniteL2.squareNonnegative (gamma * gamma)
 
     fourthBelow = Beta.power4Monotone
       gamma (canonicalGamma dataSet)
       gammaNN canonicalNN (historyGammaBelowCanonical dataSet history)
 
+    coefficientScaledRaw :
+      Beta.power4 gamma * coefficient
+      ≤ Beta.power4 gamma * uniformCoefficient dataSet
+    coefficientScaledRaw = Norm.scaleNonnegative
+      (Beta.power4 gamma) fourthNN (coefficientUniform dataSet history)
+
     coefficientStep :
       coefficient * Beta.power4 gamma
       ≤ uniformCoefficient dataSet * Beta.power4 gamma
-    coefficientStep = Norm.scaleRight
-      fourthNN (coefficientUniform dataSet history)
+    coefficientStep =
+      subst
+        (λ left → left ≤ uniformCoefficient dataSet * Beta.power4 gamma)
+        (ℚP.*-comm (Beta.power4 gamma) coefficient)
+        (subst
+          (λ right → Beta.power4 gamma * coefficient ≤ right)
+          (ℚP.*-comm (Beta.power4 gamma) (uniformCoefficient dataSet))
+          coefficientScaledRaw)
 
     powerStep :
       uniformCoefficient dataSet * Beta.power4 gamma
