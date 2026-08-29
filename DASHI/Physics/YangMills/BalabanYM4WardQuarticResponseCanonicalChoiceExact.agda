@@ -21,12 +21,13 @@ module DASHI.Physics.YangMills.BalabanYM4WardQuarticResponseCanonicalChoiceExact
 --                (C + L_local + 4 R D) gamma < b_Ward.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _≤_; _<_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Relation.Nullary.Decidable using (toWitness)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4RowAWardFloorCanonicalGateExact as Ward
+import DASHI.Physics.YangMills.BalabanYM4QuarticResponseCanonicalGateExact as Gate
 import DASHI.Physics.YangMills.BalabanYM4QuarticResponseCanonicalChoiceExact as Choice
 
 record WardQuarticResponseConstants : Set where
@@ -93,8 +94,7 @@ wardQuarticResponseGammaAtMostOne dataSet =
 wardQuarticResponsePaysLinearGate :
   (dataSet : WardQuarticResponseConstants) →
   (interactionConstant dataSet + localDerivative dataSet
-    + DASHI.Physics.YangMills.BalabanYM4QuarticResponseCanonicalGateExact.fourℚ
-        * responseCoefficient dataSet * sourceCoefficient dataSet)
+    + Gate.fourℚ * responseCoefficient dataSet * sourceCoefficient dataSet)
     * wardQuarticResponseGamma dataSet
   < Ward.wardGaussianFloor
 wardQuarticResponsePaysLinearGate dataSet =
