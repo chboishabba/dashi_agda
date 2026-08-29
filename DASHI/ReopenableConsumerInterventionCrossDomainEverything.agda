@@ -16,6 +16,8 @@ import DASHI.Core.ConsumerIndexedGovernedTransitionExact
 import DASHI.Core.ConsumerObserverJoinResidualExact
 import DASHI.Core.ConsumerSafeFidelityEscalationExact
 import DASHI.Core.ConsumerRelativeReductionKernelExact
+import DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact
+import DASHI.Core.ConsumerRelativeReductionSearchExact
 import DASHI.Core.CounterexampleGuidedConsumerRefinementExact
 import DASHI.Core.DualEffectInformationActionExact
 import DASHI.Core.EvidenceReliabilityPolarityExact
@@ -29,6 +31,7 @@ import DASHI.Core.RelationalTensionCompressionExact
 import DASHI.Core.ReopenableConsumerInterventionCrossDomainRegression
 import DASHI.Core.ReopenableConsumerInterventionKernelExact
 import DASHI.Core.ReopenableHypothesisForestExact
+import DASHI.Core.RobustInterventionAcrossHypothesesExact
 import DASHI.Core.SelectiveAuthorityCertificateExact
 import DASHI.Core.StructuredResidualProductExact
 import DASHI.Core.TypedEvidenceDependencyExact
@@ -52,6 +55,8 @@ import DASHI.Environment.LESSituatedObservationInteractionExact
 import DASHI.Environment.LESObserverContextDiscoveryConeExact
 import DASHI.Environment.LESDomainBasisBidiFrontierExact
 import DASHI.Environment.LESConsumerRelativeMechanismReductionExact
+import DASHI.Environment.LESAdaptiveSPACModelSearchExact
+import DASHI.Environment.LESModelFibreRobustInterventionExact
 import DASHI.Environment.LESFluidPhysicsCouplingExact
 import DASHI.Environment.LESBioelectricGaugeChemistryExact
 import DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact
