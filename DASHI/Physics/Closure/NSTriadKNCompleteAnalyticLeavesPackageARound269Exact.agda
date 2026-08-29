@@ -1,29 +1,16 @@
 module DASHI.Physics.Closure.NSTriadKNCompleteAnalyticLeavesPackageARound269Exact where
 
 ------------------------------------------------------------------------
--- ROUND269 / COMPLETE A B C D* F G* H BIDI LANE -> LITERAL ROUND240 BUDGET
+-- ROUND269 / CONDITIONAL A B C D* F G* H COMPILER -> LITERAL ROUND240 BUDGET
 --
--- This capstone is deliberately not another proxy theorem. It records the
--- exact source instances produced in R263--R268 on one physical family and
--- compiles the contradiction all the way back to
--- PhysicalNSMixedHelicitySpacetimeBudget.
+-- R263--R266 and R268 resolve the standard/source instances A, B, C, D*, H.
+-- R267 deliberately leaves F/G* as one explicit conditional authority because
+-- known GKP/ESS results do not automatically promote mixed-defect badness to
+-- the required singular critical element / terminal-vorticity hypotheses.
 --
--- Forward chain under a bad-sequence hypothesis:
---
---   A periodic Holder/Sobolev + integration
---   B canonical G2 exact energy -> same physical dissipation bound
---      => Round241 payment makes defect failure force critical barrier failure
---   C finite-dimensional continuity/IVT + witness selection
---      => literal bounded first-hit sequence
---   D* R260 profile theorem on exactly those first-hit states
---   F  GKP minimal nonzero defect-carrying critical profile
---   G* ESS backward uniqueness => contradiction
---   H  no bad sequence => cutoff-independent bound
---      => literal Round240 Package-A budget.
---
--- External infinite-dimensional analysis remains source-owned; the Agda code
--- compiles the exact dependency and same-object identities without claiming a
--- kernel formalisation of Sobolev/profile/ESS theory.
+-- Consequently this file is the exact FINAL COMPILER: once the two R270
+-- research implications are proved on the same selected profile, the result
+-- is the literal PhysicalNSMixedHelicitySpacetimeBudget, not another proxy.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc; _⊔_)
@@ -83,14 +70,11 @@ module CompleteAnalyticLeaves
           S G2 Time
           (R251.integratedDissipation (R263.monotoneSpacetime leafA))
 
-      -- Under the contradiction hypothesis, A+B and Round241 manufacture the
-      -- actual threshold-crossing/first-hit instance.
       leafCFromBad :
         BadSequence →
         R265.FiniteDimensionalFirstHitInstance
           Time Before criticalSize threshold
 
-      -- The profile theorem is attached to the exact sequence built by C.
       leafDFromBad :
         (bad : BadSequence) →
         R266.FirstHitPeriodicProfileInstance
@@ -98,9 +82,8 @@ module CompleteAnalyticLeaves
           (R265.buildActualFirstHitCriticalSequence (leafCFromBad bad))
           TorusState EuclideanState stateAt
 
-      -- GKP selection and ESS rigidity are applied to the profile family
-      -- descending from D*. This source-level same-object receipt prevents an
-      -- unrelated critical element from being substituted.
+      -- CONDITIONAL F/G*: R270 explains why known GKP/ESS theorems do not
+      -- manufacture this field automatically from mixed-defect badness.
       leafFGFromBad :
         BadSequence →
         R267.CriticalProfileSelectionESSInstance Profile
@@ -127,24 +110,32 @@ module CompleteAnalyticLeaves
     H.noBadSequenceBuildsPhysicalPackageA T (leafH A)
       (badSequenceImpossible A)
 
-round269LeavesABCDstarFGstarHIntegrated : Bool
-round269LeavesABCDstarFGstarHIntegrated = true
+round269ABCDstarHSourceInstancesResolved : Bool
+round269ABCDstarHSourceInstancesResolved = true
 
-round269BadSequenceContradictionCompilesToLiteralRound240Budget : Bool
-round269BadSequenceContradictionCompilesToLiteralRound240Budget = true
+round269ConditionalFGCompilerTargetsLiteralRound240Budget : Bool
+round269ConditionalFGCompilerTargetsLiteralRound240Budget = true
+
+round269PhysicalFGstarInstalled : Bool
+round269PhysicalFGstarInstalled = false
+
+round269PhysicalPackageAClosed : Bool
+round269PhysicalPackageAClosed = false
 
 round269NoNewPackageAProxy : Bool
 round269NoNewPackageAProxy = true
 
-round269ExternalInfiniteDimensionalAnalysisKernelDerivedHere : Bool
-round269ExternalInfiniteDimensionalAnalysisKernelDerivedHere = false
-
 round269ClayPromotion : Bool
 round269ClayPromotion = false
 
-round269BadSequenceContradictionCompilesToLiteralRound240BudgetIsTrue :
-  round269BadSequenceContradictionCompilesToLiteralRound240Budget ≡ true
-round269BadSequenceContradictionCompilesToLiteralRound240BudgetIsTrue = refl
+round269ConditionalFGCompilerTargetsLiteralRound240BudgetIsTrue :
+  round269ConditionalFGCompilerTargetsLiteralRound240Budget ≡ true
+round269ConditionalFGCompilerTargetsLiteralRound240BudgetIsTrue = refl
 
-round269ClayPromotionIsFalse : round269ClayPromotion ≡ false
-round269ClayPromotionIsFalse = refl
+round269PhysicalFGstarInstalledIsFalse :
+  round269PhysicalFGstarInstalled ≡ false
+round269PhysicalFGstarInstalledIsFalse = refl
+
+round269PhysicalPackageAClosedIsFalse :
+  round269PhysicalPackageAClosed ≡ false
+round269PhysicalPackageAClosedIsFalse = refl
