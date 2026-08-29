@@ -15,6 +15,7 @@ on:
       - 'DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda'
       - 'DASHI/Reasoning/RelationRepresentationExperimentProtocolExact.agda'
       - 'DASHI/Reasoning/RelationRepresentationCandidateDiscriminationExact.agda'
+      - 'DASHI/Reasoning/RelationRepresentationMechanismSocketExact.agda'
       - 'DASHI/Reasoning/FiniteRelationLinearAlgebraProducerExact.agda'
       - 'DASHI/Reasoning/FiniteRelationSVDJacobianProducerExact.agda'
       - 'DASHI/Reasoning/EigenslurFlourishingRelationBoundaryExact.agda'
