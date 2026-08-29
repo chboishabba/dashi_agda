@@ -1,14 +1,5 @@
 module DASHI.Foundations.Wette1969CertifiedHistoricalConclusionProducerExact where
 
-------------------------------------------------------------------------
--- CERTIFIED HISTORICAL CONCLUSION PRODUCER
---
--- `CertifiedFormulaProducer` permits an atomic receipt to seed a producer.  For
--- the 9.1.5 scaffold we need the stronger statement that a requested formula is
--- actually the conclusion of a certified historical rule application somewhere
--- in the trace.  This record isolates that stronger notion.
-------------------------------------------------------------------------
-
 open import DASHI.Core.Prelude
 
 import DASHI.Core.ProofCarryingRuleApplicationExact as PCRA
@@ -47,18 +38,23 @@ producerTrace producer =
     (prefix producer)
     (PCRA.choose (selected producer) (suffix producer))
 
+-- Define the target through the complete producer trace.  This makes dependent
+-- producer chains compose definitionally with `appendCertifiedTrace`.
 producerTarget :
   {initial : Context} → {formula : Formula} →
   CertifiedHistoricalConclusionProducer initial formula → Context
 producerTarget producer =
-  PCRA.runCertifiedTrace historicalSystem (suffix producer)
+  PCRA.runCertifiedTrace historicalSystem (producerTrace producer)
 
 producedAtTarget :
   {initial : Context} → {formula : Formula} →
   (producer : CertifiedHistoricalConclusionProducer initial formula) →
   formula Finite.∈Context (producerTarget producer)
 producedAtTarget producer
-  rewrite sym (conclusionMatches producer) =
+  rewrite PCRA.runAppendCertifiedTrace
+    (prefix producer)
+    (PCRA.choose (selected producer) (suffix producer))
+  | sym (conclusionMatches producer) =
   Closure.headConclusionAvailableAtTraceTarget
     (selected producer)
     (suffix producer)
@@ -90,6 +86,9 @@ record Wette1969CertifiedHistoricalConclusionProducerBoundary : Set where
     requestedFormulaMustEqualSelectedRuleConclusion : Bool
     requestedFormulaMustEqualSelectedRuleConclusionIsTrue :
       requestedFormulaMustEqualSelectedRuleConclusion ≡ true
+    completeProducerTargetUsesWholeCertifiedTrace : Bool
+    completeProducerTargetUsesWholeCertifiedTraceIsTrue :
+      completeProducerTargetUsesWholeCertifiedTrace ≡ true
     bareInitialMembershipCannotByItselfSatisfyThisProducer : Bool
     bareInitialMembershipCannotByItselfSatisfyThisProducerIsTrue :
       bareInitialMembershipCannotByItselfSatisfyThisProducer ≡ true
@@ -98,4 +97,4 @@ canonicalWette1969CertifiedHistoricalConclusionProducerBoundary :
   Wette1969CertifiedHistoricalConclusionProducerBoundary
 canonicalWette1969CertifiedHistoricalConclusionProducerBoundary =
   wette1969CertifiedHistoricalConclusionProducerBoundary
-    true refl true refl true refl
+    true refl true refl true refl true refl
