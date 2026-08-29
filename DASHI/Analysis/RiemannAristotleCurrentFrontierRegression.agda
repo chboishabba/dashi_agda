@@ -18,60 +18,50 @@ primeProjectiveDebtZero :
     F.canonicalAristotleCurrentFrontier ≡ true
 primeProjectiveDebtZero = refl
 
-gammaQuadraticEnvelopeClosed :
-  F.AristotleCurrentFrontier.gammaProjectiveQuadraticEnvelopeClosedInLean
-    F.canonicalAristotleCurrentFrontier ≡ true
-gammaQuadraticEnvelopeClosed = refl
-
-poleQuadraticEnvelopeClosed :
-  F.AristotleCurrentFrontier.poleProjectiveQuadraticEnvelopeClosedInLean
-    F.canonicalAristotleCurrentFrontier ≡ true
-poleQuadraticEnvelopeClosed = refl
-
 targetLeadingCoefficientClosed :
   F.AristotleCurrentFrontier.targetLeadingCoefficientAndRemainderClosedInLean
     F.canonicalAristotleCurrentFrontier ≡ true
 targetLeadingCoefficientClosed = refl
 
-conditionalThreeTaperClosed :
-  F.AristotleCurrentFrontier.conditionalTwoZeroThreeTaperClosedInLean
+reflectionPairKernelClosed :
+  F.AristotleCurrentFrontier.reflectionPairKernelClosedInLean
     F.canonicalAristotleCurrentFrontier ≡ true
-conditionalThreeTaperClosed = refl
+reflectionPairKernelClosed = refl
 
-conditionalThreeTaperNotUniversal :
-  F.AristotleCurrentFrontier.conditionalTwoZeroIsUniversalRHBridge
+reflectionFarTailConvergent :
+  F.AristotleCurrentFrontier.reflectionFarTailAbsoluteConvergenceClosedInLean
+    F.canonicalAristotleCurrentFrontier ≡ true
+reflectionFarTailConvergent = refl
+
+uniformCurvatureClosed :
+  F.AristotleCurrentFrontier.uniformReflectionCarrierCurvatureClosedInLean
+    F.canonicalAristotleCurrentFrontier ≡ true
+uniformCurvatureClosed = refl
+
+latestLeanBridgeKernelChecked :
+  F.AristotleCurrentFrontier.latestLeanBridgeBuildKernelChecked
+    F.canonicalAristotleCurrentFrontier ≡ true
+latestLeanBridgeKernelChecked = refl
+
+wholeCarrierStrictBudgetRejected :
+  F.AristotleCurrentFrontier.wholePostSchurCarrierStrictBudgetValid
     F.canonicalAristotleCurrentFrontier ≡ false
-conditionalThreeTaperNotUniversal = refl
+wholeCarrierStrictBudgetRejected = refl
 
-reflectionPairKernelImplemented :
-  F.AristotleCurrentFrontier.reflectionPairKernelSourceImplementedInLean
-    F.canonicalAristotleCurrentFrontier ≡ true
-reflectionPairKernelImplemented = refl
-
-reflectionProjectiveCarrierImplemented :
-  F.AristotleCurrentFrontier.reflectionSymmetrizedProjectiveCarrierSourceImplementedInLean
-    F.canonicalAristotleCurrentFrontier ≡ true
-reflectionProjectiveCarrierImplemented = refl
-
-deterministicSchurCompilerImplemented :
-  F.AristotleCurrentFrontier.deterministicProjectiveSchurCompilerSourceImplementedInLean
-    F.canonicalAristotleCurrentFrontier ≡ true
-deterministicSchurCompilerImplemented = refl
-
-newBidiLeanReceiptPending :
-  F.AristotleCurrentFrontier.newBidiLeanSourceMachineChecked
+targetRemainderSplitOpen :
+  F.AristotleCurrentFrontier.literalTargetRemainderSplitClosed
     F.canonicalAristotleCurrentFrontier ≡ false
-newBidiLeanReceiptPending = refl
+targetRemainderSplitOpen = refl
+
+strictSignedRemainderCancellationOpen :
+  F.AristotleCurrentFrontier.strictSignedRemainderCancellationClosed
+    F.canonicalAristotleCurrentFrontier ≡ false
+strictSignedRemainderCancellationOpen = refl
 
 deterministicThreeTaperConstructionOpen :
   F.AristotleCurrentFrontier.deterministicNuisanceThreeTaperConstructionClosed
     F.canonicalAristotleCurrentFrontier ≡ false
 deterministicThreeTaperConstructionOpen = refl
-
-signedPostSchurTailOpen :
-  F.AristotleCurrentFrontier.signedPostSchurOffOrdinateEstimateClosed
-    F.canonicalAristotleCurrentFrontier ≡ false
-signedPostSchurTailOpen = refl
 
 lowOrdinateComplementOpen :
   F.AristotleCurrentFrontier.lowOrdinateComplementCertified
