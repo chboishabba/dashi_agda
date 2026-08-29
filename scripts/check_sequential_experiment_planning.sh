@@ -14,6 +14,7 @@ FILES=(
   DASHI/Core/SequentialRelationalExperimentPlannerExact.agda
   DASHI/Core/JointSequentialInformationFidelityPolicyExact.agda
   DASHI/Core/ConsumerReductionJointPolicyBridgeExact.agda
+  DASHI/Core/JointSequentialInformationFidelityFixtureExact.agda
   DASHI/Core/SequentialExperimentPlanningValidation.agda
   DASHI/Physics/Foundations/GRQFTDiscriminatorSynthesisExact.agda
   DASHI/Physics/Foundations/GRQFTSequentialExperimentPlannerExact.agda
@@ -43,12 +44,18 @@ grep -q 'everyHypothesisMustPredictOneDeterministicOutcomeIsFalse' DASHI/Core/Se
 grep -q '^data JointSequentialPolicy' DASHI/Core/JointSequentialInformationFidelityPolicyExact.agda
 grep -q '^data EvidenceCapableKind' DASHI/Core/JointSequentialInformationFidelityPolicyExact.agda
 grep -q '^bundleAsEvidenceMove :' DASHI/Core/JointSequentialInformationFidelityPolicyExact.agda
+grep -q '^record FidelityUnlocksDecision' DASHI/Core/JointSequentialInformationFidelityPolicyExact.agda
 grep -q 'fidelityMoveAloneRefinesEmpiricalHypothesisFibreIsFalse' DASHI/Core/JointSequentialInformationFidelityPolicyExact.agda
+grep -q 'fidelityCanRemoveModelAdequacyObstructionIsTrue' DASHI/Core/JointSequentialInformationFidelityPolicyExact.agda
 grep -q '^reductionEscalationAsFidelityMove :' DASHI/Core/ConsumerReductionJointPolicyBridgeExact.agda
+grep -q '^jointPolicy :' DASHI/Core/JointSequentialInformationFidelityFixtureExact.agda
+grep -q '^fidelityUnlocksActionB :' DASHI/Core/JointSequentialInformationFidelityFixtureExact.agda
+grep -q 'measurementOutcomeCanDetermineWhetherEscalationIsNeededIsTrue' DASHI/Core/JointSequentialInformationFidelityFixtureExact.agda
 grep -q '^record SequentialPhysicalExperimentProgramme' DASHI/Physics/Foundations/GRQFTSequentialExperimentPlannerExact.agda
 grep -q '^record LESSequentialConsumerExperiment' DASHI/Environment/LESSequentialExperimentPlannerExact.agda
 grep -q '^record LESSequentialActionabilityExperiment' DASHI/Environment/LESSequentialExperimentPlannerExact.agda
 grep -q '^record LESJointMeasurementFidelityCampaign' DASHI/Environment/LESJointSequentialMeasurementFidelityPolicyExact.agda
+grep -q '^record LESFidelityUnlocksControl' DASHI/Environment/LESJointSequentialMeasurementFidelityPolicyExact.agda
 grep -q '^bucketToRichardsFidelityMove :' DASHI/Environment/LESJointSequentialMeasurementFidelityPolicyExact.agda
 grep -q 'richerModelAutomaticallyCreatesNewEmpiricalEvidenceIsFalse' DASHI/Environment/LESAdaptiveConsumerLoopCrossPollinationExact.agda
 
