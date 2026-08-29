@@ -16,6 +16,12 @@ FILES=(
   DASHI/Foundations/Wette1969Rule915ObligationSubgraphsExact.agda
   DASHI/Foundations/Wette1969Rule915CertifiedObligationApplicationExact.agda
   DASHI/Foundations/Wette1969Rule915ObligationProducerChainExact.agda
+  DASHI/Foundations/Wette1969CertifiedFormulaProducerExact.agda
+  DASHI/Foundations/Wette1969FreshnessSpineExact.agda
+  DASHI/Foundations/Wette1969Rule7FusionDerivationExact.agda
+  DASHI/Foundations/Wette1969Rule10AbbreviationDerivationExact.agda
+  DASHI/Foundations/Wette1969Rule915GeneratedScaffoldExact.agda
+  DASHI/Foundations/Wette1969Rule915SeparatedMajorProofsExact.agda
   DASHI/Foundations/Wette1969InductionBranchPremise8ProducerExact.agda
   DASHI/Foundations/Wette1969Rule915Premise1921DerivationExact.agda
   DASHI/Foundations/Wette1969Rule915Premise2425DerivationExact.agda
@@ -54,6 +60,19 @@ grep -q 'premise18IsExplicitPredecessorInductionProofSocketIsTrue' DASHI/Foundat
 grep -q 'premise27IsExplicitDefiniensIndependenceProofSocketIsTrue' DASHI/Foundations/Wette1969Rule915TwoProofCutsetExact.agda
 grep -q 'twoProofCutsetAlreadyDischargesEitherMajorProofIsFalse' DASHI/Foundations/Wette1969Rule915TwoProofCutsetExact.agda
 
+grep -q 'rightCompositionRule810NowLiteralIsTrue' DASHI/Foundations/Wette1969FreshnessSpineExact.agda
+grep -q 'compoundFreshnessCanBeHistoricallyBuiltFromAtomicReceiptsIsTrue' DASHI/Foundations/Wette1969FreshnessSpineExact.agda
+grep -q 'rules71And72NowLiteralHistoricalBodiesIsTrue' DASHI/Foundations/Wette1969Rule7FusionDerivationExact.agda
+grep -q 'rules101And102NowLiteralHistoricalBodiesIsTrue' DASHI/Foundations/Wette1969Rule10AbbreviationDerivationExact.agda
+grep -q 'producerCarriesHistoricalTraceIsTrue' DASHI/Foundations/Wette1969CertifiedFormulaProducerExact.agda
+
+grep -q 'formationAndEighteenScaffoldSlotsAreProducedByHistoricalTracesIsTrue' DASHI/Foundations/Wette1969Rule915GeneratedScaffoldExact.agda
+grep -q 'premise9IsIncludedInInductionScaffoldIsTrue' DASHI/Foundations/Wette1969Rule915GeneratedScaffoldExact.agda
+grep -q 'onlyPremises18And27RemainAsMajorProofSocketsIsTrue' DASHI/Foundations/Wette1969Rule915GeneratedScaffoldExact.agda
+grep -q 'generatedScaffoldMeansFreshnessForArbitraryWordsIsFalse' DASHI/Foundations/Wette1969Rule915GeneratedScaffoldExact.agda
+grep -q 'bothMajorProofsAreIndexedByOneShared1015ObjectIsTrue' DASHI/Foundations/Wette1969Rule915SeparatedMajorProofsExact.agda
+grep -q 'majorProofsAreNotManufacturedBySyntacticScaffoldIsTrue' DASHI/Foundations/Wette1969Rule915SeparatedMajorProofsExact.agda
+
 grep -q 'twoProofCutsetNowHasSameObjectParameterWeldIsTrue' DASHI/Foundations/Wette1969Rule915CoherentTwoProofApplicationExact.agda
 
 grep -q 'premise8NoLongerNeedsExternalMarkFormationEvidenceIsTrue' DASHI/Foundations/Wette1969InductionBranchPremise8ProducerExact.agda
@@ -81,6 +100,12 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Foundations/Wette1969Rule915ObligationSubgraphsExact.agda \
   DASHI/Foundations/Wette1969Rule915CertifiedObligationApplicationExact.agda \
   DASHI/Foundations/Wette1969Rule915ObligationProducerChainExact.agda \
+  DASHI/Foundations/Wette1969CertifiedFormulaProducerExact.agda \
+  DASHI/Foundations/Wette1969FreshnessSpineExact.agda \
+  DASHI/Foundations/Wette1969Rule7FusionDerivationExact.agda \
+  DASHI/Foundations/Wette1969Rule10AbbreviationDerivationExact.agda \
+  DASHI/Foundations/Wette1969Rule915GeneratedScaffoldExact.agda \
+  DASHI/Foundations/Wette1969Rule915SeparatedMajorProofsExact.agda \
   DASHI/Foundations/Wette1969InductionBranchPremise8ProducerExact.agda \
   DASHI/Foundations/Wette1969Rule915Premise1921DerivationExact.agda \
   DASHI/Foundations/Wette1969Rule915Premise2425DerivationExact.agda \
