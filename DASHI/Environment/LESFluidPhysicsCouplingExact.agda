@@ -1,6 +1,7 @@
 module DASHI.Environment.LESFluidPhysicsCouplingExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 
 import DASHI.Chemistry.TransitionKernel as Chemistry
 import DASHI.Environment.CertifiedSpatialTransportExact as Certified
@@ -32,10 +33,6 @@ data FluidApplication : Set where
   sedimentBearingFlow
   cellularOrTissueFluidTransport
   : FluidApplication
-
-------------------------------------------------------------------------
--- Dimensioned fluid-field seam.
-------------------------------------------------------------------------
 
 record SIFluidFieldSocket : Set₁ where
   constructor siFluidFieldSocket
@@ -81,10 +78,6 @@ record FluidTransportCoupling
 
 open FluidTransportCoupling public
 
-------------------------------------------------------------------------
--- Reaction/transport coupling.
-------------------------------------------------------------------------
-
 record ReactionTransportWeld
     {Source Target : Spatial.SpatialNode}
     (transportWitness : Certified.CertifiedSourceToObservation Source Target)
@@ -101,10 +94,6 @@ record ReactionTransportWeld
     commonSpaceTimeCarrierReference : String
 
 open ReactionTransportWeld public
-
-------------------------------------------------------------------------
--- The existing NS paper interface is imported as the literal proof-lane owner.
-------------------------------------------------------------------------
 
 nsProofLaneReference : String
 nsProofLaneReference =
