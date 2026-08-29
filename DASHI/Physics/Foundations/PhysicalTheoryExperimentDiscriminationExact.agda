@@ -59,9 +59,9 @@ Discriminates :
 Discriminates predicts experiment left right =
   Σ _ λ observation →
     (predicts left experiment observation ×
-     ¬ predicts right experiment observation) ⊎
+     ¬ (predicts right experiment observation)) ⊎
     (predicts right experiment observation ×
-     ¬ predicts left experiment observation)
+     ¬ (predicts left experiment observation))
 
 includedDiscriminatorRefutesEquivalence :
   ∀ {Theory Experiment Observation : Set}
@@ -71,7 +71,7 @@ includedDiscriminatorRefutesEquivalence :
     {left right : Theory} →
   language experiment →
   Discriminates predicts experiment left right →
-  ¬ EquivalentOn language predicts left right
+  ¬ (EquivalentOn language predicts left right)
 includedDiscriminatorRefutesEquivalence included
     (observation , inj₁ (leftYes , rightNo))
     equivalent =
