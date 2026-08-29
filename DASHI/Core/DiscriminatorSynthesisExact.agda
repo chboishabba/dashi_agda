@@ -6,16 +6,10 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.ExperimentalCoordinateDesignExact as Coordinate
 import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Choice
 import DASHI.Core.ConsumerRelativeReductionKernelExact as Reduction
+import DASHI.Core.PredictionEnvelopeExact as Envelope
 
 ------------------------------------------------------------------------
 -- DISCRIMINATOR SYNTHESIS
---
--- Proof-search target for the question:
---   given a collision under the current observer, which declared experiment
---   bundle is the least-cost extension that separates the relevant states?
---
--- The construction is deterministic/proof-relevant.  It does not assume a
--- probability model, and cost is not epistemic truth.
 ------------------------------------------------------------------------
 
 record ExperimentBundle (World : Set) : Set₁ where
@@ -61,12 +55,6 @@ record DiscriminatingLanguageExtension
 
 open DiscriminatingLanguageExtension public
 
-------------------------------------------------------------------------
--- Observer join.  If the added bundle separates a collision, the literal pair
--- of old and new observations separates it too.  This is the deterministic
--- information-join pattern already used elsewhere in Core.
-------------------------------------------------------------------------
-
 joinedObservation :
   ∀ {World Existing}
     (existing : World → Existing) →
@@ -87,10 +75,49 @@ extensionJoinSeparates extension same =
   separates (extensionSeparates extension) (cong proj₂ same)
 
 ------------------------------------------------------------------------
--- Nuisance robustness.  A useful separator should not disappear merely under
--- the declared systematic/nuisance transformations the experiment claims to
--- tolerate.  This is shared-nuisance robustness; stronger stochastic/error
--- models can be layered separately.
+-- Prospective consumer closure.
+--
+-- Pairwise separation is not enough when many live hypotheses remain.  A
+-- prospective measurement is consumer-closing when, for every currently
+-- compatible true state, observing that state's measurement value makes the
+-- declared downstream consumer point-identifiable on the refined fibre.
+------------------------------------------------------------------------
+
+ProspectivelyClosesConsumer :
+  ∀ {Evidence World Prediction : Set} →
+  Envelope.Compatible Evidence World →
+  (World → Prediction) →
+  ExperimentBundle World → Set₁
+ProspectivelyClosesConsumer compatible consumer bundle =
+  ∀ evidence witness →
+  compatible evidence witness →
+  Envelope.MeasurementClosesEnvelope
+    compatible
+    (observe bundle)
+    consumer
+    (evidence , observe bundle witness)
+
+record MinimalConsumerClosingBundle
+    {Evidence World Prediction : Set}
+    (compatible : Envelope.Compatible Evidence World)
+    (consumer : World → Prediction)
+    (Declared : ExperimentBundle World → Set) : Set₁ where
+  constructor minimalConsumerClosingBundle
+  field
+    selected : ExperimentBundle World
+    selectedDeclared : Declared selected
+    selectedCloses : ProspectivelyClosesConsumer compatible consumer selected
+    minimal :
+      (alternative : ExperimentBundle World) →
+      Declared alternative →
+      ProspectivelyClosesConsumer compatible consumer alternative →
+      cost selected ≤ cost alternative
+    consumerClosureReference : String
+
+open MinimalConsumerClosingBundle public
+
+------------------------------------------------------------------------
+-- Nuisance robustness.
 ------------------------------------------------------------------------
 
 record NuisanceAction (World : Set) : Set₁ where
@@ -118,10 +145,7 @@ record NuisanceRobustSeparator
 open NuisanceRobustSeparator public
 
 ------------------------------------------------------------------------
--- Optional symmetry compatibility.  Symmetry is not required for synthesis.
--- When a genuine state symmetry is declared, this receipt asks whether the
--- discriminator is invariant along that orbit.  A consumer-visible symmetry
--- should instead be retained rather than silently quotiented.
+-- Optional symmetry compatibility.
 ------------------------------------------------------------------------
 
 record SymmetryInvariantBundle
@@ -138,7 +162,7 @@ record SymmetryInvariantBundle
 open SymmetryInvariantBundle public
 
 ------------------------------------------------------------------------
--- Minimality among a declared bundle library.
+-- Minimality for one explicit collision.
 ------------------------------------------------------------------------
 
 record MinimalDiscriminator
@@ -162,7 +186,7 @@ record MinimalDiscriminator
 open MinimalDiscriminator public
 
 ------------------------------------------------------------------------
--- Perturb-and-measure discriminator over the existing coordinate-design owner.
+-- Perturb-and-measure discriminator.
 ------------------------------------------------------------------------
 
 record ControlledCoordinateDiscriminator
@@ -185,8 +209,7 @@ record ControlledCoordinateDiscriminator
 open ControlledCoordinateDiscriminator public
 
 ------------------------------------------------------------------------
--- Bridge into the actionability-cost search.  An experiment bundle can be
--- treated as a measurement move without identifying its resolving proof.
+-- Bridge into actionability-cost search.
 ------------------------------------------------------------------------
 
 bundleInformationMove :
@@ -220,6 +243,14 @@ record DiscriminatorSynthesisBoundary : Set where
     oneNewCoordinateAlwaysSeparatesAnyCollisionIsFalse :
       oneNewCoordinateAlwaysSeparatesAnyCollision ≡ false
 
+    pairwiseSeparationAutomaticallyClosesWholeConsumerFibre : Bool
+    pairwiseSeparationAutomaticallyClosesWholeConsumerFibreIsFalse :
+      pairwiseSeparationAutomaticallyClosesWholeConsumerFibre ≡ false
+
+    prospectiveClosureCanTargetDecisionRatherThanWorldIdentity : Bool
+    prospectiveClosureCanTargetDecisionRatherThanWorldIdentityIsTrue :
+      prospectiveClosureCanTargetDecisionRatherThanWorldIdentity ≡ true
+
     nuisanceRobustnessNeedsDeclaredNuisanceLanguage : Bool
     nuisanceRobustnessNeedsDeclaredNuisanceLanguageIsTrue :
       nuisanceRobustnessNeedsDeclaredNuisanceLanguage ≡ true
@@ -239,4 +270,4 @@ record DiscriminatorSynthesisBoundary : Set where
 canonicalDiscriminatorSynthesisBoundary : DiscriminatorSynthesisBoundary
 canonicalDiscriminatorSynthesisBoundary =
   discriminatorSynthesisBoundary
-    false refl true refl false refl true refl false refl
+    false refl false refl true refl true refl false refl true refl false refl
