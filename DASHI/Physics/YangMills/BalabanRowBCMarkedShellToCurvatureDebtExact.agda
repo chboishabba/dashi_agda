@@ -7,24 +7,22 @@ module DASHI.Physics.YangMills.BalabanRowBCMarkedShellToCurvatureDebtExact where
 -- negative same-density curvature debt of Row C, and its combined shell ratio
 -- is no larger than the repository's 17/32 contraction ratio, then the existing
 -- curvature-debt compiler applies with no additional summability theorem.
---
--- This module proves only the exact ordered-rational carrier conversion.  The
--- physical same-density Hessian domination remains explicit and conditional.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import DASHI.Physics.YangMills.BalabanRowBActivityEntropyToShellEnergyExact as B
 import DASHI.Physics.YangMills.BalabanUnifiedSeventeenThirtySecondIterationExact as Iter
+import DASHI.Physics.YangMills.BalabanUnifiedSeventeenThirtySecondTailModulusExact as Tail
 import DASHI.Physics.YangMills.BalabanUnifiedPolchinskiCurvatureDebtExact as Curv
 
 powNonnegative : ∀ ratio →
   0ℚ ≤ ratio → ∀ depth → 0ℚ ≤ Iter.pow ratio depth
-powNonnegative ratio ratioNN zero = ℚP.nonNegative⁻¹ _
+powNonnegative ratio ratioNN zero = ℚP.nonNegative⁻¹ 1ℚ
 powNonnegative ratio ratioNN (suc depth) =
   B.mulNN ratioNN (powNonnegative ratio ratioNN depth)
 
@@ -97,15 +95,19 @@ asGeometricNegativeCurvatureDebt dataSet = record
 markedShellCurvatureDebtUniformBound :
   (dataSet : MarkedShellCurvatureDomination) → ∀ count →
   Curv.finiteCurvatureDebt (asGeometricNegativeCurvatureDebt dataSet) count
-  ≤ Curv.finiteCurvatureDebt
-      (asGeometricNegativeCurvatureDebt dataSet) count
-markedShellCurvatureDebtUniformBound dataSet count = ℚP.≤-refl
+  ≤ Tail.tailFactor * B.combinedBaseEnergy (marked dataSet)
+markedShellCurvatureDebtUniformBound dataSet count =
+  Curv.finiteCurvatureDebtUniformBound
+    (asGeometricNegativeCurvatureDebt dataSet) count
 
 rowBCMarkedShellToCurvatureCarrierLevel : ProofLevel
 rowBCMarkedShellToCurvatureCarrierLevel = machineChecked
 
+rowBCMarkedShellToUniformCurvatureDebtLevel : ProofLevel
+rowBCMarkedShellToUniformCurvatureDebtLevel = machineChecked
+
 -- Physical seam: identify `curvatureDebt` with the negative Hessian/Heat-Doob
--- shell integral on the SAME literal compact-group Gibbs density and prove its
+-- shell debt on the SAME literal compact-group Gibbs density and prove its
 -- pointwise domination by the differentiated CMP116 marked shell.  Spatial
 -- influence/clustering remains a separate Row-C requirement.
 literalSameDensityCurvatureBelowMarkedShellLevel : ProofLevel
