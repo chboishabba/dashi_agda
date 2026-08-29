@@ -1,0 +1,9 @@
+module DASHI.Analysis.RiemannAristotleSharedCertificateREADME where
+
+open import DASHI.Core.Prelude
+
+-- Import-only aggregation root for the post-#622 shared-certificate return.
+import DASHI.Analysis.RiemannAristotleSharedWindowCertificateExact
+import DASHI.Analysis.CertifiedFiniteCarrierReindexExact
+import DASHI.Analysis.RiemannAristotleSharedCertificateReturnExact
+import DASHI.Analysis.RiemannAristotleSharedCertificateReturnRegression
