@@ -23,14 +23,16 @@ module DASHI.Physics.YangMills.BalabanA1Equation51JetGaussianInteractionSplitRou
 -- carrier and Round102 history-uniform two-sided certificate.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; -_)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Rational.Base as ℚ using (_+_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP109MixedDerivativeBetaExtractionExact as Jet
 import DASHI.Physics.YangMills.BalabanA1HistoryUniformTwoSidedBetaRound102Exact as Cert
+import DASHI.Physics.YangMills.BalabanYM4FiveChannelQuarticBetaAdapterExact as Five
+import DASHI.Physics.YangMills.BalabanYM4FiveChannelQuarticAbsoluteBetaRound102Exact as AbsFive
 
 record Equation51GaussianInteractionJetSplit (History Cell : Set) : Set₁ where
   field
@@ -50,8 +52,8 @@ record Equation51GaussianInteractionJetSplit (History Cell : Set) : Set₁ where
 
     interactionMixedIsNegativeBetaInt :
       Jet.mixedDerivativeCoefficient interactionJet
-      ≡ - Cert.Five.betaInt
-          (Cert.AbsFive.lowerData (Cert.interaction certificate history))
+      ≡ - Five.betaInt
+          (AbsFive.lowerData (Cert.interaction certificate history))
 
 open Equation51GaussianInteractionJetSplit public
 
@@ -66,8 +68,8 @@ negativeMixedCoefficientIsFiniteEvaluator dataSet =
     h = history dataSet
     g = gaussianJet dataSet
     i = interactionJet dataSet
-    betaI = Cert.Five.betaInt
-      (Cert.AbsFive.lowerData (Cert.interaction cert h))
+    betaI = Five.betaInt
+      (AbsFive.lowerData (Cert.interaction cert h))
 
     splitMixed :
       Jet.mixedDerivativeCoefficient (Jet.fullOffDiagonalTwoJet (jetData dataSet))
@@ -105,12 +107,6 @@ jetBetaIsFiniteEvaluator dataSet =
 round108A1GaussianInteractionJetSplitLevel : ProofLevel
 round108A1GaussianInteractionJetSplitLevel = machineChecked
 
--- Physical leaves after this algebraic compression:
---   (1) identify the Gaussian Eq.(5.1) mixed jet (including W+Q+R, with Q/R
---       killed by the existing Lorentz-diagonal Fourier theorem) with -betaZ;
---   (2) identify the normalized interaction mixed jet with the SAME five-channel
---       betaInt already used by the quartic Cauchy certificate.
--- No third equality asserting their sum equals beta is needed.
 literalCMP109GaussianMixedJetIdentificationRound108Level : ProofLevel
 literalCMP109GaussianMixedJetIdentificationRound108Level = conditional
 
