@@ -19,6 +19,7 @@ on:
       - 'DASHI/Physics/Foundations/BalabanCommonActionVariationValidation.agda'
       - 'DASHI/Physics/Foundations/BalabanAllSectorContinuumProducerExact.agda'
       - 'DASHI/Physics/Foundations/BalabanNativeSectorRecoveryTransportExact.agda'
+      - 'DASHI/Physics/Foundations/BalabanTransportedSectorFamilyProducerExact.agda'
       - 'DASHI/Physics/Foundations/BalabanContinuumProducerValidation.agda'
       - 'DASHI/Physics/Foundations/EinsteinCommonActionVariationFrontierExact.agda'
       - 'DASHI/Physics/Foundations/EinsteinCommonActionVariationValidation.agda'
