@@ -13,15 +13,16 @@ module DASHI.Physics.YangMills.BalabanYM4WardQuarticResponseProducerAdapterExact
 --   D       from the quartic direct-history injection,
 --   b       fixed to the Ward floor 1/8388608.
 --
--- The canonical Ward theorem then chooses gamma from C,L,R,D.  Once the literal
--- generated trajectory identifies its declared cap with that gamma, all scalar
--- shooting conditions are automatic.  What remains physical is only the actual
--- source instantiation and recurrence identities, not another numerical gate.
+-- The canonical Ward theorem chooses gamma from C,L,R,D.  Once the literal
+-- generated trajectory identifies its cap with that gamma, all scalar shooting
+-- conditions are automatic.  Remaining work is source/same-object physics, not
+-- a second numerical gate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
@@ -29,10 +30,12 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4InteractionMixedCouplingDerivativeGateExact as Mixed
 import DASHI.Physics.YangMills.BalabanYM4RowACauchySourceToCanonicalGateExact as Cauchy
 import DASHI.Physics.YangMills.BalabanYM4RowAWardFloorCanonicalGateExact as Ward
+import DASHI.Physics.YangMills.BalabanYM4ShootingSensitivityFromCubicDriftExact as Direct
 import DASHI.Physics.YangMills.BalabanYM4BetaResponseKernelSummationExact as Kernel
 import DASHI.Physics.YangMills.BalabanYM4QuarticSourceSensitivityBudgetExact as Quartic
 import DASHI.Physics.YangMills.BalabanYM4QuarticResponseCanonicalGateExact as Gate
 import DASHI.Physics.YangMills.BalabanYM4WardQuarticResponseCanonicalChoiceExact as WardChoice
+import DASHI.Physics.YangMills.BalabanYM4RowAAugmentedShootingGateExact as Aug
 
 localCauchySource :
   Mixed.MixedInteractionCauchyData → Cauchy.RowACauchySourceConstants
@@ -46,56 +49,54 @@ localCauchySource mixed = record
       ℚP.≤-refl
   }
 
+rawWardConstants :
+  ∀ {cutoff}
+    (mixed : Mixed.MixedInteractionCauchyData)
+    (kernel : Kernel.GeometricBetaResponseKernel)
+    (quartic : Quartic.QuarticSourceSensitivityData kernel cutoff) →
+  WardChoice.WardQuarticResponseConstants
+rawWardConstants mixed kernel quartic = record
+  { WardChoice.WardQuarticResponseConstants.interactionConstant =
+      Cauchy.sourceInteractionConstant (localCauchySource mixed)
+  ; WardChoice.WardQuarticResponseConstants.localDerivative =
+      Cauchy.sourceLocalDerivativeConstant (localCauchySource mixed)
+  ; WardChoice.WardQuarticResponseConstants.responseCoefficient =
+      Kernel.responseCoefficient kernel
+  ; WardChoice.WardQuarticResponseConstants.sourceCoefficient =
+      Quartic.sourceCoefficient quartic
+  ; WardChoice.WardQuarticResponseConstants.interactionConstantNonnegative =
+      Cauchy.sourceInteractionConstantNonnegative (localCauchySource mixed)
+  ; WardChoice.WardQuarticResponseConstants.localDerivativeNonnegative =
+      Cauchy.sourceLocalDerivativeConstantNonnegative (localCauchySource mixed)
+  ; WardChoice.WardQuarticResponseConstants.responseCoefficientNonnegative =
+      Kernel.responseCoefficientNonnegative kernel
+  ; WardChoice.WardQuarticResponseConstants.sourceCoefficientNonnegative =
+      Quartic.sourceCoefficientNonnegative quartic
+  }
+
 record WardQuarticResponseProducer (cutoff : Nat) : Set₁ where
   field
     mixedInteraction : Mixed.MixedInteractionCauchyData
     responseKernel : Kernel.GeometricBetaResponseKernel
     quartic : Quartic.QuarticSourceSensitivityData responseKernel cutoff
 
-    -- Same-trajectory identifications.  These are not arithmetic assumptions:
-    -- they assert that the direct cubic-telescope carrier is the actual source
-    -- trajectory built using the canonical cap selected from the producer data.
     couplingCapIsCanonical :
       Quartic.couplingCap quartic ≡
         WardChoice.wardQuarticResponseGamma
-          (record
-            { WardChoice.WardQuarticResponseConstants.interactionConstant =
-                Cauchy.sourceInteractionConstant
-                  (localCauchySource mixedInteraction)
-            ; WardChoice.WardQuarticResponseConstants.localDerivative =
-                Cauchy.sourceLocalDerivativeConstant
-                  (localCauchySource mixedInteraction)
-            ; WardChoice.WardQuarticResponseConstants.responseCoefficient =
-                Kernel.responseCoefficient responseKernel
-            ; WardChoice.WardQuarticResponseConstants.sourceCoefficient =
-                Quartic.sourceCoefficient quartic
-            ; WardChoice.WardQuarticResponseConstants.interactionConstantNonnegative =
-                Cauchy.sourceInteractionConstantNonnegative
-                  (localCauchySource mixedInteraction)
-            ; WardChoice.WardQuarticResponseConstants.localDerivativeNonnegative =
-                Cauchy.sourceLocalDerivativeConstantNonnegative
-                  (localCauchySource mixedInteraction)
-            ; WardChoice.WardQuarticResponseConstants.responseCoefficientNonnegative =
-                Kernel.responseCoefficientNonnegative responseKernel
-            ; WardChoice.WardQuarticResponseConstants.sourceCoefficientNonnegative =
-                Quartic.sourceCoefficientNonnegative quartic
-            })
+          (rawWardConstants mixedInteraction responseKernel quartic)
 
     tubeBelowCap :
-      DASHI.Physics.YangMills.BalabanYM4ShootingSensitivityFromCubicDriftExact.tubeWidth
-        (Quartic.direct quartic)
+      Direct.tubeWidth (Quartic.direct quartic)
       ≤ Quartic.couplingCap quartic
 
     marginExact :
-      DASHI.Physics.YangMills.BalabanYM4ShootingSensitivityFromCubicDriftExact.marginConstant
-        (Quartic.direct quartic)
+      Direct.marginConstant (Quartic.direct quartic)
       ≡ Ward.wardGaussianFloor
           - Cauchy.sourceInteractionConstant (localCauchySource mixedInteraction)
               * Quartic.couplingCap quartic
 
     derivativeExact :
-      DASHI.Physics.YangMills.BalabanYM4ShootingSensitivityFromCubicDriftExact.derivativeBound
-        (Quartic.direct quartic)
+      Direct.derivativeBound (Quartic.direct quartic)
       ≡ Cauchy.sourceLocalDerivativeConstant (localCauchySource mixedInteraction)
 
 open WardQuarticResponseProducer public
@@ -103,28 +104,11 @@ open WardQuarticResponseProducer public
 producerWardConstants :
   ∀ {cutoff} →
   WardQuarticResponseProducer cutoff → WardChoice.WardQuarticResponseConstants
-producerWardConstants dataSet = record
-  { WardChoice.WardQuarticResponseConstants.interactionConstant =
-      Cauchy.sourceInteractionConstant
-        (localCauchySource (mixedInteraction dataSet))
-  ; WardChoice.WardQuarticResponseConstants.localDerivative =
-      Cauchy.sourceLocalDerivativeConstant
-        (localCauchySource (mixedInteraction dataSet))
-  ; WardChoice.WardQuarticResponseConstants.responseCoefficient =
-      Kernel.responseCoefficient (responseKernel dataSet)
-  ; WardChoice.WardQuarticResponseConstants.sourceCoefficient =
-      Quartic.sourceCoefficient (quartic dataSet)
-  ; WardChoice.WardQuarticResponseConstants.interactionConstantNonnegative =
-      Cauchy.sourceInteractionConstantNonnegative
-        (localCauchySource (mixedInteraction dataSet))
-  ; WardChoice.WardQuarticResponseConstants.localDerivativeNonnegative =
-      Cauchy.sourceLocalDerivativeConstantNonnegative
-        (localCauchySource (mixedInteraction dataSet))
-  ; WardChoice.WardQuarticResponseConstants.responseCoefficientNonnegative =
-      Kernel.responseCoefficientNonnegative (responseKernel dataSet)
-  ; WardChoice.WardQuarticResponseConstants.sourceCoefficientNonnegative =
-      Quartic.sourceCoefficientNonnegative (quartic dataSet)
-  }
+producerWardConstants dataSet =
+  rawWardConstants
+    (mixedInteraction dataSet)
+    (responseKernel dataSet)
+    (quartic dataSet)
 
 producerCanonicalGamma :
   ∀ {cutoff} → WardQuarticResponseProducer cutoff → ℚ
@@ -133,10 +117,10 @@ producerCanonicalGamma dataSet =
 
 producerCapAtMostOne :
   ∀ {cutoff} (dataSet : WardQuarticResponseProducer cutoff) →
-  Quartic.couplingCap (quartic dataSet) ≤ Data.Rational.Base.1ℚ
+  Quartic.couplingCap (quartic dataSet) ≤ 1ℚ
 producerCapAtMostOne dataSet =
   subst
-    (λ left → left ≤ Data.Rational.Base.1ℚ)
+    (λ left → left ≤ 1ℚ)
     (sym (couplingCapIsCanonical dataSet))
     (WardChoice.wardQuarticResponseGammaAtMostOne
       (producerWardConstants dataSet))
@@ -195,7 +179,7 @@ asQuarticResponseCanonicalGate dataSet = record
 
 producerAugmentedShootingData :
   ∀ {cutoff} (dataSet : WardQuarticResponseProducer cutoff) →
-  DASHI.Physics.YangMills.BalabanYM4RowAAugmentedShootingGateExact.AugmentedShootingSensitivityData cutoff
+  Aug.AugmentedShootingSensitivityData cutoff
 producerAugmentedShootingData dataSet =
   Gate.asAugmentedShootingSensitivityData
     (asQuarticResponseCanonicalGate dataSet)
@@ -206,7 +190,7 @@ rowAWardQuarticResponseProducerToCanonicalGateLevel = machineChecked
 rowAWardQuarticResponseProducerToShootingLevel : ProofLevel
 rowAWardQuarticResponseProducerToShootingLevel = machineChecked
 
--- Remaining physical/source content is now concentrated in constructing this
+-- Remaining physical/source content is concentrated in constructing this
 -- producer from the literal CMP109/CMP119/CMP122 generated trajectory: the
 -- response kernel, quartic direct-history injection, and exact recurrence/cap
 -- identifications.  The scalar contraction margin is not an additional theorem.
