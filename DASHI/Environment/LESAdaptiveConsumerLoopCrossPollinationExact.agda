@@ -9,6 +9,9 @@ import DASHI.Core.ConsumerRelativeReductionSearchExact as Search
 import DASHI.Core.ConsumerRelativeMinimalFidelityExact as Minimal
 import DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact as Approx
 import DASHI.Core.ConsumerReductionDependencyReopeningExact as Reopening
+import DASHI.Core.CoarseFineRelativeFibreExact as FineFibre
+import DASHI.Core.ConsumerDecisionAdequacyFromReductionExact as Adequacy
+import DASHI.Core.ConsumerAdequacyJointPolicyBidiCompilerExact as Bidi
 import DASHI.Core.RobustInterventionAcrossHypothesesExact as Robust
 import DASHI.Core.DiscriminatorSynthesisExact as Synthesis
 import DASHI.Core.SequentialConsumerExperimentPlannerExact as Sequential
@@ -18,6 +21,7 @@ import DASHI.Environment.LESSPACFidelityCounterexampleFixturesExact as Fixtures
 import DASHI.Environment.LESDiscriminatorSynthesisExact as LESSynthesis
 import DASHI.Environment.LESSequentialExperimentPlannerExact as LESSequential
 import DASHI.Environment.LESJointSequentialMeasurementFidelityPolicyExact as LESJoint
+import DASHI.Environment.LESProofDerivedDecisionAdequacyExact as LESAdequacy
 
 adaptiveConsumerLoopOwner : String
 adaptiveConsumerLoopOwner = "DASHI.Core.AdaptiveConsumerModelLoopExact"
@@ -33,6 +37,15 @@ minimalFidelityOwner = "DASHI.Core.ConsumerRelativeMinimalFidelityExact"
 
 approximateFidelityOwner : String
 approximateFidelityOwner = "DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact"
+
+relativeFineFibreOwner : String
+relativeFineFibreOwner = "DASHI.Core.CoarseFineRelativeFibreExact"
+
+proofDerivedAdequacyOwner : String
+proofDerivedAdequacyOwner = "DASHI.Core.ConsumerDecisionAdequacyFromReductionExact"
+
+bidiAdequacyCompilerOwner : String
+bidiAdequacyCompilerOwner = "DASHI.Core.ConsumerAdequacyJointPolicyBidiCompilerExact"
 
 robustInterventionOwner : String
 robustInterventionOwner = "DASHI.Core.RobustInterventionAcrossHypothesesExact"
@@ -61,6 +74,9 @@ lesSequentialExperimentOwner = "DASHI.Environment.LESSequentialExperimentPlanner
 lesJointMeasurementFidelityOwner : String
 lesJointMeasurementFidelityOwner = "DASHI.Environment.LESJointSequentialMeasurementFidelityPolicyExact"
 
+lesProofDerivedAdequacyOwner : String
+lesProofDerivedAdequacyOwner = "DASHI.Environment.LESProofDerivedDecisionAdequacyExact"
+
 finiteSPACCounterexampleOwner : String
 finiteSPACCounterexampleOwner = "DASHI.Environment.LESSPACFidelityCounterexampleFixturesExact"
 
@@ -72,6 +88,15 @@ minimalBoundaryImported = Minimal.canonicalMinimalFidelityBoundary
 
 approximateBoundaryImported : Approx.ConsumerApproximateFidelityBoundary
 approximateBoundaryImported = Approx.canonicalConsumerApproximateFidelityBoundary
+
+fineFibreBoundaryImported : FineFibre.CoarseFineRelativeFibreBoundary
+fineFibreBoundaryImported = FineFibre.canonicalCoarseFineRelativeFibreBoundary
+
+adequacyBoundaryImported : Adequacy.ConsumerDecisionAdequacyBoundary
+adequacyBoundaryImported = Adequacy.canonicalConsumerDecisionAdequacyBoundary
+
+bidiBoundaryImported : Bidi.ConsumerAdequacyBidiCompilerBoundary
+bidiBoundaryImported = Bidi.canonicalConsumerAdequacyBidiCompilerBoundary
 
 robustBoundaryImported : Robust.RobustInterventionBoundary
 robustBoundaryImported = Robust.canonicalRobustInterventionBoundary
@@ -100,6 +125,9 @@ lesSequentialBoundaryImported = LESSequential.canonicalLESSequentialExperimentBo
 lesJointBoundaryImported : LESJoint.LESJointMeasurementFidelityBoundary
 lesJointBoundaryImported = LESJoint.canonicalLESJointMeasurementFidelityBoundary
 
+lesAdequacyBoundaryImported : LESAdequacy.LESProofDerivedAdequacyBoundary
+lesAdequacyBoundaryImported = LESAdequacy.canonicalLESProofDerivedAdequacyBoundary
+
 fixtureBoundaryImported : Fixtures.SPACFidelityCounterexampleBoundary
 fixtureBoundaryImported = Fixtures.canonicalSPACFidelityCounterexampleBoundary
 
@@ -110,6 +138,12 @@ record LESAdaptiveConsumerArchitectureCutset : Set where
     exactCertificateBranchTyped approximateDecisionMarginBranchTyped : Bool
     futureCounterexampleBranchTyped exactBranchMapsToCanonicalFutureSafety : Bool
     approximateBranchMapsToDecisionSafety counterexampleBranchRefutesConsumerCandidate : Bool
+    relativeFineResidualFibreTyped canonicalProvenanceQuotientBridgeTyped : Bool
+    coarseSafeReductionMayRetainFineResidualTyped : Bool
+    proofDerivedDecisionAdequacyTyped : Bool
+    exactCertificateFeedsDecisionAdequacyTyped : Bool
+    approximateMarginFeedsDecisionAdequacyTyped : Bool
+    counterexampleOpensFidelityBranchTyped : Bool
     reopenablePortfolioTyped liveEvidenceFibreTyped : Bool
     robustInterventionBranchTyped authorityRemainsSeparateFromRobustness : Bool
     discriminatingMeasurementOrFidelityBranchTyped evidenceUpdateTyped : Bool
@@ -138,11 +172,20 @@ canonicalLESAdaptiveConsumerArchitectureCutset =
     true true true true true true true true true true
     true true true true true true true true true true
     true true true true true true true true true true
-    true true true true true
+    true true true true true true true true true true
 
 record LESAdaptiveConsumerArchitectureBoundary : Set where
   constructor lesAdaptiveConsumerArchitectureBoundary
   field
+    fineStateMeansOnlyMoreExpensiveModel : Bool
+    fineStateMeansOnlyMoreExpensiveModelIsFalse :
+      fineStateMeansOnlyMoreExpensiveModel ≡ false
+    consumerSafeCoarseProjectionRequiresDiscardingFineResidual : Bool
+    consumerSafeCoarseProjectionRequiresDiscardingFineResidualIsFalse :
+      consumerSafeCoarseProjectionRequiresDiscardingFineResidual ≡ false
+    policyDecisionAdequacyMayBeFreeOfROMOrMarginProof : Bool
+    policyDecisionAdequacyMayBeFreeOfROMOrMarginProofIsFalse :
+      policyDecisionAdequacyMayBeFreeOfROMOrMarginProof ≡ false
     exactFutureSafetyEqualsWorldIdentity : Bool
     exactFutureSafetyEqualsWorldIdentityIsFalse : exactFutureSafetyEqualsWorldIdentity ≡ false
     approximateDecisionSafetyEqualsExactFutureQuotient : Bool
@@ -175,5 +218,6 @@ record LESAdaptiveConsumerArchitectureBoundary : Set where
 canonicalLESAdaptiveConsumerArchitectureBoundary : LESAdaptiveConsumerArchitectureBoundary
 canonicalLESAdaptiveConsumerArchitectureBoundary =
   lesAdaptiveConsumerArchitectureBoundary
+    false refl false refl false refl
     false refl false refl false refl false refl false refl false refl
     false refl false refl false refl false refl false refl false refl
