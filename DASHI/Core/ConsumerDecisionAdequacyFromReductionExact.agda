@@ -50,10 +50,11 @@ exactReducedDecisionSelectsSameIntervention :
         (trace adequacy)
         (Reduction.encode rom state)))
   ≡ intervention
-exactReducedDecisionSelectsSameIntervention adequacy state liveState =
+exactReducedDecisionSelectsSameIntervention {rom = rom} {decide = decide}
+    adequacy state liveState =
   trans
     (Approx.exactReductionDecisionSafe
-      _ _ ((trace adequacy) , state))
+      rom decide ((trace adequacy) , state))
     (fineSelectsIntervention adequacy state liveState)
 
 record ApproximateDecisionAdequacy
