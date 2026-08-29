@@ -7,22 +7,10 @@ import DASHI.Chemistry.TransitionKernel as Chemistry
 import DASHI.Environment.CertifiedSpatialTransportExact as Certified
 import DASHI.Environment.SpatialTransport as Spatial
 import DASHI.Papers.NavierStokes.TheoremInterfaceRound133Exact as NS
-import DASHI.Physics.SIQuantitiesExact as SI
+import DASHI.Physics.Units.SI as SI
 
 ------------------------------------------------------------------------
 -- LES FLUID-PHYSICS COUPLING
---
--- Repository-native cross-pollination owner.
---
--- BIDI discipline:
---   forward  : the repo already has an exact Navier-Stokes theorem lane and
---              certified spatial transport / chemistry transition grammars;
---   backward : hydrology, wind, solute transport and biological fluid uses
---              need an application-specific reduction from those physics into
---              the domain geometry, forcing, constitutive and boundary regime;
---   boundary : transport topology is not itself a fluid equation, and a
---              Navier-Stokes theorem does not automatically validate every
---              hydrological/atmospheric/biological reduction.
 ------------------------------------------------------------------------
 
 data FluidApplication : Set where
@@ -37,14 +25,17 @@ data FluidApplication : Set where
 record SIFluidFieldSocket : Set₁ where
   constructor siFluidFieldSocket
   field
-    Scalar : Set
     FluidState : Set
-    velocity : FluidState → SI.Velocity Scalar
-    pressure : FluidState → SI.Pressure Scalar
-    density : FluidState → SI.Density Scalar
-    dynamicViscosity : FluidState → SI.DynamicViscosity Scalar
-    volumetricFlowRate : FluidState → SI.VolumetricFlowRate Scalar
-    siQuantityOwnerReference : String
+    velocityScale : SI.DecimalScale
+    pressureScale : SI.DecimalScale
+    densityScale : SI.DecimalScale
+    viscosityScale : SI.DecimalScale
+    flowRateScale : SI.DecimalScale
+    velocity : FluidState → SI.Quantity SI.Velocity velocityScale
+    pressure : FluidState → SI.Quantity SI.Pressure pressureScale
+    density : FluidState → SI.Quantity SI.Density densityScale
+    dynamicViscosity : FluidState → SI.Quantity SI.DynamicViscosity viscosityScale
+    volumetricFlowRate : FluidState → SI.Quantity SI.VolumetricFlowRate flowRateScale
 
 open SIFluidFieldSocket public
 
@@ -96,12 +87,10 @@ record ReactionTransportWeld
 open ReactionTransportWeld public
 
 nsProofLaneReference : String
-nsProofLaneReference =
-  "DASHI.Papers.NavierStokes.TheoremInterfaceRound133Exact"
+nsProofLaneReference = "DASHI.Papers.NavierStokes.TheoremInterfaceRound133Exact"
 
 siFluidQuantityOwnerReference : String
-siFluidQuantityOwnerReference =
-  "DASHI.Physics.SIQuantitiesExact; BIPM DOI 10.59161/AUEZ1291"
+siFluidQuantityOwnerReference = "DASHI.Physics.Units.SI; BIPM DOI 10.59161/AUEZ1291"
 
 nsImportedClayPromotion : Bool
 nsImportedClayPromotion = NS.round133PaperClayPromotion
@@ -113,40 +102,20 @@ record LESFluidPhysicsBoundary : Set where
   constructor lesFluidPhysicsBoundary
   field
     transportPathIsNavierStokesSolution : Bool
-    transportPathIsNavierStokesSolutionIsFalse :
-      transportPathIsNavierStokesSolution ≡ false
-
+    transportPathIsNavierStokesSolutionIsFalse : transportPathIsNavierStokesSolution ≡ false
     navierStokesLaneAutomaticallyValidatesHydrology : Bool
-    navierStokesLaneAutomaticallyValidatesHydrologyIsFalse :
-      navierStokesLaneAutomaticallyValidatesHydrology ≡ false
-
+    navierStokesLaneAutomaticallyValidatesHydrologyIsFalse : navierStokesLaneAutomaticallyValidatesHydrology ≡ false
     groundwaterMustUseUnreducedIncompressibleNS : Bool
-    groundwaterMustUseUnreducedIncompressibleNSIsFalse :
-      groundwaterMustUseUnreducedIncompressibleNS ≡ false
-
+    groundwaterMustUseUnreducedIncompressibleNSIsFalse : groundwaterMustUseUnreducedIncompressibleNS ≡ false
     atmosphericWindIsIdenticalToClayNSProblem : Bool
-    atmosphericWindIsIdenticalToClayNSProblemIsFalse :
-      atmosphericWindIsIdenticalToClayNSProblem ≡ false
-
+    atmosphericWindIsIdenticalToClayNSProblemIsFalse : atmosphericWindIsIdenticalToClayNSProblem ≡ false
     chemistryTransitionPlusTransportPathProvesReactionTransportPDE : Bool
-    chemistryTransitionPlusTransportPathProvesReactionTransportPDEIsFalse :
-      chemistryTransitionPlusTransportPathProvesReactionTransportPDE ≡ false
-
-    fluidSocketUsesTypedSIQuantities : Bool
-    fluidSocketUsesTypedSIQuantitiesIsTrue :
-      fluidSocketUsesTypedSIQuantities ≡ true
-
+    chemistryTransitionPlusTransportPathProvesReactionTransportPDEIsFalse : chemistryTransitionPlusTransportPathProvesReactionTransportPDE ≡ false
+    fluidSocketUsesCanonicalSIQuantities : Bool
+    fluidSocketUsesCanonicalSIQuantitiesIsTrue : fluidSocketUsesCanonicalSIQuantities ≡ true
     cellularFluidUseRequiresApplicationReduction : Bool
-    cellularFluidUseRequiresApplicationReductionIsTrue :
-      cellularFluidUseRequiresApplicationReduction ≡ true
+    cellularFluidUseRequiresApplicationReductionIsTrue : cellularFluidUseRequiresApplicationReduction ≡ true
 
 canonicalLESFluidPhysicsBoundary : LESFluidPhysicsBoundary
 canonicalLESFluidPhysicsBoundary =
-  lesFluidPhysicsBoundary
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    true refl
-    true refl
+  lesFluidPhysicsBoundary false refl false refl false refl false refl false refl true refl true refl
