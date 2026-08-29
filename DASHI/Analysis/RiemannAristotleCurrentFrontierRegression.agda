@@ -43,25 +43,25 @@ latestLeanBridgeKernelChecked :
     F.canonicalAristotleCurrentFrontier ≡ true
 latestLeanBridgeKernelChecked = refl
 
-wholeCarrierStrictBudgetRejected :
-  F.AristotleCurrentFrontier.wholePostSchurCarrierStrictBudgetValid
-    F.canonicalAristotleCurrentFrontier ≡ false
-wholeCarrierStrictBudgetRejected = refl
+wholeCarrierStrictBudgetIsContradictionTarget :
+  F.AristotleCurrentFrontier.wholePostSchurCarrierStrictBudgetIsContradictionTarget
+    F.canonicalAristotleCurrentFrontier ≡ true
+wholeCarrierStrictBudgetIsContradictionTarget = refl
 
-targetRemainderSplitOpen :
-  F.AristotleCurrentFrontier.literalTargetRemainderSplitClosed
+eliminationAlgebraDoesNotCloseStrictBudget :
+  F.AristotleCurrentFrontier.eliminationAlgebraAloneClosesStrictBudget
     F.canonicalAristotleCurrentFrontier ≡ false
-targetRemainderSplitOpen = refl
-
-strictSignedRemainderCancellationOpen :
-  F.AristotleCurrentFrontier.strictSignedRemainderCancellationClosed
-    F.canonicalAristotleCurrentFrontier ≡ false
-strictSignedRemainderCancellationOpen = refl
+eliminationAlgebraDoesNotCloseStrictBudget = refl
 
 deterministicThreeTaperConstructionOpen :
   F.AristotleCurrentFrontier.deterministicNuisanceThreeTaperConstructionClosed
     F.canonicalAristotleCurrentFrontier ≡ false
 deterministicThreeTaperConstructionOpen = refl
+
+strictSignedWholeOffCarrierCancellationOpen :
+  F.AristotleCurrentFrontier.strictSignedWholeOffCarrierCancellationClosed
+    F.canonicalAristotleCurrentFrontier ≡ false
+strictSignedWholeOffCarrierCancellationOpen = refl
 
 lowOrdinateComplementOpen :
   F.AristotleCurrentFrontier.lowOrdinateComplementCertified
