@@ -51,6 +51,7 @@ import DASHI.Physics.Foundations.WavelengthSourceScaleSelectionExact
 import DASHI.Physics.Foundations.PathIntegralExperimentalSourceRegistryExact
 import DASHI.Physics.Foundations.TSFVFeynmanDerivationObligationsExact
 import DASHI.Physics.Foundations.PhysicalTheoryExperimentDiscriminationExact
+import DASHI.Physics.Foundations.GRQFTExperimentDesignCrossPollinationExact
 
 -- Generic downstream consumers of history/projection information.  These live
 -- in Core because their non-descent laws are not physics-specific.
