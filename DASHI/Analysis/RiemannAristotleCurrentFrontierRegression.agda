@@ -58,20 +58,35 @@ nearFarCompositionCompilerClosed :
     F.canonicalAristotleCurrentFrontier ≡ true
 nearFarCompositionCompilerClosed = refl
 
+allowanceCompilerClosed :
+  F.AristotleCurrentFrontier.nearFarAllowanceCompilerClosedInAgda
+    F.canonicalAristotleCurrentFrontier ≡ true
+allowanceCompilerClosed = refl
+
+jointCutoffCompilerClosed :
+  F.AristotleCurrentFrontier.jointCutoffCompilerClosedInAgda
+    F.canonicalAristotleCurrentFrontier ≡ true
+jointCutoffCompilerClosed = refl
+
 quantitativeFarShellEnvelopeOpen :
   F.AristotleCurrentFrontier.quantitativeFarShellEnvelopeClosed
     F.canonicalAristotleCurrentFrontier ≡ false
 quantitativeFarShellEnvelopeOpen = refl
+
+explicitFarTailModulusOpen :
+  F.AristotleCurrentFrontier.explicitFarTailModulusTransportedToAgda
+    F.canonicalAristotleCurrentFrontier ≡ false
+explicitFarTailModulusOpen = refl
 
 finiteSignedNearCoreOpen :
   F.AristotleCurrentFrontier.finiteSignedNearShellCoreClosed
     F.canonicalAristotleCurrentFrontier ≡ false
 finiteSignedNearCoreOpen = refl
 
-combinedNearFarMarginOpen :
-  F.AristotleCurrentFrontier.combinedNearFarMarginClosed
+jointNearFarCutoffStillOpen :
+  F.AristotleCurrentFrontier.jointNearFarCutoffFound
     F.canonicalAristotleCurrentFrontier ≡ false
-combinedNearFarMarginOpen = refl
+jointNearFarCutoffStillOpen = refl
 
 deterministicThreeTaperConstructionOpen :
   F.AristotleCurrentFrontier.deterministicNuisanceThreeTaperConstructionClosed
