@@ -3,17 +3,12 @@ module DASHI.Physics.YangMills.BalabanStressShellPartitionEnergyRound113Exact wh
 
 ------------------------------------------------------------------------
 -- ROUND113: PER-SHELL COEFFICIENT IDENTIFICATION -> GLOBAL ENERGY PREFIX
---
--- Round112 asked for a global equality between weighted coefficient energy and
--- the Row-B shell-energy prefix.  That equality is finite bookkeeping once the
--- actual stress coefficients are partitioned into shell blocks.  This file
--- proves the bookkeeping directly.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base as ℚ using (ℚ; _+_)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteWeightedCauchyExact as Cauchy
@@ -36,10 +31,6 @@ record LiteralStressShellPartition : Set₁ where
   field
     shellData : RowB.SummableMarkedActivityEntropyShellData
     shellSamples : Nat → List Cauchy.WeightedPair
-
-    -- Only physical bookkeeping left here: each geometric shell energy is the
-    -- weighted coefficient energy of the literal CMP116 stress coefficients in
-    -- that shell.
     shellEnergyIsCoefficientEnergy : ∀ depth →
       Shell.shellEnergy (RowB.asGeometricMarkedShellEnergy shellData) depth
       ≡ Cauchy.leftEnergy (shellSamples depth)
@@ -59,9 +50,7 @@ coefficientPrefixEnergyIsShellPrefix :
   ≡ Shell.shellEnergyPrefix
       (RowB.asGeometricMarkedShellEnergy (shellData dataSet)) cutoff
 coefficientPrefixEnergyIsShellPrefix dataSet zero =
-  let perShell = shellEnergyIsCoefficientEnergy dataSet zero
-  in
-  trans refl (Relation.Binary.PropositionalEquality.sym perShell)
+  sym (shellEnergyIsCoefficientEnergy dataSet zero)
 coefficientPrefixEnergyIsShellPrefix dataSet (suc cutoff) =
   let
     current = shellSamples dataSet (suc cutoff)
@@ -72,8 +61,7 @@ coefficientPrefixEnergyIsShellPrefix dataSet (suc cutoff) =
   in
   trans appendEnergy
     (trans
-      (cong (λ x → x + Cauchy.leftEnergy previous)
-        (Relation.Binary.PropositionalEquality.sym currentEnergy))
+      (cong (λ x → x + Cauchy.leftEnergy previous) (sym currentEnergy))
       (cong
         (λ x →
           Shell.shellEnergy
@@ -94,8 +82,5 @@ asRound112StressCoefficientShellIdentification dataSet = record
 stressShellPartitionEnergyCompilerLevel : ProofLevel
 stressShellPartitionEnergyCompilerLevel = machineChecked
 
--- The global energy-prefix equality is no longer a physical theorem.  The live
--- source task is only the per-shell identification of the literal differentiated
--- CMP116 stress coefficients with the Row-B shell-energy decomposition.
 literalStressPerShellCoefficientIdentificationLevel : ProofLevel
 literalStressPerShellCoefficientIdentificationLevel = conditional
