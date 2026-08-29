@@ -34,13 +34,14 @@ localPlacementStillDoesNotCloseGlobalRouting =
   Spatial.localValidityDoesNotAutoPromoteToGlobalRoutability
 
 geometryStillDoesNotCloseUsability :
-  Affordance.Affords Affordance.architectureAffordanceSystem
+  Affordance.AffordanceSystem.Affords Affordance.architectureAffordanceSystem
     Affordance.stairOnlyConnection Affordance.stepFreeUser
     Affordance.reachUpperLevel → ⊥
 geometryStillDoesNotCloseUsability = Affordance.notUsableForOtherAgent
 
 planningPermissionStillDoesNotClosePhysicalFeasibility :
-  Realisation.PhysicallyFeasible Realisation.interface Realisation.paperDesign → ⊥
+  Realisation.PlanningArchitectureInterface.PhysicallyFeasible
+    Realisation.interface Realisation.paperDesign → ⊥
 planningPermissionStillDoesNotClosePhysicalFeasibility feasible = feasible
 
 innerFeasibilityStillDoesNotCloseOuterFeasibility :
@@ -48,8 +49,10 @@ innerFeasibilityStillDoesNotCloseOuterFeasibility :
 innerFeasibilityStillDoesNotCloseOuterFeasibility = Nested.outerFutureCanBeLost
 
 ruralUrbanLandscapeRetainsMultifunctionality :
-  Landscape.Role Landscape.landscape Landscape.marketGarden Landscape.home ×
-  Landscape.Role Landscape.landscape Landscape.marketGarden Landscape.foodProduction
+  Landscape.InhabitedLandscape.Role
+      Landscape.landscape Landscape.marketGarden Landscape.home ×
+  Landscape.InhabitedLandscape.Role
+      Landscape.landscape Landscape.marketGarden Landscape.foodProduction
 ruralUrbanLandscapeRetainsMultifunctionality = tt , tt
 
 semiconductorCrossPollinationKeepsOutcomeBoundary :
