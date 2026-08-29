@@ -15,9 +15,17 @@ noFakeLowerCollarRegression :
   R210.round210IntroducesLowerShellCollar ≡ false
 noFakeLowerCollarRegression = refl
 
+noCutoffShellCountRegression :
+  R210.round210IntroducesCutoffShellCount ≡ false
+noCutoffShellCountRegression = refl
+
 backwardSocketRegression :
   R211.round211BackwardResidualSocketExact ≡ true
 backwardSocketRegression = refl
+
+noGramNegativityRequirementRegression :
+  R211.round211RequiresGramNegativity ≡ false
+noGramNegativityRequirementRegression = refl
 
 concretePaymentStillOpenRegression :
   Frontier.round211ConcreteSameOutputResidualPaymentConstructed ≡ false
