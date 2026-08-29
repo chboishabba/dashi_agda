@@ -15,7 +15,7 @@ import DASHI.Reasoning.RelationRepresentationTOEInferenceHandoffExact as TOE
 --   pretending that the payload has already been checked, reproduced, or
 --   promoted into Stage-6/Stage-7 inference.
 --
--- This is intentionally one layer below the future #636 owners.  Once the
+-- This is intentionally one layer below the future #636 owners. Once the
 -- Stage-6/7 experiment architecture is merged, a checked receipt can be fed to
 -- PredictionEnvelopeExact / CalibratedExperimentInferenceExact /
 -- RobustExperimentInferenceFrontierExact through a thin adapter.
@@ -42,12 +42,6 @@ record ExternalStudyReceipt : Set where
     admissionNote : String
 
 open ExternalStudyReceipt public
-
-------------------------------------------------------------------------
--- Admission is deliberately split into syntactic/package readiness and
--- inferential authority.  The former can be established by a checker over
--- hashes/files; the latter belongs to the experiment/inference layer.
-------------------------------------------------------------------------
 
 record ReceiptPackageCheck (receipt : ExternalStudyReceipt) : Set where
   constructor receiptPackageCheck
@@ -76,12 +70,6 @@ record ReceiptReproductionCheck
 
 open ReceiptReproductionCheck public
 
-------------------------------------------------------------------------
--- A checked package does not automatically become a reproduced study, and a
--- reproduced study does not automatically become a scientifically adequate
--- target-domain model.
-------------------------------------------------------------------------
-
 record ExternalReceiptAdmissionBoundary : Set where
   constructor externalReceiptAdmissionBoundary
   field
@@ -109,18 +97,9 @@ canonicalExternalReceiptAdmissionBoundary =
     false refl
     true refl
 
-------------------------------------------------------------------------
--- Stage mapping: once a raw receipt is independently checked/reproduced, each
--- artifact class has an explicit destination in the Stage-6/7 pipeline.
-------------------------------------------------------------------------
-
 artifactInferenceDestination :
-  Study.ValidationArtifact → TOE.InferenceHandoffStage
+  Study.ValidationArtifact → TOE.InferenceStage
 artifactInferenceDestination = TOE.artifactInferenceStage
-
-------------------------------------------------------------------------
--- Empty placeholder: a method profile is not itself an external receipt.
-------------------------------------------------------------------------
 
 record ExternalPayloadPresence : Set where
   constructor externalPayloadPresence
