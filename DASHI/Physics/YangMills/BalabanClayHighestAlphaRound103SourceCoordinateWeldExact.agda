@@ -2,19 +2,20 @@
 module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound103SourceCoordinateWeldExact where
 
 ------------------------------------------------------------------------
--- ROUND103/105: BIDI SOURCE-COORDINATE WELD
+-- ROUND103/106: BIDI SOURCE-COORDINATE WELD
 --
 -- A1/A2 and BC1/BC2 remain the frozen Clay frontier.
 --
--- Round105 cross-pollination adds a downstream stress-energy consumer without
--- altering that scoreboard.  The key separation is:
+-- Round105/106 cross-pollination adds a downstream stress-energy consumer
+-- without altering that scoreboard.  The key separation is:
 --
 --   * CMP109 polarization = second gauge/background variation;
 --   * stress-energy = first metric/source variation;
---   * the first variation can reuse the existing CMP116 first-gradient marked
---     shell and weighted-row control;
---   * only metric->source-coordinate identification and stress pairing remain
---     new physical leaves for that downstream consumer.
+--   * first variation reuses the existing CMP116 first-gradient marked shell;
+--   * metric perturbations must explicitly land in the SAME canonical CMP116
+--     analytic source domain;
+--   * on that admitted domain, the remaining physical theorem is the stress
+--     representation D_g V_eff[h] = <T,h> with explicit pairing convention.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -28,6 +29,8 @@ import DASHI.Physics.YangMills.BalabanCMP109Equation51LocalizedHessianRound103Ex
 import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityHessianRound103Exact as Chain
 import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityFirstVariationRound105Exact as First
 import DASHI.Physics.YangMills.BalabanCMP116FirstVariationStressPairingRound105Exact as Stress
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106Exact as MetricDomain
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as StressRep
 import DASHI.Physics.YangMills.BalabanCMP109116ConventionTransportRound103Exact as Transport
 import DASHI.Physics.YangMills.BalabanCMP116CommonAnalyticRadiusRound103Exact as Radius
 import DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact as Carrier
@@ -63,7 +66,7 @@ rowAPhysicalSourceInstantiationRound103Level : ProofLevel
 rowAPhysicalSourceInstantiationRound103Level = conditional
 
 ------------------------------------------------------------------------
--- BC1
+-- BC1 / downstream stress consumer
 ------------------------------------------------------------------------
 
 bcFiniteSecondVariationSumRound103Level : ProofLevel
@@ -90,13 +93,27 @@ bcMetricToBackgroundFirstVariationTransportRound105Level : ProofLevel
 bcMetricToBackgroundFirstVariationTransportRound105Level =
   First.metricToBackgroundFirstVariationTransportLevel
 
--- Existing first-gradient Cauchy/localization machinery already pays the
--- analytic shell for a stress first variation.  No new stress-specific decay
--- theorem is required.
 bcStressReusesFirstGradientMarkedShellRound105Level : ProofLevel
 bcStressReusesFirstGradientMarkedShellRound105Level =
   Stress.cmp116StressReusesFirstGradientMarkedShellLevel
 
+bcCanonicalMetricSourceDomainRound106Level : ProofLevel
+bcCanonicalMetricSourceDomainRound106Level =
+  MetricDomain.canonicalMetricSourceDomainPackagingLevel
+
+bcLiteralMetricToSourceDomainRound106Level : ProofLevel
+bcLiteralMetricToSourceDomainRound106Level =
+  MetricDomain.literalMetricPerturbationToCMP116SourceDomainLevel
+
+bcCanonicalMetricStressRepresentationRound106Level : ProofLevel
+bcCanonicalMetricStressRepresentationRound106Level =
+  StressRep.canonicalMetricStressRepresentationCompilerLevel
+
+bcLiteralMetricStressRepresentationRound106Level : ProofLevel
+bcLiteralMetricStressRepresentationRound106Level =
+  StressRep.literalCMP116MetricStressRepresentationLevel
+
+-- Older Round105 aliases remain visible for compatibility.
 bcStressMetricSourceCoordinateWeldRound105Level : ProofLevel
 bcStressMetricSourceCoordinateWeldRound105Level =
   Stress.literalCMP116MetricSourceCoordinateWeldLevel
