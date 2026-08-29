@@ -1,0 +1,32 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanLiteralStressCompletionRound115Validation where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanStressSameObjectProvenanceRound110Exact as R110
+import DASHI.Physics.YangMills.BalabanMarkedStressLiteralDerivativeRound111Exact as R111
+import DASHI.Physics.YangMills.BalabanStressShellEnergyToHilbertRound112Exact as R112
+import DASHI.Physics.YangMills.BalabanStressShellPartitionEnergyRound113Exact as R113
+import DASHI.Physics.YangMills.BalabanLiteralStressCoordinateRound114Exact as R114
+import DASHI.Physics.YangMills.BalabanLiteralStressCompletionRound115Exact as R115
+
+round110SameObjectProvenanceCompiler : ProofLevel
+round110SameObjectProvenanceCompiler = R110.sameObjectStressProvenanceCompilerLevel
+
+round111LiteralDerivativeCompiler : ProofLevel
+round111LiteralDerivativeCompiler = R111.markedStressLiteralDerivativeCompilerLevel
+
+round112ShellEnergyToHilbertCompiler : ProofLevel
+round112ShellEnergyToHilbertCompiler = R112.stressShellEnergyToHilbertCompilerLevel
+
+round113ShellPartitionCompiler : ProofLevel
+round113ShellPartitionCompiler = R113.stressShellPartitionEnergyCompilerLevel
+
+round114OneCoordinateCompiler : ProofLevel
+round114OneCoordinateCompiler = R114.literalStressCoordinateCompilerLevel
+
+round115CompletionCompiler : ProofLevel
+round115CompletionCompiler = R115.literalStressCompletionCompilerLevel
+
+round115PhysicalInstantiationStillConditional : ProofLevel
+round115PhysicalInstantiationStillConditional =
+  R115.literalStressCoordinatePhysicalInstantiationRound115Level
