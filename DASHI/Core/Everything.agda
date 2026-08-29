@@ -8,6 +8,9 @@ import DASHI.Core.ContrastiveHistoryResidualExact
 import DASHI.Core.ContrastiveInterventionResponseExact
 import DASHI.Core.GeneratorCoverageReachabilityExact
 import DASHI.Core.FormalClaimTransportGeometryExact
+import DASHI.Core.PredictionEnvelopeExact
+import DASHI.Core.CalibratedExperimentInferenceExact
+import DASHI.Core.RobustExperimentInferenceFrontierExact
 import DASHI.Core.FormalizationRecoverySourceRegistryExact
 import DASHI.Core.FormalizationRecoveryGeometryExact
 import DASHI.Core.SourceAcquisitionGeometryExact
