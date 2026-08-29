@@ -79,13 +79,26 @@ record AristotleCurrentFrontier : Set where
     conjugationOrbitCompressionOwned : Bool
     conjugationOrbitCompressionOwnedIsFalse : conjugationOrbitCompressionOwned ≡ false
 
-    -- Cross-lane reuse: generic finite Gram algebra already exists in NS Round180.
+    -- Historical NS-specialized reuse. Round180 itself is rational Complex3,
+    -- so a DIRECT literal RH-real -> Round180-rational identification remains
+    -- false. It is retained as a boundary regression, not used as G1 closure.
     round180ExactFiniteGramLedgerReusedForRH : Bool
     round180ExactFiniteGramLedgerReusedForRHIsTrue : round180ExactFiniteGramLedgerReusedForRH ≡ true
     rhToRound180CarrierAdapterClosedInAgda : Bool
     rhToRound180CarrierAdapterClosedInAgdaIsTrue : rhToRound180CarrierAdapterClosedInAgda ≡ true
     literalRHPostSchurCellsIdentifiedWithRound180Carrier : Bool
     literalRHPostSchurCellsIdentifiedWithRound180CarrierIsFalse : literalRHPostSchurCellsIdentifiedWithRound180Carrier ≡ false
+
+    -- Correct G1 closure: extract Round180's finite telescope to a scalar-
+    -- generic exact Gram carrier, then weld the literal three-coordinate RH
+    -- post-Schur cell to that generic carrier. No R -> Q coercion is used.
+    genericFiniteSignedGramTelescopeExtractedInAgda : Bool
+    genericFiniteSignedGramTelescopeExtractedInAgdaIsTrue :
+      genericFiniteSignedGramTelescopeExtractedInAgda ≡ true
+    literalRHPostSchurGenericGramWeldClosedInAgda : Bool
+    literalRHPostSchurGenericGramWeldClosedInAgdaIsTrue :
+      literalRHPostSchurGenericGramWeldClosedInAgda ≡ true
+
     signedRHGramDebtEstimateClosed : Bool
     signedRHGramDebtEstimateClosedIsFalse : signedRHGramDebtEstimateClosed ≡ false
 
@@ -101,5 +114,7 @@ canonicalAristotleCurrentFrontier =
     false refl false refl false refl false refl false refl false refl false refl
     true refl true refl true refl true refl true refl true refl false refl false refl false refl
     true refl true refl true refl false refl false refl false refl
-    true refl true refl false refl false refl
-    "The explicit-cutoff Lean tranche closes the infinite S2 tail and constructs the literal finite reflection-paired near carrier on D_off. Bidi reuse across the repo shows that the generic finite Gram theorem is already machine-checked in NS Round180: ||sum cells||^2 = cellMassSum + signed gramDebt, with no absolute-value or cardinality loss. The new RH adapter proves that once the literal three-taper post-Schur near contributions are identified with the same exact Complex3 carrier, Round180 supplies the Gram identity automatically. Thus the live S2 mathematics is narrower again: G1 identify the literal RH post-Schur near contributions with Round180 cells; G2 bound the resulting signed Gram debt strongly enough that diagonal mass plus signed covariance, together with the explicit far-error energy, lies below the S1 cluster margin. Reflection compression is already exhausted; no conjugation-orbit claim is made without a checked source API. S1, G1, G2, the joint margin, and low-ordinate certification remain open. RH is not derived."
+    true refl true refl false refl
+    true refl true refl
+    false refl
+    "The explicit-cutoff Lean tranche closes the infinite S2 tail and constructs the literal finite reflection-paired near carrier on D_off. Bidi reuse exposed a type boundary in the first Round180 idea: NS Round180 is specialized to rational Complex3 whereas literal RH responses are real, so direct RH-real -> Round180-rational identification remains correctly false. The reusable mathematics has now been extracted instead: FiniteSignedGramTelescopeExact proves the exact finite diagonal-plus-signed-Gram-debt identity over any exact polarized additive carrier, and RiemannAristotleLiteralPostSchurFiniteGramWeldExact maps the literal three-coordinate RH post-Schur shape definitionally into that generic theorem. Thus G1 is closed without an R-to-Q coercion. The only live S2 cancellation theorem is G2: bound the finite signed RH gramDebt strongly enough that diagonal mass plus signed covariance, together with the explicit far-error energy, lies below the surviving S1 cluster margin. S1, G2, the joint margin, and low-ordinate certification remain open. RH is not derived."
