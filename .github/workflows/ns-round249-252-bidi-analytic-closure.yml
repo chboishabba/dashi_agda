@@ -1,0 +1,47 @@
+name: NS Round249-252 bidi analytic closure
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNStandardPeriodicSobolevW1Round249Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCanonicalG2Round240W2Round250Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNStandardSpacetimeW1AndFirstHitW3Round251Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNFirstHitBidiAnalyticClosureRound252Exact.agda'
+      - '.github/workflows/ns-round249-252-bidi-analytic-closure.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bidi-analytic-closure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Type-check Round249 standard periodic W1 authority
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNStandardPeriodicSobolevW1Round249Exact.agda
+
+      - name: Type-check Round250 canonical G2 Round240 W2 weld
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNCanonicalG2Round240W2Round250Exact.agda
+
+      - name: Type-check Round251 spacetime W1 and first-hit W3 authority
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNStandardSpacetimeW1AndFirstHitW3Round251Exact.agda
+
+      - name: Type-check Round252 bidi analytic closure capstone
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNFirstHitBidiAnalyticClosureRound252Exact.agda
