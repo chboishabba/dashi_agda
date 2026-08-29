@@ -10,6 +10,8 @@ import DASHI.Environment.LESBioelectricGaugeChemistryExact as Bioelectric
 import DASHI.Environment.LESEnvironmentSIQuantityBridgeExact as EnvironmentSI
 import DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact as RootSoilFungal
 import DASHI.Environment.SoilBiogeochemistryProcessNetworkExact as SoilBio
+import DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact as PlantHydraulics
+import DASHI.Environment.SoilPlantAtmosphereContinuumExact as SPAC
 import DASHI.Physics.Units.SI as SI
 import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact as EM
 import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact as PNP
@@ -25,6 +27,8 @@ data PhysicsReuseLane : Set where
   bioelectricElectrochemicalLane
   rootSoilFungalPhysiologyLane
   soilBiogeochemistryLane
+  plantHydraulicAtmosphereCarbonLane
+  soilPlantAtmosphereContinuumLane
   : PhysicsReuseLane
 
 record PhysicsToDomainWeld : Set where
@@ -78,6 +82,14 @@ soilBiogeochemistryOwner : String
 soilBiogeochemistryOwner =
   "DASHI.Environment.SoilBiogeochemistryProcessNetworkExact; DOI 10.1016/j.soilbio.2009.02.031"
 
+plantHydraulicOwner : String
+plantHydraulicOwner =
+  "DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact; DOI 10.1007/978-3-662-04931-0 + 10.1007/BF00386231 + 10.1111/pce.12823"
+
+spacOwner : String
+spacOwner =
+  "DASHI.Environment.SoilPlantAtmosphereContinuumExact; DOI 10.2134/agronj2003.1362"
+
 siVoltageDimension : SI.Dimension
 siVoltageDimension = SI.Voltage
 
@@ -95,6 +107,12 @@ rootSoilFungalBoundaryImported = RootSoilFungal.canonicalRootSoilFungalPhysiolog
 
 soilBiogeochemistryBoundaryImported : SoilBio.SoilBiogeochemistryBoundary
 soilBiogeochemistryBoundaryImported = SoilBio.canonicalSoilBiogeochemistryBoundary
+
+plantHydraulicBoundaryImported : PlantHydraulics.PlantHydraulicAtmosphereCarbonBoundary
+plantHydraulicBoundaryImported = PlantHydraulics.canonicalPlantHydraulicAtmosphereCarbonBoundary
+
+spacBoundaryImported : SPAC.SPACBoundary
+spacBoundaryImported = SPAC.canonicalSPACBoundary
 
 record LESPhysicsCrossPollinationCutset : Set where
   constructor lesPhysicsCrossPollinationCutset
@@ -114,13 +132,20 @@ record LESPhysicsCrossPollinationCutset : Set where
     mycorrhizalExtensionTyped : Bool
     soilCarbonNitrogenProcessArchitecturePresent : Bool
     soilPlantFungalBiogeochemistryWeldTyped : Bool
+    plantHydraulicAtmosphereCarbonArchitecturePresent : Bool
+    wholePlantSameStateWeldTyped : Bool
+    atmosphereWindLeafBoundaryWeldTyped : Bool
+    soilPlantAtmosphereContinuumArchitecturePresent : Bool
+    spacBiogeochemistryFeedbackWeldTyped : Bool
 
     applicationFluidReductionStillNeedsDomainReceipt : Bool
     applicationMaxwellConstitutiveReceiptsStillNeeded : Bool
     applicationPNPParametersAndBoundaryDataStillNeeded : Bool
     plantFluidPhysiologyWeldStillNeeded : Bool
+    plantHydraulicParameterisationStillNeeded : Bool
     fungalSoilIonExchangeWeldStillNeeded : Bool
     soilBiogeochemistryParameterisationStillNeeded : Bool
+    soilHydraulicConstitutiveReceiptStillNeeded : Bool
     atmosphereHydrologyConstitutiveWeldsStillNeeded : Bool
     stage7ValidationStillNeeded : Bool
 
@@ -129,8 +154,9 @@ open LESPhysicsCrossPollinationCutset public
 canonicalLESPhysicsCrossPollinationCutset : LESPhysicsCrossPollinationCutset
 canonicalLESPhysicsCrossPollinationCutset =
   lesPhysicsCrossPollinationCutset
-    true true true true true true true true true true true true true true true
-    true true true true true true true true
+    true true true true true true true true true true
+    true true true true true true true true true true
+    true true true false true true true true true true
 
 record LESPhysicsCrossPollinationBoundary : Set where
   constructor lesPhysicsCrossPollinationBoundary
@@ -153,6 +179,12 @@ record LESPhysicsCrossPollinationBoundary : Set where
     soilCNProcessGrammarIsUniversalSoilModel : Bool
     soilCNProcessGrammarIsUniversalSoilModelIsFalse :
       soilCNProcessGrammarIsUniversalSoilModel ≡ false
+    wholePlantHydraulicWeldIsUniversalCropModel : Bool
+    wholePlantHydraulicWeldIsUniversalCropModelIsFalse :
+      wholePlantHydraulicWeldIsUniversalCropModel ≡ false
+    spacWeldEliminatesStorageAndHysteresis : Bool
+    spacWeldEliminatesStorageAndHysteresisIsFalse :
+      spacWeldEliminatesStorageAndHysteresis ≡ false
 
 canonicalLESPhysicsCrossPollinationBoundary : LESPhysicsCrossPollinationBoundary
 canonicalLESPhysicsCrossPollinationBoundary =
@@ -161,6 +193,8 @@ canonicalLESPhysicsCrossPollinationBoundary =
     false refl
     true refl
     true refl
+    false refl
+    false refl
     false refl
     false refl
     false refl
