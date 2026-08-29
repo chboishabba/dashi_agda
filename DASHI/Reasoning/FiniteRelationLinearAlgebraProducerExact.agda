@@ -191,7 +191,7 @@ record ExactRotationProducer : Set where
     Carrier : Set
     rotate : Carrier → Carrier
     orderFour : (p : Carrier) → rotate (rotate (rotate (rotate p))) ≡ p
-    family : Adequacy.TransformationFamily
+    rotationFamily : Adequacy.TransformationFamily
     rotationReading : String
 
 canonicalQuarterTurnProducer : ExactRotationProducer
@@ -216,7 +216,7 @@ record ExactAffineProducer : Set where
     transform : Vec2 → Vec2
     specimenInput specimenOutput : Vec2
     specimenReceipt : transform specimenInput ≡ specimenOutput
-    family : Adequacy.TransformationFamily
+    affineFamily : Adequacy.TransformationFamily
     affineReading : String
 
 canonicalAffineProducer : ExactAffineProducer
