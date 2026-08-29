@@ -7,6 +7,11 @@ module DASHI.Physics.Closure.NSTriadKNPartnerBlockGramPositiveWitnessRound183Exa
 -- partner compression: the Gram debt BETWEEN compressed partner cells.
 -- This file gives an exact positive witness.  Therefore no proof may silently
 -- assume that partner compression itself makes the remaining debt nonpositive.
+--
+-- Round184/185 sharpen the consequence: this witness does NOT force us to pay
+-- every cross-class Gram term.  Three partner-invariant Bony class sums can be
+-- recombined with a fixed factor 3.  The witness only rules out a generic
+-- coefficient-one estimate before physical/classwise structure is used.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -56,6 +61,9 @@ round183PartnerCompressionAutomaticallyMakesDebtNonpositive = false
 
 round183PhysicalPhaseOrTrajectoryStructureStillRequired : Bool
 round183PhysicalPhaseOrTrajectoryStructureStillRequired = true
+
+round183CrossClassSignPaymentForced : Bool
+round183CrossClassSignPaymentForced = false
 
 round183PackageAClosed : Bool
 round183PackageAClosed = false
