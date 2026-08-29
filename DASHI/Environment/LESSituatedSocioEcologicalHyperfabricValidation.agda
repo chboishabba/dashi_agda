@@ -8,6 +8,10 @@ import DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact
 import DASHI.Core.ConsumerReductionDependencyReopeningExact
 import DASHI.Core.RobustInterventionAcrossHypothesesExact
 import DASHI.Core.AdaptiveConsumerModelLoopExact
+import DASHI.Core.ExperimentalCoordinateDesignExact
+import DASHI.Core.ActionabilityCostedExperimentChoiceExact
+import DASHI.Core.CommonExperimentRealisationExact
+import DASHI.Core.DiscriminatorSynthesisExact
 import DASHI.Biology.Physical.C3Cube27ConsumerReductionAdapterExact
 import DASHI.Physics.Units.SI
 import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact
@@ -25,6 +29,7 @@ import DASHI.Environment.LESAdaptiveSPACModelSearchExact
 import DASHI.Environment.LESSPACFidelityCounterexampleFixturesExact
 import DASHI.Environment.LESModelFibreRobustInterventionExact
 import DASHI.Environment.LESAdaptiveConsumerLoopCrossPollinationExact
+import DASHI.Environment.LESDiscriminatorSynthesisExact
 import DASHI.Environment.LESFluidPhysicsCouplingExact
 import DASHI.Environment.LESBioelectricGaugeChemistryExact
 import DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact
