@@ -1,0 +1,28 @@
+name: Riemann Aristotle two-zero return
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Analysis/RiemannAristotleTwoZeroThreeTaperReturnExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleTwoZeroThreeTaperReturnRegression.agda'
+      - 'DASHI/Analysis/ExactSelectedEliminationFarTailCompilerExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleProjectedZeroTailSummabilityReturnExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleWholeCarrierCancellationCompilerExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleNearFarShellBudgetCompilerExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleNearFarShellProducerSocketsExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleNearFarShellCompositionExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleFarTailCutoffSelectorExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleNearFarAllowanceCompositionExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda'
+      - 'scripts/check_riemann_aristotle_two_zero_return.sh'
+      - '.github/workflows/riemann-aristotle-two-zero-return.yml'
+  workflow_dispatch:
+
+jobs:
+  focused-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trust scan and focused Agda check when toolchain is available
+        run: bash scripts/check_riemann_aristotle_two_zero_return.sh

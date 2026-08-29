@@ -21,20 +21,22 @@ module DASHI.Analysis.RiemannAristotleWindowSchurCrossProverSyncExact where
 --     -> positive pole-null taper family
 --     -> two-taper leading cross determinant
 --     -> localized-window TP2/covariance separation
---     -> positive-width window-taper existence
---     -> normalized narrow-window endpoint domination frontier.
+--     -> positive-width normalized narrow-window endpoint domination
+--     -> one-selected-zero literal Schur admission
+--     -> three-window point determinant gate
+--     -> positive-width three-window determinant
+--     -> small-radius literal 3x3 determinant nonvanishing
+--     -> inhabited exact two-selected-zero / three-taper Schur admission.
 --
--- The currently live Lean obligation is not another Gram sign theorem.  It is
--- a quantitative residual-budget theorem: transport the endpoint/narrow-window
--- bounds through the explicit detRest polynomial so that the positive strict
--- cross margin dominates the residual budget.
+-- The currently live Lean obligation is therefore no longer normalized endpoint
+-- transport and no longer finite selected-zero algebra.  The selected two-zero
+-- carrier is eliminated exactly.  The first open analytic payment is the
+-- projected unselected carrier together with the remaining prime/Gamma terms:
 --
--- This is exactly the generic theorem shape already owned in Agda by
--- ResidualBudgetMarginCompilerExact and structurally anticipated by G21's
--- determinant-level margin interface.  PR #627 independently arrived at the
--- same architecture for Navier--Stokes block Gram covariance: positive residual
--- covariance is admissible when quantitatively budgeted.  No #627 code is
--- imported here; this is theorem-pattern provenance only.
+--       farResidual <= B_far < strictSignalMargin.
+--
+-- The old absolute W(t)-majorant route remains structurally exhausted; exact
+-- finite elimination does not revive it.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -123,8 +125,22 @@ normalizedEndpointDominationStatus : CrossProverTheoremStatus
 normalizedEndpointDominationStatus =
   cross-prover-theorem-status
     "normalized narrow-window endpoint domination"
-    leanAristotleOwner false false
-    "Current continuation target: unit-mass self responses vanish with window width while separated-window cross responses retain a positive endpoint margin; transport these bounds through detRest."
+    leanAristotleOwner true false
+    "Lean closed the earlier normalized endpoint transport and used it in the one-selected-zero Schur admission. This status does not transport that proof into Agda."
+
+twoZeroThreeTaperAdmissionStatus : CrossProverTheoremStatus
+twoZeroThreeTaperAdmissionStatus =
+  cross-prover-theorem-status
+    "LiteralWeilThreeWindowNarrowInstance.exists_taper_triple_two_zero_admission"
+    leanAristotleOwner true false
+    "Lean constructs three positive narrow tapers and a small-radius threshold for which two selected nuisance-zero responses are eliminated exactly while a strictly ordered target height survives with positive residual norm-square."
+
+projectedFarTailStatus : CrossProverTheoremStatus
+projectedFarTailStatus =
+  cross-prover-theorem-status
+    "projected unselected-zero plus prime/Gamma far-tail budget"
+    openObligation false false
+    "This is now the first analytic payment after the finite selected carrier. Exact two-zero elimination contributes no local residual debt; a new projected/signed tail mechanism is required because the old absolute W(t) majorant is exhausted."
 
 currentAristotleStatuses : List CrossProverTheoremStatus
 currentAristotleStatuses =
@@ -136,7 +152,9 @@ currentAristotleStatuses =
   multiTaperSchurStatus ∷
   positivePoleNullFamilyStatus ∷
   windowSeparationStatus ∷
-  normalizedEndpointDominationStatus ∷ []
+  normalizedEndpointDominationStatus ∷
+  twoZeroThreeTaperAdmissionStatus ∷
+  projectedFarTailStatus ∷ []
 
 ------------------------------------------------------------------------
 -- Agda theorem surfaces returned to Lean.
@@ -199,8 +217,17 @@ record AristotleAgdaSyncBoundary : Set where
     residualSignTheoremRequired : Bool
     residualSignTheoremRequiredIsFalse : residualSignTheoremRequired ≡ false
     normalizedEndpointTransportClosed : Bool
-    normalizedEndpointTransportClosedIsFalse :
-      normalizedEndpointTransportClosed ≡ false
+    normalizedEndpointTransportClosedIsTrue :
+      normalizedEndpointTransportClosed ≡ true
+    inhabitedTwoZeroThreeTaperClosedInLean : Bool
+    inhabitedTwoZeroThreeTaperClosedInLeanIsTrue :
+      inhabitedTwoZeroThreeTaperClosedInLean ≡ true
+    selectedTwoZeroResidualDebtRequired : Bool
+    selectedTwoZeroResidualDebtRequiredIsFalse :
+      selectedTwoZeroResidualDebtRequired ≡ false
+    projectedFarTailBudgetClosed : Bool
+    projectedFarTailBudgetClosedIsFalse :
+      projectedFarTailBudgetClosed ≡ false
     riemannHypothesisDerived : Bool
     riemannHypothesisDerivedIsFalse : riemannHypothesisDerived ≡ false
 
@@ -209,6 +236,9 @@ canonicalAristotleAgdaSyncBoundary =
   aristotle-agda-sync-boundary
     false refl
     false refl
+    true refl
+    false refl
+    true refl
     true refl
     false refl
     false refl
