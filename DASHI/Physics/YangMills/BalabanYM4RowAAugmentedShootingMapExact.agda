@@ -3,18 +3,6 @@ module DASHI.Physics.YangMills.BalabanYM4RowAAugmentedShootingMapExact where
 
 ------------------------------------------------------------------------
 -- ROW A: q_direct + q_history < 1 -> ACTUAL SHOOTING-MAP CONTRACTION
---
--- The direct cubic-telescope lane and the irrelevant-memory lane produce two
--- different Lipschitz contributions to the cumulative beta correction.  The
--- previous augmented gate proves their constants satisfy
---
---                       q_direct + q_history < 1.
---
--- This file closes the algebraic seam at the level of the actual shooting map:
--- if B_direct and B_history have those two Lipschitz constants, then their sum
--- has constant q_total, and adding the fixed renormalised target does not change
--- differences.  Hence the literal source map is a strict contraction once the
--- two same-object response identifications are supplied.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -22,10 +10,10 @@ open import Agda.Builtin.Nat using (Nat)
 import Data.Nat.Base as ℕ
 open import Data.Product.Base using (_×_; _,_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; ∣_∣; _+_; _-_; _*_; _≤_; _<_)
+  (ℚ; 1ℚ; ∣_∣; _+_; _-_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4ShootingSensitivityFromCubicDriftExact as Direct
@@ -117,7 +105,7 @@ totalCorrectionLipschitz dataSet u v =
 
 strictTotalSensitivity :
   ∀ {cutoff} (dataSet : AugmentedShootingMapData cutoff) →
-  Aug.Augmented.qTotal (sensitivityData dataSet) (cutoffIndex dataSet) < (+ 1 / 1)
+  Aug.Augmented.qTotal (sensitivityData dataSet) (cutoffIndex dataSet) < 1ℚ
 strictTotalSensitivity dataSet =
   Aug.Augmented.qTotalBelowOne
     (sensitivityData dataSet)
@@ -145,7 +133,7 @@ shootingMapStrictContractionPackage :
     ≤ Aug.Augmented.qTotal (sensitivityData dataSet) (cutoffIndex dataSet)
       * ∣ u - v ∣)
   × (Aug.Augmented.qTotal
-      (sensitivityData dataSet) (cutoffIndex dataSet) < (+ 1 / 1))
+      (sensitivityData dataSet) (cutoffIndex dataSet) < 1ℚ)
 shootingMapStrictContractionPackage dataSet target u v =
   shootingMapContraction dataSet target u v , strictTotalSensitivity dataSet
 
@@ -155,9 +143,5 @@ rowAAugmentedCorrectionLipschitzAssemblyLevel = machineChecked
 rowAAugmentedShootingMapStrictContractionLevel : ProofLevel
 rowAAugmentedShootingMapStrictContractionLevel = machineChecked
 
--- Physical seam is now solely identification of the two actual cumulative beta
--- response pieces with `directCorrection` and `irrelevantHistoryCorrection`.
--- Their Lipschitz constants are produced by the direct mixed-Cauchy/cubic lane
--- and the irrelevant-history source lane respectively.
 literalRowAAugmentedShootingMapIdentificationLevel : ProofLevel
 literalRowAAugmentedShootingMapIdentificationLevel = conditional
