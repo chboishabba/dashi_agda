@@ -49,6 +49,7 @@ python3 scripts/validate_relation_representation_external_receipt.py \
 
 grep -q 'dashi.relation-representation.external-study-receipt.v1' Artifacts/relation-representation/external-study-receipt-template.json
 grep -q 'rise-2510.09790' Artifacts/relation-representation/external-study-receipt-template.json
+grep -q 'grokking-2602.02859' scripts/validate_relation_representation_external_receipt.py
 
 grep -q '10.52202/085713-1438' DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
 grep -q '10.48550/arXiv.2510.09790' DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda
@@ -66,6 +67,8 @@ grep -q 'magnitudeAwareValidation' DASHI/Reasoning/RelationRepresentationStudyVa
 grep -q 'calibratedSimilarityValidation' DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
 grep -q 'manifoldSteeringValidation' DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
 grep -q 'differentialEquivalenceValidation' DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
+grep -q 'grokkingDynamicValidation' DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
+grep -q 'spectralDiagnosticReceipt' DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
 grep -q 'currentExternalStudyPayloadAvailability' DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda
 
 grep -q 'evidenceFibreStage' DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
@@ -74,6 +77,8 @@ grep -q 'calibratedInferenceStage' DASHI/Reasoning/RelationRepresentationTOEInfe
 grep -q 'certifiedSensitivityStage' DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
 grep -q 'robustnessDiscrepancyStage' DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
 grep -q 'heldOutValidationStage' DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
+grep -q 'spectralDiagnosticHandoff' DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
+grep -q 'spectralDiagnosticIsCausalMechanismByDefault' DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
 grep -q 'stage67OwnersShouldBeReusedAfterMerge' DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda
 
 grep -q 'ExternalStudyReceipt' DASHI/Reasoning/RelationRepresentationExternalReceiptAdmissionExact.agda
