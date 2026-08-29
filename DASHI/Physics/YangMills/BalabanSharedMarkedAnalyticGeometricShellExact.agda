@@ -3,23 +3,6 @@ module DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticGeometricShellExact wh
 
 ------------------------------------------------------------------------
 -- ROW B: SHARED CMP116 MARKED CONTROL ALREADY IMPLIES GEOMETRIC SHELL DECAY
---
--- `BalabanSharedMarkedAnalyticShellExact` packages the source-facing CMP116
--- differentiated-localization theorem in the form
---
---   marked_k(d) <= C_k * rooted_k(d),
---   rooted_k(d) <= (1/4) * (1/2)^d.
---
--- Therefore the geometric shell-energy estimate requested by the frozen Row-B
--- contract is not an additional physical theorem once that shared marked source
--- control is instantiated.  It follows exactly with ratio r=1/2:
---
---   response_k(d) <= (C_k/4) * (1/2)^d.
---
--- This file proves that implication simultaneously for beta-history, Hessian
--- influence, and composite insertion marks.  A stress insertion can reuse the
--- same bound once its literal shell is identified below the composite marked
--- shell on the same completed differentiated RG state.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -28,6 +11,7 @@ open import Data.Rational.Base as ℚ using
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Nullary.Decidable using (toWitness)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayP2LargeFieldStepVExact as StepV
@@ -46,6 +30,9 @@ mulNN {left} {right} leftNN rightNN =
   in
   ℚP.nonNegative⁻¹ (left * right)
 
+quarterNN : 0ℚ ≤ StepV.quarter
+quarterNN = toWitness {a? = 0ℚ ℚP.≤? StepV.quarter} _
+
 markedBaseEnergy :
   ∀ {Scale Volume Root} →
   Shared.SharedMarkedAnalyticShellControl Scale Volume Root →
@@ -59,10 +46,6 @@ markedBaseEnergyNonnegative :
     kind →
   0ℚ ≤ markedBaseEnergy dataSet kind
 markedBaseEnergyNonnegative dataSet kind =
-  let
-    quarterNN : 0ℚ ≤ StepV.quarter
-    quarterNN = ℚP.nonNegative⁻¹ StepV.quarter
-  in
   mulNN quarterNN (Shared.markedConstantNonnegative dataSet kind)
 
 markedAnalyticShellGeometricHalf :
@@ -75,10 +58,8 @@ markedAnalyticShellGeometricHalf dataSet kind scale volume root depth =
   let
     first = Shared.markedAnalyticShellBelowRooted
       dataSet kind scale volume root depth
-
     rooted = StepV.rootedShellBelowMajorant
       (Shared.kpShell dataSet kind) scale volume root depth
-
     scaled = Norm.scaleNonnegative
       (Shared.markedConstant dataSet kind)
       (Shared.markedConstantNonnegative dataSet kind)
@@ -147,11 +128,6 @@ compositeInsertionGeometricHalf dataSet =
     (Shared.compositeInsertionShell dataSet)
     (Shared.compositeBelowAnalytic dataSet)
 
-------------------------------------------------------------------------
--- Stress can share the composite shell once its literal marked coordinate is
--- identified on the same differentiated state.
-------------------------------------------------------------------------
-
 record StressBelowCompositeMarkedShell
     {Scale Volume Root : Set}
     (dataSet : Shared.SharedMarkedAnalyticShellControl Scale Volume Root) : Set₁ where
@@ -187,11 +163,6 @@ sharedCompositeGeometricShellLevel = machineChecked
 stressBelowCompositeToGeometricShellLevel : ProofLevel
 stressBelowCompositeToGeometricShellLevel = machineChecked
 
--- Physical Row-B seam after this reduction: instantiate the source-native
--- `SharedMarkedAnalyticShellControl` from CMP116 on one cutoff-uniform domain,
--- identify the literal Hessian/composite/stress source coordinates, and prove
--- the stress-to-composite shell identification if stress is routed through the
--- common composite mark.  The r=1/2 geometric estimate is downstream algebra.
 physicalCMP116SharedMarkedControlInstantiationLevel : ProofLevel
 physicalCMP116SharedMarkedControlInstantiationLevel = conditional
 
