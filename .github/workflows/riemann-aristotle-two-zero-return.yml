@@ -17,6 +17,7 @@ on:
       - 'DASHI/Analysis/RiemannAristotleNearFarAllowanceCompositionExact.agda'
       - 'DASHI/Analysis/RiemannAristotleFiniteNearCoreSchurCompilerExact.agda'
       - 'DASHI/Analysis/RiemannAristotleFiniteNearGramCancellationCompilerExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleFiniteNearNSGramAdapterExact.agda'
       - 'DASHI/Analysis/RiemannAristotleDeterministicProjectiveSchurReturnExact.agda'
       - 'DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda'
       - 'DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda'
