@@ -8,10 +8,12 @@ import DASHI.Environment.LESDomainBasisBidiFrontierExact as Basis
 import DASHI.Environment.LESFluidPhysicsCouplingExact as Fluid
 import DASHI.Environment.LESBioelectricGaugeChemistryExact as Bioelectric
 import DASHI.Environment.LESEnvironmentSIQuantityBridgeExact as EnvironmentSI
+import DASHI.Environment.LESPhysicalProcessSourceRegistryExact as Sources
 import DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact as RootSoilFungal
 import DASHI.Environment.SoilBiogeochemistryProcessNetworkExact as SoilBio
 import DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact as PlantHydraulics
 import DASHI.Environment.SoilPlantAtmosphereContinuumExact as SPAC
+import DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact as Constitutive
 import DASHI.Physics.Units.SI as SI
 import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact as EM
 import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact as PNP
@@ -29,6 +31,7 @@ data PhysicsReuseLane : Set where
   soilBiogeochemistryLane
   plantHydraulicAtmosphereCarbonLane
   soilPlantAtmosphereContinuumLane
+  constitutiveSPACCalibrationLane
   : PhysicsReuseLane
 
 record PhysicsToDomainWeld : Set where
@@ -67,6 +70,10 @@ siQuantityArchitectureOwner = "DASHI.Physics.Units.SI; BIPM DOI 10.59161/AUEZ129
 environmentSIBridgeOwner : String
 environmentSIBridgeOwner = "DASHI.Environment.LESEnvironmentSIQuantityBridgeExact"
 
+physicalProcessSourceRegistryOwner : String
+physicalProcessSourceRegistryOwner =
+  "DASHI.Environment.LESPhysicalProcessSourceRegistryExact"
+
 u1Owner : String
 u1Owner = "DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact"
 
@@ -90,6 +97,10 @@ spacOwner : String
 spacOwner =
   "DASHI.Environment.SoilPlantAtmosphereContinuumExact; DOI 10.2134/agronj2003.1362"
 
+constitutiveCalibrationOwner : String
+constitutiveCalibrationOwner =
+  "DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact; DOI 10.1063/1.1745010 + 10.1029/WR012i003p00513 + 10.2136/sssaj1980.03615995004400050002x + 10.1111/j.1365-2486.2010.02375.x"
+
 siVoltageDimension : SI.Dimension
 siVoltageDimension = SI.Voltage
 
@@ -102,6 +113,9 @@ u1BoundaryImported = EM.canonicalU1ElectromagneticBoundary
 pnpBoundaryImported : PNP.PNPElectrodiffusionBoundary
 pnpBoundaryImported = PNP.canonicalPNPElectrodiffusionBoundary
 
+sourceAttributionBoundaryImported : Sources.LESPhysicalProcessAttributionBoundary
+sourceAttributionBoundaryImported = Sources.canonicalLESPhysicalProcessAttributionBoundary
+
 rootSoilFungalBoundaryImported : RootSoilFungal.RootSoilFungalPhysiologyBoundary
 rootSoilFungalBoundaryImported = RootSoilFungal.canonicalRootSoilFungalPhysiologyBoundary
 
@@ -113,6 +127,9 @@ plantHydraulicBoundaryImported = PlantHydraulics.canonicalPlantHydraulicAtmosphe
 
 spacBoundaryImported : SPAC.SPACBoundary
 spacBoundaryImported = SPAC.canonicalSPACBoundary
+
+constitutiveBoundaryImported : Constitutive.ConstitutiveHydrologyPlantBoundary
+constitutiveBoundaryImported = Constitutive.canonicalConstitutiveHydrologyPlantBoundary
 
 record LESPhysicsCrossPollinationCutset : Set where
   constructor lesPhysicsCrossPollinationCutset
@@ -137,6 +154,12 @@ record LESPhysicsCrossPollinationCutset : Set where
     atmosphereWindLeafBoundaryWeldTyped : Bool
     soilPlantAtmosphereContinuumArchitecturePresent : Bool
     spacBiogeochemistryFeedbackWeldTyped : Bool
+    typedPhysicalProcessSourceRegistryPresent : Bool
+    richardsPorousFlowReceiptTyped : Bool
+    soilRetentionConductivityCalibrationTyped : Bool
+    xylemConstitutiveCalibrationTyped : Bool
+    stomatalPhotosynthesisCalibrationTyped : Bool
+    constitutiveSPACCommonStateTyped : Bool
 
     applicationFluidReductionStillNeedsDomainReceipt : Bool
     applicationMaxwellConstitutiveReceiptsStillNeeded : Bool
@@ -156,7 +179,8 @@ canonicalLESPhysicsCrossPollinationCutset =
   lesPhysicsCrossPollinationCutset
     true true true true true true true true true true
     true true true true true true true true true true
-    true true true false true true true true true true
+    true true true true true true
+    true true true false true true true false true true
 
 record LESPhysicsCrossPollinationBoundary : Set where
   constructor lesPhysicsCrossPollinationBoundary
@@ -185,6 +209,12 @@ record LESPhysicsCrossPollinationBoundary : Set where
     spacWeldEliminatesStorageAndHysteresis : Bool
     spacWeldEliminatesStorageAndHysteresisIsFalse :
       spacWeldEliminatesStorageAndHysteresis ≡ false
+    typedSourceRegistryPromotesExternalClaimsToProof : Bool
+    typedSourceRegistryPromotesExternalClaimsToProofIsFalse :
+      typedSourceRegistryPromotesExternalClaimsToProof ≡ false
+    fittedConstitutiveCalibrationIsHeldOutValidation : Bool
+    fittedConstitutiveCalibrationIsHeldOutValidationIsFalse :
+      fittedConstitutiveCalibrationIsHeldOutValidation ≡ false
 
 canonicalLESPhysicsCrossPollinationBoundary : LESPhysicsCrossPollinationBoundary
 canonicalLESPhysicsCrossPollinationBoundary =
@@ -193,6 +223,8 @@ canonicalLESPhysicsCrossPollinationBoundary =
     false refl
     true refl
     true refl
+    false refl
+    false refl
     false refl
     false refl
     false refl
