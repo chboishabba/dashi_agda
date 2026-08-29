@@ -10,6 +10,7 @@ module DASHI.Analysis.ReflectionPairSignedKernelCompilerExact where
 -- kernel is owned by the separate Lean source return.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl; cong₂; trans)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; _+_; -_; _*_)
@@ -46,8 +47,6 @@ record ReflectionPairSignedKernelBoundary : Set where
     pairBeforeAbsoluteValuesIsTrue : pairBeforeAbsoluteValues ≡ true
     oddComponentSurvivesPairing : Bool
     oddComponentSurvivesPairingIsFalse : oddComponentSurvivesPairing ≡ false
-
-open import Agda.Builtin.Bool using (Bool; true; false)
 
 canonicalReflectionPairSignedKernelBoundary : ReflectionPairSignedKernelBoundary
 canonicalReflectionPairSignedKernelBoundary =
