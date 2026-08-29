@@ -8,6 +8,7 @@ import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 import DASHI.Reasoning.RelationRepresentationSourceRegistryExact as Sources
 import DASHI.Reasoning.RelationRepresentationAdequacyExact as Adequacy
 import DASHI.Reasoning.RelationRepresentationRealizationExact as Realization
+import DASHI.Reasoning.BidirectionalRelationRepresentationBridgeExact as Bidi
 import DASHI.Reasoning.EigenslurFlourishingRelationBoundaryExact as Domain
 import DASHI.Reasoning.RelationRepresentationCrossPollinationExact as Cross
 
@@ -23,6 +24,9 @@ adequacyBoundary = Adequacy.canonicalRelationRepresentationAdequacyBoundary
 
 realizationBoundary : Realization.RelationRepresentationRealizationBoundary
 realizationBoundary = Realization.canonicalRelationRepresentationRealizationBoundary
+
+bidirectionalBoundary : Bidi.BidirectionalRelationBridgeBoundary
+bidirectionalBoundary = Bidi.canonicalBidirectionalRelationBridgeBoundary
 
 domainBoundary : Domain.EigenslurFlourishingBoundary
 domainBoundary = Domain.canonicalEigenslurFlourishingBoundary
