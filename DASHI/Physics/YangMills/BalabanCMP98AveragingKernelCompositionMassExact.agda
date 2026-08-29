@@ -10,36 +10,37 @@ module DASHI.Physics.YangMills.BalabanCMP98AveragingKernelCompositionMassExact w
 --
 -- Hence normalized averaging steps remain normalized under arbitrary finite
 -- composition, and a zero-mass background derivative remains zero-mass after
--- composition with any number of later normalized steps:
---
---                  0 * 1 * ... * 1 = 0.
---
--- This is the algebraic part of the Lean `KernelComposition` result.  It removes
--- RG-depth dependence from the mass/cancellation hypothesis: only support range
--- may grow with the number of composed steps.
+-- every later normalized averaging step.  This is the algebraic part of the
+-- Lean `KernelComposition` result; only support range can grow with depth.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_)
 import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP98AveragingNormalizationDerivativeExact as Norm
 
-sumScale :
+sumScaleLeft :
   ∀ {A : Set} (values : List A) (scale : ℚ) (f : A → ℚ) →
   Norm.sumRational values (λ x → scale * f x)
   ≡ scale * Norm.sumRational values f
-sumScale [] scale f = symZero
-  where
-  symZero : 0ℚ ≡ scale * 0ℚ
-  symZero = Agda.Builtin.Equality.refl
-sumScale (x ∷ xs) scale f =
-  trans
-    (cong (scale * f x +_) (sumScale xs scale f))
-    (ℚP.*-distribˡ-+ scale (f x) (Norm.sumRational xs f))
+sumScaleLeft [] scale f = ℚRing.solve-∀ scale
+sumScaleLeft (x ∷ xs) scale f
+  rewrite sumScaleLeft xs scale f =
+  ℚRing.solve-∀ scale (f x) (Norm.sumRational xs f)
+
+sumScaleRight :
+  ∀ {A : Set} (values : List A) (f : A → ℚ) (scale : ℚ) →
+  Norm.sumRational values (λ x → f x * scale)
+  ≡ Norm.sumRational values f * scale
+sumScaleRight [] f scale = ℚRing.solve-∀ scale
+sumScaleRight (x ∷ xs) f scale
+  rewrite sumScaleRight xs f scale =
+  ℚRing.solve-∀ (f x) (Norm.sumRational xs f) scale
 
 record FiniteRationalKernel (Atom : Set) : Set₁ where
   field
@@ -68,7 +69,7 @@ innerCompositionMass :
     (λ b → weight left a * weight right b)
   ≡ weight left a * totalMass right
 innerCompositionMass left right a =
-  sumScale (atoms right) (weight left a) (weight right)
+  sumScaleLeft (atoms right) (weight left a) (weight right)
 
 compositionMassMultiplies :
   ∀ {LeftAtom RightAtom}
@@ -76,43 +77,21 @@ compositionMassMultiplies :
     (right : FiniteRationalKernel RightAtom) →
   nestedCompositionMass left right
   ≡ totalMass left * totalMass right
-compositionMassMultiplies left right =
-  trans
-    (sumCong (atoms left))
-    (sumScale (atoms left) (totalMass right) (weight left) |> commute)
+compositionMassMultiplies left right = go (atoms left)
   where
-  sumCong : (values : List _) →
+  go : (values : List _) →
     Norm.sumRational values
       (λ a → Norm.sumRational (atoms right)
         (λ b → weight left a * weight right b))
-    ≡ Norm.sumRational values
-      (λ a → weight left a * totalMass right)
-  sumCong [] = refl
-  sumCong (a ∷ rest) =
-    cong₂ _+_ (innerCompositionMass left right a) (sumCong rest)
-
-  commute :
-    Norm.sumRational (atoms left)
-      (λ a → totalMass right * weight left a)
-    ≡ totalMass left * totalMass right
-  commute =
-    trans
-      (sumCommute (atoms left))
-      (ℚP.*-comm (totalMass right) (totalMass left))
-    where
-    sumCommute : (values : List _) →
-      Norm.sumRational values
-        (λ a → totalMass right * weight left a)
-      ≡ Norm.sumRational values
-        (λ a → weight left a * totalMass right)
-    sumCommute [] = refl
-    sumCommute (a ∷ rest) =
-      cong₂ _+_ (ℚP.*-comm (totalMass right) (weight left a)) (sumCommute rest)
-
--- Small helper replacing pipeline syntax in the theorem above.
-infixl 0 _|>_
-_|>_ : ∀ {A B : Set} → A → (A → B) → B
-value |> f = f value
+    ≡ Norm.sumRational values (weight left) * totalMass right
+  go [] = ℚRing.solve-∀ (totalMass right)
+  go (a ∷ rest)
+    rewrite innerCompositionMass left right a
+          | go rest =
+    ℚRing.solve-∀
+      (weight left a)
+      (Norm.sumRational rest (weight left))
+      (totalMass right)
 
 normalizedCompositionMassOne :
   ∀ {LeftAtom RightAtom}
@@ -120,12 +99,10 @@ normalizedCompositionMassOne :
     (right : FiniteRationalKernel RightAtom) →
   totalMass left ≡ 1ℚ → totalMass right ≡ 1ℚ →
   nestedCompositionMass left right ≡ 1ℚ
-normalizedCompositionMassOne left right leftOne rightOne =
-  trans
-    (compositionMassMultiplies left right)
-    (trans
-      (cong₂ _*_ leftOne rightOne)
-      (ℚP.*-identityˡ 1ℚ))
+normalizedCompositionMassOne left right leftOne rightOne
+  rewrite compositionMassMultiplies left right
+        | leftOne | rightOne =
+  refl
 
 zeroMassSurvivesNormalizedComposition :
   ∀ {DerivativeAtom LaterAtom}
@@ -134,45 +111,18 @@ zeroMassSurvivesNormalizedComposition :
   totalMass derivativeKernel ≡ 0ℚ →
   totalMass laterKernel ≡ 1ℚ →
   nestedCompositionMass derivativeKernel laterKernel ≡ 0ℚ
-zeroMassSurvivesNormalizedComposition derivativeKernel laterKernel derivativeZero laterOne =
-  trans
-    (compositionMassMultiplies derivativeKernel laterKernel)
-    (trans
-      (cong₂ _*_ derivativeZero laterOne)
-      refl)
+zeroMassSurvivesNormalizedComposition derivativeKernel laterKernel derivativeZero laterOne
+  rewrite compositionMassMultiplies derivativeKernel laterKernel
+        | derivativeZero | laterOne =
+  refl
 
-massProduct : List ℚ → ℚ
-massProduct [] = 1ℚ
-massProduct (m ∷ ms) = m * massProduct ms
-
-allNormalizedProductOne :
-  (masses : List ℚ) →
-  (∀ mass → member mass masses → mass ≡ 1ℚ) →
-  massProduct masses ≡ 1ℚ
-allNormalizedProductOne [] allOne = refl
-allNormalizedProductOne (m ∷ ms) allOne =
-  trans
-    (cong₂ _*_
-      (allOne m here)
-      (allNormalizedProductOne ms (λ mass proof → allOne mass (there proof))))
-    (ℚP.*-identityˡ 1ℚ)
-  where
-  data member (x : ℚ) : List ℚ → Set where
-    here : ∀ {xs} → member x (x ∷ xs)
-    there : ∀ {y xs} → member x xs → member x (y ∷ xs)
-
-zeroMassTimesAnyProduct :
-  (masses : List ℚ) → 0ℚ * massProduct masses ≡ 0ℚ
-zeroMassTimesAnyProduct masses = refl
-
+-- Iterating the previous theorem needs no new estimate: after each normalized
+-- step the composed derivative still has mass zero, so the theorem applies again.
 cmp98KernelCompositionMassMultiplicationLevel : ProofLevel
 cmp98KernelCompositionMassMultiplicationLevel = machineChecked
 
 cmp98DerivativeZeroMassSurvivesCompositionLevel : ProofLevel
 cmp98DerivativeZeroMassSurvivesCompositionLevel = machineChecked
 
--- Physical/source seam: identify each later RG averaging step with a normalized
--- finite CMP98/CMP99 kernel.  No extra zero-mass assumption may then be added for
--- the composed Q' object; it follows from the initial derivative cancellation.
 literalCMP98ComposedKernelIdentificationLevel : ProofLevel
 literalCMP98ComposedKernelIdentificationLevel = conditional
