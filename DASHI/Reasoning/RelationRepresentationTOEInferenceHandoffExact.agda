@@ -60,7 +60,12 @@ rawPairHandoff =
 rawActivationHandoff : ArtifactHandoff
 rawActivationHandoff =
   artifactHandoff Study.rawEmbeddingsOrActivations evidenceFibreStage
-    "Raw embeddings/activations are producer evidence.  Their existence does not yet imply point-identifiability, probability, or realization."
+    "Raw embeddings/activations are producer evidence. Their existence does not yet imply point-identifiability, probability, or realization."
+
+weightSnapshotHandoff : ArtifactHandoff
+weightSnapshotHandoff =
+  artifactHandoff Study.weightOrParameterSnapshots evidenceFibreStage
+    "Checkpointed weights/parameters are evidence provenance for dynamical/spectral claims; a spectral interpretation is not carried by the snapshot itself."
 
 rawScoreHandoff : ArtifactHandoff
 rawScoreHandoff =
@@ -76,6 +81,16 @@ statisticalReceiptHandoff : ArtifactHandoff
 statisticalReceiptHandoff =
   artifactHandoff Study.statisticalTestReceipt calibratedInferenceStage
     "A statistical-test receipt belongs in calibrated/weighted inference and must remain distinct from deterministic admissibility."
+
+spectralDiagnosticHandoff : ArtifactHandoff
+spectralDiagnosticHandoff =
+  artifactHandoff Study.spectralDiagnosticReceipt calibratedInferenceStage
+    "A reported spectral diagnostic is a measured/derived score requiring declared computation and calibration semantics; it is not automatically a causal mechanism or future-safety certificate."
+
+alternativeDiagnosticHandoff : ArtifactHandoff
+alternativeDiagnosticHandoff =
+  artifactHandoff Study.alternativeDiagnosticReceipt robustnessDiscrepancyStage
+    "Competing diagnostics belong in robustness/model-discrimination checks because agreement or disagreement between diagnostics bears on adequacy of the proposed mechanism."
 
 checkpointHandoff : ArtifactHandoff
 checkpointHandoff =
@@ -103,14 +118,48 @@ allCanonicalHandoffs =
   ∷ modelRevisionHandoff
   ∷ rawPairHandoff
   ∷ rawActivationHandoff
+  ∷ weightSnapshotHandoff
   ∷ rawScoreHandoff
   ∷ humanJudgmentHandoff
   ∷ statisticalReceiptHandoff
+  ∷ spectralDiagnosticHandoff
+  ∷ alternativeDiagnosticHandoff
   ∷ checkpointHandoff
   ∷ interventionTrajectoryHandoff
   ∷ manifoldHandoff
   ∷ heldOutSplitHandoff
   ∷ []
+
+artifactInferenceStage : Study.ValidationArtifact → InferenceStage
+artifactInferenceStage Study.exactModelIdentity = evidenceFibreStage
+artifactInferenceStage Study.modelRevisionOrWeightHash = evidenceFibreStage
+artifactInferenceStage Study.tokenizerOrInputEncoding = evidenceFibreStage
+artifactInferenceStage Study.datasetIdentityAndVersion = evidenceFibreStage
+artifactInferenceStage Study.rawPairedExamples = evidenceFibreStage
+artifactInferenceStage Study.trainValidationTestSplit = heldOutValidationStage
+artifactInferenceStage Study.preprocessingReceipt = evidenceFibreStage
+artifactInferenceStage Study.layerOrRepresentationLocation = evidenceFibreStage
+artifactInferenceStage Study.rawEmbeddingsOrActivations = evidenceFibreStage
+artifactInferenceStage Study.fittedOperatorParameters = predictionEnvelopeStage
+artifactInferenceStage Study.baselineOperatorParameters = experimentDiscriminationStage
+artifactInferenceStage Study.metricImplementation = calibratedInferenceStage
+artifactInferenceStage Study.rawPredictionOrSimilarityScores = predictionEnvelopeStage
+artifactInferenceStage Study.groundTruthOrHumanJudgments = calibratedInferenceStage
+artifactInferenceStage Study.statisticalTestReceipt = calibratedInferenceStage
+artifactInferenceStage Study.randomSeedsAndEnvironment = evidenceFibreStage
+artifactInferenceStage Study.codeRevision = evidenceFibreStage
+artifactInferenceStage Study.syntheticGenerationPromptAndModel = evidenceFibreStage
+artifactInferenceStage Study.deduplicationOrCollisionReceipt = evidenceFibreStage
+artifactInferenceStage Study.checkpointSeries = heldOutValidationStage
+artifactInferenceStage Study.weightOrParameterSnapshots = evidenceFibreStage
+artifactInferenceStage Study.spectralDiagnosticReceipt = calibratedInferenceStage
+artifactInferenceStage Study.alternativeDiagnosticReceipt = robustnessDiscrepancyStage
+artifactInferenceStage Study.interventionTrajectory = certifiedSensitivityStage
+artifactInferenceStage Study.fittedGeometryOrManifold = robustnessDiscrepancyStage
+artifactInferenceStage Study.outputDistributionTrajectory = certifiedSensitivityStage
+artifactInferenceStage Study.compressionPartition = robustnessDiscrepancyStage
+artifactInferenceStage Study.compressionTolerance = calibratedInferenceStage
+artifactInferenceStage Study.parameterCountOrCompressionRatio = experimentDiscriminationStage
 
 ------------------------------------------------------------------------
 -- The post-merge bridge should be thin: once the Stage-6/7 owners are on the
@@ -133,6 +182,10 @@ record TOEInferenceHandoffBoundary : Set where
     declaredFiniteDifferenceIsCertifiedJacobianIsFalse :
       declaredFiniteDifferenceIsCertifiedJacobian ≡ false
 
+    spectralDiagnosticIsCausalMechanismByDefault : Bool
+    spectralDiagnosticIsCausalMechanismByDefaultIsFalse :
+      spectralDiagnosticIsCausalMechanismByDefault ≡ false
+
     goodFitEstablishesModelAdequacy : Bool
     goodFitEstablishesModelAdequacyIsFalse :
       goodFitEstablishesModelAdequacy ≡ false
@@ -148,6 +201,7 @@ record TOEInferenceHandoffBoundary : Set where
 canonicalTOEInferenceHandoffBoundary : TOEInferenceHandoffBoundary
 canonicalTOEInferenceHandoffBoundary =
   toeInferenceHandoffBoundary
+    false refl
     false refl
     false refl
     false refl
