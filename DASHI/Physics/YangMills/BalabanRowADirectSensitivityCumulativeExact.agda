@@ -2,28 +2,15 @@ module DASHI.Physics.YangMills.BalabanRowADirectSensitivityCumulativeExact where
 
 ------------------------------------------------------------------------
 -- ROW A: PER-SHELL O(g^6) DIRECT SENSITIVITY -> UNIFORM CUMULATIVE BUDGET
---
--- This module closes the finite-sum algebra after the inverse-square chain
--- suppression theorem.  If each direct shell sensitivity obeys
---
---       s_j <= C g_j^6,
---
--- then the cumulative direct sensitivity obeys
---       Sum s_j <= C Sum g_j^6.
---
--- Combining with the existing sixth-from-cubic telescope yields
---       bStar Sum s_j <= 2 C gamma^3 * tubeWidth.
---
--- Thus the literal direct part of q<1 reduces to one source constant C and the
--- already-owned small-coupling tube/margin data.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Data.Nat.Base as ℕ
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
@@ -67,6 +54,15 @@ cumulativeDirectBelowSixth dataSet (suc n) =
       (Sixth.sixth (coupling dataSet n)))
     added
 
+sumSixthCong :
+  ∀ {left right : Nat → ℚ} →
+  (∀ j → left j ≡ right j) →
+  ∀ K → Sixth.sumSixth left K ≡ Sixth.sumSixth right K
+sumSixthCong same zero = refl
+sumSixthCong same (suc n) =
+  cong₂ _+_ (sumSixthCong same n)
+    (cong Sixth.sixth (same n))
+
 module FromFlow {cutoff : Nat}
     (flow : Cubic.InverseSquareMarginFlow cutoff)
     (dataSet : DirectSixthSensitivityData)
@@ -87,29 +83,7 @@ module FromFlow {cutoff : Nat}
     let
       directToSixth = cumulativeDirectBelowSixth dataSet K
 
-      -- Rewrite the data-set coupling into the exact flow coupling inside the
-      -- sixth-power sum.  This equality is source/same-object data, not an
-      -- asymptotic comparison.
-      sixthSame :
-        Sixth.sumSixth (coupling dataSet) K
-        ≡ Sixth.sumSixth (Cubic.coupling flow) K
-      sixthSame = sumSixthCong K
-        where
-          sumSixthCong : ∀ n →
-            Sixth.sumSixth (coupling dataSet) n
-            ≡ Sixth.sumSixth (Cubic.coupling flow) n
-          sumSixthCong zero = refl
-          sumSixthCong (suc n) =
-            cong₂ _+_ (sumSixthCong n)
-              (cong Sixth.sixth (sameCoupling n))
-
-          cong : ∀ {A B : Set} (f : A → B) {x y : A} → x ≡ y → f x ≡ f y
-          cong f refl = refl
-
-          cong₂ : ∀ {A B C : Set} (f : A → B → C)
-            {x x' : A} {y y' : B} →
-            x ≡ x' → y ≡ y' → f x y ≡ f x' y'
-          cong₂ f refl refl = refl
+      sixthSame = sumSixthCong sameCoupling K
 
       directToFlowSixth :
         sumDirect (directSensitivity dataSet) K
