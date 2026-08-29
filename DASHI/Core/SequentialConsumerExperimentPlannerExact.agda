@@ -106,23 +106,25 @@ record MinimalSequentialConsumerPlan
 
 open MinimalSequentialConsumerPlan public
 
-oneShotConsumerClosingPlan :
+oneShotContinuation :
   ∀ {Evidence : Set}
     (compatible : Envelope.Compatible Evidence World)
     (consumer : World → Prediction)
     (evidence : Evidence)
-    (bundle : Synthesis.ExperimentBundle World) →
-  Synthesis.ProspectivelyClosesConsumer compatible consumer bundle →
-  SequentialConsumerPlan consumer (compatible evidence)
-oneShotConsumerClosingPlan compatible consumer evidence bundle closes =
-  askThen bundle λ outcome possible →
-    closeConsumer λ left right leftCompatible rightCompatible →
-      closure
-        left right
-        (proj₁ leftCompatible ,
-          trans (proj₂ leftCompatible) (sym realisedOutcome))
-        (proj₁ rightCompatible ,
-          trans (proj₂ rightCompatible) (sym realisedOutcome))
+    (bundle : Synthesis.ExperimentBundle World)
+    (closes : Synthesis.ProspectivelyClosesConsumer compatible consumer bundle)
+    (outcome : Synthesis.Observation bundle) →
+    OutcomePossible (compatible evidence) bundle outcome →
+    SequentialConsumerPlan consumer
+      (RefineByBundle (compatible evidence) bundle outcome)
+oneShotContinuation compatible consumer evidence bundle closes outcome possible =
+  closeConsumer λ left right leftCompatible rightCompatible →
+    closure
+      left right
+      (proj₁ leftCompatible ,
+        trans (proj₂ leftCompatible) (sym realisedOutcome))
+      (proj₁ rightCompatible ,
+        trans (proj₂ rightCompatible) (sym realisedOutcome))
   where
     witness : World
     witness = proj₁ possible
@@ -140,6 +142,17 @@ oneShotConsumerClosingPlan compatible consumer evidence bundle closes =
         consumer
         (evidence , Synthesis.observe bundle witness)
     closure = closes evidence witness witnessCompatible
+
+oneShotConsumerClosingPlan :
+  ∀ {Evidence : Set}
+    (compatible : Envelope.Compatible Evidence World)
+    (consumer : World → Prediction)
+    (evidence : Evidence)
+    (bundle : Synthesis.ExperimentBundle World) →
+  Synthesis.ProspectivelyClosesConsumer compatible consumer bundle →
+  SequentialConsumerPlan consumer (compatible evidence)
+oneShotConsumerClosingPlan compatible consumer evidence bundle closes =
+  askThen bundle (oneShotContinuation compatible consumer evidence bundle closes)
 
 record SequentialExperimentPlannerBoundary : Set where
   constructor sequentialExperimentPlannerBoundary
