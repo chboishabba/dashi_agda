@@ -19,6 +19,7 @@ import DASHI.Core.ConsumerRelativeReductionKernelExact
 import DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact
 import DASHI.Core.ConsumerRelativeReductionSearchExact
 import DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact
+import DASHI.Core.ConsumerReductionDependencyReopeningExact
 import DASHI.Core.CounterexampleGuidedConsumerRefinementExact
 import DASHI.Core.DualEffectInformationActionExact
 import DASHI.Core.EvidenceReliabilityPolarityExact
