@@ -1,7 +1,6 @@
 module DASHI.Programmes.RTXQuantitativeRefinementExact where
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 
 ------------------------------------------------------------------------
 -- Quantitative refinement seam for the actual dashiRTX renderer.
