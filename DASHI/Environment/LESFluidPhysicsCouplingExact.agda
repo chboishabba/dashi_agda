@@ -6,6 +6,7 @@ import DASHI.Chemistry.TransitionKernel as Chemistry
 import DASHI.Environment.CertifiedSpatialTransportExact as Certified
 import DASHI.Environment.SpatialTransport as Spatial
 import DASHI.Papers.NavierStokes.TheoremInterfaceRound133Exact as NS
+import DASHI.Physics.SIQuantitiesExact as SI
 
 ------------------------------------------------------------------------
 -- LES FLUID-PHYSICS COUPLING
@@ -21,9 +22,6 @@ import DASHI.Papers.NavierStokes.TheoremInterfaceRound133Exact as NS
 --   boundary : transport topology is not itself a fluid equation, and a
 --              Navier-Stokes theorem does not automatically validate every
 --              hydrological/atmospheric/biological reduction.
---
--- No external scientific claim is introduced here.  The module only makes the
--- repository reuse seam explicit.
 ------------------------------------------------------------------------
 
 data FluidApplication : Set where
@@ -35,10 +33,29 @@ data FluidApplication : Set where
   cellularOrTissueFluidTransport
   : FluidApplication
 
-record FluidReductionReceipt : Set where
+------------------------------------------------------------------------
+-- Dimensioned fluid-field seam.
+------------------------------------------------------------------------
+
+record SIFluidFieldSocket : Set₁ where
+  constructor siFluidFieldSocket
+  field
+    Scalar : Set
+    FluidState : Set
+    velocity : FluidState → SI.Velocity Scalar
+    pressure : FluidState → SI.Pressure Scalar
+    density : FluidState → SI.Density Scalar
+    dynamicViscosity : FluidState → SI.DynamicViscosity Scalar
+    volumetricFlowRate : FluidState → SI.VolumetricFlowRate Scalar
+    siQuantityOwnerReference : String
+
+open SIFluidFieldSocket public
+
+record FluidReductionReceipt : Set₁ where
   constructor fluidReductionReceipt
   field
     application : FluidApplication
+    fieldSocket : SIFluidFieldSocket
     navierStokesOwner : String
     applicationStateReference : String
     velocityPressureIdentification : String
@@ -66,11 +83,6 @@ open FluidTransportCoupling public
 
 ------------------------------------------------------------------------
 -- Reaction/transport coupling.
---
--- Chemistry already owns transition grammar while SpatialTransport owns
--- directed support.  A coupled reaction-transport model additionally needs a
--- literal advection/diffusion weld.  Merely possessing both carriers proves no
--- PDE coupling.
 ------------------------------------------------------------------------
 
 record ReactionTransportWeld
@@ -82,8 +94,8 @@ record ReactionTransportWeld
     chemicalTransition : Chemistry.Transition
     fluidCoupling : FluidTransportCoupling transportWitness
     concentrationCarrierReference : String
+    diffusionCoefficientReference : String
     advectionReference : String
-    diffusionReference : String
     reactionSourceSinkReference : String
     conservationReference : String
     commonSpaceTimeCarrierReference : String
@@ -91,15 +103,16 @@ record ReactionTransportWeld
 open ReactionTransportWeld public
 
 ------------------------------------------------------------------------
--- The existing NS paper interface is imported as the literal proof-lane owner,
--- rather than copying its PDE mathematics into LES.  Its Clay/frontier booleans
--- remain whatever that owner says; LES only records that a reusable physics
--- source exists.
+-- The existing NS paper interface is imported as the literal proof-lane owner.
 ------------------------------------------------------------------------
 
 nsProofLaneReference : String
 nsProofLaneReference =
   "DASHI.Papers.NavierStokes.TheoremInterfaceRound133Exact"
+
+siFluidQuantityOwnerReference : String
+siFluidQuantityOwnerReference =
+  "DASHI.Physics.SIQuantitiesExact; BIPM DOI 10.59161/AUEZ1291"
 
 nsImportedClayPromotion : Bool
 nsImportedClayPromotion = NS.round133PaperClayPromotion
@@ -130,6 +143,10 @@ record LESFluidPhysicsBoundary : Set where
     chemistryTransitionPlusTransportPathProvesReactionTransportPDEIsFalse :
       chemistryTransitionPlusTransportPathProvesReactionTransportPDE ≡ false
 
+    fluidSocketUsesTypedSIQuantities : Bool
+    fluidSocketUsesTypedSIQuantitiesIsTrue :
+      fluidSocketUsesTypedSIQuantities ≡ true
+
     cellularFluidUseRequiresApplicationReduction : Bool
     cellularFluidUseRequiresApplicationReductionIsTrue :
       cellularFluidUseRequiresApplicationReduction ≡ true
@@ -142,4 +159,5 @@ canonicalLESFluidPhysicsBoundary =
     false refl
     false refl
     false refl
+    true refl
     true refl
