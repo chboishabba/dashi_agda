@@ -11,6 +11,7 @@ import DASHI.Biology.HumourOnlineEngagementFramework as Humour
 import DASHI.Biology.HumourEpistemicAgencyHyperfabricBridge as HumourAgency
 import DASHI.Reasoning.RelationRepresentationSourceRegistryExact as Sources
 import DASHI.Reasoning.RelationRepresentationStudyValidationObligationsExact as Validation
+import DASHI.Reasoning.DASHIgGrokkingEmpiricalBridgeExact as DASHIg
 import DASHI.Reasoning.RelationRepresentationAdequacyExact as Adequacy
 import DASHI.Reasoning.RelationRepresentationRealizationExact as Realization
 import DASHI.Reasoning.BidirectionalRelationRepresentationBridgeExact as Bidi
@@ -31,6 +32,9 @@ sourceBoundary = Sources.canonicalRelationRepresentationAttributionBoundary
 
 studyValidationBoundary : Validation.StudyValidationBoundary
 studyValidationBoundary = Validation.canonicalStudyValidationBoundary
+
+dashigEmpiricalBoundary : DASHIg.DASHIgGrokkingEmpiricalBoundary
+dashigEmpiricalBoundary = DASHIg.canonicalDASHIgGrokkingEmpiricalBoundary
 
 adequacyBoundary : Adequacy.RelationRepresentationAdequacyBoundary
 adequacyBoundary = Adequacy.canonicalRelationRepresentationAdequacyBoundary
@@ -87,6 +91,33 @@ externalRawPayloadCouldPopulateProducerInterfaces :
   Validation.exactRawPayloadCouldPopulateProducerInterfaces
     Validation.canonicalStudyValidationBoundary ≡ true
 externalRawPayloadCouldPopulateProducerInterfaces = refl
+
+------------------------------------------------------------------------
+-- Internal DASHIg Phase-2 empirical receipts are separately pinned.
+------------------------------------------------------------------------
+
+dashigLeech022T50 : DASHIg.t50 DASHIg.leechWd022 ≡ 5060
+dashigLeech022T50 = DASHIg.leech022T50Is5060
+
+dashigLeech030T50 : DASHIg.t50 DASHIg.leechWd030 ≡ 6220
+dashigLeech030T50 = DASHIg.leech030T50Is6220
+
+dashigPlain022T50 : DASHIg.t50 DASHIg.plainWd022 ≡ 4520
+dashigPlain022T50 = DASHIg.plain022T50Is4520
+
+dashigPlain030T50 : DASHIg.t50 DASHIg.plainWd030 ≡ 8320
+dashigPlain030T50 = DASHIg.plain030T50Is8320
+
+dashigDerivativeComparisonRemainsTwoRunPrelim :
+  (DASHIg.runCount DASHIg.leechDerivativePrelim ≡ 2)
+  × (DASHIg.runCount DASHIg.plainDerivativePrelim ≡ 2)
+dashigDerivativeComparisonRemainsTwoRunPrelim =
+  DASHIg.bothDerivativeSummariesAreTwoRunPrelims
+
+dashigPrelimDoesNotAutoBecomeExternalAntiGrokkingReproduction :
+  DASHIg.dashigPrelimIsPrakashMartinReproduction
+    DASHIg.canonicalDASHIgGrokkingEmpiricalBoundary ≡ false
+dashigPrelimDoesNotAutoBecomeExternalAntiGrokkingReproduction = refl
 
 ------------------------------------------------------------------------
 -- Exact finite producer receipts.
