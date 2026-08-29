@@ -5,19 +5,15 @@ module DASHI.Foundations.Wette1969Rule915CanonicalP145PremisesExact where
 --
 -- Primary source: Eduard Wette, 1969, printed p.145.
 --
--- Wette's rule schemata use exactly nineteen word variables.  The historical
--- signature already represents those by Fin 19.  This module fixes one concrete
--- source-order assignment
+-- Wette's rule schemata use exactly nineteen word variables. The historical
+-- signature already represents those by Fin 19. This module fixes one concrete
+-- source-order assignment U,V,W,U1..U6,V1..V5,W1..W5 and constructs all 27
+-- premise formulae literally from the p.145 surface.
 --
---   U,V,W,U1..U6,V1..V5,W1..W5
---
--- and constructs all twenty-seven premise formulae literally from the p.145
--- surface.  This closes the source-identity part of the 9.1.5 reconstruction:
--- there are no opaque Formula slots and premises 18/27 are no longer represented
--- merely by semantic labels.
---
--- The module proves syntax identity only.  It does not claim that any of the
--- twenty-seven premises is derivable for this canonical schema assignment.
+-- This is the source-side owner for completion criterion 1. The separate typed
+-- weld proves that the repository's existing first-seven/later architecture is
+-- pointwise this same vector; this module itself claims syntax identity only,
+-- never derivability.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -32,10 +28,6 @@ import DASHI.Foundations.Wette1969InitialRuleTranscriptionExact as RuleBody
 
 WordTerm = Signature.WordTerm
 Formula = Signature.Formula
-
-------------------------------------------------------------------------
--- The nineteen literal rule-schema variables, in source order.
-------------------------------------------------------------------------
 
 U V W U1 U2 U3 U4 U5 U6 V1 V2 V3 V4 V5 W1 W2 W3 W4 W5 : WordTerm
 U  = Signature.variableWordTerm Fin.zero
@@ -58,29 +50,17 @@ W3 = Signature.variableWordTerm (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fi
 W4 = Signature.variableWordTerm (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc Fin.zero)))))))))))))))))
 W5 = Signature.variableWordTerm (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc (Fin.suc Fin.zero))))))))))))))))))
 
-------------------------------------------------------------------------
--- Pure word constructors used on p.145.
-------------------------------------------------------------------------
-
 juxtapose : WordTerm → WordTerm → WordTerm
-juxtapose left right =
-  Signature.binaryWordTerm Signature.juxtapositionFunctor refl left right
+juxtapose left right = Signature.binaryWordTerm Signature.juxtapositionFunctor refl left right
 
 implication : WordTerm → WordTerm → WordTerm
-implication left right =
-  Signature.binaryWordTerm Signature.implicationFunctor refl left right
+implication left right = Signature.binaryWordTerm Signature.implicationFunctor refl left right
 
 conjunction : WordTerm → WordTerm → WordTerm
-conjunction left right =
-  Signature.binaryWordTerm Signature.conjunctionFunctor refl left right
+conjunction left right = Signature.binaryWordTerm Signature.conjunctionFunctor refl left right
 
 generalize : WordTerm → WordTerm → WordTerm
-generalize binder body =
-  Signature.binaryWordTerm Signature.generalizationFunctor refl binder body
-
-------------------------------------------------------------------------
--- Dense words that p.145 prints explicitly.
-------------------------------------------------------------------------
+generalize binder body = Signature.binaryWordTerm Signature.generalizationFunctor refl binder body
 
 contextU1V1W1 : WordTerm
 contextU1V1W1 = juxtapose U1 (juxtapose V1 W1)
@@ -102,8 +82,7 @@ abbreviation17Word =
 
 premise18ConsequentWord : WordTerm
 premise18ConsequentWord =
-  implication U3
-    (implication (juxtapose V1 V3) (juxtapose W3 V3))
+  implication U3 (implication (juxtapose V1 V3) (juxtapose W3 V3))
 
 contextW4W5 : WordTerm
 contextW4W5 = juxtapose W4 W5
@@ -121,13 +100,7 @@ premise27ConsequentWord : WordTerm
 premise27ConsequentWord =
   implication (juxtapose V1 V3)
     (implication U6
-      (conjunction
-        (implication U4 U5)
-        (implication U5 U4)))
-
-------------------------------------------------------------------------
--- The literal twenty-seven p.145 premises.
-------------------------------------------------------------------------
+      (conjunction (implication U4 U5) (implication U5 U4)))
 
 p145Premise : Critical.Premise915 → Formula
 p145Premise Critical.p01 = Judgment.duplicates V W
@@ -153,28 +126,18 @@ p145Premise Critical.p20 = Judgment.predicateMarkArity V W5
 p145Premise Critical.p21 = Judgment.freeForSyntax W4 W5
 p145Premise Critical.p22 = Judgment.freeForSyntax contextW4W5 contextU1V1W1
 p145Premise Critical.p23 = Judgment.freeForSyntax V3 U
-p145Premise Critical.p24 =
-  Judgment.substitution
-    (juxtapose W2 V2) U (juxtapose W4 V3) U4
-p145Premise Critical.p25 =
-  Judgment.substitution
-    (juxtapose W2 V2) U (juxtapose W5 V3) U5
+p145Premise Critical.p24 = Judgment.substitution (juxtapose W2 V2) U (juxtapose W4 V3) U4
+p145Premise Critical.p25 = Judgment.substitution (juxtapose W2 V2) U (juxtapose W5 V3) U5
 p145Premise Critical.p26 = Judgment.abbreviates abbreviation26Word U6
 p145Premise Critical.p27 = Judgment.implies U1 premise27ConsequentWord
 
 canonicalP145Transcription : Rule915.Rule915PremiseTranscription
 canonicalP145Transcription = Rule915.rule915PremiseTranscription p145Premise
 
-------------------------------------------------------------------------
--- Regression receipts for the two former major-word holes and for the complete
--- finite slot surface.
-------------------------------------------------------------------------
-
 premise18IsLiteralP145NestedImplication :
   Rule915.premiseAt canonicalP145Transcription Critical.p18
     ≡ Judgment.implies U1
-        (implication U3
-          (implication (juxtapose V1 V3) (juxtapose W3 V3)))
+        (implication U3 (implication (juxtapose V1 V3) (juxtapose W3 V3)))
 premise18IsLiteralP145NestedImplication = refl
 
 premise27IsLiteralP145IndependenceWord :
@@ -182,9 +145,7 @@ premise27IsLiteralP145IndependenceWord :
     ≡ Judgment.implies U1
         (implication (juxtapose V1 V3)
           (implication U6
-            (conjunction
-              (implication U4 U5)
-              (implication U5 U4))))
+            (conjunction (implication U4 U5) (implication U5 U4))))
 premise27IsLiteralP145IndependenceWord = refl
 
 allTwentySevenSlotsAreFixedByOneConcreteTranscription :
@@ -200,8 +161,7 @@ canonicalRule915PremiseCount recursivePredicate = refl
 
 canonicalRule915AddressIs915 :
   (recursivePredicate : WordTerm) →
-  RuleBody.address
-    (Rule915.rule9-1-5 canonicalP145Transcription V recursivePredicate)
+  RuleBody.address (Rule915.rule9-1-5 canonicalP145Transcription V recursivePredicate)
     ≡ Revision.rule9-1-5
 canonicalRule915AddressIs915 recursivePredicate = refl
 
