@@ -57,7 +57,7 @@ jobs:
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNMixedHelicityScaleNormalizedDefectRound237Exact.agda
 
-      - name: Type-check Round238 profile extraction circularity audit
+      - name: Type-check Round238 cutoff-family extraction boundary
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNProfileExtractionCircularityRound238Exact.agda
