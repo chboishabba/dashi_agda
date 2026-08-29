@@ -4,21 +4,16 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Environment.QuantitiesConservation as Environment
-import DASHI.Physics.SIQuantitiesExact as SI
+import DASHI.Physics.Units.SI as SI
 
 ------------------------------------------------------------------------
--- ENVIRONMENT QUANTITIES -> SI DIMENSION BRIDGE
+-- ENVIRONMENT QUANTITIES -> CANONICAL SI BRIDGE
 --
--- Source calibration for SI dimensions and unit relations is inherited from
--- DASHI.Physics.SIQuantitiesExact (BIPM SI Brochure, DOI 10.59161/AUEZ1291).
---
--- The existing Environment quantity owner intentionally uses application-scale
--- units such as litres, grams, minutes and micrometres.  This module does not
--- replace that owner.  It gives each physical unit a typed SI dimension and an
--- exact rational scale to the coherent SI unit for that dimension.
+-- SI authority is DASHI.Physics.Units.SI, source-calibrated to the BIPM SI
+-- Brochure (DOI 10.59161/AUEZ1291).  This owner only adapts existing LES
+-- application scales to that canonical dimension carrier.
 ------------------------------------------------------------------------
 
--- Positive rational scale numerator/(denominatorPred+1).
 record PositiveRationalScale : Set where
   constructor positiveRationalScale
   field
@@ -50,64 +45,44 @@ record EnvironmentSIAdapter (u : Environment.Unit) : Set where
 open EnvironmentSIAdapter public
 
 labourMinutesSI : EnvironmentSIAdapter Environment.labourMinutes
-labourMinutesSI =
-  environmentSIAdapter SI.timeDimension sixtyScale "minute -> second" "BIPM SI Brochure; DOI 10.59161/AUEZ1291"
+labourMinutesSI = environmentSIAdapter SI.Time sixtyScale "minute -> second" SI.siSourceDOI
 
 machineMinutesSI : EnvironmentSIAdapter Environment.machineMinutes
-machineMinutesSI =
-  environmentSIAdapter SI.timeDimension sixtyScale "minute -> second" "BIPM SI Brochure; DOI 10.59161/AUEZ1291"
+machineMinutesSI = environmentSIAdapter SI.Time sixtyScale "minute -> second" SI.siSourceDOI
 
--- 1 mL = 10^-6 m^3.
 fuelMillilitresSI : EnvironmentSIAdapter Environment.fuelMillilitres
-fuelMillilitresSI =
-  environmentSIAdapter SI.volumeDimension microScale "millilitre -> cubic metre" "BIPM SI Brochure; DOI 10.59161/AUEZ1291"
+fuelMillilitresSI = environmentSIAdapter SI.Volume microScale "millilitre -> cubic metre" SI.siSourceDOI
 
--- 1 L = 10^-3 m^3.
 waterLitresSI : EnvironmentSIAdapter Environment.waterLitres
-waterLitresSI =
-  environmentSIAdapter SI.volumeDimension milliScale "litre -> cubic metre" "BIPM SI Brochure; DOI 10.59161/AUEZ1291"
+waterLitresSI = environmentSIAdapter SI.Volume milliScale "litre -> cubic metre" SI.siSourceDOI
 
 earthworkLitresSI : EnvironmentSIAdapter Environment.earthworkLitres
-earthworkLitresSI =
-  environmentSIAdapter SI.volumeDimension milliScale "litre -> cubic metre" "BIPM SI Brochure; DOI 10.59161/AUEZ1291"
+earthworkLitresSI = environmentSIAdapter SI.Volume milliScale "litre -> cubic metre" SI.siSourceDOI
 
--- 1 micrometre = 10^-6 m.
 rainfallMicrometresSI : EnvironmentSIAdapter Environment.rainfallMicrometres
-rainfallMicrometresSI =
-  environmentSIAdapter SI.lengthDimension microScale "micrometre -> metre" "BIPM SI Brochure; DOI 10.59161/AUEZ1291"
+rainfallMicrometresSI = environmentSIAdapter SI.Length microScale "micrometre -> metre" SI.siSourceDOI
 
--- 1 g = 10^-3 kg.
 nitrogenGramsSI : EnvironmentSIAdapter Environment.nitrogenGrams
-nitrogenGramsSI =
-  environmentSIAdapter SI.massDimension milliScale "gram -> kilogram" "BIPM SI Brochure; DOI 10.59161/AUEZ1291"
+nitrogenGramsSI = environmentSIAdapter SI.Mass milliScale "gram -> kilogram" SI.siSourceDOI
 
 phosphorusGramsSI : EnvironmentSIAdapter Environment.phosphorusGrams
-phosphorusGramsSI =
-  environmentSIAdapter SI.massDimension milliScale "gram -> kilogram" "BIPM SI Brochure; DOI 10.59161/AUEZ1291"
+phosphorusGramsSI = environmentSIAdapter SI.Mass milliScale "gram -> kilogram" SI.siSourceDOI
 
 carbonGramsSI : EnvironmentSIAdapter Environment.carbonGrams
-carbonGramsSI =
-  environmentSIAdapter SI.massDimension milliScale "gram -> kilogram" "BIPM SI Brochure; DOI 10.59161/AUEZ1291"
+carbonGramsSI = environmentSIAdapter SI.Mass milliScale "gram -> kilogram" SI.siSourceDOI
 
 sedimentGramsSI : EnvironmentSIAdapter Environment.sedimentGrams
-sedimentGramsSI =
-  environmentSIAdapter SI.massDimension milliScale "gram -> kilogram" "BIPM SI Brochure; DOI 10.59161/AUEZ1291"
+sedimentGramsSI = environmentSIAdapter SI.Mass milliScale "gram -> kilogram" SI.siSourceDOI
 
 habitatSquareMetresSI : EnvironmentSIAdapter Environment.habitatSquareMetres
-habitatSquareMetresSI =
-  environmentSIAdapter SI.areaDimension oneScale "square metre -> square metre" "BIPM SI Brochure; DOI 10.59161/AUEZ1291"
+habitatSquareMetresSI = environmentSIAdapter SI.Area oneScale "square metre -> square metre" SI.siSourceDOI
 
 cropGramsSI : EnvironmentSIAdapter Environment.cropGrams
-cropGramsSI =
-  environmentSIAdapter SI.massDimension milliScale "gram -> kilogram" "BIPM SI Brochure; DOI 10.59161/AUEZ1291"
+cropGramsSI = environmentSIAdapter SI.Mass milliScale "gram -> kilogram" SI.siSourceDOI
 
 emissionGramsCO2eSI : EnvironmentSIAdapter Environment.emissionGramsCO2e
 emissionGramsCO2eSI =
-  environmentSIAdapter SI.massDimension milliScale "gram -> kilogram; CO2e remains an accounting interpretation layered over mass" "BIPM SI dimension source + application accounting provenance"
-
-------------------------------------------------------------------------
--- Economic and confidence units intentionally do not receive SI adapters here.
-------------------------------------------------------------------------
+  environmentSIAdapter SI.Mass milliScale "gram -> kilogram; CO2e remains an accounting interpretation layered over mass" SI.siSourceDOI
 
 record EnvironmentSIQuantityBoundary : Set where
   constructor environmentSIQuantityBoundary
@@ -127,9 +102,8 @@ record EnvironmentSIQuantityBoundary : Set where
     physicalScaleIsExplicitRatherThanFreeTextOnlyIsTrue :
       physicalScaleIsExplicitRatherThanFreeTextOnly ≡ true
 
-    environmentalPhysicalUnitsHaveExplicitSIWelds : Bool
-    environmentalPhysicalUnitsHaveExplicitSIWeldsIsTrue :
-      environmentalPhysicalUnitsHaveExplicitSIWelds ≡ true
+    canonicalSIUnitsOwnerReused : Bool
+    canonicalSIUnitsOwnerReusedIsTrue : canonicalSIUnitsOwnerReused ≡ true
 
 canonicalEnvironmentSIQuantityBoundary : EnvironmentSIQuantityBoundary
 canonicalEnvironmentSIQuantityBoundary =
