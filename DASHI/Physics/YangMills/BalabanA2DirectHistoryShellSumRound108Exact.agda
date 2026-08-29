@@ -1,28 +1,13 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanA2DirectHistoryShellSumRound108Exact where
 
-------------------------------------------------------------------------
--- ROUND108 A2 BIDI WELD
---
--- Round103's literal CMP109 consumer wants one shell sequence q_j.  Existing
--- analysis already owns two logically distinct pieces:
---
---   * direct/current-coupling sensitivity, summed by the inverse-square cubic
---     telescope;
---   * irrelevant/polymer history sensitivity, summed geometrically.
---
--- Their pointwise sum is the exact q_j sequence consumed by the literal
--- same-history theorem.  The existing augmented gate makes every physical
--- finite partial sum strictly subunit.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Data.Nat.Base as ℕ
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4ShootingSensitivityFromCubicDriftExact as Direct
@@ -40,7 +25,7 @@ sumAgreeDirect f (suc n) = cong (_+ f n) (sumAgreeDirect f n)
 sumPointwiseAdd :
   (f h : Nat → ℚ) → ∀ K →
   sum (λ j → f j + h j) K ≡ sum f K + sum h K
-sumPointwiseAdd f h zero = ℚRing.solve-∀
+sumPointwiseAdd f h zero = sym (ℚP.+-identityʳ 0ℚ)
 sumPointwiseAdd f h (suc n) =
   trans
     (cong (_+ (f n + h n)) (sumPointwiseAdd f h n))
@@ -88,7 +73,7 @@ module Budget {cutoff : Nat} (dataSet : DirectHistoryShellBudget cutoff) where
     in
     subst
       (λ left → left ≤ A.qTotal K)
-      (totalSumIdentity K)
+      (sym (totalSumIdentity K))
       added
 
   totalPartialSumBelowOne :
