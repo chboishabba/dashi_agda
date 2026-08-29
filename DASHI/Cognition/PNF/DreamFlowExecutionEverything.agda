@@ -40,3 +40,8 @@ import DASHI.Cognition.PNF.StreamingSemanticPacmanKernelExact
 -- G4 evidence mechanism are executable; G3 parity plus the production-default
 -- cutover still guard full production certification.
 import DASHI.Cognition.PNF.DirectDeltaCompilerActivationExact
+
+-- Roadmap composition: certification remains parity-gated, then the next
+-- architectural tranche is streaming/delta hierarchy followed by a whole-system
+-- rebenchmark rather than indefinite cold-publication micro-optimization.
+import DASHI.Cognition.PNF.DirectStreamingRoadmapSynthesisExact
