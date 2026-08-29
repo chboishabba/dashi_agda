@@ -25,6 +25,7 @@ on:
       - 'Artifacts/relation-representation/external-study-receipt-template.json'
       - 'scripts/relation_representation_numeric_producer.py'
       - 'scripts/validate_relation_representation_external_receipt.py'
+      - 'scripts/check_dashig_grokking_stage67.sh'
       - 'Docs/support/reference/RelationRepresentationRealization.md'
       - 'scripts/check_relation_representation_realization.sh'
       - '.github/workflows/relation-representation-realization.yml'
@@ -46,4 +47,6 @@ jobs:
           DASHI_AGDA29_CACHE_ROOT: ${{ runner.temp }}/dashi-agda29
           AGDA_LOG_PATH: ${{ github.workspace }}/agda-relation-representation-realization.log
           AGDA_JOBS: '8'
-        run: bash scripts/check_relation_representation_realization.sh
+        run: |
+          bash scripts/check_relation_representation_realization.sh
+          bash scripts/check_dashig_grokking_stage67.sh
