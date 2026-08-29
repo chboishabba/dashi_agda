@@ -8,7 +8,7 @@ module DASHI.Physics.Closure.NSTriadKNThreeClassPositiveResidualCompilerRound215
 -- contract: positive covariance is admissible when quantitatively bounded.
 --
 -- This module combines that corrected contract with Round184's universal
--- three-class factor.  For a physical three-class signed fibre, it is enough to
+-- three-class factor. For a physical three-class signed fibre, it is enough to
 -- prove
 --
 --   D_FL <= R_FL,  D_HH <= R_HH,  D_CC <= R_CC.
@@ -25,15 +25,19 @@ module DASHI.Physics.Closure.NSTriadKNThreeClassPositiveResidualCompilerRound215
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst)
 
+import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramLedgerRound180Exact as R180
 import DASHI.Physics.Closure.NSTriadKNThreeClassFibreQuadraticRound184Exact as R184
 import DASHI.Physics.Closure.NSTriadKNClasswisePartnerGramPaymentRound185Exact as R185
 import DASHI.Physics.Closure.NSTriadKNRawCurlLowOutputKernelMassRound178Exact as R178
+
+F = R178.F
 
 record ThreeClassPositiveResidualPayment (fibre : R185.ThreeClassSignedFibre) : Set where
   constructor three-class-positive-residual-payment
@@ -49,7 +53,7 @@ record ThreeClassPositiveResidualPayment (fibre : R185.ThreeClassSignedFibre) : 
 open ThreeClassPositiveResidualPayment public
 
 classBound :
-  (cells : _) → (residual : ℚ) →
+  (cells : List (C3.Complex3 F)) → (residual : ℚ) →
   R180.gramDebt cells ≤ residual →
   L2.complex3NormSquared (R180.sumCells cells)
   ≤ R180.cellMassSum cells + residual
