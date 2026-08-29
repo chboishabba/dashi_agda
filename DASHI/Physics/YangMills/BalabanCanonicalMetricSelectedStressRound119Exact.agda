@@ -3,10 +3,6 @@ module DASHI.Physics.YangMills.BalabanCanonicalMetricSelectedStressRound119Exact
 
 ------------------------------------------------------------------------
 -- ROUND119: ROUND106 METRIC VARIATION USES THE EXACT ROUND114 CMP119 INSERTION
---
--- Round116 now carries an actual `SourceNativeOrdinaryCharacteristicPair`.
--- Hence we can make the canonical metric/source theorem use definitionally the
--- SAME source and insertion selected by the one-coordinate Round114 carrier.
 ------------------------------------------------------------------------
 
 open import Data.Rational.Base as ℚ using (ℚ)
@@ -77,16 +73,6 @@ record CanonicalMetricSelectedStressWeld
               (R114.asCMP119Cauchy coordinate (R114.coordinate coordinate))))
 open CanonicalMetricSelectedStressWeld public
 
-selectedSourceCauchy :
-  ∀ {C S Y group Scale Volume activity domain representation coordinate} →
-  CanonicalMetricSelectedStressWeld
-    {C = C} {S = S} {Y = Y} {group = group}
-    {Scale = Scale} {Volume = Volume} {activity = activity}
-    domain representation coordinate →
-  R109.SourceNativeStressScaleCauchy
-selectedSourceCauchy {coordinate = coordinate} _ =
-  R114.asCMP119Cauchy coordinate (R114.coordinate coordinate)
-
 asRound118CanonicalMetricWeld :
   ∀ {C S Y group Scale Volume activity}
     {domain : Domain.CanonicalMetricSourceDomain Scale Volume activity}
@@ -120,12 +106,7 @@ asRound118CanonicalMetricWeld {coordinate = coordinate} dataSet = record
               dataSet background perturbation
         }
   ; R118.CanonicalMetricCMP119StressWeld.finiteFirstVariationReadoutIsNormalizedCrossNumerator =
-      λ background perturbation admissible →
-        let first = finiteFirstVariationReadoutIsCrossNumerator
-              dataSet background perturbation admissible
-            second = metricVariationIsNormalizedCrossNumerator
-              dataSet background perturbation
-        in Relation.Binary.PropositionalEquality.trans first second
+      finiteFirstVariationReadoutIsCrossNumerator dataSet
   }
 
 canonicalMetricVariationIsExactSelectedCMP119StressInsertion :
@@ -146,8 +127,7 @@ canonicalMetricVariationIsExactSelectedCMP119StressInsertion :
       (First.substitutedFirstVariation activity background
         (Domain.metricPerturbationToBackgroundTangent
           domain background perturbation)))
-  ≡ R116.localInsertionNumerator insertion
-      (Source.pair (R116.stressInsertion insertion))
+  ≡ R116.cmp119StressInsertionNumerator insertion
 canonicalMetricVariationIsExactSelectedCMP119StressInsertion
     dataSet background perturbation admissible =
   R118.finiteCanonicalMetricVariationIsCMP119StressInsertion
@@ -157,7 +137,5 @@ canonicalMetricVariationIsExactSelectedCMP119StressInsertion
 canonicalMetricSelectedStressCompilerLevel : ProofLevel
 canonicalMetricSelectedStressCompilerLevel = machineChecked
 
--- The finite first-variation -> telescope identity is now one explicit physical
--- instantiation theorem, not two independent seams.
 literalCanonicalMetricSelectedStressInstantiationLevel : ProofLevel
 literalCanonicalMetricSelectedStressInstantiationLevel = conditional
