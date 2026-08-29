@@ -40,6 +40,25 @@ record KMajorFactorCoordinate (n : Nat) : Set where
 
 open KMajorFactorCoordinate public
 
+copiesPredecessor : ∀ {n} → KMajorFactorCoordinate n → Nat
+copiesPredecessor
+  (kMajorFactorCoordinate zero divisor () copiesBound
+    divisorPositive divisorBound productBound)
+copiesPredecessor
+  (kMajorFactorCoordinate (suc predecessor) divisor
+    copiesPositive copiesBound divisorPositive divisorBound productBound) =
+  predecessor
+
+copiesIsSuccessor :
+  ∀ {n} (coordinate : KMajorFactorCoordinate n) →
+  copies coordinate ≡ suc (copiesPredecessor coordinate)
+copiesIsSuccessor
+  (kMajorFactorCoordinate zero divisor () copiesBound
+    divisorPositive divisorBound productBound)
+copiesIsSuccessor
+  (kMajorFactorCoordinate (suc predecessor) divisor
+    copiesPositive copiesBound divisorPositive divisorBound productBound) = refl
+
 residual : ∀ {n} → KMajorFactorCoordinate n → Nat
 residual coordinate = copies coordinate * divisor coordinate
 
