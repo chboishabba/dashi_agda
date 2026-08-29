@@ -10,7 +10,7 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosBishopKMajorCoordinateDomina
 --     <= v* q(k*x_n)^v * exp(c sqrt n).
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base using (_≤_)
 
 import Real as BishopReal
@@ -18,6 +18,7 @@ import RealProperties as BishopP
 
 import DASHI.Foundations.BishopCubicTranslationIteratedExact as Iterated
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
+import DASHI.Foundations.BishopNatRealPositiveExact as NatPositive
 import DASHI.Mathematics.NumberTheory.PartitionErdosBishopCubicStepRateExact as Rate
 import DASHI.Mathematics.NumberTheory.PartitionErdosBishopFactorPairCubicExponentialExact as FactorExp
 import DASHI.Mathematics.NumberTheory.PartitionErdosBishopFactorPairCubicResidualExact as FactorResidual
@@ -33,10 +34,10 @@ coordinateResidualWeight n coordinate =
       (Rate.residualExponent n (KMajor.residual coordinate)))
 
 coordinateCubicWeight :
-  ∀ {n} {nPositive : suc 0 ≤ n} →
+  ∀ {n} {nPositive : suc zero ≤ n} →
   Rate.ErdosStepRate n nPositive →
   KMajor.KMajorFactorCoordinate n → BishopReal.ℝ
-coordinateCubicWeight rate coordinate =
+coordinateCubicWeight {n} rate coordinate =
   let
     pair = KMajor.asPositiveFactorPair coordinate
     stepPositive = FactorResidual.factorStepPositive rate pair
@@ -45,16 +46,19 @@ coordinateCubicWeight rate coordinate =
     (Iterated.natReal (KMajor.divisor coordinate))
     (BishopReal._*_
       (Iterated.powerQ stepPositive (KMajor.divisor coordinate))
-      (Exp.bishopExp (Rate.targetExponent _)))
+      (Exp.bishopExp (Rate.targetExponent n)))
 
 coordinateDivisorNonnegative :
   ∀ {n} (coordinate : KMajor.KMajorFactorCoordinate n) →
   BishopReal.NonNegative (Iterated.natReal (KMajor.divisor coordinate))
-coordinateDivisorNonnegative coordinate =
+coordinateDivisorNonnegative
+  (KMajor.kMajorFactorCoordinate copies zero copiesPositive copiesBound
+    () divisorBound productBound)
+coordinateDivisorNonnegative
+  (KMajor.kMajorFactorCoordinate copies (suc divisorPredecessor)
+    copiesPositive copiesBound divisorPositive divisorBound productBound) =
   BishopP.pos⇒nonNeg
-    (Iterated.natScalePositiveSuccessor
-      (BishopP.0<x⇒posx BishopReal.0<1)
-      (KMajor.divisor coordinate))
+    (NatPositive.natRealSuccessorPositive divisorPredecessor)
 
 coordinateResidualBelowCubic :
   ∀ {n : Nat} →
