@@ -5,6 +5,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.ExperimentalCoordinateDesignExact as Coordinate
 import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Choice
+import DASHI.Core.ConsumerRelativeReductionKernelExact as Reduction
 
 ------------------------------------------------------------------------
 -- DISCRIMINATOR SYNTHESIS
@@ -61,6 +62,31 @@ record DiscriminatingLanguageExtension
 open DiscriminatingLanguageExtension public
 
 ------------------------------------------------------------------------
+-- Observer join.  If the added bundle separates a collision, the literal pair
+-- of old and new observations separates it too.  This is the deterministic
+-- information-join pattern already used elsewhere in Core.
+------------------------------------------------------------------------
+
+joinedObservation :
+  ∀ {World Existing}
+    (existing : World → Existing) →
+    (bundle : ExperimentBundle World) →
+  World → Existing × Observation bundle
+joinedObservation existing bundle world =
+  existing world , observe bundle world
+
+extensionJoinSeparates :
+  ∀ {World Existing}
+    {existing : World → Existing}
+    (extension : DiscriminatingLanguageExtension existing) →
+  joinedObservation existing (DiscriminatingLanguageExtension.extension extension)
+    (left (collision extension))
+  ≡ joinedObservation existing (DiscriminatingLanguageExtension.extension extension)
+    (right (collision extension)) → ⊥
+extensionJoinSeparates extension same =
+  separates (extensionSeparates extension) (cong proj₂ same)
+
+------------------------------------------------------------------------
 -- Nuisance robustness.  A useful separator should not disappear merely under
 -- the declared systematic/nuisance transformations the experiment claims to
 -- tolerate.  This is shared-nuisance robustness; stronger stochastic/error
@@ -90,6 +116,26 @@ record NuisanceRobustSeparator
       ≡ observe bundle (act nuisance n right) → ⊥
 
 open NuisanceRobustSeparator public
+
+------------------------------------------------------------------------
+-- Optional symmetry compatibility.  Symmetry is not required for synthesis.
+-- When a genuine state symmetry is declared, this receipt asks whether the
+-- discriminator is invariant along that orbit.  A consumer-visible symmetry
+-- should instead be retained rather than silently quotiented.
+------------------------------------------------------------------------
+
+record SymmetryInvariantBundle
+    {World : Set}
+    (bundle : ExperimentBundle World)
+    (symmetry : Reduction.SymmetryAction World) : Set₁ where
+  constructor symmetryInvariantBundle
+  field
+    invariant :
+      (g : Reduction.Symmetry symmetry) (world : World) →
+      observe bundle (Reduction.act symmetry g world) ≡ observe bundle world
+    symmetryReference : String
+
+open SymmetryInvariantBundle public
 
 ------------------------------------------------------------------------
 -- Minimality among a declared bundle library.
@@ -186,6 +232,11 @@ record DiscriminatorSynthesisBoundary : Set where
     perturbAndMeasureCanCreateAUsefulDiscriminatorIsTrue :
       perturbAndMeasureCanCreateAUsefulDiscriminator ≡ true
 
+    symmetryCompatibilityIsRequiredForEveryExperiment : Bool
+    symmetryCompatibilityIsRequiredForEveryExperimentIsFalse :
+      symmetryCompatibilityIsRequiredForEveryExperiment ≡ false
+
 canonicalDiscriminatorSynthesisBoundary : DiscriminatorSynthesisBoundary
 canonicalDiscriminatorSynthesisBoundary =
-  discriminatorSynthesisBoundary false refl true refl false refl true refl
+  discriminatorSynthesisBoundary
+    false refl true refl false refl true refl false refl
