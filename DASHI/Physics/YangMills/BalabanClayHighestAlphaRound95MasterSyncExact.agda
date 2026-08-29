@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound95MasterSyncExact where
 
 ------------------------------------------------------------------------
--- ROUND95--98: MASTER-FIRST BIDIRECTIONAL HIGHEST-ALPHA FRONTIER
+-- ROUND95--99: MASTER-FIRST BIDIRECTIONAL HIGHEST-ALPHA FRONTIER
 --
 -- Proof search is explicitly bidirectional:
 --
@@ -12,79 +12,68 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound95MasterSyncExact whe
 --
 -- ROW A
 -- -----
--- Local data already provide the positive Ward candidate floor b, interaction
--- debt C and direct current-coupling derivative L_local.  The marginal running
--- coupling is never assigned artificial exponential forgetting.
+-- Local data already provide the Ward candidate floor b, interaction debt C and
+-- direct current-coupling derivative L_local.  Marginal coupling is never given
+-- fake exponential forgetting.
 --
--- Round96 produced one history route:
+-- Round98 adds the response-kernel route matching the parallel Lean producer:
 --
---   initial irrelevant response D0 <= S |delta u|,
---   S <= S0 gamma
---       -> q_history <= H gamma
---       -> (C + L_local + b H) gamma < b pays shooting.
+--       r_(n+1) <= R s_n + (1/2) r_n
+--         -> sum r_n <= 2 R sum s_n.
 --
--- Round98 adds the more source-shaped response-kernel route suggested by the
--- parallel Lean producer.  If propagated irrelevant sensitivity obeys
---
---       r_(n+1) <= R s_n + (1/2) r_n,
---
--- the exact potential sum r + 2 r_n gives
---
---       sum r_n <= 2 R sum s_n.
---
--- If the direct history injection is quartically suppressed,
+-- If direct history injection is quartic,
 --
 --       s_j <= D g_j^4,
 --
--- the SAME positive inverse-square drift already used by Row A yields
+-- the SAME inverse-square drift gives
 --
 --       sum s_j <= D gamma (2 gamma_tube / b_*).
 --
--- Multiplying the response debt by the shooting margin b_* cancels the reciprocal
--- and leaves at most 4 R D gamma^2.  Therefore for gamma<=1 the whole direct +
--- propagated-history gate follows from ONE linearized inequality
+-- Multiplying by the shooting margin cancels b_*^{-1}, leaving at most
+-- 4 R D gamma^2.  For gamma<=1 the complete direct+history gate therefore follows
+-- from the single linearized inequality
 --
 --       (C + L_local + 4 R D) gamma < b.
 --
--- The existing canonical rational choice is reused with effective derivative
--- L_local + 4 R D; if b<=1 (in particular the fixed Ward floor), the canonical
--- gamma is automatically <=1/2.  Hence no independent q<1, summability, or
--- sufficiently-small-gamma existence theorem remains after literal source
--- instantiation.  The shortest A leaf is now to prove the literal response-kernel
--- inequality and its quartic direct injection (or use the older O(gamma) route
--- if the source yields that more directly), together with same-object Ward and
--- interaction identification.
+-- The canonical rational choice is reused with effective derivative
+-- L_local+4RD.  With the fixed Ward floor b=1/8388608, gamma<=1/2 follows by
+-- exact arithmetic.  `WardQuarticResponseProducer` now packages the whole
+-- numerical path: once the literal trajectory supplies mixed-Cauchy data, the
+-- response kernel, quartic injection and recurrence/cap identities, the strict
+-- shooting gate is constructed automatically.
 --
 -- ROW B
 -- -----
--- The shared CMP116 marked analytic carrier itself gives r=1/2 geometric decay
--- for beta-history, physical Hessian and composite marks.  Geometric shell
--- summation is downstream after literal marked-coordinate/radius identification.
--- Stress can reuse the composite mark after source identity.
+-- The shared CMP116 marked analytic carrier gives r=1/2 geometric decay for
+-- beta-history, physical Hessian and composite marks.  Geometric summation is
+-- downstream after literal marked-coordinate/radius identification.
 --
 -- ROW B -> C, TEMPORAL
 -- --------------------
--- Since 1/2 <= 17/32, the same physical Hessian mark pays the temporal
--- curvature-debt envelope whenever the SAME-density Heat/Doob negative Hessian
--- shell is pointwise dominated by that mark.
+-- Since 1/2 <= 17/32, the same physical Hessian mark pays the temporal curvature
+-- debt whenever the SAME-density Heat/Doob negative Hessian shell is pointwise
+-- dominated by that mark.
 --
--- ROW B -> C, SPATIAL
--- -------------------
--- Backwards inspection of the finite-speed consumer asks only for one finite
--- nonnegative influence majorant M with a uniform row mass.  Forward CMP116
--- control already supplies the exponentially weighted Hessian constant C_H.
--- The physical bridge is therefore only
+-- ROW B -> C, SPATIAL (ROUND99)
+-- --------------------------------
+-- The earlier unweighted row reduction was useful but discarded information.
+-- CMP116 actually gives an exponentially weighted Hessian row.  Round99 keeps
+-- that weight all the way through the finite Dyson algebra.
 --
---                   sum_y M(x,y) <= C_H
+-- For a finite nonnegative generator M and a submultiplicative weight w,
 --
--- on the SAME derivative generator.  Round97 proves nonnegative entries imply
--- nonnegative every matrix power and then reuses the existing row induction:
+--       sum_y w(x,y) M(x,y) <= C_H
 --
---                   row(M^n) <= C_H^n.
+-- now implies for every positive matrix power
 --
--- Positivity/all-power bounds are no longer physical inputs.  Same-density
--- generator-to-marked-Hessian identification and the stochastic covariance/
--- relaxation source estimates remain the live spatial pieces.
+--       sum_y w(x,y) M^n(x,y) <= C_H^n.
+--
+-- The weight used by the existing Hessian lane is w=(3/2)^distance.  Exact Agda
+-- arithmetic now proves ordinary Nat triangle inequality implies w>=1 and
+-- w(x,z)<=w(x,y)w(y,z).  Therefore the preferred physical C-spatial leaf is only
+-- the SAME-density, SAME-metric row comparison between the absolute covariant
+-- derivative generator and the already-required CMP116 Hessian mark.  Weight
+-- algebra, power positivity and all-power propagation are theorem-owned.
 --
 -- The frozen four-row count remains four.  A row decrements only on an inhabited
 -- literal physical completion predicate or a theorem eliminating that whole row.
@@ -93,8 +82,6 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound95MasterSyncExact whe
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaExact as R87
-import DASHI.Physics.YangMills.BalabanYM4RowAGateCompositionExact as A
-import DASHI.Physics.YangMills.BalabanYM4ShootingSensitivityFromCubicDriftExact as AShoot
 import DASHI.Physics.YangMills.BalabanYM4RowACombinedSmallCouplingGateExact as AOne
 import DASHI.Physics.YangMills.BalabanYM4RowACombinedGateCompositionExact as ACompose
 import DASHI.Physics.YangMills.BalabanYM4RowACanonicalSmallCouplingChoiceExact as ACanonical
@@ -110,9 +97,10 @@ import DASHI.Physics.YangMills.BalabanYM4FiniteBetaResponseKernelBudgetExact as 
 import DASHI.Physics.YangMills.BalabanYM4QuarticSourceSensitivityBudgetExact as AQuarticBudget
 import DASHI.Physics.YangMills.BalabanYM4QuarticResponseCanonicalGateExact as AQuarticGate
 import DASHI.Physics.YangMills.BalabanYM4QuarticResponseCanonicalChoiceExact as AQuarticChoice
+import DASHI.Physics.YangMills.BalabanYM4WardQuarticResponseCanonicalChoiceExact as AWardQuartic
+import DASHI.Physics.YangMills.BalabanYM4WardQuarticResponseProducerAdapterExact as AProducer
 
 import DASHI.Physics.YangMills.BalabanRowBActivityEntropyToShellEnergyExact as B
-import DASHI.Physics.YangMills.BalabanMarkedSourceGeometricShellEnergyExact as BSum
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticGeometricShellExact as BShared
 
 import DASHI.Physics.YangMills.BalabanRowBCMarkedShellToCurvatureDebtExact as BC
@@ -120,192 +108,172 @@ import DASHI.Physics.YangMills.BalabanRowBCMarkedShellToPolchinskiIntegralDebtEx
 import DASHI.Physics.YangMills.BalabanSharedMarkedHessianToCurvatureDebtExact as BCHessian
 import DASHI.Physics.YangMills.BalabanFiniteInfluenceNonnegativePowersExact as CPositive
 import DASHI.Physics.YangMills.BalabanSharedMarkedHessianToFiniteInfluenceExact as CInfluence
+import DASHI.Physics.YangMills.BalabanFiniteWeightedInfluencePowerExact as CWeighted
+import DASHI.Physics.YangMills.BalabanThreeHalvesMetricWeightExact as CMetric
+import DASHI.Physics.YangMills.BalabanSharedMarkedHessianToWeightedInfluenceExact as CWeightedBridge
+import DASHI.Physics.YangMills.BalabanSharedMarkedMetricInfluenceExact as CMetricBridge
 
 ------------------------------------------------------------------------
 -- A: direct/history shooting and response-kernel collapse
 ------------------------------------------------------------------------
 
-rowACubicShootingSensitivityAlgebraRound95Level : ProofLevel
-rowACubicShootingSensitivityAlgebraRound95Level = machineChecked
-
-rowATwoNumericalGateCompositionRound95Level : ProofLevel
-rowATwoNumericalGateCompositionRound95Level = machineChecked
-
 rowACombinedSmallnessToSignGateRound95Level : ProofLevel
-rowACombinedSmallnessToSignGateRound95Level =
-  AOne.rowACombinedSmallnessToSignGateLevel
-
-rowACombinedSmallnessToShootingGateRound95Level : ProofLevel
-rowACombinedSmallnessToShootingGateRound95Level =
-  AOne.rowACombinedSmallnessToShootingGateLevel
+rowACombinedSmallnessToSignGateRound95Level = AOne.rowACombinedSmallnessToSignGateLevel
 
 rowAOneSmallnessGateCompositionRound95Level : ProofLevel
-rowAOneSmallnessGateCompositionRound95Level =
-  ACompose.rowAOneSmallnessGateCompositionLevel
+rowAOneSmallnessGateCompositionRound95Level = ACompose.rowAOneSmallnessGateCompositionLevel
 
 rowACanonicalGammaPositiveRound95Level : ProofLevel
-rowACanonicalGammaPositiveRound95Level =
-  ACanonical.rowACanonicalGammaPositiveLevel
+rowACanonicalGammaPositiveRound95Level = ACanonical.rowACanonicalGammaPositiveLevel
 
 rowALocalCauchyConstantsToCanonicalGateRound96Level : ProofLevel
-rowALocalCauchyConstantsToCanonicalGateRound96Level =
-  ACauchy.rowACauchyLocalConstantsToCanonicalGammaLevel
+rowALocalCauchyConstantsToCanonicalGateRound96Level = ACauchy.rowACauchyLocalConstantsToCanonicalGammaLevel
 
 rowAWardFloorArithmeticRound96Level : ProofLevel
-rowAWardFloorArithmeticRound96Level =
-  AWard.wardGaussianFloorArithmeticLevel
+rowAWardFloorArithmeticRound96Level = AWard.wardGaussianFloorArithmeticLevel
 
 rowAIrrelevantHistoryInputSensitivityRound96Level : ProofLevel
-rowAIrrelevantHistoryInputSensitivityRound96Level =
-  AHistory.rowAIrrelevantHistoryInputSensitivityLevel
+rowAIrrelevantHistoryInputSensitivityRound96Level = AHistory.rowAIrrelevantHistoryInputSensitivityLevel
 
 rowAInitialResponseToHistoryLinearCouplingRound96Level : ProofLevel
-rowAInitialResponseToHistoryLinearCouplingRound96Level =
-  AHistoryLinear.rowAInitialResponseToHistoryLinearCouplingLevel
+rowAInitialResponseToHistoryLinearCouplingRound96Level = AHistoryLinear.rowAInitialResponseToHistoryLinearCouplingLevel
 
 rowAAugmentedDirectHistoryShootingRound96Level : ProofLevel
-rowAAugmentedDirectHistoryShootingRound96Level =
-  AAugmented.rowAAugmentedShootingSubunitLevel
+rowAAugmentedDirectHistoryShootingRound96Level = AAugmented.rowAAugmentedShootingSubunitLevel
 
 rowAHistorySuppressedCombinedGateRound96Level : ProofLevel
-rowAHistorySuppressedCombinedGateRound96Level =
-  AHistoryGate.rowAHistorySuppressedAugmentedGateLevel
+rowAHistorySuppressedCombinedGateRound96Level = AHistoryGate.rowAHistorySuppressedAugmentedGateLevel
 
 rowAHistoryAugmentedCanonicalChoiceRound96Level : ProofLevel
-rowAHistoryAugmentedCanonicalChoiceRound96Level =
-  AHistoryChoice.rowAAugmentedCanonicalChoiceLevel
+rowAHistoryAugmentedCanonicalChoiceRound96Level = AHistoryChoice.rowAAugmentedCanonicalChoiceLevel
 
 rowAResponseKernelPotentialRound98Level : ProofLevel
-rowAResponseKernelPotentialRound98Level =
-  AResponse.betaResponseKernelPotentialLevel
+rowAResponseKernelPotentialRound98Level = AResponse.betaResponseKernelPotentialLevel
 
 rowAResponseKernelFiniteBudgetRound98Level : ProofLevel
-rowAResponseKernelFiniteBudgetRound98Level =
-  AFiniteResponse.finiteBetaResponseKernelBudgetLevel
+rowAResponseKernelFiniteBudgetRound98Level = AFiniteResponse.finiteBetaResponseKernelBudgetLevel
 
 rowAQuarticInjectionToFiniteBudgetRound98Level : ProofLevel
-rowAQuarticInjectionToFiniteBudgetRound98Level =
-  AQuarticBudget.quarticSourceSensitivityToFiniteBudgetLevel
+rowAQuarticInjectionToFiniteBudgetRound98Level = AQuarticBudget.quarticSourceSensitivityToFiniteBudgetLevel
 
 rowAQuarticResponseMarginCancellationRound98Level : ProofLevel
-rowAQuarticResponseMarginCancellationRound98Level =
-  AQuarticGate.rowAQuarticResponseMarginCancellationLevel
+rowAQuarticResponseMarginCancellationRound98Level = AQuarticGate.rowAQuarticResponseMarginCancellationLevel
 
 rowAQuarticResponseSingleGateRound98Level : ProofLevel
-rowAQuarticResponseSingleGateRound98Level =
-  AQuarticGate.rowAQuarticResponseSingleLinearGateLevel
+rowAQuarticResponseSingleGateRound98Level = AQuarticGate.rowAQuarticResponseSingleLinearGateLevel
 
 rowAQuarticResponseCanonicalChoiceRound98Level : ProofLevel
-rowAQuarticResponseCanonicalChoiceRound98Level =
-  AQuarticChoice.rowAQuarticResponseCanonicalChoiceLevel
+rowAQuarticResponseCanonicalChoiceRound98Level = AQuarticChoice.rowAQuarticResponseCanonicalChoiceLevel
 
-rowAQuarticResponseCanonicalCapAtMostOneRound98Level : ProofLevel
-rowAQuarticResponseCanonicalCapAtMostOneRound98Level =
-  AQuarticChoice.rowAQuarticResponseCanonicalCapAtMostOneLevel
+rowAWardQuarticCanonicalChoiceRound99Level : ProofLevel
+rowAWardQuarticCanonicalChoiceRound99Level = AWardQuartic.wardQuarticResponseCanonicalChoiceLevel
 
--- Current physical A seam after Round98:
---  1. literal CMP109/CMP99 Ward-patch -> mixed-beta-jet same-object floor;
---  2. literal normalized interaction mixed-Cauchy constants C,L_local;
---  3. literal irrelevant/polymer response kernel on the same generated history;
---  4. preferably prove its direct injection <= D g_j^4 (or use the alternative
---     initial-response O(gamma) route if that is source-native and weaker);
---  5. literal recurrence/trajectory identification.
--- All finite summation, margin cancellation, q<1 algebra and small-coupling
--- choice are downstream theorem-owned constructions.
-rowALiteralSourceInstantiationRound98Level : ProofLevel
-rowALiteralSourceInstantiationRound98Level = conditional
+rowAWardQuarticProducerToShootingRound99Level : ProofLevel
+rowAWardQuarticProducerToShootingRound99Level = AProducer.rowAWardQuarticResponseProducerToShootingLevel
+
+-- Current physical A seam after Round99:
+--  1. literal CMP109/CMP99 Ward patch -> mixed beta jet same-object floor;
+--  2. literal normalized interaction mixed-Cauchy package;
+--  3. literal irrelevant/polymer response kernel;
+--  4. literal direct history injection <= D g_j^4 (or the older O(gamma)
+--     initial-response route if source-native and weaker);
+--  5. exact recurrence/cap identification for the generated trajectory.
+-- The finite constants, summation, q<1 margin and canonical cap are downstream.
+rowALiteralSourceInstantiationRound99Level : ProofLevel
+rowALiteralSourceInstantiationRound99Level = conditional
 
 ------------------------------------------------------------------------
 -- B: shared CMP116 marked control already gives geometric r = 1/2 shells
 ------------------------------------------------------------------------
 
 rowBActivityEntropyProductRound95Level : ProofLevel
-rowBActivityEntropyProductRound95Level =
-  B.rowBActivityEntropyProductAlgebraLevel
+rowBActivityEntropyProductRound95Level = B.rowBActivityEntropyProductAlgebraLevel
 
 rowBActivityEntropyToGeometricShellRound95Level : ProofLevel
-rowBActivityEntropyToGeometricShellRound95Level =
-  B.rowBActivityEntropyToGeometricShellLevel
+rowBActivityEntropyToGeometricShellRound95Level = B.rowBActivityEntropyToGeometricShellLevel
 
 rowBUniformShellSummationRound95Level : ProofLevel
-rowBUniformShellSummationRound95Level =
-  B.rowBActivityEntropyUniformSummationLevel
+rowBUniformShellSummationRound95Level = B.rowBActivityEntropyUniformSummationLevel
 
 rowBSharedMarkedControlToGeometricHalfRound96Level : ProofLevel
-rowBSharedMarkedControlToGeometricHalfRound96Level =
-  BShared.sharedMarkedControlToGeometricHalfLevel
+rowBSharedMarkedControlToGeometricHalfRound96Level = BShared.sharedMarkedControlToGeometricHalfLevel
 
 rowBHessianGeometricHalfRound96Level : ProofLevel
-rowBHessianGeometricHalfRound96Level =
-  BShared.sharedHessianGeometricShellLevel
+rowBHessianGeometricHalfRound96Level = BShared.sharedHessianGeometricShellLevel
 
 rowBCompositeGeometricHalfRound96Level : ProofLevel
-rowBCompositeGeometricHalfRound96Level =
-  BShared.sharedCompositeGeometricShellLevel
+rowBCompositeGeometricHalfRound96Level = BShared.sharedCompositeGeometricShellLevel
 
-rowBLiteralCMP116SharedMarkedInstantiationRound98Level : ProofLevel
-rowBLiteralCMP116SharedMarkedInstantiationRound98Level = conditional
+rowBLiteralCMP116SharedMarkedInstantiationRound99Level : ProofLevel
+rowBLiteralCMP116SharedMarkedInstantiationRound99Level = conditional
 
 ------------------------------------------------------------------------
 -- B -> C temporal fusion
 ------------------------------------------------------------------------
 
 rowBCMarkedShellToCurvatureCarrierRound95Level : ProofLevel
-rowBCMarkedShellToCurvatureCarrierRound95Level =
-  BC.rowBCMarkedShellToCurvatureCarrierLevel
+rowBCMarkedShellToCurvatureCarrierRound95Level = BC.rowBCMarkedShellToCurvatureCarrierLevel
 
 rowBCMarkedShellToUniformCurvatureDebtRound95Level : ProofLevel
-rowBCMarkedShellToUniformCurvatureDebtRound95Level =
-  BC.rowBCMarkedShellToUniformCurvatureDebtLevel
+rowBCMarkedShellToUniformCurvatureDebtRound95Level = BC.rowBCMarkedShellToUniformCurvatureDebtLevel
 
 rowBCMarkedShellToIntegratedDebtRound95Level : ProofLevel
-rowBCMarkedShellToIntegratedDebtRound95Level =
-  BCIntegral.rowBCMarkedShellToUniformIntegratedCurvatureDebtLevel
+rowBCMarkedShellToIntegratedDebtRound95Level = BCIntegral.rowBCMarkedShellToUniformIntegratedCurvatureDebtLevel
 
 rowBSharedHessianPaysCurvatureDebtRound96Level : ProofLevel
-rowBSharedHessianPaysCurvatureDebtRound96Level =
-  BCHessian.sharedHessianToUniformCurvatureDebtLevel
+rowBSharedHessianPaysCurvatureDebtRound96Level = BCHessian.sharedHessianToUniformCurvatureDebtLevel
 
-rowBCSameDensityTemporalDominationRound98Level : ProofLevel
-rowBCSameDensityTemporalDominationRound98Level = conditional
+rowBCSameDensityTemporalDominationRound99Level : ProofLevel
+rowBCSameDensityTemporalDominationRound99Level = conditional
 
 ------------------------------------------------------------------------
--- B -> C spatial fusion: one Hessian row -> all finite influence powers
+-- B -> C spatial fusion: retain metric exponential weight through all powers
 ------------------------------------------------------------------------
 
 rowCInfluencePowerPositivityRound97Level : ProofLevel
-rowCInfluencePowerPositivityRound97Level =
-  CPositive.finiteInfluencePowerPositivityLevel
+rowCInfluencePowerPositivityRound97Level = CPositive.finiteInfluencePowerPositivityLevel
 
 rowCInfluencePowerRowMassRound97Level : ProofLevel
-rowCInfluencePowerRowMassRound97Level =
-  CPositive.finiteInfluencePowerRowMassFromSingleMajorantLevel
+rowCInfluencePowerRowMassRound97Level = CPositive.finiteInfluencePowerRowMassFromSingleMajorantLevel
 
 rowBSharedHessianToFiniteInfluenceCarrierRound97Level : ProofLevel
-rowBSharedHessianToFiniteInfluenceCarrierRound97Level =
-  CInfluence.sharedMarkedHessianToFiniteInfluenceCarrierLevel
+rowBSharedHessianToFiniteInfluenceCarrierRound97Level = CInfluence.sharedMarkedHessianToFiniteInfluenceCarrierLevel
 
-rowBSharedHessianToAllInfluencePowerRowsRound97Level : ProofLevel
-rowBSharedHessianToAllInfluencePowerRowsRound97Level =
-  CInfluence.sharedMarkedHessianToAllInfluencePowerRowsLevel
+rowCWeightedInfluenceAllPowerRowsRound99Level : ProofLevel
+rowCWeightedInfluenceAllPowerRowsRound99Level = CWeighted.finiteWeightedInfluenceAllPowerRowLevel
 
-rowBCSameDensityGeneratorRowIdentificationRound98Level : ProofLevel
-rowBCSameDensityGeneratorRowIdentificationRound98Level = conditional
+rowCThreeHalvesMetricWeightRound99Level : ProofLevel
+rowCThreeHalvesMetricWeightRound99Level = CMetric.threeHalvesMetricWeightSubmultiplicativeLevel
+
+rowBSharedHessianToWeightedInfluenceRound99Level : ProofLevel
+rowBSharedHessianToWeightedInfluenceRound99Level = CWeightedBridge.sharedMarkedHessianToWeightedAllPowerRowsLevel
+
+rowBSharedMetricHessianToAllWeightedRowsRound99Level : ProofLevel
+rowBSharedMetricHessianToAllWeightedRowsRound99Level = CMetricBridge.sharedMarkedMetricToAllWeightedPowerRowsLevel
+
+-- Preferred C-spatial physical seam:
+-- identify the literal same-density absolute derivative generator and the
+-- CMP116 Hessian mark on the actual integer lattice/block metric, and prove the
+-- single weighted row inequality.  Metric-weight algebra and all finite Dyson
+-- power propagation are theorem-owned.  Same-density temporal relaxation and
+-- the covariance representation are the remaining stochastic ingredients.
+rowBCSameDensityWeightedGeneratorRowRound99Level : ProofLevel
+rowBCSameDensityWeightedGeneratorRowRound99Level = conditional
 
 ------------------------------------------------------------------------
 -- Frozen four-row authority remains unchanged
 ------------------------------------------------------------------------
 
-round98FrozenResearchCountStillFour = R87.round87ShortestClayAnalyticCount
+round99FrozenResearchCountStillFour = R87.round87ShortestClayAnalyticCount
 
-rowACompletionRound98Level : ProofLevel
-rowACompletionRound98Level = conditional
+rowACompletionRound99Level : ProofLevel
+rowACompletionRound99Level = conditional
 
-rowBCompletionRound98Level : ProofLevel
-rowBCompletionRound98Level = conditional
+rowBCompletionRound99Level : ProofLevel
+rowBCompletionRound99Level = conditional
 
-rowCCompletionRound98Level : ProofLevel
-rowCCompletionRound98Level = conditional
+rowCCompletionRound99Level : ProofLevel
+rowCCompletionRound99Level = conditional
 
-rowDCompletionRound98Level : ProofLevel
-rowDCompletionRound98Level = conditional
+rowDCompletionRound99Level : ProofLevel
+rowDCompletionRound99Level = conditional
