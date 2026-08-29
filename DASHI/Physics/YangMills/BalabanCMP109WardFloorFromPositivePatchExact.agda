@@ -3,25 +3,9 @@ module DASHI.Physics.YangMills.BalabanCMP109WardFloorFromPositivePatchExact wher
 
 ------------------------------------------------------------------------
 -- ROW A GAUSSIAN PRODUCER: ONE PATCH LOWER INEQUALITY -> FIXED WARD FLOOR
---
--- Existing source-facing code already proves that for a literal CMP109 Gaussian
--- positive patch with nonnegative complement,
---
---   lowerContribution(patch) <= globalGaussianLower.
---
--- The Lean cross-prover lane has fixed the desired Gaussian floor at
---
---   b_Ward = 1 / 8388608.
---
--- Therefore the entire numerical Gaussian-floor weld reduces to one exact
--- statement about the SAME configured Brillouin box:
---
---   b_Ward <= lowerContribution(patch).
---
--- This module proves the composition.  No separate global integral estimate is
--- needed once the patch enclosure and complement sign are source-identified.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.List using (_∷_)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 import Data.Rational.Properties as ℚP
 
@@ -44,7 +28,7 @@ wardFloorBelowGlobalGaussianLower :
   Ward.wardGaussianFloor
   ≤ Integral.boxLowerSum
       (Patch.patch (literalPatch dataSet)
-        Agda.Builtin.List.∷ Patch.complement (literalPatch dataSet))
+        ∷ Patch.complement (literalPatch dataSet))
 wardFloorBelowGlobalGaussianLower dataSet =
   ℚP.≤-trans
     (wardFloorBelowPatchContribution dataSet)
@@ -53,15 +37,5 @@ wardFloorBelowGlobalGaussianLower dataSet =
 rowAWardFloorFromLiteralPatchLevel : ProofLevel
 rowAWardFloorFromLiteralPatchLevel = machineChecked
 
--- Physical/source frontier after this adapter is exact and scalar:
---
--- 1. construct the literal CMP109/CMP99 W/Q/R mixed component on one configured
---    positive-volume box;
--- 2. prove the box enclosure's `lowerContribution` is at least 1/8388608;
--- 3. prove the complement lower sum is nonnegative (already a field of the
---    literal-patch carrier).
---
--- The passage from that one local box inequality to the global Gaussian floor is
--- theorem-owned here.
 literalCMP109WardPatchLowerInequalityLevel : ProofLevel
 literalCMP109WardPatchLowerInequalityLevel = conditional
