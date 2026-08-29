@@ -1,19 +1,8 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanDensityAnchoredMetricStressRound122Exact where
 
-------------------------------------------------------------------------
--- ROUND122: CANONICAL METRIC STRESS WELD USES THE LITERAL BETA-DRIVEN DENSITY
---
--- Round119 ties the canonical CMP116 metric variation to the exact CMP119
--- insertion selected by the one-coordinate stress lane.  Round121 ensures the
--- normalized numerator/denominator source data are built on `densityAt k` of
--- the literal beta-driven complete-density trajectory.  This file welds those
--- objects pointwise, with explicit background->RG-scale and metric-perturbation
--- transports.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (_≡_; subst)
+open import Relation.Binary.PropositionalEquality using (_≡_; cong)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
@@ -43,14 +32,9 @@ record DensityAnchoredCanonicalMetricStress
       domain representation coordinate) : Set₁ where
   field
     densitySource : R121.LiteralDensityNormalizedStressSource inputs
-
     backgroundScale : Chain.Background activity → Nat
     metricPerturbationToDensityPerturbation :
-      Domain.MetricPerturbation domain →
-      R121.MetricPerturbation densitySource
-
-    -- The normalized source used by the canonical metric weld is literally the
-    -- data built from the same beta-driven density at the selected RG scale.
+      Domain.MetricPerturbation domain → R121.MetricPerturbation densitySource
     normalizedSourceIsLiteralDensity :
       ∀ background perturbation →
       R119.normalizedSource metricWeld background perturbation
@@ -76,10 +60,8 @@ canonicalMetricCrossNumeratorIsLiteralDensityCrossNumerator :
         (metricPerturbationToDensityPerturbation dataSet perturbation))
 canonicalMetricCrossNumeratorIsLiteralDensityCrossNumerator
     dataSet background perturbation =
-  let equality = normalizedSourceIsLiteralDensity dataSet background perturbation
-  in
-  Relation.Binary.PropositionalEquality.cong
-    R116.sourceDerivativeCrossNumerator equality
+  cong R116.sourceDerivativeCrossNumerator
+    (normalizedSourceIsLiteralDensity dataSet background perturbation)
 
 canonicalMetricConnectedInsertionIsOnLiteralDensity :
   ∀ {trajectory split inputs C S Y group Scale Volume activity domain representation coordinate metricWeld}
@@ -96,18 +78,12 @@ canonicalMetricConnectedInsertionIsOnLiteralDensity :
       (BetaDensity.densityAt inputs (backgroundScale dataSet background))
       (metricPerturbationToDensityPerturbation dataSet perturbation)
 canonicalMetricConnectedInsertionIsOnLiteralDensity
-    {inputs = inputs} dataSet background perturbation =
-  let equality = normalizedSourceIsLiteralDensity dataSet background perturbation
-  in
-  Relation.Binary.PropositionalEquality.cong
-    R116.connectedInsertionNumerator equality
+    dataSet background perturbation =
+  cong R116.connectedInsertionNumerator
+    (normalizedSourceIsLiteralDensity dataSet background perturbation)
 
 densityAnchoredCanonicalMetricStressCompilerLevel : ProofLevel
 densityAnchoredCanonicalMetricStressCompilerLevel = machineChecked
 
--- Physical seam remaining: exhibit the background->source scale identification
--- and perturbation transport on the actual CMP116/CMP122 construction, then
--- prove the normalized numerator/denominator data coincide definitionally/up to
--- the displayed equality.
 literalCMP116CMP122DensityAnchoringLevel : ProofLevel
 literalCMP116CMP122DensityAnchoringLevel = conditional
