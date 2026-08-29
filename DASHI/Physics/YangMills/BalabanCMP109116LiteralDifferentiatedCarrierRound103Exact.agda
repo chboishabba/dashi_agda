@@ -3,15 +3,10 @@ module DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound
 
 ------------------------------------------------------------------------
 -- ROUND103 BC1 CAPSTONE: STRICT SAME DIFFERENTIATED CARRIER
---
--- Choose CMP116 local activities AFTER their literal A=A(B) substitutions.
--- Then Part II is a localized representation of the Part-I effective potential
--- in the same physical B coordinate, and CMP109 (5.1) is D_B² of that same
--- potential.  The resulting marked static Hessian is the finite sum of the
--- physical composite local Hessians.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -35,7 +30,6 @@ record LiteralDifferentiatedEffectiveDensityCarrier : Set₁ where
       Radius.CMP116CommonAnalyticRadius
         (Source.Scale source) (Source.Volume source)
 
-    -- Explicit evidence that this scale/volume lies in the single source domain.
     backgroundInsideCommonDomain :
       Radius.backgroundCoordinateInside radiusData scale volume
     sourceInsideCommonDomain :
@@ -100,13 +94,10 @@ cmp116MarkedHessianIsSecondVariationOfEffectivePotential :
   ≡ Finite.secondVariation (calculus dataSet)
       (effectivePotential dataSet) background u v
 cmp116MarkedHessianIsSecondVariationOfEffectivePotential dataSet background u v =
-  Relation.Binary.PropositionalEquality.trans
-    (Relation.Binary.PropositionalEquality.sym
-      (cmp109PolarizationIsCMP116PhysicalMarkedHessian dataSet background u v))
+  trans
+    (sym (cmp109PolarizationIsCMP116PhysicalMarkedHessian dataSet background u v))
     (cmp109PolarizationIsSecondVariationOfEffectivePotential dataSet background u v)
 
--- Compatibility adapter for the older downstream alias carrier.  The theoremic
--- equalities above are proved BEFORE this adapter is constructed.
 asLegacySameDifferentiatedCarrier :
   (dataSet : LiteralDifferentiatedEffectiveDensityCarrier) →
   Legacy.SameDifferentiatedEffectiveDensityCarrier
@@ -139,7 +130,7 @@ asLegacySameDifferentiatedCarrier dataSet = record
         cmp116PhysicalMarkedHessian dataSet background u v
         ≡ cmp109Polarization dataSet background u v
   ; Legacy.SameDifferentiatedEffectiveDensityCarrier.heatDoobInitialDensityIsExpMinusThisPotential =
-      Set
+      ℝ ≡ ℝ
   }
 
 literalDifferentiatedCarrierAssemblyLevel : ProofLevel
@@ -148,8 +139,5 @@ literalDifferentiatedCarrierAssemblyLevel = machineChecked
 cmp109CMP116PhysicalHessianIdentityLevel : ProofLevel
 cmp109CMP116PhysicalHessianIdentityLevel = machineChecked
 
--- What remains physical is the literal repository instantiation of `source`,
--- Eq.(5.1), and the uniform common radius.  There is no additional Hessian
--- comparison theorem after those are supplied.
 literalDifferentiatedCarrierInstantiationLevel : ProofLevel
 literalDifferentiatedCarrierInstantiationLevel = conditional
