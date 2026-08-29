@@ -33,6 +33,8 @@ FILES=(
   DASHI/Analysis/RiemannAristotleFiniteNearCoreSchurCompilerExact.agda
   DASHI/Analysis/RiemannAristotleFiniteNearGramCancellationCompilerExact.agda
   DASHI/Analysis/RiemannAristotleFiniteNearNSGramAdapterExact.agda
+  DASHI/Analysis/FiniteSignedGramTelescopeExact.agda
+  DASHI/Analysis/RiemannAristotleLiteralPostSchurFiniteGramWeldExact.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 )
@@ -68,6 +70,8 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotleFiniteNearCoreSchurCompilerExact.agda
   agda DASHI/Analysis/RiemannAristotleFiniteNearGramCancellationCompilerExact.agda
   agda DASHI/Analysis/RiemannAristotleFiniteNearNSGramAdapterExact.agda
+  agda DASHI/Analysis/FiniteSignedGramTelescopeExact.agda
+  agda DASHI/Analysis/RiemannAristotleLiteralPostSchurFiniteGramWeldExact.agda
   agda DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 else
   echo "agda executable not present; trust scan only" >&2
