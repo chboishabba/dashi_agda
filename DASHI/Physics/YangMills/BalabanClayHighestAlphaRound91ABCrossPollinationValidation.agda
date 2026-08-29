@@ -5,6 +5,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaExact as R87
 import DASHI.Physics.YangMills.BalabanRowAInverseSquareSensitivityDecompositionExact as A
 import DASHI.Physics.YangMills.BalabanRowAInverseSquareChainSensitivityExact as AChain
+import DASHI.Physics.YangMills.BalabanRowASixthSensitivityFromCubicTelescopeExact as ASixth
 import DASHI.Physics.YangMills.BalabanBetaPrefixSensitivityToTubeContractionExact as Shoot
 import DASHI.Physics.YangMills.BalabanIrrelevantRGMemoryContractionExact as Memory
 import DASHI.Physics.YangMills.BalabanRowBActivityEntropyToShellEnergyExact as B
@@ -18,6 +19,10 @@ rowAInverseSquareSplitAlgebraRound91Level =
 rowAInverseSquareChainG6SuppressionRound91Level : ProofLevel
 rowAInverseSquareChainG6SuppressionRound91Level =
   AChain.rowAInverseSquareChainSuppressionAlgebraLevel
+
+rowASixthSensitivityFromCubicTubeRound92Level : ProofLevel
+rowASixthSensitivityFromCubicTubeRound92Level =
+  ASixth.rowASixthFromCubicTubeAlgebraLevel
 
 rowAShootingContractionAlgebraRound91Level : ProofLevel
 rowAShootingContractionAlgebraRound91Level =
