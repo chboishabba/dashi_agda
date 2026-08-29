@@ -45,11 +45,6 @@ import DASHI.Physics.YangMills.BalabanIntervalDeterminantAlgebra as Interval
 import DASHI.Physics.YangMills.BalabanClayFrozenFourCompletionContractExact as Frozen
 import DASHI.Physics.YangMills.CompactLieProofLevel as Level
 
-------------------------------------------------------------------------
--- Tiny Nat algebra kept local so the cutoff semantics do not depend on hidden
--- simplifier behaviour.
-------------------------------------------------------------------------
-
 nat≤Trans : ∀ {a b c : Nat} → a ≤ b → b ≤ c → a ≤ c
 nat≤Trans z≤n _ = z≤n
 nat≤Trans (s≤s ab) (s≤s bc) = s≤s (nat≤Trans ab bc)
@@ -92,11 +87,6 @@ linear : ℝ → Nat → ℝ
 linear slope zero = 0ℝ
 linear slope (suc n) = linear slope n +ℝ slope
 
-------------------------------------------------------------------------
--- Pointwise bounds generate every finite interval bound, but only when the
--- interval lies inside the declared physical cutoff.
-------------------------------------------------------------------------
-
 intervalLowerFromPointwise :
   (K : Nat) (beta : Nat → ℝ) (lower : ℝ) →
   (∀ j → suc j ≤ K → lower ≤ℝ beta (suc j)) →
@@ -136,10 +126,6 @@ prefixUpperFromPointwise K step upper pointwise (suc k) sk≤K =
       (nat≤Trans (natPred≤Suc k) sk≤K))
     (pointwise k sk≤K)
 
-------------------------------------------------------------------------
--- Minimal data before the old prefix-estimate wrapper.
-------------------------------------------------------------------------
-
 record PointwiseBetaTunedFamily : Set₁ where
   field
     gamma : ℝ
@@ -171,8 +157,6 @@ record PointwiseBetaTunedFamily : Set₁ where
       Trajectory.betaCorrection (BetaLaw.step (dynamics K)) (suc j)
         ≤ℝ betaUpper
 
-    -- This is the true remaining tuning/bare-coordinate input.  The prefix
-    -- majorant itself is fixed to the linear envelope generated above.
     bareBudget :
       ∀ K k → k ≤ K →
       Budget.gammaInverseSquare (threshold K) +ℝ linear betaUpper k
@@ -289,7 +273,7 @@ pointwiseFrozenRowA family = record
       λ K k n k+n≡K →
         let
           inside : k + n ≤ K
-          inside = subst (λ endpoint → endpoint ≤ K) k+n≡K ℕ.≤-refl
+          inside = subst (λ endpoint → endpoint ≤ K) (sym k+n≡K) ℕ.≤-refl
         in
         intervalLowerFromPointwise
           K
