@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Validate external relation-representation study receipts.
 
-This checker is intentionally stricter than a bibliography check.  A cited
-paper or public code URL is not a reproduction receipt.  For a non-template
-receipt, study-specific artifact classes, pinned model/code/environment
-identity, payload locations, and content hashes must all be present.
+This checker is intentionally stricter than a bibliography check. A cited paper
+or public code URL is not a reproduction receipt. For a non-template receipt,
+study-specific artifact classes, pinned model/code/environment identity, payload
+locations, and content hashes must all be present.
 
 The required artifact sets mirror the source-bounded method profiles in
 DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda.
@@ -21,108 +21,72 @@ SCHEMA = "dashi.relation-representation.external-study-receipt.v1"
 
 REQUIRED = {
     "christ-2510.26543": {
-        "exactModelIdentity",
-        "modelRevisionOrWeightHash",
-        "tokenizerOrInputEncoding",
-        "datasetIdentityAndVersion",
-        "rawPairedExamples",
-        "trainValidationTestSplit",
-        "layerOrRepresentationLocation",
-        "fittedOperatorParameters",
-        "rawPredictionOrSimilarityScores",
-        "parameterCountOrCompressionRatio",
-        "randomSeedsAndEnvironment",
-        "codeRevision",
+        "exactModelIdentity", "modelRevisionOrWeightHash",
+        "tokenizerOrInputEncoding", "datasetIdentityAndVersion",
+        "rawPairedExamples", "trainValidationTestSplit",
+        "layerOrRepresentationLocation", "fittedOperatorParameters",
+        "rawPredictionOrSimilarityScores", "parameterCountOrCompressionRatio",
+        "randomSeedsAndEnvironment", "codeRevision",
     },
     "rise-2510.09790": {
-        "exactModelIdentity",
-        "modelRevisionOrWeightHash",
-        "datasetIdentityAndVersion",
-        "rawPairedExamples",
-        "trainValidationTestSplit",
-        "preprocessingReceipt",
-        "rawEmbeddingsOrActivations",
-        "fittedOperatorParameters",
-        "baselineOperatorParameters",
-        "rawPredictionOrSimilarityScores",
-        "syntheticGenerationPromptAndModel",
-        "deduplicationOrCollisionReceipt",
-        "randomSeedsAndEnvironment",
-        "codeRevision",
+        "exactModelIdentity", "modelRevisionOrWeightHash",
+        "datasetIdentityAndVersion", "rawPairedExamples",
+        "trainValidationTestSplit", "preprocessingReceipt",
+        "rawEmbeddingsOrActivations", "fittedOperatorParameters",
+        "baselineOperatorParameters", "rawPredictionOrSimilarityScores",
+        "syntheticGenerationPromptAndModel", "deduplicationOrCollisionReceipt",
+        "randomSeedsAndEnvironment", "codeRevision",
     },
     "recos-2602.05266": {
-        "exactModelIdentity",
-        "modelRevisionOrWeightHash",
-        "datasetIdentityAndVersion",
-        "rawPairedExamples",
-        "preprocessingReceipt",
-        "rawEmbeddingsOrActivations",
-        "metricImplementation",
-        "rawPredictionOrSimilarityScores",
-        "groundTruthOrHumanJudgments",
-        "statisticalTestReceipt",
-        "randomSeedsAndEnvironment",
-        "codeRevision",
+        "exactModelIdentity", "modelRevisionOrWeightHash",
+        "datasetIdentityAndVersion", "rawPairedExamples",
+        "preprocessingReceipt", "rawEmbeddingsOrActivations",
+        "metricImplementation", "rawPredictionOrSimilarityScores",
+        "groundTruthOrHumanJudgments", "statisticalTestReceipt",
+        "randomSeedsAndEnvironment", "codeRevision",
     },
     "magnitude-2509.19323": {
-        "exactModelIdentity",
-        "modelRevisionOrWeightHash",
-        "datasetIdentityAndVersion",
-        "rawPairedExamples",
-        "trainValidationTestSplit",
-        "rawEmbeddingsOrActivations",
-        "metricImplementation",
-        "rawPredictionOrSimilarityScores",
-        "groundTruthOrHumanJudgments",
-        "statisticalTestReceipt",
-        "randomSeedsAndEnvironment",
-        "codeRevision",
+        "exactModelIdentity", "modelRevisionOrWeightHash",
+        "datasetIdentityAndVersion", "rawPairedExamples",
+        "trainValidationTestSplit", "rawEmbeddingsOrActivations",
+        "metricImplementation", "rawPredictionOrSimilarityScores",
+        "groundTruthOrHumanJudgments", "statisticalTestReceipt",
+        "randomSeedsAndEnvironment", "codeRevision",
     },
     "calibrated-2601.16907": {
-        "exactModelIdentity",
-        "modelRevisionOrWeightHash",
-        "datasetIdentityAndVersion",
-        "rawPairedExamples",
-        "trainValidationTestSplit",
-        "rawEmbeddingsOrActivations",
-        "fittedOperatorParameters",
-        "rawPredictionOrSimilarityScores",
-        "groundTruthOrHumanJudgments",
-        "statisticalTestReceipt",
-        "randomSeedsAndEnvironment",
-        "codeRevision",
+        "exactModelIdentity", "modelRevisionOrWeightHash",
+        "datasetIdentityAndVersion", "rawPairedExamples",
+        "trainValidationTestSplit", "rawEmbeddingsOrActivations",
+        "fittedOperatorParameters", "rawPredictionOrSimilarityScores",
+        "groundTruthOrHumanJudgments", "statisticalTestReceipt",
+        "randomSeedsAndEnvironment", "codeRevision",
     },
     "manifold-2605.05115": {
-        "exactModelIdentity",
-        "modelRevisionOrWeightHash",
-        "datasetIdentityAndVersion",
-        "rawPairedExamples",
-        "trainValidationTestSplit",
-        "layerOrRepresentationLocation",
-        "rawEmbeddingsOrActivations",
-        "fittedGeometryOrManifold",
-        "fittedOperatorParameters",
-        "baselineOperatorParameters",
-        "interventionTrajectory",
-        "outputDistributionTrajectory",
-        "rawPredictionOrSimilarityScores",
-        "randomSeedsAndEnvironment",
+        "exactModelIdentity", "modelRevisionOrWeightHash",
+        "datasetIdentityAndVersion", "rawPairedExamples",
+        "trainValidationTestSplit", "layerOrRepresentationLocation",
+        "rawEmbeddingsOrActivations", "fittedGeometryOrManifold",
+        "fittedOperatorParameters", "baselineOperatorParameters",
+        "interventionTrajectory", "outputDistributionTrajectory",
+        "rawPredictionOrSimilarityScores", "randomSeedsAndEnvironment",
         "codeRevision",
     },
     "fde-2606.01402": {
-        "exactModelIdentity",
-        "modelRevisionOrWeightHash",
-        "datasetIdentityAndVersion",
-        "trainValidationTestSplit",
-        "preprocessingReceipt",
-        "fittedOperatorParameters",
-        "compressionTolerance",
-        "compressionPartition",
-        "baselineOperatorParameters",
-        "rawPredictionOrSimilarityScores",
-        "parameterCountOrCompressionRatio",
-        "randomSeedsAndEnvironment",
+        "exactModelIdentity", "modelRevisionOrWeightHash",
+        "datasetIdentityAndVersion", "trainValidationTestSplit",
+        "preprocessingReceipt", "fittedOperatorParameters",
+        "compressionTolerance", "compressionPartition",
+        "baselineOperatorParameters", "rawPredictionOrSimilarityScores",
+        "parameterCountOrCompressionRatio", "randomSeedsAndEnvironment",
         "codeRevision",
+    },
+    "grokking-2602.02859": {
+        "exactModelIdentity", "modelRevisionOrWeightHash",
+        "datasetIdentityAndVersion", "trainValidationTestSplit",
+        "preprocessingReceipt", "checkpointSeries",
+        "weightOrParameterSnapshots", "rawPredictionOrSimilarityScores",
+        "spectralDiagnosticReceipt", "alternativeDiagnosticReceipt",
+        "randomSeedsAndEnvironment", "codeRevision",
     },
 }
 
@@ -146,8 +110,6 @@ def validate(path: Path, allow_template: bool) -> list[str]:
     status = data.get("status")
     is_template = status == "template"
     if is_template and allow_template:
-        # A template is allowed to be incomplete, but it must still name its
-        # source and must not masquerade as a reproduced/validated payload.
         source = data.get("source") or {}
         if not nonempty(source.get("authors")):
             errors.append("template source.authors must be present")
@@ -194,8 +156,6 @@ def validate(path: Path, allow_template: bool) -> list[str]:
     if missing:
         errors.append("missing required artifact classes: " + ", ".join(missing))
 
-    # Even a complete package must not claim inferential promotions in the raw
-    # receipt schema.  Those belong to Stage-6/7 owners after independent checks.
     forbidden_true = (
         "semantic_realization_established",
         "global_identifiability_established",
