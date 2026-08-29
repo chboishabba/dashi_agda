@@ -8,6 +8,7 @@ target="DASHI/Physics/YangMills/BalabanClayHighestAlphaRound103SourceCoordinateW
 
 files=(
   "$target"
+  DASHI/Physics/YangMills/BalabanA1Equation51FiveChannelSameObjectRound103Exact.agda
   DASHI/Physics/YangMills/BalabanCMP109116FiniteEffectiveActionHessianRound103Exact.agda
   DASHI/Physics/YangMills/BalabanCMP109116SourceContinuationRound103Exact.agda
   DASHI/Physics/YangMills/BalabanCMP109Equation51LocalizedHessianRound103Exact.agda
@@ -19,9 +20,7 @@ files=(
   DASHI/Physics/YangMills/BalabanHeatDoobSameDensityLogHessianRound103Exact.agda
 )
 
-for file in "${files[@]}"; do
-  test -f "$file"
-done
+for file in "${files[@]}"; do test -f "$file"; done
 
 if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERMINATION_CHECK|allow-unsolved-metas|--no-positivity-check|--no-termination-check|NON_COVERING|--type-in-type|trustMe|primTrustMe' "${files[@]}"; then
   echo "Round103 source-coordinate weld contains a hole, postulate, unsafe escape, or trust primitive" >&2
@@ -29,7 +28,8 @@ if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERM
 fi
 
 grep -q 'round103FrozenResearchCountStillFour' "$target"
-grep -q 'D_B²(E∘A)' DASHI/Physics/YangMills/BalabanCMP116SubstitutedActivityHessianRound103Exact.agda
+grep -q 'a1Equation51FiveChannelSameObjectCompilerLevel' DASHI/Physics/YangMills/BalabanA1Equation51FiveChannelSameObjectRound103Exact.agda
+grep -q 'physicalHessianSplitsIntrinsicPlusSubstitution' DASHI/Physics/YangMills/BalabanCMP116SubstitutedActivityHessianRound103Exact.agda
 grep -q 'polarizationIsLocalizedCompositeHessianSum' DASHI/Physics/YangMills/BalabanCMP109Equation51LocalizedHessianRound103Exact.agda
 grep -q 'cmp109PolarizationIsCMP116PhysicalMarkedHessian' DASHI/Physics/YangMills/BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact.agda
 grep -q 'heatDoobHessianIsStaticMinusCovariance' DASHI/Physics/YangMills/BalabanHeatDoobSameDensityLogHessianRound103Exact.agda
@@ -39,7 +39,6 @@ export DASHI_AGDA29_CACHE_ROOT="$cache_root"
 export DASHI_STATUS_DIR="${DASHI_STATUS_DIR:-$cache_root/status}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$cache_root/xdg}"
 mkdir -p "$DASHI_STATUS_DIR" "$XDG_CACHE_HOME"
-
 export AGDA_LOG_PATH="${AGDA_LOG_PATH:-$root/ym-round103-agda.log}"
 export AGDA_JOBS="${AGDA_JOBS:-4}"
 export DASHI_NO_TMUX="1"
