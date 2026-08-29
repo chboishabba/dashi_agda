@@ -1,0 +1,54 @@
+name: YM Round102 physical cut Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound102PhysicalCutExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound102Validation.agda'
+      - 'DASHI/Physics/YangMills/BalabanYM4FiveChannelQuarticAbsoluteBetaRound102Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanA1HistoryUniformTwoSidedBetaRound102Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanRowAShootingFixedPointTerminalExactRound102.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP109116SameDifferentiatedCarrierRound102Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116FirstGradientSharedMarkedExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanHeatDoobGradientCovarianceMarkedCauchyExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116GradientCovarianceToHeatDoobDebtExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116GradientCovarianceToWeightedHeatDoobExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanWeightedInfluenceEntryQuasiLocalExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanWeightedDysonQuasiLocalSeriesExact.agda'
+      - 'scripts/check_ym_round102_physical_cut.sh'
+      - '.github/workflows/ym-round102-physical-cut.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ym-round102-physical-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  agda:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          submodules: false
+      - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Check Round102 physical cut
+        env:
+          AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
+          DASHI_REPO_ROOT: ${{ github.workspace }}
+          DASHI_AGDA29_CACHE_ROOT: ${{ runner.temp }}/dashi-agda29-round102
+          DASHI_STATUS_DIR: ${{ runner.temp }}/dashi-agda29-round102/status
+          XDG_CACHE_HOME: ${{ runner.temp }}/dashi-xdg-round102
+          AGDA_LOG_PATH: ${{ github.workspace }}/ym-round102-agda.log
+          AGDA_JOBS: '4'
+          DASHI_NO_TMUX: '1'
+        run: bash scripts/check_ym_round102_physical_cut.sh
+      - name: Upload Round102 Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ym-round102-physical-cut-agda-log
+          path: ym-round102-agda*.log
+          if-no-files-found: warn
