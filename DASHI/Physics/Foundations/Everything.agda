@@ -26,6 +26,8 @@ import DASHI.Physics.Foundations.PR399FoundationsCrossPollinationExact
 import DASHI.Physics.Foundations.UnifiedEffectiveActionBoundary
 import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact
 import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryValidation
+import DASHI.Physics.Foundations.SharedEffectiveSourceRecoveryExact
+import DASHI.Physics.Foundations.SharedEffectiveSourceRecoveryValidation
 import DASHI.Physics.Foundations.FiniteHistoryOrientationExact
 import DASHI.Physics.Foundations.HistoryWeightFiltrationExact
 import DASHI.Physics.Foundations.FiniteHistoryFunctionalExact
