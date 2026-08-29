@@ -80,8 +80,8 @@ MolarConcentration = dim minusThree zeroI zeroI zeroI zeroI one zeroI
 
 ------------------------------------------------------------------------
 -- Additional coherent dimensions needed by fluid / transport / bioelectric
--- applications.  These are dimension expressions, not claims of constitutive
--- law or measured value.
+-- and electrodiffusion applications. These are dimension expressions, not
+-- claims of constitutive law or measured value.
 ------------------------------------------------------------------------
 
 Density DynamicViscosity VolumetricFlowRate DiffusionCoefficient ElectricField : Dimension
@@ -90,6 +90,13 @@ DynamicViscosity     = dim minusOne one minusOne zeroI zeroI zeroI zeroI
 VolumetricFlowRate   = dim (pos 3) zeroI minusOne zeroI zeroI zeroI zeroI
 DiffusionCoefficient = dim (pos 2) zeroI minusOne zeroI zeroI zeroI zeroI
 ElectricField        = dim one one minusThree minusOne zeroI zeroI zeroI
+
+ChargeDensity CurrentDensity MolarFluxDensity Permittivity Conductivity : Dimension
+ChargeDensity    = dim minusThree zeroI one one zeroI zeroI zeroI
+CurrentDensity   = dim minusTwo zeroI zeroI one zeroI zeroI zeroI
+MolarFluxDensity = dim minusTwo zeroI minusOne zeroI zeroI one zeroI
+Permittivity     = dim minusThree minusOne (pos 4) (pos 2) zeroI zeroI zeroI
+Conductivity     = dim minusThree minusOne (pos 3) (pos 2) zeroI zeroI zeroI
 
 ------------------------------------------------------------------------
 -- Decimal scale and exact signed fixed-point quantity.
@@ -231,6 +238,21 @@ squareMetrePerSecond = mkUnit "m² s⁻¹" "square metre per second"
 
 voltPerMetre : Unit ElectricField
 voltPerMetre = mkUnit "V m⁻¹" "volt per metre"
+
+coulombPerCubicMetre : Unit ChargeDensity
+coulombPerCubicMetre = mkUnit "C m⁻³" "coulomb per cubic metre"
+
+amperePerSquareMetre : Unit CurrentDensity
+amperePerSquareMetre = mkUnit "A m⁻²" "ampere per square metre"
+
+molePerSquareMetreSecond : Unit MolarFluxDensity
+molePerSquareMetreSecond = mkUnit "mol m⁻² s⁻¹" "mole per square metre second"
+
+faradPerMetre : Unit Permittivity
+faradPerMetre = mkUnit "F m⁻¹" "farad per metre"
+
+siemensPerMetre : Unit Conductivity
+siemensPerMetre = mkUnit "S m⁻¹" "siemens per metre"
 
 ------------------------------------------------------------------------
 -- Typed measurement and authority metadata.
