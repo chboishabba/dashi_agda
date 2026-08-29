@@ -4,3 +4,4 @@ import DASHI.Environment.LESObservationSourceRegistryExact
 import DASHI.Environment.LESSituatedSocioEcologicalHyperfabricExact
 import DASHI.Environment.LESSituatedObservationInteractionExact
 import DASHI.Environment.LESObserverContextDiscoveryConeExact
+import DASHI.Environment.LESDomainBasisBidiFrontierExact
