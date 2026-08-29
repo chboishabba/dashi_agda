@@ -8,6 +8,7 @@ open import DASHI.Programmes.BrainKernelSemanticsCorrectionExact
 open import DASHI.Programmes.CFDChartCorrectionExact
 open import DASHI.Programmes.DashifineBenchmarkCorrectionExact
 open import DASHI.Programmes.GrokkingValidationCorrectionExact
+open import DASHI.Programmes.GrokkingHeldOutToleranceExact
 open import DASHI.Programmes.CoreReferenceCorrectionExact
 open import DASHI.Programmes.FRACDASHCompilerCorrectionExact
 open import DASHI.Programmes.FRACDASHNumericInterpreterTargetExact
@@ -46,6 +47,20 @@ grokkingNoMSEPromotion :
 grokkingNoMSEPromotion =
   GrokkingValidationCorrectionBoundary.lowMSEFitIsExactFamilyIdentityIsFalse
     canonicalGrokkingValidationCorrectionBoundary
+
+grokkingNumericalStudyNeedNotBeExactIdentity :
+  GrokkingHeldOutToleranceBoundary.finiteNumericalStudyRequiresDefinitionalCurveEquality
+    canonicalGrokkingHeldOutToleranceBoundary ≡ false
+grokkingNumericalStudyNeedNotBeExactIdentity =
+  GrokkingHeldOutToleranceBoundary.finiteNumericalStudyRequiresDefinitionalCurveEqualityIsFalse
+    canonicalGrokkingHeldOutToleranceBoundary
+
+grokkingPostHocToleranceNotIndependent :
+  GrokkingHeldOutToleranceBoundary.postHocToleranceIsIndependentValidation
+    canonicalGrokkingHeldOutToleranceBoundary ≡ false
+grokkingPostHocToleranceNotIndependent =
+  GrokkingHeldOutToleranceBoundary.postHocToleranceIsIndependentValidationIsFalse
+    canonicalGrokkingHeldOutToleranceBoundary
 
 coreFingerprintNotSemanticEquality :
   CoreReferenceCorrectionBoundary.backendFingerprintEqualityIsStateEquality
