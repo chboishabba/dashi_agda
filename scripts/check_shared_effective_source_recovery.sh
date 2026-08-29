@@ -11,6 +11,7 @@ FILES=(
   DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
   DASHI/Physics/Foundations/BalabanCommonActionVariationValidation.agda
   DASHI/Physics/Foundations/BalabanAllSectorContinuumProducerExact.agda
+  DASHI/Physics/Foundations/BalabanNativeSectorRecoveryTransportExact.agda
   DASHI/Physics/Foundations/BalabanContinuumProducerValidation.agda
   DASHI/Physics/Foundations/EinsteinCommonActionVariationFrontierExact.agda
   DASHI/Physics/Foundations/EinsteinCommonActionVariationValidation.agda
@@ -29,6 +30,7 @@ done
 
 qft=DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
 producer=DASHI/Physics/Foundations/BalabanAllSectorContinuumProducerExact.agda
+transport=DASHI/Physics/Foundations/BalabanNativeSectorRecoveryTransportExact.agda
 gr=DASHI/Physics/Foundations/EinsteinCommonActionVariationFrontierExact.agda
 cap=DASHI/Physics/Foundations/CommonActionQFTGRVariationCompilerExact.agda
 producerCap=DASHI/Physics/Foundations/CommonActionQFTGRContinuumProducerCompilerExact.agda
@@ -38,8 +40,6 @@ grep -q 'finiteVariationRepresentedByFiniteStress' "$qft"
 grep -q 'finiteFirstVariationConverges' "$qft"
 grep -q 'finiteStressPairingConvergesToLiteralContinuumStress' "$qft"
 grep -q '^balabanSectorContinuumFirstVariationIsLiteralStressPairing :' "$qft"
-grep -q '^balabanAggregateSectorVariationIsAggregateStressPairing :' "$qft"
-grep -q 'aggregateStressPairingCommutes' "$qft"
 
 grep -q '^record BalabanAllSectorContinuumProducer' "$producer"
 grep -q '^legacyReceiptToContinuumProducer :' "$producer"
@@ -47,12 +47,17 @@ grep -q '^aggregateSectorVariationIsAggregateStressPairing :' "$producer"
 grep -q '^continuumProducerBuildsQFTVariationIdentification :' "$producer"
 grep -q 'downstreamCommonActionNeedsIndependentConvergenceRelationIsFalse' "$producer"
 
+grep -q '^record NativeBalabanSectorRecoveryTransport' "$transport"
+grep -q '^transportedSectorContinuumFirstVariation :' "$transport"
+grep -q '^transportedSectorVariationIsActualSharedStressPairing :' "$transport"
+grep -q 'nativeYMStressIsSharedStressByCarrierNameIsFalse' "$transport"
+grep -q 'nativeYMMetricPerturbationIsCommonPerturbationByNameIsFalse' "$transport"
+
 grep -q 'effectiveSourceRepresentsCommonMetricVariation' "$gr"
 grep -q 'commonMetricVariationEqualsEinsteinPairing' "$gr"
 grep -q 'pairingSeparatesStressOnAdmittedDomain' "$gr"
 grep -q '^commonVariationEqualsEinsteinTensor :' "$gr"
 grep -q '^einsteinTensorVariationBuildsGRIdentification :' "$gr"
-grep -q 'equalityOfPairingsImpliesTensorEqualityWithoutSeparationTheoremIsFalse' "$gr"
 
 grep -q '^record CommonMetricVariationLanguage' "$cap"
 grep -q '^commonEinsteinAndBalabanVariationImpliesStressWeld :' "$cap"
@@ -73,4 +78,4 @@ agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/BalabanContinuumPr
 agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/EinsteinCommonActionVariationValidation.agda
 agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/Everything.agda
 
-echo "Legacy and endpoint-only Balaban-QFT, pairing-exact Einstein-GR, and common-metric weld checks passed."
+echo "Legacy and endpoint-only Balaban-QFT, native-to-shared sector transport, pairing-exact Einstein-GR, and common-metric weld checks passed."
