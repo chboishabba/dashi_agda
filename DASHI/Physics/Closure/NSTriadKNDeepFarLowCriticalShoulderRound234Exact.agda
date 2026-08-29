@@ -47,7 +47,9 @@ module DASHI.Physics.Closure.NSTriadKNDeepFarLowCriticalShoulderRound234Exact wh
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
+open import Agda.Builtin.List using (_∷_; [])
+import Data.Rational.Base as ℚ
+open ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 
@@ -115,10 +117,10 @@ coefficientTimesEnergyMonotone P =
     eH = highEnergy P
 
     instance
-      bNN = Data.Rational.Base.nonNegative (bernsteinCoefficientNN P)
-      hNN = Data.Rational.Base.nonNegative (highDerivativeCoefficientNN P)
-      eLNN = Data.Rational.Base.nonNegative (lowEnergyNN P)
-      eHNN = Data.Rational.Base.nonNegative (highEnergyNN P)
+      bNN = ℚ.nonNegative (bernsteinCoefficientNN P)
+      hNN = ℚ.nonNegative (highDerivativeCoefficientNN P)
+      eLNN = ℚ.nonNegative (lowEnergyNN P)
+      eHNN = ℚ.nonNegative (highEnergyNN P)
 
     step1 : b * eL ≤ h * eL
     step1 = ℚP.*-monoʳ-≤-nonNeg eL (coefficientPayment P)
@@ -126,16 +128,13 @@ coefficientTimesEnergyMonotone P =
     step2 : (b * eL) * eH ≤ (h * eL) * eH
     step2 = ℚP.*-monoʳ-≤-nonNeg eH step1
 
-    rearrangeLeft : (b * eL) * eH ≡ b * eL * eH
-    rearrangeLeft = refl
-
     rearrangeRight : (h * eL) * eH ≡ eL * (h * eH)
     rearrangeRight = solve (b ∷ h ∷ eL ∷ eH ∷ [])
   in
-  subst₂ rearrangeLeft rearrangeRight step2
+  substRight rearrangeRight step2
   where
-  subst₂ : ∀ {a b c d : ℚ} → a ≡ b → c ≡ d → a ≤ c → b ≤ d
-  subst₂ refl refl p = p
+  substRight : ∀ {a c d : ℚ} → c ≡ d → a ≤ c → a ≤ d
+  substRight refl p = p
 
 deepFarLowMassPaidByEnergyTimesDissipation :
   (P : DeepFarLowScalarPayment) →
