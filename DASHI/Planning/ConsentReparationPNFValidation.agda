@@ -1,6 +1,7 @@
 module DASHI.Planning.ConsentReparationPNFValidation where
 
 open import DASHI.Core.Prelude
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Planning.CollectiveTerritorialConsentExact as Consent
 import DASHI.Planning.AuthoritySovereigntyNonDescentExact as Authority
 import DASHI.Planning.NonSubstitutionalReparationExact as Repair
@@ -17,8 +18,7 @@ consultationStillNotConsent :
 consultationStillNotConsent = Consent.consultedIsNotConsentGiven
 
 recognitionStillCannotConstituteEveryAuthority :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    Authority.recognitionObserver Authority.authorityObserver → ⊥
+  INF.FactorsThrough Authority.recognitionObserver Authority.authorityObserver → ⊥
 recognitionStillCannotConstituteEveryAuthority =
   Authority.stateRecognitionCannotConstituteEveryAuthority
 
