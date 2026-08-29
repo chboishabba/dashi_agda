@@ -16,7 +16,8 @@ module DASHI.Physics.YangMills.BalabanRowASixthSensitivityFromCubicTelescopeExac
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
+import Data.Nat.Base as ℕ
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -40,8 +41,6 @@ cubeMonotoneNonnegative : ∀ {lower upper} →
 cubeMonotoneNonnegative {lower} {upper} lowerNN upperNN lowerBelow =
   let
     lowerSquareNN = Cubic.productNonnegative lower lower lowerNN lowerNN
-    upperSquareNN = Cubic.productNonnegative upper upper upperNN upperNN
-
     squareBelow : lower * lower ≤ upper * upper
     squareBelow = ℚP.*-mono-≤ lowerNN lowerBelow lowerNN lowerBelow
   in
@@ -93,7 +92,7 @@ module FromFlow {cutoff : Nat}
     (∀ j → 0ℚ ≤ Cubic.coupling flow j) →
     (∀ j → Cubic.coupling flow j ≤ gamma) →
     (∀ K → Cubic.coupling flow K - Cubic.coupling flow zero ≤ tubeWidth) →
-    ∀ K → K Data.Nat.Base.≤ cutoff →
+    ∀ K → K ℕ.≤ cutoff →
     Cubic.marginConstant flow * sumSixth (Cubic.coupling flow) K
       ≤ (Cubic.twoℚ * cube gamma) * tubeWidth
   sixthSensitivityBudgetInTube marginNN {gamma} {tubeWidth}
