@@ -1,22 +1,20 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanDensityAnchoredStressLaneRound123Exact where
 
-------------------------------------------------------------------------
--- ROUND123: ONE LITERAL BETA-DRIVEN FINITE->SCHWINGER STRESS LANE
-------------------------------------------------------------------------
-
-open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (_≤_; _*_)
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
 import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityHessianRound103Exact as Chain
+import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityFirstVariationRound105Exact as First
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106Exact as Domain
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as StressRep
+import DASHI.Physics.YangMills.BalabanCanonicalMetricToCMP119StressRound118Exact as R118
 import DASHI.Physics.YangMills.BalabanCanonicalMetricStressLaneRound120Exact as R120
 import DASHI.Physics.YangMills.BalabanDensityAnchoredMetricStressRound122Exact as R122
 import DASHI.Physics.YangMills.BalabanCanonicalMetricSelectedStressRound119Exact as R119
+import DASHI.Physics.YangMills.BalabanLiteralDensityNormalizedSourceRound121Exact as R121
 import DASHI.Physics.YangMills.BalabanLiteralStressCoordinateRound114Exact as R114
 import DASHI.Physics.YangMills.BalabanLiteralStressCompletionRound115Exact as R115
 import DASHI.Physics.YangMills.BalabanNormalizedStressInsertionRound116Exact as R116
@@ -46,7 +44,6 @@ record DensityAnchoredCanonicalMetricStressLane
     stressLane : R120.CanonicalMetricLiteralStressLane
       {C = C} {S = S} {Y = Y} {group = group}
       domain representation
-
     densityAnchor : R122.DensityAnchoredCanonicalMetricStress
       {trajectory = trajectory} {split = split} {inputs = inputs}
       (R120.metricSelectedStress stressLane)
@@ -64,14 +61,13 @@ finiteMetricVariationUsesLiteralDensitySelectedInsertion :
   Domain.AdmissibleMetricPerturbation domain perturbation →
   let weld = R120.metricSelectedStress (stressLane dataSet)
       insertion =
-        R119.R118.normalizedInsertion
+        R118.normalizedInsertion
           (R119.asRound118CanonicalMetricWeld weld)
           background perturbation
   in
-  R119.R118.readoutToRational (R119.asRound118CanonicalMetricWeld weld)
+  R118.readoutToRational (R119.asRound118CanonicalMetricWeld weld)
     (StressRep.firstVariationReadout representation
-      (DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityFirstVariationRound105Exact.substitutedFirstVariation
-        activity background
+      (First.substitutedFirstVariation activity background
         (Domain.metricPerturbationToBackgroundTangent domain background perturbation)))
   ≡ R116.cmp119StressInsertionNumerator insertion
 finiteMetricVariationUsesLiteralDensitySelectedInsertion dataSet =
@@ -88,7 +84,7 @@ selectedNormalizedSourceIsLiteralBetaDrivenDensity :
     background perturbation →
   R119.normalizedSource (R120.metricSelectedStress (stressLane dataSet))
       background perturbation
-  ≡ DASHI.Physics.YangMills.BalabanLiteralDensityNormalizedSourceRound121Exact.crossDataAt
+  ≡ R121.crossDataAt
       (R122.densitySource (densityAnchor dataSet))
       (R122.selectedDensityScale (densityAnchor dataSet))
       (R122.metricPerturbationToDensityPerturbation
