@@ -27,6 +27,7 @@ import DASHI.Programmes.CoreCarrierReferenceCorrespondenceExact
 import DASHI.Programmes.FRACDASHExact
 import DASHI.Programmes.FRACDASHCompilerCorrectionExact
 import DASHI.Programmes.FRACDASHNumericInterpreterTargetExact
+import DASHI.Programmes.FRACDASHPairedPrimeActivityExact
 import DASHI.Programmes.TestHarnessExact
 import DASHI.Programmes.TestHarnessEvidenceCorrectionExact
 import DASHI.Programmes.TestHarnessFamilyReceiptExact
