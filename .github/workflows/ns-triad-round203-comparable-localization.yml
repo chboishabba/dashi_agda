@@ -17,12 +17,16 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNComparableConstantBandGramNoGoRound214Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNThreeClassPositiveResidualCompilerRound215Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPackageASelfExternalSignedProductionCompilerRound216Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNRawCurlCellMassEnergyDissipationRound217Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound215Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound215Validation.agda'
       - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound216Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound216Validation.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound217Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound217Validation.agda'
       - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound215Exact.agda'
       - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound216Exact.agda'
+      - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound217Exact.agda'
       - 'scripts/check_ns_triad_clay_frontier.py'
       - 'scripts/run_agda29_parallel_check.sh'
       - 'flake.nix'
@@ -126,3 +130,21 @@ jobs:
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Papers/NavierStokes/TheoremInterfaceRound216Exact.agda
+
+      - name: Type-check Round217 raw-cell ED compiler
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNRawCurlCellMassEnergyDissipationRound217Exact.agda
+
+      - name: Type-check Round217 frontier validation
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound217Validation.agda
+
+      - name: Type-check Round217 paper interface
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Papers/NavierStokes/TheoremInterfaceRound217Exact.agda
