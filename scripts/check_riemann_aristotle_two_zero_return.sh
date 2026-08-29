@@ -23,6 +23,7 @@ FILES=(
   DASHI/Analysis/RiemannAristotleDeterministicProjectiveSchurReturnExact.agda
   DASHI/Analysis/RiemannAristotleProjectedZeroTailSummabilityReturnExact.agda
   DASHI/Analysis/RiemannAristotleExplicitCutoffCarrierLeanReturnExact.agda
+  DASHI/Analysis/RiemannAristotleFiniteNearReflectionOrbitReturnExact.agda
   DASHI/Analysis/RiemannAristotleWholeCarrierCancellationCompilerExact.agda
   DASHI/Analysis/RiemannAristotleNearFarShellBudgetCompilerExact.agda
   DASHI/Analysis/RiemannAristotleNearFarShellProducerSocketsExact.agda
@@ -30,6 +31,7 @@ FILES=(
   DASHI/Analysis/RiemannAristotleFarTailCutoffSelectorExact.agda
   DASHI/Analysis/RiemannAristotleNearFarAllowanceCompositionExact.agda
   DASHI/Analysis/RiemannAristotleFiniteNearCoreSchurCompilerExact.agda
+  DASHI/Analysis/RiemannAristotleFiniteNearGramCancellationCompilerExact.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 )
@@ -55,6 +57,7 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotleDeterministicProjectiveSchurReturnExact.agda
   agda DASHI/Analysis/RiemannAristotleProjectedZeroTailSummabilityReturnExact.agda
   agda DASHI/Analysis/RiemannAristotleExplicitCutoffCarrierLeanReturnExact.agda
+  agda DASHI/Analysis/RiemannAristotleFiniteNearReflectionOrbitReturnExact.agda
   agda DASHI/Analysis/RiemannAristotleWholeCarrierCancellationCompilerExact.agda
   agda DASHI/Analysis/RiemannAristotleNearFarShellBudgetCompilerExact.agda
   agda DASHI/Analysis/RiemannAristotleNearFarShellProducerSocketsExact.agda
@@ -62,6 +65,7 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotleFarTailCutoffSelectorExact.agda
   agda DASHI/Analysis/RiemannAristotleNearFarAllowanceCompositionExact.agda
   agda DASHI/Analysis/RiemannAristotleFiniteNearCoreSchurCompilerExact.agda
+  agda DASHI/Analysis/RiemannAristotleFiniteNearGramCancellationCompilerExact.agda
   agda DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 else
   echo "agda executable not present; trust scan only" >&2
