@@ -1,0 +1,263 @@
+module DASHI.Programmes.BidirectionalSatelliteValidation where
+
+open import DASHI.Core.Prelude
+
+open import DASHI.Programmes.BidirectionalSatelliteCorrectionExact
+open import DASHI.Programmes.ExecutableReceiptSchemaExact
+open import DASHI.Programmes.BrainKernelSemanticsCorrectionExact
+open import DASHI.Programmes.BrainCoarsePersistenceNoGoExact
+open import DASHI.Programmes.CFDChartCorrectionExact
+open import DASHI.Programmes.CFDAdvancedNSFrontierExact
+open import DASHI.Programmes.DashifineBenchmarkCorrectionExact
+open import DASHI.Programmes.DashifineWaveProjectionFamilyExact
+open import DASHI.Programmes.GrokkingValidationCorrectionExact
+open import DASHI.Programmes.GrokkingHeldOutToleranceExact
+open import DASHI.Programmes.CoreReferenceCorrectionExact
+open import DASHI.Programmes.CoreExecutableParityReceiptExact
+open import DASHI.Programmes.CoreCarrierReferenceCorrespondenceExact
+open import DASHI.Programmes.FRACDASHCompilerCorrectionExact
+open import DASHI.Programmes.FRACDASHNumericInterpreterTargetExact
+open import DASHI.Programmes.TestHarnessEvidenceCorrectionExact
+open import DASHI.Programmes.TestHarnessFamilyReceiptExact
+open import DASHI.Programmes.TestHarnessSelectedFamiliesExact
+open import DASHI.Programmes.BrainHemibrainExperimentExact
+open import DASHI.Programmes.QuantumFalsifiableTargetExact
+open import DASHI.Programmes.QuantumExecutablePromotionReceiptExact
+open import DASHI.Programmes.QuantumCHSHDiscriminatorExact
+open import DASHI.Programmes.RTXLightTransportRefinementExact
+open import DASHI.Programmes.RTXExecutableLightTransportReceiptExact
+open import DASHI.Programmes.RTXQuantitativeRefinementExact
+
+bidiNeedsReceipts : correctedModelStillNeedsReceipt cfdBIDIAudit ≡ true
+bidiNeedsReceipts = correctedModelStillNeedsReceiptIsTrue cfdBIDIAudit
+
+brainKernelNoAutomaticIdempotence :
+  BrainKernelCorrectionBoundary.localSignKernelIsAutomaticallyIdempotent
+    canonicalBrainKernelCorrectionBoundary ≡ false
+brainKernelNoAutomaticIdempotence =
+  BrainKernelCorrectionBoundary.localSignKernelIsAutomaticallyIdempotentIsFalse
+    canonicalBrainKernelCorrectionBoundary
+
+brainZeroCoarseDefectNotPersistence :
+  BrainCoarsePersistenceBoundary.zeroCoarseDefectImpliesConsumerPersistence
+    canonicalBrainCoarsePersistenceBoundary ≡ false
+brainZeroCoarseDefectNotPersistence =
+  BrainCoarsePersistenceBoundary.zeroCoarseDefectImpliesConsumerPersistenceIsFalse
+    canonicalBrainCoarsePersistenceBoundary
+
+brainErasureBlocksTransport :
+  BrainCoarsePersistenceBoundary.coarseErasureBlocksConsumerTransport
+    canonicalBrainCoarsePersistenceBoundary ≡ true
+brainErasureBlocksTransport =
+  BrainCoarsePersistenceBoundary.coarseErasureBlocksConsumerTransportIsTrue
+    canonicalBrainCoarsePersistenceBoundary
+
+cfdNoClosureRecoveryOfLostInformation :
+  CFDChartCorrectionBoundary.closureModelCanRecoverDiscardedClaimInformation
+    canonicalCFDChartCorrectionBoundary ≡ false
+cfdNoClosureRecoveryOfLostInformation =
+  CFDChartCorrectionBoundary.closureModelCanRecoverDiscardedClaimInformationIsFalse
+    canonicalCFDChartCorrectionBoundary
+
+cfdAdvancedFrontierNotSelectedFrame :
+  CFDAdvancedNSFrontierBoundary.selectedDictionaryFrameBoundClosesCurrentNSFrontier
+    canonicalCFDAdvancedNSFrontierBoundary ≡ false
+cfdAdvancedFrontierNotSelectedFrame =
+  CFDAdvancedNSFrontierBoundary.selectedDictionaryFrameBoundClosesCurrentNSFrontierIsFalse
+    canonicalCFDAdvancedNSFrontierBoundary
+
+cfdAdvancedFrontierIntegratedCoherentBudget :
+  CFDAdvancedNSFrontierBoundary.currentNSFrontierIsCutoffUniformIntegratedCoherentBudget
+    canonicalCFDAdvancedNSFrontierBoundary ≡ true
+cfdAdvancedFrontierIntegratedCoherentBudget =
+  CFDAdvancedNSFrontierBoundary.currentNSFrontierIsCutoffUniformIntegratedCoherentBudgetIsTrue
+    canonicalCFDAdvancedNSFrontierBoundary
+
+cfdAdvancedFrontierDynamicCovarianceWall :
+  CFDAdvancedNSFrontierBoundary.dynamicCovarianceWallIsLiveAnalyticFrontier
+    canonicalCFDAdvancedNSFrontierBoundary ≡ true
+cfdAdvancedFrontierDynamicCovarianceWall =
+  CFDAdvancedNSFrontierBoundary.dynamicCovarianceWallIsLiveAnalyticFrontierIsTrue
+    canonicalCFDAdvancedNSFrontierBoundary
+
+dashifineNoUniversalPromotion :
+  DashifineBenchmarkCorrectionBoundary.oneTaskDominanceIsUniversalLearning
+    canonicalDashifineBenchmarkCorrectionBoundary ≡ false
+dashifineNoUniversalPromotion =
+  DashifineBenchmarkCorrectionBoundary.oneTaskDominanceIsUniversalLearningIsFalse
+    canonicalDashifineBenchmarkCorrectionBoundary
+
+dashifineOriginalWinDoesNotFillProjectionFamily :
+  DashifineWaveProjectionBoundary.originalWaveWinFillsProjectedTaskReceipts
+    canonicalDashifineWaveProjectionBoundary ≡ false
+dashifineOriginalWinDoesNotFillProjectionFamily =
+  DashifineWaveProjectionBoundary.originalWaveWinFillsProjectedTaskReceiptsIsFalse
+    canonicalDashifineWaveProjectionBoundary
+
+grokkingNoMSEPromotion :
+  GrokkingValidationCorrectionBoundary.lowMSEFitIsExactFamilyIdentity
+    canonicalGrokkingValidationCorrectionBoundary ≡ false
+grokkingNoMSEPromotion =
+  GrokkingValidationCorrectionBoundary.lowMSEFitIsExactFamilyIdentityIsFalse
+    canonicalGrokkingValidationCorrectionBoundary
+
+grokkingNumericalStudyNeedNotBeExactIdentity :
+  GrokkingHeldOutToleranceBoundary.finiteNumericalStudyRequiresDefinitionalCurveEquality
+    canonicalGrokkingHeldOutToleranceBoundary ≡ false
+grokkingNumericalStudyNeedNotBeExactIdentity =
+  GrokkingHeldOutToleranceBoundary.finiteNumericalStudyRequiresDefinitionalCurveEqualityIsFalse
+    canonicalGrokkingHeldOutToleranceBoundary
+
+grokkingPostHocToleranceNotIndependent :
+  GrokkingHeldOutToleranceBoundary.postHocToleranceIsIndependentValidation
+    canonicalGrokkingHeldOutToleranceBoundary ≡ false
+grokkingPostHocToleranceNotIndependent =
+  GrokkingHeldOutToleranceBoundary.postHocToleranceIsIndependentValidationIsFalse
+    canonicalGrokkingHeldOutToleranceBoundary
+
+coreFingerprintNotSemanticEquality :
+  CoreReferenceCorrectionBoundary.backendFingerprintEqualityIsStateEquality
+    canonicalCoreReferenceCorrectionBoundary ≡ false
+coreFingerprintNotSemanticEquality =
+  CoreReferenceCorrectionBoundary.backendFingerprintEqualityIsStateEqualityIsFalse
+    canonicalCoreReferenceCorrectionBoundary
+
+coreExecutableFingerprintStillNotSemanticEquality :
+  CoreExecutableParityBoundary.matchingFingerprintIsSemanticEquality
+    canonicalCoreExecutableParityBoundary ≡ false
+coreExecutableFingerprintStillNotSemanticEquality =
+  CoreExecutableParityBoundary.matchingFingerprintIsSemanticEqualityIsFalse
+    canonicalCoreExecutableParityBoundary
+
+coreReferenceCommutationCarriesClaims :
+  CoreExecutableParityBoundary.referenceCommutationCanCarryFormalClaims
+    canonicalCoreExecutableParityBoundary ≡ true
+coreReferenceCommutationCarriesClaims =
+  CoreExecutableParityBoundary.referenceCommutationCanCarryFormalClaimsIsTrue
+    canonicalCoreExecutableParityBoundary
+
+coreCarrierSquareIsLiteral :
+  CoreCarrierReferenceBoundary.supportSignCarrierHasLiteralFormalCorrespondence
+    canonicalCoreCarrierReferenceBoundary ≡ true
+coreCarrierSquareIsLiteral =
+  CoreCarrierReferenceBoundary.supportSignCarrierHasLiteralFormalCorrespondenceIsTrue
+    canonicalCoreCarrierReferenceBoundary
+
+fracdashOneStepLiftsToFiniteTrace :
+  FRACDASHCompilerCorrectionBoundary.oneStepCommutationYieldsFiniteTraceCommutation
+    canonicalFRACDASHCompilerCorrectionBoundary ≡ true
+fracdashOneStepLiftsToFiniteTrace =
+  FRACDASHCompilerCorrectionBoundary.oneStepCommutationYieldsFiniteTraceCommutationIsTrue
+    canonicalFRACDASHCompilerCorrectionBoundary
+
+fracdashFirstApplicablePolicyFormalised :
+  FRACDASHNumericInterpreterBoundary.firstApplicablePolicyFormalised
+    canonicalFRACDASHNumericInterpreterBoundary ≡ true
+fracdashFirstApplicablePolicyFormalised =
+  FRACDASHNumericInterpreterBoundary.firstApplicablePolicyFormalisedIsTrue
+    canonicalFRACDASHNumericInterpreterBoundary
+
+fracdashNumericGapNotFloatingPoint :
+  FRACDASHNumericInterpreterBoundary.remainingGapIsFloatingPointApproximation
+    canonicalFRACDASHNumericInterpreterBoundary ≡ false
+fracdashNumericGapNotFloatingPoint =
+  FRACDASHNumericInterpreterBoundary.remainingGapIsFloatingPointApproximationIsFalse
+    canonicalFRACDASHNumericInterpreterBoundary
+
+finiteExecutableObservationNotGlobalTheorem :
+  ExecutableReceiptBoundary.finiteRunObservationIsGlobalTheorem
+    canonicalExecutableReceiptBoundary ≡ false
+finiteExecutableObservationNotGlobalTheorem =
+  ExecutableReceiptBoundary.finiteRunObservationIsGlobalTheoremIsFalse
+    canonicalExecutableReceiptBoundary
+
+selectedCFDGramNotUniformFrame :
+  ExecutableReceiptBoundary.selectedGramIsUniformFrameTheorem
+    canonicalExecutableReceiptBoundary ≡ false
+selectedCFDGramNotUniformFrame =
+  ExecutableReceiptBoundary.selectedGramIsUniformFrameTheoremIsFalse
+    canonicalExecutableReceiptBoundary
+
+testHarnessArtifactNotProof :
+  TestHarnessEvidenceCorrectionBoundary.plotOrMetricIsProofByItself
+    canonicalTestHarnessEvidenceCorrectionBoundary ≡ false
+testHarnessArtifactNotProof =
+  TestHarnessEvidenceCorrectionBoundary.plotOrMetricIsProofByItselfIsFalse
+    canonicalTestHarnessEvidenceCorrectionBoundary
+
+testHarnessNeedsFamilyIndex :
+  TestHarnessFamilyBoundary.oneGlobalBenchmarkPassedBooleanIsSufficient
+    canonicalTestHarnessFamilyBoundary ≡ false
+testHarnessNeedsFamilyIndex =
+  TestHarnessFamilyBoundary.oneGlobalBenchmarkPassedBooleanIsSufficientIsFalse
+    canonicalTestHarnessFamilyBoundary
+
+testHarnessPhase3LogNotUniversalTheorem :
+  TestHarnessSelectedFamiliesBoundary.phase3CompleteLogIsUniversalLearningTheorem
+    canonicalTestHarnessSelectedFamiliesBoundary ≡ false
+testHarnessPhase3LogNotUniversalTheorem =
+  TestHarnessSelectedFamiliesBoundary.phase3CompleteLogIsUniversalLearningTheoremIsFalse
+    canonicalTestHarnessSelectedFamiliesBoundary
+
+bidiNamingCannotRepairLoss :
+  BidirectionalSatelliteCorrectionBoundary.correctedNamingAloneRepairsInformationLoss
+    canonicalBidirectionalSatelliteCorrectionBoundary ≡ false
+bidiNamingCannotRepairLoss =
+  BidirectionalSatelliteCorrectionBoundary.correctedNamingAloneRepairsInformationLossIsFalse
+    canonicalBidirectionalSatelliteCorrectionBoundary
+
+quantumDiscriminatorNotTheory :
+  QuantumTargetBoundary.discriminatorAloneIsQuantumGravityTheory
+    canonicalQuantumTargetBoundary ≡ false
+quantumDiscriminatorNotTheory =
+  QuantumTargetBoundary.discriminatorAloneIsQuantumGravityTheoryIsFalse
+    canonicalQuantumTargetBoundary
+
+quantumRuntimeAcceptanceNotTheory :
+  QuantumExecutablePromotionBoundary.runtimeAcceptedMeansEstablishedPhysicalTheory
+    canonicalQuantumExecutablePromotionBoundary ≡ false
+quantumRuntimeAcceptanceNotTheory =
+  QuantumExecutablePromotionBoundary.runtimeAcceptedMeansEstablishedPhysicalTheoryIsFalse
+    canonicalQuantumExecutablePromotionBoundary
+
+quantumExperimentStillNeedsPhysicalGate :
+  QuantumExecutablePromotionBoundary.experimentReceiptStillNeedsPhysicalPromotionGate
+    canonicalQuantumExecutablePromotionBoundary ≡ true
+quantumExperimentStillNeedsPhysicalGate =
+  QuantumExecutablePromotionBoundary.experimentReceiptStillNeedsPhysicalPromotionGateIsTrue
+    canonicalQuantumExecutablePromotionBoundary
+
+quantumCHSHViolationSplitsClasses :
+  QuantumCHSHBoundary.classifiedViolationSplitsCandidateClasses
+    canonicalQuantumCHSHBoundary ≡ true
+quantumCHSHViolationSplitsClasses =
+  QuantumCHSHBoundary.classifiedViolationSplitsCandidateClassesIsTrue
+    canonicalQuantumCHSHBoundary
+
+rtxMDLNotPhysicalTruth :
+  RTXRefinementBoundary.lowerMDLIsPhysicalTruth
+    canonicalRTXRefinementBoundary ≡ false
+rtxMDLNotPhysicalTruth =
+  RTXRefinementBoundary.lowerMDLIsPhysicalTruthIsFalse
+    canonicalRTXRefinementBoundary
+
+rtxMAENotPhysicalTruth :
+  RTXExecutableBoundary.lowerValidationMAEIsPhysicalTruth
+    canonicalRTXExecutableBoundary ≡ false
+rtxMAENotPhysicalTruth =
+  RTXExecutableBoundary.lowerValidationMAEIsPhysicalTruthIsFalse
+    canonicalRTXExecutableBoundary
+
+rtxHeldOutReceiptSupportsApproximation :
+  RTXExecutableBoundary.heldOutObservationReceiptCanSupportApproximationClaim
+    canonicalRTXExecutableBoundary ≡ true
+rtxHeldOutReceiptSupportsApproximation =
+  RTXExecutableBoundary.heldOutObservationReceiptCanSupportApproximationClaimIsTrue
+    canonicalRTXExecutableBoundary
+
+rtxQuantitativeBudgetComposes :
+  RTXQuantitativeRefinementBoundary.perStepApproximationBudgetComposes
+    canonicalRTXQuantitativeRefinementBoundary ≡ true
+rtxQuantitativeBudgetComposes =
+  RTXQuantitativeRefinementBoundary.perStepApproximationBudgetComposesIsTrue
+    canonicalRTXQuantitativeRefinementBoundary

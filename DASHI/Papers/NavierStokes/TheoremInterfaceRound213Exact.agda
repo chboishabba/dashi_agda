@@ -1,0 +1,42 @@
+module DASHI.Papers.NavierStokes.TheoremInterfaceRound213Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound213Exact as R213
+
+round213PaperResonantOutputShellTriangleClosed : Bool
+round213PaperResonantOutputShellTriangleClosed =
+  R213.round213ConcreteResonantOutputShellTriangleClosed
+
+round213PaperFixedOutputCCTwoSidedCollarClosed : Bool
+round213PaperFixedOutputCCTwoSidedCollarClosed =
+  R213.round213FixedOutputCCTwoSidedCollarClosed
+
+round213PaperConstantBandPaymentClosed : Bool
+round213PaperConstantBandPaymentClosed =
+  R213.round213ConstantBandSameOutputConvolutionPaymentClosed
+
+round213PaperPackageAClosed : Bool
+round213PaperPackageAClosed = R213.round213PackageAClosed
+
+round213PaperClayPromotion : Bool
+round213PaperClayPromotion = R213.round213ClayPromotion
+
+round213PaperResonantOutputShellTriangleClosedIsTrue :
+  round213PaperResonantOutputShellTriangleClosed ≡ true
+round213PaperResonantOutputShellTriangleClosedIsTrue = refl
+
+round213PaperFixedOutputCCTwoSidedCollarClosedIsTrue :
+  round213PaperFixedOutputCCTwoSidedCollarClosed ≡ true
+round213PaperFixedOutputCCTwoSidedCollarClosedIsTrue = refl
+
+round213PaperConstantBandPaymentClosedIsFalse :
+  round213PaperConstantBandPaymentClosed ≡ false
+round213PaperConstantBandPaymentClosedIsFalse = refl
+
+round213PaperPackageAClosedIsFalse : round213PaperPackageAClosed ≡ false
+round213PaperPackageAClosedIsFalse = refl
+
+round213PaperClayPromotionIsFalse : round213PaperClayPromotion ≡ false
+round213PaperClayPromotionIsFalse = refl

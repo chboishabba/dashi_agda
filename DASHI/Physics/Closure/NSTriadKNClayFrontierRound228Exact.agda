@@ -1,0 +1,108 @@
+module DASHI.Physics.Closure.NSTriadKNClayFrontierRound228Exact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityQuadraticKernelRound223Exact as R223
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact as R225
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityCompanionMassRound226Exact as R226
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityGlobalCompanionRound227Exact as R227
+import DASHI.Physics.Closure.NSTriadKNMixedHelicitySpacetimeFrontierRound228Exact as R228
+
+round228SameHelicityChannelsCancelPointwise : Bool
+round228SameHelicityChannelsCancelPointwise =
+  R223.round223SameHelicityChannelsCancelPointwise
+
+round228FixedOutputSwapReindexClosed : Bool
+round228FixedOutputSwapReindexClosed =
+  R224.round224MixedChannelsExactlyReindexed
+
+round228FixedOutputKernelMixedHelicityCollapseClosed : Bool
+round228FixedOutputKernelMixedHelicityCollapseClosed =
+  R225.round225CompleteFixedOutputKernelMixedHelicityCollapseClosed
+
+round228CompanionMassMixedHelicityIdentityClosed : Bool
+round228CompanionMassMixedHelicityIdentityClosed =
+  R226.round226CompanionMassExactlyMixedHelicityMass
+
+round228GlobalCompanionMixedHelicityIdentityClosed : Bool
+round228GlobalCompanionMixedHelicityIdentityClosed =
+  R227.round227GlobalCompanionIsMixedHelicityConvolutionMass
+
+round228UsesLiteralGalerkinModes : Bool
+round228UsesLiteralGalerkinModes = R228.round228UsesLiteralGalerkinOutputModes
+
+round228Round222IntegrationInterfaceAuthoritative : Bool
+round228Round222IntegrationInterfaceAuthoritative = false
+
+round228ConcreteTimeIntegralReceiptInstalled : Bool
+round228ConcreteTimeIntegralReceiptInstalled =
+  R228.round228ConcreteContinuousTimeIntegrationReceiptInstalled
+
+round228MixedHelicitySpacetimeBudgetClosed : Bool
+round228MixedHelicitySpacetimeBudgetClosed =
+  R228.round228MixedHelicitySpacetimeBudgetClosed
+
+round228ActiveRoutineCompletionSeamCount : Nat
+round228ActiveRoutineCompletionSeamCount = 0
+
+round228NovelMathematicalLeafCount : Nat
+round228NovelMathematicalLeafCount = R228.round228NovelMathematicalLeafCount
+
+round228PackageAClosed : Bool
+round228PackageAClosed = false
+
+round228ClayPromotion : Bool
+round228ClayPromotion = false
+
+round228SameHelicityChannelsCancelPointwiseIsTrue :
+  round228SameHelicityChannelsCancelPointwise ≡ true
+round228SameHelicityChannelsCancelPointwiseIsTrue = refl
+
+round228FixedOutputSwapReindexClosedIsTrue :
+  round228FixedOutputSwapReindexClosed ≡ true
+round228FixedOutputSwapReindexClosedIsTrue = refl
+
+round228FixedOutputKernelMixedHelicityCollapseClosedIsTrue :
+  round228FixedOutputKernelMixedHelicityCollapseClosed ≡ true
+round228FixedOutputKernelMixedHelicityCollapseClosedIsTrue = refl
+
+round228CompanionMassMixedHelicityIdentityClosedIsTrue :
+  round228CompanionMassMixedHelicityIdentityClosed ≡ true
+round228CompanionMassMixedHelicityIdentityClosedIsTrue = refl
+
+round228GlobalCompanionMixedHelicityIdentityClosedIsTrue :
+  round228GlobalCompanionMixedHelicityIdentityClosed ≡ true
+round228GlobalCompanionMixedHelicityIdentityClosedIsTrue = refl
+
+round228UsesLiteralGalerkinModesIsTrue :
+  round228UsesLiteralGalerkinModes ≡ true
+round228UsesLiteralGalerkinModesIsTrue = refl
+
+round228Round222IntegrationInterfaceAuthoritativeIsFalse :
+  round228Round222IntegrationInterfaceAuthoritative ≡ false
+round228Round222IntegrationInterfaceAuthoritativeIsFalse = refl
+
+round228ConcreteTimeIntegralReceiptInstalledIsFalse :
+  round228ConcreteTimeIntegralReceiptInstalled ≡ false
+round228ConcreteTimeIntegralReceiptInstalledIsFalse = refl
+
+round228MixedHelicitySpacetimeBudgetClosedIsFalse :
+  round228MixedHelicitySpacetimeBudgetClosed ≡ false
+round228MixedHelicitySpacetimeBudgetClosedIsFalse = refl
+
+round228ActiveRoutineCompletionSeamCountIsZero :
+  round228ActiveRoutineCompletionSeamCount ≡ 0
+round228ActiveRoutineCompletionSeamCountIsZero = refl
+
+round228NovelMathematicalLeafCountIsOne :
+  round228NovelMathematicalLeafCount ≡ 1
+round228NovelMathematicalLeafCountIsOne = refl
+
+round228PackageAClosedIsFalse : round228PackageAClosed ≡ false
+round228PackageAClosedIsFalse = refl
+
+round228ClayPromotionIsFalse : round228ClayPromotion ≡ false
+round228ClayPromotionIsFalse = refl

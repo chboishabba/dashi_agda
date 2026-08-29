@@ -24,6 +24,17 @@ import DASHI.Physics.Foundations.KernelQFTEmergenceObligations
 import DASHI.Physics.Foundations.KernelEmergenceHypothesesExact
 import DASHI.Physics.Foundations.PR399FoundationsCrossPollinationExact
 import DASHI.Physics.Foundations.UnifiedEffectiveActionBoundary
+import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact
+import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryValidation
+import DASHI.Physics.Foundations.SharedEffectiveSourceRecoveryExact
+import DASHI.Physics.Foundations.SharedEffectiveSourceRecoveryValidation
+import DASHI.Physics.Foundations.CommonEffectiveActionVariationExact
+import DASHI.Physics.Foundations.CommonEffectiveActionVariationValidation
+import DASHI.Physics.Foundations.BalabanCommonActionVariationFrontierExact
+import DASHI.Physics.Foundations.BalabanCommonActionVariationValidation
+import DASHI.Physics.Foundations.EinsteinCommonActionVariationFrontierExact
+import DASHI.Physics.Foundations.EinsteinCommonActionVariationValidation
+import DASHI.Physics.Foundations.CommonActionQFTGRVariationCompilerExact
 import DASHI.Physics.Foundations.FiniteHistoryOrientationExact
 import DASHI.Physics.Foundations.HistoryWeightFiltrationExact
 import DASHI.Physics.Foundations.FiniteHistoryFunctionalExact
@@ -39,6 +50,7 @@ import DASHI.Physics.Foundations.ContextConditionedTrajectoryWeightExact
 import DASHI.Physics.Foundations.WavelengthSourceScaleSelectionExact
 import DASHI.Physics.Foundations.PathIntegralExperimentalSourceRegistryExact
 import DASHI.Physics.Foundations.TSFVFeynmanDerivationObligationsExact
+import DASHI.Physics.Foundations.PhysicalTheoryExperimentDiscriminationExact
 
 -- Generic downstream consumers of history/projection information.  These live
 -- in Core because their non-descent laws are not physics-specific.
