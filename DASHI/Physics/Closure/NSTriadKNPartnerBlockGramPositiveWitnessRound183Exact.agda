@@ -11,7 +11,7 @@ module DASHI.Physics.Closure.NSTriadKNPartnerBlockGramPositiveWitnessRound183Exa
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
@@ -29,7 +29,7 @@ zeroCell = C3.complex3Zero F
 alignedBlock : R181.CellPair
 alignedBlock = R181.cell-pair R179.alignedCell zeroCell
 
-twoAlignedBlocks : Agda.Builtin.List.List R181.CellPair
+twoAlignedBlocks : List R181.CellPair
 twoAlignedBlocks = alignedBlock ∷ alignedBlock ∷ []
 
 alignedBlockCompressesToAlignedCell :
