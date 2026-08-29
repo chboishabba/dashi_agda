@@ -63,7 +63,10 @@ positiveFactorToKMajorCoordinate {n} {r} rBound pair
          (NatP.≤-trans (Factor.copiesBoundByProduct pair) rBound)
          (Factor.divisorPositive pair)
          (NatP.≤-trans (Factor.divisorBound pair) rBound)
-         productBound
+         (subst
+           (λ product → product ≤ n)
+           (Factor.productExact pair)
+           rBound)
 ... | coordinate , coordinateMember , copiesExact , divisorExact =
   coordinate ,
     (coordinateMember
@@ -76,14 +79,6 @@ positiveFactorToKMajorCoordinate {n} {r} rBound pair
     trans
       (cong₂ _*_ copiesExact divisorExact)
       (sym (Factor.productExact pair))
-  where
-  productBound :
-    suc (Factor.predecessor pair) * Factor.divisor pair ≤ n
-  productBound =
-    subst
-      (λ product → product ≤ n)
-      (Factor.productExact pair)
-      rBound
 
 ------------------------------------------------------------------------
 -- These two coordinate-completeness directions are the arithmetic content of
