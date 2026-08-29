@@ -3,6 +3,8 @@ name: relation-representation-realization
 on:
   pull_request:
     paths:
+      - 'DASHI/Core/ObligationReducingExtensionGuardExact.agda'
+      - 'DASHI/Core/Everything.agda'
       - 'DASHI/Reasoning/RelationRepresentationSourceRegistryExact.agda'
       - 'DASHI/Reasoning/RelationRepresentationStudyValidationObligationsExact.agda'
       - 'DASHI/Reasoning/RelationRepresentationTOEInferenceHandoffExact.agda'
@@ -15,6 +17,7 @@ on:
       - 'DASHI/Reasoning/BidirectionalRelationRepresentationBridgeExact.agda'
       - 'DASHI/Reasoning/RelationRepresentationExperimentProtocolExact.agda'
       - 'DASHI/Reasoning/RelationRepresentationCandidateDiscriminationExact.agda'
+      - 'DASHI/Reasoning/RelationRepresentationFrontierProgressGuardExact.agda'
       - 'DASHI/Reasoning/RelationRepresentationMechanismSocketExact.agda'
       - 'DASHI/Reasoning/FiniteRelationLinearAlgebraProducerExact.agda'
       - 'DASHI/Reasoning/FiniteRelationSVDJacobianProducerExact.agda'
