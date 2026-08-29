@@ -14,7 +14,7 @@ module DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _+ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -38,7 +38,6 @@ record FiniteLocalizedEffectiveAction : Set₁ where
     localActivity : Component → Configuration → ℝ
     cmp109EffectivePotential : Configuration → ℝ
 
-    -- Literal source equality on the SAME finite-cutoff configuration.
     cmp109PotentialIsLocalizedSum : ∀ configuration →
       cmp109EffectivePotential configuration
       ≡ sumFunctions (mapList localActivity components) configuration
@@ -57,7 +56,6 @@ record SecondVariationLinearity
     secondVariation :
       (Configuration → ℝ) → Configuration → Tangent → Tangent → ℝ
 
-    -- Standard extensionality of a derivative operator.
     secondVariationCong :
       ∀ f g → (∀ x → f x ≡ g x) → ∀ configuration u v →
       secondVariation f configuration u v
@@ -105,7 +103,7 @@ secondVariationFiniteSum calculus [] configuration u v =
 secondVariationFiniteSum calculus (f ∷ functions) configuration u v =
   trans
     (addSecondVariation calculus f (sumFunctions functions) configuration u v)
-    (Agda.Builtin.Equality.cong
+    (cong
       (λ tail → secondVariation calculus f configuration u v +ℝ tail)
       (secondVariationFiniteSum calculus functions configuration u v))
 
@@ -141,8 +139,6 @@ record CMP109E2FromSamePotential
       (Configuration dataSet) (Tangent dataSet)) : Set₁ where
   field
     cmp109E2 : Configuration dataSet → Tangent dataSet → Tangent dataSet → ℝ
-
-    -- CMP109 Eq.(5.1) / Sect.5 source-definition seam.
     cmp109E2IsSecondVariation : ∀ configuration u v →
       cmp109E2 configuration u v
       ≡ secondVariation calculus
@@ -171,9 +167,6 @@ finiteSecondVariationLinearityLevel = machineChecked
 finiteEffectiveActionHessianAssemblyLevel : ProofLevel
 finiteEffectiveActionHessianAssemblyLevel = machineChecked
 
--- The remaining source equalities are now irreducible and literal:
---   CMP109 E^(j) = the finite CMP116 localized activity sum,
---   CMP109 Pi/E^(2) = D² of that same E^(j), in the aligned coordinate.
 literalCMP109PotentialCMP116LocalizedSumLevel : ProofLevel
 literalCMP109PotentialCMP116LocalizedSumLevel = conditional
 
