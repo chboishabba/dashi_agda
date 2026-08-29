@@ -108,9 +108,6 @@ signedCrossEstimateOpen = refl
 conjugationCompressionNotClaimed : F.AristotleCurrentFrontier.conjugationOrbitCompressionOwned F.canonicalAristotleCurrentFrontier ≡ false
 conjugationCompressionNotClaimed = refl
 
--- Historical rational Round180 adapter remains a valid specialized compiler,
--- but direct identification of literal RH reals with its rational carrier is
--- deliberately false.
 round180GramLedgerReused : F.AristotleCurrentFrontier.round180ExactFiniteGramLedgerReusedForRH F.canonicalAristotleCurrentFrontier ≡ true
 round180GramLedgerReused = refl
 
@@ -120,13 +117,21 @@ rhRound180AdapterClosed = refl
 directRHRealToRound180RationalIdentificationRejected : F.AristotleCurrentFrontier.literalRHPostSchurCellsIdentifiedWithRound180Carrier F.canonicalAristotleCurrentFrontier ≡ false
 directRHRealToRound180RationalIdentificationRejected = refl
 
--- Correct G1 closure.
 genericFiniteGramTelescopeExtracted : F.AristotleCurrentFrontier.genericFiniteSignedGramTelescopeExtractedInAgda F.canonicalAristotleCurrentFrontier ≡ true
 genericFiniteGramTelescopeExtracted = refl
 
 literalRHGenericGramWeldClosed : F.AristotleCurrentFrontier.literalRHPostSchurGenericGramWeldClosedInAgda F.canonicalAristotleCurrentFrontier ≡ true
 literalRHGenericGramWeldClosed = refl
 
--- G2 remains the first signed analytic theorem.
+-- G2 bidi decomposition.
+orderedPairGramDebtExpansionClosed : F.AristotleCurrentFrontier.finiteGramDebtExpandedToOrderedPairCovarianceInAgda F.canonicalAristotleCurrentFrontier ≡ true
+orderedPairGramDebtExpansionClosed = refl
+
+threeTaperSchurKernelBilinearClosed : F.AristotleCurrentFrontier.threeTaperSchurKernelBilinearCompilerClosedInAgda F.canonicalAristotleCurrentFrontier ≡ true
+threeTaperSchurKernelBilinearClosed = refl
+
+literalLeanElim2MatrixWeldOpen : F.AristotleCurrentFrontier.literalLeanElim2MatrixIdentifiedInAgda F.canonicalAristotleCurrentFrontier ≡ false
+literalLeanElim2MatrixWeldOpen = refl
+
 signedRHGramDebtStillOpen : F.AristotleCurrentFrontier.signedRHGramDebtEstimateClosed F.canonicalAristotleCurrentFrontier ≡ false
 signedRHGramDebtStillOpen = refl
