@@ -167,6 +167,18 @@ Imported role: manifold-respecting steering can better follow natural behavior g
 
 Imported role: recos provides an ordinal-concordance alternative to cosine and reports improved STS correlation across eleven embedding models. Excluded promotion: metric benchmark success = semantic realization or consumer sufficiency.
 
+### V. S. Raghu Parupudi
+
+**Magnitude Matters: a Superior Class of Similarity Metrics for Holistic Semantic Understanding**. arXiv preprint (2025). DOI `10.48550/arXiv.2509.19323`.
+
+Imported role: OS/HTS retain magnitude together with alignment and provide a concrete magnitude-aware comparison family; reported gains are task-dependent. Excluded promotion: magnitude-aware benchmark gains = universal semantic metric or realization authority.
+
+### Nicolas Tacheny
+
+**Calibrated Similarity for Reliable Geometric Analysis of Embedding Spaces**. arXiv preprint (2026). DOI `10.48550/arXiv.2601.16907`.
+
+Imported role: monotone calibration separates absolute score interpretation from the underlying embedding/rank geometry. Excluded promotion: calibrated score = changed semantic ontology, causal explanation, or authority.
+
 ### Ravi Dhiman; Andrea Passarella; Mirco Tribastone; Lorenzo Valerio
 
 **Neural Network Compression by Approximate Differential Equivalence**. arXiv preprint (2026). DOI `10.48550/arXiv.2606.01402`.
