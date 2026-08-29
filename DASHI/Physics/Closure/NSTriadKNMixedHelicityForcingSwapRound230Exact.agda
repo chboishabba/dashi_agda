@@ -34,6 +34,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Algebra
+import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
 import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact as Cross
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNExternalWaleffeSelectedSwapAntisymmetryRound118Exact as R118
@@ -163,18 +164,40 @@ productRuleForcingCell S velocity forcing tau =
     (plusForceMinusVelocity S velocity forcing tau)
     (plusVelocityMinusForce S velocity forcing tau)
 
+complex3AddZeroLeft :
+  ∀ {r} {F : C3.RealField r} (v : C3.Complex3 F) →
+  C3.complex3Add (C3.complex3Zero F) v ≡ v
+complex3AddZeroLeft (C3.complex3 x y z) =
+  Algebra.complex3Ext
+    (Algebra.complexAddZeroLeft x)
+    (Algebra.complexAddZeroLeft y)
+    (Algebra.complexAddZeroLeft z)
+
+complex3Shuffle :
+  ∀ {r} {F : C3.RealField r}
+    (a b c d : C3.Complex3 F) →
+  C3.complex3Add (C3.complex3Add a b) (C3.complex3Add c d)
+  ≡ C3.complex3Add (C3.complex3Add a c) (C3.complex3Add b d)
+complex3Shuffle {F = F}
+    (C3.complex3 ax ay az) (C3.complex3 bx by bz)
+    (C3.complex3 cx cy cz) (C3.complex3 dx dy dz) =
+  Algebra.complex3Ext
+    (R.solve 4 (λ a b c d → ((a R.⊕ b) R.⊕ (c R.⊕ d)) R.⊜ ((a R.⊕ c) R.⊕ (b R.⊕ d))) refl ax bx cx dx)
+    (R.solve 4 (λ a b c d → ((a R.⊕ b) R.⊕ (c R.⊕ d)) R.⊜ ((a R.⊕ c) R.⊕ (b R.⊕ d))) refl ay by cy dy)
+    (R.solve 4 (λ a b c d → ((a R.⊕ b) R.⊕ (c R.⊕ d)) R.⊜ ((a R.⊕ c) R.⊕ (b R.⊕ d))) refl az bz cz dz)
+  where module R = Ring.Solver F
+
 foldAdd :
   ∀ {r} {F : C3.RealField r}
     (left right : Physical.PhysicalTriadIncidence → C3.Complex3 F)
     (items : List Physical.PhysicalTriadIncidence) →
   R224.foldVector (λ tau → C3.complex3Add (left tau) (right tau)) items
   ≡ C3.complex3Add (R224.foldVector left items) (R224.foldVector right items)
-foldAdd left right [] =
-  sym (Algebra.complex3AddZeroLeft (C3.complex3Zero _))
+foldAdd {F = F} left right [] = sym (complex3AddZeroLeft (C3.complex3Zero F))
 foldAdd left right (tau ∷ rest) =
   trans
     (cong₂ C3.complex3Add refl (foldAdd left right rest))
-    (Algebra.complex3AddShuffle
+    (complex3Shuffle
       (left tau) (right tau)
       (R224.foldVector left rest) (R224.foldVector right rest))
 
