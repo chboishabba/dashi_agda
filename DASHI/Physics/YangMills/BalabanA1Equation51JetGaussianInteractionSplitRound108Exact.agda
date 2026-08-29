@@ -4,23 +4,13 @@ module DASHI.Physics.YangMills.BalabanA1Equation51JetGaussianInteractionSplitRou
 ------------------------------------------------------------------------
 -- ROUND108 A1 BIDI WELD
 --
--- Backward from the literal CMP109 (5.42) consumer, the only coordinate used is
--- the NEGATIVE mixed coefficient of the off-diagonal two-jet.  Forward from the
--- finite Ward/five-channel calculation, the physical jet splits into Gaussian
--- and normalized-interaction pieces.  Therefore the source weld need not assert
--- one opaque equality
+-- The frozen CMP109 consumer only uses the negative MIXED coefficient of the
+-- off-diagonal two-jet.  Do not require equality of unused jet coordinates.
+-- It is enough to identify, on the same history/shell,
 --
---      jet beta = finite evaluator.
---
--- It is enough to prove, on the SAME history/shell,
---
---      fullJet = gaussianJet + interactionJet,
---      mixed gaussianJet    = - betaZ,
---      mixed interactionJet = - betaInt.
---
--- Additivity of the two-jet then gives beta = betaZ + betaInt exactly.  This is
--- the source-native decomposition needed by the existing Round103 Eq.(5.1)
--- carrier and Round102 history-uniform two-sided certificate.
+--   mixed(full physical jet) = mixed(gaussian jet) + mixed(interaction jet),
+--   mixed(gaussian jet)      = - betaZ,
+--   mixed(interaction jet)   = - betaInt.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -42,9 +32,10 @@ record Equation51GaussianInteractionJetSplit (History Cell : Set) : Set₁ where
 
     gaussianJet interactionJet : Jet.OffDiagonalTwoJet
 
-    fullJetSplits :
-      Jet.fullOffDiagonalTwoJet jetData
-      ≡ Jet.addTwoJet gaussianJet interactionJet
+    fullMixedSplits :
+      Jet.mixedDerivativeCoefficient (Jet.fullOffDiagonalTwoJet jetData)
+      ≡ Jet.mixedDerivativeCoefficient gaussianJet
+          + Jet.mixedDerivativeCoefficient interactionJet
 
     gaussianMixedIsNegativeBetaZ :
       Jet.mixedDerivativeCoefficient gaussianJet
@@ -66,18 +57,12 @@ negativeMixedCoefficientIsFiniteEvaluator dataSet =
   let
     cert = certificate dataSet
     h = history dataSet
-    g = gaussianJet dataSet
-    i = interactionJet dataSet
     betaI = Five.betaInt
       (AbsFive.lowerData (Cert.interaction cert h))
 
-    splitMixed :
-      Jet.mixedDerivativeCoefficient (Jet.fullOffDiagonalTwoJet (jetData dataSet))
-      ≡ Jet.mixedDerivativeCoefficient g + Jet.mixedDerivativeCoefficient i
-    splitMixed = cong Jet.mixedDerivativeCoefficient (fullJetSplits dataSet)
-
     identifyMixed :
-      Jet.mixedDerivativeCoefficient g + Jet.mixedDerivativeCoefficient i
+      Jet.mixedDerivativeCoefficient (gaussianJet dataSet)
+        + Jet.mixedDerivativeCoefficient (interactionJet dataSet)
       ≡ (- Cert.betaZ cert h) + (- betaI)
     identifyMixed = cong₂ _+_
       (gaussianMixedIsNegativeBetaZ dataSet)
@@ -89,7 +74,7 @@ negativeMixedCoefficientIsFiniteEvaluator dataSet =
     arithmetic = ℚRing.solve-∀ (Cert.betaZ cert h) betaI
   in
   trans
-    (cong -_ splitMixed)
+    (cong -_ (fullMixedSplits dataSet))
     (trans
       (cong -_ identifyMixed)
       (trans arithmetic (sym (Cert.betaExact cert h))))
@@ -106,6 +91,9 @@ jetBetaIsFiniteEvaluator dataSet =
 
 round108A1GaussianInteractionJetSplitLevel : ProofLevel
 round108A1GaussianInteractionJetSplitLevel = machineChecked
+
+literalCMP109MixedGaussianInteractionDecompositionRound108Level : ProofLevel
+literalCMP109MixedGaussianInteractionDecompositionRound108Level = conditional
 
 literalCMP109GaussianMixedJetIdentificationRound108Level : ProofLevel
 literalCMP109GaussianMixedJetIdentificationRound108Level = conditional
