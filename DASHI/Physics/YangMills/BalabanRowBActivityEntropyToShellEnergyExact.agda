@@ -9,46 +9,59 @@ module DASHI.Physics.YangMills.BalabanRowBActivityEntropyToShellEnergyExact wher
 -- Cluster Expansions", Communications in Mathematical Physics 116 (1988),
 -- 1--22. DOI: 10.1007/BF01239022.
 --
--- The existing marked-source shell-energy compiler starts after one has already
--- produced E_n <= E0 r^n.  This module moves that boundary one step upstream.
 -- If the differentiated activity in shell n is bounded by A a^n and the shell
--- multiplicity/entropy by B e^n, then the shell energy is bounded by
+-- multiplicity/entropy by B e^n, then
 --
 --             E_n <= (A B) (a e)^n.
 --
--- Therefore the physical CMP116 task is now source-native identification of the
--- differentiated marked activity and constants with a*e<1; the multiplication
--- and geometric-shell reduction are exact algebra.
+-- This module also constructs the exact `GeometricMarkedShellEnergy` consumed
+-- by the existing uniform summation compiler once the combined ratio has a
+-- positive geometric denominator.  Thus the source-facing Row-B task is only
+-- the literal CMP116 activity/entropy identification and the strict ratio gap.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; 1ℚ; _-_; _*_; _≤_; _<_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (_≡_; cong; subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geometric
+import DASHI.Physics.YangMills.BalabanMarkedSourceGeometricShellEnergyExact as Shell
 
-pow : ℚ → Nat → ℚ
-pow ratio zero = 1ℚ
-pow ratio (suc depth) = ratio * pow ratio depth
+mulNN : ∀ {left right} → 0ℚ ≤ left → 0ℚ ≤ right → 0ℚ ≤ left * right
+mulNN {left} {right} leftNN rightNN =
+  let
+    instance
+      leftNonnegative : NonNegative left
+      leftNonnegative = ℚ.nonNegative leftNN
+      rightNonnegative : NonNegative right
+      rightNonnegative = ℚ.nonNegative rightNN
+  in
+  ℚP.nonNegative⁻¹ (left * right)
 
 powProductExact : ∀ left right depth →
-  pow left depth * pow right depth ≡ pow (left * right) depth
+  Geometric.pow left depth * Geometric.pow right depth
+  ≡ Geometric.pow (left * right) depth
 powProductExact left right zero = ℚRing.solve-∀ left right
 powProductExact left right (suc depth) =
   let
     induction = powProductExact left right depth
 
     reassociate :
-      (left * pow left depth) * (right * pow right depth)
-      ≡ (left * right) * (pow left depth * pow right depth)
+      (left * Geometric.pow left depth)
+        * (right * Geometric.pow right depth)
+      ≡ (left * right)
+        * (Geometric.pow left depth * Geometric.pow right depth)
     reassociate = ℚRing.solve-∀
-      left right (pow left depth) (pow right depth)
+      left right (Geometric.pow left depth) (Geometric.pow right depth)
 
     replaceTail :
-      (left * right) * (pow left depth * pow right depth)
-      ≡ (left * right) * pow (left * right) depth
+      (left * right)
+        * (Geometric.pow left depth * Geometric.pow right depth)
+      ≡ (left * right) * Geometric.pow (left * right) depth
     replaceTail = cong (λ tail → (left * right) * tail) induction
   in
   trans reassociate replaceTail
@@ -60,14 +73,19 @@ record MarkedActivityEntropyShellData : Set₁ where
     activityScale entropyScale : ℚ
     activityRatio entropyRatio : ℚ
 
+    activityScaleNonnegative : 0ℚ ≤ activityScale
+    entropyScaleNonnegative : 0ℚ ≤ entropyScale
+    activityRatioNonnegative : 0ℚ ≤ activityRatio
+    entropyRatioNonnegative : 0ℚ ≤ entropyRatio
+
     activityNonnegative : ∀ depth → 0ℚ ≤ activity depth
     shellMultiplicityNonnegative : ∀ depth → 0ℚ ≤ shellMultiplicity depth
 
     activityMajorant : ∀ depth →
-      activity depth ≤ activityScale * pow activityRatio depth
+      activity depth ≤ activityScale * Geometric.pow activityRatio depth
 
     entropyMajorant : ∀ depth →
-      shellMultiplicity depth ≤ entropyScale * pow entropyRatio depth
+      shellMultiplicity depth ≤ entropyScale * Geometric.pow entropyRatio depth
 
     shellEnergyBelowMultiplicityTimesActivity : ∀ depth →
       shellEnergy depth ≤ shellMultiplicity depth * activity depth
@@ -80,10 +98,27 @@ combinedBaseEnergy dataSet = activityScale dataSet * entropyScale dataSet
 combinedShellRatio : MarkedActivityEntropyShellData → ℚ
 combinedShellRatio dataSet = activityRatio dataSet * entropyRatio dataSet
 
+combinedBaseEnergyNonnegative :
+  (dataSet : MarkedActivityEntropyShellData) →
+  0ℚ ≤ combinedBaseEnergy dataSet
+combinedBaseEnergyNonnegative dataSet =
+  mulNN
+    (activityScaleNonnegative dataSet)
+    (entropyScaleNonnegative dataSet)
+
+combinedShellRatioNonnegative :
+  (dataSet : MarkedActivityEntropyShellData) →
+  0ℚ ≤ combinedShellRatio dataSet
+combinedShellRatioNonnegative dataSet =
+  mulNN
+    (activityRatioNonnegative dataSet)
+    (entropyRatioNonnegative dataSet)
+
 activityEntropyGiveGeometricShellEnergy :
   (dataSet : MarkedActivityEntropyShellData) → ∀ depth →
   shellEnergy dataSet depth
-  ≤ combinedBaseEnergy dataSet * pow (combinedShellRatio dataSet) depth
+  ≤ combinedBaseEnergy dataSet
+      * Geometric.pow (combinedShellRatio dataSet) depth
 activityEntropyGiveGeometricShellEnergy dataSet depth =
   let
     count = shellMultiplicity dataSet depth
@@ -95,7 +130,7 @@ activityEntropyGiveGeometricShellEnergy dataSet depth =
 
     productBound :
       count * act
-      ≤ (B * pow e depth) * (A * pow a depth)
+      ≤ (B * Geometric.pow e depth) * (A * Geometric.pow a depth)
     productBound =
       ℚP.*-mono-≤
         (shellMultiplicityNonnegative dataSet depth)
@@ -105,20 +140,23 @@ activityEntropyGiveGeometricShellEnergy dataSet depth =
 
     shellToRawMajorant :
       shellEnergy dataSet depth
-      ≤ (B * pow e depth) * (A * pow a depth)
+      ≤ (B * Geometric.pow e depth) * (A * Geometric.pow a depth)
     shellToRawMajorant =
       ℚP.≤-trans
         (shellEnergyBelowMultiplicityTimesActivity dataSet depth)
         productBound
 
     reorder :
-      (B * pow e depth) * (A * pow a depth)
-      ≡ (A * B) * (pow a depth * pow e depth)
-    reorder = ℚRing.solve-∀ A B (pow a depth) (pow e depth)
+      (B * Geometric.pow e depth) * (A * Geometric.pow a depth)
+      ≡ (A * B)
+        * (Geometric.pow a depth * Geometric.pow e depth)
+    reorder = ℚRing.solve-∀
+      A B (Geometric.pow a depth) (Geometric.pow e depth)
 
     replacePower :
-      (A * B) * (pow a depth * pow e depth)
-      ≡ (A * B) * pow (a * e) depth
+      (A * B)
+        * (Geometric.pow a depth * Geometric.pow e depth)
+      ≡ (A * B) * Geometric.pow (a * e) depth
     replacePower =
       cong (λ tail → (A * B) * tail) (powProductExact a e depth)
   in
@@ -127,16 +165,56 @@ activityEntropyGiveGeometricShellEnergy dataSet depth =
     (trans reorder replacePower)
     shellToRawMajorant
 
+record SummableMarkedActivityEntropyShellData : Set₁ where
+  field
+    sourceData : MarkedActivityEntropyShellData
+    geometricBound : ℚ
+    oneMinusCombinedRatioPositive :
+      0ℚ < 1ℚ - combinedShellRatio sourceData
+    geometricBoundIdentity :
+      (1ℚ - combinedShellRatio sourceData) * geometricBound ≡ 1ℚ
+
+open SummableMarkedActivityEntropyShellData public
+
+asGeometricMarkedShellEnergy :
+  SummableMarkedActivityEntropyShellData → Shell.GeometricMarkedShellEnergy
+asGeometricMarkedShellEnergy dataSet = record
+  { Shell.GeometricMarkedShellEnergy.shellEnergy =
+      shellEnergy (sourceData dataSet)
+  ; Shell.GeometricMarkedShellEnergy.baseEnergy =
+      combinedBaseEnergy (sourceData dataSet)
+  ; Shell.GeometricMarkedShellEnergy.ratio =
+      combinedShellRatio (sourceData dataSet)
+  ; Shell.GeometricMarkedShellEnergy.geometricBound = geometricBound dataSet
+  ; Shell.GeometricMarkedShellEnergy.baseEnergyNonnegative =
+      combinedBaseEnergyNonnegative (sourceData dataSet)
+  ; Shell.GeometricMarkedShellEnergy.ratioNonnegative =
+      combinedShellRatioNonnegative (sourceData dataSet)
+  ; Shell.GeometricMarkedShellEnergy.oneMinusRatioPositive =
+      oneMinusCombinedRatioPositive dataSet
+  ; Shell.GeometricMarkedShellEnergy.geometricBoundIdentity =
+      geometricBoundIdentity dataSet
+  ; Shell.GeometricMarkedShellEnergy.shellEnergyBound =
+      activityEntropyGiveGeometricShellEnergy (sourceData dataSet)
+  }
+
+activityEntropyPrefixUniformBound :
+  (dataSet : SummableMarkedActivityEntropyShellData) → ∀ cutoff →
+  Shell.shellEnergyPrefix (asGeometricMarkedShellEnergy dataSet) cutoff
+  ≤ combinedBaseEnergy (sourceData dataSet) * geometricBound dataSet
+activityEntropyPrefixUniformBound dataSet =
+  Shell.markedSourceShellEnergyUniformBound
+    (asGeometricMarkedShellEnergy dataSet)
+
 rowBActivityEntropyProductAlgebraLevel : ProofLevel
 rowBActivityEntropyProductAlgebraLevel = machineChecked
 
 rowBActivityEntropyToGeometricShellLevel : ProofLevel
 rowBActivityEntropyToGeometricShellLevel = machineChecked
 
--- Physical CMP116 seam.  Identify the actual differentiated marked polymer
--- activity and shell multiplicity on one common source-native analytic domain,
--- prove the two pointwise majorants, and prove the combined ratio is strictly
--- below one.  No additional Yang--Mills summation theorem is needed after that.
+rowBActivityEntropyUniformSummationLevel : ProofLevel
+rowBActivityEntropyUniformSummationLevel = machineChecked
+
 literalCMP116DifferentiatedActivityMajorantLevel : ProofLevel
 literalCMP116DifferentiatedActivityMajorantLevel = conditional
 
