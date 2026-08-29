@@ -23,7 +23,8 @@ module DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticGeometricShellExact wh
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _*_; _≤_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -33,6 +34,17 @@ import DASHI.Physics.YangMills.BalabanClayP2LargeFieldStepVExact as StepV
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact as Shared
+
+mulNN : ∀ {left right} → 0ℚ ≤ left → 0ℚ ≤ right → 0ℚ ≤ left * right
+mulNN {left} {right} leftNN rightNN =
+  let
+    instance
+      leftNonnegative : NonNegative left
+      leftNonnegative = ℚ.nonNegative leftNN
+      rightNonnegative : NonNegative right
+      rightNonnegative = ℚ.nonNegative rightNN
+  in
+  ℚP.nonNegative⁻¹ (left * right)
 
 markedBaseEnergy :
   ∀ {Scale Volume Root} →
@@ -51,8 +63,7 @@ markedBaseEnergyNonnegative dataSet kind =
     quarterNN : 0ℚ ≤ StepV.quarter
     quarterNN = ℚP.nonNegative⁻¹ StepV.quarter
   in
-  StepV.productNonnegative StepV.quarter (Shared.markedConstant dataSet kind)
-    quarterNN (Shared.markedConstantNonnegative dataSet kind)
+  mulNN quarterNN (Shared.markedConstantNonnegative dataSet kind)
 
 markedAnalyticShellGeometricHalf :
   ∀ {Scale Volume Root}
