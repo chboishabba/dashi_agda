@@ -15,16 +15,27 @@ open import Agda.Builtin.String using (String)
 --   chboishabba/DASHIg
 --   commit 013962fb839e83ce8e4b35486fe1a79792c96db8
 --
--- Primary bounded source surfaces at that commit:
+-- Primary bounded empirical source surfaces at that commit:
 --   README.md
+--   .gitmodules
 --   leech_arch_ablation_prelim/mul_adamw_lambda_0/scan.csv
 --   plain_baseline_prelim/scan.csv
 --   derivative_comparison_prelim.csv
 --
--- The repository itself states that Phase 1 baseline ownership is dashifine,
--- Phase 2 comparison/validation ownership is DASHIg, and the broader formalism
--- is dashi_agda.  The representative-band results are explicitly preliminary
--- and directional rather than final large-seed evidence.
+-- ATTRIBUTION NOTE
+-- The pinned DASHIg .gitmodules names SPUTNIKAI/LeechTransformer as the
+-- upstream submodule URL.  A currently visible meta-introspector repository is
+-- a separate clone/mirror-like surface whose repository metadata points its
+-- homepage back to SPUTNIKAI/LeechTransformer.  Repository possession or clone
+-- status is not authorship.
+--
+-- The mirrored README contains a software citation claiming:
+--   A. Kornienko,
+--   "Leech-Lila: A Geometric Attention Transformer via the Leech Lattice",
+--   Zenodo DOI 10.5281/zenodo.18784424.
+-- The original SPUTNIKAI GitHub endpoint was not available during this audit,
+-- so that citation is retained as a secondary attribution claim, not promoted
+-- here into independently verified primary authorship.
 ------------------------------------------------------------------------
 
 record InternalEmpiricalSource : Set where
@@ -44,20 +55,64 @@ canonicalDASHIgPhase2Source =
     "github.com/chboishabba/DASHIg"
     "013962fb839e83ce8e4b35486fe1a79792c96db8"
     "Phase 2 comparison and validation harness for grokking dynamics; Phase 1 baseline belongs to dashifine and formal contracts belong to dashi_agda."
-    "Representative-band Leech/plain modular-multiplication runs and derivative-shape comparisons are preliminary empirical receipts for architecture/timing comparison."
-    "Does not establish Leech superiority, a universal grokking timing law, a universal mechanism, or large-seed robustness."
+    "Representative-band geometry-variant/plain modular-multiplication runs and derivative-shape comparisons are preliminary empirical receipts for architecture/timing comparison."
+    "Does not establish architecture superiority, a universal grokking timing law, a universal mechanism, large-seed robustness, or authorship of the upstream geometry-variant implementation."
 
 ------------------------------------------------------------------------
--- Literal preliminary rows from the pinned CSVs.
+-- Upstream implementation attribution is kept separate from experiment
+-- ownership.  The empirical rows below are owned as DASHIg experiment outputs;
+-- that does not transfer authorship of imported architecture code to DASHIg,
+-- chboishabba, or meta-introspector.
+------------------------------------------------------------------------
+
+data AttributionStatus : Set where
+  secondaryCitationClaim primaryAttributionVerified : AttributionStatus
+
+record UpstreamImplementationAttribution : Set where
+  constructor upstreamImplementationAttribution
+  field
+    localSubmoduleName : String
+    pinnedUpstreamURL : String
+    mirrorRepository : String
+    mirrorIsAuthorshipEvidence : Bool
+    mirrorIsAuthorshipEvidenceIsFalse : mirrorIsAuthorshipEvidence ≡ false
+    claimedAuthor : String
+    claimedTitle : String
+    claimedIdentifier : String
+    status : AttributionStatus
+    attributionReading : String
+
+open UpstreamImplementationAttribution public
+
+leechLilaAttribution : UpstreamImplementationAttribution
+leechLilaAttribution =
+  upstreamImplementationAttribution
+    "LeechTransformer"
+    "https://github.com/SPUTNIKAI/LeechTransformer.git"
+    "github.com/meta-introspector/LeechTransformer"
+    false refl
+    "A. Kornienko (claimed by mirrored README citation; not independently promoted here)"
+    "Leech-Lila: A Geometric Attention Transformer via the Leech Lattice"
+    "Zenodo DOI 10.5281/zenodo.18784424 (citation claim in mirrored README)"
+    secondaryCitationClaim
+    "DASHIg pins the SPUTNIKAI submodule URL. The visible meta-introspector copy is not treated as authorship evidence. Until a primary archival/source record is independently verified, A. Kornienko/Zenodo metadata remain an explicitly secondary citation claim."
+
+mirrorDoesNotConferAuthorship :
+  mirrorIsAuthorshipEvidence leechLilaAttribution ≡ false
+mirrorDoesNotConferAuthorship = refl
+
+------------------------------------------------------------------------
+-- Literal preliminary rows from the pinned DASHIg CSVs.
 ------------------------------------------------------------------------
 
 data Architecture : Set where
-  leechLambdaZero plainTransformer : Architecture
+  geometryVariantLambdaZero plainTransformer : Architecture
 
 record PrelimGrokRow : Set where
   constructor prelimGrokRow
   field
     architecture : Architecture
+    sourceModelLabel : String
     modulus : Nat
     weightDecayCode : Nat
     tFit : Nat
@@ -70,19 +125,25 @@ record PrelimGrokRow : Set where
 open PrelimGrokRow public
 
 -- weightDecayCode uses hundredths solely as a finite exact code: 22 -> 0.22,
--- 30 -> 0.30.  It is not a floating-point theorem.
+-- 30 -> 0.30. It is not a floating-point theorem.
+-- `sourceModelLabel` preserves the literal DASHIg CSV label without making an
+-- authorship claim from the word "leech".
 
 leechWd022 : PrelimGrokRow
-leechWd022 = prelimGrokRow leechLambdaZero 97 22 60 5060 5500 7260 true true
+leechWd022 =
+  prelimGrokRow geometryVariantLambdaZero "leech_modular_classifier" 97 22 60 5060 5500 7260 true true
 
 leechWd030 : PrelimGrokRow
-leechWd030 = prelimGrokRow leechLambdaZero 97 30 60 6220 12500 13200 true true
+leechWd030 =
+  prelimGrokRow geometryVariantLambdaZero "leech_modular_classifier" 97 30 60 6220 12500 13200 true true
 
 plainWd022 : PrelimGrokRow
-plainWd022 = prelimGrokRow plainTransformer 97 22 60 4520 6900 7360 true true
+plainWd022 =
+  prelimGrokRow plainTransformer "plain_modular_transformer" 97 22 60 4520 6900 7360 true true
 
 plainWd030 : PrelimGrokRow
-plainWd030 = prelimGrokRow plainTransformer 97 30 60 8320 9300 10840 true true
+plainWd030 =
+  prelimGrokRow plainTransformer "plain_modular_transformer" 97 30 60 8320 9300 10840 true true
 
 leech022T50Is5060 : t50 leechWd022 ≡ 5060
 leech022T50Is5060 = refl
@@ -111,7 +172,7 @@ allFourPrelimRunsReachPerfectFinalAccuracy =
 ------------------------------------------------------------------------
 -- Derivative-comparison provenance.
 --
--- The CSV has n_runs = 2 for each architecture.  Floating-point values remain
+-- The CSV has n_runs = 2 for each architecture. Floating-point values remain
 -- source data, represented as strings here rather than promoted into exact
 -- rational equalities.
 ------------------------------------------------------------------------
@@ -161,6 +222,18 @@ record DASHIgGrokkingEmpiricalBoundary : Set where
     dashigPrelimIsPrakashMartinReproductionIsFalse :
       dashigPrelimIsPrakashMartinReproduction ≡ false
 
+    dashigExperimentOwnershipImpliesUpstreamArchitectureAuthorship : Bool
+    dashigExperimentOwnershipImpliesUpstreamArchitectureAuthorshipIsFalse :
+      dashigExperimentOwnershipImpliesUpstreamArchitectureAuthorship ≡ false
+
+    metaIntrospectorCloneImpliesMetaIntrospectorAuthorship : Bool
+    metaIntrospectorCloneImpliesMetaIntrospectorAuthorshipIsFalse :
+      metaIntrospectorCloneImpliesMetaIntrospectorAuthorship ≡ false
+
+    secondaryReadmeCitationIsPrimaryAttributionReceipt : Bool
+    secondaryReadmeCitationIsPrimaryAttributionReceiptIsFalse :
+      secondaryReadmeCitationIsPrimaryAttributionReceipt ≡ false
+
     twoRunDerivativeTableEstablishesArchitectureSuperiority : Bool
     twoRunDerivativeTableEstablishesArchitectureSuperiorityIsFalse :
       twoRunDerivativeTableEstablishesArchitectureSuperiority ≡ false
@@ -180,6 +253,9 @@ record DASHIgGrokkingEmpiricalBoundary : Set where
 canonicalDASHIgGrokkingEmpiricalBoundary : DASHIgGrokkingEmpiricalBoundary
 canonicalDASHIgGrokkingEmpiricalBoundary =
   dashiGGrokkingEmpiricalBoundary
+    false refl
+    false refl
+    false refl
     false refl
     false refl
     false refl
