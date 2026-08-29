@@ -28,6 +28,8 @@ data SourceRole : Set where
   rotationalSemanticTransformation
   manifoldSteeringGeometry
   ordinalSimilarityMetric
+  magnitudeAwareSimilarityMetric
+  calibratedSimilarityMetric
   differentialEquivalenceCompression
   grokkingDynamicFailure
   eigenslurConceptualResidual
@@ -100,6 +102,32 @@ ai2026 =
     "Derives recos, a dot-product normalization based on sorted components, and reports improved semantic textual similarity correlation across eleven embedding models relative to cosine similarity."
     "Does not establish recos as a universal semantic metric and does not turn metric agreement into consumer sufficiency, causal use, realization, or authority."
 
+parupudi2025 : SourceReference
+parupudi2025 =
+  sourceReference
+    "V. S. Raghu Parupudi"
+    "Magnitude Matters: a Superior Class of Similarity Metrics for Holistic Semantic Understanding"
+    "arXiv preprint"
+    2025
+    "DOI 10.48550/arXiv.2509.19323"
+    arxivPreprint
+    magnitudeAwareSimilarityMetric
+    "Introduces Overlap Similarity (OS) and Hyperbolic Tangent Similarity (HTS), which retain magnitude as well as alignment, and reports gains on several holistic semantic tasks while the advantage is not uniform on fine compositional benchmarks."
+    "Does not establish magnitude-aware similarity as universally superior, and does not turn a benchmark improvement into semantic realization, causal use, or normative authority."
+
+tacheny2026 : SourceReference
+tacheny2026 =
+  sourceReference
+    "Nicolas Tacheny"
+    "Calibrated Similarity for Reliable Geometric Analysis of Embedding Spaces"
+    "arXiv preprint"
+    2026
+    "DOI 10.48550/arXiv.2601.16907"
+    arxivPreprint
+    calibratedSimilarityMetric
+    "Uses monotone isotonic calibration against human similarity judgments to improve absolute-score calibration while preserving rank-based structure, separating score interpretation from the underlying embedding geometry."
+    "Does not change the underlying semantic representation by itself and does not make a calibrated similarity value an ontology, causal explanation, or authority claim."
+
 dhimanEtAl2026 : SourceReference
 dhimanEtAl2026 =
   sourceReference
@@ -145,6 +173,8 @@ relationRepresentationSources =
   ∷ freenorAlvarez2025
   ∷ wurgaftEtAl2026
   ∷ ai2026
+  ∷ parupudi2025
+  ∷ tacheny2026
   ∷ dhimanEtAl2026
   ∷ prakashMartin2026
   ∷ eigenslurDefined2026
@@ -173,6 +203,14 @@ record RelationRepresentationAttributionBoundary : Set where
     similarityBenchmarkProvesConsumerSufficiencyIsFalse :
       similarityBenchmarkProvesConsumerSufficiency ≡ false
 
+    magnitudeAwareBenchmarkProvesUniversalMetric : Bool
+    magnitudeAwareBenchmarkProvesUniversalMetricIsFalse :
+      magnitudeAwareBenchmarkProvesUniversalMetric ≡ false
+
+    calibratedScoreChangesUnderlyingSemanticGeometry : Bool
+    calibratedScoreChangesUnderlyingSemanticGeometryIsFalse :
+      calibratedScoreChangesUnderlyingSemanticGeometry ≡ false
+
     grokkingCheckpointSuccessProvesFutureSafety : Bool
     grokkingCheckpointSuccessProvesFutureSafetyIsFalse :
       grokkingCheckpointSuccessProvesFutureSafety ≡ false
@@ -193,6 +231,8 @@ canonicalRelationRepresentationAttributionBoundary :
   RelationRepresentationAttributionBoundary
 canonicalRelationRepresentationAttributionBoundary =
   relationRepresentationAttributionBoundary
+    false refl
+    false refl
     false refl
     false refl
     false refl
