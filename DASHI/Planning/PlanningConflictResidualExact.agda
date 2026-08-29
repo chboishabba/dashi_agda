@@ -3,6 +3,7 @@ module DASHI.Planning.PlanningConflictResidualExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.SocialEcologicalAffordanceConeExact as Ecology
+import DASHI.Governance.InstitutionPreservingRechartAntiSublationExact as Rechart
 import DASHI.Governance.OppositionInterfaceAntiDomesticationExact as Opposition
 import DASHI.Governance.PeaceJusticeResidualNonFactorabilityExact as Justice
 
@@ -23,14 +24,13 @@ hostileBuiltFormCanContractRestAffordance =
   Ecology.hostileDesignContractsSleep
 
 quietOrderDoesNotEstablishJusticeClosure :
-  Justice.JusticeClosureCertificate
-    Justice.Rechart.suppressedQuietState → ⊥
+  Justice.JusticeClosureCertificate Rechart.suppressedQuietState → ⊥
 quietOrderDoesNotEstablishJusticeClosure =
   Justice.orderOnlyPeaceDoesNotEstablishJusticeClosure
 
 surfaceConflictSuppressionCanLeaveJusticeResidualOpen :
-  Justice.justiceResidual Justice.Rechart.visibleConflictState ≡
-  Justice.justiceResidual Justice.Rechart.suppressedQuietState
+  Justice.justiceResidual Rechart.visibleConflictState ≡
+  Justice.justiceResidual Rechart.suppressedQuietState
 surfaceConflictSuppressionCanLeaveJusticeResidualOpen =
   Justice.visibleToSuppressedSurfaceChangePreservesResidual
 
@@ -54,7 +54,7 @@ record PlanningSurfaceClosureIsInsufficient : Set where
         Ecology.hostileEcology
         Ecology.sleepAction ≡ false
     quietSurfaceCanRetainOpenJusticeResidual :
-      Justice.justiceResidual Justice.Rechart.suppressedQuietState ≡
+      Justice.justiceResidual Rechart.suppressedQuietState ≡
         Justice.residualOpen
     admittedOppositionCanLackMetaRulePower :
       Opposition.CanAlterAdmissionRule Opposition.recognisedOpposition → ⊥
