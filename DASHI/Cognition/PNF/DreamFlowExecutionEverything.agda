@@ -21,3 +21,11 @@ import DASHI.Cognition.PNF.WorkloadOptimizationAdmissionExact
 import DASHI.Cognition.PNF.PackedNormativeDeltaAuthorityBridgeExact
 import DASHI.Cognition.PNF.PackedNormativeSparseAdmissionExact
 import DASHI.Cognition.PNF.PackedOperatorFamilyAdmissionExact
+
+-- Big-picture execution constitution.  This assembles the existing formal
+-- owners into the one production destination: local packed execution, typed
+-- delta/residual transport, durable non-current staging, and atomic authority
+-- publication.  PostgreSQL is a durable/global/reference boundary rather than
+-- the mandatory internal execution bus.
+import DASHI.Cognition.PNF.DirectDeltaCompilerArchitectureExact
+import DASHI.Cognition.PNF.DirectDeltaCompilerArchitectureRegression
