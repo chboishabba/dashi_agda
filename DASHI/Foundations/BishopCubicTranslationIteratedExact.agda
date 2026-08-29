@@ -21,6 +21,8 @@ module DASHI.Foundations.BishopCubicTranslationIteratedExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Unnormalised using (0ℚᵘ; _/_)
 
 import Inverse as BishopInverse
 import Real as BishopReal
@@ -30,12 +32,78 @@ import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopExponentialCubicTranslationLowerExact as Cubic
 import DASHI.Foundations.BishopCubicTranslationGeometricRatioExact as Ratio
 import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact as Geometric
+import DASHI.Mathematics.NumberTheory.FiniteNatRationalEmbeddingExact as NatEmbed
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+------------------------------------------------------------------------
+-- Repeated addition and its canonical Nat-embedding normalization.
+
+natReal : Nat → BishopReal.ℝ
+natReal n = Exp.embed (NatEmbed.natAsRational n)
+
+natScale : Nat → BishopReal.ℝ → BishopReal.ℝ
+natScale zero x = BishopReal.0ℝ
+natScale (suc n) x = BishopReal._+_ (natScale n x) x
+
+natRealSuccessor : ∀ n →
+  BishopReal._≃_
+    (natReal (suc n))
+    (BishopReal._+_ (natReal n) BishopReal.1ℝ)
+natRealSuccessor n =
+  BishopP.≃-trans
+    (BishopP.⋆-cong (NatEmbed.natAsRationalSuccessor n))
+    (BishopP.≃-trans
+      (BishopP.⋆-distrib-+
+        (NatEmbed.natAsRational n)
+        (+ 1 / 1))
+      (BishopP.+-cong BishopP.≃-refl
+        (let open BishopP.ℝ-Solver
+         in solve 0
+           (Κ (+ 1 / 1) ⊜ Κ (+ 1 / 1))
+           BishopP.≃-refl)))
+
+natScaleAsEmbeddedNatMul : ∀ n x →
+  BishopReal._≃_
+    (natScale n x)
+    (BishopReal._*_ (natReal n) x)
+natScaleAsEmbeddedNatMul zero x =
+  let open BishopP.ℝ-Solver
+  in solve 1
+    (λ x′ → Κ 0ℚᵘ ⊜ Κ 0ℚᵘ ⊗ x′)
+    BishopP.≃-refl x
+natScaleAsEmbeddedNatMul (suc n) x =
+  BishopP.≃-trans
+    (BishopP.+-cong
+      (natScaleAsEmbeddedNatMul n x)
+      BishopP.≃-refl)
+    (BishopP.≃-trans
+      (let open BishopP.ℝ-Solver
+       in solve 2
+         (λ nr x′ →
+           (nr ⊗ x′) ⊕ x′
+           ⊜ (nr ⊕ Κ (+ 1 / 1)) ⊗ x′)
+         BishopP.≃-refl (natReal n) x)
+      (BishopP.*-congʳ
+        (BishopP.≃-symm (natRealSuccessor n))))
 
 shiftedBase : BishopReal.ℝ → BishopReal.ℝ → Nat → BishopReal.ℝ
 shiftedBase z x zero = z
 shiftedBase z x (suc n) =
   BishopReal._+_ (shiftedBase z x n) x
+
+shiftedBaseAsNatScale : ∀ z x n →
+  BishopReal._≃_
+    (shiftedBase z x n)
+    (BishopReal._+_ z (natScale n x))
+shiftedBaseAsNatScale z x zero =
+  BishopP.≃-symm (BishopP.+-identityʳ z)
+shiftedBaseAsNatScale z x (suc n) =
+  BishopP.≃-trans
+    (BishopP.+-cong
+      (shiftedBaseAsNatScale z x n)
+      BishopP.≃-refl)
+    (BishopP.≃-symm
+      (BishopP.+-assoc z (natScale n x) x))
 
 shiftedBaseNonnegative :
   ∀ {z x} → BishopReal.NonNegative z → BishopReal.NonNegative x →
