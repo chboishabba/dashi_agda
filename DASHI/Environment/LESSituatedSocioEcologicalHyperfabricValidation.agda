@@ -3,9 +3,11 @@ module DASHI.Environment.LESSituatedSocioEcologicalHyperfabricValidation where
 import DASHI.Core.ConsumerRelativeReductionKernelExact
 import DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact
 import DASHI.Core.ConsumerRelativeReductionSearchExact
+import DASHI.Core.ConsumerRelativeMinimalFidelityExact
 import DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact
 import DASHI.Core.ConsumerReductionDependencyReopeningExact
 import DASHI.Core.RobustInterventionAcrossHypothesesExact
+import DASHI.Core.AdaptiveConsumerModelLoopExact
 import DASHI.Biology.Physical.C3Cube27ConsumerReductionAdapterExact
 import DASHI.Physics.Units.SI
 import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact
@@ -20,6 +22,7 @@ import DASHI.Environment.LESDomainBasisBidiFrontierExact
 import DASHI.Environment.LESConsumerRelativeMechanismReductionExact
 import DASHI.Environment.LESApproximateFidelityReductionExact
 import DASHI.Environment.LESAdaptiveSPACModelSearchExact
+import DASHI.Environment.LESSPACFidelityCounterexampleFixturesExact
 import DASHI.Environment.LESModelFibreRobustInterventionExact
 import DASHI.Environment.LESFluidPhysicsCouplingExact
 import DASHI.Environment.LESBioelectricGaugeChemistryExact
