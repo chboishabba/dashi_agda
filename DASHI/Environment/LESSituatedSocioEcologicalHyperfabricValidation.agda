@@ -1,5 +1,7 @@
 module DASHI.Environment.LESSituatedSocioEcologicalHyperfabricValidation where
 
+import DASHI.Core.ConsumerRelativeReductionKernelExact
+import DASHI.Biology.Physical.C3Cube27ConsumerReductionAdapterExact
 import DASHI.Physics.Units.SI
 import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact
 import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact
@@ -10,6 +12,7 @@ import DASHI.Environment.LESSituatedSocioEcologicalHyperfabricExact
 import DASHI.Environment.LESSituatedObservationInteractionExact
 import DASHI.Environment.LESObserverContextDiscoveryConeExact
 import DASHI.Environment.LESDomainBasisBidiFrontierExact
+import DASHI.Environment.LESConsumerRelativeMechanismReductionExact
 import DASHI.Environment.LESFluidPhysicsCouplingExact
 import DASHI.Environment.LESBioelectricGaugeChemistryExact
 import DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact
@@ -17,4 +20,5 @@ import DASHI.Environment.SoilBiogeochemistryProcessNetworkExact
 import DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact
 import DASHI.Environment.SoilPlantAtmosphereContinuumExact
 import DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact
+import DASHI.Environment.FiniteSPACCalibrationExperimentExact
 import DASHI.Environment.LESPhysicsDomainCrossPollinationExact
