@@ -35,7 +35,7 @@ adequate adequateModel = true
 adequate inadequateModel = false
 
 sameFitDifferentAdequacy :
-  fit adequateModel ≡ fit inadequateModel ×
+  (fit adequateModel ≡ fit inadequateModel) ×
   ¬ (adequate adequateModel ≡ adequate inadequateModel)
 sameFitDifferentAdequacy = refl , λ ()
 
