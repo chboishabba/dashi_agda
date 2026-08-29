@@ -34,7 +34,9 @@ shiftedBaselPartials count index = baselPartials (index + count)
 
 shiftedBaselPartialsSubsequence :
   ∀ count →
-  shiftedBaselPartials count BishopSequence.SubsequenceOf baselPartials
+  BishopSequence._SubsequenceOf_
+    (shiftedBaselPartials count)
+    baselPartials
 shiftedBaselPartialsSubsequence count =
   BishopSequence.subseq*
     ((λ index → index + count)
@@ -43,7 +45,9 @@ shiftedBaselPartialsSubsequence count =
 
 shiftedBaselPartialsConverges :
   ∀ count →
-  shiftedBaselPartials count BishopSequence.ConvergesTo Basel.baselLimit
+  BishopSequence._ConvergesTo_
+    (shiftedBaselPartials count)
+    Basel.baselLimit
 shiftedBaselPartialsConverges count =
   BishopSequence.xₙ⊆yₙ∧yₙ→y⇒xₙ→y
     (shiftedBaselPartialsSubsequence count)
@@ -54,7 +58,7 @@ constantPrefix count index = baselPartials count
 
 constantPrefixConvergent :
   ∀ count →
-  (constantPrefix count) BishopSequence.isConvergent
+  BishopSequence._isConvergent (constantPrefix count)
 constantPrefixConvergent count =
   baselPartials count
   , BishopSequence.xₙ≃c⇒xₙ→c
@@ -62,7 +66,7 @@ constantPrefixConvergent count =
 
 shiftedPrefixConvergent :
   ∀ count →
-  (shiftedBaselPartials count) BishopSequence.isConvergent
+  BishopSequence._isConvergent (shiftedBaselPartials count)
 shiftedPrefixConvergent count =
   Basel.baselLimit , shiftedBaselPartialsConverges count
 
