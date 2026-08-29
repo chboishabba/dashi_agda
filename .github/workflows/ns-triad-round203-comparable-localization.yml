@@ -1,12 +1,20 @@
-name: NS Round203 comparable localization Agda
+name: NS comparable localization and raw-curl Agda
 
 on:
   pull_request:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKNComparableShellLocalizationRound203Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNComparableResidualProducerBoundaryRound204Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNComparableRawCurlPartnerMassRound205Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound203Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound203Validation.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound204Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound204Validation.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound205Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNClayFrontierRound205Validation.agda'
       - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound203Exact.agda'
+      - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound204Exact.agda'
+      - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound205Exact.agda'
       - 'scripts/check_ns_triad_clay_frontier.py'
       - 'scripts/run_agda29_parallel_check.sh'
       - 'flake.nix'
@@ -18,7 +26,7 @@ permissions:
   contents: read
 
 jobs:
-  round203-agda:
+  comparable-agda:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -39,14 +47,26 @@ jobs:
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNComparableShellLocalizationRound203Exact.agda
 
-      - name: Type-check Round203 frontier validation
+      - name: Type-check Round204 localized producer boundary
         run: >-
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNClayFrontierRound203Validation.agda
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound204Validation.agda
 
-      - name: Type-check Round203 paper interface
+      - name: Type-check Round205 localized raw-curl partner owner
         run: >-
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
-          DASHI/Papers/NavierStokes/TheoremInterfaceRound203Exact.agda
+          DASHI/Physics/Closure/NSTriadKNComparableRawCurlPartnerMassRound205Exact.agda
+
+      - name: Type-check Round205 frontier validation
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound205Validation.agda
+
+      - name: Type-check Round205 paper interface
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Papers/NavierStokes/TheoremInterfaceRound205Exact.agda
