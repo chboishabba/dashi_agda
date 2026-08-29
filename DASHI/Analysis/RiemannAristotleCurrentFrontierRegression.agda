@@ -123,7 +123,6 @@ genericFiniteGramTelescopeExtracted = refl
 literalRHGenericGramWeldClosed : F.AristotleCurrentFrontier.literalRHPostSchurGenericGramWeldClosedInAgda F.canonicalAristotleCurrentFrontier ≡ true
 literalRHGenericGramWeldClosed = refl
 
--- G2 bidi decomposition.
 orderedPairGramDebtExpansionClosed : F.AristotleCurrentFrontier.finiteGramDebtExpandedToOrderedPairCovarianceInAgda F.canonicalAristotleCurrentFrontier ≡ true
 orderedPairGramDebtExpansionClosed = refl
 
@@ -132,6 +131,12 @@ threeTaperSchurKernelBilinearClosed = refl
 
 literalLeanElim2MatrixWeldOpen : F.AristotleCurrentFrontier.literalLeanElim2MatrixIdentifiedInAgda F.canonicalAristotleCurrentFrontier ≡ false
 literalLeanElim2MatrixWeldOpen = refl
+
+determinantScalarizationCompilerClosed : F.AristotleCurrentFrontier.determinantScalarizationCompilerClosedInAgda F.canonicalAristotleCurrentFrontier ≡ true
+determinantScalarizationCompilerClosed = refl
+
+literalLeanBilinearDeterminantIdentityOpen : F.AristotleCurrentFrontier.literalLeanBilinearDeterminantIdentitySupplied F.canonicalAristotleCurrentFrontier ≡ false
+literalLeanBilinearDeterminantIdentityOpen = refl
 
 signedRHGramDebtStillOpen : F.AristotleCurrentFrontier.signedRHGramDebtEstimateClosed F.canonicalAristotleCurrentFrontier ≡ false
 signedRHGramDebtStillOpen = refl
