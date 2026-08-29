@@ -14,14 +14,17 @@ import DASHI.Physics.YangMills.Balaban1989Theorem1UVStabilityExact as Balaban
 -- BIDI frontier, corrected by live YM PR #635.
 --
 -- Bałaban's constructive flow is a pure-YM / compact-simple-group sector.
--- Therefore one beta-driven density must first identify ONE literal sector
--- stress tensor.  Only a family of such sector receipts plus an explicit
--- aggregation theorem may feed the total QFT stress consumed by the QFT/GR
--- weld.
+-- Therefore one beta-driven density first identifies ONE literal sector stress
+-- tensor.  Only a family of such receipts plus explicit aggregation may feed
+-- total QFT stress.
 --
--- Separately, CMP109 Round103 controls a gauge-background B-Hessian.  That is
--- not the spacetime metric variation defining stress-energy without an explicit
--- transport theorem.
+-- A second correction is variational: the first metric variation is naturally
+-- a functional of a metric perturbation h, while the stress tensor represents
+-- that functional through an application-owned pairing/normalisation:
+--
+--   delta_g rho[h] = <T , h>.
+--
+-- We do not silently identify the derivative functional with a tensor carrier.
 ------------------------------------------------------------------------
 
 record BalabanSectorFlow
@@ -46,22 +49,34 @@ record BalabanSectorMetricVariation
 
     scaleFor : Weld.Candidate U → Weld.Regime U → Nat
 
-    metricVariationOfDensity :
-      BetaDensity.Density (inputs sectorFlow) → Weld.SharedStressEnergy U
+    MetricPerturbation : Set
+    VariationScalar : Set
 
-    -- Literal pure-YM sector statement.  This is the physical theorem leaf:
-    -- metric variation of the SAME beta-driven density equals the literal
-    -- group-indexed stress tensor already carried by the QFT construction.
-    densityMetricVariationIsLiteralSectorStress :
-      ∀ candidate regime →
+    -- Literal first metric variation of the beta-driven sector density.
+    densityMetricFirstVariation :
+      BetaDensity.Density (inputs sectorFlow) →
+      MetricPerturbation → VariationScalar
+
+    -- Explicit convention pairing between the shared stress carrier and a
+    -- metric perturbation.  This is where factors such as 1/2, sqrt(|g|),
+    -- index placement, Euclidean/Lorentz continuation, etc. must be owned.
+    stressMetricPairing :
+      Weld.SharedStressEnergy U → MetricPerturbation → VariationScalar
+
+    -- Physical same-object leaf for one compact-simple sector.
+    densityFirstVariationRepresentedByLiteralSectorStress :
+      ∀ candidate regime perturbation →
       Weld.qftRegime U regime →
-      metricVariationOfDensity
+      densityMetricFirstVariation
         (Balaban.densityAt
           (BetaDensity.betaDrivenCompleteDensityFlow (inputs sectorFlow))
           (scaleFor candidate regime))
+        perturbation
       ≡
-      Weld.actualQFTSectorStressShared U
-        (Weld.coarseGrain U candidate regime) group
+      stressMetricPairing
+        (Weld.actualQFTSectorStressShared U
+          (Weld.coarseGrain U candidate regime) group)
+        perturbation
 
 open BalabanSectorMetricVariation public
 
@@ -73,13 +88,13 @@ record BalabanAllSectorVariationReceipt
       (group : QFT.CompactSimpleGroup (Weld.qftCarriers U)) →
       BalabanSectorMetricVariation variation group
 
-    -- Application-owned aggregation operation on the shared stress carrier.
     aggregateSectorStress :
       (QFT.CompactSimpleGroup (Weld.qftCarriers U) → Weld.SharedStressEnergy U) →
       Weld.SharedStressEnergy U
 
-    -- The common effective-source variation is the aggregate of the literal
-    -- sector stresses on the SAME coarse-grained candidate.
+    -- At the tensor level, the common effective source is the aggregate of the
+    -- literal sector stresses on the same coarse-grained candidate.  The
+    -- sector receipts above separately justify each T^(G) variationally.
     commonVariationIsAggregateLiteralSectorStress :
       ∀ candidate regime →
       Weld.qftRegime U regime →
@@ -90,8 +105,6 @@ record BalabanAllSectorVariationReceipt
         (Weld.actualQFTSectorStressShared U
           (Weld.coarseGrain U candidate regime))
 
-    -- That aggregate is exactly the total QFT stress already declared by the
-    -- unified candidate.  No one pure-YM sector is promoted to the total.
     aggregateLiteralSectorStressIsDeclaredTotal :
       ∀ candidate →
       aggregateSectorStress (Weld.actualQFTSectorStressShared U candidate)
@@ -105,29 +118,33 @@ record BalabanAllSectorVariationReceipt
 open BalabanAllSectorVariationReceipt public
 
 ------------------------------------------------------------------------
--- Sectorwise Bałaban provenance is exposed independently of total aggregation.
+-- Expose the literal variational identity sectorwise.
 ------------------------------------------------------------------------
 
-balabanSectorVariationIdentifiesLiteralStress :
+balabanSectorFirstVariationIsLiteralStressPairing :
   ∀ {U : Weld.UnifiedCandidate}
     (variation : Variation.CommonEffectiveActionVariation U)
     (receipt : BalabanAllSectorVariationReceipt variation)
     (group : QFT.CompactSimpleGroup (Weld.qftCarriers U))
-    candidate regime →
+    candidate regime perturbation →
   Weld.qftRegime U regime →
   let sector = sectorVariation receipt group
   in
-  metricVariationOfDensity sector
+  densityMetricFirstVariation sector
     (Balaban.densityAt
       (BetaDensity.betaDrivenCompleteDensityFlow
         (inputs (sectorFlow sector)))
       (scaleFor sector candidate regime))
+    perturbation
   ≡
-  Weld.actualQFTSectorStressShared U
-    (Weld.coarseGrain U candidate regime) group
-balabanSectorVariationIdentifiesLiteralStress variation receipt group candidate regime =
-  densityMetricVariationIsLiteralSectorStress
-    (sectorVariation receipt group) candidate regime
+  stressMetricPairing sector
+    (Weld.actualQFTSectorStressShared U
+      (Weld.coarseGrain U candidate regime) group)
+    perturbation
+balabanSectorFirstVariationIsLiteralStressPairing
+    variation receipt group candidate regime perturbation =
+  densityFirstVariationRepresentedByLiteralSectorStress
+    (sectorVariation receipt group) candidate regime perturbation
 
 ------------------------------------------------------------------------
 -- Compiler to the generic common-action QFT identification.
@@ -149,10 +166,6 @@ balabanSectorFamilyBuildsQFTVariationIdentification variation receipt = record
           (aggregateLiteralSectorStressIsDeclaredTotal
             receipt (Weld.coarseGrain U candidate regime))
   }
-
-------------------------------------------------------------------------
--- Existing source authority still supplies Section-2 form/bounds sectorwise.
-------------------------------------------------------------------------
 
 balabanSectorSection2FormAvailable :
   ∀ {U : Weld.UnifiedCandidate}
@@ -184,9 +197,9 @@ record BalabanCommonVariationBoundary : Set where
     cmp109BackgroundHessianIsMetricVariationIsFalse :
       cmp109BackgroundHessianIsMetricVariation ≡ false
 
-    backgroundHessianTransportMayDropSubstitutionCurvature : Bool
-    backgroundHessianTransportMayDropSubstitutionCurvatureIsFalse :
-      backgroundHessianTransportMayDropSubstitutionCurvature ≡ false
+    metricVariationFunctionalIsStressTensorWithoutPairing : Bool
+    metricVariationFunctionalIsStressTensorWithoutPairingIsFalse :
+      metricVariationFunctionalIsStressTensorWithoutPairing ≡ false
 
     oneBalabanPureGaugeDensityIsTotalQFTStress : Bool
     oneBalabanPureGaugeDensityIsTotalQFTStressIsFalse :
