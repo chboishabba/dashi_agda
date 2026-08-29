@@ -35,6 +35,16 @@ import DASHI.Physics.YangMills.BalabanIrrelevantRGMemoryContractionExact as Memo
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
+scaleRightNonnegative : ∀ {left right scale : ℚ} →
+  0ℚ ≤ scale → left ≤ right → left * scale ≤ right * scale
+scaleRightNonnegative {scale = scale} scaleNN leftBelowRight =
+  let
+    instance
+      scaleNonnegative : NonNegative scale
+      scaleNonnegative = ℚ.nonNegative scaleNN
+  in
+  ℚP.*-monoʳ-≤-nonNeg scale leftBelowRight
+
 sumBetaDifference : (Nat → ℚ) → Nat → ℚ
 sumBetaDifference beta zero = 0ℚ
 sumBetaDifference beta (suc n) = sumBetaDifference beta n + beta n
