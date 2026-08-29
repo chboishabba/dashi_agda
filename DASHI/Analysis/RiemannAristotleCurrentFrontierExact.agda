@@ -12,6 +12,43 @@ record AristotleCurrentFrontier : Set where
     twoRadiusOffLineDiscriminatorClosedInLeanIsTrue : twoRadiusOffLineDiscriminatorClosedInLean ≡ true
     highOrdinatePrimeProjectiveDebtZeroInLean : Bool
     highOrdinatePrimeProjectiveDebtZeroInLeanIsTrue : highOrdinatePrimeProjectiveDebtZeroInLean ≡ true
+    targetLeadingCoefficientAndRemainderClosedInLean : Bool
+    targetLeadingCoefficientAndRemainderClosedInLeanIsTrue : targetLeadingCoefficientAndRemainderClosedInLean ≡ true
+    reflectionPairKernelClosedInLean : Bool
+    reflectionPairKernelClosedInLeanIsTrue : reflectionPairKernelClosedInLean ≡ true
+    reflectionFarTailAbsoluteConvergenceClosedInLean : Bool
+    reflectionFarTailAbsoluteConvergenceClosedInLeanIsTrue : reflectionFarTailAbsoluteConvergenceClosedInLean ≡ true
+    uniformReflectionCarrierCurvatureClosedInLean : Bool
+    uniformReflectionCarrierCurvatureClosedInLeanIsTrue : uniformReflectionCarrierCurvatureClosedInLean ≡ true
+    latestLeanBridgeBuildKernelChecked : Bool
+    latestLeanBridgeBuildKernelCheckedIsTrue : latestLeanBridgeBuildKernelChecked ≡ true
+    wholePostSchurCarrierStrictBudgetIsContradictionTarget : Bool
+    wholePostSchurCarrierStrictBudgetIsContradictionTargetIsTrue : wholePostSchurCarrierStrictBudgetIsContradictionTarget ≡ true
+    eliminationAlgebraAloneClosesStrictBudget : Bool
+    eliminationAlgebraAloneClosesStrictBudgetIsFalse : eliminationAlgebraAloneClosesStrictBudget ≡ false
+    nearFarShellCompositionCompilerClosedInAgda : Bool
+    nearFarShellCompositionCompilerClosedInAgdaIsTrue : nearFarShellCompositionCompilerClosedInAgda ≡ true
+    nearFarAllowanceCompilerClosedInAgda : Bool
+    nearFarAllowanceCompilerClosedInAgdaIsTrue : nearFarAllowanceCompilerClosedInAgda ≡ true
+    jointCutoffCompilerClosedInAgda : Bool
+    jointCutoffCompilerClosedInAgdaIsTrue : jointCutoffCompilerClosedInAgda ≡ true
+    quantitativeFarShellEnvelopeClosed : Bool
+    quantitativeFarShellEnvelopeClosedIsFalse : quantitativeFarShellEnvelopeClosed ≡ false
+    explicitFarTailModulusTransportedToAgda : Bool
+    explicitFarTailModulusTransportedToAgdaIsFalse : explicitFarTailModulusTransportedToAgda ≡ false
+    finiteSignedNearShellCoreClosed : Bool
+    finiteSignedNearShellCoreClosedIsFalse : finiteSignedNearShellCoreClosed ≡ false
+    jointNearFarCutoffFound : Bool
+    jointNearFarCutoffFoundIsFalse : jointNearFarCutoffFound ≡ false
+    deterministicNuisanceThreeTaperConstructionClosed : Bool
+    deterministicNuisanceThreeTaperConstructionClosedIsFalse : deterministicNuisanceThreeTaperConstructionClosed ≡ false
+    lowOrdinateComplementCertified : Bool
+    lowOrdinateComplementCertifiedIsFalse : lowOrdinateComplementCertified ≡ false
+    finalRHImplicationClosed : Bool
+    finalRHImplicationClosedIsFalse : finalRHImplicationClosed ≡ false
+
+    -- New 2026-08-30 explicit-cutoff tranche.  These are additive compatibility
+    -- fields; the older public projections above are intentionally retained.
     deterministicProjectiveSchurKernelCheckedInLean : Bool
     deterministicProjectiveSchurKernelCheckedInLeanIsTrue : deterministicProjectiveSchurKernelCheckedInLean ≡ true
     explicitFarShellCutoffBoundClosedInLean : Bool
@@ -22,12 +59,6 @@ record AristotleCurrentFrontier : Set where
     finiteSignedNearCarrierClosedInLeanIsTrue : finiteSignedNearCarrierClosedInLean ≡ true
     literalDoffCutoffCarrierClosedInLean : Bool
     literalDoffCutoffCarrierClosedInLeanIsTrue : literalDoffCutoffCarrierClosedInLean ≡ true
-    latestLeanBridgeBuildKernelChecked : Bool
-    latestLeanBridgeBuildKernelCheckedIsTrue : latestLeanBridgeBuildKernelChecked ≡ true
-    nearFarShellCompositionCompilerClosedInAgda : Bool
-    nearFarShellCompositionCompilerClosedInAgdaIsTrue : nearFarShellCompositionCompilerClosedInAgda ≡ true
-    nearFarAllowanceCompilerClosedInAgda : Bool
-    nearFarAllowanceCompilerClosedInAgdaIsTrue : nearFarAllowanceCompilerClosedInAgda ≡ true
     finiteNearCoreSchurPerturbationCompilerClosedInAgda : Bool
     finiteNearCoreSchurPerturbationCompilerClosedInAgdaIsTrue : finiteNearCoreSchurPerturbationCompilerClosedInAgda ≡ true
     explicitLeanTailFormulaTransportedAsAgdaProof : Bool
@@ -36,12 +67,7 @@ record AristotleCurrentFrontier : Set where
     finiteSignedNearSchurCancellationClosedIsFalse : finiteSignedNearSchurCancellationClosed ≡ false
     jointFiniteNearFarMarginClosed : Bool
     jointFiniteNearFarMarginClosedIsFalse : jointFiniteNearFarMarginClosed ≡ false
-    deterministicNuisanceThreeTaperConstructionClosed : Bool
-    deterministicNuisanceThreeTaperConstructionClosedIsFalse : deterministicNuisanceThreeTaperConstructionClosed ≡ false
-    lowOrdinateComplementCertified : Bool
-    lowOrdinateComplementCertifiedIsFalse : lowOrdinateComplementCertified ≡ false
-    finalRHImplicationClosed : Bool
-    finalRHImplicationClosedIsFalse : finalRHImplicationClosed ≡ false
+
     boundedReading : String
 
 open AristotleCurrentFrontier public
@@ -49,22 +75,8 @@ open AristotleCurrentFrontier public
 canonicalAristotleCurrentFrontier : AristotleCurrentFrontier
 canonicalAristotleCurrentFrontier =
   aristotle-current-frontier
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    "The newest kernel-checked Lean tranche closes the explicit far-shell modulus, arbitrary-accuracy cutoff selection, the finite signed near carrier, and the literal D_off finite-near/far decomposition. The deterministic projective Schur compiler is also now inside the reported aggregate build. Agda therefore moves the first unproved S2 theorem to the finite post-Schur near-core energy: bound ||E D_near(J)||^2 strongly enough that its weighted sum with the explicit far-error energy lies below the surviving S1 cluster margin. The infinite zero tail is no longer the research bottleneck. S1 and low-ordinate certification remain open; RH is not derived."
+    true refl true refl true refl true refl true refl true refl true refl true refl
+    true refl false refl true refl true refl true refl
+    false refl false refl false refl false refl false refl false refl false refl
+    true refl true refl true refl true refl true refl true refl false refl false refl false refl
+    "The newest kernel-checked Lean tranche closes an explicit every-cutoff far-shell modulus, its decay to zero, a genuinely finite signed near carrier, and transport of that decomposition onto literal D_off. The deterministic projective Schur compiler is also now covered by the reported 8883-job aggregate build. Agda preserves the previous near/far compiler API and adds a finite post-Schur perturbation consumer. The first unproved S2 theorem is now a signed bound on ||E D_near(J)||^2 strong enough that, together with the explicit far-error energy, it lies below the surviving S1 cluster margin. The infinite zero tail is no longer the research bottleneck; S1, the finite signed near-Schur estimate, the joint margin, and low-ordinate certification remain open. RH is not derived."
