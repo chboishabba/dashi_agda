@@ -32,13 +32,22 @@ grep -q 'qftStressAggregation' DASHI/Physics/Foundations/SameCandidateQFTGRRecov
 grep -q 'qftTotalStressShared' DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
 grep -q '^sharedSourceImpliesSameStressEnergy :' DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryExact.agda
 grep -q '^commonVariationImpliesStressWeld :' DASHI/Physics/Foundations/CommonEffectiveActionVariationExact.agda
-grep -q '^balabanReceiptBuildsQFTVariationIdentification :' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
-grep -q '^balabanSection2FormAvailable :' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
-grep -q 'section2BoundsAloneDefineMetricVariationIsFalse' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
+
+grep -q '^record BalabanSectorFlow' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
+grep -q '^record BalabanSectorMetricVariation' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
+grep -q '^record BalabanAllSectorVariationReceipt' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
+grep -q '^balabanSectorFamilyBuildsQFTVariationIdentification :' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
+grep -q 'cmp109BackgroundHessianIsMetricVariationIsFalse' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
+grep -q 'backgroundHessianTransportMayDropSubstitutionCurvatureIsFalse' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
+grep -q 'oneBalabanPureGaugeDensityIsTotalQFTStressIsFalse' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
+grep -q 'oneGaugeSectorStressIsTotalQFTStressIsFalse' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
+grep -q '^balabanSectorFamilyProducesQFTIdentification :' DASHI/Physics/Foundations/BalabanCommonActionVariationValidation.agda
+
 grep -q '^einsteinTensorVariationBuildsGRIdentification :' DASHI/Physics/Foundations/EinsteinCommonActionVariationFrontierExact.agda
 grep -q '^actualGRFieldEquation :' DASHI/Physics/Foundations/EinsteinCommonActionVariationFrontierExact.agda
 grep -q 'fieldEquationAloneDerivesCommonActionIsFalse' DASHI/Physics/Foundations/EinsteinCommonActionVariationFrontierExact.agda
 grep -q '^commonEinsteinAndBalabanVariationImpliesStressWeld :' DASHI/Physics/Foundations/CommonActionQFTGRVariationCompilerExact.agda
+grep -q 'onePureYangMillsSectorCanStandForTotalQFTStressIsFalse' DASHI/Physics/Foundations/CommonActionQFTGRVariationCompilerExact.agda
 grep -q 'separateExtraStressWeldTheoremStillNeededAfterBothReceiptsIsFalse' DASHI/Physics/Foundations/CommonActionQFTGRVariationCompilerExact.agda
 
 if ! command -v agda >/dev/null 2>&1; then
@@ -52,4 +61,4 @@ agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/BalabanCommonActio
 agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/EinsteinCommonActionVariationValidation.agda
 agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/Everything.agda
 
-echo "Shared-source, Balaban-QFT, Einstein-GR, and common-action QFT/GR BIDI checks passed."
+echo "Shared-source, sectorwise Balaban-QFT, Einstein-GR, and common-action QFT/GR BIDI checks passed."
