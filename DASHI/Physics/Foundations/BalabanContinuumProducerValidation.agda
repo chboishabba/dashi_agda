@@ -3,10 +3,15 @@ module DASHI.Physics.Foundations.BalabanContinuumProducerValidation where
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.Foundations.BalabanAllSectorContinuumProducerExact as Producer
+import DASHI.Physics.Foundations.BalabanNativeSectorRecoveryTransportExact as Transport
 import DASHI.Physics.Foundations.CommonActionQFTGRContinuumProducerCompilerExact as Compiler
 
 balabanContinuumProducerCompiler : ProofLevel
 balabanContinuumProducerCompiler = Producer.balabanContinuumProducerCompilerLevel
+
+nativeSectorRecoveryTransportCompiler : ProofLevel
+nativeSectorRecoveryTransportCompiler =
+  Transport.nativeBalabanSectorRecoveryTransportCompilerLevel
 
 commonMetricContinuumProducerCompiler : ProofLevel
 commonMetricContinuumProducerCompiler =
