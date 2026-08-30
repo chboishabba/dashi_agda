@@ -1,17 +1,17 @@
 module DASHI.Physics.Closure.NSTriadKNCoherentDebtRelativeAbsorptionRound283Exact where
 
 ------------------------------------------------------------------------
--- ROUND283 / WEAKER BIDI CONSUMER: RELATIVE COHERENT-DEBT ABSORPTION
+-- ROUND283 / ALTERNATIVE BIDI CONSUMER: RELATIVE COHERENT-DEBT ABSORPTION
 --
 -- Round220 gives
 --
 --   Q <= 36 E D + D_Gram,
 --
 -- where Q is the complete quadratic companion mass and D_Gram is the signed
--- coherent Gram debt.  Round222 asked for an independently time-integrable
--- upper majorant of D_Gram.  That is sufficient but stronger than necessary.
+-- coherent Gram debt.  Round222 asks for an independently time-integrable
+-- upper majorant of D_Gram.
 --
--- A weaker pointwise theorem is enough:
+-- An ALTERNATIVE sufficient theorem is a strict pointwise relative estimate:
 --
 --   D_Gram <= theta * Q + C * E D,       0 <= theta < 1.
 --
@@ -19,19 +19,21 @@ module DASHI.Physics.Closure.NSTriadKNCoherentDebtRelativeAbsorptionRound283Exac
 --
 --   Q <= (36 + C) E D + theta Q,
 --
--- and strict relative absorption yields a pure E*D companion bound.  This is
--- a better backward target for the parabolic critical cone because coherent
--- same-output covariance may remain comparable to Q; it only has to consume
--- strictly less than the whole output mass after the ED-paid part is removed.
+-- and ordered-field absorption yields a pure E*D companion bound.
 --
--- The finite rational algebra below avoids pretending that the physical
--- theta/C estimate is already known.  A producer supplies the relative debt
--- inequality and an explicit absorption multiplier K satisfying
+-- IMPORTANT BIDI CORRECTION:
+-- this target is not globally weaker or stronger than Round222.  Temporal /
+-- signed cancellation may close the integrated-majorant route even when no
+-- pointwise theta<1 exists.  Conversely a strict relative estimate closes the
+-- companion without separately integrating D_Gram.  Both consumers remain
+-- live until the physical critical-cone structure chooses between them.
+--
+-- A producer supplies an explicit absorption multiplier K satisfying
 --
 --   1 + theta*K <= K.
 --
--- This division-free certificate is equivalent to K >= 1/(1-theta) when
--- theta<1, but requires no inverse/positivity machinery here.
+-- This division-free certificate corresponds to K >= 1/(1-theta) when
+-- theta<1, but no inverse machinery is required in the record itself.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -63,7 +65,6 @@ record RelativeCoherentDebtPayment : Set where
     relativeDebtBound :
       coherentDebt ≤ theta * companionMass + extraED * energyDissipation
 
-    -- Division-free strict absorption certificate.
     absorptionCertificate :
       1ℚ + theta * absorptionMultiplier ≤ absorptionMultiplier
 
@@ -104,9 +105,9 @@ relativeDebtGivesSelfReferentialBound P =
         thirtySix * energyDissipation P + coherentDebt P ≤ upper)
       rearrange step)
 
--- The final absorption step is exposed as the weakest ordered-field receipt.
--- It is standard scalar algebra once `absorptionCertificate` is available;
--- keeping it explicit avoids overclaiming an untested stdlib cancellation path.
+-- Ordered-field absorption remains an algebraic compiler task; it is not a
+-- physical/PDE hypothesis.  This record prevents source code from pretending
+-- that compiler has already been checked under an unverified stdlib lemma name.
 record RelativeAbsorptionClosure (P : RelativeCoherentDebtPayment) : Set where
   field
     absorbedBound :
@@ -121,8 +122,11 @@ relativeAbsorptionClosesCompanion :
   companionMass P ≤ absorbedCoefficient P * energyDissipation P
 relativeAbsorptionClosesCompanion P A = absorbedBound A
 
-round283RelativeDebtTargetWeakerThanIndependentIntegratedMajorant : Bool
-round283RelativeDebtTargetWeakerThanIndependentIntegratedMajorant = true
+round283RelativeAndIntegratedConsumersComparableByStrength : Bool
+round283RelativeAndIntegratedConsumersComparableByStrength = false
+
+round283RelativeAbsorptionIsAlternativeConsumer : Bool
+round283RelativeAbsorptionIsAlternativeConsumer = true
 
 round283AllowsCriticalCoreCovarianceProportionalToCompanion : Bool
 round283AllowsCriticalCoreCovarianceProportionalToCompanion = true
@@ -141,6 +145,10 @@ round283PackageAClosed = false
 
 round283ClayPromotion : Bool
 round283ClayPromotion = false
+
+round283RelativeAndIntegratedConsumersComparableByStrengthIsFalse :
+  round283RelativeAndIntegratedConsumersComparableByStrength ≡ false
+round283RelativeAndIntegratedConsumersComparableByStrengthIsFalse = refl
 
 round283PhysicalRelativeCoherentDebtEstimateClosedIsFalse :
   round283PhysicalRelativeCoherentDebtEstimateClosed ≡ false
