@@ -7,6 +7,7 @@ import DASHI.Biology.ACPUEAEROClaimAuditCalibrationExact
 import DASHI.Biology.ACPUEAEROTransportUniversalAuditExact
 import DASHI.Biology.AEROLaterMethodDisclosureProvenanceExact
 import DASHI.Biology.EducationAuditDecisionNoncollapseExact
+import DASHI.Biology.AliceBrownEducationAuditAdmissibilityCrossPollinationExact
 import DASHI.Biology.AliceBrownCorpusLoom
 import DASHI.Biology.EducationCorpusSourceRegistry
 import DASHI.Biology.HumourOnlineEngagementFramework
