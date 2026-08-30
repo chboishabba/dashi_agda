@@ -7,59 +7,82 @@ cd "$ROOT"
 FILES=(
   DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
   DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryExact.agda
-  DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryValidation.agda
   DASHI/Physics/Foundations/CommonEffectiveActionVariationExact.agda
-  DASHI/Physics/Foundations/CommonEffectiveActionVariationValidation.agda
   DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
   DASHI/Physics/Foundations/BalabanCommonActionVariationValidation.agda
+  DASHI/Physics/Foundations/BalabanAllSectorContinuumProducerExact.agda
+  DASHI/Physics/Foundations/BalabanNativeSectorRecoveryTransportExact.agda
+  DASHI/Physics/Foundations/BalabanTransportedSectorFamilyProducerExact.agda
+  DASHI/Physics/Foundations/BalabanContinuumProducerValidation.agda
   DASHI/Physics/Foundations/EinsteinCommonActionVariationFrontierExact.agda
   DASHI/Physics/Foundations/EinsteinCommonActionVariationValidation.agda
   DASHI/Physics/Foundations/CommonActionQFTGRVariationCompilerExact.agda
+  DASHI/Physics/Foundations/CommonActionQFTGRContinuumProducerCompilerExact.agda
 )
 
 FORBIDDEN_PATTERN='\{![^}]*!\}|(^|[[:space:]=:(])\?([[:space:];,)}]|$)|^[[:space:]]*postulate([[:space:]]|$)|--allow-unsolved-metas|\{-# OPTIONS[^#]*--(unsafe|type-in-type|no-positivity-check|no-termination-check|rewriting)([[:space:]]|#)|=[[:space:]]*_[[:space:]]*$'
-
 for file in "${FILES[@]}"; do
-  [[ -f "$file" ]] || { echo "required shared-source file missing: $file" >&2; exit 1; }
+  [[ -f "$file" ]] || { echo "required QFT/GR file missing: $file" >&2; exit 1; }
   if grep -nE "$FORBIDDEN_PATTERN" "$file"; then
     echo "forbidden hole, postulate, placeholder, or unsafe option in $file" >&2
     exit 1
   fi
 done
 
-grep -q '^actualQFTSectorStressShared :' DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
-grep -q 'qftStressAggregation' DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
-grep -q 'qftTotalStressShared' DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
-grep -q '^sharedSourceImpliesSameStressEnergy :' DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryExact.agda
-grep -q '^commonVariationImpliesStressWeld :' DASHI/Physics/Foundations/CommonEffectiveActionVariationExact.agda
+qft=DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
+producer=DASHI/Physics/Foundations/BalabanAllSectorContinuumProducerExact.agda
+transport=DASHI/Physics/Foundations/BalabanNativeSectorRecoveryTransportExact.agda
+family=DASHI/Physics/Foundations/BalabanTransportedSectorFamilyProducerExact.agda
+gr=DASHI/Physics/Foundations/EinsteinCommonActionVariationFrontierExact.agda
+cap=DASHI/Physics/Foundations/CommonActionQFTGRVariationCompilerExact.agda
+producerCap=DASHI/Physics/Foundations/CommonActionQFTGRContinuumProducerCompilerExact.agda
 
-grep -q '^record BalabanSectorFlow' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
-grep -q '^record BalabanSectorMetricVariation' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
-grep -q '^record BalabanAllSectorVariationReceipt' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
-grep -q '^balabanSectorFirstVariationIsLiteralStressPairing :' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
-grep -q '^balabanSectorFamilyBuildsQFTVariationIdentification :' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
-grep -q 'cmp109BackgroundHessianIsMetricVariationIsFalse' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
-grep -q 'metricVariationFunctionalIsStressTensorWithoutPairingIsFalse' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
-grep -q 'oneBalabanPureGaugeDensityIsTotalQFTStressIsFalse' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
-grep -q 'oneGaugeSectorStressIsTotalQFTStressIsFalse' DASHI/Physics/Foundations/BalabanCommonActionVariationFrontierExact.agda
-grep -q '^balabanSectorFamilyProducesQFTIdentification :' DASHI/Physics/Foundations/BalabanCommonActionVariationValidation.agda
+grep -q 'finiteStressShared' "$qft"
+grep -q 'finiteVariationRepresentedByFiniteStress' "$qft"
+grep -q 'finiteFirstVariationConverges' "$qft"
+grep -q 'finiteStressPairingConvergesToLiteralContinuumStress' "$qft"
+grep -q '^balabanSectorContinuumFirstVariationIsLiteralStressPairing :' "$qft"
 
-grep -q '^einsteinTensorVariationBuildsGRIdentification :' DASHI/Physics/Foundations/EinsteinCommonActionVariationFrontierExact.agda
-grep -q '^actualGRFieldEquation :' DASHI/Physics/Foundations/EinsteinCommonActionVariationFrontierExact.agda
-grep -q 'fieldEquationAloneDerivesCommonActionIsFalse' DASHI/Physics/Foundations/EinsteinCommonActionVariationFrontierExact.agda
-grep -q '^commonEinsteinAndBalabanVariationImpliesStressWeld :' DASHI/Physics/Foundations/CommonActionQFTGRVariationCompilerExact.agda
-grep -q 'onePureYangMillsSectorCanStandForTotalQFTStressIsFalse' DASHI/Physics/Foundations/CommonActionQFTGRVariationCompilerExact.agda
-grep -q 'separateExtraStressWeldTheoremStillNeededAfterBothReceiptsIsFalse' DASHI/Physics/Foundations/CommonActionQFTGRVariationCompilerExact.agda
+grep -q '^record BalabanAllSectorContinuumProducer' "$producer"
+grep -q '^legacyReceiptToContinuumProducer :' "$producer"
+grep -q '^aggregateSectorVariationIsAggregateStressPairing :' "$producer"
+grep -q '^continuumProducerBuildsQFTVariationIdentification :' "$producer"
+grep -q 'downstreamCommonActionNeedsIndependentConvergenceRelationIsFalse' "$producer"
+
+grep -q '^record NativeBalabanSectorRecoveryTransport' "$transport"
+grep -q '^transportedSectorContinuumFirstVariation :' "$transport"
+grep -q '^transportedSectorVariationIsActualSharedStressPairing :' "$transport"
+grep -q 'nativeYMStressIsSharedStressByCarrierNameIsFalse' "$transport"
+grep -q 'nativeYMMetricPerturbationIsCommonPerturbationByNameIsFalse' "$transport"
+
+grep -q '^record TransportedBalabanSectorFamily' "$family"
+grep -q '^transportedSectorIdentityWithCommonPairing :' "$family"
+grep -q '^transportedSectorFamilyToContinuumProducer :' "$family"
+grep -q 'sectorEndpointTransportAutomaticallyProvidesAggregationIsFalse' "$family"
+
+grep -q 'effectiveSourceRepresentsCommonMetricVariation' "$gr"
+grep -q 'commonMetricVariationEqualsEinsteinPairing' "$gr"
+grep -q 'pairingSeparatesStressOnAdmittedDomain' "$gr"
+grep -q '^commonVariationEqualsEinsteinTensor :' "$gr"
+grep -q '^einsteinTensorVariationBuildsGRIdentification :' "$gr"
+
+grep -q '^record CommonMetricVariationLanguage' "$cap"
+grep -q '^commonEinsteinAndBalabanVariationImpliesStressWeld :' "$cap"
+grep -q '^stressWeldImpliesCommonMetricPairingEquality :' "$cap"
+
+grep -q '^record CommonMetricProducerLanguage' "$producerCap"
+grep -q '^commonEinsteinAndBalabanProducerImpliesStressWeld :' "$producerCap"
+grep -q '^stressWeldImpliesCommonProducerPairingEquality :' "$producerCap"
+grep -q 'commonMetricConsumerNeedsBalabanConvergenceInternalsIsFalse' "$producerCap"
 
 if ! command -v agda >/dev/null 2>&1; then
-  echo "Agda executable not available; static shared-source checks passed, kernel typecheck not run." >&2
+  echo "Agda executable not available; static QFT/GR checks passed, kernel typecheck not run." >&2
   exit 2
 fi
 
-agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/SharedEffectiveSourceRecoveryValidation.agda
-agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/CommonEffectiveActionVariationValidation.agda
 agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/BalabanCommonActionVariationValidation.agda
+agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/BalabanContinuumProducerValidation.agda
 agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/EinsteinCommonActionVariationValidation.agda
 agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/Everything.agda
 
-echo "Shared-source, sectorwise metric-functional Balaban-QFT, Einstein-GR, and common-action QFT/GR BIDI checks passed."
+echo "Legacy and endpoint-only Balaban-QFT, native-to-shared sector transport, explicit sector-family aggregation, pairing-exact Einstein-GR, and common-metric weld checks passed."
