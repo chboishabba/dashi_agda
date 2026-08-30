@@ -8,12 +8,6 @@ import DASHI.Programmes.RTXLightTransportRefinementExact as RTX
 
 ------------------------------------------------------------------------
 -- RTX / MDL CROSS-POLLINATION
---
--- RTX already proves that its declared refinement preserves the downstream
--- observation.  This adapter shows how such a refinement can stay inside a
--- consumer-adequate stratum when adequacy itself factors through that declared
--- observation.  It does not claim that refinement lowers MDL or increases
--- physical truth.
 ------------------------------------------------------------------------
 
 record RTXConsumerMDLSurface
@@ -62,8 +56,8 @@ rtxConsumerMDLProblem {transport} surface =
     (Admissible surface)
     (ConsumerAdequate surface)
     (descriptionLength surface)
-    RTXRefines
-    (λ state → "dashiRTX light-transport state/model")
+    (RTXRefines {transport = transport})
+    (λ _ → "dashiRTX light-transport state/model")
     (codingConventionReference surface)
     (consumerReference surface)
 
@@ -73,11 +67,9 @@ record RTXAdmissibleMDLBoundary : Set where
     observationPreservingRefinementMayRemainConsumerAdequate : Bool
     observationPreservingRefinementMayRemainConsumerAdequateIsTrue :
       observationPreservingRefinementMayRemainConsumerAdequate ≡ true
-
     observationPreservationImpliesLowerDescriptionLength : Bool
     observationPreservationImpliesLowerDescriptionLengthIsFalse :
       observationPreservationImpliesLowerDescriptionLength ≡ false
-
     lowerDescriptionLengthImpliesPhysicalTruth : Bool
     lowerDescriptionLengthImpliesPhysicalTruthIsFalse :
       lowerDescriptionLengthImpliesPhysicalTruth ≡ false
