@@ -2,16 +2,14 @@ module DASHI.Biology.CrossKingdomAnaestheticActionBidiExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
-
 import DASHI.Biology.Cell.BioelectricNetwork as Bioelectric
 
 ------------------------------------------------------------------------
--- Sources: Yokawa et al. 2018 DOI 10.1093/aob/mcx155;
--- Kelz & Mashour 2019 DOI 10.1016/j.cub.2019.09.071;
--- Draguhn, Mallatt & Robinson 2021 DOI 10.1007/s00709-020-01550-9.
--- Boundary: anaesthetic sensitivity and response suppression in plants do not
--- establish plant pain or consciousness; shared cellular susceptibility is
--- kept separate from lineage-specific organism-level endpoints.
+-- Cross-kingdom anaesthetic action.
+-- Sources: Yokawa et al. 2018 (10.1093/aob/mcx155), Kelz & Mashour 2019
+-- (10.1016/j.cub.2019.09.071), Draguhn/Mallatt/Robinson 2021
+-- (10.1007/s00709-020-01550-9). Plant anaesthetic sensitivity is not promoted
+-- to evidence of pain or consciousness.
 ------------------------------------------------------------------------
 
 data Lineage : Set where plantLineage animalLineage : Lineage
@@ -44,10 +42,8 @@ data EvidentiaryStatus : Set where
 
 plantAndAnimalDistinct : plantLineage ≡ animalLineage → ⊥
 plantAndAnimalDistinct ()
-
 cellularAndConsciousLayersDistinct : cellularProcessLayer ≡ consciousStateLayer → ⊥
 cellularAndConsciousLayersDistinct ()
-
 plantAndAnimalEndpointTagsDistinct :
   (p : PlantAnaestheticEndpoint) → (a : AnimalAnaestheticEndpoint) →
   plantEndpointTag p ≡ animalEndpointTag a → ⊥
@@ -135,11 +131,9 @@ canonicalAnaestheticInferenceBoundary =
 plantActionPotentialSuppressionIsNotAnimalUnconsciousness :
   plantEndpointTag plantActionPotentialSuppressed ≡ animalEndpointTag unconsciousnessEndpoint → ⊥
 plantActionPotentialSuppressionIsNotAnimalUnconsciousness ()
-
 plantMovementSuppressionIsNotAnimalUnconsciousness :
   plantEndpointTag plantOrganMovementSuppressed ≡ animalEndpointTag unconsciousnessEndpoint → ⊥
 plantMovementSuppressionIsNotAnimalUnconsciousness ()
-
 notEstablishedIsNotDirectObservation : notEstablished ≡ directlyObserved → ⊥
 notEstablishedIsNotDirectObservation ()
 
