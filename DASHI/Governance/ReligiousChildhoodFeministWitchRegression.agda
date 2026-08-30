@@ -15,6 +15,7 @@ import DASHI.Governance.SuffrageWitchReclamationGenealogyExact as Genealogy
 import DASHI.Governance.HistoricalEventMeaningProvenanceBidiExact as History
 import DASHI.Governance.SexedHistoricalSubjectDialecticBidiExact as SexDialectic
 import DASHI.Governance.SexedHistoricalCoConstitutionHyperfabricExact as Hyper
+import DASHI.Governance.SexedHistoricalTransitionHyperfabricExact as TransitionHyper
 
 ------------------------------------------------------------------------
 -- Fine-state route survives public behavioural collapse.
@@ -78,7 +79,7 @@ historicalOppositionNotLogicalNegationRegression =
   SexDialectic.historicalOppositionDoesNotPromoteLogicalNegation
 
 ------------------------------------------------------------------------
--- Hyberfabric/co-constitution regressions.
+-- Hyperfabric/co-constitution regressions.
 ------------------------------------------------------------------------
 
 constructionModeDoesNotRecoverPowerRegression :
@@ -95,6 +96,30 @@ mutualConstructionDoesNotMeanPowerParityRegression :
   Hyper.MutualConstructionImpliesPowerParity → ⊥
 mutualConstructionDoesNotMeanPowerParityRegression =
   Hyper.mutualConstructionDoesNotImplyPowerParity
+
+------------------------------------------------------------------------
+-- Transition-hyperfabric regressions: visible reform does not close every
+-- material, symbolic, authority or historical residual.
+------------------------------------------------------------------------
+
+formalCorrectionDoesNotRecoverSymbolicClosureRegression :
+  INF.FactorsThrough
+    TransitionHyper.formalCorrectionObserver
+    TransitionHyper.symbolicClosure → ⊥
+formalCorrectionDoesNotRecoverSymbolicClosureRegression =
+  TransitionHyper.formalCorrectionCannotRecoverSymbolicClosure
+
+symbolicRechartDoesNotRecoverMaterialParityRegression :
+  INF.FactorsThrough
+    TransitionHyper.symbolicRechartObserver
+    TransitionHyper.materialParity → ⊥
+symbolicRechartDoesNotRecoverMaterialParityRegression =
+  TransitionHyper.symbolicRechartCannotRecoverMaterialParity
+
+suffrageCorrectionDoesNotMeanWholePowerParityRegression :
+  TransitionHyper.SuffrageCorrectionImpliesWholePowerParity → ⊥
+suffrageCorrectionDoesNotMeanWholePowerParityRegression =
+  TransitionHyper.suffrageCorrectionDoesNotImplyWholePowerParity
 
 ------------------------------------------------------------------------
 -- Empirical atlas remains partial rather than decorative completion.
@@ -123,6 +148,9 @@ record ReligiousChildhoodFeministWitchRegressionBoundary : Set where
     mutualConstructionMeansPowerParity : Bool
     publicGenderRecoversFullCoConstitution : Bool
     constructionModeIsPowerScore : Bool
+    formalCorrectionClosesSymbolicResidual : Bool
+    symbolicRechartCreatesMaterialParity : Bool
+    oneHistoricalAxisChangeClosesTransition : Bool
     currentReligiousAtlasIsCausallyComplete : Bool
     currentReligiousAtlasIsPartiallyInstantiated : Bool
 
@@ -130,4 +158,5 @@ canonicalReligiousChildhoodFeministWitchRegressionBoundary :
   ReligiousChildhoodFeministWitchRegressionBoundary
 canonicalReligiousChildhoodFeministWitchRegressionBoundary =
   religious-childhood-feminist-witch-regression-boundary
-    false false false false false false false false false false false false true
+    false false false false false false false false false false false
+    false false false false true
