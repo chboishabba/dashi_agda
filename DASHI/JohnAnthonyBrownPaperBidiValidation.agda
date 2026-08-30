@@ -34,6 +34,26 @@ hellFearRemainsResearchableMechanism :
   ≡ true
 hellFearRemainsResearchableMechanism = refl
 
+hellPaperForwardRoutePinned :
+  Brown.BrownPaperBidiRoute.forwardObligation Brown.hellBidiRoute
+  ≡ Brown.fearMechanismReceipt
+hellPaperForwardRoutePinned = refl
+
+hellFormalReturnRoutePinned :
+  Brown.BrownPaperBidiRoute.backwardRevision Brown.hellBidiRoute
+  ≡ Brown.splitMechanismFromOutcome
+hellFormalReturnRoutePinned = refl
+
+colonialPaperForwardRoutePinned :
+  Brown.BrownPaperBidiRoute.forwardObligation Brown.colonialBidiRoute
+  ≡ Brown.colonialHistoryReceipt
+colonialPaperForwardRoutePinned = refl
+
+melbourneResponseReturnRoutePinned :
+  Brown.BrownPaperBidiRoute.backwardRevision Brown.melbourneResponseBidiRoute
+  ≡ Brown.addIndependentInstitutionalReceipt
+melbourneResponseReturnRoutePinned = refl
+
 reverseObservationDoesNotRecoverFormation :
   Brown.FearPromotesUniqueFormationRoute → ⊥
 reverseObservationDoesNotRecoverFormation = Brown.fearDoesNotPromoteUniqueFormationRoute
