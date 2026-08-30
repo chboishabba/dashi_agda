@@ -14,64 +14,49 @@ import DASHI.Environment.LESSituatedObservationInteractionExact as Situated
 ------------------------------------------------------------------------
 -- INDIGENOUS KNOWLEDGE / STORY / TWO-EYED SEEING BIDI CAPSTONE
 --
--- PURPOSE
---
--- This module formalises repository-native boundaries exposed by a discussion
--- about Indigenous knowledge, storytelling, Two-Eyed Seeing, medicinal
--- knowledge translation and contemporary Yolngu situated problem solving.
---
--- It does NOT define a universal Indigenous epistemology.  The finite carriers
--- below are deliberately synthetic theorem witnesses.  They preserve several
--- distinctions that are easy to erase when Indigenous knowledge is reduced to
--- an extracted proposition or a Western scientific validation surface.
+-- This is a source-bounded DASHI formal extension.  It does NOT define a
+-- universal Indigenous epistemology.  Its finite witnesses preserve exactly
+-- the distinctions that are otherwise easy to erase when a situated knowledge
+-- practice is projected to a detached proposition or scientific result.
 --
 -- SOURCE CALIBRATION
 --
--- Cheryl Bartlett, Murdena Marshall, Albert Marshall (2012),
--- "Two-Eyed Seeing and other lessons learned within a co-learning journey of
--- bringing together indigenous and mainstream knowledges and ways of knowing",
--- Journal of Environmental Studies and Sciences 2:331-340,
--- DOI 10.1007/s13412-012-0086-8.
--- Bounded use: motivates coordinated use of strengths from distinct knowledge
--- systems without requiring epistemic fusion.
+-- Bartlett, Marshall & Marshall (2012), "Two-Eyed Seeing and other lessons
+-- learned within a co-learning journey of bringing together indigenous and
+-- mainstream knowledges and ways of knowing", Journal of Environmental
+-- Studies and Sciences 2:331-340, DOI 10.1007/s13412-012-0086-8.
+-- Bounded use: coordinated use of strengths from distinct knowledge systems
+-- does not require epistemic fusion.
 --
--- Robin Wall Kimmerer, Braiding Sweetgrass (2013).
--- Bounded use: inherited through the existing DASHI Kimmerer owners for
--- relational, narrative and provenance-sensitive interpretation.
+-- Kimmerer, Braiding Sweetgrass (2013), and Yunkaporta, Sand Talk (2019), are
+-- inherited through existing DASHI source-bound owners.  No source is credited
+-- with the finite factorisation theorems below.
 --
--- Tyson Yunkaporta, Sand Talk (2019).
--- Bounded use: inherited through RelationalEpistemicProcessSourceBridgeExact;
--- no source vocabulary is identified with DASHI theorem constructors.
---
--- National Film and Sound Archive of Australia, 2026 Creator Capsule:
--- "Outback Boys".  The NFSA describes the Ramingining/Arnhem Land channel as
--- documenting hunting, bushcraft and life on Country through largely unscripted
--- adventures, with Djambarrpuyngu spoken throughout, and as an immersive
--- portrait of Yolngu knowledge and identity.
+-- National Film and Sound Archive of Australia, 2026 Creator Capsule,
+-- "Outback Boys": Ramingining/Arnhem Land hunting, bushcraft and life on
+-- Country through unscripted adventures, with Djambarrpuyngu spoken throughout;
+-- the NFSA describes the channel as an immersive portrait of Yolngu knowledge
+-- and identity.
 -- https://www.nfsa.gov.au/stories/deep-dives/youtube-creator-capsule-outback-boys
--- Bounded use: source specimen for contemporary situated problem solving,
--- storytelling and co-presence of Country knowledge with modern technology.
 --
 -- ABC News (2017), "Black As returns to Ramingining for second season after
--- 'incredible demand'".  Bounded use: source specimen for unscripted everyday
--- problem-solving, ingenuity, bush life and humour around the same Ramingining
--- group.  No claim is made that entertainment footage exhausts Yolngu knowledge.
+-- 'incredible demand'": bounded specimen for unscripted everyday ingenuity,
+-- bush life and humour around the same Ramingining group.  Entertainment footage
+-- is not treated as an exhaustive representation of Yolngu knowledge.
 --
--- Maria Rosa Montinari, Sergio Minelli, Raffaele De Caterina (2019),
--- "The first 3500 years of aspirin history from its roots - A concise summary",
--- Vascular Pharmacology 113:1-8, DOI 10.1016/j.vph.2018.10.008.
--- Bounded use: aspirin is retained only as a calibration example showing a
--- long traditional-use -> chemistry -> manufactured-drug history; it is NOT
--- represented as a clean single-Indigenous-community discovery lineage.
+-- Montinari, Minelli & De Caterina (2019), "The first 3500 years of aspirin
+-- history from its roots - A concise summary", Vascular Pharmacology 113:1-8,
+-- DOI 10.1016/j.vph.2018.10.008.  Aspirin is used only as a calibration showing
+-- long traditional plant-use -> chemistry -> manufactured-drug history; it is
+-- NOT represented as a clean single-Indigenous-community discovery lineage.
 --
 -- Convention on Biological Diversity, Nagoya Protocol, especially Articles 5
--- and 12.  Bounded use: motivates keeping access, prior informed consent,
--- community protocols and benefit-sharing distinct from mere scientific use of
--- traditional knowledge associated with genetic resources.
+-- and 12.  Bounded use: access/consent/community protocol/benefit-sharing remain
+-- distinct from the downstream scientific result itself.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
--- 1. A knowledge carrier is richer than an extracted proposition.
+-- 1. Knowledge carrier != extracted proposition.
 ------------------------------------------------------------------------
 
 data KnowledgeContent : Set where
@@ -120,35 +105,21 @@ open KnowledgeCarrier public
 indigenousMedicinalStoryCarrier : KnowledgeCarrier
 indigenousMedicinalStoryCarrier =
   knowledgeCarrier
-    medicinalPlantHelps
-    countryPlace
-    custodialRelation
-    livedPractice
-    seasonalTime
-    TwoEyed.indigenousHistory
-    custodialAuthority
-    restrictedPermission
-    reciprocalCare
-    story
+    medicinalPlantHelps countryPlace custodialRelation livedPractice seasonalTime
+    TwoEyed.indigenousHistory custodialAuthority restrictedPermission
+    reciprocalCare story
 
 scientificMedicinalPaperCarrier : KnowledgeCarrier
 scientificMedicinalPaperCarrier =
   knowledgeCarrier
-    medicinalPlantHelps
-    laboratoryPlace
-    investigatorRelation
-    controlledExperiment
-    assayTime
-    TwoEyed.scientificHistory
-    researchAuthority
-    openResearchPermission
-    replicationReporting
-    paper
+    medicinalPlantHelps laboratoryPlace investigatorRelation controlledExperiment
+    assayTime TwoEyed.scientificHistory researchAuthority openResearchPermission
+    replicationReporting paper
 
-extractedProposition : KnowledgeCarrier → KnowledgeContent
+extractedProposition : KnowledgeCarrier -> KnowledgeContent
 extractedProposition = content
 
-carrierProvenance : KnowledgeCarrier → TwoEyed.Provenance
+carrierProvenance : KnowledgeCarrier -> TwoEyed.Provenance
 carrierProvenance carrier = TwoEyed.provenance (knowledgeHistory carrier)
 
 sameMedicinalPropositionAcrossHistories :
@@ -156,54 +127,36 @@ sameMedicinalPropositionAcrossHistories :
   ≡ extractedProposition scientificMedicinalPaperCarrier
 sameMedicinalPropositionAcrossHistories = refl
 
-samePropositionDifferentProvenance :
-  carrierProvenance indigenousMedicinalStoryCarrier
-  ≡ carrierProvenance scientificMedicinalPaperCarrier → ⊥
-samePropositionDifferentProvenance ()
-
 propositionCannotRecoverProvenance :
-  NonFactor.FactorsThrough extractedProposition carrierProvenance → ⊥
+  NonFactor.FactorsThrough extractedProposition carrierProvenance -> ⊥
 propositionCannotRecoverProvenance =
   NonFactor.witnessRulesOutEveryFlatFactorisation
     (NonFactor.nonFactorabilityWitness
-      indigenousMedicinalStoryCarrier
-      scientificMedicinalPaperCarrier
-      refl
-      (λ ()))
+      indigenousMedicinalStoryCarrier scientificMedicinalPaperCarrier refl (λ ()))
 
 propositionCannotRecoverAuthority :
-  NonFactor.FactorsThrough extractedProposition authority → ⊥
+  NonFactor.FactorsThrough extractedProposition authority -> ⊥
 propositionCannotRecoverAuthority =
   NonFactor.witnessRulesOutEveryFlatFactorisation
     (NonFactor.nonFactorabilityWitness
-      indigenousMedicinalStoryCarrier
-      scientificMedicinalPaperCarrier
-      refl
-      (λ ()))
+      indigenousMedicinalStoryCarrier scientificMedicinalPaperCarrier refl (λ ()))
 
 propositionCannotRecoverPermission :
-  NonFactor.FactorsThrough extractedProposition permission → ⊥
+  NonFactor.FactorsThrough extractedProposition permission -> ⊥
 propositionCannotRecoverPermission =
   NonFactor.witnessRulesOutEveryFlatFactorisation
     (NonFactor.nonFactorabilityWitness
-      indigenousMedicinalStoryCarrier
-      scientificMedicinalPaperCarrier
-      refl
-      (λ ()))
+      indigenousMedicinalStoryCarrier scientificMedicinalPaperCarrier refl (λ ()))
 
 propositionCannotRecoverObligation :
-  NonFactor.FactorsThrough extractedProposition obligation → ⊥
+  NonFactor.FactorsThrough extractedProposition obligation -> ⊥
 propositionCannotRecoverObligation =
   NonFactor.witnessRulesOutEveryFlatFactorisation
     (NonFactor.nonFactorabilityWitness
-      indigenousMedicinalStoryCarrier
-      scientificMedicinalPaperCarrier
-      refl
-      (λ ()))
+      indigenousMedicinalStoryCarrier scientificMedicinalPaperCarrier refl (λ ()))
 
 ------------------------------------------------------------------------
--- 2. Story is a knowledge expression, not proof that every listener possesses
---    every interpretation or permission carried by the source relation.
+-- 2. Story surface != complete interpretation/authority.
 ------------------------------------------------------------------------
 
 data StorySurface : Set where
@@ -215,48 +168,29 @@ data InterpretationLayer : Set where
 data ListenerStanding : Set where
   publicListener authorisedCustodian : ListenerStanding
 
-heardStory : ListenerStanding → StorySurface
+heardStory : ListenerStanding -> StorySurface
 heardStory _ = samePublicStory
 
-permittedInterpretation : ListenerStanding → InterpretationLayer
+permittedInterpretation : ListenerStanding -> InterpretationLayer
 permittedInterpretation publicListener = publicInterpretation
 permittedInterpretation authorisedCustodian = restrictedInterpretation
 
-sameStorySurfaceAcrossStandings :
-  heardStory publicListener ≡ heardStory authorisedCustodian
-sameStorySurfaceAcrossStandings = refl
-
 hearingStoryCannotRecoverPermittedInterpretation :
-  NonFactor.FactorsThrough heardStory permittedInterpretation → ⊥
+  NonFactor.FactorsThrough heardStory permittedInterpretation -> ⊥
 hearingStoryCannotRecoverPermittedInterpretation =
   NonFactor.witnessRulesOutEveryFlatFactorisation
     (NonFactor.nonFactorabilityWitness
-      publicListener
-      authorisedCustodian
-      refl
-      (λ ()))
+      publicListener authorisedCustodian refl (λ ()))
 
 data NarrativeRole : Set where
   memoryCarrier transmissionCarrier interpretationCarrier governanceCarrier
   : NarrativeRole
 
-storyCanCarryMemory : NarrativeRole
-storyCanCarryMemory = memoryCarrier
-
-storyCanCarryTransmission : NarrativeRole
-storyCanCarryTransmission = transmissionCarrier
-
-storyCanCarryInterpretation : NarrativeRole
-storyCanCarryInterpretation = interpretationCarrier
-
-storyCanCarryGovernance : NarrativeRole
-storyCanCarryGovernance = governanceCarrier
-
 narrativeCalibrationReuse : String
 narrativeCalibrationReuse = Narrative.narrativeCalibrationReading
 
 ------------------------------------------------------------------------
--- 3. Two-Eyed Seeing: coordinated use without identity or forced fusion.
+-- 3. Two-Eyed Seeing coordination without fusion.
 ------------------------------------------------------------------------
 
 record TwoEyedCoordination : Set where
@@ -265,8 +199,7 @@ record TwoEyedCoordination : Set where
     indigenousCarrier : KnowledgeCarrier
     scientificCarrier : KnowledgeCarrier
     samePracticalContent :
-      extractedProposition indigenousCarrier
-      ≡ extractedProposition scientificCarrier
+      extractedProposition indigenousCarrier ≡ extractedProposition scientificCarrier
     indigenousHistoryExact :
       knowledgeHistory indigenousCarrier ≡ TwoEyed.indigenousHistory
     scientificHistoryExact :
@@ -278,28 +211,21 @@ open TwoEyedCoordination public
 canonicalTwoEyedMedicinalCoordination : TwoEyedCoordination
 canonicalTwoEyedMedicinalCoordination =
   twoEyedCoordination
-    indigenousMedicinalStoryCarrier
-    scientificMedicinalPaperCarrier
-    refl
-    refl
-    refl
-    TwoEyed.useDistinctKnowledgesTogether
+    indigenousMedicinalStoryCarrier scientificMedicinalPaperCarrier
+    refl refl refl TwoEyed.useDistinctKnowledgesTogether
 
 coordinatedConvergenceDoesNotFuseProvenance :
   TwoEyed.provenance TwoEyed.indigenousHistory
-  ≡ TwoEyed.provenance TwoEyed.scientificHistory → ⊥
-coordinatedConvergenceDoesNotFuseProvenance =
-  TwoEyed.provenanceDiffersAcrossHistories
+  ≡ TwoEyed.provenance TwoEyed.scientificHistory -> ⊥
+coordinatedConvergenceDoesNotFuseProvenance = TwoEyed.provenanceDiffersAcrossHistories
 
 sharedObservationStillCannotRecoverProvenance :
-  NonFactor.FactorsThrough
-    TwoEyed.observeKnowledgeHistory
-    TwoEyed.provenance → ⊥
+  NonFactor.FactorsThrough TwoEyed.observeKnowledgeHistory TwoEyed.provenance -> ⊥
 sharedObservationStillCannotRecoverProvenance =
   TwoEyed.sharedObservationDoesNotRecoverProvenance
 
 ------------------------------------------------------------------------
--- 4. Translation is partial and may add or erase coordinates.
+-- 4. Translation can preserve, add, erase or leave coordinates unresolved.
 ------------------------------------------------------------------------
 
 data TranslationStage : Set where
@@ -311,94 +237,87 @@ data TranslationEffect : Set where
   : TranslationEffect
 
 data KnowledgeCoordinate : Set where
-  contentCoordinate placeCoordinate relationCoordinate practiceCoordinate
-  provenanceCoordinate authorityCoordinate permissionCoordinate
-  obligationCoordinate mechanismCoordinate doseCoordinate toxicityCoordinate
-  : KnowledgeCoordinate
+  contentCoordinate placeCoordinate relationCoordinate provenanceCoordinate
+  authorityCoordinate permissionCoordinate obligationCoordinate
+  mechanismCoordinate doseCoordinate toxicityCoordinate : KnowledgeCoordinate
 
-translationEffect : TranslationStage → KnowledgeCoordinate → TranslationEffect
-translationEffect situatedKnowledgeStage contentCoordinate = preservesCoordinate
-translationEffect situatedKnowledgeStage placeCoordinate = preservesCoordinate
-translationEffect situatedKnowledgeStage relationCoordinate = preservesCoordinate
-translationEffect situatedKnowledgeStage practiceCoordinate = preservesCoordinate
-translationEffect situatedKnowledgeStage provenanceCoordinate = preservesCoordinate
-translationEffect situatedKnowledgeStage authorityCoordinate = preservesCoordinate
-translationEffect situatedKnowledgeStage permissionCoordinate = preservesCoordinate
-translationEffect situatedKnowledgeStage obligationCoordinate = preservesCoordinate
-translationEffect situatedKnowledgeStage mechanismCoordinate = unresolvedCoordinate
-translationEffect situatedKnowledgeStage doseCoordinate = unresolvedCoordinate
-translationEffect situatedKnowledgeStage toxicityCoordinate = unresolvedCoordinate
-translationEffect extractedClaimStage contentCoordinate = preservesCoordinate
-translationEffect extractedClaimStage placeCoordinate = erasesCoordinate
-translationEffect extractedClaimStage relationCoordinate = erasesCoordinate
-translationEffect extractedClaimStage practiceCoordinate = erasesCoordinate
-translationEffect extractedClaimStage provenanceCoordinate = erasesCoordinate
-translationEffect extractedClaimStage authorityCoordinate = erasesCoordinate
-translationEffect extractedClaimStage permissionCoordinate = erasesCoordinate
-translationEffect extractedClaimStage obligationCoordinate = erasesCoordinate
-translationEffect extractedClaimStage mechanismCoordinate = unresolvedCoordinate
-translationEffect extractedClaimStage doseCoordinate = unresolvedCoordinate
-translationEffect extractedClaimStage toxicityCoordinate = unresolvedCoordinate
-translationEffect assayStage contentCoordinate = preservesCoordinate
-translationEffect assayStage placeCoordinate = erasesCoordinate
-translationEffect assayStage relationCoordinate = erasesCoordinate
-translationEffect assayStage practiceCoordinate = erasesCoordinate
-translationEffect assayStage provenanceCoordinate = erasesCoordinate
-translationEffect assayStage authorityCoordinate = erasesCoordinate
-translationEffect assayStage permissionCoordinate = erasesCoordinate
-translationEffect assayStage obligationCoordinate = erasesCoordinate
-translationEffect assayStage mechanismCoordinate = addsCoordinate
-translationEffect assayStage doseCoordinate = addsCoordinate
-translationEffect assayStage toxicityCoordinate = unresolvedCoordinate
-translationEffect mechanismStage contentCoordinate = preservesCoordinate
-translationEffect mechanismStage placeCoordinate = erasesCoordinate
-translationEffect mechanismStage relationCoordinate = erasesCoordinate
-translationEffect mechanismStage practiceCoordinate = erasesCoordinate
-translationEffect mechanismStage provenanceCoordinate = erasesCoordinate
-translationEffect mechanismStage authorityCoordinate = erasesCoordinate
-translationEffect mechanismStage permissionCoordinate = erasesCoordinate
-translationEffect mechanismStage obligationCoordinate = erasesCoordinate
-translationEffect mechanismStage mechanismCoordinate = addsCoordinate
-translationEffect mechanismStage doseCoordinate = addsCoordinate
-translationEffect mechanismStage toxicityCoordinate = addsCoordinate
-translationEffect clinicalEvidenceStage contentCoordinate = preservesCoordinate
-translationEffect clinicalEvidenceStage placeCoordinate = erasesCoordinate
-translationEffect clinicalEvidenceStage relationCoordinate = erasesCoordinate
-translationEffect clinicalEvidenceStage practiceCoordinate = erasesCoordinate
-translationEffect clinicalEvidenceStage provenanceCoordinate = erasesCoordinate
-translationEffect clinicalEvidenceStage authorityCoordinate = erasesCoordinate
-translationEffect clinicalEvidenceStage permissionCoordinate = erasesCoordinate
-translationEffect clinicalEvidenceStage obligationCoordinate = erasesCoordinate
-translationEffect clinicalEvidenceStage mechanismCoordinate = preservesCoordinate
-translationEffect clinicalEvidenceStage doseCoordinate = addsCoordinate
-translationEffect clinicalEvidenceStage toxicityCoordinate = addsCoordinate
-translationEffect manufacturedMedicineStage contentCoordinate = preservesCoordinate
-translationEffect manufacturedMedicineStage placeCoordinate = erasesCoordinate
-translationEffect manufacturedMedicineStage relationCoordinate = erasesCoordinate
-translationEffect manufacturedMedicineStage practiceCoordinate = erasesCoordinate
-translationEffect manufacturedMedicineStage provenanceCoordinate = erasesCoordinate
-translationEffect manufacturedMedicineStage authorityCoordinate = erasesCoordinate
-translationEffect manufacturedMedicineStage permissionCoordinate = erasesCoordinate
-translationEffect manufacturedMedicineStage obligationCoordinate = erasesCoordinate
-translationEffect manufacturedMedicineStage mechanismCoordinate = preservesCoordinate
-translationEffect manufacturedMedicineStage doseCoordinate = preservesCoordinate
-translationEffect manufacturedMedicineStage toxicityCoordinate = preservesCoordinate
+selectedTranslationEffect : TranslationStage -> KnowledgeCoordinate -> TranslationEffect
+selectedTranslationEffect situatedKnowledgeStage contentCoordinate = preservesCoordinate
+selectedTranslationEffect situatedKnowledgeStage placeCoordinate = preservesCoordinate
+selectedTranslationEffect situatedKnowledgeStage relationCoordinate = preservesCoordinate
+selectedTranslationEffect situatedKnowledgeStage provenanceCoordinate = preservesCoordinate
+selectedTranslationEffect situatedKnowledgeStage authorityCoordinate = preservesCoordinate
+selectedTranslationEffect situatedKnowledgeStage permissionCoordinate = preservesCoordinate
+selectedTranslationEffect situatedKnowledgeStage obligationCoordinate = preservesCoordinate
+selectedTranslationEffect situatedKnowledgeStage mechanismCoordinate = unresolvedCoordinate
+selectedTranslationEffect situatedKnowledgeStage doseCoordinate = unresolvedCoordinate
+selectedTranslationEffect situatedKnowledgeStage toxicityCoordinate = unresolvedCoordinate
+selectedTranslationEffect extractedClaimStage contentCoordinate = preservesCoordinate
+selectedTranslationEffect extractedClaimStage placeCoordinate = erasesCoordinate
+selectedTranslationEffect extractedClaimStage relationCoordinate = erasesCoordinate
+selectedTranslationEffect extractedClaimStage provenanceCoordinate = erasesCoordinate
+selectedTranslationEffect extractedClaimStage authorityCoordinate = erasesCoordinate
+selectedTranslationEffect extractedClaimStage permissionCoordinate = erasesCoordinate
+selectedTranslationEffect extractedClaimStage obligationCoordinate = erasesCoordinate
+selectedTranslationEffect extractedClaimStage mechanismCoordinate = unresolvedCoordinate
+selectedTranslationEffect extractedClaimStage doseCoordinate = unresolvedCoordinate
+selectedTranslationEffect extractedClaimStage toxicityCoordinate = unresolvedCoordinate
+selectedTranslationEffect assayStage contentCoordinate = preservesCoordinate
+selectedTranslationEffect assayStage placeCoordinate = erasesCoordinate
+selectedTranslationEffect assayStage relationCoordinate = erasesCoordinate
+selectedTranslationEffect assayStage provenanceCoordinate = erasesCoordinate
+selectedTranslationEffect assayStage authorityCoordinate = erasesCoordinate
+selectedTranslationEffect assayStage permissionCoordinate = erasesCoordinate
+selectedTranslationEffect assayStage obligationCoordinate = erasesCoordinate
+selectedTranslationEffect assayStage mechanismCoordinate = addsCoordinate
+selectedTranslationEffect assayStage doseCoordinate = addsCoordinate
+selectedTranslationEffect assayStage toxicityCoordinate = unresolvedCoordinate
+selectedTranslationEffect mechanismStage contentCoordinate = preservesCoordinate
+selectedTranslationEffect mechanismStage placeCoordinate = erasesCoordinate
+selectedTranslationEffect mechanismStage relationCoordinate = erasesCoordinate
+selectedTranslationEffect mechanismStage provenanceCoordinate = erasesCoordinate
+selectedTranslationEffect mechanismStage authorityCoordinate = erasesCoordinate
+selectedTranslationEffect mechanismStage permissionCoordinate = erasesCoordinate
+selectedTranslationEffect mechanismStage obligationCoordinate = erasesCoordinate
+selectedTranslationEffect mechanismStage mechanismCoordinate = addsCoordinate
+selectedTranslationEffect mechanismStage doseCoordinate = addsCoordinate
+selectedTranslationEffect mechanismStage toxicityCoordinate = addsCoordinate
+selectedTranslationEffect clinicalEvidenceStage contentCoordinate = preservesCoordinate
+selectedTranslationEffect clinicalEvidenceStage placeCoordinate = erasesCoordinate
+selectedTranslationEffect clinicalEvidenceStage relationCoordinate = erasesCoordinate
+selectedTranslationEffect clinicalEvidenceStage provenanceCoordinate = erasesCoordinate
+selectedTranslationEffect clinicalEvidenceStage authorityCoordinate = erasesCoordinate
+selectedTranslationEffect clinicalEvidenceStage permissionCoordinate = erasesCoordinate
+selectedTranslationEffect clinicalEvidenceStage obligationCoordinate = erasesCoordinate
+selectedTranslationEffect clinicalEvidenceStage mechanismCoordinate = preservesCoordinate
+selectedTranslationEffect clinicalEvidenceStage doseCoordinate = addsCoordinate
+selectedTranslationEffect clinicalEvidenceStage toxicityCoordinate = addsCoordinate
+selectedTranslationEffect manufacturedMedicineStage contentCoordinate = preservesCoordinate
+selectedTranslationEffect manufacturedMedicineStage placeCoordinate = erasesCoordinate
+selectedTranslationEffect manufacturedMedicineStage relationCoordinate = erasesCoordinate
+selectedTranslationEffect manufacturedMedicineStage provenanceCoordinate = erasesCoordinate
+selectedTranslationEffect manufacturedMedicineStage authorityCoordinate = erasesCoordinate
+selectedTranslationEffect manufacturedMedicineStage permissionCoordinate = erasesCoordinate
+selectedTranslationEffect manufacturedMedicineStage obligationCoordinate = erasesCoordinate
+selectedTranslationEffect manufacturedMedicineStage mechanismCoordinate = preservesCoordinate
+selectedTranslationEffect manufacturedMedicineStage doseCoordinate = preservesCoordinate
+selectedTranslationEffect manufacturedMedicineStage toxicityCoordinate = preservesCoordinate
 
 extractionErasesPlace :
-  translationEffect extractedClaimStage placeCoordinate ≡ erasesCoordinate
+  selectedTranslationEffect extractedClaimStage placeCoordinate ≡ erasesCoordinate
 extractionErasesPlace = refl
 
 assayCanAddMechanismInformation :
-  translationEffect assayStage mechanismCoordinate ≡ addsCoordinate
+  selectedTranslationEffect assayStage mechanismCoordinate ≡ addsCoordinate
 assayCanAddMechanismInformation = refl
 
 manufacturedDrugDoesNotByItselfRestoreProvenance :
-  translationEffect manufacturedMedicineStage provenanceCoordinate
+  selectedTranslationEffect manufacturedMedicineStage provenanceCoordinate
   ≡ erasesCoordinate
 manufacturedDrugDoesNotByItselfRestoreProvenance = refl
 
 ------------------------------------------------------------------------
--- 5. Medicinal-knowledge translation and benefit-sharing are separate axes.
+-- 5. Scientific result != consent != benefit sharing.
 ------------------------------------------------------------------------
 
 data MedicinalTranslation : Set where
@@ -409,8 +328,7 @@ data AccessStatus : Set where
   noAccessReceipt priorInformedConsentReceipt : AccessStatus
 
 data BenefitSharingStatus : Set where
-  noBenefitSharingReceipt mutuallyAgreedBenefitSharingReceipt
-  : BenefitSharingStatus
+  noBenefitSharingReceipt mutuallyAgreedBenefitSharingReceipt : BenefitSharingStatus
 
 data ScientificResultStatus : Set where
   candidateOnly activeCompoundFound mechanismCharacterised clinicalSupport
@@ -427,13 +345,31 @@ record MedicinalKnowledgeTranslationReceipt : Set where
 
 open MedicinalKnowledgeTranslationReceipt public
 
-scientificResultDoesNotDetermineConsent :
-  ScientificResultStatus → AccessStatus
-scientificResultDoesNotDetermineConsent _ = noAccessReceipt
+sameResultNoConsent : MedicinalKnowledgeTranslationReceipt
+sameResultNoConsent =
+  medicinalKnowledgeTranslationReceipt
+    indigenousMedicinalStoryCarrier candidateToAssay activeCompoundFound
+    noAccessReceipt noBenefitSharingReceipt
 
-scientificResultDoesNotDetermineBenefitSharing :
-  ScientificResultStatus → BenefitSharingStatus
-scientificResultDoesNotDetermineBenefitSharing _ = noBenefitSharingReceipt
+sameResultWithConsentAndBenefitSharing : MedicinalKnowledgeTranslationReceipt
+sameResultWithConsentAndBenefitSharing =
+  medicinalKnowledgeTranslationReceipt
+    indigenousMedicinalStoryCarrier candidateToAssay activeCompoundFound
+    priorInformedConsentReceipt mutuallyAgreedBenefitSharingReceipt
+
+scientificResultCannotRecoverConsent :
+  NonFactor.FactorsThrough scientificResult accessStatus -> ⊥
+scientificResultCannotRecoverConsent =
+  NonFactor.witnessRulesOutEveryFlatFactorisation
+    (NonFactor.nonFactorabilityWitness
+      sameResultNoConsent sameResultWithConsentAndBenefitSharing refl (λ ()))
+
+scientificResultCannotRecoverBenefitSharing :
+  NonFactor.FactorsThrough scientificResult benefitSharingStatus -> ⊥
+scientificResultCannotRecoverBenefitSharing =
+  NonFactor.witnessRulesOutEveryFlatFactorisation
+    (NonFactor.nonFactorabilityWitness
+      sameResultNoConsent sameResultWithConsentAndBenefitSharing refl (λ ()))
 
 record NagoyaStylePromotionGate
     (receipt : MedicinalKnowledgeTranslationReceipt) : Set where
@@ -444,9 +380,7 @@ record NagoyaStylePromotionGate
       benefitSharingStatus receipt ≡ mutuallyAgreedBenefitSharingReceipt
 
 ------------------------------------------------------------------------
--- Aspirin calibration: traditional plant use can precede scientific chemistry,
--- while "aspirin came from Indigenous knowledge" is too coarse as a historical
--- identity claim for the well-known willow lineage.
+-- 6. Aspirin calibration.
 ------------------------------------------------------------------------
 
 data AspirinHistoryStage : Set where
@@ -461,11 +395,12 @@ aspirinBoundedReading : AspirinHistoricalReading
 aspirinBoundedReading = longTraditionalPlantUseLineage
 
 singleIndigenousDiscoveryIsNotBoundedAspirinReading :
-  aspirinBoundedReading ≡ singleIndigenousDiscoveryLineage → ⊥
+  aspirinBoundedReading ≡ singleIndigenousDiscoveryLineage -> ⊥
 singleIndigenousDiscoveryIsNotBoundedAspirinReading ()
 
 ------------------------------------------------------------------------
--- 6. Contemporary situated problem solving: Outback Boys / Black As specimen.
+-- 7. Outback Boys / Black As as a contemporary situated-problem-solving
+--    specimen: modern technology can coexist with Country knowledge.
 ------------------------------------------------------------------------
 
 data ProblemKnowledgeDimension : Set where
@@ -484,26 +419,19 @@ data RepairOutcome : Set where
 data RepairMethodSignature : Set where
   situatedImprovisedMethod canonicalWorkshopMethod : RepairMethodSignature
 
-repairOutcome : RepairContext → RepairOutcome
+repairOutcome : RepairContext -> RepairOutcome
 repairOutcome _ = workingRepair
 
-repairMethod : RepairContext → RepairMethodSignature
+repairMethod : RepairContext -> RepairMethodSignature
 repairMethod remoteCountryRepair = situatedImprovisedMethod
 repairMethod workshopRepair = canonicalWorkshopMethod
 
-sameWorkingOutcomeDifferentMethod :
-  repairOutcome remoteCountryRepair ≡ repairOutcome workshopRepair
-sameWorkingOutcomeDifferentMethod = refl
-
 workingOutcomeCannotRecoverMethod :
-  NonFactor.FactorsThrough repairOutcome repairMethod → ⊥
+  NonFactor.FactorsThrough repairOutcome repairMethod -> ⊥
 workingOutcomeCannotRecoverMethod =
   NonFactor.witnessRulesOutEveryFlatFactorisation
     (NonFactor.nonFactorabilityWitness
-      remoteCountryRepair
-      workshopRepair
-      refl
-      (λ ()))
+      remoteCountryRepair workshopRepair refl (λ ()))
 
 record SituatedProblemSolving : Set where
   constructor situatedProblemSolving
@@ -521,13 +449,8 @@ open SituatedProblemSolving public
 outbackBoysSourceBoundedSpecimen : SituatedProblemSolving
 outbackBoysSourceBoundedSpecimen =
   situatedProblemSolving
-    remoteCountryRepair
-    countryKnowledge
-    modernTechnology
-    embodiedSkill
-    availableMaterial
-    socialCoordination
-    storyMemory
+    remoteCountryRepair countryKnowledge modernTechnology embodiedSkill
+    availableMaterial socialCoordination storyMemory
 
 modernTechnologyCoexistsWithCountryKnowledge :
   technicalKnowledge outbackBoysSourceBoundedSpecimen ≡ modernTechnology
@@ -537,19 +460,14 @@ countryKnowledgeRemainsExplicit :
   placeKnowledge outbackBoysSourceBoundedSpecimen ≡ countryKnowledge
 countryKnowledgeRemainsExplicit = refl
 
-storyMemoryRemainsExplicit :
-  narrativeMemory outbackBoysSourceBoundedSpecimen ≡ storyMemory
-storyMemoryRemainsExplicit = refl
-
 ------------------------------------------------------------------------
--- 7. Reuse the repo's existing situated-observation and relational-process
---    boundaries instead of replacing them.
+-- 8. Reuse existing situated-observation / relational-process boundaries.
 ------------------------------------------------------------------------
 
 anonymousReadingStillCannotRecoverProvenance :
   NonFactor.FactorsThrough
     Situated.anonymousReading
-    (λ observation → TwoEyed.provenance (Situated.knowledgeHistory observation)) →
+    (λ observation -> TwoEyed.provenance (Situated.knowledgeHistory observation)) ->
   ⊥
 anonymousReadingStillCannotRecoverProvenance =
   Situated.anonymousReadingCannotRecoverProvenance
@@ -558,7 +476,7 @@ relationalProcessSourceBoundary : Relational.RelationalEpistemicProcessBoundary
 relationalProcessSourceBoundary = Relational.canonicalRelationalEpistemicProcessBoundary
 
 ------------------------------------------------------------------------
--- 8. Capstone no-promotion boundary.
+-- 9. Capstone no-promotion boundary.
 ------------------------------------------------------------------------
 
 record IndigenousKnowledgeStoryTwoEyedBoundary : Set where
@@ -567,55 +485,41 @@ record IndigenousKnowledgeStoryTwoEyedBoundary : Set where
     indigenousKnowledgeIsUniversalSetOfDetachedPropositions : Bool
     indigenousKnowledgeIsUniversalSetOfDetachedPropositionsIsFalse :
       indigenousKnowledgeIsUniversalSetOfDetachedPropositions ≡ false
-
     samePropositionMeansSameProvenance : Bool
-    samePropositionMeansSameProvenanceIsFalse :
-      samePropositionMeansSameProvenance ≡ false
-
+    samePropositionMeansSameProvenanceIsFalse : samePropositionMeansSameProvenance ≡ false
     hearingStoryMeansPossessingEveryInterpretation : Bool
     hearingStoryMeansPossessingEveryInterpretationIsFalse :
       hearingStoryMeansPossessingEveryInterpretation ≡ false
-
     hearingStoryMeansPermissionToDiscloseOrUse : Bool
     hearingStoryMeansPermissionToDiscloseOrUseIsFalse :
       hearingStoryMeansPermissionToDiscloseOrUse ≡ false
-
     twoEyedSeeingRequiresEpistemicFusion : Bool
     twoEyedSeeingRequiresEpistemicFusionIsFalse :
       twoEyedSeeingRequiresEpistemicFusion ≡ false
-
     scientificValidationCreatesPriorKnowledgeFromNothing : Bool
     scientificValidationCreatesPriorKnowledgeFromNothingIsFalse :
       scientificValidationCreatesPriorKnowledgeFromNothing ≡ false
-
     activeCompoundIdentificationRecoversWholeSourceKnowledgeSystem : Bool
     activeCompoundIdentificationRecoversWholeSourceKnowledgeSystemIsFalse :
       activeCompoundIdentificationRecoversWholeSourceKnowledgeSystem ≡ false
-
     scientificResultAutomaticallyProvesConsent : Bool
     scientificResultAutomaticallyProvesConsentIsFalse :
       scientificResultAutomaticallyProvesConsent ≡ false
-
     scientificResultAutomaticallyProvesBenefitSharing : Bool
     scientificResultAutomaticallyProvesBenefitSharingIsFalse :
       scientificResultAutomaticallyProvesBenefitSharing ≡ false
-
     aspirinIsCleanSingleIndigenousDiscoveryExample : Bool
     aspirinIsCleanSingleIndigenousDiscoveryExampleIsFalse :
       aspirinIsCleanSingleIndigenousDiscoveryExample ≡ false
-
     usingModernTechnologyReplacesIndigenousKnowledge : Bool
     usingModernTechnologyReplacesIndigenousKnowledgeIsFalse :
       usingModernTechnologyReplacesIndigenousKnowledge ≡ false
-
     entertainmentFootageExhaustsYolnguKnowledge : Bool
     entertainmentFootageExhaustsYolnguKnowledgeIsFalse :
       entertainmentFootageExhaustsYolnguKnowledge ≡ false
-
     sameSuccessfulRepairMeansSameMethodOrContext : Bool
     sameSuccessfulRepairMeansSameMethodOrContextIsFalse :
       sameSuccessfulRepairMeansSameMethodOrContext ≡ false
-
     dashiFiniteCarrierIsUniversalIndigenousEpistemology : Bool
     dashiFiniteCarrierIsUniversalIndigenousEpistemologyIsFalse :
       dashiFiniteCarrierIsUniversalIndigenousEpistemology ≡ false
@@ -624,17 +528,5 @@ canonicalIndigenousKnowledgeStoryTwoEyedBoundary :
   IndigenousKnowledgeStoryTwoEyedBoundary
 canonicalIndigenousKnowledgeStoryTwoEyedBoundary =
   indigenousKnowledgeStoryTwoEyedBoundary
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
+    false refl false refl false refl false refl false refl false refl false refl
+    false refl false refl false refl false refl false refl false refl false refl
