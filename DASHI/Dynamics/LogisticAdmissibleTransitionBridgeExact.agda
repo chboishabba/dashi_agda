@@ -7,21 +7,16 @@ import DASHI.Dynamics.LogisticAdicStageCommutingSpine as Logistic
 
 ------------------------------------------------------------------------
 -- LOGISTIC -> GENERIC ADMISSIBLE TRANSITION BRIDGE
---
--- The existing logistic owner already separates admissible parameters from
--- invariant-region membership.  This adapter packages exactly that theorem into
--- the generic transition hyperfabric; it does not transfer real bifurcation
--- claims to p-adic or finite-residue charts.
 ------------------------------------------------------------------------
 
 logisticInvariantRegionAsTransitionSystem :
   ∀ {Parameter State} →
   Logistic.LogisticInvariantRegion Parameter State →
   Transition.AdmissibleTransitionSystem
-logisticInvariantRegionAsTransitionSystem region =
+logisticInvariantRegionAsTransitionSystem {Parameter} {State} region =
   Transition.admissibleTransitionSystem
-    _
-    _
+    State
+    Parameter
     ⊤
     (λ _ parameter state → Logistic.admissibleParameter region parameter)
     (λ _ parameter state → Logistic.step region parameter state)
@@ -60,11 +55,9 @@ record LogisticAdmissibleTransitionBoundary : Set where
     logisticInvariantRegionInstantiatesGenericTransitionGate : Bool
     logisticInvariantRegionInstantiatesGenericTransitionGateIsTrue :
       logisticInvariantRegionInstantiatesGenericTransitionGate ≡ true
-
     genericTransitionGateProvesContinuumChaos : Bool
     genericTransitionGateProvesContinuumChaosIsFalse :
       genericTransitionGateProvesContinuumChaos ≡ false
-
     genericTransitionGateIdentifiesRealAndPAdicDynamics : Bool
     genericTransitionGateIdentifiesRealAndPAdicDynamicsIsFalse :
       genericTransitionGateIdentifiesRealAndPAdicDynamics ≡ false
