@@ -8,3 +8,5 @@ import DASHI.Chemistry.ChemistryTransitionKernelTests
 import DASHI.Chemistry.ChlorAlkaliSaltIndustryExact
 import DASHI.Chemistry.ChlorAlkaliHalfReactionExact
 import DASHI.Chemistry.ChlorAlkaliCanonicalHalfReactionsExact
+import DASHI.Chemistry.DrinkingWaterChlorineSpeciationExact
+import DASHI.Chemistry.DrinkingWaterChloramineDBPBoundaryExact
