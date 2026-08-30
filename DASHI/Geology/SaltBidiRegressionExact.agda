@@ -10,6 +10,8 @@ import DASHI.Chemistry.DrinkingWaterChlorineSpeciationExact as Water
 import DASHI.Chemistry.DrinkingWaterChloramineDBPBoundaryExact as Combined
 import DASHI.Chemistry.DrinkingWaterDistributionResidualCorrosionBidiExact as Distribution
 import DASHI.Chemistry.DrinkingWaterChloramineNitrificationBiofilmBidiExact as Nitrification
+import DASHI.Chemistry.DrinkingWaterCorrosionMetalReleaseExact as Metal
+import DASHI.Chemistry.DrinkingWaterTapMetalObservationBidiExact as TapMetal
 import DASHI.Environment.RootSoilSaltLineageBidiExact as RootSalt
 
 ------------------------------------------------------------------------
@@ -79,7 +81,28 @@ record SaltBidiRegression : Set where
       Nitrification.biofilmPresenceProvesPathogenPresence
         Nitrification.canonicalChloramineNitrificationBiofilmBoundary ≡ false
 
+    metalDoesNotRecoverUniqueSourceMaterial :
+      Metal.metalDetectionIdentifiesUniqueSourceMaterial
+        Metal.canonicalCorrosionMetalReleaseBoundary ≡ false
+
+    metalDoesNotRecoverUniqueReleaseMechanism :
+      Metal.metalDetectionIdentifiesUniqueReleaseMechanism
+        Metal.canonicalCorrosionMetalReleaseBoundary ≡ false
+
+    firstDrawNotSameObservationLanguageAsFlushed :
+      TapMetal.firstDrawEqualsFlushedObservationLanguage
+        TapMetal.canonicalTapMetalObservationBoundary ≡ false
+
+    oneSampleDoesNotRecoverHydraulicHistory :
+      TapMetal.oneSampleRecoversStagnationAndHydraulicHistory
+        TapMetal.canonicalTapMetalObservationBoundary ≡ false
+
+    lowDissolvedDoesNotProveLowTotalMetal :
+      TapMetal.lowDissolvedMetalProvesLowParticulateAndTotalMetal
+        TapMetal.canonicalTapMetalObservationBoundary ≡ false
+
 canonicalSaltBidiRegression : SaltBidiRegression
 canonicalSaltBidiRegression =
   saltBidiRegression
-    refl refl refl refl refl refl refl refl refl refl refl refl refl refl refl
+    refl refl refl refl refl refl refl refl refl refl
+    refl refl refl refl refl refl refl refl refl refl
