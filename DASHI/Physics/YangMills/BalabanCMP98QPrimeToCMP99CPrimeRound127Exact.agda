@@ -6,7 +6,7 @@ module DASHI.Physics.YangMills.BalabanCMP98QPrimeToCMP99CPrimeRound127Exact wher
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _*_; NonZero)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; NonZero)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -55,7 +55,7 @@ asEliminatedPivotData dataSet =
     swapToSourceOrder : qCPrime + qPrime ≡ qPrime + qCPrime
     swapToSourceOrder = ℚP.+-comm qCPrime qPrime
 
-    sourceZero : qPrime + qCPrime ≡ ℚ.0ℚ
+    sourceZero : qPrime + qCPrime ≡ 0ℚ
     sourceZero = Constraint.differentiatedConstraint derivative freeValue rowValue
   in
   record
