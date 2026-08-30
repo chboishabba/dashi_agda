@@ -9,6 +9,7 @@ FILES=(
   DASHI/Core/AdmissibleConsumerMDLHyperfabricExact.agda
   DASHI/Chemistry/AdmissibleReactionTransitionBridgeExact.agda
   DASHI/Dynamics/LogisticAdmissibleTransitionBridgeExact.agda
+  DASHI/Planning/PlanningAdmissibleTransitionBridgeExact.agda
   DASHI/Programmes/RTXAdmissibleConsumerMDLBridgeExact.agda
   DASHI/Environment/LESAdmissibleTransitionMDLCrossPollinationExact.agda
   DASHI/Core/AdmissibleMDLTransitionValidation.agda
@@ -33,6 +34,8 @@ grep -q '^repairStaysInDeclaredNeighbourhood :' DASHI/Core/AdmissibleConsumerMDL
 grep -q '^reactionTransitionSystem :' DASHI/Chemistry/AdmissibleReactionTransitionBridgeExact.agda
 grep -q '^reactionEnablementMDLProblem :' DASHI/Chemistry/AdmissibleReactionTransitionBridgeExact.agda
 grep -q '^logisticInvariantRegionAsTransitionSystem :' DASHI/Dynamics/LogisticAdmissibleTransitionBridgeExact.agda
+grep -q '^planningAsAdmissibleTransitionSystem :' DASHI/Planning/PlanningAdmissibleTransitionBridgeExact.agda
+grep -q '^outerReserveActionIsNotAdmittedFromSpareCapacity :' DASHI/Planning/PlanningAdmissibleTransitionBridgeExact.agda
 grep -q '^rtxRefinementPreservesConsumerAdequacy :' DASHI/Programmes/RTXAdmissibleConsumerMDLBridgeExact.agda
 grep -q '^soilProcessMDLProblem :' DASHI/Environment/LESAdmissibleTransitionMDLCrossPollinationExact.agda
 
