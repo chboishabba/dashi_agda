@@ -13,6 +13,7 @@ module DASHI.Governance.SexedHistoricalSubjectDialecticBidiExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.ContextualDialecticRoleExact as Dialectic
+import DASHI.Core.TernaryRoleCarrierExact as Ternary
 import DASHI.Core.LacanIrigarayTernaryGrammarBridgeExact as LacanIrigaray
 import DASHI.Core.LacanSexuationTernarySeparationExact as Sexuation
 import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact as Subject
@@ -94,7 +95,7 @@ counterFormationDoesNotGuaranteeSynthesis ()
 ------------------------------------------------------------------------
 
 irigarayStillNotSignFlipOfLacan :
-  (p : DASHI.Core.TernaryRoleCarrierExact.TernaryPermutation) →
+  (p : Ternary.TernaryPermutation) →
   LacanIrigaray.GrammarPreserving p → ⊥
 irigarayStillNotSignFlipOfLacan =
   LacanIrigaray.noTernaryRelabellingPreservesGrammar
