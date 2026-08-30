@@ -128,10 +128,10 @@ koch2022 = verified-source
 spiritualSafety2026 : VerifiedSource
 spiritualSafety2026 = verified-source
   "spiritual-safety-2026-s-safe"
-  "Lianna McMinn et al."
+  "Lianna H. Chong; Leanne M. Tortez"
   "Development and Psychometric Validation of the Spiritual Safety Scale (S-SAFE): A Measure for Psychological Safety and Spiritual Abuse in North American Christian Communities"
   "2026"
-  "Journal of Religion and Health"
+  "Journal of Religion and Health 65(4):3634-3665"
   "10.1007/s10943-026-02734-y"
   "PubMed PMID 42474978"
   "psychometrically validated spiritual-safety/spiritual-abuse measure in primarily North American Christian samples; promising construct/instrument candidate but not direct childhood-Catholic H1/H5 evidence"
