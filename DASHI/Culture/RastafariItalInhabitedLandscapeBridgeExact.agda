@@ -2,6 +2,7 @@ module DASHI.Culture.RastafariItalInhabitedLandscapeBridgeExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Culture.RastafariItalLivityExact as Ital
 import DASHI.Environment.LESSituatedObservationInteractionExact as LESObs
 import DASHI.Planning.InhabitedLandscapeExact as Landscape
@@ -65,9 +66,9 @@ italProfileCanCoexistWithMultifunctionalLandscape = tt , (tt , tt)
 ------------------------------------------------------------------------
 
 italAttachmentDoesNotFlattenObservationContext :
-  (LESObs.INF.FactorsThrough
+  INF.FactorsThrough
     LESObs.anonymousReading
-    LESObs.situatedObservationSignature → ⊥)
+    LESObs.situatedObservationSignature → ⊥
 italAttachmentDoesNotFlattenObservationContext =
   LESObs.anonymousReadingCannotRecoverSituatedSignature
 
