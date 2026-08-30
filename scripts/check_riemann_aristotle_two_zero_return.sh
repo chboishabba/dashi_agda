@@ -45,6 +45,9 @@ FILES=(
   DASHI/Analysis/RiemannAristotleG2dScalarDeterminantSumTargetExact.agda
   DASHI/Analysis/RiemannAristotleG2eDeterminantTaperKernelExact.agda
   DASHI/Analysis/RiemannAristotleG2eTargetCenteredSymmetryNoGoExact.agda
+  DASHI/Analysis/RiemannAristotleThreeTaperSchurGramLeanReturnExact.agda
+  DASHI/Analysis/RiemannAristotleNearCoreDeterminantTaperLeanReturnExact.agda
+  DASHI/Analysis/RiemannAristotleProjectiveBalanceStrictBudgetNoGoExact.agda
   DASHI/Analysis/RiemannAristotleG2CurrentCutExact.agda
   DASHI/Analysis/RiemannAristotleG2CurrentCutRegression.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda
@@ -94,6 +97,9 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotleG2dScalarDeterminantSumTargetExact.agda
   agda DASHI/Analysis/RiemannAristotleG2eDeterminantTaperKernelExact.agda
   agda DASHI/Analysis/RiemannAristotleG2eTargetCenteredSymmetryNoGoExact.agda
+  agda DASHI/Analysis/RiemannAristotleThreeTaperSchurGramLeanReturnExact.agda
+  agda DASHI/Analysis/RiemannAristotleNearCoreDeterminantTaperLeanReturnExact.agda
+  agda DASHI/Analysis/RiemannAristotleProjectiveBalanceStrictBudgetNoGoExact.agda
   agda DASHI/Analysis/RiemannAristotleG2CurrentCutRegression.agda
   agda DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 else
