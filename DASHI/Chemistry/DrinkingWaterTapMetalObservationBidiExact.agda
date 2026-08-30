@@ -60,6 +60,9 @@ record TapMetalObservationReceipt : Set₁ where
     hiddenReleaseState : Metal.MetalReleaseState
     empiricalContact : Contact.EmpiricalContactReceipt
 
+    contactObservableSurfaceClosed :
+      Contact.observableContactClosed empiricalContact ≡ true
+
     contactDoesNotPromoteTruth :
       Contact.promotesTruth empiricalContact ≡ false
 
