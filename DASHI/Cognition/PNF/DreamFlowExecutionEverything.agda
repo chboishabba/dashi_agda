@@ -40,6 +40,11 @@ import DASHI.Cognition.PNF.StreamingSemanticPacmanKernelExact
 -- buffer/replay/EOF-tail evidence without turning scheduling into semantics.
 import DASHI.Cognition.PNF.StreamingPhysicalOverlapReceiptExact
 
+-- Admission gate for finer/better-balanced physical parser schedules.  Exact
+-- owned coverage, evidence-only context, ordered observations, and final
+-- semantic authority must survive refinement; performance remains empirical.
+import DASHI.Cognition.PNF.StreamingPhysicalPartitionRefinementExact
+
 -- Activation cut for the live packed sentence compiler.  G1/G2 and the stable
 -- G4 evidence mechanism are executable; G3 parity plus the production-default
 -- cutover still guard full production certification.
