@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Cognition.PNF.DecisionAutonomyExact as Autonomy
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Culture.ChildReligiousAutonomyFormationBidiExact as Formation
+import DASHI.Culture.ChildReligiousEpistemicReopeningBidiExact as Epistemic
 
 ------------------------------------------------------------------------
 -- Focused consumer root for the paper-specific BIDI owners.
@@ -125,3 +126,43 @@ uniqueFormationRouteStillUnrecoverable :
     Formation.canonicalChildReligiousAutonomyFormationBoundary
   ≡ false
 uniqueFormationRouteStillUnrecoverable = refl
+
+------------------------------------------------------------------------
+-- Epistemic reopening / profession regression.
+------------------------------------------------------------------------
+
+sameProfessionSurfaceDifferentEpistemicRoute :
+  Epistemic.professionSurface Epistemic.revisablyEndorsed
+  ≡ Epistemic.professionSurface Epistemic.inheritedClosedProfession
+sameProfessionSurfaceDifferentEpistemicRoute = refl
+
+professionNotAutonomousEndorsement :
+  Epistemic.ProfessionPromotesAutonomousEndorsement → ⊥
+professionNotAutonomousEndorsement =
+  Epistemic.professionDoesNotPromoteAutonomousEndorsement
+
+counterEvidenceNotSafeRevision :
+  Epistemic.CounterEvidenceAccessPromotesSafeRevision → ⊥
+counterEvidenceNotSafeRevision = Epistemic.counterEvidenceDoesNotPromoteSafeRevision
+
+safeRevisionNotForcedBeliefChange :
+  Epistemic.SafeRevisionPromotesBeliefChange → ⊥
+safeRevisionNotForcedBeliefChange = Epistemic.safeRevisionDoesNotPromoteBeliefChange
+
+publicProfessionDoesNotRecoverUniqueEpistemicRoute :
+  Epistemic.ChildReligiousEpistemicReopeningBoundary.publicProfessionRecoversUniqueEpistemicRoute
+    Epistemic.canonicalChildReligiousEpistemicReopeningBoundary
+  ≡ false
+publicProfessionDoesNotRecoverUniqueEpistemicRoute = refl
+
+reopeningCanMatterWithoutBeliefChange :
+  Epistemic.ChildReligiousEpistemicReopeningBoundary.reopeningCanMatterWithoutForcingBeliefChange
+    Epistemic.canonicalChildReligiousEpistemicReopeningBoundary
+  ≡ true
+reopeningCanMatterWithoutBeliefChange = refl
+
+inheritedBeliefMayLaterBeRevisablyEndorsed :
+  Epistemic.ChildReligiousEpistemicReopeningBoundary.inheritedBeliefCanLaterBeRevisablyEndorsed
+    Epistemic.canonicalChildReligiousEpistemicReopeningBoundary
+  ≡ true
+inheritedBeliefMayLaterBeRevisablyEndorsed = refl
