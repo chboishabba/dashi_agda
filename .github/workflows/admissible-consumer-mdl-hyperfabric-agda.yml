@@ -10,6 +10,7 @@ on:
       - 'DASHI/Chemistry/AdmissibleReactionTransitionBridgeExact.agda'
       - 'DASHI/Chemistry/Everything.agda'
       - 'DASHI/Dynamics/LogisticAdmissibleTransitionBridgeExact.agda'
+      - 'DASHI/Planning/PlanningAdmissibleTransitionBridgeExact.agda'
       - 'DASHI/Programmes/RTXAdmissibleConsumerMDLBridgeExact.agda'
       - 'DASHI/Programmes/Everything.agda'
       - 'DASHI/Environment/LESAdmissibleTransitionMDLCrossPollinationExact.agda'
