@@ -6,6 +6,7 @@ cd "$ROOT"
 
 FILES=(
   DASHI/Chemistry/RegulatoryAnalyteCoverageBidiExact.agda
+  DASHI/Chemistry/RegulatoryAnalytePanelRefinementExact.agda
   DASHI/Chemistry/Everything.agda
   DASHI/RegulatoryAnalyteCoverageValidation.agda
 )
@@ -25,5 +26,8 @@ grep -q '^certificateCannotRecoverCompleteOffPanelState :' DASHI/Chemistry/Regul
 grep -q '^offPanelCannotAutoPromoteToUndetectable :' DASHI/Chemistry/RegulatoryAnalyteCoverageBidiExact.agda
 grep -q '^socialMediaAssertionCannotAutoPromoteToVerifiedBypass :' DASHI/Chemistry/RegulatoryAnalyteCoverageBidiExact.agda
 grep -q '^canonicalRegulatoryAnalyteCoverageBoundary :' DASHI/Chemistry/RegulatoryAnalyteCoverageBidiExact.agda
+grep -q '^requiredPanelCannotRecoverOffPanelPresence :' DASHI/Chemistry/RegulatoryAnalytePanelRefinementExact.agda
+grep -q '^expandedProjectionRecoversDeclaredOffPanelCoordinate :' DASHI/Chemistry/RegulatoryAnalytePanelRefinementExact.agda
+grep -q '^expandedPanelCannotAutoPromoteToUniversalChemicalCompleteness :' DASHI/Chemistry/RegulatoryAnalytePanelRefinementExact.agda
 
 scripts/run_agda29_parallel_check.sh DASHI/RegulatoryAnalyteCoverageValidation.agda
