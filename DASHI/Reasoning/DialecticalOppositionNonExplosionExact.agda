@@ -155,7 +155,7 @@ Contradiction : Set → Set
 Contradiction P = P × ¬ P
 
 explode : {P Q : Set} → Contradiction P → Q
-explode (_ , notP) = ⊥-elim (notP _)
+explode (p , notP) = ⊥-elim (notP p)
 
 -- A concrete inhabited proposition witnesses why arbitrary context-indexed
 -- reports cannot generically be re-read as a logical contradiction.
