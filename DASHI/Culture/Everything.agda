@@ -10,4 +10,5 @@ import DASHI.Culture.KimmererBraidTransferResidualBoundaryExact
 import DASHI.Culture.ReligiousPowerChildFearClaimBidiExact
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact
 import DASHI.Culture.ChildReligiousAutonomyFormationBidiExact
+import DASHI.Culture.ChildReligiousEpistemicReopeningBidiExact
 import DASHI.Culture.HistoricalSocialTotalityBidiExact
