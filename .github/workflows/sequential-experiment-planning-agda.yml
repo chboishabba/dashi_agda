@@ -1,0 +1,56 @@
+name: Sequential experiment planning Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Core/ExperimentalCoordinateDesignExact.agda'
+      - 'DASHI/Core/ActionabilityCostedExperimentChoiceExact.agda'
+      - 'DASHI/Core/CommonExperimentRealisationExact.agda'
+      - 'DASHI/Core/DiscriminatorSynthesisExact.agda'
+      - 'DASHI/Core/CoarseFineRelativeFibreExact.agda'
+      - 'DASHI/Core/RelativeFineModelFidelityOrthogonalityExact.agda'
+      - 'DASHI/Core/ConsumerDecisionAdequacyFromReductionExact.agda'
+      - 'DASHI/Core/ConsumerAdequacyJointPolicyBidiCompilerExact.agda'
+      - 'DASHI/Core/SequentialConsumerExperimentPlannerExact.agda'
+      - 'DASHI/Core/SequentialRobustActionabilityPlannerExact.agda'
+      - 'DASHI/Core/SequentialRelationalExperimentPlannerExact.agda'
+      - 'DASHI/Core/JointSequentialInformationFidelityPolicyExact.agda'
+      - 'DASHI/Core/ConsumerReductionJointPolicyBridgeExact.agda'
+      - 'DASHI/Core/JointSequentialInformationFidelityFixtureExact.agda'
+      - 'DASHI/Core/SequentialExperimentPlanningValidation.agda'
+      - 'DASHI/Core/Everything.agda'
+      - 'DASHI/Biology/JCoarseFineConsumerReductionBridgeExact.agda'
+      - 'DASHI/Physics/Foundations/GRQFTDiscriminatorSynthesisExact.agda'
+      - 'DASHI/Physics/Foundations/GRQFTSequentialExperimentPlannerExact.agda'
+      - 'DASHI/Physics/Foundations/Everything.agda'
+      - 'DASHI/Environment/LESDiscriminatorSynthesisExact.agda'
+      - 'DASHI/Environment/LESSequentialExperimentPlannerExact.agda'
+      - 'DASHI/Environment/LESJointSequentialMeasurementFidelityPolicyExact.agda'
+      - 'DASHI/Environment/LESProofDerivedDecisionAdequacyExact.agda'
+      - 'DASHI/Environment/LESAdaptiveConsumerLoopCrossPollinationExact.agda'
+      - 'DASHI/Environment/LESSituatedSocioEcologicalHyperfabricValidation.agda'
+      - 'DASHI/ReopenableConsumerInterventionCrossDomainEverything.agda'
+      - 'scripts/check_sequential_experiment_planning.sh'
+      - '.github/workflows/sequential-experiment-planning-agda.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: dashi-global-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    env:
+      AGDA_BIN: agda
+      DASHI_REPO_ROOT: ${{ github.workspace }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Materialize Agda source dependencies
+        run: git submodule update --init --depth 1 DCHoTT-Agda cubical
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Run sequential experiment-planning audit
+        run: nix develop .# --command bash scripts/check_sequential_experiment_planning.sh
