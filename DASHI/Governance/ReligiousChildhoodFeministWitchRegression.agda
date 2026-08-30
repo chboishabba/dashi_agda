@@ -14,6 +14,7 @@ import DASHI.Governance.WitchTrialEvidenceSubjectAttributionExact as WitchTrial
 import DASHI.Governance.SuffrageWitchReclamationGenealogyExact as Genealogy
 import DASHI.Governance.HistoricalEventMeaningProvenanceBidiExact as History
 import DASHI.Governance.SexedHistoricalSubjectDialecticBidiExact as SexDialectic
+import DASHI.Governance.SexedHistoricalCoConstitutionHyperfabricExact as Hyper
 
 ------------------------------------------------------------------------
 -- Fine-state route survives public behavioural collapse.
@@ -54,8 +55,7 @@ noSalemWiccaPromotionRegression =
   Genealogy.modernWiccaDoesNotPromoteSalemWiccanIdentity
 
 ------------------------------------------------------------------------
--- Shared historical-event discipline: a burned-factory surface cannot recover
--- accidental versus politically motivated cause.
+-- Shared historical-event discipline.
 ------------------------------------------------------------------------
 
 factoryCauseRegression :
@@ -63,8 +63,7 @@ factoryCauseRegression :
 factoryCauseRegression = History.burnedSurfaceCannotRecoverCause
 
 ------------------------------------------------------------------------
--- Sexed historical dialectic: neither constructed side has an intrinsic
--- thesis/antithesis role, and opposition is not logical negation.
+-- Sexed historical dialectic.
 ------------------------------------------------------------------------
 
 masculineNoIntrinsicDialecticRoleRegression =
@@ -77,6 +76,25 @@ historicalOppositionNotLogicalNegationRegression :
   SexDialectic.HistoricalOppositionPromotesLogicalNegation → ⊥
 historicalOppositionNotLogicalNegationRegression =
   SexDialectic.historicalOppositionDoesNotPromoteLogicalNegation
+
+------------------------------------------------------------------------
+-- Hyberfabric/co-constitution regressions.
+------------------------------------------------------------------------
+
+constructionModeDoesNotRecoverPowerRegression :
+  INF.FactorsThrough Hyper.relationSurface Hyper.legalPowerOfConstructor → ⊥
+constructionModeDoesNotRecoverPowerRegression =
+  Hyper.constructionModeCannotRecoverLegalPower
+
+publicGenderDoesNotRecoverRelationalSignatureRegression :
+  INF.FactorsThrough Hyper.publicGender Hyper.fullRelationalSignature → ⊥
+publicGenderDoesNotRecoverRelationalSignatureRegression =
+  Hyper.publicGenderCannotRecoverRelationalSignature
+
+mutualConstructionDoesNotMeanPowerParityRegression :
+  Hyper.MutualConstructionImpliesPowerParity → ⊥
+mutualConstructionDoesNotMeanPowerParityRegression =
+  Hyper.mutualConstructionDoesNotImplyPowerParity
 
 ------------------------------------------------------------------------
 -- Empirical atlas remains partial rather than decorative completion.
@@ -102,6 +120,9 @@ record ReligiousChildhoodFeministWitchRegressionBoundary : Set where
     masculineIsIntrinsicDialecticThesis : Bool
     feminineIsIntrinsicDialecticAntithesis : Bool
     historicalOppositionEqualsLogicalNegation : Bool
+    mutualConstructionMeansPowerParity : Bool
+    publicGenderRecoversFullCoConstitution : Bool
+    constructionModeIsPowerScore : Bool
     currentReligiousAtlasIsCausallyComplete : Bool
     currentReligiousAtlasIsPartiallyInstantiated : Bool
 
@@ -109,4 +130,4 @@ canonicalReligiousChildhoodFeministWitchRegressionBoundary :
   ReligiousChildhoodFeministWitchRegressionBoundary
 canonicalReligiousChildhoodFeministWitchRegressionBoundary =
   religious-childhood-feminist-witch-regression-boundary
-    false false false false false false false false false true
+    false false false false false false false false false false false false true
