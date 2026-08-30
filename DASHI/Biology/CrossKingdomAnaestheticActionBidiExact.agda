@@ -93,11 +93,6 @@ data EvidentiaryStatus : Set where
   notEstablished
   : EvidentiaryStatus
 
-------------------------------------------------------------------------
--- Constructor separation prevents a shared label from erasing lineage or
--- mechanistic level.
-------------------------------------------------------------------------
-
 plantAndAnimalDistinct : plantLineage ≡ animalLineage → ⊥
 plantAndAnimalDistinct ()
 
@@ -111,93 +106,62 @@ plantAndAnimalEndpointTagsDistinct :
   plantEndpointTag p ≡ animalEndpointTag a → ⊥
 plantAndAnimalEndpointTagsDistinct _ _ ()
 
-------------------------------------------------------------------------
--- Forward direction: perturbation/substrate -> lineage-specific endpoint.
-------------------------------------------------------------------------
-
 record ForwardAnaestheticTrace : Set₁ where
   constructor forwardAnaestheticTrace
   field
     Anaesthetic : Set
     anaesthetic : Anaesthetic
     sharedSubstrate : SharedCellularSubstrate
-
     PlantState : Set
     AnimalState : Set
-
     plantBefore : PlantState
     plantAfter : PlantState
     animalBefore : AnimalState
     animalAfter : AnimalState
-
     plantEndpoint : PlantAnaestheticEndpoint
     animalEndpoint : AnimalAnaestheticEndpoint
-
     plantPerturbation : Anaesthetic → PlantState → PlantState
     animalPerturbation : Anaesthetic → AnimalState → AnimalState
-
     plantTransitionIsActual :
       plantPerturbation anaesthetic plantBefore ≡ plantAfter
     animalTransitionIsActual :
       animalPerturbation anaesthetic animalBefore ≡ animalAfter
-
     sharedSubstrateReference : String
     plantEndpointReference : String
     animalEndpointReference : String
 
 open ForwardAnaestheticTrace public
 
-------------------------------------------------------------------------
--- Backward direction: observed endpoint -> no stronger mechanistic or
--- phenomenological conclusion than the evidence warrants.
-------------------------------------------------------------------------
-
 record BackwardAnaestheticAudit : Set₁ where
   constructor backwardAnaestheticAudit
   field
     observedPlantEndpoint : PlantAnaestheticEndpoint
     observedAnimalEndpoint : AnimalAnaestheticEndpoint
-
     plantMechanismStatus : EvidentiaryStatus
     animalMechanismStatus : EvidentiaryStatus
-
     plantConsciousnessStatus : EvidentiaryStatus
     animalConsciousnessStatus : EvidentiaryStatus
-
     plantEndpointToMechanismReference : String
     animalEndpointToMechanismReference : String
     consciousnessBoundaryReference : String
-
     plantAnaestheticResponseDoesNotEstablishConsciousness :
       plantConsciousnessStatus ≡ notEstablished
 
 open BackwardAnaestheticAudit public
-
-------------------------------------------------------------------------
--- BIDI weld: the same comparison carries both causal/forward and
--- evidentiary/backward directions.
-------------------------------------------------------------------------
 
 record CrossKingdomAnaestheticBidi : Set₁ where
   constructor crossKingdomAnaestheticBidi
   field
     forward : ForwardAnaestheticTrace
     backward : BackwardAnaestheticAudit
-
     samePlantEndpoint :
       plantEndpoint forward ≡ observedPlantEndpoint backward
     sameAnimalEndpoint :
       animalEndpoint forward ≡ observedAnimalEndpoint backward
-
     comparisonLevel : ActionLayer
     sourceSynthesisReference : String
 
 open CrossKingdomAnaestheticBidi public
-
-------------------------------------------------------------------------
--- Plant electrical signalling can be compared with animal electrical
--- signalling without identifying the two network architectures.
-------------------------------------------------------------------------
 
 record BioelectricComparisonBridge
     (B : Bioelectric.BioelectricNetwork) : Set₁ where
@@ -205,23 +169,16 @@ record BioelectricComparisonBridge
   field
     plantElectricalEndpoint : PlantAnaestheticEndpoint
     animalElectricalEndpoint : AnimalAnaestheticEndpoint
-
     sharedCarrierIsBioelectric : Set
     sharedCarrierWitness : sharedCarrierIsBioelectric
-
     plantSignalArchitectureReference : String
     animalNeuralArchitectureReference : String
     ionChannelComparisonReference : String
-
     plantElectricalSignallingIsAnimalNeuralNetwork : Bool
     plantElectricalSignallingIsAnimalNeuralNetworkIsFalse :
       plantElectricalSignallingIsAnimalNeuralNetwork ≡ false
 
 open BioelectricComparisonBridge public
-
-------------------------------------------------------------------------
--- Exact epistemic gates.
-------------------------------------------------------------------------
 
 record AnaestheticInferenceBoundary : Set where
   constructor anaestheticInferenceBoundary
@@ -229,19 +186,15 @@ record AnaestheticInferenceBoundary : Set where
     sharedCellularSensitivityImpliesSharedConsciousState : Bool
     sharedCellularSensitivityImpliesSharedConsciousStateIsFalse :
       sharedCellularSensitivityImpliesSharedConsciousState ≡ false
-
     plantActionPotentialBlockImpliesUnconsciousness : Bool
     plantActionPotentialBlockImpliesUnconsciousnessIsFalse :
       plantActionPotentialBlockImpliesUnconsciousness ≡ false
-
     plantMovementSuppressionImpliesPainCapacity : Bool
     plantMovementSuppressionImpliesPainCapacityIsFalse :
       plantMovementSuppressionImpliesPainCapacity ≡ false
-
     conservedIonChannelEffectsPermitCrossKingdomMechanisticComparison : Bool
     conservedIonChannelEffectsPermitCrossKingdomMechanisticComparisonIsTrue :
       conservedIonChannelEffectsPermitCrossKingdomMechanisticComparison ≡ true
-
     lineageSpecificNetworkArchitectureMustRemainExplicit : Bool
     lineageSpecificNetworkArchitectureMustRemainExplicitIsTrue :
       lineageSpecificNetworkArchitectureMustRemainExplicit ≡ true
@@ -254,10 +207,6 @@ canonicalAnaestheticInferenceBoundary =
     false refl
     true refl
     true refl
-
-------------------------------------------------------------------------
--- Direct theorem-level forms of the two most important non-identifications.
-------------------------------------------------------------------------
 
 plantActionPotentialSuppressionIsNotAnimalUnconsciousness :
   plantEndpointTag plantActionPotentialSuppressed
@@ -272,10 +221,6 @@ plantMovementSuppressionIsNotAnimalUnconsciousness ()
 notEstablishedIsNotDirectObservation :
   notEstablished ≡ directlyObserved → ⊥
 notEstablishedIsNotDirectObservation ()
-
-------------------------------------------------------------------------
--- Source constants.
-------------------------------------------------------------------------
 
 yokawaPlantAnaesthesiaDOI : String
 yokawaPlantAnaesthesiaDOI = "10.1093/aob/mcx155"
