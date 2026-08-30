@@ -82,6 +82,10 @@ data AnimalAnaestheticEndpoint : Set where
   recoveryAfterRemoval
   : AnimalAnaestheticEndpoint
 
+data CrossKingdomEndpoint : Set where
+  plantEndpointTag : PlantAnaestheticEndpoint → CrossKingdomEndpoint
+  animalEndpointTag : AnimalAnaestheticEndpoint → CrossKingdomEndpoint
+
 data EvidentiaryStatus : Set where
   directlyObserved
   mechanisticallySupported
@@ -101,9 +105,11 @@ cellularAndConsciousLayersDistinct :
   cellularProcessLayer ≡ consciousStateLayer → ⊥
 cellularAndConsciousLayersDistinct ()
 
-plantMovementAndAnimalUnconsciousnessAreDistinctEndpointTypes :
-  PlantAnaestheticEndpoint → AnimalAnaestheticEndpoint → Set
-plantMovementAndAnimalUnconsciousnessAreDistinctEndpointTypes _ _ = ⊤
+plantAndAnimalEndpointTagsDistinct :
+  (p : PlantAnaestheticEndpoint) →
+  (a : AnimalAnaestheticEndpoint) →
+  plantEndpointTag p ≡ animalEndpointTag a → ⊥
+plantAndAnimalEndpointTagsDistinct _ _ ()
 
 ------------------------------------------------------------------------
 -- Forward direction: perturbation/substrate -> lineage-specific endpoint.
@@ -254,8 +260,14 @@ canonicalAnaestheticInferenceBoundary =
 ------------------------------------------------------------------------
 
 plantActionPotentialSuppressionIsNotAnimalUnconsciousness :
-  plantActionPotentialSuppressed ≡ plantOrganMovementSuppressed → ⊥
+  plantEndpointTag plantActionPotentialSuppressed
+  ≡ animalEndpointTag unconsciousnessEndpoint → ⊥
 plantActionPotentialSuppressionIsNotAnimalUnconsciousness ()
+
+plantMovementSuppressionIsNotAnimalUnconsciousness :
+  plantEndpointTag plantOrganMovementSuppressed
+  ≡ animalEndpointTag unconsciousnessEndpoint → ⊥
+plantMovementSuppressionIsNotAnimalUnconsciousness ()
 
 notEstablishedIsNotDirectObservation :
   notEstablished ≡ directlyObserved → ⊥
