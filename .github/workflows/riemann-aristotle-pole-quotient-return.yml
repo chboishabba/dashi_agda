@@ -1,0 +1,25 @@
+name: Riemann Aristotle pole-quotient return
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Analysis/RiemannAristotlePoleQuotientComplementMarginCompilerExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleQuotientBidiMeetingExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleQuotientSplitComplementBudgetExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleRankTwoPoleQuotientLaneSeparationExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleQuotientOffOrdinateBudgetTargetExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleQuotientGammaBudgetTargetExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleQuotientClusterMarginTargetExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleQuotientCurrentCutExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleQuotientCurrentCutRegression.agda'
+      - 'scripts/check_riemann_aristotle_pole_quotient_return.sh'
+      - '.github/workflows/riemann-aristotle-pole-quotient-return.yml'
+  workflow_dispatch:
+
+jobs:
+  focused-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trust scan and focused Agda check when toolchain is available
+        run: bash scripts/check_riemann_aristotle_pole_quotient_return.sh
