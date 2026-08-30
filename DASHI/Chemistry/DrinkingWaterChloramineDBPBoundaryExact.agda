@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Chemistry.ChlorAlkaliSaltIndustryExact as Industry
 import DASHI.Chemistry.DrinkingWaterChlorineSpeciationExact as Free
 import DASHI.Chemistry.TransitionKernel as Chemistry
 
@@ -14,6 +15,14 @@ import DASHI.Chemistry.TransitionKernel as Chemistry
 -- Keeps combined chlorine and DBP risk as separate chemistry/monitoring
 -- obligations.  It deliberately does not encode one universal breakpoint,
 -- dose, CT value, or DBP yield law.
+--
+-- Canonical qualitative monochloramine bookkeeping:
+--
+--   NH3 + HOCl -> NH2Cl + H2O
+--
+-- The broader chloramine family and breakpoint behaviour remain application
+-- supplied because pH, chlorine:ammonia ratio, temperature and contact time
+-- alter which combined-chlorine species dominate.
 ------------------------------------------------------------------------
 
 ammoniaSpecies : Chemistry.Species
@@ -66,7 +75,7 @@ monochloramineFormationTransition = record
       ∷ []
   ; Chemistry.products =
       record { Chemistry.species = monochloramineSpecies ; Chemistry.coefficient = 1 }
-      ∷ record { Chemistry.species = Chemistry.Species.species (record { Chemistry.species = Free.protonSpecies ; Chemistry.coefficient = 1 }) ; Chemistry.coefficient = 1 }
+      ∷ record { Chemistry.species = Industry.waterSpecies ; Chemistry.coefficient = 1 }
       ∷ []
   ; Chemistry.catalysts = []
   ; Chemistry.rateLaw = chloramineRate
@@ -74,11 +83,6 @@ monochloramineFormationTransition = record
   ; Chemistry.reversibility = Chemistry.conditionallyReversible
   ; Chemistry.evidence = Chemistry.literatureEstablished
   }
-
--- The exact water coproduct/proton bookkeeping depends on the chosen acid-base
--- representation, so downstream consumers must use the reference fields below
--- rather than treating this qualitative transition as a complete mass-action
--- plant model.
 
 data ResidualKind : Set where
   freeChlorineResidual
@@ -91,6 +95,7 @@ record CombinedChlorineResidualState : Set₁ where
     network : Chemistry.ReactionNetwork
     freeChlorineState : Free.FreeChlorineResidualState
     chloramineFormation : Chemistry.Transition
+    chloramineFormationIsCanonical : chloramineFormation ≡ monochloramineFormationTransition
     ammoniaSourceReference : String
     ammoniaAmmoniumSpeciationReference : String
     chlorineToAmmoniaRatioReference : String
