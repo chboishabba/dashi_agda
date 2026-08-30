@@ -2,22 +2,6 @@ module DASHI.Culture.ChildReligiousAutonomyFormationBidiExact where
 
 ------------------------------------------------------------------------
 -- CHILD RELIGIOUS FORMATION / AUTONOMY BIDI
---
--- This owner continues the source-bounded religious-power thread without
--- making religious formation itself equivalent to coercion, harm or
--- entrapment.  It cross-pollinates the merged multidimensional autonomy
--- formalism with the John Anthony Brown manuscript audit already on this PR.
---
--- Forward lane:
---   developmental dependence + authority relation + threat/reward surface
---   + alternative/refusal/revision conditions -> formation episode
---
--- Reverse lane:
---   observed conformity / identity / participation -> only the autonomy and
---   formation coordinates actually recoverable from receipts.
---
--- The central non-collapse is inherited literally from DecisionAutonomyExact:
--- the same emitted action can occur under different autonomy states.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -26,10 +10,6 @@ open import Agda.Builtin.String using (String)
 import DASHI.Cognition.PNF.DecisionAutonomyExact as Autonomy
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Culture.ReligiousPowerChildFearClaimBidiExact as ClaimAudit
-
-------------------------------------------------------------------------
--- Developmental / relational formation coordinates.
-------------------------------------------------------------------------
 
 record FormationConditions : Set where
   constructor formation-conditions
@@ -57,10 +37,6 @@ record FormationEpisode : Set where
 
 open FormationEpisode public
 
-------------------------------------------------------------------------
--- The existing autonomy owner is consumed rather than cloned.
-------------------------------------------------------------------------
-
 freeFormationAxes : Autonomy.AutonomyAxes
 freeFormationAxes = Autonomy.freeAxes
 
@@ -77,13 +53,7 @@ constrainedFormationNotAutonomous = Autonomy.constrainedNotAutonomous
 sameActionStillDoesNotDetermineAutonomy :
   Autonomy.emitted Autonomy.autonomousWithdrawal
   ≡ Autonomy.emitted Autonomy.constrainedWithdrawal
-sameActionStillDoesNotDetermineAutonomy =
-  proj₁ Autonomy.sameActionDoesNotDetermineAutonomy
-
-------------------------------------------------------------------------
--- A formation episode is not classified solely by doctrine or by whether the
--- child outwardly participates.  The autonomy coordinates are independent.
-------------------------------------------------------------------------
+sameActionStillDoesNotDetermineAutonomy = refl
 
 openFormationConditions : FormationConditions
 openFormationConditions = formation-conditions
@@ -113,11 +83,6 @@ samePublicParticipationDifferentAutonomy :
   publicSurface openFormationEpisode ≡ publicSurface closedFormationEpisode
 samePublicParticipationDifferentAutonomy = refl
 
-------------------------------------------------------------------------
--- Reopening is longitudinal.  Early formation alone neither proves coercion
--- nor settles later autonomy; later access/refusal/revision must be observed.
-------------------------------------------------------------------------
-
 record ReopeningReceipt : Set where
   constructor reopening-receipt
   field
@@ -140,11 +105,6 @@ canonicalClosedReopening : ReopeningReceipt
 canonicalClosedReopening = reopening-receipt
   false false false false false false
   "finite constrained reopening witness; not a claim about all religious families"
-
-------------------------------------------------------------------------
--- Threat representation is separated from experienced fear, behavioural
--- effect, enduring harm, and entrapment.  Each promotion needs its own receipt.
-------------------------------------------------------------------------
 
 record CosmologicalThreatReceipt : Set where
   constructor cosmological-threat-receipt
@@ -184,10 +144,6 @@ religiousIdentityDoesNotPromoteAutonomousEndorsement :
   ReligiousIdentityPromotesAutonomousEndorsement → ⊥
 religiousIdentityDoesNotPromoteAutonomousEndorsement ()
 
-------------------------------------------------------------------------
--- BIDI audit object: forward formation coordinates and backward uncertainty.
-------------------------------------------------------------------------
-
 data RecoveryStatus : Set where
   recovered : RecoveryStatus
   bounded : RecoveryStatus
@@ -218,7 +174,7 @@ record ChildReligiousFormationBidi : Set where
     paperSource : Brown.BrownPaperSource
     forwardEpisode : FormationEpisode
     backwardAudit : FormationBackwardAudit
-    existingClaimAuditBoundary : ClaimAudit.ReligiousPowerClaimBoundary
+    existingClaimAuditBoundary : ClaimAudit.ReligiousPowerBidiBoundary
     autonomyBoundary : Autonomy.AutonomyBoundary
 
 open ChildReligiousFormationBidi public
@@ -228,26 +184,16 @@ canonicalChildReligiousFormationBidi = child-religious-formation-bidi
   Brown.johnAnthonyBrownPaper
   closedFormationEpisode
   canonicalBehaviourOnlyBackwardAudit
-  ClaimAudit.canonicalReligiousPowerClaimBoundary
+  ClaimAudit.canonicalReligiousPowerBidiBoundary
   Autonomy.canonicalAutonomyBoundary
 
-------------------------------------------------------------------------
--- Cross-pollination back into the manuscript audit.
-------------------------------------------------------------------------
-
-brownHellClaimStillNeedsMechanismReceipt :
-  Brown.FormalObligation
+brownHellClaimStillNeedsMechanismReceipt : Brown.FormalObligation
 brownHellClaimStillNeedsMechanismReceipt =
   Brown.paperToPrimaryObligation Brown.hellDamnationFearClaim
 
-brownEarlyFormationStillNeedsCapacityReceipt :
-  Brown.FormalObligation
+brownEarlyFormationStillNeedsCapacityReceipt : Brown.FormalObligation
 brownEarlyFormationStillNeedsCapacityReceipt =
   Brown.paperToPrimaryObligation Brown.earlyGodSatanFormationClaim
-
-------------------------------------------------------------------------
--- Final no-promotion boundary.
-------------------------------------------------------------------------
 
 record ChildReligiousAutonomyFormationBoundary : Set where
   constructor child-religious-autonomy-formation-boundary
