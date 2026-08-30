@@ -10,6 +10,7 @@ import DASHI.Culture.JohnAnthonyBrownStudyDesignBidiExact as Design
 import DASHI.Culture.JohnAnthonyBrownPaperSectionHypothesisManifestExact as Manifest
 import DASHI.Culture.ChildReligiousAutonomyFormationBidiExact as Formation
 import DASHI.Culture.ChildReligiousEpistemicReopeningBidiExact as Epistemic
+import DASHI.Culture.ReligiousThreatPredicateDialecticBidiExact as Threat
 
 ------------------------------------------------------------------------
 -- Focused consumer root for the paper-specific BIDI owners.
@@ -238,3 +239,60 @@ inheritedBeliefMayLaterBeRevisablyEndorsed :
     Epistemic.canonicalChildReligiousEpistemicReopeningBoundary
   ≡ true
 inheritedBeliefMayLaterBeRevisablyEndorsed = refl
+
+------------------------------------------------------------------------
+-- Predicate-normal / dialectical threat regression.
+------------------------------------------------------------------------
+
+hellThreatLiteralPinned :
+  Threat.naturalLanguage Threat.hellThreatAssertion
+  ≡ "If you do X, you're going to hell."
+hellThreatLiteralPinned = refl
+
+bareThreatNotPressureCandidate :
+  Threat.BareUtterancePromotesPressureCandidate → ⊥
+bareThreatNotPressureCandidate = Threat.bareUtteranceDoesNotPromotePressureCandidate
+
+pressureCandidateNotEntrapment :
+  Threat.PressureCandidatePromotesEntrapment → ⊥
+pressureCandidateNotEntrapment = Threat.pressureCandidateDoesNotPromoteEntrapment
+
+pressureCandidateNotLegalCoercion :
+  Threat.PressureCandidatePromotesLegalCoercion → ⊥
+pressureCandidateNotLegalCoercion = Threat.pressureCandidateDoesNotPromoteLegalCoercion
+
+behaviourEffectDoesNotProveThreatTruth :
+  Threat.BehaviourEffectPromotesThreatTruth → ⊥
+behaviourEffectDoesNotProveThreatTruth = Threat.behaviourEffectDoesNotPromoteThreatTruth
+
+threatTruthDoesNotProveBehaviourEffect :
+  Threat.ThreatTruthPromotesBehaviourEffect → ⊥
+threatTruthDoesNotProveBehaviourEffect = Threat.threatTruthDoesNotPromoteBehaviourEffect
+
+doctrinalCounterclaimNotNegation :
+  Threat.doctrinalCounterclaim ≡ Threat.logicalNegation → ⊥
+doctrinalCounterclaimNotNegation = Threat.doctrinalCounterclaimNotLogicalNegation
+
+ethicalCounterpositionNotNegation :
+  Threat.logicalNegation ≡ Threat.ethicalCounterposition → ⊥
+ethicalCounterpositionNotNegation = Threat.logicalNegationNotEthicalCounterposition
+
+authorityChallengeNotNegation :
+  Threat.authorityChallenge ≡ Threat.logicalNegation → ⊥
+authorityChallengeNotNegation = Threat.authorityChallengeNotLogicalNegation
+
+unresolvedThreatComponentNotRefutation :
+  Threat.UnresolvedPromotesFalse → ⊥
+unresolvedThreatComponentNotRefutation = Threat.unresolvedDoesNotPromoteFalse
+
+recipientEffectNeedsSeparateReceipt :
+  Threat.ReligiousThreatPredicateDialecticBoundary.recipientEffectRequiresIndependentReceipt
+    Threat.canonicalReligiousThreatPredicateDialecticBoundary
+  ≡ true
+recipientEffectNeedsSeparateReceipt = refl
+
+authorityProvenanceNeedsSeparateReceipt :
+  Threat.ReligiousThreatPredicateDialecticBoundary.authorityProvenanceRequiresIndependentReceipt
+    Threat.canonicalReligiousThreatPredicateDialecticBoundary
+  ≡ true
+authorityProvenanceNeedsSeparateReceipt = refl
