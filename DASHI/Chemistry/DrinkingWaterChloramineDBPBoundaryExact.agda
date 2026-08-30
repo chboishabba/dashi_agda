@@ -12,6 +12,14 @@ import DASHI.Chemistry.TransitionKernel as Chemistry
 ------------------------------------------------------------------------
 -- CHLORAMINE / DISINFECTION-BYPRODUCT BOUNDARY
 --
+-- Source anchors:
+--   US EPA, Effectiveness of Disinfectant Residuals in the Distribution
+--   System (2007): aqueous chlorine + ammonia competing chloramine chemistry,
+--   with pH, chlorine:ammonia ratio, temperature and contact-time dependence.
+--   WHO Guidelines for Drinking-water Quality: disinfectants generate distinct
+--   organohalogen/inorganic/non-halogenated by-product families and these need
+--   separate monitoring/control rather than inference from disinfectant dose.
+--
 -- Keeps combined chlorine and DBP risk as separate chemistry/monitoring
 -- obligations.  It deliberately does not encode one universal breakpoint,
 -- dose, CT value, or DBP yield law.
