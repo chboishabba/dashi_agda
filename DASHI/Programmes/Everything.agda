@@ -34,6 +34,7 @@ import DASHI.Programmes.TestHarnessFamilyReceiptExact
 import DASHI.Programmes.TestHarnessSelectedFamiliesExact
 import DASHI.Programmes.RTXExact
 import DASHI.Programmes.RTXLightTransportRefinementExact
+import DASHI.Programmes.RTXAdmissibleConsumerMDLBridgeExact
 import DASHI.Programmes.RTXExecutableLightTransportReceiptExact
 import DASHI.Programmes.RTXQuantitativeRefinementExact
 import DASHI.Programmes.BidirectionalSatelliteValidation

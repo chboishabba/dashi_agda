@@ -34,6 +34,8 @@ import DASHI.Core.SequentialRelationalExperimentPlannerExact
 import DASHI.Core.JointSequentialInformationFidelityPolicyExact
 import DASHI.Core.ConsumerReductionJointPolicyBridgeExact
 import DASHI.Core.JointSequentialInformationFidelityFixtureExact
+import DASHI.Core.AdmissibleTransitionHyperfabricExact
+import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact
 import DASHI.Core.FormalizationRecoverySourceRegistryExact
 import DASHI.Core.FormalizationRecoveryGeometryExact
 import DASHI.Core.SourceAcquisitionGeometryExact
