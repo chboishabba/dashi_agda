@@ -13,6 +13,7 @@ import DASHI.Culture.ChildReligiousEpistemicReopeningBidiExact as Epistemic
 import DASHI.Culture.ReligiousThreatPredicateDialecticBidiExact as Threat
 import DASHI.Culture.ReligiousSanctionFeministWiccaCrossPollinationExact as FW
 import DASHI.Culture.SymbolicInversionAuthorityTransferBidiExact as Symbol
+import DASHI.Culture.WitchSelfIdentificationPredicateUseBidiExact as WitchUse
 
 ------------------------------------------------------------------------
 -- Focused consumer root for the paper-specific BIDI owners.
@@ -114,3 +115,46 @@ symbolicPositiveRechartNeedsResidual = refl
 
 symbolicDialecticalRoleFrameRelative : Symbol.SymbolicInversionAuthorityTransferBoundary.dialecticalRoleIsFrameRelative Symbol.canonicalSymbolicInversionAuthorityTransferBoundary ≡ true
 symbolicDialecticalRoleFrameRelative = refl
+
+------------------------------------------------------------------------
+-- "I am a witch" predicate/use regression.
+------------------------------------------------------------------------
+
+witchSentenceLiteralPinned : WitchUse.naturalLanguage WitchUse.canonicalWitchSelfIdentification ≡ "I am a witch."
+witchSentenceLiteralPinned = refl
+
+sameWitchSentenceCannotRecoverUse :
+  WitchUse.WitchSelfIdentificationBoundary.sameSentenceDeterminesSameUse
+    WitchUse.canonicalWitchSelfIdentificationBoundary ≡ false
+sameWitchSentenceCannotRecoverUse = refl
+
+witchDoesNotDefaultToWiccan : WitchUse.WitchSentencePromotesWiccanAffiliation → ⊥
+witchDoesNotDefaultToWiccan = WitchUse.witchSentenceDoesNotPromoteWiccanAffiliation
+
+witchDoesNotDefaultToFeminist : WitchUse.WitchSentencePromotesFeministPolitics → ⊥
+witchDoesNotDefaultToFeminist = WitchUse.witchSentenceDoesNotPromoteFeministPolitics
+
+witchSentenceDoesNotDetermineMetaphysics : WitchUse.WitchSentencePromotesMetaphysicalCommitment → ⊥
+witchSentenceDoesNotDetermineMetaphysics = WitchUse.witchSentenceDoesNotPromoteMetaphysicalCommitment
+
+witchSentenceDoesNotDeterminePractice : WitchUse.WitchSentencePromotesRitualPractice → ⊥
+witchSentenceDoesNotDeterminePractice = WitchUse.witchSentenceDoesNotPromoteRitualPractice
+
+witchSentenceDoesNotDetermineCommunity : WitchUse.WitchSentencePromotesCommunityMembership → ⊥
+witchSentenceDoesNotDetermineCommunity = WitchUse.witchSentenceDoesNotPromoteCommunityMembership
+
+witchSentenceDoesNotDetermineGenealogy : WitchUse.WitchSentencePromotesAncientGenealogy → ⊥
+witchSentenceDoesNotDetermineGenealogy = WitchUse.witchSentenceDoesNotPromoteAncientGenealogy
+
+presentWitchIdentityDoesNotRecoverChildhoodRoute : WitchUse.PresentIdentityPromotesChildhoodFormationRoute → ⊥
+presentWitchIdentityDoesNotRecoverChildhoodRoute = WitchUse.presentIdentityDoesNotPromoteChildhoodFormationRoute
+
+selfDescriptionAuthorityIsCoordinateSpecific :
+  WitchUse.WitchSelfIdentificationBoundary.selfAuthorityExtendsToHistoricalPersons
+    WitchUse.canonicalWitchSelfIdentificationBoundary ≡ false
+selfDescriptionAuthorityIsCoordinateSpecific = refl
+
+wittgensteinStillNotFabricated :
+  WitchUse.WitchSelfIdentificationBoundary.unrecoveredWittgensteinSourceIsNotCited
+    WitchUse.canonicalWitchSelfIdentificationBoundary ≡ true
+wittgensteinStillNotFabricated = refl
