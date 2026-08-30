@@ -1,6 +1,6 @@
 module DASHI.Cognition.PNF.ExactlyOnceParserAuthorityProjectionExact where
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
@@ -8,7 +8,7 @@ open import Data.Empty using (⊥)
 --
 -- Parser partitions, bilateral context windows, repairs, retries, and future
 -- finer streaming schedules may observe the same canonical source material.
--- Observation is not authority.  Every authority-bearing source event has one
+-- Observation is not authority. Every authority-bearing source event has one
 -- canonical structural owner selected by its source anchor; all other physical
 -- observations are evidence-only.
 ------------------------------------------------------------------------
@@ -30,7 +30,7 @@ record ExactlyOnceAuthorityProjection : Set₁ where
     ownedAnchor : OwnedEvent → SourceAnchor
 
     -- Physical observations of the same source anchor project to the same
-    -- authority-bearing identity.  Context, repair, retry, and scheduling
+    -- authority-bearing identity. Context, repair, retry, and scheduling
     -- identity therefore cannot mint another semantic event.
     SameAnchor : Observation → Observation → Set
     sameAnchorProjectsSameAuthority :
@@ -56,21 +56,9 @@ data PhysicalObservationRole : Set where
   boundaryRepair : PhysicalObservationRole
   retryObservation : PhysicalObservationRole
 
-record ObservationAdmission : Set where
-  constructor observationAdmission
-  field
-    role : PhysicalObservationRole
-    authorityBearing : Set
-
-open ObservationAdmission public
-
--- Only the canonical structural owner may be an authority-bearing parser
--- producer.  Repair/context/retry observations may refine evidence or resolve
--- obligations but never directly mint another owned semantic event.
 data ContextObservationMintsAuthority : Set where
 data RepairObservationMintsAuthority : Set where
 data RetryObservationMintsAuthority : Set where
-
 data PhysicalPartitionIdentityIsSemanticIdentity : Set where
 
 contextCannotMintAuthority : ContextObservationMintsAuthority → ⊥
@@ -89,7 +77,7 @@ partitionIdentityIsNotSemanticIdentity ()
 -- Schedule-invariance receipt.
 --
 -- Coarse and refined physical schedules may differ arbitrarily in partition
--- count/context/repairs.  Performance comparison is admissible only after both
+-- count/context/repairs. Performance comparison is admissible only after both
 -- schedules project to the same owned stream and final consumer authority.
 ------------------------------------------------------------------------
 
