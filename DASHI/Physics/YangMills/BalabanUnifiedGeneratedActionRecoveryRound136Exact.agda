@@ -16,6 +16,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
 import DASHI.Physics.YangMills.BalabanClayPresentCutPhysicalCompilerRound122Exact as Present
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106Exact as Domain
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as StressRep
 import DASHI.Physics.YangMills.BalabanDensityAnchoredStressLaneRound123Exact as StressLane
 import DASHI.Physics.YangMills.BalabanSectorQFTRecoveryExportRound129Exact as R129
@@ -81,8 +82,7 @@ continuumFirstVariationOfUnifiedGeneratedActionIsLiteralStressPairing :
   ∀ perturbation →
   let domain = R134.presentCutCanonicalMetricDomain metricInputs
   in
-  DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106Exact.AdmissibleMetricPerturbation
-      domain perturbation →
+  Domain.AdmissibleMetricPerturbation domain perturbation →
   R131.continuumSectorFirstVariation
       (asCommonMetricReadyBalabanSectorRecovery recovery) perturbation
   ≡ StressRep.stressMetricPairing representation
