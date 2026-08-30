@@ -198,3 +198,7 @@ import DASHI.Biology.OggTernaryEquivariantLabellingNoGoExact
 import DASHI.Biology.OperatorStructureAdmissionBoundaryExact
 import DASHI.Biology.ConsciousAccessRound7AristotleSourceBridge
 import DASHI.Biology.ConsciousAccessRound7AristotleRegression
+
+------------------------------------------------------------------------
+-- Relative JCoarse/JFine fibre -> repo-wide consumer-reduction adapter.
+import DASHI.Biology.JCoarseFineConsumerReductionBridgeExact
