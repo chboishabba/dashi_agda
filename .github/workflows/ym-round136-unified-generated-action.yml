@@ -1,4 +1,4 @@
-name: YM Round140 unified generated action Agda
+name: YM Round141 unified generated action Agda
 
 on:
   pull_request:
@@ -12,13 +12,14 @@ on:
       - 'DASHI/Physics/YangMills/BalabanUnifiedGeneratedActionA1HistoryRound138Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanUnifiedGeneratedActionPhysicalHistoryRound139Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanUnifiedPresentCutSchwingerRecoveryRound140Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCombinedRGUnifiedActionRound141Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanUnifiedPresentCutSchwingerRecoveryRound140Validation.agda'
       - 'scripts/check_ym_round136_unified_generated_action.sh'
       - '.github/workflows/ym-round136-unified-generated-action.yml'
   workflow_dispatch:
 
 concurrency:
-  group: ym-round140-${{ github.event.pull_request.number || github.ref }}
+  group: ym-round141-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -32,21 +33,21 @@ jobs:
           submodules: false
       - uses: cachix/install-nix-action@v27
       - uses: DeterminateSystems/magic-nix-cache-action@v9
-      - name: Check Round140 unified generated action
+      - name: Check Round141 unified generated action
         env:
           AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
           DASHI_REPO_ROOT: ${{ github.workspace }}
-          DASHI_AGDA29_CACHE_ROOT: ${{ runner.temp }}/dashi-agda29-round140
-          DASHI_STATUS_DIR: ${{ runner.temp }}/dashi-agda29-round140/status
-          XDG_CACHE_HOME: ${{ runner.temp }}/dashi-xdg-round140
-          AGDA_LOG_PATH: ${{ github.workspace }}/ym-round140-agda.log
+          DASHI_AGDA29_CACHE_ROOT: ${{ runner.temp }}/dashi-agda29-round141
+          DASHI_STATUS_DIR: ${{ runner.temp }}/dashi-agda29-round141/status
+          XDG_CACHE_HOME: ${{ runner.temp }}/dashi-xdg-round141
+          AGDA_LOG_PATH: ${{ github.workspace }}/ym-round141-agda.log
           AGDA_JOBS: '4'
           DASHI_NO_TMUX: '1'
         run: bash scripts/check_ym_round136_unified_generated_action.sh
-      - name: Upload Round140 Agda log
+      - name: Upload Round141 Agda log
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ym-round140-unified-generated-action-agda-log
-          path: ym-round140-agda*.log
+          name: ym-round141-unified-generated-action-agda-log
+          path: ym-round141-agda*.log
           if-no-files-found: warn
