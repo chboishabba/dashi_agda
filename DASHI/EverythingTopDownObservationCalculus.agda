@@ -18,11 +18,15 @@ import DASHI.Core.TopDownObservationCalculusExact
 -- permission and obligation remain independently consumer-indexed. Translation
 -- effects retain coordinate lineage, so erase-then-add cannot masquerade as
 -- restoration of inherited information. Required governed axes may themselves
--- vary by context/query; inactive axes are not failed axes.
+-- vary by context/query; inactive axes are not failed axes. Context transport
+-- additionally requires governed-requirement transport; observation naturality
+-- alone certifies only the restricted image unless fine-state coverage is shown.
 import DASHI.Core.GovernedObservationProvenanceExact
 import DASHI.Core.GovernedObservationProvenanceRegression
 import DASHI.Core.ContextIndexedGovernedObservationExact
 import DASHI.Core.ContextIndexedGovernedObservationRegression
+import DASHI.Core.ContextGovernedSafetyTransportExact
+import DASHI.Core.ContextGovernedSafetyTransportRegression
 
 -- Residual dependency, certified quadratic control, future-language capability,
 -- and the independent pressure axis.  Receipt-backed SensibLaw residual order
@@ -78,6 +82,10 @@ import DASHI.Cognition.PNF.ObserverSeparationAuthorityBoundaryExact
 -- Inactive governance axis != failed governance axis.
 -- Safety for a weaker governed language != safety for a stronger one.
 -- Stronger governed safety descends to included weaker requirements.
+-- Context observation naturality != automatic governed-safety transport.
+-- Newly activated governed axis may invalidate a previously safe surface.
+-- Local context safety controls the restricted image exactly.
+-- Restricted-image safety != whole-context safety without coverage/section.
 -- Current observation equality != action-indexed dependency equality.
 -- Low coupling score != action admissibility.
 -- Finite dependency score != affine spectral independence / SDP certificate.
