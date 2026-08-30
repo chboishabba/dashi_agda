@@ -8,39 +8,36 @@ module DASHI.Physics.Closure.NSTriadKNSignedIntegratedGramConsumerRound293Exact 
 --   Q(t) <= 36 E(t)D(t) + D_Gram(t).
 --
 -- R222 introduced a sufficient pointwise nonnegative majorant R_coh with
--- D_Gram <= R_coh and bounded integral.  That is well suited to absolute
--- estimates, but it is stronger than the actual downstream requirement when
--- the forward producer is a temporal flux/telescope.
+-- D_Gram <= R_coh and bounded integral.  That is stronger than the actual
+-- downstream requirement when the forward producer is a temporal flux.
 --
--- If integration is monotone and additive, one may instead integrate R220
--- directly:
+-- If integration is monotone and additive, integrate R220 first:
 --
 --   integral Q
---     <= 36 integral(ED) + integral D_Gram.
+--     <= integral(36 ED) + integral D_Gram.
 --
--- Thus Package-A only needs a cutoff-uniform UPPER bound on the SIGNED
--- integral of D_Gram.  A representation
+-- Thus it is enough to bound the SIGNED integral of D_Gram from above.  A
+-- flux/telescope identity can use endpoint cancellation without replacing its
+-- derivative by an absolute value or positive part.
 --
---   D_Gram = -dF/dt + R
---
--- can then use endpoint cancellation without replacing dF/dt by its positive
--- part or absolute value.
---
--- This file freezes that weaker backward consumer.  R222 remains a valid
--- sufficient route; Round293 is the natural consumer for the R290 weighted
--- Gram flux.
+-- The routine scalar step converting a G2 bound on integral(ED) into the
+-- scaled bound on integral(36 ED) is deliberately left with the energy
+-- producer.  This consumer asks for exactly the two integrated contributions
+-- it uses and nothing more.
 ------------------------------------------------------------------------
 
+open import Agda.Primitive using (Level; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst)
 
 thirtySix : ℚ
 thirtySix = 36
 
-record SignedIntegratedGramPayment {ℓC ℓT : _}
+record SignedIntegratedGramPayment
+    {ℓC ℓT : Level}
     (Cutoff : Set ℓC) (Time : Set ℓT) : Set (ℓC ⊔ ℓT) where
   field
     companionMass : Cutoff → Time → ℚ
@@ -61,29 +58,25 @@ record SignedIntegratedGramPayment {ℓC ℓT : _}
       integrateTo (λ cutoff time → left cutoff time + right cutoff time) N T
       ≡ integrateTo left N T + integrateTo right N T
 
-    integrationScaleThirtySix :
-      (value : Cutoff → Time → ℚ) →
-      (N : Cutoff) → (T : Time) →
-      integrateTo (λ cutoff time → thirtySix * value cutoff time) N T
-      ≡ thirtySix * integrateTo value N T
-
     pointwiseCompanionLedger :
       (N : Cutoff) → (t : Time) →
       companionMass N t
       ≤ thirtySix * energyDissipation N t + gramDebt N t
 
-    energyDissipationIntegralBound : Time → ℚ
-    gramDebtSignedIntegralUpperBound : Time → ℚ
+    scaledEnergyIntegralUpperBound : Time → ℚ
+    signedGramIntegralUpperBound : Time → ℚ
 
-    integratedEnergyDissipationBound :
+    integratedScaledEnergyBound :
       (N : Cutoff) → (T : Time) →
-      integrateTo energyDissipation N T
-      ≤ energyDissipationIntegralBound T
+      integrateTo
+        (λ cutoff time → thirtySix * energyDissipation cutoff time)
+        N T
+      ≤ scaledEnergyIntegralUpperBound T
 
     integratedSignedGramDebtBound :
       (N : Cutoff) → (T : Time) →
       integrateTo gramDebt N T
-      ≤ gramDebtSignedIntegralUpperBound T
+      ≤ signedGramIntegralUpperBound T
 
 open SignedIntegratedGramPayment public
 
@@ -91,8 +84,7 @@ combinedIntegratedBound :
   ∀ {ℓC ℓT} {Cutoff : Set ℓC} {Time : Set ℓT} →
   SignedIntegratedGramPayment Cutoff Time → Time → ℚ
 combinedIntegratedBound P T =
-  thirtySix * energyDissipationIntegralBound P T
-  + gramDebtSignedIntegralUpperBound P T
+  scaledEnergyIntegralUpperBound P T + signedGramIntegralUpperBound P T
 
 signedIntegratedGramClosesCompanionBudget :
   ∀ {ℓC ℓT} {Cutoff : Set ℓC} {Time : Set ℓT}
@@ -102,8 +94,6 @@ signedIntegratedGramClosesCompanionBudget :
   ≤ combinedIntegratedBound P T
 signedIntegratedGramClosesCompanionBudget P N T =
   let
-    pointwise = pointwiseCompanionLedger P
-
     first :
       integrateTo P (companionMass P) N T
       ≤ integrateTo P
@@ -114,7 +104,7 @@ signedIntegratedGramClosesCompanionBudget P N T =
       (companionMass P)
       (λ cutoff time →
         thirtySix * energyDissipation P cutoff time + gramDebt P cutoff time)
-      pointwise N T
+      (pointwiseCompanionLedger P) N T
 
     split :
       integrateTo P
@@ -129,34 +119,21 @@ signedIntegratedGramClosesCompanionBudget P N T =
       (λ cutoff time → thirtySix * energyDissipation P cutoff time)
       (gramDebt P) N T
 
-    scale :
-      integrateTo P
-        (λ cutoff time → thirtySix * energyDissipation P cutoff time) N T
-      ≡ thirtySix * integrateTo P (energyDissipation P) N T
-    scale = integrationScaleThirtySix P (energyDissipation P) N T
-
     middle :
       integrateTo P (companionMass P) N T
-      ≤ thirtySix * integrateTo P (energyDissipation P) N T
-          + integrateTo P (gramDebt P) N T
+      ≤
+      integrateTo P
+        (λ cutoff time → thirtySix * energyDissipation P cutoff time) N T
+      + integrateTo P (gramDebt P) N T
     middle = subst
       (λ upper → integrateTo P (companionMass P) N T ≤ upper)
-      (trans split (congLeft scale)) first
-      where
-      congLeft :
-        ∀ {a b c : ℚ} → a ≡ b → a + c ≡ b + c
-      congLeft refl = refl
+      split first
 
     paid = ℚP.+-mono-≤
-      (scaleThirtySixMonotone
-        (integratedEnergyDissipationBound P N T))
+      (integratedScaledEnergyBound P N T)
       (integratedSignedGramDebtBound P N T)
   in
   ℚP.≤-trans middle paid
-  where
-  scaleThirtySixMonotone : ∀ {a b : ℚ} → a ≤ b → thirtySix * a ≤ thirtySix * b
-  scaleThirtySixMonotone ab =
-    ℚP.*-monoˡ-≤-nonNeg thirtySix ab
 
 round293R222PointwiseMajorantStillSufficient : Bool
 round293R222PointwiseMajorantStillSufficient = true
