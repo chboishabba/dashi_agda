@@ -17,6 +17,7 @@ import DASHI.Governance.SexedHistoricalSubjectDialecticBidiExact as SexDialectic
 import DASHI.Governance.SexedHistoricalCoConstitutionHyperfabricExact as Hyper
 import DASHI.Governance.SexedHistoricalTransitionHyperfabricExact as TransitionHyper
 import DASHI.Governance.SexedHistoricalChoiceConeBridgeExact as Choice
+import DASHI.Governance.SexedHistoricalActionFeedbackHyperfabricExact as Feedback
 
 ------------------------------------------------------------------------
 -- Fine-state route survives public behavioural collapse.
@@ -146,6 +147,30 @@ formalReligiousFreedomDoesNotGuaranteeEffectiveExitRegression =
   Choice.formalReligiousFreedomDoesNotImplyEffectiveExit
 
 ------------------------------------------------------------------------
+-- Enacted-choice feedback regressions.
+------------------------------------------------------------------------
+
+conceivedChoiceDoesNotRecoverEnactmentRegression :
+  INF.FactorsThrough Feedback.conceivedSurface Feedback.enactmentSurface → ⊥
+conceivedChoiceDoesNotRecoverEnactmentRegression =
+  Feedback.conceivedChoiceCannotRecoverEnactment
+
+sameActionDoesNotRecoverLaterOptionFeedbackRegression :
+  INF.FactorsThrough Feedback.actionSurface Feedback.laterOptionFeedback → ⊥
+sameActionDoesNotRecoverLaterOptionFeedbackRegression =
+  Feedback.sameActionCannotRecoverLaterOptionFeedback
+
+sameActionDoesNotRecoverInstitutionalPowerEffectRegression :
+  INF.FactorsThrough Feedback.actionSurface Feedback.institutionalPowerEffect → ⊥
+sameActionDoesNotRecoverInstitutionalPowerEffectRegression =
+  Feedback.sameActionCannotRecoverInstitutionalPowerEffect
+
+apostasyDoesNotGuaranteePsychologicalDeconstructionRegression :
+  Feedback.ApostasyGuaranteesPsychologicalDeconstruction → ⊥
+apostasyDoesNotGuaranteePsychologicalDeconstructionRegression =
+  Feedback.apostasyDoesNotGuaranteePsychologicalDeconstruction
+
+------------------------------------------------------------------------
 -- Empirical atlas remains partial rather than decorative completion.
 ------------------------------------------------------------------------
 
@@ -179,6 +204,10 @@ record ReligiousChildhoodFeministWitchRegressionBoundary : Set where
     effectiveChoiceEqualsConceivedChoice : Bool
     legalAdulthoodZerosExitCost : Bool
     formalReligiousFreedomGuaranteesEffectiveExit : Bool
+    conceivedChoiceEqualsEnactedChoice : Bool
+    sameActionMeansSameFeedback : Bool
+    activismGuaranteesInstitutionalVictory : Bool
+    apostasyGuaranteesPsychologicalDeconstruction : Bool
     currentReligiousAtlasIsCausallyComplete : Bool
     currentReligiousAtlasIsPartiallyInstantiated : Bool
 
@@ -187,4 +216,4 @@ canonicalReligiousChildhoodFeministWitchRegressionBoundary :
 canonicalReligiousChildhoodFeministWitchRegressionBoundary =
   religious-childhood-feminist-witch-regression-boundary
     false false false false false false false false false false false
-    false false false false false false false false true
+    false false false false false false false false false false false false true
