@@ -11,6 +11,7 @@ import DASHI.Culture.JohnAnthonyBrownPaperSectionHypothesisManifestExact as Mani
 import DASHI.Culture.ChildReligiousAutonomyFormationBidiExact as Formation
 import DASHI.Culture.ChildReligiousEpistemicReopeningBidiExact as Epistemic
 import DASHI.Culture.ReligiousThreatPredicateDialecticBidiExact as Threat
+import DASHI.Culture.ReligiousSanctionFeministWiccaCrossPollinationExact as FW
 
 ------------------------------------------------------------------------
 -- Focused consumer root for the paper-specific BIDI owners.
@@ -296,3 +297,45 @@ authorityProvenanceNeedsSeparateReceipt :
     Threat.canonicalReligiousThreatPredicateDialecticBoundary
   ≡ true
 authorityProvenanceNeedsSeparateReceipt = refl
+
+------------------------------------------------------------------------
+-- Feminist / Wicca cross-pollination regression.
+------------------------------------------------------------------------
+
+sanctionNotFeministIdentity : FW.ReligiousSanctionPromotesFeminism → ⊥
+sanctionNotFeministIdentity = FW.religiousSanctionDoesNotPromoteFeminism
+
+sanctionNotWiccanIdentity : FW.ReligiousSanctionPromotesWiccanIdentity → ⊥
+sanctionNotWiccanIdentity = FW.religiousSanctionDoesNotPromoteWiccanIdentity
+
+laterWiccanIdentityNotPriorCoercion : FW.LaterWiccanIdentityPromotesPriorCoercion → ⊥
+laterWiccanIdentityNotPriorCoercion = FW.laterWiccanIdentityDoesNotPromotePriorCoercion
+
+feministCounterpositionNotLogicalNegation :
+  FW.FeministCounterpositionPromotesLogicalNegation → ⊥
+feministCounterpositionNotLogicalNegation =
+  FW.feministCounterpositionDoesNotPromoteLogicalNegation
+
+wiccanReclamationNotAncientLineage : FW.WiccanReclamationPromotesAncientLineage → ⊥
+wiccanReclamationNotAncientLineage = FW.wiccanReclamationDoesNotPromoteAncientLineage
+
+counterFormationNotGuaranteedSynthesis : FW.CounterFormationPromotesSynthesis → ⊥
+counterFormationNotGuaranteedSynthesis = FW.counterFormationDoesNotPromoteSynthesis
+
+laterAlternativeSurfaceDoesNotRecoverChildhoodRoute :
+  FW.ReligiousSanctionFeministWiccaBoundary.publicIdentityRecoversFormationRoute
+    FW.canonicalReligiousSanctionFeministWiccaBoundary
+  ≡ false
+laterAlternativeSurfaceDoesNotRecoverChildhoodRoute = refl
+
+positiveRechartingNeedsResidual :
+  FW.ReligiousSanctionFeministWiccaBoundary.positiveRechartingRequiresResidualInformation
+    FW.canonicalReligiousSanctionFeministWiccaBoundary
+  ≡ true
+positiveRechartingNeedsResidual = refl
+
+dialecticalRoleDependsOnFrame :
+  FW.ReligiousSanctionFeministWiccaBoundary.dialecticalRoleDependsOnFrame
+    FW.canonicalReligiousSanctionFeministWiccaBoundary
+  ≡ true
+dialecticalRoleDependsOnFrame = refl
