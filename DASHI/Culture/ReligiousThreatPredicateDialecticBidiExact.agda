@@ -245,7 +245,7 @@ logicalNegationPosition = threat-position
   "logical negation of the conditional consequence at the same declared scope"
 
 doctrinalAlternativePosition : ThreatPosition
-doctrinalAlternativePosition = threat-position
+ndoctrinalAlternativePosition = threat-position
   "Within another theological interpretation, doing X is not classified as entailing hell."
   doctrinalCounterclaim
   "different doctrinal frame; not automatically P × not-P in one frame"
@@ -287,9 +287,6 @@ unresolvedDoesNotPromoteFalse ()
 
 ------------------------------------------------------------------------
 -- 5. Pressure / coercion decomposition.
---
--- A sanction assertion can contribute to behavioural pressure, especially in
--- developmental dependence, but that requires recipient/context receipts.
 ------------------------------------------------------------------------
 
 record ThreatActuationContext : Set where
