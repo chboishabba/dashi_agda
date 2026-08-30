@@ -14,6 +14,7 @@ import DASHI.Culture.ReligiousThreatPredicateDialecticBidiExact as Threat
 import DASHI.Culture.ReligiousSanctionFeministWiccaCrossPollinationExact as FW
 import DASHI.Culture.SymbolicInversionAuthorityTransferBidiExact as Symbol
 import DASHI.Culture.WitchSelfIdentificationPredicateUseBidiExact as WitchUse
+import DASHI.Culture.WitchRelationalAttributionDialogueBidiExact as Rel
 
 ------------------------------------------------------------------------
 -- Focused consumer root for the paper-specific BIDI owners.
@@ -82,50 +83,19 @@ wiccanReclamationNotAncientLineage = FW.wiccanReclamationDoesNotPromoteAncientLi
 counterFormationNotGuaranteedSynthesis : FW.CounterFormationPromotesSynthesis → ⊥
 counterFormationNotGuaranteedSynthesis = FW.counterFormationDoesNotPromoteSynthesis
 
-------------------------------------------------------------------------
--- Symbolic inversion / authority-transfer regression.
-------------------------------------------------------------------------
-
 sameWitchTokenDifferentUse : Symbol.token Symbol.imposedWitchEpisode ≡ Symbol.token Symbol.reclaimedWitchEpisode
 sameWitchTokenDifferentUse = Symbol.sameTokenAcrossEpisodes
 
 sameWordDoesNotRecoverUse : Symbol.SymbolicInversionAuthorityTransferBoundary.sameWordMeansSameHistoricalUse Symbol.canonicalSymbolicInversionAuthorityTransferBoundary ≡ false
 sameWordDoesNotRecoverUse = refl
 
-reclamationDoesNotRewriteOriginalEvent : Symbol.SymbolicInversionAuthorityTransferBoundary.reclamationRewritesOriginalEvent Symbol.canonicalSymbolicInversionAuthorityTransferBoundary ≡ false
-reclamationDoesNotRewriteOriginalEvent = refl
-
 reclamationPreservesOriginalProvenance : Symbol.ReclamationErasesOriginalProvenance → ⊥
 reclamationPreservesOriginalProvenance = Symbol.reclamationDoesNotEraseOriginalProvenance
-
-institutionalAuthorityDoesNotEstablishTruth : Symbol.ImposedAuthorityTransfersTruth → ⊥
-institutionalAuthorityDoesNotEstablishTruth = Symbol.imposedAuthorityDoesNotTransferTruth
-
-sharedReclaimedSymbolNotSharedDoctrine : Symbol.SharedTokenPromotesSharedDoctrine → ⊥
-sharedReclaimedSymbolNotSharedDoctrine = Symbol.sharedTokenDoesNotPromoteSharedDoctrine
-
-sharedReclaimedSymbolNotSharedPolitics : Symbol.SharedTokenPromotesSharedPolitics → ⊥
-sharedReclaimedSymbolNotSharedPolitics = Symbol.sharedTokenDoesNotPromoteSharedPolitics
-
-sharedReclaimedSymbolNotSharedFormationHistory : Symbol.SharedTokenPromotesSharedFormationHistory → ⊥
-sharedReclaimedSymbolNotSharedFormationHistory = Symbol.sharedTokenDoesNotPromoteSharedFormationHistory
-
-symbolicPositiveRechartNeedsResidual : Symbol.SymbolicInversionAuthorityTransferBoundary.positiveRechartRequiresResidualBeyondWord Symbol.canonicalSymbolicInversionAuthorityTransferBoundary ≡ true
-symbolicPositiveRechartNeedsResidual = refl
-
-symbolicDialecticalRoleFrameRelative : Symbol.SymbolicInversionAuthorityTransferBoundary.dialecticalRoleIsFrameRelative Symbol.canonicalSymbolicInversionAuthorityTransferBoundary ≡ true
-symbolicDialecticalRoleFrameRelative = refl
-
-------------------------------------------------------------------------
--- "I am a witch" predicate/use regression.
-------------------------------------------------------------------------
 
 witchSentenceLiteralPinned : WitchUse.naturalLanguage WitchUse.canonicalWitchSelfIdentification ≡ "I am a witch."
 witchSentenceLiteralPinned = refl
 
-sameWitchSentenceCannotRecoverUse :
-  WitchUse.WitchSelfIdentificationBoundary.sameSentenceDeterminesSameUse
-    WitchUse.canonicalWitchSelfIdentificationBoundary ≡ false
+sameWitchSentenceCannotRecoverUse : WitchUse.WitchSelfIdentificationBoundary.sameSentenceDeterminesSameUse WitchUse.canonicalWitchSelfIdentificationBoundary ≡ false
 sameWitchSentenceCannotRecoverUse = refl
 
 witchDoesNotDefaultToWiccan : WitchUse.WitchSentencePromotesWiccanAffiliation → ⊥
@@ -134,27 +104,48 @@ witchDoesNotDefaultToWiccan = WitchUse.witchSentenceDoesNotPromoteWiccanAffiliat
 witchDoesNotDefaultToFeminist : WitchUse.WitchSentencePromotesFeministPolitics → ⊥
 witchDoesNotDefaultToFeminist = WitchUse.witchSentenceDoesNotPromoteFeministPolitics
 
-witchSentenceDoesNotDetermineMetaphysics : WitchUse.WitchSentencePromotesMetaphysicalCommitment → ⊥
-witchSentenceDoesNotDetermineMetaphysics = WitchUse.witchSentenceDoesNotPromoteMetaphysicalCommitment
-
-witchSentenceDoesNotDeterminePractice : WitchUse.WitchSentencePromotesRitualPractice → ⊥
-witchSentenceDoesNotDeterminePractice = WitchUse.witchSentenceDoesNotPromoteRitualPractice
-
-witchSentenceDoesNotDetermineCommunity : WitchUse.WitchSentencePromotesCommunityMembership → ⊥
-witchSentenceDoesNotDetermineCommunity = WitchUse.witchSentenceDoesNotPromoteCommunityMembership
-
-witchSentenceDoesNotDetermineGenealogy : WitchUse.WitchSentencePromotesAncientGenealogy → ⊥
-witchSentenceDoesNotDetermineGenealogy = WitchUse.witchSentenceDoesNotPromoteAncientGenealogy
-
 presentWitchIdentityDoesNotRecoverChildhoodRoute : WitchUse.PresentIdentityPromotesChildhoodFormationRoute → ⊥
 presentWitchIdentityDoesNotRecoverChildhoodRoute = WitchUse.presentIdentityDoesNotPromoteChildhoodFormationRoute
 
-selfDescriptionAuthorityIsCoordinateSpecific :
-  WitchUse.WitchSelfIdentificationBoundary.selfAuthorityExtendsToHistoricalPersons
-    WitchUse.canonicalWitchSelfIdentificationBoundary ≡ false
-selfDescriptionAuthorityIsCoordinateSpecific = refl
-
-wittgensteinStillNotFabricated :
-  WitchUse.WitchSelfIdentificationBoundary.unrecoveredWittgensteinSourceIsNotCited
-    WitchUse.canonicalWitchSelfIdentificationBoundary ≡ true
+wittgensteinStillNotFabricated : WitchUse.WitchSelfIdentificationBoundary.unrecoveredWittgensteinSourceIsNotCited WitchUse.canonicalWitchSelfIdentificationBoundary ≡ true
 wittgensteinStillNotFabricated = refl
+
+------------------------------------------------------------------------
+-- Relational attribution / dialogue regression.
+------------------------------------------------------------------------
+
+selfSurfacePinned : Rel.surface Rel.selfWitch ≡ "I am a witch."
+selfSurfacePinned = refl
+
+externalSurfacePinned : Rel.surface Rel.youWitch ≡ "You are a witch."
+externalSurfacePinned = refl
+
+historicalSurfacePinned : Rel.surface Rel.historicalWitch ≡ "She was a witch."
+historicalSurfacePinned = refl
+
+samePredicateNotSameRelationalAct : Rel.WitchRelationalAttributionBoundary.samePredicateMeansSameRelationalAct Rel.canonicalWitchRelationalAttributionBoundary ≡ false
+samePredicateNotSameRelationalAct = refl
+
+externalLabelNotTargetAssent : Rel.ExternalAttributionPromotesTargetAssent → ⊥
+externalLabelNotTargetAssent = Rel.externalAttributionDoesNotPromoteTargetAssent
+
+accusationNotHistoricalFact : Rel.AccusationPromotesHistoricalFact → ⊥
+accusationNotHistoricalFact = Rel.accusationDoesNotPromoteHistoricalFact
+
+historicalClassificationNotHistoricalSelfIdentification : Rel.HistoricalRecordPromotesSelfIdentification → ⊥
+historicalClassificationNotHistoricalSelfIdentification = Rel.historicalRecordDoesNotPromoteSelfIdentification
+
+quotationNotEndorsement : Rel.QuotationPromotesSpeakerEndorsement → ⊥
+quotationNotEndorsement = Rel.quotationDoesNotPromoteSpeakerEndorsement
+
+reclaimedQuotationNotOriginalMeaning : Rel.ReclaimedQuotationPromotesOriginalMeaning → ⊥
+reclaimedQuotationNotOriginalMeaning = Rel.reclaimedQuotationDoesNotPromoteOriginalMeaning
+
+hostileLabelNotPrivateIdentity : Rel.HostileLabelPromotesPrivateIdentity → ⊥
+hostileLabelNotPrivateIdentity = Rel.hostileLabelDoesNotPromotePrivateIdentity
+
+responseDoesNotEraseInitialProvenance : Rel.WitchRelationalAttributionBoundary.targetResponseErasesInitialProvenance Rel.canonicalWitchRelationalAttributionBoundary ≡ false
+responseDoesNotEraseInitialProvenance = refl
+
+relationalCoordinatesRequired : Rel.WitchRelationalAttributionBoundary.relationalModeRequiresIndependentCoordinates Rel.canonicalWitchRelationalAttributionBoundary ≡ true
+relationalCoordinatesRequired = refl
