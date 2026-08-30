@@ -8,6 +8,8 @@ import DASHI.Geology.SaltConservationSpineExact as Spine
 import DASHI.Chemistry.ChlorAlkaliSaltIndustryExact as Industry
 import DASHI.Chemistry.DrinkingWaterChlorineSpeciationExact as Water
 import DASHI.Chemistry.DrinkingWaterChloramineDBPBoundaryExact as Combined
+import DASHI.Chemistry.DrinkingWaterDistributionResidualCorrosionBidiExact as Distribution
+import DASHI.Chemistry.DrinkingWaterChloramineNitrificationBiofilmBidiExact as Nitrification
 import DASHI.Environment.RootSoilSaltLineageBidiExact as RootSalt
 
 ------------------------------------------------------------------------
@@ -57,6 +59,27 @@ record SaltBidiRegression : Set where
       Combined.chlorineExposureWithoutPrecursorsDeterminesDBPYield
         Combined.canonicalDrinkingWaterCombinedChlorineBoundary ≡ false
 
+    plantResidualNotTapResidual :
+      Distribution.treatmentPlantResidualEqualsTapResidual
+        Distribution.canonicalDistributionResidualCorrosionBoundary ≡ false
+
+    chlorideDoesNotUniquelyCauseCorrosion :
+      Distribution.chloridePresenceAloneProvesCorrosionCause
+        Distribution.canonicalDistributionResidualCorrosionBoundary ≡ false
+
+    tapResidualDoesNotRecoverHistory :
+      Distribution.tapResidualRecoversTreatmentAndDistributionHistory
+        Distribution.canonicalDistributionResidualCorrosionBoundary ≡ false
+
+    lowChloramineDoesNotProveNitrification :
+      Nitrification.lowChloramineResidualProvesNitrification
+        Nitrification.canonicalChloramineNitrificationBiofilmBoundary ≡ false
+
+    biofilmDoesNotProvePathogenPresence :
+      Nitrification.biofilmPresenceProvesPathogenPresence
+        Nitrification.canonicalChloramineNitrificationBiofilmBoundary ≡ false
+
 canonicalSaltBidiRegression : SaltBidiRegression
 canonicalSaltBidiRegression =
-  saltBidiRegression refl refl refl refl refl refl refl refl refl refl
+  saltBidiRegression
+    refl refl refl refl refl refl refl refl refl refl refl refl refl refl refl
