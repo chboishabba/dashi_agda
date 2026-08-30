@@ -1,0 +1,71 @@
+module DASHI.JohnAnthonyBrownQuantitativePopulationBridgeValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Culture.JohnAnthonyBrownQuantitativePopulationBridgeExact as Bridge
+
+johnAnthonyBrownProgrammeRetained :
+  Bridge.QuantitativePopulationBridgeBoundary.johnAnthonyBrownProgrammeRetained
+    Bridge.canonicalQuantitativePopulationBridgeBoundary
+  ≡ true
+johnAnthonyBrownProgrammeRetained = refl
+
+quantitativeTargetAdjacentEvidenceInstalled :
+  Bridge.QuantitativePopulationBridgeBoundary.quantitativeTargetAdjacentEvidenceInstalled
+    Bridge.canonicalQuantitativePopulationBridgeBoundary
+  ≡ true
+quantitativeTargetAdjacentEvidenceInstalled = refl
+
+familyAdolescentEvidenceInstalled :
+  Bridge.QuantitativePopulationBridgeBoundary.familyAdolescentExposureEvidenceInstalled
+    Bridge.canonicalQuantitativePopulationBridgeBoundary
+  ≡ true
+familyAdolescentEvidenceInstalled = refl
+
+aceAdjustedEvidenceInstalled :
+  Bridge.QuantitativePopulationBridgeBoundary.aceAdjustedEvidenceInstalled
+    Bridge.canonicalQuantitativePopulationBridgeBoundary
+  ≡ true
+aceAdjustedEvidenceInstalled = refl
+
+effectEstimateWithUncertaintyInstalled :
+  Bridge.QuantitativePopulationBridgeBoundary.effectEstimateWithUncertaintyInstalled
+    Bridge.canonicalQuantitativePopulationBridgeBoundary
+  ≡ true
+effectEstimateWithUncertaintyInstalled = refl
+
+conversionPracticeNotGeneralReligiousFormation :
+  Bridge.ConversionPracticePromotesGeneralReligiousFormation → ⊥
+conversionPracticeNotGeneralReligiousFormation =
+  Bridge.conversionPracticeDoesNotPromoteGeneralReligiousFormation
+
+religiousProviderNotSoleCause :
+  Bridge.ReligiousLeaderProviderPromotesReligionAsSoleCause → ⊥
+religiousProviderNotSoleCause =
+  Bridge.religiousLeaderProviderDoesNotPromoteReligionAsSoleCause
+
+adjustmentNotNoResidualConfounding :
+  Bridge.ACEAdjustedAssociationPromotesNoResidualConfounding → ⊥
+adjustmentNotNoResidualConfounding =
+  Bridge.aceAdjustmentDoesNotPromoteNoResidualConfounding
+
+youthAssociationNotAdultLongitudinalEffect :
+  Bridge.YouthAssociationPromotesAdultLongitudinalEffect → ⊥
+youthAssociationNotAdultLongitudinalEffect =
+  Bridge.youthAssociationDoesNotPromoteAdultLongitudinalEffect
+
+muslimScaleNotCatholicValidity :
+  Bridge.MuslimReligiousTraumaScalePromotesCatholicValidity → ⊥
+muslimScaleNotCatholicValidity =
+  Bridge.muslimScaleDoesNotPromoteCatholicValidity
+
+quantitativeAssociationNotAutomaticPolicy :
+  Bridge.QuantitativeAssociationPromotesLegalOrNormativeConclusion → ⊥
+quantitativeAssociationNotAutomaticPolicy =
+  Bridge.quantitativeAssociationDoesNotPromoteLegalOrNormativeConclusion
+
+directCatholicChildhoodLongitudinalEffectStillMissing :
+  Bridge.QuantitativePopulationBridgeBoundary.directCatholicChildhoodLongitudinalEffectStillMissing
+    Bridge.canonicalQuantitativePopulationBridgeBoundary
+  ≡ true
+directCatholicChildhoodLongitudinalEffectStillMissing = refl
