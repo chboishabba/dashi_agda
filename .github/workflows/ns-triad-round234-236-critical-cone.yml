@@ -1,4 +1,4 @@
-name: NS Round234-240 critical cone profiles and trajectory authority
+name: NS Round234-248 critical cone profiles trajectory extraction and bidi weld
 
 on:
   pull_request:
@@ -10,6 +10,14 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNProfileExtractionCircularityRound238Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNOrthogonalProfileMixedDefectRound239Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNDefectFailureForcesCriticalBarrierRound241Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCriticalFirstHitExtractionRound242Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNFirstHitBidiPhysicalWeldRound243Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNHelicitySignHOneIsometryRound244Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCanonicalG2NumericDissipationRound245Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalNormalizedCurlHOneModeIsometryRound246Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalNormalizedCurlHOneFiniteSumRound247Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNMixedHelicitySobolevEndpointRound248Exact.agda'
       - 'scripts/audit_opposite_helicity_symbol_round232.py'
       - 'scripts/audit_mixed_helicity_forcing_work_round233.py'
       - '.github/workflows/ns-triad-round234-236-critical-cone.yml'
@@ -71,3 +79,43 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact.agda
+
+      - name: Type-check Round241 defect to critical-barrier compiler
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNDefectFailureForcesCriticalBarrierRound241Exact.agda
+
+      - name: Type-check Round242 first-hit extraction compiler
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNCriticalFirstHitExtractionRound242Exact.agda
+
+      - name: Type-check Round243 same-trajectory bidi physical weld
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNFirstHitBidiPhysicalWeldRound243Exact.agda
+
+      - name: Type-check Round244 helicity-sign H1 isometry reduction
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNHelicitySignHOneIsometryRound244Exact.agda
+
+      - name: Type-check Round245 canonical G2 numeric dissipation projection
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNCanonicalG2NumericDissipationRound245Exact.agda
+
+      - name: Type-check Round246 literal normalized-curl H1 mode isometry
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNPhysicalNormalizedCurlHOneModeIsometryRound246Exact.agda
+
+      - name: Type-check Round247 literal Galerkin finite-sum H1 isometry
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNPhysicalNormalizedCurlHOneFiniteSumRound247Exact.agda
+
+      - name: Type-check Round248 mixed-helicity Sobolev endpoint compiler
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNMixedHelicitySobolevEndpointRound248Exact.agda
