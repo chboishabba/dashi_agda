@@ -1,20 +1,10 @@
 module DASHI.Core.ContextGovernedSafetyTransportRegression where
 
-------------------------------------------------------------------------
--- FINITE REGRESSION: A CONTEXT CHANGE MAY ACTIVATE A NEW GOVERNED AXIS.
-------------------------------------------------------------------------
-
 open import DASHI.Core.Prelude
 
 import DASHI.Core.ConsumerIndexedResidualRefinementExact as Consumer
 import DASHI.Core.ContextIndexedGovernedObservationExact as Governed
 import DASHI.Core.ContextGovernedSafetyTransportExact as Transport
-
-------------------------------------------------------------------------
--- One public surface; reading requires value only, disclosure additionally
--- requires permission.  The public surface is safe for reading but not for the
--- stronger disclosure context.
-------------------------------------------------------------------------
 
 data State : Set where restrictedState openState : State
 data Surface : Set where sameSurface : Surface
@@ -23,7 +13,6 @@ data Query : Set where useQuery : Query
 data Axis : Set where valueAxis permissionAxis : Axis
 data ValueOutcome : Set where sameValue : ValueOutcome
 data PermissionOutcome : Set where restrictedPermission openPermission : PermissionOutcome
-
 data Never : Set where
 
 observe : State → Surface
@@ -72,9 +61,6 @@ disclosureNotSafe :
 disclosureNotSafe =
   Transport.newlyActivatedCollisionBlocksTargetSafety newPermissionRequirement
 
--- Requirement transport exists in the safe direction: every reading
--- requirement is inherited by disclosure.  Therefore safety of disclosure
--- would imply safety of reading, but not conversely.
 readingRequirementsIncludedInDisclosure :
   Governed.RequirementIncluded
     family readingContext useQuery disclosureContext useQuery
