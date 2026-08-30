@@ -12,6 +12,7 @@ import DASHI.Governance.ReligiousChildhoodSubjectFormationBidiExact as Formation
 import DASHI.Governance.ReligiousChildhoodInstantiationEvidenceAtlasExact as Atlas
 import DASHI.Governance.WitchTrialEvidenceSubjectAttributionExact as WitchTrial
 import DASHI.Governance.SuffrageWitchReclamationGenealogyExact as Genealogy
+import DASHI.Governance.HistoricalEventMeaningProvenanceBidiExact as History
 
 ------------------------------------------------------------------------
 -- Fine-state route survives public behavioural collapse.
@@ -52,6 +53,15 @@ noSalemWiccaPromotionRegression =
   Genealogy.modernWiccaDoesNotPromoteSalemWiccanIdentity
 
 ------------------------------------------------------------------------
+-- Shared historical-event discipline: a burned-factory surface cannot recover
+-- accidental versus politically motivated cause.
+------------------------------------------------------------------------
+
+factoryCauseRegression :
+  INF.FactorsThrough History.factorySurface History.fireCause → ⊥
+factoryCauseRegression = History.burnedSurfaceCannotRecoverCause
+
+------------------------------------------------------------------------
 -- Empirical atlas remains partial rather than decorative completion.
 ------------------------------------------------------------------------
 
@@ -71,6 +81,7 @@ record ReligiousChildhoodFeministWitchRegressionBoundary : Set where
     spectralReportRecoversMechanism : Bool
     accusedWitchEqualsSelfIdentifiedWitch : Bool
     suffrageReinterpretationProvesUnbrokenWiccanLineage : Bool
+    burnedFactoryRecoversPoliticalCause : Bool
     currentReligiousAtlasIsCausallyComplete : Bool
     currentReligiousAtlasIsPartiallyInstantiated : Bool
 
@@ -78,4 +89,4 @@ canonicalReligiousChildhoodFeministWitchRegressionBoundary :
   ReligiousChildhoodFeministWitchRegressionBoundary
 canonicalReligiousChildhoodFeministWitchRegressionBoundary =
   religious-childhood-feminist-witch-regression-boundary
-    false false false false false true
+    false false false false false false true
