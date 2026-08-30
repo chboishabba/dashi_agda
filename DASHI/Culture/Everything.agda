@@ -15,3 +15,4 @@ import DASHI.Culture.JohnAnthonyBrownPaperSectionHypothesisManifestExact
 import DASHI.Culture.ChildReligiousAutonomyFormationBidiExact
 import DASHI.Culture.ChildReligiousEpistemicReopeningBidiExact
 import DASHI.Culture.HistoricalSocialTotalityBidiExact
+import DASHI.Culture.HistoricalTotalityCriticalTheoryCrossPollinationExact
