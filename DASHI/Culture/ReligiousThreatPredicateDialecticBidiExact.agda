@@ -245,7 +245,7 @@ logicalNegationPosition = threat-position
   "logical negation of the conditional consequence at the same declared scope"
 
 doctrinalAlternativePosition : ThreatPosition
-ndoctrinalAlternativePosition = threat-position
+doctrinalAlternativePosition = threat-position
   "Within another theological interpretation, doing X is not classified as entailing hell."
   doctrinalCounterclaim
   "different doctrinal frame; not automatically P × not-P in one frame"
