@@ -22,12 +22,34 @@ FILES=(
   DASHI/Analysis/RiemannAristotleReflectionSymmetrizationReturnExact.agda
   DASHI/Analysis/RiemannAristotleDeterministicProjectiveSchurReturnExact.agda
   DASHI/Analysis/RiemannAristotleProjectedZeroTailSummabilityReturnExact.agda
+  DASHI/Analysis/RiemannAristotleExplicitCutoffCarrierLeanReturnExact.agda
+  DASHI/Analysis/RiemannAristotleFiniteNearReflectionOrbitReturnExact.agda
   DASHI/Analysis/RiemannAristotleWholeCarrierCancellationCompilerExact.agda
   DASHI/Analysis/RiemannAristotleNearFarShellBudgetCompilerExact.agda
   DASHI/Analysis/RiemannAristotleNearFarShellProducerSocketsExact.agda
   DASHI/Analysis/RiemannAristotleNearFarShellCompositionExact.agda
   DASHI/Analysis/RiemannAristotleFarTailCutoffSelectorExact.agda
   DASHI/Analysis/RiemannAristotleNearFarAllowanceCompositionExact.agda
+  DASHI/Analysis/RiemannAristotleFiniteNearCoreSchurCompilerExact.agda
+  DASHI/Analysis/RiemannAristotleFiniteNearGramCancellationCompilerExact.agda
+  DASHI/Analysis/RiemannAristotleFiniteNearNSGramAdapterExact.agda
+  DASHI/Analysis/FiniteSignedGramTelescopeExact.agda
+  DASHI/Analysis/RiemannAristotleLiteralPostSchurFiniteGramWeldExact.agda
+  DASHI/Analysis/RiemannAristotleFiniteNearOrderedPairGramDebtExact.agda
+  DASHI/Analysis/RiemannAristotleThreeTaperSchurKernelBilinearExact.agda
+  DASHI/Analysis/RiemannAristotleFiniteNearSchurKernelCovarianceTargetExact.agda
+  DASHI/Analysis/RiemannAristotleDeterminantCovarianceCompilerExact.agda
+  DASHI/Analysis/RiemannAristotleG2DeterminantCovarianceRegression.agda
+  DASHI/Analysis/RiemannAristotleG2cPolarizationCompilerExact.agda
+  DASHI/Analysis/RiemannAristotleG2dReflectionDuplicateNoGoExact.agda
+  DASHI/Analysis/RiemannAristotleG2dScalarDeterminantSumTargetExact.agda
+  DASHI/Analysis/RiemannAristotleG2eDeterminantTaperKernelExact.agda
+  DASHI/Analysis/RiemannAristotleG2eTargetCenteredSymmetryNoGoExact.agda
+  DASHI/Analysis/RiemannAristotleThreeTaperSchurGramLeanReturnExact.agda
+  DASHI/Analysis/RiemannAristotleNearCoreDeterminantTaperLeanReturnExact.agda
+  DASHI/Analysis/RiemannAristotleProjectiveBalanceStrictBudgetNoGoExact.agda
+  DASHI/Analysis/RiemannAristotleG2CurrentCutExact.agda
+  DASHI/Analysis/RiemannAristotleG2CurrentCutRegression.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 )
@@ -52,12 +74,33 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotleReflectionSymmetrizationReturnExact.agda
   agda DASHI/Analysis/RiemannAristotleDeterministicProjectiveSchurReturnExact.agda
   agda DASHI/Analysis/RiemannAristotleProjectedZeroTailSummabilityReturnExact.agda
+  agda DASHI/Analysis/RiemannAristotleExplicitCutoffCarrierLeanReturnExact.agda
+  agda DASHI/Analysis/RiemannAristotleFiniteNearReflectionOrbitReturnExact.agda
   agda DASHI/Analysis/RiemannAristotleWholeCarrierCancellationCompilerExact.agda
   agda DASHI/Analysis/RiemannAristotleNearFarShellBudgetCompilerExact.agda
   agda DASHI/Analysis/RiemannAristotleNearFarShellProducerSocketsExact.agda
   agda DASHI/Analysis/RiemannAristotleNearFarShellCompositionExact.agda
   agda DASHI/Analysis/RiemannAristotleFarTailCutoffSelectorExact.agda
   agda DASHI/Analysis/RiemannAristotleNearFarAllowanceCompositionExact.agda
+  agda DASHI/Analysis/RiemannAristotleFiniteNearCoreSchurCompilerExact.agda
+  agda DASHI/Analysis/RiemannAristotleFiniteNearGramCancellationCompilerExact.agda
+  agda DASHI/Analysis/RiemannAristotleFiniteNearNSGramAdapterExact.agda
+  agda DASHI/Analysis/FiniteSignedGramTelescopeExact.agda
+  agda DASHI/Analysis/RiemannAristotleLiteralPostSchurFiniteGramWeldExact.agda
+  agda DASHI/Analysis/RiemannAristotleFiniteNearOrderedPairGramDebtExact.agda
+  agda DASHI/Analysis/RiemannAristotleThreeTaperSchurKernelBilinearExact.agda
+  agda DASHI/Analysis/RiemannAristotleFiniteNearSchurKernelCovarianceTargetExact.agda
+  agda DASHI/Analysis/RiemannAristotleDeterminantCovarianceCompilerExact.agda
+  agda DASHI/Analysis/RiemannAristotleG2DeterminantCovarianceRegression.agda
+  agda DASHI/Analysis/RiemannAristotleG2cPolarizationCompilerExact.agda
+  agda DASHI/Analysis/RiemannAristotleG2dReflectionDuplicateNoGoExact.agda
+  agda DASHI/Analysis/RiemannAristotleG2dScalarDeterminantSumTargetExact.agda
+  agda DASHI/Analysis/RiemannAristotleG2eDeterminantTaperKernelExact.agda
+  agda DASHI/Analysis/RiemannAristotleG2eTargetCenteredSymmetryNoGoExact.agda
+  agda DASHI/Analysis/RiemannAristotleThreeTaperSchurGramLeanReturnExact.agda
+  agda DASHI/Analysis/RiemannAristotleNearCoreDeterminantTaperLeanReturnExact.agda
+  agda DASHI/Analysis/RiemannAristotleProjectiveBalanceStrictBudgetNoGoExact.agda
+  agda DASHI/Analysis/RiemannAristotleG2CurrentCutRegression.agda
   agda DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 else
   echo "agda executable not present; trust scan only" >&2
