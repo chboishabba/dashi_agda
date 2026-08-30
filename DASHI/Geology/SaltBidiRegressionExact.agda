@@ -6,6 +6,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Geology.SaltGeochemistryExact as Salt
 import DASHI.Geology.SaltConservationSpineExact as Spine
 import DASHI.Chemistry.ChlorAlkaliSaltIndustryExact as Industry
+import DASHI.Chemistry.DrinkingWaterChlorineSpeciationExact as Water
+import DASHI.Chemistry.DrinkingWaterChloramineDBPBoundaryExact as Combined
 import DASHI.Environment.RootSoilSaltLineageBidiExact as RootSalt
 
 ------------------------------------------------------------------------
@@ -35,6 +37,26 @@ record SaltBidiRegression : Set where
       RootSalt.rootChlorideObservationIdentifiesGeologicalSaltSource
         RootSalt.canonicalRootSoilSaltBoundary ≡ false
 
+    chlorineAddedNotMeasuredResidual :
+      Water.chlorineAddedEqualsMeasuredFreeResidual
+        Water.canonicalDrinkingWaterChlorineSpeciationBoundary ≡ false
+
+    doseDoesNotFixHOClFractionWithoutPH :
+      Water.chlorineDoseDeterminesHOClFractionWithoutPH
+        Water.canonicalDrinkingWaterChlorineSpeciationBoundary ≡ false
+
+    residualDoesNotProvePerformance :
+      Water.freeChlorineResidualProvesDisinfectionPerformance
+        Water.canonicalDrinkingWaterChlorineSpeciationBoundary ≡ false
+
+    freeResidualNotCombinedResidual :
+      Combined.freeResidualEqualsCombinedResidual
+        Combined.canonicalDrinkingWaterCombinedChlorineBoundary ≡ false
+
+    exposureAloneDoesNotDetermineDBPYield :
+      Combined.chlorineExposureWithoutPrecursorsDeterminesDBPYield
+        Combined.canonicalDrinkingWaterCombinedChlorineBoundary ≡ false
+
 canonicalSaltBidiRegression : SaltBidiRegression
 canonicalSaltBidiRegression =
-  saltBidiRegression refl refl refl refl refl
+  saltBidiRegression refl refl refl refl refl refl refl refl refl refl
