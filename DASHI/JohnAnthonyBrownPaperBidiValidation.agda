@@ -5,6 +5,9 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Cognition.PNF.DecisionAutonomyExact as Autonomy
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
+import DASHI.Culture.JohnAnthonyBrownDocumentLineageExact as Lineage
+import DASHI.Culture.JohnAnthonyBrownStudyDesignBidiExact as Design
+import DASHI.Culture.JohnAnthonyBrownPaperSectionHypothesisManifestExact as Manifest
 import DASHI.Culture.ChildReligiousAutonomyFormationBidiExact as Formation
 import DASHI.Culture.ChildReligiousEpistemicReopeningBidiExact as Epistemic
 
@@ -18,6 +21,23 @@ authorAttributionPinned :
   Brown.BrownPaperSource.author Brown.johnAnthonyBrownPaper ≡
   "John Anthony Brown"
 authorAttributionPinned = Brown.johnAnthonyBrownIsAttributedAuthor
+
+latestDocumentAuthorPinned :
+  Lineage.BrownDocumentSnapshot.attributedAuthor Lineage.latestProposalSnapshot
+  ≡ "John Anthony Brown"
+latestDocumentAuthorPinned = Lineage.latestProposalAuthor
+
+latestDocumentStagePinned :
+  Lineage.BrownDocumentSnapshot.stage Lineage.latestProposalSnapshot
+  ≡ Lineage.comparativeMixedMethodsProposal
+latestDocumentStagePinned = Lineage.latestProposalStage
+
+laterDraftNotAutomaticValidation :
+  Lineage.LaterDraftPromotesEarlierClaimToFact → ⊥
+laterDraftNotAutomaticValidation = Lineage.laterDraftDoesNotPromoteEarlierClaimToFact
+
+driveModifierNotAuthorship : Lineage.DriveLastModifierPromotesAuthorship → ⊥
+driveModifierNotAuthorship = Lineage.driveLastModifierDoesNotPromoteAuthorship
 
 conditionalHypothesesPreserved :
   Brown.JohnAnthonyBrownPaperBidiBoundary.paperPositiveAndNegativeOutcomeHypothesesPreserved
@@ -88,6 +108,58 @@ formalAuditReturnsRevisionObligations :
     Brown.canonicalJohnAnthonyBrownPaperBidiBoundary
   ≡ true
 formalAuditReturnsRevisionObligations = refl
+
+studyDesignIsLongitudinalMixedMethods :
+  Design.JohnAnthonyBrownStudyDesignBoundary.latestProposalUsesLongitudinalMixedMethods
+    Design.canonicalJohnAnthonyBrownStudyDesignBoundary
+  ≡ true
+studyDesignIsLongitudinalMixedMethods = refl
+
+retrospectiveExposureBlocksAutomaticCausation :
+  Design.LongitudinalDesignPromotesCausation → ⊥
+retrospectiveExposureBlocksAutomaticCausation = Design.longitudinalDoesNotPromoteCausation
+
+adjustmentDoesNotEraseConfounding :
+  Design.CovariateAdjustmentPromotesNoConfounding → ⊥
+adjustmentDoesNotEraseConfounding = Design.adjustmentDoesNotPromoteNoConfounding
+
+comparisonGroupsNotEquivalentHarms :
+  Design.ComparatorPromotesEquivalentHarm → ⊥
+comparisonGroupsNotEquivalentHarms = Design.comparatorDoesNotPromoteEquivalentHarm
+
+newMeasureNeedsValidation :
+  Design.JohnAnthonyBrownStudyDesignBoundary.newExposureMeasureRequiresValidation
+    Design.canonicalJohnAnthonyBrownStudyDesignBoundary
+  ≡ true
+newMeasureNeedsValidation = refl
+
+mixedMethodsRetainsDivergence :
+  Design.MixedMethodsIntegrationReceipt.divergenceMayBeReported
+    Design.canonicalMixedMethodsIntegration
+  ≡ true
+mixedMethodsRetainsDivergence = refl
+
+allFiveLatestHypothesesTyped :
+  Manifest.SectionHypothesisManifestBoundary.allFiveHypothesesTyped
+    Manifest.canonicalSectionHypothesisManifestBoundary
+  ≡ true
+allFiveLatestHypothesesTyped = refl
+
+hypothesesNotFindings :
+  Manifest.SectionHypothesisManifestBoundary.hypothesesTreatedAsFindings
+    Manifest.canonicalSectionHypothesisManifestBoundary
+  ≡ false
+hypothesesNotFindings = refl
+
+citationsNotAutomaticallyVerified :
+  Manifest.PaperCitationPromotesVerifiedSource → ⊥
+citationsNotAutomaticallyVerified = Manifest.paperCitationDoesNotPromoteVerifiedSource
+
+riskAndResilienceRemainPresent :
+  Manifest.SectionHypothesisManifestBoundary.riskAndResilienceBothPreserved
+    Manifest.canonicalSectionHypothesisManifestBoundary
+  ≡ true
+riskAndResilienceRemainPresent = refl
 
 sameParticipationSurfacePinned :
   Formation.publicSurface Formation.openFormationEpisode
