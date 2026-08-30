@@ -3,5 +3,8 @@ module DASHI.EducationEvidenceAuditValidation where
 import DASHI.Reasoning.DialecticalOppositionNonExplosionExact
 import DASHI.Reasoning.PredicateNormalFormEvidenceAuditExact
 import DASHI.Reasoning.EvidenceDesignAdmissibilityExact
+import DASHI.Reasoning.ClaimAuditManifestExact
 import DASHI.Biology.ACPUEAEROEducationAssertionBidiExact
+import DASHI.Biology.ACPUEAEROClaimAuditProtocolExact
+import DASHI.Biology.ACPUEAEROClaimAuditTrancheExact
 import DASHI.Biology.EducationEvidenceAuditEverything
