@@ -8,3 +8,4 @@ import DASHI.Culture.KimmererNarrativeMetaphorCalibrationExact
 import DASHI.Culture.ShakespeareLiteraryTopologyBridgeExact
 import DASHI.Culture.KimmererBraidTransferResidualBoundaryExact
 import DASHI.Culture.ReligiousPowerChildFearClaimBidiExact
+import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact
