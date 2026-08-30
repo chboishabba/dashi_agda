@@ -206,3 +206,4 @@ import DASHI.Biology.JCoarseFineConsumerReductionBridgeExact
 -- Cross-kingdom anaesthetic action and electrical-excitability comparison.
 import DASHI.Biology.CrossKingdomAnaestheticActionBidiExact
 import DASHI.Biology.CrossKingdomActionPotentialAnaestheticBidiExact
+import DASHI.Biology.CrossKingdomAnaestheticExcitabilityFlowBidiExact
