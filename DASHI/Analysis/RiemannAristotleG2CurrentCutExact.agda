@@ -27,8 +27,16 @@ record AristotleG2CurrentCut : Set where
       g2cPolarizationDerivationClosedInAgda ≡ true
 
     g2cFreshLeanBilinearKernelReceiptPresent : Bool
-    g2cFreshLeanBilinearKernelReceiptPresentIsFalse :
-      g2cFreshLeanBilinearKernelReceiptPresent ≡ false
+    g2cFreshLeanBilinearKernelReceiptPresentIsTrue :
+      g2cFreshLeanBilinearKernelReceiptPresent ≡ true
+
+    finiteSignedGramLedgerKernelCheckedInLean : Bool
+    finiteSignedGramLedgerKernelCheckedInLeanIsTrue :
+      finiteSignedGramLedgerKernelCheckedInLean ≡ true
+
+    scalarGramDebtIdentityKernelCheckedInLean : Bool
+    scalarGramDebtIdentityKernelCheckedInLeanIsTrue :
+      scalarGramDebtIdentityKernelCheckedInLean ≡ true
 
     reflectionPairOddSinhSinCancellationClosedInLean : Bool
     reflectionPairOddSinhSinCancellationClosedInLeanIsTrue :
@@ -38,6 +46,10 @@ record AristotleG2CurrentCut : Set where
     reflectionOnlyForcesRemainingGramCancellationIsFalse :
       reflectionOnlyForcesRemainingGramCancellation ≡ false
 
+    reflectionDuplicatePositiveNoGoKernelCheckedInLean : Bool
+    reflectionDuplicatePositiveNoGoKernelCheckedInLeanIsTrue :
+      reflectionDuplicatePositiveNoGoKernelCheckedInLean ≡ true
+
     g2dReducedToSingleSignedScalarDeterminantSum : Bool
     g2dReducedToSingleSignedScalarDeterminantSumIsTrue :
       g2dReducedToSingleSignedScalarDeterminantSum ≡ true
@@ -45,6 +57,22 @@ record AristotleG2CurrentCut : Set where
     g2eDeterminantTaperKernelCompressionClosed : Bool
     g2eDeterminantTaperKernelCompressionClosedIsTrue :
       g2eDeterminantTaperKernelCompressionClosed ≡ true
+
+    literalNearCoreSingleIntegralKernelCheckedInLean : Bool
+    literalNearCoreSingleIntegralKernelCheckedInLeanIsTrue :
+      literalNearCoreSingleIntegralKernelCheckedInLean ≡ true
+
+    literalNearCoreEnergyScalarizationKernelCheckedInLean : Bool
+    literalNearCoreEnergyScalarizationKernelCheckedInLeanIsTrue :
+      literalNearCoreEnergyScalarizationKernelCheckedInLean ≡ true
+
+    literalFarRemainderInSameScalarCoordinateKernelCheckedInLean : Bool
+    literalFarRemainderInSameScalarCoordinateKernelCheckedInLeanIsTrue :
+      literalFarRemainderInSameScalarCoordinateKernelCheckedInLean ≡ true
+
+    literalScalarOffEnergyConsumerKernelCheckedInLean : Bool
+    literalScalarOffEnergyConsumerKernelCheckedInLeanIsTrue :
+      literalScalarOffEnergyConsumerKernelCheckedInLean ≡ true
 
     functionalAndConjugationSymmetriesGiveTargetCenteredGapPairing : Bool
     functionalAndConjugationSymmetriesGiveTargetCenteredGapPairingIsFalse :
@@ -58,15 +86,35 @@ record AristotleG2CurrentCut : Set where
     montgomeryVaughanDirectlyClosesLocalZeroCosineSumIsFalse :
       montgomeryVaughanDirectlyClosesLocalZeroCosineSum ≡ false
 
-    g2eTargetCenteredLocalZeroExponentialSumBoundClosed : Bool
-    g2eTargetCenteredLocalZeroExponentialSumBoundClosedIsFalse :
-      g2eTargetCenteredLocalZeroExponentialSumBoundClosed ≡ false
+    targetCenteredLocalZeroExponentialSumBoundClosed : Bool
+    targetCenteredLocalZeroExponentialSumBoundClosedIsFalse :
+      targetCenteredLocalZeroExponentialSumBoundClosed ≡ false
+
+    projectiveBalanceStrictInequalityNoGoKernelCheckedInLean : Bool
+    projectiveBalanceStrictInequalityNoGoKernelCheckedInLeanIsTrue :
+      projectiveBalanceStrictInequalityNoGoKernelCheckedInLean ≡ true
+
+    projectiveBalanceStrictInequalityNoGoClosedInAgda : Bool
+    projectiveBalanceStrictInequalityNoGoClosedInAgdaIsTrue :
+      projectiveBalanceStrictInequalityNoGoClosedInAgda ≡ true
+
+    strictOffEnergyBelowClusterUnderUnbrokenBalanceAdmissible : Bool
+    strictOffEnergyBelowClusterUnderUnbrokenBalanceAdmissibleIsFalse :
+      strictOffEnergyBelowClusterUnderUnbrokenBalanceAdmissible ≡ false
+
+    balanceBreakingPremiseRequiredForStrictContradictionRoute : Bool
+    balanceBreakingPremiseRequiredForStrictContradictionRouteIsTrue :
+      balanceBreakingPremiseRequiredForStrictContradictionRoute ≡ true
 
     genericGramOrSchurAlgebraRemaining : Bool
     genericGramOrSchurAlgebraRemainingIsFalse :
       genericGramOrSchurAlgebraRemaining ≡ false
 
-    firstGenuinelyNewAnalyticTheorem : String
+    firstUnprovedHarmonicAnalysisTheorem : String
+    contradictionArchitectureBoundary : String
+
+    leanProofsTransportedIntoAgda : Bool
+    leanProofsTransportedIntoAgdaIsFalse : leanProofsTransportedIntoAgda ≡ false
 
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
@@ -83,16 +131,29 @@ canonicalAristotleG2CurrentCut =
     true refl
     true refl
     true refl
-    false refl
+    true refl
+    true refl
+    true refl
     true refl
     false refl
     true refl
     true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
     false refl
     false refl
     false refl
     false refl
+    true refl
+    true refl
     false refl
-    "Bound the target-centered local zero exponential sum S_q(t,J)=integral q(u) * sum_{sigma in near(t,J)} m_sigma cosh(a_sigma u) cos((b_sigma-t)u) strongly enough that S_q(t,J)^2 / wedgeSq(n1,n2), together with the explicit far error, lies strictly below the surviving cluster determinant margin."
+    true refl
     false refl
-    "The bidi cut is complete through all reusable algebra. G1, G2a and G2b are closed source-level. G2c is mathematically derived from the already checked ThreeTaperSchurMargin norm/determinant identity by polarization; only a fresh Lean kernel receipt for that stitched bilinear theorem remains. Reflection-only Gram cancellation is refuted because the finite near cells are already reflection paired and reflection invariant. G2e then moves the one-dimensional determinant through the common reflection-pair kernel, producing one fixed compactly supported determinant taper q(u): d_sigma = m_sigma integral 4 q(u) cosh(a_sigma u) cos((b_sigma-t)u). Functional reflection preserves the ordinate, conjugation is centered at ordinate zero rather than arbitrary t, the local zero count is phase-blind, and the bundled Montgomery-Vaughan inequality does not directly control this local zero cosine sum. Therefore the first genuinely new analytic theorem is exactly a target-centered local zero exponential-sum cancellation estimate for this q-weighted carrier. No generic Gram, Schur, reflection, tail, or count algebra remains, and RH is not derived."
+    "For a constructed three-taper family g, radius r, deterministic nuisance directions n1,n2 with positive wedgeSq, and cutoff J>=1, bound the target-centered scalar integral integral q(u) * sum_{sigma in nearOffFinset(t,J)} m_sigma cosh(a_sigma u) cos((b_sigma-t)u) du with the exact constants needed by NearCoreDeterminantTaper.normSqP_elim2_offVec_lt_of_scalar_bound."
+    "NearCoreDeterminantTaper.not_normSqP_elim2_offVec_lt_of_balance is kernel checked: if literal projective balance identifies the surviving off-ordinate energy with the cluster margin, the same energy cannot be strictly below that margin. Therefore a strict contradiction route must expose a genuine balance-breaking premise or changed comparison object; sharpening the scalar estimate while retaining unbroken balance is not an admissible final consumer."
+    false refl
+    false refl
+    "The 8885-job Lean return closes G2c itself, the finite signed Gram ledger, scalar Gram-debt identity, reflection-duplicate no-go, the literal determinant-taper near scalarization, the finite exponential-sum form, the far remainder in the same determinant coordinate, and the scalar off-energy consumer. Agda retains these as checked-Lean provenance rather than imported proof terms. The first unproved harmonic-analysis theorem is the target-centered local zero cosine/exponential-sum bound. Separately, the newly checked projective-balance no-go blocks the old strict off-energy-below-cluster consumer under unbroken balance, so any final contradiction architecture must make the balance-breaking step explicit. No generic Gram or Schur algebra remains and RH is not derived."
