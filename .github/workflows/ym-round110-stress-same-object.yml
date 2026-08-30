@@ -1,0 +1,72 @@
+name: YM Round109-123 density-anchored stress Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanSameFamilyStressCauchySchwingerRound109Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanStressSameObjectProvenanceRound110Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanMarkedStressLiteralDerivativeRound111Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanStressShellEnergyToHilbertRound112Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanStressShellPartitionEnergyRound113Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanLiteralStressCoordinateRound114Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanLiteralStressCompletionRound115Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanLiteralStressCompletionRound115Validation.agda'
+      - 'DASHI/Physics/YangMills/BalabanNormalizedStressInsertionRound116Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanLiteralStressCoordinateSourceWeldRound117Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCanonicalMetricToCMP119StressRound118Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCanonicalMetricSelectedStressRound119Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCanonicalMetricStressLaneRound120Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCanonicalMetricStressLaneRound120Validation.agda'
+      - 'DASHI/Physics/YangMills/BalabanLiteralDensityNormalizedSourceRound121Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanDensityAnchoredMetricStressRound122Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanDensityAnchoredStressLaneRound123Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanDensityAnchoredStressLaneRound123Validation.agda'
+      - 'DASHI/Physics/YangMills/Balaban1989BetaDrivenCompleteDensityFlowExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanNormalizedExpectationCrossNumeratorExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalMetricSourceDomainRound106Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalMetricStressRepresentationRound106Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP119CompatibleLocalExpectationFlowExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanTopDownSummableRGIncrementExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanRowBActivityEntropyToShellEnergyExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanMarkedSourceGeometricShellEnergyExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanMarkedSourceCoefficientEnergyHilbertCompilerExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanMarkedSourceNuclearCompositeFieldExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanMarkedSourceCompositeStressFieldExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayLiteralTopDownConstructionExact.agda'
+      - 'scripts/check_ym_round110_stress_same_object.sh'
+      - '.github/workflows/ym-round110-stress-same-object.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ym-round109-123-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  agda:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          submodules: false
+      - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Check Round109-123 density-anchored stress lane
+        env:
+          AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
+          DASHI_REPO_ROOT: ${{ github.workspace }}
+          DASHI_AGDA29_CACHE_ROOT: ${{ runner.temp }}/dashi-agda29-round123
+          DASHI_STATUS_DIR: ${{ runner.temp }}/dashi-agda29-round123/status
+          XDG_CACHE_HOME: ${{ runner.temp }}/dashi-xdg-round123
+          AGDA_LOG_PATH: ${{ github.workspace }}/ym-round123-agda.log
+          AGDA_JOBS: '4'
+          DASHI_NO_TMUX: '1'
+        run: bash scripts/check_ym_round110_stress_same_object.sh
+      - name: Upload Round123 Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ym-round109-123-density-anchored-stress-agda-log
+          path: ym-round123-agda*.log
+          if-no-files-found: warn

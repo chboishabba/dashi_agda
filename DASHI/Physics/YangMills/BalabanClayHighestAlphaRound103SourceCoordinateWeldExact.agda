@@ -2,20 +2,15 @@
 module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound103SourceCoordinateWeldExact where
 
 ------------------------------------------------------------------------
--- ROUND103/106: BIDI SOURCE-COORDINATE WELD
+-- ROUND103/107: BIDI SOURCE-COORDINATE WELD
 --
 -- A1/A2 and BC1/BC2 remain the frozen Clay frontier.
 --
--- Round105/106 cross-pollination adds a downstream stress-energy consumer
--- without altering that scoreboard.  The key separation is:
---
---   * CMP109 polarization = second gauge/background variation;
---   * stress-energy = first metric/source variation;
---   * first variation reuses the existing CMP116 first-gradient marked shell;
---   * metric perturbations must explicitly land in the SAME canonical CMP116
---     analytic source domain;
---   * on that admitted domain, the remaining physical theorem is the stress
---     representation D_g V_eff[h] = <T,h> with explicit pairing convention.
+-- Round105/106 adds the finite first-variation stress representation on the
+-- canonical CMP116 metric/source domain.  Round107 adds only the missing
+-- finite-to-continuum compiler: finite stress representation does not become
+-- the literal continuum `stressTensor Y G` until the first-variation and stress
+-- pairing sequences have compatible unique limits.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -31,6 +26,7 @@ import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityFirstVariationRou
 import DASHI.Physics.YangMills.BalabanCMP116FirstVariationStressPairingRound105Exact as Stress
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106Exact as MetricDomain
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as StressRep
+import DASHI.Physics.YangMills.BalabanFirstVariationStressContinuumRound107Exact as StressLimit
 import DASHI.Physics.YangMills.BalabanCMP109116ConventionTransportRound103Exact as Transport
 import DASHI.Physics.YangMills.BalabanCMP116CommonAnalyticRadiusRound103Exact as Radius
 import DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact as Carrier
@@ -112,6 +108,14 @@ bcCanonicalMetricStressRepresentationRound106Level =
 bcLiteralMetricStressRepresentationRound106Level : ProofLevel
 bcLiteralMetricStressRepresentationRound106Level =
   StressRep.literalCMP116MetricStressRepresentationLevel
+
+bcStressContinuumCompilerRound107Level : ProofLevel
+bcStressContinuumCompilerRound107Level =
+  StressLimit.stressContinuumCompilerLevel
+
+bcLiteralFirstVariationContinuumInterchangeRound107Level : ProofLevel
+bcLiteralFirstVariationContinuumInterchangeRound107Level =
+  StressLimit.literalBalabanFirstVariationContinuumInterchangeLevel
 
 -- Older Round105 aliases remain visible for compatibility.
 bcStressMetricSourceCoordinateWeldRound105Level : ProofLevel

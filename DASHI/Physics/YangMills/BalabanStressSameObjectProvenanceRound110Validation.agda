@@ -1,0 +1,13 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanStressSameObjectProvenanceRound110Validation where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanStressSameObjectProvenanceRound110Exact as R110
+
+round110SameObjectCompilerIsMachineChecked : ProofLevel
+round110SameObjectCompilerIsMachineChecked =
+  R110.sameObjectStressProvenanceCompilerLevel
+
+round110LiteralInstantiationRemainsConditional : ProofLevel
+round110LiteralInstantiationRemainsConditional =
+  R110.literalCMP119StressCompletionProvenanceLevel
