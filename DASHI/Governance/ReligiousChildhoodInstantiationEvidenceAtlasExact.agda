@@ -38,7 +38,6 @@ data CoverageStatus : Set where
 data StudyDesignClass : Set where
   parentChildDiaryStudy
   retrospectiveCollegeSample
-  surveyAssociationStudy
   scaleValidationStudy
   religiousSocializationStudy
   : StudyDesignClass
@@ -97,47 +96,62 @@ exlineEtAl = empirical-source-receipt
   "validates measurement domains including divine, demonic, interpersonal, moral, doubt and ultimate-meaning struggle; measurement receipt, not developmental etiology"
 
 ------------------------------------------------------------------------
--- Source x coordinate coverage.  This is deliberately sparse.
+-- Explicit source-coordinate receipts avoid pretending coverage can be inferred
+-- from a DOI string or title match.
 ------------------------------------------------------------------------
 
-coverage : EmpiricalSourceReceipt → ReligiousChildhoodCoordinate → CoverageStatus
-coverage s divinePunishmentFear with identifier s
-... | "DOI 10.1080/13674676.2019.1629402" = directMeasuredCoverage
-... | "DOI 10.1037/a0036465" = contextualCoverage
-... | _ = notCovered
-coverage s familyReligiousTransmission with identifier s
-... | "DOI 10.2307/3512386" = directMeasuredCoverage
-... | "DOI 10.2307/1386039" = directMeasuredCoverage
-... | _ = notCovered
-coverage s autonomySupportOrControl with identifier s
-... | "DOI 10.1080/13674676.2019.1629402" = directMeasuredCoverage
-... | "DOI 10.2307/3512386" = partialProxyCoverage
-... | _ = notCovered
-coverage s apostasyOrExitTransition with identifier s
-... | "DOI 10.2307/1386039" = directMeasuredCoverage
-... | _ = notCovered
-coverage _ refusalPenalty = notCovered
-coverage _ restrictedAlternatives = notCovered
-coverage s developmentalTiming with identifier s
-... | "DOI 10.2307/3512386" = directMeasuredCoverage
-... | "DOI 10.2307/1386039" = contextualCoverage
-... | _ = notCovered
+record CoordinateCoverage : Set where
+  constructor coordinate-coverage
+  field
+    source : EmpiricalSourceReceipt
+    coordinate : ReligiousChildhoodCoordinate
+    status : CoverageStatus
+    coverageBoundary : String
+
+open CoordinateCoverage public
+
+williamsDivinePunishmentCoverage : CoordinateCoverage
+williamsDivinePunishmentCoverage = coordinate-coverage
+  williamsEtAl divinePunishmentFear directMeasuredCoverage
+  "fear-of-God-punishment scrupulosity is measured in a Catholic college-aged sample; childhood causal timing is retrospective rather than prospectively identified"
+
+boyatzisTransmissionCoverage : CoordinateCoverage
+boyatzisTransmissionCoverage = coordinate-coverage
+  boyatzisJanicki familyReligiousTransmission directMeasuredCoverage
+  "religious conversation and reciprocity/unilateral-transmission style are measured; coercion and harm are not"
+
+williamsAutonomyCoverage : CoordinateCoverage
+williamsAutonomyCoverage = coordinate-coverage
+  williamsEtAl autonomySupportOrControl directMeasuredCoverage
+  "perceived parental autonomy support is measured in association with religious/spiritual struggle"
+
+hunsbergerApostasyCoverage : CoordinateCoverage
+hunsbergerApostasyCoverage = coordinate-coverage
+  hunsbergerBrown apostasyOrExitTransition directMeasuredCoverage
+  "family background and apostasy/disaffiliation are studied; explicit refusal penalty is not thereby established"
+
+boyatzisDevelopmentalCoverage : CoordinateCoverage
+boyatzisDevelopmentalCoverage = coordinate-coverage
+  boyatzisJanicki developmentalTiming directMeasuredCoverage
+  "sample includes parent-child religious communication with children aged approximately 3-12; no claim of a universal competence threshold"
+
+exlineDivineMeasurementCoverage : CoordinateCoverage
+exlineDivineMeasurementCoverage = coordinate-coverage
+  exlineEtAl divinePunishmentFear contextualCoverage
+  "religious/spiritual struggle domains provide measurement context; the scale does not establish childhood exposure etiology"
 
 ------------------------------------------------------------------------
--- The atlas therefore narrows the missing receipt rather than declaring it
--- solved.  Hell/divine-punishment fear, transmission, autonomy support,
--- apostasy, and developmental timing have some empirical occupancy; explicit
--- refusal penalty and restricted-alternative coordinates remain unfilled here.
+-- The atlas narrows the missing receipt rather than declaring it solved.
 ------------------------------------------------------------------------
 
 record ReligiousChildhoodInstantiationReceipt : Set where
   constructor religious-childhood-instantiation-receipt
   field
-    divinePunishmentEvidence : EmpiricalSourceReceipt
-    transmissionEvidence : EmpiricalSourceReceipt
-    autonomyEvidence : EmpiricalSourceReceipt
-    apostasyEvidence : EmpiricalSourceReceipt
-    developmentalEvidence : EmpiricalSourceReceipt
+    divinePunishmentEvidence : CoordinateCoverage
+    transmissionEvidence : CoordinateCoverage
+    autonomyEvidence : CoordinateCoverage
+    apostasyEvidence : CoordinateCoverage
+    developmentalEvidence : CoordinateCoverage
     refusalPenaltyStillMissing : Bool
     restrictedAlternativesStillMissing : Bool
     causalEntrapmentEstablished : Bool
@@ -147,11 +161,11 @@ canonicalReligiousChildhoodInstantiationReceipt :
   ReligiousChildhoodInstantiationReceipt
 canonicalReligiousChildhoodInstantiationReceipt =
   religious-childhood-instantiation-receipt
-    williamsEtAl
-    boyatzisJanicki
-    williamsEtAl
-    hunsbergerBrown
-    boyatzisJanicki
+    williamsDivinePunishmentCoverage
+    boyatzisTransmissionCoverage
+    williamsAutonomyCoverage
+    hunsbergerApostasyCoverage
+    boyatzisDevelopmentalCoverage
     true true false false
 
 ------------------------------------------------------------------------
