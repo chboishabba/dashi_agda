@@ -18,22 +18,6 @@ import DASHI.Planning.InhabitedLandscapeExact as Landscape
 -- This module attaches an Ital livity profile to repository-owned physical
 -- soil/water/plant process carriers without treating the cultural orientation
 -- as a mechanistic or empirical law.
---
---   Ital livity profile
---        |
---        | cultural/practice orientation
---        v
---   inhabited landscape practice
---        |
---        | explicit physical realization required
---        v
---   soil-plant-atmosphere + soil biogeochemistry
---        |
---        | typed process enablement required
---        v
---   admissible ecological transition
---
--- The arrows are typed requirements, not source-attribution identities.
 ------------------------------------------------------------------------
 
 record ItalSocioEcologicalFlowRealization : Set₁ where
@@ -66,10 +50,6 @@ record ItalSoilProcessRealization
 
 open ItalSoilProcessRealization public
 
-------------------------------------------------------------------------
--- Positive structural facts inherited from the Ital and landscape owners.
-------------------------------------------------------------------------
-
 italFlowRetainsLifeAndLandDimensions :
   (flow : ItalSocioEcologicalFlowRealization) →
   Ital.dimension (livity flow) Ital.food ×
@@ -92,14 +72,6 @@ italFlowRetainsSituatedObservationBoundary :
 italFlowRetainsSituatedObservationBoundary =
   Observe.anonymousReadingCannotRecoverSituatedSignature
 
-------------------------------------------------------------------------
--- Mechanism gates.
---
--- An Ital-oriented food/land practice does not itself prove hydraulic
--- continuity, soil-process enablement, or a causal environmental outcome.
--- Those must come through the existing SPAC and admissible-transition owners.
-------------------------------------------------------------------------
-
 data ItalOrientationProvesSPACMechanism : Set where
 
 data ItalOrientationProvesSoilProcessEnablement : Set where
@@ -117,18 +89,6 @@ italOrientationDoesNotProveSoilProcessEnablement ()
 italOrientationDoesNotProveEnvironmentalOutcome :
   ItalOrientationProvesEnvironmentalOutcome → ⊥
 italOrientationDoesNotProveEnvironmentalOutcome ()
-
-------------------------------------------------------------------------
--- BIDI reading.
---
--- Forward:
---   cultural orientation + declared practice + physical realization
---   -> a typed socio-ecological flow object.
---
--- Backward:
---   observing a soil/water/plant outcome does not recover or identify the
---   cultural livity that motivated the practice.
-------------------------------------------------------------------------
 
 data EnvironmentalOutcomeIdentifiesItalLivity : Set where
 
