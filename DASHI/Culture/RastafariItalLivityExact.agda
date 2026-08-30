@@ -9,21 +9,6 @@ open import DASHI.Core.Prelude
 -- Joseph Powell, "Ital Hermeneutics: The Innovative Theological Grounding of
 -- Rastafari Dietary (Ietary) Practices", Black Theology 19(1), 2021, 32--52.
 -- DOI: 10.1080/14769948.2021.1897097
---
--- Source-bounded reading used here:
--- * Ital is an "I" form of vital and is a Rastafari philosophy/livity rather
---   than merely a recipe list.
--- * It values and promotes life and seeks food/practice that is as natural and
---   unadulterated as possible.
--- * Dietary manifestations are often plant-centred and may avoid animal
---   products, added salt, processed/tinned food and artificial additives.
--- * Practice varies; "strictly Ital" is stronger than merely participating in
---   some Ital-associated practices.
---
--- DASHI boundary:
--- This module does NOT identify Rastafari with permaculture, veganism,
--- environmentalism, generic wellness, or any DASHI planning formalism.
--- Cross-domain reuse must be expressed by separate bridge theorems.
 ------------------------------------------------------------------------
 
 data ItalDimension : Set where
