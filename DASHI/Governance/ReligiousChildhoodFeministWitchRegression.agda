@@ -13,6 +13,7 @@ import DASHI.Governance.ReligiousChildhoodInstantiationEvidenceAtlasExact as Atl
 import DASHI.Governance.WitchTrialEvidenceSubjectAttributionExact as WitchTrial
 import DASHI.Governance.SuffrageWitchReclamationGenealogyExact as Genealogy
 import DASHI.Governance.HistoricalEventMeaningProvenanceBidiExact as History
+import DASHI.Governance.SexedHistoricalSubjectDialecticBidiExact as SexDialectic
 
 ------------------------------------------------------------------------
 -- Fine-state route survives public behavioural collapse.
@@ -62,6 +63,22 @@ factoryCauseRegression :
 factoryCauseRegression = History.burnedSurfaceCannotRecoverCause
 
 ------------------------------------------------------------------------
+-- Sexed historical dialectic: neither constructed side has an intrinsic
+-- thesis/antithesis role, and opposition is not logical negation.
+------------------------------------------------------------------------
+
+masculineNoIntrinsicDialecticRoleRegression =
+  SexDialectic.noIntrinsicMasculineDialecticRole
+
+feminineNoIntrinsicDialecticRoleRegression =
+  SexDialectic.noIntrinsicFeminineDialecticRole
+
+historicalOppositionNotLogicalNegationRegression :
+  SexDialectic.HistoricalOppositionPromotesLogicalNegation → ⊥
+historicalOppositionNotLogicalNegationRegression =
+  SexDialectic.historicalOppositionDoesNotPromoteLogicalNegation
+
+------------------------------------------------------------------------
 -- Empirical atlas remains partial rather than decorative completion.
 ------------------------------------------------------------------------
 
@@ -82,6 +99,9 @@ record ReligiousChildhoodFeministWitchRegressionBoundary : Set where
     accusedWitchEqualsSelfIdentifiedWitch : Bool
     suffrageReinterpretationProvesUnbrokenWiccanLineage : Bool
     burnedFactoryRecoversPoliticalCause : Bool
+    masculineIsIntrinsicDialecticThesis : Bool
+    feminineIsIntrinsicDialecticAntithesis : Bool
+    historicalOppositionEqualsLogicalNegation : Bool
     currentReligiousAtlasIsCausallyComplete : Bool
     currentReligiousAtlasIsPartiallyInstantiated : Bool
 
@@ -89,4 +109,4 @@ canonicalReligiousChildhoodFeministWitchRegressionBoundary :
   ReligiousChildhoodFeministWitchRegressionBoundary
 canonicalReligiousChildhoodFeministWitchRegressionBoundary =
   religious-childhood-feminist-witch-regression-boundary
-    false false false false false false true
+    false false false false false false false false false true
