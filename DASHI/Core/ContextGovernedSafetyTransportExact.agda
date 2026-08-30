@@ -2,17 +2,6 @@ module DASHI.Core.ContextGovernedSafetyTransportExact where
 
 ------------------------------------------------------------------------
 -- GOVERNED SAFETY TRANSPORT ACROSS CONTEXT / QUERY CHANGES
---
--- Two independent things must be transported:
---
---   1. which governed axes are active;
---   2. the fine/public observations along the context restriction.
---
--- Observation naturality alone does not imply global adequacy transport:
--- restriction need not be surjective, and equality after restriction need not
--- reflect equality before restriction.  The positive theorem below therefore
--- first proves safety on the restricted image.  Whole-context promotion needs
--- an explicit coverage/section witness.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -21,10 +10,6 @@ import DASHI.Core.ConsumerIndexedResidualRefinementExact as Consumer
 import DASHI.Core.ContextIndexedGovernedObservationExact as Governed
 import DASHI.Core.ContextIndexedObservationFibrationExact as Fibration
 import DASHI.Core.ProjectionCategory as Cat
-
-------------------------------------------------------------------------
--- 1. Active-requirement transport on one observer carrier.
-------------------------------------------------------------------------
 
 RequirementTransport :
   ∀ {State Context Query Surface}
@@ -90,10 +75,6 @@ newlyActivatedCollisionBlocksTargetSafety newly safe =
     (targetCollision newly)
     (safe (axis newly) (activeAtTarget newly))
 
-------------------------------------------------------------------------
--- 2. Context-indexed observation: exact safety on the restricted image.
-------------------------------------------------------------------------
-
 record IndexedGovernedConsumer
     {base : Cat.ProjectionCategory}
     (indexed : Fibration.ContextIndexedObservation base) : Set₁ where
@@ -139,9 +120,6 @@ RestrictedImageSufficient {indexed = indexed} consumer {A} {B} change axis =
   consume consumer A axis (Fibration.restrictFine indexed change x)
   ≡ consume consumer A axis (Fibration.restrictFine indexed change y)
 
--- Local adequacy at A automatically governs every B-state after it is
--- restricted into A.  This is the exact image-level theorem; no surjectivity is
--- needed.
 localSafetyControlsRestrictedImage :
   ∀ {base : Cat.ProjectionCategory}
     {indexed : Fibration.ContextIndexedObservation base}
@@ -153,15 +131,11 @@ localSafetyControlsRestrictedImage :
     (Fibration.observe indexed A)
     (consume consumer A axis) →
   RestrictedImageSufficient consumer change axis
-localSafetyControlsRestrictedImage consumer change axis safe x y same =
+localSafetyControlsRestrictedImage {indexed = indexed} consumer change axis safe x y same =
   safe
-    (Fibration.restrictFine _ change x)
-    (Fibration.restrictFine _ change y)
+    (Fibration.restrictFine indexed change x)
+    (Fibration.restrictFine indexed change y)
     same
-
-------------------------------------------------------------------------
--- 3. Whole-context promotion requires coverage by the restriction image.
-------------------------------------------------------------------------
 
 record RestrictionCoversFine
     {base : Cat.ProjectionCategory}
@@ -189,26 +163,26 @@ restrictedImageSafetyPromotesWithCoverage :
     (Fibration.observe indexed A)
     (consume consumer A axis)
 restrictedImageSafetyPromotesWithCoverage
-  {indexed = indexed} consumer change axis coverage restrictedSafe x y same =
+  {indexed = indexed} consumer {A} {B} change axis coverage restrictedSafe x y same =
   trans
-    (sym (cong (consume consumer _ axis) (liftRestrictsBack coverage x)))
+    (sym (cong (consume consumer A axis) (liftRestrictsBack coverage x)))
     (trans
       (restrictedSafe
         (liftFine coverage x)
         (liftFine coverage y)
         (trans
-          (cong (Fibration.observe indexed _) (liftRestrictsBack coverage x))
+          (cong (Fibration.observe indexed A) (liftRestrictsBack coverage x))
           (trans same
-            (sym (cong (Fibration.observe indexed _)
+            (sym (cong (Fibration.observe indexed A)
               (liftRestrictsBack coverage y))))))
-      (cong (consume consumer _ axis) (liftRestrictsBack coverage y)))
+      (cong (consume consumer A axis) (liftRestrictsBack coverage y)))
 
 record ContextGovernedSafetyTransportBoundary : Set where
   field
     targetRequirementsMustBeInheritedOrReproved : Bool
     newlyActivatedCollidingAxisCanBreakTransport : Bool
     observationNaturalityAloneImpliesGlobalSafetyTransport : Bool
-    localSafetyControlsRestrictedImage : Bool
+    localSafetyControlsRestrictedImageExactly : Bool
     imageSafetyNeedsCoverageForWholeContextPromotion : Bool
 
 canonicalContextGovernedSafetyTransportBoundary :
@@ -217,6 +191,6 @@ canonicalContextGovernedSafetyTransportBoundary = record
   { targetRequirementsMustBeInheritedOrReproved = true
   ; newlyActivatedCollidingAxisCanBreakTransport = true
   ; observationNaturalityAloneImpliesGlobalSafetyTransport = false
-  ; localSafetyControlsRestrictedImage = true
+  ; localSafetyControlsRestrictedImageExactly = true
   ; imageSafetyNeedsCoverageForWholeContextPromotion = true
   }
