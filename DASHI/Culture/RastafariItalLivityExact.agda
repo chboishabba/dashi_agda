@@ -6,12 +6,8 @@ open import DASHI.Core.Prelude
 -- RASTAFARI ITAL LIVITY — SOURCE-BOUNDED CULTURAL OWNER
 --
 -- External calibration:
--- Darren J. N. Middleton / related Black Theology discussion is not assumed
--- here.  Primary typed calibration used for this owner is:
---
--- Nathaniel Samuel Murrell Powell, "Ital Hermeneutics: The Innovative
--- Theological Grounding of Rastafari Dietary (Ietary) Practices",
--- Black Theology 19(1), 2021, 32–52.
+-- Joseph Powell, "Ital Hermeneutics: The Innovative Theological Grounding of
+-- Rastafari Dietary (Ietary) Practices", Black Theology 19(1), 2021, 32–52.
 -- DOI: 10.1080/14769948.2021.1897097
 --
 -- Source-bounded reading used here:
