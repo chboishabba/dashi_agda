@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'DASHI/Chemistry/RegulatoryAnalyteCoverageBidiExact.agda'
+      - 'DASHI/Chemistry/RegulatoryAnalytePanelRefinementExact.agda'
       - 'DASHI/Chemistry/Everything.agda'
       - 'DASHI/RegulatoryAnalyteCoverageValidation.agda'
       - 'scripts/check_regulatory_analyte_coverage_bidi.sh'
