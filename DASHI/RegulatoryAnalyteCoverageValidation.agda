@@ -1,4 +1,5 @@
 module DASHI.RegulatoryAnalyteCoverageValidation where
 
 import DASHI.Chemistry.RegulatoryAnalyteCoverageBidiExact
+import DASHI.Chemistry.RegulatoryAnalytePanelRefinementExact
 import DASHI.Chemistry.Everything
