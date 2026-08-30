@@ -9,6 +9,9 @@ FILES=(
   DASHI/Analysis/RiemannAristotlePoleQuotientBidiMeetingExact.agda
   DASHI/Analysis/RiemannAristotlePoleQuotientSplitComplementBudgetExact.agda
   DASHI/Analysis/RiemannAristotleRankTwoPoleQuotientLaneSeparationExact.agda
+  DASHI/Analysis/RiemannAristotlePoleQuotientOffOrdinateBudgetTargetExact.agda
+  DASHI/Analysis/RiemannAristotlePoleQuotientGammaBudgetTargetExact.agda
+  DASHI/Analysis/RiemannAristotlePoleQuotientClusterMarginTargetExact.agda
   DASHI/Analysis/RiemannAristotlePoleQuotientCurrentCutExact.agda
   DASHI/Analysis/RiemannAristotlePoleQuotientCurrentCutRegression.agda
 )
@@ -25,6 +28,9 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotlePoleQuotientSplitComplementBudgetExact.agda
   agda DASHI/Analysis/RiemannAristotlePoleQuotientBidiMeetingExact.agda
   agda DASHI/Analysis/RiemannAristotleRankTwoPoleQuotientLaneSeparationExact.agda
+  agda DASHI/Analysis/RiemannAristotlePoleQuotientOffOrdinateBudgetTargetExact.agda
+  agda DASHI/Analysis/RiemannAristotlePoleQuotientGammaBudgetTargetExact.agda
+  agda DASHI/Analysis/RiemannAristotlePoleQuotientClusterMarginTargetExact.agda
   agda DASHI/Analysis/RiemannAristotlePoleQuotientCurrentCutRegression.agda
 else
   echo "agda executable not present; trust scan only" >&2
