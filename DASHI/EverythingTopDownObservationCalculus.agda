@@ -21,12 +21,17 @@ import DASHI.Core.TopDownObservationCalculusExact
 -- vary by context/query; inactive axes are not failed axes. Context transport
 -- additionally requires governed-requirement transport; observation naturality
 -- alone certifies only the restricted image unless fine-state coverage is shown.
+-- Lineage transport is coordinate-wise and remains independent of consumer
+-- safety: a safe rechart may erase provenance, and later-added provenance is new
+-- lineage rather than restoration of the erased inherited coordinate.
 import DASHI.Core.GovernedObservationProvenanceExact
 import DASHI.Core.GovernedObservationProvenanceRegression
 import DASHI.Core.ContextIndexedGovernedObservationExact
 import DASHI.Core.ContextIndexedGovernedObservationRegression
 import DASHI.Core.ContextGovernedSafetyTransportExact
 import DASHI.Core.ContextGovernedSafetyTransportRegression
+import DASHI.Core.ContextGovernedLineageTransportExact
+import DASHI.Core.ContextGovernedLineageTransportRegression
 
 -- Residual dependency, certified quadratic control, future-language capability,
 -- and the independent pressure axis.  Receipt-backed SensibLaw residual order
@@ -86,6 +91,9 @@ import DASHI.Cognition.PNF.ObserverSeparationAuthorityBoundaryExact
 -- Newly activated governed axis may invalidate a previously safe surface.
 -- Local context safety controls the restricted image exactly.
 -- Restricted-image safety != whole-context safety without coverage/section.
+-- Safe recontextualisation != provenance-lineage preservation.
+-- Coordinate-wise preserve keeps lineage; coordinate-wise erase removes it.
+-- Erase in one context then add downstream != restore inherited lineage.
 -- Current observation equality != action-indexed dependency equality.
 -- Low coupling score != action admissibility.
 -- Finite dependency score != affine spectral independence / SDP certificate.
