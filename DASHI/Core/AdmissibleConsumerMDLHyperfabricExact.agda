@@ -170,8 +170,9 @@ repairStaysInDeclaredNeighbourhood :
   sameNeighbourhood neighbourhood
     (address neighbourhood coarse)
     (address neighbourhood fine)
-repairStaysInDeclaredNeighbourhood neighbourhood repair =
-  refinementLocality neighbourhood _ _ (refinement repair)
+repairStaysInDeclaredNeighbourhood {coarse = coarse} {fine = fine}
+    neighbourhood repair =
+  refinementLocality neighbourhood coarse fine (refinement repair)
 
 record AdmissibleConsumerMDLBoundary : Set where
   constructor admissibleConsumerMDLBoundary
