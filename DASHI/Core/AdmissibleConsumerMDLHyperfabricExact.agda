@@ -7,7 +7,7 @@ open import Agda.Builtin.String using (String)
 -- REPO-NATIVE DASHI EXTENSION
 --
 -- Description length is a ranking coordinate only after hard admissibility and
--- consumer-sufficiency obligations are inhabited.  This module therefore does
+-- consumer-sufficiency obligations are inhabited. This module therefore does
 -- not identify lower MDL with physical truth, empirical support, authority, or
 -- universal optimality.
 ------------------------------------------------------------------------
@@ -65,10 +65,6 @@ minimalDescriptionIsEligible receipt =
 
 ------------------------------------------------------------------------
 -- Counterexample/local-repair surface.
---
--- A compact model is not rejected merely because a richer model exists.  A
--- consumer-relevant failure witness must be supplied.  A repair then records
--- the particular refinement that answers that witnessed failure.
 ------------------------------------------------------------------------
 
 record ConsumerCounterexample
@@ -83,6 +79,13 @@ record ConsumerCounterexample
     counterexampleReference : String
 
 open ConsumerCounterexample public
+
+counterexampleExcludesEligibility :
+  ∀ {problem candidate} →
+  ConsumerCounterexample problem candidate →
+  Eligible problem candidate → ⊥
+counterexampleExcludesEligibility failure eligible =
+  candidateInsufficient failure (proj₂ eligible)
 
 record LocalRefinementRepair
     (problem : ConsumerMDLProblem)
@@ -106,10 +109,6 @@ repairProvidesEligibleRefinement repair =
 
 ------------------------------------------------------------------------
 -- Multi-axis cost / Pareto layer over the admissible stratum.
---
--- The set of axes is application-declared.  This permits information cost,
--- compute, delay, intervention burden, risk, etc. without pretending that one
--- scalar score is universally authoritative.
 ------------------------------------------------------------------------
 
 record CostHyperfabric
@@ -147,10 +146,6 @@ open ParetoAdmissible public
 
 ------------------------------------------------------------------------
 -- Optional recursive/refinement neighbourhood.
---
--- This is intentionally not called p-adic or ultrametric by fiat.  Domains
--- with a genuine recursively addressed refinement carrier can instantiate this
--- surface and then connect it to their existing ultrametric theorem owners.
 ------------------------------------------------------------------------
 
 record RefinementNeighbourhood
@@ -168,33 +163,37 @@ record RefinementNeighbourhood
 
 open RefinementNeighbourhood public
 
+repairStaysInDeclaredNeighbourhood :
+  ∀ {problem coarse fine} →
+  (neighbourhood : RefinementNeighbourhood problem) →
+  LocalRefinementRepair problem coarse fine →
+  sameNeighbourhood neighbourhood
+    (address neighbourhood coarse)
+    (address neighbourhood fine)
+repairStaysInDeclaredNeighbourhood neighbourhood repair =
+  refinementLocality neighbourhood _ _ (refinement repair)
+
 record AdmissibleConsumerMDLBoundary : Set where
   constructor admissibleConsumerMDLBoundary
   field
     lowerDescriptionLengthIsPhysicalTruth : Bool
     lowerDescriptionLengthIsPhysicalTruthIsFalse :
       lowerDescriptionLengthIsPhysicalTruth ≡ false
-
     inadmissibleModelMayWinByShortCode : Bool
     inadmissibleModelMayWinByShortCodeIsFalse :
       inadmissibleModelMayWinByShortCode ≡ false
-
     consumerInadequateModelMayWinByShortCode : Bool
     consumerInadequateModelMayWinByShortCodeIsFalse :
       consumerInadequateModelMayWinByShortCode ≡ false
-
     richerModelExistenceRefutesCompactModel : Bool
     richerModelExistenceRefutesCompactModelIsFalse :
       richerModelExistenceRefutesCompactModel ≡ false
-
     counterexampleMayDriveLocalRefinement : Bool
     counterexampleMayDriveLocalRefinementIsTrue :
       counterexampleMayDriveLocalRefinement ≡ true
-
     paretoAxesAreApplicationDeclared : Bool
     paretoAxesAreApplicationDeclaredIsTrue :
       paretoAxesAreApplicationDeclared ≡ true
-
     recursiveAddressAutomaticallyMeansPAdicPhysics : Bool
     recursiveAddressAutomaticallyMeansPAdicPhysicsIsFalse :
       recursiveAddressAutomaticallyMeansPAdicPhysics ≡ false
