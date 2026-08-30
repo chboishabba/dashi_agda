@@ -21,12 +21,12 @@ record OrderedAdditiveComplementSurface : Set₁ where
   constructor ordered-additive-complement-surface
   field
     order : C.OrderedComplementSurface
-    _+_ : C.Scalar order → C.Scalar order → C.Scalar order
+    add : C.Scalar order → C.Scalar order → C.Scalar order
     addMonotone :
       ∀ {a a' b b'} →
       C._≤_ order a a' →
       C._≤_ order b b' →
-      C._≤_ order (a + b) (a' + b')
+      C._≤_ order (add a b) (add a' b')
 
 open OrderedAdditiveComplementSurface public
 
@@ -43,7 +43,7 @@ record SplitPoleQuotientComplementMargin
     clusterMargin : C.Scalar (order S)
 
     clusterEqualsOffPlusGamma :
-      clusterResponse ≡ offOrdinateResponse + gammaResidual
+      clusterResponse ≡ add S offOrdinateResponse gammaResidual
 
     clusterMarginLower :
       C._≤_ (order S) clusterMargin clusterResponse
@@ -56,7 +56,7 @@ record SplitPoleQuotientComplementMargin
 
     splitBudgetStrictBelowMargin :
       C._<_ (order S)
-        (offOrdinateBudget + gammaBudget)
+        (add S offOrdinateBudget gammaBudget)
         clusterMargin
 
 open SplitPoleQuotientComplementMargin public
@@ -68,8 +68,8 @@ compiledWholeComplementMargin :
 compiledWholeComplementMargin S d =
   C.pole-quotient-complement-margin
     (clusterResponse d)
-    (offOrdinateResponse d + gammaResidual d)
-    (offOrdinateBudget d + gammaBudget d)
+    (add S (offOrdinateResponse d) (gammaResidual d))
+    (add S (offOrdinateBudget d) (gammaBudget d))
     (clusterMargin d)
     (clusterEqualsOffPlusGamma d)
     (clusterMarginLower d)
