@@ -3,30 +3,29 @@ module DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact where
 ------------------------------------------------------------------------
 -- BASE369 TERNARY 27-HYPERVOXEL / THREE-CUBE HYPERFABRIC GEOMETRY
 --
--- This is geometric carrier content, not a metaphorical 3/6/9 annotation.
--- A ternary cube is SSPTrit^3 = {-1,0,+1}^3 and therefore has 27 points.
--- A one-round Base369 state is three such cubes:
+-- Geometric carrier content:
+--   T3 = {-1,0,+1}^3                    27 points
+--   H  = T3 x T3 x T3 = {-1,0,+1}^9    19683 points
 --
---   interaction cube × appraisal-A cube × appraisal-B cube
---
--- so the full fabric is (SSPTrit^3)^3 = SSPTrit^9 with 27^3 = 19683
--- states.  Adjacency below is the ordinary 3-grid adjacency: one coordinate
--- moves by one ternary step while all other coordinates are held fixed.
+-- The three T3 factors are the existing Base369 interaction cube and the two
+-- participant-appraisal cubes. Grid adjacency changes exactly one coordinate
+-- by one ternary step: -1 <-> 0 <-> +1.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _*_)
+open import Data.Empty using (⊥)
 
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369InteractionAppraisalCubeExact as Cube
 import DASHI.Foundations.Base369NineCoordinateAggregateBridgeExact as Aggregate
 
 ------------------------------------------------------------------------
--- 1. The exact 3 × 3 × 3 carrier.
+-- 1. Exact 3 x 3 x 3 ternary hypervoxel.
 ------------------------------------------------------------------------
 
-data Axis3 : Set where
-  xAxis yAxis zAxis : Axis3
+data Axis3 : Set where xAxis yAxis zAxis : Axis3
 
 record Ternary27Point : Set where
   constructor ternary27Point
@@ -34,7 +33,6 @@ record Ternary27Point : Set where
     x : SSP.SSPTrit
     y : SSP.SSPTrit
     z : SSP.SSPTrit
-
 open Ternary27Point public
 
 origin : Ternary27Point
@@ -59,14 +57,11 @@ hypervoxelStateCountIs27 : hypervoxelStateCount ≡ 27
 hypervoxelStateCountIs27 = refl
 
 ------------------------------------------------------------------------
--- 2. Slices and the six genuine outer faces.
+-- 2. Six outer faces are coordinate hyperplanes at +/-1.
 ------------------------------------------------------------------------
 
 data Face6 : Set where
-  xNegativeFace xPositiveFace
-  yNegativeFace yPositiveFace
-  zNegativeFace zPositiveFace
-  : Face6
+  xNegativeFace xPositiveFace yNegativeFace yPositiveFace zNegativeFace zPositiveFace : Face6
 
 faceAxis : Face6 → Axis3
 faceAxis xNegativeFace = xAxis
@@ -91,9 +86,7 @@ coordinate zAxis p = z p
 
 record OnFace (f : Face6) (p : Ternary27Point) : Set where
   constructor onFace
-  field
-    coordinatePinned : coordinate (faceAxis f) p ≡ faceLevel f
-
+  field coordinatePinned : coordinate (faceAxis f) p ≡ faceLevel f
 open OnFace public
 
 negativeCornerOnXNegative : OnFace xNegativeFace negativeCorner
@@ -103,7 +96,7 @@ positiveCornerOnZPositive : OnFace zPositiveFace positiveCorner
 positiveCornerOnZPositive = onFace refl
 
 ------------------------------------------------------------------------
--- 3. Exact grid adjacency: -1 <-> 0 <-> +1, never -1 <-> +1 directly.
+-- 3. One-step grid relation.
 ------------------------------------------------------------------------
 
 data TritGridStep : SSP.SSPTrit → SSP.SSPTrit → Set where
@@ -112,41 +105,30 @@ data TritGridStep : SSP.SSPTrit → SSP.SSPTrit → Set where
   zeroToPos : TritGridStep SSP.sspZero SSP.sspPosOne
   posToZero : TritGridStep SSP.sspPosOne SSP.sspZero
 
-noDirectNegToPos : TritGridStep SSP.sspNegOne SSP.sspPosOne → Set
+noDirectNegToPos : TritGridStep SSP.sspNegOne SSP.sspPosOne → ⊥
 noDirectNegToPos ()
 
+noDirectPosToNeg : TritGridStep SSP.sspPosOne SSP.sspNegOne → ⊥
+noDirectPosToNeg ()
+
 data HypervoxelAdjacent : Ternary27Point → Ternary27Point → Set where
-  adjacentX :
-    ∀ {x0 x1 y0 z0} →
-    TritGridStep x0 x1 →
-    HypervoxelAdjacent
-      (ternary27Point x0 y0 z0)
-      (ternary27Point x1 y0 z0)
-  adjacentY :
-    ∀ {x0 y0 y1 z0} →
-    TritGridStep y0 y1 →
-    HypervoxelAdjacent
-      (ternary27Point x0 y0 z0)
-      (ternary27Point x0 y1 z0)
-  adjacentZ :
-    ∀ {x0 y0 z0 z1} →
-    TritGridStep z0 z1 →
-    HypervoxelAdjacent
-      (ternary27Point x0 y0 z0)
-      (ternary27Point x0 y0 z1)
+  adjacentX : ∀ {x0 x1 y0 z0} → TritGridStep x0 x1 →
+    HypervoxelAdjacent (ternary27Point x0 y0 z0) (ternary27Point x1 y0 z0)
+  adjacentY : ∀ {x0 y0 y1 z0} → TritGridStep y0 y1 →
+    HypervoxelAdjacent (ternary27Point x0 y0 z0) (ternary27Point x0 y1 z0)
+  adjacentZ : ∀ {x0 y0 z0 z1} → TritGridStep z0 z1 →
+    HypervoxelAdjacent (ternary27Point x0 y0 z0) (ternary27Point x0 y0 z1)
 
 originAdjacentPositiveX :
   HypervoxelAdjacent origin (ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspZero)
 originAdjacentPositiveX = adjacentX zeroToPos
 
 negativeCornerAdjacentXInward :
-  HypervoxelAdjacent
-    negativeCorner
-    (ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspNegOne)
+  HypervoxelAdjacent negativeCorner (ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspNegOne)
 negativeCornerAdjacentXInward = adjacentX negToZero
 
 ------------------------------------------------------------------------
--- 4. Three ternary cubes form the exact Base369 one-round hyperfabric.
+-- 4. Exact three-cube hyperfabric = existing one-round Base369 state.
 ------------------------------------------------------------------------
 
 record TernaryHyperformalPoint : Set where
@@ -155,7 +137,6 @@ record TernaryHyperformalPoint : Set where
     interactionVoxel : Ternary27Point
     appraisalAVoxel : Ternary27Point
     appraisalBVoxel : Ternary27Point
-
 open TernaryHyperformalPoint public
 
 fabricCoordinateCount : Nat
@@ -185,99 +166,67 @@ pointToParticipantAppraisal (ternary27Point a b c) = Cube.participantAppraisal a
 participantAppraisalToPoint : Cube.ParticipantAppraisal → Ternary27Point
 participantAppraisalToPoint (Cube.participantAppraisal a b c) = ternary27Point a b c
 
-pointInteractionRoundTrip :
-  (p : Ternary27Point) → interactionCubeToPoint (pointToInteractionCube p) ≡ p
+pointInteractionRoundTrip : (p : Ternary27Point) → interactionCubeToPoint (pointToInteractionCube p) ≡ p
 pointInteractionRoundTrip (ternary27Point a b c) = refl
 
-interactionPointRoundTrip :
-  (c : Cube.InteractionCube) → pointToInteractionCube (interactionCubeToPoint c) ≡ c
+interactionPointRoundTrip : (c : Cube.InteractionCube) → pointToInteractionCube (interactionCubeToPoint c) ≡ c
 interactionPointRoundTrip (Cube.interactionCube a b c) = refl
 
-pointAppraisalRoundTrip :
-  (p : Ternary27Point) → participantAppraisalToPoint (pointToParticipantAppraisal p) ≡ p
+pointAppraisalRoundTrip : (p : Ternary27Point) → participantAppraisalToPoint (pointToParticipantAppraisal p) ≡ p
 pointAppraisalRoundTrip (ternary27Point a b c) = refl
 
-appraisalPointRoundTrip :
-  (a : Cube.ParticipantAppraisal) → pointToParticipantAppraisal (participantAppraisalToPoint a) ≡ a
+appraisalPointRoundTrip : (a : Cube.ParticipantAppraisal) → pointToParticipantAppraisal (participantAppraisalToPoint a) ≡ a
 appraisalPointRoundTrip (Cube.participantAppraisal a b c) = refl
 
 fabricToRound : TernaryHyperformalPoint → Cube.OneRoundInteractionState
-fabricToRound
-  (ternaryHyperformalPoint interaction appA appB) =
+fabricToRound (ternaryHyperformalPoint interaction appA appB) =
   Cube.oneRoundInteractionState
     (pointToInteractionCube interaction)
-    (Cube.appraisalFibre
-      (pointToParticipantAppraisal appA)
-      (pointToParticipantAppraisal appB))
+    (Cube.appraisalFibre (pointToParticipantAppraisal appA) (pointToParticipantAppraisal appB))
 
 roundToFabric : Cube.OneRoundInteractionState → TernaryHyperformalPoint
-roundToFabric
-  (Cube.oneRoundInteractionState interaction (Cube.appraisalFibre appA appB)) =
+roundToFabric (Cube.oneRoundInteractionState interaction (Cube.appraisalFibre appA appB)) =
   ternaryHyperformalPoint
     (interactionCubeToPoint interaction)
     (participantAppraisalToPoint appA)
     (participantAppraisalToPoint appB)
 
-fabricRoundTrip :
-  (p : TernaryHyperformalPoint) → roundToFabric (fabricToRound p) ≡ p
+fabricRoundTrip : (p : TernaryHyperformalPoint) → roundToFabric (fabricToRound p) ≡ p
 fabricRoundTrip
-  (ternaryHyperformalPoint
-    (ternary27Point a b c)
-    (ternary27Point d e f)
-    (ternary27Point g h i)) = refl
+  (ternaryHyperformalPoint (ternary27Point a b c) (ternary27Point d e f) (ternary27Point g h i)) = refl
 
-roundFabricRoundTrip :
-  (state : Cube.OneRoundInteractionState) → fabricToRound (roundToFabric state) ≡ state
+roundFabricRoundTrip : (s : Cube.OneRoundInteractionState) → fabricToRound (roundToFabric s) ≡ s
 roundFabricRoundTrip
-  (Cube.oneRoundInteractionState
-    (Cube.interactionCube a b c)
-    (Cube.appraisalFibre
-      (Cube.participantAppraisal d e f)
-      (Cube.participantAppraisal g h i))) = refl
+  (Cube.oneRoundInteractionState (Cube.interactionCube a b c)
+    (Cube.appraisalFibre (Cube.participantAppraisal d e f) (Cube.participantAppraisal g h i))) = refl
 
 ------------------------------------------------------------------------
--- 5. The same geometry as a flat nine-coordinate chart.
+-- 5. Flat SSPTrit^9 chart is exactly the same fabric.
 ------------------------------------------------------------------------
 
 fabricToNineTrits : TernaryHyperformalPoint → Aggregate.NineTrits
 fabricToNineTrits
-  (ternaryHyperformalPoint
-    (ternary27Point a b c)
-    (ternary27Point d e f)
-    (ternary27Point g h i)) =
+  (ternaryHyperformalPoint (ternary27Point a b c) (ternary27Point d e f) (ternary27Point g h i)) =
   Aggregate.nineTrits a b c d e f g h i
 
 nineTritsToFabric : Aggregate.NineTrits → TernaryHyperformalPoint
 nineTritsToFabric (Aggregate.nineTrits a b c d e f g h i) =
-  ternaryHyperformalPoint
-    (ternary27Point a b c)
-    (ternary27Point d e f)
-    (ternary27Point g h i)
+  ternaryHyperformalPoint (ternary27Point a b c) (ternary27Point d e f) (ternary27Point g h i)
 
-fabricNineRoundTrip :
-  (p : TernaryHyperformalPoint) → nineTritsToFabric (fabricToNineTrits p) ≡ p
+fabricNineRoundTrip : (p : TernaryHyperformalPoint) → nineTritsToFabric (fabricToNineTrits p) ≡ p
 fabricNineRoundTrip
-  (ternaryHyperformalPoint
-    (ternary27Point a b c)
-    (ternary27Point d e f)
-    (ternary27Point g h i)) = refl
+  (ternaryHyperformalPoint (ternary27Point a b c) (ternary27Point d e f) (ternary27Point g h i)) = refl
 
-nineFabricRoundTrip :
-  (n : Aggregate.NineTrits) → fabricToNineTrits (nineTritsToFabric n) ≡ n
+nineFabricRoundTrip : (n : Aggregate.NineTrits) → fabricToNineTrits (nineTritsToFabric n) ≡ n
 nineFabricRoundTrip (Aggregate.nineTrits a b c d e f g h i) = refl
 
-flattenRoundAgreesWithFabricChart :
-  (p : TernaryHyperformalPoint) →
+flattenRoundAgreesWithFabricChart : (p : TernaryHyperformalPoint) →
   Aggregate.flattenRound (fabricToRound p) ≡ fabricToNineTrits p
 flattenRoundAgreesWithFabricChart
-  (ternaryHyperformalPoint
-    (ternary27Point a b c)
-    (ternary27Point d e f)
-    (ternary27Point g h i)) = refl
+  (ternaryHyperformalPoint (ternary27Point a b c) (ternary27Point d e f) (ternary27Point g h i)) = refl
 
 ------------------------------------------------------------------------
--- 6. Projection fibres are literal 27 × 27 appraisal sheets over a 27-point
---    interaction cube.
+-- 6. Literal fibre geometry: 729 appraisal points above each interaction voxel.
 ------------------------------------------------------------------------
 
 projectInteractionVoxel : TernaryHyperformalPoint → Ternary27Point
@@ -288,68 +237,47 @@ record AppraisalFibrePoint : Set where
   field
     appraisalAPoint : Ternary27Point
     appraisalBPoint : Ternary27Point
-
 open AppraisalFibrePoint public
 
 projectAppraisalFibre : TernaryHyperformalPoint → AppraisalFibrePoint
 projectAppraisalFibre p = appraisalFibrePoint (appraisalAVoxel p) (appraisalBVoxel p)
 
 rebuildOverInteraction : Ternary27Point → AppraisalFibrePoint → TernaryHyperformalPoint
-rebuildOverInteraction interaction (appraisalFibrePoint appA appB) =
-  ternaryHyperformalPoint interaction appA appB
+rebuildOverInteraction i (appraisalFibrePoint a b) = ternaryHyperformalPoint i a b
 
-projectionRebuildInteraction :
-  (interaction : Ternary27Point) →
-  (fibre : AppraisalFibrePoint) →
-  projectInteractionVoxel (rebuildOverInteraction interaction fibre) ≡ interaction
-projectionRebuildInteraction interaction fibre = refl
+projectionRebuildInteraction : (i : Ternary27Point) → (f : AppraisalFibrePoint) →
+  projectInteractionVoxel (rebuildOverInteraction i f) ≡ i
+projectionRebuildInteraction i f = refl
 
-projectionRebuildFibre :
-  (interaction : Ternary27Point) →
-  (fibre : AppraisalFibrePoint) →
-  projectAppraisalFibre (rebuildOverInteraction interaction fibre) ≡ fibre
-projectionRebuildFibre interaction (appraisalFibrePoint appA appB) = refl
+projectionRebuildFibre : (i : Ternary27Point) → (f : AppraisalFibrePoint) →
+  projectAppraisalFibre (rebuildOverInteraction i f) ≡ f
+projectionRebuildFibre i (appraisalFibrePoint a b) = refl
 
 ------------------------------------------------------------------------
--- 7. Fabric adjacency changes exactly one coordinate in exactly one cube.
+-- 7. Hyperformal adjacency changes one coordinate in one 27-cube only.
 ------------------------------------------------------------------------
 
 data HyperformalAdjacent : TernaryHyperformalPoint → TernaryHyperformalPoint → Set where
-  interactionAdjacent :
-    ∀ {i0 i1 a b} →
-    HypervoxelAdjacent i0 i1 →
-    HyperformalAdjacent
-      (ternaryHyperformalPoint i0 a b)
-      (ternaryHyperformalPoint i1 a b)
-  appraisalAAdjacent :
-    ∀ {i a0 a1 b} →
-    HypervoxelAdjacent a0 a1 →
-    HyperformalAdjacent
-      (ternaryHyperformalPoint i a0 b)
-      (ternaryHyperformalPoint i a1 b)
-  appraisalBAdjacent :
-    ∀ {i a b0 b1} →
-    HypervoxelAdjacent b0 b1 →
-    HyperformalAdjacent
-      (ternaryHyperformalPoint i a b0)
-      (ternaryHyperformalPoint i a b1)
+  interactionAdjacent : ∀ {i0 i1 a b} → HypervoxelAdjacent i0 i1 →
+    HyperformalAdjacent (ternaryHyperformalPoint i0 a b) (ternaryHyperformalPoint i1 a b)
+  appraisalAAdjacent : ∀ {i a0 a1 b} → HypervoxelAdjacent a0 a1 →
+    HyperformalAdjacent (ternaryHyperformalPoint i a0 b) (ternaryHyperformalPoint i a1 b)
+  appraisalBAdjacent : ∀ {i a b0 b1} → HypervoxelAdjacent b0 b1 →
+    HyperformalAdjacent (ternaryHyperformalPoint i a b0) (ternaryHyperformalPoint i a b1)
 
 fabricOrigin : TernaryHyperformalPoint
 fabricOrigin = ternaryHyperformalPoint origin origin origin
 
 fabricOriginInteractionXNeighbour : TernaryHyperformalPoint
 fabricOriginInteractionXNeighbour =
-  ternaryHyperformalPoint
-    (ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspZero)
-    origin
-    origin
+  ternaryHyperformalPoint (ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspZero) origin origin
 
 fabricOriginAdjacentAlongInteractionX :
   HyperformalAdjacent fabricOrigin fabricOriginInteractionXNeighbour
 fabricOriginAdjacentAlongInteractionX = interactionAdjacent originAdjacentPositiveX
 
 ------------------------------------------------------------------------
--- 8. Geometric boundary: these counts are geometry, not semantic numerology.
+-- 8. Geometric boundary: numerical coincidences do not create semantics.
 ------------------------------------------------------------------------
 
 record Ternary27HypervoxelGeometryBoundary : Set where
@@ -364,9 +292,6 @@ record Ternary27HypervoxelGeometryBoundary : Set where
     directNegativeToPositiveIsGridEdge : Bool
     shared369NumeralsImplySharedSemanticRole : Bool
 
-open import Agda.Builtin.Bool using (Bool; false; true)
-
 canonicalTernary27HypervoxelGeometryBoundary : Ternary27HypervoxelGeometryBoundary
 canonicalTernary27HypervoxelGeometryBoundary =
-  ternary27HypervoxelGeometryBoundary
-    true true true true true true false false
+  ternary27HypervoxelGeometryBoundary true true true true true true false false
