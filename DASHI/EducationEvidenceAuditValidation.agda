@@ -8,5 +8,7 @@ import DASHI.Biology.ACPUEAEROEducationAssertionBidiExact
 import DASHI.Biology.ACPUEAEROClaimAuditProtocolExact
 import DASHI.Biology.ACPUEAEROClaimAuditTrancheExact
 import DASHI.Biology.ACPUEAEROClaimAuditCalibrationExact
+import DASHI.Biology.ACPUEAEROTransportUniversalAuditExact
+import DASHI.Biology.AEROLaterMethodDisclosureProvenanceExact
 import DASHI.Biology.EducationAuditDecisionNoncollapseExact
 import DASHI.Biology.EducationEvidenceAuditEverything
