@@ -17,6 +17,7 @@ import DASHI.Physics.YangMills.BalabanHeatDoobSameDensityLogHessianRound103Exact
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106Exact as Domain
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as StressRep
 import DASHI.Physics.YangMills.BalabanDensityAnchoredStressLaneRound123Exact as StressLane
+import DASHI.Physics.YangMills.BalabanCommonMetricSectorRecoveryRound131Exact as R131
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact as R132
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionFirstVariationRound133Exact as R133
 import DASHI.Physics.YangMills.BalabanPresentCutCanonicalMetricDomainRound134Exact as R134
@@ -111,7 +112,7 @@ unifiedContinuumFirstVariationIsLiteralStressPairing :
   ∀ perturbation →
   Domain.AdmissibleMetricPerturbation
     (R134.presentCutCanonicalMetricDomain metricInputs) perturbation →
-  DASHI.Physics.YangMills.BalabanCommonMetricSectorRecoveryRound131Exact.continuumSectorFirstVariation
+  R131.continuumSectorFirstVariation
       (R136.asCommonMetricReadyBalabanSectorRecovery (sectorRecovery recovery))
       perturbation
   ≡ StressRep.stressMetricPairing representation
