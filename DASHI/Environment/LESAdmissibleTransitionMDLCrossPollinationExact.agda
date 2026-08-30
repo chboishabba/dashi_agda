@@ -5,17 +5,18 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Chemistry.AdmissibleReactionTransitionBridgeExact as Reaction
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as MDL
+import DASHI.Core.AdmissibleTransitionHyperfabricExact as Transition
 import DASHI.Environment.SoilBiogeochemistryProcessNetworkExact as Soil
 
 ------------------------------------------------------------------------
 -- LES / SOIL-BIOGEOCHEMISTRY ADAPTER
 --
 -- SoilBiogeochemistryProcessNetworkExact already records moisture/temperature,
--- kinetic, stoichiometric and scale references for a process.  This adapter does
--- not invent their quantitative laws.  It says that a selected soil process can
--- be given a typed enablement semantics for its existing chemistry transition,
--- after which admissibility and consumer-sensitive MDL can be reasoned about by
--- the generic owners.
+-- kinetic, stoichiometric and scale references for a process. This adapter does
+-- not invent their quantitative laws. A selected soil process can instead be
+-- given a typed enablement semantics for its existing chemistry transition,
+-- after which admissibility and consumer-sensitive MDL are delegated to the
+-- generic owners.
 ------------------------------------------------------------------------
 
 record SoilProcessEnablement
@@ -33,7 +34,7 @@ open SoilProcessEnablement public
 soilProcessTransitionSystem :
   ∀ {process} →
   SoilProcessEnablement process →
-  DASHI.Core.AdmissibleTransitionHyperfabricExact.AdmissibleTransitionSystem
+  Transition.AdmissibleTransitionSystem
 soilProcessTransitionSystem enabled =
   Reaction.reactionTransitionSystem (semantics enabled)
 
