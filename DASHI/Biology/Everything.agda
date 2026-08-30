@@ -202,3 +202,8 @@ import DASHI.Biology.ConsciousAccessRound7AristotleRegression
 ------------------------------------------------------------------------
 -- Relative JCoarse/JFine fibre -> repo-wide consumer-reduction adapter.
 import DASHI.Biology.JCoarseFineConsumerReductionBridgeExact
+
+------------------------------------------------------------------------
+-- Cross-kingdom anaesthetic action: shared cellular susceptibility, divergent
+-- lineage endpoints, and explicit consciousness/pain inference boundaries.
+import DASHI.Biology.CrossKingdomAnaestheticActionBidiExact
