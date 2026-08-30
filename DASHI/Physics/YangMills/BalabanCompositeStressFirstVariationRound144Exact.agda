@@ -21,6 +21,7 @@ import DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound
 import DASHI.Physics.YangMills.BalabanCMP109116SourceContinuationRound103Exact as Source
 import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityHessianRound103Exact as Chain
 import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityFirstVariationRound105Exact as First
+import DASHI.Physics.YangMills.BalabanBC2CompactGroupSameDensityRound119Exact as BC2
 import DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionFirstVariationRound142Exact as D1
 import DASHI.Physics.YangMills.BalabanBC2FiniteLocalizedFirstVariationRound143Exact as R143
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact as R132
@@ -81,19 +82,22 @@ asUnifiedGeneratedActionFirstVariation {present = present} {laws = laws} dataSet
           (sym (stressFirstVariationIsFiniteLocalizedSum dataSet background tangent))
   }
 
-compositeStressFirstVariationBuildsSameActionWeld :
+compositeStressBuildsGlobalFirstVariation :
   ∀ {trajectory split inputs History Cell cutoff present actionWeld laws}
     (dataSet : CompositeStressFirstVariationInputs
       {trajectory = trajectory} {split = split} {inputs = inputs}
       {History = History} {Cell = Cell} {cutoff = cutoff}
       {present = present} actionWeld laws) →
   ∀ background tangent →
+  BC2.firstVariation (Present.bc2 present)
+    (Carrier.effectivePotential (Present.bc1Carrier present))
+    background tangent
+  ≡ First.substitutedFirstVariation (stressActivity dataSet)
+      (globalBackgroundToStressBackground dataSet background)
+      (globalTangentToStressTangent dataSet tangent)
+compositeStressBuildsGlobalFirstVariation dataSet =
   R133.sameActionFirstVariation
-    (asUnifiedGeneratedActionFirstVariation dataSet) background tangent
-  ≡ R133.sameActionFirstVariation
-    (asUnifiedGeneratedActionFirstVariation dataSet) background tangent
-compositeStressFirstVariationBuildsSameActionWeld dataSet background tangent =
-  Agda.Builtin.Equality.refl
+    (asUnifiedGeneratedActionFirstVariation dataSet)
 
 compositeStressFirstVariationCompilerLevel : ProofLevel
 compositeStressFirstVariationCompilerLevel = machineChecked
