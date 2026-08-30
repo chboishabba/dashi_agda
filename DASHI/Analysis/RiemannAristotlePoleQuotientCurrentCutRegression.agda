@@ -43,6 +43,18 @@ qTransportRejected :
   F.rankTwoDeterminantQTransportedToPoleQuotientCarrier F.canonicalPoleQuotientCurrentCut ≡ false
 qTransportRejected = refl
 
+poleOffSocketEncoded :
+  F.poleQuotientOffOrdinateTargetSocketEncoded F.canonicalPoleQuotientCurrentCut ≡ true
+poleOffSocketEncoded = refl
+
+gammaSocketEncoded :
+  F.poleQuotientGammaTargetSocketEncoded F.canonicalPoleQuotientCurrentCut ≡ true
+gammaSocketEncoded = refl
+
+clusterMarginSocketEncoded :
+  F.poleQuotientClusterMarginTargetSocketEncoded F.canonicalPoleQuotientCurrentCut ≡ true
+clusterMarginSocketEncoded = refl
+
 poleOffBoundOpen :
   F.poleQuotientSignedOffOrdinateBoundClosed F.canonicalPoleQuotientCurrentCut ≡ false
 poleOffBoundOpen = refl
