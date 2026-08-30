@@ -88,7 +88,7 @@ cowanDesign : Design.StudyDesignReceipt
 cowanDesign =
   Design.studyDesignReceipt
     "Cowan-2008-memory-model-review"
-    Design.scholarlyReview
+    Design.narrativeReview
     "review/theoretical synthesis of long-term, short-term and working-memory literatures"
     "not a single randomised allocation"
     "compares theoretical distinctions/models rather than one intervention comparator"
