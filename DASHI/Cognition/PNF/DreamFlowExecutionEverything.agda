@@ -22,35 +22,30 @@ import DASHI.Cognition.PNF.PackedNormativeDeltaAuthorityBridgeExact
 import DASHI.Cognition.PNF.PackedNormativeSparseAdmissionExact
 import DASHI.Cognition.PNF.PackedOperatorFamilyAdmissionExact
 
--- Big-picture execution constitution.  This assembles the existing formal
+-- Big-picture execution constitution. This assembles the existing formal
 -- owners into the one production destination: local packed execution, typed
 -- delta/residual transport, durable non-current staging, and atomic authority
--- publication.  PostgreSQL is a durable/global/reference boundary rather than
+-- publication. PostgreSQL is a durable/global/reference boundary rather than
 -- the mandatory internal execution bus.
 import DASHI.Cognition.PNF.DirectDeltaCompilerArchitectureExact
 import DASHI.Cognition.PNF.DirectDeltaCompilerArchitectureRegression
 
 -- Temporal synthesis of the same architecture over a parser event stream.
--- Each available parser event advances the ordinary delta-native authority;
--- end-of-sentence work is only the unresolved outward frontier, not a second
--- whole-sentence semantic compile.
 import DASHI.Cognition.PNF.StreamingSemanticPacmanKernelExact
 
--- Physical receipt shape for bounded parser/semantic overlap.  This records
--- buffer/replay/EOF-tail evidence without turning scheduling into semantics.
+-- Physical receipt shape for bounded parser/semantic overlap.
 import DASHI.Cognition.PNF.StreamingPhysicalOverlapReceiptExact
 
--- Admission gate for finer/better-balanced physical parser schedules.  Exact
--- owned coverage, evidence-only context, ordered observations, and final
--- semantic authority must survive refinement; performance remains empirical.
+-- Finer/better-balanced physical parser schedules are performance experiments.
 import DASHI.Cognition.PNF.StreamingPhysicalPartitionRefinementExact
 
--- Activation cut for the live packed sentence compiler.  G1/G2 and the stable
--- G4 evidence mechanism are executable; G3 parity plus the production-default
--- cutover still guard full production certification.
+-- Systemic ownership law: overlapping context/repair/retry observations may
+-- never become duplicate semantic authority. Every source anchor projects
+-- through one canonical structural owner before entering the semantic fold.
+import DASHI.Cognition.PNF.ExactlyOnceParserAuthorityProjectionExact
+
+-- Activation cut for the live packed sentence compiler.
 import DASHI.Cognition.PNF.DirectDeltaCompilerActivationExact
 
--- Roadmap composition: certification remains parity-gated, then the next
--- architectural tranche is streaming/delta hierarchy followed by a whole-system
--- rebenchmark rather than indefinite cold-publication micro-optimization.
+-- Roadmap composition.
 import DASHI.Cognition.PNF.DirectStreamingRoadmapSynthesisExact
