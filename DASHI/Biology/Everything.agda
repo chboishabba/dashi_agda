@@ -207,3 +207,4 @@ import DASHI.Biology.JCoarseFineConsumerReductionBridgeExact
 import DASHI.Biology.CrossKingdomAnaestheticActionBidiExact
 import DASHI.Biology.CrossKingdomActionPotentialAnaestheticBidiExact
 import DASHI.Biology.CrossKingdomAnaestheticExcitabilityFlowBidiExact
+import DASHI.Biology.CrossKingdomAnaestheticMechanismFibreRefinementExact
