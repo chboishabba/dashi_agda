@@ -4,17 +4,17 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Chemistry.TransitionKernel as Chemistry
+import DASHI.Core.AdmissibleTransitionHyperfabricExact as Transition
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as MDL
 
 ------------------------------------------------------------------------
 -- REPO-NATIVE TYPED BRIDGE OVER THE EXISTING CHEMISTRY KERNEL
 --
 -- TransitionKernel already records reactants, products, catalysts, rate law,
--- condition/environment, compartments and reachability metadata.  Several of
--- those guards are intentionally solver-neutral String carriers.  This module
--- does not invent their quantitative semantics.  It supplies the missing typed
--- theorem surface: an admitted reaction transition requires an inhabitant of a
--- declared enablement predicate.
+-- condition/environment, compartments and reachability metadata. Several guard
+-- surfaces remain intentionally solver-neutral String carriers. This module
+-- does not invent quantitative chemistry for them: it supplies the typed
+-- enablement witness consumed by the generic admissible-transition owner.
 ------------------------------------------------------------------------
 
 record TypedReactionSemantics
@@ -38,15 +38,30 @@ record TypedReactionSemantics
 
 open TypedReactionSemantics public
 
-data AdmittedReaction
-    {transition : Chemistry.Transition}
-    (semantics : TypedReactionSemantics transition)
-    (state : State semantics)
-    (environment : Chemistry.Environment) : Set where
-  admittedReaction :
-    Enabled semantics state environment →
-    InvariantRegion semantics state →
-    AdmittedReaction semantics state environment
+reactionTransitionSystem :
+  ∀ {transition} →
+  TypedReactionSemantics transition →
+  Transition.AdmissibleTransitionSystem
+reactionTransitionSystem semantics =
+  Transition.admissibleTransitionSystem
+    (State semantics)
+    Chemistry.Environment
+    ⊤
+    (λ _ environment state → Enabled semantics state environment)
+    (λ _ environment state → step semantics state environment)
+    (InvariantRegion semantics)
+    (λ _ environment state →
+      enabledPreservesInvariant semantics state environment)
+    "typed chemistry reaction enablement"
+
+AdmittedReaction :
+  ∀ {transition}
+    (semantics : TypedReactionSemantics transition) →
+  State semantics → Chemistry.Environment → Set
+AdmittedReaction semantics state environment =
+  Transition.AdmittedStep
+    (reactionTransitionSystem semantics)
+    tt environment state
 
 admittedReactionHasEnablement :
   ∀ {transition}
@@ -54,7 +69,7 @@ admittedReactionHasEnablement :
     {state environment} →
   AdmittedReaction semantics state environment →
   Enabled semantics state environment
-admittedReactionHasEnablement (admittedReaction enabled invariant) = enabled
+admittedReactionHasEnablement = Transition.admittedStepHasEnablement
 
 disabledExcludesAdmittedReaction :
   ∀ {transition}
@@ -62,8 +77,7 @@ disabledExcludesAdmittedReaction :
     {state environment} →
   (Enabled semantics state environment → ⊥) →
   AdmittedReaction semantics state environment → ⊥
-disabledExcludesAdmittedReaction disabled admitted =
-  disabled (admittedReactionHasEnablement admitted)
+disabledExcludesAdmittedReaction = Transition.disabledExcludesAdmittedStep
 
 admittedReactionPreservesInvariant :
   ∀ {transition}
@@ -71,10 +85,8 @@ admittedReactionPreservesInvariant :
     {state environment} →
   AdmittedReaction semantics state environment →
   InvariantRegion semantics (step semantics state environment)
-admittedReactionPreservesInvariant
-    {semantics = semantics} {state = state} {environment = environment}
-    (admittedReaction enabled invariant) =
-  enabledPreservesInvariant semantics state environment enabled invariant
+admittedReactionPreservesInvariant =
+  Transition.admittedStepPreservesInvariant
 
 ------------------------------------------------------------------------
 -- Enablement is a hard feasibility gate, distinct from conditional kinetics,
@@ -96,11 +108,20 @@ record ConditionalReactionWeight
 
 open ConditionalReactionWeight public
 
+conditionalWeightAsGenericEdgeWeight :
+  ∀ {transition}
+    {semantics : TypedReactionSemantics transition} →
+  ConditionalReactionWeight semantics →
+  Transition.ConditionalEdgeWeight (reactionTransitionSystem semantics)
+conditionalWeightAsGenericEdgeWeight {semantics = semantics} weighted =
+  Transition.conditionalEdgeWeight
+    (Weight weighted)
+    (λ _ environment state enabled →
+      weight weighted state environment enabled)
+    (weightMeaningReference weighted)
+
 ------------------------------------------------------------------------
 -- Consumer-relative MDL adapter for reaction enablement.
---
--- A compact model is eligible for an enablement-sensitive consumer only if it
--- agrees with the typed physical enablement predicate on the declared scope.
 ------------------------------------------------------------------------
 
 record ReactionEnablementModel
@@ -156,19 +177,15 @@ record ReactionMDLBoundary : Set where
     absentEnablementWitnessMeansTinyProbability : Bool
     absentEnablementWitnessMeansTinyProbabilityIsFalse :
       absentEnablementWitnessMeansTinyProbability ≡ false
-
     admittedTransitionRequiresEnablement : Bool
     admittedTransitionRequiresEnablementIsTrue :
       admittedTransitionRequiresEnablement ≡ true
-
     kineticsWeightIsConditionalOnEnablement : Bool
     kineticsWeightIsConditionalOnEnablementIsTrue :
       kineticsWeightIsConditionalOnEnablement ≡ true
-
     shortestCodeMayEraseConsumerRelevantReactionGuard : Bool
     shortestCodeMayEraseConsumerRelevantReactionGuardIsFalse :
       shortestCodeMayEraseConsumerRelevantReactionGuard ≡ false
-
     stringGuardCarrierBecomesQuantitativeChemistryHere : Bool
     stringGuardCarrierBecomesQuantitativeChemistryHereIsFalse :
       stringGuardCarrierBecomesQuantitativeChemistryHere ≡ false
