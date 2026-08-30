@@ -35,11 +35,8 @@ module DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Culture.ReligiousPowerChildFearClaimBidiExact as ClaimAudit
-
-------------------------------------------------------------------------
--- Exact manuscript attribution and bounded source role.
-------------------------------------------------------------------------
 
 record BrownPaperSource : Set where
   constructor brown-paper-source
@@ -63,10 +60,6 @@ johnAnthonyBrownPaper = brown-paper-source
 johnAnthonyBrownIsAttributedAuthor :
   BrownPaperSource.author johnAnthonyBrownPaper ≡ "John Anthony Brown"
 johnAnthonyBrownIsAttributedAuthor = refl
-
-------------------------------------------------------------------------
--- What the paper is actually trying to study.
-------------------------------------------------------------------------
 
 data BrownPaperAxis : Set where
   childAutonomy : BrownPaperAxis
@@ -138,10 +131,6 @@ melbourneResponseClaim = brown-paper-claim
   "the manuscript questions transparency, confidentiality, conflicts of interest, accountability and access to external justice in institutional response systems such as the Melbourne Response"
   johnAnthonyBrownPaper
 
-------------------------------------------------------------------------
--- Preserve the paper's own conditional / non-universal hypotheses.
-------------------------------------------------------------------------
-
 data OutcomeDirection : Set where
   potentiallyProtective : OutcomeDirection
   potentiallyHarmful : OutcomeDirection
@@ -177,12 +166,6 @@ data BrownPaperPromotesUniversalReligiousHarm : Set where
 paperDoesNotPromoteUniversalReligiousHarm :
   BrownPaperPromotesUniversalReligiousHarm → ⊥
 paperDoesNotPromoteUniversalReligiousHarm ()
-
-------------------------------------------------------------------------
--- Dependency / authority / formation coordinates.
---
--- These are research coordinates, not an automatic coercion classifier.
-------------------------------------------------------------------------
 
 record ChildReligiousFormationCoordinates : Set where
   constructor child-religious-formation-coordinates
@@ -229,14 +212,8 @@ fearDoesNotPromoteUniqueFormationRoute : FearPromotesUniqueFormationRoute → �
 fearDoesNotPromoteUniqueFormationRoute ()
 
 existingReverseNonfactorability :
-  ClaimAudit.INF.FactorsThrough
-    ClaimAudit.behaviourSurface
-    ClaimAudit.formationRoute → ⊥
+  INF.FactorsThrough ClaimAudit.behaviourSurface ClaimAudit.formationRoute → ⊥
 existingReverseNonfactorability = ClaimAudit.behaviourCannotRecoverFormationRoute
-
-------------------------------------------------------------------------
--- Paper -> formal obligation direction.
-------------------------------------------------------------------------
 
 data FormalObligation : Set where
   developmentalCapacityReceipt : FormalObligation
@@ -256,13 +233,6 @@ paperToPrimaryObligation familyAuthorityClaim = familyBelongingExitReceipt
 paperToPrimaryObligation institutionalHegemonyClaim = institutionalPowerReceipt
 paperToPrimaryObligation colonialDispossessionClaim = colonialHistoryReceipt
 paperToPrimaryObligation melbourneResponseClaim = transparencyContestabilityReceipt
-
-------------------------------------------------------------------------
--- Formalism -> paper direction.
---
--- The reverse pass says how a proposition should return to the manuscript:
--- preserve, qualify, split, source-check, or withhold legal promotion.
-------------------------------------------------------------------------
 
 data PaperRevisionAction : Set where
   preserveAsResearchQuestion : PaperRevisionAction
@@ -315,11 +285,6 @@ melbourneResponseBidiRoute =
     transparencyContestabilityReceipt refl
     addIndependentInstitutionalReceipt refl
 
-------------------------------------------------------------------------
--- Legal-label separation required by the manuscript's own ambitious legal
--- comparison programme.
-------------------------------------------------------------------------
-
 data BrownLegalLabel : Set where
   socialPsychologicalEntrapment : BrownLegalLabel
   falseImprisonment : BrownLegalLabel
@@ -351,7 +316,8 @@ record LegalPromotionReceipt (label : BrownLegalLabel) : Set where
 open LegalPromotionReceipt public
 
 data MechanismResemblancePromotesLegalElements : Set where
-\data PsychologicalCoercionPromotesModernSlavery : Set where
+
+data PsychologicalCoercionPromotesModernSlavery : Set where
 
 mechanismResemblanceDoesNotPromoteLegalElements :
   MechanismResemblancePromotesLegalElements → ⊥
@@ -360,14 +326,6 @@ mechanismResemblanceDoesNotPromoteLegalElements ()
 psychologicalCoercionDoesNotPromoteModernSlavery :
   PsychologicalCoercionPromotesModernSlavery → ⊥
 psychologicalCoercionDoesNotPromoteModernSlavery ()
-
-------------------------------------------------------------------------
--- Rights / age wording boundary.
---
--- John Anthony Brown's draft uses "age of reason and consent" as part of the
--- developmental concern.  BIDI returns that as a capacity-sensitive research
--- variable rather than silently installing a universal age threshold.
-------------------------------------------------------------------------
 
 data HardAgeThresholdPromotesAutonomyCapacity : Set where
 
@@ -384,12 +342,6 @@ parentGuidanceDoesNotPromoteOwnershipOfBelief ()
 
 under18DoesNotPromoteNoReligiousExposure : Under18PromotesNoReligiousExposure → ⊥
 under18DoesNotPromoteNoReligiousExposure ()
-
-------------------------------------------------------------------------
--- Institutional scale: family, church, school/care/service and state are not
--- one actor.  This keeps the manuscript's hegemony question researchable
--- without collapsing every institution into a single command structure.
-------------------------------------------------------------------------
 
 data AuthorityScale : Set where
   familyScale : AuthorityScale
@@ -409,11 +361,6 @@ sharedPowerDoesNotPromoteSingleActor ()
 colonialComparisonDoesNotPromoteIdenticalHistory :
   ColonialComparisonPromotesIdenticalHistory → ⊥
 colonialComparisonDoesNotPromoteIdenticalHistory ()
-
-------------------------------------------------------------------------
--- BIDI settlement: match John Anthony Brown's programme while keeping both
--- evidence discipline and the manuscript's critical/normative direction.
-------------------------------------------------------------------------
 
 record JohnAnthonyBrownPaperBidiBoundary : Set where
   constructor john-anthony-brown-paper-bidi-boundary
