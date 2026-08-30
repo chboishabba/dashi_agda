@@ -12,6 +12,14 @@ import DASHI.Geology.SaltGeochemistryExact as Salt
 ------------------------------------------------------------------------
 -- DRINKING-WATER CHLORINE SPECIATION
 --
+-- Source anchors:
+--   WHO Guidelines for Drinking-water Quality (2026 edition): chlorine in
+--   water forms hypochlorous acid/hypochlorite, with relative amounts varying
+--   with pH; chlorine residual and treatment performance remain operational
+--   monitoring questions rather than consequences of source production alone.
+--   US EPA drinking-water/disinfection material: free chlorine chemistry,
+--   residual measurement and contact-time performance are distinct surfaces.
+--
 -- Canonical qualitative chemistry:
 --
 --   Cl2 + H2O <-> HOCl + H+ + Cl-
