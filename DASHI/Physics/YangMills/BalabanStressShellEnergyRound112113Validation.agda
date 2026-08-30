@@ -1,0 +1,18 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanStressShellEnergyRound112113Validation where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanStressShellEnergyToHilbertRound112Exact as R112
+import DASHI.Physics.YangMills.BalabanStressShellPartitionEnergyRound113Exact as R113
+
+round112ShellEnergyToHilbertCompilerIsMachineChecked : ProofLevel
+round112ShellEnergyToHilbertCompilerIsMachineChecked =
+  R112.stressShellEnergyToHilbertCompilerLevel
+
+round113ShellPartitionEnergyCompilerIsMachineChecked : ProofLevel
+round113ShellPartitionEnergyCompilerIsMachineChecked =
+  R113.stressShellPartitionEnergyCompilerLevel
+
+round113PerShellIdentificationRemainsConditional : ProofLevel
+round113PerShellIdentificationRemainsConditional =
+  R113.literalStressPerShellCoefficientIdentificationLevel
