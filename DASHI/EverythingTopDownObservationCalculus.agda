@@ -14,6 +14,13 @@ import DASHI.Core.ConsumerQuotientBaseChangeRegression
 import DASHI.Core.ConsumerIndexedResidualRefinementExact
 import DASHI.Core.TopDownObservationCalculusExact
 
+-- Governance-aware observation: value, provenance, epistemic status, authority,
+-- permission and obligation remain independently consumer-indexed.  Translation
+-- effects retain coordinate lineage, so erase-then-add cannot masquerade as
+-- restoration of inherited information.
+import DASHI.Core.GovernedObservationProvenanceExact
+import DASHI.Core.GovernedObservationProvenanceRegression
+
 -- Residual dependency, certified quadratic control, future-language capability,
 -- and the independent pressure axis.  Receipt-backed SensibLaw residual order
 -- now maps monotonically into the pressure component of the healing preorder.
@@ -61,6 +68,9 @@ import DASHI.Cognition.PNF.ObserverSeparationAuthorityBoundaryExact
 -- A consumer-relevant collision forces every sufficient repair to split it.
 -- Static consumer sufficiency != exact reconstruction.
 -- Static minimal observer != future-language minimal quotient.
+-- Value preservation != provenance / epistemic / governance preservation.
+-- Release/container provenance != embedded-content verification.
+-- Erased inherited provenance != a coordinate newly added downstream.
 -- Current observation equality != action-indexed dependency equality.
 -- Low coupling score != action admissibility.
 -- Finite dependency score != affine spectral independence / SDP certificate.
