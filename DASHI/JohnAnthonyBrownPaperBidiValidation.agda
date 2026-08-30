@@ -3,6 +3,7 @@ module DASHI.JohnAnthonyBrownPaperBidiValidation where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
+import DASHI.Cognition.PNF.DecisionAutonomyExact as Autonomy
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Culture.ChildReligiousAutonomyFormationBidiExact as Formation
 
@@ -87,22 +88,18 @@ formalAuditReturnsRevisionObligations :
   ≡ true
 formalAuditReturnsRevisionObligations = refl
 
-------------------------------------------------------------------------
--- New autonomy / reopening regression.
-------------------------------------------------------------------------
-
 sameParticipationSurfacePinned :
   Formation.publicSurface Formation.openFormationEpisode
   ≡ Formation.publicSurface Formation.closedFormationEpisode
 sameParticipationSurfacePinned = refl
 
 sameActionStillNotAutonomy :
-  Formation.Autonomy.emitted Formation.Autonomy.autonomousWithdrawal
-  ≡ Formation.Autonomy.emitted Formation.Autonomy.constrainedWithdrawal
+  Autonomy.emitted Autonomy.autonomousWithdrawal
+  ≡ Autonomy.emitted Autonomy.constrainedWithdrawal
 sameActionStillNotAutonomy = Formation.sameActionStillDoesNotDetermineAutonomy
 
 constrainedFormationStillNotAutonomous :
-  Formation.Autonomy.Autonomous Formation.constrainedFormationAxes → ⊥
+  Autonomy.Autonomous Formation.constrainedFormationAxes → ⊥
 constrainedFormationStillNotAutonomous = Formation.constrainedFormationNotAutonomous
 
 laterReopeningMatters :
