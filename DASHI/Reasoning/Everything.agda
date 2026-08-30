@@ -6,6 +6,7 @@ import DASHI.Reasoning.RelationalEverything
 import DASHI.Reasoning.TernarySynthesisOrbitWeldEverything
 import DASHI.Reasoning.PathologicEverything
 import DASHI.Reasoning.AccessBiasFallacySeparationExact
+import DASHI.Reasoning.DialecticalOppositionNonExplosionExact
 import DASHI.Reasoning.AristotleMCGSHypergraphExact
 import DASHI.Reasoning.AristotleMCGSIntrospectiveSpecimen
 import DASHI.Reasoning.AristotleMCGSRecoveredWitness
