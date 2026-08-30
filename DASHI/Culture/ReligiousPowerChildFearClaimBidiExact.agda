@@ -9,6 +9,13 @@ module DASHI.Culture.ReligiousPowerChildFearClaimBidiExact where
 -- silently collapsing distinct empirical, historical, theological,
 -- metaphorical and metaphysical obligations into one claim.
 --
+-- Paper-specific calibration is owned separately by:
+--   DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact
+-- which explicitly attributes the childhood Catholic religious-power research
+-- manuscript to John Anthony Brown and preserves its autonomy,
+-- self-determination, family, hell/damnation, institutional-hegemony,
+-- colonisation, accountability and conditional-outcome structure.
+--
 -- Existing repository owners consumed structurally:
 --   * ParentalFearIndependentMobilityExact: fear can regulate behaviour while
 --     remaining situated, multi-fibre and observer-bounded.
@@ -21,11 +28,6 @@ open import DASHI.Core.Prelude
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact as Subject
 import DASHI.Biology.ParentalFearIndependentMobilityExact as Fear
-
-------------------------------------------------------------------------
--- Claim kinds remain disjoint.  A single sentence may contain several, but
--- evidence admissible for one kind is not thereby evidence for every kind.
-------------------------------------------------------------------------
 
 data ClaimKind : Set where
   historicalClaim : ClaimKind
@@ -51,12 +53,6 @@ theologyNotInstitution ()
 groupGeneralisationNotHistorical : groupGeneralisation ≡ historicalClaim → ⊥
 groupGeneralisationNotHistorical ()
 
-------------------------------------------------------------------------
--- Evidence status is not Boolean.  In particular, an unverified assertion is
--- not converted into its negation, while a supported neighbouring claim does
--- not promote an unsupported stronger claim.
-------------------------------------------------------------------------
-
 data EvidenceStatus : Set where
   supportedWithinScope : EvidenceStatus
   contested : EvidenceStatus
@@ -69,10 +65,6 @@ supportedNotUnsupported ()
 
 unresolvedNotSupported : unresolved ≡ supportedWithinScope → ⊥
 unresolvedNotSupported ()
-
-------------------------------------------------------------------------
--- Decompose the narrative into independently auditable atoms.
-------------------------------------------------------------------------
 
 data ClaimAtom : Set where
   ancientNearEasternReligiousInteraction : ClaimAtom
@@ -99,11 +91,6 @@ claimKind contemporaryChurchesHarvestLiteralPsychicEnergy = metaphysicalClaim
 claimKind warsAreSecretlyConductedAsBloodSacrifice = causalClaim
 claimKind wholeReligiousGroupsCommitRitualChildAbuse = groupGeneralisation
 claimKind demonicEntityRewardsElitesForWorship = metaphysicalClaim
-
-------------------------------------------------------------------------
--- Promotion requires an explicit bridge.  Merely sharing narrative adjacency
--- is deliberately insufficient.
-------------------------------------------------------------------------
 
 record PromotionReceipt (from to : ClaimAtom) : Set where
   constructor promotion-receipt
@@ -144,16 +131,6 @@ canonicalNoAutomaticPromotionBoundary =
   no-automatic-promotion-boundary
     false refl false refl false refl false refl false refl false refl
 
-------------------------------------------------------------------------
--- Child fear / authority BIDI carrier.
---
--- Forward: authority + threat representation can participate in behavioural
--- regulation / subject formation.
--- Reverse: observed fear, conformity or religious identity does not recover a
--- unique cause, private belief state, coercive mechanism or originating
--- subject-position.
-------------------------------------------------------------------------
-
 data FormationState : Set where
   authorityThreatRoute alternativeRoute : FormationState
 
@@ -182,12 +159,6 @@ behaviourCannotRecoverFormationRoute =
     (INF.nonFactorabilityWitness
       authorityThreatRoute alternativeRoute refl formationRouteDiffers)
 
-------------------------------------------------------------------------
--- Explicit reuse receipts: the present owner consumes the canonical fear
--- source and subject-position boundary rather than re-attributing their
--- theorems to religious studies.
-------------------------------------------------------------------------
-
 record CrossPollinationReceipt : Set where
   constructor cross-pollination-receipt
   field
@@ -213,10 +184,6 @@ canonicalCrossPollinationReceipt =
     Fear.canonicalParentalFearIndependentMobilitySource refl
     Subject.canonicalRepresentationSubjectPositionBoundary refl
     true refl true refl true refl
-
-------------------------------------------------------------------------
--- Metaphor / mechanism boundary.
-------------------------------------------------------------------------
 
 data ExplanatoryRegister : Set where
   socialMechanism : ExplanatoryRegister
