@@ -5,68 +5,51 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Biology.Cell.BioelectricNetwork as Bioelectric
 
-data Lineage : Set where
-  plantLineage
-  animalLineage
-  : Lineage
+------------------------------------------------------------------------
+-- Sources: Yokawa et al. 2018 DOI 10.1093/aob/mcx155;
+-- Kelz & Mashour 2019 DOI 10.1016/j.cub.2019.09.071;
+-- Draguhn, Mallatt & Robinson 2021 DOI 10.1007/s00709-020-01550-9.
+-- Boundary: anaesthetic sensitivity and response suppression in plants do not
+-- establish plant pain or consciousness; shared cellular susceptibility is
+-- kept separate from lineage-specific organism-level endpoints.
+------------------------------------------------------------------------
+
+data Lineage : Set where plantLineage animalLineage : Lineage
 
 data ActionLayer : Set where
-  molecularLayer
-  membraneElectricalLayer
-  cellularProcessLayer
-  tissueNetworkLayer
-  wholeOrganismLayer
-  consciousStateLayer
-  : ActionLayer
+  molecularLayer membraneElectricalLayer cellularProcessLayer tissueNetworkLayer
+  wholeOrganismLayer consciousStateLayer : ActionLayer
 
 data SharedCellularSubstrate : Set where
-  ionChannelSubstrate
-  membraneSubstrate
-  cytoskeletalSubstrate
-  mitochondrialSubstrate
-  coupledElectricalActivitySubstrate
-  : SharedCellularSubstrate
+  ionChannelSubstrate membraneSubstrate cytoskeletalSubstrate
+  mitochondrialSubstrate coupledElectricalActivitySubstrate : SharedCellularSubstrate
 
 data PlantAnaestheticEndpoint : Set where
-  plantActionPotentialSuppressed
-  plantOrganMovementSuppressed
-  plantEndocyticRecyclingAltered
-  plantROSHomeostasisAltered
-  plantGerminationOrGrowthAltered
-  plantRecoveryAfterRemoval
-  : PlantAnaestheticEndpoint
+  plantActionPotentialSuppressed plantOrganMovementSuppressed
+  plantEndocyticRecyclingAltered plantROSHomeostasisAltered
+  plantGerminationOrGrowthAltered plantRecoveryAfterRemoval : PlantAnaestheticEndpoint
 
 data AnimalAnaestheticEndpoint : Set where
-  neuronalExcitabilityAltered
-  synapticTransmissionAltered
-  neuralNetworkCoordinationDisrupted
-  immobilityEndpoint
-  amnesiaEndpoint
-  unconsciousnessEndpoint
-  recoveryAfterRemoval
-  : AnimalAnaestheticEndpoint
+  neuronalExcitabilityAltered synapticTransmissionAltered
+  neuralNetworkCoordinationDisrupted immobilityEndpoint amnesiaEndpoint
+  unconsciousnessEndpoint recoveryAfterRemoval : AnimalAnaestheticEndpoint
 
 data CrossKingdomEndpoint : Set where
   plantEndpointTag : PlantAnaestheticEndpoint → CrossKingdomEndpoint
   animalEndpointTag : AnimalAnaestheticEndpoint → CrossKingdomEndpoint
 
 data EvidentiaryStatus : Set where
-  directlyObserved
-  mechanisticallySupported
-  comparativeHypothesis
-  notEstablished
+  directlyObserved mechanisticallySupported comparativeHypothesis notEstablished
   : EvidentiaryStatus
 
 plantAndAnimalDistinct : plantLineage ≡ animalLineage → ⊥
 plantAndAnimalDistinct ()
 
-cellularAndConsciousLayersDistinct :
-  cellularProcessLayer ≡ consciousStateLayer → ⊥
+cellularAndConsciousLayersDistinct : cellularProcessLayer ≡ consciousStateLayer → ⊥
 cellularAndConsciousLayersDistinct ()
 
 plantAndAnimalEndpointTagsDistinct :
-  (p : PlantAnaestheticEndpoint) →
-  (a : AnimalAnaestheticEndpoint) →
+  (p : PlantAnaestheticEndpoint) → (a : AnimalAnaestheticEndpoint) →
   plantEndpointTag p ≡ animalEndpointTag a → ⊥
 plantAndAnimalEndpointTagsDistinct _ _ ()
 
@@ -76,22 +59,16 @@ record ForwardAnaestheticTrace : Set₁ where
     Anaesthetic : Set
     anaesthetic : Anaesthetic
     sharedSubstrate : SharedCellularSubstrate
-    PlantState : Set
-    AnimalState : Set
-    plantBefore : PlantState
-    plantAfter : PlantState
-    animalBefore : AnimalState
-    animalAfter : AnimalState
+    PlantState AnimalState : Set
+    plantBefore plantAfter : PlantState
+    animalBefore animalAfter : AnimalState
     plantEndpoint : PlantAnaestheticEndpoint
     animalEndpoint : AnimalAnaestheticEndpoint
     plantPerturbation : Anaesthetic → PlantState → PlantState
     animalPerturbation : Anaesthetic → AnimalState → AnimalState
     plantTransitionIsActual : plantPerturbation anaesthetic plantBefore ≡ plantAfter
     animalTransitionIsActual : animalPerturbation anaesthetic animalBefore ≡ animalAfter
-    sharedSubstrateReference : String
-    plantEndpointReference : String
-    animalEndpointReference : String
-
+    sharedSubstrateReference plantEndpointReference animalEndpointReference : String
 open ForwardAnaestheticTrace public
 
 record BackwardAnaestheticAudit : Set₁ where
@@ -99,16 +76,12 @@ record BackwardAnaestheticAudit : Set₁ where
   field
     observedPlantEndpoint : PlantAnaestheticEndpoint
     observedAnimalEndpoint : AnimalAnaestheticEndpoint
-    plantMechanismStatus : EvidentiaryStatus
-    animalMechanismStatus : EvidentiaryStatus
-    plantConsciousnessStatus : EvidentiaryStatus
-    animalConsciousnessStatus : EvidentiaryStatus
-    plantEndpointToMechanismReference : String
-    animalEndpointToMechanismReference : String
+    plantMechanismStatus animalMechanismStatus : EvidentiaryStatus
+    plantConsciousnessStatus animalConsciousnessStatus : EvidentiaryStatus
+    plantEndpointToMechanismReference animalEndpointToMechanismReference : String
     consciousnessBoundaryReference : String
     plantAnaestheticResponseDoesNotEstablishConsciousness :
       plantConsciousnessStatus ≡ notEstablished
-
 open BackwardAnaestheticAudit public
 
 record CrossKingdomAnaestheticBidi : Set₁ where
@@ -120,7 +93,6 @@ record CrossKingdomAnaestheticBidi : Set₁ where
     sameAnimalEndpoint : animalEndpoint forward ≡ observedAnimalEndpoint backward
     comparisonLevel : ActionLayer
     sourceSynthesisReference : String
-
 open CrossKingdomAnaestheticBidi public
 
 record BioelectricComparisonBridge (B : Bioelectric.BioelectricNetwork) : Set₁ where
@@ -130,13 +102,11 @@ record BioelectricComparisonBridge (B : Bioelectric.BioelectricNetwork) : Set₁
     animalElectricalEndpoint : AnimalAnaestheticEndpoint
     sharedCarrierIsBioelectric : Set
     sharedCarrierWitness : sharedCarrierIsBioelectric
-    plantSignalArchitectureReference : String
-    animalNeuralArchitectureReference : String
+    plantSignalArchitectureReference animalNeuralArchitectureReference : String
     ionChannelComparisonReference : String
     plantElectricalSignallingIsAnimalNeuralNetwork : Bool
     plantElectricalSignallingIsAnimalNeuralNetworkIsFalse :
       plantElectricalSignallingIsAnimalNeuralNetwork ≡ false
-
 open BioelectricComparisonBridge public
 
 record AnaestheticInferenceBoundary : Set where
@@ -175,9 +145,7 @@ notEstablishedIsNotDirectObservation ()
 
 yokawaPlantAnaesthesiaDOI : String
 yokawaPlantAnaesthesiaDOI = "10.1093/aob/mcx155"
-
 kelzMashourComparativeAnaesthesiaDOI : String
 kelzMashourComparativeAnaesthesiaDOI = "10.1016/j.cub.2019.09.071"
-
 draguhnMallattRobinsonPlantConsciousnessBoundaryDOI : String
 draguhnMallattRobinsonPlantConsciousnessBoundaryDOI = "10.1007/s00709-020-01550-9"
