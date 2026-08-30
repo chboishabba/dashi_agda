@@ -44,6 +44,11 @@ import DASHI.Cognition.PNF.StreamingPhysicalPartitionRefinementExact
 -- through one canonical structural owner before entering the semantic fold.
 import DASHI.Cognition.PNF.ExactlyOnceParserAuthorityProjectionExact
 
+-- Completion law: the structural owner stays authoritative while evidence-only
+-- context/repair observations may supply the missing parser view. Publication
+-- waits until that owner has a complete observation.
+import DASHI.Cognition.PNF.ParserBoundaryCompletionExact
+
 -- Activation cut for the live packed sentence compiler.
 import DASHI.Cognition.PNF.DirectDeltaCompilerActivationExact
 
