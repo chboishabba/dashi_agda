@@ -7,3 +7,4 @@ import DASHI.Chemistry.Photography.InstantFilmSurface
 import DASHI.Chemistry.ChemistryTransitionKernelTests
 import DASHI.Chemistry.ChlorAlkaliSaltIndustryExact
 import DASHI.Chemistry.ChlorAlkaliHalfReactionExact
+import DASHI.Chemistry.ChlorAlkaliCanonicalHalfReactionsExact
