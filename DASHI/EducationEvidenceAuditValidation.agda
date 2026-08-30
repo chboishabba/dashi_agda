@@ -1,0 +1,7 @@
+module DASHI.EducationEvidenceAuditValidation where
+
+import DASHI.Reasoning.DialecticalOppositionNonExplosionExact
+import DASHI.Reasoning.PredicateNormalFormEvidenceAuditExact
+import DASHI.Reasoning.EvidenceDesignAdmissibilityExact
+import DASHI.Biology.ACPUEAEROEducationAssertionBidiExact
+import DASHI.Biology.EducationEvidenceAuditEverything
