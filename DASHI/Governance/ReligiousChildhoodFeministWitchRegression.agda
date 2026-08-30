@@ -16,6 +16,7 @@ import DASHI.Governance.HistoricalEventMeaningProvenanceBidiExact as History
 import DASHI.Governance.SexedHistoricalSubjectDialecticBidiExact as SexDialectic
 import DASHI.Governance.SexedHistoricalCoConstitutionHyperfabricExact as Hyper
 import DASHI.Governance.SexedHistoricalTransitionHyperfabricExact as TransitionHyper
+import DASHI.Governance.SexedHistoricalChoiceConeBridgeExact as Choice
 
 ------------------------------------------------------------------------
 -- Fine-state route survives public behavioural collapse.
@@ -98,8 +99,7 @@ mutualConstructionDoesNotMeanPowerParityRegression =
   Hyper.mutualConstructionDoesNotImplyPowerParity
 
 ------------------------------------------------------------------------
--- Transition-hyperfabric regressions: visible reform does not close every
--- material, symbolic, authority or historical residual.
+-- Transition-hyperfabric regressions.
 ------------------------------------------------------------------------
 
 formalCorrectionDoesNotRecoverSymbolicClosureRegression :
@@ -120,6 +120,30 @@ suffrageCorrectionDoesNotMeanWholePowerParityRegression :
   TransitionHyper.SuffrageCorrectionImpliesWholePowerParity → ⊥
 suffrageCorrectionDoesNotMeanWholePowerParityRegression =
   TransitionHyper.suffrageCorrectionDoesNotImplyWholePowerParity
+
+------------------------------------------------------------------------
+-- Formal/effective/conceived choice regressions.
+------------------------------------------------------------------------
+
+formalRightDoesNotRecoverEffectiveChoiceRegression :
+  INF.FactorsThrough Choice.formalRight Choice.effectiveChoice → ⊥
+formalRightDoesNotRecoverEffectiveChoiceRegression =
+  Choice.formalRightCannotRecoverEffectiveChoice
+
+effectiveChoiceDoesNotRecoverConceivedChoiceRegression :
+  INF.FactorsThrough Choice.effectiveChoice Choice.conceivedChoice → ⊥
+effectiveChoiceDoesNotRecoverConceivedChoiceRegression =
+  Choice.effectiveChoiceCannotRecoverConceivedChoice
+
+formalRightDoesNotRecoverConceivedChoiceRegression :
+  INF.FactorsThrough Choice.formalRight Choice.conceivedChoice → ⊥
+formalRightDoesNotRecoverConceivedChoiceRegression =
+  Choice.formalRightCannotRecoverConceivedChoice
+
+formalReligiousFreedomDoesNotGuaranteeEffectiveExitRegression :
+  Choice.FormalReligiousFreedomImpliesEffectiveExit → ⊥
+formalReligiousFreedomDoesNotGuaranteeEffectiveExitRegression =
+  Choice.formalReligiousFreedomDoesNotImplyEffectiveExit
 
 ------------------------------------------------------------------------
 -- Empirical atlas remains partial rather than decorative completion.
@@ -151,6 +175,10 @@ record ReligiousChildhoodFeministWitchRegressionBoundary : Set where
     formalCorrectionClosesSymbolicResidual : Bool
     symbolicRechartCreatesMaterialParity : Bool
     oneHistoricalAxisChangeClosesTransition : Bool
+    formalRightEqualsEffectiveChoice : Bool
+    effectiveChoiceEqualsConceivedChoice : Bool
+    legalAdulthoodZerosExitCost : Bool
+    formalReligiousFreedomGuaranteesEffectiveExit : Bool
     currentReligiousAtlasIsCausallyComplete : Bool
     currentReligiousAtlasIsPartiallyInstantiated : Bool
 
@@ -159,4 +187,4 @@ canonicalReligiousChildhoodFeministWitchRegressionBoundary :
 canonicalReligiousChildhoodFeministWitchRegressionBoundary =
   religious-childhood-feminist-witch-regression-boundary
     false false false false false false false false false false false
-    false false false false true
+    false false false false false false false false true
