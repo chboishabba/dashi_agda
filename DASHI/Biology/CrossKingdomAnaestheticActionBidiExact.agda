@@ -5,42 +5,6 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Biology.Cell.BioelectricNetwork as Bioelectric
 
-------------------------------------------------------------------------
--- CROSS-KINGDOM ANAESTHETIC ACTION: BIDI SOURCE / MECHANISM / ENDPOINT WELD
---
--- PRIMARY SOURCES
---
--- K. Yokawa, T. Kagenishi, A. Pavlovic, S. Gall, M. Weiland,
--- S. Mancuso, F. Baluska,
--- "Anaesthetics stop diverse plant organ movements, affect endocytic vesicle
--- recycling and ROS homeostasis, and block action potentials in Venus
--- flytraps", Annals of Botany 122(5) (2018), 747--756.
--- DOI: 10.1093/aob/mcx155.
---
--- M. B. Kelz and G. A. Mashour,
--- "The Biology of General Anesthesia from Paramecium to Primate",
--- Current Biology 29(22) (2019), R1199--R1210.
--- DOI: 10.1016/j.cub.2019.09.071.
---
--- A. Draguhn, D. G. Mallatt, K. R. Robinson,
--- "Anesthetics and plants: no pain, no brain, and therefore no
--- consciousness", Protoplasma 258 (2021), 239--248.
--- DOI: 10.1007/s00709-020-01550-9.
---
--- SOURCE BOUNDARY
--- Yokawa et al. support plant movement suppression, Venus-flytrap action-
--- potential blockade, altered endocytic vesicle recycling, altered ROS
--- homeostasis, and recovery after removal for the tested anaesthetic
--- exposures. Kelz/Mashour support a cross-organism comparison in which
--- several molecular/cellular substrates are conserved while organism-level
--- endpoints differ. Draguhn/Mallatt/Robinson explicitly reject the inference
--- from plant anaesthetic sensitivity to plant pain or consciousness.
---
--- The typed comparison below is a DASHI reconstruction. It does not identify
--- plant electrical signalling with animal neural computation, and it does not
--- infer consciousness from response suppression.
-------------------------------------------------------------------------
-
 data Lineage : Set where
   plantLineage
   animalLineage
@@ -122,10 +86,8 @@ record ForwardAnaestheticTrace : Set₁ where
     animalEndpoint : AnimalAnaestheticEndpoint
     plantPerturbation : Anaesthetic → PlantState → PlantState
     animalPerturbation : Anaesthetic → AnimalState → AnimalState
-    plantTransitionIsActual :
-      plantPerturbation anaesthetic plantBefore ≡ plantAfter
-    animalTransitionIsActual :
-      animalPerturbation anaesthetic animalBefore ≡ animalAfter
+    plantTransitionIsActual : plantPerturbation anaesthetic plantBefore ≡ plantAfter
+    animalTransitionIsActual : animalPerturbation anaesthetic animalBefore ≡ animalAfter
     sharedSubstrateReference : String
     plantEndpointReference : String
     animalEndpointReference : String
@@ -154,17 +116,14 @@ record CrossKingdomAnaestheticBidi : Set₁ where
   field
     forward : ForwardAnaestheticTrace
     backward : BackwardAnaestheticAudit
-    samePlantEndpoint :
-      plantEndpoint forward ≡ observedPlantEndpoint backward
-    sameAnimalEndpoint :
-      animalEndpoint forward ≡ observedAnimalEndpoint backward
+    samePlantEndpoint : plantEndpoint forward ≡ observedPlantEndpoint backward
+    sameAnimalEndpoint : animalEndpoint forward ≡ observedAnimalEndpoint backward
     comparisonLevel : ActionLayer
     sourceSynthesisReference : String
 
 open CrossKingdomAnaestheticBidi public
 
-record BioelectricComparisonBridge
-    (B : Bioelectric.BioelectricNetwork) : Set₁ where
+record BioelectricComparisonBridge (B : Bioelectric.BioelectricNetwork) : Set₁ where
   constructor bioelectricComparisonBridge
   field
     plantElectricalEndpoint : PlantAnaestheticEndpoint
@@ -201,25 +160,17 @@ record AnaestheticInferenceBoundary : Set where
 
 canonicalAnaestheticInferenceBoundary : AnaestheticInferenceBoundary
 canonicalAnaestheticInferenceBoundary =
-  anaestheticInferenceBoundary
-    false refl
-    false refl
-    false refl
-    true refl
-    true refl
+  anaestheticInferenceBoundary false refl false refl false refl true refl true refl
 
 plantActionPotentialSuppressionIsNotAnimalUnconsciousness :
-  plantEndpointTag plantActionPotentialSuppressed
-  ≡ animalEndpointTag unconsciousnessEndpoint → ⊥
+  plantEndpointTag plantActionPotentialSuppressed ≡ animalEndpointTag unconsciousnessEndpoint → ⊥
 plantActionPotentialSuppressionIsNotAnimalUnconsciousness ()
 
 plantMovementSuppressionIsNotAnimalUnconsciousness :
-  plantEndpointTag plantOrganMovementSuppressed
-  ≡ animalEndpointTag unconsciousnessEndpoint → ⊥
+  plantEndpointTag plantOrganMovementSuppressed ≡ animalEndpointTag unconsciousnessEndpoint → ⊥
 plantMovementSuppressionIsNotAnimalUnconsciousness ()
 
-notEstablishedIsNotDirectObservation :
-  notEstablished ≡ directlyObserved → ⊥
+notEstablishedIsNotDirectObservation : notEstablished ≡ directlyObserved → ⊥
 notEstablishedIsNotDirectObservation ()
 
 yokawaPlantAnaesthesiaDOI : String
@@ -229,5 +180,4 @@ kelzMashourComparativeAnaesthesiaDOI : String
 kelzMashourComparativeAnaesthesiaDOI = "10.1016/j.cub.2019.09.071"
 
 draguhnMallattRobinsonPlantConsciousnessBoundaryDOI : String
-draguhnMallattRobinsonPlantConsciousnessBoundaryDOI =
-  "10.1007/s00709-020-01550-9"
+draguhnMallattRobinsonPlantConsciousnessBoundaryDOI = "10.1007/s00709-020-01550-9"
