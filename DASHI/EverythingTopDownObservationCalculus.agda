@@ -15,11 +15,14 @@ import DASHI.Core.ConsumerIndexedResidualRefinementExact
 import DASHI.Core.TopDownObservationCalculusExact
 
 -- Governance-aware observation: value, provenance, epistemic status, authority,
--- permission and obligation remain independently consumer-indexed.  Translation
+-- permission and obligation remain independently consumer-indexed. Translation
 -- effects retain coordinate lineage, so erase-then-add cannot masquerade as
--- restoration of inherited information.
+-- restoration of inherited information. Required governed axes may themselves
+-- vary by context/query; inactive axes are not failed axes.
 import DASHI.Core.GovernedObservationProvenanceExact
 import DASHI.Core.GovernedObservationProvenanceRegression
+import DASHI.Core.ContextIndexedGovernedObservationExact
+import DASHI.Core.ContextIndexedGovernedObservationRegression
 
 -- Residual dependency, certified quadratic control, future-language capability,
 -- and the independent pressure axis.  Receipt-backed SensibLaw residual order
@@ -71,6 +74,10 @@ import DASHI.Cognition.PNF.ObserverSeparationAuthorityBoundaryExact
 -- Value preservation != provenance / epistemic / governance preservation.
 -- Release/container provenance != embedded-content verification.
 -- Erased inherited provenance != a coordinate newly added downstream.
+-- Governed requirements may vary by context/query/use role.
+-- Inactive governance axis != failed governance axis.
+-- Safety for a weaker governed language != safety for a stronger one.
+-- Stronger governed safety descends to included weaker requirements.
 -- Current observation equality != action-indexed dependency equality.
 -- Low coupling score != action admissibility.
 -- Finite dependency score != affine spectral independence / SDP certificate.
