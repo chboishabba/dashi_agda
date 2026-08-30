@@ -12,6 +12,7 @@ import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionA2HistoryRound137Exa
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionA1HistoryRound138Exact as R138
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionPhysicalHistoryRound139Exact as R139
 import DASHI.Physics.YangMills.BalabanUnifiedPresentCutSchwingerRecoveryRound140Exact as R140
+import DASHI.Physics.YangMills.BalabanCombinedRGUnifiedActionRound141Exact as R141
 
 round132SameActionDensityCompiler : ProofLevel
 round132SameActionDensityCompiler = R132.unifiedGeneratedActionDensityCompilerLevel
@@ -41,7 +42,14 @@ round139PhysicalHistoryCompiler = R139.unifiedGeneratedActionPhysicalHistoryComp
 round140PresentCutSchwingerCompiler : ProofLevel
 round140PresentCutSchwingerCompiler = R140.unifiedPresentCutSchwingerRecoveryCompilerLevel
 
+round141CombinedRGActionRealizationCompiler : ProofLevel
+round141CombinedRGActionRealizationCompiler =
+  R141.completeDensityEffectiveActionRealizationCompilerLevel
+
 -- Physical source instantiation remains fail-closed.  This root checks the
 -- compiler graph, not a fabricated Clay or QFT/GR inhabitant.
 round140LiteralInstantiation : ProofLevel
 round140LiteralInstantiation = R140.literalUnifiedPresentCutSchwingerRecoveryLevel
+
+round141LiteralInstantiation : ProofLevel
+round141LiteralInstantiation = R141.literalCompleteDensityEffectiveActionRealizationLevel
