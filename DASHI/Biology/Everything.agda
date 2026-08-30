@@ -186,7 +186,6 @@ import DASHI.Biology.NeuralResidualDependencyBridgeExact
 
 ------------------------------------------------------------------------
 -- Conscious-access round seven: Aristotle theorem return and structural gates.
-
 import DASHI.Biology.TernaryCanonicalOrientationExact
 import DASHI.Biology.TernaryFixedTransverseFiniteExact
 import DASHI.Biology.TernaryRotationReflectionSeparationExact
@@ -204,6 +203,6 @@ import DASHI.Biology.ConsciousAccessRound7AristotleRegression
 import DASHI.Biology.JCoarseFineConsumerReductionBridgeExact
 
 ------------------------------------------------------------------------
--- Cross-kingdom anaesthetic action: shared cellular susceptibility, divergent
--- lineage endpoints, and explicit consciousness/pain inference boundaries.
+-- Cross-kingdom anaesthetic action and electrical-excitability comparison.
 import DASHI.Biology.CrossKingdomAnaestheticActionBidiExact
+import DASHI.Biology.CrossKingdomActionPotentialAnaestheticBidiExact
