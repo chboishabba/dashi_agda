@@ -26,6 +26,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Cognition.PNF.DecisionAutonomyExact as Autonomy
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact as Subject
 import DASHI.Culture.ChildReligiousAutonomyFormationBidiExact as Formation
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
@@ -84,6 +85,13 @@ epistemicRouteDiffers :
   epistemicRoute revisablyEndorsed
   ≡ epistemicRoute inheritedClosedProfession → ⊥
 epistemicRouteDiffers ()
+
+professionCannotRecoverEpistemicRoute :
+  INF.FactorsThrough professionSurface epistemicRoute → ⊥
+professionCannotRecoverEpistemicRoute =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      revisablyEndorsed inheritedClosedProfession refl epistemicRouteDiffers)
 
 ------------------------------------------------------------------------
 -- No surface-level promotion to autonomous endorsement.
@@ -223,8 +231,7 @@ canonicalProfessionOnlyAudit = epistemic-backward-audit
 ------------------------------------------------------------------------
 
 existingSpeechNonfactorability :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    Subject.speechObserver Subject.finePosition → ⊥
+  INF.FactorsThrough Subject.speechObserver Subject.finePosition → ⊥
 existingSpeechNonfactorability = Subject.speechSurfaceCannotRecoverFinePosition
 
 ------------------------------------------------------------------------
