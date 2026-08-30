@@ -23,7 +23,7 @@ import DASHI.Environment.SoilBiogeochemistryProcessNetworkExact as Soil
 -- Source boundary:
 --   The source reports field observations/trials in which raw sauerkraut juice
 --   (RSKJ) and other biological treatments were followed by large reductions in
---   measured soil glyphosate/AMPA over roughly six months.  This module records
+--   measured soil glyphosate/AMPA over roughly six months. This module records
 --   those treatment/observation relations while refusing to identify measured
 --   residue loss with one specific microbial mechanism unless an independent
 --   mechanism receipt is supplied.
@@ -31,7 +31,7 @@ import DASHI.Environment.SoilBiogeochemistryProcessNetworkExact as Soil
 -- DASHI extension:
 --   Where experimental design does not identify a causal component exactly, a
 --   backward BIDI pass may return a typed approximation/error envelope assembled
---   from known quantities and explicit unresolved residual components.  Such an
+--   from known quantities and explicit unresolved residual components. Such an
 --   envelope constrains what remains possible; it is not promoted to an exact
 --   causal decomposition.
 ------------------------------------------------------------------------
@@ -76,7 +76,6 @@ stripAndRCBDDistinct ()
 
 ------------------------------------------------------------------------
 -- Quantities are kept as scaled naturals with the scale named explicitly.
--- This prevents an untyped number from silently changing unit or precision.
 ------------------------------------------------------------------------
 
 record ScaledMeasurement : Set where
@@ -114,7 +113,7 @@ reportedRSKJDose = treatmentDose
   "raw sauerkraut juice; composition is multicomponent and not reduced to Lactiplantibacillus alone"
 
 ------------------------------------------------------------------------
--- Chemistry identities.  These are analyte/model carriers, not a claim that
+-- Chemistry identities. These are analyte/model carriers, not a claim that
 -- one disappearance pathway has been established.
 ------------------------------------------------------------------------
 
@@ -165,8 +164,7 @@ bioavailableNotMeasured ()
 
 ------------------------------------------------------------------------
 -- Candidate mechanisms remain disjoint alternatives unless independently
--- welded.  In particular, an RSKJ-associated residue decline does not select
--- Lactiplantibacillus causation by constructor choice.
+-- welded. An RSKJ-associated residue decline does not select LAB causation.
 ------------------------------------------------------------------------
 
 data CandidateMechanism : Set where
@@ -264,7 +262,7 @@ shioctonEvidenceNotKidderEvidence ()
 
 ------------------------------------------------------------------------
 -- Published Shiocton residue specimen.
--- Values are hundredths of ng/g, preserving the reported decimal values:
+-- Values are hundredths of ng/g, preserving reported decimal values:
 -- glyphosate 38.37 -> 6.57; AMPA 112.59 -> 13.35; TEG 207.26 -> 26.59.
 ------------------------------------------------------------------------
 
@@ -288,10 +286,6 @@ shioctonTEGAfter = scaledMeasurement 2659 "0.01" "ng/g" "Harle et al. 2024 Table
 
 ------------------------------------------------------------------------
 -- BIDI residual/backpropagation layer.
---
--- A missing control or nonidentified mechanism is represented by a residual
--- component with provenance and an explicit bound status.  Known quantities can
--- shrink an admissible interval, but unresolved components remain visible.
 ------------------------------------------------------------------------
 
 data BoundStatus : Set where
@@ -340,10 +334,6 @@ record BidiResidualBackpropagation : Set where
 
 open BidiResidualBackpropagation public
 
-------------------------------------------------------------------------
--- Fail-closed constructors.
-------------------------------------------------------------------------
-
 shioctonHeadlineBackpropagation : BidiResidualBackpropagation
 shioctonHeadlineBackpropagation = bidiResidualBackpropagation
   shioctonDesign
@@ -374,40 +364,74 @@ shioctonHeadlineBackpropagation = bidiResidualBackpropagation
   "all unresolved residual components must remain explicit until bounded or measured"
 
 ------------------------------------------------------------------------
--- Generic non-promotion theorems.
+-- Approximate versus exact inference is one tagged status. Constructor
+-- separation gives the literal anti-promotion theorem.
 ------------------------------------------------------------------------
 
-data ExactMechanismIdentification : Set where
-  introducedLABExactlyIdentified
-  indigenousExactlyIdentified
-  acidityExactlyIdentified
-  sorptionExactlyIdentified
-  combinedExactlyIdentified
-  : ExactMechanismIdentification
+data InferenceStatus : Set where
+  approximatelyConstrained
+  exactlyMechanismIdentified
+  : InferenceStatus
 
-data ApproximateConstraint : Set where
-  boundedButNotIdentified : ApproximateConstraint
+approximateNotExact :
+  approximatelyConstrained ≡ exactlyMechanismIdentified → ⊥
+approximateNotExact ()
 
-approximationIsNotExactIdentification :
-  ApproximateConstraint → ExactMechanismIdentification → Set
-approximationIsNotExactIdentification boundedButNotIdentified introducedLABExactlyIdentified = ⊥
-approximationIsNotExactIdentification boundedButNotIdentified indigenousExactlyIdentified = ⊥
-approximationIsNotExactIdentification boundedButNotIdentified acidityExactlyIdentified = ⊥
-approximationIsNotExactIdentification boundedButNotIdentified sorptionExactlyIdentified = ⊥
-approximationIsNotExactIdentification boundedButNotIdentified combinedExactlyIdentified = ⊥
+record BidiInferenceReceipt : Set where
+  constructor bidiInferenceReceipt
+  field
+    inferenceStatus : InferenceStatus
+    inferenceEnvelope : ApproximationEnvelope
+    inferenceMechanism : CandidateMechanism
+    mechanismReceiptReference : String
+    promotionReference : String
 
-noExactMechanismFromApproximation :
-  (m : ExactMechanismIdentification) →
-  approximationIsNotExactIdentification boundedButNotIdentified m
-noExactMechanismFromApproximation introducedLABExactlyIdentified = λ ()
-noExactMechanismFromApproximation indigenousExactlyIdentified = λ ()
-noExactMechanismFromApproximation acidityExactlyIdentified = λ ()
-noExactMechanismFromApproximation sorptionExactlyIdentified = λ ()
-noExactMechanismFromApproximation combinedExactlyIdentified = λ ()
+open BidiInferenceReceipt public
+
+shioctonApproximateInference : BidiInferenceReceipt
+shioctonApproximateInference = bidiInferenceReceipt
+  approximatelyConstrained
+  (admissibleEnvelope shioctonHeadlineBackpropagation)
+  unresolvedMechanism
+  "no exact microbial mechanism identified by the headline longitudinal contrast"
+  "exact causal promotion requires an independent control/mechanism receipt"
 
 ------------------------------------------------------------------------
--- Positive interpretation: an observed treatment-associated decline can be
--- retained as evidence without overclaiming the submechanism.
+-- Component-wise residual bounds allow later evidence to tighten the backward
+-- envelope. This is intentionally a receipt layer: the existing generic
+-- ScaledMeasurement carrier does not pretend to supply interval arithmetic.
+------------------------------------------------------------------------
+
+record ResidualComponentBound : Set where
+  constructor residualComponentBound
+  field
+    component : ResidualKind
+    lowerContribution : ScaledMeasurement
+    upperContribution : ScaledMeasurement
+    componentBoundStatus : BoundStatus
+    provenanceReference : String
+    commonScaleReference : String
+
+open ResidualComponentBound public
+
+record EnvelopeTighteningReceipt
+    (prior : ApproximationEnvelope) : Set where
+  constructor envelopeTighteningReceipt
+  field
+    posterior : ApproximationEnvelope
+    boundedComponents : List ResidualComponentBound
+    targetPreservedReference : String
+    commonUnitScaleReference : String
+    monotoneNarrowingReference : String
+    arithmeticReceiptReference : String
+    residualsNotSilentlyDroppedReference : String
+    validationReference : String
+
+open EnvelopeTighteningReceipt public
+
+------------------------------------------------------------------------
+-- Positive interpretation: treatment-associated evidence can be retained
+-- without overclaiming a submechanism.
 ------------------------------------------------------------------------
 
 record TreatmentAssociatedResidueEvidence : Set where
@@ -487,6 +511,18 @@ record GlyphosateSauerkrautBoundary : Set where
     approximateBoundIsExactRecoveredMechanismIsFalse :
       approximateBoundIsExactRecoveredMechanism ≡ false
 
+    tighteningRequiresIndependentComponentBounds : Bool
+    tighteningRequiresIndependentComponentBoundsIsTrue :
+      tighteningRequiresIndependentComponentBounds ≡ true
+
+    unmeasuredResidualMayBeSilentlySetToZero : Bool
+    unmeasuredResidualMayBeSilentlySetToZeroIsFalse :
+      unmeasuredResidualMayBeSilentlySetToZero ≡ false
+
+    narrowerEnvelopeProvesMechanism : Bool
+    narrowerEnvelopeProvesMechanismIsFalse :
+      narrowerEnvelopeProvesMechanism ≡ false
+
     independentValidationCanTightenEnvelope : Bool
     independentValidationCanTightenEnvelopeIsTrue :
       independentValidationCanTightenEnvelope ≡ true
@@ -498,5 +534,8 @@ canonicalGlyphosateSauerkrautBoundary = glyphosateSauerkrautBoundary
   false refl
   false refl
   true refl
+  false refl
+  true refl
+  false refl
   false refl
   true refl
