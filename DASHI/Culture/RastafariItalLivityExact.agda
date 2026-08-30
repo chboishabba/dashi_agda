@@ -7,7 +7,7 @@ open import DASHI.Core.Prelude
 --
 -- External calibration:
 -- Joseph Powell, "Ital Hermeneutics: The Innovative Theological Grounding of
--- Rastafari Dietary (Ietary) Practices", Black Theology 19(1), 2021, 32–52.
+-- Rastafari Dietary (Ietary) Practices", Black Theology 19(1), 2021, 32--52.
 -- DOI: 10.1080/14769948.2021.1897097
 --
 -- Source-bounded reading used here:
@@ -47,12 +47,6 @@ record ItalLivityProfile : Set where
     strength : LivityStrength
 
 open ItalLivityProfile public
-
-------------------------------------------------------------------------
--- A deliberately conservative canonical witness.
--- It records positive source-supported tendencies without pretending that every
--- Rastafari practitioner follows one identical rule set.
-------------------------------------------------------------------------
 
 canonicalItalProfile : ItalLivityProfile
 canonicalItalProfile =
@@ -97,10 +91,6 @@ canonicalItalValuesLifeAndNaturalness :
   quality canonicalItalProfile lifePromoting ×
   quality canonicalItalProfile natural
 canonicalItalValuesLifeAndNaturalness = tt , tt
-
-------------------------------------------------------------------------
--- Non-collapse / attribution gates.
-------------------------------------------------------------------------
 
 data ItalIsIdenticalToPermaculture : Set where
 
