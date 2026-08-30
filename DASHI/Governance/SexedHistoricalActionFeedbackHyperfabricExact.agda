@@ -182,10 +182,12 @@ sameActionCannotRecoverInstitutionalPowerEffect =
 ------------------------------------------------------------------------
 
 practiceBraidKeepsInstitutionalAndRelationalChangeDistinct :
+  Practice.institutionalChangeImpliesRelationalChange
+    Practice.canonicalRevolutionaryPracticeBraidSurface
+  ≡ false
+practiceBraidKeepsInstitutionalAndRelationalChangeDistinct =
   Practice.RevolutionaryPracticeBraidBoundary.institutionalChangeDoesNotCloseRelationalChange
     Practice.canonicalRevolutionaryPracticeBraidBoundary
-  ≡ refl
-practiceBraidKeepsInstitutionalAndRelationalChangeDistinct = refl
 
 ------------------------------------------------------------------------
 -- No-promotion boundaries for the historical applications discussed in this
