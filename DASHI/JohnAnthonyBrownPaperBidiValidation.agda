@@ -4,9 +4,10 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
+import DASHI.Culture.ChildReligiousAutonomyFormationBidiExact as Formation
 
 ------------------------------------------------------------------------
--- Focused consumer root for the paper-specific BIDI owner.
+-- Focused consumer root for the paper-specific BIDI owners.
 -- Suggested local command:
 --   agda -i . DASHI/JohnAnthonyBrownPaperBidiValidation.agda
 ------------------------------------------------------------------------
@@ -85,3 +86,45 @@ formalAuditReturnsRevisionObligations :
     Brown.canonicalJohnAnthonyBrownPaperBidiBoundary
   ≡ true
 formalAuditReturnsRevisionObligations = refl
+
+------------------------------------------------------------------------
+-- New autonomy / reopening regression.
+------------------------------------------------------------------------
+
+sameParticipationSurfacePinned :
+  Formation.publicSurface Formation.openFormationEpisode
+  ≡ Formation.publicSurface Formation.closedFormationEpisode
+sameParticipationSurfacePinned = refl
+
+sameActionStillNotAutonomy :
+  Formation.Autonomy.emitted Formation.Autonomy.autonomousWithdrawal
+  ≡ Formation.Autonomy.emitted Formation.Autonomy.constrainedWithdrawal
+sameActionStillNotAutonomy = Formation.sameActionStillDoesNotDetermineAutonomy
+
+constrainedFormationStillNotAutonomous :
+  Formation.Autonomy.Autonomous Formation.constrainedFormationAxes → ⊥
+constrainedFormationStillNotAutonomous = Formation.constrainedFormationNotAutonomous
+
+laterReopeningMatters :
+  Formation.ChildReligiousAutonomyFormationBoundary.laterReopeningConditionsMatter
+    Formation.canonicalChildReligiousAutonomyFormationBoundary
+  ≡ true
+laterReopeningMatters = refl
+
+participationNotConsent : Formation.ParticipationPromotesConsent → ⊥
+participationNotConsent = Formation.participationDoesNotPromoteConsent
+
+fearNotEntrapment : Formation.FearPromotesEntrapment → ⊥
+fearNotEntrapment = Formation.fearDoesNotPromoteEntrapment
+
+threatRepresentationNotExperiencedFear :
+  Formation.ChildReligiousAutonomyFormationBoundary.threatRepresentationEqualsExperiencedFear
+    Formation.canonicalChildReligiousAutonomyFormationBoundary
+  ≡ false
+threatRepresentationNotExperiencedFear = refl
+
+uniqueFormationRouteStillUnrecoverable :
+  Formation.ChildReligiousAutonomyFormationBoundary.observedConformityRecoversUniqueFormationRoute
+    Formation.canonicalChildReligiousAutonomyFormationBoundary
+  ≡ false
+uniqueFormationRouteStillUnrecoverable = refl
