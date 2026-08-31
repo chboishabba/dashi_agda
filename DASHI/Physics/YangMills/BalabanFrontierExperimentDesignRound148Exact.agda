@@ -1,10 +1,6 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanFrontierExperimentDesignRound148Exact where
 
-------------------------------------------------------------------------
--- ROUND148: EXPERIMENT-DESIGN COORDINATES FOR THE LIVE BALABAN FRONTIER
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
@@ -21,7 +17,7 @@ data BalabanFrontierCoordinate : Set where
   round108PotentialMatchResidual
   combinedRGDensityStateResidual
   combinedRGStatePotentialResidual
-  componentD1Residual
+  physicalD1ChainRuleResidual
   stressSumResidual
   metricDomainMargin
   schwingerPairingResidual
@@ -37,7 +33,7 @@ coordinateRole densityActionResidual = Design.derivedDiscriminator
 coordinateRole round108PotentialMatchResidual = Design.derivedDiscriminator
 coordinateRole combinedRGDensityStateResidual = Design.derivedDiscriminator
 coordinateRole combinedRGStatePotentialResidual = Design.derivedDiscriminator
-coordinateRole componentD1Residual = Design.derivedDiscriminator
+coordinateRole physicalD1ChainRuleResidual = Design.derivedDiscriminator
 coordinateRole stressSumResidual = Design.derivedDiscriminator
 coordinateRole metricDomainMargin = Design.measuredObservable
 coordinateRole schwingerPairingResidual = Design.derivedDiscriminator
@@ -52,13 +48,13 @@ coordinateTargetsLeaf densityActionResidual = R146.densityActionRealization
 coordinateTargetsLeaf round108PotentialMatchResidual = R146.round108SelectedPotentialMatchesBC1
 coordinateTargetsLeaf combinedRGDensityStateResidual = R146.densityToCombinedRGState
 coordinateTargetsLeaf combinedRGStatePotentialResidual = R146.combinedRGStateToBC1Potential
-coordinateTargetsLeaf componentD1Residual = R146.componentLocalizedD1ToPhysicalD1
+coordinateTargetsLeaf physicalD1ChainRuleResidual = R146.physicalCompositeD1ChainRule
 coordinateTargetsLeaf stressSumResidual = R146.stressInsertionEqualsPhysicalD1Sum
 coordinateTargetsLeaf metricDomainMargin = R146.metricPerturbationAdmission
 coordinateTargetsLeaf schwingerPairingResidual = R146.cmp119FiniteMeasureSchwingerEndpoint
 coordinateTargetsLeaf cutoffSystematic = R146.cmp119FiniteMeasureSchwingerEndpoint
 coordinateTargetsLeaf finiteVolumeSystematic = R146.cmp119FiniteMeasureSchwingerEndpoint
-coordinateTargetsLeaf discretizationSystematic = R146.componentLocalizedD1ToPhysicalD1
+coordinateTargetsLeaf discretizationSystematic = R146.physicalCompositeD1ChainRule
 
 record FrontierCoordinateDiscrimination : Set₁ where
   field
