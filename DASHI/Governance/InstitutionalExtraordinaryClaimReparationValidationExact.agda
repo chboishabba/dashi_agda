@@ -1,0 +1,44 @@
+module DASHI.Governance.InstitutionalExtraordinaryClaimReparationValidationExact where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Core.DiscriminatorSynthesisExact as Discriminator
+import DASHI.Governance.DrugGovernanceMultiAxisReparativeFibreExact as Fibre
+import DASHI.Governance.DrugGovernanceMultiAxisRepairPlannerExact as Planner
+import DASHI.Governance.MenWhoStareAtGoatsEvidenceLayerExact as Goats
+import DASHI.Governance.MenWhoStareAtGoatsReparativeAuditExact as GoatsRepair
+
+repairBoundary : Fibre.DrugGovernanceMultiAxisReparativeBoundary
+repairBoundary = Fibre.canonicalDrugGovernanceMultiAxisReparativeBoundary
+
+plannerBoundary : Planner.MultiAxisRepairPlannerBoundary
+plannerBoundary = Planner.canonicalMultiAxisRepairPlannerBoundary
+
+goatsBoundary : Goats.MenWhoStareAtGoatsEvidenceBoundary
+goatsBoundary = Goats.canonicalMenWhoStareAtGoatsEvidenceBoundary
+
+goatsRepairBoundary : GoatsRepair.MenWhoStareAtGoatsReparativeAuditBoundary
+goatsRepairBoundary = GoatsRepair.canonicalMenWhoStareAtGoatsReparativeAuditBoundary
+
+materialRepairProbeReallySeparates :
+  Discriminator.BundleSeparates
+    (Planner.probeFor Planner.materialRepairConsumer)
+    Fibre.acknowledgementOnly
+    Fibre.materialBenefitOnly
+materialRepairProbeReallySeparates = Planner.materialProbeSeparatesAcknowledgementFromMaterialRepair
+
+sovereigntyProbeReallySeparates :
+  Discriminator.BundleSeparates
+    (Planner.probeFor Planner.sovereigntyRepairConsumer)
+    Fibre.authorityReformWithoutSovereignty
+    Fibre.fullSyntheticRepair
+sovereigntyProbeReallySeparates = Planner.sovereigntyProbeSeparatesAuthorityReformFromFullRepair
+
+goatClaimStillDemandsIndependentEvidence :
+  Goats.EvidenceDemand Goats.goatKillingByStaringClaim
+goatClaimStillDemandsIndependentEvidence = Goats.canonicalGoatClaimDemand
+
+programmeHistorySelectsTruthConsumer :
+  GoatsRepair.residualProbe GoatsRepair.programmeHistoryResidual
+  ≡ Planner.truthHistoryConsumer
+programmeHistorySelectsTruthConsumer = GoatsRepair.historyResidualSelectsTruthProbe
