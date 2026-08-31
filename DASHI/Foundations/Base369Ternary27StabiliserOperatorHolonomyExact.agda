@@ -95,7 +95,7 @@ positiveXFace = Geometry.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspZero
 
 oppositeEdgeToFaceAdjacent :
   Geometry.HypervoxelAdjacent Sector.oppositeSignEdge positiveXFace
-oppositeEdgeToFaceAdjacent = Geometry.adjacentY Geometry.negZeroAdjacent
+oppositeEdgeToFaceAdjacent = Geometry.adjacentY Geometry.negToZero
 
 oppositeEdgeStratum :
   Stratification.voxelStratum Sector.oppositeSignEdge ≡
@@ -149,11 +149,10 @@ positiveCornerSwapRotateHolonomy =
     positiveCornerSwapAdmitted positiveCornerRotateAdmitted
 
 sameSignEdgeCannotAdmitSwapRotate :
-  AdmissibleHolonomyPair Sector.sameSignEdge ->
-  (λ p ->
-    first p ≡ swapXYOperator ->
-    second p ≡ rotateXYZOperator ->
-    ⊥)
+  (p : AdmissibleHolonomyPair Sector.sameSignEdge) ->
+  first p ≡ swapXYOperator ->
+  second p ≡ rotateXYZOperator ->
+  ⊥
 sameSignEdgeCannotAdmitSwapRotate p refl refl =
   sameSignEdgeRotateNotAdmitted (secondAdmitted p)
 
