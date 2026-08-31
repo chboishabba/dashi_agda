@@ -3,6 +3,7 @@ module DASHI.SexedHistoricalStatisticalExperimentValidation where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.EpistemicSuspensionExact as Suspension
 import DASHI.Governance.SexedHistoricalStatisticalExperimentHyperfabricExact as Stats
 import DASHI.Governance.SexedHistoricalConditionalReversalExact as Reversal
 import DASHI.Governance.SexedHistoricalDialecticalOrderHolonomyAnalogueExact as Order
@@ -73,10 +74,10 @@ coarsePresentHistoryRegression = Measure.coarsePresentCannotRecoverHiddenHistory
 
 selectedMeasurementSeparatesRegression :
   Measure.measure
-    (Measure.nextMeasurement Measure.recoverPathOrder BT.Suspension.suspendAndRefine)
+    (Measure.nextMeasurement Measure.recoverPathOrder Suspension.suspendAndRefine)
     Measure.institutionFirstHistory
   ≡ Measure.measure
-    (Measure.nextMeasurement Measure.recoverPathOrder BT.Suspension.suspendAndRefine)
+    (Measure.nextMeasurement Measure.recoverPathOrder Suspension.suspendAndRefine)
     Measure.reinterpretationFirstHistory
   → ⊥
 selectedMeasurementSeparatesRegression =
