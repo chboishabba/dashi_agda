@@ -4,6 +4,7 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119Round185Validation where
 import DASHI.Physics.YangMills.BalabanCMP98Equation119PhysicalSelectedBackgroundRound185Exact as R185
 import DASHI.Physics.YangMills.BalabanCMP98Equation119TypedPhysicalRealizationRound186Exact as R186
 import DASHI.Physics.YangMills.BalabanCMP98Equation119TypedToRawChartTransportRound187Exact as R187
+import DASHI.Physics.YangMills.BalabanCMP98Equation119PointwiseSelectedCutRound188Exact as R188
 
 round185PhysicalSelectedBackground =
   R185.cmp98Equation119PhysicalSelectedBackgroundRound185Level
@@ -19,3 +20,6 @@ round187TypedToRawChartTransport =
 
 round187ForgetfulGroupWordExact =
   R187.cmp98Equation119ForgetfulGroupWordExactRound187Level
+
+round188PointwiseSelectedCut =
+  R188.cmp98Equation119PointwiseSelectedCutRound188Level
