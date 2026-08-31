@@ -49,6 +49,7 @@ on:
       - 'DASHI/Governance/DrugGovernanceHistoricalBurdenPathExact.agda'
       - 'DASHI/Governance/DrugGovernanceBurdenPathEdgeIndexedReopeningExact.agda'
       - 'DASHI/Governance/DrugGovernanceHistoricalBurdenFarCrossPollinationExact.agda'
+      - 'DASHI/Governance/DrugGovernanceHistoricalBurdenPhilosophyAuditExact.agda'
       - 'DASHI/Governance/DrugGovernanceHistoricalBurdenPathValidationExact.agda'
       - 'DASHI/Governance/TrumpDrugPolicyPsychedelicClassificationBidiExact.agda'
       - 'DASHI/Governance/DrugWarReflectingPoolFailureBoundaryExact.agda'
