@@ -23,10 +23,6 @@ import DASHI.Moonshine.Monster3BPhaseTransportExact as Monster
 import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact as Bridge
 import DASHI.Moonshine.Base369Ternary27CharacterAdjacencyEquivarianceExact as Character
 
-------------------------------------------------------------------------
--- 1. Ternary reflection.
-------------------------------------------------------------------------
-
 negateTrit : SSP.SSPTrit → SSP.SSPTrit
 negateTrit SSP.sspNegOne = SSP.sspPosOne
 negateTrit SSP.sspZero = SSP.sspZero
@@ -44,10 +40,6 @@ negateGridStep Geometry.negToZero = Geometry.posToZero
 negateGridStep Geometry.zeroToNeg = Geometry.zeroToPos
 negateGridStep Geometry.zeroToPos = Geometry.zeroToNeg
 negateGridStep Geometry.posToZero = Geometry.negToZero
-
-------------------------------------------------------------------------
--- 2. Three coordinate reflections.
-------------------------------------------------------------------------
 
 flipX : Geometry.Ternary27Point → Geometry.Ternary27Point
 flipX (Geometry.ternary27Point x y z) =
@@ -76,19 +68,17 @@ flipZInvolutive (Geometry.ternary27Point x y SSP.sspNegOne) = refl
 flipZInvolutive (Geometry.ternary27Point x y SSP.sspZero) = refl
 flipZInvolutive (Geometry.ternary27Point x y SSP.sspPosOne) = refl
 
-originFixedByAllReflections :
-  flipX Geometry.origin ≡ Geometry.origin
-originFixedByAllReflections = refl
-
-------------------------------------------------------------------------
--- 3. Reflections preserve the actual nearest-neighbour graph.
-------------------------------------------------------------------------
+originFixedByFlipX : flipX Geometry.origin ≡ Geometry.origin
+originFixedByFlipX = refl
+originFixedByFlipY : flipY Geometry.origin ≡ Geometry.origin
+originFixedByFlipY = refl
+originFixedByFlipZ : flipZ Geometry.origin ≡ Geometry.origin
+originFixedByFlipZ = refl
 
 flipXPreservesAdjacency :
   ∀ {p q} → Geometry.HypervoxelAdjacent p q →
   Geometry.HypervoxelAdjacent (flipX p) (flipX q)
-flipXPreservesAdjacency (Geometry.adjacentX step) =
-  Geometry.adjacentX (negateGridStep step)
+flipXPreservesAdjacency (Geometry.adjacentX step) = Geometry.adjacentX (negateGridStep step)
 flipXPreservesAdjacency (Geometry.adjacentY step) = Geometry.adjacentY step
 flipXPreservesAdjacency (Geometry.adjacentZ step) = Geometry.adjacentZ step
 
@@ -96,8 +86,7 @@ flipYPreservesAdjacency :
   ∀ {p q} → Geometry.HypervoxelAdjacent p q →
   Geometry.HypervoxelAdjacent (flipY p) (flipY q)
 flipYPreservesAdjacency (Geometry.adjacentX step) = Geometry.adjacentX step
-flipYPreservesAdjacency (Geometry.adjacentY step) =
-  Geometry.adjacentY (negateGridStep step)
+flipYPreservesAdjacency (Geometry.adjacentY step) = Geometry.adjacentY (negateGridStep step)
 flipYPreservesAdjacency (Geometry.adjacentZ step) = Geometry.adjacentZ step
 
 flipZPreservesAdjacency :
@@ -105,12 +94,7 @@ flipZPreservesAdjacency :
   Geometry.HypervoxelAdjacent (flipZ p) (flipZ q)
 flipZPreservesAdjacency (Geometry.adjacentX step) = Geometry.adjacentX step
 flipZPreservesAdjacency (Geometry.adjacentY step) = Geometry.adjacentY step
-flipZPreservesAdjacency (Geometry.adjacentZ step) =
-  Geometry.adjacentZ (negateGridStep step)
-
-------------------------------------------------------------------------
--- 4. Reflections commute and are conjugated by coordinate permutations.
-------------------------------------------------------------------------
+flipZPreservesAdjacency (Geometry.adjacentZ step) = Geometry.adjacentZ (negateGridStep step)
 
 flipXFlipYCommute :
   (p : Geometry.Ternary27Point) → flipX (flipY p) ≡ flipY (flipX p)
@@ -129,14 +113,10 @@ swapConjugatesXFlipToYFlip :
   Bridge.swapXY (flipX (Bridge.swapXY p)) ≡ flipY p
 swapConjugatesXFlipToYFlip (Geometry.ternary27Point x y z) = refl
 
-rotationConjugatesXFlipToZFlip :
+rotationConjugatesXFlipToYFlip :
   (p : Geometry.Ternary27Point) →
-  Bridge.rotateXYZ (Bridge.rotateXYZ (flipX (Bridge.rotateXYZ p))) ≡ flipZ p
-rotationConjugatesXFlipToZFlip (Geometry.ternary27Point x y z) = refl
-
-------------------------------------------------------------------------
--- 5. Frequency reflection k -> -k.
-------------------------------------------------------------------------
+  Bridge.rotateXYZ (Bridge.rotateXYZ (flipX (Bridge.rotateXYZ p))) ≡ flipY p
+rotationConjugatesXFlipToYFlip (Geometry.ternary27Point x y z) = refl
 
 reflectFrequencyX : Bridge.CubeFrequencySector → Bridge.CubeFrequencySector
 reflectFrequencyX (Bridge.cubeFrequencySector fx fy fz) =
@@ -165,10 +145,6 @@ axisFlipCharacterCovariance Bridge.frequencyNegative SSP.sspNegOne = refl
 axisFlipCharacterCovariance Bridge.frequencyNegative SSP.sspZero = refl
 axisFlipCharacterCovariance Bridge.frequencyNegative SSP.sspPosOne = refl
 
-------------------------------------------------------------------------
--- 6. Monster seam: spatial reflection -> spectral conjugation -> 3B inversion.
-------------------------------------------------------------------------
-
 monsterAxisReflectionIntertwines :
   (f : Bridge.AxisFrequency) →
   (t : SSP.SSPTrit) →
@@ -177,10 +153,6 @@ monsterAxisReflectionIntertwines :
   ≡ Monster.transportPhase Monster.invertsGenerator
       (Fourier.phaseToMonster (Character.axisCharacterValue f t))
 monsterAxisReflectionIntertwines = Character.monsterAxisConjugationIntertwines
-
-------------------------------------------------------------------------
--- 7. Boundary: exact symmetry versus unsupported representation promotion.
-------------------------------------------------------------------------
 
 record SignedTernaryVoxelSymmetryBoundary : Set where
   constructor signedTernaryVoxelSymmetryBoundary
@@ -197,5 +169,4 @@ record SignedTernaryVoxelSymmetryBoundary : Set where
 
 canonicalSignedTernaryVoxelSymmetryBoundary : SignedTernaryVoxelSymmetryBoundary
 canonicalSignedTernaryVoxelSymmetryBoundary =
-  signedTernaryVoxelSymmetryBoundary
-    true true true true true true false false false
+  signedTernaryVoxelSymmetryBoundary true true true true true true false false false
