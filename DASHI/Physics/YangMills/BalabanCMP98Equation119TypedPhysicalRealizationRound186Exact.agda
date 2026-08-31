@@ -20,10 +20,12 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119TypedPhysicalRealizationRo
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Rational.Base using (1ℚ)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
+  (PositiveBond; pair)
 import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as Unit
 import DASHI.Physics.YangMills.BalabanClayGate4RationalSU2ExactGroupLaws as Group
@@ -37,7 +39,7 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact
 
 rawUnitQuaternion :
   (value : Raw.RationalQuaternion) →
-  Physical.quaternionNormSq value ≡ 1 →
+  Physical.quaternionNormSq value ≡ 1ℚ →
   Unit.RationalUnitQuaternion
 rawUnitQuaternion value norm =
   Unit.rationalUnitQuaternion
@@ -57,13 +59,13 @@ forgetUnitQuaternion value =
 
 forgetRawUnitQuaternion :
   (value : Raw.RationalQuaternion) →
-  (norm : Physical.quaternionNormSq value ≡ 1) →
+  (norm : Physical.quaternionNormSq value ≡ 1ℚ) →
   forgetUnitQuaternion (rawUnitQuaternion value norm) ≡ value
 forgetRawUnitQuaternion (Raw.quat a b c d) norm = refl
 
 physicalUnitLink :
   Physical.RationalSU2Background4 →
-  Path4.PhysicalBond4 → Unit.RationalUnitQuaternion
+  PositiveBond Path4.side4 → Unit.RationalUnitQuaternion
 physicalUnitLink background bond =
   rawUnitQuaternion
     (Physical.link background bond)
