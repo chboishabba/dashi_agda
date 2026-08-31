@@ -1,0 +1,19 @@
+module DASHI.JohnAnthonyBrownReceptionAdaptiveEverything where
+
+-- Merged John Anthony Brown paper/hypothesis substrate.
+import DASHI.Culture.JohnAnthonyBrownPaperSectionHypothesisManifestExact
+import DASHI.Culture.JohnAnthonyBrownHypothesisEvidenceAtlasExact
+import DASHI.Culture.JohnAnthonyBrownPrimarySourceVerificationExact
+
+-- Reception-history graph and selective reopening.
+import DASHI.Governance.CollectiveMemoryReceptionHistoryExact
+import DASHI.Governance.ReceptionRelationEvidenceTemporalGraphExact
+import DASHI.Governance.ReceptionPathPromotionExact
+import DASHI.Governance.ReceptionEvidenceSelectiveReopeningExact
+
+-- Base369 path-indexed admissibility cross-pollination.
+import DASHI.Foundations.Base369Ternary27AdmissibilityPathDynamicsExact
+
+-- Paper-specific BIDI bridge.
+import DASHI.Culture.JohnAnthonyBrownReceptionEvidenceReopeningBridgeExact
+import DASHI.JohnAnthonyBrownReceptionAdaptiveReopeningValidation
