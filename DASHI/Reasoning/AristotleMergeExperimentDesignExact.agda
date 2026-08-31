@@ -7,6 +7,7 @@ import DASHI.Core.ConsumerIndexedResidualRefinementExact as Consumer
 import DASHI.Core.DiscriminatorSynthesisExact as Synthesis
 import DASHI.Core.SequentialConsumerExperimentPlannerExact as Planner
 import DASHI.Core.ResidualObserverDependencyExact as Residual
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Reasoning.AristotleBranchMergeExact as Merge
 
 ------------------------------------------------------------------------
@@ -17,26 +18,36 @@ import DASHI.Reasoning.AristotleBranchMergeExact as Merge
 -- relevant experiment is whatever typed discriminator resolves the collision
 -- needed by the downstream consumer (here: whether branch merge is admissible).
 --
--- This consumes the repository's existing experiment-design calculus.  It
--- does not claim that theorem proving is literally a laboratory experiment.
+-- The proof-bearing `BranchSnapshot` lives in Set1 because its knowledge field
+-- is proposition-valued.  The generic experiment planner intentionally takes a
+-- first-order `World : Set`.  We therefore use a finite branch-world specimen
+-- and an explicit `snapshotOf` map into the merge layer, rather than silently
+-- identifying those carriers.
 ------------------------------------------------------------------------
 
-BranchWorld : Set
-BranchWorld =
+data BranchWorld : Set where
+  leftWorld compatibleWorld hiddenDependencyWorld reintroducedWorld : BranchWorld
+
+snapshotOf :
+  BranchWorld →
   Merge.BranchSnapshot
     Merge.Surface
     Merge.DependencyCode
     Merge.ProvenanceCode
     Merge.Lemma
+snapshotOf leftWorld = Merge.leftBranch
+snapshotOf compatibleWorld = Merge.compatibleRightBranch
+snapshotOf hiddenDependencyWorld = Merge.hiddenDependencyBranch
+snapshotOf reintroducedWorld = Merge.reintroducedProvenanceBranch
 
 coarseProofObserver : BranchWorld → Merge.Surface
-coarseProofObserver = Merge.visible
+coarseProofObserver world = Merge.visible (snapshotOf world)
 
 dependencyObserver : BranchWorld → Merge.DependencyCode
-dependencyObserver = Merge.dependency
+dependencyObserver world = Merge.dependency (snapshotOf world)
 
 provenanceObserver : BranchWorld → Merge.ProvenanceCode
-provenanceObserver = Merge.provenance
+provenanceObserver world = Merge.provenance (snapshotOf world)
 
 ------------------------------------------------------------------------
 -- Merge decision as the declared consumer.
@@ -52,10 +63,10 @@ mergeDecisionCode
 mergeDecisionCode _ = refineBeforeMerge
 
 guardObserver : BranchWorld → Merge.DependencyCode × Merge.ProvenanceCode
-guardObserver branch = dependencyObserver branch , provenanceObserver branch
+guardObserver world = dependencyObserver world , provenanceObserver world
 
 mergeDecision : BranchWorld → MergeDecision
-mergeDecision branch = mergeDecisionCode (guardObserver branch)
+mergeDecision world = mergeDecisionCode (guardObserver world)
 
 mergeDecisionCongruent :
   ∀ left right →
@@ -84,8 +95,8 @@ dependencyMergeCollision :
   Consumer.ConsumerRelevantCollision coarseProofObserver mergeDecision
 dependencyMergeCollision =
   Consumer.consumer-relevant-collision
-    Merge.leftBranch
-    Merge.hiddenDependencyBranch
+    leftWorld
+    hiddenDependencyWorld
     refl
     (λ ())
 
@@ -93,8 +104,8 @@ provenanceMergeCollision :
   Consumer.ConsumerRelevantCollision coarseProofObserver mergeDecision
 provenanceMergeCollision =
   Consumer.consumer-relevant-collision
-    Merge.leftBranch
-    Merge.reintroducedProvenanceBranch
+    leftWorld
+    reintroducedWorld
     refl
     (λ ())
 
@@ -137,16 +148,16 @@ guardProbe =
 dependencyProbeSeparatesHiddenDependencyCollision :
   Synthesis.BundleSeparates
     dependencyProbe
-    Merge.leftBranch
-    Merge.hiddenDependencyBranch
+    leftWorld
+    hiddenDependencyWorld
 dependencyProbeSeparatesHiddenDependencyCollision =
   Synthesis.bundleSeparates Merge.localIsNotGlobalSensitive
 
 provenanceProbeSeparatesLineageCollision :
   Synthesis.BundleSeparates
     provenanceProbe
-    Merge.leftBranch
-    Merge.reintroducedProvenanceBranch
+    leftWorld
+    reintroducedWorld
 provenanceProbeSeparatesLineageCollision =
   Synthesis.bundleSeparates Merge.inheritedIsNotIntroduced
 
@@ -155,8 +166,8 @@ dependencyLanguageExtension :
 dependencyLanguageExtension =
   Synthesis.discriminatingLanguageExtension
     (Synthesis.currentObserverCollision
-      Merge.leftBranch
-      Merge.hiddenDependencyBranch
+      leftWorld
+      hiddenDependencyWorld
       refl)
     dependencyProbe
     dependencyProbeSeparatesHiddenDependencyCollision
@@ -166,8 +177,8 @@ provenanceLanguageExtension :
 provenanceLanguageExtension =
   Synthesis.discriminatingLanguageExtension
     (Synthesis.currentObserverCollision
-      Merge.leftBranch
-      Merge.reintroducedProvenanceBranch
+      leftWorld
+      reintroducedWorld
       refl)
     provenanceProbe
     provenanceProbeSeparatesLineageCollision
@@ -185,42 +196,16 @@ provenanceLanguageExtension =
 ------------------------------------------------------------------------
 
 allBranchesLive : BranchWorld → Set
-allBranchesLive branch = ⊤
+allBranchesLive world = ⊤
 
 globalDependencyForcesRefinement :
-  ∀ branch →
-  dependencyObserver branch ≡ Merge.globalSensitiveDependency →
-  mergeDecision branch ≡ refineBeforeMerge
-globalDependencyForcesRefinement branch same with dependencyObserver branch
-... | Merge.localDependency with same
-...   | ()
-... | Merge.globalSensitiveDependency = refl
-
-localInheritedAllowsMerge :
-  ∀ branch →
-  dependencyObserver branch ≡ Merge.localDependency →
-  provenanceObserver branch ≡ Merge.inheritedHistory →
-  mergeDecision branch ≡ mergeAdmissible
-localInheritedAllowsMerge branch sameDependency sameProvenance
-  with dependencyObserver branch | provenanceObserver branch
-... | Merge.localDependency | Merge.inheritedHistory = refl
-... | Merge.localDependency | Merge.introducedHistory with sameProvenance
-...   | ()
-... | Merge.globalSensitiveDependency | provenance with sameDependency
-...   | ()
-
-localIntroducedForcesRefinement :
-  ∀ branch →
-  dependencyObserver branch ≡ Merge.localDependency →
-  provenanceObserver branch ≡ Merge.introducedHistory →
-  mergeDecision branch ≡ refineBeforeMerge
-localIntroducedForcesRefinement branch sameDependency sameProvenance
-  with dependencyObserver branch | provenanceObserver branch
-... | Merge.localDependency | Merge.inheritedHistory with sameProvenance
-...   | ()
-... | Merge.localDependency | Merge.introducedHistory = refl
-... | Merge.globalSensitiveDependency | provenance with sameDependency
-...   | ()
+  ∀ world →
+  dependencyObserver world ≡ Merge.globalSensitiveDependency →
+  mergeDecision world ≡ refineBeforeMerge
+globalDependencyForcesRefinement leftWorld ()
+globalDependencyForcesRefinement compatibleWorld ()
+globalDependencyForcesRefinement hiddenDependencyWorld refl = refl
+globalDependencyForcesRefinement reintroducedWorld ()
 
 provenanceContinuation :
   (outcome : Merge.ProvenanceCode) →
@@ -282,10 +267,10 @@ guardProbePlan =
 hiddenResidualDependencyDemandsRefinement :
   ∀ {State Action Index Code Coarse : Set}
     {dependency : Residual.ResidualDependencyObserver State Action Index Code}
-    {coarse : State → Coarse}
+    {coarse : Observer.Observer State Coarse}
     {action : Action} →
   Residual.HiddenResidualDependency dependency coarse action →
-  DASHI.Core.ObserverRefinementLatticeExact.StrictRefinement
+  Observer.StrictRefinement
     coarse
     (Residual.refinedObservationAt dependency coarse action)
 hiddenResidualDependencyDemandsRefinement =
