@@ -5,7 +5,9 @@ module DASHI.IndustrialChemistryLogisticsEverything where
 -- transformation / downstream manufacture / inventory / logistics / planning.
 -- CorkySoft contributes bounded operational workflow calibration for custody,
 -- handoff, shortage/readiness, substitution and reconciliation patterns; DASHI
--- planning/chemistry owners remain theorem authority.
+-- planning/chemistry owners remain theorem authority. Stateful/agentic material
+-- behaviour is included as a planning-relevant material-history dimension, not
+-- as a consciousness or permission label.
 ------------------------------------------------------------------------
 
 import DASHI.Geology.SaltGeochemistryExact
@@ -22,6 +24,7 @@ import DASHI.Planning.PlanningAdmissibleTransitionBridgeExact
 import DASHI.Planning.PlanningBIDICapstoneExact
 import DASHI.Planning.EnergyRefineryNetworkConstraintCrossPollinationExact
 import DASHI.Planning.ChemicalManufacturingInventoryLogisticsCrossPollinationExact
+import DASHI.Planning.AgenticMaterialProcessPlanningCrossPollinationExact
 import DASHI.Planning.CorkySoftOperationalPatternAtlasExact
 
 import DASHI.Governance.TrumpEnergySaltPlanningCrossPollinationExact
