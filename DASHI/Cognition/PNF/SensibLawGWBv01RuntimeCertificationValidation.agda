@@ -14,6 +14,13 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 
 ------------------------------------------------------------------------
 -- Focused validation root for the current SensibLaw runtime state.
+--
+-- Current sequence is intentionally proof/receipt stratified:
+--   60777f6... certified baseline
+--   49c09df... semantic-expansion software validation
+--   0833fb4... expanded parity/performance observations with a failed raw-stream
+--              hash gate caused by inclusion of runtime timing telemetry
+--   corrected canonical observation digest rerun still required.
 ------------------------------------------------------------------------
 
 parityFailureCountIsZero :
