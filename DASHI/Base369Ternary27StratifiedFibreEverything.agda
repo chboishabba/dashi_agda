@@ -91,6 +91,12 @@ import DASHI.Moonshine.Monster3BActualMultiplicityEvaluationFromRecognitionExact
 -- surface without introducing any new numerical recognition principle.
 import DASHI.Moonshine.Base369Monster3BActualSectorRecognitionBidiExact
 import DASHI.Moonshine.Base369Monster3BActualActionRecognitionBidiExact
+
+-- Same-action continuation: the literal Fin 90 coordinate is already owned by
+-- the actual evaluation isomorphism.  The next representation-theoretic leaf
+-- is therefore the actual inertia action on that exact coordinate, followed by
+-- the existing 12 + 78 block-recognition interface using the same action.
+import DASHI.Moonshine.Base369Monster3BMultiplicityInertiaTwelveSeventyEightBidiExact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound2Exact
 
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact
