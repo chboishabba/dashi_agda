@@ -10,6 +10,7 @@ files=(
   DASHI/Physics/YangMills/BalabanFrontierExperimentDesignRound148Exact.agda
   DASHI/Physics/YangMills/BalabanFrontierFeedbackSearchRound149Exact.agda
   DASHI/Physics/YangMills/BalabanConsumerWeightedFrontierPriorityRound150Exact.agda
+  DASHI/Physics/YangMills/BalabanRound108DirectUnifiedActionRound151Exact.agda
   DASHI/Physics/YangMills/BalabanProofExperimentFrontierRound150Validation.agda
 )
 
@@ -21,15 +22,21 @@ if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERM
 fi
 
 grep -q '^data BalabanFrontierLeaf' "${files[0]}"
+grep -q '^densityActionHasDirectRound108Route :' "${files[0]}"
+grep -q '^densityActionHasCombinedRGRoute :' "${files[0]}"
 grep -q '^unifiedSectorRouteTargets :' "${files[0]}"
 grep -q '^numericalExperimentCannotDirectlyCloseLeaf :' "${files[1]}"
 grep -q '^data BalabanFrontierCoordinate' "${files[2]}"
 grep -q '^record FrontierCoordinateDiscrimination' "${files[2]}"
 grep -q '^unifiedSectorClosureMonotone :' "${files[3]}"
 grep -q '^record CostedBalabanFrontierResolution' "${files[3]}"
-grep -q '^densityStateAlphaIsFour :' "${files[4]}"
-grep -q '^statePotentialAlphaIsFour :' "${files[4]}"
+grep -q '^directRound108MatchAlphaIsFour :' "${files[4]}"
+grep -q '^combinedRGDensityStateAlphaIsOne :' "${files[4]}"
+grep -q '^combinedRGStatePotentialAlphaIsOne :' "${files[4]}"
 grep -q '^componentD1AlphaIsThree :' "${files[4]}"
+grep -q '^record Round108DirectPresentCutActionRealization' "${files[5]}"
+grep -q '^round108DirectSelectedDensityRepresentsBC1Potential :' "${files[5]}"
+grep -q 'round151DirectRound108ActionCompiler' "${files[6]}"
 
 cache_root="${DASHI_AGDA29_CACHE_ROOT:-${RUNNER_TEMP:-$root/.cache}/dashi-agda29-ym-proof-experiment}"
 export DASHI_AGDA29_CACHE_ROOT="$cache_root"
