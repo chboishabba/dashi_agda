@@ -7,12 +7,6 @@ module DASHI.Governance.SexedHistoricalBraidedStratifiedConsumerKernelExact wher
 -- a local strand swap is kernel-safe for consumer C when C cannot distinguish
 -- the before/after ordered braid histories.  No group representation, normal
 -- subgroup, Yang-Baxter relation, or algebraic kernel theorem is claimed.
---
--- This owner cross-pollinates:
---   * ordered fibre-braid transport;
---   * Base369 centre/face/edge/corner consumer stratification;
---   * consumer-indexed horizon divergence;
---   * revolutionary-practice distinct-strand / unity-not-uniformity boundary.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -22,10 +16,6 @@ import DASHI.Foundations.Base369Ternary27HypervoxelStratificationExact as Strata
 import DASHI.Governance.RevolutionaryPracticeBraid as PracticeBraid
 import DASHI.Governance.SexedHistoricalConsumerIndexedBraidCryptoDivergenceExact as Consumer
 import DASHI.Governance.SexedHistoricalStratifiedMultiConsumerClosureExact as Multi
-
-------------------------------------------------------------------------
--- 1. Historical strands and finite ordered braid words.
-------------------------------------------------------------------------
 
 data HistoricalStrand : Set where
   evidenceStrand
@@ -42,12 +32,7 @@ data BraidWord2 : Set where
 swap2 : BraidWord2 → BraidWord2
 swap2 (braidWord left right) = braidWord right left
 
-------------------------------------------------------------------------
--- 2. Consumer observations of two-strand order.
-------------------------------------------------------------------------
-
-data ImmediateOrderCode : Set where
-  sameImmediateActionCode : ImmediateOrderCode
+data ImmediateOrderCode : Set where sameImmediateActionCode : ImmediateOrderCode
 
 data ProvenanceOrderCode : Set where
   evidenceBeforeFidelity
@@ -78,24 +63,17 @@ futureOrder (braidWord supportStrand institutionalStrand) = supportFirstLongFutu
 futureOrder (braidWord institutionalStrand supportStrand) = institutionFirstLongFuture
 futureOrder _ = sameNearFutureCode
 
-------------------------------------------------------------------------
--- 3. Consumer-relative swap safety.
-------------------------------------------------------------------------
-
 record SwapSafeImmediate (word : BraidWord2) : Set where
   constructor swap-safe-immediate
-  field
-    invisibleToImmediate : immediateOrder word ≡ immediateOrder (swap2 word)
+  field invisibleToImmediate : immediateOrder word ≡ immediateOrder (swap2 word)
 
 record SwapSafeProvenance (word : BraidWord2) : Set where
   constructor swap-safe-provenance
-  field
-    invisibleToProvenance : provenanceOrder word ≡ provenanceOrder (swap2 word)
+  field invisibleToProvenance : provenanceOrder word ≡ provenanceOrder (swap2 word)
 
 record SwapSafeFuture (word : BraidWord2) : Set where
   constructor swap-safe-future
-  field
-    invisibleToFuture : futureOrder word ≡ futureOrder (swap2 word)
+  field invisibleToFuture : futureOrder word ≡ futureOrder (swap2 word)
 
 evidenceFidelityWord : BraidWord2
 evidenceFidelityWord = braidWord evidenceStrand fidelityStrand
@@ -106,25 +84,17 @@ supportInstitutionWord = braidWord supportStrand institutionalStrand
 evidenceFidelitySwapImmediateSafe : SwapSafeImmediate evidenceFidelityWord
 evidenceFidelitySwapImmediateSafe = swap-safe-immediate refl
 
-evidenceFidelitySwapNotProvenanceSafe :
-  SwapSafeProvenance evidenceFidelityWord → ⊥
+evidenceFidelitySwapNotProvenanceSafe : SwapSafeProvenance evidenceFidelityWord → ⊥
 evidenceFidelitySwapNotProvenanceSafe (swap-safe-provenance ())
 
 supportInstitutionSwapImmediateSafe : SwapSafeImmediate supportInstitutionWord
 supportInstitutionSwapImmediateSafe = swap-safe-immediate refl
 
-supportInstitutionSwapNotFutureSafe :
-  SwapSafeFuture supportInstitutionWord → ⊥
+supportInstitutionSwapNotFutureSafe : SwapSafeFuture supportInstitutionWord → ⊥
 supportInstitutionSwapNotFutureSafe (swap-safe-future ())
 
-supportInstitutionSwapNotProvenanceSafe :
-  SwapSafeProvenance supportInstitutionWord → ⊥
+supportInstitutionSwapNotProvenanceSafe : SwapSafeProvenance supportInstitutionWord → ⊥
 supportInstitutionSwapNotProvenanceSafe (swap-safe-provenance ())
-
-------------------------------------------------------------------------
--- 4. Stratum-index the consumer question without identifying strata with
--- meanings.  These are declared finite placements only.
-------------------------------------------------------------------------
 
 consumerKernelStratum : Consumer.HistoricalConsumer → Strata.VoxelStratum
 consumerKernelStratum Consumer.immediateActionConsumer = Strata.centreStratum
@@ -142,10 +112,6 @@ longKernelLivesAtCorner :
   consumerKernelStratum Consumer.longForecastConsumer ≡ Strata.cornerStratum
 longKernelLivesAtCorner = refl
 
-------------------------------------------------------------------------
--- 5. Continuity with existing braid semantics.
-------------------------------------------------------------------------
-
 practiceBraidKeepsStrandsDistinct :
   PracticeBraid.braidRetainsDistinctStrands
     PracticeBraid.canonicalRevolutionaryPracticeBraidSurface
@@ -158,23 +124,13 @@ practiceBraidUnityDoesNotRequireUniformity :
   ≡ false
 practiceBraidUnityDoesNotRequireUniformity = refl
 
--- The cognition braid precedent explicitly gives ordered sequential transport;
--- associativity of the underlying triXor parenthesisation does not create a
--- theorem that arbitrary strand order is observationally irrelevant.
-fibreBraidSingleTransportPrecedent = FibreBraid.singleAuxiliaryTransport
-
-------------------------------------------------------------------------
--- 6. Relationship to existing stratified consumer placement.
-------------------------------------------------------------------------
+fibreBraidTransportLowersDefectPrecedent :
+  FibreBraid.globalReasoningDefect FibreBraid.resolvedByHighAuxiliary ≡ 1
+fibreBraidTransportLowersDefectPrecedent = FibreBraid.auxiliaryTransportLowersDefect
 
 existingGlobalCompatibilityConsumerIsEdge :
-  Multi.consumerStratum Multi.globalCompatibilityConsumer
-  ≡ Strata.edgeCentreStratum
+  Multi.consumerStratum Multi.globalCompatibilityConsumer ≡ Strata.edgeCentreStratum
 existingGlobalCompatibilityConsumerIsEdge = refl
-
-------------------------------------------------------------------------
--- 7. No-promotion boundaries.
-------------------------------------------------------------------------
 
 data ConsumerKernelIsAlgebraicKernel : Set where
 
@@ -195,12 +151,10 @@ data KernelSafetyCreatesNormativePermission : Set where
 consumerKernelIsNotAlgebraicKernel : ConsumerKernelIsAlgebraicKernel → ⊥
 consumerKernelIsNotAlgebraicKernel ()
 
-swapSafetyIsNotUniversalAcrossConsumers :
-  SwapSafeForOneConsumerMeansSwapSafeForAll → ⊥
+swapSafetyIsNotUniversalAcrossConsumers : SwapSafeForOneConsumerMeansSwapSafeForAll → ⊥
 swapSafetyIsNotUniversalAcrossConsumers ()
 
-immediateSwapSafetyDoesNotEraseProvenance :
-  ImmediateSwapSafetyErasesProvenance → ⊥
+immediateSwapSafetyDoesNotEraseProvenance : ImmediateSwapSafetyErasesProvenance → ⊥
 immediateSwapSafetyDoesNotEraseProvenance ()
 
 braidWordsAreNotPromotedToBraidGroup : BraidWordsFormBraidGroupHere → ⊥
@@ -215,8 +169,7 @@ stratumDoesNotDetermineSwapSafety ()
 distinctStrandsCanStillCoordinate : DistinctStrandsCannotCoordinate → ⊥
 distinctStrandsCanStillCoordinate ()
 
-kernelSafetyDoesNotCreateNormativePermission :
-  KernelSafetyCreatesNormativePermission → ⊥
+kernelSafetyDoesNotCreateNormativePermission : KernelSafetyCreatesNormativePermission → ⊥
 kernelSafetyDoesNotCreateNormativePermission ()
 
 record BraidedStratifiedConsumerKernelBoundary : Set where
@@ -233,8 +186,7 @@ record BraidedStratifiedConsumerKernelBoundary : Set where
     yangBaxterConstructed : Bool
     kernelSafetyCreatesPermission : Bool
 
-canonicalBraidedStratifiedConsumerKernelBoundary :
-  BraidedStratifiedConsumerKernelBoundary
+canonicalBraidedStratifiedConsumerKernelBoundary : BraidedStratifiedConsumerKernelBoundary
 canonicalBraidedStratifiedConsumerKernelBoundary =
   braided-stratified-consumer-kernel-boundary
     true true true true true true false false false false
