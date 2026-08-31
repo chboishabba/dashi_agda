@@ -7,7 +7,9 @@ module DASHI.IndustrialChemistryLogisticsEverything where
 -- handoff, shortage/readiness, substitution and reconciliation patterns; DASHI
 -- planning/chemistry owners remain theorem authority. Stateful/agentic material
 -- behaviour is included as a planning-relevant material-history dimension, not
--- as a consciousness or permission label.
+-- as a consciousness or permission label. Active BIDI refinement allows new
+-- material/process observations to reopen only dependency-affected planning and
+-- production certificates.
 ------------------------------------------------------------------------
 
 import DASHI.Geology.SaltGeochemistryExact
@@ -19,6 +21,9 @@ import DASHI.Chemistry.ChlorAlkaliCanonicalHalfReactionsExact
 import DASHI.Chemistry.RefineryFeedstockSaltConstraintBidiExact
 import DASHI.Chemistry.SaltPetroleumIndustrialChemistryNetworkExact
 
+import DASHI.Core.ActiveBidiDiscriminatorLoopExact
+import DASHI.Core.AdaptiveConsumerModelLoopExact
+
 import DASHI.Planning.NetworkFlowCapacityCongestionExact
 import DASHI.Planning.PlanningAdmissibleTransitionBridgeExact
 import DASHI.Planning.PlanningBIDICapstoneExact
@@ -27,4 +32,5 @@ import DASHI.Planning.ChemicalManufacturingInventoryLogisticsCrossPollinationExa
 import DASHI.Planning.AgenticMaterialProcessPlanningCrossPollinationExact
 import DASHI.Planning.CorkySoftOperationalPatternAtlasExact
 
+import DASHI.Governance.ConsciousnessAgenticMaterialActiveBidiExact
 import DASHI.Governance.TrumpEnergySaltPlanningCrossPollinationExact
