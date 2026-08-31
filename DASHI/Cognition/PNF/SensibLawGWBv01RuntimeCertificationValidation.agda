@@ -9,6 +9,7 @@ import DASHI.Cognition.PNF.SensibLawGWBv01RuntimeCertificationExact as Receipt
 import DASHI.Cognition.PNF.SensibLawGWBv01PostCertificationRoadmapExact as Roadmap
 import DASHI.Cognition.PNF.SensibLawRuntimeNumericProjectionBoundaryExact as Numeric
 import DASHI.Cognition.PNF.SensibLawSemanticExpansionSoftwareValidationExact as Expansion
+import DASHI.Cognition.PNF.SensibLawExpandedCertificationTelemetryBoundaryExact as ExpandedRun
 import DASHI.Core.IntersectionalNonFactorability as INF
 
 ------------------------------------------------------------------------
@@ -72,7 +73,37 @@ semanticExpansionNoPublicationApiContractPassed :
   Expansion.noPublicationApiChecked Expansion.semanticExpansionSoftwareValidation ≡ true
 semanticExpansionNoPublicationApiContractPassed = refl
 
-semanticExpansionFrontierStillAwaitsRuntimeCertification :
+semanticExpansionSoftwareFrontierWasAwaitingRuntimeCertification :
   Expansion.currentSemanticExpansionFrontier
   ≡ Expansion.softwareValidatedAwaitingExpandedParityPerformance
-semanticExpansionFrontierStillAwaitsRuntimeCertification = refl
+semanticExpansionSoftwareFrontierWasAwaitingRuntimeCertification = refl
+
+------------------------------------------------------------------------
+-- Expanded runtime attempt at 0833fb4...
+------------------------------------------------------------------------
+
+expandedParityRunCoversAllSentences :
+  ExpandedRun.parityChecked ExpandedRun.expandedRun0833
+  ≡ ExpandedRun.sentences ExpandedRun.expandedRun0833
+expandedParityRunCoversAllSentences = refl
+
+expandedParityRunHasZeroFailures :
+  ExpandedRun.parityFailed ExpandedRun.expandedRun0833 ≡ zero
+expandedParityRunHasZeroFailures = refl
+
+expandedRunHasZeroProjectionFailures :
+  ExpandedRun.projectionFailures ExpandedRun.expandedRun0833 ≡ zero
+expandedRunHasZeroProjectionFailures = refl
+
+expandedRunHasZeroPublicationEffects :
+  ExpandedRun.publicationEffects ExpandedRun.expandedRun0833 ≡ zero
+expandedRunHasZeroPublicationEffects = refl
+
+runtimeTelemetryIsExcludedFromSemanticObservation :
+  ExpandedRun.semanticObservationFrame ExpandedRun.runtimeTimingTelemetryFrame ≡ false
+runtimeTelemetryIsExcludedFromSemanticObservation = refl
+
+expandedCurrentFrontierAwaitsCanonicalDigestRerun :
+  ExpandedRun.currentExpandedCertificationFrontier
+  ≡ ExpandedRun.semanticParityAndPerformanceObservedAwaitingCanonicalDigestRerun
+expandedCurrentFrontierAwaitsCanonicalDigestRerun = refl
