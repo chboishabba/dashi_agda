@@ -8,6 +8,7 @@ import DASHI.Foundations.Base369Ternary27HypervoxelStratificationExact as Strata
 import DASHI.Governance.SexedHistoricalConsumerIndexedBraidCryptoDivergenceExact as Consumer
 import DASHI.Governance.SexedHistoricalBraidedStratifiedConsumerKernelExact as Kernel
 import DASHI.Governance.SexedHistoricalBraidRiskAbstentionControlExact as Control
+import DASHI.Governance.SexedHistoricalBraidQuotientResidualExact as Residual
 import DASHI.Governance.SexedHistoricalStratifiedFutureConeQuotientExact as Future
 
 immediateConsumerNoDivergenceRegression :
@@ -82,6 +83,26 @@ marketExplicitRiskCloseRegression :
   ≡ Market.flatten
 marketExplicitRiskCloseRegression = Control.marketExplicitRiskCloseFlattens
 
+braidImmediateQuotientCollapsesOrderRegression :
+  Residual.immediateClass Residual.evidenceThenFidelity
+  ≡ Residual.immediateClass Residual.fidelityThenEvidence
+braidImmediateQuotientCollapsesOrderRegression =
+  Residual.sameImmediateClassProof
+
+braidResidualReopensEvidenceFirstRegression :
+  Residual.reopenExact
+    (Residual.immediateClass Residual.evidenceThenFidelity)
+    (Residual.orderResidual Residual.evidenceThenFidelity)
+  ≡ Residual.evidenceThenFidelity
+braidResidualReopensEvidenceFirstRegression =
+  Residual.reopenEvidenceFirstExact
+
+braidProvenanceRejectsImmediateCollapseRegression :
+  Residual.provenanceReading Residual.evidenceThenFidelity
+  ≡ Residual.provenanceReading Residual.fidelityThenEvidence → ⊥
+braidProvenanceRejectsImmediateCollapseRegression =
+  Residual.provenanceConsumerRejectsCollapse
+
 consumerBraidCryptoBoundaryRegression :
   Consumer.ConsumerIndexedBraidCryptoDivergenceBoundary
 consumerBraidCryptoBoundaryRegression =
@@ -96,3 +117,7 @@ braidRiskControlBoundaryRegression :
   Control.BraidRiskAbstentionControlBoundary
 braidRiskControlBoundaryRegression =
   Control.canonicalBraidRiskAbstentionControlBoundary
+
+braidQuotientResidualBoundaryRegression : Residual.BraidQuotientResidualBoundary
+braidQuotientResidualBoundaryRegression =
+  Residual.canonicalBraidQuotientResidualBoundary
