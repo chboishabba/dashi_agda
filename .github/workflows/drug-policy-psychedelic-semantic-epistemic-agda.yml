@@ -22,6 +22,7 @@ on:
       - 'DASHI/Governance/DrugCategoryTranslationEdgeIndexedReopeningExact.agda'
       - 'DASHI/Governance/DrugCategoryPartialTranslationPathCategoryExact.agda'
       - 'DASHI/Governance/DrugCategoryComposedPathEdgeReopeningExact.agda'
+      - 'DASHI/Governance/DrugCategoryConsumerIndexedTranslationAdmissionExact.agda'
       - 'DASHI/Governance/TrumpDrugPolicyPsychedelicClassificationBidiExact.agda'
       - 'DASHI/Governance/DrugWarReflectingPoolFailureBoundaryExact.agda'
       - 'DASHI/Governance/DrugGovernanceIntersectionalAuthorityExact.agda'
