@@ -121,3 +121,8 @@ import DASHI.Core.RelationalHistoryFabricExact
 import DASHI.Core.ContextualConversionNonfactorabilityExact
 import DASHI.Core.ThresholdResidualTrajectoryGeometryExact
 import DASHI.Core.HistoryQualifiedSelectionTopologyExact
+
+-- Physical-agent safety architecture / proof-search least privilege.
+import DASHI.Core.ProofCarryingPhysicalExecutionBoundaryExact
+import DASHI.Core.SharedStateCoalitionReachableEffectExact
+import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact
