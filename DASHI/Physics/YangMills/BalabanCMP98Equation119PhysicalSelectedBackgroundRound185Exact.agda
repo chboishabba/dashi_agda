@@ -2,8 +2,8 @@
 module DASHI.Physics.YangMills.BalabanCMP98Equation119PhysicalSelectedBackgroundRound185Exact where
 
 ------------------------------------------------------------------------
--- ROUND185 A1 BIDI: THE SELECTED-BACKGROUND WELD TARGET IS THE ALREADY-OWNED
--- PHYSICAL LINK, NOT A SECOND ABSTRACT GROUP FIELD
+-- ROUND185 A1 BIDI: EQ. (119) REALIZATION TARGETS THE ALREADY-OWNED PHYSICAL
+-- SELECTED BACKGROUND, NOT A SECOND ABSTRACT `selectedBondGroup` FIELD
 --
 -- Primary sources:
 -- Tadeusz Bałaban, "Averaging Operations for Lattice Gauge Theories",
@@ -12,27 +12,28 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119PhysicalSelectedBackground
 -- Renormalization Group Method for Lattice Gauge Theories",
 -- Commun. Math. Phys. 102 (1985), 605--636. DOI: 10.1007/BF01229381.
 --
--- R170 still asks for
+-- The older physical-radius instantiation already proves
 --
---   realization bond = Selected.selectedBondGroup ...
+--   Selected.selectedBondGroup ...
+--     = Physical.link (Selected.selectedBackground ...).
 --
--- while the older physical-radius instantiation already proves
+-- Hence R170's equality
 --
---   Selected.selectedBondGroup ... = Physical.link(selectedBackground ...) .
+--   source.realization.bondField = Selected.selectedBondGroup ...
 --
--- BIDI therefore moves the same-object seam one layer upstream: on the
--- rational side-four physical carrier the only realization equality we retain
--- is the meaningful one
+-- is not the strongest physical boundary.  On the literal side-four rational
+-- carrier it is derived from the one meaningful same-object equality
 --
---   realization bond = Physical.link(selectedBackground ...).
+--   source.realization.bondField
+--     = Physical.link (Selected.selectedBackground ...).
 --
--- The R170 equality is derived by transitivity.  Callers can no longer choose
--- an independent `selectedBondGroup` interpretation for Eq. (119).
+-- This removes the independently selectable interpretation of
+-- `selectedBondGroup` from the Eq. (119) producer path.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _≤_)
+open import Data.Rational.Base using (_≤_)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -42,24 +43,20 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationalChartBridgeExact as Selected
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundPhysicalRadiusInstantiationExact as PhysicalSelected
 import DASHI.Physics.YangMills.BalabanClayGate4BackgroundFieldVariationalTheoremExact as Variational
-import DASHI.Physics.YangMills.BalabanClayGate4PrimaryQkFiniteKernelBudgetExact as Scale
 import DASHI.Physics.YangMills.BalabanClayGate4SU2PrincipalLogPathBoundExact as Path
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.BalabanCMP98UnitaryOperatorDefectTelescopeExact as Telescope
 import DASHI.Physics.YangMills.BalabanCMP98MinimalContourSourceChartBudgetExact as Budget
+import DASHI.Physics.YangMills.BalabanCMP98Equation119CanonicalCoarseSegmentRound158Exact as R158
 import DASHI.Physics.YangMills.BalabanCMP98Equation119SelectedBackgroundBondWeldRound170Exact as R170
-import DASHI.Physics.YangMills.BalabanCMP98Equation119SelectedExistingCutRound175Exact as R175
-import DASHI.Physics.YangMills.BalabanCMP98Equation119FederbushCalculusReuseRound177Exact as R177
 import DASHI.Physics.YangMills.BalabanCMP98Equation119FederbushSelectedCutProducerRound178Exact as R178
 import DASHI.Physics.YangMills.BalabanCMP98Equation119PositiveCoarseBondSourceRound182Exact as R182
-import DASHI.Physics.YangMills.BalabanCMP98Equation119PositiveBondSelectedCutFederbushRound184Exact as R184
 
 record PhysicalSelectedBackgroundEq119Inputs
     {CoarseField : Set}
+    {group : Bond.ExactLinkGroup Q.RationalQuaternion}
     (source : R182.PositiveCoarseBondEquation119Source
-      R178.su2SignedCarrier 3 4 Q.RationalQuaternion
-      (R182.R158.CanonicalL13Equation119Source.group
-        (R182.asCanonicalL13Equation119Source source))) : Set₁ where
+      R178.su2SignedCarrier 3 4 Q.RationalQuaternion group) : Set₁ where
   field
     physical :
       PhysicalSelected.SelectedPhysicalBackgroundInstantiation
@@ -72,8 +69,7 @@ record PhysicalSelectedBackgroundEq119Inputs
         (coarseAt step)
 
     realizationBondIsPhysicalLink : ∀ step bond →
-      Bond.bondField
-        (R182.realization source step) bond
+      Bond.bondField (R182.realization source step) bond
       ≡ Physical.link
           (Selected.selectedBackground
             (PhysicalSelected.bridge physical)
@@ -83,23 +79,14 @@ record PhysicalSelectedBackgroundEq119Inputs
     kernel : Telescope.UnitaryOperatorDefectKernel Q.RationalQuaternion
 
     kernelIdentityIsGroupIdentity :
-      Telescope.identity kernel
-      ≡ Bond.identity
-          (R182.R158.CanonicalL13Equation119Source.group
-            (R182.asCanonicalL13Equation119Source source))
+      Telescope.identity kernel ≡ Bond.identity group
 
     kernelMultiplyIsGroupMultiply : ∀ left right →
       Telescope.multiply kernel left right
-      ≡ Bond.multiply
-          (R182.R158.CanonicalL13Equation119Source.group
-            (R182.asCanonicalL13Equation119Source source))
-          left right
+      ≡ Bond.multiply group left right
 
     defectInverseInvariant : ∀ value →
-      Telescope.defect kernel
-        (Bond.inverse
-          (R182.R158.CanonicalL13Equation119Source.group
-            (R182.asCanonicalL13Equation119Source source)) value)
+      Telescope.defect kernel (Bond.inverse group value)
       ≡ Telescope.defect kernel value
 
     kernelDefectIsSelectedDefect : ∀ value →
@@ -116,10 +103,9 @@ open PhysicalSelectedBackgroundEq119Inputs public
 
 realizationBondIsSelectedGroup :
   ∀ {CoarseField}
+    {group : Bond.ExactLinkGroup Q.RationalQuaternion}
     {source : R182.PositiveCoarseBondEquation119Source
-      R178.su2SignedCarrier 3 4 Q.RationalQuaternion
-      (R182.R158.CanonicalL13Equation119Source.group
-        (R182.asCanonicalL13Equation119Source source))}
+      R178.su2SignedCarrier 3 4 Q.RationalQuaternion group}
     (inputs : PhysicalSelectedBackgroundEq119Inputs
       {CoarseField = CoarseField} source)
     step bond →
@@ -137,10 +123,9 @@ realizationBondIsSelectedGroup inputs step bond =
 
 asRound170SelectedBackgroundWeld :
   ∀ {CoarseField}
+    {group : Bond.ExactLinkGroup Q.RationalQuaternion}
     (source : R182.PositiveCoarseBondEquation119Source
-      R178.su2SignedCarrier 3 4 Q.RationalQuaternion
-      (R182.R158.CanonicalL13Equation119Source.group
-        (R182.asCanonicalL13Equation119Source source))) →
+      R178.su2SignedCarrier 3 4 Q.RationalQuaternion group) →
   PhysicalSelectedBackgroundEq119Inputs
     {CoarseField = CoarseField} source →
   R170.SelectedBackgroundBondWeld
@@ -173,13 +158,13 @@ asRound170SelectedBackgroundWeld source inputs = record
 cmp98Equation119PhysicalSelectedBackgroundRound185Level : ProofLevel
 cmp98Equation119PhysicalSelectedBackgroundRound185Level = machineChecked
 
--- The abstract selectedBondGroup equality is gone on this route.  The remaining
--- physical realization seam is now exactly the intended one:
+-- The abstract selectedBondGroup same-object seam is gone on this route.
+-- Remaining high-alpha realization statement:
 --
---   source.realization.bondField = Physical.link(selectedBackground).
+--   source.realization.bondField
+--     = Physical.link (selectedBackground ...).
 --
--- Next BIDI target: construct `source.realization` directly from that physical
--- background (and the repository exact SU(2) group/gauge realization), making
--- even this equality definitional.
+-- Constructing the periodic realization directly from that physical background
+-- would make this equality definitional and delete the final background weld.
 literalCMP98PhysicalBackgroundRealizationRound185Level : ProofLevel
 literalCMP98PhysicalBackgroundRealizationRound185Level = conditional
