@@ -31,6 +31,7 @@ FILES=(
   DASHI/Analysis/RiemannG2QuarterPeriodScalingPropagationExact.agda
   DASHI/Analysis/RiemannG2CutoffComplementCoordinateSeparationExact.agda
   DASHI/Analysis/RiemannG2QuarterPeriodPoleQuotientFinalCompilerExact.agda
+  DASHI/Analysis/RiemannG2PoleQuotientProducerReconciliation8889Exact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda
   DASHI/Mathematics/NumberTheory/DiophantineTupleDPrimeSquare2026ClaimAuditExact.agda
