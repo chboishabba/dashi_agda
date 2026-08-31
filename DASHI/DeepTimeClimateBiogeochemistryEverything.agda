@@ -23,6 +23,19 @@ import DASHI.Chemistry.DeepTimeCarbonReservoirFluxBalanceExact
 import DASHI.Chemistry.DeepTimeCarbonPathResidualBidiExact
 import DASHI.Chemistry.CarbonForcingRateBidiExact
 
+-- LES whole-system environmental planning and soil/salt physiology.
+import DASHI.Environment.RootSoilSaltLineageBidiExact
+import DASHI.Environment.SpatialTransport
+import DASHI.Environment.QuantitiesConservation
+import DASHI.Environment.SurrogateCalibration
+import DASHI.Environment.LESResearchCrossPollinationExact
+import DASHI.Environment.LESClimateHysteresisRecoveryCrossPollinationExact
+
+-- Large-eddy / latent world transport contributes representation and closure
+-- discipline without becoming ecological or planning authority.
+import DASHI.Physics.CFD.SparseTwistLESBridge
+import DASHI.Computation.LESGLESWorldTransportBridge
+
 import DASHI.Analysis.StoichiometricConservation
 import DASHI.Analysis.OpenSystemBalance
 
