@@ -6,6 +6,7 @@ FILES=(
   DASHI/Analysis/DeBruijnNewman2026ClaimAuditExact.agda
   DASHI/Analysis/DeBruijnNewman2026SourceWeldExact.agda
   DASHI/Analysis/DeBruijnNewmanRiemannG2BridgeAuditExact.agda
+  DASHI/Analysis/DeBruijnNewmanRiemannG2RiemannSiegelBridgeExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda
   DASHI/Mathematics/NumberTheory/DiophantineTupleDPrimeSquare2026ClaimAuditExact.agda
