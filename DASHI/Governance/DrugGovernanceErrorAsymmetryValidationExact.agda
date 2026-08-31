@@ -1,0 +1,61 @@
+module DASHI.Governance.DrugGovernanceErrorAsymmetryValidationExact where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.OptionConeCoercionExact as ConeCore
+import DASHI.Governance.DrugGovernanceErrorAsymmetryBurdenAllocationExact as Burden
+import DASHI.Governance.DrugGovernanceErrorAsymmetryOptionConeExact as ErrorCone
+import DASHI.Governance.DrugGovernanceUncertaintyBurdenMandateBidiExact as Uncertainty
+import DASHI.Governance.DrugGovernanceRepairMandateGateExact as MandateGate
+
+burdenBoundary : Burden.ErrorAsymmetryBurdenBoundary
+burdenBoundary = Burden.canonicalErrorAsymmetryBurdenBoundary
+
+optionConeBoundary : ErrorCone.ErrorAsymmetryOptionConeBoundary
+optionConeBoundary = ErrorCone.canonicalErrorAsymmetryOptionConeBoundary
+
+uncertaintyBoundary : Uncertainty.UncertaintyBurdenMandateBoundary
+uncertaintyBoundary = Uncertainty.canonicalUncertaintyBurdenMandateBoundary
+
+wrongfulPunishmentHasDistinctBearer :
+  Burden.primaryBearer Burden.wrongfulPunitiveClassification
+  ≡ Burden.primaryBearer Burden.wrongfulCareDenial → ⊥
+wrongfulPunishmentHasDistinctBearer = Burden.punitiveVsCareBurdenDiffers
+
+wrongfulPunishmentCanContractHelpSeeking :
+  ConeCore.StrictSafeReachabilityContraction
+    ErrorCone.reachability ErrorCone.baselineWorld ErrorCone.punitiveErrorWorld
+wrongfulPunishmentCanContractHelpSeeking =
+  ErrorCone.punitiveErrorContractsHelpSeeking
+
+wrongfulCareDenialCanContractCare :
+  ConeCore.StrictSafeReachabilityContraction
+    ErrorCone.reachability ErrorCone.baselineWorld ErrorCone.careDenialWorld
+wrongfulCareDenialCanContractCare = ErrorCone.careDenialContractsCare
+
+wrongfulAuthorityCanContractContest :
+  ConeCore.StrictSafeReachabilityContraction
+    ErrorCone.reachability ErrorCone.baselineWorld ErrorCone.authorityCaptureWorld
+wrongfulAuthorityCanContractContest = ErrorCone.authorityCaptureContractsContest
+
+wrongfulCommercialLegitimacyCanContractBenefitClaim :
+  ConeCore.StrictSafeReachabilityContraction
+    ErrorCone.reachability ErrorCone.baselineWorld ErrorCone.commercialCaptureWorld
+wrongfulCommercialLegitimacyCanContractBenefitClaim =
+  ErrorCone.commercialCaptureContractsBenefitClaim
+
+wrongfulSovereigntyOverrideCanContractGovernance :
+  ConeCore.StrictSafeReachabilityContraction
+    ErrorCone.reachability ErrorCone.baselineWorld ErrorCone.sovereigntyOverrideWorld
+wrongfulSovereigntyOverrideCanContractGovernance =
+  ErrorCone.sovereigntyOverrideContractsGovernance
+
+sovereigntyErrorBackpropagatesToOriginatingAuthority :
+  MandateGate.RepairAdmissionDemand MandateGate.restoreSovereignAuthorityGate
+sovereigntyErrorBackpropagatesToOriginatingAuthority =
+  Burden.repairAdmissionDemand Burden.wrongfulSovereigntyOverride
+
+punitivePreActuationBurden :
+  Uncertainty.PreActuationBurden Burden.wrongfulPunitiveClassification
+punitivePreActuationBurden =
+  Uncertainty.canonicalPreActuationBurden Burden.wrongfulPunitiveClassification
