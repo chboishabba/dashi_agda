@@ -18,8 +18,9 @@ module DASHI.Physics.YangMills.BalabanCMP98CanonicalContourLength24Round172Exact
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (suc)
 open import Data.Nat.Base using (_≤_)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Carrier
@@ -35,7 +36,7 @@ r164ListLengthIsPeriodicLength : ∀ {A : Set} (values : List A) →
   R164.listLength values ≡ Periodic.listLength values
 r164ListLengthIsPeriodicLength [] = refl
 r164ListLengthIsPeriodicLength (_ ∷ values) =
-  cong Agda.Builtin.Nat.suc (r164ListLengthIsPeriodicLength values)
+  cong suc (r164ListLengthIsPeriodicLength values)
 
 centeredDisplacementNamesAgree :
   ∀ {radius} (point : Centered.CenteredBlockPoint4 radius) →
