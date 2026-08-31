@@ -28,7 +28,6 @@ record CanonicalCharacterAttachment
   private
     AC = Analytic.AnalyticSubstrate.carrier analytic
     R = real (realPackage C)
-    K = Core.ConstructedComplexCharacterCore C
 
   field
     -- Typed same-object witnesses.  The attachment is not name/provenance only.
@@ -98,10 +97,11 @@ record CanonicalCharacterAttachment
         (expC (plusIProduct delta u))
       ≡ cosR (mulR delta u)
 
-    -- Proof-relevant receipt that the canonical laws above are the transported
-    -- realization of the single assembled constructed donor K.
-    transportedFromConstructedCore :
-      Existing.assembledConstructedComplexCharacterCore C M ≡ K
+    -- Proof-relevant receipt that this attachment cites the one assembled
+    -- constructed character donor rather than a name-only parallel core.
+    constructedCore : Core.ConstructedComplexCharacterCore C
+    constructedCoreIsAssembled :
+      constructedCore ≡ Existing.assembledConstructedComplexCharacterCore C M
 
     attachmentReference : String
 
