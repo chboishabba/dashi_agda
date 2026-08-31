@@ -5,8 +5,12 @@ open import Data.Fin using (Fin)
 import Data.Fin as Fin
 open import Data.List using (_++_)
 
+import DASHI.Algebra.Trit as Trit
 import DASHI.Computation.JacquardOperationalSemanticsExact as Jacquard
 import DASHI.Combinatorics.ProofFabricCompilerExact as ProofFabric
+import DASHI.Combinatorics.TextileFibreHyperfabricExact as TextileHyper
+import DASHI.Reasoning.TypedHyperfabricCore as Hyper
+import DASHI.Core.FibreRestrictionCore as Fibre
 import DASHI.Core.LoomEncoding as Loom
 import DASHI.Core.ProjectionCategory as PC
 import DASHI.Core.ProjectionFibre as PF
@@ -16,7 +20,8 @@ import DASHI.Core.ProjectionFibre as PF
 --
 -- The existing Jacquard owner stops at executed crossing rows.  This owner
 -- adds the physically visible face projection and welds the proof-fabric codec
--- to the repo's actual Jacquard operational semantics and LoomEncoding.
+-- to the repo's actual Jacquard operational semantics, FibreRestrictionCore,
+-- TypedHyperfabric trace and legacy LoomEncoding vocabulary.
 --
 -- For the first exact backend we use two warp ends per proof symbol because
 -- VerifiedFiniteTritCoder already uses two bits per trit.  A visible Bool says
@@ -136,58 +141,57 @@ visibleTileRoundtrip ProofFabric.tile01 = refl
 visibleTileRoundtrip ProofFabric.tile10 = refl
 visibleTileRoundtrip ProofFabric.tile11 = refl
 
-readVisiblePattern : VisiblePattern2 → List (Maybe DASHI.Algebra.Trit.Trit)
+readVisiblePattern : VisiblePattern2 → List (Maybe Trit.Trit)
 readVisiblePattern [] = []
 readVisiblePattern (row ∷ rows) =
   ProofFabric.tileToTrit (visibleRowToTile row) ∷ readVisiblePattern rows
 
 readVisibleCompiledTritStream :
-  (stream : List DASHI.Algebra.Trit.Trit) →
+  (stream : List Trit.Trit) →
   readVisiblePattern
     (visiblePatternOfTiles (ProofFabric.compileTritStream stream))
   ≡ ProofFabric.justTritStream stream
 readVisibleCompiledTritStream [] = refl
-readVisibleCompiledTritStream (DASHI.Algebra.Trit.neg ∷ stream)
+readVisibleCompiledTritStream (Trit.neg ∷ stream)
   rewrite readVisibleCompiledTritStream stream = refl
-readVisibleCompiledTritStream (DASHI.Algebra.Trit.zer ∷ stream)
+readVisibleCompiledTritStream (Trit.zer ∷ stream)
   rewrite readVisibleCompiledTritStream stream = refl
-readVisibleCompiledTritStream (DASHI.Algebra.Trit.pos ∷ stream)
+readVisibleCompiledTritStream (Trit.pos ∷ stream)
   rewrite readVisibleCompiledTritStream stream = refl
 
 ------------------------------------------------------------------------
 -- Proof -> actual Jacquard program -> executed cloth -> visible face.
 ------------------------------------------------------------------------
 
+proofTiles :
+  {Proof : Set} →
+  ProofFabric.ProofTritCodec Proof →
+  Proof →
+  List ProofFabric.ProofWeaveTile
+proofTiles codec proof =
+  ProofFabric.compileTritStream (ProofFabric.serializeProof codec proof)
+
 proofToJacquard :
   {Proof : Set} →
   ProofFabric.ProofTritCodec Proof →
   Proof →
   Jacquard.JacquardProgram 2
-proofToJacquard codec proof =
-  compileTilesToJacquard
-    (ProofFabric.compileTritStream
-      (ProofFabric.serializeProof codec proof))
+proofToJacquard codec proof = compileTilesToJacquard (proofTiles codec proof)
 
 proofVisiblePattern :
   {Proof : Set} →
   ProofFabric.ProofTritCodec Proof →
   Proof →
   VisiblePattern2
-proofVisiblePattern codec proof =
-  visibleProgram2 (proofToJacquard codec proof)
+proofVisiblePattern codec proof = visibleProgram2 (proofToJacquard codec proof)
 
 proofVisiblePatternExact :
   {Proof : Set} →
   (codec : ProofFabric.ProofTritCodec Proof) →
   (proof : Proof) →
-  proofVisiblePattern codec proof
-  ≡ visiblePatternOfTiles
-      (ProofFabric.compileTritStream
-        (ProofFabric.serializeProof codec proof))
+  proofVisiblePattern codec proof ≡ visiblePatternOfTiles (proofTiles codec proof)
 proofVisiblePatternExact codec proof =
-  jacquardTilesProduceVisiblePattern
-    (ProofFabric.compileTritStream
-      (ProofFabric.serializeProof codec proof))
+  jacquardTilesProduceVisiblePattern (proofTiles codec proof)
 
 proofVisibleCodeReadable :
   {Proof : Set} →
@@ -198,6 +202,72 @@ proofVisibleCodeReadable :
 proofVisibleCodeReadable codec proof
   rewrite proofVisiblePatternExact codec proof =
   readVisibleCompiledTritStream (ProofFabric.serializeProof codec proof)
+
+------------------------------------------------------------------------
+-- Canonical FibreRestrictionCore over the same physical-program carrier.
+--
+-- The carrier is the hidden Jacquard control program; the surface is the
+-- visible cloth face.  The fibre intentionally retains possible hidden program
+-- histories instead of asserting that visible appearance uniquely determines
+-- loom construction.
+------------------------------------------------------------------------
+
+data JacquardVisibleEvidence : Set where
+  inspectedVisibleFace : JacquardVisibleEvidence
+
+jacquardVisibleFibreCore : Fibre.FibreRestrictionCore
+jacquardVisibleFibreCore =
+  Fibre.fibreRestrictionCore
+    (Jacquard.JacquardProgram 2)
+    VisiblePattern2
+    JacquardVisibleEvidence
+    visibleProgram2
+    (λ surface → Jacquard.JacquardProgram 2)
+    (λ evidence surface → Jacquard.JacquardProgram 2)
+    true
+    false
+
+------------------------------------------------------------------------
+-- Same proof tiles -> same actual TypedHyperfabric edge trace.
+------------------------------------------------------------------------
+
+proofJacquardHyperfabricTrace :
+  {Proof : Set} →
+  ProofFabric.ProofTritCodec Proof →
+  Proof →
+  Hyper.HyperfabricTrace (TextileHyper.TextileEdge 2)
+proofJacquardHyperfabricTrace codec proof =
+  ProofFabric.proofFabricHyperfabricTrace (proofTiles codec proof)
+
+record JacquardProofFabricWitness (Proof : Set) : Set where
+  constructor jacquard-proof-fabric-witness
+  field
+    sourceProof : Proof
+    tiles : List ProofFabric.ProofWeaveTile
+    program : Jacquard.JacquardProgram 2
+    visiblePattern : VisiblePattern2
+    hyperfabricTrace : Hyper.HyperfabricTrace (TextileHyper.TextileEdge 2)
+    programExact : program ≡ compileTilesToJacquard tiles
+    visibleExact : visiblePattern ≡ visiblePatternOfTiles tiles
+    traceExact : hyperfabricTrace ≡ ProofFabric.proofFabricHyperfabricTrace tiles
+
+open JacquardProofFabricWitness public
+
+compileProofToJacquardWitness :
+  {Proof : Set} →
+  (codec : ProofFabric.ProofTritCodec Proof) →
+  (proof : Proof) →
+  JacquardProofFabricWitness Proof
+compileProofToJacquardWitness codec proof =
+  jacquard-proof-fabric-witness
+    proof
+    (proofTiles codec proof)
+    (proofToJacquard codec proof)
+    (visiblePatternOfTiles (proofTiles codec proof))
+    (proofJacquardHyperfabricTrace codec proof)
+    refl
+    refl
+    refl
 
 ------------------------------------------------------------------------
 -- Actual legacy LoomEncoding instance over the same Jacquard program carrier.
