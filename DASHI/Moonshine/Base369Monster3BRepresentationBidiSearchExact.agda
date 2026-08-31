@@ -3,16 +3,21 @@ module DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchExact where
 ------------------------------------------------------------------------
 -- CONSUMER-FIRST MONSTER 3B REPRESENTATION BIDI SEARCH FRONTIER
 --
--- The purpose of this owner is not to add another numerical Monster model.
--- It orders the remaining proof obligations by representation-theoretic
--- authority.  Existing exact arithmetic/model agreements are treated as
--- producers only when they feed an actual normalizer/restriction consumer.
+-- The repository now already contains a fail-closed GAP/CTblLib producer for
+-- the actual M -> MN3B restriction.  It checks the stored class fusion,
+-- decomposes the 196883 character, reconstructs all target class values,
+-- isolates the central 3B class with trace 53, and checks that the paired
+-- nontrivial central-phase constituents yield the 12 and 78 multiplicity
+-- quotients after division by 2 * 729.
 --
--- Highest-impact route:
+-- Therefore the first missing scientific receipt is no longer "write a
+-- restriction algorithm".  The live frontier is:
 --
---   checked M -> MN3B restriction certificate
+--   exact-head replay of the existing CTblLib restriction certificate
+--   -> identify the certified 729 factor with the concrete finite-Heisenberg
+--      representation (finite Stone-von Neumann / explicit action authority)
 --   -> actual 729 x 90 tensor constituent identification
---   -> Heisenberg/Base369 periodic-fibre intertwiner
+--   -> Base369 periodic-fibre intertwiner
 --   -> audit whether the +53 invariant excess is carried by the structured
 --      54 -> 53 zeta/ternary carrier
 --   -> only then consider larger Monster-level promotion.
@@ -84,13 +89,14 @@ periodicTranslationModelAvailableIsTrue : periodicTranslationModelAvailable ≡ 
 periodicTranslationModelAvailableIsTrue = refl
 
 ------------------------------------------------------------------------
--- 3. Live proof/search consumers.  These are ordered by authority.
+-- 3. Proof/search consumers ordered by authority.
 ------------------------------------------------------------------------
 
 data Monster3BProofLeaf : Set where
-  checkedNormalizerRestrictionCertificate : Monster3BProofLeaf
+  restrictionAlgorithmImplemented : Monster3BProofLeaf
+  exactHeadRestrictionReplay : Monster3BProofLeaf
+  heisenbergUniquenessOrActionIdentification : Monster3BProofLeaf
   actualTensorConstituentIdentification : Monster3BProofLeaf
-  explicitNormalizerActionOnHeisenbergFactor : Monster3BProofLeaf
   base369PeriodicIntertwiner : Monster3BProofLeaf
   structuredFiftyThreeExcessIdentification : Monster3BProofLeaf
   largerMonsterRepresentationPromotion : Monster3BProofLeaf
@@ -101,26 +107,33 @@ data LeafState : Set where
   blocked : LeafState
 
 leafState : Monster3BProofLeaf → LeafState
-leafState checkedNormalizerRestrictionCertificate = open
+leafState restrictionAlgorithmImplemented = closed
+leafState exactHeadRestrictionReplay = open
+leafState heisenbergUniquenessOrActionIdentification = blocked
 leafState actualTensorConstituentIdentification = blocked
-leafState explicitNormalizerActionOnHeisenbergFactor = blocked
 leafState base369PeriodicIntertwiner = blocked
 leafState structuredFiftyThreeExcessIdentification = blocked
 leafState largerMonsterRepresentationPromotion = blocked
 
+restrictionAlgorithmIsClosed : leafState restrictionAlgorithmImplemented ≡ closed
+restrictionAlgorithmIsClosed = refl
+
 ------------------------------------------------------------------------
--- 4. Dependency relation.  Later geometry cannot bypass earlier authority.
+-- 4. Dependency relation.  Geometry/counts cannot bypass representation
+--    authority.  In particular, 729 = 729 is not the Stone-von Neumann step.
 ------------------------------------------------------------------------
 
 data Requires : Monster3BProofLeaf → Monster3BProofLeaf → Set where
-  tensorNeedsRestriction :
-    Requires actualTensorConstituentIdentification checkedNormalizerRestrictionCertificate
-  actionNeedsTensor :
-    Requires explicitNormalizerActionOnHeisenbergFactor actualTensorConstituentIdentification
-  base369NeedsAction :
-    Requires base369PeriodicIntertwiner explicitNormalizerActionOnHeisenbergFactor
-  fiftyThreeNeedsRestriction :
-    Requires structuredFiftyThreeExcessIdentification checkedNormalizerRestrictionCertificate
+  replayNeedsAlgorithm :
+    Requires exactHeadRestrictionReplay restrictionAlgorithmImplemented
+  uniquenessNeedsReplay :
+    Requires heisenbergUniquenessOrActionIdentification exactHeadRestrictionReplay
+  tensorNeedsHeisenbergAuthority :
+    Requires actualTensorConstituentIdentification heisenbergUniquenessOrActionIdentification
+  base369NeedsTensor :
+    Requires base369PeriodicIntertwiner actualTensorConstituentIdentification
+  fiftyThreeNeedsReplay :
+    Requires structuredFiftyThreeExcessIdentification exactHeadRestrictionReplay
   fiftyThreeNeedsIntertwiner :
     Requires structuredFiftyThreeExcessIdentification base369PeriodicIntertwiner
   monsterNeedsTensor :
@@ -133,29 +146,46 @@ data Requires : Monster3BProofLeaf → Monster3BProofLeaf → Set where
 ------------------------------------------------------------------------
 
 highestImpactLiveLeaf : Monster3BProofLeaf
-highestImpactLiveLeaf = checkedNormalizerRestrictionCertificate
+highestImpactLiveLeaf = exactHeadRestrictionReplay
 
 highestImpactLeafIsOpen : leafState highestImpactLiveLeaf ≡ open
 highestImpactLeafIsOpen = refl
 
+nextMathematicalLeafAfterReplay : Monster3BProofLeaf
+nextMathematicalLeafAfterReplay = heisenbergUniquenessOrActionIdentification
+
 ------------------------------------------------------------------------
--- 6. Receipt types that would actually promote the frontier.
+-- 6. Receipts that would actually promote the frontier.
 ------------------------------------------------------------------------
 
-record NormalizerRestrictionCertificate : Set where
-  constructor normalizerRestrictionCertificate
+record RestrictionReplayReceipt : Set where
+  constructor restrictionReplayReceipt
   field
-    restrictionChecked : Bool
-    concreteConstituentsIdentified : Bool
-    sourceToTargetTableCorrespondenceChecked : Bool
-open NormalizerRestrictionCertificate public
+    ctblLibLoaded : Bool
+    storedFusionChecked : Bool
+    nonnegativeIntegralDecompositionChecked : Bool
+    classValuesReconstructed : Bool
+    central3BTrace53Checked : Bool
+    pairedPhaseTwelveAndSeventyEightChecked : Bool
+    generatedAgdaCertificateKernelChecked : Bool
+open RestrictionReplayReceipt public
+
+record HeisenbergRepresentationAuthorityReceipt : Set where
+  constructor heisenbergRepresentationAuthorityReceipt
+  field
+    replayReceipt : RestrictionReplayReceipt
+    nontrivialCentralCharacterLocated : Bool
+    extraspecialCarrierIdentified : Bool
+    finiteStoneVonNeumannUniquenessProvedOrExplicitMatricesImported : Bool
+    certified729RepresentationIdentifiedWithX6SchrodingerModel : Bool
+open HeisenbergRepresentationAuthorityReceipt public
 
 record HeisenbergTensorFactorisationReceipt : Set where
   constructor heisenbergTensorFactorisationReceipt
   field
-    restrictionReceipt : NormalizerRestrictionCertificate
-    heisenbergCarrierReallyActs : Bool
+    heisenbergAuthority : HeisenbergRepresentationAuthorityReceipt
     multiplicityCarrierReallyActs : Bool
+    twelvePlusSeventyEightConstituentsIdentified : Bool
     tensorActionIntertwinesRestriction : Bool
 open HeisenbergTensorFactorisationReceipt public
 
@@ -171,7 +201,7 @@ open Base369NormalizerIntertwinerReceipt public
 record FiftyThreeExcessReceipt : Set where
   constructor fiftyThreeExcessReceipt
   field
-    restrictionReceipt53 : NormalizerRestrictionCertificate
+    replayReceipt53 : RestrictionReplayReceipt
     base369IntertwinerReceipt : Base369NormalizerIntertwinerReceipt
     zeta54CarrierUsed : Bool
     invariantLineLocated : Bool
@@ -205,38 +235,45 @@ record Monster3BRepresentationSearchBoundary : Set where
     arithmeticAgreementAvailable : Bool
     exact729CarrierChartAvailable : Bool
     periodicHeisenbergEquivarianceAvailable : Bool
-    actualNormalizerRestrictionCertificateAvailable : Bool
+    restrictionAlgorithmImplementedHere : Bool
+    exactHeadRestrictionReplayAvailable : Bool
+    finiteStoneVonNeumannOrExplicitActionAvailable : Bool
     actualTensorConstituentIdentificationAvailable : Bool
     base369NormalizerIntertwinerAvailable : Bool
     structured53ExcessIdentificationAvailable : Bool
     fullMonsterRepresentationProvedHere : Bool
     fiftyThreeCountAloneClosesResidualLeaf : Bool
-    shared729CountAloneClosesTensorLeaf : Bool
+    shared729CountAloneClosesHeisenbergAuthorityLeaf : Bool
 open Monster3BRepresentationSearchBoundary public
 
 canonicalMonster3BRepresentationSearchBoundary : Monster3BRepresentationSearchBoundary
 canonicalMonster3BRepresentationSearchBoundary =
   monster3BRepresentationSearchBoundary
-    true true true
-    false false false false false
+    true true true true
+    false false false false false false
     false false
 
 ------------------------------------------------------------------------
--- 9. Scientific-priority statement encoded as a finite ranking.
+-- 9. Scientific-priority ranking.
 ------------------------------------------------------------------------
 
 impactRank : Monster3BProofLeaf → Nat
-impactRank checkedNormalizerRestrictionCertificate = 0
-impactRank actualTensorConstituentIdentification = 1
-impactRank explicitNormalizerActionOnHeisenbergFactor = 2
-impactRank base369PeriodicIntertwiner = 3
-impactRank structuredFiftyThreeExcessIdentification = 4
-impactRank largerMonsterRepresentationPromotion = 5
+impactRank restrictionAlgorithmImplemented = 0
+impactRank exactHeadRestrictionReplay = 1
+impactRank heisenbergUniquenessOrActionIdentification = 2
+impactRank actualTensorConstituentIdentification = 3
+impactRank base369PeriodicIntertwiner = 4
+impactRank structuredFiftyThreeExcessIdentification = 5
+impactRank largerMonsterRepresentationPromotion = 6
 
-restrictionRanksBeforeGeometryPromotion :
-  impactRank checkedNormalizerRestrictionCertificate ≡ 0
-restrictionRanksBeforeGeometryPromotion = refl
+replayRanksBeforeGeometryPromotion :
+  impactRank exactHeadRestrictionReplay ≡ 1
+replayRanksBeforeGeometryPromotion = refl
+
+heisenbergAuthorityImmediatelyFollowsReplay :
+  impactRank nextMathematicalLeafAfterReplay ≡ 2
+heisenbergAuthorityImmediatelyFollowsReplay = refl
 
 fullPromotionRanksAfterResidualAudit :
-  impactRank largerMonsterRepresentationPromotion ≡ 5
+  impactRank largerMonsterRepresentationPromotion ≡ 6
 fullPromotionRanksAfterResidualAudit = refl
