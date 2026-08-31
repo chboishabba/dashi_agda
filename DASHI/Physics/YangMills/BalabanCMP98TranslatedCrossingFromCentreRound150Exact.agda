@@ -34,6 +34,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Carrier
 import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact as Word
+import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact as Blocks
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109ShortestContourEnumerationExact as Contours
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109PeriodicContourFamilyInstantiationExact as Periodic
@@ -81,8 +82,7 @@ unitSegmentWordExact
     (Carrier.sucᵢ (Carrier.sucᵢ (Carrier.sucᵢ Carrier.zeroᵢ))) false) = refl
 
 walkUnitSegmentExact :
-  ∀ {n} (site : DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact.PeriodicBlock n)
-    direction →
+  ∀ {n} (site : Blocks.PeriodicBlock n) direction →
   Bond.walk site (Periodic.segmentWord (unitSegment direction))
   ≡ Bond.walkStep site direction
 walkUnitSegmentExact site direction
@@ -132,7 +132,7 @@ segmentCommutesAcrossContour commutation start crossing (segment ∷ segments) =
 centeredTargetCommutesWithOneStep :
   ∀ {n radius}
     (commutation : Embed.PeriodicSegmentCommutation n)
-    (start : DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact.PeriodicBlock n)
+    (start : Blocks.PeriodicBlock n)
     (point : Centered.CenteredBlockPoint4 radius)
     direction →
   Bond.walkStep (Embed.centeredTargetSite start point) direction
