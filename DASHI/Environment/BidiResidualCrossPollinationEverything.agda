@@ -5,4 +5,5 @@ module DASHI.Environment.BidiResidualCrossPollinationEverything where
 ------------------------------------------------------------------------
 
 open import DASHI.Environment.LESBidiResidualRefinementCrossPollinationExact public
+open import DASHI.Environment.LESResidualCostedExperimentChoiceExact public
 open import DASHI.Environment.GlyphosateSauerkrautGenericBidiBridgeExact public
