@@ -14,6 +14,8 @@ import DASHI.Governance.SexedHistoricalTransportedAssociatorSupportExact as Tran
 import DASHI.Governance.SexedHistoricalTransportedSupportDiscriminatorExact as SupportDiscriminator
 import DASHI.Governance.SexedHistoricalTransportedSupportConsumerClosureExact as ConsumerClosure
 import DASHI.Governance.SexedHistoricalStratifiedMultiConsumerClosureExact as Multi
+import DASHI.Governance.SexedHistoricalStratifiedFidelityEscalationExact as Fidelity
+import DASHI.Governance.SexedHistoricalStratifiedCounterfactualPathExact as Counterfactual
 
 canonicalSupportHistoryRegression :
   Transported.SupportTransportPath
@@ -130,6 +132,50 @@ coarseEvidenceLeavesFutureCorridorOpenRegression =
 sharedStratifiedClosureRegression : Multi.SharedStratifiedClosure
 sharedStratifiedClosureRegression = Multi.canonicalSharedStratifiedClosure
 
+coarseModelCoversCentreRegression :
+  Fidelity.DecisionAdequate
+    Fidelity.centreFaceFidelity
+    Multi.reopeningPriorityConsumer
+coarseModelCoversCentreRegression = Fidelity.centreAdequateAtCoarse
+
+coarseModelBlocksEdgeRegression :
+  Fidelity.DecisionAdequate
+    Fidelity.centreFaceFidelity
+    Multi.globalCompatibilityConsumer → ⊥
+coarseModelBlocksEdgeRegression = Fidelity.edgeBlockedAtCoarse
+
+edgeEscalationNeedRegression :
+  Fidelity.fidelityNeed
+    Fidelity.centreFaceFidelity
+    Multi.globalCompatibilityConsumer
+  ≡ Fidelity.escalateToEdge
+edgeEscalationNeedRegression = Fidelity.edgeConsumerRequestsEdgeOnly
+
+cornerEscalationNeedRegression :
+  Fidelity.fidelityNeed
+    Fidelity.centreFaceFidelity
+    Multi.futureCorridorConsumer
+  ≡ Fidelity.escalateToCorner
+cornerEscalationNeedRegression = Fidelity.cornerConsumerRequestsCorner
+
+counterfactualPathAppendAssociativeRegression :
+  (p q r : Counterfactual.AdmittedPath) →
+  (p Counterfactual.++p q) Counterfactual.++p r
+  ≡ p Counterfactual.++p (q Counterfactual.++p r)
+counterfactualPathAppendAssociativeRegression =
+  Counterfactual.pathAppendAssociative
+
+counterfactualPathsShareCoarseObservationRegression :
+  Counterfactual.observePath Counterfactual.repairThenCounterformation
+  ≡ Counterfactual.observePath Counterfactual.counterformationThenRepair
+counterfactualPathsShareCoarseObservationRegression =
+  Counterfactual.canonicalPathsShareCoarseObservation
+
+counterfactualCoarsePathCannotRecoverChoiceRegression :
+  INF.FactorsThrough Counterfactual.observePath Counterfactual.chooseNext → ⊥
+counterfactualCoarsePathCannotRecoverChoiceRegression =
+  Counterfactual.coarsePathCannotRecoverNextChoice
+
 transportedSupportBoundaryRegression :
   Transported.TransportedAssociatorSupportBoundary
 transportedSupportBoundaryRegression =
@@ -149,3 +195,12 @@ stratifiedMultiConsumerClosureBoundaryRegression :
   Multi.StratifiedMultiConsumerClosureBoundary
 stratifiedMultiConsumerClosureBoundaryRegression =
   Multi.canonicalStratifiedMultiConsumerClosureBoundary
+
+stratifiedFidelityBoundaryRegression : Fidelity.StratifiedFidelityEscalationBoundary
+stratifiedFidelityBoundaryRegression =
+  Fidelity.canonicalStratifiedFidelityEscalationBoundary
+
+stratifiedCounterfactualPathBoundaryRegression :
+  Counterfactual.StratifiedCounterfactualPathBoundary
+stratifiedCounterfactualPathBoundaryRegression =
+  Counterfactual.canonicalStratifiedCounterfactualPathBoundary
