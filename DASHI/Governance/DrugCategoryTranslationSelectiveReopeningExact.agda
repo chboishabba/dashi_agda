@@ -1,6 +1,7 @@
 module DASHI.Governance.DrugCategoryTranslationSelectiveReopeningExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AffectedDependencyClosureExact as Affected
 import DASHI.Governance.DrugCategoryMultiChartTranslationGeometryExact as Translation
