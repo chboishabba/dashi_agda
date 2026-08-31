@@ -6,8 +6,8 @@ module DASHI.Physics.YangMills.BalabanBasedGaugeActionGroupoidRound200Exact wher
 -- GROUPOID.
 --
 -- R196/R199 use actual gauge-action arrows rather than an opaque quotient
--- relation.  The older action owner proves based freeness but does not expose
--- composition/inversion of arrows.  Prove those laws once from the literal
+-- relation. The older action owner proves based freeness but does not expose
+-- composition/inversion of arrows. Prove those laws once from the literal
 -- pointwise gauge transformation and the exact group laws.
 ------------------------------------------------------------------------
 
@@ -91,6 +91,22 @@ unitGauge :
   Covariance.GaugeFunction4 N group
 unitGauge group _ = Transport.unit group
 
+gaugeTransformRespectsFieldAtBond :
+  ∀ {N} {{nz : NonZero N}}
+    (group : Transport.GroupStructure)
+    (gauge : Covariance.GaugeFunction4 N group)
+    (left right : Covariance.DirectedGaugeField4 N group)
+    bond → left bond ≡ right bond →
+  Covariance.gaugeTransformBond group gauge left bond
+  ≡ Covariance.gaugeTransformBond group gauge right bond
+gaugeTransformRespectsFieldAtBond group gauge left right bond pointwise =
+  cong
+    (λ value →
+      Transport.multiply group (gauge (source bond))
+        (Transport.multiply group value
+          (Transport.inverse group (gauge (target bond)))))
+    pointwise
+
 gaugeTransformUnit :
   ∀ {N} {{nz : NonZero N}}
     (group : Transport.GroupStructure)
@@ -167,33 +183,27 @@ gaugeInverseCancelsAction :
 gaugeInverseCancelsAction group gauge field bond =
   trans
     (gaugeTransformCompose group (gaugeInverse group gauge) gauge field bond)
-    (trans
-      (cong
-        (λ selectedGauge →
-          Covariance.gaugeTransformBond group selectedGauge field bond)
-        -- no function extensionality: expand the action at this bond below
-        refl)
-      (let
-        s = source bond
-        t = target bond
-        u = field bond
-        in
-        trans
+    (let
+      s = source bond
+      t = target bond
+      u = field bond
+      in
+      trans
+        (cong₂ (Transport.multiply group)
+          (Transport.inverseLeft group (gauge s))
           (cong₂ (Transport.multiply group)
-            (Transport.inverseLeft group (gauge s))
-            (cong₂ (Transport.multiply group)
-              refl
-              (cong (Transport.inverse group)
-                (Transport.inverseLeft group (gauge t)))))
+            refl
+            (cong (Transport.inverse group)
+              (Transport.inverseLeft group (gauge t)))))
+        (trans
+          (cong
+            (Transport.multiply group (Transport.unit group))
+            (cong (Transport.multiply group u)
+              (Free.inverseUnitExact group)))
           (trans
-            (cong
-              (Transport.multiply group (Transport.unit group))
-              (cong (Transport.multiply group u)
-                (Free.inverseUnitExact group)))
-            (trans
-              (Transport.unitLeft group
-                (Transport.multiply group u (Transport.unit group)))
-              (Transport.unitRight group u)))))
+            (Transport.unitLeft group
+              (Transport.multiply group u (Transport.unit group)))
+            (Transport.unitRight group u))))
 
 composeGaugeActionArrows :
   ∀ {N} {{nz : NonZero N}}
@@ -202,19 +212,20 @@ composeGaugeActionArrows :
   Free.GaugeActionArrow group left middle →
   Free.GaugeActionArrow group middle right →
   Free.GaugeActionArrow group left right
-composeGaugeActionArrows {group = group} firstArrow secondArrow = record
+composeGaugeActionArrows {group = group} {left = left}
+    firstArrow secondArrow = record
   { Free.GaugeActionArrow.gauge =
       gaugeMultiply group (Free.gauge secondArrow) (Free.gauge firstArrow)
   ; Free.GaugeActionArrow.actionExact = λ bond →
       trans
         (sym
           (gaugeTransformCompose group
-            (Free.gauge secondArrow) (Free.gauge firstArrow) _ bond))
+            (Free.gauge secondArrow) (Free.gauge firstArrow) left bond))
         (trans
-          (cong
-            (λ selected →
-              Covariance.gaugeTransformBond group
-                (Free.gauge secondArrow) selected bond)
+          (gaugeTransformRespectsFieldAtBond
+            group (Free.gauge secondArrow)
+            (Covariance.gaugeTransformBond group (Free.gauge firstArrow) left)
+            _ bond
             (Free.actionExact firstArrow bond))
           (Free.actionExact secondArrow bond))
   }
@@ -225,16 +236,17 @@ inverseGaugeActionArrow :
     {left right : Covariance.DirectedGaugeField4 N group} →
   Free.GaugeActionArrow group left right →
   Free.GaugeActionArrow group right left
-inverseGaugeActionArrow {group = group} arrow = record
+inverseGaugeActionArrow {group = group} {left = left} {right = right} arrow = record
   { Free.GaugeActionArrow.gauge = gaugeInverse group (Free.gauge arrow)
   ; Free.GaugeActionArrow.actionExact = λ bond →
       trans
-        (cong
-          (λ selected →
-            Covariance.gaugeTransformBond group
-              (gaugeInverse group (Free.gauge arrow)) selected bond)
+        (gaugeTransformRespectsFieldAtBond
+          group (gaugeInverse group (Free.gauge arrow))
+          right
+          (Covariance.gaugeTransformBond group (Free.gauge arrow) left)
+          bond
           (sym (Free.actionExact arrow bond)))
-        (gaugeInverseCancelsAction group (Free.gauge arrow) _ bond)
+        (gaugeInverseCancelsAction group (Free.gauge arrow) left bond)
   }
 
 basedGaugeMultiply :
@@ -257,6 +269,35 @@ basedGaugeInverse group base gauge based =
   trans
     (cong (Transport.inverse group) based)
     (Free.inverseUnitExact group)
+
+basedCompositeArrow :
+  ∀ {N} {{nz : NonZero N}}
+    {group : Transport.GroupStructure}
+    {base : Cube4 N}
+    {left middle right : Covariance.DirectedGaugeField4 N group}
+    (firstArrow : Free.GaugeActionArrow group left middle)
+    (secondArrow : Free.GaugeActionArrow group middle right) →
+  Free.BasedGaugeFunction group base (Free.gauge firstArrow) →
+  Free.BasedGaugeFunction group base (Free.gauge secondArrow) →
+  Free.BasedGaugeFunction group base
+    (Free.gauge (composeGaugeActionArrows firstArrow secondArrow))
+basedCompositeArrow {group = group} {base = base}
+    firstArrow secondArrow firstBased secondBased =
+  basedGaugeMultiply group base
+    (Free.gauge secondArrow) (Free.gauge firstArrow)
+    secondBased firstBased
+
+basedInverseArrow :
+  ∀ {N} {{nz : NonZero N}}
+    {group : Transport.GroupStructure}
+    {base : Cube4 N}
+    {left right : Covariance.DirectedGaugeField4 N group}
+    (arrow : Free.GaugeActionArrow group left right) →
+  Free.BasedGaugeFunction group base (Free.gauge arrow) →
+  Free.BasedGaugeFunction group base
+    (Free.gauge (inverseGaugeActionArrow arrow))
+basedInverseArrow {group = group} {base = base} arrow based =
+  basedGaugeInverse group base (Free.gauge arrow) based
 
 basedGaugeActionGroupoidRound200Level : ProofLevel
 basedGaugeActionGroupoidRound200Level = machineChecked
