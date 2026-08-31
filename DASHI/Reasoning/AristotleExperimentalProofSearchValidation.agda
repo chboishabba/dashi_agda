@@ -16,3 +16,4 @@ import DASHI.Analysis.RiemannAristotlePoleNearBidiMeetingExact
 import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerExact
 import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerRegression
 import DASHI.Analysis.RiemannAristotleRHAnalyticRouteSchedulerExact
+import DASHI.Analysis.RiemannAristotleRHAnalyticLeafSchedulerExact
