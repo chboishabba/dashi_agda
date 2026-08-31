@@ -15,6 +15,7 @@ FILES=(
   DASHI/Analysis/RiemannG2PostSchurDeterminantSufficiency369Exact.agda
   DASHI/Analysis/RiemannG2DeterminantSymmetryRelevance369Exact.agda
   DASHI/Analysis/RiemannG2C3FixedNuisanceDeterminantNoGo369Exact.agda
+  DASHI/Analysis/RiemannG2C3SimultaneousDeterminantCovariance369Exact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda
   DASHI/Mathematics/NumberTheory/DiophantineTupleDPrimeSquare2026ClaimAuditExact.agda
