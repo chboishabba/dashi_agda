@@ -14,9 +14,14 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119CanonicalCoarseSegmentRoun
 -- signed segment of length 13.  BIDI therefore keeps only the source axis and
 -- orientation and CONSTRUCTS the segment count.
 --
+-- Cross-pollination update: R162 proves periodic coordinate-translation
+-- commutation directly from the repository's finite-torus successor/predecessor
+-- arithmetic.  Therefore this source record no longer contains a
+-- `translationCommutation` receipt either.
+--
 -- This does not manufacture the remaining physical statement that the selected
 -- c-/c+ centres are related by that source bond: the endpoint equality remains
--- explicit.  It removes only the replaceable segment-length/shape choice.
+-- explicit.  It removes only replaceable geometry choices.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -27,6 +32,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP98MultiscaleAveragingDerivativeRound126Exact as R126
 import DASHI.Physics.YangMills.BalabanCMP98Equation119OneStepDerivativeRound146Exact as R146
 import DASHI.Physics.YangMills.BalabanCMP98Equation119LeastPrivilegeSourceRound152Exact as R152
+import DASHI.Physics.YangMills.BalabanPeriodicSegmentCommutationRound162Exact as R162
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109ShortestContourEnumerationExact as Contours
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109PeriodicContourFamilyInstantiationExact as Periodic
@@ -80,15 +86,13 @@ record CanonicalL13Equation119Source
           (canonicalCoarseSegment (coarseAxis step) (coarseDirection step)))
       ≡ Embed.embeddingCentre (plusEmbedding step)
 
-    translationCommutation : Embed.PeriodicSegmentCommutation n
-
 open CanonicalL13Equation119Source public
 
 asRound152Source :
   ∀ {C n Value group} →
   CanonicalL13Equation119Source C n Value group →
   R152.LiteralEquation119LeastPrivilegeSource C n Value group
-asRound152Source source = record
+asRound152Source {n = n} source = record
   { R152.LiteralEquation119LeastPrivilegeSource.realization = realization source
   ; R152.LiteralEquation119LeastPrivilegeSource.bondComponent = bondComponent source
   ; R152.LiteralEquation119LeastPrivilegeSource.adjointLink = adjointLink source
@@ -102,7 +106,7 @@ asRound152Source source = record
   ; R152.LiteralEquation119LeastPrivilegeSource.coarseSegmentEndsAtPlusCentre =
       canonicalCoarseSegmentEndsAtPlusCentre source
   ; R152.LiteralEquation119LeastPrivilegeSource.translationCommutation =
-      translationCommutation source
+      R162.periodicSegmentCommutation n
   }
 
 round152CoarseSegmentIsCanonicalL13 :
@@ -122,12 +126,23 @@ round152CoarseSegmentCountIsL :
   ≡ Contours.signedCount (coarseDirection source step) sourceL
 round152CoarseSegmentCountIsL source step = refl
 
+round152TranslationCommutationIsDerived :
+  ∀ {C n Value group}
+    (source : CanonicalL13Equation119Source C n Value group) →
+  R152.translationCommutation (asRound152Source source)
+  ≡ R162.periodicSegmentCommutation n
+round152TranslationCommutationIsDerived source = refl
+
 cmp98Equation119CanonicalCoarseSegmentRound158Level : ProofLevel
 cmp98Equation119CanonicalCoarseSegmentRound158Level = machineChecked
 
--- The arbitrary segment shape/count is gone.  The surviving physical geometry
--- is now only: which source coordinate axis/orientation is c, and that its
--- canonical L=13 translate really connects the selected c- and c+ centres.
+cmp98Equation119DerivedTranslationCommutationRound158Level : ProofLevel
+cmp98Equation119DerivedTranslationCommutationRound158Level = machineChecked
+
+-- The arbitrary segment shape/count and translation-commutation receipt are gone.
+-- The surviving physical geometry is only: which source coordinate
+-- axis/orientation is c, and that its canonical L=13 translate really connects
+-- the selected c- and c+ centres.
 literalCMP98CoarseAxisOrientationRound158Level : ProofLevel
 literalCMP98CoarseAxisOrientationRound158Level = conditional
 
