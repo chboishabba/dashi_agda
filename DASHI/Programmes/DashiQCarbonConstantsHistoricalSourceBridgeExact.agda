@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Programmes.ResearchProgrammeExact as Programme
 import DASHI.Programmes.QuantumExact as Quantum
 import DASHI.Chemistry.CarbonChemicalSuitabilityLifeBoundaryExact as Carbon
 import DASHI.Physics.Foundations.FundamentalConstantViabilityFibreExact as Viability
@@ -44,7 +45,7 @@ canonicalDashiQCarbonConstantsSource =
     "Cosmology discussion explicitly explored multiverse versus attractors and MDL over universes as hypotheses/selection pictures."
     "The same historical source explicitly lists absolute numerical constants, exact masses/couplings, Planck-scale value and fine nuclear structure as open rather than proved."
 
-quantumProgramme : Quantum.ResearchProgramme
+quantumProgramme : Programme.ResearchProgramme
 quantumProgramme = Quantum.dashiQProgramme
 
 carbonBoundary : Carbon.CarbonChemicalSuitabilityBoundary
