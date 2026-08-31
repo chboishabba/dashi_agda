@@ -1,0 +1,21 @@
+name: math2026-claim-audit
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Analysis/DeBruijnNewman2026ClaimAuditExact.agda'
+      - 'DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda'
+      - 'DASHI/Mathematics/NumberTheory/DiophantineTupleDPrimeSquare2026ClaimAuditExact.agda'
+      - 'DASHI/Core/ExternalAutoformalizationProvenanceExact.agda'
+      - 'DASHI/Math2026ClaimAuditValidation.agda'
+      - 'scripts/check_math2026_claim_audit.sh'
+      - '.github/workflows/math2026-claim-audit.yml'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trust scan and Agda check when available
+        run: bash scripts/check_math2026_claim_audit.sh
