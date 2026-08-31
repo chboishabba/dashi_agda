@@ -22,6 +22,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -50,8 +51,7 @@ record SwapInvariantEnvelope
   field
     envelopeSwapInvariant :
       (tau : Physical.PhysicalTriadIncidence) →
-      envelope H (DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry.swapTriad tau)
-      ≡ envelope H tau
+      envelope H (Symmetry.swapTriad tau) ≡ envelope H tau
 
 round333ExactExponentialInsertedIntoRationalC3 : Bool
 round333ExactExponentialInsertedIntoRationalC3 = false
