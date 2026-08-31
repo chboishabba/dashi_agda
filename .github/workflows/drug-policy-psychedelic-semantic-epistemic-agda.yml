@@ -44,6 +44,8 @@ on:
       - 'DASHI/Governance/DrugGovernanceErrorAsymmetryOptionConeExact.agda'
       - 'DASHI/Governance/DrugGovernanceUncertaintyBurdenMandateBidiExact.agda'
       - 'DASHI/Governance/DrugGovernanceErrorAsymmetryValidationExact.agda'
+      - 'DASHI/Governance/DrugGovernanceHistoricalBurdenExternalisationExact.agda'
+      - 'DASHI/Governance/DrugGovernanceBenefitCaptureRepairResidueExact.agda'
       - 'DASHI/Governance/TrumpDrugPolicyPsychedelicClassificationBidiExact.agda'
       - 'DASHI/Governance/DrugWarReflectingPoolFailureBoundaryExact.agda'
       - 'DASHI/Governance/DrugGovernanceIntersectionalAuthorityExact.agda'
