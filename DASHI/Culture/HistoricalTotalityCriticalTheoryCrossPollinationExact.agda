@@ -5,8 +5,10 @@ module DASHI.Culture.HistoricalTotalityCriticalTheoryCrossPollinationExact where
 --
 -- This is an integration owner, not a claim that the imported philosophers
 -- form one doctrine.  The Core source registry remains the authority for the
--- bounded historical/theoretical source roles.  The exact finite separation
--- and non-factorability results remain DASHI constructions.
+-- bounded historical/theoretical source roles.  Wittgenstein's source bridge
+-- carries its own recovered primary-work locations until/unless it is folded
+-- into that registry.  Exact finite separation and non-factorability results
+-- remain DASHI constructions.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -18,6 +20,7 @@ import DASHI.Core.TrinhSubjectInMakingNoncollapseExact as Trinh
 import DASHI.Core.LugonesPurityCurdlingNonfactorabilityExact as Lugones
 import DASHI.Core.CriticalSocialEcologyObserverRegimeExact as Ecology
 import DASHI.Culture.HistoricalSocialTotalityBidiExact as Totality
+import DASHI.Culture.WittgensteinUsePracticeSourceBridgeExact as Wittgenstein
 
 ------------------------------------------------------------------------
 -- Integration levels must remain disjoint.
@@ -41,8 +44,8 @@ patternNotHistoricalDoctrine : reusableFormalPattern ≡ historicalSourceProposi
 patternNotHistoricalDoctrine ()
 
 ------------------------------------------------------------------------
--- Existing critical-theory theorem surfaces can constrain the totality layer
--- structurally without being re-described as historical source propositions.
+-- Existing theorem surfaces can constrain the totality layer structurally
+-- without being re-described as historical source propositions.
 ------------------------------------------------------------------------
 
 trinhPublicCategoryStillDoesNotRecoverSubjectFormation :
@@ -70,6 +73,16 @@ civilisationStillDoesNotRecoverPoliticalDestiny :
 civilisationStillDoesNotRecoverPoliticalDestiny =
   Totality.civilisationCannotRecoverPoliticalDestiny
 
+sameWordsStillDoNotRecoverPracticeUse :
+  INF.FactorsThrough Wittgenstein.utteranceSurface Wittgenstein.practiceUse → ⊥
+sameWordsStillDoNotRecoverPracticeUse =
+  Wittgenstein.sameWordsCannotRecoverPracticeUse
+
+samePracticeStillDoesNotRecoverHistoricalPosition :
+  INF.FactorsThrough Wittgenstein.sharedPractice Wittgenstein.historicalPosition → ⊥
+samePracticeStillDoesNotRecoverHistoricalPosition =
+  Wittgenstein.samePracticeCannotRecoverHistoricalPosition
+
 ------------------------------------------------------------------------
 -- Source registry is consumed as provenance, not as proof authority.
 ------------------------------------------------------------------------
@@ -86,6 +99,9 @@ record CriticalTheorySourceWeld : Set where
     totalityBoundary : Totality.HistoricalSocialTotalityBoundary
     totalityBoundaryIsCanonical :
       totalityBoundary ≡ Totality.canonicalHistoricalSocialTotalityBoundary
+    wittgensteinBoundary : Wittgenstein.WittgensteinUsePracticeBoundary
+    wittgensteinBoundaryIsCanonical :
+      wittgensteinBoundary ≡ Wittgenstein.canonicalWittgensteinUsePracticeBoundary
     sourcePropositionsRemainSourceBound : Bool
     sourcePropositionsRemainSourceBoundIsTrue :
       sourcePropositionsRemainSourceBound ≡ true
@@ -102,13 +118,15 @@ canonicalCriticalTheorySourceWeld =
     Sources.canonicalRegistryBoundary refl
     Critical.canonicalCriticalRelationalGrammarBoundary refl
     Totality.canonicalHistoricalSocialTotalityBoundary refl
+    Wittgenstein.canonicalWittgensteinUsePracticeBoundary refl
     true refl true refl true refl
 
 ------------------------------------------------------------------------
 -- Cross-philosopher non-collapse.
 --
 -- Shared words such as subject, other, third, void, hierarchy, difference,
--- contradiction or relation do not identify the authors' historical concepts.
+-- contradiction, relation, use or practice do not identify the authors'
+-- historical concepts.
 ------------------------------------------------------------------------
 
 data PhilosophicalRegister : Set where
@@ -122,6 +140,7 @@ data PhilosophicalRegister : Set where
   trinhSubjectInMaking
   badiouVoidCountAsOne
   bookchinSocialEcologyHierarchy
+  wittgensteinUseLanguageGame
   : PhilosophicalRegister
 
 beauvoirNotLacan : beauvoirSubjectOther ≡ lacanianIdentificationDiscourse → ⊥
@@ -135,6 +154,12 @@ anzalduaNotBhabha ()
 
 badiouNotBookchin : badiouVoidCountAsOne ≡ bookchinSocialEcologyHierarchy → ⊥
 badiouNotBookchin ()
+
+wittgensteinNotBadiou : wittgensteinUseLanguageGame ≡ badiouVoidCountAsOne → ⊥
+wittgensteinNotBadiou ()
+
+wittgensteinNotBookchin : wittgensteinUseLanguageGame ≡ bookchinSocialEcologyHierarchy → ⊥
+wittgensteinNotBookchin ()
 
 ------------------------------------------------------------------------
 -- Boundary: atlas != synthesis != empirical history.
@@ -151,10 +176,12 @@ record HistoricalTotalityCriticalTheoryBoundary : Set where
     subjectCategoryRecoversFormationRoute : Bool
     inclusiveRhetoricRecoversMaterialAccessibility : Bool
     civilisationalIdentityRecoversPoliticalDestiny : Bool
+    languageUseRecoversWholeHistoricalTotality : Bool
+    wittgensteinSourceProvesDASHITheorem : Bool
     sourceRegistryRetainsAuthorityForAttribution : Bool
 
 canonicalHistoricalTotalityCriticalTheoryBoundary :
   HistoricalTotalityCriticalTheoryBoundary
 canonicalHistoricalTotalityCriticalTheoryBoundary =
   historical-totality-critical-theory-boundary
-    true false false false false false false false true
+    true false false false false false false false false false true
