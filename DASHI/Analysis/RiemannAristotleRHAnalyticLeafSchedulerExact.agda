@@ -6,11 +6,13 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
--- RECURSIVE RH ANALYTIC LEAF SCHEDULER — MONSTER-XPOLLENATED BIDI CUT
+-- RECURSIVE RH ANALYTIC LEAF SCHEDULER — ACTUAL CARRIER CUT
 --
--- The direct phase-statistic and explicit-formula routes share an earlier
--- prerequisite than previously represented:
+-- Forward audit of the canonical Riemann substrate showed that it does not yet
+-- expose complex exponential / target modulation / transform-shift structure.
+-- Therefore the shared H_T leaf itself has a first unpaid producer H_M:
 --
+--   H_M       canonical analytic modulation extension on existing carriers
 --   H_T       target translation <-> dual modulation intertwiner
 --   H_W       window/restriction compatibility + cluster/near/far residual
 --   H_E       phase-sensitive finite near evaluation
@@ -18,15 +20,13 @@ open import Agda.Builtin.String using (String)
 --
 -- Dependency shape:
 --
---   H_T -> direct phase statistic -> H_E
---   H_T -> H_W -> explicit-formula target window -> H_E
---   H_Gamma ---------------------------------------> final complement consumer
---
--- H_W and H_E may be developed conditionally, but cannot be promoted as closed
--- producers before their prerequisites are inhabited.
+--   H_M -> H_T -> direct phase statistic -> H_E
+--             \-> H_W -> explicit-formula target window -> H_E
+--   H_Gamma ----------------------------------------------> final consumer
 ------------------------------------------------------------------------
 
 data RHAnalyticLeaf : Set where
+  buildCanonicalAnalyticModulationExtension
   proveTargetTranslationModulationIntertwiner
   proveWindowRestrictionResidualCompatibility
   provePhaseSensitiveFiniteNearEvaluation
@@ -41,7 +41,8 @@ data LeafState : Set where
   closed open blocked pruned : LeafState
 
 leafState : RHAnalyticLeaf → LeafState
-leafState proveTargetTranslationModulationIntertwiner = open
+leafState buildCanonicalAnalyticModulationExtension = open
+leafState proveTargetTranslationModulationIntertwiner = blocked
 leafState proveWindowRestrictionResidualCompatibility = blocked
 leafState provePhaseSensitiveFiniteNearEvaluation = blocked
 leafState repairGammaPrecision = open
@@ -55,6 +56,11 @@ leafState reuseNameOnlyHardyDonor = pruned
 ------------------------------------------------------------------------
 
 data Requires : RHAnalyticLeaf → RHAnalyticLeaf → Set where
+  translationModulationNeedsCanonicalExtension :
+    Requires
+      proveTargetTranslationModulationIntertwiner
+      buildCanonicalAnalyticModulationExtension
+
   windowNeedsTranslationModulation :
     Requires
       proveWindowRestrictionResidualCompatibility
@@ -72,16 +78,17 @@ data Requires : RHAnalyticLeaf → RHAnalyticLeaf → Set where
 
 ------------------------------------------------------------------------
 -- Current genuinely schedulable producer leaves.
---
--- A blocked leaf may have its conditional interface developed, but cannot win
--- the proof-search selector as though its prerequisites were already owned.
 ------------------------------------------------------------------------
 
 data RHAnalyticLeafSchedulable : RHAnalyticLeaf → Set where
-  targetTranslationModulationLeafLive :
-    RHAnalyticLeafSchedulable proveTargetTranslationModulationIntertwiner
+  canonicalModulationExtensionLeafLive :
+    RHAnalyticLeafSchedulable buildCanonicalAnalyticModulationExtension
   gammaPrecisionLeafLive :
     RHAnalyticLeafSchedulable repairGammaPrecision
+
+translationModulationLeafNotYetSchedulable :
+  RHAnalyticLeafSchedulable proveTargetTranslationModulationIntertwiner → ⊥
+translationModulationLeafNotYetSchedulable ()
 
 windowLeafNotYetSchedulable :
   RHAnalyticLeafSchedulable proveWindowRestrictionResidualCompatibility → ⊥
@@ -104,10 +111,6 @@ genericFormulaWithoutWindowPruned ()
 nameOnlyHardyLeafPruned :
   RHAnalyticLeafSchedulable reuseNameOnlyHardyDonor → ⊥
 nameOnlyHardyLeafPruned ()
-
-------------------------------------------------------------------------
--- Cost/order only among live leaves.
-------------------------------------------------------------------------
 
 record RHAnalyticLeafCostSurface : Set₁ where
   constructor rh-analytic-leaf-cost-surface
@@ -133,15 +136,15 @@ record SelectedRHAnalyticLeaf (surface : RHAnalyticLeafCostSurface) : Set₁ whe
 
 open SelectedRHAnalyticLeaf public
 
-------------------------------------------------------------------------
--- Regression boundary.
-------------------------------------------------------------------------
-
 record RHAnalyticLeafSchedulerBoundary : Set where
   constructor rh-analytic-leaf-scheduler-boundary
   field
-    translationModulationLeafOpen : Bool
-    translationModulationLeafOpenIsTrue : translationModulationLeafOpen ≡ true
+    canonicalModulationExtensionOpen : Bool
+    canonicalModulationExtensionOpenIsTrue : canonicalModulationExtensionOpen ≡ true
+
+    translationModulationLeafBlockedOnExtension : Bool
+    translationModulationLeafBlockedOnExtensionIsTrue :
+      translationModulationLeafBlockedOnExtension ≡ true
 
     windowRestrictionLeafBlockedOnHT : Bool
     windowRestrictionLeafBlockedOnHTIsTrue : windowRestrictionLeafBlockedOnHT ≡ true
@@ -152,10 +155,6 @@ record RHAnalyticLeafSchedulerBoundary : Set where
 
     gammaPrecisionLeafOpen : Bool
     gammaPrecisionLeafOpenIsTrue : gammaPrecisionLeafOpen ≡ true
-
-    directAndExplicitFormulaRoutesMeetBeforeEvaluation : Bool
-    directAndExplicitFormulaRoutesMeetBeforeEvaluationIsTrue :
-      directAndExplicitFormulaRoutesMeetBeforeEvaluation ≡ true
 
     countOnlyLeafActive : Bool
     countOnlyLeafActiveIsFalse : countOnlyLeafActive ≡ false
