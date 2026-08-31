@@ -7,20 +7,22 @@ module DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact wh
 --
 --   B_off^pole + B_Gamma < M_cluster^pole.
 --
--- Forward source already owned in the checked Lean cutoff return:
+-- Forward source already owned in the checked Lean cutoff return is stated
+-- generically in the taper g:
 --
---   |D_off - 1/2 nearSignedSum(t,J)|
---     <= 1/2 C farShellBound(A,|t|,J),
+--   |D_off(g,t,r) - 1/2 nearSignedSum(g,t,J)|
+--     <= 1/2 C(g,r) farShellBound(A,|t|,J),
 --
 -- with farShellBound -> 0 as J -> infinity.
 --
--- The important carrier boundary is that this older cutoff theorem may only be
--- reused for the final universal pole quotient after a literal same-taper /
--- same-response transport is supplied.  The checked rank-two determinant taper
--- q is not silently substituted here.
+-- Therefore the final universal pole-quotient taper is an instantiation of the
+-- same generic cutoff theorem; no extra analytic "same taper" theorem is made
+-- into a research socket here.  This does NOT identify the separate rank-two
+-- determinant taper q with the pole taper.
 --
--- Once the carrier transport is available, H_off^pole is reduced to a finite
--- signed near evaluation plus the already-controlled far remainder.
+-- BIDI consequence: the infinite far shell is already controlled.  The first
+-- unpaid H_off^pole theorem is the finite reflection-paired target-centred near
+-- evaluation on the final high-ordinate pole taper.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -73,27 +75,22 @@ compiledOffOrdinateUpper S d =
     (addMonotone S (nearUpper d) (farUpper d))
 
 ------------------------------------------------------------------------
--- Carrier transport gate.
---
--- This is intentionally stronger than matching names.  The application must
--- identify the taper and the response consumed by the old cutoff theorem with
--- the taper and off-ordinate response used by the final pole-quotient consumer.
+-- Generic-family instantiation is not a new transport theorem.
 ------------------------------------------------------------------------
 
-record PoleCutoffCarrierTransport : Set₁ where
-  constructor pole-cutoff-carrier-transport
+record TaperGenericBoundFamily : Set₁ where
+  constructor taper-generic-bound-family
   field
-    Taper Response : Set
-    cutoffTaper poleQuotientTaper : Taper
-    cutoffResponse poleQuotientResponse : Taper → Response
+    Taper Claim : Set
+    boundAt : Taper → Claim
 
-    sameTaper : cutoffTaper ≡ poleQuotientTaper
-    sameResponse :
-      (g : Taper) → cutoffResponse g ≡ poleQuotientResponse g
+open TaperGenericBoundFamily public
 
-    transportReference : String
-
-open PoleCutoffCarrierTransport public
+instantiateGenericBoundAt :
+  (family : TaperGenericBoundFamily) →
+  (g : Taper family) →
+  Claim family
+instantiateGenericBoundAt family g = boundAt family g
 
 ------------------------------------------------------------------------
 -- Exact source/frontier audit.
@@ -112,6 +109,14 @@ record PoleQuotientOffOrdinateNearFarBoundary : Set where
     checkedLeanFiniteNearCarrierOwned : Bool
     checkedLeanFiniteNearCarrierOwnedIsTrue : checkedLeanFiniteNearCarrierOwned ≡ true
 
+    checkedLeanCutoffTheoremGenericInTaper : Bool
+    checkedLeanCutoffTheoremGenericInTaperIsTrue :
+      checkedLeanCutoffTheoremGenericInTaper ≡ true
+
+    separatePoleTaperTransportResearchTheoremRequired : Bool
+    separatePoleTaperTransportResearchTheoremRequiredIsFalse :
+      separatePoleTaperTransportResearchTheoremRequired ≡ false
+
     reflectionPairOddChannelCancelled : Bool
     reflectionPairOddChannelCancelledIsTrue :
       reflectionPairOddChannelCancelled ≡ true
@@ -123,10 +128,6 @@ record PoleQuotientOffOrdinateNearFarBoundary : Set where
     montgomeryVaughanDirectlyClosesNearCosineEvaluation : Bool
     montgomeryVaughanDirectlyClosesNearCosineEvaluationIsFalse :
       montgomeryVaughanDirectlyClosesNearCosineEvaluation ≡ false
-
-    oldCutoffCarrierTransportedToFinalPoleQuotientCarrier : Bool
-    oldCutoffCarrierTransportedToFinalPoleQuotientCarrierIsFalse :
-      oldCutoffCarrierTransportedToFinalPoleQuotientCarrier ≡ false
 
     finitePoleQuotientNearSignedEvaluationClosed : Bool
     finitePoleQuotientNearSignedEvaluationClosedIsFalse :
@@ -140,7 +141,7 @@ record PoleQuotientOffOrdinateNearFarBoundary : Set where
     hOffPoleClosedIsFalse : hOffPoleClosed ≡ false
 
     firstForwardLeaf : String
-    secondForwardLeaf : String
+    postLeafCompiler : String
     boundedReading : String
 
 canonicalPoleQuotientOffOrdinateNearFarBoundary :
@@ -152,14 +153,15 @@ canonicalPoleQuotientOffOrdinateNearFarBoundary =
     true refl
     true refl
     false refl
+    true refl
     false refl
     false refl
     false refl
     false refl
     false refl
-    "Prove a literal same-taper/same-response transport from the checked OffOrdinateCutoffCarrier theorem to the universal pole-quotient taper used by the final RH consumer."
-    "On that transported carrier, evaluate the finite reflection-paired nearOffFinset cosine sum with target-centred phase strongly enough that nearBudget + explicitFarBudget fits the remaining RH complement window."
-    "The checked 8883 Lean return already owns arbitrary-accuracy control of the infinite far shell and the finite near carrier. Reflection pairing already removes the odd sinh*sin channel. Therefore H_off^pole should not be attacked as a fresh infinite absolute-tail problem. Its exact remaining forward work is carrier transport plus finite signed target-centred near evaluation. Existing zeta symmetries and the bundled Montgomery-Vaughan owner do not directly supply that local cosine evaluation. RH is not derived."
+    "Evaluate the finite reflection-paired nearOffFinset cosine sum on the final high-ordinate pole-quotient taper, retaining target-centred phase, strongly enough that its near budget plus the explicit far-shell budget fits the remaining RH complement window."
+    "Instantiate the already generic checked cutoff theorem at the pole taper, add the finite-near budget to the explicit far budget, then feed B_off^pole into B_off^pole + B_Gamma < M_cluster^pole."
+    "The checked cutoff theorem is generic in its taper g, so final pole-taper instantiation is not promoted into a separate analytic research theorem. The rank-two determinant taper q remains a different carrier and is still not silently substituted. The infinite far shell and finite near carrier are already owned; H_off^pole is now concentrated on one finite signed target-centred near evaluation. Existing zeta symmetries and the bundled Montgomery-Vaughan owner do not directly close that evaluation. RH is not derived."
 
 ------------------------------------------------------------------------
 -- Regression against the cited source owners.
