@@ -40,11 +40,8 @@ data PersistenceCut : Set where
   immutableInputCut recoveryArtifactCut semanticStagingCut authorityPublicationCut : PersistenceCut
 
 data PostgreSQLRole : Set where
-  durableAuthorityRole
-  globalIdentityRole
-  globalReconciliationRole
-  recoveryMetadataRole
-  referenceAuditRole : PostgreSQLRole
+  durableAuthorityRole globalIdentityRole globalReconciliationRole
+    recoveryMetadataRole referenceAuditRole : PostgreSQLRole
 
 data ParserProjectionMode : Set where
   productionDirect parityReference auditDebug : ParserProjectionMode

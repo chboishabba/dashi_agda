@@ -102,12 +102,12 @@ record ParentReductionBoundary : Set where
 
 canonicalParentReductionBoundary :
   InterfaceId → Nat → Nat → Nat → ParentReductionBoundary
-canonicalParentReductionBoundary interface objectId factorId demandId =
+canonicalParentReductionBoundary interface objectIdentity factorIdentity demandIdentity =
   parentReductionBoundary
     (canonicalLookupExportCoherence
-      (interfaceMember interface objectTarget objectId))
+      (interfaceMember interface objectTarget objectIdentity))
     (canonicalLookupExportCoherence
-      (interfaceMember interface factorTarget factorId))
+      (interfaceMember interface factorTarget factorIdentity))
     (canonicalLookupExportCoherence
-      (interfaceMember interface demandTarget demandId))
+      (interfaceMember interface demandTarget demandIdentity))
     rejectAtParentRetainInChild

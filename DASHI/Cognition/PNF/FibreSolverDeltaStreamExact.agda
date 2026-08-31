@@ -37,10 +37,15 @@ record FibreLocalSolver
 
     -- The ordinary solver entrypoint is definitionally fibre-local.  It has no
     -- accumulated document/global-state argument to scan.
-    solveEvent : NumericEvent → SolverEmission SemanticDelta Candidate
-    solveEvent event = solveLocal event (localFibre event)
-
 open FibreLocalSolver public
+
+solveEvent :
+  ∀ {NumericEvent Fibre SemanticDelta Candidate : Set} →
+  FibreLocalSolver NumericEvent Fibre SemanticDelta Candidate →
+  NumericEvent →
+  SolverEmission SemanticDelta Candidate
+solveEvent solver event =
+  solveLocal solver event (localFibre solver event)
 
 ------------------------------------------------------------------------
 -- Exact residual accumulation is already a join-semilattice on the existing
