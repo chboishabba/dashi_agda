@@ -6,27 +6,31 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
--- RECURSIVE RH ANALYTIC LEAF SCHEDULER — ACTUAL CARRIER CUT
+-- RECURSIVE RH ANALYTIC LEAF SCHEDULER — CHARACTER/ACTION CUT
 --
--- Forward audit of the canonical Riemann substrate showed that it does not yet
--- expose complex exponential / target modulation / transform-shift structure.
--- Therefore the shared H_T leaf itself has a first unpaid producer H_M:
+-- The canonical carrier audit split the old H_M modulation leaf into:
 --
---   H_M       canonical analytic modulation extension on existing carriers
---   H_T       target translation <-> dual modulation intertwiner
---   H_W       window/restriction compatibility + cluster/near/far residual
+--   H_X       canonical complex character algebra
+--             exp(-itu) exp(ibu) = exp(i(b-t)u), even part = cosine
+--   H_A       action of that character on the canonical Weil/Mellin test
+--             carrier + admissibility + spectral shift for the SAME formula
+--   H_M       assembled canonical analytic modulation extension
+--   H_T       target translation <-> modulation intertwiner
+--   H_W       window/restriction + cluster/near/far residual
 --   H_E       phase-sensitive finite near evaluation
 --   H_Gamma   Gamma precision repair
 --
 -- Dependency shape:
 --
---   H_M -> H_T -> direct phase statistic -> H_E
---             \-> H_W -> explicit-formula target window -> H_E
---   H_Gamma ----------------------------------------------> final consumer
+--   H_X -> H_A -> H_M -> H_T -> direct phase statistic -> H_E
+--                    \             \-> H_W -> explicit window -> H_E
+--   H_Gamma ------------------------------------------------> final consumer
 ------------------------------------------------------------------------
 
 data RHAnalyticLeaf : Set where
-  buildCanonicalAnalyticModulationExtension
+  buildCanonicalComplexCharacter
+  proveCanonicalTestModulationShift
+  assembleCanonicalAnalyticModulationExtension
   proveTargetTranslationModulationIntertwiner
   proveWindowRestrictionResidualCompatibility
   provePhaseSensitiveFiniteNearEvaluation
@@ -41,7 +45,9 @@ data LeafState : Set where
   closed open blocked pruned : LeafState
 
 leafState : RHAnalyticLeaf → LeafState
-leafState buildCanonicalAnalyticModulationExtension = open
+leafState buildCanonicalComplexCharacter = open
+leafState proveCanonicalTestModulationShift = blocked
+leafState assembleCanonicalAnalyticModulationExtension = blocked
 leafState proveTargetTranslationModulationIntertwiner = blocked
 leafState proveWindowRestrictionResidualCompatibility = blocked
 leafState provePhaseSensitiveFiniteNearEvaluation = blocked
@@ -56,10 +62,19 @@ leafState reuseNameOnlyHardyDonor = pruned
 ------------------------------------------------------------------------
 
 data Requires : RHAnalyticLeaf → RHAnalyticLeaf → Set where
+  testActionNeedsComplexCharacter :
+    Requires proveCanonicalTestModulationShift buildCanonicalComplexCharacter
+
+  modulationAssemblyNeedsComplexCharacter :
+    Requires assembleCanonicalAnalyticModulationExtension buildCanonicalComplexCharacter
+
+  modulationAssemblyNeedsTestAction :
+    Requires assembleCanonicalAnalyticModulationExtension proveCanonicalTestModulationShift
+
   translationModulationNeedsCanonicalExtension :
     Requires
       proveTargetTranslationModulationIntertwiner
-      buildCanonicalAnalyticModulationExtension
+      assembleCanonicalAnalyticModulationExtension
 
   windowNeedsTranslationModulation :
     Requires
@@ -81,10 +96,18 @@ data Requires : RHAnalyticLeaf → RHAnalyticLeaf → Set where
 ------------------------------------------------------------------------
 
 data RHAnalyticLeafSchedulable : RHAnalyticLeaf → Set where
-  canonicalModulationExtensionLeafLive :
-    RHAnalyticLeafSchedulable buildCanonicalAnalyticModulationExtension
+  complexCharacterLeafLive :
+    RHAnalyticLeafSchedulable buildCanonicalComplexCharacter
   gammaPrecisionLeafLive :
     RHAnalyticLeafSchedulable repairGammaPrecision
+
+testActionLeafNotYetSchedulable :
+  RHAnalyticLeafSchedulable proveCanonicalTestModulationShift → ⊥
+testActionLeafNotYetSchedulable ()
+
+modulationAssemblyLeafNotYetSchedulable :
+  RHAnalyticLeafSchedulable assembleCanonicalAnalyticModulationExtension → ⊥
+modulationAssemblyLeafNotYetSchedulable ()
 
 translationModulationLeafNotYetSchedulable :
   RHAnalyticLeafSchedulable proveTargetTranslationModulationIntertwiner → ⊥
@@ -139,8 +162,16 @@ open SelectedRHAnalyticLeaf public
 record RHAnalyticLeafSchedulerBoundary : Set where
   constructor rh-analytic-leaf-scheduler-boundary
   field
-    canonicalModulationExtensionOpen : Bool
-    canonicalModulationExtensionOpenIsTrue : canonicalModulationExtensionOpen ≡ true
+    complexCharacterLeafOpen : Bool
+    complexCharacterLeafOpenIsTrue : complexCharacterLeafOpen ≡ true
+
+    testModulationActionBlockedOnHX : Bool
+    testModulationActionBlockedOnHXIsTrue :
+      testModulationActionBlockedOnHX ≡ true
+
+    modulationAssemblyBlockedOnHXAndHA : Bool
+    modulationAssemblyBlockedOnHXAndHAIsTrue :
+      modulationAssemblyBlockedOnHXAndHA ≡ true
 
     translationModulationLeafBlockedOnExtension : Bool
     translationModulationLeafBlockedOnExtensionIsTrue :
@@ -155,6 +186,10 @@ record RHAnalyticLeafSchedulerBoundary : Set where
 
     gammaPrecisionLeafOpen : Bool
     gammaPrecisionLeafOpenIsTrue : gammaPrecisionLeafOpen ≡ true
+
+    characterLawExcludesPoleCoshTaperFactor : Bool
+    characterLawExcludesPoleCoshTaperFactorIsTrue :
+      characterLawExcludesPoleCoshTaperFactor ≡ true
 
     countOnlyLeafActive : Bool
     countOnlyLeafActiveIsFalse : countOnlyLeafActive ≡ false
@@ -179,6 +214,9 @@ record RHAnalyticLeafSchedulerBoundary : Set where
 canonicalRHAnalyticLeafSchedulerBoundary : RHAnalyticLeafSchedulerBoundary
 canonicalRHAnalyticLeafSchedulerBoundary =
   rh-analytic-leaf-scheduler-boundary
+    true refl
+    true refl
+    true refl
     true refl
     true refl
     true refl
