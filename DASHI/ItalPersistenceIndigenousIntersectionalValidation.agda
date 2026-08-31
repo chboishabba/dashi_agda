@@ -9,3 +9,4 @@ import DASHI.Culture.RastafariItalLoopControlGovernanceExact
 import DASHI.Culture.RastafariItalSocioTechnicalPowerDirectReuseExact
 import DASHI.Culture.MarxLabourUnionSourceBoundaryExact
 import DASHI.Culture.RastafariItalExitRefusalMarxUnionCrossPollinationExact
+import DASHI.Culture.RastafariItalCollectiveOptionConeEfficacyExact
