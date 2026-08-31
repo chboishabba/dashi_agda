@@ -2,26 +2,23 @@
 module DASHI.Physics.YangMills.BalabanCMP98Equation119CanonicalCoarseSegmentRound158Exact where
 
 ------------------------------------------------------------------------
--- ROUND158 A1 BIDI: REMOVE THE ARBITRARY COARSE AxisSegment RECEIPT
+-- ROUND158 A1 BIDI: CANONICAL COARSE SEGMENT + DERIVED PLUS BLOCK
 --
 -- Primary source:
 -- Tadeusz Bałaban, "Averaging Operations for Lattice Gauge Theories",
 -- Commun. Math. Phys. 98 (1985), 17--51. DOI: 10.1007/BF01211042.
 --
--- R152 still accepts an arbitrary `AxisSegment` for the source coarse bond c.
--- At the minimal source scale used by this Eq. (119) lane we have L = 13 and
--- radius = 6, hence the fine realization of one coarse axis bond is the straight
--- signed segment of length 13.  BIDI therefore keeps only the source axis and
--- orientation and CONSTRUCTS the segment count.
+-- At the minimal source scale used by this Eq. (119) lane, L = 13 and radius =
+-- 6.  One source coarse axis bond is therefore the straight signed fine segment
+-- of length 13.  R162 additionally proves periodic translation commutation from
+-- the literal torus arithmetic, and R163 constructs the translated centred
+-- embedding itself.
 --
--- Cross-pollination update: R162 proves periodic coordinate-translation
--- commutation directly from the repository's finite-torus successor/predecessor
--- arithmetic.  Therefore this source record no longer contains a
--- `translationCommutation` receipt either.
---
--- This does not manufacture the remaining physical statement that the selected
--- c-/c+ centres are related by that source bond: the endpoint equality remains
--- explicit.  It removes only replaceable geometry choices.
+-- BIDI consequence: the source record below now supplies only ONE centred block
+-- embedding plus the coarse axis/orientation.  The L=13 segment, the plus-block
+-- embedding, the c- -> c+ endpoint equality, and translation commutation are all
+-- constructed.  There is no independent plus-block/endpoint receipt left to
+-- disagree with x(c).
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -33,6 +30,7 @@ import DASHI.Physics.YangMills.BalabanCMP98MultiscaleAveragingDerivativeRound126
 import DASHI.Physics.YangMills.BalabanCMP98Equation119OneStepDerivativeRound146Exact as R146
 import DASHI.Physics.YangMills.BalabanCMP98Equation119LeastPrivilegeSourceRound152Exact as R152
 import DASHI.Physics.YangMills.BalabanPeriodicSegmentCommutationRound162Exact as R162
+import DASHI.Physics.YangMills.BalabanTranslatedCenteredEmbeddingRound163Exact as R163
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109ShortestContourEnumerationExact as Contours
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109PeriodicContourFamilyInstantiationExact as Periodic
@@ -73,20 +71,33 @@ record CanonicalL13Equation119Source
     scaleV : ℚ → R126.Operator (R146.additive C)
     qSource : Nat → R126.Operator (R146.additive C)
 
-    minusEmbedding plusEmbedding :
+    -- Only the c- block is selected independently.
+    minusEmbedding :
       Nat → Embed.CenteredPeriodicNoWrapEmbedding n sourceRadius
 
+    -- Literal coarse bond c: source axis and orientation only.
     coarseAxis : Nat → Contours.Axis4
     coarseDirection : Nat → Contours.Direction
 
-    canonicalCoarseSegmentEndsAtPlusCentre : ∀ step →
-      Bond.walk
-        (Embed.embeddingCentre (minusEmbedding step))
-        (Periodic.segmentWord
-          (canonicalCoarseSegment (coarseAxis step) (coarseDirection step)))
-      ≡ Embed.embeddingCentre (plusEmbedding step)
-
 open CanonicalL13Equation119Source public
+
+coarseSegmentAt :
+  ∀ {C n Value group} →
+  CanonicalL13Equation119Source C n Value group →
+  Nat → Contours.AxisSegment
+coarseSegmentAt source step =
+  canonicalCoarseSegment
+    (coarseAxis source step) (coarseDirection source step)
+
+-- The source c+ block is definitionally the coarse translate of c-.
+derivedPlusEmbedding :
+  ∀ {C n Value group} →
+  CanonicalL13Equation119Source C n Value group →
+  Nat → Embed.CenteredPeriodicNoWrapEmbedding n sourceRadius
+derivedPlusEmbedding source step =
+  R163.translatedEmbedding
+    (minusEmbedding source step)
+    (coarseSegmentAt source step)
 
 asRound152Source :
   ∀ {C n Value group} →
@@ -99,12 +110,12 @@ asRound152Source {n = n} source = record
   ; R152.LiteralEquation119LeastPrivilegeSource.scaleV = scaleV source
   ; R152.LiteralEquation119LeastPrivilegeSource.qSource = qSource source
   ; R152.LiteralEquation119LeastPrivilegeSource.minusEmbedding = minusEmbedding source
-  ; R152.LiteralEquation119LeastPrivilegeSource.plusEmbedding = plusEmbedding source
+  ; R152.LiteralEquation119LeastPrivilegeSource.plusEmbedding =
+      derivedPlusEmbedding source
   ; R152.LiteralEquation119LeastPrivilegeSource.coarseSegment =
-      λ step → canonicalCoarseSegment
-        (coarseAxis source step) (coarseDirection source step)
+      coarseSegmentAt source
   ; R152.LiteralEquation119LeastPrivilegeSource.coarseSegmentEndsAtPlusCentre =
-      canonicalCoarseSegmentEndsAtPlusCentre source
+      λ step → refl
   ; R152.LiteralEquation119LeastPrivilegeSource.translationCommutation =
       R162.periodicSegmentCommutation n
   }
@@ -126,6 +137,27 @@ round152CoarseSegmentCountIsL :
   ≡ Contours.signedCount (coarseDirection source step) sourceL
 round152CoarseSegmentCountIsL source step = refl
 
+round152PlusEmbeddingIsCoarseTranslate :
+  ∀ {C n Value group}
+    (source : CanonicalL13Equation119Source C n Value group)
+    step →
+  R152.plusEmbedding (asRound152Source source) step
+  ≡ R163.translatedEmbedding
+      (minusEmbedding source step)
+      (coarseSegmentAt source step)
+round152PlusEmbeddingIsCoarseTranslate source step = refl
+
+round152CentreEndpointIsConstructed :
+  ∀ {C n Value group}
+    (source : CanonicalL13Equation119Source C n Value group)
+    step →
+  Bond.walk
+    (Embed.embeddingCentre (minusEmbedding source step))
+    (Periodic.segmentWord (coarseSegmentAt source step))
+  ≡ Embed.embeddingCentre
+      (R152.plusEmbedding (asRound152Source source) step)
+round152CentreEndpointIsConstructed source step = refl
+
 round152TranslationCommutationIsDerived :
   ∀ {C n Value group}
     (source : CanonicalL13Equation119Source C n Value group) →
@@ -136,15 +168,14 @@ round152TranslationCommutationIsDerived source = refl
 cmp98Equation119CanonicalCoarseSegmentRound158Level : ProofLevel
 cmp98Equation119CanonicalCoarseSegmentRound158Level = machineChecked
 
+cmp98Equation119DerivedPlusEmbeddingRound158Level : ProofLevel
+cmp98Equation119DerivedPlusEmbeddingRound158Level = machineChecked
+
 cmp98Equation119DerivedTranslationCommutationRound158Level : ProofLevel
 cmp98Equation119DerivedTranslationCommutationRound158Level = machineChecked
 
--- The arbitrary segment shape/count and translation-commutation receipt are gone.
--- The surviving physical geometry is only: which source coordinate
--- axis/orientation is c, and that its canonical L=13 translate really connects
--- the selected c- and c+ centres.
+-- The entire translated-block geometry is now construction.  The remaining
+-- source-facing coarse datum is only which coordinate axis/orientation is the
+-- printed coarse bond c at each step.
 literalCMP98CoarseAxisOrientationRound158Level : ProofLevel
 literalCMP98CoarseAxisOrientationRound158Level = conditional
-
-literalCMP98CanonicalL13CentreEndpointRound158Level : ProofLevel
-literalCMP98CanonicalL13CentreEndpointRound158Level = conditional
