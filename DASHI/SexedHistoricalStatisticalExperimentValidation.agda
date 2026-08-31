@@ -11,6 +11,9 @@ import DASHI.Governance.SexedHistoricalBinaryTernaryDialecticExact as BT
 import DASHI.Governance.SexedHistoricalAdaptiveMeasurementRefinementExact as Measure
 import DASHI.Governance.SexedHistoricalBase369TransitionPathExact as Path369
 import DASHI.Governance.SexedHistoricalBase369AdaptivePathObserverExact as Observe369
+import DASHI.Governance.SexedHistoricalEffectiveFibreTransportExact as EffectiveTransport
+import DASHI.Governance.SexedHistoricalProductiveDialecticalFibreJoinExact as ProductiveJoin
+import DASHI.Governance.SexedHistoricalDialecticalJoinAdaptiveSearchExact as JoinSearch
 
 recordedSexConstructionRegression :
   INF.FactorsThrough Stats.recordedSexSurface Stats.relationalCell → ⊥
@@ -123,6 +126,58 @@ base369SequenceMeasurementRegression :
     Observe369.hiddenFeminineCrossBack → ⊥
 base369SequenceMeasurementRegression =
   Observe369.selectedSequenceMeasurementSeparates
+
+formalTransitionLocalReachabilityRegression :
+  INF.FactorsThrough
+    EffectiveTransport.formalSurface
+    EffectiveTransport.reachabilitySurface → ⊥
+formalTransitionLocalReachabilityRegression =
+  EffectiveTransport.formalTransitionCannotRecoverLocalReachability
+
+samePresentFutureConeRegression :
+  INF.FactorsThrough
+    (DASHI.Core.RelationalHistoryFabricExact.observe
+      EffectiveTransport.transportHistoryFabric)
+    (DASHI.Core.RelationalHistoryFabricExact.futureConeOf
+      EffectiveTransport.transportHistoryFabric) → ⊥
+samePresentFutureConeRegression =
+  EffectiveTransport.sameFormalPresentCannotRecoverFutureCone
+
+productiveJoinRetainsOrderRegression :
+  INF.FactorsThrough
+    ProductiveJoin.coarseJoin
+    ProductiveJoin.joinOrderResidual → ⊥
+productiveJoinRetainsOrderRegression =
+  ProductiveJoin.productiveJoinDoesNotEraseTransportOrder
+
+joinSearchCoarseProductivityRegression :
+  INF.FactorsThrough
+    JoinSearch.coarseCandidate
+    JoinSearch.expansionStatus → ⊥
+joinSearchCoarseProductivityRegression =
+  JoinSearch.coarseCandidateCannotRecoverExpansion
+
+joinSearchResidualProductivityRegression :
+  INF.FactorsThrough
+    JoinSearch.residualStatus
+    JoinSearch.expansionStatus → ⊥
+joinSearchResidualProductivityRegression =
+  JoinSearch.residualAloneCannotRecoverProductivity
+
+joinSearchSelectedProbeRegression :
+  JoinSearch.measure
+    (JoinSearch.nextJoinMeasurement
+      JoinSearch.verifyStrictAffordanceExpansion Suspension.suspendAndRefine)
+    JoinSearch.residualPreservingNoExpansion
+  ≡ JoinSearch.measure
+    (JoinSearch.nextJoinMeasurement
+      JoinSearch.verifyStrictAffordanceExpansion Suspension.suspendAndRefine)
+    JoinSearch.productiveRelationalJoin → ⊥
+joinSearchSelectedProbeRegression =
+  JoinSearch.selectedProductivityProbeSeparatesCanonicalCandidates
+
+canonicalProductiveJoinRegression : ProductiveJoin.ProductiveDialecticalJoin
+canonicalProductiveJoinRegression = ProductiveJoin.canonicalProductiveJoin
 
 canonicalDesignRegression : Stats.SexConstructionStudyDesign
 canonicalDesignRegression = Stats.canonicalSexConstructionStudyDesign
