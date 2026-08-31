@@ -233,7 +233,7 @@ data InstitutionalisationPromotesSourceEndorsement : Set where
 data ReceptionOrderDefectPromotesDialecticalNecessity : Set where
 data ReceptionSquarePromotesGaugeCurvature : Set where
 data SameReceptionStratumPromotesSameGenealogy : Set where
-\data CurrentUsePromotesUniqueReceptionHistory : Set where
+data CurrentUsePromotesUniqueReceptionHistory : Set where
 
 laterVocabularyDoesNotPromoteOriginalMeaning :
   LaterVocabularyPromotesOriginalMeaning → ⊥
