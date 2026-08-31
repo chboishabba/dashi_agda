@@ -11,6 +11,7 @@ files=(
   DASHI/Physics/YangMills/BalabanFrontierFeedbackSearchRound149Exact.agda
   DASHI/Physics/YangMills/BalabanConsumerWeightedFrontierPriorityRound150Exact.agda
   DASHI/Physics/YangMills/BalabanRound108DirectUnifiedActionRound151Exact.agda
+  DASHI/Physics/YangMills/BalabanBC1PhysicalCompositeD1ReductionRound152Exact.agda
   DASHI/Physics/YangMills/BalabanProofExperimentFrontierRound150Validation.agda
 )
 
@@ -33,10 +34,12 @@ grep -q '^record CostedBalabanFrontierResolution' "${files[3]}"
 grep -q '^directRound108MatchAlphaIsFour :' "${files[4]}"
 grep -q '^combinedRGDensityStateAlphaIsOne :' "${files[4]}"
 grep -q '^combinedRGStatePotentialAlphaIsOne :' "${files[4]}"
-grep -q '^componentD1AlphaIsThree :' "${files[4]}"
+grep -q '^physicalD1ChainRuleAlphaIsThree :' "${files[4]}"
 grep -q '^record Round108DirectPresentCutActionRealization' "${files[5]}"
 grep -q '^round108DirectSelectedDensityRepresentsBC1Potential :' "${files[5]}"
-grep -q 'round151DirectRound108ActionCompiler' "${files[6]}"
+grep -q '^record PhysicalCompositeD1ChainRule' "${files[6]}"
+grep -q '^round152BuildsRound145ComponentD1 :' "${files[6]}"
+grep -q 'round152PhysicalD1ReductionCompiler' "${files[7]}"
 
 cache_root="${DASHI_AGDA29_CACHE_ROOT:-${RUNNER_TEMP:-$root/.cache}/dashi-agda29-ym-proof-experiment}"
 export DASHI_AGDA29_CACHE_ROOT="$cache_root"
