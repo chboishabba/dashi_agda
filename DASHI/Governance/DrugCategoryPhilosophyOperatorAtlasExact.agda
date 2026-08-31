@@ -3,6 +3,7 @@ module DASHI.Governance.DrugCategoryPhilosophyOperatorAtlasExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Governance.ContestedDrugCategoryAtlasBidiExact as Atlas
 import DASHI.Culture.WittgensteinUsePracticeSourceBridgeExact as Wittgenstein
 import DASHI.Reasoning.PNFZizekOperator as Zizek
@@ -67,12 +68,9 @@ wittgensteinBoundary : Wittgenstein.WittgensteinUsePracticeBoundary
 wittgensteinBoundary = Wittgenstein.canonicalWittgensteinUsePracticeBoundary
 
 samePatientWordStillDoesNotRecoverPractice :
-  (recover : Atlas.PatientWord → Atlas.PatientPracticeCode) →
-  ((state : Atlas.PatientUseState) →
-    recover (Atlas.patientWord state) ≡ Atlas.patientPractice state) → ⊥
-samePatientWordStillDoesNotRecoverPractice recover recovers =
+  INF.FactorsThrough Atlas.patientWord Atlas.patientPractice → ⊥
+samePatientWordStillDoesNotRecoverPractice =
   Atlas.samePatientWordCannotRecoverPractice
-    (record { factor = recover ; commutes = recovers })
 
 ------------------------------------------------------------------------
 -- Zizek operator: category closure can be investigated for a master predicate,
