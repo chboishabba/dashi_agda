@@ -48,12 +48,12 @@ import DASHI.Moonshine.Monster3BFiniteHeisenbergInverseExact
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGroupLawFrontierExact
 import DASHI.Moonshine.Monster3BFiniteHeisenbergNondegeneracyExact
 
--- Concrete Schrodinger route.  Monster-specific work now closes extraction of
--- one delta line and transport of that line through the full F3^6 orbit using
--- only the six unit translations.  Two ordinary finite-dimensional assembly
--- routes are exposed: delta synthesis and the pre-existing scalar-commutant /
--- commuting-projector no-go.  The latter avoids explicit 729-term enumeration
--- once an ordinary invariant-subspace -> projector attachment is supplied.
+-- Concrete Schrodinger route. Monster-specific work closes extraction of one
+-- delta line and transport of that line through the full F3^6 orbit using only
+-- the six unit translations. Two ordinary finite-dimensional routes can now
+-- close the same irreducibility consumer: finite delta synthesis, or the
+-- already-proved scalar-commutant / commuting-projector no-go plus a standard
+-- invariant-subspace projector attachment.
 import DASHI.Moonshine.Monster3BCyclotomicLinearAlgebraExact
 import DASHI.Moonshine.Monster3BCyclotomicNonzeroInverseExact
 import DASHI.Moonshine.Monster3BFiniteSchrodingerFunctionModuleExact
@@ -70,7 +70,16 @@ import DASHI.Moonshine.Monster3BFiniteSchrodingerIrreducibilityAssemblyExact
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCommutantExact
 import DASHI.Moonshine.Monster3BFiniteHeisenbergProjectionNoGoExact
 import DASHI.Moonshine.Monster3BFiniteSchrodingerProjectorIrreducibilityBidiExact
+import DASHI.Moonshine.Monster3BFiniteSchrodingerIrreducibilityBidiCutExact
+
+-- Existing downstream Stone-von Neumann/multiplicity/actual-kernel machinery.
+-- Character isotypy and the 90-copy count are kept distinct from construction
+-- of an actual action intertwiner / ActualZetaSectorRecognition.
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannMultiplicityExact
+import DASHI.Moonshine.Monster3BKernelCharacterCriterionExact
+import DASHI.Moonshine.Monster3BActualKernelCharacterPromotionExact
+import DASHI.Moonshine.Monster3BModelStoneVonNeumannRecognitionExact
+import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact
 
 import DASHI.Base369Ternary27StratifiedFibreHolonomyValidation
