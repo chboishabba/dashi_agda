@@ -10,10 +10,10 @@ import DASHI.Core.IntersectionalNonFactorability as NonFactor
 ------------------------------------------------------------------------
 -- FINITE RECONVERGENCE FIXTURE
 --
--- Two epistemic histories reach the same visible final assertion.  The
+-- Two epistemic histories reach the same visible final assertion. The
 -- empirical route has passed through an empirical-promotion/design-discharge
 -- gate and deposits a persistent authority residue; the purely logical route
--- does not.  Final syntax therefore cannot reconstruct later admissibility.
+-- does not. Final syntax therefore cannot reconstruct later admissibility.
 ------------------------------------------------------------------------
 
 data DerivationState : Set where
