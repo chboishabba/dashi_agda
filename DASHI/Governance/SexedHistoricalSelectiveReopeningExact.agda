@@ -21,6 +21,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AffectedDependencyClosureExact as Dependency
 import DASHI.Core.AdaptiveConsumerModelLoopExact as Adaptive
+import DASHI.Governance.SexedHistoricalProductiveDialecticalFibreJoinExact as Join
 import DASHI.Governance.SexedHistoricalDialecticalJoinAdaptiveSearchExact as Search
 import DASHI.Governance.SexedHistoricalReopenableSynthesisEndOfHistoryBoundaryExact as Reopen
 
@@ -128,7 +129,7 @@ canonicalSelectiveJoinReopening =
 reopenedJoinSearchSelectsAffordanceProbe :
   Search.nextJoinMeasurement
     Search.verifyStrictAffordanceExpansion
-    (Search.joinDisposition Search.unresolvedJoin)
+    (Join.joinDisposition Join.unresolvedJoin)
   ≡ Search.optionConeProbe
 reopenedJoinSearchSelectsAffordanceProbe = refl
 
