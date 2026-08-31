@@ -14,6 +14,9 @@ import DASHI.Reasoning.ReleasedArtifactProvenanceBidiExact
 import DASHI.Reasoning.AristotleMCGSHypergraphExact
 import DASHI.Reasoning.AristotleMCGSIntrospectiveSpecimen
 import DASHI.Reasoning.AristotleMCGSRecoveredWitness
+import DASHI.Reasoning.AristotleBranchMergeExact
+import DASHI.Reasoning.AristotleMergeExperimentDesignExact
+import DASHI.Reasoning.AristotleMergeExperimentValidation
 import DASHI.Reasoning.FolkLawEpistemicAuthorityCaptureExact
 import DASHI.Reasoning.EpistemicAuthorityIntrospectiveVisualReceiptExact
 import DASHI.Reasoning.FolkLawEpistemicAuthorityBroadExact
