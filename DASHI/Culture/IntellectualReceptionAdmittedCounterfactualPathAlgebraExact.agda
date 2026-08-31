@@ -269,29 +269,64 @@ sameEndpointCannotRecoverPathHistory =
       oneInstitutionShift twoInstitutionShifts refl pathHistoriesDiffer)
 
 ------------------------------------------------------------------------
--- 6. Projection ladder.
+-- 6. Same path length is also too coarse.
+------------------------------------------------------------------------
+
+data SameLengthPathCase : Set where
+  movementInstitutionLengthTwo institutionMovementLengthTwo : SameLengthPathCase
+
+data PathLengthCode : Set where lengthTwo : PathLengthCode
+
+data FineOrderedLengthTwoPath : Set where
+  movementInstitutionFine institutionMovementFine : FineOrderedLengthTwoPath
+
+pathLengthCode : SameLengthPathCase → PathLengthCode
+pathLengthCode _ = lengthTwo
+
+fineOrderedLengthTwoPath : SameLengthPathCase → FineOrderedLengthTwoPath
+fineOrderedLengthTwoPath movementInstitutionLengthTwo = movementInstitutionFine
+fineOrderedLengthTwoPath institutionMovementLengthTwo = institutionMovementFine
+
+sameLengthFinePathsDiffer :
+  fineOrderedLengthTwoPath movementInstitutionLengthTwo
+  ≡ fineOrderedLengthTwoPath institutionMovementLengthTwo → ⊥
+sameLengthFinePathsDiffer ()
+
+sameLengthCannotRecoverOrderedPath :
+  INF.FactorsThrough pathLengthCode fineOrderedLengthTwoPath → ⊥
+sameLengthCannotRecoverOrderedPath =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      movementInstitutionLengthTwo
+      institutionMovementLengthTwo
+      refl
+      sameLengthFinePathsDiffer)
+
+------------------------------------------------------------------------
+-- 7. Projection ladder.
 --
 -- These finite witnesses jointly separate endpoint, future cone,
--- admissibility trace and ordered path.  None is silently identified with the
--- next finer object.
+-- admissibility trace, path length and ordered path.  None is silently
+-- identified with the next finer object.
 ------------------------------------------------------------------------
 
 data PathProjectionLevel : Set where
-  endpointLevel futureConeLevel admissibilityTraceLevel orderedPathLevel
+  endpointLevel futureConeLevel admissibilityTraceLevel pathLengthLevel orderedPathLevel
   : PathProjectionLevel
 
 data PathProjectionStrength : Set where
-  endpointCoarse futureConeCoarse traceCoarse orderedPathFine
+  endpointCoarse futureConeCoarse traceCoarse lengthCoarse orderedPathFine
   : PathProjectionStrength
 
 projectionStrength : PathProjectionLevel → PathProjectionStrength
 projectionStrength endpointLevel = endpointCoarse
 projectionStrength futureConeLevel = futureConeCoarse
 projectionStrength admissibilityTraceLevel = traceCoarse
+projectionStrength pathLengthLevel = lengthCoarse
 projectionStrength orderedPathLevel = orderedPathFine
 
 ------------------------------------------------------------------------
--- 7. No-promotion boundaries.
+-- 8. No-promotion boundaries.
 ------------------------------------------------------------------------
 
 data PathAlgebraPromotesActualHistory : Set where
@@ -299,6 +334,7 @@ data PathConcatenationPromotesPhysicalWorldline : Set where
 data SameEndpointPromotesSameCausalHistory : Set where
 data SameFutureConePromotesSamePath : Set where
 data SameAdmissibilityTracePromotesSameInterventionOrder : Set where
+data SameLengthPromotesSamePath : Set where
 
 aPathAlgebraDoesNotPromoteActualHistory : PathAlgebraPromotesActualHistory → ⊥
 aPathAlgebraDoesNotPromoteActualHistory ()
@@ -318,8 +354,11 @@ sameTraceDoesNotPromoteSameInterventionOrder :
   SameAdmissibilityTracePromotesSameInterventionOrder → ⊥
 sameTraceDoesNotPromoteSameInterventionOrder ()
 
+sameLengthDoesNotPromoteSamePath : SameLengthPromotesSamePath → ⊥
+sameLengthDoesNotPromoteSamePath ()
+
 ------------------------------------------------------------------------
--- 8. Canonical boundary.
+-- 9. Canonical boundary.
 ------------------------------------------------------------------------
 
 record IntellectualReceptionAdmittedCounterfactualPathBoundary : Set where
