@@ -16,6 +16,8 @@ FILES=(
   DASHI/Analysis/RiemannAristotlePoleNearPhaseStatisticExact.agda
   DASHI/Analysis/RiemannAristotlePoleNearTargetModulationExact.agda
   DASHI/Analysis/RiemannConstructedComplexCharacterCoreExact.agda
+  DASHI/Analysis/RiemannConstructedRealPhaseCoherenceExact.agda
+  DASHI/Analysis/RiemannConstructedComplexExpAddReductionExact.agda
   DASHI/Analysis/RiemannAnalyticComplexCharacterExtensionExact.agda
   DASHI/Analysis/RiemannPoleNearReflectionEvenNormalizationExact.agda
   DASHI/Analysis/RiemannAnalyticTestModulationShiftExact.agda
