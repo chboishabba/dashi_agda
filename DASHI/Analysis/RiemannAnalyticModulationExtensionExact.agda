@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 import DASHI.Analysis.WeilTestSpace as Weil
+import DASHI.Analysis.RiemannExplicitFormula as Explicit
 import DASHI.Analysis.RiemannFormulaAnalyticCompatibility as Compat
 
 ------------------------------------------------------------------------
@@ -15,17 +16,20 @@ import DASHI.Analysis.RiemannFormulaAnalyticCompatibility as Compat
 -- admissibility and an opaque transform, but it does not currently expose
 -- complex exponential, target modulation on tests, or a transform-shift law.
 --
--- This record extends those SAME carriers.  It is not a replacement test
--- space and it does not import any finite Monster/Heisenberg carrier.
+-- This record extends those SAME carriers and is indexed by the SAME concrete
+-- RiemannExplicitFormula object whose spectral form is consumed downstream.
+-- It is not a replacement test space and it imports no Monster carrier.
 ------------------------------------------------------------------------
 
 record RiemannAnalyticModulationExtension
     (analytic : Analytic.AnalyticSubstrate)
     (space : Weil.WeilTestSpace)
-    (compat : Compat.RiemannFormulaAnalyticCompatibility analytic space) : Set₁ where
+    (formula : Explicit.RiemannExplicitFormula space)
+    (compat : Compat.RiemannFormulaAnalyticCompatibility analytic space formula) : Set₁ where
   constructor riemann-analytic-modulation-extension
   field
     carrierAgreementUsed : Set
+    concreteExplicitFormulaAgreementUsed : Set
 
     Ordinate Frequency : Set
 
@@ -47,6 +51,8 @@ record RiemannAnalyticModulationExtension
       Weil.WeilTestSpace.admissible space (modulateTest t f)
 
     -- Spectral-side shift law: target modulation induces target-relative phase.
+    -- This is tied to the same explicit-formula spectral surface, not an
+    -- independently chosen shadow transform.
     SpectralResponse : Set
     spectralResponse :
       Weil.WeilTestSpace.Test space → Ordinate → Frequency → SpectralResponse
@@ -58,6 +64,8 @@ record RiemannAnalyticModulationExtension
       (f : Weil.WeilTestSpace.Test space) →
       spectralResponse (modulateTest t f) b u
       ≡ phaseAct (targetCharacter u t) (spectralResponse f b u)
+
+    spectralResponseBelongsToConcreteFormula : Set
 
     -- The application must separately prove that this character is the actual
     -- analytic exp(- i t u), and that composing with the unshifted zero phase
@@ -93,6 +101,10 @@ record AnalyticModulationExtensionBoundary : Set where
     extensionMustReuseCanonicalCarriersIsTrue :
       extensionMustReuseCanonicalCarriers ≡ true
 
+    extensionMustReuseConcreteExplicitFormula : Bool
+    extensionMustReuseConcreteExplicitFormulaIsTrue :
+      extensionMustReuseConcreteExplicitFormula ≡ true
+
     monsterFiniteCharacterCanInstantiateAnalyticCharacter : Bool
     monsterFiniteCharacterCanInstantiateAnalyticCharacterIsFalse :
       monsterFiniteCharacterCanInstantiateAnalyticCharacter ≡ false
@@ -109,6 +121,7 @@ canonicalAnalyticModulationExtensionBoundary =
     false refl
     false refl
     false refl
+    true refl
     true refl
     false refl
     false refl
