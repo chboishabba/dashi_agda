@@ -1,6 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanProofExperimentFrontierRound150Validation where
 
+open import Agda.Builtin.Bool using (Bool)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanCombinedRGUnifiedActionRound141Exact as R141
@@ -12,6 +13,8 @@ import DASHI.Physics.YangMills.BalabanFrontierFeedbackSearchRound149Exact as R14
 import DASHI.Physics.YangMills.BalabanConsumerWeightedFrontierPriorityRound150Exact as R150
 import DASHI.Physics.YangMills.BalabanRound108DirectUnifiedActionRound151Exact as R151
 import DASHI.Physics.YangMills.BalabanBC1PhysicalCompositeD1ReductionRound152Exact as R152
+import DASHI.Physics.YangMills.BalabanSequentialDiagnosticPlannerRound153Exact as R153
+import DASHI.Physics.YangMills.BalabanInternalCompilerSourceRealizationFrontierRound154Exact as R154
 
 round141CombinedRGActionRealizationCompiler : ProofLevel
 round141CombinedRGActionRealizationCompiler =
@@ -53,3 +56,9 @@ round152LiteralPhysicalD1ChainRule = R152.literalPhysicalCompositeD1ChainRuleLev
 
 round146LiteralSourceLeaves : ProofLevel
 round146LiteralSourceLeaves = R146.literalBalabanFrontierLeafInhabitationLevel
+
+round154PhysicalSourceClosure : Bool
+round154PhysicalSourceClosure = R154.round154PhysicalSourceClosure
+
+round154ClayPromotion : Bool
+round154ClayPromotion = R154.round154ClayPromotion
