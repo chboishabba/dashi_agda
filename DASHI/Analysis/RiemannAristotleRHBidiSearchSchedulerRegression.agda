@@ -7,10 +7,6 @@ import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerExact as S
 -- Exact current RH scheduler regression after recursive H_off refinement.
 ------------------------------------------------------------------------
 
-cutoffCarrierTransportIsActive :
-  S.ActiveHighOrdinateExperiment S.transportCutoffCarrierToPoleQuotient
-cutoffCarrierTransportIsActive = S.activeCarrierTransport
-
 finiteNearEvaluationIsActive :
   S.ActiveHighOrdinateExperiment S.evaluateFiniteNearSignedSum
 finiteNearEvaluationIsActive = S.activeFiniteNear
@@ -22,6 +18,11 @@ gammaRepairIsActive = S.activeGammaRepair
 clusterRepeatCannotBeScheduled :
   S.RHBidiSchedulable S.repeatClusterMarginProof → ⊥
 clusterRepeatCannotBeScheduled = S.clusterMarginRepeatNotSchedulable
+
+genericCutoffInstantiationCannotBeScheduled :
+  S.RHBidiSchedulable S.reproveGenericCutoffInstantiation → ⊥
+genericCutoffInstantiationCannotBeScheduled =
+  S.genericCutoffInstantiationRepeatNotSchedulable
 
 farShellRepeatCannotBeScheduled :
   S.RHBidiSchedulable S.reproveInfiniteFarShell → ⊥
