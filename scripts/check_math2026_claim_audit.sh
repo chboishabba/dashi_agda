@@ -4,9 +4,12 @@ set -euo pipefail
 ROOT="DASHI/Math2026ClaimAuditValidation.agda"
 FILES=(
   DASHI/Analysis/DeBruijnNewman2026ClaimAuditExact.agda
+  DASHI/Analysis/DeBruijnNewman2026SourceWeldExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/DiophantineTupleDPrimeSquare2026ClaimAuditExact.agda
+  DASHI/Mathematics/NumberTheory/PrimePowerDiophantineTuple2026SourceExact.agda
   DASHI/Core/ExternalAutoformalizationProvenanceExact.agda
+  DASHI/Core/SourceExactFrontierBidiCrossPollination2026.agda
   "$ROOT"
 )
 
