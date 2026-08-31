@@ -14,6 +14,8 @@ import DASHI.Governance.ReceptionEvidenceSelectiveReopeningExact
 -- Base369 path-indexed admissibility cross-pollination.
 import DASHI.Foundations.Base369Ternary27AdmissibilityPathDynamicsExact
 
--- Paper-specific BIDI bridge.
+-- Paper-specific BIDI bridge and adaptive evidence-search policy.
 import DASHI.Culture.JohnAnthonyBrownReceptionEvidenceReopeningBridgeExact
+import DASHI.Culture.JohnAnthonyBrownAdaptiveEvidenceSearchExact
 import DASHI.JohnAnthonyBrownReceptionAdaptiveReopeningValidation
+import DASHI.JohnAnthonyBrownAdaptiveEvidenceSearchValidation
