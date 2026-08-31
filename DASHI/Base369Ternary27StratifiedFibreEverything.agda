@@ -1,0 +1,15 @@
+module DASHI.Base369Ternary27StratifiedFibreEverything where
+
+-- Merged geometric / stratification / spectral substrate.
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact
+import DASHI.Foundations.Base369Ternary27HypervoxelStratificationExact
+import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact
+import DASHI.Moonshine.Base369Ternary27CharacterAdjacencyEquivarianceExact
+import DASHI.Moonshine.Base369Ternary27SignedSymmetryMonsterIntertwinerExact
+import DASHI.Moonshine.Base369Ternary27PathCubeSpectralBandsExact
+
+-- New stratified/fibre/plaquette/holonomy continuation.
+import DASHI.Foundations.Base369Ternary27StratifiedAppraisalFibreExact
+import DASHI.Foundations.Base369Ternary27StratifiedFibrePlaquetteExact
+import DASHI.Moonshine.Base369Ternary27StratifiedFibreHolonomyExact
+import DASHI.Base369Ternary27StratifiedFibreHolonomyValidation
