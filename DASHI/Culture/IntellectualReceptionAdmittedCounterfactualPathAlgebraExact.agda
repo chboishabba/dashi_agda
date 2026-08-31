@@ -10,6 +10,14 @@ module DASHI.Culture.IntellectualReceptionAdmittedCounterfactualPathAlgebraExact
 -- Live PR #678 independently uses an indexed path + append pattern for proof
 -- search dynamics.  That branch is inspiration only while open and is not
 -- imported here.  The finite reception theorems below remain DASHI-owned.
+--
+-- Projection discipline:
+--
+--   endpoint
+--   != future cone
+--   != admissibility trace
+--   != path length
+--   != ordered admitted path.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -126,9 +134,6 @@ institutionThenMovementHasLengthTwo = refl
 
 ------------------------------------------------------------------------
 -- 3. Same admissibility trace does not recover path order.
---
--- Both canonical paths have exactly two admitted legs.  A consumer retaining
--- only that admitted/admitted trace cannot recover which intervention came first.
 ------------------------------------------------------------------------
 
 data TwoLegAdmittedPath : Set where
@@ -193,10 +198,6 @@ sameExactFutureConeCannotRecoverAdmittedPathOrder =
 
 ------------------------------------------------------------------------
 -- 5. Same endpoint does not recover path length/history.
---
--- shiftRelationToInstitution is idempotent on the fine state: applying it once
--- or twice reaches definitionally the same state.  The admitted paths retain
--- different lengths, so endpoint equality is strictly coarser than path history.
 ------------------------------------------------------------------------
 
 institutionTwice : Counterfactual.CounterfactualReceptionState
@@ -304,10 +305,6 @@ sameLengthCannotRecoverOrderedPath =
 
 ------------------------------------------------------------------------
 -- 7. Projection ladder.
---
--- These finite witnesses jointly separate endpoint, future cone,
--- admissibility trace, path length and ordered path.  None is silently
--- identified with the next finer object.
 ------------------------------------------------------------------------
 
 data PathProjectionLevel : Set where
