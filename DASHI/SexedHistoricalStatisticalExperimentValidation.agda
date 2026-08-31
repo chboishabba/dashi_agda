@@ -9,6 +9,8 @@ import DASHI.Governance.SexedHistoricalConditionalReversalExact as Reversal
 import DASHI.Governance.SexedHistoricalDialecticalOrderHolonomyAnalogueExact as Order
 import DASHI.Governance.SexedHistoricalBinaryTernaryDialecticExact as BT
 import DASHI.Governance.SexedHistoricalAdaptiveMeasurementRefinementExact as Measure
+import DASHI.Governance.SexedHistoricalBase369TransitionPathExact as Path369
+import DASHI.Governance.SexedHistoricalBase369AdaptivePathObserverExact as Observe369
 
 recordedSexConstructionRegression :
   INF.FactorsThrough Stats.recordedSexSurface Stats.relationalCell → ⊥
@@ -82,6 +84,45 @@ selectedMeasurementSeparatesRegression :
   → ⊥
 selectedMeasurementSeparatesRegression =
   Measure.selectedPathMeasurementSeparatesCanonicalHistories
+
+base369CrossCountCompositeRegression :
+  INF.FactorsThrough Path369.crossCount Path369.compositeChannel → ⊥
+base369CrossCountCompositeRegression =
+  Path369.coarseCrossCountCannotRecoverComposite
+
+base369CrossOrderRegression :
+  Path369.compositeChannel Path369.masculineCrossBack
+  ≡ Path369.compositeChannel Path369.feminineCrossBack → ⊥
+base369CrossOrderRegression = Path369.crossOrderChangesComposite
+
+base369StratumCompositeRegression :
+  INF.FactorsThrough Observe369.compositeStratum Observe369.trueComposite → ⊥
+base369StratumCompositeRegression =
+  Observe369.base369StratumCannotRecoverComposite
+
+base369EndpointMeasurementRegression :
+  Observe369.observe
+    (Observe369.nextPathMeasurement
+      Observe369.recoverCompositeEndpoint Suspension.suspendAndRefine)
+    Observe369.hiddenMasculineCrossBack
+  ≡ Observe369.observe
+    (Observe369.nextPathMeasurement
+      Observe369.recoverCompositeEndpoint Suspension.suspendAndRefine)
+    Observe369.hiddenFeminineCrossBack → ⊥
+base369EndpointMeasurementRegression =
+  Observe369.selectedEndpointMeasurementSeparates
+
+base369SequenceMeasurementRegression :
+  Observe369.observe
+    (Observe369.nextPathMeasurement
+      Observe369.recoverConstructionOrder Suspension.suspendAndRefine)
+    Observe369.hiddenMasculineCrossBack
+  ≡ Observe369.observe
+    (Observe369.nextPathMeasurement
+      Observe369.recoverConstructionOrder Suspension.suspendAndRefine)
+    Observe369.hiddenFeminineCrossBack → ⊥
+base369SequenceMeasurementRegression =
+  Observe369.selectedSequenceMeasurementSeparates
 
 canonicalDesignRegression : Stats.SexConstructionStudyDesign
 canonicalDesignRegression = Stats.canonicalSexConstructionStudyDesign
