@@ -47,7 +47,7 @@ selectiveNextJoinSearchReopeningRegression = Selective.nextJoinSearchMustReopen
 reopenedSearchMeasurementRegression :
   Search.nextJoinMeasurement
     Search.verifyStrictAffordanceExpansion
-    (Search.joinDisposition Search.unresolvedJoin)
+    (Join.joinDisposition Join.unresolvedJoin)
   ≡ Search.optionConeProbe
 reopenedSearchMeasurementRegression =
   Selective.reopenedJoinSearchSelectsAffordanceProbe
