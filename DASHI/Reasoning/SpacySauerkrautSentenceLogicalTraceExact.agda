@@ -116,20 +116,20 @@ patientFormula = Candidate.formula objectCandidate
 sentenceLogicalCandidate : Candidate.Formula
 sentenceLogicalCandidate =
   Candidate.existsF "e" "Event"
-    (reduceEvent Candidate.∧ (actorFormula Candidate.∧ patientFormula))
+    (Candidate._∧_
+      reduceEvent
+      (Candidate._∧_ actorFormula patientFormula))
 
 expectedDavidsonianReading : Candidate.Formula
 expectedDavidsonianReading =
   Candidate.existsF "e" "Event"
-    ( Candidate.atom "Reduce" (Candidate.eventTerm "reduce-e" ∷ [])
-      Candidate.∧
-      ( Candidate.atom "Actor"
-          (Candidate.eventTerm "reduce-e" ∷ Candidate.entityTerm "rawSauerkrautJuice" ∷ [])
-        Candidate.∧
-        Candidate.atom "Patient"
-          (Candidate.eventTerm "reduce-e" ∷ Candidate.entityTerm "glyphosateResidues" ∷ [])
-      )
-    )
+    (Candidate._∧_
+      (Candidate.atom "Reduce" (Candidate.eventTerm "reduce-e" ∷ []))
+      (Candidate._∧_
+        (Candidate.atom "Actor"
+          (Candidate.eventTerm "reduce-e" ∷ Candidate.entityTerm "rawSauerkrautJuice" ∷ []))
+        (Candidate.atom "Patient"
+          (Candidate.eventTerm "reduce-e" ∷ Candidate.entityTerm "glyphosateResidues" ∷ []))))
 
 sentenceLogicalCandidateHasExpectedShape :
   sentenceLogicalCandidate ≡ expectedDavidsonianReading
