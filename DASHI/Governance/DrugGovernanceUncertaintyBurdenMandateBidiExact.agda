@@ -2,6 +2,7 @@ module DASHI.Governance.DrugGovernanceUncertaintyBurdenMandateBidiExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Governance.OptionConeCoercionExact as OptionCone
 import DASHI.Governance.DrugGovernanceErrorAsymmetryBurdenAllocationExact as Burden
 import DASHI.Governance.DrugGovernanceErrorAsymmetryOptionConeExact as Cone
 import DASHI.Governance.DrugGovernanceRepairMandateGateExact as MandateGate
@@ -108,12 +109,12 @@ canonicalErrorBurdenBidi error =
 ------------------------------------------------------------------------
 
 punitiveRiskCanContractFutureHelpSeeking :
-  DASHI.Governance.OptionConeCoercionExact.StrictSafeReachabilityContraction
+  OptionCone.StrictSafeReachabilityContraction
     Cone.reachability Cone.baselineWorld Cone.punitiveErrorWorld
 punitiveRiskCanContractFutureHelpSeeking = Cone.punitiveErrorContractsHelpSeeking
 
 sovereigntyRiskCanContractCeremonialGovernance :
-  DASHI.Governance.OptionConeCoercionExact.StrictSafeReachabilityContraction
+  OptionCone.StrictSafeReachabilityContraction
     Cone.reachability Cone.baselineWorld Cone.sovereigntyOverrideWorld
 sovereigntyRiskCanContractCeremonialGovernance =
   Cone.sovereigntyOverrideContractsGovernance
