@@ -11,8 +11,8 @@ import DASHI.Reasoning.ComparativeInstitutionalMeaningExact as Comparative
 --
 -- A structural interpretation becomes experimentally useful when we can name
 -- a prospective observation that separates institutional worlds which are
--- currently collapsed by the existing observer.  This does not itself prove
--- the structural interpretation; it identifies a measurement/design capable of
+-- currently collapsed by the existing observer. This does not itself prove the
+-- structural interpretation; it identifies a measurement/design capable of
 -- reducing that ambiguity.
 ------------------------------------------------------------------------
 
@@ -23,16 +23,21 @@ record InstitutionalComparisonProblem : Set₁ where
     ExistingObservation : Set
     existingObserve : World → ExistingObservation
     actual alternative : World
-    currentCollision :
-      Discriminator.CurrentObserverCollision existingObserve
-    actualIsCollisionLeft :
-      Discriminator.left currentCollision ≡ actual
-    alternativeIsCollisionRight :
-      Discriminator.right currentCollision ≡ alternative
+    currentlyCollapsed :
+      existingObserve actual ≡ existingObserve alternative
     structuralReference : String
     matchingReference : String
 
 open InstitutionalComparisonProblem public
+
+comparisonCollision :
+  (problem : InstitutionalComparisonProblem) →
+  Discriminator.CurrentObserverCollision (existingObserve problem)
+comparisonCollision problem =
+  Discriminator.currentObserverCollision
+    (actual problem)
+    (alternative problem)
+    (currentlyCollapsed problem)
 
 record InstitutionalDiscriminator
     (problem : InstitutionalComparisonProblem) : Set₁ where
@@ -57,26 +62,9 @@ asLanguageExtension :
     (existingObserve problem)
 asLanguageExtension {problem} discriminator =
   Discriminator.discriminatingLanguageExtension
-    (currentCollision problem)
+    (comparisonCollision problem)
     (bundle discriminator)
-    separator
-  where
-    separator :
-      Discriminator.BundleSeparates
-        (bundle discriminator)
-        (Discriminator.left (currentCollision problem))
-        (Discriminator.right (currentCollision problem))
-    separator = record
-      { separates = λ same →
-          Discriminator.separates (separatesWorlds discriminator)
-            (subst₂
-              (λ left right →
-                Discriminator.observe (bundle discriminator) left
-                ≡ Discriminator.observe (bundle discriminator) right)
-              (sym (actualIsCollisionLeft problem))
-              (sym (alternativeIsCollisionRight problem))
-              same)
-      }
+    (separatesWorlds discriminator)
 
 ------------------------------------------------------------------------
 -- Candidate study kinds remain design classes, not evidence by themselves.
