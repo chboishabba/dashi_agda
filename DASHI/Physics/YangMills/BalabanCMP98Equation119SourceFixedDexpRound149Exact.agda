@@ -13,6 +13,7 @@ import DASHI.Physics.YangMills.BalabanCMP98MultiscaleAveragingDerivativeRound126
 import DASHI.Physics.YangMills.BalabanCMP98Equation119OneStepDerivativeRound146Exact as R146
 import DASHI.Physics.YangMills.BalabanCMP98Equation119LiteralPathRound147Exact as R147
 import DASHI.Physics.YangMills.BalabanCMP98Equation119DexpReuseRound148Exact as R148
+import DASHI.Physics.YangMills.BalabanCMP109LeftRightInverseDexpCancellationExact as LR
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredOddBlockCarrierExact as Centered
 
 -- Round147 deliberately exposes four Lie-calculus fields so its path theorem is
@@ -112,18 +113,28 @@ sourceFixedPointAdjointIsExistingAdjointExp :
   ≡ R148.pointAdjointExp convention step point vector
 sourceFixedPointAdjointIsExistingAdjointExp pathData convention step point vector = refl
 
+-- This is the nontrivial cancellation actually used by the source convention.
+-- Because Round149 forces the Round147 fields to the Round148 projections, the
+-- RHS is literally the inverse-dexp operator consumed by the Eq. (119) term.
 sourceFixedOppositeTrivialisationCancellation :
   ∀ {C n Value group}
     (pathData : R147.LiteralEquation119PathData C n Value group)
     (convention : R148.CMP98Equation119DexpConvention
       (R126.Vector (R146.additive C)))
-    step point vector →
-  R148.pointAdjointExp convention step point vector
-  ≡ R148.pointAdjointExp convention step point vector
-sourceFixedOppositeTrivialisationCancellation pathData convention step point vector = refl
+    step (point : Centered.CenteredBlockPoint4 6) vector →
+  LR.Jplus (R148.atPoint convention step point)
+    (R147.adjointExpAt
+      (withExistingDexpFamily pathData convention) step point vector)
+  ≡ R147.inverseDexpMinusAt
+      (withExistingDexpFamily pathData convention) step point vector
+sourceFixedOppositeTrivialisationCancellation pathData convention step point =
+  R148.pointOppositeTrivialisationCancels convention step point
 
 cmp98Equation119SourceFixedDexpCompilerRound149Level : ProofLevel
 cmp98Equation119SourceFixedDexpCompilerRound149Level = machineChecked
+
+cmp98Equation119SourceFixedCancellationRound149Level : ProofLevel
+cmp98Equation119SourceFixedCancellationRound149Level = machineChecked
 
 -- Strongest remaining A1 source leaves after R149:
 --   * identify the printed CMP98 Y/Y_x trivialisation with the existing Dexp
