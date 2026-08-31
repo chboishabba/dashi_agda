@@ -9,6 +9,7 @@ FILES=(
   DASHI/Reasoning/AristotleExperimentalBranchMergeExact.agda
   DASHI/Analysis/RiemannAristotlePoleQuotientLeanReturn8889Exact.agda
   DASHI/Analysis/RiemannAristotleExperimentalProofSearchExact.agda
+  DASHI/Analysis/RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact.agda
   DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerExact.agda
   DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerRegression.agda
   DASHI/Reasoning/AristotleExperimentalProofSearchValidation.agda
