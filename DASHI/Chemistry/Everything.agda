@@ -38,3 +38,7 @@ import DASHI.Chemistry.CarbonBackboneReachableChemistryConeExact
 -- Ocean biogeochemistry lane: salinity, temperature, CO2/carbonate chemistry,
 -- oxygen and nutrient state remain separate coordinates for ecological use.
 import DASHI.Chemistry.OceanCarbonateSaltTemperatureStressBidiExact
+
+-- Deep-time carbon-cycle balance: explicit atmosphere/ocean/biosphere/
+-- sediment/fossil reservoirs, transfer conservation and residence-time receipts.
+import DASHI.Chemistry.DeepTimeCarbonReservoirFluxBalanceExact
