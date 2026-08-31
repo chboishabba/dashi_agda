@@ -4,7 +4,9 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.IrigarayLabialRelationalCarrierExact as Irigaray
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.LacanIrigarayTernaryGrammarBridgeExact as LI
+import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact as Subject
 import DASHI.Core.TernaryRoleCarrierExact as Ternary
 import DASHI.Reasoning.PNFZizekOperator as Zizek
 import DASHI.Reasoning.SpacyDependencyToCandidateLogicalPNFExact as Candidate
@@ -37,11 +39,11 @@ data ResidualDemand : Set where
   : ResidualDemand
 
 auditDemand : CriticalAuditLens → ResidualDemand
- auditDemand parserScopeAudit = moreScopeEvidence
- auditDemand lacanianClosureResidualAudit = inspectMasterPredicateAndExcludedResidual
- auditDemand feministSubjectPositionAudit = addOriginatingSubjectPosition
- auditDemand irigarayanReciprocalRelationAudit = inspectReciprocalNonSovereignRelation
- auditDemand intersectionalMissingCoordinateAudit = addIntersectingSituatedCoordinate
+auditDemand parserScopeAudit = moreScopeEvidence
+auditDemand lacanianClosureResidualAudit = inspectMasterPredicateAndExcludedResidual
+auditDemand feministSubjectPositionAudit = addOriginatingSubjectPosition
+auditDemand irigarayanReciprocalRelationAudit = inspectReciprocalNonSovereignRelation
+auditDemand intersectionalMissingCoordinateAudit = addIntersectingSituatedCoordinate
 
 record MaterialisedSpacyCriticalAudit (lens : CriticalAuditLens) : Set₁ where
   constructor materialisedSpacyCriticalAudit
@@ -137,9 +139,13 @@ lacanIrigaraySharedCarrierStillDoesNotIdentifyGrammar :
 lacanIrigaraySharedCarrierStillDoesNotIdentifyGrammar =
   LI.noTernaryRelabellingPreservesGrammar
 
+feministSubjectPositionStillDoesNotDescendThroughParser :
+  INF.FactorsThrough Consumer.parserSemanticSurface Consumer.subjectPositionResidual → ⊥
 feministSubjectPositionStillDoesNotDescendThroughParser =
   Consumer.parserSurfaceCannotRecoverSubjectPosition
 
+feministSubjectPositionStillDoesNotDescendThrough369 :
+  INF.FactorsThrough Consumer.dialectic369Surface Consumer.subjectPositionResidual → ⊥
 feministSubjectPositionStillDoesNotDescendThrough369 =
   Consumer.chart369CannotRecoverSubjectPosition
 
