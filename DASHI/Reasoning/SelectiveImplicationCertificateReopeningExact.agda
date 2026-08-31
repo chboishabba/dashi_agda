@@ -6,9 +6,16 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.AffectedDependencyClosureExact as Dependency
 import DASHI.Core.AdaptiveConsumerModelLoopExact as Adaptive
 import DASHI.Reasoning.LogicalConsequenceDerivationPathExact as Path
+import DASHI.Reasoning.SemanticLogicalSelectiveReopeningExact as Canonical
 
 ------------------------------------------------------------------------
 -- CHANGED DERIVATION EDGE -> AFFECTED CONSEQUENCE/CONE CERTIFICATES
+--
+-- The inner semantic -> PNF -> logical -> cone reopening remains owned by the
+-- canonical SemanticLogicalSelectiveReopeningExact module.  This owner extends
+-- that calculus with typed derivation-edge change receipts, residual/edge
+-- certificates, downstream cone consumers, and the AdaptiveConsumerModelLoop
+-- handoff.
 ------------------------------------------------------------------------
 
 data ImplicationArtifact : Set where
@@ -87,7 +94,7 @@ transitiveImplicationReopening reopening downstream =
     downstream
 
 ------------------------------------------------------------------------
--- Exact finite dependency fixture.
+-- Exact extended dependency fixture.
 ------------------------------------------------------------------------
 
 data CanonicalDepends : ImplicationArtifact → ImplicationArtifact → Set where
@@ -111,7 +118,7 @@ data CanonicalDepends : ImplicationArtifact → ImplicationArtifact → Set wher
 canonicalDependencyGraph : ImplicationDependencyGraph
 canonicalDependencyGraph = implicationDependencyGraph
   CanonicalDepends
-  "semantic -> PNF -> logical -> empirical/residual -> edge -> cone -> consumer reverse dependency graph"
+  "extends canonical semantic/logical reopening with empirical residual, edge, cone and consumer certificates"
 
 semanticChange : ChangedDerivationArtifact
 semanticChange = changedDerivationArtifact
@@ -177,6 +184,39 @@ semanticChangeReopensConsumerUseTransitively =
     coneToConsumerObligation
 
 ------------------------------------------------------------------------
+-- Canonical-inner / extended-outer weld.
+------------------------------------------------------------------------
+
+record CanonicalExtendedReopeningReceipt : Set where
+  constructor canonicalExtendedReopeningReceipt
+  field
+    canonicalReasoningConeReopening :
+      Dependency.ReopeningObligation
+        Canonical.Depends
+        Canonical.semanticResolutionCertificate
+        Canonical.implicationConeCertificate
+    extendedConeReopening :
+      Dependency.ReopeningObligation
+        CanonicalDepends
+        semanticResolutionArtifact
+        downstreamConeCertificate
+    extendedConsumerReopening :
+      Dependency.ReopeningObligation
+        CanonicalDepends
+        semanticResolutionArtifact
+        consumerUseCertificate
+    weldReference : String
+
+open CanonicalExtendedReopeningReceipt public
+
+canonicalExtendedReopening : CanonicalExtendedReopeningReceipt
+canonicalExtendedReopening = canonicalExtendedReopeningReceipt
+  Canonical.semanticChangeReopensImplicationCone
+  semanticChangeReopensConeTransitively
+  semanticChangeReopensConsumerUseTransitively
+  "canonical semantic/logical reopening retained; extended layer adds residual/edge/consumer reachability"
+
+------------------------------------------------------------------------
 -- Staleness is reopening, not automatic refutation or global invalidation.
 ------------------------------------------------------------------------
 
@@ -189,6 +229,9 @@ reopenedNotRefuted ()
 record SelectiveImplicationReopeningBoundary : Set where
   constructor selectiveImplicationReopeningBoundary
   field
+    canonicalSemanticLogicalReopeningIsReused : Bool
+    canonicalSemanticLogicalReopeningIsReusedIsTrue :
+      canonicalSemanticLogicalReopeningIsReused ≡ true
     changedSemanticEdgeCanReopenDownstreamConeTransitively : Bool
     changedSemanticEdgeCanReopenDownstreamConeTransitivelyIsTrue :
       changedSemanticEdgeCanReopenDownstreamConeTransitively ≡ true
@@ -206,4 +249,4 @@ canonicalSelectiveImplicationReopeningBoundary :
   SelectiveImplicationReopeningBoundary
 canonicalSelectiveImplicationReopeningBoundary =
   selectiveImplicationReopeningBoundary
-    true refl false refl false refl true refl
+    true refl true refl false refl false refl true refl
