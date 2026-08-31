@@ -18,8 +18,7 @@ module DASHI.Moonshine.Base369Monster3BActualActionRecognitionBidiExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Fin.Base using (Fin)
-open import Data.Product using (_×_)
-open import DASHI.Algebra.Trit using (Trit)
+open import Data.Product using (_×_; proj₁)
 
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Moonshine.Monster3BCentralCharacterInertiaExact as Inertia
@@ -98,7 +97,7 @@ modulationExponentIntertwining :
   (state : chosenZetaSector source) →
   Actual.actualModulationExponent (recognition source) axis state
   ≡ Base369.base369ModulationExponent axis
-      (Data.Product.proj₁ (actualSectorToBase369 source state))
+      (proj₁ (actualSectorToBase369 source state))
 modulationExponentIntertwining source =
   Base369.actualModulationExponentIntertwinesBase369 (recognition source)
 
