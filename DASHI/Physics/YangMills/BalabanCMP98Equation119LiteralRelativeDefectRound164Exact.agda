@@ -34,9 +34,10 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
 open import Data.List.Base using (_++_)
-open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+open import Data.Nat.Base using (_≤_; _+_; z≤n; s≤s)
 import Data.Nat.Properties as ℕP
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_; _/_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_; _/_)
+open Data.Rational.Base using () renaming (_+_ to _+ℚ_; _-_ to _-ℚ_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -49,6 +50,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as B
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredPeriodicEmbeddingExact as Embed
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredOddBlockCarrierExact as Centered
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109PeriodicContourFamilyInstantiationExact as Periodic
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109ShortestContourEnumerationExact as Contours
 import DASHI.Physics.YangMills.BalabanCMP98UnitaryOperatorDefectTelescopeExact as Telescope
 import DASHI.Physics.YangMills.BalabanCMP98MinimalContourSourceChartBudgetExact as Budget
 import DASHI.Physics.YangMills.BalabanCMP98SelectedSourceChartFromDefectExact as Chart
@@ -109,10 +111,6 @@ record LiteralRelativeDefectInputs
 
 open LiteralRelativeDefectInputs public
 
-------------------------------------------------------------------------
--- The canonical L=13 geometry gives the 74-link bound, with no new receipt.
-------------------------------------------------------------------------
-
 coarseWordLengthIs13 :
   ∀ {C n Value group}
     (source : R158.CanonicalL13Equation119Source C n Value group)
@@ -127,8 +125,6 @@ coarseWordLengthIs13 source step =
       (R152.coarseSegment (R158.asRound152Source source) step))
     (cong Contours.count
       (R158.round152CoarseSegmentCountIsL source step))
-  where
-    import DASHI.Physics.YangMills.BalabanClayGate4CMP109ShortestContourEnumerationExact as Contours
 
 literalGammaLengthAtMost61 :
   ∀ {C n Value group}
@@ -204,11 +200,6 @@ relativeClosedWordLengthAtMost74 source inputs step point =
     (sym (appendLength gamma (R155.reverseWord coarse)))
     sumBound
 
-------------------------------------------------------------------------
--- Direct pathHolonomy telescope.  This is the cross-pollinated version of the
--- existing finite-sum argument, specialized to the ACTUAL traversed links.
-------------------------------------------------------------------------
-
 pathHolonomyDefectBelowLengthBudget :
   ∀ {C n Value group}
     (source : R158.CanonicalL13Equation119Source C n Value group)
@@ -248,14 +239,14 @@ pathHolonomyDefectBelowLengthBudget source inputs step site
       Telescope.defect (kernel inputs)
         (Telescope.multiply (kernel inputs) head tail)
       ≤ Telescope.defect (kernel inputs) head
-        + Telescope.defect (kernel inputs) tail
+        +ℚ Telescope.defect (kernel inputs) tail
     productBound = Telescope.productDefectTriangle (kernel inputs) head tail
 
     headTailBound :
       Telescope.defect (kernel inputs) head
-        + Telescope.defect (kernel inputs) tail
+        +ℚ Telescope.defect (kernel inputs) tail
       ≤ Budget.perLinkDefectMajorant
-        + Sums.natAsRational bound * Budget.perLinkDefectMajorant
+        +ℚ (Sums.natAsRational bound * Budget.perLinkDefectMajorant)
     headTailBound = ℚP.+-mono-≤
       (orientedLinkDefectSmall inputs step site direction)
       (pathHolonomyDefectBelowLengthBudget
@@ -298,7 +289,7 @@ relativeLinkBudgetInsideSourceThreshold :
   relativeLinkBudget ≤ Chart.sourceDefectThreshold
 relativeLinkBudgetInsideSourceThreshold =
   ℚP.<⇒≤
-    (ℚP.positive⁻¹ (Chart.sourceDefectThreshold - relativeLinkBudget))
+    (ℚP.positive⁻¹ (Chart.sourceDefectThreshold -ℚ relativeLinkBudget))
 
 literalRelativeClosedPathDefectBelowSourceThreshold :
   ∀ {C n Value group}
