@@ -1,6 +1,7 @@
 module DASHI.Culture.RastafariItalGovernedLineageCrossPollinationExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 
 import DASHI.Core.GovernedObservationProvenanceExact as Governed
 import DASHI.Culture.RastafariItalMaterialProvenanceConservationExact as Material
