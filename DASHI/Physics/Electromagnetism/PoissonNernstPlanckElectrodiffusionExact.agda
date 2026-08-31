@@ -37,15 +37,6 @@ record IonicSpeciesState : Set₁ where
 
 open IonicSpeciesState public
 
-------------------------------------------------------------------------
--- Core Nernst-Planck split: diffusion + electric migration.
---
--- We deliberately keep the spatial differential operator and scalar arithmetic
--- behind an application-supplied FluxCarrier.  The exported flux itself is
--- nonetheless dimensioned as mol m^-2 s^-1, and a concrete instance must prove
--- that the total flux is the combination of the two source terms.
-------------------------------------------------------------------------
-
 record NernstPlanckFluxLaw
     (species : IonicSpeciesState)
     (field : EM.U1ElectromagneticFieldSocket) : Set₁ where
@@ -53,22 +44,17 @@ record NernstPlanckFluxLaw
   field
     CoupledState : Set
     FluxCarrier : Set
-
     speciesState : CoupledState → State species
     fieldState : CoupledState → EM.FieldState field
-
     diffusiveFlux : CoupledState → FluxCarrier
     electricMigrationFlux : CoupledState → FluxCarrier
     combineFlux : FluxCarrier → FluxCarrier → FluxCarrier
     totalFlux : CoupledState → FluxCarrier
-
     totalFluxDecomposition :
       (state : CoupledState) →
       totalFlux state
       ≡ combineFlux (diffusiveFlux state) (electricMigrationFlux state)
-
     molarFluxDensity : FluxCarrier → SI.Quantity SI.MolarFluxDensity (fluxScale species)
-
     concentrationGradientReference : String
     electrochemicalMigrationReference : String
     temperatureReference : String
@@ -76,14 +62,6 @@ record NernstPlanckFluxLaw
     validityRegimeReference : String
 
 open NernstPlanckFluxLaw public
-
-------------------------------------------------------------------------
--- Poisson/electrostatic coupling.
---
--- The strongest same-object weld available without inventing numeric field
--- arithmetic is to require the charge density produced from the ionic state to
--- equal the charge density carried by the electromagnetic field state.
-------------------------------------------------------------------------
 
 record PoissonChargeCoupling
     {species : IonicSpeciesState}
@@ -94,25 +72,15 @@ record PoissonChargeCoupling
     ionicChargeDensity :
       (state : CoupledState np) →
       SI.Quantity SI.ChargeDensity (EM.chargeDensityScale field)
-
     ionicAndFieldChargeDensityAgree :
       (state : CoupledState np) →
       ionicChargeDensity state
       ≡ EM.chargeDensity field (fieldState np state)
-
     poissonEquationReference : String
     permittivityModelReference : String
     boundaryConditionReference : String
 
 open PoissonChargeCoupling public
-
-------------------------------------------------------------------------
--- Moving-fluid extension.
---
--- Classical PNP electrodiffusion in a static solvent does not by itself supply
--- fluid advection. LES needs a separate weld when water, sap, cytoplasm,
--- extracellular fluid or another moving medium advects ions.
-------------------------------------------------------------------------
 
 record AdvectiveElectrodiffusionExtension
     {species : IonicSpeciesState}
@@ -123,24 +91,20 @@ record AdvectiveElectrodiffusionExtension
     FluidState : Set
     velocityScale : SI.DecimalScale
     velocity : FluidState → SI.Quantity SI.Velocity velocityScale
-
     ExtendedState : Set
     npState : ExtendedState → CoupledState np
     fluidState : ExtendedState → FluidState
-
     ExtendedFluxCarrier : Set
     electrodiffusiveFlux : ExtendedState → ExtendedFluxCarrier
     advectiveFlux : ExtendedState → ExtendedFluxCarrier
     combineExtendedFlux : ExtendedFluxCarrier → ExtendedFluxCarrier → ExtendedFluxCarrier
     totalExtendedFlux : ExtendedState → ExtendedFluxCarrier
-
     totalExtendedFluxDecomposition :
       (state : ExtendedState) →
       totalExtendedFlux state
       ≡ combineExtendedFlux
           (electrodiffusiveFlux state)
           (advectiveFlux state)
-
     fluidReductionReference : String
     commonSpaceTimeReference : String
     advectionValidationReference : String
@@ -149,16 +113,24 @@ open AdvectiveElectrodiffusionExtension public
 
 ------------------------------------------------------------------------
 -- Cross-domain applications share this physical seam, not one empirical model.
+-- Plant root transport and an electrically excitable plant membrane are kept
+-- distinct so root physiology cannot silently stand in for a trap action
+-- potential.
 ------------------------------------------------------------------------
 
 data ElectrodiffusionApplication : Set where
   neuronalMembrane
   genericCellMembrane
+  plantExcitableMembrane
   plantRootIonTransport
   fungalIonExchange
   soilPoreElectrochemistry
   aqueousEnvironmentalTransport
   : ElectrodiffusionApplication
+
+plantExcitableMembraneIsNotPlantRootTransport :
+  plantExcitableMembrane ≡ plantRootIonTransport → ⊥
+plantExcitableMembraneIsNotPlantRootTransport ()
 
 record ElectrodiffusionApplicationReceipt : Set₁ where
   constructor electrodiffusionApplicationReceipt
@@ -184,19 +156,15 @@ record PNPElectrodiffusionBoundary : Set where
     nernstEquationAloneIsNernstPlanckTransport : Bool
     nernstEquationAloneIsNernstPlanckTransportIsFalse :
       nernstEquationAloneIsNernstPlanckTransport ≡ false
-
     pnpAutomaticallySuppliesFluidAdvection : Bool
     pnpAutomaticallySuppliesFluidAdvectionIsFalse :
       pnpAutomaticallySuppliesFluidAdvection ≡ false
-
     onePNPParameterisationValidForAllApplications : Bool
     onePNPParameterisationValidForAllApplicationsIsFalse :
       onePNPParameterisationValidForAllApplications ≡ false
-
     sameSITypeImpliesSameConstitutiveParameter : Bool
     sameSITypeImpliesSameConstitutiveParameterIsFalse :
       sameSITypeImpliesSameConstitutiveParameter ≡ false
-
     pnpApplicationNeedsBoundaryAndValidationReceipts : Bool
     pnpApplicationNeedsBoundaryAndValidationReceiptsIsTrue :
       pnpApplicationNeedsBoundaryAndValidationReceipts ≡ true
