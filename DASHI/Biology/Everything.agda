@@ -211,3 +211,9 @@ import DASHI.Biology.CrossKingdomAnaestheticExcitabilityFlowBidiExact
 import DASHI.Biology.CrossKingdomAnaestheticMechanismFibreRefinementExact
 import DASHI.Biology.AnaestheticErrorBoundMechanismFibreMonotonicityExact
 import DASHI.Biology.AnaestheticObservationErrorProductRefinementExact
+
+------------------------------------------------------------------------
+-- Deep-time biogeochemistry: prebiotic/biosphere history -> fossil carbon ->
+-- industrial return to atmosphere/ocean -> multistressor ecological futures.
+import DASHI.Biology.DeepTimeCarbonBiosphereFossilFuelBidiExact
+import DASHI.Biology.ClimateCarryingCapacityDeepTimeCrossPollinationExact
