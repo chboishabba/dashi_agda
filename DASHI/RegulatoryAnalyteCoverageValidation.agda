@@ -1,5 +1,8 @@
 module DASHI.RegulatoryAnalyteCoverageValidation where
 
+import DASHI.Chemistry.TGO93PhEurPesticideMembershipExact
 import DASHI.Chemistry.RegulatoryAnalyteCoverageBidiExact
+import DASHI.Chemistry.AssayDetectionEnvelopeExact
+import DASHI.Chemistry.DefensiveRegulatoryAssayStressAuditExact
 import DASHI.Chemistry.RegulatoryAnalytePanelRefinementExact
 import DASHI.Chemistry.Everything
