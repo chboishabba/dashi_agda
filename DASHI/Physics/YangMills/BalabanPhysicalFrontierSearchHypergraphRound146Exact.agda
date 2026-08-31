@@ -4,14 +4,13 @@ module DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Ex
 ------------------------------------------------------------------------
 -- ROUND146: THE LIVE BALABAN SOURCE CUT AS AN ARISTOTLE-STYLE HYPERGRAPH
 --
--- Cross-pollination is structural only.  Aristotle's OR-state / AND-action
--- search semantics is reused, but no empirical claim about Aristotle search
--- quality or convergence is imported.
+-- Updated after the Round108 audit: density->BC1 action realization is an OR
+-- state with two genuinely different routes.  One goes directly through the
+-- beta-driven localized effective-action family; the other factors through the
+-- repository CombinedRG state trajectory.
 --
--- IMPORTANT: in Aristotle's semantics an action with `targets = []` is a
--- successful terminal proof.  Therefore unresolved physical source leaves are
--- deliberately represented by self-blocking routes below.  A future adapter may
--- add a genuinely terminal action only when it carries the exact source proof.
+-- Empty-target actions remain reserved for actual evidence-bearing terminal
+-- proofs.  Unresolved physical leaves self-block instead.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List; _∷_; [])
@@ -20,9 +19,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Reasoning.AristotleMCGSHypergraphExact as Aristotle
 
--- Exact remaining physical/source coordinates after the merged Round132--145
--- same-action compilation.
 data BalabanFrontierLeaf : Set where
+  densityActionRealization
+  round108SelectedPotentialMatchesBC1
   densityToCombinedRGState
   combinedRGStateToBC1Potential
   componentLocalizedD1ToPhysicalD1
@@ -34,10 +33,12 @@ data BalabanFrontierLeaf : Set where
   unifiedSectorStressRecovery
   : BalabanFrontierLeaf
 
--- Search actions are route/decomposition proposals, not theorem evidence.
 data BalabanFrontierRoute : Set where
-  realizeDensityAction
-  realizePotentialAction
+  directRound108ActionRoute
+  viaCombinedRGActionRoute
+  round108SourceMatchAction
+  realizeDensityStateAction
+  realizeStatePotentialAction
   componentD1Action
   assembleStressAction
   metricDomainAction
@@ -48,8 +49,11 @@ data BalabanFrontierRoute : Set where
   : BalabanFrontierRoute
 
 routeSource : BalabanFrontierRoute → BalabanFrontierLeaf
-routeSource realizeDensityAction = densityToCombinedRGState
-routeSource realizePotentialAction = combinedRGStateToBC1Potential
+routeSource directRound108ActionRoute = densityActionRealization
+routeSource viaCombinedRGActionRoute = densityActionRealization
+routeSource round108SourceMatchAction = round108SelectedPotentialMatchesBC1
+routeSource realizeDensityStateAction = densityToCombinedRGState
+routeSource realizeStatePotentialAction = combinedRGStateToBC1Potential
 routeSource componentD1Action = componentLocalizedD1ToPhysicalD1
 routeSource assembleStressAction = stressInsertionEqualsPhysicalD1Sum
 routeSource metricDomainAction = metricPerturbationAdmission
@@ -58,21 +62,27 @@ routeSource a2HistoryAction = a2CouplingToBetaHistory
 routeSource schwingerEndpointAction = cmp119FiniteMeasureSchwingerEndpoint
 routeSource closeUnifiedSectorAction = unifiedSectorStressRecovery
 
--- Self-targeting marks a source leaf as unresolved/nonterminal.  It prevents the
--- raw search graph from manufacturing `ActionProved` through Aristotle's empty-
--- target terminal rule.  The final unified-sector route is the useful AND node.
 routeTargets : BalabanFrontierRoute → List BalabanFrontierLeaf
-routeTargets realizeDensityAction = densityToCombinedRGState ∷ []
-routeTargets realizePotentialAction = combinedRGStateToBC1Potential ∷ []
+-- OR at densityActionRealization:
+routeTargets directRound108ActionRoute = round108SelectedPotentialMatchesBC1 ∷ []
+routeTargets viaCombinedRGActionRoute =
+  densityToCombinedRGState ∷ combinedRGStateToBC1Potential ∷ []
+
+-- Unresolved source leaves are nonterminal/self-blocking.
+routeTargets round108SourceMatchAction = round108SelectedPotentialMatchesBC1 ∷ []
+routeTargets realizeDensityStateAction = densityToCombinedRGState ∷ []
+routeTargets realizeStatePotentialAction = combinedRGStateToBC1Potential ∷ []
 routeTargets componentD1Action = componentLocalizedD1ToPhysicalD1 ∷ []
 routeTargets assembleStressAction = stressInsertionEqualsPhysicalD1Sum ∷ []
 routeTargets metricDomainAction = metricPerturbationAdmission ∷ []
 routeTargets a1HistoryAction = a1CouplingToBetaHistory ∷ []
 routeTargets a2HistoryAction = a2CouplingToBetaHistory ∷ []
 routeTargets schwingerEndpointAction = cmp119FiniteMeasureSchwingerEndpoint ∷ []
+
+-- Final AND node now needs the abstract action-realization state, not both of its
+-- alternative constructions simultaneously.
 routeTargets closeUnifiedSectorAction =
-  densityToCombinedRGState ∷
-  combinedRGStateToBC1Potential ∷
+  densityActionRealization ∷
   componentLocalizedD1ToPhysicalD1 ∷
   stressInsertionEqualsPhysicalD1Sum ∷
   metricPerturbationAdmission ∷
@@ -88,10 +98,29 @@ balabanFrontierHypergraph = record
   ; Aristotle.SearchHypergraph.targets = routeTargets
   }
 
+densityActionHasDirectRound108Route :
+  Aristotle.source balabanFrontierHypergraph directRound108ActionRoute
+  ≡ densityActionRealization
+densityActionHasDirectRound108Route = refl
+
+densityActionHasCombinedRGRoute :
+  Aristotle.source balabanFrontierHypergraph viaCombinedRGActionRoute
+  ≡ densityActionRealization
+densityActionHasCombinedRGRoute = refl
+
+directRound108RouteTargetsOnlySourceMatch :
+  Aristotle.targets balabanFrontierHypergraph directRound108ActionRoute
+  ≡ round108SelectedPotentialMatchesBC1 ∷ []
+directRound108RouteTargetsOnlySourceMatch = refl
+
+combinedRGRouteTargetsTwoSemanticLeaves :
+  Aristotle.targets balabanFrontierHypergraph viaCombinedRGActionRoute
+  ≡ densityToCombinedRGState ∷ combinedRGStateToBC1Potential ∷ []
+combinedRGRouteTargetsTwoSemanticLeaves = refl
+
 unifiedSectorRouteTargets :
   Aristotle.targets balabanFrontierHypergraph closeUnifiedSectorAction
-  ≡ densityToCombinedRGState ∷
-    combinedRGStateToBC1Potential ∷
+  ≡ densityActionRealization ∷
     componentLocalizedD1ToPhysicalD1 ∷
     stressInsertionEqualsPhysicalD1Sum ∷
     metricPerturbationAdmission ∷
@@ -99,12 +128,6 @@ unifiedSectorRouteTargets :
     a2CouplingToBetaHistory ∷
     cmp119FiniteMeasureSchwingerEndpoint ∷ []
 unifiedSectorRouteTargets = refl
-
--- Explicit regression against the accidental empty-target interpretation.
-realizeDensityRouteIsNotTerminal :
-  Aristotle.targets balabanFrontierHypergraph realizeDensityAction
-  ≡ densityToCombinedRGState ∷ []
-realizeDensityRouteIsNotTerminal = refl
 
 balabanPhysicalFrontierHypergraphLevel : ProofLevel
 balabanPhysicalFrontierHypergraphLevel = machineChecked
