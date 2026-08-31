@@ -6,6 +6,8 @@ import DASHI.Physics.YangMills.BalabanCMP98ClayBoundarySupersessionRound190Exact
 import DASHI.Physics.YangMills.BalabanCMP98BidiWallRound191Exact as R191
 import DASHI.Physics.YangMills.BalabanCMP98Path13PhysicalPeriodicRealizationRound192Exact as R192
 import DASHI.Physics.YangMills.BalabanCMP98Path13Equation119SourceRound193Exact as R193
+import DASHI.Physics.YangMills.BalabanRootedCoarseAnchoredOrbitSectionRound194Exact as R194
+import DASHI.Physics.YangMills.BalabanCMP109RootedEquation012OrbitSectionRound195Exact as R195
 
 round189PathHomomorphism = R189.cmp98RawUnitPathHomomorphismRound189Level
 round190BoundarySupersession = R190.cmp98ClayBoundarySupersessionRound190Level
@@ -29,12 +31,38 @@ round193Path13Equation119Source =
 round193PhysicalRealizationDerived =
   R193.cmp98Path13RealizationDerivedRound193Level
 
--- Current source leaves after specialization.
 round193OperatorSourceSemantics =
   R193.literalCMP98Path13OperatorSourceSemanticsRound193Level
 
 round193SelectedBackgroundCutWeld =
   R193.literalCMP98Path13SelectedBackgroundCutWeldRound193Level
 
--- Terminal theorem-bearing wall remains unchanged by the source specialization.
+-- Configuration-space cross-pollination.  R194 composes the actual rooted orbit
+-- section with generic coarse-anchored block-average covariance; R195 then uses
+-- the stronger source-exact CMP109 equation-(0.12) invariance theorem.
+round194RootedCoarseAnchoredOrbitSection =
+  R194.cmp98RootedCoarseAnchoredOrbitSectionRound194Level
+
+round194RootedOrbitUniqueness =
+  R194.cmp98RootedCoarseAnchoredOrbitUniquenessRound194Level
+
+round195RootedEquation012OrbitSection =
+  R195.cmp109RootedEquation012OrbitSectionRound195Level
+
+round195RootedEquation012MapPreservation =
+  R195.cmp109RootedEquation012MapPreservationRound195Level
+
+-- Current nonlinear same-object leaves.  These are operation-identification
+-- seams, not new gauge-section or block-average theorems.
+round195GaugeActionPhysical =
+  R195.literalCMP109Equation012GaugeActionPhysicalRound195Level
+
+round195CoarseEndpointsAreRoot =
+  R195.literalCMP109Equation012CoarseEndpointsAreRootRound195Level
+
+round195IdentityIsPhysicalUnit =
+  R195.literalCMP109Equation012IdentityIsPhysicalUnitRound195Level
+
+-- Terminal theorem-bearing wall remains unchanged by the source/configuration
+-- specialization.  Status-ledger booleans do not inhabit this theorem field.
 round191TerminalWall = R191.literalTerminalClayCompositionTheoremRound191Level
