@@ -7,11 +7,13 @@ import DASHI.Core.DiscriminatorSynthesisExact as Discriminator
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.PredictionEnvelopeExact as Envelope
 import DASHI.Core.SequentialConsumerExperimentPlannerExact as Planner
+import DASHI.Foundations.Base369Ternary27HypervoxelStratificationExact as Strata
 import DASHI.Governance.SexedHistoricalAssociatorSupportedReopeningExact as Supported
 import DASHI.Governance.SexedHistoricalDistributedCompatibilityReopeningExact as Distributed
 import DASHI.Governance.SexedHistoricalTransportedAssociatorSupportExact as Transported
 import DASHI.Governance.SexedHistoricalTransportedSupportDiscriminatorExact as SupportDiscriminator
 import DASHI.Governance.SexedHistoricalTransportedSupportConsumerClosureExact as ConsumerClosure
+import DASHI.Governance.SexedHistoricalStratifiedMultiConsumerClosureExact as Multi
 
 canonicalSupportHistoryRegression :
   Transported.SupportTransportPath
@@ -94,6 +96,40 @@ canonicalSequentialReopeningPlanRegression :
 canonicalSequentialReopeningPlanRegression =
   ConsumerClosure.canonicalReopeningPlan
 
+multiConsumerCentreStratumRegression :
+  Multi.consumerStratum Multi.reopeningPriorityConsumer ≡ Strata.centreStratum
+multiConsumerCentreStratumRegression = refl
+
+multiConsumerEdgeStratumRegression :
+  Multi.consumerStratum Multi.globalCompatibilityConsumer ≡ Strata.edgeCentreStratum
+multiConsumerEdgeStratumRegression = refl
+
+sharedProbeCoversCornerRegression :
+  Multi.CoversStratum
+    Multi.supportOrderSharedProbe
+    (Multi.consumerStratum Multi.futureCorridorConsumer)
+sharedProbeCoversCornerRegression =
+  Multi.sharedProbeCoversConsumer Multi.futureCorridorConsumer
+
+sharedProbeClosesGlobalCompatibilityRegression :
+  Discriminator.ProspectivelyClosesConsumer
+    ConsumerClosure.CompatibleSupportHistory
+    (Multi.consumerDecision Multi.globalCompatibilityConsumer)
+    SupportDiscriminator.supportOrderProbe
+sharedProbeClosesGlobalCompatibilityRegression =
+  Multi.supportOrderProbeClosesConsumer Multi.globalCompatibilityConsumer
+
+coarseEvidenceLeavesFutureCorridorOpenRegression :
+  Envelope.PointIdentifiable
+    ConsumerClosure.CompatibleSupportHistory
+    (Multi.consumerDecision Multi.futureCorridorConsumer)
+    ConsumerClosure.currentCoarseSupportEvidence → ⊥
+coarseEvidenceLeavesFutureCorridorOpenRegression =
+  Multi.coarseEvidenceLeavesConsumerOpen Multi.futureCorridorConsumer
+
+sharedStratifiedClosureRegression : Multi.SharedStratifiedClosure
+sharedStratifiedClosureRegression = Multi.canonicalSharedStratifiedClosure
+
 transportedSupportBoundaryRegression :
   Transported.TransportedAssociatorSupportBoundary
 transportedSupportBoundaryRegression =
@@ -108,3 +144,8 @@ supportConsumerClosureBoundaryRegression :
   ConsumerClosure.TransportedSupportConsumerClosureBoundary
 supportConsumerClosureBoundaryRegression =
   ConsumerClosure.canonicalTransportedSupportConsumerClosureBoundary
+
+stratifiedMultiConsumerClosureBoundaryRegression :
+  Multi.StratifiedMultiConsumerClosureBoundary
+stratifiedMultiConsumerClosureBoundaryRegression =
+  Multi.canonicalStratifiedMultiConsumerClosureBoundary
