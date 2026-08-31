@@ -2,7 +2,7 @@
 module DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionSourceSemanticsRound145Validation where
 
 ------------------------------------------------------------------------
--- Focused Round145--149 validation surface.
+-- Focused Round145--150 validation surface.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionSourceSemanticsRound145Exact
@@ -10,6 +10,7 @@ import DASHI.Physics.YangMills.BalabanCMP98Equation119OneStepDerivativeRound146E
 import DASHI.Physics.YangMills.BalabanCMP98Equation119LiteralPathRound147Exact as R147
 import DASHI.Physics.YangMills.BalabanCMP98Equation119DexpReuseRound148Exact as R148
 import DASHI.Physics.YangMills.BalabanCMP98Equation119SourceFixedDexpRound149Exact as R149
+import DASHI.Physics.YangMills.BalabanCMP98TranslatedCrossingFromCentreRound150Exact as R150
 
 round145ConstantMapAuditPresent = round132ConstantRepresentationAuditLevel
 round145SourceSemanticCompilerPresent = sourceSemanticRound132CompilerLevel
@@ -24,7 +25,7 @@ round146CMP98Equation119ToMultiscaleCompiler = R146.cmp98Equation119ToR126Compil
 round147LiteralR0PathCompiler = R147.cmp98Equation119LiteralR0PathCompilerRound147Level
 round147LiteralRadiusSixBlock = R147.cmp98Equation119RadiusSixFiniteBlockRound147Level
 round147ExactSiteWeight = R147.cmp98Equation119ExactWeightRound147Level
-round147TranslatedCrossingStillSourceOpen =
+round147TranslatedCrossingLegacySourceLevel =
   R147.literalCMP98TranslatedCrossingIdentificationRound147Level
 
 round148ExistingDexpReuse = R148.cmp98Equation119ExistingDexpReuseRound148Level
@@ -37,3 +38,8 @@ round149SourceFixedDexpCompiler = R149.cmp98Equation119SourceFixedDexpCompilerRo
 round149SourceFixedCancellation = R149.cmp98Equation119SourceFixedCancellationRound149Level
 round149PhysicalSourceIdentificationStillOpen =
   R149.literalCMP98Equation119SourceFixedDexpRound149Level
+
+round150PointwiseCrossingFromCentreCompiler =
+  R150.cmp98TranslatedCrossingFromCentreCompilerRound150Level
+round150PhysicalGeometryNowOneCentreCrossing =
+  R150.literalCMP98CoarseCentreCrossingIdentificationRound150Level
