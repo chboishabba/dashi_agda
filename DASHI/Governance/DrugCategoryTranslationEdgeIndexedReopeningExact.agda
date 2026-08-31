@@ -166,8 +166,9 @@ pathResidueBoundary = PathResidue.canonicalDrugCategoryTranslationPathResidueBou
 record DrugCategoryTranslationEdgeIndexedBoundary : Set where
   constructor drugCategoryTranslationEdgeIndexedBoundary
   field
-    occurrenceCreatesDependency : Bool
-    occurrenceCreatesDependencyIsTrue : occurrenceCreatesDependency ≡ true
+    edgeOccurrenceGeneratesDependency : Bool
+    edgeOccurrenceGeneratesDependencyIsTrue :
+      edgeOccurrenceGeneratesDependency ≡ true
     occurrenceReopensExactConsumer : Bool
     occurrenceReopensExactConsumerIsTrue : occurrenceReopensExactConsumer ≡ true
     sameDomainWithoutOccurrenceForcesReopening : Bool
