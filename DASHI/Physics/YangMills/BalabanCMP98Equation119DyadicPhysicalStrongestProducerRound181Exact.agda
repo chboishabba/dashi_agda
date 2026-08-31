@@ -22,6 +22,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as Lie
 import DASHI.Physics.YangMills.BalabanCMP98MultiscaleAveragingDerivativeRound126Exact as R126
+import DASHI.Physics.YangMills.BalabanCMP98Equation119YIndexedDexpRound154Exact as R154
 import DASHI.Physics.YangMills.BalabanCMP98Equation119CanonicalCoarseSegmentRound158Exact as R158
 import DASHI.Physics.YangMills.BalabanCMP98Equation119PhysicalPrincipalImageRound157Exact as R157
 import DASHI.Physics.YangMills.BalabanCMP98Equation119DifferentialDexpRound159Exact as R159
@@ -32,7 +33,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicPrintedPhysicalInstan
 
 existingFederbushLeftRightFamily :
   R177.ExistingFederbushConventionFamily →
-  R159.R154.UniformLeftRightDexpFamily Lie.SU2LieAlgebra
+  R154.UniformLeftRightDexpFamily Lie.SU2LieAlgebra
 existingFederbushLeftRightFamily family =
   R159.asUniformLeftRightDexpFamily
     (R177.asUniformAdjointDifferentialCalculus family)
@@ -72,9 +73,5 @@ dyadicPhysicalMultiscaleDerivative source inputs weld family =
 cmp98Equation119DyadicPhysicalStrongestProducerRound181Level : ProofLevel
 cmp98Equation119DyadicPhysicalStrongestProducerRound181Level = machineChecked
 
--- On this route the selected-cut threshold comparison disappears entirely.
--- The remaining physical seam is the same-object group equality already made
--- explicit in Round180, together with realization of the literal Eq119 source
--- field/coarse-bond coordinates by the existing dyadic physical object.
 literalCMP98DyadicRelativeSameObjectRound181Level : ProofLevel
 literalCMP98DyadicRelativeSameObjectRound181Level = conditional
