@@ -39,6 +39,7 @@ import DASHI.Physics.YangMills.BalabanCMP98Equation119DexpReuseRound148Exact as 
 import DASHI.Physics.YangMills.BalabanCMP98Equation119SourceFixedDexpRound149Exact as R149
 import DASHI.Physics.YangMills.BalabanCMP98TranslatedCrossingFromCentreRound150Exact as R150
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredPeriodicEmbeddingExact as Embed
+import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact as Word
 
 record CentreTranslatedCMP98Crossing {C n Value group}
@@ -47,7 +48,7 @@ record CentreTranslatedCMP98Crossing {C n Value group}
     commutation : Embed.PeriodicSegmentCommutation n
     direction : Nat → Word.SignedAxis4
     plusCentreIsOneCrossing : ∀ step →
-      R150.Bond.walkStep
+      Bond.walkStep
         (Embed.embeddingCentre (R147.minusEmbedding pathData step))
         (direction step)
       ≡ Embed.embeddingCentre (R147.plusEmbedding pathData step)
