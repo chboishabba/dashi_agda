@@ -13,6 +13,7 @@ import DASHI.Governance.SexedHistoricalBracketedMultiverseTSFVBridgeExact as Bra
 import DASHI.Governance.SexedHistoricalStratifiedCollectiveGluingExact as Gluing
 import DASHI.Governance.SexedHistoricalDistributedCompatibilityReopeningExact as Distributed
 import DASHI.Governance.SexedHistoricalCoalitionAssociatorYijingExact as Associator
+import DASHI.Governance.SexedHistoricalAssociatorSupportedReopeningExact as Supported
 
 productiveJoinNextHistoryRegression :
   INF.FactorsThrough Reopen.joinPresentSurface Reopen.nextContinuation → ⊥
@@ -153,6 +154,25 @@ coalitionAssociatorResidualRegression :
 coalitionAssociatorResidualRegression =
   Associator.canonicalCoalitionAssociator
 
+associatorSupportRegression : Supported.AssociatorSupportReceipt
+associatorSupportRegression = Supported.canonicalAssociatorSupport
+
+line1SupportedReopensCompatibilityRegression :
+  Dependency.ReopeningObligation
+    Distributed.Depends
+    (Supported.supportArtifact Supported.line1)
+    Distributed.globalCompatibilityCertificate
+line1SupportedReopensCompatibilityRegression =
+  Supported.line1ReopensGlobalCompatibility
+
+line4SupportedReopensFutureRegression :
+  Dependency.ReopeningObligation
+    Distributed.Depends
+    (Supported.supportArtifact Supported.line4)
+    Distributed.collectiveFutureConeCertificate
+line4SupportedReopensFutureRegression =
+  Supported.line4ReopensCollectiveFuture
+
 selectiveReopeningBoundaryRegression :
   Selective.SelectiveHistoricalReopeningBoundary
 selectiveReopeningBoundaryRegression =
@@ -177,6 +197,11 @@ coalitionAssociatorYijingBoundaryRegression :
   Associator.CoalitionAssociatorYijingBoundary
 coalitionAssociatorYijingBoundaryRegression =
   Associator.canonicalCoalitionAssociatorYijingBoundary
+
+associatorSupportedReopeningBoundaryRegression :
+  Supported.AssociatorSupportedReopeningBoundary
+associatorSupportedReopeningBoundaryRegression =
+  Supported.canonicalAssociatorSupportedReopeningBoundary
 
 canonicalSourceBoundaryRegression :
   Reopen.ReopenableSynthesisEndOfHistoryBoundary
