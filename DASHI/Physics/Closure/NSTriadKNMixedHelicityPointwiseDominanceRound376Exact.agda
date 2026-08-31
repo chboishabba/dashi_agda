@@ -7,10 +7,9 @@ module DASHI.Physics.Closure.NSTriadKNMixedHelicityPointwiseDominanceRound376Exa
 --
 --   Q_companion = 16 * Q_mixed.
 --
--- The remaining order fact is not a PDE theorem.  Q_mixed is literally a
--- finite sum of squared rational Complex3 norms, hence nonnegative.  Repeated
--- doubling gives q <= 16 q, and the R228 identity transports that inequality
--- to the physical companion mass.
+-- Q_mixed is literally a finite sum of squared rational Complex3 norms, hence
+-- nonnegative. Repeated doubling gives q <= 16 q, and the R228 identity then
+-- transports that finite-order fact to the physical companion mass.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -27,10 +26,10 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
+import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityCompanionMassRound226Exact as R226
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityGlobalCompanionRound227Exact as R227
 import DASHI.Physics.Closure.NSTriadKNMixedHelicitySpacetimeFrontierRound228Exact as R228
-import DASHI.Physics.Closure.NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact as R240
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -63,18 +62,15 @@ mapSumNonnegative f fNN (k ∷ ks) =
   Rational.addNonnegative (fNN k) (mapSumNonnegative f fNN ks)
 
 mixedOutputMassNonnegative :
-  ∀ {E I}
-    (S : _) (velocity : Z3.FourierMode → C3.Complex3 F)
-    (cutoff : Nat) (output : Z3.FourierMode) →
+  {E : C3.IntegerEmbedding F} →
+  {I : C3.ModeInverseSquare F E} →
+  (S : Helical.HelicalModeScalars F) →
+  (velocity : Z3.FourierMode → C3.Complex3 F) →
+  (cutoff : Nat) (output : Z3.FourierMode) →
   0ℚ ≤ R227.mixedOutputMass {E = E} {I = I} S velocity cutoff output
 mixedOutputMassNonnegative S velocity cutoff output =
   complex3NormSquaredNonnegative _
 
-mixedMassNonnegative :
-  (T : R228.PhysicalTimeIntegral _ _ .PhysicalMixedHelicityTrajectory) → Set
-mixedMassNonnegative T = Set
-
--- Pure ordered arithmetic: q >= 0 implies q <= 16 q.
 nonnegativeBelowSixteenCopies :
   (q : ℚ) → 0ℚ ≤ q → q ≤ R226.sixteen * q
 nonnegativeBelowSixteenCopies q qNN =
