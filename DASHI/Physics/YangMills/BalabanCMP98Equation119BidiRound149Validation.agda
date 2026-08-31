@@ -1,0 +1,10 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanCMP98Equation119BidiRound149Validation where
+
+import DASHI.Physics.YangMills.BalabanCMP98MultiscaleAveragingDerivativeRound126Exact
+import DASHI.Physics.YangMills.BalabanCMP98QPrimeToCMP99CPrimeRound127Exact
+import DASHI.Physics.YangMills.BalabanCMP109LeftRightInverseDexpCancellationExact
+import DASHI.Physics.YangMills.BalabanCMP98Equation119OneStepDerivativeRound146Exact
+import DASHI.Physics.YangMills.BalabanCMP98Equation119LiteralPathRound147Exact
+import DASHI.Physics.YangMills.BalabanCMP98Equation119DexpReuseRound148Exact
+import DASHI.Physics.YangMills.BalabanCMP98Equation119SourceFixedDexpRound149Exact
