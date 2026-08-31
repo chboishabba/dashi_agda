@@ -5,6 +5,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.DiscriminatorSynthesisExact as Discriminator
 import DASHI.Core.PredictionEnvelopeExact as Envelope
+import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact as Subject
 import DASHI.Core.SequentialConsumerExperimentPlannerExact as Sequential
 import DASHI.Reasoning.SemanticCandidateResidualBidiExact as Semantic
 import DASHI.Reasoning.SpacyDependencyToCandidateLogicalPNFExact as Candidate
@@ -24,10 +25,6 @@ import DASHI.Reasoning.SpacyNegatedCoordinationScopeTraceExact as Trace
 -- that consumer.  The bundles are finite DASHI information-design fixtures;
 -- they are not claims that a philosophical audit itself performs a laboratory
 -- measurement or that the parser already observed the missing coordinate.
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
--- 1. Semantic-scope evidence surface.
 ------------------------------------------------------------------------
 
 data ScopeEvidence : Set where
@@ -67,7 +64,7 @@ scopeSequentialPlan =
     scopeBundleClosesScopeConsumer
 
 ------------------------------------------------------------------------
--- 2. Already-closed operational consumer: no experiment is required.
+-- Already-closed operational consumer: no experiment is required.
 ------------------------------------------------------------------------
 
 operationalSequentialPlan :
@@ -78,8 +75,8 @@ operationalSequentialPlan =
   Sequential.closeConsumer Consumer.operationalConsumerClosedOnMaterialisedFibre
 
 ------------------------------------------------------------------------
--- 3. Subject-position information lives on a finer situated carrier.  The
---    parser/369 surface deliberately collides on represented/originating states.
+-- Subject-position information lives on a finer situated carrier.  The
+-- parser/369 surface deliberately collides on represented/originating states.
 ------------------------------------------------------------------------
 
 data SubjectEvidence : Set where
@@ -89,15 +86,14 @@ subjectCompatible :
   Envelope.Compatible SubjectEvidence Consumer.SituatedSpacyReading
 subjectCompatible initialSubjectEvidence state = ⊤
 
-subjectConsumer :
-  Consumer.SituatedSpacyReading → Consumer.Subject.SubjectPosition
+subjectConsumer : Consumer.SituatedSpacyReading → Subject.SubjectPosition
 subjectConsumer = Consumer.subjectPositionResidual
 
 subjectPositionBundle :
   Discriminator.ExperimentBundle Consumer.SituatedSpacyReading
 subjectPositionBundle =
   Discriminator.experimentBundle
-    Consumer.Subject.SubjectPosition
+    Subject.SubjectPosition
     Consumer.subjectPositionResidual
     2
     "critical-audit: acquire originating/represented subject-position evidence"
@@ -142,9 +138,9 @@ subjectPositionExtendsParserLanguage =
     subjectBundleSeparatesParserCollision
 
 ------------------------------------------------------------------------
--- 4. Audit lens -> information policy.  Closure/context/reciprocity/intersection
---    audits remain typed demands here; this owner does not invent observations
---    that the materialised corpus does not contain.
+-- Audit lens -> information policy.  Closure/context/reciprocity/intersection
+-- audits remain typed demands here; this owner does not invent observations
+-- that the materialised corpus does not contain.
 ------------------------------------------------------------------------
 
 data AuditInformationPolicy : Set where
@@ -176,10 +172,6 @@ closurePolicyDistinctFromReciprocalPolicy :
   policyForAudit Audit.lacanianClosureResidualAudit
   ≡ policyForAudit Audit.irigarayanReciprocalRelationAudit → ⊥
 closurePolicyDistinctFromReciprocalPolicy ()
-
-------------------------------------------------------------------------
--- 5. Cross-domain planning boundary.
-------------------------------------------------------------------------
 
 record Spacy369CriticalAuditDiscriminatorBoundary : Set where
   constructor spacy369CriticalAuditDiscriminatorBoundary
