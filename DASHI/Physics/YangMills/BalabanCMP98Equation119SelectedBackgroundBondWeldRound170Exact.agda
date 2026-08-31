@@ -27,6 +27,7 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119SelectedBackgroundBondWeld
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
+import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -56,8 +57,6 @@ record SelectedBackgroundBondWeld
       Variational.CoarseSmallField
         (Selected.variational bridge) (coarseAt step)
 
-    -- The crucial same-object statement: the stored positive bond traversed by
-    -- Eq. (119) IS the selected-background group element at that same bond.
     realizationBondIsSelected : ∀ step bond →
       Bond.bondField
         (R158.CanonicalL13Equation119Source.realization source step) bond
@@ -76,7 +75,6 @@ record SelectedBackgroundBondWeld
       Telescope.defect kernel (Bond.inverse group value)
       ≡ Telescope.defect kernel value
 
-    -- Same norm/defect, not merely comparable numerical bounds.
     kernelDefectIsSelectedDefect : ∀ value →
       Telescope.defect kernel value
       ≡ Path.defect (Selected.defectAlgebra bridge) value
@@ -166,7 +164,7 @@ selectedKernelDefectBelowPerLinkMajorant weld step bond =
         (sym (kernelDefectIsSelectedDefect weld selected))
         selectedBound
     finalSelected =
-      ℚ.≤-trans selectedKernelBound
+      ℚP.≤-trans selectedKernelBound
         (publishedUpperBelowPerLinkMajorant weld)
   in
   subst
@@ -199,9 +197,5 @@ asPositiveLinkDefectInputs source weld = record
 cmp98Equation119SelectedBackgroundBondWeldRound170Level : ProofLevel
 cmp98Equation119SelectedBackgroundBondWeldRound170Level = machineChecked
 
--- The former positive-link smallness receipt is gone.  The surviving
--- quantitative same-object seams are exactly: instantiate the selected
--- variational bridge on this periodic bond carrier, identify its defect with
--- the concrete operator kernel, and discharge the already-known scalar upper.
 literalCMP98SelectedVariationalBridgeInstantiationRound170Level : ProofLevel
 literalCMP98SelectedVariationalBridgeInstantiationRound170Level = conditional
