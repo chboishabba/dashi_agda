@@ -2,12 +2,6 @@ module DASHI.Moonshine.Monster3BFiniteSchrodingerFunctionModuleExact where
 
 ------------------------------------------------------------------------
 -- FINITE SCHRODINGER FUNCTION MODULE ON X6 = F3^6
---
--- This owner turns the generator-level Weyl model into an actual function
--- carrier V = X6 -> Q(zeta_3), with pointwise additive/scalar structure and
--- literal translation/modulation actions.  It deliberately does not yet
--- assert irreducibility: invariant-subspace projection and nonzero scalar
--- inversion remain separate theorem obligations.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -18,10 +12,6 @@ open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 import DASHI.Moonshine.C3CyclotomicAmplitudeAlgebraExact as C3
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Moonshine.Monster3BFiniteHeisenbergPermutationExact as Perm
-
-------------------------------------------------------------------------
--- 1. Exact additive/scalar structure on Q(zeta_3).
-------------------------------------------------------------------------
 
 addC3 : C3.Cyclotomic3 → C3.Cyclotomic3 → C3.Cyclotomic3
 addC3 (C3.cyclotomic3 a b) (C3.cyclotomic3 c d) =
@@ -38,12 +28,11 @@ phase zer = C3.one
 phase pos = C3.zeta
 phase neg = C3.zetaSquared
 
-------------------------------------------------------------------------
--- 2. Function carrier and pointwise module operations.
-------------------------------------------------------------------------
-
 SchrodingerFunction : Set
 SchrodingerFunction = H.X6 → C3.Cyclotomic3
+
+PointwiseEqual : SchrodingerFunction → SchrodingerFunction → Set
+PointwiseEqual f g = (x : H.X6) → f x ≡ g x
 
 zeroFunction : SchrodingerFunction
 zeroFunction x = C3.zero
@@ -57,10 +46,6 @@ scaleFunction r f x = scaleC3 r (f x)
 cyclotomicScaleFunction :
   C3.Cyclotomic3 → SchrodingerFunction → SchrodingerFunction
 cyclotomicScaleFunction a f x = C3.multiply a (f x)
-
-------------------------------------------------------------------------
--- 3. Literal translation and modulation actions.
-------------------------------------------------------------------------
 
 translationAction : H.Axis6 → SchrodingerFunction → SchrodingerFunction
 translationAction axis f x = f (H.translateInverse axis x)
@@ -76,10 +61,6 @@ translationActionInverse :
 translationActionInverse axis f x
   rewrite Perm.translateInverseAfterTranslate axis (H.translate axis x)
         | Perm.translateInverseAfterTranslate axis x = refl
-
-------------------------------------------------------------------------
--- 4. Delta-line carrier.
-------------------------------------------------------------------------
 
 tritEqual : Trit → Trit → Bool
 tritEqual neg neg = true
@@ -110,9 +91,10 @@ delta selected x with x6Equal selected x
 ... | false = C3.zero
 
 ------------------------------------------------------------------------
--- 5. Invariant-subspace interface.  This is a Q(zeta_3)-linear subspace,
--- not merely a rational subspace.  Arbitrary coordinate selectors are still
--- absent; later Fourier projector ownership must derive them from modulation.
+-- Invariant subspace interface.
+--
+-- Pointwise extensional closure is carried explicitly rather than assuming
+-- propositional function extensionality inside Agda.
 ------------------------------------------------------------------------
 
 record HeisenbergInvariantSubspace (Member : SchrodingerFunction → Set) : Set where
@@ -132,6 +114,8 @@ record HeisenbergInvariantSubspace (Member : SchrodingerFunction → Set) : Set 
     closedUnderModulation :
       (axis : H.Axis6) → (f : SchrodingerFunction) → Member f →
       Member (modulationAction axis f)
+    closedUnderPointwiseEquality :
+      (f g : SchrodingerFunction) → Member f → PointwiseEqual f g → Member g
 open HeisenbergInvariantSubspace public
 
 record SchrodingerFunctionModuleBoundary : Set where
@@ -139,6 +123,7 @@ record SchrodingerFunctionModuleBoundary : Set where
   field
     exactFunctionCarrierConstructed : Bool
     cyclotomicLinearSubspaceInterfaceConstructed : Bool
+    pointwiseExtensionalMembershipConstructed : Bool
     translationActionConstructed : Bool
     modulationActionConstructed : Bool
     modulationFourierProjectorsConstructedHere : Bool
@@ -148,4 +133,4 @@ open SchrodingerFunctionModuleBoundary public
 
 canonicalSchrodingerFunctionModuleBoundary : SchrodingerFunctionModuleBoundary
 canonicalSchrodingerFunctionModuleBoundary =
-  schrodingerFunctionModuleBoundary true true true true false false false
+  schrodingerFunctionModuleBoundary true true true true true false false false
