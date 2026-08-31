@@ -11,7 +11,7 @@ import DASHI.Reasoning.EvidenceDesignAdmissibilityExact as Design
 -- EXPERIMENTAL ASSERTION -> PNF -> DESIGN LOCATION -> IMPLICATION CONE
 --
 -- Natural-language extraction, logical normalisation, experimental placement
--- and downstream implication are distinct proof obligations.  This owner does
+-- and downstream implication are distinct proof obligations. This owner does
 -- not claim to implement a general NLP parser: compilation is receipt-bearing.
 ------------------------------------------------------------------------
 
@@ -41,7 +41,18 @@ record PNFCompilationReceipt
 open PNFCompilationReceipt public
 
 ------------------------------------------------------------------------
--- Each PNF atom is located in the experimental architecture.  One prose claim
+-- Proof-relevant list membership. A design placement must point to an atom
+-- actually present in the compiled PNF assertion, not merely repeat its label.
+------------------------------------------------------------------------
+
+infix 4 _∈_
+
+data _∈_ {A : Set} (x : A) : List A → Set where
+  here : ∀ {xs} → x ∈ (x ∷ xs)
+  there : ∀ {y xs} → x ∈ xs → x ∈ (y ∷ xs)
+
+------------------------------------------------------------------------
+-- Each PNF atom is located in the experimental architecture. One prose claim
 -- may therefore draw on several noninterchangeable design coordinates.
 ------------------------------------------------------------------------
 
@@ -61,10 +72,12 @@ data ExperimentalDesignSlot : Set where
   practicalSignificanceSlot
   : ExperimentalDesignSlot
 
-record PredicateDesignPlacement : Set where
+record PredicateDesignPlacement
+    (assertion : PNF.PredicateNormalAssertion) : Set where
   constructor predicateDesignPlacement
   field
     atom : PNF.PredicateAtom
+    atomInAssertion : atom ∈ PNF.predicates assertion
     slot : ExperimentalDesignSlot
     obligation : PNF.AssertionObligation
     designEvidence : Design.EvidenceForObligation
@@ -77,7 +90,7 @@ record AssertionDesignMap
   constructor assertionDesignMap
   field
     compilation : PNFCompilationReceipt source
-    placements : List PredicateDesignPlacement
+    placements : List (PredicateDesignPlacement (compiled compilation))
     designCoverageReference : String
     uncoveredObligationsReference : String
 
@@ -85,10 +98,6 @@ open AssertionDesignMap public
 
 ------------------------------------------------------------------------
 -- Implication cone.
---
--- `supportedEdge` is warranted at the declared scope; `qualifiedEdge` carries
--- a live residual/limitation; `blockedEdge` records an attempted promotion for
--- which the required design/evidence receipt is absent or inadmissible.
 ------------------------------------------------------------------------
 
 data ConeEdgeStatus : Set where
@@ -149,8 +158,7 @@ record ExperimentalImplicationCone
 open ExperimentalImplicationCone public
 
 ------------------------------------------------------------------------
--- Promotion boundary: a blocked edge cannot be relabelled as supported merely
--- because an upstream observational/result atom is discharged.
+-- Promotion boundary.
 ------------------------------------------------------------------------
 
 data BlockedPromotionReceipt : Set where
@@ -164,6 +172,9 @@ record ExperimentalAssertionConeBoundary : Set where
     naturalLanguageEqualsPNFByDefinition : Bool
     naturalLanguageEqualsPNFByDefinitionIsFalse :
       naturalLanguageEqualsPNFByDefinition ≡ false
+    placementMayNameAtomAbsentFromCompiledPNF : Bool
+    placementMayNameAtomAbsentFromCompiledPNFIsFalse :
+      placementMayNameAtomAbsentFromCompiledPNF ≡ false
     oneDischargedAtomClosesWholeAssertion : Bool
     oneDischargedAtomClosesWholeAssertionIsFalse :
       oneDischargedAtomClosesWholeAssertion ≡ false
@@ -183,6 +194,7 @@ record ExperimentalAssertionConeBoundary : Set where
 canonicalExperimentalAssertionConeBoundary : ExperimentalAssertionConeBoundary
 canonicalExperimentalAssertionConeBoundary =
   experimentalAssertionConeBoundary
+    false refl
     false refl
     false refl
     false refl
