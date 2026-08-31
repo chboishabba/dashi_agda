@@ -11,6 +11,7 @@ import DASHI.Core.AdaptiveConsumerModelLoopExact as Adaptive
 import DASHI.Core.ReopenableHypothesisForestExact as Forest
 import DASHI.Core.GovernedBackwardConsumerRevisionExact as Consumer
 import DASHI.Core.AffectedDependencyClosureExact as Dependency
+import DASHI.Core.HistoryConditionedChoiceExact as History
 
 ------------------------------------------------------------------------
 -- ACTIVE BIDI DISCRIMINATOR LOOP
@@ -44,6 +45,40 @@ data BidiPhase : Set where
   checkBackwardConsumer
   chooseNextMove
   : BidiPhase
+
+data BidiTransition : BidiPhase → BidiPhase → Set where
+  liveToCollision : BidiTransition liveHypotheses detectCollision
+  collisionToGenerate : BidiTransition detectCollision generateCandidateDiscriminator
+  generateToVerify : BidiTransition generateCandidateDiscriminator verifyDiscriminator
+  verifyToAuthority : BidiTransition verifyDiscriminator verifyInterventionAuthority
+  authorityToMeasurement : BidiTransition verifyInterventionAuthority executeMeasurement
+  measurementToAssimilation : BidiTransition executeMeasurement assimilateEvidence
+  assimilationToRefinement : BidiTransition assimilateEvidence refineLiveFibre
+  refinementToReopening : BidiTransition refineLiveFibre reopenAffectedCertificates
+  reopeningToConsumer : BidiTransition reopenAffectedCertificates checkBackwardConsumer
+  consumerToNext : BidiTransition checkBackwardConsumer chooseNextMove
+  nextToLive : BidiTransition chooseNextMove liveHypotheses
+
+data BidiPath : BidiPhase → BidiPhase → Set where
+  bidiDone : ∀ {phase} → BidiPath phase phase
+  bidiStep : ∀ {source middle target} →
+    BidiTransition source middle →
+    BidiPath middle target →
+    BidiPath source target
+
+canonicalOneIterationCycle : BidiPath liveHypotheses liveHypotheses
+canonicalOneIterationCycle =
+  bidiStep liveToCollision
+  (bidiStep collisionToGenerate
+  (bidiStep generateToVerify
+  (bidiStep verifyToAuthority
+  (bidiStep authorityToMeasurement
+  (bidiStep measurementToAssimilation
+  (bidiStep assimilationToRefinement
+  (bidiStep refinementToReopening
+  (bidiStep reopeningToConsumer
+  (bidiStep consumerToNext
+  (bidiStep nextToLive bidiDone))))))))))
 
 data CycleDisposition : Set where
   refineAgain
@@ -97,6 +132,9 @@ consumerBoundary = Consumer.canonicalGovernedBackwardConsumerBoundary
 dependencyBoundary : Dependency.DependencyClosureBoundary
 dependencyBoundary = Dependency.canonicalDependencyClosureBoundary
 
+historyBoundary : History.HistoryConditionedChoiceBoundary
+historyBoundary = History.canonicalHistoryConditionedChoiceBoundary
+
 ------------------------------------------------------------------------
 -- Exact inherited BIDI boundaries.
 ------------------------------------------------------------------------
@@ -133,6 +171,10 @@ dormantDoesNotMeanRefuted :
   Forest.inactiveDoesNotMeanRefuted forestBoundary ≡ true
 dormantDoesNotMeanRefuted = refl
 
+samePresentNeedNotFixHistorySensitiveChoice :
+  History.samePresentObservationImpliesSameChoice historyBoundary ≡ false
+samePresentNeedNotFixHistorySensitiveChoice = refl
+
 ------------------------------------------------------------------------
 -- Cross-domain boundary.
 ------------------------------------------------------------------------
@@ -164,6 +206,9 @@ record ActiveBidiDiscriminatorLoopBoundary : Set where
     consumerClosureMayPrecedeFullWorldIdentification : Bool
     consumerClosureMayPrecedeFullWorldIdentificationIsTrue :
       consumerClosureMayPrecedeFullWorldIdentification ≡ true
+    loopReturnsToLiveHypothesisPhase : Bool
+    loopReturnsToLiveHypothesisPhaseIsTrue :
+      loopReturnsToLiveHypothesisPhase ≡ true
     reading : String
 
 canonicalActiveBidiDiscriminatorLoopBoundary : ActiveBidiDiscriminatorLoopBoundary
@@ -177,4 +222,5 @@ canonicalActiveBidiDiscriminatorLoopBoundary =
     true refl
     true refl
     true refl
-    "BIDI is an active governed cycle: forward search generates hypotheses, discriminators and candidate interventions; backward consumers independently verify discrimination, authority, provenance, nuisance robustness and closure. Observations refine the live fibre, dependency-affected certificates reopen selectively, and the next experiment may depend on the realised history."
+    true refl
+    "BIDI is an active governed cycle: forward search generates hypotheses, discriminators and candidate interventions; backward consumers independently verify discrimination, authority, provenance, nuisance robustness and closure. Observations refine the live fibre, dependency-affected certificates reopen selectively, and the next experiment may depend on realised outcome and history before the cycle returns to the live-hypothesis frontier."
