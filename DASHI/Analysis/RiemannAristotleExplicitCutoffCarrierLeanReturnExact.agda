@@ -1,5 +1,35 @@
 module DASHI.Analysis.RiemannAristotleExplicitCutoffCarrierLeanReturnExact where
 
+------------------------------------------------------------------------
+-- CROSS-PROVER RETURN: EXPLICIT FAR-SHELL MODULUS + LITERAL D_off CUTOFF
+--
+-- The supplied 2026-08-30 Lean session reports a successful aggregate build
+-- (`lake build Zeta23Bridge`, 8883 jobs) containing three new modules:
+--
+--   FarShellCutoffTailBound.lean
+--   NearFarCarrierSplit.lean
+--   OffOrdinateCutoffCarrier.lean
+--
+-- The new machine-checked theorem surfaces include:
+--
+--   farShellBound A |t| J
+--     = 18 A log(|t|+4)/J + 72 A/sqrt(J),
+--
+--   tsum_tailTermFrom_le,
+--   farShellBound_tendsto_zero,
+--   exists_cutoff_tail_lt,
+--
+-- finite near carrier owners `nearFinset` / `nearOffFinset`, and the literal
+-- off-ordinate estimate
+--
+--   |D_off(g,t,r) - 1/2 * nearSignedSum(t,J)|
+--     <= 1/2 * C * farShellBound A |t| J.
+--
+-- This Agda module records provenance and theorem shape only.  Real log/sqrt
+-- expressions and Lean proof terms are not silently reimplemented in Rational
+-- arithmetic here.
+------------------------------------------------------------------------
+
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
@@ -10,11 +40,13 @@ record ExplicitCutoffCarrierLeanReturn : Set where
     farShellModule : String
     nearFarModule : String
     literalOffOrdModule : String
+
     leanKernelChecked : Bool
     leanKernelCheckedIsTrue : leanKernelChecked ≡ true
     aggregateBuildJobsReported : String
     axiomAuditStandardOnly : Bool
     axiomAuditStandardOnlyIsTrue : axiomAuditStandardOnly ≡ true
+
     explicitFarShellFormulaOwned : Bool
     explicitFarShellFormulaOwnedIsTrue : explicitFarShellFormulaOwned ≡ true
     explicitEveryCutoffBoundOwned : Bool
@@ -23,16 +55,21 @@ record ExplicitCutoffCarrierLeanReturn : Set where
     farShellTendsToZeroOwnedIsTrue : farShellTendsToZeroOwned ≡ true
     arbitraryAccuracyCutoffOwned : Bool
     arbitraryAccuracyCutoffOwnedIsTrue : arbitraryAccuracyCutoffOwned ≡ true
+
     finiteSignedNearCarrierOwned : Bool
     finiteSignedNearCarrierOwnedIsTrue : finiteSignedNearCarrierOwned ≡ true
     literalDoffCutoffTransportOwned : Bool
     literalDoffCutoffTransportOwnedIsTrue : literalDoffCutoffTransportOwned ≡ true
+
     leanProofTransportedIntoAgda : Bool
     leanProofTransportedIntoAgdaIsFalse : leanProofTransportedIntoAgda ≡ false
+
     finiteSignedNearCancellationClosed : Bool
-    finiteSignedNearCancellationClosedIsFalse : finiteSignedNearCancellationClosed ≡ false
+    finiteSignedNearCancellationClosedIsFalse :
+      finiteSignedNearCancellationClosed ≡ false
     riemannHypothesisDerived : Bool
     riemannHypothesisDerivedIsFalse : riemannHypothesisDerived ≡ false
+
     explicitFormula : String
     boundedReading : String
 
