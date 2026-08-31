@@ -2,7 +2,13 @@
 module DASHI.Physics.YangMills.BalabanConsumerWeightedFrontierPriorityRound150Exact where
 
 ------------------------------------------------------------------------
--- ROUND150: CONSUMER-WEIGHTED FRONTIER PRIORITY, NOT LEMMA COUNT
+-- ROUND150: CONSUMER-WEIGHTED FRONTIER PRIORITY, NOW ROUTE-AWARE
+--
+-- After the Round108 audit, the density/action state has two OR routes.  A
+-- single Round108 source-match leaf completes the direct route, while either
+-- CombinedRG semantic leaf alone does not complete the two-target fallback.
+-- The planning surface therefore must not score both fallback leaves as though
+-- each independently paid the whole downstream fan-out.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
@@ -16,6 +22,7 @@ import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Ex
 import DASHI.Physics.YangMills.BalabanFrontierExperimentDesignRound148Exact as R148
 
 data FrontierConsumer : Set where
+  densityActionConsumer
   a1PresentCutConsumer
   a2PresentCutConsumer
   bc1EffectiveActionConsumer
@@ -25,10 +32,21 @@ data FrontierConsumer : Set where
   : FrontierConsumer
 
 leafConsumers : R146.BalabanFrontierLeaf → List FrontierConsumer
-leafConsumers R146.densityToCombinedRGState =
-  bc1EffectiveActionConsumer ∷ bc2HeatDoobConsumer ∷ sectorStressConsumer ∷ qftgrStressConsumer ∷ []
-leafConsumers R146.combinedRGStateToBC1Potential =
-  bc1EffectiveActionConsumer ∷ bc2HeatDoobConsumer ∷ sectorStressConsumer ∷ qftgrStressConsumer ∷ []
+leafConsumers R146.densityActionRealization =
+  bc1EffectiveActionConsumer ∷ bc2HeatDoobConsumer ∷
+  sectorStressConsumer ∷ qftgrStressConsumer ∷ []
+
+-- One successful direct Round108 source match closes the one-target direct OR
+-- route and therefore inherits the whole downstream action-realization fan-out.
+leafConsumers R146.round108SelectedPotentialMatchesBC1 =
+  bc1EffectiveActionConsumer ∷ bc2HeatDoobConsumer ∷
+  sectorStressConsumer ∷ qftgrStressConsumer ∷ []
+
+-- Each fallback semantic leaf alone only contributes to the two-target
+-- CombinedRG route.  Neither individually owns the downstream BC1/stress fanout.
+leafConsumers R146.densityToCombinedRGState = densityActionConsumer ∷ []
+leafConsumers R146.combinedRGStateToBC1Potential = densityActionConsumer ∷ []
+
 leafConsumers R146.componentLocalizedD1ToPhysicalD1 =
   bc1EffectiveActionConsumer ∷ sectorStressConsumer ∷ qftgrStressConsumer ∷ []
 leafConsumers R146.stressInsertionEqualsPhysicalD1Sum =
@@ -50,13 +68,22 @@ listLength (_ ∷ xs) = suc (listLength xs)
 alphaScore : R146.BalabanFrontierLeaf → Nat
 alphaScore leaf = listLength (leafConsumers leaf)
 
-densityStateAlphaIsFour :
-  alphaScore R146.densityToCombinedRGState ≡ suc (suc (suc (suc zero)))
-densityStateAlphaIsFour = refl
+densityActionAlphaIsFour :
+  alphaScore R146.densityActionRealization ≡ suc (suc (suc (suc zero)))
+densityActionAlphaIsFour = refl
 
-statePotentialAlphaIsFour :
-  alphaScore R146.combinedRGStateToBC1Potential ≡ suc (suc (suc (suc zero)))
-statePotentialAlphaIsFour = refl
+directRound108MatchAlphaIsFour :
+  alphaScore R146.round108SelectedPotentialMatchesBC1
+  ≡ suc (suc (suc (suc zero)))
+directRound108MatchAlphaIsFour = refl
+
+combinedRGDensityStateAlphaIsOne :
+  alphaScore R146.densityToCombinedRGState ≡ suc zero
+combinedRGDensityStateAlphaIsOne = refl
+
+combinedRGStatePotentialAlphaIsOne :
+  alphaScore R146.combinedRGStateToBC1Potential ≡ suc zero
+combinedRGStatePotentialAlphaIsOne = refl
 
 componentD1AlphaIsThree :
   alphaScore R146.componentLocalizedD1ToPhysicalD1 ≡ suc (suc (suc zero))
@@ -82,13 +109,16 @@ record ConsumerWeightedPriorityBoundary : Set where
     highestFanoutAutomaticallyProvesLeaf : Bool
     highestFanoutAutomaticallyProvesLeafIsFalse :
       highestFanoutAutomaticallyProvesLeaf ≡ false
+    fallbackSubleafMayClaimWholeRouteFanoutAlone : Bool
+    fallbackSubleafMayClaimWholeRouteFanoutAloneIsFalse :
+      fallbackSubleafMayClaimWholeRouteFanoutAlone ≡ false
     mostExperimentsAutomaticallyMeansMostProgress : Bool
     mostExperimentsAutomaticallyMeansMostProgressIsFalse :
       mostExperimentsAutomaticallyMeansMostProgress ≡ false
 
 canonicalConsumerWeightedPriorityBoundary : ConsumerWeightedPriorityBoundary
 canonicalConsumerWeightedPriorityBoundary =
-  consumerWeightedPriorityBoundary false refl false refl
+  consumerWeightedPriorityBoundary false refl false refl false refl
 
 balabanConsumerWeightedFrontierPriorityLevel : ProofLevel
 balabanConsumerWeightedFrontierPriorityLevel = machineChecked
