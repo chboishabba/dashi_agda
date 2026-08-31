@@ -2,6 +2,7 @@ module DASHI.Analysis.RiemannAristotlePoleNearTranslationModulationBidiMeetingEx
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannAristotlePoleNearTranslationModulationIntertwinerExact as HT
 import DASHI.Analysis.RiemannAristotlePoleNearWindowRestrictionResidualExact as HW
@@ -33,7 +34,7 @@ record EarlyPoleNearBidiMeeting : Set₁ where
     -- being consumed.  No equality between unrelated proof objects is assumed;
     -- sharing H_T by dependency is the authority.
     sameHTFeedsBothRoutes : Set
-    meetingReference : Agda.Builtin.String.String
+    meetingReference : String
 
 open EarlyPoleNearBidiMeeting public
 
