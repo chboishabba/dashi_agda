@@ -20,14 +20,13 @@ module DASHI.Physics.YangMills.BalabanCMP98SelectedChartThresholdRecognitionRoun
 -- final consumer.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (_≤_)
-import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayGate4PrimaryQkFiniteKernelBudgetExact as Scale
 import DASHI.Physics.YangMills.BalabanClayGate4SU2PrincipalLogPathBoundExact as Path
+import DASHI.Physics.YangMills.BalabanClayGate4SU2PrincipalLogBallExact as Log
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationalChartBridgeExact as Selected
 import DASHI.Physics.YangMills.BalabanCMP98SelectedSourceChartFromDefectExact as Chart
 import DASHI.Physics.YangMills.BalabanCMP98UnitaryOperatorDefectTelescopeExact as Telescope
@@ -142,13 +141,11 @@ selectedThresholdImpliesPrincipalImage :
       (R168.asLiteralRelativeDefectInputs source
         (R170.asPositiveLinkDefectInputs source weld))) value
     ≤ Chart.sourceDefectThreshold →
-  Selected.principalChart (R170.bridge weld) |>
-    λ chart → DASHI.Physics.YangMills.BalabanClayGate4SU2PrincipalLogBallExact.InPrincipalImage chart value
+  Log.InPrincipalImage (Selected.principalChart (R170.bridge weld)) value
 selectedThresholdImpliesPrincipalImage {weld = weld} recognition value defectSmall =
   let
     bridge = R170.bridge weld
     cut = Selected.cutData bridge
-    selectedAlgebra = Selected.defectAlgebra bridge
 
     selectedBound =
       selectedDefectBelowSelectedChartRadius recognition value defectSmall
@@ -172,10 +169,6 @@ selectedThresholdImpliesPrincipalImage {weld = weld} recognition value defectSma
     (λ predicate → predicate value)
     (Selected.admissibleIsPrincipalImage bridge)
     admitted
-  where
-    infixl 0 _|>_
-    _|>_ : ∀ {A : Set} {B : A → Set} → (x : A) → ((y : A) → B y) → B x
-    x |> f = f x
 
 asDefectRecognizedPrincipalChart :
   ∀ {C n Value group CoarseField FineField}
