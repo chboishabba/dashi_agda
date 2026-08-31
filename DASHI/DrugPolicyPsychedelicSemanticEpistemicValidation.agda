@@ -3,6 +3,8 @@ module DASHI.DrugPolicyPsychedelicSemanticEpistemicValidation where
 import DASHI.Governance.DrugPolicyPsychedelicSemanticEpistemicEverything
 
 import DASHI.Core.AffectedDependencyClosureExact as Affected
+import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Choice
+import DASHI.Core.SequentialConsumerExperimentPlannerExact as Sequential
 import DASHI.Governance.ContestedDrugCategoryAtlasBidiExact as Atlas
 import DASHI.Governance.DrugCategoryMultiChartTranslationGeometryExact as Translation
 import DASHI.Governance.DrugCategoryTranslationSelectiveReopeningExact as TranslationReopen
@@ -135,14 +137,14 @@ subjectNonDescentSelectsSubjectRefinement =
   QuotientRefinement.canonicalSubjectRefinement
 
 subjectProbeIsDeclaredCheapestResolvingMove :
-  DASHI.Core.ActionabilityCostedExperimentChoiceExact.CheapestResolvingMove
+  Choice.CheapestResolvingMove
     CostedDiscriminator.subjectProblem
     CostedDiscriminator.DeclaredProbeMove
 subjectProbeIsDeclaredCheapestResolvingMove =
   CostedDiscriminator.subjectCheapestResolving
 
 subjectSelectedProbeClosesSubjectConsumer :
-  DASHI.Core.SequentialConsumerExperimentPlannerExact.SequentialConsumerPlan
+  Sequential.SequentialConsumerPlan
     AdaptiveLoop.subjectConsumer
     (AdaptiveLoop.allCompatible tt)
 subjectSelectedProbeClosesSubjectConsumer =
