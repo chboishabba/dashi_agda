@@ -73,8 +73,10 @@ record CertifiedNestedGain : Set where
 
 open CertifiedNestedGain public
 
--- Compiler form useful to forward producers: proving missing <= supplied is
--- enough; no mechanism-specific structure appears downstream.
+-- Forward producers may use this weaker comparison surface when convenient.
+-- The conversion from a dominance inequality to a subtraction inequality is
+-- deliberately left with the ordinary rational-order backend rather than
+-- guessed here under an unverified helper name.
 record GainDominatesResidual : Set where
   constructor gain-dominates-residual
   field
@@ -84,12 +86,6 @@ record GainDominatesResidual : Set where
     dominance : missingSquaredGain region shells ≤ suppliedSquaredGain
 
 open GainDominatesResidual public
-
-dominanceGivesNonpositiveResidual :
-  (D : GainDominatesResidual) →
-  missingSquaredGain (region D) (shells D) - suppliedSquaredGain D ≤ 0ℚ
-dominanceGivesNonpositiveResidual D =
-  ℚ.-≤0⇒≤ (dominance D)
 
 -- Orientation regression: swapping which physical leg carries the nested
 -- forcing swaps which shell is treated as low/high by the FL residual.
