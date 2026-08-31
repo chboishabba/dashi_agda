@@ -16,12 +16,9 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119PositiveCoarseBondSourceRo
 -- as `(site , axis)`.  Its orientation is positive by type and its axis is the
 -- second projection.  Therefore the strongest source should store the actual
 -- positive coarse bond and derive both Round158 fields.
---
--- The conversion below is only between the repository's kernel-visible
--- four-element axis carrier and the shortest-contour enumeration's four named
--- constructors.  It contains no physical choice.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
 
@@ -63,7 +60,6 @@ record PositiveCoarseBondEquation119Source
     minusEmbedding :
       Nat → Embed.CenteredPeriodicNoWrapEmbedding n R158.sourceRadius
 
-    -- The actual source coarse bond.  Positive orientation is in the type.
     coarseBond : Nat → Carrier.PositiveBond coarseSide
 
 open PositiveCoarseBondEquation119Source public
@@ -103,7 +99,7 @@ canonicalAxisIsPositiveBondAxis :
       C n coarseSide Value group) step →
   R158.coarseAxis (asCanonicalL13Equation119Source source) step
   ≡ carrierAxisToContourAxis (Carrier.second (coarseBond source step))
-canonicalAxisIsPositiveBondAxis source step = Agda.Builtin.Equality.refl
+canonicalAxisIsPositiveBondAxis source step = refl
 
 canonicalDirectionIsPositive :
   ∀ {C n coarseSide Value group}
@@ -111,7 +107,7 @@ canonicalDirectionIsPositive :
       C n coarseSide Value group) step →
   R158.coarseDirection (asCanonicalL13Equation119Source source) step
   ≡ Contours.positive
-canonicalDirectionIsPositive source step = Agda.Builtin.Equality.refl
+canonicalDirectionIsPositive source step = refl
 
 canonicalCoarseSegmentIsPositiveBondAxisL13 :
   ∀ {C n coarseSide Value group}
@@ -121,8 +117,7 @@ canonicalCoarseSegmentIsPositiveBondAxisL13 :
   ≡ R158.canonicalCoarseSegment
       (carrierAxisToContourAxis (Carrier.second (coarseBond source step)))
       Contours.positive
-canonicalCoarseSegmentIsPositiveBondAxisL13 source step =
-  Agda.Builtin.Equality.refl
+canonicalCoarseSegmentIsPositiveBondAxisL13 source step = refl
 
 cmp98Equation119PositiveCoarseBondSourceRound182Level : ProofLevel
 cmp98Equation119PositiveCoarseBondSourceRound182Level = machineChecked
@@ -130,8 +125,5 @@ cmp98Equation119PositiveCoarseBondSourceRound182Level = machineChecked
 cmp98Equation119CoarseAxisOrientationDerivedRound182Level : ProofLevel
 cmp98Equation119CoarseAxisOrientationDerivedRound182Level = machineChecked
 
--- The printed coarse-bond axis/orientation is no longer an independent source
--- seam on this path.  What remains is same-object realization of this positive
--- coarse bond and the existing dyadic physical transported-relative product.
 literalCMP98PositiveCoarseBondSameObjectRound182Level : ProofLevel
 literalCMP98PositiveCoarseBondSameObjectRound182Level = conditional
