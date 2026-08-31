@@ -6,6 +6,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 import DASHI.Reasoning.PredicateNormalFormEvidenceAuditExact as PNF
 import DASHI.Reasoning.ClaimAuditManifestExact as Manifest
 import DASHI.Reasoning.ClaimManifestExperimentConeBridgeExact as Bridge
+import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Cone
 import DASHI.Environment.GlyphosateSauerkrautAssertionPNFConeExact as Claim
 
 ------------------------------------------------------------------------
@@ -106,7 +107,7 @@ shioctonManifest = Manifest.manifestClaim
   "Measured decline is supported; RSKJ causal contribution is only bounded/qualified; full causal and specific LAB mechanism promotions remain blocked."
 
 shioctonManifestConeBridge :
-  Bridge.ManifestConeBridge Claim.shioctonManifest Claim.shioctonNaturalAssertion
+  Bridge.ManifestConeBridge shioctonManifest Claim.shioctonNaturalAssertion
 shioctonManifestConeBridge = Bridge.manifestConeBridge
   refl
   Claim.shioctonDesignMap
@@ -120,7 +121,7 @@ shioctonManifestConeBridge = Bridge.manifestConeBridge
 
 exactPublishedTextLinkedToCone :
   Manifest.exactPublishedText shioctonManifest
-  ≡ Claim.Cone.exactText Claim.shioctonNaturalAssertion
+  ≡ Cone.exactText Claim.shioctonNaturalAssertion
 exactPublishedTextLinkedToCone =
   Bridge.manifestExactTextReachesConeSource shioctonManifestConeBridge
 
