@@ -8,21 +8,21 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalR353ToR354Round374Exact where
 --   integral mixed <= integral physical companion,
 --   integral physical companion = R293 companion integral.
 --
--- A physical R353 family already owns integration monotonicity.  Therefore the
--- first endpoint theorem should not be supplied independently.  It follows
--- from pointwise mixed<=companion once the R353 companion and integration
--- operators are identified with the physical ones.
+-- A physical R353 family already owns integration monotonicity. Therefore the
+-- first endpoint inequality should not be an independent analytic theorem. It
+-- follows from a pointwise mixed<=R353-companion theorem plus endpoint receipts
+-- identifying R353 integration with the independently owned physical integral.
 --
--- This module keeps those same-object identifications explicit and derives the
--- exact R354 input record.  No new Package-A proxy is introduced.
+-- Function extensionality is deliberately NOT assumed: the integration model
+-- is opaque authority, so same-integration facts are stated exactly at the
+-- endpoints consumed downstream.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; _≤_)
-import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -51,20 +51,30 @@ module PhysicalR353ToR354
     field
       family : R353.SignedGramFluxFamilyInputs Nat Time
 
-      companionSameObject :
-        (N : Nat) (t : Time) →
-        R353.companionMass family N t
-        ≡ Base.companionMass (Dyn.forgetDynamics T) N t
-
-      integrationSameObject :
-        (f : Nat → Time → ℚ) (N : Nat) (terminal : Time) →
-        R353.integrateTo family f N terminal
-        ≡ integrateTo (f N) terminal
-
-      pointwiseMixedBelowCompanion :
+      -- Physical mixed mass is pointwise below the exact companion observable
+      -- consumed by this R353 family.
+      pointwiseMixedBelowFamilyCompanion :
         (N : Nat) (t : Time) →
         Dyn.mixedHelicityMass T N t
-        ≤ Base.companionMass (Dyn.forgetDynamics T) N t
+        ≤ R353.companionMass family N t
+
+      -- Same integration authority, stated only at the two endpoint integrals
+      -- actually needed by R354. No function extensionality is assumed.
+      physicalMixedIsFamilyMixedIntegral :
+        (N : Nat) (terminal : Time) →
+        integrateTo (Dyn.mixedHelicityMass T N) terminal
+        ≡ R353.integrateTo family
+            (λ cutoff time → Dyn.mixedHelicityMass T cutoff time)
+            N terminal
+
+      physicalCompanionIsFamilyCompanionIntegral :
+        (N : Nat) (terminal : Time) →
+        integrateTo
+          (Base.companionMass (Dyn.forgetDynamics T) N)
+          terminal
+        ≡ R353.integrateTo family
+            (R353.companionMass family)
+            N terminal
 
   open PhysicalR353Family public
 
@@ -73,116 +83,70 @@ module PhysicalR353ToR354
     (P : PhysicalR353Family T) →
     (N : Nat) (terminal : Time) →
     integrateTo (Dyn.mixedHelicityMass T N) terminal
-    ≤ integrateTo (Base.companionMass (Dyn.forgetDynamics T) N) terminal
+    ≤ integrateTo
+        (Base.companionMass (Dyn.forgetDynamics T) N)
+        terminal
   mixedIntegralBelowPhysicalCompanion T P N terminal =
     let
       F = family P
       mixed : Nat → Time → ℚ
       mixed cutoff time = Dyn.mixedHelicityMass T cutoff time
 
-      physicalCompanion : Nat → Time → ℚ
-      physicalCompanion cutoff time =
-        Base.companionMass (Dyn.forgetDynamics T) cutoff time
-
-      familyCompanion : Nat → Time → ℚ
-      familyCompanion = R353.companionMass F
-
-      mixedBelowFamilyCompanion :
-        (cutoff : Nat) (time : Time) →
-        mixed cutoff time ≤ familyCompanion cutoff time
-      mixedBelowFamilyCompanion cutoff time =
-        subst
-          (mixed cutoff time ≤_)
-          (sym (companionSameObject P cutoff time))
-          (pointwiseMixedBelowCompanion P cutoff time)
-
       familyIntegrated :
         R353.integrateTo F mixed N terminal
-        ≤ R353.integrateTo F familyCompanion N terminal
+        ≤ R353.integrateTo F (R353.companionMass F) N terminal
       familyIntegrated =
-        R353.integrationMonotone F mixed familyCompanion
-          mixedBelowFamilyCompanion N terminal
+        R353.integrationMonotone F mixed (R353.companionMass F)
+          (pointwiseMixedBelowFamilyCompanion P) N terminal
     in
     subst
-      (λ left → left ≤ integrateTo (physicalCompanion N) terminal)
-      (integrationSameObject P mixed N terminal)
+      (λ left →
+        left ≤ integrateTo
+          (Base.companionMass (Dyn.forgetDynamics T) N) terminal)
+      (sym (physicalMixedIsFamilyMixedIntegral P N terminal))
       (subst
         (λ right →
           R353.integrateTo F mixed N terminal ≤ right)
-        (trans
-          (integrationSameObject P familyCompanion N terminal)
-          (congIntegrand N terminal))
+        (sym (physicalCompanionIsFamilyCompanionIntegral P N terminal))
         familyIntegrated)
-    where
-    congIntegrand :
-      (N : Nat) (terminal : Time) →
-      integrateTo (R353.companionMass (family P) N) terminal
-      ≡ integrateTo (Base.companionMass (Dyn.forgetDynamics T) N) terminal
-    congIntegrand N terminal =
-      cong (λ g → integrateTo g terminal)
-        (funextTime (λ t → companionSameObject P N t))
-
-    postulate
-      funextTime :
-        {f g : Time → ℚ} →
-        ((t : Time) → f t ≡ g t) → f ≡ g
-
-  -- The equality above is intentionally the only place where function
-  -- extensionality would be needed if the integration operator is opaque.
-  -- To keep theorem authority clean, the production constructor below asks for
-  -- the endpoint-level same-integration receipt directly rather than exporting
-  -- the postulated helper.
-
-  record PhysicalR353EndpointTransport
-      (T : Dyn.PhysicalNSGalerkinTrajectory) : Set₁ where
-    field
-      physicalFamily : PhysicalR353Family T
-
-      mixedIntegralBelowCompanionIntegral :
-        (N : Nat) (terminal : Time) →
-        integrateTo (Dyn.mixedHelicityMass T N) terminal
-        ≤ integrateTo
-            (Base.companionMass (Dyn.forgetDynamics T) N)
-            terminal
-
-      physicalCompanionIsFamilyIntegral :
-        (N : Nat) (terminal : Time) →
-        integrateTo
-          (Base.companionMass (Dyn.forgetDynamics T) N)
-          terminal
-        ≡ R353.integrateTo
-            (family physicalFamily)
-            (R353.companionMass (family physicalFamily))
-            N terminal
-
-  open PhysicalR353EndpointTransport public
 
   physicalR353BuildsR354Inputs :
     (T : Dyn.PhysicalNSGalerkinTrajectory) →
-    PhysicalR353EndpointTransport T →
+    (P : PhysicalR353Family T) →
     Weld.R293PhysicalPackageAInputs T
   physicalR353BuildsR354Inputs T P = record
     { Weld.signedPayment =
-        R353.signedGramFluxFamilyToR293
-          (family (physicalFamily P))
+        R353.signedGramFluxFamilyToR293 (family P)
     ; Weld.mixedIntegralBelowCompanionIntegral =
-        mixedIntegralBelowCompanionIntegral P
+        mixedIntegralBelowPhysicalCompanion T P
     ; Weld.physicalCompanionIsR293CompanionIntegral =
-        physicalCompanionIsFamilyIntegral P
+        physicalCompanionIsFamilyCompanionIntegral P
     }
+
+  physicalR353BuildsPackageA :
+    (T : Dyn.PhysicalNSGalerkinTrajectory) →
+    PhysicalR353Family T →
+    Dyn.PhysicalNSMixedHelicitySpacetimeBudget T
+  physicalR353BuildsPackageA T P =
+    Weld.r293BuildsPhysicalPackageA T
+      (physicalR353BuildsR354Inputs T P)
 
 round374R353IntegrationMonotonicityIsCorrectTransportOwner : Bool
 round374R353IntegrationMonotonicityIsCorrectTransportOwner = true
 
-round374IntegratedMixedDominanceShouldBeIndependentInput : Bool
-round374IntegratedMixedDominanceShouldBeIndependentInput = false
+round374IntegratedMixedDominanceIndependentInputRequired : Bool
+round374IntegratedMixedDominanceIndependentInputRequired = false
 
-round374PhysicalCompanionAndR353CompanionMustBeSameObject : Bool
-round374PhysicalCompanionAndR353CompanionMustBeSameObject = true
+round374FunctionExtensionalityAssumed : Bool
+round374FunctionExtensionalityAssumed = false
 
-round374OpaqueIntegrationNeedsEndpointEqualityOrFunctionExtensionality : Bool
-round374OpaqueIntegrationNeedsEndpointEqualityOrFunctionExtensionality = true
+round374PhysicalR353FamilyDirectlyBuildsPackageA : Bool
+round374PhysicalR353FamilyDirectlyBuildsPackageA = true
 
-round374IntegratedMixedDominanceShouldBeIndependentInputIsFalse :
-  round374IntegratedMixedDominanceShouldBeIndependentInput ≡ false
-round374IntegratedMixedDominanceShouldBeIndependentInputIsFalse = refl
+round374IntegratedMixedDominanceIndependentInputRequiredIsFalse :
+  round374IntegratedMixedDominanceIndependentInputRequired ≡ false
+round374IntegratedMixedDominanceIndependentInputRequiredIsFalse = refl
+
+round374FunctionExtensionalityAssumedIsFalse :
+  round374FunctionExtensionalityAssumed ≡ false
+round374FunctionExtensionalityAssumedIsFalse = refl
