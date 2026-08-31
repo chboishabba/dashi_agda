@@ -2,16 +2,6 @@ module DASHI.Physics.Closure.NSTriadKNDoubleMixedGramPairToResolventRound389Exac
 
 ------------------------------------------------------------------------
 -- ROUND389 / LITERAL DOUBLE-MIXED GRAM PAIR -> R290 RESOLVENT PAIR
---
--- R388 gives the exact damped-forced tangent of the literal double-mixed cell
--- carrier that R386 identified with the R378 Gram debt.  Therefore two such
--- cells instantiate the generic R291 two-cell Gram tangent directly.  R384
--- then compiles that physical pair into the exact R290 resolvent-weighted pair
--- once positivity of the summed viscous rate is supplied.
---
--- This closes the pairwise same-object carrier seam from R378 to R290.  The
--- only remaining local premise here is positivity of the literal physical pair
--- rate; no sign is imposed on the nonlinear remainder.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -24,6 +14,7 @@ import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R291
+import DASHI.Physics.Closure.NSTriadKNWeightedGramFluxCompilerRound290Exact as R290
 import DASHI.Physics.Closure.NSTriadKNRationalResolventFromPositiveGramPairRound384Exact as R384
 import DASHI.Physics.Closure.NSTriadKNDoubleMixedPhysicalDampedTangentRound388Exact as R388
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact as R225
@@ -57,7 +48,7 @@ module DoubleMixedPair
   pairRatePositiveBuildsR290 :
     (alpha beta : Physical.PhysicalTriadIncidence) →
     Positive (R291.pairRate (physicalDoubleMixedPair alpha beta)) →
-    DASHI.Physics.Closure.NSTriadKNWeightedGramFluxCompilerRound290Exact.DampedGramPair
+    R290.DampedGramPair
   pairRatePositiveBuildsR290 alpha beta positive =
     R384.positivePairBuildsR290
       (physicalDoubleMixedPair alpha beta) positive
