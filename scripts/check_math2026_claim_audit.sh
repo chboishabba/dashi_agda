@@ -9,6 +9,7 @@ FILES=(
   DASHI/Analysis/DeBruijnNewmanRiemannG2RiemannSiegelBridgeExact.agda
   DASHI/Analysis/RiemannG2ExplicitFormulaBridgeAuditExact.agda
   DASHI/Analysis/RiemannG2LiteralSpectralZeroWeldExact.agda
+  DASHI/Analysis/RiemannG2BidiCutReconciliationExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda
   DASHI/Mathematics/NumberTheory/DiophantineTupleDPrimeSquare2026ClaimAuditExact.agda
