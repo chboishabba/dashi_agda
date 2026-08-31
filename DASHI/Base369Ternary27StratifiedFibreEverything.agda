@@ -11,6 +11,7 @@ import DASHI.Moonshine.Base369Ternary27PathCubeSpectralBandsExact
 -- Stratified/fibre/plaquette/holonomy continuation.
 import DASHI.Foundations.Base369Ternary27StratifiedAppraisalFibreExact
 import DASHI.Foundations.Base369Ternary27StratifiedFibrePlaquetteExact
+import DASHI.Foundations.Base369Ternary27StratumStabiliserFibreAdmissibilityExact
 import DASHI.Moonshine.Base369Ternary27StratifiedFibreHolonomyExact
 
 -- BIDI weld to the existing Monster 3B finite Heisenberg and harmonic lanes.
