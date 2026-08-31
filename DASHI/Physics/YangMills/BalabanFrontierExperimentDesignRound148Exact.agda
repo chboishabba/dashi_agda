@@ -17,7 +17,10 @@ import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Ex
 data BalabanFrontierCoordinate : Set where
   a1CouplingHistoryResidual
   a2CouplingHistoryResidual
-  densityPotentialResidual
+  densityActionResidual
+  round108PotentialMatchResidual
+  combinedRGDensityStateResidual
+  combinedRGStatePotentialResidual
   componentD1Residual
   stressSumResidual
   metricDomainMargin
@@ -30,7 +33,10 @@ data BalabanFrontierCoordinate : Set where
 coordinateRole : BalabanFrontierCoordinate → Design.CoordinateRole
 coordinateRole a1CouplingHistoryResidual = Design.derivedDiscriminator
 coordinateRole a2CouplingHistoryResidual = Design.derivedDiscriminator
-coordinateRole densityPotentialResidual = Design.derivedDiscriminator
+coordinateRole densityActionResidual = Design.derivedDiscriminator
+coordinateRole round108PotentialMatchResidual = Design.derivedDiscriminator
+coordinateRole combinedRGDensityStateResidual = Design.derivedDiscriminator
+coordinateRole combinedRGStatePotentialResidual = Design.derivedDiscriminator
 coordinateRole componentD1Residual = Design.derivedDiscriminator
 coordinateRole stressSumResidual = Design.derivedDiscriminator
 coordinateRole metricDomainMargin = Design.measuredObservable
@@ -42,7 +48,10 @@ coordinateRole discretizationSystematic = Design.nuisanceCoordinate
 coordinateTargetsLeaf : BalabanFrontierCoordinate → R146.BalabanFrontierLeaf
 coordinateTargetsLeaf a1CouplingHistoryResidual = R146.a1CouplingToBetaHistory
 coordinateTargetsLeaf a2CouplingHistoryResidual = R146.a2CouplingToBetaHistory
-coordinateTargetsLeaf densityPotentialResidual = R146.combinedRGStateToBC1Potential
+coordinateTargetsLeaf densityActionResidual = R146.densityActionRealization
+coordinateTargetsLeaf round108PotentialMatchResidual = R146.round108SelectedPotentialMatchesBC1
+coordinateTargetsLeaf combinedRGDensityStateResidual = R146.densityToCombinedRGState
+coordinateTargetsLeaf combinedRGStatePotentialResidual = R146.combinedRGStateToBC1Potential
 coordinateTargetsLeaf componentD1Residual = R146.componentLocalizedD1ToPhysicalD1
 coordinateTargetsLeaf stressSumResidual = R146.stressInsertionEqualsPhysicalD1Sum
 coordinateTargetsLeaf metricDomainMargin = R146.metricPerturbationAdmission
@@ -51,8 +60,6 @@ coordinateTargetsLeaf cutoffSystematic = R146.cmp119FiniteMeasureSchwingerEndpoi
 coordinateTargetsLeaf finiteVolumeSystematic = R146.cmp119FiniteMeasureSchwingerEndpoint
 coordinateTargetsLeaf discretizationSystematic = R146.componentLocalizedD1ToPhysicalD1
 
--- Search measurements are useful when they discriminate two candidate source
--- realizations which the current proof-language observer has not separated.
 record FrontierCoordinateDiscrimination : Set₁ where
   field
     CandidateRealization : Set
