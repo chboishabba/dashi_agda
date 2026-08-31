@@ -13,8 +13,9 @@ module DASHI.Physics.YangMills.BalabanCMP109RootedEquation012OrbitSectionRound19
 --
 -- This file composes those results on the SAME gauge function.  The only
 -- same-object inputs are that the equation-(0.12) gauge action is the physical
--- bond gauge action used by the rooted section, and that its two coarse endpoint
--- gauges are evaluation of that fine gauge at the rooted coarse site.
+-- bond gauge action used by the rooted section, that its two coarse endpoint
+-- gauges are evaluation at the rooted coarse site, and that the group-average
+-- identity is the physical gauge-group unit.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -58,6 +59,9 @@ record RootedEquation012SameObjectInputs
     targetGaugeIsRootEvaluation : ∀ gauge coarse →
       Eq012.targetGauge gaugeData gauge coarse ≡ gauge base
 
+    averageIdentityIsPhysicalUnit :
+      Average.identity averageAxioms ≡ Transport.unit group
+
 open RootedEquation012SameObjectInputs public
 
 rootedEquation012SourceAnchored :
@@ -87,7 +91,9 @@ rootedEquation012SourceAnchored
   trans
     (sourceGaugeIsRootEvaluation inputs
       (Rooted.rootedGaugeFunction group paths field) coarse)
-    (Rooted.rootedGaugeFunctionBased group paths field)
+    (trans
+      (Rooted.rootedGaugeFunctionBased group paths field)
+      (sym (averageIdentityIsPhysicalUnit inputs)))
 
 rootedEquation012TargetAnchored :
   ∀ {CoarseBond FineSite Lie Scalar N}
@@ -116,7 +122,9 @@ rootedEquation012TargetAnchored
   trans
     (targetGaugeIsRootEvaluation inputs
       (Rooted.rootedGaugeFunction group paths field) coarse)
-    (Rooted.rootedGaugeFunctionBased group paths field)
+    (trans
+      (Rooted.rootedGaugeFunctionBased group paths field)
+      (sym (averageIdentityIsPhysicalUnit inputs)))
 
 rootedEquation012MapPreserved :
   ∀ {CoarseBond FineSite Lie Scalar N}
@@ -176,11 +184,11 @@ cmp109RootedEquation012OrbitSectionRound195Level = machineChecked
 cmp109RootedEquation012MapPreservationRound195Level : ProofLevel
 cmp109RootedEquation012MapPreservationRound195Level = machineChecked
 
--- The printed nonlinear compatibility problem is now reduced to literal
--- identification of the physical equation-(0.12) gauge-action data.  No new
--- block-average covariance theorem is required.
 literalCMP109Equation012GaugeActionPhysicalRound195Level : ProofLevel
 literalCMP109Equation012GaugeActionPhysicalRound195Level = conditional
 
 literalCMP109Equation012CoarseEndpointsAreRootRound195Level : ProofLevel
 literalCMP109Equation012CoarseEndpointsAreRootRound195Level = conditional
+
+literalCMP109Equation012IdentityIsPhysicalUnitRound195Level : ProofLevel
+literalCMP109Equation012IdentityIsPhysicalUnitRound195Level = conditional
