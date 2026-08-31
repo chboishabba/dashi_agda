@@ -6,6 +6,8 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Governance.SexedHistoricalStatisticalExperimentHyperfabricExact as Stats
 import DASHI.Governance.SexedHistoricalConditionalReversalExact as Reversal
 import DASHI.Governance.SexedHistoricalDialecticalOrderHolonomyAnalogueExact as Order
+import DASHI.Governance.SexedHistoricalBinaryTernaryDialecticExact as BT
+import DASHI.Governance.SexedHistoricalAdaptiveMeasurementRefinementExact as Measure
 
 recordedSexConstructionRegression :
   INF.FactorsThrough Stats.recordedSexSurface Stats.relationalCell → ⊥
@@ -52,6 +54,33 @@ dialecticalOrderNoncommutationRegression :
   Order.reinterpretAfterInstitutionalise
   ≡ Order.institutionaliseAfterReinterpret → ⊥
 dialecticalOrderNoncommutationRegression = Order.orderDefect
+
+binaryBackwardCollapseRegression :
+  INF.FactorsThrough BT.collapseUnresolvedBackward BT.fineHistoricalStatus → ⊥
+binaryBackwardCollapseRegression = BT.binaryBackwardCollapseCannotRecoverFineStatus
+
+binaryForwardCollapseRegression :
+  INF.FactorsThrough BT.collapseUnresolvedForward BT.fineHistoricalStatus → ⊥
+binaryForwardCollapseRegression = BT.binaryForwardCollapseCannotRecoverFineStatus
+
+pathAssessmentRegression :
+  INF.FactorsThrough BT.assessPath (λ x → x) → ⊥
+pathAssessmentRegression = BT.sameAssessmentDoesNotRecoverOrder
+
+coarsePresentHistoryRegression :
+  INF.FactorsThrough Measure.coarsePresent Measure.truePath → ⊥
+coarsePresentHistoryRegression = Measure.coarsePresentCannotRecoverHiddenHistory
+
+selectedMeasurementSeparatesRegression :
+  Measure.measure
+    (Measure.nextMeasurement Measure.recoverPathOrder BT.Suspension.suspendAndRefine)
+    Measure.institutionFirstHistory
+  ≡ Measure.measure
+    (Measure.nextMeasurement Measure.recoverPathOrder BT.Suspension.suspendAndRefine)
+    Measure.reinterpretationFirstHistory
+  → ⊥
+selectedMeasurementSeparatesRegression =
+  Measure.selectedPathMeasurementSeparatesCanonicalHistories
 
 canonicalDesignRegression : Stats.SexConstructionStudyDesign
 canonicalDesignRegression = Stats.canonicalSexConstructionStudyDesign
