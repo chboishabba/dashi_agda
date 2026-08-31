@@ -3,23 +3,22 @@ module DASHI.Environment.GlyphosateSauerkrautGenericBidiBridgeExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.BidiResidualApproximationExact as Bidi
-import DASHI.Environment.GlyphosateSauerkrautBioremediationBidiExact as Kraut
 import DASHI.Environment.GlyphosateSauerkrautResidualRefinementExact as Residual
 
 ------------------------------------------------------------------------
 -- The glyphosate Nat interval is an instance of the generic admissible-fibre
--- calculus.  Numeric nesting therefore inherits the generic monotone BIDI
+-- calculus. Numeric nesting therefore inherits the generic monotone BIDI
 -- semantics rather than owning a separate notion of refinement.
 ------------------------------------------------------------------------
 
 natEnvelopeFibre : Residual.NatEnvelope → Bidi.ResidualFibre Nat
 natEnvelopeFibre envelope value =
-  Residual.lower envelope Residual.≤ᴺ value ×
-  value Residual.≤ᴺ Residual.upper envelope
+  Residual._≤ᴺ_ (Residual.lower envelope) value ×
+  Residual._≤ᴺ_ value (Residual.upper envelope)
 
 natEnvelopeRefinementGivesGenericFibreRefinement :
   {child parent : Residual.NatEnvelope} →
-  child Residual.Refines parent →
+  Residual._Refines_ child parent →
   Bidi.FibreRefines
     (natEnvelopeFibre child)
     (natEnvelopeFibre parent)
