@@ -30,6 +30,7 @@ import DASHI.Analysis.Everything
 import DASHI.Biology.DomainEverything
 import DASHI.Chemistry.Everything
 import DASHI.Physics.ExhaustiveEverything
+import DASHI.Papers.Everything
 import DASHI.Applied.Everything
 import DASHI.Vision.Everything
 import DASHI.Perception.Everything
