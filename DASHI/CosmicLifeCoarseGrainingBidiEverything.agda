@@ -2,7 +2,8 @@ module DASHI.CosmicLifeCoarseGrainingBidiEverything where
 
 ------------------------------------------------------------------------
 -- Focused cross-domain rollup for consumer-relative coarse-graining,
--- carbon/backbone reachable chemistry, prebiotic organisation, cosmic
+-- carbon/backbone reachable chemistry, prebiotic organisation, deep-time
+-- biosphere/fossil-carbon trajectories, ocean-climate biogeochemistry, cosmic
 -- parameter viability and multiverse/attractor/TSFV discrimination.
 --
 -- Shared inference geometry does not imply shared ontology.
@@ -16,7 +17,13 @@ import DASHI.Core.ActiveBidiDiscriminatorLoopExact
 
 import DASHI.Chemistry.CarbonChemicalSuitabilityLifeBoundaryExact
 import DASHI.Chemistry.CarbonBackboneReachableChemistryConeExact
+import DASHI.Chemistry.SaltPetroleumIndustrialChemistryNetworkExact
+import DASHI.Chemistry.OceanCarbonateSaltTemperatureStressBidiExact
+
 import DASHI.Biology.PrebioticChemistryLifeInevitabilityBidiExact
+import DASHI.Biology.DeepTimeCarbonBiosphereFossilFuelBidiExact
+import DASHI.Biology.ClimateCarryingCapacityDeepTimeCrossPollinationExact
+import DASHI.Biology.NaturalSystemsHyperfabricExact
 import DASHI.Biology.Levin.ProblemSpaceAgency
 import DASHI.Biology.Levin.ConstitutiveInteractiveAutonomy
 
