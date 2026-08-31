@@ -5,13 +5,14 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.TrajectoryResidueExact as Trajectory
 import DASHI.Core.HistoryConditionedChoiceExact as History
-import DASHI.Reasoning.PredicateNormalFormLogicalCalculusExact as Logic
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
 
 ------------------------------------------------------------------------
 -- PATH-INDEXED EPISTEMIC CONSEQUENCE HISTORY
 --
 -- A final formula is not a sufficient description of how that formula became
--- available.  Parser/semantic resolution, logical deduction, empirical
+-- available. Parser/semantic resolution, logical deduction, empirical
 -- promotion, residual refinement and design discharge are distinct edge kinds.
 -- Two paths may reconverge at the same final assertion while retaining
 -- different authority and different admissible continuation cones.
@@ -92,11 +93,6 @@ sameFinalAssertionObservation = refl
 
 ------------------------------------------------------------------------
 -- Empirical qualification is path-deposited residue.
---
--- The logical-only path arrives without empirical qualification.  The design
--- discharge path deposits an empirical-qualification residue that persists to
--- the evidence-qualified arrival.  This instantiates the canonical trajectory
--- residue owner rather than defining bespoke history memory.
 ------------------------------------------------------------------------
 
 empiricalQualificationResidue : ConsequenceStage → Trajectory.ResidueFlag
@@ -128,11 +124,11 @@ qualificationPersistsAlongTrace =
   Trajectory.tracePreservesPresentResidue noEmpiricalQualificationErasure
 
 ------------------------------------------------------------------------
--- Coarse final-formula observation cannot reconstruct authority residue.
+-- Coarse final-formula observation cannot reconstruct qualification residue.
 ------------------------------------------------------------------------
 
 finalFormulaNeedsResidueRefinement :
-  DASHI.Core.ObserverRefinementLatticeExact.StrictRefinement
+  Observer.StrictRefinement
     observeStage
     (Trajectory.residueRefinedObserver observeStage empiricalQualificationResidue)
 finalFormulaNeedsResidueRefinement =
@@ -172,6 +168,11 @@ data ConsequenceFutureCone : Set where
   evidenceQualifiedCone
   : ConsequenceFutureCone
 
+data DerivationAuthority : Set where
+  logicalAuthority
+  empiricallyQualifiedAuthority
+  : DerivationAuthority
+
 historyObservation : DerivationHistory → FinalAssertionObservation
 historyObservation _ = sameFinalFormula
 
@@ -182,6 +183,10 @@ historyPattern evidenceQualifiedHistory = empiricalQualificationPattern
 historyUse : DerivationHistory → ConsequenceUse
 historyUse logicalOnlyHistory = useAsLogicalConsequence
 historyUse evidenceQualifiedHistory = useAsEvidenceQualifiedClaim
+
+historyAuthority : DerivationHistory → DerivationAuthority
+historyAuthority logicalOnlyHistory = logicalAuthority
+historyAuthority evidenceQualifiedHistory = empiricallyQualifiedAuthority
 
 consequenceChoiceSurface : History.HistoryConditionedChoiceSurface
 consequenceChoiceSurface =
@@ -209,7 +214,7 @@ sameFormulaDifferentUseWitness =
     }
 
 finalFormulaDoesNotDeterminePermittedUse :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
+  NonFactor.FactorsThrough
     (History.observe consequenceChoiceSurface)
     (History.choose consequenceChoiceSurface) →
   ⊥
@@ -244,21 +249,13 @@ sameFormulaDifferentFutureConeWitness =
     }
 
 finalFormulaDoesNotDetermineFutureCone :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
+  NonFactor.FactorsThrough
     (History.observeFutureHistory consequenceFutureConeSurface)
     (History.futureCone consequenceFutureConeSurface) →
   ⊥
 finalFormulaDoesNotDetermineFutureCone =
   History.futureConeCannotDescendThroughPresentObservation
     sameFormulaDifferentFutureConeWitness
-
-------------------------------------------------------------------------
--- Relation to consequence authority.
-------------------------------------------------------------------------
-
-historyAuthority : DerivationHistory → Logic.ConsequenceAuthority
-historyAuthority logicalOnlyHistory = Logic.purelyLogicalConsequence
-historyAuthority evidenceQualifiedHistory = Logic.requiresAdditionalEmpiricalEvidence
 
 sameFormulaDifferentAuthority :
   historyAuthority logicalOnlyHistory
