@@ -22,8 +22,9 @@ module DASHI.Physics.Closure.NSTriadKNCompanionDebtDoubleMixedCarrierRound386Exa
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (List; []; _∷_; map)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; _+_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
@@ -35,8 +36,6 @@ import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact as R225
-import DASHI.Physics.Closure.NSTriadKNMixedHelicityCompanionMassRound226Exact as R226
-import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramRound179Exact as R179
 import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramLedgerRound180Exact as R180
 import DASHI.Physics.Closure.NSTriadKNGramDebtPairExpansionRound383Exact as R383
 import DASHI.Physics.Closure.NSTriadKNPhysicalGlobalCompanionGramLedgerRound378Exact as R378
@@ -131,7 +130,7 @@ module OutputCarrier
       items
 
   outputGramDebtIsDoubleMixedDebt :
-    (cutoff : Agda.Builtin.Nat.Nat) (output : Z3.FourierMode) →
+    (cutoff : Nat) (output : Z3.FourierMode) →
     R378.outputGramDebt E S velocity cutoff output
     ≡ R180.gramDebt
         (doubleMixedCells (Output.physicalOutputFiber cutoff output))
