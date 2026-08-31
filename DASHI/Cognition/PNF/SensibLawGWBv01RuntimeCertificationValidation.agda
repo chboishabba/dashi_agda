@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 import DASHI.Cognition.PNF.SensibLawGWBv01RuntimeCertificationExact as Receipt
 import DASHI.Cognition.PNF.SensibLawGWBv01PostCertificationRoadmapExact as Roadmap
 import DASHI.Cognition.PNF.SensibLawRuntimeNumericProjectionBoundaryExact as Numeric
+import DASHI.Cognition.PNF.SensibLawSemanticExpansionSoftwareValidationExact as Expansion
 import DASHI.Core.IntersectionalNonFactorability as INF
 
 ------------------------------------------------------------------------
@@ -58,3 +59,20 @@ numericProjectionCannotRecoverFineTiming :
   INF.FactorsThrough Numeric.projection Numeric.activeWorkClass → ⊥
 numericProjectionCannotRecoverFineTiming =
   Numeric.performanceProjectionCannotRecoverFineTiming
+
+semanticExpansionWorkspaceValidationPassed :
+  Expansion.workspaceTestsPassed Expansion.semanticExpansionSoftwareValidation ≡ true
+semanticExpansionWorkspaceValidationPassed = refl
+
+semanticExpansionCandidateOnlyContractPassed :
+  Expansion.candidateOnlyContractChecked Expansion.semanticExpansionSoftwareValidation ≡ true
+semanticExpansionCandidateOnlyContractPassed = refl
+
+semanticExpansionNoPublicationApiContractPassed :
+  Expansion.noPublicationApiChecked Expansion.semanticExpansionSoftwareValidation ≡ true
+semanticExpansionNoPublicationApiContractPassed = refl
+
+semanticExpansionFrontierStillAwaitsRuntimeCertification :
+  Expansion.currentSemanticExpansionFrontier
+  ≡ Expansion.softwareValidatedAwaitingExpandedParityPerformance
+semanticExpansionFrontierStillAwaitsRuntimeCertification = refl
