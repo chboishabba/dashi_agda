@@ -4,10 +4,15 @@ on:
   pull_request:
     paths:
       - 'DASHI/Analysis/DeBruijnNewman2026ClaimAuditExact.agda'
+      - 'DASHI/Analysis/DeBruijnNewman2026SourceWeldExact.agda'
       - 'DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda'
       - 'DASHI/Mathematics/NumberTheory/DiophantineTupleDPrimeSquare2026ClaimAuditExact.agda'
+      - 'DASHI/Mathematics/NumberTheory/PrimePowerDiophantineTuple2026SourceExact.agda'
       - 'DASHI/Core/ExternalAutoformalizationProvenanceExact.agda'
+      - 'DASHI/Core/SourceExactFrontierBidiCrossPollination2026.agda'
+      - 'DASHI/Mathematics/NumberTheory/Math2026Everything.agda'
       - 'DASHI/Math2026ClaimAuditValidation.agda'
+      - 'Docs/formalisms/Math2026SourceExactBidi.md'
       - 'scripts/check_math2026_claim_audit.sh'
       - '.github/workflows/math2026-claim-audit.yml'
   workflow_dispatch:
