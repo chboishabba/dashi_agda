@@ -2,6 +2,8 @@ module DASHI.Core.SequentialExperimentPlanningValidation where
 
 import DASHI.Core.ExperimentalCoordinateDesignExact
 import DASHI.Core.ActionabilityCostedExperimentChoiceExact
+import DASHI.Core.GovernedAdmissibleCostedExperimentChoiceExact
+import DASHI.Core.ConsentTemporalExternalityExact
 import DASHI.Core.CommonExperimentRealisationExact
 import DASHI.Core.DiscriminatorSynthesisExact
 import DASHI.Core.CoarseFineRelativeFibreExact
