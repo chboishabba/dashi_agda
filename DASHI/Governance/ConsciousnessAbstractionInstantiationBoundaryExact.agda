@@ -96,7 +96,7 @@ data SimulationAutomaticallyImpliesInstantiation
 
 simulationDoesNotAutomaticallyImplyInstantiation :
   ∀ {c} → SimulationAutomaticallyImpliesInstantiation c → ⊥
-simulationDoesNotAutomaticallyImpliesInstantiation ()
+simulationDoesNotAutomaticallyImplyInstantiation ()
 
 ------------------------------------------------------------------------
 -- A substrate-sensitive account still does not imply biological exclusivity.
