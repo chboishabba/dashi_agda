@@ -6,6 +6,7 @@ open import Agda.Builtin.Nat using (zero)
 
 import DASHI.Cognition.PNF.SensibLawGWBv01RuntimeCertificationExact as Receipt
 import DASHI.Cognition.PNF.SensibLawGWBv01PostCertificationRoadmapExact as Roadmap
+import DASHI.Cognition.PNF.SensibLawRuntimeNumericProjectionBoundaryExact as Numeric
 
 ------------------------------------------------------------------------
 -- Focused validation root for the current SensibLaw runtime state.
@@ -42,3 +43,16 @@ universalCutoverStillFalse :
     Roadmap.currentSensibLawPostGWBFrontier
   ≡ false
 universalCutoverStillFalse = refl
+
+numericGateProjectionRetainsPass :
+  Numeric.gatePassed Numeric.gwbV01PerformanceProjection ≡ true
+numericGateProjectionRetainsPass = refl
+
+numericTierProjectionRetainsOnePointTwo :
+  Numeric.tier Numeric.gwbV01PerformanceProjection ≡ Receipt.production1_2x
+numericTierProjectionRetainsOnePointTwo = refl
+
+numericProjectionCannotRecoverFineTiming :
+  Numeric.INF.FactorsThrough Numeric.projection Numeric.activeWorkClass → Numeric.⊥
+numericProjectionCannotRecoverFineTiming =
+  Numeric.performanceProjectionCannotRecoverFineTiming
