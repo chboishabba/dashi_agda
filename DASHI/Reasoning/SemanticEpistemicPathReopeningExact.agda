@@ -5,6 +5,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AffectedDependencyClosureExact as Dependency
 import DASHI.Reasoning.SemanticEpistemicInterpretationExact as SemEpi
+import DASHI.Reasoning.LogicalConsequenceDerivationPathExact as Path
 import DASHI.Reasoning.DerivationEdgeInstanceSelectiveReopeningExact as EdgePath
 
 ------------------------------------------------------------------------
@@ -100,7 +101,7 @@ record MeaningReopeningReceipt
     (receipt : MeaningDerivationReceipt problem meaning) : Set₁ where
   constructor meaningReopeningReceipt
   field
-    edgeFrom edgeTo : EdgePath.Path.DerivationNode
+    edgeFrom edgeTo : Path.DerivationNode
     changedEdge : EdgePath.IndexedDerivationEdge edgeFrom edgeTo
     dependsOnChangedEdge : MeaningDependsOnEdge receipt changedEdge
     reopening :
