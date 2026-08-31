@@ -76,7 +76,7 @@ import DASHI.Governance.CabarlahTraumaProjectionBridgeExact
 import DASHI.Governance.ComparativeCrisisClimateAtlas
 import DASHI.Governance.RevolutionaryAdjunctRegression
 
--- Safe-and-just development / provisioning geometry.  Empirical source claims,
+-- Safe-and-just development / provisioning geometry. Empirical source claims,
 -- allocation conventions, vector observations and causal interpretation remain
 -- explicitly separated.
 import DASHI.Governance.SafeJustSourceRegistryExact
@@ -110,7 +110,7 @@ import DASHI.Governance.RelationPolicyTransportComposition
 import DASHI.Governance.DomainIndexedPeaceSubjectCarrier
 import DASHI.Governance.TransitionGovernanceOperatorAdapter
 import DASHI.Governance.MiddleEastProvenancePolicyRouting
--- Source-bounded/symbolic application surfaces.  These do not promote the
+-- Source-bounded/symbolic application surfaces. These do not promote the
 -- generic structural operators into empirical motive, guilt, or ideology.
 import DASHI.Governance.AmalekProvenanceRoleBinding
 import DASHI.Governance.PopulistPlutocraticDualProjection
@@ -130,4 +130,5 @@ import DASHI.Governance.SexedHistoricalCoConstitutionHyperfabricExact
 import DASHI.Governance.SexedHistoricalTransitionHyperfabricExact
 import DASHI.Governance.SexedHistoricalChoiceConeBridgeExact
 import DASHI.Governance.SexedHistoricalActionFeedbackHyperfabricExact
+import DASHI.Governance.SexedHistoricalCollectiveThresholdNetworkExact
 import DASHI.Governance.ReligiousChildhoodFeministWitchRegression
