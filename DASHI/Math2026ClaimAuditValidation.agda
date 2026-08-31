@@ -2,8 +2,14 @@ module DASHI.Math2026ClaimAuditValidation where
 
 open import DASHI.Analysis.DeBruijnNewman2026ClaimAuditExact
 open import DASHI.Analysis.DeBruijnNewman2026SourceWeldExact
+open import DASHI.Analysis.DeBruijnNewmanRiemannG2BridgeAuditExact
 open import DASHI.Mathematics.NumberTheory.PrimeGap2026ClaimAuditExact
+open import DASHI.Mathematics.NumberTheory.PrimeGap2026SourceAcquisitionExact
 open import DASHI.Mathematics.NumberTheory.DiophantineTupleDPrimeSquare2026ClaimAuditExact
 open import DASHI.Mathematics.NumberTheory.PrimePowerDiophantineTuple2026SourceExact
 open import DASHI.Core.ExternalAutoformalizationProvenanceExact
 open import DASHI.Core.SourceExactFrontierBidiCrossPollination2026
+open import DASHI.Core.FrontierRelationStrengthBidiExact
+open import DASHI.Core.FiniteCertificateConsumerBridgeExact
+open import DASHI.Physics.YangMills.BalabanActiveSourceDiscriminator2026Exact
+open import DASHI.Physics.Closure.NSCriticalConeAristotleRouteHypergraph2026Exact
