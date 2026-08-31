@@ -97,11 +97,10 @@ applyTwo first second state =
   applyIntervention second (applyIntervention first state)
 
 ------------------------------------------------------------------------
--- 3. A literal counterfactual order defect.
+-- 3. Raw operator order can matter even when the reverse path is not admitted.
 --
--- pluraliseTopology opens the plural continuation; closeAdmissionGate then
--- closes the gate while keeping a canon-like coarse cone.  Reversing the order
--- reopens through pluralisation.  The endpoint gate therefore remembers order.
+-- This section is intentionally algebraic only.  Section 7 below gives the
+-- stronger witness where both intervention orders are proof-relevantly admitted.
 ------------------------------------------------------------------------
 
 pluralThenClose : CounterfactualReceptionState
@@ -118,28 +117,25 @@ pluralThenCloseGate = Stratum.gate (stratum pluralThenClose)
 closeThenPluralGate : Stratum.AdmissionGate
 closeThenPluralGate = Stratum.gate (stratum closeThenPlural)
 
-counterfactualOrderChangesGate :
+rawCounterfactualOrderChangesGate :
   pluralThenCloseGate ≡ closeThenPluralGate → ⊥
-counterfactualOrderChangesGate ()
+rawCounterfactualOrderChangesGate ()
 
 ------------------------------------------------------------------------
--- 4. Coarse future can erase the order defect.
---
--- The coarse observer records only that both paths remain inside the same
--- present-vocabulary family.  The fine endpoint records the intervention order.
+-- 4. A coarse present-vocabulary surface erases the raw order defect.
 ------------------------------------------------------------------------
 
 data CounterfactualOrder : Set where
   pluralThenCloseOrder closeThenPluralOrder : CounterfactualOrder
 
-data CoarseFutureSurface : Set where
-  samePresentVocabularyFuture : CoarseFutureSurface
+data CoarseCounterfactualSurface : Set where
+  samePresentVocabularySurface : CoarseCounterfactualSurface
 
 data FineCounterfactualEndpoint : Set where
   pluralThenCloseEndpoint closeThenPluralEndpoint : FineCounterfactualEndpoint
 
-coarseFutureSurface : CounterfactualOrder → CoarseFutureSurface
-coarseFutureSurface _ = samePresentVocabularyFuture
+coarseCounterfactualSurface : CounterfactualOrder → CoarseCounterfactualSurface
+coarseCounterfactualSurface _ = samePresentVocabularySurface
 
 fineCounterfactualEndpoint : CounterfactualOrder → FineCounterfactualEndpoint
 fineCounterfactualEndpoint pluralThenCloseOrder = pluralThenCloseEndpoint
@@ -150,9 +146,9 @@ fineCounterfactualEndpointsDiffer :
   ≡ fineCounterfactualEndpoint closeThenPluralOrder → ⊥
 fineCounterfactualEndpointsDiffer ()
 
-coarseFutureCannotRecoverCounterfactualOrder :
-  INF.FactorsThrough coarseFutureSurface fineCounterfactualEndpoint → ⊥
-coarseFutureCannotRecoverCounterfactualOrder =
+coarseSurfaceCannotRecoverCounterfactualOrder :
+  INF.FactorsThrough coarseCounterfactualSurface fineCounterfactualEndpoint → ⊥
+coarseSurfaceCannotRecoverCounterfactualOrder =
   INF.witnessRulesOutEveryFlatFactorisation
     (INF.nonFactorabilityWitness
       pluralThenCloseOrder closeThenPluralOrder refl
@@ -246,7 +242,101 @@ sourceRecoveryStillAdmittedAfterClosure :
 sourceRecoveryStillAdmittedAfterClosure = Admissible.admittedStep tt tt
 
 ------------------------------------------------------------------------
--- 7. Alternative continuation composition is not historical assertion.
+-- 7. Stronger admitted order defect inside one exact future-cone fibre.
+--
+-- M = shift to movement reception: sets the movement future cone and relation.
+-- R = shift relation to institution: changes only the relation coordinate.
+--
+-- Both M;R and R;M are fully admitted from the seed.  They land in the exact
+-- same encoded future cone, but their final relation modes differ because M
+-- rewrites relation to movementSolidarity whereas R rewrites it to
+-- institutionalAuthority.
+------------------------------------------------------------------------
+
+movementIntermediate : CounterfactualReceptionState
+movementIntermediate = applyIntervention shiftToMovementHistory seedState
+
+institutionIntermediate : CounterfactualReceptionState
+institutionIntermediate = applyIntervention shiftRelationToInstitution seedState
+
+movementThenInstitution : CounterfactualReceptionState
+movementThenInstitution =
+  applyIntervention shiftRelationToInstitution movementIntermediate
+
+institutionThenMovement : CounterfactualReceptionState
+institutionThenMovement =
+  applyIntervention shiftToMovementHistory institutionIntermediate
+
+movementFirstAdmitted :
+  Admissible.AdmittedStep
+    counterfactualTransitionSystem
+    shiftToMovementHistory ordinaryCounterfactual seedState
+movementFirstAdmitted = Admissible.admittedStep tt tt
+
+institutionAfterMovementAdmitted :
+  Admissible.AdmittedStep
+    counterfactualTransitionSystem
+    shiftRelationToInstitution ordinaryCounterfactual movementIntermediate
+institutionAfterMovementAdmitted = Admissible.admittedStep tt tt
+
+institutionFirstAdmitted :
+  Admissible.AdmittedStep
+    counterfactualTransitionSystem
+    shiftRelationToInstitution ordinaryCounterfactual seedState
+institutionFirstAdmitted = Admissible.admittedStep tt tt
+
+movementAfterInstitutionAdmitted :
+  Admissible.AdmittedStep
+    counterfactualTransitionSystem
+    shiftToMovementHistory ordinaryCounterfactual institutionIntermediate
+movementAfterInstitutionAdmitted = Admissible.admittedStep tt tt
+
+admittedOrderRelationsDiffer :
+  relation movementThenInstitution ≡ relation institutionThenMovement → ⊥
+admittedOrderRelationsDiffer ()
+
+admittedOrdersShareExactFutureCone :
+  Stratum.futureCone (stratum movementThenInstitution)
+  ≡ Stratum.futureCone (stratum institutionThenMovement)
+admittedOrdersShareExactFutureCone = refl
+
+data AdmittedCounterfactualOrder : Set where
+  movementThenInstitutionOrder
+  institutionThenMovementOrder
+  : AdmittedCounterfactualOrder
+
+data AdmittedFineEndpoint : Set where
+  movementThenInstitutionEndpoint
+  institutionThenMovementEndpoint
+  : AdmittedFineEndpoint
+
+admittedFutureCone : AdmittedCounterfactualOrder → Stratum.FutureConeCode
+admittedFutureCone movementThenInstitutionOrder =
+  Stratum.futureCone (stratum movementThenInstitution)
+admittedFutureCone institutionThenMovementOrder =
+  Stratum.futureCone (stratum institutionThenMovement)
+
+admittedFineEndpoint : AdmittedCounterfactualOrder → AdmittedFineEndpoint
+admittedFineEndpoint movementThenInstitutionOrder = movementThenInstitutionEndpoint
+admittedFineEndpoint institutionThenMovementOrder = institutionThenMovementEndpoint
+
+admittedFineEndpointsDiffer :
+  admittedFineEndpoint movementThenInstitutionOrder
+  ≡ admittedFineEndpoint institutionThenMovementOrder → ⊥
+admittedFineEndpointsDiffer ()
+
+exactFutureConeCannotRecoverAdmittedTransportOrder :
+  INF.FactorsThrough admittedFutureCone admittedFineEndpoint → ⊥
+exactFutureConeCannotRecoverAdmittedTransportOrder =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
+      movementThenInstitutionOrder
+      institutionThenMovementOrder
+      admittedOrdersShareExactFutureCone
+      admittedFineEndpointsDiffer)
+
+------------------------------------------------------------------------
+-- 8. Alternative continuation composition is not historical assertion.
 ------------------------------------------------------------------------
 
 data CounterfactualCompositionPromotesActualHistory : Set where
@@ -282,25 +372,26 @@ holonomyPrecedentStillKeepsGaugeBoundary :
 holonomyPrecedentStillKeepsGaugeBoundary = refl
 
 ------------------------------------------------------------------------
--- 8. Canonical boundary.
+-- 9. Canonical boundary.
 ------------------------------------------------------------------------
 
 record IntellectualReceptionCounterfactualHyperfabricBoundary : Set where
   constructor intellectual-reception-counterfactual-hyperfabric-boundary
   field
     interventionsAlwaysCommute : Bool
-    coarseFutureDeterminesInterventionOrder : Bool
+    exactFutureConeDeterminesAdmittedInterventionOrder : Bool
     stratumDeterminesRelationMode : Bool
     disabledInterventionIsLowProbabilityIntervention : Bool
+    rawOperatorOrderEqualsAdmittedPathOrder : Bool
     counterfactualCompositionIsActualHistory : Bool
     counterfactualBranchIsPhysicalBranch : Bool
     orderDefectIsGaugeCurvature : Bool
     interventionsCanAlterAdmissibleFuture : Bool
-    compositionOrderCanMatter : Bool
+    admittedCompositionOrderCanMatter : Bool
     sourceAttributionBoundarySurvivesCounterfactuals : Bool
 
 canonicalIntellectualReceptionCounterfactualHyperfabricBoundary :
   IntellectualReceptionCounterfactualHyperfabricBoundary
 canonicalIntellectualReceptionCounterfactualHyperfabricBoundary =
   intellectual-reception-counterfactual-hyperfabric-boundary
-    false false false false false false false true true true
+    false false false false false false false false true true true
