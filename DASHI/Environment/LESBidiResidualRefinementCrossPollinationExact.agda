@@ -5,7 +5,6 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.BidiResidualApproximationExact as Bidi
 import DASHI.Core.DiscriminatorSynthesisExact as Synthesis
-import DASHI.Core.SequentialConsumerExperimentPlannerExact as Sequential
 import DASHI.Environment.LESDomainBasisBidiFrontierExact as Basis
 import DASHI.Environment.LESApproximateFidelityReductionExact as Approximate
 
@@ -39,11 +38,58 @@ bundleOutcomeRefinesLESResidual :
       (Synthesis.observe bundle)
       outcome)
     (prior experiment)
-bundleOutcomeRefinesLESResidual experiment outcome =
+bundleOutcomeRefinesLESResidual {bundle = bundle} experiment outcome =
   Bidi.measurementAlwaysRefinesPrior
     (prior experiment)
-    (Synthesis.observe _)
+    (Synthesis.observe bundle)
     outcome
+
+------------------------------------------------------------------------
+-- Approximate-fidelity cross-pollination.
+--
+-- A declared consumer can be certified decision-safe while a richer physical
+-- state fibre remains non-singleton.  The residual is therefore carried next to
+-- the certificate, not silently erased by it.
+------------------------------------------------------------------------
+
+record ResidualQualifiedLESApproximateDecision
+    {mechanism : Basis.DomainMechanismSocket}
+    {Summary Decision : Set}
+    (model : Approximate.LESApproximateReduction mechanism Summary)
+    (decide : Summary → Decision) : Set₁ where
+  constructor residualQualifiedLESApproximateDecision
+  field
+    decisionCertificate :
+      Approximate.LESApproximateDecisionCertificate model decide
+    residualFibre : Bidi.ResidualFibre (Basis.State mechanism)
+    residualReceipt : Bidi.ApproximateResidualReceipt residualFibre
+    residualInterpretationReference : String
+    richerConsumerStillOpenReference : String
+
+open ResidualQualifiedLESApproximateDecision public
+
+residualQualifiedApproximateDecisionStillSafe :
+  ∀ {mechanism Summary Decision}
+    {model : Approximate.LESApproximateReduction mechanism Summary}
+    {decide : Summary → Decision} →
+  ResidualQualifiedLESApproximateDecision model decide →
+  (controls : List (Basis.Control mechanism)) →
+  (state : Basis.State mechanism) →
+  decide
+    (DASHI.Core.AdaptiveFidelityConsumerMarginExact.low
+      (DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact.approximateTraceFidelityPair
+        (Approximate.asApproximateTraceReduction model))
+      (controls , state))
+  ≡ decide
+    (DASHI.Core.AdaptiveFidelityConsumerMarginExact.high
+      (DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact.approximateTraceFidelityPair
+        (Approximate.asApproximateTraceReduction model))
+      (controls , state))
+residualQualifiedApproximateDecisionStillSafe receipt controls state =
+  Approximate.lesApproximateDecisionSafe
+    (decisionCertificate receipt)
+    controls
+    state
 
 record LESResidualSequentialBridge
     {mechanism : Basis.DomainMechanismSocket}
@@ -75,7 +121,11 @@ record LESBidiResidualBoundary : Set where
     sequentialPlannerCanUsePartialInformationBeforeClosure : Bool
     sequentialPlannerCanUsePartialInformationBeforeClosureIsTrue :
       sequentialPlannerCanUsePartialInformationBeforeClosure ≡ true
+    decisionSafetyAutomaticallyClosesMechanisticResidual : Bool
+    decisionSafetyAutomaticallyClosesMechanisticResidualIsFalse :
+      decisionSafetyAutomaticallyClosesMechanisticResidual ≡ false
 
 canonicalLESBidiResidualBoundary : LESBidiResidualBoundary
 canonicalLESBidiResidualBoundary =
-  lesBidiResidualBoundary false refl true refl false refl true refl
+  lesBidiResidualBoundary
+    false refl true refl false refl true refl false refl
