@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
+import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Foundations.Base369Ternary27HypervoxelStratificationExact as Stratification
 import DASHI.Foundations.Base369Ternary27StratifiedAppraisalFibreExact as Fibre
@@ -115,9 +116,7 @@ heisenbergAxis0WrapsPositiveToNegative =
   TranslationAudit.axis0HeisenbergTranslationWrapsPositiveToNegative
 
 nativeGridRejectsHeisenbergWraparound :
-  Geometry.TritGridStep
-    DASHI.Foundations.SSPTritCarrier.sspPosOne
-    DASHI.Foundations.SSPTritCarrier.sspNegOne → ⊥
+  Geometry.TritGridStep SSP.sspPosOne SSP.sspNegOne → ⊥
 nativeGridRejectsHeisenbergWraparound =
   TranslationAudit.nativeGridHasNoPositiveToNegativeStep
 
