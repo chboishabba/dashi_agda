@@ -7,13 +7,12 @@ module DASHI.Physics.YangMills.BalabanFrontierRouteAdmissionRound147Exact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as Least
 import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Exact as R146
 
--- Search/experiment modalities remain distinct.  In particular, a simulation is
--- not retyped as a theorem proof merely because it is useful for search.
 data FrontierMoveKind : Set where
   repositoryProofReuse
   sourceReconstruction
@@ -33,9 +32,6 @@ open AdmittedBalabanFrontierRoute public
 liveProofSearch : AdmittedBalabanFrontierRoute → Least.LiveProofSearch
 liveProofSearch dataSet = Least.elaborateRoute (admission dataSet)
 
--- Evidence authority is deliberately typed independently of move kind.  A
--- numerical experiment can guide route choice without thereby owning a closed
--- theorem leaf.
 moveDefaultAuthority : FrontierMoveKind → Least.TheoremAuthority
 moveDefaultAuthority repositoryProofReuse = Least.derivedRepositoryTheorem
 moveDefaultAuthority sourceReconstruction = Least.sourceTheoremMatched
@@ -43,26 +39,17 @@ moveDefaultAuthority symbolicDerivation = Least.conditionalInterface
 moveDefaultAuthority numericalExperiment = Least.analogyOnly
 moveDefaultAuthority physicalMeasurement = Least.conditionalInterface
 
--- Only theorem authorities accepted by the generic least-privilege owner can
--- directly close a proof leaf.  We expose that capability rather than inventing
--- an ad-hoc Balaban success Boolean.
 record DirectLeafClosureCapability (move : FrontierMoveKind) : Set where
   field
     closedLeaf : Least.ClosedLeafCapability (moveDefaultAuthority move)
 
 open DirectLeafClosureCapability public
 
--- Constructor-level regressions: numerical experiments and mere conditional
--- interfaces cannot directly inhabit a closed theorem capability.
-numericalExperimentDoesNotDirectlyCloseLeaf :
-  DirectLeafClosureCapability numericalExperiment →
-  Least.ClosedLeafCapability Least.analogyOnly
-numericalExperimentDoesNotDirectlyCloseLeaf = closedLeaf
-
-symbolicConditionalInterfaceDoesNotDirectlyCloseLeaf :
-  DirectLeafClosureCapability symbolicDerivation →
-  Least.ClosedLeafCapability Least.conditionalInterface
-symbolicConditionalInterfaceDoesNotDirectlyCloseLeaf = closedLeaf
+-- Generic least-privilege authority makes this an actual impossibility theorem.
+numericalExperimentCannotDirectlyCloseLeaf :
+  DirectLeafClosureCapability numericalExperiment → ⊥
+numericalExperimentCannotDirectlyCloseLeaf capability =
+  Least.analogyCannotCloseLeaf (closedLeaf capability)
 
 record BalabanFrontierRouteBoundary : Set where
   constructor balabanFrontierRouteBoundary
