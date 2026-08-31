@@ -34,3 +34,7 @@ import DASHI.Chemistry.SaltPetroleumIndustrialChemistryNetworkExact
 -- stellar production abundance and abiogenesis remain separately receipted.
 import DASHI.Chemistry.CarbonChemicalSuitabilityLifeBoundaryExact
 import DASHI.Chemistry.CarbonBackboneReachableChemistryConeExact
+
+-- Ocean biogeochemistry lane: salinity, temperature, CO2/carbonate chemistry,
+-- oxygen and nutrient state remain separate coordinates for ecological use.
+import DASHI.Chemistry.OceanCarbonateSaltTemperatureStressBidiExact
