@@ -10,6 +10,7 @@ FILES=(
   DASHI/Reasoning/AristotleMCGSRecoveredWitness.agda
   DASHI/Reasoning/AristotleBranchMergeExact.agda
   DASHI/Reasoning/AristotleMergeExperimentDesignExact.agda
+  DASHI/Reasoning/AristotleMergeGovernanceCrossPollinationExact.agda
   DASHI/Reasoning/AristotleMergeExperimentValidation.agda
   DASHI/Core/ExperimentalCoordinateDesignExact.agda
   DASHI/Core/DiscriminatorSynthesisExact.agda
@@ -53,5 +54,11 @@ grep -q '^guardProbePlan :' DASHI/Reasoning/AristotleMergeExperimentDesignExact.
 grep -q '^hiddenResidualDependencyDemandsRefinement :' DASHI/Reasoning/AristotleMergeExperimentDesignExact.agda
 grep -q 'nextProofSearchProbeMayDependOnOutcomeIsTrue' DASHI/Reasoning/AristotleMergeExperimentDesignExact.agda
 grep -q 'proofSearchIsClaimedToBeLiteralPhysicalExperimentIsFalse' DASHI/Reasoning/AristotleMergeExperimentDesignExact.agda
+
+grep -q '^eraseThenAddProducesIntroducedMergeLineage :' DASHI/Reasoning/AristotleMergeGovernanceCrossPollinationExact.agda
+grep -q '^eraseThenAddCannotAuthorizeInheritedMergeLineage :' DASHI/Reasoning/AristotleMergeGovernanceCrossPollinationExact.agda
+grep -q '^record AdmittedGuardedMerge' DASHI/Reasoning/AristotleMergeGovernanceCrossPollinationExact.agda
+grep -q '^canonicalAdmittedMergeHasLiveRoute :' DASHI/Reasoning/AristotleMergeGovernanceCrossPollinationExact.agda
+grep -q 'mergeGuardAutomaticallySuppliesRouteAdmissionIsFalse' DASHI/Reasoning/AristotleMergeGovernanceCrossPollinationExact.agda
 
 scripts/run_agda29_parallel_check.sh DASHI/Reasoning/AristotleMergeExperimentValidation.agda
