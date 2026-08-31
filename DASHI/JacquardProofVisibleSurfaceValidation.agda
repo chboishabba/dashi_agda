@@ -5,6 +5,10 @@ open import DASHI.Core.Prelude
 import DASHI.Computation.JacquardOperationalSemanticsExact as Jacquard
 import DASHI.Computation.JacquardProofVisibleSurfaceExact as Visible
 import DASHI.Combinatorics.ProofFabricCompilerExact as ProofFabric
+import DASHI.Core.FibreRestrictionCore as Fibre
+import DASHI.Core.LoomEncoding as Loom
+import DASHI.Core.ProjectionCategory as PC
+import DASHI.Core.ProjectionFibre as PF
 
 visibleCompilerRegression :
   (program : Jacquard.JacquardProgram 2) →
@@ -26,11 +30,9 @@ visibleProofReadbackRegression :
   ≡ ProofFabric.justTritStream (ProofFabric.serializeProof codec proof)
 visibleProofReadbackRegression = Visible.proofVisibleCodeReadable
 
-jacquardVisibleFibreRegression : DASHI.Core.FibreRestrictionCore.FibreRestrictionCore
+jacquardVisibleFibreRegression : Fibre.FibreRestrictionCore
 jacquardVisibleFibreRegression = Visible.jacquardVisibleFibreCore
 
 jacquardVisibleLoomRegression :
-  DASHI.Core.LoomEncoding.LoomEncoding
-    DASHI.Core.ProjectionCategory.canonicalProjectionCategory
-    DASHI.Core.ProjectionFibre.canonicalProjectionFibre
+  Loom.LoomEncoding PC.canonicalProjectionCategory PF.canonicalProjectionFibre
 jacquardVisibleLoomRegression = Visible.jacquardVisibleLoomEncoding
