@@ -1,0 +1,12 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanCMP98Equation119Round191Validation where
+
+import DASHI.Physics.YangMills.BalabanCMP98RawUnitPathHomomorphismRound189Exact as R189
+import DASHI.Physics.YangMills.BalabanCMP98ClayBoundarySupersessionRound190Exact as R190
+import DASHI.Physics.YangMills.BalabanCMP98BidiWallRound191Exact as R191
+
+round189PathHomomorphism = R189.cmp98RawUnitPathHomomorphismRound189Level
+round190BoundarySupersession = R190.cmp98ClayBoundarySupersessionRound190Level
+round191WallAudit = R191.cmp98BidiWallAuditRound191Level
+round191SourceWall = R191.literalArbitraryPeriodicSelectedBackgroundProducerRound191Level
+round191TerminalWall = R191.literalTerminalClayCompositionTheoremRound191Level
