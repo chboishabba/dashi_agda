@@ -28,6 +28,7 @@ FILES=(
   DASHI/Analysis/RiemannG2NarrowWindowNoCancellationReturnExact.agda
   DASHI/Analysis/RiemannG2CutoffGrowthBidiExact.agda
   DASHI/Analysis/RiemannG2ScalarDonorRegimeReconciliationExact.agda
+  DASHI/Analysis/RiemannG2QuarterPeriodScalingPropagationExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda
   DASHI/Mathematics/NumberTheory/DiophantineTupleDPrimeSquare2026ClaimAuditExact.agda
