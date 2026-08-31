@@ -9,11 +9,6 @@ import DASHI.Reasoning.LogicalConsequenceDerivationPathExact as Path
 
 ------------------------------------------------------------------------
 -- CHANGED DERIVATION EDGE -> AFFECTED CONSEQUENCE/CONE CERTIFICATES
---
--- A source/world/semantic/evidence change should invalidate exactly the
--- certificates that depend on the changed derivation artifact.  Reverse
--- dependency closure is canonical and transitive; unrelated certificates do
--- not reopen merely because they live in the same claim cone.
 ------------------------------------------------------------------------
 
 data ImplicationArtifact : Set where
@@ -76,13 +71,20 @@ selectiveReopeningToAdaptiveConsumer reopening =
     (reopeningReference reopening)
 
 transitiveImplicationReopening :
-  ∀ {graph change middle target} →
-  SelectiveImplicationReopening graph change →
-  affectedCertificate _ ≡ middle →
-  Dependency.ReopeningObligation (Depends graph) middle target →
-  Dependency.ReopeningObligation (Depends graph) (changed change) target
-transitiveImplicationReopening reopening refl downstream =
-  Dependency.obligationsCompose (reopeningObligation reopening) downstream
+  ∀ {graph change target} →
+  (reopening : SelectiveImplicationReopening graph change) →
+  Dependency.ReopeningObligation
+    (Depends graph)
+    (affectedCertificate reopening)
+    target →
+  Dependency.ReopeningObligation
+    (Depends graph)
+    (changed change)
+    target
+transitiveImplicationReopening reopening downstream =
+  Dependency.obligationsCompose
+    (reopeningObligation reopening)
+    downstream
 
 ------------------------------------------------------------------------
 -- Exact finite dependency fixture.
@@ -154,7 +156,6 @@ semanticChangeReopensConeTransitively :
 semanticChangeReopensConeTransitively =
   transitiveImplicationReopening
     semanticChangeReopensEdge
-    refl
     edgeToConeObligation
 
 coneToConsumerObligation :
