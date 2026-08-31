@@ -12,8 +12,8 @@ module DASHI.Governance.EmbodiedAgentGovernanceEverything where
 -- distinct so emergent/shared-state communication is not erased by nominal
 -- interface descriptions. Levin-style agency/material competency is additionally
 -- kept separate from consciousness and moral-status promotion. Competing
--- substrate-sensitive consciousness theories now feed the canonical DASHI
--- discriminator-synthesis machinery rather than closing by assertion.
+-- substrate-sensitive consciousness theories feed the canonical discriminator
+-- machinery and the active BIDI loop rather than closing by assertion.
 ------------------------------------------------------------------------
 
 import DASHI.Governance.ResourcePressureTelemetryPermissionExact
@@ -32,6 +32,7 @@ import DASHI.Governance.Lerchner2026AbstractionFallacySourceBridgeExact
 import DASHI.Governance.ConsciousnessRealisedTopologyCrossPollinationExact
 import DASHI.Governance.LevinAgenticMaterialRealisedTopologyCrossPollinationExact
 import DASHI.Governance.ConsciousnessPhysicalDiscriminatorSynthesisExact
+import DASHI.Governance.ConsciousnessAgenticMaterialActiveBidiExact
 
 -- Core dependencies exposed here for downstream governance consumers.
 import DASHI.Core.ObservationInterventionTrustFibreExact
@@ -40,3 +41,4 @@ import DASHI.Core.DeclaredRealisedInteractionTopologyExact
 import DASHI.Core.ProofCarryingPhysicalExecutionBoundaryExact
 import DASHI.Core.GovernedBackwardConsumerRevisionExact
 import DASHI.Core.DiscriminatorSynthesisExact
+import DASHI.Core.ActiveBidiDiscriminatorLoopExact
