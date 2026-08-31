@@ -13,14 +13,14 @@ module DASHI.Physics.Closure.NSTriadKNLiteralMixedCellGramPairRound380Exact wher
 -- R179 real-Hermitian Gram scalar of two such cells.
 --
 -- We deliberately avoid function extensionality.  The canonical tangent below
--- is built from the damped-forced function itself, while the two pointwise
--- receipts show that at every physical mode it is the SAME value as the
--- repository's literal R94/R30 coefficient.
+-- is built from the damped-forced function itself, while the pointwise receipt
+-- shows that at every physical mode it is the SAME value as the repository's
+-- literal R94/R30 coefficient.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -117,7 +117,7 @@ module LiteralPair
     (alpha beta : Physical.PhysicalTriadIncidence) →
     R291.gramTangent (physicalDampedCellPair alpha beta)
     ≡
-    (Data.Rational.Base.0ℚ - R291.pairRate (physicalDampedCellPair alpha beta))
+    (0ℚ - R291.pairRate (physicalDampedCellPair alpha beta))
       * R291.gram (physicalDampedCellPair alpha beta)
       + R291.nonlinearGramRemainder (physicalDampedCellPair alpha beta)
   physicalGramPairTangent alpha beta =
