@@ -122,3 +122,20 @@ import DASHI.Governance.MiddleEastProvenancePolicyRouting
 import DASHI.Governance.AmalekProvenanceRoleBinding
 import DASHI.Governance.PopulistPlutocraticDualProjection
 import DASHI.Governance.IranUS2026RestitutionObservation
+
+------------------------------------------------------------------------
+-- Religious-childhood / feminist subject-formation / witch-history BIDI.
+-- Historical genealogy, empirical instantiation, identity attribution and
+-- causal promotion remain separately typed.
+import DASHI.Governance.ReligiousChildhoodSubjectFormationBidiExact
+import DASHI.Governance.ReligiousChildhoodInstantiationEvidenceAtlasExact
+import DASHI.Governance.WitchTrialEvidenceSubjectAttributionExact
+import DASHI.Governance.SuffrageWitchReclamationGenealogyExact
+import DASHI.Governance.HistoricalEventMeaningProvenanceBidiExact
+import DASHI.Governance.SexedHistoricalSubjectDialecticBidiExact
+import DASHI.Governance.SexedHistoricalCoConstitutionHyperfabricExact
+import DASHI.Governance.SexedHistoricalTransitionHyperfabricExact
+import DASHI.Governance.SexedHistoricalChoiceConeBridgeExact
+import DASHI.Governance.SexedHistoricalActionFeedbackHyperfabricExact
+import DASHI.Governance.SexedHistoricalCollectiveThresholdNetworkExact
+import DASHI.Governance.ReligiousChildhoodFeministWitchRegression
