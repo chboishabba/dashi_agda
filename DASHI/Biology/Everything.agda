@@ -63,6 +63,7 @@ import DASHI.Biology.ParentalFearIntegratedFormalismExact
 import DASHI.Biology.InterpretiveCodingSystem
 import DASHI.Biology.CrossPaperDialecticalDevelopment
 import DASHI.Biology.AliceBrownCorpusLoom
+import DASHI.Biology.AliceBrownDissentGovernanceCrossPollinationExact
 -- Stateful multiplex conscious-access / psychedelic reweighting tranche.
 import DASHI.Biology.StateDependentMultiplexTransducer
 import DASHI.Biology.ProductiveTransformCoherence
