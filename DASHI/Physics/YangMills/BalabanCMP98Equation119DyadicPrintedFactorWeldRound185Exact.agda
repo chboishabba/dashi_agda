@@ -105,7 +105,7 @@ record DyadicPrintedFactorWeld
             (R182.asCanonicalL13Equation119Source source))
           step point
 
-    coarseReverseFactorMatches : ∀ step point →
+    coarseReverseFactorMatches : ∀ step →
       Printed.reversedCoarseBondValue
         (DyadicPrinted.printedData inputs)
         (fieldAtStep step)
@@ -189,7 +189,7 @@ printedRelativeProductIsLiteralRelative {group = group} {source = source} {input
           (crossingFactorMatches weld step point)
           (cong₂ (Bond.multiply group)
             (targetReverseFactorMatches weld step point)
-            (coarseReverseFactorMatches weld step point)))
+            (coarseReverseFactorMatches weld step)))
   in
   trans multiplication
     (trans factors
