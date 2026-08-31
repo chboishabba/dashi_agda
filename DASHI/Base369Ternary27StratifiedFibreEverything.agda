@@ -36,4 +36,9 @@ import DASHI.Moonshine.Base369ZetaHeisenbergFiftyFourCarrierExact
 import DASHI.Base369ZetaHeisenbergFiftyFourValidation
 import DASHI.Base369MonsterTwoComponentCompletionValidation
 
+-- Consumer-first representation-theoretic frontier: actual M -> MN3B
+-- restriction, tensor constituent identification, Base369/Heisenberg
+-- intertwining, then the structured +53 excess audit.
+import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchExact
+
 import DASHI.Base369Ternary27StratifiedFibreHolonomyValidation
