@@ -20,6 +20,8 @@ import DASHI.Governance.DrugCategoryTranslationEdgeIndexedReopeningExact as Edge
 import DASHI.Governance.DrugCategoryPartialTranslationPathCategoryExact as PartialPath
 import DASHI.Governance.DrugCategoryComposedPathEdgeReopeningExact as ComposedReopen
 import DASHI.Governance.DrugCategoryConsumerIndexedTranslationAdmissionExact as ConsumerAdmission
+import DASHI.Governance.DrugCategoryConsumerRelativeQuotientInverseExact as QuotientInverse
+import DASHI.Governance.DrugCategoryConsumerRelativeInverseCompositionExact as InverseComposition
 import DASHI.Governance.DrugCategoryPhilosophyOperatorAtlasExact as Philosophy
 import DASHI.Governance.DrugCategoryPhilosophySelectiveReopeningExact as PhilosophyReopen
 
@@ -53,6 +55,16 @@ consumerAdmissionBoundary :
   ConsumerAdmission.DrugCategoryConsumerIndexedTranslationBoundary
 consumerAdmissionBoundary =
   ConsumerAdmission.canonicalDrugCategoryConsumerIndexedTranslationBoundary
+
+quotientInverseBoundary :
+  QuotientInverse.DrugCategoryConsumerRelativeQuotientInverseBoundary
+quotientInverseBoundary =
+  QuotientInverse.canonicalDrugCategoryConsumerRelativeQuotientInverseBoundary
+
+inverseCompositionBoundary :
+  InverseComposition.ConsumerRelativeInverseCompositionBoundary
+inverseCompositionBoundary =
+  InverseComposition.canonicalConsumerRelativeInverseCompositionBoundary
 
 philosophyBoundary : Philosophy.DrugCategoryPhilosophyOperatorBoundary
 philosophyBoundary = Philosophy.canonicalDrugCategoryPhilosophyOperatorBoundary
@@ -89,3 +101,19 @@ clinicalConsumerAdmitsComposedPath :
     PartialPath.stateClinicalLivedPath
 clinicalConsumerAdmitsComposedPath =
   ConsumerAdmission.clinicalSafetyAdmitsStateClinicalLived
+
+clinicalQuotientInverseExistsOnComposedPath :
+  QuotientInverse.ConsumerRelativeQuotientInverse
+    ConsumerAdmission.clinicalSafetyConsumer
+    PartialPath.stateClinicalLivedPath
+clinicalQuotientInverseExistsOnComposedPath =
+  QuotientInverse.clinicalQuotientInverseOnStateClinicalLived
+
+clinicalQuotientInverseComposesAcrossPathSegments :
+  QuotientInverse.ConsumerRelativeQuotientInverse
+    ConsumerAdmission.clinicalSafetyConsumer
+    (PartialPath.appendPath
+      InverseComposition.stateClinicalPath
+      InverseComposition.clinicalLivedPath)
+clinicalQuotientInverseComposesAcrossPathSegments =
+  InverseComposition.composedClinicalInverse
