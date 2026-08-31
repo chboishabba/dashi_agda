@@ -10,10 +10,34 @@ import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Choice
 -- COSTED PARTIAL-INFORMATION SELECTION
 --
 -- A useful information move need not close the current consumer or identify a
--- mechanism.  It may instead carry a certified refinement of the admissible
--- residual fibre.  Quantitative "gain" is application-declared/certified rather
+-- mechanism. It may instead carry a certified refinement of the admissible
+-- residual fibre. Quantitative "gain" is application-declared/certified rather
 -- than invented from arbitrary Set-valued fibre cardinalities.
+--
+-- Unlike the older experiment-specific InformationMoveKind, this owner is
+-- deliberately cross-domain: laboratory measurements, model-fidelity changes,
+-- proof-search actions, source recovery, and context/provenance audits can all
+-- inhabit one residual-progress search objective without being identified with
+-- each other.
 ------------------------------------------------------------------------
+
+data ResidualInformationMoveKind : Set where
+  measurementResidualMove
+  fidelityResidualMove
+  perturbationResidualMove
+  replicationResidualMove
+  proofSearchResidualMove
+  sourceRecoveryResidualMove
+  contextAuditResidualMove
+  : ResidualInformationMoveKind
+
+measurementNotProofSearch :
+  measurementResidualMove ≡ proofSearchResidualMove → ⊥
+measurementNotProofSearch ()
+
+sourceRecoveryNotContextAudit :
+  sourceRecoveryResidualMove ≡ contextAuditResidualMove → ⊥
+sourceRecoveryNotContextAudit ()
 
 record ResidualInformationMove (Hidden : Set) : Set₁ where
   constructor residualInformationMove
@@ -22,7 +46,7 @@ record ResidualInformationMove (Hidden : Set) : Set₁ where
     posterior : Bidi.ResidualFibre Hidden
     refinement : Bidi.FibreRefines posterior prior
 
-    moveKind : Choice.InformationMoveKind
+    moveKind : ResidualInformationMoveKind
     cost : Nat
     certifiedGain : Nat
 
@@ -34,10 +58,34 @@ record ResidualInformationMove (Hidden : Set) : Set₁ where
 
 open ResidualInformationMove public
 
-asInformationMove :
-  ∀ {Hidden} → ResidualInformationMove Hidden → Choice.InformationMove
-asInformationMove move = Choice.informationMove
-  (moveKind move)
+------------------------------------------------------------------------
+-- Experimental moves can still be lowered into the pre-existing actionability
+-- search vocabulary, but proof/source/context moves are not mislabeled as lab
+-- measurements merely to reuse that API.
+------------------------------------------------------------------------
+
+data ExperimentLikeResidualKind : ResidualInformationMoveKind → Set where
+  measurementExperimentLike : ExperimentLikeResidualKind measurementResidualMove
+  fidelityExperimentLike : ExperimentLikeResidualKind fidelityResidualMove
+  perturbationExperimentLike : ExperimentLikeResidualKind perturbationResidualMove
+  replicationExperimentLike : ExperimentLikeResidualKind replicationResidualMove
+
+asChoiceKind :
+  {kind : ResidualInformationMoveKind} →
+  ExperimentLikeResidualKind kind →
+  Choice.InformationMoveKind
+asChoiceKind measurementExperimentLike = Choice.takeMeasurement
+asChoiceKind fidelityExperimentLike = Choice.increaseFidelity
+asChoiceKind perturbationExperimentLike = Choice.perturbAndMeasure
+asChoiceKind replicationExperimentLike = Choice.replicateMeasurement
+
+asExperimentInformationMove :
+  ∀ {Hidden} →
+  (move : ResidualInformationMove Hidden) →
+  ExperimentLikeResidualKind (moveKind move) →
+  Choice.InformationMove
+asExperimentInformationMove move evidence = Choice.informationMove
+  (asChoiceKind evidence)
   (cost move)
   (moveReference move)
   (calibrationReference move)
@@ -150,8 +198,14 @@ record CostedResidualChoiceBoundary : Set where
     costAndGainCanDefineAParetoSurface : Bool
     costAndGainCanDefineAParetoSurfaceIsTrue :
       costAndGainCanDefineAParetoSurface ≡ true
+    proofSearchIsForcedIntoMeasurementConstructor : Bool
+    proofSearchIsForcedIntoMeasurementConstructorIsFalse :
+      proofSearchIsForcedIntoMeasurementConstructor ≡ false
+    heterogeneousInformationMovesCanShareResidualObjective : Bool
+    heterogeneousInformationMovesCanShareResidualObjectiveIsTrue :
+      heterogeneousInformationMovesCanShareResidualObjective ≡ true
 
 canonicalCostedResidualChoiceBoundary : CostedResidualChoiceBoundary
 canonicalCostedResidualChoiceBoundary =
   costedResidualChoiceBoundary
-    false refl true refl false refl false refl true refl
+    false refl true refl false refl false refl true refl false refl true refl
