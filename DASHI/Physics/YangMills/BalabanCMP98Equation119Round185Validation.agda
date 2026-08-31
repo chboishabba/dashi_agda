@@ -2,6 +2,13 @@
 module DASHI.Physics.YangMills.BalabanCMP98Equation119Round185Validation where
 
 import DASHI.Physics.YangMills.BalabanCMP98Equation119PhysicalSelectedBackgroundRound185Exact as R185
+import DASHI.Physics.YangMills.BalabanCMP98Equation119TypedPhysicalRealizationRound186Exact as R186
 
 round185PhysicalSelectedBackground =
   R185.cmp98Equation119PhysicalSelectedBackgroundRound185Level
+
+round186TypedPhysicalRealization =
+  R186.cmp98Equation119TypedPhysicalRealizationRound186Level
+
+round186PhysicalBondFieldDefinitional =
+  R186.cmp98Equation119PhysicalBondFieldDefinitionalRound186Level
