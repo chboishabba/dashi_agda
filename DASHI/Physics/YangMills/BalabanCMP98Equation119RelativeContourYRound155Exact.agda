@@ -36,10 +36,10 @@ open import Data.List.Base using (_++_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP98MultiscaleAveragingDerivativeRound126Exact as R126
 import DASHI.Physics.YangMills.BalabanCMP98Equation119OneStepDerivativeRound146Exact as R146
-import DASHI.Physics.YangMills.BalabanCMP98Equation119LiteralPathRound147Exact as R147
 import DASHI.Physics.YangMills.BalabanCMP98Equation119LeastPrivilegeSourceRound152Exact as R152
 import DASHI.Physics.YangMills.BalabanCMP98Equation119YIndexedDexpRound154Exact as R154
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109PeriodicContourFamilyInstantiationExact as Periodic
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredPeriodicEmbeddingExact as Embed
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredOddBlockCarrierExact as Centered
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Carrier
@@ -61,8 +61,8 @@ reverseWord (direction ∷ directions) =
 ------------------------------------------------------------------------
 -- Literal Gamma_{c,x}: c- -> x -> x(c) -> c+.
 --
--- R147 already proves that translating the coarse segment through x lands at
--- the same centred offset in the plus block.  The final leg is therefore the
+-- R150/R147 already establish that translating the coarse segment through x
+-- lands at the same centred offset in the plus block.  The final leg is the
 -- orientation reversal of the canonical plus-centre-to-x(c) contour.
 ------------------------------------------------------------------------
 
@@ -71,31 +71,6 @@ literalGammaWord :
   R152.LiteralEquation119LeastPrivilegeSource C n Value group →
   Nat → Centered.CenteredBlockPoint4 6 → List Word.SignedAxis4
 literalGammaWord source step point =
-  Embed.canonicalCenteredContourWord point
-  ++ R147.coarseWord
-      (R152.asLiteralPathData source
-        (dummyConvention source)) step
-  ++ reverseWord (Embed.canonicalCenteredContourWord point)
-  where
-  -- `coarseWord` is independent of the dexp convention, but R147 stores it in
-  -- path data.  A local dummy convention cannot be manufactured safely, so the
-  -- executable definition below uses the source segment word directly instead.
-  -- This declaration is intentionally unreachable; `literalGammaWordDirect`
-  -- is the public source-faithful definition used by all subsequent theorems.
-  postulate dummyConvention :
-    ∀ {C n Value group}
-      (s : R152.LiteralEquation119LeastPrivilegeSource C n Value group) →
-    DASHI.Physics.YangMills.BalabanCMP98Equation119DexpReuseRound148Exact.CMP98Equation119DexpConvention
-      (R126.Vector (R146.additive C))
-
--- Direct version with no Lie-calculus dependency at all.
-open import DASHI.Physics.YangMills.BalabanClayGate4CMP109PeriodicContourFamilyInstantiationExact as Periodic
-
-literalGammaWordDirect :
-  ∀ {C n Value group} →
-  R152.LiteralEquation119LeastPrivilegeSource C n Value group →
-  Nat → Centered.CenteredBlockPoint4 6 → List Word.SignedAxis4
-literalGammaWordDirect source step point =
   Embed.canonicalCenteredContourWord point
   ++ Periodic.segmentWord (R152.coarseSegment source step)
   ++ reverseWord (Embed.canonicalCenteredContourWord point)
@@ -122,7 +97,7 @@ literalGammaHolonomy source step point =
   Bond.pathHolonomy
     (R152.realization source step)
     (Embed.embeddingCentre (R152.minusEmbedding source step))
-    (literalGammaWordDirect source step point)
+    (literalGammaWord source step point)
 
 relativeContourElement :
   ∀ {C n Value group} →
