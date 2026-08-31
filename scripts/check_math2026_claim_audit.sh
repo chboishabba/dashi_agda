@@ -12,6 +12,7 @@ FILES=(
   DASHI/Analysis/RiemannG2BidiCutReconciliationExact.agda
   DASHI/Analysis/RiemannG2C3MonsterEquivarianceAuditExact.agda
   DASHI/Analysis/RiemannG2DeterminantConsumerQuotient369Exact.agda
+  DASHI/Analysis/RiemannG2PostSchurDeterminantSufficiency369Exact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda
   DASHI/Mathematics/NumberTheory/DiophantineTupleDPrimeSquare2026ClaimAuditExact.agda
