@@ -4,19 +4,8 @@ module DASHI.AgenticMaterialBidiEverything where
 -- Focused capstone for Levin-style diverse intelligence / agentic material,
 -- realised interaction topology, consciousness boundaries, chemistry/process
 -- state, planning/logistics, active BIDI discriminator/refinement cycles,
--- neural/ML coarse-graining and prebiotic chemistry/life-transition frontiers.
---
--- It deliberately keeps the following distinct:
---   observer-relative computational reading
---   realised interaction/competency topology
---   physical/material carrier
---   goal-directed correction evidence
---   autonomy/boundary maintenance
---   learned statistical representation
---   quantum/physical implementation
---   chemical organisation / life-like dynamics
---   consciousness
---   moral/governance authority
+-- neural/ML coarse-graining, quantum implementation, prebiotic chemistry,
+-- carbon chemical suitability and cosmic-parameter viability fibres.
 ------------------------------------------------------------------------
 
 import DASHI.Biology.Levin.Everything
@@ -36,11 +25,17 @@ import DASHI.Core.DiscriminatorSynthesisExact
 import DASHI.Core.ActiveBidiDiscriminatorLoopExact
 import DASHI.Core.AdaptiveConsumerModelLoopExact
 
+import DASHI.Chemistry.CarbonChemicalSuitabilityLifeBoundaryExact
+
 import DASHI.Governance.ConsciousnessAbstractionInstantiationBoundaryExact
 import DASHI.Governance.ConsciousnessRealisedTopologyCrossPollinationExact
 import DASHI.Governance.ConsciousnessPhysicalDiscriminatorSynthesisExact
 import DASHI.Governance.LevinAgenticMaterialRealisedTopologyCrossPollinationExact
 import DASHI.Governance.ConsciousnessAgenticMaterialActiveBidiExact
+
+import DASHI.Physics.Foundations.FundamentalConstantViabilityFibreExact
+import DASHI.Physics.Closure.TSFVMultiverseViabilityCrossPollinationExact
+import DASHI.Programmes.DashiQCarbonConstantsHistoricalSourceBridgeExact
 
 import DASHI.Reasoning.NeuralMLSubstrateSymmetryQuantumBidiExact
 import DASHI.Reasoning.NeuralSpectralRelationCrossPollinationExact
