@@ -9,14 +9,11 @@ import DASHI.Reasoning.SpacyDependencyToCandidateLogicalPNFExact as Candidate
 import DASHI.Reasoning.PredicateNormalFormLogicalCalculusExact as Logic
 import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Cone
 import DASHI.Reasoning.PredicateNormalFormEvidenceAuditExact as EvidencePNF
+open Candidate using (Formula; _⇒_)
+open Logic using (_⊢_; formula; impElim; assumption; here; there)
 
 ------------------------------------------------------------------------
 -- CAPSTONE: spaCy -> candidate semantics -> reviewed PNF -> logic -> cone
---
--- Every arrow is receipt-bearing and the reverse direction remains visible:
--- a logical reading retains the semantic candidate/resolution that supported
--- it, and that candidate retains the parser dependency observation that
--- proposed it.  Logical closure is not silently promoted to empirical support.
 ------------------------------------------------------------------------
 
 record SpacyToLogicalImplicationRun
@@ -42,9 +39,9 @@ record SpacyToLogicalImplicationRun
       Logic.EvidencePNFLogicalInterpretation
         (Cone.compiled evidentialCompilation)
 
-    derivedFormula : Candidate.Formula
+    derivedFormula : Formula
     logicalDerivation :
-      Logic.formula logicalInterpretation ∷ [] Logic.⊢ derivedFormula
+      formula logicalInterpretation ∷ [] ⊢ derivedFormula
 
     consequenceAuthority : Logic.ConsequenceAuthority
     consequenceAuthorityReference : String
@@ -53,13 +50,6 @@ record SpacyToLogicalImplicationRun
     coneLinkReference : String
 
 open SpacyToLogicalImplicationRun public
-
-------------------------------------------------------------------------
--- The BIDI readback exposes both ends of the path without claiming inverse
--- equivalence.  We can trace a consequence back to its reviewed assertion and
--- parser-supported semantic candidate, but many parser surfaces/readings may
--- inhabit the same logical formula and one parse may support several readings.
-------------------------------------------------------------------------
 
 record LogicalImplicationReadback
     {source : Cone.NaturalLanguageExperimentalAssertion}
@@ -82,11 +72,11 @@ open LogicalImplicationReadback public
 
 modusPonensFromTwoPremises :
   ∀ {φ ψ} →
-  (φ Candidate.⇒ ψ) ∷ φ ∷ [] Logic.⊢ ψ
+  (φ ⇒ ψ) ∷ φ ∷ [] ⊢ ψ
 modusPonensFromTwoPremises =
-  Logic.impElim
-    (Logic.assumption Logic.here)
-    (Logic.assumption (Logic.there Logic.here))
+  impElim
+    (assumption here)
+    (assumption (there here))
 
 causalPromotionStillNeedsEvidence :
   Logic.promotionAuthority EvidencePNF.strengthensCausalForce
@@ -119,9 +109,4 @@ record SpacyLogicalImplicationBoundary : Set where
 
 canonicalSpacyLogicalImplicationBoundary : SpacyLogicalImplicationBoundary
 canonicalSpacyLogicalImplicationBoundary =
-  spacyLogicalImplicationBoundary
-    false refl
-    true refl
-    false refl
-    false refl
-    true refl
+  spacyLogicalImplicationBoundary false refl true refl false refl false refl true refl
