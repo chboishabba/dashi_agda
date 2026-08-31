@@ -3,30 +3,21 @@ module DASHI.Chemistry.RegulatoryAnalyteCoverageBidiExact where
 ------------------------------------------------------------------------
 -- REGULATORY ANALYTE COVERAGE / CHEMICAL-STATE BIDI BOUNDARY
 --
--- Source attribution is deliberately layered.
---
 -- Regulatory source:
 --   Therapeutic Goods (Standard for Medicinal Cannabis) (TGO 93) Order 2017,
---   Schedule 1: pesticides are assessed against the limits in Ph Eur 2.8.13.
---   https://www.legislation.gov.au/
+--   Schedule 1: pesticides are assessed under Ph Eur 2.8.13.
 --
--- Regulator guidance:
---   Therapeutic Goods Administration,
---   "Complying with the quality requirements for medicinal cannabis"
---   (last updated 14 Oct 2024 at the time this module was written).
---   The guidance describes TGO 93 as minimum quality requirements, permits
---   justified reduced/rotational testing on GMP grounds, allows suitably
---   validated alternative methods, and notes that additional testing may be
---   appropriate in some circumstances.
---   https://www.tga.gov.au/resources/guidance/complying-quality-requirements-medicinal-cannabis
+-- European Pharmacopoeia correction important to this revision:
+--   Ph Eur 2.8.13 is not merely one closed blacklist.  Table 2.8.13.-1 gives
+--   explicit pesticide limits, while suspected pesticides not in that table
+--   are routed to Regulation (EC) No 396/2005; if absent there too, an
+--   ADI-based calculated limit is specified.
 --
 -- User-supplied social-media screenshot, 2026-08-31:
---   visible slide text includes "Statistical probability chemists like myself
---   have gamed your system" and "Took me about 45 minutes".
---
--- The screenshot is evidence only of the visible assertion.  This module does
--- NOT authenticate the speaker, establish the claimed bypass, identify an
--- actual pesticide, or treat the social-media claim as empirical verification.
+--   visible slide text includes a claim that the Australian system was
+--   "gamed" in about 45 minutes.  The screenshot is an application/claim
+--   surface only: it neither owns the generic assay-stress method nor proves a
+--   real bypass.
 --
 -- The finite non-factorability results below are DASHI theorems.  They are not
 -- attributed to TGA, the European Pharmacopoeia, or the screenshot speaker.
@@ -44,10 +35,10 @@ import DASHI.Core.IntersectionalNonFactorability as NonFactor
 ------------------------------------------------------------------------
 
 data SourceKind : Set where
-  legislativeStandard regulatorGuidance socialMediaScreenshot : SourceKind
+  legislativeStandard regulatorGuidance pharmacopoeiaText socialMediaScreenshot : SourceKind
 
 data SourceRole : Set where
-  normativeRequirement guidanceStatement speakerAssertion : SourceRole
+  normativeRequirement guidanceStatement methodText speakerAssertion : SourceRole
 
 data VerificationStatus : Set where
   sourceTextRecovered independentlyEstablished unresolved : VerificationStatus
@@ -64,6 +55,8 @@ open SourceAttribution public
 
 ------------------------------------------------------------------------
 -- Regulatory scope, actual assay scope and full chemical state are separate.
+-- `offPanelCompound` means outside the synthetic finite assay surface below;
+-- it MUST NOT be read as `no Ph Eur/TGO regulatory limit route`.
 ------------------------------------------------------------------------
 
 data Analyte : Set where
@@ -156,8 +149,8 @@ record ComplianceCertificate : Set where
     certificateText : String
 
 renderCertificate : ComplianceResult → ComplianceCertificate
-renderCertificate compliancePass = complianceCertificate "passes declared regulatory pesticide specification"
-renderCertificate complianceFail = complianceCertificate "fails declared regulatory pesticide specification"
+renderCertificate compliancePass = complianceCertificate "passes declared compliance observation"
+renderCertificate complianceFail = complianceCertificate "fails declared compliance observation"
 
 certificateCannotRecoverCompleteOffPanelState :
   NonFactor.FactorsThrough
@@ -168,10 +161,7 @@ certificateCannotRecoverCompleteOffPanelState =
     renderCertificate samePassDifferentOffPanelPresence
 
 ------------------------------------------------------------------------
--- Three distinct questions:
---   1. was a compound detected?
---   2. is it within a declared regulatory/assay scope?
---   3. does its presence establish a legal violation under an applicable rule?
+-- Detection, regulatory route and legal conclusion are distinct questions.
 ------------------------------------------------------------------------
 
 data CompoundObservation : Set where
@@ -189,12 +179,12 @@ detectionDoesNotManufactureViolation :
   legalStatusOf unlistedDetected ≡ noViolationEstablished
 detectionDoesNotManufactureViolation = refl
 
--- Empty permission types make the invalid promotions uninhabited unless an
--- application supplies a separate legal/normative bridge outside this module.
+-- Invalid automatic promotions remain uninhabited.
 data PassImpliesUniversalChemicalAbsencePermission : Set where
 data OffPanelImpliesUndetectablePermission : Set where
 data DetectionImpliesViolationPermission : Set where
 data SocialMediaAssertionImpliesVerifiedBypassPermission : Set where
+data NotExplicitTableMemberImpliesNoRegulatoryLimitPermission : Set where
 
 passCannotAutoPromoteToUniversalChemicalAbsence :
   PassImpliesUniversalChemicalAbsencePermission → ⊥
@@ -212,8 +202,12 @@ socialMediaAssertionCannotAutoPromoteToVerifiedBypass :
   SocialMediaAssertionImpliesVerifiedBypassPermission → ⊥
 socialMediaAssertionCannotAutoPromoteToVerifiedBypass ()
 
+notExplicitTableMemberCannotAutoPromoteToNoRegulatoryLimit :
+  NotExplicitTableMemberImpliesNoRegulatoryLimitPermission → ⊥
+notExplicitTableMemberCannotAutoPromoteToNoRegulatoryLimit ()
+
 ------------------------------------------------------------------------
--- Source-bounded TGO 93 / TGA calibration.
+-- Source-bounded TGO 93 / TGA / Ph Eur calibration.
 ------------------------------------------------------------------------
 
 tgo93PesticideRequirement : SourceAttribution
@@ -222,7 +216,7 @@ tgo93PesticideRequirement =
     legislativeStandard
     normativeRequirement
     sourceTextRecovered
-    "TGO 93 Schedule 1: pesticides; limits specified in Ph Eur 2.8.13"
+    "TGO 93 Schedule 1 item 5: Pesticides; Ph Eur 2.8.13; not more than the limits specified in Ph Eur 2.8.13"
 
 tgaQualityGuidance : SourceAttribution
 tgaQualityGuidance =
@@ -232,6 +226,14 @@ tgaQualityGuidance =
     sourceTextRecovered
     "TGA: Complying with the quality requirements for medicinal cannabis"
 
+phEurUnlistedPesticideRoute : SourceAttribution
+phEurUnlistedPesticideRoute =
+  sourceAttribution
+    pharmacopoeiaText
+    methodText
+    sourceTextRecovered
+    "Ph Eur 11.0 2.8.13: suspected pesticides outside Table 2.8.13.-1 use EU 396/2005 limits; if absent from EU texts, an ADI-based calculated limit applies"
+
 userSuppliedSlideAssertion : SourceAttribution
 userSuppliedSlideAssertion =
   sourceAttribution
@@ -240,12 +242,18 @@ userSuppliedSlideAssertion =
     unresolved
     "User-supplied screenshot 2026-08-31: visible slide claims system gaming in about 45 minutes"
 
-canonicalTGO93Panel : RegulatoryPanel
-canonicalTGO93Panel =
-  regulatoryPanel
+------------------------------------------------------------------------
+-- Synthetic assay panel retained only as the finite logical calibration used by
+-- the non-factorability theorem.  It is no longer named `canonicalTGO93Panel`:
+-- doing so would incorrectly equate this three-analyte toy with the legal Ph Eur
+-- limit architecture.
+------------------------------------------------------------------------
+
+syntheticDeclaredAssayPanel : AssayPanel
+syntheticDeclaredAssayPanel =
+  assayPanel
     scope
-    "Ph Eur 2.8.13"
-    "TGO 93 Schedule 1 limits specified in Ph Eur 2.8.13"
+    "DASHI synthetic three-coordinate assay observer; not a real laboratory panel"
   where
     scope : Analyte → ScopeStatus
     scope regulatedPesticideA = inScope
@@ -253,11 +261,9 @@ canonicalTGO93Panel =
     scope offPanelCompound = outOfScope
 
 ------------------------------------------------------------------------
--- Important calibration boundary:
--- `offPanelCompound` is a synthetic finite witness.  It is NOT the name of an
--- actual pesticide alleged to be absent from Ph Eur 2.8.13.  Establishing that
--- a real compound is outside an applicable method/panel requires a separate,
--- edition-specific analytical receipt.
+-- Real positive table-membership receipts now live in the sibling owner:
+--   DASHI.Chemistry.TGO93PhEurPesticideMembershipExact
+-- including DDT, acephate, chlorpyriphos-ethyl and other named entries.
 ------------------------------------------------------------------------
 
 record RegulatoryAnalyteCoverageBoundary : Set where
@@ -268,7 +274,9 @@ record RegulatoryAnalyteCoverageBoundary : Set where
     offPanelMeansZeroDetectionProbability : Bool
     detectedUnlistedCompoundAutomaticallyViolatesLaw : Bool
     socialMediaSlideEstablishesSuccessfulBypass : Bool
-    exactPanelMembershipForRealNamedCompoundsInstalledHere : Bool
+    socialMediaSlideOwnsGenericStressAuditMethod : Bool
+    notExplicitTableMemberMeansNoRegulatoryLimit : Bool
+    realNamedPositiveMembershipReceiptsInstalledInChemistry : Bool
     finiteNonFactorabilityIsDASHITheorem : Bool
 
 canonicalRegulatoryAnalyteCoverageBoundary : RegulatoryAnalyteCoverageBoundary
@@ -280,4 +288,6 @@ canonicalRegulatoryAnalyteCoverageBoundary =
     false
     false
     false
+    false
+    true
     true
