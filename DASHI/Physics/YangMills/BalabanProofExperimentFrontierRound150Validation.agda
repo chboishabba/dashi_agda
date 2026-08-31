@@ -1,0 +1,40 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanProofExperimentFrontierRound150Validation where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+import DASHI.Physics.YangMills.BalabanCombinedRGUnifiedActionRound141Exact as R141
+import DASHI.Physics.YangMills.BalabanBC1PhysicalCompositeFirstVariationRound145Exact as R145
+import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Exact as R146
+import DASHI.Physics.YangMills.BalabanFrontierRouteAdmissionRound147Exact as R147
+import DASHI.Physics.YangMills.BalabanFrontierExperimentDesignRound148Exact as R148
+import DASHI.Physics.YangMills.BalabanFrontierFeedbackSearchRound149Exact as R149
+import DASHI.Physics.YangMills.BalabanConsumerWeightedFrontierPriorityRound150Exact as R150
+
+round141SameActionRealizationCompiler : ProofLevel
+round141SameActionRealizationCompiler =
+  R141.completeDensityEffectiveActionRealizationCompilerLevel
+
+round145ComponentFirstVariationCompiler : ProofLevel
+round145ComponentFirstVariationCompiler =
+  R145.bc1PhysicalCompositeFirstVariationCompilerLevel
+
+round146SearchHypergraphCompiler : ProofLevel
+round146SearchHypergraphCompiler = R146.balabanPhysicalFrontierHypergraphLevel
+
+round147RouteAdmissionCompiler : ProofLevel
+round147RouteAdmissionCompiler = R147.balabanFrontierRouteAdmissionLevel
+
+round148ExperimentDesignCompiler : ProofLevel
+round148ExperimentDesignCompiler = R148.balabanFrontierExperimentDesignLevel
+
+round149FeedbackSearchCompiler : ProofLevel
+round149FeedbackSearchCompiler = R149.balabanFrontierFeedbackSearchLevel
+
+round150ConsumerPriorityCompiler : ProofLevel
+round150ConsumerPriorityCompiler = R150.balabanConsumerWeightedFrontierPriorityLevel
+
+-- The validation root deliberately keeps literal physical/source inhabitation
+-- conditional.  It validates the search/experiment compiler graph only.
+round146LiteralSourceLeaves : ProofLevel
+round146LiteralSourceLeaves = R146.literalBalabanFrontierLeafInhabitationLevel
