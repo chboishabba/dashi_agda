@@ -2,24 +2,11 @@ module DASHI.Physics.Closure.NSTriadKNDeterministicNestedColumnWeightRound332Exa
 
 ------------------------------------------------------------------------
 -- ROUND332 / REVERSE COLUMN ALSO DETERMINES THE R295 CELL WEIGHT
---
--- R331 proves that fixing an inner incidence and outer q fixes the final
--- output.  R295's cell damping rate is
---
---   lambda(outer) = rho(p_outer) + rho(q_outer).
---
--- The nested glue identifies p_outer with k_inner.  Hence the same reverse
--- column key (inner,q) determines not only k but also lambda and any abstract
--- R295 weight phi(lambda).  There is therefore no hidden independent column
--- weight multiplicity.
---
--- Numerical heat control remains separate: R295 intentionally does not install
--- exp(-s lambda), its positivity, or an upper bound.  This file must not turn
--- determinacy into a quantitative column receipt.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (ℚ; _+_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -32,7 +19,7 @@ F : C3.RealField _
 F = Rational.rationalRealField
 
 sameNestedColumnForcesSameRate :
-  (rho : Z3.FourierMode → Rational.ℚ)
+  (rho : Z3.FourierMode → ℚ)
   (inner outer₁ outer₂ : Physical.PhysicalTriadIncidence) →
   Physical.k inner ≡ Physical.p outer₁ →
   Physical.k inner ≡ Physical.p outer₂ →
@@ -53,8 +40,8 @@ sameNestedColumnForcesSameRate rho inner outer₁ outer₂ glue₁ glue₂ qSame
   cong₂Add refl refl = refl
 
 sameNestedColumnForcesSameWeight :
-  (rho : Z3.FourierMode → Rational.ℚ)
-  (phi : Rational.ℚ → C3.Complex F)
+  (rho : Z3.FourierMode → ℚ)
+  (phi : ℚ → C3.Complex F)
   (inner outer₁ outer₂ : Physical.PhysicalTriadIncidence) →
   Physical.k inner ≡ Physical.p outer₁ →
   Physical.k inner ≡ Physical.p outer₂ →
