@@ -25,7 +25,9 @@ import DASHI.Moonshine.Base369MonsterFineCarrierEquivarianceAuditExact
 import DASHI.Moonshine.Base369PeriodicTernaryTorusPathRestrictionBidiExact
 import DASHI.Moonshine.Base369PeriodicHeisenbergFibreEquivarianceExact
 
--- Exact decimal/nonary completion and 10 x 3^9 Monster bulk ledger.
+-- Exact decimal/nonary completion, 10 x 3^9 bulk, and structured 53/54 branch.
 import DASHI.Moonshine.Base369DecimalCompletionMonsterBulkBidiExact
+import DASHI.Moonshine.Base369MonsterTwoComponentCompletionBidiExact
+import DASHI.Base369MonsterTwoComponentCompletionValidation
 
 import DASHI.Base369Ternary27StratifiedFibreHolonomyValidation
