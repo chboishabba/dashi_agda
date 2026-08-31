@@ -2,7 +2,7 @@ module DASHI.Combinatorics.TextileBraidRewriteGroupoidExact where
 
 open import DASHI.Core.Prelude
 open import Data.List using (map; reverse; _++_)
-open import Data.List.Properties using (++-assoc; reverse-involutive)
+open import Data.List.Properties using (++-assoc)
 
 import DASHI.Combinatorics.TextileNFibreCalculusExact as T
 
