@@ -87,7 +87,7 @@ reservedTileRejected = refl
 --
 -- Each tile is a one-pick, two-warp cell.  A zero bit is represented by weft
 -- over warp (warp-under-weft); a one bit by warp over weft.  Concatenating
--- tiles horizontally/vertically is manufacturing/layout work and does not
+-- tiles into a wider/taller draft is manufacturing/layout work and does not
 -- change the verified symbol semantics.
 ------------------------------------------------------------------------
 
@@ -134,10 +134,6 @@ record ProofFabricArtifact (Proof : Set) : Set where
     sourceProof : Proof
     serializedProof : List Trit
     weaveTiles : List ProofWeaveTile
-    serializationMatches : serializedProof ≡ weaveTilesToTritSource
-      where
-        weaveTilesToTritSource : List Trit
-        weaveTilesToTritSource = serializedProof
     tilesMatchSerialization : weaveTiles ≡ compileTritStream serializedProof
 
 open ProofFabricArtifact public
@@ -153,7 +149,25 @@ compileProofToFabric codec proof =
     (serializeProof codec proof)
     (compileTritStream (serializeProof codec proof))
     refl
-    refl
+
+compiledArtifactParsesToSource :
+  {Proof : Set} →
+  (codec : ProofTritCodec Proof) →
+  (proof : Proof) →
+  parseProof codec
+    (serializedProof (compileProofToFabric codec proof))
+  ≡ just proof
+compiledArtifactParsesToSource codec proof =
+  parseSerializeExact codec proof
+
+compiledArtifactTilesReadExactly :
+  {Proof : Set} →
+  (codec : ProofTritCodec Proof) →
+  (proof : Proof) →
+  readTileStream (weaveTiles (compileProofToFabric codec proof))
+  ≡ justTritStream (serializeProof codec proof)
+compiledArtifactTilesReadExactly codec proof =
+  readCompiledTritStream (serializeProof codec proof)
 
 ------------------------------------------------------------------------
 -- Same physical encoding lifted into the actual textile hyperfabric.
@@ -190,6 +204,15 @@ proofFabricHyperfabricTrace tiles = record
   ; traceLabel = "proof-fabric hyperfabric trace"
   }
 
+compiledProofHyperfabricTrace :
+  {Proof : Set} →
+  (codec : ProofTritCodec Proof) →
+  Proof →
+  Hyper.HyperfabricTrace (TextileHyper.TextileEdge 2)
+compiledProofHyperfabricTrace codec proof =
+  proofFabricHyperfabricTrace
+    (weaveTiles (compileProofToFabric codec proof))
+
 ------------------------------------------------------------------------
 -- Braided carrier backend.
 --
@@ -223,6 +246,14 @@ compileTritStreamToBraid [] = []
 compileTritStreamToBraid (t ∷ ts) =
   tritToBraidTile t ++ compileTritStreamToBraid ts
 
+compileProofToBraid :
+  {Proof : Set} →
+  ProofTritCodec Proof →
+  Proof →
+  T.BraidWord 3
+compileProofToBraid codec proof =
+  compileTritStreamToBraid (serializeProof codec proof)
+
 ------------------------------------------------------------------------
 -- Embodied / portable carriers.
 --
@@ -255,6 +286,12 @@ canonicalWovenProofPlan stream =
   material-proof-plan
     wovenCloth stream true false false
     "DASHI-defined proof code; no external cultural semantics claimed"
+
+canonicalBraidedProofPlan : List Trit → MaterialProofPlan
+canonicalBraidedProofPlan stream =
+  material-proof-plan
+    braidedCord stream true false false
+    "DASHI-defined proof code rendered as ordered braid crossings"
 
 ------------------------------------------------------------------------
 -- Cultural / historical authority boundary.
