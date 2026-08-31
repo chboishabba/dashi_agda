@@ -26,6 +26,7 @@ import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption as Absorption
 import DASHI.Physics.Closure.NSPairIncidenceSchurBridge as PairSchur
 import DASHI.Physics.Closure.NSCompactGammaOffPacketPairIncidenceKernelBridge as OldBridge
 import DASHI.Physics.Closure.NSTriadKNHeatWeightedNestedPairIncidenceRealizationRound343Exact as R343
+import DASHI.Physics.Closure.NSTriadKNHeatWeightedNestedConcreteKernelMatchRound344Exact as R344
 import DASHI.Physics.Closure.NSTriadKNHeatWeightedNestedFiniteSchurCertificateRound346Exact as R346
 import DASHI.Physics.Closure.NSTriadKNHeatWeightedNestedSchurRealizationRound347Exact as R347
 import DASHI.Physics.Closure.NSTriadKNHeatWeightedNestedPhysicalResponseMajorizationRound345Exact as R345
@@ -50,7 +51,7 @@ nestedFsPhysicalResponseBelowSchurBudget :
       Absorption._≤_ A physicalFsResponse
         (Weighted.outputEnergy L
           (Weighted.evaluateEntries exactAction
-            (DASHI.Physics.Closure.NSTriadKNHeatWeightedNestedConcreteKernelMatchRound344Exact.nestedFsDeclaredMajorantKernel cutoff S)
+            (R344.nestedFsDeclaredMajorantKernel cutoff S)
             input)))
     (schurOrderTransport :
       {left right : Absorption.Scalar A} →
