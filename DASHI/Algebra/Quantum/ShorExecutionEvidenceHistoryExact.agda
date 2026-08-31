@@ -89,10 +89,10 @@ open HistoricalShorSuccess public
 historicalRecoveredPeriodIsExact :
   ∀ {H : Shor.HiddenPeriodProblem}
     {machine : Shor.ShorPeriodFindingMachine H} →
-  HistoricalShorSuccess machine →
+  (success : HistoricalShorSuccess machine) →
   Shor.recoverPeriod machine
     (Shor.periodExecute machine
-      (Shor.seed (evidence _)))
+      (Shor.seed (evidence success)))
   ≡ Shor.period H
 historicalRecoveredPeriodIsExact success =
   Shor.recoveredPeriodIsExact _ (evidence success)
