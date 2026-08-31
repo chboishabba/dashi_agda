@@ -22,7 +22,6 @@ module DASHI.Physics.Closure.NSTriadKNStrongLowLiteralNestedKernelRound329Exact 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; _≤_)
-open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -36,8 +35,8 @@ import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3LerayPythagoras as Leray
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNExternalPureCommutatorPartnerRound120Exact as R120
-import DASHI.Physics.Closure.NSTriadKNNestedInnerSwapCommutatorRound310Exact as R310
 import DASHI.Physics.Closure.NSTriadKNInnerStrongLowOutputSubconeRound321Exact as R321
+import DASHI.Physics.Closure.NSTriadKNRawCurlLowOutputKernelMassRound178Exact as R178
 import DASHI.Physics.Closure.NSTriadKNPhysicalInnerCommutatorLowOutputBoundRound326Exact as R326
 import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
 
@@ -56,19 +55,12 @@ record StrongLowLiteralNestedCell
   constructor strong-low-literal-nested-cell
   field
     inner outer : Physical.PhysicalTriadIncidence
-
-    -- a+b=p at `inner`, then p+q=k at `outer`.
-    innerOutputIsOuterForcing :
-      Physical.k inner ≡ Physical.p outer
-
+    innerOutputIsOuterForcing : Physical.k inner ≡ Physical.p outer
     innerHelical : R120.PhysicalHelicalOutputPair system inner
     innerPTransverse : Helical.Transverse E (Physical.p inner)
       (Audit.velocity system (Physical.p inner))
     innerQTransverse : Helical.Transverse E (Physical.q inner)
       (Audit.velocity system (Physical.q inner))
-
-    -- Dyadic cross-layer receipt.  It is deliberately independent of the
-    -- physical norm carrier; R321 already proved the exponent consequences.
     strongLow : R321.StronglyLowInnerOutput
 
 open StrongLowLiteralNestedCell public
@@ -129,7 +121,7 @@ innerPhysicalMajorant :
   (W : R294.SwapInvariantCellWeight F)
   (C : StrongLowLiteralNestedCell E I O system S L H W) →
   L2.complex3NormSquared (innerPairedForcing E I O system S L H W C)
-  ≤ R326.R178.nine * C3.normSquared I (Physical.k (inner C))
+  ≤ R178.nine * C3.normSquared I (Physical.k (inner C))
       * L2.complex3NormSquared (Audit.velocity system (Physical.p (inner C)))
       * L2.complex3NormSquared (Audit.velocity system (Physical.q (inner C)))
 innerPhysicalMajorant E I O system S L H W C =
