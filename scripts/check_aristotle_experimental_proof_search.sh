@@ -12,6 +12,8 @@ FILES=(
   DASHI/Analysis/RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact.agda
   DASHI/Analysis/RiemannAristotlePoleQuotientFiniteNearEvaluationBidiExact.agda
   DASHI/Analysis/RiemannAristotlePoleQuotientFiniteNearRouteAuditExact.agda
+  DASHI/Analysis/RiemannAristotlePoleQuotientDirectFiniteNearAttackExact.agda
+  DASHI/Analysis/RiemannAristotlePoleNearExplicitFormulaBridgeExact.agda
   DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerExact.agda
   DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerRegression.agda
   DASHI/Analysis/RiemannAristotleRHAnalyticRouteSchedulerExact.agda
