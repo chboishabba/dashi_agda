@@ -4,9 +4,11 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.FrontierRelationStrengthBidiExact as Relation
 import DASHI.Core.ThreeChannelC3EquivarianceGateExact as C3
+import DASHI.Core.ConsumerRelativeSymmetryRelevanceExact as SymmetryRelevance
 import DASHI.Core.Clay369ResidualSufficiencyDichotomyExact as ResidualDichotomy
 import DASHI.Analysis.RiemannG2C3MonsterEquivarianceAuditExact as RH
 import DASHI.Analysis.RiemannG2DeterminantConsumerQuotient369Exact as RHResidual
+import DASHI.Analysis.RiemannG2DeterminantSymmetryRelevance369Exact as RHSymmetry
 import DASHI.Physics.Closure.NSCriticalConeResidualFibre369CrossPollinationExact as NS
 import DASHI.Physics.YangMills.BalabanC3MonsterEquivarianceAuditExact as YM
 import DASHI.Physics.YangMills.BalabanSourceResidualConsumerNonDescent369Exact as YMResidual
@@ -14,13 +16,16 @@ import DASHI.Physics.YangMills.BalabanSourceResidualConsumerNonDescent369Exact a
 ------------------------------------------------------------------------
 -- CURRENT STRENGTH CLASSIFICATION
 --
--- Keep two distinct 369/Monster transfer axes visible:
+-- Keep distinct transfer axes visible:
 --
--- * literal C3/Fourier transfer requires a same-object order-three action and
---   equivariance. RH and YM remain analogy-only on that axis;
--- * residual/sufficiency transfer is already theorem-relevant as proof-search
---   structure: RH G2e has an exact sufficient determinant observer, whereas NS
---   and YM exhibit consumer non-descent through their current coarse observers.
+-- * literal Monster/C3 representation transfer remains analogy-only for RH/YM
+--   until literal target-carrier actions are recovered;
+-- * consumer-relative symmetry relevance is already theorem-bearing as search
+--   architecture: a symmetry preserving a sufficient observer is invisible to
+--   that consumer;
+-- * RH G2e has an exact sufficient determinant observer, so any proposed C3
+--   action must earn relevance by acting nontrivially/usefully on q itself;
+-- * NS and YM exhibit genuine consumer non-descent through coarse observers.
 ------------------------------------------------------------------------
 
 rh369CurrentRelation : Relation.RelationKind
@@ -28,6 +33,13 @@ rh369CurrentRelation = Relation.analogyOnlyRelation
 
 rh369CurrentReuse : Relation.ReuseCapability rh369CurrentRelation
 rh369CurrentReuse = Relation.reuseAnalogyForHeuristicGeneration
+
+rh369DeterminantSymmetryRelation : Relation.RelationKind
+rh369DeterminantSymmetryRelation = Relation.provedSearchObstructionReuse
+
+rh369DeterminantSymmetryReuse :
+  Relation.ReuseCapability rh369DeterminantSymmetryRelation
+rh369DeterminantSymmetryReuse = Relation.reuseProvedSearchObstruction
 
 ns369CurrentRelation : Relation.RelationKind
 ns369CurrentRelation = Relation.provedSearchObstructionReuse
@@ -63,6 +75,11 @@ rh369NoDirectTheoremTransfer :
   Relation.TheoremTransferCapability rh369CurrentRelation → ⊥
 rh369NoDirectTheoremTransfer = Relation.analogyCannotDirectlyTransferTheorem
 
+rhDeterminantSymmetryNoDirectTheoremTransfer :
+  Relation.TheoremTransferCapability rh369DeterminantSymmetryRelation → ⊥
+rhDeterminantSymmetryNoDirectTheoremTransfer =
+  Relation.searchPatternCannotDirectlyTransferTheorem
+
 ns369NoDirectTheoremTransfer :
   Relation.TheoremTransferCapability ns369CurrentRelation → ⊥
 ns369NoDirectTheoremTransfer = Relation.searchPatternCannotDirectlyTransferTheorem
@@ -81,15 +98,15 @@ ymResidualNoDirectTheoremTransfer = Relation.searchPatternCannotDirectlyTransfer
 
 ------------------------------------------------------------------------
 -- Upgrade gates. RH/YM C3 may become theorem-relevant only after literal
--- actions and equivariant same-object maps are recovered on target carriers.
+-- actions and equivariant/sufficient-observer effects are recovered.
 ------------------------------------------------------------------------
 
 record C3RelationUpgradeGate : Set where
   constructor c3RelationUpgradeGate
   field
     literalOrderThreeAction : Set
-    literalForwardEquivariance : Set
-    literalConsumerEquivariance : Set
+    inducedActionOnSufficientObserver : Set
+    usefulConsumerEffectOrInvariant : Set
     sameObjectReceipt : Set
 
 open C3RelationUpgradeGate public
@@ -109,6 +126,9 @@ record ClayMonster369Boundary : Set where
     determinantConsumerSufficiencyGenuinelyReusableForRH : Bool
     determinantConsumerSufficiencyGenuinelyReusableForRHIsTrue :
       determinantConsumerSufficiencyGenuinelyReusableForRH ≡ true
+    determinantPreservingSymmetryIsConsumerInvisibleForRHFixedKernel : Bool
+    determinantPreservingSymmetryIsConsumerInvisibleForRHFixedKernelIsTrue :
+      determinantPreservingSymmetryIsConsumerInvisibleForRHFixedKernel ≡ true
     residualConsumerNonDescentGenuinelyReusableForYM : Bool
     residualConsumerNonDescentGenuinelyReusableForYMIsTrue :
       residualConsumerNonDescentGenuinelyReusableForYM ≡ true
@@ -124,6 +144,7 @@ canonicalClayMonster369Boundary =
   clayMonster369Boundary
     false refl
     false refl
+    true refl
     true refl
     true refl
     true refl
