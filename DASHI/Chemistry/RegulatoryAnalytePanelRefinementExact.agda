@@ -1,7 +1,7 @@
 module DASHI.Chemistry.RegulatoryAnalytePanelRefinementExact where
 
 ------------------------------------------------------------------------
--- REGULATORY PANEL REFINEMENT CROSS-POLLINATION
+-- DECLARED ASSAY-PANEL REFINEMENT CROSS-POLLINATION
 --
 -- Reuses the repository's canonical non-factorability pattern: if a coarse
 -- observation identifies two fine states that differ on a consumer-relevant
@@ -9,9 +9,12 @@ module DASHI.Chemistry.RegulatoryAnalytePanelRefinementExact where
 -- or relabelling the coarse result.  A genuinely richer observation can,
 -- however, separate the pair.
 --
--- This is a finite DASHI observation model.  It does not assert that one extra
--- analyte is sufficient for real medicinal-cannabis safety and does not model
--- an impossible "test for everything" assay.
+-- This is a finite DASHI observation model.  `requiredPanel` means the coarse
+-- panel required by THIS FINITE FIXTURE; it is not asserted to equal the whole
+-- legal TGO 93 / Ph Eur pesticide-limit architecture or any laboratory's assay
+-- scope.  Real named regulatory membership lives in
+-- TGO93PhEurPesticideMembershipExact; method observability/LOD/LOQ lives in
+-- AssayDetectionEnvelopeExact.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -22,7 +25,7 @@ import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Chemistry.RegulatoryAnalyteCoverageBidiExact as Coverage
 
 ------------------------------------------------------------------------
--- Coarse required panel versus a declared expanded panel.
+-- Coarse declared fixture panel versus a declared expanded observation.
 ------------------------------------------------------------------------
 
 data PanelStage : Set where
@@ -92,11 +95,12 @@ expandedPanelCannotAutoPromoteToUniversalChemicalCompleteness ()
 record PanelRefinementBoundary : Set where
   constructor panelRefinementBoundary
   field
-    requiredPanelCanCollapseDistinctChemicalStates : Bool
+    declaredCoarsePanelCanCollapseDistinctChemicalStates : Bool
     richerDeclaredPanelCanSeparateWitnessPair : Bool
     richerDeclaredPanelMeansAllPossibleChemistryObserved : Bool
     reinterpretationOfOldPassEqualsNewMeasurement : Bool
+    fixturePanelEqualsWholeTGO93RegulatoryArchitecture : Bool
 
 canonicalPanelRefinementBoundary : PanelRefinementBoundary
 canonicalPanelRefinementBoundary =
-  panelRefinementBoundary true true false false
+  panelRefinementBoundary true true false false false
