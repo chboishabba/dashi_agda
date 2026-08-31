@@ -2,8 +2,8 @@ module DASHI.Reasoning.Spacy369FeministLacanConsumerRelativeExact where
 
 open import DASHI.Core.Prelude
 
-import DASHI.Core.BidiResidualApproximationExact as Bidi
 import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Core.FeministRechartingSourceBridgeExact as Rechart
 import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact as Subject
 import DASHI.Core.LacanIrigarayTernaryGrammarBridgeExact as LI
@@ -13,6 +13,8 @@ import DASHI.Reasoning.SemanticConsumerRelativeClosureExact as Closure
 import DASHI.Reasoning.SpacyDependencyToCandidateLogicalPNFExact as Candidate
 import DASHI.Reasoning.SpacyPNF369DialecticBridgeExact as Bridge369
 import DASHI.Reasoning.SpacyNegatedCoordinationScopeTraceExact as Trace
+
+open Candidate using (Formula; notF; _∨_)
 
 ------------------------------------------------------------------------
 -- MATERIALISED SPACY / 369 / FEMINIST / LACAN CONSUMER-RELATIVE BRIDGE
@@ -65,8 +67,8 @@ data ScopeDecision : Set where
 
 scopeConsumer : Candidate.CandidateSemanticFragment → ScopeDecision
 scopeConsumer fragment with Candidate.formula fragment
-... | Candidate.notF (_ Candidate.∨ _) = broadScopeDecision
-... | Candidate.notF _ = narrowScopeDecision
+... | notF (_ ∨ _) = broadScopeDecision
+... | notF _ = narrowScopeDecision
 ... | _ = otherScopeDecision
 
 broadScopeDecisionNotNarrow : broadScopeDecision ≡ narrowScopeDecision → ⊥
@@ -155,14 +157,10 @@ parserSubjectPositiveRecharting =
     refl
     subjectPositionsDiffer
 
-parserPlusSubjectStrictlyRefinesParserSurface :
-  Bidi.FibreRefines
-    (λ state → ⊤)
-    (λ state → ⊤)
-parserPlusSubjectStrictlyRefinesParserSurface state live = live
-
--- The actual strict-observer theorem is supplied by the canonical recharting
--- owner; this alias pins the materialised parser surface to that theorem.
+parserSubjectRechartIsStrict :
+  Observer.StrictRefinement
+    parserSemanticSurface
+    (Observer.pairObserver parserSemanticSurface subjectPositionResidual)
 parserSubjectRechartIsStrict =
   Rechart.positiveRechartingStrictlyRefinesInheritedChart
     parserSubjectPositiveRecharting
@@ -176,6 +174,10 @@ chart369SubjectPositiveRecharting =
     refl
     subjectPositionsDiffer
 
+chart369SubjectRechartIsStrict :
+  Observer.StrictRefinement
+    dialectic369Surface
+    (Observer.pairObserver dialectic369Surface subjectPositionResidual)
 chart369SubjectRechartIsStrict =
   Rechart.positiveRechartingStrictlyRefinesInheritedChart
     chart369SubjectPositiveRecharting
