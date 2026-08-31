@@ -10,6 +10,7 @@ import DASHI.Algebra.TriadicDepthOneCharacters as Characters
 import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact as Spectral
 import DASHI.Moonshine.Base369Ternary27CharacterAdjacencyEquivarianceExact as Character
 import DASHI.Moonshine.Base369Ternary27SignedSymmetryMonsterIntertwinerExact as Signed
+import DASHI.Moonshine.Base369Ternary27PathCubeSpectralBandsExact as Bands
 
 oneVoxelHas27States : Geometry.hypervoxelStateCount ≡ 27
 oneVoxelHas27States = Geometry.hypervoxelStateCountIs27
@@ -60,6 +61,19 @@ trivialCharacterConstant :
   (p : Geometry.Ternary27Point) →
   Character.cubeCharacterValue Spectral.trivialCubeSector p ≡ Characters.phase0
 trivialCharacterConstant = Character.trivialCubeCharacter
+
+pathCubeBandMultiplicitiesSumTo27 : Bands.spectralMultiplicityTotal ≡ 27
+pathCubeBandMultiplicitiesSumTo27 = Bands.spectralMultiplicityTotalIs27
+
+pathCubeHasNoWraparound :
+  Bands.PeriodicVsPathCubeSpectralBoundary.voxelAdjacencyHasWraparound
+    Bands.canonicalPeriodicVsPathCubeSpectralBoundary ≡ false
+pathCubeHasNoWraparound = refl
+
+c3CharactersNotPromotedToPathEigenbasis :
+  Bands.PeriodicVsPathCubeSpectralBoundary.c3CubedCharactersAutomaticallyDiagonalisePathCubeAdjacency
+    Bands.canonicalPeriodicVsPathCubeSpectralBoundary ≡ false
+c3CharactersNotPromotedToPathEigenbasis = refl
 
 c3CubedNotClaimedAsCyclic27 :
   Character.ProductC3VsCyclic27Boundary.sameGroupClaimed
