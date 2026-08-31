@@ -18,6 +18,7 @@ module DASHI.Governance.SexedHistoricalTransportedAssociatorSupportExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.AffectedDependencyClosureExact as Dependency
 import DASHI.Foundations.Base369Ternary27HypervoxelStratificationExact as Strata
 import DASHI.Governance.SexedHistoricalAssociatorSupportedReopeningExact as Support
@@ -37,12 +38,9 @@ data SupportStage : Set where
 data ActiveAt : SupportStage → Support.SignatureLine → Set where
   initialLine1 : ActiveAt initialAssociatorStage Support.line1
   initialLine4 : ActiveAt initialAssociatorStage Support.line4
-
   repairLine4 : ActiveAt localRepairStage Support.line4
-
   counterLine4 : ActiveAt networkCounterformationStage Support.line4
   counterLine5 : ActiveAt networkCounterformationStage Support.line5
-
   persistentLine4 : ActiveAt institutionalPersistenceStage Support.line4
 
 ------------------------------------------------------------------------
@@ -50,8 +48,6 @@ data ActiveAt : SupportStage → Support.SignatureLine → Set where
 --
 -- canonical history:
 --   {1,4} -> {4} -> {4,5} -> {4}
---
--- This demonstrates discharge, persistence, activation, and later discharge.
 ------------------------------------------------------------------------
 
 line1DischargedByLocalRepair : ActiveAt localRepairStage Support.line1 → ⊥
@@ -76,8 +72,7 @@ line4PersistsToFinalStage = persistentLine4
 ------------------------------------------------------------------------
 
 data SupportTransport : SupportStage → SupportStage → Set where
-  initialToRepair :
-    SupportTransport initialAssociatorStage localRepairStage
+  initialToRepair : SupportTransport initialAssociatorStage localRepairStage
   repairToCounterformation :
     SupportTransport localRepairStage networkCounterformationStage
   counterformationToPersistence :
@@ -100,13 +95,9 @@ canonicalSupportHistory =
 
 ------------------------------------------------------------------------
 -- 4. Stratum transport of supported coordinates.
---
--- Strata are geometric bookkeeping only.  They do not intrinsically denote
--- persons, institutions, or moral/political meanings.
 ------------------------------------------------------------------------
 
-supportStratum :
-  SupportStage → Support.SignatureLine → Strata.VoxelStratum
+supportStratum : SupportStage → Support.SignatureLine → Strata.VoxelStratum
 supportStratum initialAssociatorStage Support.line1 = Strata.faceCentreStratum
 supportStratum initialAssociatorStage Support.line4 = Strata.centreStratum
 supportStratum localRepairStage Support.line4 = Strata.centreStratum
@@ -127,9 +118,6 @@ institutionalResidualStaysAtCentreStratum = refl
 
 ------------------------------------------------------------------------
 -- 5. Stage-indexed support-to-artifact chart.
---
--- A coordinate may change which consumer it interrogates across time; support
--- transport therefore cannot be reduced to transporting a bare line number.
 ------------------------------------------------------------------------
 
 stageArtifact :
@@ -152,22 +140,19 @@ line5CounterformationTargetsMasculineLocal = refl
 ------------------------------------------------------------------------
 
 initialLine1ReopensCompatibility :
-  Dependency.ReopeningObligation
-    Distributed.Depends
+  Dependency.ReopeningObligation Distributed.Depends
     (stageArtifact initialAssociatorStage Support.line1)
     Distributed.globalCompatibilityCertificate
 initialLine1ReopensCompatibility = Support.line1ReopensGlobalCompatibility
 
 initialLine4ReopensCompatibility :
-  Dependency.ReopeningObligation
-    Distributed.Depends
+  Dependency.ReopeningObligation Distributed.Depends
     (stageArtifact initialAssociatorStage Support.line4)
     Distributed.globalCompatibilityCertificate
 initialLine4ReopensCompatibility = Support.line4ReopensGlobalCompatibility
 
 counterformationLine5ReopensCompatibility :
-  Dependency.ReopeningObligation
-    Distributed.Depends
+  Dependency.ReopeningObligation Distributed.Depends
     (stageArtifact networkCounterformationStage Support.line5)
     Distributed.globalCompatibilityCertificate
 counterformationLine5ReopensCompatibility =
@@ -175,8 +160,7 @@ counterformationLine5ReopensCompatibility =
     Distributed.masculineLocalAffectsCompatibility
 
 counterformationLine5ReopensCollectiveFuture :
-  Dependency.ReopeningObligation
-    Distributed.Depends
+  Dependency.ReopeningObligation Distributed.Depends
     (stageArtifact networkCounterformationStage Support.line5)
     Distributed.collectiveFutureConeCertificate
 counterformationLine5ReopensCollectiveFuture =
@@ -189,14 +173,13 @@ counterformationLine5ReopensCollectiveFuture =
         Distributed.globalContinuationAffectsFutureCone))
 
 finalLine4StillReopensCollectiveFuture :
-  Dependency.ReopeningObligation
-    Distributed.Depends
+  Dependency.ReopeningObligation Distributed.Depends
     (stageArtifact institutionalPersistenceStage Support.line4)
     Distributed.collectiveFutureConeCertificate
 finalLine4StillReopensCollectiveFuture = Support.line4ReopensCollectiveFuture
 
 ------------------------------------------------------------------------
--- 7. Same support cardinality / coarse stratum does not recover support history.
+-- 7. Same coarse support does not recover support history.
 ------------------------------------------------------------------------
 
 data SupportHistoryFine : Set where
@@ -218,11 +201,10 @@ fineSupportHistoryCode repairedThenCounterformed = repairBeforeCounterformation
 fineSupportHistoryCode counterformedThenRepaired = counterformationBeforeRepair
 
 sameCoarseSupportCannotRecoverSupportHistory :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    coarseSupportSurface fineSupportHistoryCode → ⊥
+  INF.FactorsThrough coarseSupportSurface fineSupportHistoryCode → ⊥
 sameCoarseSupportCannotRecoverSupportHistory =
-  DASHI.Core.IntersectionalNonFactorability.witnessRulesOutEveryFlatFactorisation
-    (DASHI.Core.IntersectionalNonFactorability.nonFactorabilityWitness
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
       repairedThenCounterformed counterformedThenRepaired refl (λ ()))
 
 ------------------------------------------------------------------------
