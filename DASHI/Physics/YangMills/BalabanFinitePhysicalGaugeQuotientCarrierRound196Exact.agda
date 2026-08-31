@@ -20,6 +20,7 @@ module DASHI.Physics.YangMills.BalabanFinitePhysicalGaugeQuotientCarrierRound196
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base using (NonZero)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.P06FaceCubeTorusGeometry using (Cube4)
@@ -104,15 +105,16 @@ finiteRootedGaugeQuotientNormalizationIdempotent
     secondLift = Rooted.rootedGaugeOrbitLift group paths
       (representativeField first)
   in
-  Rooted.rootedGaugeRepresentativeUniqueInBasedOrbit
-    group paths
-    (representativeField first)
-    (representativeField second)
-    (representativeIsRooted first)
-    (representativeIsRooted second)
-    (Rooted.gaugeArrow secondLift)
-    (Rooted.arrowIsBased secondLift)
-    bond
+  sym
+    (Rooted.rootedGaugeRepresentativeUniqueInBasedOrbit
+      group paths
+      (representativeField first)
+      (representativeField second)
+      (representativeIsRooted first)
+      (representativeIsRooted second)
+      (Rooted.gaugeArrow secondLift)
+      (Rooted.arrowIsBased secondLift)
+      bond)
 
 -- Two normalized carrier elements in the same BASED gauge orbit are the same
 -- physical bond field pointwise.  This is the finite quotient uniqueness law
