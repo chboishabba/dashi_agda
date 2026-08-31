@@ -12,6 +12,7 @@ import DASHI.Governance.SexedHistoricalSelectiveReopeningExact as Selective
 import DASHI.Governance.SexedHistoricalBracketedMultiverseTSFVBridgeExact as Bracketed
 import DASHI.Governance.SexedHistoricalStratifiedCollectiveGluingExact as Gluing
 import DASHI.Governance.SexedHistoricalDistributedCompatibilityReopeningExact as Distributed
+import DASHI.Governance.SexedHistoricalCoalitionAssociatorYijingExact as Associator
 
 productiveJoinNextHistoryRegression :
   INF.FactorsThrough Reopen.joinPresentSurface Reopen.nextContinuation → ⊥
@@ -131,6 +132,27 @@ distributedCollectiveFutureReopeningRegression :
 distributedCollectiveFutureReopeningRegression =
   Distributed.collectiveFutureConeMustReopenFromFeminineEnactment
 
+coalitionAssociatorDefectRegression :
+  Associator.leftBracketedGlobal ≡ Associator.rightBracketedGlobal → ⊥
+coalitionAssociatorDefectRegression = Associator.coalitionAssociatorDefect
+
+sameParticipantsCoalitionOutcomeRegression :
+  INF.FactorsThrough
+    Associator.participantInventory Associator.coalitionOutcome → ⊥
+sameParticipantsCoalitionOutcomeRegression =
+  Associator.sameParticipantsCannotRecoverCoalitionOutcome
+
+yijingBracketSignatureRegression :
+  Associator.leftBracketSignature ≡ Associator.rightBracketSignature → ⊥
+yijingBracketSignatureRegression =
+  Associator.coalitionBracketProducesDifferentRelationalSignature
+
+coalitionAssociatorResidualRegression :
+  Associator.CoalitionAssociatorResidual
+    Associator.leftBracketedGlobal Associator.rightBracketedGlobal
+coalitionAssociatorResidualRegression =
+  Associator.canonicalCoalitionAssociator
+
 selectiveReopeningBoundaryRegression :
   Selective.SelectiveHistoricalReopeningBoundary
 selectiveReopeningBoundaryRegression =
@@ -150,6 +172,11 @@ distributedCompatibilityReopeningBoundaryRegression :
   Distributed.DistributedCompatibilityReopeningBoundary
 distributedCompatibilityReopeningBoundaryRegression =
   Distributed.canonicalDistributedCompatibilityReopeningBoundary
+
+coalitionAssociatorYijingBoundaryRegression :
+  Associator.CoalitionAssociatorYijingBoundary
+coalitionAssociatorYijingBoundaryRegression =
+  Associator.canonicalCoalitionAssociatorYijingBoundary
 
 canonicalSourceBoundaryRegression :
   Reopen.ReopenableSynthesisEndOfHistoryBoundary
