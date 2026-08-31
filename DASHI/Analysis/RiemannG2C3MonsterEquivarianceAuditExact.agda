@@ -7,6 +7,7 @@ import DASHI.Core.ThreeChannelC3EquivarianceGateExact as C3
 import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact as Monster369
 import DASHI.Moonshine.Base369Ternary27SignedSymmetryMonsterIntertwinerExact as Signed369
 import DASHI.Analysis.RiemannAristotleG2CurrentCutExact as G2
+import DASHI.Analysis.RiemannAristotleG2eDeterminantTaperKernelExact as G2e
 import DASHI.Analysis.RiemannAristotleFiniteNearCoreSchurCompilerExact as Schur
 
 ------------------------------------------------------------------------
@@ -14,8 +15,15 @@ import DASHI.Analysis.RiemannAristotleFiniteNearCoreSchurCompilerExact as Schur
 --
 -- The Base369/Monster lane owns exact order-three coordinate rotation on its
 -- literal ternary cube and exact conjugation/reflection covariance on its
--- character sectors.  Those facts are not imported as facts about the RH
--- three-taper observer.  They motivate the exact gate below.
+-- character sectors. Those facts are not imported as facts about the RH
+-- three-taper observer.
+--
+-- A later G2e audit sharpens the priority: after fixed-nuisance determinant
+-- compression the literal reflection kernel is common across all three taper
+-- coordinates and vector Gram/Schur geometry is no longer the open object.
+-- Hence a raw three-channel Fourier decomposition is not highest-alpha merely
+-- because three channels exist. A C3 action must control the determinant taper
+-- q(u), or a downstream consumer not already factoring through q, to matter.
 ------------------------------------------------------------------------
 
 monster369OrderThreeRotationOwned : Bool
@@ -24,8 +32,6 @@ monster369OrderThreeRotationOwned = true
 monster369ReflectionFrequencyCovarianceOwned : Bool
 monster369ReflectionFrequencyCovarianceOwned = true
 
--- Current RH source surface has three tapers/channels, but no literal order-three
--- action on those actual taper objects has been recovered from the RH owner.
 rhThreeTaperChannelsOwned : Bool
 rhThreeTaperChannelsOwned = true
 
@@ -47,8 +53,15 @@ rhC3FourierModeEnergyDecompositionRecovered = false
 rhLiteralC3ActionRecoveredIsFalse : rhLiteralC3ActionRecovered ≡ false
 rhLiteralC3ActionRecoveredIsFalse = refl
 
+g2eVectorGeometryAlreadyCompressed :
+  G2e.vectorGramGeometryRemainingAfterCompression
+    G2e.canonicalG2eDeterminantTaperKernelBoundary ≡ false
+g2eVectorGeometryAlreadyCompressed =
+  G2e.vectorGramGeometryRemainingAfterCompressionIsFalse
+    G2e.canonicalG2eDeterminantTaperKernelBoundary
+
 ------------------------------------------------------------------------
--- Exact theorem-bearing target if the literal action is later found.
+-- Exact theorem-bearing target if a literal action is later found.
 ------------------------------------------------------------------------
 
 record RiemannThreeTaperC3Realisation : Set₁ where
@@ -69,12 +82,12 @@ record RiemannThreeTaperC3Realisation : Set₁ where
 
     deterministicNuisanceSubspaceInvariant : Set
     fourierModeDecompositionOfSchurEnergy : Set
+    c3ControlsDeterminantTaperQ : Set
 
 open RiemannThreeTaperC3Realisation public
 
 ------------------------------------------------------------------------
--- BIDI boundary: even an inhabited C3 realisation would reorganise the current
--- finite near-core theorem; it would not prove the signed bound by itself.
+-- Even an inhabited C3 realisation does not prove the signed bound by itself.
 ------------------------------------------------------------------------
 
 c3RealisationAloneClosesFiniteNearSchurCancellation : Bool
@@ -100,4 +113,4 @@ currentG2HarmonicLeafStillOpen =
 
 highestAlphaC3Question : String
 highestAlphaC3Question =
-  "Does the literal three-taper family admit an order-three action preserving the actual nearOffFinset construction, deterministic nuisance subspace, and Schur elimination? If yes, decompose the post-Schur near energy into exact C3 Fourier sectors; if no, retain the obstruction and do not import Monster/Base369 symmetry by analogy."
+  "Do not search for a C3 decomposition of the raw three taper coordinates as an end in itself. First ask whether a literal order-three action preserves the nuisance rows and induces a useful invariant/decomposition of q(u)=det3(n1,n2,h(u)). Only such a q-level action can survive the exact G2e scalarization and become theorem-relevant to the current local-zero consumer."
