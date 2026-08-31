@@ -5,6 +5,8 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.BidiResidualApproximationExact as Bidi
 import DASHI.Core.DiscriminatorSynthesisExact as Synthesis
+import DASHI.Core.AdaptiveFidelityConsumerMarginExact as Fidelity
+import DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact as ApproxCore
 import DASHI.Environment.LESDomainBasisBidiFrontierExact as Basis
 import DASHI.Environment.LESApproximateFidelityReductionExact as Approximate
 
@@ -46,10 +48,6 @@ bundleOutcomeRefinesLESResidual {bundle = bundle} experiment outcome =
 
 ------------------------------------------------------------------------
 -- Approximate-fidelity cross-pollination.
---
--- A declared consumer can be certified decision-safe while a richer physical
--- state fibre remains non-singleton.  The residual is therefore carried next to
--- the certificate, not silently erased by it.
 ------------------------------------------------------------------------
 
 record ResidualQualifiedLESApproximateDecision
@@ -76,13 +74,13 @@ residualQualifiedApproximateDecisionStillSafe :
   (controls : List (Basis.Control mechanism)) →
   (state : Basis.State mechanism) →
   decide
-    (DASHI.Core.AdaptiveFidelityConsumerMarginExact.low
-      (DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact.approximateTraceFidelityPair
+    (Fidelity.low
+      (ApproxCore.approximateTraceFidelityPair
         (Approximate.asApproximateTraceReduction model))
       (controls , state))
   ≡ decide
-    (DASHI.Core.AdaptiveFidelityConsumerMarginExact.high
-      (DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact.approximateTraceFidelityPair
+    (Fidelity.high
+      (ApproxCore.approximateTraceFidelityPair
         (Approximate.asApproximateTraceReduction model))
       (controls , state))
 residualQualifiedApproximateDecisionStillSafe receipt controls state =
