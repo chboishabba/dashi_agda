@@ -3,6 +3,9 @@ module DASHI.IndustrialChemistryLogisticsEverything where
 ------------------------------------------------------------------------
 -- Focused rollup: geological salt / chlor-alkali / refinery-petrochemical
 -- transformation / downstream manufacture / inventory / logistics / planning.
+-- CorkySoft contributes bounded operational workflow calibration for custody,
+-- handoff, shortage/readiness, substitution and reconciliation patterns; DASHI
+-- planning/chemistry owners remain theorem authority.
 ------------------------------------------------------------------------
 
 import DASHI.Geology.SaltGeochemistryExact
@@ -16,7 +19,9 @@ import DASHI.Chemistry.SaltPetroleumIndustrialChemistryNetworkExact
 
 import DASHI.Planning.NetworkFlowCapacityCongestionExact
 import DASHI.Planning.PlanningAdmissibleTransitionBridgeExact
+import DASHI.Planning.PlanningBIDICapstoneExact
 import DASHI.Planning.EnergyRefineryNetworkConstraintCrossPollinationExact
 import DASHI.Planning.ChemicalManufacturingInventoryLogisticsCrossPollinationExact
+import DASHI.Planning.CorkySoftOperationalPatternAtlasExact
 
 import DASHI.Governance.TrumpEnergySaltPlanningCrossPollinationExact
