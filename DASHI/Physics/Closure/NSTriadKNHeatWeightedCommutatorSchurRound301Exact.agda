@@ -1,11 +1,19 @@
 module DASHI.Physics.Closure.NSTriadKNHeatWeightedCommutatorSchurRound301Exact where
 
 ------------------------------------------------------------------------
--- ROUND301 / HIGHEST-ALPHA ANALYTIC LEAF: HEAT-WEIGHTED R294 COMMUTATOR SCHUR
+-- ROUND301 / HIGHEST-ALPHA ANALYTIC LEAF:
+-- CRITICAL-CONE HEAT-WEIGHTED R294 COMMUTATOR SCHUR
 --
 -- R300 reduces the nonlinear resolvent remainder to a positive A_s term plus
 -- a multiple of ||F_s||^2.  The literal F_s must remain the swap-invariant
 -- heat-weighted R294 mixed commutator, not a generic commutator proxy.
+--
+-- BIDI restriction from R284:
+--   deep FL and deep HH are already E*D-payable.  Re-proving them inside a
+--   new Schur theorem would strengthen the consumer and duplicate paid work.
+--   Therefore this Round301 target is ONLY the unpaid parabolic critical cone
+--
+--     FL shoulder + HH shoulder + comparable interactions.
 --
 -- Existing repository x-pollination:
 --   * Da Lio--Riviere: genuine three-term compensation precedent, but the
@@ -16,12 +24,11 @@ module DASHI.Physics.Closure.NSTriadKNHeatWeightedCommutatorSchurRound301Exact w
 --   * filtered-vortex increment lanes: useful intuition, different residual
 --     basis/operator and therefore no direct theorem authority here.
 --
--- Therefore the highest-alpha physical theorem is sharpened to:
---
---   realize F_s on the SAME R294 carrier as a heat-dependent finite kernel;
---   prove cutoff-uniform row/column budgets R(s),C(s);
---   prove the resulting Schur coefficient is integrable in s,t against the
---   already-owned physical input norms.
+-- Highest-alpha physical theorem:
+--   realize the CRITICAL-CONE RESTRICTION of F_s on the SAME R294 carrier as a
+--   heat-dependent finite kernel; prove cutoff-uniform row/column budgets
+--   R_core(s), C_core(s); prove the resulting coefficient is integrable in
+--   s,t against already-owned physical input norms.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -40,43 +47,45 @@ daLioThreeTermDirectRoute = Admission.rejected Admission.carrierMismatch
 filteredVortexDirectRoute : Admission.RouteDisposition
 filteredVortexDirectRoute = Admission.rejected Admission.consumerMismatch
 
-sameObjectHeatSchurRoute : Admission.RouteDisposition
-sameObjectHeatSchurRoute = Admission.admitted
+sameObjectCriticalConeHeatSchurRoute : Admission.RouteDisposition
+sameObjectCriticalConeHeatSchurRoute = Admission.admitted
 
 ------------------------------------------------------------------------
 -- Exact analytic target after the existing generic Schur theorem is reused.
 ------------------------------------------------------------------------
 
-record HeatWeightedCommutatorSchurLeaf : Set where
-  constructor heat-weighted-commutator-schur-leaf
+record HeatWeightedCriticalConeCommutatorSchurLeaf : Set where
+  constructor heat-weighted-critical-cone-commutator-schur-leaf
   field
-    -- s-dependent Schur budgets for the literal heat-weighted R294 kernel.
     heatParameter : ℚ
     rowBudget columnBudget inputMass outputMass : ℚ
 
     rowBudgetNonnegative : 0 ≤ rowBudget
     columnBudgetNonnegative : 0 ≤ columnBudget
 
-    -- Same-object identification: the kernel action here is the actual R294
-    -- weighted mixed commutator, not merely an analogous operator.
     literalR294KernelIdentified : Bool
     literalR294KernelIdentifiedIsTrue : literalR294KernelIdentified ≡ true
 
-    -- Produced by the existing uniform Schur theorem once row/column estimates
-    -- for that literal kernel are instantiated.
+    criticalConeRestricted : Bool
+    criticalConeRestrictedIsTrue : criticalConeRestricted ≡ true
+
+    deepFLAndHHExcludedAsAlreadyPaid : Bool
+    deepFLAndHHExcludedAsAlreadyPaidIsTrue :
+      deepFLAndHHExcludedAsAlreadyPaid ≡ true
+
     pointwiseSquaredSchurBound :
       outputMass ≤ (rowBudget * columnBudget) * inputMass
 
-open HeatWeightedCommutatorSchurLeaf public
+open HeatWeightedCriticalConeCommutatorSchurLeaf public
 
-record HeatWeightedCommutatorSpacetimePayment : Set where
-  constructor heat-weighted-commutator-spacetime-payment
+record HeatWeightedCriticalConeSpacetimePayment : Set where
+  constructor heat-weighted-critical-cone-spacetime-payment
   field
     spacetimeForcingMass : ℚ
     spacetimeUpperBound : ℚ
     spacetimeBound : spacetimeForcingMass ≤ spacetimeUpperBound
 
-open HeatWeightedCommutatorSpacetimePayment public
+open HeatWeightedCriticalConeSpacetimePayment public
 
 round301DaLioDirectPromotionRejected : Bool
 round301DaLioDirectPromotionRejected = true
@@ -84,20 +93,23 @@ round301DaLioDirectPromotionRejected = true
 round301FilteredVortexDirectPromotionRejected : Bool
 round301FilteredVortexDirectPromotionRejected = true
 
-round301SameObjectHeatSchurRouteAdmitted : Bool
-round301SameObjectHeatSchurRouteAdmitted = true
+round301SameObjectCriticalConeHeatSchurRouteAdmitted : Bool
+round301SameObjectCriticalConeHeatSchurRouteAdmitted = true
 
-round301PhysicalHeatKernelRowBudgetClosed : Bool
-round301PhysicalHeatKernelRowBudgetClosed = false
+round301DeepFLAndHHReprovedInsideSchur : Bool
+round301DeepFLAndHHReprovedInsideSchur = false
 
-round301PhysicalHeatKernelColumnBudgetClosed : Bool
-round301PhysicalHeatKernelColumnBudgetClosed = false
+round301PhysicalCriticalConeHeatKernelRowBudgetClosed : Bool
+round301PhysicalCriticalConeHeatKernelRowBudgetClosed = false
 
-round301HeatSchurCoefficientSpacetimeIntegrable : Bool
-round301HeatSchurCoefficientSpacetimeIntegrable = false
+round301PhysicalCriticalConeHeatKernelColumnBudgetClosed : Bool
+round301PhysicalCriticalConeHeatKernelColumnBudgetClosed = false
 
-round301WeightedCommutatorSpacetimePaid : Bool
-round301WeightedCommutatorSpacetimePaid = false
+round301CriticalConeHeatSchurCoefficientSpacetimeIntegrable : Bool
+round301CriticalConeHeatSchurCoefficientSpacetimeIntegrable = false
+
+round301WeightedCriticalConeCommutatorSpacetimePaid : Bool
+round301WeightedCriticalConeCommutatorSpacetimePaid = false
 
 round301PackageAClosed : Bool
 round301PackageAClosed = false
@@ -105,6 +117,10 @@ round301PackageAClosed = false
 round301ClayPromotion : Bool
 round301ClayPromotion = false
 
-round301SameObjectHeatSchurRouteAdmittedIsTrue :
-  round301SameObjectHeatSchurRouteAdmitted ≡ true
-round301SameObjectHeatSchurRouteAdmittedIsTrue = refl
+round301SameObjectCriticalConeHeatSchurRouteAdmittedIsTrue :
+  round301SameObjectCriticalConeHeatSchurRouteAdmitted ≡ true
+round301SameObjectCriticalConeHeatSchurRouteAdmittedIsTrue = refl
+
+round301DeepFLAndHHReprovedInsideSchurIsFalse :
+  round301DeepFLAndHHReprovedInsideSchur ≡ false
+round301DeepFLAndHHReprovedInsideSchurIsFalse = refl
