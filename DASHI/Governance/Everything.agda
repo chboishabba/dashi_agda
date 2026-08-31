@@ -123,4 +123,5 @@ import DASHI.Governance.SocioTechnicalPowerSelectionAssayExact
 -- Physical-agent / resource-pressure / system-closure assay lane.
 import DASHI.Governance.ResourcePressureTelemetryPermissionExact
 import DASHI.Governance.ExecutionGovernanceClosureAssayExact
+import DASHI.Governance.ConstitutionalAxisResidualCapabilityExact
 import DASHI.Governance.MHSButterBenchPhysicalAgentCrossPollinationExact
