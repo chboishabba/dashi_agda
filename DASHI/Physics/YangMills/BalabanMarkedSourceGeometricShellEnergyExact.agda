@@ -1,7 +1,8 @@
 module DASHI.Physics.YangMills.BalabanMarkedSourceGeometricShellEnergyExact where
 
 ------------------------------------------------------------------------
--- ROUND88: GEOMETRIC MARKED-SOURCE SHELL ENERGY -> UNIFORM COEFFICIENT CAP
+-- ROUND88 + 2026-08-29 CROSS-PROVER SYNC:
+-- GEOMETRIC MARKED-SOURCE SHELL ENERGY -> UNIFORM COEFFICIENT CAP
 --
 -- PRIMARY / REUSED SOURCES
 --
@@ -31,6 +32,27 @@ module DASHI.Physics.YangMills.BalabanMarkedSourceGeometricShellEnergyExact wher
 --
 -- whenever (1-r)B = 1.  The second inequality is the already machine-checked
 -- exact rational geometric theorem.
+--
+-- RECENT LEAN CROSS-PROVER REFINEMENT
+--
+-- The parallel Lean lane now proves the immediately upstream scalar producer:
+-- if literal marked/polymer activities satisfy an exponential activity bound
+--
+--       activity(n) <= A exp(-mu n)
+--
+-- and shell multiplicity/entropy satisfies
+--
+--       count(n) <= B exp(nu n),
+--
+-- with nu < mu, then
+--
+--       E_n <= A B r^n,       r = exp(nu-mu) < 1,
+--
+-- and the total shell energy is summable.  This is not promoted to Agda
+-- machineChecked authority here; it sharpens the physical B seam.  The first
+-- remaining source theorem is now to extract the literal CMP116 marked-source
+-- activity decay and entropy constants with nu < mu on the same differentiated
+-- source family.  The geometric-series algebra is already downstream.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -125,9 +147,10 @@ markedSourceGeometricShellSummationLevel = machineChecked
 markedSourceShellEnergyToUniformCoefficientCapLevel : ProofLevel
 markedSourceShellEnergyToUniformCoefficientCapLevel = machineChecked
 
--- TRUE remaining physical B energy seam: on the literal differentiated CMP116
--- source, define the shell energies and prove one cutoff/volume/scale-uniform
--- geometric majorant E_d <= E0 r^d with r<1.  Summation and Cauchy/Hilbert
--- transport are no longer physical lemmas.
+-- Agda authority remains conditional until the literal CMP116 differentiated
+-- activity and entropy bounds are inhabited on the source-native marked family.
 physicalCMP116GeometricDifferentiatedShellEnergyLevel : ProofLevel
 physicalCMP116GeometricDifferentiatedShellEnergyLevel = conditional
+
+cmp116MarkedActivityDecayEntropyCrossProverRefinementLevel : ProofLevel
+cmp116MarkedActivityDecayEntropyCrossProverRefinementLevel = conditional

@@ -1,0 +1,114 @@
+module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound91ABCrossPollinationValidation where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaExact as R87
+import DASHI.Physics.YangMills.BalabanRowAInverseSquareSensitivityDecompositionExact as A
+import DASHI.Physics.YangMills.BalabanRowAInverseSquareChainSensitivityExact as AChain
+import DASHI.Physics.YangMills.BalabanRowASixthSensitivityFromCubicTelescopeExact as ASixth
+import DASHI.Physics.YangMills.BalabanRowADirectSensitivityCumulativeExact as ADirect
+import DASHI.Physics.YangMills.BalabanRowADirectQFromTubeExact as ADirectQ
+import DASHI.Physics.YangMills.BalabanRowAIrrelevantHistorySensitivityCumulativeExact as AHistory
+import DASHI.Physics.YangMills.BalabanRowAExplicitQAssemblyExact as AQ
+import DASHI.Physics.YangMills.BalabanBetaPrefixSensitivityToTubeContractionExact as Shoot
+import DASHI.Physics.YangMills.BalabanIrrelevantRGMemoryContractionExact as Memory
+import DASHI.Physics.YangMills.BalabanRowBActivityEntropyToShellEnergyExact as B
+import DASHI.Physics.YangMills.BalabanMarkedSourceGeometricShellEnergyExact as Shell
+import DASHI.Physics.YangMills.BalabanRowBCMarkedShellToCurvatureDebtExact as BC
+import DASHI.Physics.YangMills.BalabanPolchinskiShellIntegralDebtExact as CTemporal
+
+rowAInverseSquareSplitAlgebraRound91Level : ProofLevel
+rowAInverseSquareSplitAlgebraRound91Level =
+  A.rowAInverseSquareSensitivitySplitAlgebraLevel
+
+rowAInverseSquareChainG6SuppressionRound91Level : ProofLevel
+rowAInverseSquareChainG6SuppressionRound91Level =
+  AChain.rowAInverseSquareChainSuppressionAlgebraLevel
+
+rowASixthSensitivityFromCubicTubeRound92Level : ProofLevel
+rowASixthSensitivityFromCubicTubeRound92Level =
+  ASixth.rowASixthFromCubicTubeAlgebraLevel
+
+rowACumulativeDirectG6BudgetRound92Level : ProofLevel
+rowACumulativeDirectG6BudgetRound92Level =
+  ADirect.rowADirectSixthTubeBudgetAlgebraLevel
+
+rowADirectTubeToQConstantRound93Level : ProofLevel
+rowADirectTubeToQConstantRound93Level =
+  ADirectQ.rowADirectTubeToInputSensitivityAlgebraLevel
+
+rowACumulativeIrrelevantHistoryBudgetRound92Level : ProofLevel
+rowACumulativeIrrelevantHistoryBudgetRound92Level =
+  AHistory.rowAIrrelevantHistoryInputSensitivityLevel
+
+rowAExplicitQAssemblyRound94Level : ProofLevel
+rowAExplicitQAssemblyRound94Level = AQ.rowAExplicitQAssemblyAlgebraLevel
+
+rowAExplicitQSubunitSensitivityRound94Level : ProofLevel
+rowAExplicitQSubunitSensitivityRound94Level =
+  AQ.rowAExplicitQSubunitSensitivityLevel
+
+rowAShootingContractionAlgebraRound91Level : ProofLevel
+rowAShootingContractionAlgebraRound91Level =
+  Shoot.betaPrefixSensitivityToTubeContractionLevel
+
+rowAIrrelevantMemoryGeometricCompilerRound91Level : ProofLevel
+rowAIrrelevantMemoryGeometricCompilerRound91Level =
+  Memory.irrelevantRGMemoryContractionCompilerLevel
+
+rowALiteralExplicitQAssemblyRound94Level : ProofLevel
+rowALiteralExplicitQAssemblyRound94Level = conditional
+
+rowBActivityEntropyProductRound91Level : ProofLevel
+rowBActivityEntropyProductRound91Level =
+  B.rowBActivityEntropyProductAlgebraLevel
+
+rowBActivityEntropyToGeometricShellRound91Level : ProofLevel
+rowBActivityEntropyToGeometricShellRound91Level =
+  B.rowBActivityEntropyToGeometricShellLevel
+
+rowBActivityEntropyUniformSummationRound92Level : ProofLevel
+rowBActivityEntropyUniformSummationRound92Level =
+  B.rowBActivityEntropyUniformSummationLevel
+
+rowBGeometricShellSummationRound91Level : ProofLevel
+rowBGeometricShellSummationRound91Level =
+  Shell.markedSourceGeometricShellSummationLevel
+
+rowBLiteralCMP116DifferentiatedActivityRound94Level : ProofLevel
+rowBLiteralCMP116DifferentiatedActivityRound94Level = conditional
+
+rowBLiteralCMP116ShellEntropyRound94Level : ProofLevel
+rowBLiteralCMP116ShellEntropyRound94Level = conditional
+
+rowBLiteralCMP116CombinedRatioRound94Level : ProofLevel
+rowBLiteralCMP116CombinedRatioRound94Level = conditional
+
+rowBCMarkedShellToCurvatureCarrierRound94Level : ProofLevel
+rowBCMarkedShellToCurvatureCarrierRound94Level =
+  BC.rowBCMarkedShellToCurvatureCarrierLevel
+
+rowBCMarkedShellToUniformCurvatureDebtRound94Level : ProofLevel
+rowBCMarkedShellToUniformCurvatureDebtRound94Level =
+  BC.rowBCMarkedShellToUniformCurvatureDebtLevel
+
+rowBCSameShellHessianDominationRound94Level : ProofLevel
+rowBCSameShellHessianDominationRound94Level = conditional
+
+rowCPerShellIntegralSummationCompilerRound91Level : ProofLevel
+rowCPerShellIntegralSummationCompilerRound91Level =
+  CTemporal.polchinskiShellIntegralDebtCompilerLevel
+
+round94FrozenResearchCountStillFour = R87.round87ShortestClayAnalyticCount
+
+rowACompletionRound94Level : ProofLevel
+rowACompletionRound94Level = conditional
+
+rowBCompletionRound94Level : ProofLevel
+rowBCompletionRound94Level = conditional
+
+rowCCompletionRound94Level : ProofLevel
+rowCCompletionRound94Level = conditional
+
+rowDCompletionRound94Level : ProofLevel
+rowDCompletionRound94Level = conditional
