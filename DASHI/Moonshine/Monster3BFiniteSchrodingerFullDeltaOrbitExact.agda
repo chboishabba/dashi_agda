@@ -2,16 +2,11 @@ module DASHI.Moonshine.Monster3BFiniteSchrodingerFullDeltaOrbitExact where
 
 ------------------------------------------------------------------------
 -- FULL DELTA ORBIT ON X6 FROM THE SIX EXISTING UNIT TRANSLATIONS
---
--- This closes the pointwise calculation left explicit by TranslationOrbitExact.
--- No arbitrary permutation closure is introduced.  Pointwise equality is
--- transported through the existing pullback translation action, one generator
--- word at a time, and the resulting generated point map is identified with the
--- already-defined coordinatewise shiftPoint.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl; trans)
+open import Relation.Binary.PropositionalEquality using (sym)
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
@@ -19,10 +14,6 @@ import DASHI.Moonshine.Monster3BFiniteSchrodingerFunctionModuleExact as V
 import DASHI.Moonshine.Monster3BFiniteSchrodingerDeltaExtractionExact as Extract
 import DASHI.Moonshine.Monster3BFiniteSchrodingerBooleanDeltaExact as Boolean
 import DASHI.Moonshine.Monster3BFiniteSchrodingerTranslationOrbitExact as Orbit
-
-------------------------------------------------------------------------
--- 1. Pointwise equality is stable under the literal pullback translation.
-------------------------------------------------------------------------
 
 translationActionRespectsPointwise :
   (axis : H.Axis6) {f g : V.SchrodingerFunction} →
@@ -44,10 +35,6 @@ translateWordRespectsPointwise neg axis equal =
   translationActionRespectsPointwise axis
     (translationActionRespectsPointwise axis equal)
 
-------------------------------------------------------------------------
--- 2. Point action of one trit word.
-------------------------------------------------------------------------
-
 wordPoint : Trit → H.Axis6 → H.X6 → H.X6
 wordPoint zer axis selected = selected
 wordPoint pos axis selected = H.translate axis selected
@@ -67,10 +54,6 @@ translateWordCarriesBooleanDelta neg axis selected x =
       (Boolean.unitTranslationCarriesBooleanDeltaPointwise axis selected) x)
     (Boolean.unitTranslationCarriesBooleanDeltaPointwise
       axis (H.translate axis selected) x)
-
-------------------------------------------------------------------------
--- 3. Generated point map, matching generatedTranslation exactly.
-------------------------------------------------------------------------
 
 generatedPoint : H.X6 → H.X6 → H.X6
 generatedPoint (H.x6 s0 s1 s2 s3 s4 s5) selected =
@@ -122,10 +105,6 @@ generatedTranslationCarriesBooleanDelta
           (trans
             (translateWordRespectsPointwise s5 H.axis5 e4 x)
             (e5 x)))))
-
-------------------------------------------------------------------------
--- 4. The wordPoint action is the coordinate shiftTrit action used by Orbit.
-------------------------------------------------------------------------
 
 wordPointAxis0 : (s : Trit) (x : H.X6) →
   wordPoint s H.axis0 x ≡
@@ -188,10 +167,6 @@ generatedPointIsShiftPoint
         | wordPointAxis4 s4 _
         | wordPointAxis5 s5 _ = refl
 
-------------------------------------------------------------------------
--- 5. Canonical source-to-target delta transport and subspace membership.
-------------------------------------------------------------------------
-
 canonicalGeneratedActionCarriesBooleanDelta :
   (source target : H.X6) →
   V.PointwiseEqual
@@ -224,17 +199,6 @@ canonicalDeltaTransportReceipt source target =
           (canonicalGeneratedActionCarriesBooleanDelta source target x)
           (BooleanDeltaToComparison target x)))
   where
-  translationOnComparisonToBoolean :
-    (source target x : H.X6) →
-    Orbit.generatedTranslation (Orbit.shiftFromTo source target)
-      (Extract.comparisonDelta source) x
-    ≡ Orbit.generatedTranslation (Orbit.shiftFromTo source target)
-      (Boolean.booleanDelta source) x
-  translationOnComparisonToBoolean source target x =
-    generatedTranslationRespectsPointwise
-      (Orbit.shiftFromTo source target)
-      (Boolean.comparisonDeltaIsBooleanDelta source) x
-
   generatedTranslationRespectsPointwise :
     (shift : H.X6) {f g : V.SchrodingerFunction} →
     V.PointwiseEqual f g →
@@ -250,12 +214,22 @@ canonicalDeltaTransportReceipt source target =
             (translateWordRespectsPointwise s1 H.axis1
               (translateWordRespectsPointwise s0 H.axis0 equal)))))
 
+  translationOnComparisonToBoolean :
+    (source target x : H.X6) →
+    Orbit.generatedTranslation (Orbit.shiftFromTo source target)
+      (Extract.comparisonDelta source) x
+    ≡ Orbit.generatedTranslation (Orbit.shiftFromTo source target)
+      (Boolean.booleanDelta source) x
+  translationOnComparisonToBoolean source target x =
+    generatedTranslationRespectsPointwise
+      (Orbit.shiftFromTo source target)
+      (Boolean.comparisonDeltaIsBooleanDelta source) x
+
   BooleanDeltaToComparison :
     (target x : H.X6) →
     Boolean.booleanDelta target x ≡ Extract.comparisonDelta target x
   BooleanDeltaToComparison target x =
-    Relation.Binary.PropositionalEquality.sym
-      (Boolean.comparisonDeltaIsBooleanDelta target x)
+    sym (Boolean.comparisonDeltaIsBooleanDelta target x)
 
 allDeltaOrbitMember :
   ∀ {Member}
