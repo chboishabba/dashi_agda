@@ -12,23 +12,19 @@ import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as
 -- RH-ONLY BIDI-AWARE SEARCH SCHEDULER
 --
 -- Consumer first, recursively.  A candidate experiment is schedulable only if
--- it feeds an open producer node on the backward RH cut.  The 8889 Lean return
--- closes M_cluster^pole and leaves H_Gamma consumer-insufficient.  The new
--- H_off near/far audit further decomposes H_off^pole into:
+-- it feeds an open producer node on the backward RH cut.
 --
---   H_off carrier transport
---   + finite signed near evaluation
---   + already-owned arbitrary-accuracy far shell.
+-- The checked cutoff theorem is generic in taper g, so instantiating it at the
+-- final high-ordinate pole taper is not a separate analytic research theorem.
+-- The infinite far shell is already controlled.  Therefore H_off^pole now has
+-- one genuine analytic producer node:
 --
--- Hence the active high-ordinate queue is now exactly:
+--   finite signed target-centred nearOffFinset evaluation.
 --
---   (1) identify the checked cutoff carrier with the final pole-quotient taper;
---   (2) evaluate the finite target-centred signed near sum on that carrier;
---   (3) repair H_Gamma to consumer-sufficient O(|t|^-2)-scale accuracy.
+-- Together with the consumer-insufficient Gamma result, the active queue is:
 --
--- Re-proving the cluster margin, refining the balance identity, attacking the
--- infinite far shell as a fresh theorem, or searching a theorem merely because
--- it is labelled Hardy has no scheduling authority here.
+--   (1) evaluate the finite signed near zero sum;
+--   (2) repair H_Gamma to consumer-sufficient O(|t|^-2)-scale accuracy.
 ------------------------------------------------------------------------
 
 data ProducerNeed : Set where
@@ -48,90 +44,52 @@ currentNeed Search.clusterMarginSocket = producerClosed
 ------------------------------------------------------------------------
 
 data RHProducerNode : Set where
-  offCutoffCarrierTransportNode
   offFiniteNearEvaluationNode
   gammaPrecisionNode
   : RHProducerNode
 
 nodeFeedsSocket : RHProducerNode → Search.RHResearchSocket
-nodeFeedsSocket offCutoffCarrierTransportNode = Search.offOrdinateSocket
 nodeFeedsSocket offFiniteNearEvaluationNode = Search.offOrdinateSocket
 nodeFeedsSocket gammaPrecisionNode = Search.gammaSocket
 
-data ProducerNodeStatus : Set where
-  nodeOpen
-  nodeClosed
-  : ProducerNodeStatus
-
-currentNodeStatus : RHProducerNode → ProducerNodeStatus
-currentNodeStatus offCutoffCarrierTransportNode = nodeOpen
-currentNodeStatus offFiniteNearEvaluationNode = nodeOpen
-currentNodeStatus gammaPrecisionNode = nodeOpen
-
 ------------------------------------------------------------------------
--- Candidate experiment classes for the current exact cut.
+-- Candidate experiment classes for the exact current cut.
 ------------------------------------------------------------------------
 
 data RHBidiExperiment : Set where
-  transportCutoffCarrierToPoleQuotient
   evaluateFiniteNearSignedSum
   improveGammaEvaluation
   repeatClusterMarginProof
+  reproveGenericCutoffInstantiation
   reproveInfiniteFarShell
   sharpenBalanceBudgetRoute
   auditNamedExternalDonor
   : RHBidiExperiment
 
 data RHExperimentOutputKind : Set where
-  carrierBridgeProducer
   directFiniteProducer
   consumerSufficientRepair
   redundantClosedProducer
+  redundantGenericInstantiation
   redundantOwnedFarTail
   balanceDerived
   donorAuditOnly
   : RHExperimentOutputKind
 
 outputKind : RHBidiExperiment → RHExperimentOutputKind
-outputKind transportCutoffCarrierToPoleQuotient = carrierBridgeProducer
 outputKind evaluateFiniteNearSignedSum = directFiniteProducer
 outputKind improveGammaEvaluation = consumerSufficientRepair
 outputKind repeatClusterMarginProof = redundantClosedProducer
+outputKind reproveGenericCutoffInstantiation = redundantGenericInstantiation
 outputKind reproveInfiniteFarShell = redundantOwnedFarTail
 outputKind sharpenBalanceBudgetRoute = balanceDerived
 outputKind auditNamedExternalDonor = donorAuditOnly
-
-experimentProducerNode :
-  (experiment : RHBidiExperiment) →
-  (outputKind experiment ≡ carrierBridgeProducer
-    ⊎ outputKind experiment ≡ directFiniteProducer
-    ⊎ outputKind experiment ≡ consumerSufficientRepair) →
-  RHProducerNode
-experimentProducerNode transportCutoffCarrierToPoleQuotient _ =
-  offCutoffCarrierTransportNode
-experimentProducerNode evaluateFiniteNearSignedSum _ =
-  offFiniteNearEvaluationNode
-experimentProducerNode improveGammaEvaluation _ = gammaPrecisionNode
-experimentProducerNode repeatClusterMarginProof (inj₁ ())
-experimentProducerNode repeatClusterMarginProof (inj₂ (inj₁ ()))
-experimentProducerNode repeatClusterMarginProof (inj₂ (inj₂ ()))
-experimentProducerNode reproveInfiniteFarShell (inj₁ ())
-experimentProducerNode reproveInfiniteFarShell (inj₂ (inj₁ ()))
-experimentProducerNode reproveInfiniteFarShell (inj₂ (inj₂ ()))
-experimentProducerNode sharpenBalanceBudgetRoute (inj₁ ())
-experimentProducerNode sharpenBalanceBudgetRoute (inj₂ (inj₁ ()))
-experimentProducerNode sharpenBalanceBudgetRoute (inj₂ (inj₂ ()))
-experimentProducerNode auditNamedExternalDonor (inj₁ ())
-experimentProducerNode auditNamedExternalDonor (inj₂ (inj₁ ()))
-experimentProducerNode auditNamedExternalDonor (inj₂ (inj₂ ()))
 
 ------------------------------------------------------------------------
 -- Consumer-first admissibility.
 ------------------------------------------------------------------------
 
 data InhabitsLiveRHProducer : RHBidiExperiment → Set where
-  cutoffCarrierTransportIsLive :
-    InhabitsLiveRHProducer transportCutoffCarrierToPoleQuotient
   finiteNearEvaluationIsLive :
     InhabitsLiveRHProducer evaluateFiniteNearSignedSum
   gammaPrecisionRepairIsLive :
@@ -155,6 +113,11 @@ clusterMarginRepeatNotSchedulable :
 clusterMarginRepeatNotSchedulable s with inhabitsLiveProducer s
 ... | ()
 
+genericCutoffInstantiationRepeatNotSchedulable :
+  RHBidiSchedulable reproveGenericCutoffInstantiation → ⊥
+genericCutoffInstantiationRepeatNotSchedulable s with inhabitsLiveProducer s
+... | ()
+
 farShellRepeatNotSchedulable :
   RHBidiSchedulable reproveInfiniteFarShell → ⊥
 farShellRepeatNotSchedulable s with inhabitsLiveProducer s
@@ -170,21 +133,13 @@ nameOnlyDonorNotSchedulable :
 nameOnlyDonorNotSchedulable s with inhabitsLiveProducer s
 ... | ()
 
-cutoffCarrierTransportSchedulable :
-  RHBidiSchedulable transportCutoffCarrierToPoleQuotient
-cutoffCarrierTransportSchedulable =
-  rh-bidi-schedulable
-    cutoffCarrierTransportIsLive
-    "RH pole-quotient backward consumer: B_off + B_Gamma < M_cluster"
-    "H_off^pole subcut: identify checked cutoff taper/response with final universal pole-quotient taper/response"
-
 finiteNearEvaluationSchedulable :
   RHBidiSchedulable evaluateFiniteNearSignedSum
 finiteNearEvaluationSchedulable =
   rh-bidi-schedulable
     finiteNearEvaluationIsLive
     "RH pole-quotient backward consumer: B_off + B_Gamma < M_cluster"
-    "H_off^pole subcut: finite reflection-paired target-centred nearOffFinset evaluation"
+    "H_off^pole: finite reflection-paired target-centred nearOffFinset evaluation on the final high-ordinate pole taper"
 
 gammaPrecisionRepairSchedulable :
   RHBidiSchedulable improveGammaEvaluation
@@ -195,12 +150,10 @@ gammaPrecisionRepairSchedulable =
     "H_Gamma consumer-sufficient O(|t|^-2)-scale evaluation"
 
 ------------------------------------------------------------------------
--- The active high-ordinate queue is exactly the three live producer nodes.
+-- The active high-ordinate queue is exactly the two live analytic producers.
 ------------------------------------------------------------------------
 
 data ActiveHighOrdinateExperiment : RHBidiExperiment → Set where
-  activeCarrierTransport :
-    ActiveHighOrdinateExperiment transportCutoffCarrierToPoleQuotient
   activeFiniteNear : ActiveHighOrdinateExperiment evaluateFiniteNearSignedSum
   activeGammaRepair : ActiveHighOrdinateExperiment improveGammaEvaluation
 
@@ -208,11 +161,12 @@ schedulableIsActive :
   (experiment : RHBidiExperiment) →
   RHBidiSchedulable experiment →
   ActiveHighOrdinateExperiment experiment
-schedulableIsActive transportCutoffCarrierToPoleQuotient s = activeCarrierTransport
 schedulableIsActive evaluateFiniteNearSignedSum s = activeFiniteNear
 schedulableIsActive improveGammaEvaluation s = activeGammaRepair
 schedulableIsActive repeatClusterMarginProof s =
   ⊥-elim (clusterMarginRepeatNotSchedulable s)
+schedulableIsActive reproveGenericCutoffInstantiation s =
+  ⊥-elim (genericCutoffInstantiationRepeatNotSchedulable s)
 schedulableIsActive reproveInfiniteFarShell s =
   ⊥-elim (farShellRepeatNotSchedulable s)
 schedulableIsActive sharpenBalanceBudgetRoute s =
@@ -265,10 +219,10 @@ farShellAlreadyOwned :
     HOff.canonicalPoleQuotientOffOrdinateNearFarBoundary ≡ true
 farShellAlreadyOwned = refl
 
-cutoffCarrierTransportStillOpen :
-  HOff.oldCutoffCarrierTransportedToFinalPoleQuotientCarrier
+genericCutoffTaperInstantiationNeedsNoNewAnalyticTheorem :
+  HOff.separatePoleTaperTransportResearchTheoremRequired
     HOff.canonicalPoleQuotientOffOrdinateNearFarBoundary ≡ false
-cutoffCarrierTransportStillOpen = refl
+genericCutoffTaperInstantiationNeedsNoNewAnalyticTheorem = refl
 
 finiteNearEvaluationStillOpen :
   HOff.finitePoleQuotientNearSignedEvaluationClosed
@@ -290,6 +244,10 @@ record RHBidiSearchSchedulerBoundary : Set where
     recursiveBackwardCutRefinementEnabledIsTrue :
       recursiveBackwardCutRefinementEnabled ≡ true
 
+    genericCutoffInstantiationRemainsInActiveQueue : Bool
+    genericCutoffInstantiationRemainsInActiveQueueIsFalse :
+      genericCutoffInstantiationRemainsInActiveQueue ≡ false
+
     infiniteFarShellRemainsPrimarySearchLeaf : Bool
     infiniteFarShellRemainsPrimarySearchLeafIsFalse :
       infiniteFarShellRemainsPrimarySearchLeaf ≡ false
@@ -305,9 +263,6 @@ record RHBidiSearchSchedulerBoundary : Set where
     nameOnlyHardyDonorRemainsInActiveQueue : Bool
     nameOnlyHardyDonorRemainsInActiveQueueIsFalse :
       nameOnlyHardyDonorRemainsInActiveQueue ≡ false
-
-    cutoffCarrierTransportActive : Bool
-    cutoffCarrierTransportActiveIsTrue : cutoffCarrierTransportActive ≡ true
 
     finiteNearSignedEvaluationActive : Bool
     finiteNearSignedEvaluationActiveIsTrue :
@@ -332,7 +287,7 @@ canonicalRHBidiSearchSchedulerBoundary =
     false refl
     false refl
     false refl
-    true refl
+    false refl
     true refl
     true refl
     true refl
