@@ -82,10 +82,15 @@ guardObserverSufficientForMergeDecision :
 guardObserverSufficientForMergeDecision left right sameGuard =
   cong mergeDecisionCode sameGuard
 
+-- A ResidualRepair certifies the pair (coarse,residual), not residual alone.
+-- Projecting the residual component from equal joined observations supplies the
+-- exact guard equality needed by the merge consumer.
 mergeDecisionResidualRepair :
   Consumer.ResidualRepair coarseProofObserver guardObserver mergeDecision
 mergeDecisionResidualRepair =
-  Consumer.residual-repair guardObserverSufficientForMergeDecision
+  Consumer.residual-repair λ left right sameJoined →
+    guardObserverSufficientForMergeDecision
+      left right (cong proj₂ sameJoined)
 
 ------------------------------------------------------------------------
 -- The existing visible observer has consumer-relevant collisions.
