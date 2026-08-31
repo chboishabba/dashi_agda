@@ -6,9 +6,11 @@ open import Data.List using (length)
 import DASHI.Core.ActionCrossingBraidExact as Generic
 import DASHI.Core.ActionCrossingTraceCalculusExact as Trace
 import DASHI.Core.ActionCrossingConsumerQuotientExact as Consumer
+import DASHI.Core.ActionCrossingMotifExact as Motif
 import DASHI.Core.CrossDomainActionBraidCrossPollinationExact as Cross
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Crypto.TransactionalBraidAssetProvenanceExact as Crypto
+import DASHI.Crypto.TransactionalBraidMotifRecognitionExact as CryptoMotif
 import DASHI.Governance.SexedHistoricalActionCrossingInstantiationExact as Historical
 
 traceAssociativityRegression :
@@ -54,12 +56,45 @@ historicalEndpointCannotRecoverProvenanceRegression :
 historicalEndpointCannotRecoverProvenanceRegression =
   Historical.endpointCannotRecoverHistoricalProvenance
 
+relayMotifRegression : Motif.RelayMotif Motif.relayTrace
+relayMotifRegression = Motif.canonicalRelay
+
+returnCycleMotifRegression : Motif.ReturnCycleMotif Motif.returnTrace
+returnCycleMotifRegression = Motif.canonicalReturn
+
+splitMotifRegression : Motif.SplitMotif Motif.splitTrace
+splitMotifRegression = Motif.canonicalSplit
+
+crossingCountCannotRecoverMotifRegression :
+  INF.FactorsThrough Motif.crossingCount Motif.motifCode → ⊥
+crossingCountCannotRecoverMotifRegression = Motif.countCannotRecoverMotif
+
+motifConsumerSplitRegression :
+  Consumer.ConsumerSplit
+    Motif.countConsumer Motif.motifConsumer Motif.relayReturnRewrite
+motifConsumerSplitRegression = Motif.relayReturnConsumerSplit
+
+cryptoWashLikeReturnMotifRegression :
+  Motif.ReturnCycleMotif CryptoMotif.washLikeReturnTrace
+cryptoWashLikeReturnMotifRegression = CryptoMotif.washLikeReturnMotif
+
+cryptoPeelLikeRelayMotifRegression :
+  Motif.RelayMotif CryptoMotif.peelLikeRelayTrace
+cryptoPeelLikeRelayMotifRegression = CryptoMotif.peelLikeRelayMotif
+
 actionCrossingTraceBoundaryRegression : Trace.ActionCrossingTraceBoundary
 actionCrossingTraceBoundaryRegression = Trace.canonicalActionCrossingTraceBoundary
 
 actionCrossingConsumerBoundaryRegression : Consumer.ActionCrossingConsumerQuotientBoundary
 actionCrossingConsumerBoundaryRegression =
   Consumer.canonicalActionCrossingConsumerQuotientBoundary
+
+actionCrossingMotifBoundaryRegression : Motif.ActionCrossingMotifBoundary
+actionCrossingMotifBoundaryRegression = Motif.canonicalActionCrossingMotifBoundary
+
+cryptoMotifBoundaryRegression : CryptoMotif.TransactionalBraidMotifRecognitionBoundary
+cryptoMotifBoundaryRegression =
+  CryptoMotif.canonicalTransactionalBraidMotifRecognitionBoundary
 
 crossDomainActionBraidBoundaryRegression : Cross.CrossDomainActionBraidBoundary
 crossDomainActionBraidBoundaryRegression = Cross.canonicalCrossDomainActionBraidBoundary
