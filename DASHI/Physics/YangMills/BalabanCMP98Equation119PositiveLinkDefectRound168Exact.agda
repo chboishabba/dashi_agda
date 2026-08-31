@@ -31,6 +31,7 @@ open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
 import DASHI.Physics.YangMills.BalabanCMP98Equation119CanonicalCoarseSegmentRound158Exact as R158
 import DASHI.Physics.YangMills.BalabanCMP98Equation119LiteralRelativeDefectRound164Exact as R164
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredPeriodicEmbeddingExact as Embed
 import DASHI.Physics.YangMills.BalabanCMP98UnitaryOperatorDefectTelescopeExact as Telescope
 import DASHI.Physics.YangMills.BalabanCMP98MinimalContourSourceChartBudgetExact as Budget
 
@@ -58,9 +59,7 @@ record PositiveLinkDefectInputs
       ≤ Budget.perLinkDefectMajorant
 
     canonicalContourLengthAtMost24 : ∀ point →
-      R164.listLength
-        (DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredPeriodicEmbeddingExact.canonicalCenteredContourWord point)
-      ≤ 24
+      R164.listLength (Embed.canonicalCenteredContourWord point) ≤ 24
 
 open PositiveLinkDefectInputs public
 
