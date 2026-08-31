@@ -129,3 +129,9 @@ import DASHI.Core.MultiaxialResidualBundleExact
 import DASHI.Core.RecognitionConstitutionNonfactorabilityExact
 import DASHI.Core.SituatedClaimAuthoritySystemExact
 import DASHI.Core.KnowledgeContentAuthoritySeparationExact
+
+-- Proof-carrying physical execution / shared-state coalition / proof-search
+-- least-privilege closure.
+import DASHI.Core.ProofCarryingPhysicalExecutionBoundaryExact
+import DASHI.Core.SharedStateCoalitionReachableEffectExact
+import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact
