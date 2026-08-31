@@ -54,11 +54,12 @@ addFunction f g x = addC3 (f x) (g x)
 scaleFunction : ℚ → SchrodingerFunction → SchrodingerFunction
 scaleFunction r f x = scaleC3 r (f x)
 
+cyclotomicScaleFunction :
+  C3.Cyclotomic3 → SchrodingerFunction → SchrodingerFunction
+cyclotomicScaleFunction a f x = C3.multiply a (f x)
+
 ------------------------------------------------------------------------
 -- 3. Literal translation and modulation actions.
---
--- Translation is pullback by the inverse coordinate shift.  Modulation is
--- pointwise multiplication by the phase read from the dual coordinate.
 ------------------------------------------------------------------------
 
 translationAction : H.Axis6 → SchrodingerFunction → SchrodingerFunction
@@ -77,9 +78,7 @@ translationActionInverse axis f x
         | Perm.translateInverseAfterTranslate axis x = refl
 
 ------------------------------------------------------------------------
--- 4. Delta-line carrier.  Equality is Boolean because X6 is finite and this
---    owner only needs the exact pointwise support surface for later projector
---    synthesis.
+-- 4. Delta-line carrier.
 ------------------------------------------------------------------------
 
 tritEqual : Trit → Trit → Bool
@@ -111,10 +110,9 @@ delta selected x with x6Equal selected x
 ... | false = C3.zero
 
 ------------------------------------------------------------------------
--- 5. Invariant-subspace interface.  Closure under the two generator families
---    and linear combinations is explicit.  No arbitrary coordinate selector
---    is admitted: later projector ownership must derive selectors from the
---    modulation action itself.
+-- 5. Invariant-subspace interface.  This is a Q(zeta_3)-linear subspace,
+-- not merely a rational subspace.  Arbitrary coordinate selectors are still
+-- absent; later Fourier projector ownership must derive them from modulation.
 ------------------------------------------------------------------------
 
 record HeisenbergInvariantSubspace (Member : SchrodingerFunction → Set) : Set where
@@ -125,6 +123,9 @@ record HeisenbergInvariantSubspace (Member : SchrodingerFunction → Set) : Set 
       (f g : SchrodingerFunction) → Member f → Member g → Member (addFunction f g)
     closedUnderRationalScaling :
       (r : ℚ) → (f : SchrodingerFunction) → Member f → Member (scaleFunction r f)
+    closedUnderCyclotomicScaling :
+      (a : C3.Cyclotomic3) → (f : SchrodingerFunction) → Member f →
+      Member (cyclotomicScaleFunction a f)
     closedUnderTranslation :
       (axis : H.Axis6) → (f : SchrodingerFunction) → Member f →
       Member (translationAction axis f)
@@ -137,9 +138,9 @@ record SchrodingerFunctionModuleBoundary : Set where
   constructor schrodingerFunctionModuleBoundary
   field
     exactFunctionCarrierConstructed : Bool
+    cyclotomicLinearSubspaceInterfaceConstructed : Bool
     translationActionConstructed : Bool
     modulationActionConstructed : Bool
-    invariantSubspaceInterfaceConstructed : Bool
     modulationFourierProjectorsConstructedHere : Bool
     nonzeroCyclotomicScalarInversionConstructedHere : Bool
     schrodingerIrreducibilityProvedHere : Bool
