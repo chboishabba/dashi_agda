@@ -1,0 +1,22 @@
+name: Aristotle experimental proof search
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Reasoning/AristotleExperimentalProofSearchExact.agda'
+      - 'DASHI/Reasoning/AristotleExperimentalBranchMergeExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleQuotientLeanReturn8889Exact.agda'
+      - 'DASHI/Analysis/RiemannAristotleExperimentalProofSearchExact.agda'
+      - 'DASHI/Reasoning/AristotleExperimentalProofSearchValidation.agda'
+      - 'DASHI/Reasoning/Everything.agda'
+      - 'scripts/check_aristotle_experimental_proof_search.sh'
+      - '.github/workflows/aristotle-experimental-proof-search.yml'
+  workflow_dispatch:
+
+jobs:
+  focused-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trust scan and focused Agda check when toolchain is available
+        run: bash scripts/check_aristotle_experimental_proof_search.sh
