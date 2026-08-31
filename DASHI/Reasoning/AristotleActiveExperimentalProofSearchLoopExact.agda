@@ -140,9 +140,6 @@ historySensitiveMergeWitness = record
   ; choicesDiffer = λ ()
   }
 
-historySensitiveMergeDoesNotDescendThroughVisibleState =
-  History.historyChoiceNonFactorability historySensitiveMergeWitness
-
 ------------------------------------------------------------------------
 -- 3. One search iteration is explicitly staged.
 ------------------------------------------------------------------------
@@ -230,7 +227,6 @@ record ObservationReceipt
 
 open ObservationReceipt public
 
--- Concrete realised branch for the dependency-probe local outcome.
 localDependencyOutcomePossible :
   Planner.OutcomePossible
     Experiment.allBranchesLive
@@ -285,14 +281,9 @@ initialRefinement =
 -- independent least-privilege admission receipt.
 ------------------------------------------------------------------------
 
-canonicalAdmittedMerge : Governance.AdmittedGuardedMerge Merge.leftBranch Merge.compatibleRightBranch
+canonicalAdmittedMerge :
+  Governance.AdmittedGuardedMerge Merge.leftBranch Merge.compatibleRightBranch
 canonicalAdmittedMerge = Governance.canonicalAdmittedCompatibleMerge
-
-canonicalMergedSnapshot = Governance.admittedMergeSnapshot canonicalAdmittedMerge
-
-canonicalMergedKnowledgeKeepsLeft = Governance.canonicalAdmittedMergeKeepsLemmaA
-canonicalMergedKnowledgeKeepsRight = Governance.canonicalAdmittedMergeKeepsLemmaB
-canonicalMergedRouteIsLive = Governance.canonicalAdmittedMergeHasLiveRoute
 
 ------------------------------------------------------------------------
 -- 5. Selective reopening is exact reverse dependency closure.
@@ -334,10 +325,6 @@ selectiveConsumerReopening =
 
 ------------------------------------------------------------------------
 -- 6. Loop continuation versus closure.
---
--- The already-constructed sequential plan is the continuation policy.  Closure
--- occurs when the declared consumer becomes constant on the currently live
--- fibre; full hidden-world identity is unnecessary.
 ------------------------------------------------------------------------
 
 continuationPlan :
