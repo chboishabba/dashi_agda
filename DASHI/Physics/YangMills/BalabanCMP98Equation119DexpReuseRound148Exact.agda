@@ -2,30 +2,40 @@
 module DASHI.Physics.YangMills.BalabanCMP98Equation119DexpReuseRound148Exact where
 
 ------------------------------------------------------------------------
--- ROUND148 A1 BIDI: REUSE THE EXISTING LEFT/RIGHT DEXP CALCULUS IN EQ. (119)
+-- ROUND148 A1 BIDI: SOURCE-CORRECT LEFT/RIGHT DEXP REUSE FOR EQ. (119)
 --
--- Primary sources:
+-- Primary source:
 -- Tadeusz Bałaban, "Averaging Operations for Lattice Gauge Theories",
 -- Commun. Math. Phys. 98 (1985), 17--51. DOI: 10.1007/BF01211042.
--- Tadeusz Bałaban, "Renormalization Group Approach to Lattice Gauge Field
--- Theories. I", Commun. Math. Phys. 109 (1987), 249--301.
--- DOI: 10.1007/BF01215223.
 --
--- Round147 constructs the physical R0/path geometry.  This file refuses to
--- invent fresh g/g^{-1}/adjoint operators for the remaining Lie-calculus part.
--- Instead the Eq. (119) point operators are projections of the already-owned
--- `LeftRightDexpCancellationData`:
+-- Source audit correction.
+-- CMP98 defines
 --
---   g(-i ad Y)         -> dexpMinus
---   g^{-1}(-i ad Y_x) -> Jminus
---   R(exp iY_x)        -> adjointExp.
+--   g(z) = (e^{-z} - 1)/(-z)
 --
--- The opposite-trivialisation cancellation
+-- and immediately records
 --
---   Jplus (adjointExp v) = Jminus v
+--   g^{-1}(-z) e^z = g^{-1}(z).
 --
--- is therefore inherited from the existing inverse-uniqueness theorem rather
--- than supplied as another receipt.
+-- In Eq. (119) the printed operators are therefore
+--
+--   g(-i ad Y)          = the PLUS/opposite-trivialisation dexp,
+--   g^{-1}(-i ad Y_x)  = Jplus,
+--   R(e^{iY_x})         = adjointExp,
+--
+-- when compared with the existing `LeftRightDexpCancellationData`, whose
+-- defining relation is
+--
+--   dexpPlus = adjointExp o dexpMinus
+--
+-- and whose inverse-uniqueness theorem gives exactly the source identity
+--
+--   Jplus (adjointExp v) = Jminus v.
+--
+-- An earlier Round148 draft reversed the plus/minus labels.  The BIDI source
+-- check caught that: the algebraic theorem was right, but the Eq. (119) role
+-- assignment was backwards.  This file fixes the assignment without inventing
+-- any fresh g/g^{-1}/adjoint receipt.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -45,16 +55,18 @@ record CMP98Equation119DexpConvention (Lie : Set) : Set₁ where
 
 open CMP98Equation119DexpConvention public
 
-outerDexpMinus :
+-- Literal CMP98 Eq. (119) role: g(-i ad Y).
+outerPrintedGMinus :
   ∀ {Lie} → CMP98Equation119DexpConvention Lie →
   Nat → Dexp.Endomorphism Lie
-outerDexpMinus convention step = LR.dexpMinus (outer convention step)
+outerPrintedGMinus convention step = LR.dexpPlus (outer convention step)
 
-pointInverseDexpMinus :
+-- Literal CMP98 Eq. (119) role: g^{-1}(-i ad Y_x).
+pointPrintedGInverseMinus :
   ∀ {Lie} → CMP98Equation119DexpConvention Lie →
   Nat → Centered.CenteredBlockPoint4 6 → Dexp.Endomorphism Lie
-pointInverseDexpMinus convention step point =
-  LR.Jminus (atPoint convention step point)
+pointPrintedGInverseMinus convention step point =
+  LR.Jplus (atPoint convention step point)
 
 pointAdjointExp :
   ∀ {Lie} → CMP98Equation119DexpConvention Lie →
@@ -67,34 +79,57 @@ outerAdjointExp :
   Nat → Dexp.Endomorphism Lie
 outerAdjointExp convention step = LR.adjointExp (outer convention step)
 
-pointOppositeTrivialisationCancels :
+-- This is CMP98's printed scalar-function identity
+-- g^{-1}(-z)e^z = g^{-1}(z), lifted to the existing operator family.
+pointPrintedInverseTransport :
   ∀ {Lie}
     (convention : CMP98Equation119DexpConvention Lie)
     step point vector →
-  LR.Jplus (atPoint convention step point)
+  pointPrintedGInverseMinus convention step point
     (pointAdjointExp convention step point vector)
-  ≡ pointInverseDexpMinus convention step point vector
-pointOppositeTrivialisationCancels convention step point =
+  ≡ LR.Jminus (atPoint convention step point) vector
+pointPrintedInverseTransport convention step point =
   LR.leftRightInverseDexpCancellation (atPoint convention step point)
 
-outerOppositeTrivialisationCancels :
+outerPrintedInverseTransport :
   ∀ {Lie}
     (convention : CMP98Equation119DexpConvention Lie)
     step vector →
   LR.Jplus (outer convention step)
     (outerAdjointExp convention step vector)
   ≡ LR.Jminus (outer convention step) vector
-outerOppositeTrivialisationCancels convention step =
+outerPrintedInverseTransport convention step =
   LR.leftRightInverseDexpCancellation (outer convention step)
+
+------------------------------------------------------------------------
+-- Compatibility names retained for downstream files written before the source
+-- orientation audit.  Their implementations are now source-correct: despite
+-- the historical names, these denote the printed g(-z)/g^{-1}(-z) roles.
+------------------------------------------------------------------------
+
+outerDexpMinus :
+  ∀ {Lie} → CMP98Equation119DexpConvention Lie →
+  Nat → Dexp.Endomorphism Lie
+outerDexpMinus = outerPrintedGMinus
+
+pointInverseDexpMinus :
+  ∀ {Lie} → CMP98Equation119DexpConvention Lie →
+  Nat → Centered.CenteredBlockPoint4 6 → Dexp.Endomorphism Lie
+pointInverseDexpMinus = pointPrintedGInverseMinus
 
 cmp98Equation119ExistingDexpReuseRound148Level : ProofLevel
 cmp98Equation119ExistingDexpReuseRound148Level = machineChecked
 
-cmp98Equation119OppositeTrivialisationCancellationRound148Level : ProofLevel
-cmp98Equation119OppositeTrivialisationCancellationRound148Level = machineChecked
+cmp98Equation119PrintedInverseTransportRound148Level : ProofLevel
+cmp98Equation119PrintedInverseTransportRound148Level = machineChecked
 
--- Only the literal source statement that CMP98's printed Y/Y_x conventions are
--- represented by these already-owned records remains physical.  No new inverse
--- or cancellation hypothesis is introduced here.
+-- Compatibility status name retained for prior validation roots.
+cmp98Equation119OppositeTrivialisationCancellationRound148Level : ProofLevel
+cmp98Equation119OppositeTrivialisationCancellationRound148Level =
+  cmp98Equation119PrintedInverseTransportRound148Level
+
+-- What remains physical is now narrower and source-correct: identify the
+-- actual printed Y/Y_x matrices with the already-owned LR family.  The sign and
+-- direction of the g^{-1} transport identity are no longer ambiguous.
 literalCMP98PrintedYConventionRound148Level : ProofLevel
 literalCMP98PrintedYConventionRound148Level = conditional
