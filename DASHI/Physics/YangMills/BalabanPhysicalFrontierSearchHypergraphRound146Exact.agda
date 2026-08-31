@@ -2,12 +2,13 @@
 module DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Exact where
 
 ------------------------------------------------------------------------
--- ROUND146: THE LIVE BALABAN SOURCE CUT AS AN ARISTOTLE-STYLE HYPERGRAPH
+-- ROUND146: LIVE BALABAN SOURCE CUT AS AN ARISTOTLE AND/OR HYPERGRAPH
 --
--- Updated after Round108 and Round152 audits.  Density/action realization is an
--- OR state.  The old localized-D1 identity is no longer a source leaf: Round152
--- derives it from Round118 pointwise identity + Round143 congruence once the
--- exact physical composite D1 chain rule is supplied.
+-- Source-semantics correction inspired by live PR #670, without importing it:
+-- the direct Round108 route requires BOTH a source-fixed beta-density semantics
+-- family and the selected-potential match to BC1.  The fallback route requires
+-- BOTH CombinedRG semantic leaves.  Neither child alone inherits whole-route
+-- authority.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List; _∷_; [])
@@ -18,6 +19,7 @@ import DASHI.Reasoning.AristotleMCGSHypergraphExact as Aristotle
 
 data BalabanFrontierLeaf : Set where
   densityActionRealization
+  round108FixedDensitySemantics
   round108SelectedPotentialMatchesBC1
   densityToCombinedRGState
   combinedRGStateToBC1Potential
@@ -33,6 +35,7 @@ data BalabanFrontierLeaf : Set where
 data BalabanFrontierRoute : Set where
   directRound108ActionRoute
   viaCombinedRGActionRoute
+  round108SemanticsAction
   round108SourceMatchAction
   realizeDensityStateAction
   realizeStatePotentialAction
@@ -48,6 +51,7 @@ data BalabanFrontierRoute : Set where
 routeSource : BalabanFrontierRoute → BalabanFrontierLeaf
 routeSource directRound108ActionRoute = densityActionRealization
 routeSource viaCombinedRGActionRoute = densityActionRealization
+routeSource round108SemanticsAction = round108FixedDensitySemantics
 routeSource round108SourceMatchAction = round108SelectedPotentialMatchesBC1
 routeSource realizeDensityStateAction = densityToCombinedRGState
 routeSource realizeStatePotentialAction = combinedRGStateToBC1Potential
@@ -60,10 +64,14 @@ routeSource schwingerEndpointAction = cmp119FiniteMeasureSchwingerEndpoint
 routeSource closeUnifiedSectorAction = unifiedSectorStressRecovery
 
 routeTargets : BalabanFrontierRoute → List BalabanFrontierLeaf
-routeTargets directRound108ActionRoute = round108SelectedPotentialMatchesBC1 ∷ []
+routeTargets directRound108ActionRoute =
+  round108FixedDensitySemantics ∷ round108SelectedPotentialMatchesBC1 ∷ []
 routeTargets viaCombinedRGActionRoute =
   densityToCombinedRGState ∷ combinedRGStateToBC1Potential ∷ []
 
+-- Unresolved source leaves self-block; [] remains reserved for evidence-bearing
+-- terminal actions only.
+routeTargets round108SemanticsAction = round108FixedDensitySemantics ∷ []
 routeTargets round108SourceMatchAction = round108SelectedPotentialMatchesBC1 ∷ []
 routeTargets realizeDensityStateAction = densityToCombinedRGState ∷ []
 routeTargets realizeStatePotentialAction = combinedRGStateToBC1Potential ∷ []
@@ -101,10 +109,10 @@ densityActionHasCombinedRGRoute :
   ≡ densityActionRealization
 densityActionHasCombinedRGRoute = refl
 
-directRound108RouteTargetsOnlySourceMatch :
+directRound108RouteTargetsFixedSemanticsAndMatch :
   Aristotle.targets balabanFrontierHypergraph directRound108ActionRoute
-  ≡ round108SelectedPotentialMatchesBC1 ∷ []
-directRound108RouteTargetsOnlySourceMatch = refl
+  ≡ round108FixedDensitySemantics ∷ round108SelectedPotentialMatchesBC1 ∷ []
+directRound108RouteTargetsFixedSemanticsAndMatch = refl
 
 combinedRGRouteTargetsTwoSemanticLeaves :
   Aristotle.targets balabanFrontierHypergraph viaCombinedRGActionRoute
