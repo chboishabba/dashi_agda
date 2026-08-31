@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.EpistemicSuspensionExact as Suspension
+import DASHI.Core.RelationalHistoryFabricExact as History
 import DASHI.Governance.SexedHistoricalStatisticalExperimentHyperfabricExact as Stats
 import DASHI.Governance.SexedHistoricalConditionalReversalExact as Reversal
 import DASHI.Governance.SexedHistoricalDialecticalOrderHolonomyAnalogueExact as Order
@@ -136,10 +137,8 @@ formalTransitionLocalReachabilityRegression =
 
 samePresentFutureConeRegression :
   INF.FactorsThrough
-    (DASHI.Core.RelationalHistoryFabricExact.observe
-      EffectiveTransport.transportHistoryFabric)
-    (DASHI.Core.RelationalHistoryFabricExact.futureConeOf
-      EffectiveTransport.transportHistoryFabric) → ⊥
+    (History.observe EffectiveTransport.transportHistoryFabric)
+    (History.futureConeOf EffectiveTransport.transportHistoryFabric) → ⊥
 samePresentFutureConeRegression =
   EffectiveTransport.sameFormalPresentCannotRecoverFutureCone
 
