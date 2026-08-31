@@ -3,18 +3,12 @@ module DASHI.Culture.IntellectualReceptionAdmissibilityStratumWhatIfExact where
 ------------------------------------------------------------------------
 -- INTELLECTUAL RECEPTION / PATH-QUALIFIED STRATUM / WHAT-IF CONES
 --
--- Here "stratum" means more than a coarse label.  It is a situated region
--- whose admissible moves and future cone may depend on:
+-- "Stratum" here is not merely a coarse label.  It carries a present surface,
+-- arrival history, selection/reception topology, admission gate, admissible
+-- continuation and future-cone code.
 --
---   present surface
---   + arrival history
---   + selection/reception topology
---   + current enablement / admission conditions.
---
--- This module consumes merged DASHI history/admissibility machinery.  PR #666
--- remains inspiration only while open: no Base369/Monster owner is imported.
--- The finite scenarios below are DASHI constructions, not empirical laws of
--- intellectual history and not claims of physical gauge/Monster structure.
+-- The finite constructions below are DASHI theorem fixtures.  PR #666 remains
+-- inspiration only while open: no Base369 or Monster module is imported here.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -25,45 +19,31 @@ import DASHI.Core.HistoryConditionedChoiceExact as Choice
 import DASHI.Core.HistoryQualifiedSelectionTopologyExact as Selection
 import DASHI.Core.RelationalHistoryFabricExact as Fabric
 import DASHI.Core.AdmissibleTransitionHyperfabricExact as Admissible
-import DASHI.Culture.IntellectualReceptionStratifiedFibreOrderBidiExact as Reception
 
 ------------------------------------------------------------------------
--- 1. Path-qualified reception stratum.
+-- 1. Path-qualified reception strata.
 ------------------------------------------------------------------------
 
 data ArrivalHistory : Set where
-  commentaryFirst
-  institutionFirst
-  movementFirst
-  archivalRediscovery
+  commentaryFirst institutionFirst movementFirst archivalRediscovery
   : ArrivalHistory
 
 data ReceptionTopology : Set where
-  bracketLikeCanon
-  roundRobinPluralReception
-  movementNetwork
-  archivalReview
+  bracketLikeCanon roundRobinPluralReception movementNetwork archivalReview
   : ReceptionTopology
 
 data CoarseReceptionPosition : Set where
-  samePresentVocabulary
-  : CoarseReceptionPosition
+  samePresentVocabulary : CoarseReceptionPosition
 
 data AdmissionGate : Set where
   closedGate pendingGate openGate : AdmissionGate
 
 data AdmissibleMoveCode : Set where
-  narrowCanonMove
-  pluralComparisonMove
-  counterTraditionMove
-  sourceRecoveryMove
+  narrowCanonMove pluralComparisonMove counterTraditionMove sourceRecoveryMove
   : AdmissibleMoveCode
 
 data FutureConeCode : Set where
-  canonDominantCone
-  pluralContestableCone
-  movementReclamationCone
-  archivalReconstructionCone
+  canonDominantCone pluralContestableCone movementReclamationCone archivalReconstructionCone
   : FutureConeCode
 
 record ReceptionAdmissibilityStratum : Set where
@@ -109,14 +89,11 @@ archiveStratum =
     sourceRecoveryMove archivalReconstructionCone
 
 ------------------------------------------------------------------------
--- 2. Same present surface, different arrival history -> different future cone.
+-- 2. Same present surface can hide different future cones.
 ------------------------------------------------------------------------
 
 presentSurface : ReceptionAdmissibilityStratum → CoarseReceptionPosition
 presentSurface = present
-
-arrivalCode : ReceptionAdmissibilityStratum → ArrivalHistory
-arrivalCode = arrival
 
 moveCode : ReceptionAdmissibilityStratum → AdmissibleMoveCode
 moveCode = nextMove
@@ -138,13 +115,10 @@ samePresentCannotRecoverFutureCone =
   INF.witnessRulesOutEveryFlatFactorisation
     (INF.nonFactorabilityWitness
       commentaryCanonStratum movementStratum
-      samePresentAcrossHistoryFixture
-      historyFixtureFutureDiffers)
+      samePresentAcrossHistoryFixture historyFixtureFutureDiffers)
 
 ------------------------------------------------------------------------
--- 3. Same candidate/intellectual field, different topology -> different
--- selected continuation.  This is the reception analogue of bracket vs
--- round-robin selection; the generic tournament theorem is also re-exported.
+-- 3. Bracket/round-robin analogue: same field, different selector topology.
 ------------------------------------------------------------------------
 
 data SameInterpretiveField : Set where sameInterpretiveField : SameInterpretiveField
@@ -161,22 +135,12 @@ selectedReceptionFrontier roundRobinPluralReception = pluralFrontier
 selectedReceptionFrontier movementNetwork = pluralFrontier
 selectedReceptionFrontier archivalReview = pluralFrontier
 
-sameFieldAcrossTopology :
-  interpretiveField bracketLikeCanon ≡ interpretiveField roundRobinPluralReception
-sameFieldAcrossTopology = refl
-
-topologyChangesReceptionFrontier :
-  selectedReceptionFrontier bracketLikeCanon
-  ≡ selectedReceptionFrontier roundRobinPluralReception → ⊥
-topologyChangesReceptionFrontier ()
-
 sameInterpretiveFieldCannotRecoverSelectedReceptionFrontier :
   INF.FactorsThrough interpretiveField selectedReceptionFrontier → ⊥
 sameInterpretiveFieldCannotRecoverSelectedReceptionFrontier =
   INF.witnessRulesOutEveryFlatFactorisation
     (INF.nonFactorabilityWitness
-      bracketLikeCanon roundRobinPluralReception
-      sameFieldAcrossTopology topologyChangesReceptionFrontier)
+      bracketLikeCanon roundRobinPluralReception refl (λ ()))
 
 canonicalBracketRoundRobinPrecedent :
   INF.FactorsThrough Selection.fieldOf Selection.selectedFrontier → ⊥
@@ -184,21 +148,15 @@ canonicalBracketRoundRobinPrecedent =
   Selection.candidateFieldCannotRecoverSelectedFrontier
 
 ------------------------------------------------------------------------
--- 4. History and topology are independently relevant axes.
+-- 4. History and topology are independent hidden axes.
 ------------------------------------------------------------------------
 
 sameHistoryDifferentTopologyMoveDiffers :
   moveCode commentaryCanonStratum ≡ moveCode commentaryPluralStratum → ⊥
 sameHistoryDifferentTopologyMoveDiffers ()
 
-sameTopologyDifferentHistoryFutureDiffers :
-  futureCode commentaryCanonStratum ≡ futureCode institutionCanonStratum → ⊥
-sameTopologyDifferentHistoryFutureDiffers ()
-
--- The second fixture above shares topology but currently also shares the same
--- encoded cone.  Use the meaning/order carrier for a genuine same-topology,
--- different-history distinction instead of manufacturing a false theorem.
-
+-- Both states below deliberately have the same topology code.  The theorem is
+-- only that topology alone cannot reconstruct which arrival path produced it.
 data SameTopologyHistoryState : Set where
   canonViaCommentary canonViaInstitution : SameTopologyHistoryState
 
@@ -222,17 +180,14 @@ sameTopologyCannotRecoverArrivalHistory =
       canonViaCommentary canonViaInstitution refl (λ ()))
 
 ------------------------------------------------------------------------
--- 5. Typed what-if scenarios.
+-- 5. Typed what-if interventions.
 --
--- A what-if does not assert the counterfactual is historically true.  It names
--- the coordinate changed and returns the resulting finite continuation code.
+-- A WhatIfIntervention is an alternative continuation operator.  Its result is
+-- not promoted to a claim about what actually happened historically.
 ------------------------------------------------------------------------
 
 data WhatIfIntervention : Set where
-  whatIfPluralTopology
-  whatIfMovementReception
-  whatIfSourceRecovered
-  whatIfCanonClosed
+  whatIfPluralTopology whatIfMovementReception whatIfSourceRecovered whatIfCanonClosed
   : WhatIfIntervention
 
 applyWhatIf : WhatIfIntervention → ReceptionAdmissibilityStratum → ReceptionAdmissibilityStratum
@@ -264,14 +219,8 @@ movementWhatIfChangesMove :
 movementWhatIfChangesMove ()
 
 ------------------------------------------------------------------------
--- 6. Canonical history/future-cone and relational-fabric reuse.
+-- 6. Direct canonical history/future-cone reuse.
 ------------------------------------------------------------------------
-
-choiceBoundary : Choice.HistoryConditionedChoiceBoundary
-choiceBoundary = Choice.canonicalHistoryConditionedChoiceBoundary
-
-fabricBoundary : Fabric.RelationalHistoryFabricBoundary
-fabricBoundary = Fabric.canonicalRelationalHistoryFabricBoundary
 
 sameNowCanHideDifferentCanonicalFutureCones :
   INF.FactorsThrough
@@ -297,8 +246,6 @@ data ReceptionMove : Set where
   enterCanon enterPlural enterMovement recoverSource : ReceptionMove
 
 data ReceptionParameter : Set where ordinaryReception : ReceptionParameter
-
-data ReceptionInvariant : Set where receptionInvariant : ReceptionInvariant
 
 enabled : ReceptionMove → ReceptionParameter → ReceptionAdmissibilityStratum → Set
 enabled enterCanon ordinaryReception state with gate state
@@ -330,27 +277,23 @@ step recoverSource _ state = applyWhatIf whatIfSourceRecovered state
 receptionTransitionSystem : Admissible.AdmissibleTransitionSystem
 receptionTransitionSystem =
   Admissible.admissibleTransitionSystem
-    ReceptionAdmissibilityStratum
-    ReceptionParameter
-    ReceptionMove
-    enabled
-    step
-    (λ _ → ⊤)
+    ReceptionAdmissibilityStratum ReceptionParameter ReceptionMove
+    enabled step (λ _ → ⊤)
     (λ move parameter state enabledHere invariantHere → tt)
     "Finite DASHI reception what-if transition system; not an empirical law."
 
 sourceRecoveryAdmittedWhilePending :
   Admissible.AdmittedStep
     receptionTransitionSystem recoverSource ordinaryReception archiveStratum
-sourceRecoveryAdmittedWhilePending =
-  Admissible.admittedStep tt tt
+sourceRecoveryAdmittedWhilePending = Admissible.admittedStep tt tt
 
 canonEntryBlockedWhilePending :
-  Admissible.Enabled receptionTransitionSystem enterCanon ordinaryReception archiveStratum → ⊥
+  Admissible.Enabled
+    receptionTransitionSystem enterCanon ordinaryReception archiveStratum → ⊥
 canonEntryBlockedWhilePending impossible = impossible
 
 ------------------------------------------------------------------------
--- 8. Base369/Monster comparison boundary while #666 remains open.
+-- 8. No-promotion boundaries for the Base369/Monster analogy and what-ifs.
 ------------------------------------------------------------------------
 
 data ReceptionStratumIsLiteralBase369Stratum : Set where
@@ -371,7 +314,7 @@ moreWhatIfsDoNotMeanMoreTruth : MoreWhatIfsMeansMoreTruth → ⊥
 moreWhatIfsDoNotMeanMoreTruth ()
 
 ------------------------------------------------------------------------
--- 9. Boundary.
+-- 9. Canonical boundary.
 ------------------------------------------------------------------------
 
 record IntellectualReceptionAdmissibilityStratumBoundary : Set where
