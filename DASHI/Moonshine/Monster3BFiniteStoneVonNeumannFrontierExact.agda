@@ -3,11 +3,11 @@ module DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact where
 ------------------------------------------------------------------------
 -- FINITE STONE-VON NEUMANN FRONTIER FOR THE MONSTER 3B HEISENBERG FACTOR
 --
--- The repo now owns an explicit X6 + X6* + F3 central-extension carrier,
--- the generator/Weyl commutator law, and a constructive proof that every
--- nonzero quotient vector has an explicit dual vector with nonzero pairing.
--- The remaining structural prerequisite before irreducibility is the full
--- finite Heisenberg group law (associativity/identity/inverses).
+-- Structural prerequisites are now theorem-bearing: the actual finite
+-- Heisenberg multiplication has identity/associativity/inverses, and the
+-- quotient commutator pairing is constructively nondegenerate.  The live
+-- theorem leaf is therefore irreducibility of the concrete X6 Schrodinger
+-- representation, followed by fixed-central-character uniqueness.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -18,13 +18,10 @@ import DASHI.Moonshine.Monster3BHeisenbergMultiplicityExact as Multiplicity
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as Generators
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact as Central
 import DASHI.Moonshine.Monster3BFiniteHeisenbergNondegeneracyExact as Nondegenerate
+import DASHI.Moonshine.Monster3BFiniteHeisenbergGroupLawFrontierExact as GroupLaws
 import DASHI.Moonshine.Monster3BElementaryAbelianInvariantExact as Elementary
 import DASHI.Moonshine.Base369AppraisalFibreHeisenbergCarrierBidiExact as Fibre
 import DASHI.Moonshine.Base369PeriodicHeisenbergFibreEquivarianceExact as Periodic
-
-------------------------------------------------------------------------
--- 1. Existing finite carrier facts.
-------------------------------------------------------------------------
 
 centreOrder : Nat
 centreOrder = Elementary.centreOrder
@@ -63,43 +60,14 @@ base369FibreMatchesSchrodingerDegree :
   Fibre.heisenbergFibreStateCount ≡ schrodingerDegree
 base369FibreMatchesSchrodingerDegree = refl
 
-------------------------------------------------------------------------
--- 2. Weyl / central-extension / nondegeneracy surface.
-------------------------------------------------------------------------
+finiteHeisenbergGroupLawsAvailable : Bool
+finiteHeisenbergGroupLawsAvailable =
+  GroupLaws.finiteHeisenbergGroupLawsComplete
+    GroupLaws.canonicalHeisenbergGroupLawBoundary
 
-translationAxisCount : Nat
-translationAxisCount = Generators.translationGeneratorCount
-
-modulationAxisCount : Nat
-modulationAxisCount = Generators.modulationGeneratorCount
-
-axisCountsAreSix : translationAxisCount ≡ 6
-axisCountsAreSix = refl
-
-standardWeylPairCountIs36 : Generators.standardGeneratorPairCount ≡ 36
-standardWeylPairCountIs36 = Generators.standardGeneratorPairCountIsThirtySix
-
-periodicBase369ActionAvailable : Bool
-periodicBase369ActionAvailable = true
-
-periodicBase369ActionAvailableIsTrue : periodicBase369ActionAvailable ≡ true
-periodicBase369ActionAvailableIsTrue = refl
-
-centralExtensionCarrierAvailable : Bool
-centralExtensionCarrierAvailable =
-  Central.twelveDimensionalQuotientCarrierConstructed
-    Central.canonicalHeisenbergCentralExtensionBoundary
-
-centralExtensionCarrierAvailableIsTrue : centralExtensionCarrierAvailable ≡ true
-centralExtensionCarrierAvailableIsTrue = refl
-
-commutatorPairingConstructed : Bool
-commutatorPairingConstructed =
-  Central.alternatingCommutatorPairingConstructed
-    Central.canonicalHeisenbergCentralExtensionBoundary
-
-commutatorPairingConstructedIsTrue : commutatorPairingConstructed ≡ true
-commutatorPairingConstructedIsTrue = refl
+finiteHeisenbergGroupLawsAvailableIsTrue :
+  finiteHeisenbergGroupLawsAvailable ≡ true
+finiteHeisenbergGroupLawsAvailableIsTrue = refl
 
 constructiveGlobalNondegeneracyAvailable : Bool
 constructiveGlobalNondegeneracyAvailable =
@@ -109,10 +77,6 @@ constructiveGlobalNondegeneracyAvailable =
 constructiveGlobalNondegeneracyAvailableIsTrue :
   constructiveGlobalNondegeneracyAvailable ≡ true
 constructiveGlobalNondegeneracyAvailableIsTrue = refl
-
-------------------------------------------------------------------------
--- 3. Existing elementary-abelian restriction evidence.
-------------------------------------------------------------------------
 
 rankTwoTranslationPlaneOrder : Nat
 rankTwoTranslationPlaneOrder = Elementary.translationPlaneOrder
@@ -125,10 +89,6 @@ rankTwoRestrictionReconstructs729 :
   ≡ schrodingerDegree
 rankTwoRestrictionReconstructs729 =
   Elementary.regularCopiesTimesPlaneOrderIsSchrodinger
-
-------------------------------------------------------------------------
--- 4. Exact theorem receipts still required for final Stone-von Neumann use.
-------------------------------------------------------------------------
 
 record FiniteStoneVonNeumannReceipt : Set where
   constructor finiteStoneVonNeumannReceipt
@@ -152,10 +112,6 @@ record Certified729IdentificationReceipt : Set where
     certifiedRepresentationIsomorphicToX6Model : Bool
 open Certified729IdentificationReceipt public
 
-------------------------------------------------------------------------
--- 5. Refined BIDI boundary.
-------------------------------------------------------------------------
-
 record StoneVonNeumannFrontierBoundary : Set where
   constructor stoneVonNeumannFrontierBoundary
   field
@@ -166,9 +122,8 @@ record StoneVonNeumannFrontierBoundary : Set where
     elementaryRestrictionChecksAvailable : Bool
     base369PeriodicX6CarrierChartAvailable : Bool
     centralExtensionCarrierConstructedHere : Bool
-    commutatorPairingConstructedHere : Bool
-    globalNondegenerateCommutatorPairingProvedHere : Bool
     finiteHeisenbergGroupLawsFullyProvedHere : Bool
+    globalNondegenerateCommutatorPairingProvedHere : Bool
     irreducibilityOfX6SchrodingerModelProvedHere : Bool
     uniquenessForCentralCharacterProvedHere : Bool
     certifiedMonster729ConstituentIdentifiedWithX6Here : Bool
@@ -179,13 +134,7 @@ canonicalStoneVonNeumannFrontierBoundary =
   stoneVonNeumannFrontierBoundary
     true true true true true true
     true true true
-    false false false false
-
-------------------------------------------------------------------------
--- 6. Scientific proof-search frontier.
---
--- "blocked" remains dependency-blocked, not a claim of falsity.
-------------------------------------------------------------------------
+    false false false
 
 data StoneVonNeumannProofLeaf : Set where
   constructCentralExtensionCarrier : StoneVonNeumannProofLeaf
@@ -199,27 +148,20 @@ data LeafState : Set where closed open blocked : LeafState
 
 leafState : StoneVonNeumannProofLeaf → LeafState
 leafState constructCentralExtensionCarrier = closed
-leafState proveFiniteHeisenbergGroupLaws = open
+leafState proveFiniteHeisenbergGroupLaws = closed
 leafState proveGlobalCommutatorNondegeneracy = closed
-leafState proveSchrodingerIrreducible = blocked
+leafState proveSchrodingerIrreducible = open
 leafState proveFixedCentralCharacterUniqueness = blocked
 leafState identifyCertifiedMonster729Constituent = blocked
 
-centralExtensionLeafClosed :
-  leafState constructCentralExtensionCarrier ≡ closed
-centralExtensionLeafClosed = refl
+groupLawLeafClosed : leafState proveFiniteHeisenbergGroupLaws ≡ closed
+groupLawLeafClosed = refl
 
-nondegeneracyLeafClosed :
-  leafState proveGlobalCommutatorNondegeneracy ≡ closed
+nondegeneracyLeafClosed : leafState proveGlobalCommutatorNondegeneracy ≡ closed
 nondegeneracyLeafClosed = refl
 
-groupLawsNowSoleStructuralPrerequisite :
-  leafState proveFiniteHeisenbergGroupLaws ≡ open
-groupLawsNowSoleStructuralPrerequisite = refl
-
-------------------------------------------------------------------------
--- 7. Explicit dependencies explain every remaining block.
-------------------------------------------------------------------------
+irreducibilityNowLive : leafState proveSchrodingerIrreducible ≡ open
+irreducibilityNowLive = refl
 
 data Requires : StoneVonNeumannProofLeaf → StoneVonNeumannProofLeaf → Set where
   groupNeedsCarrier :
@@ -236,7 +178,7 @@ data Requires : StoneVonNeumannProofLeaf → StoneVonNeumannProofLeaf → Set wh
     Requires identifyCertifiedMonster729Constituent proveFixedCentralCharacterUniqueness
 
 highestImpactStructuralLeaf : StoneVonNeumannProofLeaf
-highestImpactStructuralLeaf = proveFiniteHeisenbergGroupLaws
+highestImpactStructuralLeaf = proveSchrodingerIrreducible
 
 highestImpactStructuralLeafIsOpen :
   leafState highestImpactStructuralLeaf ≡ open
