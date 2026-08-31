@@ -5,14 +5,13 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Reasoning.ClaimAuditManifestExact as Manifest
 import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Cone
-import DASHI.Reasoning.PredicateNormalFormEvidenceAuditExact as PNF
 
 ------------------------------------------------------------------------
 -- CLAIM MANIFEST <-> EXPERIMENTAL ASSERTION / PNF / IMPLICATION CONE
 --
 -- The manifest owns exact published wording, source-chain/audit maturity and a
--- backward-safe assertion.  The experimental cone owns design placement and
--- downstream implication structure.  This bridge requires literal linkage of
+-- backward-safe assertion. The experimental cone owns design placement and
+-- downstream implication structure. This bridge requires literal linkage of
 -- the exact text and compiled PNF object; no key/name coincidence is enough.
 ------------------------------------------------------------------------
 
@@ -27,7 +26,7 @@ record ManifestConeBridge
     designMap : Cone.AssertionDesignMap source
 
     compiledPNFLinked :
-      PNF.compiled (Cone.compilation designMap)
+      Cone.compiled (Cone.compilation designMap)
       ≡ Manifest.normalizedAssertion manifest
 
     implicationCone : Cone.ExperimentalImplicationCone source
@@ -51,7 +50,7 @@ manifestExactTextReachesConeSource = exactTextLinked
 manifestPNFReachesDesignMap :
   ∀ {manifest source} →
   (bridge : ManifestConeBridge manifest source) →
-  PNF.compiled (Cone.compilation (designMap bridge))
+  Cone.compiled (Cone.compilation (designMap bridge))
   ≡ Manifest.normalizedAssertion manifest
 manifestPNFReachesDesignMap = compiledPNFLinked
 
