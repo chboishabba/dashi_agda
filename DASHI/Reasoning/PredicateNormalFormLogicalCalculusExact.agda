@@ -6,35 +6,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Reasoning.SpacyDependencyToCandidateLogicalPNFExact as Candidate
 import DASHI.Reasoning.PredicateNormalFormEvidenceAuditExact as EvidencePNF
-
-------------------------------------------------------------------------
--- OBJECT LOGIC OVER REVIEWED PNF FORMULAE
---
--- Logical entailment is intentionally distinct from empirical promotion.
--- Once a formula is admitted, ordinary logical consequences may be derived
--- without pretending that quantifier strengthening, causal identification,
--- transport or normative promotion followed from syntax alone.
-------------------------------------------------------------------------
-
-Formula = Candidate.Formula
-Term = Candidate.Term
-
-infix 3 _⊢_
-
-data _⊢_ : List Formula → Formula → Set where
-  assumption : ∀ {Γ φ} → φ ∈ Γ → Γ ⊢ φ
-  andIntro : ∀ {Γ φ ψ} → Γ ⊢ φ → Γ ⊢ ψ → Γ ⊢ (φ Candidate.∧ ψ)
-  andElimL : ∀ {Γ φ ψ} → Γ ⊢ (φ Candidate.∧ ψ) → Γ ⊢ φ
-  andElimR : ∀ {Γ φ ψ} → Γ ⊢ (φ Candidate.∧ ψ) → Γ ⊢ ψ
-  impIntro : ∀ {Γ φ ψ} → (φ ∷ Γ) ⊢ ψ → Γ ⊢ (φ Candidate.⇒ ψ)
-  impElim : ∀ {Γ φ ψ} → Γ ⊢ (φ Candidate.⇒ ψ) → Γ ⊢ φ → Γ ⊢ ψ
-  orIntroL : ∀ {Γ φ ψ} → Γ ⊢ φ → Γ ⊢ (φ Candidate.∨ ψ)
-  orIntroR : ∀ {Γ φ ψ} → Γ ⊢ ψ → Γ ⊢ (φ Candidate.∨ ψ)
-
-------------------------------------------------------------------------
--- Local proof-relevant list membership; kept independent of the experimental
--- placement owner's list relation.
-------------------------------------------------------------------------
+open Candidate using (Formula; Term; _∧_; _∨_; _⇒_)
 
 infix 4 _∈_
 data _∈_ {A : Set} (x : A) : List A → Set where
@@ -42,9 +14,19 @@ data _∈_ {A : Set} (x : A) : List A → Set where
   there : ∀ {y xs} → x ∈ xs → x ∈ (y ∷ xs)
 
 ------------------------------------------------------------------------
--- A reviewed evidence-PNF assertion enters the object logic only through an
--- explicit interpretation receipt.  This is the semantic BIDI seam.
+-- OBJECT LOGIC OVER REVIEWED PNF FORMULAE
 ------------------------------------------------------------------------
+
+infix 3 _⊢_
+data _⊢_ : List Formula → Formula → Set where
+  assumption : ∀ {Γ φ} → φ ∈ Γ → Γ ⊢ φ
+  andIntro : ∀ {Γ φ ψ} → Γ ⊢ φ → Γ ⊢ ψ → Γ ⊢ (φ ∧ ψ)
+  andElimL : ∀ {Γ φ ψ} → Γ ⊢ (φ ∧ ψ) → Γ ⊢ φ
+  andElimR : ∀ {Γ φ ψ} → Γ ⊢ (φ ∧ ψ) → Γ ⊢ ψ
+  impIntro : ∀ {Γ φ ψ} → (φ ∷ Γ) ⊢ ψ → Γ ⊢ (φ ⇒ ψ)
+  impElim : ∀ {Γ φ ψ} → Γ ⊢ (φ ⇒ ψ) → Γ ⊢ φ → Γ ⊢ ψ
+  orIntroL : ∀ {Γ φ ψ} → Γ ⊢ φ → Γ ⊢ (φ ∨ ψ)
+  orIntroR : ∀ {Γ φ ψ} → Γ ⊢ ψ → Γ ⊢ (φ ∨ ψ)
 
 record EvidencePNFLogicalInterpretation
     (assertion : EvidencePNF.PredicateNormalAssertion) : Set₁ where
@@ -72,10 +54,6 @@ record LogicalToEvidenceReadback
 
 open LogicalToEvidenceReadback public
 
-------------------------------------------------------------------------
--- Empirical promotion remains a separate axis.
-------------------------------------------------------------------------
-
 data ConsequenceAuthority : Set where
   purelyLogicalConsequence
   requiresAdditionalEmpiricalEvidence
@@ -93,12 +71,6 @@ record EvidenceQualifiedConsequence : Set₁ where
     empiricalPromotionReference : String
 
 open EvidenceQualifiedConsequence public
-
-------------------------------------------------------------------------
--- Canonical non-promotion classifier.  These are not claims that logic can
--- inspect arbitrary prose; they codify the repository boundary that certain
--- changes of evidential force are never licensed by logical closure alone.
-------------------------------------------------------------------------
 
 promotionAuthority : EvidencePNF.PromotionDelta → ConsequenceAuthority
 promotionAuthority EvidencePNF.sameAssertionStrength = purelyLogicalConsequence
@@ -122,12 +94,7 @@ populationWideningNotPureLogic :
   ≡ requiresAdditionalEmpiricalEvidence
 populationWideningNotPureLogic = refl
 
-------------------------------------------------------------------------
--- A small exact theorem showing the intended role of logical closure:
--- modus ponens is real logic, not an evidence promotion.
-------------------------------------------------------------------------
-
-modusPonens : ∀ {Γ φ ψ} → Γ ⊢ (φ Candidate.⇒ ψ) → Γ ⊢ φ → Γ ⊢ ψ
+modusPonens : ∀ {Γ φ ψ} → Γ ⊢ (φ ⇒ ψ) → Γ ⊢ φ → Γ ⊢ ψ
 modusPonens = impElim
 
 record PNFLogicalBoundary : Set where
@@ -151,9 +118,4 @@ record PNFLogicalBoundary : Set where
 
 canonicalPNFLogicalBoundary : PNFLogicalBoundary
 canonicalPNFLogicalBoundary =
-  pnfLogicalBoundary
-    false refl
-    false refl
-    false refl
-    false refl
-    true refl
+  pnfLogicalBoundary false refl false refl false refl false refl true refl
