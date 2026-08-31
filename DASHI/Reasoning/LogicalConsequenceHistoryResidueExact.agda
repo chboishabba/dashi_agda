@@ -5,7 +5,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.TrajectoryResidueExact as Trajectory
 import DASHI.Core.HistoryConditionedChoiceExact as History
-import DASHI.Reasoning.LogicalConsequenceDerivationPathExact as Path
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
 
 ------------------------------------------------------------------------
 -- FINITE RECONVERGENCE FIXTURE
@@ -128,7 +128,7 @@ sameAssertionDifferentAdmission = record
   }
 
 laterAdmissionCannotDescendThroughFinalAssertion :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
+  NonFactor.FactorsThrough
     (History.observe choiceSurface)
     (History.choose choiceSurface) →
   ⊥
