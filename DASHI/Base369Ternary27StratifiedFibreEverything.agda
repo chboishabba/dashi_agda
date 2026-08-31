@@ -19,4 +19,11 @@ import DASHI.Moonshine.Base369AppraisalFibreHeisenbergCarrierBidiExact
 import DASHI.Moonshine.Base369HeisenbergTranslationGridObstructionExact
 import DASHI.Moonshine.Base369MonsterFineCarrierEquivarianceAuditExact
 
+-- Periodic C3^9 host versus non-periodic P3^9 observational restriction.
+import DASHI.Moonshine.Base369PeriodicTernaryTorusPathRestrictionBidiExact
+import DASHI.Moonshine.Base369PeriodicHeisenbergFibreEquivarianceExact
+
+-- Exact decimal/nonary completion and 10 x 3^9 Monster bulk ledger.
+import DASHI.Moonshine.Base369DecimalCompletionMonsterBulkBidiExact
+
 import DASHI.Base369Ternary27StratifiedFibreHolonomyValidation
