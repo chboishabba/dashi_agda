@@ -240,7 +240,8 @@ conjugateHyperformalSector
     (conjugateCubeSector b)
 
 ------------------------------------------------------------------------
--- 6. Existing irrep interface is reused as a boundary, not falsely discharged.
+-- 6. Existing spectral/irrep interfaces are pinned without supplying a fake
+--    kernel or claiming an unsupplied transform.
 ------------------------------------------------------------------------
 
 axisCharacterFamilyIsExact : Bool
@@ -248,6 +249,12 @@ axisCharacterFamilyIsExact = true
 
 cubeCharacterProductSectorIndexed : Bool
 cubeCharacterProductSectorIndexed = true
+
+DepthOneSpectralCodecInterface : Set₁
+DepthOneSpectralCodecInterface = Irrep.ExactSpectralCodec 1
+
+DepthOneCharacterTransformInterface : Set₁
+DepthOneCharacterTransformInterface = Irrep.FiniteCharacterTransform 1
 
 fullCubeDFTConstructedHere : Bool
 fullCubeDFTConstructedHere = false
@@ -257,15 +264,6 @@ parsevalEstablishedHere = false
 
 schurDiagonalisationEstablishedHere : Bool
 schurDiagonalisationEstablishedHere = false
-
-irrepInterfaceReused : Set₁
-irrepInterfaceReused = Irrep.IrrepBlockDecomposition
-  Characters.depthOneAdditiveGroup
-  -- no kernel is supplied here; this name exists only to pin the canonical
-  -- interface family at the type level below through the boundary receipt.
-  -- A concrete translation-invariant kernel must be provided by a downstream
-  -- spectral operator owner.
-  ?
 
 ------------------------------------------------------------------------
 -- 7. Monster/Ogg seam: projection/intertwining only.
