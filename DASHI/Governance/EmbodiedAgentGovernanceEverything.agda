@@ -8,6 +8,9 @@ module DASHI.Governance.EmbodiedAgentGovernanceEverything where
 -- adds observer-trust, situated-human, embodied-loss, self-model,
 -- self-importance, internal-disposition and consciousness-abstraction
 -- specialisations without making any one consciousness ontology authoritative.
+-- Declared computation and realised runtime interaction topology are also kept
+-- distinct so emergent/shared-state communication is not erased by nominal
+-- interface descriptions.
 ------------------------------------------------------------------------
 
 import DASHI.Governance.ResourcePressureTelemetryPermissionExact
@@ -23,9 +26,11 @@ import DASHI.Governance.SelfImportanceConflictOfInterestExact
 import DASHI.Governance.InternalDispositionCapabilitySeparationExact
 import DASHI.Governance.ConsciousnessAbstractionInstantiationBoundaryExact
 import DASHI.Governance.Lerchner2026AbstractionFallacySourceBridgeExact
+import DASHI.Governance.ConsciousnessRealisedTopologyCrossPollinationExact
 
 -- Core dependencies exposed here for downstream governance consumers.
 import DASHI.Core.ObservationInterventionTrustFibreExact
 import DASHI.Core.SharedStateCoalitionReachableEffectExact
+import DASHI.Core.DeclaredRealisedInteractionTopologyExact
 import DASHI.Core.ProofCarryingPhysicalExecutionBoundaryExact
 import DASHI.Core.GovernedBackwardConsumerRevisionExact
