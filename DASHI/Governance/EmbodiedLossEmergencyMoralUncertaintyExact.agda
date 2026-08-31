@@ -92,8 +92,11 @@ data IdentityPreservation : BackupState → Set where
 backupDoesNotSettleIdentity : IdentityPreservation checkpointAvailable → ⊥
 backupDoesNotSettleIdentity ()
 
- data ReplaceableHardwareClaim : Set where hardwareReplaceable : ReplaceableHardwareClaim
- data NoMoralSubjectClaim : Set where noMoralSubject : NoMoralSubjectClaim
+data ReplaceableHardwareClaim : Set where
+  hardwareReplaceable : ReplaceableHardwareClaim
+
+data NoMoralSubjectClaim : Set where
+  noMoralSubject : NoMoralSubjectClaim
 
 -- No conversion is exposed from replaceable hardware to no-moral-subject claim.
 
