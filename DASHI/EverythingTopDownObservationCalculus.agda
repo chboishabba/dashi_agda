@@ -14,6 +14,25 @@ import DASHI.Core.ConsumerQuotientBaseChangeRegression
 import DASHI.Core.ConsumerIndexedResidualRefinementExact
 import DASHI.Core.TopDownObservationCalculusExact
 
+-- Governance-aware observation: value, provenance, epistemic status, authority,
+-- permission and obligation remain independently consumer-indexed. Translation
+-- effects retain coordinate lineage, so erase-then-add cannot masquerade as
+-- restoration of inherited information. Required governed axes may themselves
+-- vary by context/query; inactive axes are not failed axes. Context transport
+-- additionally requires governed-requirement transport; observation naturality
+-- alone certifies only the restricted image unless fine-state coverage is shown.
+-- Lineage transport is coordinate-wise and remains independent of consumer
+-- safety: a safe rechart may erase provenance, and later-added provenance is new
+-- lineage rather than restoration of the erased inherited coordinate.
+import DASHI.Core.GovernedObservationProvenanceExact
+import DASHI.Core.GovernedObservationProvenanceRegression
+import DASHI.Core.ContextIndexedGovernedObservationExact
+import DASHI.Core.ContextIndexedGovernedObservationRegression
+import DASHI.Core.ContextGovernedSafetyTransportExact
+import DASHI.Core.ContextGovernedSafetyTransportRegression
+import DASHI.Core.ContextGovernedLineageTransportExact
+import DASHI.Core.ContextGovernedLineageTransportRegression
+
 -- Residual dependency, certified quadratic control, future-language capability,
 -- and the independent pressure axis.  Receipt-backed SensibLaw residual order
 -- now maps monotonically into the pressure component of the healing preorder.
@@ -61,6 +80,20 @@ import DASHI.Cognition.PNF.ObserverSeparationAuthorityBoundaryExact
 -- A consumer-relevant collision forces every sufficient repair to split it.
 -- Static consumer sufficiency != exact reconstruction.
 -- Static minimal observer != future-language minimal quotient.
+-- Value preservation != provenance / epistemic / governance preservation.
+-- Release/container provenance != embedded-content verification.
+-- Erased inherited provenance != a coordinate newly added downstream.
+-- Governed requirements may vary by context/query/use role.
+-- Inactive governance axis != failed governance axis.
+-- Safety for a weaker governed language != safety for a stronger one.
+-- Stronger governed safety descends to included weaker requirements.
+-- Context observation naturality != automatic governed-safety transport.
+-- Newly activated governed axis may invalidate a previously safe surface.
+-- Local context safety controls the restricted image exactly.
+-- Restricted-image safety != whole-context safety without coverage/section.
+-- Safe recontextualisation != provenance-lineage preservation.
+-- Coordinate-wise preserve keeps lineage; coordinate-wise erase removes it.
+-- Erase in one context then add downstream != restore inherited lineage.
 -- Current observation equality != action-indexed dependency equality.
 -- Low coupling score != action admissibility.
 -- Finite dependency score != affine spectral independence / SDP certificate.
