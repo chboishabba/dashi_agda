@@ -6,3 +6,4 @@ import DASHI.Culture.RastafariItalIndigenousKnowledgeDirectReuseExact
 import DASHI.Culture.RastafariItalGovernedLineageCrossPollinationExact
 import DASHI.Culture.RastafariItalBenefitReturnGovernanceExact
 import DASHI.Culture.RastafariItalLoopControlGovernanceExact
+import DASHI.Culture.RastafariItalSocioTechnicalPowerDirectReuseExact
