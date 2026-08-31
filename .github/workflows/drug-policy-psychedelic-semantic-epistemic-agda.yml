@@ -29,6 +29,8 @@ on:
       - 'DASHI/Governance/DrugCategoryExplicitConsumerQuotientExact.agda'
       - 'DASHI/Governance/DrugCategoryClinicalQuotientRelativeFibreExact.agda'
       - 'DASHI/Governance/DrugCategoryConsumerQuotientRefinementExact.agda'
+      - 'DASHI/Governance/DrugCategoryCostedQuotientDiscriminatorExact.agda'
+      - 'DASHI/Governance/DrugCategoryAdaptiveQuotientExperimentLoopExact.agda'
       - 'DASHI/Governance/TrumpDrugPolicyPsychedelicClassificationBidiExact.agda'
       - 'DASHI/Governance/DrugWarReflectingPoolFailureBoundaryExact.agda'
       - 'DASHI/Governance/DrugGovernanceIntersectionalAuthorityExact.agda'
