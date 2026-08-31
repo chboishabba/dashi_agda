@@ -104,12 +104,24 @@ pointContribution :
   Nat → Nat →
   R126.Vector (additive C) →
   R126.Vector (additive C)
-pointContribution {C} source step x A =
+pointContribution source step x A =
   blockWeight source step
     (inverseGAt source step x
       (subV
         (minusPath source step x A)
         (adjointAt source step x (plusPath source step x A))))
+
+pointContributions :
+  ∀ {C} →
+  CMP98Equation119SourceOperators C →
+  Nat →
+  R126.Vector (additive C) →
+  List Nat →
+  List (R126.Vector (additive C))
+pointContributions source step A [] = []
+pointContributions source step A (x ∷ xs) =
+  pointContribution source step x A
+  ∷ pointContributions source step A xs
 
 blockContribution :
   ∀ {C} →
@@ -118,15 +130,7 @@ blockContribution :
   R126.Vector (additive C) →
   R126.Vector (additive C)
 blockContribution source step A =
-  sumV (go (blockPoints source step))
-  where
-  go :
-    ∀ {C'} →
-    List Nat →
-    List (R126.Vector (additive C'))
-  go {C'} [] = []
-  go {C'} (x ∷ xs) =
-    pointContribution source step x A ∷ go xs
+  sumV (pointContributions source step A (blockPoints source step))
 
 -- Literal CMP98 Eq. (119).
 equation119QPrime :
