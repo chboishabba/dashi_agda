@@ -5,6 +5,7 @@ module DASHI.Physics.YangMills.BalabanFrontierFeedbackSearchRound149Exact where
 -- ROUND149: TWO-CHANNEL FEEDBACK -- SEARCH RESOLUTION != THEOREM CLOSURE
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
@@ -13,7 +14,6 @@ import DASHI.Reasoning.AristotleMCGSHypergraphExact as Aristotle
 import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Choice
 import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Exact as R146
 
--- The Aristotle ledger is specialized literally to the live Balaban leaves.
 frontierLedger :
   (R146.BalabanFrontierLeaf → Aristotle.LemmaStatus) →
   Aristotle.LemmaLedger
@@ -25,15 +25,12 @@ frontierLedger status = record
 FrontierLeafProved :
   (status : R146.BalabanFrontierLeaf → Aristotle.LemmaStatus) →
   R146.BalabanFrontierLeaf → Set
-FrontierLeafProved status leaf =
-  Aristotle.ProvedIn (frontierLedger status) leaf
+FrontierLeafProved status leaf = Aristotle.ProvedIn (frontierLedger status) leaf
 
 UnifiedSectorClosed :
   (status : R146.BalabanFrontierLeaf → Aristotle.LemmaStatus) → Set
 UnifiedSectorClosed status = FrontierLeafProved status R146.unifiedSectorStressRecovery
 
--- Same identifier space across iterations: only statuses change.  Already-proved
--- leaves must be retained, exactly matching Aristotle's formal-feedback rule.
 record BalabanFrontierFeedback
     (oldStatus newStatus : R146.BalabanFrontierLeaf → Aristotle.LemmaStatus) : Set₁ where
   field
@@ -46,12 +43,10 @@ open BalabanFrontierFeedback public
 asAristotleFeedback :
   ∀ {oldStatus newStatus} →
   BalabanFrontierFeedback oldStatus newStatus →
-  Aristotle.FeedbackRefinement
-    (frontierLedger oldStatus) (frontierLedger newStatus)
+  Aristotle.FeedbackRefinement (frontierLedger oldStatus) (frontierLedger newStatus)
 asAristotleFeedback dataSet = record
   { Aristotle.FeedbackRefinement.castId = λ leaf → leaf
-  ; Aristotle.FeedbackRefinement.preservesProved =
-      preservesProvedLeaf dataSet
+  ; Aristotle.FeedbackRefinement.preservesProved = preservesProvedLeaf dataSet
   }
 
 unifiedSectorClosureMonotone :
@@ -62,15 +57,10 @@ unifiedSectorClosureMonotone feedback =
   Aristotle.provedKnowledgeMonotone
     (asAristotleFeedback feedback) R146.unifiedSectorStressRecovery
 
-------------------------------------------------------------------------
--- Costed experiment/search channel.
-------------------------------------------------------------------------
-
 frontierActionabilityProblem :
   (leaf : R146.BalabanFrontierLeaf) →
   (Resolves : Choice.InformationMove → R146.BalabanFrontierLeaf → Set) →
-  String → String → String →
-  Choice.ActionabilityProblem
+  String → String → String → Choice.ActionabilityProblem
 frontierActionabilityProblem leaf resolves obstructionRef consumerRef authorityRef = record
   { Choice.ActionabilityProblem.Obstruction = R146.BalabanFrontierLeaf
   ; Choice.ActionabilityProblem.currentObstruction = leaf
@@ -91,23 +81,19 @@ record CostedBalabanFrontierResolution : Set₁ where
 
 open CostedBalabanFrontierResolution public
 
--- The planner can establish that an information move resolved an obstruction and
--- authorised a *search decision*.  There is intentionally no function here from
--- CostedBalabanFrontierResolution to FrontierLeafProved.
-
 record BalabanFrontierFeedbackBoundary : Set where
   constructor balabanFrontierFeedbackBoundary
   field
-    resolvingSearchObstructionAutomaticallyMarksLeafProved : Agda.Builtin.Bool.Bool
+    resolvingSearchObstructionAutomaticallyMarksLeafProved : Bool
     resolvingSearchObstructionAutomaticallyMarksLeafProvedIsFalse :
-      resolvingSearchObstructionAutomaticallyMarksLeafProved ≡ Agda.Builtin.Bool.false
-    provedLeafMayBeForgottenByFeedbackIteration : Agda.Builtin.Bool.Bool
+      resolvingSearchObstructionAutomaticallyMarksLeafProved ≡ false
+    provedLeafMayBeForgottenByFeedbackIteration : Bool
     provedLeafMayBeForgottenByFeedbackIterationIsFalse :
-      provedLeafMayBeForgottenByFeedbackIteration ≡ Agda.Builtin.Bool.false
+      provedLeafMayBeForgottenByFeedbackIteration ≡ false
 
 canonicalBalabanFrontierFeedbackBoundary : BalabanFrontierFeedbackBoundary
 canonicalBalabanFrontierFeedbackBoundary =
-  balabanFrontierFeedbackBoundary Agda.Builtin.Bool.false refl Agda.Builtin.Bool.false refl
+  balabanFrontierFeedbackBoundary false refl false refl
 
 balabanFrontierFeedbackSearchLevel : ProofLevel
 balabanFrontierFeedbackSearchLevel = machineChecked
