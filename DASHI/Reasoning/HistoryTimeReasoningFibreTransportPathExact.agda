@@ -136,11 +136,11 @@ frozenCoordinatePreservedAcrossPath :
     ≡ Transport.coordinateValue coordinate start
 frozenCoordinatePreservedAcrossPath frozenRefl = refl
 frozenCoordinatePreservedAcrossPath
-  (frozenStep blocked frozenRest) =
+  (frozenStep {step = step} blocked frozenRest) =
   trans
     (frozenCoordinatePreservedAcrossPath frozenRest)
     (Transport.preservesOutsideDeclaredChange
-      (governedTransport _)
+      (governedTransport step)
       _
       blocked)
 
