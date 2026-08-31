@@ -2,6 +2,7 @@ module DASHI.Base369StabiliserReceptionGraphValidation where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Foundations.Base369Ternary27StabiliserOperatorHolonomyExact as H
 import DASHI.Foundations.Base369Ternary27StratumStabiliserFibreAdmissibilityExact as S
 import DASHI.Governance.ReceptionRelationEvidenceTemporalGraphExact as R
@@ -11,7 +12,7 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 -- Base369 operator-bearing stabiliser checks.
 ------------------------------------------------------------------------
 
-nativeTransitionExists : H.Geometry.HypervoxelAdjacent S.oppositeSignEdge H.positiveXFace
+nativeTransitionExists : Geometry.HypervoxelAdjacent S.oppositeSignEdge H.positiveXFace
 nativeTransitionExists = H.oppositeEdgeToFaceAdjacent
 
 swapUnavailableBefore : H.OperatorAdmitted S.oppositeSignEdge H.swapXYOperator -> ⊥
@@ -20,7 +21,7 @@ swapUnavailableBefore = H.oppositeSignEdgeSwapNotAdmitted
 swapAvailableAfter : H.OperatorAdmitted H.positiveXFace H.swapXYOperator
 swapAvailableAfter = H.positiveXFaceSwapAdmitted
 
-s3HolonomyPairAvailable : H.AdmissibleHolonomyPair H.Geometry.positiveCorner
+s3HolonomyPairAvailable : H.AdmissibleHolonomyPair Geometry.positiveCorner
 s3HolonomyPairAvailable = H.positiveCornerSwapRotateHolonomy
 
 operatorOrderReallyDiffers : H.swapThenRotate ≡ H.rotateThenSwap -> ⊥
