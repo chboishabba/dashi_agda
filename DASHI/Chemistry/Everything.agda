@@ -33,3 +33,4 @@ import DASHI.Chemistry.SaltPetroleumIndustrialChemistryNetworkExact
 -- Carbon suitability lane: periodic/valence structure, rich carbon chemistry,
 -- stellar production abundance and abiogenesis remain separately receipted.
 import DASHI.Chemistry.CarbonChemicalSuitabilityLifeBoundaryExact
+import DASHI.Chemistry.CarbonBackboneReachableChemistryConeExact
