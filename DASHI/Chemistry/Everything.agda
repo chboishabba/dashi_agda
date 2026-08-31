@@ -2,7 +2,10 @@ module DASHI.Chemistry.Everything where
 
 import DASHI.Chemistry.TransitionKernel
 import DASHI.Chemistry.AdmissibleReactionTransitionBridgeExact
+import DASHI.Chemistry.TGO93PhEurPesticideMembershipExact
 import DASHI.Chemistry.RegulatoryAnalyteCoverageBidiExact
+import DASHI.Chemistry.AssayDetectionEnvelopeExact
+import DASHI.Chemistry.DefensiveRegulatoryAssayStressAuditExact
 import DASHI.Chemistry.RegulatoryAnalytePanelRefinementExact
 import DASHI.Chemistry.ExistingContentBridge
 import DASHI.Chemistry.Photography.InstantFilmSurface
