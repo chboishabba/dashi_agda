@@ -48,12 +48,12 @@ import DASHI.Moonshine.Monster3BFiniteHeisenbergInverseExact
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGroupLawFrontierExact
 import DASHI.Moonshine.Monster3BFiniteHeisenbergNondegeneracyExact
 
--- Concrete Schrodinger irreducibility route: exact Q(zeta_3)-valued function
--- module, character-derived coordinate/point projectors, exact 729 scale,
--- constructive X6 comparison, nonzero cyclotomic inversion, literal delta
--- extraction, and now arbitrary F3^6 translation words generated from the six
--- unit actions.  Full irreducibility still waits on the pointwise delta-transport
--- calculation and finite delta spanning.
+-- Concrete Schrodinger route.  Monster-specific work now closes extraction of
+-- one delta line and transport of that line through the full F3^6 orbit using
+-- only the six unit translations.  Two ordinary finite-dimensional assembly
+-- routes are exposed: delta synthesis and the pre-existing scalar-commutant /
+-- commuting-projector no-go.  The latter avoids explicit 729-term enumeration
+-- once an ordinary invariant-subspace -> projector attachment is supplied.
 import DASHI.Moonshine.Monster3BCyclotomicLinearAlgebraExact
 import DASHI.Moonshine.Monster3BCyclotomicNonzeroInverseExact
 import DASHI.Moonshine.Monster3BFiniteSchrodingerFunctionModuleExact
@@ -63,7 +63,14 @@ import DASHI.Moonshine.Monster3BFiniteSchrodingerPointProjectorEvaluationExact
 import DASHI.Moonshine.Monster3BFiniteSchrodingerProjector729Exact
 import DASHI.Moonshine.Monster3BFiniteX6ConstructiveComparisonExact
 import DASHI.Moonshine.Monster3BFiniteSchrodingerDeltaExtractionExact
+import DASHI.Moonshine.Monster3BFiniteSchrodingerBooleanDeltaExact
 import DASHI.Moonshine.Monster3BFiniteSchrodingerTranslationOrbitExact
+import DASHI.Moonshine.Monster3BFiniteSchrodingerFullDeltaOrbitExact
+import DASHI.Moonshine.Monster3BFiniteSchrodingerIrreducibilityAssemblyExact
+import DASHI.Moonshine.Monster3BFiniteHeisenbergCommutantExact
+import DASHI.Moonshine.Monster3BFiniteHeisenbergProjectionNoGoExact
+import DASHI.Moonshine.Monster3BFiniteSchrodingerProjectorIrreducibilityBidiExact
+import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannMultiplicityExact
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact
 
 import DASHI.Base369Ternary27StratifiedFibreHolonomyValidation
