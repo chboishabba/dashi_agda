@@ -3,6 +3,7 @@ module DASHI.JohnAnthonyBrownHistoryQualifiedReopeningValidation where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.AdmissibleTransitionHyperfabricExact as Transition
 import DASHI.Culture.ChildReligiousHistoryQualifiedReopeningExact as H
 
 presentParticipationDoesNotRecoverChoice :
@@ -16,12 +17,12 @@ presentParticipationDoesNotRecoverCone =
   H.presentParticipationCannotRecoverRevisionCone
 
 unsupportedRevisionNotAdmitted :
-  H.Transition.AdmittedStep H.religiousReopeningTransitionSystem
+  Transition.AdmittedStep H.religiousReopeningTransitionSystem
     H.reviseCommitment H.noReopeningSupport H.closedSituatedState -> ⊥
 unsupportedRevisionNotAdmitted = H.unsupportedRevisionCannotBeAdmitted
 
 supportedRevisionReachesReopened :
-  H.Transition.step H.religiousReopeningTransitionSystem
+  Transition.step H.religiousReopeningTransitionSystem
     H.reviseCommitment H.reopeningSupport H.closedSituatedState
   ≡ H.reopenedSituatedState
 supportedRevisionReachesReopened = H.supportedRevisionReachesReopenedState
