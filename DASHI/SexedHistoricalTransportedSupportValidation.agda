@@ -5,10 +5,13 @@ open import DASHI.Core.Prelude
 import DASHI.Core.AffectedDependencyClosureExact as Dependency
 import DASHI.Core.DiscriminatorSynthesisExact as Discriminator
 import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.PredictionEnvelopeExact as Envelope
+import DASHI.Core.SequentialConsumerExperimentPlannerExact as Planner
 import DASHI.Governance.SexedHistoricalAssociatorSupportedReopeningExact as Supported
 import DASHI.Governance.SexedHistoricalDistributedCompatibilityReopeningExact as Distributed
 import DASHI.Governance.SexedHistoricalTransportedAssociatorSupportExact as Transported
 import DASHI.Governance.SexedHistoricalTransportedSupportDiscriminatorExact as SupportDiscriminator
+import DASHI.Governance.SexedHistoricalTransportedSupportConsumerClosureExact as ConsumerClosure
 
 canonicalSupportHistoryRegression :
   Transported.SupportTransportPath
@@ -67,6 +70,30 @@ joinedSupportObserverSeparatesRegression :
 joinedSupportObserverSeparatesRegression =
   SupportDiscriminator.joinedObserverSeparatesSupportHistories
 
+coarseEvidenceLeavesReopeningConsumerOpenRegression :
+  Envelope.PointIdentifiable
+    ConsumerClosure.CompatibleSupportHistory
+    ConsumerClosure.reopeningPriority
+    ConsumerClosure.currentCoarseSupportEvidence → ⊥
+coarseEvidenceLeavesReopeningConsumerOpenRegression =
+  ConsumerClosure.coarseEvidenceDoesNotCloseReopeningConsumer
+
+supportOrderProbeClosesReopeningConsumerRegression :
+  Discriminator.ProspectivelyClosesConsumer
+    ConsumerClosure.CompatibleSupportHistory
+    ConsumerClosure.reopeningPriority
+    SupportDiscriminator.supportOrderProbe
+supportOrderProbeClosesReopeningConsumerRegression =
+  ConsumerClosure.supportOrderProbeClosesReopeningConsumer
+
+canonicalSequentialReopeningPlanRegression :
+  Planner.SequentialConsumerPlan
+    ConsumerClosure.reopeningPriority
+    (ConsumerClosure.CompatibleSupportHistory
+      ConsumerClosure.currentCoarseSupportEvidence)
+canonicalSequentialReopeningPlanRegression =
+  ConsumerClosure.canonicalReopeningPlan
+
 transportedSupportBoundaryRegression :
   Transported.TransportedAssociatorSupportBoundary
 transportedSupportBoundaryRegression =
@@ -76,3 +103,8 @@ supportDiscriminatorBoundaryRegression :
   SupportDiscriminator.TransportedSupportDiscriminatorBoundary
 supportDiscriminatorBoundaryRegression =
   SupportDiscriminator.canonicalTransportedSupportDiscriminatorBoundary
+
+supportConsumerClosureBoundaryRegression :
+  ConsumerClosure.TransportedSupportConsumerClosureBoundary
+supportConsumerClosureBoundaryRegression =
+  ConsumerClosure.canonicalTransportedSupportConsumerClosureBoundary
