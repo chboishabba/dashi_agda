@@ -3,6 +3,7 @@ module DASHI.JohnAnthonyBrownAdaptiveEvidenceSearchValidation where
 open import DASHI.Core.Prelude
 
 import DASHI.Culture.JohnAnthonyBrownAdaptiveEvidenceSearchExact as Search
+import DASHI.Culture.JohnAnthonyBrownEvidenceMoveConeDynamicsExact as Cone
 import DASHI.Culture.JohnAnthonyBrownPaperSectionHypothesisManifestExact as Manifest
 
 johnAnthonyBrownAuthorPinned : Search.paperAuthor ≡ "John Anthony Brown"
@@ -16,6 +17,21 @@ initialMoveIsExposureInstrument = Search.initialNextMove
 initialMoveIsHighestAlpha :
   Search.priorityTier Search.initialHighestAlphaMove ≡ Search.highestAlpha
 initialMoveIsHighestAlpha = Search.initialHighestAlphaReallyHighest
+
+initialMoveHasAdmissionWitness :
+  Cone.EvidenceMoveAdmitted Search.initialStage
+    (Search.nextEvidenceMove Search.initialStage)
+initialMoveHasAdmissionWitness = Cone.canonicalNextMoveAdmitted Search.initialStage
+
+laterReplicationHasAdmissionWitness :
+  Cone.EvidenceMoveAdmitted Search.confoundingModelProvisionallyResolved
+    Search.runTargetPopulationReplication
+laterReplicationHasAdmissionWitness = Cone.replicationAdmittedLater
+
+replicationNotAdmittedInitially :
+  Cone.EvidenceMoveAdmitted Search.initialStage
+    Search.runTargetPopulationReplication → ⊥
+replicationNotAdmittedInitially = Cone.replicationNotInitial
 
 exposureMoveFeedsH1 :
   Search.CandidateFor Search.validateCoerciveExposureInstrument Manifest.H1
@@ -44,6 +60,9 @@ costDoesNotEqualEthics = Search.searchCostIsNotEthics
 
 priorityDoesNotEqualTruth : Search.PlanningPriorityEqualsScientificTruth → ⊥
 priorityDoesNotEqualTruth = Search.planningPriorityIsNotTruth
+
+paperConeIsNotLiteralBase369Cone : Cone.EvidenceMoveConeIsLiteralBase369OperatorCone → ⊥
+paperConeIsNotLiteralBase369Cone = Cone.paperEvidenceConeIsNotBase369OperatorCone
 
 h3ForceRetained :
   Manifest.force Manifest.h3Manifest ≡ Manifest.incrementalPrediction
