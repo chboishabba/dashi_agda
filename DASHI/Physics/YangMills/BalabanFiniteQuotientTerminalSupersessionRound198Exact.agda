@@ -11,10 +11,11 @@ module DASHI.Physics.YangMills.BalabanFiniteQuotientTerminalSupersessionRound198
 -- literally the existing finite-selector norm and is pointwise definite.
 --
 -- This owner updates theorem authority WITHOUT rewriting historical Bool
--- ledgers.  It states exactly which old finite blockers are superseded and which
+-- ledgers. It states exactly which old finite blockers are superseded and which
 -- analytic/continuum obligations remain live.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base using (NonZero)
@@ -23,6 +24,7 @@ open import Data.Rational.Base using (0ℚ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.P06FaceCubeTorusGeometry using (Cube4)
 import DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport as Transport
+import DASHI.Physics.YangMills.BalabanGaugeTransformationCovariance as Covariance
 import DASHI.Physics.YangMills.BalabanBasedPathGaugeSectionExact as Rooted
 import DASHI.Physics.YangMills.BalabanFinitePhysicalGaugeQuotientCarrierRound196Exact as R196
 import DASHI.Physics.YangMills.BalabanFiniteRootedGaugeQuotientL2Round197Exact as R197
@@ -32,20 +34,17 @@ record FiniteQuotientTerminalReplacement
     {N : Nat} {{_ : NonZero N}}
     (group : Transport.GroupStructure)
     (base : Cube4 N)
-    (paths : Rooted.RootedPathSystem base) : Set₁ where
+    (paths : Rooted.RootedPathSystem base) : Set₂ where
   field
-    quotientCarrier : Set
+    quotientCarrier : Set₁
     quotientCarrierIsRootedPhysical :
       quotientCarrier ≡ R196.FiniteRootedGaugeQuotientCarrier group base paths
 
     normalize :
-      DASHI.Physics.YangMills.BalabanGaugeTransformationCovariance.DirectedGaugeField4
-        N group → quotientCarrier
+      Covariance.DirectedGaugeField4 N group → quotientCarrier
 
     normalizedRepresentative :
-      quotientCarrier →
-      DASHI.Physics.YangMills.BalabanGaugeTransformationCovariance.DirectedGaugeField4
-        N group
+      quotientCarrier → Covariance.DirectedGaugeField4 N group
 
     selectedEnsemble :
       R197.FiniteRootedQuotientEnsemble group base paths
@@ -77,13 +76,12 @@ finiteQuotientTerminalReplacement group base paths ensemble = record
       R197.finiteQuotientNormZeroPointwise ensemble
   }
 
--- The historical Sprint111 finite input remains a receipt with a false
--- compatibility flag.  We do not mutate that fact.  Instead, the new theorem
--- carrier witnesses that the narrower historical absence of a concrete finite
--- representative carrier is now stale.
+-- Historical metadata remains historical.  We do not flip its Bool.  The new
+-- theorem carrier supersedes only the narrower claim that no concrete finite
+-- representative carrier/independence theorem exists in the repository.
 historicalSprint111FiniteCompatibilityFlagRemainsFalse :
   S111.FiniteQuotientInput.compatibilityProvedHere S111.canonicalFiniteQuotientInput
-  ≡ Agda.Builtin.Bool.false
+  ≡ false
 historicalSprint111FiniteCompatibilityFlagRemainsFalse = refl
 
 finiteGaugeOrbitRepresentativeCarrierNowConstructedRound198Level : ProofLevel
@@ -92,7 +90,7 @@ finiteGaugeOrbitRepresentativeCarrierNowConstructedRound198Level = machineChecke
 finiteSelectedEnsemblePairingNowDefiniteRound198Level : ProofLevel
 finiteSelectedEnsemblePairingNowDefiniteRound198Level = machineChecked
 
--- Still-live leaves.  R196/R197 intentionally do not prove these.
+-- Still-live leaves. R196/R197 intentionally do not prove these.
 literalPhysicalInvariantHaarGibbsMeasureRound198Level : ProofLevel
 literalPhysicalInvariantHaarGibbsMeasureRound198Level = conditional
 
