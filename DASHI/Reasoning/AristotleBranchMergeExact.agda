@@ -217,12 +217,16 @@ data Lemma : Set where
   lemmaA lemmaB : Lemma
 
 knowledgeA : Knowledge Lemma
-Knowledge.Knows knowledgeA lemmaA = ⊤
-Knowledge.Knows knowledgeA lemmaB = ⊥
+knowledgeA = knowledge λ
+  { lemmaA → ⊤
+  ; lemmaB → ⊥
+  }
 
 knowledgeB : Knowledge Lemma
-Knowledge.Knows knowledgeB lemmaA = ⊥
-Knowledge.Knows knowledgeB lemmaB = ⊤
+knowledgeB = knowledge λ
+  { lemmaA → ⊥
+  ; lemmaB → ⊤
+  }
 
 leftBranch : BranchSnapshot Surface DependencyCode ProvenanceCode Lemma
 leftBranch =
