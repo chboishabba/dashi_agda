@@ -24,7 +24,7 @@ sourceRecoveryNonDescentWitness =
     Source.labelsOnly
     Source.literalRecoveryReady
     refl
-    (lambda ())
+    (λ ())
 
 coarseBalabanClaimNotSufficientForRecoveryDecision :
   Descent.ConsumerSufficient Source.coarseSource Source.recoveryDecision -> ⊥
