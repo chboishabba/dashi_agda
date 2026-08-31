@@ -22,11 +22,10 @@ module DASHI.Physics.Closure.NSTriadKNSixteenCellKnownGainDiagnosticRound317Exac
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (_∷_; [])
 import Data.Rational.Base as ℚ
 open ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
-open import Data.Rational.Tactic.RingSolver using (solve)
 
+import DASHI.Physics.Closure.NSTriadKNNestedOuterOrientationRefinementRound314Exact as R314
 import DASHI.Physics.Closure.NSTriadKNNestedCriticalGainConsumerRound315Exact as R315
 import DASHI.Physics.Closure.NSTriadKNNestedInnerGeometryRefinementRound316Exact as R316
 
@@ -62,7 +61,6 @@ residualAfterKnownGain route P =
 cellResidual : R316.SixteenCellIndex → KnownGainParameters → ℚ
 cellResidual cell P = residualAfterKnownGain (R316.indexRoute cell) P
 
--- Regression formulas for the two nontrivial mechanisms.
 nearGainIsTwiceAmplitudeGain :
   (P : KnownGainParameters) →
   knownSquaredGain R316.homochiralRadialNear P
@@ -85,23 +83,17 @@ heterochiralNonHHHasNoAutomaticKnownGain :
   knownSquaredGain R316.heterochiralNonHH P ≡ 0ℚ
 heterochiralNonHHHasNoAutomaticKnownGain P = refl
 
--- Example symbolic formulas showing how the same inner mechanism faces a
--- different backward residual depending on which outer leg carries N_p.
 nearForcingLowResidual :
   (P : KnownGainParameters) →
   cellResidual R316.nearLow P
-  ≡ (R315.missingSquaredGain
-        DASHI.Physics.Closure.NSTriadKNNestedOuterOrientationRefinementRound314Exact.forcingLowFLShoulder
-        (shells P))
+  ≡ (R315.missingSquaredGain R314.forcingLowFLShoulder (shells P))
       - two * radialNearAmplitudeGain P
 nearForcingLowResidual P = refl
 
 nearForcingHighResidual :
   (P : KnownGainParameters) →
   cellResidual R316.nearHigh P
-  ≡ (R315.missingSquaredGain
-        DASHI.Physics.Closure.NSTriadKNNestedOuterOrientationRefinementRound314Exact.forcingHighHLShoulder
-        (shells P))
+  ≡ (R315.missingSquaredGain R314.forcingHighHLShoulder (shells P))
       - two * radialNearAmplitudeGain P
 nearForcingHighResidual P = refl
 
