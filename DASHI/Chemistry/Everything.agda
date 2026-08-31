@@ -29,3 +29,7 @@ import DASHI.Chemistry.RefineryFeedstockSaltConstraintBidiExact
 -- and hydrocarbon cracker/refinery products meet only through explicit
 -- downstream reaction, inventory, quality and provenance receipts.
 import DASHI.Chemistry.SaltPetroleumIndustrialChemistryNetworkExact
+
+-- Carbon suitability lane: periodic/valence structure, rich carbon chemistry,
+-- stellar production abundance and abiogenesis remain separately receipted.
+import DASHI.Chemistry.CarbonChemicalSuitabilityLifeBoundaryExact
