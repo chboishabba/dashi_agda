@@ -15,6 +15,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Data.Product using (_×_; _,_)
 
 ------------------------------------------------------------------------
 -- 1. Safety-language coverage and unresolved externality.

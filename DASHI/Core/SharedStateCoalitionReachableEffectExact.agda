@@ -104,33 +104,25 @@ canonicalCoalitionReachableEffect =
     filesystemDirectoryIsPotentialChannel
     combinedExternalReach
 
--- Neither individual relation contains the coalition-only effect type; the
--- collective effect is introduced only by the composed receipt above.
-
 ------------------------------------------------------------------------
--- Delegation and replication are distinct capabilities.
+-- Delegation and replication are distinct capability kinds.
 ------------------------------------------------------------------------
 
-data DelegationCapability : Set where
-  mayDelegateTask : DelegationCapability
+data CapabilityKind : Set where
+  delegationCapability replicationCapability : CapabilityKind
 
-data ReplicationCapability : Set where
-  mayReplicateActor : ReplicationCapability
-
-delegationIsNotReplication : DelegationCapability ≡ ReplicationCapability → ⊥
-delegationIsNotReplication ()
+delegationKindIsNotReplicationKind :
+  delegationCapability ≡ replicationCapability → ⊥
+delegationKindIsNotReplicationKind ()
 
 ------------------------------------------------------------------------
--- Local safety limit is not whole-system closure.
+-- Local safety and whole-system closure are distinct assurance levels.
 ------------------------------------------------------------------------
 
-data DeviceLocalSafety : Set where
-  localLimitSatisfied : DeviceLocalSafety
+data AssuranceLevel : Set where
+  deviceLocalSafety wholeSystemClosure : AssuranceLevel
 
-data SystemClosure : Set where
-  allReachableEffectsGoverned : SystemClosure
-
-localSafetyIsNotSystemClosure : DeviceLocalSafety ≡ SystemClosure → ⊥
+localSafetyIsNotSystemClosure : deviceLocalSafety ≡ wholeSystemClosure → ⊥
 localSafetyIsNotSystemClosure ()
 
 ------------------------------------------------------------------------

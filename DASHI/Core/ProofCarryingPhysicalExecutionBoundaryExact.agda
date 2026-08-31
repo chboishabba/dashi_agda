@@ -31,6 +31,9 @@ data SimAction : Set where
 data PhysicalAction : Set where
   physicalMove : PhysicalAction
 
+data ActionKind : Set where
+  simulationKind physicalKind : ActionKind
+
 data HardwareCommand : Set where
   compiledPhysicalMove : HardwareCommand
 
@@ -40,8 +43,8 @@ data PhysicalOutcome : Set where
 data SensorObservation : Set where
   sameSensorReading : SensorObservation
 
-simulationIsNotPhysical : SimAction ≡ PhysicalAction → ⊥
-simulationIsNotPhysical ()
+simulationKindIsNotPhysicalKind : simulationKind ≡ physicalKind → ⊥
+simulationKindIsNotPhysicalKind ()
 
 ------------------------------------------------------------------------
 -- Proof-bearing authority/capability atoms.
@@ -223,6 +226,19 @@ outcomesStillDiffer : intendedOutcome ≡ alternateOutcome → ⊥
 outcomesStillDiffer ()
 
 ------------------------------------------------------------------------
+-- Trusted execution binding is an explicit external implementation obligation.
+-- This formal receipt states the desired closure property but does not pretend
+-- Agda alone has inspected a runtime/FFI/device deployment.
+------------------------------------------------------------------------
+
+record ExecutionTCBContract (RuntimePhysicalEffect : Set) : Set₁ where
+  constructor execution-tcb-contract
+  field
+    executeWithReceipt : ExecutableAction → RuntimePhysicalEffect
+    allRuntimePhysicalEffectsRequireReceipt :
+      RuntimePhysicalEffect → ExecutableAction
+
+------------------------------------------------------------------------
 -- Boundary / source discipline.
 ------------------------------------------------------------------------
 
@@ -246,6 +262,9 @@ record ProofCarryingPhysicalExecutionBoundary : Set where
     localDeviceLimitProvesWholeSystemContainment : Bool
     localDeviceLimitProvesWholeSystemContainmentIsFalse :
       localDeviceLimitProvesWholeSystemContainment ≡ false
+    formalTCBContractProvesDeployedRuntimeClosure : Bool
+    formalTCBContractProvesDeployedRuntimeClosureIsFalse :
+      formalTCBContractProvesDeployedRuntimeClosure ≡ false
     externalProtocolAutomaticallySatisfiesThisBoundary : Bool
     externalProtocolAutomaticallySatisfiesThisBoundaryIsFalse :
       externalProtocolAutomaticallySatisfiesThisBoundary ≡ false
@@ -263,4 +282,5 @@ canonicalProofCarryingPhysicalExecutionBoundary =
     false refl
     false refl
     false refl
-    "Physical-agent BIDI boundary: agent intention, requested operation, admitted action, compiled hardware command, physical effect and observation remain distinct. Execution authority is proof-bearing; capability expansion and shutdown control remain external; device-local limits do not by themselves prove system containment."
+    false refl
+    "Physical-agent BIDI boundary: agent intention, requested operation, admitted action, compiled hardware command, physical effect and observation remain distinct. Execution authority is proof-bearing; capability expansion and shutdown control remain external; device-local limits do not by themselves prove system containment. Runtime exclusivity remains an explicit TCB/FFI binding obligation rather than a theorem manufactured from the abstract interface."
