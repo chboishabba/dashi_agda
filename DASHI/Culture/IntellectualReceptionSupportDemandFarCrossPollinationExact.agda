@@ -5,9 +5,10 @@ module DASHI.Culture.IntellectualReceptionSupportDemandFarCrossPollinationExact 
 --
 -- A strictly richer certificate support can be easier to separate under the
 -- current observation filtration.  This module proves that finite reversal and
--- then instantiates merged observer-refinement, experimental-coordinate,
--- discriminator-synthesis, residual-dependency, selection-topology and
--- representation-chart owners on the same reception fixture.
+-- then instantiates merged observer-refinement, consumer-residual,
+-- experimental-coordinate, discriminator-synthesis, actionability,
+-- residual-dependency, selection-topology, representation-chart and governed-
+-- provenance owners on the same reception fixture.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -19,8 +20,10 @@ import DASHI.Culture.IntellectualReceptionTemporalMultiResidueAdmissibilityExact
 import DASHI.Culture.IntellectualReceptionConsumerObservationDemandPreorderExact as Demand
 
 import DASHI.Core.ObserverRefinementLatticeExact as ObserverLattice
+import DASHI.Core.ConsumerIndexedResidualRefinementExact as ConsumerResidual
 import DASHI.Core.ExperimentalCoordinateDesignExact as Experimental
 import DASHI.Core.DiscriminatorSynthesisExact as Discriminator
+import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Actionability
 import DASHI.Core.ResidualObserverDependencyExact as Residual
 import DASHI.Core.HistoryQualifiedSelectionTopologyExact as Selection
 import DASHI.Core.IntersectionalNonFactorability as INF
@@ -154,7 +157,52 @@ authorityStrictlyRefinesPresentFuture =
     ReceptionObserver.authorityDivergentByObserver
 
 ------------------------------------------------------------------------
--- 4. Experimental-coordinate x-pollination.
+-- 4. Consumer-indexed residual x-pollination.
+-- The coarse surface is not sufficient for the authority consumer, while the
+-- joint coarse+authority observer is sufficient by construction.
+------------------------------------------------------------------------
+
+authorityConsumerCollision :
+  ConsumerResidual.ConsumerRelevantCollision
+    coarsePresentFutureObservation
+    authorityObservation
+authorityConsumerCollision =
+  ConsumerResidual.consumer-relevant-collision
+    Temporal.movementEarlyAuthorityHistory
+    Temporal.movementLateAuthorityHistory
+    coarsePresentFutureCollision
+    ReceptionObserver.authorityDivergentByObserver
+
+coarsePresentFutureCannotSufficeForAuthority :
+  ConsumerResidual.ConsumerSufficient
+    coarsePresentFutureObservation
+    authorityObservation → ⊥
+coarsePresentFutureCannotSufficeForAuthority =
+  ConsumerResidual.coarseCollisionBlocksSufficiency authorityConsumerCollision
+
+authorityResidualRepair :
+  ConsumerResidual.ResidualRepair
+    coarsePresentFutureObservation
+    authorityObservation
+    authorityObservation
+authorityResidualRepair =
+  ConsumerResidual.residual-repair
+    (ObserverLattice.pairRefinesRight
+      coarsePresentFutureObservation
+      authorityObservation)
+
+authorityResidualRepairGivesStrictRefinement :
+  ObserverLattice.StrictRefinement
+    coarsePresentFutureObservation
+    (ObserverLattice.pairObserver
+      coarsePresentFutureObservation authorityObservation)
+authorityResidualRepairGivesStrictRefinement =
+  ConsumerResidual.consumerRelevantResidualGivesStrictRefinement
+    authorityConsumerCollision
+    authorityResidualRepair
+
+------------------------------------------------------------------------
+-- 5. Experimental-coordinate x-pollination.
 ------------------------------------------------------------------------
 
 data ReceptionInformationDimension : Set where
@@ -228,7 +276,7 @@ authorityCoordinateSeparatesCollision =
     ReceptionObserver.authorityDivergentByObserver
 
 ------------------------------------------------------------------------
--- 5. Discriminator-synthesis x-pollination.
+-- 6. Discriminator-synthesis x-pollination.
 ------------------------------------------------------------------------
 
 authorityExperimentBundle :
@@ -278,7 +326,25 @@ authorityJoinSeparatesEarlyLate =
   Discriminator.extensionJoinSeparates authorityDiscriminatingLanguageExtension
 
 ------------------------------------------------------------------------
--- 6. Residual-dependency / discrepancy-calibrated preorder x-pollination.
+-- 7. Actionability x-pollination: the discriminator bundle becomes one typed
+-- information move.  Its declared cost is search/resource metadata only.
+------------------------------------------------------------------------
+
+authorityInformationMove : Actionability.InformationMove
+authorityInformationMove =
+  Discriminator.bundleInformationMove authorityExperimentBundle
+
+authorityInformationMoveKind :
+  Actionability.kind authorityInformationMove
+  ≡ Actionability.takeMeasurement
+authorityInformationMoveKind = refl
+
+authorityInformationMoveCost :
+  Actionability.cost authorityInformationMove ≡ 1
+authorityInformationMoveCost = refl
+
+------------------------------------------------------------------------
+-- 8. Residual-dependency / discrepancy-calibrated preorder x-pollination.
 ------------------------------------------------------------------------
 
 separationDemandScore :
@@ -295,7 +361,7 @@ authorityNoWorseByResidualPreorder :
 authorityNoWorseByResidualPreorder = z≤n
 
 ------------------------------------------------------------------------
--- 7. Selection-topology / nonfactorability precedent.
+-- 9. Selection-topology / nonfactorability precedent.
 ------------------------------------------------------------------------
 
 selectionTopologyStillNonFactorable :
@@ -304,7 +370,7 @@ selectionTopologyStillNonFactorable =
   Selection.candidateFieldCannotRecoverSelectedFrontier
 
 ------------------------------------------------------------------------
--- 8. Representation-chart precedent.
+-- 10. Representation-chart precedent.
 ------------------------------------------------------------------------
 
 binaryHalfPresentationStillPreservesInvariant :
@@ -320,7 +386,7 @@ representationAuthorityBoundaryRetained =
   Representation.canonicalRepresentationAuthorityBoundary
 
 ------------------------------------------------------------------------
--- 9. Governed-observation provenance precedent.
+-- 11. Governed-observation provenance precedent.
 ------------------------------------------------------------------------
 
 eraseThenAddStillIntroduced :
@@ -333,7 +399,7 @@ eraseThenAddStillIntroduced =
   Governed.additionAfterErasureIsIntroducedNotInherited
 
 ------------------------------------------------------------------------
--- 10. No-promotion boundaries.
+-- 12. No-promotion boundaries.
 ------------------------------------------------------------------------
 
 data RicherSupportPromotesGreaterTruth : Set where
@@ -343,6 +409,7 @@ data ExperimentalCoordinatePromotesPhysicalDimension : Set where
 data FiniteDemandScorePromotesSpectralIndependence : Set where
 data TopologyAnalogyPromotesHistoricalNecessity : Set where
 data RepresentationAnalogyPromotesChartIdentity : Set where
+data CheapestInformationMovePromotesBestTheory : Set where
 
 richerSupportDoesNotPromoteGreaterTruth : RicherSupportPromotesGreaterTruth → ⊥
 richerSupportDoesNotPromoteGreaterTruth ()
@@ -371,8 +438,12 @@ representationAnalogyDoesNotPromoteChartIdentity :
   RepresentationAnalogyPromotesChartIdentity → ⊥
 representationAnalogyDoesNotPromoteChartIdentity ()
 
+cheapestInformationMoveDoesNotPromoteBestTheory :
+  CheapestInformationMovePromotesBestTheory → ⊥
+cheapestInformationMoveDoesNotPromoteBestTheory ()
+
 ------------------------------------------------------------------------
--- 11. Canonical boundary.
+-- 13. Canonical boundary.
 ------------------------------------------------------------------------
 
 record IntellectualReceptionSupportDemandFarCrossPollinationBoundary : Set where
@@ -382,8 +453,11 @@ record IntellectualReceptionSupportDemandFarCrossPollinationBoundary : Set where
     richerAuthoritySupportIsEasierToSeparateHere : Bool
     supportInclusionMonotoneWithObservationDemand : Bool
     authorityStrictlyRefinesPresentFutureObserver : Bool
+    coarseSurfaceIsAuthorityConsumerSufficient : Bool
+    jointSurfaceRepairsAuthorityConsumer : Bool
     authorityIsExplicitExperimentalSeparator : Bool
     authorityFormsDiscriminatingLanguageExtension : Bool
+    authorityBundleProjectsToCostedMeasurementMove : Bool
     residualPreorderCanEncodeSameFiniteComparison : Bool
     finiteDemandScoreIsSpectralIndependenceConstant : Bool
     selectionTopologyNonfactorabilityRetained : Bool
@@ -396,4 +470,4 @@ canonicalIntellectualReceptionSupportDemandFarCrossPollinationBoundary :
   IntellectualReceptionSupportDemandFarCrossPollinationBoundary
 canonicalIntellectualReceptionSupportDemandFarCrossPollinationBoundary =
   intellectual-reception-support-demand-far-cross-pollination-boundary
-    true true false true true true true false true true true false true
+    true true false true false true true true true true false true true true false true
