@@ -26,10 +26,13 @@ open import Data.Product using (_×_; _,_)
 -- "Coupling quantum-like cognition with the neuronal networks within
 -- generalized probability theory", DOI 10.1016/j.jmp.2025.102923.
 --
+--
 -- The exact finite statements below use the literature distinction between
--- observable order statistics and state-update structure.  They do not claim
--- physical quantum dynamics in the brain, and QQ equality is kept as a
--- model-class diagnostic rather than a universal human-decision law.
+-- observable order statistics, observable noncommutativity, and state-update
+-- noncommutativity. They do not claim physical quantum dynamics in the brain.
+-- QQ is retained only as a diagnostic for the restricted projective-like
+-- calibration family; general quantum-instrument update semantics need not
+-- inherit it, nor is QQ a universal human-decision law.
 ------------------------------------------------------------------------
 
 record BeliefState : Set where

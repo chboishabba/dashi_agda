@@ -18,11 +18,6 @@ import DASHI.Cognition.PNF.BoundedEvidenceCommitmentExact as Evidence
 -- Hongjie Xia; Maxime Maheu; Gary A. Kane; Benjamin B. Scott,
 -- "Regulation of the decision threshold by the locus coeruleus",
 -- DOI 10.1038/s41386-026-02399-x.
---
--- The 2026 study provides causal evidence in rats that LC-NE activation can
--- increase modeled decision thresholds.  The exact finite policy below is a
--- calibration model, not a quantitative receptor/LC firing-rate fit and not a
--- universal stress law.
 ------------------------------------------------------------------------
 
 data ThresholdPolicy : Set where lowerThreshold elevatedThreshold : ThresholdPolicy
@@ -39,6 +34,16 @@ sameEvidenceDifferentThresholdChangesCommitment :
   thresholdUnder lowerThreshold Evidence.e1
   ≡ thresholdUnder elevatedThreshold Evidence.e1 → ⊥
 sameEvidenceDifferentThresholdChangesCommitment ()
+
+data DecisionTime : Set where firstPulse secondPulse : DecisionTime
+
+commitmentTime : ThresholdPolicy → DecisionTime
+commitmentTime lowerThreshold = firstPulse
+commitmentTime elevatedThreshold = secondPulse
+
+thresholdPolicyCanShiftCommitmentTime :
+  commitmentTime lowerThreshold ≡ commitmentTime elevatedThreshold → ⊥
+thresholdPolicyCanShiftCommitmentTime ()
 
 data LCNERegime : Set where baselineLC activatedLC : LCNERegime
 
@@ -59,10 +64,11 @@ record NeuromodulatedThresholdBoundary : Set where
   constructor neuromodulatedThresholdBoundary
   field
     accumulatedEvidenceDeterminesThreshold : Bool
+    fixedEvidenceDeterminesCommitmentTime : Bool
     lcActivationAlwaysMeansStress : Bool
     lcActivationAlwaysRaisesThresholdInEveryTaskOrSpecies : Bool
     alpha2MechanismFullyLocalizedByFiniteModel : Bool
 
 canonicalNeuromodulatedThresholdBoundary : NeuromodulatedThresholdBoundary
 canonicalNeuromodulatedThresholdBoundary =
-  neuromodulatedThresholdBoundary false false false false
+  neuromodulatedThresholdBoundary false false false false false
