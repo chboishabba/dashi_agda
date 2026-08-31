@@ -45,3 +45,4 @@ import DASHI.Physics.Closure.TSFVActionPhaseWeightSeparationExact
 -- TSFV contributes history/projection non-factorability only; it is not promoted
 -- into a multiverse or anthropic-selection theorem.
 import DASHI.Physics.Closure.TSFVMultiverseViabilityCrossPollinationExact
+import DASHI.Physics.Closure.MultiverseAttractorDiscriminatorBidiExact
