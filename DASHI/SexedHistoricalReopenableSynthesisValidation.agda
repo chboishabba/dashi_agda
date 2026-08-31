@@ -1,0 +1,33 @@
+module DASHI.SexedHistoricalReopenableSynthesisValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.EpistemicSuspensionExact as Suspension
+import DASHI.Governance.SexedHistoricalProductiveDialecticalFibreJoinExact as Join
+import DASHI.Governance.SexedHistoricalReopenableSynthesisEndOfHistoryBoundaryExact as Reopen
+
+productiveJoinNextHistoryRegression :
+  INF.FactorsThrough Reopen.joinPresentSurface Reopen.nextContinuation → ⊥
+productiveJoinNextHistoryRegression =
+  Reopen.productiveJoinSurfaceCannotRecoverNextHistory
+
+productiveJoinHasOutgoingTransitionRegression :
+  Reopen.JoinTransport Reopen.productiveJoinAtT Reopen.counterformationAtNext
+productiveJoinHasOutgoingTransitionRegression =
+  Reopen.canonicalJoinHasOutgoingTransport
+
+productiveJoinAcceptedNowRegression :
+  Join.joinDisposition Join.productiveJoin ≡ Suspension.acceptHere
+productiveJoinAcceptedNowRegression = Reopen.currentJoinAcceptedAsProductive
+
+historicalFinalityStillOpenRegression :
+  Reopen.finalityDisposition Reopen.finalityUnresolved
+  ≡ Suspension.suspendAndRefine
+historicalFinalityStillOpenRegression =
+  Reopen.historicalFinalityRemainsUnresolvedInCanonicalFixture
+
+canonicalSourceBoundaryRegression :
+  Reopen.ReopenableSynthesisEndOfHistoryBoundary
+canonicalSourceBoundaryRegression =
+  Reopen.canonicalReopenableSynthesisEndOfHistoryBoundary
