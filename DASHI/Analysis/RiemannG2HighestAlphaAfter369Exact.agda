@@ -9,50 +9,58 @@ import DASHI.Analysis.RiemannG2C3ToScalarRouteCutExact as ScalarCut
 import DASHI.Analysis.RiemannAristotleG2eTargetCenteredSymmetryNoGoExact as TargetNoGo
 import DASHI.Analysis.RiemannAristotleG2dScalarDeterminantSumTargetExact as G2d
 import DASHI.Analysis.RiemannAristotleG2CurrentCutExact as Current
+import DASHI.Analysis.RiemannG2TargetCenteredScalarCancellationAssemblyExact as Assembly
+import DASHI.Analysis.RiemannG2ExistingScalarHarmonicSameObjectAttachmentExact as Attachment
 import DASHI.Core.FrontierRelationStrengthBidiExact as Relation
 
 ------------------------------------------------------------------------
 -- G2 HIGHEST-ALPHA FRONTIER AFTER 369/MONSTER CROSS-POLLINATION
 --
--- At this point all generic symmetry machinery is considered available.
--- The current Agda return is not constructor-rich enough to decide literal C3
--- covariance, and symmetry-only determinant invariance has already been shown
--- insufficient for signed scalar cancellation.  Therefore the active frontier
--- is a two-branch OR:
+-- User-directed invariant for this tranche: assume ordinary machinery already
+-- exists.  That now applies both to C3/determinant algebra and to ordinary
+-- Fourier/parity/moment/oscillatory machinery.
 --
---   (A) source-recover the literal Lean constructors, but continue the symmetry
---       route only if they yield a nontrivial scalar q/phase law;
---   (B) attack the target-centred signed determinant-response cosine sum
---       directly.
+-- Therefore the live theorem-bearing payment is not "invent a new harmonic
+-- method".  It is the exact same-object attachment between an existing scalar
+-- harmonic donor and the literal G2 target-centred determinant problem.
 --
--- Branch A is diagnostic; Branch B is theorem-bearing highest-alpha unless A
--- produces the additional scalar law.
+-- Literal C3 constructor recovery remains diagnostic only.  It can reopen the
+-- symmetry branch solely if it yields an additional scalar q/phase identity.
 ------------------------------------------------------------------------
 
 data Post369RHAction : Set where
   recoverLiteralConstructors
   recoverNontrivialScalarSymmetryLaw
-  proveTargetCenteredScalarCancellation
+  identifyExistingScalarDonor
+  proveExactScalarProblemIdentity
   : Post369RHAction
 
 data Post369RHState : Set where
   provenanceOnly
   constructorsRecovered
   scalarLawRecovered
-  scalarCancellationClosed
+  donorIdentified
+  sameObjectScalarAttachmentClosed
   : Post369RHState
 
 nextState : Post369RHState -> Post369RHAction -> Post369RHState
 nextState provenanceOnly recoverLiteralConstructors = constructorsRecovered
 nextState provenanceOnly recoverNontrivialScalarSymmetryLaw = provenanceOnly
-nextState provenanceOnly proveTargetCenteredScalarCancellation = scalarCancellationClosed
+nextState provenanceOnly identifyExistingScalarDonor = donorIdentified
+nextState provenanceOnly proveExactScalarProblemIdentity = provenanceOnly
 nextState constructorsRecovered recoverLiteralConstructors = constructorsRecovered
 nextState constructorsRecovered recoverNontrivialScalarSymmetryLaw = scalarLawRecovered
-nextState constructorsRecovered proveTargetCenteredScalarCancellation = scalarCancellationClosed
+nextState constructorsRecovered identifyExistingScalarDonor = donorIdentified
+nextState constructorsRecovered proveExactScalarProblemIdentity = constructorsRecovered
 nextState scalarLawRecovered recoverLiteralConstructors = scalarLawRecovered
 nextState scalarLawRecovered recoverNontrivialScalarSymmetryLaw = scalarLawRecovered
-nextState scalarLawRecovered proveTargetCenteredScalarCancellation = scalarCancellationClosed
-nextState scalarCancellationClosed _ = scalarCancellationClosed
+nextState scalarLawRecovered identifyExistingScalarDonor = donorIdentified
+nextState scalarLawRecovered proveExactScalarProblemIdentity = scalarLawRecovered
+nextState donorIdentified recoverLiteralConstructors = donorIdentified
+nextState donorIdentified recoverNontrivialScalarSymmetryLaw = donorIdentified
+nextState donorIdentified identifyExistingScalarDonor = donorIdentified
+nextState donorIdentified proveExactScalarProblemIdentity = sameObjectScalarAttachmentClosed
+nextState sameObjectScalarAttachmentClosed _ = sameObjectScalarAttachmentClosed
 
 currentState : Post369RHState
 currentState = provenanceOnly
@@ -61,17 +69,17 @@ sourceDiagnosticAction : Post369RHAction
 sourceDiagnosticAction = recoverLiteralConstructors
 
 highestAlphaTheoremAction : Post369RHAction
-highestAlphaTheoremAction = proveTargetCenteredScalarCancellation
+highestAlphaTheoremAction = proveExactScalarProblemIdentity
 
-symmetryContinuationRequiresConstructorsAndScalarLaw :
-  nextState constructorsRecovered recoverNontrivialScalarSymmetryLaw
-    ≡ scalarLawRecovered
-symmetryContinuationRequiresConstructorsAndScalarLaw = refl
-
-sourceRecoveryAloneDoesNotCloseScalarTarget :
+sourceRecoveryAloneDoesNotCloseSameObjectScalarAttachment :
   nextState provenanceOnly recoverLiteralConstructors
-    ≡ scalarCancellationClosed -> ⊥
-sourceRecoveryAloneDoesNotCloseScalarTarget ()
+    ≡ sameObjectScalarAttachmentClosed -> ⊥
+sourceRecoveryAloneDoesNotCloseSameObjectScalarAttachment ()
+
+donorIdentificationNeedsExactIdentity :
+  nextState donorIdentified proveExactScalarProblemIdentity
+    ≡ sameObjectScalarAttachmentClosed
+donorIdentificationNeedsExactIdentity = refl
 
 currentAgdaPayloadStillProvenanceOnly :
   SourceGate.currentLiteralC3SourceStage ≡ SourceGate.provenanceReturnOnly
@@ -81,6 +89,20 @@ symmetryOnlyRoutePruned :
   SourceGate.symmetryOnlyCancellationDisposition
     ≡ SourceGate.symmetryOnlyCancellationPruned
 symmetryOnlyRoutePruned = refl
+
+ordinaryHarmonicDonorAssumedAvailable :
+  Attachment.ordinaryHarmonicDonorAssumedAvailable
+    Attachment.canonicalExistingScalarHarmonicAttachmentBoundary ≡ true
+ordinaryHarmonicDonorAssumedAvailable =
+  Attachment.ordinaryHarmonicDonorAssumedAvailableIsTrue
+    Attachment.canonicalExistingScalarHarmonicAttachmentBoundary
+
+exactProblemIdentityIsRequired :
+  Attachment.exactProblemIdentityRequired
+    Attachment.canonicalExistingScalarHarmonicAttachmentBoundary ≡ true
+exactProblemIdentityIsRequired =
+  Attachment.exactProblemIdentityRequiredIsTrue
+    Attachment.canonicalExistingScalarHarmonicAttachmentBoundary
 
 currentTargetCenteredSymmetryStillInsufficient :
   TargetNoGo.targetCenteredScalarCancellationClosed
@@ -115,6 +137,9 @@ record Post369HighestAlphaBoundary : Set where
     genericC3MachineryMissing : Bool
     genericC3MachineryMissingIsFalse : genericC3MachineryMissing ≡ false
 
+    genericHarmonicMachineryMissing : Bool
+    genericHarmonicMachineryMissingIsFalse : genericHarmonicMachineryMissing ≡ false
+
     currentAgdaReturnCanDecideLiteralCommonC3 : Bool
     currentAgdaReturnCanDecideLiteralCommonC3IsFalse :
       currentAgdaReturnCanDecideLiteralCommonC3 ≡ false
@@ -123,16 +148,20 @@ record Post369HighestAlphaBoundary : Set where
     sourceRecoveryIsUsefulDiagnosticIsTrue :
       sourceRecoveryIsUsefulDiagnostic ≡ true
 
-    sourceRecoveryAloneClosesG2d : Bool
-    sourceRecoveryAloneClosesG2dIsFalse : sourceRecoveryAloneClosesG2d ≡ false
-
     symmetryOnlyCancellationRoutePruned : Bool
     symmetryOnlyCancellationRoutePrunedIsTrue :
       symmetryOnlyCancellationRoutePruned ≡ true
 
-    directScalarSignedSumIsDefaultHighestAlpha : Bool
-    directScalarSignedSumIsDefaultHighestAlphaIsTrue :
-      directScalarSignedSumIsDefaultHighestAlpha ≡ true
+    existingScalarDonorMayBeReused : Bool
+    existingScalarDonorMayBeReusedIsTrue : existingScalarDonorMayBeReused ≡ true
+
+    donorNameOrPartialParameterMatchIsEnough : Bool
+    donorNameOrPartialParameterMatchIsEnoughIsFalse :
+      donorNameOrPartialParameterMatchIsEnough ≡ false
+
+    exactScalarProblemIdentityIsDefaultHighestAlpha : Bool
+    exactScalarProblemIdentityIsDefaultHighestAlphaIsTrue :
+      exactScalarProblemIdentityIsDefaultHighestAlpha ≡ true
 
     symmetryRouteReopensOnlyWithExtraScalarLaw : Bool
     symmetryRouteReopensOnlyWithExtraScalarLawIsTrue :
@@ -145,9 +174,11 @@ canonicalPost369HighestAlphaBoundary =
   post369-highest-alpha-boundary
     false refl
     false refl
-    true refl
     false refl
     true refl
     true refl
     true refl
-    "After exhausting generic 369/Monster symmetry transfer, the RH search tree has only two honest continuations. Recover the literal Lean nuisance/taper constructors as a diagnostic, reopening symmetry only if they imply a nontrivial scalar q/phase law; otherwise attack the target-centred signed determinant-response cosine sum directly. Existing zeta symmetries, local zero counts, and q-invariance alone are already known insufficient."
+    false refl
+    true refl
+    true refl
+    "Assume all ordinary symmetry and harmonic-analysis machinery already exists. The post-369 RH payment is therefore an exact same-object attachment: identify an existing scalar harmonic donor's complete LiteralTargetCenteredScalarProblem with the literal G2 determinant-taper/near-zero/target/cutoff problem. Literal C3 source recovery remains diagnostic and only reopens if it yields a nontrivial scalar q/phase law. Name similarity, theorem labels, or partial parameter agreement do not close the attachment."
