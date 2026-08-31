@@ -9,6 +9,7 @@ import DASHI.Core.Clay369ResidualSufficiencyDichotomyExact as ResidualDichotomy
 import DASHI.Analysis.RiemannG2C3MonsterEquivarianceAuditExact as RH
 import DASHI.Analysis.RiemannG2DeterminantConsumerQuotient369Exact as RHResidual
 import DASHI.Analysis.RiemannG2DeterminantSymmetryRelevance369Exact as RHSymmetry
+import DASHI.Analysis.RiemannG2C3FixedNuisanceDeterminantNoGo369Exact as RHNoGo
 import DASHI.Physics.Closure.NSCriticalConeResidualFibre369CrossPollinationExact as NS
 import DASHI.Physics.YangMills.BalabanC3MonsterEquivarianceAuditExact as YM
 import DASHI.Physics.YangMills.BalabanSourceResidualConsumerNonDescent369Exact as YMResidual
@@ -23,8 +24,9 @@ import DASHI.Physics.YangMills.BalabanSourceResidualConsumerNonDescent369Exact a
 -- * consumer-relative symmetry relevance is already theorem-bearing as search
 --   architecture: a symmetry preserving a sufficient observer is invisible to
 --   that consumer;
--- * RH G2e has an exact sufficient determinant observer, so any proposed C3
---   action must earn relevance by acting nontrivially/usefully on q itself;
+-- * RH G2e has an exact sufficient determinant observer, and a finite exact
+--   fixture now proves that rotating only the target channel with fixed nuisance
+--   rows need not preserve the determinant. Thus q-invariance cannot be assumed;
 -- * NS and YM exhibit genuine consumer non-descent through coarse observers.
 ------------------------------------------------------------------------
 
@@ -129,6 +131,9 @@ record ClayMonster369Boundary : Set where
     determinantPreservingSymmetryIsConsumerInvisibleForRHFixedKernel : Bool
     determinantPreservingSymmetryIsConsumerInvisibleForRHFixedKernelIsTrue :
       determinantPreservingSymmetryIsConsumerInvisibleForRHFixedKernel ≡ true
+    targetOnlyC3RotationAutomaticallyPreservesFixedNuisanceDeterminant : Bool
+    targetOnlyC3RotationAutomaticallyPreservesFixedNuisanceDeterminantIsFalse :
+      targetOnlyC3RotationAutomaticallyPreservesFixedNuisanceDeterminant ≡ false
     residualConsumerNonDescentGenuinelyReusableForYM : Bool
     residualConsumerNonDescentGenuinelyReusableForYMIsTrue :
       residualConsumerNonDescentGenuinelyReusableForYM ≡ true
@@ -147,6 +152,7 @@ canonicalClayMonster369Boundary =
     true refl
     true refl
     true refl
+    false refl
     true refl
     false refl
     true refl
