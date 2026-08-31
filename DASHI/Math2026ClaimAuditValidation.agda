@@ -7,6 +7,7 @@ open import DASHI.Analysis.DeBruijnNewmanRiemannG2RiemannSiegelBridgeExact
 open import DASHI.Analysis.RiemannG2ExplicitFormulaBridgeAuditExact
 open import DASHI.Analysis.RiemannG2LiteralSpectralZeroWeldExact
 open import DASHI.Analysis.RiemannG2BidiCutReconciliationExact
+open import DASHI.Analysis.RiemannG2C3MonsterEquivarianceAuditExact
 open import DASHI.Mathematics.NumberTheory.PrimeGap2026ClaimAuditExact
 open import DASHI.Mathematics.NumberTheory.PrimeGap2026SourceAcquisitionExact
 open import DASHI.Mathematics.NumberTheory.DiophantineTupleDPrimeSquare2026ClaimAuditExact
@@ -15,5 +16,9 @@ open import DASHI.Core.ExternalAutoformalizationProvenanceExact
 open import DASHI.Core.SourceExactFrontierBidiCrossPollination2026
 open import DASHI.Core.FrontierRelationStrengthBidiExact
 open import DASHI.Core.FiniteCertificateConsumerBridgeExact
+open import DASHI.Core.ThreeChannelC3EquivarianceGateExact
+open import DASHI.Core.ClayMonster369CrossPollination2026Exact
 open import DASHI.Physics.YangMills.BalabanActiveSourceDiscriminator2026Exact
+open import DASHI.Physics.YangMills.BalabanC3MonsterEquivarianceAuditExact
 open import DASHI.Physics.Closure.NSCriticalConeAristotleRouteHypergraph2026Exact
+open import DASHI.Physics.Closure.NSCriticalConeResidualFibre369CrossPollinationExact
