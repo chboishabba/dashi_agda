@@ -80,6 +80,13 @@ import DASHI.Moonshine.Monster3BKernelCharacterCriterionExact
 import DASHI.Moonshine.Monster3BActualKernelCharacterPromotionExact
 import DASHI.Moonshine.Monster3BModelStoneVonNeumannRecognitionExact
 import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact
+
+-- Once ActualZetaSectorRecognition is supplied, Base369 recognition is no
+-- longer an independent representation theorem: compose the actual-sector
+-- round trip with the exact appraisal-fibre <-> X6 chart and transport both
+-- translation and modulation observers automatically.
+import DASHI.Moonshine.Base369Monster3BActualSectorRecognitionBidiExact
+
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact
 
 import DASHI.Base369Ternary27StratifiedFibreHolonomyValidation
