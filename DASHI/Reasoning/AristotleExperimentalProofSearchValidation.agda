@@ -6,3 +6,4 @@ import DASHI.Reasoning.AristotleExperimentalBranchMergeExact
 import DASHI.Analysis.RiemannAristotlePoleQuotientLeanReturn8889Exact
 import DASHI.Analysis.RiemannAristotleExperimentalProofSearchExact
 import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerExact
+import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerRegression
