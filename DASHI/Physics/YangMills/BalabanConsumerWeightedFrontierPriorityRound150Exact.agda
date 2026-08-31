@@ -3,12 +3,9 @@ module DASHI.Physics.YangMills.BalabanConsumerWeightedFrontierPriorityRound150Ex
 
 ------------------------------------------------------------------------
 -- ROUND150: CONSUMER-WEIGHTED FRONTIER PRIORITY, NOT LEMMA COUNT
---
--- This is a search-planning heuristic over the exact BIDI dependency graph.  It
--- is not a mathematical importance theorem about Bałaban's sources.  The score
--- counts declared downstream consumers which a source identity directly feeds.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
@@ -18,7 +15,6 @@ import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as Least
 import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Exact as R146
 import DASHI.Physics.YangMills.BalabanFrontierExperimentDesignRound148Exact as R148
 
--- Consumers are theorem/programme surfaces, not paper sections.
 data FrontierConsumer : Set where
   a1PresentCutConsumer
   a2PresentCutConsumer
@@ -54,9 +50,6 @@ listLength (_ ∷ xs) = suc (listLength xs)
 alphaScore : R146.BalabanFrontierLeaf → Nat
 alphaScore leaf = listLength (leafConsumers leaf)
 
--- The two semantic realization leaves are currently tied for the largest
--- declared fan-out in this planning model.  These equations are definitional
--- audit facts about the mapping above, not source theorems.
 densityStateAlphaIsFour :
   alphaScore R146.densityToCombinedRGState ≡ suc (suc (suc (suc zero)))
 densityStateAlphaIsFour = refl
@@ -69,8 +62,6 @@ componentD1AlphaIsThree :
   alphaScore R146.componentLocalizedD1ToPhysicalD1 ≡ suc (suc (suc zero))
 componentD1AlphaIsThree = refl
 
--- A priority receipt still requires least-privilege route admission.  Fan-out
--- cannot authorize a carrier mismatch or silent hypothesis strengthening.
 record ConsumerWeightedPriority : Set₁ where
   field
     leaf : R146.BalabanFrontierLeaf
@@ -85,21 +76,19 @@ open ConsumerWeightedPriority public
 priorityLiveSearch : ConsumerWeightedPriority → Least.LiveProofSearch
 priorityLiveSearch receipt = Least.elaborateRoute (admission receipt)
 
--- Search policy boundary: alpha score is dependency fan-out only.  It neither
--- proves the leaf nor says the cheapest experiment is scientifically best.
 record ConsumerWeightedPriorityBoundary : Set where
   constructor consumerWeightedPriorityBoundary
   field
-    highestFanoutAutomaticallyProvesLeaf : Agda.Builtin.Bool.Bool
+    highestFanoutAutomaticallyProvesLeaf : Bool
     highestFanoutAutomaticallyProvesLeafIsFalse :
-      highestFanoutAutomaticallyProvesLeaf ≡ Agda.Builtin.Bool.false
-    mostExperimentsAutomaticallyMeansMostProgress : Agda.Builtin.Bool.Bool
+      highestFanoutAutomaticallyProvesLeaf ≡ false
+    mostExperimentsAutomaticallyMeansMostProgress : Bool
     mostExperimentsAutomaticallyMeansMostProgressIsFalse :
-      mostExperimentsAutomaticallyMeansMostProgress ≡ Agda.Builtin.Bool.false
+      mostExperimentsAutomaticallyMeansMostProgress ≡ false
 
 canonicalConsumerWeightedPriorityBoundary : ConsumerWeightedPriorityBoundary
 canonicalConsumerWeightedPriorityBoundary =
-  consumerWeightedPriorityBoundary Agda.Builtin.Bool.false refl Agda.Builtin.Bool.false refl
+  consumerWeightedPriorityBoundary false refl false refl
 
 balabanConsumerWeightedFrontierPriorityLevel : ProofLevel
 balabanConsumerWeightedFrontierPriorityLevel = machineChecked
