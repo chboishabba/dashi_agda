@@ -9,6 +9,9 @@ on:
       - 'DASHI/Physics/YangMills/BalabanFrontierFeedbackSearchRound149Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanConsumerWeightedFrontierPriorityRound150Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanRound108DirectUnifiedActionRound151Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanBC1PhysicalCompositeD1ReductionRound152Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanSequentialDiagnosticPlannerRound153Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanInternalCompilerSourceRealizationFrontierRound154Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanProofExperimentFrontierRound150Validation.agda'
       - 'scripts/check_ym_proof_experiment_frontier.sh'
       - '.github/workflows/ym-proof-experiment-frontier.yml'
@@ -29,7 +32,7 @@ jobs:
           submodules: false
       - uses: cachix/install-nix-action@v27
       - uses: DeterminateSystems/magic-nix-cache-action@v9
-      - name: Check YM proof experiment frontier through Round151
+      - name: Check YM proof experiment frontier through Round154
         env:
           AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
           DASHI_REPO_ROOT: ${{ github.workspace }}
