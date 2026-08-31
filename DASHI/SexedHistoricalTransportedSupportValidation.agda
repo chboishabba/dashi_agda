@@ -160,8 +160,9 @@ cornerEscalationNeedRegression = Fidelity.cornerConsumerRequestsCorner
 
 counterfactualPathAppendAssociativeRegression :
   (p q r : Counterfactual.AdmittedPath) →
-  (p Counterfactual.++p q) Counterfactual.++p r
-  ≡ p Counterfactual.++p (q Counterfactual.++p r)
+  Counterfactual._++p_
+    (Counterfactual._++p_ p q) r
+  ≡ Counterfactual._++p_ p (Counterfactual._++p_ q r)
 counterfactualPathAppendAssociativeRegression =
   Counterfactual.pathAppendAssociative
 
