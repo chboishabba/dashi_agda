@@ -3,14 +3,6 @@ module DASHI.Physics.YangMills.BalabanSequentialDiagnosticPlannerRound153Exact w
 
 ------------------------------------------------------------------------
 -- ROUND153: ADAPTIVE DIAGNOSTICS REFINE THE SOURCE-REALIZATION FIBRE
---
--- Cross-pollinates the relational sequential experiment planner.  Candidate
--- source realizations can admit several diagnostic outcomes at finite cutoff /
--- volume / precision, so deterministic sensor semantics would be too strong.
---
--- Closing a sequential consumer means the requested SEARCH classification is
--- constant on the remaining candidate fibre.  It does not prove the physical
--- source equality and does not mark an Aristotle frontier leaf proved.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -23,9 +15,6 @@ import DASHI.Core.SequentialRelationalExperimentPlannerExact as Sequential
 import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Exact as R146
 import DASHI.Physics.YangMills.BalabanFrontierExperimentDesignRound148Exact as R148
 
--- A source-diagnostic experiment is an experiment-design coordinate plus an
--- application-supplied probe reference/cost.  The coordinate role itself remains
--- owned by Round148.
 record BalabanDiagnosticExperiment : Set where
   constructor balabanDiagnosticExperiment
   field
@@ -53,8 +42,6 @@ record BalabanSequentialDiagnosticProgramme : Set₂ where
 
     plan : Sequential.CertifiedSequentialRelationalPlan system consumer live
 
-    -- Every experiment selected by the programme must diagnose one of the exact
-    -- Round146 leaves; no untyped free-floating measurements enter this planner.
     experimentTargetsFrontierLeaf :
       BalabanDiagnosticExperiment → R146.BalabanFrontierLeaf
     experimentTargetIsCoordinateTarget : ∀ experiment →
@@ -74,21 +61,14 @@ canonicalDiagnosticSystem :
     CandidateRealization BalabanDiagnosticExperiment Observation
 canonicalDiagnosticSystem predicts observationReference =
   Sequential.relationalExperimentSystem
-    predicts
-    cost
-    probeReference
-    observationReference
+    predicts cost probeReference observationReference
 
 record Round108DirectRouteDiagnosticProgramme : Set₂ where
   field
     programme : BalabanSequentialDiagnosticProgramme
-
-    -- The main experiment coordinate is the current highest-alpha single source
-    -- leaf.  Adaptive continuations may additionally inspect nuisance/systematic
-    -- coordinates, but the declared consumer is about this direct route.
     directRound108Probe : BalabanDiagnosticExperiment
     directRound108ProbeTargetsMatch :
-      R148.coordinate directRound108Probe ≡ R148.round108PotentialMatchResidual
+      coordinate directRound108Probe ≡ R148.round108PotentialMatchResidual
 
 open Round108DirectRouteDiagnosticProgramme public
 
