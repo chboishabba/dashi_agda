@@ -2,25 +2,13 @@ module DASHI.Physics.Closure.NSTriadKNLiteralGramDebtR290PairEnumerationRound390
 
 ------------------------------------------------------------------------
 -- ROUND390 / SAME-OBJECT R378-DEBT PAIR ENUMERATION INTO R290
---
--- R386 turns the literal R378 output debt into R180.gramDebt of the actual
--- double-mixed cells.  R383 expands that debt into the finite unordered pair
--- sum.  R389 supplies the corresponding R290 pair for every double-mixed cell
--- pair whose physical decay rate is positive.
---
--- This module makes those indices identical: for an arbitrary finite list of
--- physical incidences it recursively builds exactly one R290 object for each
--- unordered list-position pair and proves that R385.sumGram of that list is
--- the literal R180 Gram debt of the double-mixed cells.
---
--- Positivity is an explicit constructor premise only; no Gram sign or estimate
--- is used.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; []; _∷_; map)
 open import Data.Rational using (Positive)
+open import Data.Rational.Base using (_+_)
 open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -50,6 +38,10 @@ module Enumerate
 
   module P = R389.DoubleMixedPair physicalSystem S
 
+  append : ∀ {A : Set} → List A → List A → List A
+  append [] ys = ys
+  append (x ∷ xs) ys = x ∷ append xs ys
+
   headR290Pairs :
     Physical.PhysicalTriadIncidence →
     List Physical.PhysicalTriadIncidence →
@@ -63,11 +55,7 @@ module Enumerate
     List Physical.PhysicalTriadIncidence → List R290.DampedGramPair
   allR290Pairs [] = []
   allR290Pairs (alpha ∷ rest) =
-    headR290Pairs alpha rest ++ allR290Pairs rest
-    where
-    _++_ : ∀ {A : Set} → List A → List A → List A
-    [] ++ ys = ys
-    (x ∷ xs) ++ ys = x ∷ (xs ++ ys)
+    append (headR290Pairs alpha rest) (allR290Pairs rest)
 
   doubleMixedCells :
     List Physical.PhysicalTriadIncidence → List (C3.Complex3 F)
@@ -77,10 +65,6 @@ module Enumerate
     (left right : List R290.DampedGramPair) →
     R385.sumGram (append left right)
     ≡ R385.sumGram left + R385.sumGram right
-    where
-    append : ∀ {A : Set} → List A → List A → List A
-    append [] ys = ys
-    append (x ∷ xs) ys = x ∷ append xs ys
   sumGramAppend [] right = refl
   sumGramAppend (pair ∷ rest) right
     rewrite sumGramAppend rest right = refl
