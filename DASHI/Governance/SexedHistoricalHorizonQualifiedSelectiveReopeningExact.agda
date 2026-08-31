@@ -2,14 +2,6 @@ module DASHI.Governance.SexedHistoricalHorizonQualifiedSelectiveReopeningExact w
 
 ------------------------------------------------------------------------
 -- HORIZON-QUALIFIED SELECTIVE REOPENING
---
--- If two live histories first diverge only at horizon k, certificates scoped
--- strictly below k remain retained.  Certificates whose declared forecast
--- horizon reaches k reopen through an explicit dependency graph.
---
--- First forecast divergence is an observation-depth fact, not a historical
--- change point.  Retention below k is scoped to this finite fixture and does
--- not imply permanent closure under arbitrary future evidence.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -77,42 +69,58 @@ mediumDoesNotReachLongDivergence :
 mediumDoesNotReachLongDivergence (reaches-divergence-horizon ())
 
 ------------------------------------------------------------------------
--- 3. Dependency graph: first divergence affects only horizon-qualified lanes.
+-- 3. Homogeneous artifact carrier for canonical dependency closure.
 ------------------------------------------------------------------------
 
-data Depends : Set where
+data HorizonArtifact : Set where
+  divergenceArtifact : ForecastDivergenceEvent → HorizonArtifact
+  certificateArtifact : ForecastCertificate → HorizonArtifact
+
+data Depends : HorizonArtifact → HorizonArtifact → Set where
   divergenceToLongForecast :
-    Depends firstLongDivergence longForecastCertificate
+    Depends
+      (divergenceArtifact firstLongDivergence)
+      (certificateArtifact longForecastCertificate)
   longForecastToPlanning :
-    Depends longForecastCertificate longPlanningCertificate
+    Depends
+      (certificateArtifact longForecastCertificate)
+      (certificateArtifact longPlanningCertificate)
   planningToCollectiveFuture :
-    Depends longPlanningCertificate longCollectiveFutureCertificate
+    Depends
+      (certificateArtifact longPlanningCertificate)
+      (certificateArtifact longCollectiveFutureCertificate)
 
 ------------------------------------------------------------------------
--- 4. Canonical reopening obligations at/above the first divergence horizon.
+-- 4. Canonical reopening obligations at/above first divergence horizon.
 ------------------------------------------------------------------------
 
 longForecastMustReopen :
   Dependency.ReopeningObligation
-    Depends firstLongDivergence longForecastCertificate
+    Depends
+    (divergenceArtifact firstLongDivergence)
+    (certificateArtifact longForecastCertificate)
 longForecastMustReopen =
-  Dependency.directReopening divergenceToLongForecast
+  Dependency.oneEdgeCreatesReopeningObligation divergenceToLongForecast
 
 longPlanningMustReopen :
   Dependency.ReopeningObligation
-    Depends firstLongDivergence longPlanningCertificate
+    Depends
+    (divergenceArtifact firstLongDivergence)
+    (certificateArtifact longPlanningCertificate)
 longPlanningMustReopen =
   Dependency.obligationsCompose
-    (Dependency.directReopening divergenceToLongForecast)
-    (Dependency.directReopening longForecastToPlanning)
+    (Dependency.oneEdgeCreatesReopeningObligation divergenceToLongForecast)
+    (Dependency.oneEdgeCreatesReopeningObligation longForecastToPlanning)
 
 longCollectiveFutureMustReopen :
   Dependency.ReopeningObligation
-    Depends firstLongDivergence longCollectiveFutureCertificate
+    Depends
+    (divergenceArtifact firstLongDivergence)
+    (certificateArtifact longCollectiveFutureCertificate)
 longCollectiveFutureMustReopen =
   Dependency.obligationsCompose
     longPlanningMustReopen
-    (Dependency.directReopening planningToCollectiveFuture)
+    (Dependency.oneEdgeCreatesReopeningObligation planningToCollectiveFuture)
 
 ------------------------------------------------------------------------
 -- 5. Explicit retention below the first-divergence horizon.
