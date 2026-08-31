@@ -4,9 +4,10 @@ module DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact where
 -- FINITE STONE-VON NEUMANN FRONTIER FOR THE MONSTER 3B HEISENBERG FACTOR
 --
 -- Structural prerequisites are theorem-bearing: finite group laws and global
--- commutator nondegeneracy are closed.  The live irreducibility leaf is now
--- recursively decomposed into the concrete Q(zeta_3)[X6] function model,
--- modulation-derived Fourier projectors, delta-line extraction and spanning.
+-- commutator nondegeneracy are closed.  The concrete Q(zeta_3)[X6] function
+-- model and modulation-derived point projectors now also extract a literal
+-- delta line from every supplied nonzero invariant-vector witness.  The live
+-- irreducibility dependency is therefore translated-delta orbit spanning.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -27,6 +28,7 @@ import DASHI.Moonshine.Monster3BFiniteSchrodingerPointProjectorEvaluationExact a
 import DASHI.Moonshine.Monster3BFiniteSchrodingerProjector729Exact as Projector729
 import DASHI.Moonshine.Monster3BCyclotomicNonzeroInverseExact as CyclotomicInverse
 import DASHI.Moonshine.Monster3BFiniteX6ConstructiveComparisonExact as X6Comparison
+import DASHI.Moonshine.Monster3BFiniteSchrodingerDeltaExtractionExact as DeltaExtraction
 
 centreOrder : Nat
 centreOrder = Elementary.centreOrder
@@ -83,10 +85,6 @@ constructiveGlobalNondegeneracyAvailableIsTrue :
   constructiveGlobalNondegeneracyAvailable ≡ true
 constructiveGlobalNondegeneracyAvailableIsTrue = refl
 
-------------------------------------------------------------------------
--- Concrete irreducibility infrastructure now owned.
-------------------------------------------------------------------------
-
 functionModuleConstructed : Bool
 functionModuleConstructed =
   FunctionModule.exactFunctionCarrierConstructed
@@ -122,6 +120,11 @@ constructiveX6ComparisonConstructed =
   X6Comparison.x6ComparisonReturnsEqualityOrDifferenceCoordinate
     X6Comparison.canonicalX6ComparisonBoundary
 
+deltaLineExtractionConstructed : Bool
+deltaLineExtractionConstructed =
+  DeltaExtraction.invariantSubspaceContainsSelectedDeltaLine
+    DeltaExtraction.canonicalDeltaExtractionBoundary
+
 functionModuleConstructedIsTrue : functionModuleConstructed ≡ true
 functionModuleConstructedIsTrue = refl
 
@@ -146,9 +149,8 @@ constructiveX6ComparisonConstructedIsTrue :
   constructiveX6ComparisonConstructed ≡ true
 constructiveX6ComparisonConstructedIsTrue = refl
 
-------------------------------------------------------------------------
--- Stone-von Neumann receipts.
-------------------------------------------------------------------------
+deltaLineExtractionConstructedIsTrue : deltaLineExtractionConstructed ≡ true
+deltaLineExtractionConstructedIsTrue = refl
 
 record FiniteStoneVonNeumannReceipt : Set where
   constructor finiteStoneVonNeumannReceipt
@@ -192,11 +194,7 @@ canonicalStoneVonNeumannFrontierBoundary : StoneVonNeumannFrontierBoundary
 canonicalStoneVonNeumannFrontierBoundary =
   stoneVonNeumannFrontierBoundary
     true true true true true true
-    false false false false false
-
-------------------------------------------------------------------------
--- Recursive proof-search state.
-------------------------------------------------------------------------
+    true false false false false
 
 data StoneVonNeumannProofLeaf : Set where
   constructCentralExtensionCarrier : StoneVonNeumannProofLeaf
@@ -222,21 +220,13 @@ leafState constructSchrodingerFunctionModule = closed
 leafState deriveModulationPointProjectors = closed
 leafState proveProjector729AndOffPointSemantics = closed
 leafState constructNonzeroCyclotomicInverse = closed
-leafState extractDeltaLineFromNonzeroInvariantSubspace = open
+leafState extractDeltaLineFromNonzeroInvariantSubspace = closed
 leafState proveTranslatedDeltaOrbitSpansCarrier = open
 leafState proveSchrodingerIrreducible = blocked
 leafState proveFixedCentralCharacterUniqueness = blocked
 leafState identifyCertifiedMonster729Constituent = blocked
 
 data Requires : StoneVonNeumannProofLeaf → StoneVonNeumannProofLeaf → Set where
-  deltaExtractionNeedsModule :
-    Requires extractDeltaLineFromNonzeroInvariantSubspace constructSchrodingerFunctionModule
-  deltaExtractionNeedsProjector :
-    Requires extractDeltaLineFromNonzeroInvariantSubspace deriveModulationPointProjectors
-  deltaExtractionNeedsEvaluation :
-    Requires extractDeltaLineFromNonzeroInvariantSubspace proveProjector729AndOffPointSemantics
-  deltaExtractionNeedsInverse :
-    Requires extractDeltaLineFromNonzeroInvariantSubspace constructNonzeroCyclotomicInverse
   spanningNeedsModule :
     Requires proveTranslatedDeltaOrbitSpansCarrier constructSchrodingerFunctionModule
   irreducibleNeedsDeltaExtraction :
@@ -249,7 +239,7 @@ data Requires : StoneVonNeumannProofLeaf → StoneVonNeumannProofLeaf → Set wh
     Requires identifyCertifiedMonster729Constituent proveFixedCentralCharacterUniqueness
 
 highestImpactStructuralLeaf : StoneVonNeumannProofLeaf
-highestImpactStructuralLeaf = extractDeltaLineFromNonzeroInvariantSubspace
+highestImpactStructuralLeaf = proveTranslatedDeltaOrbitSpansCarrier
 
 highestImpactStructuralLeafIsOpen :
   leafState highestImpactStructuralLeaf ≡ open
