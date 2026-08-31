@@ -6,20 +6,11 @@ open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Analysis.RiemannAristotlePoleQuotientCurrentCutExact as Cut
+import DASHI.Analysis.RiemannAristotlePoleQuotientLeanReturn8889Exact as Return
 import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Choice
 
 ------------------------------------------------------------------------
 -- RH POLE-QUOTIENT CUT AS EXPERIMENT-DESIGNED PROOF SEARCH
---
--- The current high-ordinate cut has exactly three analytic producer sockets:
---
---   H_off^pole      signed off-ordinate reflection/cosine evaluation
---   H_Gamma         deterministic Gamma residual payment
---   M_cluster^pole  quantitative target-cluster lower margin
---
--- This module turns those sockets into explicit research moves.  It does not
--- assign mathematical difficulty or success probability.  A cost-aware policy
--- is available only after an application supplies a declared cost surface.
 ------------------------------------------------------------------------
 
 data RHResearchSocket : Set where
@@ -32,18 +23,23 @@ data RHResearchMove : Set where
   auditExternalAnalyticDonor
   : RHResearchMove
 
+data ResearchOutcome : Set where
+  openOutcome
+  theoremOwned
+  boundOwnedButConsumerOpen
+  refutedRoute
+  : ResearchOutcome
+
 MovePays : RHResearchMove → RHResearchSocket → Set
 MovePays attackOffOrdinateCancellation offOrdinateSocket = ⊤
 MovePays payGammaResidual gammaSocket = ⊤
 MovePays instantiateClusterMargin clusterMarginSocket = ⊤
 MovePays _ _ = ⊥
 
-------------------------------------------------------------------------
--- External-donor audit is a search move, not a payment.  In particular, merely
--- finding a theorem labelled Hardy / Hardy-Ramanujan / Hardy-Littlewood does
--- not discharge any RH socket until a literal carrier/interface bridge is
--- proved.
-------------------------------------------------------------------------
+currentOutcome : RHResearchSocket → ResearchOutcome
+currentOutcome offOrdinateSocket = openOutcome
+currentOutcome gammaSocket = boundOwnedButConsumerOpen
+currentOutcome clusterMarginSocket = theoremOwned
 
 record AnalyticDonorAudit : Set where
   constructor analytic-donor-audit
@@ -55,10 +51,6 @@ record AnalyticDonorAudit : Set where
     bridgeReference : String
 
 open AnalyticDonorAudit public
-
-------------------------------------------------------------------------
--- Costed search policy.  Costs are supplied, not inferred.
-------------------------------------------------------------------------
 
 record RHResearchCostSurface : Set₁ where
   constructor rh-research-cost-surface
@@ -96,22 +88,30 @@ record CheapestDeclaredSocketMove
 open CheapestDeclaredSocketMove public
 
 ------------------------------------------------------------------------
--- Exact sync to the current cut.
+-- Exact cross-prover feedback.
 ------------------------------------------------------------------------
 
-poleOffSocketStillOpen :
-  Cut.poleQuotientSignedOffOrdinateBoundClosed
-    Cut.canonicalPoleQuotientCurrentCut ≡ false
-poleOffSocketStillOpen = refl
+clusterMarginExperimentSucceededInLean :
+  Return.quantitativeClusterMarginOwned Return.canonicalPoleQuotientLeanReturn8889
+  ≡ true
+clusterMarginExperimentSucceededInLean = refl
 
-gammaSocketStillOpen :
-  Cut.gammaResidualBudgetClosed Cut.canonicalPoleQuotientCurrentCut ≡ false
-gammaSocketStillOpen = refl
+gammaExperimentProducedBoundButDidNotCloseConsumer :
+  Return.gammaUniformBoundOwned Return.canonicalPoleQuotientLeanReturn8889 ≡ true
+  ×
+  Return.gammaBoundClosesRequiredAccuracyWindow
+    Return.canonicalPoleQuotientLeanReturn8889 ≡ false
+gammaExperimentProducedBoundButDidNotCloseConsumer = refl , refl
 
-clusterMarginSocketStillOpen :
-  Cut.quantitativePoleQuotientClusterMarginClosed
-    Cut.canonicalPoleQuotientCurrentCut ≡ false
-clusterMarginSocketStillOpen = refl
+offOrdinateExperimentStillOpen :
+  Return.offOrdinateEvaluationOwned Return.canonicalPoleQuotientLeanReturn8889
+  ≡ false
+offOrdinateExperimentStillOpen = refl
+
+budgetCircularityRouteRefutedInLean :
+  Return.budgetCircularityNoGoOwned Return.canonicalPoleQuotientLeanReturn8889
+  ≡ true
+budgetCircularityRouteRefutedInLean = refl
 
 genericContradictionAlgebraAlreadyClosed :
   Cut.genericContradictionAlgebraRemaining
@@ -125,9 +125,16 @@ genericContradictionAlgebraAlreadyClosed = refl
 record RiemannExperimentalProofSearchBoundary : Set where
   constructor riemann-experimental-proof-search-boundary
   field
-    threeLivePoleQuotientSocketsExposed : Bool
-    threeLivePoleQuotientSocketsExposedIsTrue :
-      threeLivePoleQuotientSocketsExposed ≡ true
+    clusterMarginSearchShouldRemainQueuedAsOpen : Bool
+    clusterMarginSearchShouldRemainQueuedAsOpenIsFalse :
+      clusterMarginSearchShouldRemainQueuedAsOpen ≡ false
+
+    gammaSearchFullyClosed : Bool
+    gammaSearchFullyClosedIsFalse : gammaSearchFullyClosed ≡ false
+
+    offOrdinateSearchRemainsPrimaryOpenAnalyticLeaf : Bool
+    offOrdinateSearchRemainsPrimaryOpenAnalyticLeafIsTrue :
+      offOrdinateSearchRemainsPrimaryOpenAnalyticLeaf ≡ true
 
     deterministicGammaAutomaticallyCheapest : Bool
     deterministicGammaAutomaticallyCheapestIsFalse :
@@ -141,10 +148,6 @@ record RiemannExperimentalProofSearchBoundary : Set where
     donorAuditRequiresLiteralCarrierBridgeIsTrue :
       donorAuditRequiresLiteralCarrierBridge ≡ true
 
-    genericContradictionAlgebraNeedsMoreSearch : Bool
-    genericContradictionAlgebraNeedsMoreSearchIsFalse :
-      genericContradictionAlgebraNeedsMoreSearch ≡ false
-
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
 
@@ -152,9 +155,10 @@ canonicalRiemannExperimentalProofSearchBoundary :
   RiemannExperimentalProofSearchBoundary
 canonicalRiemannExperimentalProofSearchBoundary =
   riemann-experimental-proof-search-boundary
-    true refl
     false refl
     false refl
     true refl
     false refl
+    false refl
+    true refl
     false refl
