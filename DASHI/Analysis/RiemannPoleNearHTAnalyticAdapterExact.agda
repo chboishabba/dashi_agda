@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 import DASHI.Analysis.WeilTestSpace as Weil
+import DASHI.Analysis.RiemannExplicitFormula as Explicit
 import DASHI.Analysis.RiemannFormulaAnalyticCompatibility as Compat
 import DASHI.Analysis.RiemannAnalyticModulationExtensionExact as Mod
 import DASHI.Analysis.RiemannAristotlePoleNearTranslationModulationIntertwinerExact as HT
@@ -13,14 +14,16 @@ import DASHI.Analysis.RiemannAristotlePoleNearTranslationModulationIntertwinerEx
 record PoleNearHTAnalyticAdapter
     (analytic : Analytic.AnalyticSubstrate)
     (space : Weil.WeilTestSpace)
-    (compat : Compat.RiemannFormulaAnalyticCompatibility analytic space)
-    (modulation : Mod.RiemannAnalyticModulationExtension analytic space compat) : Set₁ where
+    (formula : Explicit.RiemannExplicitFormula space)
+    (compat : Compat.RiemannFormulaAnalyticCompatibility analytic space formula)
+    (modulation : Mod.RiemannAnalyticModulationExtension analytic space formula compat) : Set₁ where
   constructor pole-near-ht-analytic-adapter
   field
     H_T : HT.TargetTranslationModulationIntertwiner
 
     usesCanonicalAnalyticCarrier : Set
     usesCanonicalWeilTestCarrier : Set
+    usesSameConcreteExplicitFormula : Set
     targetTranslationIsLiteralGap : Set
     targetCharacterIsExpMinusTargetFrequency : Set
     unshiftedCharacterIsExpZeroFrequency : Set
@@ -41,6 +44,9 @@ record PoleNearHTAnalyticAdapterBoundary : Set where
 
     modulationExtensionNeededFirst : Bool
     modulationExtensionNeededFirstIsTrue : modulationExtensionNeededFirst ≡ true
+
+    concreteExplicitFormulaMustMatch : Bool
+    concreteExplicitFormulaMustMatchIsTrue : concreteExplicitFormulaMustMatch ≡ true
 
     literalGapAndCharacterLawsRequired : Bool
     literalGapAndCharacterLawsRequiredIsTrue : literalGapAndCharacterLawsRequired ≡ true
@@ -66,7 +72,8 @@ canonicalPoleNearHTAnalyticAdapterBoundary =
     true refl
     true refl
     true refl
+    true refl
     false refl
     false refl
     false refl
-    "On the canonical Riemann analytic and Weil carriers, add the missing target modulation operation and prove its character law, then identify the reflection-even response with the exact pole-quotient cosine normalization."
+    "On the canonical Riemann analytic and Weil carriers and the same concrete explicit-formula object, add the missing target modulation operation and prove its character law, then identify the reflection-even response with the exact pole-quotient cosine normalization."
