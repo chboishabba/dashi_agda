@@ -14,6 +14,9 @@ import DASHI.Governance.DrugCategoryConsumerIndexedTranslationAdmissionExact as 
 import DASHI.Governance.DrugCategoryConsumerRelativeQuotientInverseExact as QuotientInverse
 import DASHI.Governance.DrugCategoryConsumerRelativeInverseCompositionExact as InverseComposition
 import DASHI.Governance.DrugCategoryQuotientInverseFailureBackpropExact as InverseFailure
+import DASHI.Governance.DrugCategoryExplicitConsumerQuotientExact as ExplicitQuotient
+import DASHI.Governance.DrugCategoryClinicalQuotientRelativeFibreExact as RelativeFibre
+import DASHI.Governance.DrugCategoryConsumerQuotientRefinementExact as QuotientRefinement
 import DASHI.Governance.DrugCategoryPhilosophyOperatorAtlasExact as Philosophy
 import DASHI.Governance.DrugCategoryPhilosophySelectiveReopeningExact as PhilosophyReopen
 
@@ -49,6 +52,15 @@ inverseCompositionBoundary = InverseComposition.canonicalConsumerRelativeInverse
 
 inverseFailureBoundary : InverseFailure.QuotientInverseFailureBackpropBoundary
 inverseFailureBoundary = InverseFailure.canonicalQuotientInverseFailureBackpropBoundary
+
+explicitConsumerQuotientBoundary : ExplicitQuotient.DrugCategoryExplicitConsumerQuotientBoundary
+explicitConsumerQuotientBoundary = ExplicitQuotient.canonicalDrugCategoryExplicitConsumerQuotientBoundary
+
+relativeFibreBoundary : RelativeFibre.DrugCategoryClinicalQuotientRelativeFibreBoundary
+relativeFibreBoundary = RelativeFibre.canonicalDrugCategoryClinicalQuotientRelativeFibreBoundary
+
+quotientRefinementBoundary : QuotientRefinement.DrugCategoryConsumerQuotientRefinementBoundary
+quotientRefinementBoundary = QuotientRefinement.canonicalDrugCategoryConsumerQuotientRefinementBoundary
 
 philosophyBoundary : Philosophy.DrugCategoryPhilosophyOperatorBoundary
 philosophyBoundary = Philosophy.canonicalDrugCategoryPhilosophyOperatorBoundary
@@ -93,3 +105,23 @@ clinicalQuotientInverseComposesAcrossPathSegments = InverseComposition.composedC
 historyInverseFailureCreatesReconstructionDemand :
   TranslationReopen.ReconstructionDemand Translation.historyResidual
 historyInverseFailureCreatesReconstructionDemand = InverseFailure.historyFailureBackpropagates
+
+clinicalObserverDescendsButSubjectObserverDoesNot :
+  ExplicitQuotient.DescendsThrough
+    ExplicitQuotient.clinicalObserver ExplicitQuotient.clinicalObserver
+clinicalObserverDescendsButSubjectObserverDoesNot =
+  ExplicitQuotient.clinicalDescendsThroughClinical
+
+clinicalPlusRelativeFineExactlyReopensState :
+  (state : ExplicitQuotient.TranslationState) →
+  RelativeFibre.reopenClinicalRelative
+    (ExplicitQuotient.clinicalObserver state)
+    (RelativeFibre.relativeSemantic state)
+  ≡ state
+clinicalPlusRelativeFineExactlyReopensState =
+  RelativeFibre.clinicalPlusRelativeReconstructsState
+
+subjectNonDescentSelectsSubjectRefinement :
+  QuotientRefinement.RefinementCoordinate
+subjectNonDescentSelectsSubjectRefinement =
+  QuotientRefinement.canonicalSubjectRefinement
