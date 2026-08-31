@@ -11,6 +11,7 @@ import DASHI.Governance.DrugPolicyPsychedelicSemanticEpistemicEverything
 -- Pin several high-value theorem surfaces so accidental API drift is visible at
 -- the focused root rather than hidden behind an import-only aggregate.
 
+import DASHI.Core.AffectedDependencyClosureExact as Affected
 import DASHI.Governance.ContestedDrugCategoryAtlasBidiExact as Atlas
 import DASHI.Governance.DrugCategoryMultiChartTranslationGeometryExact as Translation
 import DASHI.Governance.DrugCategoryTranslationSelectiveReopeningExact as TranslationReopen
@@ -43,7 +44,7 @@ philosophyReopeningBoundary : PhilosophyReopen.PhilosophySeededReopeningBoundary
 philosophyReopeningBoundary = PhilosophyReopen.canonicalPhilosophySeededReopeningBoundary
 
 stateClinicalRevisionStillReopensClinicalSafety :
-  EdgeIndexed.Affected.ReopeningObligation
+  Affected.ReopeningObligation
     EdgeIndexed.Depends
     (EdgeIndexed.edgeArtifact EdgeIndexed.stateToClinicalEdge)
     (EdgeIndexed.consumerArtifact EdgeIndexed.clinicalSafetyConsequence)
