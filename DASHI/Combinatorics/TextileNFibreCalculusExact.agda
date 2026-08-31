@@ -1,6 +1,7 @@
 module DASHI.Combinatorics.TextileNFibreCalculusExact where
 
 open import DASHI.Core.Prelude
+open import Data.List using (map; _++_)
 
 ------------------------------------------------------------------------
 -- Shared textile event kernel.
@@ -122,11 +123,7 @@ threeRightHistory =
   braidedFibreHistory threeFibreYangBaxterRight rightHanded 3
 
 ------------------------------------------------------------------------
--- A generic n-fibre braid/plait recipe.
---
--- Rather than hard-code one aesthetic pattern, the recipe records a valid
--- sequence of adjacent generators.  Any n is accepted; invalid generators
--- cannot be constructed because every sigma carries its bound proof.
+-- Generic n-fibre braid/plait plans.
 ------------------------------------------------------------------------
 
 record NFibreBraidPlan (n : Nat) : Set where
@@ -148,6 +145,37 @@ open NFibrePlaitPlan public
 
 braidToPlait : {n : Nat} → NFibreBraidPlan n → NFibrePlaitPlan n
 braidToPlait p = nFibrePlaitPlan p true
+
+------------------------------------------------------------------------
+-- Canonical full adjacent sweep for arbitrary fibre count n >= 2.
+--
+-- Parameter k denotes n = k + 2.  The word contains every adjacent generator
+-- sigma_0, sigma_1, ..., sigma_k exactly once, in order.  Thus k=1 gives a
+-- 3-fibre sweep [sigma_0,sigma_1], k=13 gives a 15-fibre sweep through all
+-- fourteen adjacent pairs.  Repeating or reversing/orienting these sweeps
+-- produces ordinary braid/plait pattern families without changing the kernel.
+------------------------------------------------------------------------
+
+liftCrossing :
+  {n : Nat} →
+  AdjacentCrossing n →
+  AdjacentCrossing (suc n)
+liftCrossing (sigma i o p) = sigma i o (≤-step p)
+
+allAdjacentCrossings : (k : Nat) → BraidWord (k + 2)
+allAdjacentCrossings zero =
+  sigma 0 overCrossing ≤-refl ∷ []
+allAdjacentCrossings (suc k) =
+  map liftCrossing (allAdjacentCrossings k)
+  ++
+  (sigma (suc k) overCrossing ≤-refl ∷ [])
+
+canonicalSweepPlan : (k : Nat) → NFibreBraidPlan (k + 2)
+canonicalSweepPlan k =
+  nFibreBraidPlan (allAdjacentCrossings k) 1 rightHanded
+
+canonicalSweepPlait : (k : Nat) → NFibrePlaitPlan (k + 2)
+canonicalSweepPlait k = braidToPlait (canonicalSweepPlan k)
 
 ------------------------------------------------------------------------
 -- Weaving: two indexed families rather than one freely permuted family.
@@ -261,97 +289,66 @@ certifiedCount fibres13 = 13
 certifiedCount fibres14 = 14
 certifiedCount fibres15 = 15
 
-requestedMinimumMaximum : Nat
-requestedMinimumMaximum = 15
+nMinFibreTarget : Nat
+nMinFibreTarget = 15
 
-fifteenIsCertified : certifiedCount fibres15 ≡ requestedMinimumMaximum
-fifteenIsCertified = refl
+fifteenMeetsNMinTarget : certifiedCount fibres15 ≡ nMinFibreTarget
+fifteenMeetsNMinTarget = refl
 
 ------------------------------------------------------------------------
--- Canonical n-fibre "first crossing" witnesses for every certified count.
--- This establishes an actual valid braid generator on each n=3..15 carrier.
+-- Concrete full-sweep braid plans for n = 3,4,...,15.
 ------------------------------------------------------------------------
-
-zeroCrossingBound : (n : Nat) → 2 ≤ n → AdjacentCrossing n
-zeroCrossingBound n p = sigma 0 overCrossing p
-
-threeAtLeastTwo : 2 ≤ 3
-threeAtLeastTwo = s≤s (s≤s z≤n)
-
-fourAtLeastTwo : 2 ≤ 4
-fourAtLeastTwo = s≤s (s≤s z≤n)
-
-fiveAtLeastTwo : 2 ≤ 5
-fiveAtLeastTwo = s≤s (s≤s z≤n)
-
-sixAtLeastTwo : 2 ≤ 6
-sixAtLeastTwo = s≤s (s≤s z≤n)
-
-sevenAtLeastTwo : 2 ≤ 7
-sevenAtLeastTwo = s≤s (s≤s z≤n)
-
-eightAtLeastTwo : 2 ≤ 8
-eightAtLeastTwo = s≤s (s≤s z≤n)
-
-nineAtLeastTwo : 2 ≤ 9
-nineAtLeastTwo = s≤s (s≤s z≤n)
-
-tenAtLeastTwo : 2 ≤ 10
-tenAtLeastTwo = s≤s (s≤s z≤n)
-
-elevenAtLeastTwo : 2 ≤ 11
-elevenAtLeastTwo = s≤s (s≤s z≤n)
-
-twelveAtLeastTwo : 2 ≤ 12
-twelveAtLeastTwo = s≤s (s≤s z≤n)
-
-thirteenAtLeastTwo : 2 ≤ 13
-thirteenAtLeastTwo = s≤s (s≤s z≤n)
-
-fourteenAtLeastTwo : 2 ≤ 14
-fourteenAtLeastTwo = s≤s (s≤s z≤n)
-
-fifteenAtLeastTwo : 2 ≤ 15
-fifteenAtLeastTwo = s≤s (s≤s z≤n)
 
 braid3 : NFibreBraidPlan 3
-braid3 = nFibreBraidPlan (zeroCrossingBound 3 threeAtLeastTwo ∷ []) 1 rightHanded
+braid3 = canonicalSweepPlan 1
 
 braid4 : NFibreBraidPlan 4
-braid4 = nFibreBraidPlan (zeroCrossingBound 4 fourAtLeastTwo ∷ []) 1 rightHanded
+braid4 = canonicalSweepPlan 2
 
 braid5 : NFibreBraidPlan 5
-braid5 = nFibreBraidPlan (zeroCrossingBound 5 fiveAtLeastTwo ∷ []) 1 rightHanded
+braid5 = canonicalSweepPlan 3
 
 braid6 : NFibreBraidPlan 6
-braid6 = nFibreBraidPlan (zeroCrossingBound 6 sixAtLeastTwo ∷ []) 1 rightHanded
+braid6 = canonicalSweepPlan 4
 
 braid7 : NFibreBraidPlan 7
-braid7 = nFibreBraidPlan (zeroCrossingBound 7 sevenAtLeastTwo ∷ []) 1 rightHanded
+braid7 = canonicalSweepPlan 5
 
 braid8 : NFibreBraidPlan 8
-braid8 = nFibreBraidPlan (zeroCrossingBound 8 eightAtLeastTwo ∷ []) 1 rightHanded
+braid8 = canonicalSweepPlan 6
 
 braid9 : NFibreBraidPlan 9
-braid9 = nFibreBraidPlan (zeroCrossingBound 9 nineAtLeastTwo ∷ []) 1 rightHanded
+braid9 = canonicalSweepPlan 7
 
 braid10 : NFibreBraidPlan 10
-braid10 = nFibreBraidPlan (zeroCrossingBound 10 tenAtLeastTwo ∷ []) 1 rightHanded
+braid10 = canonicalSweepPlan 8
 
 braid11 : NFibreBraidPlan 11
-braid11 = nFibreBraidPlan (zeroCrossingBound 11 elevenAtLeastTwo ∷ []) 1 rightHanded
+braid11 = canonicalSweepPlan 9
 
 braid12 : NFibreBraidPlan 12
-braid12 = nFibreBraidPlan (zeroCrossingBound 12 twelveAtLeastTwo ∷ []) 1 rightHanded
+braid12 = canonicalSweepPlan 10
 
 braid13 : NFibreBraidPlan 13
-braid13 = nFibreBraidPlan (zeroCrossingBound 13 thirteenAtLeastTwo ∷ []) 1 rightHanded
+braid13 = canonicalSweepPlan 11
 
 braid14 : NFibreBraidPlan 14
-braid14 = nFibreBraidPlan (zeroCrossingBound 14 fourteenAtLeastTwo ∷ []) 1 rightHanded
+braid14 = canonicalSweepPlan 12
 
 braid15 : NFibreBraidPlan 15
-braid15 = nFibreBraidPlan (zeroCrossingBound 15 fifteenAtLeastTwo ∷ []) 1 rightHanded
+braid15 = canonicalSweepPlan 13
+
+braid3IsFullAdjacentSweep : braidSteps braid3 ≡ allAdjacentCrossings 1
+braid3IsFullAdjacentSweep = refl
+
+braid15IsFullAdjacentSweep : braidSteps braid15 ≡ allAdjacentCrossings 13
+braid15IsFullAdjacentSweep = refl
+
+plait3 : NFibrePlaitPlan 3
+plait3 = braidToPlait braid3
+
+plait15 : NFibrePlaitPlan 15
+plait15 = braidToPlait braid15
 
 ------------------------------------------------------------------------
 -- Non-collapse boundary.
