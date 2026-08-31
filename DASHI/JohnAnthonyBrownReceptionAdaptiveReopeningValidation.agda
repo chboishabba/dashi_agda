@@ -2,7 +2,9 @@ module DASHI.JohnAnthonyBrownReceptionAdaptiveReopeningValidation where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.AffectedDependencyClosureExact as Dependency
 import DASHI.Foundations.Base369Ternary27AdmissibilityPathDynamicsExact as BasePath
+import DASHI.Foundations.Base369Ternary27StabiliserOperatorHolonomyExact as Operator
 import DASHI.Governance.ReceptionEvidenceSelectiveReopeningExact as Reception
 import DASHI.Culture.JohnAnthonyBrownReceptionEvidenceReopeningBridgeExact as Brown
 import DASHI.Culture.JohnAnthonyBrownPaperSectionHypothesisManifestExact as Manifest
@@ -12,21 +14,21 @@ import DASHI.Culture.JohnAnthonyBrownPaperSectionHypothesisManifestExact as Mani
 ------------------------------------------------------------------------
 
 swapReallyUnavailableBefore :
-  BasePath.Operator.OperatorAdmitted
+  Operator.OperatorAdmitted
     (BasePath.b0 BasePath.canonicalAdmissionPath)
-    BasePath.Operator.swapXYOperator → ⊥
+    Operator.swapXYOperator → ⊥
 swapReallyUnavailableBefore = BasePath.swapUnavailableAtPath0
 
 swapReallyAvailableAfterFirstStep :
-  BasePath.Operator.OperatorAdmitted
+  Operator.OperatorAdmitted
     (BasePath.b1 BasePath.canonicalAdmissionPath)
-    BasePath.Operator.swapXYOperator
+    Operator.swapXYOperator
 swapReallyAvailableAfterFirstStep = BasePath.swapAvailableAtPath1
 
 rotationReallyAvailableAtFinalStep :
-  BasePath.Operator.OperatorAdmitted
+  Operator.OperatorAdmitted
     (BasePath.b2 BasePath.canonicalAdmissionPath)
-    BasePath.Operator.rotateXYZOperator
+    Operator.rotateXYZOperator
 rotationReallyAvailableAtFinalStep = BasePath.rotateAvailableAtPath2
 
 ------------------------------------------------------------------------
@@ -34,14 +36,14 @@ rotationReallyAvailableAtFinalStep = BasePath.rotateAvailableAtPath2
 ------------------------------------------------------------------------
 
 edgeReclassificationReopensMeaning :
-  Reception.Dependency.ReopeningObligation
+  Dependency.ReopeningObligation
     Reception.ReceptionDepends
     Reception.edgeClassificationArtifact
     Reception.semanticTransportArtifact
 edgeReclassificationReopensMeaning = Reception.edgeChangeReopensSemantic
 
 sourceChangeReopensPolicy :
-  Reception.Dependency.ReopeningObligation
+  Dependency.ReopeningObligation
     Reception.ReceptionDepends
     Reception.sourceReceiptArtifact
     Reception.downstreamPolicyArtifact
@@ -61,7 +63,7 @@ h5Pinned : Manifest.key Manifest.h5Manifest ≡ Manifest.H5
 h5Pinned = Brown.h5StillH5
 
 betrayalMeasureReopensH3OnlyThroughDeclaredDependency :
-  Brown.Dependency.ReopeningObligation
+  Dependency.ReopeningObligation
     Brown.BrownDepends
     Brown.institutionalBetrayalMeasurementEvidence
     Brown.h3IncrementalBetrayalClaim
@@ -69,7 +71,7 @@ betrayalMeasureReopensH3OnlyThroughDeclaredDependency =
   Brown.betrayalMeasureChangeReopensH3
 
 receptionHistoryReopensH2Interpretation :
-  Brown.Dependency.ReopeningObligation
+  Dependency.ReopeningObligation
     Brown.BrownDepends
     Brown.conceptualReceptionEdge
     Brown.h2OutcomeVectorClaim
