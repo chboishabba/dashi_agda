@@ -17,6 +17,8 @@ import DASHI.Governance.DrugCategoryQuotientInverseFailureBackpropExact as Inver
 import DASHI.Governance.DrugCategoryExplicitConsumerQuotientExact as ExplicitQuotient
 import DASHI.Governance.DrugCategoryClinicalQuotientRelativeFibreExact as RelativeFibre
 import DASHI.Governance.DrugCategoryConsumerQuotientRefinementExact as QuotientRefinement
+import DASHI.Governance.DrugCategoryCostedQuotientDiscriminatorExact as CostedDiscriminator
+import DASHI.Governance.DrugCategoryAdaptiveQuotientExperimentLoopExact as AdaptiveLoop
 import DASHI.Governance.DrugCategoryPhilosophyOperatorAtlasExact as Philosophy
 import DASHI.Governance.DrugCategoryPhilosophySelectiveReopeningExact as PhilosophyReopen
 
@@ -61,6 +63,12 @@ relativeFibreBoundary = RelativeFibre.canonicalDrugCategoryClinicalQuotientRelat
 
 quotientRefinementBoundary : QuotientRefinement.DrugCategoryConsumerQuotientRefinementBoundary
 quotientRefinementBoundary = QuotientRefinement.canonicalDrugCategoryConsumerQuotientRefinementBoundary
+
+costedDiscriminatorBoundary : CostedDiscriminator.DrugCategoryCostedQuotientDiscriminatorBoundary
+costedDiscriminatorBoundary = CostedDiscriminator.canonicalDrugCategoryCostedQuotientDiscriminatorBoundary
+
+adaptiveLoopBoundary : AdaptiveLoop.DrugCategoryAdaptiveQuotientExperimentBoundary
+adaptiveLoopBoundary = AdaptiveLoop.canonicalDrugCategoryAdaptiveQuotientExperimentBoundary
 
 philosophyBoundary : Philosophy.DrugCategoryPhilosophyOperatorBoundary
 philosophyBoundary = Philosophy.canonicalDrugCategoryPhilosophyOperatorBoundary
@@ -125,3 +133,17 @@ subjectNonDescentSelectsSubjectRefinement :
   QuotientRefinement.RefinementCoordinate
 subjectNonDescentSelectsSubjectRefinement =
   QuotientRefinement.canonicalSubjectRefinement
+
+subjectProbeIsDeclaredCheapestResolvingMove :
+  DASHI.Core.ActionabilityCostedExperimentChoiceExact.CheapestResolvingMove
+    CostedDiscriminator.subjectProblem
+    CostedDiscriminator.DeclaredProbeMove
+subjectProbeIsDeclaredCheapestResolvingMove =
+  CostedDiscriminator.subjectCheapestResolving
+
+subjectSelectedProbeClosesSubjectConsumer :
+  DASHI.Core.SequentialConsumerExperimentPlannerExact.SequentialConsumerPlan
+    AdaptiveLoop.subjectConsumer
+    (AdaptiveLoop.allCompatible tt)
+subjectSelectedProbeClosesSubjectConsumer =
+  AdaptiveLoop.subjectOneShotPlan
