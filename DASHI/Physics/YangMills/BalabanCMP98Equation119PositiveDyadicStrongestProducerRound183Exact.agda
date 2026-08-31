@@ -18,17 +18,19 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119PositiveDyadicStrongestPro
 -- pointwise physical weld is the actual group-valued relative object.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as Lie
 import DASHI.Physics.YangMills.BalabanCMP98MultiscaleAveragingDerivativeRound126Exact as R126
+import DASHI.Physics.YangMills.BalabanCMP98Equation119RelativeContourYRound155Exact as R155
+import DASHI.Physics.YangMills.BalabanCMP98Equation119CanonicalCoarseSegmentRound158Exact as R158
 import DASHI.Physics.YangMills.BalabanCMP98Equation119FederbushCalculusReuseRound177Exact as R177
 import DASHI.Physics.YangMills.BalabanCMP98Equation119FederbushSelectedCutProducerRound178Exact as R178
 import DASHI.Physics.YangMills.BalabanCMP98Equation119DyadicPrintedYWeldRound180Exact as R180
 import DASHI.Physics.YangMills.BalabanCMP98Equation119DyadicPhysicalStrongestProducerRound181Exact as R181
 import DASHI.Physics.YangMills.BalabanCMP98Equation119PositiveCoarseBondSourceRound182Exact as R182
-import DASHI.Physics.YangMills.BalabanCMP98Equation119RelativeContourYRound155Exact as R155
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredOddBlockCarrierExact as Centered
 import DASHI.Physics.YangMills.BalabanClayGate4SU2PrincipalLogBallExact as Log
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicPrintedPhysicalInstantiationExact as Dyadic
@@ -59,7 +61,7 @@ record PositiveDyadicRelativeWeld
           (R182.coarseBond source step)
           (fineSiteAtPoint step point))
       ≡ R155.relativeContourElement
-          (R182.R158.asRound152Source
+          (R158.asRound152Source
             (R182.asCanonicalL13Equation119Source source))
           step point
 
@@ -123,8 +125,5 @@ cmp98Equation119PositiveDyadicStrongestProducerRound183Level = machineChecked
 cmp98Equation119SamePositiveCoarseBondRound183Level : ProofLevel
 cmp98Equation119SamePositiveCoarseBondRound183Level = machineChecked
 
--- Axis, orientation, and the CMP98->CMP109 coarse-bond index mapping are now
--- construction.  Remaining high-alpha seam: identify the existing dyadic
--- transported-relative group element with the literal closed path holonomy.
 literalCMP98DyadicRelativeGroupWeldRound183Level : ProofLevel
 literalCMP98DyadicRelativeGroupWeldRound183Level = conditional
