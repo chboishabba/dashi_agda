@@ -25,12 +25,14 @@ module DASHI.Physics.Closure.NSTriadKNNestedProjectedForcingSlotExpansionRound30
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.List.Base using (List; []; _∷_)
+open import Data.List.Base using (List; []; _∷_; map)
 open import Relation.Binary.PropositionalEquality using (cong₂; trans)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Algebra
 import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
+import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact as Cross
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNWaleffeAmplitudeDampedNetworkTangentRound94Exact as R94
 import DASHI.Physics.Closure.NSTriadKNAntiParallelHelicitySlotKernelRound145Exact as R145
@@ -66,23 +68,17 @@ slotKernelAdditiveFirstAmplitude P Q a b v =
   trans
     (cong₂ C3.complex3Subtract
       (trans
-        (cong₂ (λ x y → DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross x y)
-          (R94.crossAddRight P a b) refl)
+        (cong₂ Cross.complex3Cross (R94.crossAddRight P a b) refl)
         (R94.crossAddLeft
-          (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross P a)
-          (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross P b)
+          (Cross.complex3Cross P a)
+          (Cross.complex3Cross P b)
           v))
-      (R94.crossAddLeft a b
-        (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross Q v)))
+      (R94.crossAddLeft a b (Cross.complex3Cross Q v)))
     (complex3SubtractAdditive
-      (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross
-        (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross P a) v)
-      (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross
-        (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross P b) v)
-      (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross a
-        (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross Q v))
-      (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross b
-        (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross Q v)))
+      (Cross.complex3Cross (Cross.complex3Cross P a) v)
+      (Cross.complex3Cross (Cross.complex3Cross P b) v)
+      (Cross.complex3Cross a (Cross.complex3Cross Q v))
+      (Cross.complex3Cross b (Cross.complex3Cross Q v)))
 
 slotKernelFoldFirstAmplitude :
   ∀ {r} {F : C3.RealField r}
@@ -103,7 +99,7 @@ projectedNonlinearitySlotKernelExpands :
     {I : C3.ModeInverseSquare F E}
     (system : Audit.FiniteComplex3GalerkinSystem F E I)
     (P Q v : C3.Complex3 F)
-    (p : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode) →
+    (p : Z3.FourierMode) →
   R145.slotKernel P Q (Audit.projectedNonlinearity system p) v
   ≡
   Audit.sumVectors
