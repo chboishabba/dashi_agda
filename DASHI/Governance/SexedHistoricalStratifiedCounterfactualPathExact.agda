@@ -34,30 +34,30 @@ data AdmittedMove : HistoricalMove → Set where
 
 data AdmittedPath : Set where
   emptyPath : AdmittedPath
-  _▹_ : (m : HistoricalMove) → AdmittedMove m → AdmittedPath → AdmittedPath
+  stepPath : (m : HistoricalMove) → AdmittedMove m → AdmittedPath → AdmittedPath
 
 _++p_ : AdmittedPath → AdmittedPath → AdmittedPath
 emptyPath ++p q = q
-(m ▹ receipt ▹tail) ++p q = m ▹ receipt ▹ (▹tail ++p q)
+stepPath m receipt tail ++p q = stepPath m receipt (tail ++p q)
 
 pathAppendAssociative :
   (p q r : AdmittedPath) →
   (p ++p q) ++p r ≡ p ++p (q ++p r)
 pathAppendAssociative emptyPath q r = refl
-pathAppendAssociative (m ▹ receipt ▹tail) q r =
-  cong (λ x → m ▹ receipt ▹ x) (pathAppendAssociative ▹tail q r)
+pathAppendAssociative (stepPath m receipt tail) q r =
+  cong (stepPath m receipt) (pathAppendAssociative tail q r)
 
 repairThenCounterformation : AdmittedPath
 repairThenCounterformation =
-  localRepairMove ▹ localRepairAdmitted ▹
-  networkCounterformationMove ▹ networkCounterformationAdmitted ▹
-  emptyPath
+  stepPath localRepairMove localRepairAdmitted
+    (stepPath networkCounterformationMove networkCounterformationAdmitted
+      emptyPath)
 
 counterformationThenRepair : AdmittedPath
 counterformationThenRepair =
-  networkCounterformationMove ▹ networkCounterformationAdmitted ▹
-  localRepairMove ▹ localRepairAdmitted ▹
-  emptyPath
+  stepPath networkCounterformationMove networkCounterformationAdmitted
+    (stepPath localRepairMove localRepairAdmitted
+      emptyPath)
 
 ------------------------------------------------------------------------
 -- 2. Coarse endpoint / stratum / fidelity observations collapse the paths.
@@ -102,10 +102,12 @@ data PathPattern : Set where
 
 patternOfPath : AdmittedPath → PathPattern
 patternOfPath
-  (localRepairMove ▹ _ ▹ networkCounterformationMove ▹ _ ▹ emptyPath) =
+  (stepPath localRepairMove _
+    (stepPath networkCounterformationMove _ emptyPath)) =
     repairPrecedesCounterformation
 patternOfPath
-  (networkCounterformationMove ▹ _ ▹ localRepairMove ▹ _ ▹ emptyPath) =
+  (stepPath networkCounterformationMove _
+    (stepPath localRepairMove _ emptyPath)) =
     counterformationPrecedesRepair
 patternOfPath _ = otherPattern
 
@@ -116,8 +118,14 @@ data NextHistoricalChoice : Set where
   : NextHistoricalChoice
 
 chooseNext : AdmittedPath → NextHistoricalChoice
-chooseNext repairThenCounterformation = reopenInstitutionalCompatibilityFirst
-chooseNext counterformationThenRepair = reopenDistributedCounterformationFirst
+chooseNext
+  (stepPath localRepairMove _
+    (stepPath networkCounterformationMove _ emptyPath)) =
+      reopenInstitutionalCompatibilityFirst
+chooseNext
+  (stepPath networkCounterformationMove _
+    (stepPath localRepairMove _ emptyPath)) =
+      reopenDistributedCounterformationFirst
 chooseNext _ = continueGenericSearch
 
 canonicalChoicesDiffer :
