@@ -1,0 +1,6 @@
+module DASHI.ItalPersistenceIndigenousIntersectionalValidation where
+
+import DASHI.Culture.RastafariItalReturnPersistenceExact
+import DASHI.Culture.RastafariItalIndigenousIntersectionalBoundaryExact
+import DASHI.Culture.RastafariItalIndigenousKnowledgeDirectReuseExact
+import DASHI.Culture.RastafariItalGovernedLineageCrossPollinationExact
