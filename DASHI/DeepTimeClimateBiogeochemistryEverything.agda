@@ -19,6 +19,7 @@ import DASHI.Chemistry.SaltPetroleumIndustrialChemistryNetworkExact
 import DASHI.Chemistry.RefineryFeedstockSaltConstraintBidiExact
 import DASHI.Chemistry.OceanCarbonateSaltTemperatureStressBidiExact
 import DASHI.Chemistry.DeepTimeCarbonReservoirFluxBalanceExact
+import DASHI.Chemistry.DeepTimeCarbonPathResidualBidiExact
 
 import DASHI.Analysis.StoichiometricConservation
 import DASHI.Analysis.OpenSystemBalance
