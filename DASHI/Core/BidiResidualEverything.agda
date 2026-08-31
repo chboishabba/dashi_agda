@@ -5,4 +5,6 @@ module DASHI.Core.BidiResidualEverything where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.BidiResidualApproximationExact public
+open import DASHI.Core.CostedResidualInformationChoiceExact public
 open import DASHI.Core.BidiResidualLineageCrossPollinationExact public
+open import DASHI.Core.BidiResidualSourceRecoveryCrossPollinationExact public
