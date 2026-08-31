@@ -25,6 +25,7 @@ open import DASHI.Analysis.RiemannG2ScalarDonorToPostBalanceBidiExact
 open import DASHI.Analysis.RiemannG2NarrowWindowNoCancellationReturnExact
 open import DASHI.Analysis.RiemannG2CutoffGrowthBidiExact
 open import DASHI.Analysis.RiemannG2ScalarDonorRegimeReconciliationExact
+open import DASHI.Analysis.RiemannG2QuarterPeriodScalingPropagationExact
 open import DASHI.Mathematics.NumberTheory.PrimeGap2026ClaimAuditExact
 open import DASHI.Mathematics.NumberTheory.PrimeGap2026SourceAcquisitionExact
 open import DASHI.Mathematics.NumberTheory.DiophantineTupleDPrimeSquare2026ClaimAuditExact
