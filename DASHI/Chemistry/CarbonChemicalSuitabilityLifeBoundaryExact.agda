@@ -5,6 +5,8 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Physics.Foundations.AtomicValenceFermionBridgeExact as Atomic
+
 ------------------------------------------------------------------------
 -- CARBON CHEMICAL SUITABILITY / LIFE BOUNDARY
 --
@@ -13,6 +15,11 @@ open import Agda.Builtin.String using (String)
 -- covalent chemistry make it a strong candidate carrier for complex aqueous
 -- chemistry; that does not by itself prove carbon is uniquely necessary, that
 -- life follows from carbon chemistry, or that life is cosmically inevitable.
+--
+-- Existing DASHI atomic theory already supplies the key anti-collapse:
+-- valence class alone does not predict all chemistry.  This owner therefore
+-- treats periodic/valence structure as an upstream constraint, not a complete
+-- carbon-chemistry theorem.
 --
 -- External calibration (not proof authority):
 --  * The Astrobiology Primer v2.0 (2016), PMCID PMC5008114: carbon supports a
@@ -50,6 +57,13 @@ record CarbonSuitabilityReceipt : Set where
     observationProvenanceReference : String
     validationReference : String
 
+atomicValenceBoundary : Atomic.AtomicValenceFermionBoundary
+atomicValenceBoundary = Atomic.canonicalAtomicValenceFermionBoundary
+
+valenceClassAloneDoesNotPredictAllChemistry :
+  Atomic.valenceClassAlonePredictsAllChemistry atomicValenceBoundary ≡ false
+valenceClassAloneDoesNotPredictAllChemistry = refl
+
 record CarbonChemicalSuitabilityBoundary : Set where
   constructor carbon-chemical-suitability-boundary
   field
@@ -63,6 +77,9 @@ record CarbonChemicalSuitabilityBoundary : Set where
     periodicTableStructureAloneFixesExactCarbonAbundance : Bool
     periodicTableStructureAloneFixesExactCarbonAbundanceIsFalse :
       periodicTableStructureAloneFixesExactCarbonAbundance ≡ false
+    valenceClassAloneFixesCarbonChemistry : Bool
+    valenceClassAloneFixesCarbonChemistryIsFalse :
+      valenceClassAloneFixesCarbonChemistry ≡ false
     stellarCarbonProductionEqualsChemicalSuitability : Bool
     stellarCarbonProductionEqualsChemicalSuitabilityIsFalse :
       stellarCarbonProductionEqualsChemicalSuitability ≡ false
@@ -82,6 +99,7 @@ canonicalCarbonChemicalSuitabilityBoundary =
     false refl
     false refl
     false refl
+    false refl
     true refl
     false refl
-    "Carbon's chemical suitability is a chemistry claim about reachable molecular structure under an environment. It is kept separate from stellar production abundance, abiogenesis, uniqueness among every possible substrate, consciousness, and any claim that life is inevitable."
+    "Carbon's chemical suitability is downstream of atomic/valence constraints but is not fixed by valence class alone. It remains separate from stellar production abundance, abiogenesis, uniqueness among every possible substrate, consciousness, and any claim that life is inevitable."
