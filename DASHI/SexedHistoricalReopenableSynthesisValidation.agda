@@ -9,6 +9,7 @@ import DASHI.Governance.SexedHistoricalProductiveDialecticalFibreJoinExact as Jo
 import DASHI.Governance.SexedHistoricalDialecticalJoinAdaptiveSearchExact as Search
 import DASHI.Governance.SexedHistoricalReopenableSynthesisEndOfHistoryBoundaryExact as Reopen
 import DASHI.Governance.SexedHistoricalSelectiveReopeningExact as Selective
+import DASHI.Governance.SexedHistoricalBracketedMultiverseTSFVBridgeExact as Bracketed
 
 productiveJoinNextHistoryRegression :
   INF.FactorsThrough Reopen.joinPresentSurface Reopen.nextContinuation → ⊥
@@ -52,10 +53,50 @@ reopenedSearchMeasurementRegression :
 reopenedSearchMeasurementRegression =
   Selective.reopenedJoinSearchSelectsAffordanceProbe
 
+bracketingChangesEffectiveRepairRegression :
+  Bracketed.leftBracketedRepair ≡ Bracketed.rightBracketedRepair → ⊥
+bracketingChangesEffectiveRepairRegression =
+  Bracketed.bracketingChangesEffectiveRepair
+
+sameResidualInventoryOutcomeRegression :
+  INF.FactorsThrough
+    Bracketed.residualInventory Bracketed.bracketedOutcome → ⊥
+sameResidualInventoryOutcomeRegression =
+  Bracketed.sameInventoryCannotRecoverBracketedOutcome
+
+samePresentDescendantFutureRegression :
+  INF.FactorsThrough
+    Bracketed.coarsePresent Bracketed.branchFutureCone → ⊥
+samePresentDescendantFutureRegression =
+  Bracketed.samePresentCannotRecoverDescendantFuture
+
+branchFutureProbeRegression :
+  Bracketed.measureBranch
+    (Bracketed.nextBranchMeasurement
+      Bracketed.recoverFutureCone Suspension.suspendAndRefine)
+    Bracketed.reciprocalExpansionBranch
+  ≡ Bracketed.measureBranch
+    (Bracketed.nextBranchMeasurement
+      Bracketed.recoverFutureCone Suspension.suspendAndRefine)
+    Bracketed.counterformationBranch → ⊥
+branchFutureProbeRegression =
+  Bracketed.selectedFutureProbeSeparatesCanonicalBranches
+
+canonicalTwoBoundaryCorridorRegression :
+  Bracketed.TwoBoundaryDescendantFibre
+    Bracketed.inheritedProductiveJoinHistory
+    Bracketed.preserveReciprocity
+canonicalTwoBoundaryCorridorRegression = Bracketed.canonicalReciprocalCorridor
+
 selectiveReopeningBoundaryRegression :
   Selective.SelectiveHistoricalReopeningBoundary
 selectiveReopeningBoundaryRegression =
   Selective.canonicalSelectiveHistoricalReopeningBoundary
+
+bracketedMultiverseTSFVBoundaryRegression :
+  Bracketed.BracketedMultiverseTSFVBoundary
+bracketedMultiverseTSFVBoundaryRegression =
+  Bracketed.canonicalBracketedMultiverseTSFVBoundary
 
 canonicalSourceBoundaryRegression :
   Reopen.ReopenableSynthesisEndOfHistoryBoundary
