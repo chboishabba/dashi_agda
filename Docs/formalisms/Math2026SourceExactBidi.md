@@ -78,6 +78,8 @@ checked Lean proof provenance != transported Agda proof terms
 
 and keeps the target-centred local-zero harmonic-analysis estimate open. It also records a genuine no-go: strict off-energy-below-cluster cannot be the final consumer under unchanged projective balance, so a balance-breaking premise or changed comparison object is required.
 
+The DBN/Polymath audit found a genuine shared analytic domain but no direct Theorem 1.2 or 1.3 bridge to the present G2 consumer. The repository's own explicit-formula and finite-tail owners are closer to the literal target and now carry explicit same-object weld obligations.
+
 ### Navier--Stokes
 
 The Round285 owner demonstrates BIDI route rejection: the bounded almost-periodic persistent-bad route has been ruled out for the declared badness predicate, while the direct signed critical-cone covariance theorem remains the highest-alpha physical leaf. A failed route is retained as a theorem-level no-go rather than weakened into a new assumption.
@@ -86,9 +88,62 @@ The Round285 owner demonstrates BIDI route rejection: the bounded almost-periodi
 
 The merged Round132--144 / Round140 architecture demonstrates same-object discipline: a compiler can be machine checked while literal physical source inhabitation remains conditional. Generated action, density, coupling history and stress insertion require explicit equality/realization maps; matching names do not make parallel objects identical.
 
+## Base369 / Monster cross-pollination: residual versus sufficiency
+
+The recent Base369/Monster work contributes two distinct reusable patterns, and the tranche now keeps them separate.
+
+First, literal `C3` / Fourier transport is gated by an actual order-three action and equivariance on the target carrier. Three channels alone do not create a `C3` representation. The current RH three-taper and Balaban source surfaces therefore remain analogy-only on the literal `C3` axis until a same-object cyclic action is recovered.
+
+Second, the residual/fibre lesson is now consumer-indexed rather than one-way. The correct rule is:
+
+```text
+consumer fails to descend through coarse observer
+    -> retain/refine the residual
+
+consumer exactly factors through a coarser observer
+    -> fine residual is consumer-invisible at that stage.
+```
+
+This gives three different Clay instantiations.
+
+### RH: determinant coordinates are sufficient after compression
+
+`RiemannAristotleG2eDeterminantTaperKernelExact` already reduces a fixed-nuisance three-taper point vector `h(u)` to
+
+```text
+q(u) = det3(n1,n2,h(u))
+```
+
+and every reflection-paired zero then enters through the common scalar kernel multiplying `q(u)`. `RiemannG2DeterminantConsumerQuotient369Exact` proves that equality of this determinant scalar is sufficient for the fixed pointwise kernel consumer.
+
+The stronger `RiemannG2PostSchurDeterminantSufficiency369Exact` consumes the G2c polarization theorem
+
+```text
+<E x,E y>
+  = det(n1,n2,x) det(n1,n2,y) / wedgeSq(n1,n2)
+```
+
+and proves that the pair of determinant coordinates is an exact sufficient observer for the post-Schur Gram cross-term consumer.
+
+Therefore a raw three-channel `C3`/Fourier decomposition is no longer highest-alpha merely because three taper coordinates exist. A cyclic action becomes theorem-relevant only if it controls or decomposes `q(u)` itself, the determinant pair, or a later consumer that does not already factor through these coordinates. This is a proved search-pruning result, not an RH proof; the signed local-zero bound remains open.
+
+### NS: shell geometry does not recover signed coherence
+
+`NSCriticalConeResidualFibre369CrossPollinationExact` gives a finite information-geometry witness in which two states share the same coarse critical-shell observation but have different signed residual codes. The canonical residual-observer machinery therefore yields strict observer refinement and blocks descent of the signed residual through the shell observer.
+
+The fixture is not asserted to be a Navier--Stokes solution and does not prove the physical critical-cone covariance. Its exact consequence is that a physical producer cannot expect coarse shell localization alone to reconstruct an independent phase/helicity/coherence coordinate.
+
+### YM: coarse source labels do not determine literal-recovery readiness
+
+`BalabanSourceResidualConsumerNonDescent369Exact` applies the canonical consumer non-descent machinery directly to the active Balaban source-recovery fixture. `labelsOnly` and `literalRecoveryReady` expose the same coarse source label but different recovery decisions, so the coarse source surface is neither consumer-sufficient nor capable of factoring the recovery decision.
+
+Thus the residual/non-descent part of the 369 architecture is already genuine proof-search reuse in YM, even though the literal `C3`/Monster representation-theoretic route remains source-gated.
+
+The capstone `Clay369ResidualSufficiencyDichotomyExact` packages the bidirectional rule: preserve fine residual structure exactly where a declared consumer does not descend, and compress aggressively where an exact sufficient observer has been proved.
+
 ## Shared rule
 
-Across all five settings the reusable DASHI invariant is:
+Across all settings the reusable DASHI invariant is:
 
 ```text
 announcement / matching prose / output number
@@ -102,7 +157,16 @@ downstream compiler closure
 
 proved no-go for one route
     -> redirect the search
-    != relabel the failed premise.
+    != relabel the failed premise
+
+hidden residual exists
+    != hidden residual is relevant to every consumer
+
+consumer non-descent
+    -> retain/refine the residual
+
+exact consumer sufficiency
+    -> quotient consumer-invisible fine structure.
 ```
 
 Prime-gap source reconstruction remains intentionally gated: the current repo has the claim/provenance surface, but no exact new manuscript plus Alexeev Lean artifact has yet been recovered into this tranche, so no theorem statement is invented.
