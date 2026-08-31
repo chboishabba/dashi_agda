@@ -50,9 +50,10 @@ import DASHI.Moonshine.Monster3BFiniteHeisenbergNondegeneracyExact
 
 -- Concrete Schrodinger irreducibility route: exact Q(zeta_3)-valued function
 -- module, character-derived coordinate/point projectors, exact 729 scale,
--- constructive X6 comparison, nonzero cyclotomic inversion, and literal delta
--- extraction from a nonzero invariant-vector witness.  Full irreducibility
--- still waits on translated-delta orbit / finite-basis spanning.
+-- constructive X6 comparison, nonzero cyclotomic inversion, literal delta
+-- extraction, and now arbitrary F3^6 translation words generated from the six
+-- unit actions.  Full irreducibility still waits on the pointwise delta-transport
+-- calculation and finite delta spanning.
 import DASHI.Moonshine.Monster3BCyclotomicLinearAlgebraExact
 import DASHI.Moonshine.Monster3BCyclotomicNonzeroInverseExact
 import DASHI.Moonshine.Monster3BFiniteSchrodingerFunctionModuleExact
@@ -62,6 +63,7 @@ import DASHI.Moonshine.Monster3BFiniteSchrodingerPointProjectorEvaluationExact
 import DASHI.Moonshine.Monster3BFiniteSchrodingerProjector729Exact
 import DASHI.Moonshine.Monster3BFiniteX6ConstructiveComparisonExact
 import DASHI.Moonshine.Monster3BFiniteSchrodingerDeltaExtractionExact
+import DASHI.Moonshine.Monster3BFiniteSchrodingerTranslationOrbitExact
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact
 
 import DASHI.Base369Ternary27StratifiedFibreHolonomyValidation
