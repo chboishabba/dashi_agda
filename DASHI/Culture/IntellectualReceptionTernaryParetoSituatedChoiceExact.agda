@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import Base369 as Base
 import DASHI.Culture.IntellectualReceptionSituatedInformationParetoPreorderExact as Pareto
 import DASHI.Culture.IntellectualReceptionIntersectionalInformationGeometryExact as Info
+import DASHI.Core.ObserverRefinementLatticeExact as Obs
 import DASHI.Core.ObserverIncomparabilityTypedJoinExact as ObserverJoin
 import DASHI.Reasoning.TernaryComparisonSynthesisExact as Ternary
 import DASHI.Governance.SexedHistoricalSubjectDialecticBidiExact as Dialectic
@@ -150,30 +151,26 @@ supportProvenanceIncomparableObservers =
     (λ ())
 
 supportDoesNotRefineProvenance :
-  DASHI.Core.ObserverRefinementLatticeExact.Refines
-    Info.provenanceClass Info.supportClass → ⊥
+  Obs.Refines Info.provenanceClass Info.supportClass → ⊥
 supportDoesNotRefineProvenance =
   ObserverJoin.leftDoesNotRefineRight supportProvenanceIncomparableObservers
 
 provenanceDoesNotRefineSupport :
-  DASHI.Core.ObserverRefinementLatticeExact.Refines
-    Info.supportClass Info.provenanceClass → ⊥
+  Obs.Refines Info.supportClass Info.provenanceClass → ⊥
 provenanceDoesNotRefineSupport =
   ObserverJoin.rightDoesNotRefineLeft supportProvenanceIncomparableObservers
 
 supportProvenanceJointStrictlyRefinesSupport :
-  DASHI.Core.ObserverRefinementLatticeExact.StrictRefinement
+  Obs.StrictRefinement
     Info.supportClass
-    (DASHI.Core.ObserverRefinementLatticeExact.pairObserver
-      Info.supportClass Info.provenanceClass)
+    (Obs.pairObserver Info.supportClass Info.provenanceClass)
 supportProvenanceJointStrictlyRefinesSupport =
   ObserverJoin.jointStrictlyRefinesLeft supportProvenanceIncomparableObservers
 
 supportProvenanceJointStrictlyRefinesProvenance :
-  DASHI.Core.ObserverRefinementLatticeExact.StrictRefinement
+  Obs.StrictRefinement
     Info.provenanceClass
-    (DASHI.Core.ObserverRefinementLatticeExact.pairObserver
-      Info.supportClass Info.provenanceClass)
+    (Obs.pairObserver Info.supportClass Info.provenanceClass)
 supportProvenanceJointStrictlyRefinesProvenance =
   ObserverJoin.jointStrictlyRefinesRight supportProvenanceIncomparableObservers
 
