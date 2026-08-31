@@ -217,3 +217,4 @@ import DASHI.Biology.AnaestheticObservationErrorProductRefinementExact
 -- industrial return to atmosphere/ocean -> multistressor ecological futures.
 import DASHI.Biology.DeepTimeCarbonBiosphereFossilFuelBidiExact
 import DASHI.Biology.ClimateCarryingCapacityDeepTimeCrossPollinationExact
+import DASHI.Biology.CarbonClimateEcologicalDependencyBidiExact
