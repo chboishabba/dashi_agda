@@ -11,6 +11,7 @@ import DASHI.Physics.YangMills.BalabanFrontierExperimentDesignRound148Exact as R
 import DASHI.Physics.YangMills.BalabanFrontierFeedbackSearchRound149Exact as R149
 import DASHI.Physics.YangMills.BalabanConsumerWeightedFrontierPriorityRound150Exact as R150
 import DASHI.Physics.YangMills.BalabanRound108DirectUnifiedActionRound151Exact as R151
+import DASHI.Physics.YangMills.BalabanBC1PhysicalCompositeD1ReductionRound152Exact as R152
 
 round141CombinedRGActionRealizationCompiler : ProofLevel
 round141CombinedRGActionRealizationCompiler =
@@ -38,12 +39,17 @@ round150ConsumerPriorityCompiler = R150.balabanConsumerWeightedFrontierPriorityL
 round151DirectRound108ActionCompiler : ProofLevel
 round151DirectRound108ActionCompiler = R151.round108DirectUnifiedActionCompilerLevel
 
--- Both source routes remain fail-closed until literal source matching is supplied.
+round152PhysicalD1ReductionCompiler : ProofLevel
+round152PhysicalD1ReductionCompiler = R152.bc1PhysicalCompositeD1ReductionCompilerLevel
+
 round141LiteralCombinedRGRoute : ProofLevel
 round141LiteralCombinedRGRoute = R141.literalCompleteDensityEffectiveActionRealizationLevel
 
 round151LiteralDirectRound108Route : ProofLevel
 round151LiteralDirectRound108Route = R151.literalRound108DirectPresentCutActionRealizationLevel
+
+round152LiteralPhysicalD1ChainRule : ProofLevel
+round152LiteralPhysicalD1ChainRule = R152.literalPhysicalCompositeD1ChainRuleLevel
 
 round146LiteralSourceLeaves : ProofLevel
 round146LiteralSourceLeaves = R146.literalBalabanFrontierLeafInhabitationLevel
