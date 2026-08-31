@@ -64,10 +64,10 @@ indexRoute separatedLow = oriented-nested-route R311.homochiralRadialSeparated f
 indexRoute separatedHigh = oriented-nested-route R311.homochiralRadialSeparated forcingHighHLShoulder
 indexRoute separatedHH = oriented-nested-route R311.homochiralRadialSeparated outerHHShoulder
 indexRoute separatedCC = oriented-nested-route R311.homochiralRadialSeparated outerComparable
-indexRoute heteroLow = oriented-nested-route R311.heterochiral forcingLowFLShoulder
-indexRoute heteroHigh = oriented-nested-route R311.heterochiral forcingHighHLShoulder
-indexRoute heteroHH = oriented-nested-route R311.heterochiral outerHHShoulder
-indexRoute heteroCC = oriented-nested-route R311.heterochiral outerComparable
+indexRoute heteroLow = oriented-nested-route R311.heterochiralInner forcingLowFLShoulder
+indexRoute heteroHigh = oriented-nested-route R311.heterochiralInner forcingHighHLShoulder
+indexRoute heteroHH = oriented-nested-route R311.heterochiralInner outerHHShoulder
+indexRoute heteroCC = oriented-nested-route R311.heterochiralInner outerComparable
 
 round314CombinedFLObserverTooCoarseForNestedForcing : Bool
 round314CombinedFLObserverTooCoarseForNestedForcing = true
