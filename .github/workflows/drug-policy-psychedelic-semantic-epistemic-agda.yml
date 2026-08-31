@@ -25,6 +25,7 @@ on:
       - 'DASHI/Governance/DrugCategoryConsumerIndexedTranslationAdmissionExact.agda'
       - 'DASHI/Governance/DrugCategoryConsumerRelativeQuotientInverseExact.agda'
       - 'DASHI/Governance/DrugCategoryConsumerRelativeInverseCompositionExact.agda'
+      - 'DASHI/Governance/DrugCategoryQuotientInverseFailureBackpropExact.agda'
       - 'DASHI/Governance/TrumpDrugPolicyPsychedelicClassificationBidiExact.agda'
       - 'DASHI/Governance/DrugWarReflectingPoolFailureBoundaryExact.agda'
       - 'DASHI/Governance/DrugGovernanceIntersectionalAuthorityExact.agda'
