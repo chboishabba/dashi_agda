@@ -12,6 +12,8 @@ import DASHI.Reasoning.AristotleMCGSRecoveredWitness
 import DASHI.Reasoning.AristotleBranchMergeExact
 import DASHI.Reasoning.AristotleMergeExperimentDesignExact
 import DASHI.Reasoning.AristotleMergeGovernanceCrossPollinationExact
+import DASHI.Reasoning.AristotleActiveExperimentalProofSearchLoopExact
+import DASHI.Reasoning.AristotleActiveExperimentalProofSearchDynamicsExact
 
 import DASHI.Core.ExperimentalCoordinateDesignExact
 import DASHI.Core.DiscriminatorSynthesisExact
@@ -22,4 +24,5 @@ import DASHI.Core.ResidualObserverDependencyExact
 import DASHI.Core.GovernedObservationProvenanceExact
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact
 import DASHI.Core.AdaptiveConsumerModelLoopExact
+import DASHI.Core.AffectedDependencyClosureExact
 import DASHI.Core.HistoryConditionedChoiceExact
