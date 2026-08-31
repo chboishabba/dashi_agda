@@ -2,12 +2,16 @@ module DASHI.Governance.DrugGovernanceErrorCapabilityMandateBidiCapstoneExact wh
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.SequentialConsumerExperimentPlannerExact as Sequential
 import DASHI.Governance.DrugGovernanceErrorAllocationChillingExact as Error
 import DASHI.Governance.DrugPatientCategoryAntiDomesticationExact as AntiDomestication
 import DASHI.Governance.DrugGovernanceCapabilityFunctioningExact as Capability
 import DASHI.Governance.DrugGovernanceRepairMandateGateExact as MandateGate
 import DASHI.Governance.DrugCategoryCostedQuotientDiscriminatorExact as Costed
 import DASHI.Governance.DrugGovernanceFiveProbeAdaptivePlannerExact as Planner
+import DASHI.Governance.DrugGovernanceFiveProbeWorldExact as Five
+import DASHI.Governance.OptionConeCoercionExact as Cone
 
 ------------------------------------------------------------------------
 -- ERROR / CAPABILITY / MANDATE BIDI CAPSTONE
@@ -79,6 +83,9 @@ canonicalCycle trigger =
 -- Concrete operational receipts retained from the component owners.
 ------------------------------------------------------------------------
 
+faultAllocationReallyContractsHelpSeeking :
+  Cone.StrictSafeReachabilityContraction
+    Error.drugReachability Error.beforeAllocation Error.faultResponse
 faultAllocationReallyContractsHelpSeeking = Error.faultAllocationContractsHelpSeeking
 
 admittedPatientVoiceStillLacksAutomaticMetaRulePower :
@@ -88,13 +95,12 @@ admittedPatientVoiceStillLacksAutomaticMetaRulePower =
   AntiDomestication.admittedPatientVoiceCannotSelfIssueMetaRulePower
 
 sameTreatmentStillCannotRecoverCapability :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    Capability.functioning Capability.capability → ⊥
+  INF.FactorsThrough Capability.functioning Capability.capability → ⊥
 sameTreatmentStillCannotRecoverCapability = Capability.functioningCannotRecoverCapability
 
 sovereigntyProbeHasLivePlanner :
-  DASHI.Core.SequentialConsumerExperimentPlannerExact.SequentialConsumerPlan
-    DASHI.Governance.DrugGovernanceFiveProbeWorldExact.sovereigntyPosition
+  Sequential.SequentialConsumerPlan
+    Five.sovereigntyPosition
     (Planner.allCompatible tt)
 sovereigntyProbeHasLivePlanner = Planner.sovereigntyPlan
 
