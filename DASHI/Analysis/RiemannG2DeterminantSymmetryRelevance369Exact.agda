@@ -9,6 +9,8 @@ import DASHI.Core.FrontierRelationStrengthBidiExact as Relation
 import DASHI.Analysis.RiemannAristotleG2eDeterminantTaperKernelExact as G2e
 import DASHI.Analysis.RiemannG2DeterminantConsumerQuotient369Exact as Quotient
 import DASHI.Analysis.RiemannAristotleTwoZeroThreeTaperReturnExact as ThreeTaper
+import DASHI.Analysis.RiemannG2C3FixedNuisanceDeterminantNoGo369Exact as FixedNoGo
+import DASHI.Analysis.RiemannG2C3SimultaneousDeterminantCovariance369Exact as Covariant
 
 ------------------------------------------------------------------------
 -- RH G2 / DETERMINANT-LEVEL SYMMETRY RELEVANCE
@@ -73,12 +75,50 @@ literalCyclicActionPreservesDeterminantTaperQIsFalse :
 literalCyclicActionPreservesDeterminantTaperQIsFalse = refl
 
 ------------------------------------------------------------------------
+-- New exact 369 refinement.
+--
+-- The finite determinant fixture now separates two symmetry shapes:
+--
+--   rotate h only, keep n1,n2 fixed     : NOT generically determinant invariant
+--   rotate n1,n2,h simultaneously       : determinant code invariant
+--
+-- Thus the viable RH representation-theoretic route is a same-object covariant
+-- action on the whole determinant geometry.  Bare channel cycling is pruned.
+------------------------------------------------------------------------
+
+targetOnlyRotationNotGenericDeterminantSymmetry :
+  FiniteProofTargetOnlyRotationNotGeneric
+  where
+    FiniteProofTargetOnlyRotationNotGeneric : Set
+    FiniteProofTargetOnlyRotationNotGeneric =
+      FixedNoGo.Finite.det3
+        FixedNoGo.nuisanceOne FixedNoGo.nuisanceTwo
+        (FixedNoGo.rotateVec3 FixedNoGo.targetCell)
+      ≡
+      FixedNoGo.Finite.det3
+        FixedNoGo.nuisanceOne FixedNoGo.nuisanceTwo FixedNoGo.targetCell
+      -> ⊥
+targetOnlyRotationNotGenericDeterminantSymmetry =
+  FixedNoGo.fixedNuisanceTargetRotationDoesNotPreserveDeterminant
+
+simultaneousRotationFiniteDeterminantCovariance :
+  (a b c : FixedNoGo.Finite.Vec3) ->
+  FixedNoGo.Finite.det3 a b c
+  ≡ FixedNoGo.Finite.det3
+      (FixedNoGo.rotateVec3 a)
+      (FixedNoGo.rotateVec3 b)
+      (FixedNoGo.rotateVec3 c)
+simultaneousRotationFiniteDeterminantCovariance =
+  Covariant.simultaneousRotationPreservesDeterminantCode
+
+------------------------------------------------------------------------
 -- Search consequence.
 --
 -- A candidate C3 action that leaves q fixed is consumer-invisible at G2e.
 -- Hence the only theorem-relevant C3 route is one that proves a useful action on
--- q itself: a nontrivial character law, factorization, sign law, or bound that
--- enters the signed scalar zero sum.
+-- q itself.  The finite regression further says that target-only channel
+-- cycling is not enough; nuisance geometry must transform compatibly or an
+-- independent q-character/invariant theorem must be supplied.
 ------------------------------------------------------------------------
 
 rhDeterminantSymmetryRelation : Relation.RelationKind
@@ -96,15 +136,21 @@ record RiemannG2DeterminantSymmetryBoundary : Set where
     determinantPreservationForcesFixedKernelConsumerInvariance : Bool
     determinantPreservationForcesFixedKernelConsumerInvarianceIsTrue :
       determinantPreservationForcesFixedKernelConsumerInvariance ≡ true
+    targetOnlyC3RotationGenericallyPreservesDeterminant : Bool
+    targetOnlyC3RotationGenericallyPreservesDeterminantIsFalse :
+      targetOnlyC3RotationGenericallyPreservesDeterminant ≡ false
+    simultaneousFiniteC3RotationPreservesDeterminantCode : Bool
+    simultaneousFiniteC3RotationPreservesDeterminantCodeIsTrue :
+      simultaneousFiniteC3RotationPreservesDeterminantCode ≡ true
     currentThreeTaperReturnSuppliesLiteralCyclicGenerator : Bool
     currentThreeTaperReturnSuppliesLiteralCyclicGeneratorIsFalse :
       currentThreeTaperReturnSuppliesLiteralCyclicGenerator ≡ false
     currentThreeTaperReturnSuppliesQInvariance : Bool
     currentThreeTaperReturnSuppliesQInvarianceIsFalse :
       currentThreeTaperReturnSuppliesQInvariance ≡ false
-    usefulC3RouteMustControlQOrLaterNonfactoringConsumer : Bool
-    usefulC3RouteMustControlQOrLaterNonfactoringConsumerIsTrue :
-      usefulC3RouteMustControlQOrLaterNonfactoringConsumer ≡ true
+    usefulC3RouteMustControlWholeDeterminantGeometryOrQ : Bool
+    usefulC3RouteMustControlWholeDeterminantGeometryOrQIsTrue :
+      usefulC3RouteMustControlWholeDeterminantGeometryOrQ ≡ true
     highestAlphaReading : String
 
 canonicalRiemannG2DeterminantSymmetryBoundary :
@@ -114,6 +160,8 @@ canonicalRiemannG2DeterminantSymmetryBoundary =
     false refl
     true refl
     false refl
+    true refl
+    false refl
     false refl
     true refl
-    "The RH/369 search cut is now determinant-level: inspect any literal taper symmetry only for its induced action on q(u)=det3(n1,n2,h(u)). If q is invariant, the fixed-kernel G2e consumer is invariant automatically and the fine symmetry is irrelevant there. A useful C3 route must instead yield a nontrivial theorem about q or about a downstream consumer that does not factor through q."
+    "The RH/369 search cut is now covariant-determinant level. Rotating only h with fixed nuisance rows is not generically a determinant symmetry, while simultaneous cyclic rotation of all three determinant rows preserves the finite determinant code. The next literal RH question is whether n1, n2 and h belong to one same-object order-three action; otherwise pursue direct scalar q(u) phase cancellation instead."
