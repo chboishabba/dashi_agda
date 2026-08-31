@@ -12,12 +12,8 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119DyadicPrintedFactorWeldRou
 -- The CMP109 printed owner uses exactly that syntactic order, but carries its
 -- multiplication and its four values as fields.  This round therefore removes
 -- the opaque `transportedRelative = literalRelative` receipt from the strongest
--- route and replaces it by the exact same-object facts that can be checked at
--- their owners:
---
---   transportedRelative = printedRelativeProduct,
---   printed multiplication = the source exact-link multiplication,
---   and equality of each of the four printed factors with the CMP98 factors.
+-- route and replaces it by exact same-object facts at the owners of those
+-- printed factors and operations.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -33,6 +29,8 @@ import DASHI.Physics.YangMills.BalabanClayGate4CMP109PrintedPathFormulaExact as 
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredPeriodicEmbeddingExact as Embed
 import DASHI.Physics.YangMills.BalabanClayGate4SU2PrincipalLogBallExact as Log
 import DASHI.Physics.YangMills.BalabanCMP98MultiscaleAveragingDerivativeRound126Exact as R126
+import DASHI.Physics.YangMills.BalabanCMP98Equation119RelativeContourYRound155Exact as R155
+import DASHI.Physics.YangMills.BalabanCMP98Equation119CanonicalCoarseSegmentRound158Exact as R158
 import DASHI.Physics.YangMills.BalabanCMP98Equation119FederbushCalculusReuseRound177Exact as R177
 import DASHI.Physics.YangMills.BalabanCMP98Equation119FederbushSelectedCutProducerRound178Exact as R178
 import DASHI.Physics.YangMills.BalabanCMP98Equation119PositiveCoarseBondSourceRound182Exact as R182
@@ -81,7 +79,8 @@ record DyadicPrintedFactorWeld
         (R182.coarseBond source step)
         (Embed.embed (R182.minusEmbedding source step) point)
       ≡ R184.sourceContourHolonomy
-          (R182.asCanonicalL13Equation119Source source |> R184Source)
+          (R158.asRound152Source
+            (R182.asCanonicalL13Equation119Source source))
           step point
 
     crossingFactorMatches : ∀ step point →
@@ -91,7 +90,8 @@ record DyadicPrintedFactorWeld
         (R182.coarseBond source step)
         (Embed.embed (R182.minusEmbedding source step) point)
       ≡ R184.crossingHolonomy
-          (R182.asCanonicalL13Equation119Source source |> R184Source)
+          (R158.asRound152Source
+            (R182.asCanonicalL13Equation119Source source))
           step point
 
     targetReverseFactorMatches : ∀ step point →
@@ -101,7 +101,8 @@ record DyadicPrintedFactorWeld
         (R182.coarseBond source step)
         (Embed.embed (R182.minusEmbedding source step) point)
       ≡ R184.targetReverseHolonomy
-          (R182.asCanonicalL13Equation119Source source |> R184Source)
+          (R158.asRound152Source
+            (R182.asCanonicalL13Equation119Source source))
           step point
 
     coarseReverseFactorMatches : ∀ step point →
@@ -110,18 +111,9 @@ record DyadicPrintedFactorWeld
         (fieldAtStep step)
         (R182.coarseBond source step)
       ≡ R184.coarseReverseHolonomy
-          (R182.asCanonicalL13Equation119Source source |> R184Source)
+          (R158.asRound152Source
+            (R182.asCanonicalL13Equation119Source source))
           step
-  where
-    R184Source :
-      ∀ {C n Value group'} →
-      DASHI.Physics.YangMills.BalabanCMP98Equation119CanonicalCoarseSegmentRound158Exact.CanonicalL13Equation119Source C n Value group' →
-      DASHI.Physics.YangMills.BalabanCMP98Equation119LeastPrivilegeSourceRound152Exact.LiteralEquation119LeastPrivilegeSource C n Value group'
-    R184Source = DASHI.Physics.YangMills.BalabanCMP98Equation119CanonicalCoarseSegmentRound158Exact.asRound152Source
-
-    infixl 0 _|>_
-    _|>_ : ∀ {A B : Set} → A → (A → B) → B
-    x |> f = f x
 
 open DyadicPrintedFactorWeld public
 
@@ -141,15 +133,17 @@ printedFourFactorUsesSourceMultiplication :
       (Printed.multiplyGroup (DyadicPrinted.printedData inputs) c d))
   ≡ Bond.multiply group a
       (Bond.multiply group b (Bond.multiply group c d))
-printedFourFactorUsesSourceMultiplication weld a b c d =
+printedFourFactorUsesSourceMultiplication {group = group} {inputs = inputs}
+    weld a b c d =
   trans
     (printedMultiplyIsSourceMultiply weld a
-      (Printed.multiplyGroup _ b (Printed.multiplyGroup _ c d)))
-    (cong (Bond.multiply _ a)
+      (Printed.multiplyGroup (DyadicPrinted.printedData inputs) b
+        (Printed.multiplyGroup (DyadicPrinted.printedData inputs) c d)))
+    (cong (Bond.multiply group a)
       (trans
         (printedMultiplyIsSourceMultiply weld b
-          (Printed.multiplyGroup _ c d))
-        (cong (Bond.multiply _ b)
+          (Printed.multiplyGroup (DyadicPrinted.printedData inputs) c d))
+        (cong (Bond.multiply group b)
           (printedMultiplyIsSourceMultiply weld c d))))
 
 printedRelativeProductIsLiteralRelative :
@@ -168,8 +162,8 @@ printedRelativeProductIsLiteralRelative :
       (fieldAtStep weld step)
       (R182.coarseBond source step)
       (Embed.embed (R182.minusEmbedding source step) point)
-  ≡ DASHI.Physics.YangMills.BalabanCMP98Equation119RelativeContourYRound155Exact.relativeContourElement
-      (DASHI.Physics.YangMills.BalabanCMP98Equation119CanonicalCoarseSegmentRound158Exact.asRound152Source
+  ≡ R155.relativeContourElement
+      (R158.asRound152Source
         (R182.asCanonicalL13Equation119Source source))
       step point
 printedRelativeProductIsLiteralRelative {group = group} {source = source} {inputs = inputs}
@@ -180,8 +174,7 @@ printedRelativeProductIsLiteralRelative {group = group} {source = source} {input
     coarse = R182.coarseBond source step
     fine = Embed.embed (R182.minusEmbedding source step) point
     cmp98Source =
-      DASHI.Physics.YangMills.BalabanCMP98Equation119CanonicalCoarseSegmentRound158Exact.asRound152Source
-        (R182.asCanonicalL13Equation119Source source)
+      R158.asRound152Source (R182.asCanonicalL13Equation119Source source)
 
     a = Printed.sourceAveragedContour pd field coarse fine
     b = Printed.crossingValue pd field coarse fine
@@ -248,8 +241,8 @@ cmp98Equation119DyadicPrintedFactorWeldRound185Level : ProofLevel
 cmp98Equation119DyadicPrintedFactorWeldRound185Level = machineChecked
 
 -- Whole-object equality has been replaced by explicit operation/factor welds.
--- The remaining physical work can now be discharged at the owners of the
--- printed source contour, crossing value, target reverse contour, coarse reverse
--- value, and transported-relative semantics.
+-- Remaining physical work can now be discharged at the owners of the printed
+-- source contour, crossing value, target reverse contour, coarse reverse value,
+-- and transported-relative semantics.
 literalCMP98DyadicPrintedFactorSameObjectRound185Level : ProofLevel
 literalCMP98DyadicPrintedFactorSameObjectRound185Level = conditional
