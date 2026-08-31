@@ -18,6 +18,7 @@ module DASHI.Crypto.TransactionalBraidAssetProvenanceExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.ActionCrossingBraidExact as Crossing
 import DASHI.Core.IntersectionalNonFactorability as INF
 
 ------------------------------------------------------------------------
@@ -86,15 +87,29 @@ directAndPeelProvenanceDiffer :
   provenance directTrace ≡ provenance peelLikeTrace → ⊥
 directAndPeelProvenanceDiffer ()
 
+transactionActionCrossingSurface : Crossing.ActionCrossingSurface
+transactionActionCrossingSurface =
+  Crossing.action-crossing-surface
+    TransactionTrace
+    EndpointCode
+    ProvenanceCode
+    endpoint
+    provenance
+
+canonicalSameEndpointDifferentProvenance :
+  Crossing.SameEndpointDifferentProvenance transactionActionCrossingSurface
+canonicalSameEndpointDifferentProvenance =
+  Crossing.same-endpoint-different-provenance
+    directTrace
+    washLikeTrace
+    refl
+    directAndWashProvenanceDiffer
+
 endpointCannotRecoverProvenance :
   INF.FactorsThrough endpoint provenance → ⊥
 endpointCannotRecoverProvenance =
-  INF.witnessRulesOutEveryFlatFactorisation
-    (INF.nonFactorabilityWitness
-      directTrace
-      washLikeTrace
-      refl
-      directAndWashProvenanceDiffer)
+  Crossing.endpointCannotRecoverCrossingProvenance
+    canonicalSameEndpointDifferentProvenance
 
 ------------------------------------------------------------------------
 -- 3. Crossing history is first-class, not reconstructed from endpoint alone.
@@ -186,6 +201,7 @@ record TransactionalBraidAssetProvenanceBoundary : Set where
     crossingOrderRetained : Bool
     sameEndpointCanHideDifferentProvenance : Bool
     washAndPeelAreAbstractTracePatterns : Bool
+    genericActionCrossingOwnerReused : Bool
     moreCrossingsGuaranteeConcealment : Bool
     patternAloneProvesIntent : Bool
     literalBraidGroupActionConstructed : Bool
@@ -196,4 +212,4 @@ canonicalTransactionalBraidAssetProvenanceBoundary :
   TransactionalBraidAssetProvenanceBoundary
 canonicalTransactionalBraidAssetProvenanceBoundary =
   transactional-braid-asset-provenance-boundary
-    true true true true false false false false false
+    true true true true true false false false false false
