@@ -253,7 +253,8 @@ data FormOfLifePromotesCivilisationalEssence : Set where
 data SharedUsePromotesSharedPrivateBelief : Set where
 data SharedPracticePromotesSharedAutonomy : Set where
 data WittgensteinPromotesDASHINonfactorability : Set where
-\meaningUseDoesNotPromoteLexicalRelativism : MeaningUsePromotesLexicalRelativism → ⊥
+
+meaningUseDoesNotPromoteLexicalRelativism : MeaningUsePromotesLexicalRelativism → ⊥
 meaningUseDoesNotPromoteLexicalRelativism ()
 
 languageGameDoesNotPromoteWholeSocialTotality : LanguageGamePromotesWholeSocialTotality → ⊥
