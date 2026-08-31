@@ -127,6 +127,35 @@ and proves that the pair of determinant coordinates is an exact sufficient obser
 
 Therefore a raw three-channel `C3`/Fourier decomposition is no longer highest-alpha merely because three taper coordinates exist. A cyclic action becomes theorem-relevant only if it controls or decomposes `q(u)` itself, the determinant pair, or a later consumer that does not already factor through these coordinates. This is a proved search-pruning result, not an RH proof; the signed local-zero bound remains open.
 
+### RH: the viable C3 shape is covariant determinant geometry
+
+`ConsumerRelativeSymmetryRelevanceExact` now proves the generic theorem:
+
+```text
+consumer sufficient through observer
++ symmetry preserves observer
+-> consumer invariant under symmetry.
+```
+
+Applied to G2e, any symmetry that preserves `q` is therefore invisible to the fixed-kernel consumer.
+
+The finite determinant regressions then distinguish two different `C3` shapes. `RiemannG2C3FixedNuisanceDeterminantNoGo369Exact` constructs an exact order-three coordinate rotation and a concrete determinant fixture in which rotating only the target/taper coordinates while keeping `n1,n2` fixed changes the determinant. Thus bare channel cycling is not generically `q`-invariant.
+
+`RiemannG2C3SimultaneousDeterminantCovariance369Exact` proves the complementary theorem: cyclically rotating **all three rows** of the finite determinant simultaneously preserves the oriented determinant code. The row-triple rotation is packaged as an actual `OrderThreeAction`, the determinant observer is invariant under it, and every consumer sufficient through that determinant observer is therefore invariant automatically.
+
+So the representation-theoretic RH route has become much narrower:
+
+```text
+raw channel C3
+    -/-> determinant symmetry
+
+same-object C3 on (n1,n2,h)
++ determinant covariance
+    -> legitimate symmetry of q
+```
+
+The literal RH theorem surface does not yet supply such a common cyclic action on the two nuisance rows and the taper response. The next admissible symmetry search is therefore exactly that same-object covariance question; otherwise the active route remains the scalar signed `q(u)` cosine-transform estimate.
+
 ### NS: shell geometry does not recover signed coherence
 
 `NSCriticalConeResidualFibre369CrossPollinationExact` gives a finite information-geometry witness in which two states share the same coarse critical-shell observation but have different signed residual codes. The canonical residual-observer machinery therefore yields strict observer refinement and blocks descent of the signed residual through the shell observer.
