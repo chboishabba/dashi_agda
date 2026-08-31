@@ -95,18 +95,19 @@ staleOpenCannotProveNovelty : RepoGroundedFrontier staleOpenAfterClosure → ⊥
 staleOpenCannotProveNovelty ()
 
 ------------------------------------------------------------------------
--- Reuse the route-admission taxonomy: false frontier state is not an authority
--- source.  It may trigger reopen/reuse but cannot manufacture ExactConsumerReceipt.
+-- Route belief is not an exact-consumer capability.
 ------------------------------------------------------------------------
 
-frontierBeliefDoesNotCreateProgrammeProgress :
-  BelievedFrontier → Admission.ProgrammeProgress
-frontierBeliefDoesNotCreateProgrammeProgress _ =
-  Admission.promote Admission.exactConsumerReceipt
+data BeliefGeneratedConsumerReceipt : BelievedFrontier → Set where
+-- intentionally no constructor
 
--- The helper above deliberately demonstrates that programme progress still
--- comes only from the imported exact consumer receipt; the belief argument is
--- ignored.  No BelievedFrontier -> ExactConsumerReceipt constructor is exposed.
+beliefCannotManufactureExactConsumerAuthority :
+  BeliefGeneratedConsumerReceipt believesClosed → ⊥
+beliefCannotManufactureExactConsumerAuthority ()
+
+exactConsumerStillOwnsProgrammePromotion :
+  Admission.ExactConsumerReceipt → Admission.ProgrammeProgress
+exactConsumerStillOwnsProgrammePromotion = Admission.promote
 
 ------------------------------------------------------------------------
 -- Boundary.
