@@ -14,6 +14,7 @@ data BalabanFrontierCoordinate : Set where
   a1CouplingHistoryResidual
   a2CouplingHistoryResidual
   densityActionResidual
+  round108SemanticsProvenanceResidual
   round108PotentialMatchResidual
   combinedRGDensityStateResidual
   combinedRGStatePotentialResidual
@@ -30,6 +31,7 @@ coordinateRole : BalabanFrontierCoordinate → Design.CoordinateRole
 coordinateRole a1CouplingHistoryResidual = Design.derivedDiscriminator
 coordinateRole a2CouplingHistoryResidual = Design.derivedDiscriminator
 coordinateRole densityActionResidual = Design.derivedDiscriminator
+coordinateRole round108SemanticsProvenanceResidual = Design.referenceInvariant
 coordinateRole round108PotentialMatchResidual = Design.derivedDiscriminator
 coordinateRole combinedRGDensityStateResidual = Design.derivedDiscriminator
 coordinateRole combinedRGStatePotentialResidual = Design.derivedDiscriminator
@@ -45,6 +47,7 @@ coordinateTargetsLeaf : BalabanFrontierCoordinate → R146.BalabanFrontierLeaf
 coordinateTargetsLeaf a1CouplingHistoryResidual = R146.a1CouplingToBetaHistory
 coordinateTargetsLeaf a2CouplingHistoryResidual = R146.a2CouplingToBetaHistory
 coordinateTargetsLeaf densityActionResidual = R146.densityActionRealization
+coordinateTargetsLeaf round108SemanticsProvenanceResidual = R146.round108FixedDensitySemantics
 coordinateTargetsLeaf round108PotentialMatchResidual = R146.round108SelectedPotentialMatchesBC1
 coordinateTargetsLeaf combinedRGDensityStateResidual = R146.densityToCombinedRGState
 coordinateTargetsLeaf combinedRGStatePotentialResidual = R146.combinedRGStateToBC1Potential
@@ -64,8 +67,7 @@ record FrontierCoordinateDiscrimination : Set₁ where
     coordinate : BalabanFrontierCoordinate
     left right : CandidateRealization
     currentlyCollapsed : currentObservation left ≡ currentObservation right
-    coordinateSeparates :
-      coordinateValue coordinate left ≡ coordinateValue coordinate right → ⊥
+    coordinateSeparates : coordinateValue coordinate left ≡ coordinateValue coordinate right → ⊥
 
 open FrontierCoordinateDiscrimination public
 
