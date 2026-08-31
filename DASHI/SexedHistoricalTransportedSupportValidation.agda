@@ -17,6 +17,7 @@ import DASHI.Governance.SexedHistoricalStratifiedMultiConsumerClosureExact as Mu
 import DASHI.Governance.SexedHistoricalStratifiedFidelityEscalationExact as Fidelity
 import DASHI.Governance.SexedHistoricalStratifiedCounterfactualPathExact as Counterfactual
 import DASHI.Governance.SexedHistoricalStratifiedFutureConeQuotientExact as FutureCone
+import DASHI.Governance.SexedHistoricalHorizonFiltrationFirstDivergenceExact as Horizon
 
 canonicalSupportHistoryRegression :
   Transported.SupportTransportPath
@@ -193,6 +194,32 @@ presentSurfaceCannotRecoverFutureConeRegression :
 presentSurfaceCannotRecoverFutureConeRegression =
   FutureCone.presentSurfaceCannotRecoverFutureCone
 
+shortHorizonAgreementRegression :
+  Horizon.coneAt Horizon.shortHorizon FutureCone.repairedThenPluralised
+  ≡ Horizon.coneAt Horizon.shortHorizon FutureCone.repairedThenInstitutionalised
+shortHorizonAgreementRegression = Horizon.shortHorizonAgreement
+
+mediumHorizonAgreementRegression :
+  Horizon.coneAt Horizon.mediumHorizon FutureCone.repairedThenPluralised
+  ≡ Horizon.coneAt Horizon.mediumHorizon FutureCone.repairedThenInstitutionalised
+mediumHorizonAgreementRegression = Horizon.mediumHorizonAgreement
+
+longHorizonDivergenceRegression :
+  Horizon.coneAt Horizon.longHorizon FutureCone.repairedThenPluralised
+  ≡ Horizon.coneAt Horizon.longHorizon FutureCone.repairedThenInstitutionalised → ⊥
+longHorizonDivergenceRegression = Horizon.longHorizonDivergence
+
+firstForecastDivergenceRegression :
+  Horizon.FirstForecastDivergenceAt Horizon.longHorizon
+firstForecastDivergenceRegression = Horizon.canonicalFirstForecastDivergence
+
+mediumObserverCannotRecoverLongConeRegression :
+  INF.FactorsThrough
+    (Horizon.observeAtHorizon Horizon.mediumHorizon)
+    (Horizon.coneAt Horizon.longHorizon) → ⊥
+mediumObserverCannotRecoverLongConeRegression =
+  Horizon.mediumObserverCannotRecoverLongCone
+
 transportedSupportBoundaryRegression :
   Transported.TransportedAssociatorSupportBoundary
 transportedSupportBoundaryRegression =
@@ -225,3 +252,7 @@ stratifiedCounterfactualPathBoundaryRegression =
 stratifiedFutureConeBoundaryRegression : FutureCone.StratifiedFutureConeQuotientBoundary
 stratifiedFutureConeBoundaryRegression =
   FutureCone.canonicalStratifiedFutureConeQuotientBoundary
+
+horizonFiltrationBoundaryRegression : Horizon.HorizonFiltrationFirstDivergenceBoundary
+horizonFiltrationBoundaryRegression =
+  Horizon.canonicalHorizonFiltrationFirstDivergenceBoundary
