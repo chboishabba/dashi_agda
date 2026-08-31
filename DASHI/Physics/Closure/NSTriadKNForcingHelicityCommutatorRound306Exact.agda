@@ -23,12 +23,11 @@ module DASHI.Physics.Closure.NSTriadKNForcingHelicityCommutatorRound306Exact whe
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
-import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
-import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact as Cross
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityQuadraticKernelRound223Exact as R223
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact as R230
@@ -101,24 +100,17 @@ doubleR230CellIsHelicityCommutator :
     (tau : Physical.PhysicalTriadIncidence) →
   doubleR230Cell S velocity forcing tau
   ≡ helicityCommutatorCell S velocity forcing tau
-doubleR230CellIsHelicityCommutator {F = F} S velocity forcing tau =
-  let
-    pPlus = Helical.helicalProjectorPlus _ _ S
-      (Physical.p tau) (forcing (Physical.p tau))
-    pMinus = Helical.helicalProjectorMinus _ _ S
-      (Physical.p tau) (forcing (Physical.p tau))
-    qPlus = Helical.helicalProjectorPlus _ _ S
-      (Physical.q tau) (velocity (Physical.q tau))
-    qMinus = Helical.helicalProjectorMinus _ _ S
-      (Physical.q tau) (velocity (Physical.q tau))
-  in
-  Field.symmetryAdapter
+doubleR230CellIsHelicityCommutator S velocity forcing tau =
+  sym
     (R223.helicitySlotDifferenceIsDoubleMixedHelicity
-      pPlus pMinus qPlus qMinus)
-  where
-  -- Tiny orientation adapter: R223 states H-slot = double-mixed; R306 needs
-  -- double-mixed = H-slot.  Kept local so no new algebraic authority appears.
-  module Dummy where
+      (Helical.helicalProjectorPlus _ _ S
+        (Physical.p tau) (forcing (Physical.p tau)))
+      (Helical.helicalProjectorMinus _ _ S
+        (Physical.p tau) (forcing (Physical.p tau)))
+      (Helical.helicalProjectorPlus _ _ S
+        (Physical.q tau) (velocity (Physical.q tau)))
+      (Helical.helicalProjectorMinus _ _ S
+        (Physical.q tau) (velocity (Physical.q tau))))
 
 round306R230CellIsLiteralMixedHelicityDifference : Bool
 round306R230CellIsLiteralMixedHelicityDifference = true
