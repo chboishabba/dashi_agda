@@ -7,3 +7,4 @@ module DASHI.Environment.GlyphosateSauerkrautEverything where
 
 open import DASHI.Environment.GlyphosateSauerkrautBioremediationBidiExact public
 open import DASHI.Environment.GlyphosateSauerkrautResidualRefinementExact public
+open import DASHI.Environment.GlyphosateSauerkrautGenericBidiBridgeExact public
