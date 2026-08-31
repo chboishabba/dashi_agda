@@ -26,16 +26,16 @@ PreservesObserver :
   (State -> Surface) ->
   (State -> State) ->
   Set
-PreservesObserver observe act =
-  (x : _) -> observe (act x) ≡ observe x
+PreservesObserver {State = State} observe act =
+  (x : State) -> observe (act x) ≡ observe x
 
 ConsumerInvariantUnder :
   ∀ {State Outcome : Set} ->
   (State -> Outcome) ->
   (State -> State) ->
   Set
-ConsumerInvariantUnder consumer act =
-  (x : _) -> consumer (act x) ≡ consumer x
+ConsumerInvariantUnder {State = State} consumer act =
+  (x : State) -> consumer (act x) ≡ consumer x
 
 sufficientObserverPreservationImpliesConsumerInvariance :
   ∀ {State Surface Outcome : Set}
