@@ -26,6 +26,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
+import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNLerayComplexScalarLinearityRound73Exact as R73
 import DASHI.Physics.Closure.NSTriadKNProjectedNonlinearityFirstVariationRound82Exact as R82
 import DASHI.Physics.Closure.NSTriadKNWaleffeAmplitudeDampedNetworkTangentRound94Exact as R94
@@ -154,8 +155,8 @@ canonicalHelicalDampedProjectorLinearity E I S = record
     let
       P-u = C3.lerayProject3 E I mode u
       P-f = C3.lerayProject3 E I mode f
-      C-u = R157.R142.normalizedCurl E S mode u
-      C-f = R157.R142.normalizedCurl E S mode f
+      C-u = R142.normalizedCurl E S mode u
+      C-f = R142.normalizedCurl E S mode f
       h = C3.realEmbed F (Helical.half S)
       r = R94.negativeReal rho
     in
@@ -179,8 +180,8 @@ canonicalHelicalDampedProjectorLinearity E I S = record
     let
       P-u = C3.lerayProject3 E I mode u
       P-f = C3.lerayProject3 E I mode f
-      C-u = R157.R142.normalizedCurl E S mode u
-      C-f = R157.R142.normalizedCurl E S mode f
+      C-u = R142.normalizedCurl E S mode u
+      C-f = R142.normalizedCurl E S mode f
       h = C3.realEmbed F (Helical.half S)
       r = R94.negativeReal rho
     in
