@@ -6,7 +6,9 @@ import DASHI.Governance.DrugPolicyPsychedelicSemanticEpistemicEverything
 
 import DASHI.Core.AffectedDependencyClosureExact as Affected
 import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Choice
+import DASHI.Core.DiscriminatorSynthesisExact as Discriminator
 import DASHI.Core.SequentialConsumerExperimentPlannerExact as Sequential
+import DASHI.Governance.OptionConeCoercionExact as OptionCone
 import DASHI.Governance.ContestedDrugCategoryAtlasBidiExact as Atlas
 import DASHI.Governance.DrugCategoryMultiChartTranslationGeometryExact as Translation
 import DASHI.Governance.DrugCategoryTranslationSelectiveReopeningExact as TranslationReopen
@@ -32,67 +34,46 @@ import DASHI.Governance.DrugCategoryPhilosophySelectiveReopeningExact as Philoso
 
 atlasBoundary : Atlas.ContestedDrugCategoryAtlasBoundary
 atlasBoundary = Atlas.canonicalContestedDrugCategoryAtlasBoundary
-
 translationBoundary : Translation.DrugCategoryMultiChartTranslationBoundary
 translationBoundary = Translation.canonicalDrugCategoryMultiChartTranslationBoundary
-
 translationReopeningBoundary : TranslationReopen.DrugCategoryTranslationReopeningBoundary
 translationReopeningBoundary = TranslationReopen.canonicalDrugCategoryTranslationReopeningBoundary
-
 translationPathBoundary : PathResidue.DrugCategoryTranslationPathResidueBoundary
 translationPathBoundary = PathResidue.canonicalDrugCategoryTranslationPathResidueBoundary
-
 edgeIndexedBoundary : EdgeIndexed.DrugCategoryTranslationEdgeIndexedBoundary
 edgeIndexedBoundary = EdgeIndexed.canonicalDrugCategoryTranslationEdgeIndexedBoundary
-
 partialTranslationPathBoundary : PartialPath.DrugCategoryPartialTranslationPathBoundary
 partialTranslationPathBoundary = PartialPath.canonicalDrugCategoryPartialTranslationPathBoundary
-
 composedPathReopeningBoundary : ComposedReopen.ComposedPathEdgeReopeningBoundary
 composedPathReopeningBoundary = ComposedReopen.canonicalComposedPathEdgeReopeningBoundary
-
 consumerAdmissionBoundary : ConsumerAdmission.DrugCategoryConsumerIndexedTranslationBoundary
 consumerAdmissionBoundary = ConsumerAdmission.canonicalDrugCategoryConsumerIndexedTranslationBoundary
-
 quotientInverseBoundary : QuotientInverse.DrugCategoryConsumerRelativeQuotientInverseBoundary
 quotientInverseBoundary = QuotientInverse.canonicalDrugCategoryConsumerRelativeQuotientInverseBoundary
-
 inverseCompositionBoundary : InverseComposition.ConsumerRelativeInverseCompositionBoundary
 inverseCompositionBoundary = InverseComposition.canonicalConsumerRelativeInverseCompositionBoundary
-
 inverseFailureBoundary : InverseFailure.QuotientInverseFailureBackpropBoundary
 inverseFailureBoundary = InverseFailure.canonicalQuotientInverseFailureBackpropBoundary
-
 explicitConsumerQuotientBoundary : ExplicitQuotient.DrugCategoryExplicitConsumerQuotientBoundary
 explicitConsumerQuotientBoundary = ExplicitQuotient.canonicalDrugCategoryExplicitConsumerQuotientBoundary
-
 relativeFibreBoundary : RelativeFibre.DrugCategoryClinicalQuotientRelativeFibreBoundary
 relativeFibreBoundary = RelativeFibre.canonicalDrugCategoryClinicalQuotientRelativeFibreBoundary
-
 quotientRefinementBoundary : QuotientRefinement.DrugCategoryConsumerQuotientRefinementBoundary
 quotientRefinementBoundary = QuotientRefinement.canonicalDrugCategoryConsumerQuotientRefinementBoundary
-
 costedDiscriminatorBoundary : CostedDiscriminator.DrugCategoryCostedQuotientDiscriminatorBoundary
 costedDiscriminatorBoundary = CostedDiscriminator.canonicalDrugCategoryCostedQuotientDiscriminatorBoundary
-
 adaptiveLoopBoundary : AdaptiveLoop.DrugCategoryAdaptiveQuotientExperimentBoundary
 adaptiveLoopBoundary = AdaptiveLoop.canonicalDrugCategoryAdaptiveQuotientExperimentBoundary
-
 fiveWorldBoundary : FiveWorld.FiveProbeWorldBoundary
 fiveWorldBoundary = FiveWorld.canonicalFiveProbeWorldBoundary
-
 fiveConeBoundary : FiveCone.FiveProbeOptionConeBoundary
 fiveConeBoundary = FiveCone.canonicalFiveProbeOptionConeBoundary
-
 fivePlannerBoundary : FivePlanner.FiveProbeAdaptivePlannerBoundary
 fivePlannerBoundary = FivePlanner.canonicalFiveProbeAdaptivePlannerBoundary
-
 farBoundary : Far.DrugGovernanceFarCrossPollinationBoundary
 farBoundary = Far.canonicalDrugGovernanceFarCrossPollinationBoundary
-
 philosophyBoundary : Philosophy.DrugCategoryPhilosophyOperatorBoundary
 philosophyBoundary = Philosophy.canonicalDrugCategoryPhilosophyOperatorBoundary
-
 philosophyReopeningBoundary : PhilosophyReopen.PhilosophySeededReopeningBoundary
 philosophyReopeningBoundary = PhilosophyReopen.canonicalPhilosophySeededReopeningBoundary
 
@@ -106,13 +87,11 @@ stateClinicalRevisionAlsoReopensComposedLivedConsumer :
   Affected.ReopeningObligation ComposedReopen.Depends
     (ComposedReopen.edgeArtifact EdgeIndexed.stateToClinicalEdge)
     (ComposedReopen.consumerCertificate ComposedReopen.livedSubjectMaintained)
-stateClinicalRevisionAlsoReopensComposedLivedConsumer =
-  ComposedReopen.stateClinicalRevisionReopensLivedSubjectConsumer
+stateClinicalRevisionAlsoReopensComposedLivedConsumer = ComposedReopen.stateClinicalRevisionReopensLivedSubjectConsumer
 
 clinicalFactPreservedButSubjectNotGloballyPreserved :
   PartialPath.CoordinatePreserved PartialPath.stateClinicalLivedPath Translation.clinicalFactCoordinate
-clinicalFactPreservedButSubjectNotGloballyPreserved =
-  PartialPath.clinicalFactPreservedAlongStateClinicalLived
+clinicalFactPreservedButSubjectNotGloballyPreserved = PartialPath.clinicalFactPreservedAlongStateClinicalLived
 
 clinicalConsumerAdmitsComposedPath :
   ConsumerAdmission.ConsumerPathSafe ConsumerAdmission.clinicalSafetyConsumer PartialPath.stateClinicalLivedPath
@@ -121,8 +100,7 @@ clinicalConsumerAdmitsComposedPath = ConsumerAdmission.clinicalSafetyAdmitsState
 clinicalQuotientInverseExistsOnComposedPath :
   QuotientInverse.ConsumerRelativeQuotientInverse
     ConsumerAdmission.clinicalSafetyConsumer PartialPath.stateClinicalLivedPath
-clinicalQuotientInverseExistsOnComposedPath =
-  QuotientInverse.clinicalQuotientInverseOnStateClinicalLived
+clinicalQuotientInverseExistsOnComposedPath = QuotientInverse.clinicalQuotientInverseOnStateClinicalLived
 
 clinicalQuotientInverseComposesAcrossPathSegments :
   QuotientInverse.ConsumerRelativeQuotientInverse
@@ -130,48 +108,51 @@ clinicalQuotientInverseComposesAcrossPathSegments :
     (PartialPath.appendPath InverseComposition.stateClinicalPath InverseComposition.clinicalLivedPath)
 clinicalQuotientInverseComposesAcrossPathSegments = InverseComposition.composedClinicalInverse
 
-historyInverseFailureCreatesReconstructionDemand :
-  TranslationReopen.ReconstructionDemand Translation.historyResidual
+historyInverseFailureCreatesReconstructionDemand : TranslationReopen.ReconstructionDemand Translation.historyResidual
 historyInverseFailureCreatesReconstructionDemand = InverseFailure.historyFailureBackpropagates
 
 clinicalObserverDescendsButSubjectObserverDoesNot :
-  ExplicitQuotient.DescendsThrough
-    ExplicitQuotient.clinicalObserver ExplicitQuotient.clinicalObserver
-clinicalObserverDescendsButSubjectObserverDoesNot =
-  ExplicitQuotient.clinicalDescendsThroughClinical
+  ExplicitQuotient.DescendsThrough ExplicitQuotient.clinicalObserver ExplicitQuotient.clinicalObserver
+clinicalObserverDescendsButSubjectObserverDoesNot = ExplicitQuotient.clinicalDescendsThroughClinical
 
 clinicalPlusRelativeFineExactlyReopensState :
   (state : ExplicitQuotient.TranslationState) →
   RelativeFibre.reopenClinicalRelative
     (ExplicitQuotient.clinicalObserver state)
-    (RelativeFibre.relativeSemantic state)
-  ≡ state
-clinicalPlusRelativeFineExactlyReopensState =
-  RelativeFibre.clinicalPlusRelativeReconstructsState
+    (RelativeFibre.relativeSemantic state) ≡ state
+clinicalPlusRelativeFineExactlyReopensState = RelativeFibre.clinicalPlusRelativeReconstructsState
 
 subjectNonDescentSelectsSubjectRefinement : QuotientRefinement.RefinementCoordinate
 subjectNonDescentSelectsSubjectRefinement = QuotientRefinement.canonicalSubjectRefinement
 
 subjectProbeIsDeclaredCheapestResolvingMove :
-  Choice.CheapestResolvingMove
-    CostedDiscriminator.subjectProblem
-    CostedDiscriminator.DeclaredProbeMove
+  Choice.CheapestResolvingMove CostedDiscriminator.subjectProblem CostedDiscriminator.DeclaredProbeMove
 subjectProbeIsDeclaredCheapestResolvingMove = CostedDiscriminator.subjectCheapestResolving
 
 subjectSelectedProbeClosesSubjectConsumer :
-  Sequential.SequentialConsumerPlan
-    AdaptiveLoop.subjectConsumer
-    (AdaptiveLoop.allCompatible tt)
+  Sequential.SequentialConsumerPlan AdaptiveLoop.subjectConsumer (AdaptiveLoop.allCompatible tt)
 subjectSelectedProbeClosesSubjectConsumer = AdaptiveLoop.subjectOneShotPlan
 
+authorityProbeNowHasLiveSeparator :
+  Discriminator.BundleSeparates
+    FiveWorld.authorityBundle FiveWorld.baseExternalWorld FiveWorld.authorityRechartedWorld
 authorityProbeNowHasLiveSeparator = FiveWorld.authoritySeparates
+
+materialProbeNowHasLiveSeparator :
+  Discriminator.BundleSeparates
+    FiveWorld.materialBundle FiveWorld.baseExternalWorld FiveWorld.sharedBenefitWorld
 materialProbeNowHasLiveSeparator = FiveWorld.materialSeparates
+
+sovereigntyProbeNowHasLiveSeparator :
+  Discriminator.BundleSeparates
+    FiveWorld.sovereigntyBundle FiveWorld.baseExternalWorld FiveWorld.sovereignWorld
 sovereigntyProbeNowHasLiveSeparator = FiveWorld.sovereigntySeparates
 
+sovereignExternalisationContractsOptionCone :
+  OptionCone.StrictSafeReachabilityContraction
+    FiveCone.reachability FiveWorld.sovereignWorld FiveWorld.baseExternalWorld
 sovereignExternalisationContractsOptionCone = FiveCone.sovereignToExternalContracts
 
 authoritySelectedProbeClosesAuthorityConsumer :
-  Sequential.SequentialConsumerPlan
-    FiveWorld.authorityPosition
-    (FivePlanner.allCompatible tt)
+  Sequential.SequentialConsumerPlan FiveWorld.authorityPosition (FivePlanner.allCompatible tt)
 authoritySelectedProbeClosesAuthorityConsumer = FivePlanner.authorityPlan
