@@ -3,15 +3,11 @@ module DASHI.Physics.YangMills.BalabanFrontierExperimentDesignRound148Exact wher
 
 ------------------------------------------------------------------------
 -- ROUND148: EXPERIMENT-DESIGN COORDINATES FOR THE LIVE BALABAN FRONTIER
---
--- The coordinates below are search/discrimination observables for candidate
--- realizations of the exact Round146 source leaves.  They can guide proof/source
--- search and expose systematic failure, but they do not automatically close a
--- formal theorem or promote an empirical result into a Clay proof.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Core.ExperimentalCoordinateDesignExact as Design
@@ -19,7 +15,8 @@ import DASHI.Physics.Foundations.GRQFTExperimentDesignCrossPollinationExact as G
 import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Exact as R146
 
 data BalabanFrontierCoordinate : Set where
-  couplingHistoryResidual
+  a1CouplingHistoryResidual
+  a2CouplingHistoryResidual
   densityPotentialResidual
   componentD1Residual
   stressSumResidual
@@ -31,7 +28,8 @@ data BalabanFrontierCoordinate : Set where
   : BalabanFrontierCoordinate
 
 coordinateRole : BalabanFrontierCoordinate → Design.CoordinateRole
-coordinateRole couplingHistoryResidual = Design.derivedDiscriminator
+coordinateRole a1CouplingHistoryResidual = Design.derivedDiscriminator
+coordinateRole a2CouplingHistoryResidual = Design.derivedDiscriminator
 coordinateRole densityPotentialResidual = Design.derivedDiscriminator
 coordinateRole componentD1Residual = Design.derivedDiscriminator
 coordinateRole stressSumResidual = Design.derivedDiscriminator
@@ -42,7 +40,8 @@ coordinateRole finiteVolumeSystematic = Design.nuisanceCoordinate
 coordinateRole discretizationSystematic = Design.nuisanceCoordinate
 
 coordinateTargetsLeaf : BalabanFrontierCoordinate → R146.BalabanFrontierLeaf
-coordinateTargetsLeaf couplingHistoryResidual = R146.a1CouplingToBetaHistory
+coordinateTargetsLeaf a1CouplingHistoryResidual = R146.a1CouplingToBetaHistory
+coordinateTargetsLeaf a2CouplingHistoryResidual = R146.a2CouplingToBetaHistory
 coordinateTargetsLeaf densityPotentialResidual = R146.combinedRGStateToBC1Potential
 coordinateTargetsLeaf componentD1Residual = R146.componentLocalizedD1ToPhysicalD1
 coordinateTargetsLeaf stressSumResidual = R146.stressInsertionEqualsPhysicalD1Sum
@@ -63,14 +62,10 @@ record FrontierCoordinateDiscrimination : Set₁ where
     left right : CandidateRealization
     currentlyCollapsed : currentObservation left ≡ currentObservation right
     coordinateSeparates :
-      coordinateValue coordinate left ≡ coordinateValue coordinate right →
-      Agda.Builtin.Equality._≡_ false true
+      coordinateValue coordinate left ≡ coordinateValue coordinate right → ⊥
 
 open FrontierCoordinateDiscrimination public
 
--- The GR/QFT experiment-design owner already establishes the distinction between
--- adding an informational discriminator and adding a physical dimension.  Here
--- we pin the same intended interpretation for the YM frontier.
 record BalabanFrontierExperimentBoundary : Set where
   constructor balabanFrontierExperimentBoundary
   field
@@ -91,10 +86,6 @@ canonicalBalabanFrontierExperimentBoundary : BalabanFrontierExperimentBoundary
 canonicalBalabanFrontierExperimentBoundary =
   balabanFrontierExperimentBoundary false refl false refl false refl true refl
 
--- Cross-pollination receipt: the generic GR/QFT owner classifies a useful new
--- discriminator as informational dimensionality, not automatically a new
--- spacetime/SI dimension.  Importing it here records that this frontier uses the
--- same experiment-design discipline.
 grqftExperimentDesignBoundaryReused : GRQFT.GRQFTExperimentDesignBoundary
 grqftExperimentDesignBoundaryReused = GRQFT.canonicalGRQFTExperimentDesignBoundary
 
