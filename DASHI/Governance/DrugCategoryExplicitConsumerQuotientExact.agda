@@ -68,6 +68,11 @@ clinicalBiomedicalLivedEquivalent :
   ObserverEquivalent clinicalObserver biomedicalState livedSubjectState
 clinicalBiomedicalLivedEquivalent = refl
 
+clinicalStateLivedEquivalent :
+  ObserverEquivalent clinicalObserver stateLegalState livedSubjectState
+clinicalStateLivedEquivalent =
+  trans clinicalStateEquivalent clinicalBiomedicalLivedEquivalent
+
 subjectStateLivedNotEquivalent :
   ObserverEquivalent subjectObserver stateLegalState livedSubjectState → ⊥
 subjectStateLivedNotEquivalent ()
@@ -110,7 +115,7 @@ subjectCannotDescendThroughClinical descent =
     (trans
       (commutes descent stateLegalState)
       (trans
-        (cong (readOnQuotient descent) clinicalStateEquivalent)
+        (cong (readOnQuotient descent) clinicalStateLivedEquivalent)
         (sym (commutes descent livedSubjectState))))
 
 historyCannotDescendThroughClinical :
