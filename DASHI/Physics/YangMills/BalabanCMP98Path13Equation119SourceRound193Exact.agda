@@ -15,6 +15,7 @@ module DASHI.Physics.YangMills.BalabanCMP98Path13Equation119SourceRound193Exact 
 -- Path13 background by construction at every step.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
 
@@ -85,13 +86,13 @@ path13SourceRealizationIsPhysical :
   ∀ {C} (source : Path13Equation119SourceData C) step →
   R182.realization (asPositiveCoarseBondEquation119Source source) step
   ≡ R192.path13PhysicalPeriodicRealization (background source)
-path13SourceRealizationIsPhysical source step = Agda.Builtin.Equality.refl
+path13SourceRealizationIsPhysical source step = refl
 
 path13CanonicalCoarseSideIs13 :
   ∀ {C} (source : Path13Equation119SourceData C) step →
   R182.coarseBond (asPositiveCoarseBondEquation119Source source) step
   ≡ coarseBond source step
-path13CanonicalCoarseSideIs13 source step = Agda.Builtin.Equality.refl
+path13CanonicalCoarseSideIs13 source step = refl
 
 cmp98Path13Equation119SourceRound193Level : ProofLevel
 cmp98Path13Equation119SourceRound193Level = machineChecked
