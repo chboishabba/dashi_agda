@@ -17,5 +17,6 @@ import DASHI.Foundations.Base369Ternary27AdmissibilityPathDynamicsExact
 -- Paper-specific BIDI bridge and adaptive evidence-search policy.
 import DASHI.Culture.JohnAnthonyBrownReceptionEvidenceReopeningBridgeExact
 import DASHI.Culture.JohnAnthonyBrownAdaptiveEvidenceSearchExact
+import DASHI.Culture.JohnAnthonyBrownEvidenceMoveConeDynamicsExact
 import DASHI.JohnAnthonyBrownReceptionAdaptiveReopeningValidation
 import DASHI.JohnAnthonyBrownAdaptiveEvidenceSearchValidation
