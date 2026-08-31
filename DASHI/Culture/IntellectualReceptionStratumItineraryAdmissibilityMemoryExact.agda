@@ -200,6 +200,8 @@ coarseReconvergenceCannotRecoverClosureResidue :
   Residue.ResidueDescendsThrough coarseReconverged reconvergedResidue → ⊥
 coarseReconvergenceCannotRecoverClosureResidue =
   Residue.coarseCollisionAcrossResidueBlocksDescent
+    {x = archiveReconverged}
+    {y = closureReconverged}
     refl refl refl
 
 ------------------------------------------------------------------------
