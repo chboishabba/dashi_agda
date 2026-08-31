@@ -1,0 +1,28 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanCMP98Equation119Round190Validation where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCMP98SelectedPhysicalUnitCarrierRound187Exact as R187
+import DASHI.Physics.YangMills.BalabanCMP98RawUnitPathHomomorphismRound189Exact as R189
+import DASHI.Physics.YangMills.BalabanCMP98TerminalHamiltonianBidiRound188Exact as R188
+import DASHI.Physics.YangMills.BalabanCMP98ClayBoundarySupersessionRound190Exact as R190
+
+round187PhysicalPeriodicRealization : ProofLevel
+round187PhysicalPeriodicRealization =
+  R187.cmp98SelectedPhysicalPeriodicRealizationRound187Level
+
+round189RawUnitPathHomomorphism : ProofLevel
+round189RawUnitPathHomomorphism =
+  R189.cmp98RawUnitPathHolomorphismRound189Level
+
+round188TerminalHamiltonianCompression : ProofLevel
+round188TerminalHamiltonianCompression =
+  R188.cmp98TerminalHamiltonianBidiRound188Level
+
+round190NewestTerminalSurface : ProofLevel
+round190NewestTerminalSurface =
+  R190.cmp98NewestTerminalMathematicalSurfaceRound190Level
+
+round190FinalBoundarySynchronization : ProofLevel
+round190FinalBoundarySynchronization =
+  R190.terminalClayBoundarySynchronizationRound190Level
