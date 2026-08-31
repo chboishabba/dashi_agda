@@ -37,7 +37,7 @@ import DASHI.Base369ZetaHeisenbergFiftyFourValidation
 import DASHI.Base369MonsterTwoComponentCompletionValidation
 
 -- Consumer-first representation-theoretic frontier: actual M -> MN3B
--- restriction and a now theorem-bearing finite Heisenberg group chain.
+-- restriction and a theorem-bearing finite Heisenberg group chain.
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchExact
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact
 import DASHI.Moonshine.Monster3BF3AlgebraExact
@@ -50,8 +50,9 @@ import DASHI.Moonshine.Monster3BFiniteHeisenbergNondegeneracyExact
 
 -- Concrete Schrodinger irreducibility route: exact Q(zeta_3)-valued function
 -- module, character-derived coordinate/point projectors, exact 729 scale,
--- constructive X6 comparison and nonzero cyclotomic inversion.  Full
--- irreducibility remains downstream until delta extraction/spanning closes.
+-- constructive X6 comparison, nonzero cyclotomic inversion, and literal delta
+-- extraction from a nonzero invariant-vector witness.  Full irreducibility
+-- still waits on translated-delta orbit / finite-basis spanning.
 import DASHI.Moonshine.Monster3BCyclotomicLinearAlgebraExact
 import DASHI.Moonshine.Monster3BCyclotomicNonzeroInverseExact
 import DASHI.Moonshine.Monster3BFiniteSchrodingerFunctionModuleExact
@@ -60,6 +61,7 @@ import DASHI.Moonshine.Monster3BFiniteSchrodingerPointProjectorExact
 import DASHI.Moonshine.Monster3BFiniteSchrodingerPointProjectorEvaluationExact
 import DASHI.Moonshine.Monster3BFiniteSchrodingerProjector729Exact
 import DASHI.Moonshine.Monster3BFiniteX6ConstructiveComparisonExact
+import DASHI.Moonshine.Monster3BFiniteSchrodingerDeltaExtractionExact
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact
 
 import DASHI.Base369Ternary27StratifiedFibreHolonomyValidation
