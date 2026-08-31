@@ -40,3 +40,8 @@ import DASHI.Physics.Closure.TSFVPairActionCandidateAuditExact
 import DASHI.Physics.Closure.TSFVNonseparableTransitionKernelExact
 import DASHI.Physics.Closure.TSFVBidirectionalActionRealizationObligationExact
 import DASHI.Physics.Closure.TSFVActionPhaseWeightSeparationExact
+
+-- Counterfactual parameter-space / multiverse-attractor cross-pollination.
+-- TSFV contributes history/projection non-factorability only; it is not promoted
+-- into a multiverse or anthropic-selection theorem.
+import DASHI.Physics.Closure.TSFVMultiverseViabilityCrossPollinationExact
