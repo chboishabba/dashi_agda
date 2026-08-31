@@ -19,6 +19,7 @@ import DASHI.Governance.DrugCategoryTranslationPathResidueExact as PathResidue
 import DASHI.Governance.DrugCategoryTranslationEdgeIndexedReopeningExact as EdgeIndexed
 import DASHI.Governance.DrugCategoryPartialTranslationPathCategoryExact as PartialPath
 import DASHI.Governance.DrugCategoryComposedPathEdgeReopeningExact as ComposedReopen
+import DASHI.Governance.DrugCategoryConsumerIndexedTranslationAdmissionExact as ConsumerAdmission
 import DASHI.Governance.DrugCategoryPhilosophyOperatorAtlasExact as Philosophy
 import DASHI.Governance.DrugCategoryPhilosophySelectiveReopeningExact as PhilosophyReopen
 
@@ -48,6 +49,11 @@ composedPathReopeningBoundary : ComposedReopen.ComposedPathEdgeReopeningBoundary
 composedPathReopeningBoundary =
   ComposedReopen.canonicalComposedPathEdgeReopeningBoundary
 
+consumerAdmissionBoundary :
+  ConsumerAdmission.DrugCategoryConsumerIndexedTranslationBoundary
+consumerAdmissionBoundary =
+  ConsumerAdmission.canonicalDrugCategoryConsumerIndexedTranslationBoundary
+
 philosophyBoundary : Philosophy.DrugCategoryPhilosophyOperatorBoundary
 philosophyBoundary = Philosophy.canonicalDrugCategoryPhilosophyOperatorBoundary
 
@@ -76,3 +82,10 @@ clinicalFactPreservedButSubjectNotGloballyPreserved :
     Translation.clinicalFactCoordinate
 clinicalFactPreservedButSubjectNotGloballyPreserved =
   PartialPath.clinicalFactPreservedAlongStateClinicalLived
+
+clinicalConsumerAdmitsComposedPath :
+  ConsumerAdmission.ConsumerPathSafe
+    ConsumerAdmission.clinicalSafetyConsumer
+    PartialPath.stateClinicalLivedPath
+clinicalConsumerAdmitsComposedPath =
+  ConsumerAdmission.clinicalSafetyAdmitsStateClinicalLived
