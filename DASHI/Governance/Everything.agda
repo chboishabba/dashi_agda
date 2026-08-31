@@ -119,3 +119,8 @@ import DASHI.Governance.IranUS2026RestitutionObservation
 -- History-qualified manipulation / dissent / socio-technical assay lane.
 import DASHI.Governance.SituatedDissentDeceptionAssayExact
 import DASHI.Governance.SocioTechnicalPowerSelectionAssayExact
+
+-- Physical-agent / resource-pressure / system-closure assay lane.
+import DASHI.Governance.ResourcePressureTelemetryPermissionExact
+import DASHI.Governance.ExecutionGovernanceClosureAssayExact
+import DASHI.Governance.MHSButterBenchPhysicalAgentCrossPollinationExact
