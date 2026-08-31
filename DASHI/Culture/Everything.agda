@@ -12,3 +12,4 @@ import DASHI.Culture.RastafariItalInhabitedLandscapeBridgeExact
 import DASHI.Culture.RastafariItalSocioEcologicalFlowBridgeExact
 import DASHI.Culture.RastafariItalMaterialProvenanceConservationExact
 import DASHI.Culture.RastafariItalReturnFlowCircularityExact
+import DASHI.Culture.RastafariItalReturnAdmissibleTransitionBridgeExact
