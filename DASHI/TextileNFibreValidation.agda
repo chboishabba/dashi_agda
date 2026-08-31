@@ -8,3 +8,4 @@ import DASHI.Combinatorics.TextileFibreHyperfabricExact
 import DASHI.Combinatorics.TextileFibreOrderHyperfabricExact
 import DASHI.Combinatorics.ProofFabricCompilerExact
 import DASHI.Computation.JacquardProofVisibleSurfaceExact
+import DASHI.JacquardProofVisibleSurfaceValidation
