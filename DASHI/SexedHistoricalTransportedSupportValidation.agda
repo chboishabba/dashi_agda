@@ -16,6 +16,7 @@ import DASHI.Governance.SexedHistoricalTransportedSupportConsumerClosureExact as
 import DASHI.Governance.SexedHistoricalStratifiedMultiConsumerClosureExact as Multi
 import DASHI.Governance.SexedHistoricalStratifiedFidelityEscalationExact as Fidelity
 import DASHI.Governance.SexedHistoricalStratifiedCounterfactualPathExact as Counterfactual
+import DASHI.Governance.SexedHistoricalStratifiedFutureConeQuotientExact as FutureCone
 
 canonicalSupportHistoryRegression :
   Transported.SupportTransportPath
@@ -177,6 +178,21 @@ counterfactualCoarsePathCannotRecoverChoiceRegression :
 counterfactualCoarsePathCannotRecoverChoiceRegression =
   Counterfactual.coarsePathCannotRecoverNextChoice
 
+futureConeSameImmediateChoiceRegression :
+  FutureCone.immediateChoice FutureCone.repairedThenPluralised
+  ≡ FutureCone.immediateChoice FutureCone.repairedThenInstitutionalised
+futureConeSameImmediateChoiceRegression = FutureCone.sameImmediateChoice
+
+futureConeStillDiffersRegression :
+  FutureCone.futureCone FutureCone.repairedThenPluralised
+  ≡ FutureCone.futureCone FutureCone.repairedThenInstitutionalised → ⊥
+futureConeStillDiffersRegression = FutureCone.futureConesDiffer
+
+presentSurfaceCannotRecoverFutureConeRegression :
+  INF.FactorsThrough FutureCone.observeFuturePath FutureCone.futureCone → ⊥
+presentSurfaceCannotRecoverFutureConeRegression =
+  FutureCone.presentSurfaceCannotRecoverFutureCone
+
 transportedSupportBoundaryRegression :
   Transported.TransportedAssociatorSupportBoundary
 transportedSupportBoundaryRegression =
@@ -205,3 +221,7 @@ stratifiedCounterfactualPathBoundaryRegression :
   Counterfactual.StratifiedCounterfactualPathBoundary
 stratifiedCounterfactualPathBoundaryRegression =
   Counterfactual.canonicalStratifiedCounterfactualPathBoundary
+
+stratifiedFutureConeBoundaryRegression : FutureCone.StratifiedFutureConeQuotientBoundary
+stratifiedFutureConeBoundaryRegression =
+  FutureCone.canonicalStratifiedFutureConeQuotientBoundary
