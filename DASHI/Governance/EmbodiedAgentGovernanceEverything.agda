@@ -10,7 +10,8 @@ module DASHI.Governance.EmbodiedAgentGovernanceEverything where
 -- specialisations without making any one consciousness ontology authoritative.
 -- Declared computation and realised runtime interaction topology are also kept
 -- distinct so emergent/shared-state communication is not erased by nominal
--- interface descriptions.
+-- interface descriptions. Levin-style agency/material competency is additionally
+-- kept separate from consciousness and moral-status promotion.
 ------------------------------------------------------------------------
 
 import DASHI.Governance.ResourcePressureTelemetryPermissionExact
@@ -27,6 +28,7 @@ import DASHI.Governance.InternalDispositionCapabilitySeparationExact
 import DASHI.Governance.ConsciousnessAbstractionInstantiationBoundaryExact
 import DASHI.Governance.Lerchner2026AbstractionFallacySourceBridgeExact
 import DASHI.Governance.ConsciousnessRealisedTopologyCrossPollinationExact
+import DASHI.Governance.LevinAgenticMaterialRealisedTopologyCrossPollinationExact
 
 -- Core dependencies exposed here for downstream governance consumers.
 import DASHI.Core.ObservationInterventionTrustFibreExact
