@@ -10,6 +10,7 @@ FILES=(
   DASHI/Analysis/RiemannG2ExplicitFormulaBridgeAuditExact.agda
   DASHI/Analysis/RiemannG2LiteralSpectralZeroWeldExact.agda
   DASHI/Analysis/RiemannG2BidiCutReconciliationExact.agda
+  DASHI/Analysis/RiemannG2C3MonsterEquivarianceAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda
   DASHI/Mathematics/NumberTheory/DiophantineTupleDPrimeSquare2026ClaimAuditExact.agda
@@ -18,8 +19,12 @@ FILES=(
   DASHI/Core/SourceExactFrontierBidiCrossPollination2026.agda
   DASHI/Core/FrontierRelationStrengthBidiExact.agda
   DASHI/Core/FiniteCertificateConsumerBridgeExact.agda
+  DASHI/Core/ThreeChannelC3EquivarianceGateExact.agda
+  DASHI/Core/ClayMonster369CrossPollination2026Exact.agda
   DASHI/Physics/YangMills/BalabanActiveSourceDiscriminator2026Exact.agda
+  DASHI/Physics/YangMills/BalabanC3MonsterEquivarianceAuditExact.agda
   DASHI/Physics/Closure/NSCriticalConeAristotleRouteHypergraph2026Exact.agda
+  DASHI/Physics/Closure/NSCriticalConeResidualFibre369CrossPollinationExact.agda
   "$ROOT"
 )
 
