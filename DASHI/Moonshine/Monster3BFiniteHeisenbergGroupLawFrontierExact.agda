@@ -3,10 +3,9 @@ module DASHI.Moonshine.Monster3BFiniteHeisenbergGroupLawFrontierExact where
 ------------------------------------------------------------------------
 -- FINITE HEISENBERG GROUP-LAW FRONTIER
 --
--- The central-extension multiplication is already constructed.  This owner
--- closes the identity laws and isolates the remaining associativity/inverse
--- work at the exact algebraic seams: F3 addition, dot-product bilinearity and
--- the resulting 2-cocycle identity.
+-- The central-extension multiplication is already constructed.  Identity and
+-- the concrete F3 scalar algebra are now proved.  The remaining associativity
+-- seam is dot-product bilinearity -> 2-cocycle identity -> group associativity.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -15,24 +14,19 @@ open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as G
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact as H
+import DASHI.Moonshine.Monster3BF3AlgebraExact as F3
 
 ------------------------------------------------------------------------
--- 1. Exact scalar identities needed by the identity laws.
+-- 1. Scalar/vector zero identities used by the actual group operation.
 ------------------------------------------------------------------------
 
 plusRightZero : (a : Trit) → G._+3_ a zer ≡ a
-plusRightZero neg = refl
-plusRightZero zer = refl
-plusRightZero pos = refl
+plusRightZero = F3.plusRightZero
 
 mulRightZero : (a : Trit) → H._*3_ a zer ≡ zer
 mulRightZero neg = refl
 mulRightZero zer = refl
 mulRightZero pos = refl
-
-------------------------------------------------------------------------
--- 2. Vector zero laws and vanishing cocycle legs.
-------------------------------------------------------------------------
 
 addZeroLeft : (x : G.X6) → H.addX6 H.zeroX6 x ≡ x
 addZeroLeft (G.x6 a b c d e f) = refl
@@ -51,7 +45,7 @@ dotZeroRight (G.x6 a b c d e f)
         | mulRightZero d | mulRightZero e | mulRightZero f = refl
 
 ------------------------------------------------------------------------
--- 3. Both identity laws for the actual Heisenberg multiplication.
+-- 2. Both identity laws for the actual Heisenberg multiplication.
 ------------------------------------------------------------------------
 
 leftIdentity : (g : H.Heisenberg6) → H.compose H.identityH g ≡ g
@@ -67,15 +61,30 @@ rightIdentity
         | plusRightZero c = refl
 
 ------------------------------------------------------------------------
+-- 3. Exact algebra authority imported from the finite truth-table owner.
+------------------------------------------------------------------------
+
+f3AssociativityAvailable : Bool
+f3AssociativityAvailable = F3.additiveAssociativity F3.canonicalF3AlgebraBoundary
+
+f3AssociativityAvailableIsTrue : f3AssociativityAvailable ≡ true
+f3AssociativityAvailableIsTrue = refl
+
+f3DistributivityAvailable : Bool
+f3DistributivityAvailable = F3.distributivity F3.canonicalF3AlgebraBoundary
+
+f3DistributivityAvailableIsTrue : f3DistributivityAvailable ≡ true
+f3DistributivityAvailableIsTrue = refl
+
+------------------------------------------------------------------------
 -- 4. Remaining exact algebraic obligations.
 --
--- Associativity is equivalent here to the standard cocycle identity
+-- For beta((x,xi),(y,eta)) = xi.y, dot6 bilinearity implies
 --
---   beta(g,h) + beta(g+h,k) = beta(h,k) + beta(g,h+k)
+--   beta(g,h) + beta(g+h,k) = beta(h,k) + beta(g,h+k),
 --
--- for beta((x,xi),(y,eta)) = xi . y.  Bilinearity of dot6 discharges that
--- identity.  The inverse formula then uses additive inverses plus the same
--- bilinearity.  Those facts are deliberately not replaced by booleans here.
+-- the 2-cocycle identity.  That identity is the only associativity-specific
+-- obstruction left after the already proved scalar algebra.
 ------------------------------------------------------------------------
 
 data GroupLawLeaf : Set where
@@ -92,7 +101,7 @@ data LeafState : Set where closed open blocked : LeafState
 leafState : GroupLawLeaf → LeafState
 leafState proveLeftIdentity = closed
 leafState proveRightIdentity = closed
-leafState proveF3Associativity = open
+leafState proveF3Associativity = closed
 leafState proveDotBilinearity = open
 leafState proveCocycleIdentity = blocked
 leafState proveHeisenbergAssociativity = blocked
@@ -110,12 +119,19 @@ data Requires : GroupLawLeaf → GroupLawLeaf → Set where
   inverseNeedsDotBilinearity :
     Requires proveInverseFormula proveDotBilinearity
 
+highestImpactGroupLawLeaf : GroupLawLeaf
+highestImpactGroupLawLeaf = proveDotBilinearity
+
+highestImpactGroupLawLeafIsOpen : leafState highestImpactGroupLawLeaf ≡ open
+highestImpactGroupLawLeafIsOpen = refl
+
 record HeisenbergGroupLawFrontierBoundary : Set where
   constructor heisenbergGroupLawFrontierBoundary
   field
     leftIdentityProved : Bool
     rightIdentityProved : Bool
     scalarAssociativityProvedHere : Bool
+    scalarDistributivityProvedHere : Bool
     dotBilinearityProvedHere : Bool
     cocycleIdentityProvedHere : Bool
     fullAssociativityProvedHere : Bool
@@ -124,4 +140,4 @@ open HeisenbergGroupLawFrontierBoundary public
 
 canonicalHeisenbergGroupLawFrontierBoundary : HeisenbergGroupLawFrontierBoundary
 canonicalHeisenbergGroupLawFrontierBoundary =
-  heisenbergGroupLawFrontierBoundary true true false false false false false
+  heisenbergGroupLawFrontierBoundary true true true true false false false false
