@@ -25,9 +25,10 @@ module DASHI.Physics.YangMills.BalabanCMP98SU2OperatorDefectFromPhysicalRadiusRo
 -- allowed to supply the final 1/2048 operator bound directly.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP98UnitaryOperatorDefectTelescopeExact as Op
@@ -45,8 +46,6 @@ record RationalSU2OperatorDefectRepresentation : Set₁ where
   field
     kernel : Op.UnitaryOperatorDefectKernel Q.RationalQuaternion
 
-    -- Standard matrix representation theorem for
-    -- q0 I + i(q1 sigma1 + q2 sigma2 + q3 sigma3).
     operatorDefectBelowQuaternionL1 : ∀ value →
       Op.defect kernel value
       ≤ L1.quaternionDefectL1 (QTelescope._-q_ value Q.oneQ)
@@ -89,11 +88,11 @@ physicalPositiveLinkQuaternionL1BelowOne2048 background radius bond =
       L1.quaternionDefectL1
         (QTelescope._-q_ (Physical.link background bond) Q.oneQ)
       ≤ upper)
-    symSharpBudget
+    sharpBudgetIsPerLink
     sharp
   where
-    symSharpBudget : Sharp.sharpL1Budget ≡ Budget.perLinkDefectMajorant
-    symSharpBudget = Agda.Builtin.Equality.refl
+    sharpBudgetIsPerLink : Sharp.sharpL1Budget ≡ Budget.perLinkDefectMajorant
+    sharpBudgetIsPerLink = refl
 
 physicalPositiveLinkOperatorDefectBelowOne2048 :
   (representation : RationalSU2OperatorDefectRepresentation) →
@@ -114,7 +113,5 @@ cmp98PhysicalRadiusToQuaternionL1Round171Level = machineChecked
 cmp98PhysicalRadiusToOperatorDefectRound171Level : ProofLevel
 cmp98PhysicalRadiusToOperatorDefectRound171Level = machineChecked
 
--- This is the single standard imported representation fact above; the entire
--- physical-radius -> 1/2048 operator conclusion is theorem-generated from it.
 cmp98RationalSU2OperatorRepresentationRound171Level : ProofLevel
 cmp98RationalSU2OperatorRepresentationRound171Level = standardImported
