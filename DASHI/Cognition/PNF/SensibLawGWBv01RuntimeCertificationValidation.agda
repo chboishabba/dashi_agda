@@ -1,6 +1,6 @@
 module DASHI.Cognition.PNF.SensibLawGWBv01RuntimeCertificationValidation where
 
-open import Agda.Builtin.Bool using (true)
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (zero)
 
