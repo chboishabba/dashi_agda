@@ -85,10 +85,12 @@ import DASHI.Moonshine.Monster3BActualMultiplicityEvaluationFromRecognitionExact
 -- Once ActualZetaSectorRecognition is supplied, Base369 recognition is no
 -- longer an independent representation theorem: compose the actual-sector
 -- round trip with the exact appraisal-fibre <-> X6 chart and transport both
--- translation and modulation observers automatically.  Round2 makes this the
--- live scientific frontier after ordinary finite-dimensional machinery is
--- removed from the Monster-specific search budget.
+-- translation and modulation observers automatically.  The action-recognition
+-- capstone packages this recognition together with the phase-resolved sector,
+-- producing the existing promotion pipeline and Base369 x Fin 90 compiler
+-- surface without introducing any new numerical recognition principle.
 import DASHI.Moonshine.Base369Monster3BActualSectorRecognitionBidiExact
+import DASHI.Moonshine.Base369Monster3BActualActionRecognitionBidiExact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound2Exact
 
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact
