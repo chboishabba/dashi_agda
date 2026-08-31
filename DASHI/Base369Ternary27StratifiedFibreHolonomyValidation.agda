@@ -13,6 +13,9 @@ import DASHI.Moonshine.Base369Ternary27StratifiedFibreHolonomyExact as Holonomy
 import DASHI.Moonshine.Base369AppraisalFibreHeisenbergCarrierBidiExact as HeisenbergCarrier
 import DASHI.Moonshine.Base369HeisenbergTranslationGridObstructionExact as TranslationAudit
 import DASHI.Moonshine.Base369MonsterFineCarrierEquivarianceAuditExact as FineAudit
+import DASHI.Moonshine.Base369PeriodicTernaryTorusPathRestrictionBidiExact as Torus
+import DASHI.Moonshine.Base369PeriodicHeisenbergFibreEquivarianceExact as PeriodicHeisenberg
+import DASHI.Moonshine.Base369DecimalCompletionMonsterBulkBidiExact as DecimalMonster
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as Heisenberg
 
 ------------------------------------------------------------------------
@@ -105,7 +108,7 @@ fullFabricRoundTripsThroughInteractionAndX6 =
   HeisenbergCarrier.fabricHeisenbergRoundTrip
 
 ------------------------------------------------------------------------
--- BIDI operator audit: cyclic translation obstructed, reflection compatible.
+-- BIDI operator audit: path obstruction and periodic resolution.
 ------------------------------------------------------------------------
 
 heisenbergAxis0WrapsPositiveToNegative :
@@ -129,6 +132,35 @@ signInversionCompatibilityPinned :
   TranslationAudit.HeisenbergGridBidiBoundary.signInversionMatchesGeometricReflection
     TranslationAudit.canonicalHeisenbergGridBidiBoundary ≡ true
 signInversionCompatibilityPinned = refl
+
+nativePathEdgeEmbedsInPeriodicTorus :
+  Torus.TorusVoxelAdjacent
+    TranslationAudit.zeroAxisPoint
+    TranslationAudit.positiveAxisPoint
+nativePathEdgeEmbedsInPeriodicTorus =
+  Torus.pathVoxelEdgeEmbedsInTorus TranslationAudit.zeroToPositiveIsNativeEdge
+
+wraparoundIsPeriodicEdge :
+  Torus.TorusVoxelAdjacent
+    TranslationAudit.translatedZeroAxisPoint
+    TranslationAudit.translatedPositiveAxisPoint
+wraparoundIsPeriodicEdge = Torus.heisenbergWrapLivesOnPeriodicTorus
+
+wraparoundIsCutDownstairs :
+  Geometry.HypervoxelAdjacent
+    TranslationAudit.translatedZeroAxisPoint
+    TranslationAudit.translatedPositiveAxisPoint → ⊥
+wraparoundIsCutDownstairs = Torus.heisenbergWrapIsCutByPathRestriction
+
+allSixHeisenbergTranslationsArePeriodicAutomorphisms :
+  PeriodicHeisenberg.PeriodicHeisenbergEquivarianceBoundary.allSixTranslationsArePeriodicGraphAutomorphisms
+    PeriodicHeisenberg.canonicalPeriodicHeisenbergEquivarianceBoundary ≡ true
+allSixHeisenbergTranslationsArePeriodicAutomorphisms = refl
+
+allSixHeisenbergTranslationsAreNotPathAutomorphisms :
+  PeriodicHeisenberg.PeriodicHeisenbergEquivarianceBoundary.allSixTranslationsArePathGraphAutomorphisms
+    PeriodicHeisenberg.canonicalPeriodicHeisenbergEquivarianceBoundary ≡ false
+allSixHeisenbergTranslationsAreNotPathAutomorphisms = refl
 
 ------------------------------------------------------------------------
 -- 19683 harmonic fine-carrier audit.
@@ -156,6 +188,39 @@ fullMonsterActionStillNotEstablished :
   FineAudit.FineCarrierBidiBoundary.fullMonsterActionOnHyperfabricEstablished
     FineAudit.canonicalFineCarrierBidiBoundary ≡ false
 fullMonsterActionStillNotEstablished = refl
+
+------------------------------------------------------------------------
+-- Decimal / completion / 10 x fine Monster ledger.
+------------------------------------------------------------------------
+
+nineOrdinaryPlusCompletionIsTen : DecimalMonster.coarseWithCompletionCount ≡ 10
+nineOrdinaryPlusCompletionIsTen = DecimalMonster.coarseWithCompletionCountIsTen
+
+tenTimesBase369FineIs196830 : DecimalMonster.base369TenChannelBulk ≡ 196830
+tenTimesBase369FineIs196830 = DecimalMonster.base369TenChannelBulkIs196830
+
+base369BulkPlus53IsMonsterDimension :
+  DecimalMonster.monsterDimensionFromBase369Bulk ≡ 196883
+base369BulkPlus53IsMonsterDimension = DecimalMonster.monsterDimensionFromBase369BulkIs196883
+
+base369BulkPlus54IsMoonshineWeightTwo :
+  DecimalMonster.moonshineWeightTwoFromBase369Bulk ≡ 196884
+base369BulkPlus54IsMoonshineWeightTwo = DecimalMonster.moonshineWeightTwoFromBase369BulkIs196884
+
+nineTenthsThreeAxisNumeratorIsFineCarrier :
+  DecimalMonster.ninetyPercentThreeAxisNumeratorIsHyperfabric ≡
+  DecimalMonster.ninetyPercentThreeAxisNumeratorIsHyperfabric
+nineTenthsThreeAxisNumeratorIsFineCarrier = refl
+
+tenOverNineCarryAtNineIsExact :
+  DecimalMonster.DecimalCompletionMonsterBulkBoundary.tenOverNineCompletionIdentityAvailable
+    DecimalMonster.canonicalDecimalCompletionMonsterBulkBoundary ≡ true
+tenOverNineCarryAtNineIsExact = refl
+
+decimalArithmeticNotPromotedToMonsterCause :
+  DecimalMonster.DecimalCompletionMonsterBulkBoundary.decimalLadderCausesMonsterDimension
+    DecimalMonster.canonicalDecimalCompletionMonsterBulkBoundary ≡ false
+decimalArithmeticNotPromotedToMonsterCause = refl
 
 ------------------------------------------------------------------------
 -- Existing non-promotion boundaries.
