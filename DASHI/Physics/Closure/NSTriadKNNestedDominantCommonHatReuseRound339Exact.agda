@@ -48,9 +48,8 @@ innerDominantCommonHat :
   (L : Helical.PeriodicHelicalProjectorLaws F E I S)
   (H : R142.HelicalHalfCalibration S)
   (W : R294.SwapInvariantCellWeight F) →
-  R329.StrongLowLiteralNestedCell E I O system S L H W →
-  R63.ResonantDominantCommonHat
-    (R329.inner _)
+  (C : R329.StrongLowLiteralNestedCell E I O system S L H W) →
+  R63.ResonantDominantCommonHat (R329.inner C)
 innerDominantCommonHat E I O system S L H W C =
   R63.resonantDominantCommonHat (R329.inner C)
 
@@ -63,9 +62,8 @@ outerDominantCommonHat :
   (L : Helical.PeriodicHelicalProjectorLaws F E I S)
   (H : R142.HelicalHalfCalibration S)
   (W : R294.SwapInvariantCellWeight F) →
-  R329.StrongLowLiteralNestedCell E I O system S L H W →
-  R63.ResonantDominantCommonHat
-    (R329.outer _)
+  (C : R329.StrongLowLiteralNestedCell E I O system S L H W) →
+  R63.ResonantDominantCommonHat (R329.outer C)
 outerDominantCommonHat E I O system S L H W C =
   R63.resonantDominantCommonHat (R329.outer C)
 
