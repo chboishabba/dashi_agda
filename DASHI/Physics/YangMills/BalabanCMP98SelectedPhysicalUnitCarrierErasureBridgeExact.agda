@@ -12,14 +12,16 @@ module DASHI.Physics.YangMills.BalabanCMP98SelectedPhysicalUnitCarrierErasureBri
 -- raw-quaternion group structure is required.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Rational.Base using (-_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as SU2
+import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact as Periodic
+import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact as Word
 import DASHI.Physics.YangMills.BalabanClayGate4RationalSU2ExactGroupLaws as Group
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionCoreExact as Q
@@ -51,16 +53,14 @@ eraseList [] = []
 eraseList (value ∷ values) =
   R187.eraseUnitQuaternion value ∷ eraseList values
 
-eraseProductList :
-  ∀ values →
-  R187.eraseUnitQuaternion
-    (productUnit values)
+productUnit : List SU2.RationalUnitQuaternion → SU2.RationalUnitQuaternion
+productUnit [] = Group.identityRationalSU2
+productUnit (value ∷ values) =
+  Group.multiplyRationalSU2 value (productUnit values)
+
+eraseProductList : ∀ values →
+  R187.eraseUnitQuaternion (productUnit values)
   ≡ RawPath.pathProduct (eraseList values)
-  where
-  productUnit : List SU2.RationalUnitQuaternion → SU2.RationalUnitQuaternion
-  productUnit [] = Group.identityRationalSU2
-  productUnit (value ∷ values) =
-    Group.multiplyRationalSU2 value (productUnit values)
 eraseProductList [] = eraseIdentity
 eraseProductList (value ∷ values) =
   trans
@@ -68,17 +68,6 @@ eraseProductList (value ∷ values) =
     (cong
       (Q._*q_ (R187.eraseUnitQuaternion value))
       (eraseProductList values))
-  where
-  productUnit : List SU2.RationalUnitQuaternion → SU2.RationalUnitQuaternion
-  productUnit [] = Group.identityRationalSU2
-  productUnit (head ∷ tail) = Group.multiplyRationalSU2 head (productUnit tail)
-
-rawOrientedFactor :
-  ∀ {n}
-    (realization : Bond.PeriodicBondGaugeRealization
-      n SU2.RationalUnitQuaternion Group.rationalSU2ExactLinkGroup) →
-  Bond.PeriodicSiteGauge n SU2.RationalUnitQuaternion → Set
-rawOrientedFactor realization gauge = Q.RationalQuaternion
 
 -- Pointwise erasure of the repository oriented-link convention.  Positive
 -- traversal is direct erasure; negative traversal is erasure of the exact
@@ -119,35 +108,27 @@ eraseOrientedLinkNegative realization site axis =
     (Bond.bondField realization
       (pair (Bond.negativeStep site axis) axis))
 
--- Exact path recursion in raw coordinates.  This is the representation theorem
--- needed by the selected raw principal chart: erasing the typed path holonomy
--- is the same ordered raw quaternion product of erased oriented factors.
-erasedPathHolonomy :
-  ∀ {n}
-    (realization : Bond.PeriodicBondGaugeRealization
-      n SU2.RationalUnitQuaternion Group.rationalSU2ExactLinkGroup)
-    site directions → Q.RationalQuaternion
-erasedPathHolonomy realization site directions =
-  R187.eraseUnitQuaternion
-    (Bond.pathHolonomy realization site directions)
-
 rawPathFactors :
   ∀ {n}
     (realization : Bond.PeriodicBondGaugeRealization
       n SU2.RationalUnitQuaternion Group.rationalSU2ExactLinkGroup) →
-  (site : _) → List DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact.SignedAxis4 →
+  Periodic.PeriodicBlock n → List Word.SignedAxis4 →
   List Q.RationalQuaternion
 rawPathFactors realization site [] = []
 rawPathFactors realization site (direction ∷ directions) =
   R187.eraseUnitQuaternion (Bond.orientedLink realization site direction)
   ∷ rawPathFactors realization (Bond.walkStep site direction) directions
 
+-- Exact path recursion in raw coordinates.  This is the representation theorem
+-- needed by the selected raw principal chart: erasing the typed path holonomy
+-- is the same ordered raw quaternion product of erased oriented factors.
 erasedPathHolonomyIsRawPathProduct :
   ∀ {n}
     (realization : Bond.PeriodicBondGaugeRealization
       n SU2.RationalUnitQuaternion Group.rationalSU2ExactLinkGroup)
     site directions →
-  erasedPathHolonomy realization site directions
+  R187.eraseUnitQuaternion
+    (Bond.pathHolonomy realization site directions)
   ≡ RawPath.pathProduct (rawPathFactors realization site directions)
 erasedPathHolonomyIsRawPathProduct realization site [] = eraseIdentity
 erasedPathHolonomyIsRawPathProduct realization site (direction ∷ directions) =
