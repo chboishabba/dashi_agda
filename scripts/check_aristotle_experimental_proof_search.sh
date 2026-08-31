@@ -11,8 +11,10 @@ FILES=(
   DASHI/Analysis/RiemannAristotleExperimentalProofSearchExact.agda
   DASHI/Analysis/RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact.agda
   DASHI/Analysis/RiemannAristotlePoleQuotientFiniteNearEvaluationBidiExact.agda
+  DASHI/Analysis/RiemannAristotlePoleQuotientFiniteNearRouteAuditExact.agda
   DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerExact.agda
   DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerRegression.agda
+  DASHI/Analysis/RiemannAristotleRHAnalyticRouteSchedulerExact.agda
   DASHI/Reasoning/AristotleExperimentalProofSearchValidation.agda
 )
 
