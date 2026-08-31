@@ -6,6 +6,7 @@ open import DASHI.Analysis.DeBruijnNewmanRiemannG2BridgeAuditExact
 open import DASHI.Analysis.DeBruijnNewmanRiemannG2RiemannSiegelBridgeExact
 open import DASHI.Analysis.RiemannG2ExplicitFormulaBridgeAuditExact
 open import DASHI.Analysis.RiemannG2LiteralSpectralZeroWeldExact
+open import DASHI.Analysis.RiemannG2BidiCutReconciliationExact
 open import DASHI.Mathematics.NumberTheory.PrimeGap2026ClaimAuditExact
 open import DASHI.Mathematics.NumberTheory.PrimeGap2026SourceAcquisitionExact
 open import DASHI.Mathematics.NumberTheory.DiophantineTupleDPrimeSquare2026ClaimAuditExact
