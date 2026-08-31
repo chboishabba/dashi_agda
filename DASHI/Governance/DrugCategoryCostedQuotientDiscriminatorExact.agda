@@ -32,10 +32,6 @@ probeCost authorityProbe = 3
 probeCost materialBenefitProbe = 3
 probeCost sovereigntyProbe = 4
 
-------------------------------------------------------------------------
--- Concrete subject/history bundles on the finite quotient fixture.
-------------------------------------------------------------------------
-
 subjectBundle : Discriminator.ExperimentBundle Quotient.TranslationState
 subjectBundle = Discriminator.experimentBundle
   Quotient.SubjectObservation
@@ -52,33 +48,23 @@ historyBundle = Discriminator.experimentBundle
   "observe historical classifier-position"
   "history coding/calibration must preserve erased-vs-retained/reintroduced distinction"
 
-subjectCollision :
-  Discriminator.CurrentObserverCollision Quotient.clinicalObserver
+subjectCollision : Discriminator.CurrentObserverCollision Quotient.clinicalObserver
 subjectCollision = Discriminator.currentObserverCollision
-  Quotient.stateLegalState
-  Quotient.livedSubjectState
-  refl
+  Quotient.stateLegalState Quotient.livedSubjectState refl
 
-historyCollision :
-  Discriminator.CurrentObserverCollision Quotient.clinicalObserver
+historyCollision : Discriminator.CurrentObserverCollision Quotient.clinicalObserver
 historyCollision = Discriminator.currentObserverCollision
-  Quotient.stateLegalState
-  Quotient.biomedicalState
-  refl
+  Quotient.stateLegalState Quotient.biomedicalState refl
 
 subjectBundleSeparates :
-  Discriminator.BundleSeparates
-    subjectBundle
-    Quotient.stateLegalState
-    Quotient.livedSubjectState
+  Discriminator.BundleSeparates subjectBundle
+    Quotient.stateLegalState Quotient.livedSubjectState
 subjectBundleSeparates = Discriminator.bundleSeparates
   Quotient.subjectStateLivedNotEquivalent
 
 historyBundleSeparates :
-  Discriminator.BundleSeparates
-    historyBundle
-    Quotient.stateLegalState
-    Quotient.biomedicalState
+  Discriminator.BundleSeparates historyBundle
+    Quotient.stateLegalState Quotient.biomedicalState
 historyBundleSeparates = Discriminator.bundleSeparates
   Quotient.historyStateBiomedicalNotEquivalent
 
@@ -93,30 +79,27 @@ historyLanguageExtension = Discriminator.discriminatingLanguageExtension
   historyCollision historyBundle historyBundleSeparates
 
 ------------------------------------------------------------------------
--- Prospective menu.  The remaining probes are real candidate information moves
--- but intentionally have no separator/resolution witness on this finite fixture.
+-- Prospective menu.  Remaining probes are candidates, not asserted separators
+-- for this finite fixture.
 ------------------------------------------------------------------------
 
 authorityMove : Choice.InformationMove
 authorityMove = Choice.informationMove
-  Choice.takeMeasurement
-  (probeCost authorityProbe)
+  Choice.takeMeasurement (probeCost authorityProbe)
   "probe classification-authority issuer/standing"
   "authority-provenance and coding resources"
   "requires an authority-sensitive live collision"
 
 materialBenefitMove : Choice.InformationMove
 materialBenefitMove = Choice.informationMove
-  Choice.takeMeasurement
-  (probeCost materialBenefitProbe)
+  Choice.takeMeasurement (probeCost materialBenefitProbe)
   "probe benefit/externality routing"
   "material-flow measurement resources"
   "requires a material-benefit-sensitive live collision"
 
 sovereigntyMove : Choice.InformationMove
 sovereigntyMove = Choice.informationMove
-  Choice.takeMeasurement
-  (probeCost sovereigntyProbe)
+  Choice.takeMeasurement (probeCost sovereigntyProbe)
   "probe sovereign permission/authority"
   "community-governed authority evidence resources"
   "requires a sovereignty-sensitive live collision and valid authority protocol"
@@ -128,7 +111,7 @@ historyMove : Choice.InformationMove
 historyMove = Discriminator.bundleInformationMove historyBundle
 
 ------------------------------------------------------------------------
--- Actionability problems: resolution is deliberately collision-specific.
+-- Actionability problems: resolution is collision-specific.
 ------------------------------------------------------------------------
 
 data SubjectObstruction : Set where subjectStillCollapsed : SubjectObstruction
@@ -159,10 +142,6 @@ subjectResolvingMove = Choice.resolvingMove subjectMove refl
 historyResolvingMove : Choice.ResolvingMove historyProblem
 historyResolvingMove = Choice.resolvingMove historyMove refl
 
-------------------------------------------------------------------------
--- Declared comparison menu.  Candidate status is not a resolution witness.
-------------------------------------------------------------------------
-
 data DeclaredProbeMove : Choice.InformationMove → Set where
   declaredSubject : DeclaredProbeMove subjectMove
   declaredHistory : DeclaredProbeMove historyMove
@@ -170,19 +149,28 @@ data DeclaredProbeMove : Choice.InformationMove → Set where
   declaredMaterial : DeclaredProbeMove materialBenefitMove
   declaredSovereignty : DeclaredProbeMove sovereigntyMove
 
+subjectMinimal :
+  (alternative : Choice.InformationMove) →
+  DeclaredProbeMove alternative →
+  Choice.Resolves subjectProblem alternative
+    (Choice.currentObstruction subjectProblem) →
+  Choice.cost subjectMove ≤ Choice.cost alternative
+subjectMinimal .subjectMove declared refl = s≤s z≤n
+
+historyMinimal :
+  (alternative : Choice.InformationMove) →
+  DeclaredProbeMove alternative →
+  Choice.Resolves historyProblem alternative
+    (Choice.currentObstruction historyProblem) →
+  Choice.cost historyMove ≤ Choice.cost alternative
+historyMinimal .historyMove declared refl = s≤s (s≤s z≤n)
+
 subjectCheapestResolving :
   Choice.CheapestResolvingMove subjectProblem DeclaredProbeMove
 subjectCheapestResolving = Choice.cheapestResolvingMove
   subjectResolvingMove
   declaredSubject
-  (λ alternative declared resolves →
-    let same : alternative ≡ subjectMove
-        same = resolves
-    in
-    subst
-      (λ move → Choice.cost subjectMove ≤ Choice.cost move)
-      (sym same)
-      (s≤s z≤n))
+  subjectMinimal
   "among the declared menu, only the subject probe carries a subject-obstruction resolution witness"
 
 historyCheapestResolving :
@@ -190,14 +178,7 @@ historyCheapestResolving :
 historyCheapestResolving = Choice.cheapestResolvingMove
   historyResolvingMove
   declaredHistory
-  (λ alternative declared resolves →
-    let same : alternative ≡ historyMove
-        same = resolves
-    in
-    subst
-      (λ move → Choice.cost historyMove ≤ Choice.cost move)
-      (sym same)
-      (s≤s (s≤s z≤n)))
+  historyMinimal
   "among the declared menu, only the history probe carries a history-obstruction resolution witness"
 
 ------------------------------------------------------------------------
@@ -214,10 +195,6 @@ historyFailedDescentSelectsHistoryProbe :
   ≡ Refinement.addHistoricalPosition
 historyFailedDescentSelectsHistoryProbe = refl
 
-------------------------------------------------------------------------
--- Hard boundaries.
-------------------------------------------------------------------------
-
 data CheapestProbePromotesScientificallyBest : Set where
 
 data CandidateProbePromotesResolution : Set where
@@ -226,15 +203,13 @@ data PairwiseSeparatorPromotesWholeStateIdentification : Set where
 
 data CostPromotesEthicalAuthority : Set where
 
-cheapestDoesNotPromoteScientificallyBest :
-  CheapestProbePromotesScientificallyBest → ⊥
+cheapestDoesNotPromoteScientificallyBest : CheapestProbePromotesScientificallyBest → ⊥
 cheapestDoesNotPromoteScientificallyBest ()
 
 candidateDoesNotPromoteResolution : CandidateProbePromotesResolution → ⊥
 candidateDoesNotPromoteResolution ()
 
-pairwiseDoesNotPromoteWholeState :
-  PairwiseSeparatorPromotesWholeStateIdentification → ⊥
+pairwiseDoesNotPromoteWholeState : PairwiseSeparatorPromotesWholeStateIdentification → ⊥
 pairwiseDoesNotPromoteWholeState ()
 
 costDoesNotPromoteEthicalAuthority : CostPromotesEthicalAuthority → ⊥
@@ -244,20 +219,15 @@ record DrugCategoryCostedQuotientDiscriminatorBoundary : Set where
   constructor drugCategoryCostedQuotientDiscriminatorBoundary
   field
     failedDescentCanBecomeExperimentBundle : Bool
-    failedDescentCanBecomeExperimentBundleIsTrue :
-      failedDescentCanBecomeExperimentBundle ≡ true
+    failedDescentCanBecomeExperimentBundleIsTrue : failedDescentCanBecomeExperimentBundle ≡ true
     separatingBundleCanBecomeCostedInformationMove : Bool
-    separatingBundleCanBecomeCostedInformationMoveIsTrue :
-      separatingBundleCanBecomeCostedInformationMove ≡ true
+    separatingBundleCanBecomeCostedInformationMoveIsTrue : separatingBundleCanBecomeCostedInformationMove ≡ true
     menuCanContainNonresolvingCandidateProbes : Bool
-    menuCanContainNonresolvingCandidateProbesIsTrue :
-      menuCanContainNonresolvingCandidateProbes ≡ true
+    menuCanContainNonresolvingCandidateProbesIsTrue : menuCanContainNonresolvingCandidateProbes ≡ true
     cheapestDeclaredResolvingMoveIsScientificallyBestTheory : Bool
-    cheapestDeclaredResolvingMoveIsScientificallyBestTheoryIsFalse :
-      cheapestDeclaredResolvingMoveIsScientificallyBestTheory ≡ false
+    cheapestDeclaredResolvingMoveIsScientificallyBestTheoryIsFalse : cheapestDeclaredResolvingMoveIsScientificallyBestTheory ≡ false
     pairwiseSeparationEqualsWholeSemanticRecovery : Bool
-    pairwiseSeparationEqualsWholeSemanticRecoveryIsFalse :
-      pairwiseSeparationEqualsWholeSemanticRecovery ≡ false
+    pairwiseSeparationEqualsWholeSemanticRecoveryIsFalse : pairwiseSeparationEqualsWholeSemanticRecovery ≡ false
 
 canonicalDrugCategoryCostedQuotientDiscriminatorBoundary :
   DrugCategoryCostedQuotientDiscriminatorBoundary
