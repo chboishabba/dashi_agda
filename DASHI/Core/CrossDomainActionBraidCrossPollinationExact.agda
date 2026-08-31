@@ -18,6 +18,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.ActionCrossingBraidExact as Generic
 import DASHI.Core.ActionCrossingTraceCalculusExact as Trace
+import DASHI.Core.IntersectionalNonFactorability as INF
 
 ------------------------------------------------------------------------
 -- 1. Domain-indexed scenario traces.
@@ -119,7 +120,7 @@ cryptoWitness = Generic.same-endpoint-different-provenance
   directAssetPath washLikeAssetPath refl cryptoProvenanceDiffers
 
 cryptoEndpointCannotRecoverProvenance :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
+  INF.FactorsThrough
     (Generic.endpoint cryptoSurface) (Generic.provenance cryptoSurface) → ⊥
 cryptoEndpointCannotRecoverProvenance =
   Generic.endpointCannotRecoverCrossingProvenance cryptoWitness
