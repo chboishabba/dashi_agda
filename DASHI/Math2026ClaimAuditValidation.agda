@@ -9,6 +9,7 @@ open import DASHI.Analysis.RiemannG2LiteralSpectralZeroWeldExact
 open import DASHI.Analysis.RiemannG2BidiCutReconciliationExact
 open import DASHI.Analysis.RiemannG2C3MonsterEquivarianceAuditExact
 open import DASHI.Analysis.RiemannG2DeterminantConsumerQuotient369Exact
+open import DASHI.Analysis.RiemannG2PostSchurDeterminantSufficiency369Exact
 open import DASHI.Mathematics.NumberTheory.PrimeGap2026ClaimAuditExact
 open import DASHI.Mathematics.NumberTheory.PrimeGap2026SourceAcquisitionExact
 open import DASHI.Mathematics.NumberTheory.DiophantineTupleDPrimeSquare2026ClaimAuditExact
