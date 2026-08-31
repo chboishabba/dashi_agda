@@ -2,7 +2,7 @@ module DASHI.Governance.DrugCategoryConsumerRelativeInverseCompositionExact wher
 
 open import DASHI.Core.Prelude
 
-import DASHI.Governance.DrugCategoryMultiChartTranslationGeometryExact as Translation
+import DASHI.Governance.ContestedDrugCategoryAtlasBidiExact as Atlas
 import DASHI.Governance.DrugCategoryPartialTranslationPathCategoryExact as Path
 import DASHI.Governance.DrugCategoryConsumerIndexedTranslationAdmissionExact as Admission
 import DASHI.Governance.DrugCategoryConsumerRelativeQuotientInverseExact as Inverse
@@ -60,27 +60,12 @@ consumerRelativeQuotientInverseComposes firstInverse secondInverse =
 -- Canonical factorisation of the state -> clinical -> lived clinical quotient.
 ------------------------------------------------------------------------
 
-stateClinicalOnlyPath :
-  Path.TranslationPath
-    (Path.sourceMatches Path.stateClinicalLeg |> λ _ → _)
-    (Path.targetMatches Path.stateClinicalLeg |> λ _ → _)
-stateClinicalOnlyPath = Path.pathStep Path.stateClinicalLeg Path.pathId
-
-------------------------------------------------------------------------
--- Avoid relying on equality-expression endpoints above in downstream code;
--- use explicitly typed canonical paths for the concrete factorisation.
-------------------------------------------------------------------------
-
 stateClinicalPath :
-  Path.TranslationPath
-    DASHI.Governance.ContestedDrugCategoryAtlasBidiExact.stateLegalChart
-    DASHI.Governance.ContestedDrugCategoryAtlasBidiExact.biomedicalChart
+  Path.TranslationPath Atlas.stateLegalChart Atlas.biomedicalChart
 stateClinicalPath = Path.pathStep Path.stateClinicalLeg Path.pathId
 
 clinicalLivedPath :
-  Path.TranslationPath
-    DASHI.Governance.ContestedDrugCategoryAtlasBidiExact.biomedicalChart
-    DASHI.Governance.ContestedDrugCategoryAtlasBidiExact.livedSubjectChart
+  Path.TranslationPath Atlas.biomedicalChart Atlas.livedSubjectChart
 clinicalLivedPath = Path.pathStep Path.clinicalLivedLeg Path.pathId
 
 stateClinicalClinicalSafe :
