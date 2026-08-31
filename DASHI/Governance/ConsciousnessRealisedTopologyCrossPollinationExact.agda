@@ -53,8 +53,11 @@ runtimeBoundary = Runtime.canonicalDeclaredRealisedInteractionBoundary
 consciousnessBoundary : Consciousness.ConsciousnessAbstractionInstantiationBoundary
 consciousnessBoundary = Consciousness.canonicalConsciousnessAbstractionInstantiationBoundary
 
-lerchnerBoundary : Lerchner.LerchnerAbstractionFallacyBoundary
-lerchnerBoundary = Lerchner.canonicalLerchnerAbstractionFallacyBoundary
+lerchnerSourceBoundary : Lerchner.LerchnerSourceAuthorityBoundary
+lerchnerSourceBoundary = Lerchner.canonicalLerchnerSourceAuthorityBoundary
+
+lerchnerCrossPollination : Lerchner.LerchnerDASHICrossPollination
+lerchnerCrossPollination = Lerchner.canonicalLerchnerDASHICrossPollination
 
 consciousAccessRegression : Access.ConsciousAccessNetworkRegression
 consciousAccessRegression = Access.canonicalConsciousAccessNetworkRegression
@@ -79,6 +82,10 @@ runtimeTopologyNotFixedByDeclaredInterface = refl
 sameAbstractTopologyNotEnoughForInstantiation :
   Consciousness.sameAbstractTopologyImpliesSameInstantiation consciousnessBoundary ≡ false
 sameAbstractTopologyNotEnoughForInstantiation = refl
+
+lerchnerSourceDoesNotSettleMoralPolicy :
+  Lerchner.sourceClaimSettlesMoralStatusPolicy lerchnerSourceBoundary ≡ false
+lerchnerSourceDoesNotSettleMoralPolicy = refl
 
 ------------------------------------------------------------------------
 -- Burden on substrate-sensitive theories.
