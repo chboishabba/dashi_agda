@@ -18,6 +18,7 @@ import DASHI.Governance.SexedHistoricalCoConstitutionHyperfabricExact as Hyper
 import DASHI.Governance.SexedHistoricalTransitionHyperfabricExact as TransitionHyper
 import DASHI.Governance.SexedHistoricalChoiceConeBridgeExact as Choice
 import DASHI.Governance.SexedHistoricalActionFeedbackHyperfabricExact as Feedback
+import DASHI.Governance.SexedHistoricalCollectiveThresholdNetworkExact as Collective
 
 ------------------------------------------------------------------------
 -- Fine-state route survives public behavioural collapse.
@@ -171,6 +172,35 @@ apostasyDoesNotGuaranteePsychologicalDeconstructionRegression =
   Feedback.apostasyDoesNotGuaranteePsychologicalDeconstruction
 
 ------------------------------------------------------------------------
+-- Collective threshold / network regressions.
+------------------------------------------------------------------------
+
+participationDoesNotRecoverInstitutionalOutcomeRegression :
+  INF.FactorsThrough Collective.participationSurface Collective.institutionalOutcome → ⊥
+participationDoesNotRecoverInstitutionalOutcomeRegression =
+  Collective.participationCannotRecoverInstitutionalOutcome
+
+publicLegibilityDoesNotRecoverInstitutionalOutcomeRegression :
+  INF.FactorsThrough Collective.publicLegibilitySurface Collective.institutionalOutcome → ⊥
+publicLegibilityDoesNotRecoverInstitutionalOutcomeRegression =
+  Collective.publicLegibilityCannotRecoverInstitutionalOutcome
+
+sameNetworkActionDoesNotRecoverOtherSubjectOptionRegression :
+  INF.FactorsThrough Collective.networkActionSurface Collective.otherSubjectConceivedOption → ⊥
+sameNetworkActionDoesNotRecoverOtherSubjectOptionRegression =
+  Collective.sameNetworkActionCannotRecoverOtherSubjectOption
+
+thresholdCrossingDoesNotGuaranteeVictoryRegression :
+  Collective.ThresholdCrossingGuaranteesVictory → ⊥
+thresholdCrossingDoesNotGuaranteeVictoryRegression =
+  Collective.thresholdCrossingDoesNotGuaranteeVictory
+
+transmittedMemoryDoesNotImplyInstitutionalContinuityRegression :
+  Collective.TransmittedMemoryImpliesInstitutionalContinuity → ⊥
+transmittedMemoryDoesNotImplyInstitutionalContinuityRegression =
+  Collective.transmittedMemoryDoesNotImplyInstitutionalContinuity
+
+------------------------------------------------------------------------
 -- Empirical atlas remains partial rather than decorative completion.
 ------------------------------------------------------------------------
 
@@ -208,6 +238,10 @@ record ReligiousChildhoodFeministWitchRegressionBoundary : Set where
     sameActionMeansSameFeedback : Bool
     activismGuaranteesInstitutionalVictory : Bool
     apostasyGuaranteesPsychologicalDeconstruction : Bool
+    thresholdCrossingGuaranteesVictory : Bool
+    publicLegibilityEqualsPowerParity : Bool
+    collectiveMemoryEqualsInstitutionalContinuity : Bool
+    collectiveActionUniformlyRewritesSubjects : Bool
     currentReligiousAtlasIsCausallyComplete : Bool
     currentReligiousAtlasIsPartiallyInstantiated : Bool
 
@@ -216,4 +250,5 @@ canonicalReligiousChildhoodFeministWitchRegressionBoundary :
 canonicalReligiousChildhoodFeministWitchRegressionBoundary =
   religious-childhood-feminist-witch-regression-boundary
     false false false false false false false false false false false
-    false false false false false false false false false false false false true
+    false false false false false false false false false false false
+    false false false false false true
