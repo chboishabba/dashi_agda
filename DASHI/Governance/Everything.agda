@@ -227,6 +227,8 @@ import DASHI.Governance.SexedHistoricalChoiceConeBridgeExact
 import DASHI.Governance.SexedHistoricalActionFeedbackHyperfabricExact
 import DASHI.Governance.SexedHistoricalCollectiveThresholdNetworkExact
 import DASHI.Governance.SexedHistoricalStatisticalExperimentHyperfabricExact
+import DASHI.Governance.SexedHistoricalConditionalReversalExact
+import DASHI.Governance.SexedHistoricalDialecticalOrderHolonomyAnalogueExact
 import DASHI.Governance.ReligiousChildhoodFeministWitchRegression
 -- History-qualified manipulation / dissent / socio-technical assay lane.
 import DASHI.Governance.SituatedDissentDeceptionAssayExact
