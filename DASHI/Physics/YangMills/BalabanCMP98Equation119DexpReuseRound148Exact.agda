@@ -43,13 +43,6 @@ record CMP98Equation119DexpConvention (Lie : Set) : Set₁ where
       Nat → Centered.CenteredBlockPoint4 6 →
       LR.LeftRightDexpCancellationData Lie
 
-    -- These two equalities are the literal source convention seam.  They say
-    -- that CMP98's printed Y/Y_x use the same minus trivialisation represented
-    -- by the existing repository records.  No analytic inverse law is repeated.
-    printedOuterGIsDexpMinus : Nat → Set
-    printedPointInverseGIsJminus :
-      Nat → Centered.CenteredBlockPoint4 6 → Set
-
 open CMP98Equation119DexpConvention public
 
 outerDexpMinus :
@@ -100,7 +93,8 @@ cmp98Equation119ExistingDexpReuseRound148Level = machineChecked
 cmp98Equation119OppositeTrivialisationCancellationRound148Level : ProofLevel
 cmp98Equation119OppositeTrivialisationCancellationRound148Level = machineChecked
 
--- Only source sign/trivialisation identification remains.  The inverse and
--- cancellation algebra itself is already theorem-owned.
+-- Only the literal source statement that CMP98's printed Y/Y_x conventions are
+-- represented by these already-owned records remains physical.  No new inverse
+-- or cancellation hypothesis is introduced here.
 literalCMP98PrintedYConventionRound148Level : ProofLevel
 literalCMP98PrintedYConventionRound148Level = conditional
