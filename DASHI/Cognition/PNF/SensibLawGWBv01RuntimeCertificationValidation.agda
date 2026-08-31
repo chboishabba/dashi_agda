@@ -3,10 +3,12 @@ module DASHI.Cognition.PNF.SensibLawGWBv01RuntimeCertificationValidation where
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (zero)
+open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.SensibLawGWBv01RuntimeCertificationExact as Receipt
 import DASHI.Cognition.PNF.SensibLawGWBv01PostCertificationRoadmapExact as Roadmap
 import DASHI.Cognition.PNF.SensibLawRuntimeNumericProjectionBoundaryExact as Numeric
+import DASHI.Core.IntersectionalNonFactorability as INF
 
 ------------------------------------------------------------------------
 -- Focused validation root for the current SensibLaw runtime state.
@@ -53,6 +55,6 @@ numericTierProjectionRetainsOnePointTwo :
 numericTierProjectionRetainsOnePointTwo = refl
 
 numericProjectionCannotRecoverFineTiming :
-  Numeric.INF.FactorsThrough Numeric.projection Numeric.activeWorkClass → Numeric.⊥
+  INF.FactorsThrough Numeric.projection Numeric.activeWorkClass → ⊥
 numericProjectionCannotRecoverFineTiming =
   Numeric.performanceProjectionCannotRecoverFineTiming
