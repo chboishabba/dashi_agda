@@ -24,8 +24,10 @@ import DASHI.Core.DeclaredRealisedInteractionTopologyExact
 import DASHI.Core.DiscriminatorSynthesisExact
 import DASHI.Core.ActiveBidiDiscriminatorLoopExact
 import DASHI.Core.AdaptiveConsumerModelLoopExact
+import DASHI.Core.ConsumerRelativeCoarseGrainingBidiExact
 
 import DASHI.Chemistry.CarbonChemicalSuitabilityLifeBoundaryExact
+import DASHI.Chemistry.CarbonBackboneReachableChemistryConeExact
 
 import DASHI.Governance.ConsciousnessAbstractionInstantiationBoundaryExact
 import DASHI.Governance.ConsciousnessRealisedTopologyCrossPollinationExact
@@ -35,6 +37,7 @@ import DASHI.Governance.ConsciousnessAgenticMaterialActiveBidiExact
 
 import DASHI.Physics.Foundations.FundamentalConstantViabilityFibreExact
 import DASHI.Physics.Closure.TSFVMultiverseViabilityCrossPollinationExact
+import DASHI.Physics.Closure.MultiverseAttractorDiscriminatorBidiExact
 import DASHI.Programmes.DashiQCarbonConstantsHistoricalSourceBridgeExact
 
 import DASHI.Reasoning.NeuralMLSubstrateSymmetryQuantumBidiExact
@@ -44,3 +47,5 @@ import DASHI.Reasoning.DASHIgGrokkingEmpiricalBridgeExact
 import DASHI.Planning.AgenticMaterialProcessPlanningCrossPollinationExact
 import DASHI.Planning.ChemicalManufacturingInventoryLogisticsCrossPollinationExact
 import DASHI.Planning.PlanningBIDICapstoneExact
+
+import DASHI.CosmicLifeCoarseGrainingBidiEverything
