@@ -5,6 +5,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.DeBruijnNewman2026SourceWeldExact as DBN
 import DASHI.Analysis.RiemannAristotleG2CurrentCutExact as G2
+import DASHI.Analysis.DeBruijnNewmanRiemannG2RiemannSiegelBridgeExact as RS
 import DASHI.Core.FrontierRelationStrengthBidiExact as Relation
 
 ------------------------------------------------------------------------
@@ -58,21 +59,11 @@ languagesNotDefinitionallyIdentical :
   polymathCriterionLanguage ≡ g2OpenConsumerLanguage → ⊥
 languagesNotDefinitionallyIdentical ()
 
--- Current G2 target, copied only as a repository locator string.  The theorem
--- itself remains owned by RiemannAristotleG2CurrentCutExact.
 g2TargetReference : String
 g2TargetReference = G2.firstUnprovedHarmonicAnalysisTheorem G2.canonicalAristotleG2CurrentCut
 
 ------------------------------------------------------------------------
 -- Current bridge strength.
---
--- There is a genuine analytic relation: H_0 is a fixed xi reparameterisation,
--- both lanes concern zero geometry of xi/zeta, and Polymath's criterion uses
--- explicit zero-free information.  But the recovered source theorem does not
--- state the G2 weighted local-zero cosine/exponential-sum inequality, and no
--- exact transform from its three zero-free premises to that scalar consumer has
--- been recovered.  Therefore this is shared-domain source-search strength, not
--- theorem/lemma transport strength.
 ------------------------------------------------------------------------
 
 dbnToG2CurrentRelation : Relation.RelationKind
@@ -87,8 +78,12 @@ polymathTheorem12DirectlyClosesG2Consumer = false
 exactPolymathToG2LemmaBridgeRecovered : Bool
 exactPolymathToG2LemmaBridgeRecovered = false
 
+-- The requested term-for-term Theorem 1.3 audit is now owned by
+-- DeBruijnNewmanRiemannG2RiemannSiegelBridgeExact.  It finds a real shared
+-- analytic domain and a useful DBN finite-evaluation interpretation, but no
+-- exact integer-indexed Dirichlet-sum -> zero-indexed G2 consumer transform.
 polymathRiemannSiegelApproximationAuditedAgainstG2Kernel : Bool
-polymathRiemannSiegelApproximationAuditedAgainstG2Kernel = false
+polymathRiemannSiegelApproximationAuditedAgainstG2Kernel = true
 
 polymathTheorem12DirectlyClosesG2ConsumerIsFalse :
   polymathTheorem12DirectlyClosesG2Consumer ≡ false
@@ -98,7 +93,14 @@ exactPolymathToG2LemmaBridgeRecoveredIsFalse :
   exactPolymathToG2LemmaBridgeRecovered ≡ false
 exactPolymathToG2LemmaBridgeRecoveredIsFalse = refl
 
--- Mechanical inheritance of the authoritative current G2 cut.
+polymathRiemannSiegelApproximationAuditedAgainstG2KernelIsTrue :
+  polymathRiemannSiegelApproximationAuditedAgainstG2Kernel ≡ true
+polymathRiemannSiegelApproximationAuditedAgainstG2KernelIsTrue = refl
+
+riemannSiegelAuditStillFindsNoDirectG2Closure :
+  RS.polymath13DirectlyClosesG2 ≡ false
+riemannSiegelAuditStillFindsNoDirectG2Closure = RS.polymath13DirectlyClosesG2IsFalse
+
 g2TargetStillOpen :
   G2.targetCenteredLocalZeroExponentialSumBoundClosed
     G2.canonicalAristotleG2CurrentCut ≡ false
@@ -107,14 +109,11 @@ g2TargetStillOpen =
     G2.canonicalAristotleG2CurrentCut
 
 ------------------------------------------------------------------------
--- Highest-alpha next audit.
+-- Highest-alpha next bridge search after completing the Theorem 1.3 audit.
 --
--- Theorem 1.3 of Polymath gives an effective Riemann-Siegel-type approximation
--- for H_t/B_t by a finite Dirichlet-polynomial expression with explicit error.
--- That is closer in *shape* to an oscillatory-sum consumer than Theorem 1.2,
--- but shape is not a bridge.  The next source-exact task is to compare its
--- finite sums/error terms against the literal G2 taper kernel and nearOffFinset
--- coordinates and either construct an exact lemma bridge or record a no-go.
+-- The missing theorem is no longer vaguely "Riemann-Siegel machinery".  It is
+-- an explicit transform from xi/H_0 information to the SAME zero-indexed,
+-- reflection-paired, target-centred and q-weighted finite consumer used by G2.
 ------------------------------------------------------------------------
 
 record NextDBNRHAudit : Set where
@@ -132,7 +131,7 @@ record NextDBNRHAudit : Set where
 canonicalNextDBNRHAudit : NextDBNRHAudit
 canonicalNextDBNRHAudit =
   nextDBNRHAudit
-    "Polymath 2019 Theorem 1.3 effective Riemann-Siegel approximation to H_t(x+iy)/B_t(x+iy)"
+    "explicit-formula/Hadamard/log-derivative bridge from xi or H_0 evaluations to the literal finite target-centred zeta-zero carrier"
     g2TargetReference
     true
     true
