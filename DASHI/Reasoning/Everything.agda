@@ -23,6 +23,7 @@ import DASHI.Reasoning.LogicalConsequenceHistoryResidueExact
 import DASHI.Reasoning.HistoryQualifiedImplicationConeExact
 import DASHI.Reasoning.HistoryQualifiedPromotionBackpropExact
 import DASHI.Reasoning.EvidencePromotionDerivationProtocolExact
+import DASHI.Reasoning.SemanticLogicalSelectiveReopeningExact
 import DASHI.Reasoning.ReleasedArtifactProvenanceBidiExact
 import DASHI.Reasoning.AristotleMCGSHypergraphExact
 import DASHI.Reasoning.AristotleMCGSIntrospectiveSpecimen
