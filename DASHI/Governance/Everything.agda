@@ -64,6 +64,13 @@ import DASHI.Governance.OppositionInterfaceAntiDomesticationExact
 import DASHI.Governance.EpistemicErrorAllocationChillingBridgeExact
 import DASHI.Governance.PeaceJusticeResidualNonFactorabilityExact
 import DASHI.Governance.HyperformalTernaryCarrierEquivalenceExact
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact
+import DASHI.Foundations.Base369Ternary27HypervoxelStratificationExact
+import DASHI.Governance.HyperformalTernary27GeometryBridgeExact
+import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact
+import DASHI.Moonshine.Base369Ternary27CharacterAdjacencyEquivarianceExact
+import DASHI.Moonshine.Base369Ternary27SignedSymmetryMonsterIntertwinerExact
+import DASHI.Moonshine.Base369Ternary27PathCubeSpectralBandsExact
 import DASHI.Governance.HyperformalNonFactorabilityTransportExact
 import DASHI.Governance.FibrewiseInstitutionalPowerEverything
 import DASHI.Governance.LegalDecisionDoubleProjectionExact
@@ -76,7 +83,7 @@ import DASHI.Governance.CabarlahTraumaProjectionBridgeExact
 import DASHI.Governance.ComparativeCrisisClimateAtlas
 import DASHI.Governance.RevolutionaryAdjunctRegression
 
--- Safe-and-just development / provisioning geometry.  Empirical source claims,
+-- Safe-and-just development / provisioning geometry. Empirical source claims,
 -- allocation conventions, vector observations and causal interpretation remain
 -- explicitly separated.
 import DASHI.Governance.SafeJustSourceRegistryExact
@@ -110,7 +117,7 @@ import DASHI.Governance.RelationPolicyTransportComposition
 import DASHI.Governance.DomainIndexedPeaceSubjectCarrier
 import DASHI.Governance.TransitionGovernanceOperatorAdapter
 import DASHI.Governance.MiddleEastProvenancePolicyRouting
--- Source-bounded/symbolic application surfaces.  These do not promote the
+-- Source-bounded/symbolic application surfaces. These do not promote the
 -- generic structural operators into empirical motive, guilt, or ideology.
 import DASHI.Governance.AmalekProvenanceRoleBinding
 import DASHI.Governance.PopulistPlutocraticDualProjection
