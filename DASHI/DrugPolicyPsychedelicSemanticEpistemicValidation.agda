@@ -17,6 +17,8 @@ import DASHI.Governance.DrugCategoryMultiChartTranslationGeometryExact as Transl
 import DASHI.Governance.DrugCategoryTranslationSelectiveReopeningExact as TranslationReopen
 import DASHI.Governance.DrugCategoryTranslationPathResidueExact as PathResidue
 import DASHI.Governance.DrugCategoryTranslationEdgeIndexedReopeningExact as EdgeIndexed
+import DASHI.Governance.DrugCategoryPartialTranslationPathCategoryExact as PartialPath
+import DASHI.Governance.DrugCategoryComposedPathEdgeReopeningExact as ComposedReopen
 import DASHI.Governance.DrugCategoryPhilosophyOperatorAtlasExact as Philosophy
 import DASHI.Governance.DrugCategoryPhilosophySelectiveReopeningExact as PhilosophyReopen
 
@@ -37,6 +39,15 @@ translationPathBoundary = PathResidue.canonicalDrugCategoryTranslationPathResidu
 edgeIndexedBoundary : EdgeIndexed.DrugCategoryTranslationEdgeIndexedBoundary
 edgeIndexedBoundary = EdgeIndexed.canonicalDrugCategoryTranslationEdgeIndexedBoundary
 
+partialTranslationPathBoundary :
+  PartialPath.DrugCategoryPartialTranslationPathBoundary
+partialTranslationPathBoundary =
+  PartialPath.canonicalDrugCategoryPartialTranslationPathBoundary
+
+composedPathReopeningBoundary : ComposedReopen.ComposedPathEdgeReopeningBoundary
+composedPathReopeningBoundary =
+  ComposedReopen.canonicalComposedPathEdgeReopeningBoundary
+
 philosophyBoundary : Philosophy.DrugCategoryPhilosophyOperatorBoundary
 philosophyBoundary = Philosophy.canonicalDrugCategoryPhilosophyOperatorBoundary
 
@@ -50,3 +61,18 @@ stateClinicalRevisionStillReopensClinicalSafety :
     (EdgeIndexed.consumerArtifact EdgeIndexed.clinicalSafetyConsequence)
 stateClinicalRevisionStillReopensClinicalSafety =
   EdgeIndexed.stateClinicalRevisionReopensClinicalSafety
+
+stateClinicalRevisionAlsoReopensComposedLivedConsumer :
+  Affected.ReopeningObligation
+    ComposedReopen.Depends
+    (ComposedReopen.edgeArtifact EdgeIndexed.stateToClinicalEdge)
+    (ComposedReopen.consumerCertificate ComposedReopen.livedSubjectMaintained)
+stateClinicalRevisionAlsoReopensComposedLivedConsumer =
+  ComposedReopen.stateClinicalRevisionReopensLivedSubjectConsumer
+
+clinicalFactPreservedButSubjectNotGloballyPreserved :
+  PartialPath.CoordinatePreserved
+    PartialPath.stateClinicalLivedPath
+    Translation.clinicalFactCoordinate
+clinicalFactPreservedButSubjectNotGloballyPreserved =
+  PartialPath.clinicalFactPreservedAlongStateClinicalLived
