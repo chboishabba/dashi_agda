@@ -62,7 +62,7 @@ authoritySensitiveDivergenceDepth =
     Filtration.authorityFirstDivergesAtStage2
 
 ------------------------------------------------------------------------
--- 4. The first two stages cannot witness supported authority divergence.
+-- 4. The first two stages cannot witness supported divergence.
 ------------------------------------------------------------------------
 
 noAuthorityFirstDivergenceAtStage0 :
@@ -70,23 +70,26 @@ noAuthorityFirstDivergenceAtStage0 :
     Reuse.authoritySensitiveSupport
     Filtration.stage0Present → ⊥
 noAuthorityFirstDivergenceAtStage0 witness
-  with Filtration.coordinate witness | Filtration.supported witness | Filtration.selectedHere witness
-... | Reuse.presentCoordinate | Reuse.supportPresent | Filtration.s0Present =
-      Observer.authorityDivergentByObserver
-        (Observer.presentSharedByObserver)
+  with Filtration.coordinate witness
+     | Filtration.supported witness
+     | Filtration.selectedHere witness
+     | Filtration.divergentHere witness
+... | Reuse.presentCoordinate | Reuse.supportPresent | Filtration.s0Present | divergent =
+      divergent Observer.presentSharedByObserver
 
 noAuthorityFirstDivergenceAtStage1 :
   Filtration.FirstSupportedDivergenceAt
     Reuse.authoritySensitiveSupport
     Filtration.stage1PresentFuture → ⊥
 noAuthorityFirstDivergenceAtStage1 witness
-  with Filtration.coordinate witness | Filtration.supported witness | Filtration.selectedHere witness
-... | Reuse.presentCoordinate | Reuse.supportPresent | Filtration.s1Present =
-      Observer.authorityDivergentByObserver
-        (Observer.presentSharedByObserver)
-... | Reuse.futureCoordinate | Reuse.supportFuture | Filtration.s1Future =
-      Observer.authorityDivergentByObserver
-        (Observer.futureSharedByObserver)
+  with Filtration.coordinate witness
+     | Filtration.supported witness
+     | Filtration.selectedHere witness
+     | Filtration.divergentHere witness
+... | Reuse.presentCoordinate | Reuse.supportPresent | Filtration.s1Present | divergent =
+      divergent Observer.presentSharedByObserver
+... | Reuse.futureCoordinate | Reuse.supportFuture | Filtration.s1Future | divergent =
+      divergent Observer.futureSharedByObserver
 
 ------------------------------------------------------------------------
 -- 5. Same histories and filtration can induce different consumer depths.
