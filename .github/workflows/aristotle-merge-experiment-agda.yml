@@ -8,6 +8,7 @@ on:
       - 'DASHI/Reasoning/AristotleMCGSRecoveredWitness.agda'
       - 'DASHI/Reasoning/AristotleBranchMergeExact.agda'
       - 'DASHI/Reasoning/AristotleMergeExperimentDesignExact.agda'
+      - 'DASHI/Reasoning/AristotleMergeGovernanceCrossPollinationExact.agda'
       - 'DASHI/Reasoning/AristotleMergeExperimentValidation.agda'
       - 'DASHI/Reasoning/Everything.agda'
       - 'scripts/check_aristotle_merge_experiment.sh'
