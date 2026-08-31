@@ -23,6 +23,10 @@ import DASHI.Governance.DrugCategoryClinicalQuotientRelativeFibreExact as Relati
 import DASHI.Governance.DrugCategoryConsumerQuotientRefinementExact as QuotientRefinement
 import DASHI.Governance.DrugCategoryCostedQuotientDiscriminatorExact as CostedDiscriminator
 import DASHI.Governance.DrugCategoryAdaptiveQuotientExperimentLoopExact as AdaptiveLoop
+import DASHI.Governance.DrugGovernanceFiveProbeWorldExact as FiveWorld
+import DASHI.Governance.DrugGovernanceFiveProbeOptionConeExact as FiveCone
+import DASHI.Governance.DrugGovernanceFiveProbeAdaptivePlannerExact as FivePlanner
+import DASHI.Governance.DrugGovernanceFarCrossPollinationCapstoneExact as Far
 import DASHI.Governance.DrugCategoryPhilosophyOperatorAtlasExact as Philosophy
 import DASHI.Governance.DrugCategoryPhilosophySelectiveReopeningExact as PhilosophyReopen
 
@@ -73,6 +77,18 @@ costedDiscriminatorBoundary = CostedDiscriminator.canonicalDrugCategoryCostedQuo
 
 adaptiveLoopBoundary : AdaptiveLoop.DrugCategoryAdaptiveQuotientExperimentBoundary
 adaptiveLoopBoundary = AdaptiveLoop.canonicalDrugCategoryAdaptiveQuotientExperimentBoundary
+
+fiveWorldBoundary : FiveWorld.FiveProbeWorldBoundary
+fiveWorldBoundary = FiveWorld.canonicalFiveProbeWorldBoundary
+
+fiveConeBoundary : FiveCone.FiveProbeOptionConeBoundary
+fiveConeBoundary = FiveCone.canonicalFiveProbeOptionConeBoundary
+
+fivePlannerBoundary : FivePlanner.FiveProbeAdaptivePlannerBoundary
+fivePlannerBoundary = FivePlanner.canonicalFiveProbeAdaptivePlannerBoundary
+
+farBoundary : Far.DrugGovernanceFarCrossPollinationBoundary
+farBoundary = Far.canonicalDrugGovernanceFarCrossPollinationBoundary
 
 philosophyBoundary : Philosophy.DrugCategoryPhilosophyOperatorBoundary
 philosophyBoundary = Philosophy.canonicalDrugCategoryPhilosophyOperatorBoundary
@@ -133,21 +149,29 @@ clinicalPlusRelativeFineExactlyReopensState :
 clinicalPlusRelativeFineExactlyReopensState =
   RelativeFibre.clinicalPlusRelativeReconstructsState
 
-subjectNonDescentSelectsSubjectRefinement :
-  QuotientRefinement.RefinementCoordinate
-subjectNonDescentSelectsSubjectRefinement =
-  QuotientRefinement.canonicalSubjectRefinement
+subjectNonDescentSelectsSubjectRefinement : QuotientRefinement.RefinementCoordinate
+subjectNonDescentSelectsSubjectRefinement = QuotientRefinement.canonicalSubjectRefinement
 
 subjectProbeIsDeclaredCheapestResolvingMove :
   Choice.CheapestResolvingMove
     CostedDiscriminator.subjectProblem
     CostedDiscriminator.DeclaredProbeMove
-subjectProbeIsDeclaredCheapestResolvingMove =
-  CostedDiscriminator.subjectCheapestResolving
+subjectProbeIsDeclaredCheapestResolvingMove = CostedDiscriminator.subjectCheapestResolving
 
 subjectSelectedProbeClosesSubjectConsumer :
   Sequential.SequentialConsumerPlan
     AdaptiveLoop.subjectConsumer
     (AdaptiveLoop.allCompatible tt)
-subjectSelectedProbeClosesSubjectConsumer =
-  AdaptiveLoop.subjectOneShotPlan
+subjectSelectedProbeClosesSubjectConsumer = AdaptiveLoop.subjectOneShotPlan
+
+authorityProbeNowHasLiveSeparator = FiveWorld.authoritySeparates
+materialProbeNowHasLiveSeparator = FiveWorld.materialSeparates
+sovereigntyProbeNowHasLiveSeparator = FiveWorld.sovereigntySeparates
+
+sovereignExternalisationContractsOptionCone = FiveCone.sovereignToExternalContracts
+
+authoritySelectedProbeClosesAuthorityConsumer :
+  Sequential.SequentialConsumerPlan
+    FiveWorld.authorityPosition
+    (FivePlanner.allCompatible tt)
+authoritySelectedProbeClosesAuthorityConsumer = FivePlanner.authorityPlan
