@@ -3,7 +3,10 @@ name: Regulatory analyte coverage BIDI Agda
 on:
   pull_request:
     paths:
+      - 'DASHI/Chemistry/TGO93PhEurPesticideMembershipExact.agda'
       - 'DASHI/Chemistry/RegulatoryAnalyteCoverageBidiExact.agda'
+      - 'DASHI/Chemistry/AssayDetectionEnvelopeExact.agda'
+      - 'DASHI/Chemistry/DefensiveRegulatoryAssayStressAuditExact.agda'
       - 'DASHI/Chemistry/RegulatoryAnalytePanelRefinementExact.agda'
       - 'DASHI/Chemistry/Everything.agda'
       - 'DASHI/RegulatoryAnalyteCoverageValidation.agda'
