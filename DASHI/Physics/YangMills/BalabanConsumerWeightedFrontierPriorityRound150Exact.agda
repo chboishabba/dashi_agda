@@ -1,16 +1,6 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanConsumerWeightedFrontierPriorityRound150Exact where
 
-------------------------------------------------------------------------
--- ROUND150: CONSUMER-WEIGHTED FRONTIER PRIORITY, NOW ROUTE-AWARE
---
--- After the Round108 audit, the density/action state has two OR routes.  A
--- single Round108 source-match leaf completes the direct route, while either
--- CombinedRG semantic leaf alone does not complete the two-target fallback.
--- The planning surface therefore must not score both fallback leaves as though
--- each independently paid the whole downstream fan-out.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
@@ -35,19 +25,12 @@ leafConsumers : R146.BalabanFrontierLeaf → List FrontierConsumer
 leafConsumers R146.densityActionRealization =
   bc1EffectiveActionConsumer ∷ bc2HeatDoobConsumer ∷
   sectorStressConsumer ∷ qftgrStressConsumer ∷ []
-
--- One successful direct Round108 source match closes the one-target direct OR
--- route and therefore inherits the whole downstream action-realization fan-out.
 leafConsumers R146.round108SelectedPotentialMatchesBC1 =
   bc1EffectiveActionConsumer ∷ bc2HeatDoobConsumer ∷
   sectorStressConsumer ∷ qftgrStressConsumer ∷ []
-
--- Each fallback semantic leaf alone only contributes to the two-target
--- CombinedRG route.  Neither individually owns the downstream BC1/stress fanout.
 leafConsumers R146.densityToCombinedRGState = densityActionConsumer ∷ []
 leafConsumers R146.combinedRGStateToBC1Potential = densityActionConsumer ∷ []
-
-leafConsumers R146.componentLocalizedD1ToPhysicalD1 =
+leafConsumers R146.physicalCompositeD1ChainRule =
   bc1EffectiveActionConsumer ∷ sectorStressConsumer ∷ qftgrStressConsumer ∷ []
 leafConsumers R146.stressInsertionEqualsPhysicalD1Sum =
   sectorStressConsumer ∷ qftgrStressConsumer ∷ []
@@ -85,9 +68,9 @@ combinedRGStatePotentialAlphaIsOne :
   alphaScore R146.combinedRGStateToBC1Potential ≡ suc zero
 combinedRGStatePotentialAlphaIsOne = refl
 
-componentD1AlphaIsThree :
-  alphaScore R146.componentLocalizedD1ToPhysicalD1 ≡ suc (suc (suc zero))
-componentD1AlphaIsThree = refl
+physicalD1ChainRuleAlphaIsThree :
+  alphaScore R146.physicalCompositeD1ChainRule ≡ suc (suc (suc zero))
+physicalD1ChainRuleAlphaIsThree = refl
 
 record ConsumerWeightedPriority : Set₁ where
   field
