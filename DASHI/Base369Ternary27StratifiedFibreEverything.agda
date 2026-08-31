@@ -29,6 +29,11 @@ import DASHI.Moonshine.Base369PeriodicHeisenbergFibreEquivarianceExact
 -- Exact decimal/nonary completion, 10 x 3^9 bulk, and structured 53/54 branch.
 import DASHI.Moonshine.Base369DecimalCompletionMonsterBulkBidiExact
 import DASHI.Moonshine.Base369MonsterTwoComponentCompletionBidiExact
+
+-- Refined 54 carrier: nontrivial zeta pair x ternary-27 = sixfold x nonary-9,
+-- with the sixfold factor exactly charted to the Heisenberg coordinate axes.
+import DASHI.Moonshine.Base369ZetaHeisenbergFiftyFourCarrierExact
+import DASHI.Base369ZetaHeisenbergFiftyFourValidation
 import DASHI.Base369MonsterTwoComponentCompletionValidation
 
 import DASHI.Base369Ternary27StratifiedFibreHolonomyValidation
