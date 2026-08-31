@@ -14,6 +14,13 @@ import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 -- projection.  H_X adds exactly the operations needed to state the target
 -- character law on that SAME carrier.
 --
+-- A lower BIDI descent now reuses ConcreteComplex through
+-- RiemannConstructedComplexCharacterCoreExact.  That donor already has i,
+-- complex arithmetic, expC, sin/cos and a Cartesian Euler formula.  It does
+-- not yet by itself close H_X: scalar phase coherence, complex-exp additivity,
+-- and a same-carrier attachment to this canonical Riemann substrate remain
+-- genuine obligations.
+--
 -- Intended identities:
 --   chi_t(u)   = exp(- i t u)
 --   chi_b(u)   = exp(+ i b u)
@@ -107,6 +114,22 @@ record ComplexCharacterExtensionBoundary : Set where
     canonicalCarrierAlreadyOwnsComplexExponentialIsFalse :
       canonicalCarrierAlreadyOwnsComplexExponential ≡ false
 
+    constructedComplexDonorExists : Bool
+    constructedComplexDonorExistsIsTrue :
+      constructedComplexDonorExists ≡ true
+
+    constructedDonorStillNeedsPhaseCoherence : Bool
+    constructedDonorStillNeedsPhaseCoherenceIsTrue :
+      constructedDonorStillNeedsPhaseCoherence ≡ true
+
+    constructedDonorStillNeedsExpHomomorphism : Bool
+    constructedDonorStillNeedsExpHomomorphismIsTrue :
+      constructedDonorStillNeedsExpHomomorphism ≡ true
+
+    sameCarrierAttachmentStillRequired : Bool
+    sameCarrierAttachmentStillRequiredIsTrue :
+      sameCarrierAttachmentStillRequired ≡ true
+
     characterMustLiveOnCanonicalCarrier : Bool
     characterMustLiveOnCanonicalCarrierIsTrue :
       characterMustLiveOnCanonicalCarrier ≡ true
@@ -134,7 +157,11 @@ canonicalComplexCharacterExtensionBoundary =
     false refl
     true refl
     true refl
+    true refl
+    true refl
+    true refl
+    true refl
     false refl
     false refl
     false refl
-    "Construct the real arithmetic/embedding, imaginary unit, complex exponential and cosine projection on the canonical Riemann analytic carrier, then prove exp(-itu) exp(ibu) = exp(i(b-t)u) and the even real projection cos((b-t)u)."
+    "Use the constructed ordinary complex donor: prove scalar phase coherence and complex exp additivity there, then attach that same carrier to the canonical Riemann analytic substrate.  The cosine projection is already derivable and the separate 4 g(u) cosh(a u) pole normalization remains fixed."
