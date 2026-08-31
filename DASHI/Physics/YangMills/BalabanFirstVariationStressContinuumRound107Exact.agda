@@ -1,6 +1,20 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanFirstVariationStressContinuumRound107Exact where
 
+------------------------------------------------------------------------
+-- ROUND107: FINITE-CUTOFF FIRST-VARIATION STRESS -> CONTINUUM STRESS
+--
+-- The literal Clay construction carries continuum stressTensor Y G, while its
+-- continuum-limit postcondition is stated for the finite measures.  Therefore
+-- finite-cutoff identities D_g S_k[h] = <T_k,h> do not by themselves identify
+-- the continuum stress tensor.
+--
+-- This owner isolates the exact interchange needed.  Once the finite first
+-- variations and finite stress pairings converge to their declared continuum
+-- readouts, pointwise finite equality plus uniqueness of the scalar limit gives
+-- the continuum stress representation automatically.
+------------------------------------------------------------------------
+
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
@@ -10,15 +24,19 @@ import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as T
 record ScalarLimitStructure (Cutoff Scalar : Set) : Set₁ where
   field
     ConvergesTo : (Cutoff → Scalar) → Scalar → Set
+
     convergenceCongruent :
       ∀ left right limit →
       (∀ cutoff → left cutoff ≡ right cutoff) →
-      ConvergesTo left limit → ConvergesTo right limit
+      ConvergesTo left limit →
+      ConvergesTo right limit
+
     limitUnique :
       ∀ sequence leftLimit rightLimit →
       ConvergesTo sequence leftLimit →
       ConvergesTo sequence rightLimit →
       leftLimit ≡ rightLimit
+
 open ScalarLimitStructure public
 
 record LiteralSectorStressContinuumReceipt
@@ -28,12 +46,19 @@ record LiteralSectorStressContinuumReceipt
     (group : Top.CompactSimpleGroup C) : Set₁ where
   field
     MetricPerturbation VariationScalar : Set
+
     limits : ScalarLimitStructure (Top.Cutoff C) VariationScalar
+
     AdmissibleMetricPerturbation : MetricPerturbation → Set
-    finiteFirstVariation : Top.Cutoff C → MetricPerturbation → VariationScalar
+
+    finiteFirstVariation :
+      Top.Cutoff C → MetricPerturbation → VariationScalar
+
     finiteStressTensor : Top.Cutoff C → Top.StressTensor C
+
     stressMetricPairing :
       Top.StressTensor C → MetricPerturbation → VariationScalar
+
     continuumFirstVariation : MetricPerturbation → VariationScalar
 
     finiteVariationRepresentedByFiniteStress :
@@ -53,8 +78,10 @@ record LiteralSectorStressContinuumReceipt
       ∀ perturbation →
       AdmissibleMetricPerturbation perturbation →
       ConvergesTo limits
-        (λ cutoff → stressMetricPairing (finiteStressTensor cutoff) perturbation)
+        (λ cutoff →
+          stressMetricPairing (finiteStressTensor cutoff) perturbation)
         (stressMetricPairing (Top.stressTensor Y group) perturbation)
+
 open LiteralSectorStressContinuumReceipt public
 
 continuumFirstVariationRepresentedByLiteralStress :
@@ -72,11 +99,13 @@ continuumFirstVariationRepresentedByLiteralStress
     finiteVariationSequence =
       λ cutoff → finiteFirstVariation receipt cutoff perturbation
     finiteStressSequence =
-      λ cutoff → stressMetricPairing receipt
-        (finiteStressTensor receipt cutoff) perturbation
-    pointwise = λ cutoff →
-      finiteVariationRepresentedByFiniteStress
-        receipt cutoff perturbation admissible
+      λ cutoff →
+        stressMetricPairing receipt
+          (finiteStressTensor receipt cutoff) perturbation
+    pointwise =
+      λ cutoff →
+        finiteVariationRepresentedByFiniteStress
+          receipt cutoff perturbation admissible
     variationLimit = firstVariationConverges receipt perturbation admissible
     stressLimitOnVariationSequence =
       convergenceCongruent (limits receipt)
@@ -90,7 +119,8 @@ continuumFirstVariationRepresentedByLiteralStress
     finiteVariationSequence
     (continuumFirstVariation receipt perturbation)
     (stressMetricPairing receipt (Top.stressTensor Y group) perturbation)
-    variationLimit stressLimitOnVariationSequence
+    variationLimit
+    stressLimitOnVariationSequence
 
 record StressContinuumBoundary : Set where
   constructor stressContinuumBoundary
@@ -98,15 +128,18 @@ record StressContinuumBoundary : Set where
     finiteStressRepresentationAutomaticallySurvivesContinuumLimit : Bool
     finiteStressRepresentationAutomaticallySurvivesContinuumLimitIsFalse :
       finiteStressRepresentationAutomaticallySurvivesContinuumLimit ≡ false
+
     measureContinuumLimitAloneCommutesWithMetricDifferentiation : Bool
     measureContinuumLimitAloneCommutesWithMetricDifferentiationIsFalse :
       measureContinuumLimitAloneCommutesWithMetricDifferentiation ≡ false
+
     finiteRepresentationPlusTwoCompatibleLimitsClosesContinuumStress : Bool
     finiteRepresentationPlusTwoCompatibleLimitsClosesContinuumStressIsTrue :
       finiteRepresentationPlusTwoCompatibleLimitsClosesContinuumStress ≡ true
 
 canonicalStressContinuumBoundary : StressContinuumBoundary
-canonicalStressContinuumBoundary = stressContinuumBoundary false refl false refl true refl
+canonicalStressContinuumBoundary =
+  stressContinuumBoundary false refl false refl true refl
 
 stressContinuumCompilerLevel : ProofLevel
 stressContinuumCompilerLevel = machineChecked
