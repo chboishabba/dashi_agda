@@ -5,9 +5,14 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Moonshine.Base369MonsterTwoComponentCompletionBidiExact as Two
+import DASHI.Moonshine.Base369ZetaHeisenbergFiftyFourCarrierExact as Z54
 
 ------------------------------------------------------------------------
--- Primary/secondary two-component decomposition.
+-- Primary/secondary two-component COUNT decomposition.
+--
+-- The 53/54 numbers are treated first as structured finite carrier counts.
+-- Mode/representation dimension language is only inherited where a separate
+-- owner actually supplies that interpretation.
 ------------------------------------------------------------------------
 
 fullPrimaryPinned :
@@ -23,31 +28,37 @@ primaryIsSameAcrossFullAndReduced :
   ≡ Two.primary369Component Two.reducedMonsterTwoComponent
 primaryIsSameAcrossFullAndReduced = Two.samePrimaryComponent
 
-fullSecondaryPinned :
+fullSecondaryCountPinned :
   Two.secondary369Component Two.fullWeightTwoTwoComponent ≡ 54
-fullSecondaryPinned = Two.fullSecondaryIs54
+fullSecondaryCountPinned = Two.fullSecondaryIs54
 
-reducedSecondaryPinned :
+reducedSecondaryCountPinned :
   Two.secondary369Component Two.reducedMonsterTwoComponent ≡ 53
-reducedSecondaryPinned = Two.reducedSecondaryIs53
-
-fullTwoComponentTotalPinned :
-  Two.totalDimension Two.fullWeightTwoTwoComponent ≡ 196884
-fullTwoComponentTotalPinned = Two.fullTotalIs196884
-
-reducedTwoComponentTotalPinned :
-  Two.totalDimension Two.reducedMonsterTwoComponent ≡ 196883
-reducedTwoComponentTotalPinned = Two.reducedTotalIs196883
+reducedSecondaryCountPinned = Two.reducedSecondaryIs53
 
 ------------------------------------------------------------------------
--- Multiple repo-native 369 constructions of 54 / 53.
+-- The primitive 54 geometry is the zeta-pair / ternary factorisation.
 ------------------------------------------------------------------------
+
+zetaPairTimesTwentySevenPinned : Z54.zeta54SiteCount ≡ 54
+zetaPairTimesTwentySevenPinned = Z54.zeta54SiteCountIsFiftyFour
+
+zetaTritFactorPinned : Z54.zetaTritCount ≡ 6
+zetaTritFactorPinned = Z54.zetaTritCountIsSix
+
+nonaryFactorPinned : Z54.nonaryPointCount ≡ 9
+nonaryFactorPinned = Z54.nonaryPointCountIsNine
 
 secondarySixByNinePinned : 6 * 9 ≡ 54
-secondarySixByNinePinned = refl
+secondarySixByNinePinned = Z54.fiftyFourIsSixTimesNine
 
 secondaryTwentySevenPlusTwentySevenPinned : 27 + 27 ≡ 54
 secondaryTwentySevenPlusTwentySevenPinned = refl
+
+------------------------------------------------------------------------
+-- 53 is then available as the one-constant-mode reduction of that 54-count,
+-- while the concrete line/mode interpretation remains separately typed.
+------------------------------------------------------------------------
 
 secondaryFortyFivePlusNinePinned : 45 + 9 ≡ 54
 secondaryFortyFivePlusNinePinned = Two.secondaryFullAsFortyFivePlusNine
@@ -74,12 +85,6 @@ weightTwoMonsterPlusOnePinned :
   Two.completedPart Two.weightTwoMonsterToMoonshineShape ≡ 196884
 weightTwoMonsterPlusOnePinned = refl
 
-nestedFullPinned : Two.nestedFull369Dimension ≡ 196884
-nestedFullPinned = Two.nestedFull369DimensionIs196884
-
-nestedReducedPinned : Two.nestedReduced369Dimension ≡ 196883
-nestedReducedPinned = Two.nestedReduced369DimensionIs196883
-
 ------------------------------------------------------------------------
 -- Unit-role type separation.
 ------------------------------------------------------------------------
@@ -87,14 +92,6 @@ nestedReducedPinned = Two.nestedReduced369DimensionIs196883
 jUnitContributesFineFibre :
   Two.unitContribution Two.coarseJCompletionUnit ≡ 19683
 jUnitContributesFineFibre = Two.coarseJUnitContributesFullFineFibre
-
-secondaryUnitContributesOne :
-  Two.unitContribution Two.secondaryInvariantUnit ≡ 1
-secondaryUnitContributesOne = Two.secondaryUnitContributesOneDimension
-
-conformalUnitContributesOne :
-  Two.unitContribution Two.weightTwoConformalUnit ≡ 1
-conformalUnitContributesOne = Two.conformalUnitContributesOneDimension
 
 jUnitNotSecondaryUnit :
   Two.coarseJCompletionUnit ≡ Two.secondaryInvariantUnit → ⊥
@@ -109,7 +106,7 @@ samePatternDoesNotIdentifyRepresentations :
     Two.canonicalMonsterTwoComponentCompletionBoundary ≡ false
 samePatternDoesNotIdentifyRepresentations = refl
 
-fiftyThreeNotPromotedToMonsterIrrep :
-  Two.MonsterTwoComponentCompletionBoundary.reducedFiftyThreeProvedMonsterIrreducibleHere
-    Two.canonicalMonsterTwoComponentCompletionBoundary ≡ false
-fiftyThreeNotPromotedToMonsterIrrep = refl
+fiftyFourIsNotHeisenbergRepresentationDimension :
+  Z54.ZetaHeisenbergFiftyFourBoundary.fiftyFourIsHeisenbergRepresentationDimension
+    Z54.canonicalZetaHeisenbergFiftyFourBoundary ≡ false
+fiftyFourIsNotHeisenbergRepresentationDimension = refl
