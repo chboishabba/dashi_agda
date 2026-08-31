@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Data.List using (List; []; _∷_; _++_; length)
 
 import DASHI.Combinatorics.TextileNFibreCalculusExact as T
+import DASHI.Combinatorics.TextileBraidRewriteGroupoidExact as Rewrite
 
 ------------------------------------------------------------------------
 -- EXECUTABLE INDEXED STRAND CONFIGURATIONS
@@ -55,8 +56,8 @@ executeAdjacent crossing window =
     (sizeWitness window)
 
 ------------------------------------------------------------------------
--- 2. Adjacent triple windows.  These are executable sigma_i / sigma_{i+1}
--- actions on arbitrary surrounding context and arbitrary n.
+-- 2. Adjacent triple windows carry the exact in-range proofs for sigma_i and
+-- sigma_{i+1}.  The actions below are therefore tied to actual typed generators.
 ------------------------------------------------------------------------
 
 record TripleWindowAt (n i : Nat) : Set where
@@ -66,12 +67,24 @@ record TripleWindowAt (n i : Nat) : Set where
     firstLabel secondLabel thirdLabel : Nat
     tripleSuffix : List Nat
     triplePrefixLength : length triplePrefix ≡ i
+    leftGeneratorInRange : i + 2 ≤ n
+    rightGeneratorInRange : suc i + 2 ≤ n
     tripleSizeWitness :
       length
         (triplePrefix ++ firstLabel ∷ secondLabel ∷ thirdLabel ∷ tripleSuffix)
       ≡ n
 
 open TripleWindowAt public
+
+leftTripleGenerator :
+  ∀ {n i} → T.CrossingOrientation → TripleWindowAt n i → T.AdjacentCrossing n
+leftTripleGenerator orientation window =
+  T.sigma i orientation (leftGeneratorInRange window)
+
+rightTripleGenerator :
+  ∀ {n i} → T.CrossingOrientation → TripleWindowAt n i → T.AdjacentCrossing n
+rightTripleGenerator orientation window =
+  T.sigma (suc i) orientation (rightGeneratorInRange window)
 
 flattenTriple :
   ∀ {n i} → TripleWindowAt n i → StrandConfiguration n
@@ -91,6 +104,8 @@ sigmaLeftOnTriple window =
     (thirdLabel window)
     (tripleSuffix window)
     (triplePrefixLength window)
+    (leftGeneratorInRange window)
+    (rightGeneratorInRange window)
     (tripleSizeWitness window)
 
 sigmaRightOnTriple :
@@ -103,6 +118,8 @@ sigmaRightOnTriple window =
     (secondLabel window)
     (tripleSuffix window)
     (triplePrefixLength window)
+    (leftGeneratorInRange window)
+    (rightGeneratorInRange window)
     (tripleSizeWitness window)
 
 executeYangBaxterLeft :
@@ -128,8 +145,9 @@ adjacentTripleYangBaxterOnConfigurations :
 adjacentTripleYangBaxterOnConfigurations window = refl
 
 ------------------------------------------------------------------------
--- 3. Structurally distant windows.  The middle segment witnesses that the two
--- adjacent pairs are disjoint; swapping either pair cannot touch the other.
+-- 3. Structurally distant windows carry two actual typed crossings plus a
+-- far-separation receipt.  The middle segment witnesses their disjoint local
+-- support in the explicit configuration decomposition.
 ------------------------------------------------------------------------
 
 record DistantWindow (n : Nat) : Set where
@@ -140,6 +158,14 @@ record DistantWindow (n : Nat) : Set where
     middle : List Nat
     farC farD : Nat
     farSuffix : List Nat
+    firstCrossing secondCrossing : T.AdjacentCrossing n
+    firstPrefixLength : length farPrefix ≡ T.leftIndex firstCrossing
+    secondPrefixLength :
+      length farPrefix + 2 + length middle ≡ T.leftIndex secondCrossing
+    supportsFar :
+      Rewrite.FarSeparated
+        (T.leftIndex firstCrossing)
+        (T.leftIndex secondCrossing)
     farSizeWitness :
       length
         (farPrefix ++ farA ∷ farB ∷ middle ++ farC ∷ farD ∷ farSuffix)
@@ -164,6 +190,10 @@ swapFirstDistant window =
     (middle window)
     (farC window) (farD window)
     (farSuffix window)
+    (firstCrossing window) (secondCrossing window)
+    (firstPrefixLength window)
+    (secondPrefixLength window)
+    (supportsFar window)
     (farSizeWitness window)
 
 swapSecondDistant : ∀ {n} → DistantWindow n → DistantWindow n
@@ -174,6 +204,10 @@ swapSecondDistant window =
     (middle window)
     (farD window) (farC window)
     (farSuffix window)
+    (firstCrossing window) (secondCrossing window)
+    (firstPrefixLength window)
+    (secondPrefixLength window)
+    (supportsFar window)
     (farSizeWitness window)
 
 executeFarLeftThenRight :
@@ -243,6 +277,8 @@ record TextileExecutableConfigurationBoundary : Set where
   field
     nIndexedConfigurationExplicit : Bool
     adjacentActionExecutable : Bool
+    adjacentTripleCarriesActualGenerators : Bool
+    distantWindowCarriesFarSeparatedGenerators : Bool
     arbitraryContextYangBaxterComputes : Bool
     arbitraryContextFarCommutationComputes : Bool
     orientationRetainedBeyondEndpointPermutation : Bool
@@ -254,4 +290,4 @@ canonicalTextileExecutableConfigurationBoundary :
   TextileExecutableConfigurationBoundary
 canonicalTextileExecutableConfigurationBoundary =
   textile-executable-configuration-boundary
-    true true true true true false false false
+    true true true true true true true false false false
