@@ -3,6 +3,7 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119Round186Validation where
 
 import DASHI.Physics.YangMills.BalabanCMP98Equation119PhysicalSelectedBackgroundRound185Exact as R185
 import DASHI.Physics.YangMills.BalabanCMP98Equation119ClayTerminalBidiRound186Exact as R186
+import DASHI.Physics.YangMills.BalabanCMP98TerminalStatusVsClayTheoremBoundaryExact as TerminalBoundary
 
 round185PhysicalSelectedBackground =
   R185.cmp98Equation119PhysicalSelectedBackgroundRound185Level
@@ -15,3 +16,6 @@ round186SourceLeaf =
 
 round186TerminalMathLeaf =
   R186.physicalHamiltonianClayIdentificationRound186Level
+
+terminalStatusDoesNotConstructClayComposition =
+  TerminalBoundary.terminalSprintStatusDoesNotByItselfConstructClayCompositionLevel
