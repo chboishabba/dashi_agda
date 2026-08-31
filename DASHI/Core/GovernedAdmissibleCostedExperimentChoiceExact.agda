@@ -26,15 +26,15 @@ import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as ProofSearch
 
 data EpistemicallyAdmissible : Choice.InformationMove → Set where
   governedEpistemic :
-    EpistemicallyAdmissible Dist.strategyMove Dist.distributionAwareStrategy
+    EpistemicallyAdmissible (Dist.strategyMove Dist.distributionAwareStrategy)
 
 data AuthorityAdmissible : Choice.InformationMove → Set where
   governedAuthority :
-    AuthorityAdmissible Dist.strategyMove Dist.distributionAwareStrategy
+    AuthorityAdmissible (Dist.strategyMove Dist.distributionAwareStrategy)
 
 data PermissionAdmissible : Choice.InformationMove → Set where
   governedPermission :
-    PermissionAdmissible Dist.strategyMove Dist.distributionAwareStrategy
+    PermissionAdmissible (Dist.strategyMove Dist.distributionAwareStrategy)
 
 data ConsentAdmissibleAt :
     Consent.ActionScope → Choice.InformationMove → Set where
@@ -47,19 +47,19 @@ data ConsentAdmissibleAt :
 
 data ObligationsAdmissible : Choice.InformationMove → Set where
   governedObligations :
-    ObligationsAdmissible Dist.strategyMove Dist.distributionAwareStrategy
+    ObligationsAdmissible (Dist.strategyMove Dist.distributionAwareStrategy)
 
 data ExternalitiesCovered : Choice.InformationMove → Set where
   governedExternalities :
-    ExternalitiesCovered Dist.strategyMove Dist.distributionAwareStrategy
+    ExternalitiesCovered (Dist.strategyMove Dist.distributionAwareStrategy)
 
 data DistributionCovered : Choice.InformationMove → Set where
   governedDistribution :
-    DistributionCovered Dist.strategyMove Dist.distributionAwareStrategy
+    DistributionCovered (Dist.strategyMove Dist.distributionAwareStrategy)
 
 data IntergenerationalCovered : Choice.InformationMove → Set where
   governedIntergenerational :
-    IntergenerationalCovered Dist.strategyMove Dist.distributionAwareStrategy
+    IntergenerationalCovered (Dist.strategyMove Dist.distributionAwareStrategy)
 
 record GovernedAdmissibleAt
     (scope : Consent.ActionScope)
@@ -161,8 +161,6 @@ canonicalGovernedCheapestInitial =
 ------------------------------------------------------------------------
 -- Scope matters: initial consent is not reused as downstream-reuse consent.
 ------------------------------------------------------------------------
-
-data InitialOnlyConsentReceipt : Set where initialOnly : InitialOnlyConsentReceipt
 
 initialConsentCannotPopulateReuseAdmission :
   Consent.ConsentFor
