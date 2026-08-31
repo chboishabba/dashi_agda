@@ -9,6 +9,10 @@ import DASHI.Foundations.Base369Ternary27HypervoxelStratificationExact as Strati
 import DASHI.Foundations.Base369Ternary27StratifiedAppraisalFibreExact as Fibre
 import DASHI.Foundations.Base369Ternary27StratifiedFibrePlaquetteExact as Plaquette
 import DASHI.Moonshine.Base369Ternary27StratifiedFibreHolonomyExact as Holonomy
+import DASHI.Moonshine.Base369AppraisalFibreHeisenbergCarrierBidiExact as HeisenbergCarrier
+import DASHI.Moonshine.Base369HeisenbergTranslationGridObstructionExact as TranslationAudit
+import DASHI.Moonshine.Base369MonsterFineCarrierEquivarianceAuditExact as FineAudit
+import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as Heisenberg
 
 ------------------------------------------------------------------------
 -- Stratified fibre cardinalities.
@@ -81,7 +85,81 @@ frequencyOrderDefectPinned :
 frequencyOrderDefectPinned = Holonomy.frequencyTransportOrdersDiffer
 
 ------------------------------------------------------------------------
--- Non-promotion boundaries.
+-- Exact 729 appraisal-fibre <-> finite Heisenberg carrier weld.
+------------------------------------------------------------------------
+
+heisenbergFibreHas729States :
+  HeisenbergCarrier.heisenbergFibreStateCount ≡ 729
+heisenbergFibreHas729States = HeisenbergCarrier.heisenbergFibreStateCountIs729
+
+fabricFactorsAs27Times729 :
+  HeisenbergCarrier.factorisedFabricStateCount ≡ 19683
+fabricFactorsAs27Times729 = HeisenbergCarrier.factorisedFabricStateCountIs19683
+
+fullFabricRoundTripsThroughInteractionAndX6 :
+  (p : Geometry.TernaryHyperformalPoint) →
+  HeisenbergCarrier.interactionHeisenbergToFabric
+    (HeisenbergCarrier.fabricToInteractionHeisenberg p) ≡ p
+fullFabricRoundTripsThroughInteractionAndX6 =
+  HeisenbergCarrier.fabricHeisenbergRoundTrip
+
+------------------------------------------------------------------------
+-- BIDI operator audit: cyclic translation obstructed, reflection compatible.
+------------------------------------------------------------------------
+
+heisenbergAxis0WrapsPositiveToNegative :
+  TranslationAudit.heisenbergTranslateFibre Heisenberg.axis0
+    TranslationAudit.positiveAxisFibre
+  ≡ TranslationAudit.wrappedAxisFibre
+heisenbergAxis0WrapsPositiveToNegative =
+  TranslationAudit.axis0HeisenbergTranslationWrapsPositiveToNegative
+
+nativeGridRejectsHeisenbergWraparound :
+  Geometry.TritGridStep
+    DASHI.Foundations.SSPTritCarrier.sspPosOne
+    DASHI.Foundations.SSPTritCarrier.sspNegOne → ⊥
+nativeGridRejectsHeisenbergWraparound =
+  TranslationAudit.nativeGridHasNoPositiveToNegativeStep
+
+carrierDoesNotPromoteTranslationToPathAdjacency :
+  TranslationAudit.HeisenbergGridBidiBoundary.cyclicTranslationEqualsNativePathAdjacency
+    TranslationAudit.canonicalHeisenbergGridBidiBoundary ≡ false
+carrierDoesNotPromoteTranslationToPathAdjacency = refl
+
+signInversionCompatibilityPinned :
+  TranslationAudit.HeisenbergGridBidiBoundary.signInversionMatchesGeometricReflection
+    TranslationAudit.canonicalHeisenbergGridBidiBoundary ≡ true
+signInversionCompatibilityPinned = refl
+
+------------------------------------------------------------------------
+-- 19683 harmonic fine-carrier audit.
+------------------------------------------------------------------------
+
+geometricAndHarmonicFineCountsAgree :
+  FineAudit.geometricFineCount ≡ FineAudit.harmonicFineCount
+geometricAndHarmonicFineCountsAgree = FineAudit.fineCountsAgree
+
+geometryReconstructsMonsterBulkCount :
+  FineAudit.monsterBulkFromGeometry ≡ 196830
+geometryReconstructsMonsterBulkCount = FineAudit.monsterBulkFromGeometryIs196830
+
+sameCountNotPromotedToEquivariance :
+  FineAudit.FineCarrierBidiBoundary.sameCardinalityTreatedAsEquivariance
+    FineAudit.canonicalFineCarrierBidiBoundary ≡ false
+sameCountNotPromotedToEquivariance = refl
+
+canonicalFinChartStillRequired :
+  FineAudit.FineCarrierBidiBoundary.canonicalFin19683NineTritChartConstructed
+    FineAudit.canonicalFineCarrierBidiBoundary ≡ false
+canonicalFinChartStillRequired = refl
+
+fullMonsterActionStillNotEstablished :
+  FineAudit.FineCarrierBidiBoundary.fullMonsterActionOnHyperfabricEstablished
+    FineAudit.canonicalFineCarrierBidiBoundary ≡ false
+fullMonsterActionStillNotEstablished = refl
+
+------------------------------------------------------------------------
+-- Existing non-promotion boundaries.
 ------------------------------------------------------------------------
 
 sameStratumDoesNotMeanSameFineEndpoint :
