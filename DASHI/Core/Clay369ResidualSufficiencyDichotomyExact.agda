@@ -6,7 +6,9 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Analysis.RiemannAristotleG2eDeterminantTaperKernelExact as G2e
+import DASHI.Analysis.RiemannAristotleG2cPolarizationCompilerExact as G2c
 import DASHI.Analysis.RiemannG2DeterminantConsumerQuotient369Exact as RH
+import DASHI.Analysis.RiemannG2PostSchurDeterminantSufficiency369Exact as RHSchur
 import DASHI.Physics.Closure.NSCriticalConeResidualFibre369CrossPollinationExact as NS
 import DASHI.Physics.YangMills.BalabanActiveSourceDiscriminator2026Exact as YMSource
 import DASHI.Physics.YangMills.BalabanSourceResidualConsumerNonDescent369Exact as YM
@@ -15,7 +17,7 @@ import DASHI.Physics.YangMills.BalabanSourceResidualConsumerNonDescent369Exact a
 -- CLAY / 369 RESIDUAL-SUFFICIENCY DICHOTOMY
 --
 -- The 369/Monster work makes hidden fine structure salient, but the correct
--- consumer-indexed rule is not "always retain the residual".  The repository's
+-- consumer-indexed rule is not "always retain the residual". The repository's
 -- consumer-descent calculus gives a sharper dichotomy:
 --
 --   * if a declared consumer factors through a coarse observer, extra residual
@@ -23,9 +25,10 @@ import DASHI.Physics.YangMills.BalabanSourceResidualConsumerNonDescent369Exact a
 --   * if equal coarse observations can produce different consumer outcomes,
 --     the residual is genuinely required.
 --
--- RH G2e currently exhibits the first shape after determinant scalarization.
--- NS critical-cone signed coherence and YM literal source readiness exhibit the
--- second shape in their current finite proof-search fixtures.
+-- RH now exhibits the first shape twice: pointwise G2e zero response descends
+-- through q=det(n1,n2,h), and G2c post-Schur covariance descends through the
+-- pair of determinant coordinates. NS signed coherence and YM literal source
+-- readiness exhibit the second shape in their present proof-search fixtures.
 ------------------------------------------------------------------------
 
 rhDeterminantObserverIsConsumerSufficient :
@@ -36,6 +39,14 @@ rhDeterminantObserverIsConsumerSufficient :
     (RH.fixedKernelConsumer A kernel)
 rhDeterminantObserverIsConsumerSufficient =
   RH.determinantResponseSufficientForFixedKernel
+
+rhPostSchurDeterminantPairIsConsumerSufficient :
+  (S : G2c.PolarizedDeterminantSurface) ->
+  Descent.ConsumerSufficient
+    (RHSchur.determinantPairObserver S)
+    (RHSchur.postSchurPairConsumer S)
+rhPostSchurDeterminantPairIsConsumerSufficient =
+  RHSchur.postSchurDeterminantPairIsConsumerSufficient
 
 nsCoarseShellResidualDoesNotDescend =
   NS.signedResidualCannotDescendThroughShellObserver
@@ -59,6 +70,9 @@ record Clay369ResidualSufficiencyBoundary : Set where
     rhG2eCurrentlyHasExactScalarSufficiencyPattern : Bool
     rhG2eCurrentlyHasExactScalarSufficiencyPatternIsTrue :
       rhG2eCurrentlyHasExactScalarSufficiencyPattern ≡ true
+    rhG2cPostSchurCrossTermsHaveDeterminantPairSufficiency : Bool
+    rhG2cPostSchurCrossTermsHaveDeterminantPairSufficiencyIsTrue :
+      rhG2cPostSchurCrossTermsHaveDeterminantPairSufficiency ≡ true
     nsAndYmCurrentlyHaveResidualNonDescentPatterns : Bool
     nsAndYmCurrentlyHaveResidualNonDescentPatternsIsTrue :
       nsAndYmCurrentlyHaveResidualNonDescentPatterns ≡ true
@@ -73,4 +87,5 @@ canonicalClay369ResidualSufficiencyBoundary =
     true refl
     true refl
     true refl
-    "369 cross-pollination now has a bidirectional rule: retain fine residual structure exactly where the declared consumer fails to descend, but compress aggressively where an exact sufficient observer exists. RH G2e's determinant q is sufficient for the fixed pointwise zero kernel; NS shell geometry and YM coarse source labels are not sufficient for their signed/recovery consumers."
+    true refl
+    "369 cross-pollination now has a bidirectional rule: retain fine residual structure exactly where the declared consumer fails to descend, but compress aggressively where an exact sufficient observer exists. RH determinant coordinates are sufficient for both the G2e fixed-kernel response and G2c post-Schur cross terms; NS shell geometry and YM coarse source labels are not sufficient for their signed/recovery consumers."
