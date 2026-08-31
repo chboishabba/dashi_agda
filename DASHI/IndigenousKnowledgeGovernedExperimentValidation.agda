@@ -7,3 +7,5 @@ import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact
 import DASHI.Core.ExperimentalCoordinateDesignExact
 import DASHI.Core.DiscriminatorSynthesisExact
 import DASHI.Core.SequentialConsumerExperimentPlannerExact
+import DASHI.Core.BenefitBurdenExternalityDistributionExact
+import DASHI.Governance.DistributionalExternalityCrossDomainExact
