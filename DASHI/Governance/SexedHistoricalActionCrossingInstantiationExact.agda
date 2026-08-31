@@ -42,19 +42,27 @@ counterformationCrossing =
 
 supportThenInstitution : Trace.ActionTrace HistoricalStrand HistoricalAction
 supportThenInstitution =
-  Trace.singleCrossing supportCrossing Trace.++trace Trace.singleCrossing institutionCrossing
+  Trace._++trace_
+    (Trace.singleCrossing supportCrossing)
+    (Trace.singleCrossing institutionCrossing)
 
 institutionThenSupport : Trace.ActionTrace HistoricalStrand HistoricalAction
 institutionThenSupport =
-  Trace.singleCrossing institutionCrossing Trace.++trace Trace.singleCrossing supportCrossing
+  Trace._++trace_
+    (Trace.singleCrossing institutionCrossing)
+    (Trace.singleCrossing supportCrossing)
 
 repairThenCounterformation : Trace.ActionTrace HistoricalStrand HistoricalAction
 repairThenCounterformation =
-  Trace.singleCrossing repairCrossing Trace.++trace Trace.singleCrossing counterformationCrossing
+  Trace._++trace_
+    (Trace.singleCrossing repairCrossing)
+    (Trace.singleCrossing counterformationCrossing)
 
 counterformationThenRepair : Trace.ActionTrace HistoricalStrand HistoricalAction
 counterformationThenRepair =
-  Trace.singleCrossing counterformationCrossing Trace.++trace Trace.singleCrossing repairCrossing
+  Trace._++trace_
+    (Trace.singleCrossing counterformationCrossing)
+    (Trace.singleCrossing repairCrossing)
 
 ------------------------------------------------------------------------
 -- 2. Endpoint/count collisions do not recover order provenance.
