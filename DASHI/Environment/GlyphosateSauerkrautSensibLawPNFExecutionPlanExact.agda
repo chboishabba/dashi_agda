@@ -39,6 +39,8 @@ record SensibLawPNFExecutionTarget : Set where
     externalWorldDemandReferences : List String
     parserContractReference : String
     numericPNFCompilerReference : String
+    evidentialBridgeExporterReference : String
+    evidentialBridgeSchemaReference : String
     expectedOutputReference : String
     materialisation : ParserRunMaterialisation
     materialisationReference : String
@@ -63,7 +65,9 @@ shioctonSensibLawExecutionTarget = sensibLawPNFExecutionTarget
   ∷ [])
   "SensibLaw streaming spaCy parser execution / PackedSentenceFibre authority path"
   "SensibLaw strict numeric-pnf-hyperfabric-compiler:v1"
-  "SensibLawNumericPNFReceipt followed by ParserToEvidencePNFCorrespondence and document/source/world horizon receipts"
+  "SensibLaw PR #489 src/pnf/evidential_pnf_receipt.py"
+  "sl.evidential_pnf_bridge.v0_1"
+  "numeric PNF compilation -> sl.evidential_pnf_bridge.v0_1 -> SensibLawNumericPNFReceipt -> ParserToEvidencePNFCorrespondence -> document/source/world horizon receipts"
   parserRunNotMaterialised
   "current repository search found no already-ingested Harle/sauerkraut artifact; execute/import source before installing a concrete parser receipt"
 
@@ -80,6 +84,7 @@ record MaterialisedGlyphosateSpacyPNF : Set₁ where
       SpacyBridge.SensibLawNumericPNFReceipt Claim.shioctonNaturalAssertion
     corpusWorldContext :
       WorldBridge.SensibLawCorpusWorldContext numericReceipt
+    bridgeReceiptArtifactReference : String
     runArtifactReference : String
     replayReference : String
 
@@ -94,6 +99,12 @@ record GlyphosateSensibLawExecutionBoundary : Set where
     concreteParserReceiptRequiresMaterialisedRun : Bool
     concreteParserReceiptRequiresMaterialisedRunIsTrue :
       concreteParserReceiptRequiresMaterialisedRun ≡ true
+    runtimeExporterNowHasStableSchema : Bool
+    runtimeExporterNowHasStableSchemaIsTrue :
+      runtimeExporterNowHasStableSchema ≡ true
+    exportedReceiptEqualsSemanticCorrespondence : Bool
+    exportedReceiptEqualsSemanticCorrespondenceIsFalse :
+      exportedReceiptEqualsSemanticCorrespondence ≡ false
     paperSourceAndWorldDemandsCanShareOneExecutionTarget : Bool
     paperSourceAndWorldDemandsCanShareOneExecutionTargetIsTrue :
       paperSourceAndWorldDemandsCanShareOneExecutionTarget ≡ true
@@ -101,4 +112,9 @@ record GlyphosateSensibLawExecutionBoundary : Set where
 canonicalGlyphosateSensibLawExecutionBoundary :
   GlyphosateSensibLawExecutionBoundary
 canonicalGlyphosateSensibLawExecutionBoundary =
-  glyphosateSensibLawExecutionBoundary false refl true refl true refl
+  glyphosateSensibLawExecutionBoundary
+    false refl
+    true refl
+    true refl
+    false refl
+    true refl
