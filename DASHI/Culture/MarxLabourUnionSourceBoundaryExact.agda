@@ -30,6 +30,8 @@ open import Agda.Builtin.String using (String)
 -- C98 supplies anti-union-discrimination, non-interference and collective-
 -- bargaining source surfaces.  Neither convention is represented as a complete
 -- theory of unionism or as proof authority for DASHI's governance mathematics.
+-- No right-to-strike proposition is inferred here from C87/C98; that legal
+-- question is kept outside this bounded owner.
 ------------------------------------------------------------------------
 
 record LabourUnionSourceReference : Set where
