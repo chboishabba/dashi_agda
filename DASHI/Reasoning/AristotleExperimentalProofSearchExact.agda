@@ -22,26 +22,14 @@ import DASHI.Core.SequentialConsumerExperimentPlannerExact as Sequential
 -- ActionProved with a heuristic score.
 ------------------------------------------------------------------------
 
-------------------------------------------------------------------------
--- An Aristotle observer collision is literally a discriminator-synthesis
--- collision on proof states.
-------------------------------------------------------------------------
-
 observerCollision :
   {G : Aristotle.SearchHypergraph} →
   (O : Aristotle.StateObserver G) →
   (left right : Aristotle.State G) →
-  left Aristotle.≈[ O ] right →
+  Aristotle._≈[_]_ left O right →
   Discriminator.CurrentObserverCollision (Aristotle.observe O)
 observerCollision O left right same =
   Discriminator.currentObserverCollision left right same
-
-------------------------------------------------------------------------
--- A meta-search probe observes proof states.  Examples may include trying a
--- lemma family, exposing an extra normal form, querying an auxiliary prover, or
--- computing a residual/discriminator.  The probe is not itself an Aristotle
--- proof action unless an application supplies that separate bridge.
-------------------------------------------------------------------------
 
 record AristotleProofProbe
     (G : Aristotle.SearchHypergraph) : Set₁ where
@@ -60,17 +48,11 @@ record ProbeSeparatesObserverCollision
     (left right : Aristotle.State G) : Set where
   constructor probe-separates-observer-collision
   field
-    currentlyCollapsed : left Aristotle.≈[ O ] right
+    currentlyCollapsed : Aristotle._≈[_]_ left O right
     separates :
       Discriminator.BundleSeparates (bundle probe) left right
 
 open ProbeSeparatesObserverCollision public
-
-------------------------------------------------------------------------
--- Minimal discriminator search is inherited directly from the generic
--- experiment-design owner.  Minimality is only among the explicitly declared
--- candidate probes.
-------------------------------------------------------------------------
 
 ProofDiscriminator :
   {G : Aristotle.SearchHypergraph} →
@@ -79,14 +61,6 @@ ProofDiscriminator :
   Set₁
 ProofDiscriminator O Declared =
   Discriminator.MinimalDiscriminator (Aristotle.observe O) Declared
-
-------------------------------------------------------------------------
--- Sequential proof experiments.
---
--- The terminal consumer need not identify the complete hidden proof state.  It
--- is enough that every state surviving the current evidence fibre agrees on
--- the declared downstream proof-search consumer.
-------------------------------------------------------------------------
 
 SequentialProofExperimentPlan :
   {G : Aristotle.SearchHypergraph} {Prediction : Set} →
@@ -102,14 +76,6 @@ CertifiedSequentialProofExperimentPlan :
   Set₂
 CertifiedSequentialProofExperimentPlan = Sequential.CertifiedSequentialPlan
 
-------------------------------------------------------------------------
--- Actionability bridge.
---
--- A discriminator can also be judged by whether its information move removes
--- an explicitly supplied obstruction.  No probability, scientific utility or
--- proof probability is inferred here.
-------------------------------------------------------------------------
-
 ProofSearchResolvingDiscriminator :
   {G : Aristotle.SearchHypergraph} →
   (problem : Choice.ActionabilityProblem) → Set₁
@@ -117,33 +83,24 @@ ProofSearchResolvingDiscriminator {G} problem =
   Discriminator.ActionabilityResolvingDiscriminator
     {World = Aristotle.State G} problem
 
-------------------------------------------------------------------------
--- Boundaries.
-------------------------------------------------------------------------
-
 record AristotleExperimentalProofSearchBoundary : Set where
   constructor aristotle-experimental-proof-search-boundary
   field
     experimentalDesignPolicyClaimedByAristotlePaper : Bool
     experimentalDesignPolicyClaimedByAristotlePaperIsFalse :
       experimentalDesignPolicyClaimedByAristotlePaper ≡ false
-
     searchPolicyReplacesProofValiditySemantics : Bool
     searchPolicyReplacesProofValiditySemanticsIsFalse :
       searchPolicyReplacesProofValiditySemantics ≡ false
-
     observerCollisionCanBeTargetedByDiscriminator : Bool
     observerCollisionCanBeTargetedByDiscriminatorIsTrue :
       observerCollisionCanBeTargetedByDiscriminator ≡ true
-
     nextProofExperimentMayDependOnObservedOutcome : Bool
     nextProofExperimentMayDependOnObservedOutcomeIsTrue :
       nextProofExperimentMayDependOnObservedOutcome ≡ true
-
     terminalSearchConsumerRequiresFullStateIdentity : Bool
     terminalSearchConsumerRequiresFullStateIdentityIsFalse :
       terminalSearchConsumerRequiresFullStateIdentity ≡ false
-
     leastCostClaimRequiresDeclaredComparisonClass : Bool
     leastCostClaimRequiresDeclaredComparisonClassIsTrue :
       leastCostClaimRequiresDeclaredComparisonClass ≡ true
@@ -152,9 +109,4 @@ canonicalAristotleExperimentalProofSearchBoundary :
   AristotleExperimentalProofSearchBoundary
 canonicalAristotleExperimentalProofSearchBoundary =
   aristotle-experimental-proof-search-boundary
-    false refl
-    false refl
-    true refl
-    true refl
-    false refl
-    true refl
+    false refl false refl true refl true refl false refl true refl
