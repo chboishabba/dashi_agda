@@ -29,7 +29,8 @@ import DASHI.Planning.ParticipatoryPlanningGovernanceExact as Participation
 -- Marx and ILO C87/C98 supply bounded theoretical/normative source surfaces.
 -- They do not prove the finite DASHI countermodels below, and no claim is made
 -- that one finite labour carrier exhausts capitalism, unionism or Rastafari
--- social organisation.
+-- social organisation.  The refusal/withdrawal constructors are generic DASHI
+-- governance capabilities, not a source-attributed right-to-strike theorem.
 ------------------------------------------------------------------------
 
 data ParticipationStatus : Set where
@@ -72,10 +73,6 @@ record ExitRefusalLabourState : Set where
 
 open ExitRefusalLabourState public
 
-------------------------------------------------------------------------
--- Same visible participation, very different option/control structures.
-------------------------------------------------------------------------
-
 participatingDependentNoVoice : ExitRefusalLabourState
 participatingDependentNoVoice =
   exit-refusal-labour-state
@@ -99,10 +96,6 @@ participatingGovernor =
   exit-refusal-labour-state
     participates refusalAvailable withdrawalAvailable governingRuleChange
     viableMaterialExit independentOrganisation bargainingEffective lowDependence
-
-------------------------------------------------------------------------
--- Participation cannot recover refusal/exit/governance fibres.
-------------------------------------------------------------------------
 
 participationCannotRecoverRefusal :
   NonFactor.FactorsThrough participation refusal → ⊥
@@ -146,10 +139,6 @@ participationCannotRecoverBargainingPower =
     (NonFactor.nonFactorabilityWitness
       participatingAssociationOnly participatingOrganisedBargaining refl (λ ()))
 
-------------------------------------------------------------------------
--- Even association/union-form participation cannot recover effective power.
-------------------------------------------------------------------------
-
 organisationCannotRecoverBargainingPower :
   NonFactor.FactorsThrough collectiveOrganisation bargainingPower → ⊥
 organisationCannotRecoverBargainingPower =
@@ -176,10 +165,6 @@ withdrawalCannotRecoverRuleChange =
     (NonFactor.nonFactorabilityWitness
       participatingOrganisedBargaining participatingGovernor refl (λ ()))
 
-------------------------------------------------------------------------
--- Existing canonical governance theorems reused directly.
-------------------------------------------------------------------------
-
 participationStillDoesNotCreatePowerToRefuse :
   Consent.ConsentPromotionBoundary.participationImpliesPowerToRefuse
     Consent.canonicalConsentPromotionBoundary ≡ false
@@ -204,10 +189,6 @@ coDecisionStillNotGoverning :
   Participation.stageLevel Participation.governingStage → ⊥
 coDecisionStillNotGoverning = Participation.coDecidingIsNotDefinitionallyGoverning
 
-------------------------------------------------------------------------
--- Option-cone / material-exit cross-pollination.
-------------------------------------------------------------------------
-
 coerciveSystemStillRequiresLostSafeOption :
   OptionCone.StrictSafeReachabilityContraction
     OptionCone.demoReachability
@@ -230,18 +211,10 @@ labourParticipationStillCannotRecoverPoliticalVoice :
 labourParticipationStillCannotRecoverPoliticalVoice =
   SocioTechnical.labourParticipationCannotRecoverPoliticalVoice
 
-------------------------------------------------------------------------
--- Link to the existing circular-loop control topology.
-------------------------------------------------------------------------
-
 loopParticipationStillDoesNotRecoverDecisionRights :
   NonFactor.FactorsThrough Loop.contribution Loop.decision → ⊥
 loopParticipationStillDoesNotRecoverDecisionRights =
   Loop.participationCannotRecoverDecisionRights
-
-------------------------------------------------------------------------
--- Source-bounded Marx / unionism weld.
-------------------------------------------------------------------------
 
 marxLabourUnionSourceBoundary : MarxUnion.MarxLabourUnionSourceBoundary
 marxLabourUnionSourceBoundary = MarxUnion.canonicalMarxLabourUnionSourceBoundary
@@ -260,10 +233,6 @@ collectiveBargainingStillDoesNotEqualMetaRuleAuthority :
   MarxUnion.CollectiveBargainingEqualsMetaRuleAuthority → ⊥
 collectiveBargainingStillDoesNotEqualMetaRuleAuthority =
   MarxUnion.collectiveBargainingDoesNotEqualMetaRuleAuthority
-
-------------------------------------------------------------------------
--- Explicit no-promotions.
-------------------------------------------------------------------------
 
 data ParticipationMeansFreeLabourRelation : Set where
 
@@ -308,20 +277,15 @@ record ItalExitRefusalMarxUnionBoundary : Set where
   field
     participationEqualsRefusalPower : Bool
     participationEqualsRefusalPowerIsFalse : participationEqualsRefusalPower ≡ false
-
     refusalEqualsWithdrawalPower : Bool
     refusalEqualsWithdrawalPowerIsFalse : refusalEqualsWithdrawalPower ≡ false
-
     withdrawalEqualsRuleChangePower : Bool
     withdrawalEqualsRuleChangePowerIsFalse : withdrawalEqualsRuleChangePower ≡ false
-
     formalAssociationEqualsEffectiveBargaining : Bool
     formalAssociationEqualsEffectiveBargainingIsFalse :
       formalAssociationEqualsEffectiveBargaining ≡ false
-
     formalRightsEqualMaterialExit : Bool
     formalRightsEqualMaterialExitIsFalse : formalRightsEqualMaterialExit ≡ false
-
     sourceAttributionSurvivesCrossPollination : Bool
     sourceAttributionSurvivesCrossPollinationIsTrue :
       sourceAttributionSurvivesCrossPollination ≡ true
