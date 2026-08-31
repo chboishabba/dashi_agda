@@ -42,6 +42,7 @@ FILES=(
   DASHI/Analysis/RiemannG2GammaMellinImplementationRecoveryExact.agda
   DASHI/Analysis/RiemannG2CanonicalTestModulationProofRelevantExact.agda
   DASHI/Analysis/RiemannG2GammaMellinProofRelevantActionCompilerExact.agda
+  DASHI/Analysis/RiemannG2SourceNativePhiHatModulationAdapterExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda
   DASHI/Mathematics/NumberTheory/DiophantineTupleDPrimeSquare2026ClaimAuditExact.agda
