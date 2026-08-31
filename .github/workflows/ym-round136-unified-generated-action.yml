@@ -1,0 +1,56 @@
+name: YM Round144 unified generated action Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanUnifiedGeneratedActionDensityRound132Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanUnifiedGeneratedActionFirstVariationRound133Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanPresentCutCanonicalMetricDomainRound134Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanUnifiedGeneratedActionStressScaleRound135Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanUnifiedGeneratedActionRecoveryRound136Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanUnifiedGeneratedActionA2HistoryRound137Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanUnifiedGeneratedActionA1HistoryRound138Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanUnifiedGeneratedActionPhysicalHistoryRound139Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanUnifiedPresentCutSchwingerRecoveryRound140Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCombinedRGUnifiedActionRound141Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP109116FiniteEffectiveActionFirstVariationRound142Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanBC2FiniteLocalizedFirstVariationRound143Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCompositeStressFirstVariationRound144Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanUnifiedPresentCutSchwingerRecoveryRound140Validation.agda'
+      - 'scripts/check_ym_round136_unified_generated_action.sh'
+      - '.github/workflows/ym-round136-unified-generated-action.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ym-round144-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  agda:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          submodules: false
+      - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Check Round144 unified generated action
+        env:
+          AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
+          DASHI_REPO_ROOT: ${{ github.workspace }}
+          DASHI_AGDA29_CACHE_ROOT: ${{ runner.temp }}/dashi-agda29-round144
+          DASHI_STATUS_DIR: ${{ runner.temp }}/dashi-agda29-round144/status
+          XDG_CACHE_HOME: ${{ runner.temp }}/dashi-xdg-round144
+          AGDA_LOG_PATH: ${{ github.workspace }}/ym-round144-agda.log
+          AGDA_JOBS: '4'
+          DASHI_NO_TMUX: '1'
+        run: bash scripts/check_ym_round136_unified_generated_action.sh
+      - name: Upload Round144 Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ym-round144-unified-generated-action-agda-log
+          path: ym-round144-agda*.log
+          if-no-files-found: warn
