@@ -8,6 +8,7 @@ FILES=(
   DASHI/Chemistry/TGO93PhEurPesticideMembershipExact.agda
   DASHI/Chemistry/RegulatoryAnalyteCoverageBidiExact.agda
   DASHI/Chemistry/AssayDetectionEnvelopeExact.agda
+  DASHI/Chemistry/SpeciesMethodDetectionCrossPollinationExact.agda
   DASHI/Chemistry/DefensiveRegulatoryAssayStressAuditExact.agda
   DASHI/Chemistry/RegulatoryAnalytePanelRefinementExact.agda
   DASHI/Chemistry/Everything.agda
@@ -35,6 +36,8 @@ grep -q '^socialMediaAssertionCannotAutoPromoteToVerifiedBypass :' DASHI/Chemist
 grep -q '^notDetectedCannotRecoverTrueAbsence :' DASHI/Chemistry/AssayDetectionEnvelopeExact.agda
 grep -q '^tableLimitCannotAutoPromoteToLOD :' DASHI/Chemistry/AssayDetectionEnvelopeExact.agda
 grep -q '^tableLimitCannotAutoPromoteToLOQ :' DASHI/Chemistry/AssayDetectionEnvelopeExact.agda
+grep -q '^moleculeIdentityCannotRecoverMethodDetectability :' DASHI/Chemistry/SpeciesMethodDetectionCrossPollinationExact.agda
+grep -q '^methodFamilyAloneCannotRecoverDetectionThreshold :' DASHI/Chemistry/SpeciesMethodDetectionCrossPollinationExact.agda
 grep -q '^stressWitnessRefutesCompleteRecovery :' DASHI/Chemistry/DefensiveRegulatoryAssayStressAuditExact.agda
 grep -q '^canonicalScreenshotApplicationBoundary :' DASHI/Chemistry/DefensiveRegulatoryAssayStressAuditExact.agda
 grep -q '^requiredPanelCannotRecoverOffPanelPresence :' DASHI/Chemistry/RegulatoryAnalytePanelRefinementExact.agda
