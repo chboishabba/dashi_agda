@@ -20,8 +20,8 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119SelectedBackgroundBondWeld
 -- equality identifies the selected group element with the actual bond stored
 -- by `source.realization`.
 --
--- No path, negative-link, relative-product, Y_x, or chart receipt is supplied
--- here.  They are downstream through R168--R169.
+-- Round172 separately proves the canonical radius-six contour has length <=24,
+-- so even that geometry field is no longer accepted here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -38,12 +38,11 @@ import DASHI.Physics.YangMills.BalabanClayGate4PrimaryQkFiniteKernelBudgetExact 
 import DASHI.Physics.YangMills.BalabanClayGate4SU2PrincipalLogPathBoundExact as Path
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationalChartBridgeExact as Selected
 import DASHI.Physics.YangMills.BalabanCMP98Equation119CanonicalCoarseSegmentRound158Exact as R158
-import DASHI.Physics.YangMills.BalabanCMP98Equation119LiteralRelativeDefectRound164Exact as R164
 import DASHI.Physics.YangMills.BalabanCMP98Equation119PositiveLinkDefectRound168Exact as R168
+import DASHI.Physics.YangMills.BalabanCMP98CanonicalContourLength24Round172Exact as R172
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.BalabanCMP98UnitaryOperatorDefectTelescopeExact as Telescope
 import DASHI.Physics.YangMills.BalabanCMP98MinimalContourSourceChartBudgetExact as Budget
-import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredPeriodicEmbeddingExact as Embed
 
 record SelectedBackgroundBondWeld
     {C n Value group CoarseField FineField Lie}
@@ -86,9 +85,6 @@ record SelectedBackgroundBondWeld
     publishedUpperBelowPerLinkMajorant :
       Selected.sourceFineBondUpper (Selected.variational bridge)
       ≤ Budget.perLinkDefectMajorant
-
-    canonicalContourLengthAtMost24 : ∀ point →
-      R164.listLength (Embed.canonicalCenteredContourWord point) ≤ 24
 
 open SelectedBackgroundBondWeld public
 
@@ -191,7 +187,7 @@ asPositiveLinkDefectInputs source weld = record
       λ step site axis →
         selectedKernelDefectBelowPerLinkMajorant weld step (pair site axis)
   ; R168.PositiveLinkDefectInputs.canonicalContourLengthAtMost24 =
-      canonicalContourLengthAtMost24 weld
+      R172.canonicalContourLengthAtMost24
   }
 
 cmp98Equation119SelectedBackgroundBondWeldRound170Level : ProofLevel
