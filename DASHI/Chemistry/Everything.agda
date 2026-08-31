@@ -24,3 +24,8 @@ import DASHI.Chemistry.DrinkingWaterTapMetalObservationBidiExact
 -- Refinery/feedstock composition lane: salt/chloride/process constraints remain
 -- distinct from crude grade, effective throughput and downstream economics.
 import DASHI.Chemistry.RefineryFeedstockSaltConstraintBidiExact
+
+-- Integrated industrial-chemistry lane: salt-derived chlor-alkali co-products
+-- and hydrocarbon cracker/refinery products meet only through explicit
+-- downstream reaction, inventory, quality and provenance receipts.
+import DASHI.Chemistry.SaltPetroleumIndustrialChemistryNetworkExact
