@@ -25,7 +25,9 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119ClosedPathSameObjectRound1
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Data.List.Base using (_++_)
+open import Data.Rational.Base using (_≤_)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP98Equation119LeastPrivilegeSourceRound152Exact as R152
@@ -39,6 +41,8 @@ import DASHI.Physics.YangMills.BalabanClayGate4PeriodicCoordinateClosureExact as
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredPeriodicEmbeddingExact as Embed
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredOddBlockCarrierExact as Centered
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109PeriodicContourFamilyInstantiationExact as Periodic
+import DASHI.Physics.YangMills.BalabanCMP98UnitaryOperatorDefectTelescopeExact as Telescope
+import DASHI.Physics.YangMills.BalabanCMP98SelectedSourceChartFromDefectExact as Chart
 
 literalGammaEndpointIsPlusCentre :
   ∀ {C n Value group}
@@ -108,8 +112,6 @@ literalGammaEndpointIsPlusCentre {n = n} source step point =
             (λ start → Bond.walk start (R155.reverseWord contour))
             afterCoarse)
           returnToPlusCentre)))
-  where
-    open import Data.List.Base using (_++_)
 
 closedPathHolonomyIsRelativeContourElement :
   ∀ {C n Value group}
@@ -177,24 +179,16 @@ literalRelativeElementDefectBelowSourceThreshold :
     (source : R158.CanonicalL13Equation119Source C n Value group)
     (inputs : R164.LiteralRelativeDefectInputs source)
     step point →
-  DASHI.Physics.YangMills.BalabanCMP98UnitaryOperatorDefectTelescopeExact.defect
-    (R164.kernel inputs)
+  Telescope.defect (R164.kernel inputs)
     (R155.relativeContourElement (R158.asRound152Source source) step point)
-  DASHI.Physics.YangMills.BalabanCMP98SelectedSourceChartFromDefectExact.≤
-    DASHI.Physics.YangMills.BalabanCMP98SelectedSourceChartFromDefectExact.sourceDefectThreshold
+  ≤ Chart.sourceDefectThreshold
 literalRelativeElementDefectBelowSourceThreshold source inputs step point =
-  let
-    import DASHI.Physics.YangMills.BalabanCMP98UnitaryOperatorDefectTelescopeExact as Telescope
-    import DASHI.Physics.YangMills.BalabanCMP98SelectedSourceChartFromDefectExact as Chart
-  in
   subst
     (λ selected → Telescope.defect (R164.kernel inputs) selected
-      Chart.≤ Chart.sourceDefectThreshold)
+      ≤ Chart.sourceDefectThreshold)
     (closedPathHolonomyIsRelativeContourElement source step point)
     (R164.literalRelativeClosedPathDefectBelowSourceThreshold
       source inputs step point)
-  where
-    open import Relation.Binary.PropositionalEquality using (subst)
 
 cmp98Equation119ClosedPathSameObjectRound165Level : ProofLevel
 cmp98Equation119ClosedPathSameObjectRound165Level = machineChecked
