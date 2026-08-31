@@ -10,6 +10,8 @@ import DASHI.Governance.SexedHistoricalDialecticalJoinAdaptiveSearchExact as Sea
 import DASHI.Governance.SexedHistoricalReopenableSynthesisEndOfHistoryBoundaryExact as Reopen
 import DASHI.Governance.SexedHistoricalSelectiveReopeningExact as Selective
 import DASHI.Governance.SexedHistoricalBracketedMultiverseTSFVBridgeExact as Bracketed
+import DASHI.Governance.SexedHistoricalStratifiedCollectiveGluingExact as Gluing
+import DASHI.Governance.SexedHistoricalDistributedCompatibilityReopeningExact as Distributed
 
 productiveJoinNextHistoryRegression :
   INF.FactorsThrough Reopen.joinPresentSurface Reopen.nextContinuation → ⊥
@@ -88,6 +90,47 @@ canonicalTwoBoundaryCorridorRegression :
     Bracketed.preserveReciprocity
 canonicalTwoBoundaryCorridorRegression = Bracketed.canonicalReciprocalCorridor
 
+stratumCannotRecoverLocalBranchRegression :
+  INF.FactorsThrough
+    Gluing.feminineStratumSurface Gluing.feminineContinuationSurface → ⊥
+stratumCannotRecoverLocalBranchRegression =
+  Gluing.stratumCannotRecoverLocalContinuation
+
+globalSurfaceCannotRecoverLocalIntegrityRegression :
+  INF.FactorsThrough Gluing.globalPublicSurface Gluing.globalIntegrity → ⊥
+globalSurfaceCannotRecoverLocalIntegrityRegression =
+  Gluing.globalSurfaceCannotRecoverLocalIntegrity
+
+blockedFamilyIsLocallyLiveRegression :
+  Gluing.AllLocallyLive Gluing.blockedCollectiveFamily
+blockedFamilyIsLocallyLiveRegression =
+  Gluing.blockedCollectiveFamilyLocallyLive
+
+blockedFamilyStillCannotGlueRegression :
+  Gluing.CompatibleFamily Gluing.blockedCollectiveFamily → ⊥
+blockedFamilyStillCannotGlueRegression =
+  Gluing.blockedCollectiveFamilyCannotGlue
+
+minimalCompatibilityExtensionRegression : Gluing.MinimalCompatibilityExtension
+minimalCompatibilityExtensionRegression =
+  Gluing.canonicalMinimalCompatibilityExtension
+
+distributedGlobalCompatibilityReopeningRegression :
+  Dependency.ReopeningObligation
+    Distributed.Depends
+    Distributed.feminineEnactedBranch
+    Distributed.globalCompatibilityCertificate
+distributedGlobalCompatibilityReopeningRegression =
+  Distributed.globalCompatibilityMustReopenFromFeminineEnactment
+
+distributedCollectiveFutureReopeningRegression :
+  Dependency.ReopeningObligation
+    Distributed.Depends
+    Distributed.feminineEnactedBranch
+    Distributed.collectiveFutureConeCertificate
+distributedCollectiveFutureReopeningRegression =
+  Distributed.collectiveFutureConeMustReopenFromFeminineEnactment
+
 selectiveReopeningBoundaryRegression :
   Selective.SelectiveHistoricalReopeningBoundary
 selectiveReopeningBoundaryRegression =
@@ -97,6 +140,16 @@ bracketedMultiverseTSFVBoundaryRegression :
   Bracketed.BracketedMultiverseTSFVBoundary
 bracketedMultiverseTSFVBoundaryRegression =
   Bracketed.canonicalBracketedMultiverseTSFVBoundary
+
+stratifiedCollectiveGluingBoundaryRegression :
+  Gluing.StratifiedCollectiveGluingBoundary
+stratifiedCollectiveGluingBoundaryRegression =
+  Gluing.canonicalStratifiedCollectiveGluingBoundary
+
+distributedCompatibilityReopeningBoundaryRegression :
+  Distributed.DistributedCompatibilityReopeningBoundary
+distributedCompatibilityReopeningBoundaryRegression =
+  Distributed.canonicalDistributedCompatibilityReopeningBoundary
 
 canonicalSourceBoundaryRegression :
   Reopen.ReopenableSynthesisEndOfHistoryBoundary
