@@ -31,6 +31,75 @@ record SentenceParagraphDeltaArchitecture
 open SentenceParagraphDeltaArchitecture public
 
 ------------------------------------------------------------------------
+-- Stronger B1 naturality boundary.
+--
+-- Associativity at the parent is not by itself enough to license recursive
+-- batching.  Transport must be a homomorphism of the source fusion operation:
+-- transporting an empty delta is empty, and transporting a fused source delta
+-- is exactly the same as transporting each source delta and fusing at the
+-- parent.  This is the theorem shape used by the recursive B2 runtime.
+------------------------------------------------------------------------
+
+record SentenceParagraphFusionNaturality
+    {SentenceAddress ParagraphAddress SentenceDelta ParagraphDelta : Set}
+    (architecture :
+      SentenceParagraphDeltaArchitecture
+        SentenceAddress ParagraphAddress SentenceDelta ParagraphDelta) : Set₁ where
+  field
+    emptySentenceDelta : SentenceDelta
+    fuseSentenceDelta : SentenceDelta → SentenceDelta → SentenceDelta
+
+    sourceFuseAssociative :
+      (left middle right : SentenceDelta) →
+      fuseSentenceDelta (fuseSentenceDelta left middle) right
+        ≡
+      fuseSentenceDelta left (fuseSentenceDelta middle right)
+
+    transportEmpty :
+      transportDelta architecture emptySentenceDelta
+        ≡
+      emptyParagraphDelta architecture
+
+    transportFusion :
+      (left right : SentenceDelta) →
+      transportDelta architecture (fuseSentenceDelta left right)
+        ≡
+      fuseParagraphDelta architecture
+        (transportDelta architecture left)
+        (transportDelta architecture right)
+
+open SentenceParagraphFusionNaturality public
+
+------------------------------------------------------------------------
+-- B1.1 boundary-admission naturality.
+--
+-- Emitted local semantic structure and admitted boundary structure are not the
+-- same type of claim.  For example, a sentence solver may emit an object that
+-- is not promoted into the sentence interface.  The authoritative B1.1 square
+-- therefore compares admission after semantic transport with transport of the
+-- already-admitted sentence boundary.
+------------------------------------------------------------------------
+
+record SentenceParagraphBoundaryAdmissionNaturality
+    {SentenceAddress ParagraphAddress SentenceDelta ParagraphDelta : Set}
+    (architecture :
+      SentenceParagraphDeltaArchitecture
+        SentenceAddress ParagraphAddress SentenceDelta ParagraphDelta)
+    (SentenceBoundaryDelta ParagraphBoundaryDelta : Set) : Set₁ where
+  field
+    admitSentenceDelta : SentenceDelta → SentenceBoundaryDelta
+    admitParagraphDelta : ParagraphDelta → ParagraphBoundaryDelta
+    transportBoundaryDelta : SentenceBoundaryDelta → ParagraphBoundaryDelta
+
+    boundaryAdmissionNaturality :
+      (delta : SentenceDelta) →
+      admitParagraphDelta (transportDelta architecture delta)
+        ≡
+      transportBoundaryDelta (admitSentenceDelta delta)
+
+open SentenceParagraphBoundaryAdmissionNaturality public
+
+------------------------------------------------------------------------
 -- Work receipt: sentence->paragraph work is charged to emitted delta members.
 -- There is no sentence-interior rescan term in the admitted B1 path.
 ------------------------------------------------------------------------
