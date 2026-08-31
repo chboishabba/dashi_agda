@@ -13,6 +13,7 @@ FILES=(
   DASHI/Analysis/RiemannG2C3MonsterEquivarianceAuditExact.agda
   DASHI/Analysis/RiemannG2DeterminantConsumerQuotient369Exact.agda
   DASHI/Analysis/RiemannG2PostSchurDeterminantSufficiency369Exact.agda
+  DASHI/Analysis/RiemannG2DeterminantSymmetryRelevance369Exact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda
   DASHI/Mathematics/NumberTheory/DiophantineTupleDPrimeSquare2026ClaimAuditExact.agda
@@ -22,6 +23,7 @@ FILES=(
   DASHI/Core/FrontierRelationStrengthBidiExact.agda
   DASHI/Core/FiniteCertificateConsumerBridgeExact.agda
   DASHI/Core/ThreeChannelC3EquivarianceGateExact.agda
+  DASHI/Core/ConsumerRelativeSymmetryRelevanceExact.agda
   DASHI/Core/Clay369ResidualSufficiencyDichotomyExact.agda
   DASHI/Core/ClayMonster369CrossPollination2026Exact.agda
   DASHI/Physics/YangMills/BalabanActiveSourceDiscriminator2026Exact.agda
