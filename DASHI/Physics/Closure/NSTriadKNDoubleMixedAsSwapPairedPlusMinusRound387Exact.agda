@@ -60,8 +60,9 @@ mixedMinusPlusIsNegativeSwappedPlusMinus S velocity tau =
       S velocity (Symmetry.swapTriad tau)
   in
   trans
-    (cong (R224.mixedMinusPlus S velocity)
-      (R38.swapTriadInvolutiveExact tau))
+    (sym
+      (cong (R224.mixedMinusPlus S velocity)
+        (R38.swapTriadInvolutiveExact tau)))
     atSwap
 
 doublePlus :
@@ -85,7 +86,6 @@ doubleMixedIsSwapPairedPlusMinus {F = F} S velocity tau =
   let
     A = R224.mixedPlusMinus S velocity tau
     As = R224.mixedPlusMinus S velocity (Symmetry.swapTriad tau)
-    B = R224.mixedMinusPlus S velocity tau
     Bneg = mixedMinusPlusIsNegativeSwappedPlusMinus S velocity tau
   in
   trans
