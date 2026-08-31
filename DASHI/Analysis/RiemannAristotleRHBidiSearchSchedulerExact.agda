@@ -6,30 +6,29 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannAristotleExperimentalProofSearchExact as Search
+import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as HOff
 
 ------------------------------------------------------------------------
 -- RH-ONLY BIDI-AWARE SEARCH SCHEDULER
 --
--- This scheduler is deliberately consumer-first.  A locally interesting
--- theorem experiment is not schedulable merely because it advances some
--- mathematics.  Its certified output must inhabit a producer socket still
--- required by the backward RH consumer cut.
+-- Consumer first, recursively.  A candidate experiment is schedulable only if
+-- it feeds an open producer node on the backward RH cut.  The 8889 Lean return
+-- closes M_cluster^pole and leaves H_Gamma consumer-insufficient.  The new
+-- H_off near/far audit further decomposes H_off^pole into:
 --
--- The current pole-quotient cut has three named sockets, but the 8889 Lean
--- return changes their states:
+--   H_off carrier transport
+--   + finite signed near evaluation
+--   + already-owned arbitrary-accuracy far shell.
 --
---   offOrdinateSocket : open / no producer owned
---   gammaSocket       : partial / a bound exists but fails the consumer window
---   clusterMargin     : closed / quantitative producer owned
+-- Hence the active high-ordinate queue is now exactly:
 --
--- Hence the active high-ordinate queue is exactly:
+--   (1) identify the checked cutoff carrier with the final pole-quotient taper;
+--   (2) evaluate the finite target-centred signed near sum on that carrier;
+--   (3) repair H_Gamma to consumer-sufficient O(|t|^-2)-scale accuracy.
 --
---   (1) produce H_off^pole;
---   (2) repair H_Gamma to consumer-sufficient O(|t|^-2)-scale accuracy.
---
--- Re-proving the cluster margin, refining the balance identity, or searching a
--- theorem merely because it is labelled Hardy is not an admissible RH search
--- move unless a literal producer bridge changes one of those two live sockets.
+-- Re-proving the cluster margin, refining the balance identity, attacking the
+-- infinite far shell as a fresh theorem, or searching a theorem merely because
+-- it is labelled Hardy has no scheduling authority here.
 ------------------------------------------------------------------------
 
 data ProducerNeed : Set where
@@ -45,77 +44,120 @@ currentNeed Search.gammaSocket = consumerInsufficientProducer
 currentNeed Search.clusterMarginSocket = producerClosed
 
 ------------------------------------------------------------------------
--- Candidate experiment classes for the current RH cut.
+-- Recursive producer nodes beneath the coarse RH sockets.
+------------------------------------------------------------------------
+
+data RHProducerNode : Set where
+  offCutoffCarrierTransportNode
+  offFiniteNearEvaluationNode
+  gammaPrecisionNode
+  : RHProducerNode
+
+nodeFeedsSocket : RHProducerNode → Search.RHResearchSocket
+nodeFeedsSocket offCutoffCarrierTransportNode = Search.offOrdinateSocket
+nodeFeedsSocket offFiniteNearEvaluationNode = Search.offOrdinateSocket
+nodeFeedsSocket gammaPrecisionNode = Search.gammaSocket
+
+data ProducerNodeStatus : Set where
+  nodeOpen
+  nodeClosed
+  : ProducerNodeStatus
+
+currentNodeStatus : RHProducerNode → ProducerNodeStatus
+currentNodeStatus offCutoffCarrierTransportNode = nodeOpen
+currentNodeStatus offFiniteNearEvaluationNode = nodeOpen
+currentNodeStatus gammaPrecisionNode = nodeOpen
+
+------------------------------------------------------------------------
+-- Candidate experiment classes for the current exact cut.
 ------------------------------------------------------------------------
 
 data RHBidiExperiment : Set where
-  deriveOffOrdinateEvaluation
+  transportCutoffCarrierToPoleQuotient
+  evaluateFiniteNearSignedSum
   improveGammaEvaluation
   repeatClusterMarginProof
+  reproveInfiniteFarShell
   sharpenBalanceBudgetRoute
   auditNamedExternalDonor
   : RHBidiExperiment
 
-experimentTarget : RHBidiExperiment → Search.RHResearchSocket
-experimentTarget deriveOffOrdinateEvaluation = Search.offOrdinateSocket
-experimentTarget improveGammaEvaluation = Search.gammaSocket
-experimentTarget repeatClusterMarginProof = Search.clusterMarginSocket
-experimentTarget sharpenBalanceBudgetRoute = Search.offOrdinateSocket
-experimentTarget auditNamedExternalDonor = Search.offOrdinateSocket
-
-------------------------------------------------------------------------
--- Output authority is separate from experiment identity.
---
--- A direct producer literally inhabits the missing theorem interface.
--- A precision repair strengthens an already-owned producer enough to satisfy
--- the downstream consumer.  DonorAuditOnly means no literal carrier bridge has
--- yet been supplied.  BalanceDerived is rejected by the checked circularity
--- no-go.
-------------------------------------------------------------------------
-
 data RHExperimentOutputKind : Set where
-  directProducer
+  carrierBridgeProducer
+  directFiniteProducer
   consumerSufficientRepair
   redundantClosedProducer
+  redundantOwnedFarTail
   balanceDerived
   donorAuditOnly
   : RHExperimentOutputKind
 
 outputKind : RHBidiExperiment → RHExperimentOutputKind
-outputKind deriveOffOrdinateEvaluation = directProducer
+outputKind transportCutoffCarrierToPoleQuotient = carrierBridgeProducer
+outputKind evaluateFiniteNearSignedSum = directFiniteProducer
 outputKind improveGammaEvaluation = consumerSufficientRepair
 outputKind repeatClusterMarginProof = redundantClosedProducer
+outputKind reproveInfiniteFarShell = redundantOwnedFarTail
 outputKind sharpenBalanceBudgetRoute = balanceDerived
 outputKind auditNamedExternalDonor = donorAuditOnly
+
+experimentProducerNode :
+  (experiment : RHBidiExperiment) →
+  (outputKind experiment ≡ carrierBridgeProducer
+    ⊎ outputKind experiment ≡ directFiniteProducer
+    ⊎ outputKind experiment ≡ consumerSufficientRepair) →
+  RHProducerNode
+experimentProducerNode transportCutoffCarrierToPoleQuotient _ =
+  offCutoffCarrierTransportNode
+experimentProducerNode evaluateFiniteNearSignedSum _ =
+  offFiniteNearEvaluationNode
+experimentProducerNode improveGammaEvaluation _ = gammaPrecisionNode
+experimentProducerNode repeatClusterMarginProof (inj₁ ())
+experimentProducerNode repeatClusterMarginProof (inj₂ (inj₁ ()))
+experimentProducerNode repeatClusterMarginProof (inj₂ (inj₂ ()))
+experimentProducerNode reproveInfiniteFarShell (inj₁ ())
+experimentProducerNode reproveInfiniteFarShell (inj₂ (inj₁ ()))
+experimentProducerNode reproveInfiniteFarShell (inj₂ (inj₂ ()))
+experimentProducerNode sharpenBalanceBudgetRoute (inj₁ ())
+experimentProducerNode sharpenBalanceBudgetRoute (inj₂ (inj₁ ()))
+experimentProducerNode sharpenBalanceBudgetRoute (inj₂ (inj₂ ()))
+experimentProducerNode auditNamedExternalDonor (inj₁ ())
+experimentProducerNode auditNamedExternalDonor (inj₂ (inj₁ ()))
+experimentProducerNode auditNamedExternalDonor (inj₂ (inj₂ ()))
 
 ------------------------------------------------------------------------
 -- Consumer-first admissibility.
 ------------------------------------------------------------------------
 
-data InhabitsLiveProducerSocket : RHBidiExperiment → Set where
-  offProducerIsLive : InhabitsLiveProducerSocket deriveOffOrdinateEvaluation
-  gammaRepairIsLive : InhabitsLiveProducerSocket improveGammaEvaluation
-
--- No constructor exists for the other experiment classes.
--- This is the scheduler's main guard: local mathematical progress outside a
--- live RH producer socket has zero scheduling authority here.
+data InhabitsLiveRHProducer : RHBidiExperiment → Set where
+  cutoffCarrierTransportIsLive :
+    InhabitsLiveRHProducer transportCutoffCarrierToPoleQuotient
+  finiteNearEvaluationIsLive :
+    InhabitsLiveRHProducer evaluateFiniteNearSignedSum
+  gammaPrecisionRepairIsLive :
+    InhabitsLiveRHProducer improveGammaEvaluation
 
 record RHBidiSchedulable (experiment : RHBidiExperiment) : Set where
   constructor rh-bidi-schedulable
   field
-    inhabitsLiveProducer : InhabitsLiveProducerSocket experiment
+    inhabitsLiveProducer : InhabitsLiveRHProducer experiment
     rhConsumerReference : String
     producerInterfaceReference : String
 
 open RHBidiSchedulable public
 
 ------------------------------------------------------------------------
--- Exact pruning theorems for the 8889 frontier.
+-- Exact pruning theorems.
 ------------------------------------------------------------------------
 
 clusterMarginRepeatNotSchedulable :
   RHBidiSchedulable repeatClusterMarginProof → ⊥
 clusterMarginRepeatNotSchedulable s with inhabitsLiveProducer s
+... | ()
+
+farShellRepeatNotSchedulable :
+  RHBidiSchedulable reproveInfiniteFarShell → ⊥
+farShellRepeatNotSchedulable s with inhabitsLiveProducer s
 ... | ()
 
 balanceRouteNotSchedulable :
@@ -128,38 +170,51 @@ nameOnlyDonorNotSchedulable :
 nameOnlyDonorNotSchedulable s with inhabitsLiveProducer s
 ... | ()
 
-offOrdinateDirectProducerSchedulable :
-  RHBidiSchedulable deriveOffOrdinateEvaluation
-offOrdinateDirectProducerSchedulable =
+cutoffCarrierTransportSchedulable :
+  RHBidiSchedulable transportCutoffCarrierToPoleQuotient
+cutoffCarrierTransportSchedulable =
   rh-bidi-schedulable
-    offProducerIsLive
+    cutoffCarrierTransportIsLive
     "RH pole-quotient backward consumer: B_off + B_Gamma < M_cluster"
-    "H_off^pole signed target-centered off-ordinate evaluation"
+    "H_off^pole subcut: identify checked cutoff taper/response with final universal pole-quotient taper/response"
+
+finiteNearEvaluationSchedulable :
+  RHBidiSchedulable evaluateFiniteNearSignedSum
+finiteNearEvaluationSchedulable =
+  rh-bidi-schedulable
+    finiteNearEvaluationIsLive
+    "RH pole-quotient backward consumer: B_off + B_Gamma < M_cluster"
+    "H_off^pole subcut: finite reflection-paired target-centred nearOffFinset evaluation"
 
 gammaPrecisionRepairSchedulable :
   RHBidiSchedulable improveGammaEvaluation
 gammaPrecisionRepairSchedulable =
   rh-bidi-schedulable
-    gammaRepairIsLive
+    gammaPrecisionRepairIsLive
     "RH pole-quotient backward consumer: B_off + B_Gamma < M_cluster"
     "H_Gamma consumer-sufficient O(|t|^-2)-scale evaluation"
 
 ------------------------------------------------------------------------
--- The active high-ordinate queue is exactly the two live producer obligations.
+-- The active high-ordinate queue is exactly the three live producer nodes.
 ------------------------------------------------------------------------
 
 data ActiveHighOrdinateExperiment : RHBidiExperiment → Set where
-  activeOff : ActiveHighOrdinateExperiment deriveOffOrdinateEvaluation
+  activeCarrierTransport :
+    ActiveHighOrdinateExperiment transportCutoffCarrierToPoleQuotient
+  activeFiniteNear : ActiveHighOrdinateExperiment evaluateFiniteNearSignedSum
   activeGammaRepair : ActiveHighOrdinateExperiment improveGammaEvaluation
 
 schedulableIsActive :
   (experiment : RHBidiExperiment) →
   RHBidiSchedulable experiment →
   ActiveHighOrdinateExperiment experiment
-schedulableIsActive deriveOffOrdinateEvaluation s = activeOff
+schedulableIsActive transportCutoffCarrierToPoleQuotient s = activeCarrierTransport
+schedulableIsActive evaluateFiniteNearSignedSum s = activeFiniteNear
 schedulableIsActive improveGammaEvaluation s = activeGammaRepair
 schedulableIsActive repeatClusterMarginProof s =
   ⊥-elim (clusterMarginRepeatNotSchedulable s)
+schedulableIsActive reproveInfiniteFarShell s =
+  ⊥-elim (farShellRepeatNotSchedulable s)
 schedulableIsActive sharpenBalanceBudgetRoute s =
   ⊥-elim (balanceRouteNotSchedulable s)
 schedulableIsActive auditNamedExternalDonor s =
@@ -167,12 +222,6 @@ schedulableIsActive auditNamedExternalDonor s =
 
 ------------------------------------------------------------------------
 -- Highest-alpha selection only after the RH gate.
---
--- We do not infer theorem difficulty or success probability.  An application
--- may declare a resource cost over the already-gated active experiments.  A
--- selected next experiment is highest-alpha here only in the bounded sense:
--- it is live for the backward RH consumer and no more costly than every other
--- declared live experiment.
 ------------------------------------------------------------------------
 
 record RHBidiCostSurface : Set₁ where
@@ -208,19 +257,42 @@ highestAlphaAlwaysTargetsActiveRHLeaf surface selection =
   schedulableIsActive (selected selection) (selectedSchedulable selection)
 
 ------------------------------------------------------------------------
+-- Source-backed frontier receipts feeding this recursive queue.
+------------------------------------------------------------------------
+
+farShellAlreadyOwned :
+  HOff.checkedLeanFarShellBoundOwned
+    HOff.canonicalPoleQuotientOffOrdinateNearFarBoundary ≡ true
+farShellAlreadyOwned = refl
+
+cutoffCarrierTransportStillOpen :
+  HOff.oldCutoffCarrierTransportedToFinalPoleQuotientCarrier
+    HOff.canonicalPoleQuotientOffOrdinateNearFarBoundary ≡ false
+cutoffCarrierTransportStillOpen = refl
+
+finiteNearEvaluationStillOpen :
+  HOff.finitePoleQuotientNearSignedEvaluationClosed
+    HOff.canonicalPoleQuotientOffOrdinateNearFarBoundary ≡ false
+finiteNearEvaluationStillOpen = refl
+
+------------------------------------------------------------------------
 -- Boundaries.
 ------------------------------------------------------------------------
 
 record RHBidiSearchSchedulerBoundary : Set where
   constructor rh-bidi-search-scheduler-boundary
   field
-    schedulerPursuesOnlyRHProducerSockets : Bool
-    schedulerPursuesOnlyRHProducerSocketsIsTrue :
-      schedulerPursuesOnlyRHProducerSockets ≡ true
+    schedulerPursuesOnlyRHProducerNodes : Bool
+    schedulerPursuesOnlyRHProducerNodesIsTrue :
+      schedulerPursuesOnlyRHProducerNodes ≡ true
 
-    localMathematicalProgressWithoutRHConsumerBridgeSchedulable : Bool
-    localMathematicalProgressWithoutRHConsumerBridgeSchedulableIsFalse :
-      localMathematicalProgressWithoutRHConsumerBridgeSchedulable ≡ false
+    recursiveBackwardCutRefinementEnabled : Bool
+    recursiveBackwardCutRefinementEnabledIsTrue :
+      recursiveBackwardCutRefinementEnabled ≡ true
+
+    infiniteFarShellRemainsPrimarySearchLeaf : Bool
+    infiniteFarShellRemainsPrimarySearchLeafIsFalse :
+      infiniteFarShellRemainsPrimarySearchLeaf ≡ false
 
     closedClusterMarginRemainsInActiveQueue : Bool
     closedClusterMarginRemainsInActiveQueueIsFalse :
@@ -234,8 +306,12 @@ record RHBidiSearchSchedulerBoundary : Set where
     nameOnlyHardyDonorRemainsInActiveQueueIsFalse :
       nameOnlyHardyDonorRemainsInActiveQueue ≡ false
 
-    offOrdinateEvaluationActive : Bool
-    offOrdinateEvaluationActiveIsTrue : offOrdinateEvaluationActive ≡ true
+    cutoffCarrierTransportActive : Bool
+    cutoffCarrierTransportActiveIsTrue : cutoffCarrierTransportActive ≡ true
+
+    finiteNearSignedEvaluationActive : Bool
+    finiteNearSignedEvaluationActiveIsTrue :
+      finiteNearSignedEvaluationActive ≡ true
 
     gammaPrecisionRepairActive : Bool
     gammaPrecisionRepairActiveIsTrue : gammaPrecisionRepairActive ≡ true
@@ -251,10 +327,12 @@ canonicalRHBidiSearchSchedulerBoundary : RHBidiSearchSchedulerBoundary
 canonicalRHBidiSearchSchedulerBoundary =
   rh-bidi-search-scheduler-boundary
     true refl
+    true refl
     false refl
     false refl
     false refl
     false refl
+    true refl
     true refl
     true refl
     true refl
