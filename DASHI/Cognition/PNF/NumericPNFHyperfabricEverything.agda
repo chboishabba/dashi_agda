@@ -55,6 +55,11 @@ import DASHI.Cognition.PNF.FibreSolverDeltaStreamExact
 import DASHI.Cognition.PNF.DreamPNFDeltaToDatabaseExact
 import DASHI.Cognition.PNF.DreamFibreSolverPipelineExact
 import DASHI.Cognition.PNF.FibreNaturalDeltaTransportExact
+import DASHI.Cognition.PNF.SentenceParagraphNaturalDeltaExact
+import DASHI.Cognition.PNF.RecursiveBoundaryDeltaTransportExact
+import DASHI.Cognition.PNF.SetwiseSentenceTrancheAdmissionExact
+import DASHI.Cognition.PNF.SetwiseAdjacentReconciliationDispatchExact
+import DASHI.Cognition.PNF.SentenceAnaphorSetwiseProjectionExact
 import DASHI.Cognition.PNF.DreamFlowExecutionPlacementExact
 import DASHI.Cognition.PNF.DreamFlowRuntimeComplexityExact
 import DASHI.Cognition.PNF.EditTransportLeafLocalityExact
@@ -63,10 +68,8 @@ import DASHI.Cognition.PNF.DependencyDerivedOccurrenceIdentityExact
 import DASHI.Cognition.PNF.ConsumerSufficientComplexityExact
 import DASHI.Cognition.PNF.OwnerFibreReductionComplexityExact
 import DASHI.Cognition.PNF.SignatureBucketReductionFactorizationExact
-import DASHI.Cognition.PNF.DependencyIndexedOwnerWakeupExact
 import DASHI.Cognition.PNF.SparseFrontierTopologyExact
 import DASHI.Cognition.PNF.IndependentSentenceAdmissionExact
-import DASHI.Cognition.PNF.ProducerNativeDemandProjectionExact
 import DASHI.Cognition.PNF.OptimizationEconomyExact
 import DASHI.Cognition.PNF.OptimizationAdmissibilityUnderNondeterminismExact
 import DASHI.Cognition.PNF.OptimizationAdmissibilityUnderNondeterminismRegression
