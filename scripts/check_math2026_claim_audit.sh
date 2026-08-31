@@ -21,8 +21,10 @@ FILES=(
   DASHI/Analysis/RiemannG2C3ToScalarRouteCutExact.agda
   DASHI/Analysis/RiemannG2TargetCenteredScalarCancellationAssemblyExact.agda
   DASHI/Analysis/RiemannG2ExistingScalarHarmonicSameObjectAttachmentExact.agda
+  DASHI/Analysis/RiemannG2ExistingScalarDonorInventoryExact.agda
   DASHI/Analysis/RiemannG2HighestAlphaAfter369Exact.agda
   DASHI/Analysis/RiemannG2PostScalarBalanceBreakingBidiExact.agda
+  DASHI/Analysis/RiemannG2ScalarDonorToPostBalanceBidiExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda
   DASHI/Mathematics/NumberTheory/DiophantineTupleDPrimeSquare2026ClaimAuditExact.agda
