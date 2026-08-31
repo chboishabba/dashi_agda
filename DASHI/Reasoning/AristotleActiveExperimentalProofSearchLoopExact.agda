@@ -8,6 +8,7 @@ import DASHI.Core.ConsumerIndexedResidualRefinementExact as Consumer
 import DASHI.Core.DiscriminatorSynthesisExact as Synthesis
 import DASHI.Core.SequentialConsumerExperimentPlannerExact as Planner
 import DASHI.Core.HistoryConditionedChoiceExact as History
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Core.AffectedDependencyClosureExact as Affected
 import DASHI.Core.AdaptiveConsumerModelLoopExact as Adaptive
 import DASHI.Reasoning.AristotleBranchMergeExact as Merge
@@ -139,6 +140,15 @@ historySensitiveMergeWitness = record
   ; samePresentObservation = refl
   ; choicesDiffer = λ ()
   }
+
+historySensitiveMergeCannotDescendThroughVisibleState :
+  NonFactor.FactorsThrough
+    (History.observe historySurface)
+    (History.choose historySurface) →
+  ⊥
+historySensitiveMergeCannotDescendThroughVisibleState =
+  History.historySensitiveChoiceCannotDescendThroughPresentObservation
+    historySensitiveMergeWitness
 
 ------------------------------------------------------------------------
 -- 3. One search iteration is explicitly staged.
