@@ -17,6 +17,7 @@ on:
       - 'DASHI/Moonshine/Monster3BHighestAlphaValidation.agda'
       - 'DASHI/Moonshine/Monster3BNormalizerBridge.agda'
       - 'DASHI/Moonshine/Monster3BFiniteHeisenbergGeneratorsExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteStoneVonNeumannFrontierExact.agda'
       - 'DASHI/Moonshine/Base369AppraisalFibreHeisenbergCarrierBidiExact.agda'
       - 'DASHI/Moonshine/Base369PeriodicHeisenbergFibreEquivarianceExact.agda'
       - 'DASHI/Moonshine/Base369ZetaHeisenbergFiftyFourCarrierExact.agda'
@@ -67,6 +68,7 @@ jobs:
             DASHI/Moonshine/MonsterReducedNonaryBoundaryExact.agda
             DASHI/Moonshine/MonsterC3SSP42HighestAlphaValidation.agda
             DASHI/Moonshine/Monster3BHighestAlphaValidation.agda
+            DASHI/Moonshine/Monster3BFiniteStoneVonNeumannFrontierExact.agda
             DASHI/Moonshine/Base369Monster3BRepresentationBidiSearchExact.agda
             DASHI/Moonshine/Base369ZetaHeisenbergFiftyFourCarrierExact.agda
           )
