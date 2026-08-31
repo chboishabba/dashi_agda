@@ -1,8 +1,10 @@
 module DASHI.PhilosophyClaimProvenanceHistoryValidation where
 
 import DASHI.Culture.PhilosophyClaimProvenanceHistoryBidiExact
+import DASHI.Culture.LanguageUseGovernedStandingBidiExact
 import DASHI.Culture.WittgensteinUsePracticeSourceBridgeExact
 import DASHI.Culture.HistoricalTotalityCriticalTheoryCrossPollinationExact
+import DASHI.Culture.IndigenousKnowledgeStoryTwoEyedSeeingBidiExact
 import DASHI.Core.GovernedObservationProvenanceExact
 import DASHI.Core.HistoryQualifiedSelectionTopologyExact
 import DASHI.Reasoning.PredicateNormalFormEvidenceAuditExact
