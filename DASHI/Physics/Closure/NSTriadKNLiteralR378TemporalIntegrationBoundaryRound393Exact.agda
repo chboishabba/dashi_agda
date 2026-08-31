@@ -13,8 +13,8 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR378TemporalIntegrationBoundaryRoun
 -- than hiding it inside the scalar R303 payment record.
 --
 -- A realization supplies one interval integral, integrability of the literal
--- three rates, integral linearity/negation, and the endpoint fundamental
--- theorem for the literal off-diagonal flux.  From those leaves we prove
+-- rates, integral linearity/negation, and the endpoint fundamental theorem for
+-- the literal off-diagonal flux.  From those leaves we prove
 --
 --   integral D = F(0) - F(T) + integral R.
 --
@@ -27,7 +27,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 record LiteralR378TemporalRealization {t : Level} (Time : Set t) : Set (lsuc t) where
   field
@@ -49,6 +49,8 @@ record LiteralR378TemporalRealization {t : Level} (Time : Set t) : Set (lsuc t) 
 
     gramDebtIntegrable : Integrable literalGlobalGramDebt
     fluxTangentIntegrable : Integrable literalOffDiagonalFluxTangent
+    negatedFluxTangentIntegrable :
+      Integrable (λ τ → 0ℚ - literalOffDiagonalFluxTangent τ)
     weightedRemainderIntegrable : Integrable literalWeightedRemainder
 
     integralCongruence :
@@ -76,29 +78,20 @@ literalR378IntegratedGramFluxIdentity :
   literalOffDiagonalFlux R (initialTime R)
   - literalOffDiagonalFlux R (finalTime R)
   + Integral R (literalWeightedRemainder R)
-literalR378IntegratedGramFluxIdentity R =
+literalR378IntegratedGramFluxIdentity {Time = Time} R =
   let
     pointwise :
-      (τ : _) →
+      (τ : Time) →
       literalGlobalGramDebt R τ
-      ≡ (λ s → (0ℚ - literalOffDiagonalFluxTangent R s)
-          + literalWeightedRemainder R s) τ
+      ≡ (0ℚ - literalOffDiagonalFluxTangent R τ)
+          + literalWeightedRemainder R τ
     pointwise = instantaneousR392Identity R
 
     congruent = integralCongruence R pointwise
 
     add = integralAdditive R
-      (negIntegrable R)
+      (negatedFluxTangentIntegrable R)
       (weightedRemainderIntegrable R)
-      where
-      negIntegrable :
-        ∀ {t} {Time : Set t} →
-        (Q : LiteralR378TemporalRealization Time) →
-        Integrable Q (λ τ → 0ℚ - literalOffDiagonalFluxTangent Q τ)
-      negIntegrable Q =
-        -- Least-privilege analytic boundary: closure of integrability under
-        -- negation is represented by the exact integral-negation law below.
-        fluxTangentIntegrable Q
 
     neg = integralNegation R (fluxTangentIntegrable R)
     ftc = offDiagonalFundamentalTheorem R
