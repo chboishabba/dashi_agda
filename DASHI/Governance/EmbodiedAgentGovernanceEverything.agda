@@ -5,8 +5,9 @@ module DASHI.Governance.EmbodiedAgentGovernanceEverything where
 --
 -- The lane deliberately reuses existing physical-execution, resource-pressure,
 -- dissent/deception, constitutional-residual and execution-closure owners, then
--- adds only the new observer-trust, situated-human, embodied-loss, self-model,
--- self-importance and internal-disposition specialisations.
+-- adds observer-trust, situated-human, embodied-loss, self-model,
+-- self-importance, internal-disposition and consciousness-abstraction
+-- specialisations without making any one consciousness ontology authoritative.
 ------------------------------------------------------------------------
 
 import DASHI.Governance.ResourcePressureTelemetryPermissionExact
@@ -20,6 +21,8 @@ import DASHI.Governance.EmbodiedLossEmergencyMoralUncertaintyExact
 import DASHI.Governance.EmbodiedSubjectModelInjectionExact
 import DASHI.Governance.SelfImportanceConflictOfInterestExact
 import DASHI.Governance.InternalDispositionCapabilitySeparationExact
+import DASHI.Governance.ConsciousnessAbstractionInstantiationBoundaryExact
+import DASHI.Governance.Lerchner2026AbstractionFallacySourceBridgeExact
 
 -- Core dependencies exposed here for downstream governance consumers.
 import DASHI.Core.ObservationInterventionTrustFibreExact
