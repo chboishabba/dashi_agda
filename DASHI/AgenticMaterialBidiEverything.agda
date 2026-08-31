@@ -3,7 +3,7 @@ module DASHI.AgenticMaterialBidiEverything where
 ------------------------------------------------------------------------
 -- Focused capstone for Levin-style diverse intelligence / agentic material,
 -- realised interaction topology, consciousness boundaries, chemistry/process
--- state, and planning/logistics.
+-- state, planning/logistics, and active BIDI discriminator/refinement cycles.
 --
 -- It deliberately keeps the following distinct:
 --   observer-relative computational reading
@@ -27,10 +27,15 @@ import DASHI.Biology.Levin.BiologicalComputationalConsciousnessBoundary
 
 import DASHI.Core.SharedStateCoalitionReachableEffectExact
 import DASHI.Core.DeclaredRealisedInteractionTopologyExact
+import DASHI.Core.DiscriminatorSynthesisExact
+import DASHI.Core.ActiveBidiDiscriminatorLoopExact
+import DASHI.Core.AdaptiveConsumerModelLoopExact
 
 import DASHI.Governance.ConsciousnessAbstractionInstantiationBoundaryExact
 import DASHI.Governance.ConsciousnessRealisedTopologyCrossPollinationExact
+import DASHI.Governance.ConsciousnessPhysicalDiscriminatorSynthesisExact
 import DASHI.Governance.LevinAgenticMaterialRealisedTopologyCrossPollinationExact
+import DASHI.Governance.ConsciousnessAgenticMaterialActiveBidiExact
 
 import DASHI.Planning.AgenticMaterialProcessPlanningCrossPollinationExact
 import DASHI.Planning.ChemicalManufacturingInventoryLogisticsCrossPollinationExact
