@@ -18,6 +18,12 @@ on:
       - 'DASHI/Moonshine/Monster3BNormalizerBridge.agda'
       - 'DASHI/Moonshine/Monster3BFiniteHeisenbergGeneratorsExact.agda'
       - 'DASHI/Moonshine/Monster3BFiniteHeisenbergCentralExtensionExact.agda'
+      - 'DASHI/Moonshine/Monster3BF3AlgebraExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergDotBilinearityExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergCocycleExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergAssociativityExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergInverseExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergGroupLawFrontierExact.agda'
       - 'DASHI/Moonshine/Monster3BFiniteHeisenbergNondegeneracyExact.agda'
       - 'DASHI/Moonshine/Monster3BFiniteStoneVonNeumannFrontierExact.agda'
       - 'DASHI/Moonshine/Base369AppraisalFibreHeisenbergCarrierBidiExact.agda'
@@ -71,6 +77,12 @@ jobs:
             DASHI/Moonshine/MonsterC3SSP42HighestAlphaValidation.agda
             DASHI/Moonshine/Monster3BHighestAlphaValidation.agda
             DASHI/Moonshine/Monster3BFiniteHeisenbergCentralExtensionExact.agda
+            DASHI/Moonshine/Monster3BF3AlgebraExact.agda
+            DASHI/Moonshine/Monster3BFiniteHeisenbergDotBilinearityExact.agda
+            DASHI/Moonshine/Monster3BFiniteHeisenbergCocycleExact.agda
+            DASHI/Moonshine/Monster3BFiniteHeisenbergAssociativityExact.agda
+            DASHI/Moonshine/Monster3BFiniteHeisenbergInverseExact.agda
+            DASHI/Moonshine/Monster3BFiniteHeisenbergGroupLawFrontierExact.agda
             DASHI/Moonshine/Monster3BFiniteHeisenbergNondegeneracyExact.agda
             DASHI/Moonshine/Monster3BFiniteStoneVonNeumannFrontierExact.agda
             DASHI/Moonshine/Base369Monster3BRepresentationBidiSearchExact.agda
