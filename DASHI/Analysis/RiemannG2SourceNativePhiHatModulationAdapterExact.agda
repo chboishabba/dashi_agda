@@ -47,17 +47,11 @@ record SourceNativePhiHatModulation
   field
     SourceTest : Set
 
-    -- Same-object payment: the source taper/function implementation is the
-    -- literal canonical Mellin test carrier, not merely analogous/isomorphic.
     sourceTestIdentity : SourceTest ≡ MellinTest
 
-    -- The target parameter is already fixed by compatibility to the canonical
-    -- Weil scalar / analytic real carrier.
     modulateSource :
       Weil.WeilTestSpace.Scalar space → SourceTest → SourceTest
 
-    -- Admissibility is stated on the exact eventual Weil object, after the two
-    -- owned equality transports SourceTest -> MellinTest -> WeilTest.
     modulationPreservesCanonicalAdmissibility :
       (t : Weil.WeilTestSpace.Scalar space) →
       (f : SourceTest) →
@@ -68,8 +62,6 @@ record SourceNativePhiHatModulation
         (MellinAction.mellinToWeil {compat = compat}
           (transport sourceTestIdentity (modulateSource t f)))
 
-    -- The source may package its shift response in its own coordinates, but the
-    -- theorem must identify the actual spectralZeroForm of THIS formula.
     shiftedSpectralResponse :
       Weil.WeilTestSpace.Scalar space → SourceTest →
       Weil.WeilTestSpace.Scalar space
@@ -82,8 +74,6 @@ record SourceNativePhiHatModulation
           (transport sourceTestIdentity (modulateSource t f)))
       ≡ shiftedSpectralResponse t f
 
-    -- H_X agreement remains a separate same-action seam; the shift theorem
-    -- itself is now proof-bearing rather than represented only by Set metadata.
     targetCharacterActionUsesCanonicalHX : Set
     sourceReference : String
 
@@ -131,10 +121,6 @@ sourceTransportedPreservesAdmissibility {compat = compat} R t f admissibleF
   with sourceTestIdentity R
 ... | refl = modulationPreservesCanonicalAdmissibility R t f admissibleF
 
-------------------------------------------------------------------------
--- Proof-bearing shift survives the same-object transports.
-------------------------------------------------------------------------
-
 sourceTransportedSpectralShift :
   ∀ {analytic space formula compat} →
   (R : SourceNativePhiHatModulation analytic space formula compat) →
@@ -150,16 +136,15 @@ sourceTransportedSpectralShift {compat = compat} R t f
 ... | refl = sourceSpectralShiftLaw R t f
 
 ------------------------------------------------------------------------
--- Compile into the existing canonical Mellin action.  The older H_A interface
--- stores shift surfaces as Set-valued metadata; the stronger typed theorem is
--- retained above and can be consumed directly by later strengthened compilers.
+-- Compiler into the existing Mellin-native H_A action surface.
 ------------------------------------------------------------------------
 
 toCanonicalMellinTestAction :
   ∀ {analytic space formula compat} →
   SourceNativePhiHatModulation analytic space formula compat →
   MellinAction.CanonicalMellinTestAction analytic space formula compat
-toCanonicalMellinTestAction {space = space} {formula = formula} R = record
+toCanonicalMellinTestAction
+  {analytic = analytic} {space = space} {formula = formula} {compat = compat} R = record
   { MellinAction.modulateMellin = sourceTransportedMellinAction R
   ; MellinAction.preservesTransportedWeilAdmissibility =
       sourceTransportedPreservesAdmissibility R
@@ -168,13 +153,27 @@ toCanonicalMellinTestAction {space = space} {formula = formula} R = record
   ; MellinAction.spectralShiftLawForSameFormula =
       (t : Weil.WeilTestSpace.Scalar space) →
       (f : Analytic.GammaMellinLayer.Test
-        (Analytic.AnalyticSubstrate.gammaMellin _)) →
+        (Analytic.AnalyticSubstrate.gammaMellin analytic)) →
       Explicit.RiemannExplicitFormula.spectralZeroForm formula
-        (MellinAction.mellinToWeil
+        (MellinAction.mellinToWeil {compat = compat}
           (sourceTransportedMellinAction R t f))
       ≡ shiftedSpectralResponse R t (mellinToSource R f)
-  ; MellinAction.shiftedResponseIsConcreteFormulaSpectralResponse = ⊤
-  ; MellinAction.transformShiftUsesCanonicalWeilTransform = ⊤
+  ; MellinAction.shiftedResponseIsConcreteFormulaSpectralResponse =
+      (t : Weil.WeilTestSpace.Scalar space) →
+      (f : Analytic.GammaMellinLayer.Test
+        (Analytic.AnalyticSubstrate.gammaMellin analytic)) →
+      Explicit.RiemannExplicitFormula.spectralZeroForm formula
+        (MellinAction.mellinToWeil {compat = compat}
+          (sourceTransportedMellinAction R t f))
+      ≡ shiftedSpectralResponse R t (mellinToSource R f)
+  ; MellinAction.transformShiftUsesCanonicalWeilTransform =
+      (t : Weil.WeilTestSpace.Scalar space) →
+      (f : Analytic.GammaMellinLayer.Test
+        (Analytic.AnalyticSubstrate.gammaMellin analytic)) →
+      Explicit.RiemannExplicitFormula.spectralZeroForm formula
+        (MellinAction.mellinToWeil {compat = compat}
+          (sourceTransportedMellinAction R t f))
+      ≡ shiftedSpectralResponse R t (mellinToSource R f)
   ; MellinAction.producerReference = sourceReference R
   }
 
