@@ -15,6 +15,9 @@ FILES=(
   DASHI/Analysis/RiemannAristotlePoleQuotientDirectFiniteNearAttackExact.agda
   DASHI/Analysis/RiemannAristotlePoleNearPhaseStatisticExact.agda
   DASHI/Analysis/RiemannAristotlePoleNearTargetModulationExact.agda
+  DASHI/Analysis/RiemannAristotlePoleNearTranslationModulationIntertwinerExact.agda
+  DASHI/Analysis/RiemannAristotlePoleNearWindowRestrictionResidualExact.agda
+  DASHI/Analysis/RiemannAristotlePoleNearTranslationModulationBidiMeetingExact.agda
   DASHI/Analysis/RiemannAristotlePoleNearExplicitFormulaBridgeExact.agda
   DASHI/Analysis/RiemannAristotlePoleNearBidiMeetingExact.agda
   DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerExact.agda
