@@ -9,30 +9,23 @@ import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 import DASHI.Analysis.WeilTestSpace as Weil
 import DASHI.Analysis.RiemannExplicitFormula as Explicit
 import DASHI.Analysis.RiemannFormulaAnalyticCompatibility as Compat
-import DASHI.Analysis.RiemannG2MellinTestActionTransportExact as MellinAction
+import DASHI.Analysis.RiemannG2GammaMellinImplementationRecoveryExact as Recovery
+import DASHI.Analysis.RiemannG2GammaMellinProofRelevantActionCompilerExact as StrongCompiler
 
 ------------------------------------------------------------------------
--- SOURCE-NATIVE TAPER / PHIHAT ACTION -> CANONICAL MELLIN TEST ACTION
+-- SOURCE-NATIVE TAPER / PHIHAT ACTION -> PROOF-RELEVANT H_A
 --
--- Later Riemann/Hermitian owners already record source ownership of a real-even
--- taper, complex phiHat, Fourier conjugation symmetry and window/tail control.
--- The remaining representation seam is not another harmonic identity: it is
--- the identification of the concrete source test implementation with the
--- GammaMellinLayer.Test selected by the same AnalyticSubstrate.
+-- The later Hermitian source audit already records ownership of a real-even
+-- taper, complex phiHat, Fourier conjugation symmetry and source window/tail
+-- control.  Under the repo-complete assumption, the remaining work is a
+-- representation recovery problem: identify the concrete source test carrier
+-- with the canonical Gamma/Mellin Test and reuse the already-owned source
+-- character action and transform-shift laws.
 --
--- This owner makes that recovery executable.  A source-native action may be
--- authored on its actual implementation carrier SourceTest.  One propositional
--- equality SourceTest == canonical Mellin Test transports the action into the
--- existing H_A compiler.  Unlike earlier receipt-only interfaces, the spectral
--- shift below is carried as an actual typed equality for the SAME concrete
--- RiemannExplicitFormula.spectralZeroForm.
+-- This owner compiles that exact source-native package directly into the
+-- repository's strongest proof-relevant H_A implementation surface.  No
+-- Set-valued shift socket is accepted as theorem payment here.
 ------------------------------------------------------------------------
-
-transport : ∀ {A B : Set} → A ≡ B → A → B
-transport refl x = x
-
-sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-sym refl = refl
 
 record SourceNativePhiHatModulation
     (analytic : Analytic.AnalyticSubstrate)
@@ -47,158 +40,149 @@ record SourceNativePhiHatModulation
   field
     SourceTest : Set
 
+    -- Same-object realization, not an analogy or arbitrary isomorphism.
     sourceTestIdentity : SourceTest ≡ MellinTest
 
-    modulateSource :
-      Weil.WeilTestSpace.Scalar space → SourceTest → SourceTest
+    sourceReference : String
 
-    modulationPreservesCanonicalAdmissibility :
-      (t : Weil.WeilTestSpace.Scalar space) →
-      (f : SourceTest) →
-      Weil.WeilTestSpace.admissible space
-        (MellinAction.mellinToWeil {compat = compat}
-          (transport sourceTestIdentity f)) →
-      Weil.WeilTestSpace.admissible space
-        (MellinAction.mellinToWeil {compat = compat}
-          (transport sourceTestIdentity (modulateSource t f)))
+    -- Existing source-native target-character action.
+    act :
+      Weil.WeilTestSpace.Scalar space →
+      SourceTest → SourceTest
 
-    shiftedSpectralResponse :
-      Weil.WeilTestSpace.Scalar space → SourceTest →
+    -- Expected canonical observations after exact transport into Weil Test.
+    expectedCharacterAction :
+      Weil.WeilTestSpace.Scalar space →
+      Weil.WeilTestSpace.Test space →
+      Weil.WeilTestSpace.Test space
+
+    expectedShiftedSpectralResponse :
+      Weil.WeilTestSpace.Scalar space →
+      Weil.WeilTestSpace.Test space →
       Weil.WeilTestSpace.Scalar space
 
-    sourceSpectralShiftLaw :
-      (t : Weil.WeilTestSpace.Scalar space) →
-      (f : SourceTest) →
-      Explicit.RiemannExplicitFormula.spectralZeroForm formula
-        (MellinAction.mellinToWeil {compat = compat}
-          (transport sourceTestIdentity (modulateSource t f)))
-      ≡ shiftedSpectralResponse t f
-
-    targetCharacterActionUsesCanonicalHX : Set
-    sourceReference : String
+    expectedTransformShift :
+      Weil.WeilTestSpace.Scalar space →
+      Weil.WeilTestSpace.Test space →
+      Weil.WeilTestSpace.TransformValue space
 
 open SourceNativePhiHatModulation public
 
-sourceToMellin :
-  ∀ {analytic space formula compat} →
-  (R : SourceNativePhiHatModulation analytic space formula compat) →
-  SourceTest R →
-  Analytic.GammaMellinLayer.Test
-    (Analytic.AnalyticSubstrate.gammaMellin analytic)
-sourceToMellin R = transport (sourceTestIdentity R)
-
-mellinToSource :
-  ∀ {analytic space formula compat} →
-  (R : SourceNativePhiHatModulation analytic space formula compat) →
-  Analytic.GammaMellinLayer.Test
-    (Analytic.AnalyticSubstrate.gammaMellin analytic) →
-  SourceTest R
-mellinToSource R = transport (sym (sourceTestIdentity R))
-
-sourceTransportedMellinAction :
+sourceImplementation :
   ∀ {analytic space formula compat} →
   SourceNativePhiHatModulation analytic space formula compat →
+  Recovery.GammaMellinTestImplementation analytic
+sourceImplementation P = record
+  { Recovery.ImplementationTest = SourceTest P
+  ; Recovery.implementationTestIsCanonicalMellinTest = sourceTestIdentity P
+  ; Recovery.implementationReference = sourceReference P
+  }
+
+sourceTransportedAction :
+  ∀ {analytic space formula compat} →
+  (P : SourceNativePhiHatModulation analytic space formula compat) →
   Weil.WeilTestSpace.Scalar space →
-  Analytic.GammaMellinLayer.Test
-    (Analytic.AnalyticSubstrate.gammaMellin analytic) →
-  Analytic.GammaMellinLayer.Test
-    (Analytic.AnalyticSubstrate.gammaMellin analytic)
-sourceTransportedMellinAction R t f =
-  sourceToMellin R (modulateSource R t (mellinToSource R f))
-
-sourceTransportedPreservesAdmissibility :
-  ∀ {analytic space formula compat} →
-  (R : SourceNativePhiHatModulation analytic space formula compat) →
-  (t : Weil.WeilTestSpace.Scalar space) →
-  (f : Analytic.GammaMellinLayer.Test
-    (Analytic.AnalyticSubstrate.gammaMellin analytic)) →
-  Weil.WeilTestSpace.admissible space
-    (MellinAction.mellinToWeil {compat = compat} f) →
-  Weil.WeilTestSpace.admissible space
-    (MellinAction.mellinToWeil {compat = compat}
-      (sourceTransportedMellinAction R t f))
-sourceTransportedPreservesAdmissibility {compat = compat} R t f admissibleF
-  with sourceTestIdentity R
-... | refl = modulationPreservesCanonicalAdmissibility R t f admissibleF
-
-sourceTransportedSpectralShift :
-  ∀ {analytic space formula compat} →
-  (R : SourceNativePhiHatModulation analytic space formula compat) →
-  (t : Weil.WeilTestSpace.Scalar space) →
-  (f : Analytic.GammaMellinLayer.Test
-    (Analytic.AnalyticSubstrate.gammaMellin analytic)) →
-  Explicit.RiemannExplicitFormula.spectralZeroForm formula
-    (MellinAction.mellinToWeil {compat = compat}
-      (sourceTransportedMellinAction R t f))
-  ≡ shiftedSpectralResponse R t (mellinToSource R f)
-sourceTransportedSpectralShift {compat = compat} R t f
-  with sourceTestIdentity R
-... | refl = sourceSpectralShiftLaw R t f
+  Weil.WeilTestSpace.Test space →
+  Weil.WeilTestSpace.Test space
+sourceTransportedAction P t f =
+  StrongCompiler.implementationToWeil (sourceImplementation P)
+    (act P t
+      (StrongCompiler.weilToImplementation (sourceImplementation P) f))
 
 ------------------------------------------------------------------------
--- Compiler into the existing Mellin-native H_A action surface.
+-- The theorem-bearing source receipt.  Every field below is an actual proof on
+-- the SAME transported action and SAME concrete RiemannExplicitFormula.
 ------------------------------------------------------------------------
 
-toCanonicalMellinTestAction :
+record SourceNativePhiHatModulationProof
+    {analytic : Analytic.AnalyticSubstrate}
+    {space : Weil.WeilTestSpace}
+    {formula : Explicit.RiemannExplicitFormula space}
+    {compat : Compat.RiemannFormulaAnalyticCompatibility analytic space formula}
+    (P : SourceNativePhiHatModulation analytic space formula compat) : Set₁ where
+  field
+    preservesCanonicalAdmissibility :
+      (t : Weil.WeilTestSpace.Scalar space) →
+      (f : Weil.WeilTestSpace.Test space) →
+      Weil.WeilTestSpace.admissible space f →
+      Weil.WeilTestSpace.admissible space (sourceTransportedAction P t f)
+
+    actionAgreesWithCanonicalHX :
+      (t : Weil.WeilTestSpace.Scalar space) →
+      (f : Weil.WeilTestSpace.Test space) →
+      sourceTransportedAction P t f
+      ≡ expectedCharacterAction P t f
+
+    sameFormulaSpectralShift :
+      (t : Weil.WeilTestSpace.Scalar space) →
+      (f : Weil.WeilTestSpace.Test space) →
+      Explicit.RiemannExplicitFormula.spectralZeroForm formula
+        (sourceTransportedAction P t f)
+      ≡ expectedShiftedSpectralResponse P t f
+
+    sameWeilTransformShift :
+      (t : Weil.WeilTestSpace.Scalar space) →
+      (f : Weil.WeilTestSpace.Test space) →
+      Weil.WeilTestSpace.transform space (sourceTransportedAction P t f)
+      ≡ expectedTransformShift P t f
+
+open SourceNativePhiHatModulationProof public
+
+------------------------------------------------------------------------
+-- Exact compiler into the already-owned implementation-action carrier.
+------------------------------------------------------------------------
+
+toProofRelevantImplementedMellinAction :
   ∀ {analytic space formula compat} →
-  SourceNativePhiHatModulation analytic space formula compat →
-  MellinAction.CanonicalMellinTestAction analytic space formula compat
-toCanonicalMellinTestAction
-  {analytic = analytic} {space = space} {formula = formula} {compat = compat} R = record
-  { MellinAction.modulateMellin = sourceTransportedMellinAction R
-  ; MellinAction.preservesTransportedWeilAdmissibility =
-      sourceTransportedPreservesAdmissibility R
-  ; MellinAction.targetCharacterActionUsesCanonicalHX =
-      targetCharacterActionUsesCanonicalHX R
-  ; MellinAction.spectralShiftLawForSameFormula =
-      (t : Weil.WeilTestSpace.Scalar space) →
-      (f : Analytic.GammaMellinLayer.Test
-        (Analytic.AnalyticSubstrate.gammaMellin analytic)) →
-      Explicit.RiemannExplicitFormula.spectralZeroForm formula
-        (MellinAction.mellinToWeil {compat = compat}
-          (sourceTransportedMellinAction R t f))
-      ≡ shiftedSpectralResponse R t (mellinToSource R f)
-  ; MellinAction.shiftedResponseIsConcreteFormulaSpectralResponse =
-      (t : Weil.WeilTestSpace.Scalar space) →
-      (f : Analytic.GammaMellinLayer.Test
-        (Analytic.AnalyticSubstrate.gammaMellin analytic)) →
-      Explicit.RiemannExplicitFormula.spectralZeroForm formula
-        (MellinAction.mellinToWeil {compat = compat}
-          (sourceTransportedMellinAction R t f))
-      ≡ shiftedSpectralResponse R t (mellinToSource R f)
-  ; MellinAction.transformShiftUsesCanonicalWeilTransform =
-      (t : Weil.WeilTestSpace.Scalar space) →
-      (f : Analytic.GammaMellinLayer.Test
-        (Analytic.AnalyticSubstrate.gammaMellin analytic)) →
-      Explicit.RiemannExplicitFormula.spectralZeroForm formula
-        (MellinAction.mellinToWeil {compat = compat}
-          (sourceTransportedMellinAction R t f))
-      ≡ shiftedSpectralResponse R t (mellinToSource R f)
-  ; MellinAction.producerReference = sourceReference R
+  (P : SourceNativePhiHatModulation analytic space formula compat) →
+  SourceNativePhiHatModulationProof P →
+  StrongCompiler.ProofRelevantImplementedMellinAction
+    analytic space formula compat (sourceImplementation P)
+toProofRelevantImplementedMellinAction P proof = record
+  { StrongCompiler.act = act P
+  ; StrongCompiler.expectedCharacterAction = expectedCharacterAction P
+  ; StrongCompiler.expectedShiftedSpectralResponse =
+      expectedShiftedSpectralResponse P
+  ; StrongCompiler.expectedTransformShift = expectedTransformShift P
+  ; StrongCompiler.preservesPulledBackWeilAdmissibility =
+      preservesCanonicalAdmissibility proof
+  ; StrongCompiler.actionAgreesWithCanonicalHXAfterTransport =
+      actionAgreesWithCanonicalHX proof
+  ; StrongCompiler.sameFormulaSpectralShiftAfterTransport =
+      sameFormulaSpectralShift proof
+  ; StrongCompiler.sameWeilTransformShiftAfterTransport =
+      sameWeilTransformShift proof
+  ; StrongCompiler.producerReference = sourceReference P
   }
 
 ------------------------------------------------------------------------
--- BIDI search pruning after source-native realization.
+-- BIDI search pruning after this compiler.
 ------------------------------------------------------------------------
 
 data SourceNativeSearchAction : Set where
   rebuildGenericFourierTheory
   reuseFiniteC3FourierAsRiemannTest
+  searchForAnotherAbstractHAInterface
   recoverConcreteSourceTestImplementation
   identifySourceTestWithCanonicalMellinTest
   recoverSourceCharacterMultiplicationAction
-  retainTypedSameFormulaShift
-  continueThroughMellinToWeilCompiler
+  recoverSourceAdmissibilityProof
+  recoverSourceSameFormulaShift
+  recoverSourceSameWeilTransformShift
+  compileIntoProofRelevantHA
   : SourceNativeSearchAction
 
 SourceNativeRelevant : SourceNativeSearchAction → Set
 SourceNativeRelevant rebuildGenericFourierTheory = ⊥
 SourceNativeRelevant reuseFiniteC3FourierAsRiemannTest = ⊥
+SourceNativeRelevant searchForAnotherAbstractHAInterface = ⊥
 SourceNativeRelevant recoverConcreteSourceTestImplementation = ⊤
 SourceNativeRelevant identifySourceTestWithCanonicalMellinTest = ⊤
 SourceNativeRelevant recoverSourceCharacterMultiplicationAction = ⊤
-SourceNativeRelevant retainTypedSameFormulaShift = ⊤
-SourceNativeRelevant continueThroughMellinToWeilCompiler = ⊤
+SourceNativeRelevant recoverSourceAdmissibilityProof = ⊤
+SourceNativeRelevant recoverSourceSameFormulaShift = ⊤
+SourceNativeRelevant recoverSourceSameWeilTransformShift = ⊤
+SourceNativeRelevant compileIntoProofRelevantHA = ⊤
 
 rebuildGenericFourierTheoryPruned :
   SourceNativeRelevant rebuildGenericFourierTheory → ⊥
@@ -207,6 +191,10 @@ rebuildGenericFourierTheoryPruned x = x
 finiteC3AsRiemannTestPruned :
   SourceNativeRelevant reuseFiniteC3FourierAsRiemannTest → ⊥
 finiteC3AsRiemannTestPruned x = x
+
+anotherAbstractHAInterfacePruned :
+  SourceNativeRelevant searchForAnotherAbstractHAInterface → ⊥
+anotherAbstractHAInterfacePruned x = x
 
 record SourceNativePhiHatModulationBoundary : Set where
   constructor source-native-phihat-modulation-boundary
@@ -219,17 +207,23 @@ record SourceNativePhiHatModulationBoundary : Set where
     sourceTestMustBeMerelyIsomorphicToCanonicalMellinTestIsFalse :
       sourceTestMustBeMerelyIsomorphicToCanonicalMellinTest ≡ false
 
-    exactSourceTestEqualityIsSufficientForActionTransport : Bool
-    exactSourceTestEqualityIsSufficientForActionTransportIsTrue :
-      exactSourceTestEqualityIsSufficientForActionTransport ≡ true
+    exactSourceTestEqualitySupportsActionTransport : Bool
+    exactSourceTestEqualitySupportsActionTransportIsTrue :
+      exactSourceTestEqualitySupportsActionTransport ≡ true
 
-    sameFormulaSpectralShiftIsProofBearingHere : Bool
-    sameFormulaSpectralShiftIsProofBearingHereIsTrue :
-      sameFormulaSpectralShiftIsProofBearingHere ≡ true
+    sourceShiftMustBeProofRelevant : Bool
+    sourceShiftMustBeProofRelevantIsTrue : sourceShiftMustBeProofRelevant ≡ true
 
-    carrierTransportAloneProvesShift : Bool
-    carrierTransportAloneProvesShiftIsFalse :
-      carrierTransportAloneProvesShift ≡ false
+    sourceWeilTransformShiftMustBeProofRelevant : Bool
+    sourceWeilTransformShiftMustBeProofRelevantIsTrue :
+      sourceWeilTransformShiftMustBeProofRelevant ≡ true
+
+    strongerProofRelevantHACompilerAlreadyOwned : Bool
+    strongerProofRelevantHACompilerAlreadyOwnedIsTrue :
+      strongerProofRelevantHACompilerAlreadyOwned ≡ true
+
+    anotherHAInterfaceNeeded : Bool
+    anotherHAInterfaceNeededIsFalse : anotherHAInterfaceNeeded ≡ false
 
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
@@ -240,6 +234,8 @@ canonicalSourceNativePhiHatModulationBoundary =
   source-native-phihat-modulation-boundary
     true refl
     false refl
+    true refl
+    true refl
     true refl
     true refl
     false refl
