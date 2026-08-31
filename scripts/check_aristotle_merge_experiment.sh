@@ -11,6 +11,8 @@ FILES=(
   DASHI/Reasoning/AristotleBranchMergeExact.agda
   DASHI/Reasoning/AristotleMergeExperimentDesignExact.agda
   DASHI/Reasoning/AristotleMergeGovernanceCrossPollinationExact.agda
+  DASHI/Reasoning/AristotleActiveExperimentalProofSearchLoopExact.agda
+  DASHI/Reasoning/AristotleActiveExperimentalProofSearchDynamicsExact.agda
   DASHI/Reasoning/AristotleMergeExperimentValidation.agda
   DASHI/Core/ExperimentalCoordinateDesignExact.agda
   DASHI/Core/DiscriminatorSynthesisExact.agda
@@ -20,6 +22,8 @@ FILES=(
   DASHI/Core/GovernedObservationProvenanceExact.agda
   DASHI/Core/ProofSearchLeastPrivilegeAdmissionExact.agda
   DASHI/Core/AdaptiveConsumerModelLoopExact.agda
+  DASHI/Core/AffectedDependencyClosureExact.agda
+  DASHI/Core/HistoryConditionedChoiceExact.agda
 )
 
 FORBIDDEN_PATTERN='\{![^}]*!\}|(^|[[:space:]=:(])\?([[:space:];,)}]|$)|^[[:space:]]*postulate([[:space:]]|$)|--allow-unsolved-metas|\{-# OPTIONS[^#]*--(unsafe|type-in-type|no-positivity-check|no-termination-check|rewriting)([[:space:]]|#)|=[[:space:]]*_[[:space:]]*$'
@@ -60,5 +64,24 @@ grep -q '^eraseThenAddCannotAuthorizeInheritedMergeLineage :' DASHI/Reasoning/Ar
 grep -q '^record AdmittedGuardedMerge' DASHI/Reasoning/AristotleMergeGovernanceCrossPollinationExact.agda
 grep -q '^canonicalAdmittedMergeHasLiveRoute :' DASHI/Reasoning/AristotleMergeGovernanceCrossPollinationExact.agda
 grep -q 'mergeGuardAutomaticallySuppliesRouteAdmissionIsFalse' DASHI/Reasoning/AristotleMergeGovernanceCrossPollinationExact.agda
+
+grep -q '^proofSearchCoordinateDesign :' DASHI/Reasoning/AristotleActiveExperimentalProofSearchLoopExact.agda
+grep -q '^historySensitiveMergeWitness :' DASHI/Reasoning/AristotleActiveExperimentalProofSearchLoopExact.agda
+grep -q '^record CollisionReceipt' DASHI/Reasoning/AristotleActiveExperimentalProofSearchLoopExact.agda
+grep -q '^record DiscriminatorReceipt' DASHI/Reasoning/AristotleActiveExperimentalProofSearchLoopExact.agda
+grep -q '^record ObservationReceipt' DASHI/Reasoning/AristotleActiveExperimentalProofSearchLoopExact.agda
+grep -q '^record RefinementReceipt' DASHI/Reasoning/AristotleActiveExperimentalProofSearchLoopExact.agda
+grep -q '^changedDependencyReopensConsumer :' DASHI/Reasoning/AristotleActiveExperimentalProofSearchLoopExact.agda
+grep -q '^selectiveConsumerReopening :' DASHI/Reasoning/AristotleActiveExperimentalProofSearchLoopExact.agda
+grep -q '^record ActiveExperimentalProofSearchLoop' DASHI/Reasoning/AristotleActiveExperimentalProofSearchLoopExact.agda
+grep -q '^canonicalActiveExperimentalProofSearchLoop :' DASHI/Reasoning/AristotleActiveExperimentalProofSearchLoopExact.agda
+grep -q 'activeExperimentalLoopIsClaimedByAristotlePaperIsFalse' DASHI/Reasoning/AristotleActiveExperimentalProofSearchLoopExact.agda
+
+grep -q '^data LoopTransition' DASHI/Reasoning/AristotleActiveExperimentalProofSearchDynamicsExact.agda
+grep -q '^data LoopPath' DASHI/Reasoning/AristotleActiveExperimentalProofSearchDynamicsExact.agda
+grep -q '^canonicalOneIterationCycle :' DASHI/Reasoning/AristotleActiveExperimentalProofSearchDynamicsExact.agda
+grep -q '^canonicalClosurePath :' DASHI/Reasoning/AristotleActiveExperimentalProofSearchDynamicsExact.agda
+grep -q '^record ActiveSearchDynamicsReceipt' DASHI/Reasoning/AristotleActiveExperimentalProofSearchDynamicsExact.agda
+grep -q 'refinedConsumerClosureCanTerminateSearchIsTrue' DASHI/Reasoning/AristotleActiveExperimentalProofSearchDynamicsExact.agda
 
 scripts/run_agda29_parallel_check.sh DASHI/Reasoning/AristotleMergeExperimentValidation.agda
