@@ -17,7 +17,7 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119LiteralPathRound147Exact w
 --
 -- where U_d is literally `Bond.orientedLink` at the current walked site.
 --
--- The two source paths are then literal list concatenations:
+-- The two source paths are literal list concatenations:
 --
 --   F_{c-,x} ++ [x,x']
 --   c ++ F_{c+,x'}.
@@ -26,9 +26,15 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119LiteralPathRound147Exact w
 -- and volume reduce definitionally to 13 and 28561.  The exact CMP98 weight is
 -- therefore 1/28561.
 --
+-- BIDI tightening (Round150): the translated crossing is NOT an x-indexed
+-- source field.  One signed crossing of the neighbouring block centres plus the
+-- existing periodic coordinate-translation commutation theorem transports every
+-- centred offset.  Thus x' has the same centred coordinate as x by construction.
+--
 -- What remains source-facing is deliberately narrow:
---   (1) identify the translated one-bond crossing with the source coarse-bond
---       convention, i.e. the chosen plus-block offset really is x';
+--   (1) identify one coarse centre crossing c- -> c+ in the literal source
+--       convention, together with the already-isolated periodic translation
+--       commutation input;
 --   (2) identify CMP98's printed g(-i ad Y), g^-1(-i ad Y_x), and R(exp iY)
 --       conventions with the repository's existing dexp-/inverse-dexp/adjoint
 --       operators.  No scalar Q' receipt survives.
@@ -45,6 +51,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP98MultiscaleAveragingDerivativeRound126Exact as R126
 import DASHI.Physics.YangMills.BalabanCMP98Equation119OneStepDerivativeRound146Exact as R146
+import DASHI.Physics.YangMills.BalabanCMP98TranslatedCrossingFromCentreRound150Exact as R150
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredPeriodicEmbeddingExact as Embed
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredOddBlockCarrierExact as Centered
@@ -111,18 +118,17 @@ record LiteralEquation119PathData
         (coarseWord step)
       ≡ Embed.embeddingCentre (plusEmbedding step)
 
-    -- The literal translated crossing [x,x'] is ONE actual signed periodic
-    -- bond.  `plusOffset` states which centered coordinate of the next block is
-    -- x'.  This equality is the remaining translated-crossing source seam.
-    crossingDirection :
-      Nat → Centered.CenteredBlockPoint4 6 → Word.SignedAxis4
-    plusOffset :
-      Nat → Centered.CenteredBlockPoint4 6 → Centered.CenteredBlockPoint4 6
-    crossingHitsPlusOffset : ∀ step point →
+    -- Round150 removes the former x-indexed crossing receipt.  The physical
+    -- source selects ONE signed crossing direction at each source scale.  The
+    -- plus block centre is exactly that one-bond translate of the minus centre;
+    -- every centred offset then follows by translation commutation.
+    translationCommutation : Embed.PeriodicSegmentCommutation n
+    crossingDirection : Nat → Word.SignedAxis4
+    plusCentreIsOneCrossing : ∀ step →
       Bond.walkStep
-        (Embed.embed (minusEmbedding step) point)
-        (crossingDirection step point)
-      ≡ Embed.embed (plusEmbedding step) (plusOffset step point)
+        (Embed.embeddingCentre (minusEmbedding step))
+        (crossingDirection step)
+      ≡ Embed.embeddingCentre (plusEmbedding step)
 
     -- Existing dexp/adjoint operators after the literal CMP98 sign and
     -- trivialisation convention has been identified.  These are NOT path
@@ -137,6 +143,45 @@ record LiteralEquation119PathData
     adjointExpOuter : Nat → R126.Operator (R146.additive C)
 
 open LiteralEquation119PathData public
+
+------------------------------------------------------------------------
+-- Derived translated crossing: x' is the SAME centred offset in the c+ block.
+------------------------------------------------------------------------
+
+plusOffset :
+  ∀ {C n Value group} →
+  LiteralEquation119PathData C n Value group →
+  Nat → Centered.CenteredBlockPoint4 6 → Centered.CenteredBlockPoint4 6
+plusOffset dataSet step point = point
+
+translatedGeometryAt :
+  ∀ {C n Value group} →
+  LiteralEquation119PathData C n Value group →
+  Nat → R150.TranslatedNeighbourBlockCrossing n 6
+translatedGeometryAt dataSet step = record
+  { R150.TranslatedNeighbourBlockCrossing.commutation =
+      translationCommutation dataSet
+  ; R150.TranslatedNeighbourBlockCrossing.minusEmbedding =
+      minusEmbedding dataSet step
+  ; R150.TranslatedNeighbourBlockCrossing.plusEmbedding =
+      plusEmbedding dataSet step
+  ; R150.TranslatedNeighbourBlockCrossing.crossingDirection =
+      crossingDirection dataSet step
+  ; R150.TranslatedNeighbourBlockCrossing.plusCentreIsOneCrossing =
+      plusCentreIsOneCrossing dataSet step
+  }
+
+crossingHitsPlusOffset :
+  ∀ {C n Value group}
+    (dataSet : LiteralEquation119PathData C n Value group)
+    step point →
+  Bond.walkStep
+    (Embed.embed (minusEmbedding dataSet step) point)
+    (crossingDirection dataSet step)
+  ≡ Embed.embed (plusEmbedding dataSet step) (plusOffset dataSet step point)
+crossingHitsPlusOffset dataSet step point =
+  R150.radiusSixTranslatedCrossingHitsSameOffset
+    (translatedGeometryAt dataSet step) point
 
 ------------------------------------------------------------------------
 -- Actual R0 recursion on signed periodic bonds.
@@ -167,7 +212,7 @@ minusToCrossingWord :
   Nat → Centered.CenteredBlockPoint4 6 → List Word.SignedAxis4
 minusToCrossingWord dataSet step point =
   Embed.canonicalCenteredContourWord point
-  ++ (crossingDirection dataSet step point ∷ [])
+  ++ (crossingDirection dataSet step ∷ [])
 
 plusFullWord :
   ∀ {C n Value group} →
@@ -192,15 +237,15 @@ minusToCrossingEndpointExact :
     (minusToCrossingWord dataSet step point)
   ≡ Bond.walkStep
       (Embed.embed (minusEmbedding dataSet step) point)
-      (crossingDirection dataSet step point)
+      (crossingDirection dataSet step)
 minusToCrossingEndpointExact dataSet step point =
   trans
     (Embed.walkAppend
       (Embed.embeddingCentre (minusEmbedding dataSet step))
       (Embed.canonicalCenteredContourWord point)
-      (crossingDirection dataSet step point ∷ []))
+      (crossingDirection dataSet step ∷ []))
     (cong
-      (λ site → Bond.walkStep site (crossingDirection dataSet step point))
+      (λ site → Bond.walkStep site (crossingDirection dataSet step))
       (sym (Embed.embedMeaning (minusEmbedding dataSet step) point)))
 
 -- The second concatenation also terminates at the selected plus-block x'.
@@ -338,10 +383,20 @@ cmp98Equation119RadiusSixFiniteBlockRound147Level = machineChecked
 cmp98Equation119ExactWeightRound147Level : ProofLevel
 cmp98Equation119ExactWeightRound147Level = machineChecked
 
--- The remaining physical seam is now exactly the source identification promised
--- above: translated crossing/coarse-bond convention and CMP98 Y/Y_x dexp signs.
+cmp98Equation119TranslatedCrossingFromCentreRound147Level : ProofLevel
+cmp98Equation119TranslatedCrossingFromCentreRound147Level = machineChecked
+
+-- The former x-indexed translated-crossing field is gone.  Remaining physical
+-- geometry is one coarse centre crossing plus the existing periodic translation
+-- commutation input.
+literalCMP98CoarseCentreCrossingIdentificationRound147Level : ProofLevel
+literalCMP98CoarseCentreCrossingIdentificationRound147Level = conditional
+
+-- Compatibility name for older status readers.  This now means the strictly
+-- smaller centre-crossing source seam, not an x-indexed crossing family.
 literalCMP98TranslatedCrossingIdentificationRound147Level : ProofLevel
-literalCMP98TranslatedCrossingIdentificationRound147Level = conditional
+literalCMP98TranslatedCrossingIdentificationRound147Level =
+  literalCMP98CoarseCentreCrossingIdentificationRound147Level
 
 literalCMP98DexpConventionIdentificationRound147Level : ProofLevel
 literalCMP98DexpConventionIdentificationRound147Level = conditional
