@@ -1,0 +1,5 @@
+module DASHI.Governance.MedicalCannabisSemanticEpistemicEverything where
+
+import DASHI.Governance.MedicalCannabisContaminantSemanticEpistemicExact
+import DASHI.Governance.MedicalCannabisHistoricalMeaningBridgeExact
+import DASHI.Governance.MedicalCannabisConsumerRelativeMeaningClosureExact
