@@ -10,9 +10,10 @@ import DASHI.Physics.YangMills.BalabanFrontierRouteAdmissionRound147Exact as R14
 import DASHI.Physics.YangMills.BalabanFrontierExperimentDesignRound148Exact as R148
 import DASHI.Physics.YangMills.BalabanFrontierFeedbackSearchRound149Exact as R149
 import DASHI.Physics.YangMills.BalabanConsumerWeightedFrontierPriorityRound150Exact as R150
+import DASHI.Physics.YangMills.BalabanRound108DirectUnifiedActionRound151Exact as R151
 
-round141SameActionRealizationCompiler : ProofLevel
-round141SameActionRealizationCompiler =
+round141CombinedRGActionRealizationCompiler : ProofLevel
+round141CombinedRGActionRealizationCompiler =
   R141.completeDensityEffectiveActionRealizationCompilerLevel
 
 round145ComponentFirstVariationCompiler : ProofLevel
@@ -34,7 +35,15 @@ round149FeedbackSearchCompiler = R149.balabanFrontierFeedbackSearchLevel
 round150ConsumerPriorityCompiler : ProofLevel
 round150ConsumerPriorityCompiler = R150.balabanConsumerWeightedFrontierPriorityLevel
 
--- The validation root deliberately keeps literal physical/source inhabitation
--- conditional.  It validates the search/experiment compiler graph only.
+round151DirectRound108ActionCompiler : ProofLevel
+round151DirectRound108ActionCompiler = R151.round108DirectUnifiedActionCompilerLevel
+
+-- Both source routes remain fail-closed until literal source matching is supplied.
+round141LiteralCombinedRGRoute : ProofLevel
+round141LiteralCombinedRGRoute = R141.literalCompleteDensityEffectiveActionRealizationLevel
+
+round151LiteralDirectRound108Route : ProofLevel
+round151LiteralDirectRound108Route = R151.literalRound108DirectPresentCutActionRealizationLevel
+
 round146LiteralSourceLeaves : ProofLevel
 round146LiteralSourceLeaves = R146.literalBalabanFrontierLeafInhabitationLevel
