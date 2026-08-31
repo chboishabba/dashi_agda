@@ -3,11 +3,65 @@ name: Safe-and-just provisioning Agda check
 on:
   pull_request:
     paths:
+      - 'DASHI/Core/ContextualConversionNonfactorabilityExact.agda'
+      - 'DASHI/Core/ThresholdResidualTrajectoryGeometryExact.agda'
+      - 'DASHI/Core/MeasurementBoundaryNonfactorabilityExact.agda'
+      - 'DASHI/Core/ResponsibilityBurdenNonfactorabilityExact.agda'
+      - 'DASHI/Core/PoliticalContestabilityExact.agda'
+      - 'DASHI/Core/CategoryAuthorityAuditExact.agda'
+      - 'DASHI/Core/MultiaxialResidualBundleExact.agda'
+      - 'DASHI/Core/RecognitionConstitutionNonfactorabilityExact.agda'
+      - 'DASHI/Core/SituatedClaimAuthoritySystemExact.agda'
+      - 'DASHI/Core/Everything.agda'
       - 'DASHI/Governance/SafeJustSourceRegistryExact.agda'
       - 'DASHI/Governance/SafeJustIndicatorSystemExact.agda'
       - 'DASHI/Governance/PlanetaryBoundaryAllocationExact.agda'
       - 'DASHI/Governance/ProvisioningGeometryExact.agda'
       - 'DASHI/Governance/ONeill2018MethodsBoundaryExact.agda'
+      - 'DASHI/Governance/Fanning2022TemporalIndicatorExact.agda'
+      - 'DASHI/Governance/Fanning2022SocialIndicatorRevisionExact.agda'
+      - 'DASHI/Governance/Fanning2022NormalizationExact.agda'
+      - 'DASHI/Governance/Fanning2022ProjectionBoundaryExact.agda'
+      - 'DASHI/Governance/Fanning2022ForecastAuthorityExact.agda'
+      - 'DASHI/Governance/Fanning2022MissingnessAndBalancedSampleExact.agda'
+      - 'DASHI/Governance/Fanning2022DataRealizationExact.agda'
+      - 'DASHI/Governance/Fanning2022MethodsRegression.agda'
+      - 'DASHI/Governance/SafeJustProvisioningCapabilityFunctioningBridgeExact.agda'
+      - 'DASHI/Governance/SafeJustForecastConsumerAdequacyExact.agda'
+      - 'DASHI/Governance/SafeJustEpistemicResidualLedgerExact.agda'
+      - 'DASHI/Governance/Kallis2025ClaimAuthorityRoutingExact.agda'
+      - 'DASHI/Governance/Kallis2025EvidenceAtlasExact.agda'
+      - 'DASHI/Governance/Kallis2025ClaimByClaimEvidenceRealizationExact.agda'
+      - 'DASHI/Governance/Kallis2025ClaimEvidenceRegression.agda'
+      - 'DASHI/Governance/SafeJustFeministClimateJusticeBoundaryExact.agda'
+      - 'DASHI/Governance/SafeJustFeministClimateJusticeRegression.agda'
+      - 'DASHI/Governance/FeministClimateJusticeSourceRegistryExact.agda'
+      - 'DASHI/Governance/WaringProductionBoundaryNonfactorabilityExact.agda'
+      - 'DASHI/Governance/FeministSocialProvisioningInterpretationExact.agda'
+      - 'DASHI/Governance/MacGregorMeasurableImpactObserverBoundaryExact.agda'
+      - 'DASHI/Governance/MacGregorPostPoliticalAuthorityBoundaryExact.agda'
+      - 'DASHI/Governance/SultanaClimateColonialityResidualExact.agda'
+      - 'DASHI/Governance/PacificWomenNegotiationContributionNonDescentExact.agda'
+      - 'DASHI/Governance/VanuatuGenderedRecoveryObserverBoundaryExact.agda'
+      - 'DASHI/Governance/YusoffGeologicCategoryAuthorityBoundaryExact.agda'
+      - 'DASHI/Governance/MaathaiSituatedProvisioningAuthorityExact.agda'
+      - 'DASHI/Governance/FeministClimateJusticeResidualBundleExact.agda'
+      - 'DASHI/Governance/FeministClimateQualifiedPromotionExact.agda'
+      - 'DASHI/Governance/FeministClimateJusticeSafeJustCapstoneExact.agda'
+      - 'DASHI/Governance/FeministClimateJusticeSafeJustRegression.agda'
+      - 'DASHI/Governance/IndigenousAuthoritySourceRegistryExact.agda'
+      - 'DASHI/Governance/IndigenousAuthorityEnvelopeExact.agda'
+      - 'DASHI/Governance/FirstNationsOwnedEvidenceContractExact.agda'
+      - 'DASHI/Governance/SmithResearchAgendaAuthorityBoundaryExact.agda'
+      - 'DASHI/Governance/MoretonRobinsonRecognitionSovereigntyBoundaryExact.agda'
+      - 'DASHI/Governance/WhyteKinshipTemporalityBoundaryExact.agda'
+      - 'DASHI/Governance/FeministRecognitionAuthorityCrossPollinationExact.agda'
+      - 'DASHI/Governance/SituatedIndigenousFeministAuthorityRegression.agda'
+      - 'DASHI/Governance/SafeJustQualifiedClaimPromotionExact.agda'
+      - 'DASHI/Governance/SafeJustSocialIndicatorJusticeBoundaryExact.agda'
+      - 'DASHI/Governance/SafeJustConsumerAdequacyResidualBridgeExact.agda'
+      - 'DASHI/Governance/SafeJustSituatedClaimAuthorityBridgeExact.agda'
+      - 'DASHI/Governance/SafeJustSituatedClaimAuthorityRegression.agda'
       - 'DASHI/Governance/Everything.agda'
       - '.github/workflows/safe-just-provisioning.yml'
   workflow_dispatch:
@@ -39,11 +93,64 @@ jobs:
         run: |
           set -euo pipefail
           files=(
+            DASHI/Core/ContextualConversionNonfactorabilityExact.agda
+            DASHI/Core/ThresholdResidualTrajectoryGeometryExact.agda
+            DASHI/Core/MeasurementBoundaryNonfactorabilityExact.agda
+            DASHI/Core/ResponsibilityBurdenNonfactorabilityExact.agda
+            DASHI/Core/PoliticalContestabilityExact.agda
+            DASHI/Core/CategoryAuthorityAuditExact.agda
+            DASHI/Core/MultiaxialResidualBundleExact.agda
+            DASHI/Core/RecognitionConstitutionNonfactorabilityExact.agda
+            DASHI/Core/SituatedClaimAuthoritySystemExact.agda
             DASHI/Governance/SafeJustSourceRegistryExact.agda
             DASHI/Governance/SafeJustIndicatorSystemExact.agda
             DASHI/Governance/PlanetaryBoundaryAllocationExact.agda
             DASHI/Governance/ProvisioningGeometryExact.agda
             DASHI/Governance/ONeill2018MethodsBoundaryExact.agda
+            DASHI/Governance/Fanning2022TemporalIndicatorExact.agda
+            DASHI/Governance/Fanning2022SocialIndicatorRevisionExact.agda
+            DASHI/Governance/Fanning2022NormalizationExact.agda
+            DASHI/Governance/Fanning2022ProjectionBoundaryExact.agda
+            DASHI/Governance/Fanning2022ForecastAuthorityExact.agda
+            DASHI/Governance/Fanning2022MissingnessAndBalancedSampleExact.agda
+            DASHI/Governance/Fanning2022DataRealizationExact.agda
+            DASHI/Governance/Fanning2022MethodsRegression.agda
+            DASHI/Governance/SafeJustProvisioningCapabilityFunctioningBridgeExact.agda
+            DASHI/Governance/SafeJustForecastConsumerAdequacyExact.agda
+            DASHI/Governance/SafeJustEpistemicResidualLedgerExact.agda
+            DASHI/Governance/Kallis2025ClaimAuthorityRoutingExact.agda
+            DASHI/Governance/Kallis2025EvidenceAtlasExact.agda
+            DASHI/Governance/Kallis2025ClaimByClaimEvidenceRealizationExact.agda
+            DASHI/Governance/Kallis2025ClaimEvidenceRegression.agda
+            DASHI/Governance/SafeJustFeministClimateJusticeBoundaryExact.agda
+            DASHI/Governance/SafeJustFeministClimateJusticeRegression.agda
+            DASHI/Governance/FeministClimateJusticeSourceRegistryExact.agda
+            DASHI/Governance/WaringProductionBoundaryNonfactorabilityExact.agda
+            DASHI/Governance/FeministSocialProvisioningInterpretationExact.agda
+            DASHI/Governance/MacGregorMeasurableImpactObserverBoundaryExact.agda
+            DASHI/Governance/MacGregorPostPoliticalAuthorityBoundaryExact.agda
+            DASHI/Governance/SultanaClimateColonialityResidualExact.agda
+            DASHI/Governance/PacificWomenNegotiationContributionNonDescentExact.agda
+            DASHI/Governance/VanuatuGenderedRecoveryObserverBoundaryExact.agda
+            DASHI/Governance/YusoffGeologicCategoryAuthorityBoundaryExact.agda
+            DASHI/Governance/MaathaiSituatedProvisioningAuthorityExact.agda
+            DASHI/Governance/FeministClimateJusticeResidualBundleExact.agda
+            DASHI/Governance/FeministClimateQualifiedPromotionExact.agda
+            DASHI/Governance/FeministClimateJusticeSafeJustCapstoneExact.agda
+            DASHI/Governance/FeministClimateJusticeSafeJustRegression.agda
+            DASHI/Governance/IndigenousAuthoritySourceRegistryExact.agda
+            DASHI/Governance/IndigenousAuthorityEnvelopeExact.agda
+            DASHI/Governance/FirstNationsOwnedEvidenceContractExact.agda
+            DASHI/Governance/SmithResearchAgendaAuthorityBoundaryExact.agda
+            DASHI/Governance/MoretonRobinsonRecognitionSovereigntyBoundaryExact.agda
+            DASHI/Governance/WhyteKinshipTemporalityBoundaryExact.agda
+            DASHI/Governance/FeministRecognitionAuthorityCrossPollinationExact.agda
+            DASHI/Governance/SituatedIndigenousFeministAuthorityRegression.agda
+            DASHI/Governance/SafeJustQualifiedClaimPromotionExact.agda
+            DASHI/Governance/SafeJustSocialIndicatorJusticeBoundaryExact.agda
+            DASHI/Governance/SafeJustConsumerAdequacyResidualBridgeExact.agda
+            DASHI/Governance/SafeJustSituatedClaimAuthorityBridgeExact.agda
+            DASHI/Governance/SafeJustSituatedClaimAuthorityRegression.agda
           )
           if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|sorry|admit)\b' "${files[@]}"; then
             echo 'Forbidden trust-boundary token found in safe-and-just provisioning tranche.' >&2
@@ -65,10 +172,21 @@ jobs:
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-safe-just-provisioning-check.log"
             export AGDA_JOBS=2
             targets=(
-              DASHI/Governance/SafeJustIndicatorSystemExact.agda
-              DASHI/Governance/PlanetaryBoundaryAllocationExact.agda
-              DASHI/Governance/ProvisioningGeometryExact.agda
-              DASHI/Governance/ONeill2018MethodsBoundaryExact.agda
+              DASHI/Core/RecognitionConstitutionNonfactorabilityExact.agda
+              DASHI/Core/SituatedClaimAuthoritySystemExact.agda
+              DASHI/Governance/IndigenousAuthoritySourceRegistryExact.agda
+              DASHI/Governance/IndigenousAuthorityEnvelopeExact.agda
+              DASHI/Governance/FirstNationsOwnedEvidenceContractExact.agda
+              DASHI/Governance/SmithResearchAgendaAuthorityBoundaryExact.agda
+              DASHI/Governance/MoretonRobinsonRecognitionSovereigntyBoundaryExact.agda
+              DASHI/Governance/WhyteKinshipTemporalityBoundaryExact.agda
+              DASHI/Governance/FeministRecognitionAuthorityCrossPollinationExact.agda
+              DASHI/Governance/SituatedIndigenousFeministAuthorityRegression.agda
+              DASHI/Governance/SafeJustSituatedClaimAuthorityBridgeExact.agda
+              DASHI/Governance/SafeJustSituatedClaimAuthorityRegression.agda
+              DASHI/Governance/FeministClimateJusticeSafeJustRegression.agda
+              DASHI/Governance/Kallis2025ClaimEvidenceRegression.agda
+              DASHI/Governance/Fanning2022MethodsRegression.agda
               DASHI/Governance/Everything.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"

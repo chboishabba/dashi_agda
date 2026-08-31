@@ -121,3 +121,11 @@ import DASHI.Core.RelationalHistoryFabricExact
 import DASHI.Core.ContextualConversionNonfactorabilityExact
 import DASHI.Core.ThresholdResidualTrajectoryGeometryExact
 import DASHI.Core.HistoryQualifiedSelectionTopologyExact
+import DASHI.Core.MeasurementBoundaryNonfactorabilityExact
+import DASHI.Core.ResponsibilityBurdenNonfactorabilityExact
+import DASHI.Core.PoliticalContestabilityExact
+import DASHI.Core.CategoryAuthorityAuditExact
+import DASHI.Core.MultiaxialResidualBundleExact
+import DASHI.Core.RecognitionConstitutionNonfactorabilityExact
+import DASHI.Core.SituatedClaimAuthoritySystemExact
+import DASHI.Core.KnowledgeContentAuthoritySeparationExact
