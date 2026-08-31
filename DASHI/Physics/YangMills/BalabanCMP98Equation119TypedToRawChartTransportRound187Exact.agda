@@ -16,6 +16,7 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119TypedToRawChartTransportRo
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (-_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as Unit
