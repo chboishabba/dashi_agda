@@ -33,7 +33,7 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119FederbushCalculusReuseRoun
 -- transport convention is introduced here.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -43,6 +43,8 @@ import DASHI.Physics.YangMills.BalabanSU2ReducedAdjointCalculus as R
 import DASHI.Physics.YangMills.BalabanSU2AdjointAnalyticFunctionalCalculus as Analytic
 import DASHI.Physics.YangMills.BalabanClayGate4SU2DexpInverseClosedFormExact as Dexp
 import DASHI.Physics.YangMills.BalabanCMP109PhysicalFederbushConventionCancellationExact as Federbush
+import DASHI.Physics.YangMills.BalabanCMP109LeftRightInverseDexpCancellationExact as LR
+import DASHI.Physics.YangMills.BalabanCMP98Equation119YIndexedDexpRound154Exact as R154
 import DASHI.Physics.YangMills.BalabanCMP98Equation119DifferentialDexpRound159Exact as R159
 
 record ExistingFederbushConventionFamily : Set₁ where
@@ -160,7 +162,7 @@ r159JminusIsExistingFederbushInverseMinus :
   R159.jMinusAt (asUniformAdjointDifferentialCalculus family) Y X
   ≡ R.applyReducedAdjoint Y
       (Federbush.inverseMinus (atY family Y)) X
-r159JminusIsExistingFederbushInverseMinus family Y X = Agda.Builtin.Equality.refl
+r159JminusIsExistingFederbushInverseMinus family Y X = refl
 
 r159AdjointIsExistingFederbushTransport :
   (family : ExistingFederbushConventionFamily) →
@@ -168,16 +170,13 @@ r159AdjointIsExistingFederbushTransport :
   R159.adjointExp (asUniformAdjointDifferentialCalculus family) Y X
   ≡ R.applyReducedAdjoint Y
       (Federbush.adjointTransport (atY family Y)) X
-r159AdjointIsExistingFederbushTransport family Y X = Agda.Builtin.Equality.refl
+r159AdjointIsExistingFederbushTransport family Y X = refl
 
--- This is the printed source cancellation in the R159 language.  It follows
--- from the generated calculus; its right side is definitionally the same J_-
--- already used by the older Federbush convention.
 r159PrintedInverseTransportFromExistingFederbush :
   (family : ExistingFederbushConventionFamily) →
   ∀ Y X →
-  DASHI.Physics.YangMills.BalabanCMP109LeftRightInverseDexpCancellationExact.Jplus
-    (DASHI.Physics.YangMills.BalabanCMP98Equation119YIndexedDexpRound154Exact.atY
+  LR.Jplus
+    (R154.atY
       (R159.asUniformLeftRightDexpFamily
         (asUniformAdjointDifferentialCalculus family)) Y)
     (R159.adjointExp (asUniformAdjointDifferentialCalculus family) Y X)
@@ -195,8 +194,5 @@ cmp98Equation119FederbushCalculusReuseRound175Level = machineChecked
 cmp98Equation119GeneratedAdjointInverseRound175Level : ProofLevel
 cmp98Equation119GeneratedAdjointInverseRound175Level = machineChecked
 
--- Remaining source-facing normalization is no longer an arbitrary calculus.
--- It is the same-object statement that the CMP98 principal-log coordinate Y
--- uses this already-owned literal Federbush reduced-adjoint convention family.
 literalCMP98PrincipalCoordinateIsFederbushConventionRound175Level : ProofLevel
 literalCMP98PrincipalCoordinateIsFederbushConventionRound175Level = conditional
