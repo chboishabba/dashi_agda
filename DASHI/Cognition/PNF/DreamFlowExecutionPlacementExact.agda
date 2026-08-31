@@ -23,18 +23,10 @@ data Placement : Set where
   localNative databaseAuthority : Placement
 
 data OperationClass : Set where
-  parserProjection
-  fibreAddress
-  localPNFSolve
-  localResidualJoin
-  localDeltaCompose
-  deltaTransport
-  globalIdentityLookup
-  globalTemplateLookup
-  globalCrossFibreJoin
-  durableDeltaAppend
-  authorityPublication
-  auditRebuild : OperationClass
+  parserProjection fibreAddress localPNFSolve localResidualJoin
+    localDeltaCompose deltaTransport globalIdentityLookup globalTemplateLookup
+    globalCrossFibreJoin durableDeltaAppend authorityPublication auditRebuild :
+      OperationClass
 
 idealPlacement : OperationClass → Placement
 idealPlacement parserProjection = localNative

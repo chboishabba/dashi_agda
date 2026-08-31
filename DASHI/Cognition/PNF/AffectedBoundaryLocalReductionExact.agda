@@ -123,7 +123,7 @@ hierarchyWorkUsesEmittedDeltas receipt = transportWorkExact receipt
 record DeltaNativeLookupBoundary : Set where
   constructor deltaNativeLookupBoundary
   field
-    parentReductionBoundary : ParentReductionBoundary
+    parentReductionBoundaryWitness : ParentReductionBoundary
     sparseBoundary : SparseFibredFrontierBoundary
     changedAdmittedExportCount : Nat
     changedLookupProjectionCount : Nat
