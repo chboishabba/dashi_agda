@@ -30,10 +30,6 @@ import DASHI.Governance.SexedHistoricalStratifiedFutureConeQuotientExact as Futu
 import DASHI.Governance.SexedHistoricalHorizonFiltrationFirstDivergenceExact as Horizon
 import DASHI.Governance.SexedHistoricalHorizonQualifiedSelectiveReopeningExact as Reopen
 
-------------------------------------------------------------------------
--- 1. Consumer family.
-------------------------------------------------------------------------
-
 data HistoricalConsumer : Set where
   immediateActionConsumer
   shortForecastConsumer
@@ -68,27 +64,20 @@ longAndBraidConsumersDiffer :
   ≡ consumerDivergence braidProvenanceConsumer → ⊥
 longAndBraidConsumersDiffer ()
 
-------------------------------------------------------------------------
--- 2. Same histories; different observation languages.
-------------------------------------------------------------------------
-
 data BraidTrace : Set where
   pluralisationBeforeInstitutionalClosure
   institutionalClosureBeforePluralisation
   : BraidTrace
 
 braidTrace : Future.FuturePathHistory → BraidTrace
-braidTrace Future.repairedThenPluralised =
-  pluralisationBeforeInstitutionalClosure
-braidTrace Future.repairedThenInstitutionalised =
-  institutionalClosureBeforePluralisation
+braidTrace Future.repairedThenPluralised = pluralisationBeforeInstitutionalClosure
+braidTrace Future.repairedThenInstitutionalised = institutionalClosureBeforePluralisation
 
 braidTracesDiffer :
   braidTrace Future.repairedThenPluralised
   ≡ braidTrace Future.repairedThenInstitutionalised → ⊥
 braidTracesDiffer ()
 
--- The immediate-action observation is exactly the old coarse consumer surface.
 historicalBraidObservationLanguage : CryptoObs.ObservationLanguage
 historicalBraidObservationLanguage =
   CryptoObs.observationLanguage
@@ -122,17 +111,18 @@ braidProvenanceRefinesImmediateActionLanguage :
 braidProvenanceRefinesImmediateActionLanguage =
   CryptoObs.splitRefutesExtendedEquivalence historicalBraidLanguageSplit
 
-------------------------------------------------------------------------
--- 3. Forecast consumer sees first divergence only at long horizon.
-------------------------------------------------------------------------
-
+shortForecastStillAgrees :
+  Horizon.coneAt Horizon.shortHorizon Future.repairedThenPluralised
+  ≡ Horizon.coneAt Horizon.shortHorizon Future.repairedThenInstitutionalised
 shortForecastStillAgrees = Horizon.shortHorizonAgreement
-mediumForecastStillAgrees = Horizon.mediumHorizonAgreement
-longForecastFirstDivergence = Horizon.canonicalFirstForecastDivergence
 
-------------------------------------------------------------------------
--- 4. Consumer-relative equivalence is not one universal metric.
-------------------------------------------------------------------------
+mediumForecastStillAgrees :
+  Horizon.coneAt Horizon.mediumHorizon Future.repairedThenPluralised
+  ≡ Horizon.coneAt Horizon.mediumHorizon Future.repairedThenInstitutionalised
+mediumForecastStillAgrees = Horizon.mediumHorizonAgreement
+
+longForecastFirstDivergence : Horizon.FirstForecastDivergenceAt Horizon.longHorizon
+longForecastFirstDivergence = Horizon.canonicalFirstForecastDivergence
 
 data ConsumerPairRelation : HistoricalConsumer → Set where
   immediatePairEquivalent : ConsumerPairRelation immediateActionConsumer
@@ -151,33 +141,21 @@ canonicalLongRelation = longPairSeparated
 canonicalBraidRelation : ConsumerPairRelation braidProvenanceConsumer
 canonicalBraidRelation = braidPairSeparated
 
-------------------------------------------------------------------------
--- 5. Market/crypto-control cross-pollination: uncertainty/neutrality does not
--- silently flatten/close an existing exposure or historical option cone.
-------------------------------------------------------------------------
-
 marketNeutralDoesNotFlattenPrecedent :
-  Market.compileDecision (Market.decision Market.neutral false)
-  ≡ Market.hold
+  Market.compileDecision (Market.decision Market.neutral false) ≡ Market.hold
 marketNeutralDoesNotFlattenPrecedent = Market.neutralDoesNotFlatten
 
 marketAbstentionPreservesHoldPrecedent :
-  Market.compileDecision (Market.decision Market.up true)
-  ≡ Market.hold
+  Market.compileDecision (Market.decision Market.up true) ≡ Market.hold
 marketAbstentionPreservesHoldPrecedent = Market.abstentionCompilesToHold Market.up
 
 marketRiskCloseIsExplicitPrecedent :
-  Market.compileRisk Market.closeExposure Market.hold
-  ≡ Market.flatten
+  Market.compileRisk Market.closeExposure Market.hold ≡ Market.flatten
 marketRiskCloseIsExplicitPrecedent = Market.onlyRiskClosesExposure Market.hold
 
 historicalImmediateActionStillRetained :
   Reopen.RetainedBelowFirstDivergence Reopen.immediateActionCertificate
 historicalImmediateActionStillRetained = Reopen.canonicalImmediateRetention
-
-------------------------------------------------------------------------
--- 6. QFT braid boundary remains hard.
-------------------------------------------------------------------------
 
 qftFiniteSurfaceDoesNotConstructNonAbelianIntertwiners :
   QFTBraid.nonAbelianBraidingIntertwinerConstructed
@@ -185,10 +163,6 @@ qftFiniteSurfaceDoesNotConstructNonAbelianIntertwiners :
   ≡ false
 qftFiniteSurfaceDoesNotConstructNonAbelianIntertwiners =
   QFTBraid.finitePrimeLaneBraidingDoesNotConstructNonAbelianIntertwiners
-
-------------------------------------------------------------------------
--- 7. No-promotion boundaries.
-------------------------------------------------------------------------
 
 data ConsumerIndexedDivergenceIsUniversalMetric : Set where
 
@@ -208,26 +182,22 @@ data BraidConsumerHasUniversalAuthority : Set where
 
 data ProvenanceSeparationRefutesImmediateAction : Set where
 
-consumerIndexedDivergenceIsNotUniversalMetric :
-  ConsumerIndexedDivergenceIsUniversalMetric → ⊥
+consumerIndexedDivergenceIsNotUniversalMetric : ConsumerIndexedDivergenceIsUniversalMetric → ⊥
 consumerIndexedDivergenceIsNotUniversalMetric ()
 
 braidTraceIsNotCryptographicSideChannel : BraidTraceIsCryptographicSideChannel → ⊥
 braidTraceIsNotCryptographicSideChannel ()
 
-historicalBraidIsNotNonAbelianBraidGroupAction :
-  HistoricalBraidIsNonAbelianBraidGroupAction → ⊥
+historicalBraidIsNotNonAbelianBraidGroupAction : HistoricalBraidIsNonAbelianBraidGroupAction → ⊥
 historicalBraidIsNotNonAbelianBraidGroupAction ()
 
 historicalBraidDoesNotEstablishYangBaxter : HistoricalBraidSatisfiesYangBaxter → ⊥
 historicalBraidDoesNotEstablishYangBaxter ()
 
-sameImmediateActionDoesNotEraseBraidProvenance :
-  SameImmediateActionErasesBraidProvenance → ⊥
+sameImmediateActionDoesNotEraseBraidProvenance : SameImmediateActionErasesBraidProvenance → ⊥
 sameImmediateActionDoesNotEraseBraidProvenance ()
 
-neutralDoesNotMeanFlattenAllOptions :
-  NeutralHistoricalDispositionMeansFlattenAllOptions → ⊥
+neutralDoesNotMeanFlattenAllOptions : NeutralHistoricalDispositionMeansFlattenAllOptions → ⊥
 neutralDoesNotMeanFlattenAllOptions ()
 
 cryptoObservationAnalogyDoesNotProveCryptocurrencyMechanism :
@@ -237,8 +207,7 @@ cryptoObservationAnalogyDoesNotProveCryptocurrencyMechanism ()
 braidConsumerDoesNotHaveUniversalAuthority : BraidConsumerHasUniversalAuthority → ⊥
 braidConsumerDoesNotHaveUniversalAuthority ()
 
-provenanceSeparationDoesNotRefuteImmediateAction :
-  ProvenanceSeparationRefutesImmediateAction → ⊥
+provenanceSeparationDoesNotRefuteImmediateAction : ProvenanceSeparationRefutesImmediateAction → ⊥
 provenanceSeparationDoesNotRefuteImmediateAction ()
 
 record ConsumerIndexedBraidCryptoDivergenceBoundary : Set where
