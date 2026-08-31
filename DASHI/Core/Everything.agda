@@ -120,3 +120,4 @@ import DASHI.Core.RelationalObserverGainExact
 import DASHI.Core.RelationalHistoryFabricExact
 import DASHI.Core.ContextualConversionNonfactorabilityExact
 import DASHI.Core.ThresholdResidualTrajectoryGeometryExact
+import DASHI.Core.HistoryQualifiedSelectionTopologyExact
