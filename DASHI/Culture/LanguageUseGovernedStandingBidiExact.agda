@@ -14,6 +14,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.ConsumerIndexedResidualRefinementExact as Consumer
 import DASHI.Core.GovernedObservationProvenanceExact as Governed
 import DASHI.Culture.WittgensteinUsePracticeSourceBridgeExact as Wittgenstein
 import DASHI.Culture.WitchRelationalAttributionDialogueBidiExact as Dialogue
@@ -25,37 +26,19 @@ import DASHI.Culture.PhilosophyClaimProvenanceHistoryBidiExact as Philosophy
 ------------------------------------------------------------------------
 
 data UseClass : Set where
-  devotionalUse
-  explanatoryUse
-  classificatoryUse
-  quotedUse
-  reclaimedUse
-  : UseClass
+  devotionalUse explanatoryUse classificatoryUse quotedUse reclaimedUse : UseClass
 
 data SpeakerStanding : Set where
-  selfStanding
-  participantStanding
-  custodialStanding
-  historianStanding
-  institutionalStanding
-  externalObserverStanding
-  unresolvedStanding
-  : SpeakerStanding
+  selfStanding participantStanding custodialStanding historianStanding
+  institutionalStanding externalObserverStanding unresolvedStanding : SpeakerStanding
 
 data DisclosurePermission : Set where
-  publicDisclosure
-  restrictedDisclosure
-  noDisclosureReceipt
-  unresolvedDisclosure
+  publicDisclosure restrictedDisclosure noDisclosureReceipt unresolvedDisclosure
   : DisclosurePermission
 
 data InterpretiveObligation : Set where
-  ordinaryAttribution
-  preserveContestability
-  preserveSourceContext
-  reciprocalObligation
-  unresolvedObligation
-  : InterpretiveObligation
+  ordinaryAttribution preserveContestability preserveSourceContext
+  reciprocalObligation unresolvedObligation : InterpretiveObligation
 
 record GovernedLanguageAct : Set where
   constructor governed-language-act
@@ -70,25 +53,19 @@ record GovernedLanguageAct : Set where
 open GovernedLanguageAct public
 
 ------------------------------------------------------------------------
--- 2. Same words/use can coexist with different standing.
+-- 2. Same words/use can coexist with different governed standing.
 ------------------------------------------------------------------------
 
 data GovernedUseState : Set where
-  authorisedParticipantUse
-  externalObserverUse
-  : GovernedUseState
+  authorisedParticipantUse externalObserverUse : GovernedUseState
 
-data SameWordsAndUseSurface : Set where
-  sameWordsSameUse : SameWordsAndUseSurface
+data SameWordsAndUseSurface : Set where sameWordsSameUse : SameWordsAndUseSurface
 
-data StandingCode : Set where
-  participantCode observerCode : StandingCode
+data StandingCode : Set where participantCode observerCode : StandingCode
 
-data PermissionCode : Set where
-  restrictedCode publicCode : PermissionCode
+data PermissionCode : Set where restrictedCode publicCode : PermissionCode
 
-data ObligationCode : Set where
-  reciprocalCode ordinaryCode : ObligationCode
+data ObligationCode : Set where reciprocalCode ordinaryCode : ObligationCode
 
 wordsAndUse : GovernedUseState → SameWordsAndUseSurface
 wordsAndUse _ = sameWordsSameUse
@@ -105,76 +82,66 @@ obligationCode : GovernedUseState → ObligationCode
 obligationCode authorisedParticipantUse = reciprocalCode
 obligationCode externalObserverUse = ordinaryCode
 
-standingDiffers :
-  standingCode authorisedParticipantUse ≡ standingCode externalObserverUse → ⊥
+standingDiffers : standingCode authorisedParticipantUse ≡ standingCode externalObserverUse → ⊥
 standingDiffers ()
 
-permissionDiffers :
-  permissionCode authorisedParticipantUse ≡ permissionCode externalObserverUse → ⊥
+permissionDiffers : permissionCode authorisedParticipantUse ≡ permissionCode externalObserverUse → ⊥
 permissionDiffers ()
 
-obligationDiffers :
-  obligationCode authorisedParticipantUse ≡ obligationCode externalObserverUse → ⊥
+obligationDiffers : obligationCode authorisedParticipantUse ≡ obligationCode externalObserverUse → ⊥
 obligationDiffers ()
 
-sameWordsAndUseCannotRecoverStanding :
-  INF.FactorsThrough wordsAndUse standingCode → ⊥
+sameWordsAndUseCannotRecoverStanding : INF.FactorsThrough wordsAndUse standingCode → ⊥
 sameWordsAndUseCannotRecoverStanding =
   INF.witnessRulesOutEveryFlatFactorisation
-    (INF.nonFactorabilityWitness
-      authorisedParticipantUse externalObserverUse refl standingDiffers)
+    (INF.nonFactorabilityWitness authorisedParticipantUse externalObserverUse refl standingDiffers)
 
-sameWordsAndUseCannotRecoverPermission :
-  INF.FactorsThrough wordsAndUse permissionCode → ⊥
+sameWordsAndUseCannotRecoverPermission : INF.FactorsThrough wordsAndUse permissionCode → ⊥
 sameWordsAndUseCannotRecoverPermission =
   INF.witnessRulesOutEveryFlatFactorisation
-    (INF.nonFactorabilityWitness
-      authorisedParticipantUse externalObserverUse refl permissionDiffers)
+    (INF.nonFactorabilityWitness authorisedParticipantUse externalObserverUse refl permissionDiffers)
 
-sameWordsAndUseCannotRecoverObligation :
-  INF.FactorsThrough wordsAndUse obligationCode → ⊥
+sameWordsAndUseCannotRecoverObligation : INF.FactorsThrough wordsAndUse obligationCode → ⊥
 sameWordsAndUseCannotRecoverObligation =
   INF.witnessRulesOutEveryFlatFactorisation
-    (INF.nonFactorabilityWitness
-      authorisedParticipantUse externalObserverUse refl obligationDiffers)
+    (INF.nonFactorabilityWitness authorisedParticipantUse externalObserverUse refl obligationDiffers)
 
 ------------------------------------------------------------------------
 -- 3. Direct reuse of the merged Indigenous situated-proposition theorems.
---
--- These theorems remain owned by that source-bounded DASHI capstone.  Their
--- reuse here does not make Indigenous authority/permission a Wittgensteinian
--- concept, nor Wittgensteinian use an Indigenous epistemology.
 ------------------------------------------------------------------------
 
 indigenousPropositionStillCannotRecoverAuthority :
   INF.FactorsThrough Indigenous.extractedProposition Indigenous.authority → ⊥
-indigenousPropositionStillCannotRecoverAuthority =
-  Indigenous.propositionCannotRecoverAuthority
+indigenousPropositionStillCannotRecoverAuthority = Indigenous.propositionCannotRecoverAuthority
 
 indigenousPropositionStillCannotRecoverPermission :
   INF.FactorsThrough Indigenous.extractedProposition Indigenous.permission → ⊥
-indigenousPropositionStillCannotRecoverPermission =
-  Indigenous.propositionCannotRecoverPermission
+indigenousPropositionStillCannotRecoverPermission = Indigenous.propositionCannotRecoverPermission
 
 indigenousPropositionStillCannotRecoverObligation :
   INF.FactorsThrough Indigenous.extractedProposition Indigenous.obligation → ⊥
-indigenousPropositionStillCannotRecoverObligation =
-  Indigenous.propositionCannotRecoverObligation
+indigenousPropositionStillCannotRecoverObligation = Indigenous.propositionCannotRecoverObligation
 
 ------------------------------------------------------------------------
--- 4. Governed-observer consequence.
+-- 4. Governed-observer consequence uses the canonical collision carrier.
 ------------------------------------------------------------------------
 
-standingCollision :
-  DASHI.Core.ConsumerIndexedResidualRefinementExact.ConsumerRelevantCollision
-    wordsAndUse standingCode
+standingCollision : Consumer.ConsumerRelevantCollision wordsAndUse standingCode
 standingCollision =
-  record
-    { leftState = authorisedParticipantUse
-    ; rightState = externalObserverUse
-    ; sameSurface = refl
-    ; differentConsumerValue = standingDiffers
-    }
+  Consumer.consumer-relevant-collision
+    authorisedParticipantUse externalObserverUse refl standingDiffers
+
+standingCollisionBlocksGovernedSufficiency :
+  ∀ {Value Provenance Epistemic Permission Obligation : Set}
+    {value : GovernedUseState → Value}
+    {provenance : GovernedUseState → Provenance}
+    {epistemic : GovernedUseState → Epistemic}
+    {permission : GovernedUseState → Permission}
+    {obligation : GovernedUseState → Obligation} →
+  Governed.GovernedConsumerSufficiency
+    wordsAndUse value provenance epistemic standingCode permission obligation → ⊥
+standingCollisionBlocksGovernedSufficiency =
+  Governed.authorityCollisionBlocksGovernedSufficiency standingCollision
 
 ------------------------------------------------------------------------
 -- 5. Relational attribution remains independently typed.
@@ -182,8 +149,7 @@ standingCollision =
 
 relationalPredicateStillCannotRecoverMode :
   INF.FactorsThrough Dialogue.predicateSurface Dialogue.modeCode → ⊥
-relationalPredicateStillCannotRecoverMode =
-  Dialogue.samePredicateCannotRecoverRelationalMode
+relationalPredicateStillCannotRecoverMode = Dialogue.samePredicateCannotRecoverRelationalMode
 
 ------------------------------------------------------------------------
 -- 6. No-promotion gates.
@@ -199,27 +165,17 @@ data IndigenousKnowledgePromotesWittgensteinTheory : Set where
 
 useDoesNotPromoteStanding : UsePromotesStanding → ⊥
 useDoesNotPromoteStanding ()
-
 useDoesNotPromotePermission : UsePromotesPermission → ⊥
 useDoesNotPromotePermission ()
-
 useDoesNotPromoteObligation : UsePromotesObligation → ⊥
 useDoesNotPromoteObligation ()
-
-selfIdentificationDoesNotPromoteCommunityAuthority :
-  SelfIdentificationPromotesCommunityAuthority → ⊥
+selfIdentificationDoesNotPromoteCommunityAuthority : SelfIdentificationPromotesCommunityAuthority → ⊥
 selfIdentificationDoesNotPromoteCommunityAuthority ()
-
-publicStoryDoesNotPromoteRestrictedInterpretation :
-  PublicStoryPromotesRestrictedInterpretation → ⊥
+publicStoryDoesNotPromoteRestrictedInterpretation : PublicStoryPromotesRestrictedInterpretation → ⊥
 publicStoryDoesNotPromoteRestrictedInterpretation ()
-
-wittgensteinDoesNotPromoteIndigenousGovernance :
-  WittgensteinPromotesIndigenousGovernance → ⊥
+wittgensteinDoesNotPromoteIndigenousGovernance : WittgensteinPromotesIndigenousGovernance → ⊥
 wittgensteinDoesNotPromoteIndigenousGovernance ()
-
-indigenousKnowledgeDoesNotPromoteWittgensteinTheory :
-  IndigenousKnowledgePromotesWittgensteinTheory → ⊥
+indigenousKnowledgeDoesNotPromoteWittgensteinTheory : IndigenousKnowledgePromotesWittgensteinTheory → ⊥
 indigenousKnowledgeDoesNotPromoteWittgensteinTheory ()
 
 ------------------------------------------------------------------------
@@ -262,8 +218,6 @@ record LanguageUseGovernedStandingBoundary : Set where
     governedStandingNeedsIndependentCoordinates : Bool
     sourceAttributionSurvivesSynthesis : Bool
 
-canonicalLanguageUseGovernedStandingBoundary :
-  LanguageUseGovernedStandingBoundary
+canonicalLanguageUseGovernedStandingBoundary : LanguageUseGovernedStandingBoundary
 canonicalLanguageUseGovernedStandingBoundary =
-  language-use-governed-standing-boundary
-    false false false false false false false true true
+  language-use-governed-standing-boundary false false false false false false false true true
