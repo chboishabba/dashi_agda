@@ -28,6 +28,7 @@ import DASHI.Culture.IntellectualReceptionSupportDemandFarCrossPollinationExact
 import DASHI.Culture.IntellectualReceptionIntersectionalInformationGeometryExact
 import DASHI.Culture.IntellectualReceptionIntersectionalTernaryDialectic369BridgeExact
 import DASHI.Culture.IntellectualReceptionSituatedInformationParetoPreorderExact
+import DASHI.Culture.IntellectualReceptionTernaryParetoSituatedChoiceExact
 import DASHI.Culture.WittgensteinUsePracticeSourceBridgeExact
 import DASHI.Culture.HistoricalTotalityCriticalTheoryCrossPollinationExact
 import DASHI.Culture.IndigenousKnowledgeStoryTwoEyedSeeingBidiExact
@@ -40,6 +41,7 @@ import DASHI.Core.TrajectoryResidueExact
 import DASHI.Core.AffectedDependencyClosureExact
 import DASHI.Core.CubieFaceOrderHolonomyAnalogueExact
 import DASHI.Core.ObserverRefinementLatticeExact
+import DASHI.Core.ObserverIncomparabilityTypedJoinExact
 import DASHI.Core.ExperimentalCoordinateDesignExact
 import DASHI.Core.DiscriminatorSynthesisExact
 import DASHI.Core.ResidualObserverDependencyExact
@@ -50,6 +52,7 @@ import DASHI.Core.IntersectionalConstraintGeometryExact
 import DASHI.Core.IntersectionalBinaryInteractionBridgeExact
 import DASHI.Cognition.PNF.BinaryBalancedTernaryAggregateLossExact
 import DASHI.Governance.SexedHistoricalSubjectDialecticBidiExact
+import DASHI.Reasoning.TernaryComparisonSynthesisExact
 import Base369
 import DASHI.Foundations.RepresentationChartInvariant
 import DASHI.Foundations.RadixValuationStageBridge
