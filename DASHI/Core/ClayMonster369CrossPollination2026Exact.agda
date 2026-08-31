@@ -10,6 +10,8 @@ import DASHI.Analysis.RiemannG2C3MonsterEquivarianceAuditExact as RH
 import DASHI.Analysis.RiemannG2DeterminantConsumerQuotient369Exact as RHResidual
 import DASHI.Analysis.RiemannG2DeterminantSymmetryRelevance369Exact as RHSymmetry
 import DASHI.Analysis.RiemannG2C3FixedNuisanceDeterminantNoGo369Exact as RHNoGo
+import DASHI.Analysis.RiemannG2CommonC3DeterminantCovarianceCompilerExact as RHCommonC3
+import DASHI.Analysis.RiemannG2C3ToScalarRouteCutExact as RHScalarCut
 import DASHI.Physics.Closure.NSCriticalConeResidualFibre369CrossPollinationExact as NS
 import DASHI.Physics.YangMills.BalabanC3MonsterEquivarianceAuditExact as YM
 import DASHI.Physics.YangMills.BalabanSourceResidualConsumerNonDescent369Exact as YMResidual
@@ -21,12 +23,13 @@ import DASHI.Physics.YangMills.BalabanSourceResidualConsumerNonDescent369Exact a
 --
 -- * literal Monster/C3 representation transfer remains analogy-only for RH/YM
 --   until literal target-carrier actions are recovered;
--- * consumer-relative symmetry relevance is already theorem-bearing as search
---   architecture: a symmetry preserving a sufficient observer is invisible to
---   that consumer;
--- * RH G2e has an exact sufficient determinant observer, and a finite exact
---   fixture now proves that rotating only the target channel with fixed nuisance
---   rows need not preserve the determinant. Thus q-invariance cannot be assumed;
+-- * consumer-relative symmetry relevance is theorem-bearing search structure;
+-- * RH now owns the generic common-C3 determinant covariance compiler, so no
+--   generic representation machinery needs rebuilding. The remaining RH seam is
+--   literal same-object attachment of the actual nuisance rows and taper point;
+-- * even after that attachment, q-invariance alone gives orbit invariance, not
+--   the signed scalar cancellation required by G2d. A useful symmetry route must
+--   produce a nontrivial scalar q/phase theorem;
 -- * NS and YM exhibit genuine consumer non-descent through coarse observers.
 ------------------------------------------------------------------------
 
@@ -99,17 +102,16 @@ ymResidualNoDirectTheoremTransfer :
 ymResidualNoDirectTheoremTransfer = Relation.searchPatternCannotDirectlyTransferTheorem
 
 ------------------------------------------------------------------------
--- Upgrade gates. RH/YM C3 may become theorem-relevant only after literal
--- actions and equivariant/sufficient-observer effects are recovered.
+-- Upgrade gate. No generic C3 algebra is missing now; only literal attachment
+-- and a nontrivial scalar consumer effect can justify continued RH symmetry work.
 ------------------------------------------------------------------------
 
 record C3RelationUpgradeGate : Set where
   constructor c3RelationUpgradeGate
   field
-    literalOrderThreeAction : Set
-    inducedActionOnSufficientObserver : Set
-    usefulConsumerEffectOrInvariant : Set
-    sameObjectReceipt : Set
+    literalSameObjectAttachment : Set
+    inducedActionOnDeterminantQ : Set
+    nontrivialScalarLawOrPhaseCancellation : Set
 
 open C3RelationUpgradeGate public
 
@@ -128,9 +130,12 @@ record ClayMonster369Boundary : Set where
     determinantConsumerSufficiencyGenuinelyReusableForRH : Bool
     determinantConsumerSufficiencyGenuinelyReusableForRHIsTrue :
       determinantConsumerSufficiencyGenuinelyReusableForRH ≡ true
-    determinantPreservingSymmetryIsConsumerInvisibleForRHFixedKernel : Bool
-    determinantPreservingSymmetryIsConsumerInvisibleForRHFixedKernelIsTrue :
-      determinantPreservingSymmetryIsConsumerInvisibleForRHFixedKernel ≡ true
+    genericCommonC3DeterminantCovarianceCompilerOwned : Bool
+    genericCommonC3DeterminantCovarianceCompilerOwnedIsTrue :
+      genericCommonC3DeterminantCovarianceCompilerOwned ≡ true
+    qInvariantOrbitAloneClosesRHScalarCancellation : Bool
+    qInvariantOrbitAloneClosesRHScalarCancellationIsFalse :
+      qInvariantOrbitAloneClosesRHScalarCancellation ≡ false
     targetOnlyC3RotationAutomaticallyPreservesFixedNuisanceDeterminant : Bool
     targetOnlyC3RotationAutomaticallyPreservesFixedNuisanceDeterminantIsFalse :
       targetOnlyC3RotationAutomaticallyPreservesFixedNuisanceDeterminant ≡ false
@@ -140,9 +145,6 @@ record ClayMonster369Boundary : Set where
     nsResidualFixtureIsPhysicalCovarianceProof : Bool
     nsResidualFixtureIsPhysicalCovarianceProofIsFalse :
       nsResidualFixtureIsPhysicalCovarianceProof ≡ false
-    literalEquivarianceCanUpgradeRelationStrength : Bool
-    literalEquivarianceCanUpgradeRelationStrengthIsTrue :
-      literalEquivarianceCanUpgradeRelationStrength ≡ true
 
 canonicalClayMonster369Boundary : ClayMonster369Boundary
 canonicalClayMonster369Boundary =
@@ -153,6 +155,6 @@ canonicalClayMonster369Boundary =
     true refl
     true refl
     false refl
-    true refl
     false refl
     true refl
+    false refl
