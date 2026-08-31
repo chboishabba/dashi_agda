@@ -78,7 +78,7 @@ externalWorldCannotReachSovereignGovernance = FiveCone.baseLacksSovereignGoverna
 
 sovereignWorldCarriesSovereignGovernance :
   FiveCone.Available Five.sovereignWorld FiveCone.sovereignCeremonialGovernance
-sovereignWorldCarriesSovereignGovernance = FiveCone.sovereignCarriesExtraOption
+sovereignWorldCarriesSovereignGovernance = FiveCone.sovereignGovernance
 
 ------------------------------------------------------------------------
 -- Cross-pollinated Sen boundary.
