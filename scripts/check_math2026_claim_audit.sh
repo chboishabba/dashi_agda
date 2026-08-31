@@ -38,6 +38,7 @@ FILES=(
   DASHI/Analysis/RiemannG2ConstructedComplexAnalyticCarrierAdapterExact.agda
   DASHI/Analysis/RiemannG2CanonicalTestModulationHighestAlphaExact.agda
   DASHI/Analysis/RiemannG2CanonicalTestModulationProducerInventoryExact.agda
+  DASHI/Analysis/RiemannG2MellinTestActionTransportExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda
   DASHI/Mathematics/NumberTheory/DiophantineTupleDPrimeSquare2026ClaimAuditExact.agda
