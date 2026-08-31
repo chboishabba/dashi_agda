@@ -37,10 +37,12 @@ import DASHI.Base369ZetaHeisenbergFiftyFourValidation
 import DASHI.Base369MonsterTwoComponentCompletionValidation
 
 -- Consumer-first representation-theoretic frontier: actual M -> MN3B
--- restriction, explicit finite-Heisenberg central extension, Stone-von Neumann
--- authority, tensor identification, Base369 intertwining, then +53 audit.
+-- restriction, explicit finite-Heisenberg central extension, constructive
+-- global symplectic nondegeneracy, Stone-von Neumann authority, tensor
+-- identification, Base369 intertwining, then +53 audit.
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchExact
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact
+import DASHI.Moonshine.Monster3BFiniteHeisenbergNondegeneracyExact
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact
 
 import DASHI.Base369Ternary27StratifiedFibreHolonomyValidation
