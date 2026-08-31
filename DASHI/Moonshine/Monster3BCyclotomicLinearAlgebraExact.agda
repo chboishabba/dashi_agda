@@ -39,6 +39,14 @@ addCommutative : (a b : C3.Cyclotomic3) → add a b ≡ add b a
 addCommutative (C3.cyclotomic3 a b) (C3.cyclotomic3 c d) =
   C3.cyclotomic3Ext (solve (a ∷ c ∷ [])) (solve (b ∷ d ∷ []))
 
+multiplyCommutative : (a b : C3.Cyclotomic3) →
+  C3.multiply a b ≡ C3.multiply b a
+multiplyCommutative
+  (C3.cyclotomic3 a b) (C3.cyclotomic3 c d) =
+  C3.cyclotomic3Ext
+    (solve (a ∷ b ∷ c ∷ d ∷ []))
+    (solve (a ∷ b ∷ c ∷ d ∷ []))
+
 multiplyDistributesOverAddLeft : (a b c : C3.Cyclotomic3) →
   C3.multiply a (add b c) ≡ add (C3.multiply a b) (C3.multiply a c)
 multiplyDistributesOverAddLeft
@@ -55,9 +63,39 @@ multiplyDistributesOverAddRight
     (solve (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ []))
     (solve (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ []))
 
+multiplyScaleLeft :
+  (r : ℚ) → (a b : C3.Cyclotomic3) →
+  C3.multiply (scale r a) b ≡ scale r (C3.multiply a b)
+multiplyScaleLeft r
+  (C3.cyclotomic3 a b) (C3.cyclotomic3 c d) =
+  C3.cyclotomic3Ext
+    (solve (r ∷ a ∷ b ∷ c ∷ d ∷ []))
+    (solve (r ∷ a ∷ b ∷ c ∷ d ∷ []))
+
+multiplyScaleRight :
+  (r : ℚ) → (a b : C3.Cyclotomic3) →
+  C3.multiply a (scale r b) ≡ scale r (C3.multiply a b)
+multiplyScaleRight r
+  (C3.cyclotomic3 a b) (C3.cyclotomic3 c d) =
+  C3.cyclotomic3Ext
+    (solve (r ∷ a ∷ b ∷ c ∷ d ∷ []))
+    (solve (r ∷ a ∷ b ∷ c ∷ d ∷ []))
+
+scaleScale :
+  (r s : ℚ) → (a : C3.Cyclotomic3) →
+  scale r (scale s a) ≡ scale (r * s) a
+scaleScale r s (C3.cyclotomic3 a b) =
+  C3.cyclotomic3Ext
+    (solve (r ∷ s ∷ a ∷ []))
+    (solve (r ∷ s ∷ b ∷ []))
+
 oneActsLeft : (a : C3.Cyclotomic3) → C3.multiply C3.one a ≡ a
 oneActsLeft (C3.cyclotomic3 a b) =
   C3.cyclotomic3Ext (solve (a ∷ [])) (solve (b ∷ []))
+
+zeroActsLeft : (a : C3.Cyclotomic3) → C3.multiply C3.zero a ≡ C3.zero
+zeroActsLeft (C3.cyclotomic3 a b) =
+  C3.cyclotomic3Ext (solve (a ∷ b ∷ [])) (solve (a ∷ b ∷ []))
 
 zetaSquaredTimesZetaSquaredIsZeta :
   C3.multiply C3.zetaSquared C3.zetaSquared ≡ C3.zeta
