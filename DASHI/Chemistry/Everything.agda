@@ -41,6 +41,7 @@ import DASHI.Chemistry.OceanCarbonateSaltTemperatureStressBidiExact
 
 -- Deep-time carbon-cycle balance: explicit atmosphere/ocean/biosphere/
 -- sediment/fossil reservoirs, transfer conservation, residence-time receipts,
--- and path residuals when equal endpoints hide different transient histories.
+-- path residuals, and cumulative-transfer versus forcing-rate separation.
 import DASHI.Chemistry.DeepTimeCarbonReservoirFluxBalanceExact
 import DASHI.Chemistry.DeepTimeCarbonPathResidualBidiExact
+import DASHI.Chemistry.CarbonForcingRateBidiExact
