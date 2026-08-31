@@ -5,6 +5,9 @@ open import DASHI.Core.Prelude
 import Base369 as Base
 import DASHI.Core.IntersectionalBinaryInteractionBridgeExact as Intersection
 import DASHI.Cognition.PNF.BinaryBalancedTernaryAggregateLossExact as BinaryTernary
+import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
+import DASHI.Foundations.DialecticCubieTetralemmaExact as Cubie
+import DASHI.Reasoning.TernaryComparisonSynthesisExact as Comparison
 import DASHI.Governance.SexedHistoricalSubjectDialecticBidiExact as Dialectic
 
 ------------------------------------------------------------------------
@@ -22,8 +25,8 @@ intersectionalBinaryInteractionRetained =
 ------------------------------------------------------------------------
 
 binaryPoliciesCanDifferOnSameFineNegative :
-  BinaryTernary.Cubie.positiveOnlyDecision BinaryTernary.BT.neg
-  ≡ BinaryTernary.Cubie.nonzeroDecision BinaryTernary.BT.neg → ⊥
+  Cubie.positiveOnlyDecision BT.neg
+  ≡ Cubie.nonzeroDecision BT.neg → ⊥
 binaryPoliciesCanDifferOnSameFineNegative =
   BinaryTernary.binaryPolicyChangesMeaningAtSameFineDigit
 
@@ -35,18 +38,17 @@ aggregateCanEraseDisagreementDirection :
 aggregateCanEraseDisagreementDirection =
   BinaryTernary.aggregateErasesDisagreementDirection
 
-ternaryComparisonDimensionIsNine :
-  BinaryTernary.Comparison.comparisonDimension ≡ 9
+ternaryComparisonDimensionIsNine : Comparison.comparisonDimension ≡ 9
 ternaryComparisonDimensionIsNine = BinaryTernary.comparisonNineDimension
 
 ternarySynthesisDimensionIsTwentySeven :
-  BinaryTernary.Comparison.synthesisChoiceDimension ≡ 27
+  Comparison.synthesisChoiceDimension ≡ 27
 ternarySynthesisDimensionIsTwentySeven = BinaryTernary.synthesisTwentySevenDimension
 
 ternarySynthesisRetainsComparisonBoundary :
   (left right synthesis : Base.TriTruth) →
-  BinaryTernary.Comparison.comparisonOfSynthesis
-    (BinaryTernary.Comparison.makeSynthesisChoice left right synthesis)
+  Comparison.comparisonOfSynthesis
+    (Comparison.makeSynthesisChoice left right synthesis)
   ≡ (left , right)
 ternarySynthesisRetainsComparisonBoundary =
   BinaryTernary.comparisonBoundarySurvivesSynthesis
@@ -88,7 +90,6 @@ data BinaryInteractionIsCompleteTernarySemantics : Set where
 data BinaryInteractionIsCompleteDialecticSemantics : Set where
 data BinaryInteractionIsBase369Identity : Set where
 data TernarySynthesisIsGuaranteedHistoricalSynthesis : Set where
-
 data IntersectionalRectangleIsUniversalOppressionAlgebra : Set where
 
 binaryInteractionDoesNotCompleteTernarySemantics :
