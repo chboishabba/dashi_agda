@@ -2,6 +2,7 @@ module DASHI.Planning.EnergyRefineryNetworkConstraintCrossPollinationExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
