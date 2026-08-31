@@ -3,6 +3,7 @@ module DASHI.Moonshine.Base369MonsterHistoryIndexedComputationObserverExact wher
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact as B369
 import DASHI.Reasoning.HistoryTimeIndexedAlgorithmModelExact as Model
 
@@ -90,7 +91,7 @@ base369ConjugationIsInvolutive :
 base369ConjugationIsInvolutive = B369.cubeSectorConjugationInvolutive
 
 monsterP3AnchorRemainsNeutralOrigin :
-  B369.monsterP3AxisAnchor ≡ B369.Geometry.origin
+  B369.monsterP3AxisAnchor ≡ Geometry.origin
 monsterP3AnchorRemainsNeutralOrigin = B369.monsterP3AxisAnchorIsOrigin
 
 ------------------------------------------------------------------------
