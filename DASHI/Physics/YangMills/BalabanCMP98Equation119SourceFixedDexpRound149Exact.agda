@@ -19,7 +19,8 @@ import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredOddBlockCarrierExac
 -- Round147 deliberately exposes four Lie-calculus fields so its path theorem is
 -- independent of trivialisation.  On the strongest source route, however,
 -- those fields are not caller-selected.  They are replaced by projections of
--- the already-owned Round148 convention family.
+-- the already-owned Round148 convention family.  The tightened Round147 coarse
+-- segment/translation geometry is copied unchanged.
 withExistingDexpFamily :
   ∀ {C n Value group}
     (pathData : R147.LiteralEquation119PathData C n Value group)
@@ -41,16 +42,12 @@ withExistingDexpFamily pathData convention = record
       R147.minusEmbedding pathData
   ; R147.LiteralEquation119PathData.plusEmbedding =
       R147.plusEmbedding pathData
-  ; R147.LiteralEquation119PathData.coarseWord =
-      R147.coarseWord pathData
-  ; R147.LiteralEquation119PathData.coarseWordEndsAtPlusCentre =
-      R147.coarseWordEndsAtPlusCentre pathData
-  ; R147.LiteralEquation119PathData.crossingDirection =
-      R147.crossingDirection pathData
-  ; R147.LiteralEquation119PathData.plusOffset =
-      R147.plusOffset pathData
-  ; R147.LiteralEquation119PathData.crossingHitsPlusOffset =
-      R147.crossingHitsPlusOffset pathData
+  ; R147.LiteralEquation119PathData.coarseSegment =
+      R147.coarseSegment pathData
+  ; R147.LiteralEquation119PathData.coarseSegmentEndsAtPlusCentre =
+      R147.coarseSegmentEndsAtPlusCentre pathData
+  ; R147.LiteralEquation119PathData.translationCommutation =
+      R147.translationCommutation pathData
   ; R147.LiteralEquation119PathData.dexpMinusOuter =
       R148.outerDexpMinus convention
   ; R147.LiteralEquation119PathData.inverseDexpMinusAt =
@@ -136,10 +133,10 @@ cmp98Equation119SourceFixedDexpCompilerRound149Level = machineChecked
 cmp98Equation119SourceFixedCancellationRound149Level : ProofLevel
 cmp98Equation119SourceFixedCancellationRound149Level = machineChecked
 
--- Strongest remaining A1 source leaves after R149:
+-- Strongest remaining A1 source leaves after R149/R150:
 --   * identify the printed CMP98 Y/Y_x trivialisation with the existing Dexp
 --     family used above;
---   * identify the translated one-bond crossing/coarse-word geometry with the
---     printed Eq. (119) crossing convention.
+--   * identify source coarse bond c with the concrete signed fine-lattice axis
+--     segment consumed by Round147 (translation of [x,x(c)] is then derived).
 literalCMP98Equation119SourceFixedDexpRound149Level : ProofLevel
 literalCMP98Equation119SourceFixedDexpRound149Level = conditional
