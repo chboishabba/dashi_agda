@@ -1,0 +1,38 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionRecoveryRound136Validation where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact as R132
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionFirstVariationRound133Exact as R133
+import DASHI.Physics.YangMills.BalabanPresentCutCanonicalMetricDomainRound134Exact as R134
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionStressScaleRound135Exact as R135
+import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionRecoveryRound136Exact as R136
+
+round132SameActionDensityCompiler : ProofLevel
+round132SameActionDensityCompiler = R132.unifiedGeneratedActionDensityCompilerLevel
+
+round133SameActionFirstVariationCompiler : ProofLevel
+round133SameActionFirstVariationCompiler =
+  R133.unifiedGeneratedActionFirstVariationCompilerLevel
+
+round134PresentCutMetricDomainCompiler : ProofLevel
+round134PresentCutMetricDomainCompiler = R134.presentCutCanonicalMetricDomainCompilerLevel
+
+round135SameSourceScaleCompiler : ProofLevel
+round135SameSourceScaleCompiler = R135.unifiedGeneratedActionStressScaleCompilerLevel
+
+round136UnifiedRecoveryCompiler : ProofLevel
+round136UnifiedRecoveryCompiler = R136.unifiedGeneratedActionRecoveryCompilerLevel
+
+-- These remain intentionally conditional: the validation root checks that the
+-- compilers elaborate, not that source-specific physical receipts have been
+-- fabricated.
+round132LiteralInstantiation : ProofLevel
+round132LiteralInstantiation = R132.literalUnifiedGeneratedActionDensityLevel
+
+round133LiteralInstantiation : ProofLevel
+round133LiteralInstantiation = R133.literalUnifiedGeneratedActionFirstVariationLevel
+
+round136LiteralInstantiation : ProofLevel
+round136LiteralInstantiation = R136.literalUnifiedGeneratedActionSectorRecoveryLevel
