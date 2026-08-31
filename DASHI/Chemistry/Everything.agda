@@ -20,3 +20,7 @@ import DASHI.Chemistry.DrinkingWaterDistributionResidualCorrosionBidiExact
 import DASHI.Chemistry.DrinkingWaterChloramineNitrificationBiofilmBidiExact
 import DASHI.Chemistry.DrinkingWaterCorrosionMetalReleaseExact
 import DASHI.Chemistry.DrinkingWaterTapMetalObservationBidiExact
+
+-- Refinery/feedstock composition lane: salt/chloride/process constraints remain
+-- distinct from crude grade, effective throughput and downstream economics.
+import DASHI.Chemistry.RefineryFeedstockSaltConstraintBidiExact
