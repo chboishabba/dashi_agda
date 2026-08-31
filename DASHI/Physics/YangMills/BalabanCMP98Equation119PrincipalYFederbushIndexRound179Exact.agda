@@ -57,9 +57,9 @@ pointFederbushConvention :
       R178.su2SignedCarrier n Group group)
     (chart : Log.StandardSU2PrincipalLogBall Lie.SU2LieAlgebra Group Radius) →
   R177.ExistingFederbushConventionFamily →
-  Nat → Centered.CenteredBlockPoint4 6 →
+  (step : Nat) → (point : Centered.CenteredBlockPoint4 6) →
   Federbush.LiteralCMP109FederbushConvention
-    (pointPrincipalY source chart)
+    (pointPrincipalY source chart step point)
 pointFederbushConvention source chart family step point =
   R177.atY family (pointPrincipalY source chart step point)
 
@@ -134,9 +134,10 @@ outerFederbushConvention :
     (source : R158.CanonicalL13Equation119Source
       R178.su2SignedCarrier n Group group)
     (chart : Log.StandardSU2PrincipalLogBall Lie.SU2LieAlgebra Group Radius) →
-  R177.ExistingFederbushConventionFamily → Nat →
+  R177.ExistingFederbushConventionFamily →
+  (step : Nat) →
   Federbush.LiteralCMP109FederbushConvention
-    (outerPrincipalY source chart)
+    (outerPrincipalY source chart step)
 outerFederbushConvention source chart family step =
   R177.atY family (outerPrincipalY source chart step)
 
