@@ -33,12 +33,29 @@ on:
       - 'DASHI/Moonshine/Monster3BFiniteSchrodingerPointProjectorEvaluationExact.agda'
       - 'DASHI/Moonshine/Monster3BFiniteSchrodingerProjector729Exact.agda'
       - 'DASHI/Moonshine/Monster3BFiniteX6ConstructiveComparisonExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteSchrodingerDeltaExtractionExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteSchrodingerBooleanDeltaExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteSchrodingerTranslationOrbitExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteSchrodingerFullDeltaOrbitExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteSchrodingerIrreducibilityAssemblyExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergCommutantExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergProjectionNoGoExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteSchrodingerProjectorIrreducibilityBidiExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteSchrodingerIrreducibilityBidiCutExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteStoneVonNeumannMultiplicityExact.agda'
+      - 'DASHI/Moonshine/Monster3BKernelCharacterCriterionExact.agda'
+      - 'DASHI/Moonshine/Monster3BActualKernelCharacterPromotionExact.agda'
+      - 'DASHI/Moonshine/Monster3BModelStoneVonNeumannRecognitionExact.agda'
+      - 'DASHI/Moonshine/Monster3BMultiplicityEvaluationExact.agda'
+      - 'DASHI/Moonshine/Monster3BActualMultiplicityEvaluationFromRecognitionExact.agda'
       - 'DASHI/Moonshine/Monster3BFiniteStoneVonNeumannFrontierExact.agda'
       - 'DASHI/Moonshine/Base369AppraisalFibreHeisenbergCarrierBidiExact.agda'
       - 'DASHI/Moonshine/Base369PeriodicHeisenbergFibreEquivarianceExact.agda'
       - 'DASHI/Moonshine/Base369ZetaHeisenbergFiftyFourCarrierExact.agda'
       - 'DASHI/Moonshine/Base369MonsterTwoComponentCompletionBidiExact.agda'
       - 'DASHI/Moonshine/Base369Monster3BRepresentationBidiSearchExact.agda'
+      - 'DASHI/Moonshine/Base369Monster3BActualSectorRecognitionBidiExact.agda'
+      - 'DASHI/Moonshine/Base369Monster3BRepresentationBidiSearchRound2Exact.agda'
       - 'DASHI/Base369ZetaHeisenbergFiftyFourValidation.agda'
       - 'DASHI/Base369MonsterTwoComponentCompletionValidation.agda'
       - 'DASHI/Base369Ternary27StratifiedFibreEverything.agda'
@@ -100,8 +117,25 @@ jobs:
             DASHI/Moonshine/Monster3BFiniteSchrodingerPointProjectorEvaluationExact.agda
             DASHI/Moonshine/Monster3BFiniteSchrodingerProjector729Exact.agda
             DASHI/Moonshine/Monster3BFiniteX6ConstructiveComparisonExact.agda
+            DASHI/Moonshine/Monster3BFiniteSchrodingerDeltaExtractionExact.agda
+            DASHI/Moonshine/Monster3BFiniteSchrodingerBooleanDeltaExact.agda
+            DASHI/Moonshine/Monster3BFiniteSchrodingerTranslationOrbitExact.agda
+            DASHI/Moonshine/Monster3BFiniteSchrodingerFullDeltaOrbitExact.agda
+            DASHI/Moonshine/Monster3BFiniteSchrodingerIrreducibilityAssemblyExact.agda
+            DASHI/Moonshine/Monster3BFiniteHeisenbergCommutantExact.agda
+            DASHI/Moonshine/Monster3BFiniteHeisenbergProjectionNoGoExact.agda
+            DASHI/Moonshine/Monster3BFiniteSchrodingerProjectorIrreducibilityBidiExact.agda
+            DASHI/Moonshine/Monster3BFiniteSchrodingerIrreducibilityBidiCutExact.agda
+            DASHI/Moonshine/Monster3BFiniteStoneVonNeumannMultiplicityExact.agda
+            DASHI/Moonshine/Monster3BKernelCharacterCriterionExact.agda
+            DASHI/Moonshine/Monster3BActualKernelCharacterPromotionExact.agda
+            DASHI/Moonshine/Monster3BModelStoneVonNeumannRecognitionExact.agda
+            DASHI/Moonshine/Monster3BMultiplicityEvaluationExact.agda
+            DASHI/Moonshine/Monster3BActualMultiplicityEvaluationFromRecognitionExact.agda
             DASHI/Moonshine/Monster3BFiniteStoneVonNeumannFrontierExact.agda
             DASHI/Moonshine/Base369Monster3BRepresentationBidiSearchExact.agda
+            DASHI/Moonshine/Base369Monster3BActualSectorRecognitionBidiExact.agda
+            DASHI/Moonshine/Base369Monster3BRepresentationBidiSearchRound2Exact.agda
             DASHI/Moonshine/Base369ZetaHeisenbergFiftyFourCarrierExact.agda
           )
           for source in "${sources[@]}"; do
