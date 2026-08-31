@@ -14,6 +14,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.EpistemicSuspensionExact as Suspension
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Foundations.Base369Ternary27HypervoxelStratificationExact as Strata
 import DASHI.Governance.SexedHistoricalBase369TransitionPathExact as Path
 import DASHI.Governance.SexedHistoricalAdaptiveMeasurementRefinementExact as Existing
@@ -53,7 +54,7 @@ coarseCrossCannotRecoverComposite =
 --    the other at F->F.
 ------------------------------------------------------------------------
 
-compositePoint : HiddenConstructionPath → Path.CompositeChannel → Strata.Geometry.Ternary27Point
+compositePoint : HiddenConstructionPath → Path.CompositeChannel → Geometry.Ternary27Point
 compositePoint hiddenMasculineCrossBack _ = Path.mmAdmittedPoint
 compositePoint hiddenFeminineCrossBack _ = Path.ffAdmittedPoint
 
