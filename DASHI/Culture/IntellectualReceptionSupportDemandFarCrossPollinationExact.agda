@@ -112,8 +112,6 @@ canonicalSupportInclusionDemandReversal =
     Demand.authorityNoMoreDemandingThanPresentFuture
     Demand.presentFutureNotNoMoreDemandingThanAuthority
 
--- Hence support inclusion is not monotone in the direction
--- "larger support => finer separation observation required".
 data LargerSupportMustRequireFinerObservation : Set where
 
 largerSupportDoesNotForceFinerObservation :
@@ -121,8 +119,7 @@ largerSupportDoesNotForceFinerObservation :
 largerSupportDoesNotForceFinerObservation ()
 
 ------------------------------------------------------------------------
--- 3. Observer-lattice x-pollination: adding authority strictly refines the
--- present/future observer on the canonical early/late collision.
+-- 3. Observer-lattice x-pollination.
 ------------------------------------------------------------------------
 
 coarsePresentFutureObservation :
@@ -157,8 +154,7 @@ authorityStrictlyRefinesPresentFuture =
     ReceptionObserver.authorityDivergentByObserver
 
 ------------------------------------------------------------------------
--- 4. Experimental-coordinate x-pollination: authority is an explicit measured
--- coordinate whose read separates the currently collapsed history pair.
+-- 4. Experimental-coordinate x-pollination.
 ------------------------------------------------------------------------
 
 data ReceptionInformationDimension : Set where
@@ -174,6 +170,13 @@ coordinateRole Reuse.authorityCoordinate = Experimental.measuredObservable
 
 coordinateDimension : Reuse.PrefixCoordinate → ReceptionInformationDimension
 coordinateDimension coordinate = receptionInformationDimension
+
+readReceptionCoordinate :
+  Reuse.PrefixCoordinate →
+  Temporal.TemporalReceptionHistory →
+  ReceptionObserver.ObserverValue
+readReceptionCoordinate coordinate history =
+  ReceptionObserver.observeAtT1 history coordinate
 
 applyInspection :
   InspectionControl →
@@ -205,7 +208,7 @@ receptionExperimentalDesign =
     Reuse.PrefixCoordinate
     coordinateRole
     coordinateDimension
-    ReceptionObserver.observeAtT1
+    readReceptionCoordinate
     applyInspection
     coordinateReference
     (λ coordinate → "reception information dimension")
@@ -225,8 +228,7 @@ authorityCoordinateSeparatesCollision =
     ReceptionObserver.authorityDivergentByObserver
 
 ------------------------------------------------------------------------
--- 5. Discriminator-synthesis x-pollination: the same authority coordinate is
--- packaged as an information-language extension of the coarse observer.
+-- 5. Discriminator-synthesis x-pollination.
 ------------------------------------------------------------------------
 
 authorityExperimentBundle :
@@ -277,7 +279,6 @@ authorityJoinSeparatesEarlyLate =
 
 ------------------------------------------------------------------------
 -- 6. Residual-dependency / discrepancy-calibrated preorder x-pollination.
--- The score merely mirrors the finite demand comparison; it is not spectral.
 ------------------------------------------------------------------------
 
 separationDemandScore :
@@ -294,8 +295,7 @@ authorityNoWorseByResidualPreorder :
 authorityNoWorseByResidualPreorder = z≤n
 
 ------------------------------------------------------------------------
--- 7. Selection-topology / nonfactorability precedent remains available:
--- same candidate field does not determine selected frontier.
+-- 7. Selection-topology / nonfactorability precedent.
 ------------------------------------------------------------------------
 
 selectionTopologyStillNonFactorable :
@@ -304,8 +304,7 @@ selectionTopologyStillNonFactorable =
   Selection.candidateFieldCannotRecoverSelectedFrontier
 
 ------------------------------------------------------------------------
--- 8. Representation-chart precedent: equivalent invariant value does not make
--- chart identity the semantic carrier.  This stays independent of demand order.
+-- 8. Representation-chart precedent.
 ------------------------------------------------------------------------
 
 binaryHalfPresentationStillPreservesInvariant :
@@ -321,8 +320,7 @@ representationAuthorityBoundaryRetained =
   Representation.canonicalRepresentationAuthorityBoundary
 
 ------------------------------------------------------------------------
--- 9. Governed-observation precedent: newly added information carries its own
--- lineage and does not restore erased inherited authority/provenance.
+-- 9. Governed-observation provenance precedent.
 ------------------------------------------------------------------------
 
 eraseThenAddStillIntroduced :
@@ -335,7 +333,7 @@ eraseThenAddStillIntroduced =
   Governed.additionAfterErasureIsIntroducedNotInherited
 
 ------------------------------------------------------------------------
--- 10. No-promotion boundaries for the wide x-pollination.
+-- 10. No-promotion boundaries.
 ------------------------------------------------------------------------
 
 data RicherSupportPromotesGreaterTruth : Set where
@@ -344,7 +342,6 @@ data StrictObserverRefinementPromotesWorldCompleteness : Set where
 data ExperimentalCoordinatePromotesPhysicalDimension : Set where
 data FiniteDemandScorePromotesSpectralIndependence : Set where
 data TopologyAnalogyPromotesHistoricalNecessity : Set where
-
 data RepresentationAnalogyPromotesChartIdentity : Set where
 
 richerSupportDoesNotPromoteGreaterTruth : RicherSupportPromotesGreaterTruth → ⊥
