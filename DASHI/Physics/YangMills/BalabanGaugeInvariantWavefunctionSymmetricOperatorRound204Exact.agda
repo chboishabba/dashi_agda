@@ -2,19 +2,18 @@
 module DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionSymmetricOperatorRound204Exact where
 
 ------------------------------------------------------------------------
--- ROUND204 BIDI: THE FINITE SYMMETRY PAYMENT ON THE CORRECT HAMILTONIAN TYPE.
+-- ROUND204 BIDI: SAMPLE-LOCAL SYMMETRY ON THE CORRECT HAMILTONIAN TYPE.
 --
--- R202: H acts on gauge-invariant wavefunctions.
--- R203: those wavefunctions already inherit R197's exact finite rooted pairing.
+-- R202 puts H on gauge-invariant wavefunctions.  R203B evaluates those
+-- wavefunctions on an explicitly finite SAMPLE of R196 rooted quotient points.
+-- No finite sample is promoted to an exhaustive configuration-space carrier.
 --
--- Consequently quotient descent is no longer a separate hypothesis in the
--- finite symmetry theorem.  The only operator-theoretic payment at this layer
--- is the literal pairing identity
+-- On this deliberately local carrier, operator symmetry is exactly
 --
---   <H f , g> = <f , H g>.
+--   <H f , g>_sample = <f , H g>_sample.
 --
--- This record is theorem-bearing rather than a Bool ledger.  It does not invent
--- the physical Yang-Mills H or infer continuum self-adjointness.
+-- Quotient compatibility is automatic because H returns another based-gauge-
+-- invariant wavefunction.  Physical Haar/Gibbs L2 symmetry remains separate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -26,59 +25,56 @@ open import DASHI.Physics.YangMills.P06FaceCubeTorusGeometry using (Cube4)
 import DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport as Transport
 import DASHI.Physics.YangMills.BalabanBasedPathGaugeSectionExact as Rooted
 import DASHI.Physics.YangMills.BalabanFinitePhysicalGaugeQuotientCarrierRound196Exact as R196
-import DASHI.Physics.YangMills.BalabanFiniteRootedGaugeQuotientL2Round197Exact as R197
+import DASHI.Physics.YangMills.BalabanFiniteSampleObservablePairingRound203Exact as Sample
 import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionHamiltonianRound202Exact as R202
 import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionFiniteL2Round203Exact as R203
 
-record FiniteSymmetricGaugeInvariantOperator
+record FiniteSampleSymmetricGaugeInvariantOperator
     {N : Nat} {{_ : NonZero N}}
     (group : Transport.GroupStructure)
     (base : Cube4 N)
     (paths : Rooted.RootedPathSystem base)
-    (ensemble : R197.FiniteRootedQuotientEnsemble group base paths) : Set₁ where
+    (sample : Sample.FiniteSample
+      (R203.RootedQuotient {group = group} {base = base} {paths = paths})) : Set₁ where
   field
     operator : R202.GaugeInvariantWavefunctionOperator group base
 
-    symmetric :
+    symmetricOnSample :
       ∀ left right →
-      R203.finiteWavefunctionPairing ensemble
+      R203.finiteWavefunctionSamplePairing sample
         (R202.act operator left) right
-      ≡ R203.finiteWavefunctionPairing ensemble
+      ≡ R203.finiteWavefunctionSamplePairing sample
           left (R202.act operator right)
 
-open FiniteSymmetricGaugeInvariantOperator public
+open FiniteSampleSymmetricGaugeInvariantOperator public
 
--- Gauge quotient compatibility is automatic because the operator codomain is
--- already a gauge-invariant wavefunction.  This theorem makes the exact
--- dependency reduction explicit for downstream consumers.
-symmetricOperatorNormalizationHandoff :
+sampleSymmetricOperatorNormalizationHandoff :
   ∀ {N : Nat} {{nz : NonZero N}}
     {group : Transport.GroupStructure}
     {base : Cube4 N}
     {paths : Rooted.RootedPathSystem base}
-    {ensemble : R197.FiniteRootedQuotientEnsemble group base paths}
+    {sample : Sample.FiniteSample
+      (R203.RootedQuotient {group = group} {base = base} {paths = paths})}
     (symmetricOperator :
-      FiniteSymmetricGaugeInvariantOperator group base paths ensemble)
+      FiniteSampleSymmetricGaugeInvariantOperator group base paths sample)
     wavefunction field →
   R202.amplitude
     (R202.act (operator symmetricOperator) wavefunction) field
   ≡ R202.evaluateOnRootedQuotient
       (R202.act (operator symmetricOperator) wavefunction)
       (R196.normalizeToFiniteRootedGaugeQuotient group base paths field)
-symmetricOperatorNormalizationHandoff symmetricOperator wavefunction =
+sampleSymmetricOperatorNormalizationHandoff symmetricOperator wavefunction =
   R202.operatorNormalizationHandoff (operator symmetricOperator) wavefunction
 
-finiteSymmetricGaugeInvariantOperatorRound204Level : ProofLevel
-finiteSymmetricGaugeInvariantOperatorRound204Level = machineChecked
+finiteSampleSymmetricGaugeInvariantOperatorRound204Level : ProofLevel
+finiteSampleSymmetricGaugeInvariantOperatorRound204Level = machineChecked
 
--- Exact surviving producer wall: construct the literal finite Yang-Mills
--- Hamiltonian on this carrier and prove the `symmetric` field from its physical
--- integration-by-parts/boundary law.
-literalFiniteYMHamiltonianProducerRound204Level : ProofLevel
-literalFiniteYMHamiltonianProducerRound204Level = conditional
+-- These are intentionally stronger than sample symmetry and remain live.
+literalPhysicalYMHamiltonianProducerRound204Level : ProofLevel
+literalPhysicalYMHamiltonianProducerRound204Level = conditional
 
-literalFiniteYMHamiltonianSymmetryRound204Level : ProofLevel
-literalFiniteYMHamiltonianSymmetryRound204Level = conditional
+literalPhysicalYMHamiltonianSymmetryRound204Level : ProofLevel
+literalPhysicalYMHamiltonianSymmetryRound204Level = conditional
 
 literalPhysicalGaugeInvariantL2CompletionRound204Level : ProofLevel
 literalPhysicalGaugeInvariantL2CompletionRound204Level = conditional
