@@ -10,6 +10,8 @@ import DASHI.Foundations.Base369StableAlgebraicIdentityTowerExact as Stable
 import DASHI.Foundations.Base369MonsterNamedIdentityRegistryExact as Registry
 import DASHI.Foundations.Base369JCoarseFineStableIdentityDisciplineExact as JIdentity
 import DASHI.Foundations.Base369Ternary27HypervoxelStratificationExact as Strata
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
+import DASHI.Foundations.Base369FiveModePhaseQuotientExact as Five
 import DASHI.Foundations.Base369FaceSheetPunctureIncidenceIdentityExact as Face
 import DASHI.Foundations.Base369Situated54FaceIncidence54BridgeExact as Face54
 import DASHI.Foundations.Base369NestedUnitCompletionMonsterAssemblyExact as Nested
@@ -123,9 +125,7 @@ faceSheetOnePlusEightRegression : 1 + Face.puncturedFaceCount ≡ Face.faceSheet
 faceSheetOnePlusEightRegression = Face.faceSheetIsOnePlusEight
 
 sixFaceSheetsGive54Regression :
-  DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact.outerFaceCount
-    * Face.faceSheetCount
-  ≡ Face.faceIncidenceCount
+  Geometry.outerFaceCount * Face.faceSheetCount ≡ Face.faceIncidenceCount
 sixFaceSheetsGive54Regression = Face.sixFacesTimesNineSheetIs54
 
 faceIncidenceStratificationRegression :
@@ -141,7 +141,7 @@ situated54Face54Regression = Face54.situated54IsFaceIncidence54
 
 modePhaseNineIsReducedEightPlusUnitRegression :
   Stable.CarrierIso
-    DASHI.Foundations.Base369FiveModePhaseQuotientExact.ModePhaseQuotient9
+    Five.ModePhaseQuotient9
     (Nested.PointedExtension Registry.ReducedNonary8 Nested.quotientIdentityRole)
 modePhaseNineIsReducedEightPlusUnitRegression = Nested.modePhase9IsReduced8PlusIdentity
 
