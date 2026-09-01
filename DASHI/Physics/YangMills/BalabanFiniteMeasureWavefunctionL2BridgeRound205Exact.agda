@@ -3,7 +3,7 @@ module DASHI.Physics.YangMills.BalabanFiniteMeasureWavefunctionL2BridgeRound205E
 
 ------------------------------------------------------------------------
 -- ROUND205 BIDI X-POLLINATION: LITERAL FINITE-MEASURE EXPECTATION -> THE
--- CORRECT GAUGE-INVARIANT WAVEFUNCTION PRE-HILBERT SURFACE.
+-- CORRECT GAUGE-INVARIANT WAVEFUNCTION QUOTIENT-PAIRING SURFACE.
 --
 -- R202 fixes the physical carrier: H acts on gauge-invariant wavefunctions,
 -- not gauge configurations.  The older P5 finite-measure lane already records
@@ -92,6 +92,21 @@ record FiniteMeasureWavefunctionSemantics
         (pointwiseMul wavefunction wavefunction) ≡ 0ℚ
       → NullEquivalent wavefunction zeroWavefunction
 
+    -- The pairing must itself descend through the null relation.  Without these
+    -- laws one merely has an equivalence relation beside a pairing, not a
+    -- quotient-defined pairing.
+    pairingNullCongruentLeft : ∀ {left left'} →
+      NullEquivalent left left' →
+      ∀ right →
+      expectation selectedMeasure (pointwiseMul left right)
+      ≡ expectation selectedMeasure (pointwiseMul left' right)
+
+    pairingNullCongruentRight : ∀ {right right'} →
+      NullEquivalent right right' →
+      ∀ left →
+      expectation selectedMeasure (pointwiseMul left right)
+      ≡ expectation selectedMeasure (pointwiseMul left right')
+
 open FiniteMeasureWavefunctionSemantics public
 
 finiteMeasureWavefunctionPairing :
@@ -105,6 +120,34 @@ finiteMeasureWavefunctionPairing :
 finiteMeasureWavefunctionPairing semantics left right =
   expectation semantics (selectedMeasure semantics)
     (pointwiseMul semantics left right)
+
+finiteMeasureWavefunctionPairingCongruentLeft :
+  ∀ {N} {{nz : NonZero N}}
+    {group : Transport.GroupStructure}
+    {base : Cube4 N}
+    {Measure : Set}
+    (semantics : FiniteMeasureWavefunctionSemantics group base Measure)
+    {left left'} →
+  NullEquivalent semantics left left' →
+  ∀ right →
+  finiteMeasureWavefunctionPairing semantics left right
+  ≡ finiteMeasureWavefunctionPairing semantics left' right
+finiteMeasureWavefunctionPairingCongruentLeft semantics =
+  pairingNullCongruentLeft semantics
+
+finiteMeasureWavefunctionPairingCongruentRight :
+  ∀ {N} {{nz : NonZero N}}
+    {group : Transport.GroupStructure}
+    {base : Cube4 N}
+    {Measure : Set}
+    (semantics : FiniteMeasureWavefunctionSemantics group base Measure)
+    {right right'} →
+  NullEquivalent semantics right right' →
+  ∀ left →
+  finiteMeasureWavefunctionPairing semantics left right
+  ≡ finiteMeasureWavefunctionPairing semantics left right'
+finiteMeasureWavefunctionPairingCongruentRight semantics =
+  pairingNullCongruentRight semantics
 
 finiteMeasureWavefunctionNormSq :
   ∀ {N} {{nz : NonZero N}}
@@ -144,6 +187,9 @@ finiteMeasureWavefunctionL2BridgeRound205Level = machineChecked
 
 finiteMeasureWavefunctionNullSemanticsRound205Level : ProofLevel
 finiteMeasureWavefunctionNullSemanticsRound205Level = machineChecked
+
+finiteMeasureWavefunctionQuotientPairingRound205Level : ProofLevel
+finiteMeasureWavefunctionQuotientPairingRound205Level = machineChecked
 
 -- Same-object physical seam: instantiate this semantics with the literal
 -- finiteMeasure already welded to the selected Balaban density.  The measure
