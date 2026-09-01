@@ -1,31 +1,27 @@
 module DASHI.Physics.Closure.NSTriadKNLiteralRHSPhysicalTrajectoryRound408Exact where
 
 ------------------------------------------------------------------------
--- ROUND408 / CONSTRUCT THE ROUND240 TRAJECTORY WITH THE CANONICAL LITERAL RHS
+-- ROUND408 / CONSTRUCT THE ACTUAL ROUND240 TRAJECTORY WITH LITERAL ROUND30 RHS
 --
--- R407 constructed the exact projected Galerkin equation whose
--- `timeDerivative` is definitionally Round30's literal Navier--Stokes
--- coefficient.  This round removes the remaining equation-selection freedom
--- from the live Round240 trajectory: the caller supplies only the actual state
--- curve, support/viscosity data, and a derivative witness against the literal
--- Round30 coefficient.  The equation field itself is constructed here from
--- R407.
---
--- This is a same-object authority weld, not an analytic estimate.
+-- R407 constructed the projected equation whose timeDerivative is
+-- definitionally Round30's literal Navier--Stokes coefficient.  Here we remove
+-- the remaining equation-selection freedom from the live Round240 trajectory.
+-- The physical Round30 wrapper is constructed from the SAME Round228 state,
+-- so its `finiteSystem` is definitionally the live state system; no carrier
+-- equality or caller-selected equation is needed.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
-open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact as R240
-import DASHI.Physics.Closure.NSTriadKNPhysicalFiniteComplex3GalerkinFieldRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as R30
 import DASHI.Physics.Closure.NSTriadKNCanonicalLiteralProjectedODERound407Exact as R407
 
@@ -41,56 +37,96 @@ module LiteralDynamics
       (Time → C3.Complex3 F) → Set) where
 
   module Dyn = R240.PhysicalNSDynamics Time initialTime integrateTo DerivativeOf
+  module Base = Dyn.Base
+
+  record LiteralStateSupport : Set₁ where
+    field
+      stateTrajectory : Base.PhysicalMixedHelicityTrajectory
+
+      retainedModeNonzero :
+        (cutoff : Nat) (time : Time) (mode : Z3.FourierMode) →
+        mode Cube.∈ Audit.modes (Base.systemAt stateTrajectory cutoff time) →
+        Z3.NonZeroMode mode
+
+      physicalViscosity : C3.Carrier F
+      viscosityFixed :
+        (cutoff : Nat) (time : Time) →
+        Audit.viscosity (Base.systemAt stateTrajectory cutoff time)
+        ≡ physicalViscosity
+
+      initialVelocity : Z3.FourierMode → C3.Complex3 F
+      initialVelocityAgreement :
+        (cutoff : Nat) (mode : Z3.FourierMode) →
+        Audit.modeListed (Base.systemAt stateTrajectory cutoff initialTime) mode →
+        Audit.velocity (Base.systemAt stateTrajectory cutoff initialTime) mode
+        ≡ initialVelocity mode
+
+  open LiteralStateSupport public
+
+  physicalSystemAt :
+    (S : LiteralStateSupport) →
+    (cutoff : Nat) (time : Time) →
+    R30.PhysicalFiniteComplex3GalerkinSystem F
+  physicalSystemAt S cutoff time = record
+    { R30.physicalEmbedding = Base.E (stateTrajectory S)
+    ; R30.physicalInverseSquare = Base.I (stateTrajectory S)
+    ; R30.finiteSystem = Base.systemAt (stateTrajectory S) cutoff time
+    ; R30.viscosity = Audit.viscosity (Base.systemAt (stateTrajectory S) cutoff time)
+    ; R30.retainedModeNonzero = retainedModeNonzero S cutoff time
+    ; R30.retainedVelocityTransverse = λ mode member →
+        Base.velocityTransverse (stateTrajectory S) cutoff time mode
+    }
+
+  canonicalEquationAt :
+    (S : LiteralStateSupport) →
+    (cutoff : Nat) (time : Time) →
+    Audit.ExactProjectedGalerkinEquation
+      (Base.systemAt (stateTrajectory S) cutoff time)
+  canonicalEquationAt S cutoff time =
+    R407.canonicalLiteralProjectedEquation (physicalSystemAt S cutoff time)
 
   record LiteralRHSTrajectoryData : Set₁ where
     field
-      systemAt : Nat → Time → Audit.FiniteComplex3GalerkinSystem F
-
-      physicalSystemAt :
-        (cutoff : Nat) (time : Time) →
-        Field30.PhysicalFiniteComplex3GalerkinSystem F
-
-      physicalSystemUnderlying :
-        (cutoff : Nat) (time : Time) →
-        R30.finiteSystem (physicalSystemAt cutoff time) ≡ systemAt cutoff time
+      support : LiteralStateSupport
 
       velocityDerivativeIsLiteralRHS :
         (cutoff : Nat) (mode : Z3.FourierMode) →
         DerivativeOf
-          (λ time → Audit.velocityAt (systemAt cutoff time) mode)
+          (λ time →
+            Audit.velocity
+              (Base.systemAt (stateTrajectory support) cutoff time)
+              mode)
           (λ time →
             R30.literalViscousQuadraticCoefficient
-              (physicalSystemAt cutoff time) mode)
-
-      viscosityFixed :
-        (cutoff : Nat) (time : Time) →
-        Audit.viscosity (systemAt cutoff time)
-        ≡ Audit.viscosity (systemAt cutoff initialTime)
-
-      velocityTransverse :
-        (cutoff : Nat) (time : Time) (mode : Z3.FourierMode) → Set
-
-      initialVelocityAgreement :
-        (cutoff : Nat) (mode : Z3.FourierMode) → Set
+              (physicalSystemAt support cutoff time) mode)
 
   open LiteralRHSTrajectoryData public
 
-  canonicalEquationAt :
-    (D : LiteralRHSTrajectoryData) →
-    (cutoff : Nat) (time : Time) →
-    Audit.ExactProjectedGalerkinEquation (systemAt D cutoff time)
-  canonicalEquationAt D cutoff time
-    rewrite sym (physicalSystemUnderlying D cutoff time) =
-      R407.canonicalLiteralProjectedEquation (physicalSystemAt D cutoff time)
+  literalPhysicalTrajectory :
+    LiteralRHSTrajectoryData → Dyn.PhysicalNSGalerkinTrajectory
+  literalPhysicalTrajectory D =
+    Dyn.physical-ns-galerkin-trajectory
+      (stateTrajectory S)
+      (canonicalEquationAt S)
+      (velocityDerivativeIsLiteralRHS D)
+      (physicalViscosity S)
+      (viscosityFixed S)
+      (initialVelocity S)
+      (initialVelocityAgreement S)
+    where
+      S = support D
 
-  literalRHSAgreement :
+  literalTrajectoryEquationDerivativeIsRound30 :
     (D : LiteralRHSTrajectoryData) →
     (cutoff : Nat) (time : Time) (mode : Z3.FourierMode) →
-    Audit.timeDerivative (canonicalEquationAt D cutoff time) mode
+    Audit.timeDerivative
+      (Dyn.equationAt (literalPhysicalTrajectory D) cutoff time) mode
     ≡ R30.literalViscousQuadraticCoefficient
-         (physicalSystemAt D cutoff time) mode
-  literalRHSAgreement D cutoff time mode
-    rewrite sym (physicalSystemUnderlying D cutoff time) = refl
+         (physicalSystemAt (support D) cutoff time) mode
+  literalTrajectoryEquationDerivativeIsRound30 D cutoff time mode = refl
+
+round408ActualRound240TrajectoryConstructed : Bool
+round408ActualRound240TrajectoryConstructed = true
 
 round408CanonicalEquationSelectionClosed : Bool
 round408CanonicalEquationSelectionClosed = true
@@ -104,10 +140,6 @@ round408IntroducesNoNewAnalyticEstimate = true
 round408ActualScalarFluxDerivativeStillOpen : Bool
 round408ActualScalarFluxDerivativeStillOpen = true
 
-round408CanonicalEquationSelectionClosedIsTrue :
-  round408CanonicalEquationSelectionClosed ≡ true
-round408CanonicalEquationSelectionClosedIsTrue = refl
-
-round408LiteralDerivativeAuthoritySameObjectIsTrue :
-  round408LiteralDerivativeAuthoritySameObject ≡ true
-round408LiteralDerivativeAuthoritySameObjectIsTrue = refl
+round408ActualRound240TrajectoryConstructedIsTrue :
+  round408ActualRound240TrajectoryConstructed ≡ true
+round408ActualRound240TrajectoryConstructedIsTrue = refl
