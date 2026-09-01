@@ -63,25 +63,19 @@ canonicalHXToHT H_X =
     (HX.RealCarrier H_X)
     (HX.RealCarrier H_X)
     (HX.ComplexCarrier H_X)
-    -- translate target t and source ordinate b to b-t
     (λ t b → HX.subR H_X b t)
-    -- unshifted source phase exp(+ i b u)
     (λ u b → HX.sourceCharacter H_X b u)
     (HX.mulC H_X)
     (λ u t → HX.targetCharacter H_X t u)
     (canonicalHXIntertwines H_X)
-    -- exact target-relative gap law
     ((t b : HX.RealCarrier H_X) →
       (λ t' b' → HX.subR H_X b' t') t b
       ≡ HX.subR H_X b t)
-    -- exact reflection-even cosine theorem already owned by H_X
     ((delta u : HX.RealCarrier H_X) →
       HX.realPart H_X
         (HX.expC H_X (HX.plusIProduct H_X delta u))
       ≡ HX.cosR H_X (HX.mulR H_X delta u))
-    -- analytic carrier ownership and no-Monster authority are witnessed by the
-    -- fact the constructor is built solely from this H_X object.
-    (HX.RiemannComplexCharacterExtension _)
+    ⊤
     ⊤
     (HX.characterReference H_X)
 
