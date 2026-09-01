@@ -7,6 +7,7 @@ import DASHI.Core.ActiveObligationEvidenceFibreExact as Active
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as ProofSearch
 import DASHI.Core.CalibratedExperimentInferenceExact as Calibrated
 import DASHI.Core.ReopenableHypothesisForestExact as Forest
+import DASHI.Core.SequentialConsumerExperimentPlannerExact as Sequential
 import DASHI.Governance.DrugGovernanceMultiAxisReparativeFibreExact as Fibre
 import DASHI.Governance.DrugGovernanceMultiAxisRepairPlannerExact as Planner
 import DASHI.Governance.MenWhoStareAtGoatsEvidenceLayerExact as Goats
@@ -185,7 +186,7 @@ presentimentCheaperSurveyDoesNotSeparate :
 presentimentCheaperSurveyDoesNotSeparate = Competition.cheapSurveyCannotSeparate
 
 psilocybinUsesOutcomeConditionedSequentialPlan :
-  DASHI.Core.SequentialConsumerExperimentPlannerExact.SequentialConsumerPlan
+  Sequential.SequentialConsumerPlan
     PsilocybinSequential.attributionConsumer
     PsilocybinSequential.earlyLive
 psilocybinUsesOutcomeConditionedSequentialPlan = PsilocybinSequential.psilocybinSequentialPlan
