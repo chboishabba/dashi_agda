@@ -202,10 +202,10 @@ singleActionProducerFromVOA :
   ∀ {G K : Set} {group : GR.Group G} →
   ActualMonster3BVOARecognizedActionSource G K group →
   Single.ActualMonster3BSingleActionProducer
-singleActionProducerFromVOA source =
+singleActionProducerFromVOA {G = G} source =
   record
     { State = VOACarrier (bridge (phaseSource source))
-    ; Normalizer = _
+    ; Normalizer = G
     ; normalizerAction = normalizerActionFromVOA (phaseSource source)
     ; recognition = recognition source
     }
