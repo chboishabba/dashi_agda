@@ -20,6 +20,7 @@ open import Agda.Builtin.Nat using (Nat; _+_)
 
 import DASHI.Foundations.ExceptionalAlbertFreudenthalResidualExact as Exceptional
 import DASHI.Moonshine.Base369Monster3BMultiplicityInertiaTwelveSeventyEightBidiExact as Actual
+import DASHI.Moonshine.Monster3BMultiplicityTwelveSeventyEightRecognitionExact as Split
 
 ------------------------------------------------------------------------
 -- 1. Exact exceptional dimension anatomy.
@@ -54,7 +55,7 @@ record ActualSeventyEightE6Recognition
       (inertia : Actual.MultiplicityInertia attachment) →
       (state : Actual.SeventyEightCarrier attachment) →
       toE6
-        (DASHI.Moonshine.Monster3BMultiplicityTwelveSeventyEightRecognitionExact.seventyEightAct
+        (Split.seventyEightAct
           (Actual.blockRecognition attachment) inertia state)
       ≡ e6Action inertia (toE6 state)
 
