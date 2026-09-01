@@ -10,6 +10,11 @@ import DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact as ApproxCore
 import DASHI.Environment.LESDomainBasisBidiFrontierExact as Basis
 import DASHI.Environment.LESApproximateFidelityReductionExact as Approximate
 
+------------------------------------------------------------------------
+-- An experiment can be valuable by shrinking the live model/state fibre even
+-- when it does not close the consumer in one step.
+------------------------------------------------------------------------
+
 record LESPartialResidualExperiment
     {mechanism : Basis.DomainMechanismSocket}
     (bundle : Synthesis.ExperimentBundle (Basis.State mechanism)) : Set₁ where
@@ -40,6 +45,10 @@ bundleOutcomeRefinesLESResidual {bundle = bundle} experiment outcome =
     (prior experiment)
     (Synthesis.observe bundle)
     outcome
+
+------------------------------------------------------------------------
+-- Approximate-fidelity cross-pollination.
+------------------------------------------------------------------------
 
 record ResidualQualifiedLESApproximateDecision
     {mechanism : Basis.DomainMechanismSocket}
