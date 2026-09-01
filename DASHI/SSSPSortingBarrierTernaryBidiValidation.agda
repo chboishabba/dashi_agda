@@ -8,7 +8,11 @@ import DASHI.Computation.SSSPFindPivotsCoverageCompressionExact
 import DASHI.Computation.SSSPThreeFrontierMinimumOrbitQuotientExact
 import DASHI.Computation.SSSPThreeFrontierBinaryTernaryFactorExact
 import DASHI.Computation.SSSPGeneralPullPrefixQuotientExact
+import DASHI.Computation.SSSPBMSSPConsumerContractExact
+import DASHI.Computation.SSSPLogExponentBalance2025Exact
 
+-- Semantic/FRACTRAN cross-pollination is retained as a sidecar application of
+-- the same quotient discipline, not as the primary shortest-path frontier.
 import DASHI.Cognition.PNF.SemanticQueryResidualFibreSSSPBridgeExact
 import DASHI.Cognition.PNF.SemanticRelationSheetOrientationExact
 import DASHI.Cognition.PNF.SemanticQueryFractranCatalogueBridgeExact
