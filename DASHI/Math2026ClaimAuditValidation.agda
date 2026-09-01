@@ -47,6 +47,7 @@ open import DASHI.Analysis.RiemannG2HAProofCarryingRecoveryTraceExact
 open import DASHI.Analysis.RiemannG2HAConsumerFanoutPriorityExact
 open import DASHI.Analysis.RiemannG2HAConsumerWeightedRecoveryTraceExact
 open import DASHI.Analysis.RiemannG2HASourceProducerHyperedgeExact
+open import DASHI.Analysis.RiemannG2HASingleSourceProducerBidiExact
 open import DASHI.Mathematics.NumberTheory.PrimeGap2026ClaimAuditExact
 open import DASHI.Mathematics.NumberTheory.PrimeGap2026SourceAcquisitionExact
 open import DASHI.Mathematics.NumberTheory.DiophantineTupleDPrimeSquare2026ClaimAuditExact
