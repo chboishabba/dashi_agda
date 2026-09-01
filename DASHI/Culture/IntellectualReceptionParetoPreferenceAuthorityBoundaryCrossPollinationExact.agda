@@ -3,6 +3,7 @@ module DASHI.Culture.IntellectualReceptionParetoPreferenceAuthorityBoundaryCross
 open import DASHI.Core.Prelude
 
 import DASHI.Culture.IntellectualReceptionSemanticStabiliserParetoAuthorityCrossPollinationExact as Stabiliser
+import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as MDL
 import DASHI.Environment.LESResearchCrossPollinationExact as LES
 
 ------------------------------------------------------------------------
@@ -41,11 +42,9 @@ paretoFrontDoesNotChooseReceptionAction ()
 -- second notion of Pareto admissibility.
 paretoStillRequiresEligibleGenerator :
   ∀ {selected}
-    {costs : DASHI.Core.AdmissibleConsumerMDLHyperfabricExact.CostHyperfabric
-      Stabiliser.generatorEligibilityProblem} →
-  DASHI.Core.AdmissibleConsumerMDLHyperfabricExact.ParetoAdmissible costs selected →
-  DASHI.Core.AdmissibleConsumerMDLHyperfabricExact.Eligible
-    Stabiliser.generatorEligibilityProblem selected
+    {costs : MDL.CostHyperfabric Stabiliser.generatorEligibilityProblem} →
+  MDL.ParetoAdmissible costs selected →
+  MDL.Eligible Stabiliser.generatorEligibilityProblem selected
 paretoStillRequiresEligibleGenerator =
   Stabiliser.paretoEligibilityGateRetained
 
