@@ -13,10 +13,8 @@ module DASHI.Foundations.ExceptionalAlbertFreudenthalResidualExact where
 --   non-singlet Albert pair      = 27 + 27 = 54
 --   one-scalar reduced candidate = 1 + 26 + 26 = 53
 --
--- The arithmetic consequences are theorem-level.  The 53-dimensional object
--- is deliberately typed as a REDUCED CANDIDATE carrier, not as a named
--- irreducible representation of F4/E6/E7.  Promotion to an actual action
--- requires a quotient/restriction/intertwining receipt elsewhere.
+-- Arithmetic consequences are theorem-level.  The 53-dimensional object is a
+-- REDUCED CANDIDATE carrier, not a claimed named F4/E6/E7 irreducible.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -24,29 +22,15 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 
-------------------------------------------------------------------------
--- 1. Dimension ledger.
-------------------------------------------------------------------------
-
-albertDimension : Nat
+albertDimension tracelessAlbertDimension fFourDimension eSixDimension : Nat
 albertDimension = 27
-
-tracelessAlbertDimension : Nat
 tracelessAlbertDimension = 26
-
-fFourDimension : Nat
 fFourDimension = 52
-
-eSixDimension : Nat
 eSixDimension = 78
 
-freudenthalDimension : Nat
+freudenthalDimension albertPairDimension reducedAlbertPairDimension : Nat
 freudenthalDimension = 56
-
-albertPairDimension : Nat
 albertPairDimension = 54
-
-reducedAlbertPairDimension : Nat
 reducedAlbertPairDimension = 53
 
 albertSplitsScalarPlusTraceless : 27 ≡ 1 + 26
@@ -73,19 +57,12 @@ freudenthalIsTwoScalarPlusAlbertPair = refl
 freudenthalIsTwoPlusFiftyFour : 56 ≡ 2 + 54
 freudenthalIsTwoPlusFiftyFour = refl
 
-------------------------------------------------------------------------
--- 2. Minimal typed skeleton for J = 1 + J0 and a dual/conjugate pair.
-------------------------------------------------------------------------
-
 data ScalarLine : Set where
   scalarLine : ScalarLine
 
--- Abstract carrier: this file records the representation SHAPE, not an
--- implementation of octonionic multiplication.
 record AlbertCarrier : Set₁ where
   field
     J0 : Set
-
 open AlbertCarrier public
 
 Albert27 : AlbertCarrier → Set
@@ -94,52 +71,66 @@ Albert27 A = ScalarLine ⊎ J0 A
 record AlbertPairCarrier : Set₁ where
   field
     leftAlbert rightAlbert : AlbertCarrier
-
 open AlbertPairCarrier public
 
 AlbertPair54 : AlbertPairCarrier → Set
 AlbertPair54 pair = Albert27 (leftAlbert pair) ⊎ Albert27 (rightAlbert pair)
 
--- Remove one distinguished scalar line from the pair, leaving the other
--- scalar plus both traceless sectors.  This is the 53-candidate anatomy.
 ReducedAlbertPair53 : AlbertPairCarrier → Set
-ReducedAlbertPair53 pair =
-  J0 (leftAlbert pair) ⊎ Albert27 (rightAlbert pair)
+ReducedAlbertPair53 pair = J0 (leftAlbert pair) ⊎ Albert27 (rightAlbert pair)
 
-------------------------------------------------------------------------
--- 3. Promotion contract: an actual exceptional action must respect the same
---    54 carrier, the removed scalar, and the 53 residual inclusion.
-------------------------------------------------------------------------
+-- Typed Freudenthal carrier shape R + R + J + J.
+Freudenthal56 : AlbertPairCarrier → Set
+Freudenthal56 pair = ScalarLine ⊎ (ScalarLine ⊎ AlbertPair54 pair)
 
 record ExceptionalFiftyFourToFiftyThreeRecognition : Set₁ where
   field
     Actor Actual54 Actual53 : Set
     act54 : Actor → Actual54 → Actual54
     act53 : Actor → Actual53 → Actual53
-
     invariantScalar54 : Actual54
     invariantScalarFixed :
       (actor : Actor) → act54 actor invariantScalar54 ≡ invariantScalar54
-
     include53 : Actual53 → Actual54
     sameActionRestriction :
       (actor : Actor) → (state : Actual53) →
       include53 (act53 actor state) ≡ act54 actor (include53 state)
-
     AlbertPair : AlbertPairCarrier
     toAlbertPair54 : Actual54 → AlbertPair54 AlbertPair
     fromAlbertPair54 : AlbertPair54 AlbertPair → Actual54
     fromAfterTo54 : (state : Actual54) → fromAlbertPair54 (toAlbertPair54 state) ≡ state
     toAfterFrom54 : (state : AlbertPair54 AlbertPair) → toAlbertPair54 (fromAlbertPair54 state) ≡ state
-
     toReducedAlbert53 : Actual53 → ReducedAlbertPair53 AlbertPair
     fromReducedAlbert53 : ReducedAlbertPair53 AlbertPair → Actual53
     fromAfterTo53 : (state : Actual53) → fromReducedAlbert53 (toReducedAlbert53 state) ≡ state
     toAfterFrom53 : (state : ReducedAlbertPair53 AlbertPair) → toReducedAlbert53 (fromReducedAlbert53 state) ≡ state
 
-------------------------------------------------------------------------
--- 4. Scientific boundary.
-------------------------------------------------------------------------
+-- Ambient E7/Freudenthal-style promotion target.  It packages a single action
+-- through 56 -> 54 -> 53; neither reduction is inferred from dimension.
+record ExceptionalFreudenthalFiftySixReductionRecognition : Set₁ where
+  field
+    Actor Actual56 Actual54 Actual53 : Set
+    act56 : Actor → Actual56 → Actual56
+    act54 : Actor → Actual54 → Actual54
+    act53 : Actor → Actual53 → Actual53
+
+    AlbertPair : AlbertPairCarrier
+    toFreudenthal56 : Actual56 → Freudenthal56 AlbertPair
+    fromFreudenthal56 : Freudenthal56 AlbertPair → Actual56
+    fromAfterTo56 : (state : Actual56) → fromFreudenthal56 (toFreudenthal56 state) ≡ state
+    toAfterFrom56 : (state : Freudenthal56 AlbertPair) → toFreudenthal56 (fromFreudenthal56 state) ≡ state
+
+    include54 : Actual54 → Actual56
+    include53 : Actual53 → Actual54
+    sameAction56To54 :
+      (actor : Actor) → (state : Actual54) →
+      include54 (act54 actor state) ≡ act56 actor (include54 state)
+    sameAction54To53 :
+      (actor : Actor) → (state : Actual53) →
+      include53 (act53 actor state) ≡ act54 actor (include53 state)
+
+    twoAmbientScalars : Set
+    removedScalar54To53 : Set
 
 record ExceptionalResidualBoundary : Set where
   constructor exceptionalResidualBoundary
@@ -151,6 +142,7 @@ record ExceptionalResidualBoundary : Set where
     freudenthal56ShapeRecorded : Bool
     fiftyFourAsAlbertPairRecorded : Bool
     fiftyThreeAsOneScalarPlusTwo26CandidateRecorded : Bool
+    freudenthal56To54To53ActionInterfaceRecorded : Bool
     fiftyThreeDeclaredNamedExceptionalIrrepHere : Bool
     monsterResidualIdentifiedWithAlbertResidualHere : Bool
     cardinalAgreementPromotesAction : Bool
@@ -158,5 +150,5 @@ record ExceptionalResidualBoundary : Set where
 canonicalExceptionalResidualBoundary : ExceptionalResidualBoundary
 canonicalExceptionalResidualBoundary =
   exceptionalResidualBoundary
-    true true true true true true true
+    true true true true true true true true
     false false false
