@@ -32,6 +32,7 @@ FILES=(
   DASHI/Analysis/RiemannG2CutoffComplementCoordinateSeparationExact.agda
   DASHI/Analysis/RiemannG2QuarterPeriodPoleQuotientFinalCompilerExact.agda
   DASHI/Analysis/RiemannG2PoleQuotientProducerReconciliation8889Exact.agda
+  DASHI/Analysis/RiemannG2GapSplitClusteringLeanReturn8894Exact.agda
   DASHI/Analysis/RiemannG2QuarterPeriodAnalyticRouteReconciliationExact.agda
   DASHI/Analysis/RiemannG2GammaPrecisionLossLocalizationExact.agda
   DASHI/Analysis/RiemannG2CanonicalCharacterHighestAlphaReconciliationExact.agda
