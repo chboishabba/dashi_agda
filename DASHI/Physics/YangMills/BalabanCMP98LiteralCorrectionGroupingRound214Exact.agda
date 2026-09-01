@@ -9,16 +9,16 @@ module DASHI.Physics.YangMills.BalabanCMP98LiteralCorrectionGroupingRound214Exac
 --
 --   linearizedAverage = blockedMainTerm + linearizedAverageCorrection.
 --
--- The blocked main term is already the explicit CMP98-(125) owner.  Therefore
+-- The blocked main term is already the explicit CMP98-(125) owner. Therefore
 -- a source-exact Eq.(124) transcription for this implementation requires only
 -- one remaining equality: its combined correction equals the sum of the four
--- printed correction terms.  No separate main-term witness is accepted.
+-- printed correction terms. No separate main-term witness is accepted.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc; _*_)
 open import Data.Nat.Base using (NonZero)
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -97,18 +97,8 @@ literalLinearizedAverageIsEquation124
     (Linear.linearAverageRegularBackgroundPerturbation
       mainWeight correctionWeight rootOp junctionOp Y U A coarse axis)
     (trans
-      (cong₂ Lie.lieAdd
-        reflMain
-        (correctionGrouping audit coarse axis))
-      (symGrouped (R213.cmp98Equation124Grouped (sourceTerms audit coarse axis))))
-  where
-    reflMain :
-      Literal.su2BlockedLinearAverageMainTerm mainWeight U A coarse axis
-      ≡ Eq124.transportedBondAverage (sourceTerms audit coarse axis)
-    reflMain = Agda.Builtin.Equality.refl
-
-    symGrouped : ∀ {x y : Lie.SU2LieAlgebra} → x ≡ y → y ≡ x
-    symGrouped Agda.Builtin.Equality.refl = Agda.Builtin.Equality.refl
+      (cong₂ Lie.lieAdd refl (correctionGrouping audit coarse axis))
+      (sym (R213.cmp98Equation124Grouped (sourceTerms audit coarse axis))))
 
 cmp98LiteralCorrectionGroupingRound214Level : ProofLevel
 cmp98LiteralCorrectionGroupingRound214Level = machineChecked
