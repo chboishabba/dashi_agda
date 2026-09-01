@@ -9,3 +9,4 @@ import DASHI.Finance.DashiTradeFibreBridgeExact
 import DASHI.Finance.TradeRealizationSharpeAuthorityExact
 import DASHI.Finance.TradingPermissionActionRefinementExact
 import DASHI.Finance.TradingPermissionConsumerQuotientExact
+import DASHI.Finance.TradingControlPermissionSeparationExact
