@@ -19,6 +19,8 @@ import DASHI.Foundations.Base369MonsterSemanticCoordinateSystemExact as Semantic
 import DASHI.Foundations.Base369MonsterActionBraidSemanticAttachmentExact as BraidSemantic
 import DASHI.Moonshine.MonsterWeightTwoSemanticActionRealisationExact as WeightTwoAction
 import DASHI.Moonshine.Base369MonsterSemanticRepresentationBidiFrontierExact as SemanticBidi
+import DASHI.Moonshine.Monster3BFiniteSchrodingerDeltaOrbitTransitivityExact as DeltaOrbit
+import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact as Stone
 import DASHI.Combinatorics.TextileDependencyGrammarProcessExact as Process
 import DASHI.Combinatorics.ProofFabricLocalCompatibilityExact as Local
 import DASHI.Combinatorics.ProofFabricCompilerExact as Fabric
@@ -173,6 +175,19 @@ semanticResidual53Regression = SemanticBidi.residualDegreeMatchesSemanticResidua
 
 semanticMultiplicity90Regression : SemanticBidi.actualRestrictedMultiplicityDegree ≡ 90
 semanticMultiplicity90Regression = SemanticBidi.multiplicityDegreeIsNinety
+
+deltaOrbitBoundaryRegression : DeltaOrbit.DeltaOrbitTransitivityBoundary
+deltaOrbitBoundaryRegression = DeltaOrbit.canonicalDeltaOrbitTransitivityBoundary
+
+stoneFrontierBoundaryRegression : Stone.StoneVonNeumannFrontierBoundary
+stoneFrontierBoundaryRegression = Stone.canonicalStoneVonNeumannFrontierBoundary
+
+stoneAllDeltaOrbitLinesRegression : Stone.allDeltaOrbitLinesConstructed ≡ true
+stoneAllDeltaOrbitLinesRegression = Stone.allDeltaOrbitLinesConstructedIsTrue
+
+stoneHighestImpactIsDeltaBasisSpanning :
+  Stone.highestImpactStructuralLeaf ≡ Stone.proveDeltaBasisSpansCarrier
+stoneHighestImpactIsDeltaBasisSpanning = refl
 
 binaryLiftDoesNotProduceMidRegression :
   (level : Pareto.AxisLevel) →
