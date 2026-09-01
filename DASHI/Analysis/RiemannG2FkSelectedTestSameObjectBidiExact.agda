@@ -25,6 +25,9 @@ import DASHI.Analysis.RiemannG2FkOrbitExplicitFormulaWeldExact as Weld
 --   * the input of the same RiemannExplicitFormula spectralZeroForm.
 ------------------------------------------------------------------------
 
+≡-sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+≡-sym refl = refl
+
 record SelectedFkSameObjectWeld
     (space : Weil.WeilTestSpace)
     (formula : Explicit.RiemannExplicitFormula space)
@@ -52,6 +55,27 @@ record SelectedFkSameObjectWeld
     sameSourceOrbitReference : String
 
 open SelectedFkSameObjectWeld public
+
+------------------------------------------------------------------------
+-- Existing FkOrbitConsumerAttachment ALREADY pays this weld.
+------------------------------------------------------------------------
+
+fromConsumerAttachment :
+  ∀ {space formula orbit} →
+  (attachment : Orbit.FkOrbitConsumerAttachment space formula orbit) →
+  SelectedFkSameObjectWeld space formula orbit attachment
+fromConsumerAttachment attachment = record
+  { literalSelectedTest =
+      Orbit.FkOrbitConsumerAttachment.selectedPoleTest attachment
+  ; literalSelectedTestIsEmbeddedSourceSelection =
+      Orbit.FkOrbitConsumerAttachment.selectedPoleTestIsEmbeddedSourceSelection
+        attachment
+  ; literalSelectedTestIsAttachmentSelection = refl
+  ; literalSelectedAdmissible =
+      Orbit.FkOrbitConsumerAttachment.selectedPoleAdmissible attachment
+  ; sameSourceOrbitReference =
+      Orbit.FkOrbitConsumerAttachment.attachmentReference attachment
+  }
 
 ------------------------------------------------------------------------
 -- Paired observation from the SAME literal selected test.
@@ -116,7 +140,8 @@ sameTestExplicitFormulaEquality {formula = formula} same =
     (literalSelectedAdmissible same)
 
 ------------------------------------------------------------------------
--- Attach the existing near/far weld only after proving it uses this same test.
+-- The existing near/far weld is indexed by the same attachment, hence its
+-- selected test is definitionally the same selectedPoleTest used above.
 ------------------------------------------------------------------------
 
 record SameObjectNearFarAttachment
@@ -134,6 +159,14 @@ record SameObjectNearFarAttachment
 
 open SameObjectNearFarAttachment public
 
+nearFarFromConsumerAttachment :
+  ∀ {space formula orbit} →
+  (attachment : Orbit.FkOrbitConsumerAttachment space formula orbit) →
+  (nearFar : Weld.SelectedFkExplicitFormulaWeld space formula orbit attachment) →
+  SameObjectNearFarAttachment (fromConsumerAttachment attachment) nearFar
+nearFarFromConsumerAttachment attachment nearFar = record
+  { nearFarSelectedTestIsLiteralSelectedTest = refl }
+
 ------------------------------------------------------------------------
 -- Search pruning.
 ------------------------------------------------------------------------
@@ -144,14 +177,16 @@ data SameObjectFkPayment : Set where
   useDifferentTestForSpectralDecomposition
   weldLiteralSelectedTest
   attachNearFarToSameLiteralTest
+  recoverNearFarSpectralEquality
   : SameObjectFkPayment
 
 PaymentRelevant : SameObjectFkPayment → Set
 PaymentRelevant relateSourceAndWeilTestsByName = ⊥
 PaymentRelevant useDifferentTestForAdmissibility = ⊥
 PaymentRelevant useDifferentTestForSpectralDecomposition = ⊥
-PaymentRelevant weldLiteralSelectedTest = ⊤
-PaymentRelevant attachNearFarToSameLiteralTest = ⊤
+PaymentRelevant weldLiteralSelectedTest = ⊥
+PaymentRelevant attachNearFarToSameLiteralTest = ⊥
+PaymentRelevant recoverNearFarSpectralEquality = ⊤
 
 nameOnlyCorrespondencePruned :
   PaymentRelevant relateSourceAndWeilTestsByName → ⊥
@@ -165,6 +200,14 @@ secondSpectralTestPruned :
   PaymentRelevant useDifferentTestForSpectralDecomposition → ⊥
 secondSpectralTestPruned x = x
 
+literalSelectedTestWeldAlreadyCompiled :
+  PaymentRelevant weldLiteralSelectedTest → ⊥
+literalSelectedTestWeldAlreadyCompiled x = x
+
+nearFarSameObjectAttachmentAlreadyCompiled :
+  PaymentRelevant attachNearFarToSameLiteralTest → ⊥
+nearFarSameObjectAttachmentAlreadyCompiled x = x
+
 record SelectedFkSameObjectBoundary : Set where
   constructor selected-fk-same-object-boundary
   field
@@ -176,9 +219,17 @@ record SelectedFkSameObjectBoundary : Set where
     oneLiteralSelectedTestCarriesBothFormulaObservationsIsTrue :
       oneLiteralSelectedTestCarriesBothFormulaObservations ≡ true
 
-    sameObjectNearFarAttachmentStillRequired : Bool
-    sameObjectNearFarAttachmentStillRequiredIsTrue :
-      sameObjectNearFarAttachmentStillRequired ≡ true
+    sameObjectWeldAlreadyFollowsFromConsumerAttachment : Bool
+    sameObjectWeldAlreadyFollowsFromConsumerAttachmentIsTrue :
+      sameObjectWeldAlreadyFollowsFromConsumerAttachment ≡ true
+
+    nearFarSameObjectAttachmentAlreadyFollows : Bool
+    nearFarSameObjectAttachmentAlreadyFollowsIsTrue :
+      nearFarSameObjectAttachmentAlreadyFollows ≡ true
+
+    nearFarSpectralEqualityStillRequired : Bool
+    nearFarSpectralEqualityStillRequiredIsTrue :
+      nearFarSpectralEqualityStillRequired ≡ true
 
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
@@ -191,5 +242,7 @@ canonicalSelectedFkSameObjectBoundary =
     false refl
     true refl
     true refl
+    true refl
+    true refl
     false refl
-    "Use the Moonshine same-element lesson literally: the selected checked-source fk/window object, Weil admissibility, arithmeticForm and spectralZeroForm must all meet on one literal Agda Test. Do not prove source provenance on one embedded test and the near/far spectral decomposition on another merely corresponding test. Once the same-object weld is inhabited, the canonical explicitFormula theorem relates the arithmetic and spectral observations automatically; the remaining zero-side payment is to attach the same cluster/finite-near/far decomposition to that literal selected test. RH remains open."
+    "Use the Moonshine same-element lesson literally: source provenance, Weil admissibility, arithmeticForm and spectralZeroForm meet on one literal selected Agda Test. The existing FkOrbitConsumerAttachment already constructs that same-object weld, and any SelectedFkExplicitFormulaWeld indexed by the same attachment automatically uses the same selected test. Therefore neither same-object welding nor near/far test identity is a live payment anymore. The remaining zero-side payment is the substantive same-formula equality spectralZeroForm(selectedPoleTest) = same-ordinate cluster + finite signed near response + the same far remainder. RH remains open."
