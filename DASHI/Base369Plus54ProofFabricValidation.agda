@@ -6,6 +6,8 @@ import DASHI.Algebra.Trit as Trit
 import DASHI.Foundations.Base369Completion54SituatedTriadBridgeExact as Completion
 import DASHI.Foundations.Base369SharedNonaryIdentityTransportExact as SharedJ
 import DASHI.Foundations.Base369StableAlgebraicIdentityTowerExact as Stable
+import DASHI.Foundations.Base369MonsterNamedIdentityRegistryExact as Registry
+import DASHI.Foundations.Base369JCoarseFineStableIdentityDisciplineExact as JIdentity
 import DASHI.Combinatorics.TextileDependencyGrammarProcessExact as Process
 import DASHI.Combinatorics.ProofFabricLocalCompatibilityExact as Local
 import DASHI.Combinatorics.ProofFabricCompilerExact as Fabric
@@ -87,6 +89,30 @@ stable196830CarrierIsoRegression :
     Stable.BulkFive54Appraisal
 stable196830CarrierIsoRegression = Stable.monsterBulkIsFiveBy54By729
 
+namedDecision27Regression :
+  Stable.CarrierIso Stable.Base27 Registry.DecisionCondition27
+namedDecision27Regression = Registry.decision27IsBase27
+
+namedMonsterStateRegression :
+  Stable.CarrierIso
+    Stable.BulkFive54Appraisal
+    Registry.NamedMonsterDecisionState196830
+namedMonsterStateRegression = Registry.namedMonsterDecisionIso
+
+cornerEightRegression : Registry.cornerCarrierCount ≡ 8
+cornerEightRegression = refl
+
+cornerEightMatchesVoxelRegression :
+  Registry.cornerCarrierCount
+  ≡ DASHI.Foundations.Base369Ternary27HypervoxelStratificationExact.cornerCount
+cornerEightMatchesVoxelRegression = Registry.cornerCountAgreesWithExistingStratum
+
+jCoarseCountRegression : DASHI.Biology.JFineCoarseRelativeScaleExact.jCoarseFrequency ≡ 9
+jCoarseCountRegression = JIdentity.jCoarseCountPinned
+
+jFineCountRegression : DASHI.Biology.JFineCoarseRelativeScaleExact.jFineFrequency ≡ 19683
+jFineCountRegression = JIdentity.jFineCountPinned
+
 binaryLiftDoesNotProduceMidRegression :
   (level : Pareto.AxisLevel) →
   Completion.axisLevelToTri level ≡ Base.tri-mid → ⊥
@@ -109,6 +135,12 @@ sharedNonaryBoundaryRegression = SharedJ.canonicalBase369SharedNonaryIdentityBou
 
 stableIdentityBoundaryRegression : Stable.StableAlgebraicIdentityBoundary
 stableIdentityBoundaryRegression = Stable.canonicalStableAlgebraicIdentityBoundary
+
+namedIdentityBoundaryRegression : Registry.NamedMonsterMeaningBoundary
+namedIdentityBoundaryRegression = Registry.canonicalNamedMonsterMeaningBoundary
+
+jIdentityBoundaryRegression : JIdentity.JCoarseFineIdentityBoundary
+jIdentityBoundaryRegression = JIdentity.canonicalJCoarseFineIdentityBoundary
 
 processBoundaryRegression : Process.TextileDependencyGrammarProcessBoundary
 processBoundaryRegression = Process.canonicalTextileDependencyGrammarProcessBoundary
