@@ -14,6 +14,7 @@ import DASHI.Physics.YangMills.BalabanFiniteQuotientTerminalSupersessionRound198
 import DASHI.Physics.YangMills.BalabanRootedQuotientHamiltonianDescentRound199Exact as R199
 import DASHI.Physics.YangMills.BalabanBasedGaugeActionGroupoidRound200Exact as R200
 import DASHI.Physics.YangMills.BalabanRootedHamiltonianGaugeFunctorRound201Exact as R201
+import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionHamiltonianRound202Exact as R202
 
 round189PathHomomorphism = R189.cmp98RawUnitPathHomomorphismRound189Level
 round190BoundarySupersession = R190.cmp98ClayBoundarySupersessionRound190Level
@@ -57,7 +58,7 @@ round195CoarseEndpointsAreRoot =
 round195IdentityIsPhysicalUnit =
   R195.literalCMP109Equation012IdentityIsPhysicalUnitRound195Level
 
--- Concrete set-level quotient normal form.
+-- Concrete set-level rooted normal form remains authoritative.
 round196FinitePhysicalGaugeQuotientCarrier =
   R196.finitePhysicalGaugeQuotientCarrierRound196Level
 round196FiniteGaugeQuotientIdempotence =
@@ -67,54 +68,47 @@ round196FiniteGaugeQuotientUniqueness =
 round196FiniteGaugeQuotientSelectedFibreCompatibility =
   R196.finitePhysicalGaugeQuotientSelectedFibreCompatibilityRound196Level
 
--- Finite selected-ensemble observable pairing, not a finiteness claim for the
--- full compact-group configuration quotient.
-round197FiniteSelectedEnsemblePairing =
+-- R197/R198 are retained as historical finite-selected-ensemble experiments.
+-- They do not define the physical Hamiltonian carrier.  In particular, the
+-- full compact-group configuration quotient is not asserted finite.
+round197HistoricalFiniteSelectedEnsemblePairing =
   R197.finiteRootedGaugeQuotientL2PairingRound197Level
-round197FiniteSelectedEnsembleDefiniteness =
+round197HistoricalFiniteSelectedEnsembleDefiniteness =
   R197.finiteRootedGaugeQuotientL2DefinitenessRound197Level
-
--- Historical finite-carrier absence is superseded theorem-wise while old Bool
--- receipt state remains historical.
 round198FiniteRepresentativeCarrierConstructed =
   R198.finiteGaugeOrbitRepresentativeCarrierNowConstructedRound198Level
-round198FiniteSelectedPairingDefinite =
-  R198.finiteSelectedEnsemblePairingNowDefiniteRound198Level
 
-round198PhysicalInvariantMeasure =
-  R198.literalPhysicalInvariantHaarGibbsMeasureRound198Level
-round198PhysicalQuotientL2Completion =
-  R198.literalPhysicalGaugeQuotientL2HilbertCompletionRound198Level
+-- Historical R199-R201 field-endomorphism Hamiltonian plumbing is also kept in
+-- the audit graph but is superseded by R202.  A physical Hamiltonian acts on
+-- wavefunctions/observables over configuration space, not as U -> H(U).
+round199HistoricalFieldEndomorphismDescent =
+  R199.rootedQuotientHamiltonianDescentRound199Level
+round200BasedGaugeActionGroupoid =
+  R200.basedGaugeActionGroupoidRound200Level
+round201HistoricalFieldHamiltonianFunctor =
+  R201.rootedHamiltonianGaugeFunctorRound201Level
+
+-- Correct terminal carrier from R202: scalar wavefunctions on raw gauge fields
+-- with theorem-bearing based-gauge invariance.  Evaluation on the R196 rooted
+-- normal form is proof-witness independent, and any operator whose codomain is
+-- the same invariant function space descends at evaluation level automatically.
+round202GaugeInvariantWavefunctionCarrier =
+  R202.basedGaugeInvariantWavefunctionCarrierRound202Level
+round202RootedQuotientEvaluation =
+  R202.rootedQuotientWavefunctionEvaluationRound202Level
+round202OperatorNormalizationHandoff =
+  R202.wavefunctionHamiltonianNormalizationHandoffRound202Level
+
+-- Current physical analytic leaves.
+round202PhysicalGaugeInvariantL2Measure =
+  R202.literalPhysicalGaugeInvariantL2MeasureRound202Level
+round202FiniteYMHamiltonianOnWavefunctions =
+  R202.literalFiniteYMHamiltonianOnGaugeInvariantWavefunctionsRound202Level
+round202FiniteYMHamiltonianSelfAdjointness =
+  R202.literalFiniteYMHamiltonianSymmetricSelfAdjointRound202Level
 round198FiniteToContinuumCarrierMaps =
   R198.literalFiniteToContinuumPhysicalCarrierMapsRound198Level
 round198ProjectionVacuumCompatibility =
   R198.literalPhysicalProjectionAndVacuumSectorCompatibilityRound198Level
-
--- Hamiltonian descent is now a normal-form compiler.  R199 needs preservation
--- of the rooted slice and normalization commutation; R200 supplies the based
--- gauge-action groupoid; R201 derives normalization commutation from the
--- stronger and more physical statement that H maps based gauge arrows.
-round199RootedQuotientHamiltonianDescent =
-  R199.rootedQuotientHamiltonianDescentRound199Level
-round199NormalizationHandoff =
-  R199.rootedQuotientHamiltonianNormalizationHandoffRound199Level
-
-round200BasedGaugeActionGroupoid =
-  R200.basedGaugeActionGroupoidRound200Level
-round200GaugeActionComposition =
-  R200.gaugeActionCompositionRound200Level
-round200GaugeActionInverse =
-  R200.gaugeActionInverseRound200Level
-
-round201HamiltonianGaugeFunctorCompiler =
-  R201.rootedHamiltonianGaugeFunctorRound201Level
-round201NormalizationDerived =
-  R201.rootedHamiltonianNormalizationDerivedRound201Level
-
--- Strongest live finite-H seam after quotient machinery is generated.
-round201FiniteHamiltonianGaugeArrowFunctor =
-  R201.literalFiniteYMHamiltonianGaugeArrowFunctorRound201Level
-round201FiniteHamiltonianRootedPreservation =
-  R201.literalFiniteYMHamiltonianRootedSlicePreservationRound201Level
 
 round191TerminalClayWall = R191.literalTerminalClayCompositionTheoremRound191Level
