@@ -21,6 +21,7 @@ import DASHI.Physics.YangMills.BalabanFiniteMeasureWavefunctionL2BridgeRound205E
 import DASHI.Physics.YangMills.BalabanFiniteMeasureIBPWavefunctionSymmetryRound206Exact as R206
 import DASHI.Physics.YangMills.BalabanFederbushRationalLieToRealSU2CarrierRound207Exact as R207
 import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as R208
+import DASHI.Physics.YangMills.BalabanNullQuotientHamiltonianDescentRound209Exact as R209
 
 round189PathHomomorphism = R189.cmp98RawUnitPathHomomorphismRound189Level
 round190BoundarySupersession = R190.cmp98ClayBoundarySupersessionRound190Level
@@ -62,10 +63,8 @@ round207FederbushCoordinateExact =
 round207FederbushFirstDerivativeIsQSource =
   R207.literalFederbushFirstDerivativeIsEquation119QSourceRound207Level
 
--- R208 additionally proves exact 3x3 matrix-action transport on every embedded
--- rational Lie vector, assuming the standard multiplicative embedding law.
--- Equality on this rational image is deliberately not promoted to equality of
--- operators on the complete real SU(2) carrier without an extension theorem.
+-- R208 proves exact 3x3 matrix-action transport on every embedded rational Lie
+-- vector.  It does not promote rational-image equality to full-real equality.
 round208FederbushRationalMatrixRealImage =
   R208.federbushRationalMatrixRealImageRound208Level
 round208RationalRealMultiplicativeEmbedding =
@@ -128,18 +127,22 @@ round202RootedQuotientEvaluation =
 round202OperatorNormalizationHandoff =
   R202.wavefunctionHamiltonianNormalizationHandoffRound202Level
 
--- R205 cross-pollinates the existing finite-measure/expectation architecture
--- into the corrected R202 function-space carrier. It does not infer square
--- positivity/null semantics from an opaque `Positive measure` label.
+-- R205 now has genuine null-quotient semantics: zero norm means equivalence to
+-- an explicit zero wavefunction, NullEquivalent is an equivalence relation,
+-- and the pairing is congruent in each argument under that relation.
 round205FiniteMeasureWavefunctionL2Bridge =
   R205.finiteMeasureWavefunctionL2BridgeRound205Level
+round205NullSemantics =
+  R205.finiteMeasureWavefunctionNullSemanticsRound205Level
+round205QuotientPairing =
+  R205.finiteMeasureWavefunctionQuotientPairingRound205Level
 round205LiteralFiniteMeasureExpectationSemantics =
   R205.literalBalabanFiniteMeasureExpectationSemanticsRound205Level
 round205LiteralFiniteMeasureL2Completion =
   R205.literalBalabanFiniteMeasureL2CompletionRound205Level
 
--- R206 consumes the repository's theorem-bearing selected finite IBP identity
--- directly on R205's same-measure pairing. Symmetry is not self-adjointness.
+-- R206 consumes the theorem-bearing selected finite IBP identity directly on
+-- R205's same-measure pairing. Symmetry is not self-adjointness.
 round206FiniteMeasureIBPWavefunctionSymmetry =
   R206.finiteMeasureIBPWavefunctionSymmetryRound206Level
 round206PhysicalHamiltonianAsSelectedActionVariation =
@@ -150,6 +153,17 @@ round206PhysicalBoundaryConvention =
   R206.literalPhysicalBoundaryConventionRound206Level
 round206FiniteMeasureHamiltonianSelfAdjointness =
   R206.literalFiniteMeasureHamiltonianSelfAdjointnessRound206Level
+
+-- R209 reduces quotient descent of H to preservation of the same measure-null
+-- relation.  Completion/domain/self-adjointness remain later analytic steps.
+round209NullQuotientHamiltonianDescent =
+  R209.nullQuotientHamiltonianDescentRound209Level
+round209NullQuotientPairingWellDefined =
+  R209.nullQuotientPairingWellDefinedRound209Level
+round209PhysicalHamiltonianPreservesNull =
+  R209.literalFiniteYMHamiltonianPreservesMeasureNullRound209Level
+round209L2CompletionAndSelfAdjointness =
+  R209.literalNullQuotientL2CompletionAndSelfAdjointnessRound209Level
 
 round202PhysicalGaugeInvariantL2Measure =
   R202.literalPhysicalGaugeInvariantL2MeasureRound202Level
