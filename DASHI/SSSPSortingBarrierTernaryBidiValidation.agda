@@ -1,0 +1,3 @@
+module DASHI.SSSPSortingBarrierTernaryBidiValidation where
+
+import DASHI.Computation.SSSPSortingBarrierTernaryBidiExact
