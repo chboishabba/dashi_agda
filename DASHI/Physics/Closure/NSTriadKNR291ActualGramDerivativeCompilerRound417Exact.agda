@@ -15,7 +15,7 @@ module DASHI.Physics.Closure.NSTriadKNR291ActualGramDerivativeCompilerRound417Ex
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; _+_; _*_)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
