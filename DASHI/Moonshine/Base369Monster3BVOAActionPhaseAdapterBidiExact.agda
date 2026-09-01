@@ -25,7 +25,6 @@ module DASHI.Moonshine.Base369Monster3BVOAActionPhaseAdapterBidiExact where
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Empty using (⊥)
 
 import DASHI.Moonshine.GradedRepresentation as GR
 import DASHI.Moonshine.VertexOperatorAlgebraCore as VOA
@@ -52,19 +51,6 @@ phaseZetaIsZeta = refl
 phaseZetaSquaredIsZetaSquared :
   phaseCyclotomic Inertia.phaseZetaSquared ≡ C3.zetaSquared
 phaseZetaSquaredIsZetaSquared = refl
-
--- `zero` belongs to the same amplitude algebra but is not in the image of the
--- three-phase chart.  This makes the user's remembered zeta/zeta^2/0 cluster
--- precise without turning trace/additive zero into an eigenphase.
-zeroIsNotPhaseOne : C3.zero ≡ phaseCyclotomic Inertia.phaseOne → ⊥
-zeroIsNotPhaseOne ()
-
-zeroIsNotPhaseZeta : C3.zero ≡ phaseCyclotomic Inertia.phaseZeta → ⊥
-zeroIsNotPhaseZeta ()
-
-zeroIsNotPhaseZetaSquared :
-  C3.zero ≡ phaseCyclotomic Inertia.phaseZetaSquared → ⊥
-zeroIsNotPhaseZetaSquared ()
 
 ------------------------------------------------------------------------
 -- 2. Carrier aliases from the existing Moonshine VOA owner.
