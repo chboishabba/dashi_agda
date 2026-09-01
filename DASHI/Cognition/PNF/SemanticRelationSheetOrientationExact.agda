@@ -9,7 +9,7 @@ module DASHI.Cognition.PNF.SemanticRelationSheetOrientationExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import DASHI.Algebra.Trit using (Trit; neg; zer; pos; inv)
+open import DASHI.Algebra.Trit using (Trit; neg; zer; pos; inv; inv-invol)
 
 ------------------------------------------------------------------------
 -- 1. Three typed semantic positions and their full relation sheet.
@@ -63,16 +63,17 @@ transposeInvolutive (semanticRelationSheet3 a b c d e f g h i) = refl
 
 invertSheetInvolutive :
   (s : SemanticRelationSheet3) → invertSheet (invertSheet s) ≡ s
-invertSheetInvolutive
-  (semanticRelationSheet3 neg neg neg neg neg neg neg neg neg) = refl
-invertSheetInvolutive
-  (semanticRelationSheet3 neg neg neg neg neg neg neg neg zer) = refl
-invertSheetInvolutive
-  (semanticRelationSheet3 neg neg neg neg neg neg neg neg pos) = refl
-invertSheetInvolutive
-  (semanticRelationSheet3 a b c d e f g h i) with a | b | c | d | e | f | g | h | i
-... | neg | neg | neg | neg | neg | neg | neg | neg | neg = refl
-... | _ | _ | _ | _ | _ | _ | _ | _ | _ = refl
+invertSheetInvolutive (semanticRelationSheet3 a b c d e f g h i)
+  rewrite inv-invol a
+        | inv-invol b
+        | inv-invol c
+        | inv-invol d
+        | inv-invol e
+        | inv-invol f
+        | inv-invol g
+        | inv-invol h
+        | inv-invol i
+  = refl
 
 ------------------------------------------------------------------------
 -- 3. Antisymmetric oriented semantic sheet.
