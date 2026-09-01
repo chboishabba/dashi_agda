@@ -2,6 +2,7 @@ module DASHI.Base369Plus54ProofFabricValidation where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Algebra.Trit as Trit
 import DASHI.Foundations.Base369Completion54SituatedTriadBridgeExact as Completion
 import DASHI.Combinatorics.TextileDependencyGrammarProcessExact as Process
 import DASHI.Combinatorics.ProofFabricLocalCompatibilityExact as Local
@@ -48,7 +49,7 @@ proofReservedTileRejectedRegression :
 proofReservedTileRejectedRegression = Local.reservedTileCannotType
 
 proofCompiledStreamTypedRegression :
-  (stream : List DASHI.Algebra.Trit.Trit) →
+  (stream : List Trit.Trit) →
   Local.LocallyCompatibleFabric (Fabric.compileTritStream stream)
 proofCompiledStreamTypedRegression = Local.compiledTritStreamLocallyCompatible
 
