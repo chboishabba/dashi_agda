@@ -10,14 +10,14 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation124QSourceRound214Validation 
 -- executable nested-radial correction is not by construction the sum of all
 -- four printed Eq.(124) residual families.
 --
--- Canonical qSource authority therefore moves to R215/R216:
+-- Canonical qSource authority moves to R215/R216:
 --   Eq.(119) exact path operator
 --     -> linear content of Eq.(120)
 --     -> Q(V0) by definition (121)
 --     -> Path13 source with NO caller-supplied qSource.
--- R217 then splits the surviving physical/source identification into the
--- existing selected-background, selected-cut, Federbush-Y, and perturbation-
--- coordinate receipts instead of one opaque semantic flag.
+-- R217 decomposes source semantics; R218 then performs repository archaeology
+-- and prunes the already-owned principal-Y, cut-radius and path-realization
+-- coordinates, leaving only two live same-object source receipts.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanSU2CMP98Equation124 as Eq124
@@ -29,6 +29,7 @@ import DASHI.Physics.YangMills.BalabanCMP98LiteralCorrectionGroupingRound214Exac
 import DASHI.Physics.YangMills.BalabanCMP98Equation120QSourceRecoveryRound215Exact as R215
 import DASHI.Physics.YangMills.BalabanCMP98Path13Equation120DerivedQSourceRound216Exact as R216
 import DASHI.Physics.YangMills.BalabanCMP98Equation120SelectedSemanticsRound217Exact as R217
+import DASHI.Physics.YangMills.BalabanCMP98Equation120RecoveredSourceFrontierRound218Exact as R218
 
 -- Independent source/executable diagnostic owners.
 sourceEquation124TranscriptionOwner = Eq124.cmp98LinearizationSourceExact
@@ -66,9 +67,6 @@ round215Equation119Preserved =
 round215SelectedPathSemanticsHistoricalAggregate =
   R215.literalCMP98Equation120SelectedPathSemanticsRound215Level
 
--- Strongest Path13-facing route: qSource is absent from the physical input
--- record and is generated from Eq.(120) before the ordinary R193 consumer is
--- constructed.
 round216Path13DerivedQSource =
   R216.cmp98Path13Equation120DerivedQSourceRound216Level
 round216SamePhysicalRealization =
@@ -76,18 +74,24 @@ round216SamePhysicalRealization =
 round216SelectedSourceSemanticsHistoricalAggregate =
   R216.literalCMP98Path13Equation120SelectedSemanticsRound216Level
 
--- R217 replaces the broad selected-semantics wording by explicit receipts.
+-- R217 is the structured audit that exposed which subreceipts to search.
 round217SelectedSemanticsStructure =
   R217.cmp98Equation120SelectedSemanticsRound217Level
 round217SelectedBackgroundReuse =
   R217.cmp98Equation120SelectedBackgroundReuseRound217Level
 round217SelectedFederbushReuse =
   R217.cmp98Equation120SelectedFederbushReuseRound217Level
-round217LiteralSelectedBackgroundWeld =
-  R217.literalCMP98SelectedBackgroundWeldRound217Level
-round217LiteralSelectedCutRadius =
-  R217.literalCMP98SelectedCutRadiusRound217Level
-round217LiteralPrincipalYFederbushIdentification =
-  R217.literalCMP98PrincipalYFederbushIdentificationRound217Level
-round217LiteralPerturbationCoordinates =
-  R217.literalCMP98PerturbationCoordinateSemanticsRound217Level
+
+-- R218 is the current source frontier after following R179/R181/R187/R189/R192.
+round218RecoveredSourceFrontier =
+  R218.cmp98Equation120RecoveredSourceFrontierRound218Level
+round218PrincipalYPruned =
+  R218.cmp98PrincipalYFrontierPrunedRound218Level
+round218SelectedCutRadiusPruned =
+  R218.cmp98SelectedCutRadiusFrontierPrunedRound218Level
+round218PathRealizationPruned =
+  R218.cmp98PathRealizationFrontierPrunedRound218Level
+round218Path13SelectedPhysicalBackgroundSameObject =
+  R218.literalCMP98Path13SelectedPhysicalBackgroundSameObjectRound218Level
+round218PerturbationCoordinateSemantics =
+  R218.literalCMP98PerturbationCoordinateSemanticsRound218Level
