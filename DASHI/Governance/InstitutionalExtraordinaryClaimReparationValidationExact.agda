@@ -12,6 +12,7 @@ import DASHI.Governance.AnomalousConsciousnessResearchEvidenceContinuumExact as 
 import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
 import DASHI.Governance.AnomalousPhenomenonTemporalEvidenceTrajectoriesExact as Trajectory
 import DASHI.Governance.PhenomenonEvidenceLadderProjectionOverTimeExact as Ladder
+import DASHI.Governance.AnomalousResearchPriorityFromTemporalFibreExact as Priority
 
 repairBoundary : Fibre.DrugGovernanceMultiAxisReparativeBoundary
 repairBoundary = Fibre.canonicalDrugGovernanceMultiAxisReparativeBoundary
@@ -31,6 +32,8 @@ trajectoryBoundary : Trajectory.AnomalousPhenomenonTemporalEvidenceBoundary
 trajectoryBoundary = Trajectory.canonicalAnomalousPhenomenonTemporalEvidenceBoundary
 ladderBoundary : Ladder.PhenomenonEvidenceLadderProjectionBoundary
 ladderBoundary = Ladder.canonicalPhenomenonEvidenceLadderProjectionBoundary
+priorityBoundary : Priority.AnomalousResearchPriorityTemporalBoundary
+priorityBoundary = Priority.canonicalAnomalousResearchPriorityTemporalBoundary
 
 materialRepairProbeReallySeparates :
   Discriminator.BundleSeparates (Planner.probeFor Planner.materialRepairConsumer)
@@ -84,3 +87,16 @@ sameCoarsePsilocybinLabelHidesReplicationChange :
   ≡ Ladder.standingAt Trajectory.psilocybinMeta2025_2026 Temporal.independentReplication → ⊥
 sameCoarsePsilocybinLabelHidesReplicationChange =
   Ladder.psilocybinReplicationCoordinateChanged
+
+bemResearchQuestionChangesWithHistory :
+  Priority.bemQuestion Priority.bemEarlyResearch
+  ≡ Priority.bemQuestion Priority.bemCurrentResearch → ⊥
+bemResearchQuestionChangesWithHistory = Priority.bemQuestionChanged
+
+psilocybinCurrentPriorityTargetsControl :
+  Priority.unresolvedCoordinate Priority.psilocybinCurrentMove ≡ Temporal.controlStrength
+psilocybinCurrentPriorityTargetsControl = refl
+
+ndeCurrentPriorityTargetsMechanism :
+  Priority.unresolvedCoordinate Priority.ndeCurrentMove ≡ Temporal.mechanismDiscrimination
+ndeCurrentPriorityTargetsMechanism = refl
