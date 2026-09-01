@@ -1,15 +1,16 @@
 module DASHI.Cognition.PNF.ContextualFractranArgumentTransportExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Core.ArgumentObstructionCore as Argument
 import DASHI.Cognition.PNF.ContextualFractranOccurrenceHyperfabricExact as Context
+import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 
 ------------------------------------------------------------------------
--- Cheap trit/prime inversion is not generic argument inversion.  An argument
--- is already a governed transport object with rule, evidence, context, time,
--- meaning, cause and modality.  Reciprocal FRACTRAN transport can therefore be
--- only the orientation component of a candidate reverse argument.
+-- Cheap trit/prime inversion is not generic argument inversion. An argument is
+-- governed transport with rule, evidence, context, time, meaning, cause and
+-- modality. Reciprocal FRACTRAN transport can only reverse its phase component.
 ------------------------------------------------------------------------
 
 record ArgumentPhaseProjection (core : Argument.ArgumentCore) : Set₁ where
@@ -28,11 +29,10 @@ record CandidateArgumentReverse (core : Argument.ArgumentCore) : Set₁ where
     before : ArgumentPhaseProjection core
     reversedPhase : Context.ContextualValuation
     phaseIsNegated :
-      (prime : _) →
+      (prime : Signed.SSPPrime) →
       reversedPhase prime ≡ Context.negateValuation (phaseValuation before) prime
 
-    -- The new governed-transport obligations are explicit sockets.  Nothing in
-    -- sign reversal manufactures them.
+    -- Sign reversal manufactures none of these governed-transport obligations.
     ReverseRule : Set
     ReverseReceipt : Set
     ReverseContext : Set
