@@ -25,6 +25,7 @@ import DASHI.Physics.YangMills.BalabanNullQuotientHamiltonianDescentRound209Exac
 import DASHI.Physics.YangMills.BalabanFederbushCanonicalRealMatrixExtensionRound210Exact as R210
 import DASHI.Physics.YangMills.BalabanCMP98Equation124QSourceRecoveryRound211Exact as R211
 import DASHI.Physics.YangMills.BalabanMeasureNullCanonicalQuotientHamiltonianRound212Exact as R212
+import DASHI.Physics.YangMills.BalabanWeakPairingSeparatesNullHamiltoniansRound213Exact as R213
 
 round189PathHomomorphism = R189.cmp98RawUnitPathHomomorphismRound189Level
 round190BoundarySupersession = R190.cmp98ClayBoundarySupersessionRound190Level
@@ -175,6 +176,23 @@ round212LiteralBalabanCanonicalNullQuotient =
   R212.literalBalabanMeasureNullCanonicalQuotientRound212Level
 round212LiteralHilbertCompletion =
   R212.literalBalabanNullQuotientHilbertCompletionRound212Level
+
+-- R213 is the Aristotle-style consumer/separation cut: do not reconstruct two
+-- full operators when the terminal quotient consumer only needs their null
+-- classes.  If the SAME physical pairing separates null classes, equality of
+-- all weak matrix elements forces the two R209 operators to induce the same
+-- R212 descended Hamiltonian pointwise.  Stone uniqueness then remains a
+-- standard same-action theorem after completion/domain/strong continuity.
+round213WeakPairingSeparatesNullHamiltonians =
+  R213.weakPairingSeparatesNullHamiltoniansRound213Level
+round213WeakPairingDeterminesDescendedHamiltonian =
+  R213.weakPairingDeterminesDescendedHamiltonianRound213Level
+round213LiteralBalabanPairingSeparatesNullClasses =
+  R213.literalBalabanPairingSeparatesMeasureNullClassesRound213Level
+round213LiteralStoneYMWeakPairingEquality =
+  R213.literalPhysicalStoneYMWeakGeneratorPairingEqualityRound213Level
+round213StoneSameActionGeneratorIdentification =
+  R213.stoneYMGeneratorIdentificationAfterSameActionRound213Level
 
 round202PhysicalGaugeInvariantL2Measure =
   R202.literalPhysicalGaugeInvariantL2MeasureRound202Level
