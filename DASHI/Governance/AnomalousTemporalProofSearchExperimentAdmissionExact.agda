@@ -57,8 +57,7 @@ coordinateOf psilocybinExpectancyControlStudy = Temporal.controlStrength
 coordinateOf ndeTimeLockedRealityTest = Temporal.mechanismDiscrimination
 
 readCoordinate : ExperimentCoordinate → ExperimentWorld → ExperimentalValue
-readCoordinate (targetedEvidenceCoordinate axis) world with coordinateOf (candidate world)
-... | chosenAxis = unresolvedOutcome
+readCoordinate _ _ = unresolvedOutcome
 
 applyControl : ExperimentControl → ExperimentWorld → ExperimentWorld
 applyControl applyDeclaredProtocol world = world
