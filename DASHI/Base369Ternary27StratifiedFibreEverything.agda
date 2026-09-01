@@ -105,6 +105,12 @@ import DASHI.Moonshine.Base369Monster3BActualActionRecognitionBidiExact
 -- eigenspace rather than two separately recovered objects.
 import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact
 
+-- Repo-native realization of that recovery surface: reuse the Moonshine VOA
+-- graded-module Carrier and Monster VOA action directly.  Exact 1/zeta/zeta^2
+-- amplitudes come from the existing cyclotomic owner; zero remains a separate
+-- additive/character-vanishing datum rather than a fourth eigenphase.
+import DASHI.Moonshine.Base369Monster3BVOAActionPhaseAdapterBidiExact
+
 -- Same-action continuation: the literal Fin 90 coordinate is already owned by
 -- the actual evaluation isomorphism.  The next representation-theoretic leaf
 -- is therefore the actual inertia action on that exact coordinate, followed by
@@ -113,6 +119,7 @@ import DASHI.Moonshine.Base369Monster3BMultiplicityInertiaTwelveSeventyEightBidi
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound2Exact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound3Exact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound4Exact
+import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound5Exact
 
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact
 
