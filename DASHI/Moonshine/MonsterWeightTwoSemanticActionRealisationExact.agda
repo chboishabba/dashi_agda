@@ -43,8 +43,8 @@ groupActionOnVectors :
   {representation : GR.FiniteDimensionalRepresentation G K group} →
   EndomorphismEvaluation group representation →
   G → GR.V representation → GR.V representation
-groupActionOnVectors evaluation g v =
-  applyEnd evaluation (GR.action _ g) v
+groupActionOnVectors {representation = representation} evaluation g v =
+  applyEnd evaluation (GR.action representation g) v
 
 groupIdentityActsOnVectors :
   {G K : Set} →
