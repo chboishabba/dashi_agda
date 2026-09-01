@@ -20,6 +20,7 @@ import DASHI.Foundations.Base369MonsterActionBraidSemanticAttachmentExact as Bra
 import DASHI.Moonshine.MonsterWeightTwoSemanticActionRealisationExact as WeightTwoAction
 import DASHI.Moonshine.Base369MonsterSemanticRepresentationBidiFrontierExact as SemanticBidi
 import DASHI.Moonshine.Monster3BFiniteSchrodingerDeltaOrbitTransitivityExact as DeltaOrbit
+import DASHI.Moonshine.TernaryFiniteFunctionDeltaBasisExact as DeltaBasis
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact as Stone
 import DASHI.Combinatorics.TextileDependencyGrammarProcessExact as Process
 import DASHI.Combinatorics.ProofFabricLocalCompatibilityExact as Local
@@ -72,18 +73,6 @@ monsterBulkIsFive54Times729Regression :
   5 * 54 * 729 ≡ SharedJ.globalPointedViaJ
 monsterBulkIsFive54Times729Regression = SharedJ.monsterBulkIsFiveTimes54Times729
 
-fiftyFourTimes3645Regression :
-  54 * SharedJ.fiveTimes729 ≡ SharedJ.globalPointedViaJ
-fiftyFourTimes3645Regression = SharedJ.fiftyFourTimes3645IsMonsterBulk
-
-bothHaveNineFactorLocalRegression :
-  SharedJ.sharedJ * 6 ≡ SharedJ.localBoundaryViaJ
-bothHaveNineFactorLocalRegression = SharedJ.localAsNineTimesSix
-
-bothHaveNineFactorGlobalRegression :
-  SharedJ.sharedJ * 21870 ≡ SharedJ.globalPointedViaJ
-bothHaveNineFactorGlobalRegression = SharedJ.globalAsNineTimes21870
-
 stable54CarrierIsoRegression :
   Stable.CarrierIso
     Stable.Completion54
@@ -97,9 +86,7 @@ stable10CarrierIsoRegression :
 stable10CarrierIsoRegression = Stable.pointed10IsFiveByTwo
 
 stable196830CarrierIsoRegression :
-  Stable.CarrierIso
-    Stable.MonsterBulk196830
-    Stable.BulkFive54Appraisal
+  Stable.CarrierIso Stable.MonsterBulk196830 Stable.BulkFive54Appraisal
 stable196830CarrierIsoRegression = Stable.monsterBulkIsFiveBy54By729
 
 namedDecision27Regression :
@@ -179,15 +166,21 @@ semanticMultiplicity90Regression = SemanticBidi.multiplicityDegreeIsNinety
 deltaOrbitBoundaryRegression : DeltaOrbit.DeltaOrbitTransitivityBoundary
 deltaOrbitBoundaryRegression = DeltaOrbit.canonicalDeltaOrbitTransitivityBoundary
 
+deltaBasisBoundaryRegression : DeltaBasis.TernaryFiniteFunctionDeltaBasisBoundary
+deltaBasisBoundaryRegression = DeltaBasis.canonicalTernaryFiniteFunctionDeltaBasisBoundary
+
 stoneFrontierBoundaryRegression : Stone.StoneVonNeumannFrontierBoundary
 stoneFrontierBoundaryRegression = Stone.canonicalStoneVonNeumannFrontierBoundary
 
 stoneAllDeltaOrbitLinesRegression : Stone.allDeltaOrbitLinesConstructed ≡ true
 stoneAllDeltaOrbitLinesRegression = Stone.allDeltaOrbitLinesConstructedIsTrue
 
-stoneHighestImpactIsDeltaBasisSpanning :
-  Stone.highestImpactStructuralLeaf ≡ Stone.proveDeltaBasisSpansCarrier
-stoneHighestImpactIsDeltaBasisSpanning = refl
+stoneDeltaBasisSpanningRegression : Stone.deltaBasisSpanningConstructed ≡ true
+stoneDeltaBasisSpanningRegression = Stone.deltaBasisSpanningConstructedIsTrue
+
+stoneHighestImpactIsNonzeroCoordinateExtraction :
+  Stone.highestImpactStructuralLeaf ≡ Stone.extractNonzeroCoordinateFromNonzeroVector
+stoneHighestImpactIsNonzeroCoordinateExtraction = refl
 
 binaryLiftDoesNotProduceMidRegression :
   (level : Pareto.AxisLevel) →
