@@ -16,3 +16,7 @@ import DASHI.Cognition.PNF.ContextualFractranDirectDeltaAdapterExact
 import DASHI.Cognition.PNF.TemporalContextualFractranNaturalityExact
 import DASHI.Cognition.PNF.CrossStratumIdentityFractranFibreExact
 import DASHI.Cognition.PNF.ContextualFractran369RefinementExact
+import DASHI.Cognition.PNF.ContextualFractranArgumentTransportExact
+import DASHI.Cognition.PNF.ContextualFractranRegionRestrictionExact
+import DASHI.Cognition.PNF.ConsumerWorldStabiliserFibreExact
+import DASHI.Interop.ContextualFractranPNFHyperfabric369Exact
