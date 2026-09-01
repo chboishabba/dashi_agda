@@ -2,6 +2,8 @@ module DASHI.Core.SequentialExperimentPlanningValidation where
 
 import DASHI.Core.ExperimentalCoordinateDesignExact
 import DASHI.Core.ActionabilityCostedExperimentChoiceExact
+import DASHI.Core.GovernedAdmissibleCostedExperimentChoiceExact
+import DASHI.Core.ConsentTemporalExternalityExact
 import DASHI.Core.CommonExperimentRealisationExact
 import DASHI.Core.DiscriminatorSynthesisExact
 import DASHI.Core.CoarseFineRelativeFibreExact
@@ -14,6 +16,7 @@ import DASHI.Core.SequentialRelationalExperimentPlannerExact
 import DASHI.Core.JointSequentialInformationFidelityPolicyExact
 import DASHI.Core.ConsumerReductionJointPolicyBridgeExact
 import DASHI.Core.JointSequentialInformationFidelityFixtureExact
+import DASHI.Core.BenefitBurdenExternalityDistributionExact
 import DASHI.Biology.JCoarseFineConsumerReductionBridgeExact
 import DASHI.Physics.Foundations.GRQFTExperimentDesignCrossPollinationExact
 import DASHI.Physics.Foundations.GRQFTDiscriminatorSynthesisExact
@@ -22,3 +25,5 @@ import DASHI.Environment.LESDiscriminatorSynthesisExact
 import DASHI.Environment.LESSequentialExperimentPlannerExact
 import DASHI.Environment.LESJointSequentialMeasurementFidelityPolicyExact
 import DASHI.Environment.LESProofDerivedDecisionAdequacyExact
+import DASHI.Culture.IndigenousKnowledgeGovernedProofSearchExperimentCrossPollinationExact
+import DASHI.Governance.DistributionalExternalityCrossDomainExact
