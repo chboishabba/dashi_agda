@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.Foundations.Base369Completion54SituatedTriadBridgeExact as Completion
+import DASHI.Foundations.Base369SharedNonaryIdentityTransportExact as SharedJ
 import DASHI.Combinatorics.TextileDependencyGrammarProcessExact as Process
 import DASHI.Combinatorics.ProofFabricLocalCompatibilityExact as Local
 import DASHI.Combinatorics.ProofFabricCompilerExact as Fabric
@@ -39,6 +40,34 @@ base27Times729Regression :
   ≡ Completion.globalFineFibre
 base27Times729Regression = Completion.baseTimesAppraisalIsFineFibre
 
+sharedJIsNineRegression : SharedJ.sharedJ ≡ 9
+sharedJIsNineRegression = SharedJ.sharedJIsNine
+
+sharedJLocalResolutionRegression : SharedJ.resolveJ SharedJ.localSituatedBoundary ≡ 54
+sharedJLocalResolutionRegression = SharedJ.localBoundaryViaJIs54
+
+sharedJGlobalResolutionRegression : SharedJ.resolveJ SharedJ.globalPointedFineBulk ≡ 196830
+sharedJGlobalResolutionRegression = SharedJ.globalPointedViaJIs196830
+
+fiftyFourIsTwo27CellsRegression : 2 * 27 ≡ 54
+fiftyFourIsTwo27CellsRegression = SharedJ.fiftyFourIsTwoTimesTwentySeven
+
+monsterBulkIsFive54Times729Regression :
+  5 * 54 * 729 ≡ SharedJ.globalPointedViaJ
+monsterBulkIsFive54Times729Regression = SharedJ.monsterBulkIsFiveTimes54Times729
+
+fiftyFourTimes3645Regression :
+  54 * SharedJ.fiveTimes729 ≡ SharedJ.globalPointedViaJ
+fiftyFourTimes3645Regression = SharedJ.fiftyFourTimes3645IsMonsterBulk
+
+bothHaveNineFactorLocalRegression :
+  SharedJ.sharedJ * 6 ≡ SharedJ.localBoundaryViaJ
+bothHaveNineFactorLocalRegression = SharedJ.localAsNineTimesSix
+
+bothHaveNineFactorGlobalRegression :
+  SharedJ.sharedJ * 21870 ≡ SharedJ.globalPointedViaJ
+bothHaveNineFactorGlobalRegression = SharedJ.globalAsNineTimes21870
+
 binaryLiftDoesNotProduceMidRegression :
   (level : Pareto.AxisLevel) →
   Completion.axisLevelToTri level ≡ Base.tri-mid → ⊥
@@ -55,6 +84,9 @@ proofCompiledStreamTypedRegression = Local.compiledTritStreamLocallyCompatible
 
 completionBoundaryRegression : Completion.Base369Completion54SituatedTriadBoundary
 completionBoundaryRegression = Completion.canonicalBase369Completion54SituatedTriadBoundary
+
+sharedNonaryBoundaryRegression : SharedJ.Base369SharedNonaryIdentityBoundary
+sharedNonaryBoundaryRegression = SharedJ.canonicalBase369SharedNonaryIdentityBoundary
 
 processBoundaryRegression : Process.TextileDependencyGrammarProcessBoundary
 processBoundaryRegression = Process.canonicalTextileDependencyGrammarProcessBoundary
