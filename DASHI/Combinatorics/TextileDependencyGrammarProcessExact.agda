@@ -4,7 +4,6 @@ open import DASHI.Core.Prelude
 open import Data.List using (List; []; _∷_; _++_)
 
 import DASHI.Combinatorics.TextileNFibreCalculusExact as T
-import DASHI.Core.ActionCrossingTraceCalculusExact as Trace
 
 ------------------------------------------------------------------------
 -- COMMON PROCESS SUBSTRATE, DISTINCT DEPENDENCY GRAMMARS
@@ -48,7 +47,7 @@ executeWeaveCrossing :
   TypedWeaveCrossing warpCount weftCount →
   WeaveState warpCount weftCount
 executeWeaveCrossing state crossing =
-  weave-state (weaveTrace state ++ crossing ∷ [])
+  weave-state (weaveTrace state ++ (crossing ∷ []))
 
 weaveActionIsBipartite :
   ∀ {warpCount weftCount} →
@@ -111,10 +110,10 @@ executeKnitAction state action =
   knit-state
     (suc (liveLoopCount state))
     (knitIncidences state ++
-      knit-incidence
+      (knit-incidence
         (liveLoopCount state)
         (parentIndexA action)
-        (parentIndexB action) ∷ [])
+        (parentIndexB action) ∷ []))
 
 knitExecutionGrowsLoopCarrier :
   (state : KnitState) →
@@ -158,10 +157,10 @@ executeCrochetAction state action =
     (suc (fabricLoopCount state))
     ≤-refl
     (crochetIncidences state ++
-      knit-incidence
+      (knit-incidence
         (suc (fabricLoopCount state))
         (activeLoop state)
-        (crochetTarget action) ∷ [])
+        (crochetTarget action) ∷ []))
 
 crochetExecutionMovesActiveRootToNewestLoop :
   (state : CrochetState) →
