@@ -19,6 +19,7 @@ import DASHI.Physics.YangMills.BalabanFiniteSampleObservablePairingRound203Exact
 import DASHI.Physics.YangMills.BalabanEquation119DerivativeDoesNotDetermineAverageRound204Exact as R204
 import DASHI.Physics.YangMills.BalabanFiniteMeasureWavefunctionL2BridgeRound205Exact as R205
 import DASHI.Physics.YangMills.BalabanFiniteMeasureIBPWavefunctionSymmetryRound206Exact as R206
+import DASHI.Physics.YangMills.BalabanFederbushRationalLieToRealSU2CarrierRound207Exact as R207
 
 round189PathHomomorphism = R189.cmp98RawUnitPathHomomorphismRound189Level
 round190BoundarySupersession = R190.cmp98ClayBoundarySupersessionRound190Level
@@ -51,6 +52,17 @@ round204QSourceDoesNotFollowFromQPrime =
   R204.qSourceDoesNotFollowFromQPrimeRound204Level
 round204LiteralOneStepAverageQSource =
   R204.literalCMP98OneStepAverageQSourceSameObjectRound204Level
+
+-- The physical equation-(0.11) derivative lane is rational-coordinate, while
+-- the strongest Eq.(119) carrier is literal real SU(2). R207 removes this
+-- coordinate-carrier mismatch; the remaining qSource leaf is purely operator
+-- semantics on the transported carrier.
+round207FederbushRationalLieToRealSU2Carrier =
+  R207.federbushRationalLieToRealSU2CarrierRound207Level
+round207FederbushCoordinateExact =
+  R207.federbushRationalLieCoordinateExactRound207Level
+round207FederbushFirstDerivativeIsQSource =
+  R207.literalFederbushFirstDerivativeIsEquation119QSourceRound207Level
 
 round194RootedCoarseAnchoredOrbitSection =
   R194.cmp98RootedCoarseAnchoredOrbitSectionRound194Level
