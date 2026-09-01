@@ -6,8 +6,13 @@ module DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact where
 -- Structural prerequisites are theorem-bearing: finite group laws and global
 -- commutator nondegeneracy are closed.  The concrete Q(zeta_3)[X6] function
 -- model and modulation-derived point projectors now also extract a literal
--- delta line from every supplied nonzero invariant-vector witness.  The live
--- irreducibility dependency is therefore translated-delta orbit spanning.
+-- delta line from every supplied nonzero invariant-vector witness.
+--
+-- The previously compound "translated delta orbit spans the full carrier"
+-- payment is now split correctly:
+--   1. the six translations act transitively on X6 and force all 729 delta
+--      lines into any nonzero invariant subspace -- CLOSED;
+--   2. the 729 delta lines linearly span every Schrodinger function -- OPEN.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -29,6 +34,7 @@ import DASHI.Moonshine.Monster3BFiniteSchrodingerProjector729Exact as Projector7
 import DASHI.Moonshine.Monster3BCyclotomicNonzeroInverseExact as CyclotomicInverse
 import DASHI.Moonshine.Monster3BFiniteX6ConstructiveComparisonExact as X6Comparison
 import DASHI.Moonshine.Monster3BFiniteSchrodingerDeltaExtractionExact as DeltaExtraction
+import DASHI.Moonshine.Monster3BFiniteSchrodingerDeltaOrbitTransitivityExact as Orbit
 
 centreOrder : Nat
 centreOrder = Elementary.centreOrder
@@ -125,6 +131,11 @@ deltaLineExtractionConstructed =
   DeltaExtraction.invariantSubspaceContainsSelectedDeltaLine
     DeltaExtraction.canonicalDeltaExtractionBoundary
 
+allDeltaOrbitLinesConstructed : Bool
+allDeltaOrbitLinesConstructed =
+  Orbit.all729DeltaLinesForcedIntoInvariantSubspace
+    Orbit.canonicalDeltaOrbitTransitivityBoundary
+
 functionModuleConstructedIsTrue : functionModuleConstructed ≡ true
 functionModuleConstructedIsTrue = refl
 
@@ -151,6 +162,9 @@ constructiveX6ComparisonConstructedIsTrue = refl
 
 deltaLineExtractionConstructedIsTrue : deltaLineExtractionConstructed ≡ true
 deltaLineExtractionConstructedIsTrue = refl
+
+allDeltaOrbitLinesConstructedIsTrue : allDeltaOrbitLinesConstructed ≡ true
+allDeltaOrbitLinesConstructedIsTrue = refl
 
 record FiniteStoneVonNeumannReceipt : Set where
   constructor finiteStoneVonNeumannReceipt
@@ -184,6 +198,8 @@ record StoneVonNeumannFrontierBoundary : Set where
     projectorSelected729AndOffPointSemanticsOwnedHere : Bool
     nonzeroCyclotomicInverseOwnedHere : Bool
     deltaLineExtractionFromNonzeroInvariantSubspaceProvedHere : Bool
+    translationOrbitReachesEveryDeltaLineProvedHere : Bool
+    deltaBasisSpansFullFunctionCarrierProvedHere : Bool
     translatedDeltaOrbitSpansFullFunctionCarrierProvedHere : Bool
     irreducibilityOfX6SchrodingerModelProvedHere : Bool
     uniquenessForCentralCharacterProvedHere : Bool
@@ -194,7 +210,7 @@ canonicalStoneVonNeumannFrontierBoundary : StoneVonNeumannFrontierBoundary
 canonicalStoneVonNeumannFrontierBoundary =
   stoneVonNeumannFrontierBoundary
     true true true true true true
-    true false false false false
+    true true false false false false false
 
 data StoneVonNeumannProofLeaf : Set where
   constructCentralExtensionCarrier : StoneVonNeumannProofLeaf
@@ -205,6 +221,8 @@ data StoneVonNeumannProofLeaf : Set where
   proveProjector729AndOffPointSemantics : StoneVonNeumannProofLeaf
   constructNonzeroCyclotomicInverse : StoneVonNeumannProofLeaf
   extractDeltaLineFromNonzeroInvariantSubspace : StoneVonNeumannProofLeaf
+  proveTranslationOrbitReachesEveryDeltaLine : StoneVonNeumannProofLeaf
+  proveDeltaBasisSpansCarrier : StoneVonNeumannProofLeaf
   proveTranslatedDeltaOrbitSpansCarrier : StoneVonNeumannProofLeaf
   proveSchrodingerIrreducible : StoneVonNeumannProofLeaf
   proveFixedCentralCharacterUniqueness : StoneVonNeumannProofLeaf
@@ -221,17 +239,25 @@ leafState deriveModulationPointProjectors = closed
 leafState proveProjector729AndOffPointSemantics = closed
 leafState constructNonzeroCyclotomicInverse = closed
 leafState extractDeltaLineFromNonzeroInvariantSubspace = closed
-leafState proveTranslatedDeltaOrbitSpansCarrier = open
+leafState proveTranslationOrbitReachesEveryDeltaLine = closed
+leafState proveDeltaBasisSpansCarrier = open
+leafState proveTranslatedDeltaOrbitSpansCarrier = blocked
 leafState proveSchrodingerIrreducible = blocked
 leafState proveFixedCentralCharacterUniqueness = blocked
 leafState identifyCertifiedMonster729Constituent = blocked
 
 data Requires : StoneVonNeumannProofLeaf → StoneVonNeumannProofLeaf → Set where
-  spanningNeedsModule :
-    Requires proveTranslatedDeltaOrbitSpansCarrier constructSchrodingerFunctionModule
-  irreducibleNeedsDeltaExtraction :
-    Requires proveSchrodingerIrreducible extractDeltaLineFromNonzeroInvariantSubspace
-  irreducibleNeedsSpanning :
+  orbitNeedsExtraction :
+    Requires proveTranslationOrbitReachesEveryDeltaLine
+      extractDeltaLineFromNonzeroInvariantSubspace
+  basisNeedsModule :
+    Requires proveDeltaBasisSpansCarrier constructSchrodingerFunctionModule
+  fullSpanningNeedsOrbit :
+    Requires proveTranslatedDeltaOrbitSpansCarrier
+      proveTranslationOrbitReachesEveryDeltaLine
+  fullSpanningNeedsBasis :
+    Requires proveTranslatedDeltaOrbitSpansCarrier proveDeltaBasisSpansCarrier
+  irreducibleNeedsFullSpanning :
     Requires proveSchrodingerIrreducible proveTranslatedDeltaOrbitSpansCarrier
   uniquenessNeedsIrreducible :
     Requires proveFixedCentralCharacterUniqueness proveSchrodingerIrreducible
@@ -239,7 +265,7 @@ data Requires : StoneVonNeumannProofLeaf → StoneVonNeumannProofLeaf → Set wh
     Requires identifyCertifiedMonster729Constituent proveFixedCentralCharacterUniqueness
 
 highestImpactStructuralLeaf : StoneVonNeumannProofLeaf
-highestImpactStructuralLeaf = proveTranslatedDeltaOrbitSpansCarrier
+highestImpactStructuralLeaf = proveDeltaBasisSpansCarrier
 
 highestImpactStructuralLeafIsOpen :
   leafState highestImpactStructuralLeaf ≡ open
