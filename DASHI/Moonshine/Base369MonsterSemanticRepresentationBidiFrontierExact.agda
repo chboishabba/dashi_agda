@@ -3,6 +3,9 @@ module DASHI.Moonshine.Base369MonsterSemanticRepresentationBidiFrontierExact whe
 open import DASHI.Core.Prelude
 
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchExact as ThreeB
+import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact as Stone
+import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact as Actual
+import DASHI.Moonshine.Base369Monster3BActualSectorRecognitionBidiExact as Base369Recognition
 import DASHI.Moonshine.MonsterWeightTwoSemanticActionRealisationExact as WeightTwo
 import DASHI.Foundations.Base369NestedUnitCompletionMonsterAssemblyExact as Nested
 import DASHI.Foundations.Base369MonsterSemanticCoordinateSystemExact as Semantic
@@ -12,14 +15,9 @@ import DASHI.Foundations.Base369MonsterNamedIdentityRegistryExact as Registry
 ------------------------------------------------------------------------
 -- SEMANTIC MONSTER / ACTUAL REPRESENTATION BIDI FRONTIER
 --
--- Cross-pollination principle:
--- do not wait for one monolithic 196883-state identification.  Use actual
--- representation-side discriminators already present in the 3B restriction
--- lane to test named semantic components one at a time.
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
--- 1. Stable semantic constituent currently exposed by the named assembly.
+-- Do not wait for one monolithic 196883-state identification.  The actual 3B
+-- restriction can test named semantic components locally, while the global
+-- weight-two/VOA lane constrains the full carrier and invariant conformal unit.
 ------------------------------------------------------------------------
 
 SemanticConstituent : Set
@@ -33,11 +31,6 @@ SemanticResidual = Nested.ModeBoundary53Stable
 
 SemanticAppraisal : Set
 SemanticAppraisal = Stable.Appraisal729
-
-------------------------------------------------------------------------
--- 2. Representation-side numerical discriminators already owned by the 3B
--- restriction lane.  They are receipts/targets, not carrier identifications.
-------------------------------------------------------------------------
 
 actualRestrictedHeisenbergDegree : Nat
 actualRestrictedHeisenbergDegree = ThreeB.heisenbergFactor
@@ -60,7 +53,7 @@ multiplicityDegreeIsNinety : actualRestrictedMultiplicityDegree ≡ 90
 multiplicityDegreeIsNinety = ThreeB.multiplicityFactorIs90
 
 ------------------------------------------------------------------------
--- 3. Typed bridge payments.  Equal degrees do not discharge these fields.
+-- Typed action-level bridge payments.
 ------------------------------------------------------------------------
 
 record AppraisalHeisenbergActionBridge : Set₁ where
@@ -69,7 +62,6 @@ record AppraisalHeisenbergActionBridge : Set₁ where
     appraisalCarrierIso : Stable.CarrierIso SemanticAppraisal HeisenbergRepresentationCarrier
     actualRestrictedCarrierIdentified : Set
     actualActionIntertwinesAppraisalCoordinates : Set
-
 open AppraisalHeisenbergActionBridge public
 
 record ResidualFiftyThreeActionBridge : Set₁ where
@@ -79,7 +71,6 @@ record ResidualFiftyThreeActionBridge : Set₁ where
     central3BTraceSelectsResidual : Set
     residualActionStable : Set
     invariantLineRemovalAgreesWithLocal54To53 : Set
-
 open ResidualFiftyThreeActionBridge public
 
 record ConstituentTensorBridge : Set₁ where
@@ -93,19 +84,47 @@ record ConstituentTensorBridge : Set₁ where
         tensorConstituentCarrier
     actual729By90ConstituentIdentified : Set
     tensorActionIntertwinesRestriction : Set
-
 open ConstituentTensorBridge public
 
 ------------------------------------------------------------------------
--- 4. Consumer-first promotion ladder.
+-- The actual-sector -> Base369 compiler is already theorem-bearing once an
+-- ActualZetaSectorRecognition is supplied.  It is not a further research leaf.
+------------------------------------------------------------------------
+
+record ActualRecognitionCompilerAvailable : Set₁ where
+  field
+    ActualSector : Set
+    recognition : Actual.ActualZetaSectorRecognition ActualSector
+    base369Recognition : Base369Recognition.ActualBase369SectorRecognition ActualSector
+    compilerExact :
+      base369Recognition
+      ≡ Base369Recognition.composeActualRecognitionWithBase369 recognition
+
+open ActualRecognitionCompilerAvailable public
+
+compileActualRecognitionToBase369 :
+  ∀ {ActualSector} →
+  (recognition : Actual.ActualZetaSectorRecognition ActualSector) →
+  ActualRecognitionCompilerAvailable
+compileActualRecognitionToBase369 recognition = record
+  { ActualSector = _
+  ; recognition = recognition
+  ; base369Recognition = Base369Recognition.composeActualRecognitionWithBase369 recognition
+  ; compilerExact = refl
+  }
+
+------------------------------------------------------------------------
+-- Consumer-first promotion ladder.
 ------------------------------------------------------------------------
 
 data SemanticRepresentationLeaf : Set where
   replayActual3BRestriction
-  identify729Action
+  prove729WitnessedIrreducibility
+  prove729FixedCentralCharacterUniqueness
+  constructActualZetaSectorRecognition
+  composeActualRecognitionToBase369
   identify53ResidualAction
   identify729By90TensorConstituent
-  attachBase369BulkCoordinates
   realiseWeightTwoEndomorphisms
   identifyFullWeightTwoCarrier
   preserveMonsterConstituent
@@ -116,41 +135,62 @@ data LeafStatus : Set where leafClosed leafOpen leafBlocked : LeafStatus
 
 leafStatus : SemanticRepresentationLeaf → LeafStatus
 leafStatus replayActual3BRestriction = leafOpen
-leafStatus identify729Action = leafBlocked
+leafStatus prove729WitnessedIrreducibility = leafClosed
+leafStatus prove729FixedCentralCharacterUniqueness = leafOpen
+leafStatus constructActualZetaSectorRecognition = leafBlocked
+leafStatus composeActualRecognitionToBase369 = leafClosed
 leafStatus identify53ResidualAction = leafBlocked
 leafStatus identify729By90TensorConstituent = leafBlocked
-leafStatus attachBase369BulkCoordinates = leafBlocked
 leafStatus realiseWeightTwoEndomorphisms = leafOpen
 leafStatus identifyFullWeightTwoCarrier = leafBlocked
 leafStatus preserveMonsterConstituent = leafBlocked
 leafStatus intertwineSemanticCoordinates = leafBlocked
 
+stoneWitnessedIrreducibilityClosed :
+  Stone.leafState Stone.proveWitnessedIrreducibility ≡ Stone.closed
+stoneWitnessedIrreducibilityClosed = refl
+
+base369RecognitionCompilerClosed :
+  leafStatus composeActualRecognitionToBase369 ≡ leafClosed
+base369RecognitionCompilerClosed = refl
+
 ------------------------------------------------------------------------
--- 5. Dependency graph: two independent upstream lanes can proceed in parallel.
+-- Dependency graph.
 --
 -- Local/restriction lane:
---   replay -> 729 action -> tensor -> Base369 bulk
---          -> 53 residual -----------------^
+--   model irreducibility -> uniqueness
+--   replay ---------------------------> actual zeta recognition
+--                                         |
+--                                         v
+--                           owned Base369 recognition compiler
+--                                         |
+--                                         v
+--                                729 x 90 tensor
+--
+-- Separately replay -> 53 residual audit.
 --
 -- Global/VOA lane:
---   End evaluation -> weight-two carrier -> constituent preservation
---
--- They meet only at semantic-coordinate intertwining.
+--   End evaluation -> weight-two carrier -> constituent preservation.
 ------------------------------------------------------------------------
 
 data Requires : SemanticRepresentationLeaf → SemanticRepresentationLeaf → Set where
-  heisenbergNeedsReplay : Requires identify729Action replayActual3BRestriction
+  uniquenessNeedsIrreducibility :
+    Requires prove729FixedCentralCharacterUniqueness prove729WitnessedIrreducibility
+  recognitionNeedsReplay :
+    Requires constructActualZetaSectorRecognition replayActual3BRestriction
+  recognitionNeedsUniqueness :
+    Requires constructActualZetaSectorRecognition prove729FixedCentralCharacterUniqueness
+  tensorNeedsRecognition :
+    Requires identify729By90TensorConstituent constructActualZetaSectorRecognition
   residualNeedsReplay : Requires identify53ResidualAction replayActual3BRestriction
-  tensorNeeds729 : Requires identify729By90TensorConstituent identify729Action
-  bulkNeedsTensor : Requires attachBase369BulkCoordinates identify729By90TensorConstituent
-  bulkNeedsResidual : Requires attachBase369BulkCoordinates identify53ResidualAction
   weightTwoNeedsEvaluation : Requires identifyFullWeightTwoCarrier realiseWeightTwoEndomorphisms
   constituentNeedsWeightTwo : Requires preserveMonsterConstituent identifyFullWeightTwoCarrier
-  semanticNeedsBulk : Requires intertwineSemanticCoordinates attachBase369BulkCoordinates
+  semanticNeedsRecognition : Requires intertwineSemanticCoordinates constructActualZetaSectorRecognition
+  semanticNeedsResidual : Requires intertwineSemanticCoordinates identify53ResidualAction
   semanticNeedsConstituent : Requires intertwineSemanticCoordinates preserveMonsterConstituent
 
 ------------------------------------------------------------------------
--- 6. The terminal receipt is deliberately factorised.
+-- Factorised terminal receipt.
 ------------------------------------------------------------------------
 
 record SemanticMonsterRepresentationReceipt : Set₁ where
@@ -161,11 +201,10 @@ record SemanticMonsterRepresentationReceipt : Set₁ where
     tensorBridge : ConstituentTensorBridge
     semanticConstituentBridge : Nested.MonsterConstituentSemanticBridge
     allNamedSemanticCoordinatesIntertwine : Set
-
 open SemanticMonsterRepresentationReceipt public
 
 ------------------------------------------------------------------------
--- 7. Why this is better than a cardinality-first global bijection.
+-- Boundaries.
 ------------------------------------------------------------------------
 
 data Shared729DegreeIdentifiesRepresentation : Set where
@@ -173,6 +212,7 @@ data Shared53DegreeIdentifiesResidual : Set where
 data Fin196883BijectionProvesMonsterEquivariance : Set where
 data ThreeBRestrictionAloneDeterminesGlobalAction : Set where
 data SemanticCoordinateNamesDetermineCharacter : Set where
+data CharacterEqualityChoosesActualBasisRecognition : Set where
 
 shared729DoesNotIdentifyRepresentation : Shared729DegreeIdentifiesRepresentation → ⊥
 shared729DoesNotIdentifyRepresentation ()
@@ -189,19 +229,28 @@ local3BDoesNotDetermineGlobalAction ()
 semanticNamesDoNotDetermineCharacter : SemanticCoordinateNamesDetermineCharacter → ⊥
 semanticNamesDoNotDetermineCharacter ()
 
+characterEqualityDoesNotChooseBasisRecognition :
+  CharacterEqualityChoosesActualBasisRecognition → ⊥
+characterEqualityDoesNotChooseBasisRecognition ()
+
 record SemanticRepresentationBidiBoundary : Set where
   constructor semantic-representation-bidi-boundary
   field
     actual3BRestrictionProducerExists : Bool
     semantic729TargetNamed : Bool
     semantic53TargetNamed : Bool
+    witnessed729IrreducibilityClosed : Bool
+    fixedCentralCharacterUniquenessStillLive : Bool
+    actualRecognitionStillNeedsReplayAndUniqueness : Bool
+    base369RecognitionCompilerAlreadyOwned : Bool
     weightTwoActionEvaluationPaymentNamed : Bool
-    twoUpstreamLanesCanProceedIndependently : Bool
     terminalReceiptFactorised : Bool
     equalDimensionsCloseActionBridge : Bool
+    characterEqualityAloneChoosesBasis : Bool
     localRestrictionAloneProvesGlobalMonsterAction : Bool
 
 canonicalSemanticRepresentationBidiBoundary : SemanticRepresentationBidiBoundary
 canonicalSemanticRepresentationBidiBoundary =
   semantic-representation-bidi-boundary
-    true true true true true true false false
+    true true true true true true true true true
+    false false false
