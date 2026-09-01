@@ -21,4 +21,5 @@ import DASHI.Cognition.PNF.ContextualFractranRegionRestrictionExact
 import DASHI.Cognition.PNF.ConsumerWorldStabiliserFibreExact
 import DASHI.Cognition.PNF.ContextualFractranPrimeContainmentExact
 import DASHI.Cognition.PNF.HypercomplexRequestedFractranComponentExact
+import DASHI.Cognition.PNF.ContextualFractranCatalogueQuotientExact
 import DASHI.Interop.ContextualFractranPNFHyperfabric369Exact
