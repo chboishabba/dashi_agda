@@ -98,6 +98,13 @@ import DASHI.Moonshine.Monster3BActualMultiplicityEvaluationFromRecognitionExact
 import DASHI.Moonshine.Base369Monster3BActualSectorRecognitionBidiExact
 import DASHI.Moonshine.Base369Monster3BActualActionRecognitionBidiExact
 
+-- Stronger recovery cut: when an actual literal State/Normalizer action is
+-- found, choose its zeta sector to be the dependent CentralEigenspace itself.
+-- The phase-resolved record is then generated with identity include/recover
+-- maps, so the one live producer is action + recognition on that same literal
+-- eigenspace rather than two separately recovered objects.
+import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact
+
 -- Same-action continuation: the literal Fin 90 coordinate is already owned by
 -- the actual evaluation isomorphism.  The next representation-theoretic leaf
 -- is therefore the actual inertia action on that exact coordinate, followed by
@@ -105,6 +112,7 @@ import DASHI.Moonshine.Base369Monster3BActualActionRecognitionBidiExact
 import DASHI.Moonshine.Base369Monster3BMultiplicityInertiaTwelveSeventyEightBidiExact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound2Exact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound3Exact
+import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound4Exact
 
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact
 
