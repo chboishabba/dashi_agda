@@ -198,7 +198,7 @@ identitySemanticIntertwiner system = record
 data SemanticFieldsAreIndependentProductFactors : Set where
 data CoarsePhaseCardinalityCreatesAttachment : Set where
 data SemanticIntertwinerCreatesMonsterAction : Set where
-\data EqualCoordinateCodesMeanEqualHistories : Set where
+data EqualCoordinateCodesMeanEqualHistories : Set where
 
 semanticFieldsNeedNotBeIndependentFactors :
   SemanticFieldsAreIndependentProductFactors → ⊥
