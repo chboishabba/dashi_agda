@@ -22,11 +22,12 @@ import DASHI.Physics.YangMills.BalabanFiniteMeasureIBPWavefunctionSymmetryRound2
 import DASHI.Physics.YangMills.BalabanFederbushRationalLieToRealSU2CarrierRound207Exact as R207
 import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as R208
 import DASHI.Physics.YangMills.BalabanNullQuotientHamiltonianDescentRound209Exact as R209
+import DASHI.Physics.YangMills.BalabanFederbushRealScalarExtensionRound210Exact as R210
+import DASHI.Physics.YangMills.BalabanCMP98Equation124QSourceRecoveryRound211Exact as R211
 
 round189PathHomomorphism = R189.cmp98RawUnitPathHomomorphismRound189Level
 round190BoundarySupersession = R190.cmp98ClayBoundarySupersessionRound190Level
 round191WallAudit = R191.cmp98BidiWallAuditRound191Level
-
 round191HistoricalGenericSourceWall =
   R191.literalArbitraryPeriodicSelectedBackgroundProducerRound191Level
 
@@ -46,31 +47,39 @@ round193OperatorSourceSemantics =
 round193SelectedBackgroundCutWeld =
   R193.literalCMP98Path13SelectedBackgroundCutWeldRound193Level
 
--- Eq.(119) constructs qPrime, but R204 proves that this derivative observation
--- cannot determine the independently sourced one-step average q = Q(V0).
-round204DerivativeCollision =
+-- R204 is now only the generic non-factorability firewall: an auxiliary
+-- primed observation cannot reconstruct an independently varying q source.
+-- No physical derivative meaning of CMP98 Eq. (119) is asserted here.
+round204PrimeCollision =
   R204.equation119DerivativeCollisionRound204Level
 round204QSourceDoesNotFollowFromQPrime =
   R204.qSourceDoesNotFollowFromQPrimeRound204Level
-round204LiteralOneStepAverageQSource =
-  R204.literalCMP98OneStepAverageQSourceSameObjectRound204Level
 
--- R207 removes the rational-coordinate -> literal-real SU(2) carrier mismatch.
+-- R207-R210 are retained as useful scalar/carrier machinery discovered during
+-- the earlier Federbush detour. They are no longer the canonical qSource route.
 round207FederbushRationalLieToRealSU2Carrier =
   R207.federbushRationalLieToRealSU2CarrierRound207Level
 round207FederbushCoordinateExact =
   R207.federbushRationalLieCoordinateExactRound207Level
-round207FederbushFirstDerivativeIsQSource =
-  R207.literalFederbushFirstDerivativeIsEquation119QSourceRound207Level
-
--- R208 proves exact 3x3 matrix-action transport on every embedded rational Lie
--- vector.  It does not promote rational-image equality to full-real equality.
 round208FederbushRationalMatrixRealImage =
   R208.federbushRationalMatrixRealImageRound208Level
 round208RationalRealMultiplicativeEmbedding =
   R208.rationalRealMultiplicativeEmbeddingRound208Level
-round208RationalImageToFullRealQSource =
-  R208.literalFederbushRationalImageToFullRealQSourceRound208Level
+round210FederbushRealScalarExtension =
+  R210.federbushRealScalarExtensionRound210Level
+
+-- R211 is the corrected source route: CMP98 (121)--(124) defines the nonlinear
+-- one-step average and its final linear form Q(V0)A. The existing Eq. (124)
+-- transcription and executable linearized-average owners now recover qSource
+-- from that object directly, without using Eq. (119) as a derivative.
+round211Equation124QSourceRecovery =
+  R211.cmp98Equation124QSourceRecoveryRound211Level
+round211Equation124ExecutableSameObject =
+  R211.cmp98Equation124ExecutableSameObjectCompilerRound211Level
+round211LiteralEquation124ExecutableWeld =
+  R211.literalCMP98Equation124ExecutableWeldRound211Level
+round211HistoricalPrimeDerivativeTyping =
+  R211.literalCMP98Equation119PrimeIsDerivativeOfQSourceRound211Level
 
 round194RootedCoarseAnchoredOrbitSection =
   R194.cmp98RootedCoarseAnchoredOrbitSectionRound194Level
@@ -97,8 +106,6 @@ round196FiniteGaugeQuotientUniqueness =
 round196FiniteGaugeQuotientSelectedFibreCompatibility =
   R196.finitePhysicalGaugeQuotientSelectedFibreCompatibilityRound196Level
 
--- R197 is historical: Basis.FiniteSelector is exhaustive over its carrier, not
--- merely a chosen sample. R203 installs the genuinely weaker finite-list layer.
 round197HistoricalExhaustiveSelectorPairing =
   R197.finiteRootedGaugeQuotientL2PairingRound197Level
 round203FiniteSamplePairing =
@@ -111,8 +118,6 @@ round203PhysicalHaarGibbsL2NotFiniteSample =
 round198FiniteRepresentativeCarrierConstructed =
   R198.finiteGaugeOrbitRepresentativeCarrierNowConstructedRound198Level
 
--- Historical R199-R201 field-endomorphism Hamiltonian plumbing is retained only
--- as audit history. R202 corrects the semantic carrier to invariant functions.
 round199HistoricalFieldEndomorphismDescent =
   R199.rootedQuotientHamiltonianDescentRound199Level
 round200BasedGaugeActionGroupoid =
@@ -127,9 +132,6 @@ round202RootedQuotientEvaluation =
 round202OperatorNormalizationHandoff =
   R202.wavefunctionHamiltonianNormalizationHandoffRound202Level
 
--- R205 now has genuine null-quotient semantics: zero norm means equivalence to
--- an explicit zero wavefunction, NullEquivalent is an equivalence relation,
--- and the pairing is congruent in each argument under that relation.
 round205FiniteMeasureWavefunctionL2Bridge =
   R205.finiteMeasureWavefunctionL2BridgeRound205Level
 round205NullSemantics =
@@ -141,8 +143,6 @@ round205LiteralFiniteMeasureExpectationSemantics =
 round205LiteralFiniteMeasureL2Completion =
   R205.literalBalabanFiniteMeasureL2CompletionRound205Level
 
--- R206 consumes the theorem-bearing selected finite IBP identity directly on
--- R205's same-measure pairing. Symmetry is not self-adjointness.
 round206FiniteMeasureIBPWavefunctionSymmetry =
   R206.finiteMeasureIBPWavefunctionSymmetryRound206Level
 round206PhysicalHamiltonianAsSelectedActionVariation =
@@ -154,8 +154,6 @@ round206PhysicalBoundaryConvention =
 round206FiniteMeasureHamiltonianSelfAdjointness =
   R206.literalFiniteMeasureHamiltonianSelfAdjointnessRound206Level
 
--- R209 reduces quotient descent of H to preservation of the same measure-null
--- relation.  Completion/domain/self-adjointness remain later analytic steps.
 round209NullQuotientHamiltonianDescent =
   R209.nullQuotientHamiltonianDescentRound209Level
 round209NullQuotientPairingWellDefined =
