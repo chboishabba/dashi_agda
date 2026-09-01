@@ -1,6 +1,7 @@
 module DASHI.Governance.AnomalousCompetingExperimentCostedSelectionExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 
 import DASHI.Core.DiscriminatorSynthesisExact as Disc
 import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Choice
@@ -126,8 +127,8 @@ cheapIsMinimalDiscriminator = Disc.minimalDiscriminator
     Disc.cost cheapSeparator ≤ Disc.cost alternative
   minimal .cheapSeparator declaredCheap separates = s≤s (s≤s z≤n)
   minimal .highRigourSeparator declaredHighRigour separates = s≤s (s≤s z≤n)
-  minimal .cheapNonSeparator declaredSurvey separates =
-    ⊥-elim (cheapSurveyCannotSeparate separates)
+  minimal .cheapNonSeparator declaredSurvey separates with cheapSurveyCannotSeparate separates
+  ... | ()
 
 ------------------------------------------------------------------------
 -- Resource cost is kept separate from burden, calibration risk and authority.
