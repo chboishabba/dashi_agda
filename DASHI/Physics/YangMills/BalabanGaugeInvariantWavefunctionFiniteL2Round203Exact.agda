@@ -2,125 +2,109 @@
 module DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionFiniteL2Round203Exact where
 
 ------------------------------------------------------------------------
--- ROUND203 BIDI: WAVEFUNCTION HAMILTONIAN CARRIER -> EXISTING ROOTED FINITE L2.
+-- ROUND203B BIDI: GAUGE-INVARIANT WAVEFUNCTIONS -> FINITE SAMPLE PAIRING.
 --
--- R202 corrects the semantic carrier: the Hamiltonian acts on gauge-invariant
--- wavefunctions, not on gauge fields. R197 already owns an exact finite
--- selected-ensemble pairing on the R196 rooted quotient. The bridge is literal:
--- evaluate a gauge-invariant wavefunction on each rooted representative.
+-- Supersession correction: the older R197 FiniteSelector is exhaustive and
+-- must not be presented as an arbitrary finite ensemble.  The authoritative
+-- sample-local carrier is BalabanFiniteSampleObservablePairingRound203Exact.
 --
--- This removes a false terminal seam between the finite quotient L2 lane and
--- the wavefunction/operator lane. It does NOT promote Haar/Gibbs measure or a
--- physical Hamiltonian.
+-- A gauge-invariant wavefunction is simply evaluated on the R196 rooted
+-- representative at each sampled quotient point.  All conclusions here are
+-- sample-local.  No implication is made from sampled norm zero to vanishing on
+-- unsampled configurations, and no physical Haar/Gibbs L2 theorem is claimed.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base using (NonZero)
-open import Data.Rational.Base using (ℚ; 0ℚ)
+open import Data.Rational.Base using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.P06FaceCubeTorusGeometry using (Cube4)
 import DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport as Transport
 import DASHI.Physics.YangMills.BalabanBasedPathGaugeSectionExact as Rooted
-import DASHI.Physics.YangMills.BalabanFiniteRootedGaugeQuotientL2Round197Exact as R197
+import DASHI.Physics.YangMills.BalabanFinitePhysicalGaugeQuotientCarrierRound196Exact as R196
+import DASHI.Physics.YangMills.BalabanFiniteSampleObservablePairingRound203Exact as Sample
 import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionHamiltonianRound202Exact as R202
 
-wavefunctionAsQuotientObservable :
+RootedQuotient :
+  ∀ {N : Nat} {{_ : NonZero N}}
+    {group : Transport.GroupStructure}
+    {base : Cube4 N}
+    {paths : Rooted.RootedPathSystem base} → Set
+RootedQuotient {group = group} {base = base} {paths = paths} =
+  R196.FiniteRootedGaugeQuotientCarrier group base paths
+
+wavefunctionAsRootedObservable :
   ∀ {N : Nat} {{nz : NonZero N}}
     {group : Transport.GroupStructure}
     {base : Cube4 N}
     {paths : Rooted.RootedPathSystem base} →
   R202.BasedGaugeInvariantWavefunction group base →
-  R197.QuotientObservable {group = group} {base = base} {paths = paths}
-wavefunctionAsQuotientObservable wavefunction quotient =
+  RootedQuotient {group = group} {base = base} {paths = paths} → ℚ
+wavefunctionAsRootedObservable wavefunction quotient =
   R202.evaluateOnRootedQuotient wavefunction quotient
 
-finiteWavefunctionPairing :
+finiteWavefunctionSamplePairing :
   ∀ {N : Nat} {{nz : NonZero N}}
     {group : Transport.GroupStructure}
     {base : Cube4 N}
     {paths : Rooted.RootedPathSystem base} →
-  R197.FiniteRootedQuotientEnsemble group base paths →
+  Sample.FiniteSample
+    (RootedQuotient {group = group} {base = base} {paths = paths}) →
   R202.BasedGaugeInvariantWavefunction group base →
   R202.BasedGaugeInvariantWavefunction group base →
   ℚ
-finiteWavefunctionPairing ensemble left right =
-  R197.finiteQuotientPairing ensemble
-    (wavefunctionAsQuotientObservable left)
-    (wavefunctionAsQuotientObservable right)
+finiteWavefunctionSamplePairing sample left right =
+  Sample.samplePairing sample
+    (wavefunctionAsRootedObservable left)
+    (wavefunctionAsRootedObservable right)
 
-finiteWavefunctionNormSq :
+finiteWavefunctionSampleNormSq :
   ∀ {N : Nat} {{nz : NonZero N}}
     {group : Transport.GroupStructure}
     {base : Cube4 N}
     {paths : Rooted.RootedPathSystem base} →
-  R197.FiniteRootedQuotientEnsemble group base paths →
+  Sample.FiniteSample
+    (RootedQuotient {group = group} {base = base} {paths = paths}) →
   R202.BasedGaugeInvariantWavefunction group base →
   ℚ
-finiteWavefunctionNormSq ensemble wavefunction =
-  finiteWavefunctionPairing ensemble wavefunction wavefunction
+finiteWavefunctionSampleNormSq sample wavefunction =
+  finiteWavefunctionSamplePairing sample wavefunction wavefunction
 
-finiteWavefunctionPairingSymmetric :
+finiteWavefunctionSamplePairingSymmetric :
   ∀ {N : Nat} {{nz : NonZero N}}
     {group : Transport.GroupStructure}
     {base : Cube4 N}
     {paths : Rooted.RootedPathSystem base}
-    (ensemble : R197.FiniteRootedQuotientEnsemble group base paths)
+    (sample : Sample.FiniteSample
+      (RootedQuotient {group = group} {base = base} {paths = paths}))
     left right →
-  finiteWavefunctionPairing ensemble left right
-  ≡ finiteWavefunctionPairing ensemble right left
-finiteWavefunctionPairingSymmetric ensemble left right =
-  R197.finiteQuotientPairingSymmetric ensemble
-    (wavefunctionAsQuotientObservable left)
-    (wavefunctionAsQuotientObservable right)
+  finiteWavefunctionSamplePairing sample left right
+  ≡ finiteWavefunctionSamplePairing sample right left
+finiteWavefunctionSamplePairingSymmetric sample left right =
+  Sample.samplePairingSymmetric sample
+    (wavefunctionAsRootedObservable left)
+    (wavefunctionAsRootedObservable right)
 
-finiteWavefunctionNormIsRootedNorm :
-  ∀ {N : Nat} {{nz : NonZero N}}
-    {group : Transport.GroupStructure}
-    {base : Cube4 N}
-    {paths : Rooted.RootedPathSystem base}
-    (ensemble : R197.FiniteRootedQuotientEnsemble group base paths)
-    wavefunction →
-  finiteWavefunctionNormSq ensemble wavefunction
-  ≡ R197.finiteQuotientNormSq ensemble
-      (wavefunctionAsQuotientObservable wavefunction)
-finiteWavefunctionNormIsRootedNorm ensemble wavefunction = refl
-
-finiteWavefunctionNormZeroOnRootedStates :
-  ∀ {N : Nat} {{nz : NonZero N}}
-    {group : Transport.GroupStructure}
-    {base : Cube4 N}
-    {paths : Rooted.RootedPathSystem base}
-    (ensemble : R197.FiniteRootedQuotientEnsemble group base paths)
-    (wavefunction : R202.BasedGaugeInvariantWavefunction group base) →
-  finiteWavefunctionNormSq ensemble wavefunction ≡ 0ℚ →
-  ∀ quotient →
-    R202.evaluateOnRootedQuotient wavefunction quotient ≡ 0ℚ
-finiteWavefunctionNormZeroOnRootedStates ensemble wavefunction normZero =
-  R197.finiteQuotientNormZeroPointwise ensemble
-    (wavefunctionAsQuotientObservable wavefunction)
-    normZero
-
--- Applying an R202 operator remains in the same finite L2 carrier because its
--- codomain is again a gauge-invariant wavefunction.
-finiteOperatorOutputNormSq :
+finiteOperatorOutputSampleNormSq :
   ∀ {N : Nat} {{nz : NonZero N}}
     {group : Transport.GroupStructure}
     {base : Cube4 N}
     {paths : Rooted.RootedPathSystem base} →
-  R197.FiniteRootedQuotientEnsemble group base paths →
+  Sample.FiniteSample
+    (RootedQuotient {group = group} {base = base} {paths = paths}) →
   R202.GaugeInvariantWavefunctionOperator group base →
   R202.BasedGaugeInvariantWavefunction group base →
   ℚ
-finiteOperatorOutputNormSq ensemble operator wavefunction =
-  finiteWavefunctionNormSq ensemble (R202.act operator wavefunction)
+finiteOperatorOutputSampleNormSq sample operator wavefunction =
+  finiteWavefunctionSampleNormSq sample (R202.act operator wavefunction)
 
-wavefunctionFiniteL2BridgeRound203Level : ProofLevel
-wavefunctionFiniteL2BridgeRound203Level = machineChecked
+wavefunctionFiniteSampleBridgeRound203Level : ProofLevel
+wavefunctionFiniteSampleBridgeRound203Level = machineChecked
 
-wavefunctionFiniteL2DefinitenessRound203Level : ProofLevel
-wavefunctionFiniteL2DefinitenessRound203Level = machineChecked
+wavefunctionFiniteSampleSymmetryRound203Level : ProofLevel
+wavefunctionFiniteSampleSymmetryRound203Level = machineChecked
 
 literalPhysicalGaugeInvariantL2MeasureRound203Level : ProofLevel
 literalPhysicalGaugeInvariantL2MeasureRound203Level = conditional
