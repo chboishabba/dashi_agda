@@ -42,11 +42,11 @@ data InstitutionalObjective : Set where
   : InstitutionalObjective
 
 data SubjectRelation : Set where
-  informedVolunteerRelation
+  volunteerParticipantRelation
   volunteerWithLimitedDisclosureRelation
   unwittingSubjectRelation
   patientParticipantRelation
-  recordsOnlyNoHumanExposureRelation
+  humanCognitiveParticipantRelation
   : SubjectRelation
 
 data EfficacyStanding : Set where
@@ -99,20 +99,20 @@ stargateEntry = programmeAtlasEntry
   stargateGrillFlameFamily
   remoteViewingPsi
   intelligenceCollectionObjective
-  recordsOnlyNoHumanExposureRelation
+  humanCognitiveParticipantRelation
   operationalUtilityNotEstablished
   "CIA remote-viewing/STARGATE historical collection"
-  "programme and sessions documented; operational intelligence utility remains a separate consumer"
+  "programme and human remote-viewing sessions documented; operational intelligence utility remains a separate consumer"
 
 edgewoodEntry : ProgrammeAtlasEntry
 edgewoodEntry = programmeAtlasEntry
   edgewoodHallucinogenFamily
   drugAlteredState
   militaryDisruptionObjective
-  informedVolunteerRelation
+  volunteerParticipantRelation
   mixedOrUnresolvedEfficacy
   "DoD/Health.mil Edgewood Arsenal hallucinogenic-agent studies"
-  "service-member volunteer studies included psychochemicals and LSD field testing; programme purpose is distinct from therapeutic psychedelic research"
+  "service-member volunteer studies included psychochemicals and LSD field testing; volunteer status does not by itself settle adequacy of disclosure or modern consent standards"
 
 psychedelicResearchEntry : ProgrammeAtlasEntry
 psychedelicResearchEntry = programmeAtlasEntry
