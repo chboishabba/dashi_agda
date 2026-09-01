@@ -25,23 +25,25 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation120SelectedSemanticsRound217E
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as Lie
 import DASHI.Physics.YangMills.BalabanCMP98MultiscaleAveragingDerivativeRound126Exact as R126
 import DASHI.Physics.YangMills.BalabanCMP98Equation119OneStepDerivativeRound146Exact as R146
 import DASHI.Physics.YangMills.BalabanCMP98Equation119CanonicalCoarseSegmentRound158Exact as R158
+import DASHI.Physics.YangMills.BalabanCMP98Equation119DifferentialDexpRound159Exact as R159
 import DASHI.Physics.YangMills.BalabanCMP98Equation119SelectedBackgroundBondWeldRound170Exact as R170
 import DASHI.Physics.YangMills.BalabanCMP98Equation119SelectedExistingCutRound175Exact as R175
 import DASHI.Physics.YangMills.BalabanCMP98Equation119FederbushCalculusReuseRound177Exact as R177
 import DASHI.Physics.YangMills.BalabanCMP98Equation119FederbushSelectedCutProducerRound178Exact as R178
 
 record Equation120SelectedSourceSemantics
-    {C n Value group CoarseField FineField Lie}
+    {C n Value group CoarseField FineField LieCarrier}
     (source : R158.CanonicalL13Equation119Source C n Value group) : Set₁ where
   field
     selectedBackgroundWeld :
       R170.SelectedBackgroundBondWeld
         {CoarseField = CoarseField}
         {FineField = FineField}
-        {Lie = Lie}
+        {Lie = LieCarrier}
         source
 
     selectedCut :
@@ -50,7 +52,7 @@ record Equation120SelectedSourceSemantics
 open Equation120SelectedSourceSemantics public
 
 -- Specialize the Lie-calculus side to the literal SU(2) carrier already used by
--- R178.  This record intentionally carries no qSource equality.
+-- R178. This record intentionally carries no qSource equality.
 record Equation120SelectedSU2Semantics
     {n Value group CoarseField FineField}
     (source : R158.CanonicalL13Equation119Source
@@ -60,7 +62,7 @@ record Equation120SelectedSU2Semantics
       Equation120SelectedSourceSemantics
         {CoarseField = CoarseField}
         {FineField = FineField}
-        {Lie = R178.Lie.SU2LieAlgebra}
+        {LieCarrier = Lie.SU2LieAlgebra}
         source
 
     federbushConvention : R177.ExistingFederbushConventionFamily
@@ -76,7 +78,7 @@ selectedBackgroundReceipt :
   R170.SelectedBackgroundBondWeld
     {CoarseField = CoarseField}
     {FineField = FineField}
-    {Lie = R178.Lie.SU2LieAlgebra}
+    {Lie = Lie.SU2LieAlgebra}
     source
 selectedBackgroundReceipt semantics =
   selectedBackgroundWeld (selectedSource semantics)
@@ -97,7 +99,7 @@ selectedFederbushCalculus :
       R178.su2SignedCarrier n Value group} →
   Equation120SelectedSU2Semantics
     {CoarseField = CoarseField} {FineField = FineField} source →
-  DASHI.Physics.YangMills.BalabanCMP98Equation119DifferentialDexpRound159Exact.UniformAdjointDifferentialCalculus
+  R159.UniformAdjointDifferentialCalculus
     (R126.Vector (R146.additive R178.su2SignedCarrier))
 selectedFederbushCalculus semantics =
   R177.asUniformAdjointDifferentialCalculus (federbushConvention semantics)
@@ -112,7 +114,7 @@ cmp98Equation120SelectedFederbushReuseRound217Level : ProofLevel
 cmp98Equation120SelectedFederbushReuseRound217Level = machineChecked
 
 -- These are now the literal remaining source receipts rather than one opaque
--- `selected semantics` flag.  Under the selected-background architecture they
+-- `selected semantics` flag. Under the selected-background architecture they
 -- are recovery/adaptation targets, not new qSource mathematics.
 literalCMP98SelectedBackgroundWeldRound217Level : ProofLevel
 literalCMP98SelectedBackgroundWeldRound217Level = conditional
@@ -124,7 +126,7 @@ literalCMP98PrincipalYFederbushIdentificationRound217Level : ProofLevel
 literalCMP98PrincipalYFederbushIdentificationRound217Level = conditional
 
 -- The perturbation projection / scalar-action fields entering R216 must still
--- be the literal physical A-coordinate maps.  This is deliberately kept
+-- be the literal physical A-coordinate maps. This is deliberately kept
 -- separate from background-link and principal-chart authority.
 literalCMP98PerturbationCoordinateSemanticsRound217Level : ProofLevel
 literalCMP98PerturbationCoordinateSemanticsRound217Level = conditional
