@@ -53,7 +53,10 @@ record PairCurveDerivativeData
 open PairCurveDerivativeData public
 
 fluxTerms :
-  ∀ {Time VectorDerivativeOf} →
+  {Time : Set} →
+  {VectorDerivativeOf :
+    (Time → C3.Complex3 F) →
+    (Time → C3.Complex3 F) → Set} →
   List (PairCurveDerivativeData Time VectorDerivativeOf) →
   List (Time → ℚ)
 fluxTerms [] = []
@@ -61,7 +64,10 @@ fluxTerms (P ∷ rest) =
   R416.weightedFluxCurve (R418.r290Curve (pairCurve P)) ∷ fluxTerms rest
 
 tangentTerms :
-  ∀ {Time VectorDerivativeOf} →
+  {Time : Set} →
+  {VectorDerivativeOf :
+    (Time → C3.Complex3 F) →
+    (Time → C3.Complex3 F) → Set} →
   List (PairCurveDerivativeData Time VectorDerivativeOf) →
   List (Time → ℚ)
 tangentTerms [] = []
