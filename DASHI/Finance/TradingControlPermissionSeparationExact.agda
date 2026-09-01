@@ -2,6 +2,7 @@ module DASHI.Finance.TradingControlPermissionSeparationExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Trading.PermissionKernel as Legacy
 import DASHI.Finance.TradingPermissionActionRefinementExact as Refine
 
@@ -63,15 +64,24 @@ banSurfaceCollisionHoldReduce :
   legacyPermissionSurface banHoldWorld ≡ legacyPermissionSurface banReduceWorld
 banSurfaceCollisionHoldReduce = refl
 
-banCannotDetermineControl :
-  (Legacy.Permission → ControlIntent) → ⊥
-banCannotDetermineControl compiler with compiler Legacy.BAN
-... | reduceControl = λ where
-      ()
-... | holdControl = λ where
-      ()
-... | increaseControl = λ where
-      ()
+controlDiffersIncreaseHold :
+  control banIncreaseWorld ≡ control banHoldWorld → ⊥
+controlDiffersIncreaseHold ()
+
+legacyPermissionCannotRecoverControl :
+  NF.NonFactorabilityWitness legacyPermissionSurface control
+legacyPermissionCannotRecoverControl =
+  NF.nonFactorabilityWitness
+    banIncreaseWorld
+    banHoldWorld
+    banSurfaceCollisionIncreaseHold
+    controlDiffersIncreaseHold
+
+noLegacyPermissionOnlyControlCompiler :
+  NF.FactorsThrough legacyPermissionSurface control → ⊥
+noLegacyPermissionOnlyControlCompiler =
+  NF.witnessRulesOutEveryFlatFactorisation
+    legacyPermissionCannotRecoverControl
 
 ------------------------------------------------------------------------
 -- State-aware control compilation.
