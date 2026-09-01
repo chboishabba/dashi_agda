@@ -7,6 +7,7 @@ import DASHI.Chemistry.RegulatoryAnalyteCoverageBidiExact
 import DASHI.Chemistry.AssayDetectionEnvelopeExact
 import DASHI.Chemistry.SpeciesMethodDetectionCrossPollinationExact
 import DASHI.Chemistry.DefensiveRegulatoryAssayStressAuditExact
+import DASHI.Chemistry.RegulatoryAssayExperimentProofSearchExact
 import DASHI.Chemistry.RegulatoryAnalytePanelRefinementExact
 import DASHI.Chemistry.ExistingContentBridge
 import DASHI.Chemistry.Photography.InstantFilmSurface
