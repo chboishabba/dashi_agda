@@ -14,13 +14,6 @@ import DASHI.Cognition.PNF.SensibLawParticipantLegalRoleWrongTypeBidiExact as Le
 import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExact as LegalChain
 import DASHI.Cognition.PNF.SensibLawDocumentWorldSemanticStatusBidiExact as Context
 
-------------------------------------------------------------------------
--- Canonical BIDI campaign order.
---
--- This is not a claim that every document must resolve every axis.  It is the
--- dependency order for any axis that a consumer actually requires.
-------------------------------------------------------------------------
-
 data BidiCampaign : Set where
   attributionPropositionCampaign : BidiCampaign
   occurrenceCampaign : BidiCampaign
@@ -45,10 +38,6 @@ campaignReadiness documentWorldContextCampaign = typeOwnerPresent
 allCampaignTypeOwnersPresent :
   campaignReadiness attributionPropositionCampaign ≡ typeOwnerPresent
 allCampaignTypeOwnersPresent = refl
-
-------------------------------------------------------------------------
--- Existing constitutional boundaries still govern every campaign.
-------------------------------------------------------------------------
 
 regexStillForbidden :
   Constitution.regexMayProduceSemanticEvidence
@@ -79,10 +68,6 @@ consumerEquivalenceStillNotWorldIdentity :
   Context.ConsumerEquivalentMeansSameSemanticWorld → ⊥
 consumerEquivalenceStillNotWorldIdentity = Context.consumerEquivalenceDoesNotIdentifyWorld
 
-------------------------------------------------------------------------
--- Campaign-specific owner witnesses in the dependency graph.
-------------------------------------------------------------------------
-
 claimAssertionBoundary : Attribution.ClaimAssertionIsTruthProof → ⊥
 claimAssertionBoundary = Attribution.claimAssertionDoesNotProveTruth
 
@@ -99,14 +84,8 @@ legalRoleBoundary = LegalRole.agentDoesNotAutoBecomeDutyBearer
 legalChainBoundary : LegalChain.ApplicableAutomaticallyViolated → ⊥
 legalChainBoundary = LegalChain.applicabilityDoesNotAutoViolate
 
-------------------------------------------------------------------------
--- Completion semantics: type-level campaign availability does not claim that
--- runtime producers or governed closure receipts have been supplied for a
--- concrete corpus.
-------------------------------------------------------------------------
-
 data TypeOwnerPresenceMeansCorpusResolved : Set where
-\data AggregateImportMeansKernelValidated : Set where
+data AggregateImportMeansKernelValidated : Set where
 
 typeOwnersDoNotResolveCorpus : TypeOwnerPresenceMeansCorpusResolved → ⊥
 typeOwnersDoNotResolveCorpus ()
