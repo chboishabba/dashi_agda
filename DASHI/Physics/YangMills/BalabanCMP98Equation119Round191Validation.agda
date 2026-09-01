@@ -24,6 +24,7 @@ import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Ex
 import DASHI.Physics.YangMills.BalabanNullQuotientHamiltonianDescentRound209Exact as R209
 import DASHI.Physics.YangMills.BalabanFederbushCanonicalRealMatrixExtensionRound210Exact as R210
 import DASHI.Physics.YangMills.BalabanCMP98Equation124QSourceRecoveryRound211Exact as R211
+import DASHI.Physics.YangMills.BalabanMeasureNullCanonicalQuotientHamiltonianRound212Exact as R212
 
 round189PathHomomorphism = R189.cmp98RawUnitPathHomomorphismRound189Level
 round190BoundarySupersession = R190.cmp98ClayBoundarySupersessionRound190Level
@@ -162,6 +163,18 @@ round209PhysicalHamiltonianPreservesNull =
   R209.literalFiniteYMHamiltonianPreservesMeasureNullRound209Level
 round209L2CompletionAndSelfAdjointness =
   R209.literalNullQuotientL2CompletionAndSelfAdjointnessRound209Level
+
+-- R212 consumes the null-preserving operator and a canonical presentation of
+-- the same measure-null relation, then constructs the unique descended H on the
+-- quotient. Quotient recursion is therefore no longer a live theorem leaf.
+round212CanonicalNullQuotientHamiltonian =
+  R212.measureNullCanonicalQuotientHamiltonianRound212Level
+round212CanonicalNullQuotientHamiltonianUnique =
+  R212.measureNullQuotientHamiltonianUniqueRound212Level
+round212LiteralBalabanCanonicalNullQuotient =
+  R212.literalBalabanMeasureNullCanonicalQuotientRound212Level
+round212LiteralHilbertCompletion =
+  R212.literalBalabanNullQuotientHilbertCompletionRound212Level
 
 round202PhysicalGaugeInvariantL2Measure =
   R202.literalPhysicalGaugeInvariantL2MeasureRound202Level
