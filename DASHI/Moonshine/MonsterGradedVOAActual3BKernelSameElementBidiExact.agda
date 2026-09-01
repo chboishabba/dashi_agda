@@ -33,6 +33,7 @@ open import Agda.Builtin.Nat using (Nat)
 import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact as Selected
 import DASHI.Moonshine.Monster3BActualKernelCharacterPromotionExact as Kernel
 import DASHI.Moonshine.Monster3BKernelCharacterCriterionExact as Character
+import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact as Recognition
 
 ------------------------------------------------------------------------
 -- 1. Same-element attachment to the actual kernel class surface.
@@ -145,7 +146,7 @@ record Actual3BKernelRecognizedSameElementAttachment
   field
     attachment : Actual3BKernelSameElementAttachment Monster K
     recognition :
-      DASHI.Moonshine.Monster3BMultiplicityEvaluationExact.ActualZetaSectorRecognition
+      Recognition.ActualZetaSectorRecognition
         (selectedLiteralZetaSector attachment)
 
 open Actual3BKernelRecognizedSameElementAttachment public
