@@ -49,6 +49,7 @@ on:
       - 'DASHI/Analysis/RiemannG2HAProofCarryingRecoveryTraceExact.agda'
       - 'DASHI/Analysis/RiemannG2HAConsumerFanoutPriorityExact.agda'
       - 'DASHI/Analysis/RiemannG2HAConsumerWeightedRecoveryTraceExact.agda'
+      - 'DASHI/Analysis/RiemannG2HASourceProducerHyperedgeExact.agda'
       - 'DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda'
       - 'DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda'
       - 'DASHI/Mathematics/NumberTheory/DiophantineTupleDPrimeSquare2026ClaimAuditExact.agda'
