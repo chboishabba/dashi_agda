@@ -7,26 +7,30 @@ open import Agda.Builtin.String using (String)
 import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap
 import DASHI.Analysis.RiemannG2Zeta23FkActionRecoveryExact as Fk
 import DASHI.Analysis.RiemannG2Zeta23FkCheckedSourceReturnExact as FkChecked
+import DASHI.Analysis.RiemannG2FkOrbitConsumerAttachmentExact as Orbit
+import DASHI.Analysis.RiemannG2FkOrbitExplicitFormulaWeldExact as Weld
 import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as PQ
 
 ------------------------------------------------------------------------
--- HIGHEST-ALPHA SCHEDULER AFTER THE 8894 + CHECKED f_k SOURCE AUDIT
+-- HIGHEST-ALPHA SCHEDULER AFTER 8894 + CHECKED f_k SOURCE RECOVERY
 --
--- The deeper source audit closes more of H_A than the first 8894 scheduler:
--- Zeta23 itself proves, on the literal f_k family, the paperFT frequency shift,
--- C^2 regularity, support window, compact support and continuity.  Therefore
--- these are not fresh analytic proof-search leaves.  What remains is the
--- same-object/cross-prover attachment into the canonical Agda Weil/Mellin Test
--- and identification with the same Agda RiemannExplicitFormula consumer.
+-- Source-side H_A mathematics is already paid on the literal f_k family:
+-- character multiplication, paperFT translation, C^2 regularity, support,
+-- compact support and continuity.  Backward inspection of the target-centred
+-- consumer shows that equality of the WHOLE source function space with the
+-- abstract Agda Test carrier is overpayment.  The live representation seam is
+-- only the selected source base/target/window orbit embedded into the chosen
+-- Weil Test, with admissibility and the same formula's spectral observations.
 ------------------------------------------------------------------------
 
 data RH8894Leaf : Set where
   searchForModulationOperation
   rebuildCharacterMultiplication
-  attachSourceFunctionCarrierToCanonicalMellinTest
-  proveFkAdmissibilityClosure
-  proveFkTransformShift
-  identifyFkShiftWithSameExplicitFormula
+  identifyWholeSourceFunctionSpaceWithWeilTest
+  identifyWholeSourceFunctionSpaceWithMellinTest
+  recoverSelectedFkOrbitEmbedding
+  recoverSelectedFkAdmissibility
+  recoverSelectedSameFormulaNearFarSpectralEquality
   transportCheckedFkTheoremsIntoAgda
 
   sharpenQuadraticDecayGapSplit
@@ -47,10 +51,11 @@ data LeafState : Set where
 leafState : RH8894Leaf -> LeafState
 leafState searchForModulationOperation = owned
 leafState rebuildCharacterMultiplication = pruned
-leafState attachSourceFunctionCarrierToCanonicalMellinTest = live
-leafState proveFkAdmissibilityClosure = owned
-leafState proveFkTransformShift = owned
-leafState identifyFkShiftWithSameExplicitFormula = live
+leafState identifyWholeSourceFunctionSpaceWithWeilTest = pruned
+leafState identifyWholeSourceFunctionSpaceWithMellinTest = pruned
+leafState recoverSelectedFkOrbitEmbedding = live
+leafState recoverSelectedFkAdmissibility = live
+leafState recoverSelectedSameFormulaNearFarSpectralEquality = live
 leafState transportCheckedFkTheoremsIntoAgda = live
 
 leafState sharpenQuadraticDecayGapSplit = pruned
@@ -65,7 +70,7 @@ leafState attachOwnedClusterMargin = live
 leafState combineFinalIndependentBudgets = conditional
 
 ------------------------------------------------------------------------
--- Proofs that the scheduler agrees with the existing pruning/source owners.
+-- Scheduler agreement with existing pruning/source owners.
 ------------------------------------------------------------------------
 
 modulationOperationSearchNoLongerLive :
@@ -83,6 +88,19 @@ sourceContDiffReproofNoLongerLive = FkChecked.sourceContDiffReproofPruned
 sourceCompactSupportReproofNoLongerLive :
   FkChecked.FkSourceRelevant FkChecked.reproveSourceCompactSupport -> ⊥
 sourceCompactSupportReproofNoLongerLive = FkChecked.sourceCompactSupportReproofPruned
+
+wholeWeilCarrierEqualityNoLongerLive :
+  Orbit.PaymentRelevant Orbit.identifyWholeSourceFunctionSpaceWithWeilTest -> ⊥
+wholeWeilCarrierEqualityNoLongerLive = Orbit.wholeWeilCarrierEqualityPruned
+
+wholeMellinCarrierEqualityNoLongerLive :
+  Orbit.PaymentRelevant Orbit.identifyWholeSourceFunctionSpaceWithMellinTest -> ⊥
+wholeMellinCarrierEqualityNoLongerLive = Orbit.wholeMellinCarrierEqualityPruned
+
+genericExplicitFormulaReconstructionNoLongerLive :
+  Weld.PaymentRelevant Weld.reconstructGenericExplicitFormula -> ⊥
+genericExplicitFormulaReconstructionNoLongerLive =
+  Weld.reconstructGenericExplicitFormulaPruned
 
 quadraticGapSplitSharpeningNoLongerLive :
   Gap.GapSplitRelevant Gap.sharpenSameQuadraticDecayDonor -> ⊥
@@ -124,15 +142,24 @@ record HighestAlphaAfter8894Boundary : Set where
     sourceFkAnalyticPrerequisitesAlreadyCheckedIsTrue :
       sourceFkAnalyticPrerequisitesAlreadyChecked ≡ true
 
-    sourceCarrierAttachmentStillRequired : Bool
-    sourceCarrierAttachmentStillRequiredIsTrue : sourceCarrierAttachmentStillRequired ≡ true
+    wholeSourceFunctionSpaceEqualityRequired : Bool
+    wholeSourceFunctionSpaceEqualityRequiredIsFalse :
+      wholeSourceFunctionSpaceEqualityRequired ≡ false
+
+    selectedFkOrbitEmbeddingStillRequired : Bool
+    selectedFkOrbitEmbeddingStillRequiredIsTrue :
+      selectedFkOrbitEmbeddingStillRequired ≡ true
+
+    selectedFkAdmissibilityStillRequired : Bool
+    selectedFkAdmissibilityStillRequiredIsTrue :
+      selectedFkAdmissibilityStillRequired ≡ true
+
+    sameAgdaExplicitFormulaNearFarEqualityStillRequired : Bool
+    sameAgdaExplicitFormulaNearFarEqualityStillRequiredIsTrue :
+      sameAgdaExplicitFormulaNearFarEqualityStillRequired ≡ true
 
     crossProverTransportStillRequired : Bool
     crossProverTransportStillRequiredIsTrue : crossProverTransportStillRequired ≡ true
-
-    sameAgdaExplicitFormulaIdentityStillRequired : Bool
-    sameAgdaExplicitFormulaIdentityStillRequiredIsTrue :
-      sameAgdaExplicitFormulaIdentityStillRequired ≡ true
 
     sameQuadraticGapSplitRouteStillWorthSharpening : Bool
     sameQuadraticGapSplitRouteStillWorthSharpeningIsFalse :
@@ -159,6 +186,8 @@ canonicalHighestAlphaAfter8894Boundary =
     true refl
     true refl
     true refl
+    false refl
+    true refl
     true refl
     true refl
     true refl
@@ -167,4 +196,4 @@ canonicalHighestAlphaAfter8894Boundary =
     true refl
     false refl
     false refl
-    "The deeper checked-source audit removes fresh H_A mathematics on the source side: literal f_k character multiplication, paperFT frequency translation, C^2 regularity, support, compact support and continuity are already proved in Zeta23 on the same test family used by its explicit-formula lane. Do not reprove them. Highest-alpha H_A work is now representation/provenance: attach that concrete source family to the canonical Agda Mellin/Weil Test, transport the checked source theorems across the prover boundary, and identify the source explicit-formula response with the same Agda RiemannExplicitFormula instance. In parallel, compare the adaptive J*Lambda constant window or find a genuinely different signed near mechanism, repair Gamma precision, attach the owned cluster margin, then pay the final independent budget inequality. RH remains open."
+    "The checked source already owns the literal fk character action, paperFT frequency translation, C^2 regularity, support, compact support and continuity. Backward inspection of the target-centred consumer removes another overpayment: do not identify the entire source C_c^2 function space with the abstract Agda Weil/Mellin Test carrier. Highest-alpha H_A/H_E work is consumer-relative: embed the selected source base/target/window fk orbit into the chosen Weil Test; retain admissibility; transport checked source facts across the prover boundary; and prove the spectralZeroForm of that exact selected test for the same RiemannExplicitFormula is same-ordinate cluster plus finite pole-near signed response plus the same far remainder. The existing explicitFormula theorem then supplies the arithmetic equality automatically. In parallel compare the adaptive J*Lambda constant window or find a different signed near mechanism, repair Gamma precision, attach the owned cluster margin, and pay the final independent budget inequality. RH remains open."
