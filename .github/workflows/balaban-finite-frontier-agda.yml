@@ -44,6 +44,8 @@ on:
       - 'DASHI/Physics/YangMills/BalabanCMP98Equation124GroupedCorrectionRound213Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP98LiteralCorrectionGroupingRound214Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP98Equation124QSourceRound214Validation.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP98Equation120QSourceRecoveryRound215Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP98Path13Equation120DerivedQSourceRound216Exact.agda'
       - '.github/workflows/balaban-finite-frontier-agda.yml'
 
 concurrency:
@@ -75,7 +77,7 @@ jobs:
             DASHI/Physics/YangMills/BalabanCMP98Equation124QSourceRound214Validation.agda \
             > /tmp/balaban-finite-frontier.log 2>&1
           status=$?
-          tail -n 240 /tmp/balaban-finite-frontier.log
+          tail -n 260 /tmp/balaban-finite-frontier.log
           echo "status=$status" >> "$GITHUB_OUTPUT"
           exit 0
       - name: Upload focused Agda log
