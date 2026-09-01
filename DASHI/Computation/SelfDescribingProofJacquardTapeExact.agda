@@ -7,27 +7,27 @@ import DASHI.Computation.JacquardOperationalSemanticsExact as Jacquard
 import DASHI.Combinatorics.ProofCarryingTextileHyperfabricExact as Fabric
 
 ------------------------------------------------------------------------
--- Literal fixed-width bits.  Unlike a LiftMask function, this carrier can be
+-- Literal fixed-width bits. Unlike a LiftMask function, this carrier can be
 -- scanned and parity-checked locally as physical/digital tape data.
 ------------------------------------------------------------------------
 
 data BitVector : Nat → Set where
-  [] : BitVector 0
-  _∷_ : ∀ {n} → Bool → BitVector n → BitVector (suc n)
+  b[] : BitVector 0
+  _b∷_ : ∀ {n} → Bool → BitVector n → BitVector (suc n)
 
-infixr 5 _∷_
+infixr 5 _b∷_
 
 lookupBit : ∀ {n} → BitVector n → Fin n → Bool
-lookupBit (bit ∷ bits) zero = bit
-lookupBit (bit ∷ bits) (suc i) = lookupBit bits i
+lookupBit (bit b∷ bits) zero = bit
+lookupBit (bit b∷ bits) (suc i) = lookupBit bits i
 
 bitsToLiftMask : ∀ {n} → BitVector n → Jacquard.LiftMask n
 bitsToLiftMask bits i = lookupBit bits i
 
 maskToBits : ∀ {n} → Jacquard.LiftMask n → BitVector n
-maskToBits {0} mask = []
+maskToBits {0} mask = b[]
 maskToBits {suc n} mask =
-  mask zero ∷ maskToBits (λ i → mask (suc i))
+  mask zero b∷ maskToBits (λ i → mask (suc i))
 
 xor : Bool → Bool → Bool
 xor false b = b
@@ -40,17 +40,16 @@ boolEq true true = true
 boolEq _ _ = false
 
 parityBits : ∀ {n} → BitVector n → Bool
-parityBits [] = false
-parityBits (bit ∷ bits) = xor bit (parityBits bits)
+parityBits b[] = false
+parityBits (bit b∷ bits) = xor bit (parityBits bits)
 
 ------------------------------------------------------------------------
 -- Self-describing proof tape rows.
 --
--- Every row is still a literal lift vector and may therefore be lowered to a
--- real loom row.  Structural metadata is represented in reserved proof lanes,
--- not merely in an out-of-band comment.  The exact lane packing is delegated
--- to a machine/layout profile; this owner establishes the typed frame grammar
--- and local checkability before physical lowering.
+-- Structural metadata is represented as typed lanes which a physical packing
+-- profile must lower into reserved warp ends.  Continuation rows carry the
+-- actual Jacquard motif lift payload.  The `moreContinuations` bit makes the
+-- frame grammar support a motif spanning multiple loom picks.
 ------------------------------------------------------------------------
 
 data FrameKind : Set where
@@ -87,6 +86,7 @@ record ProofTapeRow (payloadWidth : Nat) : Set where
     frameKind : FrameKind
     proofStepId : Nat
     continuationId : Nat
+    moreContinuations : Bool
     motif : Fabric.ProofMotif
     provenanceId : Nat
     payload : BitVector payloadWidth
@@ -99,30 +99,33 @@ computedParity row =
   xor (kindParity (frameKind row))
     (xor (natParity (proofStepId row))
       (xor (natParity (continuationId row))
-        (xor (motifParity (motif row))
-          (xor (natParity (provenanceId row))
-            (parityBits (payload row))))))
+        (xor (moreContinuations row)
+          (xor (motifParity (motif row))
+            (xor (natParity (provenanceId row))
+              (parityBits (payload row)))))))
 
 rowLocallyValid : ∀ {n} → ProofTapeRow n → Bool
 rowLocallyValid row = boolEq (parityBit row) (computedParity row)
 
 canonicalRow :
   ∀ {n} →
-  FrameKind → Nat → Nat → Fabric.ProofMotif → Nat → BitVector n →
+  FrameKind → Nat → Nat → Bool → Fabric.ProofMotif → Nat → BitVector n →
   ProofTapeRow n
-canonicalRow kind step cont motif provenance payload =
+canonicalRow kind step cont more motif provenance payload =
   proof-tape-row
-    kind step cont motif provenance payload
+    kind step cont more motif provenance payload
     (xor (kindParity kind)
       (xor (natParity step)
         (xor (natParity cont)
-          (xor (motifParity motif)
-            (xor (natParity provenance) (parityBits payload))))))
+          (xor more
+            (xor (motifParity motif)
+              (xor (natParity provenance) (parityBits payload)))))))
 
 canonicalRowValid :
-  ∀ {n} kind step cont motif provenance (payload : BitVector n) →
-  rowLocallyValid (canonicalRow kind step cont motif provenance payload) ≡ true
-canonicalRowValid kind step cont motif provenance payload = refl
+  ∀ {n} kind step cont more motif provenance (payload : BitVector n) →
+  rowLocallyValid
+    (canonicalRow kind step cont more motif provenance payload) ≡ true
+canonicalRowValid kind step cont more motif provenance payload = refl
 
 ProofTape : Nat → Set
 ProofTape n = List (ProofTapeRow n)
@@ -134,8 +137,8 @@ allRowsValid (row ∷ rows) with rowLocallyValid row
 ... | true = allRowsValid rows
 
 ------------------------------------------------------------------------
--- Structural grammar: start -> motifs -> stop.
--- A motif carries begin, provenance, one or more continuation rows, and end.
+-- Structural grammar:
+-- start -> (motif-begin -> provenance -> continuation+ -> motif-end)* -> stop
 ------------------------------------------------------------------------
 
 data TapePhase : Set where
@@ -164,14 +167,22 @@ advancePhase betweenMotifs row with frameKind row
 ... | motifBeginFrame = accepted (expectProvenance (proofStepId row))
 ... | stopFrame = accepted finished
 ... | _ = rejected
-advancePhase (expectProvenance step) row with frameKind row | natEq step (proofStepId row)
+advancePhase (expectProvenance step) row
+  with frameKind row | natEq step (proofStepId row)
 ... | provenanceFrame | true = accepted (expectContinuation step 0)
 ... | _ | _ = rejected
 advancePhase (expectContinuation step next) row
-  with frameKind row | natEq step (proofStepId row) | natEq next (continuationId row)
-... | continuationFrame | true | true = accepted (expectMotifEnd step)
-... | _ | _ | _ = rejected
-advancePhase (expectMotifEnd step) row with frameKind row | natEq step (proofStepId row)
+  with frameKind row
+     | natEq step (proofStepId row)
+     | natEq next (continuationId row)
+     | moreContinuations row
+... | continuationFrame | true | true | true =
+  accepted (expectContinuation step (suc next))
+... | continuationFrame | true | true | false =
+  accepted (expectMotifEnd step)
+... | _ | _ | _ | _ = rejected
+advancePhase (expectMotifEnd step) row
+  with frameKind row | natEq step (proofStepId row)
 ... | motifEndFrame | true = accepted betweenMotifs
 ... | _ | _ = rejected
 advancePhase finished row = rejected
@@ -190,10 +201,9 @@ validateProofTape : ∀ {n} → ProofTape n → Bool
 validateProofTape = validateStructureFrom expectStart
 
 ------------------------------------------------------------------------
--- Physical weaving projection.
--- Every row has a literal payload vector.  Metadata rows are intentionally
--- retained as rows: a machine profile may reserve certificate warp ends so the
--- proof framing/provenance is woven into the object rather than discarded.
+-- Physical weaving projection of payload lanes.
+-- The separate packing/backend owner adds the certificate lanes to these
+-- payload bits to obtain a full loom-width lift raster.
 ------------------------------------------------------------------------
 
 payloadLiftMask : ∀ {n} → ProofTapeRow n → Jacquard.LiftMask n
@@ -212,6 +222,7 @@ record SelfDescribingProofTapeBoundary : Set where
     literalBitsLocallyParityCheckable : Bool
     framingAndMotifBoundariesTyped : Bool
     proofStepAndContinuationIdsPresent : Bool
+    multiPickMotifsHaveContinuationChain : Bool
     provenanceChannelPresent : Bool
     invalidLocalParityRejectsBeforeWeaving : Bool
     structuralOrderRejectsBeforeWeaving : Bool
@@ -221,4 +232,4 @@ record SelfDescribingProofTapeBoundary : Set where
 canonicalSelfDescribingProofTapeBoundary : SelfDescribingProofTapeBoundary
 canonicalSelfDescribingProofTapeBoundary =
   self-describing-proof-tape-boundary
-    true true true true true true true true
+    true true true true true true true true true
