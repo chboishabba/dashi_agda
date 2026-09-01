@@ -1,0 +1,48 @@
+name: RH bidi experimental proof search
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Reasoning/AristotleExperimentalProofSearchExact.agda'
+      - 'DASHI/Reasoning/AristotleExperimentalBranchMergeExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleQuotientLeanReturn8889Exact.agda'
+      - 'DASHI/Analysis/RiemannAristotleExperimentalProofSearchExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleQuotientFiniteNearEvaluationBidiExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleQuotientFiniteNearRouteAuditExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleQuotientDirectFiniteNearAttackExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleNearPhaseStatisticExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleNearTargetModulationExact.agda'
+      - 'DASHI/Analysis/RiemannConstructedComplexCharacterCoreExact.agda'
+      - 'DASHI/Analysis/RiemannConstructedRealPhaseCoherenceExact.agda'
+      - 'DASHI/Analysis/RiemannConstructedComplexExpAddReductionExact.agda'
+      - 'DASHI/Analysis/RiemannExistingConstructedCharacterMachineryAssemblyExact.agda'
+      - 'DASHI/Analysis/RiemannCanonicalComplexCharacterAttachmentExact.agda'
+      - 'DASHI/Analysis/RiemannAnalyticComplexCharacterExtensionExact.agda'
+      - 'DASHI/Analysis/RiemannPoleNearReflectionEvenNormalizationExact.agda'
+      - 'DASHI/Analysis/RiemannAnalyticTestModulationShiftExact.agda'
+      - 'DASHI/Analysis/RiemannAnalyticModulationExtensionExact.agda'
+      - 'DASHI/Analysis/RiemannAnalyticModulationBidiAssemblyExact.agda'
+      - 'DASHI/Analysis/RiemannPoleNearHTAnalyticAdapterExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleNearTranslationModulationIntertwinerExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleNearWindowRestrictionResidualExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleNearTranslationModulationBidiMeetingExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleNearExplicitFormulaBridgeExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleNearBidiMeetingExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerRegression.agda'
+      - 'DASHI/Analysis/RiemannAristotleRHAnalyticRouteSchedulerExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleRHAnalyticLeafSchedulerExact.agda'
+      - 'DASHI/Reasoning/AristotleExperimentalProofSearchValidation.agda'
+      - 'DASHI/Reasoning/Everything.agda'
+      - 'scripts/check_aristotle_experimental_proof_search.sh'
+      - '.github/workflows/aristotle-experimental-proof-search.yml'
+  workflow_dispatch:
+
+jobs:
+  focused-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trust scan and focused Agda check when toolchain is available
+        run: bash scripts/check_aristotle_experimental_proof_search.sh
