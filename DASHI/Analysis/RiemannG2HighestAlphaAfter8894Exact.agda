@@ -6,28 +6,18 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap
 import DASHI.Analysis.RiemannG2Zeta23FkActionRecoveryExact as Fk
+import DASHI.Analysis.RiemannG2Zeta23FkCheckedSourceReturnExact as FkChecked
 import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as PQ
 
 ------------------------------------------------------------------------
--- HIGHEST-ALPHA SCHEDULER AFTER THE 8894 LEAN RETURN
+-- HIGHEST-ALPHA SCHEDULER AFTER THE 8894 + CHECKED f_k SOURCE AUDIT
 --
--- This owner is deliberately consumer-relative.  It prevents search from
--- reopening leaves that are now either source-owned or theorem-level pruned.
---
--- Zero-side/H_A:
---   * literal target-character multiplication fk is source-owned;
---   * carrier attachment, admissibility, and proof-relevant shift remain live.
---
--- Near/crossing/H_E:
---   * narrow cancellation is impossible;
---   * quadratic-decay gap-split sharpening and taper retuning are pruned;
---   * coarse counting cannot manufacture the needed clustering;
---   * adaptive inverse-width scaling itself is NOT refuted, so compare the
---     lower quarter-period constant against the upper density constant.
---
--- Gamma:
---   * existence of some Gamma bound is already owned;
---   * only sharp precision repair remains live.
+-- The deeper source audit closes more of H_A than the first 8894 scheduler:
+-- Zeta23 itself proves, on the literal f_k family, the paperFT frequency shift,
+-- C^2 regularity, support window, compact support and continuity.  Therefore
+-- these are not fresh analytic proof-search leaves.  What remains is the
+-- same-object/cross-prover attachment into the canonical Agda Weil/Mellin Test
+-- and identification with the same Agda RiemannExplicitFormula consumer.
 ------------------------------------------------------------------------
 
 data RH8894Leaf : Set where
@@ -37,6 +27,7 @@ data RH8894Leaf : Set where
   proveFkAdmissibilityClosure
   proveFkTransformShift
   identifyFkShiftWithSameExplicitFormula
+  transportCheckedFkTheoremsIntoAgda
 
   sharpenQuadraticDecayGapSplit
   retuneTaperForGapSplit
@@ -57,9 +48,10 @@ leafState : RH8894Leaf -> LeafState
 leafState searchForModulationOperation = owned
 leafState rebuildCharacterMultiplication = pruned
 leafState attachSourceFunctionCarrierToCanonicalMellinTest = live
-leafState proveFkAdmissibilityClosure = live
-leafState proveFkTransformShift = live
+leafState proveFkAdmissibilityClosure = owned
+leafState proveFkTransformShift = owned
 leafState identifyFkShiftWithSameExplicitFormula = live
+leafState transportCheckedFkTheoremsIntoAgda = live
 
 leafState sharpenQuadraticDecayGapSplit = pruned
 leafState retuneTaperForGapSplit = pruned
@@ -73,12 +65,24 @@ leafState attachOwnedClusterMargin = live
 leafState combineFinalIndependentBudgets = conditional
 
 ------------------------------------------------------------------------
--- Proofs that the scheduler agrees with the existing pruning owners.
+-- Proofs that the scheduler agrees with the existing pruning/source owners.
 ------------------------------------------------------------------------
 
 modulationOperationSearchNoLongerLive :
   Fk.HARelevant Fk.searchForAnyModulationOperation -> ⊥
 modulationOperationSearchNoLongerLive = Fk.modulationSearchPruned
+
+sourceShiftReproofNoLongerLive :
+  FkChecked.FkSourceRelevant FkChecked.reproveSourcePaperFTShift -> ⊥
+sourceShiftReproofNoLongerLive = FkChecked.sourceShiftReproofPruned
+
+sourceContDiffReproofNoLongerLive :
+  FkChecked.FkSourceRelevant FkChecked.reproveSourceContDiff -> ⊥
+sourceContDiffReproofNoLongerLive = FkChecked.sourceContDiffReproofPruned
+
+sourceCompactSupportReproofNoLongerLive :
+  FkChecked.FkSourceRelevant FkChecked.reproveSourceCompactSupport -> ⊥
+sourceCompactSupportReproofNoLongerLive = FkChecked.sourceCompactSupportReproofPruned
 
 quadraticGapSplitSharpeningNoLongerLive :
   Gap.GapSplitRelevant Gap.sharpenSameQuadraticDecayDonor -> ⊥
@@ -111,24 +115,31 @@ record HighestAlphaAfter8894Boundary : Set where
   constructor highest-alpha-after-8894-boundary
   field
     literalFkActionAlreadyRecovered : Bool
-    literalFkActionAlreadyRecoveredIsTrue :
-      literalFkActionAlreadyRecovered ≡ true
+    literalFkActionAlreadyRecoveredIsTrue : literalFkActionAlreadyRecovered ≡ true
+
+    sourceFkPaperFTShiftAlreadyChecked : Bool
+    sourceFkPaperFTShiftAlreadyCheckedIsTrue : sourceFkPaperFTShiftAlreadyChecked ≡ true
+
+    sourceFkAnalyticPrerequisitesAlreadyChecked : Bool
+    sourceFkAnalyticPrerequisitesAlreadyCheckedIsTrue :
+      sourceFkAnalyticPrerequisitesAlreadyChecked ≡ true
 
     sourceCarrierAttachmentStillRequired : Bool
-    sourceCarrierAttachmentStillRequiredIsTrue :
-      sourceCarrierAttachmentStillRequired ≡ true
+    sourceCarrierAttachmentStillRequiredIsTrue : sourceCarrierAttachmentStillRequired ≡ true
 
-    sourceTransformShiftProofStillRequired : Bool
-    sourceTransformShiftProofStillRequiredIsTrue :
-      sourceTransformShiftProofStillRequired ≡ true
+    crossProverTransportStillRequired : Bool
+    crossProverTransportStillRequiredIsTrue : crossProverTransportStillRequired ≡ true
+
+    sameAgdaExplicitFormulaIdentityStillRequired : Bool
+    sameAgdaExplicitFormulaIdentityStillRequiredIsTrue :
+      sameAgdaExplicitFormulaIdentityStillRequired ≡ true
 
     sameQuadraticGapSplitRouteStillWorthSharpening : Bool
     sameQuadraticGapSplitRouteStillWorthSharpeningIsFalse :
       sameQuadraticGapSplitRouteStillWorthSharpening ≡ false
 
     adaptiveConstantWindowComparisonLive : Bool
-    adaptiveConstantWindowComparisonLiveIsTrue :
-      adaptiveConstantWindowComparisonLive ≡ true
+    adaptiveConstantWindowComparisonLiveIsTrue : adaptiveConstantWindowComparisonLive ≡ true
 
     gammaPrecisionRepairLive : Bool
     gammaPrecisionRepairLiveIsTrue : gammaPrecisionRepairLive ≡ true
@@ -148,9 +159,12 @@ canonicalHighestAlphaAfter8894Boundary =
     true refl
     true refl
     true refl
+    true refl
+    true refl
+    true refl
     false refl
     true refl
     true refl
     false refl
     false refl
-    "After the 8894 return, do not search for another modulation operation and do not sharpen the same quadratic-decay gap split. The literal Zeta23 fk character multiplication is already recovered. Highest-alpha work is: attach that source function carrier to the canonical Mellin Test; recover/prove its admissibility and transform/same-formula shift receipts; compare the quarter-period lower constant with the 8894 density upper constant in the adaptive inverse-width regime or find a genuinely different signed near mechanism; repair Gamma to the sharp consumer window; attach the already-owned quantitative cluster margin; then pay the final independent strict budget inequality. RH remains open."
+    "The deeper checked-source audit removes fresh H_A mathematics on the source side: literal f_k character multiplication, paperFT frequency translation, C^2 regularity, support, compact support and continuity are already proved in Zeta23 on the same test family used by its explicit-formula lane. Do not reprove them. Highest-alpha H_A work is now representation/provenance: attach that concrete source family to the canonical Agda Mellin/Weil Test, transport the checked source theorems across the prover boundary, and identify the source explicit-formula response with the same Agda RiemannExplicitFormula instance. In parallel, compare the adaptive J*Lambda constant window or find a genuinely different signed near mechanism, repair Gamma precision, attach the owned cluster margin, then pay the final independent budget inequality. RH remains open."
