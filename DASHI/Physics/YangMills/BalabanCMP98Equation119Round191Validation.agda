@@ -17,6 +17,7 @@ import DASHI.Physics.YangMills.BalabanRootedHamiltonianGaugeFunctorRound201Exact
 import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionHamiltonianRound202Exact as R202
 import DASHI.Physics.YangMills.BalabanFiniteSampleObservablePairingRound203Exact as R203
 import DASHI.Physics.YangMills.BalabanEquation119DerivativeDoesNotDetermineAverageRound204Exact as R204
+import DASHI.Physics.YangMills.BalabanFiniteMeasureWavefunctionL2BridgeRound205Exact as R205
 
 round189PathHomomorphism = R189.cmp98RawUnitPathHomomorphismRound189Level
 round190BoundarySupersession = R190.cmp98ClayBoundarySupersessionRound190Level
@@ -104,6 +105,16 @@ round202RootedQuotientEvaluation =
   R202.rootedQuotientWavefunctionEvaluationRound202Level
 round202OperatorNormalizationHandoff =
   R202.wavefunctionHamiltonianNormalizationHandoffRound202Level
+
+-- R205 cross-pollinates the existing finite-measure/expectation architecture
+-- into the corrected R202 function-space carrier.  It does not infer square
+-- positivity/null semantics from an opaque `Positive measure` label.
+round205FiniteMeasureWavefunctionL2Bridge =
+  R205.finiteMeasureWavefunctionL2BridgeRound205Level
+round205LiteralFiniteMeasureExpectationSemantics =
+  R205.literalBalabanFiniteMeasureExpectationSemanticsRound205Level
+round205LiteralFiniteMeasureL2Completion =
+  R205.literalBalabanFiniteMeasureL2CompletionRound205Level
 
 round202PhysicalGaugeInvariantL2Measure =
   R202.literalPhysicalGaugeInvariantL2MeasureRound202Level
