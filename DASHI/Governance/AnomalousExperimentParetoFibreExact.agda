@@ -11,11 +11,14 @@ import DASHI.Governance.AnomalousCompetingExperimentCostedSelectionExact as Comp
 ------------------------------------------------------------------------
 -- ADMISSION-FIRST PARETO FIBRE FOR ONE LIVE EXPERIMENTAL OBLIGATION
 --
--- The front is finite and relative to the declared design language.  A design
--- reaches Pareto comparison only after it carries a literal separator receipt
--- for the current live presentiment collision.  Resource cost, participant
--- burden, calibration risk, nuisance robustness and certified residual gain
--- remain independent declared coordinates.
+-- The front is finite and relative to the declared design language. A design
+-- reaches Pareto comparison only after it carries:
+--   * a literal separator receipt for the current live collision;
+--   * a fixture-local ethics-admission receipt;
+--   * a fixture-local authority-admission receipt.
+--
+-- The latter two are structural fixtures only; they do not claim real-world
+-- IRB approval or institutional authorization.
 ------------------------------------------------------------------------
 
 data StudyDesign : Set where
@@ -29,6 +32,14 @@ bundleOf preregisteredStudy = Competition.cheapSeparator
 bundleOf adversarialMultiLabStudy = Competition.highRigourSeparator
 bundleOf retrospectiveSurvey = Competition.cheapNonSeparator
 
+data FixtureEthicsAdmissible : StudyDesign → Set where
+  preregisteredEthicsFixture : FixtureEthicsAdmissible preregisteredStudy
+  adversarialEthicsFixture : FixtureEthicsAdmissible adversarialMultiLabStudy
+
+data FixtureAuthorityAdmissible : StudyDesign → Set where
+  preregisteredAuthorityFixture : FixtureAuthorityAdmissible preregisteredStudy
+  adversarialAuthorityFixture : FixtureAuthorityAdmissible adversarialMultiLabStudy
+
 record AdmittedDesign (design : StudyDesign) : Set where
   constructor admittedDesign
   field
@@ -37,6 +48,8 @@ record AdmittedDesign (design : StudyDesign) : Set where
         (bundleOf design)
         Trajectory.anticipatoryPhysiologyAnomaly
         Trajectory.presentimentMethodArtifact
+    ethicsAdmissible : FixtureEthicsAdmissible design
+    authorityAdmissible : FixtureAuthorityAdmissible design
     ethicsReference : String
     authorityReference : String
 
@@ -45,20 +58,30 @@ open AdmittedDesign public
 preregisteredAdmitted : AdmittedDesign preregisteredStudy
 preregisteredAdmitted = admittedDesign
   Competition.cheapReallySeparates
-  "low-burden preregistered replication still requires ordinary participant-protection review"
-  "scientific admission does not itself issue institutional authority"
+  preregisteredEthicsFixture
+  preregisteredAuthorityFixture
+  "fixture-local participant-protection gate; not a real-world IRB claim"
+  "fixture-local authority gate; not a real-world institutional authorization claim"
 
 adversarialAdmitted : AdmittedDesign adversarialMultiLabStudy
 adversarialAdmitted = admittedDesign
   Competition.highRigourReallySeparates
-  "multi-lab adversarial design carries additional coordination/participant burden"
-  "independent authority and ethics review remain required"
+  adversarialEthicsFixture
+  adversarialAuthorityFixture
+  "fixture-local multi-lab participant-protection gate; not a real-world IRB claim"
+  "fixture-local authority gate; not a real-world institutional authorization claim"
 
 surveyNotAdmitted : AdmittedDesign retrospectiveSurvey → ⊥
 surveyNotAdmitted admitted = Competition.cheapSurveyCannotSeparate (separator admitted)
 
+surveyHasNoFixtureEthicsAdmission : FixtureEthicsAdmissible retrospectiveSurvey → ⊥
+surveyHasNoFixtureEthicsAdmission ()
+
+surveyHasNoFixtureAuthorityAdmission : FixtureAuthorityAdmissible retrospectiveSurvey → ⊥
+surveyHasNoFixtureAuthorityAdmission ()
+
 ------------------------------------------------------------------------
--- Declared objective coordinates.  These are finite design-order coordinates,
+-- Declared objective coordinates. These are finite design-order coordinates,
 -- not probabilities, utilities, entropy estimates or fibre cardinalities.
 ------------------------------------------------------------------------
 
@@ -200,6 +223,8 @@ data DeclaredGainPromotesFibreCardinality : Set where
 
 data FiniteFrontPromotesGlobalOptimum : Set where
 
+data FixtureAdmissionPromotesRealWorldApproval : Set where
+
 paretoFrontDoesNotPromoteTruth : ParetoFrontPromotesTruth → ⊥
 paretoFrontDoesNotPromoteTruth ()
 
@@ -212,11 +237,14 @@ declaredGainDoesNotPromoteFibreCardinality ()
 finiteFrontDoesNotPromoteGlobalOptimum : FiniteFrontPromotesGlobalOptimum → ⊥
 finiteFrontDoesNotPromoteGlobalOptimum ()
 
+fixtureAdmissionDoesNotPromoteRealWorldApproval : FixtureAdmissionPromotesRealWorldApproval → ⊥
+fixtureAdmissionDoesNotPromoteRealWorldApproval ()
+
 record AnomalousExperimentParetoFibreBoundary : Set where
   constructor anomalousExperimentParetoFibreBoundary
   field
-    hardAdmissionPrecedesParetoRanking : Bool
-    hardAdmissionPrecedesParetoRankingIsTrue : hardAdmissionPrecedesParetoRanking ≡ true
+    hardFixtureAdmissionPrecedesParetoRanking : Bool
+    hardFixtureAdmissionPrecedesParetoRankingIsTrue : hardFixtureAdmissionPrecedesParetoRanking ≡ true
     cheaperNonSeparatorCanEnterFront : Bool
     cheaperNonSeparatorCanEnterFrontIsFalse : cheaperNonSeparatorCanEnterFront ≡ false
     multipleTradeoffDesignsCanBeNonDominated : Bool
@@ -230,8 +258,10 @@ record AnomalousExperimentParetoFibreBoundary : Set where
     declaredGainIsLiteralFibreCardinalityIsFalse : declaredGainIsLiteralFibreCardinality ≡ false
     finiteDeclaredFrontIsGlobalDesignOptimum : Bool
     finiteDeclaredFrontIsGlobalDesignOptimumIsFalse : finiteDeclaredFrontIsGlobalDesignOptimum ≡ false
+    fixtureAdmissionIsRealWorldApproval : Bool
+    fixtureAdmissionIsRealWorldApprovalIsFalse : fixtureAdmissionIsRealWorldApproval ≡ false
 
 canonicalAnomalousExperimentParetoFibreBoundary : AnomalousExperimentParetoFibreBoundary
 canonicalAnomalousExperimentParetoFibreBoundary =
   anomalousExperimentParetoFibreBoundary
-    true refl false refl true refl false refl false refl false refl false refl
+    true refl false refl true refl false refl false refl false refl false refl false refl
