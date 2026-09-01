@@ -37,6 +37,15 @@ import DASHI.Base369ZetaHeisenbergFiftyFourValidation
 import DASHI.Base369MonsterTwoComponentCompletionValidation
 import DASHI.Moonshine.Base369MonsterFiftyFourFiveModeResidualActionBidiExact
 
+-- External exceptional-algebra x-pollination.  Standard Albert/F4/E6/E7
+-- dimensions are recorded separately from Monster authority: 27=1+26,
+-- 54=27+27, candidate 53=1+26+26, 56=1+1+27+27 and 78=52+26.
+-- Promotion requires two-sided same-carrier/action receipts, never dimension.
+import DASHI.Foundations.ExceptionalAlbertFreudenthalResidualExact
+import DASHI.Moonshine.Base369ExceptionalAlbertFiftyThreeResidualBidiExact
+import DASHI.Moonshine.Base369MonsterExceptionalHybridBulkResidualBidiExact
+import DASHI.Base369ExceptionalResidualCrossPollinationValidation
+
 -- Consumer-first representation-theoretic frontier and finite Heisenberg core.
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchExact
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact
@@ -100,8 +109,11 @@ import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact
 import DASHI.Moonshine.Base369Monster3BShortestFrontierCapstoneBidiExact
 import DASHI.Base369Monster3BShortestFrontierValidation
 
--- Same-action continuation on Fin 90 and search-state history.
+-- Same-action continuation on Fin 90.  The literal 78 block is now additionally
+-- exposed to an E6 candidate recognition, but E6 semantics requires an actual
+-- action intertwiner; 78=52+26 is not promotion authority.
 import DASHI.Moonshine.Base369Monster3BMultiplicityInertiaTwelveSeventyEightBidiExact
+import DASHI.Moonshine.Base369Monster3BSeventyEightExceptionalE6BidiExact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound2Exact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound3Exact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound4Exact
