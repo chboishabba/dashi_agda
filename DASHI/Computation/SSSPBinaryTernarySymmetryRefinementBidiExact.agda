@@ -8,6 +8,7 @@ module DASHI.Computation.SSSPBinaryTernarySymmetryRefinementBidiExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Bool using (Bool; false; true)
 
 import Base369 as B369
 import DASHI.Foundations.Base369BinaryTernaryRefinement as R23
@@ -54,10 +55,6 @@ SSSPBinaryTernaryRefinementCommutes =
 ------------------------------------------------------------------------
 -- 2. The paper's binary outcomes and the partial-order ternary observation
 --    are independent refinement axes.
---
--- BMSSP success/partial is a genuine two-way control surface.  Pair ordering
--- is a three-way consumer observation: left, deliberately unexposed, right.
--- Neither is coerced into being the other.
 ------------------------------------------------------------------------
 
 data BinaryControl : Set where
@@ -106,39 +103,36 @@ nineCycleCloses :
 nineCycleCloses = B369.rotateNonary⁹
 
 ------------------------------------------------------------------------
--- 5. BIDI interpretation.
---
--- Forward: a ternary partial-order state may be refined independently by a
--- binary control/polarity axis or by another ternary observation depth.
--- Reverse: observing C6 or C9 does not entitle us to identify their refinements;
--- they only meet at the declared C18 common refinement.
+-- 5. Proof-bearing BIDI interpretation.
 ------------------------------------------------------------------------
 
 record SSSPRefinementBoundary : Set where
   constructor ssspRefinementBoundary
   field
-    binaryAndTernaryAxesIndependent : Set
-    sixIsBinaryTimesTernaryResolution : Set
-    nineIsTernaryDepthTwoResolution : Set
-    commonRefinementIsEighteen : Set
-    sixAndNineAreNotFlatCoordinateCounts : Set
+    binaryTernaryCommute :
+      R23.binaryRefine (R23.ternaryRefine SSSPCoarseResolution) ≡
+      R23.ternaryRefine (R23.binaryRefine SSSPCoarseResolution)
+    sixSectorCountIsExact :
+      R23.sectorCount SSSPBinaryControlResolution ≡ 6
+    nineSectorCountIsExact :
+      R23.sectorCount SSSPTernaryOrderResolution ≡ 9
+    commonSectorCountIsEighteen :
+      R23.sectorCount SSSPCommonResolution ≡ 18
+    cyclicSixNineIdentifiedWithFlatProductCarriers : Bool
+    cyclicSixNineIdentifiedWithFlatProductCarriersIsFalse :
+      cyclicSixNineIdentifiedWithFlatProductCarriers ≡ false
 
 canonicalSSSPRefinementBoundary : SSSPRefinementBoundary
 canonicalSSSPRefinementBoundary =
   ssspRefinementBoundary
-    (R23.binaryRefine (R23.ternaryRefine SSSPCoarseResolution) ≡
-     R23.ternaryRefine (R23.binaryRefine SSSPCoarseResolution))
-    (R23.sectorCount SSSPBinaryControlResolution ≡ 6)
-    (R23.sectorCount SSSPTernaryOrderResolution ≡ 9)
-    (R23.sectorCount SSSPCommonResolution ≡ 18)
-    (SSSPHexPhase → SSSPNonaryPhase → Set)
+    SSSPBinaryTernaryRefinementCommutes
+    R23.phase6-sector-count
+    R23.phase9-sector-count
+    R23.phase18-sector-count
+    false refl
 
 ------------------------------------------------------------------------
 -- 6. Representation firewall.
---
--- C6/C9 cyclic phase symmetry and T3^6/T3^9 product carriers are separate
--- constructions.  This owner uses the former.  No equality between those
--- carrier roles is asserted here.
 ------------------------------------------------------------------------
 
 sixSectorCountExact : R23.sectorCount SSSPBinaryControlResolution ≡ 6
