@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.HistoryConditionedChoiceExact as HistoryChoice
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
 
 ------------------------------------------------------------------------
@@ -339,7 +340,7 @@ samePresentDifferentNextExperiment = record
   }
 
 presentLabelCannotDetermineNextExperiment :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
+  INF.FactorsThrough
     (HistoryChoice.observe historyChoiceSurface)
     (HistoryChoice.choose historyChoiceSurface) → ⊥
 presentLabelCannotDetermineNextExperiment =
