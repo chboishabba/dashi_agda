@@ -2,16 +2,6 @@ module DASHI.Physics.Closure.NSTriadKNSignedTTStarCriticalCancellationTargetRoun
 
 ------------------------------------------------------------------------
 -- ROUND410 / HIGHEST-ALPHA PACKAGE-A TARGET: SIGNED TT* CANCELLATION
---
--- The positive/Wiener TT* majorant is not the target: taking absolute values
--- at the last p,p' pairing produces the supercritical quantity ||u||_A^4 E.
--- The authoritative target must therefore keep the signed off-diagonal
--- Hermitian pairing on the SAME literal R406/R290 remainder until after the
--- resonance/helicity structure has been exploited.
---
--- This file does not postulate a theorem under the name of a proof.  It freezes
--- the weakest useful consumer surface so subsequent search cannot drift back
--- to an unrelated nonnegative majorant.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -37,8 +27,10 @@ module Target
       (Time → C3.Complex3 F) → Set) where
 
   module Dyn = R240.PhysicalNSDynamics Time initialTime integrateTo DerivativeOf
-  module Support = R405.LiteralSupport Time initialTime integrateTo DerivativeOf
-  module Flux = R406.FixedOutput Time initialTime integrateTo DerivativeOf
+  module Support = R405.LiteralCutoffSupport
+    Time initialTime integrateTo DerivativeOf
+  module Flux = R406.FixedLiveFlux
+    Time initialTime integrateTo DerivativeOf
 
   record SignedCriticalCancellation
       (T : Dyn.PhysicalNSGalerkinTrajectory)
@@ -54,17 +46,6 @@ module Target
         ≤ cutoffIndependentRemainderBound terminal
 
   open SignedCriticalCancellation public
-
-  ----------------------------------------------------------------------
-  -- Deliberately absent from the target:
-  --
-  --   * no ||u||_A^4 E field;
-  --   * no cellwise absolute-value hypothesis;
-  --   * no arbitrary replacement remainder;
-  --   * no cutoff-dependent bound.
-  --
-  -- The theorem must pay the exact R406 remainder.
-  ----------------------------------------------------------------------
 
 round410TargetIsLiteralR406Remainder : Bool
 round410TargetIsLiteralR406Remainder = true
