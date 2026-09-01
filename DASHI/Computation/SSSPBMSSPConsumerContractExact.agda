@@ -18,7 +18,6 @@ record BMSSPStageContract : Set₁ where
   field
     pullFactorisation : Pull.PullPrefixFactorisation
     pullTailQuotient : Pull.TailSymmetryQuotient pullFactorisation
-    pullTailInvariant : Pull.PullTailInvariance pullFactorisation pullTailQuotient
     findPivots : Pivot.FindPivotsCertificate
 
     recursiveConsumerRequiresPrefix : Bool
@@ -41,9 +40,7 @@ recursiveConsumerInvariantUnderTailSymmetry :
   ≡ Pull.consumeFull consumer x
 recursiveConsumerInvariantUnderTailSymmetry C consumer g x =
   Pull.consumerInvariantUnderTailSymmetry
-    (pullFactorisation C)
     (pullTailQuotient C)
-    (pullTailInvariant C)
     consumer g x
 
 record BMSSPBidiBoundary : Set where
