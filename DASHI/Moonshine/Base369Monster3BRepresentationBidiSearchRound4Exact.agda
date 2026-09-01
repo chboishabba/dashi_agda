@@ -20,6 +20,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as Single
+import DASHI.Moonshine.Base369Monster3BActualActionRecognitionBidiExact as Action
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound3Exact as R3
 
 ------------------------------------------------------------------------
@@ -60,10 +61,10 @@ freshNinetyCarrierSearchIsPruned = refl
 ------------------------------------------------------------------------
 
 singleProducerCompilesOldCapstone :
-  Single.ActualMonster3BSingleActionProducer → Set
-singleProducerCompilesOldCapstone source =
-  let _ = Single.actualActionRecognitionFromSingleProducer source
-  in  Set
+  Single.ActualMonster3BSingleActionProducer →
+  Action.ActualMonster3BActionRecognition
+singleProducerCompilesOldCapstone =
+  Single.actualActionRecognitionFromSingleProducer
 
 ------------------------------------------------------------------------
 -- 3. Frontier status.
