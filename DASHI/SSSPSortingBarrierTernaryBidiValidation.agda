@@ -12,15 +12,19 @@ import DASHI.Computation.SSSPThreeFrontierStableCarrierBridgeExact
 import DASHI.Computation.SSSPGeneralPullPrefixQuotientExact
 import DASHI.Computation.SSSPBMSSPConsumerContractExact
 import DASHI.Computation.SSSPLogExponentBalance2025Exact
+import DASHI.Computation.BMSSPTemporalStableFrontierFibreExact
 
 -- Cross-algorithm pathfinding fibre family.
 import DASHI.Computation.PathfindingFibreCoreExact
 import DASHI.Computation.PathfindingStableCarrierIdentityExact
+import DASHI.Computation.PathfindingTemporalFibreEvolutionExact
+import DASHI.Computation.PathfindingTemporalFibreFamilyExact
 import DASHI.Computation.BFSLayerFibreExact
 import DASHI.Computation.DijkstraQueueFibreExact
 import DASHI.Computation.BellmanFordRelaxationScheduleFibreExact
 import DASHI.Computation.AStarPlateauFibreExact
 import DASHI.Computation.BidirectionalMeetingFibreExact
+import DASHI.Computation.IncrementalShortestPathReopenFibreExact
 import DASHI.Computation.PathfindingFibreFamilyExact
 
 -- Semantic/FRACTRAN cross-pollination retained as a sidecar application.
