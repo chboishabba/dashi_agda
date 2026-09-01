@@ -42,6 +42,30 @@ paper2025-denominator : LogScaleSplit.denominator paper2025ScaleSplit ≡ 3
 paper2025-denominator = refl
 
 ------------------------------------------------------------------------
+-- Paper-faithful binary control surfaces.
+--
+-- Lemma 3.1 returns either a successful execution B' = B or a partial
+-- execution caused by large workload.  Lemma 3.2 likewise gives a dichotomy:
+-- a vertex is completed in W or remains dependent on a complete pivot.
+-- We do not manufacture third paper cases merely to fill a ternary carrier.
+
+data BMSSPOutcome : Set where
+  successfulExecution : BMSSPOutcome
+  partialLargeWorkload : BMSSPOutcome
+
+data PivotDisposition : Set where
+  completedByRelaxation : PivotDisposition
+  dependentOnPivot : PivotDisposition
+
+bmsspOutcomeCode : BMSSPOutcome → Trit
+bmsspOutcomeCode successfulExecution = pos
+bmsspOutcomeCode partialLargeWorkload = zer
+
+pivotDispositionCode : PivotDisposition → Trit
+pivotDispositionCode completedByRelaxation = pos
+pivotDispositionCode dependentOnPivot = zer
+
+------------------------------------------------------------------------
 -- Partial relative-order observation.
 --
 -- neg : left is required/certified before right
@@ -147,12 +171,10 @@ flipObservation-hyperfabric :
 flipObservation-hyperfabric x = refl
 
 ------------------------------------------------------------------------
--- Exact finite quotient witness for the sorting-barrier idea.
+-- Consumer-indexed quotient witness for the sorting-barrier idea.
 --
--- Two distinct total-order witnesses can be observationally identical when a
--- consumer does not request their relative order.  This is the minimal finite
--- theorem shape behind "do not pay to totalise information the consumer does
--- not need".
+-- The same pair of total orders is separated when a consumer requests the
+-- comparison and collapsed when that consumer does not request it.
 
 data PairTotalOrder : Set where
   leftBeforeRight : PairTotalOrder
@@ -162,22 +184,37 @@ leftBeforeRight≠rightBeforeLeft :
   ¬ (leftBeforeRight ≡ rightBeforeLeft)
 leftBeforeRight≠rightBeforeLeft ()
 
-partialOrderQuotient : PairTotalOrder → DistanceOrderObservation
-partialOrderQuotient leftBeforeRight = zer
-partialOrderQuotient rightBeforeLeft = zer
+data ComparisonDemand : Set where
+  comparisonRequired : ComparisonDemand
+  comparisonNotRequired : ComparisonDemand
 
-distinct-total-orders-collapse :
-  partialOrderQuotient leftBeforeRight ≡
-  partialOrderQuotient rightBeforeLeft
-distinct-total-orders-collapse = refl
+observeOrder :
+  ComparisonDemand → PairTotalOrder → DistanceOrderObservation
+observeOrder comparisonRequired leftBeforeRight = neg
+observeOrder comparisonRequired rightBeforeLeft = pos
+observeOrder comparisonNotRequired leftBeforeRight = zer
+observeOrder comparisonNotRequired rightBeforeLeft = zer
+
+required-left :
+  observeOrder comparisonRequired leftBeforeRight ≡ neg
+required-left = refl
+
+required-right :
+  observeOrder comparisonRequired rightBeforeLeft ≡ pos
+required-right = refl
+
+unrequired-total-orders-collapse :
+  observeOrder comparisonNotRequired leftBeforeRight ≡
+  observeOrder comparisonNotRequired rightBeforeLeft
+unrequired-total-orders-collapse = refl
 
 ------------------------------------------------------------------------
 -- Consumer descent.
 --
--- An SSSP-facing consumer can depend on exact distance output while being
--- invariant under erased pair-order information.  We keep the distance output
--- abstract here so this structural owner does not pretend to implement the
--- complete BMSSP arithmetic proof.
+-- An SSSP-facing consumer may depend on exact distance output while being
+-- invariant under an order coordinate it did not request.  We keep distance
+-- output abstract here so this structural owner does not pretend to implement
+-- the complete BMSSP arithmetic proof.
 
 record OrderInsensitiveConsumer : Set₁ where
   field
@@ -189,20 +226,21 @@ open OrderInsensitiveConsumer public
 consumeTotal :
   (C : OrderInsensitiveConsumer) →
   PairTotalOrder → Output C
-consumeTotal C o = consumePartial C (partialOrderQuotient o)
+consumeTotal C o =
+  consumePartial C (observeOrder comparisonNotRequired o)
 
-consumer-descends-through-partial-order :
+consumer-descends-through-unrequired-order :
   (C : OrderInsensitiveConsumer) →
   consumeTotal C leftBeforeRight ≡ consumeTotal C rightBeforeLeft
-consumer-descends-through-partial-order C = refl
+consumer-descends-through-unrequired-order C = refl
 
 ------------------------------------------------------------------------
 -- BIDI boundary receipts.
 --
--- Forward: total-order witnesses may be projected to the partial-order surface.
--- Backward: the partial surface cannot reconstruct which total order was used.
--- The lost coordinate is retained as an explicit residual rather than silently
--- declared irrelevant for every possible consumer.
+-- Forward: total-order witnesses may be projected to a consumer-relative
+-- partial-order surface.  Backward: an unrequested comparison cannot be
+-- reconstructed from that surface.  The erased coordinate is retained as an
+-- explicit residual rather than declared irrelevant for every consumer.
 
 data Reconstruction : Set where
   reconstructedLeft : Reconstruction
@@ -214,9 +252,25 @@ reconstructFromPartial neg = reconstructedLeft
 reconstructFromPartial zer = unresolvedOrder
 reconstructFromPartial pos = reconstructedRight
 
-quotient-reconstruction-retains-middle :
-  reconstructFromPartial (partialOrderQuotient leftBeforeRight) ≡ unresolvedOrder
-quotient-reconstruction-retains-middle = refl
+unrequired-reconstruction-retains-middle-left :
+  reconstructFromPartial
+    (observeOrder comparisonNotRequired leftBeforeRight) ≡ unresolvedOrder
+unrequired-reconstruction-retains-middle-left = refl
+
+unrequired-reconstruction-retains-middle-right :
+  reconstructFromPartial
+    (observeOrder comparisonNotRequired rightBeforeLeft) ≡ unresolvedOrder
+unrequired-reconstruction-retains-middle-right = refl
+
+required-reconstruction-recovers-left :
+  reconstructFromPartial
+    (observeOrder comparisonRequired leftBeforeRight) ≡ reconstructedLeft
+required-reconstruction-recovers-left = refl
+
+required-reconstruction-recovers-right :
+  reconstructFromPartial
+    (observeOrder comparisonRequired rightBeforeLeft) ≡ reconstructedRight
+required-reconstruction-recovers-right = refl
 
 ------------------------------------------------------------------------
 -- Explicit representation firewall.
