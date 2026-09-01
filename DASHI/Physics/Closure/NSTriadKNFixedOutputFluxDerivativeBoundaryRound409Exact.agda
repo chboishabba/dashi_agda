@@ -2,17 +2,6 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputFluxDerivativeBoundaryRound409E
 
 ------------------------------------------------------------------------
 -- ROUND409 / ONE ANALYTIC LEAF: ACTUAL DERIVATIVE OF THE FIXED-OUTPUT FLUX
---
--- The finite Fourier algebra is already closed upstream.  R406 owns a
--- time-independent output list and, at every time, the exact identity
---
---   literal R378 debt = - offDiagonalFluxTangent + weightedRemainder.
---
--- The remaining temporal seam must not be represented by a caller-selected
--- flux.  It is the derivative theorem for THAT SAME R406 observable.
---
--- This round freezes precisely that boundary.  Once supplied, the only
--- temporal work remaining before R393 is ordinary real integration/FTOC.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -39,8 +28,10 @@ module Boundary
     (ScalarDerivativeOf : (Time → ℚ) → (Time → ℚ) → Set) where
 
   module Dyn = R240.PhysicalNSDynamics Time initialTime integrateTo DerivativeOf
-  module Support = R405.LiteralSupport Time initialTime integrateTo DerivativeOf
-  module Flux = R406.FixedOutput Time initialTime integrateTo DerivativeOf
+  module Support = R405.LiteralCutoffSupport
+    Time initialTime integrateTo DerivativeOf
+  module Flux = R406.FixedLiveFlux
+    Time initialTime integrateTo DerivativeOf
 
   record FixedOutputFluxDerivative
       (T : Dyn.PhysicalNSGalerkinTrajectory)
