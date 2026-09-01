@@ -20,7 +20,7 @@ module DASHI.Physics.YangMills.BalabanFederbushRationalLieToRealSU2CarrierRound2
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -59,7 +59,7 @@ embedRationalLie3CoordinateExact embedding vector Physical.coordinateZ = refl
 
 embedRationalLie3ZeroExact :
   ∀ embedding →
-  embedRationalLie3 embedding (λ _ → Data.Rational.Base.0ℚ)
+  embedRationalLie3 embedding (λ _ → 0ℚ)
   ≡ Lie.lieZero
 embedRationalLie3ZeroExact embedding =
   Lie.su2LieExt
@@ -74,7 +74,7 @@ embedRationalLie3ZeroExact embedding =
 embedRationalLie3AddExact :
   ∀ embedding left right →
   embedRationalLie3 embedding
-    (λ coordinate → left coordinate Data.Rational.Base.+ right coordinate)
+    (λ coordinate → left coordinate + right coordinate)
   ≡ Lie.lieAdd
       (embedRationalLie3 embedding left)
       (embedRationalLie3 embedding right)
