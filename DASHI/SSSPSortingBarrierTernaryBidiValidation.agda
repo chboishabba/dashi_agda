@@ -13,6 +13,7 @@ import DASHI.Computation.SSSPGeneralPullPrefixQuotientExact
 import DASHI.Computation.SSSPBMSSPConsumerContractExact
 import DASHI.Computation.SSSPLogExponentBalance2025Exact
 import DASHI.Computation.BMSSPTemporalStableFrontierFibreExact
+import DASHI.Computation.BMSSPPullPivotTemporalSameCarrierExact
 
 -- Cross-algorithm pathfinding fibre family.
 import DASHI.Computation.PathfindingFibreCoreExact
