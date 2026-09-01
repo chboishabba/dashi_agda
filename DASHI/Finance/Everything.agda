@@ -7,3 +7,5 @@ import DASHI.Finance.MarketBraidCrossPollinationExact
 import DASHI.Finance.UniverseLeakageResidualDependencyExact
 import DASHI.Finance.DashiTradeFibreBridgeExact
 import DASHI.Finance.TradeRealizationSharpeAuthorityExact
+import DASHI.Finance.TradingPermissionActionRefinementExact
+import DASHI.Finance.TradingPermissionConsumerQuotientExact
