@@ -6,35 +6,109 @@ import DASHI.Physics.YangMills.BalabanCMP98ClayBoundarySupersessionRound190Exact
 import DASHI.Physics.YangMills.BalabanCMP98BidiWallRound191Exact as R191
 import DASHI.Physics.YangMills.BalabanCMP98Path13PhysicalPeriodicRealizationRound192Exact as R192
 import DASHI.Physics.YangMills.BalabanCMP98Path13Equation119SourceRound193Exact as R193
+import DASHI.Physics.YangMills.BalabanRootedCoarseAnchoredOrbitSectionRound194Exact as R194
+import DASHI.Physics.YangMills.BalabanCMP109RootedEquation012OrbitSectionRound195Exact as R195
+import DASHI.Physics.YangMills.BalabanFinitePhysicalGaugeQuotientCarrierRound196Exact as R196
+import DASHI.Physics.YangMills.BalabanFiniteRootedGaugeQuotientL2Round197Exact as R197
+import DASHI.Physics.YangMills.BalabanFiniteQuotientTerminalSupersessionRound198Exact as R198
+import DASHI.Physics.YangMills.BalabanRootedQuotientHamiltonianDescentRound199Exact as R199
+import DASHI.Physics.YangMills.BalabanBasedGaugeActionGroupoidRound200Exact as R200
+import DASHI.Physics.YangMills.BalabanRootedHamiltonianGaugeFunctorRound201Exact as R201
+import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionHamiltonianRound202Exact as R202
 
 round189PathHomomorphism = R189.cmp98RawUnitPathHomomorphismRound189Level
 round190BoundarySupersession = R190.cmp98ClayBoundarySupersessionRound190Level
 round191WallAudit = R191.cmp98BidiWallAuditRound191Level
 
--- Historical Round191 source wall: arbitrary-period physical realization.
--- R192/R193 show that this stronger requirement is unnecessary on the literal
--- source-scale lane: Eq.(119) can be specialized at n=12 / L=13.
+-- Historical Round191 source wall.  R192/R193 replace arbitrary-period demand
+-- by the actual literal side-13 physical source; 12 belongs only to the
+-- separate open-fibre predecessor count.
 round191HistoricalGenericSourceWall =
   R191.literalArbitraryPeriodicSelectedBackgroundProducerRound191Level
 
 round192Path13PhysicalRealization =
   R192.cmp98Path13PhysicalPeriodicRealizationRound192Level
-
 round192Path13CarrierSameObject =
   R192.cmp98Path13PhysicalCarrierSameObjectRound192Level
+round192Path13PathErasure =
+  R192.cmp98Path13PeriodicPathErasureRound192Level
 
 round193Path13Equation119Source =
   R193.cmp98Path13Equation119SourceRound193Level
-
 round193PhysicalRealizationDerived =
   R193.cmp98Path13RealizationDerivedRound193Level
-
--- Current source leaves after specialization.
 round193OperatorSourceSemantics =
   R193.literalCMP98Path13OperatorSourceSemanticsRound193Level
-
 round193SelectedBackgroundCutWeld =
   R193.literalCMP98Path13SelectedBackgroundCutWeldRound193Level
 
--- Terminal theorem-bearing wall remains unchanged by the source specialization.
-round191TerminalWall = R191.literalTerminalClayCompositionTheoremRound191Level
+round194RootedCoarseAnchoredOrbitSection =
+  R194.cmp98RootedCoarseAnchoredOrbitSectionRound194Level
+round194RootedOrbitUniqueness =
+  R194.cmp98RootedCoarseAnchoredOrbitUniquenessRound194Level
+
+round195RootedEquation012OrbitSection =
+  R195.cmp109RootedEquation012OrbitSectionRound195Level
+round195RootedEquation012MapPreservation =
+  R195.cmp109RootedEquation012MapPreservationRound195Level
+round195GaugeActionPhysical =
+  R195.literalCMP109Equation012GaugeActionPhysicalRound195Level
+round195CoarseEndpointsAreRoot =
+  R195.literalCMP109Equation012CoarseEndpointsAreRootRound195Level
+round195IdentityIsPhysicalUnit =
+  R195.literalCMP109Equation012IdentityIsPhysicalUnitRound195Level
+
+-- Concrete set-level rooted normal form remains authoritative.
+round196FinitePhysicalGaugeQuotientCarrier =
+  R196.finitePhysicalGaugeQuotientCarrierRound196Level
+round196FiniteGaugeQuotientIdempotence =
+  R196.finitePhysicalGaugeQuotientIdempotenceRound196Level
+round196FiniteGaugeQuotientUniqueness =
+  R196.finitePhysicalGaugeQuotientUniquenessRound196Level
+round196FiniteGaugeQuotientSelectedFibreCompatibility =
+  R196.finitePhysicalGaugeQuotientSelectedFibreCompatibilityRound196Level
+
+-- R197/R198 are retained as historical finite-selected-ensemble experiments.
+-- They do not define the physical Hamiltonian carrier.  In particular, the
+-- full compact-group configuration quotient is not asserted finite.
+round197HistoricalFiniteSelectedEnsemblePairing =
+  R197.finiteRootedGaugeQuotientL2PairingRound197Level
+round197HistoricalFiniteSelectedEnsembleDefiniteness =
+  R197.finiteRootedGaugeQuotientL2DefinitenessRound197Level
+round198FiniteRepresentativeCarrierConstructed =
+  R198.finiteGaugeOrbitRepresentativeCarrierNowConstructedRound198Level
+
+-- Historical R199-R201 field-endomorphism Hamiltonian plumbing is also kept in
+-- the audit graph but is superseded by R202.  A physical Hamiltonian acts on
+-- wavefunctions/observables over configuration space, not as U -> H(U).
+round199HistoricalFieldEndomorphismDescent =
+  R199.rootedQuotientHamiltonianDescentRound199Level
+round200BasedGaugeActionGroupoid =
+  R200.basedGaugeActionGroupoidRound200Level
+round201HistoricalFieldHamiltonianFunctor =
+  R201.rootedHamiltonianGaugeFunctorRound201Level
+
+-- Correct terminal carrier from R202: scalar wavefunctions on raw gauge fields
+-- with theorem-bearing based-gauge invariance.  Evaluation on the R196 rooted
+-- normal form is proof-witness independent, and any operator whose codomain is
+-- the same invariant function space descends at evaluation level automatically.
+round202GaugeInvariantWavefunctionCarrier =
+  R202.basedGaugeInvariantWavefunctionCarrierRound202Level
+round202RootedQuotientEvaluation =
+  R202.rootedQuotientWavefunctionEvaluationRound202Level
+round202OperatorNormalizationHandoff =
+  R202.wavefunctionHamiltonianNormalizationHandoffRound202Level
+
+-- Current physical analytic leaves.
+round202PhysicalGaugeInvariantL2Measure =
+  R202.literalPhysicalGaugeInvariantL2MeasureRound202Level
+round202FiniteYMHamiltonianOnWavefunctions =
+  R202.literalFiniteYMHamiltonianOnGaugeInvariantWavefunctionsRound202Level
+round202FiniteYMHamiltonianSelfAdjointness =
+  R202.literalFiniteYMHamiltonianSymmetricSelfAdjointRound202Level
+round198FiniteToContinuumCarrierMaps =
+  R198.literalFiniteToContinuumPhysicalCarrierMapsRound198Level
+round198ProjectionVacuumCompatibility =
+  R198.literalPhysicalProjectionAndVacuumSectorCompatibilityRound198Level
+
+round191TerminalClayWall = R191.literalTerminalClayCompositionTheoremRound191Level
