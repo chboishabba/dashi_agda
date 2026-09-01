@@ -148,10 +148,6 @@ expandedGWBv02CertifiedRun =
     true
     true
 
-------------------------------------------------------------------------
--- Direct proof-relevant consequences of the literal receipt.
-------------------------------------------------------------------------
-
 expandedParityCoversAllSentences :
   parityChecked expandedSurfaceV02 ≡ sentences expandedSurfaceV02
 expandedParityCoversAllSentences = refl
@@ -177,10 +173,6 @@ fullExpandedGateIsPassed :
   fullExpandedGatePassed expandedGWBv02CertifiedRun ≡ true
 fullExpandedGateIsPassed = refl
 
-------------------------------------------------------------------------
--- Current frontier and hard non-generalisation.
-------------------------------------------------------------------------
-
 data ExpandedSemanticCertificationFrontier : Set where
   boundedExpandedGWBv02CertifiedAwaitingAdmissionAndMultiCorpus
     : ExpandedSemanticCertificationFrontier
@@ -192,7 +184,7 @@ currentExpandedSemanticCertificationFrontier =
 data SingleExpandedCorpusProvesUniversalSemanticCorrectness : Set where
 data ExpandedParityAutomaticallyAuthorizesPublication : Set where
 data ExpandedGWBPerformanceProvesUniversalOnePointTwoTier : Set where
-\data CandidateResidualCountsAreSemanticQualityScores : Set where
+data CandidateResidualCountsAreSemanticQualityScores : Set where
 
 singleExpandedCorpusDoesNotProveUniversalSemanticCorrectness :
   SingleExpandedCorpusProvesUniversalSemanticCorrectness → ⊥
