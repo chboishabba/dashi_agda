@@ -22,6 +22,11 @@ import DASHI.Moonshine.Base369AppraisalFibreHeisenbergCarrierBidiExact
 import DASHI.Moonshine.Base369HeisenbergTranslationGridObstructionExact
 import DASHI.Moonshine.Base369MonsterFineCarrierEquivarianceAuditExact
 
+-- Phase-aware monomial Heisenberg action on the SAME appraisal carrier.  This
+-- adds the modulation phase action to the already-transported translations and
+-- carries all 36 standard Weyl exponent relations through the exact X6 chart.
+import DASHI.Moonshine.Base369AppraisalHeisenbergMonomialActionBidiExact
+
 -- Periodic C3^9 host versus non-periodic P3^9 observational restriction.
 import DASHI.Moonshine.Base369PeriodicTernaryTorusPathRestrictionBidiExact
 import DASHI.Moonshine.Base369PeriodicHeisenbergFibreEquivarianceExact
@@ -91,12 +96,14 @@ import DASHI.Moonshine.Monster3BActualMultiplicityEvaluationFromRecognitionExact
 -- Once ActualZetaSectorRecognition is supplied, Base369 recognition is no
 -- longer an independent representation theorem: compose the actual-sector
 -- round trip with the exact appraisal-fibre <-> X6 chart and transport both
--- translation and modulation observers automatically.  The action-recognition
--- capstone packages this recognition together with the phase-resolved sector,
--- producing the existing promotion pipeline and Base369 x Fin 90 compiler
--- surface without introducing any new numerical recognition principle.
+-- translation and modulation observers automatically.  Moreover every fixed
+-- Fin 90 coordinate is now compiled into an actual 729-state appraisal slice:
+-- evaluation is injective, exhausts that multiplicity fibre, and intertwines
+-- the actual translation/modulation observations.  So a separate 729 action
+-- recognition search is pruned after zeta recognition.
 import DASHI.Moonshine.Base369Monster3BActualSectorRecognitionBidiExact
 import DASHI.Moonshine.Base369Monster3BActualActionRecognitionBidiExact
+import DASHI.Moonshine.Base369Monster3BActualMultiplicitySliceAppraisalBidiExact
 
 -- Stronger recovery cut: when an actual literal State/Normalizer action is
 -- found, choose its zeta sector to be the dependent CentralEigenspace itself.
@@ -120,6 +127,7 @@ import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound2Exact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound3Exact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound4Exact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound5Exact
+import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound6Exact
 
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact
 
