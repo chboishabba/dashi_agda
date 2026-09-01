@@ -20,6 +20,7 @@ import DASHI.Physics.YangMills.BalabanEquation119DerivativeDoesNotDetermineAvera
 import DASHI.Physics.YangMills.BalabanFiniteMeasureWavefunctionL2BridgeRound205Exact as R205
 import DASHI.Physics.YangMills.BalabanFiniteMeasureIBPWavefunctionSymmetryRound206Exact as R206
 import DASHI.Physics.YangMills.BalabanFederbushRationalLieToRealSU2CarrierRound207Exact as R207
+import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as R208
 
 round189PathHomomorphism = R189.cmp98RawUnitPathHomomorphismRound189Level
 round190BoundarySupersession = R190.cmp98ClayBoundarySupersessionRound190Level
@@ -53,16 +54,24 @@ round204QSourceDoesNotFollowFromQPrime =
 round204LiteralOneStepAverageQSource =
   R204.literalCMP98OneStepAverageQSourceSameObjectRound204Level
 
--- The physical equation-(0.11) derivative lane is rational-coordinate, while
--- the strongest Eq.(119) carrier is literal real SU(2). R207 removes this
--- coordinate-carrier mismatch; the remaining qSource leaf is purely operator
--- semantics on the transported carrier.
+-- R207 removes the rational-coordinate -> literal-real SU(2) carrier mismatch.
 round207FederbushRationalLieToRealSU2Carrier =
   R207.federbushRationalLieToRealSU2CarrierRound207Level
 round207FederbushCoordinateExact =
   R207.federbushRationalLieCoordinateExactRound207Level
 round207FederbushFirstDerivativeIsQSource =
   R207.literalFederbushFirstDerivativeIsEquation119QSourceRound207Level
+
+-- R208 additionally proves exact 3x3 matrix-action transport on every embedded
+-- rational Lie vector, assuming the standard multiplicative embedding law.
+-- Equality on this rational image is deliberately not promoted to equality of
+-- operators on the complete real SU(2) carrier without an extension theorem.
+round208FederbushRationalMatrixRealImage =
+  R208.federbushRationalMatrixRealImageRound208Level
+round208RationalRealMultiplicativeEmbedding =
+  R208.rationalRealMultiplicativeEmbeddingRound208Level
+round208RationalImageToFullRealQSource =
+  R208.literalFederbushRationalImageToFullRealQSourceRound208Level
 
 round194RootedCoarseAnchoredOrbitSection =
   R194.cmp98RootedCoarseAnchoredOrbitSectionRound194Level
@@ -120,7 +129,7 @@ round202OperatorNormalizationHandoff =
   R202.wavefunctionHamiltonianNormalizationHandoffRound202Level
 
 -- R205 cross-pollinates the existing finite-measure/expectation architecture
--- into the corrected R202 function-space carrier.  It does not infer square
+-- into the corrected R202 function-space carrier. It does not infer square
 -- positivity/null semantics from an opaque `Positive measure` label.
 round205FiniteMeasureWavefunctionL2Bridge =
   R205.finiteMeasureWavefunctionL2BridgeRound205Level
@@ -130,8 +139,7 @@ round205LiteralFiniteMeasureL2Completion =
   R205.literalBalabanFiniteMeasureL2CompletionRound205Level
 
 -- R206 consumes the repository's theorem-bearing selected finite IBP identity
--- directly on R205's same-measure pairing.  This replaces sample symmetry as
--- the physical target while retaining the exact action/IBP realization leaves.
+-- directly on R205's same-measure pairing. Symmetry is not self-adjointness.
 round206FiniteMeasureIBPWavefunctionSymmetry =
   R206.finiteMeasureIBPWavefunctionSymmetryRound206Level
 round206PhysicalHamiltonianAsSelectedActionVariation =
