@@ -17,3 +17,7 @@ import DASHI.Finance.TradingAdmissibleOptionConeSupersessionExact
 -- of that transition. Admissibility requires the whole state-indexed
 -- precondition fabric plus an irreducible joint-compatibility receipt.
 import DASHI.Finance.TradingJointPreconditionFabricExact
+
+-- Published NASDAQ/LOBSTER tape states exercise the same fabric without
+-- manufacturing factor, portfolio or authority evidence absent from the tape.
+import DASHI.Finance.RealTapeJointPreconditionSanityExact
