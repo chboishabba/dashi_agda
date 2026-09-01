@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Analysis.ConcreteComplex as Complex
 import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 import DASHI.Analysis.WeilTestSpace as Weil
 import DASHI.Analysis.RiemannExplicitFormula as Explicit
@@ -33,7 +34,7 @@ record CanonicalHMFactorizationBridge
     {space : Weil.WeilTestSpace}
     {formula : Explicit.RiemannExplicitFormula space}
     {compat : Compat.RiemannFormulaAnalyticCompatibility analytic space formula}
-    {C : _}
+    {C : Complex.ConstructedComplexPackage}
     {F : Carrier.ConstructedComplexAnalyticFunctionLayer C}
     {realization : Carrier.CanonicalConstructedCarrierRealization analytic C F}
     (H_X : Character.RiemannComplexCharacterExtension analytic)
@@ -83,42 +84,27 @@ canonicalHXAndProofRelevantHAToHM :
   HM.RiemannAnalyticModulationExtension analytic space formula compat
 canonicalHXAndProofRelevantHAToHM H_X H_A bridge =
   HM.riemann-analytic-modulation-extension
-    -- carrierAgreementUsed
     ⊤
-    -- concreteExplicitFormulaAgreementUsed
     ⊤
-    -- Ordinate / Frequency
     (Character.RealCarrier H_X)
     (Character.RealCarrier H_X)
-    -- targetDifference
     (Character.subR H_X)
-    -- targetDifferenceIsSubtract
     ((b t : Character.RealCarrier H_X) →
       Character.subR H_X b t
       ≡ Character.addR H_X b (Character.negR H_X t))
-    -- Character / multiplication
     (Character.ComplexCarrier H_X)
     (Character.mulC H_X)
-    -- targetCharacter: H_M orders frequency before target
     (λ u t → Character.targetCharacter H_X t u)
-    -- zeroCharacter: unshifted source phase exp(+ i b u)
     (λ u b → Character.sourceCharacter H_X b u)
-    -- modulateTest
     (λ t f → StrongHA.modulateTest H_A (toWeilTarget bridge t) f)
-    -- admissibility
     (λ t f adm →
       StrongHA.modulationPreservesAdmissibility H_A
         (toWeilTarget bridge t) f adm)
-    -- SpectralResponse / response / phase action
     (SpectralResponse bridge)
     (spectralResponse bridge)
     (phaseAct bridge)
-    -- theorem-bearing factorisation
     (spectralShiftFactorization bridge)
-    -- response belongs to same concrete formula: legacy Set socket
-    ((t b u : Character.RealCarrier H_X) →
-      (f : Weil.WeilTestSpace.Test _) → Set)
-    -- H_X character proposition sockets
+    ⊤
     ((t u : Character.RealCarrier H_X) →
       Character.targetCharacter H_X t u
       ≡ Character.expC H_X (Character.minusIProduct H_X t u))
