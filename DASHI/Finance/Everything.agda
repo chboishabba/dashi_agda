@@ -13,6 +13,7 @@ import DASHI.Finance.TradeRealizationSharpeAuthorityExact
 -- imported by this aggregate.
 import DASHI.Finance.TradingAdmissibleOptionConeSupersessionExact
 
--- Size and resulting exposure are part of admissibility itself, not arbitrary
--- parameters attached after an action has already been authorized.
-import DASHI.Finance.TradingSizedAdmissibleActionFibreExact
+-- Stable candidate transition first; exposure/turnover/size are observations
+-- of that transition. Admissibility requires the whole state-indexed
+-- precondition fabric plus an irreducible joint-compatibility receipt.
+import DASHI.Finance.TradingJointPreconditionFabricExact
