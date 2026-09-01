@@ -1,4 +1,6 @@
 module DASHI.Mathematics.NumberTheory.Math2026Everything where
 
 open import DASHI.Mathematics.NumberTheory.PrimeGap2026ClaimAuditExact public
+open import DASHI.Mathematics.NumberTheory.PrimeGap2026SourceAcquisitionExact public
 open import DASHI.Mathematics.NumberTheory.DiophantineTupleDPrimeSquare2026ClaimAuditExact public
+open import DASHI.Mathematics.NumberTheory.PrimePowerDiophantineTuple2026SourceExact public
