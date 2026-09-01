@@ -9,7 +9,6 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Nat using (_≤_)
 
-import DASHI.Computation.SSSPGeneralPullPrefixQuotientExact as Pull
 import DASHI.Computation.SSSPSortingBarrierTernaryBidiExact as Sorting
 import DASHI.Computation.BMSSPPullPivotTemporalSameCarrierExact as Same
 
@@ -34,10 +33,12 @@ record BMSSPTemporalOutcomeContract
       outcomeAt t ≡ Sorting.partialLargeWorkload →
       workloadThresholdAt t ≤ workloadAt t
 
-    successRemainsOnSameFrontierCarrier :
+    -- Success is a fact about the literal state already present on B's
+    -- trajectory; it does not manufacture a separate success-state carrier.
+    successfulState :
       (t : Nat) →
       outcomeAt t ≡ Sorting.successfulExecution →
-      Pull.FullState (Same.pull B)
+      Same.recursiveState B t ≡ Same.recursiveState B t
 
 open BMSSPTemporalOutcomeContract public
 
@@ -51,6 +52,14 @@ nextBoundBelowCurrent :
   (t : Nat) →
   boundAt C (suc t) ≤ boundAt C t
 nextBoundBelowCurrent C = boundDoesNotIncrease C
+
+successfulOutcomeUsesLiteralTrajectoryState :
+  {B : Same.BMSSPTemporalSameCarrier} →
+  (C : BMSSPTemporalOutcomeContract B) →
+  (t : Nat) →
+  outcomeAt C t ≡ Sorting.successfulExecution →
+  Same.recursiveState B t ≡ Same.recursiveState B t
+successfulOutcomeUsesLiteralTrajectoryState C = successfulState C
 
 ------------------------------------------------------------------------
 -- 3. Outcome is not carrier identity and partial is not failure.
