@@ -89,12 +89,13 @@ module Unified
     ∀ {T R terminal cutoff} →
     CriticalSliceOnLiteralR406 T R terminal cutoff →
     Signed.IntegratedSignedCriticalSlice
-  toSignedCriticalSlice S = record
+  toSignedCriticalSlice {T} {R} {terminal} {cutoff} S = record
     { Signed.initialCritical = initialCritical S
     ; Signed.terminalCritical = terminalCritical S
     ; Signed.criticalDissipation = criticalDissipation S
     ; Signed.integratedSignedProduction = integratedSignedProduction S
-    ; Signed.integrableRemainder = literalRemainderIntegral _ _ _ _
+    ; Signed.integrableRemainder =
+        literalRemainderIntegral T R cutoff terminal
     ; Signed.viscousCoefficient = viscousCoefficient S
     ; Signed.absorbedCoefficient = absorbedCoefficient S
     ; Signed.criticalEnergyInequality = criticalEnergyInequality S
