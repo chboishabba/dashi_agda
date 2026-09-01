@@ -18,6 +18,11 @@ exceptional53CandidateRecorded :
     Exceptional.canonicalExceptionalResidualBoundary ≡ true
 exceptional53CandidateRecorded = refl
 
+freudenthalReductionInterfaceRecorded :
+  Exceptional.ExceptionalResidualBoundary.freudenthal56To54To53ActionInterfaceRecorded
+    Exceptional.canonicalExceptionalResidualBoundary ≡ true
+freudenthalReductionInterfaceRecorded = refl
+
 exceptional53NotNamedIrrep :
   Exceptional.ExceptionalResidualBoundary.fiftyThreeDeclaredNamedExceptionalIrrepHere
     Exceptional.canonicalExceptionalResidualBoundary ≡ false
