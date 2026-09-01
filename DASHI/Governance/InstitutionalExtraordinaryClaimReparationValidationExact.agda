@@ -7,38 +7,41 @@ import DASHI.Governance.DrugGovernanceMultiAxisReparativeFibreExact as Fibre
 import DASHI.Governance.DrugGovernanceMultiAxisRepairPlannerExact as Planner
 import DASHI.Governance.MenWhoStareAtGoatsEvidenceLayerExact as Goats
 import DASHI.Governance.MenWhoStareAtGoatsReparativeAuditExact as GoatsRepair
+import DASHI.Governance.InstitutionalAnomalousAlteredStateProgramAtlasExact as Atlas
+import DASHI.Governance.AnomalousConsciousnessResearchEvidenceContinuumExact as Continuum
 
 repairBoundary : Fibre.DrugGovernanceMultiAxisReparativeBoundary
 repairBoundary = Fibre.canonicalDrugGovernanceMultiAxisReparativeBoundary
-
 plannerBoundary : Planner.MultiAxisRepairPlannerBoundary
 plannerBoundary = Planner.canonicalMultiAxisRepairPlannerBoundary
-
 goatsBoundary : Goats.MenWhoStareAtGoatsEvidenceBoundary
 goatsBoundary = Goats.canonicalMenWhoStareAtGoatsEvidenceBoundary
-
 goatsRepairBoundary : GoatsRepair.MenWhoStareAtGoatsReparativeAuditBoundary
 goatsRepairBoundary = GoatsRepair.canonicalMenWhoStareAtGoatsReparativeAuditBoundary
+atlasBoundary : Atlas.InstitutionalAnomalousAlteredStateAtlasBoundary
+atlasBoundary = Atlas.canonicalInstitutionalAnomalousAlteredStateAtlasBoundary
+continuumBoundary : Continuum.AnomalousConsciousnessResearchBoundary
+continuumBoundary = Continuum.canonicalAnomalousConsciousnessResearchBoundary
 
 materialRepairProbeReallySeparates :
-  Discriminator.BundleSeparates
-    (Planner.probeFor Planner.materialRepairConsumer)
-    Fibre.acknowledgementOnly
-    Fibre.materialBenefitOnly
+  Discriminator.BundleSeparates (Planner.probeFor Planner.materialRepairConsumer)
+    Fibre.acknowledgementOnly Fibre.materialBenefitOnly
 materialRepairProbeReallySeparates = Planner.materialProbeSeparatesAcknowledgementFromMaterialRepair
 
 sovereigntyProbeReallySeparates :
-  Discriminator.BundleSeparates
-    (Planner.probeFor Planner.sovereigntyRepairConsumer)
-    Fibre.authorityReformWithoutSovereignty
-    Fibre.fullSyntheticRepair
+  Discriminator.BundleSeparates (Planner.probeFor Planner.sovereigntyRepairConsumer)
+    Fibre.authorityReformWithoutSovereignty Fibre.fullSyntheticRepair
 sovereigntyProbeReallySeparates = Planner.sovereigntyProbeSeparatesAuthorityReformFromFullRepair
 
-goatClaimStillDemandsIndependentEvidence :
-  Goats.EvidenceDemand Goats.goatKillingByStaringClaim
+goatClaimStillDemandsIndependentEvidence : Goats.EvidenceDemand Goats.goatKillingByStaringClaim
 goatClaimStillDemandsIndependentEvidence = Goats.canonicalGoatClaimDemand
 
 programmeHistorySelectsTruthConsumer :
-  GoatsRepair.residualProbe GoatsRepair.programmeHistoryResidual
-  ≡ Planner.truthHistoryConsumer
+  GoatsRepair.residualProbe GoatsRepair.programmeHistoryResidual ≡ Planner.truthHistoryConsumer
 programmeHistorySelectsTruthConsumer = GoatsRepair.historyResidualSelectsTruthProbe
+
+stargateStillDemandsOperationalEvaluation : Atlas.AtlasDemand Atlas.operationalUtilityConsumer
+stargateStillDemandsOperationalEvaluation = Atlas.stargateUtilityDemand
+
+psychedelicTherapeuticUseStillNeedsClinicalEvidence : Atlas.AtlasDemand Atlas.therapeuticConsumer
+psychedelicTherapeuticUseStillNeedsClinicalEvidence = Atlas.psychedelicTherapeuticDemand
