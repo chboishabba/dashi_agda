@@ -1,0 +1,52 @@
+name: YM proof experiment frontier Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanPhysicalFrontierSearchHypergraphRound146Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanFrontierRouteAdmissionRound147Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanFrontierExperimentDesignRound148Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanFrontierFeedbackSearchRound149Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanConsumerWeightedFrontierPriorityRound150Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanRound108DirectUnifiedActionRound151Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanBC1PhysicalCompositeD1ReductionRound152Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanSequentialDiagnosticPlannerRound153Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanInternalCompilerSourceRealizationFrontierRound154Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanProofExperimentFrontierRound150Validation.agda'
+      - 'scripts/check_ym_proof_experiment_frontier.sh'
+      - '.github/workflows/ym-proof-experiment-frontier.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ym-proof-experiment-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  agda:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          submodules: false
+      - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Check YM proof experiment frontier through Round154
+        env:
+          AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
+          DASHI_REPO_ROOT: ${{ github.workspace }}
+          DASHI_AGDA29_CACHE_ROOT: ${{ runner.temp }}/dashi-agda29-ym-proof-experiment
+          DASHI_STATUS_DIR: ${{ runner.temp }}/dashi-agda29-ym-proof-experiment/status
+          XDG_CACHE_HOME: ${{ runner.temp }}/dashi-xdg-ym-proof-experiment
+          AGDA_LOG_PATH: ${{ github.workspace }}/ym-proof-experiment-frontier-agda.log
+          AGDA_JOBS: '4'
+          DASHI_NO_TMUX: '1'
+        run: bash scripts/check_ym_proof_experiment_frontier.sh
+      - name: Upload Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ym-proof-experiment-frontier-agda-log
+          path: ym-proof-experiment-frontier-agda*.log
+          if-no-files-found: warn
