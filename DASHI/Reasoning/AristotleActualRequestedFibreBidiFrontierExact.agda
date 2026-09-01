@@ -24,6 +24,7 @@ module DASHI.Reasoning.AristotleActualRequestedFibreBidiFrontierExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
+open import Data.Empty using (⊥)
 
 import DASHI.Reasoning.AristotleMCGSHypergraphExact as Aristotle
 import DASHI.Reasoning.AristotleResidualInformationSearchExact as Residual
@@ -35,17 +36,11 @@ record ActualAristotleRequestedFibreProducer
   field
     requestedComponent : Requested.AristotleRequestedStateComponent G
 
-    -- A real collision in the old observer fibre is split by the requested
-    -- component.  This is the exact observation-gain theorem.
     strictSplit :
       Requested.StrictRequestedSplit oldObserver requestedComponent
 
-    -- A real Aristotle action carries a certified posterior residual fibre and
-    -- keeps every explicit hyperedge target admissible.
     residualAction : Residual.AristotleResidualAction G
 
-    -- Proof reuse after refining the observer is not inherited automatically.
-    -- The actual refined observer must earn its own quotient-soundness witness.
     refinedQuotientSound :
       Aristotle.QuotientSound G
         (Requested.refinedObserver oldObserver requestedComponent)
@@ -61,13 +56,10 @@ actualRequestedSplitIsStrict :
   ≡ Aristotle.observe
       (Requested.refinedObserver oldObserver (requestedComponent producer))
       (Requested.right (strictSplit producer))
-  →
-  DASHI.Core.Prelude.⊥
+  → ⊥
 actualRequestedSplitIsStrict producer =
   Requested.requestedSplitSeparatesRefinedObserver (strictSplit producer)
 
--- Once a real proof is constructed, refinement machinery adds no alternative
--- notion of success: terminal authority is still the Aristotle AND/OR proof.
 record ActualAristotleBidiClosure
     {G : Aristotle.SearchHypergraph}
     {oldObserver : Aristotle.StateObserver G}
