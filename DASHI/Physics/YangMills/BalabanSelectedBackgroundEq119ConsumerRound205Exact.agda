@@ -13,6 +13,7 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundEq119ConsumerRound205Exa
 
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationalChartBridgeExact as Bridge
 import DASHI.Physics.YangMills.BalabanClayGate4SU2PrincipalLogBallExact as Log
+import DASHI.Physics.YangMills.BalabanClayGate4BackgroundFieldVariationalTheoremExact as Variational
 
 record Eq119PrincipalLogConsumer
     (CoarseField FineField Bond Lie Group Bound Output : Set) : Set₁ where
@@ -21,9 +22,8 @@ record Eq119PrincipalLogConsumer
       (bridge : Bridge.SelectedBackgroundVariationalChartBridge
         CoarseField FineField Bond Lie Group Bound) →
       (coarse : CoarseField) →
-      (small :
-        DASHI.Physics.YangMills.BalabanClayGate4BackgroundFieldVariationalTheoremExact.CoarseSmallField
-          (Bridge.variational bridge) coarse) →
+      (small : Variational.CoarseSmallField
+        (Bridge.variational bridge) coarse) →
       (bond : Bond) →
       Log.InPrincipalImage (Bridge.principalChart bridge)
         (Bridge.selectedBondGroup bridge coarse small bond) →
@@ -38,9 +38,8 @@ consumeSelectedBackgroundDirectly :
     (bridge : Bridge.SelectedBackgroundVariationalChartBridge
       CoarseField FineField Bond Lie Group Bound)
     (coarse : CoarseField)
-    (small :
-      DASHI.Physics.YangMills.BalabanClayGate4BackgroundFieldVariationalTheoremExact.CoarseSmallField
-        (Bridge.variational bridge) coarse)
+    (small : Variational.CoarseSmallField
+      (Bridge.variational bridge) coarse)
     (bond : Bond) →
   Output
 consumeSelectedBackgroundDirectly consumer bridge coarse small bond =
