@@ -17,11 +17,13 @@ import DASHI.Foundations.Base369Situated54FaceIncidence54BridgeExact as Face54
 import DASHI.Foundations.Base369NestedUnitCompletionMonsterAssemblyExact as Nested
 import DASHI.Foundations.Base369MonsterSemanticCoordinateSystemExact as Semantic
 import DASHI.Foundations.Base369MonsterActionBraidSemanticAttachmentExact as BraidSemantic
+import DASHI.Foundations.Base369TernaryDeltaBasisCrossPollinationExact as TernaryBasis
 import DASHI.Moonshine.MonsterWeightTwoSemanticActionRealisationExact as WeightTwoAction
 import DASHI.Moonshine.Base369MonsterSemanticRepresentationBidiFrontierExact as SemanticBidi
 import DASHI.Moonshine.Monster3BFiniteSchrodingerDeltaOrbitTransitivityExact as DeltaOrbit
 import DASHI.Moonshine.TernaryFiniteFunctionDeltaBasisExact as DeltaBasis
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact as Stone
+import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannUniquenessBidiExact as Uniqueness
 import DASHI.Combinatorics.TextileDependencyGrammarProcessExact as Process
 import DASHI.Combinatorics.ProofFabricLocalCompatibilityExact as Local
 import DASHI.Combinatorics.ProofFabricCompilerExact as Fabric
@@ -148,6 +150,9 @@ semanticCoordinateBoundaryRegression = Semantic.canonicalMonsterSemanticCoordina
 braidSemanticBoundaryRegression : BraidSemantic.MonsterActionBraidSemanticBoundary
 braidSemanticBoundaryRegression = BraidSemantic.canonicalMonsterActionBraidSemanticBoundary
 
+ternaryBasisBoundaryRegression : TernaryBasis.Base369TernaryDeltaBasisBoundary
+ternaryBasisBoundaryRegression = TernaryBasis.canonicalBase369TernaryDeltaBasisBoundary
+
 weightTwoActionBoundaryRegression : WeightTwoAction.MonsterWeightTwoSemanticActionBoundary
 weightTwoActionBoundaryRegression = WeightTwoAction.canonicalMonsterWeightTwoSemanticActionBoundary
 
@@ -181,6 +186,20 @@ stoneDeltaBasisSpanningRegression = Stone.deltaBasisSpanningConstructedIsTrue
 stoneHighestImpactIsNonzeroCoordinateExtraction :
   Stone.highestImpactStructuralLeaf ≡ Stone.extractNonzeroCoordinateFromNonzeroVector
 stoneHighestImpactIsNonzeroCoordinateExtraction = refl
+
+uniquenessBoundaryRegression : Uniqueness.StoneVonNeumannUniquenessBidiBoundary
+uniquenessBoundaryRegression = Uniqueness.canonicalStoneVonNeumannUniquenessBidiBoundary
+
+zetaSignatureUniqueRegression :
+  Uniqueness.centralPhaseOfSignature
+    (Uniqueness.signatureForPhase Uniqueness.zetaPhase)
+  ≡ Uniqueness.zetaPhase
+zetaSignatureUniqueRegression = Uniqueness.signatureHasRequestedPhase Uniqueness.zetaPhase
+
+uniquenessHighestImpactRegression :
+  Uniqueness.highestImpactUniquenessLeaf
+  ≡ Uniqueness.instantiateCharacterDeterminationTheorem
+uniquenessHighestImpactRegression = refl
 
 binaryLiftDoesNotProduceMidRegression :
   (level : Pareto.AxisLevel) →
