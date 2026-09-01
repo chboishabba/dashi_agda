@@ -36,6 +36,12 @@ import DASHI.Moonshine.Base369ZetaHeisenbergFiftyFourCarrierExact
 import DASHI.Base369ZetaHeisenbergFiftyFourValidation
 import DASHI.Base369MonsterTwoComponentCompletionValidation
 
+-- Cross-pollinated 54 -> 1 + 53 cut: the existing typed five-mode carrier is
+-- used only as a candidate five-complete-sector index.  Promotion to Monster
+-- semantics requires a two-sided actual 54/53 recognition and proof that the
+-- 53 action is the restriction of the same actual 54 action.
+import DASHI.Moonshine.Base369MonsterFiftyFourFiveModeResidualActionBidiExact
+
 -- Consumer-first representation-theoretic frontier: actual M -> MN3B
 -- restriction and a theorem-bearing finite Heisenberg group chain.
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchExact
