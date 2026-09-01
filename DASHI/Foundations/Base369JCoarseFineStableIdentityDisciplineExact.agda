@@ -63,7 +63,7 @@ jAbsoluteCountPinned = refl
 
 data JFineFrequencyEqualsDecisionFine : Set where
 data HarmonicBulkEqualsDecisionBulk : Set where
-\data JFineCardinalityCreatesSemanticInterpretation : Set where
+data JFineCardinalityCreatesSemanticInterpretation : Set where
 
 jFineFrequencyNotIdentifiedWithDecisionFine :
   JFineFrequencyEqualsDecisionFine → ⊥
