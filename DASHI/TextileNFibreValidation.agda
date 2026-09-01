@@ -1,0 +1,11 @@
+module DASHI.TextileNFibreValidation where
+
+import DASHI.Combinatorics.TextileNFibreCalculusExact
+import DASHI.Combinatorics.TextileCrossPollinationExact
+import DASHI.Combinatorics.TextileBraidRewriteGroupoidExact
+import DASHI.Combinatorics.TextileExecutableStrandConfigurationExact
+import DASHI.Combinatorics.TextileFibreHyperfabricExact
+import DASHI.Combinatorics.TextileFibreOrderHyperfabricExact
+import DASHI.Combinatorics.ProofFabricCompilerExact
+import DASHI.Computation.JacquardProofVisibleSurfaceExact
+import DASHI.JacquardProofVisibleSurfaceValidation
