@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Algebra.Trit as Trit
 import DASHI.Foundations.Base369Completion54SituatedTriadBridgeExact as Completion
 import DASHI.Foundations.Base369SharedNonaryIdentityTransportExact as SharedJ
+import DASHI.Foundations.Base369StableAlgebraicIdentityTowerExact as Stable
 import DASHI.Combinatorics.TextileDependencyGrammarProcessExact as Process
 import DASHI.Combinatorics.ProofFabricLocalCompatibilityExact as Local
 import DASHI.Combinatorics.ProofFabricCompilerExact as Fabric
@@ -68,6 +69,24 @@ bothHaveNineFactorGlobalRegression :
   SharedJ.sharedJ * 21870 ≡ SharedJ.globalPointedViaJ
 bothHaveNineFactorGlobalRegression = SharedJ.globalAsNineTimes21870
 
+stable54CarrierIsoRegression :
+  Stable.CarrierIso
+    Stable.Completion54
+    (Completion.SituatedTriadRow × Stable.Base27)
+stable54CarrierIsoRegression = Stable.completion54IsTwoBy27
+
+stable10CarrierIsoRegression :
+  Stable.CarrierIso
+    Stable.Pointed10
+    (Stable.FiveMode × Stable.Orientation2)
+stable10CarrierIsoRegression = Stable.pointed10IsFiveByTwo
+
+stable196830CarrierIsoRegression :
+  Stable.CarrierIso
+    Stable.MonsterBulk196830
+    Stable.BulkFive54Appraisal
+stable196830CarrierIsoRegression = Stable.monsterBulkIsFiveBy54By729
+
 binaryLiftDoesNotProduceMidRegression :
   (level : Pareto.AxisLevel) →
   Completion.axisLevelToTri level ≡ Base.tri-mid → ⊥
@@ -87,6 +106,9 @@ completionBoundaryRegression = Completion.canonicalBase369Completion54SituatedTr
 
 sharedNonaryBoundaryRegression : SharedJ.Base369SharedNonaryIdentityBoundary
 sharedNonaryBoundaryRegression = SharedJ.canonicalBase369SharedNonaryIdentityBoundary
+
+stableIdentityBoundaryRegression : Stable.StableAlgebraicIdentityBoundary
+stableIdentityBoundaryRegression = Stable.canonicalStableAlgebraicIdentityBoundary
 
 processBoundaryRegression : Process.TextileDependencyGrammarProcessBoundary
 processBoundaryRegression = Process.canonicalTextileDependencyGrammarProcessBoundary
