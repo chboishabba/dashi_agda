@@ -14,6 +14,8 @@ import DASHI.Computation.SSSPBMSSPConsumerContractExact
 import DASHI.Computation.SSSPLogExponentBalance2025Exact
 import DASHI.Computation.BMSSPTemporalStableFrontierFibreExact
 import DASHI.Computation.BMSSPPullPivotTemporalSameCarrierExact
+import DASHI.Computation.BMSSPWorkPivotTemporalTransportExact
+import DASHI.Computation.BMSSPTemporalOutcomeBoundExact
 
 -- Cross-algorithm pathfinding fibre family.
 import DASHI.Computation.PathfindingFibreCoreExact
