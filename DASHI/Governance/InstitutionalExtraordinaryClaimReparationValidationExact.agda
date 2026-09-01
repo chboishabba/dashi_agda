@@ -7,6 +7,8 @@ import DASHI.Governance.DrugGovernanceMultiAxisReparativeFibreExact as Fibre
 import DASHI.Governance.DrugGovernanceMultiAxisRepairPlannerExact as Planner
 import DASHI.Governance.MenWhoStareAtGoatsEvidenceLayerExact as Goats
 import DASHI.Governance.MenWhoStareAtGoatsReparativeAuditExact as GoatsRepair
+import DASHI.Governance.InstitutionalAnomalousAlteredStateProgramAtlasExact as Atlas
+import DASHI.Governance.AnomalousConsciousnessResearchEvidenceContinuumExact as Continuum
 
 repairBoundary : Fibre.DrugGovernanceMultiAxisReparativeBoundary
 repairBoundary = Fibre.canonicalDrugGovernanceMultiAxisReparativeBoundary
@@ -19,6 +21,12 @@ goatsBoundary = Goats.canonicalMenWhoStareAtGoatsEvidenceBoundary
 
 goatsRepairBoundary : GoatsRepair.MenWhoStareAtGoatsReparativeAuditBoundary
 goatsRepairBoundary = GoatsRepair.canonicalMenWhoStareAtGoatsReparativeAuditBoundary
+
+atlasBoundary : Atlas.InstitutionalAnomalousAlteredStateAtlasBoundary
+atlasBoundary = Atlas.canonicalInstitutionalAnomalousAlteredStateAtlasBoundary
+
+continuumBoundary : Continuum.AnomalousConsciousnessResearchBoundary
+continuumBoundary = Continuum.canonicalAnomalousConsciousnessResearchBoundary
 
 materialRepairProbeReallySeparates :
   Discriminator.BundleSeparates
@@ -42,3 +50,11 @@ programmeHistorySelectsTruthConsumer :
   GoatsRepair.residualProbe GoatsRepair.programmeHistoryResidual
   ≡ Planner.truthHistoryConsumer
 programmeHistorySelectsTruthConsumer = GoatsRepair.historyResidualSelectsTruthProbe
+
+stargateStillDemandsOperationalEvaluation :
+  Atlas.AtlasDemand Atlas.operationalUtilityConsumer
+stargateStillDemandsOperationalEvaluation = Atlas.stargateUtilityDemand
+
+psychedelicTherapeuticUseStillNeedsClinicalEvidence :
+  Atlas.AtlasDemand Atlas.therapeuticConsumer
+psychedelicTherapeuticUseStillNeedsClinicalEvidence = Atlas.psychedelicTherapeuticDemand
