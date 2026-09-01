@@ -3,11 +3,13 @@ module DASHI.Base369Plus54ProofFabricValidation where
 open import DASHI.Core.Prelude
 
 import DASHI.Algebra.Trit as Trit
+import DASHI.Biology.JFineCoarseRelativeScaleExact as JScale
 import DASHI.Foundations.Base369Completion54SituatedTriadBridgeExact as Completion
 import DASHI.Foundations.Base369SharedNonaryIdentityTransportExact as SharedJ
 import DASHI.Foundations.Base369StableAlgebraicIdentityTowerExact as Stable
 import DASHI.Foundations.Base369MonsterNamedIdentityRegistryExact as Registry
 import DASHI.Foundations.Base369JCoarseFineStableIdentityDisciplineExact as JIdentity
+import DASHI.Foundations.Base369Ternary27HypervoxelStratificationExact as Strata
 import DASHI.Combinatorics.TextileDependencyGrammarProcessExact as Process
 import DASHI.Combinatorics.ProofFabricLocalCompatibilityExact as Local
 import DASHI.Combinatorics.ProofFabricCompilerExact as Fabric
@@ -103,14 +105,13 @@ cornerEightRegression : Registry.cornerCarrierCount ≡ 8
 cornerEightRegression = refl
 
 cornerEightMatchesVoxelRegression :
-  Registry.cornerCarrierCount
-  ≡ DASHI.Foundations.Base369Ternary27HypervoxelStratificationExact.cornerCount
+  Registry.cornerCarrierCount ≡ Strata.cornerCount
 cornerEightMatchesVoxelRegression = Registry.cornerCountAgreesWithExistingStratum
 
-jCoarseCountRegression : DASHI.Biology.JFineCoarseRelativeScaleExact.jCoarseFrequency ≡ 9
+jCoarseCountRegression : JScale.jCoarseFrequency ≡ 9
 jCoarseCountRegression = JIdentity.jCoarseCountPinned
 
-jFineCountRegression : DASHI.Biology.JFineCoarseRelativeScaleExact.jFineFrequency ≡ 19683
+jFineCountRegression : JScale.jFineFrequency ≡ 19683
 jFineCountRegression = JIdentity.jFineCountPinned
 
 binaryLiftDoesNotProduceMidRegression :
