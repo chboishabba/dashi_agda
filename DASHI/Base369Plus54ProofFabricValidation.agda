@@ -10,6 +10,11 @@ import DASHI.Foundations.Base369StableAlgebraicIdentityTowerExact as Stable
 import DASHI.Foundations.Base369MonsterNamedIdentityRegistryExact as Registry
 import DASHI.Foundations.Base369JCoarseFineStableIdentityDisciplineExact as JIdentity
 import DASHI.Foundations.Base369Ternary27HypervoxelStratificationExact as Strata
+import DASHI.Foundations.Base369FaceSheetPunctureIncidenceIdentityExact as Face
+import DASHI.Foundations.Base369Situated54FaceIncidence54BridgeExact as Face54
+import DASHI.Foundations.Base369NestedUnitCompletionMonsterAssemblyExact as Nested
+import DASHI.Foundations.Base369MonsterSemanticCoordinateSystemExact as Semantic
+import DASHI.Foundations.Base369MonsterActionBraidSemanticAttachmentExact as BraidSemantic
 import DASHI.Combinatorics.TextileDependencyGrammarProcessExact as Process
 import DASHI.Combinatorics.ProofFabricLocalCompatibilityExact as Local
 import DASHI.Combinatorics.ProofFabricCompilerExact as Fabric
@@ -114,6 +119,44 @@ jCoarseCountRegression = JIdentity.jCoarseCountPinned
 jFineCountRegression : JScale.jFineFrequency ≡ 19683
 jFineCountRegression = JIdentity.jFineCountPinned
 
+faceSheetOnePlusEightRegression : 1 + Face.puncturedFaceCount ≡ Face.faceSheetCount
+faceSheetOnePlusEightRegression = Face.faceSheetIsOnePlusEight
+
+sixFaceSheetsGive54Regression :
+  DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact.outerFaceCount
+    * Face.faceSheetCount
+  ≡ Face.faceIncidenceCount
+sixFaceSheetsGive54Regression = Face.sixFacesTimesNineSheetIs54
+
+faceIncidenceStratificationRegression :
+  Face.faceCentreIncidenceCount
+    + Face.edgeCentreIncidenceCount
+    + Face.cornerIncidenceCount
+  ≡ Face.faceIncidenceCount
+faceIncidenceStratificationRegression = Face.stratifiedBoundaryIncidencesSumTo54
+
+situated54Face54Regression :
+  Stable.CarrierIso Stable.Completion54 Face.FaceIncidence54
+situated54Face54Regression = Face54.situated54IsFaceIncidence54
+
+modePhaseNineIsReducedEightPlusUnitRegression :
+  Stable.CarrierIso
+    DASHI.Foundations.Base369FiveModePhaseQuotientExact.ModePhaseQuotient9
+    (Nested.PointedExtension Registry.ReducedNonary8 Nested.quotientIdentityRole)
+modePhaseNineIsReducedEightPlusUnitRegression = Nested.modePhase9IsReduced8PlusIdentity
+
+local54Is53PlusInvariantRegression :
+  Stable.CarrierIso
+    Nested.ModeBoundary54Stable
+    (Nested.PointedExtension Nested.ModeBoundary53Stable Nested.localBoundaryInvariantRole)
+local54Is53PlusInvariantRegression = Nested.modeBoundary54Is53PlusInvariant
+
+semanticCoordinateBoundaryRegression : Semantic.MonsterSemanticCoordinateBoundary
+semanticCoordinateBoundaryRegression = Semantic.canonicalMonsterSemanticCoordinateBoundary
+
+braidSemanticBoundaryRegression : BraidSemantic.MonsterActionBraidSemanticBoundary
+braidSemanticBoundaryRegression = BraidSemantic.canonicalMonsterActionBraidSemanticBoundary
+
 binaryLiftDoesNotProduceMidRegression :
   (level : Pareto.AxisLevel) →
   Completion.axisLevelToTri level ≡ Base.tri-mid → ⊥
@@ -142,6 +185,15 @@ namedIdentityBoundaryRegression = Registry.canonicalNamedMonsterMeaningBoundary
 
 jIdentityBoundaryRegression : JIdentity.JCoarseFineIdentityBoundary
 jIdentityBoundaryRegression = JIdentity.canonicalJCoarseFineIdentityBoundary
+
+faceSheetBoundaryRegression : Face.FaceSheetPunctureIncidenceBoundary
+faceSheetBoundaryRegression = Face.canonicalFaceSheetPunctureIncidenceBoundary
+
+face54BoundaryRegression : Face54.Situated54FaceIncidenceBoundary
+face54BoundaryRegression = Face54.canonicalSituated54FaceIncidenceBoundary
+
+nestedUnitBoundaryRegression : Nested.NestedUnitCompletionBoundary
+nestedUnitBoundaryRegression = Nested.canonicalNestedUnitCompletionBoundary
 
 processBoundaryRegression : Process.TextileDependencyGrammarProcessBoundary
 processBoundaryRegression = Process.canonicalTextileDependencyGrammarProcessBoundary
