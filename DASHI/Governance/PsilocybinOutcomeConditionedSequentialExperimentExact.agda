@@ -112,30 +112,10 @@ closeAfterNoSignal = Sequential.closeConsumer closure
   closure Trajectory.noPsilocybinTherapeuticEffect Trajectory.noPsilocybinTherapeuticEffect leftProof rightProof = refl
   closure Trajectory.noPsilocybinTherapeuticEffect Trajectory.psilocybinTherapeuticEffect leftProof (_ , ())
   closure Trajectory.noPsilocybinTherapeuticEffect Trajectory.expectancyBlindingContribution leftProof (_ , ())
-  closure Trajectory.psilocybinTherapeuticEffect right leftProof = λ { (_ , ()) }
-  closure Trajectory.expectancyBlindingContribution right leftProof = λ { (_ , ()) }
+  closure Trajectory.noPsilocybinTherapeuticEffect _ leftProof (() , _)
+  closure Trajectory.psilocybinTherapeuticEffect _ (_ , ()) rightProof
+  closure Trajectory.expectancyBlindingContribution _ (_ , ()) rightProof
   closure _ _ (() , _) rightProof
-
-closeAfterAttribution :
-  (base : Trajectory.Interpretation → Set) →
-  (outcome : AttributionObservation) →
-  Sequential.OutcomePossible base attributionBundle outcome →
-  Sequential.SequentialConsumerPlan
-    attributionConsumer
-    (Sequential.RefineByBundle base attributionBundle outcome)
-closeAfterAttribution base outcome possible = Sequential.closeConsumer closure
-  where
-  closure :
-    (left right : Trajectory.Interpretation) →
-    Sequential.RefineByBundle base attributionBundle outcome left →
-    Sequential.RefineByBundle base attributionBundle outcome right →
-    attributionConsumer left ≡ attributionConsumer right
-  closure left right (leftBase , leftOutcome) (rightBase , rightOutcome) =
-    attributionReadoutDeterminesConsumer
-      left right
-      (proj₁ leftBase)
-      (proj₁ rightBase)
-      (trans leftOutcome (sym rightOutcome))
 
 ------------------------------------------------------------------------
 -- Positive efficacy branch asks the attribution experiment; no-signal branch
@@ -146,9 +126,29 @@ closeAfterAttribution base outcome possible = Sequential.closeConsumer closure
 positiveBase : Trajectory.Interpretation → Set
 positiveBase = Sequential.RefineByBundle earlyLive efficacyBundle positiveTherapeuticSignal
 
+closeAfterAttribution :
+  (outcome : AttributionObservation) →
+  Sequential.OutcomePossible positiveBase attributionBundle outcome →
+  Sequential.SequentialConsumerPlan
+    attributionConsumer
+    (Sequential.RefineByBundle positiveBase attributionBundle outcome)
+closeAfterAttribution outcome possible = Sequential.closeConsumer closure
+  where
+  closure :
+    (left right : Trajectory.Interpretation) →
+    Sequential.RefineByBundle positiveBase attributionBundle outcome left →
+    Sequential.RefineByBundle positiveBase attributionBundle outcome right →
+    attributionConsumer left ≡ attributionConsumer right
+  closure left right (leftBase , leftOutcome) (rightBase , rightOutcome) =
+    attributionReadoutDeterminesConsumer
+      left right
+      (proj₁ leftBase)
+      (proj₁ rightBase)
+      (trans leftOutcome (sym rightOutcome))
+
 positiveContinuation :
   Sequential.SequentialConsumerPlan attributionConsumer positiveBase
-positiveContinuation = Sequential.askThen attributionBundle (closeAfterAttribution positiveBase)
+positiveContinuation = Sequential.askThen attributionBundle closeAfterAttribution
 
 irrelevantEfficacyImpossible :
   Sequential.OutcomePossible earlyLive efficacyBundle irrelevantEfficacySignal → ⊥
