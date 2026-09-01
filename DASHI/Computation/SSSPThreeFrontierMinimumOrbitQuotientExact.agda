@@ -9,6 +9,7 @@ module DASHI.Computation.SSSPThreeFrontierMinimumOrbitQuotientExact where
 -- consumer demand / orbit structure, not an identification of S3 with C6.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Relation.Nullary using (¬_)
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 
@@ -135,15 +136,26 @@ data MinCResidual : Set where
 record MinimumOrbitQuotientBoundary : Set where
   constructor minimumOrbitQuotientBoundary
   field
-    sixLinearExtensionsNeedNotRemainSeparated : Set
-    threeMinimumClassesRemainSeparated : Set
-    eachMinimumClassRetainsBinaryTailResidual : Set
-    sourceSixCarrierIdentifiedWithC6 : Set
+    minAFibreCollapses :
+      pullOneObservation F3.abc ≡ pullOneObservation F3.acb
+    minBFibreCollapses :
+      pullOneObservation F3.bac ≡ pullOneObservation F3.bca
+    minCFibreCollapses :
+      pullOneObservation F3.cab ≡ pullOneObservation F3.cba
+    distinctMinimumClassesRemainSeparatedAB :
+      ¬ (pullOneObservation F3.abc ≡ pullOneObservation F3.bac)
+    distinctMinimumClassesRemainSeparatedBC :
+      ¬ (pullOneObservation F3.bac ≡ pullOneObservation F3.cab)
+    sourceSixCarrierIdentifiedWithC6 : Bool
+    sourceSixCarrierIdentifiedWithC6IsFalse :
+      sourceSixCarrierIdentifiedWithC6 ≡ false
 
 canonicalMinimumOrbitQuotientBoundary : MinimumOrbitQuotientBoundary
 canonicalMinimumOrbitQuotientBoundary =
   minimumOrbitQuotientBoundary
-    (F3.abc ≡ F3.acb → pullOneObservation F3.abc ≡ pullOneObservation F3.acb)
-    (¬ (pullOneObservation F3.abc ≡ pullOneObservation F3.bac))
-    MinAResidual
-    (¬ (F3.LinearOrder3 ≡ F3.Frontier3))
+    pullOne-abc-acb
+    pullOne-bac-bca
+    pullOne-cab-cba
+    minimumClassesRemainSeparatedAB
+    minimumClassesRemainSeparatedBC
+    false refl
