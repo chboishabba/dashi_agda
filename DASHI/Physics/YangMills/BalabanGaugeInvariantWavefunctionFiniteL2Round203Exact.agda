@@ -14,7 +14,7 @@ module DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionFiniteL2Round203
 -- physical Hamiltonian.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base using (NonZero)
 open import Data.Rational.Base using (ℚ; 0ℚ)
@@ -23,7 +23,6 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.P06FaceCubeTorusGeometry using (Cube4)
 import DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport as Transport
 import DASHI.Physics.YangMills.BalabanBasedPathGaugeSectionExact as Rooted
-import DASHI.Physics.YangMills.BalabanFinitePhysicalGaugeQuotientCarrierRound196Exact as R196
 import DASHI.Physics.YangMills.BalabanFiniteRootedGaugeQuotientL2Round197Exact as R197
 import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionHamiltonianRound202Exact as R202
 
@@ -86,10 +85,9 @@ finiteWavefunctionNormIsRootedNorm :
   finiteWavefunctionNormSq ensemble wavefunction
   ≡ R197.finiteQuotientNormSq ensemble
       (wavefunctionAsQuotientObservable wavefunction)
-finiteWavefunctionNormIsRootedNorm ensemble wavefunction =
-  Agda.Builtin.Equality.refl
+finiteWavefunctionNormIsRootedNorm ensemble wavefunction = refl
 
-finiteWavefunctionNormZeroOnSelectedRootedStates :
+finiteWavefunctionNormZeroOnRootedStates :
   ∀ {N : Nat} {{nz : NonZero N}}
     {group : Transport.GroupStructure}
     {base : Cube4 N}
@@ -99,7 +97,7 @@ finiteWavefunctionNormZeroOnSelectedRootedStates :
   finiteWavefunctionNormSq ensemble wavefunction ≡ 0ℚ →
   ∀ quotient →
     R202.evaluateOnRootedQuotient wavefunction quotient ≡ 0ℚ
-finiteWavefunctionNormZeroOnSelectedRootedStates ensemble wavefunction normZero =
+finiteWavefunctionNormZeroOnRootedStates ensemble wavefunction normZero =
   R197.finiteQuotientNormZeroPointwise ensemble
     (wavefunctionAsQuotientObservable wavefunction)
     normZero
