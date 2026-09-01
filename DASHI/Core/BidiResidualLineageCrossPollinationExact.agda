@@ -6,6 +6,12 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.BidiResidualApproximationExact as Bidi
 import DASHI.Core.ContextGovernedLineageTransportExact as Lineage
 
+------------------------------------------------------------------------
+-- Residual narrowing and provenance-lineage transport are orthogonal axes.
+-- A fibre may shrink while its coordinate is preserved, erased, or restored;
+-- narrowing alone therefore does not certify provenance.
+------------------------------------------------------------------------
+
 record BidiRefinementWithLineage
     {Hidden Context Coordinate : Set}
     (family : Lineage.ContextCoordinateLineage Context Coordinate)
