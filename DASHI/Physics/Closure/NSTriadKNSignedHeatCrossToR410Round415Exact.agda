@@ -22,7 +22,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; _*_; _≤_)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -67,8 +67,6 @@ module SignedHeatCross
       integratedSignedAggregateCross : Nat → Time → ℚ
       cutoffIndependentCrossBound : Time → ℚ
 
-      -- Same-object R299/R406 weld.  `R299.four` is exactly the coefficient
-      -- produced by the pre-norm pair factorisation.
       literalR406RemainderIsFourSignedCross :
         (cutoff : Nat) (terminal : Time) →
         literalRemainderIntegral T R cutoff terminal
@@ -91,7 +89,7 @@ module SignedHeatCross
     ; Target.signedRemainderBudget = λ cutoff terminal →
         subst
           (λ x → x ≤ cutoffIndependentCrossBound P terminal)
-          (literalR406RemainderIsFourSignedCross P cutoff terminal)
+          (sym (literalR406RemainderIsFourSignedCross P cutoff terminal))
           (signedCrossBudget P cutoff terminal)
     }
 
