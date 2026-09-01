@@ -18,6 +18,7 @@ module DASHI.Physics.Closure.NSTriadKNHeatNestedOuterPacketCarrierRound419Exact 
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (ℚ)
 open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -47,7 +48,7 @@ nestedOuterPacketPower :
   (W : R294.SwapInvariantCellWeight F) →
   (selected : Z3.FourierMode → Bool) →
   R329.StrongLowLiteralNestedCell E I O system S L H W →
-  Rational.ℚ
+  ℚ
 nestedOuterPacketPower E I O system S L H W selected C =
   R98.selectedOrderedPower
     E I selected (Audit.velocity system) (R329.outer C)
