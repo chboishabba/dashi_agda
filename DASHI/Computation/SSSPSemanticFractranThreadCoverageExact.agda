@@ -1,10 +1,9 @@
 module DASHI.Computation.SSSPSemanticFractranThreadCoverageExact where
 
--- One theorem-bearing coverage surface for the concrete architecture items
--- discussed in the SSSP <-> semantic/FRACTRAN thread.  Positive coverage is
--- anchored to imported witnesses where available; conditional promotions stay
--- explicit boundaries rather than being marked as completed representation
--- theorems.
+-- One import/authority surface for every concrete architecture item discussed
+-- in the SSSP <-> semantic/FRACTRAN thread.  The theorem-bearing content lives
+-- in the imported owners; this file records thread coverage and explicit
+-- non-promotion boundaries without adding a second proof layer.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -25,29 +24,6 @@ import DASHI.Cognition.PNF.SemanticBracketFractranDivisibilityExact as Bracket
 import DASHI.Cognition.PNF.SemanticTokenQuotientStateExact as Token
 import DASHI.Cognition.PNF.SemanticPhaseFractranIntertwinerBoundaryExact as Phase
 import DASHI.Cognition.PNF.SemanticQueryBracketFractranSplitChainExact as Chain
-
-------------------------------------------------------------------------
--- Imported exact witnesses used by the audit.
-------------------------------------------------------------------------
-
-sortingWitness = Sorting.consumer-descends-through-unrequired-order
-refinementWitness = Refine.SSSPBinaryTernaryRefinementCommutes
-threeFrontierWitness = Three.linearExtensionsCollapseForAConsumer
-symmetryWitness = Symmetry.abcAcbConsumerEquivalentFromSymmetry
-findPivotsWitness = Pivots.canonicalFindPivotsBidiBoundary
-minimumWitness = Minimum.minimumCodecRoundTrip
-factorWitness = Factor.orderRoundTrip
-pullWitness = Pull.consumerInvariantUnderTailSymmetry
-queryWitness = Query.coarseWorldsObservationEqual
-querySplitWitness = Query.provenanceWorldsSeparate
-sheetWitness = Sheet.canonicalTransposeFlipsLeftRight
-catalogueWitness = Catalogue.semanticQueryEquivalentWorldsHaveSameFractranOutcome
-bracketClosedWitness = Bracket.bracketUnavailableDisablesDistinguishingRule
-bracketOpenWitness = Bracket.bracketAvailableEnablesDistinguishingRule
-tokenWitness = Token.refinementPreservesOccurrence
-chainClosedWitness = Chain.coarseQueryDistinguishingRuleDisabled
-chainOpenWitness = Chain.provenanceQueryDistinguishingRuleEnabled
-phaseBoundaryWitness = Phase.canonicalPhaseFractranBoundary
 
 record ThreadCoverage : Set where
   constructor threadCoverage
