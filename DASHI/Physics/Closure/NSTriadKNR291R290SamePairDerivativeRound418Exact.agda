@@ -18,6 +18,7 @@ module DASHI.Physics.Closure.NSTriadKNR291R290SamePairDerivativeRound418Exact wh
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -76,8 +77,8 @@ module SamePairDerivative
       (R416.gramTangentCurve (r290Curve P))
   r291GramDerivativeTransportedToR290 P dA dB =
     R416.transportDerivative C
-      (λ time → sameGram P time)
-      (λ time → sameGramTangent P time)
+      (λ time → sym (sameGram P time))
+      (λ time → sym (sameGramTangent P time))
       (Gram.cellDerivativesBuildExactR291GramDerivative
         (r291Curve P) dA dB)
 
