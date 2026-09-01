@@ -15,7 +15,53 @@ on:
       - 'DASHI/Moonshine/MonsterReducedNonaryBoundaryExact.agda'
       - 'DASHI/Moonshine/MonsterC3SSP42HighestAlphaValidation.agda'
       - 'DASHI/Moonshine/Monster3BHighestAlphaValidation.agda'
+      - 'DASHI/Moonshine/Monster3BNormalizerBridge.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergGeneratorsExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergCentralExtensionExact.agda'
+      - 'DASHI/Moonshine/Monster3BF3AlgebraExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergDotBilinearityExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergCocycleExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergAssociativityExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergInverseExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergGroupLawFrontierExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergNondegeneracyExact.agda'
+      - 'DASHI/Moonshine/Monster3BCyclotomicLinearAlgebraExact.agda'
+      - 'DASHI/Moonshine/Monster3BCyclotomicNonzeroInverseExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteSchrodingerFunctionModuleExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteSchrodingerCoordinateProjectorExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteSchrodingerPointProjectorExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteSchrodingerPointProjectorEvaluationExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteSchrodingerProjector729Exact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteX6ConstructiveComparisonExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteSchrodingerDeltaExtractionExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteSchrodingerBooleanDeltaExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteSchrodingerTranslationOrbitExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteSchrodingerFullDeltaOrbitExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteSchrodingerIrreducibilityAssemblyExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergCommutantExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergProjectionNoGoExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteSchrodingerProjectorIrreducibilityBidiExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteSchrodingerIrreducibilityBidiCutExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteStoneVonNeumannMultiplicityExact.agda'
+      - 'DASHI/Moonshine/Monster3BKernelCharacterCriterionExact.agda'
+      - 'DASHI/Moonshine/Monster3BActualKernelCharacterPromotionExact.agda'
+      - 'DASHI/Moonshine/Monster3BModelStoneVonNeumannRecognitionExact.agda'
+      - 'DASHI/Moonshine/Monster3BMultiplicityEvaluationExact.agda'
+      - 'DASHI/Moonshine/Monster3BActualMultiplicityEvaluationFromRecognitionExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteStoneVonNeumannFrontierExact.agda'
+      - 'DASHI/Moonshine/Base369AppraisalFibreHeisenbergCarrierBidiExact.agda'
+      - 'DASHI/Moonshine/Base369PeriodicHeisenbergFibreEquivarianceExact.agda'
+      - 'DASHI/Moonshine/Base369ZetaHeisenbergFiftyFourCarrierExact.agda'
+      - 'DASHI/Moonshine/Base369MonsterTwoComponentCompletionBidiExact.agda'
+      - 'DASHI/Moonshine/Base369Monster3BRepresentationBidiSearchExact.agda'
+      - 'DASHI/Moonshine/Base369Monster3BActualSectorRecognitionBidiExact.agda'
+      - 'DASHI/Moonshine/Base369Monster3BRepresentationBidiSearchRound2Exact.agda'
+      - 'DASHI/Base369ZetaHeisenbergFiftyFourValidation.agda'
+      - 'DASHI/Base369MonsterTwoComponentCompletionValidation.agda'
+      - 'DASHI/Base369Ternary27StratifiedFibreEverything.agda'
       - 'scripts/check_monster_3b_normalizer_dashboard.sh'
+      - 'scripts/monster_3b_normalizer_restriction.g'
+      - 'scripts/render_monster_3b_certificate.py'
       - '.github/workflows/monster-c3-ssp42.yml'
 
 concurrency:
@@ -35,6 +81,12 @@ jobs:
           agda-version: '2.6.4.3'
           agda-stdlib-version: '2.1'
 
+      - name: Install GAP CTblLib
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gap gap-character-tables
+          gap -q -c 'if LoadPackage("ctbllib") <> true then Error("CTblLib unavailable"); fi; Print("CTblLib loaded\n"); QUIT_GAP(0);'
+
       - name: Reject trust escapes in tranche
         run: |
           sources=(
@@ -48,6 +100,43 @@ jobs:
             DASHI/Moonshine/SSP15PhaseClosure54Exact.agda
             DASHI/Moonshine/MonsterReducedNonaryBoundaryExact.agda
             DASHI/Moonshine/MonsterC3SSP42HighestAlphaValidation.agda
+            DASHI/Moonshine/Monster3BHighestAlphaValidation.agda
+            DASHI/Moonshine/Monster3BFiniteHeisenbergCentralExtensionExact.agda
+            DASHI/Moonshine/Monster3BF3AlgebraExact.agda
+            DASHI/Moonshine/Monster3BFiniteHeisenbergDotBilinearityExact.agda
+            DASHI/Moonshine/Monster3BFiniteHeisenbergCocycleExact.agda
+            DASHI/Moonshine/Monster3BFiniteHeisenbergAssociativityExact.agda
+            DASHI/Moonshine/Monster3BFiniteHeisenbergInverseExact.agda
+            DASHI/Moonshine/Monster3BFiniteHeisenbergGroupLawFrontierExact.agda
+            DASHI/Moonshine/Monster3BFiniteHeisenbergNondegeneracyExact.agda
+            DASHI/Moonshine/Monster3BCyclotomicLinearAlgebraExact.agda
+            DASHI/Moonshine/Monster3BCyclotomicNonzeroInverseExact.agda
+            DASHI/Moonshine/Monster3BFiniteSchrodingerFunctionModuleExact.agda
+            DASHI/Moonshine/Monster3BFiniteSchrodingerCoordinateProjectorExact.agda
+            DASHI/Moonshine/Monster3BFiniteSchrodingerPointProjectorExact.agda
+            DASHI/Moonshine/Monster3BFiniteSchrodingerPointProjectorEvaluationExact.agda
+            DASHI/Moonshine/Monster3BFiniteSchrodingerProjector729Exact.agda
+            DASHI/Moonshine/Monster3BFiniteX6ConstructiveComparisonExact.agda
+            DASHI/Moonshine/Monster3BFiniteSchrodingerDeltaExtractionExact.agda
+            DASHI/Moonshine/Monster3BFiniteSchrodingerBooleanDeltaExact.agda
+            DASHI/Moonshine/Monster3BFiniteSchrodingerTranslationOrbitExact.agda
+            DASHI/Moonshine/Monster3BFiniteSchrodingerFullDeltaOrbitExact.agda
+            DASHI/Moonshine/Monster3BFiniteSchrodingerIrreducibilityAssemblyExact.agda
+            DASHI/Moonshine/Monster3BFiniteHeisenbergCommutantExact.agda
+            DASHI/Moonshine/Monster3BFiniteHeisenbergProjectionNoGoExact.agda
+            DASHI/Moonshine/Monster3BFiniteSchrodingerProjectorIrreducibilityBidiExact.agda
+            DASHI/Moonshine/Monster3BFiniteSchrodingerIrreducibilityBidiCutExact.agda
+            DASHI/Moonshine/Monster3BFiniteStoneVonNeumannMultiplicityExact.agda
+            DASHI/Moonshine/Monster3BKernelCharacterCriterionExact.agda
+            DASHI/Moonshine/Monster3BActualKernelCharacterPromotionExact.agda
+            DASHI/Moonshine/Monster3BModelStoneVonNeumannRecognitionExact.agda
+            DASHI/Moonshine/Monster3BMultiplicityEvaluationExact.agda
+            DASHI/Moonshine/Monster3BActualMultiplicityEvaluationFromRecognitionExact.agda
+            DASHI/Moonshine/Monster3BFiniteStoneVonNeumannFrontierExact.agda
+            DASHI/Moonshine/Base369Monster3BRepresentationBidiSearchExact.agda
+            DASHI/Moonshine/Base369Monster3BActualSectorRecognitionBidiExact.agda
+            DASHI/Moonshine/Base369Monster3BRepresentationBidiSearchRound2Exact.agda
+            DASHI/Moonshine/Base369ZetaHeisenbergFiftyFourCarrierExact.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
@@ -55,6 +144,17 @@ jobs:
               exit 1
             fi
           done
+
+      - name: Replay fail-closed Monster to MN3B restriction certificate
+        run: |
+          bash scripts/check_monster_3b_normalizer_dashboard.sh
+          test -s build/monster_3b_normalizer_restriction.json
+          test -s build/generated/DASHI/Moonshine/Generated/Monster3BRestrictionCertificate.agda
+
+      - name: Kernel-check generated restriction certificate
+        run: |
+          agda -i . -i build/generated -l standard-library \
+            build/generated/DASHI/Moonshine/Generated/Monster3BRestrictionCertificate.agda
 
       - name: Kernel-check focused C3 SSP42 root
         run: |
@@ -66,3 +166,8 @@ jobs:
         run: |
           agda -i . -l standard-library \
             DASHI/Moonshine/Monster3BHighestAlphaValidation.agda
+
+      - name: Kernel-check Base369 Monster frontier aggregate
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Base369Ternary27StratifiedFibreEverything.agda
