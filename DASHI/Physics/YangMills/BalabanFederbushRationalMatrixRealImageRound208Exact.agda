@@ -125,8 +125,12 @@ embeddedMatrixOutputCoordinateExact embedding matrix vector coordinate =
 federbushRationalMatrixRealImageRound208Level : ProofLevel
 federbushRationalMatrixRealImageRound208Level = machineChecked
 
+-- No multiplication-preservation inhabitant for the repository's abstract
+-- `RealAnalysisAxioms.ℝ` carrier was found in the current source tree.  The
+-- compiler above is checked once such an embedding is supplied; the physical
+-- scalar-transport authority remains open.
 rationalRealMultiplicativeEmbeddingRound208Level : ProofLevel
-rationalRealMultiplicativeEmbeddingRound208Level = standardImported
+rationalRealMultiplicativeEmbeddingRound208Level = conditional
 
 -- Exact remaining promotion wall: equality on the embedded rational image is
 -- not equality of operators on the complete real SU(2) carrier.  Supply either
