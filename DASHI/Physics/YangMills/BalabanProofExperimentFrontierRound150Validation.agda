@@ -1,0 +1,64 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanProofExperimentFrontierRound150Validation where
+
+open import Agda.Builtin.Bool using (Bool)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+import DASHI.Physics.YangMills.BalabanCombinedRGUnifiedActionRound141Exact as R141
+import DASHI.Physics.YangMills.BalabanBC1PhysicalCompositeFirstVariationRound145Exact as R145
+import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Exact as R146
+import DASHI.Physics.YangMills.BalabanFrontierRouteAdmissionRound147Exact as R147
+import DASHI.Physics.YangMills.BalabanFrontierExperimentDesignRound148Exact as R148
+import DASHI.Physics.YangMills.BalabanFrontierFeedbackSearchRound149Exact as R149
+import DASHI.Physics.YangMills.BalabanConsumerWeightedFrontierPriorityRound150Exact as R150
+import DASHI.Physics.YangMills.BalabanRound108DirectUnifiedActionRound151Exact as R151
+import DASHI.Physics.YangMills.BalabanBC1PhysicalCompositeD1ReductionRound152Exact as R152
+import DASHI.Physics.YangMills.BalabanSequentialDiagnosticPlannerRound153Exact as R153
+import DASHI.Physics.YangMills.BalabanInternalCompilerSourceRealizationFrontierRound154Exact as R154
+
+round141CombinedRGActionRealizationCompiler : ProofLevel
+round141CombinedRGActionRealizationCompiler =
+  R141.completeDensityEffectiveActionRealizationCompilerLevel
+
+round145ComponentFirstVariationCompiler : ProofLevel
+round145ComponentFirstVariationCompiler =
+  R145.bc1PhysicalCompositeFirstVariationCompilerLevel
+
+round146SearchHypergraphCompiler : ProofLevel
+round146SearchHypergraphCompiler = R146.balabanPhysicalFrontierHypergraphLevel
+
+round147RouteAdmissionCompiler : ProofLevel
+round147RouteAdmissionCompiler = R147.balabanFrontierRouteAdmissionLevel
+
+round148ExperimentDesignCompiler : ProofLevel
+round148ExperimentDesignCompiler = R148.balabanFrontierExperimentDesignLevel
+
+round149FeedbackSearchCompiler : ProofLevel
+round149FeedbackSearchCompiler = R149.balabanFrontierFeedbackSearchLevel
+
+round150ConsumerPriorityCompiler : ProofLevel
+round150ConsumerPriorityCompiler = R150.balabanConsumerWeightedFrontierPriorityLevel
+
+round151DirectRound108ActionCompiler : ProofLevel
+round151DirectRound108ActionCompiler = R151.round108DirectUnifiedActionCompilerLevel
+
+round152PhysicalD1ReductionCompiler : ProofLevel
+round152PhysicalD1ReductionCompiler = R152.bc1PhysicalCompositeD1ReductionCompilerLevel
+
+round141LiteralCombinedRGRoute : ProofLevel
+round141LiteralCombinedRGRoute = R141.literalCompleteDensityEffectiveActionRealizationLevel
+
+round151LiteralDirectRound108Route : ProofLevel
+round151LiteralDirectRound108Route = R151.literalRound108DirectPresentCutActionRealizationLevel
+
+round152LiteralPhysicalD1ChainRule : ProofLevel
+round152LiteralPhysicalD1ChainRule = R152.literalPhysicalCompositeD1ChainRuleLevel
+
+round146LiteralSourceLeaves : ProofLevel
+round146LiteralSourceLeaves = R146.literalBalabanFrontierLeafInhabitationLevel
+
+round154PhysicalSourceClosure : Bool
+round154PhysicalSourceClosure = R154.round154PhysicalSourceClosure
+
+round154ClayPromotion : Bool
+round154ClayPromotion = R154.round154ClayPromotion
