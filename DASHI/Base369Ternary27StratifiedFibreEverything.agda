@@ -118,6 +118,12 @@ import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact
 -- additive/character-vanishing datum rather than a fourth eigenphase.
 import DASHI.Moonshine.Base369Monster3BVOAActionPhaseAdapterBidiExact
 
+-- Same-object global/local authority weld: one Monster element now indexes both
+-- the exact legacy graded-trace/character probe and the literal VOA state
+-- action, with explicit receipts that both surfaces use the same graded
+-- representation, graded-character action, and first-coefficient bridge.
+import DASHI.Moonshine.MonsterGradedVOALiteralActionSameObjectBidiExact
+
 -- Same-action continuation: the literal Fin 90 coordinate is already owned by
 -- the actual evaluation isomorphism.  The next representation-theoretic leaf
 -- is therefore the actual inertia action on that exact coordinate, followed by
