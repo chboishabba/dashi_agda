@@ -42,6 +42,7 @@ open import DASHI.Analysis.RiemannG2CanonicalTestModulationProofRelevantExact
 open import DASHI.Analysis.RiemannG2GammaMellinProofRelevantActionCompilerExact
 open import DASHI.Analysis.RiemannG2SourceNativePhiHatModulationAdapterExact
 open import DASHI.Analysis.RiemannG2Zeta23FkActionRecoveryExact
+open import DASHI.Analysis.RiemannG2Zeta23FkCheckedSourceReturnExact
 open import DASHI.Analysis.RiemannG2HighestAlphaAfter8894Exact
 open import DASHI.Mathematics.NumberTheory.PrimeGap2026ClaimAuditExact
 open import DASHI.Mathematics.NumberTheory.PrimeGap2026SourceAcquisitionExact
