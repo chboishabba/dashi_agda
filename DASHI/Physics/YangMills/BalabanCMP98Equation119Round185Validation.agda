@@ -1,0 +1,25 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanCMP98Equation119Round185Validation where
+
+import DASHI.Physics.YangMills.BalabanCMP98Equation119PhysicalSelectedBackgroundRound185Exact as R185
+import DASHI.Physics.YangMills.BalabanCMP98SelectedPhysicalUnitCarrierRound187Exact as R187
+import DASHI.Physics.YangMills.BalabanCMP98SelectedPhysicalUnitCarrierErasureBridgeExact as Erasure
+import DASHI.Physics.YangMills.BalabanCMP98Equation119PointwiseSelectedCutExact as PointwiseCut
+
+round185PhysicalSelectedBackground =
+  R185.cmp98Equation119PhysicalSelectedBackgroundRound185Level
+
+round187SelectedPhysicalUnitCarrier =
+  R187.cmp98SelectedPhysicalUnitCarrierRound187Level
+
+round187SelectedPhysicalPeriodicRealization =
+  R187.cmp98SelectedPhysicalPeriodicRealizationRound187Level
+
+selectedPhysicalUnitCarrierErasureHomomorphism =
+  Erasure.cmp98SelectedPhysicalUnitCarrierErasureHomomorphismLevel
+
+selectedPhysicalPathErasure =
+  Erasure.cmp98SelectedPhysicalPathErasureLevel
+
+pointwiseSelectedCut =
+  PointwiseCut.cmp98Equation119PointwiseSelectedCutLevel
