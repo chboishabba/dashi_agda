@@ -12,3 +12,7 @@ import DASHI.Finance.TradeRealizationSharpeAuthorityExact
 -- in the branch as historical development artifacts but are deliberately not
 -- imported by this aggregate.
 import DASHI.Finance.TradingAdmissibleOptionConeSupersessionExact
+
+-- Size and resulting exposure are part of admissibility itself, not arbitrary
+-- parameters attached after an action has already been authorized.
+import DASHI.Finance.TradingSizedAdmissibleActionFibreExact
