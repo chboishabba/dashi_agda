@@ -11,4 +11,6 @@ import DASHI.Combinatorics.ProofCarryingTextileHyperfabricExact
 import DASHI.Combinatorics.TemporalProofCarryingTextileFibreExact
 import DASHI.Computation.JacquardProofVisibleSurfaceExact
 import DASHI.Computation.ProofCarryingJacquardMotifExact
+import DASHI.Computation.JacquardTapeInterpreterExact
+import DASHI.Computation.TemporalProofJacquardTapeBridgeExact
 import DASHI.JacquardProofVisibleSurfaceValidation
