@@ -18,6 +18,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -90,16 +91,6 @@ module LiteralDynamics
          (physicalSystemAt D cutoff time) mode
   literalRHSAgreement D cutoff time mode
     rewrite sym (physicalSystemUnderlying D cutoff time) = refl
-
-  ----------------------------------------------------------------------
-  -- We deliberately stop one field short of fabricating a Round240 record.
-  -- Round240's exact field names have evolved several times; this owner fixes
-  -- the semantic payload that any constructor adapter must preserve:
-  --
-  --   state curve + literal RHS derivative witness + canonical R407 equation.
-  --
-  -- No arbitrary equation producer remains.
-  ----------------------------------------------------------------------
 
 round408CanonicalEquationSelectionClosed : Bool
 round408CanonicalEquationSelectionClosed = true
