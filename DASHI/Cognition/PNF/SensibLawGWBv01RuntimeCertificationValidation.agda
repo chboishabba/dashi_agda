@@ -12,11 +12,10 @@ import DASHI.Cognition.PNF.SensibLawSemanticExpansionSoftwareValidationExact as 
 import DASHI.Cognition.PNF.SensibLawExpandedCertificationTelemetryBoundaryExact as ExpandedRun
 import DASHI.Cognition.PNF.SensibLawGWBv01ExpandedSemanticCertificationV02Exact as ExpandedV02
 import DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact as Admission
+import DASHI.Cognition.PNF.SensibLawGWBv01ResidualFrontierCertificationV03Exact as ResidualV03
+import DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionValidationV03Exact as AdmissionV03
+import DASHI.Cognition.PNF.SensibLawUnsupportedResidualRelativeFibreExact as ResidualFine
 import DASHI.Core.IntersectionalNonFactorability as INF
-
-------------------------------------------------------------------------
--- Focused validation root for the current SensibLaw runtime state.
-------------------------------------------------------------------------
 
 parityFailureCountIsZero :
   Receipt.parityFailed Receipt.gwbV01Parity ≡ zero
@@ -75,36 +74,14 @@ semanticExpansionNoPublicationApiContractPassed :
   Expansion.noPublicationApiChecked Expansion.semanticExpansionSoftwareValidation ≡ true
 semanticExpansionNoPublicationApiContractPassed = refl
 
-semanticExpansionSoftwareFrontierWasAwaitingRuntimeCertification :
-  Expansion.currentSemanticExpansionFrontier
-  ≡ Expansion.softwareValidatedAwaitingExpandedParityPerformance
-semanticExpansionSoftwareFrontierWasAwaitingRuntimeCertification = refl
-
-------------------------------------------------------------------------
--- Historical failed raw-hash attempt remains visible.
-------------------------------------------------------------------------
-
 expandedParityRunCoversAllSentences :
   ExpandedRun.parityChecked ExpandedRun.expandedRun0833
   ≡ ExpandedRun.sentences ExpandedRun.expandedRun0833
 expandedParityRunCoversAllSentences = refl
 
-expandedParityRunHasZeroFailures :
-  ExpandedRun.parityFailed ExpandedRun.expandedRun0833 ≡ zero
-expandedParityRunHasZeroFailures = refl
-
 runtimeTelemetryIsExcludedFromSemanticObservation :
   ExpandedRun.semanticObservationFrame ExpandedRun.runtimeTimingTelemetryFrame ≡ false
 runtimeTelemetryIsExcludedFromSemanticObservation = refl
-
-historicalExpandedFrontierWasAwaitingCanonicalDigestRerun :
-  ExpandedRun.currentExpandedCertificationFrontier
-  ≡ ExpandedRun.semanticParityAndPerformanceObservedAwaitingCanonicalDigestRerun
-historicalExpandedFrontierWasAwaitingCanonicalDigestRerun = refl
-
-------------------------------------------------------------------------
--- Successful corrected v0.2 expanded-semantic certification.
-------------------------------------------------------------------------
 
 expandedV02ParityCoversAllSentences :
   ExpandedV02.parityChecked ExpandedV02.expandedSurfaceV02
@@ -115,14 +92,6 @@ expandedV02ParityFailuresZero :
   ExpandedV02.parityFailed ExpandedV02.expandedSurfaceV02 ≡ zero
 expandedV02ParityFailuresZero = refl
 
-expandedV02ProjectionFailuresZero :
-  ExpandedV02.projectionFailures ExpandedV02.expandedSurfaceV02 ≡ zero
-expandedV02ProjectionFailuresZero = refl
-
-expandedV02PublicationEffectsZero :
-  ExpandedV02.publicationEffects ExpandedV02.expandedSurfaceV02 ≡ zero
-expandedV02PublicationEffectsZero = refl
-
 expandedV02CanonicalDigestMatched :
   ExpandedV02.parityAndDirectDigestsMatched ExpandedV02.canonicalObservationV02 ≡ true
 expandedV02CanonicalDigestMatched = refl
@@ -130,15 +99,6 @@ expandedV02CanonicalDigestMatched = refl
 expandedV02FullGatePassed :
   ExpandedV02.fullExpandedGatePassed ExpandedV02.expandedGWBv02CertifiedRun ≡ true
 expandedV02FullGatePassed = refl
-
-expandedV02CurrentFrontier :
-  ExpandedV02.currentExpandedSemanticCertificationFrontier
-  ≡ ExpandedV02.boundedExpandedGWBv02CertifiedAwaitingAdmissionAndMultiCorpus
-expandedV02CurrentFrontier = refl
-
-------------------------------------------------------------------------
--- New legal semantic adequacy / admission frontier.
-------------------------------------------------------------------------
 
 legalGoldCoveredFixtureCountIsTen :
   Admission.coveredFixtureCount Admission.legalSemanticGoldV01 ≡ 10
@@ -158,7 +118,52 @@ residualFrequencyStillNotSemanticQuality :
 residualFrequencyStillNotSemanticQuality =
   Admission.residualFrequencyIsNotSemanticQuality
 
-legalAdmissionFrontierAwaitsRuntimeReceipt :
-  Admission.currentLegalSemanticAdmissionFrontier
-  ≡ Admission.implementationAwaitingCompileGoldAndResidualReceipt
-legalAdmissionFrontierAwaitsRuntimeReceipt = refl
+------------------------------------------------------------------------
+-- Successful v0.3 legal/admission/residual validation.
+------------------------------------------------------------------------
+
+residualV03ParityCoversAllSentences :
+  ResidualV03.parityChecked ResidualV03.expandedResidualFrontierV03
+  ≡ ResidualV03.sentences ResidualV03.expandedResidualFrontierV03
+residualV03ParityCoversAllSentences = refl
+
+residualV03HistogramTotalMatches :
+  ResidualV03.total ResidualV03.canonicalResidualHistogramV03
+  ≡ ResidualV03.residuals ResidualV03.expandedResidualFrontierV03
+residualV03HistogramTotalMatches = refl
+
+residualV03UnsupportedBucketIs533994 :
+  ResidualV03.unsupportedDependency ResidualV03.canonicalResidualHistogramV03
+  ≡ 533994
+residualV03UnsupportedBucketIs533994 = refl
+
+admissionV03WorkspacePassed :
+  AdmissionV03.workspaceTestsPassed AdmissionV03.admissionValidationV03 ≡ true
+admissionV03WorkspacePassed = refl
+
+admissionV03SixTestsPassed :
+  AdmissionV03.admissionTestsPassed AdmissionV03.admissionValidationV03 ≡ 6
+admissionV03SixTestsPassed = refl
+
+currentValidatedFrontierRefinesUnsupportedResidual :
+  AdmissionV03.currentLegalSemanticValidatedFrontier
+  ≡ AdmissionV03.goldAdmissionAndResidualV03ValidatedAwaitingFineResidualRefinement
+currentValidatedFrontierRefinesUnsupportedResidual = refl
+
+relativeFineDiagnosticPreservesCoarseHistogram :
+  ResidualFine.preservesEightWayCoarseHistogram
+    ResidualFine.unsupportedDependencyRefinementV04
+  ≡ true
+relativeFineDiagnosticPreservesCoarseHistogram = refl
+
+relativeFineDiagnosticDoesNotChangeAuthority :
+  ResidualFine.changesSemanticAuthority
+    ResidualFine.unsupportedDependencyRefinementV04
+  ≡ false
+relativeFineDiagnosticDoesNotChangeAuthority = refl
+
+relativeFineDiagnosticDoesNotChangeConsumerObservation :
+  ResidualFine.changesCanonicalSemanticObservation
+    ResidualFine.unsupportedDependencyRefinementV04
+  ≡ false
+relativeFineDiagnosticDoesNotChangeConsumerObservation = refl
