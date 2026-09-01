@@ -1,9 +1,8 @@
 module DASHI.Computation.SSSPSemanticFractranThreadCoverageExact where
 
 -- One import/receipt surface for every concrete architecture item discussed in
--- the SSSP <-> semantic/FRACTRAN thread.  The purpose is coverage accounting:
--- implemented constructions are imported here, while intentionally conditional
--- promotion steps remain represented by explicit interfaces/boundaries.
+-- the SSSP <-> semantic/FRACTRAN thread. Implemented constructions are imported
+-- here; intentionally conditional promotions remain explicit interfaces.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -23,6 +22,7 @@ import DASHI.Cognition.PNF.SemanticQueryFractranCatalogueBridgeExact as Catalogu
 import DASHI.Cognition.PNF.SemanticBracketFractranDivisibilityExact as Bracket
 import DASHI.Cognition.PNF.SemanticTokenQuotientStateExact as Token
 import DASHI.Cognition.PNF.SemanticPhaseFractranIntertwinerBoundaryExact as Phase
+import DASHI.Cognition.PNF.SemanticQueryBracketFractranSplitChainExact as Chain
 
 record ThreadCoverage : Set where
   constructor threadCoverage
@@ -76,6 +76,10 @@ record ThreadCoverage : Set where
     bracketDivisibilityGate : Bool
     bracketDivisibilityGateIsTrue : bracketDivisibilityGate ≡ true
 
+    endToEndQueryBracketSplitChain : Bool
+    endToEndQueryBracketSplitChainIsTrue :
+      endToEndQueryBracketSplitChain ≡ true
+
     queryToFractranCompressionNeedsSoundCatalogueWitness : Bool
     queryToFractranCompressionNeedsSoundCatalogueWitnessIsTrue :
       queryToFractranCompressionNeedsSoundCatalogueWitness ≡ true
@@ -102,6 +106,7 @@ record ThreadCoverage : Set where
 canonicalThreadCoverage : ThreadCoverage
 canonicalThreadCoverage =
   threadCoverage
+    true refl
     true refl
     true refl
     true refl
