@@ -33,6 +33,7 @@ FILES=(
   DASHI/Analysis/RiemannG2QuarterPeriodPoleQuotientFinalCompilerExact.agda
   DASHI/Analysis/RiemannG2PoleQuotientProducerReconciliation8889Exact.agda
   DASHI/Analysis/RiemannG2GapSplitClusteringLeanReturn8894Exact.agda
+  DASHI/Analysis/RiemannG2AdaptiveJLambdaConstantWindowExact.agda
   DASHI/Analysis/RiemannG2QuarterPeriodAnalyticRouteReconciliationExact.agda
   DASHI/Analysis/RiemannG2GammaPrecisionLossLocalizationExact.agda
   DASHI/Analysis/RiemannG2CanonicalCharacterHighestAlphaReconciliationExact.agda
@@ -45,6 +46,7 @@ FILES=(
   DASHI/Analysis/RiemannG2GammaMellinProofRelevantActionCompilerExact.agda
   DASHI/Analysis/RiemannG2SourceNativePhiHatModulationAdapterExact.agda
   DASHI/Analysis/RiemannG2Zeta23FkActionRecoveryExact.agda
+  DASHI/Analysis/RiemannG2Zeta23FkCheckedSourceReturnExact.agda
   DASHI/Analysis/RiemannG2HighestAlphaAfter8894Exact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda
