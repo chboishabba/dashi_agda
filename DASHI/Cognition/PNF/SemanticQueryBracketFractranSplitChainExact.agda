@@ -13,6 +13,7 @@ module DASHI.Cognition.PNF.SemanticQueryBracketFractranSplitChainExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.SemanticQueryResidualFibreSSSPBridgeExact as Query
 import DASHI.Cognition.PNF.SemanticBracketFractranDivisibilityExact as Bracket
@@ -53,7 +54,7 @@ coarseQueryDistinguishingRuleDisabled = refl
 coarseQueryCannotAuthoriseResidualSplit :
   Bracket.ResidualSplitPermission
     (bracketForQuery Query.coarseIdentityQuery) →
-  DASHI.Core.Prelude.⊥
+  ⊥
 coarseQueryCannotAuthoriseResidualSplit =
   Bracket.unavailableBracketCannotAuthoriseSplit
 
@@ -65,7 +66,7 @@ coarseQueryCannotAuthoriseResidualSplit =
 provenanceWorldsAreDistinguished :
   (Query.exampleObserve Query.provenanceQuery Query.canonicalReferent ≡
    Query.exampleObserve Query.provenanceQuery Query.impersonatorReferent) →
-  DASHI.Core.Prelude.⊥
+  ⊥
 provenanceWorldsAreDistinguished = Query.provenanceWorldsSeparate
 
 provenanceQueryDistinguishingRuleEnabled :
