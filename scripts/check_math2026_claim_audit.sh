@@ -51,6 +51,7 @@ FILES=(
   DASHI/Analysis/RiemannG2HAConsumerWeightedRecoveryTraceExact.agda
   DASHI/Analysis/RiemannG2HASourceProducerHyperedgeExact.agda
   DASHI/Analysis/RiemannG2HASingleSourceProducerBidiExact.agda
+  DASHI/Analysis/RiemannG2HASingleProducerLegacyHACompilerExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda
   DASHI/Mathematics/NumberTheory/DiophantineTupleDPrimeSquare2026ClaimAuditExact.agda
