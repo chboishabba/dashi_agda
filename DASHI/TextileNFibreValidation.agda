@@ -8,6 +8,7 @@ import DASHI.Combinatorics.TextileFibreHyperfabricExact
 import DASHI.Combinatorics.TextileFibreOrderHyperfabricExact
 import DASHI.Combinatorics.ProofFabricCompilerExact
 import DASHI.Combinatorics.ProofCarryingTextileHyperfabricExact
+import DASHI.Combinatorics.TemporalProofCarryingTextileFibreExact
 import DASHI.Computation.JacquardProofVisibleSurfaceExact
 import DASHI.Computation.ProofCarryingJacquardMotifExact
 import DASHI.JacquardProofVisibleSurfaceValidation
