@@ -3,6 +3,7 @@ module DASHI.Physics.Foundations.Everything where
 import DASHI.Physics.Foundations.ParameterScaleTaxonomyExact
 import DASHI.Physics.Foundations.ParameterInformationGeometryExact
 import DASHI.Physics.Foundations.ScaleInvariantTheorySelectionExact
+import DASHI.Physics.Foundations.FundamentalConstantViabilityFibreExact
 import DASHI.Physics.Foundations.PadicCausalChartLosslessExact
 import DASHI.Physics.Foundations.ModularProjectionQuantisationExact
 import DASHI.Physics.Foundations.RGMDLExhaustionChambersExact
@@ -60,8 +61,6 @@ import DASHI.Physics.Foundations.GRQFTExperimentDesignCrossPollinationExact
 import DASHI.Physics.Foundations.GRQFTDiscriminatorSynthesisExact
 import DASHI.Physics.Foundations.GRQFTSequentialExperimentPlannerExact
 
--- Generic downstream consumers of history/projection information.  These live
--- in Core because their non-descent laws are not physics-specific.
 import DASHI.Core.HistoryConditionedChoiceExact
 import DASHI.Core.RelationalTensionCompressionExact
 import DASHI.Core.RelationalObserverGainExact

@@ -19,6 +19,7 @@ import DASHI.Core.ConsumerRelativeMinimalFidelityExact
 import DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact
 import DASHI.Core.ConsumerReductionDependencyReopeningExact
 import DASHI.Core.CoarseFineRelativeFibreExact
+import DASHI.Core.ConsumerRelativeCoarseGrainingBidiExact
 import DASHI.Core.RelativeFineModelFidelityOrthogonalityExact
 import DASHI.Core.ConsumerDecisionAdequacyFromReductionExact
 import DASHI.Core.ConsumerAdequacyJointPolicyBidiCompilerExact
