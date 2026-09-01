@@ -16,6 +16,7 @@ import DASHI.Physics.YangMills.BalabanBasedGaugeActionGroupoidRound200Exact as R
 import DASHI.Physics.YangMills.BalabanRootedHamiltonianGaugeFunctorRound201Exact as R201
 import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionHamiltonianRound202Exact as R202
 import DASHI.Physics.YangMills.BalabanFiniteSampleObservablePairingRound203Exact as R203
+import DASHI.Physics.YangMills.BalabanEquation119DerivativeDoesNotDetermineAverageRound204Exact as R204
 
 round189PathHomomorphism = R189.cmp98RawUnitPathHomomorphismRound189Level
 round190BoundarySupersession = R190.cmp98ClayBoundarySupersessionRound190Level
@@ -40,6 +41,15 @@ round193OperatorSourceSemantics =
 round193SelectedBackgroundCutWeld =
   R193.literalCMP98Path13SelectedBackgroundCutWeldRound193Level
 
+-- R204 sharpens the remaining qSource part: Eq.(119) constructs qPrime but the
+-- underlying one-step Q(V0) cannot factor through the derivative observation.
+round204DerivativeCollision =
+  R204.equation119DerivativeCollisionRound204Level
+round204QSourceDoesNotFollowFromQPrime =
+  R204.qSourceDoesNotFollowFromQPrimeRound204Level
+round204LiteralOneStepAverageQSource =
+  R204.literalCMP98OneStepAverageQSourceSameObjectRound204Level
+
 round194RootedCoarseAnchoredOrbitSection =
   R194.cmp98RootedCoarseAnchoredOrbitSectionRound194Level
 round194RootedOrbitUniqueness =
@@ -56,7 +66,6 @@ round195CoarseEndpointsAreRoot =
 round195IdentityIsPhysicalUnit =
   R195.literalCMP109Equation012IdentityIsPhysicalUnitRound195Level
 
--- Concrete set-level rooted normal form remains authoritative.
 round196FinitePhysicalGaugeQuotientCarrier =
   R196.finitePhysicalGaugeQuotientCarrierRound196Level
 round196FiniteGaugeQuotientIdempotence =
@@ -66,9 +75,8 @@ round196FiniteGaugeQuotientUniqueness =
 round196FiniteGaugeQuotientSelectedFibreCompatibility =
   R196.finitePhysicalGaugeQuotientSelectedFibreCompatibilityRound196Level
 
--- Historical R197 used the exhaustive `FiniteSelector` carrier as though it
--- were merely a finite ensemble.  R203 is the corrected weaker sample-local
--- surface.  No full compact-group configuration finiteness is inferred.
+-- Historical R197 used the exhaustive FiniteSelector carrier as though it were
+-- merely a finite ensemble. R203 is the corrected weaker sample-local surface.
 round197HistoricalExhaustiveSelectorPairing =
   R197.finiteRootedGaugeQuotientL2PairingRound197Level
 round203FiniteSamplePairing =
@@ -80,7 +88,7 @@ round198FiniteRepresentativeCarrierConstructed =
   R198.finiteGaugeOrbitRepresentativeCarrierNowConstructedRound198Level
 
 -- Historical R199-R201 field-endomorphism Hamiltonian plumbing is retained only
--- as audit history.  R202 corrects the semantic carrier: H acts on invariant
+-- as audit history. R202 corrects the semantic carrier: H acts on invariant
 -- wavefunctions/observables over configuration space, not on gauge fields.
 round199HistoricalFieldEndomorphismDescent =
   R199.rootedQuotientHamiltonianDescentRound199Level
@@ -96,7 +104,6 @@ round202RootedQuotientEvaluation =
 round202OperatorNormalizationHandoff =
   R202.wavefunctionHamiltonianNormalizationHandoffRound202Level
 
--- Current physical analytic leaves.
 round202PhysicalGaugeInvariantL2Measure =
   R202.literalPhysicalGaugeInvariantL2MeasureRound202Level
 round203PhysicalHaarGibbsL2NotFiniteSample =
