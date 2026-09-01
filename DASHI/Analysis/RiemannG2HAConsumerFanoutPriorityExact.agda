@@ -82,10 +82,10 @@ provenanceFanoutIsOne :
 provenanceFanoutIsOne = refl
 
 postTransportTheoremFanoutsAreOne :
-  probeFanoutScore HA.recoverAdmissibility ≡ suc zero ×
-  (probeFanoutScore HA.recoverCanonicalHXAgreement ≡ suc zero ×
-  (probeFanoutScore HA.recoverSameFormulaSpectralShift ≡ suc zero ×
-   probeFanoutScore HA.recoverSameWeilTransformShift ≡ suc zero))
+  (probeFanoutScore HA.recoverAdmissibility ≡ suc zero) ×
+  ((probeFanoutScore HA.recoverCanonicalHXAgreement ≡ suc zero) ×
+  ((probeFanoutScore HA.recoverSameFormulaSpectralShift ≡ suc zero) ×
+   (probeFanoutScore HA.recoverSameWeilTransformShift ≡ suc zero)))
 postTransportTheoremFanoutsAreOne = refl , (refl , (refl , refl))
 
 ------------------------------------------------------------------------
@@ -127,11 +127,6 @@ initialFormulaShiftCannotBecomePriorityCandidate candidate =
 
 ------------------------------------------------------------------------
 -- Exact initial-frontier classification.
---
--- The two mathematical producer probes occupy the five-consumer top class.
--- Provenance remains enabled but belongs to a distinct one-consumer audit
--- branch.  This is a planning priority only: either top probe still leaves the
--- other prerequisite open.
 ------------------------------------------------------------------------
 
 data InitialFanoutClass : HA.HARecoveryProbe → Set where
@@ -156,7 +151,7 @@ classifyInitialEnabledProbe Frontier.sourceProvenanceLive =
 TopFanoutAtInitialFrontier : HA.HARecoveryProbe → Set
 TopFanoutAtInitialFrontier probe =
   PriorityCandidate Frontier.allMissingState probe ×
-  probeFanoutScore probe ≡ suc (suc (suc (suc (suc zero))))
+  (probeFanoutScore probe ≡ suc (suc (suc (suc (suc zero)))))
 
 implementationIsInitialTopFanout :
   TopFanoutAtInitialFrontier HA.recoverImplementationIdentity
@@ -198,12 +193,12 @@ postTransportWeilPriority =
   priority-candidate Frontier.sameWeilTransformShiftLive
 
 postTransportFanoutCannotChooseAmongFourMathReceipts :
-  priorityCandidateScore postTransportAdmissibilityPriority
-  ≡ priorityCandidateScore postTransportHXPriority ×
-  (priorityCandidateScore postTransportHXPriority
-   ≡ priorityCandidateScore postTransportFormulaPriority ×
-   priorityCandidateScore postTransportFormulaPriority
-   ≡ priorityCandidateScore postTransportWeilPriority)
+  (priorityCandidateScore postTransportAdmissibilityPriority
+   ≡ priorityCandidateScore postTransportHXPriority) ×
+  ((priorityCandidateScore postTransportHXPriority
+    ≡ priorityCandidateScore postTransportFormulaPriority) ×
+   (priorityCandidateScore postTransportFormulaPriority
+    ≡ priorityCandidateScore postTransportWeilPriority))
 postTransportFanoutCannotChooseAmongFourMathReceipts =
   refl , (refl , refl)
 
