@@ -7,7 +7,7 @@ module DASHI.Computation.SSSPGeneralPullPrefixQuotientExact where
 -- pretending that this owner reimplements the paper's ordered-set data
 -- structure.
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong; trans; sym)
+open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Agda.Builtin.Bool using (Bool; false; true)
 
 ------------------------------------------------------------------------
@@ -24,6 +24,9 @@ record PullPrefixFactorisation : Set₁ where
 
     rebuildEncode :
       (x : FullState) → rebuild (encodePrefix x) (encodeTail x) ≡ x
+
+    prefixOfRebuild :
+      (p : Prefix) (t : TailCode) → encodePrefix (rebuild p t) ≡ p
 
 open PullPrefixFactorisation public
 
@@ -50,30 +53,26 @@ open TailSymmetryQuotient public
 
 actFull :
   {F : PullPrefixFactorisation} →
-  TailSymmetryQuotient F →
-  Symmetry →
+  (Q : TailSymmetryQuotient F) →
+  Symmetry Q →
   FullState F →
   FullState F
 actFull {F} Q g x =
   rebuild F (encodePrefix F x) (actTail Q g (encodeTail F x))
 
--- Pull observes only the prefix.  Therefore every tail action is invisible by
--- construction, regardless of how many internal linear extensions the tail
--- contains.
 pullObservation :
   (F : PullPrefixFactorisation) → FullState F → Prefix F
 pullObservation F = encodePrefix F
 
-record PullTailInvariance
-  (F : PullPrefixFactorisation)
-  (Q : TailSymmetryQuotient F) : Set₁ where
-  constructor pullTailInvariance
-  field
-    prefixPreservedByTailAction :
-      (g : Symmetry Q) (x : FullState F) →
-      pullObservation F (actFull Q g x) ≡ pullObservation F x
-
-open PullTailInvariance public
+prefixPreservedByTailAction :
+  {F : PullPrefixFactorisation} →
+  (Q : TailSymmetryQuotient F) →
+  (g : Symmetry Q) (x : FullState F) →
+  pullObservation F (actFull Q g x) ≡ pullObservation F x
+prefixPreservedByTailAction {F} Q g x =
+  prefixOfRebuild F
+    (encodePrefix F x)
+    (actTail Q g (encodeTail F x))
 
 ------------------------------------------------------------------------
 -- 3. Generic consumer descent through the prefix quotient.
@@ -89,7 +88,7 @@ open PrefixConsumer public
 
 consumeFull :
   {F : PullPrefixFactorisation} →
-  PrefixConsumer F → FullState F → Output
+  (C : PrefixConsumer F) → FullState F → Output C
 consumeFull {F} C x = consumePrefix C (encodePrefix F x)
 
 consumerIgnoresTailGivenSamePrefix :
@@ -99,6 +98,15 @@ consumerIgnoresTailGivenSamePrefix :
   encodePrefix F x ≡ encodePrefix F y →
   consumeFull C x ≡ consumeFull C y
 consumerIgnoresTailGivenSamePrefix C eq = cong (consumePrefix C) eq
+
+consumerInvariantUnderTailSymmetry :
+  {F : PullPrefixFactorisation} →
+  (Q : TailSymmetryQuotient F) →
+  (C : PrefixConsumer F) →
+  (g : Symmetry Q) (x : FullState F) →
+  consumeFull C (actFull Q g x) ≡ consumeFull C x
+consumerInvariantUnderTailSymmetry Q C g x =
+  cong (consumePrefix C) (prefixPreservedByTailAction Q g x)
 
 ------------------------------------------------------------------------
 -- 4. BIDI boundary.
