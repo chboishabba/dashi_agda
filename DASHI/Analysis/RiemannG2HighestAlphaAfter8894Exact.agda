@@ -9,18 +9,19 @@ import DASHI.Analysis.RiemannG2Zeta23FkActionRecoveryExact as Fk
 import DASHI.Analysis.RiemannG2Zeta23FkCheckedSourceReturnExact as FkChecked
 import DASHI.Analysis.RiemannG2FkOrbitConsumerAttachmentExact as Orbit
 import DASHI.Analysis.RiemannG2FkOrbitExplicitFormulaWeldExact as Weld
+import DASHI.Analysis.RiemannG2FkSelectedTestSameObjectBidiExact as Same
 import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as PQ
 
 ------------------------------------------------------------------------
 -- HIGHEST-ALPHA SCHEDULER AFTER 8894 + CHECKED f_k SOURCE RECOVERY
 --
--- Source-side H_A mathematics is already paid on the literal f_k family:
--- character multiplication, paperFT translation, C^2 regularity, support,
--- compact support and continuity.  Backward inspection of the target-centred
--- consumer shows that equality of the WHOLE source function space with the
--- abstract Agda Test carrier is overpayment.  The live representation seam is
--- only the selected source base/target/window orbit embedded into the chosen
--- Weil Test, with admissibility and the same formula's spectral observations.
+-- Source-side H_A mathematics is paid on the literal f_k family.  The target
+-- consumer only needs the selected source orbit embedded into one Weil Test.
+-- Cross-pollination from the Moonshine same-element weld then removes another
+-- duplicate payment: once FkOrbitConsumerAttachment exists, the literal selected
+-- Test, its admissibility, and the fact that the near/far weld uses that same
+-- Test are compiler output.  The substantive remaining zero-side theorem is the
+-- same-formula spectral near/far equality on that literal selected Test.
 ------------------------------------------------------------------------
 
 data RH8894Leaf : Set where
@@ -28,10 +29,9 @@ data RH8894Leaf : Set where
   rebuildCharacterMultiplication
   identifyWholeSourceFunctionSpaceWithWeilTest
   identifyWholeSourceFunctionSpaceWithMellinTest
-  recoverSelectedFkOrbitEmbedding
-  recoverSelectedFkAdmissibility
+  recoverSelectedFkOrbitAttachment
+  compileSelectedFkSameObjectWeld
   recoverSelectedSameFormulaNearFarSpectralEquality
-  transportCheckedFkTheoremsIntoAgda
 
   sharpenQuadraticDecayGapSplit
   retuneTaperForGapSplit
@@ -53,10 +53,9 @@ leafState searchForModulationOperation = owned
 leafState rebuildCharacterMultiplication = pruned
 leafState identifyWholeSourceFunctionSpaceWithWeilTest = pruned
 leafState identifyWholeSourceFunctionSpaceWithMellinTest = pruned
-leafState recoverSelectedFkOrbitEmbedding = live
-leafState recoverSelectedFkAdmissibility = live
+leafState recoverSelectedFkOrbitAttachment = live
+leafState compileSelectedFkSameObjectWeld = owned
 leafState recoverSelectedSameFormulaNearFarSpectralEquality = live
-leafState transportCheckedFkTheoremsIntoAgda = live
 
 leafState sharpenQuadraticDecayGapSplit = pruned
 leafState retuneTaperForGapSplit = pruned
@@ -102,6 +101,15 @@ genericExplicitFormulaReconstructionNoLongerLive :
 genericExplicitFormulaReconstructionNoLongerLive =
   Weld.reconstructGenericExplicitFormulaPruned
 
+sameObjectWeldIsCompilerOutput :
+  Same.PaymentRelevant Same.weldLiteralSelectedTest -> ⊥
+sameObjectWeldIsCompilerOutput = Same.literalSelectedTestWeldAlreadyCompiled
+
+sameObjectNearFarAttachmentIsCompilerOutput :
+  Same.PaymentRelevant Same.attachNearFarToSameLiteralTest -> ⊥
+sameObjectNearFarAttachmentIsCompilerOutput =
+  Same.nearFarSameObjectAttachmentAlreadyCompiled
+
 quadraticGapSplitSharpeningNoLongerLive :
   Gap.GapSplitRelevant Gap.sharpenSameQuadraticDecayDonor -> ⊥
 quadraticGapSplitSharpeningNoLongerLive = Gap.sameQuadraticDecayDonorPruned
@@ -132,41 +140,33 @@ adaptiveInverseWidthStillLogicallyOpen =
 record HighestAlphaAfter8894Boundary : Set where
   constructor highest-alpha-after-8894-boundary
   field
-    literalFkActionAlreadyRecovered : Bool
-    literalFkActionAlreadyRecoveredIsTrue : literalFkActionAlreadyRecovered ≡ true
-
-    sourceFkPaperFTShiftAlreadyChecked : Bool
-    sourceFkPaperFTShiftAlreadyCheckedIsTrue : sourceFkPaperFTShiftAlreadyChecked ≡ true
-
-    sourceFkAnalyticPrerequisitesAlreadyChecked : Bool
-    sourceFkAnalyticPrerequisitesAlreadyCheckedIsTrue :
-      sourceFkAnalyticPrerequisitesAlreadyChecked ≡ true
+    literalFkSourceMathematicsAlreadyRecovered : Bool
+    literalFkSourceMathematicsAlreadyRecoveredIsTrue :
+      literalFkSourceMathematicsAlreadyRecovered ≡ true
 
     wholeSourceFunctionSpaceEqualityRequired : Bool
     wholeSourceFunctionSpaceEqualityRequiredIsFalse :
       wholeSourceFunctionSpaceEqualityRequired ≡ false
 
-    selectedFkOrbitEmbeddingStillRequired : Bool
-    selectedFkOrbitEmbeddingStillRequiredIsTrue :
-      selectedFkOrbitEmbeddingStillRequired ≡ true
+    selectedFkOrbitAttachmentStillRequired : Bool
+    selectedFkOrbitAttachmentStillRequiredIsTrue :
+      selectedFkOrbitAttachmentStillRequired ≡ true
 
-    selectedFkAdmissibilityStillRequired : Bool
-    selectedFkAdmissibilityStillRequiredIsTrue :
-      selectedFkAdmissibilityStillRequired ≡ true
+    sameObjectWeldIsSeparatePayment : Bool
+    sameObjectWeldIsSeparatePaymentIsFalse :
+      sameObjectWeldIsSeparatePayment ≡ false
 
     sameAgdaExplicitFormulaNearFarEqualityStillRequired : Bool
     sameAgdaExplicitFormulaNearFarEqualityStillRequiredIsTrue :
       sameAgdaExplicitFormulaNearFarEqualityStillRequired ≡ true
-
-    crossProverTransportStillRequired : Bool
-    crossProverTransportStillRequiredIsTrue : crossProverTransportStillRequired ≡ true
 
     sameQuadraticGapSplitRouteStillWorthSharpening : Bool
     sameQuadraticGapSplitRouteStillWorthSharpeningIsFalse :
       sameQuadraticGapSplitRouteStillWorthSharpening ≡ false
 
     adaptiveConstantWindowComparisonLive : Bool
-    adaptiveConstantWindowComparisonLiveIsTrue : adaptiveConstantWindowComparisonLive ≡ true
+    adaptiveConstantWindowComparisonLiveIsTrue :
+      adaptiveConstantWindowComparisonLive ≡ true
 
     gammaPrecisionRepairLive : Bool
     gammaPrecisionRepairLiveIsTrue : gammaPrecisionRepairLive ≡ true
@@ -184,16 +184,13 @@ canonicalHighestAlphaAfter8894Boundary : HighestAlphaAfter8894Boundary
 canonicalHighestAlphaAfter8894Boundary =
   highest-alpha-after-8894-boundary
     true refl
-    true refl
-    true refl
     false refl
     true refl
-    true refl
-    true refl
+    false refl
     true refl
     false refl
     true refl
     true refl
     false refl
     false refl
-    "The checked source already owns the literal fk character action, paperFT frequency translation, C^2 regularity, support, compact support and continuity. Backward inspection of the target-centred consumer removes another overpayment: do not identify the entire source C_c^2 function space with the abstract Agda Weil/Mellin Test carrier. Highest-alpha H_A/H_E work is consumer-relative: embed the selected source base/target/window fk orbit into the chosen Weil Test; retain admissibility; transport checked source facts across the prover boundary; and prove the spectralZeroForm of that exact selected test for the same RiemannExplicitFormula is same-ordinate cluster plus finite pole-near signed response plus the same far remainder. The existing explicitFormula theorem then supplies the arithmetic equality automatically. In parallel compare the adaptive J*Lambda constant window or find a different signed near mechanism, repair Gamma precision, attach the owned cluster margin, and pay the final independent budget inequality. RH remains open."
+    "Cross-pollinating the Moonshine same-element rule tightens the RH selected-test lane. The checked source already owns fk character multiplication, paperFT shift and analytic prerequisites. Whole source-carrier equality is unnecessary. Recover one consumer-relative FkOrbitConsumerAttachment from the checked source into the chosen Agda Weil Test. From that attachment, the literal selected Test, its admissibility, the arithmetic/spectral paired observation, and same-test near/far attachment are compiler output. Do not schedule them as independent leaves. The substantive zero-side theorem is now the same-RiemannExplicitFormula equality spectralZeroForm(selectedPoleTest) = same-ordinate cluster + finite signed near response + the same far remainder. In parallel compare the adaptive J*Lambda constant window or find a different signed mechanism, repair Gamma precision, attach the owned cluster margin, then pay the final independent budget inequality. RH remains open."
