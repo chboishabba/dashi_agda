@@ -18,10 +18,13 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
+import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact as Canonical
 import DASHI.Physics.Closure.NSTriadKNFixedCanonicalRealityVectorFieldRound71Exact as Fixed
 
@@ -37,8 +40,8 @@ removeZeroMemberNonzero {mode} {modes = head ∷ tail} member
 ...   | Cube.here refl = record
       { Z3.notZero = λ headZero →
           Output.falseNotTrue
-            (Agda.Builtin.Equality.trans
-              (Agda.Builtin.Equality.sym headDecision)
+            (trans
+              (sym headDecision)
               (Output.modeEqualComplete headZero))
       }
 ...   | Cube.there rest =
@@ -51,14 +54,12 @@ nonzeroCutoffMemberNonzero :
 nonzeroCutoffMemberNonzero = removeZeroMemberNonzero
 
 fixedAuditRetainedModeNonzero :
-  ∀ {r} {F : DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier.RealField r}
-    {E : DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier.IntegerEmbedding F}
+  ∀ {r} {F : C3.RealField r}
+    {E : C3.IntegerEmbedding F}
     (geometry : Fixed.FixedCanonicalGeometry F E)
     (state : Fixed.CanonicalRealityState F (Fixed.cutoff geometry))
     (mode : Z3.FourierMode) →
-  mode Cube.∈
-    DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit.modes
-      (Fixed.fixedAuditSystem geometry state) →
+  mode Cube.∈ Audit.modes (Fixed.fixedAuditSystem geometry state) →
   Z3.NonZeroMode mode
 fixedAuditRetainedModeNonzero geometry state mode member =
   nonzeroCutoffMemberNonzero member
