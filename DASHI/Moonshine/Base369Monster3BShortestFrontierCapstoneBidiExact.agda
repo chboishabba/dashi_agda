@@ -12,22 +12,26 @@ module DASHI.Moonshine.Base369Monster3BShortestFrontierCapstoneBidiExact where
 --     -> X6 x Fin 90
 --     -> all 90 actual Base369 appraisal 729-slices.
 --
--- The point is compression of scientific inputs.  Everything after the two
+-- The point is compression of scientific inputs. Everything after the two
 -- genuinely external receipts
 --
 --   (1) selected literal element represents the certified central-3B class;
 --   (2) the literal zeta eigenspace is action-recognized as X6 x Fin 90
 --
--- is compiler output.  No cardinality-only promotion is introduced.
+-- is compiler output. No cardinality-only promotion is introduced.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Fin.Base using (Fin)
 
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
+import DASHI.Moonshine.Base369AppraisalFibreHeisenbergCarrierBidiExact as Carrier
+import DASHI.Moonshine.Base369HeisenbergTranslationGridObstructionExact as AppraisalAction
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
+import DASHI.Moonshine.Monster3BKernelCharacterCriterionExact as Character
+import DASHI.Moonshine.Monster3BActualKernelCharacterPromotionExact as Kernel
 import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact as Recognition
 import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact as KernelWeld
 import DASHI.Moonshine.Base369Monster3BActualMultiplicitySliceAppraisalBidiExact as Slice
@@ -58,7 +62,7 @@ ActualZetaSector source =
 selectedCentralZetaAmplitudeIs65610 :
   ∀ {Monster K}
     (source : Shortest3BFrontierSource Monster K) →
-  DASHI.Moonshine.Monster3BKernelCharacterCriterionExact.coefficientZeta
+  Character.coefficientZeta
     (KernelWeld.selectedActualRestrictedCharacter (attachment source))
   ≡ 65610
 selectedCentralZetaAmplitudeIs65610 source =
@@ -67,7 +71,7 @@ selectedCentralZetaAmplitudeIs65610 source =
 selectedKernelMultiplicityIsNinety :
   ∀ {Monster K}
     (source : Shortest3BFrontierSource Monster K) →
-  DASHI.Moonshine.Monster3BActualKernelCharacterPromotionExact.multiplicity
+  Kernel.multiplicity
     (KernelWeld.selectedKernelNinetyHeisenbergIsotypy (attachment source))
   ≡ 90
 selectedKernelMultiplicityIsNinety source =
@@ -107,7 +111,7 @@ actualSliceWeight :
   (m : Fin 90) →
   (point : Geometry.AppraisalFibrePoint) →
   actualWeight source (actualStateAtAppraisal source m point)
-  ≡ DASHI.Moonshine.Base369AppraisalFibreHeisenbergCarrierBidiExact.appraisalFibreToX6 point
+  ≡ Carrier.appraisalFibreToX6 point
 actualSliceWeight source =
   Slice.actualStateAtAppraisalWeight (recognition source)
 
@@ -140,8 +144,7 @@ actualSliceTranslationIntertwines :
   Recognition.actualTranslate (recognition source) axis
     (actualStateAtAppraisal source m point)
   ≡ actualStateAtAppraisal source m
-      (DASHI.Moonshine.Base369HeisenbergTranslationGridObstructionExact.heisenbergTranslateFibre
-        axis point)
+      (AppraisalAction.heisenbergTranslateFibre axis point)
 actualSliceTranslationIntertwines source =
   Slice.actualAppraisalTranslationIntertwines (recognition source)
 
@@ -153,13 +156,13 @@ actualSliceModulationIntertwines :
   (point : Geometry.AppraisalFibrePoint) →
   Recognition.actualModulationExponent (recognition source) axis
     (actualStateAtAppraisal source m point)
-  ≡ H.modulationExponent axis
-      (DASHI.Moonshine.Base369AppraisalFibreHeisenbergCarrierBidiExact.appraisalFibreToX6 point)
+  ≡ H.modulationExponent axis (Carrier.appraisalFibreToX6 point)
 actualSliceModulationIntertwines source =
   Slice.actualAppraisalModulationExponentIntertwines (recognition source)
 
 ------------------------------------------------------------------------
--- 5. Exhaustion of each selected multiplicity fibre.
+-- 5. Exhaustion: every recognized literal zeta state belongs to exactly its
+--    own Fin-90 slice, reconstructed through its X6/appraisal coordinate.
 ------------------------------------------------------------------------
 
 actualStateRecoveredInOwnSlice :
@@ -169,18 +172,17 @@ actualStateRecoveredInOwnSlice :
   state ≡
     actualStateAtAppraisal source
       (actualMultiplicity source state)
-      (DASHI.Moonshine.Base369AppraisalFibreHeisenbergCarrierBidiExact.x6ToAppraisalFibre
-        (actualWeight source state))
+      (Carrier.x6ToAppraisalFibre (actualWeight source state))
 actualStateRecoveredInOwnSlice source state =
   Slice.actualStateRecoveredFromAppraisal
     (recognition source)
     (actualMultiplicity source state)
     state
-    DASHI.Moonshine.Base369Monster3BShortestFrontierCapstoneBidiExact.refl
+    refl
 
 ------------------------------------------------------------------------
--- 6. Frontier accounting.  The entire 729/90 tail is generated after the two
---    external same-object/action receipts.  This file does not fabricate them.
+-- 6. Frontier accounting. The entire 729/90 tail is generated after the two
+--    external same-object/action receipts. This file does not fabricate them.
 ------------------------------------------------------------------------
 
 record Shortest3BFrontierBoundary : Set where
