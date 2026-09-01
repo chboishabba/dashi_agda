@@ -9,6 +9,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Computation.PathfindingTemporalFibreEvolutionExact as Temporal
 import DASHI.Computation.BMSSPTemporalStableFrontierFibreExact as BMSSP
+import DASHI.Computation.IncrementalShortestPathReopenFibreExact as Incremental
 
 ------------------------------------------------------------------------
 -- 1. Named temporal evolution roles.
@@ -79,6 +80,15 @@ record TemporalPathfindingFamilyBoundary : Set where
     bmsspTailMayChangeAcrossRecursiveStepIsTrue :
       bmsspTailMayChangeAcrossRecursiveStep ≡ true
 
+    temporalFibreEvolutionRequiresSameLiteralTransition : Bool
+    temporalFibreEvolutionRequiresSameLiteralTransitionIsTrue :
+      temporalFibreEvolutionRequiresSameLiteralTransition ≡ true
+
 canonicalTemporalPathfindingFamilyBoundary : TemporalPathfindingFamilyBoundary
 canonicalTemporalPathfindingFamilyBoundary =
-  temporalPathfindingFamilyBoundary false refl false refl true refl true refl
+  temporalPathfindingFamilyBoundary
+    false refl
+    false refl
+    true refl
+    true refl
+    true refl
