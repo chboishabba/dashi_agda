@@ -8,9 +8,8 @@ import DASHI.Cognition.PNF.ContextualFractranOccurrenceHyperfabricExact as Conte
 import DASHI.Cognition.PNF.BracketedTSFVFractranWorldFibreExact as World
 
 ------------------------------------------------------------------------
--- Time-indexed contextual fibres.  Same coarse state at two times does not
--- identify histories.  Symmetry/phase inversion commuting with time transport
--- is a theorem obligation, not a consequence of carrier geometry.
+-- Time-indexed contextual fibres. Same coarse state does not identify history.
+-- Commutation between phase action and time transport is theorem-bearing.
 ------------------------------------------------------------------------
 
 data TimeIndex : Set where
@@ -36,9 +35,7 @@ record TemporalTransport : Set₁ where
 
 open TemporalTransport public
 
-record TemporalPhaseNaturality
-  (T : TemporalTransport)
-  : Set₁ where
+record TemporalPhaseNaturality (T : TemporalTransport) : Set₁ where
   constructor temporalPhaseNaturality
   field
     phaseAction : TemporalOccurrenceState → TemporalOccurrenceState
@@ -49,17 +46,27 @@ record TemporalPhaseNaturality
 
 open TemporalPhaseNaturality public
 
-record TemporalSymmetryDefect
-  (T : TemporalTransport)
-  : Set₁ where
+------------------------------------------------------------------------
+-- When naturality is unavailable, retain both orderings and an explicit
+-- residual witness type. This avoids pretending non-commutation is a Boolean
+-- property derivable from an equality proof.
+------------------------------------------------------------------------
+
+record TemporalSymmetryDefect (T : TemporalTransport) : Set₁ where
   constructor temporalSymmetryDefect
   field
     phaseAction : TemporalOccurrenceState → TemporalOccurrenceState
     witnessState : TemporalOccurrenceState
-    orderMatters :
-      transport T (phaseAction witnessState)
-      ≡ phaseAction (transport T witnessState)
-      → Bool
+    transportAfterPhase : TemporalOccurrenceState
+    phaseAfterTransport : TemporalOccurrenceState
+    firstPathExact :
+      transportAfterPhase ≡ transport T (phaseAction witnessState)
+    secondPathExact :
+      phaseAfterTransport ≡ phaseAction (transport T witnessState)
+    DefectResidual : Set
+    defectResidual : DefectResidual
+
+open TemporalSymmetryDefect public
 
 record TemporalContextualBoundary : Set where
   constructor temporalContextualBoundary
@@ -68,7 +75,8 @@ record TemporalContextualBoundary : Set where
     phaseNaturalityIsAutomatic : Bool
     temporalTransportMayChangeBracketExposure : Bool
     differentHistoriesMayShareCurrentZero : Bool
+    failedNaturalityRetainsTwoOrderedPaths : Bool
 
 canonicalTemporalContextualBoundary : TemporalContextualBoundary
 canonicalTemporalContextualBoundary =
-  temporalContextualBoundary false false true true
+  temporalContextualBoundary false false true true true
