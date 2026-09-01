@@ -13,6 +13,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.ProofCarryingPhysicalExecutionBoundaryExact as Physical
 import DASHI.Core.SharedStateCoalitionReachableEffectExact as Shared
+import DASHI.Core.ObservationInterventionTrustFibreExact as ObserverTrust
 import DASHI.Governance.ResourcePressureTelemetryPermissionExact as Pressure
 import DASHI.Governance.ExecutionGovernanceClosureAssayExact as Closure
 
@@ -42,7 +43,7 @@ butterBenchSource =
     "Butter-Bench: Evaluating LLM Controlled Robots for Practical Intelligence"
     "Andon Labs"
     "2025"
-    "Embodied-robot evaluation/calibration source: humans about 95 percent versus best tested model about 40 percent; reports repeated docking failure/self-referential trace and a low-battery confidential-information-for-charging stress test."
+    "Embodied-robot evaluation/calibration source. The relevant resource-pressure condition is the battery/charging state presented by the test harness to the model; this source role does not promote the supplied low-battery telemetry into a theorem about the robot's true physical energy state. Reports repeated docking/non-charging behaviour and a confidential-information-for-charging stress test."
     "https://andonlabs.com/evals/butter-bench"
 
 openAISharedChannelSource : ExternalAssaySource
@@ -60,6 +61,9 @@ openAISharedChannelSource =
 
 physicalBoundary : Physical.ProofCarryingPhysicalExecutionBoundary
 physicalBoundary = Physical.canonicalProofCarryingPhysicalExecutionBoundary
+
+observationInterventionBoundary : ObserverTrust.ObservationInterventionTrustBoundary
+observationInterventionBoundary = ObserverTrust.canonicalObservationInterventionTrustBoundary
 
 resourcePressureBoundary : Pressure.ResourcePressureTelemetryPermissionBoundary
 resourcePressureBoundary = Pressure.canonicalResourcePressureTelemetryPermissionBoundary
@@ -81,6 +85,7 @@ record MHSButterBenchPhysicalAgentCrossPollination : Set where
     butterSource : ExternalAssaySource
     sharedChannelSource : ExternalAssaySource
     executionBoundary : Physical.ProofCarryingPhysicalExecutionBoundary
+    observerTrustBoundary : ObserverTrust.ObservationInterventionTrustBoundary
     pressureBoundary : Pressure.ResourcePressureTelemetryPermissionBoundary
     channelBoundary : Shared.SharedStateCoalitionBoundary
     closureBoundary : Closure.ExecutionGovernanceClosureBoundary
@@ -104,6 +109,10 @@ record MHSButterBenchPhysicalAgentCrossPollination : Set where
     resourcePressureCreatesPermission : Bool
     resourcePressureCreatesPermissionIsFalse : resourcePressureCreatesPermission ≡ false
 
+    reportedEmergencyEqualsPhysicalEmergency : Bool
+    reportedEmergencyEqualsPhysicalEmergencyIsFalse :
+      reportedEmergencyEqualsPhysicalEmergency ≡ false
+
     undeclaredSharedStateCannotCommunicate : Bool
     undeclaredSharedStateCannotCommunicateIsFalse :
       undeclaredSharedStateCannotCommunicate ≡ false
@@ -126,6 +135,7 @@ canonicalMHSButterBenchPhysicalAgentCrossPollination =
     butterBenchSource
     openAISharedChannelSource
     Physical.canonicalProofCarryingPhysicalExecutionBoundary
+    ObserverTrust.canonicalObservationInterventionTrustBoundary
     Pressure.canonicalResourcePressureTelemetryPermissionBoundary
     Shared.canonicalSharedStateCoalitionBoundary
     Closure.canonicalExecutionGovernanceClosureBoundary
@@ -137,4 +147,5 @@ canonicalMHSButterBenchPhysicalAgentCrossPollination =
     false refl
     false refl
     false refl
-    "MHS makes DASHI's execution seam concrete: intention/request/admission/command/effect/observation are not collapsed. Butter-Bench supplies an embodied resource-pressure assay where continued-operation pressure does not manufacture unrelated information authority. The OpenAI incident supplies a shared-state/coalition assay. All external reports remain bounded source context; the exact non-collapse and admission results are DASHI constructions."
+    false refl
+    "MHS makes DASHI's execution seam concrete: intention/request/admission/command/effect/observation are not collapsed. Butter-Bench supplies an observation-layer resource-pressure assay: supplied/reported self-state can alter planning without establishing the underlying physical state and without manufacturing unrelated information authority. The OpenAI incident supplies a shared-state/coalition assay. External reports remain bounded source context; the exact non-collapse and admission results are DASHI constructions."

@@ -21,3 +21,28 @@ import DASHI.Chemistry.DrinkingWaterDistributionResidualCorrosionBidiExact
 import DASHI.Chemistry.DrinkingWaterChloramineNitrificationBiofilmBidiExact
 import DASHI.Chemistry.DrinkingWaterCorrosionMetalReleaseExact
 import DASHI.Chemistry.DrinkingWaterTapMetalObservationBidiExact
+
+-- Refinery/feedstock composition lane: salt/chloride/process constraints remain
+-- distinct from crude grade, effective throughput and downstream economics.
+import DASHI.Chemistry.RefineryFeedstockSaltConstraintBidiExact
+
+-- Integrated industrial-chemistry lane: salt-derived chlor-alkali co-products
+-- and hydrocarbon cracker/refinery products meet only through explicit
+-- downstream reaction, inventory, quality and provenance receipts.
+import DASHI.Chemistry.SaltPetroleumIndustrialChemistryNetworkExact
+
+-- Carbon suitability lane: periodic/valence structure, rich carbon chemistry,
+-- stellar production abundance and abiogenesis remain separately receipted.
+import DASHI.Chemistry.CarbonChemicalSuitabilityLifeBoundaryExact
+import DASHI.Chemistry.CarbonBackboneReachableChemistryConeExact
+
+-- Ocean biogeochemistry lane: salinity, temperature, CO2/carbonate chemistry,
+-- oxygen and nutrient state remain separate coordinates for ecological use.
+import DASHI.Chemistry.OceanCarbonateSaltTemperatureStressBidiExact
+
+-- Deep-time carbon-cycle balance: explicit atmosphere/ocean/biosphere/
+-- sediment/fossil reservoirs, transfer conservation, residence-time receipts,
+-- path residuals, and cumulative-transfer versus forcing-rate separation.
+import DASHI.Chemistry.DeepTimeCarbonReservoirFluxBalanceExact
+import DASHI.Chemistry.DeepTimeCarbonPathResidualBidiExact
+import DASHI.Chemistry.CarbonForcingRateBidiExact
