@@ -2,8 +2,8 @@ module DASHI.Computation.BMSSPWorkPivotTemporalTransportExact where
 
 -- Temporal transport laws for the same-carrier BMSSP layer.
 -- Completed work and pivot coverage are intentionally different temporal
--- objects: completed work may be persistent, while pivots may be reselected,
--- invalidated, or replaced as the recursive frontier evolves.
+-- objects: completed work may be persistent, while pivot coverage may be
+-- discharged into work or re-established by a (possibly different) pivot.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -32,29 +32,7 @@ record CompletedWorkPersistence
 open CompletedWorkPersistence public
 
 ------------------------------------------------------------------------
--- 2. Pivot coverage transport is weaker and explicit.
-------------------------------------------------------------------------
-
-data PivotTransportKind : Set where
-  pivotPreserved : PivotTransportKind
-  pivotReselected : PivotTransportKind
-  pivotInvalidated : PivotTransportKind
-
-record PivotCoverageTransport
-  (B : Same.BMSSPTemporalSameCarrier) : Set₁ where
-  constructor pivotCoverageTransport
-  field
-    kindAt : Nat → Pull.FullState (Same.pull B) → PivotTransportKind
-
-    transportRelation :
-      (t : Nat) (x : Pull.FullState (Same.pull B)) →
-      Same.VisitsCompletePivot (Same.pivotLayer B t) x →
-      Set
-
-open PivotCoverageTransport public
-
-------------------------------------------------------------------------
--- 3. Coverage after transport is re-established at the target time.
+-- 2. Target coverage is theorem-bearing at every time slice.
 ------------------------------------------------------------------------
 
 targetCoverage :
@@ -85,6 +63,36 @@ completedWorkStaysCovered :
     (Same.pivotLayer B (suc t))
     (Same.advance (Same.transition B) t x)
 completedWorkStaysCovered B W t x done = inj₁ (persists W t x done)
+
+------------------------------------------------------------------------
+-- 3. Pivot evolution is a target-state dichotomy, not identical persistence.
+------------------------------------------------------------------------
+
+data PivotAfterStep
+  (B : Same.BMSSPTemporalSameCarrier)
+  (t : Nat)
+  (x : Pull.FullState (Same.pull B)) : Set where
+  pivotDischargedIntoCompletedWork :
+    Same.InCompletedWork
+      (Same.pivotLayer B (suc t))
+      (Same.advance (Same.transition B) t x) →
+    PivotAfterStep B t x
+
+  pivotCoverageReestablished :
+    Same.VisitsCompletePivot
+      (Same.pivotLayer B (suc t))
+      (Same.advance (Same.transition B) t x) →
+    PivotAfterStep B t x
+
+classifyPivotAfterStep :
+  (B : Same.BMSSPTemporalSameCarrier) →
+  (t : Nat) →
+  (x : Pull.FullState (Same.pull B)) →
+  Same.VisitsCompletePivot (Same.pivotLayer B t) x →
+  PivotAfterStep B t x
+classifyPivotAfterStep B t x oldPivot with targetCoverage B t x
+... | inj₁ done = pivotDischargedIntoCompletedWork done
+... | inj₂ pivot = pivotCoverageReestablished pivot
 
 ------------------------------------------------------------------------
 -- 4. Residual evolution is separately typed.
@@ -123,6 +131,10 @@ record BMSSPWorkPivotTemporalBoundary : Set where
     pivotCoverageMustPersistIdenticallyIsFalse :
       pivotCoverageMustPersistIdentically ≡ false
 
+    pivotTargetStatusIsProofClassified : Bool
+    pivotTargetStatusIsProofClassifiedIsTrue :
+      pivotTargetStatusIsProofClassified ≡ true
+
     targetCoverageMustBeReestablished : Bool
     targetCoverageMustBeReestablishedIsTrue :
       targetCoverageMustBeReestablished ≡ true
@@ -133,4 +145,4 @@ record BMSSPWorkPivotTemporalBoundary : Set where
 
 canonicalBMSSPWorkPivotTemporalBoundary : BMSSPWorkPivotTemporalBoundary
 canonicalBMSSPWorkPivotTemporalBoundary =
-  bmsspWorkPivotTemporalBoundary true refl false refl true refl true refl
+  bmsspWorkPivotTemporalBoundary true refl false refl true refl true refl true refl
