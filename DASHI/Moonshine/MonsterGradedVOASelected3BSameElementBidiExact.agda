@@ -30,8 +30,10 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Moonshine.GradedVertexOperatorAlgebraBoundary as GVOA
+import DASHI.Moonshine.MonsterGradedVOABridgeExact as Legacy
 import DASHI.Moonshine.MonsterGradedVOALiteralActionSameObjectBidiExact as Weld
 import DASHI.Moonshine.Base369Monster3BVOAActionPhaseAdapterBidiExact as Phase
+import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact as Recognition
 
 ------------------------------------------------------------------------
 -- 1. Same-bridge selected-3B package.
@@ -43,9 +45,7 @@ record Selected3BSameElementSource (Monster K : Set) : Setω where
 
     phaseSource :
       Phase.ActualMonster3BVOAPhaseActionSource Monster K
-        (GVOA.group
-          (DASHI.Moonshine.MonsterGradedVOABridgeExact.voaAction
-            (Weld.gradedAuthority weld)))
+        (GVOA.group (Legacy.voaAction (Weld.gradedAuthority weld)))
 
     -- This is the decisive same-object payment.  The phase source is not
     -- permitted to bring a second literal VOA bridge with the same-looking
@@ -91,7 +91,7 @@ record Selected3BRecognizedSameElementSource (Monster K : Set) : Setω where
   field
     selectedSource : Selected3BSameElementSource Monster K
     recognition :
-      DASHI.Moonshine.Monster3BMultiplicityEvaluationExact.ActualZetaSectorRecognition
+      Recognition.ActualZetaSectorRecognition
         (selectedLiteralZetaSector selectedSource)
 
 open Selected3BRecognizedSameElementSource public
