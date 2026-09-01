@@ -18,6 +18,7 @@ import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionHamiltonianRound
 import DASHI.Physics.YangMills.BalabanFiniteSampleObservablePairingRound203Exact as R203
 import DASHI.Physics.YangMills.BalabanEquation119DerivativeDoesNotDetermineAverageRound204Exact as R204
 import DASHI.Physics.YangMills.BalabanFiniteMeasureWavefunctionL2BridgeRound205Exact as R205
+import DASHI.Physics.YangMills.BalabanFiniteMeasureIBPWavefunctionSymmetryRound206Exact as R206
 
 round189PathHomomorphism = R189.cmp98RawUnitPathHomomorphismRound189Level
 round190BoundarySupersession = R190.cmp98ClayBoundarySupersessionRound190Level
@@ -115,6 +116,20 @@ round205LiteralFiniteMeasureExpectationSemantics =
   R205.literalBalabanFiniteMeasureExpectationSemanticsRound205Level
 round205LiteralFiniteMeasureL2Completion =
   R205.literalBalabanFiniteMeasureL2CompletionRound205Level
+
+-- R206 consumes the repository's theorem-bearing selected finite IBP identity
+-- directly on R205's same-measure pairing.  This replaces sample symmetry as
+-- the physical target while retaining the exact action/IBP realization leaves.
+round206FiniteMeasureIBPWavefunctionSymmetry =
+  R206.finiteMeasureIBPWavefunctionSymmetryRound206Level
+round206PhysicalHamiltonianAsSelectedActionVariation =
+  R206.literalPhysicalYMHamiltonianAsSelectedActionVariationRound206Level
+round206SelectedIBPRightSideAsFiniteMeasurePairing =
+  R206.literalSelectedIBPRightSideAsFiniteMeasurePairingRound206Level
+round206PhysicalBoundaryConvention =
+  R206.literalPhysicalBoundaryConventionRound206Level
+round206FiniteMeasureHamiltonianSelfAdjointness =
+  R206.literalFiniteMeasureHamiltonianSelfAdjointnessRound206Level
 
 round202PhysicalGaugeInvariantL2Measure =
   R202.literalPhysicalGaugeInvariantL2MeasureRound202Level
