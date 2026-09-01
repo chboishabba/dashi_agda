@@ -23,6 +23,8 @@ import DASHI.Governance.AnomalousTemporalProofSearchExperimentAdmissionExact as 
 import DASHI.Governance.AnomalousTemporalCalibratedHypothesisForestExact as CalibratedForest
 import DASHI.Governance.AnomalousCompetingExperimentCostedSelectionExact as Competition
 import DASHI.Governance.PsilocybinOutcomeConditionedSequentialExperimentExact as PsilocybinSequential
+import DASHI.Governance.AnomalousExperimentParetoFibreExact as Pareto
+import DASHI.Governance.AnomalousExperimentalDesignFarCrossPollinationExact as Far
 
 repairBoundary : Fibre.DrugGovernanceMultiAxisReparativeBoundary
 repairBoundary = Fibre.canonicalDrugGovernanceMultiAxisReparativeBoundary
@@ -54,6 +56,10 @@ competitionBoundary : Competition.AnomalousCompetingExperimentCostBoundary
 competitionBoundary = Competition.canonicalAnomalousCompetingExperimentCostBoundary
 psilocybinSequentialBoundary : PsilocybinSequential.PsilocybinOutcomeConditionedSequentialBoundary
 psilocybinSequentialBoundary = PsilocybinSequential.canonicalPsilocybinOutcomeConditionedSequentialBoundary
+paretoBoundary : Pareto.AnomalousExperimentParetoFibreBoundary
+paretoBoundary = Pareto.canonicalAnomalousExperimentParetoFibreBoundary
+farCrossPollinationBoundary : Far.AnomalousExperimentalDesignFarCrossPollinationBoundary
+farCrossPollinationBoundary = Far.canonicalAnomalousExperimentalDesignFarCrossPollinationBoundary
 
 materialRepairProbeReallySeparates :
   Discriminator.BundleSeparates (Planner.probeFor Planner.materialRepairConsumer)
@@ -190,3 +196,20 @@ psilocybinUsesOutcomeConditionedSequentialPlan :
     PsilocybinSequential.attributionConsumer
     PsilocybinSequential.earlyLive
 psilocybinUsesOutcomeConditionedSequentialPlan = PsilocybinSequential.psilocybinSequentialPlan
+
+preregisteredPresentimentDesignIsNonDominated :
+  Pareto.NonDominated Pareto.preregisteredStudy
+preregisteredPresentimentDesignIsNonDominated = Pareto.preregisteredNonDominated
+
+adversarialPresentimentDesignIsNonDominated :
+  Pareto.NonDominated Pareto.adversarialMultiLabStudy
+adversarialPresentimentDesignIsNonDominated = Pareto.adversarialNonDominated
+
+retrospectiveSurveyCannotEnterParetoFront :
+  Pareto.NonDominated Pareto.retrospectiveSurvey → ⊥
+retrospectiveSurveyCannotEnterParetoFront = Pareto.surveyCannotEnterParetoFront
+
+paretoPreferenceCanSelectDifferentAdmittedDesigns :
+  Pareto.preferredDesign Pareto.resourceBurdenPriority
+  ≡ Pareto.preferredDesign Pareto.robustnessPriority → ⊥
+paretoPreferenceCanSelectDifferentAdmittedDesigns = Pareto.preferenceCanSelectDifferentFrontPoints
