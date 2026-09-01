@@ -23,10 +23,12 @@ module DASHI.Physics.Closure.NSTriadKNRationalPhysicalPairRatePositivityRound400
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
-open import Data.Rational.Base using
+open import Data.Rational using
   (ℚ; 0ℚ; 1ℚ; Positive; NonNegative; _+_; _*_; _<_; _≤_;
-   positive; nonNegative; ≢-nonZero)
+   nonNegative; ≢-nonZero)
+open import Data.Rational.Base using (positive)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
@@ -47,13 +49,7 @@ import DASHI.Physics.Closure.NSTriadKNNonzeroOutputInputAlternativeRound399Exact
 F : C3.RealField _
 F = Rational.rationalRealField
 
-zeroNotOne : 0ℚ ≡ 1ℚ → Agda.Builtin.Unit.⊤
-zeroNotOne ()
-
--- A local empty carrier avoids importing any stronger logical principle.
-data Empty : Set where
-
-zeroEqualsOneImpossible : 0ℚ ≡ 1ℚ → Empty
+zeroEqualsOneImpossible : 0ℚ ≡ 1ℚ → ⊥
 zeroEqualsOneImpossible ()
 
 normSquaredNonnegative :
@@ -86,7 +82,7 @@ normSquaredNonzero :
   (I : C3.ModeInverseSquare F E)
   (mode : Z3.FourierMode) →
   Z3.NonZeroMode mode →
-  C3.normSquared I mode ≡ 0ℚ → Empty
+  C3.normSquared I mode ≡ 0ℚ → ⊥
 normSquaredNonzero E I mode modeNonzero normZero =
   let
     inverse = C3.inverseNormSquared I mode
@@ -112,9 +108,8 @@ normSquaredPositive E I mode modeNonzero =
     normNN : 0ℚ ≤ C3.normSquared I mode
     normNN = normSquaredNonnegative E I mode
 
-    normNZ : C3.normSquared I mode ≡ 0ℚ → Agda.Builtin.Empty.⊥
-    normNZ equality with normSquaredNonzero E I mode modeNonzero equality
-    ... | ()
+    normNZ : C3.normSquared I mode ≡ 0ℚ → ⊥
+    normNZ = normSquaredNonzero E I mode modeNonzero
 
     instance
       normNNI : NonNegative (C3.normSquared I mode)
