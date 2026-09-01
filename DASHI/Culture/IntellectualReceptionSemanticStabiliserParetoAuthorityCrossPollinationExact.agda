@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Culture.IntellectualReceptionActionVoxelGovernedSymmetryExact as Voxel
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as MDL
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
+import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Governance.AuthorityMandateCore as Authority
 import DASHI.Governance.ContestedAmbientAuthorityHyperformalismExact as Contested
 import DASHI.Moonshine.Base369Ternary27SignedSymmetryMonsterIntertwinerExact as Signed
@@ -76,10 +77,7 @@ semanticGeneratorAgreesWithGeometry semanticComparisonReflection state =
 
 swapXYIsGeometricallyAvailable :
   applyGeometricGenerator swapXYGenerator (Voxel.actionVoxelPoint Voxel.seekState)
-  ≡ Geometry.ternary27Point
-      (Voxel.comparisonOutcome Voxel.seekState)
-      (Voxel.responseTrit Voxel.preserveState .Voxel.responsePolicy)
-      (Voxel.authorityTrit (Voxel.authorityStatus Voxel.seekState))
+  ≡ Geometry.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspNegOne
 swapXYIsGeometricallyAvailable = Voxel.seekPointSwappedXY
 
 swapXYNotSemanticRolePreserving :
@@ -129,7 +127,7 @@ fixtureAuthorisedImpliesSemantic :
   CanonicalFixtureAuthorisedGenerator generator →
   SemanticRolePreservingGenerator generator
 fixtureAuthorisedImpliesSemantic
-  (fixture-authorised-generator .Authority.constitutionalDelegation admissible fixtureIdentityScope) =
+  (fixture-authorised-generator source admissible fixtureIdentityScope) =
   semanticIdentity
 
 comparisonReflectionNotFixtureAuthorised :
@@ -209,7 +207,7 @@ paretoEligibilityGateRetained :
   MDL.ParetoAdmissible costs selected →
   MDL.Eligible generatorEligibilityProblem selected
 paretoEligibilityGateRetained receipt =
-  MDL.ParetoAdmissible.selectedEligible receipt
+  MDL.selectedEligible receipt
 
 comparisonReflectionCannotBecomeParetoSelectedWithoutAuthority :
   ∀ {costs : MDL.CostHyperfabric generatorEligibilityProblem} →
