@@ -15,5 +15,6 @@ import DASHI.Cognition.PNF.SemanticQueryFractranCatalogueBridgeExact
 import DASHI.Cognition.PNF.SemanticBracketFractranDivisibilityExact
 import DASHI.Cognition.PNF.SemanticTokenQuotientStateExact
 import DASHI.Cognition.PNF.SemanticPhaseFractranIntertwinerBoundaryExact
+import DASHI.Cognition.PNF.SemanticQueryBracketFractranSplitChainExact
 
 import DASHI.Computation.SSSPSemanticFractranThreadCoverageExact
