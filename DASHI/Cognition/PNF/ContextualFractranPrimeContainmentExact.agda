@@ -10,10 +10,8 @@ import DASHI.Foundations.SSPPrimeLane369Refinement as Lane369
 import DASHI.TrackedPrimes as Tracked
 
 ------------------------------------------------------------------------
--- The signed FRACTRAN atlas and the older tracked-prime 369 refinement use
--- distinct typed prime carriers.  Do not identify them by raw Nat equality.
--- A consumer that wants 'which larger 369 address contains this FRACTRAN lane'
--- must supply the explicit same-lane bridge.
+-- The signed FRACTRAN atlas and older tracked-prime 369 refinement use
+-- distinct typed prime carriers. Do not identify them by raw Nat equality.
 ------------------------------------------------------------------------
 
 record SignedTrackedLaneBridge : Set where
@@ -21,7 +19,7 @@ record SignedTrackedLaneBridge : Set where
   field
     signedLane : Signed.SSPPrime
     trackedLane : Tracked.SSP
-    arithmeticValueAgrees : Signed.primeValue signedLane ≡ Tracked.sspNat trackedLane
+    arithmeticValueAgrees : Signed.primeValue signedLane ≡ Tracked.toNat trackedLane
 
 open SignedTrackedLaneBridge public
 
