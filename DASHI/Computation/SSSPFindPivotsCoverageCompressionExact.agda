@@ -14,6 +14,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _*_; _+_)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Data.Nat using (_≤_; z≤n; s≤s)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
+open import Data.Unit using (⊤; tt)
 
 ------------------------------------------------------------------------
 -- 1. Exact coverage shape of Lemma 3.2.
@@ -35,8 +36,8 @@ open FindPivotsCoverage public
 -- 2. Cardinal compression in denominator-free form.
 --
 -- The paper states |P| <= |W|/k.  A convenient natural-number certificate is
--- k*|P| <= |W|.  This owner records that stronger denominator-free form as an
--- input witness; a later arithmetic bridge may relate it to floor division.
+-- k*|P| <= |W|.  This owner records that denominator-free form as an input
+-- witness; a later arithmetic bridge may relate it to floor division.
 ------------------------------------------------------------------------
 
 record FindPivotsCompression : Set where
@@ -91,7 +92,7 @@ finiteCoverage2 =
 -- 2 * 1 <= 2
 compression2 : FindPivotsCompression
 compression2 =
-  findPivotsCompression 2 1 2 1 Set (s≤s (s≤s z≤n))
+  findPivotsCompression 2 1 2 1 ⊤ (s≤s (s≤s z≤n))
 
 canonicalFindPivotsCertificate : FindPivotsCertificate
 canonicalFindPivotsCertificate =
