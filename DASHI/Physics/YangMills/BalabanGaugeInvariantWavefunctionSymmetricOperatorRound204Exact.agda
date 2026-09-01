@@ -25,6 +25,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.P06FaceCubeTorusGeometry using (Cube4)
 import DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport as Transport
 import DASHI.Physics.YangMills.BalabanBasedPathGaugeSectionExact as Rooted
+import DASHI.Physics.YangMills.BalabanFinitePhysicalGaugeQuotientCarrierRound196Exact as R196
 import DASHI.Physics.YangMills.BalabanFiniteRootedGaugeQuotientL2Round197Exact as R197
 import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionHamiltonianRound202Exact as R202
 import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionFiniteL2Round203Exact as R203
@@ -63,8 +64,7 @@ symmetricOperatorNormalizationHandoff :
     (R202.act (operator symmetricOperator) wavefunction) field
   ≡ R202.evaluateOnRootedQuotient
       (R202.act (operator symmetricOperator) wavefunction)
-      (DASHI.Physics.YangMills.BalabanFinitePhysicalGaugeQuotientCarrierRound196Exact.normalizeToFiniteRootedGaugeQuotient
-        group base paths field)
+      (R196.normalizeToFiniteRootedGaugeQuotient group base paths field)
 symmetricOperatorNormalizationHandoff symmetricOperator wavefunction =
   R202.operatorNormalizationHandoff (operator symmetricOperator) wavefunction
 
