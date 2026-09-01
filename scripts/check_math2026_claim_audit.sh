@@ -46,6 +46,7 @@ FILES=(
   DASHI/Analysis/RiemannG2HAConsumerQuotientActiveSearchExact.agda
   DASHI/Analysis/RiemannG2HARecoveryDependencyFrontierExact.agda
   DASHI/Analysis/RiemannG2HAAdmissibleSearchRankingExact.agda
+  DASHI/Analysis/RiemannG2HAProofCarryingRecoveryTraceExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda
   DASHI/Mathematics/NumberTheory/DiophantineTupleDPrimeSquare2026ClaimAuditExact.agda
