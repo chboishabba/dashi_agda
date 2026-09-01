@@ -2,3 +2,4 @@ module DASHI.SSSPSortingBarrierTernaryBidiValidation where
 
 import DASHI.Computation.SSSPSortingBarrierTernaryBidiExact
 import DASHI.Computation.SSSPBinaryTernarySymmetryRefinementBidiExact
+import DASHI.Computation.SSSPThreeFrontierLinearExtensionQuotientBidiExact
