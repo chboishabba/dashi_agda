@@ -1,0 +1,37 @@
+name: proof-experiment-action-369-agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Core/HistoryIndexedProofExperimentActionLoopExact.agda'
+      - 'DASHI/Core/ProofExperimentAction369IntegrationExact.agda'
+      - 'DASHI/Core/ProofExperimentAction369Validation.agda'
+      - 'DASHI/Moonshine/Base369OODAProofExperimentObserverExact.agda'
+      - 'DASHI/Moonshine/Monster196830RegularBulkResidualControlPatternExact.agda'
+      - 'DASHI/EverythingProofExperimentAction369.agda'
+      - 'scripts/check_proof_experiment_action_369.sh'
+      - '.github/workflows/proof-experiment-action-369-agda.yml'
+  push:
+    branches:
+      - agent/ooda-proof-experiment-196830
+    paths:
+      - 'DASHI/Core/HistoryIndexedProofExperimentActionLoopExact.agda'
+      - 'DASHI/Core/ProofExperimentAction369IntegrationExact.agda'
+      - 'DASHI/Core/ProofExperimentAction369Validation.agda'
+      - 'DASHI/Moonshine/Base369OODAProofExperimentObserverExact.agda'
+      - 'DASHI/Moonshine/Monster196830RegularBulkResidualControlPatternExact.agda'
+      - 'DASHI/EverythingProofExperimentAction369.agda'
+      - 'scripts/check_proof_experiment_action_369.sh'
+      - '.github/workflows/proof-experiment-action-369-agda.yml'
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y agda
+      - name: Check proof/experiment/action 369 tranche
+        run: bash scripts/check_proof_experiment_action_369.sh
