@@ -21,10 +21,6 @@ import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 -- every ternary depth n and later instantiated at n = 6.
 ------------------------------------------------------------------------
 
-------------------------------------------------------------------------
--- 1. Ternary cube carrier.
-------------------------------------------------------------------------
-
 data TritCube : Nat → Set where
   cube0 : TritCube 0
   cubeS : ∀ {n} → Trit → TritCube n → TritCube (suc n)
@@ -33,10 +29,6 @@ cubeEqual : ∀ {n} → TritCube n → TritCube n → Bool
 cubeEqual cube0 cube0 = true
 cubeEqual (cubeS t ts) (cubeS u us) =
   V._and_ (V.tritEqual t u) (cubeEqual ts us)
-
-------------------------------------------------------------------------
--- 2. Exact cyclotomic convenience laws.
-------------------------------------------------------------------------
 
 addZeroLeft : (a : C3.Cyclotomic3) → V.addC3 C3.zero a ≡ a
 addZeroLeft (C3.cyclotomic3 a b) =
@@ -51,10 +43,6 @@ multiplyRightOne a = trans (L.multiplyCommutative a C3.one) (L.oneActsLeft a)
 
 multiplyRightZero : (a : C3.Cyclotomic3) → C3.multiply a C3.zero ≡ C3.zero
 multiplyRightZero a = trans (L.multiplyCommutative a C3.zero) (L.zeroActsLeft a)
-
-------------------------------------------------------------------------
--- 3. Point masses and finite linear-combination syntax.
-------------------------------------------------------------------------
 
 pointMass :
   ∀ {n} → TritCube n → C3.Cyclotomic3 → TritCube n → C3.Cyclotomic3
@@ -115,10 +103,6 @@ interpretLiftHead head observed (combine left right) tail =
       a ≡ a' → b ≡ b' → f a b ≡ f a' b'
   cong₂ f refl refl = refl
 
-------------------------------------------------------------------------
--- 4. Recursive decomposition of every function on T^n.
-------------------------------------------------------------------------
-
 decompose :
   ∀ {n} → (TritCube n → C3.Cyclotomic3) → DeltaCombination n
 decompose {0} f = deltaTerm cube0 (f cube0)
@@ -127,14 +111,14 @@ decompose {suc n} f =
     (liftHead neg (decompose (λ tail → f (cubeS neg tail))))
     (combine
       (liftHead zer (decompose (λ tail → f (cubeS zer tail))))
-      (liftHead pos (decompose (λ tail → f (cubeS pos tail)))) )
+      (liftHead pos (decompose (λ tail → f (cubeS pos tail)))))
 
 decomposeExact :
   ∀ {n}
     (f : TritCube n → C3.Cyclotomic3)
     (x : TritCube n) →
   interpret (decompose f) x ≡ f x
-decomposeExact {0} f cube0 = multiplyRightOne (f cube0)
+decomposeExact {0} f cube0 = refl
 decomposeExact {suc n} f (cubeS neg tail)
   rewrite interpretLiftHead neg neg (decompose (λ t → f (cubeS neg t))) tail
         | interpretLiftHead zer neg (decompose (λ t → f (cubeS zer t))) tail
@@ -156,10 +140,6 @@ decomposeExact {suc n} f (cubeS pos tail)
         | decomposeExact (λ t → f (cubeS pos t)) tail
         | addZeroLeft (f (cubeS pos tail))
         | addZeroLeft (f (cubeS pos tail)) = refl
-
-------------------------------------------------------------------------
--- 5. Exact T^6 <-> X6 carrier bridge.
-------------------------------------------------------------------------
 
 Cube6 : Set
 Cube6 = TritCube 6
@@ -217,11 +197,6 @@ scaledBooleanDeltaIsPointMass selected coefficient x
 ... | true = multiplyRightOne coefficient
 ... | false = multiplyRightZero coefficient
 
-------------------------------------------------------------------------
--- 6. Every combination of point masses belongs to any invariant subspace that
--- already contains every Boolean delta line.
-------------------------------------------------------------------------
-
 combinationFunction : DeltaCombination 6 → V.SchrodingerFunction
 combinationFunction combination x = interpret combination (fromX6 x)
 
@@ -257,10 +232,6 @@ combinationMember inv allDelta (combine left right) =
     (combinationFunction right)
     (combinationMember inv allDelta left)
     (combinationMember inv allDelta right)
-
-------------------------------------------------------------------------
--- 7. Main generic X6 spanning theorem.
-------------------------------------------------------------------------
 
 allDeltaLinesSpanEverySchrodingerFunction :
   ∀ {Member}
