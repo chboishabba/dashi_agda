@@ -10,17 +10,19 @@ import DASHI.Cognition.PNF.SensibLawGWBv01PostCertificationRoadmapExact as Roadm
 import DASHI.Cognition.PNF.SensibLawRuntimeNumericProjectionBoundaryExact as Numeric
 import DASHI.Cognition.PNF.SensibLawSemanticExpansionSoftwareValidationExact as Expansion
 import DASHI.Cognition.PNF.SensibLawExpandedCertificationTelemetryBoundaryExact as ExpandedRun
+import DASHI.Cognition.PNF.SensibLawGWBv01ExpandedSemanticCertificationV02Exact as ExpandedV02
 import DASHI.Core.IntersectionalNonFactorability as INF
 
 ------------------------------------------------------------------------
 -- Focused validation root for the current SensibLaw runtime state.
 --
--- Current sequence is intentionally proof/receipt stratified:
---   60777f6... certified baseline
+-- Receipt sequence is intentionally stratified:
+--   60777f6... baseline GWB direct-core certification
 --   49c09df... semantic-expansion software validation
---   0833fb4... expanded parity/performance observations with a failed raw-stream
---              hash gate caused by inclusion of runtime timing telemetry
---   corrected canonical observation digest rerun still required.
+--   0833fb4... expanded parity/performance positive surface with failed raw
+--              stream hash because M timing telemetry was included
+--   v0.2 corrected observation identity: D/P/S/T/E/Q only, M excluded
+--   full expanded GWB v0.2 gate passed.
 ------------------------------------------------------------------------
 
 parityFailureCountIsZero :
@@ -86,7 +88,7 @@ semanticExpansionSoftwareFrontierWasAwaitingRuntimeCertification :
 semanticExpansionSoftwareFrontierWasAwaitingRuntimeCertification = refl
 
 ------------------------------------------------------------------------
--- Expanded runtime attempt at 0833fb4...
+-- Historical failed raw-hash attempt remains visible.
 ------------------------------------------------------------------------
 
 expandedParityRunCoversAllSentences :
@@ -98,19 +100,45 @@ expandedParityRunHasZeroFailures :
   ExpandedRun.parityFailed ExpandedRun.expandedRun0833 ≡ zero
 expandedParityRunHasZeroFailures = refl
 
-expandedRunHasZeroProjectionFailures :
-  ExpandedRun.projectionFailures ExpandedRun.expandedRun0833 ≡ zero
-expandedRunHasZeroProjectionFailures = refl
-
-expandedRunHasZeroPublicationEffects :
-  ExpandedRun.publicationEffects ExpandedRun.expandedRun0833 ≡ zero
-expandedRunHasZeroPublicationEffects = refl
-
 runtimeTelemetryIsExcludedFromSemanticObservation :
   ExpandedRun.semanticObservationFrame ExpandedRun.runtimeTimingTelemetryFrame ≡ false
 runtimeTelemetryIsExcludedFromSemanticObservation = refl
 
-expandedCurrentFrontierAwaitsCanonicalDigestRerun :
+historicalExpandedFrontierWasAwaitingCanonicalDigestRerun :
   ExpandedRun.currentExpandedCertificationFrontier
   ≡ ExpandedRun.semanticParityAndPerformanceObservedAwaitingCanonicalDigestRerun
-expandedCurrentFrontierAwaitsCanonicalDigestRerun = refl
+historicalExpandedFrontierWasAwaitingCanonicalDigestRerun = refl
+
+------------------------------------------------------------------------
+-- Successful corrected v0.2 expanded-semantic certification.
+------------------------------------------------------------------------
+
+expandedV02ParityCoversAllSentences :
+  ExpandedV02.parityChecked ExpandedV02.expandedSurfaceV02
+  ≡ ExpandedV02.sentences ExpandedV02.expandedSurfaceV02
+expandedV02ParityCoversAllSentences = refl
+
+expandedV02ParityFailuresZero :
+  ExpandedV02.parityFailed ExpandedV02.expandedSurfaceV02 ≡ zero
+expandedV02ParityFailuresZero = refl
+
+expandedV02ProjectionFailuresZero :
+  ExpandedV02.projectionFailures ExpandedV02.expandedSurfaceV02 ≡ zero
+expandedV02ProjectionFailuresZero = refl
+
+expandedV02PublicationEffectsZero :
+  ExpandedV02.publicationEffects ExpandedV02.expandedSurfaceV02 ≡ zero
+expandedV02PublicationEffectsZero = refl
+
+expandedV02CanonicalDigestMatched :
+  ExpandedV02.parityAndDirectDigestsMatched ExpandedV02.canonicalObservationV02 ≡ true
+expandedV02CanonicalDigestMatched = refl
+
+expandedV02FullGatePassed :
+  ExpandedV02.fullExpandedGatePassed ExpandedV02.expandedGWBv02CertifiedRun ≡ true
+expandedV02FullGatePassed = refl
+
+expandedV02CurrentFrontier :
+  ExpandedV02.currentExpandedSemanticCertificationFrontier
+  ≡ ExpandedV02.boundedExpandedGWBv02CertifiedAwaitingAdmissionAndMultiCorpus
+expandedV02CurrentFrontier = refl
