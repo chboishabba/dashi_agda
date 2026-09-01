@@ -19,6 +19,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound4Exact as R4
 import DASHI.Moonshine.Base369Monster3BVOAActionPhaseAdapterBidiExact as VOAAdapter
+import DASHI.Moonshine.Monster3BCentralCharacterInertiaExact as Inertia
+import DASHI.Moonshine.C3CyclotomicAmplitudeAlgebraExact as C3
 
 ------------------------------------------------------------------------
 -- 1. Search coordinates after exposing the VOA action owner.
@@ -85,8 +87,7 @@ recognitionRemainsSameCarrierLive = refl
 ------------------------------------------------------------------------
 
 zetaPhaseIsRepoCyclotomicZeta :
-  VOAAdapter.phaseCyclotomic VOAAdapter.Inertia.phaseZeta
-  ≡ VOAAdapter.C3.zeta
+  VOAAdapter.phaseCyclotomic Inertia.phaseZeta ≡ C3.zeta
 zetaPhaseIsRepoCyclotomicZeta = refl
 
 ------------------------------------------------------------------------
