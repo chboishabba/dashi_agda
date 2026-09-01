@@ -9,6 +9,9 @@ import DASHI.Governance.MenWhoStareAtGoatsEvidenceLayerExact as Goats
 import DASHI.Governance.MenWhoStareAtGoatsReparativeAuditExact as GoatsRepair
 import DASHI.Governance.InstitutionalAnomalousAlteredStateProgramAtlasExact as Atlas
 import DASHI.Governance.AnomalousConsciousnessResearchEvidenceContinuumExact as Continuum
+import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
+import DASHI.Governance.AnomalousPhenomenonTemporalEvidenceTrajectoriesExact as Trajectory
+import DASHI.Governance.PhenomenonEvidenceLadderProjectionOverTimeExact as Ladder
 
 repairBoundary : Fibre.DrugGovernanceMultiAxisReparativeBoundary
 repairBoundary = Fibre.canonicalDrugGovernanceMultiAxisReparativeBoundary
@@ -22,6 +25,12 @@ atlasBoundary : Atlas.InstitutionalAnomalousAlteredStateAtlasBoundary
 atlasBoundary = Atlas.canonicalInstitutionalAnomalousAlteredStateAtlasBoundary
 continuumBoundary : Continuum.AnomalousConsciousnessResearchBoundary
 continuumBoundary = Continuum.canonicalAnomalousConsciousnessResearchBoundary
+temporalBoundary : Temporal.PhenomenonEvidenceFibreOverTimeBoundary
+temporalBoundary = Temporal.canonicalPhenomenonEvidenceFibreOverTimeBoundary
+trajectoryBoundary : Trajectory.AnomalousPhenomenonTemporalEvidenceBoundary
+trajectoryBoundary = Trajectory.canonicalAnomalousPhenomenonTemporalEvidenceBoundary
+ladderBoundary : Ladder.PhenomenonEvidenceLadderProjectionBoundary
+ladderBoundary = Ladder.canonicalPhenomenonEvidenceLadderProjectionBoundary
 
 materialRepairProbeReallySeparates :
   Discriminator.BundleSeparates (Planner.probeFor Planner.materialRepairConsumer)
@@ -45,3 +54,33 @@ stargateStillDemandsOperationalEvaluation = Atlas.stargateUtilityDemand
 
 psychedelicTherapeuticUseStillNeedsClinicalEvidence : Atlas.AtlasDemand Atlas.therapeuticConsumer
 psychedelicTherapeuticUseStillNeedsClinicalEvidence = Atlas.psychedelicTherapeuticDemand
+
+bemHighRigourReplicationStrictlyRefinesFibre :
+  Temporal.StrictFibreRefinement
+    Trajectory.temporalSystem
+    Trajectory.bemInitial2011
+    Trajectory.transparentPsi2025
+bemHighRigourReplicationStrictlyRefinesFibre =
+  Trajectory.bemReplicationStrictlyRemovesRobustOriginalEffect
+
+presentimentUpdateNeedNotShrinkFibre :
+  Temporal.FibreUnchanged
+    Trajectory.temporalSystem
+    Trajectory.presentimentMeta2012
+    Trajectory.presentimentUpdate2018
+presentimentUpdateNeedNotShrinkFibre =
+  Trajectory.presentimentUpdateLeavesCoreInterpretationFibreOpen
+
+psilocybinMetaEvidenceStrictlyRefinesFibre :
+  Temporal.StrictFibreRefinement
+    Trajectory.temporalSystem
+    Trajectory.psilocybinEarlyModernTrials
+    Trajectory.psilocybinMeta2025_2026
+psilocybinMetaEvidenceStrictlyRefinesFibre =
+  Trajectory.psilocybinMetaEvidenceRemovesPureNoEffectInterpretation
+
+sameCoarsePsilocybinLabelHidesReplicationChange :
+  Ladder.standingAt Trajectory.psilocybinEarlyModernTrials Temporal.independentReplication
+  ≡ Ladder.standingAt Trajectory.psilocybinMeta2025_2026 Temporal.independentReplication → ⊥
+sameCoarsePsilocybinLabelHidesReplicationChange =
+  Ladder.psilocybinReplicationCoordinateChanged
