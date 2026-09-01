@@ -27,19 +27,10 @@ data SearchMove : Set where
 SearchModel : Set
 SearchModel = HA.HARecoveryState × SearchMove
 
-------------------------------------------------------------------------
--- 1. Hard semantic/admissibility gate.
-------------------------------------------------------------------------
-
 MoveAdmissible : SearchModel → Set
 MoveAdmissible (state , rebuildGenericTransformTheory) = ⊥
 MoveAdmissible (state , reuseFiniteCharacterAsAnalyticHA) = ⊥
 MoveAdmissible (state , runHAProbe probe) = ⊤
-
-------------------------------------------------------------------------
--- 2. Consumer-adequacy gate: an admissible probe is useful only when it is the
--- exact next probe selected by the current H_A recovery state.
-------------------------------------------------------------------------
 
 ProbeMatchesNext :
   (state : HA.HARecoveryState) →
@@ -75,12 +66,6 @@ MoveConsumerAdequate (state , rebuildGenericTransformTheory) = ⊥
 MoveConsumerAdequate (state , reuseFiniteCharacterAsAnalyticHA) = ⊥
 MoveConsumerAdequate (state , runHAProbe probe) = ProbeMatchesNext state probe
 
-------------------------------------------------------------------------
--- 3. Cheapness is deliberately allowed to favour bad moves numerically.  The
--- generic eligible-stratum theorem is what prevents that numerical artefact
--- from becoming proof-search authority.
-------------------------------------------------------------------------
-
 moveDescriptionLength : SearchModel → Nat
 moveDescriptionLength (state , rebuildGenericTransformTheory) = zero
 moveDescriptionLength (state , reuseFiniteCharacterAsAnalyticHA) = zero
@@ -105,10 +90,6 @@ haSearchMDLProblem =
       "reuse finite character carrier as analytic H_A (inadmissible)"
     modelReference (state , runHAProbe probe) =
       "run state-selected H_A recovery probe"
-
-------------------------------------------------------------------------
--- 4. Canonical current-state witnesses.
-------------------------------------------------------------------------
 
 allMissingState : HA.HARecoveryState
 allMissingState =
@@ -140,19 +121,13 @@ wrongLaterProbeNotEligible :
     (allMissingState , runHAProbe HA.recoverSameFormulaSpectralShift) → ⊥
 wrongLaterProbeNotEligible eligible = proj₂ eligible
 
-------------------------------------------------------------------------
--- 5. Pareto firewall.  Whatever application-specific cost hyperfabric is used,
--- Pareto selection itself carries eligibility.  Hence no cost coordinate can
--- promote an inadmissible or consumer-irrelevant move.
-------------------------------------------------------------------------
-
 paretoSelectionCarriesHardGates :
   (costs : MDL.CostHyperfabric haSearchMDLProblem) →
   (selected : SearchModel) →
   MDL.ParetoAdmissible costs selected →
   MDL.Eligible haSearchMDLProblem selected
 paretoSelectionCarriesHardGates costs selected receipt =
-  MDL.ParetoAdmissible.selectedEligible receipt
+  MDL.selectedEligible receipt
 
 cheapGenericMoveCannotBeParetoSelected :
   (costs : MDL.CostHyperfabric haSearchMDLProblem) →
@@ -186,10 +161,6 @@ wrongLaterProbeCannotBeParetoSelected costs receipt =
       costs
       (allMissingState , runHAProbe HA.recoverSameFormulaSpectralShift)
       receipt)
-
-------------------------------------------------------------------------
--- 6. Boundary / cross-pollination reading.
-------------------------------------------------------------------------
 
 record HAAdmissibleSearchRankingBoundary : Set where
   constructor ha-admissible-search-ranking-boundary
