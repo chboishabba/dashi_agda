@@ -1,5 +1,6 @@
 module DASHI.SSSPSortingBarrierTernaryBidiValidation where
 
+-- Primary pathfinding spine.
 import DASHI.Computation.SSSPSortingBarrierTernaryBidiExact
 import DASHI.Computation.SSSPBinaryTernarySymmetryRefinementBidiExact
 import DASHI.Computation.SSSPThreeFrontierLinearExtensionQuotientBidiExact
@@ -8,7 +9,10 @@ import DASHI.Computation.SSSPFindPivotsCoverageCompressionExact
 import DASHI.Computation.SSSPThreeFrontierMinimumOrbitQuotientExact
 import DASHI.Computation.SSSPThreeFrontierBinaryTernaryFactorExact
 import DASHI.Computation.SSSPGeneralPullPrefixQuotientExact
+import DASHI.Computation.SSSPBMSSPConsumerContractExact
+import DASHI.Computation.SSSPLogExponentBalance2025Exact
 
+-- Semantic/FRACTRAN cross-pollination retained as a sidecar application.
 import DASHI.Cognition.PNF.SemanticQueryResidualFibreSSSPBridgeExact
 import DASHI.Cognition.PNF.SemanticRelationSheetOrientationExact
 import DASHI.Cognition.PNF.SemanticQueryFractranCatalogueBridgeExact
