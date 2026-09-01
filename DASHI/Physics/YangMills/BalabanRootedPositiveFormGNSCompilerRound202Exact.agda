@@ -21,9 +21,9 @@ compileRootedPositiveFormToGNSBridge :
     (normalise : Configuration → Rooted)
     (form : R201.RootedPositiveForm Rooted Scalar) →
   R200.RootedPhysicalQuotientGNSBridge Configuration Rooted Scalar
-compileRootedPositiveFormToGNSBridge normalise form = record
+compileRootedPositiveFormToGNSBridge {Rooted = Rooted} normalise form = record
   { normalise = normalise
-  ; GNSCarrier = _
+  ; GNSCarrier = Rooted
   ; sameCarrier = refl
   ; zero = R201.zero form
   ; normSquared = R201.normSquared form
