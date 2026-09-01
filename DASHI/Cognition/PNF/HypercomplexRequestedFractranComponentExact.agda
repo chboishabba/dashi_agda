@@ -43,16 +43,29 @@ record CoarsePreimageFibre
 
 open CoarsePreimageFibre public
 
+observedAddress3 :
+  (xComponent yComponent zComponent : RequestedFractranComponent) →
+  FineCarrier xComponent →
+  FineCarrier yComponent →
+  FineCarrier zComponent →
+  Geometry.Ternary27Point
+observedAddress3 xComponent yComponent zComponent x y z =
+  Geometry.ternary27Point
+    (observeFine xComponent x)
+    (observeFine yComponent y)
+    (observeFine zComponent z)
+
 record RequestedCubie3 : Set₁ where
   constructor requestedCubie3
   field
     xComponent yComponent zComponent : RequestedFractranComponent
+    xState : FineCarrier xComponent
+    yState : FineCarrier yComponent
+    zState : FineCarrier zComponent
     coarseAddress : Geometry.Ternary27Point
-
-    XFine YFine ZFine : Set
-    xFineIsCarrier : XFine ≡ FineCarrier xComponent
-    yFineIsCarrier : YFine ≡ FineCarrier yComponent
-    zFineIsCarrier : ZFine ≡ FineCarrier zComponent
+    addressExact :
+      coarseAddress ≡
+      observedAddress3 xComponent yComponent zComponent xState yState zState
 
 open RequestedCubie3 public
 
@@ -76,7 +89,8 @@ record HypercomplexComponentBoundary : Set where
     cubieIsOneFineState : Bool
     tritIsOnlyCoarseSignedObservation : Bool
     finePhaseInversionMayBeNontrivial : Bool
+    cubieAddressIsDerivedFromFineStates : Bool
 
 canonicalHypercomplexComponentBoundary : HypercomplexComponentBoundary
 canonicalHypercomplexComponentBoundary =
-  hypercomplexComponentBoundary false false true true
+  hypercomplexComponentBoundary false false true true true
