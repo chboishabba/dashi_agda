@@ -17,14 +17,12 @@ import DASHI.Physics.YangMills.BalabanRootedHamiltonianGaugeFunctorRound201Exact
 import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionHamiltonianRound202Exact as R202
 import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionFiniteL2Round203Exact as R203
 import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionSymmetricOperatorRound204Exact as R204
+import DASHI.Physics.YangMills.BalabanSelectedIBPWavefunctionSymmetryWeldRound205Exact as R205
 
 round189PathHomomorphism = R189.cmp98RawUnitPathHomomorphismRound189Level
 round190BoundarySupersession = R190.cmp98ClayBoundarySupersessionRound190Level
 round191WallAudit = R191.cmp98BidiWallAuditRound191Level
 
--- Historical Round191 source wall.  R192/R193 replace arbitrary-period demand
--- by the actual literal side-13 physical source; 12 belongs only to the
--- separate open-fibre predecessor count.
 round191HistoricalGenericSourceWall =
   R191.literalArbitraryPeriodicSelectedBackgroundProducerRound191Level
 
@@ -60,7 +58,6 @@ round195CoarseEndpointsAreRoot =
 round195IdentityIsPhysicalUnit =
   R195.literalCMP109Equation012IdentityIsPhysicalUnitRound195Level
 
--- Concrete set-level rooted normal form remains authoritative.
 round196FinitePhysicalGaugeQuotientCarrier =
   R196.finitePhysicalGaugeQuotientCarrierRound196Level
 round196FiniteGaugeQuotientIdempotence =
@@ -70,10 +67,6 @@ round196FiniteGaugeQuotientUniqueness =
 round196FiniteGaugeQuotientSelectedFibreCompatibility =
   R196.finitePhysicalGaugeQuotientSelectedFibreCompatibilityRound196Level
 
--- R197 is a finite selected-ensemble pairing on the same rooted carrier.  R203
--- now shows this is not semantically disconnected from the correct R202
--- wavefunction carrier: evaluation on rooted representatives gives the exact
--- quotient observable consumed by R197.
 round197FiniteSelectedEnsemblePairing =
   R197.finiteRootedGaugeQuotientL2PairingRound197Level
 round197FiniteSelectedEnsembleDefiniteness =
@@ -81,9 +74,6 @@ round197FiniteSelectedEnsembleDefiniteness =
 round198FiniteRepresentativeCarrierConstructed =
   R198.finiteGaugeOrbitRepresentativeCarrierNowConstructedRound198Level
 
--- Historical R199-R201 field-endomorphism Hamiltonian plumbing is also kept in
--- the audit graph but is superseded by R202.  A physical Hamiltonian acts on
--- wavefunctions/observables over configuration space, not as U -> H(U).
 round199HistoricalFieldEndomorphismDescent =
   R199.rootedQuotientHamiltonianDescentRound199Level
 round200BasedGaugeActionGroupoid =
@@ -91,7 +81,6 @@ round200BasedGaugeActionGroupoid =
 round201HistoricalFieldHamiltonianFunctor =
   R201.rootedHamiltonianGaugeFunctorRound201Level
 
--- Correct terminal carrier from R202.
 round202GaugeInvariantWavefunctionCarrier =
   R202.basedGaugeInvariantWavefunctionCarrierRound202Level
 round202RootedQuotientEvaluation =
@@ -99,24 +88,29 @@ round202RootedQuotientEvaluation =
 round202OperatorNormalizationHandoff =
   R202.wavefunctionHamiltonianNormalizationHandoffRound202Level
 
--- R203 removes the false L2/wavefunction split on finite selected ensembles.
 round203WavefunctionFiniteL2Bridge =
   R203.wavefunctionFiniteL2BridgeRound203Level
 round203WavefunctionFiniteL2Definiteness =
   R203.wavefunctionFiniteL2DefinitenessRound203Level
 
--- R204 reduces finite operator symmetry to one theorem-bearing equality on the
--- correct gauge-invariant wavefunction carrier; quotient descent is automatic.
 round204FiniteSymmetricGaugeInvariantOperator =
   R204.finiteSymmetricGaugeInvariantOperatorRound204Level
+
+-- R205 consumes the repository's actual theorem-bearing selected finite IBP
+-- equation.  The generic symmetric-form blocker is now reduced to two exact
+-- same-object realization payments on the R202/R203 wavefunction carrier.
+round205SelectedIBPWavefunctionSymmetryCompiler =
+  R205.selectedIBPWavefunctionSymmetryCompilerRound205Level
+round205FiniteHamiltonianAsSelectedActionVariation =
+  R205.literalFiniteYMHamiltonianAsSelectedActionVariationRound205Level
+round205SelectedIBPRightSideAsWavefunctionPairing =
+  R205.literalSelectedIBPRightSideAsWavefunctionPairingRound205Level
+round205PhysicalBoundaryCancellation =
+  R205.literalPhysicalBoundaryCancellationRound205Level
 
 -- Current physical analytic leaves.
 round204PhysicalGaugeInvariantL2Completion =
   R204.literalPhysicalGaugeInvariantL2CompletionRound204Level
-round204FiniteYMHamiltonianProducer =
-  R204.literalFiniteYMHamiltonianProducerRound204Level
-round204FiniteYMHamiltonianSymmetry =
-  R204.literalFiniteYMHamiltonianSymmetryRound204Level
 round198FiniteToContinuumCarrierMaps =
   R198.literalFiniteToContinuumPhysicalCarrierMapsRound198Level
 round198ProjectionVacuumCompatibility =
