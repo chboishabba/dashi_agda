@@ -2,12 +2,13 @@ module DASHI.Computation.PathfindingFibreFamilyExact where
 
 -- Cross-algorithm pathfinding fibre map.  Each algorithm exposes a different
 -- consumer-visible certificate and retains a different residual scheduling or
--- ordering fibre.  Shared language does not imply identical correctness laws.
+-- ordering fibre.  Shared cardinality does not imply shared identity or law.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Computation.PathfindingFibreCoreExact as Core
+import DASHI.Computation.PathfindingStableCarrierIdentityExact as Stable
 import DASHI.Computation.BFSLayerFibreExact as BFS
 import DASHI.Computation.DijkstraQueueFibreExact as Dijkstra
 import DASHI.Computation.BellmanFordRelaxationScheduleFibreExact as BellmanFord
@@ -41,6 +42,14 @@ record PathfindingFibreFamily : Set where
     bmsspResidualIsUnexposedPullTailIsTrue :
       bmsspResidualIsUnexposedPullTail ≡ true
 
+    residualCarriersHaveStableAlgorithmicNames : Bool
+    residualCarriersHaveStableAlgorithmicNamesIsTrue :
+      residualCarriersHaveStableAlgorithmicNames ≡ true
+
+    equalCardinalityIdentifiesResidualRoles : Bool
+    equalCardinalityIdentifiesResidualRolesIsFalse :
+      equalCardinalityIdentifiesResidualRoles ≡ false
+
     allAlgorithmsShareIdenticalResidualGroup : Bool
     allAlgorithmsShareIdenticalResidualGroupIsFalse :
       allAlgorithmsShareIdenticalResidualGroup ≡ false
@@ -58,5 +67,10 @@ canonicalPathfindingFibreFamily =
     true refl
     true refl
     true refl
+    true refl
     false refl
     false refl
+    false refl
+
+stableIdentityBoundary : Stable.PathfindingStableCarrierBoundary
+stableIdentityBoundary = Stable.canonicalPathfindingStableCarrierBoundary
