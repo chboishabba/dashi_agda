@@ -11,18 +11,11 @@ import DASHI.Cognition.PNF.SensibLawRuntimeNumericProjectionBoundaryExact as Num
 import DASHI.Cognition.PNF.SensibLawSemanticExpansionSoftwareValidationExact as Expansion
 import DASHI.Cognition.PNF.SensibLawExpandedCertificationTelemetryBoundaryExact as ExpandedRun
 import DASHI.Cognition.PNF.SensibLawGWBv01ExpandedSemanticCertificationV02Exact as ExpandedV02
+import DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact as Admission
 import DASHI.Core.IntersectionalNonFactorability as INF
 
 ------------------------------------------------------------------------
 -- Focused validation root for the current SensibLaw runtime state.
---
--- Receipt sequence is intentionally stratified:
---   60777f6... baseline GWB direct-core certification
---   49c09df... semantic-expansion software validation
---   0833fb4... expanded parity/performance positive surface with failed raw
---              stream hash because M timing telemetry was included
---   v0.2 corrected observation identity: D/P/S/T/E/Q only, M excluded
---   full expanded GWB v0.2 gate passed.
 ------------------------------------------------------------------------
 
 parityFailureCountIsZero :
@@ -142,3 +135,30 @@ expandedV02CurrentFrontier :
   ExpandedV02.currentExpandedSemanticCertificationFrontier
   ≡ ExpandedV02.boundedExpandedGWBv02CertifiedAwaitingAdmissionAndMultiCorpus
 expandedV02CurrentFrontier = refl
+
+------------------------------------------------------------------------
+-- New legal semantic adequacy / admission frontier.
+------------------------------------------------------------------------
+
+legalGoldCoveredFixtureCountIsTen :
+  Admission.coveredFixtureCount Admission.legalSemanticGoldV01 ≡ 10
+legalGoldCoveredFixtureCountIsTen = refl
+
+legalGoldProducerGapCountIsSix :
+  Admission.producerGapCount Admission.legalSemanticGoldV01 ≡ 6
+legalGoldProducerGapCountIsSix = refl
+
+parserCandidateStillCannotAuthorizeAdmission :
+  Admission.ParserCandidateAloneAuthorizesAdmission → ⊥
+parserCandidateStillCannotAuthorizeAdmission =
+  Admission.parserCandidateAloneCannotAuthorizeAdmission
+
+residualFrequencyStillNotSemanticQuality :
+  Admission.ResidualFrequencyIsSemanticQuality → ⊥
+residualFrequencyStillNotSemanticQuality =
+  Admission.residualFrequencyIsNotSemanticQuality
+
+legalAdmissionFrontierAwaitsRuntimeReceipt :
+  Admission.currentLegalSemanticAdmissionFrontier
+  ≡ Admission.implementationAwaitingCompileGoldAndResidualReceipt
+legalAdmissionFrontierAwaitsRuntimeReceipt = refl
