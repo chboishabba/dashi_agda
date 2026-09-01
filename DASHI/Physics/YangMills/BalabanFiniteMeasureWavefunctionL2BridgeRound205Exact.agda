@@ -16,7 +16,7 @@ module DASHI.Physics.YangMills.BalabanFiniteMeasureWavefunctionL2BridgeRound205E
 -- generic positivity label into an inner-product theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base using (NonZero)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
@@ -25,6 +25,17 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.P06FaceCubeTorusGeometry using (Cube4)
 import DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport as Transport
 import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionHamiltonianRound202Exact as R202
+
+zeroWavefunction :
+  ∀ {N : Nat} {{nz : NonZero N}}
+    {group : Transport.GroupStructure}
+    {base : Cube4 N} →
+  R202.BasedGaugeInvariantWavefunction group base
+zeroWavefunction = record
+  { R202.BasedGaugeInvariantWavefunction.amplitude = λ _ → 0ℚ
+  ; R202.BasedGaugeInvariantWavefunction.invariantUnderBasedArrow =
+      λ arrow based → refl
+  }
 
 record FiniteMeasureWavefunctionSemantics
     {N : Nat} {{_ : NonZero N}}
@@ -58,16 +69,28 @@ record FiniteMeasureWavefunctionSemantics
       0ℚ ≤ expectation selectedMeasure
         (pointwiseMul wavefunction wavefunction)
 
-    -- Correct null-space semantics.  Pre-Hilbert definiteness is obtained only
-    -- after quotienting by this relation, not by claiming pointwise equality.
+    -- Null-space semantics is an actual equivalence relation.  A zero norm must
+    -- place the wavefunction in the equivalence class of the literal zero
+    -- wavefunction; reflexivity alone would be vacuous.
     NullEquivalent :
       R202.BasedGaugeInvariantWavefunction group base →
       R202.BasedGaugeInvariantWavefunction group base → Set
 
-    zeroSquareIffNullEquivalent : ∀ wavefunction →
+    nullReflexive : ∀ wavefunction →
+      NullEquivalent wavefunction wavefunction
+
+    nullSymmetric : ∀ {left right} →
+      NullEquivalent left right → NullEquivalent right left
+
+    nullTransitive : ∀ {left middle right} →
+      NullEquivalent left middle →
+      NullEquivalent middle right →
+      NullEquivalent left right
+
+    zeroSquareImpliesNullEquivalentToZero : ∀ wavefunction →
       expectation selectedMeasure
         (pointwiseMul wavefunction wavefunction) ≡ 0ℚ
-      → NullEquivalent wavefunction wavefunction
+      → NullEquivalent wavefunction zeroWavefunction
 
 open FiniteMeasureWavefunctionSemantics public
 
@@ -104,7 +127,7 @@ finiteMeasureWavefunctionNormNonnegative :
 finiteMeasureWavefunctionNormNonnegative semantics wavefunction =
   squareExpectationNonnegative semantics wavefunction
 
-finiteMeasureWavefunctionNormZeroGivesNull :
+finiteMeasureWavefunctionNormZeroGivesNullToZero :
   ∀ {N} {{nz : NonZero N}}
     {group : Transport.GroupStructure}
     {base : Cube4 N}
@@ -112,12 +135,15 @@ finiteMeasureWavefunctionNormZeroGivesNull :
     (semantics : FiniteMeasureWavefunctionSemantics group base Measure)
     wavefunction →
   finiteMeasureWavefunctionNormSq semantics wavefunction ≡ 0ℚ →
-  NullEquivalent semantics wavefunction wavefunction
-finiteMeasureWavefunctionNormZeroGivesNull semantics wavefunction =
-  zeroSquareIffNullEquivalent semantics wavefunction
+  NullEquivalent semantics wavefunction zeroWavefunction
+finiteMeasureWavefunctionNormZeroGivesNullToZero semantics wavefunction =
+  zeroSquareImpliesNullEquivalentToZero semantics wavefunction
 
 finiteMeasureWavefunctionL2BridgeRound205Level : ProofLevel
 finiteMeasureWavefunctionL2BridgeRound205Level = machineChecked
+
+finiteMeasureWavefunctionNullSemanticsRound205Level : ProofLevel
+finiteMeasureWavefunctionNullSemanticsRound205Level = machineChecked
 
 -- Same-object physical seam: instantiate this semantics with the literal
 -- finiteMeasure already welded to the selected Balaban density.  The measure
@@ -125,7 +151,8 @@ finiteMeasureWavefunctionL2BridgeRound205Level = machineChecked
 literalBalabanFiniteMeasureExpectationSemanticsRound205Level : ProofLevel
 literalBalabanFiniteMeasureExpectationSemanticsRound205Level = conditional
 
--- Completion and self-adjoint Hamiltonian still require the actual null quotient,
--- norm completion/domain and operator theory on that same measure.
+-- Completion and self-adjoint Hamiltonian still require the actual quotient by
+-- NullEquivalent, its norm completion/domain and operator theory on that same
+-- measure.
 literalBalabanFiniteMeasureL2CompletionRound205Level : ProofLevel
 literalBalabanFiniteMeasureL2CompletionRound205Level = conditional
