@@ -5,6 +5,8 @@ open import DASHI.Core.Prelude
 import DASHI.Core.DiscriminatorSynthesisExact as Discriminator
 import DASHI.Core.ActiveObligationEvidenceFibreExact as Active
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as ProofSearch
+import DASHI.Core.CalibratedExperimentInferenceExact as Calibrated
+import DASHI.Core.ReopenableHypothesisForestExact as Forest
 import DASHI.Governance.DrugGovernanceMultiAxisReparativeFibreExact as Fibre
 import DASHI.Governance.DrugGovernanceMultiAxisRepairPlannerExact as Planner
 import DASHI.Governance.MenWhoStareAtGoatsEvidenceLayerExact as Goats
@@ -17,6 +19,7 @@ import DASHI.Governance.PhenomenonEvidenceLadderProjectionOverTimeExact as Ladde
 import DASHI.Governance.AnomalousResearchPriorityFromTemporalFibreExact as Priority
 import DASHI.Governance.AnomalousConsumerIndexedObligationFibreExact as Obligation
 import DASHI.Governance.AnomalousTemporalProofSearchExperimentAdmissionExact as Admission
+import DASHI.Governance.AnomalousTemporalCalibratedHypothesisForestExact as CalibratedForest
 
 repairBoundary : Fibre.DrugGovernanceMultiAxisReparativeBoundary
 repairBoundary = Fibre.canonicalDrugGovernanceMultiAxisReparativeBoundary
@@ -42,6 +45,8 @@ obligationBoundary : Obligation.AnomalousConsumerIndexedObligationBoundary
 obligationBoundary = Obligation.canonicalAnomalousConsumerIndexedObligationBoundary
 admissionBoundary : Admission.AnomalousTemporalProofSearchAdmissionBoundary
 admissionBoundary = Admission.canonicalAnomalousTemporalProofSearchAdmissionBoundary
+calibratedForestBoundary : CalibratedForest.AnomalousTemporalCalibratedForestBoundary
+calibratedForestBoundary = CalibratedForest.canonicalAnomalousTemporalCalibratedForestBoundary
 
 materialRepairProbeReallySeparates :
   Discriminator.BundleSeparates (Planner.probeFor Planner.materialRepairConsumer)
@@ -138,3 +143,23 @@ bemRepeatAfterTransparentPsiIsRejected :
   Admission.rejectedDisposition Admission.repeatBemOriginalAfterTransparentPsi
   ≡ ProofSearch.rejected ProofSearch.consumerMismatch
 bemRepeatAfterTransparentPsiIsRejected = refl
+
+bemTemporalRefinementIsCalibratedDataRefinement :
+  Calibrated.DataRefinement CalibratedForest.experimentFamily
+bemTemporalRefinementIsCalibratedDataRefinement = CalibratedForest.bemCalibratedRefinement
+
+bemDormantBranchCanReopenWithExplicitHistoricalEvidence :
+  Forest.HypothesisTransition
+    CalibratedForest.hypothesisSemantics
+    Trajectory.robustBemPrecognition
+    (Forest.reopenable Forest.fidelityPending)
+    Forest.active
+bemDormantBranchCanReopenWithExplicitHistoricalEvidence = CalibratedForest.bemMayReopenFromDormant
+
+bemDormantBranchCannotBecomeRefutedByPruning :
+  Forest.HypothesisTransition
+    CalibratedForest.hypothesisSemantics
+    Trajectory.robustBemPrecognition
+    (Forest.reopenable Forest.fidelityPending)
+    Forest.refuted → ⊥
+bemDormantBranchCannotBecomeRefutedByPruning = CalibratedForest.bemDormancyCannotDirectlyBecomeRefutation
