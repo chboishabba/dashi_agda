@@ -22,7 +22,7 @@ import DASHI.Physics.YangMills.BalabanFiniteMeasureIBPWavefunctionSymmetryRound2
 import DASHI.Physics.YangMills.BalabanFederbushRationalLieToRealSU2CarrierRound207Exact as R207
 import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as R208
 import DASHI.Physics.YangMills.BalabanNullQuotientHamiltonianDescentRound209Exact as R209
-import DASHI.Physics.YangMills.BalabanFederbushRealScalarExtensionRound210Exact as R210
+import DASHI.Physics.YangMills.BalabanFederbushCanonicalRealMatrixExtensionRound210Exact as R210
 import DASHI.Physics.YangMills.BalabanCMP98Equation124QSourceRecoveryRound211Exact as R211
 
 round189PathHomomorphism = R189.cmp98RawUnitPathHomomorphismRound189Level
@@ -66,7 +66,7 @@ round208FederbushRationalMatrixRealImage =
 round208RationalRealMultiplicativeEmbedding =
   R208.rationalRealMultiplicativeEmbeddingRound208Level
 round210FederbushRealScalarExtension =
-  R210.federbushRealScalarExtensionRound210Level
+  R210.federbushCanonicalRealMatrixExtensionRound210Level
 
 -- R211 is the corrected source route: CMP98 (121)--(124) defines the nonlinear
 -- one-step average and its final linear form Q(V0)A. The existing Eq. (124)
