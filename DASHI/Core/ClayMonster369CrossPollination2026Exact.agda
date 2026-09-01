@@ -1,0 +1,160 @@
+module DASHI.Core.ClayMonster369CrossPollination2026Exact where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Core.FrontierRelationStrengthBidiExact as Relation
+import DASHI.Core.ThreeChannelC3EquivarianceGateExact as C3
+import DASHI.Core.ConsumerRelativeSymmetryRelevanceExact as SymmetryRelevance
+import DASHI.Core.Clay369ResidualSufficiencyDichotomyExact as ResidualDichotomy
+import DASHI.Analysis.RiemannG2C3MonsterEquivarianceAuditExact as RH
+import DASHI.Analysis.RiemannG2DeterminantConsumerQuotient369Exact as RHResidual
+import DASHI.Analysis.RiemannG2DeterminantSymmetryRelevance369Exact as RHSymmetry
+import DASHI.Analysis.RiemannG2C3FixedNuisanceDeterminantNoGo369Exact as RHNoGo
+import DASHI.Analysis.RiemannG2CommonC3DeterminantCovarianceCompilerExact as RHCommonC3
+import DASHI.Analysis.RiemannG2C3ToScalarRouteCutExact as RHScalarCut
+import DASHI.Physics.Closure.NSCriticalConeResidualFibre369CrossPollinationExact as NS
+import DASHI.Physics.YangMills.BalabanC3MonsterEquivarianceAuditExact as YM
+import DASHI.Physics.YangMills.BalabanSourceResidualConsumerNonDescent369Exact as YMResidual
+
+------------------------------------------------------------------------
+-- CURRENT STRENGTH CLASSIFICATION
+--
+-- Keep distinct transfer axes visible:
+--
+-- * literal Monster/C3 representation transfer remains analogy-only for RH/YM
+--   until literal target-carrier actions are recovered;
+-- * consumer-relative symmetry relevance is theorem-bearing search structure;
+-- * RH now owns the generic common-C3 determinant covariance compiler, so no
+--   generic representation machinery needs rebuilding. The remaining RH seam is
+--   literal same-object attachment of the actual nuisance rows and taper point;
+-- * even after that attachment, q-invariance alone gives orbit invariance, not
+--   the signed scalar cancellation required by G2d. A useful symmetry route must
+--   produce a nontrivial scalar q/phase theorem;
+-- * NS and YM exhibit genuine consumer non-descent through coarse observers.
+------------------------------------------------------------------------
+
+rh369CurrentRelation : Relation.RelationKind
+rh369CurrentRelation = Relation.analogyOnlyRelation
+
+rh369CurrentReuse : Relation.ReuseCapability rh369CurrentRelation
+rh369CurrentReuse = Relation.reuseAnalogyForHeuristicGeneration
+
+rh369DeterminantSymmetryRelation : Relation.RelationKind
+rh369DeterminantSymmetryRelation = Relation.provedSearchObstructionReuse
+
+rh369DeterminantSymmetryReuse :
+  Relation.ReuseCapability rh369DeterminantSymmetryRelation
+rh369DeterminantSymmetryReuse = Relation.reuseProvedSearchObstruction
+
+ns369CurrentRelation : Relation.RelationKind
+ns369CurrentRelation = Relation.provedSearchObstructionReuse
+
+ns369CurrentReuse : Relation.ReuseCapability ns369CurrentRelation
+ns369CurrentReuse = Relation.reuseProvedSearchObstruction
+
+ym369CurrentRelation : Relation.RelationKind
+ym369CurrentRelation = Relation.analogyOnlyRelation
+
+ym369CurrentReuse : Relation.ReuseCapability ym369CurrentRelation
+ym369CurrentReuse = Relation.reuseAnalogyForHeuristicGeneration
+
+rh369ResidualSufficiencyRelation : Relation.RelationKind
+rh369ResidualSufficiencyRelation = Relation.provedSearchObstructionReuse
+
+rh369ResidualSufficiencyReuse :
+  Relation.ReuseCapability rh369ResidualSufficiencyRelation
+rh369ResidualSufficiencyReuse = Relation.reuseProvedSearchObstruction
+
+ym369ResidualSufficiencyRelation : Relation.RelationKind
+ym369ResidualSufficiencyRelation = Relation.provedSearchObstructionReuse
+
+ym369ResidualSufficiencyReuse :
+  Relation.ReuseCapability ym369ResidualSufficiencyRelation
+ym369ResidualSufficiencyReuse = Relation.reuseProvedSearchObstruction
+
+------------------------------------------------------------------------
+-- No theorem transport at the present strengths.
+------------------------------------------------------------------------
+
+rh369NoDirectTheoremTransfer :
+  Relation.TheoremTransferCapability rh369CurrentRelation → ⊥
+rh369NoDirectTheoremTransfer = Relation.analogyCannotDirectlyTransferTheorem
+
+rhDeterminantSymmetryNoDirectTheoremTransfer :
+  Relation.TheoremTransferCapability rh369DeterminantSymmetryRelation → ⊥
+rhDeterminantSymmetryNoDirectTheoremTransfer =
+  Relation.searchPatternCannotDirectlyTransferTheorem
+
+ns369NoDirectTheoremTransfer :
+  Relation.TheoremTransferCapability ns369CurrentRelation → ⊥
+ns369NoDirectTheoremTransfer = Relation.searchPatternCannotDirectlyTransferTheorem
+
+ym369NoDirectTheoremTransfer :
+  Relation.TheoremTransferCapability ym369CurrentRelation → ⊥
+ym369NoDirectTheoremTransfer = Relation.analogyCannotDirectlyTransferTheorem
+
+rhResidualNoDirectTheoremTransfer :
+  Relation.TheoremTransferCapability rh369ResidualSufficiencyRelation → ⊥
+rhResidualNoDirectTheoremTransfer = Relation.searchPatternCannotDirectlyTransferTheorem
+
+ymResidualNoDirectTheoremTransfer :
+  Relation.TheoremTransferCapability ym369ResidualSufficiencyRelation → ⊥
+ymResidualNoDirectTheoremTransfer = Relation.searchPatternCannotDirectlyTransferTheorem
+
+------------------------------------------------------------------------
+-- Upgrade gate. No generic C3 algebra is missing now; only literal attachment
+-- and a nontrivial scalar consumer effect can justify continued RH symmetry work.
+------------------------------------------------------------------------
+
+record C3RelationUpgradeGate : Set where
+  constructor c3RelationUpgradeGate
+  field
+    literalSameObjectAttachment : Set
+    inducedActionOnDeterminantQ : Set
+    nontrivialScalarLawOrPhaseCancellation : Set
+
+open C3RelationUpgradeGate public
+
+record ClayMonster369Boundary : Set where
+  constructor clayMonster369Boundary
+  field
+    monster369AutomaticallyActsOnRHThreeTapers : Bool
+    monster369AutomaticallyActsOnRHThreeTapersIsFalse :
+      monster369AutomaticallyActsOnRHThreeTapers ≡ false
+    monster369AutomaticallyActsOnBalabanFields : Bool
+    monster369AutomaticallyActsOnBalabanFieldsIsFalse :
+      monster369AutomaticallyActsOnBalabanFields ≡ false
+    residualObserverNonFactorabilityGenuinelyReusableForNS : Bool
+    residualObserverNonFactorabilityGenuinelyReusableForNSIsTrue :
+      residualObserverNonFactorabilityGenuinelyReusableForNS ≡ true
+    determinantConsumerSufficiencyGenuinelyReusableForRH : Bool
+    determinantConsumerSufficiencyGenuinelyReusableForRHIsTrue :
+      determinantConsumerSufficiencyGenuinelyReusableForRH ≡ true
+    genericCommonC3DeterminantCovarianceCompilerOwned : Bool
+    genericCommonC3DeterminantCovarianceCompilerOwnedIsTrue :
+      genericCommonC3DeterminantCovarianceCompilerOwned ≡ true
+    qInvariantOrbitAloneClosesRHScalarCancellation : Bool
+    qInvariantOrbitAloneClosesRHScalarCancellationIsFalse :
+      qInvariantOrbitAloneClosesRHScalarCancellation ≡ false
+    targetOnlyC3RotationAutomaticallyPreservesFixedNuisanceDeterminant : Bool
+    targetOnlyC3RotationAutomaticallyPreservesFixedNuisanceDeterminantIsFalse :
+      targetOnlyC3RotationAutomaticallyPreservesFixedNuisanceDeterminant ≡ false
+    residualConsumerNonDescentGenuinelyReusableForYM : Bool
+    residualConsumerNonDescentGenuinelyReusableForYMIsTrue :
+      residualConsumerNonDescentGenuinelyReusableForYM ≡ true
+    nsResidualFixtureIsPhysicalCovarianceProof : Bool
+    nsResidualFixtureIsPhysicalCovarianceProofIsFalse :
+      nsResidualFixtureIsPhysicalCovarianceProof ≡ false
+
+canonicalClayMonster369Boundary : ClayMonster369Boundary
+canonicalClayMonster369Boundary =
+  clayMonster369Boundary
+    false refl
+    false refl
+    true refl
+    true refl
+    true refl
+    false refl
+    false refl
+    true refl
+    false refl
