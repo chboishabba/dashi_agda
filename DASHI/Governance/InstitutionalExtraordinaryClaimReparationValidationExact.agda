@@ -20,6 +20,8 @@ import DASHI.Governance.AnomalousResearchPriorityFromTemporalFibreExact as Prior
 import DASHI.Governance.AnomalousConsumerIndexedObligationFibreExact as Obligation
 import DASHI.Governance.AnomalousTemporalProofSearchExperimentAdmissionExact as Admission
 import DASHI.Governance.AnomalousTemporalCalibratedHypothesisForestExact as CalibratedForest
+import DASHI.Governance.AnomalousCompetingExperimentCostedSelectionExact as Competition
+import DASHI.Governance.PsilocybinOutcomeConditionedSequentialExperimentExact as PsilocybinSequential
 
 repairBoundary : Fibre.DrugGovernanceMultiAxisReparativeBoundary
 repairBoundary = Fibre.canonicalDrugGovernanceMultiAxisReparativeBoundary
@@ -47,6 +49,10 @@ admissionBoundary : Admission.AnomalousTemporalProofSearchAdmissionBoundary
 admissionBoundary = Admission.canonicalAnomalousTemporalProofSearchAdmissionBoundary
 calibratedForestBoundary : CalibratedForest.AnomalousTemporalCalibratedForestBoundary
 calibratedForestBoundary = CalibratedForest.canonicalAnomalousTemporalCalibratedForestBoundary
+competitionBoundary : Competition.AnomalousCompetingExperimentCostBoundary
+competitionBoundary = Competition.canonicalAnomalousCompetingExperimentCostBoundary
+psilocybinSequentialBoundary : PsilocybinSequential.PsilocybinOutcomeConditionedSequentialBoundary
+psilocybinSequentialBoundary = PsilocybinSequential.canonicalPsilocybinOutcomeConditionedSequentialBoundary
 
 materialRepairProbeReallySeparates :
   Discriminator.BundleSeparates (Planner.probeFor Planner.materialRepairConsumer)
@@ -163,3 +169,23 @@ bemDormantBranchCannotBecomeRefutedByPruning :
     (Forest.reopenable Forest.fidelityPending)
     Forest.refuted → ⊥
 bemDormantBranchCannotBecomeRefutedByPruning = CalibratedForest.bemDormancyCannotDirectlyBecomeRefutation
+
+presentimentCheapProtocolReallySeparates :
+  Discriminator.BundleSeparates
+    Competition.cheapSeparator
+    Trajectory.anticipatoryPhysiologyAnomaly
+    Trajectory.presentimentMethodArtifact
+presentimentCheapProtocolReallySeparates = Competition.cheapReallySeparates
+
+presentimentCheaperSurveyDoesNotSeparate :
+  Discriminator.BundleSeparates
+    Competition.cheapNonSeparator
+    Trajectory.anticipatoryPhysiologyAnomaly
+    Trajectory.presentimentMethodArtifact → ⊥
+presentimentCheaperSurveyDoesNotSeparate = Competition.cheapSurveyCannotSeparate
+
+psilocybinUsesOutcomeConditionedSequentialPlan :
+  DASHI.Core.SequentialConsumerExperimentPlannerExact.SequentialConsumerPlan
+    PsilocybinSequential.attributionConsumer
+    PsilocybinSequential.earlyLive
+psilocybinUsesOutcomeConditionedSequentialPlan = PsilocybinSequential.psilocybinSequentialPlan
