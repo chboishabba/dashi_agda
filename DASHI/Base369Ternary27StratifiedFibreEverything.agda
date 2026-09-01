@@ -124,6 +124,12 @@ import DASHI.Moonshine.Base369Monster3BVOAActionPhaseAdapterBidiExact
 -- representation, graded-character action, and first-coefficient bridge.
 import DASHI.Moonshine.MonsterGradedVOALiteralActionSameObjectBidiExact
 
+-- Attach the selected central 3B phase source to that exact welded literal VOA
+-- bridge.  The chosen element therefore feeds both the grade-two trace probe
+-- and the literal zeta-eigenspace action; class-3B identification and zeta
+-- recognition remain explicit live receipts rather than trace inference.
+import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact
+
 -- Same-action continuation: the literal Fin 90 coordinate is already owned by
 -- the actual evaluation isomorphism.  The next representation-theoretic leaf
 -- is therefore the actual inertia action on that exact coordinate, followed by
