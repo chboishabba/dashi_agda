@@ -14,6 +14,7 @@ import DASHI.Computation.SSSPLogExponentBalance2025Exact
 
 -- Cross-algorithm pathfinding fibre family.
 import DASHI.Computation.PathfindingFibreCoreExact
+import DASHI.Computation.PathfindingStableCarrierIdentityExact
 import DASHI.Computation.BFSLayerFibreExact
 import DASHI.Computation.DijkstraQueueFibreExact
 import DASHI.Computation.BellmanFordRelaxationScheduleFibreExact
