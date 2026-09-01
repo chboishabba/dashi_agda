@@ -17,6 +17,7 @@ open import Relation.Binary.PropositionalEquality using (trans)
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
@@ -42,12 +43,10 @@ module LiteralOutputFluxLocal
       (Field30.physicalEmbedding physicalSystem)
       (Field30.physicalInverseSquare physicalSystem)
       S L H
-      (Field30.finiteSystem physicalSystem .DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit.FiniteComplex3GalerkinSystem.velocity)) where
+      (Audit.velocityAt (Field30.finiteSystem physicalSystem))) where
 
   E = Field30.physicalEmbedding physicalSystem
-  velocity =
-    Field30.finiteSystem physicalSystem
-      .DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit.FiniteComplex3GalerkinSystem.velocity
+  velocity = Audit.velocityAt (Field30.finiteSystem physicalSystem)
 
   module Carrier = R386.OutputCarrier E
     (Field30.physicalInverseSquare physicalSystem) S L H velocity P
