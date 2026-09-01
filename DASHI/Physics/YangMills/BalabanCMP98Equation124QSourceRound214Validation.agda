@@ -6,7 +6,7 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation124QSourceRound214Validation 
 --
 -- Historical R211/R213/R214 remain useful diagnostics for comparing the
 -- independent five-term Eq.(124) transcription with the current executable
--- real-SU(2) linearized average.  Source inspection showed, however, that the
+-- real-SU(2) linearized average. Source inspection showed, however, that the
 -- executable nested-radial correction is not by construction the sum of all
 -- four printed Eq.(124) residual families.
 --
@@ -15,6 +15,9 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation124QSourceRound214Validation 
 --     -> linear content of Eq.(120)
 --     -> Q(V0) by definition (121)
 --     -> Path13 source with NO caller-supplied qSource.
+-- R217 then splits the surviving physical/source identification into the
+-- existing selected-background, selected-cut, Federbush-Y, and perturbation-
+-- coordinate receipts instead of one opaque semantic flag.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanSU2CMP98Equation124 as Eq124
@@ -25,6 +28,7 @@ import DASHI.Physics.YangMills.BalabanCMP98Equation124GroupedCorrectionRound213E
 import DASHI.Physics.YangMills.BalabanCMP98LiteralCorrectionGroupingRound214Exact as R214
 import DASHI.Physics.YangMills.BalabanCMP98Equation120QSourceRecoveryRound215Exact as R215
 import DASHI.Physics.YangMills.BalabanCMP98Path13Equation120DerivedQSourceRound216Exact as R216
+import DASHI.Physics.YangMills.BalabanCMP98Equation120SelectedSemanticsRound217Exact as R217
 
 -- Independent source/executable diagnostic owners.
 sourceEquation124TranscriptionOwner = Eq124.cmp98LinearizationSourceExact
@@ -59,7 +63,7 @@ round215SamePathCarrier =
   R215.cmp98Equation120SamePathCarrierRound215Level
 round215Equation119Preserved =
   R215.cmp98Equation119PreservedUnderQSourceRecoveryRound215Level
-round215SelectedPathSemantics =
+round215SelectedPathSemanticsHistoricalAggregate =
   R215.literalCMP98Equation120SelectedPathSemanticsRound215Level
 
 -- Strongest Path13-facing route: qSource is absent from the physical input
@@ -69,5 +73,21 @@ round216Path13DerivedQSource =
   R216.cmp98Path13Equation120DerivedQSourceRound216Level
 round216SamePhysicalRealization =
   R216.cmp98Path13Equation120SamePhysicalRealizationRound216Level
-round216SelectedSourceSemantics =
+round216SelectedSourceSemanticsHistoricalAggregate =
   R216.literalCMP98Path13Equation120SelectedSemanticsRound216Level
+
+-- R217 replaces the broad selected-semantics wording by explicit receipts.
+round217SelectedSemanticsStructure =
+  R217.cmp98Equation120SelectedSemanticsRound217Level
+round217SelectedBackgroundReuse =
+  R217.cmp98Equation120SelectedBackgroundReuseRound217Level
+round217SelectedFederbushReuse =
+  R217.cmp98Equation120SelectedFederbushReuseRound217Level
+round217LiteralSelectedBackgroundWeld =
+  R217.literalCMP98SelectedBackgroundWeldRound217Level
+round217LiteralSelectedCutRadius =
+  R217.literalCMP98SelectedCutRadiusRound217Level
+round217LiteralPrincipalYFederbushIdentification =
+  R217.literalCMP98PrincipalYFederbushIdentificationRound217Level
+round217LiteralPerturbationCoordinates =
+  R217.literalCMP98PerturbationCoordinateSemanticsRound217Level
