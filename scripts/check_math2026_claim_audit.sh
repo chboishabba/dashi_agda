@@ -47,6 +47,8 @@ FILES=(
   DASHI/Analysis/RiemannG2SourceNativePhiHatModulationAdapterExact.agda
   DASHI/Analysis/RiemannG2Zeta23FkActionRecoveryExact.agda
   DASHI/Analysis/RiemannG2Zeta23FkCheckedSourceReturnExact.agda
+  DASHI/Analysis/RiemannG2FkOrbitConsumerAttachmentExact.agda
+  DASHI/Analysis/RiemannG2FkOrbitExplicitFormulaWeldExact.agda
   DASHI/Analysis/RiemannG2HighestAlphaAfter8894Exact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda
