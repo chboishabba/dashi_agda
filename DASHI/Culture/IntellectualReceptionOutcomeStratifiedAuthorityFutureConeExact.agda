@@ -6,8 +6,10 @@ import DASHI.Culture.IntellectualReceptionContextIndexedAuthorisedStabiliserProo
 import DASHI.Culture.IntellectualReceptionContextAuthorisationSequentialExperimentExact as Sequential
 import DASHI.Culture.IntellectualReceptionStratifiedStabiliserSearchAuthorityFibreExact as Stratified
 import DASHI.Culture.IntellectualReceptionSemanticStabiliserParetoAuthorityCrossPollinationExact as Stabiliser
+import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as MDL
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as ProofSearch
 import DASHI.Core.SequentialConsumerExperimentPlannerExact as Planner
+import DASHI.Reasoning.AristotleActiveExperimentalProofSearchLoopExact as Loop
 import DASHI.Reasoning.AristotleActiveExperimentalProofSearchDynamicsExact as Dynamics
 
 ------------------------------------------------------------------------
@@ -113,10 +115,10 @@ presentOutcomeOpensGovernance =
   Context.reviewedComparisonReflectionAuthorised
 
 presentOutcomeOpensEligibility :
-  Context.ContextAuthorisedGenerator
-    Context.reviewedComparisonContext
+  MDL.Eligible
+    (Context.contextEligibilityProblem Context.reviewedComparisonContext)
     Stabiliser.comparisonFlipXGenerator
-presentOutcomeOpensEligibility = presentOutcomeOpensGovernance
+presentOutcomeOpensEligibility = Context.reviewedComparisonReflectionEligible
 
 ------------------------------------------------------------------------
 -- Exact link to the existing one-step sequential experiment.  Both concrete
@@ -164,11 +166,11 @@ presentOutcomeConsumerCloses = Sequential.reviewedOutcomeClosesAuthorisedDecisio
 ------------------------------------------------------------------------
 
 activeSearchCanCycleAfterReopening :
-  Dynamics.LoopPath Dynamics.Loop.liveHypotheses Dynamics.Loop.liveHypotheses
+  Dynamics.LoopPath Loop.liveHypotheses Loop.liveHypotheses
 activeSearchCanCycleAfterReopening = Dynamics.canonicalOneIterationCycle
 
 activeSearchCanCloseConsumer :
-  Dynamics.LoopPath Dynamics.Loop.liveHypotheses Dynamics.Loop.consumerClosed
+  Dynamics.LoopPath Loop.liveHypotheses Loop.consumerClosed
 activeSearchCanCloseConsumer = Dynamics.canonicalClosurePath
 
 ------------------------------------------------------------------------
