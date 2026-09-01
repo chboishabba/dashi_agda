@@ -15,6 +15,7 @@ open import Data.Rational using (Positive)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
@@ -37,8 +38,7 @@ module PositiveViscosityOutputFlux
       (Field30.physicalEmbedding physicalSystem)
       (Field30.physicalInverseSquare physicalSystem)
       S L H
-      (DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit.velocityAt
-        (Field30.finiteSystem physicalSystem)))
+      (Audit.velocityAt (Field30.finiteSystem physicalSystem)))
     (viscosityPositive : Positive (Field30.viscosity physicalSystem)) where
 
   module Flux = R397.LiteralOutputFluxLocal physicalSystem S L H P
