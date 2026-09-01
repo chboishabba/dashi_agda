@@ -3,9 +3,9 @@ module DASHI.Cognition.PNF.ContextualFractranOccurrenceHyperfabricExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.List.Base using (List; []; _∷_)
+open import Data.List.Base using (List)
 
-import DASHI.Cognition.PNF.SpacyNumericProjection as Spacy
+open import DASHI.Cognition.PNF.NumericAuthority using (TokenId)
 import DASHI.Cognition.PNF.NumericOccurrenceFibre as Occurrence
 import DASHI.Cognition.PNF.NumericHyperfabric as Document
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
@@ -14,48 +14,49 @@ import DASHI.Foundations.SSPTritCarrier as Trit
 ------------------------------------------------------------------------
 -- Contextual token valuation.
 --
--- A lexical surface/POS pair is not assigned one global FRACTRAN value.
--- The value belongs to an occurrence in one admissible document-world context.
--- spaCy supplies structural evidence; document/world restriction supplies the
--- contextual signed SSP valuation.
+-- A surface/POS pair does not have one global FRACTRAN value.  The value is
+-- attached to a concrete token occurrence in one document/world/query fibre.
 ------------------------------------------------------------------------
 
 data SemanticRole : Set where
-  agentRole patientRole sourceRole targetRole giverRole recipientRole : SemanticRole
-  premiseRole conclusionRole evidenceRole authorityRole : SemanticRole
+  agentSemanticRole patientSemanticRole : SemanticRole
+  sourceSemanticRole targetSemanticRole : SemanticRole
+  giverSemanticRole recipientSemanticRole : SemanticRole
+  premiseSemanticRole conclusionSemanticRole : SemanticRole
+  evidenceSemanticRole authoritySemanticRole : SemanticRole
 
 record OrientedRolePair : Set where
   constructor orientedRolePair
   field
-    sourceRole : SemanticRole
-    targetRole : SemanticRole
+    fromRole : SemanticRole
+    toRole : SemanticRole
 
 open OrientedRolePair public
 
 reverseRolePair : OrientedRolePair → OrientedRolePair
-reverseRolePair (orientedRolePair source target) = orientedRolePair target source
+reverseRolePair (orientedRolePair from to) = orientedRolePair to from
 
 reverseRolePairInvolutive :
   (roles : OrientedRolePair) →
   reverseRolePair (reverseRolePair roles) ≡ roles
-reverseRolePairInvolutive (orientedRolePair source target) = refl
+reverseRolePairInvolutive (orientedRolePair from to) = refl
 
 record QueryFrame : Set where
   constructor queryFrame
   field
-    roles : OrientedRolePair
-    anchorToken : Spacy.TokenId
+    orientedRoles : OrientedRolePair
+    anchorToken : TokenId
     asksForSource : Bool
 
 open QueryFrame public
 
+flipBool : Bool → Bool
+flipBool false = true
+flipBool true = false
+
 invertQueryFrame : QueryFrame → QueryFrame
 invertQueryFrame (queryFrame roles anchor asksSource) =
-  queryFrame (reverseRolePair roles) anchor (not asksSource)
-  where
-    not : Bool → Bool
-    not false = true
-    not true = false
+  queryFrame (reverseRolePair roles) anchor (flipBool asksSource)
 
 invertQueryFrameInvolutive :
   (query : QueryFrame) →
@@ -64,6 +65,10 @@ invertQueryFrameInvolutive (queryFrame roles anchor false)
   rewrite reverseRolePairInvolutive roles = refl
 invertQueryFrameInvolutive (queryFrame roles anchor true)
   rewrite reverseRolePairInvolutive roles = refl
+
+------------------------------------------------------------------------
+-- Signed SSP valuation: machine-rich state first, ternary observation second.
+------------------------------------------------------------------------
 
 ContextualValuation : Set
 ContextualValuation = Signed.SSPPrime → Signed.SignedMultiplicity
@@ -85,23 +90,22 @@ coarseSSPTrit (Signed.negativeMultiplicity n) = Trit.sspNegOne
 coarseSSPTrit Signed.zeroMultiplicity = Trit.sspZero
 coarseSSPTrit (Signed.positiveMultiplicity n) = Trit.sspPosOne
 
+negateTrit : Trit.SSPTrit → Trit.SSPTrit
+negateTrit Trit.sspNegOne = Trit.sspPosOne
+negateTrit Trit.sspZero = Trit.sspZero
+negateTrit Trit.sspPosOne = Trit.sspNegOne
+
 coarseNegationCommutes :
   (multiplicity : Signed.SignedMultiplicity) →
   coarseSSPTrit (Signed.negateMultiplicity multiplicity)
   ≡ negateTrit (coarseSSPTrit multiplicity)
-  where
-    negateTrit : Trit.SSPTrit → Trit.SSPTrit
-    negateTrit Trit.sspNegOne = Trit.sspPosOne
-    negateTrit Trit.sspZero = Trit.sspZero
-    negateTrit Trit.sspPosOne = Trit.sspNegOne
 coarseNegationCommutes (Signed.negativeMultiplicity n) = refl
 coarseNegationCommutes Signed.zeroMultiplicity = refl
 coarseNegationCommutes (Signed.positiveMultiplicity n) = refl
 
 ------------------------------------------------------------------------
--- FRACTRAN instruction surface.  Numerator and denominator are deliberately
--- retained separately: reciprocal transport is a real machine-level operation,
--- not merely a sign label.
+-- FRACTRAN fractions retain numerator and denominator separately.  Reciprocal
+-- transport is therefore a real machine-level candidate inversion.
 ------------------------------------------------------------------------
 
 record FractranFraction : Set where
@@ -122,10 +126,7 @@ reciprocalInvolutive :
 reciprocalInvolutive (fractranFraction numerator denominator) = refl
 
 ------------------------------------------------------------------------
--- Backward restriction from closed document state to one token occurrence.
--- The compiler is intentionally parameterised by the actual restriction law:
--- this module records the shape and the laws rather than inventing one global
--- lexical dictionary.
+-- Backward document -> world -> occurrence restriction.
 ------------------------------------------------------------------------
 
 record DocumentFractranState : Set where
@@ -142,7 +143,7 @@ data WorldId : Set where
 record ContextualOccurrenceState : Set where
   constructor contextualOccurrenceState
   field
-    document : DocumentFractranState
+    documentState : DocumentFractranState
     worldId : WorldId
     occurrence : Occurrence.ScopedTokenOccurrence
     query : QueryFrame
@@ -177,15 +178,14 @@ record BackwardDerivationLaw : Set₁ where
       (worldId : WorldId) →
       (occurrence : Occurrence.ScopedTokenOccurrence) →
       (query : QueryFrame) →
-      ContextualOccurrenceState.document
+      ContextualOccurrenceState.documentState
         (derive document worldId occurrence query)
       ≡ document
 
 open BackwardDerivationLaw public
 
 ------------------------------------------------------------------------
--- Query observation and residual fibre.
--- Different fine world-relative valuations may have the same requested trit.
+-- Query projection + retained residual world fibre.
 ------------------------------------------------------------------------
 
 record RequestedPrimeObservation : Set where
@@ -221,8 +221,7 @@ record QueryProjectedOccurrence : Set where
 open QueryProjectedOccurrence public
 
 ------------------------------------------------------------------------
--- Phase inversion is candidate reciprocal transport.  It becomes semantic only
--- under a situated admissibility receipt supplied by the bracket/world layer.
+-- Inversion is ambient/candidate first; semantic lawfulness is situated.
 ------------------------------------------------------------------------
 
 record PhaseInversionCandidate : Set where
@@ -253,8 +252,7 @@ record SituatedAdmissibility : Set where
 open SituatedAdmissibility public
 
 allSituatedChecksPass : SituatedAdmissibility → Bool
-allSituatedChecksPass
-  (situatedAdmissibility true true true true) = true
+allSituatedChecksPass (situatedAdmissibility true true true true) = true
 allSituatedChecksPass _ = false
 
 record LawfulPhaseTransport : Set where
@@ -267,7 +265,7 @@ record LawfulPhaseTransport : Set where
 open LawfulPhaseTransport public
 
 ------------------------------------------------------------------------
--- Boundaries.
+-- Boundary receipts.
 ------------------------------------------------------------------------
 
 record ContextualFractranBoundary : Set where
@@ -283,5 +281,4 @@ record ContextualFractranBoundary : Set where
 
 canonicalContextualFractranBoundary : ContextualFractranBoundary
 canonicalContextualFractranBoundary =
-  contextualFractranBoundary
-    false false false false false true true
+  contextualFractranBoundary false false false false false true true
