@@ -14,10 +14,6 @@ import DASHI.Foundations.Base369MonsterNamedIdentityRegistryExact as Registry
 
 ------------------------------------------------------------------------
 -- SEMANTIC MONSTER / ACTUAL REPRESENTATION BIDI FRONTIER
---
--- Do not wait for one monolithic 196883-state identification.  The actual 3B
--- restriction can test named semantic components locally, while the global
--- weight-two/VOA lane constrains the full carrier and invariant conformal unit.
 ------------------------------------------------------------------------
 
 SemanticConstituent : Set
@@ -52,10 +48,6 @@ residualDegreeMatchesSemanticResidual = ThreeB.invariantExcessIs53
 multiplicityDegreeIsNinety : actualRestrictedMultiplicityDegree ≡ 90
 multiplicityDegreeIsNinety = ThreeB.multiplicityFactorIs90
 
-------------------------------------------------------------------------
--- Typed action-level bridge payments.
-------------------------------------------------------------------------
-
 record AppraisalHeisenbergActionBridge : Set₁ where
   field
     HeisenbergRepresentationCarrier : Set
@@ -87,8 +79,7 @@ record ConstituentTensorBridge : Set₁ where
 open ConstituentTensorBridge public
 
 ------------------------------------------------------------------------
--- The actual-sector -> Base369 compiler is already theorem-bearing once an
--- ActualZetaSectorRecognition is supplied.  It is not a further research leaf.
+-- Actual-sector recognition -> Base369 is already a compiler, not research.
 ------------------------------------------------------------------------
 
 record ActualRecognitionCompilerAvailable : Set₁ where
@@ -99,15 +90,14 @@ record ActualRecognitionCompilerAvailable : Set₁ where
     compilerExact :
       base369Recognition
       ≡ Base369Recognition.composeActualRecognitionWithBase369 recognition
-
 open ActualRecognitionCompilerAvailable public
 
 compileActualRecognitionToBase369 :
   ∀ {ActualSector} →
   (recognition : Actual.ActualZetaSectorRecognition ActualSector) →
   ActualRecognitionCompilerAvailable
-compileActualRecognitionToBase369 recognition = record
-  { ActualSector = _
+compileActualRecognitionToBase369 {ActualSector} recognition = record
+  { ActualSector = ActualSector
   ; recognition = recognition
   ; base369Recognition = Base369Recognition.composeActualRecognitionWithBase369 recognition
   ; compilerExact = refl
@@ -154,25 +144,6 @@ base369RecognitionCompilerClosed :
   leafStatus composeActualRecognitionToBase369 ≡ leafClosed
 base369RecognitionCompilerClosed = refl
 
-------------------------------------------------------------------------
--- Dependency graph.
---
--- Local/restriction lane:
---   model irreducibility -> uniqueness
---   replay ---------------------------> actual zeta recognition
---                                         |
---                                         v
---                           owned Base369 recognition compiler
---                                         |
---                                         v
---                                729 x 90 tensor
---
--- Separately replay -> 53 residual audit.
---
--- Global/VOA lane:
---   End evaluation -> weight-two carrier -> constituent preservation.
-------------------------------------------------------------------------
-
 data Requires : SemanticRepresentationLeaf → SemanticRepresentationLeaf → Set where
   uniquenessNeedsIrreducibility :
     Requires prove729FixedCentralCharacterUniqueness prove729WitnessedIrreducibility
@@ -189,10 +160,6 @@ data Requires : SemanticRepresentationLeaf → SemanticRepresentationLeaf → Se
   semanticNeedsResidual : Requires intertwineSemanticCoordinates identify53ResidualAction
   semanticNeedsConstituent : Requires intertwineSemanticCoordinates preserveMonsterConstituent
 
-------------------------------------------------------------------------
--- Factorised terminal receipt.
-------------------------------------------------------------------------
-
 record SemanticMonsterRepresentationReceipt : Set₁ where
   field
     actual3BReplay : ThreeB.RestrictionReplayReceipt
@@ -202,10 +169,6 @@ record SemanticMonsterRepresentationReceipt : Set₁ where
     semanticConstituentBridge : Nested.MonsterConstituentSemanticBridge
     allNamedSemanticCoordinatesIntertwine : Set
 open SemanticMonsterRepresentationReceipt public
-
-------------------------------------------------------------------------
--- Boundaries.
-------------------------------------------------------------------------
 
 data Shared729DegreeIdentifiesRepresentation : Set where
 data Shared53DegreeIdentifiesResidual : Set where
