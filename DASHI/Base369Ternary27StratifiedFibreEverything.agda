@@ -104,6 +104,7 @@ import DASHI.Moonshine.Base369Monster3BActualActionRecognitionBidiExact
 -- the existing 12 + 78 block-recognition interface using the same action.
 import DASHI.Moonshine.Base369Monster3BMultiplicityInertiaTwelveSeventyEightBidiExact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound2Exact
+import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound3Exact
 
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact
 
