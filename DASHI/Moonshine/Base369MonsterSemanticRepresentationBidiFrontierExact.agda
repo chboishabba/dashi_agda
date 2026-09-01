@@ -172,7 +172,7 @@ data Shared729DegreeIdentifiesRepresentation : Set where
 data Shared53DegreeIdentifiesResidual : Set where
 data Fin196883BijectionProvesMonsterEquivariance : Set where
 data ThreeBRestrictionAloneDeterminesGlobalAction : Set where
-\data SemanticCoordinateNamesDetermineCharacter : Set where
+data SemanticCoordinateNamesDetermineCharacter : Set where
 
 shared729DoesNotIdentifyRepresentation : Shared729DegreeIdentifiesRepresentation → ⊥
 shared729DoesNotIdentifyRepresentation ()
