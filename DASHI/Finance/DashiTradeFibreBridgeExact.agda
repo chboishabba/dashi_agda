@@ -3,6 +3,7 @@ module DASHI.Finance.DashiTradeFibreBridgeExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Finance.TemporalMarketFibreExact as Temporal
+import DASHI.Finance.PointInTimeUniverseFibreExact as PIT
 import DASHI.Finance.DeepStatArbFibrePipelineExact as StatArb
 import DASHI.Trading.PermissionKernel as Legacy
 import DASHI.Trading.DashiTradeDreamOptionConeExact as Dream
@@ -74,14 +75,11 @@ canonicalResidual =
     StatArb.pca
     "canonical residual payload"
     "canonical PIT factor-fit receipt"
-    -- The universe field is structural here; the dedicated PIT owner proves
-    -- admissibility of historical membership separately.
-    (record
-      { universeTime = 0
-      ; constituentSet = "historical constituents at t0"
-      ; membershipProvenance = "historical membership receipt"
-      ; dynamicHistoricalPool = true
-      })
+    (PIT.universeFibre
+      0
+      "historical constituents at t0"
+      "historical membership receipt"
+      true)
     "canonical residual provenance"
 
 cleanLongTradeFibre : TradeSituatedFibre
