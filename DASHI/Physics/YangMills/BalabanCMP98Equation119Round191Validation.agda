@@ -15,6 +15,7 @@ import DASHI.Physics.YangMills.BalabanRootedQuotientHamiltonianDescentRound199Ex
 import DASHI.Physics.YangMills.BalabanBasedGaugeActionGroupoidRound200Exact as R200
 import DASHI.Physics.YangMills.BalabanRootedHamiltonianGaugeFunctorRound201Exact as R201
 import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionHamiltonianRound202Exact as R202
+import DASHI.Physics.YangMills.BalabanFiniteSampleObservablePairingRound203Exact as Sample203
 import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionFiniteL2Round203Exact as R203
 import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionSymmetricOperatorRound204Exact as R204
 import DASHI.Physics.YangMills.BalabanSelectedIBPWavefunctionSymmetryWeldRound205Exact as R205
@@ -67,10 +68,16 @@ round196FiniteGaugeQuotientUniqueness =
 round196FiniteGaugeQuotientSelectedFibreCompatibility =
   R196.finitePhysicalGaugeQuotientSelectedFibreCompatibilityRound196Level
 
-round197FiniteSelectedEnsemblePairing =
+-- R197 remains an exhaustive-selector theorem.  The authoritative weaker
+-- finite-list interpretation is the upstream R203 FiniteSample owner below.
+round197HistoricalExhaustiveSelectorPairing =
   R197.finiteRootedGaugeQuotientL2PairingRound197Level
-round197FiniteSelectedEnsembleDefiniteness =
+round197HistoricalExhaustiveSelectorDefiniteness =
   R197.finiteRootedGaugeQuotientL2DefinitenessRound197Level
+round203FiniteSampleObservablePairing =
+  Sample203.finiteSampleObservablePairingRound203Level
+round203FiniteSampleExhaustiveSelectorSeparation =
+  Sample203.finiteSampleExhaustiveSelectorSeparationRound203Level
 round198FiniteRepresentativeCarrierConstructed =
   R198.finiteGaugeOrbitRepresentativeCarrierNowConstructedRound198Level
 
@@ -88,23 +95,22 @@ round202RootedQuotientEvaluation =
 round202OperatorNormalizationHandoff =
   R202.wavefunctionHamiltonianNormalizationHandoffRound202Level
 
-round203WavefunctionFiniteL2Bridge =
-  R203.wavefunctionFiniteL2BridgeRound203Level
-round203WavefunctionFiniteL2Definiteness =
-  R203.wavefunctionFiniteL2DefinitenessRound203Level
+round203WavefunctionFiniteSampleBridge =
+  R203.wavefunctionFiniteSampleBridgeRound203Level
+round203WavefunctionFiniteSampleSymmetry =
+  R203.wavefunctionFiniteSampleSymmetryRound203Level
 
-round204FiniteSymmetricGaugeInvariantOperator =
-  R204.finiteSymmetricGaugeInvariantOperatorRound204Level
+round204FiniteSampleSymmetricGaugeInvariantOperator =
+  R204.finiteSampleSymmetricGaugeInvariantOperatorRound204Level
 
--- R205 consumes the repository's actual theorem-bearing selected finite IBP
--- equation.  The generic symmetric-form blocker is now reduced to two exact
--- same-object realization payments on the R202/R203 wavefunction carrier.
-round205SelectedIBPWavefunctionSymmetryCompiler =
-  R205.selectedIBPWavefunctionSymmetryCompilerRound205Level
-round205FiniteHamiltonianAsSelectedActionVariation =
-  R205.literalFiniteYMHamiltonianAsSelectedActionVariationRound205Level
-round205SelectedIBPRightSideAsWavefunctionPairing =
-  R205.literalSelectedIBPRightSideAsWavefunctionPairingRound205Level
+-- R205 consumes the actual theorem-bearing selected finite IBP equation, but
+-- only at sample level.  It does not manufacture the physical measure or H.
+round205SelectedIBPWavefunctionSampleSymmetryCompiler =
+  R205.selectedIBPWavefunctionSampleSymmetryCompilerRound205Level
+round205PhysicalHamiltonianAsSelectedActionVariation =
+  R205.literalPhysicalYMHamiltonianAsSelectedActionVariationRound205Level
+round205SelectedIBPRightSideAsPhysicalL2Pairing =
+  R205.literalSelectedIBPRightSideAsPhysicalL2PairingRound205Level
 round205PhysicalBoundaryCancellation =
   R205.literalPhysicalBoundaryCancellationRound205Level
 
