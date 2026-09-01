@@ -37,6 +37,9 @@ on:
       - 'DASHI/Physics/YangMills/BalabanFederbushRationalLieToRealSU2CarrierRound207Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanFederbushRationalMatrixRealImageRound208Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanNullQuotientHamiltonianDescentRound209Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanFederbushCanonicalRealMatrixExtensionRound210Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP98Equation124QSourceRecoveryRound211Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanMeasureNullCanonicalQuotientHamiltonianRound212Exact.agda'
       - '.github/workflows/balaban-finite-frontier-agda.yml'
 
 concurrency:
