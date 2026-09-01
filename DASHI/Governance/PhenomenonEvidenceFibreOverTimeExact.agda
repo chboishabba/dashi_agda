@@ -11,10 +11,10 @@ import DASHI.Core.RelationalHistoryFabricExact as HistoryFabric
 -- PHENOMENON EVIDENCE FIBRES OVER TIME
 --
 -- Evidence is not a terminal scalar.  For phenomenon p and time t, the live
--- evidential fibre is the set/predicate of interpretations still compatible
--- with the evidence available at t.  Updates can refine, reopen, or preserve
--- that fibre.  A present evidence summary does not erase the path by which it
--- was reached.
+-- evidential fibre is the proof-bearing carrier of interpretations still
+-- compatible with the evidence available at t.  Updates can refine, reopen, or
+-- preserve that fibre.  A present evidence summary does not erase the path by
+-- which it was reached.
 ------------------------------------------------------------------------
 
 data EvidenceCoordinate : Set where
@@ -60,8 +60,20 @@ record TemporalEvidenceSystem : Set₁ where
 
 open TemporalEvidenceSystem public
 
-EvidenceFibre : (system : TemporalEvidenceSystem) → Time system → Set₁
-EvidenceFibre system t = (h : Interpretation system) → Compatible system t h → Set
+-- Literal dependent fibre at time t: an interpretation plus the receipt that
+-- it remains compatible with the evidence available at that time.
+record LiveInterpretationAt
+    (system : TemporalEvidenceSystem)
+    (t : Time system) : Set where
+  constructor liveInterpretationAt
+  field
+    interpretation : Interpretation system
+    compatibilityReceipt : Compatible system t interpretation
+
+open LiveInterpretationAt public
+
+EvidenceFibre : (system : TemporalEvidenceSystem) → Time system → Set
+EvidenceFibre system t = LiveInterpretationAt system t
 
 -- Refinement means that every interpretation live after the update was already
 -- live before it.  It does not require a numerical confidence score.
@@ -166,6 +178,12 @@ toySystem = record
   ; summarize = λ _ → samePresentSummary
   ; timeReference = λ _ → "finite temporal evidence-fibre fixture"
   }
+
+toyEarlyBroadLive : EvidenceFibre toySystem earlyA
+toyEarlyBroadLive = liveInterpretationAt broadHypothesis tt
+
+toyLateNarrowLive : EvidenceFibre toySystem lateA
+toyLateNarrowLive = liveInterpretationAt narrowHypothesis tt
 
 toyStrictRefinement : StrictFibreRefinement toySystem earlyA lateA
 toyStrictRefinement = record
