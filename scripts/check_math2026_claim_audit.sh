@@ -56,6 +56,8 @@ FILES=(
   DASHI/Analysis/RiemannG2CanonicalHXToHTCompilerExact.agda
   DASHI/Analysis/RiemannG2CanonicalHXHMToPoleNearHTAdapterExact.agda
   DASHI/Analysis/RiemannG2TargetModulationToHWCompilerExact.agda
+  DASHI/Analysis/RiemannG2PoleNearTargetWindowSpectralIdentificationCompilerExact.agda
+  DASHI/Analysis/RiemannG2ZeroSideHMBypassBidiExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda
   DASHI/Mathematics/NumberTheory/DiophantineTupleDPrimeSquare2026ClaimAuditExact.agda
