@@ -18,6 +18,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound4Exact as R4
+import DASHI.Moonshine.Base369Monster3BVOAActionPhaseAdapterBidiExact as VOAAdapter
 
 ------------------------------------------------------------------------
 -- 1. Search coordinates after exposing the VOA action owner.
@@ -80,7 +81,16 @@ recognitionRemainsSameCarrierLive :
 recognitionRemainsSameCarrierLive = refl
 
 ------------------------------------------------------------------------
--- 3. The attachment-inspired nested-unit question remains parallel.
+-- 3. The cyclotomic phase chart is literally the adapter's existing owner.
+------------------------------------------------------------------------
+
+zetaPhaseIsRepoCyclotomicZeta :
+  VOAAdapter.phaseCyclotomic VOAAdapter.Inertia.phaseZeta
+  ≡ VOAAdapter.C3.zeta
+zetaPhaseIsRepoCyclotomicZeta = refl
+
+------------------------------------------------------------------------
+-- 4. The attachment-inspired nested-unit question remains parallel.
 --
 -- The local 54 = 53 + 1 and global 196884 = 196883 + 1 shapes may share a
 -- completion pattern, but no equality of their distinguished unit carriers is
@@ -92,7 +102,7 @@ nestedUnitBridgeIsParallelNotGenerated :
 nestedUnitBridgeIsParallelNotGenerated = refl
 
 ------------------------------------------------------------------------
--- 4. Boundary.
+-- 5. Boundary.
 ------------------------------------------------------------------------
 
 record Round5Boundary : Set where
@@ -116,7 +126,7 @@ canonicalRound5Boundary =
     true true true false true true false true true false true
 
 ------------------------------------------------------------------------
--- 5. Round-4 phase-resolution pruning remains valid.
+-- 6. Round-4 phase-resolution pruning remains valid.
 ------------------------------------------------------------------------
 
 round4PhaseSearchAlreadyPruned :
