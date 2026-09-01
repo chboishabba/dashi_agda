@@ -7,6 +7,8 @@ import DASHI.Finance.MarketBraidCrossPollinationExact
 import DASHI.Finance.UniverseLeakageResidualDependencyExact
 import DASHI.Finance.DashiTradeFibreBridgeExact
 import DASHI.Finance.TradeRealizationSharpeAuthorityExact
-import DASHI.Finance.TradingPermissionActionRefinementExact
-import DASHI.Finance.TradingPermissionConsumerQuotientExact
-import DASHI.Finance.TradingControlPermissionSeparationExact
+
+-- Canonical trading-control semantics. Earlier BAN/action experiments remain
+-- in the branch as historical development artifacts but are deliberately not
+-- imported by this aggregate.
+import DASHI.Finance.TradingAdmissibleOptionConeSupersessionExact
