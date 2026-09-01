@@ -37,26 +37,17 @@ fixedSpectralIdentificationToHW :
   HW.PoleNearWindowRestriction H_T
 fixedSpectralIdentificationToHW {space} H_T m identification =
   HW.pole-near-window-restriction
-    -- one literal selected target/cutoff instance
     ⊤
     ⊤
     (Weil.WeilTestSpace.Scalar space)
-    -- full translated response
     (λ _ → Target.spectralValue identification)
-    -- restriction to the selected finite near carrier
     (λ _ → tt)
-    -- finite signed near response
     (λ _ → Target.finitePoleNearSigned identification)
-    -- same-ordinate cluster
     (λ _ → Target.sameOrdinateCluster identification)
-    -- actual far channel
     (λ _ → Target.farZeroRemainder identification)
-    -- exact scalar composition used by the identification
     (Target._⊕_ identification)
-    -- exact decomposition
     (λ _ → Target.spectralIsClusterNearFar identification)
-    -- same H_T / taper / gap / multiplicity / near finset / far channel
-    (HT.TargetTranslationModulationIntertwiner)
+    ⊤
     (Target.poleTaperCarrierOwned m)
     (Target.preservesTargetRelativeGap identification)
     (Target.preservesMultiplicity identification)
