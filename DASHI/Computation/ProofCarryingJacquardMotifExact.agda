@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Data.Maybe using (Maybe; just; nothing)
 open import Data.List using (_++_)
 
+import DASHI.Core.ProofCarryingRuleApplicationExact as RuleProof
 import DASHI.Combinatorics.ProofFabricCompilerExact as ProofFabric
 import DASHI.Combinatorics.ProofCarryingTextileHyperfabricExact as Carrying
 import DASHI.Computation.JacquardOperationalSemanticsExact as Jacquard
@@ -13,11 +14,8 @@ import DASHI.Computation.JacquardProofVisibleSurfaceExact as Visible
 -- STRUCTURAL PROOF MOTIFS ON THE ACTUAL JACQUARD BACKEND
 --
 -- One proof motif occupies two Jacquard rows x two warp ends = four visible
--- binary cells.  Six even-parity codewords are assigned to the six structural
--- proof motifs.  All other four-cell patterns are rejected by the decoder.
---
--- This is not merely a byte encoding: the decoded symbol is the structural
--- rule-class annotation carried by CertifiedFabricPatch.
+-- binary cells. Six even-parity codewords are assigned to the six structural
+-- proof motifs. All other four-cell patterns are rejected by the decoder.
 ------------------------------------------------------------------------
 
 MotifTilePair : Set
@@ -117,7 +115,7 @@ reservedStructuralPatternBRejected = refl
 
 patchJacquardProgram :
   {State Rule : Set}
-  {system : DASHI.Core.ProofCarryingRuleApplicationExact.RuleApplicationSystem State Rule}
+  {system : RuleProof.RuleApplicationSystem State Rule}
   {assignment : Carrying.MotifAssignment Rule}
   {occurrence : Carrying.RuleOccurrence system} →
   Carrying.CertifiedFabricPatch assignment occurrence →
@@ -127,7 +125,7 @@ patchJacquardProgram patch =
 
 patchVisiblePattern :
   {State Rule : Set}
-  {system : DASHI.Core.ProofCarryingRuleApplicationExact.RuleApplicationSystem State Rule}
+  {system : RuleProof.RuleApplicationSystem State Rule}
   {assignment : Carrying.MotifAssignment Rule}
   {occurrence : Carrying.RuleOccurrence system} →
   Carrying.CertifiedFabricPatch assignment occurrence →
@@ -137,7 +135,7 @@ patchVisiblePattern patch =
 
 certifiedPatchVisibleRoundtrip :
   {State Rule : Set}
-  {system : DASHI.Core.ProofCarryingRuleApplicationExact.RuleApplicationSystem State Rule}
+  {system : RuleProof.RuleApplicationSystem State Rule}
   {assignment : Carrying.MotifAssignment Rule}
   {occurrence : Carrying.RuleOccurrence system} →
   (patch : Carrying.CertifiedFabricPatch assignment occurrence) →
@@ -152,10 +150,10 @@ certifiedPatchVisibleRoundtrip patch =
 
 compileFabricTraceToJacquard :
   {State Rule : Set}
-  {system : DASHI.Core.ProofCarryingRuleApplicationExact.RuleApplicationSystem State Rule}
+  {system : RuleProof.RuleApplicationSystem State Rule}
   {assignment : Carrying.MotifAssignment Rule}
   {state : State}
-  {trace : DASHI.Core.ProofCarryingRuleApplicationExact.CertifiedRuleTrace system state} →
+  {trace : RuleProof.CertifiedRuleTrace system state} →
   Carrying.CertifiedFabricTrace assignment trace →
   Jacquard.JacquardProgram 2
 compileFabricTraceToJacquard Carrying.fabricDone = []
