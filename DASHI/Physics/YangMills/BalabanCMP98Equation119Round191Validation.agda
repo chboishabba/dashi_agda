@@ -15,6 +15,8 @@ import DASHI.Physics.YangMills.BalabanRootedQuotientHamiltonianDescentRound199Ex
 import DASHI.Physics.YangMills.BalabanBasedGaugeActionGroupoidRound200Exact as R200
 import DASHI.Physics.YangMills.BalabanRootedHamiltonianGaugeFunctorRound201Exact as R201
 import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionHamiltonianRound202Exact as R202
+import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionFiniteL2Round203Exact as R203
+import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionSymmetricOperatorRound204Exact as R204
 
 round189PathHomomorphism = R189.cmp98RawUnitPathHomomorphismRound189Level
 round190BoundarySupersession = R190.cmp98ClayBoundarySupersessionRound190Level
@@ -68,12 +70,13 @@ round196FiniteGaugeQuotientUniqueness =
 round196FiniteGaugeQuotientSelectedFibreCompatibility =
   R196.finitePhysicalGaugeQuotientSelectedFibreCompatibilityRound196Level
 
--- R197/R198 are retained as historical finite-selected-ensemble experiments.
--- They do not define the physical Hamiltonian carrier.  In particular, the
--- full compact-group configuration quotient is not asserted finite.
-round197HistoricalFiniteSelectedEnsemblePairing =
+-- R197 is a finite selected-ensemble pairing on the same rooted carrier.  R203
+-- now shows this is not semantically disconnected from the correct R202
+-- wavefunction carrier: evaluation on rooted representatives gives the exact
+-- quotient observable consumed by R197.
+round197FiniteSelectedEnsemblePairing =
   R197.finiteRootedGaugeQuotientL2PairingRound197Level
-round197HistoricalFiniteSelectedEnsembleDefiniteness =
+round197FiniteSelectedEnsembleDefiniteness =
   R197.finiteRootedGaugeQuotientL2DefinitenessRound197Level
 round198FiniteRepresentativeCarrierConstructed =
   R198.finiteGaugeOrbitRepresentativeCarrierNowConstructedRound198Level
@@ -88,10 +91,7 @@ round200BasedGaugeActionGroupoid =
 round201HistoricalFieldHamiltonianFunctor =
   R201.rootedHamiltonianGaugeFunctorRound201Level
 
--- Correct terminal carrier from R202: scalar wavefunctions on raw gauge fields
--- with theorem-bearing based-gauge invariance.  Evaluation on the R196 rooted
--- normal form is proof-witness independent, and any operator whose codomain is
--- the same invariant function space descends at evaluation level automatically.
+-- Correct terminal carrier from R202.
 round202GaugeInvariantWavefunctionCarrier =
   R202.basedGaugeInvariantWavefunctionCarrierRound202Level
 round202RootedQuotientEvaluation =
@@ -99,13 +99,24 @@ round202RootedQuotientEvaluation =
 round202OperatorNormalizationHandoff =
   R202.wavefunctionHamiltonianNormalizationHandoffRound202Level
 
+-- R203 removes the false L2/wavefunction split on finite selected ensembles.
+round203WavefunctionFiniteL2Bridge =
+  R203.wavefunctionFiniteL2BridgeRound203Level
+round203WavefunctionFiniteL2Definiteness =
+  R203.wavefunctionFiniteL2DefinitenessRound203Level
+
+-- R204 reduces finite operator symmetry to one theorem-bearing equality on the
+-- correct gauge-invariant wavefunction carrier; quotient descent is automatic.
+round204FiniteSymmetricGaugeInvariantOperator =
+  R204.finiteSymmetricGaugeInvariantOperatorRound204Level
+
 -- Current physical analytic leaves.
-round202PhysicalGaugeInvariantL2Measure =
-  R202.literalPhysicalGaugeInvariantL2MeasureRound202Level
-round202FiniteYMHamiltonianOnWavefunctions =
-  R202.literalFiniteYMHamiltonianOnGaugeInvariantWavefunctionsRound202Level
-round202FiniteYMHamiltonianSelfAdjointness =
-  R202.literalFiniteYMHamiltonianSymmetricSelfAdjointRound202Level
+round204PhysicalGaugeInvariantL2Completion =
+  R204.literalPhysicalGaugeInvariantL2CompletionRound204Level
+round204FiniteYMHamiltonianProducer =
+  R204.literalFiniteYMHamiltonianProducerRound204Level
+round204FiniteYMHamiltonianSymmetry =
+  R204.literalFiniteYMHamiltonianSymmetryRound204Level
 round198FiniteToContinuumCarrierMaps =
   R198.literalFiniteToContinuumPhysicalCarrierMapsRound198Level
 round198ProjectionVacuumCompatibility =
