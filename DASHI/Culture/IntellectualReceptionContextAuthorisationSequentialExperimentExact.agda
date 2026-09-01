@@ -164,7 +164,7 @@ discriminatorSynthesisBoundaryRetained =
 
 data ExperimentOutcomeCreatesScopedAuthority : Set where
 data SearchClosureCreatesScopedAuthority : Set where
-\data ConsumerClosureMeansWholeContextIdentity : Set where
+data ConsumerClosureMeansWholeContextIdentity : Set where
 
 experimentOutcomeDoesNotCreateScopedAuthority :
   ExperimentOutcomeCreatesScopedAuthority → ⊥
