@@ -2,7 +2,7 @@ module DASHI.Governance.AnomalousResearchPriorityFromTemporalFibreExact where
 
 open import DASHI.Core.Prelude
 
-import DASHI.Core.HistoryConditionedChoiceExact as HistoryChoice
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
 import DASHI.Governance.AnomalousPhenomenonTemporalEvidenceTrajectoriesExact as Trajectory
 import DASHI.Governance.PhenomenonEvidenceLadderProjectionOverTimeExact as Ladder
@@ -121,12 +121,11 @@ bemQuestionChanged :
 bemQuestionChanged ()
 
 phenomenonNameCannotDetermineResearchQuestion :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough bemSummary bemQuestion → ⊥
-phenomenonNameCannotDetermineResearchQuestion factor =
-  DASHI.Core.IntersectionalNonFactorability.witnessRulesOutEveryFlatFactorisation
-    (DASHI.Core.IntersectionalNonFactorability.nonFactorabilityWitness
+  INF.FactorsThrough bemSummary bemQuestion → ⊥
+phenomenonNameCannotDetermineResearchQuestion =
+  INF.witnessRulesOutEveryFlatFactorisation
+    (INF.nonFactorabilityWitness
       bemEarlyResearch bemCurrentResearch refl bemQuestionChanged)
-    factor
 
 ------------------------------------------------------------------------
 -- Present evidence coordinates justify the move without promoting them into a
