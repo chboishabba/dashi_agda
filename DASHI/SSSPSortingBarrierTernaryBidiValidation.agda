@@ -7,3 +7,7 @@ import DASHI.Computation.SSSPConsumerInvariantSymmetryQuotientExact
 import DASHI.Computation.SSSPFindPivotsCoverageCompressionExact
 import DASHI.Computation.SSSPThreeFrontierMinimumOrbitQuotientExact
 import DASHI.Computation.SSSPThreeFrontierBinaryTernaryFactorExact
+
+import DASHI.Cognition.PNF.SemanticQueryResidualFibreSSSPBridgeExact
+import DASHI.Cognition.PNF.SemanticRelationSheetOrientationExact
+import DASHI.Cognition.PNF.SemanticQueryFractranCatalogueBridgeExact
