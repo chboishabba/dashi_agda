@@ -3,6 +3,8 @@ module DASHI.Governance.InstitutionalExtraordinaryClaimReparationValidationExact
 open import DASHI.Core.Prelude
 
 import DASHI.Core.DiscriminatorSynthesisExact as Discriminator
+import DASHI.Core.ActiveObligationEvidenceFibreExact as Active
+import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as ProofSearch
 import DASHI.Governance.DrugGovernanceMultiAxisReparativeFibreExact as Fibre
 import DASHI.Governance.DrugGovernanceMultiAxisRepairPlannerExact as Planner
 import DASHI.Governance.MenWhoStareAtGoatsEvidenceLayerExact as Goats
@@ -13,6 +15,8 @@ import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
 import DASHI.Governance.AnomalousPhenomenonTemporalEvidenceTrajectoriesExact as Trajectory
 import DASHI.Governance.PhenomenonEvidenceLadderProjectionOverTimeExact as Ladder
 import DASHI.Governance.AnomalousResearchPriorityFromTemporalFibreExact as Priority
+import DASHI.Governance.AnomalousConsumerIndexedObligationFibreExact as Obligation
+import DASHI.Governance.AnomalousTemporalProofSearchExperimentAdmissionExact as Admission
 
 repairBoundary : Fibre.DrugGovernanceMultiAxisReparativeBoundary
 repairBoundary = Fibre.canonicalDrugGovernanceMultiAxisReparativeBoundary
@@ -34,6 +38,10 @@ ladderBoundary : Ladder.PhenomenonEvidenceLadderProjectionBoundary
 ladderBoundary = Ladder.canonicalPhenomenonEvidenceLadderProjectionBoundary
 priorityBoundary : Priority.AnomalousResearchPriorityTemporalBoundary
 priorityBoundary = Priority.canonicalAnomalousResearchPriorityTemporalBoundary
+obligationBoundary : Obligation.AnomalousConsumerIndexedObligationBoundary
+obligationBoundary = Obligation.canonicalAnomalousConsumerIndexedObligationBoundary
+admissionBoundary : Admission.AnomalousTemporalProofSearchAdmissionBoundary
+admissionBoundary = Admission.canonicalAnomalousTemporalProofSearchAdmissionBoundary
 
 materialRepairProbeReallySeparates :
   Discriminator.BundleSeparates (Planner.probeFor Planner.materialRepairConsumer)
@@ -100,3 +108,33 @@ psilocybinCurrentPriorityTargetsControl = refl
 ndeCurrentPriorityTargetsMechanism :
   Priority.unresolvedCoordinate Priority.ndeCurrentMove ≡ Temporal.mechanismDiscrimination
 ndeCurrentPriorityTargetsMechanism = refl
+
+ndePhenomenologyCanCloseWhileMechanismRemainsOpen :
+  Active.ResolvedFor
+    Obligation.obligationFamily
+    Trajectory.awareII2023
+    Obligation.phenomenologyConsumer
+ndePhenomenologyCanCloseWhileMechanismRemainsOpen = Obligation.ndePhenomenologyResolved
+
+ndeMechanismStillBlocked :
+  Active.ResolvedFor
+    Obligation.obligationFamily
+    Trajectory.awareII2023
+    Obligation.mechanismConsumer → ⊥
+ndeMechanismStillBlocked = Obligation.ndeMechanismNotResolved
+
+presentimentExperimentRouteAdmitted : ProofSearch.RouteAdmission
+presentimentExperimentRouteAdmitted = Admission.proofSearchAdmission Admission.presentimentRoute
+
+psilocybinExperimentTargetsControlAxis :
+  Admission.targetAxis Admission.psilocybinRoute ≡ Temporal.controlStrength
+psilocybinExperimentTargetsControlAxis = refl
+
+ndeMechanismExperimentTargetsMechanismAxis :
+  Admission.targetAxis Admission.ndeMechanismRoute ≡ Temporal.mechanismDiscrimination
+ndeMechanismExperimentTargetsMechanismAxis = refl
+
+bemRepeatAfterTransparentPsiIsRejected :
+  Admission.rejectedDisposition Admission.repeatBemOriginalAfterTransparentPsi
+  ≡ ProofSearch.rejected ProofSearch.consumerMismatch
+bemRepeatAfterTransparentPsiIsRejected = refl
