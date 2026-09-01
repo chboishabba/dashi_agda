@@ -23,7 +23,7 @@ module DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Ex
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; _+ℝ_; _*ℝ_)
@@ -33,6 +33,7 @@ import DASHI.Physics.YangMills.BalabanPhysicalSU2FiniteCoordinatesExact as Physi
 import DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedJacobianExact as Jacobian
 import DASHI.Physics.YangMills.BalabanFiniteMatrixL1ContractionExact as L1
 import DASHI.Physics.YangMills.BalabanA2RationalSensitivityToRealContractionRound104Exact as Embed
+import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as Lie
 import DASHI.Physics.YangMills.BalabanFederbushRationalLieToRealSU2CarrierRound207Exact as R207
 
 record RationalRealRingEmbedding : Set₁ where
@@ -48,6 +49,16 @@ open RationalRealRingEmbedding public
 realSum : ∀ {A : Set} → List A → (A → ℝ) → ℝ
 realSum [] value = 0ℝ
 realSum (x ∷ xs) value = value x +ℝ realSum xs value
+
+realSumCong :
+  ∀ {A : Set} (values : List A) {left right : A → ℝ} →
+  (∀ x → left x ≡ right x) →
+  realSum values left ≡ realSum values right
+realSumCong [] pointwise = refl
+realSumCong (x ∷ xs) {left} {right} pointwise =
+  trans
+    (cong (left x +ℝ_) (realSumCong xs pointwise))
+    (cong (_+ℝ realSum xs right) (pointwise x))
 
 embedRationalSumExact :
   ∀ {A : Set}
@@ -86,38 +97,14 @@ rationalMatrixActionEmbeddingExact embedding matrix vector row =
   trans
     (embedRationalSumExact embedding Physical.lieCoordinates3
       (λ column → matrix row column * vector column))
-    (realSumCong Physical.lieCoordinates3)
-  where
-    realSumCong :
-      ∀ {A : Set} (values : List A)
-        {left right : A → ℝ} →
-      (∀ x → left x ≡ right x) →
-      realSum values left ≡ realSum values right
-    realSumCong [] pointwise = refl
-    realSumCong (x ∷ xs) pointwise =
-      trans
-        (cong (left x +ℝ_) (realSumCong xs pointwise))
-        (cong (_+ℝ realSum xs right) (pointwise x))
-      where
-        left = λ column →
-          Embed.embed (Embed.base (additive embedding))
-            (matrix row column * vector column)
-        right = λ column →
-          Embed.embed (Embed.base (additive embedding)) (matrix row column)
-          *ℝ Embed.embed (Embed.base (additive embedding)) (vector column)
-
-    pointwise : ∀ column →
-      Embed.embed (Embed.base (additive embedding))
-        (matrix row column * vector column)
-      ≡ Embed.embed (Embed.base (additive embedding)) (matrix row column)
-          *ℝ Embed.embed (Embed.base (additive embedding)) (vector column)
-    pointwise column = multiplyExact embedding
-      (matrix row column) (vector column)
+    (realSumCong Physical.lieCoordinates3
+      (λ column → multiplyExact embedding
+        (matrix row column) (vector column)))
 
 embeddedMatrixOutput :
   RationalRealRingEmbedding →
   Jacobian.Lie3Matrix → Jacobian.Lie3Vector →
-  R207.Lie.SU2LieAlgebra
+  Lie.SU2LieAlgebra
 embeddedMatrixOutput embedding matrix vector =
   R207.embedRationalLie3 (additive embedding)
     (L1.applyKernel Physical.lieCoordinates3 matrix vector)
