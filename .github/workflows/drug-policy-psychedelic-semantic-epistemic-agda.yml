@@ -1,0 +1,124 @@
+name: Drug policy psychedelic semantic epistemic Agda check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - 'DASHI/Governance/WarOnDrugsHistoricalGenealogyExact.agda'
+      - 'DASHI/Governance/CountercultureDrugReclassificationHistoryExact.agda'
+      - 'DASHI/Governance/HistoricalDrugGovernanceClassifierExact.agda'
+      - 'DASHI/Governance/DrugGovernanceClassifierRevisionBackpropExact.agda'
+      - 'DASHI/Governance/DrugGovernanceClassifierEvolutionPathExact.agda'
+      - 'DASHI/Governance/HistoricalDrugClassifierCounterfactualDiscriminatorExact.agda'
+      - 'DASHI/Governance/FeministDrugClassificationAuthorityExact.agda'
+      - 'DASHI/Governance/DrugClassificationLegitimacyAssayExact.agda'
+      - 'DASHI/Governance/DrugCategoryReversalReclamationReconstitutionExact.agda'
+      - 'DASHI/Governance/ContestedDrugCategoryAtlasBidiExact.agda'
+      - 'DASHI/Governance/DrugCategoryPhilosophyOperatorAtlasExact.agda'
+      - 'DASHI/Governance/DrugCategoryPhilosophySelectiveReopeningExact.agda'
+      - 'DASHI/Governance/DrugCategoryMultiChartTranslationGeometryExact.agda'
+      - 'DASHI/Governance/DrugCategoryTranslationSelectiveReopeningExact.agda'
+      - 'DASHI/Governance/DrugCategoryTranslationPathResidueExact.agda'
+      - 'DASHI/Governance/DrugCategoryTranslationEdgeIndexedReopeningExact.agda'
+      - 'DASHI/Governance/DrugCategoryPartialTranslationPathCategoryExact.agda'
+      - 'DASHI/Governance/DrugCategoryComposedPathEdgeReopeningExact.agda'
+      - 'DASHI/Governance/DrugCategoryConsumerIndexedTranslationAdmissionExact.agda'
+      - 'DASHI/Governance/DrugCategoryConsumerRelativeQuotientInverseExact.agda'
+      - 'DASHI/Governance/DrugCategoryConsumerRelativeInverseCompositionExact.agda'
+      - 'DASHI/Governance/DrugCategoryQuotientInverseFailureBackpropExact.agda'
+      - 'DASHI/Governance/DrugCategoryExplicitConsumerQuotientExact.agda'
+      - 'DASHI/Governance/DrugCategoryClinicalQuotientRelativeFibreExact.agda'
+      - 'DASHI/Governance/DrugCategoryConsumerQuotientRefinementExact.agda'
+      - 'DASHI/Governance/DrugCategoryCostedQuotientDiscriminatorExact.agda'
+      - 'DASHI/Governance/DrugCategoryAdaptiveQuotientExperimentLoopExact.agda'
+      - 'DASHI/Governance/DrugGovernanceFiveProbeWorldExact.agda'
+      - 'DASHI/Governance/DrugGovernanceFiveProbeOptionConeExact.agda'
+      - 'DASHI/Governance/DrugGovernanceFiveProbeAdaptivePlannerExact.agda'
+      - 'DASHI/Governance/DrugGovernanceFarCrossPollinationCapstoneExact.agda'
+      - 'DASHI/Governance/DrugGovernanceErrorAllocationChillingExact.agda'
+      - 'DASHI/Governance/DrugPatientCategoryAntiDomesticationExact.agda'
+      - 'DASHI/Governance/DrugGovernanceCapabilityFunctioningExact.agda'
+      - 'DASHI/Governance/DrugGovernanceRepairMandateGateExact.agda'
+      - 'DASHI/Governance/DrugGovernanceErrorCapabilityMandateBidiCapstoneExact.agda'
+      - 'DASHI/Governance/DrugGovernanceErrorAsymmetryBurdenAllocationExact.agda'
+      - 'DASHI/Governance/DrugGovernanceErrorAsymmetryOptionConeExact.agda'
+      - 'DASHI/Governance/DrugGovernanceUncertaintyBurdenMandateBidiExact.agda'
+      - 'DASHI/Governance/DrugGovernanceErrorAsymmetryValidationExact.agda'
+      - 'DASHI/Governance/DrugGovernanceHistoricalBurdenExternalisationExact.agda'
+      - 'DASHI/Governance/DrugGovernanceBenefitCaptureRepairResidueExact.agda'
+      - 'DASHI/Governance/DrugGovernanceHistoricalBurdenPathExact.agda'
+      - 'DASHI/Governance/DrugGovernanceBurdenPathEdgeIndexedReopeningExact.agda'
+      - 'DASHI/Governance/DrugGovernanceHistoricalBurdenFarCrossPollinationExact.agda'
+      - 'DASHI/Governance/DrugGovernanceHistoricalBurdenPhilosophyAuditExact.agda'
+      - 'DASHI/Governance/DrugGovernanceHistoricalBurdenPathValidationExact.agda'
+      - 'DASHI/Governance/DrugGovernanceMultiAxisReparativeFibreExact.agda'
+      - 'DASHI/Governance/DrugGovernanceMultiAxisRepairPlannerExact.agda'
+      - 'DASHI/Governance/MenWhoStareAtGoatsEvidenceLayerExact.agda'
+      - 'DASHI/Governance/MenWhoStareAtGoatsReparativeAuditExact.agda'
+      - 'DASHI/Governance/InstitutionalExtraordinaryClaimReparationEverything.agda'
+      - 'DASHI/Governance/InstitutionalExtraordinaryClaimReparationValidationExact.agda'
+      - 'DASHI/Governance/TrumpDrugPolicyPsychedelicClassificationBidiExact.agda'
+      - 'DASHI/Governance/DrugWarReflectingPoolFailureBoundaryExact.agda'
+      - 'DASHI/Governance/DrugGovernanceIntersectionalAuthorityExact.agda'
+      - 'DASHI/Governance/DrugClassificationAsymmetryDiscriminatorExact.agda'
+      - 'DASHI/Governance/VeteranPsychedelicTraumaAccessBoundaryExact.agda'
+      - 'DASHI/Governance/PsychedelicIndigenousAuthorityIntersectionalExact.agda'
+      - 'DASHI/Governance/TrumpismDrugWarPsychedelicSemanticEpistemicCapstoneExact.agda'
+      - 'DASHI/Governance/DrugPolicyPsychedelicSemanticEpistemicEverything.agda'
+      - 'DASHI/Biology/KluverFormConstantPsychedelicBoundaryExact.agda'
+      - 'DASHI/DrugPolicyPsychedelicSemanticEpistemicValidation.agda'
+      - '.github/workflows/drug-policy-psychedelic-semantic-epistemic-agda.yml'
+
+concurrency:
+  group: drug-policy-psychedelic-semantic-epistemic-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: drug-policy-semepi-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+      - name: Check focused drug-policy semantic epistemic root with Agda 2.9
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export XDG_CACHE_HOME="$RUNNER_TEMP/dashi-cache"
+            export DASHI_STATUS_DIR="$RUNNER_TEMP/dashi-status"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export DASHI_NO_TMUX=1
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-drug-policy-semepi-check.log"
+            export AGDA_JOBS=2
+            scripts/run_agda29_parallel_check.sh \
+              DASHI/DrugPolicyPsychedelicSemanticEpistemicValidation.agda
+          ) > agda-drug-policy-semepi-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 240 agda-drug-policy-semepi-check.log
+          exit 0
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: drug-policy-psychedelic-semantic-epistemic-agda-log
+          path: agda-drug-policy-semepi-check.log
+          if-no-files-found: error
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
