@@ -86,6 +86,13 @@ consumerDispositionTruthStillUnresolved :
   ≡ Status.truthUnresolved
 consumerDispositionTruthStillUnresolved = refl
 
+replicatedEvidenceStillNotIndependent :
+  (lineage : Evidence.Narrative.EvidenceLineage) →
+  Evidence.Narrative.IndependentEvidencePair
+    lineage (Evidence.Narrative.replicateEvidence lineage) → ⊥
+replicatedEvidenceStillNotIndependent =
+  Evidence.replicationCannotPayIndependentEvidence
+
 ------------------------------------------------------------------------
 -- Identity live refinement: coarse collision -> provenance refinement ->
 -- separate identity closure.  The detailed equality theorem is owned by the
