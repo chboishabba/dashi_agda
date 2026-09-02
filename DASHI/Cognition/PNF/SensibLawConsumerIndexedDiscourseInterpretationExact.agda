@@ -1,6 +1,6 @@
 module DASHI.Cognition.PNF.SensibLawConsumerIndexedDiscourseInterpretationExact where
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
@@ -13,9 +13,9 @@ import DASHI.Cognition.PNF.SensibLawDocumentDiscourseContextRefinementExact as C
 ------------------------------------------------------------------------
 -- MULTI-CONSUMER DISCOURSE INTERPRETATION
 --
--- A text is not assigned exactly one consumer/domain.  One stable semantic
+-- A text is not assigned exactly one consumer/domain. One stable semantic
 -- carrier may simultaneously support general, legal, historical, cultural,
--- pedagogical or custom interpretations.  Consumer demand is therefore a
+-- pedagogical or custom interpretations. Consumer demand is therefore a
 -- collection of requested projections, never a parser mode or exclusive tag.
 ------------------------------------------------------------------------
 
@@ -48,7 +48,7 @@ record DiscourseActCandidate : Set where
     contentReference : String
     contextEvidenceReferences : List String
     candidateOnly : Bool
-    candidateOnlyIsTrue : candidateOnly ≡ false → ⊥
+    candidateOnlyIsTrue : candidateOnly ≡ true
 
 open DiscourseActCandidate public
 
@@ -67,7 +67,7 @@ record GeneralDiscourseResolution (candidate : DiscourseActCandidate) : Set wher
 open GeneralDiscourseResolution public
 
 ------------------------------------------------------------------------
--- Demand is plural.  Legal context is attached independently from whether
+-- Demand is plural. Legal context is attached independently from whether
 -- other consumers are simultaneously active.
 ------------------------------------------------------------------------
 
@@ -121,7 +121,7 @@ interpretForDemand {candidate} general demand =
     false refl
 
 ------------------------------------------------------------------------
--- Legal projection is one optional projection among potentially many.  It
+-- Legal projection is one optional projection among potentially many. It
 -- does not consume or erase historical/cultural/general/pedagogical views.
 ------------------------------------------------------------------------
 
