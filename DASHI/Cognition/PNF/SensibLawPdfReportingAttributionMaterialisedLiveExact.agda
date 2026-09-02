@@ -10,33 +10,22 @@ open import Data.Empty using (⊥)
 import DASHI.Cognition.PNF.NumericAuthority as Authority
 import DASHI.Cognition.PNF.SpacyNumericProjection as Spacy
 import DASHI.Reasoning.SpacyDependencyToCandidateLogicalPNFExact as Candidate
+import DASHI.Reasoning.SpacyExecutableSemanticRuleBankExact as RuleBank
 import DASHI.Cognition.PNF.SensibLawMaterialisedSpacyToOntologyVerticalExact as Compiler
-import DASHI.Cognition.PNF.SensibLawAttributionPropositionOccurrenceBidiExact as Attribution
 import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExact as Legal
+import DASHI.Cognition.PNF.SensibLawConsumerIndexedDiscourseInterpretationExact as Consumer
 import DASHI.Interop.SensibLawOntologyTopology as Ontology
 
 ------------------------------------------------------------------------
--- PDF-BACKED MATERIALISED REPORTING ATTRIBUTION VERTICAL
+-- PDF-BACKED MATERIALISED GENERAL-DISCOURSE ATTRIBUTION VERTICAL
 --
--- Source receipt:
---   sensiblaw.reporting-attribution-fixture.v0_1
---   text sha256 84eeb6e3b6900521796fd1d669b7f8b1998d652ce8fed0a98fc0486b01e2a01d
+-- Source receipt: sensiblaw.reporting-attribution-fixture.v0_1
+-- text sha256: 84eeb6e3b6900521796fd1d669b7f8b1998d652ce8fed0a98fc0486b01e2a01d
 --
--- The paragraph was extracted from the Native Title (New South Wales) Act
--- 1994 (NSW) PDF fixture and parsed with en_core_web_sm.  This module retains
--- the exact sentence-local parser structure needed by the semantic consumer:
---
---   nsubj(submitted, applicant)
---   ccomp(submitted, conferred)
---   nsubj(conferred, grant)
---   dobj(conferred, right)
---
--- The Python harness used a lexical reporting-lemma set for discovery and a
--- convenience surface check for source_candidate.  Those are NOT semantic
--- authority here.  The Agda attribution is paid by the actual dependency
--- structure above.  The raw ccomp edge is retained under its literal name
--- because the older generic DependencyShape currently has no ccomp constructor.
+-- This owner is domain-neutral through parser, clause and discourse structure.
+-- The same carrier may later receive a legal submission projection, but nothing
+-- here requires that legal consumer.
 ------------------------------------------------------------------------
 
 record ReportingFixtureProvenance : Set where
@@ -69,10 +58,7 @@ fixtureProvenance =
     "84eeb6e3b6900521796fd1d669b7f8b1998d652ce8fed0a98fc0486b01e2a01d"
     0 515 3
     "spaCy en_core_web_sm; Rust semantic-status branch be53eebe97509814ae13f01e9b02440b2ce624ec"
-    false refl
-    false refl
-    true refl
-    false refl
+    false refl false refl true refl false refl
 
 sentenceId : Authority.SentenceId
 sentenceId = Authority.sentenceId 1
@@ -82,12 +68,6 @@ sym = Authority.symbolId
 
 ann : Nat → Spacy.NumericAnnotation
 ann n = Spacy.annotationPresent (sym n)
-
-------------------------------------------------------------------------
--- Literal parser observations from sentence 1 of the receipt.  Numeric symbol
--- ids are local stable handles; source offsets, ordinals and heads are the
--- receipt coordinates that carry the parser identity here.
-------------------------------------------------------------------------
 
 applicantToken : Spacy.SpacyTokenObservation
 applicantToken =
@@ -124,20 +104,41 @@ rightToken =
     (Spacy.parserLemma (sym 2005)) (ann 3005) (ann 4005) (ann 5005)
     Spacy.nothing (Spacy.declaredHeadAt 221 230)
 
-------------------------------------------------------------------------
--- Existing canonical dependency candidates where the old DependencyShape
--- actually has the correct constructor.
-------------------------------------------------------------------------
-
 reportingSourceWitness : Candidate.DependencyWitness
 reportingSourceWitness =
   Candidate.dependencyWitness
     applicantToken submittedToken Candidate.nominalSubject
     "receipt sentence 1: nsubj(submitted, applicant), spans 137:146 -> 147:156"
 
+reportingSourceAdmission :
+  RuleBank.ShapeAdmission reportingSourceWitness Candidate.nominalSubject
+reportingSourceAdmission =
+  RuleBank.shapeAdmission refl
+    "rulebank-v0.2 general discourse subject admission"
+    "spaCy nsubj"
+
 reportingSourceCandidate : Candidate.CandidateSemanticFragment
 reportingSourceCandidate =
-  Candidate.subjectCandidate reportingSourceWitness "submit-e" "applicant"
+  RuleBank.nsubjActorRule reportingSourceWitness reportingSourceAdmission
+    "submit-e" "applicant"
+
+embeddedCcompWitness : Candidate.DependencyWitness
+embeddedCcompWitness =
+  Candidate.dependencyWitness
+    conferredToken submittedToken Candidate.clausalComplement
+    "receipt sentence 1: ccomp(submitted, conferred), spans 221:230 -> 147:156"
+
+embeddedCcompAdmission :
+  RuleBank.ShapeAdmission embeddedCcompWitness Candidate.clausalComplement
+embeddedCcompAdmission =
+  RuleBank.shapeAdmission refl
+    "rulebank-v0.2 general clausal complement admission"
+    "spaCy ccomp"
+
+embeddedContentCandidate : Candidate.CandidateSemanticFragment
+embeddedContentCandidate =
+  RuleBank.clausalComplementRule embeddedCcompWitness embeddedCcompAdmission
+    "submit-e" "confer-e"
 
 embeddedGrantWitness : Candidate.DependencyWitness
 embeddedGrantWitness =
@@ -159,53 +160,16 @@ embeddedRightCandidate : Candidate.CandidateSemanticFragment
 embeddedRightCandidate =
   Candidate.objectCandidate embeddedRightWitness "confer-e" "right"
 
-------------------------------------------------------------------------
--- The receipt's literal ccomp edge.  Do not coerce it into nominalModifier or
--- another older generic dependency constructor merely to fit that enum.
-------------------------------------------------------------------------
-
-record EmbeddedPropositionDependencyReceipt : Set where
-  constructor embeddedPropositionDependencyReceipt
-  field
-    reportingPredicate : Spacy.SpacyTokenObservation
-    embeddedPredicate : Spacy.SpacyTokenObservation
-    rawDependency : String
-    reportingSpan : String
-    embeddedSpan : String
-    sameSentence :
-      Spacy.sentence reportingPredicate ≡ Spacy.sentence embeddedPredicate
-    embeddedPropositionCandidate : Bool
-    embeddedPropositionCandidateIsTrue : embeddedPropositionCandidate ≡ true
-
-open EmbeddedPropositionDependencyReceipt public
-
-embeddedCcomp : EmbeddedPropositionDependencyReceipt
-embeddedCcomp =
-  embeddedPropositionDependencyReceipt
-    submittedToken
-    conferredToken
-    "ccomp"
-    "147:156"
-    "221:230"
-    refl
-    true refl
-
-------------------------------------------------------------------------
--- Reporting composition.  The source candidate and embedded clause are both
--- parser-supported but remain candidate-only.  The source identity is not
--- obtained from string search; the nsubj witness is retained as its evidence.
-------------------------------------------------------------------------
-
 embeddedFibre : Candidate.CandidateSemanticFibre
 embeddedFibre =
   Candidate.candidateSemanticFibre
-    (embeddedGrantCandidate ∷ embeddedRightCandidate ∷ [])
-    "PDF-backed embedded proposition fibre: grant as candidate actor; right as candidate patient"
+    (embeddedContentCandidate ∷ embeddedGrantCandidate ∷ embeddedRightCandidate ∷ [])
+    "PDF-backed general content-clause fibre; no legal classification required"
 
 embeddedFormula : Candidate.Formula
 embeddedFormula =
   Candidate._∧_
-    (Candidate.atom "Confer" (Candidate.eventTerm "confer-e" ∷ []))
+    (Candidate.formula embeddedContentCandidate)
     (Candidate._∧_
       (Candidate.formula embeddedGrantCandidate)
       (Candidate.formula embeddedRightCandidate))
@@ -216,11 +180,10 @@ record ReportingAttributionCompositionReceipt : Set where
     provenance : ReportingFixtureProvenance
     sourceDependency : Candidate.DependencyWitness
     sourceCandidate : Candidate.CandidateSemanticFragment
-    sourceCandidateIsCandidateOnly : Candidate.candidateOnly sourceCandidate ≡ true
-    embeddedDependency : EmbeddedPropositionDependencyReceipt
+    contentDependency : Candidate.DependencyWitness
+    contentCandidate : Candidate.CandidateSemanticFragment
     propositionFibre : Candidate.CandidateSemanticFibre
     propositionFormula : Candidate.Formula
-    sourceResolutionReference : String
     lexicalDiscoveryUsedOnlyToFindCandidate : Bool
     lexicalDiscoveryUsedOnlyToFindCandidateIsTrue :
       lexicalDiscoveryUsedOnlyToFindCandidate ≡ true
@@ -234,21 +197,50 @@ reportingComposition : ReportingAttributionCompositionReceipt
 reportingComposition =
   reportingAttributionCompositionReceipt
     fixtureProvenance
-    reportingSourceWitness
-    reportingSourceCandidate
-    refl
-    embeddedCcomp
-    embeddedFibre
-    embeddedFormula
-    "source candidate backed by literal nsubj(submitted, applicant); no surface-string identity closure"
-    true refl
-    false refl
+    reportingSourceWitness reportingSourceCandidate
+    embeddedCcompWitness embeddedContentCandidate
+    embeddedFibre embeddedFormula
+    true refl false refl
 
 ------------------------------------------------------------------------
--- Existing parser/PNF -> ITIR compiler now consumes the embedded proposition.
--- The ITIR claim is ABOUT the embedded `confer-e` event and is asserted by the
--- applicant perspective.  The reporting `submit-e` event remains provenance,
--- not the world occurrence asserted by the embedded proposition.
+-- Domain-neutral discourse candidate.  This is usable by ordinary text
+-- consumers without selecting any legal ontology or judicial status.
+------------------------------------------------------------------------
+
+discourseCandidate : Consumer.DiscourseActCandidate
+discourseCandidate =
+  Consumer.discourseActCandidate
+    reportingSourceCandidate
+    reportingSourceCandidate
+    embeddedContentCandidate
+    "actor:pdf-native-title:applicant"
+    "event:pdf-native-title:confer-exclusive-possession:1"
+    ( "nsubj(submitted, applicant)"
+    ∷ "ccomp(submitted, conferred)"
+    ∷ "paragraph sha256:84eeb6e3b6900521796fd1d669b7f8b1998d652ce8fed0a98fc0486b01e2a01d"
+    ∷ [])
+    true refl
+
+generalDiscourseResolution : Consumer.GeneralDiscourseResolution discourseCandidate
+generalDiscourseResolution =
+  Consumer.generalDiscourseResolution
+    Consumer.reportDiscourse
+    Status.assertedBySource
+    Status.assertedOccurrence
+    Status.truthUnresolved
+    Status.propositionSource
+    "source/content structure supports attributed report/assertion; legal role intentionally absent"
+    false refl
+
+generalConsumerInterpretation :
+  Consumer.ConsumerIndexedDiscourseInterpretation
+    discourseCandidate generalDiscourseResolution
+generalConsumerInterpretation =
+  Consumer.generalOnlyInterpretation generalDiscourseResolution
+
+------------------------------------------------------------------------
+-- Generic parser/PNF -> ITIR carrier.  IDs remain domain-neutral; later legal
+-- consumers may project this same carrier into a case/submission context.
 ------------------------------------------------------------------------
 
 ontologyInput : Compiler.ParserSemanticOntologyInput
@@ -259,18 +251,17 @@ ontologyInput =
     embeddedFibre
     embeddedFormula
     (Ontology.stableId "event:pdf-native-title:confer-exclusive-possession:1")
-    (Ontology.stableId "event-class:reported-legal-proposition")
-    (Ontology.stableId "claim:pdf-native-title:applicant-submission:1")
+    (Ontology.stableId "event-class:proposition-content")
+    (Ontology.stableId "claim:pdf-native-title:reported-content:1")
     (Ontology.stableId "perspective:pdf-native-title:applicant")
     (Ontology.stableId "actor:pdf-native-title:applicant")
-    "embedded proposition candidate: grant of Lease conferred a right of exclusive possession"
+    "content proposition candidate: grant of Lease conferred a right of exclusive possession"
     "The applicant submitted that the grant of the Lease ... conferred a right of exclusive possession ..."
-    "applicant submission perspective"
-    "reporting-attribution-fixture-v01 sentence 1 ccomp/nsubj/dobj structure"
-    "embedded proposition candidate preserved from materialised PDF-backed spaCy receipt"
-    "speaker/source candidate backed by nsubj(submitted, applicant); perspective identity supplied explicitly"
-    false refl
-    false refl
+    "source-attributed discourse perspective"
+    "reporting-attribution-fixture-v01 generic nsubj+ccomp content structure"
+    "content-clause candidate preserved from materialised PDF-backed spaCy receipt"
+    "speaker/source candidate backed by nsubj(submitted, applicant); identity supplied explicitly"
+    false refl false refl
 
 ontologyOutput : Compiler.ParserSemanticOntologyOutput ontologyInput
 ontologyOutput = Compiler.compileParserSemanticOntology ontologyInput
@@ -283,21 +274,6 @@ applicantPerspective = Compiler.perspective ontologyOutput
 
 applicantClaim : Ontology.Claim
 applicantClaim = Compiler.claim ontologyOutput
-
-sameClaimEvent :
-  Ontology.Claim.aboutEvent applicantClaim ≡ Ontology.Event.eventId embeddedEvent
-sameClaimEvent = refl
-
-sameClaimSpeaker :
-  Ontology.Claim.assertedBy applicantClaim
-  ≡ Ontology.Perspective.speakerId applicantPerspective
-sameClaimSpeaker = refl
-
-------------------------------------------------------------------------
--- Status refinement.  Parser construction begins mentioned-only.  The
--- reporting/source receipt licenses asserted-by-source / asserted-occurrence
--- status, but not occurrence admission or truth admission.
-------------------------------------------------------------------------
 
 sourceProposition : Status.PropositionStatusProduct
 sourceProposition =
@@ -323,30 +299,24 @@ sourceEventStatus =
 propositionReceipt : Status.PropositionResolutionReceipt
 propositionReceipt =
   Status.propositionResolutionReceipt
-    sourceProposition
-    Status.assertedBySource
-    Status.truthUnresolved
-    "nsubj(submitted, applicant) + ccomp(submitted, conferred) reporting composition"
+    sourceProposition Status.assertedBySource Status.truthUnresolved
+    "generic nsubj + clausalComplement discourse composition"
     ("PDF paragraph sha256:84eeb6e3b6900521796fd1d669b7f8b1998d652ce8fed0a98fc0486b01e2a01d" ∷ [])
-    "reporting-attribution parser/status fixture; candidate-only"
+    "general discourse resolution; no legal consumer required"
 
 occurrenceReceipt : Status.OccurrenceResolutionReceipt
 occurrenceReceipt =
   Status.occurrenceResolutionReceipt
-    sourceEventStatus
-    Status.assertedOccurrence
-    ("claim:pdf-native-title:applicant-submission:1" ∷ [])
-    ("materialised ccomp/nsubj/dobj parser evidence" ∷ [])
+    sourceEventStatus Status.assertedOccurrence
+    ("claim:pdf-native-title:reported-content:1" ∷ [])
+    ("materialised nsubj+ccomp+nsubj+dobj parser evidence" ∷ [])
     "asserted occurrence means asserted by source; no occurrence-admission authority"
 
 reportingLegalGate : Legal.SemanticLegalInputGate embeddedEvent
 reportingLegalGate =
   Legal.semanticLegalInputGate
-    sourceEventStatus
-    sourceProposition
-    refl
-    Status.applicabilityCandidate
-    Legal.assertionCandidateUse
+    sourceEventStatus sourceProposition refl
+    Status.applicabilityCandidate Legal.assertionCandidateUse
 
 reportingTruthStillUnresolved :
   Status.resultingTruthStatus propositionReceipt ≡ Status.truthUnresolved
@@ -362,14 +332,14 @@ reportingLegalUseIsCandidateOnly :
 reportingLegalUseIsCandidateOnly = refl
 
 ------------------------------------------------------------------------
--- Hard non-promotion boundaries surfaced by the PDF-backed fixture.
+-- Hard boundaries.
 ------------------------------------------------------------------------
 
 data ReportingLemmaChoosesSemanticStatus : Set where
 data SurfaceSourceSearchProvesAttribution : Set where
 data CcompEdgeProvesEmbeddedTruth : Set where
+data GeneralDiscourseAutomaticallyLegal : Set where
 data ApplicantSubmissionProvesOccurrence : Set where
-data ApplicantSubmissionAuthorizesLegalApplicability : Set where
 
 reportingLemmaDoesNotChooseSemanticStatus :
   ReportingLemmaChoosesSemanticStatus → ⊥
@@ -382,9 +352,9 @@ surfaceSearchDoesNotProveAttribution ()
 ccompDoesNotProveEmbeddedTruth : CcompEdgeProvesEmbeddedTruth → ⊥
 ccompDoesNotProveEmbeddedTruth ()
 
+generalDiscourseDoesNotAutomaticallyBecomeLegal :
+  GeneralDiscourseAutomaticallyLegal → ⊥
+generalDiscourseDoesNotAutomaticallyBecomeLegal ()
+
 submissionDoesNotProveOccurrence : ApplicantSubmissionProvesOccurrence → ⊥
 submissionDoesNotProveOccurrence ()
-
-submissionDoesNotAuthorizeAdmittedApplicability :
-  ApplicantSubmissionAuthorizesLegalApplicability → ⊥
-submissionDoesNotAuthorizeAdmittedApplicability ()
