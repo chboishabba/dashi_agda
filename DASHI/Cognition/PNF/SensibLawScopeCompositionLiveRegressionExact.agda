@@ -248,23 +248,11 @@ scopeDemoProposition =
     Status.assertedBySource
     Status.truthUnresolved
     Status.propositionSource
+    Status.evidenceNeutral
     Status.sourceEvidence
-      |>λ
-  where
-    infixl 0 |>λ
-    _|>λ : Status.EvidenceKind →
-      Status.PropositionStatusProduct
-    _|>λ evidenceKind =
-      Status.propositionStatusProduct
-        "proposition:scope-demo"
-        Status.assertedBySource
-        Status.truthUnresolved
-        Status.propositionSource
-        Status.evidenceNeutral
-        evidenceKind
-        Status.modalityKindUnresolved
-        Status.modalForceUnresolved
-        Status.scopeUnresolved
+    Status.modalityKindUnresolved
+    Status.modalForceUnresolved
+    Status.scopeUnresolved
 
 scopeDemoEvent : Status.EventStatusProduct
 scopeDemoEvent =
@@ -312,8 +300,8 @@ liveScopeTruthStillUnresolved = refl
 data ParserAdmissionIsModalResolution : Set where
 data ResolvedScopeIsOccurrenceAdmission : Set where
 
-a parserAdmissionDoesNotResolveModalForce : ParserAdmissionIsModalResolution → ⊥
-a parserAdmissionDoesNotResolveModalForce ()
+parserAdmissionDoesNotResolveModalForce : ParserAdmissionIsModalResolution → ⊥
+parserAdmissionDoesNotResolveModalForce ()
 
 resolvedScopeDoesNotAdmitOccurrence : ResolvedScopeIsOccurrenceAdmission → ⊥
 resolvedScopeDoesNotAdmitOccurrence ()
