@@ -19,6 +19,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _*_)
 open import Data.Product using (_×_; _,_)
 
+import DASHI.Algebra.Trit as Trit
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Foundations.Base369Ternary27CornerEightExact as Corners
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
@@ -92,12 +93,12 @@ sixAttachedHypercubeAddressCountIs4374 = refl
 record FaceCoordinateCube : Set where
   constructor faceCoordinateCube
   field
-    xNegativeCoordinate : DASHI.Algebra.Trit.Trit
-    xPositiveCoordinate : DASHI.Algebra.Trit.Trit
-    yNegativeCoordinate : DASHI.Algebra.Trit.Trit
-    yPositiveCoordinate : DASHI.Algebra.Trit.Trit
-    zNegativeCoordinate : DASHI.Algebra.Trit.Trit
-    zPositiveCoordinate : DASHI.Algebra.Trit.Trit
+    xNegativeCoordinate : Trit.Trit
+    xPositiveCoordinate : Trit.Trit
+    yNegativeCoordinate : Trit.Trit
+    yPositiveCoordinate : Trit.Trit
+    zNegativeCoordinate : Trit.Trit
+    zPositiveCoordinate : Trit.Trit
 open FaceCoordinateCube public
 
 x6ToFaceCoordinateCube : H.X6 → FaceCoordinateCube
