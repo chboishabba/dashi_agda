@@ -13,6 +13,7 @@ import DASHI.Cognition.PNF.SensibLawMaterialisedSpacyReferencePopulationLiveExac
 import DASHI.Cognition.PNF.SensibLawMaterialisedSpacyToOntologyVerticalExact as SpacyOntology
 import DASHI.Cognition.PNF.SensibLawMaterialisedSpacyEndToEndVerticalExact as SpacyEndToEnd
 import DASHI.Cognition.PNF.SensibLawPdfReportingAttributionMaterialisedLiveExact as PdfReporting
+import DASHI.Cognition.PNF.SensibLawPdfReportingDocumentContextLiveExact as PdfDocument
 import DASHI.Cognition.PNF.SensibLawAttributionPropositionOccurrenceBidiExact as Attribution
 import DASHI.Cognition.PNF.SensibLawScopeCompositionLiveRegressionExact as Scope
 import DASHI.Cognition.PNF.SensibLawDocumentDiscourseContextRefinementExact as Context
@@ -24,30 +25,17 @@ import DASHI.Cognition.PNF.SensibLawDocumentWorldSemanticStatusBidiExact as Worl
 
 ------------------------------------------------------------------------
 -- LIVE PHASE-C/D AGGREGATE
---
--- Unlike SensibLawSemanticBidiCampaignEverything, which records type-owner
--- availability, this root imports actual inhabited regressions from existing
--- repo producers.  It still does not claim corpus coverage or kernel validation.
 ------------------------------------------------------------------------
 
 data LiveCampaign : Set where
-  claimDiscourseLive : LiveCampaign
-  occurrenceLive : LiveCampaign
-  evidenceLineageLive : LiveCampaign
-  crossCarrierClaimLive : LiveCampaign
-  identityRefinementLive : LiveCampaign
-  referencePopulationLive : LiveCampaign
-  materialisedSpacyOntologyLive : LiveCampaign
-  materialisedSpacyEndToEndLive : LiveCampaign
-  pdfReportingAttributionLive : LiveCampaign
-  scopeCompositionLive : LiveCampaign
-  documentContextLive : LiveCampaign
-  participantLegalRoleLive : LiveCampaign
-  narrativeLegalGateLive : LiveCampaign
+  claimDiscourseLive occurrenceLive evidenceLineageLive crossCarrierClaimLive
+  identityRefinementLive referencePopulationLive materialisedSpacyOntologyLive
+  materialisedSpacyEndToEndLive pdfReportingAttributionLive
+  pdfReportingDocumentContextLive scopeCompositionLive documentContextLive
+  participantLegalRoleLive narrativeLegalGateLive : LiveCampaign
 
 data LiveCampaignState : Set where
-  inhabitedRegression : LiveCampaignState
-  typeOnly : LiveCampaignState
+  inhabitedRegression typeOnly : LiveCampaignState
 
 liveCampaignState : LiveCampaign → LiveCampaignState
 liveCampaignState claimDiscourseLive = inhabitedRegression
@@ -59,13 +47,14 @@ liveCampaignState referencePopulationLive = inhabitedRegression
 liveCampaignState materialisedSpacyOntologyLive = inhabitedRegression
 liveCampaignState materialisedSpacyEndToEndLive = inhabitedRegression
 liveCampaignState pdfReportingAttributionLive = inhabitedRegression
+liveCampaignState pdfReportingDocumentContextLive = inhabitedRegression
 liveCampaignState scopeCompositionLive = inhabitedRegression
 liveCampaignState documentContextLive = inhabitedRegression
 liveCampaignState participantLegalRoleLive = inhabitedRegression
 liveCampaignState narrativeLegalGateLive = inhabitedRegression
 
 ------------------------------------------------------------------------
--- Narrative status is now inhabited, not merely enumerated.
+-- Narrative status.
 ------------------------------------------------------------------------
 
 positiveClaimIsAssertedOccurrence :
@@ -90,7 +79,7 @@ claimTruthStillUnresolved :
 claimTruthStillUnresolved = refl
 
 ------------------------------------------------------------------------
--- Evidence/provenance and institutional planes do not overwrite truth.
+-- Evidence/provenance.
 ------------------------------------------------------------------------
 
 consumerDispositionTruthStillUnresolved :
@@ -105,7 +94,7 @@ repetitionStillNotTruthAuthority :
 repetitionStillNotTruthAuthority = Evidence.repetitionDoesNotRaiseTruthAuthority
 
 ------------------------------------------------------------------------
--- Identity live refinement and materialised parser reference population.
+-- Identity/reference.
 ------------------------------------------------------------------------
 
 identityLiveStatus : Status.IdentityStatus
@@ -162,8 +151,7 @@ materialisedSourceAssertionOnlyCandidateLegalUse :
 materialisedSourceAssertionOnlyCandidateLegalUse = refl
 
 ------------------------------------------------------------------------
--- PDF-backed legal reporting attribution is now a materialised parser-fed
--- vertical, not merely a typed Claim fixture.
+-- PDF-backed reporting attribution.
 ------------------------------------------------------------------------
 
 pdfReportingParserHasNoTruthAuthority :
@@ -177,8 +165,7 @@ pdfReportingParserHasNoOccurrenceAuthority =
   PdfReporting.parserAloneAuthorizesOccurrenceIsFalse PdfReporting.fixtureProvenance
 
 pdfReportingTruthStillUnresolved :
-  Status.resultingTruthStatus PdfReporting.propositionReceipt
-  ≡ Status.truthUnresolved
+  Status.resultingTruthStatus PdfReporting.propositionReceipt ≡ Status.truthUnresolved
 pdfReportingTruthStillUnresolved = PdfReporting.reportingTruthStillUnresolved
 
 pdfReportingOccurrenceIsSourceAssertionOnly :
@@ -199,7 +186,30 @@ pdfLexicalDiscoveryStillNotSemanticAuthority =
   PdfReporting.reportingLemmaDoesNotChooseSemanticStatus
 
 ------------------------------------------------------------------------
--- Scope composition is an inhabited parser-to-status chain.
+-- Same PDF-backed claim -> typed document-discourse context.
+------------------------------------------------------------------------
+
+pdfDocumentContextPreservesProposition :
+  Status.propositionReference
+    (Context.ContextualPropositionRefinement.refined PdfDocument.contextualRefinement)
+  ≡ Status.propositionReference PdfReporting.sourceProposition
+pdfDocumentContextPreservesProposition = PdfDocument.samePropositionAfterDocumentRefinement
+
+pdfDocumentContextIsSubmission :
+  Status.judicialStatus
+    (Context.ContextualLegalDiscourseProjection.legalStatus
+      PdfDocument.legalDiscourseProjection)
+  ≡ Status.submission
+pdfDocumentContextIsSubmission = PdfDocument.judicialDiscourseIsSubmissionCandidate
+
+pdfDocumentContextStillTruthUnresolved :
+  Status.truthStatus
+    (Context.ContextualPropositionRefinement.refined PdfDocument.contextualRefinement)
+  ≡ Status.truthUnresolved
+pdfDocumentContextStillTruthUnresolved = PdfDocument.submissionTruthStillUnresolved
+
+------------------------------------------------------------------------
+-- Scope composition.
 ------------------------------------------------------------------------
 
 scopeParserAdmissionStillNotSemanticResolution :
@@ -213,7 +223,7 @@ scopeResolutionStillNotOccurrenceAdmission =
   Scope.resolvedScopeDoesNotAdmitOccurrence
 
 ------------------------------------------------------------------------
--- Typed document context refines discourse status without rewriting truth.
+-- Typed document context.
 ------------------------------------------------------------------------
 
 submissionTruthStillUnresolved :
@@ -234,7 +244,7 @@ findingOccurrenceRequiresReceipt :
 findingOccurrenceRequiresReceipt = refl
 
 ------------------------------------------------------------------------
--- Generic Agent survives explicit, system-relative legal-role projection.
+-- Participant/legal role.
 ------------------------------------------------------------------------
 
 agentFixtureDoesNotGeneraliseToAllAgents :
@@ -248,7 +258,7 @@ crossSystemRoleDifferenceRemainsValid =
   LegalRole.crossSystemDifferenceIsNotContradiction
 
 ------------------------------------------------------------------------
--- Narrative -> legal gate is now fail-closed on occurrence/proposition status.
+-- Narrative -> legal gate.
 ------------------------------------------------------------------------
 
 allegationOnlyCandidateLegalUse :
@@ -280,7 +290,7 @@ findingLegalUseStillNotUniversalTruth :
 findingLegalUseStillNotUniversalTruth = refl
 
 ------------------------------------------------------------------------
--- Existing document/world boundaries remain in force.
+-- Existing document/world boundaries.
 ------------------------------------------------------------------------
 
 worldConsumerEquivalenceStillNotIdentity :
@@ -294,7 +304,6 @@ worldConsumerEquivalenceStillNotIdentity = World.consumerEquivalenceDoesNotIdent
 data LiveRegressionMeansCorpusCoverage : Set where
 data LiveRegressionMeansKernelValidated : Set where
 data LiveNarrativeStatusMeansLegalConclusion : Set where
-
 data OneMaterialisedVerticalMeansReportingCompilerComplete : Set where
 
 liveRegressionDoesNotMeanCorpusCoverage : LiveRegressionMeansCorpusCoverage → ⊥
