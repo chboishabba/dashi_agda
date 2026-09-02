@@ -3,6 +3,7 @@ module DASHI.Cognition.PNF.SensibLawNarrativeToLegalGateLiveBidiExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
+import DASHI.Cognition.PNF.NarrativeClaimProvenanceExact as ClaimNarrative
 import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 import DASHI.Cognition.PNF.SensibLawClaimLatticeNarrativeStatusLiveBidiExact as Narrative
 import DASHI.Cognition.PNF.SensibLawClaimAtomOntologyVerticalSliceExact as Vertical
@@ -63,7 +64,7 @@ allegedNarrative =
   Narrative.compileNarrativeModality
     "proposition:dog-walk-alleged"
     "event:dog-walk"
-    Narrative.Narrative.alleged
+    ClaimNarrative.alleged
 
 allegedCandidateGate : Legal.SemanticLegalInputGate Vertical.dogEvent
 allegedCandidateGate =
