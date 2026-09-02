@@ -12,11 +12,6 @@ import DASHI.Cognition.PNF.SensibLawDocumentDiscourseContextRefinementExact as C
 
 ------------------------------------------------------------------------
 -- MULTI-CONSUMER DISCOURSE INTERPRETATION
---
--- A text is not assigned exactly one consumer/domain. One stable semantic
--- carrier may simultaneously support general, legal, historical, cultural,
--- pedagogical or custom interpretations. Consumer demand is therefore a
--- collection of requested projections, never a parser mode or exclusive tag.
 ------------------------------------------------------------------------
 
 data ConsumerKind : Set where
@@ -65,11 +60,6 @@ record GeneralDiscourseResolution (candidate : DiscourseActCandidate) : Set wher
     legalVocabularyRequiredIsFalse : legalVocabularyRequired ≡ false
 
 open GeneralDiscourseResolution public
-
-------------------------------------------------------------------------
--- Demand is plural. Legal context is attached independently from whether
--- other consumers are simultaneously active.
-------------------------------------------------------------------------
 
 record ConsumerDemandProfile : Set where
   constructor consumerDemandProfile
@@ -121,8 +111,7 @@ interpretForDemand {candidate} general demand =
     false refl
 
 ------------------------------------------------------------------------
--- Legal projection is one optional projection among potentially many. It
--- does not consume or erase historical/cultural/general/pedagogical views.
+-- Legal projection is one optional projection among potentially many.
 ------------------------------------------------------------------------
 
 record LegalDiscourseProjection
@@ -178,6 +167,53 @@ casualCaseDiscussionDemand =
     (generalSemanticConsumer ∷ legalConsumer ∷ culturalConsumer ∷ [])
     []
     "casual discussion may contain legal material without supplying governed legal context"
+
+------------------------------------------------------------------------
+-- Degenerate compatibility views.
+--
+-- Older fixtures asked for one view at a time.  These wrappers preserve those
+-- call sites, but they are explicitly projections of the plural demand model
+-- and are not the canonical carrier.
+------------------------------------------------------------------------
+
+data OptionalLegalContext : Set where
+  noLegalContext : OptionalLegalContext
+  legalContext : Context.DocumentDiscourseFrame → OptionalLegalContext
+
+record ConsumerIndexedDiscourseInterpretation
+    (candidate : DiscourseActCandidate)
+    (general : GeneralDiscourseResolution candidate) : Set where
+  constructor consumerIndexedDiscourseInterpretation
+  field
+    consumer : ConsumerKind
+    legalContextSelection : OptionalLegalContext
+    underlyingCandidate : DiscourseActCandidate
+    underlyingCandidateSame : underlyingCandidate ≡ candidate
+    generalInterpretation : GeneralDiscourseResolution candidate
+    generalInterpretationSame : generalInterpretation ≡ general
+    parserRewrittenForConsumer : Bool
+    parserRewrittenForConsumerIsFalse : parserRewrittenForConsumer ≡ false
+
+open ConsumerIndexedDiscourseInterpretation public
+
+generalOnlyInterpretation :
+  {candidate : DiscourseActCandidate} →
+  (general : GeneralDiscourseResolution candidate) →
+  ConsumerIndexedDiscourseInterpretation candidate general
+generalOnlyInterpretation {candidate} general =
+  consumerIndexedDiscourseInterpretation
+    generalSemanticConsumer noLegalContext
+    candidate refl general refl false refl
+
+legalContextInterpretation :
+  {candidate : DiscourseActCandidate} →
+  (general : GeneralDiscourseResolution candidate) →
+  Context.DocumentDiscourseFrame →
+  ConsumerIndexedDiscourseInterpretation candidate general
+legalContextInterpretation {candidate} general frame =
+  consumerIndexedDiscourseInterpretation
+    legalConsumer (legalContext frame)
+    candidate refl general refl false refl
 
 ------------------------------------------------------------------------
 -- No-collapse laws.
