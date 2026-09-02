@@ -1,5 +1,6 @@
 module DASHI.Cognition.PNF.SensibLawSemanticLiveVerticalEverything where
 
+open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
@@ -9,6 +10,8 @@ import DASHI.Cognition.PNF.SensibLawNarrativeEvidenceConsumerStatusBidiExact as 
 import DASHI.Cognition.PNF.SensibLawClaimAtomOntologyVerticalSliceExact as Vertical
 import DASHI.Cognition.PNF.SensibLawSemanticResidualIdentityLiveBidiExact as Identity
 import DASHI.Cognition.PNF.SensibLawMaterialisedSpacyReferencePopulationLiveExact as Reference
+import DASHI.Cognition.PNF.SensibLawMaterialisedSpacyToOntologyVerticalExact as SpacyOntology
+import DASHI.Cognition.PNF.SensibLawMaterialisedSpacyEndToEndVerticalExact as SpacyEndToEnd
 import DASHI.Cognition.PNF.SensibLawScopeCompositionLiveRegressionExact as Scope
 import DASHI.Cognition.PNF.SensibLawDocumentDiscourseContextRefinementExact as Context
 import DASHI.Cognition.PNF.SensibLawDocumentDiscourseLiveVerticalExact as Document
@@ -32,6 +35,8 @@ data LiveCampaign : Set where
   crossCarrierClaimLive : LiveCampaign
   identityRefinementLive : LiveCampaign
   referencePopulationLive : LiveCampaign
+  materialisedSpacyOntologyLive : LiveCampaign
+  materialisedSpacyEndToEndLive : LiveCampaign
   scopeCompositionLive : LiveCampaign
   documentContextLive : LiveCampaign
   participantLegalRoleLive : LiveCampaign
@@ -48,6 +53,8 @@ liveCampaignState evidenceLineageLive = inhabitedRegression
 liveCampaignState crossCarrierClaimLive = inhabitedRegression
 liveCampaignState identityRefinementLive = inhabitedRegression
 liveCampaignState referencePopulationLive = inhabitedRegression
+liveCampaignState materialisedSpacyOntologyLive = inhabitedRegression
+liveCampaignState materialisedSpacyEndToEndLive = inhabitedRegression
 liveCampaignState scopeCompositionLive = inhabitedRegression
 liveCampaignState documentContextLive = inhabitedRegression
 liveCampaignState participantLegalRoleLive = inhabitedRegression
@@ -119,6 +126,37 @@ materialisedReferencePopulationCreatesAntecedentFibre = refl
 sameSentenceStillNotCoreferenceProof :
   Reference.SameSentenceProvesCoreference → ⊥
 sameSentenceStillNotCoreferenceProof = Reference.sameSentenceDoesNotProveCoreference
+
+------------------------------------------------------------------------
+-- Materialised spaCy -> ITIR ontology -> status -> legal-input gate.
+------------------------------------------------------------------------
+
+materialisedParserStillHasNoTruthAuthority :
+  SpacyOntology.parserAloneAuthorizesTruth SpacyOntology.readmeInput ≡ false
+materialisedParserStillHasNoTruthAuthority = SpacyOntology.readmeParserTruthAuthorityIsFalse
+
+materialisedParserStillHasNoOccurrenceAuthority :
+  SpacyOntology.parserAloneAuthorizesOccurrence SpacyOntology.readmeInput ≡ false
+materialisedParserStillHasNoOccurrenceAuthority =
+  SpacyOntology.readmeParserOccurrenceAuthorityIsFalse
+
+materialisedOntologyStartsMentionedOnly :
+  Status.occurrence
+    (DASHI.Cognition.PNF.SensibLawAttributionPropositionOccurrenceBidiExact.occurrence
+      (SpacyOntology.weld SpacyOntology.readmeOutput))
+  ≡ Status.mentionedEventuality
+materialisedOntologyStartsMentionedOnly = refl
+
+materialisedSourceAssertionStillTruthUnresolved :
+  Status.resultingTruthStatus SpacyEndToEnd.sourcePropositionReceipt
+  ≡ Status.truthUnresolved
+materialisedSourceAssertionStillTruthUnresolved = refl
+
+materialisedSourceAssertionOnlyCandidateLegalUse :
+  LegalChain.SemanticLegalInputGate.resultingApplicability
+    SpacyEndToEnd.sourceAssertionLegalGate
+  ≡ Status.applicabilityCandidate
+materialisedSourceAssertionOnlyCandidateLegalUse = refl
 
 ------------------------------------------------------------------------
 -- Scope composition is an inhabited parser-to-status chain.
@@ -217,6 +255,8 @@ data LiveRegressionMeansCorpusCoverage : Set where
 data LiveRegressionMeansKernelValidated : Set where
 data LiveNarrativeStatusMeansLegalConclusion : Set where
 
+data OneMaterialisedVerticalMeansReportingCompilerComplete : Set where
+
 liveRegressionDoesNotMeanCorpusCoverage : LiveRegressionMeansCorpusCoverage → ⊥
 liveRegressionDoesNotMeanCorpusCoverage ()
 
@@ -226,3 +266,7 @@ liveRegressionDoesNotMeanKernelValidation ()
 liveNarrativeStatusDoesNotMeanLegalConclusion :
   LiveNarrativeStatusMeansLegalConclusion → ⊥
 liveNarrativeStatusDoesNotMeanLegalConclusion ()
+
+materialisedVerticalDoesNotCompleteReportingCompiler :
+  OneMaterialisedVerticalMeansReportingCompilerComplete → ⊥
+materialisedVerticalDoesNotCompleteReportingCompiler ()
