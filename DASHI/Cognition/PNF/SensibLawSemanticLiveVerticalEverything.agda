@@ -8,6 +8,7 @@ import DASHI.Cognition.PNF.SensibLawClaimLatticeNarrativeStatusLiveBidiExact as 
 import DASHI.Cognition.PNF.SensibLawNarrativeEvidenceConsumerStatusBidiExact as Evidence
 import DASHI.Cognition.PNF.SensibLawClaimAtomOntologyVerticalSliceExact as Vertical
 import DASHI.Cognition.PNF.SensibLawSemanticResidualIdentityLiveBidiExact as Identity
+import DASHI.Cognition.PNF.SensibLawMaterialisedSpacyReferencePopulationLiveExact as Reference
 import DASHI.Cognition.PNF.SensibLawScopeCompositionLiveRegressionExact as Scope
 import DASHI.Cognition.PNF.SensibLawDocumentDiscourseContextRefinementExact as Context
 import DASHI.Cognition.PNF.SensibLawDocumentDiscourseLiveVerticalExact as Document
@@ -30,6 +31,7 @@ data LiveCampaign : Set where
   evidenceLineageLive : LiveCampaign
   crossCarrierClaimLive : LiveCampaign
   identityRefinementLive : LiveCampaign
+  referencePopulationLive : LiveCampaign
   scopeCompositionLive : LiveCampaign
   documentContextLive : LiveCampaign
   participantLegalRoleLive : LiveCampaign
@@ -45,6 +47,7 @@ liveCampaignState occurrenceLive = inhabitedRegression
 liveCampaignState evidenceLineageLive = inhabitedRegression
 liveCampaignState crossCarrierClaimLive = inhabitedRegression
 liveCampaignState identityRefinementLive = inhabitedRegression
+liveCampaignState referencePopulationLive = inhabitedRegression
 liveCampaignState scopeCompositionLive = inhabitedRegression
 liveCampaignState documentContextLive = inhabitedRegression
 liveCampaignState participantLegalRoleLive = inhabitedRegression
@@ -91,8 +94,7 @@ repetitionStillNotTruthAuthority :
 repetitionStillNotTruthAuthority = Evidence.repetitionDoesNotRaiseTruthAuthority
 
 ------------------------------------------------------------------------
--- Identity live refinement: coarse collision -> provenance refinement ->
--- separate identity closure.
+-- Identity live refinement and materialised parser reference population.
 ------------------------------------------------------------------------
 
 identityLiveStatus : Status.IdentityStatus
@@ -101,6 +103,22 @@ identityLiveStatus = Status.identityStatus Identity.exampleSubject
 identityCoarseQueryNotRetroactivelyUnique :
   Identity.LaterProvenanceMakesCoarseQueryUnique → ⊥
 identityCoarseQueryNotRetroactivelyUnique = Identity.laterProvenanceDoesNotRewriteCoarseQuery
+
+materialisedReferencePopulationLeavesIdentityOpen :
+  Status.identityStatus
+    (Reference.semanticSubject Reference.canonicalMaterialisedReferencePopulation)
+  ≡ Status.identityUnresolved
+materialisedReferencePopulationLeavesIdentityOpen = refl
+
+materialisedReferencePopulationCreatesAntecedentFibre :
+  Status.antecedentStatus
+    (Reference.semanticSubject Reference.canonicalMaterialisedReferencePopulation)
+  ≡ Status.antecedentCandidateSet
+materialisedReferencePopulationCreatesAntecedentFibre = refl
+
+sameSentenceStillNotCoreferenceProof :
+  Reference.SameSentenceProvesCoreference → ⊥
+sameSentenceStillNotCoreferenceProof = Reference.sameSentenceDoesNotProveCoreference
 
 ------------------------------------------------------------------------
 -- Scope composition is an inhabited parser-to-status chain.
