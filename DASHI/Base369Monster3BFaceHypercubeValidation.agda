@@ -9,6 +9,10 @@ import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Moonshine.Base369Ternary27FaceHypercubeAttachmentBidiExact as Face
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound13Exact as Round13
 
+positiveCorner : Corners.Corner3
+positiveCorner =
+  Corners.corner3 Corners.positiveOuter Corners.positiveOuter Corners.positiveOuter
+
 faceAxisRoundTrip :
   (face : Geometry.Face6) →
   Face.axis6ToFace (Face.faceToAxis6 face) ≡ face
@@ -20,22 +24,16 @@ axisFaceRoundTrip :
 axisFaceRoundTrip = Face.faceAfterAxis
 
 positiveCornerOnItsXFace :
-  Geometry.OnFace Geometry.xPositiveFace
-    (Corners.cornerPoint
-      (Corners.corner3 Corners.positiveOuter Corners.positiveOuter Corners.positiveOuter))
-positiveCornerOnItsXFace = Face.cornerOnIncidentXFace _
+  Geometry.OnFace Geometry.xPositiveFace (Corners.cornerPoint positiveCorner)
+positiveCornerOnItsXFace = Face.cornerOnIncidentXFace positiveCorner
 
 positiveCornerOnItsYFace :
-  Geometry.OnFace Geometry.yPositiveFace
-    (Corners.cornerPoint
-      (Corners.corner3 Corners.positiveOuter Corners.positiveOuter Corners.positiveOuter))
-positiveCornerOnItsYFace = Face.cornerOnIncidentYFace _
+  Geometry.OnFace Geometry.yPositiveFace (Corners.cornerPoint positiveCorner)
+positiveCornerOnItsYFace = Face.cornerOnIncidentYFace positiveCorner
 
 positiveCornerOnItsZFace :
-  Geometry.OnFace Geometry.zPositiveFace
-    (Corners.cornerPoint
-      (Corners.corner3 Corners.positiveOuter Corners.positiveOuter Corners.positiveOuter))
-positiveCornerOnItsZFace = Face.cornerOnIncidentZFace _
+  Geometry.OnFace Geometry.zPositiveFace (Corners.cornerPoint positiveCorner)
+positiveCornerOnItsZFace = Face.cornerOnIncidentZFace positiveCorner
 
 sixFaceHypercubeCount : Face.sixAttachedHypercubeAddressCount ≡ 4374
 sixFaceHypercubeCount = Face.sixAttachedHypercubeAddressCountIs4374
