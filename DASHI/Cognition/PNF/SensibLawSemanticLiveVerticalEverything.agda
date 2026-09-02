@@ -88,25 +88,30 @@ consumerDispositionTruthStillUnresolved = refl
 
 ------------------------------------------------------------------------
 -- Identity live refinement: coarse collision -> provenance refinement ->
--- separate identity closure.
+-- separate identity closure.  The detailed equality theorem is owned by the
+-- imported live module; this root pins its public boundary and final status.
 ------------------------------------------------------------------------
 
-identityNarrowingPreservesIdentity :
-  Status.identityCandidateSet ≡ Status.identityCandidateSet
-identityNarrowingPreservesIdentity = refl
+identityLiveStatus : Status.IdentityStatus
+identityLiveStatus = Status.identityStatus Identity.exampleSubject
 
-identityNarrowingTheoremIsLive :
-  Status.IdentityStatus
-identityNarrowingTheoremIsLive =
-  Status.identityStatus Identity.exampleSubject
+identityCoarseQueryNotRetroactivelyUnique :
+  Identity.LaterProvenanceMakesCoarseQueryUnique → ⊥
+identityCoarseQueryNotRetroactivelyUnique = Identity.laterProvenanceDoesNotRewriteCoarseQuery
 
 ------------------------------------------------------------------------
 -- Scope composition is an inhabited parser-to-status chain.
 ------------------------------------------------------------------------
 
-scopeQualificationStillDoesNotAdmitTruth :
-  Scope.ScopeQualifiedOccurrenceTruthWitness
-scopeQualificationStillDoesNotAdmitTruth = Scope.liveScopeTruthWitness
+scopeParserAdmissionStillNotSemanticResolution :
+  Scope.ParserAdmissionIsModalResolution → ⊥
+scopeParserAdmissionStillNotSemanticResolution =
+  Scope.parserAdmissionDoesNotResolveModalForce
+
+scopeResolutionStillNotOccurrenceAdmission :
+  Scope.ResolvedScopeIsOccurrenceAdmission → ⊥
+scopeResolutionStillNotOccurrenceAdmission =
+  Scope.resolvedScopeDoesNotAdmitOccurrence
 
 ------------------------------------------------------------------------
 -- Typed document context refines discourse status without rewriting truth.
@@ -133,9 +138,15 @@ findingOccurrenceRequiresReceipt = refl
 -- Generic Agent survives explicit, system-relative legal-role projection.
 ------------------------------------------------------------------------
 
-agentSurvivesDutyBearerProjection :
-  Status.agent ≡ Status.agent
-agentSurvivesDutyBearerProjection = refl
+agentFixtureDoesNotGeneraliseToAllAgents :
+  LegalRole.FixtureDutyBearerMakesAllAgentsDutyBearers → ⊥
+agentFixtureDoesNotGeneraliseToAllAgents =
+  LegalRole.fixtureDoesNotGeneraliseAgentToDutyBearer
+
+crossSystemRoleDifferenceRemainsValid :
+  LegalRole.CrossSystemRoleDifferenceIsContradiction → ⊥
+crossSystemRoleDifferenceRemainsValid =
+  LegalRole.crossSystemDifferenceIsNotContradiction
 
 ------------------------------------------------------------------------
 -- Narrative -> legal gate is now fail-closed on occurrence/proposition status.
