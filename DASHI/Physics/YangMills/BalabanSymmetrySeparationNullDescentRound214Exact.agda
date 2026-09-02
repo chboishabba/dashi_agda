@@ -18,7 +18,7 @@ module DASHI.Physics.YangMills.BalabanSymmetrySeparationNullDescentRound214Exact
 -- Thus null preservation is not a separate Yang-Mills theorem after the
 -- physical IBP weld and pairing separation have been paid.  This module
 -- constructs the R209 null-respecting operator directly from those two
--- receipts and therefore prunes one terminal leaf before R212 quotient descent.
+-- receipts and then feeds it immediately to R212's canonical quotient.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -33,6 +33,7 @@ import DASHI.Physics.YangMills.BalabanGaugeInvariantWavefunctionHamiltonianRound
 import DASHI.Physics.YangMills.BalabanFiniteMeasureWavefunctionL2BridgeRound205Exact as R205
 import DASHI.Physics.YangMills.BalabanFiniteMeasureIBPWavefunctionSymmetryRound206Exact as R206
 import DASHI.Physics.YangMills.BalabanNullQuotientHamiltonianDescentRound209Exact as R209
+import DASHI.Physics.YangMills.BalabanMeasureNullCanonicalQuotientHamiltonianRound212Exact as R212
 import DASHI.Physics.YangMills.BalabanWeakPairingSeparatesNullHamiltoniansRound213Exact as R213
 
 symmetryAndSeparationPreserveNull :
@@ -77,17 +78,60 @@ symmetryAndSeparationGiveNullRespectingOperator weld separation = record
       symmetryAndSeparationPreserveNull weld separation
   }
 
+-- Once the canonical R212 presentation of the SAME null relation is available,
+-- there is no further operator-descent choice: the quotient Hamiltonian is the
+-- canonical R212 descended action of the R206 operator.
+symmetryAndSeparationDescendedHamiltonian :
+  ∀ {N : Nat} {{nz : NonZero N}}
+    {group : Transport.GroupStructure}
+    {base : Cube4 N}
+    {Measure : Set}
+    {semantics : R205.FiniteMeasureWavefunctionSemantics group base Measure}
+    {Q : Set₁} →
+  R212.CanonicalMeasureNullQuotient group base Measure semantics Q →
+  R206.FiniteMeasureIBPWavefunctionSymmetryWeld group base Measure semantics →
+  R213.PairingSeparatesMeasureNullClasses group base Measure semantics →
+  Q → Q
+symmetryAndSeparationDescendedHamiltonian quotient weld separation =
+  R212.descendedHamiltonian quotient
+    (symmetryAndSeparationGiveNullRespectingOperator weld separation)
+
+symmetryAndSeparationQuotientSquareCommutes :
+  ∀ {N : Nat} {{nz : NonZero N}}
+    {group : Transport.GroupStructure}
+    {base : Cube4 N}
+    {Measure : Set}
+    {semantics : R205.FiniteMeasureWavefunctionSemantics group base Measure}
+    {Q : Set₁}
+    (quotient : R212.CanonicalMeasureNullQuotient
+      group base Measure semantics Q)
+    (weld : R206.FiniteMeasureIBPWavefunctionSymmetryWeld
+      group base Measure semantics)
+    (separation : R213.PairingSeparatesMeasureNullClasses
+      group base Measure semantics)
+    wavefunction →
+  symmetryAndSeparationDescendedHamiltonian quotient weld separation
+    (R212.project quotient wavefunction)
+  ≡ R212.project quotient (R202.act (R206.operator weld) wavefunction)
+symmetryAndSeparationQuotientSquareCommutes quotient weld separation =
+  R212.hamiltonianQuotientSquareCommutes quotient
+    (symmetryAndSeparationGiveNullRespectingOperator weld separation)
+
 symmetrySeparationNullDescentRound214Level : ProofLevel
 symmetrySeparationNullDescentRound214Level = machineChecked
 
 nullPreservationNoLongerIndependentRound214Level : ProofLevel
 nullPreservationNoLongerIndependentRound214Level = machineChecked
 
+symmetrySeparationCanonicalQuotientHamiltonianRound214Level : ProofLevel
+symmetrySeparationCanonicalQuotientHamiltonianRound214Level = machineChecked
+
 -- The remaining physical payments are now upstream and same-object:
 --   * inhabit the R205 semantics on the literal Balaban measure;
 --   * inhabit R213 separation on that same pairing;
---   * instantiate the R206 IBP weld with the literal finite YM Hamiltonian.
--- Once these exist, R209 null preservation is compiler output above.
+--   * instantiate the R206 IBP weld with the literal finite YM Hamiltonian;
+--   * provide the canonical presentation/completion of that SAME null quotient.
+-- R209 null preservation and the pre-completion quotient H are compiler output.
 literalBalabanMeasureSemanticsRound214Level : ProofLevel
 literalBalabanMeasureSemanticsRound214Level = conditional
 
@@ -96,3 +140,6 @@ literalBalabanPairingSeparationRound214Level = conditional
 
 literalPhysicalYMIBPWeldRound214Level : ProofLevel
 literalPhysicalYMIBPWeldRound214Level = conditional
+
+literalBalabanCanonicalNullQuotientRound214Level : ProofLevel
+literalBalabanCanonicalNullQuotientRound214Level = conditional
