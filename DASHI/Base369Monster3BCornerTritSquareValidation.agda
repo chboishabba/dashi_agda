@@ -2,6 +2,7 @@ module DASHI.Base369Monster3BCornerTritSquareValidation where
 
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+import Data.Fin.Base as Fin
 
 import DASHI.Foundations.Base369Ternary27CornerEightExact as Corners
 import DASHI.Moonshine.Base369CompletedTenTritSquareMultiplicityBidiExact as Completed
@@ -11,7 +12,7 @@ import DASHI.Moonshine.Base369MonsterThreeLocalEightToSixPlusTwoCarrierBidiExact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound12Exact as Round12
 
 negativeCornerChartIsGeometric :
-  Corners.fin8ToCorner Data.Fin.Base.zero
+  Corners.fin8ToCorner Fin.zero
   ≡ Corners.corner3 Corners.negativeOuter Corners.negativeOuter Corners.negativeOuter
 negativeCornerChartIsGeometric = refl
 
