@@ -25,12 +25,16 @@ round213WeakPairingSeparationCompiler =
 
 -- R214 removes null preservation as an independent physical theorem once the
 -- SAME R205 pairing has both the R206 symmetry receipt and the R213 separation
--- receipt.
+-- receipt. It also compiles those receipts directly through the canonical R212
+-- quotient presentation.
 round214SymmetrySeparationNullDescent =
   R214.symmetrySeparationNullDescentRound214Level
 
 round214NullPreservationNoLongerIndependent =
   R214.nullPreservationNoLongerIndependentRound214Level
+
+round214CanonicalQuotientHamiltonianCompiler =
+  R214.symmetrySeparationCanonicalQuotientHamiltonianRound214Level
 
 -- Remaining same-object physical inputs.
 round214LiteralBalabanMeasureSemantics =
@@ -41,3 +45,6 @@ round214LiteralBalabanPairingSeparation =
 
 round214LiteralPhysicalYMIBPWeld =
   R214.literalPhysicalYMIBPWeldRound214Level
+
+round214LiteralBalabanCanonicalNullQuotient =
+  R214.literalBalabanCanonicalNullQuotientRound214Level
