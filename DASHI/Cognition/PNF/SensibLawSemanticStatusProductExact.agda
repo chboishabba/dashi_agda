@@ -53,6 +53,7 @@ data OccurrenceStatus : Set where
   assertedOccurrence : OccurrenceStatus
   reportedOccurrence : OccurrenceStatus
   allegedOccurrence : OccurrenceStatus
+  deniedOccurrence : OccurrenceStatus
   hypotheticalOccurrence : OccurrenceStatus
   conditionalOccurrence : OccurrenceStatus
   negatedOccurrence : OccurrenceStatus
