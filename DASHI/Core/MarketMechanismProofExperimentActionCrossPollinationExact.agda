@@ -3,6 +3,7 @@ module DASHI.Core.MarketMechanismProofExperimentActionCrossPollinationExact wher
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 import DASHI.Core.HistoryIndexedProofExperimentActionLoopExact as Loop
 import DASHI.Economics.MarketTransitionGrammarCyberneticsExact as Market
