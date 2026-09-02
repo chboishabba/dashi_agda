@@ -32,8 +32,8 @@ import DASHI.Promotion.SystemicDistressReframingBoundary as Distress
 
 lopezPsychologisationIsIntersectionalShape :
   INF.NonFactorabilityWitness
-    (lambda state -> Lopez.individualObservation state Lopez.samePerson)
-    (lambda state -> Lopez.structuralDependency state Lopez.samePerson)
+    (λ state → Lopez.individualObservation state Lopez.samePerson)
+    (λ state → Lopez.structuralDependency state Lopez.samePerson)
 lopezPsychologisationIsIntersectionalShape =
   INF.nonFactorabilityWitness
     Lopez.exploitativeLabourFrame
@@ -42,12 +42,12 @@ lopezPsychologisationIsIntersectionalShape =
     Lopez.structuralDependenciesDiffer
 
 individualRechartingStillCannotRecoverStructuralDependency :
-  forall {Recharted : Set} ->
-  (rechart : Lopez.IndividualObservation -> Recharted) ->
+  ∀ {Recharted : Set} →
+  (rechart : Lopez.IndividualObservation → Recharted) →
   INF.FactorsThrough
-    (lambda state -> rechart (Lopez.individualObservation state Lopez.samePerson))
-    (lambda state -> Lopez.structuralDependency state Lopez.samePerson) ->
-  bottom
+    (λ state → rechart (Lopez.individualObservation state Lopez.samePerson))
+    (λ state → Lopez.structuralDependency state Lopez.samePerson) →
+  ⊥
 individualRechartingStillCannotRecoverStructuralDependency rechart =
   INF.rechartingCannotRecoverErasedPhenomenon
     rechart lopezPsychologisationIsIntersectionalShape
@@ -72,7 +72,7 @@ intersectionalNonFactorabilityRetained = INF.canonicalIntersectionalNonFactorabi
 ------------------------------------------------------------------------
 
 publicCategoryStillCannotRecoverSubjectFormation :
-  INF.FactorsThrough Trinh.publicCategory Trinh.subjectFormation -> bottom
+  INF.FactorsThrough Trinh.publicCategory Trinh.subjectFormation → ⊥
 publicCategoryStillCannotRecoverSubjectFormation =
   Trinh.publicCategoryCannotRecoverSubjectFormation
 
@@ -143,26 +143,26 @@ data CriticalFormalSimilarityMergesSources : Set where
 
 data SystemicCritiqueErasesBodilyOrClinicalAxes : Set where
 
-lopezRiosNotIdentifiedWithIntersectionality : LopezRiosEqualsIntersectionality -> bottom
+lopezRiosNotIdentifiedWithIntersectionality : LopezRiosEqualsIntersectionality → ⊥
 lopezRiosNotIdentifiedWithIntersectionality ()
 
-lopezRiosNotIdentifiedWithLacanianTheory : LopezRiosEqualsLacanianTheory -> bottom
+lopezRiosNotIdentifiedWithLacanianTheory : LopezRiosEqualsLacanianTheory → ⊥
 lopezRiosNotIdentifiedWithLacanianTheory ()
 
-lopezRiosNotIdentifiedWithFeministTheory : LopezRiosEqualsFeministTheory -> bottom
+lopezRiosNotIdentifiedWithFeministTheory : LopezRiosEqualsFeministTheory → ⊥
 lopezRiosNotIdentifiedWithFeministTheory ()
 
 marxLabourSourceDoesNotProvePsychologicalCause :
-  MarxLabourSourceProvesPsychologicalCause -> bottom
+  MarxLabourSourceProvesPsychologicalCause → ⊥
 marxLabourSourceDoesNotProvePsychologicalCause ()
 
-ideologyBridgeDoesNotDiagnosePerson : IdeologyBridgeDiagnosesPerson -> bottom
+ideologyBridgeDoesNotDiagnosePerson : IdeologyBridgeDiagnosesPerson → ⊥
 ideologyBridgeDoesNotDiagnosePerson ()
 
-formalSimilarityDoesNotMergeSources : CriticalFormalSimilarityMergesSources -> bottom
+formalSimilarityDoesNotMergeSources : CriticalFormalSimilarityMergesSources → ⊥
 formalSimilarityDoesNotMergeSources ()
 
-systemicCritiqueDoesNotEraseOtherAxes : SystemicCritiqueErasesBodilyOrClinicalAxes -> bottom
+systemicCritiqueDoesNotEraseOtherAxes : SystemicCritiqueErasesBodilyOrClinicalAxes → ⊥
 systemicCritiqueDoesNotEraseOtherAxes ()
 
 record LopezRiosCriticalTheoryPsychologyBoundary : Set where
