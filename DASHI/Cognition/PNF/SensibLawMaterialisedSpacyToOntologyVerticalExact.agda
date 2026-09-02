@@ -40,7 +40,9 @@ record ParserSemanticOntologyInput : Set where
     semanticResolutionReference : String
     sourcePerspectiveReference : String
     parserAloneAuthorizesTruth : Bool
+    parserAloneAuthorizesTruthIsFalse : parserAloneAuthorizesTruth ≡ false
     parserAloneAuthorizesOccurrence : Bool
+    parserAloneAuthorizesOccurrenceIsFalse : parserAloneAuthorizesOccurrence ≡ false
 
 open ParserSemanticOntologyInput public
 
@@ -128,7 +130,9 @@ readmeInput =
     "reviewed candidate PNF from materialised trace; scope history retained"
     "source perspective supplied by document provenance, not parser lexical inference"
     false
+    refl
     false
+    refl
 
 readmeOutput : ParserSemanticOntologyOutput readmeInput
 readmeOutput = compileParserSemanticOntology readmeInput
@@ -163,6 +167,14 @@ readmeParserFibrePreserved = refl
 readmeParserFormulaPreserved :
   propositionFormulaPreserved readmeOutput ≡ Trace.finalFormula
 readmeParserFormulaPreserved = refl
+
+readmeParserTruthAuthorityIsFalse :
+  parserAloneAuthorizesTruth readmeInput ≡ false
+readmeParserTruthAuthorityIsFalse = parserAloneAuthorizesTruthIsFalse readmeInput
+
+readmeParserOccurrenceAuthorityIsFalse :
+  parserAloneAuthorizesOccurrence readmeInput ≡ false
+readmeParserOccurrenceAuthorityIsFalse = parserAloneAuthorizesOccurrenceIsFalse readmeInput
 
 ------------------------------------------------------------------------
 -- The ontology weld intentionally begins at assertion/mention, never truth or
