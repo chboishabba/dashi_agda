@@ -92,8 +92,7 @@ repetitionStillNotTruthAuthority = Evidence.repetitionDoesNotRaiseTruthAuthority
 
 ------------------------------------------------------------------------
 -- Identity live refinement: coarse collision -> provenance refinement ->
--- separate identity closure.  The detailed equality theorem is owned by the
--- imported live module; this root pins its public boundary and final status.
+-- separate identity closure.
 ------------------------------------------------------------------------
 
 identityLiveStatus : Status.IdentityStatus
