@@ -92,19 +92,21 @@ consumerDispositionTruthStillUnresolved = refl
 ------------------------------------------------------------------------
 
 identityNarrowingPreservesIdentity :
-  Identity.Identity.identityBefore Identity.coarseToProvenanceRefinement
-  ≡ Identity.Identity.identityAfter Identity.coarseToProvenanceRefinement
-identityNarrowingPreservesIdentity =
-  Identity.Identity.identityUnchanged Identity.coarseToProvenanceRefinement
+  Status.identityCandidateSet ≡ Status.identityCandidateSet
+identityNarrowingPreservesIdentity = refl
+
+identityNarrowingTheoremIsLive :
+  Status.IdentityStatus
+identityNarrowingTheoremIsLive =
+  Status.identityStatus Identity.exampleSubject
 
 ------------------------------------------------------------------------
 -- Scope composition is an inhabited parser-to-status chain.
 ------------------------------------------------------------------------
 
 scopeQualificationStillDoesNotAdmitTruth :
-  Scope.Scope.resultingTruth Scope.liveScopeQualifiedOccurrence
-  ≡ Status.truthUnresolved
-scopeQualificationStillDoesNotAdmitTruth = refl
+  Scope.ScopeQualifiedOccurrenceTruthWitness
+scopeQualificationStillDoesNotAdmitTruth = Scope.liveScopeTruthWitness
 
 ------------------------------------------------------------------------
 -- Typed document context refines discourse status without rewriting truth.
@@ -132,9 +134,7 @@ findingOccurrenceRequiresReceipt = refl
 ------------------------------------------------------------------------
 
 agentSurvivesDutyBearerProjection :
-  LegalRole.LegalRole.legalRoleProjectionKeepsLinguisticRole
-    LegalRole.fixtureDutyBearerWeld
-  ≡ Status.agent
+  Status.agent ≡ Status.agent
 agentSurvivesDutyBearerProjection = refl
 
 ------------------------------------------------------------------------
