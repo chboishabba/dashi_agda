@@ -41,6 +41,8 @@ on:
       - 'DASHI/Physics/YangMills/BalabanCMP98Equation124QSourceRecoveryRound211Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanMeasureNullCanonicalQuotientHamiltonianRound212Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanWeakPairingSeparatesNullHamiltoniansRound213Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanSymmetrySeparationNullDescentRound214Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanTerminalHamiltonianRound214Validation.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP98Equation124GroupedCorrectionRound213Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP98LiteralCorrectionGroupingRound214Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP98Equation124QSourceRound214Validation.agda'
@@ -76,9 +78,10 @@ jobs:
             DASHI/Physics/YangMills/BalabanUniformResidualMajorant.agda \
             DASHI/Physics/YangMills/BalabanCMP98Equation119Round191Validation.agda \
             DASHI/Physics/YangMills/BalabanCMP98Equation124QSourceRound214Validation.agda \
+            DASHI/Physics/YangMills/BalabanTerminalHamiltonianRound214Validation.agda \
             > /tmp/balaban-finite-frontier.log 2>&1
           status=$?
-          tail -n 280 /tmp/balaban-finite-frontier.log
+          tail -n 320 /tmp/balaban-finite-frontier.log
           echo "status=$status" >> "$GITHUB_OUTPUT"
           exit 0
       - name: Upload focused Agda log
