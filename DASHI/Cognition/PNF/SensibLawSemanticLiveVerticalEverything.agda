@@ -12,6 +12,7 @@ import DASHI.Cognition.PNF.SensibLawSemanticResidualIdentityLiveBidiExact as Ide
 import DASHI.Cognition.PNF.SensibLawMaterialisedSpacyReferencePopulationLiveExact as Reference
 import DASHI.Cognition.PNF.SensibLawMaterialisedSpacyToOntologyVerticalExact as SpacyOntology
 import DASHI.Cognition.PNF.SensibLawMaterialisedSpacyEndToEndVerticalExact as SpacyEndToEnd
+import DASHI.Cognition.PNF.SensibLawAttributionPropositionOccurrenceBidiExact as Attribution
 import DASHI.Cognition.PNF.SensibLawScopeCompositionLiveRegressionExact as Scope
 import DASHI.Cognition.PNF.SensibLawDocumentDiscourseContextRefinementExact as Context
 import DASHI.Cognition.PNF.SensibLawDocumentDiscourseLiveVerticalExact as Document
@@ -142,8 +143,7 @@ materialisedParserStillHasNoOccurrenceAuthority =
 
 materialisedOntologyStartsMentionedOnly :
   Status.occurrence
-    (DASHI.Cognition.PNF.SensibLawAttributionPropositionOccurrenceBidiExact.occurrence
-      (SpacyOntology.weld SpacyOntology.readmeOutput))
+    (Attribution.occurrence (SpacyOntology.weld SpacyOntology.readmeOutput))
   ≡ Status.mentionedEventuality
 materialisedOntologyStartsMentionedOnly = refl
 
