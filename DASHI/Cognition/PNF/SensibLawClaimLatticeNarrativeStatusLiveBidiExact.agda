@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import LoomRelationAlgebra as Relation
 import ClaimReconciliationObjectLattice as Claims
 import DASHI.Cognition.PNF.NarrativeClaimProvenanceExact as Narrative
 import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
@@ -76,7 +77,7 @@ record LiveClaimOccurrenceReceipt (claim : Claims.ClaimAtom) : Set where
     sameOccurrence :
       Status.occurrence eventStatus ≡ resultingOccurrence
     sourcePromotionStillFalse :
-      Claims.claimPromotionState claim ≡ Claims.Relation.promotionFalse
+      Claims.claimPromotionState claim ≡ Relation.promotionFalse
 
 open LiveClaimOccurrenceReceipt public
 
