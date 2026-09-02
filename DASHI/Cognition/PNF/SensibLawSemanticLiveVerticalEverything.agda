@@ -86,12 +86,9 @@ consumerDispositionTruthStillUnresolved :
   ≡ Status.truthUnresolved
 consumerDispositionTruthStillUnresolved = refl
 
-replicatedEvidenceStillNotIndependent :
-  (lineage : Evidence.Narrative.EvidenceLineage) →
-  Evidence.Narrative.IndependentEvidencePair
-    lineage (Evidence.Narrative.replicateEvidence lineage) → ⊥
-replicatedEvidenceStillNotIndependent =
-  Evidence.replicationCannotPayIndependentEvidence
+repetitionStillNotTruthAuthority :
+  Evidence.RepetitionRaisesTruthAuthority → ⊥
+repetitionStillNotTruthAuthority = Evidence.repetitionDoesNotRaiseTruthAuthority
 
 ------------------------------------------------------------------------
 -- Identity live refinement: coarse collision -> provenance refinement ->
