@@ -109,6 +109,17 @@ import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact
 import DASHI.Moonshine.Base369Monster3BShortestFrontierCapstoneBidiExact
 import DASHI.Base369Monster3BShortestFrontierValidation
 
+-- Character-level regular C3 bulk is now exact:
+--   W|C3 = 65610 Reg(C3) + 53*1,
+-- hence 196830 is the balanced three-phase character bulk.  The literal
+-- three-phase owner exposes W_1, W_zeta and W_zeta^2 as fibres of the SAME
+-- selected VOA action and isolates the next theorem: recognize the regular
+-- 729x90 block inside W_1, then the complementary R_53 is a same-action
+-- residual rather than a numerical tail.
+import DASHI.Moonshine.Monster3BRegularC3BulkResidualFiftyThreeBidiExact
+import DASHI.Moonshine.Monster3BLiteralThreePhaseRegularResidualBidiExact
+import DASHI.Base369Monster3BRegularResidualValidation
+
 -- Same-action continuation on Fin 90.  The literal 78 block is now additionally
 -- exposed to an E6 candidate recognition, but E6 semantics requires an actual
 -- action intertwiner; 78=52+26 is not promotion authority.
@@ -122,6 +133,7 @@ import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound6Exact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound7Exact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound8Exact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound9Exact
+import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound10Exact
 
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact
 
