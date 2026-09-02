@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Moonshine.Base369Monster3BMultiplicityTenByNineBidiExact as Ninety
 import DASHI.Moonshine.Base369Pointed729NestedNinetyBidiExact as Nested
 import DASHI.Moonshine.Base369MonsterThreeLocalTenByNineRefactorBidiExact as ThreeLocal
+import DASHI.Moonshine.MonsterThreeLocalE8LeechBridgeExact as ThreeLocalSource
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound11Exact as Round11
 
 ninetyIsTypedTenByNine : Ninety.tenByNineDimension ≡ 90
@@ -22,9 +23,7 @@ nestedThreePhase196830IsExact :
 nestedThreePhase196830IsExact = Nested.nestedThreePhaseBulkDimensionIs196830
 
 threeLocalRefactor65610IsExact :
-  Ninety.tenByNineDimension *
-    DASHI.Moonshine.MonsterThreeLocalE8LeechBridgeExact.threePowerSix
-  ≡ 65610
+  Ninety.tenByNineDimension * ThreeLocalSource.threePowerSix ≡ 65610
 threeLocalRefactor65610IsExact = ThreeLocal.tenByNineTimesThreePowerSixIs65610
 
 sameActualActionRequired :
