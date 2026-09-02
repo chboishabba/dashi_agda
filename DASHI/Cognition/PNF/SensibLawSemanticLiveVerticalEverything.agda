@@ -12,6 +12,7 @@ import DASHI.Cognition.PNF.SensibLawSemanticResidualIdentityLiveBidiExact as Ide
 import DASHI.Cognition.PNF.SensibLawMaterialisedSpacyReferencePopulationLiveExact as Reference
 import DASHI.Cognition.PNF.SensibLawMaterialisedSpacyToOntologyVerticalExact as SpacyOntology
 import DASHI.Cognition.PNF.SensibLawMaterialisedSpacyEndToEndVerticalExact as SpacyEndToEnd
+import DASHI.Cognition.PNF.SensibLawPdfReportingAttributionMaterialisedLiveExact as PdfReporting
 import DASHI.Cognition.PNF.SensibLawAttributionPropositionOccurrenceBidiExact as Attribution
 import DASHI.Cognition.PNF.SensibLawScopeCompositionLiveRegressionExact as Scope
 import DASHI.Cognition.PNF.SensibLawDocumentDiscourseContextRefinementExact as Context
@@ -38,6 +39,7 @@ data LiveCampaign : Set where
   referencePopulationLive : LiveCampaign
   materialisedSpacyOntologyLive : LiveCampaign
   materialisedSpacyEndToEndLive : LiveCampaign
+  pdfReportingAttributionLive : LiveCampaign
   scopeCompositionLive : LiveCampaign
   documentContextLive : LiveCampaign
   participantLegalRoleLive : LiveCampaign
@@ -56,6 +58,7 @@ liveCampaignState identityRefinementLive = inhabitedRegression
 liveCampaignState referencePopulationLive = inhabitedRegression
 liveCampaignState materialisedSpacyOntologyLive = inhabitedRegression
 liveCampaignState materialisedSpacyEndToEndLive = inhabitedRegression
+liveCampaignState pdfReportingAttributionLive = inhabitedRegression
 liveCampaignState scopeCompositionLive = inhabitedRegression
 liveCampaignState documentContextLive = inhabitedRegression
 liveCampaignState participantLegalRoleLive = inhabitedRegression
@@ -157,6 +160,43 @@ materialisedSourceAssertionOnlyCandidateLegalUse :
     SpacyEndToEnd.sourceAssertionLegalGate
   ≡ Status.applicabilityCandidate
 materialisedSourceAssertionOnlyCandidateLegalUse = refl
+
+------------------------------------------------------------------------
+-- PDF-backed legal reporting attribution is now a materialised parser-fed
+-- vertical, not merely a typed Claim fixture.
+------------------------------------------------------------------------
+
+pdfReportingParserHasNoTruthAuthority :
+  PdfReporting.parserAloneAuthorizesTruth PdfReporting.fixtureProvenance ≡ false
+pdfReportingParserHasNoTruthAuthority =
+  PdfReporting.parserAloneAuthorizesTruthIsFalse PdfReporting.fixtureProvenance
+
+pdfReportingParserHasNoOccurrenceAuthority :
+  PdfReporting.parserAloneAuthorizesOccurrence PdfReporting.fixtureProvenance ≡ false
+pdfReportingParserHasNoOccurrenceAuthority =
+  PdfReporting.parserAloneAuthorizesOccurrenceIsFalse PdfReporting.fixtureProvenance
+
+pdfReportingTruthStillUnresolved :
+  Status.resultingTruthStatus PdfReporting.propositionReceipt
+  ≡ Status.truthUnresolved
+pdfReportingTruthStillUnresolved = PdfReporting.reportingTruthStillUnresolved
+
+pdfReportingOccurrenceIsSourceAssertionOnly :
+  Status.resultingOccurrenceStatus PdfReporting.occurrenceReceipt
+  ≡ Status.assertedOccurrence
+pdfReportingOccurrenceIsSourceAssertionOnly =
+  PdfReporting.reportingOccurrenceIsAssertedNotAdmitted
+
+pdfReportingLegalUseIsCandidateOnly :
+  LegalChain.SemanticLegalInputGate.resultingApplicability
+    PdfReporting.reportingLegalGate
+  ≡ Status.applicabilityCandidate
+pdfReportingLegalUseIsCandidateOnly = PdfReporting.reportingLegalUseIsCandidateOnly
+
+pdfLexicalDiscoveryStillNotSemanticAuthority :
+  PdfReporting.ReportingLemmaChoosesSemanticStatus → ⊥
+pdfLexicalDiscoveryStillNotSemanticAuthority =
+  PdfReporting.reportingLemmaDoesNotChooseSemanticStatus
 
 ------------------------------------------------------------------------
 -- Scope composition is an inhabited parser-to-status chain.
