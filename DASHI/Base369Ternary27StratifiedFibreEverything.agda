@@ -120,6 +120,17 @@ import DASHI.Moonshine.Monster3BRegularC3BulkResidualFiftyThreeBidiExact
 import DASHI.Moonshine.Monster3BLiteralThreePhaseRegularResidualBidiExact
 import DASHI.Base369Monster3BRegularResidualValidation
 
+-- Typed 90 cross-pollination.  The existing pointed-appraisal owner already
+-- has Fine10 x SecondarySheet9 and 729 = 8*(10*9)+9.  The new BIDI owner makes
+-- Fin90 <-> Fine10 x SecondarySheet9 the explicit same-action promotion target;
+-- the nested carrier theorem then gives 65610 = [8*90+9]*90 and the sourced
+-- 3^8/3^6 bridge refactors through this same 10x9 factor without identifying
+-- the distinct 3-local groups.
+import DASHI.Moonshine.Base369Monster3BMultiplicityTenByNineBidiExact
+import DASHI.Moonshine.Base369Pointed729NestedNinetyBidiExact
+import DASHI.Moonshine.Base369MonsterThreeLocalTenByNineRefactorBidiExact
+import DASHI.Base369Monster3BTenByNineMultiplicityValidation
+
 -- Same-action continuation on Fin 90.  The literal 78 block is now additionally
 -- exposed to an E6 candidate recognition, but E6 semantics requires an actual
 -- action intertwiner; 78=52+26 is not promotion authority.
@@ -134,6 +145,7 @@ import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound7Exact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound8Exact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound9Exact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound10Exact
+import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound11Exact
 
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact
 
