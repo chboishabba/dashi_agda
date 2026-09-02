@@ -13,6 +13,7 @@ import DASHI.Cognition.PNF.SensibLawScopeCompositionBidiExact as Scope
 import DASHI.Cognition.PNF.SensibLawParticipantLegalRoleWrongTypeBidiExact as LegalRole
 import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExact as LegalChain
 import DASHI.Cognition.PNF.SensibLawDocumentWorldSemanticStatusBidiExact as Context
+import DASHI.Cognition.PNF.SensibLawSemanticLiveVerticalEverything as Live
 
 data BidiCampaign : Set where
   attributionPropositionCampaign : BidiCampaign
@@ -38,6 +39,39 @@ campaignReadiness documentWorldContextCampaign = typeOwnerPresent
 allCampaignTypeOwnersPresent :
   campaignReadiness attributionPropositionCampaign ≡ typeOwnerPresent
 allCampaignTypeOwnersPresent = refl
+
+------------------------------------------------------------------------
+-- Phase transition: the aggregate now also imports actual inhabited regressions
+-- for the first semantic verticals.  This does not make the corpus resolved.
+------------------------------------------------------------------------
+
+claimDiscourseHasLiveInhabitant :
+  Live.liveCampaignState Live.claimDiscourseLive ≡ Live.inhabitedRegression
+claimDiscourseHasLiveInhabitant = refl
+
+occurrenceHasLiveInhabitant :
+  Live.liveCampaignState Live.occurrenceLive ≡ Live.inhabitedRegression
+occurrenceHasLiveInhabitant = refl
+
+identityRefinementHasLiveInhabitant :
+  Live.liveCampaignState Live.identityRefinementLive ≡ Live.inhabitedRegression
+identityRefinementHasLiveInhabitant = refl
+
+scopeCompositionHasLiveInhabitant :
+  Live.liveCampaignState Live.scopeCompositionLive ≡ Live.inhabitedRegression
+scopeCompositionHasLiveInhabitant = refl
+
+documentContextHasLiveInhabitant :
+  Live.liveCampaignState Live.documentContextLive ≡ Live.inhabitedRegression
+documentContextHasLiveInhabitant = refl
+
+participantLegalRoleHasLiveInhabitant :
+  Live.liveCampaignState Live.participantLegalRoleLive ≡ Live.inhabitedRegression
+participantLegalRoleHasLiveInhabitant = refl
+
+narrativeLegalGateHasLiveInhabitant :
+  Live.liveCampaignState Live.narrativeLegalGateLive ≡ Live.inhabitedRegression
+narrativeLegalGateHasLiveInhabitant = refl
 
 regexStillForbidden :
   Constitution.regexMayProduceSemanticEvidence
