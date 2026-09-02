@@ -21,12 +21,103 @@ data _∈_ {A : Set} (x : A) : List A → Set where
   here : ∀ {xs} → x ∈ (x ∷ xs)
   there : ∀ {y xs} → x ∈ xs → x ∈ (y ∷ xs)
 
+------------------------------------------------------------------------
+-- Semantic input gate.
+--
+-- A legal engine may reason ABOUT an allegation, denial, assertion or
+-- hypothetical without pretending that the underlying event occurred.  Those
+-- discourse states therefore enter only candidate applicability here.
+-- Admitted applicability requires an explicit established-occurrence route.
+-- A court finding may be legally usable while universal truth remains unresolved.
+------------------------------------------------------------------------
+
+data LegalEventUse :
+    Status.OccurrenceStatus →
+    Status.PropositionStatus →
+    Status.TruthStatus →
+    Status.ApplicabilityStatus → Set where
+
+  allegationCandidateUse :
+    LegalEventUse
+      Status.allegedOccurrence
+      Status.allegedProposition
+      Status.truthUnresolved
+      Status.applicabilityCandidate
+
+  assertionCandidateUse :
+    LegalEventUse
+      Status.assertedOccurrence
+      Status.assertedBySource
+      Status.truthUnresolved
+      Status.applicabilityCandidate
+
+  denialCandidateUse :
+    LegalEventUse
+      Status.deniedOccurrence
+      Status.deniedProposition
+      Status.truthUnresolved
+      Status.applicabilityCandidate
+
+  reportedCandidateUse :
+    LegalEventUse
+      Status.reportedOccurrence
+      Status.quotedReportedProposition
+      Status.truthUnresolved
+      Status.applicabilityCandidate
+
+  hypotheticalCandidateUse :
+    LegalEventUse
+      Status.hypotheticalOccurrence
+      Status.hypotheticalProposition
+      Status.truthUnresolved
+      Status.applicabilityCandidate
+
+  conditionalCandidateUse :
+    LegalEventUse
+      Status.conditionalOccurrence
+      Status.hypotheticalProposition
+      Status.truthUnresolved
+      Status.applicabilityCandidate
+
+  establishedFindingUse :
+    LegalEventUse
+      Status.occurrenceAdmitted
+      Status.foundAsFact
+      Status.truthUnresolved
+      Status.applicabilityAdmitted
+
+  governedTruthUse :
+    LegalEventUse
+      Status.occurrenceAdmitted
+      Status.admittedProposition
+      Status.truthAdmitted
+      Status.applicabilityAdmitted
+
+record SemanticLegalInputGate (event : Ontology.Event) : Set where
+  constructor semanticLegalInputGate
+  field
+    eventStatus : Status.EventStatusProduct
+    propositionStatus : Status.PropositionStatusProduct
+    sameEventReference :
+      Status.eventReference eventStatus
+      ≡ Ontology.StableId.value (Ontology.Event.eventId event)
+    resultingApplicability : Status.ApplicabilityStatus
+    legalEventUse :
+      LegalEventUse
+        (Status.occurrence eventStatus)
+        (Status.propositionStatus propositionStatus)
+        (Status.truthStatus propositionStatus)
+        resultingApplicability
+
+open SemanticLegalInputGate public
+
 record WrongTypeApplicabilityReceipt : Set where
   constructor wrongTypeApplicabilityReceipt
   field
     event : Ontology.Event
     wrongType : Ontology.WrongType
     interpretation : Ontology.WrongTypeInterpretation
+    semanticInput : SemanticLegalInputGate event
     legalStatus : Status.LegalStatusProduct
     sameEvent :
       Ontology.WrongTypeInterpretation.interpretedEvent interpretation
@@ -38,6 +129,9 @@ record WrongTypeApplicabilityReceipt : Set where
       Ontology.WrongTypeInterpretation.underSystem interpretation
       ≡ Ontology.WrongType.definingSystem wrongType
     resultingApplicability : Status.ApplicabilityStatus
+    applicabilityMatchesSemanticGate :
+      resultingApplicability
+      ≡ SemanticLegalInputGate.resultingApplicability semanticInput
     typedMeetReference : String
     temporalReference : String
     jurisdictionReference : String
@@ -126,14 +220,15 @@ open RemedyEligibilityReceipt public
 ------------------------------------------------------------------------
 
 data LegalConsumerNeed : Set where
-  needsApplicability needsViolation needsLiability needsBurden needsRemedy
-  : LegalConsumerNeed
+  needsSemanticOccurrence needsApplicability needsViolation needsLiability
+  needsBurden needsRemedy : LegalConsumerNeed
 
 data RequiredReceiptKind : Set where
-  applicabilityReceiptKind violationReceiptKind liabilityReceiptKind
-  burdenReceiptKind remedyReceiptKind : RequiredReceiptKind
+  semanticOccurrenceReceiptKind applicabilityReceiptKind violationReceiptKind
+  liabilityReceiptKind burdenReceiptKind remedyReceiptKind : RequiredReceiptKind
 
 requiredReceipt : LegalConsumerNeed → RequiredReceiptKind
+requiredReceipt needsSemanticOccurrence = semanticOccurrenceReceiptKind
 requiredReceipt needsApplicability = applicabilityReceiptKind
 requiredReceipt needsViolation = violationReceiptKind
 requiredReceipt needsLiability = liabilityReceiptKind
@@ -144,12 +239,24 @@ requiredReceipt needsRemedy = remedyReceiptKind
 -- Hard no-go laws.
 ------------------------------------------------------------------------
 
+data AllegationAutomaticallyEstablishedEvent : Set where
+data AssertionAutomaticallyEstablishedEvent : Set where
+data DenialIsNegatedEventFact : Set where
 data WrongTypeInterpretationAutomaticallyApplicable : Set where
 data ApplicableAutomaticallyViolated : Set where
 data ViolationAutomaticallyLiable : Set where
 data LiabilityAutomaticallySelectsRemedy : Set where
 data BurdenBearerAutomaticallySyntacticSubject : Set where
 data RemedyMembershipProvesEligibility : Set where
+
+allegationDoesNotEstablishEvent : AllegationAutomaticallyEstablishedEvent → ⊥
+allegationDoesNotEstablishEvent ()
+
+assertionDoesNotEstablishEvent : AssertionAutomaticallyEstablishedEvent → ⊥
+assertionDoesNotEstablishEvent ()
+
+denialDoesNotBecomeNegatedEventFact : DenialIsNegatedEventFact → ⊥
+denialDoesNotBecomeNegatedEventFact ()
 
 wrongTypeInterpretationDoesNotAutoApply :
   WrongTypeInterpretationAutomaticallyApplicable → ⊥
