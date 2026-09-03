@@ -16,6 +16,8 @@ import DASHI.Cognition.PNF.SensibLawDocumentWorldSemanticStatusBidiExact as Cont
 import DASHI.Cognition.PNF.SensibLawConsumerIndexedDiscourseInterpretationExact as Consumer
 import DASHI.Cognition.PNF.SensibLawConsumerQuerySemanticCoordinateReopeningExact as Demand
 import DASHI.Cognition.PNF.SensibLawConsumerQueryLeastPrivilegeRegressionExact as LeastPrivilege
+import DASHI.Cognition.PNF.SensibLawActiveRequirementExecutionPlannerExact as Planner
+import DASHI.Cognition.PNF.SensibLawRequirementProducerRoutingExact as Routing
 import DASHI.Cognition.PNF.SensibLawSemanticLiveVerticalEverything as Live
 
 data BidiCampaign : Set where
@@ -27,6 +29,8 @@ data BidiCampaign : Set where
   legalApplicabilityCampaign : BidiCampaign
   documentWorldContextCampaign : BidiCampaign
   consumerQueryDemandCampaign : BidiCampaign
+  activeRequirementPlannerCampaign : BidiCampaign
+  requirementProducerRoutingCampaign : BidiCampaign
 
 data CampaignReadiness : Set where
   typeOwnerPresent runtimeProducerNeeded consumerMaySkip : CampaignReadiness
@@ -40,6 +44,8 @@ campaignReadiness participantLegalRoleCampaign = typeOwnerPresent
 campaignReadiness legalApplicabilityCampaign = typeOwnerPresent
 campaignReadiness documentWorldContextCampaign = typeOwnerPresent
 campaignReadiness consumerQueryDemandCampaign = typeOwnerPresent
+campaignReadiness activeRequirementPlannerCampaign = typeOwnerPresent
+campaignReadiness requirementProducerRoutingCampaign = typeOwnerPresent
 
 allCampaignTypeOwnersPresent :
   campaignReadiness attributionPropositionCampaign ≡ typeOwnerPresent
@@ -48,6 +54,14 @@ allCampaignTypeOwnersPresent = refl
 consumerQueryDemandOwnerPresent :
   campaignReadiness consumerQueryDemandCampaign ≡ typeOwnerPresent
 consumerQueryDemandOwnerPresent = refl
+
+executionPlannerOwnerPresent :
+  campaignReadiness activeRequirementPlannerCampaign ≡ typeOwnerPresent
+executionPlannerOwnerPresent = refl
+
+producerRoutingOwnerPresent :
+  campaignReadiness requirementProducerRoutingCampaign ≡ typeOwnerPresent
+producerRoutingOwnerPresent = refl
 
 ------------------------------------------------------------------------
 -- Phase transition: the aggregate also imports actual inhabited regressions.
@@ -121,6 +135,62 @@ broaderDemandPreservesSemanticCarrier :
   Demand.BroaderDemandRewritesSemanticCarrier → ⊥
 broaderDemandPreservesSemanticCarrier =
   Demand.broaderDemandDoesNotRewriteCarrier
+
+------------------------------------------------------------------------
+-- Execution planning and least work.
+------------------------------------------------------------------------
+
+resolvedRequirementReusesExistingEvidence :
+  ∀ {state active refs producer} →
+  Planner.action
+    (Planner.planRequirement
+      (Planner.coordinateEvidenceReceipt {state} {active}
+        Planner.currentResolved refs producer true refl true refl)
+      "campaign:resolved")
+  ≡ Planner.reuseExisting
+resolvedRequirementReusesExistingEvidence = refl
+
+missingRequirementAcquiresEvidence :
+  ∀ {state active refs producer} →
+  Planner.action
+    (Planner.planRequirement
+      (Planner.coordinateEvidenceReceipt {state} {active}
+        Planner.currentMissing refs producer true refl true refl)
+      "campaign:missing")
+  ≡ Planner.acquireMissingEvidence
+missingRequirementAcquiresEvidence = refl
+
+staleRequirementRevalidatesWithoutReparse :
+  Planner.StaleRequirementForcesFullReparse → ⊥
+staleRequirementRevalidatesWithoutReparse =
+  Planner.staleRequirementDoesNotForceFullReparse
+
+semanticStateIsNotTotalEvidenceOracle :
+  Planner.SemanticStateAloneTotalizesCoordinateEvidence → ⊥
+semanticStateIsNotTotalEvidenceOracle =
+  Planner.semanticStateAloneDoesNotTotalizeEvidence
+
+------------------------------------------------------------------------
+-- Producer routing boundaries.
+------------------------------------------------------------------------
+
+documentContextHasDedicatedProducer :
+  Routing.ProducerCanPopulate
+    Cross.documentContextProducer
+    Demand.documentContextCoordinate
+documentContextHasDedicatedProducer = Routing.documentContextPopulatesContext
+
+parserCannotPopulateLegalApplicability :
+  Routing.ParserCanPopulateLegalApplicability → ⊥
+parserCannotPopulateLegalApplicability = Routing.parserDoesNotOwnLegalApplicability
+
+attributionCannotResolveAuthority :
+  Routing.AttributionProducerCanResolveAuthority → ⊥
+attributionCannotResolveAuthority = Routing.attributionDoesNotOwnAuthority
+
+reuseNeedsNoProducerInvocation :
+  Routing.invocationNeed Planner.reuseExisting ≡ Routing.noProducerInvocation
+reuseNeedsNoProducerInvocation = refl
 
 ------------------------------------------------------------------------
 -- Existing cross-axis boundaries.
