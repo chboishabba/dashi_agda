@@ -8,5 +8,6 @@ import DASHI.Physics.Plasma.MHDMaxwellLorentzReductionBidiExact
 import DASHI.Physics.Plasma.FusionPropulsionScienceBidiCrossPollinationExact
 import DASHI.Physics.Plasma.MHDInvariantFibreBidiExact
 import DASHI.Physics.Plasma.ElsasserMHDChartExact
+import DASHI.Physics.Plasma.ElsasserCounterpropagatingInteractionBidiExact
 import DASHI.Physics.Plasma.NSTriadMHDTheoremShapeCrossPollinationExact
 import DASHI.Physics.Plasma.ReconnectionInvariantBreakBidiExact
