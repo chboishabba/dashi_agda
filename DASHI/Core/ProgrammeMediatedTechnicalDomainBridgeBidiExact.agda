@@ -8,21 +8,9 @@ import DASHI.Core.TechnicalDependencyHypergraphExact as H
 ------------------------------------------------------------------------
 -- PROGRAMME-MEDIATED TECHNICAL DOMAIN BRIDGE — BIDI KERNEL
 --
--- A broad similarity between two technical domains is not enough.  Promotion
+-- A broad similarity between two technical domains is not enough. Promotion
 -- requires a source-backed programme whose own technical description contains
--- both domains on the same programme object.
---
--- Forward direction:
---   programme receipt -> surviving technical-domain bridge.
---
--- Reverse direction:
---   a consumer asking to promote a domain adjacency is told exactly what it
---   owes: same programme, left/right technical participation, and official
---   programme provenance.
---
--- The bridge is technical/programmatic only.  It carries no permission to
--- infer common personnel, common employer, contact, relationship, selector,
--- adversary, or causal explanation.
+-- both domains on the same literal programme receipt.
 ------------------------------------------------------------------------
 
 record ProgrammeDomainBridge : Set₁ where
@@ -32,6 +20,10 @@ record ProgrammeDomainBridge : Set₁ where
     leftDomain : H.TechnicalNode
     rightDomain : H.TechnicalNode
     programmeReceipt : H.TechnicalHyperedge
+
+    sameObjectEndpoints :
+      H.endpoints programmeReceipt ≡
+      programme ∷ leftDomain ∷ rightDomain ∷ []
 
     receiptUsesTechnology :
       H.edgeKind programmeReceipt ≡ H.programmeUsesTechnology
