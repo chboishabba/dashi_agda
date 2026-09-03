@@ -23,8 +23,8 @@ import DASHI.Core.RequiredAxisSupportSquareExact as Support
 --
 -- SensibLaw therefore does NOT map a consumer label to one fixed pipeline.
 -- The same consumer may ask a cheap structural/discourse question or a much
--- stronger governed question.  Multiple consumer/query requests contribute
--- simultaneous obligations over one unchanged semantic carrier.
+-- stronger governed question. Multiple consumer/query requests contribute
+-- simultaneous proof-bearing obligations over one unchanged semantic carrier.
 ------------------------------------------------------------------------
 
 data SemanticQuery : Set where
@@ -59,10 +59,6 @@ data SemanticCoordinate : Set where
 
 ------------------------------------------------------------------------
 -- Proof-bearing requirement relation.
---
--- General queries may be asked by ANY consumer.  Legal-specific coordinates
--- arise from the legal query being requested, not from legal-looking words or
--- merely selecting `legalConsumer`.
 ------------------------------------------------------------------------
 
 data Requires :
@@ -137,21 +133,22 @@ record DemandRequest : Set where
 
 open DemandRequest public
 
-record RequirementWitness (request : DemandRequest) : Set where
-  constructor requirementWitness
+record ActiveRequirement : Set where
+  constructor activeRequirement
   field
+    requiredConsumer : Consumer.ConsumerKind
+    requiredQuery : SemanticQuery
     coordinate : SemanticCoordinate
-    requirement : Requires (consumer request) (query request) coordinate
+    requirement : Requires requiredConsumer requiredQuery coordinate
     requirementReference : String
 
-open RequirementWitness public
+open ActiveRequirement public
 
 record SemanticDemand : Set where
   constructor semanticDemand
   field
     requests : List DemandRequest
-    requirements : List SemanticCoordinate
-    requirementWitnessReferences : List String
+    activeRequirements : List ActiveRequirement
     demandReference : String
 
 open SemanticDemand public
@@ -214,16 +211,28 @@ mixedCaseDemand : SemanticDemand
 mixedCaseDemand =
   semanticDemand
     (generalWhoSaidWhat ∷ historicalProvenance ∷ legalSubmissionRole ∷ [])
-    ( discourseCoordinate
-    ∷ referenceCoordinate
-    ∷ attributionCoordinate
-    ∷ provenanceCoordinate
-    ∷ temporalCoordinate
-    ∷ documentContextCoordinate
-    ∷ [])
-    ( "general:discourse+reference+attribution"
-    ∷ "historical:provenance+temporal"
-    ∷ "legal-discourse-role:document-context"
+    ( activeRequirement Consumer.generalSemanticConsumer whoSaidWhatQuery
+        discourseCoordinate whoNeedsDiscourse "general who-said-what needs discourse"
+    ∷ activeRequirement Consumer.generalSemanticConsumer whoSaidWhatQuery
+        referenceCoordinate whoNeedsReference "general who-said-what needs reference"
+    ∷ activeRequirement Consumer.generalSemanticConsumer whoSaidWhatQuery
+        attributionCoordinate whoNeedsAttribution "general who-said-what needs attribution"
+    ∷ activeRequirement Consumer.historicalConsumer provenanceHistoryQuery
+        discourseCoordinate historyNeedsDiscourse "historical query needs discourse"
+    ∷ activeRequirement Consumer.historicalConsumer provenanceHistoryQuery
+        attributionCoordinate historyNeedsAttribution "historical query needs attribution"
+    ∷ activeRequirement Consumer.historicalConsumer provenanceHistoryQuery
+        provenanceCoordinate historyNeedsProvenance "historical query needs provenance"
+    ∷ activeRequirement Consumer.historicalConsumer provenanceHistoryQuery
+        temporalCoordinate historyNeedsTemporal "historical query needs temporal relation"
+    ∷ activeRequirement Consumer.legalConsumer legalDiscourseRoleQuery
+        discourseCoordinate legalRoleNeedsDiscourse "legal discourse-role query needs discourse"
+    ∷ activeRequirement Consumer.legalConsumer legalDiscourseRoleQuery
+        referenceCoordinate legalRoleNeedsReference "legal discourse-role query needs reference"
+    ∷ activeRequirement Consumer.legalConsumer legalDiscourseRoleQuery
+        attributionCoordinate legalRoleNeedsAttribution "legal discourse-role query needs attribution"
+    ∷ activeRequirement Consumer.legalConsumer legalDiscourseRoleQuery
+        documentContextCoordinate legalRoleNeedsDocumentContext "legal discourse-role query needs document context"
     ∷ [])
     "simultaneous general + historical + legal-discourse demand over one carrier"
 
@@ -271,10 +280,6 @@ missingAuthorityCannotBeResolvedPositive resolved =
 
 ------------------------------------------------------------------------
 -- Dependency graph from semantic coordinates to consumer-facing products.
---
--- The graph is deliberately sparse.  A changed authority receipt can reopen a
--- legal applicability/liability product without forcing parser syntax or a
--- general who-said-what answer to be recomputed.
 ------------------------------------------------------------------------
 
 data SemanticArtifact : Set where
@@ -420,6 +425,7 @@ record ConsumerQueryCoordinateBoundary : Set where
     requirementsAreConsumerAndQueryIndexed : Bool
     inactiveCoordinatesCountAsFailures : Bool
     multipleRequestsMayActivateJointCoordinates : Bool
+    activeRequirementsCarryProofWitnesses : Bool
     strongOneAxisEvidenceFillsMissingOtherAxis : Bool
     dependencyAffectedProductsMayReopenTransitively : Bool
     unrelatedParserCoordinatesMustReopenAfterAuthorityChange : Bool
@@ -428,4 +434,4 @@ record ConsumerQueryCoordinateBoundary : Set where
 canonicalConsumerQueryCoordinateBoundary : ConsumerQueryCoordinateBoundary
 canonicalConsumerQueryCoordinateBoundary =
   consumerQueryCoordinateBoundary
-    true false true false true false false
+    true false true true false true false false
