@@ -9,7 +9,7 @@ open import Agda.Builtin.String using (String)
 -- Formalise zero-point energy without flattening field, boundary, mode,
 -- Hamiltonian, state, and renormalisation coordinates into one scalar.
 --
--- The exact finite spine is:
+-- Exact finite spine:
 --
 --   field/boundary base
 --     -> admissible mode fibre
@@ -18,9 +18,9 @@ open import Agda.Builtin.String using (String)
 --     -> zero-point assignment
 --     -> finite vacuum aggregate
 --
--- The QFT/renormalised observable is deliberately a later fibre.  In
--- particular, the raw finite or formal mode sum is not identified here with
--- a cosmological constant or with extractable work.
+-- The QFT/renormalised observable is deliberately a later fibre.  The raw
+-- finite or formal mode sum is not identified here with a cosmological
+-- constant or with extractable work.
 ------------------------------------------------------------------------
 
 record ScalarSpectrum : Set₁ where
@@ -242,15 +242,18 @@ finiteVacuumEnergy H = aggregate H (finiteModes H)
 
 ------------------------------------------------------------------------
 -- Boundary-dependent mode fabrics and non-factorability.
+--
+-- We retain field-carrier equality separately from boundary distinction.
+-- The witness does not attempt to coerce heterogeneous field points; that
+-- transport belongs in a later same-object bridge if a concrete field model
+-- needs it.
 ------------------------------------------------------------------------
 
 record SameFieldDifferentBoundaryWitness
     {S : ScalarSpectrum}
     (left right : FiniteVacuumHyperfabric S) : Set₁ where
   field
-    sameFieldType : Field (base left) ≡ Field (base right)
-    sameFieldPoint :
-      subst (λ F → F) sameFieldType (field (base left)) ≡ field (base right)
+    sameFieldCarrier : Field (base left) ≡ Field (base right)
 
     boundariesDiffer :
       Boundary (base left) → Boundary (base right) → Set
@@ -261,10 +264,6 @@ record SameFieldDifferentBoundaryWitness
     vacuumEnergiesDiffer : Set
 
 open SameFieldDifferentBoundaryWitness public
-
--- The explicit witness type prevents vacuum energy from being represented as
--- a function of field identity alone.  Boundary/mode data are retained in the
--- hypervoxel rather than quotiented away.
 
 record VacuumEnergyDoesNotFactorThroughFieldIdentity
     {S : ScalarSpectrum} : Set₁ where
