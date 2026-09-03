@@ -23,8 +23,9 @@ data ProducerCanPopulate : Cross.ProducerClass → Demand.SemanticCoordinate →
   evidencePopulatesProvenance : ProducerCanPopulate Cross.evidenceProducer Demand.provenanceCoordinate
   temporalPopulatesTemporal : ProducerCanPopulate Cross.temporalProducer Demand.temporalCoordinate
   documentContextPopulatesContext : ProducerCanPopulate Cross.documentContextProducer Demand.documentContextCoordinate
+  documentContextPopulatesJurisdictionCandidate : ProducerCanPopulate Cross.documentContextProducer Demand.jurisdictionCandidateCoordinate
+  legalJurisdictionPopulatesResolvedJurisdiction : ProducerCanPopulate Cross.legalJurisdictionProducer Demand.resolvedLegalJurisdictionCoordinate
   legalSourcePopulatesAuthority : ProducerCanPopulate Cross.legalSourceAuthorityProducer Demand.legalSourceAuthorityCoordinate
-  legalMeetPopulatesJurisdiction : ProducerCanPopulate Cross.legalTypedMeetProducer Demand.jurisdictionCoordinate
   legalMeetPopulatesLegalRole : ProducerCanPopulate Cross.legalTypedMeetProducer Demand.legalRoleCoordinate
   legalMeetPopulatesApplicability : ProducerCanPopulate Cross.legalTypedMeetProducer Demand.applicabilityCoordinate
   legalMeetPopulatesViolation : ProducerCanPopulate Cross.legalTypedMeetProducer Demand.violationCoordinate
@@ -33,10 +34,7 @@ data ProducerCanPopulate : Cross.ProducerClass → Demand.SemanticCoordinate →
 
 record ProducerRoute (coordinate : Demand.SemanticCoordinate) : Set where
   constructor producerRoute
-  field
-    producer : Cross.ProducerClass
-    capability : ProducerCanPopulate producer coordinate
-    routeReference : String
+  field producer : Cross.ProducerClass; capability : ProducerCanPopulate producer coordinate; routeReference : String
 open ProducerRoute public
 
 routeForActiveRequirement : (active : Demand.ActiveRequirement) → ProducerRoute (Demand.coordinate active) → ProducerRoute (Demand.coordinate active)
@@ -53,42 +51,30 @@ invocationNeed Planner.revalidateStaleEvidence = producerInvocationRequired
 data WorkRoute (need : ProducerInvocationNeed) (coordinate : Demand.SemanticCoordinate) : Set where
   reuseWithoutProducer : WorkRoute noProducerInvocation coordinate
   invokeProducer : ProducerRoute coordinate → WorkRoute producerInvocationRequired coordinate
-
 record RoutedWork {state} {active : Demand.ActiveRequirement} (plan : Planner.RequirementPlan state active) : Set where
   constructor routedWork
-  field
-    need : ProducerInvocationNeed
-    needExact : need ≡ invocationNeed (Planner.action plan)
-    route : WorkRoute need (Demand.coordinate active)
-    routeReference : String
+  field need : ProducerInvocationNeed; needExact : need ≡ invocationNeed (Planner.action plan); route : WorkRoute need (Demand.coordinate active); routeReference : String
 open RoutedWork public
 
-referenceRoute : ProducerRoute Demand.referenceCoordinate
 referenceRoute = producerRoute Cross.bindingAccessibilityProducer bindingPopulatesReference "reference/coreference candidate population"
-attributionRoute : ProducerRoute Demand.attributionCoordinate
 attributionRoute = producerRoute Cross.attributionProducer attributionPopulatesAttribution "source/reporting attribution producer"
-temporalRoute : ProducerRoute Demand.temporalCoordinate
 temporalRoute = producerRoute Cross.temporalProducer temporalPopulatesTemporal "temporal qualification/anchor producer"
-scopeCandidateRoute : ProducerRoute Demand.scopeCandidateCoordinate
 scopeCandidateRoute = producerRoute Cross.structuralCompositionProducer structurePopulatesScopeCandidate "parser/dependency scope-candidate composition"
-resolvedScopeRoute : ProducerRoute Demand.resolvedScopeCoordinate
 resolvedScopeRoute = producerRoute Cross.scopeResolutionProducer scopeResolutionPopulatesResolvedScope "joint modality/negation/condition/temporal scope resolution"
-documentContextRoute : ProducerRoute Demand.documentContextCoordinate
 documentContextRoute = producerRoute Cross.documentContextProducer documentContextPopulatesContext "typed document/region/case context producer"
-legalSourceAuthorityRoute : ProducerRoute Demand.legalSourceAuthorityCoordinate
+jurisdictionCandidateRoute = producerRoute Cross.documentContextProducer documentContextPopulatesJurisdictionCandidate "document/context jurisdiction candidate only"
+resolvedLegalJurisdictionRoute = producerRoute Cross.legalJurisdictionProducer legalJurisdictionPopulatesResolvedJurisdiction "CaseFrame + LegalSystem + resolved legal jurisdiction producer"
 legalSourceAuthorityRoute = producerRoute Cross.legalSourceAuthorityProducer legalSourcePopulatesAuthority "LegalSource + source system + effective interval authority producer"
-semanticAdmissionAuthorityRoute : ProducerRoute Demand.semanticAdmissionAuthorityCoordinate
 semanticAdmissionAuthorityRoute = producerRoute Cross.governedAdmissionProducer governedAdmissionPopulatesSemanticAuthority "semantic resolution/admission authority producer"
-applicabilityRoute : ProducerRoute Demand.applicabilityCoordinate
 applicabilityRoute = producerRoute Cross.legalTypedMeetProducer legalMeetPopulatesApplicability "typed legal applicability meet"
 
 data ReuseExistingRequiresProducerInvocation : Set where
 data UnassessedRequirementMaySkipInspectionProducer : Set where
 data ParserCanPopulateLegalApplicability : Set where
 data ParserScopeCandidateCanPopulateResolvedScope : Set where
+data JurisdictionCandidateCanPopulateResolvedLegalJurisdiction : Set where
 data AttributionProducerCanResolveLegalSourceAuthority : Set where
 data SemanticAdmissionProducerCanResolveLegalSourceAuthority : Set where
-data DocumentContextIsParserShape : Set where
 
 actionReuseNeedsNoProducer : invocationNeed Planner.reuseExisting ≡ noProducerInvocation
 actionReuseNeedsNoProducer = refl
@@ -106,25 +92,14 @@ parserDoesNotOwnLegalApplicability : ParserCanPopulateLegalApplicability → ⊥
 parserDoesNotOwnLegalApplicability ()
 parserScopeCandidateDoesNotOwnResolvedScope : ParserScopeCandidateCanPopulateResolvedScope → ⊥
 parserScopeCandidateDoesNotOwnResolvedScope ()
+jurisdictionCandidateDoesNotOwnResolvedLegalJurisdiction : JurisdictionCandidateCanPopulateResolvedLegalJurisdiction → ⊥
+jurisdictionCandidateDoesNotOwnResolvedLegalJurisdiction ()
 attributionDoesNotOwnLegalSourceAuthority : AttributionProducerCanResolveLegalSourceAuthority → ⊥
 attributionDoesNotOwnLegalSourceAuthority ()
 semanticAdmissionDoesNotOwnLegalSourceAuthority : SemanticAdmissionProducerCanResolveLegalSourceAuthority → ⊥
 semanticAdmissionDoesNotOwnLegalSourceAuthority ()
-documentContextDoesNotCollapseToParserShape : DocumentContextIsParserShape → ⊥
-documentContextDoesNotCollapseToParserShape ()
 
 record RequirementProducerRoutingBoundary : Set where
   constructor requirement-producer-routing-boundary
-  field
-    producerRoutingIsCoordinateIndexed : Bool
-    unassessedRequirementNeedsInspectionProducer : Bool
-    satisfiedRequirementNeedsProducerInvocation : Bool
-    parserMayPopulateLegalApplicability : Bool
-    parserScopeCandidateMayPopulateResolvedScope : Bool
-    resolvedScopeHasDedicatedProducerClass : Bool
-    attributionMayResolveLegalSourceAuthority : Bool
-    semanticAdmissionMayResolveLegalSourceAuthority : Bool
-    legalSourceAuthorityHasDedicatedProducerClass : Bool
-    documentContextHasDedicatedProducerClass : Bool
-canonicalRequirementProducerRoutingBoundary : RequirementProducerRoutingBoundary
-canonicalRequirementProducerRoutingBoundary = requirement-producer-routing-boundary true true false false false true false false true true
+  field producerRoutingIsCoordinateIndexed unassessedRequirementNeedsInspectionProducer satisfiedRequirementNeedsProducerInvocation parserMayPopulateLegalApplicability parserScopeCandidateMayPopulateResolvedScope resolvedScopeHasDedicatedProducerClass jurisdictionCandidateMayPopulateResolvedLegalJurisdiction resolvedLegalJurisdictionHasDedicatedProducerClass attributionMayResolveLegalSourceAuthority semanticAdmissionMayResolveLegalSourceAuthority legalSourceAuthorityHasDedicatedProducerClass documentContextHasDedicatedProducerClass : Bool
+canonicalRequirementProducerRoutingBoundary = requirement-producer-routing-boundary true true false false false true false true false false true true
