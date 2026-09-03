@@ -12,15 +12,12 @@ import DASHI.Physics.QuantumVacuum.CasimirPressureDerivativeSameObjectCompletion
 
 ------------------------------------------------------------------------
 -- FINAL REMAINING CASIMIR CLOSURE CAPSTONE
---
--- This status intentionally distinguishes infrastructure that is already
--- machine-backed elsewhere in the repo from application-specific mathematics
--- that still needs a literal producer.
 ------------------------------------------------------------------------
 
 record RemainingClosureStatus : Set where
   field
-    importedBishopCompleteRealBackend : Bool
+    importedBishopSetoidCompleteRealBackend : Bool
+    localFastCauchyBackendStillCritical : Bool
     setoidNativeCasimirScalarInterface : Bool
     maxwellPDECutset : Bool
     radialMeasureCutset : Bool
@@ -39,7 +36,10 @@ record RemainingClosureStatus : Set where
     casimirZetaSameObjectWeldClosed : Bool
     pressureSameObjectDerivativeClosed : Bool
 
-    importedBishopCompleteRealBackendIsTrue : importedBishopCompleteRealBackend ≡ true
+    importedBishopSetoidCompleteRealBackendIsTrue :
+      importedBishopSetoidCompleteRealBackend ≡ true
+    localFastCauchyBackendStillCriticalIsFalse :
+      localFastCauchyBackendStillCritical ≡ false
     setoidNativeCasimirScalarInterfaceIsTrue : setoidNativeCasimirScalarInterface ≡ true
     maxwellPDECutsetIsTrue : maxwellPDECutset ≡ true
     radialMeasureCutsetIsTrue : radialMeasureCutset ≡ true
@@ -62,7 +62,8 @@ open RemainingClosureStatus public
 
 canonicalRemainingClosureStatus : RemainingClosureStatus
 canonicalRemainingClosureStatus = record
-  { importedBishopCompleteRealBackend = true
+  { importedBishopSetoidCompleteRealBackend = true
+  ; localFastCauchyBackendStillCritical = false
   ; setoidNativeCasimirScalarInterface = true
   ; maxwellPDECutset = true
   ; radialMeasureCutset = true
@@ -79,7 +80,8 @@ canonicalRemainingClosureStatus = record
   ; zetaMinusThreeAnalyticClosed = false
   ; casimirZetaSameObjectWeldClosed = false
   ; pressureSameObjectDerivativeClosed = false
-  ; importedBishopCompleteRealBackendIsTrue = refl
+  ; importedBishopSetoidCompleteRealBackendIsTrue = refl
+  ; localFastCauchyBackendStillCriticalIsFalse = refl
   ; setoidNativeCasimirScalarInterfaceIsTrue = refl
   ; maxwellPDECutsetIsTrue = refl
   ; radialMeasureCutsetIsTrue = refl
@@ -110,5 +112,5 @@ canonicalClosureOrder = record
   { first = "close perfect-conductor Maxwell PDE/completeness"
   ; second = "close radial measure + regulated analytic estimates and 1/6"
   ; third = "close zeta(-3) analytic theorem + literal Casimir defect weld"
-  ; fourth = "descend setoid result to legacy kernel and compile pressure derivative"
+  ; fourth = "provide setoid-to-legacy kernel weld and compile pressure derivative"
   }
