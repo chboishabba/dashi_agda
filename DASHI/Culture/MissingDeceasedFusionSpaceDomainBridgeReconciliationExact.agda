@@ -3,13 +3,12 @@ module DASHI.Culture.MissingDeceasedFusionSpaceDomainBridgeReconciliationExact w
 open import DASHI.Core.Prelude
 
 import DASHI.Core.ProgrammeMediatedTechnicalDomainBridgeBidiExact as B
-import DASHI.Culture.MissingDeceasedTechnicalDependencyHypergraphExact as M
 import DASHI.Culture.NASAFusionPlasmaSpacePropulsionBridgeExact as N
 
 ------------------------------------------------------------------------
 -- RECONCILIATION OF THE EARLIER BROAD-ADJACENCY SNAPSHOT.
 --
--- The earlier fixture correctly refused to promote
+-- The earlier roster fixture correctly refused to promote
 --
 --   magnetic reconnection / fusion plasma  <->  space systems
 --
@@ -25,7 +24,6 @@ import DASHI.Culture.NASAFusionPlasmaSpacePropulsionBridgeExact as N
 record PlasmaSpaceReconciliation : Set₁ where
   constructor plasma-space-reconciliation
   field
-    oldAdjacency : Set
     promotedProgrammeBridge : B.PromotedTechnicalDomainBridge
 
     fusionPlasmaToSpacePropulsionNowProgrammeBacked : Bool
@@ -51,7 +49,6 @@ record PlasmaSpaceReconciliation : Set₁ where
 canonicalPlasmaSpaceReconciliation : PlasmaSpaceReconciliation
 canonicalPlasmaSpaceReconciliation =
   plasma-space-reconciliation
-    (M.H.CandidateDomainAdjacency)
     N.fusionToPropulsionPromoted
     true refl
     false refl
