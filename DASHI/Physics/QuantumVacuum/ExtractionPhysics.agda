@@ -10,6 +10,8 @@ module DASHI.Physics.QuantumVacuum.ExtractionPhysics where
 
 import DASHI.Physics.QuantumVacuum.ExtractionPhysicsSurface
 import DASHI.Physics.QuantumVacuum.PhysicalQuantities
+import DASHI.Physics.QuantumVacuum.ZeroPointModeHyperfabricExact
+import DASHI.Physics.QuantumVacuum.ZeroPointExtractionFirewallExact
 import DASHI.Physics.QuantumVacuum.EvidenceReceipts
 import DASHI.Physics.QuantumVacuum.DiscriminatingExperiment
 import DASHI.Physics.QuantumVacuum.CasimirParallelPlateKernel
