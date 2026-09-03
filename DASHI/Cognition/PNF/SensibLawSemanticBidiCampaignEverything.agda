@@ -13,6 +13,7 @@ import DASHI.Cognition.PNF.SensibLawScopeCompositionBidiExact as Scope
 import DASHI.Cognition.PNF.SensibLawParticipantLegalRoleWrongTypeBidiExact as LegalRole
 import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExact as LegalChain
 import DASHI.Cognition.PNF.SensibLawDocumentWorldSemanticStatusBidiExact as Context
+import DASHI.Cognition.PNF.SensibLawConsumerIndexedDiscourseInterpretationExact as Consumer
 import DASHI.Cognition.PNF.SensibLawConsumerQuerySemanticCoordinateReopeningExact as Demand
 import DASHI.Cognition.PNF.SensibLawConsumerQueryLeastPrivilegeRegressionExact as LeastPrivilege
 import DASHI.Cognition.PNF.SensibLawSemanticLiveVerticalEverything as Live
@@ -92,7 +93,7 @@ legalConsumerDoesNotImplyFullApplicabilityStack =
 
 legalWhoSaidWhatHasNoApplicabilityObligation :
   Demand.Requires
-    Demand.Consumer.legalConsumer
+    Consumer.legalConsumer
     Demand.whoSaidWhatQuery
     Demand.applicabilityCoordinate → ⊥
 legalWhoSaidWhatHasNoApplicabilityObligation =
@@ -100,7 +101,7 @@ legalWhoSaidWhatHasNoApplicabilityObligation =
 
 legalWhoSaidWhatHasNoAuthorityObligation :
   Demand.Requires
-    Demand.Consumer.legalConsumer
+    Consumer.legalConsumer
     Demand.whoSaidWhatQuery
     Demand.authorityCoordinate → ⊥
 legalWhoSaidWhatHasNoAuthorityObligation =
