@@ -24,3 +24,5 @@ import DASHI.Physics.Plasma.ElsasserAmplitudeRechartAlgebraExact
 import DASHI.Physics.Plasma.ElsasserSectorSelectionBidiExact
 import DASHI.Physics.Plasma.MHDMomentumInductionElsasserAmplitudeWeldBidiExact
 import DASHI.Physics.Plasma.MHDElsasserAmplitudeFrontierExact
+import DASHI.Physics.Plasma.MHDHelicalElsasserTriadTangentExact
+import DASHI.Physics.Plasma.MHDIdealInvariantTriadTestBidiExact
