@@ -15,3 +15,8 @@ import DASHI.Physics.Plasma.MHDHelicalCoefficientAnatomyExact
 import DASHI.Physics.Plasma.MHDMomentumTriadZeroSumBidiExact
 import DASHI.Physics.Plasma.HelicityElsasserBinaryAxesExact
 import DASHI.Physics.Plasma.MHDHelicalTriadBidiFrontierExact
+import DASHI.Physics.Plasma.MHDHelicalElsasserTriadHypervoxelExact
+import DASHI.Physics.Plasma.MHDHelicalElsasserInteractionAdmissibilityExact
+import DASHI.Physics.Plasma.MHDMomentumCommutatorAfterElsasserBidiExact
+import DASHI.Physics.Plasma.MHDInductionResidualConsumerBidiExact
+import DASHI.Physics.Plasma.MHDHelicalElsasserTriadFrontierExact
