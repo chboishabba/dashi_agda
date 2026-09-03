@@ -14,6 +14,7 @@ import DASHI.Cognition.PNF.SensibLawParticipantLegalRoleWrongTypeBidiExact as Le
 import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExact as LegalChain
 import DASHI.Cognition.PNF.SensibLawDocumentWorldSemanticStatusBidiExact as Context
 import DASHI.Cognition.PNF.SensibLawConsumerQuerySemanticCoordinateReopeningExact as Demand
+import DASHI.Cognition.PNF.SensibLawConsumerQueryLeastPrivilegeRegressionExact as LeastPrivilege
 import DASHI.Cognition.PNF.SensibLawSemanticLiveVerticalEverything as Live
 
 data BidiCampaign : Set where
@@ -88,6 +89,22 @@ legalConsumerDoesNotImplyFullApplicabilityStack :
   Demand.LegalConsumerAlwaysNeedsApplicability → ⊥
 legalConsumerDoesNotImplyFullApplicabilityStack =
   Demand.legalConsumerDoesNotAlwaysNeedApplicability
+
+legalWhoSaidWhatHasNoApplicabilityObligation :
+  Demand.Requires
+    Demand.Consumer.legalConsumer
+    Demand.whoSaidWhatQuery
+    Demand.applicabilityCoordinate → ⊥
+legalWhoSaidWhatHasNoApplicabilityObligation =
+  LeastPrivilege.legalWhoSaidWhatDoesNotRequireApplicability
+
+legalWhoSaidWhatHasNoAuthorityObligation :
+  Demand.Requires
+    Demand.Consumer.legalConsumer
+    Demand.whoSaidWhatQuery
+    Demand.authorityCoordinate → ⊥
+legalWhoSaidWhatHasNoAuthorityObligation =
+  LeastPrivilege.legalWhoSaidWhatDoesNotRequireAuthority
 
 unrequestedCoordinatesDoNotBlockConsumer :
   Demand.UnrequestedCoordinateMustResolve → ⊥
