@@ -14,7 +14,7 @@ import DASHI.Core.ProgrammeMediatedTechnicalDomainBridgeBidiExact as B
 --   * NASA TechPort project 93869 / Direct Fusion Drive architecture.
 --   * NASA TechPort project 4373 / Aneutronic Fusion Spacecraft Architecture.
 --
--- These receipts establish a technology-domain bridge.  They do not establish
+-- These receipts establish a technology-domain bridge. They do not establish
 -- that any named person in another fixture worked on these projects.
 ------------------------------------------------------------------------
 
@@ -87,7 +87,7 @@ aneutronicFusionSurvives :
 aneutronicFusionSurvives = refl
 
 ------------------------------------------------------------------------
--- BIDI programme-domain bridges.
+-- BIDI programme-domain bridges. The first refl pins the literal endpoints.
 ------------------------------------------------------------------------
 
 fusionToPropulsionBridge : B.ProgrammeDomainBridge
@@ -96,6 +96,7 @@ fusionToPropulsionBridge = B.programme-domain-bridge
   magnetizedFusionPlasma
   magneticNozzlePropulsion
   fusionDrivenRocketReceipt
+  refl
   refl
   refl
   refl
@@ -111,6 +112,7 @@ frcToPropulsionBridge = B.programme-domain-bridge
   refl
   refl
   refl
+  refl
   "NASA TechPort project 93869"
   "A field-reversed-configuration fusion object is explicitly reused in an integrated spacecraft propulsion-and-power architecture."
 
@@ -120,6 +122,7 @@ aneutronicToPropulsionBridge = B.programme-domain-bridge
   fusionProductsDirectThrust
   magneticNozzlePropulsion
   aneutronicFusionReceipt
+  refl
   refl
   refl
   refl
@@ -137,7 +140,7 @@ frcToPropulsionPromoted = B.promote frcToPropulsionBridge
 --
 -- Magnetic reconnection is a genuine neighbouring plasma-physics coordinate,
 -- but the NASA programme receipts above do not identify propulsion itself with
--- magnetic reconnection.  FRC/magnetized-plasma topology is the stronger
+-- magnetic reconnection. FRC/magnetized-plasma topology is the stronger
 -- same-object bridge presently owned here.
 ------------------------------------------------------------------------
 
