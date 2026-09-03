@@ -7,6 +7,7 @@ import DASHI.Analysis.PoissonSummationKernelBidiExact as PS
 import DASHI.Analysis.RenormalisedDifferenceLimitExact as RDL
 import DASHI.Analysis.SumIntegralDefectExact as SID
 import DASHI.Analysis.MeasureIntegralLimitKernelBidiExact as MIL
+import DASHI.Analysis.MeasureIntegralMetricLimitBridgeExact as MIM
 import DASHI.Analysis.MetricConvergenceKernelBidiExact as Metric
 import DASHI.Physics.QuantumVacuum.CasimirParallelPlateKernel as Casimir
 import DASHI.Physics.QuantumVacuum.PerfectConductorMaxwellSpectrumBidiExact as MaxwellSpectrum
@@ -82,8 +83,7 @@ record TransverseContinuumAndLimitReceipt
     genericMetricProblem : Metric.ParameterisedMetricLimitProblem
     genericMetricProblemIsCasimirInstance :
       genericMetricProblem ≡
-      TransverseMetric.MIM.metricProblem
-        (TransverseMetric.adapter metricConvergence)
+      MIM.metricProblem (TransverseMetric.adapter metricConvergence)
 
     subtractionBeforeLimit : Set
     presentationIndependentLimit : Set
