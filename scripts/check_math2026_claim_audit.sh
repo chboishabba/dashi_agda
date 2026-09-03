@@ -35,6 +35,7 @@ FILES=(
   DASHI/Analysis/RiemannG2GapSplitClusteringLeanReturn8894Exact.agda
   DASHI/Analysis/RiemannG2QuarterPeriodAnalyticRouteReconciliationExact.agda
   DASHI/Analysis/RiemannG2GammaPrecisionLossLocalizationExact.agda
+  DASHI/Analysis/RiemannG2GammaProducerSourceAcquisitionExact.agda
   DASHI/Analysis/RiemannG2CanonicalCharacterHighestAlphaReconciliationExact.agda
   DASHI/Analysis/RiemannG2ConstructedComplexAnalyticCarrierAdapterExact.agda
   DASHI/Analysis/RiemannG2CanonicalTestModulationHighestAlphaExact.agda
