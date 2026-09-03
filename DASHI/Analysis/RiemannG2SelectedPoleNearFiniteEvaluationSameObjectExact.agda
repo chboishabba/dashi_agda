@@ -59,6 +59,82 @@ record SelectedFiniteNearEvaluationAttachment
 open SelectedFiniteNearEvaluationAttachment public
 
 ------------------------------------------------------------------------
+-- BUDGET TRANSPORT: GENERIC EVALUATOR BUDGET -> SELECTED WEIL SCALAR
+--
+-- EvaluationProducesBudget is deliberately consumer-generic: its Budget carrier
+-- need not be the same type as the selected Weil scalar.  The only additional
+-- representation payment needed after a same-object finite evaluation is a
+-- consumer transport from that abstract Budget into the selected scalar plus a
+-- proof that the evaluator's existing ProducesRequiredUpper receipt becomes the
+-- selected finite-near upper relation.  Once this transport exists, extracting
+-- the selected near budget is compiler output rather than fresh analysis.
+------------------------------------------------------------------------
+
+record SelectedFiniteNearBudgetTransport
+    (space : Weil.WeilTestSpace)
+    (formula : Explicit.RiemannExplicitFormula space)
+    (orbit : Orbit.SourceFkOrbit)
+    (selected : Selected.ActualSelectedPoleNearProducer space formula orbit)
+    (finite : Eval.FiniteNearProducer)
+    (attachment :
+      SelectedFiniteNearEvaluationAttachment space formula orbit selected finite)
+    : Set₁ where
+  private
+    evaluation = Eval.FiniteNearProducer.evaluation finite
+    budgetReceipt = Eval.FiniteNearProducer.budget finite
+
+  field
+    budgetToSelectedScalar :
+      Eval.EvaluationProducesBudget.Budget budgetReceipt →
+      Weil.WeilTestSpace.Scalar space
+
+    SelectedUpper :
+      Weil.WeilTestSpace.Scalar space →
+      Weil.WeilTestSpace.Scalar space →
+      Set
+
+    evaluatorUpperBecomesSelectedUpper :
+      Eval.EvaluationProducesBudget.ProducesRequiredUpper
+        budgetReceipt
+        evaluation
+        (Eval.EvaluationProducesBudget.nearBudget budgetReceipt)
+      →
+      SelectedUpper
+        (Window.PoleNearTargetWindow.finitePoleNearSigned
+          (Selected.ActualSelectedPoleNearProducer.targetWindow selected))
+        (budgetToSelectedScalar
+          (Eval.EvaluationProducesBudget.nearBudget budgetReceipt))
+
+    budgetTransportReference : String
+
+open SelectedFiniteNearBudgetTransport public
+
+selectedNearBudget :
+  ∀ {space formula orbit selected finite attachment} →
+  (transport :
+    SelectedFiniteNearBudgetTransport
+      space formula orbit selected finite attachment) →
+  Weil.WeilTestSpace.Scalar space
+selectedNearBudget {finite = finite} transport =
+  budgetToSelectedScalar transport
+    (Eval.EvaluationProducesBudget.nearBudget
+      (Eval.FiniteNearProducer.budget finite))
+
+selectedFiniteNearUpper :
+  ∀ {space formula orbit selected finite attachment} →
+  (transport :
+    SelectedFiniteNearBudgetTransport
+      space formula orbit selected finite attachment) →
+  SelectedUpper transport
+    (Window.PoleNearTargetWindow.finitePoleNearSigned
+      (Selected.ActualSelectedPoleNearProducer.targetWindow selected))
+    (selectedNearBudget transport)
+selectedFiniteNearUpper {finite = finite} transport =
+  evaluatorUpperBecomesSelectedUpper transport
+    (Eval.EvaluationProducesBudget.producesRequiredUpper
+      (Eval.FiniteNearProducer.budget finite))
+
+------------------------------------------------------------------------
 -- Checked-cutoff consequences: do not reopen carrier/far-shell mathematics.
 ------------------------------------------------------------------------
 
@@ -101,6 +177,7 @@ data SelectedFiniteNearPayment : Set where
   reproveDoffCutoffTransport
   recoverSignedFiniteNearProducer
   weldEvaluationToSelectedWindowFiniteNear
+  recoverBudgetTransportToSelectedScalar
   extractNearBudget
   : SelectedFiniteNearPayment
 
@@ -114,6 +191,7 @@ paymentStatus reproveArbitraryAccuracyCutoff = pruned
 paymentStatus reproveDoffCutoffTransport = pruned
 paymentStatus recoverSignedFiniteNearProducer = live
 paymentStatus weldEvaluationToSelectedWindowFiniteNear = live
+paymentStatus recoverBudgetTransportToSelectedScalar = live
 paymentStatus extractNearBudget = downstream
 
 finiteCarrierRebuildPruned : paymentStatus rebuildFiniteNearCarrier ≡ pruned
@@ -124,6 +202,10 @@ farShellReproofPruned = refl
 
 cutoffReproofPruned : paymentStatus reproveArbitraryAccuracyCutoff ≡ pruned
 cutoffReproofPruned = refl
+
+nearBudgetExtractionIsCompilerOutput :
+  paymentStatus extractNearBudget ≡ downstream
+nearBudgetExtractionIsCompilerOutput = refl
 
 record SelectedFiniteNearSameObjectBoundary : Set where
   constructor selected-finite-near-same-object-boundary
@@ -148,6 +230,14 @@ record SelectedFiniteNearSameObjectBoundary : Set where
     evaluatorMustUseSelectedWindowFiniteNearIsTrue :
       evaluatorMustUseSelectedWindowFiniteNear ≡ true
 
+    genericEvaluatorBudgetAlreadyLivesInSelectedScalar : Bool
+    genericEvaluatorBudgetAlreadyLivesInSelectedScalarIsFalse :
+      genericEvaluatorBudgetAlreadyLivesInSelectedScalar ≡ false
+
+    selectedBudgetExtractionNeedsFreshAnalyticEstimateAfterTransport : Bool
+    selectedBudgetExtractionNeedsFreshAnalyticEstimateAfterTransportIsFalse :
+      selectedBudgetExtractionNeedsFreshAnalyticEstimateAfterTransport ≡ false
+
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
 
@@ -163,4 +253,6 @@ canonicalSelectedFiniteNearSameObjectBoundary =
     false refl
     true refl
     false refl
-    "The checked 8883 cutoff return already owns the finite near carrier, explicit far-shell modulus/decay, arbitrary-accuracy cutoff and literal D_off cutoff transport. Do not reprove them. The live zero-side analytic payment is an actual phase-preserving FiniteNearProducer whose evaluation scalar carrier is identified with the selected Weil scalar and whose signedNearValue transports to exactly finitePoleNearSigned of the SAME selected PoleNearTargetWindow. Only then may its EvaluationProducesBudget receipt be consumed as the RH near budget. RH remains open."
+    false refl
+    false refl
+    "The checked 8883 cutoff return already owns the finite near carrier, explicit far-shell modulus/decay, arbitrary-accuracy cutoff and literal D_off cutoff transport. Do not reprove them. The live zero-side analytic payment is an actual phase-preserving FiniteNearProducer whose evaluation scalar carrier is identified with the selected Weil scalar and whose signedNearValue transports to exactly finitePoleNearSigned of the SAME selected PoleNearTargetWindow. EvaluationProducesBudget is already owned by that producer; after supplying the consumer-relative Budget -> selected-Scalar transport and proving its ProducesRequiredUpper receipt becomes the selected upper relation, the selected near budget and upper receipt are compiler output. RH remains open."
