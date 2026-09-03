@@ -7,15 +7,6 @@ import DASHI.Physics.QuantumVacuum.HarmonicOscillatorDoubledEnergyExact as Osc
 
 ------------------------------------------------------------------------
 -- FINITE SAME-FIELD / DIFFERENT-BOUNDARY COMPUTATIONAL FIXTURE
---
--- This is deliberately a finite toy witness.  It does not claim that these
--- three frequencies are a physical parallel-plate spectrum.  Its role is to
--- prove, by reduction, that once the boundary coordinate changes the admitted
--- mode list can change and so can the aggregate zero-point coordinate.
---
--- In doubled-energy units each ground mode contributes exactly omega:
---
---   2 E0(omega) = omega.
 ------------------------------------------------------------------------
 
 data FieldToken : Set where
@@ -34,13 +25,23 @@ record FiniteBoundaryModeFabric : Set where
 
 open FiniteBoundaryModeFabric public
 
-sumNat : List Nat → Nat
-sumNat [] = 0
-sumNat (x ∷ xs) = x + sumNat xs
+modewiseDoubledGroundEnergy : Nat → Nat
+modewiseDoubledGroundEnergy omega = Osc.doubledEnergy omega 0
+
+modewiseDoubledGroundEnergyIsFrequency :
+  (omega : Nat) →
+  modewiseDoubledGroundEnergy omega ≡ omega
+modewiseDoubledGroundEnergyIsFrequency omega =
+  Osc.groundDoubledEnergy omega
+
+sumModewiseDoubledGroundEnergy : List Nat → Nat
+sumModewiseDoubledGroundEnergy [] = 0
+sumModewiseDoubledGroundEnergy (omega ∷ rest) =
+  modewiseDoubledGroundEnergy omega + sumModewiseDoubledGroundEnergy rest
 
 doubledVacuumGroundAggregate : FiniteBoundaryModeFabric → Nat
 doubledVacuumGroundAggregate fabric =
-  sumNat (frequencies fabric)
+  sumModewiseDoubledGroundEnergy (frequencies fabric)
 
 freeFabric : FiniteBoundaryModeFabric
 freeFabric =
@@ -87,13 +88,6 @@ aggregateDifference :
     (doubledVacuumGroundAggregate cavityFabric)
 aggregateDifference = differentNat sixNotFour
 
-------------------------------------------------------------------------
--- Explicit non-factorability witness.
---
--- The field chart is identical, but the boundary chart distinguishes the two
--- hypervoxels and their finite zero-point aggregates differ.
-------------------------------------------------------------------------
-
 record FieldIdentityDoesNotDetermineVacuumAggregate : Set where
   field
     left right : FiniteBoundaryModeFabric
@@ -114,10 +108,6 @@ finiteNonFactorabilityWitness =
     ; sameFieldCoordinate = refl
     ; aggregateSeparates = aggregateDifference
     }
-
-------------------------------------------------------------------------
--- Boundary retopology is not ground-state-alone extraction.
-------------------------------------------------------------------------
 
 boundaryChanged : BoundaryToken → BoundaryToken → Set
 boundaryChanged freeBoundary cavityBoundary = ⊤
@@ -150,13 +140,6 @@ finiteRetopologyReceipt =
     ; boundaryDifference = tt
     ; aggregateDifference = aggregateDifference
     }
-
-------------------------------------------------------------------------
--- Authority boundary: this fixture is only a computational witness that mode
--- admission and raw finite zero-point coordinates can depend on boundary data.
--- It is not a physical Casimir spectrum, a renormalised observable, or a
--- closed energy cycle.
-------------------------------------------------------------------------
 
 record FixtureAuthorityBoundary : Set where
   field
