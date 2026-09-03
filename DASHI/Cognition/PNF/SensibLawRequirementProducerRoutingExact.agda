@@ -22,12 +22,13 @@ data ProducerCanPopulate : Cross.ProducerClass → Demand.SemanticCoordinate →
   evidencePopulatesProvenance : ProducerCanPopulate Cross.evidenceProducer Demand.provenanceCoordinate
   temporalPopulatesTemporal : ProducerCanPopulate Cross.temporalProducer Demand.temporalCoordinate
   documentContextPopulatesContext : ProducerCanPopulate Cross.documentContextProducer Demand.documentContextCoordinate
+  legalSourcePopulatesAuthority : ProducerCanPopulate Cross.legalSourceAuthorityProducer Demand.legalSourceAuthorityCoordinate
   legalMeetPopulatesJurisdiction : ProducerCanPopulate Cross.legalTypedMeetProducer Demand.jurisdictionCoordinate
   legalMeetPopulatesLegalRole : ProducerCanPopulate Cross.legalTypedMeetProducer Demand.legalRoleCoordinate
   legalMeetPopulatesApplicability : ProducerCanPopulate Cross.legalTypedMeetProducer Demand.applicabilityCoordinate
   legalMeetPopulatesViolation : ProducerCanPopulate Cross.legalTypedMeetProducer Demand.violationCoordinate
   legalMeetPopulatesLiability : ProducerCanPopulate Cross.legalTypedMeetProducer Demand.liabilityCoordinate
-  governedAdmissionPopulatesAuthority : ProducerCanPopulate Cross.governedAdmissionProducer Demand.authorityCoordinate
+  governedAdmissionPopulatesSemanticAuthority : ProducerCanPopulate Cross.governedAdmissionProducer Demand.semanticAdmissionAuthorityCoordinate
 
 record ProducerRoute (coordinate : Demand.SemanticCoordinate) : Set where
   constructor producerRoute
@@ -72,14 +73,17 @@ temporalRoute : ProducerRoute Demand.temporalCoordinate
 temporalRoute = producerRoute Cross.temporalProducer temporalPopulatesTemporal "temporal qualification/anchor producer"
 documentContextRoute : ProducerRoute Demand.documentContextCoordinate
 documentContextRoute = producerRoute Cross.documentContextProducer documentContextPopulatesContext "typed document/region/case context producer"
-authorityRoute : ProducerRoute Demand.authorityCoordinate
-authorityRoute = producerRoute Cross.governedAdmissionProducer governedAdmissionPopulatesAuthority "governed authority/admission evidence producer"
+legalSourceAuthorityRoute : ProducerRoute Demand.legalSourceAuthorityCoordinate
+legalSourceAuthorityRoute = producerRoute Cross.legalSourceAuthorityProducer legalSourcePopulatesAuthority "LegalSource + source system + effective interval authority producer"
+semanticAdmissionAuthorityRoute : ProducerRoute Demand.semanticAdmissionAuthorityCoordinate
+semanticAdmissionAuthorityRoute = producerRoute Cross.governedAdmissionProducer governedAdmissionPopulatesSemanticAuthority "semantic resolution/admission authority producer"
 applicabilityRoute : ProducerRoute Demand.applicabilityCoordinate
 applicabilityRoute = producerRoute Cross.legalTypedMeetProducer legalMeetPopulatesApplicability "typed legal applicability meet"
 
 data ReuseExistingRequiresProducerInvocation : Set where
 data ParserCanPopulateLegalApplicability : Set where
-data AttributionProducerCanResolveAuthority : Set where
+data AttributionProducerCanResolveLegalSourceAuthority : Set where
+data SemanticAdmissionProducerCanResolveLegalSourceAuthority : Set where
 data DocumentContextIsParserShape : Set where
 
 actionReuseNeedsNoProducer : invocationNeed Planner.reuseExisting ≡ noProducerInvocation
@@ -92,8 +96,10 @@ reuseDoesNotInvokeProducer : ReuseExistingRequiresProducerInvocation → ⊥
 reuseDoesNotInvokeProducer ()
 parserDoesNotOwnLegalApplicability : ParserCanPopulateLegalApplicability → ⊥
 parserDoesNotOwnLegalApplicability ()
-attributionDoesNotOwnAuthority : AttributionProducerCanResolveAuthority → ⊥
-attributionDoesNotOwnAuthority ()
+attributionDoesNotOwnLegalSourceAuthority : AttributionProducerCanResolveLegalSourceAuthority → ⊥
+attributionDoesNotOwnLegalSourceAuthority ()
+semanticAdmissionDoesNotOwnLegalSourceAuthority : SemanticAdmissionProducerCanResolveLegalSourceAuthority → ⊥
+semanticAdmissionDoesNotOwnLegalSourceAuthority ()
 documentContextDoesNotCollapseToParserShape : DocumentContextIsParserShape → ⊥
 documentContextDoesNotCollapseToParserShape ()
 
@@ -103,7 +109,9 @@ record RequirementProducerRoutingBoundary : Set where
     producerRoutingIsCoordinateIndexed : Bool
     satisfiedRequirementNeedsProducerInvocation : Bool
     parserMayPopulateLegalApplicability : Bool
-    attributionMayResolveAuthority : Bool
+    attributionMayResolveLegalSourceAuthority : Bool
+    semanticAdmissionMayResolveLegalSourceAuthority : Bool
+    legalSourceAuthorityHasDedicatedProducerClass : Bool
     documentContextHasDedicatedProducerClass : Bool
 canonicalRequirementProducerRoutingBoundary : RequirementProducerRoutingBoundary
-canonicalRequirementProducerRoutingBoundary = requirement-producer-routing-boundary true false false false true
+canonicalRequirementProducerRoutingBoundary = requirement-producer-routing-boundary true false false false false true true
