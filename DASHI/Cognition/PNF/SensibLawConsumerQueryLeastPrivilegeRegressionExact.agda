@@ -8,52 +8,34 @@ import DASHI.Cognition.PNF.SensibLawConsumerQuerySemanticCoordinateReopeningExac
 
 ------------------------------------------------------------------------
 -- EXACT LEAST-PRIVILEGE REGRESSIONS
---
--- These are indexed impossibilities over the actual `Requires` relation, not
--- policy comments.  A consumer may be legal while asking a cheap general
--- discourse question; absent constructors are therefore meaningful here.
 ------------------------------------------------------------------------
 
 legalWhoSaidWhatDoesNotRequireApplicability :
-  Demand.Requires
-    Consumer.legalConsumer
-    Demand.whoSaidWhatQuery
-    Demand.applicabilityCoordinate → ⊥
+  Demand.Requires Consumer.legalConsumer Demand.whoSaidWhatQuery Demand.applicabilityCoordinate → ⊥
 legalWhoSaidWhatDoesNotRequireApplicability ()
 
-legalWhoSaidWhatDoesNotRequireAuthority :
-  Demand.Requires
-    Consumer.legalConsumer
-    Demand.whoSaidWhatQuery
-    Demand.authorityCoordinate → ⊥
-legalWhoSaidWhatDoesNotRequireAuthority ()
+legalWhoSaidWhatDoesNotRequireLegalSourceAuthority :
+  Demand.Requires Consumer.legalConsumer Demand.whoSaidWhatQuery Demand.legalSourceAuthorityCoordinate → ⊥
+legalWhoSaidWhatDoesNotRequireLegalSourceAuthority ()
+
+legalWhoSaidWhatDoesNotRequireSemanticAdmissionAuthority :
+  Demand.Requires Consumer.legalConsumer Demand.whoSaidWhatQuery Demand.semanticAdmissionAuthorityCoordinate → ⊥
+legalWhoSaidWhatDoesNotRequireSemanticAdmissionAuthority ()
 
 legalWhoSaidWhatDoesNotRequireJurisdiction :
-  Demand.Requires
-    Consumer.legalConsumer
-    Demand.whoSaidWhatQuery
-    Demand.jurisdictionCoordinate → ⊥
+  Demand.Requires Consumer.legalConsumer Demand.whoSaidWhatQuery Demand.jurisdictionCoordinate → ⊥
 legalWhoSaidWhatDoesNotRequireJurisdiction ()
 
 legalDiscourseRoleDoesNotRequireApplicability :
-  Demand.Requires
-    Consumer.legalConsumer
-    Demand.legalDiscourseRoleQuery
-    Demand.applicabilityCoordinate → ⊥
+  Demand.Requires Consumer.legalConsumer Demand.legalDiscourseRoleQuery Demand.applicabilityCoordinate → ⊥
 legalDiscourseRoleDoesNotRequireApplicability ()
 
 legalDiscourseRoleDoesNotRequireLiability :
-  Demand.Requires
-    Consumer.legalConsumer
-    Demand.legalDiscourseRoleQuery
-    Demand.liabilityCoordinate → ⊥
+  Demand.Requires Consumer.legalConsumer Demand.legalDiscourseRoleQuery Demand.liabilityCoordinate → ⊥
 legalDiscourseRoleDoesNotRequireLiability ()
 
 generalWhoSaidWhatDoesNotRequireLegalRole :
-  Demand.Requires
-    Consumer.generalSemanticConsumer
-    Demand.whoSaidWhatQuery
-    Demand.legalRoleCoordinate → ⊥
+  Demand.Requires Consumer.generalSemanticConsumer Demand.whoSaidWhatQuery Demand.legalRoleCoordinate → ⊥
 generalWhoSaidWhatDoesNotRequireLegalRole ()
 
 ------------------------------------------------------------------------
@@ -61,24 +43,19 @@ generalWhoSaidWhatDoesNotRequireLegalRole ()
 ------------------------------------------------------------------------
 
 legalApplicabilityReallyRequiresOccurrence :
-  Demand.Requires
-    Consumer.legalConsumer
-    Demand.legalApplicabilityQuery
-    Demand.occurrenceCoordinate
+  Demand.Requires Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.occurrenceCoordinate
 legalApplicabilityReallyRequiresOccurrence = Demand.legalApplicabilityNeedsOccurrence
 
-legalApplicabilityReallyRequiresAuthority :
-  Demand.Requires
-    Consumer.legalConsumer
-    Demand.legalApplicabilityQuery
-    Demand.authorityCoordinate
-legalApplicabilityReallyRequiresAuthority = Demand.legalApplicabilityNeedsAuthority
+legalApplicabilityReallyRequiresLegalSourceAuthority :
+  Demand.Requires Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.legalSourceAuthorityCoordinate
+legalApplicabilityReallyRequiresLegalSourceAuthority = Demand.legalApplicabilityNeedsLegalSourceAuthority
+
+legalApplicabilityDoesNotRequireSemanticAdmissionAuthority :
+  Demand.Requires Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.semanticAdmissionAuthorityCoordinate → ⊥
+legalApplicabilityDoesNotRequireSemanticAdmissionAuthority ()
 
 legalApplicabilityReallyRequiresJurisdiction :
-  Demand.Requires
-    Consumer.legalConsumer
-    Demand.legalApplicabilityQuery
-    Demand.jurisdictionCoordinate
+  Demand.Requires Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.jurisdictionCoordinate
 legalApplicabilityReallyRequiresJurisdiction = Demand.legalApplicabilityNeedsJurisdiction
 
 ------------------------------------------------------------------------
@@ -86,17 +63,15 @@ legalApplicabilityReallyRequiresJurisdiction = Demand.legalApplicabilityNeedsJur
 ------------------------------------------------------------------------
 
 data CheapQuerySecretlyContainsFullLegalStack : Set where
-data StrongQueryCanBorrowMissingAuthorityFromAttribution : Set where
-
+data StrongQueryCanBorrowMissingLegalSourceAuthorityFromAttribution : Set where
 data QueryBroadeningReparsesText : Set where
 
-cheapQueryDoesNotSecretlyContainFullLegalStack :
-  CheapQuerySecretlyContainsFullLegalStack → ⊥
+cheapQueryDoesNotSecretlyContainFullLegalStack : CheapQuerySecretlyContainsFullLegalStack → ⊥
 cheapQueryDoesNotSecretlyContainFullLegalStack ()
 
-strongQueryCannotBorrowMissingAuthorityFromAttribution :
-  StrongQueryCanBorrowMissingAuthorityFromAttribution → ⊥
-strongQueryCannotBorrowMissingAuthorityFromAttribution ()
+strongQueryCannotBorrowMissingLegalSourceAuthorityFromAttribution :
+  StrongQueryCanBorrowMissingLegalSourceAuthorityFromAttribution → ⊥
+strongQueryCannotBorrowMissingLegalSourceAuthorityFromAttribution ()
 
 queryBroadeningDoesNotReparseText : QueryBroadeningReparsesText → ⊥
 queryBroadeningDoesNotReparseText ()
