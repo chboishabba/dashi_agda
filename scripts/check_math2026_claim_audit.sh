@@ -51,6 +51,7 @@ FILES=(
   DASHI/Analysis/RiemannG2FkOrbitExplicitFormulaWeldExact.agda
   DASHI/Analysis/RiemannG2FkSelectedTestSameObjectBidiExact.agda
   DASHI/Analysis/RiemannG2SelectedPoleNearSingleProducerBidiExact.agda
+  DASHI/Analysis/RiemannG2SelectedPoleNearFiniteEvaluationSameObjectExact.agda
   DASHI/Analysis/RiemannG2HighestAlphaAfter8894Exact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda
