@@ -9,17 +9,14 @@ import DASHI.Physics.QuantumVacuum.PhysicalQuantities as Q
 ------------------------------------------------------------------------
 -- PHYSICAL PARALLEL-PLATE MODE-SPECTRUM CUTSET
 --
--- This module moves the Casimir lane from a toy finite mode witness to the
--- exact physical obligations needed for the ideal conducting-plate result.
--- It does not fabricate the continuum/renormalisation theorem.
---
--- For a plate separation d, a physical mode has transverse momentum k_perp,
--- longitudinal integer n, and polarization.  Its frequency must satisfy
+-- For ideal conducting plates, a mode is indexed by transverse momentum,
+-- longitudinal integer n, and polarization, with
 --
 --   omega = c sqrt(k_perp^2 + (n pi / d)^2).
 --
--- A regulated mode sum is then compared with a reference vacuum and only the
--- renormalised difference may be welded to the existing Casimir kernel.
+-- The regulated plate/reference sums are kept distinct from the renormalised
+-- observable.  The only genuinely open analytic leaf is regulator removal +
+-- reference subtraction + continuum evaluation on the physical spectrum.
 ------------------------------------------------------------------------
 
 data Polarisation : Set where
@@ -39,7 +36,6 @@ record ParallelPlateSpectralModel
   field
     Transverse : Set
     Mode : Set
-
     modeIndex : Mode → ParallelPlateModeIndex Transverse
 
     transverseSquared : Transverse → Casimir.Scalar kernel
@@ -54,25 +50,21 @@ record ParallelPlateSpectralModel
       (m : Mode) →
       admissible d m →
       frequency d m ≡
-        Casimir.lightSpeed kernel Casimir.*
-        root
-          (transverseSquared (transverse (modeIndex m)) Casimir.+
-           square
-             (divide
-               (Casimir.fromNat kernel (longitudinal (modeIndex m)) Casimir.*
-                Casimir.pi kernel)
-               (Casimir.lengthValue kernel d)))
+        Casimir._*_ kernel
+          (Casimir.lightSpeed kernel)
+          (root
+            (Casimir._+_ kernel
+              (transverseSquared (transverse (modeIndex m)))
+              (square
+                (divide
+                  (Casimir._*_ kernel
+                    (Casimir.fromNat kernel (longitudinal (modeIndex m)))
+                    (Casimir.pi kernel))
+                  (Casimir.lengthValue kernel d)))))
 
     spectralReading : String
 
 open ParallelPlateSpectralModel public
-
-------------------------------------------------------------------------
--- Regulated finite approximants.
---
--- The regulator chooses finite mode carriers on both the plate and reference
--- sides.  The sum law is explicit and modewise uses (1/2) hbar omega.
-------------------------------------------------------------------------
 
 record ParallelPlateRegulator
     {kernel : Casimir.CasimirScalarModel}
@@ -96,8 +88,13 @@ record ParallelPlateRegulator
     zeroPointLaw :
       (d : Q.Length) → (m : Mode spectrum) →
       zeroPointContribution d m ≡
-        (Casimir.hbar kernel Casimir.* frequency spectrum d m) Casimir.*
-        divide spectrum (Casimir.one kernel) (Casimir.fromNat kernel 2)
+        Casimir._*_ kernel
+          (Casimir._*_ kernel
+            (Casimir.hbar kernel)
+            (frequency spectrum d m))
+          (divide spectrum
+            (Casimir.one kernel)
+            (Casimir.fromNat kernel 2))
 
     regulatedPlateEnergy : Q.Length → Cutoff → Casimir.Scalar kernel
     regulatedReferenceEnergy : Q.Length → Cutoff → Casimir.Scalar kernel
@@ -123,11 +120,7 @@ record ParallelPlateRegulator
 open ParallelPlateRegulator public
 
 ------------------------------------------------------------------------
--- Renormalised continuum receipt: THIS is the hard analytic leaf.
---
--- The receipt must simultaneously identify the physical spectrum, control the
--- regulator/removal limit, subtract the reference vacuum on the same scalar
--- carrier, and prove agreement with -pi^2 hbar c/(720 d^3).
+-- HARD ANALYTIC LEAF.
 ------------------------------------------------------------------------
 
 record ParallelPlateRenormalisedEvaluation
@@ -153,18 +146,11 @@ record ParallelPlateRenormalisedEvaluation
 
     derivativeCarrier : Set
     boundaryDerivativeProducesPressure : derivativeCarrier
-
-    pressureWeld :
-      (d : Q.Length) → Set
+    pressureWeld : (d : Q.Length) → Set
 
     evaluationReading : String
 
 open ParallelPlateRenormalisedEvaluation public
-
-------------------------------------------------------------------------
--- Once the analytic receipt exists, the existing kernel formula is compiler
--- output on the same object.  No further physical mode-sum theorem is needed.
-------------------------------------------------------------------------
 
 renormalisedDifferenceHasCasimirEnergyLaw :
   (kernel : Casimir.CasimirScalarModel) →
@@ -172,19 +158,25 @@ renormalisedDifferenceHasCasimirEnergyLaw :
   (d : Q.Length) →
   sameScalarObservable evaluation d (renormalisedDifference evaluation d) ≡
   Casimir.negate kernel
-    (((Casimir.pi kernel Casimir.* Casimir.pi kernel) Casimir.*
-      (Casimir.hbar kernel Casimir.* Casimir.lightSpeed kernel)) Casimir.*
-     Casimir.inverse kernel
-       (Casimir.fromNat kernel 720 Casimir.*
-        Casimir.power3 kernel (Casimir.lengthValue kernel d)))
+    (Casimir._*_ kernel
+      (Casimir._*_ kernel
+        (Casimir._*_ kernel
+          (Casimir.pi kernel)
+          (Casimir.pi kernel))
+        (Casimir._*_ kernel
+          (Casimir.hbar kernel)
+          (Casimir.lightSpeed kernel)))
+      (Casimir.inverse kernel
+        (Casimir._*_ kernel
+          (Casimir.fromNat kernel 720)
+          (Casimir.power3 kernel (Casimir.lengthValue kernel d)))))
 renormalisedDifferenceHasCasimirEnergyLaw kernel evaluation d =
   trans
     (energyPerAreaWeld evaluation d)
     (Casimir.energyLaw kernel d)
 
 ------------------------------------------------------------------------
--- Machine-readable cutset.  Everything except the continuum/renormalised
--- evaluation is now architecture or existing-kernel output.
+-- Exact cutset status.
 ------------------------------------------------------------------------
 
 record ParallelPlateCutsetStatus : Set where
@@ -198,19 +190,14 @@ record ParallelPlateCutsetStatus : Set where
     casimirKernelAlreadyOwned : Bool
     resetCycleClosedBySpectralEvaluation : Bool
 
-    oscillatorZeroPointFormulaOwnedIsTrue :
-      oscillatorZeroPointFormulaOwned ≡ true
-    boundaryModeNonFactorabilityOwnedIsTrue :
-      boundaryModeNonFactorabilityOwned ≡ true
+    oscillatorZeroPointFormulaOwnedIsTrue : oscillatorZeroPointFormulaOwned ≡ true
+    boundaryModeNonFactorabilityOwnedIsTrue : boundaryModeNonFactorabilityOwned ≡ true
     rationalHalfScaleOwnedIsTrue : rationalHalfScaleOwned ≡ true
-    physicalModeSpectrumInterfaceOwnedIsTrue :
-      physicalModeSpectrumInterfaceOwned ≡ true
+    physicalModeSpectrumInterfaceOwnedIsTrue : physicalModeSpectrumInterfaceOwned ≡ true
     regulatorInterfaceOwnedIsTrue : regulatorInterfaceOwned ≡ true
-    renormalisedContinuumEvaluationClosedIsFalse :
-      renormalisedContinuumEvaluationClosed ≡ false
+    renormalisedContinuumEvaluationClosedIsFalse : renormalisedContinuumEvaluationClosed ≡ false
     casimirKernelAlreadyOwnedIsTrue : casimirKernelAlreadyOwned ≡ true
-    resetCycleClosedBySpectralEvaluationIsFalse :
-      resetCycleClosedBySpectralEvaluation ≡ false
+    resetCycleClosedBySpectralEvaluationIsFalse : resetCycleClosedBySpectralEvaluation ≡ false
 
 open ParallelPlateCutsetStatus public
 
