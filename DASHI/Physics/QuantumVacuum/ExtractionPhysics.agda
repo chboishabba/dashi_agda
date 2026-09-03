@@ -12,11 +12,13 @@ import DASHI.Physics.QuantumVacuum.ExtractionPhysicsSurface
 import DASHI.Physics.QuantumVacuum.PhysicalQuantities
 import DASHI.Physics.QuantumVacuum.ZeroPointModeHyperfabricExact
 import DASHI.Physics.QuantumVacuum.HarmonicOscillatorDoubledEnergyExact
+import DASHI.Physics.QuantumVacuum.HarmonicOscillatorRationalHalfScaleExact
 import DASHI.Physics.QuantumVacuum.ZeroPointExtractionFirewallExact
 import DASHI.Physics.QuantumVacuum.EvidenceReceipts
 import DASHI.Physics.QuantumVacuum.DiscriminatingExperiment
 import DASHI.Physics.QuantumVacuum.CasimirParallelPlateKernel
 import DASHI.Physics.QuantumVacuum.CasimirModeHyperfabricBridgeExact
+import DASHI.Physics.QuantumVacuum.FiniteCasimirModeDifferenceFixtureExact
 import DASHI.Physics.QuantumVacuum.TunableMaterialCasimirBridge
 import DASHI.Physics.QuantumVacuum.CasimirCycleAccounting
 import DASHI.Physics.QuantumVacuum.ReservoirDynamics
