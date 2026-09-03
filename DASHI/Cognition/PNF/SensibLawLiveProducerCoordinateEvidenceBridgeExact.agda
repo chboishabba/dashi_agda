@@ -16,7 +16,7 @@ import DASHI.Cognition.PNF.SensibLawDocumentDiscourseContextRefinementExact as D
 -- LIVE PRODUCER RECEIPT -> COORDINATE EVIDENCE
 --
 -- Producer evidence pays a planner requirement only when the exact producer
--- object is present in the current SemanticCommitmentState.  Type similarity or
+-- object is present in the current SemanticCommitmentState. Type similarity or
 -- a receipt about another proposition/event/legal status is not enough.
 ------------------------------------------------------------------------
 
@@ -66,6 +66,25 @@ record DocumentContextReceiptInState
 
 open DocumentContextReceiptInState public
 
+data ResolvedAttribution : Status.AttributionRole → Set where
+  authorResolved : ResolvedAttribution Status.author
+  speakerResolved : ResolvedAttribution Status.speaker
+  reporterResolved : ResolvedAttribution Status.reporter
+  quotedSpeakerResolved : ResolvedAttribution Status.quotedSpeaker
+  propositionSourceResolved : ResolvedAttribution Status.propositionSource
+
+record AttributionReceiptInState
+    (state : Status.SemanticCommitmentState) : Set where
+  constructor attributionReceiptInState
+  field
+    propositionReceipt : Status.PropositionResolutionReceipt
+    exactMembership : Status.proposition propositionReceipt ∈ Status.propositions state
+    resolvedAttribution :
+      ResolvedAttribution (Status.attribution (Status.proposition propositionReceipt))
+    attributionReference : String
+
+open AttributionReceiptInState public
+
 ------------------------------------------------------------------------
 -- Exact current-resolution bridges.
 ------------------------------------------------------------------------
@@ -92,6 +111,18 @@ occurrenceReceiptPaysActiveCoordinate same owned =
     Planner.currentResolved
     (OccurrenceReceiptInState.receiptReference owned ∷ [])
     "OccurrenceResolutionReceipt + exact current-state membership"
+    true refl true refl
+
+attributionReceiptPaysActiveCoordinate :
+  ∀ {state active} →
+  Demand.coordinate active ≡ Demand.attributionCoordinate →
+  AttributionReceiptInState state →
+  Planner.CoordinateEvidenceReceipt state active
+attributionReceiptPaysActiveCoordinate same owned =
+  Planner.coordinateEvidenceReceipt
+    Planner.currentResolved
+    (AttributionReceiptInState.attributionReference owned ∷ [])
+    "resolved attribution in PropositionResolutionReceipt + exact state membership"
     true refl true refl
 
 applicabilityReceiptPaysActiveCoordinate :
@@ -206,6 +237,8 @@ data ParserCandidatePaysAuthorityCoordinate : Set where
 data MissingEvidenceMayBeInferredFromNoLocalConstructor : Set where
 data StaleEvidenceEqualsMissingEvidence : Set where
 
+data UnresolvedAttributionCountsAsResolved : Set where
+
 otherPropositionReceiptDoesNotPay :
   ReceiptAboutOtherPropositionPaysRequirement → ⊥
 otherPropositionReceiptDoesNotPay ()
@@ -223,6 +256,10 @@ absenceOfConstructorDoesNotProveMissing ()
 staleDoesNotCollapseToMissing : StaleEvidenceEqualsMissingEvidence → ⊥
 staleDoesNotCollapseToMissing ()
 
+unresolvedAttributionDoesNotCountAsResolved :
+  UnresolvedAttributionCountsAsResolved → ⊥
+unresolvedAttributionDoesNotCountAsResolved ()
+
 record LiveProducerCoordinateEvidenceBoundary : Set where
   constructor live-producer-coordinate-evidence-boundary
   field
@@ -231,9 +268,10 @@ record LiveProducerCoordinateEvidenceBoundary : Set where
     exhaustiveSearchRequiredForMissingClassification : Bool
     conflictingAndMissingRemainDistinct : Bool
     staleAndMissingRemainDistinct : Bool
+    unresolvedAttributionCountsAsResolved : Bool
     parserCandidateMayPayAuthorityCoordinate : Bool
 
 canonicalLiveProducerCoordinateEvidenceBoundary :
   LiveProducerCoordinateEvidenceBoundary
 canonicalLiveProducerCoordinateEvidenceBoundary =
-  live-producer-coordinate-evidence-boundary true false true true true false
+  live-producer-coordinate-evidence-boundary true false true true true false false
