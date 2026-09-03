@@ -2,6 +2,7 @@ module DASHI.Analysis.ZetaMinusThreeAnalyticCutsetExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
+open import Data.Rational using (ℚ)
 
 import DASHI.Analysis.ZetaMinusThreeBernoulliArithmeticExact as Arithmetic
 
@@ -16,11 +17,9 @@ import DASHI.Analysis.ZetaMinusThreeBernoulliArithmeticExact as Arithmetic
 record RiemannZetaContinuationCarrier : Set₁ where
   field
     Complex : Set
-    Rational : Set
     zeta : Complex → Complex
-    embedRational : Rational → Complex
+    embedRational : ℚ → Complex
     minusThree : Complex
-    oneOverOneTwenty : Rational
     reading : String
 
 open RiemannZetaContinuationCarrier public
@@ -44,12 +43,18 @@ record ZetaMinusThreeOneOver120Receipt
     (Z : RiemannZetaContinuationCarrier) : Set₁ where
   field
     analytic : BernoulliFourAnalyticReceipt Z
-    rationalCompiler : Arithmetic.ZetaMinusThreeArithmeticReceipt
+    rationalCompiler :
+      Arithmetic.minusB4OverFour ≡ Arithmetic.oneOver120
     rationalCompilerUsesB4 : Set
-    zetaMinusThreeEqualsOneOver120 : Set
+    zetaMinusThreeEqualsOneOver120 :
+      zeta Z (minusThree Z) ≡ embedRational Z Arithmetic.oneOver120
     reading : String
 
 open ZetaMinusThreeOneOver120Receipt public
+
+canonicalBernoulliArithmetic :
+  Arithmetic.minusB4OverFour ≡ Arithmetic.oneOver120
+canonicalBernoulliArithmetic = Arithmetic.bernoulliB4CompilerProducesOneOver120
 
 data BernoulliArithmeticAutomaticallySuppliesAnalyticContinuation : Set where
 
