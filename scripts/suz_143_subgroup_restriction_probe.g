@@ -1,10 +1,21 @@
 # Exact CTblLib probe for restrictions of the faithful degree-143 Suz character.
 #
 # PURPOSE
-#   Test whether the published Suz-irreducible 143 can acquire an invariant
-#   53-dimensional summand after restriction to structurally motivated maximal
-#   subgroups.  This is the representation-theoretic firewall for the proposed
-#   R_53 ~ J_27 + V_26 / 1+26+26 Albert lane.
+#   Test two competing downstream structures after restricting the published
+#   Suz-irreducible 143 to structurally motivated maximal subgroups:
+#
+#   (A) highest-priority G2(4) bridge:
+#         143 |_ G2(4) ?= 65 + 78
+#       where 65 and 78 are genuine ordinary G2(4) irreducible degrees;
+#
+#   (B) older Albert residual lane:
+#         does any named subgroup expose an invariant dimension-53 summand,
+#         especially through 27 + 26?
+#
+#   The script records the COMPLETE ordinary restriction decomposition.  It
+#   does not identify a G2(4)-degree-78 constituent with Wilson's degree-78
+#   multiplicity representation merely from matching degree; that is a later
+#   same-object / cover-character comparison.
 #
 # PRIMARY SOURCES
 #   R. A. Wilson, "The odd-local subgroups of the Monster",
@@ -32,7 +43,8 @@ fi;
 chi143Position := pos143[1];
 chi143 := suzIrr[chi143Position];
 
-# Every table below has a stored fusion into Suz in current CTblLib.
+# G2(4) is deliberately first: it is the strongest structural candidate.
+# Every table below is expected to have a stored fusion into Suz in CTblLib.
 candidateNames := [
   "G2(4)",
   "U5(2)",
@@ -91,6 +103,16 @@ for name in candidateNames do
   constituentMultiplicities := List(nz, i -> mults[i]);
   attainable53 := AttainableDimensions(constituentDegrees, constituentMultiplicities, 53);
 
+  # Exact ordinary-character G2(4) target.  We only mark the Boolean here;
+  # the script does not fail if it is false, because a negative answer is a
+  # scientifically useful result rather than a producer failure.
+  isG2 := name = "G2(4)";
+  g2Exact65Plus78 :=
+    isG2
+    and Length(nz) = 2
+    and constituentDegrees = [65, 78]
+    and constituentMultiplicities = [1, 1];
+
   Add(records, rec(
     name := name,
     nonzeroPositions := nz,
@@ -99,8 +121,11 @@ for name in candidateNames do
     hasIrrep26 := 26 in constituentDegrees,
     hasIrrep27 := 27 in constituentDegrees,
     hasIrrep53 := 53 in constituentDegrees,
+    hasIrrep65 := 65 in constituentDegrees,
+    hasIrrep78 := 78 in constituentDegrees,
     hasInvariant53Subsum := 53 in attainable53,
     hasAlbert27Plus26Irreps := (26 in constituentDegrees) and (27 in constituentDegrees),
+    exactG2SixtyFivePlusSeventyEight := g2Exact65Plus78,
     attainableUpTo53 := attainable53
   ));
 od;
@@ -112,6 +137,7 @@ PrintTo(output,
   "  \"source_table\": \"Suz\",\n",
   "  \"source_character_position\": ", chi143Position, ",\n",
   "  \"source_character_degree\": 143,\n",
+  "  \"g2_priority_target\": \"143|G2(4) = 65 + 78\",\n",
   "  \"candidates\": [\n"
 );
 
@@ -124,8 +150,11 @@ for j in [1..Length(records)] do
     "\"has_irrep_26\": ", LowercaseString(String(r.hasIrrep26)), ", ",
     "\"has_irrep_27\": ", LowercaseString(String(r.hasIrrep27)), ", ",
     "\"has_irrep_53\": ", LowercaseString(String(r.hasIrrep53)), ", ",
+    "\"has_irrep_65\": ", LowercaseString(String(r.hasIrrep65)), ", ",
+    "\"has_irrep_78\": ", LowercaseString(String(r.hasIrrep78)), ", ",
     "\"has_invariant_53_subsum\": ", LowercaseString(String(r.hasInvariant53Subsum)), ", ",
     "\"has_albert_27_plus_26_irreps\": ", LowercaseString(String(r.hasAlbert27Plus26Irreps)), ", ",
+    "\"exact_g2_65_plus_78\": ", LowercaseString(String(r.exactG2SixtyFivePlusSeventyEight)), ", ",
     "\"attainable_up_to_53\": ", r.attainableUpTo53, "}"
   );
   if j < Length(records) then PrintTo(output, ","); fi;
