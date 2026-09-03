@@ -13,15 +13,6 @@ import DASHI.Cognition.PNF.SensibLawConsumerQuerySemanticCoordinateReopeningExac
 import DASHI.Cognition.PNF.SensibLawActiveRequirementExecutionPlannerExact as Planner
 import DASHI.Cognition.PNF.SensibLawLiveProducerCoordinateEvidenceBridgeExact as Bridge
 
-------------------------------------------------------------------------
--- RESOLVED LEGAL JURISDICTION
---
--- A location mention or document provenance may propose a jurisdiction
--- candidate.  Applicability requires a legal-system-relative jurisdiction
--- receipt.  Geographic jurisdiction is deliberately excluded from the resolved
--- legal-jurisdiction witness family below.
-------------------------------------------------------------------------
-
 data ResolvedLegalJurisdiction : Status.JurisdictionKind → Set where
   legalSystemResolved : ResolvedLegalJurisdiction Status.legalSystemJurisdiction
   courtResolved : ResolvedLegalJurisdiction Status.courtJurisdiction
@@ -39,8 +30,7 @@ record LegalJurisdictionReceiptInState
       ≡ Ontology.LegalSystem.systemId system
     legalStatus : Status.LegalStatusProduct
     legalStatusMembership : Bridge._∈_ legalStatus (Status.legalStatuses state)
-    jurisdictionResolved :
-      ResolvedLegalJurisdiction (Status.jurisdictionKind legalStatus)
+    jurisdictionResolved : ResolvedLegalJurisdiction (Status.jurisdictionKind legalStatus)
     jurisdictionEvidenceReferences : List String
     systemEvidenceReferences : List String
     jurisdictionReference : String
@@ -59,10 +49,6 @@ legalJurisdictionPaysActiveCoordinate same receipt =
     (jurisdictionReference receipt)
     true refl true refl
 
-------------------------------------------------------------------------
--- Candidate jurisdiction is weaker.
-------------------------------------------------------------------------
-
 record JurisdictionCandidate : Set where
   constructor jurisdictionCandidate
   field
@@ -77,7 +63,8 @@ data GeographicMentionIsResolvedLegalJurisdiction : Set where
 data CaseFrameSystemAloneFixesJurisdictionKind : Set where
 data LegalSystemRecordAloneEstablishesApplicability : Set where
 data JurisdictionCandidatePaysResolvedLegalJurisdiction : Set where
-\ ngeographicMentionDoesNotResolveLegalJurisdiction :
+
+geographicMentionDoesNotResolveLegalJurisdiction :
   GeographicMentionIsResolvedLegalJurisdiction → ⊥
 geographicMentionDoesNotResolveLegalJurisdiction ()
 
