@@ -20,11 +20,6 @@ import DASHI.Cognition.PNF.SensibLawRequirementProducerRoutingExact as Routing
 
 ------------------------------------------------------------------------
 -- MATERIALISED PDF -> CONSTITUTION -> COMMITMENT STATE
---
--- Reuse the actual parser observations from the PDF reporting fixture.  This is
--- not a second parse and does not identify the lower CandidateSemanticFibre with
--- the higher Constitution.SemanticCandidateFibre; the latter is constructed
--- explicitly from the same numeric token observations.
 ------------------------------------------------------------------------
 
 submittedRow : Spacy.NumericTokenRow
@@ -118,14 +113,14 @@ documentContextActive =
     Demand.legalApplicabilityNeedsContext
     "PDF applicability needs document/case context"
 
-authorityActive : Demand.ActiveRequirement
-authorityActive =
+legalSourceAuthorityActive : Demand.ActiveRequirement
+legalSourceAuthorityActive =
   Demand.activeRequirement
     Consumer.legalConsumer
     Demand.legalApplicabilityQuery
-    Demand.authorityCoordinate
-    Demand.legalApplicabilityNeedsAuthority
-    "PDF applicability still requires governed authority"
+    Demand.legalSourceAuthorityCoordinate
+    Demand.legalApplicabilityNeedsLegalSourceAuthority
+    "PDF applicability still requires legal-source authority"
 
 ------------------------------------------------------------------------
 -- Same-object producer ownership in the current state.
@@ -166,21 +161,16 @@ ownedDocumentContext =
 ------------------------------------------------------------------------
 
 attributionEvidence : Planner.CoordinateEvidenceReceipt pdfPlannerState attributionActive
-attributionEvidence =
-  Bridge.attributionReceiptPaysActiveCoordinate refl ownedAttribution
+attributionEvidence = Bridge.attributionReceiptPaysActiveCoordinate refl ownedAttribution
 
 propositionEvidence : Planner.CoordinateEvidenceReceipt pdfPlannerState propositionActive
-propositionEvidence =
-  Bridge.propositionReceiptPaysActiveCoordinate refl ownedProposition
+propositionEvidence = Bridge.propositionReceiptPaysActiveCoordinate refl ownedProposition
 
 occurrenceEvidence : Planner.CoordinateEvidenceReceipt pdfPlannerState occurrenceActive
-occurrenceEvidence =
-  Bridge.occurrenceReceiptPaysActiveCoordinate refl ownedOccurrence
+occurrenceEvidence = Bridge.occurrenceReceiptPaysActiveCoordinate refl ownedOccurrence
 
-documentContextEvidence :
-  Planner.CoordinateEvidenceReceipt pdfPlannerState documentContextActive
-documentContextEvidence =
-  Bridge.documentContextReceiptPaysActiveCoordinate refl ownedDocumentContext
+documentContextEvidence : Planner.CoordinateEvidenceReceipt pdfPlannerState documentContextActive
+documentContextEvidence = Bridge.documentContextReceiptPaysActiveCoordinate refl ownedDocumentContext
 
 attributionPlan : Planner.RequirementPlan pdfPlannerState attributionActive
 attributionPlan = Planner.planRequirement attributionEvidence "reuse live PDF attribution"
@@ -192,23 +182,18 @@ occurrencePlan : Planner.RequirementPlan pdfPlannerState occurrenceActive
 occurrencePlan = Planner.planRequirement occurrenceEvidence "reuse live PDF occurrence status"
 
 documentContextPlan : Planner.RequirementPlan pdfPlannerState documentContextActive
-documentContextPlan =
-  Planner.planRequirement documentContextEvidence "reuse live PDF document context"
+documentContextPlan = Planner.planRequirement documentContextEvidence "reuse live PDF document context"
 
-attributionReusesExisting :
-  Planner.action attributionPlan ≡ Planner.reuseExisting
+attributionReusesExisting : Planner.action attributionPlan ≡ Planner.reuseExisting
 attributionReusesExisting = refl
 
-propositionReusesExisting :
-  Planner.action propositionPlan ≡ Planner.reuseExisting
+propositionReusesExisting : Planner.action propositionPlan ≡ Planner.reuseExisting
 propositionReusesExisting = refl
 
-occurrenceReusesExisting :
-  Planner.action occurrencePlan ≡ Planner.reuseExisting
+occurrenceReusesExisting : Planner.action occurrencePlan ≡ Planner.reuseExisting
 occurrenceReusesExisting = refl
 
-documentContextReusesExisting :
-  Planner.action documentContextPlan ≡ Planner.reuseExisting
+documentContextReusesExisting : Planner.action documentContextPlan ≡ Planner.reuseExisting
 documentContextReusesExisting = refl
 
 ------------------------------------------------------------------------
@@ -216,38 +201,27 @@ documentContextReusesExisting = refl
 ------------------------------------------------------------------------
 
 attributionWork : Routing.RoutedWork attributionPlan
-attributionWork =
-  Routing.routedWork
-    Routing.noProducerInvocation refl Routing.reuseWithoutProducer
-    "attribution receipt already live"
+attributionWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "attribution receipt already live"
 
 propositionWork : Routing.RoutedWork propositionPlan
-propositionWork =
-  Routing.routedWork
-    Routing.noProducerInvocation refl Routing.reuseWithoutProducer
-    "proposition receipt already live"
+propositionWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "proposition receipt already live"
 
 occurrenceWork : Routing.RoutedWork occurrencePlan
-occurrenceWork =
-  Routing.routedWork
-    Routing.noProducerInvocation refl Routing.reuseWithoutProducer
-    "occurrence receipt already live"
+occurrenceWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "occurrence receipt already live"
 
 documentContextWork : Routing.RoutedWork documentContextPlan
-documentContextWork =
-  Routing.routedWork
-    Routing.noProducerInvocation refl Routing.reuseWithoutProducer
-    "document context receipt already live"
+documentContextWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "document context receipt already live"
 
 ------------------------------------------------------------------------
--- The same PDF parser/status receipts do not pay governed authority.
+-- The same PDF parser/status receipts do not pay legal-source authority.
 ------------------------------------------------------------------------
 
-data PdfParserReceiptPaysAuthorityRequirement : Set where
-\data PaidPrefixMeansApplicabilityFullyResolved : Set where
+data PdfParserReceiptPaysLegalSourceAuthorityRequirement : Set where
+data PaidPrefixMeansApplicabilityFullyResolved : Set where
 
-pdfParserDoesNotPayAuthority : PdfParserReceiptPaysAuthorityRequirement → ⊥
-pdfParserDoesNotPayAuthority ()
+pdfParserDoesNotPayLegalSourceAuthority :
+  PdfParserReceiptPaysLegalSourceAuthorityRequirement → ⊥
+pdfParserDoesNotPayLegalSourceAuthority ()
 
 paidPrefixDoesNotMeanFullApplicability :
   PaidPrefixMeansApplicabilityFullyResolved → ⊥
@@ -261,9 +235,8 @@ record PdfPlannerLiveBoundary : Set where
     occurrenceReceiptReused : Bool
     attributionReceiptReused : Bool
     documentContextReceiptReused : Bool
-    paidPrefixClosesAuthority : Bool
+    paidPrefixClosesLegalSourceAuthority : Bool
     plannerReparsesPdf : Bool
 
 canonicalPdfPlannerLiveBoundary : PdfPlannerLiveBoundary
-canonicalPdfPlannerLiveBoundary =
-  pdf-planner-live-boundary true true true true true false false
+canonicalPdfPlannerLiveBoundary = pdf-planner-live-boundary true true true true true false false
