@@ -27,14 +27,15 @@ module DASHI.Moonshine.Base369Monster3BMultiplicityCompletedTenTritSquareCompile
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Fin.Base using (Fin)
-open import Data.Product using (_×_; _,_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Data.Product using (_×_; _,_)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import Data.Fin.Base as FinBase
 import Data.Fin.Properties as FinP
 
 import DASHI.Foundations.Base369PointedAppraisalFibreExact as Pointed
 import DASHI.Moonshine.Base369CompletedTenTritSquareMultiplicityBidiExact as Completed
+import DASHI.Moonshine.Base369Monster3BMultiplicityTenByNineBidiExact as Ninety
 import DASHI.Moonshine.Base369Monster3BMultiplicityInertiaTwelveSeventyEightBidiExact as Actual
 import DASHI.Moonshine.Base369Monster3BActualActionRecognitionBidiExact as Action
 
@@ -119,7 +120,7 @@ completedActualActionIntertwines attachment inertia multiplicity
   rewrite completedAfterFin90 multiplicity = refl
 
 ------------------------------------------------------------------------
--- 4. Package the old attachment interface as generated compiler output.
+-- 4. Package the old 10 x 9 attachment as compiler output.
 ------------------------------------------------------------------------
 
 compiledTenByNineAct :
@@ -142,29 +143,50 @@ compiledTenByNineIntertwines :
 compiledTenByNineIntertwines attachment inertia multiplicity
   rewrite tenByNineAfterFin90 multiplicity = refl
 
+compiledTenByNineAttachment :
+  ∀ {source : Action.ActualMonster3BActionRecognition} →
+  (attachment : Actual.ActualMultiplicityInertiaAttachment source) →
+  Ninety.ActualMultiplicityTenByNineAttachment attachment
+compiledTenByNineAttachment attachment =
+  record
+    { toTenByNine = fin90ToTenByNine
+    ; fromTenByNine = tenByNineToFin90
+    ; fromAfterTo = tenByNineAfterFin90
+    ; toAfterFrom = fin90AfterTenByNine
+    ; tenByNineAct = compiledTenByNineAct attachment
+    ; sameActualMultiplicityAction = compiledTenByNineIntertwines attachment
+    }
+
 ------------------------------------------------------------------------
--- 5. The genuinely live refinement: componentwise factorization.
+-- 5. Package the completed semantic attachment as compiler output too.
 ------------------------------------------------------------------------
 
-record ComponentwiseCompletedAction
-    {source : Action.ActualMonster3BActionRecognition}
-    (attachment : Actual.ActualMultiplicityInertiaAttachment source) : Set₁ where
-  field
-    completedTenAct :
-      Actual.MultiplicityInertia attachment →
-      Completed.CompletedTenTritSquare →
-      Completed.CompletedTenTritSquare
+completedChartIntertwinesCompiled :
+  ∀ {source : Action.ActualMonster3BActionRecognition} →
+  (attachment : Actual.ActualMultiplicityInertiaAttachment source) →
+  (inertia : Actual.MultiplicityInertia attachment) →
+  (surface : Ninety.TenByNineMultiplicity) →
+  Completed.toCompletedTenTritSquare
+    (compiledTenByNineAct attachment inertia surface)
+  ≡ completedActualAct attachment inertia
+      (Completed.toCompletedTenTritSquare surface)
+completedChartIntertwinesCompiled attachment inertia surface
+  rewrite Completed.fromAfterToCompleted surface = refl
 
-    -- This field is deliberately only the first promotion layer.  A stronger
-    -- future owner may split CompletedTenTritSquare itself into independent
-    -- CoarseChannel and TritSquare actions and prove their product law.
-    agreesWithTransportedActualAction :
-      (inertia : Actual.MultiplicityInertia attachment) →
-      (surface : Completed.CompletedTenTritSquare) →
-      completedTenAct inertia surface
-      ≡ completedActualAct attachment inertia surface
+compiledCompletedAttachment :
+  ∀ {source : Action.ActualMonster3BActionRecognition} →
+  (attachment : Actual.ActualMultiplicityInertiaAttachment source) →
+  Completed.ActualMultiplicityCompletedTenTritSquareAttachment attachment
+compiledCompletedAttachment attachment =
+  record
+    { tenByNineAttachment = compiledTenByNineAttachment attachment
+    ; completedAct = completedActualAct attachment
+    ; completedChartIntertwines = completedChartIntertwinesCompiled attachment
+    }
 
-open ComponentwiseCompletedAction public
+------------------------------------------------------------------------
+-- 6. Boundary: factorwise dynamics are the remaining scientific question.
+------------------------------------------------------------------------
 
 record CompletedMultiplicityCompilerBoundary : Set where
   constructor completedMultiplicityCompilerBoundary
@@ -173,6 +195,8 @@ record CompletedMultiplicityCompilerBoundary : Set where
     completedTenAndTritSquareChartsAlreadyOwned : Bool
     fin90ToCompletedTenTimesTritSquareTwoSided : Bool
     actualInertiaActionTransportedByConstruction : Bool
+    oldTenByNineAttachmentGenerated : Bool
+    oldCompletedAttachmentGenerated : Bool
     separateEquivariantCarrierRecognitionStillScientific : Bool
     factorwiseTenAndTritSquareActionAlreadyProved : Bool
     factorwiseActionIsNextScientificTest : Bool
@@ -181,4 +205,4 @@ canonicalCompletedMultiplicityCompilerBoundary :
   CompletedMultiplicityCompilerBoundary
 canonicalCompletedMultiplicityCompilerBoundary =
   completedMultiplicityCompilerBoundary
-    true true true true false false true
+    true true true true true true false false true
