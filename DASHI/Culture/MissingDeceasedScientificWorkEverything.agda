@@ -1,13 +1,17 @@
 module DASHI.Culture.MissingDeceasedScientificWorkEverything where
 
--- Focused aggregate for attribution-safe scientific-work reconstruction.
+-- Focused aggregate for attribution-safe scientific-work reconstruction,
+-- source-exact citation, and technical-intersection proof search.
 -- Kept separate from AmyEskridgeEvidenceEverything because Amy Eskridge is not
 -- explicitly named in the 20 April 2026 House Oversight letter formalised here.
 
 import DASHI.Core.ScientificWorkAttributionExact
 import DASHI.Core.ScientificSourceCitationExact
+import DASHI.Core.TechnicalDependencyHypergraphExact
 import DASHI.Culture.MissingDeceasedScientistWorkAttributionExact
 import DASHI.Culture.MissingDeceasedScientificWorkCrossPollinationExact
 import DASHI.Culture.MissingDeceasedScientificWorkSourceRegistryExact
 import DASHI.Culture.MissingDeceasedScientificWorkSourceRegistryExtendedExact
+import DASHI.Culture.MissingDeceasedTechnicalDependencyHypergraphExact
+import DASHI.Culture.MissingDeceasedTechnicalIntersectionAcquisitionExact
 import DASHI.Culture.HouseOversightScientistRosterScopeExact
