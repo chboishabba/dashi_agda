@@ -29,8 +29,27 @@ on:
       - 'DASHI/Physics/YangMills/BalabanBetaUniformityConjecture.agda'
       - 'DASHI/Physics/YangMills/BalabanDashenGrossConventionMap.agda'
       - 'DASHI/Physics/YangMills/BalabanBetaNormalizationCalibration.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP98Equation119Round191Validation.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteSampleObservablePairingRound203Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanEquation119DerivativeDoesNotDetermineAverageRound204Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteMeasureWavefunctionL2BridgeRound205Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteMeasureIBPWavefunctionSymmetryRound206Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanFederbushRationalLieToRealSU2CarrierRound207Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanFederbushRationalMatrixRealImageRound208Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanNullQuotientHamiltonianDescentRound209Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanFederbushCanonicalRealMatrixExtensionRound210Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP98Equation124QSourceRecoveryRound211Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanMeasureNullCanonicalQuotientHamiltonianRound212Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanWeakPairingSeparatesNullHamiltoniansRound213Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanSymmetrySeparationNullDescentRound214Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanTerminalHamiltonianRound214Validation.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP98Equation124GroupedCorrectionRound213Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP98LiteralCorrectionGroupingRound214Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP98Equation124QSourceRound214Validation.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP98Equation120QSourceRecoveryRound215Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP98Path13Equation120DerivedQSourceRound216Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP98Equation120SelectedSemanticsRound217Exact.agda'
       - '.github/workflows/balaban-finite-frontier-agda.yml'
-
 
 concurrency:
   group: dashi-global-${{ github.ref }}
@@ -57,9 +76,12 @@ jobs:
             DASHI/Physics/YangMills/BalabanFiniteOneStepFrontierBundle.agda \
             DASHI/Physics/YangMills/BalabanGeometricPowerVanishing.agda \
             DASHI/Physics/YangMills/BalabanUniformResidualMajorant.agda \
+            DASHI/Physics/YangMills/BalabanCMP98Equation119Round191Validation.agda \
+            DASHI/Physics/YangMills/BalabanCMP98Equation124QSourceRound214Validation.agda \
+            DASHI/Physics/YangMills/BalabanTerminalHamiltonianRound214Validation.agda \
             > /tmp/balaban-finite-frontier.log 2>&1
           status=$?
-          tail -n 160 /tmp/balaban-finite-frontier.log
+          tail -n 320 /tmp/balaban-finite-frontier.log
           echo "status=$status" >> "$GITHUB_OUTPUT"
           exit 0
       - name: Upload focused Agda log
