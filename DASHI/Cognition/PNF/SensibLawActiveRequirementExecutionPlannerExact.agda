@@ -11,15 +11,15 @@ import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 import DASHI.Cognition.PNF.SensibLawConsumerQuerySemanticCoordinateReopeningExact as Demand
 
 data CoordinateEvidenceDisposition : Set where
-  currentResolved currentMissing currentConflicting stalePreviouslyResolved
+  currentUnassessed currentResolved currentMissing currentConflicting stalePreviouslyResolved
   : CoordinateEvidenceDisposition
 
 data RequirementDisposition : Set where
-  alreadySatisfied missingEvidence conflictingEvidence reopenRequired
+  needsInspection alreadySatisfied missingEvidence conflictingEvidence reopenRequired
   : RequirementDisposition
 
 data RequirementExecutionAction : Set where
-  reuseExisting acquireMissingEvidence resolveConflict revalidateStaleEvidence
+  inspectForEvidence reuseExisting acquireMissingEvidence resolveConflict revalidateStaleEvidence
   : RequirementExecutionAction
 
 record CoordinateEvidenceReceipt
@@ -37,12 +37,14 @@ record CoordinateEvidenceReceipt
 open CoordinateEvidenceReceipt public
 
 classifyEvidence : CoordinateEvidenceDisposition → RequirementDisposition
+classifyEvidence currentUnassessed = needsInspection
 classifyEvidence currentResolved = alreadySatisfied
 classifyEvidence currentMissing = missingEvidence
 classifyEvidence currentConflicting = conflictingEvidence
 classifyEvidence stalePreviouslyResolved = reopenRequired
 
 leastAction : RequirementDisposition → RequirementExecutionAction
+leastAction needsInspection = inspectForEvidence
 leastAction alreadySatisfied = reuseExisting
 leastAction missingEvidence = acquireMissingEvidence
 leastAction conflictingEvidence = resolveConflict
@@ -94,13 +96,26 @@ record DemandExecutionPlan
     underlyingStateRewrittenIsFalse : underlyingStateRewritten ≡ false
 open DemandExecutionPlan public
 
+unassessedReceiptNeedsInspection :
+  ∀ {state active refs producer} →
+  disposition (planRequirement
+    (coordinateEvidenceReceipt {state} {active} currentUnassessed refs producer true refl true refl)
+    "unassessed") ≡ needsInspection
+unassessedReceiptNeedsInspection = refl
+
+unassessedReceiptInspectsFirst :
+  ∀ {state active refs producer} →
+  action (planRequirement
+    (coordinateEvidenceReceipt {state} {active} currentUnassessed refs producer true refl true refl)
+    "unassessed") ≡ inspectForEvidence
+unassessedReceiptInspectsFirst = refl
+
 resolvedReceiptGivesSatisfied :
   ∀ {state active refs producer} →
   disposition (planRequirement
     (coordinateEvidenceReceipt {state} {active} currentResolved refs producer true refl true refl)
     "resolved") ≡ alreadySatisfied
 resolvedReceiptGivesSatisfied = refl
-
 resolvedReceiptReusesExisting :
   ∀ {state active refs producer} →
   action (planRequirement
@@ -114,7 +129,6 @@ missingReceiptGivesMissing :
     (coordinateEvidenceReceipt {state} {active} currentMissing refs producer true refl true refl)
     "missing") ≡ missingEvidence
 missingReceiptGivesMissing = refl
-
 missingReceiptAcquiresEvidence :
   ∀ {state active refs producer} →
   action (planRequirement
@@ -128,7 +142,6 @@ conflictingReceiptGivesConflict :
     (coordinateEvidenceReceipt {state} {active} currentConflicting refs producer true refl true refl)
     "conflicting") ≡ conflictingEvidence
 conflictingReceiptGivesConflict = refl
-
 conflictingReceiptResolvesConflict :
   ∀ {state active refs producer} →
   action (planRequirement
@@ -142,7 +155,6 @@ staleReceiptGivesReopening :
     (coordinateEvidenceReceipt {state} {active} stalePreviouslyResolved refs producer true refl true refl)
     "stale") ≡ reopenRequired
 staleReceiptGivesReopening = refl
-
 staleReceiptRevalidatesOnly :
   ∀ {state active refs producer} →
   action (planRequirement
@@ -151,6 +163,7 @@ staleReceiptRevalidatesOnly :
 staleReceiptRevalidatesOnly = refl
 
 data SemanticStateAloneTotalizesCoordinateEvidence : Set where
+data UnassessedEvidenceEqualsMissingEvidence : Set where
 data ResolvedOtherCoordinateFillsMissingActiveRequirement : Set where
 data StaleReceiptStillCountsAsSatisfied : Set where
 data ConflictingReceiptCountsAsMissing : Set where
@@ -161,6 +174,8 @@ data StaleRequirementForcesFullReparse : Set where
 
 semanticStateAloneDoesNotTotalizeEvidence : SemanticStateAloneTotalizesCoordinateEvidence → ⊥
 semanticStateAloneDoesNotTotalizeEvidence ()
+unassessedDoesNotMeanMissing : UnassessedEvidenceEqualsMissingEvidence → ⊥
+unassessedDoesNotMeanMissing ()
 resolvedOtherCoordinateDoesNotFillMissingRequirement : ResolvedOtherCoordinateFillsMissingActiveRequirement → ⊥
 resolvedOtherCoordinateDoesNotFillMissingRequirement ()
 staleReceiptDoesNotRemainSatisfied : StaleReceiptStillCountsAsSatisfied → ⊥
@@ -181,8 +196,10 @@ record ActiveRequirementExecutionPlannerBoundary : Set where
   field
     planningIsIndexedByExactActiveRequirement : Bool
     semanticStateAloneIsTotalEvidenceOracle : Bool
+    unassessedAndMissingRemainDistinct : Bool
     missingAndConflictingRemainDistinct : Bool
     stalePreviouslyResolvedReopens : Bool
+    unassessedRequirementInspectsBeforeMissingClassification : Bool
     satisfiedRequirementReusesExistingEvidence : Bool
     missingRequirementAcquiresOnlyMissingEvidence : Bool
     conflictGetsDistinctResolutionAction : Bool
@@ -192,4 +209,5 @@ record ActiveRequirementExecutionPlannerBoundary : Set where
     planningRequiresParserReparse : Bool
 canonicalActiveRequirementExecutionPlannerBoundary : ActiveRequirementExecutionPlannerBoundary
 canonicalActiveRequirementExecutionPlannerBoundary =
-  active-requirement-execution-planner-boundary true false true true true true true true false false false
+  active-requirement-execution-planner-boundary
+    true false true true true true true true true true false false false
