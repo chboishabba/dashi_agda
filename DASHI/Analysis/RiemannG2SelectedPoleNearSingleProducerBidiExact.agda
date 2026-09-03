@@ -43,7 +43,6 @@ record ActualSelectedPoleNearProducer
       Window.PoleNearTargetWindow.targetWindowTest targetWindow
       ≡ Orbit.FkOrbitConsumerAttachment.selectedPoleTest attachment
 
-    -- Proof-relevant preservation receipts for the source-selected semantics.
     poleTaperPreservedWitness :
       Window.PoleNearTargetWindow.poleTaperPreserved targetWindow
     targetRelativePhasePreservedWitness :
@@ -70,7 +69,7 @@ producerToSameObjectWeld :
   Same.SelectedFkSameObjectWeld
     space formula orbit (attachment producer)
 producerToSameObjectWeld producer =
-  Same.canonicalSameObjectWeld (attachment producer)
+  Same.fromConsumerAttachment (attachment producer)
 
 ------------------------------------------------------------------------
 -- 2. The selected near/far explicit-formula weld is generated from the
@@ -122,8 +121,8 @@ producerToSameObjectNearFarAttachment :
     (producerToSameObjectWeld producer)
     (producerToSelectedFkExplicitFormulaWeld producer)
 producerToSameObjectNearFarAttachment producer =
-  Same.canonicalSameObjectNearFarAttachment
-    (producerToSameObjectWeld producer)
+  Same.nearFarFromConsumerAttachment
+    (attachment producer)
     (producerToSelectedFkExplicitFormulaWeld producer)
 
 ------------------------------------------------------------------------
