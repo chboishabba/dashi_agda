@@ -12,20 +12,16 @@ import DASHI.Core.AffectedDependencyClosureExact as Closure
 import DASHI.Core.RequiredAxisSupportSquareExact as Support
 
 data SemanticQuery : Set where
-  parseStructureQuery
-  whoSaidWhatQuery
-  provenanceHistoryQuery
-  discourseContextQuery
-  legalDiscourseRoleQuery
-  legalApplicabilityQuery
-  legalLiabilityQuery
+  parseStructureQuery whoSaidWhatQuery provenanceHistoryQuery discourseContextQuery
+  legalDiscourseRoleQuery legalApplicabilityQuery legalLiabilityQuery
   customQuery : String → SemanticQuery
 
 data SemanticCoordinate : Set where
   syntaxCoordinate discourseCoordinate referenceCoordinate attributionCoordinate
   provenanceCoordinate temporalCoordinate scopeCandidateCoordinate resolvedScopeCoordinate
   propositionStatusCoordinate occurrenceCoordinate evidenceCoordinate documentContextCoordinate
-  semanticAdmissionAuthorityCoordinate legalSourceAuthorityCoordinate jurisdictionCoordinate
+  jurisdictionCandidateCoordinate resolvedLegalJurisdictionCoordinate
+  semanticAdmissionAuthorityCoordinate legalSourceAuthorityCoordinate
   legalRoleCoordinate applicabilityCoordinate violationCoordinate liabilityCoordinate
   : SemanticCoordinate
 
@@ -49,103 +45,71 @@ data Requires : Consumer.ConsumerKind → SemanticQuery → SemanticCoordinate �
   legalApplicabilityNeedsEvidence : Requires Consumer.legalConsumer legalApplicabilityQuery evidenceCoordinate
   legalApplicabilityNeedsContext : Requires Consumer.legalConsumer legalApplicabilityQuery documentContextCoordinate
   legalApplicabilityNeedsLegalSourceAuthority : Requires Consumer.legalConsumer legalApplicabilityQuery legalSourceAuthorityCoordinate
-  legalApplicabilityNeedsJurisdiction : Requires Consumer.legalConsumer legalApplicabilityQuery jurisdictionCoordinate
+  legalApplicabilityNeedsResolvedJurisdiction : Requires Consumer.legalConsumer legalApplicabilityQuery resolvedLegalJurisdictionCoordinate
   legalApplicabilityNeedsResolvedScope : Requires Consumer.legalConsumer legalApplicabilityQuery resolvedScopeCoordinate
   legalLiabilityNeedsApplicability : Requires Consumer.legalConsumer legalLiabilityQuery applicabilityCoordinate
   legalLiabilityNeedsViolation : Requires Consumer.legalConsumer legalLiabilityQuery violationCoordinate
   legalLiabilityNeedsLegalRole : Requires Consumer.legalConsumer legalLiabilityQuery legalRoleCoordinate
   legalLiabilityNeedsEvidence : Requires Consumer.legalConsumer legalLiabilityQuery evidenceCoordinate
   legalLiabilityNeedsLegalSourceAuthority : Requires Consumer.legalConsumer legalLiabilityQuery legalSourceAuthorityCoordinate
-  legalLiabilityNeedsJurisdiction : Requires Consumer.legalConsumer legalLiabilityQuery jurisdictionCoordinate
+  legalLiabilityNeedsResolvedJurisdiction : Requires Consumer.legalConsumer legalLiabilityQuery resolvedLegalJurisdictionCoordinate
 
 record DemandRequest : Set where
   constructor demandRequest
-  field
-    consumer : Consumer.ConsumerKind
-    query : SemanticQuery
-    requestReference : String
+  field consumer : Consumer.ConsumerKind; query : SemanticQuery; requestReference : String
 open DemandRequest public
-
 record ActiveRequirement : Set where
   constructor activeRequirement
-  field
-    requiredConsumer : Consumer.ConsumerKind
-    requiredQuery : SemanticQuery
-    coordinate : SemanticCoordinate
-    requirement : Requires requiredConsumer requiredQuery coordinate
-    requirementReference : String
+  field requiredConsumer : Consumer.ConsumerKind; requiredQuery : SemanticQuery; coordinate : SemanticCoordinate; requirement : Requires requiredConsumer requiredQuery coordinate; requirementReference : String
 open ActiveRequirement public
-
 record SemanticDemand : Set where
   constructor semanticDemand
-  field
-    requests : List DemandRequest
-    activeRequirements : List ActiveRequirement
-    demandReference : String
+  field requests : List DemandRequest; activeRequirements : List ActiveRequirement; demandReference : String
 open SemanticDemand public
 
-generalWhoSaidWhat : DemandRequest
 generalWhoSaidWhat = demandRequest Consumer.generalSemanticConsumer whoSaidWhatQuery "general consumer asks who said what"
-legalWhoSaidWhat : DemandRequest
-legalWhoSaidWhat = demandRequest Consumer.legalConsumer whoSaidWhatQuery "legal consumer asks only who said what; legal applicability is not active"
-legalSubmissionRole : DemandRequest
-legalSubmissionRole = demandRequest Consumer.legalConsumer legalDiscourseRoleQuery "legal consumer asks whether attributed discourse is a submission/finding/etc"
-historicalProvenance : DemandRequest
-historicalProvenance = demandRequest Consumer.historicalConsumer provenanceHistoryQuery "historical consumer asks provenance and temporal-source question"
-legalApplicability : DemandRequest
-legalApplicability = demandRequest Consumer.legalConsumer legalApplicabilityQuery "legal consumer asks governed applicability question"
-legalLiability : DemandRequest
-legalLiability = demandRequest Consumer.legalConsumer legalLiabilityQuery "legal consumer asks downstream liability question"
+legalWhoSaidWhat = demandRequest Consumer.legalConsumer whoSaidWhatQuery "legal consumer asks only who said what"
+legalSubmissionRole = demandRequest Consumer.legalConsumer legalDiscourseRoleQuery "legal consumer asks discourse role"
+historicalProvenance = demandRequest Consumer.historicalConsumer provenanceHistoryQuery "historical consumer asks provenance/time"
+legalApplicability = demandRequest Consumer.legalConsumer legalApplicabilityQuery "legal consumer asks governed applicability"
+legalLiability = demandRequest Consumer.legalConsumer legalLiabilityQuery "legal consumer asks liability"
 
-whoSaidWhatRequirements : List SemanticCoordinate
 whoSaidWhatRequirements = discourseCoordinate ∷ referenceCoordinate ∷ attributionCoordinate ∷ []
-legalDiscourseRoleRequirements : List SemanticCoordinate
 legalDiscourseRoleRequirements = discourseCoordinate ∷ referenceCoordinate ∷ attributionCoordinate ∷ documentContextCoordinate ∷ []
-historicalRequirements : List SemanticCoordinate
 historicalRequirements = discourseCoordinate ∷ attributionCoordinate ∷ provenanceCoordinate ∷ temporalCoordinate ∷ []
-legalApplicabilityRequirements : List SemanticCoordinate
-legalApplicabilityRequirements = propositionStatusCoordinate ∷ occurrenceCoordinate ∷ evidenceCoordinate ∷ documentContextCoordinate ∷ legalSourceAuthorityCoordinate ∷ jurisdictionCoordinate ∷ resolvedScopeCoordinate ∷ []
+legalApplicabilityRequirements = propositionStatusCoordinate ∷ occurrenceCoordinate ∷ evidenceCoordinate ∷ documentContextCoordinate ∷ legalSourceAuthorityCoordinate ∷ resolvedLegalJurisdictionCoordinate ∷ resolvedScopeCoordinate ∷ []
 
-mixedCaseDemand : SemanticDemand
 mixedCaseDemand = semanticDemand
   (generalWhoSaidWhat ∷ historicalProvenance ∷ legalSubmissionRole ∷ [])
-  ( activeRequirement Consumer.generalSemanticConsumer whoSaidWhatQuery discourseCoordinate whoNeedsDiscourse "general who-said-what needs discourse"
-  ∷ activeRequirement Consumer.generalSemanticConsumer whoSaidWhatQuery referenceCoordinate whoNeedsReference "general who-said-what needs reference"
-  ∷ activeRequirement Consumer.generalSemanticConsumer whoSaidWhatQuery attributionCoordinate whoNeedsAttribution "general who-said-what needs attribution"
-  ∷ activeRequirement Consumer.historicalConsumer provenanceHistoryQuery discourseCoordinate historyNeedsDiscourse "historical query needs discourse"
-  ∷ activeRequirement Consumer.historicalConsumer provenanceHistoryQuery attributionCoordinate historyNeedsAttribution "historical query needs attribution"
-  ∷ activeRequirement Consumer.historicalConsumer provenanceHistoryQuery provenanceCoordinate historyNeedsProvenance "historical query needs provenance"
-  ∷ activeRequirement Consumer.historicalConsumer provenanceHistoryQuery temporalCoordinate historyNeedsTemporal "historical query needs temporal relation"
-  ∷ activeRequirement Consumer.legalConsumer legalDiscourseRoleQuery discourseCoordinate legalRoleNeedsDiscourse "legal discourse-role query needs discourse"
-  ∷ activeRequirement Consumer.legalConsumer legalDiscourseRoleQuery referenceCoordinate legalRoleNeedsReference "legal discourse-role query needs reference"
-  ∷ activeRequirement Consumer.legalConsumer legalDiscourseRoleQuery attributionCoordinate legalRoleNeedsAttribution "legal discourse-role query needs attribution"
-  ∷ activeRequirement Consumer.legalConsumer legalDiscourseRoleQuery documentContextCoordinate legalRoleNeedsDocumentContext "legal discourse-role query needs document context"
-  ∷ [])
-  "simultaneous general + historical + legal-discourse demand over one carrier"
+  ( activeRequirement Consumer.generalSemanticConsumer whoSaidWhatQuery discourseCoordinate whoNeedsDiscourse "general discourse"
+  ∷ activeRequirement Consumer.generalSemanticConsumer whoSaidWhatQuery referenceCoordinate whoNeedsReference "general reference"
+  ∷ activeRequirement Consumer.generalSemanticConsumer whoSaidWhatQuery attributionCoordinate whoNeedsAttribution "general attribution"
+  ∷ activeRequirement Consumer.historicalConsumer provenanceHistoryQuery discourseCoordinate historyNeedsDiscourse "history discourse"
+  ∷ activeRequirement Consumer.historicalConsumer provenanceHistoryQuery attributionCoordinate historyNeedsAttribution "history attribution"
+  ∷ activeRequirement Consumer.historicalConsumer provenanceHistoryQuery provenanceCoordinate historyNeedsProvenance "history provenance"
+  ∷ activeRequirement Consumer.historicalConsumer provenanceHistoryQuery temporalCoordinate historyNeedsTemporal "history temporal"
+  ∷ activeRequirement Consumer.legalConsumer legalDiscourseRoleQuery discourseCoordinate legalRoleNeedsDiscourse "legal discourse"
+  ∷ activeRequirement Consumer.legalConsumer legalDiscourseRoleQuery referenceCoordinate legalRoleNeedsReference "legal reference"
+  ∷ activeRequirement Consumer.legalConsumer legalDiscourseRoleQuery attributionCoordinate legalRoleNeedsAttribution "legal attribution"
+  ∷ activeRequirement Consumer.legalConsumer legalDiscourseRoleQuery documentContextCoordinate legalRoleNeedsDocumentContext "legal context" ∷ [])
+  "simultaneous general + historical + legal-discourse demand"
 
 data CoordinateEvidenceState : Set where coordinateResolved coordinateMissing coordinateConflicting : CoordinateEvidenceState
-coordinateSupport : CoordinateEvidenceState → Support.SupportSquare
 coordinateSupport coordinateResolved = Support.supportSquare true false
 coordinateSupport coordinateMissing = Support.supportSquare false false
 coordinateSupport coordinateConflicting = Support.supportSquare true true
-
 record RequiredCoordinateEvidence (consumer : Consumer.ConsumerKind) (query : SemanticQuery) (coordinate : SemanticCoordinate) : Set where
   constructor requiredCoordinateEvidence
-  field
-    required : Requires consumer query coordinate
-    evidenceState : CoordinateEvidenceState
-    evidenceReference : String
+  field required : Requires consumer query coordinate; evidenceState : CoordinateEvidenceState; evidenceReference : String
 open RequiredCoordinateEvidence public
 
-missingLegalSourceAuthorityForApplicability : RequiredCoordinateEvidence Consumer.legalConsumer legalApplicabilityQuery legalSourceAuthorityCoordinate
-missingLegalSourceAuthorityForApplicability = requiredCoordinateEvidence legalApplicabilityNeedsLegalSourceAuthority coordinateMissing "legal-source authority evidence unresolved for applicability query"
+missingLegalSourceAuthorityForApplicability = requiredCoordinateEvidence legalApplicabilityNeedsLegalSourceAuthority coordinateMissing "legal-source authority unresolved"
 missingLegalSourceAuthorityCannotBeResolvedPositive : Support.ResolvedPositive (coordinateSupport (evidenceState missingLegalSourceAuthorityForApplicability)) → ⊥
 missingLegalSourceAuthorityCannotBeResolvedPositive resolved = Support.missingCannotBeResolvedPositive (refl , refl) resolved
 
 data SemanticArtifact : Set where
   coordinateArtifact : SemanticCoordinate → SemanticArtifact
-  generalDiscourseAnswerArtifact historicalAnswerArtifact legalDiscourseAnswerArtifact
-  legalApplicabilityAnswerArtifact legalLiabilityAnswerArtifact : SemanticArtifact
+  generalDiscourseAnswerArtifact historicalAnswerArtifact legalDiscourseAnswerArtifact legalApplicabilityAnswerArtifact legalLiabilityAnswerArtifact : SemanticArtifact
 
 data SemanticDepends : SemanticArtifact → SemanticArtifact → Set where
   discourseFeedsGeneral : SemanticDepends (coordinateArtifact discourseCoordinate) generalDiscourseAnswerArtifact
@@ -164,23 +128,19 @@ data SemanticDepends : SemanticArtifact → SemanticArtifact → Set where
   evidenceFeedsApplicability : SemanticDepends (coordinateArtifact evidenceCoordinate) legalApplicabilityAnswerArtifact
   contextFeedsApplicability : SemanticDepends (coordinateArtifact documentContextCoordinate) legalApplicabilityAnswerArtifact
   legalSourceAuthorityFeedsApplicability : SemanticDepends (coordinateArtifact legalSourceAuthorityCoordinate) legalApplicabilityAnswerArtifact
-  jurisdictionFeedsApplicability : SemanticDepends (coordinateArtifact jurisdictionCoordinate) legalApplicabilityAnswerArtifact
+  resolvedJurisdictionFeedsApplicability : SemanticDepends (coordinateArtifact resolvedLegalJurisdictionCoordinate) legalApplicabilityAnswerArtifact
   resolvedScopeFeedsApplicability : SemanticDepends (coordinateArtifact resolvedScopeCoordinate) legalApplicabilityAnswerArtifact
   applicabilityFeedsLiability : SemanticDepends legalApplicabilityAnswerArtifact legalLiabilityAnswerArtifact
   violationFeedsLiability : SemanticDepends (coordinateArtifact violationCoordinate) legalLiabilityAnswerArtifact
   roleFeedsLiability : SemanticDepends (coordinateArtifact legalRoleCoordinate) legalLiabilityAnswerArtifact
   legalSourceAuthorityFeedsLiability : SemanticDepends (coordinateArtifact legalSourceAuthorityCoordinate) legalLiabilityAnswerArtifact
-  jurisdictionFeedsLiability : SemanticDepends (coordinateArtifact jurisdictionCoordinate) legalLiabilityAnswerArtifact
+  resolvedJurisdictionFeedsLiability : SemanticDepends (coordinateArtifact resolvedLegalJurisdictionCoordinate) legalLiabilityAnswerArtifact
 
-legalSourceAuthorityChangeReopensApplicability : Closure.ReopeningObligation SemanticDepends (coordinateArtifact legalSourceAuthorityCoordinate) legalApplicabilityAnswerArtifact
 legalSourceAuthorityChangeReopensApplicability = Closure.oneEdgeCreatesReopeningObligation legalSourceAuthorityFeedsApplicability
-legalSourceAuthorityChangeReopensLiabilityTransitively : Closure.ReopeningObligation SemanticDepends (coordinateArtifact legalSourceAuthorityCoordinate) legalLiabilityAnswerArtifact
 legalSourceAuthorityChangeReopensLiabilityTransitively = Closure.obligationsCompose legalSourceAuthorityChangeReopensApplicability (Closure.oneEdgeCreatesReopeningObligation applicabilityFeedsLiability)
-resolvedScopeChangeReopensApplicability : Closure.ReopeningObligation SemanticDepends (coordinateArtifact resolvedScopeCoordinate) legalApplicabilityAnswerArtifact
 resolvedScopeChangeReopensApplicability = Closure.oneEdgeCreatesReopeningObligation resolvedScopeFeedsApplicability
-provenanceChangeReopensHistoricalAnswer : Closure.ReopeningObligation SemanticDepends (coordinateArtifact provenanceCoordinate) historicalAnswerArtifact
+resolvedJurisdictionChangeReopensApplicability = Closure.oneEdgeCreatesReopeningObligation resolvedJurisdictionFeedsApplicability
 provenanceChangeReopensHistoricalAnswer = Closure.oneEdgeCreatesReopeningObligation provenanceFeedsHistorical
-contextChangeReopensLegalDiscourseAnswer : Closure.ReopeningObligation SemanticDepends (coordinateArtifact documentContextCoordinate) legalDiscourseAnswerArtifact
 contextChangeReopensLegalDiscourseAnswer = Closure.oneEdgeCreatesReopeningObligation contextFeedsLegalDiscourse
 
 data ConsumerKindAloneFixesRequirements : Set where
@@ -192,7 +152,7 @@ data BroaderDemandRewritesSemanticCarrier : Set where
 data OneConsumerRequirementErasesAnother : Set where
 data SemanticAdmissionAuthorityPaysLegalSourceAuthority : Set where
 data ScopeCandidatePaysResolvedScope : Set where
-
+data JurisdictionCandidatePaysResolvedLegalJurisdiction : Set where
 consumerKindAloneDoesNotFixRequirements : ConsumerKindAloneFixesRequirements → ⊥
 consumerKindAloneDoesNotFixRequirements ()
 legalConsumerDoesNotAlwaysNeedApplicability : LegalConsumerAlwaysNeedsApplicability → ⊥
@@ -211,19 +171,10 @@ semanticAdmissionAuthorityDoesNotPayLegalSourceAuthority : SemanticAdmissionAuth
 semanticAdmissionAuthorityDoesNotPayLegalSourceAuthority ()
 scopeCandidateDoesNotPayResolvedScope : ScopeCandidatePaysResolvedScope → ⊥
 scopeCandidateDoesNotPayResolvedScope ()
+jurisdictionCandidateDoesNotPayResolvedLegalJurisdiction : JurisdictionCandidatePaysResolvedLegalJurisdiction → ⊥
+jurisdictionCandidateDoesNotPayResolvedLegalJurisdiction ()
 
 record ConsumerQueryCoordinateBoundary : Set where
   constructor consumerQueryCoordinateBoundary
-  field
-    requirementsAreConsumerAndQueryIndexed : Bool
-    inactiveCoordinatesCountAsFailures : Bool
-    multipleRequestsMayActivateJointCoordinates : Bool
-    activeRequirementsCarryProofWitnesses : Bool
-    semanticAdmissionAndLegalSourceAuthorityDistinct : Bool
-    scopeCandidateAndResolvedScopeDistinct : Bool
-    strongOneAxisEvidenceFillsMissingOtherAxis : Bool
-    dependencyAffectedProductsMayReopenTransitively : Bool
-    unrelatedParserCoordinatesMustReopenAfterAuthorityChange : Bool
-    broaderDemandRewritesUnderlyingSemanticCarrier : Bool
-canonicalConsumerQueryCoordinateBoundary : ConsumerQueryCoordinateBoundary
-canonicalConsumerQueryCoordinateBoundary = consumerQueryCoordinateBoundary true false true true true true false true false false
+  field requirementsAreConsumerAndQueryIndexed inactiveCoordinatesCountAsFailures multipleRequestsMayActivateJointCoordinates activeRequirementsCarryProofWitnesses semanticAdmissionAndLegalSourceAuthorityDistinct scopeCandidateAndResolvedScopeDistinct jurisdictionCandidateAndResolvedLegalJurisdictionDistinct strongOneAxisEvidenceFillsMissingOtherAxis dependencyAffectedProductsMayReopenTransitively unrelatedParserCoordinatesMustReopenAfterAuthorityChange broaderDemandRewritesUnderlyingSemanticCarrier : Bool
+canonicalConsumerQueryCoordinateBoundary = consumerQueryCoordinateBoundary true false true true true true true false true false false
