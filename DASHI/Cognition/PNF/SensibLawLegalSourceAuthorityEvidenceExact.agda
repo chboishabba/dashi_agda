@@ -16,19 +16,10 @@ import DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact as Admis
 
 ------------------------------------------------------------------------
 -- LEGAL-SOURCE AUTHORITY EVIDENCE
---
--- This is deliberately distinct from semantic admission authority.  A
--- SemanticAdmissionReceipt may authorize resolution/admission of a semantic
--- candidate; it does not establish that a statute/case/treaty is authoritative
--- law for a legal applicability query.
 ------------------------------------------------------------------------
 
 data SourceValidityStatus : Set where
-  validityCurrent
-  validityExpired
-  validityRepealed
-  validitySuperseded
-  validityUnresolved
+  validityCurrent validityExpired validityRepealed validitySuperseded validityUnresolved
   : SourceValidityStatus
 
 data CurrentValidity : SourceValidityStatus → Set where
@@ -43,7 +34,7 @@ record LegalSourceAuthorityReceiptInState
     sourceSystemMatches :
       Ontology.LegalSource.sourceSystem source ≡ Ontology.LegalSystem.systemId system
     legalStatus : Status.LegalStatusProduct
-    legalStatusMembership : legalStatus Bridge.∈ Status.legalStatuses state
+    legalStatusMembership : Bridge._∈_ legalStatus (Status.legalStatuses state)
     authorityIsLegal : Status.authorityKind legalStatus ≡ Status.legalAuthority
     validity : SourceValidityStatus
     validityIsCurrent : CurrentValidity validity
@@ -62,8 +53,8 @@ legalSourceAuthorityPaysActiveCoordinate :
 legalSourceAuthorityPaysActiveCoordinate same receipt =
   Planner.coordinateEvidenceReceipt
     Planner.currentResolved
-    ( authorityEvidenceReferences receipt )
-    ( authorityReference receipt )
+    (authorityEvidenceReferences receipt)
+    (authorityReference receipt)
     true refl true refl
 
 ------------------------------------------------------------------------
@@ -90,28 +81,23 @@ data DocumentRoleSuppliesLegalSourceAuthority : Set where
 candidateSourceDoesNotCloseAuthority : CandidateSourceIsAuthoritative → ⊥
 candidateSourceDoesNotCloseAuthority ()
 
-sameSystemDoesNotAutomaticallyCloseAuthority :
-  SameLegalSystemAutomaticallyMeansAuthority → ⊥
+sameSystemDoesNotAutomaticallyCloseAuthority : SameLegalSystemAutomaticallyMeansAuthority → ⊥
 sameSystemDoesNotAutomaticallyCloseAuthority ()
 
-currentValidityDoesNotAutomaticallyEstablishApplicability :
-  CurrentValidityAutomaticallyMeansApplicability → ⊥
+currentValidityDoesNotAutomaticallyEstablishApplicability : CurrentValidityAutomaticallyMeansApplicability → ⊥
 currentValidityDoesNotAutomaticallyEstablishApplicability ()
 
-semanticAdmissionDoesNotBecomeLegalSourceAuthority :
-  SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
+semanticAdmissionDoesNotBecomeLegalSourceAuthority : SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
 semanticAdmissionDoesNotBecomeLegalSourceAuthority ()
 
-documentRoleDoesNotSupplyLegalSourceAuthority :
-  DocumentRoleSuppliesLegalSourceAuthority → ⊥
+documentRoleDoesNotSupplyLegalSourceAuthority : DocumentRoleSuppliesLegalSourceAuthority → ⊥
 documentRoleDoesNotSupplyLegalSourceAuthority ()
 
 semanticAdmissionReceiptCannotPayLegalSourceAuthority :
   ∀ {candidate} →
   Admission.SemanticAdmissionReceipt candidate →
   SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
-semanticAdmissionReceiptCannotPayLegalSourceAuthority receipt =
-  semanticAdmissionDoesNotBecomeLegalSourceAuthority
+semanticAdmissionReceiptCannotPayLegalSourceAuthority receipt = semanticAdmissionDoesNotBecomeLegalSourceAuthority
 
 record LegalSourceAuthorityBoundary : Set where
   constructor legal-source-authority-boundary
