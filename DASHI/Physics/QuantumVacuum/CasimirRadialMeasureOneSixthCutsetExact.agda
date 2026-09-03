@@ -4,8 +4,8 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.QuantumVacuum.CasimirParallelPlateKernel as Casimir
+import DASHI.Physics.QuantumVacuum.ParallelPlateTransverseMeasureLimitBidiExact as Transverse
 import DASHI.Physics.QuantumVacuum.ParallelPlateTransverseRadialReductionBidiExact as Radial
-import DASHI.Physics.QuantumVacuum.ParallelPlateRadialSpectralIntegrandBidiExact as Integrand
 
 ------------------------------------------------------------------------
 -- TRANSVERSE/RADIAL 1/6 PRODUCER CUTSET
@@ -58,9 +58,10 @@ record RegulatedRadialIntegralEvaluation : Set₁ where
 open RegulatedRadialIntegralEvaluation public
 
 record TransverseOneSixthReceipt
-    (kernel : Casimir.CasimirScalarModel) : Set₁ where
+    (kernel : Casimir.CasimirScalarModel)
+    (T : Transverse.CasimirTransverseMeasureFamily kernel) : Set₁ where
   field
-    radialReduction : Radial.TransverseRadialReduction kernel
+    radialReduction : Radial.CasimirRadialReduction kernel T
     polarMeasure : PolarMeasureTheorem
     substitution : RadialChangeOfVariablesTheorem
     radialEvaluation : RegulatedRadialIntegralEvaluation
