@@ -13,6 +13,7 @@ import DASHI.Cognition.PNF.SensibLawScopeCompositionBidiExact as Scope
 import DASHI.Cognition.PNF.SensibLawParticipantLegalRoleWrongTypeBidiExact as LegalRole
 import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExact as LegalChain
 import DASHI.Cognition.PNF.SensibLawDocumentWorldSemanticStatusBidiExact as Context
+import DASHI.Cognition.PNF.SensibLawConsumerQuerySemanticCoordinateReopeningExact as Demand
 import DASHI.Cognition.PNF.SensibLawSemanticLiveVerticalEverything as Live
 
 data BidiCampaign : Set where
@@ -23,6 +24,7 @@ data BidiCampaign : Set where
   participantLegalRoleCampaign : BidiCampaign
   legalApplicabilityCampaign : BidiCampaign
   documentWorldContextCampaign : BidiCampaign
+  consumerQueryDemandCampaign : BidiCampaign
 
 data CampaignReadiness : Set where
   typeOwnerPresent runtimeProducerNeeded consumerMaySkip : CampaignReadiness
@@ -35,14 +37,19 @@ campaignReadiness scopeCompositionCampaign = typeOwnerPresent
 campaignReadiness participantLegalRoleCampaign = typeOwnerPresent
 campaignReadiness legalApplicabilityCampaign = typeOwnerPresent
 campaignReadiness documentWorldContextCampaign = typeOwnerPresent
+campaignReadiness consumerQueryDemandCampaign = typeOwnerPresent
 
 allCampaignTypeOwnersPresent :
   campaignReadiness attributionPropositionCampaign ≡ typeOwnerPresent
 allCampaignTypeOwnersPresent = refl
 
+consumerQueryDemandOwnerPresent :
+  campaignReadiness consumerQueryDemandCampaign ≡ typeOwnerPresent
+consumerQueryDemandOwnerPresent = refl
+
 ------------------------------------------------------------------------
--- Phase transition: the aggregate now also imports actual inhabited regressions
--- for the first semantic verticals.  This does not make the corpus resolved.
+-- Phase transition: the aggregate also imports actual inhabited regressions.
+-- This does not make the corpus resolved.
 ------------------------------------------------------------------------
 
 claimDiscourseHasLiveInhabitant :
@@ -72,6 +79,34 @@ participantLegalRoleHasLiveInhabitant = refl
 narrativeLegalGateHasLiveInhabitant :
   Live.liveCampaignState Live.narrativeLegalGateLive ≡ Live.inhabitedRegression
 narrativeLegalGateHasLiveInhabitant = refl
+
+------------------------------------------------------------------------
+-- Consumer/query least-privilege boundaries are now part of the campaign root.
+------------------------------------------------------------------------
+
+legalConsumerDoesNotImplyFullApplicabilityStack :
+  Demand.LegalConsumerAlwaysNeedsApplicability → ⊥
+legalConsumerDoesNotImplyFullApplicabilityStack =
+  Demand.legalConsumerDoesNotAlwaysNeedApplicability
+
+unrequestedCoordinatesDoNotBlockConsumer :
+  Demand.UnrequestedCoordinateMustResolve → ⊥
+unrequestedCoordinatesDoNotBlockConsumer =
+  Demand.unrequestedCoordinateDoesNotCountAsFailure
+
+authorityUpdateDoesNotReparseSyntax :
+  Demand.AuthorityChangeReparsesSyntax → ⊥
+authorityUpdateDoesNotReparseSyntax =
+  Demand.authorityChangeDoesNotReparseSyntax
+
+broaderDemandPreservesSemanticCarrier :
+  Demand.BroaderDemandRewritesSemanticCarrier → ⊥
+broaderDemandPreservesSemanticCarrier =
+  Demand.broaderDemandDoesNotRewriteCarrier
+
+------------------------------------------------------------------------
+-- Existing cross-axis boundaries.
+------------------------------------------------------------------------
 
 regexStillForbidden :
   Constitution.regexMayProduceSemanticEvidence
