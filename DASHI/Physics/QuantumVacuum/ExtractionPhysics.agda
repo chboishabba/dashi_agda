@@ -8,6 +8,9 @@ module DASHI.Physics.QuantumVacuum.ExtractionPhysics where
 -- reservoir and replication obligations.
 ------------------------------------------------------------------------
 
+import DASHI.Analysis.PoissonSummationKernelBidiExact
+import DASHI.Analysis.RenormalisedDifferenceLimitExact
+import DASHI.Analysis.SumIntegralDefectExact
 import DASHI.Physics.QuantumVacuum.ExtractionPhysicsSurface
 import DASHI.Physics.QuantumVacuum.PhysicalQuantities
 import DASHI.Physics.QuantumVacuum.ZeroPointModeHyperfabricExact
@@ -24,6 +27,9 @@ import DASHI.Physics.QuantumVacuum.ParallelPlateModeSpectrumCutsetExact
 import DASHI.Physics.QuantumVacuum.ParallelPlateCasimirAnalyticWallExact
 import DASHI.Physics.QuantumVacuum.CasimirCutoffRouteSeparationExact
 import DASHI.Physics.QuantumVacuum.CasimirSpectralCycleFirewallExact
+import DASHI.Physics.QuantumVacuum.ParallelPlateRegulatedDifferenceBidiExact
+import DASHI.Physics.QuantumVacuum.CasimirRiemannYangMillsBidiCrossPollinationExact
+import DASHI.Physics.QuantumVacuum.CasimirCoefficient720To240CompilerExact
 import DASHI.Physics.QuantumVacuum.TunableMaterialCasimirBridge
 import DASHI.Physics.QuantumVacuum.CasimirCycleAccounting
 import DASHI.Physics.QuantumVacuum.ReservoirDynamics
