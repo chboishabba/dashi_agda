@@ -11,6 +11,8 @@ module DASHI.Physics.QuantumVacuum.ExtractionPhysics where
 import DASHI.Analysis.PoissonSummationKernelBidiExact
 import DASHI.Analysis.RenormalisedDifferenceLimitExact
 import DASHI.Analysis.SumIntegralDefectExact
+import DASHI.Analysis.MeasureIntegralLimitKernelBidiExact
+import DASHI.Analysis.MeasureIntegralLimitCrossPollinationBidiExact
 import DASHI.Analysis.InversePowerDerivativeCompilerExact
 import DASHI.Physics.QuantumVacuum.ExtractionPhysicsSurface
 import DASHI.Physics.QuantumVacuum.PhysicalQuantities
@@ -30,6 +32,7 @@ import DASHI.Physics.QuantumVacuum.ParallelPlateCasimirAnalyticWallExact
 import DASHI.Physics.QuantumVacuum.CasimirCutoffRouteSeparationExact
 import DASHI.Physics.QuantumVacuum.CasimirSpectralCycleFirewallExact
 import DASHI.Physics.QuantumVacuum.ParallelPlateRegulatedDifferenceBidiExact
+import DASHI.Physics.QuantumVacuum.ParallelPlateTransverseMeasureLimitBidiExact
 import DASHI.Physics.QuantumVacuum.ParallelPlateRenormalisedDifferenceHighestAlphaExact
 import DASHI.Physics.QuantumVacuum.CasimirRiemannYangMillsBidiCrossPollinationExact
 import DASHI.Physics.QuantumVacuum.CasimirCoefficient720To240CompilerExact
