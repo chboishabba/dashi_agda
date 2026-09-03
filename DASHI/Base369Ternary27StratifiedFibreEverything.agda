@@ -22,6 +22,9 @@ import DASHI.Moonshine.Base369AppraisalFibreHeisenbergCarrierBidiExact
 import DASHI.Moonshine.Base369HeisenbergTranslationGridObstructionExact
 import DASHI.Moonshine.Base369MonsterFineCarrierEquivarianceAuditExact
 
+-- Phase-aware monomial Heisenberg action on the SAME appraisal carrier.
+import DASHI.Moonshine.Base369AppraisalHeisenbergMonomialActionBidiExact
+
 -- Periodic C3^9 host versus non-periodic P3^9 observational restriction.
 import DASHI.Moonshine.Base369PeriodicTernaryTorusPathRestrictionBidiExact
 import DASHI.Moonshine.Base369PeriodicHeisenbergFibreEquivarianceExact
@@ -29,15 +32,21 @@ import DASHI.Moonshine.Base369PeriodicHeisenbergFibreEquivarianceExact
 -- Exact decimal/nonary completion, 10 x 3^9 bulk, and structured 53/54 branch.
 import DASHI.Moonshine.Base369DecimalCompletionMonsterBulkBidiExact
 import DASHI.Moonshine.Base369MonsterTwoComponentCompletionBidiExact
-
--- Refined 54 carrier: nontrivial zeta pair x ternary-27 = sixfold x nonary-9,
--- with the sixfold factor exactly charted to the Heisenberg coordinate axes.
 import DASHI.Moonshine.Base369ZetaHeisenbergFiftyFourCarrierExact
 import DASHI.Base369ZetaHeisenbergFiftyFourValidation
 import DASHI.Base369MonsterTwoComponentCompletionValidation
+import DASHI.Moonshine.Base369MonsterFiftyFourFiveModeResidualActionBidiExact
 
--- Consumer-first representation-theoretic frontier: actual M -> MN3B
--- restriction and a theorem-bearing finite Heisenberg group chain.
+-- External exceptional-algebra x-pollination.  Standard Albert/F4/E6/E7
+-- dimensions are recorded separately from Monster authority: 27=1+26,
+-- 54=27+27, candidate 53=1+26+26, 56=1+1+27+27 and 78=52+26.
+-- Promotion requires two-sided same-carrier/action receipts, never dimension.
+import DASHI.Foundations.ExceptionalAlbertFreudenthalResidualExact
+import DASHI.Moonshine.Base369ExceptionalAlbertFiftyThreeResidualBidiExact
+import DASHI.Moonshine.Base369MonsterExceptionalHybridBulkResidualBidiExact
+import DASHI.Base369ExceptionalResidualCrossPollinationValidation
+
+-- Consumer-first representation-theoretic frontier and finite Heisenberg core.
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchExact
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact
 import DASHI.Moonshine.Monster3BF3AlgebraExact
@@ -48,12 +57,7 @@ import DASHI.Moonshine.Monster3BFiniteHeisenbergInverseExact
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGroupLawFrontierExact
 import DASHI.Moonshine.Monster3BFiniteHeisenbergNondegeneracyExact
 
--- Concrete Schrodinger route. Monster-specific work closes extraction of one
--- delta line and transport of that line through the full F3^6 orbit using only
--- the six unit translations. Two ordinary finite-dimensional routes can now
--- close the same irreducibility consumer: finite delta synthesis, or the
--- already-proved scalar-commutant / commuting-projector no-go plus a standard
--- invariant-subspace projector attachment.
+-- Concrete Schrodinger / projector / irreducibility route.
 import DASHI.Moonshine.Monster3BCyclotomicLinearAlgebraExact
 import DASHI.Moonshine.Monster3BCyclotomicNonzeroInverseExact
 import DASHI.Moonshine.Monster3BFiniteSchrodingerFunctionModuleExact
@@ -72,9 +76,7 @@ import DASHI.Moonshine.Monster3BFiniteHeisenbergProjectionNoGoExact
 import DASHI.Moonshine.Monster3BFiniteSchrodingerProjectorIrreducibilityBidiExact
 import DASHI.Moonshine.Monster3BFiniteSchrodingerIrreducibilityBidiCutExact
 
--- Existing downstream Stone-von Neumann/multiplicity/actual-kernel machinery.
--- Character isotypy and the 90-copy count are kept distinct from construction
--- of an actual action intertwiner / ActualZetaSectorRecognition.
+-- Stone-von Neumann, kernel character and multiplicity machinery.
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannMultiplicityExact
 import DASHI.Moonshine.Monster3BKernelCharacterCriterionExact
 import DASHI.Moonshine.Monster3BActualKernelCharacterPromotionExact
@@ -82,22 +84,68 @@ import DASHI.Moonshine.Monster3BModelStoneVonNeumannRecognitionExact
 import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact
 import DASHI.Moonshine.Monster3BActualMultiplicityEvaluationFromRecognitionExact
 
--- Once ActualZetaSectorRecognition is supplied, Base369 recognition is no
--- longer an independent representation theorem: compose the actual-sector
--- round trip with the exact appraisal-fibre <-> X6 chart and transport both
--- translation and modulation observers automatically.  The action-recognition
--- capstone packages this recognition together with the phase-resolved sector,
--- producing the existing promotion pipeline and Base369 x Fin 90 compiler
--- surface without introducing any new numerical recognition principle.
+-- Actual zeta recognition compiles to fixed-multiplicity appraisal slices.
 import DASHI.Moonshine.Base369Monster3BActualSectorRecognitionBidiExact
 import DASHI.Moonshine.Base369Monster3BActualActionRecognitionBidiExact
+import DASHI.Moonshine.Base369Monster3BActualMultiplicitySliceAppraisalBidiExact
 
--- Same-action continuation: the literal Fin 90 coordinate is already owned by
--- the actual evaluation isomorphism.  The next representation-theoretic leaf
--- is therefore the actual inertia action on that exact coordinate, followed by
--- the existing 12 + 78 block-recognition interface using the same action.
+-- Same-carrier action producer and repo-native VOA realization.
+import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact
+import DASHI.Moonshine.Base369Monster3BVOAActionPhaseAdapterBidiExact
+
+-- Same-object global/local authority weld: exact trace and literal action.
+import DASHI.Moonshine.MonsterGradedVOALiteralActionSameObjectBidiExact
+import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact
+
+-- Attach that exact selected literal element to the independently certified
+-- central-zeta CTblLib/kernel class.  This makes 65610 and the 90-copy
+-- character isotypy downstream while leaving action recognition explicit.
+import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact
+
+-- Shortest frontier capstone: after the element/class-fusion receipt and
+-- ActualZetaSectorRecognition, X6 x Fin 90 and all 90 actual appraisal slices
+-- (including translation/modulation intertwining and fibre exhaustion) are
+-- compiler output.
+import DASHI.Moonshine.Base369Monster3BShortestFrontierCapstoneBidiExact
+import DASHI.Base369Monster3BShortestFrontierValidation
+
+-- Character-level regular C3 bulk is now exact:
+--   W|C3 = 65610 Reg(C3) + 53*1,
+-- hence 196830 is the balanced three-phase character bulk.  The literal
+-- three-phase owner exposes W_1, W_zeta and W_zeta^2 as fibres of the SAME
+-- selected VOA action and isolates the next theorem: recognize the regular
+-- 729x90 block inside W_1, then the complementary R_53 is a same-action
+-- residual rather than a numerical tail.
+import DASHI.Moonshine.Monster3BRegularC3BulkResidualFiftyThreeBidiExact
+import DASHI.Moonshine.Monster3BLiteralThreePhaseRegularResidualBidiExact
+import DASHI.Base369Monster3BRegularResidualValidation
+
+-- Typed 90 cross-pollination.  The existing pointed-appraisal owner already
+-- has Fine10 x SecondarySheet9 and 729 = 8*(10*9)+9.  The new BIDI owner makes
+-- Fin90 <-> Fine10 x SecondarySheet9 the explicit same-action promotion target;
+-- the nested carrier theorem then gives 65610 = [8*90+9]*90 and the sourced
+-- 3^8/3^6 bridge refactors through this same 10x9 factor without identifying
+-- the distinct 3-local groups.
+import DASHI.Moonshine.Base369Monster3BMultiplicityTenByNineBidiExact
+import DASHI.Moonshine.Base369Pointed729NestedNinetyBidiExact
+import DASHI.Moonshine.Base369MonsterThreeLocalTenByNineRefactorBidiExact
+import DASHI.Base369Monster3BTenByNineMultiplicityValidation
+
+-- Same-action continuation on Fin 90.  The literal 78 block is now additionally
+-- exposed to an E6 candidate recognition, but E6 semantics requires an actual
+-- action intertwiner; 78=52+26 is not promotion authority.
 import DASHI.Moonshine.Base369Monster3BMultiplicityInertiaTwelveSeventyEightBidiExact
+import DASHI.Moonshine.Base369Monster3BSeventyEightExceptionalE6BidiExact
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound2Exact
+import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound3Exact
+import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound4Exact
+import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound5Exact
+import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound6Exact
+import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound7Exact
+import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound8Exact
+import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound9Exact
+import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound10Exact
+import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound11Exact
 
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact
 
