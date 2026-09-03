@@ -3,8 +3,9 @@ module DASHI.Culture.MissingDeceasedTechnicalIntersectionAcquisitionExact where
 ------------------------------------------------------------------------
 -- PROOF-DIRECTED ACQUISITION FOR TECHNICAL INTERSECTIONS
 --
--- Candidate domain adjacency is not promoted to dependency.  Instead it emits
--- the exact evidence object that would be sufficient to upgrade the edge.
+-- Generic documented technology-domain bridges may be source-backed without a
+-- shared historical programme.  Person-specific participation remains a
+-- separate same-object acquisition problem.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -24,7 +25,7 @@ data TechnicalIntersectionTarget : Set where
   rezaMcCaslandNamedPersonnelRoster
   scorpiusSpaceNuclearSharedSupplierOrTechnologyTransfer
   scorpiusSpaceNuclearSharedPersonnel
-  plasmaSpaceNuclearSharedProgramme
+  loureiroFusionSpaceSpecificLineage
   jplPlanetarySharedMissionOrInstrument
   jplPlanetarySharedPublicationOrProposal
   : TechnicalIntersectionTarget
@@ -87,15 +88,15 @@ nuclearSystemsPersonnelAcquisition =
     "conference proceedings / working-group minutes with same-object identity receipts"
     "shared person must have role-bearing edges to both programmes"
 
-plasmaSpaceProgrammeAcquisition : TechnicalIntersectionAcquisition
-plasmaSpaceProgrammeAcquisition =
+loureiroFusionSpaceAcquisition : TechnicalIntersectionAcquisition
+loureiroFusionSpaceAcquisition =
   technical-intersection-acquisition
-    plasmaSpaceNuclearSharedProgramme
+    loureiroFusionSpaceSpecificLineage
     targetNotLocated
-    "MIT fusion/plasma physics <-> space nuclear/fission systems"
-    "grant/contract/programme record naming both technical streams or shared investigators"
-    "joint publication, workshop programme, advisory panel or technology-transfer record"
-    "physics-domain adjacency alone remains unresolved candidate"
+    "Nuno Loureiro's specific fusion/plasma work <-> a particular fusion-space propulsion research, advisory, funding, technology-transfer or observer lineage"
+    "grant/contract/programme/advisory/review/technology-transfer record naming Loureiro or his exact work in a space-propulsion context"
+    "joint workshop, publication, proposal, review panel, technical-intelligence assessment or authenticated institutional correspondence"
+    "the generic fusion/plasma <-> space-propulsion engineering bridge is already source-backed; only a person-specific same-object receipt may promote Loureiro into a particular lineage"
 
 planetarySharedMissionAcquisition : TechnicalIntersectionAcquisition
 planetarySharedMissionAcquisition =
@@ -124,7 +125,7 @@ planetarySharedPublicationAcquisition =
 data TechnicalConnectionHypothesis : Set where
   rezaMcCaslandTechnicalConnection
   scorpiusSpaceNuclearTechnicalConnection
-  plasmaSpaceNuclearTechnicalConnection
+  loureiroFusionSpaceSpecificConnection
   hicksMaiwaldTechnicalConnection
   : TechnicalConnectionHypothesis
 
@@ -142,6 +143,14 @@ rezaMcCaslandDeferred :
     (Forest.reopenable Forest.ambiguityUnresolved)
 rezaMcCaslandDeferred = Forest.defer Forest.ambiguityUnresolved
 
+loureiroFusionSpaceDeferred :
+  Forest.HypothesisTransition
+    technicalConnectionSemantics
+    loureiroFusionSpaceSpecificConnection
+    Forest.active
+    (Forest.reopenable Forest.ambiguityUnresolved)
+loureiroFusionSpaceDeferred = Forest.defer Forest.ambiguityUnresolved
+
 noAcquisitionResultDoesNotRefuteTechnicalConnection :
   Forest.HypothesisTransition
     technicalConnectionSemantics
@@ -156,6 +165,14 @@ record TechnicalIntersectionAcquisitionBoundary : Set where
     candidateAdjacencyCreatesTargetedAcquisition : Bool
     candidateAdjacencyCreatesTargetedAcquisitionIsTrue :
       candidateAdjacencyCreatesTargetedAcquisition ≡ true
+
+    documentedTechnologyBridgeNeedsSharedProgrammeToExist : Bool
+    documentedTechnologyBridgeNeedsSharedProgrammeToExistIsFalse :
+      documentedTechnologyBridgeNeedsSharedProgrammeToExist ≡ false
+
+    personSpecificParticipationNeedsSameObjectReceipt : Bool
+    personSpecificParticipationNeedsSameObjectReceiptIsTrue :
+      personSpecificParticipationNeedsSameObjectReceipt ≡ true
 
     failedSearchEqualsKnownAbsence : Bool
     failedSearchEqualsKnownAbsenceIsFalse : failedSearchEqualsKnownAbsence ≡ false
@@ -172,6 +189,8 @@ canonicalTechnicalIntersectionAcquisitionBoundary :
   TechnicalIntersectionAcquisitionBoundary
 canonicalTechnicalIntersectionAcquisitionBoundary =
   technical-intersection-acquisition-boundary
+    true refl
+    false refl
     true refl
     false refl
     false refl
