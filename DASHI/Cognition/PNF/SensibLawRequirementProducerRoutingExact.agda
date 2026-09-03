@@ -47,6 +47,9 @@ data ProducerCanPopulate :
   temporalPopulatesTemporal :
     ProducerCanPopulate Cross.temporalProducer Demand.temporalCoordinate
 
+  documentContextPopulatesContext :
+    ProducerCanPopulate Cross.documentContextProducer Demand.documentContextCoordinate
+
   legalMeetPopulatesJurisdiction :
     ProducerCanPopulate Cross.legalTypedMeetProducer Demand.jurisdictionCoordinate
   legalMeetPopulatesLegalRole :
@@ -60,15 +63,6 @@ data ProducerCanPopulate :
 
   governedAdmissionPopulatesAuthority :
     ProducerCanPopulate Cross.governedAdmissionProducer Demand.authorityCoordinate
-
-------------------------------------------------------------------------
--- Document context is intentionally not forced into an existing ProducerClass:
--- the current taxonomy has no document-context producer class.  We preserve
--- that as an explicit routing gap rather than pretending another producer owns
--- it.  This is a useful next extension of Cross.ProducerClass.
-------------------------------------------------------------------------
-
-data DocumentContextProducerClassMissing : Set where
 
 record ProducerRoute (coordinate : Demand.SemanticCoordinate) : Set where
   constructor producerRoute
@@ -100,6 +94,14 @@ invocationNeed Planner.acquireMissingEvidence = producerInvocationRequired
 invocationNeed Planner.resolveConflict = producerInvocationRequired
 invocationNeed Planner.revalidateStaleEvidence = producerInvocationRequired
 
+data WorkRoute
+    (need : ProducerInvocationNeed)
+    (coordinate : Demand.SemanticCoordinate) : Set where
+  reuseWithoutProducer : WorkRoute noProducerInvocation coordinate
+  invokeProducer :
+    ProducerRoute coordinate →
+    WorkRoute producerInvocationRequired coordinate
+
 record RoutedWork
     {state}
     {active : Demand.ActiveRequirement}
@@ -108,7 +110,7 @@ record RoutedWork
   field
     need : ProducerInvocationNeed
     needExact : need ≡ invocationNeed (Planner.action plan)
-    route : ProducerRoute (Demand.coordinate active)
+    route : WorkRoute need (Demand.coordinate active)
     routeReference : String
 
 open RoutedWork public
@@ -129,6 +131,10 @@ temporalRoute : ProducerRoute Demand.temporalCoordinate
 temporalRoute = producerRoute Cross.temporalProducer temporalPopulatesTemporal
   "temporal qualification/anchor producer"
 
+documentContextRoute : ProducerRoute Demand.documentContextCoordinate
+documentContextRoute = producerRoute Cross.documentContextProducer documentContextPopulatesContext
+  "typed document/region/case context producer"
+
 authorityRoute : ProducerRoute Demand.authorityCoordinate
 authorityRoute = producerRoute Cross.governedAdmissionProducer governedAdmissionPopulatesAuthority
   "governed authority/admission evidence producer"
@@ -144,7 +150,7 @@ applicabilityRoute = producerRoute Cross.legalTypedMeetProducer legalMeetPopulat
 data ReuseExistingRequiresProducerInvocation : Set where
 data ParserCanPopulateLegalApplicability : Set where
 data AttributionProducerCanResolveAuthority : Set where
-data MissingDocumentContextSilentlyRoutesElsewhere : Set where
+data DocumentContextIsParserShape : Set where
 
 actionReuseNeedsNoProducer :
   invocationNeed Planner.reuseExisting ≡ noProducerInvocation
@@ -153,6 +159,10 @@ actionReuseNeedsNoProducer = refl
 missingEvidenceNeedsProducer :
   invocationNeed Planner.acquireMissingEvidence ≡ producerInvocationRequired
 missingEvidenceNeedsProducer = refl
+
+reuseHasLiteralNoProducerRoute :
+  ∀ {coordinate} → WorkRoute noProducerInvocation coordinate
+reuseHasLiteralNoProducerRoute = reuseWithoutProducer
 
 reuseDoesNotInvokeProducer : ReuseExistingRequiresProducerInvocation → ⊥
 reuseDoesNotInvokeProducer ()
@@ -163,9 +173,8 @@ parserDoesNotOwnLegalApplicability ()
 attributionDoesNotOwnAuthority : AttributionProducerCanResolveAuthority → ⊥
 attributionDoesNotOwnAuthority ()
 
-documentContextGapIsNotSilentlyRouted :
-  MissingDocumentContextSilentlyRoutesElsewhere → ⊥
-documentContextGapIsNotSilentlyRouted ()
+documentContextDoesNotCollapseToParserShape : DocumentContextIsParserShape → ⊥
+documentContextDoesNotCollapseToParserShape ()
 
 record RequirementProducerRoutingBoundary : Set where
   constructor requirement-producer-routing-boundary
@@ -174,8 +183,8 @@ record RequirementProducerRoutingBoundary : Set where
     satisfiedRequirementNeedsProducerInvocation : Bool
     parserMayPopulateLegalApplicability : Bool
     attributionMayResolveAuthority : Bool
-    missingProducerClassMayBeSilentlySubstituted : Bool
+    documentContextHasDedicatedProducerClass : Bool
 
 canonicalRequirementProducerRoutingBoundary : RequirementProducerRoutingBoundary
 canonicalRequirementProducerRoutingBoundary =
-  requirement-producer-routing-boundary true false false false false
+  requirement-producer-routing-boundary true false false false true
