@@ -63,6 +63,9 @@ magneticReconnection = H.technical-node H.technologyNode "magnetic reconnection 
 fusionPlasma : H.TechnicalNode
 fusionPlasma = H.technical-node H.programmeNode "fusion plasma confinement and transport research"
 
+fusionSpacePropulsionEngineering : H.TechnicalNode
+fusionSpacePropulsionEngineering = H.technical-node H.technologyNode "fusion/plasma engineering interface for space propulsion"
+
 michaelHicks : H.TechnicalNode
 michaelHicks = H.technical-node H.personNode "Michael David Hicks"
 
@@ -154,6 +157,13 @@ loureiroPlasma = H.technical-hyperedge
   "MIT Physics / PSFC profile; Viriato DOI 10.1016/j.cpc.2016.05.004"
   "Loureiro's documented work includes magnetic reconnection, magnetized plasma dynamics, turbulence, fusion confinement and transport."
 
+fusionSpaceDocumentedBridge : H.TechnicalHyperedge
+fusionSpaceDocumentedBridge = H.technical-hyperedge
+  (fusionPlasma ∷ fusionSpacePropulsionEngineering ∷ [])
+  H.documentedTechnologyDomainBridge H.officialProgrammeReceipt
+  "NASA NTRS, 'Fusion for Space Propulsion' and NASA fusion-propulsion concept studies"
+  "NASA explicitly documents that plasma/fusion physics, enabling component technologies, computation and diagnostics form an engineering base for fusion space-propulsion research. This establishes a domain bridge, not Loureiro participation in a NASA propulsion programme."
+
 hicksPlanetary : H.TechnicalHyperedge
 hicksPlanetary = H.technical-hyperedge
   (michaelHicks ∷ planetaryDefense ∷ [])
@@ -215,7 +225,9 @@ rezaMcCaslandReported = H.technical-hyperedge
   "Reported professional relationship is retained as a lead but erased by the technical quotient until primary programme/personnel evidence is recovered."
 
 ------------------------------------------------------------------------
--- Domain adjacencies that survive as QUESTIONS, not shared-programme edges.
+-- Candidate adjacencies.  The generic fusion<->space engineering bridge is now
+-- source-backed; the unresolved question is whether Loureiro's particular work
+-- entered a specific space-propulsion lineage or observer surface.
 ------------------------------------------------------------------------
 
 nuclearSystemsAdjacency : H.CandidateDomainAdjacency
@@ -237,10 +249,10 @@ spaceMaterialsAdjacency = H.candidate-domain-adjacency
 plasmaNuclearAdjacency : H.CandidateDomainAdjacency
 plasmaNuclearAdjacency = H.candidate-domain-adjacency
   magneticReconnection
-  spaceNuclearPropulsionIC
-  "high-energy / nuclear-adjacent plasma and space systems"
-  "broad physics/engineering adjacency only"
-  "identify a shared funded programme, facility, instrument, publication, contractor or personnel edge"
+  fusionSpacePropulsionEngineering
+  "fusion/plasma physics <-> space propulsion"
+  "generic engineering-domain bridge is source-backed by NASA; Loureiro-specific participation/transfer remains unresolved"
+  "recover a Loureiro-specific grant, advisory role, workshop, technology-transfer, publication, contractor, programme or technical-intelligence observer receipt if one exists"
 
 planetarySensingAdjacency : H.CandidateDomainAdjacency
 planetarySensingAdjacency = H.candidate-domain-adjacency
@@ -270,6 +282,10 @@ rezaPatentSurvives :
   H.quotientDisposition rezaAlloyPatent ≡ H.survivesTechnicalQuotient
 rezaPatentSurvives = refl
 
+fusionSpaceBridgeSurvives :
+  H.quotientDisposition fusionSpaceDocumentedBridge ≡ H.survivesTechnicalQuotient
+fusionSpaceBridgeSurvives = refl
+
 record CurrentTechnicalIntersectionAssessment : Set where
   constructor current-technical-intersection-assessment
   field
@@ -281,21 +297,31 @@ record CurrentTechnicalIntersectionAssessment : Set where
     strongWithinPersonWorkEdgesSurviveIsTrue :
       strongWithinPersonWorkEdgesSurvive ≡ true
 
+    documentedFusionSpaceDomainBridgeEstablished : Bool
+    documentedFusionSpaceDomainBridgeEstablishedIsTrue :
+      documentedFusionSpaceDomainBridgeEstablished ≡ true
+
+    documentedFusionSpaceBridgeMeansLoureiroWorkedOnSpacePropulsion : Bool
+    documentedFusionSpaceBridgeMeansLoureiroWorkedOnSpacePropulsionIsFalse :
+      documentedFusionSpaceBridgeMeansLoureiroWorkedOnSpacePropulsion ≡ false
+
     institutionOnlyEdgesSurvive : Bool
     institutionOnlyEdgesSurviveIsFalse : institutionOnlyEdgesSurvive ≡ false
 
     mediaOnlyEdgesSurvive : Bool
     mediaOnlyEdgesSurviveIsFalse : mediaOnlyEdgesSurvive ≡ false
 
-    domainAdjacenciesRemainAcquisitionTargets : Bool
-    domainAdjacenciesRemainAcquisitionTargetsIsTrue :
-      domainAdjacenciesRemainAcquisitionTargets ≡ true
+    personSpecificAdjacenciesRemainAcquisitionTargets : Bool
+    personSpecificAdjacenciesRemainAcquisitionTargetsIsTrue :
+      personSpecificAdjacenciesRemainAcquisitionTargets ≡ true
 
 canonicalCurrentTechnicalIntersectionAssessment : CurrentTechnicalIntersectionAssessment
 canonicalCurrentTechnicalIntersectionAssessment =
   current-technical-intersection-assessment
     false refl
     true refl
+    true refl
+    false refl
     false refl
     false refl
     true refl
