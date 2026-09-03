@@ -1,0 +1,246 @@
+module DASHI.Base369Plus54ProofFabricValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Algebra.Trit as Trit
+import DASHI.Biology.JFineCoarseRelativeScaleExact as JScale
+import DASHI.Foundations.Base369Completion54SituatedTriadBridgeExact as Completion
+import DASHI.Foundations.Base369SharedNonaryIdentityTransportExact as SharedJ
+import DASHI.Foundations.Base369StableAlgebraicIdentityTowerExact as Stable
+import DASHI.Foundations.Base369MonsterNamedIdentityRegistryExact as Registry
+import DASHI.Foundations.Base369JCoarseFineStableIdentityDisciplineExact as JIdentity
+import DASHI.Foundations.Base369Ternary27HypervoxelStratificationExact as Strata
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
+import DASHI.Foundations.Base369FiveModePhaseQuotientExact as Five
+import DASHI.Foundations.Base369FaceSheetPunctureIncidenceIdentityExact as Face
+import DASHI.Foundations.Base369Situated54FaceIncidence54BridgeExact as Face54
+import DASHI.Foundations.Base369NestedUnitCompletionMonsterAssemblyExact as Nested
+import DASHI.Foundations.Base369MonsterSemanticCoordinateSystemExact as Semantic
+import DASHI.Foundations.Base369MonsterActionBraidSemanticAttachmentExact as BraidSemantic
+import DASHI.Foundations.Base369TernaryDeltaBasisCrossPollinationExact as TernaryBasis
+import DASHI.Moonshine.MonsterWeightTwoSemanticActionRealisationExact as WeightTwoAction
+import DASHI.Moonshine.Base369MonsterSemanticRepresentationBidiFrontierExact as SemanticBidi
+import DASHI.Moonshine.Monster3BFiniteSchrodingerDeltaOrbitTransitivityExact as DeltaOrbit
+import DASHI.Moonshine.TernaryFiniteFunctionDeltaBasisExact as DeltaBasis
+import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact as Stone
+import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannUniquenessBidiExact as Uniqueness
+import DASHI.Combinatorics.TextileDependencyGrammarProcessExact as Process
+import DASHI.Combinatorics.ProofFabricLocalCompatibilityExact as Local
+import DASHI.Combinatorics.ProofFabricCompilerExact as Fabric
+import DASHI.Culture.IntellectualReceptionSituatedInformationParetoPreorderExact as Pareto
+import Base369 as Base
+
+coarseNinePlusOneRegression :
+  Completion.coarseBaseChannels + Completion.coarseCompletionChannels
+  ≡ Completion.coarseCarrierChannels
+coarseNinePlusOneRegression = Completion.coarseNinePlusOne
+
+coarseBulkRegression :
+  Completion.baseBulk + Completion.completionBulk ≡ Completion.coarseBulk
+coarseBulkRegression = Completion.coarseBulkDecomposesNinePlusOne
+
+situatedTwoByThreeRegression : 2 * 3 ≡ Completion.situatedSlotCount
+situatedTwoByThreeRegression = Completion.twoRowsTimesThreeColumns
+
+comparisonNineRegression : 3 * 3 ≡ Completion.comparisonSheetCount
+comparisonNineRegression = Completion.threeTimesThreeIsNine
+
+localCompletion54Regression :
+  Completion.situatedSlotCount * Completion.comparisonSheetCount
+  ≡ Completion.localCompletionCount
+localCompletion54Regression = Completion.sixTimesNineIs54
+
+localResidual53Regression :
+  1 + Completion.localResidualCount ≡ Completion.localCompletionCount
+localResidual53Regression = Completion.onePlusResidualIs54
+
+base27Times729Regression :
+  Completion.base27Count * Completion.ternarySituatedValuationCount
+  ≡ Completion.globalFineFibre
+base27Times729Regression = Completion.baseTimesAppraisalIsFineFibre
+
+sharedJIsNineRegression : SharedJ.sharedJ ≡ 9
+sharedJIsNineRegression = SharedJ.sharedJIsNine
+
+sharedJLocalResolutionRegression : SharedJ.resolveJ SharedJ.localSituatedBoundary ≡ 54
+sharedJLocalResolutionRegression = SharedJ.localBoundaryViaJIs54
+
+sharedJGlobalResolutionRegression : SharedJ.resolveJ SharedJ.globalPointedFineBulk ≡ 196830
+sharedJGlobalResolutionRegression = SharedJ.globalPointedViaJIs196830
+
+fiftyFourIsTwo27CellsRegression : 2 * 27 ≡ 54
+fiftyFourIsTwo27CellsRegression = SharedJ.fiftyFourIsTwoTimesTwentySeven
+
+monsterBulkIsFive54Times729Regression :
+  5 * 54 * 729 ≡ SharedJ.globalPointedViaJ
+monsterBulkIsFive54Times729Regression = SharedJ.monsterBulkIsFiveTimes54Times729
+
+stable54CarrierIsoRegression :
+  Stable.CarrierIso
+    Stable.Completion54
+    (Completion.SituatedTriadRow × Stable.Base27)
+stable54CarrierIsoRegression = Stable.completion54IsTwoBy27
+
+stable10CarrierIsoRegression :
+  Stable.CarrierIso
+    Stable.Pointed10
+    (Stable.FiveMode × Stable.Orientation2)
+stable10CarrierIsoRegression = Stable.pointed10IsFiveByTwo
+
+stable196830CarrierIsoRegression :
+  Stable.CarrierIso Stable.MonsterBulk196830 Stable.BulkFive54Appraisal
+stable196830CarrierIsoRegression = Stable.monsterBulkIsFiveBy54By729
+
+namedDecision27Regression :
+  Stable.CarrierIso Stable.Base27 Registry.DecisionCondition27
+namedDecision27Regression = Registry.decision27IsBase27
+
+namedMonsterStateRegression :
+  Stable.CarrierIso
+    Stable.BulkFive54Appraisal
+    Registry.NamedMonsterDecisionState196830
+namedMonsterStateRegression = Registry.namedMonsterDecisionIso
+
+cornerEightRegression : Registry.cornerCarrierCount ≡ 8
+cornerEightRegression = refl
+
+cornerEightMatchesVoxelRegression :
+  Registry.cornerCarrierCount ≡ Strata.cornerCount
+cornerEightMatchesVoxelRegression = Registry.cornerCountAgreesWithExistingStratum
+
+jCoarseCountRegression : JScale.jCoarseFrequency ≡ 9
+jCoarseCountRegression = JIdentity.jCoarseCountPinned
+
+jFineCountRegression : JScale.jFineFrequency ≡ 19683
+jFineCountRegression = JIdentity.jFineCountPinned
+
+faceSheetOnePlusEightRegression : 1 + Face.puncturedFaceCount ≡ Face.faceSheetCount
+faceSheetOnePlusEightRegression = Face.faceSheetIsOnePlusEight
+
+sixFaceSheetsGive54Regression :
+  Geometry.outerFaceCount * Face.faceSheetCount ≡ Face.faceIncidenceCount
+sixFaceSheetsGive54Regression = Face.sixFacesTimesNineSheetIs54
+
+faceIncidenceStratificationRegression :
+  Face.faceCentreIncidenceCount
+    + Face.edgeCentreIncidenceCount
+    + Face.cornerIncidenceCount
+  ≡ Face.faceIncidenceCount
+faceIncidenceStratificationRegression = Face.stratifiedBoundaryIncidencesSumTo54
+
+situated54Face54Regression :
+  Stable.CarrierIso Stable.Completion54 Face.FaceIncidence54
+situated54Face54Regression = Face54.situated54IsFaceIncidence54
+
+modePhaseNineIsReducedEightPlusUnitRegression :
+  Stable.CarrierIso
+    Five.ModePhaseQuotient9
+    (Nested.PointedExtension Registry.ReducedNonary8 Nested.quotientIdentityRole)
+modePhaseNineIsReducedEightPlusUnitRegression = Nested.modePhase9IsReduced8PlusIdentity
+
+local54Is53PlusInvariantRegression :
+  Stable.CarrierIso
+    Nested.ModeBoundary54Stable
+    (Nested.PointedExtension Nested.ModeBoundary53Stable Nested.localBoundaryInvariantRole)
+local54Is53PlusInvariantRegression = Nested.modeBoundary54Is53PlusInvariant
+
+semanticCoordinateBoundaryRegression : Semantic.MonsterSemanticCoordinateBoundary
+semanticCoordinateBoundaryRegression = Semantic.canonicalMonsterSemanticCoordinateBoundary
+
+braidSemanticBoundaryRegression : BraidSemantic.MonsterActionBraidSemanticBoundary
+braidSemanticBoundaryRegression = BraidSemantic.canonicalMonsterActionBraidSemanticBoundary
+
+ternaryBasisBoundaryRegression : TernaryBasis.Base369TernaryDeltaBasisBoundary
+ternaryBasisBoundaryRegression = TernaryBasis.canonicalBase369TernaryDeltaBasisBoundary
+
+weightTwoActionBoundaryRegression : WeightTwoAction.MonsterWeightTwoSemanticActionBoundary
+weightTwoActionBoundaryRegression = WeightTwoAction.canonicalMonsterWeightTwoSemanticActionBoundary
+
+semanticRepresentationFrontierBoundaryRegression : SemanticBidi.SemanticRepresentationBidiBoundary
+semanticRepresentationFrontierBoundaryRegression = SemanticBidi.canonicalSemanticRepresentationBidiBoundary
+
+semanticHeisenberg729Regression : SemanticBidi.actualRestrictedHeisenbergDegree ≡ 729
+semanticHeisenberg729Regression = SemanticBidi.heisenbergDegreeMatchesSemanticAppraisal
+
+semanticResidual53Regression : SemanticBidi.actualRestrictedResidualDegree ≡ 53
+semanticResidual53Regression = SemanticBidi.residualDegreeMatchesSemanticResidual
+
+semanticMultiplicity90Regression : SemanticBidi.actualRestrictedMultiplicityDegree ≡ 90
+semanticMultiplicity90Regression = SemanticBidi.multiplicityDegreeIsNinety
+
+deltaOrbitBoundaryRegression : DeltaOrbit.DeltaOrbitTransitivityBoundary
+deltaOrbitBoundaryRegression = DeltaOrbit.canonicalDeltaOrbitTransitivityBoundary
+
+deltaBasisBoundaryRegression : DeltaBasis.TernaryFiniteFunctionDeltaBasisBoundary
+deltaBasisBoundaryRegression = DeltaBasis.canonicalTernaryFiniteFunctionDeltaBasisBoundary
+
+stoneFrontierBoundaryRegression : Stone.StoneVonNeumannFrontierBoundary
+stoneFrontierBoundaryRegression = Stone.canonicalStoneVonNeumannFrontierBoundary
+
+stoneAllDeltaOrbitLinesRegression : Stone.allDeltaOrbitLinesConstructed ≡ true
+stoneAllDeltaOrbitLinesRegression = Stone.allDeltaOrbitLinesConstructedIsTrue
+
+stoneDeltaBasisSpanningRegression : Stone.deltaBasisSpanningConstructed ≡ true
+stoneDeltaBasisSpanningRegression = Stone.deltaBasisSpanningConstructedIsTrue
+
+stoneHighestImpactIsNonzeroCoordinateExtraction :
+  Stone.highestImpactStructuralLeaf ≡ Stone.extractNonzeroCoordinateFromNonzeroVector
+stoneHighestImpactIsNonzeroCoordinateExtraction = refl
+
+uniquenessBoundaryRegression : Uniqueness.StoneVonNeumannUniquenessBidiBoundary
+uniquenessBoundaryRegression = Uniqueness.canonicalStoneVonNeumannUniquenessBidiBoundary
+
+zetaSignatureUniqueRegression :
+  Uniqueness.centralPhaseOfSignature
+    (Uniqueness.signatureForPhase Uniqueness.zetaPhase)
+  ≡ Uniqueness.zetaPhase
+zetaSignatureUniqueRegression = Uniqueness.signatureHasRequestedPhase Uniqueness.zetaPhase
+
+uniquenessHighestImpactRegression :
+  Uniqueness.highestImpactUniquenessLeaf
+  ≡ Uniqueness.instantiateCharacterDeterminationTheorem
+uniquenessHighestImpactRegression = refl
+
+binaryLiftDoesNotProduceMidRegression :
+  (level : Pareto.AxisLevel) →
+  Completion.axisLevelToTri level ≡ Base.tri-mid → ⊥
+binaryLiftDoesNotProduceMidRegression = Completion.binaryProfileNeverIntroducesMid
+
+proofReservedTileRejectedRegression :
+  Local.LocallyWellTypedTile Fabric.tile11 → ⊥
+proofReservedTileRejectedRegression = Local.reservedTileCannotType
+
+proofCompiledStreamTypedRegression :
+  (stream : List Trit.Trit) →
+  Local.LocallyCompatibleFabric (Fabric.compileTritStream stream)
+proofCompiledStreamTypedRegression = Local.compiledTritStreamLocallyCompatible
+
+completionBoundaryRegression : Completion.Base369Completion54SituatedTriadBoundary
+completionBoundaryRegression = Completion.canonicalBase369Completion54SituatedTriadBoundary
+
+sharedNonaryBoundaryRegression : SharedJ.Base369SharedNonaryIdentityBoundary
+sharedNonaryBoundaryRegression = SharedJ.canonicalBase369SharedNonaryIdentityBoundary
+
+stableIdentityBoundaryRegression : Stable.StableAlgebraicIdentityBoundary
+stableIdentityBoundaryRegression = Stable.canonicalStableAlgebraicIdentityBoundary
+
+namedIdentityBoundaryRegression : Registry.NamedMonsterMeaningBoundary
+namedIdentityBoundaryRegression = Registry.canonicalNamedMonsterMeaningBoundary
+
+jIdentityBoundaryRegression : JIdentity.JCoarseFineIdentityBoundary
+jIdentityBoundaryRegression = JIdentity.canonicalJCoarseFineIdentityBoundary
+
+faceSheetBoundaryRegression : Face.FaceSheetPunctureIncidenceBoundary
+faceSheetBoundaryRegression = Face.canonicalFaceSheetPunctureIncidenceBoundary
+
+face54BoundaryRegression : Face54.Situated54FaceIncidenceBoundary
+face54BoundaryRegression = Face54.canonicalSituated54FaceIncidenceBoundary
+
+nestedUnitBoundaryRegression : Nested.NestedUnitCompletionBoundary
+nestedUnitBoundaryRegression = Nested.canonicalNestedUnitCompletionBoundary
+
+processBoundaryRegression : Process.TextileDependencyGrammarProcessBoundary
+processBoundaryRegression = Process.canonicalTextileDependencyGrammarProcessBoundary
+
+proofFabricLocalBoundaryRegression : Local.ProofFabricLocalCompatibilityBoundary
+proofFabricLocalBoundaryRegression = Local.canonicalProofFabricLocalCompatibilityBoundary
