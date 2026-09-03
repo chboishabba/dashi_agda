@@ -46,6 +46,7 @@ data ProducerInvocationNeed : Set where
   noProducerInvocation producerInvocationRequired : ProducerInvocationNeed
 
 invocationNeed : Planner.RequirementExecutionAction → ProducerInvocationNeed
+invocationNeed Planner.inspectForEvidence = producerInvocationRequired
 invocationNeed Planner.reuseExisting = noProducerInvocation
 invocationNeed Planner.acquireMissingEvidence = producerInvocationRequired
 invocationNeed Planner.resolveConflict = producerInvocationRequired
@@ -81,6 +82,7 @@ applicabilityRoute : ProducerRoute Demand.applicabilityCoordinate
 applicabilityRoute = producerRoute Cross.legalTypedMeetProducer legalMeetPopulatesApplicability "typed legal applicability meet"
 
 data ReuseExistingRequiresProducerInvocation : Set where
+data UnassessedRequirementMaySkipInspectionProducer : Set where
 data ParserCanPopulateLegalApplicability : Set where
 data AttributionProducerCanResolveLegalSourceAuthority : Set where
 data SemanticAdmissionProducerCanResolveLegalSourceAuthority : Set where
@@ -88,12 +90,16 @@ data DocumentContextIsParserShape : Set where
 
 actionReuseNeedsNoProducer : invocationNeed Planner.reuseExisting ≡ noProducerInvocation
 actionReuseNeedsNoProducer = refl
+inspectionNeedsProducer : invocationNeed Planner.inspectForEvidence ≡ producerInvocationRequired
+inspectionNeedsProducer = refl
 missingEvidenceNeedsProducer : invocationNeed Planner.acquireMissingEvidence ≡ producerInvocationRequired
 missingEvidenceNeedsProducer = refl
 reuseHasLiteralNoProducerRoute : ∀ {coordinate} → WorkRoute noProducerInvocation coordinate
 reuseHasLiteralNoProducerRoute = reuseWithoutProducer
 reuseDoesNotInvokeProducer : ReuseExistingRequiresProducerInvocation → ⊥
 reuseDoesNotInvokeProducer ()
+unassessedRequirementCannotSkipInspectionProducer : UnassessedRequirementMaySkipInspectionProducer → ⊥
+unassessedRequirementCannotSkipInspectionProducer ()
 parserDoesNotOwnLegalApplicability : ParserCanPopulateLegalApplicability → ⊥
 parserDoesNotOwnLegalApplicability ()
 attributionDoesNotOwnLegalSourceAuthority : AttributionProducerCanResolveLegalSourceAuthority → ⊥
@@ -107,6 +113,7 @@ record RequirementProducerRoutingBoundary : Set where
   constructor requirement-producer-routing-boundary
   field
     producerRoutingIsCoordinateIndexed : Bool
+    unassessedRequirementNeedsInspectionProducer : Bool
     satisfiedRequirementNeedsProducerInvocation : Bool
     parserMayPopulateLegalApplicability : Bool
     attributionMayResolveLegalSourceAuthority : Bool
@@ -114,4 +121,4 @@ record RequirementProducerRoutingBoundary : Set where
     legalSourceAuthorityHasDedicatedProducerClass : Bool
     documentContextHasDedicatedProducerClass : Bool
 canonicalRequirementProducerRoutingBoundary : RequirementProducerRoutingBoundary
-canonicalRequirementProducerRoutingBoundary = requirement-producer-routing-boundary true false false false false true true
+canonicalRequirementProducerRoutingBoundary = requirement-producer-routing-boundary true true false false false false true true
