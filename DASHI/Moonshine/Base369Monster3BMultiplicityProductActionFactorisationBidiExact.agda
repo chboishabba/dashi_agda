@@ -20,8 +20,9 @@ module DASHI.Moonshine.Base369Monster3BMultiplicityProductActionFactorisationBid
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Product using (_,_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (_≢_; cong; cong₂; sym; trans)
+open import Data.Empty using (⊥)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
+open import Relation.Binary.PropositionalEquality using (_≢_; cong₂; sym; trans)
 
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
 import DASHI.Foundations.Base369NonaryTritSquareExact as Square
@@ -135,7 +136,7 @@ coarseCouplingBlocksDescent :
     {attachment : Actual.ActualMultiplicityInertiaAttachment source} →
   CoarseCouplingWitness attachment →
   CoarseActionDescent attachment →
-  Agda.Builtin.Equality._≡_ false true
+  ⊥
 coarseCouplingBlocksDescent witness descent =
   coarseOutputsDiffer witness equality
   where
@@ -173,7 +174,7 @@ tritSquareCouplingBlocksDescent :
     {attachment : Actual.ActualMultiplicityInertiaAttachment source} →
   TritSquareCouplingWitness attachment →
   TritSquareActionDescent attachment →
-  Agda.Builtin.Equality._≡_ false true
+  ⊥
 tritSquareCouplingBlocksDescent witness descent =
   squareOutputsDiffer witness equality
   where
