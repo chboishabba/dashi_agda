@@ -12,7 +12,6 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.CommonSelectorVisibilityHyperfabricExact as V
 import DASHI.Culture.MissingDeceasedScientificWorkSourceRegistryExact as Sources
-import DASHI.Culture.MissingDeceasedScientificWorkSourceRegistryExtendedExact as Extended
 
 ------------------------------------------------------------------------
 -- Publicly visible scientific / technical work receipts.
@@ -100,45 +99,56 @@ thomasPublicWork = V.visibility-receipt
   "Publication authorship makes this work publicly discoverable."
 
 ------------------------------------------------------------------------
--- A public-internet observer is enough to see the above PUBLIC coordinates.
--- This deliberately does not assert access to private personnel/security data.
+-- Public-observer witness language.
 ------------------------------------------------------------------------
+
+data PubliclyVisible : V.VisibilityReceipt → Set where
+  hicksVisible : PubliclyVisible hicksPublicWork
+  maiwaldVisible : PubliclyVisible maiwaldPublicWork
+  rezaVisible : PubliclyVisible rezaPublicPatent
+  leblancVisible : PubliclyVisible leblancPublicWork
+  loureiroVisible : PubliclyVisible loureiroPublicWork
+  grillmairVisible : PubliclyVisible grillmairPublicWork
+  mccaslandVisible : PubliclyVisible mccaslandPublicRole
+  chavezVisible : PubliclyVisible chavezPublicRole
+  thomasVisible : PubliclyVisible thomasPublicWork
 
 publicInternet : V.SelectorCapability
 publicInternet = V.selector-capability
   V.publicInternetObserver
   PubliclyVisible
   "canonical public/institutional publications, patents, official biographies, NTRS and laboratory profiles"
-  where
-    data PubliclyVisible : V.VisibilityReceipt → Set where
-      hicksVisible : PubliclyVisible hicksPublicWork
-      maiwaldVisible : PubliclyVisible maiwaldPublicWork
-      rezaVisible : PubliclyVisible rezaPublicPatent
-      leblancVisible : PubliclyVisible leblancPublicWork
-      loureiroVisible : PubliclyVisible loureiroPublicWork
-      grillmairVisible : PubliclyVisible grillmairPublicWork
-      mccaslandVisible : PubliclyVisible mccaslandPublicRole
-      chavezVisible : PubliclyVisible chavezPublicRole
-      thomasVisible : PubliclyVisible thomasPublicWork
 
 hicksPubliclyVisible : V.PersonVisibleTo publicInternet hicksPublicWork
-hicksPubliclyVisible = V.person-visible-to PubliclyVisible.hicksVisible
+hicksPubliclyVisible = V.person-visible-to hicksVisible
+
+maiwaldPubliclyVisible : V.PersonVisibleTo publicInternet maiwaldPublicWork
+maiwaldPubliclyVisible = V.person-visible-to maiwaldVisible
 
 rezaPubliclyVisible : V.PersonVisibleTo publicInternet rezaPublicPatent
-rezaPubliclyVisible = V.person-visible-to PubliclyVisible.rezaVisible
+rezaPubliclyVisible = V.person-visible-to rezaVisible
 
 leblancPubliclyVisible : V.PersonVisibleTo publicInternet leblancPublicWork
-leblancPubliclyVisible = V.person-visible-to PubliclyVisible.leblancVisible
+leblancPubliclyVisible = V.person-visible-to leblancVisible
 
 loureiroPubliclyVisible : V.PersonVisibleTo publicInternet loureiroPublicWork
-loureiroPubliclyVisible = V.person-visible-to PubliclyVisible.loureiroVisible
+loureiroPubliclyVisible = V.person-visible-to loureiroVisible
+
+grillmairPubliclyVisible : V.PersonVisibleTo publicInternet grillmairPublicWork
+grillmairPubliclyVisible = V.person-visible-to grillmairVisible
+
+mccaslandPubliclyVisible : V.PersonVisibleTo publicInternet mccaslandPublicRole
+mccaslandPubliclyVisible = V.person-visible-to mccaslandVisible
 
 chavezPubliclyVisible : V.PersonVisibleTo publicInternet chavezPublicRole
-chavezPubliclyVisible = V.person-visible-to PubliclyVisible.chavezVisible
+chavezPubliclyVisible = V.person-visible-to chavezVisible
+
+thomasPubliclyVisible : V.PersonVisibleTo publicInternet thomasPublicWork
+thomasPubliclyVisible = V.person-visible-to thomasVisible
 
 ------------------------------------------------------------------------
 -- Important result: one does not need a shared programme to construct a common
--- PUBLIC visibility observer.  But that is a very coarse observer: millions of
+-- PUBLIC visibility observer.  But that is a very coarse observer: many other
 -- scientists/engineers are likewise publicly visible.  It cannot by itself
 -- explain roster selection.
 ------------------------------------------------------------------------
