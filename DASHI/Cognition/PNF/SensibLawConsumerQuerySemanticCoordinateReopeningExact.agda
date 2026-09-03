@@ -13,18 +13,6 @@ import DASHI.Core.RequiredAxisSupportSquareExact as Support
 
 ------------------------------------------------------------------------
 -- CONSUMER + QUERY -> ACTIVE SEMANTIC COORDINATES
---
--- Cross-pollination:
---   * QueryIndexedProjectionAdequacyExact: adequacy is query-relative.
---   * ActiveObligationEvidenceFibreExact: inactive obligations are not failures.
---   * RequiredAxisSupportSquareExact: strength on one required axis cannot fill
---     a missing different axis.
---   * AffectedDependencyClosureExact: only dependency-affected products reopen.
---
--- SensibLaw therefore does NOT map a consumer label to one fixed pipeline.
--- The same consumer may ask a cheap structural/discourse question or a much
--- stronger governed question. Multiple consumer/query requests contribute
--- simultaneous proof-bearing obligations over one unchanged semantic carrier.
 ------------------------------------------------------------------------
 
 data SemanticQuery : Set where
@@ -49,7 +37,8 @@ data SemanticCoordinate : Set where
   occurrenceCoordinate
   evidenceCoordinate
   documentContextCoordinate
-  authorityCoordinate
+  semanticAdmissionAuthorityCoordinate
+  legalSourceAuthorityCoordinate
   jurisdictionCoordinate
   legalRoleCoordinate
   applicabilityCoordinate
@@ -104,8 +93,8 @@ data Requires :
     Requires Consumer.legalConsumer legalApplicabilityQuery evidenceCoordinate
   legalApplicabilityNeedsContext :
     Requires Consumer.legalConsumer legalApplicabilityQuery documentContextCoordinate
-  legalApplicabilityNeedsAuthority :
-    Requires Consumer.legalConsumer legalApplicabilityQuery authorityCoordinate
+  legalApplicabilityNeedsLegalSourceAuthority :
+    Requires Consumer.legalConsumer legalApplicabilityQuery legalSourceAuthorityCoordinate
   legalApplicabilityNeedsJurisdiction :
     Requires Consumer.legalConsumer legalApplicabilityQuery jurisdictionCoordinate
   legalApplicabilityNeedsScope :
@@ -119,8 +108,8 @@ data Requires :
     Requires Consumer.legalConsumer legalLiabilityQuery legalRoleCoordinate
   legalLiabilityNeedsEvidence :
     Requires Consumer.legalConsumer legalLiabilityQuery evidenceCoordinate
-  legalLiabilityNeedsAuthority :
-    Requires Consumer.legalConsumer legalLiabilityQuery authorityCoordinate
+  legalLiabilityNeedsLegalSourceAuthority :
+    Requires Consumer.legalConsumer legalLiabilityQuery legalSourceAuthorityCoordinate
   legalLiabilityNeedsJurisdiction :
     Requires Consumer.legalConsumer legalLiabilityQuery jurisdictionCoordinate
 
@@ -204,8 +193,8 @@ historicalRequirements =
 legalApplicabilityRequirements : List SemanticCoordinate
 legalApplicabilityRequirements =
   propositionStatusCoordinate ∷ occurrenceCoordinate ∷ evidenceCoordinate
-  ∷ documentContextCoordinate ∷ authorityCoordinate ∷ jurisdictionCoordinate
-  ∷ scopeCoordinate ∷ []
+  ∷ documentContextCoordinate ∷ legalSourceAuthorityCoordinate
+  ∷ jurisdictionCoordinate ∷ scopeCoordinate ∷ []
 
 mixedCaseDemand : SemanticDemand
 mixedCaseDemand =
@@ -263,19 +252,19 @@ record RequiredCoordinateEvidence
 
 open RequiredCoordinateEvidence public
 
-missingAuthorityForApplicability :
+missingLegalSourceAuthorityForApplicability :
   RequiredCoordinateEvidence
-    Consumer.legalConsumer legalApplicabilityQuery authorityCoordinate
-missingAuthorityForApplicability =
+    Consumer.legalConsumer legalApplicabilityQuery legalSourceAuthorityCoordinate
+missingLegalSourceAuthorityForApplicability =
   requiredCoordinateEvidence
-    legalApplicabilityNeedsAuthority
+    legalApplicabilityNeedsLegalSourceAuthority
     coordinateMissing
-    "authority evidence unresolved for applicability query"
+    "legal-source authority evidence unresolved for applicability query"
 
-missingAuthorityCannotBeResolvedPositive :
+missingLegalSourceAuthorityCannotBeResolvedPositive :
   Support.ResolvedPositive
-    (coordinateSupport (evidenceState missingAuthorityForApplicability)) → ⊥
-missingAuthorityCannotBeResolvedPositive resolved =
+    (coordinateSupport (evidenceState missingLegalSourceAuthorityForApplicability)) → ⊥
+missingLegalSourceAuthorityCannotBeResolvedPositive resolved =
   Support.missingCannotBeResolvedPositive (refl , refl) resolved
 
 ------------------------------------------------------------------------
@@ -325,8 +314,8 @@ data SemanticDepends : SemanticArtifact → SemanticArtifact → Set where
     SemanticDepends (coordinateArtifact evidenceCoordinate) legalApplicabilityAnswerArtifact
   contextFeedsApplicability :
     SemanticDepends (coordinateArtifact documentContextCoordinate) legalApplicabilityAnswerArtifact
-  authorityFeedsApplicability :
-    SemanticDepends (coordinateArtifact authorityCoordinate) legalApplicabilityAnswerArtifact
+  legalSourceAuthorityFeedsApplicability :
+    SemanticDepends (coordinateArtifact legalSourceAuthorityCoordinate) legalApplicabilityAnswerArtifact
   jurisdictionFeedsApplicability :
     SemanticDepends (coordinateArtifact jurisdictionCoordinate) legalApplicabilityAnswerArtifact
   scopeFeedsApplicability :
@@ -338,8 +327,8 @@ data SemanticDepends : SemanticArtifact → SemanticArtifact → Set where
     SemanticDepends (coordinateArtifact violationCoordinate) legalLiabilityAnswerArtifact
   roleFeedsLiability :
     SemanticDepends (coordinateArtifact legalRoleCoordinate) legalLiabilityAnswerArtifact
-  authorityFeedsLiability :
-    SemanticDepends (coordinateArtifact authorityCoordinate) legalLiabilityAnswerArtifact
+  legalSourceAuthorityFeedsLiability :
+    SemanticDepends (coordinateArtifact legalSourceAuthorityCoordinate) legalLiabilityAnswerArtifact
   jurisdictionFeedsLiability :
     SemanticDepends (coordinateArtifact jurisdictionCoordinate) legalLiabilityAnswerArtifact
 
@@ -347,22 +336,22 @@ data SemanticDepends : SemanticArtifact → SemanticArtifact → Set where
 -- Exact selective-reopening specimens using the existing generic closure.
 ------------------------------------------------------------------------
 
-authorityChangeReopensApplicability :
+legalSourceAuthorityChangeReopensApplicability :
   Closure.ReopeningObligation
     SemanticDepends
-    (coordinateArtifact authorityCoordinate)
+    (coordinateArtifact legalSourceAuthorityCoordinate)
     legalApplicabilityAnswerArtifact
-authorityChangeReopensApplicability =
-  Closure.oneEdgeCreatesReopeningObligation authorityFeedsApplicability
+legalSourceAuthorityChangeReopensApplicability =
+  Closure.oneEdgeCreatesReopeningObligation legalSourceAuthorityFeedsApplicability
 
-authorityChangeReopensLiabilityTransitively :
+legalSourceAuthorityChangeReopensLiabilityTransitively :
   Closure.ReopeningObligation
     SemanticDepends
-    (coordinateArtifact authorityCoordinate)
+    (coordinateArtifact legalSourceAuthorityCoordinate)
     legalLiabilityAnswerArtifact
-authorityChangeReopensLiabilityTransitively =
+legalSourceAuthorityChangeReopensLiabilityTransitively =
   Closure.obligationsCompose
-    authorityChangeReopensApplicability
+    legalSourceAuthorityChangeReopensApplicability
     (Closure.oneEdgeCreatesReopeningObligation applicabilityFeedsLiability)
 
 provenanceChangeReopensHistoricalAnswer :
@@ -392,6 +381,7 @@ data EvidenceOnOneCoordinateFillsAnother : Set where
 data AuthorityChangeReparsesSyntax : Set where
 data BroaderDemandRewritesSemanticCarrier : Set where
 data OneConsumerRequirementErasesAnother : Set where
+data SemanticAdmissionAuthorityPaysLegalSourceAuthority : Set where
 
 consumerKindAloneDoesNotFixRequirements :
   ConsumerKindAloneFixesRequirements → ⊥
@@ -419,6 +409,10 @@ oneConsumerRequirementDoesNotEraseAnother :
   OneConsumerRequirementErasesAnother → ⊥
 oneConsumerRequirementDoesNotEraseAnother ()
 
+semanticAdmissionAuthorityDoesNotPayLegalSourceAuthority :
+  SemanticAdmissionAuthorityPaysLegalSourceAuthority → ⊥
+semanticAdmissionAuthorityDoesNotPayLegalSourceAuthority ()
+
 record ConsumerQueryCoordinateBoundary : Set where
   constructor consumerQueryCoordinateBoundary
   field
@@ -426,6 +420,7 @@ record ConsumerQueryCoordinateBoundary : Set where
     inactiveCoordinatesCountAsFailures : Bool
     multipleRequestsMayActivateJointCoordinates : Bool
     activeRequirementsCarryProofWitnesses : Bool
+    semanticAdmissionAndLegalSourceAuthorityDistinct : Bool
     strongOneAxisEvidenceFillsMissingOtherAxis : Bool
     dependencyAffectedProductsMayReopenTransitively : Bool
     unrelatedParserCoordinatesMustReopenAfterAuthorityChange : Bool
@@ -434,4 +429,4 @@ record ConsumerQueryCoordinateBoundary : Set where
 canonicalConsumerQueryCoordinateBoundary : ConsumerQueryCoordinateBoundary
 canonicalConsumerQueryCoordinateBoundary =
   consumerQueryCoordinateBoundary
-    true false true true false true false false
+    true false true true true false true false false
