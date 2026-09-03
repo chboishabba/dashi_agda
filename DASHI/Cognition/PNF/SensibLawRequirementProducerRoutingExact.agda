@@ -14,7 +14,8 @@ data ProducerCanPopulate : Cross.ProducerClass → Demand.SemanticCoordinate →
   parserPopulatesSyntax : ProducerCanPopulate Cross.parserShapeProducer Demand.syntaxCoordinate
   structurePopulatesDiscourse : ProducerCanPopulate Cross.structuralCompositionProducer Demand.discourseCoordinate
   structurePopulatesOccurrence : ProducerCanPopulate Cross.structuralCompositionProducer Demand.occurrenceCoordinate
-  structurePopulatesScopeCandidate : ProducerCanPopulate Cross.structuralCompositionProducer Demand.scopeCoordinate
+  structurePopulatesScopeCandidate : ProducerCanPopulate Cross.structuralCompositionProducer Demand.scopeCandidateCoordinate
+  scopeResolutionPopulatesResolvedScope : ProducerCanPopulate Cross.scopeResolutionProducer Demand.resolvedScopeCoordinate
   bindingPopulatesReference : ProducerCanPopulate Cross.bindingAccessibilityProducer Demand.referenceCoordinate
   attributionPopulatesAttribution : ProducerCanPopulate Cross.attributionProducer Demand.attributionCoordinate
   attributionPopulatesProposition : ProducerCanPopulate Cross.attributionProducer Demand.propositionStatusCoordinate
@@ -38,13 +39,10 @@ record ProducerRoute (coordinate : Demand.SemanticCoordinate) : Set where
     routeReference : String
 open ProducerRoute public
 
-routeForActiveRequirement :
-  (active : Demand.ActiveRequirement) → ProducerRoute (Demand.coordinate active) → ProducerRoute (Demand.coordinate active)
+routeForActiveRequirement : (active : Demand.ActiveRequirement) → ProducerRoute (Demand.coordinate active) → ProducerRoute (Demand.coordinate active)
 routeForActiveRequirement active route = route
 
-data ProducerInvocationNeed : Set where
-  noProducerInvocation producerInvocationRequired : ProducerInvocationNeed
-
+data ProducerInvocationNeed : Set where noProducerInvocation producerInvocationRequired : ProducerInvocationNeed
 invocationNeed : Planner.RequirementExecutionAction → ProducerInvocationNeed
 invocationNeed Planner.inspectForEvidence = producerInvocationRequired
 invocationNeed Planner.reuseExisting = noProducerInvocation
@@ -56,8 +54,7 @@ data WorkRoute (need : ProducerInvocationNeed) (coordinate : Demand.SemanticCoor
   reuseWithoutProducer : WorkRoute noProducerInvocation coordinate
   invokeProducer : ProducerRoute coordinate → WorkRoute producerInvocationRequired coordinate
 
-record RoutedWork {state} {active : Demand.ActiveRequirement}
-    (plan : Planner.RequirementPlan state active) : Set where
+record RoutedWork {state} {active : Demand.ActiveRequirement} (plan : Planner.RequirementPlan state active) : Set where
   constructor routedWork
   field
     need : ProducerInvocationNeed
@@ -72,6 +69,10 @@ attributionRoute : ProducerRoute Demand.attributionCoordinate
 attributionRoute = producerRoute Cross.attributionProducer attributionPopulatesAttribution "source/reporting attribution producer"
 temporalRoute : ProducerRoute Demand.temporalCoordinate
 temporalRoute = producerRoute Cross.temporalProducer temporalPopulatesTemporal "temporal qualification/anchor producer"
+scopeCandidateRoute : ProducerRoute Demand.scopeCandidateCoordinate
+scopeCandidateRoute = producerRoute Cross.structuralCompositionProducer structurePopulatesScopeCandidate "parser/dependency scope-candidate composition"
+resolvedScopeRoute : ProducerRoute Demand.resolvedScopeCoordinate
+resolvedScopeRoute = producerRoute Cross.scopeResolutionProducer scopeResolutionPopulatesResolvedScope "joint modality/negation/condition/temporal scope resolution"
 documentContextRoute : ProducerRoute Demand.documentContextCoordinate
 documentContextRoute = producerRoute Cross.documentContextProducer documentContextPopulatesContext "typed document/region/case context producer"
 legalSourceAuthorityRoute : ProducerRoute Demand.legalSourceAuthorityCoordinate
@@ -84,6 +85,7 @@ applicabilityRoute = producerRoute Cross.legalTypedMeetProducer legalMeetPopulat
 data ReuseExistingRequiresProducerInvocation : Set where
 data UnassessedRequirementMaySkipInspectionProducer : Set where
 data ParserCanPopulateLegalApplicability : Set where
+data ParserScopeCandidateCanPopulateResolvedScope : Set where
 data AttributionProducerCanResolveLegalSourceAuthority : Set where
 data SemanticAdmissionProducerCanResolveLegalSourceAuthority : Set where
 data DocumentContextIsParserShape : Set where
@@ -102,6 +104,8 @@ unassessedRequirementCannotSkipInspectionProducer : UnassessedRequirementMaySkip
 unassessedRequirementCannotSkipInspectionProducer ()
 parserDoesNotOwnLegalApplicability : ParserCanPopulateLegalApplicability → ⊥
 parserDoesNotOwnLegalApplicability ()
+parserScopeCandidateDoesNotOwnResolvedScope : ParserScopeCandidateCanPopulateResolvedScope → ⊥
+parserScopeCandidateDoesNotOwnResolvedScope ()
 attributionDoesNotOwnLegalSourceAuthority : AttributionProducerCanResolveLegalSourceAuthority → ⊥
 attributionDoesNotOwnLegalSourceAuthority ()
 semanticAdmissionDoesNotOwnLegalSourceAuthority : SemanticAdmissionProducerCanResolveLegalSourceAuthority → ⊥
@@ -116,9 +120,11 @@ record RequirementProducerRoutingBoundary : Set where
     unassessedRequirementNeedsInspectionProducer : Bool
     satisfiedRequirementNeedsProducerInvocation : Bool
     parserMayPopulateLegalApplicability : Bool
+    parserScopeCandidateMayPopulateResolvedScope : Bool
+    resolvedScopeHasDedicatedProducerClass : Bool
     attributionMayResolveLegalSourceAuthority : Bool
     semanticAdmissionMayResolveLegalSourceAuthority : Bool
     legalSourceAuthorityHasDedicatedProducerClass : Bool
     documentContextHasDedicatedProducerClass : Bool
 canonicalRequirementProducerRoutingBoundary : RequirementProducerRoutingBoundary
-canonicalRequirementProducerRoutingBoundary = requirement-producer-routing-boundary true true false false false false true true
+canonicalRequirementProducerRoutingBoundary = requirement-producer-routing-boundary true true false false false true false false true true
