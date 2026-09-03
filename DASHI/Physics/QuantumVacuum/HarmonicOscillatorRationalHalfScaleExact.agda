@@ -7,8 +7,6 @@ open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 
-import DASHI.Physics.QuantumVacuum.HarmonicOscillatorDoubledEnergyExact as Doubled
-
 ------------------------------------------------------------------------
 -- CONCRETE RATIONAL HALF-SCALE BRIDGE
 --
@@ -44,10 +42,6 @@ rationalGroundHalfScaleIdentity :
   ≡ (hbar * omega) * (0ℚ + half)
 rationalGroundHalfScaleIdentity hbar omega =
   ℚRing.solve (hbar ∷ omega ∷ [])
-
-------------------------------------------------------------------------
--- Interpretation receipt for the denominator-free finite owner.
-------------------------------------------------------------------------
 
 record RationalHalfScaleReceipt : Set where
   field
@@ -85,10 +79,6 @@ buildRationalHalfScaleReceipt hbar omega occupation =
     ; physicalEnergyLaw = refl
     ; oscillatorLaw = rationalHalfScaleIdentity hbar omega occupation
     }
-
-------------------------------------------------------------------------
--- Authority firewall.
-------------------------------------------------------------------------
 
 rationalIdentityIsQFTRenormalisation : Bool
 rationalIdentityIsQFTRenormalisation = false
