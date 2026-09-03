@@ -44,6 +44,22 @@ FILES=(
   DASHI/Analysis/RiemannG2CanonicalTestModulationProofRelevantExact.agda
   DASHI/Analysis/RiemannG2GammaMellinProofRelevantActionCompilerExact.agda
   DASHI/Analysis/RiemannG2SourceNativePhiHatModulationAdapterExact.agda
+  DASHI/Analysis/RiemannG2HAConsumerQuotientActiveSearchExact.agda
+  DASHI/Analysis/RiemannG2HARecoveryDependencyFrontierExact.agda
+  DASHI/Analysis/RiemannG2HAAdmissibleSearchRankingExact.agda
+  DASHI/Analysis/RiemannG2HAProofCarryingRecoveryTraceExact.agda
+  DASHI/Analysis/RiemannG2HAConsumerFanoutPriorityExact.agda
+  DASHI/Analysis/RiemannG2HAConsumerWeightedRecoveryTraceExact.agda
+  DASHI/Analysis/RiemannG2HASourceProducerHyperedgeExact.agda
+  DASHI/Analysis/RiemannG2HASingleSourceProducerBidiExact.agda
+  DASHI/Analysis/RiemannG2HASingleProducerLegacyHACompilerExact.agda
+  DASHI/Analysis/RiemannG2CanonicalHAToHMFactorizationExact.agda
+  DASHI/Analysis/RiemannG2CanonicalHXToHTCompilerExact.agda
+  DASHI/Analysis/RiemannG2CanonicalHXHMToPoleNearHTAdapterExact.agda
+  DASHI/Analysis/RiemannG2TargetModulationToHWCompilerExact.agda
+  DASHI/Analysis/RiemannG2PoleNearTargetWindowSpectralIdentificationCompilerExact.agda
+  DASHI/Analysis/RiemannG2ZeroSideHMBypassBidiExact.agda
+  DASHI/Analysis/RiemannG2ExplicitCutoffTargetWindowFrontierExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda
   DASHI/Mathematics/NumberTheory/DiophantineTupleDPrimeSquare2026ClaimAuditExact.agda
@@ -64,13 +80,14 @@ FILES=(
   "$ROOT"
 )
 
-if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|\?|{!!})\b' "${FILES[@]}"; then
-  echo "unsafe or incomplete proof surface found" >&2
-  exit 1
-fi
+FORBIDDEN_PATTERN='\{![^}]*!\}|(^|[[:space:]=:(])\?([[:space:];,)}]|$)|^[[:space:]]*postulate([[:space:]]|$)|--allow-unsolved-metas|\{-# OPTIONS[^#]*--(unsafe|type-in-type|no-positivity-check|no-termination-check|rewriting)([[:space:]]|#)|=[[:space:]]*_[[:space:]]*$'
 
-if command -v agda >/dev/null 2>&1; then
-  agda -i . "$ROOT"
-else
-  echo "agda not available; trust scan only"
-fi
+for file in "${FILES[@]}"; do
+  [[ -f "$file" ]] || { echo "required Math2026 source is missing: $file" >&2; exit 1; }
+  if grep -nE "$FORBIDDEN_PATTERN" "$file"; then
+    echo "forbidden hole, postulate, placeholder, or unsafe option in $file" >&2
+    exit 1
+  fi
+done
+
+scripts/run_agda29_parallel_check.sh "$ROOT"
