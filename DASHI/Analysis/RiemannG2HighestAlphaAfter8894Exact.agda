@@ -11,17 +11,17 @@ import DASHI.Analysis.RiemannG2FkOrbitConsumerAttachmentExact as Orbit
 import DASHI.Analysis.RiemannG2FkOrbitExplicitFormulaWeldExact as Weld
 import DASHI.Analysis.RiemannG2FkSelectedTestSameObjectBidiExact as Same
 import DASHI.Analysis.RiemannG2SelectedPoleNearSingleProducerBidiExact as Single
+import DASHI.Analysis.RiemannG2SelectedPoleNearFiniteEvaluationSameObjectExact as NearEval
 import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as PQ
 
 ------------------------------------------------------------------------
--- HIGHEST-ALPHA SCHEDULER AFTER 8894 + CHECKED f_k SOURCE RECOVERY
+-- HIGHEST-ALPHA SCHEDULER AFTER 8894 + PR CROSS-POLLINATION
 --
--- Cross-PR BIDI compression now removes a further false decomposition.  PR #691
--- showed that theorem consequences indexed by one literal source producer should
--- not be searched independently.  PR #684 showed that same-object premises can
--- make an apparent physical leaf compiler output.  Applied here, the selected
--- orbit attachment, target-window decomposition, selected same-object weld and
--- selected near/far weld are projections of one dependent target-window producer.
+-- The selected target-window representation work is one dependent producer.
+-- The checked 8883 cutoff return separately owns the finite near carrier, far
+-- shell, arbitrary-accuracy cutoff and literal D_off cutoff transport.  Hence
+-- the live near-side analysis is now an actual phase-preserving FiniteNearProducer
+-- welded to the exact finitePoleNearSigned coordinate of that selected window.
 ------------------------------------------------------------------------
 
 data RH8894Leaf : Set where
@@ -34,13 +34,20 @@ data RH8894Leaf : Set where
   separatelyRecoverSelectedSameTestWeld
   recoverActualSelectedPoleNearProducer
 
+  rebuildFiniteNearCarrier
+  reproveFarShellDecay
+  reproveArbitraryAccuracyCutoff
+  recoverPhasePreservingFiniteNearProducer
+  weldFiniteNearEvaluationToSelectedWindow
+  extractSelectedNearBudget
+
   sharpenQuadraticDecayGapSplit
   retuneTaperForGapSplit
   deriveClusteringFromCoarseCounting
   compareAdaptiveJLambdaConstants
-  seekDifferentSignedNearMechanism
 
   searchForAnyGammaBound
+  localizeGammaPrecisionLoss
   repairGammaToSharpWindow
   attachOwnedClusterMargin
   combineFinalIndependentBudgets
@@ -59,13 +66,20 @@ leafState separatelyRecoverSelectedNearFarWeld = pruned
 leafState separatelyRecoverSelectedSameTestWeld = pruned
 leafState recoverActualSelectedPoleNearProducer = live
 
+leafState rebuildFiniteNearCarrier = pruned
+leafState reproveFarShellDecay = pruned
+leafState reproveArbitraryAccuracyCutoff = pruned
+leafState recoverPhasePreservingFiniteNearProducer = live
+leafState weldFiniteNearEvaluationToSelectedWindow = live
+leafState extractSelectedNearBudget = downstream
+
 leafState sharpenQuadraticDecayGapSplit = pruned
 leafState retuneTaperForGapSplit = pruned
 leafState deriveClusteringFromCoarseCounting = pruned
 leafState compareAdaptiveJLambdaConstants = live
-leafState seekDifferentSignedNearMechanism = live
 
 leafState searchForAnyGammaBound = pruned
+leafState localizeGammaPrecisionLoss = live
 leafState repairGammaToSharpWindow = live
 leafState attachOwnedClusterMargin = live
 leafState combineFinalIndependentBudgets = conditional
@@ -81,14 +95,6 @@ modulationOperationSearchNoLongerLive = Fk.modulationSearchPruned
 sourceShiftReproofNoLongerLive :
   FkChecked.FkSourceRelevant FkChecked.reproveSourcePaperFTShift -> ⊥
 sourceShiftReproofNoLongerLive = FkChecked.sourceShiftReproofPruned
-
-sourceContDiffReproofNoLongerLive :
-  FkChecked.FkSourceRelevant FkChecked.reproveSourceContDiff -> ⊥
-sourceContDiffReproofNoLongerLive = FkChecked.sourceContDiffReproofPruned
-
-sourceCompactSupportReproofNoLongerLive :
-  FkChecked.FkSourceRelevant FkChecked.reproveSourceCompactSupport -> ⊥
-sourceCompactSupportReproofNoLongerLive = FkChecked.sourceCompactSupportReproofPruned
 
 wholeWeilCarrierEqualityNoLongerLive :
   Orbit.PaymentRelevant Orbit.identifyWholeSourceFunctionSpaceWithWeilTest -> ⊥
@@ -119,6 +125,18 @@ separateSelectedNearFarSearchNoLongerLive = Single.separateNearFarSearchPruned
 separateSelectedSameTestSearchNoLongerLive :
   Single.searchStatus Single.separatelyRecoverSameTestWeld ≡ Single.pruned
 separateSelectedSameTestSearchNoLongerLive = Single.separateSameTestSearchPruned
+
+finiteNearCarrierRebuildNoLongerLive :
+  NearEval.paymentStatus NearEval.rebuildFiniteNearCarrier ≡ NearEval.pruned
+finiteNearCarrierRebuildNoLongerLive = NearEval.finiteCarrierRebuildPruned
+
+farShellReproofNoLongerLive :
+  NearEval.paymentStatus NearEval.reproveFarShellDecay ≡ NearEval.pruned
+farShellReproofNoLongerLive = NearEval.farShellReproofPruned
+
+cutoffReproofNoLongerLive :
+  NearEval.paymentStatus NearEval.reproveArbitraryAccuracyCutoff ≡ NearEval.pruned
+cutoffReproofNoLongerLive = NearEval.cutoffReproofPruned
 
 quadraticGapSplitSharpeningNoLongerLive :
   Gap.GapSplitRelevant Gap.sharpenSameQuadraticDecayDonor -> ⊥
@@ -154,17 +172,21 @@ record HighestAlphaAfter8894Boundary : Set where
     literalFkSourceMathematicsAlreadyRecoveredIsTrue :
       literalFkSourceMathematicsAlreadyRecovered ≡ true
 
-    wholeSourceFunctionSpaceEqualityRequired : Bool
-    wholeSourceFunctionSpaceEqualityRequiredIsFalse :
-      wholeSourceFunctionSpaceEqualityRequired ≡ false
-
-    selectedOrbitWindowAndSameObjectAreIndependentLeaves : Bool
-    selectedOrbitWindowAndSameObjectAreIndependentLeavesIsFalse :
-      selectedOrbitWindowAndSameObjectAreIndependentLeaves ≡ false
-
     actualSelectedPoleNearProducerStillRequired : Bool
     actualSelectedPoleNearProducerStillRequiredIsTrue :
       actualSelectedPoleNearProducerStillRequired ≡ true
+
+    finiteNearCarrierAndFarShellFreshMathematicsRequired : Bool
+    finiteNearCarrierAndFarShellFreshMathematicsRequiredIsFalse :
+      finiteNearCarrierAndFarShellFreshMathematicsRequired ≡ false
+
+    selectedPhasePreservingFiniteEvaluationStillRequired : Bool
+    selectedPhasePreservingFiniteEvaluationStillRequiredIsTrue :
+      selectedPhasePreservingFiniteEvaluationStillRequired ≡ true
+
+    evaluatorMustBeWeldedToSelectedWindowFiniteNear : Bool
+    evaluatorMustBeWeldedToSelectedWindowFiniteNearIsTrue :
+      evaluatorMustBeWeldedToSelectedWindowFiniteNear ≡ true
 
     sameQuadraticGapSplitRouteStillWorthSharpening : Bool
     sameQuadraticGapSplitRouteStillWorthSharpeningIsFalse :
@@ -173,6 +195,10 @@ record HighestAlphaAfter8894Boundary : Set where
     adaptiveConstantWindowComparisonLive : Bool
     adaptiveConstantWindowComparisonLiveIsTrue :
       adaptiveConstantWindowComparisonLive ≡ true
+
+    gammaPrecisionLossLocalizationLive : Bool
+    gammaPrecisionLossLocalizationLiveIsTrue :
+      gammaPrecisionLossLocalizationLive ≡ true
 
     gammaPrecisionRepairLive : Bool
     gammaPrecisionRepairLiveIsTrue : gammaPrecisionRepairLive ≡ true
@@ -190,12 +216,14 @@ canonicalHighestAlphaAfter8894Boundary : HighestAlphaAfter8894Boundary
 canonicalHighestAlphaAfter8894Boundary =
   highest-alpha-after-8894-boundary
     true refl
-    false refl
-    false refl
     true refl
     false refl
     true refl
     true refl
     false refl
+    true refl
+    true refl
+    true refl
     false refl
-    "Recent PR inspiration compresses the selected zero-side lane again. Do not separately recover a source-orbit attachment, a selected same-test weld and a selected near/far weld. Recover one ActualSelectedPoleNearProducer indexed by the same Weil space/formula/orbit: it contains the chosen source attachment, one theorem-bearing PoleNearTargetWindow, equality of their selected Test and the preservation receipts. Existing compilers then generate the literal selected-test weld, same-formula cluster/finite-near/far weld and same-object near/far attachment. In parallel compare the adaptive J*Lambda window or find a different signed mechanism, repair Gamma precision, attach the owned cluster margin and pay the final independent budget inequality. RH remains open."
+    false refl
+    "PR cross-pollination compresses the zero-side lane to one dependent selected target-window producer followed by one phase-preserving finite-near evaluator on that SAME finite-near scalar. The checked 8883 return already owns the finite near carrier, far-shell modulus/decay, arbitrary-accuracy cutoff and D_off cutoff transport, so rebuilding those is pruned. The live near analysis is to recover an admitted FiniteNearProducer and prove its signedNearValue, after exact scalar-carrier transport, is the finitePoleNearSigned coordinate of the selected PoleNearTargetWindow; its budget extraction is then downstream. The 8894 quadratic gap-split sharpening remains pruned, the adaptive J*Lambda compatibility question remains live, and H_Gamma still requires source-exact precision-loss localization plus repair to the sharp cluster window. RH remains open."
