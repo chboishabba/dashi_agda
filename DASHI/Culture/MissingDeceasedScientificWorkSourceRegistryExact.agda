@@ -4,8 +4,8 @@ module DASHI.Culture.MissingDeceasedScientificWorkSourceRegistryExact where
 -- FULL SOURCE REGISTRY FOR MISSING/DECEASED SCIENTIFIC-WORK ATTRIBUTIONS
 --
 -- Each entry records author/institution, title, venue/publisher, year, strongest
--- stable identifier available, exact locator, and bounded role.  DOI is used
--- where verified; patents, NASA NTRS IDs, PMIDs/PMCIDs, institutional records,
+-- stable identifier available, exact locator, and bounded role. DOI is used
+-- where verified; patents, NASA NTRS IDs, PMID/PMCID, institutional records,
 -- and canonical URLs are retained when no DOI is appropriate.
 ------------------------------------------------------------------------
 
@@ -14,10 +14,6 @@ open import DASHI.Core.Prelude
 import DASHI.Core.ScientificSourceCitationExact as Citation
 import DASHI.Culture.MissingDeceasedScientistWorkAttributionExact as Atlas
 import DASHI.Culture.MissingDeceasedScientificWorkCrossPollinationExact as Cross
-
-------------------------------------------------------------------------
--- Hicks
-------------------------------------------------------------------------
 
 hicksJPLFamilyNews : Citation.ScientificCitation
 hicksJPLFamilyNews =
@@ -44,12 +40,7 @@ hicksArizonaMemorial =
     "Independent institutional restatement of Hicks's JPL tenure, comet/asteroid specialty, and named mission science-team memberships."
 
 hicksDARTCitation : Citation.AttributionWithCitation
-hicksDARTCitation =
-  Citation.attribution-with-citation Atlas.hicksDARTTeam hicksJPLFamilyNews
-
-------------------------------------------------------------------------
--- Maiwald
-------------------------------------------------------------------------
+hicksDARTCitation = Citation.attribution-with-citation Atlas.hicksDARTTeam hicksJPLFamilyNews
 
 maiwaldSURP2023 : Citation.ScientificCitation
 maiwaldSURP2023 =
@@ -64,12 +55,7 @@ maiwaldSURP2023 =
     "Names Frank Maiwald as Principal Investigator and the listed collaborators as co-investigators/collaborators."
 
 maiwaldPICitation : Citation.AttributionWithCitation
-maiwaldPICitation =
-  Citation.attribution-with-citation Atlas.maiwaldBiosignaturePI maiwaldSURP2023
-
-------------------------------------------------------------------------
--- Monica Jacinto / Reza patent lineage
-------------------------------------------------------------------------
+maiwaldPICitation = Citation.attribution-with-citation Atlas.maiwaldBiosignaturePI maiwaldSURP2023
 
 jacintoHardwickPatent2004 : Citation.ScientificCitation
 jacintoHardwickPatent2004 =
@@ -84,12 +70,7 @@ jacintoHardwickPatent2004 =
     "Names Monica A. Jacinto and Dallis Ann Hardwick as inventors of nickel-based burn-resistant/high-strength alloys for oxygen-rich structural applications."
 
 jacintoPatentCitation : Citation.AttributionWithCitation
-jacintoPatentCitation =
-  Citation.attribution-with-citation Atlas.rezaBurnResistantAlloyPatent jacintoHardwickPatent2004
-
-------------------------------------------------------------------------
--- Joshua LeBlanc / NASA fission power and propulsion instrumentation
-------------------------------------------------------------------------
+jacintoPatentCitation = Citation.attribution-with-citation Atlas.rezaBurnResistantAlloyPatent jacintoHardwickPatent2004
 
 leblancNTRS2025 : Citation.ScientificCitation
 leblancNTRS2025 =
@@ -104,36 +85,25 @@ leblancNTRS2025 =
     "Names Joshua Leblanc of Marshall Space Flight Center as an author and labels him NASA SNP I&C TechMat Team Lead."
 
 leblancAuthorCitation : Citation.AttributionWithCitation
-leblancAuthorCitation =
-  Citation.attribution-with-citation Atlas.leblancFissionSurfacePowerAuthor leblancNTRS2025
+leblancAuthorCitation = Citation.attribution-with-citation Atlas.leblancFissionSurfacePowerAuthor leblancNTRS2025
 
 leblancLeadCitation : Citation.AttributionWithCitation
-leblancLeadCitation =
-  Citation.attribution-with-citation Atlas.leblancSnpICLead leblancNTRS2025
-
-------------------------------------------------------------------------
--- Loureiro
-------------------------------------------------------------------------
+leblancLeadCitation = Citation.attribution-with-citation Atlas.leblancSnpICLead leblancNTRS2025
 
 loureiroViriato2016 : Citation.ScientificCitation
 loureiroViriato2016 =
   Citation.scientific-citation
-    "N. F. Loureiro; W. Dorland; L. Fazendeiro; A. Kanekar; A. A. Schekochihin; D. Zocco"
+    "N. F. Loureiro; W. Dorland; L. Fazendeiro; A. Kanekar; A. Mallet; M. S. Vilelas; A. Zocco"
     "Viriato: A Fourier-Hermite spectral code for strongly magnetized fluid-kinetic plasma dynamics"
     "Computer Physics Communications 206, 45-63"
     2016
     (Citation.doi "10.1016/j.cpc.2016.05.004")
-    "article DOI / volume 206, pages 45-63"
+    "DOI record; arXiv:1505.02649; MIT PSFC report PSFC/JA-16-7"
     Citation.authorshipSource
-    "Publication-level authorship for the Viriato code paper; applications include magnetized plasma turbulence and magnetic reconnection."
+    "Publication-level authorship for Viriato; the code targets strongly magnetized fluid-kinetic plasma dynamics including plasma turbulence and magnetic reconnection."
 
 loureiroViriatoCitation : Citation.AttributionWithCitation
-loureiroViriatoCitation =
-  Citation.attribution-with-citation Atlas.loureiroViriato loureiroViriato2016
-
-------------------------------------------------------------------------
--- Grillmair
-------------------------------------------------------------------------
+loureiroViriatoCitation = Citation.attribution-with-citation Atlas.loureiroViriato loureiroViriato2016
 
 grillmairCrossroads2017 : Citation.ScientificCitation
 grillmairCrossroads2017 =
@@ -143,17 +113,12 @@ grillmairCrossroads2017 =
     "The Astrophysical Journal 847(2), Article 119"
     2017
     (Citation.doi "10.3847/1538-4357/aa8872")
-    "CaltechAUTHORS record; arXiv:1708.09029"
+    "CaltechAUTHORS:20170929-083050550; arXiv:1708.09029"
     Citation.authorshipSource
     "Sole-author publication reporting four cold stellar-stream candidates in the South Galactic Cap."
 
 grillmairCrossroadsCitation : Citation.AttributionWithCitation
-grillmairCrossroadsCitation =
-  Citation.attribution-with-citation Atlas.grillmairCrossroadsAuthor grillmairCrossroads2017
-
-------------------------------------------------------------------------
--- McCasland
-------------------------------------------------------------------------
+grillmairCrossroadsCitation = Citation.attribution-with-citation Atlas.grillmairCrossroadsAuthor grillmairCrossroads2017
 
 mccaslandUSAFBiography : Citation.ScientificCitation
 mccaslandUSAFBiography =
@@ -168,12 +133,7 @@ mccaslandUSAFBiography =
     "Documents astronautical-engineering education; payload development, GPS chief engineering, Space Based Laser program direction, Space Vehicles Directorate/Phillips Research Site command, space acquisition, and AFRL command."
 
 mccaslandAFRLCitation : Citation.AttributionWithCitation
-mccaslandAFRLCitation =
-  Citation.attribution-with-citation Atlas.mccaslandAFRLLeadership mccaslandUSAFBiography
-
-------------------------------------------------------------------------
--- Anthony Chavez
-------------------------------------------------------------------------
+mccaslandAFRLCitation = Citation.attribution-with-citation Atlas.mccaslandAFRLLeadership mccaslandUSAFBiography
 
 anthonyChavezLANL2025 : Citation.ScientificCitation
 anthonyChavezLANL2025 =
@@ -188,12 +148,7 @@ anthonyChavezLANL2025 =
     "States that Chavez earned mechanical engineering, worked more than 25 years at DARHT, and completed design work for the Scorpius accelerator."
 
 anthonyChavezScorpiusCitation : Citation.AttributionWithCitation
-anthonyChavezScorpiusCitation =
-  Citation.attribution-with-citation Cross.anthonyChavezScorpius anthonyChavezLANL2025
-
-------------------------------------------------------------------------
--- Jason R. Thomas
-------------------------------------------------------------------------
+anthonyChavezScorpiusCitation = Citation.attribution-with-citation Cross.anthonyChavezScorpius anthonyChavezLANL2025
 
 thomasSTING2018 : Citation.ScientificCitation
 thomasSTING2018 =
@@ -208,34 +163,23 @@ thomasSTING2018 =
     "Publication names Jason R. Thomas as an author on the STING-IRF3/NFkB chemical-biology screen."
 
 thomasSTINGCitation : Citation.AttributionWithCitation
-thomasSTINGCitation =
-  Citation.attribution-with-citation Cross.jasonThomasSTINGScreen thomasSTING2018
-
-------------------------------------------------------------------------
--- Registry policy manifest.
-------------------------------------------------------------------------
+thomasSTINGCitation = Citation.attribution-with-citation Cross.jasonThomasSTINGScreen thomasSTING2018
 
 record MissingScientistSourceRegistryBoundary : Set where
   constructor missing-scientist-source-registry-boundary
   field
     publicationDOIsRecordedWhenVerified : Bool
-    publicationDOIsRecordedWhenVerifiedIsTrue :
-      publicationDOIsRecordedWhenVerified ≡ true
+    publicationDOIsRecordedWhenVerifiedIsTrue : publicationDOIsRecordedWhenVerified ≡ true
     patentsUsePatentIdentifiersRatherThanFakeDOIs : Bool
-    patentsUsePatentIdentifiersRatherThanFakeDOIsIsTrue :
-      patentsUsePatentIdentifiersRatherThanFakeDOIs ≡ true
+    patentsUsePatentIdentifiersRatherThanFakeDOIsIsTrue : patentsUsePatentIdentifiersRatherThanFakeDOIs ≡ true
     nasaReportsUseNTRSIdentifiersWhenAvailable : Bool
-    nasaReportsUseNTRSIdentifiersWhenAvailableIsTrue :
-      nasaReportsUseNTRSIdentifiersWhenAvailable ≡ true
+    nasaReportsUseNTRSIdentifiersWhenAvailableIsTrue : nasaReportsUseNTRSIdentifiersWhenAvailable ≡ true
     institutionalSourcesRemainValidWithoutDOI : Bool
-    institutionalSourcesRemainValidWithoutDOIIsTrue :
-      institutionalSourcesRemainValidWithoutDOI ≡ true
+    institutionalSourcesRemainValidWithoutDOIIsTrue : institutionalSourcesRemainValidWithoutDOI ≡ true
     sourceClaimRemainsBoundedToItsRole : Bool
-    sourceClaimRemainsBoundedToItsRoleIsTrue :
-      sourceClaimRemainsBoundedToItsRole ≡ true
+    sourceClaimRemainsBoundedToItsRoleIsTrue : sourceClaimRemainsBoundedToItsRole ≡ true
 
-canonicalMissingScientistSourceRegistryBoundary :
-  MissingScientistSourceRegistryBoundary
+canonicalMissingScientistSourceRegistryBoundary : MissingScientistSourceRegistryBoundary
 canonicalMissingScientistSourceRegistryBoundary =
   missing-scientist-source-registry-boundary
     true refl
