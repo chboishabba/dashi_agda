@@ -57,6 +57,7 @@ import DASHI.Physics.QuantumVacuum.CasimirCoefficient720To240CompilerExact
 import DASHI.Physics.QuantumVacuum.CasimirInversePowerDerivativeBidiExact
 import DASHI.Physics.QuantumVacuum.CasimirPressureDerivativeSameObjectCompletionExact
 import DASHI.Physics.QuantumVacuum.CasimirRemainingClosureCapstoneExact
+import DASHI.Physics.QuantumVacuum.CasimirClosureAssemblyCompilerExact
 import DASHI.Physics.QuantumVacuum.TunableMaterialCasimirBridge
 import DASHI.Physics.QuantumVacuum.CasimirCycleAccounting
 import DASHI.Physics.QuantumVacuum.ReservoirDynamics
