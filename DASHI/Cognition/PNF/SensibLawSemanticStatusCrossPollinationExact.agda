@@ -15,14 +15,14 @@ import DASHI.Cognition.PNF.ContextualFractranDirectDeltaAdapterExact as Contextu
 
 data ProducerClass : Set where
   parserShapeProducer structuralCompositionProducer bindingAccessibilityProducer
-  attributionProducer evidenceProducer temporalProducer legalTypedMeetProducer
-  governedAdmissionProducer : ProducerClass
+  attributionProducer evidenceProducer temporalProducer documentContextProducer
+  legalTypedMeetProducer governedAdmissionProducer : ProducerClass
 
 data StatusAxis : Set where
   participantRoleAxis referentKindAxis identityAxis antecedentAxis occurrenceAxis
   propositionAxis attributionAxis evidenceAxis modalityAxis temporalAxis conditionAxis
-  jurisdictionAxis authorityAxis applicabilityAxis violationAxis liabilityAxis burdenAxis
-  judicialDiscourseAxis normativeRelationAxis : StatusAxis
+  documentContextAxis jurisdictionAxis authorityAxis applicabilityAxis violationAxis
+  liabilityAxis burdenAxis judicialDiscourseAxis normativeRelationAxis : StatusAxis
 
 record AxisPopulationReceipt : Set where
   constructor axisPopulationReceipt
@@ -60,6 +60,9 @@ evidenceCandidateRequiresProvenance = axisPopulationReceipt evidenceProducer evi
 
 temporalCandidateRequiresAnchor : AxisPopulationReceipt
 temporalCandidateRequiresAnchor = axisPopulationReceipt temporalProducer temporalAxis true true true true "temporal qualification/anchor composition"
+
+documentContextCandidateRequiresStructure : AxisPopulationReceipt
+documentContextCandidateRequiresStructure = axisPopulationReceipt documentContextProducer documentContextAxis true true true true "typed document/region/case context composition"
 
 legalApplicabilityCandidateRequiresTypedMeet : AxisPopulationReceipt
 legalApplicabilityCandidateRequiresTypedMeet = axisPopulationReceipt legalTypedMeetProducer applicabilityAxis true true true true "legal typed meet across structural/jurisdiction/time/actor/conduct/object/circumstance/exception/burden"
