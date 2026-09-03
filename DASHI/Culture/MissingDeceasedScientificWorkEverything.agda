@@ -4,9 +4,9 @@ module DASHI.Culture.MissingDeceasedScientificWorkEverything where
 -- source-exact citation, technical-intersection proof search, independent
 -- common-selector/visibility analysis, selector-discrimination search,
 -- higher-order capability synthesis, capability-indexed selector salience,
--- denominator-aware matched-control enrichment, disruption-benefit evidence
--- testing, actor benefit/visibility/effect intersection, and matched disruption-
--- impact controls.
+-- denominator-aware matched-control enrichment, competing-hypothesis
+-- discrimination, disruption-benefit evidence testing, actor benefit/visibility/
+-- effect intersection, and matched disruption-impact controls.
 -- Kept separate from AmyEskridgeEvidenceEverything because Amy Eskridge is not
 -- explicitly named in the 20 April 2026 House Oversight letter formalised here.
 
@@ -34,6 +34,7 @@ import DASHI.Culture.MissingDeceasedCapabilitySynthesisExact
 import DASHI.Culture.MissingDeceasedCapabilityIndexedSelectorSalienceExact
 import DASHI.Culture.MissingDeceasedCapabilitySelectorAcquisitionExact
 import DASHI.Culture.MissingDeceasedRosterEnrichmentDesignExact
+import DASHI.Culture.MissingDeceasedHypothesisDiscriminatorMatrixExact
 import DASHI.Culture.MissingDeceasedDisruptionBenefitEvidenceExact
 import DASHI.Culture.MissingDeceasedDisruptionBenefitAcquisitionExact
 import DASHI.Culture.MissingDeceasedActorIntersectionFrontierExact
