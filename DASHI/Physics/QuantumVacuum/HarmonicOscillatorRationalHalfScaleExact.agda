@@ -2,6 +2,7 @@ module DASHI.Physics.QuantumVacuum.HarmonicOscillatorRationalHalfScaleExact wher
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
