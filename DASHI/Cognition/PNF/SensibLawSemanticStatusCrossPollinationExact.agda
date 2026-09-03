@@ -16,16 +16,16 @@ import DASHI.Cognition.PNF.ContextualFractranDirectDeltaAdapterExact as Contextu
 data ProducerClass : Set where
   parserShapeProducer structuralCompositionProducer bindingAccessibilityProducer
   attributionProducer evidenceProducer temporalProducer scopeResolutionProducer
-  documentContextProducer legalSourceAuthorityProducer legalTypedMeetProducer
-  governedAdmissionProducer : ProducerClass
+  documentContextProducer legalJurisdictionProducer legalSourceAuthorityProducer
+  legalTypedMeetProducer governedAdmissionProducer : ProducerClass
 
 data StatusAxis : Set where
   participantRoleAxis referentKindAxis identityAxis antecedentAxis occurrenceAxis
   propositionAxis attributionAxis evidenceAxis modalityAxis temporalAxis conditionAxis
-  scopeCandidateAxis resolvedScopeAxis documentContextAxis jurisdictionAxis
-  semanticAdmissionAuthorityAxis legalSourceAuthorityAxis applicabilityAxis
-  violationAxis liabilityAxis burdenAxis judicialDiscourseAxis normativeRelationAxis
-  : StatusAxis
+  scopeCandidateAxis resolvedScopeAxis documentContextAxis jurisdictionCandidateAxis
+  resolvedLegalJurisdictionAxis semanticAdmissionAuthorityAxis legalSourceAuthorityAxis
+  applicabilityAxis violationAxis liabilityAxis burdenAxis judicialDiscourseAxis
+  normativeRelationAxis : StatusAxis
 
 record AxisPopulationReceipt : Set where
   constructor axisPopulationReceipt
@@ -61,10 +61,14 @@ resolvedScopeRequiresCompositeReceipt : AxisPopulationReceipt
 resolvedScopeRequiresCompositeReceipt = axisPopulationReceipt scopeResolutionProducer resolvedScopeAxis false true true false "SensibLawScopeCompositionBidiExact joint scope receipt"
 documentContextCandidateRequiresStructure : AxisPopulationReceipt
 documentContextCandidateRequiresStructure = axisPopulationReceipt documentContextProducer documentContextAxis true true true true "typed document/region/case context composition"
+legalJurisdictionCandidateRequiresContext : AxisPopulationReceipt
+legalJurisdictionCandidateRequiresContext = axisPopulationReceipt documentContextProducer jurisdictionCandidateAxis true true true true "document/geographic/legal-system context may propose jurisdiction candidates only"
+resolvedLegalJurisdictionRequiresSystemWeld : AxisPopulationReceipt
+resolvedLegalJurisdictionRequiresSystemWeld = axisPopulationReceipt legalJurisdictionProducer resolvedLegalJurisdictionAxis false true true false "CaseFrame legalSystemId + LegalSystem systemId + resolved legal jurisdiction kind"
 legalSourceAuthorityRequiresSystemAndValidity : AxisPopulationReceipt
 legalSourceAuthorityRequiresSystemAndValidity = axisPopulationReceipt legalSourceAuthorityProducer legalSourceAuthorityAxis true true true true "SensibLawOntologyTopology LegalSource + source system + validity interval; legal authority not inferred from semantic admission"
 legalApplicabilityCandidateRequiresTypedMeet : AxisPopulationReceipt
-legalApplicabilityCandidateRequiresTypedMeet = axisPopulationReceipt legalTypedMeetProducer applicabilityAxis true true true true "legal typed meet across structural/jurisdiction/time/actor/conduct/object/circumstance/exception/burden"
+legalApplicabilityCandidateRequiresTypedMeet = axisPopulationReceipt legalTypedMeetProducer applicabilityAxis true true true true "legal typed meet consumes resolved jurisdiction/authority/scope plus event/wrong/evidence coordinates"
 admissionClosureReceipt : AxisPopulationReceipt
 admissionClosureReceipt = axisPopulationReceipt governedAdmissionProducer semanticAdmissionAuthorityAxis false true true false "SensibLawLegalSemanticAdmissionFrontierExact semantic resolution/admission authority only"
 
@@ -113,6 +117,7 @@ data QuotedSpeakerIsDocumentAuthor : Set where
 data GeographicLocationIsLegalJurisdiction : Set where
 data LegalAuthorityIsPromotionAuthority : Set where
 data ParserScopeCandidateIsResolvedScope : Set where
+data JurisdictionCandidateIsResolvedLegalJurisdiction : Set where
 data FoundAsFactIsUniversalTruth : Set where
 data NormativeRelationIsModalSurface : Set where
 data BurdenBearerIsSyntacticSubject : Set where
@@ -126,6 +131,8 @@ legalAuthorityDoesNotEqualPromotionAuthority : LegalAuthorityIsPromotionAuthorit
 legalAuthorityDoesNotEqualPromotionAuthority ()
 parserScopeCandidateDoesNotEqualResolvedScope : ParserScopeCandidateIsResolvedScope → ⊥
 parserScopeCandidateDoesNotEqualResolvedScope ()
+jurisdictionCandidateDoesNotEqualResolvedLegalJurisdiction : JurisdictionCandidateIsResolvedLegalJurisdiction → ⊥
+jurisdictionCandidateDoesNotEqualResolvedLegalJurisdiction ()
 foundAsFactDoesNotMeanUniversalTruth : FoundAsFactIsUniversalTruth → ⊥
 foundAsFactDoesNotMeanUniversalTruth ()
 normativeRelationNotRawModalSurface : NormativeRelationIsModalSurface → ⊥
