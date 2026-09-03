@@ -5,6 +5,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.MeasureIntegralLimitKernelBidiExact as MIL
 import DASHI.Physics.QuantumVacuum.CasimirParallelPlateKernel as Casimir
+import DASHI.Physics.QuantumVacuum.ParallelPlateModeSpectrumCutsetExact as Cutset
 import DASHI.Physics.QuantumVacuum.ParallelPlateRegulatedDifferenceBidiExact as Difference
 
 ------------------------------------------------------------------------
@@ -28,7 +29,7 @@ record CasimirTransverseMeasureFamily
     transverseMeasure : Measure
 
     regulatedIntegrand :
-      Difference.Cutset.Cutoff (Difference.regulator casimirDifference) →
+      Cutset.Cutoff (Difference.regulator casimirDifference) →
       TransversePoint → Integrand
 
     limitIntegrand : TransversePoint → Integrand
@@ -36,13 +37,13 @@ record CasimirTransverseMeasureFamily
     integrate : Measure → (TransversePoint → Integrand) → Casimir.Scalar kernel
 
     regulatedTransverseIntegral :
-      Difference.Cutset.Cutoff (Difference.regulator casimirDifference) →
+      Cutset.Cutoff (Difference.regulator casimirDifference) →
       Casimir.Scalar kernel
 
     renormalisedTransverseIntegral : Casimir.Scalar kernel
 
     regulatedIntegralLaw :
-      (Λ : Difference.Cutset.Cutoff (Difference.regulator casimirDifference)) →
+      (Λ : Cutset.Cutoff (Difference.regulator casimirDifference)) →
       regulatedTransverseIntegral Λ ≡
       integrate transverseMeasure (regulatedIntegrand Λ)
 
@@ -51,7 +52,7 @@ record CasimirTransverseMeasureFamily
       integrate transverseMeasure limitIntegrand
 
     integralIsLiteralRegulatedDifference :
-      (Λ : Difference.Cutset.Cutoff (Difference.regulator casimirDifference)) →
+      (Λ : Cutset.Cutoff (Difference.regulator casimirDifference)) →
       regulatedTransverseIntegral Λ ≡
       Difference.regulatedDifference casimirDifference Λ
 
@@ -65,7 +66,7 @@ asGenericMeasureIntegralProblem :
   MIL.MeasureIntegralProblem
 asGenericMeasureIntegralProblem kernel F = record
   { Parameter = ⊤
-  ; Regulator = Difference.Cutset.Cutoff (Difference.regulator (casimirDifference F))
+  ; Regulator = Cutset.Cutoff (Difference.regulator (casimirDifference F))
   ; Point = TransversePoint F
   ; Scalar = Casimir.Scalar kernel
   ; Integrand = Integrand F
