@@ -11,3 +11,7 @@ import DASHI.Physics.Plasma.ElsasserMHDChartExact
 import DASHI.Physics.Plasma.ElsasserCounterpropagatingInteractionBidiExact
 import DASHI.Physics.Plasma.NSTriadMHDTheoremShapeCrossPollinationExact
 import DASHI.Physics.Plasma.ReconnectionInvariantBreakBidiExact
+import DASHI.Physics.Plasma.MHDHelicalCoefficientAnatomyExact
+import DASHI.Physics.Plasma.MHDMomentumTriadZeroSumBidiExact
+import DASHI.Physics.Plasma.HelicityElsasserBinaryAxesExact
+import DASHI.Physics.Plasma.MHDHelicalTriadBidiFrontierExact
