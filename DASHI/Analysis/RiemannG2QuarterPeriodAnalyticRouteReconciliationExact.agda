@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Analysis.RiemannG2NarrowWindowNoCancellationReturnExact as Narrow
 import DASHI.Analysis.RiemannG2CutoffGrowthBidiExact as Growth
 import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as PQ8889
+import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap8894
 
 ------------------------------------------------------------------------
 -- QUARTER-PERIOD / ANALYTIC-LEAF RECONCILIATION
@@ -18,15 +19,21 @@ import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as PQ
 -- with H_Gamma independent and live in parallel.  This module does not import
 -- that open draft branch and does not pretend its Agda proof terms are present
 -- here.  It records only the cross-branch frontier correspondence needed to
--- reconcile that decomposition with the checked-Lean 8890 narrow-window no-go
--- already owned on this branch.
+-- reconcile that decomposition with the checked-Lean narrow-window and
+-- optimized-gap-split no-go returns already owned on this branch.
 --
 -- Key correction: quarter-period crossing is necessary for phase cancellation,
 -- but it is NOT a prerequisite for constructing regime-independent character,
--- modulation, or Gamma infrastructure.  Therefore H_X and Gamma precision may
--- advance in parallel with the literal Lambda(t)/J(t) scaling audit.  H_E, by
--- contrast, cannot close the unchanged narrow scalar consumer while
+-- modulation, or Gamma infrastructure.  Therefore H_X/H_A infrastructure and
+-- Gamma precision may advance in parallel with the literal Lambda(t)/J(t)
+-- scaling audit. H_E cannot close the unchanged narrow scalar consumer while
 -- J*Lambda <= pi/2.
+--
+-- The 8894 gap-split return additionally prunes the transported quadratic-decay
+-- donor as a sufficient growing-cutoff closure.  It does NOT refute every
+-- adaptive inverse-width route: its density consequence also has J=O(1/Lambda),
+-- so the surviving clustering route becomes a constant-window compatibility
+-- problem on J*Lambda.
 ------------------------------------------------------------------------
 
 data AnalyticLeafCode : Set where
@@ -85,7 +92,7 @@ canonicalCrossBranchAnalyticFrontierReturn : CrossBranchAnalyticFrontierReturn
 canonicalCrossBranchAnalyticFrontierReturn =
   cross-branch-analytic-frontier-return
     "PR #677 agent/aristotle-experimental-proof-search"
-    "107436163baf6016f985f6b95fce82460a992cfb"
+    "10a008594ae759cb47bd96f48b88aad34bb1a8a3"
     false refl
     true refl
     false refl
@@ -131,6 +138,26 @@ clusterFreshDerivationPrunedBy8889 = PQ8889.deriveFreshClusterMarginPruned
 genericGammaSearchPrunedBy8889 :
   PQ8889.LeafRelevant PQ8889.findAnyGammaUpperBound -> ⊥
 genericGammaSearchPrunedBy8889 = PQ8889.findAnyGammaUpperBoundPruned
+
+quadraticDecayGapSplitSharpeningPrunedBy8894 :
+  Gap8894.GapSplitRelevant Gap8894.sharpenSameQuadraticDecayDonor -> ⊥
+quadraticDecayGapSplitSharpeningPrunedBy8894 =
+  Gap8894.sameQuadraticDecayDonorPruned
+
+taperRetuningGapSplitPrunedBy8894 :
+  Gap8894.GapSplitRelevant Gap8894.retuneTaperWidthOrProfile -> ⊥
+taperRetuningGapSplitPrunedBy8894 = Gap8894.taperRetuningPruned
+
+coarseCountingClusteringPrunedBy8894 :
+  Gap8894.GapSplitRelevant Gap8894.deriveClusteringFromCoarseCountingOnly -> ⊥
+coarseCountingClusteringPrunedBy8894 = Gap8894.coarseCountingClusteringPruned
+
+adaptiveInverseWidthRouteNotRefutedBy8894DensityCut :
+  Gap8894.densityCutRefutesEveryAdaptiveInverseWidthRoute
+    Gap8894.canonicalGapSplitClusteringLeanReturn8894 ≡ false
+adaptiveInverseWidthRouteNotRefutedBy8894DensityCut =
+  Gap8894.densityCutRefutesEveryAdaptiveInverseWidthRouteIsFalse
+    Gap8894.canonicalGapSplitClusteringLeanReturn8894
 
 ------------------------------------------------------------------------
 -- Parallel live work packages.
@@ -197,4 +224,4 @@ canonicalCrossBranchRegimeReconciliationBoundary =
     false refl
     false refl
     false refl
-    "The 8890 no-cancellation theorem and the PR #677 recursive analytic frontier are complementary, not sequential in every coordinate. Build canonical complex-character/modulation infrastructure and repair Gamma precision in parallel with the literal Lambda(t)/J(t) crossing audit. Do not schedule H_E as a cancellation closure on the unchanged problem until pi/2 < J*Lambda. The 8889 return already removes fresh cluster derivation and generic Gamma-bound search: what survives is same-object cluster attachment, sharp Gamma precision repair, crossed-regime signed off-ordinate evaluation, and an independent strict budget combination."
+    "The narrow-window no-cancellation theorem, the 8894 optimized gap-split shape no-go, and the PR #677 recursive analytic frontier are complementary. Build canonical character/modulation infrastructure and repair Gamma precision in parallel with the literal Lambda(t)/J(t) crossing audit. Do not schedule H_E as a cancellation closure on the unchanged problem until pi/2 < J*Lambda. The 8894 return additionally prunes sharpening the same quadratic-decay donor, taper retuning, and clustering-by-coarse-counting. Its density cut scales as J=O(1/Lambda), so it does not by itself refute our adaptive inverse-width regime; the surviving gap-split question is an explicit lower-versus-upper constant window for J*Lambda or a genuinely different signed mechanism. The 8889 return still removes fresh cluster-margin derivation and generic Gamma-bound search."
