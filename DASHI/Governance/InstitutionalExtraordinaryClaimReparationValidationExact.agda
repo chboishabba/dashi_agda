@@ -3,42 +3,213 @@ module DASHI.Governance.InstitutionalExtraordinaryClaimReparationValidationExact
 open import DASHI.Core.Prelude
 
 import DASHI.Core.DiscriminatorSynthesisExact as Discriminator
+import DASHI.Core.ActiveObligationEvidenceFibreExact as Active
+import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as ProofSearch
+import DASHI.Core.CalibratedExperimentInferenceExact as Calibrated
+import DASHI.Core.ReopenableHypothesisForestExact as Forest
+import DASHI.Core.SequentialConsumerExperimentPlannerExact as Sequential
 import DASHI.Governance.DrugGovernanceMultiAxisReparativeFibreExact as Fibre
 import DASHI.Governance.DrugGovernanceMultiAxisRepairPlannerExact as Planner
 import DASHI.Governance.MenWhoStareAtGoatsEvidenceLayerExact as Goats
 import DASHI.Governance.MenWhoStareAtGoatsReparativeAuditExact as GoatsRepair
+import DASHI.Governance.InstitutionalAnomalousAlteredStateProgramAtlasExact as Atlas
+import DASHI.Governance.AnomalousConsciousnessResearchEvidenceContinuumExact as Continuum
+import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
+import DASHI.Governance.AnomalousPhenomenonTemporalEvidenceTrajectoriesExact as Trajectory
+import DASHI.Governance.PhenomenonEvidenceLadderProjectionOverTimeExact as Ladder
+import DASHI.Governance.AnomalousResearchPriorityFromTemporalFibreExact as Priority
+import DASHI.Governance.AnomalousConsumerIndexedObligationFibreExact as Obligation
+import DASHI.Governance.AnomalousTemporalProofSearchExperimentAdmissionExact as Admission
+import DASHI.Governance.AnomalousTemporalCalibratedHypothesisForestExact as CalibratedForest
+import DASHI.Governance.AnomalousCompetingExperimentCostedSelectionExact as Competition
+import DASHI.Governance.PsilocybinOutcomeConditionedSequentialExperimentExact as PsilocybinSequential
+import DASHI.Governance.AnomalousExperimentParetoFibreExact as Pareto
+import DASHI.Governance.AnomalousExperimentalDesignFarCrossPollinationExact as Far
 
 repairBoundary : Fibre.DrugGovernanceMultiAxisReparativeBoundary
 repairBoundary = Fibre.canonicalDrugGovernanceMultiAxisReparativeBoundary
-
 plannerBoundary : Planner.MultiAxisRepairPlannerBoundary
 plannerBoundary = Planner.canonicalMultiAxisRepairPlannerBoundary
-
 goatsBoundary : Goats.MenWhoStareAtGoatsEvidenceBoundary
 goatsBoundary = Goats.canonicalMenWhoStareAtGoatsEvidenceBoundary
-
 goatsRepairBoundary : GoatsRepair.MenWhoStareAtGoatsReparativeAuditBoundary
 goatsRepairBoundary = GoatsRepair.canonicalMenWhoStareAtGoatsReparativeAuditBoundary
+atlasBoundary : Atlas.InstitutionalAnomalousAlteredStateAtlasBoundary
+atlasBoundary = Atlas.canonicalInstitutionalAnomalousAlteredStateAtlasBoundary
+continuumBoundary : Continuum.AnomalousConsciousnessResearchBoundary
+continuumBoundary = Continuum.canonicalAnomalousConsciousnessResearchBoundary
+temporalBoundary : Temporal.PhenomenonEvidenceFibreOverTimeBoundary
+temporalBoundary = Temporal.canonicalPhenomenonEvidenceFibreOverTimeBoundary
+trajectoryBoundary : Trajectory.AnomalousPhenomenonTemporalEvidenceBoundary
+trajectoryBoundary = Trajectory.canonicalAnomalousPhenomenonTemporalEvidenceBoundary
+ladderBoundary : Ladder.PhenomenonEvidenceLadderProjectionBoundary
+ladderBoundary = Ladder.canonicalPhenomenonEvidenceLadderProjectionBoundary
+priorityBoundary : Priority.AnomalousResearchPriorityTemporalBoundary
+priorityBoundary = Priority.canonicalAnomalousResearchPriorityTemporalBoundary
+obligationBoundary : Obligation.AnomalousConsumerIndexedObligationBoundary
+obligationBoundary = Obligation.canonicalAnomalousConsumerIndexedObligationBoundary
+admissionBoundary : Admission.AnomalousTemporalProofSearchAdmissionBoundary
+admissionBoundary = Admission.canonicalAnomalousTemporalProofSearchAdmissionBoundary
+calibratedForestBoundary : CalibratedForest.AnomalousTemporalCalibratedForestBoundary
+calibratedForestBoundary = CalibratedForest.canonicalAnomalousTemporalCalibratedForestBoundary
+competitionBoundary : Competition.AnomalousCompetingExperimentCostBoundary
+competitionBoundary = Competition.canonicalAnomalousCompetingExperimentCostBoundary
+psilocybinSequentialBoundary : PsilocybinSequential.PsilocybinOutcomeConditionedSequentialBoundary
+psilocybinSequentialBoundary = PsilocybinSequential.canonicalPsilocybinOutcomeConditionedSequentialBoundary
+paretoBoundary : Pareto.AnomalousExperimentParetoFibreBoundary
+paretoBoundary = Pareto.canonicalAnomalousExperimentParetoFibreBoundary
+farCrossPollinationBoundary : Far.AnomalousExperimentalDesignFarCrossPollinationBoundary
+farCrossPollinationBoundary = Far.canonicalAnomalousExperimentalDesignFarCrossPollinationBoundary
 
 materialRepairProbeReallySeparates :
-  Discriminator.BundleSeparates
-    (Planner.probeFor Planner.materialRepairConsumer)
-    Fibre.acknowledgementOnly
-    Fibre.materialBenefitOnly
+  Discriminator.BundleSeparates (Planner.probeFor Planner.materialRepairConsumer)
+    Fibre.acknowledgementOnly Fibre.materialBenefitOnly
 materialRepairProbeReallySeparates = Planner.materialProbeSeparatesAcknowledgementFromMaterialRepair
 
 sovereigntyProbeReallySeparates :
-  Discriminator.BundleSeparates
-    (Planner.probeFor Planner.sovereigntyRepairConsumer)
-    Fibre.authorityReformWithoutSovereignty
-    Fibre.fullSyntheticRepair
+  Discriminator.BundleSeparates (Planner.probeFor Planner.sovereigntyRepairConsumer)
+    Fibre.authorityReformWithoutSovereignty Fibre.fullSyntheticRepair
 sovereigntyProbeReallySeparates = Planner.sovereigntyProbeSeparatesAuthorityReformFromFullRepair
 
-goatClaimStillDemandsIndependentEvidence :
-  Goats.EvidenceDemand Goats.goatKillingByStaringClaim
+goatClaimStillDemandsIndependentEvidence : Goats.EvidenceDemand Goats.goatKillingByStaringClaim
 goatClaimStillDemandsIndependentEvidence = Goats.canonicalGoatClaimDemand
 
 programmeHistorySelectsTruthConsumer :
-  GoatsRepair.residualProbe GoatsRepair.programmeHistoryResidual
-  ≡ Planner.truthHistoryConsumer
+  GoatsRepair.residualProbe GoatsRepair.programmeHistoryResidual ≡ Planner.truthHistoryConsumer
 programmeHistorySelectsTruthConsumer = GoatsRepair.historyResidualSelectsTruthProbe
+
+stargateStillDemandsOperationalEvaluation : Atlas.AtlasDemand Atlas.operationalUtilityConsumer
+stargateStillDemandsOperationalEvaluation = Atlas.stargateUtilityDemand
+
+psychedelicTherapeuticUseStillNeedsClinicalEvidence : Atlas.AtlasDemand Atlas.therapeuticConsumer
+psychedelicTherapeuticUseStillNeedsClinicalEvidence = Atlas.psychedelicTherapeuticDemand
+
+bemHighRigourReplicationStrictlyRefinesFibre :
+  Temporal.StrictFibreRefinement
+    Trajectory.temporalSystem
+    Trajectory.bemInitial2011
+    Trajectory.transparentPsi2025
+bemHighRigourReplicationStrictlyRefinesFibre =
+  Trajectory.bemReplicationStrictlyRemovesRobustOriginalEffect
+
+presentimentUpdateNeedNotShrinkFibre :
+  Temporal.FibreUnchanged
+    Trajectory.temporalSystem
+    Trajectory.presentimentMeta2012
+    Trajectory.presentimentUpdate2018
+presentimentUpdateNeedNotShrinkFibre =
+  Trajectory.presentimentUpdateLeavesCoreInterpretationFibreOpen
+
+psilocybinMetaEvidenceStrictlyRefinesFibre :
+  Temporal.StrictFibreRefinement
+    Trajectory.temporalSystem
+    Trajectory.psilocybinEarlyModernTrials
+    Trajectory.psilocybinMeta2025_2026
+psilocybinMetaEvidenceStrictlyRefinesFibre =
+  Trajectory.psilocybinMetaEvidenceRemovesPureNoEffectInterpretation
+
+sameCoarsePsilocybinLabelHidesReplicationChange :
+  Ladder.standingAt Trajectory.psilocybinEarlyModernTrials Temporal.independentReplication
+  ≡ Ladder.standingAt Trajectory.psilocybinMeta2025_2026 Temporal.independentReplication → ⊥
+sameCoarsePsilocybinLabelHidesReplicationChange =
+  Ladder.psilocybinReplicationCoordinateChanged
+
+bemResearchQuestionChangesWithHistory :
+  Priority.bemQuestion Priority.bemEarlyResearch
+  ≡ Priority.bemQuestion Priority.bemCurrentResearch → ⊥
+bemResearchQuestionChangesWithHistory = Priority.bemQuestionChanged
+
+psilocybinCurrentPriorityTargetsControl :
+  Priority.unresolvedCoordinate Priority.psilocybinCurrentMove ≡ Temporal.controlStrength
+psilocybinCurrentPriorityTargetsControl = refl
+
+ndeCurrentPriorityTargetsMechanism :
+  Priority.unresolvedCoordinate Priority.ndeCurrentMove ≡ Temporal.mechanismDiscrimination
+ndeCurrentPriorityTargetsMechanism = refl
+
+ndePhenomenologyCanCloseWhileMechanismRemainsOpen :
+  Active.ResolvedFor
+    Obligation.obligationFamily
+    Trajectory.awareII2023
+    Obligation.phenomenologyConsumer
+ndePhenomenologyCanCloseWhileMechanismRemainsOpen = Obligation.ndePhenomenologyResolved
+
+ndeMechanismStillBlocked :
+  Active.ResolvedFor
+    Obligation.obligationFamily
+    Trajectory.awareII2023
+    Obligation.mechanismConsumer → ⊥
+ndeMechanismStillBlocked = Obligation.ndeMechanismNotResolved
+
+presentimentExperimentRouteAdmitted : ProofSearch.RouteAdmission
+presentimentExperimentRouteAdmitted = Admission.proofSearchAdmission Admission.presentimentRoute
+
+psilocybinExperimentTargetsControlAxis :
+  Admission.targetAxis Admission.psilocybinRoute ≡ Temporal.controlStrength
+psilocybinExperimentTargetsControlAxis = refl
+
+ndeMechanismExperimentTargetsMechanismAxis :
+  Admission.targetAxis Admission.ndeMechanismRoute ≡ Temporal.mechanismDiscrimination
+ndeMechanismExperimentTargetsMechanismAxis = refl
+
+bemRepeatAfterTransparentPsiIsRejected :
+  Admission.rejectedDisposition Admission.repeatBemOriginalAfterTransparentPsi
+  ≡ ProofSearch.rejected ProofSearch.consumerMismatch
+bemRepeatAfterTransparentPsiIsRejected = refl
+
+bemTemporalRefinementIsCalibratedDataRefinement :
+  Calibrated.DataRefinement CalibratedForest.experimentFamily
+bemTemporalRefinementIsCalibratedDataRefinement = CalibratedForest.bemCalibratedRefinement
+
+bemDormantBranchCanReopenWithExplicitHistoricalEvidence :
+  Forest.HypothesisTransition
+    CalibratedForest.hypothesisSemantics
+    Trajectory.robustBemPrecognition
+    (Forest.reopenable Forest.fidelityPending)
+    Forest.active
+bemDormantBranchCanReopenWithExplicitHistoricalEvidence = CalibratedForest.bemMayReopenFromDormant
+
+bemDormantBranchCannotBecomeRefutedByPruning :
+  Forest.HypothesisTransition
+    CalibratedForest.hypothesisSemantics
+    Trajectory.robustBemPrecognition
+    (Forest.reopenable Forest.fidelityPending)
+    Forest.refuted → ⊥
+bemDormantBranchCannotBecomeRefutedByPruning = CalibratedForest.bemDormancyCannotDirectlyBecomeRefutation
+
+presentimentCheapProtocolReallySeparates :
+  Discriminator.BundleSeparates
+    Competition.cheapSeparator
+    Trajectory.anticipatoryPhysiologyAnomaly
+    Trajectory.presentimentMethodArtifact
+presentimentCheapProtocolReallySeparates = Competition.cheapReallySeparates
+
+presentimentCheaperSurveyDoesNotSeparate :
+  Discriminator.BundleSeparates
+    Competition.cheapNonSeparator
+    Trajectory.anticipatoryPhysiologyAnomaly
+    Trajectory.presentimentMethodArtifact → ⊥
+presentimentCheaperSurveyDoesNotSeparate = Competition.cheapSurveyCannotSeparate
+
+psilocybinUsesOutcomeConditionedSequentialPlan :
+  Sequential.SequentialConsumerPlan
+    PsilocybinSequential.attributionConsumer
+    PsilocybinSequential.earlyLive
+psilocybinUsesOutcomeConditionedSequentialPlan = PsilocybinSequential.psilocybinSequentialPlan
+
+preregisteredPresentimentDesignIsNonDominated :
+  Pareto.NonDominated Pareto.preregisteredStudy
+preregisteredPresentimentDesignIsNonDominated = Pareto.preregisteredNonDominated
+
+adversarialPresentimentDesignIsNonDominated :
+  Pareto.NonDominated Pareto.adversarialMultiLabStudy
+adversarialPresentimentDesignIsNonDominated = Pareto.adversarialNonDominated
+
+retrospectiveSurveyCannotEnterParetoFront :
+  Pareto.NonDominated Pareto.retrospectiveSurvey → ⊥
+retrospectiveSurveyCannotEnterParetoFront = Pareto.surveyCannotEnterParetoFront
+
+paretoPreferenceCanSelectDifferentAdmittedDesigns :
+  Pareto.preferredDesign Pareto.resourceBurdenPriority
+  ≡ Pareto.preferredDesign Pareto.robustnessPriority → ⊥
+paretoPreferenceCanSelectDifferentAdmittedDesigns = Pareto.preferenceCanSelectDifferentFrontPoints
