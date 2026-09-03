@@ -12,16 +12,23 @@ import DASHI.Analysis.RiemannG2FkOrbitExplicitFormulaWeldExact as Weld
 import DASHI.Analysis.RiemannG2FkSelectedTestSameObjectBidiExact as Same
 import DASHI.Analysis.RiemannG2SelectedPoleNearSingleProducerBidiExact as Single
 import DASHI.Analysis.RiemannG2SelectedPoleNearFiniteEvaluationSameObjectExact as NearEval
+import DASHI.Analysis.RiemannG2GammaProducerSourceAcquisitionExact as GammaSource
 import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as PQ
 
 ------------------------------------------------------------------------
--- HIGHEST-ALPHA SCHEDULER AFTER 8894 + PR CROSS-POLLINATION
+-- HIGHEST-ALPHA SCHEDULER AFTER 8894 + SOURCE-EXACT GAMMA ACQUISITION
 --
--- The selected target-window representation work is one dependent producer.
--- The checked 8883 cutoff return separately owns the finite near carrier, far
--- shell, arbitrary-accuracy cutoff and literal D_off cutoff transport.  Hence
--- the live near-side analysis is now an actual phase-preserving FiniteNearProducer
--- welded to the exact finitePoleNearSigned coordinate of that selected window.
+-- Near side:
+--   selected target-window representation = one dependent producer;
+--   checked 8883 return owns finite carrier/far shell/cutoff transport;
+--   live theorem = phase-preserving finite evaluation on SAME finitePoleNearSigned;
+--   after Budget -> selected-Scalar transport, budget extraction is compiler output.
+--
+-- Gamma side:
+--   checked 8889 return owns existence of a coarse uniform bound but not the
+--   recovered producer decomposition.  Therefore the current first Gamma leaf
+--   is exact source artifact/decomposition recovery, not a guessed analytic
+--   sharpening stage.
 ------------------------------------------------------------------------
 
 data RH8894Leaf : Set where
@@ -39,6 +46,7 @@ data RH8894Leaf : Set where
   reproveArbitraryAccuracyCutoff
   recoverPhasePreservingFiniteNearProducer
   weldFiniteNearEvaluationToSelectedWindow
+  recoverNearBudgetTransportToSelectedScalar
   extractSelectedNearBudget
 
   sharpenQuadraticDecayGapSplit
@@ -47,7 +55,10 @@ data RH8894Leaf : Set where
   compareAdaptiveJLambdaConstants
 
   searchForAnyGammaBound
-  localizeGammaPrecisionLoss
+  guessGammaLossWithoutSource
+  recoverExactGammaProducerArtifact
+  recoverExactGammaProducerDecomposition
+  localizeGammaPrecisionLossOnRecoveredProducer
   repairGammaToSharpWindow
   attachOwnedClusterMargin
   combineFinalIndependentBudgets
@@ -71,6 +82,7 @@ leafState reproveFarShellDecay = pruned
 leafState reproveArbitraryAccuracyCutoff = pruned
 leafState recoverPhasePreservingFiniteNearProducer = live
 leafState weldFiniteNearEvaluationToSelectedWindow = live
+leafState recoverNearBudgetTransportToSelectedScalar = live
 leafState extractSelectedNearBudget = downstream
 
 leafState sharpenQuadraticDecayGapSplit = pruned
@@ -79,8 +91,11 @@ leafState deriveClusteringFromCoarseCounting = pruned
 leafState compareAdaptiveJLambdaConstants = live
 
 leafState searchForAnyGammaBound = pruned
-leafState localizeGammaPrecisionLoss = live
-leafState repairGammaToSharpWindow = live
+leafState guessGammaLossWithoutSource = pruned
+leafState recoverExactGammaProducerArtifact = live
+leafState recoverExactGammaProducerDecomposition = live
+leafState localizeGammaPrecisionLossOnRecoveredProducer = downstream
+leafState repairGammaToSharpWindow = downstream
 leafState attachOwnedClusterMargin = live
 leafState combineFinalIndependentBudgets = conditional
 
@@ -138,6 +153,10 @@ cutoffReproofNoLongerLive :
   NearEval.paymentStatus NearEval.reproveArbitraryAccuracyCutoff ≡ NearEval.pruned
 cutoffReproofNoLongerLive = NearEval.cutoffReproofPruned
 
+nearBudgetExtractionIsDownstream :
+  NearEval.paymentStatus NearEval.extractNearBudget ≡ NearEval.downstream
+nearBudgetExtractionIsDownstream = NearEval.nearBudgetExtractionIsCompilerOutput
+
 quadraticGapSplitSharpeningNoLongerLive :
   Gap.GapSplitRelevant Gap.sharpenSameQuadraticDecayDonor -> ⊥
 quadraticGapSplitSharpeningNoLongerLive = Gap.sameQuadraticDecayDonorPruned
@@ -153,6 +172,21 @@ coarseCountingClusteringNoLongerLive = Gap.coarseCountingClusteringPruned
 genericGammaSearchNoLongerLive :
   PQ.LeafRelevant PQ.findAnyGammaUpperBound -> ⊥
 genericGammaSearchNoLongerLive = PQ.findAnyGammaUpperBoundPruned
+
+guessGammaStirlingLossNoLongerLive :
+  GammaSource.SearchRelevant GammaSource.guessStirlingLossWithoutProducer -> ⊥
+guessGammaStirlingLossNoLongerLive =
+  GammaSource.guessStirlingLossWithoutProducerPruned
+
+guessGammaDigammaLossNoLongerLive :
+  GammaSource.SearchRelevant GammaSource.guessDigammaLossWithoutProducer -> ⊥
+guessGammaDigammaLossNoLongerLive =
+  GammaSource.guessDigammaLossWithoutProducerPruned
+
+gammaSourceRecoveryStageIsArtifactRequired :
+  GammaSource.currentGammaProducerRecoveryStage
+  ≡ GammaSource.producerArtifactRequired
+gammaSourceRecoveryStageIsArtifactRequired = refl
 
 adaptiveInverseWidthStillLogicallyOpen :
   Gap.densityCutRefutesEveryAdaptiveInverseWidthRoute
@@ -188,6 +222,10 @@ record HighestAlphaAfter8894Boundary : Set where
     evaluatorMustBeWeldedToSelectedWindowFiniteNearIsTrue :
       evaluatorMustBeWeldedToSelectedWindowFiniteNear ≡ true
 
+    nearBudgetNeedsOnlyConsumerTransportAfterEvaluation : Bool
+    nearBudgetNeedsOnlyConsumerTransportAfterEvaluationIsTrue :
+      nearBudgetNeedsOnlyConsumerTransportAfterEvaluation ≡ true
+
     sameQuadraticGapSplitRouteStillWorthSharpening : Bool
     sameQuadraticGapSplitRouteStillWorthSharpeningIsFalse :
       sameQuadraticGapSplitRouteStillWorthSharpening ≡ false
@@ -196,12 +234,13 @@ record HighestAlphaAfter8894Boundary : Set where
     adaptiveConstantWindowComparisonLiveIsTrue :
       adaptiveConstantWindowComparisonLive ≡ true
 
-    gammaPrecisionLossLocalizationLive : Bool
-    gammaPrecisionLossLocalizationLiveIsTrue :
-      gammaPrecisionLossLocalizationLive ≡ true
+    exactGammaProducerArtifactRecoveryLive : Bool
+    exactGammaProducerArtifactRecoveryLiveIsTrue :
+      exactGammaProducerArtifactRecoveryLive ≡ true
 
-    gammaPrecisionRepairLive : Bool
-    gammaPrecisionRepairLiveIsTrue : gammaPrecisionRepairLive ≡ true
+    sourceFreeGammaLossGuessAdmissible : Bool
+    sourceFreeGammaLossGuessAdmissibleIsFalse :
+      sourceFreeGammaLossGuessAdmissible ≡ false
 
     finalBudgetCombinationAlreadyUnconditional : Bool
     finalBudgetCombinationAlreadyUnconditionalIsFalse :
@@ -220,10 +259,11 @@ canonicalHighestAlphaAfter8894Boundary =
     false refl
     true refl
     true refl
+    true refl
     false refl
     true refl
     true refl
-    true refl
     false refl
     false refl
-    "PR cross-pollination compresses the zero-side lane to one dependent selected target-window producer followed by one phase-preserving finite-near evaluator on that SAME finite-near scalar. The checked 8883 return already owns the finite near carrier, far-shell modulus/decay, arbitrary-accuracy cutoff and D_off cutoff transport, so rebuilding those is pruned. The live near analysis is to recover an admitted FiniteNearProducer and prove its signedNearValue, after exact scalar-carrier transport, is the finitePoleNearSigned coordinate of the selected PoleNearTargetWindow; its budget extraction is then downstream. The 8894 quadratic gap-split sharpening remains pruned, the adaptive J*Lambda compatibility question remains live, and H_Gamma still requires source-exact precision-loss localization plus repair to the sharp cluster window. RH remains open."
+    false refl
+    "The zero-side lane is now one dependent selected target-window producer plus one phase-preserving finite-near evaluator on the SAME finitePoleNearSigned scalar. Checked 8883 owns finite carrier/far shell/cutoff transport. After the evaluator is welded to the selected finite-near value, only a consumer-relative transport from its abstract Budget to the selected Weil scalar is needed; selected near-budget extraction is compiler output. For Gamma, the stronger existing source-acquisition owner supersedes a free-floating candidate-stage search: currentGammaProducerRecoveryStage is producerArtifactRequired. Recover the exact checked uniform-bound artifact and decomposition first, then localize the first source-verified precision loss and repair that step. Source-free Stirling/digamma guesses are pruned. The adaptive J*Lambda constant-window comparison and final same-scalar/same-taper strict budget assembly remain live. RH remains open."
