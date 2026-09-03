@@ -6,9 +6,11 @@ open import Agda.Builtin.String using (String)
 import DASHI.Analysis.PoissonSummationKernelBidiExact as PS
 import DASHI.Analysis.RenormalisedDifferenceLimitExact as RDL
 import DASHI.Analysis.SumIntegralDefectExact as SID
+import DASHI.Analysis.MeasureIntegralLimitKernelBidiExact as MIL
 import DASHI.Physics.QuantumVacuum.CasimirParallelPlateKernel as Casimir
 import DASHI.Physics.QuantumVacuum.PerfectConductorMaxwellSpectrumBidiExact as MaxwellSpectrum
 import DASHI.Physics.QuantumVacuum.ParallelPlateRegulatedDifferenceBidiExact as Difference
+import DASHI.Physics.QuantumVacuum.ParallelPlateTransverseMeasureLimitBidiExact as Transverse
 
 ------------------------------------------------------------------------
 -- HIGHEST-ALPHA CASIMIR RENORMALISED-DIFFERENCE CUTSET
@@ -19,8 +21,8 @@ import DASHI.Physics.QuantumVacuum.ParallelPlateRegulatedDifferenceBidiExact as 
 --   B. analytic measure/convergence and regulator-removal control;
 --   C. exact evaluation of the surviving finite part to the 720 coefficient.
 --
--- A Poisson receipt can help with A only when welded to the literal Casimir
--- defect.  It does not manufacture B or C.
+-- B is no longer an opaque Set-valued socket: it is routed through the generic
+-- MeasureIntegralLimit BIDI kernel, with a Casimir-native transverse instance.
 ------------------------------------------------------------------------
 
 record CasimirSpectralInput
@@ -59,15 +61,20 @@ record TransverseContinuumAndLimitReceipt
     (kernel : Casimir.CasimirScalarModel)
     (input : CasimirSpectralInput kernel) : Set₁ where
   field
-    MeasureCarrier : Set
-    TransverseDomain : Set
+    measureFamily : Transverse.CasimirTransverseMeasureFamily kernel
 
-    transverseMeasure : MeasureCarrier
-    transverseDomain : TransverseDomain
+    measureFamilyUsesInputDifference :
+      Transverse.casimirDifference measureFamily ≡ regulatedDifference input
+
+    analyticCompletion :
+      Transverse.CasimirTransverseAnalyticCompletion kernel measureFamily
+
+    genericMeasureProblem : MIL.MeasureIntegralProblem
+    genericMeasureProblemIsCasimirInstance :
+      genericMeasureProblem ≡
+      Transverse.asGenericMeasureIntegralProblem kernel measureFamily
 
     subtractionBeforeLimit : Set
-    integrableRegulatedDifference : Set
-    exchangeSumIntegralJustified : Set
     regulatorRemovalConverges : Set
     presentationIndependentLimit : Set
 
@@ -109,10 +116,12 @@ record RenormalisedDifferenceCompletion
 open RenormalisedDifferenceCompletion public
 
 ------------------------------------------------------------------------
--- No-promotion boundaries between the three theorem classes.
+-- No-promotion boundaries between the theorem classes.
 ------------------------------------------------------------------------
 
 data DefectTransformationImpliesConvergencePermission : Set where
+
+data MeasureInterfaceImpliesAnalyticCompletionPermission : Set where
 
 data ConvergenceImpliesCoefficient720Permission : Set where
 
@@ -121,6 +130,10 @@ data Coefficient720ImpliesMaxwellSpectrumPermission : Set where
 transformationCannotAutoSupplyConvergence :
   DefectTransformationImpliesConvergencePermission → ⊥
 transformationCannotAutoSupplyConvergence ()
+
+measureInterfaceCannotAutoSupplyAnalyticCompletion :
+  MeasureInterfaceImpliesAnalyticCompletionPermission → ⊥
+measureInterfaceCannotAutoSupplyAnalyticCompletion ()
 
 convergenceCannotAutoSupply720 :
   ConvergenceImpliesCoefficient720Permission → ⊥
@@ -139,24 +152,38 @@ record HighestAlphaStatus : Set where
     genericPoissonShapeOwned : Bool
     genericDifferenceShapeOwned : Bool
     genericDefectShapeOwned : Bool
+    genericMeasureIntegralLimitShapeOwned : Bool
     casimirDifferenceInstanceOwned : Bool
+    casimirTransverseMeasureInstanceOwned : Bool
     perfectConductorSpectrumProducerInterfaceOwned : Bool
 
     literalMaxwellBoundaryPDEClosed : Bool
-    transverseMeasureAndConvergenceClosed : Bool
+    concreteTransverseMeasureClosed : Bool
+    transverseIntegrabilityClosed : Bool
+    dominationAndLimitExchangeClosed : Bool
+    regulatorRemovalClosed : Bool
     finitePart720Closed : Bool
 
     genericPoissonShapeOwnedIsTrue : genericPoissonShapeOwned ≡ true
     genericDifferenceShapeOwnedIsTrue : genericDifferenceShapeOwned ≡ true
     genericDefectShapeOwnedIsTrue : genericDefectShapeOwned ≡ true
+    genericMeasureIntegralLimitShapeOwnedIsTrue :
+      genericMeasureIntegralLimitShapeOwned ≡ true
     casimirDifferenceInstanceOwnedIsTrue : casimirDifferenceInstanceOwned ≡ true
+    casimirTransverseMeasureInstanceOwnedIsTrue :
+      casimirTransverseMeasureInstanceOwned ≡ true
     perfectConductorSpectrumProducerInterfaceOwnedIsTrue :
       perfectConductorSpectrumProducerInterfaceOwned ≡ true
 
     literalMaxwellBoundaryPDEClosedIsFalse :
       literalMaxwellBoundaryPDEClosed ≡ false
-    transverseMeasureAndConvergenceClosedIsFalse :
-      transverseMeasureAndConvergenceClosed ≡ false
+    concreteTransverseMeasureClosedIsFalse :
+      concreteTransverseMeasureClosed ≡ false
+    transverseIntegrabilityClosedIsFalse :
+      transverseIntegrabilityClosed ≡ false
+    dominationAndLimitExchangeClosedIsFalse :
+      dominationAndLimitExchangeClosed ≡ false
+    regulatorRemovalClosedIsFalse : regulatorRemovalClosed ≡ false
     finitePart720ClosedIsFalse : finitePart720Closed ≡ false
 
 open HighestAlphaStatus public
@@ -166,17 +193,27 @@ canonicalHighestAlphaStatus = record
   { genericPoissonShapeOwned = true
   ; genericDifferenceShapeOwned = true
   ; genericDefectShapeOwned = true
+  ; genericMeasureIntegralLimitShapeOwned = true
   ; casimirDifferenceInstanceOwned = true
+  ; casimirTransverseMeasureInstanceOwned = true
   ; perfectConductorSpectrumProducerInterfaceOwned = true
   ; literalMaxwellBoundaryPDEClosed = false
-  ; transverseMeasureAndConvergenceClosed = false
+  ; concreteTransverseMeasureClosed = false
+  ; transverseIntegrabilityClosed = false
+  ; dominationAndLimitExchangeClosed = false
+  ; regulatorRemovalClosed = false
   ; finitePart720Closed = false
   ; genericPoissonShapeOwnedIsTrue = refl
   ; genericDifferenceShapeOwnedIsTrue = refl
   ; genericDefectShapeOwnedIsTrue = refl
+  ; genericMeasureIntegralLimitShapeOwnedIsTrue = refl
   ; casimirDifferenceInstanceOwnedIsTrue = refl
+  ; casimirTransverseMeasureInstanceOwnedIsTrue = refl
   ; perfectConductorSpectrumProducerInterfaceOwnedIsTrue = refl
   ; literalMaxwellBoundaryPDEClosedIsFalse = refl
-  ; transverseMeasureAndConvergenceClosedIsFalse = refl
+  ; concreteTransverseMeasureClosedIsFalse = refl
+  ; transverseIntegrabilityClosedIsFalse = refl
+  ; dominationAndLimitExchangeClosedIsFalse = refl
+  ; regulatorRemovalClosedIsFalse = refl
   ; finitePart720ClosedIsFalse = refl
   }
