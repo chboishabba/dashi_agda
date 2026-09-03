@@ -20,3 +20,7 @@ import DASHI.Physics.Plasma.MHDHelicalElsasserInteractionAdmissibilityExact
 import DASHI.Physics.Plasma.MHDMomentumCommutatorAfterElsasserBidiExact
 import DASHI.Physics.Plasma.MHDInductionResidualConsumerBidiExact
 import DASHI.Physics.Plasma.MHDHelicalElsasserTriadFrontierExact
+import DASHI.Physics.Plasma.ElsasserAmplitudeRechartAlgebraExact
+import DASHI.Physics.Plasma.ElsasserSectorSelectionBidiExact
+import DASHI.Physics.Plasma.MHDMomentumInductionElsasserAmplitudeWeldBidiExact
+import DASHI.Physics.Plasma.MHDElsasserAmplitudeFrontierExact
