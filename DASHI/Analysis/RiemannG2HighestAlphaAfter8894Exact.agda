@@ -10,18 +10,18 @@ import DASHI.Analysis.RiemannG2Zeta23FkCheckedSourceReturnExact as FkChecked
 import DASHI.Analysis.RiemannG2FkOrbitConsumerAttachmentExact as Orbit
 import DASHI.Analysis.RiemannG2FkOrbitExplicitFormulaWeldExact as Weld
 import DASHI.Analysis.RiemannG2FkSelectedTestSameObjectBidiExact as Same
+import DASHI.Analysis.RiemannG2SelectedPoleNearSingleProducerBidiExact as Single
 import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as PQ
 
 ------------------------------------------------------------------------
 -- HIGHEST-ALPHA SCHEDULER AFTER 8894 + CHECKED f_k SOURCE RECOVERY
 --
--- Source-side H_A mathematics is paid on the literal f_k family.  The target
--- consumer only needs the selected source orbit embedded into one Weil Test.
--- Cross-pollination from the Moonshine same-element weld then removes another
--- duplicate payment: once FkOrbitConsumerAttachment exists, the literal selected
--- Test, its admissibility, and the fact that the near/far weld uses that same
--- Test are compiler output.  The substantive remaining zero-side theorem is the
--- same-formula spectral near/far equality on that literal selected Test.
+-- Cross-PR BIDI compression now removes a further false decomposition.  PR #691
+-- showed that theorem consequences indexed by one literal source producer should
+-- not be searched independently.  PR #684 showed that same-object premises can
+-- make an apparent physical leaf compiler output.  Applied here, the selected
+-- orbit attachment, target-window decomposition, selected same-object weld and
+-- selected near/far weld are projections of one dependent target-window producer.
 ------------------------------------------------------------------------
 
 data RH8894Leaf : Set where
@@ -29,9 +29,10 @@ data RH8894Leaf : Set where
   rebuildCharacterMultiplication
   identifyWholeSourceFunctionSpaceWithWeilTest
   identifyWholeSourceFunctionSpaceWithMellinTest
-  recoverSelectedFkOrbitAttachment
-  compileSelectedFkSameObjectWeld
-  recoverSelectedSameFormulaNearFarSpectralEquality
+  separatelyRecoverSelectedFkOrbitAttachment
+  separatelyRecoverSelectedNearFarWeld
+  separatelyRecoverSelectedSameTestWeld
+  recoverActualSelectedPoleNearProducer
 
   sharpenQuadraticDecayGapSplit
   retuneTaperForGapSplit
@@ -46,16 +47,17 @@ data RH8894Leaf : Set where
   : RH8894Leaf
 
 data LeafState : Set where
-  pruned owned live conditional : LeafState
+  pruned owned live conditional downstream : LeafState
 
 leafState : RH8894Leaf -> LeafState
 leafState searchForModulationOperation = owned
 leafState rebuildCharacterMultiplication = pruned
 leafState identifyWholeSourceFunctionSpaceWithWeilTest = pruned
 leafState identifyWholeSourceFunctionSpaceWithMellinTest = pruned
-leafState recoverSelectedFkOrbitAttachment = live
-leafState compileSelectedFkSameObjectWeld = owned
-leafState recoverSelectedSameFormulaNearFarSpectralEquality = live
+leafState separatelyRecoverSelectedFkOrbitAttachment = pruned
+leafState separatelyRecoverSelectedNearFarWeld = pruned
+leafState separatelyRecoverSelectedSameTestWeld = pruned
+leafState recoverActualSelectedPoleNearProducer = live
 
 leafState sharpenQuadraticDecayGapSplit = pruned
 leafState retuneTaperForGapSplit = pruned
@@ -110,6 +112,14 @@ sameObjectNearFarAttachmentIsCompilerOutput :
 sameObjectNearFarAttachmentIsCompilerOutput =
   Same.nearFarSameObjectAttachmentAlreadyCompiled
 
+separateSelectedNearFarSearchNoLongerLive :
+  Single.searchStatus Single.separatelyRecoverNearFarWeld ≡ Single.pruned
+separateSelectedNearFarSearchNoLongerLive = Single.separateNearFarSearchPruned
+
+separateSelectedSameTestSearchNoLongerLive :
+  Single.searchStatus Single.separatelyRecoverSameTestWeld ≡ Single.pruned
+separateSelectedSameTestSearchNoLongerLive = Single.separateSameTestSearchPruned
+
 quadraticGapSplitSharpeningNoLongerLive :
   Gap.GapSplitRelevant Gap.sharpenSameQuadraticDecayDonor -> ⊥
 quadraticGapSplitSharpeningNoLongerLive = Gap.sameQuadraticDecayDonorPruned
@@ -148,17 +158,13 @@ record HighestAlphaAfter8894Boundary : Set where
     wholeSourceFunctionSpaceEqualityRequiredIsFalse :
       wholeSourceFunctionSpaceEqualityRequired ≡ false
 
-    selectedFkOrbitAttachmentStillRequired : Bool
-    selectedFkOrbitAttachmentStillRequiredIsTrue :
-      selectedFkOrbitAttachmentStillRequired ≡ true
+    selectedOrbitWindowAndSameObjectAreIndependentLeaves : Bool
+    selectedOrbitWindowAndSameObjectAreIndependentLeavesIsFalse :
+      selectedOrbitWindowAndSameObjectAreIndependentLeaves ≡ false
 
-    sameObjectWeldIsSeparatePayment : Bool
-    sameObjectWeldIsSeparatePaymentIsFalse :
-      sameObjectWeldIsSeparatePayment ≡ false
-
-    sameAgdaExplicitFormulaNearFarEqualityStillRequired : Bool
-    sameAgdaExplicitFormulaNearFarEqualityStillRequiredIsTrue :
-      sameAgdaExplicitFormulaNearFarEqualityStillRequired ≡ true
+    actualSelectedPoleNearProducerStillRequired : Bool
+    actualSelectedPoleNearProducerStillRequiredIsTrue :
+      actualSelectedPoleNearProducerStillRequired ≡ true
 
     sameQuadraticGapSplitRouteStillWorthSharpening : Bool
     sameQuadraticGapSplitRouteStillWorthSharpeningIsFalse :
@@ -185,7 +191,6 @@ canonicalHighestAlphaAfter8894Boundary =
   highest-alpha-after-8894-boundary
     true refl
     false refl
-    true refl
     false refl
     true refl
     false refl
@@ -193,4 +198,4 @@ canonicalHighestAlphaAfter8894Boundary =
     true refl
     false refl
     false refl
-    "Cross-pollinating the Moonshine same-element rule tightens the RH selected-test lane. The checked source already owns fk character multiplication, paperFT shift and analytic prerequisites. Whole source-carrier equality is unnecessary. Recover one consumer-relative FkOrbitConsumerAttachment from the checked source into the chosen Agda Weil Test. From that attachment, the literal selected Test, its admissibility, the arithmetic/spectral paired observation, and same-test near/far attachment are compiler output. Do not schedule them as independent leaves. The substantive zero-side theorem is now the same-RiemannExplicitFormula equality spectralZeroForm(selectedPoleTest) = same-ordinate cluster + finite signed near response + the same far remainder. In parallel compare the adaptive J*Lambda constant window or find a different signed mechanism, repair Gamma precision, attach the owned cluster margin, then pay the final independent budget inequality. RH remains open."
+    "Recent PR inspiration compresses the selected zero-side lane again. Do not separately recover a source-orbit attachment, a selected same-test weld and a selected near/far weld. Recover one ActualSelectedPoleNearProducer indexed by the same Weil space/formula/orbit: it contains the chosen source attachment, one theorem-bearing PoleNearTargetWindow, equality of their selected Test and the preservation receipts. Existing compilers then generate the literal selected-test weld, same-formula cluster/finite-near/far weld and same-object near/far attachment. In parallel compare the adaptive J*Lambda window or find a different signed mechanism, repair Gamma precision, attach the owned cluster margin and pay the final independent budget inequality. RH remains open."
