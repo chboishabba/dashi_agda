@@ -47,6 +47,7 @@ open import DASHI.Analysis.RiemannG2Zeta23FkCheckedSourceReturnExact
 open import DASHI.Analysis.RiemannG2FkOrbitConsumerAttachmentExact
 open import DASHI.Analysis.RiemannG2FkOrbitExplicitFormulaWeldExact
 open import DASHI.Analysis.RiemannG2FkSelectedTestSameObjectBidiExact
+open import DASHI.Analysis.RiemannG2SelectedPoleNearSingleProducerBidiExact
 open import DASHI.Analysis.RiemannG2HighestAlphaAfter8894Exact
 open import DASHI.Mathematics.NumberTheory.PrimeGap2026ClaimAuditExact
 open import DASHI.Mathematics.NumberTheory.PrimeGap2026SourceAcquisitionExact
