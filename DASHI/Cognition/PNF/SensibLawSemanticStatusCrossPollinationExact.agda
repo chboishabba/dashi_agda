@@ -16,13 +16,15 @@ import DASHI.Cognition.PNF.ContextualFractranDirectDeltaAdapterExact as Contextu
 data ProducerClass : Set where
   parserShapeProducer structuralCompositionProducer bindingAccessibilityProducer
   attributionProducer evidenceProducer temporalProducer documentContextProducer
-  legalTypedMeetProducer governedAdmissionProducer : ProducerClass
+  legalSourceAuthorityProducer legalTypedMeetProducer governedAdmissionProducer
+  : ProducerClass
 
 data StatusAxis : Set where
   participantRoleAxis referentKindAxis identityAxis antecedentAxis occurrenceAxis
   propositionAxis attributionAxis evidenceAxis modalityAxis temporalAxis conditionAxis
-  documentContextAxis jurisdictionAxis authorityAxis applicabilityAxis violationAxis
-  liabilityAxis burdenAxis judicialDiscourseAxis normativeRelationAxis : StatusAxis
+  documentContextAxis jurisdictionAxis semanticAdmissionAuthorityAxis
+  legalSourceAuthorityAxis applicabilityAxis violationAxis liabilityAxis burdenAxis
+  judicialDiscourseAxis normativeRelationAxis : StatusAxis
 
 record AxisPopulationReceipt : Set where
   constructor axisPopulationReceipt
@@ -54,10 +56,12 @@ temporalCandidateRequiresAnchor : AxisPopulationReceipt
 temporalCandidateRequiresAnchor = axisPopulationReceipt temporalProducer temporalAxis true true true true "temporal qualification/anchor composition"
 documentContextCandidateRequiresStructure : AxisPopulationReceipt
 documentContextCandidateRequiresStructure = axisPopulationReceipt documentContextProducer documentContextAxis true true true true "typed document/region/case context composition"
+legalSourceAuthorityRequiresSystemAndValidity : AxisPopulationReceipt
+legalSourceAuthorityRequiresSystemAndValidity = axisPopulationReceipt legalSourceAuthorityProducer legalSourceAuthorityAxis true true true true "SensibLawOntologyTopology LegalSource + source system + validity interval; legal authority not inferred from semantic admission"
 legalApplicabilityCandidateRequiresTypedMeet : AxisPopulationReceipt
 legalApplicabilityCandidateRequiresTypedMeet = axisPopulationReceipt legalTypedMeetProducer applicabilityAxis true true true true "legal typed meet across structural/jurisdiction/time/actor/conduct/object/circumstance/exception/burden"
 admissionClosureReceipt : AxisPopulationReceipt
-admissionClosureReceipt = axisPopulationReceipt governedAdmissionProducer authorityAxis false true true false "SensibLawLegalSemanticAdmissionFrontierExact"
+admissionClosureReceipt = axisPopulationReceipt governedAdmissionProducer semanticAdmissionAuthorityAxis false true true false "SensibLawLegalSemanticAdmissionFrontierExact semantic resolution/admission authority only"
 
 ruleBankModalEdgeDoesNotCreateTheorem : RuleBank.modalAuxiliaryCreatesModalTheorem RuleBank.canonicalExecutableSemanticRuleBoundary ≡ false
 ruleBankModalEdgeDoesNotCreateTheorem = refl
