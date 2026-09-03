@@ -5,6 +5,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.QuantumVacuum.ZeroPointModeHyperfabricExact as ZPE
 import DASHI.Physics.QuantumVacuum.CasimirParallelPlateKernel as Casimir
+import DASHI.Physics.QuantumVacuum.PhysicalQuantities as Q
 import DASHI.Physics.QuantumVacuum.ExtractionPhysicsSurface as Surface
 
 ------------------------------------------------------------------------
@@ -101,8 +102,8 @@ record CasimirModeHyperfabricWeld
     retopology : BoundaryRetopologyReceipt free cavity
     difference : VacuumDifferenceObservable free cavity
 
-    separation : Casimir.Q.Length
-    plateArea : Casimir.Q.Area
+    separation : Q.Length
+    plateArea : Q.Area
     kernel : Casimir.CasimirScalarModel
 
     SameObservable : Set
