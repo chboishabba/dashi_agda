@@ -7,6 +7,7 @@ module DASHI.Physics.Everything where
 import DASHI.Physics.Laws.Everything
 import DASHI.Physics.Units.Everything
 import DASHI.Physics.Electromagnetism.Everything
+import DASHI.Physics.Plasma.Everything
 import DASHI.Physics.DarkSector.Everything
 import DASHI.Physics.Unification.Everything
 import DASHI.Physics.Foundations.Everything
