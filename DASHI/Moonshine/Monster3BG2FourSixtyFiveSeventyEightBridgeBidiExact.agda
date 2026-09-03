@@ -2,48 +2,18 @@ module DASHI.Moonshine.Monster3BG2FourSixtyFiveSeventyEightBridgeBidiExact where
 
 ------------------------------------------------------------------------
 -- G2(4) BRIDGE TARGET FOR THE SUZ 143 AND WILSON 78
---
--- Published/source-backed data now gives three distinct structures:
---
---   (1) Suz has a faithful irreducible character of degree 143.
---   (2) G2(4) is a maximal subgroup of Suz and has ordinary irreducibles of
---       degrees 65 and 78.
---   (3) Wilson's Monster 3B restriction contains a degree-78 multiplicity
---       constituent paired with degree 12 inside the nontrivial central phase.
---
--- The highest-priority branching test is therefore
---
---     143 |_ G2(4) ?= 65 + 78.
---
--- Even if that equality is certified by CTblLib, it does NOT by itself prove
--- that the G2(4)-degree-78 constituent is the same representation object as
--- Wilson's degree-78 multiplicity constituent.  The latter lives in the
--- central-extension/inertia tower of the 3B normalizer.  A second same-object
--- / cover-character weld is required.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_)
-
-------------------------------------------------------------------------
--- 1. Arithmetic shadows.
-------------------------------------------------------------------------
+open import Data.Sum.Base using (_⊎_)
 
 sixtyFivePlusSeventyEight : 65 + 78 ≡ 143
 sixtyFivePlusSeventyEight = refl
 
 twelvePlusSeventyEight : 12 + 78 ≡ 90
 twelvePlusSeventyEight = refl
-
-------------------------------------------------------------------------
--- 2. Exact ordinary branching receipt.
---
--- This record is deliberately agnostic about concrete character-table APIs.
--- The executable producer `scripts/suz_143_subgroup_restriction_probe.g`
--- supplies the actual CTblLib test.  Once generated data is imported, this
--- record can be inhabited by the certified G2(4) restriction.
-------------------------------------------------------------------------
 
 record Suz143ToG2FourBranching : Set₁ where
   field
@@ -64,14 +34,6 @@ record Suz143ToG2FourBranching : Set₁ where
     seventyEightDimensionIs78 : seventyEightDimension ≡ 78
 
 open Suz143ToG2FourBranching public
-
-------------------------------------------------------------------------
--- 3. Same-78 weld target.
---
--- Degree equality is insufficient.  A valid promotion identifies the
--- G2(4)-78 carrier with the ACTUAL Wilson multiplicity-78 carrier and proves
--- that both carry the same selected subgroup action after restriction.
-------------------------------------------------------------------------
 
 record WilsonSeventyEightG2FourSameObject
     (branch : Suz143ToG2FourBranching) : Set₁ where
@@ -97,10 +59,6 @@ record WilsonSeventyEightG2FourSameObject
       ≡ wilsonSeventyEightAct actor (toWilson78 state)
 
 open WilsonSeventyEightG2FourSameObject public
-
-------------------------------------------------------------------------
--- 4. Boundary / epistemic status.
-------------------------------------------------------------------------
 
 record G2FourBridgeBoundary : Set where
   constructor g2FourBridgeBoundary
@@ -136,7 +94,6 @@ canonicalG2FourBridgeBoundary =
 --                  |
 --             12 + 78 = 90
 --
--- This would connect the fixed central-trivial side and the nontrivial-phase
--- multiplicity side through G2(4), without reviving the forbidden Suz-stable
--- 143 = 90 + 53 split.
+-- Matching degree does not identify the two 78s.  The second promotion needs
+-- an actual shared subgroup/cover action and an intertwiner.
 ------------------------------------------------------------------------
