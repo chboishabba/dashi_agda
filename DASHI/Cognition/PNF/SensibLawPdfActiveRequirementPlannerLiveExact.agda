@@ -34,48 +34,30 @@ contextualProposition : Status.PropositionStatusProduct
 contextualProposition = Document.ContextualPropositionRefinement.refined PdfDocument.contextualRefinement
 contextualLegalStatus : Status.LegalStatusProduct
 contextualLegalStatus = Document.ContextualLegalDiscourseProjection.legalStatus PdfDocument.legalDiscourseProjection
-
 pdfPlannerState : Status.SemanticCommitmentState
 pdfPlannerState = Status.semanticCommitmentState pdfConstitutionFibre [] (Reporting.sourceEventStatus ∷ []) (Reporting.sourceProposition ∷ contextualProposition ∷ []) (contextualLegalStatus ∷ []) true false
 
-attributionActive : Demand.ActiveRequirement
 attributionActive = Demand.activeRequirement Consumer.generalSemanticConsumer Demand.whoSaidWhatQuery Demand.attributionCoordinate Demand.whoNeedsAttribution "PDF general who-said-what attribution"
-propositionActive : Demand.ActiveRequirement
 propositionActive = Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.propositionStatusCoordinate Demand.legalApplicabilityNeedsProposition "PDF applicability needs proposition status"
-occurrenceActive : Demand.ActiveRequirement
 occurrenceActive = Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.occurrenceCoordinate Demand.legalApplicabilityNeedsOccurrence "PDF applicability needs occurrence status"
-documentContextActive : Demand.ActiveRequirement
 documentContextActive = Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.documentContextCoordinate Demand.legalApplicabilityNeedsContext "PDF applicability needs document/case context"
-legalSourceAuthorityActive : Demand.ActiveRequirement
 legalSourceAuthorityActive = Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.legalSourceAuthorityCoordinate Demand.legalApplicabilityNeedsLegalSourceAuthority "PDF applicability still requires legal-source authority"
-resolvedScopeActive : Demand.ActiveRequirement
 resolvedScopeActive = Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.resolvedScopeCoordinate Demand.legalApplicabilityNeedsResolvedScope "PDF applicability still requires resolved same-object scope"
+resolvedJurisdictionActive = Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.resolvedLegalJurisdictionCoordinate Demand.legalApplicabilityNeedsResolvedJurisdiction "PDF applicability still requires resolved legal jurisdiction"
 
-ownedProposition : Bridge.PropositionReceiptInState pdfPlannerState
 ownedProposition = Bridge.propositionReceiptInState Reporting.propositionReceipt Bridge.here "PDF PropositionResolutionReceipt is the first proposition in planner state"
-ownedOccurrence : Bridge.OccurrenceReceiptInState pdfPlannerState
 ownedOccurrence = Bridge.occurrenceReceiptInState Reporting.occurrenceReceipt Bridge.here "PDF OccurrenceResolutionReceipt is the first event in planner state"
-ownedAttribution : Bridge.AttributionReceiptInState pdfPlannerState
 ownedAttribution = Bridge.attributionReceiptInState Reporting.propositionReceipt Bridge.here Bridge.propositionSourceResolved "PDF source proposition carries resolved proposition-source attribution"
-ownedDocumentContext : Bridge.DocumentContextReceiptInState pdfPlannerState
 ownedDocumentContext = Bridge.documentContextReceiptInState PdfDocument.applicantSubmissionFrame contextualProposition (Bridge.there Bridge.here) "PDF applicant-submission frame refines the second proposition in planner state"
 
-attributionEvidence : Planner.CoordinateEvidenceReceipt pdfPlannerState attributionActive
 attributionEvidence = Bridge.attributionReceiptPaysActiveCoordinate refl ownedAttribution
-propositionEvidence : Planner.CoordinateEvidenceReceipt pdfPlannerState propositionActive
 propositionEvidence = Bridge.propositionReceiptPaysActiveCoordinate refl ownedProposition
-occurrenceEvidence : Planner.CoordinateEvidenceReceipt pdfPlannerState occurrenceActive
 occurrenceEvidence = Bridge.occurrenceReceiptPaysActiveCoordinate refl ownedOccurrence
-documentContextEvidence : Planner.CoordinateEvidenceReceipt pdfPlannerState documentContextActive
 documentContextEvidence = Bridge.documentContextReceiptPaysActiveCoordinate refl ownedDocumentContext
 
-attributionPlan : Planner.RequirementPlan pdfPlannerState attributionActive
 attributionPlan = Planner.planRequirement attributionEvidence "reuse live PDF attribution"
-propositionPlan : Planner.RequirementPlan pdfPlannerState propositionActive
 propositionPlan = Planner.planRequirement propositionEvidence "reuse live PDF proposition status"
-occurrencePlan : Planner.RequirementPlan pdfPlannerState occurrenceActive
 occurrencePlan = Planner.planRequirement occurrenceEvidence "reuse live PDF occurrence status"
-documentContextPlan : Planner.RequirementPlan pdfPlannerState documentContextActive
 documentContextPlan = Planner.planRequirement documentContextEvidence "reuse live PDF document context"
 
 attributionReusesExisting : Planner.action attributionPlan ≡ Planner.reuseExisting
@@ -87,63 +69,58 @@ occurrenceReusesExisting = refl
 documentContextReusesExisting : Planner.action documentContextPlan ≡ Planner.reuseExisting
 documentContextReusesExisting = refl
 
-attributionWork : Routing.RoutedWork attributionPlan
 attributionWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "attribution receipt already live"
-propositionWork : Routing.RoutedWork propositionPlan
 propositionWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "proposition receipt already live"
-occurrenceWork : Routing.RoutedWork occurrencePlan
 occurrenceWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "occurrence receipt already live"
-documentContextWork : Routing.RoutedWork documentContextPlan
 documentContextWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "document context receipt already live"
 
-legalSourceAuthorityUnassessed : Planner.CoordinateEvidenceReceipt pdfPlannerState legalSourceAuthorityActive
 legalSourceAuthorityUnassessed = Planner.coordinateEvidenceReceipt Planner.currentUnassessed [] "no legal-source authority search/verification receipt has yet been run for this PDF requirement" true refl true refl
-legalSourceAuthorityPlan : Planner.RequirementPlan pdfPlannerState legalSourceAuthorityActive
 legalSourceAuthorityPlan = Planner.planRequirement legalSourceAuthorityUnassessed "inspect legal-source authority before any missing classification"
 legalSourceAuthorityNeedsInspection : Planner.action legalSourceAuthorityPlan ≡ Planner.inspectForEvidence
 legalSourceAuthorityNeedsInspection = refl
-legalSourceAuthorityWork : Routing.RoutedWork legalSourceAuthorityPlan
 legalSourceAuthorityWork = Routing.routedWork Routing.producerInvocationRequired refl (Routing.invokeProducer Routing.legalSourceAuthorityRoute) "inspect LegalSource/system/validity authority evidence"
 
-resolvedScopeUnassessed : Planner.CoordinateEvidenceReceipt pdfPlannerState resolvedScopeActive
 resolvedScopeUnassessed = Planner.coordinateEvidenceReceipt Planner.currentUnassessed [] "no same-object joint ScopeCompositionReceipt has yet been produced for the PDF proposition/event" true refl true refl
-resolvedScopePlan : Planner.RequirementPlan pdfPlannerState resolvedScopeActive
 resolvedScopePlan = Planner.planRequirement resolvedScopeUnassessed "inspect/resolve joint proposition scope before applicability"
 resolvedScopeNeedsInspection : Planner.action resolvedScopePlan ≡ Planner.inspectForEvidence
 resolvedScopeNeedsInspection = refl
-resolvedScopeWork : Routing.RoutedWork resolvedScopePlan
 resolvedScopeWork = Routing.routedWork Routing.producerInvocationRequired refl (Routing.invokeProducer Routing.resolvedScopeRoute) "inspect same-object joint scope resolution; do not route to parser scope candidate"
+
+resolvedJurisdictionUnassessed = Planner.coordinateEvidenceReceipt Planner.currentUnassessed [] "document context does not itself establish the legal-system jurisdiction required for applicability" true refl true refl
+resolvedJurisdictionPlan = Planner.planRequirement resolvedJurisdictionUnassessed "inspect CaseFrame/LegalSystem/resolved-jurisdiction evidence"
+resolvedJurisdictionNeedsInspection : Planner.action resolvedJurisdictionPlan ≡ Planner.inspectForEvidence
+resolvedJurisdictionNeedsInspection = refl
+resolvedJurisdictionWork = Routing.routedWork Routing.producerInvocationRequired refl (Routing.invokeProducer Routing.resolvedLegalJurisdictionRoute) "inspect exact legal-system jurisdiction weld; do not promote geographic/document candidate"
 
 data PdfParserReceiptPaysLegalSourceAuthorityRequirement : Set where
 data PdfParserScopeCandidatePaysResolvedScope : Set where
+data PdfDocumentContextPaysResolvedLegalJurisdiction : Set where
 data PaidPrefixMeansApplicabilityFullyResolved : Set where
 data UnassessedLegalSourceAuthorityMeansMissing : Set where
-\data UnassessedResolvedScopeMeansMissing : Set where
+data UnassessedResolvedScopeMeansMissing : Set where
+data UnassessedResolvedJurisdictionMeansMissing : Set where
 
 pdfParserDoesNotPayLegalSourceAuthority : PdfParserReceiptPaysLegalSourceAuthorityRequirement → ⊥
 pdfParserDoesNotPayLegalSourceAuthority ()
 pdfParserScopeCandidateDoesNotPayResolvedScope : PdfParserScopeCandidatePaysResolvedScope → ⊥
 pdfParserScopeCandidateDoesNotPayResolvedScope ()
+pdfDocumentContextDoesNotPayResolvedLegalJurisdiction : PdfDocumentContextPaysResolvedLegalJurisdiction → ⊥
+pdfDocumentContextDoesNotPayResolvedLegalJurisdiction ()
 paidPrefixDoesNotMeanFullApplicability : PaidPrefixMeansApplicabilityFullyResolved → ⊥
 paidPrefixDoesNotMeanFullApplicability ()
 unassessedLegalSourceAuthorityDoesNotMeanMissing : UnassessedLegalSourceAuthorityMeansMissing → ⊥
 unassessedLegalSourceAuthorityDoesNotMeanMissing ()
 unassessedResolvedScopeDoesNotMeanMissing : UnassessedResolvedScopeMeansMissing → ⊥
 unassessedResolvedScopeDoesNotMeanMissing ()
+unassessedResolvedJurisdictionDoesNotMeanMissing : UnassessedResolvedJurisdictionMeansMissing → ⊥
+unassessedResolvedJurisdictionDoesNotMeanMissing ()
 
 record PdfPlannerLiveBoundary : Set where
   constructor pdf-planner-live-boundary
   field
-    materialisedParserRowsReused : Bool
-    propositionReceiptReused : Bool
-    occurrenceReceiptReused : Bool
-    attributionReceiptReused : Bool
-    documentContextReceiptReused : Bool
-    legalSourceAuthorityIsUnassessed : Bool
-    legalSourceAuthorityRoutesToInspectionProducer : Bool
-    resolvedScopeIsUnassessed : Bool
-    resolvedScopeRoutesToScopeResolutionProducer : Bool
-    paidPrefixClosesApplicability : Bool
-    plannerReparsesPdf : Bool
-canonicalPdfPlannerLiveBoundary : PdfPlannerLiveBoundary
-canonicalPdfPlannerLiveBoundary = pdf-planner-live-boundary true true true true true true true true true false false
+    materialisedParserRowsReused propositionReceiptReused occurrenceReceiptReused attributionReceiptReused documentContextReceiptReused : Bool
+    legalSourceAuthorityIsUnassessed legalSourceAuthorityRoutesToInspectionProducer : Bool
+    resolvedScopeIsUnassessed resolvedScopeRoutesToScopeResolutionProducer : Bool
+    resolvedJurisdictionIsUnassessed resolvedJurisdictionRoutesToLegalJurisdictionProducer : Bool
+    paidPrefixClosesApplicability plannerReparsesPdf : Bool
+canonicalPdfPlannerLiveBoundary = pdf-planner-live-boundary true true true true true true true true true true true false false
