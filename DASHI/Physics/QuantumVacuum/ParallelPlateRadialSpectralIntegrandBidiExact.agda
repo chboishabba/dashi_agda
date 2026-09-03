@@ -4,10 +4,9 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.ConstructiveRealSpine as CRS
-import DASHI.Analysis.OrdinaryComplexPolar as Polar
 import DASHI.Physics.QuantumVacuum.CasimirParallelPlateKernel as Casimir
+import DASHI.Physics.QuantumVacuum.ParallelPlateConstructiveRealScalarBridgeExact as ScalarBridge
 import DASHI.Physics.QuantumVacuum.ParallelPlateConstructiveRealSpectralAuthorityExact as Spectral
-import DASHI.Physics.QuantumVacuum.ParallelPlateTransverseRadialReductionBidiExact as Radial
 
 ------------------------------------------------------------------------
 -- EXPLICIT RADIAL CASIMIR SPECTRAL INTEGRAND, BIDI
@@ -27,16 +26,15 @@ record RadialModeData
     (A : Spectral.ParallelPlateConstructiveRealSpectralAuthority kernel) : Set₁ where
   field
     Radius : Set
-    radiusValue : Radius → CRS.Real (Spectral.ScalarBridge.real (Spectral.scalarPackage A))
+    radiusValue : Radius → CRS.Real (ScalarBridge.real (Spectral.scalarPackage A))
 
     Mode : Set
-    longitudinalScale : Mode → CRS.Real (Spectral.ScalarBridge.real (Spectral.scalarPackage A))
+    longitudinalScale : Mode → CRS.Real (ScalarBridge.real (Spectral.scalarPackage A))
 
-    radicandNonnegative :
-      Radius → Mode → Set
+    radicandNonnegative : Radius → Mode → Set
 
     modeFrequencyWithoutC :
-      Radius → Mode → CRS.Real (Spectral.ScalarBridge.real (Spectral.scalarPackage A))
+      Radius → Mode → CRS.Real (ScalarBridge.real (Spectral.scalarPackage A))
 
     frequencyLaw :
       (k : Radius) → (m : Mode) →
