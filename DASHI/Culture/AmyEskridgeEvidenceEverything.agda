@@ -3,5 +3,7 @@ module DASHI.Culture.AmyEskridgeEvidenceEverything where
 -- Focused aggregate for the evidence-hyperfabric lane.
 
 import DASHI.Core.EvidenceHyperfabricExact
+import DASHI.Core.EvidenceAcquisitionSelectiveReopeningExact
 import DASHI.Culture.AmyEskridgeEvidenceHyperfabricExact
 import DASHI.Culture.AmyEskridgeEvidenceCrossPollinationExact
+import DASHI.Culture.AmyEskridgeAcquisitionProofSearchExact
