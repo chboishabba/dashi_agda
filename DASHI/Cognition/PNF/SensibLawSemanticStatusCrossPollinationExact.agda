@@ -15,16 +15,17 @@ import DASHI.Cognition.PNF.ContextualFractranDirectDeltaAdapterExact as Contextu
 
 data ProducerClass : Set where
   parserShapeProducer structuralCompositionProducer bindingAccessibilityProducer
-  attributionProducer evidenceProducer temporalProducer documentContextProducer
-  legalSourceAuthorityProducer legalTypedMeetProducer governedAdmissionProducer
-  : ProducerClass
+  attributionProducer evidenceProducer temporalProducer scopeResolutionProducer
+  documentContextProducer legalSourceAuthorityProducer legalTypedMeetProducer
+  governedAdmissionProducer : ProducerClass
 
 data StatusAxis : Set where
   participantRoleAxis referentKindAxis identityAxis antecedentAxis occurrenceAxis
   propositionAxis attributionAxis evidenceAxis modalityAxis temporalAxis conditionAxis
-  documentContextAxis jurisdictionAxis semanticAdmissionAuthorityAxis
-  legalSourceAuthorityAxis applicabilityAxis violationAxis liabilityAxis burdenAxis
-  judicialDiscourseAxis normativeRelationAxis : StatusAxis
+  scopeCandidateAxis resolvedScopeAxis documentContextAxis jurisdictionAxis
+  semanticAdmissionAuthorityAxis legalSourceAuthorityAxis applicabilityAxis
+  violationAxis liabilityAxis burdenAxis judicialDiscourseAxis normativeRelationAxis
+  : StatusAxis
 
 record AxisPopulationReceipt : Set where
   constructor axisPopulationReceipt
@@ -54,6 +55,10 @@ evidenceCandidateRequiresProvenance : AxisPopulationReceipt
 evidenceCandidateRequiresProvenance = axisPopulationReceipt evidenceProducer evidenceAxis true true true true "source/provenance evidence composition"
 temporalCandidateRequiresAnchor : AxisPopulationReceipt
 temporalCandidateRequiresAnchor = axisPopulationReceipt temporalProducer temporalAxis true true true true "temporal qualification/anchor composition"
+structuralScopeCandidateRequiresComposition : AxisPopulationReceipt
+structuralScopeCandidateRequiresComposition = axisPopulationReceipt structuralCompositionProducer scopeCandidateAxis true true true true "parser/dependency composition may expose scope candidates only"
+resolvedScopeRequiresCompositeReceipt : AxisPopulationReceipt
+resolvedScopeRequiresCompositeReceipt = axisPopulationReceipt scopeResolutionProducer resolvedScopeAxis false true true false "SensibLawScopeCompositionBidiExact joint scope receipt"
 documentContextCandidateRequiresStructure : AxisPopulationReceipt
 documentContextCandidateRequiresStructure = axisPopulationReceipt documentContextProducer documentContextAxis true true true true "typed document/region/case context composition"
 legalSourceAuthorityRequiresSystemAndValidity : AxisPopulationReceipt
@@ -107,6 +112,7 @@ data ReportingVerbMakesEmbeddedPropositionTrue : Set where
 data QuotedSpeakerIsDocumentAuthor : Set where
 data GeographicLocationIsLegalJurisdiction : Set where
 data LegalAuthorityIsPromotionAuthority : Set where
+data ParserScopeCandidateIsResolvedScope : Set where
 data FoundAsFactIsUniversalTruth : Set where
 data NormativeRelationIsModalSurface : Set where
 data BurdenBearerIsSyntacticSubject : Set where
@@ -118,6 +124,8 @@ locationDoesNotDetermineLegalJurisdiction : GeographicLocationIsLegalJurisdictio
 locationDoesNotDetermineLegalJurisdiction ()
 legalAuthorityDoesNotEqualPromotionAuthority : LegalAuthorityIsPromotionAuthority → ⊥
 legalAuthorityDoesNotEqualPromotionAuthority ()
+parserScopeCandidateDoesNotEqualResolvedScope : ParserScopeCandidateIsResolvedScope → ⊥
+parserScopeCandidateDoesNotEqualResolvedScope ()
 foundAsFactDoesNotMeanUniversalTruth : FoundAsFactIsUniversalTruth → ⊥
 foundAsFactDoesNotMeanUniversalTruth ()
 normativeRelationNotRawModalSurface : NormativeRelationIsModalSurface → ⊥
