@@ -7,6 +7,14 @@ import DASHI.Physics.QuantumVacuum.HarmonicOscillatorDoubledEnergyExact as Osc
 
 ------------------------------------------------------------------------
 -- FINITE SAME-FIELD / DIFFERENT-BOUNDARY COMPUTATIONAL FIXTURE
+--
+-- This is deliberately a finite toy witness, not a physical parallel-plate
+-- spectrum.  Its job is to exhibit the exact non-factorability pattern:
+--
+--   same field coordinate
+--   + different boundary coordinate
+--   -> different admitted mode family
+--   -> different raw finite zero-point aggregate.
 ------------------------------------------------------------------------
 
 data FieldToken : Set where
