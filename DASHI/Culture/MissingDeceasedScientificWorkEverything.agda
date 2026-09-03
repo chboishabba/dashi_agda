@@ -5,6 +5,8 @@ module DASHI.Culture.MissingDeceasedScientificWorkEverything where
 -- explicitly named in the 20 April 2026 House Oversight letter formalised here.
 
 import DASHI.Core.ScientificWorkAttributionExact
+import DASHI.Core.ScientificSourceCitationExact
 import DASHI.Culture.MissingDeceasedScientistWorkAttributionExact
 import DASHI.Culture.MissingDeceasedScientificWorkCrossPollinationExact
+import DASHI.Culture.MissingDeceasedScientificWorkSourceRegistryExact
 import DASHI.Culture.HouseOversightScientistRosterScopeExact
