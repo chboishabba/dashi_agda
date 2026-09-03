@@ -50,6 +50,7 @@ FILES=(
   DASHI/Analysis/RiemannG2FkOrbitConsumerAttachmentExact.agda
   DASHI/Analysis/RiemannG2FkOrbitExplicitFormulaWeldExact.agda
   DASHI/Analysis/RiemannG2FkSelectedTestSameObjectBidiExact.agda
+  DASHI/Analysis/RiemannG2SelectedPoleNearSingleProducerBidiExact.agda
   DASHI/Analysis/RiemannG2HighestAlphaAfter8894Exact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026ClaimAuditExact.agda
   DASHI/Mathematics/NumberTheory/PrimeGap2026SourceAcquisitionExact.agda
@@ -71,13 +72,14 @@ FILES=(
   "$ROOT"
 )
 
-if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|\?|{!!})\b' "${FILES[@]}"; then
-  echo "unsafe or incomplete proof surface found" >&2
-  exit 1
-fi
+FORBIDDEN_PATTERN='\{![^}]*!\}|(^|[[:space:]=:(])\?([[:space:];,)}]|$)|^[[:space:]]*postulate([[:space:]]|$)|--allow-unsolved-metas|\{-# OPTIONS[^#]*--(unsafe|type-in-type|no-positivity-check|no-termination-check|rewriting)([[:space:]]|#)|=[[:space:]]*_[[:space:]]*$'
 
-if command -v agda >/dev/null 2>&1; then
-  agda -i . "$ROOT"
-else
-  echo "agda not available; trust scan only"
-fi
+for file in "${FILES[@]}"; do
+  [[ -f "$file" ]] || { echo "required Math2026 source is missing: $file" >&2; exit 1; }
+  if grep -nE "$FORBIDDEN_PATTERN" "$file"; then
+    echo "forbidden hole, postulate, placeholder, or unsafe option in $file" >&2
+    exit 1
+  fi
+done
+
+scripts/run_agda29_parallel_check.sh "$ROOT"
