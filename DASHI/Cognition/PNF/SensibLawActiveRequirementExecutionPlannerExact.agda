@@ -34,6 +34,13 @@ data RequirementDisposition : Set where
   reopenRequired
   : RequirementDisposition
 
+data RequirementExecutionAction : Set where
+  reuseExisting
+  acquireMissingEvidence
+  resolveConflict
+  revalidateStaleEvidence
+  : RequirementExecutionAction
+
 record CoordinateEvidenceReceipt
     (state : Status.SemanticCommitmentState)
     (active : Demand.ActiveRequirement) : Set where
@@ -55,6 +62,12 @@ classifyEvidence currentMissing = missingEvidence
 classifyEvidence currentConflicting = conflictingEvidence
 classifyEvidence stalePreviouslyResolved = reopenRequired
 
+leastAction : RequirementDisposition → RequirementExecutionAction
+leastAction alreadySatisfied = reuseExisting
+leastAction missingEvidence = acquireMissingEvidence
+leastAction conflictingEvidence = resolveConflict
+leastAction reopenRequired = revalidateStaleEvidence
+
 record RequirementPlan
     (state : Status.SemanticCommitmentState)
     (active : Demand.ActiveRequirement) : Set where
@@ -63,6 +76,8 @@ record RequirementPlan
     evidence : CoordinateEvidenceReceipt state active
     disposition : RequirementDisposition
     dispositionExact : disposition ≡ classifyEvidence (evidenceDisposition evidence)
+    action : RequirementExecutionAction
+    actionExact : action ≡ leastAction disposition
     activeCoordinate : Demand.SemanticCoordinate
     activeCoordinateExact : activeCoordinate ≡ Demand.coordinate active
     parserReparseRequired : Bool
@@ -81,6 +96,8 @@ planRequirement {active = active} receipt ref =
   requirementPlan
     receipt
     (classifyEvidence (evidenceDisposition receipt))
+    refl
+    (leastAction (classifyEvidence (evidenceDisposition receipt)))
     refl
     (Demand.coordinate active)
     refl
@@ -114,7 +131,7 @@ record DemandExecutionPlan
 open DemandExecutionPlan public
 
 ------------------------------------------------------------------------
--- Exact disposition witnesses.
+-- Exact disposition/action witnesses.
 ------------------------------------------------------------------------
 
 resolvedReceiptGivesSatisfied :
@@ -127,6 +144,16 @@ resolvedReceiptGivesSatisfied :
   ≡ alreadySatisfied
 resolvedReceiptGivesSatisfied = refl
 
+resolvedReceiptReusesExisting :
+  ∀ {state active refs producer} →
+  action
+    (planRequirement
+      (coordinateEvidenceReceipt {state} {active}
+        currentResolved refs producer true refl true refl)
+      "resolved")
+  ≡ reuseExisting
+resolvedReceiptReusesExisting = refl
+
 missingReceiptGivesMissing :
   ∀ {state active refs producer} →
   disposition
@@ -136,6 +163,16 @@ missingReceiptGivesMissing :
       "missing")
   ≡ missingEvidence
 missingReceiptGivesMissing = refl
+
+missingReceiptAcquiresEvidence :
+  ∀ {state active refs producer} →
+  action
+    (planRequirement
+      (coordinateEvidenceReceipt {state} {active}
+        currentMissing refs producer true refl true refl)
+      "missing")
+  ≡ acquireMissingEvidence
+missingReceiptAcquiresEvidence = refl
 
 conflictingReceiptGivesConflict :
   ∀ {state active refs producer} →
@@ -147,6 +184,16 @@ conflictingReceiptGivesConflict :
   ≡ conflictingEvidence
 conflictingReceiptGivesConflict = refl
 
+conflictingReceiptResolvesConflict :
+  ∀ {state active refs producer} →
+  action
+    (planRequirement
+      (coordinateEvidenceReceipt {state} {active}
+        currentConflicting refs producer true refl true refl)
+      "conflicting")
+  ≡ resolveConflict
+conflictingReceiptResolvesConflict = refl
+
 staleReceiptGivesReopening :
   ∀ {state active refs producer} →
   disposition
@@ -156,6 +203,16 @@ staleReceiptGivesReopening :
       "stale")
   ≡ reopenRequired
 staleReceiptGivesReopening = refl
+
+staleReceiptRevalidatesOnly :
+  ∀ {state active refs producer} →
+  action
+    (planRequirement
+      (coordinateEvidenceReceipt {state} {active}
+        stalePreviouslyResolved refs producer true refl true refl)
+      "stale")
+  ≡ revalidateStaleEvidence
+staleReceiptRevalidatesOnly = refl
 
 ------------------------------------------------------------------------
 -- Hard boundaries.
@@ -167,6 +224,8 @@ data StaleReceiptStillCountsAsSatisfied : Set where
 data ConflictingReceiptCountsAsMissing : Set where
 data PlanningRequirementRewritesSemanticState : Set where
 data PlanningRequirementRequiresParserReparse : Set where
+data SatisfiedRequirementRecomputesProducer : Set where
+data StaleRequirementForcesFullReparse : Set where
 
 semanticStateAloneDoesNotTotalizeEvidence :
   SemanticStateAloneTotalizesCoordinateEvidence → ⊥
@@ -188,6 +247,13 @@ planningDoesNotRewriteState ()
 planningDoesNotRequireParserReparse : PlanningRequirementRequiresParserReparse → ⊥
 planningDoesNotRequireParserReparse ()
 
+satisfiedRequirementDoesNotRecomputeProducer :
+  SatisfiedRequirementRecomputesProducer → ⊥
+satisfiedRequirementDoesNotRecomputeProducer ()
+
+staleRequirementDoesNotForceFullReparse : StaleRequirementForcesFullReparse → ⊥
+staleRequirementDoesNotForceFullReparse ()
+
 record ActiveRequirementExecutionPlannerBoundary : Set where
   constructor active-requirement-execution-planner-boundary
   field
@@ -195,6 +261,10 @@ record ActiveRequirementExecutionPlannerBoundary : Set where
     semanticStateAloneIsTotalEvidenceOracle : Bool
     missingAndConflictingRemainDistinct : Bool
     stalePreviouslyResolvedReopens : Bool
+    satisfiedRequirementReusesExistingEvidence : Bool
+    missingRequirementAcquiresOnlyMissingEvidence : Bool
+    conflictGetsDistinctResolutionAction : Bool
+    staleRequirementUsesRevalidationAction : Bool
     oneCoordinateCanCompensateForAnother : Bool
     planningRewritesUnderlyingState : Bool
     planningRequiresParserReparse : Bool
@@ -203,4 +273,4 @@ canonicalActiveRequirementExecutionPlannerBoundary :
   ActiveRequirementExecutionPlannerBoundary
 canonicalActiveRequirementExecutionPlannerBoundary =
   active-requirement-execution-planner-boundary
-    true false true true false false false
+    true false true true true true true true false false false
