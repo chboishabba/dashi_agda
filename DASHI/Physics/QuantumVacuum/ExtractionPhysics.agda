@@ -16,6 +16,7 @@ import DASHI.Analysis.MeasureIntegralLimitCrossPollinationBidiExact
 import DASHI.Analysis.MetricConvergenceKernelBidiExact
 import DASHI.Analysis.MeasureIntegralMetricLimitBridgeExact
 import DASHI.Analysis.ConstructiveRealMetricConvergenceBridgeExact
+import DASHI.Analysis.FastCauchyRationalRealBackendCutsetExact
 import DASHI.Analysis.ZetaMinusThreeBernoulliArithmeticExact
 import DASHI.Analysis.InversePowerDerivativeCompilerExact
 import DASHI.Physics.QuantumVacuum.ExtractionPhysicsSurface
