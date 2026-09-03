@@ -18,6 +18,8 @@ import DASHI.Cognition.PNF.SensibLawConsumerQuerySemanticCoordinateReopeningExac
 import DASHI.Cognition.PNF.SensibLawConsumerQueryLeastPrivilegeRegressionExact as LeastPrivilege
 import DASHI.Cognition.PNF.SensibLawActiveRequirementExecutionPlannerExact as Planner
 import DASHI.Cognition.PNF.SensibLawRequirementProducerRoutingExact as Routing
+import DASHI.Cognition.PNF.SensibLawLiveProducerCoordinateEvidenceBridgeExact as EvidenceBridge
+import DASHI.Cognition.PNF.SensibLawPdfActiveRequirementPlannerLiveExact as PdfPlanner
 import DASHI.Cognition.PNF.SensibLawSemanticLiveVerticalEverything as Live
 
 data BidiCampaign : Set where
@@ -31,6 +33,8 @@ data BidiCampaign : Set where
   consumerQueryDemandCampaign : BidiCampaign
   activeRequirementPlannerCampaign : BidiCampaign
   requirementProducerRoutingCampaign : BidiCampaign
+  liveProducerEvidenceCampaign : BidiCampaign
+  pdfPlannerRegressionCampaign : BidiCampaign
 
 data CampaignReadiness : Set where
   typeOwnerPresent runtimeProducerNeeded consumerMaySkip : CampaignReadiness
@@ -46,6 +50,8 @@ campaignReadiness documentWorldContextCampaign = typeOwnerPresent
 campaignReadiness consumerQueryDemandCampaign = typeOwnerPresent
 campaignReadiness activeRequirementPlannerCampaign = typeOwnerPresent
 campaignReadiness requirementProducerRoutingCampaign = typeOwnerPresent
+campaignReadiness liveProducerEvidenceCampaign = typeOwnerPresent
+campaignReadiness pdfPlannerRegressionCampaign = typeOwnerPresent
 
 allCampaignTypeOwnersPresent : campaignReadiness attributionPropositionCampaign ≡ typeOwnerPresent
 allCampaignTypeOwnersPresent = refl
@@ -55,6 +61,10 @@ executionPlannerOwnerPresent : campaignReadiness activeRequirementPlannerCampaig
 executionPlannerOwnerPresent = refl
 producerRoutingOwnerPresent : campaignReadiness requirementProducerRoutingCampaign ≡ typeOwnerPresent
 producerRoutingOwnerPresent = refl
+liveProducerEvidenceOwnerPresent : campaignReadiness liveProducerEvidenceCampaign ≡ typeOwnerPresent
+liveProducerEvidenceOwnerPresent = refl
+pdfPlannerRegressionOwnerPresent : campaignReadiness pdfPlannerRegressionCampaign ≡ typeOwnerPresent
+pdfPlannerRegressionOwnerPresent = refl
 
 claimDiscourseHasLiveInhabitant : Live.liveCampaignState Live.claimDiscourseLive ≡ Live.inhabitedRegression
 claimDiscourseHasLiveInhabitant = refl
@@ -109,6 +119,26 @@ attributionCannotResolveAuthority : Routing.AttributionProducerCanResolveAuthori
 attributionCannotResolveAuthority = Routing.attributionDoesNotOwnAuthority
 reuseNeedsNoProducerInvocation : Routing.invocationNeed Planner.reuseExisting ≡ Routing.noProducerInvocation
 reuseNeedsNoProducerInvocation = refl
+
+positiveProducerReceiptRequiresExactStateObject :
+  EvidenceBridge.ReceiptAboutOtherPropositionPaysRequirement → ⊥
+positiveProducerReceiptRequiresExactStateObject = EvidenceBridge.otherPropositionReceiptDoesNotPay
+missingClassificationNeedsSearchReceipt :
+  EvidenceBridge.MissingEvidenceMayBeInferredFromNoLocalConstructor → ⊥
+missingClassificationNeedsSearchReceipt = EvidenceBridge.absenceOfConstructorDoesNotProveMissing
+parserStillCannotPayAuthorityCoordinate : EvidenceBridge.ParserCandidatePaysAuthorityCoordinate → ⊥
+parserStillCannotPayAuthorityCoordinate = EvidenceBridge.parserCandidateDoesNotPayAuthority
+
+pdfPlannerReusesAttribution : Planner.action PdfPlanner.attributionPlan ≡ Planner.reuseExisting
+pdfPlannerReusesAttribution = PdfPlanner.attributionReusesExisting
+pdfPlannerReusesProposition : Planner.action PdfPlanner.propositionPlan ≡ Planner.reuseExisting
+pdfPlannerReusesProposition = PdfPlanner.propositionReusesExisting
+pdfPlannerReusesOccurrence : Planner.action PdfPlanner.occurrencePlan ≡ Planner.reuseExisting
+pdfPlannerReusesOccurrence = PdfPlanner.occurrenceReusesExisting
+pdfPlannerReusesDocumentContext : Planner.action PdfPlanner.documentContextPlan ≡ Planner.reuseExisting
+pdfPlannerReusesDocumentContext = PdfPlanner.documentContextReusesExisting
+pdfPaidPrefixDoesNotCloseApplicability : PdfPlanner.PaidPrefixMeansApplicabilityFullyResolved → ⊥
+pdfPaidPrefixDoesNotCloseApplicability = PdfPlanner.paidPrefixDoesNotMeanFullApplicability
 
 regexStillForbidden : Constitution.regexMayProduceSemanticEvidence Constitution.canonicalCompositionOnlyBoundary ≡ false
 regexStillForbidden = refl
