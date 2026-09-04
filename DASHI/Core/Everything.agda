@@ -113,6 +113,8 @@ import DASHI.Core.DeclaredRealizedIntegrityResidualExact
 import DASHI.Core.SolisSituatedIntegrityBridgeExact
 import DASHI.Core.SituatedIntegrityNonfactorabilityExact
 import DASHI.Core.SolisInquiryPipelineExact
+import DASHI.Core.ResidualScalingLawEscapeExact
+import DASHI.Core.ResidualScalingDependencyCrossPollinationExact
 
 -- History-conditioned decision / relational compression / observer-gain core.
 import DASHI.Core.HistoryConditionedChoiceExact
