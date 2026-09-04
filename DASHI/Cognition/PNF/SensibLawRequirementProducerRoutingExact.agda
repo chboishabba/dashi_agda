@@ -27,7 +27,7 @@ data ProducerCanPopulate : Cross.ProducerClass → Demand.SemanticCoordinate →
   documentContextPopulatesJurisdictionCandidate : ProducerCanPopulate Cross.documentContextProducer Demand.jurisdictionCandidateCoordinate
   legalJurisdictionPopulatesResolvedJurisdiction : ProducerCanPopulate Cross.legalJurisdictionProducer Demand.resolvedLegalJurisdictionCoordinate
   legalSourcePopulatesAuthority : ProducerCanPopulate Cross.legalSourceAuthorityProducer Demand.legalSourceAuthorityCoordinate
-  legalMeetPopulatesLegalRole : ProducerCanPopulate Cross.legalTypedMeetProducer Demand.legalRoleCoordinate
+  legalRoleResolutionPopulatesLegalRole : ProducerCanPopulate Cross.legalRoleResolutionProducer Demand.legalRoleCoordinate
   legalMeetPopulatesApplicability : ProducerCanPopulate Cross.legalTypedMeetProducer Demand.applicabilityCoordinate
   legalMeetPopulatesViolation : ProducerCanPopulate Cross.legalTypedMeetProducer Demand.violationCoordinate
   legalMeetPopulatesLiability : ProducerCanPopulate Cross.legalTypedMeetProducer Demand.liabilityCoordinate
@@ -68,8 +68,11 @@ documentContextRoute = producerRoute Cross.documentContextProducer documentConte
 jurisdictionCandidateRoute = producerRoute Cross.documentContextProducer documentContextPopulatesJurisdictionCandidate "document/context jurisdiction candidate only"
 resolvedLegalJurisdictionRoute = producerRoute Cross.legalJurisdictionProducer legalJurisdictionPopulatesResolvedJurisdiction "CaseFrame + LegalSystem + resolved legal jurisdiction producer"
 legalSourceAuthorityRoute = producerRoute Cross.legalSourceAuthorityProducer legalSourcePopulatesAuthority "LegalSource + source system + effective interval authority producer"
+legalRoleRoute = producerRoute Cross.legalRoleResolutionProducer legalRoleResolutionPopulatesLegalRole "same-object participant/WrongType legal-role resolution"
 semanticAdmissionAuthorityRoute = producerRoute Cross.governedAdmissionProducer governedAdmissionPopulatesSemanticAuthority "semantic resolution/admission authority producer"
 applicabilityRoute = producerRoute Cross.legalTypedMeetProducer legalMeetPopulatesApplicability "typed legal applicability meet"
+violationRoute = producerRoute Cross.legalTypedMeetProducer legalMeetPopulatesViolation "wrong-element violation evaluation"
+liabilityRoute = producerRoute Cross.legalTypedMeetProducer legalMeetPopulatesLiability "liability resolution over paid violation/legal-role/evidence prerequisites"
 
 data ReuseExistingRequiresProducerInvocation : Set where
 data UnassessedRequirementMaySkipInspectionProducer : Set where
@@ -77,6 +80,8 @@ data ParserCanPopulateLegalApplicability : Set where
 data EvidenceCandidateCanPopulateResolvedLegalEvidence : Set where
 data ParserScopeCandidateCanPopulateResolvedScope : Set where
 data JurisdictionCandidateCanPopulateResolvedLegalJurisdiction : Set where
+data ParserParticipantCanPopulateResolvedLegalRole : Set where
+data ApplicabilityMeetCanInventLegalRole : Set where
 data AttributionProducerCanResolveLegalSourceAuthority : Set where
 data SemanticAdmissionProducerCanResolveLegalSourceAuthority : Set where
 
@@ -100,6 +105,10 @@ parserScopeCandidateDoesNotOwnResolvedScope : ParserScopeCandidateCanPopulateRes
 parserScopeCandidateDoesNotOwnResolvedScope ()
 jurisdictionCandidateDoesNotOwnResolvedLegalJurisdiction : JurisdictionCandidateCanPopulateResolvedLegalJurisdiction → ⊥
 jurisdictionCandidateDoesNotOwnResolvedLegalJurisdiction ()
+parserParticipantDoesNotOwnResolvedLegalRole : ParserParticipantCanPopulateResolvedLegalRole → ⊥
+parserParticipantDoesNotOwnResolvedLegalRole ()
+applicabilityMeetDoesNotInventLegalRole : ApplicabilityMeetCanInventLegalRole → ⊥
+applicabilityMeetDoesNotInventLegalRole ()
 attributionDoesNotOwnLegalSourceAuthority : AttributionProducerCanResolveLegalSourceAuthority → ⊥
 attributionDoesNotOwnLegalSourceAuthority ()
 semanticAdmissionDoesNotOwnLegalSourceAuthority : SemanticAdmissionProducerCanResolveLegalSourceAuthority → ⊥
@@ -107,5 +116,25 @@ semanticAdmissionDoesNotOwnLegalSourceAuthority ()
 
 record RequirementProducerRoutingBoundary : Set where
   constructor requirement-producer-routing-boundary
-  field producerRoutingIsCoordinateIndexed unassessedRequirementNeedsInspectionProducer satisfiedRequirementNeedsProducerInvocation parserMayPopulateLegalApplicability evidenceCandidateMayPopulateResolvedLegalEvidence resolvedLegalEvidenceHasDedicatedProducerClass parserScopeCandidateMayPopulateResolvedScope resolvedScopeHasDedicatedProducerClass jurisdictionCandidateMayPopulateResolvedLegalJurisdiction resolvedLegalJurisdictionHasDedicatedProducerClass attributionMayResolveLegalSourceAuthority semanticAdmissionMayResolveLegalSourceAuthority legalSourceAuthorityHasDedicatedProducerClass documentContextHasDedicatedProducerClass : Bool
-canonicalRequirementProducerRoutingBoundary = requirement-producer-routing-boundary true true false false false true false true false true false false true true
+  field
+    producerRoutingIsCoordinateIndexed : Bool
+    unassessedRequirementNeedsInspectionProducer : Bool
+    satisfiedRequirementNeedsProducerInvocation : Bool
+    parserMayPopulateLegalApplicability : Bool
+    evidenceCandidateMayPopulateResolvedLegalEvidence : Bool
+    resolvedLegalEvidenceHasDedicatedProducerClass : Bool
+    parserScopeCandidateMayPopulateResolvedScope : Bool
+    resolvedScopeHasDedicatedProducerClass : Bool
+    jurisdictionCandidateMayPopulateResolvedLegalJurisdiction : Bool
+    resolvedLegalJurisdictionHasDedicatedProducerClass : Bool
+    parserParticipantMayPopulateResolvedLegalRole : Bool
+    applicabilityMeetMayInventLegalRole : Bool
+    resolvedLegalRoleHasDedicatedProducerClass : Bool
+    attributionMayResolveLegalSourceAuthority : Bool
+    semanticAdmissionMayResolveLegalSourceAuthority : Bool
+    legalSourceAuthorityHasDedicatedProducerClass : Bool
+    documentContextHasDedicatedProducerClass : Bool
+canonicalRequirementProducerRoutingBoundary : RequirementProducerRoutingBoundary
+canonicalRequirementProducerRoutingBoundary =
+  requirement-producer-routing-boundary
+    true true false false false true false true false true false false true false false true true
