@@ -21,9 +21,17 @@ record MHDCyclicInvariantBidiFrontier : Set where
     threeOutputCyclicCarrierOwnedIsTrue :
       threeOutputCyclicCarrierOwned ≡ true
 
-    pseudoEnergySkewExchangeConsumerOwned : Bool
-    pseudoEnergySkewExchangeConsumerOwnedIsTrue :
-      pseudoEnergySkewExchangeConsumerOwned ≡ true
+    couplingExchangeAntisymmetryShapeOwned : Bool
+    couplingExchangeAntisymmetryShapeOwnedIsTrue :
+      couplingExchangeAntisymmetryShapeOwned ≡ true
+
+    fullModalTransferSkewWeldOwned : Bool
+    fullModalTransferSkewWeldOwnedIsFalse :
+      fullModalTransferSkewWeldOwned ≡ false
+
+    threeOutputSkewDecompositionSocketOwned : Bool
+    threeOutputSkewDecompositionSocketOwnedIsTrue :
+      threeOutputSkewDecompositionSocketOwned ≡ true
 
     literalMHDPlusSkewExchangeDecompositionOwned : Bool
     literalMHDPlusSkewExchangeDecompositionOwnedIsFalse :
@@ -37,9 +45,9 @@ record MHDCyclicInvariantBidiFrontier : Set where
     literalPressureProjectionCancellationOwnedIsFalse :
       literalPressureProjectionCancellationOwned ≡ false
 
-    energyCrossHelicityCompilerShapeOwned : Bool
-    energyCrossHelicityCompilerShapeOwnedIsTrue :
-      energyCrossHelicityCompilerShapeOwned ≡ true
+    pseudoEnergyToInvariantCompilerOwned : Bool
+    pseudoEnergyToInvariantCompilerOwnedIsTrue :
+      pseudoEnergyToInvariantCompilerOwned ≡ true
 
     totalEnergyLiteralTriadConservationOwned : Bool
     totalEnergyLiteralTriadConservationOwnedIsFalse :
@@ -53,5 +61,6 @@ canonicalMHDCyclicInvariantBidiFrontier : MHDCyclicInvariantBidiFrontier
 canonicalMHDCyclicInvariantBidiFrontier =
   mhd-cyclic-invariant-bidi-frontier
     true refl true refl true refl true refl
+    false refl true refl
     false refl false refl false refl
     true refl false refl false refl
