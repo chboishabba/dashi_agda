@@ -1,6 +1,6 @@
 module DASHI.Physics.QuantumVacuum.PerfectConductorFiniteCutoffParsevalBidiExact where
 
-open import Agda.Primitive using (Level)
+open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.String using (String)
@@ -25,7 +25,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoTorusTrigonometricParsevalExact as Pars
 
 record FiniteCutoffTorusRealisation
     {r : Level}
-    (F : C3.RealField r) : Set₁ where
+    (F : C3.RealField r) : Set (lsuc r) where
   field
     PlateMode : Set
     plateModes : List PlateMode
