@@ -46,6 +46,12 @@ record MHDInvariantElsasserFrontier : Set where
     magneticVectorPotentialObserverOwnedIsTrue :
       magneticVectorPotentialObserverOwned ≡ true
 
+    physicalInverseCurlObserverOwned : Bool
+    physicalInverseCurlObserverOwnedIsTrue : physicalInverseCurlObserverOwned ≡ true
+
+    physicalInverseCurlRealityOwned : Bool
+    physicalInverseCurlRealityOwnedIsTrue : physicalInverseCurlRealityOwned ≡ true
+
     magneticHelicityPlusInverseRadiusWeightOwned : Bool
     magneticHelicityPlusInverseRadiusWeightOwnedIsTrue :
       magneticHelicityPlusInverseRadiusWeightOwned ≡ true
@@ -62,19 +68,32 @@ record MHDInvariantElsasserFrontier : Set where
     magneticHelicityDirectionalVariationOwnedIsTrue :
       magneticHelicityDirectionalVariationOwned ≡ true
 
-    magneticHelicityRealityPairedInductionCancellationOwned : Bool
-    magneticHelicityRealityPairedInductionCancellationOwnedIsFalse :
-      magneticHelicityRealityPairedInductionCancellationOwned ≡ false
+    doubledMagneticFibreOwned : Bool
+    doubledMagneticFibreOwnedIsTrue : doubledMagneticFibreOwned ≡ true
 
-    magneticHelicityWeightedCyclicCancellationOwned : Bool
-    magneticHelicityWeightedCyclicCancellationOwnedIsFalse :
-      magneticHelicityWeightedCyclicCancellationOwned ≡ false
+    doubledMagneticRealityAndTransverseOwned : Bool
+    doubledMagneticRealityAndTransverseOwnedIsTrue :
+      doubledMagneticRealityAndTransverseOwned ≡ true
+
+    doubledInductionRealityAndTransverseOwned : Bool
+    doubledInductionRealityAndTransverseOwnedIsTrue :
+      doubledInductionRealityAndTransverseOwned ≡ true
+
+    literalMagneticHelicityThreeLegConsumerOwned : Bool
+    literalMagneticHelicityThreeLegConsumerOwnedIsTrue :
+      literalMagneticHelicityThreeLegConsumerOwned ≡ true
+
+    magneticHelicityRealityPairedThreeLegCancellationOwned : Bool
+    magneticHelicityRealityPairedThreeLegCancellationOwnedIsFalse :
+      magneticHelicityRealityPairedThreeLegCancellationOwned ≡ false
 
 canonicalMHDInvariantElsasserFrontier : MHDInvariantElsasserFrontier
 canonicalMHDInvariantElsasserFrontier =
   mhd-invariant-elsasser-frontier
     true refl true refl true refl true refl true refl
     true refl true refl true refl true refl true refl
-    true refl true refl true refl true refl true refl
-    true refl true refl true refl
-    false refl false refl
+    true refl true refl true refl true refl
+    true refl true refl true refl true refl
+    true refl true refl true refl true refl
+    true refl true refl true refl true refl
+    false refl
