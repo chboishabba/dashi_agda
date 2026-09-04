@@ -3,6 +3,7 @@ module DASHI.Physics.QuantumVacuum.PerfectConductorFiniteCutoffModeEnumerationEx
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Empty using (⊥)
 open import Data.Fin.Base using (Fin)
 open import Data.List.Base using (cartesianProductWith)
 open import Data.List.Membership.Propositional using (_∈_)
@@ -103,6 +104,5 @@ canonicalFiniteCutoffModeEnumeration transverseBound longitudinalBound = record
 data FiniteCutoffExhaustivenessAutomaticallyIsContinuumCompleteness : Set where
 
 finiteDoesNotProveContinuumCompleteness :
-  FiniteCutoffExhaustivenessAutomaticallyIsContinuumCompleteness →
-  Data.Empty.⊥
+  FiniteCutoffExhaustivenessAutomaticallyIsContinuumCompleteness → ⊥
 finiteDoesNotProveContinuumCompleteness ()
