@@ -10,11 +10,11 @@ import Inverse as BishopInverse
 
 solveRightMultiplication :
   (x d y : BishopReal.ℝ) →
-  d BishopReal.≄0 →
+  (d≄0 : d BishopReal.≄0) →
   BishopReal._≃_ (BishopReal._*_ x d) y →
   BishopReal._≃_
     x
-    (BishopReal._*_ y ((d BishopInverse.⁻¹) _))
+    (BishopReal._*_ y ((d BishopInverse.⁻¹) d≄0))
 solveRightMultiplication x d y d≄0 xd≃y =
   BishopProperties.≃-trans
     (BishopProperties.≃-symm (BishopProperties.*-identityʳ x))
@@ -29,11 +29,11 @@ solveRightMultiplication x d y d≄0 xd≃y =
 
 solveLeftMultiplication :
   (d x y : BishopReal.ℝ) →
-  d BishopReal.≄0 →
+  (d≄0 : d BishopReal.≄0) →
   BishopReal._≃_ (BishopReal._*_ d x) y →
   BishopReal._≃_
     x
-    (BishopReal._*_ ((d BishopInverse.⁻¹) _) y)
+    (BishopReal._*_ ((d BishopInverse.⁻¹) d≄0) y)
 solveLeftMultiplication d x y d≄0 dx≃y =
   BishopProperties.≃-trans
     (BishopProperties.≃-symm (BishopProperties.*-identityˡ x))
