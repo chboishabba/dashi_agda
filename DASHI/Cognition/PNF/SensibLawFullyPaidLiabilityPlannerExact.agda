@@ -14,10 +14,6 @@ import DASHI.Cognition.PNF.SensibLawLiabilityPrerequisiteMeetExact as LiabilityM
 import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExact as Legal
 import DASHI.Cognition.PNF.SensibLawLiveProducerCoordinateEvidenceBridgeExact as Bridge
 
-------------------------------------------------------------------------
--- Reuse the exact post-violation receipts; do not rebuild upstream semantics.
-------------------------------------------------------------------------
-
 liabilityPrerequisites :
   LiabilityMeet.LiabilityPrerequisiteBundle ViolationPaid.postViolationState
 liabilityPrerequisites =
@@ -27,17 +23,8 @@ liabilityPrerequisites =
     ViolationPaid.resolvedEvidence
     ViolationPaid.authorityReceipt
     ViolationPaid.jurisdictionReceipt
-    refl
-    refl
-    refl
-    refl
-    refl
-    refl
+    refl refl refl refl refl refl
     "post-violation same-object liability prerequisite bundle"
-
-------------------------------------------------------------------------
--- The fixture violation is only candidate, so liability is forced to candidate.
-------------------------------------------------------------------------
 
 liabilityDecision : LiabilityMeet.LiabilityDecision liabilityPrerequisites
 liabilityDecision =
@@ -69,10 +56,6 @@ candidateViolationWasNotPromoted :
   ≡ Status.violationCandidate
 candidateViolationWasNotPromoted = refl
 
-------------------------------------------------------------------------
--- Append a liability snapshot; retain applicability and violation history.
-------------------------------------------------------------------------
-
 postLiabilityLegalStatus : Status.LegalStatusProduct
 postLiabilityLegalStatus =
   Status.legalStatusProduct
@@ -99,16 +82,16 @@ postLiabilityState =
     (Status.governedAdmissionPresent ViolationPaid.postViolationState)
 
 priorViolationSnapshotRetained :
-  ViolationPaid.postViolationLegalStatus Bridge.∈ Status.legalStatuses postLiabilityState
+  Bridge._∈_
+    ViolationPaid.postViolationLegalStatus
+    (Status.legalStatuses postLiabilityState)
 priorViolationSnapshotRetained = Bridge.there Bridge.here
 
 priorApplicabilitySnapshotRetained :
-  Paid.fixtureLegalStatus Bridge.∈ Status.legalStatuses postLiabilityState
+  Bridge._∈_
+    Paid.fixtureLegalStatus
+    (Status.legalStatuses postLiabilityState)
 priorApplicabilitySnapshotRetained = Bridge.there (Bridge.there Bridge.here)
-
-------------------------------------------------------------------------
--- Liability does not itself pay burden, standard, or remedy eligibility.
-------------------------------------------------------------------------
 
 data LiabilityCandidateAutomaticallyAdmitted : Set where
 data LiabilityReceiptAutomaticallyCreatesBurden : Set where
@@ -118,16 +101,12 @@ data PostLiabilitySnapshotErasesViolationHistory : Set where
 
 candidateLiabilityDoesNotAutoAdmit : LiabilityCandidateAutomaticallyAdmitted → ⊥
 candidateLiabilityDoesNotAutoAdmit ()
-
 liabilityDoesNotAutomaticallyCreateBurden : LiabilityReceiptAutomaticallyCreatesBurden → ⊥
 liabilityDoesNotAutomaticallyCreateBurden ()
-
 liabilityDoesNotAutomaticallySelectStandard : LiabilityReceiptAutomaticallySelectsStandard → ⊥
 liabilityDoesNotAutomaticallySelectStandard ()
-
 liabilityDoesNotAutomaticallyMakeRemedyEligible : LiabilityReceiptAutomaticallyMakesRemedyEligible → ⊥
 liabilityDoesNotAutomaticallyMakeRemedyEligible ()
-
 postLiabilityStateRetainsViolationHistory : PostLiabilitySnapshotErasesViolationHistory → ⊥
 postLiabilityStateRetainsViolationHistory ()
 
