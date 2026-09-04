@@ -17,6 +17,7 @@ import DASHI.Analysis.NonArchimedeanTwistedBlockReductionBidiExact as Reduction
 data SearchAction : Set where
   instantiateExistingIntertwiner : SearchAction
   recoverConcreteGroupLabelling : SearchAction
+  attachConcreteScalarActionWeld : SearchAction
   attachConcretePeriodReceipt : SearchAction
   attachConcreteOrbitWeightReceipt : SearchAction
   invokeOwnedGenericPowerReduction : SearchAction
@@ -35,6 +36,7 @@ data SearchStatus : Set where
 searchStatus : SearchAction → SearchStatus
 searchStatus instantiateExistingIntertwiner = downstream
 searchStatus recoverConcreteGroupLabelling = downstream
+searchStatus attachConcreteScalarActionWeld = downstream
 searchStatus attachConcretePeriodReceipt = downstream
 searchStatus attachConcreteOrbitWeightReceipt = downstream
 searchStatus invokeOwnedGenericPowerReduction = downstream
@@ -61,13 +63,16 @@ crossRadixCarrierIdentificationForbidden :
 crossRadixCarrierIdentificationForbidden = refl
 
 ------------------------------------------------------------------------
--- Highest-alpha path: instantiate -> label -> period/weight -> reduction.
+-- Highest-alpha path:
+-- exact rechart -> genuine group labels -> scalar action -> period/weight ->
+-- already-owned generic reduction.
 ------------------------------------------------------------------------
 
 highestAlphaPath : List SearchAction
 highestAlphaPath =
   instantiateExistingIntertwiner ∷
   recoverConcreteGroupLabelling ∷
+  attachConcreteScalarActionWeld ∷
   attachConcretePeriodReceipt ∷
   attachConcreteOrbitWeightReceipt ∷
   invokeOwnedGenericPowerReduction ∷
@@ -80,7 +85,8 @@ record ProofSearchPruningBoundary : Set where
     sourceSpecificInstantiationRemains : Bool
     genericPowerReductionAlreadyOwned : Bool
     strongerSpatialClaimNeedsSameObjectInstantiation : Bool
+    literalScalarPowerNeedsScalarActionWeld : Bool
 
 canonicalProofSearchPruningBoundary : ProofSearchPruningBoundary
 canonicalProofSearchPruningBoundary =
-  proofSearchPruningBoundary true true true true
+  proofSearchPruningBoundary true true true true true
