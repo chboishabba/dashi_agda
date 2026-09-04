@@ -60,6 +60,10 @@ record MHDCyclicInvariantBidiFrontier : Set where
     minusProjectedPseudoEnergyCancellationOwnedIsTrue :
       minusProjectedPseudoEnergyCancellationOwned ≡ true
 
+    pdeProjectedFourierBidiWeldSocketOwned : Bool
+    pdeProjectedFourierBidiWeldSocketOwnedIsTrue :
+      pdeProjectedFourierBidiWeldSocketOwned ≡ true
+
     literalElsasserPdeToProjectedFourierWeldOwned : Bool
     literalElsasserPdeToProjectedFourierWeldOwnedIsFalse :
       literalElsasserPdeToProjectedFourierWeldOwned ≡ false
@@ -83,4 +87,4 @@ canonicalMHDCyclicInvariantBidiFrontier =
     true refl true refl true refl
     true refl true refl true refl true refl
     true refl true refl true refl true refl true refl
-    false refl true refl false refl false refl
+    true refl false refl true refl false refl false refl
