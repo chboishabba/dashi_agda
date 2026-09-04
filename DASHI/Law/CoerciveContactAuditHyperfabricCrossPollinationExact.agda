@@ -2,6 +2,7 @@ module DASHI.Law.CoerciveContactAuditHyperfabricCrossPollinationExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
+import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Law.QueenslandWandingReachabilityBidiExact as Wand
 import DASHI.Law.LowTraceCoerciveForceNonReconstructionExact as Force
 
@@ -29,7 +30,7 @@ record ReachabilityObservabilityAsymmetry
   field
     enforcementReachabilityExpanded : Wand.indirectSearchReachability (encounter h)
     forceHistoryNotRecoverableFromCoarseRecord :
-      Force.NF.FactorsThrough Force.observe Force.actualForce → ⊥
+      NF.FactorsThrough Force.observe Force.actualForce → ⊥
 
 open ReachabilityObservabilityAsymmetry public
 
