@@ -26,6 +26,7 @@ import DASHI.Analysis.NonArchimedeanOddOrbitCoordinateChartBidiExact
 import DASHI.Analysis.NonArchimedeanCanonicalOddOrbitProducerBidiExact
 import DASHI.Analysis.NonArchimedeanFullCycleSignedCancellationBidiExact
 import DASHI.Analysis.NonArchimedeanMonomialTraceSpatialBidiExact
+import DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact
 
 -- Optional Monster correspondence x-pollination.  These remain downstream
 -- comparison fibres and are not prerequisites for the source spectral closure.
