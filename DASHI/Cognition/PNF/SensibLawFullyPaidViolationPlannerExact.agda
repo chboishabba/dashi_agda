@@ -3,15 +3,15 @@ module DASHI.Cognition.PNF.SensibLawFullyPaidViolationPlannerExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Empty using (⊥)
 
 import DASHI.Interop.SensibLawOntologyTopology as Ontology
 import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 import DASHI.Cognition.PNF.SensibLawFullyPaidApplicabilityFixtureExact as Paid
+import DASHI.Cognition.PNF.SensibLawParticipantLegalRoleLiveBidiExact as LegalRoleLive
 import DASHI.Cognition.PNF.SensibLawViolationPrerequisiteMeetExact as ViolationMeet
 import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExact as Legal
-import DASHI.Cognition.PNF.SensibLawParticipantLegalRoleWrongTypeBidiExact as LegalRole
 import DASHI.Cognition.PNF.SensibLawLiveProducerCoordinateEvidenceBridgeExact as Bridge
 import DASHI.Cognition.PNF.SensibLawResolvedLegalEvidenceExact as Evidence
 import DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact as Authority
@@ -49,7 +49,7 @@ violationPrerequisites =
 fixtureElementEvaluation : Legal.WrongElementEvaluation
 fixtureElementEvaluation =
   Legal.wrongElementEvaluation
-    (Ontology.WrongType.wrongTypeId Paid.LegalRoleLive.fixtureWrongType)
+    (Ontology.WrongType.wrongTypeId LegalRoleLive.fixtureWrongType)
     "element:fixture:dog-walk-duty"
     Legal.elementSatisfied
     ("fixture documentary evidence" ∷ [])
@@ -60,7 +60,7 @@ fixtureEvaluations = fixtureElementEvaluation ∷ []
 
 evaluationsMatchWrongType :
   ViolationMeet.EvaluationsForWrongType
-    (Ontology.WrongType.wrongTypeId Paid.LegalRoleLive.fixtureWrongType)
+    (Ontology.WrongType.wrongTypeId LegalRoleLive.fixtureWrongType)
     fixtureEvaluations
 evaluationsMatchWrongType =
   ViolationMeet.evaluationFor refl ViolationMeet.noEvaluations
@@ -141,7 +141,7 @@ ownedApplicability =
 ownedLegalRole : Bridge.LegalRoleReceiptInState postViolationState
 ownedLegalRole =
   Bridge.legalRoleReceiptInState
-    Paid.LegalRoleLive.fixtureDutyBearerWeld
+    LegalRoleLive.fixtureDutyBearerWeld
     Bridge.here
     Paid.fixtureEvent
     Bridge.here
@@ -248,7 +248,6 @@ jurisdictionWork = Routing.routedWork Routing.noProducerInvocation refl Routing.
 
 data PaidLiabilityPrerequisitesAutomaticallyCreateLiability : Set where
 data ViolationCandidateAutomaticallyBecomesViolationAdmitted : Set where
-
 data PostViolationStateErasesPriorApplicabilitySnapshot : Set where
 
 paidLiabilityPrerequisitesDoNotCreateLiability :
