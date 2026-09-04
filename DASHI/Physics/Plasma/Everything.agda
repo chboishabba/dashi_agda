@@ -55,3 +55,4 @@ import DASHI.Physics.Plasma.MHDElsasserThreeLegNormalFormCancellationExact
 import DASHI.Physics.Plasma.MHDElsasserProjectedNonlinearCoefficientExact
 import DASHI.Physics.Plasma.MHDElsasserProjectedThreeLegCancellationExact
 import DASHI.Physics.Plasma.MHDPlusMinusProjectedPseudoEnergyExact
+import DASHI.Physics.Plasma.MHDElsasserPDEProjectedFourierWeldBidiExact
