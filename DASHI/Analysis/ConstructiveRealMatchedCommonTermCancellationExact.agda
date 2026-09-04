@@ -1,6 +1,7 @@
 module DASHI.Analysis.ConstructiveRealMatchedCommonTermCancellationExact where
 
-open import Relation.Binary.PropositionalEquality using (_≡_; trans; cong)
+open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (_≡_; trans; cong; cong₂)
 
 import DASHI.Analysis.ConstructiveRealSpine as R
 import DASHI.Analysis.MarxConstructiveRealRingNormalisation as Ring
@@ -54,27 +55,51 @@ record MatchedRegulatedDecomposition
 
 open MatchedRegulatedDecomposition public
 
+regulatedDifferenceCancelsCommon :
+  {real : R.ConstructedOrderedCompleteReal} →
+  (laws : Ring.ConstructedRealRingNormalisationLaws real) →
+  (D : MatchedRegulatedDecomposition real) →
+  ∀ r →
+  R._-_ real (plate D r) (reference D r)
+  ≡ R._-_ real (plateResidual D r) (referenceResidual D r)
+regulatedDifferenceCancelsCommon {real} laws D r =
+  trans
+    (cong₂
+      (R._-_ real)
+      (plateDecomposition D r)
+      (referenceDecomposition D r))
+    (commonRightTermCancels laws
+      (plateResidual D r)
+      (referenceResidual D r)
+      (commonTerm D r))
+
 record MatchedDifferenceCancellationReceipt
     {real : R.ConstructedOrderedCompleteReal}
     (laws : Ring.ConstructedRealRingNormalisationLaws real)
     (D : MatchedRegulatedDecomposition real) : Set₁ where
   field
-    sameCommonTermLiteral : Set
-
-    regulatedDifferenceCancelsCommon : ∀ r →
+    cancellation : ∀ r →
       R._-_ real (plate D r) (reference D r)
       ≡ R._-_ real (plateResidual D r) (referenceResidual D r)
 
 open MatchedDifferenceCancellationReceipt public
+
+buildMatchedDifferenceCancellationReceipt :
+  {real : R.ConstructedOrderedCompleteReal} →
+  (laws : Ring.ConstructedRealRingNormalisationLaws real) →
+  (D : MatchedRegulatedDecomposition real) →
+  MatchedDifferenceCancellationReceipt laws D
+buildMatchedDifferenceCancellationReceipt laws D = record
+  { cancellation = regulatedDifferenceCancelsCommon laws D }
 
 data CommonTermCancellationAutomaticallyProvesResidualConvergence : Set where
 
 data SeparateRawLimitsRequiredAfterExactCancellation : Set where
 
 cancellationDoesNotProveConvergence :
-  CommonTermCancellationAutomaticallyProvesResidualConvergence → DASHI.Core.Prelude.⊥
+  CommonTermCancellationAutomaticallyProvesResidualConvergence → ⊥
 cancellationDoesNotProveConvergence ()
 
 rawLimitsNotRequiredByMatchedDifference :
-  SeparateRawLimitsRequiredAfterExactCancellation → DASHI.Core.Prelude.⊥
+  SeparateRawLimitsRequiredAfterExactCancellation → ⊥
 rawLimitsNotRequiredByMatchedDifference ()
