@@ -18,13 +18,12 @@ import DASHI.Physics.Closure.NSTriadKNLeraySelfAdjointness as LeraySelfAdjoint
 ------------------------------------------------------------------------
 
 projectedPayload :
-  ∀ {r} {F : C3.RealField r} →
-  C3.IntegerEmbedding F →
-  (E : C3.IntegerEmbedding F) →
+  ∀ {r} {F : C3.RealField r}
+    (E : C3.IntegerEmbedding F) →
   C3.ModeInverseSquare F E →
   Z3.FourierMode →
   C3.Complex3 F → C3.Complex3 F → C3.Complex F
-projectedPayload _ E I k test value =
+projectedPayload E I k test value =
   C3.hermitianPairing3 test (C3.lerayProject3 E I k value)
 
 unprojectedPayload :
@@ -39,8 +38,8 @@ projectedPayloadReducesOnTransverseTest :
     (k : Z3.FourierMode)
     (test value : C3.Complex3 F) →
   Helical.Transverse E k test →
-  C3.hermitianPairing3 test (C3.lerayProject3 E I k value)
-  ≡ C3.hermitianPairing3 test value
+  projectedPayload E I k test value
+  ≡ unprojectedPayload test value
 projectedPayloadReducesOnTransverseTest E I k test value transverseTest =
   trans
     (sym (LeraySelfAdjoint.leraySelfAdjoint E I k test value))
@@ -49,15 +48,19 @@ projectedPayloadReducesOnTransverseTest E I k test value transverseTest =
       (LerayFixed.lerayFixesTransverse E I k test transverseTest))
 
 realProjectedPayload :
-  ∀ {r} {F : C3.RealField r} →
-  C3.IntegerEmbedding F →
-  (E : C3.IntegerEmbedding F) →
+  ∀ {r} {F : C3.RealField r}
+    (E : C3.IntegerEmbedding F) →
   C3.ModeInverseSquare F E →
   Z3.FourierMode →
   C3.Complex3 F → C3.Complex3 F → C3.Carrier F
-realProjectedPayload _ E I k test value =
-  C3.complexRealPart
-    (C3.hermitianPairing3 test (C3.lerayProject3 E I k value))
+realProjectedPayload E I k test value =
+  C3.complexRealPart (projectedPayload E I k test value)
+
+realUnprojectedPayload :
+  ∀ {r} {F : C3.RealField r} →
+  C3.Complex3 F → C3.Complex3 F → C3.Carrier F
+realUnprojectedPayload test value =
+  C3.complexRealPart (unprojectedPayload test value)
 
 realProjectedPayloadReducesOnTransverseTest :
   ∀ {r} {F : C3.RealField r}
@@ -66,9 +69,8 @@ realProjectedPayloadReducesOnTransverseTest :
     (k : Z3.FourierMode)
     (test value : C3.Complex3 F) →
   Helical.Transverse E k test →
-  C3.complexRealPart
-    (C3.hermitianPairing3 test (C3.lerayProject3 E I k value))
-  ≡ C3.complexRealPart (C3.hermitianPairing3 test value)
+  realProjectedPayload E I k test value
+  ≡ realUnprojectedPayload test value
 realProjectedPayloadReducesOnTransverseTest E I k test value transverseTest =
   cong C3.complexRealPart
     (projectedPayloadReducesOnTransverseTest E I k test value transverseTest)
