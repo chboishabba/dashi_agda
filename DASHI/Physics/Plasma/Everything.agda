@@ -61,3 +61,6 @@ import DASHI.Physics.Plasma.MHDLiteralIdealEnergyCrossHelicityTriadConservationE
 import DASHI.Physics.Plasma.MHDMagneticVectorPotentialHelicalObserverExact
 import DASHI.Physics.Plasma.MHDMagneticHelicityHelicalWeightExact
 import DASHI.Physics.Plasma.MHDMagneticHelicityDirectionalVariationBidiExact
+import DASHI.Physics.Plasma.MHDDoubledMagneticElsasserFibreExact
+import DASHI.Physics.Plasma.MHDPhysicalInverseCurlMagneticHelicityExact
+import DASHI.Physics.Plasma.MHDMagneticHelicityThreeLegBidiExact
