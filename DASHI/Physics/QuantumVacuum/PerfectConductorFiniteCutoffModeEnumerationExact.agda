@@ -8,10 +8,11 @@ open import Data.Fin.Base using (Fin)
 open import Data.List.Base using (cartesianProductWith)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Data.List.Membership.Propositional.Properties using
-  (∈-cartesianProductWith⁺; ∈-allFin)
+  (∈-cartesianProductWith⁺)
 open import Data.List.Relation.Unary.Any as Any using ()
 open import Data.Product using (_×_; _,_)
 
+import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact as Finite
 import DASHI.Physics.QuantumVacuum.ParallelPlateModeSpectrumCutsetExact as Cutset
 
 ------------------------------------------------------------------------
@@ -24,9 +25,9 @@ import DASHI.Physics.QuantumVacuum.ParallelPlateModeSpectrumCutsetExact as Cutse
 --
 --   (k_perp label, n, TE/TM)
 --
--- is enumerated constructively by a finite Cartesian product.  The theorem is
--- domain-neutral finite combinatorics; it does not claim continuum TE/TM
--- completeness or Maxwell PDE completeness.
+-- is enumerated constructively by a finite Cartesian product.  The Fin-coordinate
+-- enumeration and completeness theorem are reused directly from DASHI's generic
+-- FiniteProductEnumerationExact owner.
 ------------------------------------------------------------------------
 
 polarisationList : List Cutset.Polarisation
@@ -45,7 +46,7 @@ longitudinalPolarisationCoordinates :
   List (Fin longitudinalBound × Cutset.Polarisation)
 longitudinalPolarisationCoordinates longitudinalBound =
   cartesianProductWith _,_
-    (Data.List.Base.allFin longitudinalBound)
+    (Finite.allFin longitudinalBound)
     polarisationList
 
 finiteModeCoordinates :
@@ -53,7 +54,7 @@ finiteModeCoordinates :
   List (FiniteModeCoordinate transverseBound longitudinalBound)
 finiteModeCoordinates transverseBound longitudinalBound =
   cartesianProductWith _,_
-    (Data.List.Base.allFin transverseBound)
+    (Finite.allFin transverseBound)
     (longitudinalPolarisationCoordinates longitudinalBound)
 
 longitudinalPolarisationComplete :
@@ -62,7 +63,9 @@ longitudinalPolarisationComplete :
   (p : Cutset.Polarisation) →
   (n , p) ∈ longitudinalPolarisationCoordinates longitudinalBound
 longitudinalPolarisationComplete n p =
-  ∈-cartesianProductWith⁺ _,_ (∈-allFin n) (polarisationComplete p)
+  ∈-cartesianProductWith⁺ _,_
+    (Finite.allFinComplete n)
+    (polarisationComplete p)
 
 finiteModeCoordinatesComplete :
   ∀ {transverseBound longitudinalBound} →
@@ -73,7 +76,7 @@ finiteModeCoordinatesComplete :
     finiteModeCoordinates transverseBound longitudinalBound
 finiteModeCoordinatesComplete k n p =
   ∈-cartesianProductWith⁺ _,_
-    (∈-allFin k)
+    (Finite.allFinComplete k)
     (longitudinalPolarisationComplete n p)
 
 record FiniteCutoffModeEnumerationReceipt : Set₁ where
