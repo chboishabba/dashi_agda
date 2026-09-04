@@ -26,3 +26,9 @@ import DASHI.Physics.Plasma.MHDMomentumInductionElsasserAmplitudeWeldBidiExact
 import DASHI.Physics.Plasma.MHDElsasserAmplitudeFrontierExact
 import DASHI.Physics.Plasma.MHDHelicalElsasserTriadTangentExact
 import DASHI.Physics.Plasma.MHDIdealInvariantTriadTestBidiExact
+import DASHI.Physics.Plasma.ElsasserInvariantCoordinateAlgebraExact
+import DASHI.Physics.Plasma.MHDElsasserTangentRechartExact
+import DASHI.Physics.Plasma.MHDEnergyCrossHelicityDirectionalVariationExact
+import DASHI.Physics.Plasma.MHDEnergyCrossHelicityTriadBidiExact
+import DASHI.Physics.Plasma.MHDMagneticHelicityHelicalWeightBidiExact
+import DASHI.Physics.Plasma.MHDInvariantElsasserFrontierExact
