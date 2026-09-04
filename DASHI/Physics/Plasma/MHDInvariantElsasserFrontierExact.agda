@@ -79,6 +79,14 @@ record MHDInvariantElsasserFrontier : Set where
     doubledInductionRealityAndTransverseOwnedIsTrue :
       doubledInductionRealityAndTransverseOwned ≡ true
 
+    magneticHelicityObserverRealityTransportOwned : Bool
+    magneticHelicityObserverRealityTransportOwnedIsTrue :
+      magneticHelicityObserverRealityTransportOwned ≡ true
+
+    magneticHelicityVariationRealityTransportOwned : Bool
+    magneticHelicityVariationRealityTransportOwnedIsTrue :
+      magneticHelicityVariationRealityTransportOwned ≡ true
+
     literalMagneticHelicityThreeLegConsumerOwned : Bool
     literalMagneticHelicityThreeLegConsumerOwnedIsTrue :
       literalMagneticHelicityThreeLegConsumerOwned ≡ true
@@ -96,4 +104,5 @@ canonicalMHDInvariantElsasserFrontier =
     true refl true refl true refl true refl
     true refl true refl true refl true refl
     true refl true refl true refl true refl
+    true refl true refl
     false refl
