@@ -1,12 +1,13 @@
 module DASHI.Physics.QuantumVacuum.ParallelPlateRegulatorFiniteEnumerationWeldExact where
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List)
 open import Data.Fin.Base using (Fin)
 open import Data.List.Membership.Propositional using (_∈_)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_,_)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
+import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact as Finite
 import DASHI.Physics.QuantumVacuum.CasimirParallelPlateKernel as Casimir
 import DASHI.Physics.QuantumVacuum.PhysicalQuantities as Q
 import DASHI.Physics.QuantumVacuum.ParallelPlateModeSpectrumCutsetExact as Cutset
@@ -15,10 +16,10 @@ import DASHI.Physics.QuantumVacuum.PerfectConductorFiniteCutoffModeEnumerationEx
 ------------------------------------------------------------------------
 -- FINITE ENUMERATION -> LITERAL PARALLEL-PLATE REGULATOR LIST
 --
--- The regulator already consumes finite lists.  This weld states exactly what
--- is needed to know that a concrete cutoff list is not merely a sample: every
--- bounded transverse/longitudinal/polarization coordinate is represented in
--- the literal list used by the regulated energy.
+-- The regulator already consumes finite lists.  If the literal plate-mode list
+-- is exactly the image of DASHI's exhaustive finite coordinate enumeration,
+-- coverage is compiler output.  A caller therefore pays only the same-object
+-- map/list/cutoff weld, not a second element-by-element exhaustiveness proof.
 ------------------------------------------------------------------------
 
 record RegulatorFiniteEnumerationWeld
@@ -29,41 +30,51 @@ record RegulatorFiniteEnumerationWeld
     separation : Q.Length
     cutoff : Cutset.Cutoff regulator
 
-    transverseBound longitudinalBound : Nat
     enumeration : Enum.FiniteCutoffModeEnumerationReceipt
 
     coordinateToMode :
-      Enum.FiniteModeCoordinate transverseBound longitudinalBound →
+      Enum.FiniteModeCoordinate
+        (Enum.transverseBound enumeration)
+        (Enum.longitudinalBound enumeration) →
       Cutset.Mode spectrum
 
-    enumerationHasRequestedBounds :
-      (Enum.transverseBound enumeration ≡ transverseBound) ×
-      (Enum.longitudinalBound enumeration ≡ longitudinalBound)
+    plateListExact :
+      Cutset.plateModes regulator separation cutoff ≡
+      Data.List.Base.map coordinateToMode (Enum.coordinates enumeration)
 
     coordinateIndexAgreesWithPhysicalModeIndex : Set
     cutoffPredicateAgreesWithFiniteBounds : Set
 
-    everyEnumeratedCoordinateInPlateList :
-      (k : Fin transverseBound) →
-      (n : Fin longitudinalBound) →
-      (p : Cutset.Polarisation) →
-      coordinateToMode (k , (n , p))
-      ∈ Cutset.plateModes regulator separation cutoff
-
 open RegulatorFiniteEnumerationWeld public
+
+enumeratedCoordinateInPlateList :
+  ∀ {kernel spectrum regulator}
+    (W : RegulatorFiniteEnumerationWeld {kernel} spectrum regulator) →
+  (k : Fin (Enum.transverseBound (enumeration W))) →
+  (n : Fin (Enum.longitudinalBound (enumeration W))) →
+  (p : Cutset.Polarisation) →
+  coordinateToMode W (k , (n , p))
+  ∈ Cutset.plateModes regulator (separation W) (cutoff W)
+enumeratedCoordinateInPlateList W k n p =
+  subst
+    (λ modes → coordinateToMode W (k , (n , p)) ∈ modes)
+    (sym (plateListExact W))
+    (Finite.mapMember
+      (coordinateToMode W)
+      (Enum.exhaustive (enumeration W) k n p))
 
 record ReverseRegulatorEnumerationObligations : Set where
   field
-    finiteBoundsExtractedFromCutoff : Set
+    finiteCoordinateEnumerationChosen : Set
     finiteCoordinateToPhysicalModeMap : Set
+    literalPlateListIsMappedEnumeration : Set
     modeIndexCompatibility : Set
     cutoffPredicateCompatibility : Set
-    literalPlateListCoverage : Set
 
 open ReverseRegulatorEnumerationObligations public
 
-data RegulatorListAutomaticallyExhaustiveBecauseFinite : Set where
+data ExactMappedEnumerationAutomaticallyProvesContinuumCompleteness : Set where
 
-finiteListNeedsCoverageProof :
-  RegulatorListAutomaticallyExhaustiveBecauseFinite → ⊥
-finiteListNeedsCoverageProof ()
+finiteMappedCoverageDoesNotProveContinuumCompleteness :
+  ExactMappedEnumerationAutomaticallyProvesContinuumCompleteness → ⊥
+finiteMappedCoverageDoesNotProveContinuumCompleteness ()
