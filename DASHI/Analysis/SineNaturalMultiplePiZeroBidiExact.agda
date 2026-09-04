@@ -1,6 +1,7 @@
 module DASHI.Analysis.SineNaturalMultiplePiZeroBidiExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; trans; cong; cong₂)
 
 import DASHI.Analysis.ConstructiveRealSpine as R
@@ -105,5 +106,5 @@ open ReverseSineZeroClassificationWeld public
 data ForwardZerosAutomaticallyGiveReverseClassification : Set where
 
 forwardDoesNotProveExhaustiveness :
-  ForwardZerosAutomaticallyGiveReverseClassification → DASHI.Core.Prelude.⊥
+  ForwardZerosAutomaticallyGiveReverseClassification → ⊥
 forwardDoesNotProveExhaustiveness ()
