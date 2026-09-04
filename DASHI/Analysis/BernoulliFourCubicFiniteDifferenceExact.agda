@@ -1,7 +1,8 @@
 module DASHI.Analysis.BernoulliFourCubicFiniteDifferenceExact where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Empty using (⊥)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
@@ -73,5 +74,5 @@ buildCubicBernoulliFiniteDifferenceReceipt x = record
 data FiniteDifferenceAutomaticallyProvesZetaContinuation : Set where
 
 finiteBernoulliAlgebraIsNotAnalyticContinuation :
-  FiniteDifferenceAutomaticallyProvesZetaContinuation → DASHI.Core.Prelude.⊥
+  FiniteDifferenceAutomaticallyProvesZetaContinuation → ⊥
 finiteBernoulliAlgebraIsNotAnalyticContinuation ()
