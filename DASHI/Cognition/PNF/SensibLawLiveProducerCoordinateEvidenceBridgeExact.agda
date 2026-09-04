@@ -14,6 +14,7 @@ import DASHI.Cognition.PNF.SensibLawActiveRequirementExecutionPlannerExact as Pl
 import DASHI.Cognition.PNF.SensibLawDocumentDiscourseContextRefinementExact as Document
 import DASHI.Cognition.PNF.SensibLawScopeCompositionBidiExact as Scope
 import DASHI.Cognition.PNF.SensibLawParticipantLegalRoleWrongTypeBidiExact as LegalRole
+import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExact as Legal
 
 infix 4 _∈_
 data _∈_ {A : Set} (x : A) : List A → Set where
@@ -43,6 +44,20 @@ record ApplicabilityReceiptInState (state : Status.SemanticCommitmentState) : Se
     exactMembership : Status.legalStatus receipt ∈ Status.legalStatuses state
     receiptReference : String
 open ApplicabilityReceiptInState public
+
+record ViolationReceiptInState (state : Status.SemanticCommitmentState) : Set where
+  constructor violationReceiptInState
+  field
+    receipt : Legal.ViolationReceipt
+    legalStatus : Status.LegalStatusProduct
+    legalStatusMembership : legalStatus ∈ Status.legalStatuses state
+    resultingViolationMatches :
+      Status.violation legalStatus ≡ Legal.resultingViolation receipt
+    applicabilityPreserved :
+      Status.applicability legalStatus
+      ≡ Legal.resultingApplicability (Legal.applicabilityReceipt receipt)
+    receiptReference : String
+open ViolationReceiptInState public
 
 record DocumentContextReceiptInState (state : Status.SemanticCommitmentState) : Set where
   constructor documentContextReceiptInState
@@ -113,6 +128,9 @@ legalRoleReceiptPaysActiveCoordinate same owned = Planner.coordinateEvidenceRece
 applicabilityReceiptPaysActiveCoordinate : ∀ {state active} → Demand.coordinate active ≡ Demand.applicabilityCoordinate → ApplicabilityReceiptInState state → Planner.CoordinateEvidenceReceipt state active
 applicabilityReceiptPaysActiveCoordinate same owned = Planner.coordinateEvidenceReceipt Planner.currentResolved (ApplicabilityReceiptInState.receiptReference owned ∷ []) "ApplicabilityResolutionReceipt + exact current-state membership" true refl true refl
 
+violationReceiptPaysActiveCoordinate : ∀ {state active} → Demand.coordinate active ≡ Demand.violationCoordinate → ViolationReceiptInState state → Planner.CoordinateEvidenceReceipt state active
+violationReceiptPaysActiveCoordinate same owned = Planner.coordinateEvidenceReceipt Planner.currentResolved (ViolationReceiptInState.receiptReference owned ∷ []) "ViolationReceipt + exact legal-status snapshot membership" true refl true refl
+
 documentContextReceiptPaysActiveCoordinate : ∀ {state active} → Demand.coordinate active ≡ Demand.documentContextCoordinate → DocumentContextReceiptInState state → Planner.CoordinateEvidenceReceipt state active
 documentContextReceiptPaysActiveCoordinate same owned = Planner.coordinateEvidenceReceipt Planner.currentResolved (DocumentContextReceiptInState.frameReference owned ∷ []) "typed DocumentDiscourseFrame + exact contextual proposition membership" true refl true refl
 
@@ -166,6 +184,7 @@ data ScopeReceiptForOtherEventPaysResolvedScope : Set where
 data PartiallyResolvedScopePaysResolvedScope : Set where
 data LegalRoleWeldWithoutStateSubjectPaysRole : Set where
 data LegalRoleWeldForOtherEventPaysRole : Set where
+data ViolationReceiptWithoutMatchingStatusPaysViolation : Set where
 
 otherPropositionReceiptDoesNotPay : ReceiptAboutOtherPropositionPaysRequirement → ⊥
 otherPropositionReceiptDoesNotPay ()
@@ -187,6 +206,8 @@ legalRoleWeldWithoutSubjectMembershipDoesNotPay : LegalRoleWeldWithoutStateSubje
 legalRoleWeldWithoutSubjectMembershipDoesNotPay ()
 legalRoleWeldForOtherEventDoesNotPay : LegalRoleWeldForOtherEventPaysRole → ⊥
 legalRoleWeldForOtherEventDoesNotPay ()
+violationReceiptWithoutMatchingStatusDoesNotPay : ViolationReceiptWithoutMatchingStatusPaysViolation → ⊥
+violationReceiptWithoutMatchingStatusDoesNotPay ()
 
 record LiveProducerCoordinateEvidenceBoundary : Set where
   constructor live-producer-coordinate-evidence-boundary
@@ -200,6 +221,7 @@ record LiveProducerCoordinateEvidenceBoundary : Set where
     resolvedScopeRequiresSamePropositionAndEvent : Bool
     resolvedScopeRequiresAllScopeAxesResolved : Bool
     resolvedLegalRoleRequiresSameSubjectAndEvent : Bool
+    violationReceiptRequiresMatchingLegalStatusSnapshot : Bool
     parserCandidateMayPayAuthorityCoordinate : Bool
 canonicalLiveProducerCoordinateEvidenceBoundary : LiveProducerCoordinateEvidenceBoundary
-canonicalLiveProducerCoordinateEvidenceBoundary = live-producer-coordinate-evidence-boundary true false true true true false true true true false
+canonicalLiveProducerCoordinateEvidenceBoundary = live-producer-coordinate-evidence-boundary true false true true true false true true true true false
