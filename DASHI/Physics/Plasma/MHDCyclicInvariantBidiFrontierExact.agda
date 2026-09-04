@@ -3,7 +3,7 @@ module DASHI.Physics.Plasma.MHDCyclicInvariantBidiFrontierExact where
 open import DASHI.Core.Prelude
 
 ------------------------------------------------------------------------
--- CYCLIC INVARIANT FRONTIER AFTER EXACT EXCHANGE-COMPATIBLE TRANSFER LIFT
+-- CYCLIC INVARIANT FRONTIER AFTER EXACT PROJECTED ELSASSER CLOSURE
 ------------------------------------------------------------------------
 
 record MHDCyclicInvariantBidiFrontier : Set where
@@ -17,54 +17,70 @@ record MHDCyclicInvariantBidiFrontier : Set where
     nsMhdPreNormTheoremShapeBridgeOwnedIsTrue :
       nsMhdPreNormTheoremShapeBridgeOwned ≡ true
 
-    threeOutputCyclicCarrierOwned : Bool
-    threeOutputCyclicCarrierOwnedIsTrue :
-      threeOutputCyclicCarrierOwned ≡ true
-
     couplingExchangeAntisymmetryShapeOwned : Bool
     couplingExchangeAntisymmetryShapeOwnedIsTrue :
       couplingExchangeAntisymmetryShapeOwned ≡ true
 
-    exchangeCompatiblePayloadToFullTransferSkewOwned : Bool
-    exchangeCompatiblePayloadToFullTransferSkewOwnedIsTrue :
-      exchangeCompatiblePayloadToFullTransferSkewOwned ≡ true
+    transverseLerayRemovalOwned : Bool
+    transverseLerayRemovalOwnedIsTrue : transverseLerayRemovalOwned ≡ true
 
-    literalMhdPayloadExchangeProducerOwned : Bool
-    literalMhdPayloadExchangeProducerOwnedIsFalse :
-      literalMhdPayloadExchangeProducerOwned ≡ false
+    hermitianConjugatePayloadExchangeOwned : Bool
+    hermitianConjugatePayloadExchangeOwnedIsTrue :
+      hermitianConjugatePayloadExchangeOwned ≡ true
 
-    threePairExactCancellationCompilerOwned : Bool
-    threePairExactCancellationCompilerOwnedIsTrue :
-      threePairExactCancellationCompilerOwned ≡ true
+    derivativeFactorAntisymmetryReuseOwned : Bool
+    derivativeFactorAntisymmetryReuseOwnedIsTrue :
+      derivativeFactorAntisymmetryReuseOwned ≡ true
 
-    literalMHDPlusSkewExchangeDecompositionOwned : Bool
-    literalMHDPlusSkewExchangeDecompositionOwnedIsFalse :
-      literalMHDPlusSkewExchangeDecompositionOwned ≡ false
+    twoFieldOrderedRealityPairCancellationOwned : Bool
+    twoFieldOrderedRealityPairCancellationOwnedIsTrue :
+      twoFieldOrderedRealityPairCancellationOwned ≡ true
 
-    literalMHDMinusSkewExchangeDecompositionOwned : Bool
-    literalMHDMinusSkewExchangeDecompositionOwnedIsFalse :
-      literalMHDMinusSkewExchangeDecompositionOwned ≡ false
+    twoFieldThreeLegNormalFormCancellationOwned : Bool
+    twoFieldThreeLegNormalFormCancellationOwnedIsTrue :
+      twoFieldThreeLegNormalFormCancellationOwned ≡ true
 
-    literalPressureProjectionCancellationOwned : Bool
-    literalPressureProjectionCancellationOwnedIsFalse :
-      literalPressureProjectionCancellationOwned ≡ false
+    literalProjectedElsasserInteractionOwned : Bool
+    literalProjectedElsasserInteractionOwnedIsTrue :
+      literalProjectedElsasserInteractionOwned ≡ true
+
+    projectedInteractionNormalFormReductionOwned : Bool
+    projectedInteractionNormalFormReductionOwnedIsTrue :
+      projectedInteractionNormalFormReductionOwned ≡ true
+
+    projectedThreeLegCancellationOwned : Bool
+    projectedThreeLegCancellationOwnedIsTrue :
+      projectedThreeLegCancellationOwned ≡ true
+
+    plusProjectedPseudoEnergyCancellationOwned : Bool
+    plusProjectedPseudoEnergyCancellationOwnedIsTrue :
+      plusProjectedPseudoEnergyCancellationOwned ≡ true
+
+    minusProjectedPseudoEnergyCancellationOwned : Bool
+    minusProjectedPseudoEnergyCancellationOwnedIsTrue :
+      minusProjectedPseudoEnergyCancellationOwned ≡ true
+
+    literalElsasserPdeToProjectedFourierWeldOwned : Bool
+    literalElsasserPdeToProjectedFourierWeldOwnedIsFalse :
+      literalElsasserPdeToProjectedFourierWeldOwned ≡ false
 
     pseudoEnergyZeroToEnergyCrossHelicityExactOwned : Bool
     pseudoEnergyZeroToEnergyCrossHelicityExactOwnedIsTrue :
       pseudoEnergyZeroToEnergyCrossHelicityExactOwned ≡ true
 
-    totalEnergyLiteralTriadConservationOwned : Bool
-    totalEnergyLiteralTriadConservationOwnedIsFalse :
-      totalEnergyLiteralTriadConservationOwned ≡ false
+    totalEnergyLiteralPdeTriadConservationOwned : Bool
+    totalEnergyLiteralPdeTriadConservationOwnedIsFalse :
+      totalEnergyLiteralPdeTriadConservationOwned ≡ false
 
-    crossHelicityLiteralTriadConservationOwned : Bool
-    crossHelicityLiteralTriadConservationOwnedIsFalse :
-      crossHelicityLiteralTriadConservationOwned ≡ false
+    crossHelicityLiteralPdeTriadConservationOwned : Bool
+    crossHelicityLiteralPdeTriadConservationOwnedIsFalse :
+      crossHelicityLiteralPdeTriadConservationOwned ≡ false
 
 canonicalMHDCyclicInvariantBidiFrontier : MHDCyclicInvariantBidiFrontier
 canonicalMHDCyclicInvariantBidiFrontier =
   mhd-cyclic-invariant-bidi-frontier
+    true refl true refl true refl
+    true refl true refl true refl
     true refl true refl true refl true refl
-    true refl false refl true refl
-    false refl false refl false refl
-    true refl false refl false refl
+    true refl true refl true refl true refl true refl
+    false refl true refl false refl false refl
