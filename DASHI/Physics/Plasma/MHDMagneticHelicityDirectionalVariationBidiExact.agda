@@ -6,9 +6,8 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
-import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
+import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAlgebraProgram as Hermitian
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as Scaling
-import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws as Additive
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as Normalized
 import DASHI.Physics.Plasma.MHDMagneticVectorPotentialHelicalObserverExact as Observer
@@ -56,18 +55,13 @@ vectorPotentialSelfAdjoint {F = F} E I S L k u v transverseU transverseV =
                 (Helical.curlSymbolSelfAdjointOnTransverse
                   L k u v transverseU transverseV)))))
         (trans
-          (sym
-            (Scaling.complexMultiplyAssociative
-              inverseC inverseC
-              (C3.hermitianPairing3 u (Helical.curlSymbol E k v))))
-          (trans
-            (cong (C3.complexMultiply inverseC)
-              (sym
-                (Scaling.hermitianPairingScaleRight inverseC
-                  u (Helical.curlSymbol E k v))))
+          (cong (C3.complexMultiply inverseC)
             (sym
               (Scaling.hermitianPairingScaleRight inverseC
-                u (Normalized.normalizedCurl E S k v)))))))
+                u (Helical.curlSymbol E k v))))
+          (sym
+            (Scaling.hermitianPairingScaleRight inverseC
+              u (Normalized.normalizedCurl E S k v))))))
   where
   inverseC = C3.realEmbed F (Helical.inverseModeNorm S k)
 
@@ -118,13 +112,19 @@ magneticHelicityVariationSymmetricForm
           (Observer.magneticVectorPotentialMode E S k magnetic))))
     (trans
       (cong C3.complexRealPart
-        (vectorPotentialSelfAdjoint
-          E I S L k magnetic tangent transverseMagnetic transverseTangent))
-      (cong C3.complexRealPart
         (sym
-          (C3.hermitianPairingConjugateSymmetric
-            tangent
-            (Observer.magneticVectorPotentialMode E S k magnetic)))))
+          (vectorPotentialSelfAdjoint
+            E I S L k magnetic tangent transverseMagnetic transverseTangent)))
+      (trans
+        (sym
+          (Hermitian.complexRealPartConjugateInvariant
+            (C3.hermitianPairing3
+              (Observer.magneticVectorPotentialMode E S k magnetic)
+              tangent)))
+        (cong C3.complexRealPart
+          (Hermitian.hermitianPairingConjugateSymmetric
+            (Observer.magneticVectorPotentialMode E S k magnetic)
+            tangent))))
 
 record MagneticHelicityVariationBoundary : Set where
   constructor magnetic-helicity-variation-boundary
