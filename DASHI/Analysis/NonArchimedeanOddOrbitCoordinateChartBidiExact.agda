@@ -18,6 +18,7 @@ module DASHI.Analysis.NonArchimedeanOddOrbitCoordinateChartBidiExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Product using (_×_)
 
 record CardinalityProductChart : Set₁ where
   field
@@ -80,17 +81,25 @@ record OrbitChartBoundary : Set where
   constructor orbitChartBoundary
   field
     sourceCardinalityProductEquivalenceOwned : Bool
-    sourceTwoOddCyclesMathematicsOwned : Bool
+    sourceOrderOfThreeOwned : Bool
+    sourceOddResidueCardinalityOwned : Bool
+    exportedCanonicalTwoOrbitPartitionLocated : Bool
     sourceProductEquivalenceIsDefinitionallyOddOrbitChart : Bool
     explicitProductToOrbitSameObjectWeldOwned : Bool
     equalCardinalityMayPromoteOrbitSemantics : Bool
 
 canonicalOrbitChartBoundary : OrbitChartBoundary
 canonicalOrbitChartBoundary =
-  orbitChartBoundary true true false false false
+  orbitChartBoundary true true true false false false false
 
 cardinalityDoesNotSupplyOrbitSemantics :
   OrbitChartBoundary.equalCardinalityMayPromoteOrbitSemantics
     canonicalOrbitChartBoundary
   ≡ false
 cardinalityDoesNotSupplyOrbitSemantics = refl
+
+canonicalPartitionStillNeedsExportedProducer :
+  OrbitChartBoundary.exportedCanonicalTwoOrbitPartitionLocated
+    canonicalOrbitChartBoundary
+  ≡ false
+canonicalPartitionStillNeedsExportedProducer = refl
