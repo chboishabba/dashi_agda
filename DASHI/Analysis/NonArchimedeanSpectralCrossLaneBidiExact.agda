@@ -2,17 +2,6 @@ module DASHI.Analysis.NonArchimedeanSpectralCrossLaneBidiExact where
 
 ------------------------------------------------------------------------
 -- Cross-lane BIDI x-pollination.
---
--- The source repo contributes a compact finite example of a general DASHI
--- discipline already used elsewhere:
---
---   preserve phase / sign / channel data
---   -> pair or quotient by the relevant symmetry
---   -> only then project to a scalar invariant.
---
--- This module exports that structural law without identifying the dyadic
--- cyclotomic carrier with the existing C3 carrier, and without identifying
--- character-space transport with spatial dynamics.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -33,27 +22,22 @@ canonicalSignedBeforeNormDiscipline : SignedBeforeNormDiscipline
 canonicalSignedBeforeNormDiscipline =
   signedBeforeNormDiscipline true true true false
 
-------------------------------------------------------------------------
--- Existing C3 owner supplies an exact witness that the structural law is
--- already native to DASHI: x * conjugate(x) lands on the norm axis only after
--- conjugation has been retained explicitly.
-------------------------------------------------------------------------
-
 c3PairThenNormWitness : (x : C3.Cyclotomic3) →
   C3.multiply x (C3.conjugate x) ≡ C3.embedRational (C3.norm x)
 c3PairThenNormWitness = C3.multiplyByConjugateLandsOnNorm
 
 ------------------------------------------------------------------------
--- Existing adic bridge supplies the same-object firewall: an exact transport
--- relation may still only be a projected shadow of another representation.
+-- Reuse the adic bridge's exported governance boundary directly.  This keeps
+-- the cross-pollination independent of the private alias used inside that
+-- module while preserving the exact projected-shadow != definitional-identity
+-- discipline.
 ------------------------------------------------------------------------
 
-adicProjectedShadowFirewall :
-  ∀ {H A B G S} →
-  (bridge : Adic.Adic.HypervoxelAdicYoungFibonacciBridge H A B G S) →
-  Adic.Adic.HypervoxelAdicYoungFibonacciBridge.relation bridge
-    ≡ Adic.Adic.projectedShadow
-adicProjectedShadowFirewall = Adic.adicBridgeRemainsProjectedShadow
+adicProjectedShadowIsNotDefinitionalIdentity :
+  Adic.AdicArgumentTransportBoundary.projectedShadowEqualsDefinitionalIdentity
+    Adic.canonicalAdicArgumentTransportBoundary
+  ≡ false
+adicProjectedShadowIsNotDefinitionalIdentity = refl
 
 record CrossLaneFirewall : Set where
   constructor crossLaneFirewall
@@ -67,11 +51,6 @@ canonicalCrossLaneFirewall : CrossLaneFirewall
 canonicalCrossLaneFirewall =
   crossLaneFirewall true false false false
 
-------------------------------------------------------------------------
--- BIDI export: if a downstream consumer asks for a scalar norm theorem but
--- cancellation depends on signed/conjugate channels, the reverse search must
--- reopen the pre-norm representation rather than estimate the scalar harder.
-------------------------------------------------------------------------
 
 data ReverseRepair : Set where
   reopenSignedChannels : ReverseRepair
