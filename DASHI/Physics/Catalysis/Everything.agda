@@ -1,3 +1,4 @@
 module DASHI.Physics.Catalysis.Everything where
 
 import DASHI.Physics.Catalysis.HighEntropyMBeneMechanismHyperfabricExact
+import DASHI.Physics.Catalysis.HighEntropyMBeneResidualScalingEscapeBidiExact
