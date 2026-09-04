@@ -8,14 +8,18 @@ This pass tests the BIDI critical-knowledge hypothesis using local responsibilit
 
 MIT's PSFC profile identifies Loureiro as both PSFC director and head of the Loureiro Group. MIT's memorial material records multiple current graduate students who describe him as their advisor, and records Cristina Rea saying Loureiro entrusted her with a division-head role. MIT's faculty directory also shows that the PSFC already had a separate Head of Plasma Theory and Computation, Paul Bonoli.
 
+A Journal of Plasma Physics paper by Dion Li, Zhuo Liu, and Loureiro was published online on 27 February 2026, with Dion Li as corresponding author. MIT's PSFC repository dates the underlying manuscript to May 2025 and records DOE/NSF-supported computing and fellowship resources. This is evidence that at least one Loureiro-linked research product survived through publication after his death, but it is not itself a successor/adviser receipt.
+
 Sources:
 - MIT PSFC Loureiro profile: https://www-new.psfc.mit.edu/people/faculty/nuno-loureiro
 - MIT News memorial, 16 Dec 2025: https://news.mit.edu/2025/nuno-loureiro-professor-director-plasma-science-and-fusion-center-dies-1216
 - MIT PSFC faculty/senior scientists directory: https://www-new.psfc.mit.edu/people/faculty
+- Dion Li, Zhuo Liu, Nuno F. Loureiro, 'Role of ion acoustic instability in magnetic reconnection', Journal of Plasma Physics, published online 27 Feb 2026, DOI 10.1017/S002237782510113X
+- MIT PSFC report PSFC/JA-25-49, manuscript dated May 2025
 
 ### BIDI effect
 
-This narrows the reverse search. Loureiro was not the only senior plasma-theory authority at PSFC, but he did have a distinct personal research group and active advisees. Therefore the decisive replacement question is not 'who replaced the director?' or 'who heads plasma theory generally?' It is:
+This narrows the reverse search. Loureiro was not the only senior plasma-theory authority at PSFC, but he did have a distinct personal research group and active advisees. At least one group-linked research output crossed the publication boundary after his death. Therefore the decisive replacement question is not 'who replaced the director?' or 'who heads plasma theory generally?' It is:
 
 - who became formal adviser/PI for the Loureiro Group's active projects and students;
 - whether specific proposals, grants, code/theory projects, or unpublished work were reassigned;
@@ -24,6 +28,7 @@ This narrows the reverse search. Loureiro was not the only senior plasma-theory 
 Current status:
 - centre leadership replacement: SOURCEBACKED;
 - general plasma-theory institutional redundancy: PARTIAL/SOURCEBACKED;
+- one posthumous research-output continuity receipt: SOURCEBACKED;
 - personal research-group replacement: LIVE;
 - uniqueness/nonpublicness of his knowledge: LIVE.
 
@@ -119,23 +124,28 @@ Current status:
 
 ## William Neil McCasland
 
-The public record still supports McCasland's post-Air-Force role as Director of Technology at Applied Technology Associates, with technology identification/development, strategy, and IRAD responsibilities described in organizational biographies/announcements. Public search in this pass did not locate a primary post-February-2026 announcement naming a successor or transfer of those responsibilities.
+The Hertz Foundation's current profile lists McCasland as Director of Technology at Applied Technology Associates and states that he was responsible for technology identification and development across ATA competencies and applications and for setting technology-development vision and strategy with strategic-development and business-development directors. A Hertz workshop biography gives the same description. These are stronger role receipts than generic retrospective reporting, but the current public pass still does not establish the exact status of that role on 27 February 2026 or identify a post-disappearance successor.
+
+Sources:
+- Hertz Foundation profile: https://www.hertzfoundation.org/people/w-mccasland/
+- Hertz Foundation 2019 Summer Workshop agenda/biography
 
 Secondary investigative pages sometimes claim a direct BlueHalo continuation through 2026, but those claims are not used here as primary role-transfer evidence.
 
 ### BIDI effect
 
-McCasland remains the strongest integration-breadth case, but the event-time criticality claim cannot close until the ATA/BlueHalo ownership chain and post-disappearance responsibility transfer are source-backed.
+McCasland remains the strongest integration-breadth case. The role description is substantive enough to justify a criticality test because it covers technology identification, development, and portfolio strategy rather than merely a ceremonial title. However, the event-time criticality claim cannot close until the ATA/BlueHalo ownership chain and post-disappearance responsibility transfer are source-backed.
 
 Reverse obligations:
 - primary employer confirmation of his active role at disappearance;
 - successor to Director of Technology / equivalent technology-strategy function;
-- IRAD portfolio ownership before/after 27 Feb 2026;
+- IRAD/technology portfolio ownership before/after 27 Feb 2026;
 - any measurable technology-programme change attributable to the transition.
 
 Current status:
 - historical integration breadth: STRONG SOURCEBACKED;
-- event-time role: PARTIAL;
+- post-retirement technology-strategy responsibilities: SOURCEBACKED;
+- exact event-time role status: PARTIAL;
 - successor: NOT LOCATED;
 - replacement difficulty: LIVE.
 
