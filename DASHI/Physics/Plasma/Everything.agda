@@ -56,3 +56,5 @@ import DASHI.Physics.Plasma.MHDElsasserProjectedNonlinearCoefficientExact
 import DASHI.Physics.Plasma.MHDElsasserProjectedThreeLegCancellationExact
 import DASHI.Physics.Plasma.MHDPlusMinusProjectedPseudoEnergyExact
 import DASHI.Physics.Plasma.MHDElsasserPDEProjectedFourierWeldBidiExact
+import DASHI.Physics.Plasma.MHDLiteralIdealElsasserGalerkinDynamicsExact
+import DASHI.Physics.Plasma.MHDLiteralIdealEnergyCrossHelicityTriadConservationExact
