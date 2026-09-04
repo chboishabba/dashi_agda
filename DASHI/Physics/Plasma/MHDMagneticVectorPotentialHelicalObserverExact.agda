@@ -2,12 +2,11 @@ module DASHI.Physics.Plasma.MHDMagneticVectorPotentialHelicalObserverExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Primitive using (Level)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
-import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
 import DASHI.Physics.Closure.NSTriadKNLerayOutputTransversalityRound30Exact as LerayOut
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as Normalized
@@ -176,30 +175,33 @@ normalizedCurlMinusIsNegation {F = F} E I S L k C value =
     Field.complex3Ext (coordinate x) (coordinate y) (coordinate z)
     where
     invC = C3.realEmbed F inverse
+    radC = C3.realEmbed F radius
     negRadC = C3.realEmbed F (C3.negate F radius)
+
+    negativeProduct :
+      C3.complexMultiply invC negRadC
+      ≡ C3.complexNegate (C3.complexOne F)
+    negativeProduct =
+      trans
+        (cong (C3.complexMultiply invC)
+          (sym (C3.realEmbedNegate F radius)))
+        (trans
+          (Field.complexNegateMultiplyRight invC radC)
+          (cong C3.complexNegate
+            (embeddedRadiusInverse radius inverse inverseLaw)))
 
     coordinate : (c : C3.Complex F) →
       C3.complexMultiply invC (C3.complexMultiply negRadC c)
       ≡ C3.complexNegate c
     coordinate c =
-      Q.solve 3
-        (λ inv negRadius c →
-          inv Q.⊗ (negRadius Q.⊗ c)
-          Q.⊜ (Q.⊝ c))
-        scalarWitness invC negRadC c
-      where
-      module Q = Ring.Solver F
-      scalarWitness :
-        C3.complexMultiply invC negRadC
-        ≡ C3.complexNegate (C3.complexOne F)
-      scalarWitness =
-        trans
-          (cong (C3.complexMultiply invC)
-            (C3.realEmbedNegate F radius))
+      trans
+        (sym (Field.complexMultiplyAssociative invC negRadC c))
+        (trans
+          (cong (λ coefficient → C3.complexMultiply coefficient c)
+            negativeProduct)
           (trans
-            (Field.complexNegateMultiplyRight invC (C3.realEmbed F radius))
-            (cong C3.complexNegate
-              (embeddedRadiusInverse radius inverse inverseLaw)))
+            (Field.complexNegateMultiplyLeft (C3.complexOne F) c)
+            (cong C3.complexNegate (C3.complexMultiplyOneLeft F c))))
 
 record MagneticHelicityObserverBoundary : Set where
   constructor magnetic-helicity-observer-boundary
