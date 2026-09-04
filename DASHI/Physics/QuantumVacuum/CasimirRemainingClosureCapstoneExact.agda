@@ -5,11 +5,13 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.QuantumVacuum.CasimirBishopSetoidBackendReuseExact
 import DASHI.Physics.QuantumVacuum.PerfectConductorPlateModePDECutsetExact
+import DASHI.Physics.QuantumVacuum.PerfectConductorLongitudinalQuantisationHighestAlphaExact
 import DASHI.Physics.QuantumVacuum.CasimirRadialMeasureOneSixthCutsetExact
 import DASHI.Physics.QuantumVacuum.CasimirOneSixthFactorisationExact
 import DASHI.Physics.QuantumVacuum.CasimirRegulatorDominatedTailCutsetExact
 import DASHI.Analysis.ZetaMinusThreeAnalyticCutsetExact
 import DASHI.Analysis.ZetaMinusThreeSourceAuthorityExact
+import DASHI.Analysis.SineZeroClassificationSourceAuthorityExact
 import DASHI.Physics.QuantumVacuum.BrownMaclayParallelPlateSourceAuthorityExact
 import DASHI.Physics.QuantumVacuum.CasimirPressureDerivativeSameObjectCompletionExact
 
@@ -30,14 +32,21 @@ record RemainingClosureStatus : Set where
 
     brownMaclaySameSystemSourceBacked : Bool
     zetaMinusThreeSourceBacked : Bool
+    sineZeroClassificationSourceBacked : Bool
     oneSixthDenominatorCompilerOwned : Bool
+    longitudinalEndpointReductionOwned : Bool
+    bishopAmplitudeCancellationOwned : Bool
+    bishopDivisionTransportOwned : Bool
+    cubicDerivativeFactorThreeOwned : Bool
 
     legacyPropositionalWeldClosed : Bool
     maxwellPDEClosed : Bool
     teTmCompletenessClosed : Bool
+    sineZeroSameObjectTransportClosed : Bool
+    physicalLongitudinalModeIndexWeldClosed : Bool
     polarMeasureClosed : Bool
     angularHalfClosed : Bool
-    radialThirdClosed : Bool
+    radialThirdEndpointClosed : Bool
     radialOneSixthClosed : Bool
     dominationInterchangeClosed : Bool
     regulatorTailClosed : Bool
@@ -56,17 +65,23 @@ record RemainingClosureStatus : Set where
     zetaMinusThreeCutsetIsTrue : zetaMinusThreeCutset ≡ true
     pressureDerivativeCutsetIsTrue : pressureDerivativeCutset ≡ true
 
-    brownMaclaySameSystemSourceBackedIsTrue :
-      brownMaclaySameSystemSourceBacked ≡ true
+    brownMaclaySameSystemSourceBackedIsTrue : brownMaclaySameSystemSourceBacked ≡ true
     zetaMinusThreeSourceBackedIsTrue : zetaMinusThreeSourceBacked ≡ true
+    sineZeroClassificationSourceBackedIsTrue : sineZeroClassificationSourceBacked ≡ true
     oneSixthDenominatorCompilerOwnedIsTrue : oneSixthDenominatorCompilerOwned ≡ true
+    longitudinalEndpointReductionOwnedIsTrue : longitudinalEndpointReductionOwned ≡ true
+    bishopAmplitudeCancellationOwnedIsTrue : bishopAmplitudeCancellationOwned ≡ true
+    bishopDivisionTransportOwnedIsTrue : bishopDivisionTransportOwned ≡ true
+    cubicDerivativeFactorThreeOwnedIsTrue : cubicDerivativeFactorThreeOwned ≡ true
 
     legacyPropositionalWeldClosedIsFalse : legacyPropositionalWeldClosed ≡ false
     maxwellPDEClosedIsFalse : maxwellPDEClosed ≡ false
     teTmCompletenessClosedIsFalse : teTmCompletenessClosed ≡ false
+    sineZeroSameObjectTransportClosedIsFalse : sineZeroSameObjectTransportClosed ≡ false
+    physicalLongitudinalModeIndexWeldClosedIsFalse : physicalLongitudinalModeIndexWeldClosed ≡ false
     polarMeasureClosedIsFalse : polarMeasureClosed ≡ false
     angularHalfClosedIsFalse : angularHalfClosed ≡ false
-    radialThirdClosedIsFalse : radialThirdClosed ≡ false
+    radialThirdEndpointClosedIsFalse : radialThirdEndpointClosed ≡ false
     radialOneSixthClosedIsFalse : radialOneSixthClosed ≡ false
     dominationInterchangeClosedIsFalse : dominationInterchangeClosed ≡ false
     regulatorTailClosedIsFalse : regulatorTailClosed ≡ false
@@ -88,13 +103,20 @@ canonicalRemainingClosureStatus = record
   ; pressureDerivativeCutset = true
   ; brownMaclaySameSystemSourceBacked = true
   ; zetaMinusThreeSourceBacked = true
+  ; sineZeroClassificationSourceBacked = true
   ; oneSixthDenominatorCompilerOwned = true
+  ; longitudinalEndpointReductionOwned = true
+  ; bishopAmplitudeCancellationOwned = true
+  ; bishopDivisionTransportOwned = true
+  ; cubicDerivativeFactorThreeOwned = true
   ; legacyPropositionalWeldClosed = false
   ; maxwellPDEClosed = false
   ; teTmCompletenessClosed = false
+  ; sineZeroSameObjectTransportClosed = false
+  ; physicalLongitudinalModeIndexWeldClosed = false
   ; polarMeasureClosed = false
   ; angularHalfClosed = false
-  ; radialThirdClosed = false
+  ; radialThirdEndpointClosed = false
   ; radialOneSixthClosed = false
   ; dominationInterchangeClosed = false
   ; regulatorTailClosed = false
@@ -111,13 +133,20 @@ canonicalRemainingClosureStatus = record
   ; pressureDerivativeCutsetIsTrue = refl
   ; brownMaclaySameSystemSourceBackedIsTrue = refl
   ; zetaMinusThreeSourceBackedIsTrue = refl
+  ; sineZeroClassificationSourceBackedIsTrue = refl
   ; oneSixthDenominatorCompilerOwnedIsTrue = refl
+  ; longitudinalEndpointReductionOwnedIsTrue = refl
+  ; bishopAmplitudeCancellationOwnedIsTrue = refl
+  ; bishopDivisionTransportOwnedIsTrue = refl
+  ; cubicDerivativeFactorThreeOwnedIsTrue = refl
   ; legacyPropositionalWeldClosedIsFalse = refl
   ; maxwellPDEClosedIsFalse = refl
   ; teTmCompletenessClosedIsFalse = refl
+  ; sineZeroSameObjectTransportClosedIsFalse = refl
+  ; physicalLongitudinalModeIndexWeldClosedIsFalse = refl
   ; polarMeasureClosedIsFalse = refl
   ; angularHalfClosedIsFalse = refl
-  ; radialThirdClosedIsFalse = refl
+  ; radialThirdEndpointClosedIsFalse = refl
   ; radialOneSixthClosedIsFalse = refl
   ; dominationInterchangeClosedIsFalse = refl
   ; regulatorTailClosedIsFalse = refl
@@ -135,8 +164,8 @@ record ClosureOrder : Set where
 
 canonicalClosureOrder : ClosureOrder
 canonicalClosureOrder = record
-  { first = "close perfect-conductor Maxwell PDE/completeness; Brown-Maclay same-system result is source-backed but not a mode proof"
-  ; second = "close polar angular 1/2 + radial finite-part 1/3; denominator 2*3=6 is already compiler output"
+  { first = "close Maxwell wave/TE-TM completeness and same-object sine-zero transport; endpoint algebra, nonzero amplitude cancellation, and division by d are already owned"
+  ; second = "close polar angular 1/2 and regulated radial endpoint theorem; cubic factor three and denominator 2*3=6 are already owned"
   ; third = "close regulator estimates and internal zeta(-3) derivation / literal Casimir defect weld; DLMF special value is source-backed"
   ; fourth = "provide setoid-to-legacy kernel weld and compile pressure derivative"
   }
