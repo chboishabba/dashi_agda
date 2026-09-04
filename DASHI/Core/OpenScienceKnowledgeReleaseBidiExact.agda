@@ -94,24 +94,33 @@ record RestrictedToPublicTransfer (receipt : OpenScienceReceipt) : Set where
 open RestrictedToPublicTransfer public
 
 ------------------------------------------------------------------------
--- Viewpoint x-pollination.  These are parent/child semantic correspondences,
--- not automatic evidence promotion.  A V4/V5 viewpoint receipt still has to
--- satisfy its own provenance requirements before an open-science claim is made.
+-- Viewpoint x-pollination is PARTIAL, not total.
+--
+-- Only viewpoint coordinates whose semantics directly concern disclosure or
+-- secrecy can bridge into the open-science parent without a second independent
+-- receipt.  Fusion optimism, hidden-capability belief and exotic-propulsion
+-- belief do not by themselves establish openness.
 ------------------------------------------------------------------------
 
-viewpointParentAxis : V.ViewpointAxis → OpenScienceAxis
-viewpointParentAxis V.uapDisclosureSupport = disclosureOrTransparencyAdvocacy
-viewpointParentAxis V.suppressedOrExoticPropulsionBelief = suppressionOrSecrecyCritique
-viewpointParentAxis V.transformativeFusionEnergyExpectation = publicTechnicalEducation
-viewpointParentAxis V.secrecyOrClassificationCritique = suppressionOrSecrecyCritique
-viewpointParentAxis V.willingSensitiveTechnicalDisclosure = disclosureOrTransparencyAdvocacy
-viewpointParentAxis V.hiddenMajorCapabilityBelief = suppressionOrSecrecyCritique
+data ViewpointSupportsOpenAxis : V.ViewpointAxis → OpenScienceAxis → Set where
+  uapDisclosureSupportsTransparency :
+    ViewpointSupportsOpenAxis
+      V.uapDisclosureSupport
+      disclosureOrTransparencyAdvocacy
+  secrecyCritiqueSupportsOpenCritique :
+    ViewpointSupportsOpenAxis
+      V.secrecyOrClassificationCritique
+      suppressionOrSecrecyCritique
+  willingDisclosureSupportsTransparency :
+    ViewpointSupportsOpenAxis
+      V.willingSensitiveTechnicalDisclosure
+      disclosureOrTransparencyAdvocacy
 
 record ViewpointToOpenScienceBridge (v : V.ViewpointReceipt) (o : OpenScienceReceipt) : Set where
   constructor viewpoint-to-open-science-bridge
   field
     samePerson : V.person v ≡ person o
-    parentAxisAgrees : viewpointParentAxis (V.axis v) ≡ axis o
+    semanticBridge : ViewpointSupportsOpenAxis (V.axis v) (axis o)
     viewpointStrong : V.StrongViewpointClaim v
     bridgeReference : String
 
@@ -160,12 +169,20 @@ record OpenScienceBoundary : Set where
     institutionalPublicationProvesPersonalOpenScienceIdeology : Bool
     institutionalPublicationProvesPersonalOpenScienceIdeologyIsFalse :
       institutionalPublicationProvesPersonalOpenScienceIdeology ≡ false
+    fusionOptimismAutomaticallyMeansOpenScience : Bool
+    fusionOptimismAutomaticallyMeansOpenScienceIsFalse :
+      fusionOptimismAutomaticallyMeansOpenScience ≡ false
+    hiddenCapabilityBeliefAutomaticallyMeansOpenScience : Bool
+    hiddenCapabilityBeliefAutomaticallyMeansOpenScienceIsFalse :
+      hiddenCapabilityBeliefAutomaticallyMeansOpenScience ≡ false
     matchedControlsRequiredForOpenScienceEnrichment : Bool
     matchedControlsRequiredForOpenScienceEnrichmentIsTrue :
       matchedControlsRequiredForOpenScienceEnrichment ≡ true
 
 canonicalOpenScienceBoundary : OpenScienceBoundary
 canonicalOpenScienceBoundary = open-science-boundary
+  false refl
+  false refl
   false refl
   false refl
   false refl
