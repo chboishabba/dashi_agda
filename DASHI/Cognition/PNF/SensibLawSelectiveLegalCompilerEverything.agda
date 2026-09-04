@@ -21,10 +21,6 @@ import DASHI.Cognition.PNF.SensibLawLiveProducerCoordinateEvidenceBridgeExact as
 import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExact as Legal
 
-------------------------------------------------------------------------
--- FOCUSED SELECTIVE LEGAL COMPILER ROOT
-------------------------------------------------------------------------
-
 pdfReusesAttribution : Planner.action Pdf.attributionPlan ≡ Planner.reuseExisting
 pdfReusesAttribution = refl
 pdfReusesProposition : Planner.action Pdf.propositionPlan ≡ Planner.reuseExisting
@@ -63,10 +59,6 @@ liabilityRetainsCandidateViolation :
   ≡ Status.violationCandidate
 liabilityRetainsCandidateViolation = refl
 
-------------------------------------------------------------------------
--- Producer ownership remains separated.
-------------------------------------------------------------------------
-
 resolvedEvidenceHasDedicatedProducer :
   Routing.ProducerCanPopulate
     Cross.legalEvidenceResolutionProducer Demand.resolvedLegalEvidenceCoordinate
@@ -86,10 +78,6 @@ legalSourceAuthorityHasDedicatedProducer :
   Routing.ProducerCanPopulate
     Cross.legalSourceAuthorityProducer Demand.legalSourceAuthorityCoordinate
 legalSourceAuthorityHasDedicatedProducer = Routing.legalSourcePopulatesAuthority
-
-------------------------------------------------------------------------
--- Compiler-level hard boundaries.
-------------------------------------------------------------------------
 
 mixedApplicabilityReceiptsBlocked :
   ApplicabilityMeet.MixedObjectReceiptsAuthorizeApplicabilityMeet → ⊥
@@ -119,23 +107,17 @@ semanticAdmissionStillCannotBecomeLegalSourceAuthority :
   Authority.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
 semanticAdmissionStillCannotBecomeLegalSourceAuthority = Authority.semanticAdmissionDoesNotBecomeLegalSourceAuthority
 
-------------------------------------------------------------------------
--- State refinement is additive: later status snapshots retain earlier ones.
-------------------------------------------------------------------------
-
 priorViolationSnapshotRetained :
-  PaidViolation.postViolationLegalStatus Bridge.∈
-    Status.legalStatuses PaidLiability.postLiabilityState
+  Bridge._∈_
+    PaidViolation.postViolationLegalStatus
+    (Status.legalStatuses PaidLiability.postLiabilityState)
 priorViolationSnapshotRetained = PaidLiability.priorViolationSnapshotRetained
 
 priorApplicabilitySnapshotRetained :
-  PaidApplicability.fixtureLegalStatus Bridge.∈
-    Status.legalStatuses PaidLiability.postLiabilityState
+  Bridge._∈_
+    PaidApplicability.fixtureLegalStatus
+    (Status.legalStatuses PaidLiability.postLiabilityState)
 priorApplicabilitySnapshotRetained = PaidLiability.priorApplicabilitySnapshotRetained
-
-------------------------------------------------------------------------
--- Aggregate import is not a kernel receipt.
-------------------------------------------------------------------------
 
 data SelectiveLegalCompilerAggregateMeansKernelValidated : Set where
 
