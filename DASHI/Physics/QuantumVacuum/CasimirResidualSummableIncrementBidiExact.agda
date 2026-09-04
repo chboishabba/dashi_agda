@@ -1,6 +1,7 @@
 module DASHI.Physics.QuantumVacuum.CasimirResidualSummableIncrementBidiExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.SummableIncrementCauchyBidiExact as SumInc
@@ -19,7 +20,7 @@ import DASHI.Physics.QuantumVacuum.CasimirResidualCauchyToLimitExact as Residual
 record CasimirResidualSummableIncrement : Set₁ where
   field
     residualSequence : Spine.Sequence Residual.Real
-    residualAt : Agda.Builtin.Nat.Nat → Spine.Carrier Residual.Real
+    residualAt : Nat → Spine.Carrier Residual.Real
     sequenceIsResidual : ∀ n →
       Spine._≈_ Residual.Real
         (Spine.sequenceAt Residual.Real residualSequence n)
