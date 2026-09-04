@@ -3,7 +3,7 @@ module DASHI.Physics.Plasma.MHDCyclicInvariantBidiFrontierExact where
 open import DASHI.Core.Prelude
 
 ------------------------------------------------------------------------
--- CYCLIC INVARIANT FRONTIER AFTER PRE-NORM CROSS-POLLINATION
+-- CYCLIC INVARIANT FRONTIER AFTER EXACT EXCHANGE-COMPATIBLE TRANSFER LIFT
 ------------------------------------------------------------------------
 
 record MHDCyclicInvariantBidiFrontier : Set where
@@ -25,13 +25,17 @@ record MHDCyclicInvariantBidiFrontier : Set where
     couplingExchangeAntisymmetryShapeOwnedIsTrue :
       couplingExchangeAntisymmetryShapeOwned ≡ true
 
-    fullModalTransferSkewWeldOwned : Bool
-    fullModalTransferSkewWeldOwnedIsFalse :
-      fullModalTransferSkewWeldOwned ≡ false
+    exchangeCompatiblePayloadToFullTransferSkewOwned : Bool
+    exchangeCompatiblePayloadToFullTransferSkewOwnedIsTrue :
+      exchangeCompatiblePayloadToFullTransferSkewOwned ≡ true
 
-    threeOutputSkewDecompositionSocketOwned : Bool
-    threeOutputSkewDecompositionSocketOwnedIsTrue :
-      threeOutputSkewDecompositionSocketOwned ≡ true
+    literalMhdPayloadExchangeProducerOwned : Bool
+    literalMhdPayloadExchangeProducerOwnedIsFalse :
+      literalMhdPayloadExchangeProducerOwned ≡ false
+
+    threePairExactCancellationCompilerOwned : Bool
+    threePairExactCancellationCompilerOwnedIsTrue :
+      threePairExactCancellationCompilerOwned ≡ true
 
     literalMHDPlusSkewExchangeDecompositionOwned : Bool
     literalMHDPlusSkewExchangeDecompositionOwnedIsFalse :
@@ -45,9 +49,9 @@ record MHDCyclicInvariantBidiFrontier : Set where
     literalPressureProjectionCancellationOwnedIsFalse :
       literalPressureProjectionCancellationOwned ≡ false
 
-    pseudoEnergyToInvariantCompilerOwned : Bool
-    pseudoEnergyToInvariantCompilerOwnedIsTrue :
-      pseudoEnergyToInvariantCompilerOwned ≡ true
+    pseudoEnergyZeroToEnergyCrossHelicityExactOwned : Bool
+    pseudoEnergyZeroToEnergyCrossHelicityExactOwnedIsTrue :
+      pseudoEnergyZeroToEnergyCrossHelicityExactOwned ≡ true
 
     totalEnergyLiteralTriadConservationOwned : Bool
     totalEnergyLiteralTriadConservationOwnedIsFalse :
@@ -61,6 +65,6 @@ canonicalMHDCyclicInvariantBidiFrontier : MHDCyclicInvariantBidiFrontier
 canonicalMHDCyclicInvariantBidiFrontier =
   mhd-cyclic-invariant-bidi-frontier
     true refl true refl true refl true refl
-    false refl true refl
+    true refl false refl true refl
     false refl false refl false refl
     true refl false refl false refl
