@@ -12,7 +12,8 @@ module DASHI.Analysis.NonArchimedeanSpatialCharacterIntertwinerReuseExact where
 -- Here the fine carrier is the concrete spatial representation and the coarse
 -- carrier is the character/monomial representation.  An exact analyze/synthesize
 -- round trip plus the existing Intertwiner is sufficient to transport dynamics
--- back to the same spatial object.
+-- back to the same spatial object.  Literal power identities such as -2 I also
+-- require the rechart to preserve the relevant scalar action.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -23,12 +24,16 @@ record SpatialCharacterRechart : Set₁ where
   field
     Spatial : Set
     Character : Set
+    Scalar : Set
 
     analyze : Spatial → Character
     synthesize : Character → Spatial
 
     spatialStep : Spatial → Spatial
     characterStep : Character → Character
+
+    scaleSpatial : Scalar → Spatial → Spatial
+    scaleCharacter : Scalar → Character → Character
 
     synthesizeAnalyze :
       (state : Spatial) →
@@ -37,6 +42,12 @@ record SpatialCharacterRechart : Set₁ where
     analyzeSynthesize :
       (state : Character) →
       analyze (synthesize state) ≡ state
+
+    synthesizeScale :
+      (scalar : Scalar) →
+      (state : Character) →
+      synthesize (scaleCharacter scalar state)
+      ≡ scaleSpatial scalar (synthesize state)
 
     exactIntertwiner :
       Core.Intertwiner analyze analyze spatialStep characterStep
@@ -109,6 +120,30 @@ spatialIterateRecoveredFromCharacterIterate R n state =
     (synthesizeAnalyze R (iterate n (spatialStep R) state))
 
 ------------------------------------------------------------------------
+-- Character-space scalar power identities transport to literal spatial scalar
+-- power identities only because scalar action is part of the same-object weld.
+------------------------------------------------------------------------
+
+characterScalarPowerToSpatialScalarPower :
+  (R : SpatialCharacterRechart) →
+  (n : Nat) →
+  (scalar : Scalar R) →
+  ((state : Character R) →
+    iterate n (characterStep R) state
+    ≡ scaleCharacter R scalar state) →
+  (state : Spatial R) →
+  iterate n (spatialStep R) state
+  ≡ scaleSpatial R scalar state
+characterScalarPowerToSpatialScalarPower R n scalar characterPower state =
+  trans
+    (sym (spatialIterateRecoveredFromCharacterIterate R n state))
+    (trans
+      (cong (synthesize R) (characterPower (analyze R state)))
+      (trans
+        (synthesizeScale R scalar (analyze R state))
+        (cong (scaleSpatial R scalar) (synthesizeAnalyze R state))))
+
+------------------------------------------------------------------------
 -- BIDI cutset.  The generic monomial power theorem is downstream of this
 -- same-object rechart; period and orbit-weight receipts stay independent.
 ------------------------------------------------------------------------
@@ -128,6 +163,7 @@ record ExistingMachineryReuseBoundary : Set where
     newIntertwinerDatatypeRequired : Bool
     existingCoreIntertwinerReused : Bool
     exactAnalyzeSynthesizeRequired : Bool
+    scalarActionCompatibilityRequired : Bool
     spatialCarrierEqualsCharacterCarrierRequired : Bool
     periodMayBeCollapsedIntoIntertwiner : Bool
     weightMayBeCollapsedIntoIntertwiner : Bool
@@ -137,6 +173,7 @@ canonicalExistingMachineryReuseBoundary : ExistingMachineryReuseBoundary
 canonicalExistingMachineryReuseBoundary =
   existingMachineryReuseBoundary
     false
+    true
     true
     true
     false
