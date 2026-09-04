@@ -36,6 +36,15 @@ capabilitySelectorDesign = E.matched-reference-design
   "test whether portfolio/advisory/funding/security/intelligence observer surfaces identify roster members at a higher rate than matched peers"
   "common internet visibility is baseline and cannot itself count as the discriminating feature"
 
+openScienceReleaseDesign : E.MatchedReferenceDesign
+openScienceReleaseDesign = E.matched-reference-design
+  "roster members with source-backed technical or institutional roles and at least one scorable O1-O6 open-science coordinate"
+  "matched peers from the same institution/field/seniority/time strata, selected without inspecting their openness scores"
+  ("institution" ∷ "technical field or role class" ∷ "career seniority" ∷ "publication opportunity" ∷ "public-role opportunity" ∷ "programme sensitivity" ∷ "geography/time" ∷ [])
+  true refl
+  "score O1 public technical publication, O2 open code/data/methods, O3 public technical education, O4 disclosure/transparency advocacy, O5 suppression/secrecy critique and O6 restricted-to-public same-object transfer using the identical provenance rubric for roster and controls"
+  "do not count ordinary publication opportunity as a discriminating feature; do not infer O4/O5 from papers; do not infer O6 without prior-restriction + public-release + same-object receipts"
+
 record CurrentRosterEnrichmentFrontier : Set where
   constructor current-roster-enrichment-frontier
   field
@@ -57,9 +66,14 @@ record CurrentRosterEnrichmentFrontier : Set where
     capabilityAwareSelectorEnrichmentEstablishedIsFalse :
       capabilityAwareSelectorEnrichmentEstablished ≡ false
 
+    openScienceRosterEnrichmentEstablished : Bool
+    openScienceRosterEnrichmentEstablishedIsFalse :
+      openScienceRosterEnrichmentEstablished ≡ false
+
 canonicalCurrentRosterEnrichmentFrontier : CurrentRosterEnrichmentFrontier
 canonicalCurrentRosterEnrichmentFrontier = current-roster-enrichment-frontier
   true refl
+  false refl
   false refl
   false refl
   false refl
