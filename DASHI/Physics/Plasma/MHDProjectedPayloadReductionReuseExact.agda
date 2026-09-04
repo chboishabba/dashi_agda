@@ -52,13 +52,13 @@ realProjectedPayload :
     (E : C3.IntegerEmbedding F) →
   C3.ModeInverseSquare F E →
   Z3.FourierMode →
-  C3.Complex3 F → C3.Complex3 F → C3.Carrier F
+  C3.Complex3 F → C3.Complex3 F → C3.Complex F
 realProjectedPayload E I k test value =
   C3.complexRealPart (projectedPayload E I k test value)
 
 realUnprojectedPayload :
   ∀ {r} {F : C3.RealField r} →
-  C3.Complex3 F → C3.Complex3 F → C3.Carrier F
+  C3.Complex3 F → C3.Complex3 F → C3.Complex F
 realUnprojectedPayload test value =
   C3.complexRealPart (unprojectedPayload test value)
 
