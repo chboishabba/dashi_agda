@@ -3,7 +3,7 @@ module DASHI.Physics.Plasma.MHDCyclicInvariantBidiFrontierExact where
 open import DASHI.Core.Prelude
 
 ------------------------------------------------------------------------
--- CYCLIC INVARIANT FRONTIER AFTER EXACT PROJECTED ELSASSER CLOSURE
+-- CYCLIC INVARIANT FRONTIER AFTER LITERAL REPO-MODEL CLOSURE
 ------------------------------------------------------------------------
 
 record MHDCyclicInvariantBidiFrontier : Set where
@@ -60,25 +60,33 @@ record MHDCyclicInvariantBidiFrontier : Set where
     minusProjectedPseudoEnergyCancellationOwnedIsTrue :
       minusProjectedPseudoEnergyCancellationOwned ≡ true
 
-    pdeProjectedFourierBidiWeldSocketOwned : Bool
-    pdeProjectedFourierBidiWeldSocketOwnedIsTrue :
-      pdeProjectedFourierBidiWeldSocketOwned ≡ true
+    literalRepoIdealElsasserGalerkinDynamicsOwned : Bool
+    literalRepoIdealElsasserGalerkinDynamicsOwnedIsTrue :
+      literalRepoIdealElsasserGalerkinDynamicsOwned ≡ true
 
-    literalElsasserPdeToProjectedFourierWeldOwned : Bool
-    literalElsasserPdeToProjectedFourierWeldOwnedIsFalse :
-      literalElsasserPdeToProjectedFourierWeldOwned ≡ false
+    repoGalerkinToProjectedInteractionWeldOwned : Bool
+    repoGalerkinToProjectedInteractionWeldOwnedIsTrue :
+      repoGalerkinToProjectedInteractionWeldOwned ≡ true
 
-    pseudoEnergyZeroToEnergyCrossHelicityExactOwned : Bool
-    pseudoEnergyZeroToEnergyCrossHelicityExactOwnedIsTrue :
-      pseudoEnergyZeroToEnergyCrossHelicityExactOwned ≡ true
+    totalEnergyLiteralRepoTriadConservationOwned : Bool
+    totalEnergyLiteralRepoTriadConservationOwnedIsTrue :
+      totalEnergyLiteralRepoTriadConservationOwned ≡ true
 
-    totalEnergyLiteralPdeTriadConservationOwned : Bool
-    totalEnergyLiteralPdeTriadConservationOwnedIsFalse :
-      totalEnergyLiteralPdeTriadConservationOwned ≡ false
+    crossHelicityLiteralRepoTriadConservationOwned : Bool
+    crossHelicityLiteralRepoTriadConservationOwnedIsTrue :
+      crossHelicityLiteralRepoTriadConservationOwned ≡ true
 
-    crossHelicityLiteralPdeTriadConservationOwned : Bool
-    crossHelicityLiteralPdeTriadConservationOwnedIsFalse :
-      crossHelicityLiteralPdeTriadConservationOwned ≡ false
+    sourcePdeProjectedFourierBidiWeldSocketOwned : Bool
+    sourcePdeProjectedFourierBidiWeldSocketOwnedIsTrue :
+      sourcePdeProjectedFourierBidiWeldSocketOwned ≡ true
+
+    externalSourcePdeToRepoProjectedFourierWeldOwned : Bool
+    externalSourcePdeToRepoProjectedFourierWeldOwnedIsFalse :
+      externalSourcePdeToRepoProjectedFourierWeldOwned ≡ false
+
+    magneticHelicityClosedByEnergyCrossHelicityCompiler : Bool
+    magneticHelicityClosedByEnergyCrossHelicityCompilerIsFalse :
+      magneticHelicityClosedByEnergyCrossHelicityCompiler ≡ false
 
 canonicalMHDCyclicInvariantBidiFrontier : MHDCyclicInvariantBidiFrontier
 canonicalMHDCyclicInvariantBidiFrontier =
@@ -86,5 +94,6 @@ canonicalMHDCyclicInvariantBidiFrontier =
     true refl true refl true refl
     true refl true refl true refl
     true refl true refl true refl true refl
-    true refl true refl true refl true refl true refl
-    true refl false refl true refl false refl false refl
+    true refl true refl true refl
+    true refl true refl true refl true refl
+    true refl false refl false refl
