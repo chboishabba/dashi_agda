@@ -49,6 +49,7 @@ data TowerObligation : Set where
 data TowerDisposition : Set where
   live : TowerDisposition
   alternative : TowerDisposition
+  downstream : TowerDisposition
   pruned : TowerDisposition
   forbiddenShortcut : TowerDisposition
 
@@ -59,16 +60,6 @@ towerDisposition recurseFiniteTower = downstream
 towerDisposition rebuildHadamardBlockDiagonalization = pruned
 towerDisposition rebuildDeterminantFactorization = pruned
 towerDisposition acceptTruePlaceholderAsSpectrumTheorem = forbiddenShortcut
-  where
-    data Dummy : Set where
-
-data DownstreamTag : Set where downstream : DownstreamTag
-
--- Separate function avoids pretending `downstream` is a TowerDisposition
--- constructor while retaining the source-search ordering below.
-towerNeedsRecursionAfterOneStep : TowerObligation → Bool
-towerNeedsRecursionAfterOneStep recurseFiniteTower = true
-towerNeedsRecursionAfterOneStep _ = false
 
 highestAlphaTowerPath : List TowerObligation
 highestAlphaTowerPath =
