@@ -16,15 +16,6 @@ import DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact as Authori
 import DASHI.Cognition.PNF.SensibLawLegalJurisdictionEvidenceExact as Jurisdiction
 import DASHI.Cognition.PNF.SensibLawParticipantLegalRoleWrongTypeBidiExact as LegalRole
 
-------------------------------------------------------------------------
--- VIOLATION STATUS -> PERMITTED LIABILITY STATUS
---
--- This is the missing refinement above the permissive historical LiabilityReceipt.
--- Candidate violation may support only candidate liability.  Admitted absence of
--- violation closes only to admitted absence of liability.  Admitted violation
--- still needs an explicit liability decision; it is not definitionally liability.
-------------------------------------------------------------------------
-
 data LegalViolationUse :
     Status.ViolationStatus → Status.LiabilityStatus → Set where
   unresolvedViolationUse :
@@ -38,10 +29,6 @@ data LegalViolationUse :
   admittedNoViolationUse :
     LegalViolationUse Status.noViolationAdmitted Status.noLiabilityAdmitted
 
-------------------------------------------------------------------------
--- Same-object prerequisite bundle.
-------------------------------------------------------------------------
-
 record LiabilityPrerequisiteBundle
     (state : Status.SemanticCommitmentState) : Set where
   constructor liabilityPrerequisiteBundle
@@ -51,7 +38,6 @@ record LiabilityPrerequisiteBundle
     resolvedEvidence : Evidence.ResolvedLegalEvidenceReceiptInState state
     legalSourceAuthority : Authority.LegalSourceAuthorityReceiptInState state
     resolvedJurisdiction : Jurisdiction.LegalJurisdictionReceiptInState state
-
     sameWrongTypeAsLegalRole :
       LegalRole.wrongType (Bridge.weld legalRole)
       ≡ Legal.wrongType
@@ -133,41 +119,26 @@ compiledLiabilityMatchesDecision :
   ≡ resultingLiability (decision input)
 compiledLiabilityMatchesDecision input = refl
 
-------------------------------------------------------------------------
--- Hard boundaries.
-------------------------------------------------------------------------
-
 data CandidateViolationAdmitsLiability : Set where
 data NoViolationAdmittedStillAllowsLiabilityAdmitted : Set where
 data ViolationAdmittedAutomaticallyCreatesLiability : Set where
 data CulpabilityFromOtherWrongTypeMayBeBorrowed : Set where
 data LegalRoleForOtherEventMayBeBorrowed : Set where
 data AuthorityOrJurisdictionMayComeFromOtherSystem : Set where
-\data LiabilityAutomaticallySelectsRemedy : Set where
+data LiabilityAutomaticallySelectsRemedy : Set where
 
 candidateViolationDoesNotAdmitLiability : CandidateViolationAdmitsLiability → ⊥
 candidateViolationDoesNotAdmitLiability ()
-
-noViolationDoesNotAllowAdmittedLiability :
-  NoViolationAdmittedStillAllowsLiabilityAdmitted → ⊥
+noViolationDoesNotAllowAdmittedLiability : NoViolationAdmittedStillAllowsLiabilityAdmitted → ⊥
 noViolationDoesNotAllowAdmittedLiability ()
-
-admittedViolationDoesNotAutomaticallyCreateLiability :
-  ViolationAdmittedAutomaticallyCreatesLiability → ⊥
+admittedViolationDoesNotAutomaticallyCreateLiability : ViolationAdmittedAutomaticallyCreatesLiability → ⊥
 admittedViolationDoesNotAutomaticallyCreateLiability ()
-
-otherWrongTypeCulpabilityCannotBeBorrowed :
-  CulpabilityFromOtherWrongTypeMayBeBorrowed → ⊥
+otherWrongTypeCulpabilityCannotBeBorrowed : CulpabilityFromOtherWrongTypeMayBeBorrowed → ⊥
 otherWrongTypeCulpabilityCannotBeBorrowed ()
-
-otherEventLegalRoleCannotBeBorrowed :
-  LegalRoleForOtherEventMayBeBorrowed → ⊥
+otherEventLegalRoleCannotBeBorrowed : LegalRoleForOtherEventMayBeBorrowed → ⊥
 otherEventLegalRoleCannotBeBorrowed ()
-
-otherSystemAuthorityJurisdictionCannotBeBorrowed :
-  AuthorityOrJurisdictionMayComeFromOtherSystem → ⊥
+otherSystemAuthorityJurisdictionCannotBeBorrowed : AuthorityOrJurisdictionMayComeFromOtherSystem → ⊥
 otherSystemAuthorityJurisdictionCannotBeBorrowed ()
-
 liabilityDoesNotAutomaticallySelectRemedy : LiabilityAutomaticallySelectsRemedy → ⊥
 liabilityDoesNotAutomaticallySelectRemedy ()
 
