@@ -42,13 +42,23 @@ record MBeneResidualScalingProducer (chart : MBeneScalingChart) : Set₁ where
 open MBeneResidualScalingProducer public
 
 exactMBeneResidualScalingBlocksCoarseDescent :
-  ∀ {chart : MBeneScalingChart} →
-  MBeneResidualScalingProducer chart →
+  ∀ {chart : MBeneScalingChart}
+    (producer : MBeneResidualScalingProducer chart) →
   Scaling.ScalingLawDescends
-    (coarse (record { exactSeparatingWitness = ? }))
-    (target (record { exactSeparatingWitness = ? })) →
+    (coarse producer)
+    (target producer) →
   ⊥
-exactMBeneResidualScalingBlocksCoarseDescent = ?
+exactMBeneResidualScalingBlocksCoarseDescent producer =
+  Scaling.residualScalingWitnessBlocksCoarseScalingLaw
+    (exactSeparatingWitness producer)
+
+exactMBeneResidualScalingGivesStrictRefinement :
+  ∀ {chart : MBeneScalingChart}
+    (producer : MBeneResidualScalingProducer chart) →
+  _
+exactMBeneResidualScalingGivesStrictRefinement producer =
+  Scaling.residualScalingWitnessGivesStrictRefinement
+    (exactSeparatingWitness producer)
 
 ------------------------------------------------------------------------
 -- Source-backed mechanism receipt versus still-live exact witness.
@@ -114,6 +124,39 @@ canonicalReportedDesignRule = reported-design-rule
   "balanced CO2 activation"
   "optimal COOH* stabilization"
   "facile CO* desorption"
+
+------------------------------------------------------------------------
+-- BIDI search contract.
+--
+-- Forward: physical local-state receipts produce residual coordinates and,
+-- once an exact separating pair is available, a strict refinement / no-descent
+-- theorem.
+-- Reverse: a claimed scaling escape compiles back into the missing exact pair
+-- obligation rather than being accepted from a performance scalar alone.
+------------------------------------------------------------------------
+
+record BidiScalingSearchContract : Set where
+  constructor bidi-scaling-search-contract
+  field
+    forwardNeedsLocalElectronicResidual : Bool
+    forwardNeedsLocalElectronicResidualIsTrue :
+      forwardNeedsLocalElectronicResidual ≡ true
+
+    forwardNeedsTargetIntermediateEnergy : Bool
+    forwardNeedsTargetIntermediateEnergyIsTrue :
+      forwardNeedsTargetIntermediateEnergy ≡ true
+
+    reverseClaimRequiresEqualCoarseSeparatingPair : Bool
+    reverseClaimRequiresEqualCoarseSeparatingPairIsTrue :
+      reverseClaimRequiresEqualCoarseSeparatingPair ≡ true
+
+    leaderboardScalarAloneDischargesScalingEscape : Bool
+    leaderboardScalarAloneDischargesScalingEscapeIsFalse :
+      leaderboardScalarAloneDischargesScalingEscape ≡ false
+
+canonicalBidiScalingSearchContract : BidiScalingSearchContract
+canonicalBidiScalingSearchContract =
+  bidi-scaling-search-contract true refl true refl true refl false refl
 
 ------------------------------------------------------------------------
 -- Cross-pollination statement kept explicit.
