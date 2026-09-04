@@ -15,17 +15,19 @@ import DASHI.Cognition.PNF.ContextualFractranDirectDeltaAdapterExact as Contextu
 
 data ProducerClass : Set where
   parserShapeProducer structuralCompositionProducer bindingAccessibilityProducer
-  attributionProducer evidenceProducer temporalProducer scopeResolutionProducer
-  documentContextProducer legalJurisdictionProducer legalSourceAuthorityProducer
-  legalTypedMeetProducer governedAdmissionProducer : ProducerClass
+  attributionProducer evidenceProducer legalEvidenceResolutionProducer temporalProducer
+  scopeResolutionProducer documentContextProducer legalJurisdictionProducer
+  legalSourceAuthorityProducer legalTypedMeetProducer governedAdmissionProducer
+  : ProducerClass
 
 data StatusAxis : Set where
   participantRoleAxis referentKindAxis identityAxis antecedentAxis occurrenceAxis
-  propositionAxis attributionAxis evidenceAxis modalityAxis temporalAxis conditionAxis
-  scopeCandidateAxis resolvedScopeAxis documentContextAxis jurisdictionCandidateAxis
-  resolvedLegalJurisdictionAxis semanticAdmissionAuthorityAxis legalSourceAuthorityAxis
-  applicabilityAxis violationAxis liabilityAxis burdenAxis judicialDiscourseAxis
-  normativeRelationAxis : StatusAxis
+  propositionAxis attributionAxis evidenceCandidateAxis resolvedLegalEvidenceAxis
+  modalityAxis temporalAxis conditionAxis scopeCandidateAxis resolvedScopeAxis
+  documentContextAxis jurisdictionCandidateAxis resolvedLegalJurisdictionAxis
+  semanticAdmissionAuthorityAxis legalSourceAuthorityAxis applicabilityAxis
+  violationAxis liabilityAxis burdenAxis judicialDiscourseAxis normativeRelationAxis
+  : StatusAxis
 
 record AxisPopulationReceipt : Set where
   constructor axisPopulationReceipt
@@ -52,7 +54,9 @@ occurrenceCandidateRequiresStatusEvidence = axisPopulationReceipt structuralComp
 propositionCandidateRequiresAttribution : AxisPopulationReceipt
 propositionCandidateRequiresAttribution = axisPopulationReceipt attributionProducer propositionAxis true true true true "attribution/status composition"
 evidenceCandidateRequiresProvenance : AxisPopulationReceipt
-evidenceCandidateRequiresProvenance = axisPopulationReceipt evidenceProducer evidenceAxis true true true true "source/provenance evidence composition"
+evidenceCandidateRequiresProvenance = axisPopulationReceipt evidenceProducer evidenceCandidateAxis true true true true "source/provenance evidence candidate composition; repetition does not create independence"
+resolvedLegalEvidenceRequiresSameObjectProvenance : AxisPopulationReceipt
+resolvedLegalEvidenceRequiresSameObjectProvenance = axisPopulationReceipt legalEvidenceResolutionProducer resolvedLegalEvidenceAxis false true true false "same proposition/event EvidenceItem + EventEvidenceLink + provenance-qualified legal-use evidence receipt"
 temporalCandidateRequiresAnchor : AxisPopulationReceipt
 temporalCandidateRequiresAnchor = axisPopulationReceipt temporalProducer temporalAxis true true true true "temporal qualification/anchor composition"
 structuralScopeCandidateRequiresComposition : AxisPopulationReceipt
@@ -68,7 +72,7 @@ resolvedLegalJurisdictionRequiresSystemWeld = axisPopulationReceipt legalJurisdi
 legalSourceAuthorityRequiresSystemAndValidity : AxisPopulationReceipt
 legalSourceAuthorityRequiresSystemAndValidity = axisPopulationReceipt legalSourceAuthorityProducer legalSourceAuthorityAxis true true true true "SensibLawOntologyTopology LegalSource + source system + validity interval; legal authority not inferred from semantic admission"
 legalApplicabilityCandidateRequiresTypedMeet : AxisPopulationReceipt
-legalApplicabilityCandidateRequiresTypedMeet = axisPopulationReceipt legalTypedMeetProducer applicabilityAxis true true true true "legal typed meet consumes resolved jurisdiction/authority/scope plus event/wrong/evidence coordinates"
+legalApplicabilityCandidateRequiresTypedMeet = axisPopulationReceipt legalTypedMeetProducer applicabilityAxis true true true true "legal typed meet consumes resolved jurisdiction/authority/scope/evidence plus event/wrong coordinates"
 admissionClosureReceipt : AxisPopulationReceipt
 admissionClosureReceipt = axisPopulationReceipt governedAdmissionProducer semanticAdmissionAuthorityAxis false true true false "SensibLawLegalSemanticAdmissionFrontierExact semantic resolution/admission authority only"
 
@@ -118,6 +122,8 @@ data GeographicLocationIsLegalJurisdiction : Set where
 data LegalAuthorityIsPromotionAuthority : Set where
 data ParserScopeCandidateIsResolvedScope : Set where
 data JurisdictionCandidateIsResolvedLegalJurisdiction : Set where
+data EvidenceCandidateIsResolvedLegalEvidence : Set where
+data RepeatedEvidenceCreatesIndependentLegalSupport : Set where
 data FoundAsFactIsUniversalTruth : Set where
 data NormativeRelationIsModalSurface : Set where
 data BurdenBearerIsSyntacticSubject : Set where
@@ -133,6 +139,10 @@ parserScopeCandidateDoesNotEqualResolvedScope : ParserScopeCandidateIsResolvedSc
 parserScopeCandidateDoesNotEqualResolvedScope ()
 jurisdictionCandidateDoesNotEqualResolvedLegalJurisdiction : JurisdictionCandidateIsResolvedLegalJurisdiction → ⊥
 jurisdictionCandidateDoesNotEqualResolvedLegalJurisdiction ()
+evidenceCandidateDoesNotEqualResolvedLegalEvidence : EvidenceCandidateIsResolvedLegalEvidence → ⊥
+evidenceCandidateDoesNotEqualResolvedLegalEvidence ()
+repeatedEvidenceDoesNotCreateIndependentLegalSupport : RepeatedEvidenceCreatesIndependentLegalSupport → ⊥
+repeatedEvidenceDoesNotCreateIndependentLegalSupport ()
 foundAsFactDoesNotMeanUniversalTruth : FoundAsFactIsUniversalTruth → ⊥
 foundAsFactDoesNotMeanUniversalTruth ()
 normativeRelationNotRawModalSurface : NormativeRelationIsModalSurface → ⊥
