@@ -3,8 +3,6 @@ module DASHI.Physics.Plasma.MHDThreeOutputCyclicElsasserTriadExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
-import DASHI.Physics.Plasma.MHDEnergyCrossHelicityTriadBidiExact as EC
-
 ------------------------------------------------------------------------
 -- LITERAL THREE-OUTPUT CYCLIC TRIAD SOCKET
 --
@@ -13,7 +11,7 @@ import DASHI.Physics.Plasma.MHDEnergyCrossHelicityTriadBidiExact as EC
 -- their cyclic identification and projection/pressure cancellation.
 ------------------------------------------------------------------------
 
-record ThreeOutputCyclicTriad {r : _} (F : _) : Set₁ where
+record ThreeOutputCyclicTriad : Set₁ where
   constructor three-output-cyclic-triad
   field
     KSlot PSlot QSlot : Set
