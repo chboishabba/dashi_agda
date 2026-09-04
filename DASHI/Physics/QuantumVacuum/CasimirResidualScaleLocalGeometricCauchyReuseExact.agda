@@ -1,7 +1,7 @@
 module DASHI.Physics.QuantumVacuum.CasimirResidualScaleLocalGeometricCauchyReuseExact where
 
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; _*_)
 open import Data.Empty using (⊥)
 
 import DASHI.Physics.YangMills.BalabanContinuumScaleLocalObservableCauchyExact as Scale
@@ -22,7 +22,7 @@ record CasimirScaleLocalResidualData : Set₁ where
 
     residualDifferenceMagnitude : Nat → Nat → ℚ
     residualDifferenceNonnegative : ∀ start count →
-      ℚ.0ℚ ≤ residualDifferenceMagnitude start count
+      0ℚ ≤ residualDifferenceMagnitude start count
 
     sameLiteralPostCancellationTrajectory : Set
 
