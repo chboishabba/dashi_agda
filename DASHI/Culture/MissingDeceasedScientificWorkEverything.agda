@@ -5,8 +5,9 @@ module DASHI.Culture.MissingDeceasedScientificWorkEverything where
 -- common-selector/visibility analysis, selector-discrimination search,
 -- higher-order capability synthesis, capability-indexed selector salience,
 -- denominator-aware matched-control enrichment, competing-hypothesis
--- discrimination, disruption-benefit evidence testing, actor benefit/visibility/
--- effect intersection, and matched disruption-impact controls.
+-- discrimination, critical-knowledge BIDI acquisition, disruption-benefit
+-- evidence testing, actor benefit/visibility/effect intersection, and matched
+-- disruption-impact controls.
 -- Kept separate from AmyEskridgeEvidenceEverything because Amy Eskridge is not
 -- explicitly named in the 20 April 2026 House Oversight letter formalised here.
 
@@ -21,6 +22,7 @@ import DASHI.Core.ReferencePopulationRosterEnrichmentExact
 import DASHI.Core.DisruptionBenefitHypothesisExact
 import DASHI.Core.ActorBenefitVisibilityDisruptionIntersectionExact
 import DASHI.Core.CounterfactualDisruptionImpactExact
+import DASHI.Core.CriticalKnowledgeConcentrationBidiExact
 import DASHI.Culture.MissingDeceasedScientistWorkAttributionExact
 import DASHI.Culture.MissingDeceasedScientificWorkCrossPollinationExact
 import DASHI.Culture.MissingDeceasedScientificWorkSourceRegistryExact
@@ -39,4 +41,5 @@ import DASHI.Culture.MissingDeceasedDisruptionBenefitEvidenceExact
 import DASHI.Culture.MissingDeceasedDisruptionBenefitAcquisitionExact
 import DASHI.Culture.MissingDeceasedActorIntersectionFrontierExact
 import DASHI.Culture.MissingDeceasedCounterfactualDisruptionImpactExact
+import DASHI.Culture.MissingDeceasedCriticalKnowledgeBidiExact
 import DASHI.Culture.HouseOversightScientistRosterScopeExact
