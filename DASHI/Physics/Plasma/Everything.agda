@@ -64,3 +64,4 @@ import DASHI.Physics.Plasma.MHDMagneticHelicityDirectionalVariationBidiExact
 import DASHI.Physics.Plasma.MHDDoubledMagneticElsasserFibreExact
 import DASHI.Physics.Plasma.MHDPhysicalInverseCurlMagneticHelicityExact
 import DASHI.Physics.Plasma.MHDMagneticHelicityThreeLegBidiExact
+import DASHI.Physics.Plasma.MHDMagneticHelicityRealityTransportExact
