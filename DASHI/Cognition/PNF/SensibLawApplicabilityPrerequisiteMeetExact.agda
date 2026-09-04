@@ -14,14 +14,15 @@ import DASHI.Cognition.PNF.SensibLawLiveProducerCoordinateEvidenceBridgeExact as
 import DASHI.Cognition.PNF.SensibLawResolvedLegalEvidenceExact as Evidence
 import DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact as Authority
 import DASHI.Cognition.PNF.SensibLawLegalJurisdictionEvidenceExact as Jurisdiction
+import DASHI.Cognition.PNF.SensibLawScopeCompositionBidiExact as Scope
 
 ------------------------------------------------------------------------
 -- APPLICABILITY PREREQUISITE MEET
 --
--- The legacy WrongTypeApplicabilityReceipt retains string references for
--- temporal/jurisdiction/authority/etc.  This owner strengthens construction:
--- those references are downstream metadata only.  A legal applicability meet
--- may run here only after exact same-state prerequisite receipts exist.
+-- All prerequisite receipts must not merely inhabit the same state: they must
+-- be welded to the same proposition/event/legal-system objects.  This blocks a
+-- mixed bundle assembled from individually valid receipts about unrelated
+-- objects.
 ------------------------------------------------------------------------
 
 record ApplicabilityPrerequisiteBundle
@@ -35,6 +36,29 @@ record ApplicabilityPrerequisiteBundle
     legalSourceAuthority : Authority.LegalSourceAuthorityReceiptInState state
     resolvedJurisdiction : Jurisdiction.LegalJurisdictionReceiptInState state
     resolvedScope : Bridge.ResolvedScopeReceiptInState state
+
+    sameEvidenceProposition :
+      Evidence.propositionStatus resolvedEvidence
+      ≡ Status.proposition (Bridge.receipt proposition)
+    sameEvidenceEvent :
+      Evidence.eventStatus resolvedEvidence
+      ≡ Status.event (Bridge.receipt occurrence)
+    sameDocumentProposition :
+      Bridge.refinedProposition documentContext
+      ≡ Status.proposition (Bridge.receipt proposition)
+    sameScopeProposition :
+      Scope.proposition (Bridge.receipt resolvedScope)
+      ≡ Status.proposition (Bridge.receipt proposition)
+    sameScopeEvent :
+      Scope.event (Bridge.receipt resolvedScope)
+      ≡ Status.event (Bridge.receipt occurrence)
+    sameAuthorityJurisdictionLegalStatus :
+      Authority.legalStatus legalSourceAuthority
+      ≡ Jurisdiction.legalStatus resolvedJurisdiction
+    sameAuthorityJurisdictionSystem :
+      Authority.system legalSourceAuthority
+      ≡ Jurisdiction.system resolvedJurisdiction
+
     bundleReference : String
 
 open ApplicabilityPrerequisiteBundle public
@@ -50,6 +74,10 @@ record ApplicabilityMeetInput
     semanticInput : Legal.SemanticLegalInputGate event
     legalStatus : Status.LegalStatusProduct
     legalStatusMembership : Bridge._∈_ legalStatus (Status.legalStatuses state)
+    meetLegalStatusMatchesAuthority :
+      legalStatus ≡ Authority.legalStatus (legalSourceAuthority prerequisites)
+    meetLegalStatusMatchesJurisdiction :
+      legalStatus ≡ Jurisdiction.legalStatus (resolvedJurisdiction prerequisites)
     sameEvent :
       Ontology.WrongTypeInterpretation.interpretedEvent interpretation
       ≡ Ontology.Event.eventId event
@@ -59,6 +87,10 @@ record ApplicabilityMeetInput
     sameSystem :
       Ontology.WrongTypeInterpretation.underSystem interpretation
       ≡ Ontology.WrongType.definingSystem wrongType
+    meetSystemMatchesResolvedSystem :
+      Ontology.WrongType.definingSystem wrongType
+      ≡ Ontology.LegalSystem.systemId
+          (Authority.system (legalSourceAuthority prerequisites))
     typedMeetReference : String
     temporalReference : String
     exceptionReference : String
@@ -89,11 +121,6 @@ compileApplicabilityMeet input =
     (Authority.authorityReference
       (legalSourceAuthority (prerequisites input)))
 
-------------------------------------------------------------------------
--- The meet preserves the semantic input gate; prerequisite closure does not
--- upgrade an assertion/allegation candidate into admitted occurrence/truth.
-------------------------------------------------------------------------
-
 compiledApplicabilityMatchesSemanticGate :
   ∀ {state} (input : ApplicabilityMeetInput state) →
   Legal.resultingApplicability (compileApplicabilityMeet input)
@@ -105,6 +132,9 @@ data MissingResolvedEvidenceStillAllowsMeet : Set where
 data MissingAuthorityStillAllowsMeet : Set where
 data MissingResolvedScopeStillAllowsMeet : Set where
 data MissingResolvedJurisdictionStillAllowsMeet : Set where
+data MixedObjectReceiptsAuthorizeApplicabilityMeet : Set where
+data MismatchedLegalStatusAuthorizesApplicabilityMeet : Set where
+data MismatchedLegalSystemAuthorizesApplicabilityMeet : Set where
 data PrerequisiteClosureAdmitsTruth : Set where
 
 stringsAloneDoNotAuthorizeMeet : StringsAloneAuthorizeApplicabilityMeet → ⊥
@@ -117,6 +147,12 @@ missingResolvedScopeBlocksMeet : MissingResolvedScopeStillAllowsMeet → ⊥
 missingResolvedScopeBlocksMeet ()
 missingResolvedJurisdictionBlocksMeet : MissingResolvedJurisdictionStillAllowsMeet → ⊥
 missingResolvedJurisdictionBlocksMeet ()
+mixedObjectReceiptsDoNotAuthorizeMeet : MixedObjectReceiptsAuthorizeApplicabilityMeet → ⊥
+mixedObjectReceiptsDoNotAuthorizeMeet ()
+mismatchedLegalStatusDoesNotAuthorizeMeet : MismatchedLegalStatusAuthorizesApplicabilityMeet → ⊥
+mismatchedLegalStatusDoesNotAuthorizeMeet ()
+mismatchedLegalSystemDoesNotAuthorizeMeet : MismatchedLegalSystemAuthorizesApplicabilityMeet → ⊥
+mismatchedLegalSystemDoesNotAuthorizeMeet ()
 prerequisiteClosureDoesNotAdmitTruth : PrerequisiteClosureAdmitsTruth → ⊥
 prerequisiteClosureDoesNotAdmitTruth ()
 
@@ -130,10 +166,15 @@ record ApplicabilityPrerequisiteMeetBoundary : Set where
     legalSourceAuthorityRequired : Bool
     resolvedJurisdictionRequired : Bool
     resolvedScopeRequired : Bool
+    crossReceiptSameObjectWeldsRequired : Bool
+    authorityJurisdictionSameLegalStatusRequired : Bool
+    authorityJurisdictionSameLegalSystemRequired : Bool
+    meetLegalStatusMustMatchPrerequisites : Bool
+    meetWrongTypeSystemMustMatchResolvedSystem : Bool
     stringReferencesAloneSuffice : Bool
     prerequisiteClosureAdmitsTruth : Bool
 
 canonicalApplicabilityPrerequisiteMeetBoundary : ApplicabilityPrerequisiteMeetBoundary
 canonicalApplicabilityPrerequisiteMeetBoundary =
   applicability-prerequisite-meet-boundary
-    true true true true true true true false false
+    true true true true true true true true true true true true false false
