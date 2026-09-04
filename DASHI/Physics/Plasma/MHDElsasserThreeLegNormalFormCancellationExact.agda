@@ -6,6 +6,7 @@ open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; tra
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction as Orbit
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Algebra
 import DASHI.Physics.Closure.NSTriadKNComplex3RealityPhaseAudit as Audit
@@ -87,28 +88,21 @@ elsasserThreeLegNormalFormCancellation :
   ∀ {r} {F : C3.RealField r}
     (E : C3.IntegerEmbedding F)
     (tau : Physical.PhysicalTriadIncidence)
-    (transport target : Z3.FourierMode → C3.Complex3 F) →
-  Audit.RealityCondition transport →
-  Audit.RealityCondition target →
-  Audit.DivergenceFreeCondition E transport →
-  Assembly.add
-    (elsasserOrderedTransferLaws
-      E transport target)
-    (Assembly.add
-      (elsasserOrderedTransferLaws
-        E transport target)
-      (Assembly.orderedPairTransfer
-        (elsasserOrderedTransferLaws
-          E transport target) tau)
-      (Assembly.orderedPairTransfer
-        (elsasserOrderedTransferLaws
-          E transport target)
-        (DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction.pEnergyLeg tau)))
-    (Assembly.orderedPairTransfer
-      (elsasserOrderedTransferLaws
-        E transport target)
-      (DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction.qEnergyLeg tau))
-  ≡ Assembly.zero (elsasserOrderedTransferLaws E transport target)
+    (transport target : Z3.FourierMode → C3.Complex3 F)
+    (transportReality : Audit.RealityCondition transport)
+    (targetReality : Audit.RealityCondition target)
+    (transportDivergenceFree : Audit.DivergenceFreeCondition E transport) →
+  let laws =
+        elsasserOrderedTransferLaws
+          E transport target
+          transportReality targetReality transportDivergenceFree
+  in
+  Assembly.add laws
+    (Assembly.add laws
+      (Assembly.orderedPairTransfer laws tau)
+      (Assembly.orderedPairTransfer laws (Orbit.pEnergyLeg tau)))
+    (Assembly.orderedPairTransfer laws (Orbit.qEnergyLeg tau))
+  ≡ Assembly.zero laws
 elsasserThreeLegNormalFormCancellation
   E tau transport target transportReality targetReality transportDivergenceFree =
   Assembly.orderedRealityCancellationImpliesThreeLegCancellation
