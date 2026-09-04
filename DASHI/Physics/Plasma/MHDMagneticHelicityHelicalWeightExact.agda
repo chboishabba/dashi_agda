@@ -6,6 +6,7 @@ open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as Scaling
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws as Additive
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
@@ -128,7 +129,7 @@ minusMagneticHelicityWeight {F = F} E I S L k C value =
             (Additive.hermitianPairingNegateRight
               (Helical.helicalProjectorMinus E I S k value)
               (Helical.helicalProjectorMinus E I S k value)))
-          (C3.complexNegateMultiplyRight
+          (Field.complexNegateMultiplyRight
             (C3.realEmbed F (Helical.inverseModeNorm S k))
             (C3.hermitianPairing3
               (Helical.helicalProjectorMinus E I S k value)
