@@ -5,15 +5,26 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.SineNaturalMultiplePiZeroBidiExact
 import DASHI.Analysis.BernoulliFourCubicFiniteDifferenceExact
+import DASHI.Analysis.BernoulliFourCubicTelescopingExact
 import DASHI.Analysis.ZetaMinusThreeFiniteAnalyticBidiExact
 import DASHI.Analysis.SourceBackedTheoremTransportBidiExact
 import DASHI.Analysis.PreProjectionCancellationBidiCrossPollinationExact
+import DASHI.Analysis.FourierTrigonometricCompletenessSourceAuthorityExact
+import DASHI.Analysis.ChangeOfVariablesMeasureSourceAuthorityExact
+import DASHI.Analysis.ZetaEulerMaclaurinContinuationSourceAuthorityExact
+import DASHI.Analysis.PolarJacobianDeterminantAlgebraExact
+import DASHI.Analysis.PowerSeriesDifferentiationBidiCrossPollinationExact
+import DASHI.Analysis.BishopMatchedCommonTermCancellationExact
 import DASHI.Physics.QuantumVacuum.CasimirBishopSetoidBackendReuseExact
 import DASHI.Physics.QuantumVacuum.PerfectConductorPlateModePDECutsetExact
 import DASHI.Physics.QuantumVacuum.PerfectConductorLongitudinalQuantisationHighestAlphaExact
+import DASHI.Physics.QuantumVacuum.PerfectConductorTETMGenerationCompletenessBidiExact
 import DASHI.Physics.QuantumVacuum.CasimirRadialMeasureOneSixthCutsetExact
 import DASHI.Physics.QuantumVacuum.CasimirOneSixthFactorisationExact
 import DASHI.Physics.QuantumVacuum.CasimirRegulatorDominatedTailCutsetExact
+import DASHI.Physics.QuantumVacuum.CasimirBishopMatchedAsymptoticCancellationExact
+import DASHI.Physics.QuantumVacuum.CasimirResidualCauchyToLimitExact
+import DASHI.Physics.QuantumVacuum.CasimirEndgameSourceTransportBidiExact
 import DASHI.Analysis.ZetaMinusThreeAnalyticCutsetExact
 import DASHI.Analysis.ZetaMinusThreeSourceAuthorityExact
 import DASHI.Analysis.SineZeroClassificationSourceAuthorityExact
@@ -22,6 +33,11 @@ import DASHI.Physics.QuantumVacuum.CasimirPressureDerivativeSameObjectCompletion
 
 ------------------------------------------------------------------------
 -- FINAL REMAINING CASIMIR CLOSURE CAPSTONE
+--
+-- OWNED      = repo theorem/compiler or exact architecture.
+-- SOURCEBACKED = bounded classical theorem authority, still requiring an
+--                explicit same-object/application weld.
+-- LIVE       = local theorem/estimate/weld not yet machine-closed.
 ------------------------------------------------------------------------
 
 record RemainingClosureStatus : Set where
@@ -37,36 +53,47 @@ record RemainingClosureStatus : Set where
 
     brownMaclaySameSystemSourceBacked : Bool
     zetaMinusThreeSourceBacked : Bool
+    zetaEulerMaclaurinContinuationSourceBacked : Bool
     sineZeroClassificationSourceBacked : Bool
+    fourierCompletenessSourceBacked : Bool
+    changeOfVariablesSourceBacked : Bool
+
     oneSixthDenominatorCompilerOwned : Bool
     longitudinalEndpointReductionOwned : Bool
     forwardNaturalPiModesOwned : Bool
+    teTmGenerationCompletenessSplitOwned : Bool
     bishopAmplitudeCancellationOwned : Bool
     bishopDivisionTransportOwned : Bool
     cubicDerivativeFactorThreeOwned : Bool
     bernoulliFourCubicFiniteDifferenceOwned : Bool
+    bernoulliFourCubicTelescopingOwned : Bool
+    polarJacobianDeterminantAlgebraOwned : Bool
+    powerSeriesDifferentiationBidiKernelOwned : Bool
+    bishopMatchedCommonTermCancellationOwned : Bool
+    residualCauchyToLimitCompilerOwned : Bool
     sourceTransportCompilerOwned : Bool
+    endgameSourceTransportCompilerOwned : Bool
     preProjectionCancellationShapeOwned : Bool
 
     legacyPropositionalWeldClosed : Bool
     maxwellPDEClosed : Bool
-    teTmCompletenessClosed : Bool
+    teTmCompletenessLocalWeldClosed : Bool
     sineZeroSameObjectTransportClosed : Bool
     physicalLongitudinalModeIndexWeldClosed : Bool
-    polarMeasureClosed : Bool
+    trigPowerSeriesDerivativeClosed : Bool
+    polarChangeOfVariablesLocalWeldClosed : Bool
     angularHalfClosed : Bool
     radialThirdEndpointClosed : Bool
     radialOneSixthClosed : Bool
     dominationInterchangeClosed : Bool
-    regulatorTailClosed : Bool
-    zetaMinusThreeAnalyticClosed : Bool
+    residualCauchyTailEstimateClosed : Bool
+    zetaEulerMaclaurinLocalWeldClosed : Bool
+    internalZetaContinuationClosed : Bool
     casimirZetaSameObjectWeldClosed : Bool
     pressureSameObjectDerivativeClosed : Bool
 
-    importedBishopSetoidCompleteRealBackendIsTrue :
-      importedBishopSetoidCompleteRealBackend ≡ true
-    localFastCauchyBackendStillCriticalIsFalse :
-      localFastCauchyBackendStillCritical ≡ false
+    importedBishopSetoidCompleteRealBackendIsTrue : importedBishopSetoidCompleteRealBackend ≡ true
+    localFastCauchyBackendStillCriticalIsFalse : localFastCauchyBackendStillCritical ≡ false
     setoidNativeCasimirScalarInterfaceIsTrue : setoidNativeCasimirScalarInterface ≡ true
     maxwellPDECutsetIsTrue : maxwellPDECutset ≡ true
     radialMeasureCutsetIsTrue : radialMeasureCutset ≡ true
@@ -76,29 +103,42 @@ record RemainingClosureStatus : Set where
 
     brownMaclaySameSystemSourceBackedIsTrue : brownMaclaySameSystemSourceBacked ≡ true
     zetaMinusThreeSourceBackedIsTrue : zetaMinusThreeSourceBacked ≡ true
+    zetaEulerMaclaurinContinuationSourceBackedIsTrue : zetaEulerMaclaurinContinuationSourceBacked ≡ true
     sineZeroClassificationSourceBackedIsTrue : sineZeroClassificationSourceBacked ≡ true
+    fourierCompletenessSourceBackedIsTrue : fourierCompletenessSourceBacked ≡ true
+    changeOfVariablesSourceBackedIsTrue : changeOfVariablesSourceBacked ≡ true
+
     oneSixthDenominatorCompilerOwnedIsTrue : oneSixthDenominatorCompilerOwned ≡ true
     longitudinalEndpointReductionOwnedIsTrue : longitudinalEndpointReductionOwned ≡ true
     forwardNaturalPiModesOwnedIsTrue : forwardNaturalPiModesOwned ≡ true
+    teTmGenerationCompletenessSplitOwnedIsTrue : teTmGenerationCompletenessSplitOwned ≡ true
     bishopAmplitudeCancellationOwnedIsTrue : bishopAmplitudeCancellationOwned ≡ true
     bishopDivisionTransportOwnedIsTrue : bishopDivisionTransportOwned ≡ true
     cubicDerivativeFactorThreeOwnedIsTrue : cubicDerivativeFactorThreeOwned ≡ true
     bernoulliFourCubicFiniteDifferenceOwnedIsTrue : bernoulliFourCubicFiniteDifferenceOwned ≡ true
+    bernoulliFourCubicTelescopingOwnedIsTrue : bernoulliFourCubicTelescopingOwned ≡ true
+    polarJacobianDeterminantAlgebraOwnedIsTrue : polarJacobianDeterminantAlgebraOwned ≡ true
+    powerSeriesDifferentiationBidiKernelOwnedIsTrue : powerSeriesDifferentiationBidiKernelOwned ≡ true
+    bishopMatchedCommonTermCancellationOwnedIsTrue : bishopMatchedCommonTermCancellationOwned ≡ true
+    residualCauchyToLimitCompilerOwnedIsTrue : residualCauchyToLimitCompilerOwned ≡ true
     sourceTransportCompilerOwnedIsTrue : sourceTransportCompilerOwned ≡ true
+    endgameSourceTransportCompilerOwnedIsTrue : endgameSourceTransportCompilerOwned ≡ true
     preProjectionCancellationShapeOwnedIsTrue : preProjectionCancellationShapeOwned ≡ true
 
     legacyPropositionalWeldClosedIsFalse : legacyPropositionalWeldClosed ≡ false
     maxwellPDEClosedIsFalse : maxwellPDEClosed ≡ false
-    teTmCompletenessClosedIsFalse : teTmCompletenessClosed ≡ false
+    teTmCompletenessLocalWeldClosedIsFalse : teTmCompletenessLocalWeldClosed ≡ false
     sineZeroSameObjectTransportClosedIsFalse : sineZeroSameObjectTransportClosed ≡ false
     physicalLongitudinalModeIndexWeldClosedIsFalse : physicalLongitudinalModeIndexWeldClosed ≡ false
-    polarMeasureClosedIsFalse : polarMeasureClosed ≡ false
+    trigPowerSeriesDerivativeClosedIsFalse : trigPowerSeriesDerivativeClosed ≡ false
+    polarChangeOfVariablesLocalWeldClosedIsFalse : polarChangeOfVariablesLocalWeldClosed ≡ false
     angularHalfClosedIsFalse : angularHalfClosed ≡ false
     radialThirdEndpointClosedIsFalse : radialThirdEndpointClosed ≡ false
     radialOneSixthClosedIsFalse : radialOneSixthClosed ≡ false
     dominationInterchangeClosedIsFalse : dominationInterchangeClosed ≡ false
-    regulatorTailClosedIsFalse : regulatorTailClosed ≡ false
-    zetaMinusThreeAnalyticClosedIsFalse : zetaMinusThreeAnalyticClosed ≡ false
+    residualCauchyTailEstimateClosedIsFalse : residualCauchyTailEstimateClosed ≡ false
+    zetaEulerMaclaurinLocalWeldClosedIsFalse : zetaEulerMaclaurinLocalWeldClosed ≡ false
+    internalZetaContinuationClosedIsFalse : internalZetaContinuationClosed ≡ false
     casimirZetaSameObjectWeldClosedIsFalse : casimirZetaSameObjectWeldClosed ≡ false
     pressureSameObjectDerivativeClosedIsFalse : pressureSameObjectDerivativeClosed ≡ false
 
@@ -114,32 +154,48 @@ canonicalRemainingClosureStatus = record
   ; regulatorAnalyticCutset = true
   ; zetaMinusThreeCutset = true
   ; pressureDerivativeCutset = true
+
   ; brownMaclaySameSystemSourceBacked = true
   ; zetaMinusThreeSourceBacked = true
+  ; zetaEulerMaclaurinContinuationSourceBacked = true
   ; sineZeroClassificationSourceBacked = true
+  ; fourierCompletenessSourceBacked = true
+  ; changeOfVariablesSourceBacked = true
+
   ; oneSixthDenominatorCompilerOwned = true
   ; longitudinalEndpointReductionOwned = true
   ; forwardNaturalPiModesOwned = true
+  ; teTmGenerationCompletenessSplitOwned = true
   ; bishopAmplitudeCancellationOwned = true
   ; bishopDivisionTransportOwned = true
   ; cubicDerivativeFactorThreeOwned = true
   ; bernoulliFourCubicFiniteDifferenceOwned = true
+  ; bernoulliFourCubicTelescopingOwned = true
+  ; polarJacobianDeterminantAlgebraOwned = true
+  ; powerSeriesDifferentiationBidiKernelOwned = true
+  ; bishopMatchedCommonTermCancellationOwned = true
+  ; residualCauchyToLimitCompilerOwned = true
   ; sourceTransportCompilerOwned = true
+  ; endgameSourceTransportCompilerOwned = true
   ; preProjectionCancellationShapeOwned = true
+
   ; legacyPropositionalWeldClosed = false
   ; maxwellPDEClosed = false
-  ; teTmCompletenessClosed = false
+  ; teTmCompletenessLocalWeldClosed = false
   ; sineZeroSameObjectTransportClosed = false
   ; physicalLongitudinalModeIndexWeldClosed = false
-  ; polarMeasureClosed = false
+  ; trigPowerSeriesDerivativeClosed = false
+  ; polarChangeOfVariablesLocalWeldClosed = false
   ; angularHalfClosed = false
   ; radialThirdEndpointClosed = false
   ; radialOneSixthClosed = false
   ; dominationInterchangeClosed = false
-  ; regulatorTailClosed = false
-  ; zetaMinusThreeAnalyticClosed = false
+  ; residualCauchyTailEstimateClosed = false
+  ; zetaEulerMaclaurinLocalWeldClosed = false
+  ; internalZetaContinuationClosed = false
   ; casimirZetaSameObjectWeldClosed = false
   ; pressureSameObjectDerivativeClosed = false
+
   ; importedBishopSetoidCompleteRealBackendIsTrue = refl
   ; localFastCauchyBackendStillCriticalIsFalse = refl
   ; setoidNativeCasimirScalarInterfaceIsTrue = refl
@@ -148,30 +204,45 @@ canonicalRemainingClosureStatus = record
   ; regulatorAnalyticCutsetIsTrue = refl
   ; zetaMinusThreeCutsetIsTrue = refl
   ; pressureDerivativeCutsetIsTrue = refl
+
   ; brownMaclaySameSystemSourceBackedIsTrue = refl
   ; zetaMinusThreeSourceBackedIsTrue = refl
+  ; zetaEulerMaclaurinContinuationSourceBackedIsTrue = refl
   ; sineZeroClassificationSourceBackedIsTrue = refl
+  ; fourierCompletenessSourceBackedIsTrue = refl
+  ; changeOfVariablesSourceBackedIsTrue = refl
+
   ; oneSixthDenominatorCompilerOwnedIsTrue = refl
   ; longitudinalEndpointReductionOwnedIsTrue = refl
   ; forwardNaturalPiModesOwnedIsTrue = refl
+  ; teTmGenerationCompletenessSplitOwnedIsTrue = refl
   ; bishopAmplitudeCancellationOwnedIsTrue = refl
   ; bishopDivisionTransportOwnedIsTrue = refl
   ; cubicDerivativeFactorThreeOwnedIsTrue = refl
   ; bernoulliFourCubicFiniteDifferenceOwnedIsTrue = refl
+  ; bernoulliFourCubicTelescopingOwnedIsTrue = refl
+  ; polarJacobianDeterminantAlgebraOwnedIsTrue = refl
+  ; powerSeriesDifferentiationBidiKernelOwnedIsTrue = refl
+  ; bishopMatchedCommonTermCancellationOwnedIsTrue = refl
+  ; residualCauchyToLimitCompilerOwnedIsTrue = refl
   ; sourceTransportCompilerOwnedIsTrue = refl
+  ; endgameSourceTransportCompilerOwnedIsTrue = refl
   ; preProjectionCancellationShapeOwnedIsTrue = refl
+
   ; legacyPropositionalWeldClosedIsFalse = refl
   ; maxwellPDEClosedIsFalse = refl
-  ; teTmCompletenessClosedIsFalse = refl
+  ; teTmCompletenessLocalWeldClosedIsFalse = refl
   ; sineZeroSameObjectTransportClosedIsFalse = refl
   ; physicalLongitudinalModeIndexWeldClosedIsFalse = refl
-  ; polarMeasureClosedIsFalse = refl
+  ; trigPowerSeriesDerivativeClosedIsFalse = refl
+  ; polarChangeOfVariablesLocalWeldClosedIsFalse = refl
   ; angularHalfClosedIsFalse = refl
   ; radialThirdEndpointClosedIsFalse = refl
   ; radialOneSixthClosedIsFalse = refl
   ; dominationInterchangeClosedIsFalse = refl
-  ; regulatorTailClosedIsFalse = refl
-  ; zetaMinusThreeAnalyticClosedIsFalse = refl
+  ; residualCauchyTailEstimateClosedIsFalse = refl
+  ; zetaEulerMaclaurinLocalWeldClosedIsFalse = refl
+  ; internalZetaContinuationClosedIsFalse = refl
   ; casimirZetaSameObjectWeldClosedIsFalse = refl
   ; pressureSameObjectDerivativeClosedIsFalse = refl
   }
@@ -185,8 +256,8 @@ record ClosureOrder : Set where
 
 canonicalClosureOrder : ClosureOrder
 canonicalClosureOrder = record
-  { first = "close Maxwell wave/TE-TM completeness and reverse sine-zero same-object transport; forward n*pi candidate modes, endpoint algebra, amplitude cancellation, and division by d are already owned"
-  ; second = "close polar angular 1/2 and regulated radial endpoint theorem; cubic factor three and denominator 2*3=6 are already owned"
-  ; third = "close regulator estimates and internal zeta(-3) continuation / literal Casimir defect weld; B4(x+1)-B4(x)=4x^3 and rational coefficient arithmetic are already owned"
-  ; fourth = "provide setoid-to-legacy kernel weld and compile pressure derivative"
+  { first = "weld the source-backed Fourier completeness theorem to the literal perfect-conductor TE/TM mode Hilbert carrier; forward candidate generation is already owned"
+  ; second = "weld the source-backed change-of-variables theorem to the literal polar Casimir measure/integrand and close the shared trig power-series derivative receipt; Jacobian determinant algebra is already owned"
+  ; third = "prove the residual post-cancellation Cauchy tail and required interchange estimates; matched common divergence cancellation and Cauchy-to-limit existence are already compiler output"
+  ; fourth = "weld the source-backed Euler--Maclaurin continuation at s=-3 to the literal Casimir longitudinal defect, or prove the continuation internally; finite B4 cubic algebra/telescoping and 1/120 arithmetic are already owned"
   }
