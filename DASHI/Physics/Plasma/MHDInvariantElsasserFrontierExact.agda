@@ -3,7 +3,7 @@ module DASHI.Physics.Plasma.MHDInvariantElsasserFrontierExact where
 open import DASHI.Core.Prelude
 
 ------------------------------------------------------------------------
--- CURRENT SCIENCE FRONTIER
+-- CURRENT SCIENCE FRONTIER AFTER LITERAL PROJECTED-FOURIER CLOSURE
 ------------------------------------------------------------------------
 
 record MHDInvariantElsasserFrontier : Set where
@@ -25,29 +25,56 @@ record MHDInvariantElsasserFrontier : Set where
     crossHelicityDirectionalVariationRechartOwnedIsTrue : crossHelicityDirectionalVariationRechartOwned ≡ true
 
     literalPlusCyclicCancellationOwned : Bool
-    literalPlusCyclicCancellationOwnedIsFalse : literalPlusCyclicCancellationOwned ≡ false
+    literalPlusCyclicCancellationOwnedIsTrue : literalPlusCyclicCancellationOwned ≡ true
 
     literalMinusCyclicCancellationOwned : Bool
-    literalMinusCyclicCancellationOwnedIsFalse : literalMinusCyclicCancellationOwned ≡ false
+    literalMinusCyclicCancellationOwnedIsTrue : literalMinusCyclicCancellationOwned ≡ true
 
     pressureProjectionCancellationOwned : Bool
-    pressureProjectionCancellationOwnedIsFalse : pressureProjectionCancellationOwned ≡ false
+    pressureProjectionCancellationOwnedIsTrue : pressureProjectionCancellationOwned ≡ true
 
     totalEnergyTriadConservationOwned : Bool
-    totalEnergyTriadConservationOwnedIsFalse : totalEnergyTriadConservationOwned ≡ false
+    totalEnergyTriadConservationOwnedIsTrue : totalEnergyTriadConservationOwned ≡ true
 
     crossHelicityTriadConservationOwned : Bool
-    crossHelicityTriadConservationOwnedIsFalse : crossHelicityTriadConservationOwned ≡ false
+    crossHelicityTriadConservationOwnedIsTrue : crossHelicityTriadConservationOwned ≡ true
 
     magneticHelicityUsesDistinctHelicalWeight : Bool
     magneticHelicityUsesDistinctHelicalWeightIsTrue : magneticHelicityUsesDistinctHelicalWeight ≡ true
 
+    magneticVectorPotentialObserverOwned : Bool
+    magneticVectorPotentialObserverOwnedIsTrue :
+      magneticVectorPotentialObserverOwned ≡ true
+
+    magneticHelicityPlusInverseRadiusWeightOwned : Bool
+    magneticHelicityPlusInverseRadiusWeightOwnedIsTrue :
+      magneticHelicityPlusInverseRadiusWeightOwned ≡ true
+
+    magneticHelicityMinusInverseRadiusWeightOwned : Bool
+    magneticHelicityMinusInverseRadiusWeightOwnedIsTrue :
+      magneticHelicityMinusInverseRadiusWeightOwned ≡ true
+
+    inverseCurlSelfAdjointOnTransverseOwned : Bool
+    inverseCurlSelfAdjointOnTransverseOwnedIsTrue :
+      inverseCurlSelfAdjointOnTransverseOwned ≡ true
+
+    magneticHelicityDirectionalVariationOwned : Bool
+    magneticHelicityDirectionalVariationOwnedIsTrue :
+      magneticHelicityDirectionalVariationOwned ≡ true
+
+    magneticHelicityRealityPairedInductionCancellationOwned : Bool
+    magneticHelicityRealityPairedInductionCancellationOwnedIsFalse :
+      magneticHelicityRealityPairedInductionCancellationOwned ≡ false
+
     magneticHelicityWeightedCyclicCancellationOwned : Bool
-    magneticHelicityWeightedCyclicCancellationOwnedIsFalse : magneticHelicityWeightedCyclicCancellationOwned ≡ false
+    magneticHelicityWeightedCyclicCancellationOwnedIsFalse :
+      magneticHelicityWeightedCyclicCancellationOwned ≡ false
 
 canonicalMHDInvariantElsasserFrontier : MHDInvariantElsasserFrontier
 canonicalMHDInvariantElsasserFrontier =
   mhd-invariant-elsasser-frontier
     true refl true refl true refl true refl true refl
-    false refl false refl false refl false refl false refl
-    true refl false refl
+    true refl true refl true refl true refl true refl
+    true refl true refl true refl true refl true refl
+    true refl true refl true refl
+    false refl false refl
