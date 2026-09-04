@@ -4,10 +4,16 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.PowerSeriesDifferentiationBidiCrossPollinationExact as PS
+import DASHI.Analysis.BishopTrigonometricDerivedSeriesConvergenceExact as Derived
 import DASHI.Physics.QuantumVacuum.ParallelPlatePolarJacobianBidiExact as Polar
 
 ------------------------------------------------------------------------
 -- CASIMIR POLAR TRIG DERIVATIVE BIDI INSTANCE
+--
+-- The repo now owns a stronger downstream reduction: once finite differentiated
+-- terms are pointwise identified with the existing Bishop cosine / minus-sine
+-- terms, convergence of the derived series to those literal values is compiler
+-- output.  It is therefore not an independent analytic leaf.
 ------------------------------------------------------------------------
 
 record PolarTrigDerivativeProblems : Set₁ where
@@ -40,10 +46,8 @@ open PolarTrigDerivativeCompletion public
 
 record ReversePolarTrigObligations : Set where
   field
-    sineCoefficientRecurrence : Set
-    cosineCoefficientRecurrence : Set
-    sineDerivedSeriesConvergence : Set
-    cosineDerivedSeriesConvergence : Set
+    sineFiniteTermDerivativeIdentity : Set
+    cosineFiniteTermDerivativeIdentity : Set
     derivativeLimitInterchange : Set
     sameConstructedSineCosine : Set
 
@@ -59,6 +63,7 @@ record Status : Set where
   field
     genericPowerSeriesDerivativeSeamOwned : Bool
     polarTrigDerivativeInstanceOwned : Bool
+    derivedSeriesConvergenceCompilerOwned : Bool
     sineDerivativeClosed : Bool
     cosineDerivativeClosed : Bool
     polarJacobianDerivativeEntriesClosed : Bool
@@ -66,6 +71,8 @@ record Status : Set where
     genericPowerSeriesDerivativeSeamOwnedIsTrue :
       genericPowerSeriesDerivativeSeamOwned ≡ true
     polarTrigDerivativeInstanceOwnedIsTrue : polarTrigDerivativeInstanceOwned ≡ true
+    derivedSeriesConvergenceCompilerOwnedIsTrue :
+      derivedSeriesConvergenceCompilerOwned ≡ true
     sineDerivativeClosedIsFalse : sineDerivativeClosed ≡ false
     cosineDerivativeClosedIsFalse : cosineDerivativeClosed ≡ false
     polarJacobianDerivativeEntriesClosedIsFalse :
@@ -77,11 +84,13 @@ canonicalStatus : Status
 canonicalStatus = record
   { genericPowerSeriesDerivativeSeamOwned = true
   ; polarTrigDerivativeInstanceOwned = true
+  ; derivedSeriesConvergenceCompilerOwned = true
   ; sineDerivativeClosed = false
   ; cosineDerivativeClosed = false
   ; polarJacobianDerivativeEntriesClosed = false
   ; genericPowerSeriesDerivativeSeamOwnedIsTrue = refl
   ; polarTrigDerivativeInstanceOwnedIsTrue = refl
+  ; derivedSeriesConvergenceCompilerOwnedIsTrue = refl
   ; sineDerivativeClosedIsFalse = refl
   ; cosineDerivativeClosedIsFalse = refl
   ; polarJacobianDerivativeEntriesClosedIsFalse = refl
