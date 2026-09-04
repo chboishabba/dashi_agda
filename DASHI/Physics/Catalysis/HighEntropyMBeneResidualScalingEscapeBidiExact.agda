@@ -3,6 +3,7 @@ module DASHI.Physics.Catalysis.HighEntropyMBeneResidualScalingEscapeBidiExact wh
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Core.ResidualScalingLawEscapeExact as Scaling
 import DASHI.Physics.Catalysis.HighEntropyMBeneMechanismHyperfabricExact as MBene
 
@@ -55,7 +56,11 @@ exactMBeneResidualScalingBlocksCoarseDescent producer =
 exactMBeneResidualScalingGivesStrictRefinement :
   ∀ {chart : MBeneScalingChart}
     (producer : MBeneResidualScalingProducer chart) →
-  _
+  Observer.StrictRefinement
+    (coarse producer)
+    (Scaling.refinedScalingObservation
+      (coarse producer)
+      (residual producer))
 exactMBeneResidualScalingGivesStrictRefinement producer =
   Scaling.residualScalingWitnessGivesStrictRefinement
     (exactSeparatingWitness producer)
