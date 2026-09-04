@@ -39,7 +39,7 @@ spectralCircleSpatialClaim : BidiClaim
 spectralCircleSpatialClaim =
   bidiClaim spatialSpectralCircle
     "spatial twisted-block spectral circle"
-    "concrete twistedDirMatrix character rechart + group labels + scalar action"
+    "owned source DFT infrastructure + concrete conjugated-matrix-to-monomial equality + same-label orbit receipts"
     true false false false
 
 orbitProductClaim : BidiClaim
@@ -79,9 +79,9 @@ ropeOptimalityClaim =
 
 
 data MissingObligation : Set where
-  needConcreteTwistedCharacterRechart : MissingObligation
-  needConcreteGroupLabelling : MissingObligation
-  needConcreteScalarActionWeld : MissingObligation
+  needConcreteConjugatedEntries : MissingObligation
+  needConcreteCharacterIndexAlignment : MissingObligation
+  needConcreteDFTMonomialMatrixEquality : MissingObligation
   needConcretePeriodAttachment : MissingObligation
   needConcreteOrbitWeightAttachment : MissingObligation
   needOrbitPartitionWeld : MissingObligation
@@ -93,9 +93,9 @@ data MissingObligation : Set where
 
 compileMissing : ClaimKind → List MissingObligation
 compileMissing spatialSpectralCircle =
-  needConcreteTwistedCharacterRechart ∷
-  needConcreteGroupLabelling ∷
-  needConcreteScalarActionWeld ∷
+  needConcreteConjugatedEntries ∷
+  needConcreteCharacterIndexAlignment ∷
+  needConcreteDFTMonomialMatrixEquality ∷
   needConcretePeriodAttachment ∷
   needConcreteOrbitWeightAttachment ∷
   []
@@ -113,15 +113,16 @@ record BidiFirewall : Set where
     conditionalConsumerImpliesProducer : Bool
     architecturalAnalogyImpliesTheoremTransport : Bool
     genericInfrastructureMayReplaceConcreteAttachment : Bool
+    finalMagnitudeHypothesisMayCountAsItsOwnDerivation : Bool
 
 canonicalBidiFirewall : BidiFirewall
-canonicalBidiFirewall = bidiFirewall false false false false false
+canonicalBidiFirewall = bidiFirewall false false false false false false
 
 spatialSpectralCircleExactCutset :
   compileMissing (kind spectralCircleSpatialClaim)
-  ≡ needConcreteTwistedCharacterRechart ∷
-    needConcreteGroupLabelling ∷
-    needConcreteScalarActionWeld ∷
+  ≡ needConcreteConjugatedEntries ∷
+    needConcreteCharacterIndexAlignment ∷
+    needConcreteDFTMonomialMatrixEquality ∷
     needConcretePeriodAttachment ∷
     needConcreteOrbitWeightAttachment ∷
     []
