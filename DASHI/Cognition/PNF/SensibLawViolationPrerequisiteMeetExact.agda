@@ -14,16 +14,13 @@ import DASHI.Cognition.PNF.SensibLawLiveProducerCoordinateEvidenceBridgeExact as
 import DASHI.Cognition.PNF.SensibLawResolvedLegalEvidenceExact as Evidence
 import DASHI.Cognition.PNF.SensibLawParticipantLegalRoleWrongTypeBidiExact as LegalRole
 
-------------------------------------------------------------------------
--- WRONGTYPE APPLICABILITY RECEIPT IN STATE
-------------------------------------------------------------------------
-
 record WrongTypeApplicabilityReceiptInState
     (state : Status.SemanticCommitmentState) : Set where
   constructor wrongTypeApplicabilityReceiptInState
   field
     receipt : Legal.WrongTypeApplicabilityReceipt
-    legalStatusMembership : Legal.legalStatus receipt Bridge.∈ Status.legalStatuses state
+    legalStatusMembership :
+      Bridge._∈_ (Legal.legalStatus receipt) (Status.legalStatuses state)
     applicabilityResolution : Status.ApplicabilityResolutionReceipt
     sameLegalStatus :
       Status.legalStatus applicabilityResolution ≡ Legal.legalStatus receipt
@@ -33,10 +30,6 @@ record WrongTypeApplicabilityReceiptInState
     receiptReference : String
 
 open WrongTypeApplicabilityReceiptInState public
-
-------------------------------------------------------------------------
--- Every element evaluation must belong to the exact WrongType under review.
-------------------------------------------------------------------------
 
 data EvaluationsForWrongType
     (wrong : Ontology.StableId) : List Legal.WrongElementEvaluation → Set where
@@ -110,10 +103,6 @@ compiledViolationMatchesDecision :
   ≡ resultingViolation (decision input)
 compiledViolationMatchesDecision input = refl
 
-------------------------------------------------------------------------
--- Boundaries.
-------------------------------------------------------------------------
-
 data ApplicabilityAutomaticallyProvesViolation : Set where
 data ElementEvaluationForOtherWrongTypeMayBeBorrowed : Set where
 data LegalRoleAloneProvesViolation : Set where
@@ -123,17 +112,13 @@ data ViolationAutomaticallyProvesLiability : Set where
 applicabilityDoesNotAutomaticallyProveViolation :
   ApplicabilityAutomaticallyProvesViolation → ⊥
 applicabilityDoesNotAutomaticallyProveViolation ()
-
 otherWrongTypeEvaluationCannotBeBorrowed :
   ElementEvaluationForOtherWrongTypeMayBeBorrowed → ⊥
 otherWrongTypeEvaluationCannotBeBorrowed ()
-
 legalRoleAloneDoesNotProveViolation : LegalRoleAloneProvesViolation → ⊥
 legalRoleAloneDoesNotProveViolation ()
-
 resolvedEvidenceAloneDoesNotProveViolation : ResolvedEvidenceAloneProvesViolation → ⊥
 resolvedEvidenceAloneDoesNotProveViolation ()
-
 violationDoesNotAutomaticallyProveLiability : ViolationAutomaticallyProvesLiability → ⊥
 violationDoesNotAutomaticallyProveLiability ()
 
