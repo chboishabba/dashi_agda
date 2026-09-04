@@ -41,6 +41,7 @@ attributionActive = Demand.activeRequirement Consumer.generalSemanticConsumer De
 propositionActive = Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.propositionStatusCoordinate Demand.legalApplicabilityNeedsProposition "PDF applicability needs proposition status"
 occurrenceActive = Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.occurrenceCoordinate Demand.legalApplicabilityNeedsOccurrence "PDF applicability needs occurrence status"
 documentContextActive = Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.documentContextCoordinate Demand.legalApplicabilityNeedsContext "PDF applicability needs document/case context"
+resolvedEvidenceActive = Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.resolvedLegalEvidenceCoordinate Demand.legalApplicabilityNeedsResolvedEvidence "PDF applicability still requires same-object resolved legal-use evidence"
 legalSourceAuthorityActive = Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.legalSourceAuthorityCoordinate Demand.legalApplicabilityNeedsLegalSourceAuthority "PDF applicability still requires legal-source authority"
 resolvedScopeActive = Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.resolvedScopeCoordinate Demand.legalApplicabilityNeedsResolvedScope "PDF applicability still requires resolved same-object scope"
 resolvedJurisdictionActive = Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.resolvedLegalJurisdictionCoordinate Demand.legalApplicabilityNeedsResolvedJurisdiction "PDF applicability still requires resolved legal jurisdiction"
@@ -74,6 +75,12 @@ propositionWork = Routing.routedWork Routing.noProducerInvocation refl Routing.r
 occurrenceWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "occurrence receipt already live"
 documentContextWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "document context receipt already live"
 
+resolvedEvidenceUnassessed = Planner.coordinateEvidenceReceipt Planner.currentUnassessed [] "source/proposition metadata is present, but no exact EvidenceItem/EventEvidenceLink legal-use evidence receipt has yet been produced for this PDF proposition/event" true refl true refl
+resolvedEvidencePlan = Planner.planRequirement resolvedEvidenceUnassessed "inspect same-object legal-use evidence before applicability"
+resolvedEvidenceNeedsInspection : Planner.action resolvedEvidencePlan ≡ Planner.inspectForEvidence
+resolvedEvidenceNeedsInspection = refl
+resolvedEvidenceWork = Routing.routedWork Routing.producerInvocationRequired refl (Routing.invokeProducer Routing.resolvedLegalEvidenceRoute) "inspect exact EvidenceItem/EventEvidenceLink/provenance receipt; do not promote parser or source evidence candidate"
+
 legalSourceAuthorityUnassessed = Planner.coordinateEvidenceReceipt Planner.currentUnassessed [] "no legal-source authority search/verification receipt has yet been run for this PDF requirement" true refl true refl
 legalSourceAuthorityPlan = Planner.planRequirement legalSourceAuthorityUnassessed "inspect legal-source authority before any missing classification"
 legalSourceAuthorityNeedsInspection : Planner.action legalSourceAuthorityPlan ≡ Planner.inspectForEvidence
@@ -93,21 +100,27 @@ resolvedJurisdictionNeedsInspection = refl
 resolvedJurisdictionWork = Routing.routedWork Routing.producerInvocationRequired refl (Routing.invokeProducer Routing.resolvedLegalJurisdictionRoute) "inspect exact legal-system jurisdiction weld; do not promote geographic/document candidate"
 
 data PdfParserReceiptPaysLegalSourceAuthorityRequirement : Set where
+data PdfSourceEvidenceCandidatePaysResolvedLegalEvidence : Set where
 data PdfParserScopeCandidatePaysResolvedScope : Set where
 data PdfDocumentContextPaysResolvedLegalJurisdiction : Set where
 data PaidPrefixMeansApplicabilityFullyResolved : Set where
+data UnassessedResolvedEvidenceMeansMissing : Set where
 data UnassessedLegalSourceAuthorityMeansMissing : Set where
 data UnassessedResolvedScopeMeansMissing : Set where
 data UnassessedResolvedJurisdictionMeansMissing : Set where
 
 pdfParserDoesNotPayLegalSourceAuthority : PdfParserReceiptPaysLegalSourceAuthorityRequirement → ⊥
 pdfParserDoesNotPayLegalSourceAuthority ()
+pdfSourceEvidenceCandidateDoesNotPayResolvedLegalEvidence : PdfSourceEvidenceCandidatePaysResolvedLegalEvidence → ⊥
+pdfSourceEvidenceCandidateDoesNotPayResolvedLegalEvidence ()
 pdfParserScopeCandidateDoesNotPayResolvedScope : PdfParserScopeCandidatePaysResolvedScope → ⊥
 pdfParserScopeCandidateDoesNotPayResolvedScope ()
 pdfDocumentContextDoesNotPayResolvedLegalJurisdiction : PdfDocumentContextPaysResolvedLegalJurisdiction → ⊥
 pdfDocumentContextDoesNotPayResolvedLegalJurisdiction ()
 paidPrefixDoesNotMeanFullApplicability : PaidPrefixMeansApplicabilityFullyResolved → ⊥
 paidPrefixDoesNotMeanFullApplicability ()
+unassessedResolvedEvidenceDoesNotMeanMissing : UnassessedResolvedEvidenceMeansMissing → ⊥
+unassessedResolvedEvidenceDoesNotMeanMissing ()
 unassessedLegalSourceAuthorityDoesNotMeanMissing : UnassessedLegalSourceAuthorityMeansMissing → ⊥
 unassessedLegalSourceAuthorityDoesNotMeanMissing ()
 unassessedResolvedScopeDoesNotMeanMissing : UnassessedResolvedScopeMeansMissing → ⊥
@@ -119,8 +132,9 @@ record PdfPlannerLiveBoundary : Set where
   constructor pdf-planner-live-boundary
   field
     materialisedParserRowsReused propositionReceiptReused occurrenceReceiptReused attributionReceiptReused documentContextReceiptReused : Bool
+    resolvedEvidenceIsUnassessed resolvedEvidenceRoutesToLegalEvidenceProducer : Bool
     legalSourceAuthorityIsUnassessed legalSourceAuthorityRoutesToInspectionProducer : Bool
     resolvedScopeIsUnassessed resolvedScopeRoutesToScopeResolutionProducer : Bool
     resolvedJurisdictionIsUnassessed resolvedJurisdictionRoutesToLegalJurisdictionProducer : Bool
     paidPrefixClosesApplicability plannerReparsesPdf : Bool
-canonicalPdfPlannerLiveBoundary = pdf-planner-live-boundary true true true true true true true true true true true false false
+canonicalPdfPlannerLiveBoundary = pdf-planner-live-boundary true true true true true true true true true true true true true false false
