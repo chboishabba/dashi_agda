@@ -1,5 +1,6 @@
 module DASHI.Analysis.EndpointZeroTrigonometricSeparationExact where
 
+open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; trans; cong; cong₂)
 
 import DASHI.Analysis.ConstructiveRealSpine as R
@@ -112,8 +113,35 @@ record EndpointZeroReductionReceipt
 
 open EndpointZeroReductionReceipt public
 
+endpointZeroReduction :
+  {real : R.ConstructedOrderedCompleteReal} →
+  {exp : R.ConstructedRealExponential real} →
+  (laws : Ring.ConstructedRealRingNormalisationLaws real) →
+  (trig : Trig.TrigonometricPowerSeriesAuthority real exp) →
+  (A B k d : R.Real real) →
+  mode trig A B k (R.zero real) ≡ R.zero real →
+  mode trig A B k d ≡ R.zero real →
+  EndpointZeroReductionReceipt laws trig A B k d
+endpointZeroReduction {real} laws trig A B k d firstBoundary secondBoundary =
+  record
+    { firstBoundaryZero = firstBoundary
+    ; secondBoundaryZero = secondBoundary
+    ; cosineCoefficientZero = Bzero
+    ; secondBoundaryReducesToSineFactor =
+        trans
+          (sym (modeWithZeroCosineCoefficient laws trig A k d))
+          (trans
+            (sym (cong (λ coeff → mode trig A coeff k d) Bzero))
+            secondBoundary)
+    }
+  where
+    Bzero : B ≡ R.zero real
+    Bzero =
+      firstEndpointZeroForcesCosineCoefficientZero
+        laws trig A B k firstBoundary
+
 data EndpointReductionAutomaticallyClassifiesSineZeros : Set where
 
 endpointAlgebraDoesNotClassifyAllZeros :
-  EndpointReductionAutomaticallyClassifiesSineZeros → DASHI.Core.Prelude.⊥
+  EndpointReductionAutomaticallyClassifiesSineZeros → ⊥
 endpointAlgebraDoesNotClassifyAllZeros ()
