@@ -3,12 +3,13 @@ module DASHI.Analysis.NonArchimedeanSpectralObligationRoutingExact where
 ------------------------------------------------------------------------
 -- Typed claim-specific reverse routing.
 --
--- This avoids string-dispatch entirely: each downstream target is a distinct
--- constructor, so reverse proof search cannot accidentally merge obligations
--- merely because they share the same Boolean status summary.
+-- This avoids string-dispatch entirely.  Targets route to a list of exact
+-- producer obligations so a multi-coordinate cutset is not collapsed into one
+-- generic missing-proof label.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 
 
 data SpectralTarget : Set where
@@ -21,42 +22,58 @@ data SpectralTarget : Set where
 
 
 data ProducerObligation : Set where
-  explicitFourierIntertwiner : ProducerObligation
+  concreteTwistedCharacterRechart : ProducerObligation
+  concreteGroupLabelling : ProducerObligation
+  concreteScalarActionWeld : ProducerObligation
+  concretePeriodAttachment : ProducerObligation
+  concreteOrbitWeightAttachment : ProducerObligation
   orbitPartitionReceipt : ProducerObligation
   graphToDecompositionConstruction : ProducerObligation
   activeSetDepthDecayBound : ProducerObligation
   entropySameObjectReceipt : ProducerObligation
   transformerLossOrFidelityTheorem : ProducerObligation
-  alreadyOwned : ProducerObligation
 
-reverseRoute : SpectralTarget → ProducerObligation
-reverseRoute spatialSpectralCircle = explicitFourierIntertwiner
-reverseRoute orbitProductInterpretation = alreadyOwned
-reverseRoute arbitraryDagAdelicCover = graphToDecompositionConstruction
-reverseRoute depthDecaySparsity = activeSetDepthDecayBound
-reverseRoute contractedBoundaryEntropyLaw = entropySameObjectReceipt
-reverseRoute ropeModelOptimality = transformerLossOrFidelityTheorem
+reverseRoute : SpectralTarget → List ProducerObligation
+reverseRoute spatialSpectralCircle =
+  concreteTwistedCharacterRechart ∷
+  concreteGroupLabelling ∷
+  concreteScalarActionWeld ∷
+  concretePeriodAttachment ∷
+  concreteOrbitWeightAttachment ∷
+  []
+reverseRoute orbitProductInterpretation = []
+reverseRoute arbitraryDagAdelicCover = graphToDecompositionConstruction ∷ []
+reverseRoute depthDecaySparsity = activeSetDepthDecayBound ∷ []
+reverseRoute contractedBoundaryEntropyLaw = entropySameObjectReceipt ∷ []
+reverseRoute ropeModelOptimality = transformerLossOrFidelityTheorem ∷ []
 
 spatialRouteExact :
-  reverseRoute spatialSpectralCircle ≡ explicitFourierIntertwiner
+  reverseRoute spatialSpectralCircle
+  ≡ concreteTwistedCharacterRechart ∷
+    concreteGroupLabelling ∷
+    concreteScalarActionWeld ∷
+    concretePeriodAttachment ∷
+    concreteOrbitWeightAttachment ∷
+    []
 spatialRouteExact = refl
 
 orbitProductRouteExact :
-  reverseRoute orbitProductInterpretation ≡ alreadyOwned
+  reverseRoute orbitProductInterpretation ≡ []
 orbitProductRouteExact = refl
 
 multiPrimeCoverRouteExact :
-  reverseRoute arbitraryDagAdelicCover ≡ graphToDecompositionConstruction
+  reverseRoute arbitraryDagAdelicCover
+  ≡ graphToDecompositionConstruction ∷ []
 multiPrimeCoverRouteExact = refl
 
 sparsityRouteExact :
-  reverseRoute depthDecaySparsity ≡ activeSetDepthDecayBound
+  reverseRoute depthDecaySparsity ≡ activeSetDepthDecayBound ∷ []
 sparsityRouteExact = refl
 
 entropyRouteExact :
-  reverseRoute contractedBoundaryEntropyLaw ≡ entropySameObjectReceipt
+  reverseRoute contractedBoundaryEntropyLaw ≡ entropySameObjectReceipt ∷ []
 entropyRouteExact = refl
 
 ropeRouteExact :
-  reverseRoute ropeModelOptimality ≡ transformerLossOrFidelityTheorem
+  reverseRoute ropeModelOptimality ≡ transformerLossOrFidelityTheorem ∷ []
 ropeRouteExact = refl
