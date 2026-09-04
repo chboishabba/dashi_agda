@@ -21,6 +21,10 @@ import DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact as Authori
 import DASHI.Cognition.PNF.SensibLawLegalJurisdictionEvidenceExact as Jurisdiction
 import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExact as Legal
 import DASHI.Cognition.PNF.SensibLawApplicabilityPrerequisiteMeetExact as Meet
+import DASHI.Cognition.PNF.SensibLawConsumerIndexedDiscourseInterpretationExact as Consumer
+import DASHI.Cognition.PNF.SensibLawConsumerQuerySemanticCoordinateReopeningExact as Demand
+import DASHI.Cognition.PNF.SensibLawActiveRequirementExecutionPlannerExact as Planner
+import DASHI.Cognition.PNF.SensibLawRequirementProducerRoutingExact as Routing
 
 ------------------------------------------------------------------------
 -- FULLY-PAID REGRESSION FIXTURE
@@ -67,10 +71,6 @@ fixtureDocumentFrame =
     ("existing canonical dog-walk fixture" ∷ [])
     "fixture document-context resolver"
     false refl false refl
-
-------------------------------------------------------------------------
--- Same proposition/event statuses.
-------------------------------------------------------------------------
 
 fixtureProposition : Status.PropositionStatusProduct
 fixtureProposition =
@@ -121,13 +121,8 @@ fixtureContextProposition : Status.PropositionStatusProduct
 fixtureContextProposition =
   Document.ContextualPropositionRefinement.refined fixtureContextualRefinement
 
-contextCompilerReturnsExactProposition :
-  fixtureContextProposition ≡ fixtureProposition
+contextCompilerReturnsExactProposition : fixtureContextProposition ≡ fixtureProposition
 contextCompilerReturnsExactProposition = refl
-
-------------------------------------------------------------------------
--- One exact legal-status object pays both authority and jurisdiction.
-------------------------------------------------------------------------
 
 fixtureLegalStatus : Status.LegalStatusProduct
 fixtureLegalStatus =
@@ -143,12 +138,6 @@ fixtureLegalStatus =
     Status.submission
     Status.normativeRelationUnresolved
 
-------------------------------------------------------------------------
--- State.  The source candidate is an existing parser-derived Constitution
--- carrier used only to satisfy the generic state container; none of the proof
--- obligations below may be discharged by that unrelated parser carrier.
-------------------------------------------------------------------------
-
 fixtureState : Status.SemanticCommitmentState
 fixtureState =
   Status.semanticCommitmentState
@@ -161,25 +150,18 @@ fixtureState =
 
 ownedProposition : Bridge.PropositionReceiptInState fixtureState
 ownedProposition =
-  Bridge.propositionReceiptInState
-    fixturePropositionReceipt Bridge.here
+  Bridge.propositionReceiptInState fixturePropositionReceipt Bridge.here
     "fixture proposition exact state membership"
 
 ownedOccurrence : Bridge.OccurrenceReceiptInState fixtureState
 ownedOccurrence =
-  Bridge.occurrenceReceiptInState
-    fixtureOccurrenceReceipt Bridge.here
+  Bridge.occurrenceReceiptInState fixtureOccurrenceReceipt Bridge.here
     "fixture event exact state membership"
 
 ownedDocumentContext : Bridge.DocumentContextReceiptInState fixtureState
 ownedDocumentContext =
-  Bridge.documentContextReceiptInState
-    fixtureDocumentFrame fixtureContextProposition Bridge.here
+  Bridge.documentContextReceiptInState fixtureDocumentFrame fixtureContextProposition Bridge.here
     "fixture applicant-submission context compiled to exact proposition"
-
-------------------------------------------------------------------------
--- Evidence.
-------------------------------------------------------------------------
 
 fixtureEvidenceItem : Ontology.EvidenceItem
 fixtureEvidenceItem =
@@ -192,40 +174,25 @@ fixtureEvidenceItem =
 
 fixtureEvidenceLink : Ontology.EventEvidenceLink
 fixtureEvidenceLink =
-  Ontology.attachEvidence
-    Vertical.dogEvent fixtureEvidenceItem "supports asserted dog-walk proposition"
+  Ontology.attachEvidence Vertical.dogEvent fixtureEvidenceItem
+    "supports asserted dog-walk proposition"
 
 resolvedEvidence : Evidence.ResolvedLegalEvidenceReceiptInState fixtureState
 resolvedEvidence =
   Evidence.resolvedLegalEvidenceReceiptInState
-    fixtureEvidenceItem
-    fixtureEvidenceLink
-    fixtureEvent
-    fixtureProposition
-    Bridge.here
-    Bridge.here
-    refl
-    refl
+    fixtureEvidenceItem fixtureEvidenceLink fixtureEvent fixtureProposition
+    Bridge.here Bridge.here refl refl
     Evidence.documentaryEvidenceLegalUse
     true refl
     ("provenance:fixture:dog-walk-document" ∷ [])
     "fixture resolved documentary evidence"
 
-------------------------------------------------------------------------
--- Authority and jurisdiction over the same legal status/system.
-------------------------------------------------------------------------
-
 authorityReceipt : Authority.LegalSourceAuthorityReceiptInState fixtureState
 authorityReceipt =
   Authority.legalSourceAuthorityReceiptInState
-    fixtureSource
-    fixtureSystem
-    refl
-    fixtureLegalStatus
-    Bridge.here
-    refl
-    Authority.validityCurrent
-    Authority.currentValidity
+    fixtureSource fixtureSystem refl
+    fixtureLegalStatus Bridge.here refl
+    Authority.validityCurrent Authority.currentValidity
     ("Fixture Dog Duty Act s 1" ∷ [])
     ("fixture validity interval checked" ∷ [])
     ("fixture source recognized as legal authority" ∷ [])
@@ -234,19 +201,11 @@ authorityReceipt =
 jurisdictionReceipt : Jurisdiction.LegalJurisdictionReceiptInState fixtureState
 jurisdictionReceipt =
   Jurisdiction.legalJurisdictionReceiptInState
-    fixtureCase
-    fixtureSystem
-    refl
-    fixtureLegalStatus
-    Bridge.here
-    Jurisdiction.legalSystemResolved
+    fixtureCase fixtureSystem refl
+    fixtureLegalStatus Bridge.here Jurisdiction.legalSystemResolved
     ("fixture case legal-system identity" ∷ [])
     ("fixture legal system record" ∷ [])
     "fixture resolved legal-system jurisdiction"
-
-------------------------------------------------------------------------
--- Same-object resolved scope.
-------------------------------------------------------------------------
 
 fixtureScopeBody : Candidate.Formula
 fixtureScopeBody =
@@ -257,67 +216,130 @@ fixtureScopeBody =
 fixtureScopeReceipt : Scope.ScopeCompositionReceipt
 fixtureScopeReceipt =
   Scope.scopeCompositionReceipt
-    fixtureProposition
-    fixtureEvent
-    fixtureScopeBody
-    []
-    Status.modalityKindUnresolved
-    Status.modalForceUnresolved
-    Status.scopeResolved
-    Status.scopeResolved
-    Status.conditionUnresolved
-    Status.scopeResolved
-    Status.eventTime
-    Status.scopeResolved
-    "fixture joint scope resolution"
-    false false
+    fixtureProposition fixtureEvent fixtureScopeBody []
+    Status.modalityKindUnresolved Status.modalForceUnresolved
+    Status.scopeResolved Status.scopeResolved
+    Status.conditionUnresolved Status.scopeResolved
+    Status.eventTime Status.scopeResolved
+    "fixture joint scope resolution" false false
 
 ownedScope : Bridge.ResolvedScopeReceiptInState fixtureState
 ownedScope =
   Bridge.resolvedScopeReceiptInState
-    fixtureScopeReceipt
-    Bridge.here
-    Bridge.here
+    fixtureScopeReceipt Bridge.here Bridge.here
     refl refl refl refl
     "fixture same-object resolved scope"
-
-------------------------------------------------------------------------
--- Strong prerequisite bundle: every receipt is literally about the same
--- proposition/event/status/system.
-------------------------------------------------------------------------
 
 prerequisites : Meet.ApplicabilityPrerequisiteBundle fixtureState
 prerequisites =
   Meet.applicabilityPrerequisiteBundle
-    ownedProposition
-    ownedOccurrence
-    ownedDocumentContext
-    resolvedEvidence
-    authorityReceipt
-    jurisdictionReceipt
-    ownedScope
-    refl
-    refl
-    contextCompilerReturnsExactProposition
-    refl
-    refl
-    refl
-    refl
+    ownedProposition ownedOccurrence ownedDocumentContext
+    resolvedEvidence authorityReceipt jurisdictionReceipt ownedScope
+    refl refl contextCompilerReturnsExactProposition refl refl refl refl
     "fully-paid fixture same-object prerequisite bundle"
 
 ------------------------------------------------------------------------
--- Semantic legal input remains candidate-only because the event is asserted,
--- not admitted.  Paying legal prerequisites does not upgrade occurrence/truth.
+-- Planner sees the exact same seven applicability obligations as already paid.
+------------------------------------------------------------------------
+
+propositionActive : Demand.ActiveRequirement
+propositionActive =
+  Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery
+    Demand.propositionStatusCoordinate Demand.legalApplicabilityNeedsProposition
+    "fully-paid fixture proposition"
+
+occurrenceActive : Demand.ActiveRequirement
+occurrenceActive =
+  Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery
+    Demand.occurrenceCoordinate Demand.legalApplicabilityNeedsOccurrence
+    "fully-paid fixture occurrence"
+
+documentContextActive : Demand.ActiveRequirement
+documentContextActive =
+  Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery
+    Demand.documentContextCoordinate Demand.legalApplicabilityNeedsContext
+    "fully-paid fixture document context"
+
+resolvedEvidenceActive : Demand.ActiveRequirement
+resolvedEvidenceActive =
+  Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery
+    Demand.resolvedLegalEvidenceCoordinate Demand.legalApplicabilityNeedsResolvedEvidence
+    "fully-paid fixture resolved evidence"
+
+legalSourceAuthorityActive : Demand.ActiveRequirement
+legalSourceAuthorityActive =
+  Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery
+    Demand.legalSourceAuthorityCoordinate Demand.legalApplicabilityNeedsLegalSourceAuthority
+    "fully-paid fixture legal-source authority"
+
+resolvedJurisdictionActive : Demand.ActiveRequirement
+resolvedJurisdictionActive =
+  Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery
+    Demand.resolvedLegalJurisdictionCoordinate Demand.legalApplicabilityNeedsResolvedJurisdiction
+    "fully-paid fixture resolved jurisdiction"
+
+resolvedScopeActive : Demand.ActiveRequirement
+resolvedScopeActive =
+  Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery
+    Demand.resolvedScopeCoordinate Demand.legalApplicabilityNeedsResolvedScope
+    "fully-paid fixture resolved scope"
+
+propositionEvidence : Planner.CoordinateEvidenceReceipt fixtureState propositionActive
+propositionEvidence = Bridge.propositionReceiptPaysActiveCoordinate refl ownedProposition
+occurrenceEvidence : Planner.CoordinateEvidenceReceipt fixtureState occurrenceActive
+occurrenceEvidence = Bridge.occurrenceReceiptPaysActiveCoordinate refl ownedOccurrence
+documentContextEvidence : Planner.CoordinateEvidenceReceipt fixtureState documentContextActive
+documentContextEvidence = Bridge.documentContextReceiptPaysActiveCoordinate refl ownedDocumentContext
+resolvedEvidenceEvidence : Planner.CoordinateEvidenceReceipt fixtureState resolvedEvidenceActive
+resolvedEvidenceEvidence = Evidence.resolvedLegalEvidencePaysActiveCoordinate refl resolvedEvidence
+legalSourceAuthorityEvidence : Planner.CoordinateEvidenceReceipt fixtureState legalSourceAuthorityActive
+legalSourceAuthorityEvidence = Authority.legalSourceAuthorityPaysActiveCoordinate refl authorityReceipt
+resolvedJurisdictionEvidence : Planner.CoordinateEvidenceReceipt fixtureState resolvedJurisdictionActive
+resolvedJurisdictionEvidence = Jurisdiction.legalJurisdictionPaysActiveCoordinate refl jurisdictionReceipt
+resolvedScopeEvidence : Planner.CoordinateEvidenceReceipt fixtureState resolvedScopeActive
+resolvedScopeEvidence = Bridge.resolvedScopeReceiptPaysActiveCoordinate refl ownedScope
+
+propositionPlan = Planner.planRequirement propositionEvidence "reuse paid proposition"
+occurrencePlan = Planner.planRequirement occurrenceEvidence "reuse paid occurrence"
+documentContextPlan = Planner.planRequirement documentContextEvidence "reuse paid document context"
+resolvedEvidencePlan = Planner.planRequirement resolvedEvidenceEvidence "reuse paid legal evidence"
+legalSourceAuthorityPlan = Planner.planRequirement legalSourceAuthorityEvidence "reuse paid legal authority"
+resolvedJurisdictionPlan = Planner.planRequirement resolvedJurisdictionEvidence "reuse paid jurisdiction"
+resolvedScopePlan = Planner.planRequirement resolvedScopeEvidence "reuse paid scope"
+
+allSevenRequirementsReuse :
+  Planner.action propositionPlan ≡ Planner.reuseExisting
+  × Planner.action occurrencePlan ≡ Planner.reuseExisting
+  × Planner.action documentContextPlan ≡ Planner.reuseExisting
+  × Planner.action resolvedEvidencePlan ≡ Planner.reuseExisting
+  × Planner.action legalSourceAuthorityPlan ≡ Planner.reuseExisting
+  × Planner.action resolvedJurisdictionPlan ≡ Planner.reuseExisting
+  × Planner.action resolvedScopePlan ≡ Planner.reuseExisting
+allSevenRequirementsReuse = refl , refl , refl , refl , refl , refl , refl
+
+propositionWork : Routing.RoutedWork propositionPlan
+propositionWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "paid proposition"
+occurrenceWork : Routing.RoutedWork occurrencePlan
+occurrenceWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "paid occurrence"
+documentContextWork : Routing.RoutedWork documentContextPlan
+documentContextWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "paid document context"
+resolvedEvidenceWork : Routing.RoutedWork resolvedEvidencePlan
+resolvedEvidenceWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "paid legal evidence"
+legalSourceAuthorityWork : Routing.RoutedWork legalSourceAuthorityPlan
+legalSourceAuthorityWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "paid legal authority"
+resolvedJurisdictionWork : Routing.RoutedWork resolvedJurisdictionPlan
+resolvedJurisdictionWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "paid jurisdiction"
+resolvedScopeWork : Routing.RoutedWork resolvedScopePlan
+resolvedScopeWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "paid scope"
+
+------------------------------------------------------------------------
+-- Only after the same receipts are planner-paid do we compile applicability.
 ------------------------------------------------------------------------
 
 semanticInput : Legal.SemanticLegalInputGate Vertical.dogEvent
 semanticInput =
-  Legal.semanticLegalInputGate
-    fixtureEvent
-    fixtureProposition
-    refl
-    Status.applicabilityCandidate
-    Legal.assertionCandidateUse
+  Legal.semanticLegalInputGate fixtureEvent fixtureProposition refl
+    Status.applicabilityCandidate Legal.assertionCandidateUse
 
 meetInput : Meet.ApplicabilityMeetInput fixtureState
 meetInput =
@@ -329,12 +351,7 @@ meetInput =
     semanticInput
     fixtureLegalStatus
     Bridge.here
-    refl
-    refl
-    refl
-    refl
-    refl
-    refl
+    refl refl refl refl refl refl
     "fully-paid same-object fixture typed meet"
     "fixture event time"
     "fixture exceptions checked"
@@ -346,31 +363,23 @@ compiledApplicabilityIsStillCandidate :
   Legal.resultingApplicability compiledApplicability ≡ Status.applicabilityCandidate
 compiledApplicabilityIsStillCandidate = refl
 
-fixtureTruthStillUnresolved :
-  Status.truthStatus fixtureProposition ≡ Status.truthUnresolved
+fixtureTruthStillUnresolved : Status.truthStatus fixtureProposition ≡ Status.truthUnresolved
 fixtureTruthStillUnresolved = refl
-
-fixtureOccurrenceStillAsserted :
-  Status.occurrence fixtureEvent ≡ Status.assertedOccurrence
+fixtureOccurrenceStillAsserted : Status.occurrence fixtureEvent ≡ Status.assertedOccurrence
 fixtureOccurrenceStillAsserted = refl
-
-------------------------------------------------------------------------
--- Boundaries.
-------------------------------------------------------------------------
 
 data FullyPaidFixtureProvesRealDogLaw : Set where
 data FullyPaidPrerequisitesAdmitOccurrence : Set where
 data FullyPaidPrerequisitesAdmitTruth : Set where
 data UnrelatedParserCarrierPaidLegalPrerequisites : Set where
 
-fixtureDoesNotProveRealDogLaw : FullyPaidFixtureProvesRealDogLaw → ⊥
-fixtureDoesNotProveRealDogLaw ()
+afixtureDoesNotProveRealDogLaw : FullyPaidFixtureProvesRealDogLaw → ⊥
+afixtureDoesNotProveRealDogLaw ()
 fullyPaidPrerequisitesDoNotAdmitOccurrence : FullyPaidPrerequisitesAdmitOccurrence → ⊥
 fullyPaidPrerequisitesDoNotAdmitOccurrence ()
 fullyPaidPrerequisitesDoNotAdmitTruth : FullyPaidPrerequisitesAdmitTruth → ⊥
 fullyPaidPrerequisitesDoNotAdmitTruth ()
-unrelatedParserCarrierDoesNotPayLegalPrerequisites :
-  UnrelatedParserCarrierPaidLegalPrerequisites → ⊥
+unrelatedParserCarrierDoesNotPayLegalPrerequisites : UnrelatedParserCarrierPaidLegalPrerequisites → ⊥
 unrelatedParserCarrierDoesNotPayLegalPrerequisites ()
 
 record FullyPaidApplicabilityFixtureBoundary : Set where
@@ -384,14 +393,15 @@ record FullyPaidApplicabilityFixtureBoundary : Set where
     oneExactLegalStatusAcrossAuthorityJurisdictionMeet : Bool
     oneExactLegalSystemAcrossWrongSourceCase : Bool
     prerequisiteBundleInhabited : Bool
+    allSevenPlannerRequirementsReuseExisting : Bool
+    allSevenReuseWithoutProducerInvocation : Bool
     applicabilityMeetCompiled : Bool
     resultingApplicabilityStillCandidate : Bool
     truthStillUnresolved : Bool
     occurrenceStillAsserted : Bool
     provesRealDogLaw : Bool
 
-canonicalFullyPaidApplicabilityFixtureBoundary :
-  FullyPaidApplicabilityFixtureBoundary
+canonicalFullyPaidApplicabilityFixtureBoundary : FullyPaidApplicabilityFixtureBoundary
 canonicalFullyPaidApplicabilityFixtureBoundary =
   fully-paid-applicability-fixture-boundary
-    true true true true true true true true true true true true false
+    true true true true true true true true true true true true true true false
