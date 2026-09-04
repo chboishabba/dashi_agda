@@ -7,11 +7,13 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Interop.SensibLawOntologyTopology as Ontology
 import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 import DASHI.Cognition.PNF.SensibLawConsumerQuerySemanticCoordinateReopeningExact as Demand
 import DASHI.Cognition.PNF.SensibLawActiveRequirementExecutionPlannerExact as Planner
 import DASHI.Cognition.PNF.SensibLawDocumentDiscourseContextRefinementExact as Document
 import DASHI.Cognition.PNF.SensibLawScopeCompositionBidiExact as Scope
+import DASHI.Cognition.PNF.SensibLawParticipantLegalRoleWrongTypeBidiExact as LegalRole
 
 infix 4 _∈_
 data _∈_ {A : Set} (x : A) : List A → Set where
@@ -80,6 +82,19 @@ record ResolvedScopeReceiptInState (state : Status.SemanticCommitmentState) : Se
     scopeReference : String
 open ResolvedScopeReceiptInState public
 
+record LegalRoleReceiptInState (state : Status.SemanticCommitmentState) : Set where
+  constructor legalRoleReceiptInState
+  field
+    weld : LegalRole.ParticipantLegalRoleWeld
+    subjectMembership : LegalRole.subject weld ∈ Status.subjects state
+    eventStatus : Status.EventStatusProduct
+    eventStatusMembership : eventStatus ∈ Status.events state
+    sameEventReference :
+      Ontology.Event.eventId (LegalRole.event weld)
+      ≡ Ontology.stableId (Status.eventReference eventStatus)
+    roleReference : String
+open LegalRoleReceiptInState public
+
 propositionReceiptPaysActiveCoordinate : ∀ {state active} → Demand.coordinate active ≡ Demand.propositionStatusCoordinate → PropositionReceiptInState state → Planner.CoordinateEvidenceReceipt state active
 propositionReceiptPaysActiveCoordinate same owned = Planner.coordinateEvidenceReceipt Planner.currentResolved (PropositionReceiptInState.receiptReference owned ∷ []) "PropositionResolutionReceipt + exact current-state membership" true refl true refl
 
@@ -91,6 +106,9 @@ attributionReceiptPaysActiveCoordinate same owned = Planner.coordinateEvidenceRe
 
 resolvedScopeReceiptPaysActiveCoordinate : ∀ {state active} → Demand.coordinate active ≡ Demand.resolvedScopeCoordinate → ResolvedScopeReceiptInState state → Planner.CoordinateEvidenceReceipt state active
 resolvedScopeReceiptPaysActiveCoordinate same owned = Planner.coordinateEvidenceReceipt Planner.currentResolved (ResolvedScopeReceiptInState.scopeReference owned ∷ []) "joint ScopeCompositionReceipt with all required scopes resolved + exact proposition/event membership" true refl true refl
+
+legalRoleReceiptPaysActiveCoordinate : ∀ {state active} → Demand.coordinate active ≡ Demand.legalRoleCoordinate → LegalRoleReceiptInState state → Planner.CoordinateEvidenceReceipt state active
+legalRoleReceiptPaysActiveCoordinate same owned = Planner.coordinateEvidenceReceipt Planner.currentResolved (LegalRoleReceiptInState.roleReference owned ∷ []) "ParticipantLegalRoleWeld + exact subject/event state membership" true refl true refl
 
 applicabilityReceiptPaysActiveCoordinate : ∀ {state active} → Demand.coordinate active ≡ Demand.applicabilityCoordinate → ApplicabilityReceiptInState state → Planner.CoordinateEvidenceReceipt state active
 applicabilityReceiptPaysActiveCoordinate same owned = Planner.coordinateEvidenceReceipt Planner.currentResolved (ApplicabilityReceiptInState.receiptReference owned ∷ []) "ApplicabilityResolutionReceipt + exact current-state membership" true refl true refl
@@ -146,6 +164,8 @@ data StaleEvidenceEqualsMissingEvidence : Set where
 data UnresolvedAttributionCountsAsResolved : Set where
 data ScopeReceiptForOtherEventPaysResolvedScope : Set where
 data PartiallyResolvedScopePaysResolvedScope : Set where
+data LegalRoleWeldWithoutStateSubjectPaysRole : Set where
+data LegalRoleWeldForOtherEventPaysRole : Set where
 
 otherPropositionReceiptDoesNotPay : ReceiptAboutOtherPropositionPaysRequirement → ⊥
 otherPropositionReceiptDoesNotPay ()
@@ -163,6 +183,10 @@ otherEventScopeReceiptDoesNotPay : ScopeReceiptForOtherEventPaysResolvedScope �
 otherEventScopeReceiptDoesNotPay ()
 partialScopeDoesNotPayResolvedScope : PartiallyResolvedScopePaysResolvedScope → ⊥
 partialScopeDoesNotPayResolvedScope ()
+legalRoleWeldWithoutSubjectMembershipDoesNotPay : LegalRoleWeldWithoutStateSubjectPaysRole → ⊥
+legalRoleWeldWithoutSubjectMembershipDoesNotPay ()
+legalRoleWeldForOtherEventDoesNotPay : LegalRoleWeldForOtherEventPaysRole → ⊥
+legalRoleWeldForOtherEventDoesNotPay ()
 
 record LiveProducerCoordinateEvidenceBoundary : Set where
   constructor live-producer-coordinate-evidence-boundary
@@ -175,6 +199,7 @@ record LiveProducerCoordinateEvidenceBoundary : Set where
     unresolvedAttributionCountsAsResolved : Bool
     resolvedScopeRequiresSamePropositionAndEvent : Bool
     resolvedScopeRequiresAllScopeAxesResolved : Bool
+    resolvedLegalRoleRequiresSameSubjectAndEvent : Bool
     parserCandidateMayPayAuthorityCoordinate : Bool
 canonicalLiveProducerCoordinateEvidenceBoundary : LiveProducerCoordinateEvidenceBoundary
-canonicalLiveProducerCoordinateEvidenceBoundary = live-producer-coordinate-evidence-boundary true false true true true false true true false
+canonicalLiveProducerCoordinateEvidenceBoundary = live-producer-coordinate-evidence-boundary true false true true true false true true true false
