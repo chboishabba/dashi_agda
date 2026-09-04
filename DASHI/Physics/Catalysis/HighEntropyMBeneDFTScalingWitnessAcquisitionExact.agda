@@ -47,6 +47,7 @@ record DFTWitnessAcquisition : Set where
   constructor dft-witness-acquisition
   field
     sourceTarget : Acquisition.SourceAcquisitionTarget
+    primaryAbstractInspected : Bool
     candidatePairIdentified : Bool
     descriptorValuesExtracted : Bool
     residualValuesExtracted : Bool
@@ -66,6 +67,10 @@ record DFTWitnessAcquisitionBoundary : Set where
     bibliographicAccessEqualsNumericalExtractionIsFalse :
       bibliographicAccessEqualsNumericalExtraction ≡ false
 
+    abstractInspectionEqualsFullTextInspection : Bool
+    abstractInspectionEqualsFullTextInspectionIsFalse :
+      abstractInspectionEqualsFullTextInspection ≡ false
+
     approximateDescriptorMatchEqualsLiteralAgdaEquality : Bool
     approximateDescriptorMatchEqualsLiteralAgdaEqualityIsFalse :
       approximateDescriptorMatchEqualsLiteralAgdaEquality ≡ false
@@ -76,11 +81,14 @@ record DFTWitnessAcquisitionBoundary : Set where
 
 canonicalDFTWitnessAcquisitionBoundary : DFTWitnessAcquisitionBoundary
 canonicalDFTWitnessAcquisitionBoundary =
-  dft-witness-acquisition-boundary false refl false refl false refl true refl
+  dft-witness-acquisition-boundary
+    false refl false refl false refl false refl true refl
 
 ------------------------------------------------------------------------
--- Current acquisition state: source identified and mechanism inspected, exact
--- same-coarse separating pair not yet extracted.
+-- Current acquisition state: the primary bibliographic/abstract-level source
+-- has been identified and inspected for the reported mechanism, but the full
+-- numerical/supplementary material required for an exact separating pair has
+-- not yet been acquired or inspected here.
 ------------------------------------------------------------------------
 
 canonicalPaperAcquisitionTarget : Acquisition.SourceAcquisitionTarget
@@ -90,14 +98,15 @@ canonicalPaperAcquisitionTarget = record
   ; pageLocator = "full paper / supplementary numerical data"
   ; primaryRoute = Acquisition.publisherBackfile
   ; alternateRoute = Acquisition.directDigitalArchive
-  ; fullTextAcquired = true
-  ; primaryTextInspected = true
+  ; fullTextAcquired = false
+  ; primaryTextInspected = false
   ; transcriptionExtracted = false
   }
 
 canonicalCurrentDFTWitnessAcquisition : DFTWitnessAcquisition
 canonicalCurrentDFTWitnessAcquisition = record
   { sourceTarget = canonicalPaperAcquisitionTarget
+  ; primaryAbstractInspected = true
   ; candidatePairIdentified = false
   ; descriptorValuesExtracted = false
   ; residualValuesExtracted = false
@@ -113,6 +122,10 @@ canonicalCurrentDFTWitnessAcquisition = record
 record ReverseAcquisitionObligation : Set where
   constructor reverse-acquisition-obligation
   field
+    acquireFullNumericalOrSupplementarySource : Bool
+    acquireFullNumericalOrSupplementarySourceIsTrue :
+      acquireFullNumericalOrSupplementarySource ≡ true
+
     findPairSharingCoarseDescriptor : Bool
     findPairSharingCoarseDescriptorIsTrue :
       findPairSharingCoarseDescriptor ≡ true
@@ -131,4 +144,5 @@ record ReverseAcquisitionObligation : Set where
 
 canonicalReverseAcquisitionObligation : ReverseAcquisitionObligation
 canonicalReverseAcquisitionObligation =
-  reverse-acquisition-obligation true refl true refl true refl true refl
+  reverse-acquisition-obligation
+    true refl true refl true refl true refl true refl
