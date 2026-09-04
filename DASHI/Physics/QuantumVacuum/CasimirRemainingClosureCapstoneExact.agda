@@ -3,6 +3,11 @@ module DASHI.Physics.QuantumVacuum.CasimirRemainingClosureCapstoneExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
+import DASHI.Analysis.SineNaturalMultiplePiZeroBidiExact
+import DASHI.Analysis.BernoulliFourCubicFiniteDifferenceExact
+import DASHI.Analysis.ZetaMinusThreeFiniteAnalyticBidiExact
+import DASHI.Analysis.SourceBackedTheoremTransportBidiExact
+import DASHI.Analysis.PreProjectionCancellationBidiCrossPollinationExact
 import DASHI.Physics.QuantumVacuum.CasimirBishopSetoidBackendReuseExact
 import DASHI.Physics.QuantumVacuum.PerfectConductorPlateModePDECutsetExact
 import DASHI.Physics.QuantumVacuum.PerfectConductorLongitudinalQuantisationHighestAlphaExact
@@ -35,9 +40,13 @@ record RemainingClosureStatus : Set where
     sineZeroClassificationSourceBacked : Bool
     oneSixthDenominatorCompilerOwned : Bool
     longitudinalEndpointReductionOwned : Bool
+    forwardNaturalPiModesOwned : Bool
     bishopAmplitudeCancellationOwned : Bool
     bishopDivisionTransportOwned : Bool
     cubicDerivativeFactorThreeOwned : Bool
+    bernoulliFourCubicFiniteDifferenceOwned : Bool
+    sourceTransportCompilerOwned : Bool
+    preProjectionCancellationShapeOwned : Bool
 
     legacyPropositionalWeldClosed : Bool
     maxwellPDEClosed : Bool
@@ -70,9 +79,13 @@ record RemainingClosureStatus : Set where
     sineZeroClassificationSourceBackedIsTrue : sineZeroClassificationSourceBacked ≡ true
     oneSixthDenominatorCompilerOwnedIsTrue : oneSixthDenominatorCompilerOwned ≡ true
     longitudinalEndpointReductionOwnedIsTrue : longitudinalEndpointReductionOwned ≡ true
+    forwardNaturalPiModesOwnedIsTrue : forwardNaturalPiModesOwned ≡ true
     bishopAmplitudeCancellationOwnedIsTrue : bishopAmplitudeCancellationOwned ≡ true
     bishopDivisionTransportOwnedIsTrue : bishopDivisionTransportOwned ≡ true
     cubicDerivativeFactorThreeOwnedIsTrue : cubicDerivativeFactorThreeOwned ≡ true
+    bernoulliFourCubicFiniteDifferenceOwnedIsTrue : bernoulliFourCubicFiniteDifferenceOwned ≡ true
+    sourceTransportCompilerOwnedIsTrue : sourceTransportCompilerOwned ≡ true
+    preProjectionCancellationShapeOwnedIsTrue : preProjectionCancellationShapeOwned ≡ true
 
     legacyPropositionalWeldClosedIsFalse : legacyPropositionalWeldClosed ≡ false
     maxwellPDEClosedIsFalse : maxwellPDEClosed ≡ false
@@ -106,9 +119,13 @@ canonicalRemainingClosureStatus = record
   ; sineZeroClassificationSourceBacked = true
   ; oneSixthDenominatorCompilerOwned = true
   ; longitudinalEndpointReductionOwned = true
+  ; forwardNaturalPiModesOwned = true
   ; bishopAmplitudeCancellationOwned = true
   ; bishopDivisionTransportOwned = true
   ; cubicDerivativeFactorThreeOwned = true
+  ; bernoulliFourCubicFiniteDifferenceOwned = true
+  ; sourceTransportCompilerOwned = true
+  ; preProjectionCancellationShapeOwned = true
   ; legacyPropositionalWeldClosed = false
   ; maxwellPDEClosed = false
   ; teTmCompletenessClosed = false
@@ -136,9 +153,13 @@ canonicalRemainingClosureStatus = record
   ; sineZeroClassificationSourceBackedIsTrue = refl
   ; oneSixthDenominatorCompilerOwnedIsTrue = refl
   ; longitudinalEndpointReductionOwnedIsTrue = refl
+  ; forwardNaturalPiModesOwnedIsTrue = refl
   ; bishopAmplitudeCancellationOwnedIsTrue = refl
   ; bishopDivisionTransportOwnedIsTrue = refl
   ; cubicDerivativeFactorThreeOwnedIsTrue = refl
+  ; bernoulliFourCubicFiniteDifferenceOwnedIsTrue = refl
+  ; sourceTransportCompilerOwnedIsTrue = refl
+  ; preProjectionCancellationShapeOwnedIsTrue = refl
   ; legacyPropositionalWeldClosedIsFalse = refl
   ; maxwellPDEClosedIsFalse = refl
   ; teTmCompletenessClosedIsFalse = refl
@@ -164,8 +185,8 @@ record ClosureOrder : Set where
 
 canonicalClosureOrder : ClosureOrder
 canonicalClosureOrder = record
-  { first = "close Maxwell wave/TE-TM completeness and same-object sine-zero transport; endpoint algebra, nonzero amplitude cancellation, and division by d are already owned"
+  { first = "close Maxwell wave/TE-TM completeness and reverse sine-zero same-object transport; forward n*pi candidate modes, endpoint algebra, amplitude cancellation, and division by d are already owned"
   ; second = "close polar angular 1/2 and regulated radial endpoint theorem; cubic factor three and denominator 2*3=6 are already owned"
-  ; third = "close regulator estimates and internal zeta(-3) derivation / literal Casimir defect weld; DLMF special value is source-backed"
+  ; third = "close regulator estimates and internal zeta(-3) continuation / literal Casimir defect weld; B4(x+1)-B4(x)=4x^3 and rational coefficient arithmetic are already owned"
   ; fourth = "provide setoid-to-legacy kernel weld and compile pressure derivative"
   }
