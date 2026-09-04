@@ -7,6 +7,7 @@ import RealProperties as BishopP
 
 import DASHI.Analysis.BishopSetoidPowerDerivativeNormalisationExact as Power
 import DASHI.Foundations.BishopExponentialBinomialCoefficientExact as Binomial
+import DASHI.Foundations.BishopFiniteDegreeOneGeometricIdentityExact as NatReal
 
 ------------------------------------------------------------------------
 -- RECURSIVE NATURAL SCALING = BISHOP SEMIRING NATURAL SCALING
@@ -32,7 +33,7 @@ recursiveScaleIsEmbeddedNaturalMultiply :
   Bishop._≃_
     (Power.natScale n value)
     (Bishop._*_
-      (DASHI.Foundations.BishopFiniteDegreeOneGeometricIdentityExact.natReal n)
+      (NatReal.natReal n)
       value)
 recursiveScaleIsEmbeddedNaturalMultiply n value =
   BishopP.≃-trans
