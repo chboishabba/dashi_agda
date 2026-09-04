@@ -18,7 +18,23 @@ record SourceTheoremMatrix : Set where
     cyclotomicOddProductOwned : Bool
     orbitPartitionNeedsSeparateReceipt : Bool
     intermediateOddTraceVanishesOwned : Bool
-    spatialSpectralCircleConditional : Bool
+
+    concreteDFTReindexOwned : Bool
+    concreteDFTBasisOwned : Bool
+    concreteDFTUnitarityOwned : Bool
+    concreteFourierConjugatedTwistedMatrixOwned : Bool
+    concreteFourierConjugatedEqualsMonomialOwned : Bool
+
+    twistedBlockHypothesisStoresFinalMagnitude : Bool
+    twistedBlockHypothesisStoresFourierMonomialWeld : Bool
+    finalSpectralCircleUsesFinalMagnitudeHypothesis : Bool
+    finalSpectralCircleDerivesMagnitudeFromOrbitKernel : Bool
+
+    hadamardBlockDiagonalizationOwned : Bool
+    determinantCoverFactorizationOwned : Bool
+    namedSpectralTowerConclusionIsSpectrumUnion : Bool
+    namedSpectralTowerConclusionIsTrueOnly : Bool
+
     dyadicDirectLimitInjectiveOwned : Bool
     ropeRelativeInvarianceOwned : Bool
     ropeModelOptimalityOwned : Bool
@@ -30,26 +46,22 @@ record SourceTheoremMatrix : Set where
 canonicalSourceTheoremMatrix : SourceTheoremMatrix
 canonicalSourceTheoremMatrix =
   sourceTheoremMatrix
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    false
-    true
-    false
-    true
-    false
+    true true true true true
+    true true true true false
+    true false true false
+    true true false true
+    true true false true false true false
 
 record PromotionMatrix : Set where
   constructor promotionMatrix
   field
     finiteCharacterOrbitKernel : Bool
     signedTraceKernel : Bool
+    concreteDFTInfrastructure : Bool
+    concreteDFTMonomialSameObject : Bool
     spatialSpectralConsumer : Bool
+    determinantTowerFactorization : Bool
+    literalSpectrumTower : Bool
     directLimitArchitecture : Bool
     ropeGeometry : Bool
     transformerCompressionOptimality : Bool
@@ -59,13 +71,26 @@ record PromotionMatrix : Set where
 
 canonicalPromotionMatrix : PromotionMatrix
 canonicalPromotionMatrix =
-  promotionMatrix true true false true true false false false false
+  promotionMatrix
+    true true true false false true false
+    true true false false false false
 
-spatialRemainsBlocked : PromotionMatrix.spatialSpectralConsumer canonicalPromotionMatrix ≡ false
+spatialRemainsBlocked :
+  PromotionMatrix.spatialSpectralConsumer canonicalPromotionMatrix ≡ false
 spatialRemainsBlocked = refl
 
-finiteKernelPromotes : PromotionMatrix.finiteCharacterOrbitKernel canonicalPromotionMatrix ≡ true
+finiteKernelPromotes :
+  PromotionMatrix.finiteCharacterOrbitKernel canonicalPromotionMatrix ≡ true
 finiteKernelPromotes = refl
 
-signedTracePromotes : PromotionMatrix.signedTraceKernel canonicalPromotionMatrix ≡ true
+signedTracePromotes :
+  PromotionMatrix.signedTraceKernel canonicalPromotionMatrix ≡ true
 signedTracePromotes = refl
+
+sourceDFTInfrastructurePromotes :
+  PromotionMatrix.concreteDFTInfrastructure canonicalPromotionMatrix ≡ true
+sourceDFTInfrastructurePromotes = refl
+
+literalSpectrumTowerStillBlocked :
+  PromotionMatrix.literalSpectrumTower canonicalPromotionMatrix ≡ false
+literalSpectrumTowerStillBlocked = refl
