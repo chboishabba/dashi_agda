@@ -8,7 +8,6 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Interop.SensibLawOntologyTopology as Ontology
-import DASHI.Cognition.PNF.SensibLawSpacyCompositionOnlySemanticConstitutionExact as Constitution
 import DASHI.Cognition.PNF.SensibLawPdfActiveRequirementPlannerLiveExact as PdfPlanner
 import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 import DASHI.Cognition.PNF.SensibLawClaimAtomOntologyVerticalSliceExact as Vertical
@@ -64,7 +63,7 @@ fixtureDocumentFrame =
     fixtureCase
     Vertical.dogPerspective
     "fixture:dog-walk/document-region"
-    Document.neutralNarrative
+    Document.applicantSubmission
     ("existing canonical dog-walk fixture" ∷ [])
     "fixture document-context resolver"
     false refl false refl
@@ -79,7 +78,7 @@ fixtureProposition =
     "dog-walked-positive"
     Status.assertedBySource
     Status.truthUnresolved
-    Status.propositionSource
+    Status.speaker
     Status.evidenceFor
     Status.documentaryEvidence
     Status.modalityKindUnresolved
@@ -118,12 +117,13 @@ fixtureContextualRefinement :
 fixtureContextualRefinement =
   Document.refinePropositionFromDocumentFrame fixtureProposition fixtureDocumentFrame
 
--- neutralNarrative changes the proposition-status to represented and attribution
--- to unresolved.  For this fully-paid applicability fixture we therefore retain
--- the exact asserted proposition directly as the contextual proposition owner;
--- the DocumentDiscourseFrame itself supplies context but does not rewrite it.
 fixtureContextProposition : Status.PropositionStatusProduct
-fixtureContextProposition = fixtureProposition
+fixtureContextProposition =
+  Document.ContextualPropositionRefinement.refined fixtureContextualRefinement
+
+contextCompilerReturnsExactProposition :
+  fixtureContextProposition ≡ fixtureProposition
+contextCompilerReturnsExactProposition = refl
 
 ------------------------------------------------------------------------
 -- One exact legal-status object pays both authority and jurisdiction.
@@ -140,7 +140,7 @@ fixtureLegalStatus =
     Status.liabilityUnresolved
     Status.burdenKindUnresolved
     Status.standardUnresolved
-    Status.judicialStatusUnresolved
+    Status.submission
     Status.normativeRelationUnresolved
 
 ------------------------------------------------------------------------
@@ -175,7 +175,7 @@ ownedDocumentContext : Bridge.DocumentContextReceiptInState fixtureState
 ownedDocumentContext =
   Bridge.documentContextReceiptInState
     fixtureDocumentFrame fixtureContextProposition Bridge.here
-    "fixture case/document context over exact proposition"
+    "fixture applicant-submission context compiled to exact proposition"
 
 ------------------------------------------------------------------------
 -- Evidence.
@@ -298,7 +298,7 @@ prerequisites =
     ownedScope
     refl
     refl
-    refl
+    contextCompilerReturnsExactProposition
     refl
     refl
     refl
@@ -334,6 +334,7 @@ meetInput =
     refl
     refl
     refl
+    refl
     "fully-paid same-object fixture typed meet"
     "fixture event time"
     "fixture exceptions checked"
@@ -364,13 +365,10 @@ data UnrelatedParserCarrierPaidLegalPrerequisites : Set where
 
 fixtureDoesNotProveRealDogLaw : FullyPaidFixtureProvesRealDogLaw → ⊥
 fixtureDoesNotProveRealDogLaw ()
-
 fullyPaidPrerequisitesDoNotAdmitOccurrence : FullyPaidPrerequisitesAdmitOccurrence → ⊥
 fullyPaidPrerequisitesDoNotAdmitOccurrence ()
-
 fullyPaidPrerequisitesDoNotAdmitTruth : FullyPaidPrerequisitesAdmitTruth → ⊥
 fullyPaidPrerequisitesDoNotAdmitTruth ()
-
 unrelatedParserCarrierDoesNotPayLegalPrerequisites :
   UnrelatedParserCarrierPaidLegalPrerequisites → ⊥
 unrelatedParserCarrierDoesNotPayLegalPrerequisites ()
@@ -380,6 +378,7 @@ record FullyPaidApplicabilityFixtureBoundary : Set where
   field
     existingDogEventReused : Bool
     existingWrongTypeReused : Bool
+    contextCompilerProducesExactProposition : Bool
     oneExactPropositionAcrossReceipts : Bool
     oneExactEventAcrossReceipts : Bool
     oneExactLegalStatusAcrossAuthorityJurisdictionMeet : Bool
@@ -395,4 +394,4 @@ canonicalFullyPaidApplicabilityFixtureBoundary :
   FullyPaidApplicabilityFixtureBoundary
 canonicalFullyPaidApplicabilityFixtureBoundary =
   fully-paid-applicability-fixture-boundary
-    true true true true true true true true true true true false
+    true true true true true true true true true true true true false
