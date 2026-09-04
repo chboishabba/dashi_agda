@@ -17,6 +17,7 @@ data CandidateExplanation : Set where
   rivalProgrammeOrContractBenefit
   lowReplaceabilityTacitKnowledgeSelection
   capabilityAwareCrossDomainSelection
+  openScienceKnowledgeReleaseSelection
   retrospectiveNarrativeAssembly
   heterogeneousUnrelatedCases
   : CandidateExplanation
@@ -32,6 +33,7 @@ data DiscriminatorAxis : Set where
   matchedControlRobustness
   crossCaseCommonality
   negativeCaseTolerance
+  knowledgeReleaseBoundaryEvidence
   : DiscriminatorAxis
 
 data RequirementLevel : Set where
@@ -81,6 +83,26 @@ capabilitySelectionNeedsCrossDomainObserver = hypothesis-axis-requirement
   capabilityAwareCrossDomainSelection capabilityAwareVisibility required
   "The explanatory observer must see complementary capability contributions, not merely names or public publications."
 
+openScienceNeedsEnrichment : HypothesisAxisRequirement
+openScienceNeedsEnrichment = hypothesis-axis-requirement
+  openScienceKnowledgeReleaseSelection rosterEnrichment required
+  "Publication is common among scientists, so an open-science explanation is discriminating only if O1-O6 behaviour/posture is enriched relative to matched peers under a predeclared rubric."
+
+openScienceNeedsVisibility : HypothesisAxisRequirement
+openScienceNeedsVisibility = hypothesis-axis-requirement
+  openScienceKnowledgeReleaseSelection capabilityAwareVisibility required
+  "A selector explanation must identify an observer capable of seeing the relevant openness/release behaviour, not merely the person's technical field."
+
+openScienceO6NeedsBoundaryEvidence : HypothesisAxisRequirement
+openScienceO6NeedsBoundaryEvidence = hypothesis-axis-requirement
+  openScienceKnowledgeReleaseSelection knowledgeReleaseBoundaryEvidence required
+  "Any strong restricted-to-public release claim requires a prior-restriction receipt, a public-release receipt and a same-object weld. Ordinary publication, patents or disclosure advocacy cannot substitute."
+
+openScienceActualDisruptionIsInformative : HypothesisAxisRequirement
+openScienceActualDisruptionIsInformative = hypothesis-axis-requirement
+  openScienceKnowledgeReleaseSelection actualDisruptionEffect informative
+  "Open-science selection does not logically require programme paralysis, but actual knowledge-transfer consequences can distinguish a consequential release posture from ordinary public dissemination."
+
 retrospectiveNarrativePredictsWeakControls : HypothesisAxisRequirement
 retrospectiveNarrativePredictsWeakControls = hypothesis-axis-requirement
   retrospectiveNarrativeAssembly matchedControlRobustness required
@@ -106,12 +128,22 @@ record DiscriminatorMatrixBoundary : Set where
     explanatoryCoverageEqualsCausalProofIsFalse :
       explanatoryCoverageEqualsCausalProof ≡ false
 
+    ordinaryPublicationAloneCanMakeOpenScienceSelectionDiscriminating : Bool
+    ordinaryPublicationAloneCanMakeOpenScienceSelectionDiscriminatingIsFalse :
+      ordinaryPublicationAloneCanMakeOpenScienceSelectionDiscriminating ≡ false
+
+    restrictedReleaseMayBeInferredWithoutSameObjectBoundaryEvidence : Bool
+    restrictedReleaseMayBeInferredWithoutSameObjectBoundaryEvidenceIsFalse :
+      restrictedReleaseMayBeInferredWithoutSameObjectBoundaryEvidence ≡ false
+
     nullOrHeterogeneousExplanationMustRemainLive : Bool
     nullOrHeterogeneousExplanationMustRemainLiveIsTrue :
       nullOrHeterogeneousExplanationMustRemainLive ≡ true
 
 canonicalDiscriminatorMatrixBoundary : DiscriminatorMatrixBoundary
 canonicalDiscriminatorMatrixBoundary = discriminator-matrix-boundary
+  false refl
+  false refl
   false refl
   false refl
   false refl
