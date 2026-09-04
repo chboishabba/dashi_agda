@@ -1,6 +1,6 @@
 module DASHI.Analysis.BernoulliFourCubicTelescopingExact where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
