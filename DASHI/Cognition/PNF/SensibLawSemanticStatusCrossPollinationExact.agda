@@ -17,15 +17,15 @@ data ProducerClass : Set where
   parserShapeProducer structuralCompositionProducer bindingAccessibilityProducer
   attributionProducer evidenceProducer legalEvidenceResolutionProducer temporalProducer
   scopeResolutionProducer documentContextProducer legalJurisdictionProducer
-  legalSourceAuthorityProducer legalTypedMeetProducer governedAdmissionProducer
-  : ProducerClass
+  legalSourceAuthorityProducer legalRoleResolutionProducer legalTypedMeetProducer
+  governedAdmissionProducer : ProducerClass
 
 data StatusAxis : Set where
   participantRoleAxis referentKindAxis identityAxis antecedentAxis occurrenceAxis
   propositionAxis attributionAxis evidenceCandidateAxis resolvedLegalEvidenceAxis
   modalityAxis temporalAxis conditionAxis scopeCandidateAxis resolvedScopeAxis
   documentContextAxis jurisdictionCandidateAxis resolvedLegalJurisdictionAxis
-  semanticAdmissionAuthorityAxis legalSourceAuthorityAxis applicabilityAxis
+  semanticAdmissionAuthorityAxis legalSourceAuthorityAxis legalRoleAxis applicabilityAxis
   violationAxis liabilityAxis burdenAxis judicialDiscourseAxis normativeRelationAxis
   : StatusAxis
 
@@ -71,6 +71,8 @@ resolvedLegalJurisdictionRequiresSystemWeld : AxisPopulationReceipt
 resolvedLegalJurisdictionRequiresSystemWeld = axisPopulationReceipt legalJurisdictionProducer resolvedLegalJurisdictionAxis false true true false "CaseFrame legalSystemId + LegalSystem systemId + resolved legal jurisdiction kind"
 legalSourceAuthorityRequiresSystemAndValidity : AxisPopulationReceipt
 legalSourceAuthorityRequiresSystemAndValidity = axisPopulationReceipt legalSourceAuthorityProducer legalSourceAuthorityAxis true true true true "SensibLawOntologyTopology LegalSource + source system + validity interval; legal authority not inferred from semantic admission"
+legalRoleRequiresExplicitWeld : AxisPopulationReceipt
+legalRoleRequiresExplicitWeld = axisPopulationReceipt legalRoleResolutionProducer legalRoleAxis false true true false "SensibLawParticipantLegalRoleWrongTypeBidiExact ParticipantLegalRoleWeld over exact actor/event/wrong/system"
 legalApplicabilityCandidateRequiresTypedMeet : AxisPopulationReceipt
 legalApplicabilityCandidateRequiresTypedMeet = axisPopulationReceipt legalTypedMeetProducer applicabilityAxis true true true true "legal typed meet consumes resolved jurisdiction/authority/scope/evidence plus event/wrong coordinates"
 admissionClosureReceipt : AxisPopulationReceipt
@@ -123,6 +125,7 @@ data LegalAuthorityIsPromotionAuthority : Set where
 data ParserScopeCandidateIsResolvedScope : Set where
 data JurisdictionCandidateIsResolvedLegalJurisdiction : Set where
 data EvidenceCandidateIsResolvedLegalEvidence : Set where
+data ParserParticipantRoleIsResolvedLegalRole : Set where
 data RepeatedEvidenceCreatesIndependentLegalSupport : Set where
 data FoundAsFactIsUniversalTruth : Set where
 data NormativeRelationIsModalSurface : Set where
@@ -141,6 +144,8 @@ jurisdictionCandidateDoesNotEqualResolvedLegalJurisdiction : JurisdictionCandida
 jurisdictionCandidateDoesNotEqualResolvedLegalJurisdiction ()
 evidenceCandidateDoesNotEqualResolvedLegalEvidence : EvidenceCandidateIsResolvedLegalEvidence → ⊥
 evidenceCandidateDoesNotEqualResolvedLegalEvidence ()
+parserParticipantRoleDoesNotEqualResolvedLegalRole : ParserParticipantRoleIsResolvedLegalRole → ⊥
+parserParticipantRoleDoesNotEqualResolvedLegalRole ()
 repeatedEvidenceDoesNotCreateIndependentLegalSupport : RepeatedEvidenceCreatesIndependentLegalSupport → ⊥
 repeatedEvidenceDoesNotCreateIndependentLegalSupport ()
 foundAsFactDoesNotMeanUniversalTruth : FoundAsFactIsUniversalTruth → ⊥
