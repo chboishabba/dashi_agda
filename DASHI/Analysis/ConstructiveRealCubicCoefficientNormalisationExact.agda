@@ -1,8 +1,9 @@
 module DASHI.Analysis.ConstructiveRealCubicCoefficientNormalisationExact where
 
-open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; trans; cong₂)
+open import Relation.Binary.PropositionalEquality using (_≡_; sym; trans; cong₂)
 
 import DASHI.Analysis.ConstructiveRealSpine as R
+import DASHI.Analysis.MarxDifferentialCore as Marx
 import DASHI.Analysis.MarxConstructiveRealRingNormalisation as Norm
 import DASHI.Analysis.ConstructiveRealCubicMarxDerivativeExact as Cubic
 
@@ -49,8 +50,7 @@ cubeMarxDerivativeIsThreeTimesSquare :
   {real : R.ConstructedOrderedCompleteReal} →
   (laws : Norm.ConstructedRealRingNormalisationLaws real) →
   (x : R.Real real) →
-  DASHI.Analysis.MarxDifferentialCore.marxDerivative
-    (Cubic.cubeFactorisation laws) x
+  Marx.marxDerivative (Cubic.cubeFactorisation laws) x
   ≡ threeTimesSquare real x
 cubeMarxDerivativeIsThreeTimesSquare {real} laws x =
   trans
