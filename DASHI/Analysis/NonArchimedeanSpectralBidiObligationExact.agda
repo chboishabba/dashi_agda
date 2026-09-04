@@ -11,6 +11,7 @@ module DASHI.Analysis.NonArchimedeanSpectralBidiObligationExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.List using (List; []; _∷_)
 
 
 data ClaimKind : Set where
@@ -38,7 +39,7 @@ spectralCircleSpatialClaim : BidiClaim
 spectralCircleSpatialClaim =
   bidiClaim spatialSpectralCircle
     "spatial twisted-block spectral circle"
-    "character monomial dynamics + explicit unitary/Fourier intertwiner"
+    "concrete twistedDirMatrix character rechart + group labels + scalar action"
     true false false false
 
 orbitProductClaim : BidiClaim
@@ -78,7 +79,11 @@ ropeOptimalityClaim =
 
 
 data MissingObligation : Set where
-  needSpatialIntertwiner : MissingObligation
+  needConcreteTwistedCharacterRechart : MissingObligation
+  needConcreteGroupLabelling : MissingObligation
+  needConcreteScalarActionWeld : MissingObligation
+  needConcretePeriodAttachment : MissingObligation
+  needConcreteOrbitWeightAttachment : MissingObligation
   needOrbitPartitionWeld : MissingObligation
   needGraphToDecompositionProducer : MissingObligation
   needDepthDecayProducer : MissingObligation
@@ -86,13 +91,19 @@ data MissingObligation : Set where
   needModelLevelRoPEConsumerTheorem : MissingObligation
   noMissingObligation : MissingObligation
 
-compileMissing : ClaimKind → MissingObligation
-compileMissing spatialSpectralCircle = needSpatialIntertwiner
-compileMissing orbitProduct = noMissingObligation
-compileMissing arbitraryDagCover = needGraphToDecompositionProducer
-compileMissing depthDecaySparsity = needDepthDecayProducer
-compileMissing contractedBoundaryEntropy = needBoundaryEntropySameObjectWeld
-compileMissing ropeOptimality = needModelLevelRoPEConsumerTheorem
+compileMissing : ClaimKind → List MissingObligation
+compileMissing spatialSpectralCircle =
+  needConcreteTwistedCharacterRechart ∷
+  needConcreteGroupLabelling ∷
+  needConcreteScalarActionWeld ∷
+  needConcretePeriodAttachment ∷
+  needConcreteOrbitWeightAttachment ∷
+  []
+compileMissing orbitProduct = []
+compileMissing arbitraryDagCover = needGraphToDecompositionProducer ∷ []
+compileMissing depthDecaySparsity = needDepthDecayProducer ∷ []
+compileMissing contractedBoundaryEntropy = needBoundaryEntropySameObjectWeld ∷ []
+compileMissing ropeOptimality = needModelLevelRoPEConsumerTheorem ∷ []
 
 record BidiFirewall : Set where
   constructor bidiFirewall
@@ -101,30 +112,41 @@ record BidiFirewall : Set where
     theoremExistsImpliesSameObjectWeld : Bool
     conditionalConsumerImpliesProducer : Bool
     architecturalAnalogyImpliesTheoremTransport : Bool
+    genericInfrastructureMayReplaceConcreteAttachment : Bool
 
 canonicalBidiFirewall : BidiFirewall
-canonicalBidiFirewall = bidiFirewall false false false false
+canonicalBidiFirewall = bidiFirewall false false false false false
 
-spectralCircleNeedsIntertwiner :
-  compileMissing (kind spectralCircleSpatialClaim) ≡ needSpatialIntertwiner
-spectralCircleNeedsIntertwiner = refl
+spatialSpectralCircleExactCutset :
+  compileMissing (kind spectralCircleSpatialClaim)
+  ≡ needConcreteTwistedCharacterRechart ∷
+    needConcreteGroupLabelling ∷
+    needConcreteScalarActionWeld ∷
+    needConcretePeriodAttachment ∷
+    needConcreteOrbitWeightAttachment ∷
+    []
+spatialSpectralCircleExactCutset = refl
 
 orbitProductIsPromotable :
-  compileMissing (kind orbitProductClaim) ≡ noMissingObligation
+  compileMissing (kind orbitProductClaim) ≡ []
 orbitProductIsPromotable = refl
 
 multiPrimeCoverNeedsProducer :
-  compileMissing (kind multiPrimeCoverClaim) ≡ needGraphToDecompositionProducer
+  compileMissing (kind multiPrimeCoverClaim)
+  ≡ needGraphToDecompositionProducer ∷ []
 multiPrimeCoverNeedsProducer = refl
 
 multiPrimeSparsityNeedsQuantitativeProducer :
-  compileMissing (kind multiPrimeSparsityClaim) ≡ needDepthDecayProducer
+  compileMissing (kind multiPrimeSparsityClaim)
+  ≡ needDepthDecayProducer ∷ []
 multiPrimeSparsityNeedsQuantitativeProducer = refl
 
 holographicClaimNeedsSameObjectWeld :
-  compileMissing (kind holographicAreaClaim) ≡ needBoundaryEntropySameObjectWeld
+  compileMissing (kind holographicAreaClaim)
+  ≡ needBoundaryEntropySameObjectWeld ∷ []
 holographicClaimNeedsSameObjectWeld = refl
 
 ropeOptimalityNeedsModelConsumer :
-  compileMissing (kind ropeOptimalityClaim) ≡ needModelLevelRoPEConsumerTheorem
+  compileMissing (kind ropeOptimalityClaim)
+  ≡ needModelLevelRoPEConsumerTheorem ∷ []
 ropeOptimalityNeedsModelConsumer = refl
