@@ -3,6 +3,7 @@ module DASHI.Physics.QuantumVacuum.ParallelPlateRegulatorFiniteEnumerationWeldEx
 open import DASHI.Core.Prelude
 open import Agda.Builtin.List using (List)
 open import Data.Fin.Base using (Fin)
+open import Data.List.Base using (map)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Data.Product using (_,_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
@@ -40,7 +41,7 @@ record RegulatorFiniteEnumerationWeld
 
     plateListExact :
       Cutset.plateModes regulator separation cutoff ≡
-      Data.List.Base.map coordinateToMode (Enum.coordinates enumeration)
+      map coordinateToMode (Enum.coordinates enumeration)
 
     coordinateIndexAgreesWithPhysicalModeIndex : Set
     cutoffPredicateAgreesWithFiniteBounds : Set
