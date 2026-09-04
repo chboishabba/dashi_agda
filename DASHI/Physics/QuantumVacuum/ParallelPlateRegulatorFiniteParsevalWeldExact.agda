@@ -2,12 +2,12 @@ module DASHI.Physics.QuantumVacuum.ParallelPlateRegulatorFiniteParsevalWeldExact
 
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (map)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNLuoTorusTrigonometricPolynomialExact as Torus
+import DASHI.Physics.Closure.NSTriadKNLuoTorusTrigonometricParsevalExact as Parseval
 import DASHI.Physics.QuantumVacuum.CasimirParallelPlateKernel as Casimir
 import DASHI.Physics.QuantumVacuum.PhysicalQuantities as Q
 import DASHI.Physics.QuantumVacuum.ParallelPlateModeSpectrumCutsetExact as Cutset
@@ -41,14 +41,16 @@ asFiniteCutoffTorusRealisation :
   ∀ {r} {F : C3.RealField r} {kernel spectrum regulator} →
   RegulatorFiniteTorusParsevalWeld F {kernel} spectrum regulator →
   FiniteParseval.FiniteCutoffTorusRealisation F
-asFiniteCutoffTorusRealisation W = record
-  { FiniteParseval.PlateMode = Cutset.Mode _
+asFiniteCutoffTorusRealisation
+    {spectrum = spectrum} {regulator = regulator} W = record
+  { FiniteParseval.PlateMode = Cutset.Mode spectrum
   ; FiniteParseval.plateModes =
-      Cutset.plateModes _ (separation W) (cutoff W)
+      Cutset.plateModes regulator (separation W) (cutoff W)
   ; FiniteParseval.torus = torus W
   ; FiniteParseval.encode = encode W
   ; FiniteParseval.terms =
-      map (encode W) (Cutset.plateModes _ (separation W) (cutoff W))
+      map (encode W)
+        (Cutset.plateModes regulator (separation W) (cutoff W))
   ; FiniteParseval.termsAreEncodedPlateModes = refl
   ; FiniteParseval.sameCutoffModeLabels = sameFiniteCutoffModeLabels W
   ; FiniteParseval.sameCoefficientNormalisation = sameCoefficientNormalisation W
@@ -62,9 +64,9 @@ literalRegulatorFiniteParseval :
   (W : RegulatorFiniteTorusParsevalWeld F {kernel} spectrum regulator) →
   let R = asFiniteCutoffTorusRealisation W
   in
-  DASHI.Physics.Closure.NSTriadKNLuoTorusTrigonometricParsevalExact.physicalPolynomialEnergy
+  Parseval.physicalPolynomialEnergy
       (FiniteParseval.torus R) (FiniteParseval.terms R)
-  ≡ DASHI.Physics.Closure.NSTriadKNLuoTorusTrigonometricParsevalExact.polynomialCoefficientEnergy
+  ≡ Parseval.polynomialCoefficientEnergy
       (FiniteParseval.torus R) (FiniteParseval.terms R) (FiniteParseval.terms R)
 literalRegulatorFiniteParseval W =
   FiniteParseval.finiteCutoffParseval (asFiniteCutoffTorusRealisation W)
