@@ -4,56 +4,63 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
--- CANONICAL ENDGAME STATUS AFTER V6 PROOF PRUNING
+-- CANONICAL ENDGAME STATUS AFTER V7 CHART-FREE PRUNING
 ------------------------------------------------------------------------
 
 record CanonicalEndgameStatus : Set where
   field
     finiteCutoffEnumerationOwned : Bool
     finiteParsevalOwned : Bool
-    bishopPowerAndFiniteTrigAnalyticDerivativeOwned : Bool
-    bishopProductRuleOwned : Bool
-    bishopPolarDerivativeAndDeterminantCompilerOwned : Bool
-    sourceBackedTrigDerivativeAndPythagoreanOwned : Bool
+
     sourceBackedParallelPlateFieldExpansionOwned : Bool
+    sourceBackedParallelPlateTransverseCoverageOwned : Bool
     sourceBackedParallelPlateLongitudinalCoverageOwned : Bool
     maxwellProofBearingCompletenessCompilerOwned : Bool
-    sourceBackedPolarChangeOfVariablesOwned : Bool
+
+    radialLebesgueDecompositionSourceBacked : Bool
+    radialityIsLiteralPointwiseEquality : Bool
+    chartFreeRadialTransportOwned : Bool
+    round11TrigDependencyPrunedFromCanonicalRoute : Bool
+    polarJacobianDependencyPrunedFromCanonicalRoute : Bool
+
     matchedDivergenceCancellationOwned : Bool
     canonicalResidualMetricOwned : Bool
     canonicalMetricToBishopConvergenceOwned : Bool
     residualTrajectoryAndCandidateWeldsPruned : Bool
+
     proofBearingZetaTransformationTraceSurfaceOwned : Bool
     transformedLiteralDefectOneOver120CompilerOwned : Bool
     sixTimes120ArithmeticOwned : Bool
-    v6CanonicalRouterOwned : Bool
+
+    v7CanonicalRouterOwned : Bool
+    remainingProducerFamilies : Nat
 
     maxwellSourceFiniteEnergyCarrierWeldClosed : Bool
-    maxwellTransverseCompletenessClosed : Bool
     maxwellTETMIndependenceClosed : Bool
     maxwellZeroSectorCountingClosed : Bool
-    sharedClassicalBishopTrigObjectWeldClosed : Bool
-    polarMeasureDomainIntegrandWeldClosed : Bool
+    radialMeasureIntegrabilityAndNormalizationWeldClosed : Bool
     concreteResidualTailBoundClosed : Bool
     concreteZetaTransformationTraceClosed : Bool
 
     finiteCutoffEnumerationOwnedIsTrue : finiteCutoffEnumerationOwned ≡ true
     finiteParsevalOwnedIsTrue : finiteParsevalOwned ≡ true
-    bishopPowerAndFiniteTrigAnalyticDerivativeOwnedIsTrue :
-      bishopPowerAndFiniteTrigAnalyticDerivativeOwned ≡ true
-    bishopProductRuleOwnedIsTrue : bishopProductRuleOwned ≡ true
-    bishopPolarDerivativeAndDeterminantCompilerOwnedIsTrue :
-      bishopPolarDerivativeAndDeterminantCompilerOwned ≡ true
-    sourceBackedTrigDerivativeAndPythagoreanOwnedIsTrue :
-      sourceBackedTrigDerivativeAndPythagoreanOwned ≡ true
     sourceBackedParallelPlateFieldExpansionOwnedIsTrue :
       sourceBackedParallelPlateFieldExpansionOwned ≡ true
+    sourceBackedParallelPlateTransverseCoverageOwnedIsTrue :
+      sourceBackedParallelPlateTransverseCoverageOwned ≡ true
     sourceBackedParallelPlateLongitudinalCoverageOwnedIsTrue :
       sourceBackedParallelPlateLongitudinalCoverageOwned ≡ true
     maxwellProofBearingCompletenessCompilerOwnedIsTrue :
       maxwellProofBearingCompletenessCompilerOwned ≡ true
-    sourceBackedPolarChangeOfVariablesOwnedIsTrue :
-      sourceBackedPolarChangeOfVariablesOwned ≡ true
+    radialLebesgueDecompositionSourceBackedIsTrue :
+      radialLebesgueDecompositionSourceBacked ≡ true
+    radialityIsLiteralPointwiseEqualityIsTrue :
+      radialityIsLiteralPointwiseEquality ≡ true
+    chartFreeRadialTransportOwnedIsTrue : chartFreeRadialTransportOwned ≡ true
+    round11TrigDependencyPrunedFromCanonicalRouteIsTrue :
+      round11TrigDependencyPrunedFromCanonicalRoute ≡ true
+    polarJacobianDependencyPrunedFromCanonicalRouteIsTrue :
+      polarJacobianDependencyPrunedFromCanonicalRoute ≡ true
     matchedDivergenceCancellationOwnedIsTrue : matchedDivergenceCancellationOwned ≡ true
     canonicalResidualMetricOwnedIsTrue : canonicalResidualMetricOwned ≡ true
     canonicalMetricToBishopConvergenceOwnedIsTrue :
@@ -65,20 +72,15 @@ record CanonicalEndgameStatus : Set where
     transformedLiteralDefectOneOver120CompilerOwnedIsTrue :
       transformedLiteralDefectOneOver120CompilerOwned ≡ true
     sixTimes120ArithmeticOwnedIsTrue : sixTimes120ArithmeticOwned ≡ true
-    v6CanonicalRouterOwnedIsTrue : v6CanonicalRouterOwned ≡ true
+    v7CanonicalRouterOwnedIsTrue : v7CanonicalRouterOwned ≡ true
+    remainingProducerFamiliesIsFour : remainingProducerFamilies ≡ 4
 
     maxwellSourceFiniteEnergyCarrierWeldClosedIsFalse :
       maxwellSourceFiniteEnergyCarrierWeldClosed ≡ false
-    maxwellTransverseCompletenessClosedIsFalse :
-      maxwellTransverseCompletenessClosed ≡ false
-    maxwellTETMIndependenceClosedIsFalse :
-      maxwellTETMIndependenceClosed ≡ false
-    maxwellZeroSectorCountingClosedIsFalse :
-      maxwellZeroSectorCountingClosed ≡ false
-    sharedClassicalBishopTrigObjectWeldClosedIsFalse :
-      sharedClassicalBishopTrigObjectWeldClosed ≡ false
-    polarMeasureDomainIntegrandWeldClosedIsFalse :
-      polarMeasureDomainIntegrandWeldClosed ≡ false
+    maxwellTETMIndependenceClosedIsFalse : maxwellTETMIndependenceClosed ≡ false
+    maxwellZeroSectorCountingClosedIsFalse : maxwellZeroSectorCountingClosed ≡ false
+    radialMeasureIntegrabilityAndNormalizationWeldClosedIsFalse :
+      radialMeasureIntegrabilityAndNormalizationWeldClosed ≡ false
     concreteResidualTailBoundClosedIsFalse : concreteResidualTailBoundClosed ≡ false
     concreteZetaTransformationTraceClosedIsFalse :
       concreteZetaTransformationTraceClosed ≡ false
@@ -89,14 +91,15 @@ canonicalStatus : CanonicalEndgameStatus
 canonicalStatus = record
   { finiteCutoffEnumerationOwned = true
   ; finiteParsevalOwned = true
-  ; bishopPowerAndFiniteTrigAnalyticDerivativeOwned = true
-  ; bishopProductRuleOwned = true
-  ; bishopPolarDerivativeAndDeterminantCompilerOwned = true
-  ; sourceBackedTrigDerivativeAndPythagoreanOwned = true
   ; sourceBackedParallelPlateFieldExpansionOwned = true
+  ; sourceBackedParallelPlateTransverseCoverageOwned = true
   ; sourceBackedParallelPlateLongitudinalCoverageOwned = true
   ; maxwellProofBearingCompletenessCompilerOwned = true
-  ; sourceBackedPolarChangeOfVariablesOwned = true
+  ; radialLebesgueDecompositionSourceBacked = true
+  ; radialityIsLiteralPointwiseEquality = true
+  ; chartFreeRadialTransportOwned = true
+  ; round11TrigDependencyPrunedFromCanonicalRoute = true
+  ; polarJacobianDependencyPrunedFromCanonicalRoute = true
   ; matchedDivergenceCancellationOwned = true
   ; canonicalResidualMetricOwned = true
   ; canonicalMetricToBishopConvergenceOwned = true
@@ -104,25 +107,25 @@ canonicalStatus = record
   ; proofBearingZetaTransformationTraceSurfaceOwned = true
   ; transformedLiteralDefectOneOver120CompilerOwned = true
   ; sixTimes120ArithmeticOwned = true
-  ; v6CanonicalRouterOwned = true
+  ; v7CanonicalRouterOwned = true
+  ; remainingProducerFamilies = 4
   ; maxwellSourceFiniteEnergyCarrierWeldClosed = false
-  ; maxwellTransverseCompletenessClosed = false
   ; maxwellTETMIndependenceClosed = false
   ; maxwellZeroSectorCountingClosed = false
-  ; sharedClassicalBishopTrigObjectWeldClosed = false
-  ; polarMeasureDomainIntegrandWeldClosed = false
+  ; radialMeasureIntegrabilityAndNormalizationWeldClosed = false
   ; concreteResidualTailBoundClosed = false
   ; concreteZetaTransformationTraceClosed = false
   ; finiteCutoffEnumerationOwnedIsTrue = refl
   ; finiteParsevalOwnedIsTrue = refl
-  ; bishopPowerAndFiniteTrigAnalyticDerivativeOwnedIsTrue = refl
-  ; bishopProductRuleOwnedIsTrue = refl
-  ; bishopPolarDerivativeAndDeterminantCompilerOwnedIsTrue = refl
-  ; sourceBackedTrigDerivativeAndPythagoreanOwnedIsTrue = refl
   ; sourceBackedParallelPlateFieldExpansionOwnedIsTrue = refl
+  ; sourceBackedParallelPlateTransverseCoverageOwnedIsTrue = refl
   ; sourceBackedParallelPlateLongitudinalCoverageOwnedIsTrue = refl
   ; maxwellProofBearingCompletenessCompilerOwnedIsTrue = refl
-  ; sourceBackedPolarChangeOfVariablesOwnedIsTrue = refl
+  ; radialLebesgueDecompositionSourceBackedIsTrue = refl
+  ; radialityIsLiteralPointwiseEqualityIsTrue = refl
+  ; chartFreeRadialTransportOwnedIsTrue = refl
+  ; round11TrigDependencyPrunedFromCanonicalRouteIsTrue = refl
+  ; polarJacobianDependencyPrunedFromCanonicalRouteIsTrue = refl
   ; matchedDivergenceCancellationOwnedIsTrue = refl
   ; canonicalResidualMetricOwnedIsTrue = refl
   ; canonicalMetricToBishopConvergenceOwnedIsTrue = refl
@@ -130,13 +133,12 @@ canonicalStatus = record
   ; proofBearingZetaTransformationTraceSurfaceOwnedIsTrue = refl
   ; transformedLiteralDefectOneOver120CompilerOwnedIsTrue = refl
   ; sixTimes120ArithmeticOwnedIsTrue = refl
-  ; v6CanonicalRouterOwnedIsTrue = refl
+  ; v7CanonicalRouterOwnedIsTrue = refl
+  ; remainingProducerFamiliesIsFour = refl
   ; maxwellSourceFiniteEnergyCarrierWeldClosedIsFalse = refl
-  ; maxwellTransverseCompletenessClosedIsFalse = refl
   ; maxwellTETMIndependenceClosedIsFalse = refl
   ; maxwellZeroSectorCountingClosedIsFalse = refl
-  ; sharedClassicalBishopTrigObjectWeldClosedIsFalse = refl
-  ; polarMeasureDomainIntegrandWeldClosedIsFalse = refl
+  ; radialMeasureIntegrabilityAndNormalizationWeldClosedIsFalse = refl
   ; concreteResidualTailBoundClosedIsFalse = refl
   ; concreteZetaTransformationTraceClosedIsFalse = refl
   }
@@ -144,21 +146,18 @@ canonicalStatus = record
 record CanonicalCriticalPath : Set where
   field
     maxwell : String
-    trig : String
-    polarMeasure : String
+    radialMeasure : String
     residual : String
     zeta : String
 
 canonicalCriticalPath : CanonicalCriticalPath
 canonicalCriticalPath = record
   { maxwell =
-      "pay one source-to-Casimir finite-energy/mode-object weld plus the genuinely local transverse-completeness, TE/TM-independence and exact zero-sector-counting receipts; source-backed field spanning and longitudinal coverage are then compiler output"
-  ; trig =
-      "identify the classical DLMF sine/cosine object with the literal Round11 Bishop series once; pointwise absolute convergence alone is not enough to prove derivative-limit interchange, so the cross-foundation derivative-semantics/interchange weld remains live"
-  ; polarMeasure =
-      "apply the source-backed polar change-of-variables theorem to the literal Casimir domain, measure and integrand; Bishop trig derivatives and det(DPhi)=r are already upstream compiler output"
+      "pay one source-to-Casimir finite-energy/mode-object weld plus local TE/TM-independence and exact zero-sector-counting receipts; field spanning, transverse coverage and longitudinal coverage are compiler output"
+  ; radialMeasure =
+      "prove the literal transverse integrand factors pointwise through radius, its radial integral is admissible/integrable, and the Casimir measure/2*pi normalization matches the source radial Lebesgue decomposition; no trig or polar chart is on the preferred route"
   ; residual =
-      "prove one concrete post-cancellation tail theorem |R_n-Eren| <= 1/(m+1) beyond a constructed threshold; the residual metric family, candidate identity and Bishop convergence transport are now definitionally fixed"
+      "prove one concrete post-cancellation tail theorem |R_n-Eren| <= 1/(m+1) beyond a constructed threshold; residual metric family, candidate identity and Bishop convergence transport are definitionally fixed"
   ; zeta =
-      "instantiate the proof-bearing transformation trace from the literal discrete-minus-continuum longitudinal defect through the finite-part/zeta transformation; once supplied, the transformed literal defect = 1/120 theorem is compiler output"
+      "instantiate the proof-bearing transformation trace from the literal discrete-minus-continuum longitudinal defect through the finite-part/zeta transformation; transformed literal defect = 1/120 is then compiler output"
   }
