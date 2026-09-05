@@ -8,6 +8,7 @@ import DASHI.Core.ScientificWorkAttributionExact
 import DASHI.Core.ScientificSourceCitationExact
 import DASHI.Core.TechnicalDependencyHypergraphExact
 import DASHI.Core.FiniteObservationClosureBidiExact
+import DASHI.Core.InverseProblemIdentifiabilityBidiExact
 import DASHI.Core.CommonSelectorVisibilityHyperfabricExact
 import DASHI.Core.SelectorDiscriminationSearchExact
 import DASHI.Core.CapabilitySynthesisHypergraphExact
@@ -42,6 +43,7 @@ import DASHI.Culture.MissingDeceasedCriticalKnowledgeBidiExact
 import DASHI.Culture.MissingDeceasedViewpointEvidenceExact
 import DASHI.Culture.MissingDeceasedOpenScienceBidiExact
 import DASHI.Culture.HouseOversightScientistRosterScopeExact
+import DASHI.Culture.ScientificRosterInverseProblemCrossPollinationExact
 
 -- Actual scientific / engineering work owners.
 import DASHI.Culture.AmyEskridgeGravityMechanismCrossPollinationExact
