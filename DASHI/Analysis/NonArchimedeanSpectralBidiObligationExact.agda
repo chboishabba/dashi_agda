@@ -39,7 +39,7 @@ spectralCircleSpatialClaim : BidiClaim
 spectralCircleSpatialClaim =
   bidiClaim spatialSpectralCircle
     "spatial twisted-block spectral circle"
-    "odd-character/tau-odd semantics + arithmetic +/-3^j orbit chart + twisted-coordinate character weld + same-label period/weight"
+    "arithmetic +/-3^j orbit chart + odd-character/tau-odd semantics + twisted-coordinate character weld + same-label period/weight"
     true false false false
 
 orbitProductClaim : BidiClaim
@@ -95,8 +95,8 @@ data MissingObligation : Set where
 
 compileMissing : ClaimKind → List MissingObligation
 compileMissing spatialSpectralCircle =
-  needOddCharacterTauOddIff ∷
   needArithmeticOddOrbitChart ∷
+  needOddCharacterTauOddIff ∷
   needTwistedCoordinateCharacterIdentification ∷
   needCompleteCharacterBasisActionEquality ∷
   needConcretePeriodAttachment ∷
@@ -127,8 +127,8 @@ canonicalBidiFirewall = bidiFirewall false false false false false false false
 
 spatialSpectralCircleExactCutset :
   compileMissing (kind spectralCircleSpatialClaim)
-  ≡ needOddCharacterTauOddIff ∷
-    needArithmeticOddOrbitChart ∷
+  ≡ needArithmeticOddOrbitChart ∷
+    needOddCharacterTauOddIff ∷
     needTwistedCoordinateCharacterIdentification ∷
     needCompleteCharacterBasisActionEquality ∷
     needConcretePeriodAttachment ∷
