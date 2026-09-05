@@ -11,6 +11,8 @@ import DASHI.Law.CoerciveEncounterLawfulnessProductExact as Product
 import DASHI.Law.TemporalAuthorityNonRetroactivityExact as Temporal
 import DASHI.Law.IndependentEvidenceProvenanceExact as Provenance
 import DASHI.Law.EvidenceProvenanceDependencyDagExact as Dag
+import DASHI.Law.CoerciveEncounterFixtureCompilerExact as Fixture
+import DASHI.Law.CoerciveEncounterGenericReceiptBridgeExact as Receipt
 
 firewallAndReachabilityCoexist :
   Wand.FirewallWithReachability Wand.canonicalFirewallBoundary
@@ -96,3 +98,20 @@ independenceConsumerRequiresIndependentProducer :
   Dag.reverseProvenance Dag.independentCorroborationConsumer ≡ Dag.independentProducerReceipt
 independenceConsumerRequiresIndependentProducer =
   Dag.independenceConsumerRequiresProducerReceipt
+
+empiricalFixtureStopsAtFirstLegalGap :
+  Fixture.firstLawfulnessResidual Fixture.canonicalMissingSafeguardFixture
+  ≡ Product.firstOpenLawfulnessCoordinate Product.safeguardCoordinate
+empiricalFixtureStopsAtFirstLegalGap = Fixture.canonicalFixtureStopsAtSafeguard
+
+downstreamSearchCannotLeapfrogFixtureGap :
+  Fixture.searchOccurred Fixture.canonicalMissingSafeguardFixture ≡ Fixture.observedTrue
+downstreamSearchCannotLeapfrogFixtureGap = Fixture.canonicalFixtureSearchCannotLeapfrogSafeguard
+
+downstreamContrabandCannotLeapfrogFixtureGap :
+  Fixture.otherContrabandFound Fixture.canonicalMissingSafeguardFixture ≡ Fixture.observedTrue
+downstreamContrabandCannotLeapfrogFixtureGap = Fixture.canonicalFixtureContrabandCannotLeapfrogSafeguard
+
+genericFixtureReceiptRemainsNonPromoting :
+  Receipt.Generic.promotesClaim Receipt.canonicalFixtureGenericReceipt ≡ false
+genericFixtureReceiptRemainsNonPromoting = Receipt.canonicalFixtureReceiptNonPromoting
