@@ -4,11 +4,11 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Law.PartialIdentificationMissingnessBoundsExact as Bounds
+import DASHI.Law.ExactIntervalRatioSeparatorExact as Exact
 
 ------------------------------------------------------------------------
 -- Robust disparity means the ordering survives every admissible allocation
--- represented by the bound surface.  We keep arithmetic comparison receipts
--- explicit rather than hiding them inside a point estimate.
+-- represented by the bound surface.
 ------------------------------------------------------------------------
 
 record RobustPositiveDisparityReceipt (a b : Bounds.RatioBounds) : Set where
@@ -57,6 +57,34 @@ record RobustDisparitySurface : Set where
 open RobustDisparitySurface public
 
 ------------------------------------------------------------------------
+-- Exact arithmetic now derives the conclusion; no trusted ordering Boolean is
+-- needed at this seam.  Malformed bounds fail closed to unidentified.
+------------------------------------------------------------------------
+
+derivedConclusion : Bounds.RatioBounds → Bounds.RatioBounds → RobustDisparityConclusion
+derivedConclusion a b with Exact.classifyRatioBounds a b
+... | Exact.arithmeticRobustPositive = robustPositive
+... | Exact.arithmeticRobustNegative = robustNegative
+... | Exact.arithmeticUnidentified = unidentified
+... | Exact.malformedBounds = unidentified
+
+deriveRobustSurface : Bounds.RatioBounds → Bounds.RatioBounds → RobustDisparitySurface
+deriveRobustSurface a b = robustDisparitySurface a b (derivedConclusion a b)
+  "derived by exact interval cross multiplication; malformed/overlap fail closed"
+
+canonicalDerivedPositive :
+  conclusion (deriveRobustSurface Exact.canonicalA Exact.canonicalSeparatedB) ≡ robustPositive
+canonicalDerivedPositive = refl
+
+canonicalDerivedOverlapUnidentified :
+  conclusion (deriveRobustSurface Exact.canonicalA Exact.canonicalOverlapB) ≡ unidentified
+canonicalDerivedOverlapUnidentified = refl
+
+canonicalMalformedFailsClosed :
+  conclusion (deriveRobustSurface Exact.zeroDenominatorBounds Exact.canonicalSeparatedB) ≡ unidentified
+canonicalMalformedFailsClosed = refl
+
+------------------------------------------------------------------------
 -- BIDI gate.
 ------------------------------------------------------------------------
 
@@ -64,31 +92,31 @@ data RobustClaim : Set where
   disparityExists disparityDirection pointMagnitude : RobustClaim
 
 data RobustProducer : Set where
-  boundSurfaceProducer worstCaseOrderingProducer completeObservationProducer : RobustProducer
+  boundSurfaceProducer exactArithmeticSeparatorProducer completeObservationProducer : RobustProducer
 
 reverseRobustClaim : RobustClaim → RobustProducer
-reverseRobustClaim disparityExists = worstCaseOrderingProducer
-reverseRobustClaim disparityDirection = worstCaseOrderingProducer
+reverseRobustClaim disparityExists = exactArithmeticSeparatorProducer
+reverseRobustClaim disparityDirection = exactArithmeticSeparatorProducer
 reverseRobustClaim pointMagnitude = completeObservationProducer
 
 record RobustPromotionCutset : Set where
   constructor robustPromotionCutset
   field
     boundSurfaceClosed : Bool
-    worstCaseOrderingClosed : Bool
+    exactArithmeticSeparatorClosed : Bool
     completeObservationClosed : Bool
     cutsetReference : String
 
 open RobustPromotionCutset public
 
 data RobustResidual : Set where
-  boundSurfaceResidual worstCaseOrderingResidual completeObservationResidual robustClosed : RobustResidual
+  boundSurfaceResidual exactArithmeticResidual completeObservationResidual robustClosed : RobustResidual
 
 firstRobustResidual : RobustClaim → RobustPromotionCutset → RobustResidual
 firstRobustResidual disparityExists c with boundSurfaceClosed c
 ... | false = boundSurfaceResidual
-... | true with worstCaseOrderingClosed c
-...   | false = worstCaseOrderingResidual
+... | true with exactArithmeticSeparatorClosed c
+...   | false = exactArithmeticResidual
 ...   | true = robustClosed
 firstRobustResidual disparityDirection c = firstRobustResidual disparityExists c
 firstRobustResidual pointMagnitude c with completeObservationClosed c
@@ -97,7 +125,7 @@ firstRobustResidual pointMagnitude c with completeObservationClosed c
 
 canonicalRobustButNotPointCutset : RobustPromotionCutset
 canonicalRobustButNotPointCutset = robustPromotionCutset true true false
-  "bounds and worst-case ordering close; exact point magnitude remains unavailable"
+  "bounds and exact cross-multiplication separator close; exact point magnitude remains unavailable"
 
 robustDirectionCanCloseBeforePointMagnitude :
   firstRobustResidual disparityDirection canonicalRobustButNotPointCutset ≡ robustClosed
@@ -119,6 +147,8 @@ record RobustDisparityBoundary : Set where
     overlappingBoundsMayBePromotedToRobustDisparity : Bool
     overlappingBoundsMayBePromotedToRobustDisparityIsFalse :
       overlappingBoundsMayBePromotedToRobustDisparity ≡ false
+    trustedOrderingFlagStillRequired : Bool
+    trustedOrderingFlagStillRequiredIsFalse : trustedOrderingFlagStillRequired ≡ false
 
 canonicalRobustDisparityBoundary : RobustDisparityBoundary
-canonicalRobustDisparityBoundary = robustDisparityBoundary false refl false refl false refl
+canonicalRobustDisparityBoundary = robustDisparityBoundary false refl false refl false refl false refl
