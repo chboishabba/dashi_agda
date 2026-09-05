@@ -19,8 +19,10 @@ module DASHI.Analysis.NonArchimedeanSetDependentStoppingTailBidiExact where
 --   -> generic Nat recurrence gives geometric survivor-count decay
 --   -> probability normalization gives (1-2^(-m))^q.
 --
--- All intermediate finite mathematics is now generic/owned.  Remaining leaves
--- are same-object adapters for the actual source ZMod/stopping semantics.
+-- The source itself already enumerates the literal ZMod (2^n) carrier through
+-- Finset.univ, so finite-state enumeration is source-paid. Remaining leaves are
+-- predecessor cyclicity, the same-object rw_path/prefix absorption weld, and
+-- probability normalization.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -30,21 +32,25 @@ open import Agda.Builtin.List using (List; []; _∷_)
 import DASHI.Analysis.NonArchimedeanForwardTranslationIrreducibilityCompilerExact as Forward
 import DASHI.Analysis.NonArchimedeanFiniteUniformHittingBlockCompilerExact as Uniform
 import DASHI.Analysis.NonArchimedeanHittingWordPaddingExact as Padding
+import DASHI.Analysis.NonArchimedeanZModStoppingCarrierSourceExact as SourceCarrier
 import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
 import DASHI.Core.FiniteBooleanSurvivorCountExact as Survivor
 import DASHI.Core.FiniteBlockSurvivalCountDecayExact as CountDecay
+import DASHI.Core.FinitePrefixAbsorptionExact as PrefixAbsorption
 
 
 data TailLeaf : Set where
   sourceFullPeriod : TailLeaf
+  sourceZModFiniteEnumeration : TailLeaf
+  sourceFiniteBinaryChoiceEnumeration : TailLeaf
   forwardTranslationBlock : TailLeaf
   cyclicZModPredecessor : TailLeaf
-  zmodFiniteEnumeration : TailLeaf
   directedIrreducibility : TailLeaf
   finiteUniformHittingBlock : TailLeaf
   exactHittingWordPadding : TailLeaf
   completeBinaryBranchEnumeration : TailLeaf
-  selectedHitPrefixIsKilled : TailLeaf
+  genericPrefixAbsorption : TailLeaf
+  sourceRwPathPrefixWeld : TailLeaf
   oneKilledWordCountBound : TailLeaf
   geometricSurvivorCountDecay : TailLeaf
   probabilityNormalization : TailLeaf
@@ -60,14 +66,16 @@ data TailStatus : Set where
 
 status : TailLeaf → TailStatus
 status sourceFullPeriod = sourceOwned
+status sourceZModFiniteEnumeration = sourceOwned
+status sourceFiniteBinaryChoiceEnumeration = sourceOwned
 status forwardTranslationBlock = compiled
 status cyclicZModPredecessor = liveAdapter
-status zmodFiniteEnumeration = liveAdapter
 status directedIrreducibility = downstream
 status finiteUniformHittingBlock = repoGeneric
 status exactHittingWordPadding = compiled
 status completeBinaryBranchEnumeration = repoGeneric
-status selectedHitPrefixIsKilled = liveAdapter
+status genericPrefixAbsorption = repoGeneric
+status sourceRwPathPrefixWeld = liveAdapter
 status oneKilledWordCountBound = repoGeneric
 status geometricSurvivorCountDecay = repoGeneric
 status probabilityNormalization = liveAdapter
@@ -76,15 +84,13 @@ status setDependentExponentialTail = downstream
 
 data TailObligation : Set where
   needZModCyclicPredecessorAdapter : TailObligation
-  needZModFiniteEnumerationAdapter : TailObligation
-  needPrefixHitAbsorptionWeld : TailObligation
+  needSourceRwPathPrefixAbsorptionWeld : TailObligation
   needProbabilityNormalization : TailObligation
 
 constructiveTailCutset : List TailObligation
 constructiveTailCutset =
   needZModCyclicPredecessorAdapter ∷
-  needZModFiniteEnumerationAdapter ∷
-  needPrefixHitAbsorptionWeld ∷
+  needSourceRwPathPrefixAbsorptionWeld ∷
   needProbabilityNormalization ∷
   []
 
@@ -95,9 +101,11 @@ record ConstructiveTailBoundary : Set where
     killedKernelSpectralRadiusNeeded : Bool
     principalSubmatrixInterlacingNeeded : Bool
     sourceFullPeriodReused : Bool
+    sourceFiniteCarrierEnumerationOwned : Bool
     uniformWitnessMaximumOwned : Bool
     hittingWordPaddingOwned : Bool
     binaryEnumerationOwned : Bool
+    genericPrefixAbsorptionOwned : Bool
     oneKilledWordCountMathOwned : Bool
     genericCountDecayOwned : Bool
     setDependentRateAllowed : Bool
@@ -105,7 +113,7 @@ record ConstructiveTailBoundary : Set where
 canonicalConstructiveTailBoundary : ConstructiveTailBoundary
 canonicalConstructiveTailBoundary =
   constructiveTailBoundary
-    false false false true true true true true true true
+    false false false true true true true true true true true true
 
 universalFalseRatePruned :
   ConstructiveTailBoundary.sourceUniversalRateStillUsed
@@ -119,29 +127,23 @@ killedKernelSpectrumPruned :
   ≡ false
 killedKernelSpectrumPruned = refl
 
+sourceFiniteCarrierEnumerationClosed :
+  ConstructiveTailBoundary.sourceFiniteCarrierEnumerationOwned
+    canonicalConstructiveTailBoundary
+  ≡ true
+sourceFiniteCarrierEnumerationClosed = refl
+
 uniformBlockMathOwned :
   ConstructiveTailBoundary.uniformWitnessMaximumOwned
     canonicalConstructiveTailBoundary
   ≡ true
 uniformBlockMathOwned = refl
 
-paddingMathOwned :
-  ConstructiveTailBoundary.hittingWordPaddingOwned
+prefixAbsorptionMathOwned :
+  ConstructiveTailBoundary.genericPrefixAbsorptionOwned
     canonicalConstructiveTailBoundary
   ≡ true
-paddingMathOwned = refl
-
-binaryEnumerationMathOwned :
-  ConstructiveTailBoundary.binaryEnumerationOwned
-    canonicalConstructiveTailBoundary
-  ≡ true
-binaryEnumerationMathOwned = refl
-
-oneKilledWordCountMathOwned :
-  ConstructiveTailBoundary.oneKilledWordCountMathOwned
-    canonicalConstructiveTailBoundary
-  ≡ true
-oneKilledWordCountMathOwned = refl
+prefixAbsorptionMathOwned = refl
 
 constructiveSetDependentRouteLive :
   ConstructiveTailBoundary.setDependentRateAllowed
