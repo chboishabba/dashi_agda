@@ -27,9 +27,7 @@ import DASHI.Analysis.NonArchimedeanCanonicalOddOrbitProducerBidiExact
 import DASHI.Analysis.NonArchimedeanFullCycleSignedCancellationBidiExact
 import DASHI.Analysis.NonArchimedeanMonomialTraceSpatialBidiExact
 
--- Corrected character-basis closure route. Existing finite DFT theory and
--- matrix faithfulness are reused; the source product DFT is retained only as a
--- unitary artifact, not as the literal odd-character transform.
+-- Corrected character-basis closure route.
 import DASHI.Analysis.NonArchimedeanCharacterBasisMatrixFaithfulnessReuseExact
 import DASHI.Analysis.NonArchimedeanHalfPeriodCharacterClassifierExact
 import DASHI.Analysis.NonArchimedeanTauOddCharacterRestrictionBidiExact
@@ -44,10 +42,7 @@ import DASHI.Analysis.NonArchimedeanConcreteSourceSheetAdapterExact
 import DASHI.Analysis.NonArchimedeanConcreteSourceSheetAdapterClosureExact
 import DASHI.Analysis.NonArchimedeanConcreteMonomialWeldCompilerExact
 
--- Arithmetic orbit and signed-return closure. The stronger checked source
--- theorem `three_pow_two_pow` carries an odd coefficient and supplies the extra
--- dyadic bit needed for the orbit-sum phase; explicit +/- i sqrt(2) values are
--- pruned from the critical path.
+-- Arithmetic orbit and signed-return closure.
 import DASHI.Analysis.NonArchimedeanOddOrbitDFTRechartCorrectionExact
 import DASHI.Analysis.NonArchimedeanOddOrbitEquivalenceCompilerExact
 import DASHI.Analysis.NonArchimedeanCanonicalOddOrbitClosureReuseExact
@@ -59,16 +54,11 @@ import DASHI.Analysis.NonArchimedeanOrbitSumToSignedCancellationExact
 import DASHI.Analysis.NonArchimedeanNegativeOrbitWeightPhaseCompilerExact
 import DASHI.Analysis.NonArchimedeanOrbitCancellationToMinusTwoExact
 
--- Spectrum-tower repair. The external named theorem still concludes `True`,
--- but the characteristic determinant/root-union route now compiles from the
--- already checked block decomposition and determinant ingredients.
+-- Spectrum-tower repair.
 import DASHI.Analysis.NonArchimedeanCharacteristicRootUnionCompilerExact
 import DASHI.Analysis.NonArchimedeanCharacteristicFactorizationReuseExact
 
--- Post-closure sigma / continuous-transfer audit. The primitive twisted-circle
--- radius, full transfer eigenvalues, normalized Markov eigenvalue, conditional
--- L2 rate, and Prolate critical parameter are separately typed. The local
--- cyclotomic half is repaired; only the cross-lane same-object anchor remains.
+-- Post-closure sigma / continuous-transfer audit.
 import DASHI.Analysis.NonArchimedeanDirectedRadiusCriticalSigmaAuditExact
 import DASHI.Analysis.NonArchimedeanSigmaRoleSeparationExact
 import DASHI.Analysis.NonArchimedeanCyclotomicSigmaHalfCompilerExact
@@ -77,12 +67,29 @@ import DASHI.Analysis.NonArchimedeanTransferRadiusAnchorNoGoExact
 import DASHI.Analysis.NonArchimedeanPrimitiveTwistedAnchorRepairExact
 import DASHI.Analysis.NonArchimedeanContinuousTransferRadiusSemanticAuditExact
 import DASHI.Analysis.NonArchimedeanContinuousTransferClaimStrengthExact
+import DASHI.Analysis.NonArchimedeanContinuousGibbsUniquenessBidiExact
 import DASHI.Analysis.NonArchimedeanSemilocalSigmaNonDescentExact
 import DASHI.Analysis.NonArchimedeanSigmaAnchorSameObjectBidiExact
+
+-- Corrected finite Markov/mixing route.  The source C=1 one-step
+-- inverse-sqrt-two contraction is refuted at n=3.  The viable route uses a
+-- finite level-dependent prefactor, exact monomial powers and unitary shell
+-- energy assembly.  Stopping-time consumers are routed independently.
+import DASHI.Analysis.NonArchimedeanContinuousMixingBidiExact
+import DASHI.Analysis.NonArchimedeanMixingRateNormalizationExact
+import DASHI.Analysis.NonArchimedeanMeanZeroInvariantCompilerExact
+import DASHI.Analysis.NonArchimedeanFiniteMeanZeroClosureReuseExact
+import DASHI.Analysis.NonArchimedeanL2MixingN3CounterexampleExact
+import DASHI.Analysis.NonArchimedeanMarkovMixingProofAuditExact
+import DASHI.Analysis.NonArchimedeanMonomialPowerPrefactorBidiExact
+import DASHI.Analysis.NonArchimedeanExplicitSquaredMixingPrefactorExact
+import DASHI.Analysis.NonArchimedeanPrefactoredL2PowerCompilerExact
+import DASHI.Analysis.NonArchimedeanFourierShellEnergyAssemblyBidiExact
+import DASHI.Analysis.NonArchimedeanStoppingTimeAuthorityBidiExact
+
 import DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact
 
--- Optional Monster correspondence x-pollination. These remain downstream
--- comparison fibres and are not prerequisites for the source spectral closure.
+-- Optional Monster correspondence x-pollination.
 import DASHI.Analysis.NonArchimedeanMonster3BDyadicCorrespondenceBidiExact
 import DASHI.Analysis.NonArchimedeanMonster3BPhaseBulkHypervoxelExact
 import DASHI.Analysis.NonArchimedeanMonster3BActionSeparationExact
