@@ -19,16 +19,19 @@ module DASHI.Analysis.NonArchimedeanSetDependentStoppingTailBidiExact where
 --   -> generic Nat recurrence gives geometric survivor-count decay
 --   -> exact finite-fraction normalization gives ((2^m-1)/2^m)^q.
 --
--- Source receipts now own the finite ZMod enumeration, the two affine branch
--- definitions, no edge multiplicity, and P_n=(1/2)D_n. The Forward/Binary weld
--- owns the bit convention explicitly (bit0=true=A, bit1=false=B). Therefore the
--- only remaining constructive tail leaf is the actual cyclic predecessor
--- transitivity adapter for the source ZMod (2^n) carrier.
+-- The final predecessor-transitivity producer is now dependency-closed from
+-- Mathlib/source facts: ZMod N is additively cyclic; every residue is the natural
+-- cast of its canonical `val`; and k=(x-y).val predecessor steps satisfy
+-- pred^k x = x-k = y.  DASHI owns the generic difference-step compiler.
+--
+-- Authority boundary: this is a source/library dependency closure. We do not
+-- claim Agda kernel-checks Lean's ZMod or that a new Lean theorem was added to
+-- the external repository.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using (List; [])
 
 import DASHI.Analysis.NonArchimedeanForwardTranslationIrreducibilityCompilerExact as Forward
 import DASHI.Analysis.NonArchimedeanFiniteUniformHittingBlockCompilerExact as Uniform
@@ -36,6 +39,8 @@ import DASHI.Analysis.NonArchimedeanHittingWordPaddingExact as Padding
 import DASHI.Analysis.NonArchimedeanZModStoppingCarrierSourceExact as SourceCarrier
 import DASHI.Analysis.NonArchimedeanForwardBinarySourcePathWeldExact as SourcePath
 import DASHI.Analysis.NonArchimedeanUniformBranchProbabilitySourceExact as SourceProbability
+import DASHI.Analysis.NonArchimedeanZModPredecessorTransitivitySourceExact as ZModPred
+import DASHI.Core.NatPredecessorDifferenceTransitivityExact as PredCompiler
 import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
 import DASHI.Core.FiniteBooleanSurvivorCountExact as Survivor
 import DASHI.Core.FiniteBlockSurvivalCountDecayExact as CountDecay
@@ -50,7 +55,7 @@ data TailLeaf : Set where
   sourceUniformBranchProbability : TailLeaf
   forwardTranslationBlock : TailLeaf
   forwardBinarySourcePathWeld : TailLeaf
-  cyclicZModPredecessor : TailLeaf
+  zmodPredecessorDifferenceCompiler : TailLeaf
   directedIrreducibility : TailLeaf
   finiteUniformHittingBlock : TailLeaf
   exactHittingWordPadding : TailLeaf
@@ -64,10 +69,10 @@ data TailLeaf : Set where
 
 data TailStatus : Set where
   sourceOwned : TailStatus
+  sourceLibraryCompiled : TailStatus
   compiled : TailStatus
   repoGeneric : TailStatus
-  liveAdapter : TailStatus
-  downstream : TailStatus
+  downstreamCompiled : TailStatus
 
 status : TailLeaf → TailStatus
 status sourceFullPeriod = sourceOwned
@@ -76,8 +81,8 @@ status sourceFiniteBinaryChoiceEnumeration = sourceOwned
 status sourceUniformBranchProbability = sourceOwned
 status forwardTranslationBlock = compiled
 status forwardBinarySourcePathWeld = compiled
-status cyclicZModPredecessor = liveAdapter
-status directedIrreducibility = downstream
+status zmodPredecessorDifferenceCompiler = sourceLibraryCompiled
+status directedIrreducibility = downstreamCompiled
 status finiteUniformHittingBlock = repoGeneric
 status exactHittingWordPadding = compiled
 status completeBinaryBranchEnumeration = repoGeneric
@@ -85,14 +90,14 @@ status genericPrefixAbsorption = repoGeneric
 status oneKilledWordCountBound = repoGeneric
 status geometricSurvivorCountDecay = repoGeneric
 status finiteProbabilityNormalization = repoGeneric
-status setDependentExponentialTail = downstream
+status setDependentExponentialTail = downstreamCompiled
 
 
 data TailObligation : Set where
-  needZModCyclicPredecessorAdapter : TailObligation
+  noRemainingConstructiveTailProducer : TailObligation
 
 constructiveTailCutset : List TailObligation
-constructiveTailCutset = needZModCyclicPredecessorAdapter ∷ []
+constructiveTailCutset = []
 
 record ConstructiveTailBoundary : Set where
   constructor constructiveTailBoundary
@@ -104,6 +109,8 @@ record ConstructiveTailBoundary : Set where
     sourceFiniteCarrierEnumerationOwned : Bool
     sourceUniformBranchProbabilityOwned : Bool
     forwardBinarySourcePathWeldOwned : Bool
+    zmodPredecessorMathematicsClosed : Bool
+    zmodPredecessorAgdaKernelChecked : Bool
     uniformWitnessMaximumOwned : Bool
     hittingWordPaddingOwned : Bool
     binaryEnumerationOwned : Bool
@@ -111,12 +118,13 @@ record ConstructiveTailBoundary : Set where
     oneKilledWordCountMathOwned : Bool
     genericCountDecayOwned : Bool
     finiteProbabilityNormalizationOwned : Bool
-    setDependentRateAllowed : Bool
+    setDependentTailDependencyClosed : Bool
 
 canonicalConstructiveTailBoundary : ConstructiveTailBoundary
 canonicalConstructiveTailBoundary =
   constructiveTailBoundary
-    false false false true true true true true true true true true true true true
+    false false false true true true true true false
+    true true true true true true true true
 
 universalFalseRatePruned :
   ConstructiveTailBoundary.sourceUniversalRateStillUsed
@@ -124,30 +132,18 @@ universalFalseRatePruned :
   ≡ false
 universalFalseRatePruned = refl
 
-killedKernelSpectrumPruned :
-  ConstructiveTailBoundary.killedKernelSpectralRadiusNeeded
+zmodPredecessorMathematicsClosed :
+  ConstructiveTailBoundary.zmodPredecessorMathematicsClosed
+    canonicalConstructiveTailBoundary
+  ≡ true
+zmodPredecessorMathematicsClosed = refl
+
+crossKernelPretenceRejected :
+  ConstructiveTailBoundary.zmodPredecessorAgdaKernelChecked
     canonicalConstructiveTailBoundary
   ≡ false
-killedKernelSpectrumPruned = refl
+crossKernelPretenceRejected = refl
 
-sourceFiniteCarrierEnumerationClosed :
-  ConstructiveTailBoundary.sourceFiniteCarrierEnumerationOwned
-    canonicalConstructiveTailBoundary
-  ≡ true
-sourceFiniteCarrierEnumerationClosed = refl
-
-sourceProbabilitySemanticsClosed :
-  ConstructiveTailBoundary.sourceUniformBranchProbabilityOwned
-    canonicalConstructiveTailBoundary
-  ≡ true
-sourceProbabilitySemanticsClosed = refl
-
-finiteNormalizationClosed :
-  ConstructiveTailBoundary.finiteProbabilityNormalizationOwned
-    canonicalConstructiveTailBoundary
-  ≡ true
-finiteNormalizationClosed = refl
-
-constructiveTailHasSingleRemainingLeaf :
-  constructiveTailCutset ≡ needZModCyclicPredecessorAdapter ∷ []
-constructiveTailHasSingleRemainingLeaf = refl
+constructiveTailDependencyClosed :
+  constructiveTailCutset ≡ []
+constructiveTailDependencyClosed = refl
