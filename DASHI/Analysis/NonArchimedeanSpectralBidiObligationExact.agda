@@ -3,10 +3,19 @@ module DASHI.Analysis.NonArchimedeanSpectralBidiObligationExact where
 ------------------------------------------------------------------------
 -- Reverse / BIDI obligation compiler for the non-Archimedean spectral lane.
 --
--- Source correction: the currently checked F_(2^(n-2)) tensor I_2 transform
--- after an arbitrary Fin product reindex is not yet the odd-character Fourier
--- transform.  Downstream spatial claims therefore reopen the semantic
--- odd-character rechart, not generic DFT algebra or raw matrix expansion.
+-- Generic and arithmetic producers already recovered in the repo are pruned
+-- from reverse search.  In particular:
+--
+--   * primitive half-turn -> -1 is upstream reusable;
+--   * odd-character <-> tau-odd compiles from that half-turn and parity;
+--   * the strong source theorem `three_pow_two_pow` compiles the full-orbit sum
+--     to the dyadic half period;
+--   * C2=-C1 plus finite-product algebra compiles W2=-W1 and W1+W2=0;
+--   * existing matrix faithfulness compiles literal matrix equality from basis
+--     action equality.
+--
+-- Thus downstream spatial claims reopen only same-object character wiring,
+-- canonical orbit receipts, and the appropriate same-label magnitude/period.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -41,14 +50,14 @@ spectralCircleSpatialClaim : BidiClaim
 spectralCircleSpatialClaim =
   bidiClaim spatialSpectralCircle
     "spatial twisted-block spectral circle"
-    "odd-character Fourier rechart + half-period classifier + arithmetic odd-orbit receipts + same-label magnitude receipt"
+    "corrected odd-character DFT instantiation + twisted-coordinate same-object weld + canonical odd-orbit receipts + same-label magnitude receipt"
     true false false false
 
 spatialTwistedPowerClaim : BidiClaim
 spatialTwistedPowerClaim =
   bidiClaim spatialTwistedPower
     "spatial twisted-block doubled-return power equals minus two identity"
-    "spatial character weld + orbit period + paired product two + orbit cancellation sum zero"
+    "corrected odd-character DFT instantiation + twisted-coordinate same-object weld + canonical odd-orbit period; signed orbit weight now compiles from strong three-power arithmetic"
     true false false false
 
 orbitProductClaim : BidiClaim
@@ -88,15 +97,13 @@ ropeOptimalityClaim =
 
 
 data MissingObligation : Set where
-  needPrimitiveHalfTurnInstantiation : MissingObligation
-  needOddCharacterFourierRechart : MissingObligation
+  needInstantiateCorrectOddCharacterDFT : MissingObligation
   needArithmeticOddOrbitReceipts : MissingObligation
   needTwistedCoordinateOddCharacterIdentification : MissingObligation
   needCompleteCharacterBasisActionEquality : MissingObligation
   needConcreteDFTMonomialMatrixEquality : MissingObligation
   needConcretePeriodAttachment : MissingObligation
   needConcreteOrbitMagnitudeAttachment : MissingObligation
-  needOrbitCancellationSumZero : MissingObligation
   needOrbitPartitionWeld : MissingObligation
   needGraphToDecompositionProducer : MissingObligation
   needDepthDecayProducer : MissingObligation
@@ -106,8 +113,7 @@ data MissingObligation : Set where
 
 compileMissing : ClaimKind → List MissingObligation
 compileMissing spatialSpectralCircle =
-  needPrimitiveHalfTurnInstantiation ∷
-  needOddCharacterFourierRechart ∷
+  needInstantiateCorrectOddCharacterDFT ∷
   needArithmeticOddOrbitReceipts ∷
   needTwistedCoordinateOddCharacterIdentification ∷
   needCompleteCharacterBasisActionEquality ∷
@@ -115,12 +121,11 @@ compileMissing spatialSpectralCircle =
   needConcreteOrbitMagnitudeAttachment ∷
   []
 compileMissing spatialTwistedPower =
-  needOddCharacterFourierRechart ∷
+  needInstantiateCorrectOddCharacterDFT ∷
   needArithmeticOddOrbitReceipts ∷
   needTwistedCoordinateOddCharacterIdentification ∷
   needCompleteCharacterBasisActionEquality ∷
   needConcretePeriodAttachment ∷
-  needOrbitCancellationSumZero ∷
   []
 compileMissing orbitProduct = []
 compileMissing arbitraryDagCover = needGraphToDecompositionProducer ∷ []
@@ -142,16 +147,17 @@ record BidiFirewall : Set where
     finalMagnitudeHypothesisMayCountAsItsOwnDerivation : Bool
     compiledMatrixEqualityShouldRemainOnSearchFrontier : Bool
     arbitraryUnitaryDFTMayCountAsOddCharacterDFT : Bool
+    primitiveHalfTurnShouldRemainOnSearchFrontier : Bool
+    signedOrbitCancellationShouldRemainOnSearchFrontier : Bool
     explicitComplexPhaseValuesRequiredForMinusTwo : Bool
 
 canonicalBidiFirewall : BidiFirewall
 canonicalBidiFirewall =
-  bidiFirewall false false false false false false false false false
+  bidiFirewall false false false false false false false false false false false
 
 spatialSpectralCircleExactCutset :
   compileMissing (kind spectralCircleSpatialClaim)
-  ≡ needPrimitiveHalfTurnInstantiation ∷
-    needOddCharacterFourierRechart ∷
+  ≡ needInstantiateCorrectOddCharacterDFT ∷
     needArithmeticOddOrbitReceipts ∷
     needTwistedCoordinateOddCharacterIdentification ∷
     needCompleteCharacterBasisActionEquality ∷
@@ -160,22 +166,33 @@ spatialSpectralCircleExactCutset :
     []
 spatialSpectralCircleExactCutset = refl
 
-spatialPowerNeedsOnlyMinimalSignProducer :
+spatialPowerSignedLeafIsNowPruned :
   compileMissing (kind spatialTwistedPowerClaim)
-  ≡ needOddCharacterFourierRechart ∷
+  ≡ needInstantiateCorrectOddCharacterDFT ∷
     needArithmeticOddOrbitReceipts ∷
     needTwistedCoordinateOddCharacterIdentification ∷
     needCompleteCharacterBasisActionEquality ∷
     needConcretePeriodAttachment ∷
-    needOrbitCancellationSumZero ∷
     []
-spatialPowerNeedsOnlyMinimalSignProducer = refl
+spatialPowerSignedLeafIsNowPruned = refl
 
 compiledMatrixEqualityIsPrunedFromSearch :
   BidiFirewall.compiledMatrixEqualityShouldRemainOnSearchFrontier
     canonicalBidiFirewall
   ≡ false
 compiledMatrixEqualityIsPrunedFromSearch = refl
+
+primitiveHalfTurnIsPrunedFromSearch :
+  BidiFirewall.primitiveHalfTurnShouldRemainOnSearchFrontier
+    canonicalBidiFirewall
+  ≡ false
+primitiveHalfTurnIsPrunedFromSearch = refl
+
+signedOrbitCancellationIsPrunedFromSearch :
+  BidiFirewall.signedOrbitCancellationShouldRemainOnSearchFrontier
+    canonicalBidiFirewall
+  ≡ false
+signedOrbitCancellationIsPrunedFromSearch = refl
 
 arbitraryUnitaryDoesNotSupplyCharacterSemantics :
   BidiFirewall.arbitraryUnitaryDFTMayCountAsOddCharacterDFT
