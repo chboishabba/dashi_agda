@@ -69,6 +69,13 @@ record LocalTETMCompletenessSkeleton : Set₁ where
        FiniteEnergyHilbertCarrierMatchesSourceExpansion) →
       EveryPhysicalModeTEorTM
 
+    TransverseCompleteness : Set
+    sourceExpansionToLocalTransverseCompleteness :
+      Transport.SourceClaim fieldExpansionClaim →
+      (SameClassicalAndCasimirPlateModeObject ×
+       FiniteEnergyHilbertCarrierMatchesSourceExpansion) →
+      TransverseCompleteness
+
     LongitudinalCompleteness : Set
     sourceLongitudinalExpansionToLocal :
       Transport.SourceClaim longitudinalExpansionClaim →
@@ -82,9 +89,6 @@ record LocalTETMCompletenessSkeleton : Set₁ where
     NoDoubleCountingAwayFromZeroSector : Set
     noDoubleCountingAwayFromZeroSectorEvidence :
       NoDoubleCountingAwayFromZeroSector
-
-    TransverseCompleteness : Set
-    transverseCompletenessEvidence : TransverseCompleteness
 
     reading : String
 
@@ -129,6 +133,19 @@ compileEveryPhysicalModeTEorTM S =
     (record
       { Transport.objectWeld = sourceToLocalModeObjectEvidence S })
 
+compileTransverseCompleteness :
+  (S : LocalTETMCompletenessSkeleton) →
+  TransverseCompleteness S
+compileTransverseCompleteness S =
+  Transport.transportSourceBackedTheorem
+    fieldExpansionClaim
+    (localTarget fieldExpansionClaim
+      (TransverseCompleteness S)
+      (SourceToLocalModeObject S)
+      (sourceExpansionToLocalTransverseCompleteness S))
+    (record
+      { Transport.objectWeld = sourceToLocalModeObjectEvidence S })
+
 compileLongitudinalCompleteness :
   (S : LocalTETMCompletenessSkeleton) →
   LongitudinalCompleteness S
@@ -158,7 +175,7 @@ compileProofBearingTETMCompleteness S = record
   ; Proof.ZeroSectorCountingCorrect = ZeroSectorCountingCorrect S
   ; Proof.zeroSectorCountingCorrectEvidence = zeroSectorCountingCorrectEvidence S
   ; Proof.TransverseCompleteness = TransverseCompleteness S
-  ; Proof.transverseCompletenessEvidence = transverseCompletenessEvidence S
+  ; Proof.transverseCompletenessEvidence = compileTransverseCompleteness S
   ; Proof.LongitudinalCompleteness = LongitudinalCompleteness S
   ; Proof.longitudinalCompletenessEvidence = compileLongitudinalCompleteness S
   ; Proof.reading = reading S
@@ -171,28 +188,23 @@ compileProofBearingTETMCompleteness S = record
 record ReverseSourceBackedCompletenessObligations : Set where
   field
     classicalToCasimirModeAndFiniteEnergyCarrierWeld : Set
-    transverseContinuumCompleteness : Set
     teTmIndependenceAwayFromExceptionalSector : Set
     exactZeroSectorCountingConvention : Set
     reading : String
 
 open ReverseSourceBackedCompletenessObligations public
 
-data SeparateSourceReceiptRequiredForSpanningAndLongitudinalCoverage : Set where
-
-data SourceExpansionAutomaticallyProvesTransverseHilbertCompletion : Set where
+data SeparateSourceReceiptRequiredForSpanningTransverseAndLongitudinalCoverage : Set where
 
 data SourceDiscussionOfZeroSectorAutomaticallyProvesLocalCounting : Set where
 
 data MatchingModeLabelsWithoutFiniteEnergyCarrierIdentitySuffices : Set where
 
-oneCarrierWeldFeedsSourceClaims :
-  SeparateSourceReceiptRequiredForSpanningAndLongitudinalCoverage → ⊥
-oneCarrierWeldFeedsSourceClaims ()
+data FieldExpansionAutomaticallyProvesTETMIndependenceConvention : Set where
 
-sourceDoesNotInventTransverseCompletion :
-  SourceExpansionAutomaticallyProvesTransverseHilbertCompletion → ⊥
-sourceDoesNotInventTransverseCompletion ()
+oneCarrierWeldFeedsSourceClaims :
+  SeparateSourceReceiptRequiredForSpanningTransverseAndLongitudinalCoverage → ⊥
+oneCarrierWeldFeedsSourceClaims ()
 
 zeroSectorDiscussionDoesNotFixLocalCounting :
   SourceDiscussionOfZeroSectorAutomaticallyProvesLocalCounting → ⊥
@@ -202,22 +214,28 @@ labelsAloneDoNotIdentifyCompletion :
   MatchingModeLabelsWithoutFiniteEnergyCarrierIdentitySuffices → ⊥
 labelsAloneDoNotIdentifyCompletion ()
 
+expansionDoesNotFixIndependenceConvention :
+  FieldExpansionAutomaticallyProvesTETMIndependenceConvention → ⊥
+expansionDoesNotFixIndependenceConvention ()
+
 record Status : Set where
   field
     fieldSpanningSourceBacked : Bool
+    transverseCoverageSourceBacked : Bool
     longitudinalCoverageSourceBacked : Bool
-    oneCarrierWeldFeedsTwoCompilers : Bool
+    oneCarrierWeldFeedsThreeCompilers : Bool
     finiteEnergyCarrierIncludedInSourceWeld : Bool
     proofBearingCompletenessCompilerOwned : Bool
-    transverseHilbertCompletionStillLocal : Bool
+    teTmIndependenceStillLocal : Bool
     zeroSectorCountingStillLocal : Bool
 
     fieldSpanningSourceBackedIsTrue : fieldSpanningSourceBacked ≡ true
+    transverseCoverageSourceBackedIsTrue : transverseCoverageSourceBacked ≡ true
     longitudinalCoverageSourceBackedIsTrue : longitudinalCoverageSourceBacked ≡ true
-    oneCarrierWeldFeedsTwoCompilersIsTrue : oneCarrierWeldFeedsTwoCompilers ≡ true
+    oneCarrierWeldFeedsThreeCompilersIsTrue : oneCarrierWeldFeedsThreeCompilers ≡ true
     finiteEnergyCarrierIncludedInSourceWeldIsTrue : finiteEnergyCarrierIncludedInSourceWeld ≡ true
     proofBearingCompletenessCompilerOwnedIsTrue : proofBearingCompletenessCompilerOwned ≡ true
-    transverseHilbertCompletionStillLocalIsTrue : transverseHilbertCompletionStillLocal ≡ true
+    teTmIndependenceStillLocalIsTrue : teTmIndependenceStillLocal ≡ true
     zeroSectorCountingStillLocalIsTrue : zeroSectorCountingStillLocal ≡ true
 
 open Status public
@@ -225,17 +243,19 @@ open Status public
 canonicalStatus : Status
 canonicalStatus = record
   { fieldSpanningSourceBacked = true
+  ; transverseCoverageSourceBacked = true
   ; longitudinalCoverageSourceBacked = true
-  ; oneCarrierWeldFeedsTwoCompilers = true
+  ; oneCarrierWeldFeedsThreeCompilers = true
   ; finiteEnergyCarrierIncludedInSourceWeld = true
   ; proofBearingCompletenessCompilerOwned = true
-  ; transverseHilbertCompletionStillLocal = true
+  ; teTmIndependenceStillLocal = true
   ; zeroSectorCountingStillLocal = true
   ; fieldSpanningSourceBackedIsTrue = refl
+  ; transverseCoverageSourceBackedIsTrue = refl
   ; longitudinalCoverageSourceBackedIsTrue = refl
-  ; oneCarrierWeldFeedsTwoCompilersIsTrue = refl
+  ; oneCarrierWeldFeedsThreeCompilersIsTrue = refl
   ; finiteEnergyCarrierIncludedInSourceWeldIsTrue = refl
   ; proofBearingCompletenessCompilerOwnedIsTrue = refl
-  ; transverseHilbertCompletionStillLocalIsTrue = refl
+  ; teTmIndependenceStillLocalIsTrue = refl
   ; zeroSectorCountingStillLocalIsTrue = refl
   }
