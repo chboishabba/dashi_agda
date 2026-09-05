@@ -24,10 +24,13 @@ import DASHI.Cognition.PNF.SensibLawIssueIndexedAdjudicativeHyperfabricExact as 
 import DASHI.Cognition.PNF.SensibLawIssueBurdenStandardRemedyBidiExact as IssueBSR
 import DASHI.Cognition.PNF.SensibLawAdjudicativeTemporalNonRetroactivityExact as Temporal
 import DASHI.Cognition.PNF.SensibLawLegalOutcomeIdentifiabilityBidiExact as Outcome
-
-------------------------------------------------------------------------
--- EXISTING SELECTIVE COMPILER PATH.
-------------------------------------------------------------------------
+import DASHI.Cognition.PNF.SensibLawMaboPrimaryTextParserBatchMaterialisedExact as MaboBatch
+import DASHI.Cognition.PNF.SensibLawMaboBrennanDawsonIssueResidualLiveExact as Mabo
+import DASHI.Cognition.PNF.SensibLawMaboRecognitionBasisAuthorityEvidenceExact as MaboAuthority
+import DASHI.Cognition.PNF.SensibLawMaboRecognitionBasisDiscriminatorClosureExact as MaboClosure
+import DASHI.Cognition.PNF.SensibLawMaboRecognitionCoordinateFactorisationExact as MaboFactor
+import DASHI.Cognition.PNF.SensibLawMaboRecognitionFactorisedReversePlannerExact as MaboPlanner
+import DASHI.Cognition.PNF.SensibLawMaboRecognitionIssueHyperfabricBridgeExact as MaboHyper
 
 pdfReusesAttribution : Planner.action Pdf.attributionPlan ≡ Planner.reuseExisting
 pdfReusesAttribution = refl
@@ -84,10 +87,6 @@ priorViolationSnapshotRetained = PaidLiability.priorViolationSnapshotRetained
 priorApplicabilitySnapshotRetained : Bridge._∈_ PaidApplicability.fixtureLegalStatus (Status.legalStatuses PaidLiability.postLiabilityState)
 priorApplicabilitySnapshotRetained = PaidLiability.priorApplicabilitySnapshotRetained
 
-------------------------------------------------------------------------
--- ISSUE-INDEXED ADJUDICATIVE HYPERFABRIC.
-------------------------------------------------------------------------
-
 burdenMayCloseBeforeLiability : Issue.firstAdjudicativeResidual Issue.identifyBurdenQuery Issue.burdenCanCloseWithoutLiability ≡ Issue.adjudicativeClosed
 burdenMayCloseBeforeLiability = refl
 remedyMayStopAtIndependentSourceResidual : Issue.firstAdjudicativeResidual Issue.remedyEligibilityQuery Issue.candidateLiabilityButNoRemedySource ≡ Issue.remedySourceResidual
@@ -103,35 +102,77 @@ oneLinearPipelineNotUniversal = Issue.oneLinearPipelineDoesNotFitEveryQuery
 legalConclusionDoesNotBecomePhysicalAuthority : Issue.LegalConclusionAuthorisesPhysicalAction → ⊥
 legalConclusionDoesNotBecomePhysicalAuthority = Issue.legalConclusionDoesNotAuthorisePhysicalAction
 
-------------------------------------------------------------------------
--- HISTORY-INDEXED ADJUDICATIVE PROVENANCE.
-------------------------------------------------------------------------
-
 laterEvidenceDoesNotRetroactivelyPayEarlierBurden : Temporal.LaterEvidenceRetroactivelySatisfiesEarlierBurden → ⊥
 laterEvidenceDoesNotRetroactivelyPayEarlierBurden = Temporal.laterEvidenceDoesNotRetroactivelySatisfyBurden
 laterFindingDoesNotRetroactivelyPayEarlierStandard : Temporal.LaterFindingRetroactivelySatisfiesEarlierStandard → ⊥
 laterFindingDoesNotRetroactivelyPayEarlierStandard = Temporal.laterFindingDoesNotRetroactivelySatisfyStandard
 
-------------------------------------------------------------------------
--- LEGAL OUTCOME PARTIAL IDENTIFICATION.
-------------------------------------------------------------------------
-
-compatibleExplanationsCanCloseCoarseConsumer :
-  Outcome.goalStatus Outcome.listCompatibleExplanations Outcome.canonicalAmbiguousDisposition
-  ≡ Outcome.explanationGoalClosed
+compatibleExplanationsCanCloseCoarseConsumer : Outcome.goalStatus Outcome.listCompatibleExplanations Outcome.canonicalAmbiguousDisposition ≡ Outcome.explanationGoalClosed
 compatibleExplanationsCanCloseCoarseConsumer = refl
-
-exactDispositionReasonCanRemainOpen :
-  Outcome.goalStatus Outcome.exactDispositionReason Outcome.canonicalAmbiguousDisposition
-  ≡ Outcome.explanationGoalOpen
+exactDispositionReasonCanRemainOpen : Outcome.goalStatus Outcome.exactDispositionReason Outcome.canonicalAmbiguousDisposition ≡ Outcome.explanationGoalOpen
 exactDispositionReasonCanRemainOpen = refl
-
 dispositionDoesNotUniquelyDetermineReason : Outcome.DispositionSurfaceUniquelyDeterminesReason → ⊥
 dispositionDoesNotUniquelyDetermineReason = Outcome.dispositionDoesNotUniquelyDetermineReason
 
-------------------------------------------------------------------------
--- Aggregate import is not a kernel receipt.
-------------------------------------------------------------------------
+applicantBatchRemainsCandidateOnly : MaboBatch.candidateOnly MaboBatch.applicantSpecimen ≡ true
+applicantBatchRemainsCandidateOnly = refl
+brennanBatchRemainsCandidateOnly : MaboBatch.candidateOnly MaboBatch.brennanSpecimen ≡ true
+brennanBatchRemainsCandidateOnly = refl
+dawsonBatchRemainsCandidateOnly : MaboBatch.candidateOnly MaboBatch.dawsonSpecimen ≡ true
+dawsonBatchRemainsCandidateOnly = refl
+
+brennanDawsonContrastIsRecognitionBasis : Mabo.primaryKind Mabo.brennanDawsonResidual ≡ Mabo.recognitionBasisContrast
+brennanDawsonContrastIsRecognitionBasis = refl
+maboResidualSearchTargetsRecognitionBasis : Mabo.obligation Mabo.brennanDawsonSearch ≡ Mabo.inspectRecognitionBasis
+maboResidualSearchTargetsRecognitionBasis = refl
+maboSameIssueIsNotBooleanNegation : Mabo.SameIssueMeansLogicalNegation → ⊥
+maboSameIssueIsNotBooleanNegation = Mabo.sameIssueDoesNotMeanLogicalNegation
+maboParserDoesNotCreateHolding : Mabo.ParserCandidateCreatesJudicialHolding → ⊥
+maboParserDoesNotCreateHolding = Mabo.parserCandidateDoesNotCreateHolding
+maboFiveParagraphBatchDoesNotClaimGeneralCoverage : MaboBatch.FiveParagraphBatchIsGeneralParserCoverage → ⊥
+maboFiveParagraphBatchDoesNotClaimGeneralCoverage = MaboBatch.fiveParagraphBatchDoesNotClaimGeneralCoverage
+
+maboAuthorityUseContrastClosesCoarseBasisConsumer : MaboClosure.goalStatus MaboClosure.listCompatibleRecognitionBases MaboClosure.recognitionBasisReceipt ≡ MaboClosure.goalClosed
+maboAuthorityUseContrastClosesCoarseBasisConsumer = refl
+maboExactJurisprudentialTheoryRemainsOpen : MaboClosure.goalStatus MaboClosure.identifyExactExhaustiveJurisprudentialTheory MaboClosure.recognitionBasisReceipt ≡ MaboClosure.goalOpen
+maboExactJurisprudentialTheoryRemainsOpen = refl
+maboAmoduSameAuthorityDifferentUse : MaboAuthority.SharedAuthorityUseContrast MaboAuthority.brennanAmoduUse MaboAuthority.dawsonAmoduUse
+maboAmoduSameAuthorityDifferentUse = MaboAuthority.amoduUseContrast
+maboCalderSameAuthorityDifferentUse : MaboAuthority.SharedAuthorityUseContrast MaboAuthority.brennanCalderUse MaboAuthority.dawsonCalderUse
+maboCalderSameAuthorityDifferentUse = MaboAuthority.calderUseContrast
+maboSharedCitationDoesNotForceSharedMeaning : MaboClosure.SharedCitationClosesSharedMeaning → ⊥
+maboSharedCitationDoesNotForceSharedMeaning = MaboClosure.sharedCitationDoesNotCloseMeaning
+maboCitationDoesNotEqualAdoption : MaboAuthority.CitationMeansAdoption → ⊥
+maboCitationDoesNotEqualAdoption = MaboAuthority.aCitationDoesNotMeanAdoption
+
+maboRecognitionByConductDoesNotProveContinuity : MaboFactor.RecognitionByConductProvesContinuity → ⊥
+maboRecognitionByConductDoesNotProveContinuity = MaboFactor.recognitionByConductDoesNotProveContinuity
+maboContinuityDoesNotProveRecognitionByConduct : MaboFactor.ContinuityProvesRecognitionByConduct → ⊥
+maboContinuityDoesNotProveRecognitionByConduct = MaboFactor.continuityDoesNotProveRecognitionByConduct
+maboCalderSameAuthorityDifferentCoordinates : MaboFactor.SameAuthorityDifferentCoordinateReceipt
+maboCalderSameAuthorityDifferentCoordinates = MaboFactor.calderCoordinateContrast
+maboAmoduSameAuthorityDifferentCoordinates : MaboFactor.SameAuthorityDifferentCoordinateReceipt
+maboAmoduSameAuthorityDifferentCoordinates = MaboFactor.amoduCoordinateContrast
+
+maboContinuityQueryRoutesToBrennanCalder : MaboPlanner.probes MaboPlanner.continuityPlan ≡ (MaboPlanner.inspectBrennanContinuityPassages ∷ MaboPlanner.inspectCalderHallPassages ∷ [])
+maboContinuityQueryRoutesToBrennanCalder = refl
+maboRecognitionConductQueryRoutesToDawsonCalder : MaboPlanner.probes MaboPlanner.recognitionConductPlan ≡ (MaboPlanner.inspectDawsonAcquiescencePassages ∷ MaboPlanner.inspectCalderJudsonPassages ∷ [])
+maboRecognitionConductQueryRoutesToDawsonCalder = refl
+maboEnforceabilityQueryRoutesToBrennanAmodu : MaboPlanner.probes MaboPlanner.enforceabilityPlan ≡ (MaboPlanner.inspectBrennanRadicalTitlePassages ∷ MaboPlanner.inspectAmoduRadicalTitlePassages ∷ [])
+maboEnforceabilityQueryRoutesToBrennanAmodu = refl
+maboFactorisedSearchDoesNotEqualResolution : MaboPlanner.SearchPlanClosesLegalCoordinate → ⊥
+maboFactorisedSearchDoesNotEqualResolution = MaboPlanner.searchPlanDoesNotCloseCoordinate
+maboCurrentFactorisedSearchNeedsNoParserRerun : MaboPlanner.parserRerunRequired MaboPlanner.continuityPlan ≡ false
+maboCurrentFactorisedSearchNeedsNoParserRerun = refl
+
+maboContinuityCompilesToContinuityObligation : MaboHyper.obligation MaboHyper.continuityHyperfabric ≡ MaboHyper.establishContinuityRule
+maboContinuityCompilesToContinuityObligation = refl
+maboRecognitionConductCompilesToConductObligation : MaboHyper.obligation MaboHyper.recognitionConductHyperfabric ≡ MaboHyper.establishRecognitionByConduct
+maboRecognitionConductCompilesToConductObligation = refl
+maboOneRecognitionResidualDoesNotFitAllCoordinates : MaboHyper.OneRecognitionResidualFitsEveryCoordinate → ⊥
+maboOneRecognitionResidualDoesNotFitAllCoordinates = MaboHyper.oneResidualDoesNotFitEveryRecognitionCoordinate
+maboCoordinateBridgePreservesIssueIdentity : MaboHyper.issue MaboHyper.continuityHyperfabric ≡ Mabo.maboRecognitionIssue
+maboCoordinateBridgePreservesIssueIdentity = refl
 
 data SelectiveLegalCompilerAggregateMeansKernelValidated : Set where
 aggregateDoesNotClaimKernelValidation : SelectiveLegalCompilerAggregateMeansKernelValidated → ⊥
