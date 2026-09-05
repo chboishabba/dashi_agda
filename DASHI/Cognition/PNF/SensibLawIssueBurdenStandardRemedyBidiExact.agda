@@ -12,10 +12,6 @@ import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExact as Legal
 import DASHI.Cognition.PNF.SensibLawIssueIndexedAdjudicativeHyperfabricExact as Issue
 
-------------------------------------------------------------------------
--- BURDEN + STANDARD ARE ISSUE-INDEXED, NOT DOWNSTREAM OF LIABILITY.
-------------------------------------------------------------------------
-
 record IssueBurdenReceipt (issue : Issue.LegalIssue) : Set where
   constructor issueBurdenReceipt
   field
@@ -27,7 +23,6 @@ record IssueBurdenReceipt (issue : Issue.LegalIssue) : Set where
     legalSystemExact : String
     legalSystemMatchesIssue : legalSystemExact ≡ Issue.legalSystemReference issue
     resolverReference : String
-
 open IssueBurdenReceipt public
 
 record IssueStandardReceipt (issue : Issue.LegalIssue) : Set where
@@ -42,7 +37,6 @@ record IssueStandardReceipt (issue : Issue.LegalIssue) : Set where
     legalSystemExact : String
     legalSystemMatchesIssue : legalSystemExact ≡ Issue.legalSystemReference issue
     resolverReference : String
-
 open IssueStandardReceipt public
 
 record IssueAdjudicativeFrame (issue : Issue.LegalIssue) : Set where
@@ -54,31 +48,18 @@ record IssueAdjudicativeFrame (issue : Issue.LegalIssue) : Set where
     evidenceAdequacyResolved : Bool
     evidenceAdequacyResolvedIsTrue : evidenceAdequacyResolved ≡ true
     frameReference : String
-
 open IssueAdjudicativeFrame public
 
-------------------------------------------------------------------------
--- REMEDY ELIGIBILITY IS A SEPARATE QUERY-SPECIFIC CONSEQUENCE.
-------------------------------------------------------------------------
-
 data RemedyEligibilityStatus : Set where
-  remedyEligibilityUnresolved
-  remedyEligibilityCandidate
-  remedyEligibleAdmitted
-  remedyIneligibleAdmitted
-  : RemedyEligibilityStatus
+  remedyEligibilityUnresolved remedyEligibilityCandidate
+  remedyEligibleAdmitted remedyIneligibleAdmitted : RemedyEligibilityStatus
 
 data LiabilityRemedyUse : Status.LiabilityStatus → RemedyEligibilityStatus → Set where
-  unresolvedLiabilityRemedyUse :
-    LiabilityRemedyUse Status.liabilityUnresolved remedyEligibilityUnresolved
-  candidateLiabilityRemedyUse :
-    LiabilityRemedyUse Status.liabilityCandidate remedyEligibilityCandidate
-  admittedLiabilityCandidateRemedyUse :
-    LiabilityRemedyUse Status.liabilityAdmitted remedyEligibilityCandidate
-  admittedLiabilityEligibleRemedyUse :
-    LiabilityRemedyUse Status.liabilityAdmitted remedyEligibleAdmitted
-  noLiabilityIneligibleRemedyUse :
-    LiabilityRemedyUse Status.noLiabilityAdmitted remedyIneligibleAdmitted
+  unresolvedLiabilityRemedyUse : LiabilityRemedyUse Status.liabilityUnresolved remedyEligibilityUnresolved
+  candidateLiabilityRemedyUse : LiabilityRemedyUse Status.liabilityCandidate remedyEligibilityCandidate
+  admittedLiabilityCandidateRemedyUse : LiabilityRemedyUse Status.liabilityAdmitted remedyEligibilityCandidate
+  admittedLiabilityEligibleRemedyUse : LiabilityRemedyUse Status.liabilityAdmitted remedyEligibleAdmitted
+  noLiabilityIneligibleRemedyUse : LiabilityRemedyUse Status.noLiabilityAdmitted remedyIneligibleAdmitted
 
 data NonEmpty {A : Set} : List A → Set where
   oneOrMore : ∀ {x xs} → NonEmpty (x ∷ xs)
@@ -88,13 +69,9 @@ record RemedyPrerequisiteBundle : Set where
   field
     liabilityReceipt : Legal.LiabilityReceipt
     wrongType : Ontology.WrongType
-    sameWrongType :
-      wrongType ≡
-      Legal.wrongType
-        (Legal.applicabilityReceipt
-          (Legal.violationReceipt liabilityReceipt))
+    sameWrongType : wrongType ≡ Legal.wrongType (Legal.applicabilityReceipt (Legal.violationReceipt liabilityReceipt))
     remedyReference : Ontology.StableId
-    remedyDeclaredForWrongType : remedyReference Legal.∈ Ontology.WrongType.remedyIds wrongType
+    remedyDeclaredForWrongType : Legal._∈_ remedyReference (Ontology.WrongType.remedyIds wrongType)
     protectedInterestReferences : List Ontology.StableId
     protectedInterestsPresent : NonEmpty protectedInterestReferences
     harmReferences : List Ontology.StableId
@@ -103,27 +80,19 @@ record RemedyPrerequisiteBundle : Set where
     remedySourceResolved : Bool
     remedySourceResolvedIsTrue : remedySourceResolved ≡ true
     bundleReference : String
-
 open RemedyPrerequisiteBundle public
 
 record RemedyDecision (prerequisites : RemedyPrerequisiteBundle) : Set where
   constructor remedyDecision
   field
     resultingEligibility : RemedyEligibilityStatus
-    liabilityUse :
-      LiabilityRemedyUse
-        (Legal.resultingLiability (liabilityReceipt prerequisites))
-        resultingEligibility
+    liabilityUse : LiabilityRemedyUse (Legal.resultingLiability (liabilityReceipt prerequisites)) resultingEligibility
     resolverReference : String
-
 open RemedyDecision public
 
 record RemedyMeetInput : Set where
   constructor remedyMeetInput
-  field
-    prerequisites : RemedyPrerequisiteBundle
-    decision : RemedyDecision prerequisites
-
+  field prerequisites : RemedyPrerequisiteBundle; decision : RemedyDecision prerequisites
 open RemedyMeetInput public
 
 compileLegacyRemedyEligibility : RemedyMeetInput → Legal.RemedyEligibilityReceipt
@@ -144,17 +113,12 @@ compileLegacyRemedyEligibility input =
   eligibilityBool remedyEligibleAdmitted = true
   eligibilityBool remedyIneligibleAdmitted = false
 
-------------------------------------------------------------------------
--- Hard boundaries.
-------------------------------------------------------------------------
-
 data LiabilityDeterminesIssueBurden : Set where
 data LiabilityDeterminesIssueStandard : Set where
 data CandidateLiabilityAdmitsRemedyEligibility : Set where
 data RemedyDeclaredForWrongTypeAloneMakesEligible : Set where
 data EmptyHarmSetMayClosePositiveRemedyEligibility : Set where
 data EmptyProtectedInterestSetMayClosePositiveRemedyEligibility : Set where
-
 liabilityDoesNotDetermineIssueBurden : LiabilityDeterminesIssueBurden → ⊥
 liabilityDoesNotDetermineIssueBurden ()
 liabilityDoesNotDetermineIssueStandard : LiabilityDeterminesIssueStandard → ⊥
@@ -180,7 +144,5 @@ record IssueBurdenStandardRemedyBoundary : Set where
     remedyNeedsProtectedInterest : Bool
     remedyNeedsHarm : Bool
     remedyNeedsResolvedSource : Bool
-
 canonicalIssueBurdenStandardRemedyBoundary : IssueBurdenStandardRemedyBoundary
-canonicalIssueBurdenStandardRemedyBoundary =
-  issue-burden-standard-remedy-boundary true true false false false true true true true
+canonicalIssueBurdenStandardRemedyBoundary = issue-burden-standard-remedy-boundary true true false false false true true true true
