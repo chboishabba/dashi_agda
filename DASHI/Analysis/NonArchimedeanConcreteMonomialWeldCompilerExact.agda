@@ -3,18 +3,19 @@ module DASHI.Analysis.NonArchimedeanConcreteMonomialWeldCompilerExact where
 ------------------------------------------------------------------------
 -- CONCRETE MONOMIAL WELD COMPILER
 --
--- Highest-alpha route after the source audit:
+-- After the reuse pass, odd-character/tau-odd semantics, canonical odd-orbit
+-- classification, and signed orbit return are compiler outputs from existing
+-- source/repo mathematics.  The remaining spatial task is therefore the one
+-- same-object chain
 --
---   tau-odd/odd-character identification
---   + arithmetic odd-orbit chart (j,b) <-> +/-3^j
---   + source D_n character action
---   + concrete twisted-coordinate <-> character-basis identification
---   + equality of the two operators on each complete basis vector
---   + existing finite matrix-action faithfulness
---       => literal conjugated-matrix = monomial-matrix equality.
+--   literal twisted coordinate
+--      -> tau-odd full function
+--      -> corrected odd-character basis
+--      -> source D_n character action
+--      -> equality on a complete basis
+--      -> literal monomial matrix equality.
 --
--- This is deliberately a compiler from source-specific receipts into a matrix
--- equality.  It does not rebuild DFT algebra or finite matrix extensionality.
+-- Finite matrix faithfulness is reused rather than re-proved.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -29,10 +30,10 @@ record ConcreteCharacterActionCompilerInput : Set₁ where
 
     sourceCharacterActionOwned : Bool
     sourceTauOddPreservationOwned : Bool
-    oddCharacterIffTauOddReceiptOwned : Bool
-    arithmeticOddOrbitChartOwned : Bool
-    twistedCoordinateCharacterReceiptOwned : Bool
-    concreteDFTBasisReceiptOwned : Bool
+    oddCharacterIffTauOddCompiled : Bool
+    canonicalOddOrbitChartCompiled : Bool
+    twistedRestrictionIntertwinerOwned : Bool
+    correctedOddCharacterDFTInstantiated : Bool
     actionEqualityDerivedOnCompleteBasis : Bool
 
 open ConcreteCharacterActionCompilerInput public
@@ -46,10 +47,12 @@ compiledConcreteMatrixEquality input =
 
 
 data ConcreteWeldLeaf : Set where
+  instantiateConcreteSheetAdapter : ConcreteWeldLeaf
+  composeTwistedRestrictionWithOddCharacterDFT : ConcreteWeldLeaf
+  completeBasisActionEquality : ConcreteWeldLeaf
   oddCharacterTauOddIff : ConcreteWeldLeaf
   arithmeticOddOrbitRechart : ConcreteWeldLeaf
-  twistedCoordinateCharacterIdentification : ConcreteWeldLeaf
-  completeBasisActionEquality : ConcreteWeldLeaf
+  signedOrbitReturn : ConcreteWeldLeaf
   finiteMatrixActionFaithfulness : ConcreteWeldLeaf
   entrywiseConjugatedMatrixExpansion : ConcreteWeldLeaf
   rebuildDFTUnitarity : ConcreteWeldLeaf
@@ -59,13 +62,16 @@ data ConcreteWeldLeaf : Set where
 data LeafDisposition : Set where
   live : LeafDisposition
   downstream : LeafDisposition
+  compiled : LeafDisposition
   pruned : LeafDisposition
 
 leafDisposition : ConcreteWeldLeaf → LeafDisposition
-leafDisposition oddCharacterTauOddIff = live
-leafDisposition arithmeticOddOrbitRechart = live
-leafDisposition twistedCoordinateCharacterIdentification = live
+leafDisposition instantiateConcreteSheetAdapter = live
+leafDisposition composeTwistedRestrictionWithOddCharacterDFT = downstream
 leafDisposition completeBasisActionEquality = downstream
+leafDisposition oddCharacterTauOddIff = compiled
+leafDisposition arithmeticOddOrbitRechart = compiled
+leafDisposition signedOrbitReturn = compiled
 leafDisposition finiteMatrixActionFaithfulness = pruned
 leafDisposition entrywiseConjugatedMatrixExpansion = pruned
 leafDisposition rebuildDFTUnitarity = pruned
@@ -73,9 +79,8 @@ leafDisposition rebuildCharacterAction = pruned
 
 highestAlphaConcreteWeldPath : List ConcreteWeldLeaf
 highestAlphaConcreteWeldPath =
-  arithmeticOddOrbitRechart ∷
-  oddCharacterTauOddIff ∷
-  twistedCoordinateCharacterIdentification ∷
+  instantiateConcreteSheetAdapter ∷
+  composeTwistedRestrictionWithOddCharacterDFT ∷
   completeBasisActionEquality ∷
   []
 
@@ -85,16 +90,16 @@ record WeldFanout : Set where
     closesSpatialSpectrumTransport : Bool
     closesSpatialTraceTransport : Bool
     closesSpatialPowerTransport : Bool
-    closesOrbitPhaseSignReceipt : Bool
-    closesCanonicalOrbitPartitionReceipt : Bool
+    signedOrbitLaneAlreadyClosedIndependently : Bool
+    canonicalOrbitPartitionAlreadyClosedIndependently : Bool
 
 canonicalWeldFanout : WeldFanout
-canonicalWeldFanout = weldFanout true true true false false
+canonicalWeldFanout = weldFanout true true true true true
 
 oneWeldFeedsThreeConsumers :
   WeldFanout.closesSpatialSpectrumTransport canonicalWeldFanout ≡ true
 oneWeldFeedsThreeConsumers = refl
 
-phaseRemainsIndependent :
-  WeldFanout.closesOrbitPhaseSignReceipt canonicalWeldFanout ≡ false
-phaseRemainsIndependent = refl
+phaseNoLongerBlocksSpatialWeld :
+  WeldFanout.signedOrbitLaneAlreadyClosedIndependently canonicalWeldFanout ≡ true
+phaseNoLongerBlocksSpatialWeld = refl
