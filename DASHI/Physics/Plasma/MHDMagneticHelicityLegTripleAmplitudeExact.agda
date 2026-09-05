@@ -37,9 +37,9 @@ complex3ScaleOne :
   C3.complex3Scale (C3.complexOne F) value ≡ value
 complex3ScaleOne {F = F} (C3.complex3 x y z) =
   Field.complex3Ext
-    (C3.complexMultiplyOneLeft F x)
-    (C3.complexMultiplyOneLeft F y)
-    (C3.complexMultiplyOneLeft F z)
+    (Hermitian.complexMultiplyOneLeft x)
+    (Hermitian.complexMultiplyOneLeft y)
+    (Hermitian.complexMultiplyOneLeft z)
 
 doubleScaleIsAddSelf :
   ∀ {r : Level} {F : C3.RealField r}
