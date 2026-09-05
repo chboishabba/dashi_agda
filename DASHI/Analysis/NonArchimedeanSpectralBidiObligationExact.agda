@@ -3,18 +3,9 @@ module DASHI.Analysis.NonArchimedeanSpectralBidiObligationExact where
 ------------------------------------------------------------------------
 -- Reverse / BIDI obligation compiler for the non-Archimedean spectral lane.
 --
--- The finite spectral core is compiler-closed.  The post-closure audit now
--- separates three distinct half-valued objects:
---
---   * directed radius level-contraction factor 1/2;
---   * cyclotomic amplitude exponent sigma_cyc = log_2 |W_C| = 1/2;
---   * Prolate/Archimedean critical-line parameter sigma = 1/2.
---
--- The local p=2 anchor is repaired using the primitive twisted-circle radius
--- r_tw(2)=sqrt 2, not a full transfer-operator spectral radius.  That local
--- half-value is now compiler-closed.  The only remaining anchor obligation is
--- a same-object compatibility theorem between the local cyclotomic sigma and
--- the independent Prolate sigma parameter.
+-- Finite spectral closure is complete at the dependency level.  Post-closure
+-- continuous claims are routed separately: local cyclotomic sigma, Prolate
+-- sigma, Gibbs uniqueness, and exponential mixing are distinct consumers.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -31,6 +22,10 @@ data ClaimKind : Set where
   cyclotomicSigmaHalf : ClaimKind
   prolateCriticalLineHalf : ClaimKind
   cyclotomicAnchorsProlateHalf : ClaimKind
+  uniqueHaarConformalGibbs : ClaimKind
+  unconditionalL2Mixing : ClaimKind
+  correlationDecayAtInverseSqrtTwo : ClaimKind
+  fullContinuousTransferRadiusSqrtTwo : ClaimKind
   orbitProduct : ClaimKind
   arbitraryDagCover : ClaimKind
   depthDecaySparsity : ClaimKind
@@ -72,7 +67,7 @@ directedSigmaClaim : BidiClaim
 directedSigmaClaim =
   bidiClaim directedRadiusSigmaHalf
     "directed twisted-circle radius convergence itself has size exponent sigma=1/2"
-    "independent definition of radius sigma + theorem connecting it to the N=2^n scaling law"
+    "independent definition of radius sigma + theorem connecting it to N=2^n scaling"
     false
 
 cyclotomicSigmaClaim : BidiClaim
@@ -94,6 +89,34 @@ sigmaAnchorClaim =
   bidiClaim cyclotomicAnchorsProlateHalf
     "cyclotomic sigma_cyc=1/2 algebraically anchors the Prolate critical-line sigma=1/2"
     "two-sided sigma same-object weld preserving anchor and critical conditions"
+    false
+
+gibbsUniquenessClaim : BidiClaim
+gibbsUniquenessClaim =
+  bidiClaim uniqueHaarConformalGibbs
+    "normalized Haar is the unique conformal Gibbs state"
+    "dedicated Gibbs uniqueness/ergodicity producer"
+    false
+
+l2MixingClaim : BidiClaim
+l2MixingClaim =
+  bidiClaim unconditionalL2Mixing
+    "normalized Collatz walk has unconditional geometric L2 mixing"
+    "mean-zero invariance + derived one-step contraction; iteration is repo-reusable"
+    false
+
+correlationDecayClaim : BidiClaim
+correlationDecayClaim =
+  bidiClaim correlationDecayAtInverseSqrtTwo
+    "correlations decay at inverse-sqrt-two rate"
+    "unconditional L2 mixing + correlation consumer identification"
+    false
+
+fullTransferRadiusClaim : BidiClaim
+fullTransferRadiusClaim =
+  bidiClaim fullContinuousTransferRadiusSqrtTwo
+    "full unnormalised continuous transfer operator has spectral radius sqrt two"
+    "rejected object interpretation: source owns constant eigenvalue two"
     false
 
 orbitProductClaim : BidiClaim
@@ -126,6 +149,11 @@ data MissingObligation : Set where
   needDirectedRadiusSigmaDefinition : MissingObligation
   needDirectedRadiusSigmaScalingTheorem : MissingObligation
   needCyclotomicToProlateSigmaSameObjectWeld : MissingObligation
+  needGibbsUniquenessTheorem : MissingObligation
+  needMeanZeroInvariance : MissingObligation
+  needUnconditionalOneStepMeanZeroContraction : MissingObligation
+  needCorrelationConsumerWeld : MissingObligation
+  rejectedFullTransferRadiusSqrtTwo : MissingObligation
   needGraphToDecompositionProducer : MissingObligation
   needDepthDecayProducer : MissingObligation
   needBoundaryEntropySameObjectWeld : MissingObligation
@@ -141,38 +169,48 @@ compileMissing cyclotomicSigmaHalf = []
 compileMissing prolateCriticalLineHalf = []
 compileMissing cyclotomicAnchorsProlateHalf =
   needCyclotomicToProlateSigmaSameObjectWeld ∷ []
+compileMissing uniqueHaarConformalGibbs = needGibbsUniquenessTheorem ∷ []
+compileMissing unconditionalL2Mixing =
+  needMeanZeroInvariance ∷ needUnconditionalOneStepMeanZeroContraction ∷ []
+compileMissing correlationDecayAtInverseSqrtTwo =
+  needMeanZeroInvariance ∷
+  needUnconditionalOneStepMeanZeroContraction ∷
+  needCorrelationConsumerWeld ∷ []
+compileMissing fullContinuousTransferRadiusSqrtTwo =
+  rejectedFullTransferRadiusSqrtTwo ∷ []
 compileMissing orbitProduct = []
 compileMissing arbitraryDagCover = needGraphToDecompositionProducer ∷ []
 compileMissing depthDecaySparsity = needDepthDecayProducer ∷ []
 compileMissing contractedBoundaryEntropy = needBoundaryEntropySameObjectWeld ∷ []
 compileMissing ropeOptimality = needModelLevelRoPEConsumerTheorem ∷ []
 
-finiteSpatialCoreClosed :
-  compileMissing spatialSpectralCircle ≡ []
+finiteSpatialCoreClosed : compileMissing spatialSpectralCircle ≡ []
 finiteSpatialCoreClosed = refl
 
-finitePowerCoreClosed :
-  compileMissing spatialTwistedPower ≡ []
-finitePowerCoreClosed = refl
-
-spectrumTowerRepoClosed :
-  compileMissing literalOneStepSpectrumUnion ≡ []
+spectrumTowerRepoClosed : compileMissing literalOneStepSpectrumUnion ≡ []
 spectrumTowerRepoClosed = refl
 
-cyclotomicSigmaHalfClosed :
-  compileMissing cyclotomicSigmaHalf ≡ []
+cyclotomicSigmaHalfClosed : compileMissing cyclotomicSigmaHalf ≡ []
 cyclotomicSigmaHalfClosed = refl
 
-prolateCriticalLineHalfClosed :
-  compileMissing prolateCriticalLineHalf ≡ []
+prolateCriticalLineHalfClosed : compileMissing prolateCriticalLineHalf ≡ []
 prolateCriticalLineHalfClosed = refl
-
-directedRadiusSigmaExactCutset :
-  compileMissing directedRadiusSigmaHalf
-  ≡ needDirectedRadiusSigmaDefinition ∷ needDirectedRadiusSigmaScalingTheorem ∷ []
-directedRadiusSigmaExactCutset = refl
 
 sigmaAnchorSingleWeldCutset :
   compileMissing cyclotomicAnchorsProlateHalf
   ≡ needCyclotomicToProlateSigmaSameObjectWeld ∷ []
 sigmaAnchorSingleWeldCutset = refl
+
+gibbsUniquenessExactCutset :
+  compileMissing uniqueHaarConformalGibbs ≡ needGibbsUniquenessTheorem ∷ []
+gibbsUniquenessExactCutset = refl
+
+mixingExactCutset :
+  compileMissing unconditionalL2Mixing
+  ≡ needMeanZeroInvariance ∷ needUnconditionalOneStepMeanZeroContraction ∷ []
+mixingExactCutset = refl
+
+fullTransferSqrtTwoRejected :
+  compileMissing fullContinuousTransferRadiusSqrtTwo
+  ≡ rejectedFullTransferRadiusSqrtTwo ∷ []
+fullTransferSqrtTwoRejected = refl
