@@ -2,7 +2,9 @@ module DASHI.Culture.MissingDeceasedScientificWorkEverything where
 
 -- Focused aggregate for attribution-safe scientific-work reconstruction,
 -- source-exact citation, technical-intersection proof search, and actual
--- science/math BIDI cross-pollination across the documented roster.
+-- science/math BIDI formalisation across the documented roster.
+--
+-- Domain owners remain separate unless there is a genuine technical bridge.
 
 import DASHI.Core.ScientificWorkAttributionExact
 import DASHI.Core.ScientificSourceCitationExact
@@ -48,11 +50,21 @@ import DASHI.Culture.ScientificRosterInverseProblemCrossPollinationExact
 -- Actual scientific / engineering work owners.
 import DASHI.Culture.AmyEskridgeGravityMechanismCrossPollinationExact
 import DASHI.Culture.McCaslandTechnicalProgrammeBidiExact
+import DASHI.Control.McCaslandFaultTolerantFlexibleStructureControlBidiExact
+
 import DASHI.Physics.Plasma.LoureiroViriatoPlasmoidBidiExact
 import DASHI.Physics.Nuclear.LeBlancFissionSurfacePowerICBidiExact
+
 import DASHI.Physics.Spectroscopy.MaiwaldActionSpectroscopyBidiExact
+import DASHI.Physics.Spectroscopy.MaiwaldQuadrupoleIonTrapMassSpectrometryBidiExact
+
 import DASHI.Physics.Materials.RezaBurnResistantAlloyBidiExact
 import DASHI.Physics.Astrophysics.GrillmairStellarStreamBidiExact
+
 import DASHI.Physics.Planetary.HicksSmallBodyPhotometryBidiExact
+import DASHI.Physics.Planetary.HicksCometAsteroidSpecificWorksBidiExact
+
 import DASHI.Physics.Accelerator.AnthonyChavezScorpiusBidiExact
+import DASHI.Physics.Accelerator.AnthonyChavezPermanentMagnetSpectrometerCalibrationBidiExact
+
 import DASHI.Biology.JasonThomasSignallingBidiExact
