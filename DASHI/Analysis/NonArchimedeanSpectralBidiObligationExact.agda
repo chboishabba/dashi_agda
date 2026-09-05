@@ -3,11 +3,11 @@ module DASHI.Analysis.NonArchimedeanSpectralBidiObligationExact where
 ------------------------------------------------------------------------
 -- Reverse / BIDI obligation compiler for the non-Archimedean spectral lane.
 --
--- Finite spectral closure is complete at the dependency level. Post-closure
--- continuous claims are routed separately. Mean-zero invariance for the finite
--- normalized walk now compiles from existing source inverse-of-three arithmetic
--- plus finite sum reindexing, leaving the actual one-step L2 contraction as the
--- live analytic mixing producer.
+-- Finite spectral closure is dependency-closed.  Post-closure continuous and
+-- Markov claims are routed at their actual theorem strength.  In particular,
+-- the source's unit-prefactor one-step L2 contraction is refuted at n=3; the
+-- viable replacement is a level-dependent prefactored power bound assembled
+-- from the monomial shell powers through the unitary Fourier energy chart.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -25,8 +25,15 @@ data ClaimKind : Set where
   prolateCriticalLineHalf : ClaimKind
   cyclotomicAnchorsProlateHalf : ClaimKind
   uniqueHaarConformalGibbs : ClaimKind
-  unconditionalL2Mixing : ClaimKind
+
+  unitPrefactorOneStepL2Contraction : ClaimKind
+  prefactoredL2PowerMixing : ClaimKind
+  totalVariationMixing : ClaimKind
   correlationDecayAtInverseSqrtTwo : ClaimKind
+  universalStoppingSurvivalBound : ClaimKind
+  stoppingMomentFiniteness : ClaimKind
+  taoStyleStoppingConcentration : ClaimKind
+
   fullContinuousTransferRadiusSqrtTwo : ClaimKind
   orbitProduct : ClaimKind
   arbitraryDagCover : ClaimKind
@@ -84,15 +91,40 @@ gibbsUniquenessClaim = bidiClaim uniqueHaarConformalGibbs
   "normalized Haar is the unique conformal Gibbs state"
   "dedicated Gibbs uniqueness/ergodicity producer" false
 
-l2MixingClaim : BidiClaim
-l2MixingClaim = bidiClaim unconditionalL2Mixing
-  "normalized Collatz walk has unconditional geometric L2 mixing"
-  "derived one-step mean-zero contraction; invariance and iteration already compile" false
+unitOneStepClaim : BidiClaim
+unitOneStepClaim = bidiClaim unitPrefactorOneStepL2Contraction
+  "every mean-zero state contracts by 1/sqrt two in one step"
+  "rejected by exact n=3 rational counterexample" false
+
+prefactoredMixingClaim : BidiClaim
+prefactoredMixingClaim = bidiClaim prefactoredL2PowerMixing
+  "finite normalized walk has C_n-prefactored inverse-sqrt-two L2 power decay"
+  "explicit shell prefactor + Parseval shell-energy same-object weld" false
+
+totalVariationClaim : BidiClaim
+totalVariationClaim = bidiClaim totalVariationMixing
+  "finite walk has total-variation mixing from repaired prefactored L2 decay"
+  "prefactored L2 power bound + finite Cauchy-Schwarz consumer" false
 
 correlationDecayClaim : BidiClaim
 correlationDecayClaim = bidiClaim correlationDecayAtInverseSqrtTwo
-  "correlations decay at inverse-sqrt-two rate"
-  "unconditional L2 mixing + correlation consumer identification" false
+  "correlations decay at inverse-sqrt-two spectral rate with a finite prefactor"
+  "prefactored L2 mixing + correlation consumer identification" false
+
+stoppingSurvivalClaim : BidiClaim
+stoppingSurvivalClaim = bidiClaim universalStoppingSurvivalBound
+  "every nontrivial stopping set has survival tail C 2^(-t/2)"
+  "independent killed/substochastic-kernel power bound" false
+
+stoppingMomentsClaim : BidiClaim
+stoppingMomentsClaim = bidiClaim stoppingMomentFiniteness
+  "all stopping-time moments follow from the inverse-sqrt-two survival tail"
+  "valid survival-tail producer + generating-function consumer" false
+
+taoConcentrationClaim : BidiClaim
+taoConcentrationClaim = bidiClaim taoStyleStoppingConcentration
+  "Tao-style logarithmic stopping concentration follows from the finite spectral gap"
+  "separate Markov concentration hypotheses + same-object drift/stopping weld" false
 
 fullTransferRadiusClaim : BidiClaim
 fullTransferRadiusClaim = bidiClaim fullContinuousTransferRadiusSqrtTwo
@@ -130,8 +162,16 @@ data MissingObligation : Set where
   needDirectedRadiusSigmaScalingTheorem : MissingObligation
   needCyclotomicToProlateSigmaSameObjectWeld : MissingObligation
   needGibbsUniquenessTheorem : MissingObligation
-  needUnconditionalOneStepMeanZeroContraction : MissingObligation
+
+  rejectedUnitPrefactorOneStepContraction : MissingObligation
+  needInputParsevalShellEnergyWeld : MissingObligation
+  needOutputParsevalShellEnergyWeld : MissingObligation
   needCorrelationConsumerWeld : MissingObligation
+  needKilledKernelPowerBound : MissingObligation
+  needStoppingTailGeneratingFunctionConsumer : MissingObligation
+  needMarkovConcentrationHypotheses : MissingObligation
+  needDriftStoppingSameObjectWeld : MissingObligation
+
   rejectedFullTransferRadiusSqrtTwo : MissingObligation
   needGraphToDecompositionProducer : MissingObligation
   needDepthDecayProducer : MissingObligation
@@ -149,11 +189,28 @@ compileMissing prolateCriticalLineHalf = []
 compileMissing cyclotomicAnchorsProlateHalf =
   needCyclotomicToProlateSigmaSameObjectWeld ∷ []
 compileMissing uniqueHaarConformalGibbs = needGibbsUniquenessTheorem ∷ []
-compileMissing unconditionalL2Mixing =
-  needUnconditionalOneStepMeanZeroContraction ∷ []
+
+compileMissing unitPrefactorOneStepL2Contraction =
+  rejectedUnitPrefactorOneStepContraction ∷ []
+compileMissing prefactoredL2PowerMixing =
+  needInputParsevalShellEnergyWeld ∷
+  needOutputParsevalShellEnergyWeld ∷ []
+compileMissing totalVariationMixing =
+  needInputParsevalShellEnergyWeld ∷
+  needOutputParsevalShellEnergyWeld ∷ []
 compileMissing correlationDecayAtInverseSqrtTwo =
-  needUnconditionalOneStepMeanZeroContraction ∷
+  needInputParsevalShellEnergyWeld ∷
+  needOutputParsevalShellEnergyWeld ∷
   needCorrelationConsumerWeld ∷ []
+compileMissing universalStoppingSurvivalBound =
+  needKilledKernelPowerBound ∷ []
+compileMissing stoppingMomentFiniteness =
+  needKilledKernelPowerBound ∷
+  needStoppingTailGeneratingFunctionConsumer ∷ []
+compileMissing taoStyleStoppingConcentration =
+  needMarkovConcentrationHypotheses ∷
+  needDriftStoppingSameObjectWeld ∷ []
+
 compileMissing fullContinuousTransferRadiusSqrtTwo =
   rejectedFullTransferRadiusSqrtTwo ∷ []
 compileMissing orbitProduct = []
@@ -177,10 +234,21 @@ gibbsUniquenessExactCutset :
   compileMissing uniqueHaarConformalGibbs ≡ needGibbsUniquenessTheorem ∷ []
 gibbsUniquenessExactCutset = refl
 
-mixingSingleAnalyticLeaf :
-  compileMissing unconditionalL2Mixing
-  ≡ needUnconditionalOneStepMeanZeroContraction ∷ []
-mixingSingleAnalyticLeaf = refl
+unitOneStepContractionRejected :
+  compileMissing unitPrefactorOneStepL2Contraction
+  ≡ rejectedUnitPrefactorOneStepContraction ∷ []
+unitOneStepContractionRejected = refl
+
+prefactoredMixingExactCutset :
+  compileMissing prefactoredL2PowerMixing
+  ≡ needInputParsevalShellEnergyWeld ∷
+    needOutputParsevalShellEnergyWeld ∷ []
+prefactoredMixingExactCutset = refl
+
+stoppingSurvivalNeedsIndependentProducer :
+  compileMissing universalStoppingSurvivalBound
+  ≡ needKilledKernelPowerBound ∷ []
+stoppingSurvivalNeedsIndependentProducer = refl
 
 fullTransferSqrtTwoRejected :
   compileMissing fullContinuousTransferRadiusSqrtTwo
