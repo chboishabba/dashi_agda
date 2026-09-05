@@ -18,14 +18,10 @@ import DASHI.Physics.QuantumVacuum.CasimirRegulatorMetricTailReceiptExact as Tai
 ------------------------------------------------------------------------
 -- CANONICAL BISHOP METRIC PROBLEM FOR ONE RESIDUAL TRAJECTORY
 --
--- Use Nat epsilon indices directly:
---
---   Close x y k  := |x-y| <= 1/k,
---
--- with Positive k := NonZero k.  This matches Bishop Sequence.ConvergesTo
--- exactly enough that a proof-bearing metric tail compiles directly to the
--- native convergence constructor.  No separate metric-to-Bishop theorem is
--- required.
+-- Precision is indexed by m : Nat and interpreted as 1/(m+1).  Thus Close is
+-- total: no reciprocal of zero is ever formed.  Bishop's native convergence
+-- constructor quantifies over k = suc m, so the two notions line up
+-- definitionally after pattern matching on the nonzero k.
 ------------------------------------------------------------------------
 
 bishopResidualMetricProblem :
@@ -38,15 +34,15 @@ bishopResidualMetricProblem residualAt candidate = record
   ; Metric.Value = Bishop.ℝ
   ; Metric.Epsilon = Nat
   ; Metric._≼_ = Nat._≤_
-  ; Metric.Positive = Nat.NonZero
-  ; Metric.Close = λ x y k →
+  ; Metric.Positive = λ _ → ⊤
+  ; Metric.Close = λ x y precision →
       Bishop._≤_
         (Bishop.∣ Bishop._-_ x y ∣)
-        (Bishop._⋆ (+ 1 / k))
+        (Bishop._⋆ (+ 1 / suc precision))
   ; Metric.family = λ _ index → residualAt index
   ; Metric.candidate = λ _ → candidate
   ; Metric.reading =
-      "Canonical Bishop residual metric: Nat epsilon index k means absolute error <= 1/k."
+      "Canonical Bishop residual metric: precision index m means absolute error <= 1/(m+1)."
   }
 
 canonicalTailToBishopConvergence :
@@ -55,19 +51,21 @@ canonicalTailToBishopConvergence :
     (bishopResidualMetricProblem residualAt candidate)) →
   BishopSequence._ConvergesTo_ residualAt candidate
 canonicalTailToBishopConvergence {residualAt} {candidate} T =
-  BishopSequence.con* λ k {{kNonzero}} →
-    let
-      thresholdIndex = Tail.threshold T tt k
-    in
-    thresholdIndex , λ n nAboveSuccessorThreshold →
-      Tail.tailClose T
-        tt
-        k
-        kNonzero
-        n
-        (NatP.≤-trans
-          (NatP.n≤1+n thresholdIndex)
-          nAboveSuccessorThreshold)
+  BishopSequence.con* λ
+    { (suc precision) →
+      let
+        thresholdIndex = Tail.threshold T tt precision
+      in
+      thresholdIndex , λ n nAboveSuccessorThreshold →
+        Tail.tailClose T
+          tt
+          precision
+          tt
+          n
+          (NatP.≤-trans
+            (NatP.n≤1+n thresholdIndex)
+            nAboveSuccessorThreshold)
+    }
 
 ------------------------------------------------------------------------
 -- Same theorem with the metric receipt projected explicitly.
@@ -83,7 +81,7 @@ canonicalPointwiseMetricConvergence = Tail.asPointwiseMetricConvergence
 
 record ReverseCanonicalResidualTailObligations : Set where
   field
-    dependentOneOverKTailBound : Set
+    dependentOneOverSuccessorTailBound : Set
     thresholdConstruction : Set
     presentationIndependence : Set
     reading : String
@@ -105,12 +103,14 @@ metricFamilyIsLiteralResidualHere ()
 record Status : Set where
   field
     canonicalResidualMetricOwned : Bool
+    totalSuccessorPrecisionOwned : Bool
     bishopNativeConvergenceCompilerOwned : Bool
     metricToBishopTransportLeafPruned : Bool
     metricFamilyIdentityLeafPruned : Bool
     concreteResidualTailBoundClosed : Bool
 
     canonicalResidualMetricOwnedIsTrue : canonicalResidualMetricOwned ≡ true
+    totalSuccessorPrecisionOwnedIsTrue : totalSuccessorPrecisionOwned ≡ true
     bishopNativeConvergenceCompilerOwnedIsTrue : bishopNativeConvergenceCompilerOwned ≡ true
     metricToBishopTransportLeafPrunedIsTrue : metricToBishopTransportLeafPruned ≡ true
     metricFamilyIdentityLeafPrunedIsTrue : metricFamilyIdentityLeafPruned ≡ true
@@ -121,11 +121,13 @@ open Status public
 canonicalStatus : Status
 canonicalStatus = record
   { canonicalResidualMetricOwned = true
+  ; totalSuccessorPrecisionOwned = true
   ; bishopNativeConvergenceCompilerOwned = true
   ; metricToBishopTransportLeafPruned = true
   ; metricFamilyIdentityLeafPruned = true
   ; concreteResidualTailBoundClosed = false
   ; canonicalResidualMetricOwnedIsTrue = refl
+  ; totalSuccessorPrecisionOwnedIsTrue = refl
   ; bishopNativeConvergenceCompilerOwnedIsTrue = refl
   ; metricToBishopTransportLeafPrunedIsTrue = refl
   ; metricFamilyIdentityLeafPrunedIsTrue = refl
