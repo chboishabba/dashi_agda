@@ -12,13 +12,6 @@ import DASHI.Cognition.PNF.SensibLawMaboRecognitionBasisAuthorityEvidenceExact a
 import DASHI.Cognition.PNF.SensibLawMaboRecognitionCoordinateFactorisationExact as Factor
 import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 
-------------------------------------------------------------------------
--- Reviewed proposition layer over exact primary-authority parser anchors.
---
--- Parser observations do not choose these legal coordinates.  The weld from
--- anchor to proposition/coordinate is an explicit reviewed receipt.
-------------------------------------------------------------------------
-
 data PrimaryTextQuality : Set where
   textNativePrimary
   ocrPrimaryProjection
@@ -55,10 +48,6 @@ record ReviewedPrimaryAuthorityProposition : Set where
     parserAloneCreatesHolding : Bool
     parserAloneCreatesHoldingIsFalse : parserAloneCreatesHolding ≡ false
 open ReviewedPrimaryAuthorityProposition public
-
-------------------------------------------------------------------------
--- Amodu Tijani: title structure and sovereignty continuity.
-------------------------------------------------------------------------
 
 amoduUsufructBurdenProposition : ReviewedPrimaryAuthorityProposition
 amoduUsufructBurdenProposition = reviewedPrimaryAuthorityProposition
@@ -111,11 +100,6 @@ amoduNoBeneficialDisplacementProposition = reviewedPrimaryAuthorityProposition
   deniesDependency
   Status.represented Status.truthUnresolved textNativePrimary
   true refl false refl false refl
-
-------------------------------------------------------------------------
--- Calder, Hall J: independence from formal recognition and extinguishment.
--- The text is primary-source OCR projection, not authoritative transcription.
-------------------------------------------------------------------------
 
 hallIndependentTitleProposition : ReviewedPrimaryAuthorityProposition
 hallIndependentTitleProposition = reviewedPrimaryAuthorityProposition
@@ -208,11 +192,6 @@ hallClearPlainBurdenProposition = reviewedPrimaryAuthorityProposition
   Status.represented Status.truthUnresolved ocrPrimaryProjection
   true refl false refl false refl
 
-------------------------------------------------------------------------
--- Calder, Judson J: parser-primary anchor for the recognised/unrecognised
--- title distinction.  It is not collapsed into Hall J's contrary coordinate.
-------------------------------------------------------------------------
-
 judsonRecognizedUnrecognizedProposition : ReviewedPrimaryAuthorityProposition
 judsonRecognizedUnrecognizedProposition = reviewedPrimaryAuthorityProposition
   "proposition:calder:judson:recognized-unrecognized-dichotomy-discussed"
@@ -225,10 +204,6 @@ judsonRecognizedUnrecognizedProposition = reviewedPrimaryAuthorityProposition
   authorityInterpretationPosition
   Status.represented Status.truthUnresolved ocrPrimaryProjection
   true refl false refl false refl
-
-------------------------------------------------------------------------
--- Coordinate-family receipts.
-------------------------------------------------------------------------
 
 record PrimaryCoordinateEvidence : Set where
   constructor primaryCoordinateEvidence
@@ -268,15 +243,11 @@ calderRecognitionEvidence = primaryCoordinateEvidence
   "OCR-derived Calder Hall/Judson propositions bearing differently on recognition; not collapsed into one resolved doctrine"
   false refl
 
-------------------------------------------------------------------------
--- No-promotion laws.
-------------------------------------------------------------------------
-
 data ParserAnchorIsReviewedProposition : Set where
 data OcrPrimaryProjectionIsAuthoritativeQuotation : Set where
 data CoordinateEvidenceMeansCoordinateResolved : Set where
 data OneAuthorityPropositionDeterminesMaboUse : Set where
-\data PrimaryPropositionMakesWorldTruth : Set where
+data PrimaryPropositionMakesWorldTruth : Set where
 
 parserAnchorDoesNotBecomeReviewedProposition : ParserAnchorIsReviewedProposition → ⊥
 parserAnchorDoesNotBecomeReviewedProposition ()
