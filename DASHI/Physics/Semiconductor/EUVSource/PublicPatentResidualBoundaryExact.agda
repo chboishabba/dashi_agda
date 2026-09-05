@@ -10,6 +10,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 -- Conversely, lack of public disclosure does not prove that a detail is a
 -- legally protected trade secret.  This finite carrier keeps those cases apart.
 
+data ⊥ : Set where
+
 data DisclosureState : Set where
   PublicCorporateStatement : DisclosureState
   PublicPatentEmbodiment    : DisclosureState
@@ -110,8 +112,9 @@ residualDebrisRecipe : DisclosureReceipt
 residualDebrisRecipe =
   disclosureReceipt ExactDebrisMitigationRecipe CurrentImplementationNotEstablished
 
--- Firewall: patent disclosure and current-product identity are different
--- evidence states by construction.
+-- Firewall: these are genuinely distinct constructors.  A public patent
+-- embodiment cannot definitionally be the same evidence state as an exact
+-- current-production implementation that has not been established publicly.
 patentStateNotCurrentImplementationState :
-  PublicPatentEmbodiment ≡ PublicPatentEmbodiment
-patentStateNotCurrentImplementationState = refl
+  PublicPatentEmbodiment ≡ CurrentImplementationNotEstablished → ⊥
+patentStateNotCurrentImplementationState ()
