@@ -3,17 +3,23 @@ module DASHI.Analysis.NonArchimedeanContinuousMixingBidiExact where
 ------------------------------------------------------------------------
 -- CONTINUOUS / FINITE L2 MIXING BIDI
 --
--- `L2Mixing.lean` stores the one-step mean-zero contraction as a field of
--- `L2MixingAssumptions`; `L2_decay_bound` simply returns that field.
+-- The source one-step field
 --
--- Mean-zero invariance is no longer a live leaf: the finite Collatz branches
--- x -> 3x and x -> 3x-1 are permutations because the source already constructs
--- inv3 and proves three_mul_inv3 = 1.  Finite sum reindexing gives mass
--- preservation, and the generic zero-fibre compiler gives P_n(L2_0) subset L2_0.
+--   ||P_n f|| <= 1/sqrt(2) ||f||  on L2_0
 --
--- Hence the only live analytic producer for geometric L2 decay is the actual
--- derivation of the one-step 1/sqrt(2) contraction.  Geometric iteration is
--- repo-reusable.  Correlation decay additionally needs a consumer weld.
+-- is not merely unproved: the exact n=3 rational witness in
+-- NonArchimedeanL2MixingN3CounterexampleExact refutes its squared necessary
+-- form.  Mean-zero invariance itself compiles from existing source inverse-of-3
+-- arithmetic and finite sum reindexing.
+--
+-- This does NOT refute asymptotic mixing with a prefactor C_n > 1.  For a
+-- non-normal finite operator, transient norm amplification may coexist with
+-- spectral-rate decay of powers.  The viable target is therefore a power bound
+--
+--   ||P_n^t|L2_0|| <= C_n * 2^(-t/2),
+--
+-- produced from the now-owned finite spectral/monomial decomposition plus a
+-- conditioning/power-control theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -23,62 +29,69 @@ open import Agda.Builtin.List using (List; []; _∷_)
 
 data MixingLeaf : Set where
   meanZeroInvariant : MixingLeaf
-  oneStepMeanZeroContraction : MixingLeaf
-  geometricIteration : MixingLeaf
+  oneStepInverseSqrtTwoContraction : MixingLeaf
+  finiteSpectralRateHalf : MixingLeaf
+  powerBoundWithPrefactor : MixingLeaf
   correlationIdentification : MixingLeaf
   unconditionalExponentialMixing : MixingLeaf
 
 
 data MixingStatus : Set where
   compiled : MixingStatus
-  sourceAssumed : MixingStatus
+  sourceAssumedButRefuted : MixingStatus
+  sourceOrRepoOwned : MixingStatus
   live : MixingStatus
-  repoReusable : MixingStatus
   downstream : MixingStatus
 
 mixingStatus : MixingLeaf → MixingStatus
 mixingStatus meanZeroInvariant = compiled
-mixingStatus oneStepMeanZeroContraction = sourceAssumed
-mixingStatus geometricIteration = repoReusable
+mixingStatus oneStepInverseSqrtTwoContraction = sourceAssumedButRefuted
+mixingStatus finiteSpectralRateHalf = sourceOrRepoOwned
+mixingStatus powerBoundWithPrefactor = live
 mixingStatus correlationIdentification = live
 mixingStatus unconditionalExponentialMixing = downstream
 
 
 data MixingObligation : Set where
-  needUnconditionalOneStepMeanZeroContraction : MixingObligation
+  needFinitePowerBoundWithPrefactor : MixingObligation
   needCorrelationConsumerWeld : MixingObligation
+  rejectedUnitConstantOneStepContraction : MixingObligation
 
 l2MixingCutset : List MixingObligation
-l2MixingCutset =
-  needUnconditionalOneStepMeanZeroContraction ∷ []
+l2MixingCutset = needFinitePowerBoundWithPrefactor ∷ []
 
 correlationDecayCutset : List MixingObligation
 correlationDecayCutset =
-  needUnconditionalOneStepMeanZeroContraction ∷
-  needCorrelationConsumerWeld ∷ []
+  needFinitePowerBoundWithPrefactor ∷ needCorrelationConsumerWeld ∷ []
+
+oneStepClaimDisposition : List MixingObligation
+oneStepClaimDisposition = rejectedUnitConstantOneStepContraction ∷ []
 
 record MixingFirewall : Set where
   constructor mixingFirewall
   field
-    assumptionFieldCountsAsDerivedSpectralBound : Bool
-    meanZeroInvarianceStillNeedsSearch : Bool
+    refutedOneStepBoundRefutesAllAsymptoticMixing : Bool
+    spectralRadiusAloneControlsOneStepNormForNonNormalOperator : Bool
+    spectralRateAloneSuppliesPowerPrefactor : Bool
     geometricNormDecayAutomaticallyEqualsCorrelationDecay : Bool
-    genericIterationNeedsReproof : Bool
+    meanZeroInvarianceStillNeedsSearch : Bool
 
 canonicalMixingFirewall : MixingFirewall
 canonicalMixingFirewall =
-  mixingFirewall false false false false
+  mixingFirewall false false false false false
 
-assumedOneStepBoundNotPromoted :
-  MixingFirewall.assumptionFieldCountsAsDerivedSpectralBound
+oneStepNoGoDoesNotKillPrefactoredMixing :
+  MixingFirewall.refutedOneStepBoundRefutesAllAsymptoticMixing
     canonicalMixingFirewall
   ≡ false
-assumedOneStepBoundNotPromoted = refl
+oneStepNoGoDoesNotKillPrefactoredMixing = refl
 
-meanZeroSearchNowPruned :
-  MixingFirewall.meanZeroInvarianceStillNeedsSearch canonicalMixingFirewall ≡ false
-meanZeroSearchNowPruned = refl
+spectralRadiusDoesNotControlOneStepNormHere :
+  MixingFirewall.spectralRadiusAloneControlsOneStepNormForNonNormalOperator
+    canonicalMixingFirewall
+  ≡ false
+spectralRadiusDoesNotControlOneStepNormHere = refl
 
-genericIterationIsReusable :
-  MixingFirewall.genericIterationNeedsReproof canonicalMixingFirewall ≡ false
-genericIterationIsReusable = refl
+powerPrefactorStillNeedsReceipt :
+  mixingStatus powerBoundWithPrefactor ≡ live
+powerPrefactorStillNeedsReceipt = refl
