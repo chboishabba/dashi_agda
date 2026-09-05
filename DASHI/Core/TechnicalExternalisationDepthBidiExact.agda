@@ -9,7 +9,7 @@ import DASHI.Core.CriticalKnowledgeConcentrationBidiExact as K
 ------------------------------------------------------------------------
 -- TECHNICAL EXTERNALISATION DEPTH
 --
--- Publication is a weak binary feature.  This object measures how much of the
+-- Publication is a weak binary feature. This object measures how much of the
 -- technical reasoning/implementation chain is deliberately made inspectable.
 ------------------------------------------------------------------------
 
@@ -24,6 +24,14 @@ data ExternalisationStage : Set where
   publicInterpretation
   : ExternalisationStage
 
+------------------------------------------------------------------------
+-- Small local list-membership witness; avoids depending on a repo-global name.
+------------------------------------------------------------------------
+
+data _∈Stages_ (x : ExternalisationStage) : List ExternalisationStage → Set where
+  here : ∀ {xs} → x ∈Stages (x ∷ xs)
+  there : ∀ {y xs} → x ∈Stages xs → x ∈Stages (y ∷ xs)
+
 record TechnicalExternalisationProfile : Set where
   constructor technical-externalisation-profile
   field
@@ -37,9 +45,9 @@ open TechnicalExternalisationProfile public
 record DeepExternalisation (profile : TechnicalExternalisationProfile) : Set where
   constructor deep-externalisation
   field
-    modelExposed : ListMembership physicalOrTechnicalModel (stages profile)
-    methodExposed : ListMembership algorithmOrDesignMethod (stages profile)
-    validationExposed : ListMembership benchmarkOrValidation (stages profile)
+    modelExposed : physicalOrTechnicalModel ∈Stages stages profile
+    methodExposed : algorithmOrDesignMethod ∈Stages stages profile
+    validationExposed : benchmarkOrValidation ∈Stages stages profile
     depthReference : String
 
 open DeepExternalisation public
