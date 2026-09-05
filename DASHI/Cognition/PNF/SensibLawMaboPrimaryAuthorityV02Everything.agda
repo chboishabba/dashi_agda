@@ -1,6 +1,7 @@
 module DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityV02Everything where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityParserBatchV02Exact as Batch
