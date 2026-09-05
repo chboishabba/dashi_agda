@@ -148,7 +148,7 @@ compileCanonicalEndgame {zetaTrace = zetaTrace} B = record
 record ReverseV8EndgameObligations : Set where
   field
     maxwellFiniteEnergySourceCarrierWeld : Set
-    radialLebesgueIntegrabilityMeasureAndNormalizationWeld : Set
+    radialPointwiseFactorisationIntegrabilityMeasureNormalization : Set
     concreteOneOverSuccessorResidualTail : Set
     concreteLongitudinalTransformationTrace : Set
     crossStagePhysicalSameObjectReceipts : Set
