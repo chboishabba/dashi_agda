@@ -81,7 +81,6 @@ recognitionPlanNeedsNoFurtherParserRun : Refined.parserRerunRequired Refined.rec
 recognitionPlanNeedsNoFurtherParserRun = refl
 enforceabilityPlanNeedsNoFurtherParserRun : Refined.parserRerunRequired Refined.enforceabilityV02Plan ≡ false
 enforceabilityPlanNeedsNoFurtherParserRun = refl
-
 continuityPlanHasNoHallVerificationResidual : Refined.residuals Refined.continuityV02Plan ≡ (Refined.compareAmoduContinuityWithDawsonRecognitionUse ∷ Refined.reconcileContinuityAndRecognitionCoordinates ∷ [])
 continuityPlanHasNoHallVerificationResidual = refl
 recognitionPlanHasNoHallVerificationResidual : Refined.residuals Refined.recognitionV02Plan ≡ (Refined.compareHallRecognitionIndependenceWithDawsonUse ∷ Refined.reconcileContinuityAndRecognitionCoordinates ∷ [])
