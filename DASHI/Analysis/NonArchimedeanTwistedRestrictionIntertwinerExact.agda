@@ -24,6 +24,7 @@ module DASHI.Analysis.NonArchimedeanTwistedRestrictionIntertwinerExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 record TwistedRestrictionData : Set₁ where
   field
@@ -54,13 +55,9 @@ fullStepIntertwinesTwistedRestriction :
   fullStep data (extendMinus data f)
   ≡ extendMinus data (twistedStep data f)
 fullStepIntertwinesTwistedRestriction data f =
-  let
-    hClosure = tauOddClosure data f
-    hZero = sheetZeroReduction data f
-  in
-  trans hClosure (cong (extendMinus data) hZero)
-  where
-    open import Relation.Binary.PropositionalEquality using (cong; trans)
+  trans
+    (tauOddClosure data f)
+    (cong (extendMinus data) (sheetZeroReduction data f))
 
 record SourceTwistedRestrictionBoundary : Set where
   constructor sourceTwistedRestrictionBoundary
