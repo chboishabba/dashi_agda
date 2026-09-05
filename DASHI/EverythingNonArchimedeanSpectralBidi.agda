@@ -65,9 +65,9 @@ import DASHI.Analysis.NonArchimedeanOrbitCancellationToMinusTwoExact
 import DASHI.Analysis.NonArchimedeanCharacteristicRootUnionCompilerExact
 import DASHI.Analysis.NonArchimedeanCharacteristicFactorizationReuseExact
 
--- Post-closure sigma / continuous-transfer audit.  The primitive twisted-circle
+-- Post-closure sigma / continuous-transfer audit. The primitive twisted-circle
 -- radius, full transfer eigenvalues, normalized Markov eigenvalue, conditional
--- L2 rate, and Prolate critical parameter are separately typed.  The local
+-- L2 rate, and Prolate critical parameter are separately typed. The local
 -- cyclotomic half is repaired; only the cross-lane same-object anchor remains.
 import DASHI.Analysis.NonArchimedeanDirectedRadiusCriticalSigmaAuditExact
 import DASHI.Analysis.NonArchimedeanSigmaRoleSeparationExact
@@ -76,6 +76,7 @@ import DASHI.Analysis.NonArchimedeanProlateCriticalLineSigmaSourceExact
 import DASHI.Analysis.NonArchimedeanTransferRadiusAnchorNoGoExact
 import DASHI.Analysis.NonArchimedeanPrimitiveTwistedAnchorRepairExact
 import DASHI.Analysis.NonArchimedeanContinuousTransferRadiusSemanticAuditExact
+import DASHI.Analysis.NonArchimedeanContinuousTransferClaimStrengthExact
 import DASHI.Analysis.NonArchimedeanSemilocalSigmaNonDescentExact
 import DASHI.Analysis.NonArchimedeanSigmaAnchorSameObjectBidiExact
 import DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact
