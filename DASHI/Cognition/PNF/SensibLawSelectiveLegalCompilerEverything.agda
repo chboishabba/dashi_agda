@@ -162,6 +162,8 @@ maboEnforceabilityQueryRoutesToBrennanAmodu : MaboPlanner.probes MaboPlanner.enf
 maboEnforceabilityQueryRoutesToBrennanAmodu = refl
 maboFactorisedSearchDoesNotEqualResolution : MaboPlanner.SearchPlanClosesLegalCoordinate → ⊥
 maboFactorisedSearchDoesNotEqualResolution = MaboPlanner.searchPlanDoesNotCloseCoordinate
+maboCurrentFactorisedSearchNeedsNoParserRerun : MaboPlanner.parserRerunRequired MaboPlanner.continuityPlan ≡ false
+maboCurrentFactorisedSearchNeedsNoParserRerun = refl
 
 maboContinuityCompilesToContinuityObligation : MaboHyper.obligation MaboHyper.continuityHyperfabric ≡ MaboHyper.establishContinuityRule
 maboContinuityCompilesToContinuityObligation = refl
