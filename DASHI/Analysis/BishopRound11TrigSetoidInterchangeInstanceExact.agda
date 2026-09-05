@@ -1,8 +1,9 @@
 module DASHI.Analysis.BishopRound11TrigSetoidInterchangeInstanceExact where
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.String using (String)
+open import Data.Product.Base using (_,_)
 
 import Real as Bishop
 import Sequence as BishopSequence
@@ -18,13 +19,17 @@ import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
 ------------------------------------------------------------------------
 -- ROUND11 BISHOP TRIG -> GENERIC SETOID DERIVATIVE/LIMIT PROBLEM
 --
--- The literal function approximants are finite partial sums of the existing
--- Round11 sine/cosine terms.  Their derivative candidates are finite partial
--- sums of the already-owned concrete differentiated terms.  Convergence of the
--- function series and derivative series is imported from the existing Bishop
--- owners.  What remains explicit is:
---   * finite-sum differentiation for the selected derivative semantics;
---   * the actual derivative/limit interchange control.
+-- Sine uses the ordinary partial sums.
+--
+-- Cosine is deliberately shifted by one partial-sum index because
+-- `cosineAlgebraicDerivedTerm n` differentiates the (n+1)-st cosine term: the
+-- zeroth cosine term is constant.  Thus
+--
+--   cosine approximant N = Σ_{k < N+1} c_k,
+--   derivative approximant N = Σ_{k < N} D c_{k+1}.
+--
+-- Bishop's own `shift-is-subsequence` theorem transports convergence of the
+-- original cosine partial sums to this shifted approximant sequence.
 ------------------------------------------------------------------------
 
 BishopSetoidReal : Spine.SetoidOrderedCompleteReal
@@ -51,12 +56,13 @@ record BishopTrigDerivativeSemantics : Set₁ where
         (BishopSequence.SeriesOf
           (Finite.sineAlgebraicDerivedTerm point) count)
 
-    finiteCosinePartialSumDerivative :
+    finiteCosineShiftedPartialSumDerivative :
       (dataSet : Elementary.BishopElementaryPowerSeriesData) →
       (count : Nat) →
       (point : Bishop.ℝ) →
       DerivativeAt
-        (λ x → BishopSequence.SeriesOf (Elementary.cosineTerm dataSet x) count)
+        (λ x → BishopSequence.SeriesOf
+          (Elementary.cosineTerm dataSet x) (suc count))
         point
         (BishopSequence.SeriesOf
           (Finite.cosineAlgebraicDerivedTerm point) count)
@@ -127,6 +133,28 @@ sineSetoidProblem I = record
   ; Interchange.reading = sineInterchangeControlMeaning I
   }
 
+shiftedCosinePartialSums :
+  (I : Round11TrigInterchangeInstance) →
+  Bishop.ℝ → Nat → Bishop.ℝ
+shiftedCosinePartialSums I point =
+  BishopSequence.shift
+    (BishopSequence.SeriesOf (Elementary.cosineTerm (seriesData I) point))
+    1
+
+shiftedCosineConverges :
+  (I : Round11TrigInterchangeInstance) →
+  (point : Bishop.ℝ) →
+  BishopSequence._ConvergesTo_
+    (shiftedCosinePartialSums I point)
+    (Elementary.bishopCos (seriesData I) point)
+shiftedCosineConverges I point =
+  BishopSequence.fast-xₙ⊆yₙ∧yₙ→y⇒xₙ→y
+    (BishopSequence.shift-is-subsequence
+      (BishopSequence.SeriesOf (Elementary.cosineTerm (seriesData I) point))
+      1)
+    (Elementary.bishopCos (seriesData I) point ,
+      Elementary.bishopCosConvergence (seriesData I) point)
+
 cosineSetoidProblem :
   (I : Round11TrigInterchangeInstance) →
   Interchange.SetoidDerivativeLimitProblem
@@ -135,24 +163,28 @@ cosineSetoidProblem I = record
   ; Interchange.sequences = BishopSequences
   ; Interchange.Domain = Bishop.ℝ
   ; Interchange.approximant = λ count point →
-      BishopSequence.SeriesOf (Elementary.cosineTerm (seriesData I) point) count
+      BishopSequence.SeriesOf
+        (Elementary.cosineTerm (seriesData I) point)
+        (suc count)
   ; Interchange.derivativeApproximant = λ count point →
       BishopSequence.SeriesOf (Finite.cosineAlgebraicDerivedTerm point) count
   ; Interchange.limitFunction = Elementary.bishopCos (seriesData I)
-  ; Interchange.derivativeLimit = λ point → Bishop.-_ (Elementary.bishopSin (seriesData I) point)
+  ; Interchange.derivativeLimit = λ point →
+      Bishop.-_ (Elementary.bishopSin (seriesData I) point)
   ; Interchange.DerivativeAt = DerivativeAt (derivativeSemantics I)
   ; Interchange.approximantDerivative =
-      finiteCosinePartialSumDerivative (derivativeSemantics I) (seriesData I)
+      finiteCosineShiftedPartialSumDerivative
+        (derivativeSemantics I) (seriesData I)
   ; Interchange.FunctionConvergesAt = λ point →
       BishopSequence._ConvergesTo_
-        (BishopSequence.SeriesOf (Elementary.cosineTerm (seriesData I) point))
+        (shiftedCosinePartialSums I point)
         (Elementary.bishopCos (seriesData I) point)
   ; Interchange.DerivativeConvergesAt = λ point →
       BishopSequence._ConvergesTo_
         (BishopSequence.SeriesOf (Finite.cosineAlgebraicDerivedTerm point))
         (Bishop.-_ (Elementary.bishopSin (seriesData I) point))
   ; Interchange.InterchangeControlAt = CosineInterchangeControlAt I
-  ; Interchange.functionConvergence = Elementary.bishopCosConvergence (seriesData I)
+  ; Interchange.functionConvergence = shiftedCosineConverges I
   ; Interchange.derivativeConvergence =
       Concrete.cosineDerivedSeriesConverges (concreteProblem I)
   ; Interchange.reading = cosineInterchangeControlMeaning I
@@ -191,9 +223,10 @@ cosineDerivativeCompiled A =
 record ReverseRound11InterchangeObligations : Set where
   field
     derivativeSemanticsSelected : Set
-    finitePartialSumRuleClosed : Set
+    algebraicToAnalyticTermDerivativeWeld : Set
+    finiteSumZeroAndAddRules : Set
     sineInterchangeControlClosed : Set
-    cosineInterchangeControlClosed : Set
+    cosineShiftedInterchangeControlClosed : Set
 
 open ReverseRound11InterchangeObligations public
 
@@ -201,13 +234,17 @@ record Status : Set where
   field
     literalRound11FunctionConvergenceOwned : Bool
     literalRound11DerivedSeriesConvergenceOwned : Bool
+    cosineShiftedFunctionConvergenceOwned : Bool
     genericSetoidProblemInstantiationOwned : Bool
+    algebraicToAnalyticTermDerivativeWeldClosed : Bool
     finitePartialSumDerivativeRuleClosed : Bool
     interchangeControlClosed : Bool
 
     literalRound11FunctionConvergenceOwnedIsTrue : literalRound11FunctionConvergenceOwned ≡ true
     literalRound11DerivedSeriesConvergenceOwnedIsTrue : literalRound11DerivedSeriesConvergenceOwned ≡ true
+    cosineShiftedFunctionConvergenceOwnedIsTrue : cosineShiftedFunctionConvergenceOwned ≡ true
     genericSetoidProblemInstantiationOwnedIsTrue : genericSetoidProblemInstantiationOwned ≡ true
+    algebraicToAnalyticTermDerivativeWeldClosedIsFalse : algebraicToAnalyticTermDerivativeWeldClosed ≡ false
     finitePartialSumDerivativeRuleClosedIsFalse : finitePartialSumDerivativeRuleClosed ≡ false
     interchangeControlClosedIsFalse : interchangeControlClosed ≡ false
 
@@ -217,12 +254,16 @@ canonicalStatus : Status
 canonicalStatus = record
   { literalRound11FunctionConvergenceOwned = true
   ; literalRound11DerivedSeriesConvergenceOwned = true
+  ; cosineShiftedFunctionConvergenceOwned = true
   ; genericSetoidProblemInstantiationOwned = true
+  ; algebraicToAnalyticTermDerivativeWeldClosed = false
   ; finitePartialSumDerivativeRuleClosed = false
   ; interchangeControlClosed = false
   ; literalRound11FunctionConvergenceOwnedIsTrue = refl
   ; literalRound11DerivedSeriesConvergenceOwnedIsTrue = refl
+  ; cosineShiftedFunctionConvergenceOwnedIsTrue = refl
   ; genericSetoidProblemInstantiationOwnedIsTrue = refl
+  ; algebraicToAnalyticTermDerivativeWeldClosedIsFalse = refl
   ; finitePartialSumDerivativeRuleClosedIsFalse = refl
   ; interchangeControlClosedIsFalse = refl
   }
