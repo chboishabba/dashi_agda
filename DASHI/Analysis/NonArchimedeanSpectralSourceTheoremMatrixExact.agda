@@ -14,6 +14,9 @@ record SourceTheoremMatrix : Set where
   constructor sourceTheoremMatrix
   field
     characterMonomialActionOwned : Bool
+    functionLevelDnChiOwned : Bool
+    DnPreservesTauOddOwned : Bool
+    oddCharacterIffTauOddOwned : Bool
     orderThreeOwned : Bool
     cyclotomicOddProductOwned : Bool
     orbitPartitionNeedsSeparateReceipt : Bool
@@ -46,7 +49,7 @@ record SourceTheoremMatrix : Set where
 canonicalSourceTheoremMatrix : SourceTheoremMatrix
 canonicalSourceTheoremMatrix =
   sourceTheoremMatrix
-    true true true true true
+    true true true false true true true true
     true true true true false
     true false true false
     true true false true
@@ -56,6 +59,7 @@ record PromotionMatrix : Set where
   constructor promotionMatrix
   field
     finiteCharacterOrbitKernel : Bool
+    tauOddCharacterSemantics : Bool
     signedTraceKernel : Bool
     concreteDFTInfrastructure : Bool
     concreteDFTMonomialSameObject : Bool
@@ -72,7 +76,7 @@ record PromotionMatrix : Set where
 canonicalPromotionMatrix : PromotionMatrix
 canonicalPromotionMatrix =
   promotionMatrix
-    true true true false false true false
+    true false true true false false true false
     true true false false false false
 
 spatialRemainsBlocked :
@@ -90,6 +94,10 @@ signedTracePromotes = refl
 sourceDFTInfrastructurePromotes :
   PromotionMatrix.concreteDFTInfrastructure canonicalPromotionMatrix ≡ true
 sourceDFTInfrastructurePromotes = refl
+
+oddCharacterTauOddStillBlocked :
+  PromotionMatrix.tauOddCharacterSemantics canonicalPromotionMatrix ≡ false
+oddCharacterTauOddStillBlocked = refl
 
 literalSpectrumTowerStillBlocked :
   PromotionMatrix.literalSpectrumTower canonicalPromotionMatrix ≡ false
