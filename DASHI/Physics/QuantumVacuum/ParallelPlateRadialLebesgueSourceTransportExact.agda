@@ -35,17 +35,15 @@ record CasimirRadialLebesgueTarget
     radiusOf : Transverse.TransversePoint F → Radius
     radialIntegrand : Radius → Transverse.Integrand F
 
-    LimitIntegrandIsRadial : Set
-    limitIntegrandIsRadialEvidence : LimitIntegrandIsRadial
+    limitIntegrandIsRadial :
+      (point : Transverse.TransversePoint F) →
+      Transverse.limitIntegrand F point ≡ radialIntegrand (radiusOf point)
 
     RadialIntegrability : Set
     radialIntegrabilityEvidence : RadialIntegrability
 
     SameLebesgueMeasureAsSource : Set
     sameLebesgueMeasureAsSourceEvidence : SameLebesgueMeasureAsSource
-
-    SameCasimirTransverseIntegrand : Set
-    sameCasimirTransverseIntegrandEvidence : SameCasimirTransverseIntegrand
 
     SameNormalizationConvention : Set
     sameNormalizationConventionEvidence : SameNormalizationConvention
@@ -57,11 +55,9 @@ record CasimirRadialLebesgueTarget
 
     sourceRadialMeasureToLocal :
       Transport.SourceClaim radialMeasureClaim →
-      (LimitIntegrandIsRadial ×
-       (RadialIntegrability ×
+      (RadialIntegrability ×
        (SameLebesgueMeasureAsSource ×
-       (SameCasimirTransverseIntegrand ×
-       (SameNormalizationConvention × SameRadialMeasureObject))))) →
+       (SameNormalizationConvention × SameRadialMeasureObject))) →
       LocalRadialReduction
 
     reading : String
@@ -72,23 +68,19 @@ RadialSourceApplicationObject :
   ∀ {kernel F} →
   CasimirRadialLebesgueTarget kernel F → Set
 RadialSourceApplicationObject T =
-  LimitIntegrandIsRadial T ×
-  (RadialIntegrability T ×
+  RadialIntegrability T ×
   (SameLebesgueMeasureAsSource T ×
-  (SameCasimirTransverseIntegrand T ×
-  (SameNormalizationConvention T × SameRadialMeasureObject T))))
+  (SameNormalizationConvention T × SameRadialMeasureObject T))
 
 radialSourceApplicationEvidence :
   ∀ {kernel F} →
   (T : CasimirRadialLebesgueTarget kernel F) →
   RadialSourceApplicationObject T
 radialSourceApplicationEvidence T =
-  limitIntegrandIsRadialEvidence T ,
-  (radialIntegrabilityEvidence T ,
+  radialIntegrabilityEvidence T ,
   (sameLebesgueMeasureAsSourceEvidence T ,
-  (sameCasimirTransverseIntegrandEvidence T ,
   (sameNormalizationConventionEvidence T ,
-   sameRadialMeasureObjectEvidence T))))
+   sameRadialMeasureObjectEvidence T))
 
 asTransportTarget :
   ∀ {kernel F} →
@@ -113,57 +105,28 @@ compileLocalRadialReduction T =
       { Transport.objectWeld = radialSourceApplicationEvidence T })
 
 ------------------------------------------------------------------------
--- Strong local object weld: all application-specific coordinates are explicit
--- and proof-bearing.  This is the actual remaining radial-measure payment.
-------------------------------------------------------------------------
-
-record ProofBearingRadialMeasureWeld
-    {kernel : Casimir.CasimirScalarModel}
-    {F : Transverse.CasimirTransverseMeasureFamily kernel}
-    (T : CasimirRadialLebesgueTarget kernel F) : Set₁ where
-  field
-    radiality : LimitIntegrandIsRadial T
-    integrability : RadialIntegrability T
-    sourceLebesgueMeasure : SameLebesgueMeasureAsSource T
-    sameCasimirIntegrand : SameCasimirTransverseIntegrand T
-    sameNormalization : SameNormalizationConvention T
-    radialMeasureObject : SameRadialMeasureObject T
-
-open ProofBearingRadialMeasureWeld public
-
-canonicalWeldFromTarget :
-  ∀ {kernel F} →
-  (T : CasimirRadialLebesgueTarget kernel F) →
-  ProofBearingRadialMeasureWeld T
-canonicalWeldFromTarget T = record
-  { radiality = limitIntegrandIsRadialEvidence T
-  ; integrability = radialIntegrabilityEvidence T
-  ; sourceLebesgueMeasure = sameLebesgueMeasureAsSourceEvidence T
-  ; sameCasimirIntegrand = sameCasimirTransverseIntegrandEvidence T
-  ; sameNormalization = sameNormalizationConventionEvidence T
-  ; radialMeasureObject = sameRadialMeasureObjectEvidence T
-  }
-
-------------------------------------------------------------------------
 -- BIDI pruning.
 ------------------------------------------------------------------------
 
 record ReverseRadialLebesgueObligations : Set where
   field
-    literalCasimirIntegrandIsRadial : Set
+    literalPointwiseRadialFactorisation : Set
     radialIntegrability : Set
     sameR2LebesgueMeasure : Set
-    sameCasimirTransverseIntegrand : Set
     sameTwoPiNormalization : Set
     reading : String
 
 open ReverseRadialLebesgueObligations public
 
+data SeparateSameCasimirIntegrandWeldStillRequired : Set where
 data PolarAngularChartStillRequired : Set where
 data SineCosineDerivativeStillRequired : Set where
 data PolarJacobianDeterminantStillRequired : Set where
 data PolarOriginAndSeamChartTreatmentStillRequired : Set where
-data BareSameRadialObjectLabelSuffices : Set where
+
+definitionalRadialityIdentifiesIntegrand :
+  SeparateSameCasimirIntegrandWeldStillRequired → ⊥
+definitionalRadialityIdentifiesIntegrand ()
 
 radialRoutePrunesAngularChart : PolarAngularChartStillRequired → ⊥
 radialRoutePrunesAngularChart ()
@@ -177,14 +140,12 @@ radialRoutePrunesJacobianCalculation ()
 sphereRoutePrunesPolarSeam : PolarOriginAndSeamChartTreatmentStillRequired → ⊥
 sphereRoutePrunesPolarSeam ()
 
-radialTransportRequiresAllCoordinates : BareSameRadialObjectLabelSuffices → ⊥
-radialTransportRequiresAllCoordinates ()
-
 record Status : Set where
   field
     radialLebesgueSourceBacked : Bool
     chartFreeCasimirTransportOwned : Bool
-    allLocalRadialCoordinatesRequiredByTransport : Bool
+    radialityIsLiteralPointwiseEquality : Bool
+    sameIntegrandLeafPruned : Bool
     trigDerivativePrunedFromCasimirMeasureRoute : Bool
     jacobianPrunedFromCasimirMeasureRoute : Bool
     polarSeamPrunedFromCasimirMeasureRoute : Bool
@@ -192,8 +153,9 @@ record Status : Set where
 
     radialLebesgueSourceBackedIsTrue : radialLebesgueSourceBacked ≡ true
     chartFreeCasimirTransportOwnedIsTrue : chartFreeCasimirTransportOwned ≡ true
-    allLocalRadialCoordinatesRequiredByTransportIsTrue :
-      allLocalRadialCoordinatesRequiredByTransport ≡ true
+    radialityIsLiteralPointwiseEqualityIsTrue :
+      radialityIsLiteralPointwiseEquality ≡ true
+    sameIntegrandLeafPrunedIsTrue : sameIntegrandLeafPruned ≡ true
     trigDerivativePrunedFromCasimirMeasureRouteIsTrue :
       trigDerivativePrunedFromCasimirMeasureRoute ≡ true
     jacobianPrunedFromCasimirMeasureRouteIsTrue :
@@ -208,14 +170,16 @@ canonicalStatus : Status
 canonicalStatus = record
   { radialLebesgueSourceBacked = true
   ; chartFreeCasimirTransportOwned = true
-  ; allLocalRadialCoordinatesRequiredByTransport = true
+  ; radialityIsLiteralPointwiseEquality = true
+  ; sameIntegrandLeafPruned = true
   ; trigDerivativePrunedFromCasimirMeasureRoute = true
   ; jacobianPrunedFromCasimirMeasureRoute = true
   ; polarSeamPrunedFromCasimirMeasureRoute = true
   ; localRadialMeasureWeldClosed = false
   ; radialLebesgueSourceBackedIsTrue = refl
   ; chartFreeCasimirTransportOwnedIsTrue = refl
-  ; allLocalRadialCoordinatesRequiredByTransportIsTrue = refl
+  ; radialityIsLiteralPointwiseEqualityIsTrue = refl
+  ; sameIntegrandLeafPrunedIsTrue = refl
   ; trigDerivativePrunedFromCasimirMeasureRouteIsTrue = refl
   ; jacobianPrunedFromCasimirMeasureRouteIsTrue = refl
   ; polarSeamPrunedFromCasimirMeasureRouteIsTrue = refl
