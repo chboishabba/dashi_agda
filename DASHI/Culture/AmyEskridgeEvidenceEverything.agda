@@ -13,3 +13,4 @@ import DASHI.Culture.AmyEskridgeEvidenceCrossPollinationExact
 import DASHI.Culture.AmyEskridgeAcquisitionProofSearchExact
 import DASHI.Culture.AmyEskridgeGravityMechanismCrossPollinationExact
 import DASHI.Culture.AmyEskridgeLiTorrMechanismBridgeExact
+import DASHI.Culture.AmyEskridgeLiTorrMagnitudeTriangleCrossPollinationExact
