@@ -1,0 +1,12 @@
+{
+  "authority_receipt_id": "authority-demo-001",
+  "kind": "Created",
+  "name": "hello",
+  "namespace": "monster",
+  "payload": {
+    "entrypoint": "hello-agent",
+    "flake": "./fixtures/hello-agent",
+    "service": "kagenti-agent-hello.service"
+  },
+  "proof_receipt_id": "proof-demo-001"
+}
