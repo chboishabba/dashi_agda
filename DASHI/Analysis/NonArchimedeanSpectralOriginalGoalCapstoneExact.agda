@@ -141,6 +141,10 @@ matrixEqualityIsCompilerOutputOnceSemanticInputsExist :
   ≡ true
 matrixEqualityIsCompilerOutputOnceSemanticInputsExist = refl
 
+arithmeticOrbitChartIsHighestAlphaLiveLeaf :
+  leafStatus arithmeticOddOrbitChart ≡ live
+arithmeticOrbitChartIsHighestAlphaLiveLeaf = refl
+
 finalMagnitudeCannotSelfDischarge :
   OriginalGoalBoundary.finalMagnitudeHypothesisMayCloseItsOwnProducerPath
     canonicalOriginalGoalBoundary
