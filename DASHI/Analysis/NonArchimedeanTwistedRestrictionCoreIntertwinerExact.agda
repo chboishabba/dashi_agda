@@ -16,6 +16,7 @@ import DASHI.Analysis.NonArchimedeanTwistedRestrictionIntertwinerExact as Restri
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 coreTwistedRestrictionIntertwiner :
   (data : Restrict.TwistedRestrictionData) →
@@ -26,7 +27,7 @@ coreTwistedRestrictionIntertwiner :
     (Restrict.fullStep data)
 coreTwistedRestrictionIntertwiner data =
   Core.intertwiner
-    (Restrict.fullStepIntertwinesTwistedRestriction data)
+    (λ f → sym (Restrict.fullStepIntertwinesTwistedRestriction data f))
 
 record CoreReuseBoundary : Set where
   constructor coreReuseBoundary
