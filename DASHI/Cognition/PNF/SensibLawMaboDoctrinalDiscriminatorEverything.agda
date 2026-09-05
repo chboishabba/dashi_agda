@@ -8,6 +8,7 @@ import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityResidualRefinementV02Exa
 import DASHI.Cognition.PNF.SensibLawMaboMinimalDoctrinalDiscriminatorExact as Minimal
 import DASHI.Cognition.PNF.SensibLawMaboMinimalDoctrinalHyperfabricBridgeExact as Hyper
 import DASHI.Cognition.PNF.SensibLawMaboMinimalDoctrinalCutsetExact as Cutset
+import DASHI.Cognition.PNF.SensibLawMaboDoctrinalConsumerClosureExact as Consumer
 import DASHI.Cognition.PNF.SensibLawIssueIndexedAdjudicativeHyperfabricExact as Issue
 import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityUseUpgradeExact as Upgrade
 
@@ -16,15 +17,15 @@ import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityUseUpgradeExact as Upgra
 -- discriminator -> claim-specific cutset -> generic issue-hyperfabric work.
 ------------------------------------------------------------------------
 
-continuityCanCloseNarrowly :
+continuityCanCloseNarrowSourceCutset :
   Cutset.firstResidual Minimal.identifyExistenceContinuity Cutset.postHallVerificationCutset
   ≡ Cutset.minimalDoctrinalClosed
-continuityCanCloseNarrowly = refl
+continuityCanCloseNarrowSourceCutset = refl
 
-extinguishmentCanCloseNarrowly :
+extinguishmentCanCloseNarrowSourceCutset :
   Cutset.firstResidual Minimal.identifyExtinguishmentRule Cutset.postHallVerificationCutset
   ≡ Cutset.minimalDoctrinalClosed
-extinguishmentCanCloseNarrowly = refl
+extinguishmentCanCloseNarrowSourceCutset = refl
 
 recognitionConditionStillOpen :
   Cutset.firstResidual Minimal.identifyRecognitionCondition Cutset.postHallVerificationCutset
@@ -40,6 +41,31 @@ unifiedTheoryStopsAtRecognitionCondition :
   Cutset.firstResidual Minimal.identifyUnifiedRecognitionTheory Cutset.postHallVerificationCutset
   ≡ Cutset.recognitionConditionResidual
 unifiedTheoryStopsAtRecognitionCondition = refl
+
+------------------------------------------------------------------------
+-- Consumer-relative closure: authoritative proposition mapping may close a
+-- source consumer without adjudicating the final legal doctrine.
+------------------------------------------------------------------------
+
+continuitySourceMapConsumerCloses :
+  Consumer.goalStatus Consumer.listSourceBackedContinuityPropositions Cutset.postHallVerificationCutset
+  ≡ Consumer.goalClosed
+continuitySourceMapConsumerCloses = refl
+
+extinguishmentSourceMapConsumerCloses :
+  Consumer.goalStatus Consumer.listSourceBackedExtinguishmentPropositions Cutset.postHallVerificationCutset
+  ≡ Consumer.goalClosed
+extinguishmentSourceMapConsumerCloses = refl
+
+finalContinuityDoctrineConsumerStillOpen :
+  Consumer.goalStatus Consumer.adjudicateFinalContinuityDoctrine Cutset.postHallVerificationCutset
+  ≡ Consumer.goalOpen
+finalContinuityDoctrineConsumerStillOpen = refl
+
+unifiedDoctrineConsumerStillOpen :
+  Consumer.goalStatus Consumer.adjudicateUnifiedRecognitionDoctrine Cutset.postHallVerificationCutset
+  ≡ Consumer.goalOpen
+unifiedDoctrineConsumerStillOpen = refl
 
 ------------------------------------------------------------------------
 -- Different open fibres compile to different work kinds.
@@ -77,8 +103,10 @@ continuityCannotPayRecognitionCondition : Minimal.ExistenceContinuityProvesRecog
 continuityCannotPayRecognitionCondition = Minimal.continuityDoesNotProveRecognitionCondition
 extinguishmentCannotPayRecognitionEvidence : Cutset.ExtinguishmentClosurePaysRecognitionEvidence → ⊥
 extinguishmentCannotPayRecognitionEvidence = Cutset.extinguishmentDoesNotPayRecognitionEvidence
-narrowClosureDoesNotRequireUnifiedTheory : Cutset.NarrowClosureRequiresUnifiedTheory → ⊥
-narrowClosureDoesNotRequireUnifiedTheory = Cutset.narrowClosureDoesNotRequireUnifiedTheory
+sourceMapClosureDoesNotAdjudicateDoctrine : Consumer.SourceMapClosureMeansFinalDoctrine → ⊥
+sourceMapClosureDoesNotAdjudicateDoctrine = Consumer.sourceMapClosureDoesNotMeanFinalDoctrine
+verifiedQuotationDoesNotBecomeAdoptedRule : Consumer.VerifiedQuotationMeansAdoptedRule → ⊥
+verifiedQuotationDoesNotBecomeAdoptedRule = Consumer.verifiedQuotationDoesNotMeanAdoptedRule
 oneGlobalDoctrinalCutsetDoesNotFitEveryQuery : Cutset.OneGlobalDoctrinalCutsetFitsEveryQuery → ⊥
 oneGlobalDoctrinalCutsetDoesNotFitEveryQuery = Cutset.oneGlobalCutsetDoesNotFitEveryQuery
 oneProbeDoesNotFitEveryAxis : Hyper.OneProbeFitsAllMinimalAxes → ⊥
