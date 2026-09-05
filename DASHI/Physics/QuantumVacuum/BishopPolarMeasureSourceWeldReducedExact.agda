@@ -13,12 +13,6 @@ import DASHI.Physics.QuantumVacuum.BishopPolarJacobianSameTrigWeldCompilerExact 
 
 ------------------------------------------------------------------------
 -- REDUCED POLAR MEASURE WELD
---
--- The local calculus no longer belongs in the change-of-variables obligation:
--- one trig-object weld already compiles pointwise derivative entries and
--- det(D Phi)=r on the Bishop carrier.  What remains is genuinely measure
--- theoretic: domain, singular set, measurability/integrability, measure
--- normalization, and same Casimir integrand.
 ------------------------------------------------------------------------
 
 sourceClaim : Transport.SourceBackedClaim
@@ -74,14 +68,16 @@ record ReducedBishopPolarMeasureTarget
 open ReducedBishopPolarMeasureTarget public
 
 pointwiseBishopJacobian :
-  ∀ {P W} →
+  ∀ {P : Trig.Round11FactorInterchangeProblem}
+    {W : TrigWeld.Round11ClassicalTrigObjectWeld P} →
   (radius theta : Bishop.ℝ) →
   Jacobian.BishopPolarJacobianReceipt P radius theta
 pointwiseBishopJacobian {W = W} =
   Jacobian.compileBishopPolarJacobian W
 
 asLocalTarget :
-  ∀ {P W} →
+  ∀ {P : Trig.Round11FactorInterchangeProblem}
+    {W : TrigWeld.Round11ClassicalTrigObjectWeld P} →
   ReducedBishopPolarMeasureTarget P W →
   Transport.LocalTheoremTarget sourceClaim
 asLocalTarget T = record
@@ -92,7 +88,8 @@ asLocalTarget T = record
   }
 
 compileLocalPolarMeasureChange :
-  ∀ {P W} →
+  ∀ {P : Trig.Round11FactorInterchangeProblem}
+    {W : TrigWeld.Round11ClassicalTrigObjectWeld P} →
   (T : ReducedBishopPolarMeasureTarget P W) →
   LocalPolarMeasureChange T
 compileLocalPolarMeasureChange T =
