@@ -10,7 +10,12 @@ module DASHI.Analysis.NonArchimedeanSpectralBidiObligationExact where
 --   * cyclotomic amplitude exponent sigma_cyc = log_2 |W_C| = 1/2;
 --   * Prolate/Archimedean critical-line parameter sigma = 1/2.
 --
--- Equal numerals are not a cross-lane same-object theorem.
+-- The monograph additionally writes 2^(-sigma) rho(L_2) = 1.  The formal
+-- source shows that the sqrt-two quantity is the primitive twisted-circle
+-- radius, not a proved spectral radius of the full continuous transfer
+-- operator.  An anchor claim therefore needs an explicit sector/radius object
+-- plus a theorem identifying the sigma solved by that local equation with the
+-- Prolate spectral parameter.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -75,7 +80,7 @@ cyclotomicSigmaClaim : BidiClaim
 cyclotomicSigmaClaim =
   bidiClaim cyclotomicSigmaHalf
     "cyclotomic local amplitude exponent sigma_cyc = log_2 |W_C| equals 1/2"
-    "orbit magnitude sqrt two + source log2_sqrt_two theorem"
+    "primitive twisted radius sqrt two + source log2_sqrt_two theorem"
     true
 
 prolateSigmaClaim : BidiClaim
@@ -88,8 +93,8 @@ prolateSigmaClaim =
 sigmaAnchorClaim : BidiClaim
 sigmaAnchorClaim =
   bidiClaim cyclotomicAnchorsProlateHalf
-    "cyclotomic sigma_cyc=1/2 anchors the Prolate critical-line sigma=1/2"
-    "explicit cross-lane map + compatibility theorem"
+    "cyclotomic sigma_cyc=1/2 algebraically anchors the Prolate critical-line sigma=1/2"
+    "explicit primitive-sector radius semantics + cross-lane sigma compatibility theorem"
     false
 
 orbitProductClaim : BidiClaim
@@ -121,8 +126,9 @@ ropeOptimalityClaim = bidiClaim ropeOptimality
 data MissingObligation : Set where
   needDirectedRadiusSigmaDefinition : MissingObligation
   needDirectedRadiusSigmaScalingTheorem : MissingObligation
-  needCyclotomicToProlateSigmaMap : MissingObligation
-  needCyclotomicToProlateCompatibility : MissingObligation
+  needAnchorSectorRadiusDefinition : MissingObligation
+  needAnchorSectorRadiusSqrtTwoReceipt : MissingObligation
+  needCyclotomicToProlateSigmaCompatibility : MissingObligation
   needGraphToDecompositionProducer : MissingObligation
   needDepthDecayProducer : MissingObligation
   needBoundaryEntropySameObjectWeld : MissingObligation
@@ -137,7 +143,10 @@ compileMissing directedRadiusSigmaHalf =
 compileMissing cyclotomicSigmaHalf = []
 compileMissing prolateCriticalLineHalf = []
 compileMissing cyclotomicAnchorsProlateHalf =
-  needCyclotomicToProlateSigmaMap ∷ needCyclotomicToProlateCompatibility ∷ []
+  needAnchorSectorRadiusDefinition ∷
+  needAnchorSectorRadiusSqrtTwoReceipt ∷
+  needCyclotomicToProlateSigmaCompatibility ∷
+  []
 compileMissing orbitProduct = []
 compileMissing arbitraryDagCover = needGraphToDecompositionProducer ∷ []
 compileMissing depthDecaySparsity = needDepthDecayProducer ∷ []
@@ -171,5 +180,8 @@ directedRadiusSigmaExactCutset = refl
 
 sigmaAnchorExactCutset :
   compileMissing cyclotomicAnchorsProlateHalf
-  ≡ needCyclotomicToProlateSigmaMap ∷ needCyclotomicToProlateCompatibility ∷ []
+  ≡ needAnchorSectorRadiusDefinition ∷
+    needAnchorSectorRadiusSqrtTwoReceipt ∷
+    needCyclotomicToProlateSigmaCompatibility ∷
+    []
 sigmaAnchorExactCutset = refl
