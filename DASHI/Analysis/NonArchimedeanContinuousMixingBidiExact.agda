@@ -3,18 +3,17 @@ module DASHI.Analysis.NonArchimedeanContinuousMixingBidiExact where
 ------------------------------------------------------------------------
 -- CONTINUOUS / FINITE L2 MIXING BIDI
 --
--- `L2Mixing.lean` defines P_n and L2_0, then stores the one-step mean-zero
--- contraction as a field of `L2MixingAssumptions`.  The source theorem
--- `L2_decay_bound` simply returns that field.
+-- `L2Mixing.lean` stores the one-step mean-zero contraction as a field of
+-- `L2MixingAssumptions`; `L2_decay_bound` simply returns that field.
 --
--- To obtain a genuine geometric n-step decay theorem from that shape one needs
--- two source-specific receipts:
+-- Mean-zero invariance is no longer a live leaf: the finite Collatz branches
+-- x -> 3x and x -> 3x-1 are permutations because the source already constructs
+-- inv3 and proves three_mul_inv3 = 1.  Finite sum reindexing gives mass
+-- preservation, and the generic zero-fibre compiler gives P_n(L2_0) subset L2_0.
 --
---   1. P_n preserves L2_0;
---   2. the one-step contraction is proved rather than assumed.
---
--- Once those exist, geometric iteration is generic and already has a concrete
--- DASHI precedent in BalabanSelectedBackgroundResidualPowerDecayExact.
+-- Hence the only live analytic producer for geometric L2 decay is the actual
+-- derivation of the one-step 1/sqrt(2) contraction.  Geometric iteration is
+-- repo-reusable.  Correlation decay additionally needs a consumer weld.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -31,14 +30,14 @@ data MixingLeaf : Set where
 
 
 data MixingStatus : Set where
-  sourceOwned : MixingStatus
+  compiled : MixingStatus
   sourceAssumed : MixingStatus
   live : MixingStatus
   repoReusable : MixingStatus
   downstream : MixingStatus
 
 mixingStatus : MixingLeaf → MixingStatus
-mixingStatus meanZeroInvariant = live
+mixingStatus meanZeroInvariant = compiled
 mixingStatus oneStepMeanZeroContraction = sourceAssumed
 mixingStatus geometricIteration = repoReusable
 mixingStatus correlationIdentification = live
@@ -46,22 +45,23 @@ mixingStatus unconditionalExponentialMixing = downstream
 
 
 data MixingObligation : Set where
-  needMeanZeroInvariance : MixingObligation
   needUnconditionalOneStepMeanZeroContraction : MixingObligation
   needCorrelationConsumerWeld : MixingObligation
 
-mixingCutset : List MixingObligation
-mixingCutset =
-  needMeanZeroInvariance ∷
+l2MixingCutset : List MixingObligation
+l2MixingCutset =
+  needUnconditionalOneStepMeanZeroContraction ∷ []
+
+correlationDecayCutset : List MixingObligation
+correlationDecayCutset =
   needUnconditionalOneStepMeanZeroContraction ∷
-  needCorrelationConsumerWeld ∷
-  []
+  needCorrelationConsumerWeld ∷ []
 
 record MixingFirewall : Set where
   constructor mixingFirewall
   field
     assumptionFieldCountsAsDerivedSpectralBound : Bool
-    oneStepBoundCanIterateWithoutInvariantSubspace : Bool
+    meanZeroInvarianceStillNeedsSearch : Bool
     geometricNormDecayAutomaticallyEqualsCorrelationDecay : Bool
     genericIterationNeedsReproof : Bool
 
@@ -75,11 +75,9 @@ assumedOneStepBoundNotPromoted :
   ≡ false
 assumedOneStepBoundNotPromoted = refl
 
-iterationNeedsInvariantSubspace :
-  MixingFirewall.oneStepBoundCanIterateWithoutInvariantSubspace
-    canonicalMixingFirewall
-  ≡ false
-iterationNeedsInvariantSubspace = refl
+meanZeroSearchNowPruned :
+  MixingFirewall.meanZeroInvarianceStillNeedsSearch canonicalMixingFirewall ≡ false
+meanZeroSearchNowPruned = refl
 
 genericIterationIsReusable :
   MixingFirewall.genericIterationNeedsReproof canonicalMixingFirewall ≡ false
