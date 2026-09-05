@@ -13,12 +13,6 @@ import DASHI.Physics.QuantumVacuum.Casimir720FactorisationBidiExact as C720
 
 ------------------------------------------------------------------------
 -- PROOF-BEARING LONGITUDINAL DEFECT -> ZETA TRANSFORMATION TRACE
---
--- Numerical agreement is not same-object identity.  This trace pins one
--- literal parameter/integrand of the discrete-minus-continuum Casimir defect,
--- maps its scalar value into the zeta carrier, and requires inhabited receipts
--- that the discrete term, continuum reference, subtraction convention and
--- finite-part transformation are the same physical/analytic object.
 ------------------------------------------------------------------------
 
 record LongitudinalDefectTransformationTrace
@@ -39,6 +33,9 @@ record LongitudinalDefectTransformationTrace
     transformedDefectIsTransportedOriginal :
       CasimirZeta.transformedDefectValue P ≡
       scalarToZetaValue originalDefectValue
+
+    SameLiteralLongitudinalDefect : Set
+    sameLiteralLongitudinalDefectEvidence : SameLiteralLongitudinalDefect
 
     DiscreteLongitudinalTermPreserved : Set
     discreteLongitudinalTermPreservedEvidence :
@@ -140,14 +137,21 @@ asLegacyZeta120Receipt {P = P} {T = T} Z = record
   ; C720.longitudinalInput = Difference.Integrand (CasimirZeta.defect P)
   ; C720.zetaMinusThreeValue = CasimirZeta.transformedDefectValue P
   ; C720.analyticContinuationOrEquivalentFinitePart =
-      Analytic.analyticContinuationAtMinusThree (localZetaReceipt Z)
+      Analytic.analyticContinuationExistsAtMinusThree
+        (Analytic.analytic (localZetaReceipt Z))
   ; C720.zetaMinusThreeEqualsOneOver120 =
       CasimirZeta.transformedDefectValue P ≡ problemOneOver120Value Z
   ; C720.sameCasimirLongitudinalDefect =
-      LongitudinalDefectTransformationTrace kernel P
+      SameLiteralLongitudinalDefect T
   ; C720.reading =
       "Legacy 1/120 metadata projected from a proof-bearing literal-defect transformation trace."
   }
+
+sameLiteralDefectProof :
+  ∀ {kernel P} →
+  (T : LongitudinalDefectTransformationTrace kernel P) →
+  SameLiteralLongitudinalDefect T
+sameLiteralDefectProof = sameLiteralLongitudinalDefectEvidence
 
 ------------------------------------------------------------------------
 -- Reverse proof search.
