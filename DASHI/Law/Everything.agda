@@ -11,4 +11,6 @@ import DASHI.Law.IndependentEvidenceProvenanceExact
 import DASHI.Law.EvidenceProvenanceDependencyDagExact
 import DASHI.Law.CoerciveEncounterFixtureCompilerExact
 import DASHI.Law.CoerciveEncounterGenericReceiptBridgeExact
+import DASHI.Law.CoerciveEncounterPopulationAggregationExact
+import DASHI.Law.SystemicCoercivePracticePromotionGateExact
 import DASHI.Law.CoerciveContactAuditValidation
