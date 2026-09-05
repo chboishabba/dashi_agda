@@ -7,6 +7,7 @@ open import Relation.Binary.PropositionalEquality using (cong; trans; _≡_)
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAlgebraProgram as Hermitian
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws as Additive
+import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact as Cross
 import DASHI.Physics.Closure.NSTriadKNComplex3ScalarTripleOrbitRound93Exact as Triple
 import DASHI.Physics.Closure.NSTriadKNExternalWaleffeSelectedSwapAntisymmetryRound118Exact as CrossSwap
 import DASHI.Physics.Closure.NSTriadKNPhysicalTransferOutputPhaseSignFlipRound88Exact as RealSign
@@ -50,16 +51,14 @@ baseAmplitude :
   ∀ {r : Level} {F : C3.RealField r} →
   C3.Complex3 F → C3.Complex3 F → C3.Complex3 F → C3.Complex F
 baseAmplitude U Q K =
-  C3.hermitianPairing3 K
-    (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross U Q)
+  C3.hermitianPairing3 K (Cross.complex3Cross U Q)
 
 reversedRealityMateAmplitude :
   ∀ {r : Level} {F : C3.RealField r} →
   C3.Complex3 F → C3.Complex3 F → C3.Complex3 F → C3.Complex F
 reversedRealityMateAmplitude U Q K =
   C3.hermitianPairing3 Q
-    (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross
-      (C3.complex3Conjugate U) K)
+    (Cross.complex3Cross (C3.complex3Conjugate U) K)
 
 reversedRealityMateIsNegativeConjugateBase :
   ∀ {r : Level} {F : C3.RealField r}
@@ -72,8 +71,7 @@ reversedRealityMateIsNegativeConjugateBase U Q K =
       (CrossSwap.crossAnticommutative (C3.complex3Conjugate U) K))
     (trans
       (Additive.hermitianPairingNegateRight Q
-        (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross
-          K (C3.complex3Conjugate U)))
+        (Cross.complex3Cross K (C3.complex3Conjugate U)))
       (cong C3.complexNegate
         (Triple.qEnergyAmplitudeIsConjugateBase U Q K)))
 
@@ -93,8 +91,7 @@ middleAmplitude :
   C3.Complex3 F → C3.Complex3 F → C3.Complex3 F → C3.Complex F
 middleAmplitude P U Q =
   C3.hermitianPairing3 P
-    (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross
-      U (C3.complex3Conjugate Q))
+    (Cross.complex3Cross U (C3.complex3Conjugate Q))
 
 middleSwapIsNegative :
   ∀ {r : Level} {F : C3.RealField r}
