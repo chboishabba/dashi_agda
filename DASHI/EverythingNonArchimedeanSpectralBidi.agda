@@ -36,6 +36,7 @@ import DASHI.Analysis.NonArchimedeanTauOddCharacterRestrictionBidiExact
 import DASHI.Analysis.NonArchimedeanOddCharacterFourierRechartCorrectionExact
 import DASHI.Analysis.NonArchimedeanOddCharacterDFTSourceReuseExact
 import DASHI.Analysis.NonArchimedeanProductDFTOddCharacterNoGoExact
+import DASHI.Analysis.NonArchimedeanTwistedTauOddFunctionEquivalenceExact
 import DASHI.Analysis.NonArchimedeanConcreteMonomialWeldCompilerExact
 
 -- Arithmetic orbit and signed-return closure.  The stronger checked source
@@ -44,6 +45,7 @@ import DASHI.Analysis.NonArchimedeanConcreteMonomialWeldCompilerExact
 -- pruned from the critical path.
 import DASHI.Analysis.NonArchimedeanOddOrbitDFTRechartCorrectionExact
 import DASHI.Analysis.NonArchimedeanOddOrbitEquivalenceCompilerExact
+import DASHI.Analysis.NonArchimedeanCanonicalOddOrbitClosureReuseExact
 import DASHI.Analysis.NonArchimedeanPowerOrbitSumBidiExact
 import DASHI.Analysis.NonArchimedeanThreePowerOddCoefficientReuseExact
 import DASHI.Analysis.NonArchimedeanNegativeOrbitConjugationBidiExact
