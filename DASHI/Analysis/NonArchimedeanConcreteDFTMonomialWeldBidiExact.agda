@@ -11,10 +11,10 @@ module DASHI.Analysis.NonArchimedeanConcreteDFTMonomialWeldBidiExact where
 --   * (F tensor I_2)(F tensor I_2)^* = I
 --   * the literal conjugated matrix
 --
--- Therefore the highest-alpha missing object is not another Fourier transform.
--- It is the explicit equality between that SAME conjugated concrete matrix and
--- the claimed character/monomial operator, with the character labels aligned
--- to the same finite-group indices.
+-- DASHI additionally already owns finite matrix action faithfulness.  Hence
+-- entrywise expansion of the full conjugated matrix is only a fallback route:
+-- equality on every genuine character-basis vector compiles to literal matrix
+-- equality.  The live source-specific work is semantic label attachment.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -23,12 +23,15 @@ open import Agda.Builtin.List using (List; []; _∷_)
 
 
 data ConcreteDFTMonomialObligation : Set where
-  computeConcreteConjugatedEntries : ConcreteDFTMonomialObligation
-  identifyCharacterFrequencyLabels : ConcreteDFTMonomialObligation
+  identifyOddCharacterTauOddSemantics : ConcreteDFTMonomialObligation
+  constructArithmeticOddOrbitChart : ConcreteDFTMonomialObligation
+  identifyTwistedCoordinatesWithCharacterBasis : ConcreteDFTMonomialObligation
+  proveSameActionOnCompleteBasis : ConcreteDFTMonomialObligation
   proveConcreteMonomialMatrixEquality : ConcreteDFTMonomialObligation
   attachOrbitPeriodToSameLabels : ConcreteDFTMonomialObligation
   attachOrbitWeightToSameLabels : ConcreteDFTMonomialObligation
 
+  computeConcreteConjugatedEntries : ConcreteDFTMonomialObligation
   rebuildDFTMatrix : ConcreteDFTMonomialObligation
   rebuildIndexEquivalence : ConcreteDFTMonomialObligation
   rebuildUnitarity : ConcreteDFTMonomialObligation
@@ -38,15 +41,20 @@ data ConcreteDFTMonomialObligation : Set where
 data ObligationDisposition : Set where
   live : ObligationDisposition
   downstream : ObligationDisposition
+  compiled : ObligationDisposition
+  fallback : ObligationDisposition
   pruned : ObligationDisposition
   forbiddenShortcut : ObligationDisposition
 
 obligationDisposition : ConcreteDFTMonomialObligation → ObligationDisposition
-obligationDisposition computeConcreteConjugatedEntries = live
-obligationDisposition identifyCharacterFrequencyLabels = live
-obligationDisposition proveConcreteMonomialMatrixEquality = downstream
+obligationDisposition identifyOddCharacterTauOddSemantics = live
+obligationDisposition constructArithmeticOddOrbitChart = live
+obligationDisposition identifyTwistedCoordinatesWithCharacterBasis = live
+obligationDisposition proveSameActionOnCompleteBasis = downstream
+obligationDisposition proveConcreteMonomialMatrixEquality = compiled
 obligationDisposition attachOrbitPeriodToSameLabels = downstream
 obligationDisposition attachOrbitWeightToSameLabels = downstream
+obligationDisposition computeConcreteConjugatedEntries = fallback
 obligationDisposition rebuildDFTMatrix = pruned
 obligationDisposition rebuildIndexEquivalence = pruned
 obligationDisposition rebuildUnitarity = pruned
@@ -102,16 +110,21 @@ open ConcreteSpectralCircleProducer public
 
 highestAlphaDFTMonomialPath : List ConcreteDFTMonomialObligation
 highestAlphaDFTMonomialPath =
-  computeConcreteConjugatedEntries ∷
-  identifyCharacterFrequencyLabels ∷
-  proveConcreteMonomialMatrixEquality ∷
+  constructArithmeticOddOrbitChart ∷
+  identifyOddCharacterTauOddSemantics ∷
+  identifyTwistedCoordinatesWithCharacterBasis ∷
+  proveSameActionOnCompleteBasis ∷
   attachOrbitPeriodToSameLabels ∷
   attachOrbitWeightToSameLabels ∷
   []
 
-rebuildDFTPruned :
-  obligationDisposition rebuildDFTMatrix ≡ pruned
-rebuildDFTPruned = refl
+entrywiseExpansionIsFallback :
+  obligationDisposition computeConcreteConjugatedEntries ≡ fallback
+entrywiseExpansionIsFallback = refl
+
+matrixEqualityIsCompiled :
+  obligationDisposition proveConcreteMonomialMatrixEquality ≡ compiled
+matrixEqualityIsCompiled = refl
 
 assumeFinalMagnitudeForbidden :
   obligationDisposition assumeEigenvalueMagnitude ≡ forbiddenShortcut
@@ -124,9 +137,10 @@ record BidiBoundary : Set where
     sourceDFTBasisOwned : Bool
     sourceDFTUnitarityOwned : Bool
     sourceConcreteConjugatedMatrixOwned : Bool
+    finiteBasisActionFaithfulnessOwnedInDASHI : Bool
     concreteConjugatedToMonomialEqualityOwned : Bool
     finalMagnitudeMayBeUsedAsProducerForItsOwnDerivation : Bool
 
 canonicalBidiBoundary : BidiBoundary
 canonicalBidiBoundary =
-  bidiBoundary true true true true false false
+  bidiBoundary true true true true true false false
