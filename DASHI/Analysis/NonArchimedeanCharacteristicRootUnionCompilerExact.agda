@@ -14,9 +14,11 @@ module DASHI.Analysis.NonArchimedeanCharacteristicRootUnionCompilerExact where
 -- record that permits the zero vector.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
+open import Data.Product using (Σ; _,_)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
+open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
 
 record ZeroProductScalar (Scalar : Set) : Set₁ where
   field
@@ -49,8 +51,6 @@ LeftRoot laws data =
   Σ (Lambda data) (λ lambda → chiLeft data lambda ≡ zero laws)
 RightRoot laws data =
   Σ (Lambda data) (λ lambda → chiRight data lambda ≡ zero laws)
-
-open import Data.Product using (Σ; _,_)
 
 wholeRootSplits :
   ∀ {Scalar}
@@ -97,11 +97,9 @@ rightRootInjectsWhole laws data lambda hRight =
 record RootUnionBoundary : Set where
   constructor rootUnionBoundary
   field
-    zeroVectorEigenpairShortcutAllowed : Agda.Builtin.Bool.Bool
-    fredholmRootUnionEqualsSpectrumWithoutReciprocalCheck : Agda.Builtin.Bool.Bool
-    characteristicFactorizationClosesFiniteRootUnion : Agda.Builtin.Bool.Bool
-
-open import Agda.Builtin.Bool using (Bool; false; true)
+    zeroVectorEigenpairShortcutAllowed : Bool
+    fredholmRootUnionEqualsSpectrumWithoutReciprocalCheck : Bool
+    characteristicFactorizationClosesFiniteRootUnion : Bool
 
 canonicalRootUnionBoundary : RootUnionBoundary
 canonicalRootUnionBoundary = rootUnionBoundary false false true
