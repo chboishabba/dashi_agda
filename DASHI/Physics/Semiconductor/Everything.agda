@@ -5,3 +5,4 @@ module DASHI.Physics.Semiconductor.Everything where
 -- technical/scientific producers.
 
 import DASHI.Physics.Semiconductor.Lithography.Everything
+import DASHI.Physics.Semiconductor.EUVSource.Everything
