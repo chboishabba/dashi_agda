@@ -1,0 +1,16 @@
+module DASHI.Culture.MissingDeceasedOpenScienceEverything where
+
+-- Focused aggregate for the open-science / knowledge-release lane.
+
+import DASHI.Core.ViewpointProvenanceBidiExact
+import DASHI.Core.OpenScienceKnowledgeReleaseBidiExact
+import DASHI.Core.OpenScienceArtifactGranularityBidiExact
+import DASHI.Core.TechnicalExternalisationDepthBidiExact
+import DASHI.Core.ReferencePopulationRosterEnrichmentExact
+import DASHI.Core.SelectorDiscriminationSearchExact
+import DASHI.Culture.MissingDeceasedViewpointEvidenceExact
+import DASHI.Culture.MissingDeceasedOpenScienceBidiExact
+import DASHI.Culture.MissingDeceasedOpenScienceAcquisition2026_09_05Exact
+import DASHI.Culture.MissingDeceasedTechnicalExternalisationExact
+import DASHI.Culture.MissingDeceasedRosterEnrichmentDesignExact
+import DASHI.Culture.MissingDeceasedHypothesisDiscriminatorMatrixExact
