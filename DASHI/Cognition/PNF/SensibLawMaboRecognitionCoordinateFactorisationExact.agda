@@ -124,11 +124,7 @@ requiredCoordinates identifyRecognitionByConductRule = crownRecognitionRequireme
 requiredCoordinates identifyEnforceabilityStructure = radicalTitleCompatibility ∷ enforceabilityAgainstCrown ∷ []
 requiredCoordinates identifyExactUnifiedTheory = antecedentRightExistence ∷ continuityAcrossSovereignty ∷ radicalTitleCompatibility ∷ enforceabilityAgainstCrown ∷ crownRecognitionRequirement ∷ recognitionByCrownConduct ∷ evidentialInferenceOfRecognition ∷ authorityInterpretation ∷ []
 
-data CoordinateState : Set where
-  coordinateUnassessed
-  coordinateCandidateSupported
-  coordinateResolved
-  : CoordinateState
+data CoordinateState : Set where coordinateUnassessed coordinateCandidateSupported coordinateResolved : CoordinateState
 
 record FactorisedRecognitionState : Set where
   constructor factorisedRecognitionState
@@ -142,8 +138,7 @@ record FactorisedRecognitionState : Set where
 open FactorisedRecognitionState public
 
 currentFactorisedState : FactorisedRecognitionState
-currentFactorisedState = factorisedRecognitionState
-  coordinateCandidateSupported coordinateCandidateSupported coordinateCandidateSupported coordinateCandidateSupported coordinateUnassessed
+currentFactorisedState = factorisedRecognitionState coordinateCandidateSupported coordinateCandidateSupported coordinateCandidateSupported coordinateCandidateSupported coordinateUnassessed
   "factorised from current Brennan/Dawson primary-text and reviewed Calder/Amodu authority-use receipts; no coordinate promoted to final adjudicative resolution"
 
 data RecognitionByConductProvesContinuity : Set where
