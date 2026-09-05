@@ -22,4 +22,6 @@ import DASHI.Law.DeploymentConditionedSelectionBidiExact
 import DASHI.Law.PartialIdentificationMissingnessBoundsExact
 import DASHI.Law.ExactIntervalRatioSeparatorExact
 import DASHI.Law.RobustSelectionDisparityBoundsBidiExact
+import DASHI.Law.MissingnessMechanismFibreExact
+import DASHI.Law.MissingnessAssumptionBoundTransportBidiExact
 import DASHI.Law.CoerciveContactAuditValidation
