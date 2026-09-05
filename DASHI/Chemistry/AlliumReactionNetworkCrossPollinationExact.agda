@@ -3,6 +3,7 @@ module DASHI.Chemistry.AlliumReactionNetworkCrossPollinationExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Chemistry.TransitionKernel as TK
@@ -18,8 +19,9 @@ import DASHI.Chemistry.AlliumMolecularIdentityExact as Identity
 -- Pathway anchors:
 --   Borlinghaus et al. 2014 PMID 25153873
 --   Shimon et al. 2007 PMID 17174334
---   alliinase: alliin -> allyl sulfenic acid + pyruvate + ammonia;
---   two allyl sulfenic-acid molecules then condense nonenzymatically to allicin.
+--   alliinase: alliin + H2O -> allyl sulfenic acid + pyruvic acid + NH3;
+--   two allyl sulfenic-acid molecules then condense nonenzymatically to
+--   allicin + H2O.
 --
 -- Allicin-thiol anchor:
 --   Borlinghaus et al. 2021 PMID 33801955.
@@ -45,6 +47,12 @@ alliinSpecies = literatureSpecies
   "C6H11NO3S"
   "substrate for alliinase"
 
+waterSpecies : TK.Species
+waterSpecies = literatureSpecies
+  "water"
+  "H2O"
+  "reaction/solvent participant"
+
 allylSulfenicAcidSpecies : TK.Species
 allylSulfenicAcidSpecies = literatureSpecies
   "allyl sulfenic acid"
@@ -57,16 +65,16 @@ allicinSpecies = literatureSpecies
   "C6H10OS2"
   "reactive thiosulfinate"
 
-pyruvateSpecies : TK.Species
-pyruvateSpecies = literatureSpecies
-  "pyruvate"
-  "C3H3O3- / acid-base state context dependent"
+pyruvicAcidSpecies : TK.Species
+pyruvicAcidSpecies = literatureSpecies
+  "pyruvic acid / pyruvate acid-base family"
+  "C3H4O3 neutral bookkeeping form"
   "alliinase coproduct"
 
 ammoniaSpecies : TK.Species
 ammoniaSpecies = literatureSpecies
-  "ammonia/ammonium"
-  "NH3/NH4+ depending on pH"
+  "ammonia / ammonium acid-base family"
+  "NH3 neutral bookkeeping form"
   "alliinase coproduct"
 
 genericThiolSpecies : TK.Species
@@ -88,21 +96,60 @@ alliinaseSpecies = literatureSpecies
   "PLP-dependent C-S lyase"
 
 ------------------------------------------------------------------------
--- Qualitative transition records. The alliinase entry intentionally does not
--- pretend one aggregate Transition is an atom-balanced elementary reaction;
--- it records the experimentally established pathway stage and leaves detailed
--- elementary stoichiometry to the molecular stoichiometric bridge.
+-- Exact finite atom-count checks for the two resolved small-molecule pathway
+-- stages.  These are arithmetic checks of the neutral bookkeeping equations,
+-- not kinetic or mechanistic completeness claims.
+------------------------------------------------------------------------
+
+record CHNOSBalance : Set where
+  constructor chnosBalance
+  field
+    cLeft cRight : Nat
+    hLeft hRight : Nat
+    nLeft nRight : Nat
+    oLeft oRight : Nat
+    sLeft sRight : Nat
+    carbonBalanced : cLeft ≡ cRight
+    hydrogenBalanced : hLeft ≡ hRight
+    nitrogenBalanced : nLeft ≡ nRight
+    oxygenBalanced : oLeft ≡ oRight
+    sulfurBalanced : sLeft ≡ sRight
+
+alliinaseNeutralBalance : CHNOSBalance
+alliinaseNeutralBalance = chnosBalance
+  6 6
+  (11 + 2) (6 + 4 + 3)
+  1 1
+  (3 + 1) (1 + 3)
+  1 1
+  refl refl refl refl refl
+
+sulfenicCondensationBalance : CHNOSBalance
+sulfenicCondensationBalance = chnosBalance
+  (3 + 3) 6
+  (6 + 6) (10 + 2)
+  0 0
+  (1 + 1) (1 + 1)
+  (1 + 1) 2
+  refl refl refl refl refl
+
+------------------------------------------------------------------------
+-- Qualitative transition records.  The two biosynthetic stages above now have
+-- atom-count receipts.  The generic thiol transition remains family-level
+-- because R-SH denotes many chemically distinct biological targets.
 ------------------------------------------------------------------------
 
 alliinaseStep : TK.Transition
 alliinaseStep = record
-  { transitionId = "alliinase cleavage: alliin -> allyl sulfenic acid + pyruvate + ammonia"
+  { transitionId = "alliinase cleavage: alliin + H2O -> allyl sulfenic acid + pyruvic acid + NH3"
   ; transitionKind = TK.chemicalReaction
-  ; reactants = TK.record { species = alliinSpecies ; coefficient = 1 } ∷ []
+  ; reactants =
+      record { species = alliinSpecies ; coefficient = 1 } ∷
+      record { species = waterSpecies ; coefficient = 1 } ∷ []
   ; products =
-      TK.record { species = allylSulfenicAcidSpecies ; coefficient = 1 } ∷
-      TK.record { species = pyruvateSpecies ; coefficient = 1 } ∷
-      TK.record { species = ammoniaSpecies ; coefficient = 1 } ∷ []
+      record { species = allylSulfenicAcidSpecies ; coefficient = 1 } ∷
+      record { species = pyruvicAcidSpecies ; coefficient = 1 } ∷
+      record { species = ammoniaSpecies ; coefficient = 1 } ∷ []
   ; catalysts = alliinaseSpecies ∷ []
   ; rateLaw = TK.unknownRate
   ; condition = record
@@ -116,16 +163,18 @@ alliinaseStep = record
 
 sulfenicCondensation : TK.Transition
 sulfenicCondensation = record
-  { transitionId = "2 allyl sulfenic acid -> allicin + water (condensation representation)"
+  { transitionId = "2 allyl sulfenic acid -> allicin + H2O"
   ; transitionKind = TK.chemicalReaction
-  ; reactants = TK.record { species = allylSulfenicAcidSpecies ; coefficient = 2 } ∷ []
-  ; products = TK.record { species = allicinSpecies ; coefficient = 1 } ∷ []
+  ; reactants = record { species = allylSulfenicAcidSpecies ; coefficient = 2 } ∷ []
+  ; products =
+      record { species = allicinSpecies ; coefficient = 1 } ∷
+      record { species = waterSpecies ; coefficient = 1 } ∷ []
   ; catalysts = []
   ; rateLaw = TK.unknownRate
   ; condition = record
       { conditionLabel = "spontaneous sulfenic-acid condensation"
       ; environment = TK.emptyEnvironment
-      ; guardExpression = "allyl sulfenic acid co-present; solvent proton/water bookkeeping unresolved here"
+      ; guardExpression = "two allyl sulfenic-acid equivalents co-present"
       }
   ; reversibility = TK.irreversible
   ; evidence = TK.literatureEstablished
@@ -136,9 +185,9 @@ allicinThiolTransition = record
   { transitionId = "allicin-mediated S-thioallylation of accessible biological thiol"
   ; transitionKind = TK.chemicalReaction
   ; reactants =
-      TK.record { species = allicinSpecies ; coefficient = 1 } ∷
-      TK.record { species = genericThiolSpecies ; coefficient = 1 } ∷ []
-  ; products = TK.record { species = sThioallylatedTargetSpecies ; coefficient = 1 } ∷ []
+      record { species = allicinSpecies ; coefficient = 1 } ∷
+      record { species = genericThiolSpecies ; coefficient = 1 } ∷ []
+  ; products = record { species = sThioallylatedTargetSpecies ; coefficient = 1 } ∷ []
   ; catalysts = []
   ; rateLaw = TK.unknownRate
   ; condition = record
@@ -154,8 +203,8 @@ alliumCoreNetwork : TK.ReactionNetwork
 alliumCoreNetwork = record
   { networkId = "Allium alliin -> allicin -> biological-thiol partial network"
   ; species =
-      alliinSpecies ∷ allylSulfenicAcidSpecies ∷ allicinSpecies ∷
-      pyruvateSpecies ∷ ammoniaSpecies ∷ genericThiolSpecies ∷
+      alliinSpecies ∷ waterSpecies ∷ allylSulfenicAcidSpecies ∷ allicinSpecies ∷
+      pyruvicAcidSpecies ∷ ammoniaSpecies ∷ genericThiolSpecies ∷
       sThioallylatedTargetSpecies ∷ alliinaseSpecies ∷ []
   ; transitions = alliinaseStep ∷ sulfenicCondensation ∷ allicinThiolTransition ∷ []
   ; compartments = []
@@ -178,10 +227,14 @@ record AlliumNetworkBoundary : Set where
     genericThiolTransitionIdentifiesEveryProteinTargetIsFalse :
       genericThiolTransitionIdentifiesEveryProteinTarget ≡ false
 
+    atomBalanceProvesUniqueElementaryMechanism : Bool
+    atomBalanceProvesUniqueElementaryMechanismIsFalse :
+      atomBalanceProvesUniqueElementaryMechanism ≡ false
+
     sourceBackedPathwayCanSeedPreparationModel : Bool
     sourceBackedPathwayCanSeedPreparationModelIsTrue :
       sourceBackedPathwayCanSeedPreparationModel ≡ true
 
 canonicalAlliumNetworkBoundary : AlliumNetworkBoundary
 canonicalAlliumNetworkBoundary = alliumNetworkBoundary
-  false refl false refl false refl true refl
+  false refl false refl false refl false refl true refl
