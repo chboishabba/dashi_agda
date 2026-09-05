@@ -5,5 +5,8 @@ import DASHI.Law.LowTraceCoerciveForceNonReconstructionExact
 import DASHI.Law.CoerciveContactAuditHyperfabricCrossPollinationExact
 import DASHI.Law.CoerciveEncounterTrajectoryBidiExact
 import DASHI.Law.CoerciveEncounterLawfulnessBidiExact
+import DASHI.Law.CoerciveEncounterLawfulnessProductExact
+import DASHI.Law.TemporalAuthorityNonRetroactivityExact
 import DASHI.Law.IndependentEvidenceProvenanceExact
+import DASHI.Law.EvidenceProvenanceDependencyDagExact
 import DASHI.Law.CoerciveContactAuditValidation
