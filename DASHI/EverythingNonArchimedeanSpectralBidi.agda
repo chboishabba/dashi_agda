@@ -26,6 +26,13 @@ import DASHI.Analysis.NonArchimedeanOddOrbitCoordinateChartBidiExact
 import DASHI.Analysis.NonArchimedeanCanonicalOddOrbitProducerBidiExact
 import DASHI.Analysis.NonArchimedeanFullCycleSignedCancellationBidiExact
 import DASHI.Analysis.NonArchimedeanMonomialTraceSpatialBidiExact
+
+-- Sharpened closure route: equality on the genuine odd-character basis is
+-- enough to compile the literal DFT-conjugated matrix equality.
+import DASHI.Analysis.NonArchimedeanCharacterBasisMatrixFaithfulnessReuseExact
+import DASHI.Analysis.NonArchimedeanTauOddCharacterRestrictionBidiExact
+import DASHI.Analysis.NonArchimedeanConcreteMonomialWeldCompilerExact
+import DASHI.Analysis.NonArchimedeanOddOrbitDFTRechartCorrectionExact
 import DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact
 
 -- Optional Monster correspondence x-pollination.  These remain downstream
