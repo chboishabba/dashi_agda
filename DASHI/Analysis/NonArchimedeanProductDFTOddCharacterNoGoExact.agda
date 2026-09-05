@@ -14,7 +14,7 @@ module DASHI.Analysis.NonArchimedeanProductDFTOddCharacterNoGoExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 data Empty : Set where
 
@@ -42,22 +42,12 @@ productDFTCannotEqualOddCharacterDFT :
   productDFT witness ≡ oddCharacterDFT witness → Empty
 productDFTCannotEqualOddCharacterDFT witness matrixEquality =
   oddCharacterCrossEntryNonzero witness
-    (let
-      entryEquality :
-        productDFT witness (crossRow witness) (crossCol witness)
-        ≡ oddCharacterDFT witness (crossRow witness) (crossCol witness)
-      entryEquality =
-        cong
+    (trans
+      (sym
+        (cong
           (λ matrix → matrix (crossRow witness) (crossCol witness))
-          matrixEquality
-    in
-      let
-        -- productEntry = zero and productEntry = oddEntry imply oddEntry = zero
-        open import Relation.Binary.PropositionalEquality using (sym; trans)
-      in
-      trans
-        (sym entryEquality)
-        (productCrossEntryZero witness))
+          matrixEquality))
+      (productCrossEntryZero witness))
 
 record SourceProductDFTNoGoStatus : Set where
   constructor sourceProductDFTNoGoStatus
