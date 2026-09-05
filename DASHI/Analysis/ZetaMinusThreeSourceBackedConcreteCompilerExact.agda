@@ -11,11 +11,6 @@ import DASHI.Analysis.ZetaMinusThreeBernoulliArithmeticExact as Arithmetic
 
 ------------------------------------------------------------------------
 -- SOURCE-BACKED ZETA(-3) -> CONCRETE LOCAL ANALYTIC RECORD
---
--- The source layer used to terminate at detached `Set` receipts.  This owner
--- makes the BIDI transport target the actual concrete analytic records consumed
--- downstream.  The source theorem is still not a machine proof on an arbitrary
--- DASHI carrier: a same-object semantic weld is required explicitly.
 ------------------------------------------------------------------------
 
 eulerMaclaurinSourceClaim : Transport.SourceBackedClaim
@@ -24,38 +19,29 @@ eulerMaclaurinSourceClaim = record
       Euler.eulerMaclaurinRepresentationStated
         Euler.canonicalZetaEulerMaclaurinAuthority
   ; Transport.sourceReceipt = tt
-  ; Transport.sourceName =
-      Euler.sourceName Euler.canonicalZetaEulerMaclaurinAuthority
-  ; Transport.sourceLocator =
-      Euler.sourceLocator Euler.canonicalZetaEulerMaclaurinAuthority
-  ; Transport.reading =
-      "DLMF Euler--Maclaurin continuation source authority, transported only through an explicit local zeta-carrier weld."
+  ; Transport.sourceName = Euler.sourceName Euler.canonicalZetaEulerMaclaurinAuthority
+  ; Transport.sourceLocator = Euler.sourceLocator Euler.canonicalZetaEulerMaclaurinAuthority
+  ; Transport.reading = "DLMF Euler--Maclaurin continuation source authority."
   }
 
 negativeIntegerSourceClaim : Transport.SourceBackedClaim
 negativeIntegerSourceClaim = record
   { Transport.SourceClaim =
-      Special.zetaMinusThreeEqualsMinusB4OverFour
-        Special.nistDLMFZetaMinusThreeAuthority
+      Special.zetaMinusThreeEqualsMinusB4OverFour Special.nistDLMFZetaMinusThreeAuthority
   ; Transport.sourceReceipt = tt
-  ; Transport.sourceName =
-      Special.sourceName Special.nistDLMFZetaMinusThreeAuthority
-  ; Transport.sourceLocator =
-      Special.sourceLocator Special.nistDLMFZetaMinusThreeAuthority
-  ; Transport.reading =
-      "DLMF negative-integer Bernoulli special-value source authority at n=3."
+  ; Transport.sourceName = Special.sourceName Special.nistDLMFZetaMinusThreeAuthority
+  ; Transport.sourceLocator = Special.sourceLocator Special.nistDLMFZetaMinusThreeAuthority
+  ; Transport.reading = "DLMF negative-integer Bernoulli special-value source authority at n=3."
   }
 
 record ConcreteEulerMaclaurinWeld
     (Z : Analytic.RiemannZetaContinuationCarrier) : Set₁ where
   field
     sameContinuedZetaBernoulliConventionAndRemainder : Set
-
     sourceToConcreteAnalyticReceipt :
       Transport.SourceClaim eulerMaclaurinSourceClaim →
       sameContinuedZetaBernoulliConventionAndRemainder →
       Analytic.BernoulliFourAnalyticReceipt Z
-
     reading : String
 
 open ConcreteEulerMaclaurinWeld public
@@ -66,8 +52,7 @@ asConcreteEulerMaclaurinTarget :
   Transport.LocalTheoremTarget eulerMaclaurinSourceClaim
 asConcreteEulerMaclaurinTarget Z W = record
   { Transport.LocalClaim = Analytic.BernoulliFourAnalyticReceipt Z
-  ; Transport.sameMathematicalObject =
-      sameContinuedZetaBernoulliConventionAndRemainder W
+  ; Transport.sameMathematicalObject = sameContinuedZetaBernoulliConventionAndRemainder W
   ; Transport.sourceSemanticsToLocal = sourceToConcreteAnalyticReceipt W
   ; Transport.reading = reading W
   }
@@ -83,25 +68,16 @@ compileConcreteAnalyticReceipt Z W weld =
     (asConcreteEulerMaclaurinTarget Z W)
     (record { Transport.objectWeld = weld })
 
-------------------------------------------------------------------------
--- Special-value compiler.  The rational B4 -> 1/120 arithmetic is already
--- machine-owned; only source semantics and same-object carrier normalization
--- remain application-specific.
-------------------------------------------------------------------------
-
 record ConcreteMinusThreeSpecialValueWeld
     (Z : Analytic.RiemannZetaContinuationCarrier) : Set₁ where
   field
     analyticReceipt : Analytic.BernoulliFourAnalyticReceipt Z
-
     sameZetaBernoulliAndRationalEmbedding : Set
-
     sourceToZetaMinusThreeOneOver120 :
       Transport.SourceClaim negativeIntegerSourceClaim →
       sameZetaBernoulliAndRationalEmbedding →
       Analytic.zeta Z (Analytic.minusThree Z)
       ≡ Analytic.embedRational Z Arithmetic.oneOver120
-
     reading : String
 
 open ConcreteMinusThreeSpecialValueWeld public
@@ -114,8 +90,7 @@ asConcreteSpecialValueTarget Z W = record
   { Transport.LocalClaim =
       Analytic.zeta Z (Analytic.minusThree Z)
       ≡ Analytic.embedRational Z Arithmetic.oneOver120
-  ; Transport.sameMathematicalObject =
-      sameZetaBernoulliAndRationalEmbedding W
+  ; Transport.sameMathematicalObject = sameZetaBernoulliAndRationalEmbedding W
   ; Transport.sourceSemanticsToLocal = sourceToZetaMinusThreeOneOver120 W
   ; Transport.reading = reading W
   }
@@ -135,7 +110,30 @@ compileConcreteZetaMinusThreeOneOver120 Z W weld = record
         (asConcreteSpecialValueTarget Z W)
         (record { Transport.objectWeld = weld })
   ; Analytic.reading =
-      "Source-backed negative-integer theorem plus the machine-owned Bernoulli arithmetic compiles zeta(-3)=1/120 on this exact local carrier."
+      "Source-backed negative-integer theorem plus machine-owned Bernoulli arithmetic compiles zeta(-3)=1/120 on this exact local carrier."
+  }
+
+------------------------------------------------------------------------
+-- COMPATIBILITY COMPILER TO THE OLDER GENERIC ANALYTIC RECEIPT
+------------------------------------------------------------------------
+
+asLegacyBernoulliAnalyticReceipt :
+  ∀ {Z : Analytic.RiemannZetaContinuationCarrier} →
+  Analytic.ZetaMinusThreeOneOver120Receipt Z →
+  Arithmetic.ZetaMinusThreeBernoulliAnalyticReceipt
+asLegacyBernoulliAnalyticReceipt {Z} receipt = record
+  { Arithmetic.ZetaValue = Analytic.Complex Z
+  ; Arithmetic.zetaMinusThree = Analytic.zeta Z (Analytic.minusThree Z)
+  ; Arithmetic.BernoulliValue = Analytic.Bernoulli (Analytic.analytic receipt)
+  ; Arithmetic.B4 = Analytic.B4 (Analytic.analytic receipt)
+  ; Arithmetic.analyticContinuationAtMinusThree =
+      Analytic.analyticContinuationExistsAtMinusThree (Analytic.analytic receipt)
+  ; Arithmetic.bernoulliSpecialValueFormulaAtFour =
+      Analytic.bernoulliSpecialValueTheorem (Analytic.analytic receipt)
+  ; Arithmetic.bernoulliB4IdentifiedWithMinusOneOver30 =
+      Analytic.b4EqualsMinusOneOverThirty (Analytic.analytic receipt)
+  ; Arithmetic.zetaValueTransportToRational =
+      Analytic.zetaMinusThreeEqualsOneOver120 receipt
   }
 
 record ReverseConcreteZetaObligations : Set where
@@ -149,15 +147,12 @@ record ReverseConcreteZetaObligations : Set where
 open ReverseConcreteZetaObligations public
 
 data EulerMaclaurinCitationAutomaticallyConstructsLocalCarrier : Set where
-
 data EqualRationalValueAutomaticallyIdentifiesContinuedZeta : Set where
 
-citationDoesNotConstructCarrier :
-  EulerMaclaurinCitationAutomaticallyConstructsLocalCarrier → ⊥
+citationDoesNotConstructCarrier : EulerMaclaurinCitationAutomaticallyConstructsLocalCarrier → ⊥
 citationDoesNotConstructCarrier ()
 
-valueDoesNotIdentifyZetaObject :
-  EqualRationalValueAutomaticallyIdentifiesContinuedZeta → ⊥
+valueDoesNotIdentifyZetaObject : EqualRationalValueAutomaticallyIdentifiesContinuedZeta → ⊥
 valueDoesNotIdentifyZetaObject ()
 
 record Status : Set where
@@ -165,6 +160,7 @@ record Status : Set where
     eulerMaclaurinSourceTransportToConcreteReceiptOwned : Bool
     negativeIntegerSourceTransportToConcreteReceiptOwned : Bool
     bernoulliArithmeticCompilerOwned : Bool
+    legacyAnalyticReceiptCompilerOwned : Bool
     sameObjectCarrierWeldStillRequired : Bool
 
     eulerMaclaurinSourceTransportToConcreteReceiptOwnedIsTrue :
@@ -172,6 +168,7 @@ record Status : Set where
     negativeIntegerSourceTransportToConcreteReceiptOwnedIsTrue :
       negativeIntegerSourceTransportToConcreteReceiptOwned ≡ true
     bernoulliArithmeticCompilerOwnedIsTrue : bernoulliArithmeticCompilerOwned ≡ true
+    legacyAnalyticReceiptCompilerOwnedIsTrue : legacyAnalyticReceiptCompilerOwned ≡ true
     sameObjectCarrierWeldStillRequiredIsTrue : sameObjectCarrierWeldStillRequired ≡ true
 
 open Status public
@@ -181,9 +178,11 @@ canonicalStatus = record
   { eulerMaclaurinSourceTransportToConcreteReceiptOwned = true
   ; negativeIntegerSourceTransportToConcreteReceiptOwned = true
   ; bernoulliArithmeticCompilerOwned = true
+  ; legacyAnalyticReceiptCompilerOwned = true
   ; sameObjectCarrierWeldStillRequired = true
   ; eulerMaclaurinSourceTransportToConcreteReceiptOwnedIsTrue = refl
   ; negativeIntegerSourceTransportToConcreteReceiptOwnedIsTrue = refl
   ; bernoulliArithmeticCompilerOwnedIsTrue = refl
+  ; legacyAnalyticReceiptCompilerOwnedIsTrue = refl
   ; sameObjectCarrierWeldStillRequiredIsTrue = refl
   }
