@@ -57,8 +57,8 @@ open CasimirZetaDefectCarrierWeld public
 
 problemOneOver120Value :
   ∀ {kernel} →
-  CasimirZetaDefectCarrierWeld kernel →
-  CasimirZeta.ZetaValue ∘ problem
+  (W : CasimirZetaDefectCarrierWeld kernel) →
+  CasimirZeta.ZetaValue (problem W)
 problemOneOver120Value W =
   localToProblemZetaValue W
     (Analytic.embedRational
