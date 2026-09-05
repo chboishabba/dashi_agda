@@ -5,13 +5,13 @@ module DASHI.Analysis.NonArchimedeanSpectralBidiObligationExact where
 --
 -- Finite spectral closure is dependency-closed.  Post-closure continuous and
 -- Markov claims are routed at their actual theorem strength.  Two advertised
--- unit/uniform Markov estimates are now refuted by exact n=3 witnesses:
+-- unit/uniform Markov estimates are refuted by exact n=3 witnesses:
 --
 --   * unit-prefactor one-step L2 inverse-sqrt-two contraction;
 --   * universal sqrt(|A^c|) 2^(-t/2) stopping-survival bound.
 --
--- The viable repairs are level-dependent prefactored L2 powers and weaker,
--- stopping-set-dependent killed-chain tails.
+-- The viable repairs are level-dependent prefactored L2 powers and a finite,
+-- constructive hitting-block route for set-dependent stopping tails.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -124,12 +124,12 @@ universalStoppingSurvivalClaim = bidiClaim universalStoppingSurvivalBound
 setDependentStoppingSurvivalClaim : BidiClaim
 setDependentStoppingSurvivalClaim = bidiClaim setDependentStoppingSurvivalBound
   "each fixed finite stopping set has some set-dependent exponential survival tail"
-  "directed irreducibility + set-dependent killed-kernel power bound" false
+  "forward translation reachability + finite hitting-block survivor-count decay" false
 
 stoppingMomentsClaim : BidiClaim
 stoppingMomentsClaim = bidiClaim stoppingMomentFiniteness
   "finite stopping-time moments follow from a valid set-dependent survival tail"
-  "set-dependent killed-chain tail + generating-function/moment consumer" false
+  "constructive finite tail + generating-function/moment consumer" false
 
 taoConcentrationClaim : BidiClaim
 taoConcentrationClaim = bidiClaim taoStyleStoppingConcentration
@@ -179,8 +179,10 @@ data MissingObligation : Set where
   needCorrelationConsumerWeld : MissingObligation
 
   rejectedUniversalStoppingSurvivalBound : MissingObligation
-  needFiniteDirectedIrreducibility : MissingObligation
-  needSetDependentKilledKernelPowerBound : MissingObligation
+  needZModCyclicPredecessorAdapter : MissingObligation
+  needFiniteUniformHittingBlockCompiler : MissingObligation
+  needOneKilledWordCountBound : MissingObligation
+  needProbabilityNormalization : MissingObligation
   needStoppingTailGeneratingFunctionConsumer : MissingObligation
   needMarkovConcentrationHypotheses : MissingObligation
   needDriftStoppingSameObjectWeld : MissingObligation
@@ -219,11 +221,15 @@ compileMissing correlationDecayAtInverseSqrtTwo =
 compileMissing universalStoppingSurvivalBound =
   rejectedUniversalStoppingSurvivalBound ∷ []
 compileMissing setDependentStoppingSurvivalBound =
-  needFiniteDirectedIrreducibility ∷
-  needSetDependentKilledKernelPowerBound ∷ []
+  needZModCyclicPredecessorAdapter ∷
+  needFiniteUniformHittingBlockCompiler ∷
+  needOneKilledWordCountBound ∷
+  needProbabilityNormalization ∷ []
 compileMissing stoppingMomentFiniteness =
-  needFiniteDirectedIrreducibility ∷
-  needSetDependentKilledKernelPowerBound ∷
+  needZModCyclicPredecessorAdapter ∷
+  needFiniteUniformHittingBlockCompiler ∷
+  needOneKilledWordCountBound ∷
+  needProbabilityNormalization ∷
   needStoppingTailGeneratingFunctionConsumer ∷ []
 compileMissing taoStyleStoppingConcentration =
   needMarkovConcentrationHypotheses ∷
@@ -268,11 +274,13 @@ universalStoppingSurvivalRejected :
   ≡ rejectedUniversalStoppingSurvivalBound ∷ []
 universalStoppingSurvivalRejected = refl
 
-setDependentStoppingTailCutset :
+constructiveSetDependentStoppingTailCutset :
   compileMissing setDependentStoppingSurvivalBound
-  ≡ needFiniteDirectedIrreducibility ∷
-    needSetDependentKilledKernelPowerBound ∷ []
-setDependentStoppingTailCutset = refl
+  ≡ needZModCyclicPredecessorAdapter ∷
+    needFiniteUniformHittingBlockCompiler ∷
+    needOneKilledWordCountBound ∷
+    needProbabilityNormalization ∷ []
+constructiveSetDependentStoppingTailCutset = refl
 
 fullTransferSqrtTwoRejected :
   compileMissing fullContinuousTransferRadiusSqrtTwo
