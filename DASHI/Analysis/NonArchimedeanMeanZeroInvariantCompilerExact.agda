@@ -8,6 +8,7 @@ module DASHI.Analysis.NonArchimedeanMeanZeroInvariantCompilerExact where
 -- preservation receipt for P_n into invariance of the source's L2_0 kernel.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (trans)
 
@@ -35,13 +36,11 @@ zeroFibreInvariant data state hZero =
 record CollatzMeanZeroSourceBoundary : Set where
   constructor collatzMeanZeroSourceBoundary
   field
-    sourceL2ZeroDefinedAsKernelOfSum : Agda.Builtin.Bool.Bool
-    sourcePnIsHalfDn : Agda.Builtin.Bool.Bool
-    sourceColumnSumTwoTheoremLocated : Agda.Builtin.Bool.Bool
-    sourceMassPreservationTheoremLocated : Agda.Builtin.Bool.Bool
-    genericKernelPreservationNowOwned : Agda.Builtin.Bool.Bool
-
-open import Agda.Builtin.Bool using (Bool; true; false)
+    sourceL2ZeroDefinedAsKernelOfSum : Bool
+    sourcePnIsHalfDn : Bool
+    sourceColumnSumTwoTheoremLocated : Bool
+    sourceMassPreservationTheoremLocated : Bool
+    genericKernelPreservationNowOwned : Bool
 
 canonicalCollatzMeanZeroSourceBoundary : CollatzMeanZeroSourceBoundary
 canonicalCollatzMeanZeroSourceBoundary =
