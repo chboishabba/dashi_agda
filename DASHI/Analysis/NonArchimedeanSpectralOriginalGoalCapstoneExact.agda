@@ -5,9 +5,10 @@ module DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact where
 --
 -- The finite non-Archimedean spectral core is dependency-closed in DASHI.
 -- Post-closure audits now separate sigma semantics, continuous-transfer claims,
--- and finite Markov/mixing consumers.  The old unit-prefactor L2 route is
--- refuted; the viable repair is a finite level-dependent prefactor assembled
--- through the unitary Fourier shell-energy chart.
+-- and finite Markov/mixing consumers.  The old unit-prefactor L2 route and the
+-- advertised universal inverse-sqrt-two survival tail are both refuted by exact
+-- n=3 witnesses.  Viable repairs use level-dependent L2 prefactors and weaker,
+-- stopping-set-dependent killed-chain tails.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -42,7 +43,9 @@ data OriginalGoalLeaf : Set where
   prefactoredL2ShellCompiler : OriginalGoalLeaf
   parsevalShellEnergyWeld : OriginalGoalLeaf
   prefactoredL2WholeOperator : OriginalGoalLeaf
-  killedKernelSurvivalBound : OriginalGoalLeaf
+  universalStoppingSurvivalBound : OriginalGoalLeaf
+  directedFiniteIrreducibility : OriginalGoalLeaf
+  setDependentKilledKernelTail : OriginalGoalLeaf
   gibbsUniqueness : OriginalGoalLeaf
 
 
@@ -86,14 +89,17 @@ leafStatus explicitLevelSquaredPrefactor = owned
 leafStatus prefactoredL2ShellCompiler = compiled
 leafStatus parsevalShellEnergyWeld = liveSameObjectWeld
 leafStatus prefactoredL2WholeOperator = downstream
-leafStatus killedKernelSurvivalBound = liveIndependentProducer
+leafStatus universalStoppingSurvivalBound = refuted
+leafStatus directedFiniteIrreducibility = liveIndependentProducer
+leafStatus setDependentKilledKernelTail = downstream
 leafStatus gibbsUniqueness = liveIndependentProducer
 
 priority : List OriginalGoalLeaf
 priority =
   parsevalShellEnergyWeld ∷
   prefactoredL2WholeOperator ∷
-  killedKernelSurvivalBound ∷
+  directedFiniteIrreducibility ∷
+  setDependentKilledKernelTail ∷
   cyclotomicToProlateSigmaAnchor ∷
   gibbsUniqueness ∷
   []
@@ -146,17 +152,26 @@ record MixingRepairBoundary : Set where
     genericFiniteEnergyAssemblyOwned : Bool
     parsevalShellEnergySameObjectWeldOwned : Bool
     wholePrefactoredL2BoundOwned : Bool
-    killedKernelBoundOwned : Bool
+    universalStoppingTailValid : Bool
+    directedFiniteIrreducibilityOwned : Bool
+    setDependentKilledKernelTailOwned : Bool
 
 canonicalMixingRepairBoundary : MixingRepairBoundary
 canonicalMixingRepairBoundary =
-  mixingRepairBoundary true false true true true false false false
+  mixingRepairBoundary
+    true false true true true false false false false false
 
 unitPrefactorMixingRouteClosedNegative :
   MixingRepairBoundary.unitPrefactorOneStepContractionValid
     canonicalMixingRepairBoundary
   ≡ false
 unitPrefactorMixingRouteClosedNegative = refl
+
+universalStoppingTailClosedNegative :
+  MixingRepairBoundary.universalStoppingTailValid
+    canonicalMixingRepairBoundary
+  ≡ false
+universalStoppingTailClosedNegative = refl
 
 prefactoredMixingRouteStillLiveAtParsevalWeld :
   MixingRepairBoundary.parsevalShellEnergySameObjectWeldOwned
