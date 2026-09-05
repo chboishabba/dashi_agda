@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.ExternalisationBoundaryEnrichmentBidiExact as W
 import DASHI.Core.ReferencePopulationRosterEnrichmentExact as R
 import DASHI.Culture.MissingDeceasedTechnicalExternalisationExact as X
+import DASHI.Culture.AmyEskridgeKnowledgeBoundaryTransitionExact as AmyB
 
 ------------------------------------------------------------------------
 -- CURRENT PERSON-LEVEL WITNESSES
@@ -50,7 +51,7 @@ restrictedBoundaryControlDesign = R.matched-reference-design
   ∷ [] )
   true refl
   "count B only after prior restriction, public release and same-object provenance are all present"
-  "ordinary publication, patents, public-use reports and disclosure advocacy alone do not count as B"
+  "ordinary publication, patents, public-use reports, attempted release and disclosure advocacy alone do not count as completed B"
 
 ------------------------------------------------------------------------
 -- BIDI FRONTIER
@@ -60,17 +61,17 @@ deepExternalisationNeedsMatchedControls : W.ExternalisationSelectionFrontier
 deepExternalisationNeedsMatchedControls = W.externalisation-selection-frontier
   W.deepTechnicalExternalisation
   W.missingMatchedControlPopulation
-  "populate pre-registered peers and score problem/model/method/implementation/validation/failure/artifact/interpretation stages with the same rubric"
+  "complete pre-registered peers and score problem/model/method/implementation/validation/failure/artifact/interpretation stages with the same rubric"
   "whether deep technical externalisation is enriched beyond ordinary peer practice"
   "selection, targeting, actor identity, motive, harm, or restricted-to-public transfer"
 
-restrictedTransferNeedsPersonEvidence : W.ExternalisationSelectionFrontier
-restrictedTransferNeedsPersonEvidence = W.externalisation-selection-frontier
+restrictedTransferNeedsClosedPersonEvidence : W.ExternalisationSelectionFrontier
+restrictedTransferNeedsClosedPersonEvidence = W.externalisation-selection-frontier
   W.restrictedToPublicTransfer
   W.missingPersonFeatureEvidence
-  "for each candidate recover one exact knowledge object with a source-backed prior restricted/private state, later public release and same-object provenance"
-  "a person-level B witness eligible for later matched-control scoring"
-  "enrichment, selection, actor identity, motive or harm"
+  "Eskridge now supplies a captured contemporaneous self-report of NASA-origin/private work and a release-review process, but B still requires an exact same-object weld plus verified public-release outcome; search for paper title, NASA case/review receipt, decision, draft/final pair, or final publication"
+  "a completed person-level B witness eligible for later matched-control scoring"
+  "a completed transfer merely from an attempted/under-review transition; enrichment, selection, actor identity, motive or harm"
 
 deepExternalisationNeedsFeatureAwareSelector : W.ExternalisationSelectionFrontier
 deepExternalisationNeedsFeatureAwareSelector = W.externalisation-selection-frontier
@@ -85,6 +86,14 @@ record CurrentExternalisationBoundaryAssessment : Set where
   field
     loureiroDeepWitnessOwned : Bool
     loureiroDeepWitnessOwnedIsTrue : loureiroDeepWitnessOwned ≡ true
+
+    amyAttemptedBoundaryTransitionCandidateLocated : Bool
+    amyAttemptedBoundaryTransitionCandidateLocatedIsTrue :
+      amyAttemptedBoundaryTransitionCandidateLocated ≡ true
+
+    amyExactSameObjectWeldLocated : Bool
+    amyExactSameObjectWeldLocatedIsFalse :
+      amyExactSameObjectWeldLocated ≡ false
 
     anyClosedRestrictedBoundaryWitnessLocated : Bool
     anyClosedRestrictedBoundaryWitnessLocatedIsFalse :
@@ -107,6 +116,8 @@ canonicalCurrentExternalisationBoundaryAssessment :
 canonicalCurrentExternalisationBoundaryAssessment =
   current-externalisation-boundary-assessment
     true refl
+    true refl
+    false refl
     false refl
     false refl
     false refl
