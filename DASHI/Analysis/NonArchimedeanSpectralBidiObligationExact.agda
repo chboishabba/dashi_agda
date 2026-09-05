@@ -4,10 +4,14 @@ module DASHI.Analysis.NonArchimedeanSpectralBidiObligationExact where
 -- Reverse / BIDI obligation compiler for the non-Archimedean spectral lane.
 --
 -- Finite spectral closure is dependency-closed.  Post-closure continuous and
--- Markov claims are routed at their actual theorem strength.  In particular,
--- the source's unit-prefactor one-step L2 contraction is refuted at n=3; the
--- viable replacement is a level-dependent prefactored power bound assembled
--- from the monomial shell powers through the unitary Fourier energy chart.
+-- Markov claims are routed at their actual theorem strength.  Two advertised
+-- unit/uniform Markov estimates are now refuted by exact n=3 witnesses:
+--
+--   * unit-prefactor one-step L2 inverse-sqrt-two contraction;
+--   * universal sqrt(|A^c|) 2^(-t/2) stopping-survival bound.
+--
+-- The viable repairs are level-dependent prefactored L2 powers and weaker,
+-- stopping-set-dependent killed-chain tails.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -31,6 +35,7 @@ data ClaimKind : Set where
   totalVariationMixing : ClaimKind
   correlationDecayAtInverseSqrtTwo : ClaimKind
   universalStoppingSurvivalBound : ClaimKind
+  setDependentStoppingSurvivalBound : ClaimKind
   stoppingMomentFiniteness : ClaimKind
   taoStyleStoppingConcentration : ClaimKind
 
@@ -111,15 +116,20 @@ correlationDecayClaim = bidiClaim correlationDecayAtInverseSqrtTwo
   "correlations decay at inverse-sqrt-two spectral rate with a finite prefactor"
   "prefactored L2 mixing + correlation consumer identification" false
 
-stoppingSurvivalClaim : BidiClaim
-stoppingSurvivalClaim = bidiClaim universalStoppingSurvivalBound
-  "every nontrivial stopping set has survival tail C 2^(-t/2)"
-  "independent killed/substochastic-kernel power bound" false
+universalStoppingSurvivalClaim : BidiClaim
+universalStoppingSurvivalClaim = bidiClaim universalStoppingSurvivalBound
+  "every nontrivial stopping set has tail sqrt(|A^c|) 2^(-t/2)"
+  "rejected by exact n=3 A={4}, x0=1, t=3 counterexample" false
+
+setDependentStoppingSurvivalClaim : BidiClaim
+setDependentStoppingSurvivalClaim = bidiClaim setDependentStoppingSurvivalBound
+  "each fixed finite stopping set has some set-dependent exponential survival tail"
+  "directed irreducibility + set-dependent killed-kernel power bound" false
 
 stoppingMomentsClaim : BidiClaim
 stoppingMomentsClaim = bidiClaim stoppingMomentFiniteness
-  "all stopping-time moments follow from the inverse-sqrt-two survival tail"
-  "valid survival-tail producer + generating-function consumer" false
+  "finite stopping-time moments follow from a valid set-dependent survival tail"
+  "set-dependent killed-chain tail + generating-function/moment consumer" false
 
 taoConcentrationClaim : BidiClaim
 taoConcentrationClaim = bidiClaim taoStyleStoppingConcentration
@@ -167,7 +177,10 @@ data MissingObligation : Set where
   needInputParsevalShellEnergyWeld : MissingObligation
   needOutputParsevalShellEnergyWeld : MissingObligation
   needCorrelationConsumerWeld : MissingObligation
-  needKilledKernelPowerBound : MissingObligation
+
+  rejectedUniversalStoppingSurvivalBound : MissingObligation
+  needFiniteDirectedIrreducibility : MissingObligation
+  needSetDependentKilledKernelPowerBound : MissingObligation
   needStoppingTailGeneratingFunctionConsumer : MissingObligation
   needMarkovConcentrationHypotheses : MissingObligation
   needDriftStoppingSameObjectWeld : MissingObligation
@@ -202,10 +215,15 @@ compileMissing correlationDecayAtInverseSqrtTwo =
   needInputParsevalShellEnergyWeld ∷
   needOutputParsevalShellEnergyWeld ∷
   needCorrelationConsumerWeld ∷ []
+
 compileMissing universalStoppingSurvivalBound =
-  needKilledKernelPowerBound ∷ []
+  rejectedUniversalStoppingSurvivalBound ∷ []
+compileMissing setDependentStoppingSurvivalBound =
+  needFiniteDirectedIrreducibility ∷
+  needSetDependentKilledKernelPowerBound ∷ []
 compileMissing stoppingMomentFiniteness =
-  needKilledKernelPowerBound ∷
+  needFiniteDirectedIrreducibility ∷
+  needSetDependentKilledKernelPowerBound ∷
   needStoppingTailGeneratingFunctionConsumer ∷ []
 compileMissing taoStyleStoppingConcentration =
   needMarkovConcentrationHypotheses ∷
@@ -245,10 +263,16 @@ prefactoredMixingExactCutset :
     needOutputParsevalShellEnergyWeld ∷ []
 prefactoredMixingExactCutset = refl
 
-stoppingSurvivalNeedsIndependentProducer :
+universalStoppingSurvivalRejected :
   compileMissing universalStoppingSurvivalBound
-  ≡ needKilledKernelPowerBound ∷ []
-stoppingSurvivalNeedsIndependentProducer = refl
+  ≡ rejectedUniversalStoppingSurvivalBound ∷ []
+universalStoppingSurvivalRejected = refl
+
+setDependentStoppingTailCutset :
+  compileMissing setDependentStoppingSurvivalBound
+  ≡ needFiniteDirectedIrreducibility ∷
+    needSetDependentKilledKernelPowerBound ∷ []
+setDependentStoppingTailCutset = refl
 
 fullTransferSqrtTwoRejected :
   compileMissing fullContinuousTransferRadiusSqrtTwo
