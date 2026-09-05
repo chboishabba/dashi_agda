@@ -16,17 +16,24 @@ import DASHI.Cognition.PNF.SensibLawDocumentWorldSemanticStatusBidiExact as Cont
 import DASHI.Cognition.PNF.SensibLawConsumerIndexedDiscourseInterpretationExact as Consumer
 import DASHI.Cognition.PNF.SensibLawConsumerQuerySemanticCoordinateReopeningExact as Demand
 import DASHI.Cognition.PNF.SensibLawConsumerQueryLeastPrivilegeRegressionExact as LeastPrivilege
+import DASHI.Cognition.PNF.SensibLawActiveRequirementExecutionPlannerExact as Planner
+import DASHI.Cognition.PNF.SensibLawRequirementProducerRoutingExact as Routing
+import DASHI.Cognition.PNF.SensibLawLiveProducerCoordinateEvidenceBridgeExact as EvidenceBridge
+import DASHI.Cognition.PNF.SensibLawResolvedLegalEvidenceExact as LegalEvidence
+import DASHI.Cognition.PNF.SensibLawLegalJurisdictionEvidenceExact as LegalJurisdiction
+import DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact as LegalAuthority
+import DASHI.Cognition.PNF.SensibLawResolvedScopePlannerLiveExact as ResolvedScopeLive
+import DASHI.Cognition.PNF.SensibLawPdfActiveRequirementPlannerLiveExact as PdfPlanner
 import DASHI.Cognition.PNF.SensibLawSemanticLiveVerticalEverything as Live
 
 data BidiCampaign : Set where
-  attributionPropositionCampaign : BidiCampaign
-  occurrenceCampaign : BidiCampaign
-  antecedentIdentityCampaign : BidiCampaign
-  scopeCompositionCampaign : BidiCampaign
-  participantLegalRoleCampaign : BidiCampaign
-  legalApplicabilityCampaign : BidiCampaign
-  documentWorldContextCampaign : BidiCampaign
-  consumerQueryDemandCampaign : BidiCampaign
+  attributionPropositionCampaign occurrenceCampaign antecedentIdentityCampaign
+  scopeCompositionCampaign participantLegalRoleCampaign legalApplicabilityCampaign
+  documentWorldContextCampaign consumerQueryDemandCampaign
+  activeRequirementPlannerCampaign requirementProducerRoutingCampaign
+  liveProducerEvidenceCampaign resolvedLegalEvidenceCampaign
+  resolvedLegalJurisdictionCampaign legalSourceAuthorityCampaign
+  resolvedScopePlannerCampaign pdfPlannerRegressionCampaign : BidiCampaign
 
 data CampaignReadiness : Set where
   typeOwnerPresent runtimeProducerNeeded consumerMaySkip : CampaignReadiness
@@ -40,142 +47,185 @@ campaignReadiness participantLegalRoleCampaign = typeOwnerPresent
 campaignReadiness legalApplicabilityCampaign = typeOwnerPresent
 campaignReadiness documentWorldContextCampaign = typeOwnerPresent
 campaignReadiness consumerQueryDemandCampaign = typeOwnerPresent
+campaignReadiness activeRequirementPlannerCampaign = typeOwnerPresent
+campaignReadiness requirementProducerRoutingCampaign = typeOwnerPresent
+campaignReadiness liveProducerEvidenceCampaign = typeOwnerPresent
+campaignReadiness resolvedLegalEvidenceCampaign = typeOwnerPresent
+campaignReadiness resolvedLegalJurisdictionCampaign = typeOwnerPresent
+campaignReadiness legalSourceAuthorityCampaign = typeOwnerPresent
+campaignReadiness resolvedScopePlannerCampaign = typeOwnerPresent
+campaignReadiness pdfPlannerRegressionCampaign = typeOwnerPresent
 
-allCampaignTypeOwnersPresent :
-  campaignReadiness attributionPropositionCampaign ≡ typeOwnerPresent
+allCampaignTypeOwnersPresent : campaignReadiness attributionPropositionCampaign ≡ typeOwnerPresent
 allCampaignTypeOwnersPresent = refl
+executionPlannerOwnerPresent : campaignReadiness activeRequirementPlannerCampaign ≡ typeOwnerPresent
+executionPlannerOwnerPresent = refl
+producerRoutingOwnerPresent : campaignReadiness requirementProducerRoutingCampaign ≡ typeOwnerPresent
+producerRoutingOwnerPresent = refl
+liveProducerEvidenceOwnerPresent : campaignReadiness liveProducerEvidenceCampaign ≡ typeOwnerPresent
+liveProducerEvidenceOwnerPresent = refl
+resolvedLegalEvidenceOwnerPresent : campaignReadiness resolvedLegalEvidenceCampaign ≡ typeOwnerPresent
+resolvedLegalEvidenceOwnerPresent = refl
+resolvedLegalJurisdictionOwnerPresent : campaignReadiness resolvedLegalJurisdictionCampaign ≡ typeOwnerPresent
+resolvedLegalJurisdictionOwnerPresent = refl
+legalSourceAuthorityOwnerPresent : campaignReadiness legalSourceAuthorityCampaign ≡ typeOwnerPresent
+legalSourceAuthorityOwnerPresent = refl
+resolvedScopePlannerOwnerPresent : campaignReadiness resolvedScopePlannerCampaign ≡ typeOwnerPresent
+resolvedScopePlannerOwnerPresent = refl
+pdfPlannerRegressionOwnerPresent : campaignReadiness pdfPlannerRegressionCampaign ≡ typeOwnerPresent
+pdfPlannerRegressionOwnerPresent = refl
 
-consumerQueryDemandOwnerPresent :
-  campaignReadiness consumerQueryDemandCampaign ≡ typeOwnerPresent
-consumerQueryDemandOwnerPresent = refl
-
-------------------------------------------------------------------------
--- Phase transition: the aggregate also imports actual inhabited regressions.
--- This does not make the corpus resolved.
-------------------------------------------------------------------------
-
-claimDiscourseHasLiveInhabitant :
-  Live.liveCampaignState Live.claimDiscourseLive ≡ Live.inhabitedRegression
+claimDiscourseHasLiveInhabitant : Live.liveCampaignState Live.claimDiscourseLive ≡ Live.inhabitedRegression
 claimDiscourseHasLiveInhabitant = refl
-
-occurrenceHasLiveInhabitant :
-  Live.liveCampaignState Live.occurrenceLive ≡ Live.inhabitedRegression
+occurrenceHasLiveInhabitant : Live.liveCampaignState Live.occurrenceLive ≡ Live.inhabitedRegression
 occurrenceHasLiveInhabitant = refl
-
-identityRefinementHasLiveInhabitant :
-  Live.liveCampaignState Live.identityRefinementLive ≡ Live.inhabitedRegression
+identityRefinementHasLiveInhabitant : Live.liveCampaignState Live.identityRefinementLive ≡ Live.inhabitedRegression
 identityRefinementHasLiveInhabitant = refl
-
-scopeCompositionHasLiveInhabitant :
-  Live.liveCampaignState Live.scopeCompositionLive ≡ Live.inhabitedRegression
+scopeCompositionHasLiveInhabitant : Live.liveCampaignState Live.scopeCompositionLive ≡ Live.inhabitedRegression
 scopeCompositionHasLiveInhabitant = refl
-
-documentContextHasLiveInhabitant :
-  Live.liveCampaignState Live.documentContextLive ≡ Live.inhabitedRegression
+documentContextHasLiveInhabitant : Live.liveCampaignState Live.documentContextLive ≡ Live.inhabitedRegression
 documentContextHasLiveInhabitant = refl
-
-participantLegalRoleHasLiveInhabitant :
-  Live.liveCampaignState Live.participantLegalRoleLive ≡ Live.inhabitedRegression
+participantLegalRoleHasLiveInhabitant : Live.liveCampaignState Live.participantLegalRoleLive ≡ Live.inhabitedRegression
 participantLegalRoleHasLiveInhabitant = refl
-
-narrativeLegalGateHasLiveInhabitant :
-  Live.liveCampaignState Live.narrativeLegalGateLive ≡ Live.inhabitedRegression
+narrativeLegalGateHasLiveInhabitant : Live.liveCampaignState Live.narrativeLegalGateLive ≡ Live.inhabitedRegression
 narrativeLegalGateHasLiveInhabitant = refl
+resolvedScopePlannerHasLiveInhabitant : Planner.action ResolvedScopeLive.resolvedScopePlan ≡ Planner.reuseExisting
+resolvedScopePlannerHasLiveInhabitant = ResolvedScopeLive.resolvedScopeReusesExisting
 
-------------------------------------------------------------------------
--- Consumer/query least-privilege boundaries are now part of the campaign root.
-------------------------------------------------------------------------
+legalConsumerDoesNotImplyFullApplicabilityStack : Demand.LegalConsumerAlwaysNeedsApplicability → ⊥
+legalConsumerDoesNotImplyFullApplicabilityStack = Demand.legalConsumerDoesNotAlwaysNeedApplicability
+legalWhoSaidWhatHasNoApplicabilityObligation : Demand.Requires Consumer.legalConsumer Demand.whoSaidWhatQuery Demand.applicabilityCoordinate → ⊥
+legalWhoSaidWhatHasNoApplicabilityObligation = LeastPrivilege.legalWhoSaidWhatDoesNotRequireApplicability
+legalApplicabilityRequiresResolvedEvidence : Demand.Requires Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.resolvedLegalEvidenceCoordinate
+legalApplicabilityRequiresResolvedEvidence = LeastPrivilege.legalApplicabilityReallyRequiresResolvedEvidence
+legalApplicabilityCannotBorrowEvidenceCandidate : Demand.Requires Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.evidenceCandidateCoordinate → ⊥
+legalApplicabilityCannotBorrowEvidenceCandidate = LeastPrivilege.legalApplicabilityDoesNotAcceptEvidenceCandidateInstead
+legalApplicabilityRequiresLegalSourceAuthority : Demand.Requires Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.legalSourceAuthorityCoordinate
+legalApplicabilityRequiresLegalSourceAuthority = LeastPrivilege.legalApplicabilityReallyRequiresLegalSourceAuthority
+legalApplicabilityDoesNotBorrowSemanticAdmissionAuthority : Demand.Requires Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.semanticAdmissionAuthorityCoordinate → ⊥
+legalApplicabilityDoesNotBorrowSemanticAdmissionAuthority = LeastPrivilege.legalApplicabilityDoesNotRequireSemanticAdmissionAuthority
+legalApplicabilityRequiresResolvedJurisdiction : Demand.Requires Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.resolvedLegalJurisdictionCoordinate
+legalApplicabilityRequiresResolvedJurisdiction = LeastPrivilege.legalApplicabilityReallyRequiresResolvedJurisdiction
+legalApplicabilityRequiresResolvedScope : Demand.Requires Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.resolvedScopeCoordinate
+legalApplicabilityRequiresResolvedScope = LeastPrivilege.legalApplicabilityReallyRequiresResolvedScope
+unrequestedCoordinatesDoNotBlockConsumer : Demand.UnrequestedCoordinateMustResolve → ⊥
+unrequestedCoordinatesDoNotBlockConsumer = Demand.unrequestedCoordinateDoesNotCountAsFailure
+authorityUpdateDoesNotReparseSyntax : Demand.AuthorityChangeReparsesSyntax → ⊥
+authorityUpdateDoesNotReparseSyntax = Demand.authorityChangeDoesNotReparseSyntax
+broaderDemandPreservesSemanticCarrier : Demand.BroaderDemandRewritesSemanticCarrier → ⊥
+broaderDemandPreservesSemanticCarrier = Demand.broaderDemandDoesNotRewriteCarrier
+semanticAdmissionAuthorityCannotPayLegalSourceAuthority : Demand.SemanticAdmissionAuthorityPaysLegalSourceAuthority → ⊥
+semanticAdmissionAuthorityCannotPayLegalSourceAuthority = Demand.semanticAdmissionAuthorityDoesNotPayLegalSourceAuthority
 
-legalConsumerDoesNotImplyFullApplicabilityStack :
-  Demand.LegalConsumerAlwaysNeedsApplicability → ⊥
-legalConsumerDoesNotImplyFullApplicabilityStack =
-  Demand.legalConsumerDoesNotAlwaysNeedApplicability
+evidenceCandidateAndResolvedLegalEvidenceAreDistinct : Cross.EvidenceCandidateIsResolvedLegalEvidence → ⊥
+evidenceCandidateAndResolvedLegalEvidenceAreDistinct = Cross.evidenceCandidateDoesNotEqualResolvedLegalEvidence
+scopeCandidateAndResolvedScopeAreDistinct : Cross.ParserScopeCandidateIsResolvedScope → ⊥
+scopeCandidateAndResolvedScopeAreDistinct = Cross.parserScopeCandidateDoesNotEqualResolvedScope
+jurisdictionCandidateAndResolvedJurisdictionAreDistinct : Cross.JurisdictionCandidateIsResolvedLegalJurisdiction → ⊥
+jurisdictionCandidateAndResolvedJurisdictionAreDistinct = Cross.jurisdictionCandidateDoesNotEqualResolvedLegalJurisdiction
+parserEvidenceCannotPayResolvedLegalEvidence : LegalEvidence.ParserEvidencePaysResolvedLegalEvidence → ⊥
+parserEvidenceCannotPayResolvedLegalEvidence = LegalEvidence.parserEvidenceDoesNotPayResolvedLegalEvidence
+geographicMentionCannotPayResolvedLegalJurisdiction : LegalJurisdiction.GeographicMentionIsResolvedLegalJurisdiction → ⊥
+geographicMentionCannotPayResolvedLegalJurisdiction = LegalJurisdiction.geographicMentionDoesNotResolveLegalJurisdiction
+semanticAdmissionCannotBecomeLegalSourceAuthority : LegalAuthority.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
+semanticAdmissionCannotBecomeLegalSourceAuthority = LegalAuthority.semanticAdmissionDoesNotBecomeLegalSourceAuthority
 
-legalWhoSaidWhatHasNoApplicabilityObligation :
-  Demand.Requires
-    Consumer.legalConsumer
-    Demand.whoSaidWhatQuery
-    Demand.applicabilityCoordinate → ⊥
-legalWhoSaidWhatHasNoApplicabilityObligation =
-  LeastPrivilege.legalWhoSaidWhatDoesNotRequireApplicability
+resolvedRequirementReusesExistingEvidence :
+  ∀ {state active refs producer} →
+  Planner.action (Planner.planRequirement
+    (Planner.coordinateEvidenceReceipt {state} {active} Planner.currentResolved refs producer true refl true refl)
+    "campaign:resolved") ≡ Planner.reuseExisting
+resolvedRequirementReusesExistingEvidence = refl
+unassessedRequirementInspectsEvidence :
+  ∀ {state active refs producer} →
+  Planner.action (Planner.planRequirement
+    (Planner.coordinateEvidenceReceipt {state} {active} Planner.currentUnassessed refs producer true refl true refl)
+    "campaign:unassessed") ≡ Planner.inspectForEvidence
+unassessedRequirementInspectsEvidence = refl
+missingRequirementAcquiresEvidence :
+  ∀ {state active refs producer} →
+  Planner.action (Planner.planRequirement
+    (Planner.coordinateEvidenceReceipt {state} {active} Planner.currentMissing refs producer true refl true refl)
+    "campaign:missing") ≡ Planner.acquireMissingEvidence
+missingRequirementAcquiresEvidence = refl
+staleRequirementRevalidatesWithoutReparse : Planner.StaleRequirementForcesFullReparse → ⊥
+staleRequirementRevalidatesWithoutReparse = Planner.staleRequirementDoesNotForceFullReparse
+semanticStateIsNotTotalEvidenceOracle : Planner.SemanticStateAloneTotalizesCoordinateEvidence → ⊥
+semanticStateIsNotTotalEvidenceOracle = Planner.semanticStateAloneDoesNotTotalizeEvidence
 
-legalWhoSaidWhatHasNoAuthorityObligation :
-  Demand.Requires
-    Consumer.legalConsumer
-    Demand.whoSaidWhatQuery
-    Demand.authorityCoordinate → ⊥
-legalWhoSaidWhatHasNoAuthorityObligation =
-  LeastPrivilege.legalWhoSaidWhatDoesNotRequireAuthority
+documentContextHasDedicatedProducer : Routing.ProducerCanPopulate Cross.documentContextProducer Demand.documentContextCoordinate
+documentContextHasDedicatedProducer = Routing.documentContextPopulatesContext
+resolvedLegalEvidenceHasDedicatedProducer : Routing.ProducerCanPopulate Cross.legalEvidenceResolutionProducer Demand.resolvedLegalEvidenceCoordinate
+resolvedLegalEvidenceHasDedicatedProducer = Routing.legalEvidencePopulatesResolvedEvidence
+resolvedScopeHasDedicatedProducer : Routing.ProducerCanPopulate Cross.scopeResolutionProducer Demand.resolvedScopeCoordinate
+resolvedScopeHasDedicatedProducer = Routing.scopeResolutionPopulatesResolvedScope
+resolvedJurisdictionHasDedicatedProducer : Routing.ProducerCanPopulate Cross.legalJurisdictionProducer Demand.resolvedLegalJurisdictionCoordinate
+resolvedJurisdictionHasDedicatedProducer = Routing.legalJurisdictionPopulatesResolvedJurisdiction
+legalSourceAuthorityHasDedicatedProducer : Routing.ProducerCanPopulate Cross.legalSourceAuthorityProducer Demand.legalSourceAuthorityCoordinate
+legalSourceAuthorityHasDedicatedProducer = Routing.legalSourcePopulatesAuthority
+semanticAdmissionHasSeparateProducer : Routing.ProducerCanPopulate Cross.governedAdmissionProducer Demand.semanticAdmissionAuthorityCoordinate
+semanticAdmissionHasSeparateProducer = Routing.governedAdmissionPopulatesSemanticAuthority
+parserCannotPopulateLegalApplicability : Routing.ParserCanPopulateLegalApplicability → ⊥
+parserCannotPopulateLegalApplicability = Routing.parserDoesNotOwnLegalApplicability
+evidenceCandidateCannotPopulateResolvedLegalEvidence : Routing.EvidenceCandidateCanPopulateResolvedLegalEvidence → ⊥
+evidenceCandidateCannotPopulateResolvedLegalEvidence = Routing.evidenceCandidateDoesNotOwnResolvedLegalEvidence
+reuseNeedsNoProducerInvocation : Routing.invocationNeed Planner.reuseExisting ≡ Routing.noProducerInvocation
+reuseNeedsNoProducerInvocation = refl
 
-unrequestedCoordinatesDoNotBlockConsumer :
-  Demand.UnrequestedCoordinateMustResolve → ⊥
-unrequestedCoordinatesDoNotBlockConsumer =
-  Demand.unrequestedCoordinateDoesNotCountAsFailure
+positiveProducerReceiptRequiresExactStateObject : EvidenceBridge.ReceiptAboutOtherPropositionPaysRequirement → ⊥
+positiveProducerReceiptRequiresExactStateObject = EvidenceBridge.otherPropositionReceiptDoesNotPay
+missingClassificationNeedsSearchReceipt : EvidenceBridge.MissingEvidenceMayBeInferredFromNoLocalConstructor → ⊥
+missingClassificationNeedsSearchReceipt = EvidenceBridge.absenceOfConstructorDoesNotProveMissing
 
-authorityUpdateDoesNotReparseSyntax :
-  Demand.AuthorityChangeReparsesSyntax → ⊥
-authorityUpdateDoesNotReparseSyntax =
-  Demand.authorityChangeDoesNotReparseSyntax
+pdfPlannerReusesAttribution : Planner.action PdfPlanner.attributionPlan ≡ Planner.reuseExisting
+pdfPlannerReusesAttribution = PdfPlanner.attributionReusesExisting
+pdfPlannerReusesProposition : Planner.action PdfPlanner.propositionPlan ≡ Planner.reuseExisting
+pdfPlannerReusesProposition = PdfPlanner.propositionReusesExisting
+pdfPlannerReusesOccurrence : Planner.action PdfPlanner.occurrencePlan ≡ Planner.reuseExisting
+pdfPlannerReusesOccurrence = PdfPlanner.occurrenceReusesExisting
+pdfPlannerReusesDocumentContext : Planner.action PdfPlanner.documentContextPlan ≡ Planner.reuseExisting
+pdfPlannerReusesDocumentContext = PdfPlanner.documentContextReusesExisting
+pdfPlannerInspectsResolvedEvidence : Planner.action PdfPlanner.resolvedEvidencePlan ≡ Planner.inspectForEvidence
+pdfPlannerInspectsResolvedEvidence = PdfPlanner.resolvedEvidenceNeedsInspection
+pdfPlannerInspectsLegalSourceAuthority : Planner.action PdfPlanner.legalSourceAuthorityPlan ≡ Planner.inspectForEvidence
+pdfPlannerInspectsLegalSourceAuthority = PdfPlanner.legalSourceAuthorityNeedsInspection
+pdfPlannerInspectsResolvedScope : Planner.action PdfPlanner.resolvedScopePlan ≡ Planner.inspectForEvidence
+pdfPlannerInspectsResolvedScope = PdfPlanner.resolvedScopeNeedsInspection
+pdfPlannerInspectsResolvedJurisdiction : Planner.action PdfPlanner.resolvedJurisdictionPlan ≡ Planner.inspectForEvidence
+pdfPlannerInspectsResolvedJurisdiction = PdfPlanner.resolvedJurisdictionNeedsInspection
+pdfPaidPrefixDoesNotCloseApplicability : PdfPlanner.PaidPrefixMeansApplicabilityFullyResolved → ⊥
+pdfPaidPrefixDoesNotCloseApplicability = PdfPlanner.paidPrefixDoesNotMeanFullApplicability
 
-broaderDemandPreservesSemanticCarrier :
-  Demand.BroaderDemandRewritesSemanticCarrier → ⊥
-broaderDemandPreservesSemanticCarrier =
-  Demand.broaderDemandDoesNotRewriteCarrier
-
-------------------------------------------------------------------------
--- Existing cross-axis boundaries.
-------------------------------------------------------------------------
-
-regexStillForbidden :
-  Constitution.regexMayProduceSemanticEvidence
-    Constitution.canonicalCompositionOnlyBoundary ≡ false
+regexStillForbidden : Constitution.regexMayProduceSemanticEvidence Constitution.canonicalCompositionOnlyBoundary ≡ false
 regexStillForbidden = refl
-
-candidateStillNeedsContext :
-  Constitution.semanticResolutionRequiresContextReceipt
-    Constitution.canonicalCompositionOnlyBoundary ≡ true
+candidateStillNeedsContext : Constitution.semanticResolutionRequiresContextReceipt Constitution.canonicalCompositionOnlyBoundary ≡ true
 candidateStillNeedsContext = refl
-
 assertionStillNotTruth : Status.AssertionDeterminesTruth → ⊥
 assertionStillNotTruth = Status.assertionDoesNotDetermineTruth
-
 mentionStillNotOccurrence : Status.MentionDeterminesOccurrence → ⊥
 mentionStillNotOccurrence = Status.mentionDoesNotDetermineOccurrence
-
 agentStillNotDutyBearer : Status.LinguisticAgentDeterminesDutyBearer → ⊥
 agentStillNotDutyBearer = Status.linguisticAgentDoesNotDetermineDutyBearer
-
 applicabilityStillNotViolation : Status.ApplicabilityDeterminesViolation → ⊥
 applicabilityStillNotViolation = Status.applicabilityDoesNotDetermineViolation
-
 violationStillNotLiability : Status.ViolationDeterminesLiability → ⊥
 violationStillNotLiability = Status.violationDoesNotDetermineLiability
-
-consumerEquivalenceStillNotWorldIdentity :
-  Context.ConsumerEquivalentMeansSameSemanticWorld → ⊥
+consumerEquivalenceStillNotWorldIdentity : Context.ConsumerEquivalentMeansSameSemanticWorld → ⊥
 consumerEquivalenceStillNotWorldIdentity = Context.consumerEquivalenceDoesNotIdentifyWorld
-
 claimAssertionBoundary : Attribution.ClaimAssertionIsTruthProof → ⊥
 claimAssertionBoundary = Attribution.claimAssertionDoesNotProveTruth
-
-antecedentIdentityBoundary :
-  Identity.UniqueAntecedentAutomaticallyClosesIdentity → ⊥
+antecedentIdentityBoundary : Identity.UniqueAntecedentAutomaticallyClosesIdentity → ⊥
 antecedentIdentityBoundary = Identity.uniqueAntecedentDoesNotAutoCloseIdentity
-
 scopeTruthBoundary : Scope.ScopeResolutionProvesTruth → ⊥
 scopeTruthBoundary = Scope.scopeResolutionDoesNotProveTruth
-
 legalRoleBoundary : LegalRole.AgentAutomaticallyDutyBearer → ⊥
 legalRoleBoundary = LegalRole.agentDoesNotAutoBecomeDutyBearer
-
 legalChainBoundary : LegalChain.ApplicableAutomaticallyViolated → ⊥
 legalChainBoundary = LegalChain.applicabilityDoesNotAutoViolate
 
 data TypeOwnerPresenceMeansCorpusResolved : Set where
 data AggregateImportMeansKernelValidated : Set where
-
 typeOwnersDoNotResolveCorpus : TypeOwnerPresenceMeansCorpusResolved → ⊥
 typeOwnersDoNotResolveCorpus ()
-
 aggregateImportDoesNotClaimKernelValidation : AggregateImportMeansKernelValidated → ⊥
 aggregateImportDoesNotClaimKernelValidation ()
