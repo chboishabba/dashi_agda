@@ -6,18 +6,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Cognition.PNF.SensibLawMaboBrennanDawsonIssueResidualLiveExact as Mabo
 import DASHI.Cognition.PNF.SensibLawMaboRecognitionBasisAuthorityEvidenceExact as Use
 import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityPropositionWeldExact as Primary
 import DASHI.Cognition.PNF.SensibLawMaboRecognitionCoordinateFactorisationExact as Factor
-
-------------------------------------------------------------------------
--- Relation between a Mabo authority-use receipt and a proposition recovered
--- from the cited authority's own primary text.
---
--- This is deliberately not equality.  A later judge may support, qualify,
--- contrast with, or leave unresolved a proposition appearing in the cited
--- authority.  The relation itself is reviewed, not parser-produced.
-------------------------------------------------------------------------
 
 data PrimaryUseRelation : Set where
   primarySupportsLaterUse
@@ -27,7 +19,7 @@ data PrimaryUseRelation : Set where
   : PrimaryUseRelation
 
 record PrimaryAuthorityUseWeld
-    {maboProposition : _}
+    {maboProposition : Mabo.ReviewedJudicialProposition}
     (laterUse : Use.AuthorityUseReceipt maboProposition)
     (primary : Primary.ReviewedPrimaryAuthorityProposition) : Set where
   constructor primaryAuthorityUseWeld
@@ -43,10 +35,6 @@ record PrimaryAuthorityUseWeld
     parserAloneAuthorizesRelationIsFalse : parserAloneAuthorizesRelation ≡ false
     relationReference : String
 open PrimaryAuthorityUseWeld public
-
-------------------------------------------------------------------------
--- Amodu Tijani.
-------------------------------------------------------------------------
 
 brennanAmoduRadicalTitleWeld :
   PrimaryAuthorityUseWeld Use.brennanAmoduUse Primary.amoduUsufructBurdenProposition
@@ -83,10 +71,6 @@ dawsonAmoduNoDisplacementWeld = primaryAuthorityUseWeld
   true refl false refl
   "Amodu primary text rejects beneficial-Crown-title displacement of presumptive native title; this is relevant to, but does not by itself settle, Dawson's recognition analysis"
 
-------------------------------------------------------------------------
--- Calder.
-------------------------------------------------------------------------
-
 brennanCalderIndependentTitleWeld :
   PrimaryAuthorityUseWeld Use.brennanCalderUse Primary.hallIndependentTitleProposition
 brennanCalderIndependentTitleWeld = primaryAuthorityUseWeld
@@ -122,10 +106,6 @@ dawsonCalderJudsonWeld = primaryAuthorityUseWeld
   true refl false refl
   "Judson J OCR-primary material discusses and rejects a simple recognised/unrecognised dichotomy in the Tillamook compensation line; it informs but does not itself prove Dawson's recognition doctrine"
 
-------------------------------------------------------------------------
--- High-value disagreement receipt.
-------------------------------------------------------------------------
-
 record SameAuthorityPrimaryInterpretiveContrast : Set where
   constructor sameAuthorityPrimaryInterpretiveContrast
   field
@@ -158,10 +138,6 @@ amoduContinuityInterpretiveContrast = sameAuthorityPrimaryInterpretiveContrast
   true refl
   Factor.continuityAcrossSovereignty
   "same Amodu primary continuity proposition supports Brennan's continuity/radical-title lane while qualifying a recognition-dependent reading in Dawson"
-
-------------------------------------------------------------------------
--- No-collapse laws.
-------------------------------------------------------------------------
 
 data SameAuthorityMeansSameInterpretation : Set where
 data PrimaryTextForcesLaterJudicialUse : Set where
