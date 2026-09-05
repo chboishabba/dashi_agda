@@ -17,4 +17,6 @@ import DASHI.Law.CoerciveEncounterDenominatorIntegrityExact
 import DASHI.Law.SelectionEligibilityDisparityBidiExact
 import DASHI.Law.WandingOpportunityEligibilityHypervoxelExact
 import DASHI.Law.OpportunityConditionedSelectionDisparityExact
+import DASHI.Law.WandingOperationDeploymentProofExact
+import DASHI.Law.DeploymentConditionedSelectionBidiExact
 import DASHI.Law.CoerciveContactAuditValidation
