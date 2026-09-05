@@ -4,14 +4,17 @@ open import DASHI.Core.Prelude
 open import Agda.Primitive using (Level)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans; _≡_; refl)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
+import DASHI.Physics.Closure.NSTriadKNComplex3AlgebraLaws as Algebra
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAlgebraProgram as Hermitian
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws as Additive
 import DASHI.Physics.Closure.NSTriadKNProjectedNonlinearityFirstVariationRound82Exact as Linear
 import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact as Cross
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
+import DASHI.Physics.Closure.NSTriadKNCriticalNormalizedCurlSlotTangentRound157Exact as CurlAdd
 import DASHI.Physics.Plasma.MHDPlusMinusProjectedPseudoEnergyExact as State
 import DASHI.Physics.Plasma.MHDDoubledMagneticElsasserFibreExact as Doubled
 import DASHI.Physics.Plasma.MHDPhysicalInverseCurlMagneticHelicityExact as InverseCurl
@@ -77,7 +80,7 @@ physicalVariationIsDoubleFirstPairing :
     (I : C3.ModeInverseSquare F E)
     (S : Helical.HelicalModeScalars F)
     (L : Helical.PeriodicHelicalProjectorLaws F E I S)
-    (k : _)
+    (k : Z3.FourierMode)
     (magnetic tangent : C3.Complex3 F) →
   Helical.Transverse E k magnetic →
   Helical.Transverse E k tangent →
@@ -167,28 +170,34 @@ magneticHelicityLegVariationIsTripleAmplitude
     {F = F} E I S L state tau nonzero =
   let
     k = Physical.k tau
+    p = Physical.p tau
+    q = Physical.q tau
     magnetic = Doubled.doubledMagnetic state k
     tangent = CurlWeld.orderedPairDoubledInduction I state tau
     A = InverseCurl.physicalVectorPotential E I k magnetic
-    candidate = crossCandidate state tau
+    firstCross =
+      Cross.complex3Cross
+        (CurlPair.doubledVelocity state p)
+        (Doubled.doubledMagnetic state q)
+    secondCross =
+      Cross.complex3Cross
+        (CurlPair.doubledVelocity state q)
+        (Doubled.doubledMagnetic state p)
+    candidate = C3.complex3Add firstCross secondCross
 
     tangentTransverse : Helical.Transverse E k tangent
     tangentTransverse =
-      let
-        first = Doubled.doubledInductionOrderedTransverse
-          I state k (Physical.p tau) (Physical.q tau)
-          (Physical.kNonzero nonzero)
-        second = Doubled.doubledInductionOrderedTransverse
-          I state k (Physical.q tau) (Physical.p tau)
-          (Physical.kNonzero nonzero)
-      in
       trans
-        (DASHI.Physics.Closure.NSTriadKNComplex3AlgebraLaws.bilinearDot3RightAdd
+        (Algebra.bilinearDot3RightAdd
           (C3.modeVector E k)
-          (Doubled.doubledInductionOrderedInteraction I state k (Physical.p tau) (Physical.q tau))
-          (Doubled.doubledInductionOrderedInteraction I state k (Physical.q tau) (Physical.p tau)))
+          (Doubled.doubledInductionOrderedInteraction I state k p q)
+          (Doubled.doubledInductionOrderedInteraction I state k q p))
         (trans
-          (cong₂ C3.complexAdd first second)
+          (cong₂ C3.complexAdd
+            (Doubled.doubledInductionOrderedTransverse
+              I state k p q (Physical.kNonzero nonzero))
+            (Doubled.doubledInductionOrderedTransverse
+              I state k q p (Physical.kNonzero nonzero)))
           (Field.complexAddZeroLeft (C3.complexZero F)))
 
     symmetricVariation :
@@ -210,9 +219,7 @@ magneticHelicityLegVariationIsTripleAmplitude
       trans
         (CurlWeld.orderedPairDoubledInductionDoublesToCurlCrosses
           E I state tau)
-        (sym
-          (DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws.hermitianDummy
-            {F = F}))
+        (sym (CurlAdd.curlSymbolAdd E k firstCross secondCross))
   in
   trans
     symmetricVariation
@@ -227,23 +234,10 @@ magneticHelicityLegVariationIsTripleAmplitude
           (Doubled.doubledMagneticTransverse state k))
         (trans
           (cong C3.complexRealPart
-            (Additive.hermitianPairingAddRight
-              magnetic
-              (Cross.complex3Cross
-                (CurlPair.doubledVelocity state (Physical.p tau))
-                (Doubled.doubledMagnetic state (Physical.q tau)))
-              (Cross.complex3Cross
-                (CurlPair.doubledVelocity state (Physical.q tau))
-                (Doubled.doubledMagnetic state (Physical.p tau)))))
+            (Additive.hermitianPairingAddRight magnetic firstCross secondCross))
           (Field.complexRealPartAdd
-            (C3.hermitianPairing3 magnetic
-              (Cross.complex3Cross
-                (CurlPair.doubledVelocity state (Physical.p tau))
-                (Doubled.doubledMagnetic state (Physical.q tau))))
-            (C3.hermitianPairing3 magnetic
-              (Cross.complex3Cross
-                (CurlPair.doubledVelocity state (Physical.q tau))
-                (Doubled.doubledMagnetic state (Physical.p tau))))))))
+            (C3.hermitianPairing3 magnetic firstCross)
+            (C3.hermitianPairing3 magnetic secondCross)))))
 
 record LegTripleAmplitudeBoundary : Set where
   constructor leg-triple-amplitude-boundary
