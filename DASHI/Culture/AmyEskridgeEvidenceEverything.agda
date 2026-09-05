@@ -1,0 +1,31 @@
+module DASHI.Culture.AmyEskridgeEvidenceEverything where
+
+-- Focused aggregate for the evidence-hyperfabric lane.  The generic viewpoint,
+-- open-science and knowledge-boundary BIDI cores are registered here without
+-- treating Amy Eskridge as a member of the separate House-letter scientist
+-- roster population.
+
+import DASHI.Core.EvidenceHyperfabricExact
+import DASHI.Core.EvidenceAcquisitionSelectiveReopeningExact
+import DASHI.Core.ViewpointProvenanceBidiExact
+import DASHI.Core.OpenScienceKnowledgeReleaseBidiExact
+import DASHI.Core.KnowledgeBoundaryTransitionBidiExact
+import DASHI.Core.KnowledgeBoundaryCandidateIdentityBidiExact
+import DASHI.Core.KnowledgeObjectLineageBidiExact
+import DASHI.Core.LayeredKnowledgeReleaseBidiExact
+import DASHI.Culture.AmyEskridgeEvidenceHyperfabricExact
+import DASHI.Culture.AmyEskridgeEvidenceCrossPollinationExact
+import DASHI.Culture.AmyEskridgeAcquisitionProofSearchExact
+import DASHI.Culture.AmyEskridgeKnowledgeBoundaryTransitionExact
+import DASHI.Culture.AmyEskridgePOAMSBoundaryCandidateExact
+import DASHI.Culture.AmyEskridgePOAMSObjectLineageExact
+import DASHI.Culture.POAMSProprietaryPeriodBoundaryExact
+import DASHI.Culture.POAMSLayeredReleaseExact
+import DASHI.Culture.AmyEskridgeGravityMechanismCrossPollinationExact
+import DASHI.Culture.AmyEskridgeLiTorrMechanismBridgeExact
+import DASHI.Culture.AmyEskridgeLiTorrMagnitudeTriangleCrossPollinationExact
+import DASHI.Culture.AmyEskridgeLiTorrGRGeometryCrossPollinationExact
+import DASHI.Culture.AmyEskridgeLiTorrGeometryFactorCrossPollinationExact
+import DASHI.Culture.AmyEskridgeLiTorrSourceConstitutiveCrossPollinationExact
+import DASHI.Culture.AmyEskridgeSuperconductingGravityExperimentalConstraintsCrossPollinationExact
+import DASHI.Culture.AmyEskridgeSuperconductingGravityExperimentProofSearchCrossPollinationExact

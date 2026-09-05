@@ -1,0 +1,7 @@
+module DASHI.Physics.Catalysis.Everything where
+
+import DASHI.Physics.Catalysis.HighEntropyMBeneMechanismHyperfabricExact
+import DASHI.Physics.Catalysis.HighEntropyMBeneResidualScalingEscapeBidiExact
+import DASHI.Physics.Catalysis.HighEntropyMBeneScreeningAdmissibilityBidiExact
+import DASHI.Physics.Catalysis.HighEntropyMBeneDFTScalingWitnessAcquisitionExact
+import DASHI.Physics.Catalysis.HighEntropyMBeneThermodynamicKineticFirewallExact

@@ -1,0 +1,53 @@
+module DASHI.Culture.MissingDeceasedScientificWorkEverything where
+
+-- Focused aggregate for attribution-safe scientific-work reconstruction,
+-- source-exact citation, technical-intersection proof search, independent
+-- common-selector/visibility analysis, selector-discrimination search,
+-- higher-order capability synthesis, capability-indexed selector salience,
+-- denominator-aware matched-control enrichment, competing-hypothesis
+-- discrimination, critical-knowledge BIDI acquisition, viewpoint-provenance
+-- testing, open-science/knowledge-release and externalisation-boundary BIDI
+-- testing, disruption-benefit evidence testing, actor benefit/visibility/effect
+-- intersection, and matched disruption-impact controls.
+-- Kept separate from AmyEskridgeEvidenceEverything because Amy Eskridge is not
+-- explicitly named in the 20 April 2026 House Oversight letter formalised here.
+
+import DASHI.Core.ScientificWorkAttributionExact
+import DASHI.Core.ScientificSourceCitationExact
+import DASHI.Core.TechnicalDependencyHypergraphExact
+import DASHI.Core.CommonSelectorVisibilityHyperfabricExact
+import DASHI.Core.SelectorDiscriminationSearchExact
+import DASHI.Core.CapabilitySynthesisHypergraphExact
+import DASHI.Core.CapabilityIndexedSelectorSalienceExact
+import DASHI.Core.ReferencePopulationRosterEnrichmentExact
+import DASHI.Core.DisruptionBenefitHypothesisExact
+import DASHI.Core.ActorBenefitVisibilityDisruptionIntersectionExact
+import DASHI.Core.CounterfactualDisruptionImpactExact
+import DASHI.Core.CriticalKnowledgeConcentrationBidiExact
+import DASHI.Core.ViewpointProvenanceBidiExact
+import DASHI.Core.OpenScienceKnowledgeReleaseBidiExact
+import DASHI.Core.TechnicalExternalisationDepthBidiExact
+import DASHI.Core.ExternalisationBoundaryEnrichmentBidiExact
+import DASHI.Culture.MissingDeceasedScientistWorkAttributionExact
+import DASHI.Culture.MissingDeceasedScientificWorkCrossPollinationExact
+import DASHI.Culture.MissingDeceasedScientificWorkSourceRegistryExact
+import DASHI.Culture.MissingDeceasedScientificWorkSourceRegistryExtendedExact
+import DASHI.Culture.MissingDeceasedTechnicalDependencyHypergraphExact
+import DASHI.Culture.MissingDeceasedTechnicalIntersectionAcquisitionExact
+import DASHI.Culture.MissingDeceasedCommonSelectorVisibilityExact
+import DASHI.Culture.MissingDeceasedSelectorAcquisitionExact
+import DASHI.Culture.MissingDeceasedSelectorDiscriminationFrontierExact
+import DASHI.Culture.MissingDeceasedCapabilitySynthesisExact
+import DASHI.Culture.MissingDeceasedCapabilityIndexedSelectorSalienceExact
+import DASHI.Culture.MissingDeceasedCapabilitySelectorAcquisitionExact
+import DASHI.Culture.MissingDeceasedRosterEnrichmentDesignExact
+import DASHI.Culture.MissingDeceasedHypothesisDiscriminatorMatrixExact
+import DASHI.Culture.MissingDeceasedDisruptionBenefitEvidenceExact
+import DASHI.Culture.MissingDeceasedDisruptionBenefitAcquisitionExact
+import DASHI.Culture.MissingDeceasedActorIntersectionFrontierExact
+import DASHI.Culture.MissingDeceasedCounterfactualDisruptionImpactExact
+import DASHI.Culture.MissingDeceasedCriticalKnowledgeBidiExact
+import DASHI.Culture.MissingDeceasedViewpointEvidenceExact
+import DASHI.Culture.MissingDeceasedOpenScienceBidiExact
+import DASHI.Culture.MissingDeceasedOpenScienceEverything
+import DASHI.Culture.HouseOversightScientistRosterScopeExact
