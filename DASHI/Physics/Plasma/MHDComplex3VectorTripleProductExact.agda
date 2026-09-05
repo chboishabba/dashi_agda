@@ -60,6 +60,25 @@ vectorTripleProduct {F = F}
       refl ax ay az bx by bz cx cy cz)
   where module R = Ring.Solver F
 
+complex3ReverseSubtractIsNegate :
+  ∀ {r : Level} {F : C3.RealField r}
+    (left right : C3.Complex3 F) →
+  C3.complex3Subtract right left
+  ≡ C3.complex3Negate (C3.complex3Subtract left right)
+complex3ReverseSubtractIsNegate {F = F}
+    (C3.complex3 lx ly lz) (C3.complex3 rx ry rz) =
+  Field.complex3Ext
+    (R.solve 2
+      (λ l r → (r R.⊕ (R.⊝ l)) R.⊜ R.⊝ (l R.⊕ (R.⊝ r)))
+      refl lx rx)
+    (R.solve 2
+      (λ l r → (r R.⊕ (R.⊝ l)) R.⊜ R.⊝ (l R.⊕ (R.⊝ r)))
+      refl ly ry)
+    (R.solve 2
+      (λ l r → (r R.⊕ (R.⊝ l)) R.⊜ R.⊝ (l R.⊕ (R.⊝ r)))
+      refl lz rz)
+  where module R = Ring.Solver F
+
 ------------------------------------------------------------------------
 -- RESONANT/TRANSVERSE SPECIALIZATION USED BY IDEAL INDUCTION
 ------------------------------------------------------------------------
@@ -117,21 +136,9 @@ inductionKernelIsNegativeCurlCross {F = F} p q k u b G
         | Algebra.bilinearDot3Commutative u q
         | Algebra.bilinearDot3Commutative b p
         | vectorTripleProduct (C3.complex3Add p q) u b =
-  finalNegate
-  where
-  finalNegate :
-    C3.complex3Subtract
-      (C3.complex3Scale (C3.bilinearDot3 q u) b)
-      (C3.complex3Scale (C3.bilinearDot3 p b) u)
-    ≡
-    C3.complex3Negate
-      (C3.complex3Subtract
-        (C3.complex3Scale (C3.bilinearDot3 p b) u)
-        (C3.complex3Scale (C3.bilinearDot3 q u) b))
-  finalNegate
-      rewrite Field.complex3NegateSubtract
-        (C3.complex3Scale (C3.bilinearDot3 p b) u)
-        (C3.complex3Scale (C3.bilinearDot3 q u) b) = refl
+  complex3ReverseSubtractIsNegate
+    (C3.complex3Scale (C3.bilinearDot3 p b) u)
+    (C3.complex3Scale (C3.bilinearDot3 q u) b)
 
 record VectorTripleProductBoundary : Set where
   constructor vector-triple-product-boundary
