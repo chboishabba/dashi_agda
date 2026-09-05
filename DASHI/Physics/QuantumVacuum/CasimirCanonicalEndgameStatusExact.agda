@@ -4,7 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
--- CANONICAL ENDGAME STATUS AFTER V4 PROOF PRUNING
+-- CANONICAL ENDGAME STATUS AFTER V6 PROOF PRUNING
 ------------------------------------------------------------------------
 
 record CanonicalEndgameStatus : Set where
@@ -15,20 +15,27 @@ record CanonicalEndgameStatus : Set where
     bishopProductRuleOwned : Bool
     bishopPolarDerivativeAndDeterminantCompilerOwned : Bool
     sourceBackedTrigDerivativeAndPythagoreanOwned : Bool
-    sourceBackedParallelPlateTETMExpansionOwned : Bool
+    sourceBackedParallelPlateFieldExpansionOwned : Bool
+    sourceBackedParallelPlateLongitudinalCoverageOwned : Bool
+    maxwellProofBearingCompletenessCompilerOwned : Bool
     sourceBackedPolarChangeOfVariablesOwned : Bool
     matchedDivergenceCancellationOwned : Bool
     canonicalResidualMetricOwned : Bool
     canonicalMetricToBishopConvergenceOwned : Bool
-    zetaMinusThreeOneOver120CompilerOwned : Bool
+    residualTrajectoryAndCandidateWeldsPruned : Bool
+    proofBearingZetaTransformationTraceSurfaceOwned : Bool
+    transformedLiteralDefectOneOver120CompilerOwned : Bool
     sixTimes120ArithmeticOwned : Bool
-    v4CanonicalRouterOwned : Bool
+    v6CanonicalRouterOwned : Bool
 
-    maxwellFiniteEnergyCarrierWeldClosed : Bool
+    maxwellSourceFiniteEnergyCarrierWeldClosed : Bool
+    maxwellTransverseCompletenessClosed : Bool
+    maxwellTETMIndependenceClosed : Bool
+    maxwellZeroSectorCountingClosed : Bool
     sharedClassicalBishopTrigObjectWeldClosed : Bool
     polarMeasureDomainIntegrandWeldClosed : Bool
     concreteResidualTailBoundClosed : Bool
-    zetaTransformationTraceClosed : Bool
+    concreteZetaTransformationTraceClosed : Bool
 
     finiteCutoffEnumerationOwnedIsTrue : finiteCutoffEnumerationOwned ≡ true
     finiteParsevalOwnedIsTrue : finiteParsevalOwned ≡ true
@@ -39,27 +46,42 @@ record CanonicalEndgameStatus : Set where
       bishopPolarDerivativeAndDeterminantCompilerOwned ≡ true
     sourceBackedTrigDerivativeAndPythagoreanOwnedIsTrue :
       sourceBackedTrigDerivativeAndPythagoreanOwned ≡ true
-    sourceBackedParallelPlateTETMExpansionOwnedIsTrue :
-      sourceBackedParallelPlateTETMExpansionOwned ≡ true
+    sourceBackedParallelPlateFieldExpansionOwnedIsTrue :
+      sourceBackedParallelPlateFieldExpansionOwned ≡ true
+    sourceBackedParallelPlateLongitudinalCoverageOwnedIsTrue :
+      sourceBackedParallelPlateLongitudinalCoverageOwned ≡ true
+    maxwellProofBearingCompletenessCompilerOwnedIsTrue :
+      maxwellProofBearingCompletenessCompilerOwned ≡ true
     sourceBackedPolarChangeOfVariablesOwnedIsTrue :
       sourceBackedPolarChangeOfVariablesOwned ≡ true
     matchedDivergenceCancellationOwnedIsTrue : matchedDivergenceCancellationOwned ≡ true
     canonicalResidualMetricOwnedIsTrue : canonicalResidualMetricOwned ≡ true
     canonicalMetricToBishopConvergenceOwnedIsTrue :
       canonicalMetricToBishopConvergenceOwned ≡ true
-    zetaMinusThreeOneOver120CompilerOwnedIsTrue :
-      zetaMinusThreeOneOver120CompilerOwned ≡ true
+    residualTrajectoryAndCandidateWeldsPrunedIsTrue :
+      residualTrajectoryAndCandidateWeldsPruned ≡ true
+    proofBearingZetaTransformationTraceSurfaceOwnedIsTrue :
+      proofBearingZetaTransformationTraceSurfaceOwned ≡ true
+    transformedLiteralDefectOneOver120CompilerOwnedIsTrue :
+      transformedLiteralDefectOneOver120CompilerOwned ≡ true
     sixTimes120ArithmeticOwnedIsTrue : sixTimes120ArithmeticOwned ≡ true
-    v4CanonicalRouterOwnedIsTrue : v4CanonicalRouterOwned ≡ true
+    v6CanonicalRouterOwnedIsTrue : v6CanonicalRouterOwned ≡ true
 
-    maxwellFiniteEnergyCarrierWeldClosedIsFalse :
-      maxwellFiniteEnergyCarrierWeldClosed ≡ false
+    maxwellSourceFiniteEnergyCarrierWeldClosedIsFalse :
+      maxwellSourceFiniteEnergyCarrierWeldClosed ≡ false
+    maxwellTransverseCompletenessClosedIsFalse :
+      maxwellTransverseCompletenessClosed ≡ false
+    maxwellTETMIndependenceClosedIsFalse :
+      maxwellTETMIndependenceClosed ≡ false
+    maxwellZeroSectorCountingClosedIsFalse :
+      maxwellZeroSectorCountingClosed ≡ false
     sharedClassicalBishopTrigObjectWeldClosedIsFalse :
       sharedClassicalBishopTrigObjectWeldClosed ≡ false
     polarMeasureDomainIntegrandWeldClosedIsFalse :
       polarMeasureDomainIntegrandWeldClosed ≡ false
     concreteResidualTailBoundClosedIsFalse : concreteResidualTailBoundClosed ≡ false
-    zetaTransformationTraceClosedIsFalse : zetaTransformationTraceClosed ≡ false
+    concreteZetaTransformationTraceClosedIsFalse :
+      concreteZetaTransformationTraceClosed ≡ false
 
 open CanonicalEndgameStatus public
 
@@ -71,58 +93,72 @@ canonicalStatus = record
   ; bishopProductRuleOwned = true
   ; bishopPolarDerivativeAndDeterminantCompilerOwned = true
   ; sourceBackedTrigDerivativeAndPythagoreanOwned = true
-  ; sourceBackedParallelPlateTETMExpansionOwned = true
+  ; sourceBackedParallelPlateFieldExpansionOwned = true
+  ; sourceBackedParallelPlateLongitudinalCoverageOwned = true
+  ; maxwellProofBearingCompletenessCompilerOwned = true
   ; sourceBackedPolarChangeOfVariablesOwned = true
   ; matchedDivergenceCancellationOwned = true
   ; canonicalResidualMetricOwned = true
   ; canonicalMetricToBishopConvergenceOwned = true
-  ; zetaMinusThreeOneOver120CompilerOwned = true
+  ; residualTrajectoryAndCandidateWeldsPruned = true
+  ; proofBearingZetaTransformationTraceSurfaceOwned = true
+  ; transformedLiteralDefectOneOver120CompilerOwned = true
   ; sixTimes120ArithmeticOwned = true
-  ; v4CanonicalRouterOwned = true
-  ; maxwellFiniteEnergyCarrierWeldClosed = false
+  ; v6CanonicalRouterOwned = true
+  ; maxwellSourceFiniteEnergyCarrierWeldClosed = false
+  ; maxwellTransverseCompletenessClosed = false
+  ; maxwellTETMIndependenceClosed = false
+  ; maxwellZeroSectorCountingClosed = false
   ; sharedClassicalBishopTrigObjectWeldClosed = false
   ; polarMeasureDomainIntegrandWeldClosed = false
   ; concreteResidualTailBoundClosed = false
-  ; zetaTransformationTraceClosed = false
+  ; concreteZetaTransformationTraceClosed = false
   ; finiteCutoffEnumerationOwnedIsTrue = refl
   ; finiteParsevalOwnedIsTrue = refl
   ; bishopPowerAndFiniteTrigAnalyticDerivativeOwnedIsTrue = refl
   ; bishopProductRuleOwnedIsTrue = refl
   ; bishopPolarDerivativeAndDeterminantCompilerOwnedIsTrue = refl
   ; sourceBackedTrigDerivativeAndPythagoreanOwnedIsTrue = refl
-  ; sourceBackedParallelPlateTETMExpansionOwnedIsTrue = refl
+  ; sourceBackedParallelPlateFieldExpansionOwnedIsTrue = refl
+  ; sourceBackedParallelPlateLongitudinalCoverageOwnedIsTrue = refl
+  ; maxwellProofBearingCompletenessCompilerOwnedIsTrue = refl
   ; sourceBackedPolarChangeOfVariablesOwnedIsTrue = refl
   ; matchedDivergenceCancellationOwnedIsTrue = refl
   ; canonicalResidualMetricOwnedIsTrue = refl
   ; canonicalMetricToBishopConvergenceOwnedIsTrue = refl
-  ; zetaMinusThreeOneOver120CompilerOwnedIsTrue = refl
+  ; residualTrajectoryAndCandidateWeldsPrunedIsTrue = refl
+  ; proofBearingZetaTransformationTraceSurfaceOwnedIsTrue = refl
+  ; transformedLiteralDefectOneOver120CompilerOwnedIsTrue = refl
   ; sixTimes120ArithmeticOwnedIsTrue = refl
-  ; v4CanonicalRouterOwnedIsTrue = refl
-  ; maxwellFiniteEnergyCarrierWeldClosedIsFalse = refl
+  ; v6CanonicalRouterOwnedIsTrue = refl
+  ; maxwellSourceFiniteEnergyCarrierWeldClosedIsFalse = refl
+  ; maxwellTransverseCompletenessClosedIsFalse = refl
+  ; maxwellTETMIndependenceClosedIsFalse = refl
+  ; maxwellZeroSectorCountingClosedIsFalse = refl
   ; sharedClassicalBishopTrigObjectWeldClosedIsFalse = refl
   ; polarMeasureDomainIntegrandWeldClosedIsFalse = refl
   ; concreteResidualTailBoundClosedIsFalse = refl
-  ; zetaTransformationTraceClosedIsFalse = refl
+  ; concreteZetaTransformationTraceClosedIsFalse = refl
   }
 
 record CanonicalCriticalPath : Set where
   field
-    first : String
-    second : String
-    third : String
-    fourth : String
-    fifth : String
+    maxwell : String
+    trig : String
+    polarMeasure : String
+    residual : String
+    zeta : String
 
 canonicalCriticalPath : CanonicalCriticalPath
 canonicalCriticalPath = record
-  { first =
-      "identify the source-backed parallel-plate TE/TM expansion with the literal Casimir finite-energy/Hilbert field carrier, including transverse labels and the exceptional zero sector"
-  ; second =
-      "identify the classical DLMF sine/cosine object with the literal Round11 Bishop series once; that one weld feeds both derivative and Pythagorean compilers"
-  ; third =
-      "apply the source-backed polar change-of-variables theorem to the literal Casimir domain, measure and integrand; trig derivatives and det(DPhi)=r are already upstream"
-  ; fourth =
-      "prove one concrete dependent post-cancellation tail estimate |R_n-Eren| <= 1/(m+1) beyond a constructed threshold; Bishop convergence is then compiler output"
-  ; fifth =
-      "provide a proof-bearing transformation trace from the literal discrete-minus-continuum longitudinal defect to the local zeta continuation object; zeta(-3)=1/120 is already compiler output"
+  { maxwell =
+      "pay one source-to-Casimir finite-energy/mode-object weld plus the genuinely local transverse-completeness, TE/TM-independence and exact zero-sector-counting receipts; source-backed field spanning and longitudinal coverage are then compiler output"
+  ; trig =
+      "identify the classical DLMF sine/cosine object with the literal Round11 Bishop series once; pointwise absolute convergence alone is not enough to prove derivative-limit interchange, so the cross-foundation derivative-semantics/interchange weld remains live"
+  ; polarMeasure =
+      "apply the source-backed polar change-of-variables theorem to the literal Casimir domain, measure and integrand; Bishop trig derivatives and det(DPhi)=r are already upstream compiler output"
+  ; residual =
+      "prove one concrete post-cancellation tail theorem |R_n-Eren| <= 1/(m+1) beyond a constructed threshold; the residual metric family, candidate identity and Bishop convergence transport are now definitionally fixed"
+  ; zeta =
+      "instantiate the proof-bearing transformation trace from the literal discrete-minus-continuum longitudinal defect through the finite-part/zeta transformation; once supplied, the transformed literal defect = 1/120 theorem is compiler output"
   }
