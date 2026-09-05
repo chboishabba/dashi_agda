@@ -41,6 +41,7 @@ import DASHI.Analysis.NonArchimedeanTwistedTauOddFunctionEquivalenceExact
 import DASHI.Analysis.NonArchimedeanTwistedRestrictionIntertwinerExact
 import DASHI.Analysis.NonArchimedeanTwistedRestrictionCoreIntertwinerExact
 import DASHI.Analysis.NonArchimedeanConcreteSourceSheetAdapterExact
+import DASHI.Analysis.NonArchimedeanConcreteSourceSheetAdapterClosureExact
 import DASHI.Analysis.NonArchimedeanConcreteMonomialWeldCompilerExact
 
 -- Arithmetic orbit and signed-return closure. The stronger checked source
@@ -57,6 +58,16 @@ import DASHI.Analysis.NonArchimedeanOneOrbitTraceCancellationExact
 import DASHI.Analysis.NonArchimedeanOrbitSumToSignedCancellationExact
 import DASHI.Analysis.NonArchimedeanNegativeOrbitWeightPhaseCompilerExact
 import DASHI.Analysis.NonArchimedeanOrbitCancellationToMinusTwoExact
+
+-- Spectrum-tower repair. The external named theorem still concludes `True`,
+-- but the characteristic determinant/root-union route now compiles from the
+-- already checked block decomposition and determinant ingredients.
+import DASHI.Analysis.NonArchimedeanCharacteristicRootUnionCompilerExact
+import DASHI.Analysis.NonArchimedeanCharacteristicFactorizationReuseExact
+
+-- Current post-closure audit: keep the directed twisted-circle radius scaling
+-- separate from the independent theorem-bearing undirected gap exponent alpha.
+import DASHI.Analysis.NonArchimedeanDirectedRadiusCriticalSigmaAuditExact
 import DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact
 
 -- Optional Monster correspondence x-pollination. These remain downstream
