@@ -5,8 +5,7 @@ open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
 -- GENERIC INVERSE-PROBLEM / IDENTIFIABILITY BIDI CORE
---
--- Shared theorem-shape only.  Domain models remain separate.
+-- Shared theorem-shape only. Domain models remain separate.
 ------------------------------------------------------------------------
 
 record ForwardModel : Set₁ where
@@ -35,12 +34,32 @@ record IdentifiabilityWitness (M : ForwardModel) : Set where
 
 open IdentifiabilityWitness public
 
+record DistinctDegeneracyWitness (M : ForwardModel) : Set where
+  constructor distinct-degeneracy-witness
+  field
+    witness : IdentifiabilityWitness M
+    distinctLatents : left witness ≢ right witness
+
+open DistinctDegeneracyWitness public
+
 record GloballyIdentifiable (M : ForwardModel) : Set where
   constructor globally-identifiable
   field
     injectiveForward : (x y : Latent M) → forward M x ≡ forward M y → x ≡ y
 
 open GloballyIdentifiable public
+
+distinctDegeneracyRefutesGlobalIdentifiability :
+  (M : ForwardModel) →
+  DistinctDegeneracyWitness M →
+  GloballyIdentifiable M →
+  ⊥
+distinctDegeneracyRefutesGlobalIdentifiability M d g =
+  distinctLatents d
+    (injectiveForward g
+      (left (witness d))
+      (right (witness d))
+      (sameObservable (witness d)))
 
 record MultiChannelModel : Set₁ where
   constructor multi-channel-model
@@ -62,6 +81,16 @@ record FusionSeparates (M : MultiChannelModel) : Set where
       x ≡ y
 
 open FusionSeparates public
+
+fusionEqualityIdentifies :
+  (M : MultiChannelModel) →
+  FusionSeparates M →
+  (x y : Latent M) →
+  f₁ M x ≡ f₁ M y →
+  f₂ M x ≡ f₂ M y →
+  x ≡ y
+fusionEqualityIdentifies M fusion x y eq₁ eq₂ =
+  separates fusion x y eq₁ eq₂
 
 record InverseProblemBoundary : Set where
   constructor inverse-problem-boundary
