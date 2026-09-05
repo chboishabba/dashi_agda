@@ -237,6 +237,8 @@ data SeparateTEZeroExclusionReceiptStillRequired : Set where
 data SeparateTMZeroCountingReceiptStillRequired : Set where
 data SeparateTETMIndependenceReceiptStillRequired : Set where
 
+data MatchingTEMTETMLabelsWithoutFiniteEnergyCarrierIdentitySuffices : Set where
+
 teZeroPrunedByDatatype : SeparateTEZeroExclusionReceiptStillRequired → ⊥
 teZeroPrunedByDatatype ()
 
@@ -245,6 +247,10 @@ tmZeroPrunedByTEMConstructor ()
 
 independencePrunedByConstructors : SeparateTETMIndependenceReceiptStillRequired → ⊥
 independencePrunedByConstructors ()
+
+labelsStillDoNotIdentifyHilbertCarrier :
+  MatchingTEMTETMLabelsWithoutFiniteEnergyCarrierIdentitySuffices → ⊥
+labelsStillDoNotIdentifyHilbertCarrier ()
 
 record Status : Set where
   field
