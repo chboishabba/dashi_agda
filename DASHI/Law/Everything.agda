@@ -13,4 +13,6 @@ import DASHI.Law.CoerciveEncounterFixtureCompilerExact
 import DASHI.Law.CoerciveEncounterGenericReceiptBridgeExact
 import DASHI.Law.CoerciveEncounterPopulationAggregationExact
 import DASHI.Law.SystemicCoercivePracticePromotionGateExact
+import DASHI.Law.CoerciveEncounterDenominatorIntegrityExact
+import DASHI.Law.SelectionEligibilityDisparityBidiExact
 import DASHI.Law.CoerciveContactAuditValidation
