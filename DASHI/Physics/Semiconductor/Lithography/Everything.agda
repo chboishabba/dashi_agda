@@ -3,3 +3,4 @@ module DASHI.Physics.Semiconductor.Lithography.Everything where
 import DASHI.Physics.Semiconductor.Lithography.RayleighCriterionExact
 import DASHI.Physics.Semiconductor.Lithography.ASMLRayleighFixturesExact
 import DASHI.Physics.Semiconductor.Lithography.DepthOfFocusScalingExact
+import DASHI.Physics.Semiconductor.Lithography.PhotonEnergyScalingExact
