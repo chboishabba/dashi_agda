@@ -1,6 +1,7 @@
 module DASHI.Core.RuntimeVerticalSliceValidation where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Core.ContentAddressedTransitionIdentityExact as Identity
