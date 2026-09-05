@@ -11,6 +11,7 @@ import DASHI.Analysis.BishopSetoidPowerDerivativeNormalisationExact as Power
 import DASHI.Analysis.BishopNaturalScaleEmbeddingBridgeExact as Scale
 import DASHI.Analysis.BishopInverseFactorialDerivativeCoefficientExact as Coefficient
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
+import DASHI.Foundations.BishopFiniteDegreeOneGeometricIdentityExact as NatReal
 import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact as Estimates
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Terms
 
@@ -45,8 +46,7 @@ coefficientTimesScaledPower :
       power)
 coefficientTimesScaledPower n coefficient power =
   let
-    embedded =
-      DASHI.Foundations.BishopFiniteDegreeOneGeometricIdentityExact.natReal (suc n)
+    embedded = NatReal.natReal (suc n)
     open BishopP.ℝ-Solver
   in
   BishopP.≃-trans
@@ -112,7 +112,6 @@ sineFiniteTermDerivativeIsCosineTerm :
 sineFiniteTermDerivativeIsCosineTerm point index =
   let
     even = Estimates.evenExponent index
-    sign = Terms.alternatingSign index
     nextCoefficient = Exp.embed (Exp.inverseFactorial (suc even))
     power = Bishop.pow point even
   in
@@ -142,7 +141,6 @@ cosineFiniteTermDerivativeIsNegativeSineTerm point index =
   let
     odd = Estimates.oddExponent index
     sign = Terms.alternatingSign index
-    nextSign = Terms.alternatingSign (suc index)
     nextCoefficient = Exp.embed (Exp.inverseFactorial (suc odd))
     coefficient = Exp.embed (Exp.inverseFactorial odd)
     power = Bishop.pow point odd
