@@ -169,7 +169,7 @@ whyteSubject = C.matched-externalisation-subject
 
 mitPsfcSeedCohort : C.ExternalisationControlCohort
 mitPsfcSeedCohort = C.externalisation-control-cohort
-  D.openScienceExternalisationDesign
+  D.externalisationDepthDesign
   (loureiroSubject ∷ [])
   (whiteSubject ∷ bonoliSubject ∷ whyteSubject ∷ [])
   "First PSFC stratum. Anne White is already a control-side deep-positive; Bonoli and Whyte remain incompletely inspected rather than negative. No enrichment claim is made from this seed cohort."
