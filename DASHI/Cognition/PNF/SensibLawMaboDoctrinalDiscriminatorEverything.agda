@@ -4,6 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityV02Everything as V02
+import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityResidualRefinementV02Exact as Refined
 import DASHI.Cognition.PNF.SensibLawMaboMinimalDoctrinalDiscriminatorExact as Minimal
 import DASHI.Cognition.PNF.SensibLawMaboMinimalDoctrinalHyperfabricBridgeExact as Hyper
 import DASHI.Cognition.PNF.SensibLawMaboMinimalDoctrinalCutsetExact as Cutset
@@ -88,9 +89,9 @@ oneProbeDoesNotFitEveryAxis = Hyper.oneProbeDoesNotFitAllAxes
 ------------------------------------------------------------------------
 
 authoritativeTextStillDoesNotResolveLegalCoordinate :
-  V02.Refined.AuthoritativeTranscriptionMeansCoordinateResolved → ⊥
+  Refined.AuthoritativeTranscriptionMeansCoordinateResolved → ⊥
 authoritativeTextStillDoesNotResolveLegalCoordinate = V02.authoritativeTextStillDoesNotResolveCoordinate
 
 exactUnifiedTheoryStillNotClosed :
-  V02.Refined.TextNativeAmoduEvidenceResolvesExactMaboTheory → ⊥
+  Refined.TextNativeAmoduEvidenceResolvesExactMaboTheory → ⊥
 exactUnifiedTheoryStillNotClosed = V02.v02DoesNotCloseExactUnifiedTheory
