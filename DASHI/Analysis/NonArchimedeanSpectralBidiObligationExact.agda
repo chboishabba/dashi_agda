@@ -11,9 +11,10 @@ module DASHI.Analysis.NonArchimedeanSpectralBidiObligationExact where
 --   * universal sqrt(|A^c|) 2^(-t/2) stopping-survival bound.
 --
 -- The viable repairs are level-dependent prefactored L2 powers and a finite,
--- constructive hitting-block route for set-dependent stopping tails. The source
--- already supplies the finite ZMod/Finset.univ carrier enumeration, so the
--- constructive stopping tail now has only three same-object/backend leaves.
+-- constructive hitting-block route for set-dependent stopping tails. All finite
+-- stopping combinatorics, branch/probability semantics and absorption are now
+-- owned. The only remaining constructive tail seam is predecessor transitivity
+-- on the literal source ZMod (2^n) carrier.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -124,12 +125,12 @@ universalStoppingSurvivalClaim = bidiClaim universalStoppingSurvivalBound
 setDependentStoppingSurvivalClaim : BidiClaim
 setDependentStoppingSurvivalClaim = bidiClaim setDependentStoppingSurvivalBound
   "each fixed finite stopping set has some set-dependent exponential survival tail"
-  "forward translation reachability + finite hitting-block survivor-count decay" false
+  "single remaining ZMod predecessor transitivity adapter" false
 
 stoppingMomentsClaim : BidiClaim
 stoppingMomentsClaim = bidiClaim stoppingMomentFiniteness
   "finite stopping-time moments follow from a valid set-dependent survival tail"
-  "constructive finite tail + generating-function/moment consumer" false
+  "set-dependent finite fraction tail + generating-function/moment consumer" false
 
 taoConcentrationClaim : BidiClaim
 taoConcentrationClaim = bidiClaim taoStyleStoppingConcentration
@@ -178,8 +179,6 @@ data MissingObligation : Set where
   needCorrelationConsumerWeld : MissingObligation
   rejectedUniversalStoppingSurvivalBound : MissingObligation
   needZModCyclicPredecessorAdapter : MissingObligation
-  needSourceRwPathPrefixAbsorptionWeld : MissingObligation
-  needProbabilityNormalization : MissingObligation
   needStoppingTailGeneratingFunctionConsumer : MissingObligation
   needMarkovConcentrationHypotheses : MissingObligation
   needDriftStoppingSameObjectWeld : MissingObligation
@@ -215,13 +214,9 @@ compileMissing correlationDecayAtInverseSqrtTwo =
 compileMissing universalStoppingSurvivalBound =
   rejectedUniversalStoppingSurvivalBound ∷ []
 compileMissing setDependentStoppingSurvivalBound =
-  needZModCyclicPredecessorAdapter ∷
-  needSourceRwPathPrefixAbsorptionWeld ∷
-  needProbabilityNormalization ∷ []
+  needZModCyclicPredecessorAdapter ∷ []
 compileMissing stoppingMomentFiniteness =
   needZModCyclicPredecessorAdapter ∷
-  needSourceRwPathPrefixAbsorptionWeld ∷
-  needProbabilityNormalization ∷
   needStoppingTailGeneratingFunctionConsumer ∷ []
 compileMissing taoStyleStoppingConcentration =
   needMarkovConcentrationHypotheses ∷
@@ -265,12 +260,10 @@ universalStoppingSurvivalRejected :
   ≡ rejectedUniversalStoppingSurvivalBound ∷ []
 universalStoppingSurvivalRejected = refl
 
-constructiveSetDependentStoppingTailCutset :
+constructiveSetDependentStoppingTailSingleLeaf :
   compileMissing setDependentStoppingSurvivalBound
-  ≡ needZModCyclicPredecessorAdapter ∷
-    needSourceRwPathPrefixAbsorptionWeld ∷
-    needProbabilityNormalization ∷ []
-constructiveSetDependentStoppingTailCutset = refl
+  ≡ needZModCyclicPredecessorAdapter ∷ []
+constructiveSetDependentStoppingTailSingleLeaf = refl
 
 fullTransferSqrtTwoRejected :
   compileMissing fullContinuousTransferRadiusSqrtTwo
