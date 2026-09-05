@@ -1,6 +1,8 @@
 module DASHI.Culture.MissingDeceasedOpenScienceEverything where
 
--- Focused aggregate for the open-science / knowledge-release lane.
+-- Focused aggregate for the open-science / knowledge-release lane, including
+-- the underlying scientific/engineering mechanism owners so release-layer
+-- claims are always attached to the actual technical object being externalised.
 
 import DASHI.Core.ViewpointProvenanceBidiExact
 import DASHI.Core.OpenScienceKnowledgeReleaseBidiExact
@@ -9,12 +11,21 @@ import DASHI.Core.KnowledgeBoundaryTransitionBidiExact
 import DASHI.Core.KnowledgeBoundaryCandidateIdentityBidiExact
 import DASHI.Core.KnowledgeBoundaryKindBidiExact
 import DASHI.Core.LayeredKnowledgeReleaseBidiExact
+import DASHI.Core.ScientificMechanismEvidenceBidiExact
 import DASHI.Core.TechnicalExternalisationDepthBidiExact
 import DASHI.Core.ExternalisationBoundaryEnrichmentBidiExact
 import DASHI.Core.ExternalisationMatchedControlScoringExact
 import DASHI.Core.ExternalisationAttributionDiscriminationExact
 import DASHI.Core.ReferencePopulationRosterEnrichmentExact
 import DASHI.Core.SelectorDiscriminationSearchExact
+
+import DASHI.Physics.POAMSScientificMechanismBoundaryExact
+import DASHI.Physics.RezaBurnResistantAlloyScienceExact
+import DASHI.Physics.LeBlancFissionInstrumentationControlScienceExact
+import DASHI.Physics.Plasma.LoureiroViriatoNumericsScienceExact
+import DASHI.Physics.ScorpiusRadiographicAcceleratorScienceExact
+import DASHI.Physics.MaiwaldActionSpectroscopyScienceExact
+
 import DASHI.Culture.MissingDeceasedViewpointEvidenceExact
 import DASHI.Culture.MissingDeceasedOpenScienceBidiExact
 import DASHI.Culture.MissingDeceasedOpenScienceAcquisition2026_09_05Exact
@@ -25,5 +36,6 @@ import DASHI.Culture.MissingDeceasedExternalisationAttributionExact
 import DASHI.Culture.MissingDeceasedLayeredReleaseCrossRosterExact
 import DASHI.Culture.RezaPatentBoundaryTransitionExact
 import DASHI.Culture.MissingDeceasedBoundaryKindComparisonExact
+import DASHI.Culture.MissingDeceasedScienceBoundaryCrossPollinationExact
 import DASHI.Culture.MissingDeceasedRosterEnrichmentDesignExact
 import DASHI.Culture.MissingDeceasedHypothesisDiscriminatorMatrixExact
