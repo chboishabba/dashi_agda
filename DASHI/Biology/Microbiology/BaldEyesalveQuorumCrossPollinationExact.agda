@@ -7,7 +7,10 @@ open import Agda.Builtin.String using (String)
 import DASHI.Biology.Core.ContextIndexedSystem as Context
 import DASHI.Biology.Microbiology.QuorumSensingContextExact as QS
 import DASHI.Biology.Microbiology.BaldEyesalveMechanismBoundaryExact as Eyesalve
+import DASHI.Biology.Protein.AlliumThiolProteinInteractionExact as ProteinThiol
+import DASHI.Chemistry.AlliumMolecularIdentityExact as Identity
 import DASHI.Chemistry.AlliumOrganosulfurMechanismExact as Allium
+import DASHI.Chemistry.AlliumReactionNetworkCrossPollinationExact as ReactionNetwork
 
 ------------------------------------------------------------------------
 -- CROSS-POLLINATION LAYER
@@ -56,8 +59,6 @@ microbiologyContextProjection = record
   ; project = phenotypeProject
   }
 
--- Concrete finite ambiguity witness: one coarse planktonic phenotype is
--- compatible with two mechanistically distinct hidden states.
 samePlanktonicPhenotypeWitness :
   phenotypeProject planktonicContext thiolDominantState ≡
   phenotypeProject planktonicContext quorumPerturbedState
@@ -152,6 +153,52 @@ preparationEvolutionCandidate =
     "open metabolomic/time-course lane: composition and active-species evolution should be measured directly"
 
 ------------------------------------------------------------------------
+-- Molecular-identity and protein-chemistry refinement.
+--
+-- We now have an actual molecular carrier for allicin (C6H10OS2; PubChem
+-- CID 65036), a source-backed alliin -> sulfenic acid -> allicin reaction
+-- network with finite atom-balance receipts, and an explicit protein-cysteine
+-- S-thioallylation target layer. These strengthen the candidate graph without
+-- collapsing constituent chemistry into a complete eyesalve mechanism.
+------------------------------------------------------------------------
+
+record MolecularCandidateRefinement : Set where
+  constructor molecularCandidateRefinement
+  field
+    candidate : CrossSourceCandidate
+    moleculeIdentity : Identity.MolecularIdentity
+    reactionNetworkReference : String
+    proteinInteractionReference : String
+    molecularIdentityEstablished : Bool
+    constituentReactionFamilyEstablished : Bool
+    targetPreparationCausalDominanceEstablished : Bool
+    targetPreparationCausalDominanceEstablishedIsFalse :
+      targetPreparationCausalDominanceEstablished ≡ false
+
+allicinMolecularRefinement : MolecularCandidateRefinement
+allicinMolecularRefinement = molecularCandidateRefinement
+  allicinProteomeCandidate
+  Identity.allicinIdentity
+  "DASHI.Chemistry.AlliumReactionNetworkCrossPollinationExact.alliumCoreNetwork"
+  "DASHI.Biology.Protein.AlliumThiolProteinInteractionExact.allicinProteinWeld"
+  true
+  true
+  false
+  refl
+
+-- Definitionally pin the molecular identity used by the refinement to the same
+-- formula coordinates supplied by the chemistry owner.
+allicinRefinementCarbonCount :
+  Identity.carbon (Identity.composition
+    (MolecularCandidateRefinement.moleculeIdentity allicinMolecularRefinement)) ≡ 6
+allicinRefinementCarbonCount = refl
+
+allicinRefinementSulfurCount :
+  Identity.sulfur (Identity.composition
+    (MolecularCandidateRefinement.moleculeIdentity allicinMolecularRefinement)) ≡ 2
+allicinRefinementSulfurCount = refl
+
+------------------------------------------------------------------------
 -- Explicit weld obligations before a related-source mechanism is promoted.
 ------------------------------------------------------------------------
 
@@ -182,10 +229,24 @@ record CrossPollinationBoundary : Set where
     quorumReporterShiftEqualsBiofilmCausationIsFalse :
       quorumReporterShiftEqualsBiofilmCausation ≡ false
 
+    molecularFormulaEqualsMechanism : Bool
+    molecularFormulaEqualsMechanismIsFalse :
+      molecularFormulaEqualsMechanism ≡ false
+
+    proteinModificationEqualsWholeCellPhenotype : Bool
+    proteinModificationEqualsWholeCellPhenotypeIsFalse :
+      proteinModificationEqualsWholeCellPhenotype ≡ false
+
     multiOmicsCouldRefineCurrentMechanismPartition : Bool
     multiOmicsCouldRefineCurrentMechanismPartitionIsTrue :
       multiOmicsCouldRefineCurrentMechanismPartition ≡ true
 
 canonicalCrossPollinationBoundary : CrossPollinationBoundary
 canonicalCrossPollinationBoundary =
-  crossPollinationBoundary false refl false refl false refl true refl
+  crossPollinationBoundary
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    true refl
