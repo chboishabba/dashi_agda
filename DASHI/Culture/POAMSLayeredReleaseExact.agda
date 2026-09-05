@@ -13,8 +13,8 @@ import DASHI.Core.LayeredKnowledgeReleaseBidiExact as L
 --   * a later public NASA technical memorandum;
 --   * V5 data remaining in Quantum Machines possession;
 --   * V5 hardware remaining in Quantum Machines possession.
--- This is therefore a genuine partial-release topology, not evidence that all
--- technical material crossed into the public domain.
+-- This is therefore a genuine documented partial-release topology, not evidence
+-- that all technical material crossed into the public domain.
 ------------------------------------------------------------------------
 
 poamsGovernance : L.LayerReceipt
@@ -82,6 +82,12 @@ poamsPartialRelease = L.partial-release-witness
   (inj₁ refl)
   "Public report exists while the underlying V5 data are still reported in private Quantum Machines custody."
 
+poamsDocumentedPartialRelease : L.DocumentedPartialReleaseWitness poamsLayeredReleaseProfile
+poamsDocumentedPartialRelease = L.documented-partial-release-witness
+  refl
+  (inj₁ refl)
+  "Primary NASA reporting explicitly places the V5 data in Quantum Machines custody while the NASA TM itself is public; unlike an unknown-underlying profile, this is a documented layer contrast."
+
 poamsGovernanceRelaxed : L.GovernanceRelaxationWitness poamsLayeredReleaseProfile
 poamsGovernanceRelaxed = L.governance-relaxation-witness
   refl
@@ -104,6 +110,8 @@ record CurrentPOAMSLayeredAssessment : Set where
     governanceBoundaryEndedIsTrue : governanceBoundaryEnded ≡ true
     publicTechnicalReportOwned : Bool
     publicTechnicalReportOwnedIsTrue : publicTechnicalReportOwned ≡ true
+    documentedUnderlyingPrivateLayerOwned : Bool
+    documentedUnderlyingPrivateLayerOwnedIsTrue : documentedUnderlyingPrivateLayerOwned ≡ true
     underlyingDataPubliclyReleased : Bool
     underlyingDataPubliclyReleasedIsFalse : underlyingDataPubliclyReleased ≡ false
     hardwarePubliclyAccessible : Bool
@@ -113,6 +121,7 @@ record CurrentPOAMSLayeredAssessment : Set where
 
 canonicalCurrentPOAMSLayeredAssessment : CurrentPOAMSLayeredAssessment
 canonicalCurrentPOAMSLayeredAssessment = current-poams-layered-assessment
+  true refl
   true refl
   true refl
   true refl
