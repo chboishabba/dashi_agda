@@ -71,6 +71,8 @@ hallSpecificExtinguishmentIsSemanticNotVerbatimPromotion = refl
 
 ocrHistoryStillRetainedAfterVerification : Batch.projectionKind Batch.calderHallIndependentTitleSpecimen ≡ Batch.ocrDerivedProjection
 ocrHistoryStillRetainedAfterVerification = refl
+verificationDoesNotRewriteOcrSource : Verify.OcrReceiptBecomesAuthoritativeSource → ⊥
+verificationDoesNotRewriteOcrSource = Verify.authVerificationDoesNotRewriteOcrProvenance
 
 ------------------------------------------------------------------------
 -- Later-use / primary-text relations.
