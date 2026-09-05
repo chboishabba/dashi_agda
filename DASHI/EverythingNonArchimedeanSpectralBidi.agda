@@ -27,18 +27,29 @@ import DASHI.Analysis.NonArchimedeanCanonicalOddOrbitProducerBidiExact
 import DASHI.Analysis.NonArchimedeanFullCycleSignedCancellationBidiExact
 import DASHI.Analysis.NonArchimedeanMonomialTraceSpatialBidiExact
 
--- Sharpened closure route.  The source's arbitrary product DFT is retained as
--- a unitary artifact but cannot substitute for the genuine odd-character
--- transform without an explicit semantic weld; the sparse-vs-dense witness
--- shows it is the wrong literal matrix candidate under the stated indexing.
+-- Corrected character-basis closure route.  Existing finite DFT theory and
+-- matrix faithfulness are reused; the source product DFT is retained only as a
+-- unitary artifact, not as the literal odd-character transform.
 import DASHI.Analysis.NonArchimedeanCharacterBasisMatrixFaithfulnessReuseExact
 import DASHI.Analysis.NonArchimedeanHalfPeriodCharacterClassifierExact
 import DASHI.Analysis.NonArchimedeanTauOddCharacterRestrictionBidiExact
 import DASHI.Analysis.NonArchimedeanOddCharacterFourierRechartCorrectionExact
+import DASHI.Analysis.NonArchimedeanOddCharacterDFTSourceReuseExact
 import DASHI.Analysis.NonArchimedeanProductDFTOddCharacterNoGoExact
 import DASHI.Analysis.NonArchimedeanConcreteMonomialWeldCompilerExact
+
+-- Arithmetic orbit and signed-return closure.  The stronger checked source
+-- theorem `three_pow_two_pow` carries an odd coefficient and supplies the extra
+-- dyadic bit needed for the orbit-sum phase; explicit +/- i sqrt(2) values are
+-- pruned from the critical path.
 import DASHI.Analysis.NonArchimedeanOddOrbitDFTRechartCorrectionExact
 import DASHI.Analysis.NonArchimedeanOddOrbitEquivalenceCompilerExact
+import DASHI.Analysis.NonArchimedeanPowerOrbitSumBidiExact
+import DASHI.Analysis.NonArchimedeanThreePowerOddCoefficientReuseExact
+import DASHI.Analysis.NonArchimedeanNegativeOrbitConjugationBidiExact
+import DASHI.Analysis.NonArchimedeanOneOrbitTraceCancellationExact
+import DASHI.Analysis.NonArchimedeanOrbitSumToSignedCancellationExact
+import DASHI.Analysis.NonArchimedeanNegativeOrbitWeightPhaseCompilerExact
 import DASHI.Analysis.NonArchimedeanOrbitCancellationToMinusTwoExact
 import DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact
 
