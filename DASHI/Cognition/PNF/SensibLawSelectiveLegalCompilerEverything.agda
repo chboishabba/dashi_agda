@@ -114,10 +114,6 @@ exactDispositionReasonCanRemainOpen = refl
 dispositionDoesNotUniquelyDetermineReason : Outcome.DispositionSurfaceUniquelyDeterminesReason → ⊥
 dispositionDoesNotUniquelyDetermineReason = Outcome.dispositionDoesNotUniquelyDetermineReason
 
-------------------------------------------------------------------------
--- REAL PRIMARY-TEXT MABO/NATIVE-TITLE VERTICAL.
-------------------------------------------------------------------------
-
 applicantBatchRemainsCandidateOnly : MaboBatch.candidateOnly MaboBatch.applicantSpecimen ≡ true
 applicantBatchRemainsCandidateOnly = refl
 brennanBatchRemainsCandidateOnly : MaboBatch.candidateOnly MaboBatch.brennanSpecimen ≡ true
@@ -149,10 +145,6 @@ maboSharedCitationDoesNotForceSharedMeaning = MaboClosure.sharedCitationDoesNotC
 maboCitationDoesNotEqualAdoption : MaboAuthority.CitationMeansAdoption → ⊥
 maboCitationDoesNotEqualAdoption = MaboAuthority.aCitationDoesNotMeanAdoption
 
-------------------------------------------------------------------------
--- FACTORISED RECOGNITION COORDINATES + QUERY-INDEXED SEARCH.
-------------------------------------------------------------------------
-
 maboRecognitionByConductDoesNotProveContinuity : MaboFactor.RecognitionByConductProvesContinuity → ⊥
 maboRecognitionByConductDoesNotProveContinuity = MaboFactor.recognitionByConductDoesNotProveContinuity
 maboContinuityDoesNotProveRecognitionByConduct : MaboFactor.ContinuityProvesRecognitionByConduct → ⊥
@@ -170,10 +162,6 @@ maboEnforceabilityQueryRoutesToBrennanAmodu : MaboPlanner.probes MaboPlanner.enf
 maboEnforceabilityQueryRoutesToBrennanAmodu = refl
 maboFactorisedSearchDoesNotEqualResolution : MaboPlanner.SearchPlanClosesLegalCoordinate → ⊥
 maboFactorisedSearchDoesNotEqualResolution = MaboPlanner.searchPlanDoesNotCloseCoordinate
-
-------------------------------------------------------------------------
--- SAME ISSUE, DIFFERENT ADJUDICATIVE RESIDUALS.
-------------------------------------------------------------------------
 
 maboContinuityCompilesToContinuityObligation : MaboHyper.obligation MaboHyper.continuityHyperfabric ≡ MaboHyper.establishContinuityRule
 maboContinuityCompilesToContinuityObligation = refl
