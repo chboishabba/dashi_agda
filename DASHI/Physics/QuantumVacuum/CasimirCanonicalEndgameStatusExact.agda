@@ -4,7 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
--- CANONICAL ENDGAME STATUS AFTER V7 CHART-FREE PRUNING
+-- CANONICAL ENDGAME STATUS AFTER V8 PHYSICAL-MODE PRUNING
 ------------------------------------------------------------------------
 
 record CanonicalEndgameStatus : Set where
@@ -15,7 +15,11 @@ record CanonicalEndgameStatus : Set where
     sourceBackedParallelPlateFieldExpansionOwned : Bool
     sourceBackedParallelPlateTransverseCoverageOwned : Bool
     sourceBackedParallelPlateLongitudinalCoverageOwned : Bool
-    maxwellProofBearingCompletenessCompilerOwned : Bool
+    physicalTEMTETMCarrierOwned : Bool
+    teZeroUnrepresentable : Bool
+    tmZeroCanonicalizedAsTEM : Bool
+    classDisjointnessOwned : Bool
+    physicalModeCompletenessCompilerOwned : Bool
 
     radialLebesgueDecompositionSourceBacked : Bool
     radialityIsLiteralPointwiseEquality : Bool
@@ -32,12 +36,10 @@ record CanonicalEndgameStatus : Set where
     transformedLiteralDefectOneOver120CompilerOwned : Bool
     sixTimes120ArithmeticOwned : Bool
 
-    v7CanonicalRouterOwned : Bool
+    v8CanonicalRouterOwned : Bool
     remainingProducerFamilies : Nat
 
     maxwellSourceFiniteEnergyCarrierWeldClosed : Bool
-    maxwellTETMIndependenceClosed : Bool
-    maxwellZeroSectorCountingClosed : Bool
     radialMeasureIntegrabilityAndNormalizationWeldClosed : Bool
     concreteResidualTailBoundClosed : Bool
     concreteZetaTransformationTraceClosed : Bool
@@ -50,8 +52,12 @@ record CanonicalEndgameStatus : Set where
       sourceBackedParallelPlateTransverseCoverageOwned ≡ true
     sourceBackedParallelPlateLongitudinalCoverageOwnedIsTrue :
       sourceBackedParallelPlateLongitudinalCoverageOwned ≡ true
-    maxwellProofBearingCompletenessCompilerOwnedIsTrue :
-      maxwellProofBearingCompletenessCompilerOwned ≡ true
+    physicalTEMTETMCarrierOwnedIsTrue : physicalTEMTETMCarrierOwned ≡ true
+    teZeroUnrepresentableIsTrue : teZeroUnrepresentable ≡ true
+    tmZeroCanonicalizedAsTEMIsTrue : tmZeroCanonicalizedAsTEM ≡ true
+    classDisjointnessOwnedIsTrue : classDisjointnessOwned ≡ true
+    physicalModeCompletenessCompilerOwnedIsTrue :
+      physicalModeCompletenessCompilerOwned ≡ true
     radialLebesgueDecompositionSourceBackedIsTrue :
       radialLebesgueDecompositionSourceBacked ≡ true
     radialityIsLiteralPointwiseEqualityIsTrue :
@@ -72,13 +78,11 @@ record CanonicalEndgameStatus : Set where
     transformedLiteralDefectOneOver120CompilerOwnedIsTrue :
       transformedLiteralDefectOneOver120CompilerOwned ≡ true
     sixTimes120ArithmeticOwnedIsTrue : sixTimes120ArithmeticOwned ≡ true
-    v7CanonicalRouterOwnedIsTrue : v7CanonicalRouterOwned ≡ true
+    v8CanonicalRouterOwnedIsTrue : v8CanonicalRouterOwned ≡ true
     remainingProducerFamiliesIsFour : remainingProducerFamilies ≡ 4
 
     maxwellSourceFiniteEnergyCarrierWeldClosedIsFalse :
       maxwellSourceFiniteEnergyCarrierWeldClosed ≡ false
-    maxwellTETMIndependenceClosedIsFalse : maxwellTETMIndependenceClosed ≡ false
-    maxwellZeroSectorCountingClosedIsFalse : maxwellZeroSectorCountingClosed ≡ false
     radialMeasureIntegrabilityAndNormalizationWeldClosedIsFalse :
       radialMeasureIntegrabilityAndNormalizationWeldClosed ≡ false
     concreteResidualTailBoundClosedIsFalse : concreteResidualTailBoundClosed ≡ false
@@ -94,7 +98,11 @@ canonicalStatus = record
   ; sourceBackedParallelPlateFieldExpansionOwned = true
   ; sourceBackedParallelPlateTransverseCoverageOwned = true
   ; sourceBackedParallelPlateLongitudinalCoverageOwned = true
-  ; maxwellProofBearingCompletenessCompilerOwned = true
+  ; physicalTEMTETMCarrierOwned = true
+  ; teZeroUnrepresentable = true
+  ; tmZeroCanonicalizedAsTEM = true
+  ; classDisjointnessOwned = true
+  ; physicalModeCompletenessCompilerOwned = true
   ; radialLebesgueDecompositionSourceBacked = true
   ; radialityIsLiteralPointwiseEquality = true
   ; chartFreeRadialTransportOwned = true
@@ -107,11 +115,9 @@ canonicalStatus = record
   ; proofBearingZetaTransformationTraceSurfaceOwned = true
   ; transformedLiteralDefectOneOver120CompilerOwned = true
   ; sixTimes120ArithmeticOwned = true
-  ; v7CanonicalRouterOwned = true
+  ; v8CanonicalRouterOwned = true
   ; remainingProducerFamilies = 4
   ; maxwellSourceFiniteEnergyCarrierWeldClosed = false
-  ; maxwellTETMIndependenceClosed = false
-  ; maxwellZeroSectorCountingClosed = false
   ; radialMeasureIntegrabilityAndNormalizationWeldClosed = false
   ; concreteResidualTailBoundClosed = false
   ; concreteZetaTransformationTraceClosed = false
@@ -120,7 +126,11 @@ canonicalStatus = record
   ; sourceBackedParallelPlateFieldExpansionOwnedIsTrue = refl
   ; sourceBackedParallelPlateTransverseCoverageOwnedIsTrue = refl
   ; sourceBackedParallelPlateLongitudinalCoverageOwnedIsTrue = refl
-  ; maxwellProofBearingCompletenessCompilerOwnedIsTrue = refl
+  ; physicalTEMTETMCarrierOwnedIsTrue = refl
+  ; teZeroUnrepresentableIsTrue = refl
+  ; tmZeroCanonicalizedAsTEMIsTrue = refl
+  ; classDisjointnessOwnedIsTrue = refl
+  ; physicalModeCompletenessCompilerOwnedIsTrue = refl
   ; radialLebesgueDecompositionSourceBackedIsTrue = refl
   ; radialityIsLiteralPointwiseEqualityIsTrue = refl
   ; chartFreeRadialTransportOwnedIsTrue = refl
@@ -133,11 +143,9 @@ canonicalStatus = record
   ; proofBearingZetaTransformationTraceSurfaceOwnedIsTrue = refl
   ; transformedLiteralDefectOneOver120CompilerOwnedIsTrue = refl
   ; sixTimes120ArithmeticOwnedIsTrue = refl
-  ; v7CanonicalRouterOwnedIsTrue = refl
+  ; v8CanonicalRouterOwnedIsTrue = refl
   ; remainingProducerFamiliesIsFour = refl
   ; maxwellSourceFiniteEnergyCarrierWeldClosedIsFalse = refl
-  ; maxwellTETMIndependenceClosedIsFalse = refl
-  ; maxwellZeroSectorCountingClosedIsFalse = refl
   ; radialMeasureIntegrabilityAndNormalizationWeldClosedIsFalse = refl
   ; concreteResidualTailBoundClosedIsFalse = refl
   ; concreteZetaTransformationTraceClosedIsFalse = refl
@@ -153,9 +161,9 @@ record CanonicalCriticalPath : Set where
 canonicalCriticalPath : CanonicalCriticalPath
 canonicalCriticalPath = record
   { maxwell =
-      "pay one source-to-Casimir finite-energy/mode-object weld plus local TE/TM-independence and exact zero-sector-counting receipts; field spanning, transverse coverage and longitudinal coverage are compiler output"
+      "pay one source-to-Casimir finite-energy/mode-carrier weld. The canonical TEM | TE+ | TM+ datatype already fixes the zero sector and class disjointness; source-backed field spanning, transverse coverage and longitudinal coverage are compiler output"
   ; radialMeasure =
-      "prove the literal transverse integrand factors pointwise through radius, its radial integral is admissible/integrable, and the Casimir measure/2*pi normalization matches the source radial Lebesgue decomposition; no trig or polar chart is on the preferred route"
+      "prove the literal transverse integrand factors pointwise through radius, its radial integral is admissible/integrable, and the Casimir R^2 Lebesgue measure / 2*pi normalization matches the source radial decomposition; no trig or polar chart is on the canonical route"
   ; residual =
       "prove one concrete post-cancellation tail theorem |R_n-Eren| <= 1/(m+1) beyond a constructed threshold; residual metric family, candidate identity and Bishop convergence transport are definitionally fixed"
   ; zeta =
