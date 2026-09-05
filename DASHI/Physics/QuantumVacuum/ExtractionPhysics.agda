@@ -110,6 +110,7 @@ import DASHI.Physics.QuantumVacuum.CasimirPressureDerivativeSameObjectCompletion
 import DASHI.Physics.QuantumVacuum.CasimirRemainingClosureCapstoneExact
 import DASHI.Physics.QuantumVacuum.CasimirRepoReuseEndgameStatusExact
 import DASHI.Physics.QuantumVacuum.CasimirClosureAssemblyCompilerExact
+import DASHI.Physics.QuantumVacuum.CasimirBidiEndgameRouterV2Exact
 import DASHI.Physics.QuantumVacuum.TunableMaterialCasimirBridge
 import DASHI.Physics.QuantumVacuum.CasimirCycleAccounting
 import DASHI.Physics.QuantumVacuum.ReservoirDynamics
