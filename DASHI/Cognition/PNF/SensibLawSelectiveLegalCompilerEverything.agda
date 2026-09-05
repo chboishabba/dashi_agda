@@ -24,10 +24,8 @@ import DASHI.Cognition.PNF.SensibLawIssueIndexedAdjudicativeHyperfabricExact as 
 import DASHI.Cognition.PNF.SensibLawIssueBurdenStandardRemedyBidiExact as IssueBSR
 import DASHI.Cognition.PNF.SensibLawAdjudicativeTemporalNonRetroactivityExact as Temporal
 import DASHI.Cognition.PNF.SensibLawLegalOutcomeIdentifiabilityBidiExact as Outcome
-
-------------------------------------------------------------------------
--- EXISTING SELECTIVE COMPILER PATH.
-------------------------------------------------------------------------
+import DASHI.Cognition.PNF.SensibLawMaboPrimaryTextParserBatchMaterialisedExact as MaboBatch
+import DASHI.Cognition.PNF.SensibLawMaboBrennanDawsonIssueResidualLiveExact as Mabo
 
 pdfReusesAttribution : Planner.action Pdf.attributionPlan ≡ Planner.reuseExisting
 pdfReusesAttribution = refl
@@ -84,10 +82,6 @@ priorViolationSnapshotRetained = PaidLiability.priorViolationSnapshotRetained
 priorApplicabilitySnapshotRetained : Bridge._∈_ PaidApplicability.fixtureLegalStatus (Status.legalStatuses PaidLiability.postLiabilityState)
 priorApplicabilitySnapshotRetained = PaidLiability.priorApplicabilitySnapshotRetained
 
-------------------------------------------------------------------------
--- ISSUE-INDEXED ADJUDICATIVE HYPERFABRIC.
-------------------------------------------------------------------------
-
 burdenMayCloseBeforeLiability : Issue.firstAdjudicativeResidual Issue.identifyBurdenQuery Issue.burdenCanCloseWithoutLiability ≡ Issue.adjudicativeClosed
 burdenMayCloseBeforeLiability = refl
 remedyMayStopAtIndependentSourceResidual : Issue.firstAdjudicativeResidual Issue.remedyEligibilityQuery Issue.candidateLiabilityButNoRemedySource ≡ Issue.remedySourceResidual
@@ -103,35 +97,39 @@ oneLinearPipelineNotUniversal = Issue.oneLinearPipelineDoesNotFitEveryQuery
 legalConclusionDoesNotBecomePhysicalAuthority : Issue.LegalConclusionAuthorisesPhysicalAction → ⊥
 legalConclusionDoesNotBecomePhysicalAuthority = Issue.legalConclusionDoesNotAuthorisePhysicalAction
 
-------------------------------------------------------------------------
--- HISTORY-INDEXED ADJUDICATIVE PROVENANCE.
-------------------------------------------------------------------------
-
 laterEvidenceDoesNotRetroactivelyPayEarlierBurden : Temporal.LaterEvidenceRetroactivelySatisfiesEarlierBurden → ⊥
 laterEvidenceDoesNotRetroactivelyPayEarlierBurden = Temporal.laterEvidenceDoesNotRetroactivelySatisfyBurden
 laterFindingDoesNotRetroactivelyPayEarlierStandard : Temporal.LaterFindingRetroactivelySatisfiesEarlierStandard → ⊥
 laterFindingDoesNotRetroactivelyPayEarlierStandard = Temporal.laterFindingDoesNotRetroactivelySatisfyStandard
 
-------------------------------------------------------------------------
--- LEGAL OUTCOME PARTIAL IDENTIFICATION.
-------------------------------------------------------------------------
-
-compatibleExplanationsCanCloseCoarseConsumer :
-  Outcome.goalStatus Outcome.listCompatibleExplanations Outcome.canonicalAmbiguousDisposition
-  ≡ Outcome.explanationGoalClosed
+compatibleExplanationsCanCloseCoarseConsumer : Outcome.goalStatus Outcome.listCompatibleExplanations Outcome.canonicalAmbiguousDisposition ≡ Outcome.explanationGoalClosed
 compatibleExplanationsCanCloseCoarseConsumer = refl
-
-exactDispositionReasonCanRemainOpen :
-  Outcome.goalStatus Outcome.exactDispositionReason Outcome.canonicalAmbiguousDisposition
-  ≡ Outcome.explanationGoalOpen
+exactDispositionReasonCanRemainOpen : Outcome.goalStatus Outcome.exactDispositionReason Outcome.canonicalAmbiguousDisposition ≡ Outcome.explanationGoalOpen
 exactDispositionReasonCanRemainOpen = refl
-
 dispositionDoesNotUniquelyDetermineReason : Outcome.DispositionSurfaceUniquelyDeterminesReason → ⊥
 dispositionDoesNotUniquelyDetermineReason = Outcome.dispositionDoesNotUniquelyDetermineReason
 
 ------------------------------------------------------------------------
--- Aggregate import is not a kernel receipt.
+-- REAL PRIMARY-TEXT MABO/NATIVE-TITLE VERTICAL.
 ------------------------------------------------------------------------
+
+applicantBatchRemainsCandidateOnly : MaboBatch.candidateOnly MaboBatch.applicantSpecimen ≡ true
+applicantBatchRemainsCandidateOnly = refl
+brennanBatchRemainsCandidateOnly : MaboBatch.candidateOnly MaboBatch.brennanSpecimen ≡ true
+brennanBatchRemainsCandidateOnly = refl
+dawsonBatchRemainsCandidateOnly : MaboBatch.candidateOnly MaboBatch.dawsonSpecimen ≡ true
+dawsonBatchRemainsCandidateOnly = refl
+
+brennanDawsonContrastIsRecognitionBasis : Mabo.primaryKind Mabo.brennanDawsonResidual ≡ Mabo.recognitionBasisContrast
+brennanDawsonContrastIsRecognitionBasis = refl
+maboResidualSearchTargetsRecognitionBasis : Mabo.obligation Mabo.brennanDawsonSearch ≡ Mabo.inspectRecognitionBasis
+maboResidualSearchTargetsRecognitionBasis = refl
+maboSameIssueIsNotBooleanNegation : Mabo.SameIssueMeansLogicalNegation → ⊥
+maboSameIssueIsNotBooleanNegation = Mabo.sameIssueDoesNotMeanLogicalNegation
+maboParserDoesNotCreateHolding : Mabo.ParserCandidateCreatesJudicialHolding → ⊥
+maboParserDoesNotCreateHolding = Mabo.parserCandidateDoesNotCreateHolding
+maboFiveParagraphBatchDoesNotClaimGeneralCoverage : MaboBatch.FiveParagraphBatchIsGeneralParserCoverage → ⊥
+maboFiveParagraphBatchDoesNotClaimGeneralCoverage = MaboBatch.fiveParagraphBatchDoesNotClaimGeneralCoverage
 
 data SelectiveLegalCompilerAggregateMeansKernelValidated : Set where
 aggregateDoesNotClaimKernelValidation : SelectiveLegalCompilerAggregateMeansKernelValidated → ⊥
