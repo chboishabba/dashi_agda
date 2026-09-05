@@ -1,12 +1,13 @@
 module DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact where
 
 ------------------------------------------------------------------------
--- ORIGINAL-GOAL CAPSTONE
+-- ORIGINAL-GOAL / POST-CLOSURE CAPSTONE
 --
 -- The finite non-Archimedean spectral core is dependency-closed in DASHI.
--- Post-closure, the remaining claim-strength issue is no longer the value 1/2
--- itself.  The source contains several distinct half-valued coordinates, and
--- only an explicit same-object theorem may identify them.
+-- Post-closure audits now separate sigma semantics, continuous-transfer claims,
+-- and finite Markov/mixing consumers.  The old unit-prefactor L2 route is
+-- refuted; the viable repair is a finite level-dependent prefactor assembled
+-- through the unitary Fourier shell-energy chart.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -35,6 +36,15 @@ data OriginalGoalLeaf : Set where
   cyclotomicToProlateSigmaAnchor : OriginalGoalLeaf
   undirectedGapExponentAlpha : OriginalGoalLeaf
 
+  meanZeroInvariant : OriginalGoalLeaf
+  unitPrefactorOneStepL2 : OriginalGoalLeaf
+  explicitLevelSquaredPrefactor : OriginalGoalLeaf
+  prefactoredL2ShellCompiler : OriginalGoalLeaf
+  parsevalShellEnergyWeld : OriginalGoalLeaf
+  prefactoredL2WholeOperator : OriginalGoalLeaf
+  killedKernelSurvivalBound : OriginalGoalLeaf
+  gibbsUniqueness : OriginalGoalLeaf
+
 
 data OriginalGoalStatus : Set where
   sourceOwned : OriginalGoalStatus
@@ -43,8 +53,11 @@ data OriginalGoalStatus : Set where
   repoReusable : OriginalGoalStatus
   sourcePlaceholderButRepoCompiled : OriginalGoalStatus
   rejectedReading : OriginalGoalStatus
+  refuted : OriginalGoalStatus
   sourceUnproved : OriginalGoalStatus
   liveSameObjectWeld : OriginalGoalStatus
+  liveIndependentProducer : OriginalGoalStatus
+  downstream : OriginalGoalStatus
 
 leafStatus : OriginalGoalLeaf → OriginalGoalStatus
 leafStatus functionLevelCharacterAction = sourceOwned
@@ -63,13 +76,27 @@ leafStatus literalOneStepSpectrumUnion = sourcePlaceholderButRepoCompiled
 leafStatus directedRadiusSizeExponentHalf = rejectedReading
 leafStatus cyclotomicSigmaHalf = compiled
 leafStatus prolateCriticalLineHalf = sourceOwned
-leafStatus fullTransferRadiusSqrtTwo = sourceUnproved
+leafStatus fullTransferRadiusSqrtTwo = rejectedReading
 leafStatus cyclotomicToProlateSigmaAnchor = liveSameObjectWeld
 leafStatus undirectedGapExponentAlpha = sourceOwned
 
+leafStatus meanZeroInvariant = compiled
+leafStatus unitPrefactorOneStepL2 = refuted
+leafStatus explicitLevelSquaredPrefactor = owned
+leafStatus prefactoredL2ShellCompiler = compiled
+leafStatus parsevalShellEnergyWeld = liveSameObjectWeld
+leafStatus prefactoredL2WholeOperator = downstream
+leafStatus killedKernelSurvivalBound = liveIndependentProducer
+leafStatus gibbsUniqueness = liveIndependentProducer
+
 priority : List OriginalGoalLeaf
 priority =
-  cyclotomicToProlateSigmaAnchor ∷ []
+  parsevalShellEnergyWeld ∷
+  prefactoredL2WholeOperator ∷
+  killedKernelSurvivalBound ∷
+  cyclotomicToProlateSigmaAnchor ∷
+  gibbsUniqueness ∷
+  []
 
 record FiniteCoreClosure : Set where
   constructor finiteCoreClosure
@@ -109,16 +136,38 @@ canonicalSigmaClosureBoundary : SigmaClosureBoundary
 canonicalSigmaClosureBoundary =
   sigmaClosureBoundary true true true false false false false
 
+record MixingRepairBoundary : Set where
+  constructor mixingRepairBoundary
+  field
+    meanZeroInvariantCompiled : Bool
+    unitPrefactorOneStepContractionValid : Bool
+    explicitFiniteLevelPrefactorOwned : Bool
+    shellPowerCompilerOwned : Bool
+    genericFiniteEnergyAssemblyOwned : Bool
+    parsevalShellEnergySameObjectWeldOwned : Bool
+    wholePrefactoredL2BoundOwned : Bool
+    killedKernelBoundOwned : Bool
+
+canonicalMixingRepairBoundary : MixingRepairBoundary
+canonicalMixingRepairBoundary =
+  mixingRepairBoundary true false true true true false false false
+
+unitPrefactorMixingRouteClosedNegative :
+  MixingRepairBoundary.unitPrefactorOneStepContractionValid
+    canonicalMixingRepairBoundary
+  ≡ false
+unitPrefactorMixingRouteClosedNegative = refl
+
+prefactoredMixingRouteStillLiveAtParsevalWeld :
+  MixingRepairBoundary.parsevalShellEnergySameObjectWeldOwned
+    canonicalMixingRepairBoundary
+  ≡ false
+prefactoredMixingRouteStillLiveAtParsevalWeld = refl
+
 localAndProlateHalvesDoNotAutoWeld :
   SigmaClosureBoundary.sameObjectAnchorLocated canonicalSigmaClosureBoundary
   ≡ false
 localAndProlateHalvesDoNotAutoWeld = refl
-
-fullTransferRadiusSqrtTwoStillUnproved :
-  SigmaClosureBoundary.fullTransferOperatorRadiusSqrtTwoOwned
-    canonicalSigmaClosureBoundary
-  ≡ false
-fullTransferRadiusSqrtTwoStillUnproved = refl
 
 sizeExponentHalfReadingRejected :
   SigmaClosureBoundary.radiusNSizePowerHalfReadingValid
