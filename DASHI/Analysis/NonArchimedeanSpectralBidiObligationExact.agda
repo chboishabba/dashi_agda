@@ -3,9 +3,10 @@ module DASHI.Analysis.NonArchimedeanSpectralBidiObligationExact where
 ------------------------------------------------------------------------
 -- Reverse / BIDI obligation compiler for the non-Archimedean spectral lane.
 --
--- Downstream advertised claims compile back into exact missing producers.
--- Typed constructors keep distinct claims from collapsing merely because they
--- share the same Boolean status summary.
+-- Source correction: the currently checked F_(2^(n-2)) tensor I_2 transform
+-- after an arbitrary Fin product reindex is not yet the odd-character Fourier
+-- transform.  Downstream spatial claims therefore reopen the semantic
+-- odd-character rechart, not generic DFT algebra or raw matrix expansion.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -16,6 +17,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 
 data ClaimKind : Set where
   spatialSpectralCircle : ClaimKind
+  spatialTwistedPower : ClaimKind
   orbitProduct : ClaimKind
   arbitraryDagCover : ClaimKind
   depthDecaySparsity : ClaimKind
@@ -39,7 +41,14 @@ spectralCircleSpatialClaim : BidiClaim
 spectralCircleSpatialClaim =
   bidiClaim spatialSpectralCircle
     "spatial twisted-block spectral circle"
-    "arithmetic +/-3^j orbit chart + odd-character/tau-odd semantics + twisted-coordinate character weld + same-label period/weight"
+    "odd-character Fourier rechart + half-period classifier + arithmetic odd-orbit receipts + same-label magnitude receipt"
+    true false false false
+
+spatialTwistedPowerClaim : BidiClaim
+spatialTwistedPowerClaim =
+  bidiClaim spatialTwistedPower
+    "spatial twisted-block doubled-return power equals minus two identity"
+    "spatial character weld + orbit period + paired product two + orbit cancellation sum zero"
     true false false false
 
 orbitProductClaim : BidiClaim
@@ -79,13 +88,15 @@ ropeOptimalityClaim =
 
 
 data MissingObligation : Set where
-  needOddCharacterTauOddIff : MissingObligation
-  needArithmeticOddOrbitChart : MissingObligation
-  needTwistedCoordinateCharacterIdentification : MissingObligation
+  needPrimitiveHalfTurnInstantiation : MissingObligation
+  needOddCharacterFourierRechart : MissingObligation
+  needArithmeticOddOrbitReceipts : MissingObligation
+  needTwistedCoordinateOddCharacterIdentification : MissingObligation
   needCompleteCharacterBasisActionEquality : MissingObligation
   needConcreteDFTMonomialMatrixEquality : MissingObligation
   needConcretePeriodAttachment : MissingObligation
-  needConcreteOrbitWeightAttachment : MissingObligation
+  needConcreteOrbitMagnitudeAttachment : MissingObligation
+  needOrbitCancellationSumZero : MissingObligation
   needOrbitPartitionWeld : MissingObligation
   needGraphToDecompositionProducer : MissingObligation
   needDepthDecayProducer : MissingObligation
@@ -95,12 +106,21 @@ data MissingObligation : Set where
 
 compileMissing : ClaimKind → List MissingObligation
 compileMissing spatialSpectralCircle =
-  needArithmeticOddOrbitChart ∷
-  needOddCharacterTauOddIff ∷
-  needTwistedCoordinateCharacterIdentification ∷
+  needPrimitiveHalfTurnInstantiation ∷
+  needOddCharacterFourierRechart ∷
+  needArithmeticOddOrbitReceipts ∷
+  needTwistedCoordinateOddCharacterIdentification ∷
   needCompleteCharacterBasisActionEquality ∷
   needConcretePeriodAttachment ∷
-  needConcreteOrbitWeightAttachment ∷
+  needConcreteOrbitMagnitudeAttachment ∷
+  []
+compileMissing spatialTwistedPower =
+  needOddCharacterFourierRechart ∷
+  needArithmeticOddOrbitReceipts ∷
+  needTwistedCoordinateOddCharacterIdentification ∷
+  needCompleteCharacterBasisActionEquality ∷
+  needConcretePeriodAttachment ∷
+  needOrbitCancellationSumZero ∷
   []
 compileMissing orbitProduct = []
 compileMissing arbitraryDagCover = needGraphToDecompositionProducer ∷ []
@@ -121,26 +141,53 @@ record BidiFirewall : Set where
     genericInfrastructureMayReplaceConcreteAttachment : Bool
     finalMagnitudeHypothesisMayCountAsItsOwnDerivation : Bool
     compiledMatrixEqualityShouldRemainOnSearchFrontier : Bool
+    arbitraryUnitaryDFTMayCountAsOddCharacterDFT : Bool
+    explicitComplexPhaseValuesRequiredForMinusTwo : Bool
 
 canonicalBidiFirewall : BidiFirewall
-canonicalBidiFirewall = bidiFirewall false false false false false false false
+canonicalBidiFirewall =
+  bidiFirewall false false false false false false false false false
 
 spatialSpectralCircleExactCutset :
   compileMissing (kind spectralCircleSpatialClaim)
-  ≡ needArithmeticOddOrbitChart ∷
-    needOddCharacterTauOddIff ∷
-    needTwistedCoordinateCharacterIdentification ∷
+  ≡ needPrimitiveHalfTurnInstantiation ∷
+    needOddCharacterFourierRechart ∷
+    needArithmeticOddOrbitReceipts ∷
+    needTwistedCoordinateOddCharacterIdentification ∷
     needCompleteCharacterBasisActionEquality ∷
     needConcretePeriodAttachment ∷
-    needConcreteOrbitWeightAttachment ∷
+    needConcreteOrbitMagnitudeAttachment ∷
     []
 spatialSpectralCircleExactCutset = refl
+
+spatialPowerNeedsOnlyMinimalSignProducer :
+  compileMissing (kind spatialTwistedPowerClaim)
+  ≡ needOddCharacterFourierRechart ∷
+    needArithmeticOddOrbitReceipts ∷
+    needTwistedCoordinateOddCharacterIdentification ∷
+    needCompleteCharacterBasisActionEquality ∷
+    needConcretePeriodAttachment ∷
+    needOrbitCancellationSumZero ∷
+    []
+spatialPowerNeedsOnlyMinimalSignProducer = refl
 
 compiledMatrixEqualityIsPrunedFromSearch :
   BidiFirewall.compiledMatrixEqualityShouldRemainOnSearchFrontier
     canonicalBidiFirewall
   ≡ false
 compiledMatrixEqualityIsPrunedFromSearch = refl
+
+arbitraryUnitaryDoesNotSupplyCharacterSemantics :
+  BidiFirewall.arbitraryUnitaryDFTMayCountAsOddCharacterDFT
+    canonicalBidiFirewall
+  ≡ false
+arbitraryUnitaryDoesNotSupplyCharacterSemantics = refl
+
+explicitPhaseValuesNotRequiredForPower :
+  BidiFirewall.explicitComplexPhaseValuesRequiredForMinusTwo
+    canonicalBidiFirewall
+  ≡ false
+explicitPhaseValuesNotRequiredForPower = refl
 
 orbitProductIsPromotable :
   compileMissing (kind orbitProductClaim) ≡ []
