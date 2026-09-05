@@ -7,27 +7,34 @@ module DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact where
 -- dynamics that motivated the audit.  Monster correspondence is useful
 -- x-pollination but not a prerequisite here.
 --
--- The source-exact closure graph is now:
+-- After reusing finite matrix-action faithfulness, the source-exact closure
+-- graph is now:
 --
---  D_n character action                    [OWNED]
+--  D_n function-level character action       [OWNED]
+--  D_n preserves tau-odd functions           [OWNED]
 --      |
---      +-> order(3)=2^(n-2)                [OWNED]
---      +-> odd residue cardinality         [OWNED]
---      |     -> canonical C1,C2 package    [LIVE EXPORT]
---      |          -> |W_C|^2=2             [COMPILER FROM OWNED CONDITIONAL]
---      |          -> W1*W2=2               [COMPILER FROM OWNED CONDITIONAL]
---      |          -> phase/sign W_i        [LIVE]
+--      +-> odd character <-> tau-odd          [LIVE]
 --      |
---  concrete twistedDirMatrix               [OWNED]
---      -> Hadamard twisted-sector split    [OWNED]
---      -> concrete DFT basis/reindex        [OWNED]
---      -> DFT-conjugated matrix             [OWNED]
---      -> equals explicit monomial operator [HIGHEST-ALPHA LIVE]
---             |                |
---             v                v
---       spatial spectrum   spatial trace
---             |                |
---             +------ fanout --+
+--  order(3)=2^(n-2)                           [OWNED]
+--  odd residue cardinality                    [OWNED]
+--      |
+--      +-> arithmetic orbit chart
+--          (j,0)->3^j ; (j,1)->-3^j           [HIGHEST-ALPHA LIVE]
+--          -> canonical C1,C2 package         [DOWNSTREAM]
+--          -> |W_C|^2=2                       [OWNED CONDITIONAL]
+--          -> W1*W2=2                         [OWNED CONDITIONAL]
+--          -> phase/sign W_i                  [LIVE]
+--
+--  concrete twistedDirMatrix                  [OWNED]
+--      -> Hadamard twisted-sector split       [OWNED]
+--      -> concrete DFT carrier/reindex         [OWNED]
+--      -> DFT-conjugated matrix                [OWNED OBJECT]
+--      -> twisted coordinates <-> odd chars    [LIVE]
+--      -> equality on complete character basis [DOWNSTREAM]
+--      -> matrix equality by repo faithfulness [COMPILER / OWNED GENERIC]
+--             |               |               |
+--             v               v               v
+--       spatial spectrum  spatial trace   spatial powers
 --
 -- Separately, the one-step determinant cover factorization is OWNED, while the
 -- theorem named `spectral_tower_one_step` has only `True` as its formal type;
@@ -40,8 +47,12 @@ open import Agda.Builtin.List using (List; []; _∷_)
 
 
 data OriginalGoalLeaf : Set where
-  canonicalTwoOddOrbitPackage : OriginalGoalLeaf
+  oddCharacterTauOddIff : OriginalGoalLeaf
+  arithmeticOddOrbitChart : OriginalGoalLeaf
+  twistedCoordinateCharacterIdentification : OriginalGoalLeaf
+  completeCharacterBasisActionEquality : OriginalGoalLeaf
   concreteDFTConjugatedEqualsMonomial : OriginalGoalLeaf
+  canonicalTwoOddOrbitPackage : OriginalGoalLeaf
   orbitPhaseSign : OriginalGoalLeaf
   literalOneStepSpectrumUnion : OriginalGoalLeaf
 
@@ -51,17 +62,24 @@ data OriginalGoalStatus : Set where
   live : OriginalGoalStatus
   downstream : OriginalGoalStatus
   pruned : OriginalGoalStatus
+  compiled : OriginalGoalStatus
 
 leafStatus : OriginalGoalLeaf → OriginalGoalStatus
-leafStatus canonicalTwoOddOrbitPackage = live
-leafStatus concreteDFTConjugatedEqualsMonomial = live
+leafStatus oddCharacterTauOddIff = live
+leafStatus arithmeticOddOrbitChart = live
+leafStatus twistedCoordinateCharacterIdentification = live
+leafStatus completeCharacterBasisActionEquality = downstream
+leafStatus concreteDFTConjugatedEqualsMonomial = compiled
+leafStatus canonicalTwoOddOrbitPackage = downstream
 leafStatus orbitPhaseSign = live
 leafStatus literalOneStepSpectrumUnion = downstream
 
 priority : List OriginalGoalLeaf
 priority =
-  concreteDFTConjugatedEqualsMonomial ∷
-  canonicalTwoOddOrbitPackage ∷
+  arithmeticOddOrbitChart ∷
+  oddCharacterTauOddIff ∷
+  twistedCoordinateCharacterIdentification ∷
+  completeCharacterBasisActionEquality ∷
   orbitPhaseSign ∷
   literalOneStepSpectrumUnion ∷
   []
@@ -72,16 +90,19 @@ record SharedWeldFanout : Set where
     sameConcreteMatrixWeldFeedsSpatialSpectrum : Bool
     sameConcreteMatrixWeldFeedsSpatialTrace : Bool
     sameConcreteMatrixWeldFeedsSpatialPower : Bool
+    equalityOnBasisCompilesLiteralMatrixEquality : Bool
     threeIndependentMatrixWeldsShouldBeSearched : Bool
 
 canonicalSharedWeldFanout : SharedWeldFanout
 canonicalSharedWeldFanout =
-  sharedWeldFanout true true true false
+  sharedWeldFanout true true true true false
 
 record OriginalGoalBoundary : Set where
   constructor originalGoalBoundary
   field
-    characterActionOwned : Bool
+    functionLevelCharacterActionOwned : Bool
+    tauOddPreservationOwned : Bool
+    finiteMatrixBasisFaithfulnessOwned : Bool
     monomialPowerCalculusOwned : Bool
     orbitOrderOwned : Bool
     oddCardinalityOwned : Bool
@@ -91,8 +112,10 @@ record OriginalGoalBoundary : Set where
     concreteDFTInfrastructureOwned : Bool
     determinantTowerFactorizationOwned : Bool
 
-    concreteDFTMonomialEqualityOwned : Bool
-    canonicalOrbitPackageOwned : Bool
+    oddCharacterTauOddIffOwned : Bool
+    arithmeticOrbitChartOwned : Bool
+    twistedCoordinateCharacterIdentificationOwned : Bool
+    concreteDFTMonomialEqualityCompiledOnceInputsExist : Bool
     orbitPhaseSignOwned : Bool
     literalSpectrumTowerOwned : Bool
 
@@ -102,8 +125,8 @@ record OriginalGoalBoundary : Set where
 canonicalOriginalGoalBoundary : OriginalGoalBoundary
 canonicalOriginalGoalBoundary =
   originalGoalBoundary
-    true true true true true true true true true
-    false false false false
+    true true true true true true true true true true true
+    false false false true false false
     false false
 
 monsterIsOptionalForOriginalClosure :
@@ -111,6 +134,12 @@ monsterIsOptionalForOriginalClosure :
     canonicalOriginalGoalBoundary
   ≡ false
 monsterIsOptionalForOriginalClosure = refl
+
+matrixEqualityIsCompilerOutputOnceSemanticInputsExist :
+  OriginalGoalBoundary.concreteDFTMonomialEqualityCompiledOnceInputsExist
+    canonicalOriginalGoalBoundary
+  ≡ true
+matrixEqualityIsCompilerOutputOnceSemanticInputsExist = refl
 
 finalMagnitudeCannotSelfDischarge :
   OriginalGoalBoundary.finalMagnitudeHypothesisMayCloseItsOwnProducerPath
