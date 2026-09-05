@@ -24,6 +24,8 @@ import DASHI.Law.DeploymentConditionedSelectionBidiExact as DeploymentBidi
 import DASHI.Law.PartialIdentificationMissingnessBoundsExact as Bounds
 import DASHI.Law.ExactIntervalRatioSeparatorExact as Exact
 import DASHI.Law.RobustSelectionDisparityBoundsBidiExact as Robust
+import DASHI.Law.MissingnessMechanismFibreExact as Mechanism
+import DASHI.Law.MissingnessAssumptionBoundTransportBidiExact as MissingTransport
 
 firewallAndReachabilityCoexist :
   Wand.FirewallWithReachability Wand.canonicalFirewallBoundary
@@ -244,3 +246,39 @@ exactMagnitudeStillRequiresCompleteObservation :
   Robust.firstRobustResidual Robust.pointMagnitude Robust.canonicalRobustButNotPointCutset
   ≡ Robust.completeObservationResidual
 exactMagnitudeStillRequiresCompleteObservation = Robust.pointMagnitudeStillRequiresCompleteObservation
+
+unresolvedMissingnessDoesNotBecomeIndependent :
+  Mechanism.classifyMechanism Mechanism.canonicalUnrestrictedMechanism
+  ≡ Mechanism.nonIgnorableOrUnresolvedMissingness
+unresolvedMissingnessDoesNotBecomeIndependent = Mechanism.canonicalUnrestrictedClass
+
+independenceRequiresClosedDependencyFibre :
+  Mechanism.classifyMechanism Mechanism.canonicalIndependentMechanism
+  ≡ Mechanism.observationIndependentMissingness
+independenceRequiresClosedDependencyFibre = Mechanism.canonicalIndependentClass
+
+worstCaseBoundsNeedNoIndependenceAssumption :
+  MissingTransport.transportStatus MissingTransport.canonicalUnrestrictedRequest
+  ≡ MissingTransport.worstCaseRetained
+worstCaseBoundsNeedNoIndependenceAssumption = MissingTransport.canonicalUnrestrictedRetained
+
+narrowingWithoutReceiptFailsClosed :
+  MissingTransport.transportStatus MissingTransport.canonicalMissingReceiptRequest
+  ≡ MissingTransport.assumptionReceiptMissing
+narrowingWithoutReceiptFailsClosed = MissingTransport.canonicalMissingReceiptBlocksNarrowing
+
+receiptedIndependenceCanNarrowBounds :
+  MissingTransport.transportStatus MissingTransport.canonicalReceiptedIndependentRequest
+  ≡ MissingTransport.narrowedUnderReceiptedAssumption
+receiptedIndependenceCanNarrowBounds = MissingTransport.canonicalReceiptedIndependentAllowsNarrowing
+
+outcomeDependentMissingnessRejectsIndependenceNarrowing :
+  MissingTransport.transportStatus MissingTransport.canonicalOutcomeDependentRejected
+  ≡ MissingTransport.mechanismIncompatible
+outcomeDependentMissingnessRejectsIndependenceNarrowing = MissingTransport.canonicalOutcomeDependentCannotUseIndependenceNarrowing
+
+tightenedBoundsReverseRouteToMechanismReceipt :
+  MissingTransport.firstBoundTransportResidual MissingTransport.tightenedIdentifiedSet
+    (MissingTransport.boundTransportCutset true false false "raw bounds close; mechanism receipt open")
+  ≡ MissingTransport.mechanismReceiptResidual
+tightenedBoundsReverseRouteToMechanismReceipt = MissingTransport.canonicalTighteningOpenAtMechanism
