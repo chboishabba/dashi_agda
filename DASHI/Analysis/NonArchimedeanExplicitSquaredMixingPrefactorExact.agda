@@ -27,7 +27,7 @@ module DASHI.Analysis.NonArchimedeanExplicitSquaredMixingPrefactorExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _-_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _-_; _*_)
 
 pow2 : Nat → Nat
 pow2 zero = 1
@@ -65,8 +65,7 @@ record SquaredPrefactorProducer : Set₁ where
     cycleLengthsBoundedByMaxOddCycleLength : Bool
 
     shellSquaredPowerEnvelope :
-      (shell : Shell) →
-      Set
+      (shell : Shell) → Set
     wholeLevelSquaredPowerEnvelope : Set
 
 open SquaredPrefactorProducer public
