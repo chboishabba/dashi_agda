@@ -17,14 +17,16 @@ module DASHI.Analysis.NonArchimedeanForwardTranslationIrreducibilityCompilerExac
 -- irreducibility route; undirected Schreier connectivity is not required.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Product using (Σ; _,_)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
+-- Tail-recursive iterate: execute `step` once, then continue.
 iterate : {A : Set} → (A → A) → Nat → A → A
 iterate step zero x = x
-iterate step (suc n) x = step (iterate step n x)
+iterate step (suc n) x = iterate step n (step x)
 
 record ForwardTranslationData : Set₁ where
   field
@@ -54,11 +56,7 @@ forwardBlockIsPred data x =
   trans
     (bFactorsAsPredAfterA data
       (iterate (a data) (periodMinusOne data) x))
-    (congPred (periodReturn data x))
-  where
-  congPred :
-    ∀ {u v} → u ≡ v → pred data u ≡ pred data v
-  congPred refl = refl
+    (cong (pred data) (periodReturn data x))
 
 record CyclicPredecessorTransitive (data : ForwardTranslationData) : Set where
   field
@@ -92,8 +90,28 @@ repeatA :
 repeatA data zero tail = tail
 repeatA data (suc n) tail = useA (repeatA data n tail)
 
+repeatARuns :
+  (data : ForwardTranslationData) →
+  (n : Nat) →
+  (tail : ForwardWord data) →
+  (x : State data) →
+  run data (repeatA data n tail) x
+  ≡ run data tail (iterate (a data) n x)
+repeatARuns data zero tail x = refl
+repeatARuns data (suc n) tail x =
+  repeatARuns data n tail (a data x)
+
 predBlockWord : (data : ForwardTranslationData) → ForwardWord data
 predBlockWord data = repeatA data (periodMinusOne data) (useB done)
+
+predBlockRuns :
+  (data : ForwardTranslationData) →
+  (x : State data) →
+  run data (predBlockWord data) x ≡ pred data x
+predBlockRuns data x =
+  trans
+    (repeatARuns data (periodMinusOne data) (useB done) x)
+    (forwardBlockIsPred data x)
 
 -- Word concatenation, executing the left word first and then the right word.
 _++w_ :
@@ -103,11 +121,43 @@ done ++w right = right
 (useA left) ++w right = useA (left ++w right)
 (useB left) ++w right = useB (left ++w right)
 
+runConcat :
+  (data : ForwardTranslationData) →
+  (left right : ForwardWord data) →
+  (x : State data) →
+  run data (left ++w right) x
+  ≡ run data right (run data left x)
+runConcat data done right x = refl
+runConcat data (useA left) right x =
+  runConcat data left right (a data x)
+runConcat data (useB left) right x =
+  runConcat data left right (b data x)
+
 repeatWord :
   {data : ForwardTranslationData} →
   ForwardWord data → Nat → ForwardWord data
 repeatWord word zero = done
 repeatWord word (suc n) = word ++w repeatWord word n
+
+repeatPredBlockRuns :
+  (data : ForwardTranslationData) →
+  (steps : Nat) →
+  (x : State data) →
+  run data (repeatWord (predBlockWord data) steps) x
+  ≡ iterate (pred data) steps x
+repeatPredBlockRuns data zero x = refl
+repeatPredBlockRuns data (suc steps) x =
+  trans
+    (runConcat data
+      (predBlockWord data)
+      (repeatWord (predBlockWord data) steps)
+      x)
+    (trans
+      (repeatPredBlockRuns data steps
+        (run data (predBlockWord data) x))
+      (cong
+        (iterate (pred data) steps)
+        (predBlockRuns data x)))
 
 record DirectedForwardReachability (data : ForwardTranslationData) : Set where
   field
@@ -115,35 +165,55 @@ record DirectedForwardReachability (data : ForwardTranslationData) : Set where
       (x y : State data) →
       Σ (ForwardWord data) (λ word → run data word x ≡ y)
 
+open DirectedForwardReachability public
+
+directedReachabilityFromCyclicPred :
+  (data : ForwardTranslationData) →
+  CyclicPredecessorTransitive data →
+  DirectedForwardReachability data
+directedReachabilityFromCyclicPred data cyclic = record
+  { reaches = λ x y →
+      let reached = predReach cyclic x y
+          steps = Data.Product.proj₁ reached
+          target = Data.Product.proj₂ reached
+          word = repeatWord (predBlockWord data) steps
+      in
+      word , trans (repeatPredBlockRuns data steps x) target
+  }
+  where
+  open import Data.Product using (proj₁; proj₂)
+
 ------------------------------------------------------------------------
 -- The only source-specific remainder is the standard cyclicity of predecessor
--- on ZMod (2^n).  Once supplied, the forward-translation block gives the
--- directed semigroup transitivity target.
---
--- We keep this receipt explicit rather than pretending undirected graph
--- connectivity proves directed reachability.
+-- on ZMod (2^n).  Once supplied, the forward-translation compiler constructs
+-- actual forward words witnessing directed transitivity.
 ------------------------------------------------------------------------
 
 record IrreducibilityCompilerCutset : Set where
   constructor irreducibilityCompilerCutset
   field
-    sourceThreeFullPeriodOwned : Agda.Builtin.Bool.Bool
-    affineBranchFactorizationOwned : Agda.Builtin.Bool.Bool
-    cyclicPredecessorAdapterOwned : Agda.Builtin.Bool.Bool
-    forwardTranslationBlockCompiled : Agda.Builtin.Bool.Bool
-    directedIrreducibilityClosed : Agda.Builtin.Bool.Bool
-
-open import Agda.Builtin.Bool using (Bool; true; false)
+    sourceThreeFullPeriodOwned : Bool
+    affineBranchFactorizationOwned : Bool
+    cyclicPredecessorAdapterOwned : Bool
+    forwardTranslationBlockCompiled : Bool
+    genericDirectedReachabilityCompilerOwned : Bool
+    directedIrreducibilityClosed : Bool
 
 canonicalIrreducibilityCompilerCutset : IrreducibilityCompilerCutset
 canonicalIrreducibilityCompilerCutset =
-  irreducibilityCompilerCutset true true false true false
+  irreducibilityCompilerCutset true true false true true false
 
 forwardTranslationCoreClosed :
   IrreducibilityCompilerCutset.forwardTranslationBlockCompiled
     canonicalIrreducibilityCompilerCutset
   ≡ true
 forwardTranslationCoreClosed = refl
+
+genericForwardReachabilityCompilerClosed :
+  IrreducibilityCompilerCutset.genericDirectedReachabilityCompilerOwned
+    canonicalIrreducibilityCompilerCutset
+  ≡ true
+genericForwardReachabilityCompilerClosed = refl
 
 cyclicAdapterIsOnlyRemainingLeaf :
   IrreducibilityCompilerCutset.cyclicPredecessorAdapterOwned
