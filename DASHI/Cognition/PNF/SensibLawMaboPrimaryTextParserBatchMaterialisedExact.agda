@@ -12,15 +12,6 @@ import DASHI.Cognition.PNF.SpacyNumericProjection as Spacy
 import DASHI.Reasoning.SpacyDependencyToCandidateLogicalPNFExact as Candidate
 import DASHI.Cognition.PNF.SensibLawPdfReportingAttributionMaterialisedLiveExact as Applicant
 
-------------------------------------------------------------------------
--- PRIMARY-TEXT PARSER BATCH v0.1
---
--- This owner materialises the exact receipt metadata plus selected dependency
--- observations that carry the semantic pressure of the three-source batch.
--- The full token table remains runtime/source-owned by the JSON receipt.
--- No parser observation below is semantic, legal, truth or occurrence authority.
-------------------------------------------------------------------------
-
 record PrimaryTextSpecimenReceipt : Set where
   constructor primaryTextSpecimenReceipt
   field
@@ -71,25 +62,19 @@ dawsonSpecimen = primaryTextSpecimenReceipt
   "parser_observation_and_candidate_status_only" "en_core_web_sm"
   true refl false refl false refl false refl
 
-------------------------------------------------------------------------
--- Applicant lane reuses the already-owned exact PDF parser witnesses.
-------------------------------------------------------------------------
-
 applicantReportingWitness : Candidate.DependencyWitness
 applicantReportingWitness = Applicant.reportingSourceWitness
-
 applicantEmbeddedContentWitness : Candidate.DependencyWitness
 applicantEmbeddedContentWitness = Applicant.embeddedCcompWitness
-
-------------------------------------------------------------------------
--- Brennan materialised dependency observations.
--- Sentence 0: "... change in sovereignty does not extinguish native title ..."
-------------------------------------------------------------------------
 
 sym : Nat → Authority.SymbolId
 sym = Authority.symbolId
 ann : Nat → Spacy.NumericAnnotation
 ann n = Spacy.annotationPresent (sym n)
+
+------------------------------------------------------------------------
+-- Brennan sentence 0.
+------------------------------------------------------------------------
 
 brennanSentence0 : Authority.SentenceId
 brennanSentence0 = Authority.sentenceId 0
@@ -129,7 +114,7 @@ brennanExtinguishObjectWitness = Candidate.dependencyWitness
   "receipt Brennan sentence 0: dobj(extinguish, title), spans 121:126 -> 103:113"
 
 ------------------------------------------------------------------------
--- Brennan sentence 3: conditional survival + explicit first-person viewpoint.
+-- Brennan sentence 3 conditional survival.
 ------------------------------------------------------------------------
 
 brennanSentence3 : Authority.SentenceId
@@ -147,13 +132,19 @@ brennanSurvivesToken = Spacy.spacyTokenObservation
   (Spacy.parserLemma (sym 62303)) (ann 63303) (ann 64303) (ann 65303)
   Spacy.nothing (Spacy.declaredHeadAt 880 882)
 
-brennanConditionalWitness : Candidate.DependencyWitness
-brennanConditionalWitness = Candidate.dependencyWitness
-  brennanSurvivesToken brennanSurvivesToken Candidate.adverbialClause
-  "receipt Brennan sentence 3: advcl(root-is, survives) with mark If at span 788:790; same token retained as clause anchor"
+brennanRootIsToken : Spacy.SpacyTokenObservation
+brennanRootIsToken = Spacy.spacyTokenObservation
+  (Authority.tokenId 61320) brennanSentence3 20 880 882 (sym 61320)
+  (Spacy.parserLemma (sym 62320)) (ann 63320) (ann 64320) (ann 65320)
+  Spacy.nothing Spacy.declaredSelfHead
+
+brennanConditionalClauseWitness : Candidate.DependencyWitness
+brennanConditionalClauseWitness = Candidate.dependencyWitness
+  brennanSurvivesToken brennanRootIsToken Candidate.adverbialClause
+  "receipt Brennan sentence 3: advcl(root-is, survives), spans 804:812 -> 880:882; If marker span 788:790 is separately retained"
 
 ------------------------------------------------------------------------
--- Brennan sentence 6: "It is sufficient to state that ... rejects ... accepts ..."
+-- Brennan sentence 6.
 ------------------------------------------------------------------------
 
 brennanSentence6 : Authority.SentenceId
@@ -183,8 +174,7 @@ brennanStateContentWitness = Candidate.dependencyWitness
   "receipt Brennan sentence 6: ccomp(state, rejects), spans 1588:1595 -> 1533:1538"
 
 ------------------------------------------------------------------------
--- Dawson sentence 0: explicit viewpoint/modal reasoning without lexical
--- reporting-predicate discovery in the runtime receipt.
+-- Dawson sentence 0.
 ------------------------------------------------------------------------
 
 dawsonSentence0 : Authority.SentenceId
