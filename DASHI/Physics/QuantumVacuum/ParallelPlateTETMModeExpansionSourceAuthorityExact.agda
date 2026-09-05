@@ -74,7 +74,4 @@ classicalExpansionNeedsCasimirCarrierWeld ()
 
 zeroModeMustNotBeFlattenedBackToLegacyTETM :
   ExceptionalZeroModeAutomaticallyMeansLegacyTEorTMZero → ⊥
-zeroModeMustNotBeFlattenedBackToLegacyTETMZero
-  where
-    LegacyTETMZero : Set
-    LegacyTETMZero = ExceptionalZeroModeAutomaticallyMeansLegacyTEorTMZero
+zeroModeMustNotBeFlattenedBackToLegacyTETM ()
