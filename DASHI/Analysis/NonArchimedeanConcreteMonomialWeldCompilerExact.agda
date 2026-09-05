@@ -6,9 +6,10 @@ module DASHI.Analysis.NonArchimedeanConcreteMonomialWeldCompilerExact where
 -- Highest-alpha route after the source audit:
 --
 --   tau-odd/odd-character identification
+--   + arithmetic odd-orbit chart (j,b) <-> +/-3^j
 --   + source D_n character action
---   + concrete DFT basis/reindex
---   + equality of the two operators on the character basis
+--   + concrete twisted-coordinate <-> character-basis identification
+--   + equality of the two operators on each complete basis vector
 --   + existing finite matrix-action faithfulness
 --       => literal conjugated-matrix = monomial-matrix equality.
 --
@@ -29,6 +30,7 @@ record ConcreteCharacterActionCompilerInput : Set₁ where
     sourceCharacterActionOwned : Bool
     sourceTauOddPreservationOwned : Bool
     oddCharacterIffTauOddReceiptOwned : Bool
+    arithmeticOddOrbitChartOwned : Bool
     twistedCoordinateCharacterReceiptOwned : Bool
     concreteDFTBasisReceiptOwned : Bool
     actionEqualityDerivedOnCompleteBasis : Bool
@@ -45,6 +47,7 @@ compiledConcreteMatrixEquality input =
 
 data ConcreteWeldLeaf : Set where
   oddCharacterTauOddIff : ConcreteWeldLeaf
+  arithmeticOddOrbitRechart : ConcreteWeldLeaf
   twistedCoordinateCharacterIdentification : ConcreteWeldLeaf
   completeBasisActionEquality : ConcreteWeldLeaf
   finiteMatrixActionFaithfulness : ConcreteWeldLeaf
@@ -60,6 +63,7 @@ data LeafDisposition : Set where
 
 leafDisposition : ConcreteWeldLeaf → LeafDisposition
 leafDisposition oddCharacterTauOddIff = live
+leafDisposition arithmeticOddOrbitRechart = live
 leafDisposition twistedCoordinateCharacterIdentification = live
 leafDisposition completeBasisActionEquality = downstream
 leafDisposition finiteMatrixActionFaithfulness = pruned
@@ -69,6 +73,7 @@ leafDisposition rebuildCharacterAction = pruned
 
 highestAlphaConcreteWeldPath : List ConcreteWeldLeaf
 highestAlphaConcreteWeldPath =
+  arithmeticOddOrbitRechart ∷
   oddCharacterTauOddIff ∷
   twistedCoordinateCharacterIdentification ∷
   completeBasisActionEquality ∷
