@@ -13,6 +13,8 @@ import DASHI.Law.IndependentEvidenceProvenanceExact as Provenance
 import DASHI.Law.EvidenceProvenanceDependencyDagExact as Dag
 import DASHI.Law.CoerciveEncounterFixtureCompilerExact as Fixture
 import DASHI.Law.CoerciveEncounterGenericReceiptBridgeExact as Receipt
+import DASHI.Law.CoerciveEncounterPopulationAggregationExact as Population
+import DASHI.Law.SystemicCoercivePracticePromotionGateExact as Systemic
 
 firewallAndReachabilityCoexist :
   Wand.FirewallWithReachability Wand.canonicalFirewallBoundary
@@ -115,3 +117,25 @@ downstreamContrabandCannotLeapfrogFixtureGap = Fixture.canonicalFixtureContraban
 genericFixtureReceiptRemainsNonPromoting :
   Receipt.Generic.promotesClaim Receipt.canonicalFixtureGenericReceipt ≡ false
 genericFixtureReceiptRemainsNonPromoting = Receipt.canonicalFixtureReceiptNonPromoting
+
+populationGatewayCountsPreserveTypedDenominator :
+  Population.numerator (Population.gatewayRateCounts Population.canonicalPopulation) ≡ 2
+populationGatewayCountsPreserveTypedDenominator = Population.canonicalGatewayNumerator
+
+populationLawfulnessDoesNotFollowFromSearchCount :
+  Population.numerator (Population.lawfulnessClosureRateCounts Population.canonicalPopulation) ≡ 0
+populationLawfulnessDoesNotFollowFromSearchCount = Population.canonicalLawfulnessClosedNumerator
+
+pretextClaimStillRequiresIntentProducer :
+  Systemic.firstSystemicResidual
+    Systemic.pretextualIntent
+    Systemic.canonicalDescriptiveOnlyCutset
+  ≡ Systemic.intentResidual
+pretextClaimStillRequiresIntentProducer = Systemic.canonicalPretextStopsAtIntent
+
+deterrenceClaimStillRequiresCounterfactual :
+  Systemic.firstSystemicResidual
+    Systemic.causalDeterrence
+    Systemic.canonicalDescriptiveOnlyCutset
+  ≡ Systemic.counterfactualResidual
+deterrenceClaimStillRequiresCounterfactual = Systemic.canonicalDeterrenceStillNeedsCounterfactual
