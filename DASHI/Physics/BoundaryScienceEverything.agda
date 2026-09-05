@@ -18,3 +18,7 @@ import DASHI.Physics.LeBlancFissionInstrumentationControlScienceExact
 import DASHI.Physics.Plasma.LoureiroViriatoNumericsScienceExact
 import DASHI.Physics.ScorpiusRadiographicAcceleratorScienceExact
 import DASHI.Physics.MaiwaldActionSpectroscopyScienceExact
+
+-- Explicit dependency-direction bridges: generic domain science first,
+-- bounded source/case refinements second.
+import DASHI.Physics.BoundaryScienceGeneralisationBridgesExact
