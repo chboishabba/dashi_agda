@@ -5,6 +5,7 @@ module DASHI.Culture.MissingDeceasedOpenScienceEverything where
 import DASHI.Core.ViewpointProvenanceBidiExact
 import DASHI.Core.OpenScienceKnowledgeReleaseBidiExact
 import DASHI.Core.OpenScienceArtifactGranularityBidiExact
+import DASHI.Core.KnowledgeBoundaryTransitionBidiExact
 import DASHI.Core.TechnicalExternalisationDepthBidiExact
 import DASHI.Core.ExternalisationBoundaryEnrichmentBidiExact
 import DASHI.Core.ExternalisationMatchedControlScoringExact
