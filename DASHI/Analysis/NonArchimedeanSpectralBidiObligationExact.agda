@@ -3,22 +3,16 @@ module DASHI.Analysis.NonArchimedeanSpectralBidiObligationExact where
 ------------------------------------------------------------------------
 -- Reverse / BIDI obligation compiler for the non-Archimedean spectral lane.
 --
--- After reusing all currently owned arithmetic and generic machinery, the
--- finite spectral core has one composite source-specific seam:
+-- All generic Fourier, matrix, orbit, sign, and binary-sheet mathematics are
+-- now owned or reusable in-repo.  The finite spectral core therefore reopens
+-- one foreign-source producer only:
 --
---   literal Hadamard twisted coordinate
---      <-> tau-odd full function
---      <-> odd-character basis
---      <-> corrected modulated half-size DFT coordinates.
+--   concrete Lean ZMod-2 sheet model
+--      -> DASHI binary-sheet/twisted-restriction adapter.
 --
--- Everything else now compiles after that seam:
---
---   * canonical two odd orbits from exact order/parity/cardinality;
---   * orbit period from exact order;
---   * orbit magnitude from the existing conditional magnitude theorem;
---   * signed full return from the stronger source `three_pow_two_pow` theorem;
---   * literal monomial matrix equality from complete basis action equality;
---   * spatial spectrum/trace/power transport from the common weld.
+-- From that single adapter the corrected odd-character DFT, complete basis
+-- action, literal monomial matrix equality, spatial spectrum, trace, and power
+-- consumers are compiler output.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -53,14 +47,14 @@ spectralCircleSpatialClaim : BidiClaim
 spectralCircleSpatialClaim =
   bidiClaim spatialSpectralCircle
     "spatial twisted-block spectral circle"
-    "corrected odd-character DFT instantiation + twisted-coordinate/tau-odd same-object weld"
+    "single concrete source sheet adapter for D'_matrix/twistedDirMatrix"
     true false false false
 
 spatialTwistedPowerClaim : BidiClaim
 spatialTwistedPowerClaim =
   bidiClaim spatialTwistedPower
     "spatial twisted-block doubled-return power equals minus two identity"
-    "same corrected spatial/character weld; orbit period and signed return now compile from owned arithmetic"
+    "same single concrete source sheet adapter; orbit/sign/power machinery already compiles"
     true false false false
 
 orbitProductClaim : BidiClaim
@@ -100,9 +94,7 @@ ropeOptimalityClaim =
 
 
 data MissingObligation : Set where
-  needInstantiateCorrectOddCharacterDFT : MissingObligation
-  needTwistedCoordinateTauOddFunctionWeld : MissingObligation
-  needCompleteCharacterBasisActionEquality : MissingObligation
+  needConcreteSourceSheetAdapter : MissingObligation
   needConcreteDFTMonomialMatrixEquality : MissingObligation
   needGraphToDecompositionProducer : MissingObligation
   needDepthDecayProducer : MissingObligation
@@ -112,15 +104,9 @@ data MissingObligation : Set where
 
 compileMissing : ClaimKind → List MissingObligation
 compileMissing spatialSpectralCircle =
-  needInstantiateCorrectOddCharacterDFT ∷
-  needTwistedCoordinateTauOddFunctionWeld ∷
-  needCompleteCharacterBasisActionEquality ∷
-  []
+  needConcreteSourceSheetAdapter ∷ []
 compileMissing spatialTwistedPower =
-  needInstantiateCorrectOddCharacterDFT ∷
-  needTwistedCoordinateTauOddFunctionWeld ∷
-  needCompleteCharacterBasisActionEquality ∷
-  []
+  needConcreteSourceSheetAdapter ∷ []
 compileMissing orbitProduct = []
 compileMissing arbitraryDagCover = needGraphToDecompositionProducer ∷ []
 compileMissing depthDecaySparsity = needDepthDecayProducer ∷ []
@@ -139,30 +125,30 @@ record BidiFirewall : Set where
     architecturalAnalogyImpliesTheoremTransport : Bool
     finalMagnitudeHypothesisMayCountAsItsOwnDerivation : Bool
     compiledMatrixEqualityShouldRemainOnSearchFrontier : Bool
-    arbitraryUnitaryDFTMayCountAsOddCharacterDFT : Bool
+    genericDFTShouldRemainOnSearchFrontier : Bool
     canonicalOrbitReceiptsShouldRemainOnSearchFrontier : Bool
     signedOrbitCancellationShouldRemainOnSearchFrontier : Bool
-    explicitComplexPhaseValuesRequiredForMinusTwo : Bool
+    genericBinarySheetEquivalenceShouldRemainOnSearchFrontier : Bool
 
 canonicalBidiFirewall : BidiFirewall
 canonicalBidiFirewall =
   bidiFirewall false false false false false false false false false false
 
-spatialSpectralCircleSingleSeamCutset :
+spatialSpectralCircleSingleAdapterCutset :
   compileMissing (kind spectralCircleSpatialClaim)
-  ≡ needInstantiateCorrectOddCharacterDFT ∷
-    needTwistedCoordinateTauOddFunctionWeld ∷
-    needCompleteCharacterBasisActionEquality ∷
-    []
-spatialSpectralCircleSingleSeamCutset = refl
+  ≡ needConcreteSourceSheetAdapter ∷ []
+spatialSpectralCircleSingleAdapterCutset = refl
 
-spatialPowerSharesSameSeam :
+spatialPowerSharesSingleAdapter :
   compileMissing (kind spatialTwistedPowerClaim)
-  ≡ needInstantiateCorrectOddCharacterDFT ∷
-    needTwistedCoordinateTauOddFunctionWeld ∷
-    needCompleteCharacterBasisActionEquality ∷
-    []
-spatialPowerSharesSameSeam = refl
+  ≡ needConcreteSourceSheetAdapter ∷ []
+spatialPowerSharesSingleAdapter = refl
+
+compiledMatrixEqualityIsPrunedFromSearch :
+  BidiFirewall.compiledMatrixEqualityShouldRemainOnSearchFrontier
+    canonicalBidiFirewall
+  ≡ false
+compiledMatrixEqualityIsPrunedFromSearch = refl
 
 canonicalOrbitSearchIsPruned :
   BidiFirewall.canonicalOrbitReceiptsShouldRemainOnSearchFrontier
@@ -176,23 +162,11 @@ signedOrbitSearchIsPruned :
   ≡ false
 signedOrbitSearchIsPruned = refl
 
-compiledMatrixEqualityIsPrunedFromSearch :
-  BidiFirewall.compiledMatrixEqualityShouldRemainOnSearchFrontier
+genericBinarySheetSearchIsPruned :
+  BidiFirewall.genericBinarySheetEquivalenceShouldRemainOnSearchFrontier
     canonicalBidiFirewall
   ≡ false
-compiledMatrixEqualityIsPrunedFromSearch = refl
-
-arbitraryUnitaryDoesNotSupplyCharacterSemantics :
-  BidiFirewall.arbitraryUnitaryDFTMayCountAsOddCharacterDFT
-    canonicalBidiFirewall
-  ≡ false
-arbitraryUnitaryDoesNotSupplyCharacterSemantics = refl
-
-explicitPhaseValuesNotRequiredForPower :
-  BidiFirewall.explicitComplexPhaseValuesRequiredForMinusTwo
-    canonicalBidiFirewall
-  ≡ false
-explicitPhaseValuesNotRequiredForPower = refl
+genericBinarySheetSearchIsPruned = refl
 
 orbitProductIsPromotable :
   compileMissing (kind orbitProductClaim) ≡ []
