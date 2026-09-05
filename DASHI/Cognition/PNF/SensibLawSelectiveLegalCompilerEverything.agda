@@ -26,6 +26,8 @@ import DASHI.Cognition.PNF.SensibLawAdjudicativeTemporalNonRetroactivityExact as
 import DASHI.Cognition.PNF.SensibLawLegalOutcomeIdentifiabilityBidiExact as Outcome
 import DASHI.Cognition.PNF.SensibLawMaboPrimaryTextParserBatchMaterialisedExact as MaboBatch
 import DASHI.Cognition.PNF.SensibLawMaboBrennanDawsonIssueResidualLiveExact as Mabo
+import DASHI.Cognition.PNF.SensibLawMaboRecognitionBasisAuthorityEvidenceExact as MaboAuthority
+import DASHI.Cognition.PNF.SensibLawMaboRecognitionBasisDiscriminatorClosureExact as MaboClosure
 
 pdfReusesAttribution : Planner.action Pdf.attributionPlan ≡ Planner.reuseExisting
 pdfReusesAttribution = refl
@@ -130,6 +132,28 @@ maboParserDoesNotCreateHolding : Mabo.ParserCandidateCreatesJudicialHolding → 
 maboParserDoesNotCreateHolding = Mabo.parserCandidateDoesNotCreateHolding
 maboFiveParagraphBatchDoesNotClaimGeneralCoverage : MaboBatch.FiveParagraphBatchIsGeneralParserCoverage → ⊥
 maboFiveParagraphBatchDoesNotClaimGeneralCoverage = MaboBatch.fiveParagraphBatchDoesNotClaimGeneralCoverage
+
+maboAuthorityUseContrastClosesCoarseBasisConsumer :
+  MaboClosure.goalStatus MaboClosure.listCompatibleRecognitionBases MaboClosure.recognitionBasisReceipt
+  ≡ MaboClosure.goalClosed
+maboAuthorityUseContrastClosesCoarseBasisConsumer = refl
+
+maboExactJurisprudentialTheoryRemainsOpen :
+  MaboClosure.goalStatus MaboClosure.identifyExactExhaustiveJurisprudentialTheory MaboClosure.recognitionBasisReceipt
+  ≡ MaboClosure.goalOpen
+maboExactJurisprudentialTheoryRemainsOpen = refl
+
+maboAmoduSameAuthorityDifferentUse : MaboAuthority.SharedAuthorityUseContrast MaboAuthority.brennanAmoduUse MaboAuthority.dawsonAmoduUse
+maboAmoduSameAuthorityDifferentUse = MaboAuthority.amoduUseContrast
+
+maboCalderSameAuthorityDifferentUse : MaboAuthority.SharedAuthorityUseContrast MaboAuthority.brennanCalderUse MaboAuthority.dawsonCalderUse
+maboCalderSameAuthorityDifferentUse = MaboAuthority.calderUseContrast
+
+maboSharedCitationDoesNotForceSharedMeaning : MaboClosure.SharedCitationClosesSharedMeaning → ⊥
+maboSharedCitationDoesNotForceSharedMeaning = MaboClosure.sharedCitationDoesNotCloseMeaning
+
+maboCitationDoesNotEqualAdoption : MaboAuthority.CitationMeansAdoption → ⊥
+maboCitationDoesNotEqualAdoption = MaboAuthority.aCitationDoesNotMeanAdoption
 
 data SelectiveLegalCompilerAggregateMeansKernelValidated : Set where
 aggregateDoesNotClaimKernelValidation : SelectiveLegalCompilerAggregateMeansKernelValidated → ⊥
