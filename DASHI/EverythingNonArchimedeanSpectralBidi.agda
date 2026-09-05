@@ -27,7 +27,7 @@ import DASHI.Analysis.NonArchimedeanCanonicalOddOrbitProducerBidiExact
 import DASHI.Analysis.NonArchimedeanFullCycleSignedCancellationBidiExact
 import DASHI.Analysis.NonArchimedeanMonomialTraceSpatialBidiExact
 
--- Corrected character-basis closure route.  Existing finite DFT theory and
+-- Corrected character-basis closure route. Existing finite DFT theory and
 -- matrix faithfulness are reused; the source product DFT is retained only as a
 -- unitary artifact, not as the literal odd-character transform.
 import DASHI.Analysis.NonArchimedeanCharacterBasisMatrixFaithfulnessReuseExact
@@ -40,9 +40,10 @@ import DASHI.Analysis.NonArchimedeanBinarySheetTauOddEquivalenceExact
 import DASHI.Analysis.NonArchimedeanTwistedTauOddFunctionEquivalenceExact
 import DASHI.Analysis.NonArchimedeanTwistedRestrictionIntertwinerExact
 import DASHI.Analysis.NonArchimedeanTwistedRestrictionCoreIntertwinerExact
+import DASHI.Analysis.NonArchimedeanConcreteSourceSheetAdapterExact
 import DASHI.Analysis.NonArchimedeanConcreteMonomialWeldCompilerExact
 
--- Arithmetic orbit and signed-return closure.  The stronger checked source
+-- Arithmetic orbit and signed-return closure. The stronger checked source
 -- theorem `three_pow_two_pow` carries an odd coefficient and supplies the extra
 -- dyadic bit needed for the orbit-sum phase; explicit +/- i sqrt(2) values are
 -- pruned from the critical path.
@@ -58,7 +59,7 @@ import DASHI.Analysis.NonArchimedeanNegativeOrbitWeightPhaseCompilerExact
 import DASHI.Analysis.NonArchimedeanOrbitCancellationToMinusTwoExact
 import DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact
 
--- Optional Monster correspondence x-pollination.  These remain downstream
+-- Optional Monster correspondence x-pollination. These remain downstream
 -- comparison fibres and are not prerequisites for the source spectral closure.
 import DASHI.Analysis.NonArchimedeanMonster3BDyadicCorrespondenceBidiExact
 import DASHI.Analysis.NonArchimedeanMonster3BPhaseBulkHypervoxelExact
