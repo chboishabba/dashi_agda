@@ -15,6 +15,8 @@ import DASHI.Law.CoerciveEncounterFixtureCompilerExact as Fixture
 import DASHI.Law.CoerciveEncounterGenericReceiptBridgeExact as Receipt
 import DASHI.Law.CoerciveEncounterPopulationAggregationExact as Population
 import DASHI.Law.SystemicCoercivePracticePromotionGateExact as Systemic
+import DASHI.Law.CoerciveEncounterDenominatorIntegrityExact as Denom
+import DASHI.Law.SelectionEligibilityDisparityBidiExact as Disparity
 
 firewallAndReachabilityCoexist :
   Wand.FirewallWithReachability Wand.canonicalFirewallBoundary
@@ -139,3 +141,29 @@ deterrenceClaimStillRequiresCounterfactual :
     Systemic.canonicalDescriptiveOnlyCutset
   ≡ Systemic.counterfactualResidual
 deterrenceClaimStillRequiresCounterfactual = Systemic.canonicalDeterrenceStillNeedsCounterfactual
+
+encounterCountDoesNotCollapseToUniquePersons :
+  Denom.encounterCount Denom.canonicalDenominatorLedger ≡ 4
+encounterCountDoesNotCollapseToUniquePersons = Denom.canonicalEncounterCount
+
+uniquePersonDenominatorRetainsDeduplication :
+  Denom.uniquePersonCount Denom.canonicalDenominatorLedger ≡ 2
+uniquePersonDenominatorRetainsDeduplication = Denom.canonicalUniquePersonCount
+
+missingStatusRemainsUnresolved :
+  Denom.interpretStatus Denom.statusMissing ≡ Denom.unresolvedStatus
+missingStatusRemainsUnresolved = Denom.missingStatusIsNotNegative
+
+scanShareDoesNotCloseSelectionDisparity :
+  Disparity.firstDisparityResidual
+    Disparity.descriptiveSelectionDisparity
+    Disparity.canonicalScanShareOnly
+  ≡ Disparity.eligibilityResidual
+scanShareDoesNotCloseSelectionDisparity = Disparity.scanShareDoesNotCloseSelectionDisparity
+
+causalDiscriminationNeedsCausalSelectionModel :
+  Disparity.firstDisparityResidual
+    Disparity.causalDiscrimination
+    (Disparity.selectionDisparityCutset true true true true true false "descriptive selection surface closed")
+  ≡ Disparity.causalModelResidual
+causalDiscriminationNeedsCausalSelectionModel = Disparity.causalClaimRequiresCausalModel
