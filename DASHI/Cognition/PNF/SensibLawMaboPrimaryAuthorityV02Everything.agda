@@ -8,6 +8,7 @@ import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityPropositionWeldExact as 
 import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityUseUpgradeExact as Upgrade
 import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityResidualRefinementV02Exact as Refined
 import DASHI.Cognition.PNF.SensibLawMaboRecognitionCoordinateFactorisationExact as Factor
+import DASHI.Cognition.PNF.SensibLawCalderAuthoritativeTranscriptionVerificationExact as Verify
 
 ------------------------------------------------------------------------
 -- Exact runtime/source boundary.
@@ -49,6 +50,28 @@ hallClearPlainPassageRemainsContinuityIndexed : Primary.primaryCoordinate Primar
 hallClearPlainPassageRemainsContinuityIndexed = refl
 
 ------------------------------------------------------------------------
+-- Authoritative Calder transcription verification.
+------------------------------------------------------------------------
+
+hallIndependentTextVerified : Verify.authoritativeTranscriptionVerified Verify.hallIndependentTitleVerified ≡ true
+hallIndependentTextVerified = refl
+hallRecognitionTextVerified : Verify.authoritativeTranscriptionVerified Verify.hallRecognitionNotPrerequisiteVerified ≡ true
+hallRecognitionTextVerified = refl
+hallSurvivalTextVerified : Verify.authoritativeTranscriptionVerified Verify.hallSurvivalWithoutRecognitionVerified ≡ true
+hallSurvivalTextVerified = refl
+hallContinuityPresumptionTextVerified : Verify.authoritativeTranscriptionVerified Verify.hallContinuityPresumptionVerified ≡ true
+hallContinuityPresumptionTextVerified = refl
+hallClearPlainTextVerified : Verify.authoritativeTranscriptionVerified Verify.hallClearPlainBurdenVerified ≡ true
+hallClearPlainTextVerified = refl
+
+hallSpecificExtinguishmentIsSemanticNotVerbatimPromotion :
+  Verify.verificationGrade Verify.hallSpecificExtinguishmentVerified ≡ Verify.semanticPropositionVerified
+hallSpecificExtinguishmentIsSemanticNotVerbatimPromotion = refl
+
+ocrHistoryStillRetainedAfterVerification : Batch.projectionKind Batch.calderHallIndependentTitleSpecimen ≡ Batch.ocrDerivedProjection
+ocrHistoryStillRetainedAfterVerification = refl
+
+------------------------------------------------------------------------
 -- Later-use / primary-text relations.
 ------------------------------------------------------------------------
 
@@ -62,15 +85,15 @@ dawsonAmoduPrimaryQualification : Upgrade.relation Upgrade.dawsonAmoduContinuity
 dawsonAmoduPrimaryQualification = refl
 
 ------------------------------------------------------------------------
--- Post-v0.2 residual state.
+-- Post-v0.2 residual state after authoritative Hall verification.
 ------------------------------------------------------------------------
 
 radicalTitleStrengthenedByTextNativePrimary : Refined.state Refined.radicalTitleAfterV02 ≡ Refined.strengthenedByPrimaryTextNative
 radicalTitleStrengthenedByTextNativePrimary = refl
-continuityStrengthenedByTextNativePrimary : Refined.state Refined.continuityAfterV02 ≡ Refined.strengthenedByPrimaryTextNative
-continuityStrengthenedByTextNativePrimary = refl
-recognitionContrastNowLocatedInPrimaryMaterial : Refined.state Refined.recognitionRequirementAfterV02 ≡ Refined.primaryInterpretiveContrastLocated
-recognitionContrastNowLocatedInPrimaryMaterial = refl
+continuityHasAuthoritativePrimaryContrast : Refined.state Refined.continuityAfterV02 ≡ Refined.authoritativePrimaryContrastVerified
+continuityHasAuthoritativePrimaryContrast = refl
+recognitionHasAuthoritativePrimaryContrast : Refined.state Refined.recognitionRequirementAfterV02 ≡ Refined.authoritativePrimaryContrastVerified
+recognitionHasAuthoritativePrimaryContrast = refl
 
 continuityPlanNeedsNoFurtherParserRun : Refined.parserRerunRequired Refined.continuityV02Plan ≡ false
 continuityPlanNeedsNoFurtherParserRun = refl
@@ -79,19 +102,31 @@ recognitionPlanNeedsNoFurtherParserRun = refl
 enforceabilityPlanNeedsNoFurtherParserRun : Refined.parserRerunRequired Refined.enforceabilityV02Plan ≡ false
 enforceabilityPlanNeedsNoFurtherParserRun = refl
 
+continuityPlanHasNoHallVerificationResidual :
+  Refined.residuals Refined.continuityV02Plan ≡
+  (Refined.compareAmoduContinuityWithDawsonRecognitionUse ∷ Refined.reconcileContinuityAndRecognitionCoordinates ∷ [])
+continuityPlanHasNoHallVerificationResidual = refl
+
+recognitionPlanHasNoHallVerificationResidual :
+  Refined.residuals Refined.recognitionV02Plan ≡
+  (Refined.compareHallRecognitionIndependenceWithDawsonUse ∷ Refined.reconcileContinuityAndRecognitionCoordinates ∷ [])
+recognitionPlanHasNoHallVerificationResidual = refl
+
 ------------------------------------------------------------------------
 -- Firewalls promoted at the focused-root surface.
 ------------------------------------------------------------------------
 
-ocrStillNotAuthoritativeTranscription : Batch.OcrProjectionIsAuthoritativeTranscription → ⊥
-ocrStillNotAuthoritativeTranscription = Batch.ocrProjectionDoesNotBecomeAuthoritativeTranscription
+ocrStillNotAuthoritativeTranscriptionByItself : Batch.OcrProjectionIsAuthoritativeTranscription → ⊥
+ocrStillNotAuthoritativeTranscriptionByItself = Batch.ocrProjectionDoesNotBecomeAuthoritativeTranscription
 parserStillDoesNotResolveCoordinate : Batch.ParserCandidateCreatesLegalCoordinateResolution → ⊥
 parserStillDoesNotResolveCoordinate = Batch.parserCandidateDoesNotResolveLegalCoordinate
-primaryEvidenceStillDoesNotResolveCoordinate : Refined.PrimaryParserEvidenceMeansCoordinateResolved → ⊥
-primaryEvidenceStillDoesNotResolveCoordinate = Refined.primaryParserEvidenceDoesNotResolveCoordinate
+authoritativeTextStillDoesNotResolveCoordinate : Refined.AuthoritativeTranscriptionMeansCoordinateResolved → ⊥
+authoritativeTextStillDoesNotResolveCoordinate = Refined.authoritativeTranscriptionDoesNotResolveCoordinate
 sameAuthorityStillDoesNotMeanSameInterpretation : Upgrade.SameAuthorityMeansSameInterpretation → ⊥
 sameAuthorityStillDoesNotMeanSameInterpretation = Upgrade.sameAuthorityDoesNotMeanSameInterpretation
 primaryContrastDoesNotMakeLaterJudgmentFalse : Upgrade.PrimaryContrastMakesLaterJudgmentFalse → ⊥
 primaryContrastDoesNotMakeLaterJudgmentFalse = Upgrade.primaryContrastDoesNotMakeLaterJudgmentFalse
+hallVerificationDoesNotEraseJudsonResidual : Refined.HallVerificationEliminatesAllCalderResiduals → ⊥
+hallVerificationDoesNotEraseJudsonResidual = Refined.hallVerificationDoesNotEliminateAllCalderResiduals
 v02DoesNotCloseExactUnifiedTheory : Refined.TextNativeAmoduEvidenceResolvesExactMaboTheory → ⊥
 v02DoesNotCloseExactUnifiedTheory = Refined.amoduEvidenceDoesNotResolveExactMaboTheory
