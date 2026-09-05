@@ -23,6 +23,7 @@ import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExa
 import DASHI.Cognition.PNF.SensibLawIssueIndexedAdjudicativeHyperfabricExact as Issue
 import DASHI.Cognition.PNF.SensibLawIssueBurdenStandardRemedyBidiExact as IssueBSR
 import DASHI.Cognition.PNF.SensibLawAdjudicativeTemporalNonRetroactivityExact as Temporal
+import DASHI.Cognition.PNF.SensibLawLegalOutcomeIdentifiabilityBidiExact as Outcome
 
 ------------------------------------------------------------------------
 -- EXISTING SELECTIVE COMPILER PATH.
@@ -85,41 +86,48 @@ priorApplicabilitySnapshotRetained = PaidLiability.priorApplicabilitySnapshotRet
 
 ------------------------------------------------------------------------
 -- ISSUE-INDEXED ADJUDICATIVE HYPERFABRIC.
--- The linear chain above is one valid compiled path, not universal topology.
 ------------------------------------------------------------------------
 
-burdenMayCloseBeforeLiability :
-  Issue.firstAdjudicativeResidual Issue.identifyBurdenQuery Issue.burdenCanCloseWithoutLiability
-  ≡ Issue.adjudicativeClosed
+burdenMayCloseBeforeLiability : Issue.firstAdjudicativeResidual Issue.identifyBurdenQuery Issue.burdenCanCloseWithoutLiability ≡ Issue.adjudicativeClosed
 burdenMayCloseBeforeLiability = refl
-
-remedyMayStopAtIndependentSourceResidual :
-  Issue.firstAdjudicativeResidual Issue.remedyEligibilityQuery Issue.candidateLiabilityButNoRemedySource
-  ≡ Issue.remedySourceResidual
+remedyMayStopAtIndependentSourceResidual : Issue.firstAdjudicativeResidual Issue.remedyEligibilityQuery Issue.candidateLiabilityButNoRemedySource ≡ Issue.remedySourceResidual
 remedyMayStopAtIndependentSourceResidual = refl
-
 liabilityDoesNotFixBurden : IssueBSR.LiabilityDeterminesIssueBurden → ⊥
 liabilityDoesNotFixBurden = IssueBSR.liabilityDoesNotDetermineIssueBurden
-
 liabilityDoesNotFixStandard : IssueBSR.LiabilityDeterminesIssueStandard → ⊥
 liabilityDoesNotFixStandard = IssueBSR.liabilityDoesNotDetermineIssueStandard
-
 candidateLiabilityCannotAdmitRemedy : IssueBSR.CandidateLiabilityAdmitsRemedyEligibility → ⊥
 candidateLiabilityCannotAdmitRemedy = IssueBSR.candidateLiabilityDoesNotAdmitRemedy
-
 oneLinearPipelineNotUniversal : Issue.OneFixedLinearPipelineFitsEveryLegalQuery → ⊥
 oneLinearPipelineNotUniversal = Issue.oneLinearPipelineDoesNotFitEveryQuery
-
 legalConclusionDoesNotBecomePhysicalAuthority : Issue.LegalConclusionAuthorisesPhysicalAction → ⊥
 legalConclusionDoesNotBecomePhysicalAuthority = Issue.legalConclusionDoesNotAuthorisePhysicalAction
 
-laterEvidenceDoesNotRetroactivelyPayEarlierBurden :
-  Temporal.LaterEvidenceRetroactivelySatisfiesEarlierBurden → ⊥
-laterEvidenceDoesNotRetroactivelyPayEarlierBurden = Temporal.laterEvidenceDoesNotRetroactivelySatisfyBurden
+------------------------------------------------------------------------
+-- HISTORY-INDEXED ADJUDICATIVE PROVENANCE.
+------------------------------------------------------------------------
 
-laterFindingDoesNotRetroactivelyPayEarlierStandard :
-  Temporal.LaterFindingRetroactivelySatisfiesEarlierStandard → ⊥
+laterEvidenceDoesNotRetroactivelyPayEarlierBurden : Temporal.LaterEvidenceRetroactivelySatisfiesEarlierBurden → ⊥
+laterEvidenceDoesNotRetroactivelyPayEarlierBurden = Temporal.laterEvidenceDoesNotRetroactivelySatisfyBurden
+laterFindingDoesNotRetroactivelyPayEarlierStandard : Temporal.LaterFindingRetroactivelySatisfiesEarlierStandard → ⊥
 laterFindingDoesNotRetroactivelyPayEarlierStandard = Temporal.laterFindingDoesNotRetroactivelySatisfyStandard
+
+------------------------------------------------------------------------
+-- LEGAL OUTCOME PARTIAL IDENTIFICATION.
+------------------------------------------------------------------------
+
+compatibleExplanationsCanCloseCoarseConsumer :
+  Outcome.goalStatus Outcome.listCompatibleExplanations Outcome.canonicalAmbiguousDisposition
+  ≡ Outcome.explanationGoalClosed
+compatibleExplanationsCanCloseCoarseConsumer = refl
+
+exactDispositionReasonCanRemainOpen :
+  Outcome.goalStatus Outcome.exactDispositionReason Outcome.canonicalAmbiguousDisposition
+  ≡ Outcome.explanationGoalOpen
+exactDispositionReasonCanRemainOpen = refl
+
+dispositionDoesNotUniquelyDetermineReason : Outcome.DispositionSurfaceUniquelyDeterminesReason → ⊥
+dispositionDoesNotUniquelyDetermineReason = Outcome.dispositionDoesNotUniquelyDetermineReason
 
 ------------------------------------------------------------------------
 -- Aggregate import is not a kernel receipt.
