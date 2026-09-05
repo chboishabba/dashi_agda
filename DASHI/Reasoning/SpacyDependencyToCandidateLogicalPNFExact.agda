@@ -1,6 +1,7 @@
 module DASHI.Reasoning.SpacyDependencyToCandidateLogicalPNFExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
@@ -10,12 +11,6 @@ import DASHI.Reasoning.PredicateNormalFormEvidenceAuditExact as EvidencePNF
 
 ------------------------------------------------------------------------
 -- BIDI PARSER OBSERVATION -> CANDIDATE SEMANTIC PNF
---
--- This is deliberately not a parser-is-semantics compiler.  A spaCy
--- dependency observation licenses only a candidate semantic fragment.  The
--- reverse direction records which parser observations would witness a chosen
--- fragment.  Ambiguity is retained as a fibre until a separate resolution
--- receipt selects an admissible reading.
 ------------------------------------------------------------------------
 
 data Term : Set where
@@ -42,6 +37,11 @@ data DependencyShape : Set where
   modalAuxiliary
   determiner
   temporalModifier
+  clausalComplement
+  openClausalComplement
+  adverbialClause
+  clausalModifier
+  relativeClause
   unresolvedDependency
   : DependencyShape
 
@@ -65,6 +65,8 @@ data SemanticFragmentKind : Set where
   modalityFragment
   quantifierFragment
   temporalFragment
+  contentClauseFragment
+  clauseAttachmentFragment
   unresolvedFragment
   : SemanticFragmentKind
 
@@ -82,12 +84,6 @@ record CandidateSemanticFragment : Set where
 
 open CandidateSemanticFragment public
 
-------------------------------------------------------------------------
--- BIDI direction.  Forward extraction and reverse support are constructor
--- distinct.  Reverse support never means the dependency parse uniquely
--- determines the semantic reading.
-------------------------------------------------------------------------
-
 record ParserSemanticBidi : Set₁ where
   constructor parserSemanticBidi
   field
@@ -97,11 +93,6 @@ record ParserSemanticBidi : Set₁ where
     reverseRuleReference : String
 
 open ParserSemanticBidi public
-
-------------------------------------------------------------------------
--- Ambiguity remains a fibre.  Selecting one candidate requires an explicit
--- resolution receipt and retains the rejected/alternative readings.
-------------------------------------------------------------------------
 
 record CandidateSemanticFibre : Set where
   constructor candidateSemanticFibre
@@ -123,13 +114,6 @@ record SemanticResolutionReceipt (fibre : CandidateSemanticFibre) : Set₁ where
 
 open SemanticResolutionReceipt public
 
-------------------------------------------------------------------------
--- Correspondence into the evidence-facing PNF remains proof-relevant.
--- A resolved candidate can propose a quantifier, inferential force, scope and
--- predicate atoms, but each proposal carries an independent correspondence
--- reference.  Nothing here manufactures world truth.
-------------------------------------------------------------------------
-
 record ResolvedCandidateToEvidencePNF
     {fibre : CandidateSemanticFibre}
     (resolution : SemanticResolutionReceipt fibre)
@@ -147,7 +131,7 @@ record ResolvedCandidateToEvidencePNF
 open ResolvedCandidateToEvidencePNF public
 
 ------------------------------------------------------------------------
--- Canonical rule schemas.  These are intentionally syntactic candidates.
+-- Canonical syntactic-candidate constructors.
 ------------------------------------------------------------------------
 
 subjectCandidate : DependencyWitness → String → String → CandidateSemanticFragment
@@ -183,6 +167,28 @@ negationCandidate witness body =
     "dependency-rule:neg->notF"
     true refl
 
+contentClauseCandidate : DependencyWitness → String → String → CandidateSemanticFragment
+contentClauseCandidate witness governorEvent contentEvent =
+  candidateSemanticFragment
+    "spacy-content-clause-candidate"
+    contentClauseFragment
+    (atom "ContentClause" (eventTerm governorEvent ∷ eventTerm contentEvent ∷ []))
+    witness
+    "clausal dependency proposes governor/content-event structure; discourse role remains unresolved"
+    "dependency-rule:clausal->ContentClause"
+    true refl
+
+clauseAttachmentCandidate : DependencyWitness → String → String → String → CandidateSemanticFragment
+clauseAttachmentCandidate witness relationName governorEvent clauseEvent =
+  candidateSemanticFragment
+    "spacy-clause-attachment-candidate"
+    clauseAttachmentFragment
+    (atom relationName (eventTerm governorEvent ∷ eventTerm clauseEvent ∷ []))
+    witness
+    "clausal attachment proposes structural relation; legal/discourse interpretation remains unresolved"
+    "dependency-rule:clausal-attachment"
+    true refl
+
 ------------------------------------------------------------------------
 -- Hard boundaries.
 ------------------------------------------------------------------------
@@ -191,24 +197,20 @@ record SpacySemanticBoundary : Set where
   constructor spacySemanticBoundary
   field
     dependencyUniquelyDeterminesSemantics : Bool
-    dependencyUniquelyDeterminesSemanticsIsFalse :
-      dependencyUniquelyDeterminesSemantics ≡ false
+    dependencyUniquelyDeterminesSemanticsIsFalse : dependencyUniquelyDeterminesSemantics ≡ false
     candidateFragmentIsWorldFact : Bool
     candidateFragmentIsWorldFactIsFalse : candidateFragmentIsWorldFact ≡ false
     ambiguityMayBeSilentlyDropped : Bool
     ambiguityMayBeSilentlyDroppedIsFalse : ambiguityMayBeSilentlyDropped ≡ false
     reverseSupportMeansSemanticEquivalence : Bool
-    reverseSupportMeansSemanticEquivalenceIsFalse :
-      reverseSupportMeansSemanticEquivalence ≡ false
+    reverseSupportMeansSemanticEquivalenceIsFalse : reverseSupportMeansSemanticEquivalence ≡ false
     resolvedCandidateCanFeedEvidencePNF : Bool
-    resolvedCandidateCanFeedEvidencePNFIsTrue :
-      resolvedCandidateCanFeedEvidencePNF ≡ true
+    resolvedCandidateCanFeedEvidencePNFIsTrue : resolvedCandidateCanFeedEvidencePNF ≡ true
+    clausalDependencyChoosesDiscourseRole : Bool
+    clausalDependencyChoosesDiscourseRoleIsFalse : clausalDependencyChoosesDiscourseRole ≡ false
+    clausalDependencyChoosesLegalStatus : Bool
+    clausalDependencyChoosesLegalStatusIsFalse : clausalDependencyChoosesLegalStatus ≡ false
 
 canonicalSpacySemanticBoundary : SpacySemanticBoundary
 canonicalSpacySemanticBoundary =
-  spacySemanticBoundary
-    false refl
-    false refl
-    false refl
-    false refl
-    true refl
+  spacySemanticBoundary false refl false refl false refl false refl true refl false refl false refl
