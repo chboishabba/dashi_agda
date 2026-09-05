@@ -9,14 +9,6 @@ open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.SensibLawMaboRecognitionCoordinateFactorisationExact as Factor
 
-------------------------------------------------------------------------
--- FACTORISED REVERSE SEARCH
---
--- Each legal query now routes to the minimum presently relevant source probes.
--- This is a search-policy compiler only: retrieval does not itself resolve the
--- legal coordinate or promote a proposition to a holding/world truth.
-------------------------------------------------------------------------
-
 data RecognitionProbe : Set where
   inspectBrennanContinuityPassages
   inspectBrennanRadicalTitlePassages
@@ -29,11 +21,7 @@ data RecognitionProbe : Set where
   inspectAllFactorisedCoordinates
   : RecognitionProbe
 
-data RecognitionWorkKind : Set where
-  thinkWork
-  lookWork
-  testWork
-  : RecognitionWorkKind
+data RecognitionWorkKind : Set where thinkWork lookWork testWork : RecognitionWorkKind
 
 record RecognitionSearchPlan : Set where
   constructor recognitionSearchPlan
@@ -44,6 +32,8 @@ record RecognitionSearchPlan : Set where
     workKind : RecognitionWorkKind
     wholeJudgmentRescanRequired : Bool
     wholeJudgmentRescanRequiredIsFalse : wholeJudgmentRescanRequired ≡ false
+    parserRerunRequired : Bool
+    parserRerunRequiredIsFalse : parserRerunRequired ≡ false
     planReference : String
 open RecognitionSearchPlan public
 
@@ -52,71 +42,65 @@ planRecognitionSearch Factor.identifyContinuityRule = recognitionSearchPlan
   Factor.identifyContinuityRule
   (Factor.antecedentRightExistence ∷ Factor.continuityAcrossSovereignty ∷ [])
   (inspectBrennanContinuityPassages ∷ inspectCalderHallPassages ∷ [])
-  lookWork false refl
-  "continuity query -> Brennan continuity + Calder Hall probes"
+  lookWork false refl false refl
+  "continuity query -> Brennan continuity + Calder Hall probes; current parser batch is sufficient for routing"
 planRecognitionSearch Factor.identifyCrownRecognitionRule = recognitionSearchPlan
   Factor.identifyCrownRecognitionRule
   (Factor.crownRecognitionRequirement ∷ Factor.authorityInterpretation ∷ [])
   (inspectDawsonRecognitionPassages ∷ inspectCalderJudsonPassages ∷ inspectAmoduRecognitionPassages ∷ [])
-  lookWork false refl
-  "Crown-recognition query -> Dawson recognition + Calder/Amodu interpretation probes"
+  lookWork false refl false refl
+  "Crown-recognition query -> Dawson recognition + Calder/Amodu interpretation probes; primary-source retrieval precedes any optional authority-v0.2 parser batch"
 planRecognitionSearch Factor.identifyRecognitionByConductRule = recognitionSearchPlan
   Factor.identifyRecognitionByConductRule
   (Factor.crownRecognitionRequirement ∷ Factor.recognitionByCrownConduct ∷ Factor.evidentialInferenceOfRecognition ∷ [])
   (inspectDawsonAcquiescencePassages ∷ inspectCalderJudsonPassages ∷ [])
-  testWork false refl
+  testWork false refl false refl
   "recognition-by-conduct query -> Dawson acquiescence + Calder interpretation discriminator"
 planRecognitionSearch Factor.identifyEnforceabilityStructure = recognitionSearchPlan
   Factor.identifyEnforceabilityStructure
   (Factor.radicalTitleCompatibility ∷ Factor.enforceabilityAgainstCrown ∷ [])
   (inspectBrennanRadicalTitlePassages ∷ inspectAmoduRadicalTitlePassages ∷ [])
-  lookWork false refl
+  lookWork false refl false refl
   "enforceability query -> Brennan radical-title + Amodu Tijani radical-title probes"
 planRecognitionSearch Factor.identifyExactUnifiedTheory = recognitionSearchPlan
   Factor.identifyExactUnifiedTheory
   (Factor.requiredCoordinates Factor.identifyExactUnifiedTheory)
   (inspectAllFactorisedCoordinates ∷ [])
-  thinkWork false refl
-  "exact unified theory remains a downstream synthesis goal over all factorised coordinates; no whole-judgment rescan is implied"
+  thinkWork false refl false refl
+  "exact unified theory remains downstream synthesis over all factorised coordinates; current step needs source discrimination, not parser rerun"
 
 continuityPlan : RecognitionSearchPlan
 continuityPlan = planRecognitionSearch Factor.identifyContinuityRule
-
 recognitionConductPlan : RecognitionSearchPlan
 recognitionConductPlan = planRecognitionSearch Factor.identifyRecognitionByConductRule
-
 enforceabilityPlan : RecognitionSearchPlan
 enforceabilityPlan = planRecognitionSearch Factor.identifyEnforceabilityStructure
 
 continuityRoutesToBrennanCalder : probes continuityPlan ≡ (inspectBrennanContinuityPassages ∷ inspectCalderHallPassages ∷ [])
 continuityRoutesToBrennanCalder = refl
-
 recognitionConductRoutesToDawsonCalder : probes recognitionConductPlan ≡ (inspectDawsonAcquiescencePassages ∷ inspectCalderJudsonPassages ∷ [])
 recognitionConductRoutesToDawsonCalder = refl
-
 enforceabilityRoutesToBrennanAmodu : probes enforceabilityPlan ≡ (inspectBrennanRadicalTitlePassages ∷ inspectAmoduRadicalTitlePassages ∷ [])
 enforceabilityRoutesToBrennanAmodu = refl
-
-------------------------------------------------------------------------
--- No-collapse / least-search boundaries.
-------------------------------------------------------------------------
+currentFactorisedSearchNeedsNoParserRerun : parserRerunRequired continuityPlan ≡ false
+currentFactorisedSearchNeedsNoParserRerun = refl
 
 data ContinuityQueryRequiresRecognitionConductProbe : Set where
 data RecognitionConductQueryRequiresBrennanRadicalTitleProbe : Set where
 data SearchPlanClosesLegalCoordinate : Set where
 data FactorisedQueryRequiresWholeJudgmentRescan : Set where
+data SourceRetrievalAutomaticallyRequiresParserRerun : Set where
 
 continuityDoesNotRequireRecognitionConductProbe : ContinuityQueryRequiresRecognitionConductProbe → ⊥
 continuityDoesNotRequireRecognitionConductProbe ()
-
 recognitionConductDoesNotRequireBrennanRadicalTitleProbe : RecognitionConductQueryRequiresBrennanRadicalTitleProbe → ⊥
 recognitionConductDoesNotRequireBrennanRadicalTitleProbe ()
-
 searchPlanDoesNotCloseCoordinate : SearchPlanClosesLegalCoordinate → ⊥
 searchPlanDoesNotCloseCoordinate ()
-
 factorisedQueryDoesNotRequireWholeRescan : FactorisedQueryRequiresWholeJudgmentRescan → ⊥
 factorisedQueryDoesNotRequireWholeRescan ()
+sourceRetrievalDoesNotAutomaticallyRequireParserRerun : SourceRetrievalAutomaticallyRequiresParserRerun → ⊥
+sourceRetrievalDoesNotAutomaticallyRequireParserRerun ()
 
 record RecognitionSearchBoundary : Set where
   constructor recognitionSearchBoundary
@@ -127,6 +111,8 @@ record RecognitionSearchBoundary : Set where
     retrievalEqualsResolutionIsFalse : retrievalEqualsResolution ≡ false
     wholeJudgmentRescanRequired : Bool
     wholeJudgmentRescanRequiredIsFalse : wholeJudgmentRescanRequired ≡ false
+    currentParserRerunRequired : Bool
+    currentParserRerunRequiredIsFalse : currentParserRerunRequired ≡ false
 
 canonicalRecognitionSearchBoundary : RecognitionSearchBoundary
-canonicalRecognitionSearchBoundary = recognitionSearchBoundary true refl false refl false refl
+canonicalRecognitionSearchBoundary = recognitionSearchBoundary true refl false refl false refl false refl
