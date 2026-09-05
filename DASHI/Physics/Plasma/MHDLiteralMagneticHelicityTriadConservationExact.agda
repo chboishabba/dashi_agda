@@ -60,10 +60,6 @@ qEnergyLegNonzero tau nonzero =
     (InverseReality.negateModeNonzero (Physical.pNonzero nonzero))
     (Physical.qNonzero nonzero)
 
-------------------------------------------------------------------------
--- Six amplitudes, arranged as three cancelling pre-norm pairs.
-------------------------------------------------------------------------
-
 record SixMagneticAmplitudes
     {r : Level} {F : C3.RealField r}
     {E : C3.IntegerEmbedding F}
@@ -265,7 +261,7 @@ literalMagneticHelicityTriadConservation :
     (state : State.IdealElsasserFourierState F E)
     (tau : Physical.PhysicalTriadIncidence) →
   Physical.NonZeroPhysicalTriad tau →
-  ThreeLeg.threeLegMagneticHelicityVariation E I state tau
+  ThreeLeg.magneticHelicityThreeLegVariation E I state tau
   ≡ C3.complexZero F
 literalMagneticHelicityTriadConservation
     E I S L state tau nonzero =
