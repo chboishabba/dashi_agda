@@ -86,7 +86,6 @@ quotientAtZero x (suc n) =
   let
     oldPower = Bishop.pow x n
     nextPower = Bishop.pow x (suc n)
-    open BishopP.ℝ-Solver
   in
   BishopP.≃-trans
     (BishopP.+-cong
@@ -95,17 +94,12 @@ quotientAtZero x (suc n) =
         (BishopP.+-identityʳ x))
       BishopP.≃-refl)
     (BishopP.≃-trans
-      (solve 3
-        (λ scale old x′ →
-          (scale ⊗ x′) ⊕ (old ⊗ x′)
-          ⊜ (scale ⊗ x′) ⊕ (old ⊗ x′))
-        BishopP.≃-refl
-        (Power.natScale (suc n) oldPower)
-        oldPower x)
-      (BishopP.≃-symm
-        (Power.natScaleSuccessor
-          (suc n)
-          nextPower)))
+      (BishopP.+-cong
+        (BishopP.≃-trans
+          (Power.natScaleMulRight (suc n) oldPower x)
+          (Power.natScaleCong (suc n) (Power.powerSuccessor x n)))
+        (Power.powerSuccessor x n))
+      BishopP.≃-refl)
 
 ------------------------------------------------------------------------
 -- The quotient-at-zero theorem has the same displayed normal form as the
