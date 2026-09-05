@@ -13,11 +13,6 @@ import DASHI.Physics.QuantumVacuum.Casimir720FactorisationBidiExact as C720
 
 ------------------------------------------------------------------------
 -- SOURCE-BACKED LOCAL ZETA(-3) -> LITERAL CASIMIR LONGITUDINAL DEFECT
---
--- The analytic source theorem now produces an exact local zeta receipt before
--- this module begins.  This owner pays only the application-specific same-object
--- map from that local zeta value carrier into the transformed Casimir defect's
--- `ZetaValue` carrier.
 ------------------------------------------------------------------------
 
 record CasimirZetaDefectCarrierWeld
@@ -26,8 +21,7 @@ record CasimirZetaDefectCarrierWeld
     problem : CasimirZeta.CasimirLongitudinalZetaProblem kernel
 
     localZetaCarrier : Analytic.RiemannZetaContinuationCarrier
-    localZetaReceipt :
-      Analytic.ZetaMinusThreeOneOver120Receipt localZetaCarrier
+    localZetaReceipt : Analytic.ZetaMinusThreeOneOver120Receipt localZetaCarrier
 
     DefectInput : Set
     defectInput : DefectInput
@@ -65,12 +59,18 @@ problemOneOver120Value W =
       (localZetaCarrier W)
       Arithmetic.oneOver120)
 
-problemZetaMinusThreeEqualsOneOver120 :
-  ∀ {kernel} (W : CasimirZetaDefectCarrierWeld kernel) →
+problemZetaMinusThreeOneOver120Statement :
+  ∀ {kernel} →
+  CasimirZetaDefectCarrierWeld kernel → Set
+problemZetaMinusThreeOneOver120Statement W =
   CasimirZeta.evaluateZeta (problem W)
     (CasimirZeta.zetaFunction (problem W))
     (CasimirZeta.minusThreePoint (problem W))
   ≡ problemOneOver120Value W
+
+problemZetaMinusThreeEqualsOneOver120 :
+  ∀ {kernel} (W : CasimirZetaDefectCarrierWeld kernel) →
+  problemZetaMinusThreeOneOver120Statement W
 problemZetaMinusThreeEqualsOneOver120 W =
   trans
     (problemMinusThreeEvaluationIsLocalZeta W)
@@ -93,9 +93,9 @@ compileCasimirZetaMinusThreeClosure W = record
   ; CasimirZeta.sameZetaValueCarrier = sameZetaValueCarrierSemantics W
   ; CasimirZeta.sameZetaObject = sameZetaFunctionObject W
   ; CasimirZeta.rationalValueTransport =
-      problemZetaMinusThreeEqualsOneOver120 W
+      problemZetaMinusThreeOneOver120Statement W
   ; CasimirZeta.producesCasimirOneOver120 =
-      problemZetaMinusThreeEqualsOneOver120 W
+      problemZetaMinusThreeOneOver120Statement W
   ; CasimirZeta.sameLongitudinalDefect = sameCasimirLongitudinalDefect W
   ; CasimirZeta.reading =
       "The source-backed local zeta(-3)=1/120 receipt is transported onto the literal transformed Casimir longitudinal defect value carrier."
@@ -114,7 +114,7 @@ compileCasimirZeta120Receipt W = record
   ; C720.analyticContinuationOrEquivalentFinitePart =
       Arithmetic.analyticContinuationAtMinusThree (legacyAnalyticReceipt W)
   ; C720.zetaMinusThreeEqualsOneOver120 =
-      problemZetaMinusThreeEqualsOneOver120 W
+      problemZetaMinusThreeOneOver120Statement W
   ; C720.sameCasimirLongitudinalDefect = sameCasimirLongitudinalDefect W
   ; C720.reading =
       "Same-object source-backed zeta(-3)=1/120 receipt for the Casimir longitudinal defect."
@@ -153,12 +153,14 @@ record Status : Set where
     legacyAnalyticCompatibilityCompilerOwned : Bool
     casimirZetaClosureCompilerOwned : Bool
     casimir720ZetaReceiptCompilerOwned : Bool
+    exactProblemZetaEqualityProofOwned : Bool
     defectSameObjectWeldStillRequired : Bool
 
     sourceBackedLocalZeta120CompilerOwnedIsTrue : sourceBackedLocalZeta120CompilerOwned ≡ true
     legacyAnalyticCompatibilityCompilerOwnedIsTrue : legacyAnalyticCompatibilityCompilerOwned ≡ true
     casimirZetaClosureCompilerOwnedIsTrue : casimirZetaClosureCompilerOwned ≡ true
     casimir720ZetaReceiptCompilerOwnedIsTrue : casimir720ZetaReceiptCompilerOwned ≡ true
+    exactProblemZetaEqualityProofOwnedIsTrue : exactProblemZetaEqualityProofOwned ≡ true
     defectSameObjectWeldStillRequiredIsTrue : defectSameObjectWeldStillRequired ≡ true
 
 open Status public
@@ -169,10 +171,12 @@ canonicalStatus = record
   ; legacyAnalyticCompatibilityCompilerOwned = true
   ; casimirZetaClosureCompilerOwned = true
   ; casimir720ZetaReceiptCompilerOwned = true
+  ; exactProblemZetaEqualityProofOwned = true
   ; defectSameObjectWeldStillRequired = true
   ; sourceBackedLocalZeta120CompilerOwnedIsTrue = refl
   ; legacyAnalyticCompatibilityCompilerOwnedIsTrue = refl
   ; casimirZetaClosureCompilerOwnedIsTrue = refl
   ; casimir720ZetaReceiptCompilerOwnedIsTrue = refl
+  ; exactProblemZetaEqualityProofOwnedIsTrue = refl
   ; defectSameObjectWeldStillRequiredIsTrue = refl
   }
