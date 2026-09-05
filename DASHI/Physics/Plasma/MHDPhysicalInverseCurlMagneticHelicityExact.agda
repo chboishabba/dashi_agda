@@ -2,13 +2,17 @@ module DASHI.Physics.Plasma.MHDPhysicalInverseCurlMagneticHelicityExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Primitive using (Level)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans; _≡_; refl)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as Scaling
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNModeInverseSquareRealityRound35Exact as InverseReality
+import DASHI.Physics.Closure.NSTriadKNHelicalModeNormSquareActionRound126Exact as CurlLinear
+import DASHI.Physics.Closure.NSTriadKNLerayComplexScalarLinearityRound73Exact as Linear
+import DASHI.Physics.Closure.NSTriadKNLerayOutputTransversalityRound30Exact as LerayOut
 
 ------------------------------------------------------------------------
 -- PHYSICAL INVERSE-CURL OBSERVER
@@ -105,6 +109,56 @@ physicalVectorPotentialSelfAdjoint {F = F} E I S L k u v transverseU transverseV
   where
   inverseC = C3.realEmbed F (C3.inverseNormSquared I k)
 
+complex3ScaleOne :
+  ∀ {r : Level} {F : C3.RealField r}
+    (value : C3.Complex3 F) →
+  C3.complex3Scale (C3.complexOne F) value ≡ value
+complex3ScaleOne {F = F} (C3.complex3 x y z) =
+  Field.complex3Ext
+    (C3.complexMultiplyOneLeft F x)
+    (C3.complexMultiplyOneLeft F y)
+    (C3.complexMultiplyOneLeft F z)
+
+physicalVectorPotentialIsCurlInverse :
+  ∀ {r : Level} {F : C3.RealField r}
+    (E : C3.IntegerEmbedding F)
+    (I : C3.ModeInverseSquare F E)
+    (S : Helical.HelicalModeScalars F)
+    (L : Helical.PeriodicHelicalProjectorLaws F E I S)
+    (k : Z3.FourierMode) →
+  Z3.NonZeroMode k →
+  (magnetic : C3.Complex3 F) →
+  Helical.Transverse E k magnetic →
+  Helical.curlSymbol E k (physicalVectorPotential E I k magnetic)
+  ≡ magnetic
+physicalVectorPotentialIsCurlInverse {F = F}
+    E I S L k nonzero magnetic transverse =
+  trans
+    (CurlLinear.curlSymbolScale E k inverseC
+      (Helical.curlSymbol E k magnetic))
+    (trans
+      (cong (C3.complex3Scale inverseC)
+        (Helical.curlSymbolSquaredOnTransverse L k magnetic transverse))
+      (trans
+        (Linear.complex3ScaleAssociative inverseC normC magnetic)
+        (trans
+          (cong
+            (λ coefficient → C3.complex3Scale coefficient magnetic)
+            productIsOne)
+          (complex3ScaleOne magnetic))))
+  where
+  inverse = C3.inverseNormSquared I k
+  norm = C3.normSquared I k
+  inverseC = C3.realEmbed F inverse
+  normC = C3.realEmbed F norm
+
+  productIsOne :
+    C3.complexMultiply inverseC normC ≡ C3.complexOne F
+  productIsOne =
+    trans
+      (LerayOut.realEmbedMultiply inverse norm)
+      (cong (C3.realEmbed F) (C3.inverseLaw I k nonzero))
+
 record PhysicalInverseCurlBoundary : Set where
   constructor physical-inverse-curl-boundary
   field
@@ -119,10 +173,14 @@ record PhysicalInverseCurlBoundary : Set where
     inverseCurlSelfAdjointOwned : Bool
     inverseCurlSelfAdjointOwnedIsTrue : inverseCurlSelfAdjointOwned ≡ true
 
+    inverseCurlActuallyInvertsCurlOnNonzeroTransverseModes : Bool
+    inverseCurlActuallyInvertsCurlOnNonzeroTransverseModesIsTrue :
+      inverseCurlActuallyInvertsCurlOnNonzeroTransverseModes ≡ true
+
     helicalInverseRadiusIsDefinitionOfPhysicalObserver : Bool
     helicalInverseRadiusIsDefinitionOfPhysicalObserverIsFalse :
       helicalInverseRadiusIsDefinitionOfPhysicalObserver ≡ false
 
 canonicalPhysicalInverseCurlBoundary : PhysicalInverseCurlBoundary
 canonicalPhysicalInverseCurlBoundary =
-  physical-inverse-curl-boundary true refl true refl true refl false refl
+  physical-inverse-curl-boundary true refl true refl true refl true refl false refl
