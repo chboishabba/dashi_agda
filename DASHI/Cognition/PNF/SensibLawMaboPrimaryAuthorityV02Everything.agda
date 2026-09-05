@@ -10,6 +10,9 @@ import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityUseUpgradeExact as Upgra
 import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityResidualRefinementV02Exact as Refined
 import DASHI.Cognition.PNF.SensibLawMaboRecognitionCoordinateFactorisationExact as Factor
 import DASHI.Cognition.PNF.SensibLawCalderAuthoritativeTranscriptionVerificationExact as Verify
+import DASHI.Cognition.PNF.SensibLawMaboMinimalDoctrinalDiscriminatorExact as Minimal
+import DASHI.Cognition.PNF.SensibLawMaboMinimalDoctrinalHyperfabricBridgeExact as MinimalHyper
+import DASHI.Cognition.PNF.SensibLawIssueIndexedAdjudicativeHyperfabricExact as Issue
 
 batchHasFiveSpecimens : Batch.specimenCount Batch.primaryAuthorityBatchV02 ≡ 5
 batchHasFiveSpecimens = refl
@@ -85,6 +88,65 @@ continuityPlanHasNoHallVerificationResidual : Refined.residuals Refined.continui
 continuityPlanHasNoHallVerificationResidual = refl
 recognitionPlanHasNoHallVerificationResidual : Refined.residuals Refined.recognitionV02Plan ≡ (Refined.compareHallRecognitionIndependenceWithDawsonUse ∷ Refined.reconcileContinuityAndRecognitionCoordinates ∷ [])
 recognitionPlanHasNoHallVerificationResidual = refl
+
+------------------------------------------------------------------------
+-- Minimal doctrinal discriminator: four independent legal questions.
+------------------------------------------------------------------------
+
+hallVerifiedContinuityLivesOnExistenceContinuityAxis : Minimal.axis Minimal.hallContinuityReceipt ≡ Minimal.existenceContinuityAxis
+hallVerifiedContinuityLivesOnExistenceContinuityAxis = refl
+hallVerifiedRecognitionIndependenceLivesOnConditionAxis : Minimal.axis Minimal.hallRecognitionConditionReceipt ≡ Minimal.recognitionConditionAxis
+hallVerifiedRecognitionIndependenceLivesOnConditionAxis = refl
+dawsonRecognitionConditionAndEvidenceRemainDistinct : Minimal.axis Minimal.dawsonRecognitionConditionReceipt ≡ Minimal.recognitionConditionAxis
+dawsonRecognitionConditionAndEvidenceRemainDistinct = refl
+dawsonRecognitionEvidenceLivesOnEvidenceAxis : Minimal.axis Minimal.dawsonRecognitionEvidenceReceipt ≡ Minimal.recognitionEvidenceAxis
+dawsonRecognitionEvidenceLivesOnEvidenceAxis = refl
+hallClearPlainLivesOnExtinguishmentAxis : Minimal.axis Minimal.hallExtinguishmentReceipt ≡ Minimal.extinguishmentAxis
+hallClearPlainLivesOnExtinguishmentAxis = refl
+
+hallDawsonRecognitionContrastIsPropositionSensitive : Upgrade.PrimaryUseRelation
+hallDawsonRecognitionContrastIsPropositionSensitive = Minimal.dawsonRelation Minimal.calderRecognitionAxisContrast
+hallDawsonRecognitionContrastIsContrast : hallDawsonRecognitionContrastIsPropositionSensitive ≡ Upgrade.primaryContrastsLaterUse
+hallDawsonRecognitionContrastIsContrast = refl
+
+recognitionEvidenceDoesNotProveRecognitionCondition : Minimal.RecognitionEvidenceProvesRecognitionCondition → ⊥
+recognitionEvidenceDoesNotProveRecognitionCondition = Minimal.evidenceDoesNotProveRecognitionCondition
+recognitionConditionDoesNotProveContinuity : Minimal.RecognitionConditionProvesExistenceContinuity → ⊥
+recognitionConditionDoesNotProveContinuity = Minimal.recognitionConditionDoesNotProveContinuity
+continuityDoesNotProveRecognitionCondition : Minimal.ExistenceContinuityProvesRecognitionCondition → ⊥
+continuityDoesNotProveRecognitionCondition = Minimal.continuityDoesNotProveRecognitionCondition
+recognitionConditionDoesNotProveExtinguishment : Minimal.RecognitionConditionProvesExtinguishment → ⊥
+recognitionConditionDoesNotProveExtinguishment = Minimal.recognitionConditionDoesNotProveExtinguishment
+sourceVerificationStillDoesNotResolveDoctrine : Minimal.AuthoritativeSourceVerificationResolvesDoctrine → ⊥
+sourceVerificationStillDoesNotResolveDoctrine = Minimal.authoritativeVerificationDoesNotResolveDoctrine
+
+------------------------------------------------------------------------
+-- Generic issue-hyperfabric execution consequences.
+------------------------------------------------------------------------
+
+continuityCompilesToAuthorityLook : MinimalHyper.workKind MinimalHyper.continuityHyperfabric ≡ Issue.lookWork
+continuityCompilesToAuthorityLook = refl
+recognitionConditionCompilesToAuthorityLook : MinimalHyper.workKind MinimalHyper.recognitionConditionHyperfabric ≡ Issue.lookWork
+recognitionConditionCompilesToAuthorityLook = refl
+recognitionEvidenceCompilesToTestWork : MinimalHyper.workKind MinimalHyper.recognitionEvidenceHyperfabric ≡ Issue.testWork
+recognitionEvidenceCompilesToTestWork = refl
+extinguishmentCompilesToAuthorityLook : MinimalHyper.workKind MinimalHyper.extinguishmentHyperfabric ≡ Issue.lookWork
+extinguishmentCompilesToAuthorityLook = refl
+unifiedRecognitionTheoryCompilesToThinkWork : MinimalHyper.workKind MinimalHyper.unifiedTheoryHyperfabric ≡ Issue.thinkWork
+unifiedRecognitionTheoryCompilesToThinkWork = refl
+
+recognitionConditionObligationIsNotRecognitionEvidenceObligation : MinimalHyper.obligation MinimalHyper.recognitionConditionHyperfabric ≡ MinimalHyper.establishRecognitionConditionRule
+recognitionConditionObligationIsNotRecognitionEvidenceObligation = refl
+recognitionEvidenceObligationIsEvidenceSpecific : MinimalHyper.obligation MinimalHyper.recognitionEvidenceHyperfabric ≡ MinimalHyper.establishRecognitionEvidenceBasis
+recognitionEvidenceObligationIsEvidenceSpecific = refl
+oneProbeStillDoesNotFitAllMinimalAxes : MinimalHyper.OneProbeFitsAllMinimalAxes → ⊥
+oneProbeStillDoesNotFitAllMinimalAxes = MinimalHyper.oneProbeDoesNotFitAllAxes
+minimalHyperfabricStillDoesNotAdjudicateDoctrine : MinimalHyper.MinimalBridgeAdjudicatesFinalDoctrine → ⊥
+minimalHyperfabricStillDoesNotAdjudicateDoctrine = MinimalHyper.minimalBridgeDoesNotAdjudicateDoctrine
+
+------------------------------------------------------------------------
+-- Existing source/proof firewalls remain live.
+------------------------------------------------------------------------
 
 ocrStillNotAuthoritativeTranscriptionByItself : Batch.OcrProjectionIsAuthoritativeTranscription → ⊥
 ocrStillNotAuthoritativeTranscriptionByItself = Batch.ocrProjectionDoesNotBecomeAuthoritativeTranscription
