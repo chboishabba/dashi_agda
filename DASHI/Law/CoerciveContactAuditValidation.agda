@@ -17,6 +17,8 @@ import DASHI.Law.CoerciveEncounterPopulationAggregationExact as Population
 import DASHI.Law.SystemicCoercivePracticePromotionGateExact as Systemic
 import DASHI.Law.CoerciveEncounterDenominatorIntegrityExact as Denom
 import DASHI.Law.SelectionEligibilityDisparityBidiExact as Disparity
+import DASHI.Law.WandingOpportunityEligibilityHypervoxelExact as Opportunity
+import DASHI.Law.OpportunityConditionedSelectionDisparityExact as Conditional
 
 firewallAndReachabilityCoexist :
   Wand.FirewallWithReachability Wand.canonicalFirewallBoundary
@@ -167,3 +169,20 @@ causalDiscriminationNeedsCausalSelectionModel :
     (Disparity.selectionDisparityCutset true true true true true false "descriptive selection surface closed")
   ≡ Disparity.causalModelResidual
 causalDiscriminationNeedsCausalSelectionModel = Disparity.causalClaimRequiresCausalModel
+
+opportunityDoesNotCollapseToEligibility : Opportunity.EligibilityClosure Opportunity.exposedEligibleNotSelected
+opportunityDoesNotCollapseToEligibility = Opportunity.canonicalEligibilityClosure
+
+deploymentDisparityCanCloseBeforeOfficerSelection :
+  Conditional.firstOpportunityDisparityResidual
+    Conditional.deploymentOpportunityDisparity
+    Conditional.canonicalDeploymentOnlyCutset
+  ≡ Conditional.opportunityDisparityClosed
+deploymentDisparityCanCloseBeforeOfficerSelection = Conditional.canonicalDeploymentCanCloseBeforeSelection
+
+officerSelectionStillRequiresEligibilityConditioning :
+  Conditional.firstOpportunityDisparityResidual
+    Conditional.officerSelectionConditionalDisparity
+    Conditional.canonicalDeploymentOnlyCutset
+  ≡ Conditional.eligibilityResidual
+officerSelectionStillRequiresEligibilityConditioning = Conditional.canonicalOfficerSelectionStillNeedsEligibility
