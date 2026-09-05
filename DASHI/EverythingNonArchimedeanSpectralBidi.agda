@@ -39,6 +39,7 @@ import DASHI.Analysis.NonArchimedeanProductDFTOddCharacterNoGoExact
 import DASHI.Analysis.NonArchimedeanBinarySheetTauOddEquivalenceExact
 import DASHI.Analysis.NonArchimedeanTwistedTauOddFunctionEquivalenceExact
 import DASHI.Analysis.NonArchimedeanTwistedRestrictionIntertwinerExact
+import DASHI.Analysis.NonArchimedeanTwistedRestrictionCoreIntertwinerExact
 import DASHI.Analysis.NonArchimedeanConcreteMonomialWeldCompilerExact
 
 -- Arithmetic orbit and signed-return closure.  The stronger checked source
