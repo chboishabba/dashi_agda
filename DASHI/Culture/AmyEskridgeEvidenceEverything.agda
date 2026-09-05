@@ -11,3 +11,4 @@ import DASHI.Core.OpenScienceKnowledgeReleaseBidiExact
 import DASHI.Culture.AmyEskridgeEvidenceHyperfabricExact
 import DASHI.Culture.AmyEskridgeEvidenceCrossPollinationExact
 import DASHI.Culture.AmyEskridgeAcquisitionProofSearchExact
+import DASHI.Culture.AmyEskridgeGravityMechanismCrossPollinationExact
