@@ -5,6 +5,7 @@ open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ)
 
 import Real as Bishop
 import RealProperties as BishopP
+import Sequence as BishopSequence
 
 import DASHI.Analysis.BishopSetoidPowerDerivativeNormalisationExact as Power
 
@@ -21,8 +22,7 @@ import DASHI.Analysis.BishopSetoidPowerDerivativeNormalisationExact as Power
 --   (x+h)^n - x^n ~= h Q_n(x,h).
 --
 -- At h=0 the quotient polynomial reduces to the already-owned natural-scale
--- derivative coefficient.  No division by h and no analytic limit enter this
--- owner.
+-- derivative coefficient.  No division by h enters this owner.
 ------------------------------------------------------------------------
 
 powerDifferenceQuotient : Bishop.ℝ → Bishop.ℝ → Nat → Bishop.ℝ
@@ -85,7 +85,6 @@ quotientAtZero x zero =
 quotientAtZero x (suc n) =
   let
     oldPower = Bishop.pow x n
-    nextPower = Bishop.pow x (suc n)
   in
   BishopP.≃-trans
     (BishopP.+-cong
@@ -93,17 +92,86 @@ quotientAtZero x (suc n) =
         (quotientAtZero x n)
         (BishopP.+-identityʳ x))
       BishopP.≃-refl)
-    (BishopP.≃-trans
-      (BishopP.+-cong
-        (BishopP.≃-trans
-          (Power.natScaleMulRight (suc n) oldPower x)
-          (Power.natScaleCong (suc n) (Power.powerSuccessor x n)))
-        (Power.powerSuccessor x n))
-      BishopP.≃-refl)
+    (BishopP.+-cong
+      (BishopP.≃-trans
+        (Power.natScaleMulRight (suc n) oldPower x)
+        (Power.natScaleCong (suc n) (Power.powerSuccessor x n)))
+      (Power.powerSuccessor x n))
+
+------------------------------------------------------------------------
+-- QUOTIENT CONTINUITY AT ZERO FROM THE PINNED BISHOP SEQUENCE ALGEBRA
+--
+-- No separate topological continuity theorem is required.  For every sequence
+-- h_j -> 0, Q_n(x,h_j) -> Q_n(x,0) follows recursively from Bishop's checked
+-- constant-, sum-, and product-convergence theorems.
+------------------------------------------------------------------------
+
+constantConverges :
+  ∀ value →
+  BishopSequence._ConvergesTo_
+    (λ _ → value)
+    value
+constantConverges value =
+  BishopSequence.xₙ≃c⇒xₙ→c
+    (λ {(suc n) → BishopP.≃-refl})
+
+powerDifferenceQuotientConvergesAtZero :
+  ∀ x n {perturbation : Nat → Bishop.ℝ} →
+  BishopSequence._ConvergesTo_ perturbation Bishop.0ℝ →
+  BishopSequence._ConvergesTo_
+    (λ index → powerDifferenceQuotient x (perturbation index) n)
+    (powerDifferenceQuotient x Bishop.0ℝ n)
+powerDifferenceQuotientConvergesAtZero x zero perturbationConverges =
+  constantConverges Bishop.0ℝ
+powerDifferenceQuotientConvergesAtZero x (suc n) {perturbation} perturbationConverges =
+  let
+    quotientLimit = powerDifferenceQuotient x Bishop.0ℝ n
+
+    quotientConvergent : BishopSequence._isConvergent
+      (λ index → powerDifferenceQuotient x (perturbation index) n)
+    quotientConvergent =
+      quotientLimit ,
+      powerDifferenceQuotientConvergesAtZero x n perturbationConverges
+
+    xConvergent : BishopSequence._isConvergent (λ _ → x)
+    xConvergent = x , constantConverges x
+
+    perturbationConvergent : BishopSequence._isConvergent perturbation
+    perturbationConvergent = Bishop.0ℝ , perturbationConverges
+
+    shiftedBaseConvergent : BishopSequence._isConvergent
+      (λ index → Bishop._+_ x (perturbation index))
+    shiftedBaseConvergent =
+      Bishop._+_ x Bishop.0ℝ ,
+      BishopSequence.xₙ+yₙ→x₀+y₀
+        xConvergent perturbationConvergent
+
+    productLimit =
+      Bishop._*_
+        quotientLimit
+        (Bishop._+_ x Bishop.0ℝ)
+
+    productConvergent : BishopSequence._isConvergent
+      (λ index →
+        Bishop._*_
+          (powerDifferenceQuotient x (perturbation index) n)
+          (Bishop._+_ x (perturbation index)))
+    productConvergent =
+      productLimit ,
+      BishopSequence.xₙyₙ→x₀y₀
+        quotientConvergent shiftedBaseConvergent
+
+    powerConvergent : BishopSequence._isConvergent
+      (λ _ → Bishop.pow x n)
+    powerConvergent =
+      Bishop.pow x n , constantConverges (Bishop.pow x n)
+  in
+  BishopSequence.xₙ+yₙ→x₀+y₀
+    productConvergent powerConvergent
 
 ------------------------------------------------------------------------
 -- The quotient-at-zero theorem has the same displayed normal form as the
--- algebraic power derivative.  Same-object identification is now explicit.
+-- algebraic power derivative.  Same-object identification is explicit.
 ------------------------------------------------------------------------
 
 powerDerivativeIsDifferenceQuotientAtZero :
@@ -120,14 +188,14 @@ record Status : Set where
   field
     exactPowerDifferenceFactorisationOwned : Bool
     quotientAtZeroNormalisationOwned : Bool
-    algebraicDerivativeDifferenceQuotientWeldOwned : Bool
     quotientContinuityAtZeroClosed : Bool
+    algebraicDerivativeDifferenceQuotientWeldOwned : Bool
 
     exactPowerDifferenceFactorisationOwnedIsTrue : exactPowerDifferenceFactorisationOwned ≡ true
     quotientAtZeroNormalisationOwnedIsTrue : quotientAtZeroNormalisationOwned ≡ true
+    quotientContinuityAtZeroClosedIsTrue : quotientContinuityAtZeroClosed ≡ true
     algebraicDerivativeDifferenceQuotientWeldOwnedIsTrue :
       algebraicDerivativeDifferenceQuotientWeldOwned ≡ true
-    quotientContinuityAtZeroClosedIsFalse : quotientContinuityAtZeroClosed ≡ false
 
 open Status public
 
@@ -135,10 +203,10 @@ canonicalStatus : Status
 canonicalStatus = record
   { exactPowerDifferenceFactorisationOwned = true
   ; quotientAtZeroNormalisationOwned = true
+  ; quotientContinuityAtZeroClosed = true
   ; algebraicDerivativeDifferenceQuotientWeldOwned = true
-  ; quotientContinuityAtZeroClosed = false
   ; exactPowerDifferenceFactorisationOwnedIsTrue = refl
   ; quotientAtZeroNormalisationOwnedIsTrue = refl
+  ; quotientContinuityAtZeroClosedIsTrue = refl
   ; algebraicDerivativeDifferenceQuotientWeldOwnedIsTrue = refl
-  ; quotientContinuityAtZeroClosedIsFalse = refl
   }
