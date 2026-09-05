@@ -7,7 +7,7 @@ open import Agda.Builtin.String using (String)
 -- LAYERED KNOWLEDGE-RELEASE BIDI
 --
 -- A programme can cross one public/private boundary without all of its
--- underlying objects crossing.  Report publication, data availability,
+-- underlying objects crossing. Report publication, data availability,
 -- hardware custody, and governance restrictions are therefore separate fibres.
 ------------------------------------------------------------------------
 
@@ -56,8 +56,9 @@ record LayeredReleaseProfile : Set where
 open LayeredReleaseProfile public
 
 ------------------------------------------------------------------------
--- Partial release is a first-class result: at least one public-facing layer has
--- crossed while at least one underlying layer remains private/bounded/unknown.
+-- Weak partial release: public report plus an underlying layer that is either
+-- known non-public OR still unresolved. Useful as a proof-search state, but not
+-- enough to show an actual information boundary.
 ------------------------------------------------------------------------
 
 record PartialReleaseWitness (profile : LayeredReleaseProfile) : Set where
@@ -77,6 +78,27 @@ record PartialReleaseWitness (profile : LayeredReleaseProfile) : Set where
     witnessReference : String
 
 open PartialReleaseWitness public
+
+------------------------------------------------------------------------
+-- Stronger documented partial release. Unknown does NOT count. At least one
+-- underlying layer must have a source-backed bounded/private state while the
+-- report itself is public.
+------------------------------------------------------------------------
+
+record DocumentedPartialReleaseWitness (profile : LayeredReleaseProfile) : Set where
+  constructor documented-partial-release-witness
+  field
+    reportPublic : state (report profile) ≡ public
+    documentedUnderlyingBoundary :
+      (state (data profile) ≡ privateCustody) ⊎
+      (state (data profile) ≡ bounded) ⊎
+      (state (hardware profile) ≡ privateCustody) ⊎
+      (state (hardware profile) ≡ bounded) ⊎
+      (state (knowHow profile) ≡ privateCustody) ⊎
+      (state (knowHow profile) ≡ bounded)
+    witnessReference : String
+
+open DocumentedPartialReleaseWitness public
 
 record GovernanceRelaxationWitness (profile : LayeredReleaseProfile) : Set where
   constructor governance-relaxation-witness
@@ -131,9 +153,13 @@ record LayeredReleaseBoundary : Set where
     derivedPrivateResultsInheritPublicStatusFromFoundation : Bool
     derivedPrivateResultsInheritPublicStatusFromFoundationIsFalse :
       derivedPrivateResultsInheritPublicStatusFromFoundation ≡ false
+    unknownUnderlyingLayerCountsAsDocumentedBoundary : Bool
+    unknownUnderlyingLayerCountsAsDocumentedBoundaryIsFalse :
+      unknownUnderlyingLayerCountsAsDocumentedBoundary ≡ false
 
 canonicalLayeredReleaseBoundary : LayeredReleaseBoundary
 canonicalLayeredReleaseBoundary = layered-release-boundary
+  false refl
   false refl
   false refl
   false refl
