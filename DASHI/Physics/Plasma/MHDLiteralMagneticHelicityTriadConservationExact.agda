@@ -215,6 +215,17 @@ sixAmplitudeRegroup {F = F} a b c d e f =
     refl a b c d e f
   where module R = Ring.Solver F
 
+zeroNest :
+  ∀ {r : Level} {F : C3.RealField r} →
+  C3.complexAdd (C3.complexZero F)
+    (C3.complexAdd (C3.complexZero F) (C3.complexZero F))
+  ≡ C3.complexZero F
+zeroNest {F = F} =
+  trans
+    (Field.complexAddZeroLeft
+      (C3.complexAdd (C3.complexZero F) (C3.complexZero F)))
+    (Field.complexAddZeroLeft (C3.complexZero F))
+
 threeLegTripleAmplitudeCancels :
   ∀ {r : Level} {F : C3.RealField r}
     {E : C3.IntegerEmbedding F}
@@ -243,7 +254,7 @@ threeLegTripleAmplitudeCancels {F = F} state tau =
           (cong₂ C3.complexAdd
             (secondRealityPairCancels state tau)
             (middlePairCancels state tau)))
-        (Field.complexAddZeroLeft (C3.complexZero F))))
+        zeroNest))
 
 literalMagneticHelicityTriadConservation :
   ∀ {r : Level} {F : C3.RealField r}
