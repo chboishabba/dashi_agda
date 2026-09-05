@@ -11,10 +11,6 @@ import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityResidualRefinementV02Exa
 import DASHI.Cognition.PNF.SensibLawMaboRecognitionCoordinateFactorisationExact as Factor
 import DASHI.Cognition.PNF.SensibLawCalderAuthoritativeTranscriptionVerificationExact as Verify
 
-------------------------------------------------------------------------
--- Exact runtime/source boundary.
-------------------------------------------------------------------------
-
 batchHasFiveSpecimens : Batch.specimenCount Batch.primaryAuthorityBatchV02 ≡ 5
 batchHasFiveSpecimens = refl
 batchHas197Paragraphs : Batch.paragraphCount Batch.primaryAuthorityBatchV02 ≡ 197
@@ -35,10 +31,6 @@ calderHallIndependentUsesOcrProjection = refl
 calderHallExtinguishmentUsesOcrProjection : Batch.projectionKind Batch.calderHallExtinguishmentContinuitySpecimen ≡ Batch.ocrDerivedProjection
 calderHallExtinguishmentUsesOcrProjection = refl
 
-------------------------------------------------------------------------
--- Primary proposition coordinates.
-------------------------------------------------------------------------
-
 amoduUsufructPaysRadicalTitleCoordinate : Primary.primaryCoordinate Primary.amoduUsufructBurdenProposition ≡ Factor.radicalTitleCompatibility
 amoduUsufructPaysRadicalTitleCoordinate = refl
 amoduCessionPaysContinuityCoordinate : Primary.primaryCoordinate Primary.amoduCessionContinuityProposition ≡ Factor.continuityAcrossSovereignty
@@ -50,10 +42,6 @@ hallRecognitionPassageTargetsRecognitionRequirement = refl
 hallClearPlainPassageRemainsContinuityIndexed : Primary.primaryCoordinate Primary.hallClearPlainBurdenProposition ≡ Factor.continuityAcrossSovereignty
 hallClearPlainPassageRemainsContinuityIndexed = refl
 
-------------------------------------------------------------------------
--- Authoritative Calder transcription verification.
-------------------------------------------------------------------------
-
 hallIndependentTextVerified : Verify.authoritativeTranscriptionVerified Verify.hallIndependentTitleVerified ≡ true
 hallIndependentTextVerified = refl
 hallRecognitionTextVerified : Verify.authoritativeTranscriptionVerified Verify.hallRecognitionNotPrerequisiteVerified ≡ true
@@ -64,19 +52,12 @@ hallContinuityPresumptionTextVerified : Verify.authoritativeTranscriptionVerifie
 hallContinuityPresumptionTextVerified = refl
 hallClearPlainTextVerified : Verify.authoritativeTranscriptionVerified Verify.hallClearPlainBurdenVerified ≡ true
 hallClearPlainTextVerified = refl
-
-hallSpecificExtinguishmentIsSemanticNotVerbatimPromotion :
-  Verify.verificationGrade Verify.hallSpecificExtinguishmentVerified ≡ Verify.semanticPropositionVerified
+hallSpecificExtinguishmentIsSemanticNotVerbatimPromotion : Verify.verificationGrade Verify.hallSpecificExtinguishmentVerified ≡ Verify.semanticPropositionVerified
 hallSpecificExtinguishmentIsSemanticNotVerbatimPromotion = refl
-
 ocrHistoryStillRetainedAfterVerification : Batch.projectionKind Batch.calderHallIndependentTitleSpecimen ≡ Batch.ocrDerivedProjection
 ocrHistoryStillRetainedAfterVerification = refl
 verificationDoesNotRewriteOcrSource : Verify.OcrReceiptBecomesAuthoritativeSource → ⊥
 verificationDoesNotRewriteOcrSource = Verify.authVerificationDoesNotRewriteOcrProvenance
-
-------------------------------------------------------------------------
--- Later-use / primary-text relations.
-------------------------------------------------------------------------
 
 brennanAmoduPrimarySupport : Upgrade.relation Upgrade.brennanAmoduRadicalTitleWeld ≡ Upgrade.primarySupportsLaterUse
 brennanAmoduPrimarySupport = refl
@@ -86,10 +67,6 @@ dawsonCalderHallPrimaryContrast : Upgrade.relation Upgrade.dawsonCalderRecogniti
 dawsonCalderHallPrimaryContrast = refl
 dawsonAmoduPrimaryQualification : Upgrade.relation Upgrade.dawsonAmoduContinuityWeld ≡ Upgrade.primaryQualifiesLaterUse
 dawsonAmoduPrimaryQualification = refl
-
-------------------------------------------------------------------------
--- Post-v0.2 residual state after authoritative Hall verification.
-------------------------------------------------------------------------
 
 radicalTitleStrengthenedByTextNativePrimary : Refined.state Refined.radicalTitleAfterV02 ≡ Refined.strengthenedByPrimaryTextNative
 radicalTitleStrengthenedByTextNativePrimary = refl
@@ -105,19 +82,10 @@ recognitionPlanNeedsNoFurtherParserRun = refl
 enforceabilityPlanNeedsNoFurtherParserRun : Refined.parserRerunRequired Refined.enforceabilityV02Plan ≡ false
 enforceabilityPlanNeedsNoFurtherParserRun = refl
 
-continuityPlanHasNoHallVerificationResidual :
-  Refined.residuals Refined.continuityV02Plan ≡
-  (Refined.compareAmoduContinuityWithDawsonRecognitionUse ∷ Refined.reconcileContinuityAndRecognitionCoordinates ∷ [])
+continuityPlanHasNoHallVerificationResidual : Refined.residuals Refined.continuityV02Plan ≡ (Refined.compareAmoduContinuityWithDawsonRecognitionUse ∷ Refined.reconcileContinuityAndRecognitionCoordinates ∷ [])
 continuityPlanHasNoHallVerificationResidual = refl
-
-recognitionPlanHasNoHallVerificationResidual :
-  Refined.residuals Refined.recognitionV02Plan ≡
-  (Refined.compareHallRecognitionIndependenceWithDawsonUse ∷ Refined.reconcileContinuityAndRecognitionCoordinates ∷ [])
+recognitionPlanHasNoHallVerificationResidual : Refined.residuals Refined.recognitionV02Plan ≡ (Refined.compareHallRecognitionIndependenceWithDawsonUse ∷ Refined.reconcileContinuityAndRecognitionCoordinates ∷ [])
 recognitionPlanHasNoHallVerificationResidual = refl
-
-------------------------------------------------------------------------
--- Firewalls promoted at the focused-root surface.
-------------------------------------------------------------------------
 
 ocrStillNotAuthoritativeTranscriptionByItself : Batch.OcrProjectionIsAuthoritativeTranscription → ⊥
 ocrStillNotAuthoritativeTranscriptionByItself = Batch.ocrProjectionDoesNotBecomeAuthoritativeTranscription
