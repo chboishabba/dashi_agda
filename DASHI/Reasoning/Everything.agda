@@ -86,6 +86,9 @@ import DASHI.Reasoning.FolkLawEpistemicAuthorityCaptureExact
 import DASHI.Reasoning.EpistemicAuthorityBroadVisualFindingExact
 import DASHI.Reasoning.FolkLawEpistemicAuthorityBroadExact
 import DASHI.Reasoning.EpistemicAuthorityIntrospectiveVisualReceiptExact
+import DASHI.Reasoning.JusticeLeeSensibLawAdversarialProofGraphBidiExact
+import DASHI.Reasoning.JusticeLeeSensibLawExperimentSearchCrossPollinationExact
+import DASHI.Reasoning.JusticeLeeSensibLawBidiSearchClosureExact
 
 -- Source-bounded metaphor-as-structure / task-relative compression layer.
 import DASHI.Reasoning.StructuralMetaphorSourceRegistryExact
