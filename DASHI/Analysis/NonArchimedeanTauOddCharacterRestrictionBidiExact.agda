@@ -99,3 +99,7 @@ highestAlphaTauOddPath =
 sourceCharacterFormulaMustNotBeRebuilt :
   obligationDisposition rebuildCharacterActionFormula ≡ pruned
 sourceCharacterFormulaMustNotBeRebuilt = refl
+
+sourceTauOddPreservationMustNotBeRebuilt :
+  obligationDisposition rebuildTauOddPreservation ≡ pruned
+sourceTauOddPreservationMustNotBeRebuilt = refl
