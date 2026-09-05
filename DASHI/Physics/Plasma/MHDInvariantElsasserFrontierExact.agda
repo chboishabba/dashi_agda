@@ -52,6 +52,10 @@ record MHDInvariantElsasserFrontier : Set where
     physicalInverseCurlRealityOwned : Bool
     physicalInverseCurlRealityOwnedIsTrue : physicalInverseCurlRealityOwned ≡ true
 
+    physicalInverseCurlActuallyInvertsCurlOwned : Bool
+    physicalInverseCurlActuallyInvertsCurlOwnedIsTrue :
+      physicalInverseCurlActuallyInvertsCurlOwned ≡ true
+
     magneticHelicityPlusInverseRadiusWeightOwned : Bool
     magneticHelicityPlusInverseRadiusWeightOwnedIsTrue :
       magneticHelicityPlusInverseRadiusWeightOwned ≡ true
@@ -91,18 +95,50 @@ record MHDInvariantElsasserFrontier : Set where
     literalMagneticHelicityThreeLegConsumerOwnedIsTrue :
       literalMagneticHelicityThreeLegConsumerOwned ≡ true
 
+    doubledInductionKernelNormalFormOwned : Bool
+    doubledInductionKernelNormalFormOwnedIsTrue :
+      doubledInductionKernelNormalFormOwned ≡ true
+
+    orderedPairRequiredForInductionCurlForm : Bool
+    orderedPairRequiredForInductionCurlFormIsTrue :
+      orderedPairRequiredForInductionCurlForm ≡ true
+
+    orderedPairInductionCurlWeldOwned : Bool
+    orderedPairInductionCurlWeldOwnedIsTrue :
+      orderedPairInductionCurlWeldOwned ≡ true
+
+    curlLerayProjectionInvariantOwned : Bool
+    curlLerayProjectionInvariantOwnedIsTrue :
+      curlLerayProjectionInvariantOwned ≡ true
+
+    magneticHelicityLegTripleAmplitudeReductionOwned : Bool
+    magneticHelicityLegTripleAmplitudeReductionOwnedIsTrue :
+      magneticHelicityLegTripleAmplitudeReductionOwned ≡ true
+
+    magneticHelicityThreePreNormPairCancellationsOwned : Bool
+    magneticHelicityThreePreNormPairCancellationsOwnedIsTrue :
+      magneticHelicityThreePreNormPairCancellationsOwned ≡ true
+
     magneticHelicityRealityPairedThreeLegCancellationOwned : Bool
-    magneticHelicityRealityPairedThreeLegCancellationOwnedIsFalse :
-      magneticHelicityRealityPairedThreeLegCancellationOwned ≡ false
+    magneticHelicityRealityPairedThreeLegCancellationOwnedIsTrue :
+      magneticHelicityRealityPairedThreeLegCancellationOwned ≡ true
+
+    literalNonzeroTriadMagneticHelicityConservationOwned : Bool
+    literalNonzeroTriadMagneticHelicityConservationOwnedIsTrue :
+      literalNonzeroTriadMagneticHelicityConservationOwned ≡ true
+
+    globalContinuumMagneticHelicityConservationClaimed : Bool
+    globalContinuumMagneticHelicityConservationClaimedIsFalse :
+      globalContinuumMagneticHelicityConservationClaimed ≡ false
 
 canonicalMHDInvariantElsasserFrontier : MHDInvariantElsasserFrontier
 canonicalMHDInvariantElsasserFrontier =
   mhd-invariant-elsasser-frontier
     true refl true refl true refl true refl true refl
     true refl true refl true refl true refl true refl
-    true refl true refl true refl true refl
-    true refl true refl true refl true refl
-    true refl true refl true refl true refl
-    true refl true refl true refl true refl
-    true refl true refl
-    false refl
+    true refl true refl true refl true refl true refl
+    true refl true refl true refl true refl true refl
+    true refl true refl true refl true refl true refl
+    true refl true refl true refl true refl true refl
+    true refl true refl true refl true refl true refl
+    true refl true refl true refl true refl false refl
