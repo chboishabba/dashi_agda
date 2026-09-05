@@ -39,7 +39,7 @@ spectralCircleSpatialClaim : BidiClaim
 spectralCircleSpatialClaim =
   bidiClaim spatialSpectralCircle
     "spatial twisted-block spectral circle"
-    "owned source DFT infrastructure + concrete conjugated-matrix-to-monomial equality + same-label orbit receipts"
+    "odd-character/tau-odd semantics + arithmetic +/-3^j orbit chart + twisted-coordinate character weld + same-label period/weight"
     true false false false
 
 orbitProductClaim : BidiClaim
@@ -79,8 +79,10 @@ ropeOptimalityClaim =
 
 
 data MissingObligation : Set where
-  needConcreteConjugatedEntries : MissingObligation
-  needConcreteCharacterIndexAlignment : MissingObligation
+  needOddCharacterTauOddIff : MissingObligation
+  needArithmeticOddOrbitChart : MissingObligation
+  needTwistedCoordinateCharacterIdentification : MissingObligation
+  needCompleteCharacterBasisActionEquality : MissingObligation
   needConcreteDFTMonomialMatrixEquality : MissingObligation
   needConcretePeriodAttachment : MissingObligation
   needConcreteOrbitWeightAttachment : MissingObligation
@@ -93,9 +95,10 @@ data MissingObligation : Set where
 
 compileMissing : ClaimKind → List MissingObligation
 compileMissing spatialSpectralCircle =
-  needConcreteConjugatedEntries ∷
-  needConcreteCharacterIndexAlignment ∷
-  needConcreteDFTMonomialMatrixEquality ∷
+  needOddCharacterTauOddIff ∷
+  needArithmeticOddOrbitChart ∷
+  needTwistedCoordinateCharacterIdentification ∷
+  needCompleteCharacterBasisActionEquality ∷
   needConcretePeriodAttachment ∷
   needConcreteOrbitWeightAttachment ∷
   []
@@ -104,6 +107,9 @@ compileMissing arbitraryDagCover = needGraphToDecompositionProducer ∷ []
 compileMissing depthDecaySparsity = needDepthDecayProducer ∷ []
 compileMissing contractedBoundaryEntropy = needBoundaryEntropySameObjectWeld ∷ []
 compileMissing ropeOptimality = needModelLevelRoPEConsumerTheorem ∷ []
+
+matrixEqualityIsCompilerOutput : MissingObligation
+matrixEqualityIsCompilerOutput = needConcreteDFTMonomialMatrixEquality
 
 record BidiFirewall : Set where
   constructor bidiFirewall
@@ -114,19 +120,27 @@ record BidiFirewall : Set where
     architecturalAnalogyImpliesTheoremTransport : Bool
     genericInfrastructureMayReplaceConcreteAttachment : Bool
     finalMagnitudeHypothesisMayCountAsItsOwnDerivation : Bool
+    compiledMatrixEqualityShouldRemainOnSearchFrontier : Bool
 
 canonicalBidiFirewall : BidiFirewall
-canonicalBidiFirewall = bidiFirewall false false false false false false
+canonicalBidiFirewall = bidiFirewall false false false false false false false
 
 spatialSpectralCircleExactCutset :
   compileMissing (kind spectralCircleSpatialClaim)
-  ≡ needConcreteConjugatedEntries ∷
-    needConcreteCharacterIndexAlignment ∷
-    needConcreteDFTMonomialMatrixEquality ∷
+  ≡ needOddCharacterTauOddIff ∷
+    needArithmeticOddOrbitChart ∷
+    needTwistedCoordinateCharacterIdentification ∷
+    needCompleteCharacterBasisActionEquality ∷
     needConcretePeriodAttachment ∷
     needConcreteOrbitWeightAttachment ∷
     []
 spatialSpectralCircleExactCutset = refl
+
+compiledMatrixEqualityIsPrunedFromSearch :
+  BidiFirewall.compiledMatrixEqualityShouldRemainOnSearchFrontier
+    canonicalBidiFirewall
+  ≡ false
+compiledMatrixEqualityIsPrunedFromSearch = refl
 
 orbitProductIsPromotable :
   compileMissing (kind orbitProductClaim) ≡ []
