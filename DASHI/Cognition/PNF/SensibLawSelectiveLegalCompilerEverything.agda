@@ -30,6 +30,7 @@ import DASHI.Cognition.PNF.SensibLawMaboRecognitionBasisAuthorityEvidenceExact a
 import DASHI.Cognition.PNF.SensibLawMaboRecognitionBasisDiscriminatorClosureExact as MaboClosure
 import DASHI.Cognition.PNF.SensibLawMaboRecognitionCoordinateFactorisationExact as MaboFactor
 import DASHI.Cognition.PNF.SensibLawMaboRecognitionFactorisedReversePlannerExact as MaboPlanner
+import DASHI.Cognition.PNF.SensibLawMaboRecognitionIssueHyperfabricBridgeExact as MaboHyper
 
 pdfReusesAttribution : Planner.action Pdf.attributionPlan ≡ Planner.reuseExisting
 pdfReusesAttribution = refl
@@ -154,33 +155,34 @@ maboCitationDoesNotEqualAdoption = MaboAuthority.aCitationDoesNotMeanAdoption
 
 maboRecognitionByConductDoesNotProveContinuity : MaboFactor.RecognitionByConductProvesContinuity → ⊥
 maboRecognitionByConductDoesNotProveContinuity = MaboFactor.recognitionByConductDoesNotProveContinuity
-
 maboContinuityDoesNotProveRecognitionByConduct : MaboFactor.ContinuityProvesRecognitionByConduct → ⊥
 maboContinuityDoesNotProveRecognitionByConduct = MaboFactor.continuityDoesNotProveRecognitionByConduct
-
 maboCalderSameAuthorityDifferentCoordinates : MaboFactor.SameAuthorityDifferentCoordinateReceipt
 maboCalderSameAuthorityDifferentCoordinates = MaboFactor.calderCoordinateContrast
-
 maboAmoduSameAuthorityDifferentCoordinates : MaboFactor.SameAuthorityDifferentCoordinateReceipt
 maboAmoduSameAuthorityDifferentCoordinates = MaboFactor.amoduCoordinateContrast
 
-maboContinuityQueryRoutesToBrennanCalder :
-  MaboPlanner.probes MaboPlanner.continuityPlan
-  ≡ (MaboPlanner.inspectBrennanContinuityPassages ∷ MaboPlanner.inspectCalderHallPassages ∷ [])
+maboContinuityQueryRoutesToBrennanCalder : MaboPlanner.probes MaboPlanner.continuityPlan ≡ (MaboPlanner.inspectBrennanContinuityPassages ∷ MaboPlanner.inspectCalderHallPassages ∷ [])
 maboContinuityQueryRoutesToBrennanCalder = refl
-
-maboRecognitionConductQueryRoutesToDawsonCalder :
-  MaboPlanner.probes MaboPlanner.recognitionConductPlan
-  ≡ (MaboPlanner.inspectDawsonAcquiescencePassages ∷ MaboPlanner.inspectCalderJudsonPassages ∷ [])
+maboRecognitionConductQueryRoutesToDawsonCalder : MaboPlanner.probes MaboPlanner.recognitionConductPlan ≡ (MaboPlanner.inspectDawsonAcquiescencePassages ∷ MaboPlanner.inspectCalderJudsonPassages ∷ [])
 maboRecognitionConductQueryRoutesToDawsonCalder = refl
-
-maboEnforceabilityQueryRoutesToBrennanAmodu :
-  MaboPlanner.probes MaboPlanner.enforceabilityPlan
-  ≡ (MaboPlanner.inspectBrennanRadicalTitlePassages ∷ MaboPlanner.inspectAmoduRadicalTitlePassages ∷ [])
+maboEnforceabilityQueryRoutesToBrennanAmodu : MaboPlanner.probes MaboPlanner.enforceabilityPlan ≡ (MaboPlanner.inspectBrennanRadicalTitlePassages ∷ MaboPlanner.inspectAmoduRadicalTitlePassages ∷ [])
 maboEnforceabilityQueryRoutesToBrennanAmodu = refl
-
 maboFactorisedSearchDoesNotEqualResolution : MaboPlanner.SearchPlanClosesLegalCoordinate → ⊥
 maboFactorisedSearchDoesNotEqualResolution = MaboPlanner.searchPlanDoesNotCloseCoordinate
+
+------------------------------------------------------------------------
+-- SAME ISSUE, DIFFERENT ADJUDICATIVE RESIDUALS.
+------------------------------------------------------------------------
+
+maboContinuityCompilesToContinuityObligation : MaboHyper.obligation MaboHyper.continuityHyperfabric ≡ MaboHyper.establishContinuityRule
+maboContinuityCompilesToContinuityObligation = refl
+maboRecognitionConductCompilesToConductObligation : MaboHyper.obligation MaboHyper.recognitionConductHyperfabric ≡ MaboHyper.establishRecognitionByConduct
+maboRecognitionConductCompilesToConductObligation = refl
+maboOneRecognitionResidualDoesNotFitAllCoordinates : MaboHyper.OneRecognitionResidualFitsEveryCoordinate → ⊥
+maboOneRecognitionResidualDoesNotFitAllCoordinates = MaboHyper.oneResidualDoesNotFitEveryRecognitionCoordinate
+maboCoordinateBridgePreservesIssueIdentity : MaboHyper.issue MaboHyper.continuityHyperfabric ≡ Mabo.maboRecognitionIssue
+maboCoordinateBridgePreservesIssueIdentity = refl
 
 data SelectiveLegalCompilerAggregateMeansKernelValidated : Set where
 aggregateDoesNotClaimKernelValidation : SelectiveLegalCompilerAggregateMeansKernelValidated → ⊥
