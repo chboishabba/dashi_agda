@@ -65,13 +65,19 @@ import DASHI.Analysis.NonArchimedeanOrbitCancellationToMinusTwoExact
 import DASHI.Analysis.NonArchimedeanCharacteristicRootUnionCompilerExact
 import DASHI.Analysis.NonArchimedeanCharacteristicFactorizationReuseExact
 
--- Post-closure sigma audit.  Three half-valued coordinates remain separately
--- typed: cyclotomic amplitude exponent, per-level radius contraction, and the
--- Prolate/Archimedean critical-line parameter.  Equal numerals are not a weld.
+-- Post-closure sigma / continuous-transfer audit.  The primitive twisted-circle
+-- radius, full transfer eigenvalues, normalized Markov eigenvalue, conditional
+-- L2 rate, and Prolate critical parameter are separately typed.  The local
+-- cyclotomic half is repaired; only the cross-lane same-object anchor remains.
 import DASHI.Analysis.NonArchimedeanDirectedRadiusCriticalSigmaAuditExact
 import DASHI.Analysis.NonArchimedeanSigmaRoleSeparationExact
 import DASHI.Analysis.NonArchimedeanCyclotomicSigmaHalfCompilerExact
 import DASHI.Analysis.NonArchimedeanProlateCriticalLineSigmaSourceExact
+import DASHI.Analysis.NonArchimedeanTransferRadiusAnchorNoGoExact
+import DASHI.Analysis.NonArchimedeanPrimitiveTwistedAnchorRepairExact
+import DASHI.Analysis.NonArchimedeanContinuousTransferRadiusSemanticAuditExact
+import DASHI.Analysis.NonArchimedeanSemilocalSigmaNonDescentExact
+import DASHI.Analysis.NonArchimedeanSigmaAnchorSameObjectBidiExact
 import DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact
 
 -- Optional Monster correspondence x-pollination. These remain downstream
