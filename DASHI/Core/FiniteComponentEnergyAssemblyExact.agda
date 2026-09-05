@@ -32,29 +32,15 @@ sum :
 sum O [] = 0# (M O)
 sum O (x ∷ xs) = Ordered.AddMonoid._+_ (M O) x (sum O xs)
 
-PointwiseBound :
-  ∀ {ℓ} →
-  (O : Ordered.OrderedMonoid {ℓ}) →
-  List (N (M O)) →
-  List (N (M O)) →
-  Set ℓ
-PointwiseBound O [] [] = Set
-PointwiseBound O [] (_ ∷ _) = Set
-PointwiseBound O (_ ∷ _) [] = Set
-PointwiseBound O (x ∷ xs) (y ∷ ys) =
-  Ordered.OrderedMonoid._≤_ O x y × PointwiseBound O xs ys
-  where
-  open import Data.Product using (_×_)
-
--- A length-aligned version avoids treating mismatched lists as valid evidence.
+-- Length-aligned pointwise bounds.
 data AlignedPointwiseBound
   {ℓ}
   (O : Ordered.OrderedMonoid {ℓ}) :
   List (N (M O)) →
   List (N (M O)) →
   Set ℓ where
-  [] : AlignedPointwiseBound O [] []
-  _∷_ :
+  apb[] : AlignedPointwiseBound O [] []
+  _apb∷_ :
     ∀ {x y xs ys} →
     Ordered.OrderedMonoid._≤_ O x y →
     AlignedPointwiseBound O xs ys →
@@ -66,9 +52,9 @@ pointwiseBoundSums :
     {xs ys : List (N (M O))} →
   AlignedPointwiseBound O xs ys →
   Ordered.OrderedMonoid._≤_ O (sum O xs) (sum O ys)
-pointwiseBoundSums O [] =
+pointwiseBoundSums O apb[] =
   Ordered.OrderedMonoid.refl≤ O (0# (M O))
-pointwiseBoundSums O (headBound ∷ tailBounds) =
+pointwiseBoundSums O (headBound apb∷ tailBounds) =
   Ordered.OrderedMonoid.mono+ O
     _ _ _ _
     headBound
