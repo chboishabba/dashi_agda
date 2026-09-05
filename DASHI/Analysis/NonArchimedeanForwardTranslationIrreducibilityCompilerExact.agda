@@ -23,7 +23,6 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Product using (Σ; _,_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
--- Tail-recursive iterate: execute `step` once, then continue.
 iterate : {A : Set} → (A → A) → Nat → A → A
 iterate step zero x = x
 iterate step (suc n) x = iterate step n (step x)
@@ -33,12 +32,8 @@ record ForwardTranslationData : Set₁ where
     State : Set
     a b pred : State → State
     periodMinusOne : Nat
-
-    -- a(a^(L-1)x)=x, i.e. the supplied source full-period theorem.
     periodReturn :
       (x : State) → a (iterate a periodMinusOne x) ≡ x
-
-    -- b(y)=pred(a(y)); for Collatz this is 3y-1.
     bFactorsAsPredAfterA :
       (y : State) → b y ≡ pred (a y)
 
@@ -113,7 +108,6 @@ predBlockRuns data x =
     (repeatARuns data (periodMinusOne data) (useB done) x)
     (forwardBlockIsPred data x)
 
--- Word concatenation, executing the left word first and then the right word.
 _++w_ :
   {data : ForwardTranslationData} →
   ForwardWord data → ForwardWord data → ForwardWord data
@@ -167,21 +161,22 @@ record DirectedForwardReachability (data : ForwardTranslationData) : Set where
 
 open DirectedForwardReachability public
 
+compileReach :
+  (data : ForwardTranslationData) →
+  CyclicPredecessorTransitive data →
+  (x y : State data) →
+  Σ (ForwardWord data) (λ word → run data word x ≡ y)
+compileReach data cyclic x y with predReach cyclic x y
+... | steps , target =
+  repeatWord (predBlockWord data) steps ,
+  trans (repeatPredBlockRuns data steps x) target
+
 directedReachabilityFromCyclicPred :
   (data : ForwardTranslationData) →
   CyclicPredecessorTransitive data →
   DirectedForwardReachability data
 directedReachabilityFromCyclicPred data cyclic = record
-  { reaches = λ x y →
-      let reached = predReach cyclic x y
-          steps = Data.Product.proj₁ reached
-          target = Data.Product.proj₂ reached
-          word = repeatWord (predBlockWord data) steps
-      in
-      word , trans (repeatPredBlockRuns data steps x) target
-  }
-  where
-  open import Data.Product using (proj₁; proj₂)
+  { reaches = compileReach data cyclic }
 
 ------------------------------------------------------------------------
 -- The only source-specific remainder is the standard cyclicity of predecessor
