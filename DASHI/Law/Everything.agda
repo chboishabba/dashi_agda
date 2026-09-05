@@ -27,5 +27,8 @@ import DASHI.Law.MissingnessAssumptionBoundTransportBidiExact
 import DASHI.Law.MarginalConditionalMissingnessNonFactorabilityExact
 import DASHI.Law.MarginalConditionalMissingnessValidation
 import DASHI.Law.JointConditionalMissingnessCubeExact
+import DASHI.Law.SparseCellSupportPrivacyFibreExact
 import DASHI.Law.OperationalDirectionProvenanceBidiExact
+import DASHI.Law.OperationalCommandCivilianDirectionBidiExact
+import DASHI.Law.JarrettPostBondiConstitutionalSourceReceiptsExact
 import DASHI.Law.CoerciveContactAuditValidation
