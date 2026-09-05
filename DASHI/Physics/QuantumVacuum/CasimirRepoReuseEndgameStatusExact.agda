@@ -15,10 +15,13 @@ record RepoReuseEndgameStatus : Set where
     finiteCutoffParsevalOwned : Bool
 
     bishopSeriesConvergenceReused : Bool
-    bishopPowerDerivativeOwned : Bool
+    bishopPowerAlgebraicDerivativeOwned : Bool
     bishopInverseFactorialDerivativeCoefficientOwned : Bool
-    trigFiniteTermDerivativeClosed : Bool
+    trigFiniteTermAlgebraicDerivativeOwned : Bool
     derivedTrigSeriesConvergenceCompilerOwned : Bool
+    cosineShiftedConvergenceOwned : Bool
+    setoidFiniteSumDerivativeCompilerOwned : Bool
+    algebraicAnalyticDerivativeWeldSurfaceOwned : Bool
     setoidDerivativeLimitInterchangeCutsetOwned : Bool
 
     scaleLocalGeometricCauchyReused : Bool
@@ -33,6 +36,8 @@ record RepoReuseEndgameStatus : Set where
     proofBearingReducedEndgameRouterOwned : Bool
 
     continuumTETMPhysicalWeldClosed : Bool
+    algebraicToAnalyticTermDerivativeWeldClosed : Bool
+    finiteDerivativeZeroAddRulesClosed : Bool
     derivativeSeriesInterchangeClosed : Bool
     polarCoordinateProductRuleWeldClosed : Bool
     polarMeasureApplicationWeldClosed : Bool
@@ -47,32 +52,34 @@ record RepoReuseEndgameStatus : Set where
     finiteCutoffParsevalOwnedIsTrue : finiteCutoffParsevalOwned ≡ true
 
     bishopSeriesConvergenceReusedIsTrue : bishopSeriesConvergenceReused ≡ true
-    bishopPowerDerivativeOwnedIsTrue : bishopPowerDerivativeOwned ≡ true
+    bishopPowerAlgebraicDerivativeOwnedIsTrue : bishopPowerAlgebraicDerivativeOwned ≡ true
     bishopInverseFactorialDerivativeCoefficientOwnedIsTrue :
       bishopInverseFactorialDerivativeCoefficientOwned ≡ true
-    trigFiniteTermDerivativeClosedIsTrue : trigFiniteTermDerivativeClosed ≡ true
-    derivedTrigSeriesConvergenceCompilerOwnedIsTrue :
-      derivedTrigSeriesConvergenceCompilerOwned ≡ true
+    trigFiniteTermAlgebraicDerivativeOwnedIsTrue : trigFiniteTermAlgebraicDerivativeOwned ≡ true
+    derivedTrigSeriesConvergenceCompilerOwnedIsTrue : derivedTrigSeriesConvergenceCompilerOwned ≡ true
+    cosineShiftedConvergenceOwnedIsTrue : cosineShiftedConvergenceOwned ≡ true
+    setoidFiniteSumDerivativeCompilerOwnedIsTrue : setoidFiniteSumDerivativeCompilerOwned ≡ true
+    algebraicAnalyticDerivativeWeldSurfaceOwnedIsTrue :
+      algebraicAnalyticDerivativeWeldSurfaceOwned ≡ true
     setoidDerivativeLimitInterchangeCutsetOwnedIsTrue :
       setoidDerivativeLimitInterchangeCutsetOwned ≡ true
 
     scaleLocalGeometricCauchyReusedIsTrue : scaleLocalGeometricCauchyReused ≡ true
-    residualDyadicCauchyModulusCompilerOwnedIsTrue :
-      residualDyadicCauchyModulusCompilerOwned ≡ true
+    residualDyadicCauchyModulusCompilerOwnedIsTrue : residualDyadicCauchyModulusCompilerOwned ≡ true
     bishopCauchyToLimitCompilerOwnedIsTrue : bishopCauchyToLimitCompilerOwned ≡ true
-    residualConvergenceRouteDisjunctionOwnedIsTrue :
-      residualConvergenceRouteDisjunctionOwned ≡ true
+    residualConvergenceRouteDisjunctionOwnedIsTrue : residualConvergenceRouteDisjunctionOwned ≡ true
     directRegulatorTailRouteOwnedIsTrue : directRegulatorTailRouteOwned ≡ true
 
     sourceBackedLocalTheoremTransportCompilerOwnedIsTrue :
       sourceBackedLocalTheoremTransportCompilerOwned ≡ true
-    sourceBackedConcreteZetaCompilerOwnedIsTrue :
-      sourceBackedConcreteZetaCompilerOwned ≡ true
+    sourceBackedConcreteZetaCompilerOwnedIsTrue : sourceBackedConcreteZetaCompilerOwned ≡ true
     casimirZetaProducerCompilerOwnedIsTrue : casimirZetaProducerCompilerOwned ≡ true
-    proofBearingReducedEndgameRouterOwnedIsTrue :
-      proofBearingReducedEndgameRouterOwned ≡ true
+    proofBearingReducedEndgameRouterOwnedIsTrue : proofBearingReducedEndgameRouterOwned ≡ true
 
     continuumTETMPhysicalWeldClosedIsFalse : continuumTETMPhysicalWeldClosed ≡ false
+    algebraicToAnalyticTermDerivativeWeldClosedIsFalse :
+      algebraicToAnalyticTermDerivativeWeldClosed ≡ false
+    finiteDerivativeZeroAddRulesClosedIsFalse : finiteDerivativeZeroAddRulesClosed ≡ false
     derivativeSeriesInterchangeClosedIsFalse : derivativeSeriesInterchangeClosed ≡ false
     polarCoordinateProductRuleWeldClosedIsFalse : polarCoordinateProductRuleWeldClosed ≡ false
     polarMeasureApplicationWeldClosedIsFalse : polarMeasureApplicationWeldClosed ≡ false
@@ -91,10 +98,13 @@ canonicalRepoReuseEndgameStatus = record
   ; finiteTorusParsevalReused = true
   ; finiteCutoffParsevalOwned = true
   ; bishopSeriesConvergenceReused = true
-  ; bishopPowerDerivativeOwned = true
+  ; bishopPowerAlgebraicDerivativeOwned = true
   ; bishopInverseFactorialDerivativeCoefficientOwned = true
-  ; trigFiniteTermDerivativeClosed = true
+  ; trigFiniteTermAlgebraicDerivativeOwned = true
   ; derivedTrigSeriesConvergenceCompilerOwned = true
+  ; cosineShiftedConvergenceOwned = true
+  ; setoidFiniteSumDerivativeCompilerOwned = true
+  ; algebraicAnalyticDerivativeWeldSurfaceOwned = true
   ; setoidDerivativeLimitInterchangeCutsetOwned = true
   ; scaleLocalGeometricCauchyReused = true
   ; residualDyadicCauchyModulusCompilerOwned = true
@@ -106,6 +116,8 @@ canonicalRepoReuseEndgameStatus = record
   ; casimirZetaProducerCompilerOwned = true
   ; proofBearingReducedEndgameRouterOwned = true
   ; continuumTETMPhysicalWeldClosed = false
+  ; algebraicToAnalyticTermDerivativeWeldClosed = false
+  ; finiteDerivativeZeroAddRulesClosed = false
   ; derivativeSeriesInterchangeClosed = false
   ; polarCoordinateProductRuleWeldClosed = false
   ; polarMeasureApplicationWeldClosed = false
@@ -118,10 +130,13 @@ canonicalRepoReuseEndgameStatus = record
   ; finiteTorusParsevalReusedIsTrue = refl
   ; finiteCutoffParsevalOwnedIsTrue = refl
   ; bishopSeriesConvergenceReusedIsTrue = refl
-  ; bishopPowerDerivativeOwnedIsTrue = refl
+  ; bishopPowerAlgebraicDerivativeOwnedIsTrue = refl
   ; bishopInverseFactorialDerivativeCoefficientOwnedIsTrue = refl
-  ; trigFiniteTermDerivativeClosedIsTrue = refl
+  ; trigFiniteTermAlgebraicDerivativeOwnedIsTrue = refl
   ; derivedTrigSeriesConvergenceCompilerOwnedIsTrue = refl
+  ; cosineShiftedConvergenceOwnedIsTrue = refl
+  ; setoidFiniteSumDerivativeCompilerOwnedIsTrue = refl
+  ; algebraicAnalyticDerivativeWeldSurfaceOwnedIsTrue = refl
   ; setoidDerivativeLimitInterchangeCutsetOwnedIsTrue = refl
   ; scaleLocalGeometricCauchyReusedIsTrue = refl
   ; residualDyadicCauchyModulusCompilerOwnedIsTrue = refl
@@ -133,6 +148,8 @@ canonicalRepoReuseEndgameStatus = record
   ; casimirZetaProducerCompilerOwnedIsTrue = refl
   ; proofBearingReducedEndgameRouterOwnedIsTrue = refl
   ; continuumTETMPhysicalWeldClosedIsFalse = refl
+  ; algebraicToAnalyticTermDerivativeWeldClosedIsFalse = refl
+  ; finiteDerivativeZeroAddRulesClosedIsFalse = refl
   ; derivativeSeriesInterchangeClosedIsFalse = refl
   ; polarCoordinateProductRuleWeldClosedIsFalse = refl
   ; polarMeasureApplicationWeldClosedIsFalse = refl
@@ -151,8 +168,8 @@ record CorrectedCriticalPath : Set where
 
 canonicalCorrectedCriticalPath : CorrectedCriticalPath
 canonicalCorrectedCriticalPath = record
-  { first = "weld the classical continuum trigonometric completeness theorem to the physical TE/TM Maxwell carrier; every finite cutoff tuple is already exhaustively enumerated and finite Parseval is already repo-owned"
-  ; second = "prove the shared setoid-native derivative/series interchange theorem for the existing Round11 Bishop sine/cosine series, then weld ordinary constant/product rules to the polar coordinate map; finite term derivatives and both derived-series limits are already repo-owned"
+  { first = "weld classical continuum trigonometric completeness to the physical TE/TM Maxwell carrier; finite cutoff enumeration and finite Parseval are already repo-owned"
+  ; second = "select a Bishop setoid analytic derivative semantics, prove the algebraic monomial/trig normal forms satisfy it plus its zero/add rules, then prove the shared derivative/limit interchange theorem; literal Round11 function convergence, shifted-cosine convergence, derived-series convergence, and finite-sum induction are already compiler output"
   ; third = "close EITHER a summable successive-increment estimate OR the existing regulator direct epsilon-tail estimate on the literal post-cancellation residual; both routes already compile to the Bishop residual limit"
   ; fourth = "supply the typed same-object map from the source-backed local zeta carrier/evaluation to the transformed Casimir longitudinal defect; Euler--Maclaurin/source transport, zeta(-3)=1/120, the legacy zeta producer, and 6*120=720 are compiler output"
   }
