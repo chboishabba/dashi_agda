@@ -7,6 +7,7 @@ import DASHI.Core.OpenScienceKnowledgeReleaseBidiExact
 import DASHI.Core.OpenScienceArtifactGranularityBidiExact
 import DASHI.Core.KnowledgeBoundaryTransitionBidiExact
 import DASHI.Core.KnowledgeBoundaryCandidateIdentityBidiExact
+import DASHI.Core.KnowledgeBoundaryKindBidiExact
 import DASHI.Core.LayeredKnowledgeReleaseBidiExact
 import DASHI.Core.TechnicalExternalisationDepthBidiExact
 import DASHI.Core.ExternalisationBoundaryEnrichmentBidiExact
@@ -22,5 +23,6 @@ import DASHI.Culture.MissingDeceasedExternalisationBoundarySelectionExact
 import DASHI.Culture.MissingDeceasedExternalisationMatchedControlsExact
 import DASHI.Culture.MissingDeceasedExternalisationAttributionExact
 import DASHI.Culture.MissingDeceasedLayeredReleaseCrossRosterExact
+import DASHI.Culture.RezaPatentBoundaryTransitionExact
 import DASHI.Culture.MissingDeceasedRosterEnrichmentDesignExact
 import DASHI.Culture.MissingDeceasedHypothesisDiscriminatorMatrixExact
