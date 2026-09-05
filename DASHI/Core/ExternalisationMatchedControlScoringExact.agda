@@ -31,6 +31,15 @@ record StageEvidenceReceipt : Set where
 
 open StageEvidenceReceipt public
 
+------------------------------------------------------------------------
+-- Local membership for receipt lists. This module does not assume a Prelude
+-- membership name or semantics.
+------------------------------------------------------------------------
+
+data _∈Receipts_ (x : StageEvidenceReceipt) : List StageEvidenceReceipt → Set where
+  hereReceipt : ∀ {xs} → x ∈Receipts (x ∷ xs)
+  thereReceipt : ∀ {y xs} → x ∈Receipts xs → x ∈Receipts (y ∷ xs)
+
 record MatchedExternalisationSubject : Set where
   constructor matched-externalisation-subject
   field
@@ -47,7 +56,7 @@ record PositiveStage
   constructor positive-stage
   field
     receipt : StageEvidenceReceipt
-    receiptInSubject : StageEvidenceReceipt ∈ stageReceipts subject
+    receiptInSubject : receipt ∈Receipts stageReceipts subject
     correctStage : stage receipt ≡ target
     present : state receipt ≡ stagePresent
 
@@ -66,7 +75,8 @@ open DeepExternalisationScore public
 
 ------------------------------------------------------------------------
 -- A complete score is stronger than a deep-positive witness. It requires every
--- stage to have been inspected rather than silently treating unknowns as false.
+-- listed stage receipt to have been inspected rather than silently treating
+-- unknowns as false.
 ------------------------------------------------------------------------
 
 record StageInspectionComplete (receipt : StageEvidenceReceipt) : Set where
@@ -84,7 +94,7 @@ record SubjectScoringComplete (subject : MatchedExternalisationSubject) : Set wh
   field
     eachReceiptInspected :
       (receipt : StageEvidenceReceipt) →
-      receipt ∈ stageReceipts subject →
+      receipt ∈Receipts stageReceipts subject →
       StageInspectionComplete receipt
     completenessReference : String
 
