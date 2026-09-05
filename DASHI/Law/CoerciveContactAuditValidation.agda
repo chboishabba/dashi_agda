@@ -21,6 +21,8 @@ import DASHI.Law.WandingOpportunityEligibilityHypervoxelExact as Opportunity
 import DASHI.Law.OpportunityConditionedSelectionDisparityExact as Conditional
 import DASHI.Law.WandingOperationDeploymentProofExact as Deployment
 import DASHI.Law.DeploymentConditionedSelectionBidiExact as DeploymentBidi
+import DASHI.Law.PartialIdentificationMissingnessBoundsExact as Bounds
+import DASHI.Law.RobustSelectionDisparityBoundsBidiExact as Robust
 
 firewallAndReachabilityCoexist :
   Wand.FirewallWithReachability Wand.canonicalFirewallBoundary
@@ -28,8 +30,7 @@ firewallAndReachabilityCoexist = Wand.canonicalFirewallReachability
 
 forceRecordNonReconstruction :
   Force.NF.FactorsThrough Force.observe Force.actualForce → ⊥
-forceRecordNonReconstruction =
-  Force.postEncounterRecordCannotReconstructForceHistory
+forceRecordNonReconstruction = Force.postEncounterRecordCannotReconstructForceHistory
 
 firstOpenEdgeRegression :
   Trajectory.firstUnsupported
@@ -44,8 +45,7 @@ coarseEndpointDoesNotCloseResidual :
     Trajectory.trajectoryResidualObserver
     Trajectory.coarseOutcome
     Trajectory.inspectTransitionTable → ⊥
-coarseEndpointDoesNotCloseResidual =
-  Trajectory.coarseOutcomeCannotRecoverTransitionResidual
+coarseEndpointDoesNotCloseResidual = Trajectory.coarseOutcomeCannotRecoverTransitionResidual
 
 crossPollinatedAsymmetry :
   Cross.ReachabilityObservabilityAsymmetry
@@ -67,14 +67,11 @@ missingEvidenceDoesNotBecomeNegativeEvidence = Law.missingReceiptRemainsOpen
 
 physicalReachabilityDoesNotEstablishLawfulReachability :
   Law.legalReachability Law.canonicalReachableButNotLawfullyClosed ≡ Law.unreachable
-physicalReachabilityDoesNotEstablishLawfulReachability =
-  Law.notYetLawfullyReachable Law.canonicalReachableButNotLawfullyClosed
+physicalReachabilityDoesNotEstablishLawfulReachability = Law.notYetLawfullyReachable Law.canonicalReachableButNotLawfullyClosed
 
 sameEvidenceContentDoesNotEstablishIndependence :
-  Provenance.NF.FactorsThrough
-    Provenance.contentProjection Provenance.provenanceStrength → ⊥
-sameEvidenceContentDoesNotEstablishIndependence =
-  Provenance.sameContentCannotReconstructIndependence
+  Provenance.NF.FactorsThrough Provenance.contentProjection Provenance.provenanceStrength → ⊥
+sameEvidenceContentDoesNotEstablishIndependence = Provenance.sameContentCannotReconstructIndependence
 
 lowAuditSurfaceHasReconstructionDeficit :
   Provenance.AccountabilityReconstructionDeficit Provenance.canonicalLowAuditSurface
@@ -96,16 +93,14 @@ laterContrabandCannotBeEarlierSearchProducer = Temporal.contrabandAfterSearchIsR
 
 downstreamDoesNotRetroactivelyCloseUpstream :
   Temporal.downstreamClosesUpstream Temporal.canonicalDownstreamCannotRetroactivelyCloseUpstream ≡ false
-downstreamDoesNotRetroactivelyCloseUpstream =
-  Temporal.downstreamClosesUpstreamIsFalse Temporal.canonicalDownstreamCannotRetroactivelyCloseUpstream
+downstreamDoesNotRetroactivelyCloseUpstream = Temporal.downstreamClosesUpstreamIsFalse Temporal.canonicalDownstreamCannotRetroactivelyCloseUpstream
 
 multipleInstitutionalRecordsMayShareProducer : Dag.SharedUltimateProducer
 multipleInstitutionalRecordsMayShareProducer = Dag.canonicalSharedProducer
 
 independenceConsumerRequiresIndependentProducer :
   Dag.reverseProvenance Dag.independentCorroborationConsumer ≡ Dag.independentProducerReceipt
-independenceConsumerRequiresIndependentProducer =
-  Dag.independenceConsumerRequiresProducerReceipt
+independenceConsumerRequiresIndependentProducer = Dag.independenceConsumerRequiresProducerReceipt
 
 empiricalFixtureStopsAtFirstLegalGap :
   Fixture.firstLawfulnessResidual Fixture.canonicalMissingSafeguardFixture
@@ -133,16 +128,12 @@ populationLawfulnessDoesNotFollowFromSearchCount :
 populationLawfulnessDoesNotFollowFromSearchCount = Population.canonicalLawfulnessClosedNumerator
 
 pretextClaimStillRequiresIntentProducer :
-  Systemic.firstSystemicResidual
-    Systemic.pretextualIntent
-    Systemic.canonicalDescriptiveOnlyCutset
+  Systemic.firstSystemicResidual Systemic.pretextualIntent Systemic.canonicalDescriptiveOnlyCutset
   ≡ Systemic.intentResidual
 pretextClaimStillRequiresIntentProducer = Systemic.canonicalPretextStopsAtIntent
 
 deterrenceClaimStillRequiresCounterfactual :
-  Systemic.firstSystemicResidual
-    Systemic.causalDeterrence
-    Systemic.canonicalDescriptiveOnlyCutset
+  Systemic.firstSystemicResidual Systemic.causalDeterrence Systemic.canonicalDescriptiveOnlyCutset
   ≡ Systemic.counterfactualResidual
 deterrenceClaimStillRequiresCounterfactual = Systemic.canonicalDeterrenceStillNeedsCounterfactual
 
@@ -159,9 +150,7 @@ missingStatusRemainsUnresolved :
 missingStatusRemainsUnresolved = Denom.missingStatusIsNotNegative
 
 scanShareDoesNotCloseSelectionDisparity :
-  Disparity.firstDisparityResidual
-    Disparity.descriptiveSelectionDisparity
-    Disparity.canonicalScanShareOnly
+  Disparity.firstDisparityResidual Disparity.descriptiveSelectionDisparity Disparity.canonicalScanShareOnly
   ≡ Disparity.eligibilityResidual
 scanShareDoesNotCloseSelectionDisparity = Disparity.scanShareDoesNotCloseSelectionDisparity
 
@@ -176,16 +165,12 @@ opportunityDoesNotCollapseToEligibility : Opportunity.EligibilityClosure Opportu
 opportunityDoesNotCollapseToEligibility = Opportunity.canonicalEligibilityClosure
 
 deploymentDisparityCanCloseBeforeOfficerSelection :
-  Conditional.firstOpportunityDisparityResidual
-    Conditional.deploymentOpportunityDisparity
-    Conditional.canonicalDeploymentOnlyCutset
+  Conditional.firstOpportunityDisparityResidual Conditional.deploymentOpportunityDisparity Conditional.canonicalDeploymentOnlyCutset
   ≡ Conditional.opportunityDisparityClosed
 deploymentDisparityCanCloseBeforeOfficerSelection = Conditional.canonicalDeploymentCanCloseBeforeSelection
 
 officerSelectionStillRequiresEligibilityConditioning :
-  Conditional.firstOpportunityDisparityResidual
-    Conditional.officerSelectionConditionalDisparity
-    Conditional.canonicalDeploymentOnlyCutset
+  Conditional.firstOpportunityDisparityResidual Conditional.officerSelectionConditionalDisparity Conditional.canonicalDeploymentOnlyCutset
   ≡ Conditional.eligibilityResidual
 officerSelectionStillRequiresEligibilityConditioning = Conditional.canonicalOfficerSelectionStillNeedsEligibility
 
@@ -195,19 +180,13 @@ deploymentRequiresExposureSetProducer :
 deploymentRequiresExposureSetProducer = Deployment.canonicalDeploymentStopsAtExposureSet
 
 conditionalSelectionRetainsEligibleExposureDenominator :
-  Deployment.denominator
-    (Deployment.selectedGivenOpportunityEligibility Deployment.canonicalExposureLedger)
-  ≡ 6
-conditionalSelectionRetainsEligibleExposureDenominator =
-  Deployment.canonicalConditionalSelectionDenominator
+  Deployment.denominator (Deployment.selectedGivenOpportunityEligibility Deployment.canonicalExposureLedger) ≡ 6
+conditionalSelectionRetainsEligibleExposureDenominator = Deployment.canonicalConditionalSelectionDenominator
 
 operationAuthorisationDoesNotCloseSelectionDenominator :
-  DeploymentBidi.firstDeploymentSelectionResidual
-    DeploymentBidi.conditionalSelectionRate
-    DeploymentBidi.canonicalExposureSetOpenCutset
+  DeploymentBidi.firstDeploymentSelectionResidual DeploymentBidi.conditionalSelectionRate DeploymentBidi.canonicalExposureSetOpenCutset
   ≡ DeploymentBidi.exposureSetResidual
-operationAuthorisationDoesNotCloseSelectionDenominator =
-  DeploymentBidi.canonicalConditionalSelectionStopsAtExposureSet
+operationAuthorisationDoesNotCloseSelectionDenominator = DeploymentBidi.canonicalConditionalSelectionStopsAtExposureSet
 
 deploymentAdjustedDisparityStillNeedsGroupLinkage :
   DeploymentBidi.firstDeploymentSelectionResidual
@@ -215,5 +194,32 @@ deploymentAdjustedDisparityStillNeedsGroupLinkage :
     (DeploymentBidi.deploymentSelectionCutset true true true true false true
       "deployment/exposure/eligibility/selection closed; group linkage open")
   ≡ DeploymentBidi.groupLinkageResidual
-deploymentAdjustedDisparityStillNeedsGroupLinkage =
-  DeploymentBidi.canonicalAdjustedDisparityStopsAtGroupLinkage
+deploymentAdjustedDisparityStillNeedsGroupLinkage = DeploymentBidi.canonicalAdjustedDisparityStopsAtGroupLinkage
+
+missingMassProducesBoundsNotPointEstimate :
+  Bounds.upper (Bounds.positiveCountBounds Bounds.canonicalGroupSurface) ≡ 50
+missingMassProducesBoundsNotPointEstimate = Bounds.canonicalGroupUpper
+
+selectionRateBoundsRetainUnresolvedMass :
+  Bounds.denominatorUpper (Bounds.selectionRateBounds Bounds.canonicalSelectionSurface) ≡ 53
+selectionRateBoundsRetainUnresolvedMass = Bounds.canonicalSelectionDenominatorUpper
+
+robustDisparityCanCloseBeforePointIdentification :
+  Bounds.firstMissingnessResidual Bounds.robustSelectionDisparity Bounds.canonicalBoundedButNotPointIdentified
+  ≡ Bounds.missingnessClosed
+robustDisparityCanCloseBeforePointIdentification = Bounds.robustDisparityCanCloseWithoutPointIdentification
+
+pointEstimateStillBlockedByMissingness :
+  Bounds.firstMissingnessResidual Bounds.pointIdentifiedSelectionRate Bounds.canonicalBoundedButNotPointIdentified
+  ≡ Bounds.completeObservationResidual
+pointEstimateStillBlockedByMissingness = Bounds.pointEstimateStillBlockedByMissingness
+
+robustDirectionDoesNotRequireExactMagnitude :
+  Robust.firstRobustResidual Robust.disparityDirection Robust.canonicalRobustButNotPointCutset
+  ≡ Robust.robustClosed
+robustDirectionDoesNotRequireExactMagnitude = Robust.robustDirectionCanCloseBeforePointMagnitude
+
+exactMagnitudeStillRequiresCompleteObservation :
+  Robust.firstRobustResidual Robust.pointMagnitude Robust.canonicalRobustButNotPointCutset
+  ≡ Robust.completeObservationResidual
+exactMagnitudeStillRequiresCompleteObservation = Robust.pointMagnitudeStillRequiresCompleteObservation
