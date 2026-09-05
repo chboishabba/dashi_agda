@@ -9,51 +9,47 @@ import DASHI.Physics.QuantumVacuum.ParallelPlateTETMModeExpansionSourceAuthority
 import DASHI.Physics.QuantumVacuum.PerfectConductorTETMProofBearingCompletenessExact as Proof
 
 ------------------------------------------------------------------------
--- FOUR BOUNDED SOURCE CLAIMS FROM THE SAME PARALLEL-PLATE SOURCE
+-- BOUNDED SOURCE CLAIMS FROM THE SAME PARALLEL-PLATE SOURCE
 ------------------------------------------------------------------------
-
-teTmGenerationClaim : Transport.SourceBackedClaim
-teTmGenerationClaim = record
-  { Transport.SourceClaim = Source.teTmModesDerived Source.canonicalParallelPlateTETMModeExpansionAuthority
-  ; Transport.sourceReceipt = tt
-  ; Transport.sourceName = Source.sourceName Source.canonicalParallelPlateTETMModeExpansionAuthority
-  ; Transport.sourceLocator = Source.sourceLocator Source.canonicalParallelPlateTETMModeExpansionAuthority
-  ; Transport.reading = "MIT source: TE/TM modes are derived for the conducting parallel-plate problem."
-  }
-
-longitudinalQuantisationClaim : Transport.SourceBackedClaim
-longitudinalQuantisationClaim = record
-  { Transport.SourceClaim = Source.longitudinalIntegerQuantisationDerived Source.canonicalParallelPlateTETMModeExpansionAuthority
-  ; Transport.sourceReceipt = tt
-  ; Transport.sourceName = Source.sourceName Source.canonicalParallelPlateTETMModeExpansionAuthority
-  ; Transport.sourceLocator = Source.sourceLocator Source.canonicalParallelPlateTETMModeExpansionAuthority
-  ; Transport.reading = "MIT source: longitudinal plate modes carry the integer quantisation structure."
-  }
 
 fieldExpansionClaim : Transport.SourceBackedClaim
 fieldExpansionClaim = record
-  { Transport.SourceClaim = Source.fieldsExpandedAsLinearCombinationOfModes Source.canonicalParallelPlateTETMModeExpansionAuthority
+  { Transport.SourceClaim =
+      Source.fieldsExpandedAsLinearCombinationOfModes
+        Source.canonicalParallelPlateTETMModeExpansionAuthority
   ; Transport.sourceReceipt = tt
-  ; Transport.sourceName = Source.sourceName Source.canonicalParallelPlateTETMModeExpansionAuthority
-  ; Transport.sourceLocator = Source.sourceLocator Source.canonicalParallelPlateTETMModeExpansionAuthority
-  ; Transport.reading = "MIT source: fields between the plates expand as linear combinations of the TE/TM modes."
+  ; Transport.sourceName =
+      Source.sourceName Source.canonicalParallelPlateTETMModeExpansionAuthority
+  ; Transport.sourceLocator =
+      Source.sourceLocator Source.canonicalParallelPlateTETMModeExpansionAuthority
+  ; Transport.reading =
+      "MIT source: fields between the conducting plates expand as linear combinations of the TE/TM modes."
   }
 
-zeroSectorClaim : Transport.SourceBackedClaim
-zeroSectorClaim = record
-  { Transport.SourceClaim = Source.exceptionalZeroSectorDiscussed Source.canonicalParallelPlateTETMModeExpansionAuthority
-  ; Transport.sourceReceipt = tt
-  ; Transport.sourceName = Source.sourceName Source.canonicalParallelPlateTETMModeExpansionAuthority
-  ; Transport.sourceLocator = Source.sourceLocator Source.canonicalParallelPlateTETMModeExpansionAuthority
-  ; Transport.reading = "MIT source: the exceptional zero sector is treated explicitly."
+longitudinalExpansionClaim : Transport.SourceBackedClaim
+longitudinalExpansionClaim = record
+  { Transport.SourceClaim =
+      Source.fieldsExpandedAsLinearCombinationOfModes
+        Source.canonicalParallelPlateTETMModeExpansionAuthority
+      ×
+      Source.longitudinalIntegerQuantisationDerived
+        Source.canonicalParallelPlateTETMModeExpansionAuthority
+  ; Transport.sourceReceipt = tt , tt
+  ; Transport.sourceName =
+      Source.sourceName Source.canonicalParallelPlateTETMModeExpansionAuthority
+  ; Transport.sourceLocator =
+      Source.sourceLocator Source.canonicalParallelPlateTETMModeExpansionAuthority
+  ; Transport.reading =
+      "MIT source: the TE/TM field expansion is accompanied by the longitudinal integer quantisation structure."
   }
 
 ------------------------------------------------------------------------
 -- LOCAL COMPLETENESS SKELETON
 --
--- Source claims can compile the four source-level coordinates only after one
--- same-object carrier/convention weld.  The genuinely local Hilbert/transverse
--- and independence facts remain proof-bearing inputs.
+-- The source can close spanning and longitudinal-index coverage only after one
+-- same-object carrier/convention weld.  It does NOT by itself close the exact
+-- zero-sector counting, transverse Hilbert completion, or TE/TM independence
+-- convention used by the Casimir consumer.
 ------------------------------------------------------------------------
 
 record LocalTETMCompletenessSkeleton : Set₁ where
@@ -68,23 +64,19 @@ record LocalTETMCompletenessSkeleton : Set₁ where
       SameClassicalAndCasimirPlateModeObject
 
     EveryPhysicalModeTEorTM : Set
-    LongitudinalCompleteness : Set
-    ZeroSectorCountingCorrect : Set
-
-    sourceGenerationToLocal :
-      Transport.SourceClaim teTmGenerationClaim →
+    sourceExpansionToLocalSpanning :
+      Transport.SourceClaim fieldExpansionClaim →
       SameClassicalAndCasimirPlateModeObject →
       EveryPhysicalModeTEorTM
 
-    sourceLongitudinalToLocal :
-      Transport.SourceClaim longitudinalQuantisationClaim →
+    LongitudinalCompleteness : Set
+    sourceLongitudinalExpansionToLocal :
+      Transport.SourceClaim longitudinalExpansionClaim →
       SameClassicalAndCasimirPlateModeObject →
       LongitudinalCompleteness
 
-    sourceZeroSectorToLocal :
-      Transport.SourceClaim zeroSectorClaim →
-      SameClassicalAndCasimirPlateModeObject →
-      ZeroSectorCountingCorrect
+    ZeroSectorCountingCorrect : Set
+    zeroSectorCountingCorrectEvidence : ZeroSectorCountingCorrect
 
     NoDoubleCountingAwayFromZeroSector : Set
     noDoubleCountingAwayFromZeroSectorEvidence :
@@ -111,7 +103,8 @@ localTarget claim LocalClaim SameObject SourceToLocal = record
   { Transport.LocalClaim = LocalClaim
   ; Transport.sameMathematicalObject = SameObject
   ; Transport.sourceSemanticsToLocal = SourceToLocal
-  ; Transport.reading = "Parallel-plate source theorem transported only after the common local mode-object weld."
+  ; Transport.reading =
+      "Parallel-plate source theorem transported only after the common local mode-object weld."
   }
 
 compileEveryPhysicalModeTEorTM :
@@ -119,11 +112,11 @@ compileEveryPhysicalModeTEorTM :
   EveryPhysicalModeTEorTM S
 compileEveryPhysicalModeTEorTM S =
   Transport.transportSourceBackedTheorem
-    teTmGenerationClaim
-    (localTarget teTmGenerationClaim
+    fieldExpansionClaim
+    (localTarget fieldExpansionClaim
       (EveryPhysicalModeTEorTM S)
       (SameClassicalAndCasimirPlateModeObject S)
-      (sourceGenerationToLocal S))
+      (sourceExpansionToLocalSpanning S))
     (record
       { Transport.objectWeld = sameClassicalAndCasimirPlateModeObjectEvidence S })
 
@@ -132,24 +125,11 @@ compileLongitudinalCompleteness :
   LongitudinalCompleteness S
 compileLongitudinalCompleteness S =
   Transport.transportSourceBackedTheorem
-    longitudinalQuantisationClaim
-    (localTarget longitudinalQuantisationClaim
+    longitudinalExpansionClaim
+    (localTarget longitudinalExpansionClaim
       (LongitudinalCompleteness S)
       (SameClassicalAndCasimirPlateModeObject S)
-      (sourceLongitudinalToLocal S))
-    (record
-      { Transport.objectWeld = sameClassicalAndCasimirPlateModeObjectEvidence S })
-
-compileZeroSectorCounting :
-  (S : LocalTETMCompletenessSkeleton) →
-  ZeroSectorCountingCorrect S
-compileZeroSectorCounting S =
-  Transport.transportSourceBackedTheorem
-    zeroSectorClaim
-    (localTarget zeroSectorClaim
-      (ZeroSectorCountingCorrect S)
-      (SameClassicalAndCasimirPlateModeObject S)
-      (sourceZeroSectorToLocal S))
+      (sourceLongitudinalExpansionToLocal S))
     (record
       { Transport.objectWeld = sameClassicalAndCasimirPlateModeObjectEvidence S })
 
@@ -167,7 +147,7 @@ compileProofBearingTETMCompleteness S = record
   ; Proof.NoDoubleCountingAwayFromZeroSector = NoDoubleCountingAwayFromZeroSector S
   ; Proof.noDoubleCountingAwayFromZeroSectorEvidence = noDoubleCountingAwayFromZeroSectorEvidence S
   ; Proof.ZeroSectorCountingCorrect = ZeroSectorCountingCorrect S
-  ; Proof.zeroSectorCountingCorrectEvidence = compileZeroSectorCounting S
+  ; Proof.zeroSectorCountingCorrectEvidence = zeroSectorCountingCorrectEvidence S
   ; Proof.TransverseCompleteness = TransverseCompleteness S
   ; Proof.transverseCompletenessEvidence = transverseCompletenessEvidence S
   ; Proof.LongitudinalCompleteness = LongitudinalCompleteness S
@@ -185,52 +165,59 @@ record ReverseSourceBackedCompletenessObligations : Set where
     finiteEnergyHilbertCarrierIdentification : Set
     transverseContinuumCompleteness : Set
     teTmIndependenceAwayFromExceptionalSector : Set
+    exactZeroSectorCountingConvention : Set
     reading : String
 
 open ReverseSourceBackedCompletenessObligations public
 
-data SeparateSourceReceiptRequiredForGenerationQuantisationAndZeroSector : Set where
+data SeparateSourceReceiptRequiredForSpanningAndLongitudinalCoverage : Set where
 
 data SourceExpansionAutomaticallyProvesTransverseHilbertCompletion : Set where
 
+data SourceDiscussionOfZeroSectorAutomaticallyProvesLocalCounting : Set where
+
 oneModeObjectWeldFeedsSourceClaims :
-  SeparateSourceReceiptRequiredForGenerationQuantisationAndZeroSector → ⊥
+  SeparateSourceReceiptRequiredForSpanningAndLongitudinalCoverage → ⊥
 oneModeObjectWeldFeedsSourceClaims ()
 
 sourceDoesNotInventTransverseCompletion :
   SourceExpansionAutomaticallyProvesTransverseHilbertCompletion → ⊥
 sourceDoesNotInventTransverseCompletion ()
 
+zeroSectorDiscussionDoesNotFixLocalCounting :
+  SourceDiscussionOfZeroSectorAutomaticallyProvesLocalCounting → ⊥
+zeroSectorDiscussionDoesNotFixLocalCounting ()
+
 record Status : Set where
   field
-    teTmGenerationSourceBacked : Bool
-    longitudinalCompletenessSourceBacked : Bool
-    exceptionalZeroSectorSourceBacked : Bool
-    oneModeObjectWeldFeedsThreeCompilers : Bool
+    fieldSpanningSourceBacked : Bool
+    longitudinalCoverageSourceBacked : Bool
+    oneModeObjectWeldFeedsTwoCompilers : Bool
     proofBearingCompletenessCompilerOwned : Bool
     transverseHilbertCompletionStillLocal : Bool
+    zeroSectorCountingStillLocal : Bool
 
-    teTmGenerationSourceBackedIsTrue : teTmGenerationSourceBacked ≡ true
-    longitudinalCompletenessSourceBackedIsTrue : longitudinalCompletenessSourceBacked ≡ true
-    exceptionalZeroSectorSourceBackedIsTrue : exceptionalZeroSectorSourceBacked ≡ true
-    oneModeObjectWeldFeedsThreeCompilersIsTrue : oneModeObjectWeldFeedsThreeCompilers ≡ true
+    fieldSpanningSourceBackedIsTrue : fieldSpanningSourceBacked ≡ true
+    longitudinalCoverageSourceBackedIsTrue : longitudinalCoverageSourceBacked ≡ true
+    oneModeObjectWeldFeedsTwoCompilersIsTrue : oneModeObjectWeldFeedsTwoCompilers ≡ true
     proofBearingCompletenessCompilerOwnedIsTrue : proofBearingCompletenessCompilerOwned ≡ true
     transverseHilbertCompletionStillLocalIsTrue : transverseHilbertCompletionStillLocal ≡ true
+    zeroSectorCountingStillLocalIsTrue : zeroSectorCountingStillLocal ≡ true
 
 open Status public
 
 canonicalStatus : Status
 canonicalStatus = record
-  { teTmGenerationSourceBacked = true
-  ; longitudinalCompletenessSourceBacked = true
-  ; exceptionalZeroSectorSourceBacked = true
-  ; oneModeObjectWeldFeedsThreeCompilers = true
+  { fieldSpanningSourceBacked = true
+  ; longitudinalCoverageSourceBacked = true
+  ; oneModeObjectWeldFeedsTwoCompilers = true
   ; proofBearingCompletenessCompilerOwned = true
   ; transverseHilbertCompletionStillLocal = true
-  ; teTmGenerationSourceBackedIsTrue = refl
-  ; longitudinalCompletenessSourceBackedIsTrue = refl
-  ; exceptionalZeroSectorSourceBackedIsTrue = refl
-  ; oneModeObjectWeldFeedsThreeCompilersIsTrue = refl
+  ; zeroSectorCountingStillLocal = true
+  ; fieldSpanningSourceBackedIsTrue = refl
+  ; longitudinalCoverageSourceBackedIsTrue = refl
+  ; oneModeObjectWeldFeedsTwoCompilersIsTrue = refl
   ; proofBearingCompletenessCompilerOwnedIsTrue = refl
   ; transverseHilbertCompletionStillLocalIsTrue = refl
+  ; zeroSectorCountingStillLocalIsTrue = refl
   }
