@@ -15,11 +15,6 @@ import DASHI.Cognition.PNF.SensibLawIssueIndexedAdjudicativeHyperfabricExact as 
 
 ------------------------------------------------------------------------
 -- LIVE MABO SAME-ISSUE ALIGNMENT
---
--- Parser structure proposes clause candidates.  Reviewed source metadata says
--- which judge authored each passage.  A separate reviewed issue-alignment
--- receipt is required before Brennan and Dawson can be compared on one issue.
--- The contrast is not encoded as Boolean negation.
 ------------------------------------------------------------------------
 
 brennanContentAdmission :
@@ -33,10 +28,20 @@ brennanContentCandidate = RuleBank.clausalComplementRule
   Batch.brennanStateContentWitness brennanContentAdmission
   "event:mabo:brennan:state" "event:mabo:brennan:reject-notion"
 
+brennanNegationBody : Candidate.Formula
+brennanNegationBody = Candidate.atom "ExtinguishNativeTitle"
+  (Candidate.eventTerm "event:mabo:brennan:extinguish-native-title" ∷
+   Candidate.entityTerm "native-title" ∷ [])
+
+brennanNegationAdmission :
+  RuleBank.ShapeAdmission Batch.brennanNegationWitness Candidate.negation
+brennanNegationAdmission = RuleBank.shapeAdmission refl
+  "primary-text-v0.1 Brennan negation shape admission"
+  "spaCy neg(extinguish, not)"
+
 brennanNegationCandidate : Candidate.CandidateSemanticFragment
-brennanNegationCandidate = Candidate.negationCandidate
-  Batch.brennanNegationWitness
-  "event:mabo:brennan:extinguish-native-title"
+brennanNegationCandidate = RuleBank.negationScopeRule
+  Batch.brennanNegationWitness brennanNegationAdmission brennanNegationBody
 
 brennanTitleObjectCandidate : Candidate.CandidateSemanticFragment
 brennanTitleObjectCandidate = Candidate.objectCandidate
@@ -62,9 +67,6 @@ dawsonViewpointCandidate = Candidate.subjectCandidate
 
 ------------------------------------------------------------------------
 -- Reviewed judicial proposition receipts.
--- These summaries are review-layer proposition identifiers over bounded source
--- passages; they are not produced by spaCy and do not claim final holding or
--- world truth.
 ------------------------------------------------------------------------
 
 record ReviewedJudicialProposition : Set where
@@ -230,7 +232,7 @@ data SameIssueMeansLogicalNegation : Set where
 data ParserCandidateCreatesJudicialHolding : Set where
 data ReviewedSpeakerMetadataMakesWorldTruth : Set where
 data BrennanPropositionIsDawsonNegation : Set where
-\data BoundedContrastCompletesMaboAdjudication : Set where
+data BoundedContrastCompletesMaboAdjudication : Set where
 
 sameIssueDoesNotMeanLogicalNegation : SameIssueMeansLogicalNegation → ⊥
 sameIssueDoesNotMeanLogicalNegation ()
