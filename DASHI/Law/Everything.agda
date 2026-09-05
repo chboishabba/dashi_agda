@@ -4,4 +4,6 @@ import DASHI.Law.QueenslandWandingReachabilityBidiExact
 import DASHI.Law.LowTraceCoerciveForceNonReconstructionExact
 import DASHI.Law.CoerciveContactAuditHyperfabricCrossPollinationExact
 import DASHI.Law.CoerciveEncounterTrajectoryBidiExact
+import DASHI.Law.CoerciveEncounterLawfulnessBidiExact
+import DASHI.Law.IndependentEvidenceProvenanceExact
 import DASHI.Law.CoerciveContactAuditValidation
