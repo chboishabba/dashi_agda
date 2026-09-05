@@ -127,6 +127,14 @@ record MHDInvariantElsasserFrontier : Set where
     literalNonzeroTriadMagneticHelicityConservationOwnedIsTrue :
       literalNonzeroTriadMagneticHelicityConservationOwned ≡ true
 
+    compactIdealInvariantTriadCompilerOwned : Bool
+    compactIdealInvariantTriadCompilerOwnedIsTrue :
+      compactIdealInvariantTriadCompilerOwned ≡ true
+
+    compactCompilerPreservesDistinctProofRoutes : Bool
+    compactCompilerPreservesDistinctProofRoutesIsTrue :
+      compactCompilerPreservesDistinctProofRoutes ≡ true
+
     globalContinuumMagneticHelicityConservationClaimed : Bool
     globalContinuumMagneticHelicityConservationClaimedIsFalse :
       globalContinuumMagneticHelicityConservationClaimed ≡ false
