@@ -4,31 +4,39 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
--- BOUNDED SOURCE AUTHORITY: TE/TM MODE EXPANSION BETWEEN PARALLEL PLATES
+-- BOUNDED SOURCE AUTHORITY: TEM / TE / TM MODES BETWEEN PARALLEL PLATES
 --
 -- SOURCE:
 -- H. A. Haus and J. R. Melcher, Electromagnetic Fields and Energy,
--- MIT OpenCourseWare, Chapter 13, especially §§13.2--13.3.
--- The text derives TE/TM modes between perfectly conducting parallel plates,
--- identifies the longitudinal n*pi/a structure, discusses the exceptional
--- zero sector, and states that fields between the plates are linear
--- combinations of the modes.
+-- MIT OpenCourseWare, Chapter 13, especially §13.2.
 --
--- This is SOURCEBACKED mode-expansion authority only.  It is not automatically
--- the same Hilbert/finite-energy carrier, transverse continuum normalization,
--- quantum mode space, or zero-sector convention used by the Casimir consumer.
+-- The source states that:
+-- * fields between perfectly conducting parallel plates are linear
+--   combinations of the modes;
+-- * the longitudinal dependence is indexed by n*pi/a;
+-- * the TE n=0 solution is excluded because it has zero amplitude;
+-- * the TM0 solution has both E and H transverse to propagation and is the TEM
+--   mode from §13.1.
+--
+-- This source correction matters to the formal carrier: the exceptional zero
+-- mode should be represented as TEM, not as an undifferentiated TE/TM zero
+-- sector.
 ------------------------------------------------------------------------
 
 record ParallelPlateTETMModeExpansionSourceAuthority : Set where
   field
     sourceName : String
     sourceLocator : String
+    exactSectionLocator : String
 
     perfectlyConductingParallelPlateProblem : Set
     teTmModesDerived : Set
     longitudinalIntegerQuantisationDerived : Set
     fieldsExpandedAsLinearCombinationOfModes : Set
-    exceptionalZeroSectorDiscussed : Set
+
+    teZeroExcludedBecauseZeroAmplitude : Set
+    tmZeroIdentifiedAsTEM : Set
+    positiveIndexHigherModes : Set
 
     sourceBackedOnly : Set
     reading : String
@@ -42,18 +50,31 @@ canonicalParallelPlateTETMModeExpansionAuthority = record
       "Haus and Melcher, Electromagnetic Fields and Energy, Chapter 13 (MIT OpenCourseWare)"
   ; sourceLocator =
       "https://ocw.mit.edu/courses/res-6-001-electromagnetic-fields-and-energy-spring-2008/pages/chapter-13/"
+  ; exactSectionLocator =
+      "https://ocw.mit.edu/courses/res-6-001-electromagnetic-fields-and-energy-spring-2008/e7b7eabc9d1921d231a012c6d0b94f93_13.pdf ; Section 13.2, equations (19)--(21)"
   ; perfectlyConductingParallelPlateProblem = ⊤
   ; teTmModesDerived = ⊤
   ; longitudinalIntegerQuantisationDerived = ⊤
   ; fieldsExpandedAsLinearCombinationOfModes = ⊤
-  ; exceptionalZeroSectorDiscussed = ⊤
+  ; teZeroExcludedBecauseZeroAmplitude = ⊤
+  ; tmZeroIdentifiedAsTEM = ⊤
+  ; positiveIndexHigherModes = ⊤
   ; sourceBackedOnly = ⊤
   ; reading =
-      "MIT source-backs classical TE/TM mode expansion for perfectly conducting parallel plates; the exact DASHI finite-energy/Hilbert carrier and quantum-mode identification remain local welds."
+      "MIT source-backs a TEM zero mode plus positive-index TE/TM higher modes; the exact DASHI finite-energy/Hilbert carrier and quantum-mode identification remain local welds."
   }
 
 data ClassicalParallelPlateExpansionAutomaticallyIsCasimirHilbertCompleteness : Set where
 
+data ExceptionalZeroModeAutomaticallyMeansLegacyTEorTMZero : Set where
+
 classicalExpansionNeedsCasimirCarrierWeld :
   ClassicalParallelPlateExpansionAutomaticallyIsCasimirHilbertCompleteness → ⊥
 classicalExpansionNeedsCasimirCarrierWeld ()
+
+zeroModeMustNotBeFlattenedBackToLegacyTETM :
+  ExceptionalZeroModeAutomaticallyMeansLegacyTEorTMZero → ⊥
+zeroModeMustNotBeFlattenedBackToLegacyTETMZero
+  where
+    LegacyTETMZero : Set
+    LegacyTETMZero = ExceptionalZeroModeAutomaticallyMeansLegacyTEorTMZero
