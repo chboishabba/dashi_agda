@@ -19,10 +19,9 @@ import DASHI.Physics.QuantumVacuum.Casimir720FactorisationBidiExact as C720
 ------------------------------------------------------------------------
 -- CASIMIR BIDI ENDGAME ROUTER V6
 --
--- Maxwell source transport is now compiled into the proof-bearing completeness
--- receipt at the capstone: field spanning and longitudinal coverage come from
--- the bounded source after one same-object mode-space weld; exact zero-sector
--- counting, transverse completion and TE/TM independence remain local.
+-- One source-to-Casimir finite-energy/mode-space weld now feeds field spanning,
+-- transverse coverage and longitudinal coverage.  Exact zero-sector counting
+-- and TE/TM independence remain genuinely local Maxwell payments.
 ------------------------------------------------------------------------
 
 record CanonicalCasimirEndgameBundle
@@ -173,7 +172,7 @@ compileCanonicalEndgame
   ; sameLongitudinalDefect = sameLongitudinalDefectAcrossRenormalisationAndZetaEvidence B
   ; sameSeparation = sameSeparationParameterAcrossAllStagesEvidence B
   ; reading =
-      "V6 canonical endgame: the bounded parallel-plate source compiles field spanning and longitudinal coverage into the proof-bearing Maxwell completeness receipt; only local Hilbert/transverse/independence/zero-sector semantics remain."
+      "V6 canonical endgame: one source-to-Casimir finite-energy mode-space weld feeds field spanning, transverse coverage and longitudinal coverage; only local TE/TM independence and zero-sector counting remain in that family."
   }
 
 ------------------------------------------------------------------------
@@ -183,7 +182,6 @@ compileCanonicalEndgame
 record ReverseV6EndgameObligations : Set where
   field
     maxwellModeObjectAndFiniteEnergyHilbertWeld : Set
-    maxwellTransverseCompleteness : Set
     maxwellTETMIndependenceAwayFromZeroSector : Set
     maxwellExactZeroSectorCounting : Set
     sharedClassicalBishopTrigObjectWeld : Set
@@ -196,26 +194,28 @@ open ReverseV6EndgameObligations public
 
 data PrebuiltMaxwellCompletenessReceiptStillRequired : Set where
 
-data SeparateSourceSpanningAndLongitudinalReceiptsStillRequired : Set where
+data SeparateSourceSpanningTransverseAndLongitudinalReceiptsStillRequired : Set where
 
 maxwellCompletenessNowCompiled :
   PrebuiltMaxwellCompletenessReceiptStillRequired → ⊥
 maxwellCompletenessNowCompiled ()
 
-oneSourceModeObjectWeldFeedsBoth :
-  SeparateSourceSpanningAndLongitudinalReceiptsStillRequired → ⊥
-oneSourceModeObjectWeldFeedsBoth ()
+oneSourceModeObjectWeldFeedsAllCoverage :
+  SeparateSourceSpanningTransverseAndLongitudinalReceiptsStillRequired → ⊥
+oneSourceModeObjectWeldFeedsAllCoverage ()
 
 record Status : Set where
   field
     v6MaxwellCompilerRouterOwned : Bool
     sourceBackedFieldSpanningCompiled : Bool
+    sourceBackedTransverseCoverageCompiled : Bool
     sourceBackedLongitudinalCoverageCompiled : Bool
     prebuiltMaxwellReceiptPruned : Bool
     remainingProducerFamilies : Nat
 
     v6MaxwellCompilerRouterOwnedIsTrue : v6MaxwellCompilerRouterOwned ≡ true
     sourceBackedFieldSpanningCompiledIsTrue : sourceBackedFieldSpanningCompiled ≡ true
+    sourceBackedTransverseCoverageCompiledIsTrue : sourceBackedTransverseCoverageCompiled ≡ true
     sourceBackedLongitudinalCoverageCompiledIsTrue : sourceBackedLongitudinalCoverageCompiled ≡ true
     prebuiltMaxwellReceiptPrunedIsTrue : prebuiltMaxwellReceiptPruned ≡ true
     remainingProducerFamiliesIsFive : remainingProducerFamilies ≡ 5
@@ -226,11 +226,13 @@ canonicalStatus : Status
 canonicalStatus = record
   { v6MaxwellCompilerRouterOwned = true
   ; sourceBackedFieldSpanningCompiled = true
+  ; sourceBackedTransverseCoverageCompiled = true
   ; sourceBackedLongitudinalCoverageCompiled = true
   ; prebuiltMaxwellReceiptPruned = true
   ; remainingProducerFamilies = 5
   ; v6MaxwellCompilerRouterOwnedIsTrue = refl
   ; sourceBackedFieldSpanningCompiledIsTrue = refl
+  ; sourceBackedTransverseCoverageCompiledIsTrue = refl
   ; sourceBackedLongitudinalCoverageCompiledIsTrue = refl
   ; prebuiltMaxwellReceiptPrunedIsTrue = refl
   ; remainingProducerFamiliesIsFive = refl
