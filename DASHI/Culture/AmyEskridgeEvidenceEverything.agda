@@ -12,6 +12,7 @@ import DASHI.Core.OpenScienceKnowledgeReleaseBidiExact
 import DASHI.Core.KnowledgeBoundaryTransitionBidiExact
 import DASHI.Core.KnowledgeBoundaryCandidateIdentityBidiExact
 import DASHI.Core.KnowledgeObjectLineageBidiExact
+import DASHI.Core.LayeredKnowledgeReleaseBidiExact
 import DASHI.Culture.AmyEskridgeEvidenceHyperfabricExact
 import DASHI.Culture.AmyEskridgeEvidenceCrossPollinationExact
 import DASHI.Culture.AmyEskridgeAcquisitionProofSearchExact
@@ -19,6 +20,7 @@ import DASHI.Culture.AmyEskridgeKnowledgeBoundaryTransitionExact
 import DASHI.Culture.AmyEskridgePOAMSBoundaryCandidateExact
 import DASHI.Culture.AmyEskridgePOAMSObjectLineageExact
 import DASHI.Culture.POAMSProprietaryPeriodBoundaryExact
+import DASHI.Culture.POAMSLayeredReleaseExact
 import DASHI.Culture.AmyEskridgeGravityMechanismCrossPollinationExact
 import DASHI.Culture.AmyEskridgeLiTorrMechanismBridgeExact
 import DASHI.Culture.AmyEskridgeLiTorrMagnitudeTriangleCrossPollinationExact
