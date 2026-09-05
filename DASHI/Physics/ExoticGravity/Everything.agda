@@ -2,3 +2,6 @@ module DASHI.Physics.ExoticGravity.Everything where
 
 import DASHI.Physics.ExoticGravity.EngineeredInertialGravitationalHyperfabricExact
 import DASHI.Physics.ExoticGravity.EngineeredInertialGravitationalBidiExact
+import DASHI.Physics.ExoticGravity.LiTorrCoupledPotentialModelExact
+import DASHI.Physics.ExoticGravity.LiTorrKowittMagnitudeDisputeBidiExact
+import DASHI.Physics.ExoticGravity.LiTorrExperimentalDiscriminatorBidiExact
