@@ -56,6 +56,7 @@ import DASHI.Control.McCaslandFaultTolerantFlexibleStructureControlBidiExact
 import DASHI.Control.McCaslandGramianPlacementAlgorithmDepthExact
 import DASHI.Control.McCaslandFailureSetPlacementCompilerExact
 import DASHI.Control.McCaslandFiniteFailureFamilyScoreExact
+import DASHI.Control.McCaslandBeamPlacementFiniteEngineExact
 
 import DASHI.Physics.Plasma.LoureiroViriatoPlasmoidBidiExact
 import DASHI.Physics.Plasma.LoureiroTearingMediatedMHDTurbulenceBidiExact
@@ -63,6 +64,7 @@ import DASHI.Physics.Plasma.LoureiroKREHMHermiteEquationDepthExact
 import DASHI.Physics.Plasma.LoureiroTearingCrossoverCompilerExact
 import DASHI.Physics.Plasma.LoureiroHermiteClosureReceiptExact
 import DASHI.Physics.Plasma.LoureiroCrossoverExponentDerivationExact
+import DASHI.Physics.Plasma.LoureiroBetaZeroCrossoverComputationExact
 
 import DASHI.Physics.Nuclear.LeBlancFissionSurfacePowerICBidiExact
 import DASHI.Physics.Nuclear.LeBlancFSPICQualificationDepthExact
@@ -77,11 +79,13 @@ import DASHI.Physics.Materials.RezaBurnResistantAlloyBidiExact
 import DASHI.Physics.Materials.RezaGammaPrimeBurnStrengthTradeoffDepthExact
 import DASHI.Physics.Materials.RezaTestedAlloyTradeoffMatrixExact
 import DASHI.Physics.Materials.RezaParetoWitnessExact
+import DASHI.Physics.Materials.RezaExample12NonDominanceClosedExact
 
 import DASHI.Physics.Astrophysics.GrillmairStellarStreamBidiExact
 import DASHI.Physics.Astrophysics.GrillmairMatchedFilterOrbitDepthExact
 import DASHI.Physics.Astrophysics.GrillmairDistanceScanMatchedFilterCompilerExact
 import DASHI.Physics.Astrophysics.GrillmairExecutableDistanceScanExact
+import DASHI.Physics.Astrophysics.GrillmairFiniteDistanceGridOrderExact
 
 import DASHI.Physics.Planetary.HicksSmallBodyPhotometryBidiExact
 import DASHI.Physics.Planetary.HicksCometAsteroidSpecificWorksBidiExact
