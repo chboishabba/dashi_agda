@@ -3,9 +3,11 @@ module DASHI.Analysis.NonArchimedeanSpectralObligationRoutingExact where
 ------------------------------------------------------------------------
 -- Typed claim-specific reverse routing.
 --
--- This avoids string-dispatch entirely.  Targets route to a list of exact
--- producer obligations so a multi-coordinate cutset is not collapsed into one
--- generic missing-proof label.
+-- After the finite-core reuse pass, the spatial spectral target has one
+-- source-specific producer only: instantiate the concrete Lean ZMod-2 sheet
+-- model in the owned DASHI binary-sheet/twisted-restriction adapter.  Character
+-- labels, scalar action, period, orbit weight, signed return, and literal matrix
+-- equality are now compiler output from existing source/repo owners.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -22,12 +24,7 @@ data SpectralTarget : Set where
 
 
 data ProducerObligation : Set where
-  concreteTwistedCharacterRechart : ProducerObligation
-  concreteGroupLabelling : ProducerObligation
-  concreteScalarActionWeld : ProducerObligation
-  concretePeriodAttachment : ProducerObligation
-  concreteOrbitWeightAttachment : ProducerObligation
-  orbitPartitionReceipt : ProducerObligation
+  concreteSourceSheetAdapter : ProducerObligation
   graphToDecompositionConstruction : ProducerObligation
   activeSetDepthDecayBound : ProducerObligation
   entropySameObjectReceipt : ProducerObligation
@@ -35,12 +32,7 @@ data ProducerObligation : Set where
 
 reverseRoute : SpectralTarget → List ProducerObligation
 reverseRoute spatialSpectralCircle =
-  concreteTwistedCharacterRechart ∷
-  concreteGroupLabelling ∷
-  concreteScalarActionWeld ∷
-  concretePeriodAttachment ∷
-  concreteOrbitWeightAttachment ∷
-  []
+  concreteSourceSheetAdapter ∷ []
 reverseRoute orbitProductInterpretation = []
 reverseRoute arbitraryDagAdelicCover = graphToDecompositionConstruction ∷ []
 reverseRoute depthDecaySparsity = activeSetDepthDecayBound ∷ []
@@ -49,12 +41,7 @@ reverseRoute ropeModelOptimality = transformerLossOrFidelityTheorem ∷ []
 
 spatialRouteExact :
   reverseRoute spatialSpectralCircle
-  ≡ concreteTwistedCharacterRechart ∷
-    concreteGroupLabelling ∷
-    concreteScalarActionWeld ∷
-    concretePeriodAttachment ∷
-    concreteOrbitWeightAttachment ∷
-    []
+  ≡ concreteSourceSheetAdapter ∷ []
 spatialRouteExact = refl
 
 orbitProductRouteExact :
