@@ -11,9 +11,11 @@ import DASHI.Cognition.PNF.SensibLawMaboRecognitionCoordinateFactorisationExact 
 import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityParserBatchV02Exact as Batch
 import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityPropositionWeldExact as Primary
 import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityUseUpgradeExact as Upgrade
+import DASHI.Cognition.PNF.SensibLawCalderAuthoritativeTranscriptionVerificationExact as Verify
 
 ------------------------------------------------------------------------
--- Evidence grade after consuming primary-authority-parser-batch-v0.2.
+-- Evidence grade after consuming primary-authority-parser-batch-v0.2 and
+-- the independent Supreme Court of Canada transcription verification.
 ------------------------------------------------------------------------
 
 data PrimaryEvidenceGrade : Set where
@@ -30,6 +32,7 @@ data RefinedCoordinateState : Set where
   strengthenedByPrimaryOcr
   strengthenedByPrimaryTextNative
   primaryInterpretiveContrastLocated
+  authoritativePrimaryContrastVerified
   coordinateResolved
   : RefinedCoordinateState
 
@@ -57,9 +60,9 @@ radicalTitleAfterV02 = refinedCoordinateReceipt
 continuityAfterV02 : RefinedCoordinateReceipt
 continuityAfterV02 = refinedCoordinateReceipt
   Factor.continuityAcrossSovereignty
-  strengthenedByPrimaryTextNative
-  reviewedPrimaryPropositionEvidence
-  "Amodu text-native cession/continuity propositions plus Calder Hall OCR continuity propositions; strongest source grade is the text-native Amodu primary path"
+  authoritativePrimaryContrastVerified
+  authoritativeTranscriptionVerified
+  "Amodu text-native continuity propositions plus Hall continuity/survival propositions independently verified against the Supreme Court of Canada Calder transcription"
   false refl false refl
 
 enforceabilityAfterV02 : RefinedCoordinateReceipt
@@ -73,9 +76,9 @@ enforceabilityAfterV02 = refinedCoordinateReceipt
 recognitionRequirementAfterV02 : RefinedCoordinateReceipt
 recognitionRequirementAfterV02 = refinedCoordinateReceipt
   Factor.crownRecognitionRequirement
-  primaryInterpretiveContrastLocated
-  primaryOcrParserEvidence
-  "Calder Hall OCR-primary propositions deny affirmative sovereign recognition as prerequisite while Dawson's reviewed Mabo use reads Calder through recognition; exact OCR/transcription verification remains open"
+  authoritativePrimaryContrastVerified
+  authoritativeTranscriptionVerified
+  "Hall's recognition-not-prerequisite and survival-without-recognition propositions are independently verified against the official SCC Calder transcription; these verified primary propositions contrast with Dawson's reviewed Calder recognition reading"
   false refl false refl
 
 authorityInterpretationAfterV02 : RefinedCoordinateReceipt
@@ -83,15 +86,15 @@ authorityInterpretationAfterV02 = refinedCoordinateReceipt
   Factor.authorityInterpretation
   primaryInterpretiveContrastLocated
   primaryOcrParserEvidence
-  "Judson OCR-primary recognised/unrecognised-title discussion plus Hall recognition-independence passages now permit proposition-level authority-use comparison, but OCR remains a source-quality residual"
+  "Hall recognition-independence propositions are SCC-transcription verified, but the separate Judson recognised/unrecognised-title OCR specimen remains OCR-derived if exact Judson proposition identity is required"
   false refl false refl
 
 ------------------------------------------------------------------------
--- Query-specific residuals after v0.2.
+-- Query-specific residuals after authoritative Hall verification.
 ------------------------------------------------------------------------
 
 data PostV02Residual : Set where
-  verifyCalderOcrAgainstAuthoritativeText
+  verifyRemainingCalderJudsonOcrIfNeeded
   compareHallRecognitionIndependenceWithDawsonUse
   compareAmoduContinuityWithDawsonRecognitionUse
   reconcileContinuityAndRecognitionCoordinates
@@ -120,29 +123,29 @@ open PostV02WorkPlan public
 postV02Plan : Factor.RecognitionQuery → PostV02WorkPlan
 postV02Plan Factor.identifyContinuityRule = postV02WorkPlan
   Factor.identifyContinuityRule
-  (verifyCalderOcrAgainstAuthoritativeText ∷ compareAmoduContinuityWithDawsonRecognitionUse ∷ [])
+  (compareAmoduContinuityWithDawsonRecognitionUse ∷ reconcileContinuityAndRecognitionCoordinates ∷ [])
   comparePropositionsWork false refl false refl
-  "v0.2 already provides Amodu primary parser evidence and Calder Hall OCR; continuity work now compares propositions and verifies Calder OCR rather than retrieving/reparsing sources"
+  "Hall continuity/survival text is now SCC-transcription verified; continuity work is proposition-level comparison/synthesis, not OCR recovery or parser rerun"
 postV02Plan Factor.identifyCrownRecognitionRule = postV02WorkPlan
   Factor.identifyCrownRecognitionRule
-  (verifyCalderOcrAgainstAuthoritativeText ∷ compareHallRecognitionIndependenceWithDawsonUse ∷ [])
-  verifySourceWork false refl false refl
-  "recognition requirement now has a located Hall-v-Dawson interpretive contrast; authoritative Calder transcription verification is the leading source residual"
+  (compareHallRecognitionIndependenceWithDawsonUse ∷ reconcileContinuityAndRecognitionCoordinates ∷ [])
+  comparePropositionsWork false refl false refl
+  "Hall recognition-independence text is now SCC-transcription verified; the leading residual is interpretation of Hall against Dawson, not transcription recovery"
 postV02Plan Factor.identifyRecognitionByConductRule = postV02WorkPlan
   Factor.identifyRecognitionByConductRule
-  (verifyCalderOcrAgainstAuthoritativeText ∷ compareHallRecognitionIndependenceWithDawsonUse ∷ [])
+  (compareHallRecognitionIndependenceWithDawsonUse ∷ verifyRemainingCalderJudsonOcrIfNeeded ∷ [])
   comparePropositionsWork false refl false refl
-  "recognition-by-conduct analysis can proceed from Dawson plus Calder OCR-primary material, but OCR provenance blocks exact primary proposition promotion"
+  "Hall source-quality residual is paid; exact Judson OCR verification remains conditional only if the Judson-side authority interpretation is needed to decide recognition-by-conduct"
 postV02Plan Factor.identifyEnforceabilityStructure = postV02WorkPlan
   Factor.identifyEnforceabilityStructure
   (compareAmoduContinuityWithDawsonRecognitionUse ∷ [])
   comparePropositionsWork false refl false refl
-  "Amodu text-native primary parser evidence is already available; no further parser/source retrieval is required for the current enforceability discriminator"
+  "Amodu text-native primary evidence is already available; no further parser/source retrieval is required for the current enforceability discriminator"
 postV02Plan Factor.identifyExactUnifiedTheory = postV02WorkPlan
   Factor.identifyExactUnifiedTheory
-  (verifyCalderOcrAgainstAuthoritativeText ∷ reconcileContinuityAndRecognitionCoordinates ∷ synthesizeExactUnifiedTheory ∷ [])
+  (verifyRemainingCalderJudsonOcrIfNeeded ∷ reconcileContinuityAndRecognitionCoordinates ∷ synthesizeExactUnifiedTheory ∷ [])
   synthesizeTheoryWork false refl false refl
-  "exact unified theory remains open after v0.2; source-quality verification and cross-coordinate synthesis remain distinct obligations"
+  "Hall transcription-quality residual is closed; exact unified theory remains open because cross-coordinate jurisprudential synthesis and, if material, exact Judson verification remain separate obligations"
 
 continuityV02Plan : PostV02WorkPlan
 continuityV02Plan = postV02Plan Factor.identifyContinuityRule
@@ -158,8 +161,18 @@ recognitionNoLongerNeedsPrimaryParserRun = refl
 enforceabilityNoLongerNeedsPrimaryParserRun : parserRerunRequired enforceabilityV02Plan ≡ false
 enforceabilityNoLongerNeedsPrimaryParserRun = refl
 
+continuityNoLongerHasHallVerificationResidual :
+  residuals continuityV02Plan ≡
+  (compareAmoduContinuityWithDawsonRecognitionUse ∷ reconcileContinuityAndRecognitionCoordinates ∷ [])
+continuityNoLongerHasHallVerificationResidual = refl
+
+recognitionNoLongerHasHallVerificationResidual :
+  residuals recognitionV02Plan ≡
+  (compareHallRecognitionIndependenceWithDawsonUse ∷ reconcileContinuityAndRecognitionCoordinates ∷ [])
+recognitionNoLongerHasHallVerificationResidual = refl
+
 ------------------------------------------------------------------------
--- Exact evidence-presence witnesses from the new batch.
+-- Exact evidence-presence and source-verification witnesses.
 ------------------------------------------------------------------------
 
 amoduRadicalTextNative : Batch.projectionKind Batch.amoduRadicalTitleSpecimen ≡ Batch.textNativePdfProjection
@@ -170,6 +183,17 @@ calderHallIndependentIsOcr : Batch.projectionKind Batch.calderHallIndependentTit
 calderHallIndependentIsOcr = refl
 calderHallExtinguishmentIsOcr : Batch.projectionKind Batch.calderHallExtinguishmentContinuitySpecimen ≡ Batch.ocrDerivedProjection
 calderHallExtinguishmentIsOcr = refl
+
+hallIndependentNowAuthoritativelyVerified : Verify.authoritativeTranscriptionVerified Verify.hallIndependentTitleVerified ≡ true
+hallIndependentNowAuthoritativelyVerified = refl
+hallRecognitionNowAuthoritativelyVerified : Verify.authoritativeTranscriptionVerified Verify.hallRecognitionNotPrerequisiteVerified ≡ true
+hallRecognitionNowAuthoritativelyVerified = refl
+hallSurvivalNowAuthoritativelyVerified : Verify.authoritativeTranscriptionVerified Verify.hallSurvivalWithoutRecognitionVerified ≡ true
+hallSurvivalNowAuthoritativelyVerified = refl
+hallContinuityNowAuthoritativelyVerified : Verify.authoritativeTranscriptionVerified Verify.hallContinuityPresumptionVerified ≡ true
+hallContinuityNowAuthoritativelyVerified = refl
+hallClearPlainNowAuthoritativelyVerified : Verify.authoritativeTranscriptionVerified Verify.hallClearPlainBurdenVerified ≡ true
+hallClearPlainNowAuthoritativelyVerified = refl
 
 calderRecognitionContrastLocated : Upgrade.relation Upgrade.dawsonCalderRecognitionWeld ≡ Upgrade.primaryContrastsLaterUse
 calderRecognitionContrastLocated = refl
@@ -183,18 +207,18 @@ brennanAmoduRadicalSupported = refl
 ------------------------------------------------------------------------
 
 data PrimaryParserEvidenceMeansCoordinateResolved : Set where
-data OcrLocatedContrastMeansAuthoritativeTranscription : Set where
+data AuthoritativeTranscriptionMeansCoordinateResolved : Set where
 data TextNativeAmoduEvidenceResolvesExactMaboTheory : Set where
-data V02EliminatesAllSourceResiduals : Set where
+data HallVerificationEliminatesAllCalderResiduals : Set where
 data ParserRunDeterminesLaterAuthorityInterpretation : Set where
 
 primaryParserEvidenceDoesNotResolveCoordinate : PrimaryParserEvidenceMeansCoordinateResolved → ⊥
 primaryParserEvidenceDoesNotResolveCoordinate ()
-ocrContrastDoesNotVerifyTranscription : OcrLocatedContrastMeansAuthoritativeTranscription → ⊥
-ocrContrastDoesNotVerifyTranscription ()
+authoritativeTranscriptionDoesNotResolveCoordinate : AuthoritativeTranscriptionMeansCoordinateResolved → ⊥
+authoritativeTranscriptionDoesNotResolveCoordinate ()
 amoduEvidenceDoesNotResolveExactMaboTheory : TextNativeAmoduEvidenceResolvesExactMaboTheory → ⊥
 amoduEvidenceDoesNotResolveExactMaboTheory ()
-v02DoesNotEliminateAllResiduals : V02EliminatesAllSourceResiduals → ⊥
-v02DoesNotEliminateAllResiduals ()
+hallVerificationDoesNotEliminateAllCalderResiduals : HallVerificationEliminatesAllCalderResiduals → ⊥
+hallVerificationDoesNotEliminateAllCalderResiduals ()
 parserRunDoesNotDetermineLaterInterpretation : ParserRunDeterminesLaterAuthorityInterpretation → ⊥
 parserRunDoesNotDetermineLaterInterpretation ()
