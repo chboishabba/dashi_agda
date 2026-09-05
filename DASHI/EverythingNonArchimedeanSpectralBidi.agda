@@ -73,8 +73,8 @@ import DASHI.Analysis.NonArchimedeanSigmaAnchorSameObjectBidiExact
 
 -- Corrected finite Markov/mixing route.  Both the source C=1 L2 estimate and
 -- its advertised universal inverse-sqrt-two stopping-survival tail are refuted
--- by exact n=3 witnesses.  Viable repairs use finite prefactors and weaker,
--- set-dependent killed-chain bounds.
+-- by exact n=3 witnesses.  Viable repairs use finite prefactors and a
+-- constructive finite hitting-block route rather than non-normal interlacing.
 import DASHI.Analysis.NonArchimedeanContinuousMixingBidiExact
 import DASHI.Analysis.NonArchimedeanMixingRateNormalizationExact
 import DASHI.Analysis.NonArchimedeanMeanZeroInvariantCompilerExact
@@ -86,6 +86,8 @@ import DASHI.Analysis.NonArchimedeanExplicitSquaredMixingPrefactorExact
 import DASHI.Analysis.NonArchimedeanPrefactoredL2PowerCompilerExact
 import DASHI.Analysis.NonArchimedeanFourierShellEnergyAssemblyBidiExact
 import DASHI.Analysis.NonArchimedeanStoppingSurvivalN3CounterexampleExact
+import DASHI.Analysis.NonArchimedeanForwardTranslationIrreducibilityCompilerExact
+import DASHI.Analysis.NonArchimedeanSetDependentStoppingTailBidiExact
 import DASHI.Analysis.NonArchimedeanStoppingTimeAuthorityBidiExact
 
 import DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact
