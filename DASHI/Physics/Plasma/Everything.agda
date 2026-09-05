@@ -77,4 +77,5 @@ import DASHI.Physics.Plasma.MHDMagneticHelicityCurlPairingReductionExact
 import DASHI.Physics.Plasma.MHDMagneticHelicityLegTripleAmplitudeExact
 import DASHI.Physics.Plasma.MHDMagneticHelicityTriplePairCancellationExact
 import DASHI.Physics.Plasma.MHDLiteralMagneticHelicityTriadConservationExact
+import DASHI.Physics.Plasma.MHDLiteralIdealInvariantTriadCompilerExact
 import DASHI.Physics.Plasma.LoureiroViriatoPlasmoidBidiExact
