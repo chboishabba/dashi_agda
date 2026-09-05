@@ -28,6 +28,8 @@ import DASHI.Cognition.PNF.SensibLawMaboPrimaryTextParserBatchMaterialisedExact 
 import DASHI.Cognition.PNF.SensibLawMaboBrennanDawsonIssueResidualLiveExact as Mabo
 import DASHI.Cognition.PNF.SensibLawMaboRecognitionBasisAuthorityEvidenceExact as MaboAuthority
 import DASHI.Cognition.PNF.SensibLawMaboRecognitionBasisDiscriminatorClosureExact as MaboClosure
+import DASHI.Cognition.PNF.SensibLawMaboRecognitionCoordinateFactorisationExact as MaboFactor
+import DASHI.Cognition.PNF.SensibLawMaboRecognitionFactorisedReversePlannerExact as MaboPlanner
 
 pdfReusesAttribution : Planner.action Pdf.attributionPlan ≡ Planner.reuseExisting
 pdfReusesAttribution = refl
@@ -133,27 +135,52 @@ maboParserDoesNotCreateHolding = Mabo.parserCandidateDoesNotCreateHolding
 maboFiveParagraphBatchDoesNotClaimGeneralCoverage : MaboBatch.FiveParagraphBatchIsGeneralParserCoverage → ⊥
 maboFiveParagraphBatchDoesNotClaimGeneralCoverage = MaboBatch.fiveParagraphBatchDoesNotClaimGeneralCoverage
 
-maboAuthorityUseContrastClosesCoarseBasisConsumer :
-  MaboClosure.goalStatus MaboClosure.listCompatibleRecognitionBases MaboClosure.recognitionBasisReceipt
-  ≡ MaboClosure.goalClosed
+maboAuthorityUseContrastClosesCoarseBasisConsumer : MaboClosure.goalStatus MaboClosure.listCompatibleRecognitionBases MaboClosure.recognitionBasisReceipt ≡ MaboClosure.goalClosed
 maboAuthorityUseContrastClosesCoarseBasisConsumer = refl
-
-maboExactJurisprudentialTheoryRemainsOpen :
-  MaboClosure.goalStatus MaboClosure.identifyExactExhaustiveJurisprudentialTheory MaboClosure.recognitionBasisReceipt
-  ≡ MaboClosure.goalOpen
+maboExactJurisprudentialTheoryRemainsOpen : MaboClosure.goalStatus MaboClosure.identifyExactExhaustiveJurisprudentialTheory MaboClosure.recognitionBasisReceipt ≡ MaboClosure.goalOpen
 maboExactJurisprudentialTheoryRemainsOpen = refl
-
 maboAmoduSameAuthorityDifferentUse : MaboAuthority.SharedAuthorityUseContrast MaboAuthority.brennanAmoduUse MaboAuthority.dawsonAmoduUse
 maboAmoduSameAuthorityDifferentUse = MaboAuthority.amoduUseContrast
-
 maboCalderSameAuthorityDifferentUse : MaboAuthority.SharedAuthorityUseContrast MaboAuthority.brennanCalderUse MaboAuthority.dawsonCalderUse
 maboCalderSameAuthorityDifferentUse = MaboAuthority.calderUseContrast
-
 maboSharedCitationDoesNotForceSharedMeaning : MaboClosure.SharedCitationClosesSharedMeaning → ⊥
 maboSharedCitationDoesNotForceSharedMeaning = MaboClosure.sharedCitationDoesNotCloseMeaning
-
 maboCitationDoesNotEqualAdoption : MaboAuthority.CitationMeansAdoption → ⊥
 maboCitationDoesNotEqualAdoption = MaboAuthority.aCitationDoesNotMeanAdoption
+
+------------------------------------------------------------------------
+-- FACTORISED RECOGNITION COORDINATES + QUERY-INDEXED SEARCH.
+------------------------------------------------------------------------
+
+maboRecognitionByConductDoesNotProveContinuity : MaboFactor.RecognitionByConductProvesContinuity → ⊥
+maboRecognitionByConductDoesNotProveContinuity = MaboFactor.recognitionByConductDoesNotProveContinuity
+
+maboContinuityDoesNotProveRecognitionByConduct : MaboFactor.ContinuityProvesRecognitionByConduct → ⊥
+maboContinuityDoesNotProveRecognitionByConduct = MaboFactor.continuityDoesNotProveRecognitionByConduct
+
+maboCalderSameAuthorityDifferentCoordinates : MaboFactor.SameAuthorityDifferentCoordinateReceipt
+maboCalderSameAuthorityDifferentCoordinates = MaboFactor.calderCoordinateContrast
+
+maboAmoduSameAuthorityDifferentCoordinates : MaboFactor.SameAuthorityDifferentCoordinateReceipt
+maboAmoduSameAuthorityDifferentCoordinates = MaboFactor.amoduCoordinateContrast
+
+maboContinuityQueryRoutesToBrennanCalder :
+  MaboPlanner.probes MaboPlanner.continuityPlan
+  ≡ (MaboPlanner.inspectBrennanContinuityPassages ∷ MaboPlanner.inspectCalderHallPassages ∷ [])
+maboContinuityQueryRoutesToBrennanCalder = refl
+
+maboRecognitionConductQueryRoutesToDawsonCalder :
+  MaboPlanner.probes MaboPlanner.recognitionConductPlan
+  ≡ (MaboPlanner.inspectDawsonAcquiescencePassages ∷ MaboPlanner.inspectCalderJudsonPassages ∷ [])
+maboRecognitionConductQueryRoutesToDawsonCalder = refl
+
+maboEnforceabilityQueryRoutesToBrennanAmodu :
+  MaboPlanner.probes MaboPlanner.enforceabilityPlan
+  ≡ (MaboPlanner.inspectBrennanRadicalTitlePassages ∷ MaboPlanner.inspectAmoduRadicalTitlePassages ∷ [])
+maboEnforceabilityQueryRoutesToBrennanAmodu = refl
+
+maboFactorisedSearchDoesNotEqualResolution : MaboPlanner.SearchPlanClosesLegalCoordinate → ⊥
+maboFactorisedSearchDoesNotEqualResolution = MaboPlanner.searchPlanDoesNotCloseCoordinate
 
 data SelectiveLegalCompilerAggregateMeansKernelValidated : Set where
 aggregateDoesNotClaimKernelValidation : SelectiveLegalCompilerAggregateMeansKernelValidated → ⊥
