@@ -181,7 +181,7 @@ sineSeriesPartialAnalyticDerivative :
       (Finite.sineAlgebraicDerivedTerm point) count)
 sineSeriesPartialAnalyticDerivative count point =
   Factor.factorDerivativeCongruence
-    (λ value → sineGenericPartialIsSeriesOf count value)
+    (λ value → BishopP.≃-symm (sineGenericPartialIsSeriesOf count value))
     (sineGenericDerivativePartialIsSeriesOf count point)
     (sineFinitePartialDerivative count point)
 
@@ -237,7 +237,7 @@ cosineSeriesOffsetPartialAnalyticDerivative :
       (Finite.cosineAlgebraicDerivedTerm point) count)
 cosineSeriesOffsetPartialAnalyticDerivative count point =
   Factor.factorDerivativeCongruence
-    (λ value → cosineOffsetIsSeriesOf count value)
+    (λ value → BishopP.≃-symm (cosineOffsetIsSeriesOf count value))
     (cosineOffsetDerivativeIsSeriesOf count point)
     (cosineOffsetPartialDerivative count point)
 
