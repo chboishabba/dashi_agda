@@ -13,11 +13,12 @@ module DASHI.Core.FinitePrefactorEnergyAssemblyExact where
 --
 --   sum_s output(s) <= sum_s envelope(C,s).
 --
--- The ordered-additive structure is reused from MDLDescentTradeoff.  This is
+-- The ordered-additive structure is reused from MDLDescentTradeoff. This is
 -- exactly the whole-level step needed after selecting a finite maximum shell
 -- prefactor.
 ------------------------------------------------------------------------
 
+open import Agda.Primitive using (lsuc; _⊔_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat using (_≤_)
