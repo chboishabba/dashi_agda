@@ -9,4 +9,6 @@ import DASHI.Law.CoerciveEncounterLawfulnessProductExact
 import DASHI.Law.TemporalAuthorityNonRetroactivityExact
 import DASHI.Law.IndependentEvidenceProvenanceExact
 import DASHI.Law.EvidenceProvenanceDependencyDagExact
+import DASHI.Law.CoerciveEncounterFixtureCompilerExact
+import DASHI.Law.CoerciveEncounterGenericReceiptBridgeExact
 import DASHI.Law.CoerciveContactAuditValidation
