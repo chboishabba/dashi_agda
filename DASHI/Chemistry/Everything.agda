@@ -46,3 +46,9 @@ import DASHI.Chemistry.OceanCarbonateSaltTemperatureStressBidiExact
 import DASHI.Chemistry.DeepTimeCarbonReservoirFluxBalanceExact
 import DASHI.Chemistry.DeepTimeCarbonPathResidualBidiExact
 import DASHI.Chemistry.CarbonForcingRateBidiExact
+
+------------------------------------------------------------------------
+-- Garlic/Allium organosulfur chemistry: allicin thiol reactivity, redox
+-- disturbance, ajoene quorum-regulation evidence, and mechanism-completeness
+-- firewalls for multi-component antimicrobial preparations.
+import DASHI.Chemistry.AlliumOrganosulfurMechanismExact
