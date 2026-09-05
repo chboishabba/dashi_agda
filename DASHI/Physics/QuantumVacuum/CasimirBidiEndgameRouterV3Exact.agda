@@ -87,16 +87,18 @@ compiledTrigDerivativeAuthority :
   ProofBearingCasimirEndgameBundle
     kernel trigProblem trigWeld metricProblem metricTail →
   Trig.Round11FactorInterchangeAuthority trigProblem
-compiledTrigDerivativeAuthority B =
-  TrigWeld.compileRound11DerivativeAuthority _ _
+compiledTrigDerivativeAuthority
+    {trigProblem = trigProblem} {trigWeld = trigWeld} B =
+  TrigWeld.compileRound11DerivativeAuthority trigProblem trigWeld
 
 compiledTrigPythagorean :
   ∀ {kernel trigProblem trigWeld metricProblem metricTail} →
   ProofBearingCasimirEndgameBundle
     kernel trigProblem trigWeld metricProblem metricTail →
   TrigWeld.Round11Pythagorean trigProblem
-compiledTrigPythagorean B =
-  TrigWeld.compileRound11Pythagorean _ _
+compiledTrigPythagorean
+    {trigProblem = trigProblem} {trigWeld = trigWeld} B =
+  TrigWeld.compileRound11Pythagorean trigProblem trigWeld
 
 compiledPolarMeasureChange :
   ∀ {kernel trigProblem trigWeld metricProblem metricTail} →
