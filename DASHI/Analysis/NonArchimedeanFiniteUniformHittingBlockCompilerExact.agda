@@ -8,10 +8,12 @@ module DASHI.Analysis.NonArchimedeanFiniteUniformHittingBlockCompilerExact where
 -- chosen word length.  This produces one uniform finite hitting-block length.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.List.Membership.Propositional using (_∈_)
-open import Data.Product using (Σ; _,_; proj₁; proj₂)
+open import Data.Nat using (_≤_)
+open import Data.Product using (Σ; _,_; proj₁)
 
 import DASHI.Analysis.NonArchimedeanForwardTranslationIrreducibilityCompilerExact as Forward
 import DASHI.Core.FiniteWitnessMaximumExact as FiniteMax
@@ -40,8 +42,6 @@ ChosenHit :
 ChosenHit data reach target state =
   Σ (Forward.ForwardWord data)
     (λ word → Forward.run data word state ≡ target)
-  where
-  open import Agda.Builtin.Equality using (_≡_)
 
 chosenHit :
   (data : Forward.ForwardTranslationData) →
@@ -83,8 +83,6 @@ record UniformHittingBlock
     chosenWordLengthBound :
       (state : Forward.State data) →
       chosenHitCost data reach target state ≤ blockLength
-  where
-  open import Data.Nat using (_≤_)
 
 open UniformHittingBlock public
 
