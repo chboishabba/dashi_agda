@@ -3,6 +3,7 @@ module DASHI.Analysis.BishopRound11PowerSeriesLocalChartExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
+import DASHI.Foundations.BishopConstructiveRealBridgeExact as Bishop
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Terms
 import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
@@ -10,10 +11,13 @@ import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
 ------------------------------------------------------------------------
 -- ROUND11 LOCAL POWER-SERIES CHART
 --
--- Before using any external termwise-differentiation theorem, record which
--- coordinates of the intended power series are already owned internally.
--- Round11 supplies the elementary-series data and a literal identification of
--- its sine/cosine terms with the signed factorial-power terms.
+-- Only proof-bearing coordinates are promoted here.  The older elementary
+-- series record also contains several Set-valued descriptive fields; those are
+-- deliberately NOT treated as evidence.  What Round11 genuinely supplies is:
+--
+--   * the literal elementary-series object;
+--   * pointwise Bishop equivalences to concrete signed factorial-power terms;
+--   * actual absolute-convergence receipts at every Bishop point.
 ------------------------------------------------------------------------
 
 record Round11LocalPowerSeriesChart : Set₁ where
@@ -26,19 +30,14 @@ record Round11LocalPowerSeriesChart : Set₁ where
     concreteTerms : Terms.ConcreteSineCosineTermIdentification dataSet
 
     sineAbsolutelyConvergentAtEveryBishopPoint :
-      (point : Elementary.Bishop.Bishopℝ) →
-      Elementary.Bishop.BishopAbsoluteSeriesConvergent
+      (point : Bishop.Bishopℝ) →
+      Bishop.BishopAbsoluteSeriesConvergent
         (Elementary.sineTerm dataSet point)
 
     cosineAbsolutelyConvergentAtEveryBishopPoint :
-      (point : Elementary.Bishop.Bishopℝ) →
-      Elementary.Bishop.BishopAbsoluteSeriesConvergent
+      (point : Bishop.Bishopℝ) →
+      Bishop.BishopAbsoluteSeriesConvergent
         (Elementary.cosineTerm dataSet point)
-
-    sineOddFactorialCoordinateOwned : Set
-    cosineEvenFactorialCoordinateOwned : Set
-    alternatingSignCoordinateOwned : Set
-    centreIsZeroCoordinateOwned : Set
 
     reading : String
 
@@ -56,26 +55,38 @@ canonicalRound11LocalPowerSeriesChart cutset = record
       Elementary.sineAbsoluteConvergence (Round11.elementarySeries cutset)
   ; cosineAbsolutelyConvergentAtEveryBishopPoint =
       Elementary.cosineAbsoluteConvergence (Round11.elementarySeries cutset)
-  ; sineOddFactorialCoordinateOwned = ⊤
-  ; cosineEvenFactorialCoordinateOwned = ⊤
-  ; alternatingSignCoordinateOwned = ⊤
-  ; centreIsZeroCoordinateOwned = ⊤
   ; reading =
-      "Round11 already owns the literal Bishop sine/cosine term families, absolute convergence, and their signed factorial-power chart."
+      "Round11 proof-bearing chart: literal sine/cosine terms are identified with concrete signed factorial powers and are absolutely convergent at every Bishop point."
   }
 
 ------------------------------------------------------------------------
--- The local chart does not itself cross from the classical DLMF derivative
--- semantics to the Bishop factor derivative.  That remains a separate bridge.
+-- The local chart does not itself cross foundations.  DLMF's theorem is stated
+-- for the classical power-series derivative; the consumer uses the Bishop
+-- division-free factor derivative.  Their relationship remains explicit.
 ------------------------------------------------------------------------
 
 record ClassicalToBishopDerivativeSemanticBridge
     (chart : Round11LocalPowerSeriesChart) : Set₁ where
   field
-    classicalPowerSeriesObjectMatchesLocalChart : Set
-    classicalInteriorDomainCoversLocalEvaluation : Set
+    ClassicalPowerSeriesObject : Set
+    classicalPowerSeriesObject : ClassicalPowerSeriesObject
+
+    sourceCoefficientAndCentreIdentification : Set
+    sourceCoefficientAndCentreIdentificationEvidence :
+      sourceCoefficientAndCentreIdentification
+
+    sourceInteriorDomainContainsRequestedPoints : Set
+    sourceInteriorDomainContainsRequestedPointsEvidence :
+      sourceInteriorDomainContainsRequestedPoints
+
     classicalTermwiseDerivativeMatchesLocalDerivedSeries : Set
+    classicalTermwiseDerivativeMatchesLocalDerivedSeriesEvidence :
+      classicalTermwiseDerivativeMatchesLocalDerivedSeries
+
     classicalDerivativeImpliesBishopFactorDerivative : Set
+    classicalDerivativeImpliesBishopFactorDerivativeEvidence :
+      classicalDerivativeImpliesBishopFactorDerivative
+
     reading : String
 
 open ClassicalToBishopDerivativeSemanticBridge public
@@ -88,26 +99,30 @@ localChartDoesNotCollapseDerivativeFoundations ()
 
 record Status : Set where
   field
-    round11LocalSeriesChartOwned : Bool
+    round11LiteralTermIdentificationOwned : Bool
     globalBishopAbsoluteConvergenceOwned : Bool
-    coefficientAndIndexChartOwned : Bool
+    descriptiveSetFieldsNotPromotedToEvidence : Bool
     crossFoundationDerivativeBridgeClosed : Bool
 
-    round11LocalSeriesChartOwnedIsTrue : round11LocalSeriesChartOwned ≡ true
-    globalBishopAbsoluteConvergenceOwnedIsTrue : globalBishopAbsoluteConvergenceOwned ≡ true
-    coefficientAndIndexChartOwnedIsTrue : coefficientAndIndexChartOwned ≡ true
-    crossFoundationDerivativeBridgeClosedIsFalse : crossFoundationDerivativeBridgeClosed ≡ false
+    round11LiteralTermIdentificationOwnedIsTrue :
+      round11LiteralTermIdentificationOwned ≡ true
+    globalBishopAbsoluteConvergenceOwnedIsTrue :
+      globalBishopAbsoluteConvergenceOwned ≡ true
+    descriptiveSetFieldsNotPromotedToEvidenceIsTrue :
+      descriptiveSetFieldsNotPromotedToEvidence ≡ true
+    crossFoundationDerivativeBridgeClosedIsFalse :
+      crossFoundationDerivativeBridgeClosed ≡ false
 
 open Status public
 
 canonicalStatus : Status
 canonicalStatus = record
-  { round11LocalSeriesChartOwned = true
+  { round11LiteralTermIdentificationOwned = true
   ; globalBishopAbsoluteConvergenceOwned = true
-  ; coefficientAndIndexChartOwned = true
+  ; descriptiveSetFieldsNotPromotedToEvidence = true
   ; crossFoundationDerivativeBridgeClosed = false
-  ; round11LocalSeriesChartOwnedIsTrue = refl
+  ; round11LiteralTermIdentificationOwnedIsTrue = refl
   ; globalBishopAbsoluteConvergenceOwnedIsTrue = refl
-  ; coefficientAndIndexChartOwnedIsTrue = refl
+  ; descriptiveSetFieldsNotPromotedToEvidenceIsTrue = refl
   ; crossFoundationDerivativeBridgeClosedIsFalse = refl
   }
