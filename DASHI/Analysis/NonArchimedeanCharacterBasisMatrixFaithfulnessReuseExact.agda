@@ -12,6 +12,7 @@ module DASHI.Analysis.NonArchimedeanCharacterBasisMatrixFaithfulnessReuseExact w
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteCoordinateMatrixEquivalenceExact as Coordinate
 
@@ -26,7 +27,7 @@ basisActionDeterminesFiniteMatrix = Coordinate.matrixActionInjective
 record SpectralBasisActionWeld : Set₁ where
   field
     Scalar : Set
-    n : Agda.Builtin.Nat.Nat
+    n : Nat
     scalarLaws : Coordinate.CommutativeSemiringLaws Scalar
     conjugatedMatrix monomialMatrix : Coordinate.FiniteMatrix Scalar n
     sameAction :
