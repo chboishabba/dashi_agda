@@ -1,6 +1,7 @@
 module DASHI.Physics.Materials.RezaParetoWitnessExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Materials.RezaTestedAlloyTradeoffMatrixExact as Matrix
 
@@ -24,34 +25,56 @@ record PairwiseNonDominance (x y : Matrix.AlloyExample) : Set where
     xBetterBurn : StrictlyBetterBurn x y
     yBetterTensile : StrictlyBetterTensile y x
 
-example1HigherBurnThan2 : StrictlyBetterBurn Matrix.example1 Matrix.example2
-example1HigherBurnThan2 = strictly-better-burn (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s z≤n)))))))
+nonDominanceFromOpposedStrictAdvantages :
+  {x y : Matrix.AlloyExample} →
+  Matrix.burnThresholdPsi x > Matrix.burnThresholdPsi y →
+  Matrix.tensileKsi y > Matrix.tensileKsi x →
+  PairwiseNonDominance x y
+nonDominanceFromOpposedStrictAdvantages burn> tensile> =
+  pairwise-nondominance
+    (strictly-better-burn burn>)
+    (strictly-better-tensile tensile>)
 
--- We avoid hand-proving the full large-N inequalities here; instead expose the
--- source-owned arithmetic comparison as a typed receipt until Nat comparison
--- automation is wired into this branch.
-record SourceArithmeticComparison : Set where
-  constructor source-arithmetic-comparison
+------------------------------------------------------------------------
+-- Concrete source arithmetic frontier.
+-- Example 1 vs Example 2 is source-numerically:
+--   burn:    10000 > 7000
+--   tensile:   187 > 170
+-- We deliberately do not fake those Nat proofs with hand-written Peano chains.
+------------------------------------------------------------------------
+
+record ConcreteComparisonFrontier : Set where
+  constructor concrete-comparison-frontier
   field
-    proposition : Set
-    statement : Bool
-    statementIsTrue : statement ≡ true
+    leftLabel rightLabel : String
+    burnComparison : String
+    tensileComparison : String
+    natInequalityProofsOwned : Bool
+    natInequalityProofsOwnedIsFalse : natInequalityProofsOwned ≡ false
+    theoremConstructorReady : Bool
+    theoremConstructorReadyIsTrue : theoremConstructorReady ≡ true
 
-example1Vs2NonDominanceReceipt : SourceArithmeticComparison
-example1Vs2NonDominanceReceipt =
-  source-arithmetic-comparison
-    (PairwiseNonDominance Matrix.example1 Matrix.example2)
-    true refl
+example1Vs2Frontier : ConcreteComparisonFrontier
+example1Vs2Frontier = concrete-comparison-frontier
+  "Example 1"
+  "Example 2"
+  "10000 > 7000"
+  "187 > 170"
+  false refl
+  true refl
 
 record RezaParetoBoundary : Set where
   constructor reza-pareto-boundary
   field
-    receiptEqualsConstructedNatInequalityProof : Bool
-    receiptEqualsConstructedNatInequalityProofIsFalse :
-      receiptEqualsConstructedNatInequalityProof ≡ false
+    sourceNumericReceiptEqualsConstructedNatInequalityProof : Bool
+    sourceNumericReceiptEqualsConstructedNatInequalityProofIsFalse :
+      sourceNumericReceiptEqualsConstructedNatInequalityProof ≡ false
     lowerBoundExampleMayEnterExactDominanceTest : Bool
     lowerBoundExampleMayEnterExactDominanceTestIsFalse :
       lowerBoundExampleMayEnterExactDominanceTest ≡ false
+    opposedStrictAdvantagesSufficeForNonDominance : Bool
+    opposedStrictAdvantagesSufficeForNonDominanceIsTrue :
+      opposedStrictAdvantagesSufficeForNonDominance ≡ true
 
 canonicalRezaParetoBoundary : RezaParetoBoundary
-canonicalRezaParetoBoundary = reza-pareto-boundary false refl false refl
+canonicalRezaParetoBoundary = reza-pareto-boundary false refl false refl true refl
