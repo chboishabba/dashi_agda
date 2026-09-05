@@ -2,12 +2,14 @@ module DASHI.Physics.Plasma.MHDProjectedCrossCurlExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Primitive using (Level)
-open import Relation.Binary.PropositionalEquality using (cong; trans; _≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans; _≡_; refl)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
+import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws as Additive
+import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as Scaling
 import DASHI.Physics.Closure.NSTriadKNLerayAlgebraProgram as Leray
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact as Cross
@@ -84,39 +86,32 @@ projectedNegativeCrossIsCurl :
     (C3.complex3Negate
       (Cross.complex3Cross (C3.modeVector E k) value))
   ≡ Helical.curlSymbol E k value
-projectedNegativeCrossIsCurl E I k value =
+projectedNegativeCrossIsCurl {F = F} E I k value =
   trans
     (cong
-      (C3.complex3Scale (C3.complexNegate (C3.complexI _)))
+      (C3.complex3Scale (C3.complexNegate (C3.complexI F)))
       (Leray.lerayFixesTransverse E I k
         (C3.complex3Negate
           (Cross.complex3Cross (C3.modeVector E k) value))
         negatedTransverse))
     (minusIMinusCrossIsCurl E k value)
   where
+  crossValue = Cross.complex3Cross (C3.modeVector E k) value
+
   negatedTransverse :
-    Helical.Transverse E k
-      (C3.complex3Negate
-        (Cross.complex3Cross (C3.modeVector E k) value))
+    Helical.Transverse E k (C3.complex3Negate crossValue)
   negatedTransverse =
     trans
       (cong
         (λ v → C3.bilinearDot3 (C3.modeVector E k) v)
-        (sym
-          (DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws.complex3ScaleMinusOne
-            (Cross.complex3Cross (C3.modeVector E k) value))))
+        (sym (Additive.complex3ScaleMinusOne crossValue)))
       (trans
-        (DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws.bilinearDot3ScaleRight
-          (DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws.minusOne _)
-          (C3.modeVector E k)
-          (Cross.complex3Cross (C3.modeVector E k) value))
+        (Scaling.bilinearDot3ScaleRight
+          (Additive.minusOne F) (C3.modeVector E k) crossValue)
         (trans
-          (cong
-            (C3.complexMultiply
-              (DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws.minusOne _))
+          (cong (C3.complexMultiply (Additive.minusOne F))
             (crossOutputTransverse E k value))
-          (Field.complexMultiplyZeroRight
-            (DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws.minusOne _))))
+          (Field.complexMultiplyZeroRight (Additive.minusOne F))))
 
 record ProjectedCrossCurlBoundary : Set where
   constructor projected-cross-curl-boundary
