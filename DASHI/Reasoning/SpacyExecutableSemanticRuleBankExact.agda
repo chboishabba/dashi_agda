@@ -1,6 +1,7 @@
 module DASHI.Reasoning.SpacyExecutableSemanticRuleBankExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
@@ -10,21 +11,14 @@ open Candidate using
   ; DependencyWitness; DependencyShape; shape
   ; nominalSubject; directObject; passiveSubject; adjectivalModifier
   ; nominalModifier; conjunction; negation; modalAuxiliary; determiner
-  ; temporalModifier
+  ; temporalModifier; clausalComplement; openClausalComplement
+  ; adverbialClause; clausalModifier; relativeClause
   ; CandidateSemanticFragment; candidateSemanticFragment
   ; SemanticFragmentKind; actorFragment; patientFragment; propertyFragment
   ; relationFragment; conjunctionFragment; negationFragment; modalityFragment
-  ; quantifierFragment; temporalFragment; unresolvedFragment
+  ; quantifierFragment; temporalFragment; contentClauseFragment
+  ; clauseAttachmentFragment; unresolvedFragment
   )
-
-------------------------------------------------------------------------
--- EXECUTABLE SEMANTIC RULE BANK
---
--- The earlier owner established candidate semantics, but its canonical nsubj/
--- obj helpers accepted an arbitrary DependencyWitness.  This layer makes rule
--- admission proof-relevant: each executable rule requires evidence that the
--- witness really has the dependency shape licensed by that rule.
-------------------------------------------------------------------------
 
 record ShapeAdmission
     (witness : DependencyWitness)
@@ -135,11 +129,6 @@ conjunctionRule witness admission left right =
     (ruleVersionReference admission)
     true refl
 
-------------------------------------------------------------------------
--- Determiner/quantifier semantics require both syntactic admission and a
--- lexical reading receipt.  A bare det edge does not decide forall vs exists.
-------------------------------------------------------------------------
-
 data DeterminerReading : Set where
   universalDeterminer
   existentialDeterminer
@@ -186,12 +175,6 @@ existentialDeterminerRule witness resolution variable domain body =
     (resolverReference resolution)
     true refl
 
-------------------------------------------------------------------------
--- Modal and temporal dependencies are retained as explicit qualification
--- predicates in first-order candidate semantics.  They are not given modal or
--- temporal proof rules merely because spaCy observed an auxiliary/modifier.
-------------------------------------------------------------------------
-
 modalQualificationRule :
   (witness : DependencyWitness) →
   ShapeAdmission witness modalAuxiliary →
@@ -223,11 +206,78 @@ temporalQualificationRule witness admission eventName temporalReading =
     true refl
 
 ------------------------------------------------------------------------
--- Composite constructions. Relative clauses and conditionals generally need
--- several dependency observations, so they are admitted over already-reviewed
--- candidate formulae plus an explicit attachment/marker receipt rather than by
--- pretending one dependency label uniquely determines their scope.
+-- Domain-neutral clausal rules.
 ------------------------------------------------------------------------
+
+clausalComplementRule :
+  (witness : DependencyWitness) →
+  ShapeAdmission witness clausalComplement →
+  String → String → CandidateSemanticFragment
+clausalComplementRule witness admission governorEvent contentEvent =
+  candidateSemanticFragment
+    "rulebank-ccomp-content"
+    contentClauseFragment
+    (atom "ContentClause" (Candidate.eventTerm governorEvent ∷ Candidate.eventTerm contentEvent ∷ []))
+    witness
+    "ccomp proposes governor/content-event structure; reporting, truth and legal status remain unresolved"
+    (ruleVersionReference admission)
+    true refl
+
+openClausalComplementRule :
+  (witness : DependencyWitness) →
+  ShapeAdmission witness openClausalComplement →
+  String → String → CandidateSemanticFragment
+openClausalComplementRule witness admission governorEvent contentEvent =
+  candidateSemanticFragment
+    "rulebank-xcomp-content"
+    contentClauseFragment
+    (atom "OpenContentClause" (Candidate.eventTerm governorEvent ∷ Candidate.eventTerm contentEvent ∷ []))
+    witness
+    "xcomp proposes an open clausal content relation; control/raising interpretation remains unresolved"
+    (ruleVersionReference admission)
+    true refl
+
+adverbialClauseRule :
+  (witness : DependencyWitness) →
+  ShapeAdmission witness adverbialClause →
+  String → String → CandidateSemanticFragment
+adverbialClauseRule witness admission governorEvent clauseEvent =
+  candidateSemanticFragment
+    "rulebank-advcl-attachment"
+    clauseAttachmentFragment
+    (atom "AdverbialClause" (Candidate.eventTerm governorEvent ∷ Candidate.eventTerm clauseEvent ∷ []))
+    witness
+    "advcl proposes clausal attachment; conditional/causal/temporal force needs separate composition evidence"
+    (ruleVersionReference admission)
+    true refl
+
+clausalModifierRule :
+  (witness : DependencyWitness) →
+  ShapeAdmission witness clausalModifier →
+  String → String → CandidateSemanticFragment
+clausalModifierRule witness admission governorEvent clauseEvent =
+  candidateSemanticFragment
+    "rulebank-acl-attachment"
+    clauseAttachmentFragment
+    (atom "ClausalModifier" (Candidate.eventTerm governorEvent ∷ Candidate.eventTerm clauseEvent ∷ []))
+    witness
+    "acl proposes a clausal modifier attachment without resolving legal or discourse status"
+    (ruleVersionReference admission)
+    true refl
+
+relativeClauseDependencyRule :
+  (witness : DependencyWitness) →
+  ShapeAdmission witness relativeClause →
+  String → String → CandidateSemanticFragment
+relativeClauseDependencyRule witness admission governorEvent clauseEvent =
+  candidateSemanticFragment
+    "rulebank-relcl-attachment"
+    clauseAttachmentFragment
+    (atom "RelativeClause" (Candidate.eventTerm governorEvent ∷ Candidate.eventTerm clauseEvent ∷ []))
+    witness
+    "relcl proposes relative-clause attachment; antecedent identity remains separately resolved"
+    (ruleVersionReference admission)
+    true refl
 
 record RelativeClauseComposition : Set where
   constructor relativeClauseComposition
@@ -241,8 +291,7 @@ record RelativeClauseComposition : Set where
 open RelativeClauseComposition public
 
 relativeClauseRule : RelativeClauseComposition → Formula
-relativeClauseRule composition =
-  headFormula composition ∧ clauseFormula composition
+relativeClauseRule composition = headFormula composition ∧ clauseFormula composition
 
 record ConditionalComposition : Set where
   constructor conditionalComposition
@@ -256,8 +305,7 @@ record ConditionalComposition : Set where
 open ConditionalComposition public
 
 conditionalRule : ConditionalComposition → Formula
-conditionalRule composition =
-  antecedent composition ⇒ consequent composition
+conditionalRule composition = antecedent composition ⇒ consequent composition
 
 ------------------------------------------------------------------------
 -- Hard boundaries.
@@ -267,23 +315,22 @@ record ExecutableSemanticRuleBoundary : Set where
   constructor executableSemanticRuleBoundary
   field
     arbitraryDependencyMayEnterNsubjRule : Bool
-    arbitraryDependencyMayEnterNsubjRuleIsFalse :
-      arbitraryDependencyMayEnterNsubjRule ≡ false
+    arbitraryDependencyMayEnterNsubjRuleIsFalse : arbitraryDependencyMayEnterNsubjRule ≡ false
     determinerEdgeUniquelyChoosesQuantifier : Bool
-    determinerEdgeUniquelyChoosesQuantifierIsFalse :
-      determinerEdgeUniquelyChoosesQuantifier ≡ false
+    determinerEdgeUniquelyChoosesQuantifierIsFalse : determinerEdgeUniquelyChoosesQuantifier ≡ false
     passiveSubjectDefaultsToActor : Bool
     passiveSubjectDefaultsToActorIsFalse : passiveSubjectDefaultsToActor ≡ false
     modalAuxiliaryCreatesModalTheorem : Bool
     modalAuxiliaryCreatesModalTheoremIsFalse : modalAuxiliaryCreatesModalTheorem ≡ false
     relativeClauseMayRequireCompositeEvidence : Bool
-    relativeClauseMayRequireCompositeEvidenceIsTrue :
-      relativeClauseMayRequireCompositeEvidence ≡ true
+    relativeClauseMayRequireCompositeEvidenceIsTrue : relativeClauseMayRequireCompositeEvidence ≡ true
     conditionalMayRequireCompositeEvidence : Bool
-    conditionalMayRequireCompositeEvidenceIsTrue :
-      conditionalMayRequireCompositeEvidence ≡ true
+    conditionalMayRequireCompositeEvidenceIsTrue : conditionalMayRequireCompositeEvidence ≡ true
+    clausalComplementCreatesReportingTheorem : Bool
+    clausalComplementCreatesReportingTheoremIsFalse : clausalComplementCreatesReportingTheorem ≡ false
+    clausalDependencyCreatesLegalStatus : Bool
+    clausalDependencyCreatesLegalStatusIsFalse : clausalDependencyCreatesLegalStatus ≡ false
 
 canonicalExecutableSemanticRuleBoundary : ExecutableSemanticRuleBoundary
 canonicalExecutableSemanticRuleBoundary =
-  executableSemanticRuleBoundary
-    false refl false refl false refl false refl true refl true refl
+  executableSemanticRuleBoundary false refl false refl false refl false refl true refl true refl false refl false refl
