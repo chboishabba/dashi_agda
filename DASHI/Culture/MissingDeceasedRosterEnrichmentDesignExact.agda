@@ -45,6 +45,15 @@ openScienceReleaseDesign = E.matched-reference-design
   "score O1 public technical publication, O2 open code/data/methods, O3 public technical education, O4 disclosure/transparency advocacy, O5 suppression/secrecy critique and O6 restricted-to-public same-object transfer using the identical provenance rubric for roster and controls"
   "do not count ordinary publication opportunity as a discriminating feature; do not infer O4/O5 from papers; do not infer O6 without prior-restriction + public-release + same-object receipts"
 
+externalisationDepthDesign : E.MatchedReferenceDesign
+externalisationDepthDesign = E.matched-reference-design
+  "roster technical works with stage-level evidence for public externalisation depth"
+  "matched technical peers/works selected within institution/domain/seniority/time strata before scoring externalisation stages"
+  ("institution" ∷ "technical domain" ∷ "career seniority" ∷ "publication opportunity" ∷ "public-role opportunity" ∷ "programme sensitivity" ∷ "geography/time" ∷ [])
+  true refl
+  "score problem/model/method/implementation/validation/failure-mode/artifact/public-interpretation stages with present/absent/not-inspected/conflict states; deep-positive requires model + method + validation all positively receipted"
+  "do not treat not-inspected as absent; do not drop controls because they score as deep; do not infer restricted-to-public transfer or anti-secrecy belief from externalisation depth"
+
 record CurrentRosterEnrichmentFrontier : Set where
   constructor current-roster-enrichment-frontier
   field
@@ -70,9 +79,14 @@ record CurrentRosterEnrichmentFrontier : Set where
     openScienceRosterEnrichmentEstablishedIsFalse :
       openScienceRosterEnrichmentEstablished ≡ false
 
+    externalisationDepthEnrichmentEstablished : Bool
+    externalisationDepthEnrichmentEstablishedIsFalse :
+      externalisationDepthEnrichmentEstablished ≡ false
+
 canonicalCurrentRosterEnrichmentFrontier : CurrentRosterEnrichmentFrontier
 canonicalCurrentRosterEnrichmentFrontier = current-roster-enrichment-frontier
   true refl
+  false refl
   false refl
   false refl
   false refl
