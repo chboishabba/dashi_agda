@@ -1,0 +1,284 @@
+module DASHI.Law.CoerciveContactAuditValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Law.QueenslandWandingReachabilityBidiExact as Wand
+import DASHI.Law.LowTraceCoerciveForceNonReconstructionExact as Force
+import DASHI.Law.CoerciveContactAuditHyperfabricCrossPollinationExact as Cross
+import DASHI.Law.CoerciveEncounterTrajectoryBidiExact as Trajectory
+import DASHI.Law.CoerciveEncounterLawfulnessBidiExact as Law
+import DASHI.Law.CoerciveEncounterLawfulnessProductExact as Product
+import DASHI.Law.TemporalAuthorityNonRetroactivityExact as Temporal
+import DASHI.Law.IndependentEvidenceProvenanceExact as Provenance
+import DASHI.Law.EvidenceProvenanceDependencyDagExact as Dag
+import DASHI.Law.CoerciveEncounterFixtureCompilerExact as Fixture
+import DASHI.Law.CoerciveEncounterGenericReceiptBridgeExact as Receipt
+import DASHI.Law.CoerciveEncounterPopulationAggregationExact as Population
+import DASHI.Law.SystemicCoercivePracticePromotionGateExact as Systemic
+import DASHI.Law.CoerciveEncounterDenominatorIntegrityExact as Denom
+import DASHI.Law.SelectionEligibilityDisparityBidiExact as Disparity
+import DASHI.Law.WandingOpportunityEligibilityHypervoxelExact as Opportunity
+import DASHI.Law.OpportunityConditionedSelectionDisparityExact as Conditional
+import DASHI.Law.WandingOperationDeploymentProofExact as Deployment
+import DASHI.Law.DeploymentConditionedSelectionBidiExact as DeploymentBidi
+import DASHI.Law.PartialIdentificationMissingnessBoundsExact as Bounds
+import DASHI.Law.ExactIntervalRatioSeparatorExact as Exact
+import DASHI.Law.RobustSelectionDisparityBoundsBidiExact as Robust
+import DASHI.Law.MissingnessMechanismFibreExact as Mechanism
+import DASHI.Law.MissingnessAssumptionBoundTransportBidiExact as MissingTransport
+
+firewallAndReachabilityCoexist :
+  Wand.FirewallWithReachability Wand.canonicalFirewallBoundary
+firewallAndReachabilityCoexist = Wand.canonicalFirewallReachability
+
+forceRecordNonReconstruction :
+  Force.NF.FactorsThrough Force.observe Force.actualForce → ⊥
+forceRecordNonReconstruction = Force.postEncounterRecordCannotReconstructForceHistory
+
+firstOpenEdgeRegression :
+  Trajectory.firstUnsupported
+    (Trajectory.canonicalEncounterTrajectory
+      Trajectory.supported Trajectory.supported
+      Trajectory.unsupported Trajectory.unsupported)
+  ≡ Trajectory.firstOpen (Trajectory.responsePredicateEdge Trajectory.unsupported)
+firstOpenEdgeRegression = Trajectory.canonicalFirstGapAtTransition
+
+coarseEndpointDoesNotCloseResidual :
+  Trajectory.Residual.DependencyCodeDescendsAt
+    Trajectory.trajectoryResidualObserver
+    Trajectory.coarseOutcome
+    Trajectory.inspectTransitionTable → ⊥
+coarseEndpointDoesNotCloseResidual = Trajectory.coarseOutcomeCannotRecoverTransitionResidual
+
+crossPollinatedAsymmetry :
+  Cross.ReachabilityObservabilityAsymmetry
+    (Cross.coerciveContactHypervoxel
+      Wand.canonicalFirewallBoundary
+      Force.contactElectricalLowRecord
+      (Wand.noDirectConferral Wand.canonicalFirewallReachability)
+      (Wand.searchStillReachable Wand.canonicalFirewallReachability)
+      "validation")
+crossPollinatedAsymmetry = Cross.canonicalAsymmetry
+
+occurrenceCannotCloseLawfulness :
+  Law.NF.FactorsThrough Law.occurrenceProjection Law.legalOutcomeProjection → ⊥
+occurrenceCannotCloseLawfulness = Law.occurrenceCannotReconstructLawfulness
+
+missingEvidenceDoesNotBecomeNegativeEvidence :
+  Law.closureOf Law.missingReceipt ≡ Law.openMissing
+missingEvidenceDoesNotBecomeNegativeEvidence = Law.missingReceiptRemainsOpen
+
+physicalReachabilityDoesNotEstablishLawfulReachability :
+  Law.legalReachability Law.canonicalReachableButNotLawfullyClosed ≡ Law.unreachable
+physicalReachabilityDoesNotEstablishLawfulReachability = Law.notYetLawfullyReachable Law.canonicalReachableButNotLawfullyClosed
+
+sameEvidenceContentDoesNotEstablishIndependence :
+  Provenance.NF.FactorsThrough Provenance.contentProjection Provenance.provenanceStrength → ⊥
+sameEvidenceContentDoesNotEstablishIndependence = Provenance.sameContentCannotReconstructIndependence
+
+lowAuditSurfaceHasReconstructionDeficit :
+  Provenance.AccountabilityReconstructionDeficit Provenance.canonicalLowAuditSurface
+lowAuditSurfaceHasReconstructionDeficit = Provenance.canonicalAccountabilityDeficit
+
+missingSafeguardBlocksLawfulnessClosure :
+  Product.firstOpenLawfulness
+    (Product.lawfulnessObligationVector
+      Product.coordinateClosed Product.coordinateClosed
+      Product.coordinateClosed Product.coordinateClosed
+      Product.coordinateClosed Product.coordinateOpen
+      Product.coordinateClosed Product.coordinateClosed)
+  ≡ Product.firstOpenLawfulnessCoordinate Product.safeguardCoordinate
+missingSafeguardBlocksLawfulnessClosure = Product.missingSafeguardStopsClosure
+
+laterContrabandCannotBeEarlierSearchProducer :
+  Temporal.RetroactiveProducer Temporal.contrabandAfterSearch
+laterContrabandCannotBeEarlierSearchProducer = Temporal.contrabandAfterSearchIsRetroactive
+
+downstreamDoesNotRetroactivelyCloseUpstream :
+  Temporal.downstreamClosesUpstream Temporal.canonicalDownstreamCannotRetroactivelyCloseUpstream ≡ false
+downstreamDoesNotRetroactivelyCloseUpstream = Temporal.downstreamClosesUpstreamIsFalse Temporal.canonicalDownstreamCannotRetroactivelyCloseUpstream
+
+multipleInstitutionalRecordsMayShareProducer : Dag.SharedUltimateProducer
+multipleInstitutionalRecordsMayShareProducer = Dag.canonicalSharedProducer
+
+independenceConsumerRequiresIndependentProducer :
+  Dag.reverseProvenance Dag.independentCorroborationConsumer ≡ Dag.independentProducerReceipt
+independenceConsumerRequiresIndependentProducer = Dag.independenceConsumerRequiresProducerReceipt
+
+empiricalFixtureStopsAtFirstLegalGap :
+  Fixture.firstLawfulnessResidual Fixture.canonicalMissingSafeguardFixture
+  ≡ Product.firstOpenLawfulnessCoordinate Product.safeguardCoordinate
+empiricalFixtureStopsAtFirstLegalGap = Fixture.canonicalFixtureStopsAtSafeguard
+
+downstreamSearchCannotLeapfrogFixtureGap :
+  Fixture.searchOccurred Fixture.canonicalMissingSafeguardFixture ≡ Fixture.observedTrue
+downstreamSearchCannotLeapfrogFixtureGap = Fixture.canonicalFixtureSearchCannotLeapfrogSafeguard
+
+downstreamContrabandCannotLeapfrogFixtureGap :
+  Fixture.otherContrabandFound Fixture.canonicalMissingSafeguardFixture ≡ Fixture.observedTrue
+downstreamContrabandCannotLeapfrogFixtureGap = Fixture.canonicalFixtureContrabandCannotLeapfrogSafeguard
+
+genericFixtureReceiptRemainsNonPromoting :
+  Receipt.Generic.promotesClaim Receipt.canonicalFixtureGenericReceipt ≡ false
+genericFixtureReceiptRemainsNonPromoting = Receipt.canonicalFixtureReceiptNonPromoting
+
+populationGatewayCountsPreserveTypedDenominator :
+  Population.numerator (Population.gatewayRateCounts Population.canonicalPopulation) ≡ 2
+populationGatewayCountsPreserveTypedDenominator = Population.canonicalGatewayNumerator
+
+populationLawfulnessDoesNotFollowFromSearchCount :
+  Population.numerator (Population.lawfulnessClosureRateCounts Population.canonicalPopulation) ≡ 0
+populationLawfulnessDoesNotFollowFromSearchCount = Population.canonicalLawfulnessClosedNumerator
+
+pretextClaimStillRequiresIntentProducer :
+  Systemic.firstSystemicResidual Systemic.pretextualIntent Systemic.canonicalDescriptiveOnlyCutset
+  ≡ Systemic.intentResidual
+pretextClaimStillRequiresIntentProducer = Systemic.canonicalPretextStopsAtIntent
+
+deterrenceClaimStillRequiresCounterfactual :
+  Systemic.firstSystemicResidual Systemic.causalDeterrence Systemic.canonicalDescriptiveOnlyCutset
+  ≡ Systemic.counterfactualResidual
+deterrenceClaimStillRequiresCounterfactual = Systemic.canonicalDeterrenceStillNeedsCounterfactual
+
+encounterCountDoesNotCollapseToUniquePersons :
+  Denom.encounterCount Denom.canonicalDenominatorLedger ≡ 4
+encounterCountDoesNotCollapseToUniquePersons = Denom.canonicalEncounterCount
+
+uniquePersonDenominatorRetainsDeduplication :
+  Denom.uniquePersonCount Denom.canonicalDenominatorLedger ≡ 2
+uniquePersonDenominatorRetainsDeduplication = Denom.canonicalUniquePersonCount
+
+missingStatusRemainsUnresolved :
+  Denom.interpretStatus Denom.statusMissing ≡ Denom.unresolvedStatus
+missingStatusRemainsUnresolved = Denom.missingStatusIsNotNegative
+
+scanShareDoesNotCloseSelectionDisparity :
+  Disparity.firstDisparityResidual Disparity.descriptiveSelectionDisparity Disparity.canonicalScanShareOnly
+  ≡ Disparity.eligibilityResidual
+scanShareDoesNotCloseSelectionDisparity = Disparity.scanShareDoesNotCloseSelectionDisparity
+
+causalDiscriminationNeedsCausalSelectionModel :
+  Disparity.firstDisparityResidual
+    Disparity.causalDiscrimination
+    (Disparity.selectionDisparityCutset true true true true true false "descriptive selection surface closed")
+  ≡ Disparity.causalModelResidual
+causalDiscriminationNeedsCausalSelectionModel = Disparity.causalClaimRequiresCausalModel
+
+opportunityDoesNotCollapseToEligibility : Opportunity.EligibilityClosure Opportunity.exposedEligibleNotSelected
+opportunityDoesNotCollapseToEligibility = Opportunity.canonicalEligibilityClosure
+
+deploymentDisparityCanCloseBeforeOfficerSelection :
+  Conditional.firstOpportunityDisparityResidual Conditional.deploymentOpportunityDisparity Conditional.canonicalDeploymentOnlyCutset
+  ≡ Conditional.opportunityDisparityClosed
+deploymentDisparityCanCloseBeforeOfficerSelection = Conditional.canonicalDeploymentCanCloseBeforeSelection
+
+officerSelectionStillRequiresEligibilityConditioning :
+  Conditional.firstOpportunityDisparityResidual Conditional.officerSelectionConditionalDisparity Conditional.canonicalDeploymentOnlyCutset
+  ≡ Conditional.eligibilityResidual
+officerSelectionStillRequiresEligibilityConditioning = Conditional.canonicalOfficerSelectionStillNeedsEligibility
+
+deploymentRequiresExposureSetProducer :
+  Deployment.firstOpenDeployment Deployment.canonicalDeployment
+  ≡ Deployment.firstOpenDeploymentCoordinate Deployment.exposureSetCoordinate
+deploymentRequiresExposureSetProducer = Deployment.canonicalDeploymentStopsAtExposureSet
+
+conditionalSelectionRetainsEligibleExposureDenominator :
+  Deployment.denominator (Deployment.selectedGivenOpportunityEligibility Deployment.canonicalExposureLedger) ≡ 6
+conditionalSelectionRetainsEligibleExposureDenominator = Deployment.canonicalConditionalSelectionDenominator
+
+operationAuthorisationDoesNotCloseSelectionDenominator :
+  DeploymentBidi.firstDeploymentSelectionResidual DeploymentBidi.conditionalSelectionRate DeploymentBidi.canonicalExposureSetOpenCutset
+  ≡ DeploymentBidi.exposureSetResidual
+operationAuthorisationDoesNotCloseSelectionDenominator = DeploymentBidi.canonicalConditionalSelectionStopsAtExposureSet
+
+deploymentAdjustedDisparityStillNeedsGroupLinkage :
+  DeploymentBidi.firstDeploymentSelectionResidual
+    DeploymentBidi.deploymentAdjustedGroupDisparity
+    (DeploymentBidi.deploymentSelectionCutset true true true true false true
+      "deployment/exposure/eligibility/selection closed; group linkage open")
+  ≡ DeploymentBidi.groupLinkageResidual
+deploymentAdjustedDisparityStillNeedsGroupLinkage = DeploymentBidi.canonicalAdjustedDisparityStopsAtGroupLinkage
+
+missingMassProducesBoundsNotPointEstimate :
+  Bounds.upper (Bounds.positiveCountBounds Bounds.canonicalGroupSurface) ≡ 50
+missingMassProducesBoundsNotPointEstimate = Bounds.canonicalGroupUpper
+
+selectionRateBoundsRetainUnresolvedMass :
+  Bounds.denominatorUpper (Bounds.selectionRateBounds Bounds.canonicalSelectionSurface) ≡ 53
+selectionRateBoundsRetainUnresolvedMass = Bounds.canonicalSelectionDenominatorUpper
+
+robustDisparityCanCloseBeforePointIdentification :
+  Bounds.firstMissingnessResidual Bounds.robustSelectionDisparity Bounds.canonicalBoundedButNotPointIdentified
+  ≡ Bounds.missingnessClosed
+robustDisparityCanCloseBeforePointIdentification = Bounds.robustDisparityCanCloseWithoutPointIdentification
+
+pointEstimateStillBlockedByMissingness :
+  Bounds.firstMissingnessResidual Bounds.pointIdentifiedSelectionRate Bounds.canonicalBoundedButNotPointIdentified
+  ≡ Bounds.completeObservationResidual
+pointEstimateStillBlockedByMissingness = Bounds.pointEstimateStillBlockedByMissingness
+
+exactCrossProductsDeriveRobustPositive :
+  Exact.classifyRatioBounds Exact.canonicalA Exact.canonicalSeparatedB
+  ≡ Exact.arithmeticRobustPositive
+exactCrossProductsDeriveRobustPositive = Exact.canonicalPositiveSeparation
+
+overlappingIntervalsFailClosed :
+  Exact.classifyRatioBounds Exact.canonicalA Exact.canonicalOverlapB
+  ≡ Exact.arithmeticUnidentified
+overlappingIntervalsFailClosed = Exact.canonicalOverlapUnidentified
+
+zeroDenominatorFailsClosed :
+  Exact.classifyRatioBounds Exact.zeroDenominatorBounds Exact.canonicalSeparatedB
+  ≡ Exact.malformedBounds
+zeroDenominatorFailsClosed = Exact.zeroDenominatorRejected
+
+derivedRobustSurfaceNeedsNoTrustedOrderingFlag :
+  Robust.conclusion (Robust.deriveRobustSurface Exact.canonicalA Exact.canonicalSeparatedB)
+  ≡ Robust.robustPositive
+derivedRobustSurfaceNeedsNoTrustedOrderingFlag = Robust.canonicalDerivedPositive
+
+robustDirectionDoesNotRequireExactMagnitude :
+  Robust.firstRobustResidual Robust.disparityDirection Robust.canonicalRobustButNotPointCutset
+  ≡ Robust.robustClosed
+robustDirectionDoesNotRequireExactMagnitude = Robust.robustDirectionCanCloseBeforePointMagnitude
+
+exactMagnitudeStillRequiresCompleteObservation :
+  Robust.firstRobustResidual Robust.pointMagnitude Robust.canonicalRobustButNotPointCutset
+  ≡ Robust.completeObservationResidual
+exactMagnitudeStillRequiresCompleteObservation = Robust.pointMagnitudeStillRequiresCompleteObservation
+
+unresolvedMissingnessDoesNotBecomeIndependent :
+  Mechanism.classifyMechanism Mechanism.canonicalUnrestrictedMechanism
+  ≡ Mechanism.nonIgnorableOrUnresolvedMissingness
+unresolvedMissingnessDoesNotBecomeIndependent = Mechanism.canonicalUnrestrictedClass
+
+independenceRequiresClosedDependencyFibre :
+  Mechanism.classifyMechanism Mechanism.canonicalIndependentMechanism
+  ≡ Mechanism.observationIndependentMissingness
+independenceRequiresClosedDependencyFibre = Mechanism.canonicalIndependentClass
+
+worstCaseBoundsNeedNoIndependenceAssumption :
+  MissingTransport.transportStatus MissingTransport.canonicalUnrestrictedRequest
+  ≡ MissingTransport.worstCaseRetained
+worstCaseBoundsNeedNoIndependenceAssumption = MissingTransport.canonicalUnrestrictedRetained
+
+narrowingWithoutReceiptFailsClosed :
+  MissingTransport.transportStatus MissingTransport.canonicalMissingReceiptRequest
+  ≡ MissingTransport.assumptionReceiptMissing
+narrowingWithoutReceiptFailsClosed = MissingTransport.canonicalMissingReceiptBlocksNarrowing
+
+receiptedIndependenceCanNarrowBounds :
+  MissingTransport.transportStatus MissingTransport.canonicalReceiptedIndependentRequest
+  ≡ MissingTransport.narrowedUnderReceiptedAssumption
+receiptedIndependenceCanNarrowBounds = MissingTransport.canonicalReceiptedIndependentAllowsNarrowing
+
+outcomeDependentMissingnessRejectsIndependenceNarrowing :
+  MissingTransport.transportStatus MissingTransport.canonicalOutcomeDependentRejected
+  ≡ MissingTransport.mechanismIncompatible
+outcomeDependentMissingnessRejectsIndependenceNarrowing = MissingTransport.canonicalOutcomeDependentCannotUseIndependenceNarrowing
+
+tightenedBoundsReverseRouteToMechanismReceipt :
+  MissingTransport.firstBoundTransportResidual MissingTransport.tightenedIdentifiedSet
+    (MissingTransport.boundTransportCutset true false false "raw bounds close; mechanism receipt open")
+  ≡ MissingTransport.mechanismReceiptResidual
+tightenedBoundsReverseRouteToMechanismReceipt = MissingTransport.canonicalTighteningOpenAtMechanism
