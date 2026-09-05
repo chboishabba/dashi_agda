@@ -121,8 +121,8 @@ compileConsumerFiniteSumDerivative :
     (ConsumerDerivativePartialSum W count point)
 compileConsumerFiniteSumDerivative S termDerivative W count point =
   derivativeRespectsFunctionAndValueEquality W
-    (λ x → Spine.≈-sym (R S) (consumerSumMatchesGeneric W count x))
-    (Spine.≈-sym (R S) (consumerDerivativeSumMatchesGeneric W count point))
+    (consumerSumMatchesGeneric W count)
+    (consumerDerivativeSumMatchesGeneric W count point)
     (finiteSumDerivative S termDerivative count point)
 
 record ReverseFiniteSumDerivativeObligations : Set where
