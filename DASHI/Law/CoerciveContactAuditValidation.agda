@@ -22,6 +22,7 @@ import DASHI.Law.OpportunityConditionedSelectionDisparityExact as Conditional
 import DASHI.Law.WandingOperationDeploymentProofExact as Deployment
 import DASHI.Law.DeploymentConditionedSelectionBidiExact as DeploymentBidi
 import DASHI.Law.PartialIdentificationMissingnessBoundsExact as Bounds
+import DASHI.Law.ExactIntervalRatioSeparatorExact as Exact
 import DASHI.Law.RobustSelectionDisparityBoundsBidiExact as Robust
 
 firewallAndReachabilityCoexist :
@@ -213,6 +214,26 @@ pointEstimateStillBlockedByMissingness :
   Bounds.firstMissingnessResidual Bounds.pointIdentifiedSelectionRate Bounds.canonicalBoundedButNotPointIdentified
   ≡ Bounds.completeObservationResidual
 pointEstimateStillBlockedByMissingness = Bounds.pointEstimateStillBlockedByMissingness
+
+exactCrossProductsDeriveRobustPositive :
+  Exact.classifyRatioBounds Exact.canonicalA Exact.canonicalSeparatedB
+  ≡ Exact.arithmeticRobustPositive
+exactCrossProductsDeriveRobustPositive = Exact.canonicalPositiveSeparation
+
+overlappingIntervalsFailClosed :
+  Exact.classifyRatioBounds Exact.canonicalA Exact.canonicalOverlapB
+  ≡ Exact.arithmeticUnidentified
+overlappingIntervalsFailClosed = Exact.canonicalOverlapUnidentified
+
+zeroDenominatorFailsClosed :
+  Exact.classifyRatioBounds Exact.zeroDenominatorBounds Exact.canonicalSeparatedB
+  ≡ Exact.malformedBounds
+zeroDenominatorFailsClosed = Exact.zeroDenominatorRejected
+
+derivedRobustSurfaceNeedsNoTrustedOrderingFlag :
+  Robust.conclusion (Robust.deriveRobustSurface Exact.canonicalA Exact.canonicalSeparatedB)
+  ≡ Robust.robustPositive
+derivedRobustSurfaceNeedsNoTrustedOrderingFlag = Robust.canonicalDerivedPositive
 
 robustDirectionDoesNotRequireExactMagnitude :
   Robust.firstRobustResidual Robust.disparityDirection Robust.canonicalRobustButNotPointCutset
