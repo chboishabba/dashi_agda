@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Core.FeministRechartingSourceBridgeExact as Feminist
 import DASHI.Core.CriticalRelationalGrammarCapstoneExact as Critical
 import DASHI.Core.TrinhSubjectInMakingNoncollapseExact as Trinh
@@ -121,7 +122,9 @@ positiveResidualRepairPattern :
 positiveResidualRepairPattern = Feminist.canonicalPositiveRecharting
 
 positiveResidualRepairIsStrict :
-  _
+  Observer.StrictRefinement
+    Feminist.inheritedChart
+    (Observer.pairObserver Feminist.inheritedChart Feminist.positiveMultiplicity)
 positiveResidualRepairIsStrict = Feminist.canonicalPositiveRechartingIsStrict
 
 ------------------------------------------------------------------------
@@ -177,7 +180,6 @@ data MarxianRelationIsUniqueDistressCause : Set where
 data IntersectionalReadingErasesBody : Set where
 data FeministRechartingIsJustSignFlip : Set where
 data SharedFormalPatternMergesAuthors : Set where
-
 data SourcePropositionBecomesDASHIProof : Set where
 
 individualDescriptionDoesNotExhaustStructuralCause :
