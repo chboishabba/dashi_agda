@@ -3,42 +3,19 @@ module DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact where
 ------------------------------------------------------------------------
 -- ORIGINAL-GOAL CAPSTONE
 --
--- Return the tranche to the theorem-bearing finite non-Archimedean spectral
--- dynamics that motivated the audit.  Monster correspondence is useful
--- x-pollination but not a prerequisite here.
+-- The Monster correspondence remains optional downstream x-pollination.
+-- This capstone tracks only the finite non-Archimedean spectral closure.
 --
--- After reusing finite matrix-action faithfulness, the source-exact closure
--- graph is now:
+-- New source correction:
+-- source `Analysis/DFT.lean` owns a unitary F_(2^(n-2)) tensor I_2 after an
+-- arbitrary cardinality product reindex.  That is NOT yet the odd-character
+-- Fourier transform of the tau-antisymmetric twisted sector.
 --
---  D_n function-level character action       [OWNED]
---  D_n preserves tau-odd functions           [OWNED]
---      |
---      +-> odd character <-> tau-odd          [LIVE]
---      |
---  order(3)=2^(n-2)                           [OWNED]
---  odd residue cardinality                    [OWNED]
---      |
---      +-> arithmetic orbit chart
---          (j,0)->3^j ; (j,1)->-3^j           [HIGHEST-ALPHA LIVE]
---          -> canonical C1,C2 package         [DOWNSTREAM]
---          -> |W_C|^2=2                       [OWNED CONDITIONAL]
---          -> W1*W2=2                         [OWNED CONDITIONAL]
---          -> phase/sign W_i                  [LIVE]
+-- The natural odd-character kernel is
 --
---  concrete twistedDirMatrix                  [OWNED]
---      -> Hadamard twisted-sector split       [OWNED]
---      -> concrete DFT carrier/reindex         [OWNED]
---      -> DFT-conjugated matrix                [OWNED OBJECT]
---      -> twisted coordinates <-> odd chars    [LIVE]
---      -> equality on complete character basis [DOWNSTREAM]
---      -> matrix equality by repo faithfulness [COMPILER / OWNED GENERIC]
---             |               |               |
---             v               v               v
---       spatial spectrum  spatial trace   spatial powers
+--   omega^((2j+1)v) = omega^v * (omega^2)^(jv),
 --
--- Separately, the one-step determinant cover factorization is OWNED, while the
--- theorem named `spectral_tower_one_step` has only `True` as its formal type;
--- literal recursive spectrum-union transport remains a small downstream weld.
+-- i.e. a modulated 2^(n-1)-point DFT (up to row/column convention).
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -47,13 +24,17 @@ open import Agda.Builtin.List using (List; []; _∷_)
 
 
 data OriginalGoalLeaf : Set where
+  primitiveHalfTurnAtMinusOne : OriginalGoalLeaf
   oddCharacterTauOddIff : OriginalGoalLeaf
+  oddCharacterFourierRechart : OriginalGoalLeaf
+  arithmeticOddOrbitReceipts : OriginalGoalLeaf
   arithmeticOddOrbitChart : OriginalGoalLeaf
   twistedCoordinateCharacterIdentification : OriginalGoalLeaf
   completeCharacterBasisActionEquality : OriginalGoalLeaf
   concreteDFTConjugatedEqualsMonomial : OriginalGoalLeaf
   canonicalTwoOddOrbitPackage : OriginalGoalLeaf
-  orbitPhaseSign : OriginalGoalLeaf
+  orbitCancellationSumZero : OriginalGoalLeaf
+  doubledReturnMinusTwo : OriginalGoalLeaf
   literalOneStepSpectrumUnion : OriginalGoalLeaf
 
 
@@ -63,33 +44,38 @@ data OriginalGoalStatus : Set where
   downstream : OriginalGoalStatus
   pruned : OriginalGoalStatus
   compiled : OriginalGoalStatus
+  upstreamReusable : OriginalGoalStatus
 
 leafStatus : OriginalGoalLeaf → OriginalGoalStatus
-leafStatus oddCharacterTauOddIff = live
-leafStatus arithmeticOddOrbitChart = live
-leafStatus twistedCoordinateCharacterIdentification = live
+leafStatus primitiveHalfTurnAtMinusOne = upstreamReusable
+leafStatus oddCharacterTauOddIff = compiled
+leafStatus oddCharacterFourierRechart = live
+leafStatus arithmeticOddOrbitReceipts = live
+leafStatus arithmeticOddOrbitChart = compiled
+leafStatus twistedCoordinateCharacterIdentification = downstream
 leafStatus completeCharacterBasisActionEquality = downstream
 leafStatus concreteDFTConjugatedEqualsMonomial = compiled
 leafStatus canonicalTwoOddOrbitPackage = downstream
-leafStatus orbitPhaseSign = live
+leafStatus orbitCancellationSumZero = live
+leafStatus doubledReturnMinusTwo = compiled
 leafStatus literalOneStepSpectrumUnion = downstream
 
 priority : List OriginalGoalLeaf
 priority =
-  arithmeticOddOrbitChart ∷
-  oddCharacterTauOddIff ∷
+  oddCharacterFourierRechart ∷
+  arithmeticOddOrbitReceipts ∷
+  orbitCancellationSumZero ∷
   twistedCoordinateCharacterIdentification ∷
   completeCharacterBasisActionEquality ∷
-  orbitPhaseSign ∷
   literalOneStepSpectrumUnion ∷
   []
 
 record SharedWeldFanout : Set where
   constructor sharedWeldFanout
   field
-    sameConcreteMatrixWeldFeedsSpatialSpectrum : Bool
-    sameConcreteMatrixWeldFeedsSpatialTrace : Bool
-    sameConcreteMatrixWeldFeedsSpatialPower : Bool
+    oddCharacterRechartFeedsSpatialSpectrum : Bool
+    oddCharacterRechartFeedsSpatialTrace : Bool
+    oddCharacterRechartFeedsSpatialPower : Bool
     equalityOnBasisCompilesLiteralMatrixEquality : Bool
     threeIndependentMatrixWeldsShouldBeSearched : Bool
 
@@ -109,14 +95,18 @@ record OriginalGoalBoundary : Set where
     conditionalOrbitMagnitudeOwned : Bool
     conditionalPairedProductOwned : Bool
     concreteHadamardSplitOwned : Bool
-    concreteDFTInfrastructureOwned : Bool
+    sourceProductDFTInfrastructureOwned : Bool
     determinantTowerFactorizationOwned : Bool
 
-    oddCharacterTauOddIffOwned : Bool
-    arithmeticOrbitChartOwned : Bool
-    twistedCoordinateCharacterIdentificationOwned : Bool
-    concreteDFTMonomialEqualityCompiledOnceInputsExist : Bool
-    orbitPhaseSignOwned : Bool
+    sourceProductDFTIsOddCharacterTransform : Bool
+    halfPeriodMathlibRouteAvailable : Bool
+    oddCharacterTauOddIffCompilesFromHalfPeriod : Bool
+    oddCharacterFourierRechartOwned : Bool
+    arithmeticOrbitChartCompilesFromReceipts : Bool
+    concreteMonomialEqualityCompilesFromBasisAction : Bool
+    explicitPhaseValuesRequiredForMinusTwo : Bool
+    orbitCancellationSumZeroOwned : Bool
+    doubledReturnMinusTwoCompilesFromCancellationProduct : Bool
     literalSpectrumTowerOwned : Bool
 
     monsterCorrespondenceRequiredForSpectralClosure : Bool
@@ -126,24 +116,36 @@ canonicalOriginalGoalBoundary : OriginalGoalBoundary
 canonicalOriginalGoalBoundary =
   originalGoalBoundary
     true true true true true true true true true true true
-    false false false true false false
+    false true true false true true false false true false
     false false
+
+currentProductDFTDoesNotCloseCharacterWeld :
+  OriginalGoalBoundary.sourceProductDFTIsOddCharacterTransform
+    canonicalOriginalGoalBoundary
+  ≡ false
+currentProductDFTDoesNotCloseCharacterWeld = refl
+
+oddTauOddIffIsNoLongerPrimitiveSearchLeaf :
+  leafStatus oddCharacterTauOddIff ≡ compiled
+oddTauOddIffIsNoLongerPrimitiveSearchLeaf = refl
+
+explicitComplexPhaseValuesNotRequired :
+  OriginalGoalBoundary.explicitPhaseValuesRequiredForMinusTwo
+    canonicalOriginalGoalBoundary
+  ≡ false
+explicitComplexPhaseValuesNotRequired = refl
+
+minusTwoCompilesFromMinimalCancellation :
+  OriginalGoalBoundary.doubledReturnMinusTwoCompilesFromCancellationProduct
+    canonicalOriginalGoalBoundary
+  ≡ true
+minusTwoCompilesFromMinimalCancellation = refl
 
 monsterIsOptionalForOriginalClosure :
   OriginalGoalBoundary.monsterCorrespondenceRequiredForSpectralClosure
     canonicalOriginalGoalBoundary
   ≡ false
 monsterIsOptionalForOriginalClosure = refl
-
-matrixEqualityIsCompilerOutputOnceSemanticInputsExist :
-  OriginalGoalBoundary.concreteDFTMonomialEqualityCompiledOnceInputsExist
-    canonicalOriginalGoalBoundary
-  ≡ true
-matrixEqualityIsCompilerOutputOnceSemanticInputsExist = refl
-
-arithmeticOrbitChartIsHighestAlphaLiveLeaf :
-  leafStatus arithmeticOddOrbitChart ≡ live
-arithmeticOrbitChartIsHighestAlphaLiveLeaf = refl
 
 finalMagnitudeCannotSelfDischarge :
   OriginalGoalBoundary.finalMagnitudeHypothesisMayCloseItsOwnProducerPath
