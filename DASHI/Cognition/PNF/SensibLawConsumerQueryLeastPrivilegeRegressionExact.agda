@@ -6,97 +6,60 @@ open import Data.Empty using (⊥)
 import DASHI.Cognition.PNF.SensibLawConsumerIndexedDiscourseInterpretationExact as Consumer
 import DASHI.Cognition.PNF.SensibLawConsumerQuerySemanticCoordinateReopeningExact as Demand
 
-------------------------------------------------------------------------
--- EXACT LEAST-PRIVILEGE REGRESSIONS
---
--- These are indexed impossibilities over the actual `Requires` relation, not
--- policy comments.  A consumer may be legal while asking a cheap general
--- discourse question; absent constructors are therefore meaningful here.
-------------------------------------------------------------------------
-
-legalWhoSaidWhatDoesNotRequireApplicability :
-  Demand.Requires
-    Consumer.legalConsumer
-    Demand.whoSaidWhatQuery
-    Demand.applicabilityCoordinate → ⊥
+legalWhoSaidWhatDoesNotRequireApplicability : Demand.Requires Consumer.legalConsumer Demand.whoSaidWhatQuery Demand.applicabilityCoordinate → ⊥
 legalWhoSaidWhatDoesNotRequireApplicability ()
-
-legalWhoSaidWhatDoesNotRequireAuthority :
-  Demand.Requires
-    Consumer.legalConsumer
-    Demand.whoSaidWhatQuery
-    Demand.authorityCoordinate → ⊥
-legalWhoSaidWhatDoesNotRequireAuthority ()
-
-legalWhoSaidWhatDoesNotRequireJurisdiction :
-  Demand.Requires
-    Consumer.legalConsumer
-    Demand.whoSaidWhatQuery
-    Demand.jurisdictionCoordinate → ⊥
-legalWhoSaidWhatDoesNotRequireJurisdiction ()
-
-legalDiscourseRoleDoesNotRequireApplicability :
-  Demand.Requires
-    Consumer.legalConsumer
-    Demand.legalDiscourseRoleQuery
-    Demand.applicabilityCoordinate → ⊥
+legalWhoSaidWhatDoesNotRequireLegalSourceAuthority : Demand.Requires Consumer.legalConsumer Demand.whoSaidWhatQuery Demand.legalSourceAuthorityCoordinate → ⊥
+legalWhoSaidWhatDoesNotRequireLegalSourceAuthority ()
+legalWhoSaidWhatDoesNotRequireSemanticAdmissionAuthority : Demand.Requires Consumer.legalConsumer Demand.whoSaidWhatQuery Demand.semanticAdmissionAuthorityCoordinate → ⊥
+legalWhoSaidWhatDoesNotRequireSemanticAdmissionAuthority ()
+legalWhoSaidWhatDoesNotRequireResolvedEvidence : Demand.Requires Consumer.legalConsumer Demand.whoSaidWhatQuery Demand.resolvedLegalEvidenceCoordinate → ⊥
+legalWhoSaidWhatDoesNotRequireResolvedEvidence ()
+legalWhoSaidWhatDoesNotRequireResolvedScope : Demand.Requires Consumer.legalConsumer Demand.whoSaidWhatQuery Demand.resolvedScopeCoordinate → ⊥
+legalWhoSaidWhatDoesNotRequireResolvedScope ()
+legalWhoSaidWhatDoesNotRequireResolvedJurisdiction : Demand.Requires Consumer.legalConsumer Demand.whoSaidWhatQuery Demand.resolvedLegalJurisdictionCoordinate → ⊥
+legalWhoSaidWhatDoesNotRequireResolvedJurisdiction ()
+legalDiscourseRoleDoesNotRequireApplicability : Demand.Requires Consumer.legalConsumer Demand.legalDiscourseRoleQuery Demand.applicabilityCoordinate → ⊥
 legalDiscourseRoleDoesNotRequireApplicability ()
-
-legalDiscourseRoleDoesNotRequireLiability :
-  Demand.Requires
-    Consumer.legalConsumer
-    Demand.legalDiscourseRoleQuery
-    Demand.liabilityCoordinate → ⊥
+legalDiscourseRoleDoesNotRequireLiability : Demand.Requires Consumer.legalConsumer Demand.legalDiscourseRoleQuery Demand.liabilityCoordinate → ⊥
 legalDiscourseRoleDoesNotRequireLiability ()
-
-generalWhoSaidWhatDoesNotRequireLegalRole :
-  Demand.Requires
-    Consumer.generalSemanticConsumer
-    Demand.whoSaidWhatQuery
-    Demand.legalRoleCoordinate → ⊥
+generalWhoSaidWhatDoesNotRequireLegalRole : Demand.Requires Consumer.generalSemanticConsumer Demand.whoSaidWhatQuery Demand.legalRoleCoordinate → ⊥
 generalWhoSaidWhatDoesNotRequireLegalRole ()
 
-------------------------------------------------------------------------
--- Conversely, the strong legal query owns proof-bearing requirements.
-------------------------------------------------------------------------
-
-legalApplicabilityReallyRequiresOccurrence :
-  Demand.Requires
-    Consumer.legalConsumer
-    Demand.legalApplicabilityQuery
-    Demand.occurrenceCoordinate
+legalApplicabilityReallyRequiresOccurrence : Demand.Requires Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.occurrenceCoordinate
 legalApplicabilityReallyRequiresOccurrence = Demand.legalApplicabilityNeedsOccurrence
-
-legalApplicabilityReallyRequiresAuthority :
-  Demand.Requires
-    Consumer.legalConsumer
-    Demand.legalApplicabilityQuery
-    Demand.authorityCoordinate
-legalApplicabilityReallyRequiresAuthority = Demand.legalApplicabilityNeedsAuthority
-
-legalApplicabilityReallyRequiresJurisdiction :
-  Demand.Requires
-    Consumer.legalConsumer
-    Demand.legalApplicabilityQuery
-    Demand.jurisdictionCoordinate
-legalApplicabilityReallyRequiresJurisdiction = Demand.legalApplicabilityNeedsJurisdiction
-
-------------------------------------------------------------------------
--- Query broadening is obligation growth, not parse mutation.
-------------------------------------------------------------------------
+legalApplicabilityReallyRequiresResolvedEvidence : Demand.Requires Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.resolvedLegalEvidenceCoordinate
+legalApplicabilityReallyRequiresResolvedEvidence = Demand.legalApplicabilityNeedsResolvedEvidence
+legalApplicabilityDoesNotAcceptEvidenceCandidateInstead : Demand.Requires Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.evidenceCandidateCoordinate → ⊥
+legalApplicabilityDoesNotAcceptEvidenceCandidateInstead ()
+legalApplicabilityReallyRequiresLegalSourceAuthority : Demand.Requires Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.legalSourceAuthorityCoordinate
+legalApplicabilityReallyRequiresLegalSourceAuthority = Demand.legalApplicabilityNeedsLegalSourceAuthority
+legalApplicabilityDoesNotRequireSemanticAdmissionAuthority : Demand.Requires Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.semanticAdmissionAuthorityCoordinate → ⊥
+legalApplicabilityDoesNotRequireSemanticAdmissionAuthority ()
+legalApplicabilityReallyRequiresResolvedJurisdiction : Demand.Requires Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.resolvedLegalJurisdictionCoordinate
+legalApplicabilityReallyRequiresResolvedJurisdiction = Demand.legalApplicabilityNeedsResolvedJurisdiction
+legalApplicabilityDoesNotAcceptJurisdictionCandidateInstead : Demand.Requires Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.jurisdictionCandidateCoordinate → ⊥
+legalApplicabilityDoesNotAcceptJurisdictionCandidateInstead ()
+legalApplicabilityReallyRequiresResolvedScope : Demand.Requires Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.resolvedScopeCoordinate
+legalApplicabilityReallyRequiresResolvedScope = Demand.legalApplicabilityNeedsResolvedScope
+legalApplicabilityDoesNotAcceptScopeCandidateInstead : Demand.Requires Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.scopeCandidateCoordinate → ⊥
+legalApplicabilityDoesNotAcceptScopeCandidateInstead ()
 
 data CheapQuerySecretlyContainsFullLegalStack : Set where
-data StrongQueryCanBorrowMissingAuthorityFromAttribution : Set where
-
+data StrongQueryCanBorrowMissingLegalSourceAuthorityFromAttribution : Set where
+data StrongQueryCanBorrowResolvedEvidenceFromCandidate : Set where
+data StrongQueryCanBorrowResolvedScopeFromParserCandidate : Set where
+data StrongQueryCanBorrowResolvedJurisdictionFromContextCandidate : Set where
 data QueryBroadeningReparsesText : Set where
 
-cheapQueryDoesNotSecretlyContainFullLegalStack :
-  CheapQuerySecretlyContainsFullLegalStack → ⊥
+cheapQueryDoesNotSecretlyContainFullLegalStack : CheapQuerySecretlyContainsFullLegalStack → ⊥
 cheapQueryDoesNotSecretlyContainFullLegalStack ()
-
-strongQueryCannotBorrowMissingAuthorityFromAttribution :
-  StrongQueryCanBorrowMissingAuthorityFromAttribution → ⊥
-strongQueryCannotBorrowMissingAuthorityFromAttribution ()
-
+strongQueryCannotBorrowMissingLegalSourceAuthorityFromAttribution : StrongQueryCanBorrowMissingLegalSourceAuthorityFromAttribution → ⊥
+strongQueryCannotBorrowMissingLegalSourceAuthorityFromAttribution ()
+strongQueryCannotBorrowResolvedEvidenceFromCandidate : StrongQueryCanBorrowResolvedEvidenceFromCandidate → ⊥
+strongQueryCannotBorrowResolvedEvidenceFromCandidate ()
+strongQueryCannotBorrowResolvedScopeFromParserCandidate : StrongQueryCanBorrowResolvedScopeFromParserCandidate → ⊥
+strongQueryCannotBorrowResolvedScopeFromParserCandidate ()
+strongQueryCannotBorrowResolvedJurisdictionFromContextCandidate : StrongQueryCanBorrowResolvedJurisdictionFromContextCandidate → ⊥
+strongQueryCannotBorrowResolvedJurisdictionFromContextCandidate ()
 queryBroadeningDoesNotReparseText : QueryBroadeningReparsesText → ⊥
 queryBroadeningDoesNotReparseText ()
