@@ -19,19 +19,27 @@ record RepoReuseEndgameStatus : Set where
     bishopInverseFactorialDerivativeCoefficientOwned : Bool
     trigFiniteTermDerivativeClosed : Bool
     derivedTrigSeriesConvergenceCompilerOwned : Bool
+    setoidDerivativeLimitInterchangeCutsetOwned : Bool
 
     scaleLocalGeometricCauchyReused : Bool
     residualDyadicCauchyModulusCompilerOwned : Bool
     bishopCauchyToLimitCompilerOwned : Bool
+    residualConvergenceRouteDisjunctionOwned : Bool
+    directRegulatorTailRouteOwned : Bool
 
     sourceBackedLocalTheoremTransportCompilerOwned : Bool
+    sourceBackedConcreteZetaCompilerOwned : Bool
+    casimirZetaProducerCompilerOwned : Bool
+    proofBearingReducedEndgameRouterOwned : Bool
 
     continuumTETMPhysicalWeldClosed : Bool
     derivativeSeriesInterchangeClosed : Bool
     polarCoordinateProductRuleWeldClosed : Bool
     polarMeasureApplicationWeldClosed : Bool
     casimirResidualIncrementEstimateClosed : Bool
-    zetaEulerMaclaurinDefectWeldClosed : Bool
+    casimirDirectMetricTailEstimateClosed : Bool
+    atLeastOneResidualConvergenceEstimateClosed : Bool
+    zetaDefectSameObjectWeldClosed : Bool
 
     finiteProductEnumerationReusedIsTrue : finiteProductEnumerationReused ≡ true
     finiteCutoffPlateEnumerationOwnedIsTrue : finiteCutoffPlateEnumerationOwned ≡ true
@@ -45,21 +53,34 @@ record RepoReuseEndgameStatus : Set where
     trigFiniteTermDerivativeClosedIsTrue : trigFiniteTermDerivativeClosed ≡ true
     derivedTrigSeriesConvergenceCompilerOwnedIsTrue :
       derivedTrigSeriesConvergenceCompilerOwned ≡ true
+    setoidDerivativeLimitInterchangeCutsetOwnedIsTrue :
+      setoidDerivativeLimitInterchangeCutsetOwned ≡ true
 
     scaleLocalGeometricCauchyReusedIsTrue : scaleLocalGeometricCauchyReused ≡ true
     residualDyadicCauchyModulusCompilerOwnedIsTrue :
       residualDyadicCauchyModulusCompilerOwned ≡ true
     bishopCauchyToLimitCompilerOwnedIsTrue : bishopCauchyToLimitCompilerOwned ≡ true
+    residualConvergenceRouteDisjunctionOwnedIsTrue :
+      residualConvergenceRouteDisjunctionOwned ≡ true
+    directRegulatorTailRouteOwnedIsTrue : directRegulatorTailRouteOwned ≡ true
 
     sourceBackedLocalTheoremTransportCompilerOwnedIsTrue :
       sourceBackedLocalTheoremTransportCompilerOwned ≡ true
+    sourceBackedConcreteZetaCompilerOwnedIsTrue :
+      sourceBackedConcreteZetaCompilerOwned ≡ true
+    casimirZetaProducerCompilerOwnedIsTrue : casimirZetaProducerCompilerOwned ≡ true
+    proofBearingReducedEndgameRouterOwnedIsTrue :
+      proofBearingReducedEndgameRouterOwned ≡ true
 
     continuumTETMPhysicalWeldClosedIsFalse : continuumTETMPhysicalWeldClosed ≡ false
     derivativeSeriesInterchangeClosedIsFalse : derivativeSeriesInterchangeClosed ≡ false
     polarCoordinateProductRuleWeldClosedIsFalse : polarCoordinateProductRuleWeldClosed ≡ false
     polarMeasureApplicationWeldClosedIsFalse : polarMeasureApplicationWeldClosed ≡ false
     casimirResidualIncrementEstimateClosedIsFalse : casimirResidualIncrementEstimateClosed ≡ false
-    zetaEulerMaclaurinDefectWeldClosedIsFalse : zetaEulerMaclaurinDefectWeldClosed ≡ false
+    casimirDirectMetricTailEstimateClosedIsFalse : casimirDirectMetricTailEstimateClosed ≡ false
+    atLeastOneResidualConvergenceEstimateClosedIsFalse :
+      atLeastOneResidualConvergenceEstimateClosed ≡ false
+    zetaDefectSameObjectWeldClosedIsFalse : zetaDefectSameObjectWeldClosed ≡ false
 
 open RepoReuseEndgameStatus public
 
@@ -74,16 +95,24 @@ canonicalRepoReuseEndgameStatus = record
   ; bishopInverseFactorialDerivativeCoefficientOwned = true
   ; trigFiniteTermDerivativeClosed = true
   ; derivedTrigSeriesConvergenceCompilerOwned = true
+  ; setoidDerivativeLimitInterchangeCutsetOwned = true
   ; scaleLocalGeometricCauchyReused = true
   ; residualDyadicCauchyModulusCompilerOwned = true
   ; bishopCauchyToLimitCompilerOwned = true
+  ; residualConvergenceRouteDisjunctionOwned = true
+  ; directRegulatorTailRouteOwned = true
   ; sourceBackedLocalTheoremTransportCompilerOwned = true
+  ; sourceBackedConcreteZetaCompilerOwned = true
+  ; casimirZetaProducerCompilerOwned = true
+  ; proofBearingReducedEndgameRouterOwned = true
   ; continuumTETMPhysicalWeldClosed = false
   ; derivativeSeriesInterchangeClosed = false
   ; polarCoordinateProductRuleWeldClosed = false
   ; polarMeasureApplicationWeldClosed = false
   ; casimirResidualIncrementEstimateClosed = false
-  ; zetaEulerMaclaurinDefectWeldClosed = false
+  ; casimirDirectMetricTailEstimateClosed = false
+  ; atLeastOneResidualConvergenceEstimateClosed = false
+  ; zetaDefectSameObjectWeldClosed = false
   ; finiteProductEnumerationReusedIsTrue = refl
   ; finiteCutoffPlateEnumerationOwnedIsTrue = refl
   ; finiteTorusParsevalReusedIsTrue = refl
@@ -93,16 +122,24 @@ canonicalRepoReuseEndgameStatus = record
   ; bishopInverseFactorialDerivativeCoefficientOwnedIsTrue = refl
   ; trigFiniteTermDerivativeClosedIsTrue = refl
   ; derivedTrigSeriesConvergenceCompilerOwnedIsTrue = refl
+  ; setoidDerivativeLimitInterchangeCutsetOwnedIsTrue = refl
   ; scaleLocalGeometricCauchyReusedIsTrue = refl
   ; residualDyadicCauchyModulusCompilerOwnedIsTrue = refl
   ; bishopCauchyToLimitCompilerOwnedIsTrue = refl
+  ; residualConvergenceRouteDisjunctionOwnedIsTrue = refl
+  ; directRegulatorTailRouteOwnedIsTrue = refl
   ; sourceBackedLocalTheoremTransportCompilerOwnedIsTrue = refl
+  ; sourceBackedConcreteZetaCompilerOwnedIsTrue = refl
+  ; casimirZetaProducerCompilerOwnedIsTrue = refl
+  ; proofBearingReducedEndgameRouterOwnedIsTrue = refl
   ; continuumTETMPhysicalWeldClosedIsFalse = refl
   ; derivativeSeriesInterchangeClosedIsFalse = refl
   ; polarCoordinateProductRuleWeldClosedIsFalse = refl
   ; polarMeasureApplicationWeldClosedIsFalse = refl
   ; casimirResidualIncrementEstimateClosedIsFalse = refl
-  ; zetaEulerMaclaurinDefectWeldClosedIsFalse = refl
+  ; casimirDirectMetricTailEstimateClosedIsFalse = refl
+  ; atLeastOneResidualConvergenceEstimateClosedIsFalse = refl
+  ; zetaDefectSameObjectWeldClosedIsFalse = refl
   }
 
 record CorrectedCriticalPath : Set where
@@ -115,7 +152,7 @@ record CorrectedCriticalPath : Set where
 canonicalCorrectedCriticalPath : CorrectedCriticalPath
 canonicalCorrectedCriticalPath = record
   { first = "weld the classical continuum trigonometric completeness theorem to the physical TE/TM Maxwell carrier; every finite cutoff tuple is already exhaustively enumerated and finite Parseval is already repo-owned"
-  ; second = "close one setoid-native derivative/series interchange theorem for the existing Round11 Bishop sine/cosine series, then weld the ordinary constant/product rules to the polar coordinate map; finite term derivatives and both derived-series limits are already repo-owned"
-  ; third = "prove one same-object dyadic majorant for successive post-cancellation Casimir cutoff increments and transport its rational modulus to the Bishop metric; tail summation and limit existence are already compiler output"
-  ; fourth = "weld the repo-pinned Euler--Maclaurin continuation theorem to the literal transformed Casimir longitudinal defect; finite Bernoulli/cubic algebra and 1/120 arithmetic are already owned"
+  ; second = "prove the shared setoid-native derivative/series interchange theorem for the existing Round11 Bishop sine/cosine series, then weld ordinary constant/product rules to the polar coordinate map; finite term derivatives and both derived-series limits are already repo-owned"
+  ; third = "close EITHER a summable successive-increment estimate OR the existing regulator direct epsilon-tail estimate on the literal post-cancellation residual; both routes already compile to the Bishop residual limit"
+  ; fourth = "supply the typed same-object map from the source-backed local zeta carrier/evaluation to the transformed Casimir longitudinal defect; Euler--Maclaurin/source transport, zeta(-3)=1/120, the legacy zeta producer, and 6*120=720 are compiler output"
   }
