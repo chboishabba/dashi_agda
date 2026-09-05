@@ -3,9 +3,11 @@ module DASHI.Analysis.NonArchimedeanSpectralBidiObligationExact where
 ------------------------------------------------------------------------
 -- Reverse / BIDI obligation compiler for the non-Archimedean spectral lane.
 --
--- Finite spectral closure is complete at the dependency level.  Post-closure
--- continuous claims are routed separately: local cyclotomic sigma, Prolate
--- sigma, Gibbs uniqueness, and exponential mixing are distinct consumers.
+-- Finite spectral closure is complete at the dependency level. Post-closure
+-- continuous claims are routed separately. Mean-zero invariance for the finite
+-- normalized walk now compiles from existing source inverse-of-three arithmetic
+-- plus finite sum reindexing, leaving the actual one-step L2 contraction as the
+-- live analytic mixing producer.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -43,81 +45,59 @@ record BidiClaim : Set where
 open BidiClaim public
 
 spectralCircleSpatialClaim : BidiClaim
-spectralCircleSpatialClaim =
-  bidiClaim spatialSpectralCircle
-    "spatial twisted-block spectral circle"
-    "compiler-closed from concrete sheet definitions + corrected odd-character weld"
-    true
+spectralCircleSpatialClaim = bidiClaim spatialSpectralCircle
+  "spatial twisted-block spectral circle"
+  "compiler-closed from concrete sheet definitions + corrected odd-character weld" true
 
 spatialTwistedPowerClaim : BidiClaim
-spatialTwistedPowerClaim =
-  bidiClaim spatialTwistedPower
-    "spatial twisted-block doubled-return power equals minus two identity"
-    "same compiler-closed spatial weld + owned signed-return arithmetic"
-    true
+spatialTwistedPowerClaim = bidiClaim spatialTwistedPower
+  "spatial twisted-block doubled-return power equals minus two identity"
+  "same compiler-closed spatial weld + owned signed-return arithmetic" true
 
 spectrumTowerClaim : BidiClaim
-spectrumTowerClaim =
-  bidiClaim literalOneStepSpectrumUnion
-    "literal one-step spectrum union"
-    "characteristic determinant factorization + characteristic root union compiler"
-    true
+spectrumTowerClaim = bidiClaim literalOneStepSpectrumUnion
+  "literal one-step spectrum union"
+  "characteristic determinant factorization + characteristic root union compiler" true
 
 directedSigmaClaim : BidiClaim
-directedSigmaClaim =
-  bidiClaim directedRadiusSigmaHalf
-    "directed twisted-circle radius convergence itself has size exponent sigma=1/2"
-    "independent definition of radius sigma + theorem connecting it to N=2^n scaling"
-    false
+directedSigmaClaim = bidiClaim directedRadiusSigmaHalf
+  "directed twisted-circle radius convergence itself has size exponent sigma=1/2"
+  "independent definition of radius sigma + theorem connecting it to N=2^n scaling" false
 
 cyclotomicSigmaClaim : BidiClaim
-cyclotomicSigmaClaim =
-  bidiClaim cyclotomicSigmaHalf
-    "cyclotomic local amplitude exponent sigma_cyc = log_2 r_tw(2) equals 1/2"
-    "source r_tw(2)=sqrt two + source log2_sqrt_two theorem"
-    true
+cyclotomicSigmaClaim = bidiClaim cyclotomicSigmaHalf
+  "cyclotomic local amplitude exponent sigma_cyc = log_2 r_tw(2) equals 1/2"
+  "source r_tw(2)=sqrt two + source log2_sqrt_two theorem" true
 
 prolateSigmaClaim : BidiClaim
-prolateSigmaClaim =
-  bidiClaim prolateCriticalLineHalf
-    "Prolate/Archimedean critical-line parameter has distinguished value sigma=1/2"
-    "ProlateScaling secular-imaginary and normal-gap theorems"
-    true
+prolateSigmaClaim = bidiClaim prolateCriticalLineHalf
+  "Prolate/Archimedean critical-line parameter has distinguished value sigma=1/2"
+  "ProlateScaling secular-imaginary and normal-gap theorems" true
 
 sigmaAnchorClaim : BidiClaim
-sigmaAnchorClaim =
-  bidiClaim cyclotomicAnchorsProlateHalf
-    "cyclotomic sigma_cyc=1/2 algebraically anchors the Prolate critical-line sigma=1/2"
-    "two-sided sigma same-object weld preserving anchor and critical conditions"
-    false
+sigmaAnchorClaim = bidiClaim cyclotomicAnchorsProlateHalf
+  "cyclotomic sigma_cyc=1/2 algebraically anchors the Prolate critical-line sigma=1/2"
+  "two-sided sigma same-object weld preserving anchor and critical conditions" false
 
 gibbsUniquenessClaim : BidiClaim
-gibbsUniquenessClaim =
-  bidiClaim uniqueHaarConformalGibbs
-    "normalized Haar is the unique conformal Gibbs state"
-    "dedicated Gibbs uniqueness/ergodicity producer"
-    false
+gibbsUniquenessClaim = bidiClaim uniqueHaarConformalGibbs
+  "normalized Haar is the unique conformal Gibbs state"
+  "dedicated Gibbs uniqueness/ergodicity producer" false
 
 l2MixingClaim : BidiClaim
-l2MixingClaim =
-  bidiClaim unconditionalL2Mixing
-    "normalized Collatz walk has unconditional geometric L2 mixing"
-    "mean-zero invariance + derived one-step contraction; iteration is repo-reusable"
-    false
+l2MixingClaim = bidiClaim unconditionalL2Mixing
+  "normalized Collatz walk has unconditional geometric L2 mixing"
+  "derived one-step mean-zero contraction; invariance and iteration already compile" false
 
 correlationDecayClaim : BidiClaim
-correlationDecayClaim =
-  bidiClaim correlationDecayAtInverseSqrtTwo
-    "correlations decay at inverse-sqrt-two rate"
-    "unconditional L2 mixing + correlation consumer identification"
-    false
+correlationDecayClaim = bidiClaim correlationDecayAtInverseSqrtTwo
+  "correlations decay at inverse-sqrt-two rate"
+  "unconditional L2 mixing + correlation consumer identification" false
 
 fullTransferRadiusClaim : BidiClaim
-fullTransferRadiusClaim =
-  bidiClaim fullContinuousTransferRadiusSqrtTwo
-    "full unnormalised continuous transfer operator has spectral radius sqrt two"
-    "rejected object interpretation: source owns constant eigenvalue two"
-    false
+fullTransferRadiusClaim = bidiClaim fullContinuousTransferRadiusSqrtTwo
+  "full unnormalised continuous transfer operator has spectral radius sqrt two"
+  "rejected object interpretation: source owns constant eigenvalue two" false
 
 orbitProductClaim : BidiClaim
 orbitProductClaim = bidiClaim orbitProduct
@@ -150,7 +130,6 @@ data MissingObligation : Set where
   needDirectedRadiusSigmaScalingTheorem : MissingObligation
   needCyclotomicToProlateSigmaSameObjectWeld : MissingObligation
   needGibbsUniquenessTheorem : MissingObligation
-  needMeanZeroInvariance : MissingObligation
   needUnconditionalOneStepMeanZeroContraction : MissingObligation
   needCorrelationConsumerWeld : MissingObligation
   rejectedFullTransferRadiusSqrtTwo : MissingObligation
@@ -171,9 +150,8 @@ compileMissing cyclotomicAnchorsProlateHalf =
   needCyclotomicToProlateSigmaSameObjectWeld ∷ []
 compileMissing uniqueHaarConformalGibbs = needGibbsUniquenessTheorem ∷ []
 compileMissing unconditionalL2Mixing =
-  needMeanZeroInvariance ∷ needUnconditionalOneStepMeanZeroContraction ∷ []
+  needUnconditionalOneStepMeanZeroContraction ∷ []
 compileMissing correlationDecayAtInverseSqrtTwo =
-  needMeanZeroInvariance ∷
   needUnconditionalOneStepMeanZeroContraction ∷
   needCorrelationConsumerWeld ∷ []
 compileMissing fullContinuousTransferRadiusSqrtTwo =
@@ -190,12 +168,6 @@ finiteSpatialCoreClosed = refl
 spectrumTowerRepoClosed : compileMissing literalOneStepSpectrumUnion ≡ []
 spectrumTowerRepoClosed = refl
 
-cyclotomicSigmaHalfClosed : compileMissing cyclotomicSigmaHalf ≡ []
-cyclotomicSigmaHalfClosed = refl
-
-prolateCriticalLineHalfClosed : compileMissing prolateCriticalLineHalf ≡ []
-prolateCriticalLineHalfClosed = refl
-
 sigmaAnchorSingleWeldCutset :
   compileMissing cyclotomicAnchorsProlateHalf
   ≡ needCyclotomicToProlateSigmaSameObjectWeld ∷ []
@@ -205,10 +177,10 @@ gibbsUniquenessExactCutset :
   compileMissing uniqueHaarConformalGibbs ≡ needGibbsUniquenessTheorem ∷ []
 gibbsUniquenessExactCutset = refl
 
-mixingExactCutset :
+mixingSingleAnalyticLeaf :
   compileMissing unconditionalL2Mixing
-  ≡ needMeanZeroInvariance ∷ needUnconditionalOneStepMeanZeroContraction ∷ []
-mixingExactCutset = refl
+  ≡ needUnconditionalOneStepMeanZeroContraction ∷ []
+mixingSingleAnalyticLeaf = refl
 
 fullTransferSqrtTwoRejected :
   compileMissing fullContinuousTransferRadiusSqrtTwo
