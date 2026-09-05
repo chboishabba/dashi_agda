@@ -8,11 +8,6 @@ import DASHI.Cognition.PNF.SensibLawIssueIndexedAdjudicativeHyperfabricExact as 
 import DASHI.Cognition.PNF.SensibLawMaboBrennanDawsonIssueResidualLiveExact as Mabo
 import DASHI.Cognition.PNF.SensibLawMaboRecognitionCoordinateFactorisationExact as Factor
 
-------------------------------------------------------------------------
--- Bridge the Mabo-specific recognition coordinates into the generic
--- issue-indexed adjudicative residual fabric.
-------------------------------------------------------------------------
-
 data MaboAdjudicativeResidual : Set where
   continuityResidual
   enforceabilityResidual
@@ -78,9 +73,7 @@ open MaboIssueHyperfabricReceipt public
 
 compileCoordinateToIssueHyperfabric : Factor.RecognitionCoordinate → MaboIssueHyperfabricReceipt
 compileCoordinateToIssueHyperfabric c = maboIssueHyperfabricReceipt
-  Mabo.maboRecognitionIssue
-  Mabo.brennanDawsonResidual
-  c
+  Mabo.maboRecognitionIssue Mabo.brennanDawsonResidual c
   (coordinateResidual c) refl
   (residualObligation (coordinateResidual c)) refl
   (obligationDiscriminator (residualObligation (coordinateResidual c))) refl
@@ -88,19 +81,13 @@ compileCoordinateToIssueHyperfabric c = maboIssueHyperfabricReceipt
 
 continuityHyperfabric : MaboIssueHyperfabricReceipt
 continuityHyperfabric = compileCoordinateToIssueHyperfabric Factor.continuityAcrossSovereignty
-
 recognitionConductHyperfabric : MaboIssueHyperfabricReceipt
 recognitionConductHyperfabric = compileCoordinateToIssueHyperfabric Factor.recognitionByCrownConduct
 
 continuityObligationIsSpecific : obligation continuityHyperfabric ≡ establishContinuityRule
 continuityObligationIsSpecific = refl
-
 recognitionConductObligationIsSpecific : obligation recognitionConductHyperfabric ≡ establishRecognitionByConduct
 recognitionConductObligationIsSpecific = refl
-
-------------------------------------------------------------------------
--- No-collapse boundaries.
-------------------------------------------------------------------------
 
 data OneRecognitionResidualFitsEveryCoordinate : Set where
 data CoordinateBridgeChangesIssueIdentity : Set where
@@ -108,9 +95,7 @@ data GenericHyperfabricBridgeAdjudicatesMabo : Set where
 
 oneResidualDoesNotFitEveryRecognitionCoordinate : OneRecognitionResidualFitsEveryCoordinate → ⊥
 oneResidualDoesNotFitEveryRecognitionCoordinate ()
-
 coordinateBridgeDoesNotChangeIssueIdentity : CoordinateBridgeChangesIssueIdentity → ⊥
 coordinateBridgeDoesNotChangeIssueIdentity ()
-
 genericBridgeDoesNotAdjudicateMabo : GenericHyperfabricBridgeAdjudicatesMabo → ⊥
 genericBridgeDoesNotAdjudicateMabo ()
