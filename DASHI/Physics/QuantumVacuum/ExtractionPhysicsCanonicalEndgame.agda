@@ -15,3 +15,4 @@ import DASHI.Physics.QuantumVacuum.CasimirBishopCanonicalResidualMetricTailExact
 import DASHI.Physics.QuantumVacuum.CasimirCanonicalResidualMetricConvergenceCompilerExact
 import DASHI.Physics.QuantumVacuum.CasimirBidiEndgameRouterV3Exact
 import DASHI.Physics.QuantumVacuum.CasimirBidiEndgameRouterV4Exact
+import DASHI.Physics.QuantumVacuum.CasimirCanonicalEndgameStatusExact
