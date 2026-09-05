@@ -29,11 +29,13 @@ import DASHI.Analysis.NonArchimedeanMonomialTraceSpatialBidiExact
 
 -- Sharpened closure route.  The source's arbitrary product DFT is retained as
 -- a unitary artifact but cannot substitute for the genuine odd-character
--- transform without an explicit semantic weld.
+-- transform without an explicit semantic weld; the sparse-vs-dense witness
+-- shows it is the wrong literal matrix candidate under the stated indexing.
 import DASHI.Analysis.NonArchimedeanCharacterBasisMatrixFaithfulnessReuseExact
 import DASHI.Analysis.NonArchimedeanHalfPeriodCharacterClassifierExact
 import DASHI.Analysis.NonArchimedeanTauOddCharacterRestrictionBidiExact
 import DASHI.Analysis.NonArchimedeanOddCharacterFourierRechartCorrectionExact
+import DASHI.Analysis.NonArchimedeanProductDFTOddCharacterNoGoExact
 import DASHI.Analysis.NonArchimedeanConcreteMonomialWeldCompilerExact
 import DASHI.Analysis.NonArchimedeanOddOrbitDFTRechartCorrectionExact
 import DASHI.Analysis.NonArchimedeanOddOrbitEquivalenceCompilerExact
