@@ -7,7 +7,10 @@ import DASHI.Law.LowTraceCoerciveForceNonReconstructionExact as Force
 import DASHI.Law.CoerciveContactAuditHyperfabricCrossPollinationExact as Cross
 import DASHI.Law.CoerciveEncounterTrajectoryBidiExact as Trajectory
 import DASHI.Law.CoerciveEncounterLawfulnessBidiExact as Law
+import DASHI.Law.CoerciveEncounterLawfulnessProductExact as Product
+import DASHI.Law.TemporalAuthorityNonRetroactivityExact as Temporal
 import DASHI.Law.IndependentEvidenceProvenanceExact as Provenance
+import DASHI.Law.EvidenceProvenanceDependencyDagExact as Dag
 
 firewallAndReachabilityCoexist :
   Wand.FirewallWithReachability Wand.canonicalFirewallBoundary
@@ -66,3 +69,30 @@ sameEvidenceContentDoesNotEstablishIndependence =
 lowAuditSurfaceHasReconstructionDeficit :
   Provenance.AccountabilityReconstructionDeficit Provenance.canonicalLowAuditSurface
 lowAuditSurfaceHasReconstructionDeficit = Provenance.canonicalAccountabilityDeficit
+
+missingSafeguardBlocksLawfulnessClosure :
+  Product.firstOpenLawfulness
+    (Product.lawfulnessObligationVector
+      Product.coordinateClosed Product.coordinateClosed
+      Product.coordinateClosed Product.coordinateClosed
+      Product.coordinateClosed Product.coordinateOpen
+      Product.coordinateClosed Product.coordinateClosed)
+  ≡ Product.firstOpenLawfulnessCoordinate Product.safeguardCoordinate
+missingSafeguardBlocksLawfulnessClosure = Product.missingSafeguardStopsClosure
+
+laterContrabandCannotBeEarlierSearchProducer :
+  Temporal.RetroactiveProducer Temporal.contrabandAfterSearch
+laterContrabandCannotBeEarlierSearchProducer = Temporal.contrabandAfterSearchIsRetroactive
+
+downstreamDoesNotRetroactivelyCloseUpstream :
+  Temporal.downstreamClosesUpstream Temporal.canonicalDownstreamCannotRetroactivelyCloseUpstream ≡ false
+downstreamDoesNotRetroactivelyCloseUpstream =
+  Temporal.downstreamClosesUpstreamIsFalse Temporal.canonicalDownstreamCannotRetroactivelyCloseUpstream
+
+multipleInstitutionalRecordsMayShareProducer : Dag.SharedUltimateProducer
+multipleInstitutionalRecordsMayShareProducer = Dag.canonicalSharedProducer
+
+independenceConsumerRequiresIndependentProducer :
+  Dag.reverseProvenance Dag.independentCorroborationConsumer ≡ Dag.independentProducerReceipt
+independenceConsumerRequiresIndependentProducer =
+  Dag.independenceConsumerRequiresProducerReceipt
