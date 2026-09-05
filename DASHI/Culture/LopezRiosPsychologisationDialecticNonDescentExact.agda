@@ -3,6 +3,7 @@ module DASHI.Culture.LopezRiosPsychologisationDialecticNonDescentExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.ContextualDialecticRoleExact as Role
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Reasoning.DialecticInvariantGeometry as Dialectic
 import DASHI.Culture.LopezRiosMarxistPsychologySourceAtlasExact as Sources
 
@@ -17,8 +18,10 @@ import DASHI.Culture.LopezRiosMarxistPsychologySourceAtlasExact as Sources
 -- Repo cross-pollination:
 --   ContextualDialecticRoleExact already proves that a role may vary with the
 --   comparison frame and therefore cannot, in general, be replaced by an
---   intrinsic entity role. DialecticInvariantGeometry independently keeps
---   stance-indexed observations, common invariant, and projection distinct.
+--   intrinsic entity role. IntersectionalNonFactorability owns the generic
+--   quotient/factorisation obstruction used here. DialecticInvariantGeometry
+--   independently keeps stance-indexed observations, common invariant, and
+--   projection distinct.
 ------------------------------------------------------------------------
 
 data StructuralFrame : Set where
@@ -56,8 +59,48 @@ structuralDependenciesDiffer :
 structuralDependenciesDiffer ()
 
 ------------------------------------------------------------------------
+-- Generic repository owner.
+--
+-- This same-object fixture is now exported directly as an instance of the
+-- repository-wide non-factorability theorem.  The older local descent surface
+-- remains below as a compatibility facade, not as a second foundation.
+------------------------------------------------------------------------
+
+genericPsychologisationWitness :
+  INF.NonFactorabilityWitness
+    (λ state → individualObservation state samePerson)
+    (λ state → structuralDependency state samePerson)
+genericPsychologisationWitness =
+  INF.nonFactorabilityWitness
+    exploitativeLabourFrame
+    nonExploitativeLabourFrame
+    sameIndividualObservation
+    structuralDependenciesDiffer
+
+genericIndividualObserverCannotFactorStructuralDependency :
+  INF.FactorsThrough
+    (λ state → individualObservation state samePerson)
+    (λ state → structuralDependency state samePerson) →
+  ⊥
+genericIndividualObserverCannotFactorStructuralDependency =
+  INF.witnessRulesOutEveryFlatFactorisation genericPsychologisationWitness
+
+genericIndividualRechartingCannotRecoverStructuralDependency :
+  ∀ {Recharted : Set} →
+  (rechart : IndividualObservation → Recharted) →
+  INF.FactorsThrough
+    (λ state → rechart (individualObservation state samePerson))
+    (λ state → structuralDependency state samePerson) →
+  ⊥
+genericIndividualRechartingCannotRecoverStructuralDependency rechart =
+  INF.rechartingCannotRecoverErasedPhenomenon
+    rechart genericPsychologisationWitness
+
+------------------------------------------------------------------------
+-- Compatibility facade.
 -- A consumer descends through the individual observer iff equal observations
--- force equal consumer-relevant structural dependencies.
+-- force equal consumer-relevant structural dependencies.  New consumers should
+-- prefer the generic FactorsThrough/NonFactorabilityWitness surface above.
 ------------------------------------------------------------------------
 
 IndividualObserverSupportsStructuralDescent : Set
