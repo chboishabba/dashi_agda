@@ -28,6 +28,11 @@ record SourceTheoremMatrix : Set where
     concreteFourierConjugatedTwistedMatrixOwned : Bool
     concreteFourierConjugatedEqualsMonomialOwned : Bool
 
+    sourceDFTRootOrderIsTwoPowNMinusTwo : Bool
+    sourceDFTHasIdentityTwoFactor : Bool
+    sourceDFTReindexIsCardinalityProduct : Bool
+    sourceDFTDefinitionallyEqualsOddCharacterTransform : Bool
+
     twistedBlockHypothesisStoresFinalMagnitude : Bool
     twistedBlockHypothesisStoresFourierMonomialWeld : Bool
     finalSpectralCircleUsesFinalMagnitudeHypothesis : Bool
@@ -51,6 +56,7 @@ canonicalSourceTheoremMatrix =
   sourceTheoremMatrix
     true true true false true true true true
     true true true true false
+    true true true false
     true false true false
     true true false true
     true true false true false true false
@@ -62,6 +68,8 @@ record PromotionMatrix : Set where
     tauOddCharacterSemantics : Bool
     signedTraceKernel : Bool
     concreteDFTInfrastructure : Bool
+    currentProductDFTOddCharacterSemantics : Bool
+    correctedOddCharacterRechartRequired : Bool
     concreteDFTMonomialSameObject : Bool
     spatialSpectralConsumer : Bool
     determinantTowerFactorization : Bool
@@ -76,8 +84,18 @@ record PromotionMatrix : Set where
 canonicalPromotionMatrix : PromotionMatrix
 canonicalPromotionMatrix =
   promotionMatrix
-    true false true true false false true false
+    true false true true false true false false true false
     true true false false false false
+
+currentProductDFTDoesNotPromoteOddCharacterSemantics :
+  PromotionMatrix.currentProductDFTOddCharacterSemantics canonicalPromotionMatrix
+  ≡ false
+currentProductDFTDoesNotPromoteOddCharacterSemantics = refl
+
+correctedOddCharacterRechartIsRequired :
+  PromotionMatrix.correctedOddCharacterRechartRequired canonicalPromotionMatrix
+  ≡ true
+correctedOddCharacterRechartIsRequired = refl
 
 spatialRemainsBlocked :
   PromotionMatrix.spatialSpectralConsumer canonicalPromotionMatrix ≡ false
@@ -95,9 +113,9 @@ sourceDFTInfrastructurePromotes :
   PromotionMatrix.concreteDFTInfrastructure canonicalPromotionMatrix ≡ true
 sourceDFTInfrastructurePromotes = refl
 
-oddCharacterTauOddStillBlocked :
+oddCharacterTauOddStillBlockedInSource :
   PromotionMatrix.tauOddCharacterSemantics canonicalPromotionMatrix ≡ false
-oddCharacterTauOddStillBlocked = refl
+oddCharacterTauOddStillBlockedInSource = refl
 
 literalSpectrumTowerStillBlocked :
   PromotionMatrix.literalSpectrumTower canonicalPromotionMatrix ≡ false
