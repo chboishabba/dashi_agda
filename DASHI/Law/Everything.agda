@@ -24,4 +24,6 @@ import DASHI.Law.ExactIntervalRatioSeparatorExact
 import DASHI.Law.RobustSelectionDisparityBoundsBidiExact
 import DASHI.Law.MissingnessMechanismFibreExact
 import DASHI.Law.MissingnessAssumptionBoundTransportBidiExact
+import DASHI.Law.MarginalConditionalMissingnessNonFactorabilityExact
+import DASHI.Law.MarginalConditionalMissingnessValidation
 import DASHI.Law.CoerciveContactAuditValidation
