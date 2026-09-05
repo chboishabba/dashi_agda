@@ -19,4 +19,6 @@ import DASHI.Law.WandingOpportunityEligibilityHypervoxelExact
 import DASHI.Law.OpportunityConditionedSelectionDisparityExact
 import DASHI.Law.WandingOperationDeploymentProofExact
 import DASHI.Law.DeploymentConditionedSelectionBidiExact
+import DASHI.Law.PartialIdentificationMissingnessBoundsExact
+import DASHI.Law.RobustSelectionDisparityBoundsBidiExact
 import DASHI.Law.CoerciveContactAuditValidation
