@@ -4,7 +4,9 @@ module DASHI.Analysis.NonArchimedeanSpectralSourceTheoremMatrixExact where
 -- Source theorem / advertised claim matrix.
 --
 -- The point is not to judge names, but to force every promoted claim to carry
--- exactly the source strength actually present in the external Lean repo.
+-- exactly the source strength actually present in the external Lean repo, while
+-- separately recording consequences that DASHI can compile from those checked
+-- ingredients plus existing generic machinery.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -18,6 +20,7 @@ record SourceTheoremMatrix : Set where
     DnPreservesTauOddOwned : Bool
     oddCharacterIffTauOddOwned : Bool
     orderThreeOwned : Bool
+    strongThreePowerOddCoefficientOwned : Bool
     cyclotomicOddProductOwned : Bool
     orbitPartitionNeedsSeparateReceipt : Bool
     intermediateOddTraceVanishesOwned : Bool
@@ -54,7 +57,7 @@ record SourceTheoremMatrix : Set where
 canonicalSourceTheoremMatrix : SourceTheoremMatrix
 canonicalSourceTheoremMatrix =
   sourceTheoremMatrix
-    true true true false true true true true
+    true true true false true true true true true
     true true true true false
     true true true false
     true false true false
@@ -65,11 +68,15 @@ record PromotionMatrix : Set where
   constructor promotionMatrix
   field
     finiteCharacterOrbitKernel : Bool
-    tauOddCharacterSemantics : Bool
-    signedTraceKernel : Bool
+    sourceTauOddCharacterSemantics : Bool
+    dashiCompiledTauOddCharacterSemantics : Bool
+    intermediateSignedTraceKernel : Bool
+    strongThreePowerPhaseArithmetic : Bool
+    dashiCompiledFullReturnCancellation : Bool
     concreteDFTInfrastructure : Bool
     currentProductDFTOddCharacterSemantics : Bool
     correctedOddCharacterRechartRequired : Bool
+    correctedOddCharacterRechartUsesExistingDFTTheory : Bool
     concreteDFTMonomialSameObject : Bool
     spatialSpectralConsumer : Bool
     determinantTowerFactorization : Bool
@@ -84,7 +91,8 @@ record PromotionMatrix : Set where
 canonicalPromotionMatrix : PromotionMatrix
 canonicalPromotionMatrix =
   promotionMatrix
-    true false true true false true false false true false
+    true false true true true true
+    true false true true false false true false
     true true false false false false
 
 currentProductDFTDoesNotPromoteOddCharacterSemantics :
@@ -97,6 +105,22 @@ correctedOddCharacterRechartIsRequired :
   ≡ true
 correctedOddCharacterRechartIsRequired = refl
 
+correctedRechartReusesExistingDFTTheory :
+  PromotionMatrix.correctedOddCharacterRechartUsesExistingDFTTheory
+    canonicalPromotionMatrix
+  ≡ true
+correctedRechartReusesExistingDFTTheory = refl
+
+strongThreePowerArithmeticPromotes :
+  PromotionMatrix.strongThreePowerPhaseArithmetic canonicalPromotionMatrix
+  ≡ true
+strongThreePowerArithmeticPromotes = refl
+
+fullReturnCancellationNowCompiles :
+  PromotionMatrix.dashiCompiledFullReturnCancellation canonicalPromotionMatrix
+  ≡ true
+fullReturnCancellationNowCompiles = refl
+
 spatialRemainsBlocked :
   PromotionMatrix.spatialSpectralConsumer canonicalPromotionMatrix ≡ false
 spatialRemainsBlocked = refl
@@ -105,17 +129,17 @@ finiteKernelPromotes :
   PromotionMatrix.finiteCharacterOrbitKernel canonicalPromotionMatrix ≡ true
 finiteKernelPromotes = refl
 
-signedTracePromotes :
-  PromotionMatrix.signedTraceKernel canonicalPromotionMatrix ≡ true
-signedTracePromotes = refl
-
 sourceDFTInfrastructurePromotes :
   PromotionMatrix.concreteDFTInfrastructure canonicalPromotionMatrix ≡ true
 sourceDFTInfrastructurePromotes = refl
 
-oddCharacterTauOddStillBlockedInSource :
-  PromotionMatrix.tauOddCharacterSemantics canonicalPromotionMatrix ≡ false
-oddCharacterTauOddStillBlockedInSource = refl
+sourceOddCharacterTauOddStillNotExported :
+  PromotionMatrix.sourceTauOddCharacterSemantics canonicalPromotionMatrix ≡ false
+sourceOddCharacterTauOddStillNotExported = refl
+
+dashiTauOddSemanticsCompile :
+  PromotionMatrix.dashiCompiledTauOddCharacterSemantics canonicalPromotionMatrix ≡ true
+dashiTauOddSemanticsCompile = refl
 
 literalSpectrumTowerStillBlocked :
   PromotionMatrix.literalSpectrumTower canonicalPromotionMatrix ≡ false
