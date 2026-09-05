@@ -9,6 +9,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
+import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact as Cross
 
 ------------------------------------------------------------------------
 -- CURL DOES NOT SEE THE LONGITUDINAL LERAY CORRECTION
@@ -18,9 +19,9 @@ crossIgnoresLongitudinalCorrection :
   ∀ {r : Level} {F : C3.RealField r}
     (wave value : C3.Complex3 F)
     (alpha : C3.Complex F) →
-  Helical.complex3Cross wave
+  Cross.complex3Cross wave
     (C3.complex3Subtract value (C3.complex3Scale alpha wave))
-  ≡ Helical.complex3Cross wave value
+  ≡ Cross.complex3Cross wave value
 crossIgnoresLongitudinalCorrection {F = F}
     (C3.complex3 kx ky kz)
     (C3.complex3 vx vy vz)
