@@ -18,7 +18,8 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _-_)
 open import Data.List.Base using (length)
 open import Data.List.Membership.Propositional using (_∈_; here; there)
 open import Data.Nat using (_≤_; _<_; z≤n; s≤s)
-open import Data.Nat.Properties as NatP using (≤-trans; ≤-<-trans; n<1+n)
+open import Data.Nat.Properties as NatP using
+  (≤-trans; ≤-<-trans; n<1+n; n≤1+n)
 
 survivorCount : List Bool → Nat
 survivorCount [] = zero
@@ -31,13 +32,10 @@ survivorCountLeLength [] = z≤n
 survivorCountLeLength (false ∷ xs) =
   ≤-trans
     (survivorCountLeLength xs)
-    (NatP.≤-reflexive refl)
-  where
-  open import Relation.Binary.PropositionalEquality using (refl)
+    (n≤1+n (length xs))
 survivorCountLeLength (true ∷ xs) =
   s≤s (survivorCountLeLength xs)
 
--- More direct helper: every Nat is strictly below its successor.
 countBelowSuccessorLength :
   (xs : List Bool) → survivorCount xs < suc (length xs)
 countBelowSuccessorLength xs =
