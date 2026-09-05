@@ -3,8 +3,7 @@ module DASHI.Analysis.NonArchimedeanSpectralSourceTheoremMatrixExact where
 ------------------------------------------------------------------------
 -- SOURCE THEOREM / ADVERTISED CLAIM MATRIX
 --
--- The matrix is source-strength exact.  Generic DASHI compiler output is kept
--- distinct from theorem strength in the external Lean repository.
+-- External Lean theorem strength remains separate from DASHI compiler output.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -40,6 +39,10 @@ record SourceTheoremMatrix : Set where
     namedSpectralTowerConclusionIsSpectrumUnion : Bool
     namedSpectralTowerConclusionIsTrueOnly : Bool
 
+    undirectedGapExponentAlphaLeanOwned : Bool
+    directedRadiusCriticalSigmaHalfAdvertised : Bool
+    directedRadiusCriticalSigmaHalfLeanTheoremLocated : Bool
+
 canonicalSourceTheoremMatrix : SourceTheoremMatrix
 canonicalSourceTheoremMatrix =
   sourceTheoremMatrix
@@ -48,6 +51,7 @@ canonicalSourceTheoremMatrix =
     true true true true
     true false true false
     true true false true
+    true true false
 
 record DashICompilationMatrix : Set where
   constructor dashICompilationMatrix
@@ -55,32 +59,39 @@ record DashICompilationMatrix : Set where
     oddCharacterIffTauOddCompiled : Bool
     correctedOddCharacterDFTReusesExistingTheory : Bool
     binarySheetTauOddEquivalenceOwned : Bool
+    concreteSourceSheetAdapterCompiledFromCheckedDefinitions : Bool
     twistedRestrictionCoreIntertwinerCompiled : Bool
     canonicalOddOrbitPackageCompiled : Bool
-    orbitSumHalfPeriodCompiled : Bool
     signedReturnCompiled : Bool
-    doubledReturnMinusTwoCompiled : Bool
     literalMatrixEqualityCompilesFromBasisAction : Bool
-    concreteSourceSheetAdapterOwned : Bool
-    spatialSpectralConsumerPromoted : Bool
-    literalSpectrumTowerPromoted : Bool
+    characteristicFactorizationCompiled : Bool
+    characteristicRootUnionCompiled : Bool
+    spatialSpectralConsumerCompilerClosed : Bool
+    literalSpectrumTowerRepoCompiled : Bool
+    directedSigmaHalfFromRadiusFormulaRejected : Bool
 
 canonicalDashICompilationMatrix : DashICompilationMatrix
 canonicalDashICompilationMatrix =
   dashICompilationMatrix
-    true true true true true true true true true false false false
+    true true true true true true true true true true true true true
 
-singleFiniteCoreBlocker :
-  DashICompilationMatrix.concreteSourceSheetAdapterOwned
+finiteCoreCompilerClosed :
+  DashICompilationMatrix.spatialSpectralConsumerCompilerClosed
     canonicalDashICompilationMatrix
-  ≡ false
-singleFiniteCoreBlocker = refl
+  ≡ true
+finiteCoreCompilerClosed = refl
 
-spatialRemainsBlockedOnlyAtAdapter :
-  DashICompilationMatrix.spatialSpectralConsumerPromoted
+sourceNamedTowerStillPlaceholder :
+  SourceTheoremMatrix.namedSpectralTowerConclusionIsTrueOnly
+    canonicalSourceTheoremMatrix
+  ≡ true
+sourceNamedTowerStillPlaceholder = refl
+
+repoCompilerClosesTowerStatement :
+  DashICompilationMatrix.literalSpectrumTowerRepoCompiled
     canonicalDashICompilationMatrix
-  ≡ false
-spatialRemainsBlockedOnlyAtAdapter = refl
+  ≡ true
+repoCompilerClosesTowerStatement = refl
 
 sourceProductDFTNotOddCharacterTransform :
   SourceTheoremMatrix.sourceDFTDefinitionallyEqualsOddCharacterTransform
@@ -88,14 +99,14 @@ sourceProductDFTNotOddCharacterTransform :
   ≡ false
 sourceProductDFTNotOddCharacterTransform = refl
 
-sourceFinalMagnitudeStillConditional :
-  SourceTheoremMatrix.finalSpectralCircleDerivesMagnitudeFromOrbitKernel
+directedSigmaHalfNotLocatedAsLeanTheorem :
+  SourceTheoremMatrix.directedRadiusCriticalSigmaHalfLeanTheoremLocated
     canonicalSourceTheoremMatrix
   ≡ false
-sourceFinalMagnitudeStillConditional = refl
+directedSigmaHalfNotLocatedAsLeanTheorem = refl
 
-literalSpectrumTowerStillBlocked :
-  DashICompilationMatrix.literalSpectrumTowerPromoted
-    canonicalDashICompilationMatrix
-  ≡ false
-literalSpectrumTowerStillBlocked = refl
+undirectedAlphaIsLeanOwned :
+  SourceTheoremMatrix.undirectedGapExponentAlphaLeanOwned
+    canonicalSourceTheoremMatrix
+  ≡ true
+undirectedAlphaIsLeanOwned = refl
