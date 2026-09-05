@@ -3,19 +3,22 @@ module DASHI.Analysis.NonArchimedeanSpectralBidiObligationExact where
 ------------------------------------------------------------------------
 -- Reverse / BIDI obligation compiler for the non-Archimedean spectral lane.
 --
--- Generic and arithmetic producers already recovered in the repo are pruned
--- from reverse search.  In particular:
+-- After reusing all currently owned arithmetic and generic machinery, the
+-- finite spectral core has one composite source-specific seam:
 --
---   * primitive half-turn -> -1 is upstream reusable;
---   * odd-character <-> tau-odd compiles from that half-turn and parity;
---   * the strong source theorem `three_pow_two_pow` compiles the full-orbit sum
---     to the dyadic half period;
---   * C2=-C1 plus finite-product algebra compiles W2=-W1 and W1+W2=0;
---   * existing matrix faithfulness compiles literal matrix equality from basis
---     action equality.
+--   literal Hadamard twisted coordinate
+--      <-> tau-odd full function
+--      <-> odd-character basis
+--      <-> corrected modulated half-size DFT coordinates.
 --
--- Thus downstream spatial claims reopen only same-object character wiring,
--- canonical orbit receipts, and the appropriate same-label magnitude/period.
+-- Everything else now compiles after that seam:
+--
+--   * canonical two odd orbits from exact order/parity/cardinality;
+--   * orbit period from exact order;
+--   * orbit magnitude from the existing conditional magnitude theorem;
+--   * signed full return from the stronger source `three_pow_two_pow` theorem;
+--   * literal monomial matrix equality from complete basis action equality;
+--   * spatial spectrum/trace/power transport from the common weld.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -50,21 +53,21 @@ spectralCircleSpatialClaim : BidiClaim
 spectralCircleSpatialClaim =
   bidiClaim spatialSpectralCircle
     "spatial twisted-block spectral circle"
-    "corrected odd-character DFT instantiation + twisted-coordinate same-object weld + canonical odd-orbit receipts + same-label magnitude receipt"
+    "corrected odd-character DFT instantiation + twisted-coordinate/tau-odd same-object weld"
     true false false false
 
 spatialTwistedPowerClaim : BidiClaim
 spatialTwistedPowerClaim =
   bidiClaim spatialTwistedPower
     "spatial twisted-block doubled-return power equals minus two identity"
-    "corrected odd-character DFT instantiation + twisted-coordinate same-object weld + canonical odd-orbit period; signed orbit weight now compiles from strong three-power arithmetic"
+    "same corrected spatial/character weld; orbit period and signed return now compile from owned arithmetic"
     true false false false
 
 orbitProductClaim : BidiClaim
 orbitProductClaim =
   bidiClaim orbitProduct
     "two x3 orbit products multiply to two"
-    "odd-residue cyclotomic product + separate x3 orbit partition receipt"
+    "odd-residue cyclotomic product + canonical two-orbit partition compiler"
     true true true true
 
 multiPrimeCoverClaim : BidiClaim
@@ -98,13 +101,9 @@ ropeOptimalityClaim =
 
 data MissingObligation : Set where
   needInstantiateCorrectOddCharacterDFT : MissingObligation
-  needArithmeticOddOrbitReceipts : MissingObligation
-  needTwistedCoordinateOddCharacterIdentification : MissingObligation
+  needTwistedCoordinateTauOddFunctionWeld : MissingObligation
   needCompleteCharacterBasisActionEquality : MissingObligation
   needConcreteDFTMonomialMatrixEquality : MissingObligation
-  needConcretePeriodAttachment : MissingObligation
-  needConcreteOrbitMagnitudeAttachment : MissingObligation
-  needOrbitPartitionWeld : MissingObligation
   needGraphToDecompositionProducer : MissingObligation
   needDepthDecayProducer : MissingObligation
   needBoundaryEntropySameObjectWeld : MissingObligation
@@ -114,18 +113,13 @@ data MissingObligation : Set where
 compileMissing : ClaimKind → List MissingObligation
 compileMissing spatialSpectralCircle =
   needInstantiateCorrectOddCharacterDFT ∷
-  needArithmeticOddOrbitReceipts ∷
-  needTwistedCoordinateOddCharacterIdentification ∷
+  needTwistedCoordinateTauOddFunctionWeld ∷
   needCompleteCharacterBasisActionEquality ∷
-  needConcretePeriodAttachment ∷
-  needConcreteOrbitMagnitudeAttachment ∷
   []
 compileMissing spatialTwistedPower =
   needInstantiateCorrectOddCharacterDFT ∷
-  needArithmeticOddOrbitReceipts ∷
-  needTwistedCoordinateOddCharacterIdentification ∷
+  needTwistedCoordinateTauOddFunctionWeld ∷
   needCompleteCharacterBasisActionEquality ∷
-  needConcretePeriodAttachment ∷
   []
 compileMissing orbitProduct = []
 compileMissing arbitraryDagCover = needGraphToDecompositionProducer ∷ []
@@ -143,56 +137,50 @@ record BidiFirewall : Set where
     theoremExistsImpliesSameObjectWeld : Bool
     conditionalConsumerImpliesProducer : Bool
     architecturalAnalogyImpliesTheoremTransport : Bool
-    genericInfrastructureMayReplaceConcreteAttachment : Bool
     finalMagnitudeHypothesisMayCountAsItsOwnDerivation : Bool
     compiledMatrixEqualityShouldRemainOnSearchFrontier : Bool
     arbitraryUnitaryDFTMayCountAsOddCharacterDFT : Bool
-    primitiveHalfTurnShouldRemainOnSearchFrontier : Bool
+    canonicalOrbitReceiptsShouldRemainOnSearchFrontier : Bool
     signedOrbitCancellationShouldRemainOnSearchFrontier : Bool
     explicitComplexPhaseValuesRequiredForMinusTwo : Bool
 
 canonicalBidiFirewall : BidiFirewall
 canonicalBidiFirewall =
-  bidiFirewall false false false false false false false false false false false
+  bidiFirewall false false false false false false false false false false
 
-spatialSpectralCircleExactCutset :
+spatialSpectralCircleSingleSeamCutset :
   compileMissing (kind spectralCircleSpatialClaim)
   ≡ needInstantiateCorrectOddCharacterDFT ∷
-    needArithmeticOddOrbitReceipts ∷
-    needTwistedCoordinateOddCharacterIdentification ∷
+    needTwistedCoordinateTauOddFunctionWeld ∷
     needCompleteCharacterBasisActionEquality ∷
-    needConcretePeriodAttachment ∷
-    needConcreteOrbitMagnitudeAttachment ∷
     []
-spatialSpectralCircleExactCutset = refl
+spatialSpectralCircleSingleSeamCutset = refl
 
-spatialPowerSignedLeafIsNowPruned :
+spatialPowerSharesSameSeam :
   compileMissing (kind spatialTwistedPowerClaim)
   ≡ needInstantiateCorrectOddCharacterDFT ∷
-    needArithmeticOddOrbitReceipts ∷
-    needTwistedCoordinateOddCharacterIdentification ∷
+    needTwistedCoordinateTauOddFunctionWeld ∷
     needCompleteCharacterBasisActionEquality ∷
-    needConcretePeriodAttachment ∷
     []
-spatialPowerSignedLeafIsNowPruned = refl
+spatialPowerSharesSameSeam = refl
+
+canonicalOrbitSearchIsPruned :
+  BidiFirewall.canonicalOrbitReceiptsShouldRemainOnSearchFrontier
+    canonicalBidiFirewall
+  ≡ false
+canonicalOrbitSearchIsPruned = refl
+
+signedOrbitSearchIsPruned :
+  BidiFirewall.signedOrbitCancellationShouldRemainOnSearchFrontier
+    canonicalBidiFirewall
+  ≡ false
+signedOrbitSearchIsPruned = refl
 
 compiledMatrixEqualityIsPrunedFromSearch :
   BidiFirewall.compiledMatrixEqualityShouldRemainOnSearchFrontier
     canonicalBidiFirewall
   ≡ false
 compiledMatrixEqualityIsPrunedFromSearch = refl
-
-primitiveHalfTurnIsPrunedFromSearch :
-  BidiFirewall.primitiveHalfTurnShouldRemainOnSearchFrontier
-    canonicalBidiFirewall
-  ≡ false
-primitiveHalfTurnIsPrunedFromSearch = refl
-
-signedOrbitCancellationIsPrunedFromSearch :
-  BidiFirewall.signedOrbitCancellationShouldRemainOnSearchFrontier
-    canonicalBidiFirewall
-  ≡ false
-signedOrbitCancellationIsPrunedFromSearch = refl
 
 arbitraryUnitaryDoesNotSupplyCharacterSemantics :
   BidiFirewall.arbitraryUnitaryDFTMayCountAsOddCharacterDFT
