@@ -45,11 +45,6 @@ longitudinalExpansionClaim = record
 
 ------------------------------------------------------------------------
 -- LOCAL COMPLETENESS SKELETON
---
--- The source can close spanning and longitudinal-index coverage only after one
--- same-object carrier/convention weld.  It does NOT by itself close the exact
--- zero-sector counting, transverse Hilbert completion, or TE/TM independence
--- convention used by the Casimir consumer.
 ------------------------------------------------------------------------
 
 record LocalTETMCompletenessSkeleton : Set₁ where
@@ -63,16 +58,22 @@ record LocalTETMCompletenessSkeleton : Set₁ where
     sameClassicalAndCasimirPlateModeObjectEvidence :
       SameClassicalAndCasimirPlateModeObject
 
+    FiniteEnergyHilbertCarrierMatchesSourceExpansion : Set
+    finiteEnergyHilbertCarrierMatchesSourceExpansionEvidence :
+      FiniteEnergyHilbertCarrierMatchesSourceExpansion
+
     EveryPhysicalModeTEorTM : Set
     sourceExpansionToLocalSpanning :
       Transport.SourceClaim fieldExpansionClaim →
-      SameClassicalAndCasimirPlateModeObject →
+      (SameClassicalAndCasimirPlateModeObject ×
+       FiniteEnergyHilbertCarrierMatchesSourceExpansion) →
       EveryPhysicalModeTEorTM
 
     LongitudinalCompleteness : Set
     sourceLongitudinalExpansionToLocal :
       Transport.SourceClaim longitudinalExpansionClaim →
-      SameClassicalAndCasimirPlateModeObject →
+      (SameClassicalAndCasimirPlateModeObject ×
+       FiniteEnergyHilbertCarrierMatchesSourceExpansion) →
       LongitudinalCompleteness
 
     ZeroSectorCountingCorrect : Set
@@ -85,13 +86,21 @@ record LocalTETMCompletenessSkeleton : Set₁ where
     TransverseCompleteness : Set
     transverseCompletenessEvidence : TransverseCompleteness
 
-    FiniteEnergyHilbertCarrierMatchesSourceExpansion : Set
-    finiteEnergyHilbertCarrierMatchesSourceExpansionEvidence :
-      FiniteEnergyHilbertCarrierMatchesSourceExpansion
-
     reading : String
 
 open LocalTETMCompletenessSkeleton public
+
+SourceToLocalModeObject : LocalTETMCompletenessSkeleton → Set
+SourceToLocalModeObject S =
+  SameClassicalAndCasimirPlateModeObject S ×
+  FiniteEnergyHilbertCarrierMatchesSourceExpansion S
+
+sourceToLocalModeObjectEvidence :
+  (S : LocalTETMCompletenessSkeleton) →
+  SourceToLocalModeObject S
+sourceToLocalModeObjectEvidence S =
+  sameClassicalAndCasimirPlateModeObjectEvidence S ,
+  finiteEnergyHilbertCarrierMatchesSourceExpansionEvidence S
 
 localTarget :
   (claim : Transport.SourceBackedClaim) →
@@ -104,7 +113,7 @@ localTarget claim LocalClaim SameObject SourceToLocal = record
   ; Transport.sameMathematicalObject = SameObject
   ; Transport.sourceSemanticsToLocal = SourceToLocal
   ; Transport.reading =
-      "Parallel-plate source theorem transported only after the common local mode-object weld."
+      "Parallel-plate source theorem transported only after the local mode semantics and finite-energy/Hilbert carrier are both identified."
   }
 
 compileEveryPhysicalModeTEorTM :
@@ -115,10 +124,10 @@ compileEveryPhysicalModeTEorTM S =
     fieldExpansionClaim
     (localTarget fieldExpansionClaim
       (EveryPhysicalModeTEorTM S)
-      (SameClassicalAndCasimirPlateModeObject S)
+      (SourceToLocalModeObject S)
       (sourceExpansionToLocalSpanning S))
     (record
-      { Transport.objectWeld = sameClassicalAndCasimirPlateModeObjectEvidence S })
+      { Transport.objectWeld = sourceToLocalModeObjectEvidence S })
 
 compileLongitudinalCompleteness :
   (S : LocalTETMCompletenessSkeleton) →
@@ -128,10 +137,10 @@ compileLongitudinalCompleteness S =
     longitudinalExpansionClaim
     (localTarget longitudinalExpansionClaim
       (LongitudinalCompleteness S)
-      (SameClassicalAndCasimirPlateModeObject S)
+      (SourceToLocalModeObject S)
       (sourceLongitudinalExpansionToLocal S))
     (record
-      { Transport.objectWeld = sameClassicalAndCasimirPlateModeObjectEvidence S })
+      { Transport.objectWeld = sourceToLocalModeObjectEvidence S })
 
 compileProofBearingTETMCompleteness :
   (S : LocalTETMCompletenessSkeleton) →
@@ -161,8 +170,7 @@ compileProofBearingTETMCompleteness S = record
 
 record ReverseSourceBackedCompletenessObligations : Set where
   field
-    oneClassicalToCasimirModeObjectWeld : Set
-    finiteEnergyHilbertCarrierIdentification : Set
+    classicalToCasimirModeAndFiniteEnergyCarrierWeld : Set
     transverseContinuumCompleteness : Set
     teTmIndependenceAwayFromExceptionalSector : Set
     exactZeroSectorCountingConvention : Set
@@ -176,9 +184,11 @@ data SourceExpansionAutomaticallyProvesTransverseHilbertCompletion : Set where
 
 data SourceDiscussionOfZeroSectorAutomaticallyProvesLocalCounting : Set where
 
-oneModeObjectWeldFeedsSourceClaims :
+data MatchingModeLabelsWithoutFiniteEnergyCarrierIdentitySuffices : Set where
+
+oneCarrierWeldFeedsSourceClaims :
   SeparateSourceReceiptRequiredForSpanningAndLongitudinalCoverage → ⊥
-oneModeObjectWeldFeedsSourceClaims ()
+oneCarrierWeldFeedsSourceClaims ()
 
 sourceDoesNotInventTransverseCompletion :
   SourceExpansionAutomaticallyProvesTransverseHilbertCompletion → ⊥
@@ -188,18 +198,24 @@ zeroSectorDiscussionDoesNotFixLocalCounting :
   SourceDiscussionOfZeroSectorAutomaticallyProvesLocalCounting → ⊥
 zeroSectorDiscussionDoesNotFixLocalCounting ()
 
+labelsAloneDoNotIdentifyCompletion :
+  MatchingModeLabelsWithoutFiniteEnergyCarrierIdentitySuffices → ⊥
+labelsAloneDoNotIdentifyCompletion ()
+
 record Status : Set where
   field
     fieldSpanningSourceBacked : Bool
     longitudinalCoverageSourceBacked : Bool
-    oneModeObjectWeldFeedsTwoCompilers : Bool
+    oneCarrierWeldFeedsTwoCompilers : Bool
+    finiteEnergyCarrierIncludedInSourceWeld : Bool
     proofBearingCompletenessCompilerOwned : Bool
     transverseHilbertCompletionStillLocal : Bool
     zeroSectorCountingStillLocal : Bool
 
     fieldSpanningSourceBackedIsTrue : fieldSpanningSourceBacked ≡ true
     longitudinalCoverageSourceBackedIsTrue : longitudinalCoverageSourceBacked ≡ true
-    oneModeObjectWeldFeedsTwoCompilersIsTrue : oneModeObjectWeldFeedsTwoCompilers ≡ true
+    oneCarrierWeldFeedsTwoCompilersIsTrue : oneCarrierWeldFeedsTwoCompilers ≡ true
+    finiteEnergyCarrierIncludedInSourceWeldIsTrue : finiteEnergyCarrierIncludedInSourceWeld ≡ true
     proofBearingCompletenessCompilerOwnedIsTrue : proofBearingCompletenessCompilerOwned ≡ true
     transverseHilbertCompletionStillLocalIsTrue : transverseHilbertCompletionStillLocal ≡ true
     zeroSectorCountingStillLocalIsTrue : zeroSectorCountingStillLocal ≡ true
@@ -210,13 +226,15 @@ canonicalStatus : Status
 canonicalStatus = record
   { fieldSpanningSourceBacked = true
   ; longitudinalCoverageSourceBacked = true
-  ; oneModeObjectWeldFeedsTwoCompilers = true
+  ; oneCarrierWeldFeedsTwoCompilers = true
+  ; finiteEnergyCarrierIncludedInSourceWeld = true
   ; proofBearingCompletenessCompilerOwned = true
   ; transverseHilbertCompletionStillLocal = true
   ; zeroSectorCountingStillLocal = true
   ; fieldSpanningSourceBackedIsTrue = refl
   ; longitudinalCoverageSourceBackedIsTrue = refl
-  ; oneModeObjectWeldFeedsTwoCompilersIsTrue = refl
+  ; oneCarrierWeldFeedsTwoCompilersIsTrue = refl
+  ; finiteEnergyCarrierIncludedInSourceWeldIsTrue = refl
   ; proofBearingCompletenessCompilerOwnedIsTrue = refl
   ; transverseHilbertCompletionStillLocalIsTrue = refl
   ; zeroSectorCountingStillLocalIsTrue = refl
