@@ -12,14 +12,6 @@ import DASHI.Analysis.BishopPowerFirstOrderDifferenceFactorisationExact as Power
 
 ------------------------------------------------------------------------
 -- BISHOP FACTOR DERIVATIVE: IDENTITY, CONTINUITY, PRODUCT RULE
---
--- The factor derivative is strong enough to compile ordinary first-order
--- calculus internally.  In particular differentiability implies sequential
--- continuity because
---
---   f(x+h)-f(x) ~= h q(h),  h_j -> 0,  q(h_j) -> f'(x),
---
--- hence h_j q(h_j) -> 0.
 ------------------------------------------------------------------------
 
 factorDerivativeIdentity :
@@ -92,7 +84,6 @@ factorDerivativeSequentialContinuity
         h = perturbation index
         shifted = f (Bishop._+_ point h)
         base = f point
-        q = Factor.quotient D h
         open BishopP.ℝ-Solver
       in
       BishopP.≃-trans
@@ -120,10 +111,11 @@ factorDerivativeSequentialContinuity
         (f point)
     rawLimitIsBase =
       let open BishopP.ℝ-Solver in
-      solve 1
-        (λ base → base ⊕ (Κ 0ℚᵘ ⊗ derivativeValue) ⊜ base)
+      solve 2
+        (λ base derivative →
+          base ⊕ (Κ 0ℚᵘ ⊗ derivative) ⊜ base)
         BishopP.≃-refl
-        (f point)
+        (f point) derivativeValue
   in
   BishopSequence.xₙ→x∧x≃y⇒xₙ→y
     actualConvergesToRawLimit rawLimitIsBase
