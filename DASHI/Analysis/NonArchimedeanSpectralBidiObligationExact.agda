@@ -29,7 +29,6 @@ data ClaimKind : Set where
   prolateCriticalLineHalf : ClaimKind
   cyclotomicAnchorsProlateHalf : ClaimKind
   uniqueHaarConformalGibbs : ClaimKind
-
   unitPrefactorOneStepL2Contraction : ClaimKind
   prefactoredL2PowerMixing : ClaimKind
   totalVariationMixing : ClaimKind
@@ -38,7 +37,6 @@ data ClaimKind : Set where
   setDependentStoppingSurvivalBound : ClaimKind
   stoppingMomentFiniteness : ClaimKind
   taoStyleStoppingConcentration : ClaimKind
-
   fullContinuousTransferRadiusSqrtTwo : ClaimKind
   orbitProduct : ClaimKind
   arbitraryDagCover : ClaimKind
@@ -172,21 +170,18 @@ data MissingObligation : Set where
   needDirectedRadiusSigmaScalingTheorem : MissingObligation
   needCyclotomicToProlateSigmaSameObjectWeld : MissingObligation
   needGibbsUniquenessTheorem : MissingObligation
-
   rejectedUnitPrefactorOneStepContraction : MissingObligation
   needInputParsevalShellEnergyWeld : MissingObligation
   needOutputParsevalShellEnergyWeld : MissingObligation
   needCorrelationConsumerWeld : MissingObligation
-
   rejectedUniversalStoppingSurvivalBound : MissingObligation
   needZModCyclicPredecessorAdapter : MissingObligation
-  needFiniteUniformHittingBlockCompiler : MissingObligation
-  needOneKilledWordCountBound : MissingObligation
+  needZModFiniteEnumerationAdapter : MissingObligation
+  needPrefixHitAbsorptionWeld : MissingObligation
   needProbabilityNormalization : MissingObligation
   needStoppingTailGeneratingFunctionConsumer : MissingObligation
   needMarkovConcentrationHypotheses : MissingObligation
   needDriftStoppingSameObjectWeld : MissingObligation
-
   rejectedFullTransferRadiusSqrtTwo : MissingObligation
   needGraphToDecompositionProducer : MissingObligation
   needDepthDecayProducer : MissingObligation
@@ -204,7 +199,6 @@ compileMissing prolateCriticalLineHalf = []
 compileMissing cyclotomicAnchorsProlateHalf =
   needCyclotomicToProlateSigmaSameObjectWeld ∷ []
 compileMissing uniqueHaarConformalGibbs = needGibbsUniquenessTheorem ∷ []
-
 compileMissing unitPrefactorOneStepL2Contraction =
   rejectedUnitPrefactorOneStepContraction ∷ []
 compileMissing prefactoredL2PowerMixing =
@@ -217,24 +211,22 @@ compileMissing correlationDecayAtInverseSqrtTwo =
   needInputParsevalShellEnergyWeld ∷
   needOutputParsevalShellEnergyWeld ∷
   needCorrelationConsumerWeld ∷ []
-
 compileMissing universalStoppingSurvivalBound =
   rejectedUniversalStoppingSurvivalBound ∷ []
 compileMissing setDependentStoppingSurvivalBound =
   needZModCyclicPredecessorAdapter ∷
-  needFiniteUniformHittingBlockCompiler ∷
-  needOneKilledWordCountBound ∷
+  needZModFiniteEnumerationAdapter ∷
+  needPrefixHitAbsorptionWeld ∷
   needProbabilityNormalization ∷ []
 compileMissing stoppingMomentFiniteness =
   needZModCyclicPredecessorAdapter ∷
-  needFiniteUniformHittingBlockCompiler ∷
-  needOneKilledWordCountBound ∷
+  needZModFiniteEnumerationAdapter ∷
+  needPrefixHitAbsorptionWeld ∷
   needProbabilityNormalization ∷
   needStoppingTailGeneratingFunctionConsumer ∷ []
 compileMissing taoStyleStoppingConcentration =
   needMarkovConcentrationHypotheses ∷
   needDriftStoppingSameObjectWeld ∷ []
-
 compileMissing fullContinuousTransferRadiusSqrtTwo =
   rejectedFullTransferRadiusSqrtTwo ∷ []
 compileMissing orbitProduct = []
@@ -277,8 +269,8 @@ universalStoppingSurvivalRejected = refl
 constructiveSetDependentStoppingTailCutset :
   compileMissing setDependentStoppingSurvivalBound
   ≡ needZModCyclicPredecessorAdapter ∷
-    needFiniteUniformHittingBlockCompiler ∷
-    needOneKilledWordCountBound ∷
+    needZModFiniteEnumerationAdapter ∷
+    needPrefixHitAbsorptionWeld ∷
     needProbabilityNormalization ∷ []
 constructiveSetDependentStoppingTailCutset = refl
 
