@@ -19,6 +19,8 @@ import DASHI.Law.CoerciveEncounterDenominatorIntegrityExact as Denom
 import DASHI.Law.SelectionEligibilityDisparityBidiExact as Disparity
 import DASHI.Law.WandingOpportunityEligibilityHypervoxelExact as Opportunity
 import DASHI.Law.OpportunityConditionedSelectionDisparityExact as Conditional
+import DASHI.Law.WandingOperationDeploymentProofExact as Deployment
+import DASHI.Law.DeploymentConditionedSelectionBidiExact as DeploymentBidi
 
 firewallAndReachabilityCoexist :
   Wand.FirewallWithReachability Wand.canonicalFirewallBoundary
@@ -186,3 +188,32 @@ officerSelectionStillRequiresEligibilityConditioning :
     Conditional.canonicalDeploymentOnlyCutset
   ≡ Conditional.eligibilityResidual
 officerSelectionStillRequiresEligibilityConditioning = Conditional.canonicalOfficerSelectionStillNeedsEligibility
+
+deploymentRequiresExposureSetProducer :
+  Deployment.firstOpenDeployment Deployment.canonicalDeployment
+  ≡ Deployment.firstOpenDeploymentCoordinate Deployment.exposureSetCoordinate
+deploymentRequiresExposureSetProducer = Deployment.canonicalDeploymentStopsAtExposureSet
+
+conditionalSelectionRetainsEligibleExposureDenominator :
+  Deployment.denominator
+    (Deployment.selectedGivenOpportunityEligibility Deployment.canonicalExposureLedger)
+  ≡ 6
+conditionalSelectionRetainsEligibleExposureDenominator =
+  Deployment.canonicalConditionalSelectionDenominator
+
+operationAuthorisationDoesNotCloseSelectionDenominator :
+  DeploymentBidi.firstDeploymentSelectionResidual
+    DeploymentBidi.conditionalSelectionRate
+    DeploymentBidi.canonicalExposureSetOpenCutset
+  ≡ DeploymentBidi.exposureSetResidual
+operationAuthorisationDoesNotCloseSelectionDenominator =
+  DeploymentBidi.canonicalConditionalSelectionStopsAtExposureSet
+
+deploymentAdjustedDisparityStillNeedsGroupLinkage :
+  DeploymentBidi.firstDeploymentSelectionResidual
+    DeploymentBidi.deploymentAdjustedGroupDisparity
+    (DeploymentBidi.deploymentSelectionCutset true true true true false true
+      "deployment/exposure/eligibility/selection closed; group linkage open")
+  ≡ DeploymentBidi.groupLinkageResidual
+deploymentAdjustedDisparityStillNeedsGroupLinkage =
+  DeploymentBidi.canonicalAdjustedDisparityStopsAtGroupLinkage
