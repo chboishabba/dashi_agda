@@ -13,14 +13,19 @@ module DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact where
 --   * odd-character <-> tau-odd compiles from primitive half-turn + parity;
 --   * the source product DFT is a valid unitary artifact but is rejected as the
 --     literal odd-character transform;
---   * the correct odd-character transform is the existing half-size cyclic DFT
---     with diagonal omega^v modulation;
---   * orbit signed cancellation now compiles from the already-owned stronger
---     integer theorem `three_pow_two_pow` and ordinary finite-product algebra.
+--   * the correct odd-character transform reuses the existing half-size cyclic
+--     DFT with diagonal omega^v modulation;
+--   * the canonical two odd orbits compile from exact order/parity/cardinality;
+--   * orbit signed cancellation compiles from the already-owned stronger
+--     integer theorem `three_pow_two_pow` and ordinary finite-product algebra;
+--   * the monomial matrix equality compiles from complete basis action using
+--     existing finite matrix faithfulness.
 --
--- Hence the only highest-alpha source-specific front is the same-object wiring
--- between the literal twisted coordinate carrier and the corrected
--- odd-character Fourier basis.
+-- Hence the only highest-alpha live source-specific front is the same-object
+-- wiring between the literal Hadamard twisted coordinate carrier and the
+-- tau-odd/odd-character function carrier.  Once that weld is instantiated, the
+-- corrected DFT coordinates, spectrum, trace, and doubled-return power all fan
+-- out downstream from the same object.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -60,7 +65,7 @@ leafStatus instantiateCorrectOddCharacterDFT = repoReusable
 leafStatus twistedCoordinateCharacterIdentification = live
 leafStatus completeCharacterBasisActionEquality = downstream
 leafStatus concreteDFTConjugatedEqualsMonomial = compiled
-leafStatus arithmeticOddOrbitReceipts = live
+leafStatus arithmeticOddOrbitReceipts = compiled
 leafStatus arithmeticOddOrbitChart = compiled
 leafStatus orbitSumHalfPeriod = compiled
 leafStatus negativeOrbitWeightSign = compiled
@@ -72,7 +77,6 @@ priority : List OriginalGoalLeaf
 priority =
   twistedCoordinateCharacterIdentification ∷
   instantiateCorrectOddCharacterDFT ∷
-  arithmeticOddOrbitReceipts ∷
   completeCharacterBasisActionEquality ∷
   literalOneStepSpectrumUnion ∷
   []
@@ -85,11 +89,12 @@ record SharedWeldFanout : Set where
     correctedOddCharacterRechartFeedsSpatialPower : Bool
     equalityOnBasisCompilesLiteralMatrixEquality : Bool
     signedOrbitLaneIndependentOfSpatialRechart : Bool
+    canonicalOrbitLaneIndependentOfSpatialRechart : Bool
     threeIndependentMatrixWeldsShouldBeSearched : Bool
 
 canonicalSharedWeldFanout : SharedWeldFanout
 canonicalSharedWeldFanout =
-  sharedWeldFanout true true true true true false
+  sharedWeldFanout true true true true true true false
 
 record OriginalGoalBoundary : Set where
   constructor originalGoalBoundary
@@ -111,7 +116,7 @@ record OriginalGoalBoundary : Set where
     oddCharacterTauOddIffCompilesFromHalfPeriod : Bool
     correctedOddCharacterDFTUsesExistingDFTTheory : Bool
     correctedOddCharacterDFTNeedsNewGenericFourierLibrary : Bool
-    arithmeticOrbitChartCompilesFromReceipts : Bool
+    canonicalOddOrbitPackageCompilesFromExistingArithmetic : Bool
     strongThreePowerOddCoefficientOwned : Bool
     orbitSumHalfPeriodCompilesFromStrongThreePower : Bool
     negativeOrbitWeightSignCompilesFromOrbitSum : Bool
@@ -149,6 +154,10 @@ newFourierLibraryPruned :
   ≡ false
 newFourierLibraryPruned = refl
 
+canonicalOddOrbitNowCompiled :
+  leafStatus arithmeticOddOrbitReceipts ≡ compiled
+canonicalOddOrbitNowCompiled = refl
+
 orbitSumNowCompiled :
   leafStatus orbitSumHalfPeriod ≡ compiled
 orbitSumNowCompiled = refl
@@ -161,9 +170,9 @@ minusTwoNowCompiled :
   leafStatus doubledReturnMinusTwo ≡ compiled
 minusTwoNowCompiled = refl
 
-spatialCharacterWeldIsHighestAlphaLiveLeaf :
+spatialCharacterWeldIsOnlyLiveFiniteCoreLeaf :
   leafStatus twistedCoordinateCharacterIdentification ≡ live
-spatialCharacterWeldIsHighestAlphaLiveLeaf = refl
+spatialCharacterWeldIsOnlyLiveFiniteCoreLeaf = refl
 
 monsterIsOptionalForOriginalClosure :
   OriginalGoalBoundary.monsterCorrespondenceRequiredForSpectralClosure
