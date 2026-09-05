@@ -103,7 +103,8 @@ compileConcreteZetaMinusThreeOneOver120 :
 compileConcreteZetaMinusThreeOneOver120 Z W weld = record
   { Analytic.analytic = analyticReceipt W
   ; Analytic.rationalCompiler = Arithmetic.bernoulliB4CompilerProducesOneOver120
-  ; Analytic.rationalCompilerUsesB4 = tt
+  ; Analytic.rationalCompilerUsesB4 =
+      Arithmetic.minusB4OverFour ≡ Arithmetic.oneOver120
   ; Analytic.zetaMinusThreeEqualsOneOver120 =
       Transport.transportSourceBackedTheorem
         negativeIntegerSourceClaim
@@ -133,7 +134,8 @@ asLegacyBernoulliAnalyticReceipt {Z} receipt = record
   ; Arithmetic.bernoulliB4IdentifiedWithMinusOneOver30 =
       Analytic.b4EqualsMinusOneOverThirty (Analytic.analytic receipt)
   ; Arithmetic.zetaValueTransportToRational =
-      Analytic.zetaMinusThreeEqualsOneOver120 receipt
+      Analytic.zeta Z (Analytic.minusThree Z)
+      ≡ Analytic.embedRational Z Arithmetic.oneOver120
   }
 
 record ReverseConcreteZetaObligations : Set where
