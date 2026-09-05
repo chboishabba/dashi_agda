@@ -14,16 +14,6 @@ import DASHI.Physics.QuantumVacuum.Casimir720FactorisationBidiExact as C720
 
 ------------------------------------------------------------------------
 -- CASIMIR BIDI ENDGAME ROUTER V2
---
--- This is the reduced producer graph after repo cross-pollination.  It does not
--- require callers to pre-build the old monolithic regulator completion or the
--- old zeta producer:
---
---   * convergence may arrive through either the summable-increment route OR a
---     direct regulator metric-tail route;
---   * the zeta producer is compiler output from the typed source-backed defect
---     weld;
---   * 6*120=720 remains arithmetic compiler output.
 ------------------------------------------------------------------------
 
 record ReducedCasimirProducerBundle
@@ -39,10 +29,25 @@ record ReducedCasimirProducerBundle
     zetaDefectWeld : Zeta.CasimirZetaDefectCarrierWeld kernel
 
     sameSpectrumAcrossMaxwellAndTransverse : Set
+    sameSpectrumAcrossMaxwellAndTransverseEvidence :
+      sameSpectrumAcrossMaxwellAndTransverse
+
     samePostCancellationResidualAsTransverseCalculation : Set
+    samePostCancellationResidualAsTransverseCalculationEvidence :
+      samePostCancellationResidualAsTransverseCalculation
+
     sameLongitudinalDefectAcrossOneSixthAndZeta : Set
+    sameLongitudinalDefectAcrossOneSixthAndZetaEvidence :
+      sameLongitudinalDefectAcrossOneSixthAndZeta
+
     sameSeparationParameter : Set
+    sameSeparationParameterEvidence : sameSeparationParameter
+
     sameRenormalisedObservable : Set
+    sameRenormalisedObservableEvidence : sameRenormalisedObservable
+
+    zetaDefectSameObjectEvidence :
+      Zeta.sameCasimirLongitudinalDefect zetaDefectWeld
 
     reading : String
 
@@ -101,11 +106,10 @@ compileReducedEndgame B = record
   ; zetaProducer = compiledZetaProducer B
   ; zeta120 = compiledZeta120Receipt B
   ; arithmetic720 = compiled6Times120 B
-  ; residualIsSameRenormalisedObservable = sameRenormalisedObservable B
-  ; zetaIsSameLongitudinalDefect =
-      Zeta.sameCasimirLongitudinalDefect (zetaDefectWeld B)
+  ; residualIsSameRenormalisedObservable = sameRenormalisedObservableEvidence B
+  ; zetaIsSameLongitudinalDefect = zetaDefectSameObjectEvidence B
   ; reading =
-      "Reduced Casimir endgame: Maxwell/transverse producers plus one convergence route and one typed zeta-defect weld compile the residual limit and longitudinal 1/120 receipt."
+      "Reduced Casimir endgame: Maxwell/transverse producers plus one convergence route and one typed proof-bearing zeta-defect weld compile the residual limit and longitudinal 1/120 receipt."
   }
 
 ------------------------------------------------------------------------
@@ -118,15 +122,14 @@ record ReverseReducedEndgameObligations : Set where
     transverseOneSixthPhysicalWeld : Set
     oneResidualConvergenceRoute : Set
     typedSourceBackedZetaDefectWeld : Set
-    sameObjectAssemblyWelds : Set
+    proofBearingSameObjectAssemblyWelds : Set
 
 open ReverseReducedEndgameObligations public
 
 data OldMonolithicRegulatorCompletionIsAlwaysRequired : Set where
-
 data PrebuiltLegacyZetaProducerIsAlwaysRequired : Set where
-
 data BothResidualConvergenceRoutesAreRequired : Set where
+data BareSameObjectSetLabelIsEnoughForV2Assembly : Set where
 
 monolithicRegulatorNoLongerMandatory :
   OldMonolithicRegulatorCompletionIsAlwaysRequired → ⊥
@@ -140,9 +143,14 @@ onlyOneResidualRouteRequired :
   BothResidualConvergenceRoutesAreRequired → ⊥
 onlyOneResidualRouteRequired ()
 
+v2RequiresEvidenceNotBareLabels :
+  BareSameObjectSetLabelIsEnoughForV2Assembly → ⊥
+v2RequiresEvidenceNotBareLabels ()
+
 record Status : Set where
   field
     reducedEndgameRouterOwned : Bool
+    proofBearingAssemblyWeldsOwned : Bool
     zetaProducerCompilerOwned : Bool
     convergenceRouteDisjunctionOwned : Bool
     arithmetic720CompilerOwned : Bool
@@ -152,6 +160,7 @@ record Status : Set where
     zetaDefectSameObjectWeldStillLive : Bool
 
     reducedEndgameRouterOwnedIsTrue : reducedEndgameRouterOwned ≡ true
+    proofBearingAssemblyWeldsOwnedIsTrue : proofBearingAssemblyWeldsOwned ≡ true
     zetaProducerCompilerOwnedIsTrue : zetaProducerCompilerOwned ≡ true
     convergenceRouteDisjunctionOwnedIsTrue : convergenceRouteDisjunctionOwned ≡ true
     arithmetic720CompilerOwnedIsTrue : arithmetic720CompilerOwned ≡ true
@@ -165,6 +174,7 @@ open Status public
 canonicalStatus : Status
 canonicalStatus = record
   { reducedEndgameRouterOwned = true
+  ; proofBearingAssemblyWeldsOwned = true
   ; zetaProducerCompilerOwned = true
   ; convergenceRouteDisjunctionOwned = true
   ; arithmetic720CompilerOwned = true
@@ -173,6 +183,7 @@ canonicalStatus = record
   ; concreteResidualTailStillLive = true
   ; zetaDefectSameObjectWeldStillLive = true
   ; reducedEndgameRouterOwnedIsTrue = refl
+  ; proofBearingAssemblyWeldsOwnedIsTrue = refl
   ; zetaProducerCompilerOwnedIsTrue = refl
   ; convergenceRouteDisjunctionOwnedIsTrue = refl
   ; arithmetic720CompilerOwnedIsTrue = refl
