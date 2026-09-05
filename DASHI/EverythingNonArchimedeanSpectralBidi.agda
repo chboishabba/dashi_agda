@@ -71,10 +71,10 @@ import DASHI.Analysis.NonArchimedeanContinuousGibbsUniquenessBidiExact
 import DASHI.Analysis.NonArchimedeanSemilocalSigmaNonDescentExact
 import DASHI.Analysis.NonArchimedeanSigmaAnchorSameObjectBidiExact
 
--- Corrected finite Markov/mixing route.  The source C=1 one-step
--- inverse-sqrt-two contraction is refuted at n=3.  The viable route uses a
--- finite level-dependent prefactor, exact monomial powers and unitary shell
--- energy assembly.  Stopping-time consumers are routed independently.
+-- Corrected finite Markov/mixing route.  Both the source C=1 L2 estimate and
+-- its advertised universal inverse-sqrt-two stopping-survival tail are refuted
+-- by exact n=3 witnesses.  Viable repairs use finite prefactors and weaker,
+-- set-dependent killed-chain bounds.
 import DASHI.Analysis.NonArchimedeanContinuousMixingBidiExact
 import DASHI.Analysis.NonArchimedeanMixingRateNormalizationExact
 import DASHI.Analysis.NonArchimedeanMeanZeroInvariantCompilerExact
@@ -85,6 +85,7 @@ import DASHI.Analysis.NonArchimedeanMonomialPowerPrefactorBidiExact
 import DASHI.Analysis.NonArchimedeanExplicitSquaredMixingPrefactorExact
 import DASHI.Analysis.NonArchimedeanPrefactoredL2PowerCompilerExact
 import DASHI.Analysis.NonArchimedeanFourierShellEnergyAssemblyBidiExact
+import DASHI.Analysis.NonArchimedeanStoppingSurvivalN3CounterexampleExact
 import DASHI.Analysis.NonArchimedeanStoppingTimeAuthorityBidiExact
 
 import DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact
