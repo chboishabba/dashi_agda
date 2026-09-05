@@ -3,15 +3,17 @@ module DASHI.Analysis.NonArchimedeanSpectralBidiObligationExact where
 ------------------------------------------------------------------------
 -- Reverse / BIDI obligation compiler for the non-Archimedean spectral lane.
 --
--- Finite spectral closure is dependency-closed.  Post-closure continuous and
--- Markov claims are routed at their actual theorem strength.  Two advertised
+-- Finite spectral closure is dependency-closed. Post-closure continuous and
+-- Markov claims are routed at their actual theorem strength. Two advertised
 -- unit/uniform Markov estimates are refuted by exact n=3 witnesses:
 --
 --   * unit-prefactor one-step L2 inverse-sqrt-two contraction;
 --   * universal sqrt(|A^c|) 2^(-t/2) stopping-survival bound.
 --
 -- The viable repairs are level-dependent prefactored L2 powers and a finite,
--- constructive hitting-block route for set-dependent stopping tails.
+-- constructive hitting-block route for set-dependent stopping tails. The source
+-- already supplies the finite ZMod/Finset.univ carrier enumeration, so the
+-- constructive stopping tail now has only three same-object/backend leaves.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -176,8 +178,7 @@ data MissingObligation : Set where
   needCorrelationConsumerWeld : MissingObligation
   rejectedUniversalStoppingSurvivalBound : MissingObligation
   needZModCyclicPredecessorAdapter : MissingObligation
-  needZModFiniteEnumerationAdapter : MissingObligation
-  needPrefixHitAbsorptionWeld : MissingObligation
+  needSourceRwPathPrefixAbsorptionWeld : MissingObligation
   needProbabilityNormalization : MissingObligation
   needStoppingTailGeneratingFunctionConsumer : MissingObligation
   needMarkovConcentrationHypotheses : MissingObligation
@@ -215,13 +216,11 @@ compileMissing universalStoppingSurvivalBound =
   rejectedUniversalStoppingSurvivalBound ∷ []
 compileMissing setDependentStoppingSurvivalBound =
   needZModCyclicPredecessorAdapter ∷
-  needZModFiniteEnumerationAdapter ∷
-  needPrefixHitAbsorptionWeld ∷
+  needSourceRwPathPrefixAbsorptionWeld ∷
   needProbabilityNormalization ∷ []
 compileMissing stoppingMomentFiniteness =
   needZModCyclicPredecessorAdapter ∷
-  needZModFiniteEnumerationAdapter ∷
-  needPrefixHitAbsorptionWeld ∷
+  needSourceRwPathPrefixAbsorptionWeld ∷
   needProbabilityNormalization ∷
   needStoppingTailGeneratingFunctionConsumer ∷ []
 compileMissing taoStyleStoppingConcentration =
@@ -269,8 +268,7 @@ universalStoppingSurvivalRejected = refl
 constructiveSetDependentStoppingTailCutset :
   compileMissing setDependentStoppingSurvivalBound
   ≡ needZModCyclicPredecessorAdapter ∷
-    needZModFiniteEnumerationAdapter ∷
-    needPrefixHitAbsorptionWeld ∷
+    needSourceRwPathPrefixAbsorptionWeld ∷
     needProbabilityNormalization ∷ []
 constructiveSetDependentStoppingTailCutset = refl
 
