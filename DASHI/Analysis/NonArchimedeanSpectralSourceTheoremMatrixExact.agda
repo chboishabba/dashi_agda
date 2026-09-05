@@ -39,6 +39,33 @@ record SourceTheoremMatrix : Set where
     namedSpectralTowerConclusionIsSpectrumUnion : Bool
     namedSpectralTowerConclusionIsTrueOnly : Bool
 
+    continuousTransferDefined : Bool
+    normalizedContinuousTransferDefined : Bool
+    unnormalizedConstantEigenvalueTwoOwned : Bool
+    normalizedConstantEigenvalueOneOwned : Bool
+    twistedCircleRadiusSequenceOwned : Bool
+    twistedCircleRadiusAtTwoSqrtTwoOwned : Bool
+    twistedCircleRadiusConvergesOneOwned : Bool
+    fullContinuousOperatorRadiusSqrtTwoOwned : Bool
+
+    gibbsMarkovEquivalenceOwned : Bool
+    branchInvariantImpliesGibbsOwned : Bool
+    measureGibbsIdentityConditionalOwned : Bool
+    uniqueHaarGibbsTheoremLocated : Bool
+
+    lipschitzSupNormNonexpansionOwned : Bool
+    lipschitzSemiNormNonexpansionOwned : Bool
+    lipschitzTotalNormNonexpansionOwned : Bool
+    essentialSpectralRadiusOneTheoremLocated : Bool
+
+    l2MeanZeroContractionStoredAsAssumption : Bool
+    l2MeanZeroInvariantTheoremLocated : Bool
+    unconditionalL2MixingTheoremLocated : Bool
+    correlationDecayTheoremLocated : Bool
+
+    prolateCriticalSigmaHalfTheoremBearing : Bool
+    cyclotomicProlateSameObjectWeldLocated : Bool
+
     undirectedGapExponentAlphaLeanOwned : Bool
     directedRadiusCriticalSigmaHalfAdvertised : Bool
     directedRadiusCriticalSigmaHalfLeanTheoremLocated : Bool
@@ -51,6 +78,11 @@ canonicalSourceTheoremMatrix =
     true true true true
     true false true false
     true true false true
+    true true true true true true true false
+    true true true false
+    true true true false
+    true false false false
+    true false
     true true false
 
 record DashICompilationMatrix : Set where
@@ -68,12 +100,22 @@ record DashICompilationMatrix : Set where
     characteristicRootUnionCompiled : Bool
     spatialSpectralConsumerCompilerClosed : Bool
     literalSpectrumTowerRepoCompiled : Bool
+
+    cyclotomicSigmaHalfCompiled : Bool
+    primitiveTwistedAnchorRepairCompiled : Bool
+    semilocalTwoAdicToSigmaNonDescentOwned : Bool
+    cyclotomicProlateSameObjectWeldOwned : Bool
     directedSigmaHalfFromRadiusFormulaRejected : Bool
+
+    continuousGibbsUniquenessCompiled : Bool
+    continuousUnconditionalMixingCompiled : Bool
 
 canonicalDashICompilationMatrix : DashICompilationMatrix
 canonicalDashICompilationMatrix =
   dashICompilationMatrix
-    true true true true true true true true true true true true true
+    true true true true true true true true true true true true
+    true true true false true
+    false false
 
 finiteCoreCompilerClosed :
   DashICompilationMatrix.spatialSpectralConsumerCompilerClosed
@@ -99,11 +141,41 @@ sourceProductDFTNotOddCharacterTransform :
   ≡ false
 sourceProductDFTNotOddCharacterTransform = refl
 
-directedSigmaHalfNotLocatedAsLeanTheorem :
-  SourceTheoremMatrix.directedRadiusCriticalSigmaHalfLeanTheoremLocated
+fullContinuousRadiusSqrtTwoNotOwned :
+  SourceTheoremMatrix.fullContinuousOperatorRadiusSqrtTwoOwned
     canonicalSourceTheoremMatrix
   ≡ false
-directedSigmaHalfNotLocatedAsLeanTheorem = refl
+fullContinuousRadiusSqrtTwoNotOwned = refl
+
+gibbsUniquenessNotLocated :
+  SourceTheoremMatrix.uniqueHaarGibbsTheoremLocated
+    canonicalSourceTheoremMatrix
+  ≡ false
+gibbsUniquenessNotLocated = refl
+
+l2OneStepBoundIsAssumptionBacked :
+  SourceTheoremMatrix.l2MeanZeroContractionStoredAsAssumption
+    canonicalSourceTheoremMatrix
+  ≡ true
+l2OneStepBoundIsAssumptionBacked = refl
+
+unconditionalMixingNotLocated :
+  SourceTheoremMatrix.unconditionalL2MixingTheoremLocated
+    canonicalSourceTheoremMatrix
+  ≡ false
+unconditionalMixingNotLocated = refl
+
+prolateHalfIsSourceTheoremBearing :
+  SourceTheoremMatrix.prolateCriticalSigmaHalfTheoremBearing
+    canonicalSourceTheoremMatrix
+  ≡ true
+prolateHalfIsSourceTheoremBearing = refl
+
+cyclotomicProlateWeldNotLocated :
+  SourceTheoremMatrix.cyclotomicProlateSameObjectWeldLocated
+    canonicalSourceTheoremMatrix
+  ≡ false
+cyclotomicProlateWeldNotLocated = refl
 
 undirectedAlphaIsLeanOwned :
   SourceTheoremMatrix.undirectedGapExponentAlphaLeanOwned
