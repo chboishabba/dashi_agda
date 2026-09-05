@@ -49,19 +49,23 @@ record ArithmeticOddOrbitChart : Set₁ where
 
 open ArithmeticOddOrbitChart public
 
-record ArithmeticChartProducerReceipts : Set where
-  constructor arithmeticChartProducerReceipts
+record SourceArithmeticChartStatus : Set where
+  constructor sourceArithmeticChartStatus
   field
-    orderThreeExactlyTwoPowNMinusTwo : Bool
-    powersThreeInjectiveBeforePeriod : Bool
-    positiveOrbitOdd : Bool
-    negativeOrbitOdd : Bool
-    positiveNegativeOrbitsDisjoint : Bool
-    twoOrbitsCoverAllOddResidues : Bool
+    orderThreeExactlyTwoPowNMinusTwoOwned : Bool
+    oddResidueCardinalityOwned : Bool
+    powersThreeInjectivityArgumentPresent : Bool
+    canonicalPositivePowerOrbitExportOwned : Bool
+    canonicalNegativePowerOrbitExportOwned : Bool
+    canonicalDisjointnessExportOwned : Bool
+    canonicalCoverExportOwned : Bool
+    packagedArithmeticOrbitEquivalenceOwned : Bool
 
-canonicalArithmeticChartProducerReceipts : ArithmeticChartProducerReceipts
-canonicalArithmeticChartProducerReceipts =
-  arithmeticChartProducerReceipts true true true true true true
+canonicalSourceArithmeticChartStatus : SourceArithmeticChartStatus
+canonicalSourceArithmeticChartStatus =
+  sourceArithmeticChartStatus
+    true true true
+    false false false false false
 
 record DFTRechartBoundary : Set where
   constructor dftRechartBoundary
@@ -112,3 +116,9 @@ cardinalityChartCannotSubstitute :
     canonicalDFTRechartBoundary
   ≡ false
 cardinalityChartCannotSubstitute = refl
+
+arithmeticOrbitEquivalenceStillLive :
+  SourceArithmeticChartStatus.packagedArithmeticOrbitEquivalenceOwned
+    canonicalSourceArithmeticChartStatus
+  ≡ false
+arithmeticOrbitEquivalenceStillLive = refl
