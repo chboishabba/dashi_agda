@@ -9,6 +9,7 @@ import Sequence as BishopSequence
 
 import DASHI.Analysis.BishopConstructedRealBackendExact as Backend
 import DASHI.Analysis.BishopFactorDerivativeExact as Factor
+import DASHI.Analysis.BishopPowerFirstOrderDifferenceFactorisationExact as PowerFactor
 import DASHI.Analysis.BishopConcreteTrigAnalyticTermDerivativeExact as TermAnalytic
 import DASHI.Analysis.BishopConcreteSineCosineFiniteTermDerivativeExact as Finite
 import DASHI.Analysis.SetoidFiniteSumDerivativeBidiExact as FiniteSum
@@ -89,8 +90,7 @@ factorDerivativeConstant constant point = record
         (λ c h′ → c ⊖ c ⊜ h′ ⊗ Κ 0ℚᵘ)
         BishopP.≃-refl constant h
   ; Factor.quotientConvergesOnNullSequences = λ perturbationConverges →
-      import DASHI.Analysis.BishopPowerFirstOrderDifferenceFactorisationExact as PowerFactor
-      in PowerFactor.constantConverges Bishop.0ℝ
+      PowerFactor.constantConverges Bishop.0ℝ
   }
 
 cosineZeroTermIsOne :
