@@ -218,3 +218,11 @@ import DASHI.Biology.AnaestheticObservationErrorProductRefinementExact
 import DASHI.Biology.DeepTimeCarbonBiosphereFossilFuelBidiExact
 import DASHI.Biology.ClimateCarryingCapacityDeepTimeCrossPollinationExact
 import DASHI.Biology.CarbonClimateEcologicalDependencyBidiExact
+
+------------------------------------------------------------------------
+-- Microbiology / ancientbiotics lane: quorum sensing as a context-indexed
+-- distributed signal system, Bald's eyesalve assay/mechanism boundaries, and
+-- bounded transfer from tangential organosulfur molecular-pathway sources.
+import DASHI.Biology.Microbiology.QuorumSensingContextExact
+import DASHI.Biology.Microbiology.BaldEyesalveMechanismBoundaryExact
+import DASHI.Biology.Microbiology.BaldEyesalveQuorumCrossPollinationExact
