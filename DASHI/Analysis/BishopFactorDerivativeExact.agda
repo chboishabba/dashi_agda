@@ -75,13 +75,7 @@ factorDerivativeScale :
 factorDerivativeScale {f} {point} {derivativeValue} coefficient D = record
   { quotient = λ h → Bishop._*_ coefficient (quotient D h)
   ; incrementFactorisation = λ h →
-      let
-        open BishopP.ℝ-Solver
-        functionDifference =
-          Bishop._-_
-            (f (Bishop._+_ point h))
-            (f point)
-      in
+      let open BishopP.ℝ-Solver in
       BishopP.≃-trans
         (solve 3
           (λ c fh fx → c ⊗ fh ⊖ c ⊗ fx ⊜ c ⊗ (fh ⊖ fx))
@@ -145,7 +139,7 @@ factorDerivativeAdd {f} {g} {point} {df} {dg} F G = record
 factorDerivativeCongruence :
   ∀ {f g point df dg} →
   (functionEquivalent : ∀ x → Bishop._≃_ (f x) (g x)) →
-  Bishop._≃_ df dg →
+  Bishop._≃_ dg df →
   BishopFactorDerivativeAt g point dg →
   BishopFactorDerivativeAt f point df
 factorDerivativeCongruence {f} {g} {point} {df} {dg}
@@ -160,7 +154,7 @@ factorDerivativeCongruence {f} {g} {point} {df} {dg}
   ; quotientConvergesOnNullSequences = λ perturbationConverges →
       BishopSequence.xₙ→x∧x≃y⇒xₙ→y
         (quotientConvergesOnNullSequences G perturbationConverges)
-        (BishopP.≃-symm derivativeEquivalent)
+        derivativeEquivalent
   }
 
 ------------------------------------------------------------------------
