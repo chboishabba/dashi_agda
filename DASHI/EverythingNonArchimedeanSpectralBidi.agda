@@ -65,9 +65,13 @@ import DASHI.Analysis.NonArchimedeanOrbitCancellationToMinusTwoExact
 import DASHI.Analysis.NonArchimedeanCharacteristicRootUnionCompilerExact
 import DASHI.Analysis.NonArchimedeanCharacteristicFactorizationReuseExact
 
--- Current post-closure audit: keep the directed twisted-circle radius scaling
--- separate from the independent theorem-bearing undirected gap exponent alpha.
+-- Post-closure sigma audit.  Three half-valued coordinates remain separately
+-- typed: cyclotomic amplitude exponent, per-level radius contraction, and the
+-- Prolate/Archimedean critical-line parameter.  Equal numerals are not a weld.
 import DASHI.Analysis.NonArchimedeanDirectedRadiusCriticalSigmaAuditExact
+import DASHI.Analysis.NonArchimedeanSigmaRoleSeparationExact
+import DASHI.Analysis.NonArchimedeanCyclotomicSigmaHalfCompilerExact
+import DASHI.Analysis.NonArchimedeanProlateCriticalLineSigmaSourceExact
 import DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact
 
 -- Optional Monster correspondence x-pollination. These remain downstream
