@@ -15,4 +15,6 @@ import DASHI.Law.CoerciveEncounterPopulationAggregationExact
 import DASHI.Law.SystemicCoercivePracticePromotionGateExact
 import DASHI.Law.CoerciveEncounterDenominatorIntegrityExact
 import DASHI.Law.SelectionEligibilityDisparityBidiExact
+import DASHI.Law.WandingOpportunityEligibilityHypervoxelExact
+import DASHI.Law.OpportunityConditionedSelectionDisparityExact
 import DASHI.Law.CoerciveContactAuditValidation
