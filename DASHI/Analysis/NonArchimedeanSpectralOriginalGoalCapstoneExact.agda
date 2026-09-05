@@ -6,16 +6,21 @@ module DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact where
 -- The Monster correspondence remains optional downstream x-pollination.
 -- This capstone tracks only the finite non-Archimedean spectral closure.
 --
--- New source correction:
--- source `Analysis/DFT.lean` owns a unitary F_(2^(n-2)) tensor I_2 after an
--- arbitrary cardinality product reindex.  That is NOT yet the odd-character
--- Fourier transform of the tau-antisymmetric twisted sector.
+-- Current source-exact state:
 --
--- The natural odd-character kernel is
+--   * function-level character action is owned;
+--   * tau-odd preservation is owned;
+--   * odd-character <-> tau-odd compiles from primitive half-turn + parity;
+--   * the source product DFT is a valid unitary artifact but is rejected as the
+--     literal odd-character transform;
+--   * the correct odd-character transform is the existing half-size cyclic DFT
+--     with diagonal omega^v modulation;
+--   * orbit signed cancellation now compiles from the already-owned stronger
+--     integer theorem `three_pow_two_pow` and ordinary finite-product algebra.
 --
---   omega^((2j+1)v) = omega^v * (omega^2)^(jv),
---
--- i.e. a modulated 2^(n-1)-point DFT (up to row/column convention).
+-- Hence the only highest-alpha source-specific front is the same-object wiring
+-- between the literal twisted coordinate carrier and the corrected
+-- odd-character Fourier basis.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -26,13 +31,14 @@ open import Agda.Builtin.List using (List; []; _∷_)
 data OriginalGoalLeaf : Set where
   primitiveHalfTurnAtMinusOne : OriginalGoalLeaf
   oddCharacterTauOddIff : OriginalGoalLeaf
-  oddCharacterFourierRechart : OriginalGoalLeaf
-  arithmeticOddOrbitReceipts : OriginalGoalLeaf
-  arithmeticOddOrbitChart : OriginalGoalLeaf
+  instantiateCorrectOddCharacterDFT : OriginalGoalLeaf
   twistedCoordinateCharacterIdentification : OriginalGoalLeaf
   completeCharacterBasisActionEquality : OriginalGoalLeaf
   concreteDFTConjugatedEqualsMonomial : OriginalGoalLeaf
-  canonicalTwoOddOrbitPackage : OriginalGoalLeaf
+  arithmeticOddOrbitReceipts : OriginalGoalLeaf
+  arithmeticOddOrbitChart : OriginalGoalLeaf
+  orbitSumHalfPeriod : OriginalGoalLeaf
+  negativeOrbitWeightSign : OriginalGoalLeaf
   orbitCancellationSumZero : OriginalGoalLeaf
   doubledReturnMinusTwo : OriginalGoalLeaf
   literalOneStepSpectrumUnion : OriginalGoalLeaf
@@ -45,27 +51,28 @@ data OriginalGoalStatus : Set where
   pruned : OriginalGoalStatus
   compiled : OriginalGoalStatus
   upstreamReusable : OriginalGoalStatus
+  repoReusable : OriginalGoalStatus
 
 leafStatus : OriginalGoalLeaf → OriginalGoalStatus
 leafStatus primitiveHalfTurnAtMinusOne = upstreamReusable
 leafStatus oddCharacterTauOddIff = compiled
-leafStatus oddCharacterFourierRechart = live
-leafStatus arithmeticOddOrbitReceipts = live
-leafStatus arithmeticOddOrbitChart = compiled
-leafStatus twistedCoordinateCharacterIdentification = downstream
+leafStatus instantiateCorrectOddCharacterDFT = repoReusable
+leafStatus twistedCoordinateCharacterIdentification = live
 leafStatus completeCharacterBasisActionEquality = downstream
 leafStatus concreteDFTConjugatedEqualsMonomial = compiled
-leafStatus canonicalTwoOddOrbitPackage = downstream
-leafStatus orbitCancellationSumZero = live
+leafStatus arithmeticOddOrbitReceipts = live
+leafStatus arithmeticOddOrbitChart = compiled
+leafStatus orbitSumHalfPeriod = compiled
+leafStatus negativeOrbitWeightSign = compiled
+leafStatus orbitCancellationSumZero = compiled
 leafStatus doubledReturnMinusTwo = compiled
 leafStatus literalOneStepSpectrumUnion = downstream
 
 priority : List OriginalGoalLeaf
 priority =
-  oddCharacterFourierRechart ∷
-  arithmeticOddOrbitReceipts ∷
-  orbitCancellationSumZero ∷
   twistedCoordinateCharacterIdentification ∷
+  instantiateCorrectOddCharacterDFT ∷
+  arithmeticOddOrbitReceipts ∷
   completeCharacterBasisActionEquality ∷
   literalOneStepSpectrumUnion ∷
   []
@@ -73,15 +80,16 @@ priority =
 record SharedWeldFanout : Set where
   constructor sharedWeldFanout
   field
-    oddCharacterRechartFeedsSpatialSpectrum : Bool
-    oddCharacterRechartFeedsSpatialTrace : Bool
-    oddCharacterRechartFeedsSpatialPower : Bool
+    correctedOddCharacterRechartFeedsSpatialSpectrum : Bool
+    correctedOddCharacterRechartFeedsSpatialTrace : Bool
+    correctedOddCharacterRechartFeedsSpatialPower : Bool
     equalityOnBasisCompilesLiteralMatrixEquality : Bool
+    signedOrbitLaneIndependentOfSpatialRechart : Bool
     threeIndependentMatrixWeldsShouldBeSearched : Bool
 
 canonicalSharedWeldFanout : SharedWeldFanout
 canonicalSharedWeldFanout =
-  sharedWeldFanout true true true true false
+  sharedWeldFanout true true true true true false
 
 record OriginalGoalBoundary : Set where
   constructor originalGoalBoundary
@@ -101,11 +109,15 @@ record OriginalGoalBoundary : Set where
     sourceProductDFTIsOddCharacterTransform : Bool
     halfPeriodMathlibRouteAvailable : Bool
     oddCharacterTauOddIffCompilesFromHalfPeriod : Bool
-    oddCharacterFourierRechartOwned : Bool
+    correctedOddCharacterDFTUsesExistingDFTTheory : Bool
+    correctedOddCharacterDFTNeedsNewGenericFourierLibrary : Bool
     arithmeticOrbitChartCompilesFromReceipts : Bool
+    strongThreePowerOddCoefficientOwned : Bool
+    orbitSumHalfPeriodCompilesFromStrongThreePower : Bool
+    negativeOrbitWeightSignCompilesFromOrbitSum : Bool
+    orbitCancellationCompiles : Bool
     concreteMonomialEqualityCompilesFromBasisAction : Bool
     explicitPhaseValuesRequiredForMinusTwo : Bool
-    orbitCancellationSumZeroOwned : Bool
     doubledReturnMinusTwoCompilesFromCancellationProduct : Bool
     literalSpectrumTowerOwned : Bool
 
@@ -116,7 +128,7 @@ canonicalOriginalGoalBoundary : OriginalGoalBoundary
 canonicalOriginalGoalBoundary =
   originalGoalBoundary
     true true true true true true true true true true true
-    false true true false true true false false true false
+    false true true true false true true true true true true false true false
     false false
 
 currentProductDFTDoesNotCloseCharacterWeld :
@@ -125,21 +137,33 @@ currentProductDFTDoesNotCloseCharacterWeld :
   ≡ false
 currentProductDFTDoesNotCloseCharacterWeld = refl
 
-oddTauOddIffIsNoLongerPrimitiveSearchLeaf :
-  leafStatus oddCharacterTauOddIff ≡ compiled
-oddTauOddIffIsNoLongerPrimitiveSearchLeaf = refl
-
-explicitComplexPhaseValuesNotRequired :
-  OriginalGoalBoundary.explicitPhaseValuesRequiredForMinusTwo
-    canonicalOriginalGoalBoundary
-  ≡ false
-explicitComplexPhaseValuesNotRequired = refl
-
-minusTwoCompilesFromMinimalCancellation :
-  OriginalGoalBoundary.doubledReturnMinusTwoCompilesFromCancellationProduct
+correctedDFTReusesExistingTheory :
+  OriginalGoalBoundary.correctedOddCharacterDFTUsesExistingDFTTheory
     canonicalOriginalGoalBoundary
   ≡ true
-minusTwoCompilesFromMinimalCancellation = refl
+correctedDFTReusesExistingTheory = refl
+
+newFourierLibraryPruned :
+  OriginalGoalBoundary.correctedOddCharacterDFTNeedsNewGenericFourierLibrary
+    canonicalOriginalGoalBoundary
+  ≡ false
+newFourierLibraryPruned = refl
+
+orbitSumNowCompiled :
+  leafStatus orbitSumHalfPeriod ≡ compiled
+orbitSumNowCompiled = refl
+
+signedCancellationNowCompiled :
+  leafStatus orbitCancellationSumZero ≡ compiled
+signedCancellationNowCompiled = refl
+
+minusTwoNowCompiled :
+  leafStatus doubledReturnMinusTwo ≡ compiled
+minusTwoNowCompiled = refl
+
+spatialCharacterWeldIsHighestAlphaLiveLeaf :
+  leafStatus twistedCoordinateCharacterIdentification ≡ live
+spatialCharacterWeldIsHighestAlphaLiveLeaf = refl
 
 monsterIsOptionalForOriginalClosure :
   OriginalGoalBoundary.monsterCorrespondenceRequiredForSpectralClosure
