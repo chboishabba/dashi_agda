@@ -18,6 +18,7 @@ module DASHI.Analysis.NonArchimedeanBinarySheetTauOddEquivalenceExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 record SheetPoint (Base : Set) : Set where
   constructor sheetPoint
@@ -85,9 +86,7 @@ extendAfterRestrictPointwise :
   (p : SheetPoint Base) →
   antisymmetricExtend laws (restrictSheetZero F) p ≡ F p
 extendAfterRestrictPointwise laws F h (sheetPoint x false) = refl
-extendAfterRestrictPointwise laws F h (sheetPoint x true) =
-  let open import Relation.Binary.PropositionalEquality using (sym)
-  in sym (h x)
+extendAfterRestrictPointwise laws F h (sheetPoint x true) = sym (h x)
 
 record BinarySheetWeldStatus : Set where
   constructor binarySheetWeldStatus
