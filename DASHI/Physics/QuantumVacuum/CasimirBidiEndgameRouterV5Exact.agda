@@ -110,15 +110,17 @@ compiledTransformedDefectOneOver120 :
     kernel trigProblem trigWeld zetaProblem zetaTrace zeta120 →
   ZetaProblem.transformedDefectValue zetaProblem ≡
     ZetaTrace.problemOneOver120Value zeta120
-compiledTransformedDefectOneOver120 B =
-  ZetaTrace.transformedLiteralDefectEqualsOneOver120 _
+compiledTransformedDefectOneOver120
+    {zeta120 = zeta120} B =
+  ZetaTrace.transformedLiteralDefectEqualsOneOver120 zeta120
 
 compiledLegacyZeta120 :
   ∀ {kernel trigProblem trigWeld zetaProblem zetaTrace zeta120} →
   CanonicalCasimirEndgameBundle
     kernel trigProblem trigWeld zetaProblem zetaTrace zeta120 →
   C720.ZetaMinusThree120Receipt
-compiledLegacyZeta120 B = ZetaTrace.asLegacyZeta120Receipt _
+compiledLegacyZeta120 {zeta120 = zeta120} B =
+  ZetaTrace.asLegacyZeta120Receipt zeta120
 
 record CanonicalEndgameOutputs
     (kernel : Casimir.CasimirScalarModel)
