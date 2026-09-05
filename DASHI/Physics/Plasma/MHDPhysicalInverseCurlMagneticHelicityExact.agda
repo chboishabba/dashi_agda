@@ -7,6 +7,7 @@ open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; tra
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
+import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAlgebraProgram as Hermitian
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as Scaling
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNModeInverseSquareRealityRound35Exact as InverseReality
@@ -16,14 +17,6 @@ import DASHI.Physics.Closure.NSTriadKNLerayOutputTransversalityRound30Exact as L
 
 ------------------------------------------------------------------------
 -- PHYSICAL INVERSE-CURL OBSERVER
---
--- On a transverse nonzero Fourier mode,
---
---   A_k = |k|^-2 curl_k B_k.
---
--- This uses the repository's physical ModeInverseSquare geometry directly.
--- The helical s/|k| observer is a representation theorem over this object,
--- rather than the definition of magnetic vector potential.
 ------------------------------------------------------------------------
 
 physicalVectorPotential :
@@ -113,11 +106,11 @@ complex3ScaleOne :
   ∀ {r : Level} {F : C3.RealField r}
     (value : C3.Complex3 F) →
   C3.complex3Scale (C3.complexOne F) value ≡ value
-complex3ScaleOne {F = F} (C3.complex3 x y z) =
+complex3ScaleOne (C3.complex3 x y z) =
   Field.complex3Ext
-    (C3.complexMultiplyOneLeft F x)
-    (C3.complexMultiplyOneLeft F y)
-    (C3.complexMultiplyOneLeft F z)
+    (Hermitian.complexMultiplyOneLeft x)
+    (Hermitian.complexMultiplyOneLeft y)
+    (Hermitian.complexMultiplyOneLeft z)
 
 physicalVectorPotentialIsCurlInverse :
   ∀ {r : Level} {F : C3.RealField r}
