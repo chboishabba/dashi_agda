@@ -7,6 +7,7 @@ import DASHI.Core.ExternalisationBoundaryEnrichmentBidiExact as W
 import DASHI.Core.ReferencePopulationRosterEnrichmentExact as R
 import DASHI.Culture.MissingDeceasedTechnicalExternalisationExact as X
 import DASHI.Culture.AmyEskridgeKnowledgeBoundaryTransitionExact as AmyB
+import DASHI.Culture.RezaPatentBoundaryTransitionExact as RezaB
 
 ------------------------------------------------------------------------
 -- CURRENT PERSON-LEVEL WITNESSES
@@ -40,9 +41,10 @@ deepExternalisationControlDesign = R.matched-reference-design
 
 restrictedBoundaryControlDesign : R.MatchedReferenceDesign
 restrictedBoundaryControlDesign = R.matched-reference-design
-  "declared technical roster members with a closed same-object restricted/private-to-public transfer receipt"
-  "matched peers with comparable access, release opportunity, institution, programme sensitivity and time window"
-  ( "institution"
+  "declared technical roster members with a closed same-object private-to-public transfer, stratified by boundary kind"
+  "matched peers with comparable boundary mechanism, access, release opportunity, institution, programme sensitivity and time window"
+  ( "boundary kind"
+  ∷ "institution"
   ∷ "technical domain"
   ∷ "role/access level"
   ∷ "programme sensitivity"
@@ -50,8 +52,8 @@ restrictedBoundaryControlDesign = R.matched-reference-design
   ∷ "time/geography"
   ∷ [] )
   true refl
-  "count B only after prior restriction, public release and same-object provenance are all present"
-  "ordinary publication, patents, public-use reports, attempted release and disclosure advocacy alone do not count as completed B"
+  "count completed B only after prior private/restricted state, public release, same-object provenance and boundary kind are all present"
+  "do not pool ordinary patent confidentiality with contractual proprietary, controlled-government, export-controlled, classified/declassification or discretionary-disclosure transitions"
 
 ------------------------------------------------------------------------
 -- BIDI FRONTIER
@@ -65,13 +67,13 @@ deepExternalisationNeedsMatchedControls = W.externalisation-selection-frontier
   "whether deep technical externalisation is enriched beyond ordinary peer practice"
   "selection, targeting, actor identity, motive, harm, or restricted-to-public transfer"
 
-restrictedTransferNeedsClosedPersonEvidence : W.ExternalisationSelectionFrontier
-restrictedTransferNeedsClosedPersonEvidence = W.externalisation-selection-frontier
+nonRoutineRestrictedTransferNeedsClosedPersonEvidence : W.ExternalisationSelectionFrontier
+nonRoutineRestrictedTransferNeedsClosedPersonEvidence = W.externalisation-selection-frontier
   W.restrictedToPublicTransfer
   W.missingPersonFeatureEvidence
-  "Eskridge now supplies a captured contemporaneous self-report of NASA-origin/private work and a release-review process, but B still requires an exact same-object weld plus verified public-release outcome; search for paper title, NASA case/review receipt, decision, draft/final pair, or final publication"
-  "a completed person-level B witness eligible for later matched-control scoring"
-  "a completed transfer merely from an attempted/under-review transition; enrichment, selection, actor identity, motive or harm"
+  "Reza now closes a routine patent-confidentiality -> statutory-publication transition. For the stronger non-routine H_B, recover a completed same-object contractual proprietary, controlled-government, export-controlled, classified/declassification or discretionary-disclosure transition. Eskridge/POAMS remains the strongest candidate but Amy's exact object identity is still open."
+  "a non-routine completed person-level B witness eligible for like-for-like boundary-kind controls"
+  "sensitive disclosure merely from routine patent publication; enrichment, selection, actor identity, motive or harm"
 
 deepExternalisationNeedsFeatureAwareSelector : W.ExternalisationSelectionFrontier
 deepExternalisationNeedsFeatureAwareSelector = W.externalisation-selection-frontier
@@ -95,9 +97,17 @@ record CurrentExternalisationBoundaryAssessment : Set where
     amyExactSameObjectWeldLocatedIsFalse :
       amyExactSameObjectWeldLocated ≡ false
 
-    anyClosedRestrictedBoundaryWitnessLocated : Bool
-    anyClosedRestrictedBoundaryWitnessLocatedIsFalse :
-      anyClosedRestrictedBoundaryWitnessLocated ≡ false
+    anyClosedBoundaryWitnessLocated : Bool
+    anyClosedBoundaryWitnessLocatedIsTrue :
+      anyClosedBoundaryWitnessLocated ≡ true
+
+    rezaRoutinePatentBoundaryClosed : Bool
+    rezaRoutinePatentBoundaryClosedIsTrue :
+      rezaRoutinePatentBoundaryClosed ≡ true
+
+    anyClosedNonRoutineSensitiveBoundaryWitnessLocated : Bool
+    anyClosedNonRoutineSensitiveBoundaryWitnessLocatedIsFalse :
+      anyClosedNonRoutineSensitiveBoundaryWitnessLocated ≡ false
 
     deepRosterEnrichmentEstablished : Bool
     deepRosterEnrichmentEstablishedIsFalse :
@@ -118,6 +128,8 @@ canonicalCurrentExternalisationBoundaryAssessment =
     true refl
     true refl
     false refl
+    true refl
+    true refl
     false refl
     false refl
     false refl
