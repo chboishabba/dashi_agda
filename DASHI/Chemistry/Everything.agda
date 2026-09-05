@@ -46,3 +46,12 @@ import DASHI.Chemistry.OceanCarbonateSaltTemperatureStressBidiExact
 import DASHI.Chemistry.DeepTimeCarbonReservoirFluxBalanceExact
 import DASHI.Chemistry.DeepTimeCarbonPathResidualBidiExact
 import DASHI.Chemistry.CarbonForcingRateBidiExact
+
+------------------------------------------------------------------------
+-- Garlic/Allium organosulfur chemistry: molecular identity, exact finite
+-- composition coordinates, source-backed small-molecule pathway balances,
+-- allicin thiol reactivity, ajoene quorum-regulation evidence, and mechanism
+-- completeness firewalls for multi-component antimicrobial preparations.
+import DASHI.Chemistry.AlliumMolecularIdentityExact
+import DASHI.Chemistry.AlliumOrganosulfurMechanismExact
+import DASHI.Chemistry.AlliumReactionNetworkCrossPollinationExact
