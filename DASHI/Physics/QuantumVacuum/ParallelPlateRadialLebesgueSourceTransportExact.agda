@@ -10,15 +10,6 @@ import DASHI.Physics.QuantumVacuum.ParallelPlateTransverseMeasureLimitBidiExact 
 
 ------------------------------------------------------------------------
 -- CHART-FREE RADIAL LEBESGUE TRANSPORT
---
--- For the Casimir transverse integral, use the source-backed decomposition
---
---   R^2 \ {0} ~= (0,infinity) x S^1,
---   d^2k = r dr dω,
---   measure(S^1)=2*pi,
---
--- rather than introducing an angular coordinate chart.  This removes the
--- polar seam and all sine/cosine/Jacobian calculus from this proof route.
 ------------------------------------------------------------------------
 
 radialMeasureClaim : Transport.SourceBackedClaim
@@ -30,7 +21,8 @@ radialMeasureClaim = record
       × Source.unitCircleInvariantMeasureIsTwoPi Source.canonicalRadialLebesgueAuthority)
   ; Transport.sourceReceipt = tt , (tt , tt)
   ; Transport.sourceName = Source.sourceName Source.canonicalRadialLebesgueAuthority
-  ; Transport.sourceLocator = Source.radialMeasureSourceLocator Source.canonicalRadialLebesgueAuthority
+  ; Transport.sourceLocator =
+      "https://math.mit.edu/~rbm/18-155-F13/Lecture9.pdf ; https://math.mit.edu/~djk/18_01/chapter28/section03.html"
   ; Transport.reading =
       "MIT radial Lebesgue decomposition in dimension two, with S^1 normalization 2*pi."
   }
@@ -58,19 +50,45 @@ record CasimirRadialLebesgueTarget
     SameNormalizationConvention : Set
     sameNormalizationConventionEvidence : SameNormalizationConvention
 
-    LocalRadialReduction : Set
-
     SameRadialMeasureObject : Set
     sameRadialMeasureObjectEvidence : SameRadialMeasureObject
 
+    LocalRadialReduction : Set
+
     sourceRadialMeasureToLocal :
       Transport.SourceClaim radialMeasureClaim →
-      SameRadialMeasureObject →
+      (LimitIntegrandIsRadial ×
+       (RadialIntegrability ×
+       (SameLebesgueMeasureAsSource ×
+       (SameCasimirTransverseIntegrand ×
+       (SameNormalizationConvention × SameRadialMeasureObject))))) →
       LocalRadialReduction
 
     reading : String
 
 open CasimirRadialLebesgueTarget public
+
+RadialSourceApplicationObject :
+  ∀ {kernel F} →
+  CasimirRadialLebesgueTarget kernel F → Set
+RadialSourceApplicationObject T =
+  LimitIntegrandIsRadial T ×
+  (RadialIntegrability T ×
+  (SameLebesgueMeasureAsSource T ×
+  (SameCasimirTransverseIntegrand T ×
+  (SameNormalizationConvention T × SameRadialMeasureObject T))))
+
+radialSourceApplicationEvidence :
+  ∀ {kernel F} →
+  (T : CasimirRadialLebesgueTarget kernel F) →
+  RadialSourceApplicationObject T
+radialSourceApplicationEvidence T =
+  limitIntegrandIsRadialEvidence T ,
+  (radialIntegrabilityEvidence T ,
+  (sameLebesgueMeasureAsSourceEvidence T ,
+  (sameCasimirTransverseIntegrandEvidence T ,
+  (sameNormalizationConventionEvidence T ,
+   sameRadialMeasureObjectEvidence T))))
 
 asTransportTarget :
   ∀ {kernel F} →
@@ -78,7 +96,7 @@ asTransportTarget :
   Transport.LocalTheoremTarget radialMeasureClaim
 asTransportTarget T = record
   { Transport.LocalClaim = LocalRadialReduction T
-  ; Transport.sameMathematicalObject = SameRadialMeasureObject T
+  ; Transport.sameMathematicalObject = RadialSourceApplicationObject T
   ; Transport.sourceSemanticsToLocal = sourceRadialMeasureToLocal T
   ; Transport.reading = reading T
   }
@@ -92,7 +110,7 @@ compileLocalRadialReduction T =
     radialMeasureClaim
     (asTransportTarget T)
     (record
-      { Transport.objectWeld = sameRadialMeasureObjectEvidence T })
+      { Transport.objectWeld = radialSourceApplicationEvidence T })
 
 ------------------------------------------------------------------------
 -- Strong local object weld: all application-specific coordinates are explicit
@@ -145,6 +163,7 @@ data PolarAngularChartStillRequired : Set where
 data SineCosineDerivativeStillRequired : Set where
 data PolarJacobianDeterminantStillRequired : Set where
 data PolarOriginAndSeamChartTreatmentStillRequired : Set where
+data BareSameRadialObjectLabelSuffices : Set where
 
 radialRoutePrunesAngularChart : PolarAngularChartStillRequired → ⊥
 radialRoutePrunesAngularChart ()
@@ -158,10 +177,14 @@ radialRoutePrunesJacobianCalculation ()
 sphereRoutePrunesPolarSeam : PolarOriginAndSeamChartTreatmentStillRequired → ⊥
 sphereRoutePrunesPolarSeam ()
 
+radialTransportRequiresAllCoordinates : BareSameRadialObjectLabelSuffices → ⊥
+radialTransportRequiresAllCoordinates ()
+
 record Status : Set where
   field
     radialLebesgueSourceBacked : Bool
     chartFreeCasimirTransportOwned : Bool
+    allLocalRadialCoordinatesRequiredByTransport : Bool
     trigDerivativePrunedFromCasimirMeasureRoute : Bool
     jacobianPrunedFromCasimirMeasureRoute : Bool
     polarSeamPrunedFromCasimirMeasureRoute : Bool
@@ -169,6 +192,8 @@ record Status : Set where
 
     radialLebesgueSourceBackedIsTrue : radialLebesgueSourceBacked ≡ true
     chartFreeCasimirTransportOwnedIsTrue : chartFreeCasimirTransportOwned ≡ true
+    allLocalRadialCoordinatesRequiredByTransportIsTrue :
+      allLocalRadialCoordinatesRequiredByTransport ≡ true
     trigDerivativePrunedFromCasimirMeasureRouteIsTrue :
       trigDerivativePrunedFromCasimirMeasureRoute ≡ true
     jacobianPrunedFromCasimirMeasureRouteIsTrue :
@@ -183,12 +208,14 @@ canonicalStatus : Status
 canonicalStatus = record
   { radialLebesgueSourceBacked = true
   ; chartFreeCasimirTransportOwned = true
+  ; allLocalRadialCoordinatesRequiredByTransport = true
   ; trigDerivativePrunedFromCasimirMeasureRoute = true
   ; jacobianPrunedFromCasimirMeasureRoute = true
   ; polarSeamPrunedFromCasimirMeasureRoute = true
   ; localRadialMeasureWeldClosed = false
   ; radialLebesgueSourceBackedIsTrue = refl
   ; chartFreeCasimirTransportOwnedIsTrue = refl
+  ; allLocalRadialCoordinatesRequiredByTransportIsTrue = refl
   ; trigDerivativePrunedFromCasimirMeasureRouteIsTrue = refl
   ; jacobianPrunedFromCasimirMeasureRouteIsTrue = refl
   ; polarSeamPrunedFromCasimirMeasureRouteIsTrue = refl
