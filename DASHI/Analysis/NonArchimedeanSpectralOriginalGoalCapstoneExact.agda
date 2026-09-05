@@ -3,11 +3,10 @@ module DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact where
 ------------------------------------------------------------------------
 -- ORIGINAL-GOAL CAPSTONE
 --
--- The finite non-Archimedean spectral core is now dependency-closed in DASHI.
--- This does NOT rewrite the external Lean source: its named
--- `spectral_tower_one_step` theorem still concludes `True`.  The distinction is
--- source theorem strength versus DASHI compiler closure from already checked
--- ingredients.
+-- The finite non-Archimedean spectral core is dependency-closed in DASHI.
+-- Post-closure, the remaining claim-strength issue is no longer the value 1/2
+-- itself.  The source contains several distinct half-valued coordinates, and
+-- only an explicit same-object theorem may identify them.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -28,7 +27,12 @@ data OriginalGoalLeaf : Set where
   concreteDFTConjugatedEqualsMonomial : OriginalGoalLeaf
   characteristicDeterminantFactorization : OriginalGoalLeaf
   literalOneStepSpectrumUnion : OriginalGoalLeaf
-  directedRadiusCriticalSigmaAudit : OriginalGoalLeaf
+
+  directedRadiusSizeExponentHalf : OriginalGoalLeaf
+  cyclotomicSigmaHalf : OriginalGoalLeaf
+  prolateCriticalLineHalf : OriginalGoalLeaf
+  fullTransferRadiusSqrtTwo : OriginalGoalLeaf
+  cyclotomicToProlateSigmaAnchor : OriginalGoalLeaf
   undirectedGapExponentAlpha : OriginalGoalLeaf
 
 
@@ -38,7 +42,9 @@ data OriginalGoalStatus : Set where
   compiled : OriginalGoalStatus
   repoReusable : OriginalGoalStatus
   sourcePlaceholderButRepoCompiled : OriginalGoalStatus
-  liveAudit : OriginalGoalStatus
+  rejectedReading : OriginalGoalStatus
+  sourceUnproved : OriginalGoalStatus
+  liveSameObjectWeld : OriginalGoalStatus
 
 leafStatus : OriginalGoalLeaf → OriginalGoalStatus
 leafStatus functionLevelCharacterAction = sourceOwned
@@ -53,12 +59,17 @@ leafStatus completeCharacterBasisActionEquality = compiled
 leafStatus concreteDFTConjugatedEqualsMonomial = compiled
 leafStatus characteristicDeterminantFactorization = compiled
 leafStatus literalOneStepSpectrumUnion = sourcePlaceholderButRepoCompiled
-leafStatus directedRadiusCriticalSigmaAudit = liveAudit
+
+leafStatus directedRadiusSizeExponentHalf = rejectedReading
+leafStatus cyclotomicSigmaHalf = compiled
+leafStatus prolateCriticalLineHalf = sourceOwned
+leafStatus fullTransferRadiusSqrtTwo = sourceUnproved
+leafStatus cyclotomicToProlateSigmaAnchor = liveSameObjectWeld
 leafStatus undirectedGapExponentAlpha = sourceOwned
 
 priority : List OriginalGoalLeaf
 priority =
-  directedRadiusCriticalSigmaAudit ∷ []
+  cyclotomicToProlateSigmaAnchor ∷ []
 
 record FiniteCoreClosure : Set where
   constructor finiteCoreClosure
@@ -83,20 +94,34 @@ finiteCoreHasNoRemainingMathematicalProducer :
   ≡ false
 finiteCoreHasNoRemainingMathematicalProducer = refl
 
-record ExponentSeparationBoundary : Set where
-  constructor exponentSeparationBoundary
+record SigmaClosureBoundary : Set where
+  constructor sigmaClosureBoundary
   field
-    directedRadiusSigmaIsUndirectedGapAlpha : Bool
-    undirectedGapAlphaHasLeanTheorems : Bool
-    directedRadiusSigmaHalfHasLocatedLeanTheorem : Bool
-    exponentNamesMayBeCollapsed : Bool
+    primitiveTwistedRadiusAtTwoIsSqrtTwoOwned : Bool
+    localCyclotomicHalfCompiled : Bool
+    prolateCriticalHalfOwned : Bool
+    fullTransferOperatorRadiusSqrtTwoOwned : Bool
+    radiusNSizePowerHalfReadingValid : Bool
+    commonSemilocalTensorImpliesSigmaIdentification : Bool
+    sameObjectAnchorLocated : Bool
 
-canonicalExponentSeparationBoundary : ExponentSeparationBoundary
-canonicalExponentSeparationBoundary =
-  exponentSeparationBoundary false true false false
+canonicalSigmaClosureBoundary : SigmaClosureBoundary
+canonicalSigmaClosureBoundary =
+  sigmaClosureBoundary true true true false false false false
 
-undirectedAlphaDoesNotDischargeDirectedSigma :
-  ExponentSeparationBoundary.directedRadiusSigmaIsUndirectedGapAlpha
-    canonicalExponentSeparationBoundary
+localAndProlateHalvesDoNotAutoWeld :
+  SigmaClosureBoundary.sameObjectAnchorLocated canonicalSigmaClosureBoundary
   ≡ false
-undirectedAlphaDoesNotDischargeDirectedSigma = refl
+localAndProlateHalvesDoNotAutoWeld = refl
+
+fullTransferRadiusSqrtTwoStillUnproved :
+  SigmaClosureBoundary.fullTransferOperatorRadiusSqrtTwoOwned
+    canonicalSigmaClosureBoundary
+  ≡ false
+fullTransferRadiusSqrtTwoStillUnproved = refl
+
+sizeExponentHalfReadingRejected :
+  SigmaClosureBoundary.radiusNSizePowerHalfReadingValid
+    canonicalSigmaClosureBoundary
+  ≡ false
+sizeExponentHalfReadingRejected = refl
