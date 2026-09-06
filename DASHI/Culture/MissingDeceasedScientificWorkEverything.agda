@@ -7,13 +7,22 @@ module DASHI.Culture.MissingDeceasedScientificWorkEverything where
 -- denominator-aware matched-control enrichment, competing-hypothesis
 -- discrimination, critical-knowledge BIDI acquisition, viewpoint-provenance
 -- testing, open-science/knowledge-release and externalisation-boundary BIDI
--- testing, disruption-benefit evidence testing, actor benefit/visibility/effect
--- intersection, and matched disruption-impact controls.
+-- testing, science-to-capability-carrier reconstruction, disruption-benefit
+-- evidence testing, actor benefit/visibility/effect intersection, and matched
+-- disruption-impact controls.
+--
+-- The scientific formalisation is both memorial work and an investigative aid:
+-- it identifies the actual capability-bearing carriers that later evidence must
+-- connect to people, access, replacement difficulty, observers and events.
+-- None of those bridges are inferred from scientific interest alone.
+--
 -- Kept separate from AmyEskridgeEvidenceEverything because Amy Eskridge is not
 -- explicitly named in the 20 April 2026 House Oversight letter formalised here.
 
 import DASHI.Core.ScientificWorkAttributionExact
 import DASHI.Core.ScientificSourceCitationExact
+import DASHI.Core.ScientificMechanismEvidenceBidiExact
+import DASHI.Core.ScientificCapabilityCarrierBidiExact
 import DASHI.Core.TechnicalDependencyHypergraphExact
 import DASHI.Core.CommonSelectorVisibilityHyperfabricExact
 import DASHI.Core.SelectorDiscriminationSearchExact
@@ -28,6 +37,7 @@ import DASHI.Core.ViewpointProvenanceBidiExact
 import DASHI.Core.OpenScienceKnowledgeReleaseBidiExact
 import DASHI.Core.TechnicalExternalisationDepthBidiExact
 import DASHI.Core.ExternalisationBoundaryEnrichmentBidiExact
+import DASHI.Physics.BoundaryScienceEverything
 import DASHI.Culture.MissingDeceasedScientistWorkAttributionExact
 import DASHI.Culture.MissingDeceasedScientificWorkCrossPollinationExact
 import DASHI.Culture.MissingDeceasedScientificWorkSourceRegistryExact
@@ -40,6 +50,7 @@ import DASHI.Culture.MissingDeceasedSelectorDiscriminationFrontierExact
 import DASHI.Culture.MissingDeceasedCapabilitySynthesisExact
 import DASHI.Culture.MissingDeceasedCapabilityIndexedSelectorSalienceExact
 import DASHI.Culture.MissingDeceasedCapabilitySelectorAcquisitionExact
+import DASHI.Culture.MissingDeceasedScientificCapabilityCarrierMatrixExact
 import DASHI.Culture.MissingDeceasedRosterEnrichmentDesignExact
 import DASHI.Culture.MissingDeceasedHypothesisDiscriminatorMatrixExact
 import DASHI.Culture.MissingDeceasedDisruptionBenefitEvidenceExact
