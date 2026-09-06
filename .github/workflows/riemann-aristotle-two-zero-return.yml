@@ -22,6 +22,8 @@ on:
       - 'DASHI/Analysis/RiemannG2AdaptiveJLambdaConstantWindowExact.agda'
       - 'DASHI/Analysis/RiemannG2QuarterPeriodAnalyticRouteReconciliationExact.agda'
       - 'DASHI/Analysis/RiemannG2HighestAlphaAfter8894Exact.agda'
+      - 'DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleRHAnalyticLeafSchedulerExact.agda'
       - 'DASHI/Analysis/RiemannAristotleNearCoreDensityReturnRegression.agda'
       - 'DASHI/Analysis/RiemannAristotleSharedCertificateREADME.agda'
       - 'DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda'
