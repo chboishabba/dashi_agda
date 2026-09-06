@@ -7,7 +7,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Core.RequiredAxisSupportSquareExact as Square
-import DASHI.Cognition.PNF.SensibLawMaboLandBackAuditedCausalEverything as Audited
+import DASHI.Cognition.PNF.SensibLawMaboDawsonCrownDerivationHingeClosureExact as Dawson
 import DASHI.Cognition.PNF.SensibLawMaboTwoOrderParaconsistentSpaceExact as Para
 import DASHI.Cognition.PNF.SensibLawIndigenousLandBackAttributedSourceAtlasExact as Sources
 import DASHI.Cognition.PNF.SensibLawIndigenousLandBackAttributedSourceAtlasSupplementExact as Supplement
@@ -15,10 +15,6 @@ import DASHI.Cognition.PNF.SensibLawIndigenousCarbonColonialClassificationCritic
 
 ------------------------------------------------------------------------
 -- Preferred downstream surface after attribution + paraconsistency audit.
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
--- Structured bibliography is first-class and non-promoting.
 ------------------------------------------------------------------------
 
 primaryStructuredSourceCount :
@@ -38,7 +34,7 @@ supplementAtlasDoesNotCreateAuthority :
 supplementAtlasDoesNotCreateAuthority = refl
 
 ------------------------------------------------------------------------
--- The Dawson result is placed inside the actual support space.
+-- Dawson internal closure is one paraconsistent axis, not the global state.
 ------------------------------------------------------------------------
 
 dawsonInternalLogicIsPositiveOnlyNotGlobalClosure :
@@ -71,13 +67,13 @@ internalClosureAndCrossOrderConflictCoexist :
 internalClosureAndCrossOrderConflictCoexist = refl , refl
 
 ------------------------------------------------------------------------
--- The older audited consumer closure remains true but is no longer the whole
--- state description.
+-- The narrow Dawson consumer remains closed, but that does not globally close
+-- the cross-order support space.
 ------------------------------------------------------------------------
 
 dawsonNarrowConsumerStillClosed :
-  Audited.Dawson.consumerClosure Audited.Dawson.reconstructDawsonInternalLogic
-  ≡ Audited.Dawson.consumerClosed
+  Dawson.consumerClosure Dawson.reconstructDawsonInternalLogic
+  ≡ Dawson.consumerClosed
 dawsonNarrowConsumerStillClosed = refl
 
 narrowClosureDoesNotImplyGlobalResolution :
