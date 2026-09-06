@@ -11,3 +11,5 @@ import DASHI.Physics.Semiconductor.Device.GateGeometryObservationNonFactorabilit
 import DASHI.Physics.Semiconductor.Device.SameObjectGummelFiniteContractionExact
 import DASHI.Physics.Semiconductor.Device.ComputedFiniteDeviceCellExact
 import DASHI.Physics.Semiconductor.Device.ResidualDrivenComputedCorrectionExact
+import DASHI.Physics.Semiconductor.Device.FiniteContinuityResidualExact
+import DASHI.Physics.Semiconductor.Device.FiniteSecantResponseCorrectionExact
