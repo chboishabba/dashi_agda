@@ -5,34 +5,90 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 open import DASHI.Geometry.Gauge.SUNPrimitives
+import DASHI.Physics.YangMills.YMOperatorDomainContinuumFrontier2026Exact as Frontier
 
 record MassGapSpectralStatement : Set₁ where
   field
-    hamiltonianAvailable : Bool
-    vacuumEigenvalueZero : Bool
-    vacuumMultiplicityOne : Bool
-    spectralGapPositive : Bool
+    physicalHamiltonianAvailable : Bool
+    physicalVacuumEigenvalueZeroEstablished : Bool
+    physicalVacuumMultiplicityOneEstablished : Bool
+    physicalContinuumSpectralGapPositive : Bool
+    boundedStrongLimitFormGapTransportAvailable : Bool
+    vacuumOrthogonalRecoveryGapCompilerAvailable : Bool
+    denseCoreSpectralExclusionCompilerAvailable : Bool
+    genuinePartialDomainHamiltonianAvailable : Bool
+    physicalVacuumRecoverySystemAvailable : Bool
+    physicalDenseCoreProducerAvailable : Bool
+    physicalClosedFormOrResolventIdentificationAvailable : Bool
     gapBound : String
     clayPromoted : Bool
-    hamiltonianAvailableIsTrue : hamiltonianAvailable ≡ true
-    vacuumEigenvalueZeroIsTrue : vacuumEigenvalueZero ≡ true
-    vacuumMultiplicityOneIsTrue : vacuumMultiplicityOne ≡ true
-    spectralGapPositiveIsTrue : spectralGapPositive ≡ true
+    physicalHamiltonianAvailableIsFalse : physicalHamiltonianAvailable ≡ false
+    physicalVacuumEigenvalueZeroEstablishedIsFalse :
+      physicalVacuumEigenvalueZeroEstablished ≡ false
+    physicalVacuumMultiplicityOneEstablishedIsFalse :
+      physicalVacuumMultiplicityOneEstablished ≡ false
+    physicalContinuumSpectralGapPositiveIsFalse :
+      physicalContinuumSpectralGapPositive ≡ false
+    boundedStrongLimitFormGapTransportAvailableIsTrue :
+      boundedStrongLimitFormGapTransportAvailable ≡ true
+    vacuumOrthogonalRecoveryGapCompilerAvailableIsTrue :
+      vacuumOrthogonalRecoveryGapCompilerAvailable ≡ true
+    denseCoreSpectralExclusionCompilerAvailableIsTrue :
+      denseCoreSpectralExclusionCompilerAvailable ≡ true
+    genuinePartialDomainHamiltonianAvailableIsFalse :
+      genuinePartialDomainHamiltonianAvailable ≡ false
+    physicalVacuumRecoverySystemAvailableIsFalse :
+      physicalVacuumRecoverySystemAvailable ≡ false
+    physicalDenseCoreProducerAvailableIsFalse :
+      physicalDenseCoreProducerAvailable ≡ false
+    physicalClosedFormOrResolventIdentificationAvailableIsFalse :
+      physicalClosedFormOrResolventIdentificationAvailable ≡ false
     clayPromotedIsFalse : clayPromoted ≡ false
     noClayPromotion : clayYangMillsPromoted ≡ false
 
 canonicalMassGapSpectralStatement : MassGapSpectralStatement
 canonicalMassGapSpectralStatement = record
-  { hamiltonianAvailable = true
-  ; vacuumEigenvalueZero = true
-  ; vacuumMultiplicityOne = true
-  ; spectralGapPositive = true
-  ; gapBound = "positive physical mass gap available on the canonical YM source-intake route"
+  { physicalHamiltonianAvailable =
+      Frontier.genuinePartialDomainHamiltonianFormalized
+        Frontier.canonicalYMOperatorContinuumFrontier
+  ; physicalVacuumEigenvalueZeroEstablished = false
+  ; physicalVacuumMultiplicityOneEstablished = false
+  ; physicalContinuumSpectralGapPositive = false
+  ; boundedStrongLimitFormGapTransportAvailable =
+      Frontier.boundedStrongLimitFormGapTransportClosed
+        Frontier.canonicalYMOperatorContinuumFrontier
+  ; vacuumOrthogonalRecoveryGapCompilerAvailable =
+      Frontier.vacuumOrthogonalRecoveryGapCompilerClosed
+        Frontier.canonicalYMOperatorContinuumFrontier
+  ; denseCoreSpectralExclusionCompilerAvailable =
+      Frontier.denseCoreSpectralExclusionCompilerClosed
+        Frontier.canonicalYMOperatorContinuumFrontier
+  ; genuinePartialDomainHamiltonianAvailable =
+      Frontier.genuinePartialDomainHamiltonianFormalized
+        Frontier.canonicalYMOperatorContinuumFrontier
+  ; physicalVacuumRecoverySystemAvailable =
+      Frontier.physicalVacuumRecoverySystemConstructed
+        Frontier.canonicalYMOperatorContinuumFrontier
+  ; physicalDenseCoreProducerAvailable =
+      Frontier.physicalDenseCoreClusteringContinuityProducerClosed
+        Frontier.canonicalYMOperatorContinuumFrontier
+  ; physicalClosedFormOrResolventIdentificationAvailable =
+      Frontier.physicalClosedFormOrResolventIdentificationClosed
+        Frontier.canonicalYMOperatorContinuumFrontier
+  ; gapBound =
+      "Two generic compilers are closed: Lean bounded pointwise-strong-limit form-gap transport and Agda vacuum-orthogonal recovery gap transport; Agda also closes dense-core spectral exclusion. The physical continuum YM gap remains open until the domain-aware Hamiltonian, vacuum-orthogonal recovery/dense-core producers, and physical continuum identification are supplied."
   ; clayPromoted = false
-  ; hamiltonianAvailableIsTrue = refl
-  ; vacuumEigenvalueZeroIsTrue = refl
-  ; vacuumMultiplicityOneIsTrue = refl
-  ; spectralGapPositiveIsTrue = refl
+  ; physicalHamiltonianAvailableIsFalse = refl
+  ; physicalVacuumEigenvalueZeroEstablishedIsFalse = refl
+  ; physicalVacuumMultiplicityOneEstablishedIsFalse = refl
+  ; physicalContinuumSpectralGapPositiveIsFalse = refl
+  ; boundedStrongLimitFormGapTransportAvailableIsTrue = refl
+  ; vacuumOrthogonalRecoveryGapCompilerAvailableIsTrue = refl
+  ; denseCoreSpectralExclusionCompilerAvailableIsTrue = refl
+  ; genuinePartialDomainHamiltonianAvailableIsFalse = refl
+  ; physicalVacuumRecoverySystemAvailableIsFalse = refl
+  ; physicalDenseCoreProducerAvailableIsFalse = refl
+  ; physicalClosedFormOrResolventIdentificationAvailableIsFalse = refl
   ; clayPromotedIsFalse = refl
   ; noClayPromotion = refl
   }

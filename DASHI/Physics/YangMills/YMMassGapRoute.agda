@@ -1,12 +1,13 @@
 module DASHI.Physics.YangMills.YMMassGapRoute where
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.YangMills.BalabanSU2GeometryQ0Bundle
 import DASHI.Physics.YangMills.BalabanFiniteOneStepFrontierBundle
+import DASHI.Physics.YangMills.YMOperatorDomainContinuumFrontier2026Exact as Frontier
 
 open import DASHI.Geometry.Gauge.SUNPrimitives
 open import DASHI.Geometry.Gauge.SUNLane
@@ -28,10 +29,37 @@ record YMMassGapRoute (N : Nat) : Setω where
     wightman : WightmanReconstructionLane
     spectralGap : MassGapSpectralStatement
     o4Restoration : O4RestorationLane
+    operatorContinuumFrontier : Frontier.YMOperatorContinuumFrontier
+    generatorUniquenessAvailable : Bool
+    symmetryNullPreservationAvailable : Bool
+    gaugeInvariantCarrierAvailable : Bool
+    boundedStrongLimitGapTransportAvailable : Bool
+    vacuumRecoveryGapCompilerAvailable : Bool
+    denseCoreSpectralExclusionCompilerAvailable : Bool
+    physicalPartialDomainHamiltonianClosed : Bool
+    physicalVacuumRecoverySystemClosed : Bool
+    physicalDenseCoreProducerClosed : Bool
+    ymEqualsOSEvolutionClosed : Bool
+    physicalClosedFormOrResolventIdentificationClosed : Bool
+    finiteToContinuumConstructionClosed : Bool
+    physicalContinuumOSWightmanClosed : Bool
     logSobolev : Bool
     witten : Bool
     qit : Bool
     clayYangMillsPromotedRoute : Bool
+    generatorUniquenessAvailableIsTrue : generatorUniquenessAvailable ≡ true
+    symmetryNullPreservationAvailableIsTrue : symmetryNullPreservationAvailable ≡ true
+    gaugeInvariantCarrierAvailableIsTrue : gaugeInvariantCarrierAvailable ≡ true
+    boundedStrongLimitGapTransportAvailableIsTrue : boundedStrongLimitGapTransportAvailable ≡ true
+    vacuumRecoveryGapCompilerAvailableIsTrue : vacuumRecoveryGapCompilerAvailable ≡ true
+    denseCoreSpectralExclusionCompilerAvailableIsTrue : denseCoreSpectralExclusionCompilerAvailable ≡ true
+    physicalPartialDomainHamiltonianClosedIsFalse : physicalPartialDomainHamiltonianClosed ≡ false
+    physicalVacuumRecoverySystemClosedIsFalse : physicalVacuumRecoverySystemClosed ≡ false
+    physicalDenseCoreProducerClosedIsFalse : physicalDenseCoreProducerClosed ≡ false
+    ymEqualsOSEvolutionClosedIsFalse : ymEqualsOSEvolutionClosed ≡ false
+    physicalClosedFormOrResolventIdentificationClosedIsFalse : physicalClosedFormOrResolventIdentificationClosed ≡ false
+    finiteToContinuumConstructionClosedIsFalse : finiteToContinuumConstructionClosed ≡ false
+    physicalContinuumOSWightmanClosedIsFalse : physicalContinuumOSWightmanClosed ≡ false
     logSobolevIsFalse : logSobolev ≡ false
     wittenIsFalse : witten ≡ false
     qitIsFalse : qit ≡ false
@@ -48,10 +76,37 @@ canonicalYMMassGapRoute N = record
   ; wightman = canonicalWightmanReconstructionLane
   ; spectralGap = canonicalMassGapSpectralStatement
   ; o4Restoration = canonicalO4RestorationLane
+  ; operatorContinuumFrontier = Frontier.canonicalYMOperatorContinuumFrontier
+  ; generatorUniquenessAvailable = Frontier.generatorUniquenessClosedWithoutBoundednessHypothesisOnTotalMaps Frontier.canonicalYMOperatorContinuumFrontier
+  ; symmetryNullPreservationAvailable = Frontier.symmetryImpliesNullPreservationClosedForTotalLinearMaps Frontier.canonicalYMOperatorContinuumFrontier
+  ; gaugeInvariantCarrierAvailable = Frontier.gaugeInvariantL2CarrierClosed Frontier.canonicalYMOperatorContinuumFrontier
+  ; boundedStrongLimitGapTransportAvailable = Frontier.boundedStrongLimitFormGapTransportClosed Frontier.canonicalYMOperatorContinuumFrontier
+  ; vacuumRecoveryGapCompilerAvailable = Frontier.vacuumOrthogonalRecoveryGapCompilerClosed Frontier.canonicalYMOperatorContinuumFrontier
+  ; denseCoreSpectralExclusionCompilerAvailable = Frontier.denseCoreSpectralExclusionCompilerClosed Frontier.canonicalYMOperatorContinuumFrontier
+  ; physicalPartialDomainHamiltonianClosed = Frontier.genuinePartialDomainHamiltonianFormalized Frontier.canonicalYMOperatorContinuumFrontier
+  ; physicalVacuumRecoverySystemClosed = Frontier.physicalVacuumRecoverySystemConstructed Frontier.canonicalYMOperatorContinuumFrontier
+  ; physicalDenseCoreProducerClosed = Frontier.physicalDenseCoreClusteringContinuityProducerClosed Frontier.canonicalYMOperatorContinuumFrontier
+  ; ymEqualsOSEvolutionClosed = Frontier.ymEvolutionEqualsOSReconstructedEvolutionClosed Frontier.canonicalYMOperatorContinuumFrontier
+  ; physicalClosedFormOrResolventIdentificationClosed = Frontier.physicalClosedFormOrResolventIdentificationClosed Frontier.canonicalYMOperatorContinuumFrontier
+  ; finiteToContinuumConstructionClosed = Frontier.finiteToContinuumYMConstructionClosed Frontier.canonicalYMOperatorContinuumFrontier
+  ; physicalContinuumOSWightmanClosed = Frontier.continuumOSWightmanPackageClosed Frontier.canonicalYMOperatorContinuumFrontier
   ; logSobolev = false
   ; witten = false
   ; qit = false
   ; clayYangMillsPromotedRoute = false
+  ; generatorUniquenessAvailableIsTrue = refl
+  ; symmetryNullPreservationAvailableIsTrue = refl
+  ; gaugeInvariantCarrierAvailableIsTrue = refl
+  ; boundedStrongLimitGapTransportAvailableIsTrue = refl
+  ; vacuumRecoveryGapCompilerAvailableIsTrue = refl
+  ; denseCoreSpectralExclusionCompilerAvailableIsTrue = refl
+  ; physicalPartialDomainHamiltonianClosedIsFalse = refl
+  ; physicalVacuumRecoverySystemClosedIsFalse = refl
+  ; physicalDenseCoreProducerClosedIsFalse = refl
+  ; ymEqualsOSEvolutionClosedIsFalse = refl
+  ; physicalClosedFormOrResolventIdentificationClosedIsFalse = refl
+  ; finiteToContinuumConstructionClosedIsFalse = refl
+  ; physicalContinuumOSWightmanClosedIsFalse = refl
   ; logSobolevIsFalse = refl
   ; wittenIsFalse = refl
   ; qitIsFalse = refl
