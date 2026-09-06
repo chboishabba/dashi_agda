@@ -3,17 +3,16 @@ module DASHI.Culture.PoststructuralismFourfoldRetreatCrossPollinationExact where
 ------------------------------------------------------------------------
 -- POSTSTRUCTURALISM x FOURFOLD-RETREAT CROSS-POLLINATION
 --
--- Reuses merged repository machinery rather than turning a school label into
--- a one-bit verdict.  The application claim is deliberately weaker:
+-- Source-attribution policy is explicit:
 --
---   critique of universal/foundational reason
--- + discourse treated as constitutive
--- does NOT by itself entail
---   abandonment of materialism and rational explanation.
+--   Foster/Rockhill source proposition
+--   != DASHI bounded interpretation
+--   != DASHI formal construction
+--   != empirical claim about a thinker/tradition.
 --
--- Likewise, a tradition label does not determine a four-coordinate retreat
--- profile.  These are DASHI formal boundaries, not historical propositions
--- attributed to Foster, Rockhill, Foucault, Derrida, or any other thinker.
+-- In particular, the finite countermodels below are repository constructions.
+-- They are not historical claims about Foucault, Derrida, poststructuralism or
+-- postmodernism as a whole.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -39,15 +38,17 @@ record RetreatProfile : Set where
 
 open RetreatProfile public
 
-mixedPoststructuralProfile : RetreatProfile
-mixedPoststructuralProfile = retreat-profile true true false false
+-- These profiles are finite DASHI witnesses only.  They have no external
+-- thinker/tradition attribution.
+constructedMixedProfile : RetreatProfile
+constructedMixedProfile = retreat-profile true true false false
 
-fourAxisHighProfile : RetreatProfile
-fourAxisHighProfile = retreat-profile true true true true
+constructedFourAxisHighProfile : RetreatProfile
+constructedFourAxisHighProfile = retreat-profile true true true true
 
-materialismCoordinateSeparatesProfiles :
-  mixedPoststructuralProfile ≡ fourAxisHighProfile → ⊥
-materialismCoordinateSeparatesProfiles same =
+materialismCoordinateSeparatesConstructedProfiles :
+  constructedMixedProfile ≡ constructedFourAxisHighProfile → ⊥
+materialismCoordinateSeparatesConstructedProfiles same =
   falseIsNotTrue
     (cong materialismScienceAxis same)
   where
@@ -56,11 +57,14 @@ materialismCoordinateSeparatesProfiles same =
 
 ------------------------------------------------------------------------
 -- 2. Same broad school label cannot recover the full retreat profile.
+--
+-- `SituatedReading` is a toy carrier witnessing non-factorability.  Its two
+-- constructors are not asserted to be actual historical schools or authors.
 ------------------------------------------------------------------------
 
 data SituatedReading : Set where
-  discourseMaterialistReading
-  discourseIdealistReading
+  constructedDiscourseMaterialistReading
+  constructedDiscourseIdealistReading
   : SituatedReading
 
 data BroadSchoolLabel : Set where poststructuralistLabel : BroadSchoolLabel
@@ -69,20 +73,20 @@ schoolLabel : SituatedReading → BroadSchoolLabel
 schoolLabel _ = poststructuralistLabel
 
 retreatProfile : SituatedReading → RetreatProfile
-retreatProfile discourseMaterialistReading = mixedPoststructuralProfile
-retreatProfile discourseIdealistReading = fourAxisHighProfile
+retreatProfile constructedDiscourseMaterialistReading = constructedMixedProfile
+retreatProfile constructedDiscourseIdealistReading = constructedFourAxisHighProfile
 
 sameLabelDifferentProfile :
-  retreatProfile discourseMaterialistReading ≡
-  retreatProfile discourseIdealistReading → ⊥
-sameLabelDifferentProfile = materialismCoordinateSeparatesProfiles
+  retreatProfile constructedDiscourseMaterialistReading ≡
+  retreatProfile constructedDiscourseIdealistReading → ⊥
+sameLabelDifferentProfile = materialismCoordinateSeparatesConstructedProfiles
 
 poststructuralistLabelNonFactorability :
   INF.NonFactorabilityWitness schoolLabel retreatProfile
 poststructuralistLabelNonFactorability =
   INF.nonFactorabilityWitness
-    discourseMaterialistReading
-    discourseIdealistReading
+    constructedDiscourseMaterialistReading
+    constructedDiscourseIdealistReading
     refl
     sameLabelDifferentProfile
 
@@ -100,7 +104,8 @@ poststructuralistLabelCannotDetermineRetreatProfile =
 --    reflective.
 -- C: abandons materialism and rational explanation.
 --
--- Repository policy: A+B never auto-promotes to C.
+-- The implication A+B -> C is NOT attributed to Foster/Rockhill as a theorem;
+-- its rejection here is a DASHI no-promotion boundary.
 ------------------------------------------------------------------------
 
 data TheoreticalMove : Set where
@@ -139,11 +144,6 @@ reciprocalNotDiscursiveOneWay ()
 
 ------------------------------------------------------------------------
 -- 5. Political-strategy residual: the stronger criticism can remain open.
---
--- The meaningful question is not whether discourse exists, but whether the
--- framework supplies adequate causal and strategic carriers for production,
--- class, accumulation, states, imperial systems, collective agents and
--- transformation targets.
 ------------------------------------------------------------------------
 
 data StrategicCoordinate : Set where
@@ -168,7 +168,67 @@ record StrategicResidual : Set where
     adequacy : StrategicAdequacy
 
 ------------------------------------------------------------------------
--- 6. Direct x-pollination with merged provenance/critical-theory boundaries.
+-- 6. Attribution-aware source consumption.
+--
+-- Every imported external proposition remains attached to the exact speaker
+-- receipt that owns it.  The repository may then build bounded interpretations
+-- or formal countermodels, but those later layers do not flow backward into
+-- source authorship.
+------------------------------------------------------------------------
+
+data CrossPollinationClaimLayer : Set where
+  externalSourceProposition
+  dashIBoundedInterpretation
+  dashIFormalCountermodel
+  empiricalNamedThinkerClaim
+  : CrossPollinationClaimLayer
+
+record SourceUseReceipt : Set where
+  constructor source-use-receipt
+  field
+    sourceReceipt : Source.SourceReceipt
+    sourceLayer : CrossPollinationClaimLayer
+    downstreamLayer : CrossPollinationClaimLayer
+    preservesSpeakerOwnership : Bool
+    preservesExactSourceLocation : Bool
+    createsEmpiricalAuthority : Bool
+    attributesDASHIConstructionToSource : Bool
+    independentPromotionReceiptRequired : Bool
+
+fourfoldSummarySourceUse : SourceUseReceipt
+fourfoldSummarySourceUse =
+  source-use-receipt
+    Source.fourfoldRetreatReceipt
+    externalSourceProposition
+    dashIBoundedInterpretation
+    true true false false true
+
+nonMechanicalQualificationSourceUse : SourceUseReceipt
+nonMechanicalQualificationSourceUse =
+  source-use-receipt
+    Source.nonMechanicalFieldReceipt
+    externalSourceProposition
+    dashIBoundedInterpretation
+    true true false false true
+
+fosterDiscursiveTurnSourceUse : SourceUseReceipt
+fosterDiscursiveTurnSourceUse =
+  source-use-receipt
+    Source.fosterDiscursiveTurnAssociationReceipt
+    externalSourceProposition
+    dashIBoundedInterpretation
+    true true false false true
+
+rockhillMaterialWithdrawalSourceUse : SourceUseReceipt
+rockhillMaterialWithdrawalSourceUse =
+  source-use-receipt
+    Source.rockhillMaterialRealityWithdrawalReceipt
+    externalSourceProposition
+    dashIBoundedInterpretation
+    true true false false true
+
+------------------------------------------------------------------------
+-- 7. Direct x-pollination with merged provenance/critical-theory boundaries.
 ------------------------------------------------------------------------
 
 record FourfoldRetreatCrossPollinationWeld : Set where
@@ -177,6 +237,9 @@ record FourfoldRetreatCrossPollinationWeld : Set where
     sourceBoundary : Source.FourfoldRetreatSourceBoundary
     philosophyBoundary : Philosophy.PhilosophyClaimProvenanceHistoryBoundary
     criticalTheoryBoundary : Critical.HistoricalTotalityCriticalTheoryBoundary
+    exactSpeakerReceiptsPreserved : Bool
+    sourceLocationReceiptsPreserved : Bool
+    accessCarrierNotPromotedToAuthorship : Bool
     schoolLabelDoesNotDetermineProfile : Bool
     critiqueOfReasonDoesNotEqualIrrationalism : Bool
     discourseConstitutiveDoesNotEqualImmaterialism : Bool
@@ -185,6 +248,8 @@ record FourfoldRetreatCrossPollinationWeld : Set where
     fourAxisProfileDoesNotFollowFromTraditionName : Bool
     strategicAdequacyRequiresIndependentReceipts : Bool
     sourceArgumentRemainsSourceBound : Bool
+    finiteCountermodelOwnedByDASHI : Bool
+    namedThinkerClassificationStillRequiresEvidence : Bool
 
 canonicalFourfoldRetreatCrossPollinationWeld :
   FourfoldRetreatCrossPollinationWeld
@@ -193,10 +258,10 @@ canonicalFourfoldRetreatCrossPollinationWeld =
     Source.canonicalFourfoldRetreatSourceBoundary
     Philosophy.canonicalPhilosophyClaimProvenanceHistoryBoundary
     Critical.canonicalHistoricalTotalityCriticalTheoryBoundary
-    true true true true true true true true
+    true true true true true true true true true true true true true true
 
 ------------------------------------------------------------------------
--- 7. Explicit no-promotion gates.
+-- 8. Explicit no-promotion gates.
 ------------------------------------------------------------------------
 
 data CritiqueOfReasonMeansIrrationalism : Set where
@@ -205,6 +270,9 @@ data SocialConstructionMeansCausalInertness : Set where
 data OneRetreatAxisDeterminesAllFour : Set where
 data PoststructuralistMeansFourfoldRetreat : Set where
 data FourfoldRetreatCritiqueProvesHistoricalCausation : Set where
+data AccessLocationCreatesSourceAuthorship : Set where
+data DASHICountermodelBecomesSourceAuthorsTheorem : Set where
+data SourceCriticismClassifiesNamedThinkerWithoutReceipt : Set where
 
 critiqueOfReasonDoesNotMeanIrrationalism :
   CritiqueOfReasonMeansIrrationalism → ⊥
@@ -229,3 +297,15 @@ poststructuralistDoesNotMeanFourfoldRetreat ()
 fourfoldRetreatCritiqueDoesNotProveHistoricalCausation :
   FourfoldRetreatCritiqueProvesHistoricalCausation → ⊥
 fourfoldRetreatCritiqueDoesNotProveHistoricalCausation ()
+
+accessLocationDoesNotCreateSourceAuthorship :
+  AccessLocationCreatesSourceAuthorship → ⊥
+accessLocationDoesNotCreateSourceAuthorship ()
+
+dashICountermodelDoesNotBecomeSourceAuthorsTheorem :
+  DASHICountermodelBecomesSourceAuthorsTheorem → ⊥
+dashICountermodelDoesNotBecomeSourceAuthorsTheorem ()
+
+sourceCriticismDoesNotClassifyNamedThinkerWithoutReceipt :
+  SourceCriticismClassifiesNamedThinkerWithoutReceipt → ⊥
+sourceCriticismDoesNotClassifyNamedThinkerWithoutReceipt ()
