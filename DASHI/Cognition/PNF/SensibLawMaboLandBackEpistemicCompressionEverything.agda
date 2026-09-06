@@ -5,9 +5,10 @@ module DASHI.Cognition.PNF.SensibLawMaboLandBackEpistemicCompressionEverything w
 --
 -- Extends the attributed/paraconsistent LAND BACK surface with the generic
 -- dominant-chart compiler and the feminist/intersectional/anti-psychologising/
--- Amalek cross-pollination.  It does not merge those traditions into one
--- doctrine and does not treat property/asset vocabulary as the ontology of
--- Country.
+-- Amalek cross-pollination. It also carries the terra-nullius functional legal
+-- effect classification and the Billy effective-remedy / Two-Eyed Seeing braid.
+-- It does not merge those traditions into one doctrine and does not treat
+-- property/asset vocabulary as the ontology of Country.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -20,6 +21,8 @@ import DASHI.Cognition.PNF.SensibLawDominantChartEpistemicCompressionCrossPollin
 import DASHI.Cognition.PNF.SensibLawMaboCrownRecognitionProjectionNonFactorabilityExact as Crown
 import DASHI.Cognition.PNF.SensibLawLandBackIncomeProjectionNonFactorabilityExact as Income
 import DASHI.Cognition.PNF.SensibLawIndigenousCarbonValueProjectionNonFactorabilityExact as Carbon
+import DASHI.Cognition.PNF.SensibLawMaboTerraNulliusJuridicalDehumanisationExact as Terra
+import DASHI.Cognition.PNF.SensibLawBillyEffectiveRemedyTwoEyedSeeingExact as Billy
 import DASHI.Culture.AmalekAuthorityProjectionBoundary as Amalek
 
 ------------------------------------------------------------------------
@@ -159,6 +162,157 @@ posthocBiaRelabellingCannotRepairStewardshipProjection :
     Carbon.stewardshipValueOutcome → ⊥
 posthocBiaRelabellingCannotRepairStewardshipProjection =
   Cross.biaReclassificationCannotRecoverStewardshipRelation
+
+------------------------------------------------------------------------
+-- Terra nullius: operative legal effect can be classified without inventing a
+-- quotation or a biological proposition.
+------------------------------------------------------------------------
+
+terraNulliusFunctionalJuridicalDehumanisation :
+  Terra.FunctionalJuridicalDehumanisation
+terraNulliusFunctionalJuridicalDehumanisation =
+  Terra.terraNulliusFunctionalJuridicalDehumanisation
+
+terraNulliusTreatedInhabitedCountryAsLegallyUninhabited :
+  Terra.treatedAsLegallyUninhabited terraNulliusFunctionalJuridicalDehumanisation ≡ true
+terraNulliusTreatedInhabitedCountryAsLegallyUninhabited = refl
+
+terraNulliusDeniedIndigenousSovereigntyConstitutiveStanding :
+  Terra.indigenousSovereigntyDeniedConstitutiveStanding
+    terraNulliusFunctionalJuridicalDehumanisation ≡ true
+terraNulliusDeniedIndigenousSovereigntyConstitutiveStanding = refl
+
+terraNulliusDeniedOccupancyProprietaryStanding :
+  Terra.occupancyDeniedProprietaryStanding
+    terraNulliusFunctionalJuridicalDehumanisation ≡ true
+terraNulliusDeniedOccupancyProprietaryStanding = refl
+
+biologicalNonHumanHoldingIsNotRequiredForFunctionalClassification :
+  Terra.biologicalNonHumanPropositionRequired
+    terraNulliusFunctionalJuridicalDehumanisation ≡ false
+biologicalNonHumanHoldingIsNotRequiredForFunctionalClassification = refl
+
+brennanNotGivenOurFunctionalPhrase :
+  Terra.BrennanUsedOurFunctionalDehumanisationPhrase → ⊥
+brennanNotGivenOurFunctionalPhrase = Terra.ourPhraseDoesNotTransferToBrennan
+
+systemEffectClassificationIsNotSpeakerQuotation :
+  Terra.effectClassificationEqualsSpeakerQuotation Terra.terraNulliusSystemReading ≡ false
+systemEffectClassificationIsNotSpeakerQuotation = refl
+
+systemEffectClassificationDoesNotRequirePrivateMotive :
+  Terra.effectClassificationProvesPrivateMotive Terra.terraNulliusSystemReading ≡ false
+systemEffectClassificationDoesNotRequirePrivateMotive = refl
+
+------------------------------------------------------------------------
+-- Billy: full reparation is conjunctive and remains publicly incomplete.
+------------------------------------------------------------------------
+
+billyFullReparationStatus : Billy.FullReparationStatus
+billyFullReparationStatus = Billy.currentPublicFullReparationStatus
+
+billyPublicFullReparationResidualLive :
+  billyFullReparationStatus ≡ Billy.fullReparationResidualLive
+billyPublicFullReparationResidualLive = refl
+
+billyCompensationReceiptNotRecovered :
+  Billy.publicImplementationState Billy.adequateCompensation
+  ≡ Billy.publicReceiptNotRecovered
+billyCompensationReceiptNotRecovered = refl
+
+billyConsultationEvidencePresent :
+  Billy.publicImplementationState Billy.meaningfulConsultation
+  ≡ Billy.publicEvidencePresent
+billyConsultationEvidencePresent = refl
+
+billySafeExistenceMeasuresEvidencePresent :
+  Billy.publicImplementationState Billy.continuedSafeExistenceMeasures
+  ≡ Billy.publicEvidencePresent
+billySafeExistenceMeasuresEvidencePresent = refl
+
+billyDirectCommitteeExecutionWritUnavailableByDefault :
+  Billy.mechanismStrength Billy.directTreatyBodyDomesticExecutionWrit
+  ≡ Billy.unavailableByDefault
+billyDirectCommitteeExecutionWritUnavailableByDefault = refl
+
+billyTreatyFollowUpIsIndirectLeverage :
+  Billy.mechanismStrength Billy.treatyBodyFollowUpProcedure
+  ≡ Billy.availableIndirect
+billyTreatyFollowUpIsIndirectLeverage = refl
+
+billyCompensationProspectPoliticallyContingent :
+  Billy.prospectFor Billy.adequateCompensation ≡ Billy.politicallyContingentProspect
+billyCompensationProspectPoliticallyContingent = refl
+
+billyConsultationDoesNotCloseFullReparation :
+  Billy.ConsultationEqualsFullReparation → ⊥
+billyConsultationDoesNotCloseFullReparation = Billy.consultationDoesNotEqualFullReparation
+
+billyAdaptationFundingDoesNotBecomeCompensation :
+  Billy.AdaptationFundingEqualsCompensation → ⊥
+billyAdaptationFundingDoesNotBecomeCompensation = Billy.adaptationFundingDoesNotEqualCompensation
+
+------------------------------------------------------------------------
+-- Two-Eyed Seeing / Sweetgrass: coordination without extraction or fusion.
+------------------------------------------------------------------------
+
+billyRemedyConsultationBoundary : Billy.RemedyConsultationBoundary
+billyRemedyConsultationBoundary = Billy.canonicalRemedyConsultationBoundary
+
+billyCommunityObservationDoesNotTransferAuthorityToState :
+  Billy.hearingCommunityObservationEqualsTransferringAuthority
+    billyRemedyConsultationBoundary ≡ false
+billyCommunityObservationDoesNotTransferAuthorityToState = refl
+
+billyConsultationMayEraseProvenanceAndObligation :
+  Billy.consultationMayEraseProvenanceAndObligation
+    billyRemedyConsultationBoundary ≡ true
+billyConsultationMayEraseProvenanceAndObligation = refl
+
+billyCommunityDefinedNeedsRequired :
+  Billy.adequateConsultationRequiresCommunityDefinedNeeds
+    billyRemedyConsultationBoundary ≡ true
+billyCommunityDefinedNeedsRequired = refl
+
+billyMonitoringRequiresCommunityFeedbackLoop :
+  Billy.monitoringRequiresCommunityFeedbackLoop
+    billyRemedyConsultationBoundary ≡ true
+billyMonitoringRequiresCommunityFeedbackLoop = refl
+
+billyRemedyCanCoordinateWithoutEpistemicFusion :
+  Billy.remedyCanBeCoordinatedWithoutEpistemicFusion
+    billyRemedyConsultationBoundary ≡ true
+billyRemedyCanCoordinateWithoutEpistemicFusion = refl
+
+------------------------------------------------------------------------
+-- "A system is what it does": declared commitment != realised remedy.
+------------------------------------------------------------------------
+
+billyOperationalSemantics : Billy.RemedyOperationalSemantics
+billyOperationalSemantics = Billy.canonicalRemedyOperationalSemantics
+
+billyDeclarationAloneDoesNotCloseRemedy :
+  Billy.declarationAloneClosesRemedy billyOperationalSemantics ≡ false
+billyDeclarationAloneDoesNotCloseRemedy = refl
+
+billyFundingAnnouncementDoesNotCloseCompensation :
+  Billy.fundingAnnouncementAloneClosesCompensationCoordinate
+    billyOperationalSemantics ≡ false
+billyFundingAnnouncementDoesNotCloseCompensation = refl
+
+billyConsultationMeetingDoesNotCloseNeedsAssessment :
+  Billy.consultationMeetingAloneClosesNeedsAssessment billyOperationalSemantics ≡ false
+billyConsultationMeetingDoesNotCloseNeedsAssessment = refl
+
+billyRealisedSafetyAndCulturalContinuityMatter :
+  Billy.realisedCommunitySafetyAndCulturalContinuityMatter
+    billyOperationalSemantics ≡ true
+billyRealisedSafetyAndCulturalContinuityMatter = refl
+
+billyImplementationMustUseCommunityDefinedOutcomeFeedback :
+  Billy.implementationMustBeMonitoredAgainstCommunityDefinedOutcome
+    billyOperationalSemantics ≡ true
+billyImplementationMustUseCommunityDefinedOutcomeFeedback = refl
 
 ------------------------------------------------------------------------
 -- Amalek is the correction-closure frontier, not a synonym for coarse-graining.
