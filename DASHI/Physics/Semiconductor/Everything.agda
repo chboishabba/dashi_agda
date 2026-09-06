@@ -9,3 +9,4 @@ import DASHI.Physics.Semiconductor.EUVSource.Everything
 import DASHI.Physics.Semiconductor.EUVOptics.Everything
 import DASHI.Physics.Semiconductor.Resist.Everything
 import DASHI.Physics.Semiconductor.Etch.Everything
+import DASHI.Physics.Semiconductor.Deposition.Everything
