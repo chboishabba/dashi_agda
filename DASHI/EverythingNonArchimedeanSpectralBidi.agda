@@ -70,6 +70,7 @@ import DASHI.Analysis.NonArchimedeanContinuousTransferClaimStrengthExact
 import DASHI.Analysis.NonArchimedeanContinuousGibbsUniquenessBidiExact
 import DASHI.Analysis.NonArchimedeanSemilocalSigmaNonDescentExact
 import DASHI.Analysis.NonArchimedeanSigmaAnchorSameObjectBidiExact
+import DASHI.Analysis.NonArchimedeanGibbsFiniteProjectionUniquenessBidiExact
 
 -- Corrected finite Markov/mixing route.  Both the source C=1 L2 estimate and
 -- its advertised universal inverse-sqrt-two stopping-survival tail are refuted
@@ -101,12 +102,13 @@ import DASHI.Analysis.NonArchimedeanStoppingMomentRepairBidiExact
 import DASHI.Analysis.NonArchimedeanFiniteStationaryVsGibbsBoundaryExact
 import DASHI.Analysis.NonArchimedeanStoppingTimeAuthorityBidiExact
 
--- Generic x-pollinated finite-state kernels extracted from the repaired lane.
+-- Generic x-pollinated finite-state / projective kernels extracted from the repaired lane.
 import DASHI.Core.FiniteProbabilityDensityCoordinateWeldExact
 import DASHI.Core.FiniteUniformBranchingHittingTailExact
 import DASHI.Core.FinitePrefixAbsorptionExact
 import DASHI.Core.FiniteUniformProbabilityNormalizationExact
 import DASHI.Core.FinitePrefactorEnergyAssemblyExact
+import DASHI.Core.FiniteProjectionMeasureUniquenessExact
 
 import DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact
 
