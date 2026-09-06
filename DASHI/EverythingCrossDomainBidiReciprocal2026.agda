@@ -45,4 +45,7 @@ import DASHI.Core.HistoricalProducerResponsibilityTraceBidiExact
 import DASHI.Core.CostedMixedConsumerClosingObservationSearchBidiExact
 import DASHI.Core.HistoricalResponsibilityLineageTraceBidiExact
 
+-- Sixth-order residual -> producer -> action compiler.
+import DASHI.Core.HistoricalProducerNextBestActionCompilerBidiExact
+
 import DASHI.Core.CrossDomainBidiReciprocal2026Validation
