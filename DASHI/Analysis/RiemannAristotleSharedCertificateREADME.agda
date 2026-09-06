@@ -8,13 +8,13 @@ open import DASHI.Core.Prelude
 -- The current returned state includes the exact two-zero / three-taper theorem,
 -- the explicit finite-near/far decomposition, the optimized gap-split no-go,
 -- the §37 quarter-period/density reconciliation, and the §38 actual-zeta upper
--- local-count instance.  The existing gap-split, adaptive-window, quarter-period
+-- local-count instance. The existing gap-split, adaptive-window, quarter-period
 -- and canonical RH schedulers consume those returns directly, so this is one
 -- welded dependency graph rather than parallel status ledgers.
 --
 -- The Alpöge--Furman >2/3 simple/on-critical-line theorem is audited against
 -- the live local-clustering consumer: its global population summary does not
--- descend directly to the selected target-local gap pattern.  The clustering
+-- descend directly to the selected target-local gap pattern. The clustering
 -- leaf is refined instead through the existing pair/Hermitian moment lane: the
 -- Agda discrete compiler now proves that a sufficiently small SAME-target local
 -- second moment forces highGapMass < 2*lowGapMass, leaving the actual analytic
