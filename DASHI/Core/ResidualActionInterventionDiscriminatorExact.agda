@@ -9,6 +9,7 @@ import DASHI.Core.MechanismModelDiscriminationExact as Model
 import DASHI.Core.ResidualActionPolicyExact as Action
 import DASHI.Core.DiscriminatorSynthesisExact as Discriminator
 import DASHI.Core.SequentialRobustActionabilityPlannerExact as RobustPlan
+import DASHI.Core.RobustInterventionAcrossHypothesesExact as Robust
 
 ------------------------------------------------------------------------
 -- RESIDUAL ACTION <-> INTERVENTIONAL DISCRIMINATOR
@@ -43,9 +44,7 @@ record ConsumerEarlyStopReceipt : Set₁ where
   constructor consumerEarlyStopReceipt
   field
     Hypothesis Intervention Outcome : Set
-    system :
-      DASHI.Core.RobustInterventionAcrossHypothesesExact.HypothesisInterventionSystem
-        Hypothesis Intervention Outcome
+    system : Robust.HypothesisInterventionSystem Hypothesis Intervention Outcome
     Authority : Intervention → Set
     live : Hypothesis → Set
     plan : RobustPlan.SequentialActionabilityPlan system Authority live
