@@ -14,16 +14,14 @@ import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact as Z38
 ------------------------------------------------------------------------
 -- QUARTER-PERIOD / ANALYTIC-LEAF RECONCILIATION
 --
--- The earlier owner correctly separated regime-independent infrastructure from
--- the quarter-period-sensitive finite-near consumer.  The checked §37 return
--- now closes the separate width/crossing constant-window audit: it proves exact
--- compatibility arithmetic and Nat cutoff existence under its hypotheses.
--- §38 additionally supplies zeta's upper local count.
+-- §37 closes the separate J*Lambda constant-window compatibility audit and §38
+-- closes zeta upper local counting.
 --
--- Therefore widthAndCrossingScale is no longer a live work package.  This file
--- is updated in place so downstream schedulers see the closure through the same
--- owner.  The genuinely new analytic payment is actual-zeta low-gap clustering;
--- finite-near evaluation and Gamma precision remain independent existing lanes.
+-- CORRECTION: the §35 low-gap clustering inequality is necessary for POSITIVITY
+-- of the gap-split lower bound used in a no-go against the desired scalar bound.
+-- It is therefore retained as an obstruction diagnostic, not a forward RH work
+-- package. The forward zero-side theorem remains the consumer-sufficient literal
+-- target-centred signed response (the direct finite producer / G2d scalar leaf).
 ------------------------------------------------------------------------
 
 data AnalyticLeafCode : Set where
@@ -91,7 +89,7 @@ canonicalCrossBranchAnalyticFrontierReturn =
     false refl
     false refl
     true refl
-    "Reported dependency: H_X -> H_A -> H_M -> H_T -> direct phase statistic -> H_E, with H_T -> H_W -> explicit window -> H_E and H_Gamma feeding the final consumer independently."
+    "Historical explicit-formula dependency: H_X -> H_A -> H_M -> H_T -> H_W/H_E, with H_Gamma independent. The later direct literal signed route is a separate route and is not blocked on this chain."
 
 CanAdvanceBeforeCrossing : AnalyticLeafCode -> Set
 CanAdvanceBeforeCrossing HXcomplexCharacter = ⊤
@@ -113,9 +111,6 @@ quarterPeriodCrossingNecessaryForCancellation =
   Narrow.survivingRouteRequiresQuarterPeriodCrossingIsTrue
     Narrow.canonicalNarrowWindowNoCancellationReturn
 
--- Historical pre-§37 growth owner: this remains true of that owner's local
--- state, but the later checked producer discharges the corresponding global
--- scheduling leaf below.
 currentCutoffStageStillRequiresCrossing :
   Growth.currentCutoffGrowthStage ≡ Growth.crossingLawRequired
 currentCutoffStageStillRequiresCrossing = refl
@@ -130,8 +125,7 @@ genericGammaSearchPrunedBy8889 = PQ8889.findAnyGammaUpperBoundPruned
 
 quadraticDecayGapSplitSharpeningPrunedBy8894 :
   Gap8894.GapSplitRelevant Gap8894.sharpenSameQuadraticDecayDonor -> ⊥
-quadraticDecayGapSplitSharpeningPrunedBy8894 =
-  Gap8894.sameQuadraticDecayDonorPruned
+quadraticDecayGapSplitSharpeningPrunedBy8894 = Gap8894.sameQuadraticDecayDonorPruned
 
 taperRetuningGapSplitPrunedBy8894 :
   Gap8894.GapSplitRelevant Gap8894.retuneTaperWidthOrProfile -> ⊥
@@ -142,8 +136,7 @@ coarseCountingClusteringPrunedBy8894 :
 coarseCountingClusteringPrunedBy8894 = Gap8894.coarseCountingClusteringPruned
 
 quarterDensityComparisonPrunedBy8896 :
-  Gap8894.GapSplitRelevant
-    Gap8894.compareQuarterPeriodLowerConstantWithDensityUpperConstant -> ⊥
+  Gap8894.GapSplitRelevant Gap8894.compareQuarterPeriodLowerConstantWithDensityUpperConstant -> ⊥
 quarterDensityComparisonPrunedBy8896 = Gap8894.quarterDensityConstantComparisonPruned
 
 zetaUpperCountSearchPrunedBy8896 :
@@ -156,8 +149,7 @@ quarterDensityNatWindowChecked :
 quarterDensityNatWindowChecked = refl
 
 zetaShortWindowUpperCountChecked :
-  Z38.zetaShortWindowUpperCountOwnedInLean Z38.canonicalZetaLocalCountLeanReturn
-  ≡ true
+  Z38.zetaShortWindowUpperCountOwnedInLean Z38.canonicalZetaLocalCountLeanReturn ≡ true
 zetaShortWindowUpperCountChecked = refl
 
 adaptiveInverseWidthRouteNotRefutedByDensityCut :
@@ -167,13 +159,19 @@ adaptiveInverseWidthRouteNotRefutedByDensityCut =
   Gap8894.densityCutRefutesEveryAdaptiveInverseWidthRouteIsFalse
     Gap8894.canonicalGapSplitClusteringLeanReturn8894
 
+clusteringDoesNotDirectlyPayRH :
+  Gap8894.clusteringDirectlyPaysRHScalarConsumer
+    Gap8894.canonicalGapSplitClusteringLeanReturn8894 ≡ false
+clusteringDoesNotDirectlyPayRH = Gap8894.clusteringDoesNotDirectlyPayRH
+
 ------------------------------------------------------------------------
--- Parallel live work packages after 8896.
+-- Work packages after the corrected §35 interpretation.
 ------------------------------------------------------------------------
 
 data LiveWorkPackage : Set where
   widthAndCrossingScale
   actualZetaLowGapClustering
+  literalDirectSignedProducer
   canonicalCharacterInfrastructure
   gammaPrecisionRepair
   crossedRegimeFiniteEvaluation
@@ -181,11 +179,12 @@ data LiveWorkPackage : Set where
   : LiveWorkPackage
 
 data WorkState : Set where
-  closed live blocked conditional : WorkState
+  closed live blocked conditional diagnostic : WorkState
 
 workState : LiveWorkPackage -> WorkState
 workState widthAndCrossingScale = closed
-workState actualZetaLowGapClustering = live
+workState actualZetaLowGapClustering = diagnostic
+workState literalDirectSignedProducer = live
 workState canonicalCharacterInfrastructure = live
 workState gammaPrecisionRepair = live
 workState crossedRegimeFiniteEvaluation = blocked
@@ -194,8 +193,13 @@ workState finalIndependentBudgetCombination = conditional
 widthAndCrossingScaleClosed : workState widthAndCrossingScale ≡ closed
 widthAndCrossingScaleClosed = refl
 
-actualZetaClusteringIsLive : workState actualZetaLowGapClustering ≡ live
-actualZetaClusteringIsLive = refl
+actualZetaClusteringIsDiagnostic :
+  workState actualZetaLowGapClustering ≡ diagnostic
+actualZetaClusteringIsDiagnostic = refl
+
+literalDirectSignedProducerIsLive :
+  workState literalDirectSignedProducer ≡ live
+literalDirectSignedProducerIsLive = refl
 
 record CrossBranchRegimeReconciliationBoundary : Set where
   constructor cross-branch-regime-reconciliation-boundary
@@ -216,8 +220,16 @@ record CrossBranchRegimeReconciliationBoundary : Set where
     widthCrossingConstantComparisonClosedBy8896IsTrue :
       widthCrossingConstantComparisonClosedBy8896 ≡ true
 
-    actualZetaClusteringStillOpen : Bool
-    actualZetaClusteringStillOpenIsTrue : actualZetaClusteringStillOpen ≡ true
+    actualZetaClusteringStillUnproved : Bool
+    actualZetaClusteringStillUnprovedIsTrue : actualZetaClusteringStillUnproved ≡ true
+
+    actualZetaClusteringIsForwardRHWorkPackage : Bool
+    actualZetaClusteringIsForwardRHWorkPackageIsFalse :
+      actualZetaClusteringIsForwardRHWorkPackage ≡ false
+
+    literalDirectSignedProducerForwardLeafOpen : Bool
+    literalDirectSignedProducerForwardLeafOpenIsTrue :
+      literalDirectSignedProducerForwardLeafOpen ≡ true
 
     arbitraryGammaUpperBoundNeedsFreshSearch : Bool
     arbitraryGammaUpperBoundNeedsFreshSearchIsFalse :
@@ -228,8 +240,7 @@ record CrossBranchRegimeReconciliationBoundary : Set where
 
     highestAlphaReading : String
 
-canonicalCrossBranchRegimeReconciliationBoundary :
-  CrossBranchRegimeReconciliationBoundary
+canonicalCrossBranchRegimeReconciliationBoundary : CrossBranchRegimeReconciliationBoundary
 canonicalCrossBranchRegimeReconciliationBoundary =
   cross-branch-regime-reconciliation-boundary
     false refl
@@ -238,5 +249,7 @@ canonicalCrossBranchRegimeReconciliationBoundary =
     true refl
     true refl
     false refl
+    true refl
     false refl
-    "The checked §37 return closes the literal J*Lambda lower-versus-upper constant-window audit, including Nat cutoff existence, and §38 closes zeta upper local counting. Those are no longer parallel search packages. The gap-split owner now routes directly to actual-zeta low-gap clustering. Character/modulation infrastructure, the existing same-object finite-near evaluator, and Gamma precision remain separate genuine dependencies. No checked return here supplies the clustering inequality or RH."
+    false refl
+    "§37 closes the J*Lambda compatibility audit and §38 closes zeta upper local counting. The §35 clustering condition remains mathematically unproved but belongs to the gap-split positivity/no-go diagnostic, not the forward RH queue. The live forward zero-side payment is the literal target-centred signed scalar theorem packaged as a consumer-sufficient DirectFinitePoleNearProducer. The historical explicit-formula character/modulation route and Gamma precision remain separate alternatives/dependencies. RH is not derived."
