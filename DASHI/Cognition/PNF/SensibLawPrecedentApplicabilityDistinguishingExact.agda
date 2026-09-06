@@ -100,9 +100,9 @@ record FeatureMap (p : PrecedentProposition) (c : CurrentCase) : Set where
   field
     mapsFeature : Algebra.LegalProposition → Algebra.LegalProposition → Set
     everyMaterialPrecedentFeatureMapped :
-      ∀ {f} → f Algebra.∈ materialFeatures p →
+      ∀ {f} → Algebra._∈_ f (materialFeatures p) →
       Σ Algebra.LegalProposition (λ g →
-        g Algebra.∈ factsAndFeatures c × mapsFeature f g)
+        Algebra._∈_ g (factsAndFeatures c) × mapsFeature f g)
 
 open FeatureMap public
 
@@ -126,7 +126,8 @@ record MaterialDifference (p : PrecedentProposition) (c : CurrentCase) : Set whe
   field
     precedentFeature : Algebra.LegalProposition
     currentFeature : Algebra.LegalProposition
-    precedentFeatureWasMaterial : precedentFeature Algebra.∈ materialFeatures p
+    precedentFeatureWasMaterial :
+      Algebra._∈_ precedentFeature (materialFeatures p)
     differenceStatement : String
     legallyMaterialBecause : Algebra.LegalSourceRef
 
@@ -153,7 +154,8 @@ record MinimalDistinguishingSet (p : PrecedentProposition) (c : CurrentCase) : S
     distinguishing : DistinguishingSet p c
     sufficientAgainstApplication : PrecedentApplicable p c → ⊥
     eachDifferenceNecessary :
-      ∀ {d} → d Algebra.∈ DistinguishingSet.differences distinguishing → Set
+      ∀ {d} →
+      Algebra._∈_ d (DistinguishingSet.differences distinguishing) → Set
 
 open MinimalDistinguishingSet public
 
