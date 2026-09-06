@@ -3,185 +3,300 @@
 module DASHI.Physics.Semiconductor.Device.ComputedFiniteDeviceCellExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _+_; _*_)
-open import Data.Empty using (⊥)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Empty using (⊥; ⊥-elim)
+open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 
+import DASHI.Analysis.StrictContractionUniqueness as SCU
 import DASHI.Physics.Semiconductor.Device.FinitePoissonGreenCrossPollinationExact as Poisson
 import DASHI.Physics.Semiconductor.Device.DriftDiffusionContinuityExact as Transport
 
 ------------------------------------------------------------------------
 -- COMPUTED FINITE DEVICE CELL
 --
--- This owner replaces a hand-selected state trajectory by explicit coordinate
--- producers.  It remains a normalized finite scientific fixture, not a physical
--- calibrated FinFET/nanosheet device model.
-------------------------------------------------------------------------
-
-record CellState : Set where
-  constructor cellState
-  field
-    leftPotential  : Nat
-    rightPotential : Nat
-    fixedCharge    : Nat
-    electronCode   : Nat
-    holeCode       : Nat
-    mobilityN      : Nat
-    mobilityP      : Nat
-    centrePotential : Nat
-    electronCurrent : Nat
-    holeCurrent     : Nat
-
-open CellState public
-
-------------------------------------------------------------------------
--- Carrier-statistics law for the finite fixture.
+-- The earlier three-state Gummel fixture chose the coupled coordinates directly.
+-- Here the state carrier is only a finite source-charge coordinate.  Potential,
+-- electron/hole populations and drift currents are then computed functions of
+-- that source coordinate and supplied with exact Poisson/statistics/transport
+-- receipts.
 --
--- n + phi = donorBudget
--- p + donorBudget = holeOffset + phi
+-- All numbers are normalized finite codes.  This is not a calibrated transistor
+-- model and does not claim Boltzmann/Fermi-Dirac statistics, physical field units,
+-- or a real-device Gummel convergence theorem.
+------------------------------------------------------------------------
+
+data SourceCharge : Set where
+  q1 q3 q5 : SourceCharge
+
+chargeCode : SourceCharge → Nat
+chargeCode q1 = 1
+chargeCode q3 = 3
+chargeCode q5 = 5
+
+-- Fixed boundary potentials for the tiny one-cell problem.
+leftBoundary : Nat
+leftBoundary = 2
+
+rightBoundary : Nat
+rightBoundary = 3
+
+------------------------------------------------------------------------
+-- Poisson producer.
 --
--- These equalities are deliberately synthetic monotone couplings.  They are not
--- Boltzmann/Fermi-Dirac statistics.  The scientific value is that n and p are
--- computed from phi on the same state rather than chosen independently.
+-- Existing finite device convention:
+--   phi_l + phi_r + rho = phi_c + phi_c.
+-- For rho in {1,3,5}, the exact centre solutions are {3,4,5}.
 ------------------------------------------------------------------------
 
-record CarrierStatisticsProducer : Set where
-  constructor carrierStatisticsProducer
-  field
-    donorBudget : Nat
-    holeOffset  : Nat
+centrePotential : SourceCharge → Nat
+centrePotential q1 = 3
+centrePotential q3 = 4
+centrePotential q5 = 5
 
-open CarrierStatisticsProducer public
+poissonCell : SourceCharge → Poisson.ThreePointPoissonCell
+poissonCell q1 = Poisson.threePointPoissonCell 2 3 3 1 refl
+poissonCell q3 = Poisson.threePointPoissonCell 2 4 3 3 refl
+poissonCell q5 = Poisson.threePointPoissonCell 2 5 3 5 refl
 
-statisticsFixture : CarrierStatisticsProducer
-statisticsFixture = carrierStatisticsProducer 10 3
+poissonLeftMatches : (q : SourceCharge) → Poisson.leftPotential (poissonCell q) ≡ leftBoundary
+poissonLeftMatches q1 = refl
+poissonLeftMatches q3 = refl
+poissonLeftMatches q5 = refl
 
-record StatisticsReceipt (s : CellState) : Set where
-  field
-    electronLaw : electronCode s + centrePotential s ≡ donorBudget statisticsFixture
-    holeLaw : holeCode s + donorBudget statisticsFixture ≡ holeOffset statisticsFixture + centrePotential s
+poissonRightMatches : (q : SourceCharge) → Poisson.rightPotential (poissonCell q) ≡ rightBoundary
+poissonRightMatches q1 = refl
+poissonRightMatches q3 = refl
+poissonRightMatches q5 = refl
 
-------------------------------------------------------------------------
--- Poisson producer.  The physical continuum sign/unit convention is not claimed;
--- this consumes the exact three-point balance already owned by the device lane.
-------------------------------------------------------------------------
+poissonCentreMatches : (q : SourceCharge) → Poisson.centrePotential (poissonCell q) ≡ centrePotential q
+poissonCentreMatches q1 = refl
+poissonCentreMatches q3 = refl
+poissonCentreMatches q5 = refl
 
-record PoissonReceipt (s : CellState) : Set where
-  field
-    cell : Poisson.ThreePointPoissonCell
-    sameLeft : Poisson.leftPotential cell ≡ leftPotential s
-    sameCentre : Poisson.centrePotential cell ≡ centrePotential s
-    sameRight : Poisson.rightPotential cell ≡ rightPotential s
-    sameCharge : Poisson.sourceCharge cell ≡ fixedCharge s
-
-------------------------------------------------------------------------
--- Transport producer.  We use the existing normalized drift skeleton J=n*mu*E
--- with E code fixed to one on this tiny cell, so current = density*mobility.
-------------------------------------------------------------------------
-
-record TransportReceipt (s : CellState) : Set where
-  field
-    electronDrift : Transport.DriftLawWitness
-    holeDrift : Transport.DriftLawWitness
-    electronDensityMatches : Transport.density electronDrift ≡ electronCode s
-    electronMobilityMatches : Transport.mobility electronDrift ≡ mobilityN s
-    electronFieldIsOne : Transport.field electronDrift ≡ 1
-    electronCurrentMatches : Transport.drift electronDrift ≡ electronCurrent s
-    holeDensityMatches : Transport.density holeDrift ≡ holeCode s
-    holeMobilityMatches : Transport.mobility holeDrift ≡ mobilityP s
-    holeFieldIsOne : Transport.field holeDrift ≡ 1
-    holeCurrentMatches : Transport.drift holeDrift ≡ holeCurrent s
+poissonChargeMatches : (q : SourceCharge) → Poisson.sourceCharge (poissonCell q) ≡ chargeCode q
+poissonChargeMatches q1 = refl
+poissonChargeMatches q3 = refl
+poissonChargeMatches q5 = refl
 
 ------------------------------------------------------------------------
--- Two exact computed states.
+-- Finite carrier-statistics producer.
 --
--- With boundaries 2 and 3 and fixed charge 5, Poisson forces phi=5:
---   2 + 3 + 5 = 5 + 5.
--- Statistics then force n=5, p= -2 would be impossible on Nat, so the fixture
--- uses holeOffset=8 below through a separate local producer.  This highlights
--- why signed/real carrier statistics are needed for physical promotion.
+-- Synthetic exact laws on this admitted family:
+--   n + phi = 10
+--   p + 2 = phi
+-- encoded by exhaustive finite receipts.  They are intentionally not promoted
+-- to semiconductor equilibrium statistics.
 ------------------------------------------------------------------------
 
-record LocalStatisticsProducer : Set where
-  constructor localStatisticsProducer
+electronPopulation : SourceCharge → Nat
+electronPopulation q1 = 7
+electronPopulation q3 = 6
+electronPopulation q5 = 5
+
+holePopulation : SourceCharge → Nat
+holePopulation q1 = 1
+holePopulation q3 = 2
+holePopulation q5 = 3
+
+record CarrierStatisticsReceipt (q : SourceCharge) : Set where
   field
-    electronBudget : Nat
-    holeBudget : Nat
+    electronLaw :
+      electronPopulation q + centrePotential q ≡ 10
+    holeLaw :
+      holePopulation q + 2 ≡ centrePotential q
 
-localStatistics : LocalStatisticsProducer
-localStatistics = localStatisticsProducer 10 8
+open CarrierStatisticsReceipt public
 
-record LocalStatisticsReceipt (s : CellState) : Set where
+carrierStatisticsReceipt : (q : SourceCharge) → CarrierStatisticsReceipt q
+carrierStatisticsReceipt q1 = record { electronLaw = refl ; holeLaw = refl }
+carrierStatisticsReceipt q3 = record { electronLaw = refl ; holeLaw = refl }
+carrierStatisticsReceipt q5 = record { electronLaw = refl ; holeLaw = refl }
+
+------------------------------------------------------------------------
+-- Transport producer using the already-existing normalized drift skeleton.
+-- Electron mobility code is 2, hole mobility code is 1, and field code is 1.
+------------------------------------------------------------------------
+
+electronCurrent : SourceCharge → Nat
+electronCurrent q1 = 14
+electronCurrent q3 = 12
+electronCurrent q5 = 10
+
+holeCurrent : SourceCharge → Nat
+holeCurrent q1 = 1
+holeCurrent q3 = 2
+holeCurrent q5 = 3
+
+electronDrift : (q : SourceCharge) → Transport.DriftLawWitness
+electronDrift q1 = Transport.driftLawWitness 7 2 1 14 refl
+electronDrift q3 = Transport.driftLawWitness 6 2 1 12 refl
+electronDrift q5 = Transport.driftLawWitness 5 2 1 10 refl
+
+holeDrift : (q : SourceCharge) → Transport.DriftLawWitness
+holeDrift q1 = Transport.driftLawWitness 1 1 1 1 refl
+holeDrift q3 = Transport.driftLawWitness 2 1 1 2 refl
+holeDrift q5 = Transport.driftLawWitness 3 1 1 3 refl
+
+------------------------------------------------------------------------
+-- Same-object computed state.  No independent choices remain for phi,n,p,Jn,Jp
+-- once q is selected inside this finite fixture.
+------------------------------------------------------------------------
+
+record ComputedCell : Set where
+  constructor computedCell
   field
-    electronBalance : electronCode s + centrePotential s ≡ electronBudget localStatistics
-    holeBalance : holeCode s + centrePotential s ≡ holeBudget localStatistics
+    sourceChargeCode : Nat
+    phi : Nat
+    n : Nat
+    p : Nat
+    Jn : Nat
+    Jp : Nat
 
-fixedCell : CellState
-fixedCell = cellState 2 3 5 5 3 2 1 5 10 3
+open ComputedCell public
 
-fixedPoisson : PoissonReceipt fixedCell
-fixedPoisson = record
-  { cell = Poisson.threePointPoissonCell 2 5 3 5 refl
-  ; sameLeft = refl
-  ; sameCentre = refl
-  ; sameRight = refl
-  ; sameCharge = refl
+solveCell : SourceCharge → ComputedCell
+solveCell q = computedCell
+  (chargeCode q)
+  (centrePotential q)
+  (electronPopulation q)
+  (holePopulation q)
+  (electronCurrent q)
+  (holeCurrent q)
+
+q1Solution : solveCell q1 ≡ computedCell 1 3 7 1 14 1
+q1Solution = refl
+
+q3Solution : solveCell q3 ≡ computedCell 3 4 6 2 12 2
+q3Solution = refl
+
+q5Solution : solveCell q5 ≡ computedCell 5 5 5 3 10 3
+q5Solution = refl
+
+------------------------------------------------------------------------
+-- Finite residual update.
+--
+-- This is an explicit normalized correction law on the admitted charge family:
+-- q1 -> q3 -> q5 -> q5.  Unlike the older hand-selected coordinate trajectory,
+-- every full device coordinate after each correction is recomputed by solveCell.
+-- The correction law itself remains synthetic and is NOT a physical charge-
+-- neutrality/Newton/Gummel update.
+------------------------------------------------------------------------
+
+chargeCorrection : SourceCharge → SourceCharge
+chargeCorrection q1 = q3
+chargeCorrection q3 = q5
+chargeCorrection q5 = q5
+
+computedSweep : ComputedCell → ComputedCell
+computedSweep (computedCell 1 3 7 1 14 1) = solveCell q3
+computedSweep (computedCell 3 4 6 2 12 2) = solveCell q5
+computedSweep (computedCell 5 5 5 3 10 3) = solveCell q5
+computedSweep other = other
+
+sourceSweep : SourceCharge → ComputedCell
+sourceSweep q = solveCell (chargeCorrection q)
+
+q1SweepComputed : sourceSweep q1 ≡ solveCell q3
+q1SweepComputed = refl
+
+q3SweepComputed : sourceSweep q3 ≡ solveCell q5
+q3SweepComputed = refl
+
+q5SweepFixed : sourceSweep q5 ≡ solveCell q5
+q5SweepFixed = refl
+
+q1ReachesFixedInTwo : sourceSweep (chargeCorrection q1) ≡ solveCell q5
+q1ReachesFixedInTwo = refl
+
+------------------------------------------------------------------------
+-- Exhaustive convergence certificate on the source family, using the corrected
+-- generic distinct-pair contraction theory discovered in the previous pass.
+------------------------------------------------------------------------
+
+data CellDistance : Set where
+  d0 d1 d2 : CellDistance
+
+sourceDistance : SourceCharge → SourceCharge → CellDistance
+sourceDistance q1 q1 = d0
+sourceDistance q3 q3 = d0
+sourceDistance q5 q5 = d0
+sourceDistance q1 q3 = d2
+sourceDistance q3 q1 = d2
+sourceDistance q1 q5 = d2
+sourceDistance q5 q1 = d2
+sourceDistance q3 q5 = d1
+sourceDistance q5 q3 = d1
+
+data StrictlySmaller : CellDistance → CellDistance → Set where
+  d0<d1 : StrictlySmaller d0 d1
+  d1<d2 : StrictlySmaller d1 d2
+  d0<d2 : StrictlySmaller d0 d2
+
+sourceEquality :
+  (left right : SourceCharge) →
+  (left ≡ right) ⊎ SCU.Distinct left right
+sourceEquality q1 q1 = inj₁ refl
+sourceEquality q1 q3 = inj₂ (λ ())
+sourceEquality q1 q5 = inj₂ (λ ())
+sourceEquality q3 q1 = inj₂ (λ ())
+sourceEquality q3 q3 = inj₁ refl
+sourceEquality q3 q5 = inj₂ (λ ())
+sourceEquality q5 q1 = inj₂ (λ ())
+sourceEquality q5 q3 = inj₂ (λ ())
+sourceEquality q5 q5 = inj₁ refl
+
+strictDistanceIrreflexive :
+  SCU.IrreflexiveStrictDistance CellDistance StrictlySmaller
+strictDistanceIrreflexive = record
+  { irreflexive = λ where
+      d0 ()
+      d1 ()
+      d2 ()
   }
 
-fixedStatistics : LocalStatisticsReceipt fixedCell
-fixedStatistics = record
-  { electronBalance = refl
-  ; holeBalance = refl
+correctionContractsDistinct :
+  (left right : SourceCharge) →
+  SCU.Distinct left right →
+  StrictlySmaller
+    (sourceDistance (chargeCorrection left) (chargeCorrection right))
+    (sourceDistance left right)
+correctionContractsDistinct q1 q1 different = ⊥-elim (different refl)
+correctionContractsDistinct q1 q3 different = d1<d2
+correctionContractsDistinct q1 q5 different = d1<d2
+correctionContractsDistinct q3 q1 different = d1<d2
+correctionContractsDistinct q3 q3 different = ⊥-elim (different refl)
+correctionContractsDistinct q3 q5 different = d0<d1
+correctionContractsDistinct q5 q1 different = d1<d2
+correctionContractsDistinct q5 q3 different = d0<d1
+correctionContractsDistinct q5 q5 different = ⊥-elim (different refl)
+
+computedSourceContraction :
+  SCU.SeparatedFiniteContractionCertificate SourceCharge CellDistance
+computedSourceContraction = record
+  { step = chargeCorrection
+  ; distance = sourceDistance
+  ; StrictlySmaller = StrictlySmaller
+  ; fixedPoint = q5
+  ; fixed = refl
+  ; decideEquality = sourceEquality
+  ; contractiveDistinct = correctionContractsDistinct
   }
 
-fixedTransport : TransportReceipt fixedCell
-fixedTransport = record
-  { electronDrift = Transport.driftLawWitness 5 2 1 10 refl
-  ; holeDrift = Transport.driftLawWitness 3 1 1 3 refl
-  ; electronDensityMatches = refl
-  ; electronMobilityMatches = refl
-  ; electronFieldIsOne = refl
-  ; electronCurrentMatches = refl
-  ; holeDensityMatches = refl
-  ; holeMobilityMatches = refl
-  ; holeFieldIsOne = refl
-  ; holeCurrentMatches = refl
-  }
+computedSourceUniqueFixedPoint :
+  SCU.SeparatedUniqueFixedPointCertificate computedSourceContraction
+computedSourceUniqueFixedPoint =
+  SCU.certifySeparatedUniqueFixedPoint
+    computedSourceContraction strictDistanceIrreflexive
+
+anyComputedSourceFixedPointIsQ5 :
+  (q : SourceCharge) →
+  chargeCorrection q ≡ q →
+  q ≡ q5
+anyComputedSourceFixedPointIsQ5 =
+  SCU.SeparatedUniqueFixedPointCertificate.unique computedSourceUniqueFixedPoint
 
 ------------------------------------------------------------------------
--- A perturbed input carries stale carrier/current coordinates.  One computed
--- sweep discards those stale values and reconstructs the exact same-object
--- solution from Poisson -> statistics -> transport.
-------------------------------------------------------------------------
-
-perturbedCell : CellState
-perturbedCell = cellState 2 3 5 8 1 2 1 4 16 1
-
-computedSweep : CellState → CellState
-computedSweep s = cellState
-  (leftPotential s)
-  (rightPotential s)
-  (fixedCharge s)
-  5
-  3
-  (mobilityN s)
-  (mobilityP s)
-  5
-  10
-  3
-
-computedSweepPerturbed : computedSweep perturbedCell ≡ fixedCell
-computedSweepPerturbed = refl
-
-computedSweepFixed : computedSweep fixedCell ≡ fixedCell
-computedSweepFixed = refl
-
-computedSweepIdempotent : (s : CellState) → computedSweep (computedSweep s) ≡ computedSweep s
-computedSweepIdempotent s = refl
-
-------------------------------------------------------------------------
--- Same coarse recipe knobs do not guarantee the state is self-consistent before
--- the coupled solve.  The computed sweep is a reconstruction, not a declaration
--- that arbitrary input carriers already satisfy Poisson/statistics/transport.
+-- Promotion boundary.
 ------------------------------------------------------------------------
 
 data PhysicalComputedCellResidual : Set where
@@ -194,8 +309,11 @@ data PhysicalComputedCellResidual : Set where
   RecombinationGeneration : PhysicalComputedCellResidual
   ContactBoundaryConditions : PhysicalComputedCellResidual
   PhysicalUnitsCalibration : PhysicalComputedCellResidual
+  PhysicalChargeCorrectionLaw : PhysicalComputedCellResidual
   SameObjectPDEDiscretization : PhysicalComputedCellResidual
 
 -- Firewalls:
--- finite Nat carrier statistics != semiconductor Fermi-Dirac statistics.
--- exact idempotent reconstruction != general nonlinear Gummel convergence.
+-- exhaustive finite source family != physical continuum/device state space.
+-- finite population tables != Boltzmann/Fermi-Dirac carrier statistics.
+-- synthetic chargeCorrection != physical Gummel/Newton residual update.
+-- exact finite contraction here != general physical solver convergence.
