@@ -2,26 +2,24 @@
 module DASHI.Physics.YangMills.BalabanCMP98Path13Equation120DerivedQSourceRound216Exact where
 
 ------------------------------------------------------------------------
--- ROUND216 BIDI: REMOVE qSource FROM THE PATH13 PHYSICAL INPUT RECORD.
+-- ROUND216 REPAIR: REMOVE qSource ON THE CORRECT PATH13 HISTORICAL INDEX.
 --
--- R193 still asks the caller for a `qSource`, although R215 shows that CMP98
--- (120)+(121) already determines it from the exact R147 path/dexp data.
+-- The old periodic geometry APIs are predecessor-indexed:
 --
--- This owner starts from precisely the remaining Path13 physical data:
---   background, bond projection, adjoint link action, scalar action,
---   c- embedding, and the selected positive coarse bond,
--- together with the already-owned printed dexp convention.
+--   PeriodicBlock n = periodicTorus4Definition (suc n),
+--   PeriodicBondField n = BondField (suc n).
 --
--- To reuse the historical R182/R158/R152/R147 geometry compiler we install a
--- harmless zero qSource placeholder.  Eq. (119) never reads qSource.  R215 then
--- overwrites that placeholder with the Eq. (120) linear form.  Finally we build
--- an ordinary R193 source whose qSource is definitionally the recovered one.
+-- Therefore physical side 13 is represented there by R192.path13PeriodicIndex
+-- = 12.  The earlier version passed literal 13 and thereby mixed side-14
+-- historical geometry with a side-13 physical background/coarse-bond carrier.
 --
--- Thus qSource is no longer an independent Path13 physical authority.
+-- This repair keeps physical/coarse side 13 while all R147/R152/R158 periodic
+-- geometry parameters use the predecessor index 12.  qSource recovery itself
+-- is unchanged.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -51,7 +49,7 @@ record Path13Equation120PhysicalSourceData
 
     bondComponent :
       Nat → R126.Vector (R146.additive C) →
-      Blocks.PeriodicBlock Side13.side13 → Word.SignedAxis4 →
+      Blocks.PeriodicBlock R192.path13PeriodicIndex → Word.SignedAxis4 →
       R126.Vector (R146.additive C)
 
     adjointLink :
@@ -61,7 +59,7 @@ record Path13Equation120PhysicalSourceData
 
     minusEmbedding :
       Nat → Embed.CenteredPeriodicNoWrapEmbedding
-        Side13.side13 R158.sourceRadius
+        R192.path13PeriodicIndex R158.sourceRadius
 
     coarseBond : Nat → Torus.PositiveBond Side13.side13
 
@@ -72,14 +70,11 @@ zeroQSource :
   Nat → R126.Operator (R146.additive C)
 zeroQSource {C} step input = R126.zeroV (R146.additive C)
 
--- Historical geometry carrier with qSource deliberately set to zero.  This is
--- not a physical claim: the field is only present because the older record was
--- wider than the Eq. (119) computation actually requires.
 asPlaceholderPositiveCoarseBondSource :
   ∀ {C} →
   Path13Equation120PhysicalSourceData C →
   R182.PositiveCoarseBondEquation119Source
-    C Side13.side13 Side13.side13
+    C R192.path13PeriodicIndex Side13.side13
     SU2.RationalUnitQuaternion Group.rationalSU2ExactLinkGroup
 asPlaceholderPositiveCoarseBondSource source = record
   { R182.PositiveCoarseBondEquation119Source.realization =
@@ -96,7 +91,8 @@ asPlaceholderCanonicalSource :
   ∀ {C} →
   Path13Equation120PhysicalSourceData C →
   R158.CanonicalL13Equation119Source
-    C Side13.side13 SU2.RationalUnitQuaternion Group.rationalSU2ExactLinkGroup
+    C R192.path13PeriodicIndex
+    SU2.RationalUnitQuaternion Group.rationalSU2ExactLinkGroup
 asPlaceholderCanonicalSource source =
   R182.asCanonicalL13Equation119Source
     (asPlaceholderPositiveCoarseBondSource source)
@@ -105,7 +101,8 @@ asPlaceholderLeastPrivilegeSource :
   ∀ {C} →
   Path13Equation120PhysicalSourceData C →
   R152.LiteralEquation119LeastPrivilegeSource
-    C Side13.side13 SU2.RationalUnitQuaternion Group.rationalSU2ExactLinkGroup
+    C R192.path13PeriodicIndex
+    SU2.RationalUnitQuaternion Group.rationalSU2ExactLinkGroup
 asPlaceholderLeastPrivilegeSource source =
   R158.asRound152Source (asPlaceholderCanonicalSource source)
 
@@ -115,7 +112,8 @@ placeholderLiteralPathData :
   R148.CMP98Equation119DexpConvention
     (R126.Vector (R146.additive C)) →
   R147.LiteralEquation119PathData
-    C Side13.side13 SU2.RationalUnitQuaternion Group.rationalSU2ExactLinkGroup
+    C R192.path13PeriodicIndex
+    SU2.RationalUnitQuaternion Group.rationalSU2ExactLinkGroup
 placeholderLiteralPathData source convention =
   R152.asLiteralPathData
     (asPlaceholderLeastPrivilegeSource source) convention
@@ -126,7 +124,8 @@ recoveredLiteralPathData :
   R148.CMP98Equation119DexpConvention
     (R126.Vector (R146.additive C)) →
   R147.LiteralEquation119PathData
-    C Side13.side13 SU2.RationalUnitQuaternion Group.rationalSU2ExactLinkGroup
+    C R192.path13PeriodicIndex
+    SU2.RationalUnitQuaternion Group.rationalSU2ExactLinkGroup
 recoveredLiteralPathData source convention =
   R215.recoverEquation120QSource
     (placeholderLiteralPathData source convention)
@@ -168,7 +167,6 @@ path13QSourceIsRecoveredEquation120 :
       (placeholderLiteralPathData source convention) step input
 path13QSourceIsRecoveredEquation120 source convention step input = refl
 
--- The physical periodic realization is still exactly R192's Path13 object.
 path13RecoveredSourceRealizationIsPhysical :
   ∀ {C}
     (source : Path13Equation120PhysicalSourceData C)
@@ -180,14 +178,22 @@ path13RecoveredSourceRealizationIsPhysical :
   ≡ R192.path13PhysicalPeriodicRealization (background source)
 path13RecoveredSourceRealizationIsPhysical source convention step = refl
 
+path13DerivedQHistoricalIndexIs12 :
+  R192.path13PeriodicIndex ≡ 12
+path13DerivedQHistoricalIndexIs12 = refl
+
+path13DerivedQPhysicalSideIs13 :
+  suc R192.path13PeriodicIndex ≡ Side13.side13
+path13DerivedQPhysicalSideIs13 = refl
+
+cmp98Path13DerivedQSourceHistoricalIndexRepairRound216Level : ProofLevel
+cmp98Path13DerivedQSourceHistoricalIndexRepairRound216Level = machineChecked
+
 cmp98Path13Equation120DerivedQSourceRound216Level : ProofLevel
 cmp98Path13Equation120DerivedQSourceRound216Level = machineChecked
 
 cmp98Path13Equation120SamePhysicalRealizationRound216Level : ProofLevel
 cmp98Path13Equation120SamePhysicalRealizationRound216Level = machineChecked
 
--- No independent qSource remains in the new Path13 input type.  The surviving
--- source-facing seam is the same one already isolated by R148/R215: identify
--- the printed Y/Y_x and R0 path semantics with the selected physical cut.
 literalCMP98Path13Equation120SelectedSemanticsRound216Level : ProofLevel
 literalCMP98Path13Equation120SelectedSemanticsRound216Level = conditional
