@@ -9,6 +9,8 @@ import DASHI.Analysis.RiemannAristotleExperimentalProofSearchExact as Search
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as HOff
 import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap
 import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact as Z38
+import DASHI.Analysis.RiemannG2AlpogeFurmanClusteringNonDescentExact as AFLocal
+import DASHI.Analysis.RiemannG2LowGapClusteringMomentReductionExact as Moment
 
 ------------------------------------------------------------------------
 -- RH-ONLY BIDI-AWARE SEARCH SCHEDULER
@@ -22,14 +24,15 @@ import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact as Z38
 --   (4/pi^2) * highGapMass < lowGapMass,
 --   D = pi/(3 Lambda).
 --
--- This is NOT the already-closed `clusterMarginSocket`: that socket is the
--- off-line pole cluster margin M_cluster^pole.  The new clustering theorem is a
--- property of the retained zeta-zero mass distribution and feeds H_off.
+-- The clustering node is now refined one level further by an exact in-repo
+-- moment compiler: a SAME-target/SAME-window normalized second-moment estimate
+-- strong enough to force highGapMass < 2*lowGapMass, followed by the elementary
+-- real coefficient bridge 4/pi^2 < 1/2, is sufficient for the clustering
+-- consumer. Direct clustering remains an admissible alternative route.
 --
--- The active high-ordinate queue is therefore three independent producer
--- classes: actual-zeta clustering, same-object finite-near evaluation, and
--- consumer-sufficient Gamma precision.  §37/§38 remove the constant-window and
--- zeta-upper-count searches from that queue.
+-- This is NOT the already-closed `clusterMarginSocket`: that socket is the
+-- off-line pole cluster margin M_cluster^pole. The new clustering theorem is a
+-- property of the retained zeta-zero mass distribution and feeds H_off.
 ------------------------------------------------------------------------
 
 data ProducerNeed : Set where
@@ -50,14 +53,20 @@ currentNeed Search.clusterMarginSocket = producerClosed
 
 data RHProducerNode : Set where
   zetaLowGapClusteringNode
+  zetaTargetLocalSecondMomentNode
   offFiniteNearEvaluationNode
   gammaPrecisionNode
   : RHProducerNode
 
 nodeFeedsSocket : RHProducerNode → Search.RHResearchSocket
 nodeFeedsSocket zetaLowGapClusteringNode = Search.offOrdinateSocket
+nodeFeedsSocket zetaTargetLocalSecondMomentNode = Search.offOrdinateSocket
 nodeFeedsSocket offFiniteNearEvaluationNode = Search.offOrdinateSocket
 nodeFeedsSocket gammaPrecisionNode = Search.gammaSocket
+
+data ProducerRefines : RHProducerNode → RHProducerNode → Set where
+  targetLocalMomentRefinesClustering :
+    ProducerRefines zetaTargetLocalSecondMomentNode zetaLowGapClusteringNode
 
 ------------------------------------------------------------------------
 -- Candidate experiment classes for the exact current cut.
@@ -65,8 +74,10 @@ nodeFeedsSocket gammaPrecisionNode = Search.gammaSocket
 
 data RHBidiExperiment : Set where
   proveActualZetaLowGapClustering
+  proveTargetLocalSecondMoment
   evaluateFiniteNearSignedSum
   improveGammaEvaluation
+  reuseGlobalSimpleZeroProportionAsLocalClustering
   repeatClosedPoleClusterMarginProof
   repeatZetaUpperLocalCountProof
   repeatQuarterDensityConstantComparison
@@ -78,8 +89,10 @@ data RHBidiExperiment : Set where
 
 data RHExperimentOutputKind : Set where
   directClusteringProducer
+  localMomentClusteringProducer
   directFiniteProducer
   consumerSufficientRepair
+  rejectedNonlocalDonor
   redundantClosedProducer
   redundantCheckedProducer
   redundantGenericInstantiation
@@ -90,8 +103,10 @@ data RHExperimentOutputKind : Set where
 
 outputKind : RHBidiExperiment → RHExperimentOutputKind
 outputKind proveActualZetaLowGapClustering = directClusteringProducer
+outputKind proveTargetLocalSecondMoment = localMomentClusteringProducer
 outputKind evaluateFiniteNearSignedSum = directFiniteProducer
 outputKind improveGammaEvaluation = consumerSufficientRepair
+outputKind reuseGlobalSimpleZeroProportionAsLocalClustering = rejectedNonlocalDonor
 outputKind repeatClosedPoleClusterMarginProof = redundantClosedProducer
 outputKind repeatZetaUpperLocalCountProof = redundantCheckedProducer
 outputKind repeatQuarterDensityConstantComparison = redundantCheckedProducer
@@ -107,6 +122,8 @@ outputKind auditNamedExternalDonor = donorAuditOnly
 data InhabitsLiveRHProducer : RHBidiExperiment → Set where
   zetaLowGapClusteringIsLive :
     InhabitsLiveRHProducer proveActualZetaLowGapClustering
+  zetaTargetLocalSecondMomentIsLive :
+    InhabitsLiveRHProducer proveTargetLocalSecondMoment
   finiteNearEvaluationIsLive :
     InhabitsLiveRHProducer evaluateFiniteNearSignedSum
   gammaPrecisionRepairIsLive :
@@ -120,6 +137,12 @@ record RHBidiSchedulable (experiment : RHBidiExperiment) : Set where
     producerInterfaceReference : String
 
 open RHBidiSchedulable public
+
+globalSimpleZeroProportionNotSchedulableAsLocalClustering :
+  RHBidiSchedulable reuseGlobalSimpleZeroProportionAsLocalClustering → ⊥
+globalSimpleZeroProportionNotSchedulableAsLocalClustering s
+  with inhabitsLiveProducer s
+... | ()
 
 closedPoleClusterMarginRepeatNotSchedulable :
   RHBidiSchedulable repeatClosedPoleClusterMarginProof → ⊥
@@ -164,6 +187,14 @@ zetaLowGapClusteringSchedulable =
     "RH off-ordinate backward consumer via optimized gap split"
     "actual zeta zeros: (4/pi^2) * highGapMass < lowGapMass at D = pi/(3 Lambda)"
 
+zetaTargetLocalSecondMomentSchedulable :
+  RHBidiSchedulable proveTargetLocalSecondMoment
+zetaTargetLocalSecondMomentSchedulable =
+  rh-bidi-schedulable
+    zetaTargetLocalSecondMomentIsLive
+    "actual-zeta low-gap clustering producer"
+    "SAME-target/SAME-window normalized second moment: highGapMass <= M2_norm < 2*lowGapMass; then use 4/pi^2 < 1/2"
+
 finiteNearEvaluationSchedulable :
   RHBidiSchedulable evaluateFiniteNearSignedSum
 finiteNearEvaluationSchedulable =
@@ -181,12 +212,14 @@ gammaPrecisionRepairSchedulable =
     "H_Gamma consumer-sufficient O(|t|^-2)-scale evaluation"
 
 ------------------------------------------------------------------------
--- The active high-ordinate queue after 8896.
+-- The active high-ordinate queue after the local-moment refinement.
 ------------------------------------------------------------------------
 
 data ActiveHighOrdinateExperiment : RHBidiExperiment → Set where
   activeZetaClustering :
     ActiveHighOrdinateExperiment proveActualZetaLowGapClustering
+  activeZetaLocalMoment :
+    ActiveHighOrdinateExperiment proveTargetLocalSecondMoment
   activeFiniteNear : ActiveHighOrdinateExperiment evaluateFiniteNearSignedSum
   activeGammaRepair : ActiveHighOrdinateExperiment improveGammaEvaluation
 
@@ -195,8 +228,11 @@ schedulableIsActive :
   RHBidiSchedulable experiment →
   ActiveHighOrdinateExperiment experiment
 schedulableIsActive proveActualZetaLowGapClustering s = activeZetaClustering
+schedulableIsActive proveTargetLocalSecondMoment s = activeZetaLocalMoment
 schedulableIsActive evaluateFiniteNearSignedSum s = activeFiniteNear
 schedulableIsActive improveGammaEvaluation s = activeGammaRepair
+schedulableIsActive reuseGlobalSimpleZeroProportionAsLocalClustering s =
+  ⊥-elim (globalSimpleZeroProportionNotSchedulableAsLocalClustering s)
 schedulableIsActive repeatClosedPoleClusterMarginProof s =
   ⊥-elim (closedPoleClusterMarginRepeatNotSchedulable s)
 schedulableIsActive repeatZetaUpperLocalCountProof s =
@@ -281,6 +317,21 @@ actualZetaClusteringNotYetClosed :
   Z38.actualZetaClusteringClosed Z38.canonicalZetaLocalCountLeanReturn ≡ false
 actualZetaClusteringNotYetClosed = refl
 
+localMomentCompilerClosedInAgda :
+  Moment.LocalMomentClusteringBoundary.natMomentToTwoToOneRatioCompilerClosedInAgda
+    Moment.canonicalLocalMomentClusteringBoundary ≡ true
+localMomentCompilerClosedInAgda = refl
+
+selectedTargetLocalMomentStillOpen :
+  Moment.LocalMomentClusteringBoundary.exactSelectedTargetLocalSecondMomentProducerOwned
+    Moment.canonicalLocalMomentClusteringBoundary ≡ false
+selectedTargetLocalMomentStillOpen = refl
+
+globalSimpleProportionCannotDirectlyCloseClustering :
+  AFLocal.GlobalSimpleToLocalClusteringBoundary.alpogeFurmanDirectlyClosesGapSplitClustering
+    AFLocal.canonicalGlobalSimpleToLocalClusteringBoundary ≡ false
+globalSimpleProportionCannotDirectlyCloseClustering = refl
+
 ------------------------------------------------------------------------
 -- Boundaries.
 ------------------------------------------------------------------------
@@ -320,6 +371,14 @@ record RHBidiSearchSchedulerBoundary : Set where
     actualZetaLowGapClusteringActiveIsTrue :
       actualZetaLowGapClusteringActive ≡ true
 
+    targetLocalSecondMomentRefinementActive : Bool
+    targetLocalSecondMomentRefinementActiveIsTrue :
+      targetLocalSecondMomentRefinementActive ≡ true
+
+    globalSimpleZeroProportionDirectClusteringRouteActive : Bool
+    globalSimpleZeroProportionDirectClusteringRouteActiveIsFalse :
+      globalSimpleZeroProportionDirectClusteringRouteActive ≡ false
+
     balanceCircularityRouteRemainsInActiveQueue : Bool
     balanceCircularityRouteRemainsInActiveQueueIsFalse :
       balanceCircularityRouteRemainsInActiveQueue ≡ false
@@ -353,6 +412,8 @@ canonicalRHBidiSearchSchedulerBoundary =
     false refl
     false refl
     true refl
+    true refl
+    false refl
     false refl
     false refl
     true refl
