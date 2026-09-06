@@ -2,15 +2,18 @@
 module DASHI.Physics.YangMills.BalabanCMP98ClayBoundarySupersessionRound190Exact where
 
 ------------------------------------------------------------------------
--- ROUND190 TERMINAL BIDI: CONSUME THE NEWEST INTERNAL MASS-GAP / SURVIVAL
--- STATUS BEFORE TREATING OLDER FAIL-CLOSED CLAY BOUNDARY BITS AS MATHEMATICS.
+-- ROUND190 TERMINAL BIDI: CORRECTED AUTHORITY / THEOREM STRENGTH
 --
--- This module does not promote Clay Yang-Mills.  It proves a repository-status
--- fact: later owners already expose an internal continuum Hamiltonian gap,
--- continuum mass gap, mass-gap survival, and a true Clay-statement
--- compatibility coordinate, while YMClayPromotionBoundary still uses local
--- fail-closed shim booleans.  Therefore those old false shim bits cannot be
--- used to re-open the mathematical chain without an explicit same-object audit.
+-- Sprint129 spectral-gap transport and YMMassGapSurvivalAuthority contain
+-- historical/authority Bool coordinates set to true.  Their records do not
+-- construct the physical closed forms, resolvents, Hamiltonian domains,
+-- Wightman dynamics, or recovery maps required by the current theorem-strength
+-- frontier.  These coordinates remain useful provenance, but cannot supersede
+-- the fail-closed M7-M9 mathematical obligations.
+--
+-- This module therefore synchronizes the terminal surface with
+-- YMOperatorDomainContinuumFrontier2026Exact and YMClayPromotionBoundary.
+-- No Clay Yang-Mills promotion is claimed.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (true; false)
@@ -20,70 +23,126 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.Closure.YMSprint129SpectralGapTransportClosure as S129
 import DASHI.Physics.Closure.YMMassGapSurvivalAuthority as Survival
 import DASHI.Physics.Closure.YMClayPromotionBoundary as Clay
+import DASHI.Physics.YangMills.YMOperatorDomainContinuumFrontier2026Exact as Frontier
 
-terminalContinuumHamiltonianGapAlreadyTrue :
+------------------------------------------------------------------------
+-- Legacy/authority facts retained with bounded interpretation.
+------------------------------------------------------------------------
+
+legacySprint129ContinuumHamiltonianGapReceiptBitIsTrue :
   S129.continuumHamiltonianSpectralGapProvedHere ≡ true
-terminalContinuumHamiltonianGapAlreadyTrue =
+legacySprint129ContinuumHamiltonianGapReceiptBitIsTrue =
   S129.continuumHamiltonianSpectralGapProvedHereIsTrue
 
-terminalContinuumMassGapAlreadyTrue :
+legacySprint129ContinuumMassGapReceiptBitIsTrue :
   S129.continuumMassGapProvedHere ≡ true
-terminalContinuumMassGapAlreadyTrue =
+legacySprint129ContinuumMassGapReceiptBitIsTrue =
   S129.continuumMassGapProvedHereIsTrue
 
-terminalMassGapSurvivalAlreadyTrue :
+authorityMassGapSurvivalCoordinateIsTrue :
   Survival.massGapSurvivalUnconditional ≡ true
-terminalMassGapSurvivalAlreadyTrue = refl
+authorityMassGapSurvivalCoordinateIsTrue = refl
 
-terminalSurvivalProviderMarkedDerivedInRepo :
+authoritySurvivalProviderMarkedDerivedInRepo :
   Survival.massGapSurvivalProviderDerivedInRepo ≡ true
-terminalSurvivalProviderMarkedDerivedInRepo = refl
+authoritySurvivalProviderMarkedDerivedInRepo = refl
 
-terminalClayCompatibilityProviderIsTrue :
+authorityClayCompatibilityCoordinateIsTrue :
   Survival.MassGapSurvivalProvider.clayStatementCompatibility
     Survival.massGapSurvivalProvider ≡ true
-terminalClayCompatibilityProviderIsTrue =
+authorityClayCompatibilityCoordinateIsTrue =
   Survival.MassGapSurvivalProvider.clayStatementCompatibilityIsTrue
     Survival.massGapSurvivalProvider
+
+------------------------------------------------------------------------
+-- Current theorem-strength facts.  These control mathematical promotion.
+------------------------------------------------------------------------
+
+physicalHamiltonianSameObjectStillOpen :
+  Frontier.physicalActionVariationHamiltonianSameObjectClosed
+    Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+physicalHamiltonianSameObjectStillOpen = refl
+
+physicalHamiltonianDomainStillOpen :
+  Frontier.genuinePartialDomainHamiltonianFormalized
+    Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+physicalHamiltonianDomainStillOpen = refl
+
+physicalSelfAdjointSelectedYMFormStillOpen :
+  Frontier.physicalSelfAdjointSelectedYMFormClosed
+    Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+physicalSelfAdjointSelectedYMFormStillOpen = refl
+
+constructiveContinuumOSWightmanStillOpen :
+  Frontier.continuumOSWightmanPackageClosed
+    Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+constructiveContinuumOSWightmanStillOpen = refl
+
+ymOSEvolutionIdentificationStillOpen :
+  Frontier.ymEvolutionEqualsOSReconstructedEvolutionClosed
+    Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+ymOSEvolutionIdentificationStillOpen = refl
+
+physicalVacuumRecoveryStillOpen :
+  Frontier.physicalVacuumRecoverySystemConstructed
+    Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+physicalVacuumRecoveryStillOpen = refl
+
+physicalFiniteToContinuumConstructionStillOpen :
+  Frontier.finiteToContinuumYMConstructionClosed
+    Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+physicalFiniteToContinuumConstructionStillOpen = refl
 
 terminalClayPromotionStillFalse :
   Clay.clayYangMillsPromoted ≡ false
 terminalClayPromotionStillFalse = refl
 
+------------------------------------------------------------------------
+-- Corrected newest terminal status surface.
+------------------------------------------------------------------------
+
 record NewestTerminalMathematicalSurface : Set where
   field
-    continuumHamiltonianGap :
-      S129.continuumHamiltonianSpectralGapProvedHere ≡ true
-    continuumMassGap :
-      S129.continuumMassGapProvedHere ≡ true
-    massGapSurvival :
-      Survival.massGapSurvivalUnconditional ≡ true
-    survivalProviderDerived :
-      Survival.massGapSurvivalProviderDerivedInRepo ≡ true
-    clayCompatibilityCoordinate :
-      Survival.MassGapSurvivalProvider.clayStatementCompatibility
-        Survival.massGapSurvivalProvider ≡ true
+    sprint129GapReceiptRecorded :
+      S129.spectralGapTransportClosedHere ≡ true
+    survivalAuthorityCoordinateRecorded :
+      Survival.massGapSurvivalAuthorityConditionalBool ≡ true
+
+    physicalHamiltonianSameObjectClosed :
+      Frontier.physicalActionVariationHamiltonianSameObjectClosed
+        Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+    physicalHamiltonianDomainClosed :
+      Frontier.genuinePartialDomainHamiltonianFormalized
+        Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+    physicalSelfAdjointFormClosed :
+      Frontier.physicalSelfAdjointSelectedYMFormClosed
+        Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+    constructiveOSWightmanClosed :
+      Frontier.continuumOSWightmanPackageClosed
+        Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+    physicalRecoveryClosed :
+      Frontier.physicalVacuumRecoverySystemConstructed
+        Frontier.canonicalYMOperatorContinuumFrontier ≡ false
     clayPromotionRemainsFailClosed :
       Clay.clayYangMillsPromoted ≡ false
 
 newestTerminalMathematicalSurface : NewestTerminalMathematicalSurface
 newestTerminalMathematicalSurface = record
-  { continuumHamiltonianGap = terminalContinuumHamiltonianGapAlreadyTrue
-  ; continuumMassGap = terminalContinuumMassGapAlreadyTrue
-  ; massGapSurvival = terminalMassGapSurvivalAlreadyTrue
-  ; survivalProviderDerived = terminalSurvivalProviderMarkedDerivedInRepo
-  ; clayCompatibilityCoordinate = terminalClayCompatibilityProviderIsTrue
+  { sprint129GapReceiptRecorded = S129.spectralGapTransportClosedHereIsTrue
+  ; survivalAuthorityCoordinateRecorded = refl
+  ; physicalHamiltonianSameObjectClosed = refl
+  ; physicalHamiltonianDomainClosed = refl
+  ; physicalSelfAdjointFormClosed = refl
+  ; constructiveOSWightmanClosed = refl
+  ; physicalRecoveryClosed = refl
   ; clayPromotionRemainsFailClosed = terminalClayPromotionStillFalse
   }
 
 cmp98NewestTerminalMathematicalSurfaceRound190Level : ProofLevel
 cmp98NewestTerminalMathematicalSurfaceRound190Level = machineChecked
 
--- BIDI consequence: the current final mathematical search target is not an
--- undifferentiated 'prove continuum mass gap' leaf, and it is not justified to
--- inherit the old local false shims as fresh analytic obligations.  What remains
--- is a same-object/promotion-boundary synchronization audit: connect the newer
--- theorem-bearing/status owners to the exact final Clay formulation type, then
--- keep external review/acceptance separate as governance.
+-- BIDI consequence: authority/receipt coordinates do not reduce the current
+-- mathematical frontier to Clay-statement wording.  The remaining highest-alpha
+-- terminal work is still the physical M7-M9 and continuum same-object chain.
 terminalClayBoundarySynchronizationRound190Level : ProofLevel
 terminalClayBoundarySynchronizationRound190Level = conditional
