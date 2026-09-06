@@ -29,13 +29,12 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputEDSelectorRoutingRound436Exact 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Data.Rational.Base using (ℚ; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
-import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNSelectedPairEnergyDissipationProductRound109Exact as R109
 import DASHI.Physics.Closure.NSTriadKNPhysicalRawCurlCellEDAdapterRound219Exact as R219
