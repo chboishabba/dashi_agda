@@ -9,11 +9,6 @@ import DASHI.Core.ResidualObserverDependencyExact as Residual
 
 ------------------------------------------------------------------------
 -- Direct instantiation of the repo-wide residual-dependency seam.
---
--- A coarse electrical reading may leave hidden dependencies among interface,
--- electrostatic, transport and contact coordinates.  The generic DASHI theorem
--- then says that adding the action-indexed dependency code is a strict observer
--- refinement when a witness pair is available.
 ------------------------------------------------------------------------
 
 data DeviceState : Set where
@@ -48,8 +43,8 @@ deviceResidualDependency :
   Residual.ResidualDependencyObserver
     DeviceState DiagnosticAction DeviceIndex DependencyCode
 deviceResidualDependency = record
-  { ResidualDependencyObserver.Influences = DeviceInfluence
-  ; ResidualDependencyObserver.dependencyCode = deviceDependencyCode
+  { Influences = DeviceInfluence
+  ; dependencyCode = deviceDependencyCode
   }
 
 coarseElectricalObserver : Observer.Observer DeviceState CoarseElectrical
@@ -81,9 +76,9 @@ coarseIVCannotReconstructDependency =
   Residual.hiddenResidualDependencyBlocksDescent hiddenDeviceDependency
 
 ------------------------------------------------------------------------
--- Diagnostic routing: the same generic coupling score used elsewhere in DASHI
--- can rank which residual family remains most entangled, but a small Nat score
--- is not automatically a covariance/Gram/spectral-independence certificate.
+-- Diagnostic routing: the same generic coupling-score type used elsewhere in
+-- DASHI can rank finite residual entanglement.  It is not automatically a
+-- covariance/Gram/spectral-independence certificate.
 ------------------------------------------------------------------------
 
 data DiagnosticRoute : Set where
