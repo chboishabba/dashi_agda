@@ -4,18 +4,26 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Analysis.RiemannAristotleQuarterPeriodDensityWindowLeanReturnExact as Q37
+import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact as Z38
+
 ------------------------------------------------------------------------
 -- CHECKED-LEAN RETURN: OPTIMIZED GAP SPLIT / TAPER-SHAPE NO-GO / DENSITY CUT
 --
--- Supplied Zeta23Bridge return reports a successful aggregate Lean build with
--- 8894 jobs and three new sorry-free modules:
---
+-- Original 8894 return:
 --   NearCoreGapSplitOptimization.lean
 --   NearCoreTaperShapeNoGo.lean
 --   NearCoreClusteringDensityCut.lean
 --
--- This Agda owner records the theorem surface and its BIDI consequences only.
--- It does not transport Lean proof terms into Agda and does not assert RH.
+-- BIDI UPDATE (8896): this existing owner now consumes the checked §37 and §38
+-- returns directly.  The old constant-window comparison is no longer a live
+-- search leaf, and the zeta upper-count producer is no longer a hypothesis.
+-- The first live zero-side analytic obligation is therefore the actual-zeta
+-- clustering inequality itself.
+--
+-- Lean proofs remain Lean-owned; these imports synchronize theorem status and
+-- search routing without pretending the real-analysis proofs were replayed in
+-- Agda.
 ------------------------------------------------------------------------
 
 data CrossProverAuthority8894 : Set where
@@ -125,7 +133,46 @@ canonicalGapSplitClusteringLeanReturn8894 =
     "The checked Lean return proves integral(q) <= Lambda^2 * integral(abs(q'')); applied to the determinant taper this forces the optimized positivity criterion to imply (2J+1) A log(|t|+J+4) < pi^2/18, so the transported quadratic-decay sufficient criterion cannot be repaired by taper width or profile tuning once unit local count is present."
     "Any positive gap-split floor requires (4/pi^2) * highGapMass < lowGapMass. This is a genuine local clustering requirement; coarse counting, absolute envelopes, and sharper use of the same quadratic-decay donor do not supply it."
     "With explicit short-window upper density A and long-window lower density c, positivity forces J < 1 + D + pi^2 A (2D+2)/(4c). At D = pi/(3 Lambda) this is an inverse-width-scale cap J = O(1/Lambda)."
-    "Do not over-promote the density cut into a no-go for every adaptive route. The live quarter-period route also requires J on the inverse-width scale. For adaptive Lambda(t), especially Lambda(t) proportional to 1/|t|, the new return converts the surviving clustering route into a constant-window compatibility problem on J*Lambda rather than refuting inverse-width scaling itself. This is a BIDI reconciliation statement, not a transported Lean theorem."
+    "The later checked §37 return resolves the constant-window comparison: inverse-width scaling is compatible under its stated hypotheses, including an actual Nat cutoff existence theorem. The comparison leaf is therefore closed; genuine zeta clustering remains the live analytic payment."
+
+------------------------------------------------------------------------
+-- 8896 return-to-owner welds.
+------------------------------------------------------------------------
+
+quarterDensityReconciliationChecked :
+  Q37.QuarterPeriodDensityWindowReturn.machineCheckedInLean
+    Q37.canonicalQuarterPeriodDensityWindowReturn ≡ true
+quarterDensityReconciliationChecked = refl
+
+quarterDensityComparisonNotAgdaProof :
+  Q37.QuarterPeriodDensityWindowReturn.transportedIntoAgda
+    Q37.canonicalQuarterPeriodDensityWindowReturn ≡ false
+quarterDensityComparisonNotAgdaProof = refl
+
+integerJointWindowOwnedInLean :
+  Q37.QuarterPeriodDensityWindowReturn.explicitIntegerCutoffExistenceOwnedInLean
+    Q37.canonicalQuarterPeriodDensityWindowReturn ≡ true
+integerJointWindowOwnedInLean = refl
+
+zetaUpperLocalCountChecked :
+  Z38.ZetaLocalCountLeanReturn.importedProducerCheckedInLean
+    Z38.canonicalZetaLocalCountLeanReturn ≡ true
+zetaUpperLocalCountChecked = refl
+
+zetaShortWindowUpperCountChecked :
+  Z38.ZetaLocalCountLeanReturn.zetaShortWindowUpperCountOwnedInLean
+    Z38.canonicalZetaLocalCountLeanReturn ≡ true
+zetaShortWindowUpperCountChecked = refl
+
+zetaLongWindowLowerDensityStillOpen :
+  Z38.ZetaLocalCountLeanReturn.zetaLongWindowLowerDensityClosed
+    Z38.canonicalZetaLocalCountLeanReturn ≡ false
+zetaLongWindowLowerDensityStillOpen = refl
+
+actualZetaClusteringStillOpen :
+  Z38.ZetaLocalCountLeanReturn.actualZetaClusteringClosed
+    Z38.canonicalZetaLocalCountLeanReturn ≡ false
+actualZetaClusteringStillOpen = refl
 
 ------------------------------------------------------------------------
 -- Search pruning / live route selection.
@@ -136,8 +183,10 @@ data GapSplitSearchAction : Set where
   retuneTaperWidthOrProfile
   deriveClusteringFromCoarseCountingOnly
   reuseOptimizedGapSplitAsGrowingCutoffClosure
-  proveNewLowGapClustering
+  recoverZetaUpperLocalCount
   compareQuarterPeriodLowerConstantWithDensityUpperConstant
+  proveNewLowGapClustering
+  supplyLongWindowLowerDensity
   pursueDifferentSignedMechanism
   repairGammaPrecisionInParallel
   continueCanonicalTestModulationInParallel
@@ -148,8 +197,10 @@ GapSplitRelevant sharpenSameQuadraticDecayDonor = ⊥
 GapSplitRelevant retuneTaperWidthOrProfile = ⊥
 GapSplitRelevant deriveClusteringFromCoarseCountingOnly = ⊥
 GapSplitRelevant reuseOptimizedGapSplitAsGrowingCutoffClosure = ⊥
+GapSplitRelevant recoverZetaUpperLocalCount = ⊥
+GapSplitRelevant compareQuarterPeriodLowerConstantWithDensityUpperConstant = ⊥
 GapSplitRelevant proveNewLowGapClustering = ⊤
-GapSplitRelevant compareQuarterPeriodLowerConstantWithDensityUpperConstant = ⊤
+GapSplitRelevant supplyLongWindowLowerDensity = ⊤
 GapSplitRelevant pursueDifferentSignedMechanism = ⊤
 GapSplitRelevant repairGammaPrecisionInParallel = ⊤
 GapSplitRelevant continueCanonicalTestModulationInParallel = ⊤
@@ -170,5 +221,13 @@ optimizedGapSplitGrowingCutoffClosurePruned :
   GapSplitRelevant reuseOptimizedGapSplitAsGrowingCutoffClosure → ⊥
 optimizedGapSplitGrowingCutoffClosurePruned x = x
 
+zetaUpperLocalCountSearchPruned :
+  GapSplitRelevant recoverZetaUpperLocalCount → ⊥
+zetaUpperLocalCountSearchPruned x = x
+
+quarterDensityConstantComparisonPruned :
+  GapSplitRelevant compareQuarterPeriodLowerConstantWithDensityUpperConstant → ⊥
+quarterDensityConstantComparisonPruned x = x
+
 currentGapSplitRouteState : GapSplitRouteState
-currentGapSplitRouteState = densityConstantWindowConditional
+currentGapSplitRouteState = clusteringRequired
