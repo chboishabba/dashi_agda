@@ -19,6 +19,11 @@ import DASHI.Analysis.RiemannG2TargetCenteredScalarCancellationAssemblyExact as 
 -- BIDI rule: this is not a second zero-sum ontology. Every successful producer
 -- names the canonical LiteralTargetCenteredScalarProblem it realizes. All
 -- preservation / same-object propositions are proof-bearing receipts.
+--
+-- `signedCosineCell` is retained only as a compatibility field for historical
+-- consumers. The theorem-bearing kernel is the stronger integrated
+-- Literal.dSigma / Literal.totalSignedResponse. No live RH payment may depend on
+-- separately proving a semantics for the three-argument helper.
 ------------------------------------------------------------------------
 
 record DirectFiniteNearCell : Set where
@@ -69,6 +74,8 @@ record DirectFinitePoleNearProducer : Set₁ where
     multiplicityOf : ZeroIndex → Scalar
     horizontalDisplacement : ZeroIndex → Scalar
     targetRelativeGap : ZeroIndex → Scalar
+
+    -- Compatibility-only helper. Literal.dSigma is the authoritative kernel.
     signedCosineCell : Taper → Scalar → Scalar → Scalar
 
     finiteSignedNearValue : Scalar
@@ -125,6 +132,7 @@ record DirectFinitePoleNearProducer : Set₁ where
     finiteSignedNearValueIsLiteralTotalSignedResponseReceipt :
       finiteSignedNearValueIsLiteralTotalSignedResponse
 
+    -- Compatibility firewall, not a theorem-bearing analytic obligation.
     signedCosineCellIsLiteralKernelResponse : Set
     signedCosineCellIsLiteralKernelResponseReceipt :
       signedCosineCellIsLiteralKernelResponse
@@ -136,17 +144,16 @@ open DirectFinitePoleNearProducer public
 ------------------------------------------------------------------------
 -- CANONICAL COMPILER FROM THE EXISTING LITERAL G2 SCALAR PROBLEM
 --
--- This removes duplicate representation payments. The compiler fixes, by
--- construction:
+-- Scalar, ZeroIndex, target, nearIndex, multiplicity, horizontal displacement,
+-- target-relative gap and finite signed value are fixed by construction.
 --
---   Scalar, ZeroIndex, target, nearIndex, multiplicity,
---   horizontal displacement, target-relative gap, finite signed value.
+-- The only theorem-bearing quantitative input is
 --
--- A caller supplies only the genuinely extra direct-route data: pole taper /
--- cutoff realization, the scalar signed-cell evaluator, and an actual
--- approximant/error receipt. The signed-cell semantic realization remains an
--- explicit proof input because LiteralTargetCenteredScalarProblem stores the
--- integrated d_sigma kernel rather than this three-argument helper function.
+--   Within (Literal.totalSignedResponse P) approximant error.
+--
+-- The pole taper/cutoff remain explicit because the selected-window weld must
+-- identify them. `signedCosineCell` survives only for API compatibility and gets
+-- no separate semantic research payment.
 ------------------------------------------------------------------------
 
 record LiteralDirectFiniteInput
@@ -156,7 +163,7 @@ record LiteralDirectFiniteInput
     poleTaper : Taper
     cutoff : Literal.Scalar P
 
-    signedCosineCell :
+    compatibilitySignedCosineCell :
       Taper → Literal.Scalar P → Literal.Scalar P → Literal.Scalar P
 
     approximant : Literal.Scalar P
@@ -169,13 +176,6 @@ record LiteralDirectFiniteInput
 
     poleTaperRealization : Set
     poleTaperRealizationReceipt : poleTaperRealization
-
-    signedCosinePhaseRealization : Set
-    signedCosinePhaseRealizationReceipt : signedCosinePhaseRealization
-
-    signedCosineCellRealizesLiteralKernel : Set
-    signedCosineCellRealizesLiteralKernelReceipt :
-      signedCosineCellRealizesLiteralKernel
 
     directRouteIndependentOfProjectiveBalance : Set
     directRouteIndependentOfProjectiveBalanceReceipt :
@@ -201,7 +201,7 @@ compileLiteralDirectFiniteProducer P input =
     (Literal.multiplicity P)
     (Literal.offRealPart P)
     (Literal.targetRelativeGap P)
-    (LiteralDirectFiniteInput.signedCosineCell input)
+    (LiteralDirectFiniteInput.compatibilitySignedCosineCell input)
     (Literal.totalSignedResponse P)
     (LiteralDirectFiniteInput.approximant input)
     (LiteralDirectFiniteInput.error input)
@@ -214,8 +214,8 @@ compileLiteralDirectFiniteProducer P input =
     refl
     ((Literal.nearOff P) ≡ (Literal.nearOff P))
     refl
-    (LiteralDirectFiniteInput.signedCosinePhaseRealization input)
-    (LiteralDirectFiniteInput.signedCosinePhaseRealizationReceipt input)
+    ((Literal.targetRelativeGap P) ≡ (Literal.targetRelativeGap P))
+    refl
     (LiteralDirectFiniteInput.directRouteIndependentOfProjectiveBalance input)
     (LiteralDirectFiniteInput.directRouteIndependentOfProjectiveBalanceReceipt input)
     (LiteralDirectFiniteInput.evaluationReceipt input)
@@ -234,8 +234,8 @@ compileLiteralDirectFiniteProducer P input =
     refl
     ((Literal.totalSignedResponse P) ≡ (Literal.totalSignedResponse P))
     refl
-    (LiteralDirectFiniteInput.signedCosineCellRealizesLiteralKernel input)
-    (LiteralDirectFiniteInput.signedCosineCellRealizesLiteralKernelReceipt input)
+    ((Literal.totalSignedResponse P) ≡ (Literal.totalSignedResponse P))
+    refl
     (LiteralDirectFiniteInput.producerReference input)
 
 compiledDirectTargetIsLiteral :
@@ -302,6 +302,10 @@ record DirectFiniteNearAttackBoundary : Set where
     canonicalLiteralFieldsCompileWithoutFreshProofIsTrue :
       canonicalLiteralFieldsCompileWithoutFreshProof ≡ true
 
+    legacySignedCosineCellIsLiveResearchPayment : Bool
+    legacySignedCosineCellIsLiveResearchPaymentIsFalse :
+      legacySignedCosineCellIsLiveResearchPayment ≡ false
+
     directProducerMayUseUnrelatedZeroCarrier : Bool
     directProducerMayUseUnrelatedZeroCarrierIsFalse :
       directProducerMayUseUnrelatedZeroCarrier ≡ false
@@ -322,4 +326,5 @@ canonicalDirectFiniteNearAttackBoundary =
     true refl
     false refl
     false refl
-    "Start from the existing LiteralTargetCenteredScalarProblem and use compileLiteralDirectFiniteProducer. Scalar/ZeroIndex, target, nearOff, multiplicity, off-real displacement, delta = ordinate-target and totalSignedResponse are compiler output, not new research. Supply only the literal pole-taper/kernel realization and a consumer-useful approximant/error receipt. The hard payment is quantitative signed control on that exact G2 scalar object; RH remains open."
+    false refl
+    "Start from the existing LiteralTargetCenteredScalarProblem and use compileLiteralDirectFiniteProducer. Scalar/ZeroIndex, target, nearOff, multiplicity, off-real displacement, delta = ordinate-target and totalSignedResponse are compiler output. The legacy signedCosineCell helper is compatibility-only because Literal.dSigma already owns the integrated kernel. The live analytic payment is now the consumer-useful Within(totalSignedResponse, approximant, error) estimate on the exact G2 scalar object, plus selected pole-taper/cutoff identity downstream. RH remains open."
