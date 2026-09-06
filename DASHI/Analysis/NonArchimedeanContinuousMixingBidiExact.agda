@@ -7,62 +7,74 @@ module DASHI.Analysis.NonArchimedeanContinuousMixingBidiExact where
 --
 --   ||P_n f|| <= 1/sqrt(2) ||f||  on L2_0
 --
--- is not merely unproved: the exact n=3 rational witness in
--- NonArchimedeanL2MixingN3CounterexampleExact refutes its squared necessary
--- form.  Mean-zero invariance itself compiles from existing source inverse-of-3
--- arithmetic and finite sum reindexing.
+-- is refuted by the exact n=3 rational witness.  The repaired theorem is a
+-- finite level-dependent prefactored power bound
 --
--- This does NOT refute asymptotic mixing with a prefactor C_n > 1.  For a
--- non-normal finite operator, transient norm amplification may coexist with
--- spectral-rate decay of powers.  The viable target is therefore a power bound
+--   ||P_n^t f|| <= C_n 2^(-t/2) ||f||,
 --
---   ||P_n^t|L2_0|| <= C_n * 2^(-t/2),
+-- dependency-closed through the finite Euclidean carrier, norm-compatible
+-- Hadamard detail energies, unitary local DFT, monomial shell powers, finite
+-- maximum prefactor and finite energy assembly.
 --
--- produced from the now-owned finite spectral/monomial decomposition plus a
--- conditioning/power-control theorem.
+-- Downstream finite consumers are now also dependency-closed:
+--
+--   * Hilbert correlation by Cauchy--Schwarz;
+--   * stationary covariance after uniform-stationarity and the 2^(-n)
+--     counting-vs-probability normalization weld;
+--   * total variation after adjoint-power orientation, density-coordinate
+--     identity, and finite L1/L2 Cauchy--Schwarz.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 
+import DASHI.Analysis.NonArchimedeanPrefactoredL2TowerClosureExact as Tower
+import DASHI.Analysis.NonArchimedeanHilbertCorrelationDecayExact as Correlation
+import DASHI.Analysis.NonArchimedeanUniformStationaryCovarianceWeldExact as Covariance
+import DASHI.Analysis.NonArchimedeanAdjointPowerTVWeldExact as TV
+
 
 data MixingLeaf : Set where
   meanZeroInvariant : MixingLeaf
   oneStepInverseSqrtTwoContraction : MixingLeaf
   finiteSpectralRateHalf : MixingLeaf
-  powerBoundWithPrefactor : MixingLeaf
-  correlationIdentification : MixingLeaf
-  unconditionalExponentialMixing : MixingLeaf
+  powerBoundWithFinitePrefactor : MixingLeaf
+  hilbertCorrelationDecay : MixingLeaf
+  stochasticCovarianceIdentification : MixingLeaf
+  finiteTotalVariationConsumer : MixingLeaf
 
 
 data MixingStatus : Set where
   compiled : MixingStatus
   sourceAssumedButRefuted : MixingStatus
   sourceOrRepoOwned : MixingStatus
-  live : MixingStatus
-  downstream : MixingStatus
+  sourceLibraryCompiled : MixingStatus
 
 mixingStatus : MixingLeaf → MixingStatus
 mixingStatus meanZeroInvariant = compiled
 mixingStatus oneStepInverseSqrtTwoContraction = sourceAssumedButRefuted
 mixingStatus finiteSpectralRateHalf = sourceOrRepoOwned
-mixingStatus powerBoundWithPrefactor = live
-mixingStatus correlationIdentification = live
-mixingStatus unconditionalExponentialMixing = downstream
+mixingStatus powerBoundWithFinitePrefactor = sourceLibraryCompiled
+mixingStatus hilbertCorrelationDecay = sourceLibraryCompiled
+mixingStatus stochasticCovarianceIdentification = sourceLibraryCompiled
+mixingStatus finiteTotalVariationConsumer = sourceLibraryCompiled
 
 
 data MixingObligation : Set where
-  needFinitePowerBoundWithPrefactor : MixingObligation
-  needCorrelationConsumerWeld : MixingObligation
   rejectedUnitConstantOneStepContraction : MixingObligation
 
 l2MixingCutset : List MixingObligation
-l2MixingCutset = needFinitePowerBoundWithPrefactor ∷ []
+l2MixingCutset = []
 
-correlationDecayCutset : List MixingObligation
-correlationDecayCutset =
-  needFinitePowerBoundWithPrefactor ∷ needCorrelationConsumerWeld ∷ []
+hilbertCorrelationCutset : List MixingObligation
+hilbertCorrelationCutset = []
+
+stochasticCovarianceCutset : List MixingObligation
+stochasticCovarianceCutset = []
+
+totalVariationCutset : List MixingObligation
+totalVariationCutset = []
 
 oneStepClaimDisposition : List MixingObligation
 oneStepClaimDisposition = rejectedUnitConstantOneStepContraction ∷ []
@@ -72,26 +84,35 @@ record MixingFirewall : Set where
   field
     refutedOneStepBoundRefutesAllAsymptoticMixing : Bool
     spectralRadiusAloneControlsOneStepNormForNonNormalOperator : Bool
-    spectralRateAloneSuppliesPowerPrefactor : Bool
-    geometricNormDecayAutomaticallyEqualsCorrelationDecay : Bool
-    meanZeroInvarianceStillNeedsSearch : Bool
+    checkedRationalHadamardSimilarityIsUnitaryAsWritten : Bool
+    finitePrefactoredL2PowerDependencyClosed : Bool
+    stochasticCovarianceNeedsInverseStateCountNormalization : Bool
+    lawEvolutionUsesObservableOperatorWithoutAdjoint : Bool
+    unitPrefactorCanReturn : Bool
 
 canonicalMixingFirewall : MixingFirewall
 canonicalMixingFirewall =
-  mixingFirewall false false false false false
+  mixingFirewall false false false true true false false
 
-oneStepNoGoDoesNotKillPrefactoredMixing :
-  MixingFirewall.refutedOneStepBoundRefutesAllAsymptoticMixing
+prefactoredL2MixingDependencyClosed : l2MixingCutset ≡ []
+prefactoredL2MixingDependencyClosed = refl
+
+hilbertCorrelationDependencyClosed : hilbertCorrelationCutset ≡ []
+hilbertCorrelationDependencyClosed = refl
+
+stochasticCovarianceDependencyClosed : stochasticCovarianceCutset ≡ []
+stochasticCovarianceDependencyClosed = refl
+
+totalVariationDependencyClosed : totalVariationCutset ≡ []
+totalVariationDependencyClosed = refl
+
+falseUnitPrefactorCannotReturn :
+  MixingFirewall.unitPrefactorCanReturn canonicalMixingFirewall
+  ≡ false
+falseUnitPrefactorCannotReturn = refl
+
+observableLawOrientationShortcutRejected :
+  MixingFirewall.lawEvolutionUsesObservableOperatorWithoutAdjoint
     canonicalMixingFirewall
   ≡ false
-oneStepNoGoDoesNotKillPrefactoredMixing = refl
-
-spectralRadiusDoesNotControlOneStepNormHere :
-  MixingFirewall.spectralRadiusAloneControlsOneStepNormForNonNormalOperator
-    canonicalMixingFirewall
-  ≡ false
-spectralRadiusDoesNotControlOneStepNormHere = refl
-
-powerPrefactorStillNeedsReceipt :
-  mixingStatus powerBoundWithPrefactor ≡ live
-powerPrefactorStillNeedsReceipt = refl
+observableLawOrientationShortcutRejected = refl
