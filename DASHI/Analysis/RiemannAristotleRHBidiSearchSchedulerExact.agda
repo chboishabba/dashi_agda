@@ -11,6 +11,7 @@ import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap
 import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact as Z38
 import DASHI.Analysis.RiemannG2AlpogeFurmanClusteringNonDescentExact as AFLocal
 import DASHI.Analysis.RiemannG2LowGapClusteringMomentReductionExact as Moment
+import DASHI.Analysis.RiemannG2SelectedTargetLocalMomentSameObjectExact as SelectedMoment
 
 ------------------------------------------------------------------------
 -- RH-ONLY BIDI-AWARE SEARCH SCHEDULER
@@ -24,11 +25,16 @@ import DASHI.Analysis.RiemannG2LowGapClusteringMomentReductionExact as Moment
 --   (4/pi^2) * highGapMass < lowGapMass,
 --   D = pi/(3 Lambda).
 --
--- The clustering node is now refined one level further by an exact in-repo
--- moment compiler: a SAME-target/SAME-window normalized second-moment estimate
--- strong enough to force highGapMass < 2*lowGapMass, followed by the elementary
--- real coefficient bridge 4/pi^2 < 1/2, is sufficient for the clustering
--- consumer. Direct clustering remains an admissible alternative route.
+-- The clustering node is refined by a target-local second-moment compiler. The
+-- actual analytic moment is not allowed to float on a parallel target/window:
+-- `RiemannG2SelectedTargetLocalMomentSameObjectExact` indexes it by the existing
+-- `ActualSelectedPoleNearProducer`, reusing the SAME target-relative phase,
+-- multiplicities and nearOffFinset. Once that attachment is inhabited, the
+-- strict two-to-one mass ratio is compiler output.
+--
+-- Direct clustering remains an admissible alternative route. The Alpöge--Furman
+-- global >2/3 simple/on-line theorem remains a relevant donor but is explicitly
+-- rejected as a direct target-local clustering proof without localization.
 --
 -- This is NOT the already-closed `clusterMarginSocket`: that socket is the
 -- off-line pole cluster margin M_cluster^pole. The new clustering theorem is a
@@ -193,7 +199,7 @@ zetaTargetLocalSecondMomentSchedulable =
   rh-bidi-schedulable
     zetaTargetLocalSecondMomentIsLive
     "actual-zeta low-gap clustering producer"
-    "SAME-target/SAME-window normalized second moment: highGapMass <= M2_norm < 2*lowGapMass; then use 4/pi^2 < 1/2"
+    "RiemannG2SelectedTargetLocalMomentSameObjectExact.SelectedTargetLocalMomentAttachment indexed by the existing ActualSelectedPoleNearProducer; prove SAME-target/SAME-window M2_norm with highGapMass <= M2_norm < 2*lowGapMass"
 
 finiteNearEvaluationSchedulable :
   RHBidiSchedulable evaluateFiniteNearSignedSum
@@ -212,7 +218,7 @@ gammaPrecisionRepairSchedulable =
     "H_Gamma consumer-sufficient O(|t|^-2)-scale evaluation"
 
 ------------------------------------------------------------------------
--- The active high-ordinate queue after the local-moment refinement.
+-- The active high-ordinate queue after the same-object local-moment refinement.
 ------------------------------------------------------------------------
 
 data ActiveHighOrdinateExperiment : RHBidiExperiment → Set where
@@ -322,10 +328,30 @@ localMomentCompilerClosedInAgda :
     Moment.canonicalLocalMomentClusteringBoundary ≡ true
 localMomentCompilerClosedInAgda = refl
 
-selectedTargetLocalMomentStillOpen :
-  Moment.LocalMomentClusteringBoundary.exactSelectedTargetLocalSecondMomentProducerOwned
-    Moment.canonicalLocalMomentClusteringBoundary ≡ false
-selectedTargetLocalMomentStillOpen = refl
+selectedMomentSameObjectShapeOwned :
+  SelectedMoment.SelectedTargetLocalMomentBoundary.selectedWindowMomentAttachmentIsExactConsumerShape
+    SelectedMoment.canonicalSelectedTargetLocalMomentBoundary ≡ true
+selectedMomentSameObjectShapeOwned = refl
+
+selectedMomentSameObjectProducerStillOpen :
+  SelectedMoment.SelectedTargetLocalMomentBoundary.selectedWindowMomentProducerInhabitedHere
+    SelectedMoment.canonicalSelectedTargetLocalMomentBoundary ≡ false
+selectedMomentSameObjectProducerStillOpen = refl
+
+secondMomentTargetSearchPruned :
+  SelectedMoment.paymentState SelectedMoment.recoverSecondSelectedTarget
+  ≡ SelectedMoment.pruned
+secondMomentTargetSearchPruned = refl
+
+secondMomentNearFamilySearchPruned :
+  SelectedMoment.paymentState SelectedMoment.recoverSecondNearZeroFamily
+  ≡ SelectedMoment.pruned
+secondMomentNearFamilySearchPruned = refl
+
+secondMomentMultiplicitySearchPruned :
+  SelectedMoment.paymentState SelectedMoment.recoverSecondMultiplicityCarrier
+  ≡ SelectedMoment.pruned
+secondMomentMultiplicitySearchPruned = refl
 
 globalSimpleProportionCannotDirectlyCloseClustering :
   AFLocal.GlobalSimpleToLocalClusteringBoundary.alpogeFurmanDirectlyClosesGapSplitClustering
@@ -375,6 +401,10 @@ record RHBidiSearchSchedulerBoundary : Set where
     targetLocalSecondMomentRefinementActiveIsTrue :
       targetLocalSecondMomentRefinementActive ≡ true
 
+    targetLocalSecondMomentUsesExistingSelectedWindow : Bool
+    targetLocalSecondMomentUsesExistingSelectedWindowIsTrue :
+      targetLocalSecondMomentUsesExistingSelectedWindow ≡ true
+
     globalSimpleZeroProportionDirectClusteringRouteActive : Bool
     globalSimpleZeroProportionDirectClusteringRouteActiveIsFalse :
       globalSimpleZeroProportionDirectClusteringRouteActive ≡ false
@@ -411,6 +441,7 @@ canonicalRHBidiSearchSchedulerBoundary =
     false refl
     false refl
     false refl
+    true refl
     true refl
     true refl
     false refl
