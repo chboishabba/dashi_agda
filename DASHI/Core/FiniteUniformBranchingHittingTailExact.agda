@@ -21,11 +21,11 @@ module DASHI.Core.FiniteUniformBranchingHittingTailExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Agda.Builtin.Nat using (Nat; _-_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_; _-_)
 open import Data.List.Base using (length)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Data.Nat using (_≤_)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Core.FiniteBooleanSurvivorCountExact as Survivor
 import DASHI.Core.FiniteBlockSurvivalCountDecayExact as Decay
@@ -75,7 +75,7 @@ record UniformBranchingTailCompiler : Set₁ where
     survivors : Nat → Nat
     aggregateOneBlockBound :
       (q : Nat) →
-      survivors (Agda.Builtin.Nat.suc q)
+      survivors (suc q)
       ≤ (branchFactor family - 1) * survivors q
 
 open UniformBranchingTailCompiler public
@@ -96,7 +96,7 @@ genericGeometricSurvivorBound :
   (q : Nat) →
   survivors compiler q
   ≤ Decay.powNat (branchFactor (family compiler) - 1) q
-      * survivors compiler Agda.Builtin.Nat.zero
+      * survivors compiler zero
 genericGeometricSurvivorBound compiler q =
   Decay.survivorCountGeometricBound
     (asBlockSurvivalRecurrence compiler) q
