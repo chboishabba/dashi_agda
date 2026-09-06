@@ -7,9 +7,9 @@ module DASHI.Culture.MissingDeceasedScientificWorkEverything where
 -- denominator-aware matched-control enrichment, competing-hypothesis
 -- discrimination, critical-knowledge BIDI acquisition, viewpoint-provenance
 -- testing, open-science/knowledge-release and externalisation-boundary BIDI
--- testing, science-to-capability-carrier reconstruction, disruption-benefit
--- evidence testing, actor benefit/visibility/effect intersection, and matched
--- disruption-impact controls.
+-- testing, science-to-capability-carrier reconstruction, science-driven
+-- acquisition compilation, disruption-benefit evidence testing, actor
+-- benefit/visibility/effect intersection, and matched disruption-impact controls.
 --
 -- The scientific formalisation is both memorial work and an investigative aid:
 -- it identifies the actual capability-bearing carriers that later evidence must
@@ -52,6 +52,7 @@ import DASHI.Culture.MissingDeceasedCapabilityIndexedSelectorSalienceExact
 import DASHI.Culture.MissingDeceasedCapabilitySelectorAcquisitionExact
 import DASHI.Culture.MissingDeceasedScientificCapabilityCarrierMatrixExact
 import DASHI.Culture.MissingDeceasedScientificCapabilityPublicControlsExact
+import DASHI.Culture.MissingDeceasedScienceDrivenAcquisitionExact
 import DASHI.Culture.MissingDeceasedRosterEnrichmentDesignExact
 import DASHI.Culture.MissingDeceasedHypothesisDiscriminatorMatrixExact
 import DASHI.Culture.MissingDeceasedDisruptionBenefitEvidenceExact
