@@ -37,8 +37,8 @@ module DASHI.Physics.Closure.NSTriadKNClaySubmissionCutsetRound424Exact where
 -- the wrong frozen transport ordering and cannot derive the required first-
 -- adjoint estimate from the favourable second-adjoint ordering.
 --
--- R329/R430 now close a further SAME-OBJECT pointwise seam.  The actual inner
--- pure commutator is proved transverse at the outer p leg, the physical outer-q
+-- R329/R430 close a further SAME-OBJECT pointwise seam.  The actual inner pure
+-- commutator is transverse at the outer p leg, the physical outer-q
 -- transversality is retained, and the literal nested outer slot therefore
 -- factors through the R145 anti-parallel defect.  R430 gives
 --
@@ -55,10 +55,21 @@ module DASHI.Physics.Closure.NSTriadKNClaySubmissionCutsetRound424Exact where
 -- cancellable scalar equality m(k)^2=|k|^2.  This firewall matters for generic
 -- lattice modes whose Euclidean radius need not be rational.
 --
--- Therefore the one novel NS obligation remains the cutoff-uniform bound on the
--- SAME common signed R299/R423 aggregate cross.  The new pointwise geometry
--- narrows candidate producers but does not silently replace aggregate coherence
--- by a cellwise estimate.
+-- R432 sharpens the aggregation frontier again.  R398 constructs the live R406
+-- pair family by concatenating one fixed-output pair list at a time and proves
+-- exact additivity of the weighted remainder under list append.  Therefore the
+-- heat factorization can be performed output-fibre by output-fibre.  There is
+-- NO cross-output coherence theorem left.  The remaining discovery theorem is
+-- exactly:
+--
+--   (i) cutoff-uniform control of coherent signed cross INSIDE each fixed
+--       output fibre, and
+--   (ii) a cardinality-free summation of those fibre budgets by a critical
+--        physical quantity.
+--
+-- Thus "global aggregate coherence" is now too broad a description.  The live
+-- novel seam is fixed-output coherence plus physical summability of the fibre
+-- budgets.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -75,6 +86,7 @@ import DASHI.Physics.Closure.NSTriadKNCannoneTrilinearAntisymmetryAudit as Anti
 import DASHI.Physics.Closure.NSTriadKNStrongLowLiteralNestedKernelRound329Exact as R329
 import DASHI.Physics.Closure.NSTriadKNLiteralNestedOuterAntiParallelNormRound430Exact as R430
 import DASHI.Physics.Closure.NSTriadKNLiteralNestedOuterRadiusDefectRound431Exact as R431
+import DASHI.Physics.Closure.NSTriadKNFixedOutputSignedCrossAggregationRound432Exact as R432
 import DASHI.Physics.Closure.NSTriadKNCriticalSimonUpgradeFollowsBarrierRound148Exact as R148
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalGalerkinSimonWeldRound104Exact as R104
 
@@ -157,8 +169,20 @@ round424GlobalRationalPhysicalRadiusCalibrationInstalled =
 round424PointwiseNestedGeometryPaysAggregateCoherence : Bool
 round424PointwiseNestedGeometryPaysAggregateCoherence = false
 
-round424RemainingNovelSeamIsCutoffUniformCommonSignedCrossBound : Bool
-round424RemainingNovelSeamIsCutoffUniformCommonSignedCrossBound = true
+round424CrossOutputCoherencePaymentRequired : Bool
+round424CrossOutputCoherencePaymentRequired =
+  R432.round432CrossOutputCoherencePaymentRequired
+
+round424OnlyFixedOutputCoherenceRemainsBeforeBudgetSummation : Bool
+round424OnlyFixedOutputCoherenceRemainsBeforeBudgetSummation =
+  R432.round432OnlyFixedOutputCoherenceRemainsBeforeBudgetSummation
+
+round424CutoffUniformSumOfFixedOutputBudgetsClosed : Bool
+round424CutoffUniformSumOfFixedOutputBudgetsClosed =
+  R432.round432CutoffUniformSumOfFibreBudgetsClosed
+
+round424RemainingNovelSeamIsFixedOutputCoherencePlusBudgetSummation : Bool
+round424RemainingNovelSeamIsFixedOutputCoherencePlusBudgetSummation = true
 
 round424PostBarrierNeedsNoNewNSDiscoveryEstimate : Bool
 round424PostBarrierNeedsNoNewNSDiscoveryEstimate =
@@ -266,9 +290,24 @@ round424PointwiseNestedGeometryPaysAggregateCoherenceIsFalse :
   round424PointwiseNestedGeometryPaysAggregateCoherence ≡ false
 round424PointwiseNestedGeometryPaysAggregateCoherenceIsFalse = refl
 
-round424RemainingNovelSeamIsCutoffUniformCommonSignedCrossBoundIsTrue :
-  round424RemainingNovelSeamIsCutoffUniformCommonSignedCrossBound ≡ true
-round424RemainingNovelSeamIsCutoffUniformCommonSignedCrossBoundIsTrue = refl
+round424CrossOutputCoherencePaymentRequiredIsFalse :
+  round424CrossOutputCoherencePaymentRequired ≡ false
+round424CrossOutputCoherencePaymentRequiredIsFalse =
+  R432.round432CrossOutputCoherencePaymentRequiredIsFalse
+
+round424OnlyFixedOutputCoherenceRemainsBeforeBudgetSummationIsTrue :
+  round424OnlyFixedOutputCoherenceRemainsBeforeBudgetSummation ≡ true
+round424OnlyFixedOutputCoherenceRemainsBeforeBudgetSummationIsTrue =
+  R432.round432OnlyFixedOutputCoherenceRemainsBeforeBudgetSummationIsTrue
+
+round424CutoffUniformSumOfFixedOutputBudgetsClosedIsFalse :
+  round424CutoffUniformSumOfFixedOutputBudgetsClosed ≡ false
+round424CutoffUniformSumOfFixedOutputBudgetsClosedIsFalse =
+  R432.round432CutoffUniformSumOfFibreBudgetsClosedIsFalse
+
+round424RemainingNovelSeamIsFixedOutputCoherencePlusBudgetSummationIsTrue :
+  round424RemainingNovelSeamIsFixedOutputCoherencePlusBudgetSummation ≡ true
+round424RemainingNovelSeamIsFixedOutputCoherencePlusBudgetSummationIsTrue = refl
 
 round424PostBarrierNeedsNoNewNSDiscoveryEstimateIsTrue :
   round424PostBarrierNeedsNoNewNSDiscoveryEstimate ≡ true
