@@ -134,10 +134,6 @@ residualDrivenStepAgreesWithOldCorrection Cell.q1 = refl
 residualDrivenStepAgreesWithOldCorrection Cell.q3 = refl
 residualDrivenStepAgreesWithOldCorrection Cell.q5 = refl
 
-------------------------------------------------------------------------
--- Recompute the complete electrical cell only after the admitted action.
-------------------------------------------------------------------------
-
 residualDrivenCellStep : Cell.SourceCharge → Cell.ComputedCell
 residualDrivenCellStep q = Cell.solveCell (residualDrivenStep q)
 
