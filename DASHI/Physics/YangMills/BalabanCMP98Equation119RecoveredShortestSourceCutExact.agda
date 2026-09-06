@@ -2,31 +2,26 @@
 module DASHI.Physics.YangMills.BalabanCMP98Equation119RecoveredShortestSourceCutExact where
 
 ------------------------------------------------------------------------
--- CMP98 EQ. (119): RECOVERED SHORTEST SOURCE CUT AFTER ROUND218 ARCHAEOLOGY
+-- CMP98 EQ. (119): RECOVERED SHORTEST SOURCE CUT
 --
--- The pointwise selected-cut route remains a valid semantic fallback, but the
--- later physical/dyadic/Path13 owners remove several older source coordinates.
+-- Physical side 13 uses historical periodic index 12.  The repaired Path13
+-- realization, signed perturbation projection, local scalar action, two-carrier
+-- selected-bond Eq.(119), and generic field assembly are already constructed.
 --
--- IMPORTANT INDEX REPAIR:
--- the historical periodic APIs are predecessor-indexed:
+-- This round further removes the opaque "global/local perturbation semantics"
+-- seam.  The repository now has a direct Path13 family compiler that constructs
+-- from narrow inputs:
 --
---   PeriodicBlock n = periodicTorus4Definition (suc n),
---   PeriodicBondField n = BondField (suc n).
+--   realization -> erased literal relative contour -> principal Y_x
+--   -> outer Y -> Federbush g/Jminus/Ad -> selected-bond Eq.(119)
+--   -> positive-bond field derivative.
 --
--- Physical side 13 therefore uses historical n=12.  R192/R193/R216 encode
--- this explicitly.  The Path13 realization is counted as pruned only together
--- with that repair; the superseded n=13 specialization must not be revived.
---
--- The two surviving source receipts remain:
---   1. construct the selected variational/physical background directly on the
---      literal Path13 background carrier;
---   2. instantiate the now-generic two-carrier Eq.(119) family on the actual
---      Path13 global perturbation field and the local SU(2) Lie carrier.
---
--- Inside (2), positive projection, signed orientation, canonical local scalar
--- action, the two-carrier selected-bond formula, and generic coarse-bond field
--- assembly are all constructed.  The surviving perturbation payment is now a
--- same-object Path13 source-family inhabitant, not missing algebra.
+-- Its surviving input frontier is exactly five independently typed payments:
+--   1. selected variational/physical Path13 background;
+--   2. rational-real ring embedding;
+--   3. an ExistingFederbushConventionFamily inhabitant;
+--   4. radius-six minus embedding centred for every selected positive bond;
+--   5. principal-image admission of each erased literal relative contour.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -39,6 +34,9 @@ import DASHI.Physics.YangMills.BalabanCMP98Path13PhysicalPeriodicRealizationRoun
 import DASHI.Physics.YangMills.BalabanPath13SelectedPhysicalBackgroundTargetExact as Path13Target
 import DASHI.Physics.YangMills.BalabanCMP98Path13PerturbationCarrierWeldExact as PerturbationTarget
 import DASHI.Physics.YangMills.BalabanCMP98Equation119TwoCarrierSelectedBondExact as TwoCarrier
+import DASHI.Physics.YangMills.BalabanRationalUnitQuaternionRealLieAdjointExact as UnitAdjoint
+import DASHI.Physics.YangMills.BalabanCMP98Equation119GeometryRelativeContourExact as Geometry
+import DASHI.Physics.YangMills.BalabanCMP98Path13TwoCarrierSourceFamilyExact as Path13Family
 
 Path13SelectedPhysicalBackgroundProducer : Set → Set → Set₁
 Path13SelectedPhysicalBackgroundProducer =
@@ -61,48 +59,55 @@ record RecoveredEq119ShortestSourceStatus : Set where
     path13PositiveBondPerturbationProjectionClosed : Bool
     path13RationalSignedBondPerturbationProjectionClosed : Bool
     path13CanonicalLocalScalarActionClosed : Bool
+    rationalUnitRealLieAdjointCompilerClosed : Bool
     twoCarrierSelectedBondEq119CompilerClosed : Bool
     twoCarrierCoarseBondFieldAssemblyClosed : Bool
+    geometryOnlyRelativeContourCompilerClosed : Bool
+    path13PrincipalYCompilerClosed : Bool
+    path13OuterYCompilerClosed : Bool
+    path13TwoCarrierSourceFamilyCompilerClosed : Bool
+    path13TwoCarrierFieldDerivativeCompilerClosed : Bool
+
     path13SelectedPhysicalBackground13Constructed : Bool
+    rationalRealRingEmbeddingConstructed : Bool
+    federbushConventionFamilyConstructed : Bool
+    path13BondCenteredMinusEmbeddingsConstructed : Bool
+    path13RelativeContoursPrincipalImageAdmitted : Bool
+    path13TwoCarrierSourceFamilyInputsConstructed : Bool
     path13GlobalLocalPerturbationSemanticsConstructed : Bool
     recoveredShortestPhysicalEq119SourceClosed : Bool
 
-    pointwiseSemanticFallbackCompilerClosedIsTrue :
-      pointwiseSemanticFallbackCompilerClosed ≡ true
-    principalYFederbushIndexPrunedIsTrue :
-      principalYFederbushIndexPruned ≡ true
-    selectedCutRadiusPrunedOnShortestRouteIsTrue :
-      selectedCutRadiusPrunedOnShortestRoute ≡ true
-    selectedPhysicalPeriodicRealizationPrunedIsTrue :
-      selectedPhysicalPeriodicRealizationPruned ≡ true
-    rawUnitPathRepresentationPrunedIsTrue :
-      rawUnitPathRepresentationPruned ≡ true
-    path13HistoricalPeriodicIndexRepairClosedIsTrue :
-      path13HistoricalPeriodicIndexRepairClosed ≡ true
-    path13PeriodicRealizationPrunedIsTrue :
-      path13PeriodicRealizationPruned ≡ true
-    path13PositiveBondPerturbationProjectionClosedIsTrue :
-      path13PositiveBondPerturbationProjectionClosed ≡ true
-    path13RationalSignedBondPerturbationProjectionClosedIsTrue :
-      path13RationalSignedBondPerturbationProjectionClosed ≡ true
-    path13CanonicalLocalScalarActionClosedIsTrue :
-      path13CanonicalLocalScalarActionClosed ≡ true
-    twoCarrierSelectedBondEq119CompilerClosedIsTrue :
-      twoCarrierSelectedBondEq119CompilerClosed ≡ true
-    twoCarrierCoarseBondFieldAssemblyClosedIsTrue :
-      twoCarrierCoarseBondFieldAssemblyClosed ≡ true
+    pointwiseSemanticFallbackCompilerClosedIsTrue : pointwiseSemanticFallbackCompilerClosed ≡ true
+    principalYFederbushIndexPrunedIsTrue : principalYFederbushIndexPruned ≡ true
+    selectedCutRadiusPrunedOnShortestRouteIsTrue : selectedCutRadiusPrunedOnShortestRoute ≡ true
+    selectedPhysicalPeriodicRealizationPrunedIsTrue : selectedPhysicalPeriodicRealizationPruned ≡ true
+    rawUnitPathRepresentationPrunedIsTrue : rawUnitPathRepresentationPruned ≡ true
+    path13HistoricalPeriodicIndexRepairClosedIsTrue : path13HistoricalPeriodicIndexRepairClosed ≡ true
+    path13PeriodicRealizationPrunedIsTrue : path13PeriodicRealizationPruned ≡ true
+    path13PositiveBondPerturbationProjectionClosedIsTrue : path13PositiveBondPerturbationProjectionClosed ≡ true
+    path13RationalSignedBondPerturbationProjectionClosedIsTrue : path13RationalSignedBondPerturbationProjectionClosed ≡ true
+    path13CanonicalLocalScalarActionClosedIsTrue : path13CanonicalLocalScalarActionClosed ≡ true
+    rationalUnitRealLieAdjointCompilerClosedIsTrue : rationalUnitRealLieAdjointCompilerClosed ≡ true
+    twoCarrierSelectedBondEq119CompilerClosedIsTrue : twoCarrierSelectedBondEq119CompilerClosed ≡ true
+    twoCarrierCoarseBondFieldAssemblyClosedIsTrue : twoCarrierCoarseBondFieldAssemblyClosed ≡ true
+    geometryOnlyRelativeContourCompilerClosedIsTrue : geometryOnlyRelativeContourCompilerClosed ≡ true
+    path13PrincipalYCompilerClosedIsTrue : path13PrincipalYCompilerClosed ≡ true
+    path13OuterYCompilerClosedIsTrue : path13OuterYCompilerClosed ≡ true
+    path13TwoCarrierSourceFamilyCompilerClosedIsTrue : path13TwoCarrierSourceFamilyCompilerClosed ≡ true
+    path13TwoCarrierFieldDerivativeCompilerClosedIsTrue : path13TwoCarrierFieldDerivativeCompilerClosed ≡ true
 
-    path13SelectedPhysicalBackground13ConstructedIsFalse :
-      path13SelectedPhysicalBackground13Constructed ≡ false
-    path13GlobalLocalPerturbationSemanticsConstructedIsFalse :
-      path13GlobalLocalPerturbationSemanticsConstructed ≡ false
-    recoveredShortestPhysicalEq119SourceClosedIsFalse :
-      recoveredShortestPhysicalEq119SourceClosed ≡ false
+    path13SelectedPhysicalBackground13ConstructedIsFalse : path13SelectedPhysicalBackground13Constructed ≡ false
+    rationalRealRingEmbeddingConstructedIsFalse : rationalRealRingEmbeddingConstructed ≡ false
+    federbushConventionFamilyConstructedIsFalse : federbushConventionFamilyConstructed ≡ false
+    path13BondCenteredMinusEmbeddingsConstructedIsFalse : path13BondCenteredMinusEmbeddingsConstructed ≡ false
+    path13RelativeContoursPrincipalImageAdmittedIsFalse : path13RelativeContoursPrincipalImageAdmitted ≡ false
+    path13TwoCarrierSourceFamilyInputsConstructedIsFalse : path13TwoCarrierSourceFamilyInputsConstructed ≡ false
+    path13GlobalLocalPerturbationSemanticsConstructedIsFalse : path13GlobalLocalPerturbationSemanticsConstructed ≡ false
+    recoveredShortestPhysicalEq119SourceClosedIsFalse : recoveredShortestPhysicalEq119SourceClosed ≡ false
 
 open RecoveredEq119ShortestSourceStatus public
 
-canonicalRecoveredEq119ShortestSourceStatus :
-  RecoveredEq119ShortestSourceStatus
+canonicalRecoveredEq119ShortestSourceStatus : RecoveredEq119ShortestSourceStatus
 canonicalRecoveredEq119ShortestSourceStatus = record
   { pointwiseSemanticFallbackCompilerClosed =
       Eq119Cut.pointwiseSemanticSelectedCutCompilerClosed
@@ -116,9 +121,20 @@ canonicalRecoveredEq119ShortestSourceStatus = record
   ; path13PositiveBondPerturbationProjectionClosed = true
   ; path13RationalSignedBondPerturbationProjectionClosed = true
   ; path13CanonicalLocalScalarActionClosed = true
+  ; rationalUnitRealLieAdjointCompilerClosed = true
   ; twoCarrierSelectedBondEq119CompilerClosed = true
   ; twoCarrierCoarseBondFieldAssemblyClosed = true
+  ; geometryOnlyRelativeContourCompilerClosed = true
+  ; path13PrincipalYCompilerClosed = true
+  ; path13OuterYCompilerClosed = true
+  ; path13TwoCarrierSourceFamilyCompilerClosed = true
+  ; path13TwoCarrierFieldDerivativeCompilerClosed = true
   ; path13SelectedPhysicalBackground13Constructed = false
+  ; rationalRealRingEmbeddingConstructed = false
+  ; federbushConventionFamilyConstructed = false
+  ; path13BondCenteredMinusEmbeddingsConstructed = false
+  ; path13RelativeContoursPrincipalImageAdmitted = false
+  ; path13TwoCarrierSourceFamilyInputsConstructed = false
   ; path13GlobalLocalPerturbationSemanticsConstructed = false
   ; recoveredShortestPhysicalEq119SourceClosed = false
   ; pointwiseSemanticFallbackCompilerClosedIsTrue =
@@ -133,85 +149,93 @@ canonicalRecoveredEq119ShortestSourceStatus = record
   ; path13PositiveBondPerturbationProjectionClosedIsTrue = refl
   ; path13RationalSignedBondPerturbationProjectionClosedIsTrue = refl
   ; path13CanonicalLocalScalarActionClosedIsTrue = refl
+  ; rationalUnitRealLieAdjointCompilerClosedIsTrue = refl
   ; twoCarrierSelectedBondEq119CompilerClosedIsTrue = refl
   ; twoCarrierCoarseBondFieldAssemblyClosedIsTrue = refl
+  ; geometryOnlyRelativeContourCompilerClosedIsTrue = refl
+  ; path13PrincipalYCompilerClosedIsTrue = refl
+  ; path13OuterYCompilerClosedIsTrue = refl
+  ; path13TwoCarrierSourceFamilyCompilerClosedIsTrue = refl
+  ; path13TwoCarrierFieldDerivativeCompilerClosedIsTrue = refl
   ; path13SelectedPhysicalBackground13ConstructedIsFalse = refl
+  ; rationalRealRingEmbeddingConstructedIsFalse = refl
+  ; federbushConventionFamilyConstructedIsFalse = refl
+  ; path13BondCenteredMinusEmbeddingsConstructedIsFalse = refl
+  ; path13RelativeContoursPrincipalImageAdmittedIsFalse = refl
+  ; path13TwoCarrierSourceFamilyInputsConstructedIsFalse = refl
   ; path13GlobalLocalPerturbationSemanticsConstructedIsFalse = refl
   ; recoveredShortestPhysicalEq119SourceClosedIsFalse = refl
   }
 
-path13BackgroundIsSelectedPhysicalBackgroundClosed :
-  RecoveredEq119ShortestSourceStatus → Bool
-path13BackgroundIsSelectedPhysicalBackgroundClosed =
-  path13SelectedPhysicalBackground13Constructed
+path13BackgroundIsSelectedPhysicalBackgroundClosed : RecoveredEq119ShortestSourceStatus → Bool
+path13BackgroundIsSelectedPhysicalBackgroundClosed = path13SelectedPhysicalBackground13Constructed
 
 path13BackgroundIsSelectedPhysicalBackgroundClosedIsFalse :
-  path13BackgroundIsSelectedPhysicalBackgroundClosed
-    canonicalRecoveredEq119ShortestSourceStatus ≡ false
+  path13BackgroundIsSelectedPhysicalBackgroundClosed canonicalRecoveredEq119ShortestSourceStatus ≡ false
 path13BackgroundIsSelectedPhysicalBackgroundClosedIsFalse =
-  path13SelectedPhysicalBackground13ConstructedIsFalse
-    canonicalRecoveredEq119ShortestSourceStatus
+  path13SelectedPhysicalBackground13ConstructedIsFalse canonicalRecoveredEq119ShortestSourceStatus
 
-perturbationCoordinateSemanticsClosed :
-  RecoveredEq119ShortestSourceStatus → Bool
-perturbationCoordinateSemanticsClosed =
-  path13GlobalLocalPerturbationSemanticsConstructed
+perturbationCoordinateSemanticsClosed : RecoveredEq119ShortestSourceStatus → Bool
+perturbationCoordinateSemanticsClosed = path13GlobalLocalPerturbationSemanticsConstructed
 
 perturbationCoordinateSemanticsClosedIsFalse :
-  perturbationCoordinateSemanticsClosed
-    canonicalRecoveredEq119ShortestSourceStatus ≡ false
+  perturbationCoordinateSemanticsClosed canonicalRecoveredEq119ShortestSourceStatus ≡ false
 perturbationCoordinateSemanticsClosedIsFalse =
-  path13GlobalLocalPerturbationSemanticsConstructedIsFalse
-    canonicalRecoveredEq119ShortestSourceStatus
+  path13GlobalLocalPerturbationSemanticsConstructedIsFalse canonicalRecoveredEq119ShortestSourceStatus
 
 principalYFederbushIndexPruningLevel : ProofLevel
-principalYFederbushIndexPruningLevel =
-  R218.cmp98PrincipalYFrontierPrunedRound218Level
+principalYFederbushIndexPruningLevel = R218.cmp98PrincipalYFrontierPrunedRound218Level
 
 selectedCutRadiusPruningLevel : ProofLevel
-selectedCutRadiusPruningLevel =
-  R218.cmp98SelectedCutRadiusFrontierPrunedRound218Level
+selectedCutRadiusPruningLevel = R218.cmp98SelectedCutRadiusFrontierPrunedRound218Level
 
 path13HistoricalPeriodicIndexRepairLevel : ProofLevel
-path13HistoricalPeriodicIndexRepairLevel =
-  R192.cmp98Path13PhysicalPeriodicIndexRepairRound192Level
+path13HistoricalPeriodicIndexRepairLevel = R192.cmp98Path13PhysicalPeriodicIndexRepairRound192Level
 
 pathRealizationPruningLevel : ProofLevel
-pathRealizationPruningLevel =
-  R218.cmp98PathRealizationFrontierPrunedRound218Level
+pathRealizationPruningLevel = R218.cmp98PathRealizationFrontierPrunedRound218Level
 
 recoveredSourceFrontierLevel : ProofLevel
-recoveredSourceFrontierLevel =
-  R218.cmp98Equation120RecoveredSourceFrontierRound218Level
+recoveredSourceFrontierLevel = R218.cmp98Equation120RecoveredSourceFrontierRound218Level
 
 path13SelectedPhysicalBackgroundTargetLevel : ProofLevel
-path13SelectedPhysicalBackgroundTargetLevel =
-  Path13Target.cmp98Path13SelectedPhysicalBackgroundTargetLevel
+path13SelectedPhysicalBackgroundTargetLevel = Path13Target.cmp98Path13SelectedPhysicalBackgroundTargetLevel
 
 path13PositiveBondPerturbationProjectionLevel : ProofLevel
-path13PositiveBondPerturbationProjectionLevel =
-  PerturbationTarget.cmp98Path13PositiveBondPerturbationProjectionLevel
+path13PositiveBondPerturbationProjectionLevel = PerturbationTarget.cmp98Path13PositiveBondPerturbationProjectionLevel
 
 path13RationalSignedBondPerturbationProjectionLevel : ProofLevel
-path13RationalSignedBondPerturbationProjectionLevel =
-  PerturbationTarget.cmp98Path13RationalSignedBondProjectionLevel
+path13RationalSignedBondPerturbationProjectionLevel = PerturbationTarget.cmp98Path13RationalSignedBondProjectionLevel
 
 path13CanonicalLocalScalarActionLevel : ProofLevel
-path13CanonicalLocalScalarActionLevel =
-  PerturbationTarget.cmp98Path13CanonicalLocalScalarActionLevel
+path13CanonicalLocalScalarActionLevel = PerturbationTarget.cmp98Path13CanonicalLocalScalarActionLevel
+
+rationalUnitRealLieAdjointCompilerLevel : ProofLevel
+rationalUnitRealLieAdjointCompilerLevel = UnitAdjoint.rationalUnitQuaternionRealLieAdjointCompilerLevel
 
 twoCarrierSelectedBondEq119CompilerLevel : ProofLevel
-twoCarrierSelectedBondEq119CompilerLevel =
-  TwoCarrier.cmp98Equation119TwoCarrierSelectedBondLevel
+twoCarrierSelectedBondEq119CompilerLevel = TwoCarrier.cmp98Equation119TwoCarrierSelectedBondLevel
 
 twoCarrierCoarseBondFieldAssemblyLevel : ProofLevel
-twoCarrierCoarseBondFieldAssemblyLevel =
-  TwoCarrier.cmp98Equation119TwoCarrierFieldAssemblyLevel
+twoCarrierCoarseBondFieldAssemblyLevel = TwoCarrier.cmp98Equation119TwoCarrierFieldAssemblyLevel
+
+geometryOnlyRelativeContourCompilerLevel : ProofLevel
+geometryOnlyRelativeContourCompilerLevel = Geometry.cmp98Equation119GeometryOnlyRelativeContourLevel
+
+path13PrincipalYCompilerLevel : ProofLevel
+path13PrincipalYCompilerLevel = Path13Family.cmp98Path13PrincipalYCompilerLevel
+
+path13OuterYCompilerLevel : ProofLevel
+path13OuterYCompilerLevel = Path13Family.cmp98Path13OuterYCompilerLevel
+
+path13TwoCarrierSourceFamilyCompilerLevel : ProofLevel
+path13TwoCarrierSourceFamilyCompilerLevel = Path13Family.cmp98Path13TwoCarrierSourceFamilyCompilerLevel
+
+path13TwoCarrierFieldDerivativeCompilerLevel : ProofLevel
+path13TwoCarrierFieldDerivativeCompilerLevel = Path13Family.cmp98Path13TwoCarrierFieldDerivativeCompilerLevel
 
 literalCMP98RecoveredPath13BackgroundSameObjectLevel : ProofLevel
-literalCMP98RecoveredPath13BackgroundSameObjectLevel =
-  Path13Target.literalCMP98Path13SelectedPhysicalBackgroundProducerLevel
+literalCMP98RecoveredPath13BackgroundSameObjectLevel = Path13Target.literalCMP98Path13SelectedPhysicalBackgroundProducerLevel
 
 literalCMP98RecoveredPerturbationCoordinateSemanticsLevel : ProofLevel
-literalCMP98RecoveredPerturbationCoordinateSemanticsLevel =
-  PerturbationTarget.literalCMP98Path13GlobalLocalPerturbationSemanticsLevel
+literalCMP98RecoveredPerturbationCoordinateSemanticsLevel = Path13Family.literalCMP98Path13TwoCarrierSourceFamilyInputsLevel
