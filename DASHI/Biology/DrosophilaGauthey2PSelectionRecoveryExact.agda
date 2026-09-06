@@ -21,6 +21,11 @@ open import Agda.Builtin.String using (String)
 -- * vertical ROI-row concatenation across trials;
 -- * top 0.5 percent row selection;
 -- * export of selected traces without selected source indices.
+--
+-- A complete runtime audit of the deposited Data.zip subsequently established
+-- that the four source trial pickles and four corresponding n1000 label files
+-- are absent from that deposit. Exact trace-row recovery therefore remains a
+-- valid conditional compiler but cannot fire on the deposited source set.
 ------------------------------------------------------------------------
 
 record TwoPSelectionSourceReceipt : Set where
@@ -65,13 +70,15 @@ record SourceRecoveryBoundary : Set where
     planeLocalClusterIdentityIsNotGlobalIntegerLabelIdentity : Bool
     recoveryRequiresOriginalFourSourceTrialMatrices : Bool
     completeUnambiguousRecoveryRequiredForPromotion : Bool
+    depositedSourceSetDoesNotContainRequiredGeneratingInputs : Bool
+    conditionalCompilerDoesNotImplyRunnableDepositRoute : Bool
     recoveredSupervoxelStillDoesNotImplyMaleCNSNeuronIdentity : Bool
 
 open SourceRecoveryBoundary public
 
 canonicalSourceRecoveryBoundary : SourceRecoveryBoundary
 canonicalSourceRecoveryBoundary =
-  sourceRecoveryBoundary true true true true true true true
+  sourceRecoveryBoundary true true true true true true true true true
 
 record SourceRecoveryAssessment : Set where
   constructor sourceRecoveryAssessment
@@ -81,10 +88,11 @@ record SourceRecoveryAssessment : Set where
     noAmbiguousRows : Bool
     all940Recovered : Bool
     sourceROIIdentityAdmissible : Bool
+    externalScientificReceiptRequired : Bool
     sameAnimalMaleCNSIdentityAdmissible : Bool
 
 open SourceRecoveryAssessment public
 
-unpaidSourceRecoveryAssessment : SourceRecoveryAssessment
-unpaidSourceRecoveryAssessment =
-  sourceRecoveryAssessment false false false false false false
+closedNegativeDepositRecoveryAssessment : SourceRecoveryAssessment
+closedNegativeDepositRecoveryAssessment =
+  sourceRecoveryAssessment false false false false false true false
