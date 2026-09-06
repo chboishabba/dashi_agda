@@ -18,18 +18,11 @@ import DASHI.Analysis.RiemannG2LowGapClusteringMomentReductionExact as Moment
 -- Existing owners expose three views of one intended mathematical object:
 --
 --   * ActualSelectedPoleNearProducer: selected Weil/formula/window object;
---   * DirectFinitePoleNearProducer: explicit zero/gap + signed evaluation;
+--   * DirectFinitePoleNearProducer: literal zero/gap + signed evaluation;
 --   * LiteralTargetCenteredScalarProblem: final G2 q/zero/target consumer.
 --
--- The direct producer has now been strengthened in place: it names the literal
--- scalar problem it realizes. Therefore this module does not introduce another
--- moment definition. The only canonical unnormalised target-gap moment is
---
---   Literal.targetRelativeGapSecondMoment (Direct.literalProblem direct).
---
--- The normalized Nat ledger below must be an explicit normalization/ordering
--- realization of that literal scalar value. This keeps the discrete clustering
--- compiler honest without pretending an arbitrary Scalar is Nat.
+-- Every same-object proposition below is proof-bearing. Merely supplying a Set
+-- no longer counts as a weld receipt.
 ------------------------------------------------------------------------
 
 record SelectedDirectFiniteWeld
@@ -40,14 +33,33 @@ record SelectedDirectFiniteWeld
     (direct : Direct.DirectFinitePoleNearProducer) : Set₁ where
   field
     sameSelectedTarget : Set
+    sameSelectedTargetReceipt : sameSelectedTarget
+
     sameSelectedCutoff : Set
+    sameSelectedCutoffReceipt : sameSelectedCutoff
+
     sameNearZeroIndexFamily : Set
+    sameNearZeroIndexFamilyReceipt : sameNearZeroIndexFamily
+
     sameMultiplicityFunction : Set
+    sameMultiplicityFunctionReceipt : sameMultiplicityFunction
+
     sameTargetRelativeGapFunction : Set
+    sameTargetRelativeGapFunctionReceipt : sameTargetRelativeGapFunction
+
     samePoleTaper : Set
+    samePoleTaperReceipt : samePoleTaper
+
     sameFiniteSignedNearValue : Set
+    sameFiniteSignedNearValueReceipt : sameFiniteSignedNearValue
+
     sameExplicitFormulaObject : Set
+    sameExplicitFormulaObjectReceipt : sameExplicitFormulaObject
+
     selectedWindowIsDirectLiteralProblem : Set
+    selectedWindowIsDirectLiteralProblemReceipt :
+      selectedWindowIsDirectLiteralProblem
+
     weldReference : String
 
 open SelectedDirectFiniteWeld public
@@ -68,14 +80,26 @@ record SelectedDirectFiniteMomentProducer
   field
     normalizedOrdinateMoment : Moment.NormalizedLocalSecondMomentLedger
 
-    -- The Nat ledger is not a second mathematical moment. It must be proved to
-    -- represent the exact literal Scalar-valued moment above under the selected
-    -- normalization/order structure.
+    -- The Nat ledger is not a second mathematical moment. It must realize the
+    -- exact literal Scalar-valued moment under an explicit normalization/order.
     normalizedLedgerRealizesLiteralTargetGapSecondMoment : Set
+    normalizedLedgerRealizesLiteralTargetGapSecondMomentReceipt :
+      normalizedLedgerRealizesLiteralTargetGapSecondMoment
+
     normalizationPreservesLiteralNearFamily : Set
+    normalizationPreservesLiteralNearFamilyReceipt :
+      normalizationPreservesLiteralNearFamily
+
     normalizationPreservesLiteralMultiplicity : Set
+    normalizationPreservesLiteralMultiplicityReceipt :
+      normalizationPreservesLiteralMultiplicity
+
     radiusIsSelectedGapSplitD : Set
+    radiusIsSelectedGapSplitDReceipt : radiusIsSelectedGapSplitD
+
     everyHighGapCellPaysUnitNormalizedMoment : Set
+    everyHighGapCellPaysUnitNormalizedMomentReceipt :
+      everyHighGapCellPaysUnitNormalizedMoment
 
     momentReference : String
 
@@ -94,7 +118,7 @@ selectedDirectMomentGivesTwoToOneRatio producer =
 
 ------------------------------------------------------------------------
 -- Fan-out: one admitted direct producer already has the signed finite-near
--- evaluation receipt, while the downstream moment supplies the clustering ratio.
+-- evaluation receipt, while the downstream moment supplies clustering ratio.
 ------------------------------------------------------------------------
 
 directEvaluationReceiptStillAvailable :
@@ -161,6 +185,14 @@ record SelectedDirectFiniteMomentBoundary : Set where
     selectedAndDirectViewsMustBeWeldedIsTrue :
       selectedAndDirectViewsMustBeWelded ≡ true
 
+    selectedDirectWeldClaimsAreProofBearing : Bool
+    selectedDirectWeldClaimsAreProofBearingIsTrue :
+      selectedDirectWeldClaimsAreProofBearing ≡ true
+
+    momentNormalizationClaimsAreProofBearing : Bool
+    momentNormalizationClaimsAreProofBearingIsTrue :
+      momentNormalizationClaimsAreProofBearing ≡ true
+
     separateZeroFamilyForMomentRequired : Bool
     separateZeroFamilyForMomentRequiredIsFalse :
       separateZeroFamilyForMomentRequired ≡ false
@@ -201,13 +233,15 @@ canonicalSelectedDirectFiniteMomentBoundary : SelectedDirectFiniteMomentBoundary
 canonicalSelectedDirectFiniteMomentBoundary =
   selected-direct-finite-moment-boundary
     true refl
-    false refl
+    true refl
     true refl
     false refl
     true refl
     false refl
+    true refl
     false refl
     false refl
     false refl
     false refl
-    "The literal delta moment is no longer a free-floating search object: DirectFinitePoleNearProducer names a LiteralTargetCenteredScalarProblem, and that owner defines M2_delta = finiteNearSum(m_sigma*(ordinate-target)^2). Recover the actual direct producer first. Its signed approximant/error receipt is already part of that object, so do not re-evaluate a second finite sum. After the direct producer and existing selected producer are available, weld them; then prove the quantitative bound on the SAME literal M2_delta and attach the existing direct evaluation to the selected consumer. The discrete two-to-one compiler is downstream, and RH remains open."
+    false refl
+    "The literal delta moment is not a free-floating search object. DirectFinitePoleNearProducer names the canonical LiteralTargetCenteredScalarProblem, which owns M2_delta = finiteNearSum(m_sigma*(ordinate-target)^2). Recover the actual direct quantitative receipt first; then provide proof-bearing selected/direct same-object weld receipts. Any normalized clustering ledger must itself carry proof-bearing realization receipts back to that literal M2_delta. Do not re-evaluate a second finite sum or define a second moment. Exact clustering and RH remain open."
