@@ -8,32 +8,22 @@ import DASHI.Analysis.RiemannG2NarrowWindowNoCancellationReturnExact as Narrow
 import DASHI.Analysis.RiemannG2CutoffGrowthBidiExact as Growth
 import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as PQ8889
 import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap8894
+import DASHI.Analysis.RiemannAristotleQuarterPeriodDensityWindowLeanReturnExact as Q37
+import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact as Z38
 
 ------------------------------------------------------------------------
 -- QUARTER-PERIOD / ANALYTIC-LEAF RECONCILIATION
 --
--- A parallel RH branch currently reports the recursive analytic decomposition
+-- The earlier owner correctly separated regime-independent infrastructure from
+-- the quarter-period-sensitive finite-near consumer.  The checked §37 return
+-- now closes the separate width/crossing constant-window audit: it proves exact
+-- compatibility arithmetic and Nat cutoff existence under its hypotheses.
+-- §38 additionally supplies zeta's upper local count.
 --
---   H_X -> H_A -> H_M -> H_T -> H_W -> H_E
---
--- with H_Gamma independent and live in parallel.  This module does not import
--- that open draft branch and does not pretend its Agda proof terms are present
--- here.  It records only the cross-branch frontier correspondence needed to
--- reconcile that decomposition with the checked-Lean narrow-window and
--- optimized-gap-split no-go returns already owned on this branch.
---
--- Key correction: quarter-period crossing is necessary for phase cancellation,
--- but it is NOT a prerequisite for constructing regime-independent character,
--- modulation, or Gamma infrastructure.  Therefore H_X/H_A infrastructure and
--- Gamma precision may advance in parallel with the literal Lambda(t)/J(t)
--- scaling audit. H_E cannot close the unchanged narrow scalar consumer while
--- J*Lambda <= pi/2.
---
--- The 8894 gap-split return additionally prunes the transported quadratic-decay
--- donor as a sufficient growing-cutoff closure.  It does NOT refute every
--- adaptive inverse-width route: its density consequence also has J=O(1/Lambda),
--- so the surviving clustering route becomes a constant-window compatibility
--- problem on J*Lambda.
+-- Therefore widthAndCrossingScale is no longer a live work package.  This file
+-- is updated in place so downstream schedulers see the closure through the same
+-- owner.  The genuinely new analytic payment is actual-zeta low-gap clustering;
+-- finite-near evaluation and Gamma precision remain independent existing lanes.
 ------------------------------------------------------------------------
 
 data AnalyticLeafCode : Set where
@@ -103,10 +93,6 @@ canonicalCrossBranchAnalyticFrontierReturn =
     true refl
     "Reported dependency: H_X -> H_A -> H_M -> H_T -> direct phase statistic -> H_E, with H_T -> H_W -> explicit window -> H_E and H_Gamma feeding the final consumer independently."
 
-------------------------------------------------------------------------
--- What may be worked before quarter-period crossing?
-------------------------------------------------------------------------
-
 CanAdvanceBeforeCrossing : AnalyticLeafCode -> Set
 CanAdvanceBeforeCrossing HXcomplexCharacter = ⊤
 CanAdvanceBeforeCrossing HAtestModulationShift = ⊤
@@ -127,6 +113,9 @@ quarterPeriodCrossingNecessaryForCancellation =
   Narrow.survivingRouteRequiresQuarterPeriodCrossingIsTrue
     Narrow.canonicalNarrowWindowNoCancellationReturn
 
+-- Historical pre-§37 growth owner: this remains true of that owner's local
+-- state, but the later checked producer discharges the corresponding global
+-- scheduling leaf below.
 currentCutoffStageStillRequiresCrossing :
   Growth.currentCutoffGrowthStage ≡ Growth.crossingLawRequired
 currentCutoffStageStillRequiresCrossing = refl
@@ -152,19 +141,39 @@ coarseCountingClusteringPrunedBy8894 :
   Gap8894.GapSplitRelevant Gap8894.deriveClusteringFromCoarseCountingOnly -> ⊥
 coarseCountingClusteringPrunedBy8894 = Gap8894.coarseCountingClusteringPruned
 
-adaptiveInverseWidthRouteNotRefutedBy8894DensityCut :
+quarterDensityComparisonPrunedBy8896 :
+  Gap8894.GapSplitRelevant
+    Gap8894.compareQuarterPeriodLowerConstantWithDensityUpperConstant -> ⊥
+quarterDensityComparisonPrunedBy8896 = Gap8894.quarterDensityConstantComparisonPruned
+
+zetaUpperCountSearchPrunedBy8896 :
+  Gap8894.GapSplitRelevant Gap8894.recoverZetaUpperLocalCount -> ⊥
+zetaUpperCountSearchPrunedBy8896 = Gap8894.zetaUpperLocalCountSearchPruned
+
+quarterDensityNatWindowChecked :
+  Q37.explicitIntegerCutoffExistenceOwnedInLean
+    Q37.canonicalQuarterPeriodDensityWindowReturn ≡ true
+quarterDensityNatWindowChecked = refl
+
+zetaShortWindowUpperCountChecked :
+  Z38.zetaShortWindowUpperCountOwnedInLean Z38.canonicalZetaLocalCountLeanReturn
+  ≡ true
+zetaShortWindowUpperCountChecked = refl
+
+adaptiveInverseWidthRouteNotRefutedByDensityCut :
   Gap8894.densityCutRefutesEveryAdaptiveInverseWidthRoute
     Gap8894.canonicalGapSplitClusteringLeanReturn8894 ≡ false
-adaptiveInverseWidthRouteNotRefutedBy8894DensityCut =
+adaptiveInverseWidthRouteNotRefutedByDensityCut =
   Gap8894.densityCutRefutesEveryAdaptiveInverseWidthRouteIsFalse
     Gap8894.canonicalGapSplitClusteringLeanReturn8894
 
 ------------------------------------------------------------------------
--- Parallel live work packages.
+-- Parallel live work packages after 8896.
 ------------------------------------------------------------------------
 
 data LiveWorkPackage : Set where
   widthAndCrossingScale
+  actualZetaLowGapClustering
   canonicalCharacterInfrastructure
   gammaPrecisionRepair
   crossedRegimeFiniteEvaluation
@@ -172,14 +181,21 @@ data LiveWorkPackage : Set where
   : LiveWorkPackage
 
 data WorkState : Set where
-  live blocked conditional : WorkState
+  closed live blocked conditional : WorkState
 
 workState : LiveWorkPackage -> WorkState
-workState widthAndCrossingScale = live
+workState widthAndCrossingScale = closed
+workState actualZetaLowGapClustering = live
 workState canonicalCharacterInfrastructure = live
 workState gammaPrecisionRepair = live
 workState crossedRegimeFiniteEvaluation = blocked
 workState finalIndependentBudgetCombination = conditional
+
+widthAndCrossingScaleClosed : workState widthAndCrossingScale ≡ closed
+widthAndCrossingScaleClosed = refl
+
+actualZetaClusteringIsLive : workState actualZetaLowGapClustering ≡ live
+actualZetaClusteringIsLive = refl
 
 record CrossBranchRegimeReconciliationBoundary : Set where
   constructor cross-branch-regime-reconciliation-boundary
@@ -196,13 +212,12 @@ record CrossBranchRegimeReconciliationBoundary : Set where
     phaseSensitiveFiniteEvaluationCanCloseInPinnedNarrowRegimeIsFalse :
       phaseSensitiveFiniteEvaluationCanCloseInPinnedNarrowRegime ≡ false
 
-    widthCrossingCharacterAndGammaMayAdvanceInParallel : Bool
-    widthCrossingCharacterAndGammaMayAdvanceInParallelIsTrue :
-      widthCrossingCharacterAndGammaMayAdvanceInParallel ≡ true
+    widthCrossingConstantComparisonClosedBy8896 : Bool
+    widthCrossingConstantComparisonClosedBy8896IsTrue :
+      widthCrossingConstantComparisonClosedBy8896 ≡ true
 
-    quantitativeClusterNeedsFreshAnalysis : Bool
-    quantitativeClusterNeedsFreshAnalysisIsFalse :
-      quantitativeClusterNeedsFreshAnalysis ≡ false
+    actualZetaClusteringStillOpen : Bool
+    actualZetaClusteringStillOpenIsTrue : actualZetaClusteringStillOpen ≡ true
 
     arbitraryGammaUpperBoundNeedsFreshSearch : Bool
     arbitraryGammaUpperBoundNeedsFreshSearchIsFalse :
@@ -221,7 +236,7 @@ canonicalCrossBranchRegimeReconciliationBoundary =
     false refl
     false refl
     true refl
+    true refl
     false refl
     false refl
-    false refl
-    "The narrow-window no-cancellation theorem, the 8894 optimized gap-split shape no-go, and the PR #677 recursive analytic frontier are complementary. Build canonical character/modulation infrastructure and repair Gamma precision in parallel with the literal Lambda(t)/J(t) crossing audit. Do not schedule H_E as a cancellation closure on the unchanged problem until pi/2 < J*Lambda. The 8894 return additionally prunes sharpening the same quadratic-decay donor, taper retuning, and clustering-by-coarse-counting. Its density cut scales as J=O(1/Lambda), so it does not by itself refute our adaptive inverse-width regime; the surviving gap-split question is an explicit lower-versus-upper constant window for J*Lambda or a genuinely different signed mechanism. The 8889 return still removes fresh cluster-margin derivation and generic Gamma-bound search."
+    "The checked §37 return closes the literal J*Lambda lower-versus-upper constant-window audit, including Nat cutoff existence, and §38 closes zeta upper local counting. Those are no longer parallel search packages. The gap-split owner now routes directly to actual-zeta low-gap clustering. Character/modulation infrastructure, the existing same-object finite-near evaluator, and Gamma precision remain separate genuine dependencies. No checked return here supplies the clustering inequality or RH."
