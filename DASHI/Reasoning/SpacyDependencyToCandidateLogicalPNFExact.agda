@@ -52,7 +52,6 @@ record DependencyWitness : Set where
     head : Spacy.SpacyTokenObservation
     shape : DependencyShape
     parserDependencyReference : String
-
 open DependencyWitness public
 
 data SemanticFragmentKind : Set where
@@ -81,7 +80,6 @@ record CandidateSemanticFragment : Set where
     confidenceOrRankingReference : String
     candidateOnly : Bool
     candidateOnlyIsTrue : candidateOnly ≡ true
-
 open CandidateSemanticFragment public
 
 record ParserSemanticBidi : Set₁ where
@@ -91,15 +89,11 @@ record ParserSemanticBidi : Set₁ where
     reverseSupport : CandidateSemanticFragment → List DependencyWitness
     forwardRuleReference : String
     reverseRuleReference : String
-
 open ParserSemanticBidi public
 
 record CandidateSemanticFibre : Set where
   constructor candidateSemanticFibre
-  field
-    candidates : List CandidateSemanticFragment
-    fibreReference : String
-
+  field candidates : List CandidateSemanticFragment; fibreReference : String
 open CandidateSemanticFibre public
 
 record SemanticResolutionReceipt (fibre : CandidateSemanticFibre) : Set₁ where
@@ -111,7 +105,6 @@ record SemanticResolutionReceipt (fibre : CandidateSemanticFibre) : Set₁ where
     scopeResolutionReference : String
     entityResolutionReference : String
     reviewerOrResolverReference : String
-
 open SemanticResolutionReceipt public
 
 record ResolvedCandidateToEvidencePNF
@@ -120,14 +113,11 @@ record ResolvedCandidateToEvidencePNF
     (assertion : EvidencePNF.PredicateNormalAssertion) : Set₁ where
   constructor resolvedCandidateToEvidencePNF
   field
-    formulaCorrespondenceReference : String
-    predicateAtomCorrespondenceReference : String
-    quantifierCorrespondenceReference : String
-    inferentialForceCorrespondenceReference : String
+    formulaCorrespondenceReference predicateAtomCorrespondenceReference : String
+    quantifierCorrespondenceReference inferentialForceCorrespondenceReference : String
     scopeCorrespondenceReference : String
     worldIdentityStillExternal : Bool
     worldIdentityStillExternalIsTrue : worldIdentityStillExternal ≡ true
-
 open ResolvedCandidateToEvidencePNF public
 
 ------------------------------------------------------------------------
@@ -135,37 +125,22 @@ open ResolvedCandidateToEvidencePNF public
 ------------------------------------------------------------------------
 
 subjectCandidate : DependencyWitness → String → String → CandidateSemanticFragment
-subjectCandidate witness eventName entityName =
-  candidateSemanticFragment
-    "spacy-nsubj-candidate"
-    actorFragment
-    (atom "Actor" (eventTerm eventName ∷ entityTerm entityName ∷ []))
-    witness
-    "nominal subject proposes an actor/event relation"
-    "dependency-rule:nsubj->Actor"
-    true refl
+subjectCandidate witness eventName entityName = candidateSemanticFragment
+  "spacy-nsubj-candidate" actorFragment
+  (atom "Actor" (eventTerm eventName ∷ entityTerm entityName ∷ [])) witness
+  "nominal subject proposes an actor/event relation" "dependency-rule:nsubj->Actor" true refl
 
 objectCandidate : DependencyWitness → String → String → CandidateSemanticFragment
-objectCandidate witness eventName entityName =
-  candidateSemanticFragment
-    "spacy-obj-candidate"
-    patientFragment
-    (atom "Patient" (eventTerm eventName ∷ entityTerm entityName ∷ []))
-    witness
-    "direct object proposes a patient/event relation"
-    "dependency-rule:obj->Patient"
-    true refl
+objectCandidate witness eventName entityName = candidateSemanticFragment
+  "spacy-obj-candidate" patientFragment
+  (atom "Patient" (eventTerm eventName ∷ entityTerm entityName ∷ [])) witness
+  "direct object proposes a patient/event relation" "dependency-rule:obj->Patient" true refl
 
 negationCandidate : DependencyWitness → Formula → CandidateSemanticFragment
-negationCandidate witness body =
-  candidateSemanticFragment
-    "spacy-neg-candidate"
-    negationFragment
-    (notF body)
-    witness
-    "dependency negation proposes scoped logical negation; scope remains reviewable"
-    "dependency-rule:neg->notF"
-    true refl
+negationCandidate witness body = candidateSemanticFragment
+  "spacy-neg-candidate" negationFragment (notF body) witness
+  "dependency negation proposes scoped logical negation; scope remains reviewable"
+  "dependency-rule:neg->notF" true refl
 
 contentClauseCandidate : DependencyWitness → String → String → CandidateSemanticFragment
 contentClauseCandidate witness governorEvent contentEvent =
