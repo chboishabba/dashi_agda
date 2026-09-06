@@ -185,6 +185,7 @@ record RecognitionLensReceipt : Set where
     lens : RecognitionCriticalLens
     source : Sources.LayeredClaimReceipt
     sourceLayer : Sources.ClaimLayer
+    sourceLayerMatches : Sources.layer source ≡ sourceLayer
     exactCombinedConclusionAuthoredBySource : Bool
     exactCombinedConclusionAuthoredBySourceIsFalse :
       exactCombinedConclusionAuthoredBySource ≡ false
@@ -197,35 +198,35 @@ coulthardLensReceipt : RecognitionLensReceipt
 coulthardLensReceipt = recognition-lens-receipt
   coulthardColonialRecognitionLens
   Sources.coulthardRecognitionPowerArgument
-  Sources.sourceCriticalTheory
+  Sources.sourceCriticalTheory refl
   false refl false refl
 
 povinelliLensReceipt : RecognitionLensReceipt
 povinelliLensReceipt = recognition-lens-receipt
   povinelliAuthenticityLegibilityLens
   Sources.povinelliCunningRecognitionArgument
-  Sources.sourceAnthropologicalTheory
+  Sources.sourceAnthropologicalTheory refl
   false refl false refl
 
 moretonRobinsonLensReceipt : RecognitionLensReceipt
 moretonRobinsonLensReceipt = recognition-lens-receipt
   moretonRobinsonPossessiveSovereigntyLens
   Sources.moretonRobinsonPossessiveWhiteSovereigntyArgument
-  Sources.sourceCriticalTheory
+  Sources.sourceCriticalTheory refl
   false refl false refl
 
 nicholsLensReceipt : RecognitionLensReceipt
 nicholsLensReceipt = recognition-lens-receipt
   nicholsRecursiveDispossessionLens
   Sources.nicholsRecursiveDispossessionArgument
-  Sources.sourceCriticalTheory
+  Sources.sourceCriticalTheory refl
   false refl false refl
 
 sensibLawInfantilisationReceipt : RecognitionLensReceipt
 sensibLawInfantilisationReceipt = recognition-lens-receipt
   sensibLawInfantilisationLens
   Sources.nativeTitleInfantilisationCriticalSynthesis
-  Sources.dashCriticalSynthesis
+  Sources.dashCriticalSynthesis refl
   false refl false refl
 
 ------------------------------------------------------------------------
