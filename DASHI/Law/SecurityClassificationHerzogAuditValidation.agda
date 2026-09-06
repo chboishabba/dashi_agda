@@ -1,0 +1,31 @@
+module DASHI.Law.SecurityClassificationHerzogAuditValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Law.HerzogRallyPoliceConductSourceAuditExact as Audit
+import DASHI.Law.SecurityClassificationProvenanceBidiExact as Classification
+import DASHI.Law.AustraliaMilitaryMarathonSecuritySourceReceiptsExact as Contemporary
+
+leccScopeIsNotFinalFinding :
+  Audit.adjudicatedOrFinalFinding Audit.leccScopeReceipt ≡ false
+leccScopeIsNotFinalFinding = refl
+
+legalObserverReportIsNotLECCFinding :
+  Audit.legalObserverReportEqualsLECCFinalFinding Audit.canonicalPoliceAuditBoundary ≡ false
+legalObserverReportIsNotLECCFinding = refl
+
+postHocCrowdLabelCannotBackfillPreActionClassification :
+  Classification.firstClassificationResidual
+    Classification.assemblyWasClassifiedAsRiskBeforeAction
+    Classification.canonicalPublicNarrativeOnlyCutset
+  ≡ Classification.preActionDocumentResidual
+postHocCrowdLabelCannotBackfillPreActionClassification =
+  Classification.preActionClassificationCannotBeBackfilledByPostHocNarrative
+
+warshipCorrectionPinned :
+  Contemporary.iranianWarshipMayBeRelabelledCivilianShip Contemporary.canonicalContemporaryBoundary ≡ false
+warshipCorrectionPinned = refl
+
+marathonEscortReportingNotOfficialAdmission :
+  Contemporary.investigativeMarathonEscortReportEqualsOfficialPoliceAdmission Contemporary.canonicalContemporaryBoundary ≡ false
+marathonEscortReportingNotOfficialAdmission = refl
