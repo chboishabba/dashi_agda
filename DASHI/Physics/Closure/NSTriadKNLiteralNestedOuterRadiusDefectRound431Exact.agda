@@ -50,6 +50,7 @@ import DASHI.Physics.Closure.NSTriadKNStrongLowLiteralNestedKernelRound329Exact 
 import DASHI.Physics.Closure.NSTriadKNLiteralNestedOuterAntiParallelNormRound430Exact as R430
 import DASHI.Physics.Closure.NSTriadKNHHAntiParallelQuadraticKernelNormRound174Exact as R174
 
+F : C3.RealField _
 F = R329.F
 
 record LiteralOuterRadiusCalibration
