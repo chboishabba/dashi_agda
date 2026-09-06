@@ -10,12 +10,13 @@ import DASHI.Physics.YangMills.YMOperatorDomainContinuumSources2026Exact as Src
 import DASHI.Physics.YangMills.BalabanClayDenseCoreSpectralGapExact as DenseGap
 import DASHI.Physics.YangMills.BalabanVacuumOrthogonalMoscoRecoveryExact as VacuumRecovery
 import DASHI.Physics.YangMills.BalabanCMP98Equation119PositiveBondSelectedCutFederbushRound184Exact as Eq119R184
+import DASHI.Physics.YangMills.BalabanCMP98SelectedPhysicalUnitCarrierRound187Exact as Eq119R187
+import DASHI.Physics.YangMills.BalabanCMP98RawUnitPathHomomorphismRound189Exact as Eq119R189
 import DASHI.Physics.YangMills.WightmanEndpointLemmaQueue as WightmanQueue
 import DASHI.Physics.Closure.YMStrictSelectedHodgeVariationPairing as FiniteVariation
 import DASHI.Physics.Closure.YMSprint129MoscoLiminfStrongResolventClosure as Sprint129
 import DASHI.Physics.Closure.YMSprint129MoscoRecoveryNoPollutionClosure as Sprint129Recovery
 import DASHI.Physics.Closure.SchrodingerSelfAdjointEvolutionReceipt as SelfAdjointReceipt
-import DASHI.Quantum.Stone as Stone
 
 record AgdaToLeanInterface : Set where
   constructor agda-to-lean-interface
@@ -35,7 +36,7 @@ domainAwareHamiltonianInterface = agda-to-lean-interface
   "Tosio Kato, Perturbation Theory for Linear Operators, DOI 10.1007/978-3-642-66282-9"
   "selected gauge-invariant L2 carrier H; domain D(H); operator H : D(H) -> H; common invariant dense core; symmetry/self-adjointness on the stated domain; same-object identification with the selected Yang-Mills action variation"
   false false
-  "The selected physical-carrier route is now the gauge-invariant L2 subspace returned by Lean, so constructing a separate quotient of configuration space by gauge orbits is not a mandatory M7 payment. What remains is the genuine operator domain/core and self-adjoint selected-form realization."
+  "The selected physical-carrier route is the gauge-invariant L2 subspace returned by Lean; a separate configuration-space gauge-orbit quotient is not a mandatory M7 payment. What remains is the genuine operator domain/core and self-adjoint selected-form realization."
 
 vacuumRecoveryGapInterface : AgdaToLeanInterface
 vacuumRecoveryGapInterface = agda-to-lean-interface
@@ -43,7 +44,7 @@ vacuumRecoveryGapInterface = agda-to-lean-interface
   "Umberto Mosco, Convergence of Convex Sets and of Solutions of Variational Inequalities, DOI 10.1016/0001-8708(69)90009-7; Kazuhiro Kuwae and Takashi Shioya, Convergence of Spectral Structures: A Functional Analytic Theory and Its Applications to Spectral Geometry, DOI 10.4310/cag.2003.v11.n4.a1"
   "for each limiting vacuum-orthogonal vector, provide a finite vacuum-orthogonal recovery vector with norm domination, the finite uniform gap, and recovery-energy upper bound"
   true false
-  "BalabanVacuumOrthogonalMoscoRecoveryExact already proves the generic recovery-system compiler in Agda. What remains is the physical YM recovery-system producer. Sprint129 recovery flags/evidence rows do not instantiate this record."
+  "BalabanVacuumOrthogonalMoscoRecoveryExact proves the generic recovery-system compiler in Agda. Sprint129 recovery flags/evidence rows do not instantiate this record; the physical YM recovery-system producer remains open."
 
 denseCoreGapInterface : AgdaToLeanInterface
 denseCoreGapInterface = agda-to-lean-interface
@@ -80,13 +81,33 @@ vacuumRecoveryGapCompilerReturned :
   VacuumRecovery.PhysicalVacuumGapAfterRecovery system
 vacuumRecoveryGapCompilerReturned = VacuumRecovery.physicalVacuumGapAfterRecovery
 
--- Strongest current Eq. (119) consumer.
+------------------------------------------------------------------------
+-- Eq. (119) theorem-level BIDI progression.
+------------------------------------------------------------------------
+
+-- R184 closes the downstream selected-cut/Federbush derivative compiler.
 eq119PositiveBondSelectedCutFederbushCompilerLevel =
   Eq119R184.cmp98Equation119PositiveBondSelectedCutFederbushRound184Level
 
--- Existing finite selected-Hodge/action-variation calculation. This is real
--- repository structure, but its owner deliberately keeps physical promotion
--- false, so it cannot by itself identify the continuum Hamiltonian.
+-- R187 constructs the exact periodic unit-quaternion realization directly
+-- from the already-selected physical background.
+eq119PhysicalPeriodicRealizationLevel =
+  Eq119R187.cmp98SelectedPhysicalPeriodicRealizationRound187Level
+
+-- R189 proves erasure preserves identity, multiplication, inverse, and
+-- arbitrary path holonomy, closing the raw-rational / unit-quaternion path seam.
+eq119RawUnitPathHomomorphismLevel =
+  Eq119R189.cmp98RawUnitPathHolomorphismRound189Level
+
+-- After these closures the exact source-side leaf is no longer "construct the
+-- background" or "choose a principal cut".  It is the same-object equality
+-- between the CMP109 transported-relative bond and CMP98 literal relative
+-- contour on the shared positive coarse bond/embedded fine site.
+
+------------------------------------------------------------------------
+-- Existing finite selected-Hodge/action-variation calculation.
+------------------------------------------------------------------------
+
 finiteSelectedVariationPairingCalculated : Bool
 finiteSelectedVariationPairingCalculated =
   FiniteVariation.StrictSelectedHodgeVariationPairingCalculation.strictPairingCalculated
@@ -110,13 +131,9 @@ finiteSelectedVariationPairingPhysicalPromotionIsFalse =
     FiniteVariation.canonicalStrictSelectedHodgeVariationPairingCalculation
 
 ------------------------------------------------------------------------
--- Proof-strength audits that prevent name-based promotion.
+-- Proof-strength audits that prevent name/receipt-based promotion.
 ------------------------------------------------------------------------
 
--- `StoneSelfAdjoint` is historically named, but structurally contains only a
--- symmetry field. It does not carry a partial operator domain, adjoint-domain
--- equality or closedness. Therefore the repo's Stone theorem is useful to M8's
--- evolution/symmetry architecture but cannot close analytic M7c.
 record AnalyticSelfAdjointnessShape : Set₁ where
   field
     Carrier : Set
@@ -134,9 +151,6 @@ stoneSelfAdjointRecordCarriesAnalyticDomainShapeIsFalse :
   stoneSelfAdjointRecordCarriesAnalyticDomainShape ≡ false
 stoneSelfAdjointRecordCarriesAnalyticDomainShapeIsFalse = refl
 
--- Sprint129 calls the recovery sequence constructed, but the object is a Bool
--- plus evidence rows. It does not expose the vector-valued recovery map and
--- inequalities required by VacuumOrthogonalRecoverySystem.
 sprint129RecoveryReceiptSaysConstructed : Bool
 sprint129RecoveryReceiptSaysConstructed =
   Sprint129Recovery.moscoRecoverySequenceConstructedHere
@@ -153,8 +167,6 @@ sprint129RecoveryReceiptInstantiatesVacuumRecoverySystemIsFalse :
   sprint129RecoveryReceiptInstantiatesVacuumRecoverySystem ≡ false
 sprint129RecoveryReceiptInstantiatesVacuumRecoverySystemIsFalse = refl
 
--- The Wightman queue is an explicit postulate-backed logical interface. This
--- fact must outrank source-surface `proofTargetIsClosed` flags when deciding M8.
 wightmanQueueConstructiveDynamicsKernelClosed : Bool
 wightmanQueueConstructiveDynamicsKernelClosed = false
 
@@ -183,8 +195,12 @@ record YMOperatorContinuumFrontier : Set where
     sprint129MoscoEvidenceReceiptClosed : Bool
     sprint129AnalyticClosedFormKernelTheoremClosed : Bool
 
+    -- Backward-compatible R184 status plus the stronger later physical route.
     cmp98Equation119CompilerThroughRound184Closed : Bool
     cmp98SelectedBackgroundAndCutPhysicalInstantiationClosed : Bool
+    cmp98PhysicalPeriodicRealizationRound187Closed : Bool
+    cmp98RawUnitPathHomomorphismRound189Closed : Bool
+    cmp98CMP109TransportedRelativeEqualsCMP98LiteralContourClosed : Bool
 
     finiteSelectedHodgeVariationPairingClosed : Bool
     physicalSelectedVariationPairingPromoted : Bool
@@ -210,6 +226,7 @@ canonicalYMOperatorContinuumFrontier = ym-operator-continuum-frontier
   true true true
   Sprint129.mc1TheoremProvedHere false
   true false
+  true true false
   finiteSelectedVariationPairingCalculated
   finiteSelectedVariationPairingPhysicalPromotion
   false
@@ -248,9 +265,18 @@ eq119CompilerThroughRound184ClosedIsTrue :
   cmp98Equation119CompilerThroughRound184Closed canonicalYMOperatorContinuumFrontier ≡ true
 eq119CompilerThroughRound184ClosedIsTrue = refl
 
-eq119SelectedBackgroundAndCutPhysicalInstantiationClosedIsFalse :
-  cmp98SelectedBackgroundAndCutPhysicalInstantiationClosed canonicalYMOperatorContinuumFrontier ≡ false
-eq119SelectedBackgroundAndCutPhysicalInstantiationClosedIsFalse = refl
+eq119PhysicalPeriodicRealizationRound187ClosedIsTrue :
+  cmp98PhysicalPeriodicRealizationRound187Closed canonicalYMOperatorContinuumFrontier ≡ true
+eq119PhysicalPeriodicRealizationRound187ClosedIsTrue = refl
+
+eq119RawUnitPathHomomorphismRound189ClosedIsTrue :
+  cmp98RawUnitPathHomomorphismRound189Closed canonicalYMOperatorContinuumFrontier ≡ true
+eq119RawUnitPathHomomorphismRound189ClosedIsTrue = refl
+
+eq119TransportedRelativeSameObjectStillOpen :
+  cmp98CMP109TransportedRelativeEqualsCMP98LiteralContourClosed
+    canonicalYMOperatorContinuumFrontier ≡ false
+eq119TransportedRelativeSameObjectStillOpen = refl
 
 finiteSelectedHodgeVariationPairingClosedIsTrue :
   finiteSelectedHodgeVariationPairingClosed canonicalYMOperatorContinuumFrontier ≡ true
