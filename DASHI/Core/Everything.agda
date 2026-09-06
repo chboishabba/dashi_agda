@@ -32,6 +32,8 @@ import DASHI.Core.DiscriminatorSynthesisExact
 import DASHI.Core.MechanismModelDiscriminationExact
 import DASHI.Core.MechanismDiscriminationApplicationAtlasExact
 import DASHI.Core.AdaptiveMechanismDiscriminationPlannerExact
+import DASHI.Core.ResidualActionPolicyExact
+import DASHI.Core.ResidualActionApplicationAtlasExact
 import DASHI.Core.SequentialConsumerExperimentPlannerExact
 import DASHI.Core.SequentialRobustActionabilityPlannerExact
 import DASHI.Core.SequentialRelationalExperimentPlannerExact
