@@ -4,7 +4,10 @@ open import DASHI.Core.Prelude
 import DASHI.Economics.AIFinancingReflexivityExact as Reflexive
 import DASHI.Economics.AITerminalPayerEconomicValidationExact as Terminal
 import DASHI.Economics.AIManufacturingChokepointTimescaleExact as Manufacturing
-import DASHI.Economics.AIStructuredInfrastructureCommonFactorRiskExact as Structured
+import DASHI.Economics.AIStructuredInfrastructureCommonFactorRiskExact as AIStructured
+import DASHI.Economics.ReflexiveFlowValidationExact as Econ
+import DASHI.Economics.CommonFactorStructuredFinanceExact as Structured
+import DASHI.Economics.ManufacturingScarcityTimescaleExact as Scarcity
 import DASHI.Economics.UnitEconomicsMarginExact as Unit
 import DASHI.Economics.PolicyBackstopCommercialDisciplineExact as Policy
 
@@ -55,7 +58,7 @@ regimeVectorDoesNotAutoPromoteToBubble ()
 
 -- Cross-owner firewalls kept at the aggregate surface.
 markedGainDoesNotCloseExternalCash :
-  Reflexive.Econ.MarkedGainImpliesExternalCashPermission → ⊥
+  Econ.MarkedGainImpliesExternalCashPermission → ⊥
 markedGainDoesNotCloseExternalCash = Reflexive.markedGainDoesNotCloseExternalCash
 
 highUsageDoesNotClosePositiveUnitEconomics :
@@ -64,14 +67,14 @@ highUsageDoesNotClosePositiveUnitEconomics =
   Unit.highUsageDoesNotAutoPromoteToPositiveUnitEconomics
 
 scarcityDoesNotCloseDownstreamViability :
-  Manufacturing.Scarcity.ScarcityRentImpliesDownstreamViabilityPermission → ⊥
+  Scarcity.ScarcityRentImpliesDownstreamViabilityPermission → ⊥
 scarcityDoesNotCloseDownstreamViability =
   Manufacturing.scarcityRentDoesNotCloseDownstreamViability
 
 projectMultiplicityDoesNotCloseRiskIndependence :
-  Structured.Structured.ProjectMultiplicityImpliesRiskIndependencePermission → ⊥
+  Structured.ProjectMultiplicityImpliesRiskIndependencePermission → ⊥
 projectMultiplicityDoesNotCloseRiskIndependence =
-  Structured.projectMultiplicityDoesNotCloseRiskIndependence
+  AIStructured.projectMultiplicityDoesNotCloseRiskIndependence
 
 policySupportDoesNotCloseCommercialViability :
   Policy.PolicySupportImpliesCommercialViabilityPermission → ⊥
