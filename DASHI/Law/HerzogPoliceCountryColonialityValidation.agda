@@ -1,0 +1,39 @@
+module DASHI.Law.HerzogPoliceCountryColonialityValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Law.ComparativeSettlerColonialSovereigntySourceBidiExact as Sovereignty
+import DASHI.Law.AustraliaIsraelMilitarySecurityProvenanceExact as AUIsrael
+import DASHI.Law.HerzogPoliceCountryColonialityCrossPollinationExact as Cross
+
+maboReceiptRemainsCourtAttributed :
+  Sovereignty.role Sovereignty.maboSurvivalReceipt ≡ Sovereignty.highCourtHolding
+maboReceiptRemainsCourtAttributed = refl
+
+uluruNeverCededRemainsFirstNationsAttributed :
+  Sovereignty.role Sovereignty.uluruNeverCededReceipt ≡ Sovereignty.firstNationsConsensusStatement
+uluruNeverCededRemainsFirstNationsAttributed = refl
+
+palestinianSovereigntyConstraintRemainsICJAttributed :
+  Sovereignty.role Sovereignty.icjNoIsraeliSovereigntyReceipt ≡ Sovereignty.icjAdvisoryOpinion
+palestinianSovereigntyConstraintRemainsICJAttributed = refl
+
+australiaPalestineComparisonStaysStructuralNotIdentical :
+  Sovereignty.sameHistoricalDoctrine Sovereignty.canonicalComparativeFibre ≡ false
+australiaPalestineComparisonStaysStructuralNotIdentical = refl
+
+militaryIndustrialLinkDoesNotClosePoliceOperationalTransfer :
+  AUIsrael.directPoliceOperationalTransferProven AUIsrael.canonicalBilateralPolicyFibre ≡ false
+militaryIndustrialLinkDoesNotClosePoliceOperationalTransfer = refl
+
+publicOrderLabelDoesNotExhaustHerzogPoliticalContent :
+  Cross.publicOrderLabelExhaustsPoliticalMeaning Cross.canonicalHerzogColonialityFibre ≡ false
+publicOrderLabelDoesNotExhaustHerzogPoliticalContent = refl
+
+colonialityHomologyDoesNotCloseIntent :
+  Cross.colonialityHomologyAutomaticallyClosesIntent Cross.canonicalFascismPolicingAuditBoundary ≡ false
+colonialityHomologyDoesNotCloseIntent = refl
+
+propertyRecognitionDoesNotExhaustCountry :
+  Cross.nativeTitleRecognitionExhaustsCountry Cross.canonicalCountryRecognitionBoundary ≡ false
+propertyRecognitionDoesNotExhaustCountry = refl
