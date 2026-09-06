@@ -11,12 +11,6 @@ import DASHI.Biology.Microbiology.QuorumSensingContextExact as QS
 
 ------------------------------------------------------------------------
 -- NINE-DAY PREPARATION -> MOLECULAR-MECHANISM WELD
---
--- This closes a structural gap in the earlier tranche: known Allium chemical
--- transformations and direct S. aureus allicin-thiolome evidence now feed the
--- eyesalve mechanism frontier through explicit target-preparation obligations.
--- Nothing here claims the relevant compounds were measured in the historical
--- mixture at day 9; that remains an experimental producer.
 ------------------------------------------------------------------------
 
 data MechanismLane : Set where
@@ -47,9 +41,7 @@ allicinThiolCandidate = nineDayMechanismCandidate
   allicinThiolStress
   "Allium allicin identity and thiol chemistry"
   "Loi et al. 2019 S. aureus allicin thiolome"
-  true
-  false
-  false
+  true false false
   "allicin is evidenced in reconstructed eyesalve work, but the full day-9 target-system thiolome remains unmeasured"
 
 staphRegulatorCandidate : NineDayMechanismCandidate
@@ -57,29 +49,23 @@ staphRegulatorCandidate = nineDayMechanismCandidate
   transcriptionalRegulatorPerturbation
   "allicin S-thioallylation chemistry"
   "MgrA/SarA/SarH1/SarS targets in S. aureus under allicin stress"
-  true
-  false
-  false
-  "direct species-level target evidence sharpens the candidate without proving that the complete eyesalve phenotype is mediated through these regulators"
+  true false false
+  "direct species-level target evidence sharpens the candidate without proving mixture-level mediation"
 
 quorumCandidate : NineDayMechanismCandidate
 quorumCandidate = nineDayMechanismCandidate
   quorumRelatedRegulatoryPerturbation
   "garlic organosulfur / ajoene quorum-sensing literature"
-  "S. aureus regulator and stress-response literature plus Pseudomonas anti-QS literature"
-  false
-  false
-  false
-  "remains a hypothesis lane until compound presence, reporter response, and mediation are measured in the target preparation and organism"
+  "S. aureus regulator/stress literature plus Pseudomonas anti-QS literature"
+  false false false
+  "requires compound-presence, reporter-response and mediation welds in the target preparation and organism"
 
 downstreamChemistryCandidate : NineDayMechanismCandidate
 downstreamChemistryCandidate = nineDayMechanismCandidate
   downstreamOrganosulfurChemistry
   "allicin can transform into DADS/DATS/polysulfanes/vinyl dithiins/ajoene in context-dependent processing chemistry"
-  "compound-specific biological actions are source-indexed"
-  false
-  false
-  false
+  "compound-specific biological actions remain source-indexed"
+  false false false
   "nine-day maturation makes time-resolved sulfur speciation a high-value missing producer"
 
 record DirectPromotionReceipt : Set where
@@ -102,19 +88,15 @@ record NineDayMechanismBoundary : Set where
     maturationEfficacyDifferenceProvesChemicalIdentityOfCause : Bool
     maturationEfficacyDifferenceProvesChemicalIdentityOfCauseIsFalse :
       maturationEfficacyDifferenceProvesChemicalIdentityOfCause ≡ false
-
     directSAureusAllicinThiolomeProvesWholeEyesalveMechanism : Bool
     directSAureusAllicinThiolomeProvesWholeEyesalveMechanismIsFalse :
       directSAureusAllicinThiolomeProvesWholeEyesalveMechanism ≡ false
-
     garlicQuorumLiteratureProvesEyesalveQuorumMediation : Bool
     garlicQuorumLiteratureProvesEyesalveQuorumMediationIsFalse :
       garlicQuorumLiteratureProvesEyesalveQuorumMediation ≡ false
-
     tangentialMechanismEvidenceCanReduceExperimentalSearchSpace : Bool
     tangentialMechanismEvidenceCanReduceExperimentalSearchSpaceIsTrue :
       tangentialMechanismEvidenceCanReduceExperimentalSearchSpace ≡ true
-
     shortestProducerIsTimeResolvedChemistryThenMechanismAssay : Bool
     shortestProducerIsTimeResolvedChemistryThenMechanismAssayIsTrue :
       shortestProducerIsTimeResolvedChemistryThenMechanismAssay ≡ true
@@ -124,9 +106,7 @@ canonicalNineDayMechanismBoundary = nineDayMechanismBoundary
   false refl false refl false refl true refl true refl
 
 ------------------------------------------------------------------------
--- BIDI exports: existing owners are consumed explicitly so this is not a
--- parallel ontology.  The new frontier is the missing weld among preparation
--- trajectory, S. aureus thiolome, quorum context, and eyesalve phenotype.
+-- BIDI exports: consume canonical pre-existing owners explicitly.
 ------------------------------------------------------------------------
 
 existingTrajectoryBoundary : Trajectory.MolecularTrajectoryBoundary
@@ -138,5 +118,5 @@ existingStaphBoundary = Thiolome.canonicalStaphylococcusAllicinBoundary
 existingEyesalveBoundary : Eyesalve.BaldEyesalveMechanismBoundary
 existingEyesalveBoundary = Eyesalve.canonicalBaldEyesalveMechanismBoundary
 
-existingQuorumBoundary : QS.QuorumSensingBoundary
-existingQuorumBoundary = QS.canonicalQuorumSensingBoundary
+existingQuorumBoundary : QS.QSBoundary
+existingQuorumBoundary = QS.canonicalQSBoundary
