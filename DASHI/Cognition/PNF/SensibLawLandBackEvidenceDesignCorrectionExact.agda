@@ -7,7 +7,6 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.SensibLawIndigenousLandBackGlobalEvidenceExact as Atlas
-import DASHI.Cognition.PNF.SensibLawIndigenousLandBackSourceAuthorityExact as Authority
 
 ------------------------------------------------------------------------
 -- Additive corrections to local design/claim labels in the first global atlas.
@@ -29,7 +28,7 @@ record EvidenceDesignCorrection : Set where
   constructor evidenceDesignCorrection
   field
     historicalStudy : Atlas.LandBackStudyReceipt
-    sourceAuthority : Authority.SourceAuthorityReceipt
+    correctedSourceCitation : String
     preferredDesign : PreferredDesignKind
     preferredClaimVerb : ClaimVerbBoundary
     correctionReference : String
@@ -42,10 +41,10 @@ open EvidenceDesignCorrection public
 probst2020DesignCorrection : EvidenceDesignCorrection
 probst2020DesignCorrection = evidenceDesignCorrection
   Atlas.probst2020PrivateTitlingCounterexample
-  Authority.vasco2018LandUseAuthority
+  "Probst et al., Impacts of a large-scale titling initiative on deforestation in the Brazilian Amazon, Nature Sustainability 3 (2020) 1019-1026, doi:10.1038/s41893-020-0537-2"
   fixedEffectsCausalChainDesign
   sourceReportsCausalEffect
-  "Correction overlay: Probst et al. 2020 uses property-level fixed-effects/event-study analysis and explicitly explores the causal chain between Terra Legal titling and deforestation; the old comparativeObservationalDesign tag is too weak. Source identity remains Probst et al.; the Vasco authority passed here is only a temporary type-compatible external-source placeholder and MUST NOT be treated as Probst authorship. A dedicated Probst authority receipt is the next source cleanup target."
+  "Correction overlay: Probst et al. use property-level fixed-effects/event-study analysis and explicitly explore the causal chain between Terra Legal titling and deforestation; the old comparativeObservationalDesign local tag is too weak. This overlay uses Probst's own source identity only."
   false refl
   false refl
 
@@ -54,27 +53,24 @@ probst2020DesignCorrection = evidenceDesignCorrection
 denBraber2024ClaimVerbCorrection : EvidenceDesignCorrection
 denBraber2024ClaimVerbCorrection = evidenceDesignCorrection
   Atlas.amazonSocioeconomicTradeoff2024
-  Authority.denBraber2024Authority
+  "den Braber et al., Nature Ecology & Evolution 8 (2024) 1482-1492, doi:10.1038/s41559-024-02458-w"
   peerReviewedComparativeMatchedDesign
   sourceReportsComparativeAssociationOrEstimatedDifference
-  "Correction overlay: phrase the 48-83% result as the study's comparative estimate for Indigenous territories relative to specified competing land-use controls; do not rewrite it as universal causal effect of Indigenous governance"
+  "Correction overlay: phrase the 48-83% result as the study's comparative estimate for Indigenous territories relative to specified competing land-use controls; do not rewrite it as a universal causal effect of Indigenous governance"
   false refl
   false refl
 
 ------------------------------------------------------------------------
--- IMPORTANT audit trap: the Probst overlay above deliberately exposes that the
--- source-authority owner still lacks a dedicated Probst receipt.  The temporary
--- placeholder is NOT permission to transfer Vasco authorship.  We make that
--- impossibility explicit and keep the cleanup residual open.
+-- No source-identity substitution is permitted by a correction overlay.
 ------------------------------------------------------------------------
 
-data PlaceholderAuthorityTransfersAuthorship : Set where
 data LocalDesignCorrectionCreatesSourceProposition : Set where
 data ComparativeEstimateBecomesUniversalCausalLaw : Set where
+data CorrectionOverlayTransfersForeignAuthorship : Set where
 
-placeholderDoesNotTransferAuthorship : PlaceholderAuthorityTransfersAuthorship → ⊥
-placeholderDoesNotTransferAuthorship ()
 correctionDoesNotCreateSourceProposition : LocalDesignCorrectionCreatesSourceProposition → ⊥
 correctionDoesNotCreateSourceProposition ()
 comparativeEstimateDoesNotBecomeUniversalLaw : ComparativeEstimateBecomesUniversalCausalLaw → ⊥
 comparativeEstimateDoesNotBecomeUniversalCausalLaw ()
+correctionDoesNotTransferForeignAuthorship : CorrectionOverlayTransfersForeignAuthorship → ⊥
+correctionDoesNotTransferForeignAuthorship ()
