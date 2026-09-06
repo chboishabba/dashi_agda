@@ -71,6 +71,7 @@ import DASHI.Analysis.NonArchimedeanContinuousGibbsUniquenessBidiExact
 import DASHI.Analysis.NonArchimedeanSemilocalSigmaNonDescentExact
 import DASHI.Analysis.NonArchimedeanSigmaAnchorSameObjectBidiExact
 import DASHI.Analysis.NonArchimedeanGibbsFiniteProjectionUniquenessBidiExact
+import DASHI.Analysis.NonArchimedeanPadicCylinderBorelSourceExact
 
 -- Corrected finite Markov/mixing route.  Both the source C=1 L2 estimate and
 -- its advertised universal inverse-sqrt-two stopping-survival tail are refuted
