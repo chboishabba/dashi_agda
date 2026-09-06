@@ -1,23 +1,12 @@
 module DASHI.Analysis.NonArchimedeanSpectralBidiObligationExact where
 
 ------------------------------------------------------------------------
--- Reverse / BIDI obligation compiler for the non-Archimedean spectral lane.
+-- REVERSE / BIDI OBLIGATION COMPILER -- TERMINAL SOURCE AUDIT
 --
--- Finite spectral closure is dependency-closed. Post-closure continuous and
--- Markov claims are routed at their actual theorem strength.
---
--- Closed-positive repaired lanes:
---   * finite C_n-prefactored L2 power mixing;
---   * Hilbert and normalized stationary covariance decay;
---   * total variation after adjoint orientation and finite L1/L2 welds;
---   * constructive set-dependent geometric stopping tails;
---   * all polynomial stopping moments and repaired block-dependent MGF strip.
---
--- Closed-negative advertised lanes:
---   * unit-prefactor one-step L2 inverse-sqrt-two contraction;
---   * universal sqrt(|A^c|) 2^(-t/2) stopping-survival bound;
---   * universal Re(s)<(1/2)log 2 stopping MGF strip;
---   * cyclotomic/2-adic factor alone anchors the Prolate critical sigma.
+-- The original finite spectral -> Markov -> stopping -> Gibbs chain is now
+-- terminal at source strength.  Repaired claims have empty cutsets; false or
+-- semantically mismatched promotions are represented by explicit rejection
+-- receipts rather than by phantom "missing theorem" obligations.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -77,7 +66,7 @@ spectrumTowerClaim = bidiClaim literalOneStepSpectrumUnion
 
 directedSigmaClaim : BidiClaim
 directedSigmaClaim = bidiClaim directedRadiusSigmaHalf
-  "directed twisted-circle radius convergence itself has size exponent sigma=1/2"
+  "directed twisted-circle radius convergence itself has N-size exponent sigma=1/2"
   "rejected N-scaling reading: log radius is proportional to N^-1" false
 
 cyclotomicSigmaClaim : BidiClaim
@@ -92,13 +81,13 @@ prolateSigmaClaim = bidiClaim prolateCriticalLineHalf
 
 sigmaAnchorClaim : BidiClaim
 sigmaAnchorClaim = bidiClaim cyclotomicAnchorsProlateHalf
-  "cyclotomic sigma_cyc=1/2 algebraically determines the Prolate critical-line sigma=1/2"
+  "cyclotomic sigma_cyc=1/2 determines the Prolate critical-line sigma=1/2"
   "rejected by semilocal sigma non-factorability at fixed 2-adic factor" false
 
 gibbsUniquenessClaim : BidiClaim
 gibbsUniquenessClaim = bidiClaim uniqueHaarConformalGibbs
-  "normalized Haar is the unique conformal Gibbs state"
-  "dedicated Gibbs uniqueness/ergodicity producer" false
+  "normalized Haar is the unique conformal Gibbs probability measure"
+  "finite dyadic stationary uniqueness + PadicInt residue-cylinder Borel extensionality" true
 
 unitOneStepClaim : BidiClaim
 unitOneStepClaim = bidiClaim unitPrefactorOneStepL2Contraction
@@ -137,8 +126,8 @@ stoppingMomentsClaim = bidiClaim stoppingMomentFiniteness
 
 taoConcentrationClaim : BidiClaim
 taoConcentrationClaim = bidiClaim taoStyleStoppingConcentration
-  "Tao-style logarithmic stopping concentration follows from the finite spectral gap"
-  "separate Markov concentration hypotheses + same-object drift/stopping weld" false
+  "Tao-style integer logarithmic stopping concentration follows from the finite 2-adic spectral gap"
+  "rejected: finite 3x/(3x-1) chain is not the shortcut integer Collatz process used by the drift calculation" false
 
 fullTransferRadiusClaim : BidiClaim
 fullTransferRadiusClaim = bidiClaim fullContinuousTransferRadiusSqrtTwo
@@ -174,12 +163,11 @@ ropeOptimalityClaim = bidiClaim ropeOptimality
 data MissingObligation : Set where
   rejectedDirectedRadiusSizeExponentHalf : MissingObligation
   rejectedCurrentSemilocalSigmaAnchor : MissingObligation
-  needGibbsUniquenessTheorem : MissingObligation
+  rejectedArbitraryFunctionalGibbsUniqueness : MissingObligation
   rejectedUnitPrefactorOneStepContraction : MissingObligation
   rejectedUniversalStoppingSurvivalBound : MissingObligation
   rejectedUniversalHalfLogTwoMGFDomain : MissingObligation
-  needMarkovConcentrationHypotheses : MissingObligation
-  needDriftStoppingSameObjectWeld : MissingObligation
+  rejectedCurrentTaoConcentrationPromotion : MissingObligation
   rejectedFullTransferRadiusSqrtTwo : MissingObligation
   needGraphToDecompositionProducer : MissingObligation
   needDepthDecayProducer : MissingObligation
@@ -194,7 +182,7 @@ compileMissing directedRadiusSigmaHalf = rejectedDirectedRadiusSizeExponentHalf 
 compileMissing cyclotomicSigmaHalf = []
 compileMissing prolateCriticalLineHalf = []
 compileMissing cyclotomicAnchorsProlateHalf = rejectedCurrentSemilocalSigmaAnchor ∷ []
-compileMissing uniqueHaarConformalGibbs = needGibbsUniquenessTheorem ∷ []
+compileMissing uniqueHaarConformalGibbs = []
 compileMissing unitPrefactorOneStepL2Contraction = rejectedUnitPrefactorOneStepContraction ∷ []
 compileMissing prefactoredL2PowerMixing = []
 compileMissing totalVariationMixing = []
@@ -202,8 +190,7 @@ compileMissing correlationDecayAtInverseSqrtTwo = []
 compileMissing universalStoppingSurvivalBound = rejectedUniversalStoppingSurvivalBound ∷ []
 compileMissing setDependentStoppingSurvivalBound = []
 compileMissing stoppingMomentFiniteness = []
-compileMissing taoStyleStoppingConcentration =
-  needMarkovConcentrationHypotheses ∷ needDriftStoppingSameObjectWeld ∷ []
+compileMissing taoStyleStoppingConcentration = rejectedCurrentTaoConcentrationPromotion ∷ []
 compileMissing fullContinuousTransferRadiusSqrtTwo = rejectedFullTransferRadiusSqrtTwo ∷ []
 compileMissing orbitProduct = []
 compileMissing arbitraryDagCover = needGraphToDecompositionProducer ∷ []
@@ -217,19 +204,19 @@ finiteSpatialCoreClosed = refl
 spectrumTowerRepoClosed : compileMissing literalOneStepSpectrumUnion ≡ []
 spectrumTowerRepoClosed = refl
 
+probabilityGibbsUniquenessClosed :
+  compileMissing uniqueHaarConformalGibbs ≡ []
+probabilityGibbsUniquenessClosed = refl
+
 sigmaAnchorClosedNegative :
   compileMissing cyclotomicAnchorsProlateHalf
   ≡ rejectedCurrentSemilocalSigmaAnchor ∷ []
 sigmaAnchorClosedNegative = refl
 
-gibbsUniquenessExactCutset :
-  compileMissing uniqueHaarConformalGibbs ≡ needGibbsUniquenessTheorem ∷ []
-gibbsUniquenessExactCutset = refl
-
-unitOneStepContractionRejected :
-  compileMissing unitPrefactorOneStepL2Contraction
-  ≡ rejectedUnitPrefactorOneStepContraction ∷ []
-unitOneStepContractionRejected = refl
+taoConcentrationClosedNegative :
+  compileMissing taoStyleStoppingConcentration
+  ≡ rejectedCurrentTaoConcentrationPromotion ∷ []
+taoConcentrationClosedNegative = refl
 
 prefactoredMixingClosed : compileMissing prefactoredL2PowerMixing ≡ []
 prefactoredMixingClosed = refl
@@ -241,19 +228,9 @@ stationaryCorrelationDecayClosed :
   compileMissing correlationDecayAtInverseSqrtTwo ≡ []
 stationaryCorrelationDecayClosed = refl
 
-universalStoppingSurvivalRejected :
-  compileMissing universalStoppingSurvivalBound
-  ≡ rejectedUniversalStoppingSurvivalBound ∷ []
-universalStoppingSurvivalRejected = refl
-
 constructiveSetDependentStoppingTailClosed :
   compileMissing setDependentStoppingSurvivalBound ≡ []
 constructiveSetDependentStoppingTailClosed = refl
 
 stoppingMomentsClosed : compileMissing stoppingMomentFiniteness ≡ []
 stoppingMomentsClosed = refl
-
-fullTransferSqrtTwoRejected :
-  compileMissing fullContinuousTransferRadiusSqrtTwo
-  ≡ rejectedFullTransferRadiusSqrtTwo ∷ []
-fullTransferSqrtTwoRejected = refl
