@@ -13,3 +13,5 @@ import DASHI.Physics.Semiconductor.Device.ComputedFiniteDeviceCellExact
 import DASHI.Physics.Semiconductor.Device.ResidualDrivenComputedCorrectionExact
 import DASHI.Physics.Semiconductor.Device.FiniteContinuityResidualExact
 import DASHI.Physics.Semiconductor.Device.FiniteSecantResponseCorrectionExact
+import DASHI.Physics.Semiconductor.Device.SpatialContinuityRecombinationExact
+import DASHI.Physics.Semiconductor.Device.SpatialResidualSecantWeldExact
