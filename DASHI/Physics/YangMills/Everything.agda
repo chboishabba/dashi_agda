@@ -16,3 +16,15 @@ import DASHI.Physics.YangMills.BalabanRGStepVLane
 import DASHI.Physics.YangMills.O4CovarianceRestorationGate
 import DASHI.Physics.YangMills.YMMassGapRoute
 import DASHI.Physics.YangMills.BalabanClayGate4LightweightValidation
+
+-- Existing theorem-level high-alpha route consumed by the operator/domain weld.
+import DASHI.Physics.YangMills.BalabanVacuumOrthogonalMoscoRecoveryExact
+import DASHI.Physics.YangMills.BalabanClayDenseCoreSpectralGapExact
+import DASHI.Physics.YangMills.BalabanOSExponentialClusteringImpliesHamiltonianGapExact
+import DASHI.Physics.YangMills.BalabanClayHighestAlphaReuseExact
+import DASHI.Physics.YangMills.BalabanClayMassGapGatePackageExact
+
+-- September 2026 bidirectional Lean/Agda operator-domain cross-pollination.
+import DASHI.Physics.YangMills.YMOperatorDomainContinuumSources2026Exact
+import DASHI.Physics.YangMills.YMAristotleOperatorReturn2026Exact
+import DASHI.Physics.YangMills.YMOperatorDomainContinuumFrontier2026Exact
