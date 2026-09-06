@@ -5,6 +5,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.ResidualActionPolicyExact as Action
+import DASHI.Chemistry.MechanismDiscriminationExact as MD
+import DASHI.Chemistry.TransitionKernel as TK
 import DASHI.Biology.Microbiology.BaldEyesalveMechanismDiscriminationBidiExact as Disc
 import DASHI.Biology.Microbiology.BaldEyesalveMechanismExperimentSelectionExact as Experiments
 
@@ -116,19 +118,19 @@ unresolvedAction = eyesalveActionRecommendation
 -- Explicit reuse of existing discriminating and experimental carriers.
 ------------------------------------------------------------------------
 
-existingThiolReopen : Disc.MD.ReopenTarget
+existingThiolReopen : MD.ReopenTarget
 existingThiolReopen = Disc.reopenThiolLane
 
-existingRecoveryReopen : Disc.MD.ReopenTarget
+existingRecoveryReopen : MD.ReopenTarget
 existingRecoveryReopen = Disc.reopenRecoveryLane
 
-existingQuorumReopen : Disc.MD.ReopenTarget
+existingQuorumReopen : MD.ReopenTarget
 existingQuorumReopen = Disc.reopenQuorumLane
 
-existingMatrixReopen : Disc.MD.ReopenTarget
+existingMatrixReopen : MD.ReopenTarget
 existingMatrixReopen = Disc.reopenMatrixLane
 
-existingExperimentSelection : Experiments.TK.ExperimentSelection
+existingExperimentSelection : TK.ExperimentSelection
 existingExperimentSelection = Experiments.canonicalMechanismExperimentSelection
 
 record BaldEyesalveResidualActionBoundary : Set where
