@@ -6,6 +6,7 @@ import DASHI.Economics.CommonFactorStructuredFinanceExact
 import DASHI.Economics.ManufacturingScarcityTimescaleExact
 import DASHI.Economics.PolicyBackstopCommercialDisciplineExact
 import DASHI.Economics.ComputeScalingUnitEconomicsExact
+import DASHI.Economics.AIEconomicUsefulWorkTimeSeriesExact
 
 import DASHI.Economics.AIFinancingReflexivityExact
 import DASHI.Economics.AITerminalPayerEconomicValidationExact
@@ -26,4 +27,5 @@ import DASHI.Economics.SoftBankOpenAIValuationLeverage2026Exact
 import DASHI.Economics.TSMCHBMManufacturingDemandPolicy2026Exact
 import DASHI.Economics.MarxCapitalAIInfrastructureCrossPollinationExact
 import DASHI.Economics.AIInfrastructureYouTubeShortTranscriptBoundaryExact
+import DASHI.Economics.ChinaUSAITrainingServingComputeSeparation2026Exact
 import DASHI.Economics.AICurrentRegimeCalibration2026Exact
