@@ -19,19 +19,19 @@ open CustodyEventTimeRow public
 
 eskridgeRow : CustodyEventTimeRow
 eskridgeRow = custody-event-time-row "Amy Eskridge" partial notLocated notLocated partial notLocated
-  "Corporate authority and Institute team surface are source-backed, but technical IP, apparatus, notebooks/repositories and post-death asset disposition remain open."
+  "SEC 2019 plus federal 2020/2021 PPP entity records establish a multi-year Institute operating surface, and a registry-derived index reports HoloChron dissolution after Amy's death. Exact 2022 technical IP, apparatus, notebooks/repositories and winding-up asset disposition remain open."
 
 maiwaldRow : CustodyEventTimeRow
 maiwaldRow = custody-event-time-row "Frank Maiwald" owned owned partial owned partial
-  "Same project, successor PI, overlapping collaborators and the same external Weber-group apparatus are source-backed; exact JPL calibration/qualification carrier transfer remains open."
+  "Same project, successor PI, overlapping collaborators, continuing Boulder apparatus and a distinct Caltech/JPL benchtop implementation are source-backed. Physical/application-platform redundancy is therefore stronger than before, while exact JPL calibration/qualification carrier transfer remains open."
 
 mccaslandRow : CustodyEventTimeRow
 mccaslandRow = custody-event-time-row "William Neil McCasland" partial notLocated notLocated owned notLocated
-  "Pre-acquisition ATA Director of Technology role and the 2025 BlueHalo-to-AeroVironment acquisition are source-backed; exact post-close role/access/portfolio is not located."
+  "Pre-acquisition ATA Director of Technology role, the 2025 BlueHalo-to-AeroVironment acquisition, and Draper's 2025 Annual Report naming McCasland as a Member of the Corporation are source-backed. Exact post-close BlueHalo/AeroVironment title, programme access and portfolio remain not located."
 
 hicksRow : CustodyEventTimeRow
 hicksRow = custody-event-time-row "Michael David Hicks" contradicted notLocated notLocated partial notLocated
-  "Institutional memorials end JPL service in 2022, before the 2023 death. Historical mission expertise is owned, but event-time JPL operational access cannot be inherited without a separate receipt."
+  "Institutional memorials end JPL service in 2022, before the 2023 death. Historical mission expertise is owned, but event-time JPL operational access cannot be inherited without a separate post-2022 receipt."
 
 loureiroRow : CustodyEventTimeRow
 loureiroRow = custody-event-time-row "Nuno Loureiro" owned partial partial owned partial
@@ -46,5 +46,9 @@ record MatrixBoundary : Set where
     organisationalContinuityImpliesSameCarrierTransferIsFalse : organisationalContinuityImpliesSameCarrierTransfer ≡ false
     formerRoleImpliesEventTimeRole : Bool
     formerRoleImpliesEventTimeRoleIsFalse : formerRoleImpliesEventTimeRole ≡ false
+    corporateOperatingSurfaceImpliesTechnicalCustody : Bool
+    corporateOperatingSurfaceImpliesTechnicalCustodyIsFalse : corporateOperatingSurfaceImpliesTechnicalCustody ≡ false
+    parallelPlatformsImpliesMissionQualificationRedundant : Bool
+    parallelPlatformsImpliesMissionQualificationRedundantIsFalse : parallelPlatformsImpliesMissionQualificationRedundant ≡ false
 canonicalMatrixBoundary : MatrixBoundary
-canonicalMatrixBoundary = matrix-boundary false refl false refl false refl
+canonicalMatrixBoundary = matrix-boundary false refl false refl false refl false refl false refl
