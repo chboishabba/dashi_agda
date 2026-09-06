@@ -32,6 +32,8 @@ module DASHI.Physics.YangMills.BalabanClayMassGapGatePackageExact where
 -- DOI 10.4310/cag.2003.v11.n4.a1.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayPhysicalScaleExponentExact
@@ -126,19 +128,19 @@ addOptionalSpectralEdgeIdentification mandatoryGates gate5 = record
 generatorUniquenessCompilerClosed :
   Frontier.generatorUniquenessClosedWithoutBoundednessHypothesisOnTotalMaps
     Frontier.canonicalYMOperatorContinuumFrontier
-  ≡ Agda.Builtin.Bool.true
+  ≡ true
 generatorUniquenessCompilerClosed = refl
 
 vacuumRecoveryGapCompilerClosed :
   Frontier.vacuumOrthogonalRecoveryGapCompilerClosed
     Frontier.canonicalYMOperatorContinuumFrontier
-  ≡ Agda.Builtin.Bool.true
+  ≡ true
 vacuumRecoveryGapCompilerClosed = refl
 
 denseCoreSpectralExclusionCompilerClosed :
   Frontier.denseCoreSpectralExclusionCompilerClosed
     Frontier.canonicalYMOperatorContinuumFrontier
-  ≡ Agda.Builtin.Bool.true
+  ≡ true
 denseCoreSpectralExclusionCompilerClosed = refl
 
 massGapGateSeparationLevel : ProofLevel
