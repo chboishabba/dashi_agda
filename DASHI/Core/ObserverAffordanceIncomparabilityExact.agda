@@ -61,11 +61,11 @@ affordanceDoesNotDetermineObservation witness =
 ------------------------------------------------------------------------
 
 data SquareState : Set where
-  closedApproved
-  openApproved
-  closedDisapproved
-  openDisapproved
-  : SquareState
+  closedApproved : SquareState
+  openApproved : SquareState
+  closedDisapproved : SquareState
+  openDisapproved : SquareState
+
 
 data SquareObservation : Set where
   approved disapproved : SquareObservation

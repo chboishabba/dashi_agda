@@ -27,22 +27,22 @@ record CorrectionLoopSystem
 open CorrectionLoopSystem public
 
 data LoopState : Set where
-  ordinaryConfirmation
-  blindSpotDisclosure
-  : LoopState
+  ordinaryConfirmation : LoopState
+  blindSpotDisclosure : LoopState
+
 
 data Challenge : Set where
-  confirmingInput
-  correctiveDisclosure
-  : Challenge
+  confirmingInput : Challenge
+  correctiveDisclosure : Challenge
+
 
 data Reading : Set where
-  confirmsExistingChart
-  : Reading
+  confirmsExistingChart : Reading
+
 
 data Revision : Set where
-  chartUnchanged
-  : Revision
+  chartUnchanged : Revision
+
 
 loopChallenge : LoopState → Challenge
 loopChallenge ordinaryConfirmation = confirmingInput

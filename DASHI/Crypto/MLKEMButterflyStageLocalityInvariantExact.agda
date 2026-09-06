@@ -34,9 +34,7 @@ open import Relation.Binary.PropositionalEquality using (trans; sym)
 import DASHI.Crypto.MLKEMFIPS203SourceExact as FIPS
 
 data ButterflyStage : Set where
-  sourceStage
-  stage1 stage2 stage3 stage4 stage5 stage6
-  finalNTTStage : ButterflyStage
+  sourceStage stage1 stage2 stage3 stage4 stage5 stage6 finalNTTStage : ButterflyStage
 
 sourceSupportWidth : ButterflyStage → Nat
 sourceSupportWidth sourceStage = 1
@@ -119,7 +117,7 @@ mlKem512EndpointAreasEqual :
   localityArea FIPS.params512 finalNTTStage
 mlKem512EndpointAreasEqual = mlKem512AllStagesEqual sourceStage finalNTTStage
 
-record ButterflyLocalityBoundary : Set where
+record ButterflyLocalityBoundary : Set₁ where
   constructor butterflyLocalityBoundary
   field
     allStageIdentityProvesAllRepresentationsObeySameArea : Set

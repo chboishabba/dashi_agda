@@ -44,11 +44,11 @@ record AntifascistPostulateBoundary : Set₂ where
 antifascistPostulateBoundary : AntifascistPostulateBoundary
 antifascistPostulateBoundary = record
   { Carrier = AFS.S
-  ; entropy = AFS.H
+  ; entropy = AFS.distinctionRank
   ; invertibleBoundary = AFS.Invertible
   ; entropyPreservationBoundary =
       (u : AFS.Invertible) (s : AFS.S) →
-      AFS.H (AFS.Invertible.U u s) ≡ AFS.H s
+      AFS.distinctionRank (AFS.Invertible.U u s) ≡ AFS.distinctionRank s
   ; nonCollapseBoundary = (u : AFS.Invertible) → Set
   }
 

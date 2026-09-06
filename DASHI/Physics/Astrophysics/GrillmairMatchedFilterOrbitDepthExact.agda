@@ -7,15 +7,14 @@ open import Agda.Builtin.String using (String)
 -- ApJ 847:119 (2017), DOI 10.3847/1538-4357/aa8872.
 
 data StreamAnalysisStage : Set where
-  colourMagnitudeFilter
-  foregroundModel
-  distanceModulusScan
-  skyProjection
-  streamTrackFit
-  orbitFit
-  progenitorTest
-  kinematicConfirmation
-  : StreamAnalysisStage
+  colourMagnitudeFilter : StreamAnalysisStage
+  foregroundModel : StreamAnalysisStage
+  distanceModulusScan : StreamAnalysisStage
+  skyProjection : StreamAnalysisStage
+  streamTrackFit : StreamAnalysisStage
+  orbitFit : StreamAnalysisStage
+  progenitorTest : StreamAnalysisStage
+  kinematicConfirmation : StreamAnalysisStage
 
 record MatchedFilterPipeline : Set where
   constructor matched-filter-pipeline
@@ -86,18 +85,19 @@ record GrillmairDepthBoundary : Set where
     properMotionOrRadialVelocityCanConfirmCandidate : Bool
     properMotionOrRadialVelocityCanConfirmCandidateIsTrue : properMotionOrRadialVelocityCanConfirmCandidate ≡ true
 
+open GrillmairDepthBoundary public
+
 canonicalGrillmairDepthBoundary : GrillmairDepthBoundary
 canonicalGrillmairDepthBoundary = grillmair-depth-boundary false refl false refl false refl true refl
 
 data GrillmairReverseTarget : Set where
-  acquireCMDTemplate
-  acquireForegroundEstimate
-  acquireDistanceModulus
-  acquireProjectionChoice
-  acquireReddeningModel
-  acquireTrackFit
-  acquireGalacticPotential
-  acquireRadialVelocity
-  acquireProperMotion
-  acquireProgenitorKinematics
-  : GrillmairReverseTarget
+  acquireCMDTemplate : GrillmairReverseTarget
+  acquireForegroundEstimate : GrillmairReverseTarget
+  acquireDistanceModulus : GrillmairReverseTarget
+  acquireProjectionChoice : GrillmairReverseTarget
+  acquireReddeningModel : GrillmairReverseTarget
+  acquireTrackFit : GrillmairReverseTarget
+  acquireGalacticPotential : GrillmairReverseTarget
+  acquireRadialVelocity : GrillmairReverseTarget
+  acquireProperMotion : GrillmairReverseTarget
+  acquireProgenitorKinematics : GrillmairReverseTarget

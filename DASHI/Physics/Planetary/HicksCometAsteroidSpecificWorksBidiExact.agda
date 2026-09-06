@@ -78,6 +78,8 @@ record HicksSpecificWorkBoundary : Set where
     multiEpochPhotometryCanConstrainActivityEvolutionIsTrue :
       multiEpochPhotometryCanConstrainActivityEvolution ≡ true
 
+open HicksSpecificWorkBoundary public
+
 canonicalHicksSpecificWorkBoundary : HicksSpecificWorkBoundary
 canonicalHicksSpecificWorkBoundary =
   hicks-specific-work-boundary false refl false refl false refl true refl

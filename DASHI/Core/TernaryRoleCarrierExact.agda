@@ -30,13 +30,13 @@ data TernaryRoleCode : Set where
 ------------------------------------------------------------------------
 
 data TernaryPermutation : Set where
-  identityPermutation
-  swap01Permutation
-  swap02Permutation
-  swap12Permutation
-  cycle012Permutation
-  cycle021Permutation
-  : TernaryPermutation
+  identityPermutation : TernaryPermutation
+  swap01Permutation : TernaryPermutation
+  swap02Permutation : TernaryPermutation
+  swap12Permutation : TernaryPermutation
+  cycle012Permutation : TernaryPermutation
+  cycle021Permutation : TernaryPermutation
+
 
 permute : TernaryPermutation → TernaryRoleCode → TernaryRoleCode
 permute identityPermutation code0 = code0

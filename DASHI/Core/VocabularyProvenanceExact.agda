@@ -17,12 +17,12 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 data VocabularyOrigin : Set where
-  sourceNative
-  interlocutorSupplied
-  dashiImported
-  mathematicalImported
-  mixedProvenance
-  : VocabularyOrigin
+  sourceNative : VocabularyOrigin
+  interlocutorSupplied : VocabularyOrigin
+  dashiImported : VocabularyOrigin
+  mathematicalImported : VocabularyOrigin
+  mixedProvenance : VocabularyOrigin
+
 
 record VocabularyEntry : Set where
   constructor vocabulary-entry

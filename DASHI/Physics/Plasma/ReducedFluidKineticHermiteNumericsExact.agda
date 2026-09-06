@@ -8,18 +8,16 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ReducedModel : Set where
-  reducedMHD
-  kineticReducedMHD
-  kineticReducedElectronHeating
-  twoFieldGyrofluidLimit
-  : ReducedModel
+  reducedMHD : ReducedModel
+  kineticReducedMHD : ReducedModel
+  kineticReducedElectronHeating : ReducedModel
+  twoFieldGyrofluidLimit : ReducedModel
 
 data NumericalAxis : Set where
-  parallelCoordinate
-  perpendicularPlane
-  velocityMomentAxis
-  timeSplitting
-  : NumericalAxis
+  parallelCoordinate : NumericalAxis
+  perpendicularPlane : NumericalAxis
+  velocityMomentAxis : NumericalAxis
+  timeSplitting : NumericalAxis
 
 record StrongGuideFieldOrdering : Set where
   constructor strong-guide-field-ordering
@@ -90,6 +88,8 @@ record ReducedNumericsBoundary : Set where
     benchmarkAgreementMeansUniqueNumericalMethod : Bool
     benchmarkAgreementMeansUniqueNumericalMethodIsFalse : benchmarkAgreementMeansUniqueNumericalMethod ≡ false
 
+open ReducedNumericsBoundary public
+
 canonicalReducedNumericsBoundary : ReducedNumericsBoundary
 canonicalReducedNumericsBoundary = reduced-numerics-boundary
   false refl
@@ -98,10 +98,9 @@ canonicalReducedNumericsBoundary = reduced-numerics-boundary
   false refl
 
 data ReducedNumericsReverseTarget : Set where
-  needOrderingReceipt
-  needClosureJustification
-  needHermiteConvergence
-  needSpatialTemporalConvergence
-  needInvariantBudget
-  needCrossCodeBenchmark
-  : ReducedNumericsReverseTarget
+  needOrderingReceipt : ReducedNumericsReverseTarget
+  needClosureJustification : ReducedNumericsReverseTarget
+  needHermiteConvergence : ReducedNumericsReverseTarget
+  needSpatialTemporalConvergence : ReducedNumericsReverseTarget
+  needInvariantBudget : ReducedNumericsReverseTarget
+  needCrossCodeBenchmark : ReducedNumericsReverseTarget

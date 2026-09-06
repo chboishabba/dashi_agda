@@ -24,26 +24,26 @@ import DASHI.Crypto.PublicSecretFactorisationAttackExact as Factor
 ------------------------------------------------------------------------
 
 data SecurityObligation : Set where
-  padFreshAndSecret
-  nonceUniquePerKey
-  keyEntropyAdequate
-  authenticationSound
-  trapdoorInverseHard
-  paddingValidityNotObservable
-  discreteLogHard
-  publicElementAcceptedOnlyIfValid
-  x25519AllZeroSharedSecretHandled
-  ephemeralFresh
-  kemComponentSecure
-  kdfComponentSecure
-  aeadComponentSecure
-  contextBound
-  moduleLWEHard
-  noPublicSecretFactorisation
-  implicitRejectionNotExternallySplit
-  classicalChannelAuthenticated
-  quantumParameterTestSound
-  followOnSymmetricSecure
+  padFreshAndSecret : SecurityObligation
+  nonceUniquePerKey : SecurityObligation
+  keyEntropyAdequate : SecurityObligation
+  authenticationSound : SecurityObligation
+  trapdoorInverseHard : SecurityObligation
+  paddingValidityNotObservable : SecurityObligation
+  discreteLogHard : SecurityObligation
+  publicElementAcceptedOnlyIfValid : SecurityObligation
+  x25519AllZeroSharedSecretHandled : SecurityObligation
+  ephemeralFresh : SecurityObligation
+  kemComponentSecure : SecurityObligation
+  kdfComponentSecure : SecurityObligation
+  aeadComponentSecure : SecurityObligation
+  contextBound : SecurityObligation
+  moduleLWEHard : SecurityObligation
+  noPublicSecretFactorisation : SecurityObligation
+  implicitRejectionNotExternallySplit : SecurityObligation
+  classicalChannelAuthenticated : SecurityObligation
+  quantumParameterTestSound : SecurityObligation
+  followOnSymmetricSecure : SecurityObligation
   attackerModelWithinAssumedBoundary : SecurityObligation
 
 data DependsOn : Profile.CryptoCandidate → SecurityObligation → Set where

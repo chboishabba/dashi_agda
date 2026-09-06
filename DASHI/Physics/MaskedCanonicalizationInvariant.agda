@@ -1,10 +1,11 @@
 module DASHI.Physics.MaskedCanonicalizationInvariant where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.Nat using (Nat) renaming (_+_ to _+ℕ_)
 open import Relation.Binary.PropositionalEquality using (cong)
 
 open import Data.Vec using (Vec; []; _∷_)
+open import Data.Product using (_,_)
 open import Data.Integer using (ℤ; _+_; _*_)
 
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
@@ -34,13 +35,13 @@ Qσ-canonVec (s ∷ σ) (t ∷ x)
 
 coreQσ :
   ∀ {m k : Nat} →
-  Vec IMQ.Sign m → Vec Trit (m + k) → ℤ
+  Vec IMQ.Sign m → Vec Trit (m +ℕ k) → ℤ
 coreQσ {m} {k} σ x = IMQ.Qσ σ (TCP.coarseOf m k x)
 
 coreQσ-Cᵣ :
   ∀ {m k : Nat}
     (σ : Vec IMQ.Sign m)
-    (x : Vec Trit (m + k)) →
+    (x : Vec Trit (m +ℕ k)) →
   coreQσ σ (CM.Cᵣ {m} {k} x) ≡ coreQσ σ x
 coreQσ-Cᵣ {m} {k} σ x with TCP.split m k x
 ... | (c , t)

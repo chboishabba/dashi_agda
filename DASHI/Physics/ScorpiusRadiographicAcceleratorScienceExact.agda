@@ -10,16 +10,16 @@ import DASHI.Core.ScientificMechanismEvidenceBidiExact as S
 ------------------------------------------------------------------------
 
 data RadiographyStage : Set where
-  pulsedPower
-  electronInjection
-  inductionAcceleration
-  beamTransport
-  targetConversion
-  xRayPulse
-  objectTransmission
-  detectorImage
-  hydrodynamicInference
-  : RadiographyStage
+  pulsedPower : RadiographyStage
+  electronInjection : RadiographyStage
+  inductionAcceleration : RadiographyStage
+  beamTransport : RadiographyStage
+  targetConversion : RadiographyStage
+  xRayPulse : RadiographyStage
+  objectTransmission : RadiographyStage
+  detectorImage : RadiographyStage
+  hydrodynamicInference : RadiographyStage
+
 
 record RadiographyChain : Set where
   constructor radiography-chain
@@ -90,6 +90,8 @@ record CurrentScorpiusScienceAssessment : Set where
     experimentSpecificInverseProblemClosed : Bool
     experimentSpecificInverseProblemClosedIsFalse :
       experimentSpecificInverseProblemClosed ≡ false
+
+open CurrentScorpiusScienceAssessment public
 
 canonicalCurrentScorpiusScienceAssessment : CurrentScorpiusScienceAssessment
 canonicalCurrentScorpiusScienceAssessment = current-scorpius-science-assessment

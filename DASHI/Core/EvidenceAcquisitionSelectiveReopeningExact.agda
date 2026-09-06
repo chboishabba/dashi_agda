@@ -30,10 +30,9 @@ import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as ProofSearch
 ------------------------------------------------------------------------
 
 data AcquisitionBranchState : Set where
-  acquisitionOpen
-  acquisitionSatisfied
-  acquisitionClosedKnownAbsent
-  : AcquisitionBranchState
+  acquisitionOpen : AcquisitionBranchState
+  acquisitionSatisfied : AcquisitionBranchState
+  acquisitionClosedKnownAbsent : AcquisitionBranchState
 
 branchState : Evidence.RecordStatus → AcquisitionBranchState
 branchState Evidence.notLocated = acquisitionOpen

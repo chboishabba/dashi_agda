@@ -1,8 +1,8 @@
 module DASHI.Physics.MaskedNoLeakageBridge where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat; _+_)
-open import Data.Integer using (+_)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Integer using (ℤ; +_; _+_)
 open import Data.Vec using (Vec; _++_)
 
 open import DASHI.Algebra.Trit using (Trit)

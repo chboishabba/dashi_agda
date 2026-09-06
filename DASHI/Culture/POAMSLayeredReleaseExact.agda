@@ -29,7 +29,7 @@ poamsPublicReport : L.LayerReceipt
 poamsPublicReport = L.layer-receipt
   "NASA/TM-20205010911 / M-1531"
   L.publicTechnicalReport
-  L.public
+  L.publicState
   "NASA NTRS 20205010911; distribution limits Public; Standard Form 298 Unclassified-Unlimited"
   "The technical memorandum itself is publicly distributed."
 

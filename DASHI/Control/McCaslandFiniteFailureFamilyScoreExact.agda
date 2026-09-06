@@ -10,14 +10,21 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data PlacementNode : Set where
-  sensorA sensorB sensorC actuatorA actuatorB actuatorC
-  : PlacementNode
+  sensorA : PlacementNode
+  sensorB : PlacementNode
+  sensorC : PlacementNode
+  actuatorA : PlacementNode
+  actuatorB : PlacementNode
+  actuatorC : PlacementNode
 
 data FailureCase : Set where
-  nominal
-  failSensorA failSensorB failSensorC
-  failActuatorA failActuatorB failActuatorC
-  : FailureCase
+  nominal : FailureCase
+  failSensorA : FailureCase
+  failSensorB : FailureCase
+  failSensorC : FailureCase
+  failActuatorA : FailureCase
+  failActuatorB : FailureCase
+  failActuatorC : FailureCase
 
 record FinitePlacement : Set where
   constructor finite-placement
@@ -74,6 +81,8 @@ record McCaslandFiniteFailureBoundary : Set where
     worstCaseWitnessRequiresEnumeratedDomain : Bool
     worstCaseWitnessRequiresEnumeratedDomainIsTrue :
       worstCaseWitnessRequiresEnumeratedDomain ≡ true
+
+open McCaslandFiniteFailureBoundary public
 
 canonicalMcCaslandFiniteFailureBoundary : McCaslandFiniteFailureBoundary
 canonicalMcCaslandFiniteFailureBoundary =

@@ -13,40 +13,37 @@ open import Agda.Builtin.String using (String)
 -- Materials Science and Technology 29(7), 2013, DOI 10.1179/1743284712Y.0000000199.
 
 data ProcessCoordinate : Set where
-  solutionTemperature
-  solutionTime
-  coolingRate
-  ageingTemperature
-  ageingTime
-  deformationTemperature
-  strainRate
-  totalStrain
-  remeltHistory
-  : ProcessCoordinate
+  solutionTemperature : ProcessCoordinate
+  solutionTime : ProcessCoordinate
+  coolingRate : ProcessCoordinate
+  ageingTemperature : ProcessCoordinate
+  ageingTime : ProcessCoordinate
+  deformationTemperature : ProcessCoordinate
+  strainRate : ProcessCoordinate
+  totalStrain : ProcessCoordinate
+  remeltHistory : ProcessCoordinate
 
 data MicrostructureCoordinate : Set where
-  gammaGrainSize
-  primaryGammaPrime
-  secondaryGammaPrime
-  tertiaryGammaPrime
-  gammaPrimeVolumeFraction
-  precipitateCoherency
-  segregation
-  porosity
-  tcpPhasePopulation
-  grainBoundaryState
-  : MicrostructureCoordinate
+  gammaGrainSize : MicrostructureCoordinate
+  primaryGammaPrime : MicrostructureCoordinate
+  secondaryGammaPrime : MicrostructureCoordinate
+  tertiaryGammaPrime : MicrostructureCoordinate
+  gammaPrimeVolumeFraction : MicrostructureCoordinate
+  precipitateCoherency : MicrostructureCoordinate
+  segregation : MicrostructureCoordinate
+  porosity : MicrostructureCoordinate
+  tcpPhasePopulation : MicrostructureCoordinate
+  grainBoundaryState : MicrostructureCoordinate
 
 data PropertyCoordinate : Set where
-  yieldStrength
-  tensileStrength
-  creepResistance
-  hardness
-  fatigueResistance
-  oxidationResistance
-  burnResistance
-  ductility
-  : PropertyCoordinate
+  yieldStrength : PropertyCoordinate
+  tensileStrength : PropertyCoordinate
+  creepResistance : PropertyCoordinate
+  hardness : PropertyCoordinate
+  fatigueResistance : PropertyCoordinate
+  oxidationResistance : PropertyCoordinate
+  burnResistance : PropertyCoordinate
+  ductility : PropertyCoordinate
 
 record ProcessState : Set where
   constructor process-state
@@ -79,16 +76,17 @@ record ProcessStateBoundary : Set where
     deformationHistoryCanAlterRecrystallisationAndGammaPrimeState : Bool
     deformationHistoryCanAlterRecrystallisationAndGammaPrimeStateIsTrue : deformationHistoryCanAlterRecrystallisationAndGammaPrimeState ≡ true
 
+open ProcessStateBoundary public
+
 canonicalProcessStateBoundary : ProcessStateBoundary
 canonicalProcessStateBoundary = process-state-boundary false refl false refl true refl true refl
 
 data ProcessStateReverseTarget : Set where
-  acquireExactHeatTreatmentSchedule
-  acquireThermomechanicalHistory
-  acquireGammaPrimeSizeDistribution
-  acquireGammaPrimeVolumeFraction
-  acquireGrainSizeAndBoundaryState
-  acquireSegregationAndPorosity
-  acquireTCPPhaseCharacterisation
-  acquireTemperatureResolvedPropertyData
-  : ProcessStateReverseTarget
+  acquireExactHeatTreatmentSchedule : ProcessStateReverseTarget
+  acquireThermomechanicalHistory : ProcessStateReverseTarget
+  acquireGammaPrimeSizeDistribution : ProcessStateReverseTarget
+  acquireGammaPrimeVolumeFraction : ProcessStateReverseTarget
+  acquireGrainSizeAndBoundaryState : ProcessStateReverseTarget
+  acquireSegregationAndPorosity : ProcessStateReverseTarget
+  acquireTCPPhaseCharacterisation : ProcessStateReverseTarget
+  acquireTemperatureResolvedPropertyData : ProcessStateReverseTarget

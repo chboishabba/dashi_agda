@@ -96,9 +96,9 @@ noAuthorityFirstDivergenceAtStage1 witness
 ------------------------------------------------------------------------
 
 data CertificateDepthCode : Set where
-  finiteStage2Depth
-  noDivergenceWithinFiltration
-  : CertificateDepthCode
+  finiteStage2Depth : CertificateDepthCode
+  noDivergenceWithinFiltration : CertificateDepthCode
+
 
 depthCode : Reuse.CertificateSupport → CertificateDepthCode
 depthCode Reuse.presentFutureSupport = noDivergenceWithinFiltration

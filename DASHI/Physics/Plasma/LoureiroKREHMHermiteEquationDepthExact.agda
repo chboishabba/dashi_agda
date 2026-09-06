@@ -9,23 +9,21 @@ open import Agda.Builtin.String using (String)
 -- a full analytic rederivation in DASHI.
 
 data KREHMField : Set where
-  electrostaticPotential
-  parallelVectorPotential
-  electronDensity
-  parallelElectronFlow
-  reducedElectronDistribution
-  : KREHMField
+  electrostaticPotential : KREHMField
+  parallelVectorPotential : KREHMField
+  electronDensity : KREHMField
+  parallelElectronFlow : KREHMField
+  reducedElectronDistribution : KREHMField
 
 data KREHMOperator : Set where
-  perpendicularPoissonBracket
-  parallelDerivative
-  perpendicularLaplacian
-  resistiveDiffusion
-  electronInertia
-  HermiteStreamingUp
-  HermiteStreamingDown
-  collisions
-  : KREHMOperator
+  perpendicularPoissonBracket : KREHMOperator
+  parallelDerivative : KREHMOperator
+  perpendicularLaplacian : KREHMOperator
+  resistiveDiffusion : KREHMOperator
+  electronInertia : KREHMOperator
+  HermiteStreamingUp : KREHMOperator
+  HermiteStreamingDown : KREHMOperator
+  collisions : KREHMOperator
 
 record RMHDLimitEquation : Set where
   constructor rmhd-limit-equation
@@ -100,15 +98,16 @@ record KREHMDepthBoundary : Set where
     tearingBenchmarkAtEtaZeroStillCanReconnectViaElectronInertia : Bool
     tearingBenchmarkAtEtaZeroStillCanReconnectViaElectronInertiaIsTrue : tearingBenchmarkAtEtaZeroStillCanReconnectViaElectronInertia ≡ true
 
+open KREHMDepthBoundary public
+
 canonicalKREHMDepthBoundary : KREHMDepthBoundary
 canonicalKREHMDepthBoundary = krehm-depth-boundary false refl true refl false refl true refl
 
 data KREHMReverseTarget : Set where
-  acquireNormalization
-  acquireFullKREHMEquationSet
-  acquireHermiteBasisConvention
-  acquireClosureFormula
-  acquireCollisionOperator
-  acquireEnergyBalance
-  acquireTearingBenchmarkParameters
-  : KREHMReverseTarget
+  acquireNormalization : KREHMReverseTarget
+  acquireFullKREHMEquationSet : KREHMReverseTarget
+  acquireHermiteBasisConvention : KREHMReverseTarget
+  acquireClosureFormula : KREHMReverseTarget
+  acquireCollisionOperator : KREHMReverseTarget
+  acquireEnergyBalance : KREHMReverseTarget
+  acquireTearingBenchmarkParameters : KREHMReverseTarget

@@ -15,36 +15,36 @@ import DASHI.Core.ViewpointProvenanceBidiExact as V
 ------------------------------------------------------------------------
 
 data OpenScienceAxis : Set where
-  publicTechnicalPublication
-  openCodeDataOrMethods
-  publicTechnicalEducation
-  disclosureOrTransparencyAdvocacy
-  suppressionOrSecrecyCritique
-  restrictedToPublicBoundaryCrossing
-  : OpenScienceAxis
+  publicTechnicalPublication : OpenScienceAxis
+  openCodeDataOrMethods : OpenScienceAxis
+  publicTechnicalEducation : OpenScienceAxis
+  disclosureOrTransparencyAdvocacy : OpenScienceAxis
+  suppressionOrSecrecyCritique : OpenScienceAxis
+  restrictedToPublicBoundaryCrossing : OpenScienceAxis
+
 
 data OpenScienceMode : Set where
-  behaviour
-  explicitBelief
-  institutionalParticipation
-  : OpenScienceMode
+  behaviour : OpenScienceMode
+  explicitBelief : OpenScienceMode
+  institutionalParticipation : OpenScienceMode
+
 
 data OpenScienceProvenance : Set where
-  selfStatement
-  publicArtifact
-  institutionalRelease
-  contemporaneousDirectWitness
-  documentedParticipation
-  laterAttribution
-  mediaProjection
-  : OpenScienceProvenance
+  selfStatement : OpenScienceProvenance
+  publicArtifact : OpenScienceProvenance
+  institutionalRelease : OpenScienceProvenance
+  contemporaneousDirectWitness : OpenScienceProvenance
+  documentedParticipation : OpenScienceProvenance
+  laterAttribution : OpenScienceProvenance
+  mediaProjection : OpenScienceProvenance
+
 
 data OpenScienceStatus : Set where
-  positive
-  negative
-  unknown
-  contradicted
-  : OpenScienceStatus
+  positive : OpenScienceStatus
+  negative : OpenScienceStatus
+  unknown : OpenScienceStatus
+  contradicted : OpenScienceStatus
+
 
 record OpenScienceReceipt : Set where
   constructor open-science-receipt
@@ -132,16 +132,16 @@ open ViewpointToOpenScienceBridge public
 ------------------------------------------------------------------------
 
 data OpenScienceAcquisitionTarget : Set where
-  publicationReceipt
-  openArtifactReceipt
-  publicTeachingReceipt
-  disclosureAdvocacyReceipt
-  antiSuppressionReceipt
-  priorRestrictionReceipt
-  publicReleaseReceipt
-  sameKnowledgeObjectWeld
-  matchedOpenScienceControls
-  : OpenScienceAcquisitionTarget
+  publicationReceipt : OpenScienceAcquisitionTarget
+  openArtifactReceipt : OpenScienceAcquisitionTarget
+  publicTeachingReceipt : OpenScienceAcquisitionTarget
+  disclosureAdvocacyReceipt : OpenScienceAcquisitionTarget
+  antiSuppressionReceipt : OpenScienceAcquisitionTarget
+  priorRestrictionReceipt : OpenScienceAcquisitionTarget
+  publicReleaseReceipt : OpenScienceAcquisitionTarget
+  sameKnowledgeObjectWeld : OpenScienceAcquisitionTarget
+  matchedOpenScienceControls : OpenScienceAcquisitionTarget
+
 
 record OpenScienceReverseObligation : Set where
   constructor open-science-reverse-obligation

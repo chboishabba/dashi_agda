@@ -12,14 +12,15 @@ postulate
   sF : FascisticSystem.S
   uA : AntiFascistSystem.Invertible
   sA : AntiFascistSystem.S
+  pA : AntiFascistSystem.DistinctionPreserving uA
 
 fascism-monotone-smoke = FascisticSystem.monotone sF
 
 fascism-strict-decrease-smoke = FascisticSystem.strict-decrease sF
 
-anti-entropy-preserved-smoke = AntiFascistSystem.entropy-preserved uA sA
+anti-distinction-preserved-smoke = AntiFascistSystem.rankPreserved pA sA
 
-anti-non-collapse-smoke = AntiFascistSystem.non-collapse uA
+anti-invertible-injective-smoke = AntiFascistSystem.invertibleInjective uA
 
 -- Interface-level comparison hook to quantum: unitary evolution should be invertible,
 -- so it cannot satisfy the projection-only + strict contraction hypotheses simultaneously.

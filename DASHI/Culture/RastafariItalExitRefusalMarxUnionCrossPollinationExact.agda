@@ -43,15 +43,15 @@ data WithdrawalStatus : Set where
   withdrawalUnavailable withdrawalAvailable : WithdrawalStatus
 
 data RuleChangeStatus : Set where
-  noRuleChangePower consultRuleOnly collectiveRuleChange governingRuleChange
-  : RuleChangeStatus
+  noRuleChangePower consultRuleOnly collectiveRuleChange governingRuleChange : RuleChangeStatus
+
 
 data MaterialExitStatus : Set where
   noViableMaterialExit fragileMaterialExit viableMaterialExit : MaterialExitStatus
 
 data CollectiveOrganisationStatus : Set where
-  noCollectiveOrganisation associationPresent independentOrganisation
-  : CollectiveOrganisationStatus
+  noCollectiveOrganisation associationPresent independentOrganisation : CollectiveOrganisationStatus
+
 
 data BargainingPowerStatus : Set where
   bargainingAbsent bargainingNominal bargainingEffective : BargainingPowerStatus

@@ -13,8 +13,8 @@ record InnerProductSpace : Set₁ where
     zeroH : H
     inner : H → H → Scalar
 
-record Isometry (H : InnerProductSpace) : Set₁ where
-  open InnerProductSpace H
+record Isometry (space : InnerProductSpace) : Set₁ where
+  open InnerProductSpace space
   field
     map : H → H
     preservesInner : ∀ x y → inner (map x) (map y) ≡ inner x y

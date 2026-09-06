@@ -22,10 +22,10 @@ import DASHI.Culture.IntellectualReceptionObservationPrecisionRefinementExact as
 ------------------------------------------------------------------------
 
 data PrecisionStage : Set where
-  stage0Present
-  stage1PresentFuture
-  stage2PresentFutureAuthority
-  : PrecisionStage
+  stage0Present : PrecisionStage
+  stage1PresentFuture : PrecisionStage
+  stage2PresentFutureAuthority : PrecisionStage
+
 
 data SelectedAtStage : PrecisionStage → Reuse.PrefixCoordinate → Set where
   s0Present : SelectedAtStage stage0Present Reuse.presentCoordinate
@@ -197,10 +197,10 @@ stage1CannotAlreadyExposeAuthority ()
 module FirstDivergenceReopening where
 
   data Artifact : Set where
-    firstDivergenceArtifact
-    stage2ProjectionCertificate
-    downstreamCertificate
-    : Artifact
+    firstDivergenceArtifact : Artifact
+    stage2ProjectionCertificate : Artifact
+    downstreamCertificate : Artifact
+
 
   data Depends : Artifact → Artifact → Set where
     firstDivergenceCreatesDependency :

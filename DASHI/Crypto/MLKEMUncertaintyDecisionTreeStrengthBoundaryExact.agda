@@ -32,7 +32,10 @@ module DASHI.Crypto.MLKEMUncertaintyDecisionTreeStrengthBoundaryExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Nat using (Nat; zero; suc; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Data.Nat using (_≤_)
+import Data.Nat.Properties as NatP
+open import Relation.Binary.PropositionalEquality using (sym)
 
 ------------------------------------------------------------------------
 -- Ideal binary decision capacity.
@@ -58,7 +61,8 @@ oneMoreDecisionBitDoublesLeafCapacity :
   (depth maxCandidatesPerLeaf : Nat) →
   binaryLeafCapacity (suc depth) maxCandidatesPerLeaf ≡
   2 * binaryLeafCapacity depth maxCandidatesPerLeaf
-oneMoreDecisionBitDoublesLeafCapacity depth maxCandidatesPerLeaf = refl
+oneMoreDecisionBitDoublesLeafCapacity depth maxCandidatesPerLeaf =
+  NatP.*-assoc 2 (pow2 depth) maxCandidatesPerLeaf
 
 oneMorePrimitiveAddsOnly128Demand :
   (depth : Nat) →

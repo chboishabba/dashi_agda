@@ -11,12 +11,11 @@ data QualificationAxis : Set where
   neutronFluence gammaDose temperature operatingLife measurementIntegrity compactness autonomy failureProbability : QualificationAxis
 
 data QualificationEvidence : Set where
-  heritageKnowledge
-  literatureDeviceRecord
-  acceleratedTest
-  reliabilityPhysicsModel
-  integratedSystemTest
-  : QualificationEvidence
+  heritageKnowledge : QualificationEvidence
+  literatureDeviceRecord : QualificationEvidence
+  acceleratedTest : QualificationEvidence
+  reliabilityPhysicsModel : QualificationEvidence
+  integratedSystemTest : QualificationEvidence
 
 record QualificationRequirement : Set where
   constructor qualification-requirement
@@ -81,16 +80,17 @@ record LeBlancQualificationBoundary : Set where
     probabilityOfFailureNeedsModelOrTestReceipt : Bool
     probabilityOfFailureNeedsModelOrTestReceiptIsTrue : probabilityOfFailureNeedsModelOrTestReceipt ≡ true
 
+open LeBlancQualificationBoundary public
+
 canonicalLeBlancQualificationBoundary : LeBlancQualificationBoundary
 canonicalLeBlancQualificationBoundary = leblanc-qualification-boundary false refl false refl false refl false refl true refl
 
 data LeBlancQualificationReverseTarget : Set where
-  acquireOperatingMargin
-  acquireRadiationDriftCurve
-  acquireTemperatureDriftCurve
-  acquireLifeAccelerationModel
-  acquireFailureProbabilityModel
-  acquireRedundancyArchitecture
-  acquireDiagnosticCoverage
-  acquireCorrectiveActionPolicy
-  : LeBlancQualificationReverseTarget
+  acquireOperatingMargin : LeBlancQualificationReverseTarget
+  acquireRadiationDriftCurve : LeBlancQualificationReverseTarget
+  acquireTemperatureDriftCurve : LeBlancQualificationReverseTarget
+  acquireLifeAccelerationModel : LeBlancQualificationReverseTarget
+  acquireFailureProbabilityModel : LeBlancQualificationReverseTarget
+  acquireRedundancyArchitecture : LeBlancQualificationReverseTarget
+  acquireDiagnosticCoverage : LeBlancQualificationReverseTarget
+  acquireCorrectiveActionPolicy : LeBlancQualificationReverseTarget

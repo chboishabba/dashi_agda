@@ -65,14 +65,14 @@ adequateForOneConsumerDoesNotGlobalise system source good bad witness promote =
 ------------------------------------------------------------------------
 
 data AdequacyStage : Set where
-  sourceAcquired
-  translated
-  reconstructed
-  realized
-  kernelChecked
-  empiricallyCalibrated
-  normativelyAdmitted
-  : AdequacyStage
+  sourceAcquired : AdequacyStage
+  translated : AdequacyStage
+  reconstructed : AdequacyStage
+  realized : AdequacyStage
+  kernelChecked : AdequacyStage
+  empiricallyCalibrated : AdequacyStage
+  normativelyAdmitted : AdequacyStage
+
 
 record StageConsumerAdequacy (Consumer : Set) : Set₁ where
   constructor stageConsumerAdequacy

@@ -54,12 +54,12 @@ asResidualInformationMove move = Costed.residualInformationMove
 ------------------------------------------------------------------------
 
 data SourceRecoveryGrade : Set where
-  routeLocated
-  textAcquired
-  primaryTextInspected
-  transcriptionRecovered
-  statementCorrespondenceChecked
-  : SourceRecoveryGrade
+  routeLocated : SourceRecoveryGrade
+  textAcquired : SourceRecoveryGrade
+  primaryTextInspected : SourceRecoveryGrade
+  transcriptionRecovered : SourceRecoveryGrade
+  statementCorrespondenceChecked : SourceRecoveryGrade
+
 
 routeNotInspection : routeLocated ≡ primaryTextInspected → ⊥
 routeNotInspection ()

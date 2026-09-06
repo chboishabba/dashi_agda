@@ -21,11 +21,10 @@ open import DASHI.Core.Prelude
 import DASHI.Core.IntersectionalNonFactorability as INF
 
 data ParticipationState : Set where
-  highRecognitionLowDistribution
-  highRecognitionHighDistribution
-  highDistributionLowRepresentation
-  highDistributionHighRepresentation
-  : ParticipationState
+  highRecognitionLowDistribution : ParticipationState
+  highRecognitionHighDistribution : ParticipationState
+  highDistributionLowRepresentation : ParticipationState
+  highDistributionHighRepresentation : ParticipationState
 
 data Distribution : Set where lowDistribution highDistribution : Distribution
 data Recognition : Set where lowRecognition highRecognition : Recognition
@@ -81,6 +80,8 @@ record ParticipationAxesBoundary : Set where
     threeAxesDefinitionallySumToJustice : Bool
     threeAxesDefinitionallySumToJusticeIsFalse :
       threeAxesDefinitionallySumToJustice ≡ false
+
+open ParticipationAxesBoundary public
 
 canonicalParticipationAxesBoundary : ParticipationAxesBoundary
 canonicalParticipationAxesBoundary =

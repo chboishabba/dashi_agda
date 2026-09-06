@@ -9,9 +9,9 @@ import DASHI.Core.ReferencePopulationRosterEnrichmentExact as R
 import DASHI.Core.SelectorDiscriminationSearchExact as S
 
 data ExternalisationFeature : Set where
-  deepTechnicalExternalisation
-  restrictedToPublicTransfer
-  : ExternalisationFeature
+  deepTechnicalExternalisation : ExternalisationFeature
+  restrictedToPublicTransfer : ExternalisationFeature
+
 
 record DeepFeatureWitness : Set where
   constructor deep-feature-witness
@@ -67,12 +67,12 @@ record ExternalisationSelectionCandidate
 open ExternalisationSelectionCandidate public
 
 data MissingExternalisationSelectionReceipt : Set where
-  missingPersonFeatureEvidence
-  missingMatchedControlPopulation
-  missingEnrichmentComparison
-  missingFeatureAwareSelector
-  missingSelectorProvenance
-  : MissingExternalisationSelectionReceipt
+  missingPersonFeatureEvidence : MissingExternalisationSelectionReceipt
+  missingMatchedControlPopulation : MissingExternalisationSelectionReceipt
+  missingEnrichmentComparison : MissingExternalisationSelectionReceipt
+  missingFeatureAwareSelector : MissingExternalisationSelectionReceipt
+  missingSelectorProvenance : MissingExternalisationSelectionReceipt
+
 
 record ExternalisationSelectionFrontier : Set where
   constructor externalisation-selection-frontier

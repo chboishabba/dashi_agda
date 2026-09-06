@@ -1,4 +1,4 @@
-module DASHI.Culture.MissingDeceasedOpenScienceAcquisition2026_09_05Exact where
+module DASHI.Culture.MissingDeceasedOpenScienceAcquisition20260905Exact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)

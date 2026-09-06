@@ -12,36 +12,36 @@ open import Agda.Builtin.String using (String)
 
 
 data CandidateExplanation : Set where
-  fusionEnergyIncumbentDisruption
-  foreignStrategicCapabilityDenial
-  rivalProgrammeOrContractBenefit
-  lowReplaceabilityTacitKnowledgeSelection
-  capabilityAwareCrossDomainSelection
-  openScienceKnowledgeReleaseSelection
-  retrospectiveNarrativeAssembly
-  heterogeneousUnrelatedCases
-  : CandidateExplanation
+  fusionEnergyIncumbentDisruption : CandidateExplanation
+  foreignStrategicCapabilityDenial : CandidateExplanation
+  rivalProgrammeOrContractBenefit : CandidateExplanation
+  lowReplaceabilityTacitKnowledgeSelection : CandidateExplanation
+  capabilityAwareCrossDomainSelection : CandidateExplanation
+  openScienceKnowledgeReleaseSelection : CandidateExplanation
+  retrospectiveNarrativeAssembly : CandidateExplanation
+  heterogeneousUnrelatedCases : CandidateExplanation
+
 
 data DiscriminatorAxis : Set where
-  rosterEnrichment
-  actualDisruptionEffect
-  actorMaterialBenefit
-  capabilityAwareVisibility
-  threatPerception
-  opportunityOrAccess
-  operationalEvidence
-  matchedControlRobustness
-  crossCaseCommonality
-  negativeCaseTolerance
-  knowledgeReleaseBoundaryEvidence
-  : DiscriminatorAxis
+  rosterEnrichment : DiscriminatorAxis
+  actualDisruptionEffect : DiscriminatorAxis
+  actorMaterialBenefit : DiscriminatorAxis
+  capabilityAwareVisibility : DiscriminatorAxis
+  threatPerception : DiscriminatorAxis
+  opportunityOrAccess : DiscriminatorAxis
+  operationalEvidence : DiscriminatorAxis
+  matchedControlRobustness : DiscriminatorAxis
+  crossCaseCommonality : DiscriminatorAxis
+  negativeCaseTolerance : DiscriminatorAxis
+  knowledgeReleaseBoundaryEvidence : DiscriminatorAxis
+
 
 data RequirementLevel : Set where
-  required
-  stronglyExpected
-  informative
-  notRequired
-  : RequirementLevel
+  required : RequirementLevel
+  stronglyExpected : RequirementLevel
+  informative : RequirementLevel
+  notRequired : RequirementLevel
+
 
 record HypothesisAxisRequirement : Set where
   constructor hypothesis-axis-requirement

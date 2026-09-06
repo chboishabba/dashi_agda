@@ -12,18 +12,17 @@ open import Agda.Builtin.String using (String)
 -- behavior beyond the strict asymptotic regime.
 
 data ValidityCoordinate : Set where
-  strongGuideField
-  electronBetaOrdering
-  anisotropyOrdering
-  electronInertiaRetained
-  electronLandauDampingRetained
-  ionFLREffectsRetained
-  collisionModel
-  resistivityModel
-  velocitySpaceResolution
-  hermiteTruncation
-  hyperCollisionOrDissipation
-  : ValidityCoordinate
+  strongGuideField : ValidityCoordinate
+  electronBetaOrdering : ValidityCoordinate
+  anisotropyOrdering : ValidityCoordinate
+  electronInertiaRetained : ValidityCoordinate
+  electronLandauDampingRetained : ValidityCoordinate
+  ionFLREffectsRetained : ValidityCoordinate
+  collisionModel : ValidityCoordinate
+  resistivityModel : ValidityCoordinate
+  velocitySpaceResolution : ValidityCoordinate
+  hermiteTruncation : ValidityCoordinate
+  hyperCollisionOrDissipation : ValidityCoordinate
 
 record ReducedModelValidityProfile : Set where
   constructor reduced-model-validity-profile
@@ -73,16 +72,17 @@ record ReducedModelBoundary : Set where
     closureChoiceCanAffectFiniteMResult : Bool
     closureChoiceCanAffectFiniteMResultIsTrue : closureChoiceCanAffectFiniteMResult ≡ true
 
+open ReducedModelBoundary public
+
 canonicalReducedModelBoundary : ReducedModelBoundary
 canonicalReducedModelBoundary = reduced-model-boundary false refl false refl false refl true refl
 
 data ReducedModelReverseTarget : Set where
-  acquireTargetPlasmaOrdering
-  acquireBetaRegime
-  acquireNeglectedPhysicsEstimate
-  acquireHermiteResolutionScan
-  acquireClosureSensitivity
-  acquireCollisionSensitivity
-  acquireFullKineticComparison
-  acquireInvariantBudget
-  : ReducedModelReverseTarget
+  acquireTargetPlasmaOrdering : ReducedModelReverseTarget
+  acquireBetaRegime : ReducedModelReverseTarget
+  acquireNeglectedPhysicsEstimate : ReducedModelReverseTarget
+  acquireHermiteResolutionScan : ReducedModelReverseTarget
+  acquireClosureSensitivity : ReducedModelReverseTarget
+  acquireCollisionSensitivity : ReducedModelReverseTarget
+  acquireFullKineticComparison : ReducedModelReverseTarget
+  acquireInvariantBudget : ReducedModelReverseTarget

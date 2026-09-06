@@ -31,9 +31,8 @@ import DASHI.Environment.LESResearchCrossPollinationRound7Exact as LES7
 ------------------------------------------------------------------------
 
 data SourceRole : Set where
-  historicalThreeSistersProductivity
-  rootForagingComplementarity
-  : SourceRole
+  historicalThreeSistersProductivity : SourceRole
+  rootForagingComplementarity : SourceRole
 
 record SourceReference : Set where
   constructor sourceReference
@@ -176,6 +175,8 @@ record ThreeSistersLESBoundary : Set where
     privateCaseFactsEncoded : Bool
     privateCaseFactsEncodedIsFalse :
       privateCaseFactsEncoded ≡ false
+
+open ThreeSistersLESBoundary public
 
 canonicalThreeSistersLESBoundary : ThreeSistersLESBoundary
 canonicalThreeSistersLESBoundary =

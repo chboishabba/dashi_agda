@@ -22,14 +22,13 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data TheoremAuthority : Set where
-  kernelCheckedHere
-  kernelCheckedElsewhere
-  sourceTheoremMatched
-  derivedRepositoryTheorem
-  conditionalInterface
-  analogyOnly
-  conjectural
-  : TheoremAuthority
+  kernelCheckedHere : TheoremAuthority
+  kernelCheckedElsewhere : TheoremAuthority
+  sourceTheoremMatched : TheoremAuthority
+  derivedRepositoryTheorem : TheoremAuthority
+  conditionalInterface : TheoremAuthority
+  analogyOnly : TheoremAuthority
+  conjectural : TheoremAuthority
 
 data ClosedLeafCapability : TheoremAuthority → Set where
   hereLeaf : ClosedLeafCapability kernelCheckedHere
@@ -99,16 +98,15 @@ canonicalRouteIsLive = elaborateRoute canonicalRouteAdmission
 ------------------------------------------------------------------------
 
 data RouteError : Set where
-  carrierMismatch
-  scopeMismatch
-  strengthMismatch
-  circularity
-  noGoCollision
-  hypothesisInflation
-  alreadyOwned
-  consumerMismatch
-  missingPrerequisite
-  : RouteError
+  carrierMismatch : RouteError
+  scopeMismatch : RouteError
+  strengthMismatch : RouteError
+  circularity : RouteError
+  noGoCollision : RouteError
+  hypothesisInflation : RouteError
+  alreadyOwned : RouteError
+  consumerMismatch : RouteError
+  missingPrerequisite : RouteError
 
 data RouteDisposition : Set where
   rejected : RouteError → RouteDisposition
@@ -132,11 +130,10 @@ duplicateTheoremRegression = redirectedReuse
 ------------------------------------------------------------------------
 
 data HypothesisClass : Set where
-  derivableFromBase
-  authenticatedImportedTheorem
-  explicitFrontierLeaf
-  forbiddenStrengthening
-  : HypothesisClass
+  derivableFromBase : HypothesisClass
+  authenticatedImportedTheorem : HypothesisClass
+  explicitFrontierLeaf : HypothesisClass
+  forbiddenStrengthening : HypothesisClass
 
 data PermittedHypothesisAddition : HypothesisClass → Set where
   addDerivable : PermittedHypothesisAddition derivableFromBase

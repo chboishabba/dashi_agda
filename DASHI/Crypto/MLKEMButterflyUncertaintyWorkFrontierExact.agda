@@ -37,7 +37,7 @@ module DASHI.Crypto.MLKEMButterflyUncertaintyWorkFrontierExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _*_)
+open import Agda.Builtin.Nat using (Nat; _*_; _+_)
 open import Data.Nat using (_≤_)
 import Data.Nat.Properties as NatP
 

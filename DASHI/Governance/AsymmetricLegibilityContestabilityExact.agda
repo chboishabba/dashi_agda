@@ -116,15 +116,15 @@ sameRepresentationStillDoesNotCreateAuthority = refl
 
 data Case2 : Set where case0 case1 : Case2
 data Internal2 : Set where internal0 internal1 : Internal2
-data PublicOne : Set where public : PublicOne
+data PublicOne : Set where pub : PublicOne
 
 inspect2 : Case2 → Internal2
 inspect2 case0 = internal0
 inspect2 case1 = internal1
 
 disclose2 : Internal2 → PublicOne
-disclose2 internal0 = public
-disclose2 internal1 = public
+disclose2 internal0 = pub
+disclose2 internal1 = pub
 
 finiteLegibilityChannel : LegibilityChannel
 finiteLegibilityChannel =
@@ -149,6 +149,8 @@ record AsymmetricLegibilityBoundary : Set where
     targetDomainAuthorityNeedsSeparateWitness : Bool
     exactRecoveryBlockedByConcreteCollapseWitness : Bool
 
+open AsymmetricLegibilityBoundary public
+
 canonicalAsymmetricLegibilityBoundary : AsymmetricLegibilityBoundary
 canonicalAsymmetricLegibilityBoundary =
   asymmetricLegibilityBoundary false false false true true true
@@ -158,6 +160,8 @@ record AsymmetricLegibilitySourceReceipt : Set where
   field
     sources : List Sources.ScholarlySource
     boundary : AsymmetricLegibilityBoundary
+
+open AsymmetricLegibilitySourceReceipt public
 
 canonicalAsymmetricLegibilitySourceReceipt : AsymmetricLegibilitySourceReceipt
 canonicalAsymmetricLegibilitySourceReceipt =

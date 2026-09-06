@@ -85,3 +85,5 @@ record ItalGovernedLineageBoundary : Set where
 canonicalItalGovernedLineageBoundary : ItalGovernedLineageBoundary
 canonicalItalGovernedLineageBoundary =
   italGovernedLineageBoundary false refl true refl true refl
+
+open ItalGovernedLineageBoundary public

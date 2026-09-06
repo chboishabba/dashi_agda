@@ -15,11 +15,11 @@ import DASHI.Core.ReferencePopulationRosterEnrichmentExact as R
 ------------------------------------------------------------------------
 
 data StageEvidenceState : Set where
-  stagePresent
-  stageAbsent
-  stageNotInspected
-  stageConflict
-  : StageEvidenceState
+  stagePresent : StageEvidenceState
+  stageAbsent : StageEvidenceState
+  stageNotInspected : StageEvidenceState
+  stageConflict : StageEvidenceState
+
 
 record StageEvidenceReceipt : Set where
   constructor stage-evidence-receipt

@@ -13,14 +13,14 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data WorkCoverageStatus : Set where
-  scientificOwnerImplemented
-  engineeringOwnerImplemented
-  programmeRoleImplemented
-  mechanismDiscriminationOwnerImplemented
-  nonScientificRoleNoScienceOwner
-  publicationIdentityWeldPending
-  additionalWorkSearchOpen
-  : WorkCoverageStatus
+  scientificOwnerImplemented : WorkCoverageStatus
+  engineeringOwnerImplemented : WorkCoverageStatus
+  programmeRoleImplemented : WorkCoverageStatus
+  mechanismDiscriminationOwnerImplemented : WorkCoverageStatus
+  nonScientificRoleNoScienceOwner : WorkCoverageStatus
+  publicationIdentityWeldPending : WorkCoverageStatus
+  additionalWorkSearchOpen : WorkCoverageStatus
+
 
 record WorkCoverageEntry : Set where
   constructor work-coverage-entry

@@ -12,22 +12,22 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data BoundaryState : Set where
-  boundedPrivate
-  releaseRequested
-  releaseUnderReview
-  releaseApproved
-  releasedPublicly
-  releaseDenied
-  releaseOutcomeUnresolved
-  : BoundaryState
+  boundedPrivate : BoundaryState
+  releaseRequested : BoundaryState
+  releaseUnderReview : BoundaryState
+  releaseApproved : BoundaryState
+  releasedPublicly : BoundaryState
+  releaseDenied : BoundaryState
+  releaseOutcomeUnresolved : BoundaryState
+
 
 data BoundaryEvidenceGrade : Set where
-  primaryInstitutional
-  firstPersonContemporaneous
-  capturedContemporaneousArtifact
-  laterSecondary
-  uncorroboratedAttribution
-  : BoundaryEvidenceGrade
+  primaryInstitutional : BoundaryEvidenceGrade
+  firstPersonContemporaneous : BoundaryEvidenceGrade
+  capturedContemporaneousArtifact : BoundaryEvidenceGrade
+  laterSecondary : BoundaryEvidenceGrade
+  uncorroboratedAttribution : BoundaryEvidenceGrade
+
 
 record BoundaryStateReceipt : Set where
   constructor boundary-state-receipt
@@ -64,12 +64,12 @@ record AttemptedBoundaryTransition
 open AttemptedBoundaryTransition public
 
 record CompletedBoundaryTransition
-    (bounded public : BoundaryStateReceipt) : Set where
+    (bounded pub : BoundaryStateReceipt) : Set where
   constructor completed-boundary-transition
   field
     boundedState : state bounded ≡ boundedPrivate
-    publicState : state public ≡ releasedPublicly
-    sameObject : SameBoundaryObject bounded public
+    publicState : state pub ≡ releasedPublicly
+    sameObject : SameBoundaryObject bounded pub
     transitionReference : String
 
 open CompletedBoundaryTransition public

@@ -15,11 +15,11 @@ import DASHI.Culture.RastafariItalReturnFlowCircularityExact as Return
 ------------------------------------------------------------------------
 
 data PracticeState : Set where
-  beforeReturn
-  oneCycleCompleted
-  repeatedCyclePractice
-  interruptedPractice
-  : PracticeState
+  beforeReturn : PracticeState
+  oneCycleCompleted : PracticeState
+  repeatedCyclePractice : PracticeState
+  interruptedPractice : PracticeState
+
 
 data PracticeStep : PracticeState → PracticeState → Set where
   firstCycle : PracticeStep beforeReturn oneCycleCompleted
@@ -28,12 +28,12 @@ data PracticeStep : PracticeState → PracticeState → Set where
   interruptAfterFirst : PracticeStep oneCycleCompleted interruptedPractice
 
 data PersistenceClass : Set where
-  oneOffReturn
-  repeatedReturn
-  historyRetainingPractice
-  resilientPracticeClaim
-  regenerativePersistenceClaim
-  : PersistenceClass
+  oneOffReturn : PersistenceClass
+  repeatedReturn : PersistenceClass
+  historyRetainingPractice : PersistenceClass
+  resilientPracticeClaim : PersistenceClass
+  regenerativePersistenceClaim : PersistenceClass
+
 
 practiceResidue : PracticeState → Trajectory.ResidueFlag
 practiceResidue beforeReturn = Trajectory.residueAbsent
@@ -42,7 +42,7 @@ practiceResidue repeatedCyclePractice = Trajectory.residuePresent
 practiceResidue interruptedPractice = Trajectory.residuePresent
 
 returnHistoryIsNotErased : Trajectory.NoResidueErasure PracticeStep practiceResidue
-returnHistoryIsNotErased firstCycle present = present
+returnHistoryIsNotErased firstCycle ()
 returnHistoryIsNotErased repeatCycle present = present
 returnHistoryIsNotErased continueCycle present = present
 returnHistoryIsNotErased interruptAfterFirst present = present
@@ -122,3 +122,5 @@ record ItalReturnPersistenceBoundary : Set where
 canonicalItalReturnPersistenceBoundary : ItalReturnPersistenceBoundary
 canonicalItalReturnPersistenceBoundary =
   italReturnPersistenceBoundary false refl false refl false refl true refl
+
+open ItalReturnPersistenceBoundary public

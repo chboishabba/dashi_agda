@@ -41,9 +41,8 @@ import DASHI.Physics.Units.SI as SI
 ------------------------------------------------------------------------
 
 data XylemTransportRegime : Set where
-  cohesionTensionXylem
-  applicationSpecificHydraulicReduction
-  : XylemTransportRegime
+  cohesionTensionXylem : XylemTransportRegime
+  applicationSpecificHydraulicReduction : XylemTransportRegime
 
 record XylemHydraulicReceipt
     (root : RootSoil.RootSoilIonWaterMechanism) : Set₁ where
@@ -261,6 +260,8 @@ record PlantHydraulicAtmosphereCarbonBoundary : Set where
     stage7ValidationStillRequired : Bool
     stage7ValidationStillRequiredIsTrue :
       stage7ValidationStillRequired ≡ true
+
+open PlantHydraulicAtmosphereCarbonBoundary public
 
 canonicalPlantHydraulicAtmosphereCarbonBoundary : PlantHydraulicAtmosphereCarbonBoundary
 canonicalPlantHydraulicAtmosphereCarbonBoundary =

@@ -77,10 +77,10 @@ presentFutureDoesNotIntersectDivergentRegion witness
 module DivergentSupportReopening (support : Reuse.CertificateSupport) where
 
   data Artifact : Set where
-    divergentCoordinateArtifact
-    supportCertificate
-    downstreamCertificate
-    : Artifact
+    divergentCoordinateArtifact : Artifact
+    supportCertificate : Artifact
+    downstreamCertificate : Artifact
+
 
   data Depends : Artifact → Artifact → Set where
     divergentSupportCreatesDependency :

@@ -29,7 +29,7 @@ import DASHI.Crypto.MLKEMFIPS203SourceExact as FIPS
 import DASHI.Crypto.MLKEMNTTDataflowCouplingExact as NTT
 
 secretNTTScalarFanoutPerSourceCoefficient : Nat
-secretNTTScalarFanoutPerSourceCoefficient = NTT.sourceCoefficientsPerScalarNTTCoordinate
+secretNTTScalarFanoutPerSourceCoefficient = NTT.sourceCoefficientsPerSecretScalarNTTCoordinate
 
 secretNTTScalarFanoutIs128 : secretNTTScalarFanoutPerSourceCoefficient ≡ 128
 secretNTTScalarFanoutIs128 = refl

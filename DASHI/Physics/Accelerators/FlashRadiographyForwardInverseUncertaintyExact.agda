@@ -15,28 +15,26 @@ open import Agda.Builtin.String using (String)
 -- IEEE Trans. Image Process. 30 (2021) 7184-7199, DOI 10.1109/TIP.2021.3101929.
 
 data ForwardCoordinate : Set where
-  sourceSpectrum
-  focalSpotDistribution
-  sourceBlur
-  detectorPointSpread
-  detectorResponse
-  projectionGeometry
-  attenuationCoefficients
-  objectDensity
-  scatterField
-  photonNoise
-  : ForwardCoordinate
+  sourceSpectrum : ForwardCoordinate
+  focalSpotDistribution : ForwardCoordinate
+  sourceBlur : ForwardCoordinate
+  detectorPointSpread : ForwardCoordinate
+  detectorResponse : ForwardCoordinate
+  projectionGeometry : ForwardCoordinate
+  attenuationCoefficients : ForwardCoordinate
+  objectDensity : ForwardCoordinate
+  scatterField : ForwardCoordinate
+  photonNoise : ForwardCoordinate
 
 data InverseCoordinate : Set where
-  regularisation
-  priorModel
-  likelihoodModel
-  densityReconstruction
-  spectrumReconstruction
-  blurReconstruction
-  posteriorUncertainty
-  sensitivityAnalysis
-  : InverseCoordinate
+  regularisation : InverseCoordinate
+  priorModel : InverseCoordinate
+  likelihoodModel : InverseCoordinate
+  densityReconstruction : InverseCoordinate
+  spectrumReconstruction : InverseCoordinate
+  blurReconstruction : InverseCoordinate
+  posteriorUncertainty : InverseCoordinate
+  sensitivityAnalysis : InverseCoordinate
 
 record RadiographyForwardInverseModel : Set where
   constructor radiography-forward-inverse-model
@@ -67,19 +65,20 @@ record InverseProblemBoundary : Set where
     uncertaintyQuantificationCanChangeInterpretiveConfidence : Bool
     uncertaintyQuantificationCanChangeInterpretiveConfidenceIsTrue : uncertaintyQuantificationCanChangeInterpretiveConfidence ≡ true
 
+open InverseProblemBoundary public
+
 canonicalInverseProblemBoundary : InverseProblemBoundary
 canonicalInverseProblemBoundary = inverse-problem-boundary false refl false refl false refl true refl
 
 data RadiographyReverseTarget : Set where
-  acquireSourceSpectrumCalibration
-  acquireFocalSpotMap
-  acquireDetectorPSF
-  acquireDetectorResponseCurve
-  acquireScatterModel
-  acquireExactGeometry
-  acquireAttenuationModel
-  acquireNoiseModel
-  acquireRegularisationOrPrior
-  acquirePosteriorUncertainty
-  acquireValidationPhantomOrGroundTruth
-  : RadiographyReverseTarget
+  acquireSourceSpectrumCalibration : RadiographyReverseTarget
+  acquireFocalSpotMap : RadiographyReverseTarget
+  acquireDetectorPSF : RadiographyReverseTarget
+  acquireDetectorResponseCurve : RadiographyReverseTarget
+  acquireScatterModel : RadiographyReverseTarget
+  acquireExactGeometry : RadiographyReverseTarget
+  acquireAttenuationModel : RadiographyReverseTarget
+  acquireNoiseModel : RadiographyReverseTarget
+  acquireRegularisationOrPrior : RadiographyReverseTarget
+  acquirePosteriorUncertainty : RadiographyReverseTarget
+  acquireValidationPhantomOrGroundTruth : RadiographyReverseTarget

@@ -186,7 +186,7 @@ demoRouting = record
   ; dominationCost = λ situation route → 0
   }
 
-demoInterpretation : RouteMandateInterpretation demoMandate
+demoInterpretation : RouteMandateInterpretation {DemoSituation} {DemoRoute} demoMandate
 demoInterpretation =
   routeMandateInterpretation
     (λ situation → tt)
@@ -244,6 +244,8 @@ record MandateBackedRoutingBoundary : Set where
     scopedAuthorityRequiresRecall : Bool
     scopedAuthorityRequiresReview : Bool
     inhabitedScopedRouteWitnessAvailable : Bool
+
+open MandateBackedRoutingBoundary public
 
 canonicalMandateBackedRoutingBoundary : MandateBackedRoutingBoundary
 canonicalMandateBackedRoutingBoundary =

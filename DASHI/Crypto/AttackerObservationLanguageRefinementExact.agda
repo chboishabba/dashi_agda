@@ -62,13 +62,13 @@ splitRefutesExtendedEquivalence split extended =
 
 data Hidden2 : Set where h0 h1 : Hidden2
 
-data PublicOne : Set where public : PublicOne
+data PublicOne : Set where pub : PublicOne
 
 data SideBit : Set where side0 side1 : SideBit
 
 publicObs : Hidden2 → PublicOne
-publicObs h0 = public
-publicObs h1 = public
+publicObs h0 = pub
+publicObs h1 = pub
 
 sideObs : Hidden2 → SideBit
 sideObs h0 = side0

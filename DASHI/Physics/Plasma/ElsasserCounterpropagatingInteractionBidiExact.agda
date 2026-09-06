@@ -19,9 +19,8 @@ import DASHI.Physics.Plasma.ElsasserMHDChartExact as Elsasser
 ------------------------------------------------------------------------
 
 data ElsasserOrientation : Set where
-  plusOrientation
-  minusOrientation
-  : ElsasserOrientation
+  plusOrientation : ElsasserOrientation
+  minusOrientation : ElsasserOrientation
 
 opposite : ElsasserOrientation → ElsasserOrientation
 opposite plusOrientation = minusOrientation
@@ -95,6 +94,8 @@ record CounterpropagationBoundary : Set where
     nsHelicalTriadSignAloneDeterminesMHDTransfer : Bool
     nsHelicalTriadSignAloneDeterminesMHDTransferIsFalse :
       nsHelicalTriadSignAloneDeterminesMHDTransfer ≡ false
+
+open CounterpropagationBoundary public
 
 canonicalCounterpropagationBoundary : CounterpropagationBoundary
 canonicalCounterpropagationBoundary =

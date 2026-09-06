@@ -9,6 +9,7 @@ module DASHI.Culture.MissingDeceasedCommonSelectorVisibilityExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 
 import DASHI.Core.CommonSelectorVisibilityHyperfabricExact as V
 import DASHI.Culture.MissingDeceasedScientificWorkSourceRegistryExact as Sources
@@ -172,10 +173,10 @@ loureiroLeBlancCommonPublicVisibility = V.common-visibility-pair
 ------------------------------------------------------------------------
 
 data SelectorStatus : Set where
-  sourceBackedPresent
-  candidateNotLocated
-  candidateKnownAbsent
-  : SelectorStatus
+  sourceBackedPresent : SelectorStatus
+  candidateNotLocated : SelectorStatus
+  candidateKnownAbsent : SelectorStatus
+
 
 record SelectorLayerAssessment : Set where
   constructor selector-layer-assessment
@@ -184,6 +185,8 @@ record SelectorLayerAssessment : Set where
     status : SelectorStatus
     evidenceNeeded : String
     boundedReading : String
+
+open SelectorLayerAssessment public
 
 publicLayer : SelectorLayerAssessment
 publicLayer = selector-layer-assessment
@@ -247,6 +250,8 @@ record CurrentSelectorAssessment : Set where
 
     commonAdversaryEstablished : Bool
     commonAdversaryEstablishedIsFalse : commonAdversaryEstablished ≡ false
+
+open CurrentSelectorAssessment public
 
 canonicalCurrentSelectorAssessment : CurrentSelectorAssessment
 canonicalCurrentSelectorAssessment = current-selector-assessment

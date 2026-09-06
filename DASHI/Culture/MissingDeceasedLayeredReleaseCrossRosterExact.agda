@@ -33,7 +33,7 @@ leblancReport : L.LayerReceipt
 leblancReport = L.layer-receipt
   "NASA 40 kW Fission Surface Power I&C Technology Development Path"
   L.publicTechnicalReport
-  L.public
+  L.publicState
   "NASA NTRS 20250008475"
   "NASA publicly distributes the presentation; the record states Public Use Permitted and NASA Peer Committee review."
 
@@ -97,7 +97,7 @@ rezaReport : L.LayerReceipt
 rezaReport = L.layer-receipt
   "US20040208777A1"
   L.publicTechnicalReport
-  L.public
+  L.publicState
   "Google Patents / USPTO lineage for US20040208777A1"
   "The patent application publicly discloses the claimed alloy invention."
 
@@ -161,7 +161,7 @@ chavezReport : L.LayerReceipt
 chavezReport = L.layer-receipt
   "DARHT / Scorpius public engineering description"
   L.publicTechnicalReport
-  L.public
+  L.publicState
   "LANL National Security Science Spring/Summer 2025 issues"
   "LANL publicly explains accelerator architecture, radiographic capability and engineering roles."
 
@@ -234,6 +234,8 @@ record CurrentLayeredCrossRosterAssessment : Set where
     crossRosterLayeredEnrichmentEstablished : Bool
     crossRosterLayeredEnrichmentEstablishedIsFalse :
       crossRosterLayeredEnrichmentEstablished ≡ false
+
+open CurrentLayeredCrossRosterAssessment public
 
 canonicalCurrentLayeredCrossRosterAssessment : CurrentLayeredCrossRosterAssessment
 canonicalCurrentLayeredCrossRosterAssessment = current-layered-cross-roster-assessment

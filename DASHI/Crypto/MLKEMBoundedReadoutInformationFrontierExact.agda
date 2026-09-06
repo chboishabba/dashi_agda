@@ -84,18 +84,18 @@ record UncertaintyBoundedReadoutPrimitive : Set where
 open UncertaintyBoundedReadoutPrimitive public
 
 primitiveUncertaintyFrontier :
-  (primitive : UncertaintyBoundedReadoutPrimitive) →
+  (prim : UncertaintyBoundedReadoutPrimitive) →
   128 ≤
-  sourceSupport primitive *
-  (touchCount (readout primitive) + singularBudget primitive)
+  sourceSupport prim *
+  (touchCount (readout prim) + singularBudget prim)
 primitiveUncertaintyFrontier = uncertaintyTouch128
 
 primitiveInformationFrontier :
-  (primitive : UncertaintyBoundedReadoutPrimitive) →
-  protectedBitsResolved (readout primitive) ≤
-  touchCount (readout primitive) * bitsPerTouchedCell (readout primitive)
-primitiveInformationFrontier primitive =
-  protectedResolutionWithinTouchedCapacity (readout primitive)
+  (prim : UncertaintyBoundedReadoutPrimitive) →
+  protectedBitsResolved (readout prim) ≤
+  touchCount (readout prim) * bitsPerTouchedCell (readout prim)
+primitiveInformationFrontier prim =
+  protectedResolutionWithinTouchedCapacity (readout prim)
 
 ------------------------------------------------------------------------
 -- Radius specialization.  If primitive source moves are bounded by r, the
@@ -103,17 +103,17 @@ primitiveInformationFrontier primitive =
 ------------------------------------------------------------------------
 
 radiusUncertaintyFrontier :
-  (primitive : UncertaintyBoundedReadoutPrimitive) →
+  (prim : UncertaintyBoundedReadoutPrimitive) →
   (radius : Nat) →
-  sourceSupport primitive ≤ radius →
+  sourceSupport prim ≤ radius →
   128 ≤
   radius *
-  (touchCount (readout primitive) + singularBudget primitive)
-radiusUncertaintyFrontier primitive radius withinRadius =
+  (touchCount (readout prim) + singularBudget prim)
+radiusUncertaintyFrontier prim radius withinRadius =
   NatP.≤-trans
-    (uncertaintyTouch128 primitive)
+    (uncertaintyTouch128 prim)
     (NatP.*-monoˡ-≤
-      (touchCount (readout primitive) + singularBudget primitive)
+      (touchCount (readout prim) + singularBudget prim)
       withinRadius)
 
 ------------------------------------------------------------------------

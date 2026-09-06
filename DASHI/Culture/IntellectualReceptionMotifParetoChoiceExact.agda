@@ -16,11 +16,11 @@ import DASHI.Culture.IntellectualReceptionTernaryParetoSituatedChoiceExact as Ch
 ------------------------------------------------------------------------
 
 data ReceptionMotif : Set where
-  relayReception
-  sourceReturnRecovery
-  pluralSplitReception
-  institutionalMergeReception
-  : ReceptionMotif
+  relayReception : ReceptionMotif
+  sourceReturnRecovery : ReceptionMotif
+  pluralSplitReception : ReceptionMotif
+  institutionalMergeReception : ReceptionMotif
+
 
 motifProfile : ReceptionMotif → Pareto.SituatedInformationProfile
 motifProfile relayReception =

@@ -28,20 +28,30 @@ import DASHI.Core.ObserverRefinementLatticeExact as Observer
 ------------------------------------------------------------------------
 
 data EvidenceKind : Set where
-  testimony recordEvidence witnessEvidence forensicEvidence
-  institutionalEvidence secondaryEvidence : EvidenceKind
+  testimony : EvidenceKind
+  recordEvidence : EvidenceKind
+  witnessEvidence : EvidenceKind
+  forensicEvidence : EvidenceKind
+  institutionalEvidence : EvidenceKind
+  secondaryEvidence : EvidenceKind
 
 data RecordStatus : Set where
-  present notLocated knownAbsent : RecordStatus
+  present : RecordStatus
+  notLocated : RecordStatus
+  knownAbsent : RecordStatus
 
 data TemporalPosition : Set where
-  preEvent postEvent : TemporalPosition
+  preEvent : TemporalPosition
+  postEvent : TemporalPosition
 
 data SourceRelation : Set where
-  independent sharedLineage unknownLineage : SourceRelation
+  independent : SourceRelation
+  sharedLineage : SourceRelation
+  unknownLineage : SourceRelation
 
 data AuditStatus : Set where
-  publiclyAuditable notPubliclyAuditable : AuditStatus
+  publiclyAuditable : AuditStatus
+  notPubliclyAuditable : AuditStatus
 
 notLocated≠knownAbsent : notLocated ≡ knownAbsent → ⊥
 notLocated≠knownAbsent ()

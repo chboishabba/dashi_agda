@@ -13,17 +13,17 @@ data PlasmaModel : Set where
   KREHM KRMHD reducedMHDLimit : PlasmaModel
 
 data ParallelScheme : Set where
-  macCormack2
-  tvdRK3Upwind7
-  : ParallelScheme
+  macCormack2 : ParallelScheme
+  tvdRK3Upwind7 : ParallelScheme
+
 
 data PerpendicularScheme : Set where
-  pseudoSpectral
-  : PerpendicularScheme
+  pseudoSpectral : PerpendicularScheme
+
 
 data VelocitySpaceScheme : Set where
-  hermiteSpectral
-  : VelocitySpaceScheme
+  hermiteSpectral : VelocitySpaceScheme
+
 
 data OperatorSplit : Set where
   strang godunov : OperatorSplit
@@ -104,6 +104,8 @@ record CurrentViriatoScienceAssessment : Set where
     benchmarkSuiteOwnedIsTrue : benchmarkSuiteOwned ≡ true
     universalPhysicalValidityOwned : Bool
     universalPhysicalValidityOwnedIsFalse : universalPhysicalValidityOwned ≡ false
+
+open CurrentViriatoScienceAssessment public
 
 canonicalCurrentViriatoScienceAssessment : CurrentViriatoScienceAssessment
 canonicalCurrentViriatoScienceAssessment = current-viriato-science-assessment

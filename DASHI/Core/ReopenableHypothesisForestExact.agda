@@ -45,6 +45,8 @@ data HypothesisStatus : Set where
   reopenable : DormancyReason → HypothesisStatus
   refuted : HypothesisStatus
 
+open import Agda.Primitive using (Level; lsuc; _⊔_)
+
 ------------------------------------------------------------------------
 -- Refutation is proof-bearing.  In particular there is deliberately no
 -- constructor `reopenable -> refuted`: an inactive alternative must first be
@@ -52,7 +54,7 @@ data HypothesisStatus : Set where
 -- supplied against the hypothesis carrier itself.
 ------------------------------------------------------------------------
 
-record HypothesisSemantics (Hypothesis : Set) : Set₁ where
+record HypothesisSemantics {ℓ : Level} (Hypothesis : Set ℓ) : Set (lsuc ℓ) where
   constructor hypothesisSemantics
   field
     Refutation : Hypothesis → Set
@@ -61,7 +63,7 @@ record HypothesisSemantics (Hypothesis : Set) : Set₁ where
 open HypothesisSemantics public
 
 data HypothesisTransition
-    {Hypothesis : Set}
+    {ℓ : Level} {Hypothesis : Set ℓ}
     (semantics : HypothesisSemantics Hypothesis)
     (hypothesis : Hypothesis) :
     HypothesisStatus → HypothesisStatus → Set where
@@ -85,7 +87,7 @@ data HypothesisTransition
 ------------------------------------------------------------------------
 
 noDirectDormantRefutation :
-  ∀ {Hypothesis}
+  ∀ {ℓ : Level} {Hypothesis : Set ℓ}
     {semantics : HypothesisSemantics Hypothesis}
     {hypothesis : Hypothesis}
     {reason : DormancyReason} →
@@ -97,7 +99,7 @@ noDirectDormantRefutation ()
 -- Forest entries keep status separate from the payload and any domain score.
 ------------------------------------------------------------------------
 
-record HypothesisEntry (Hypothesis Score : Set) : Set where
+record HypothesisEntry {ℓ₁ ℓ₂ : Level} (Hypothesis : Set ℓ₁) (Score : Set ℓ₂) : Set (ℓ₁ ⊔ ℓ₂) where
   constructor hypothesisEntry
   field
     hypothesis : Hypothesis
@@ -113,6 +115,8 @@ record ReopenableHypothesisBoundary : Set where
     refutationRequiresDomainWitness : Bool
     dormantAlternativeCanReturnToActive : Bool
     scoringSemanticsRemainDomainSpecific : Bool
+
+open ReopenableHypothesisBoundary public
 
 canonicalReopenableHypothesisBoundary : ReopenableHypothesisBoundary
 canonicalReopenableHypothesisBoundary =

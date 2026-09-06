@@ -62,17 +62,17 @@ movementAuthorityLedger =
 ------------------------------------------------------------------------
 
 data LedgerState : Set where
-  sourceLedgerState
-  closureVisitedState
-  archivePluralVisitedState
-  movementAuthorityVisitedState
-  reconvergedClosureState
-  reconvergedArchivePluralState
-  reconvergedMovementAuthorityState
-  archivePluralContinuationState
-  movementContinuationState
-  authorityContinuationState
-  : LedgerState
+  sourceLedgerState : LedgerState
+  closureVisitedState : LedgerState
+  archivePluralVisitedState : LedgerState
+  movementAuthorityVisitedState : LedgerState
+  reconvergedClosureState : LedgerState
+  reconvergedArchivePluralState : LedgerState
+  reconvergedMovementAuthorityState : LedgerState
+  archivePluralContinuationState : LedgerState
+  movementContinuationState : LedgerState
+  authorityContinuationState : LedgerState
+
 
 ledger : LedgerState → ReceptionResidueLedger
 ledger sourceLedgerState = emptyLedger
@@ -198,10 +198,10 @@ futureObserver _ = Stratum.pluralContestableCone
 ------------------------------------------------------------------------
 
 data LaterEdgeProfile : Set where
-  closureRestrictedEdges
-  archivePluralEdges
-  movementAuthorityEdges
-  : LaterEdgeProfile
+  closureRestrictedEdges : LaterEdgeProfile
+  archivePluralEdges : LaterEdgeProfile
+  movementAuthorityEdges : LaterEdgeProfile
+
 
 edgeProfile : ReconvergedLedgerCase → LaterEdgeProfile
 edgeProfile closureCase = closureRestrictedEdges

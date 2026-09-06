@@ -56,7 +56,7 @@ record DiscriminatingLanguageExtension
 open DiscriminatingLanguageExtension public
 
 joinedObservation :
-  ∀ {World Existing}
+  ∀ {World Existing : Set}
     (existing : World → Existing) →
     (bundle : ExperimentBundle World) →
   World → Existing × Observation bundle
@@ -64,7 +64,7 @@ joinedObservation existing bundle world =
   existing world , observe bundle world
 
 extensionJoinSeparates :
-  ∀ {World Existing}
+  ∀ {World Existing : Set}
     {existing : World → Existing}
     (extension : DiscriminatingLanguageExtension existing) →
   joinedObservation existing (DiscriminatingLanguageExtension.extension extension)
@@ -87,7 +87,7 @@ ProspectivelyClosesConsumer :
   ∀ {Evidence World Prediction : Set} →
   Envelope.Compatible Evidence World →
   (World → Prediction) →
-  ExperimentBundle World → Set₁
+  ExperimentBundle World → Set
 ProspectivelyClosesConsumer compatible consumer bundle =
   ∀ evidence witness →
   compatible evidence witness →
@@ -213,7 +213,7 @@ open ControlledCoordinateDiscriminator public
 ------------------------------------------------------------------------
 
 bundleInformationMove :
-  ∀ {World} → ExperimentBundle World → Choice.InformationMove
+  ∀ {World : Set} → ExperimentBundle World → Choice.InformationMove
 bundleInformationMove bundle =
   Choice.informationMove
     Choice.takeMeasurement
@@ -266,6 +266,8 @@ record DiscriminatorSynthesisBoundary : Set where
     symmetryCompatibilityIsRequiredForEveryExperiment : Bool
     symmetryCompatibilityIsRequiredForEveryExperimentIsFalse :
       symmetryCompatibilityIsRequiredForEveryExperiment ≡ false
+
+open DiscriminatorSynthesisBoundary public
 
 canonicalDiscriminatorSynthesisBoundary : DiscriminatorSynthesisBoundary
 canonicalDiscriminatorSynthesisBoundary =

@@ -10,17 +10,17 @@ import DASHI.Core.ScientificMechanismEvidenceBidiExact as S
 ------------------------------------------------------------------------
 
 data AlloyElement : Set where
-  nickel cobalt chromium aluminum titanium carbon boron zirconium manganese
-  : AlloyElement
+  nickel cobalt chromium aluminum titanium carbon boron zirconium manganese : AlloyElement
+
 
 data MetallurgicalRole : Set where
-  burnResistance
-  solidSolutionStrengthening
-  oxidationResistance
-  gammaPrimeStrengthening
-  grainBoundaryStrengthening
-  fabricationSupport
-  : MetallurgicalRole
+  burnResistance : MetallurgicalRole
+  solidSolutionStrengthening : MetallurgicalRole
+  oxidationResistance : MetallurgicalRole
+  gammaPrimeStrengthening : MetallurgicalRole
+  grainBoundaryStrengthening : MetallurgicalRole
+  fabricationSupport : MetallurgicalRole
+
 
 record CompositionRange : Set where
   constructor composition-range
@@ -134,6 +134,8 @@ record CurrentRezaAlloyScienceAssessment : Set where
     fullMicrostructurePropertyModelOwned : Bool
     fullMicrostructurePropertyModelOwnedIsFalse :
       fullMicrostructurePropertyModelOwned ≡ false
+
+open CurrentRezaAlloyScienceAssessment public
 
 canonicalCurrentRezaAlloyScienceAssessment : CurrentRezaAlloyScienceAssessment
 canonicalCurrentRezaAlloyScienceAssessment = current-reza-alloy-science-assessment

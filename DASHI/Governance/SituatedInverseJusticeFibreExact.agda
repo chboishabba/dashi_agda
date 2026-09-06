@@ -436,6 +436,8 @@ record SituatedInverseJusticeBoundary : Set where
     negativeTransitionMayInstantiateInverseJustice : Bool
     empiricalRoleBindingRequiredForLiveCases : Bool
 
+open SituatedInverseJusticeBoundary public
+
 canonicalSituatedInverseJusticeBoundary : SituatedInverseJusticeBoundary
 canonicalSituatedInverseJusticeBoundary =
   situatedInverseJusticeBoundary

@@ -24,12 +24,12 @@ import DASHI.Core.ActiveBidiDiscriminatorLoopExact as Bidi
 ------------------------------------------------------------------------
 
 data DomainReading : Set where
-  neuralPopulationReading
-  learnedRepresentationReading
-  quantumEffectiveReading
-  chemicalCollectiveReading
-  cosmologicalEffectiveReading
-  : DomainReading
+  neuralPopulationReading : DomainReading
+  learnedRepresentationReading : DomainReading
+  quantumEffectiveReading : DomainReading
+  chemicalCollectiveReading : DomainReading
+  cosmologicalEffectiveReading : DomainReading
+
 
 record CoarseGrainingApplicationReceipt : Set where
   constructor coarse-graining-application-receipt

@@ -24,25 +24,25 @@ import DASHI.Culture.SymbolicInversionAuthorityTransferBidiExact as Symbol
 data AttributionPerson : Set where firstPerson secondPerson thirdPerson : AttributionPerson
 
 data AttributionMode : Set where
-  selfIdentification
-  directExternalAttribution
-  accusation
-  reportedQuotation
-  retrospectiveHistoricalClassification
-  reclaimedQuotation
-  hostileLabelling
-  descriptiveObservation
-  : AttributionMode
+  selfIdentification : AttributionMode
+  directExternalAttribution : AttributionMode
+  accusation : AttributionMode
+  reportedQuotation : AttributionMode
+  retrospectiveHistoricalClassification : AttributionMode
+  reclaimedQuotation : AttributionMode
+  hostileLabelling : AttributionMode
+  descriptiveObservation : AttributionMode
+
 
 data AttributionAuthority : Set where
-  selfAuthority
-  targetContestableAuthority
-  institutionalAuthority
-  documentaryAuthority
-  historianInterpretiveAuthority
-  communityAuthority
-  unresolvedAuthority
-  : AttributionAuthority
+  selfAuthority : AttributionAuthority
+  targetContestableAuthority : AttributionAuthority
+  institutionalAuthority : AttributionAuthority
+  documentaryAuthority : AttributionAuthority
+  historianInterpretiveAuthority : AttributionAuthority
+  communityAuthority : AttributionAuthority
+  unresolvedAuthority : AttributionAuthority
+
 
 data TemporalRelation : Set where presentTime pastTime quotedTime unresolvedTime : TemporalRelation
 
@@ -153,25 +153,25 @@ hostileLabelDoesNotPromotePrivateIdentity ()
 ------------------------------------------------------------------------
 
 data AttributionObligationKind : Set where
-  speakerIdentityObligation
-  targetIdentityObligation
-  targetAssentObligation
-  attributionSourceObligation
-  historicalEvidenceObligation
-  quotationFidelityObligation
-  endorsementObligation
-  temporalScopeObligation
-  contestabilityObligation
-  selfIdentificationObligation
-  : AttributionObligationKind
+  speakerIdentityObligation : AttributionObligationKind
+  targetIdentityObligation : AttributionObligationKind
+  targetAssentObligation : AttributionObligationKind
+  attributionSourceObligation : AttributionObligationKind
+  historicalEvidenceObligation : AttributionObligationKind
+  quotationFidelityObligation : AttributionObligationKind
+  endorsementObligation : AttributionObligationKind
+  temporalScopeObligation : AttributionObligationKind
+  contestabilityObligation : AttributionObligationKind
+  selfIdentificationObligation : AttributionObligationKind
+
 
 data AttributionStatus : Set where
-  recovered
-  requiresIndependentReceipt
-  unresolved
-  notApplicable
-  nonidentifiable
-  : AttributionStatus
+  recovered : AttributionStatus
+  requiresIndependentReceipt : AttributionStatus
+  unresolved : AttributionStatus
+  notApplicable : AttributionStatus
+  nonidentifiable : AttributionStatus
+
 
 record AttributionAudit : Set where
   constructor attribution-audit
@@ -196,13 +196,13 @@ historicalSelfIdentificationStatus = requiresIndependentReceipt
 ------------------------------------------------------------------------
 
 data DialogueMove : Set where
-  attributionMove
-  acceptanceMove
-  rejectionMove
-  qualificationMove
-  reclaimingMove
-  quotationMove
-  : DialogueMove
+  attributionMove : DialogueMove
+  acceptanceMove : DialogueMove
+  rejectionMove : DialogueMove
+  qualificationMove : DialogueMove
+  reclaimingMove : DialogueMove
+  quotationMove : DialogueMove
+
 
 record AttributionDialogue : Set where
   constructor attribution-dialogue

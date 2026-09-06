@@ -33,8 +33,8 @@ data SpeakerStanding : Set where
   institutionalStanding externalObserverStanding unresolvedStanding : SpeakerStanding
 
 data DisclosurePermission : Set where
-  publicDisclosure restrictedDisclosure noDisclosureReceipt unresolvedDisclosure
-  : DisclosurePermission
+  publicDisclosure restrictedDisclosure noDisclosureReceipt unresolvedDisclosure : DisclosurePermission
+
 
 data InterpretiveObligation : Set where
   ordinaryAttribution preserveContestability preserveSourceContext

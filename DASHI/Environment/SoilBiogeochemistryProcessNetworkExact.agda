@@ -28,20 +28,18 @@ import DASHI.Environment.LESDomainBasisBidiFrontierExact as Basis
 ------------------------------------------------------------------------
 
 data SoilCNPoolKind : Set where
-  soilOrganicCarbon
-  microbialBiomassCarbon
-  soilOrganicNitrogen
-  mineralNitrogen
-  microbialBiomassNitrogen
-  : SoilCNPoolKind
+  soilOrganicCarbon : SoilCNPoolKind
+  microbialBiomassCarbon : SoilCNPoolKind
+  soilOrganicNitrogen : SoilCNPoolKind
+  mineralNitrogen : SoilCNPoolKind
+  microbialBiomassNitrogen : SoilCNPoolKind
 
 data SoilCNProcessKind : Set where
-  decomposition
-  microbialAssimilation
-  mineralisation
-  immobilisation
-  heterotrophicRespiration
-  : SoilCNProcessKind
+  decomposition : SoilCNProcessKind
+  microbialAssimilation : SoilCNProcessKind
+  mineralisation : SoilCNProcessKind
+  immobilisation : SoilCNProcessKind
+  heterotrophicRespiration : SoilCNProcessKind
 
 record SoilCNPool : Set where
   constructor soilCNPool
@@ -176,3 +174,5 @@ canonicalSoilBiogeochemistryBoundary =
     false refl
     true refl
     true refl
+
+open SoilBiogeochemistryBoundary public

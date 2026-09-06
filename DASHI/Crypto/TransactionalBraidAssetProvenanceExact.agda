@@ -29,11 +29,7 @@ data AssetStrand : Set where
   originStrand relayStrand sinkStrand : AssetStrand
 
 data TransactionKind : Set where
-  transferCrossing
-  splitCrossing
-  mergeCrossing
-  returnCrossing
-  : TransactionKind
+  transferCrossing splitCrossing mergeCrossing returnCrossing : TransactionKind
 
 record TransactionCrossing : Set where
   constructor transaction-crossing
@@ -45,10 +41,7 @@ record TransactionCrossing : Set where
 open TransactionCrossing public
 
 data TransactionTrace : Set where
-  directTrace
-  washLikeTrace
-  peelLikeTrace
-  : TransactionTrace
+  directTrace washLikeTrace peelLikeTrace : TransactionTrace
 
 ------------------------------------------------------------------------
 -- 2. Coarse endpoint can collide while provenance differs.
@@ -58,10 +51,7 @@ data EndpointCode : Set where
   sameTerminalAssetSurface : EndpointCode
 
 data ProvenanceCode : Set where
-  directOriginToSink
-  returnedThroughRelay
-  serialRelayPeel
-  : ProvenanceCode
+  directOriginToSink returnedThroughRelay serialRelayPeel : ProvenanceCode
 
 endpoint : TransactionTrace → EndpointCode
 endpoint _ = sameTerminalAssetSurface
@@ -143,10 +133,7 @@ traceDepth washLikeTrace = twoCrossings
 traceDepth peelLikeTrace = manyCrossings
 
 data ProvenanceDisposition : Set where
-  directlyAttributed
-  attributionRequiresPathReview
-  attributionRequiresSerialPathReview
-  : ProvenanceDisposition
+  directlyAttributed attributionRequiresPathReview attributionRequiresSerialPathReview : ProvenanceDisposition
 
 provenanceDisposition : TransactionTrace → ProvenanceDisposition
 provenanceDisposition directTrace = directlyAttributed

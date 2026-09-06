@@ -2,6 +2,7 @@ module DASHI.Core.StablePartitionCanonicalFutureBridgeExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
+open import Data.List.Base using (length)
 
 import DASHI.Core.AdmissibleReachability as Reachability
 import DASHI.Core.FutureObservationLanguageQuotientExact as Future
@@ -38,7 +39,7 @@ canonicalAction :
     (state : State) (action : Action) →
   Dependency.AdmissibleAction
     (deterministicSystem step label) state action
-canonicalAction state action = record
+canonicalAction {step = step} state action = record
   { precondition = tt
   ; after = step action state
   ; postcondition = exactPost refl
@@ -54,7 +55,7 @@ canonicalExecutes :
     (deterministicSystem step label)
     actions state (Refinement.run step actions state)
 canonicalExecutes [] state = Reachability.executesNil
-canonicalExecutes (action ∷ rest) state =
+canonicalExecutes {step = step} (action ∷ rest) state =
   Reachability.executesCons
     (canonicalAction state action)
     (canonicalExecutes rest (step action state))

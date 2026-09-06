@@ -32,11 +32,11 @@ import DASHI.Core.IntersectionalBinaryInteractionBridgeExact as Interaction
 ------------------------------------------------------------------------
 
 data InformationSituation : Set where
-  presentFutureInherited
-  authorityInherited
-  authorityIntroduced
-  presentFutureIntroduced
-  : InformationSituation
+  presentFutureInherited : InformationSituation
+  authorityInherited : InformationSituation
+  authorityIntroduced : InformationSituation
+  presentFutureIntroduced : InformationSituation
+
 
 data SupportClass : Set where
   presentFutureSupportClass authoritySupportClass : SupportClass
@@ -51,11 +51,11 @@ data AuthorityClass : Set where
   authorityAbsent authorityPresent : AuthorityClass
 
 data SituatedInformationCode : Set where
-  pfInheritedCode
-  authorityInheritedCode
-  authorityIntroducedCode
-  pfIntroducedCode
-  : SituatedInformationCode
+  pfInheritedCode : SituatedInformationCode
+  authorityInheritedCode : SituatedInformationCode
+  authorityIntroducedCode : SituatedInformationCode
+  pfIntroducedCode : SituatedInformationCode
+
 
 supportClass : InformationSituation → SupportClass
 supportClass presentFutureInherited = presentFutureSupportClass

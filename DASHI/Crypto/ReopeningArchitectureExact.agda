@@ -63,10 +63,7 @@ record ReopeningAsymmetry (system : ModelRelativeReopening) : Set₁ where
 open ReopeningAsymmetry public
 
 data HiddenFibreMode : Set where
-  informationTheoretic
-  secretCoordinateTransform
-  algebraicTrapdoor
-  noisyModuleGeometry : HiddenFibreMode
+  informationTheoretic secretCoordinateTransform algebraicTrapdoor noisyModuleGeometry : HiddenFibreMode
 
 record CandidateVerifier : Set₁ where
   constructor candidateVerifier

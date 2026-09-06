@@ -20,21 +20,21 @@ import DASHI.Core.ReopenableHypothesisForestExact as Forest
 ------------------------------------------------------------------------
 
 data SelectorAcquisitionTarget : Set where
-  crossInstitutionPersonnelDirectory
-  sharedFundingOrAwardManagementSystem
-  sharedPrimeOrSubcontractorRegistry
-  sharedFacilityAccessOrVisitorSystem
-  sharedClearanceOrSecurityAdministrationSystem
-  sharedTechnicalConferenceOrAdvisoryNetwork
-  sharedCounterintelligenceOrWatchlistingSystem
-  sharedPublicTechnicalIndex
-  : SelectorAcquisitionTarget
+  crossInstitutionPersonnelDirectory : SelectorAcquisitionTarget
+  sharedFundingOrAwardManagementSystem : SelectorAcquisitionTarget
+  sharedPrimeOrSubcontractorRegistry : SelectorAcquisitionTarget
+  sharedFacilityAccessOrVisitorSystem : SelectorAcquisitionTarget
+  sharedClearanceOrSecurityAdministrationSystem : SelectorAcquisitionTarget
+  sharedTechnicalConferenceOrAdvisoryNetwork : SelectorAcquisitionTarget
+  sharedCounterintelligenceOrWatchlistingSystem : SelectorAcquisitionTarget
+  sharedPublicTechnicalIndex : SelectorAcquisitionTarget
+
 
 data TargetStatus : Set where
-  targetPresent
-  targetNotLocated
-  targetKnownAbsent
-  : TargetStatus
+  targetPresent : TargetStatus
+  targetNotLocated : TargetStatus
+  targetKnownAbsent : TargetStatus
+
 
 record SelectorAcquisition : Set where
   constructor selector-acquisition
@@ -125,13 +125,13 @@ intelligenceSelectorAcquisition = selector-acquisition
 ------------------------------------------------------------------------
 
 data SelectorHypothesis : Set where
-  publicOnlySelector
-  personnelSelector
-  fundingOrContractSelector
-  facilityOrSecuritySelector
-  professionalNetworkSelector
-  intelligenceSelector
-  : SelectorHypothesis
+  publicOnlySelector : SelectorHypothesis
+  personnelSelector : SelectorHypothesis
+  fundingOrContractSelector : SelectorHypothesis
+  facilityOrSecuritySelector : SelectorHypothesis
+  professionalNetworkSelector : SelectorHypothesis
+  intelligenceSelector : SelectorHypothesis
+
 
 selectorSemantics : Forest.HypothesisSemantics SelectorHypothesis
 selectorSemantics = Forest.hypothesisSemantics

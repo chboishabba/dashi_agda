@@ -128,3 +128,5 @@ canonicalItalMaterialProvenanceBoundary =
     false refl
     true refl
     true refl
+
+open ItalMaterialProvenanceBoundary public

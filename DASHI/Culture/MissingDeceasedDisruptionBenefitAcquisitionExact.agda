@@ -11,23 +11,23 @@ import DASHI.Core.ReopenableHypothesisForestExact as Forest
 ------------------------------------------------------------------------
 
 data DisruptionAcquisitionTarget : Set where
-  actorSpecificFusionExposure
-  actorSpecificFissionExposure
-  actorPerceptionOfTechnicalThreat
-  rosterMatchedControls
-  keyPersonReplaceabilityEvidence
-  programmeDelayAfterLoss
-  commonCapabilityAwareObserver
-  historicalTechnicalSabotagePrecedent
-  caseSpecificActorVisibility
-  caseSpecificOperationalEvidence
-  : DisruptionAcquisitionTarget
+  actorSpecificFusionExposure : DisruptionAcquisitionTarget
+  actorSpecificFissionExposure : DisruptionAcquisitionTarget
+  actorPerceptionOfTechnicalThreat : DisruptionAcquisitionTarget
+  rosterMatchedControls : DisruptionAcquisitionTarget
+  keyPersonReplaceabilityEvidence : DisruptionAcquisitionTarget
+  programmeDelayAfterLoss : DisruptionAcquisitionTarget
+  commonCapabilityAwareObserver : DisruptionAcquisitionTarget
+  historicalTechnicalSabotagePrecedent : DisruptionAcquisitionTarget
+  caseSpecificActorVisibility : DisruptionAcquisitionTarget
+  caseSpecificOperationalEvidence : DisruptionAcquisitionTarget
+
 
 data TargetStatus : Set where
-  targetPresent
-  targetNotLocated
-  targetKnownAbsent
-  : TargetStatus
+  targetPresent : TargetStatus
+  targetNotLocated : TargetStatus
+  targetKnownAbsent : TargetStatus
+
 
 record DisruptionAcquisition : Set where
   constructor disruption-acquisition
@@ -127,12 +127,12 @@ operationalEvidenceAcquisition = disruption-acquisition
 ------------------------------------------------------------------------
 
 data DisruptionHypothesis : Set where
-  fossilIncumbentBenefit
-  foreignStrategicDenial
-  rivalProgrammeBenefit
-  capabilityAwareSelection
-  tacitKnowledgeSelection
-  : DisruptionHypothesis
+  fossilIncumbentBenefit : DisruptionHypothesis
+  foreignStrategicDenial : DisruptionHypothesis
+  rivalProgrammeBenefit : DisruptionHypothesis
+  capabilityAwareSelection : DisruptionHypothesis
+  tacitKnowledgeSelection : DisruptionHypothesis
+
 
 disruptionSemantics : Forest.HypothesisSemantics DisruptionHypothesis
 disruptionSemantics = Forest.hypothesisSemantics

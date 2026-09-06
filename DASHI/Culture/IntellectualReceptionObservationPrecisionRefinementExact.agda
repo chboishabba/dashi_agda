@@ -27,9 +27,9 @@ import DASHI.Culture.IntellectualReceptionObserverDerivedSupportPartitionExact a
 ------------------------------------------------------------------------
 
 data ObservationPrecision : Set where
-  coarsePresentFuture
-  finePresentFutureAuthority
-  : ObservationPrecision
+  coarsePresentFuture : ObservationPrecision
+  finePresentFutureAuthority : ObservationPrecision
+
 
 data SelectedAt : ObservationPrecision → Reuse.PrefixCoordinate → Set where
   coarseSelectPresent : SelectedAt coarsePresentFuture Reuse.presentCoordinate
@@ -212,10 +212,10 @@ fineAuthoritySensitiveProjectionReopened =
 module PrecisionRefinementReopening where
 
   data Artifact : Set where
-    newlyExposedCoordinateArtifact
-    refinedProjectionCertificate
-    downstreamCertificate
-    : Artifact
+    newlyExposedCoordinateArtifact : Artifact
+    refinedProjectionCertificate : Artifact
+    downstreamCertificate : Artifact
+
 
   data Depends : Artifact → Artifact → Set where
     newlyExposedDivergenceCreatesDependency :

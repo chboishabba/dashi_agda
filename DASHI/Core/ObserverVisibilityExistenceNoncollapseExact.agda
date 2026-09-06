@@ -83,9 +83,9 @@ visibilityRechartingStillCannotRecoverExistence collision rechart =
 ------------------------------------------------------------------------
 
 data DemoState : Set where
-  invisibleAbsent
-  invisiblePresent
-  : DemoState
+  invisibleAbsent : DemoState
+  invisiblePresent : DemoState
+
 
 data DemoVisibility : Set where
   notVisible : DemoVisibility

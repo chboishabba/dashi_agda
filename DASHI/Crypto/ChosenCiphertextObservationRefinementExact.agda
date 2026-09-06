@@ -126,7 +126,7 @@ samePublicFibreCannotBeSplitByPublicFactoredObservation :
   project system left ≡ project system right →
   ∀ q → publicObserve system left q ≡ publicObserve system right q
 samePublicFibreCannotBeSplitByPublicFactoredObservation {system} samePublic q =
-  cong (λ public → answer system public q) samePublic
+  cong (λ pub → answer system pub q) samePublic
 
 ------------------------------------------------------------------------
 -- Exact split witness: two hidden states agree at the prior public surface but

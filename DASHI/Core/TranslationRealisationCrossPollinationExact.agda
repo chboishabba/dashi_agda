@@ -24,11 +24,11 @@ import DASHI.Core.ResidualObligationPropagationExact as Residual
 ------------------------------------------------------------------------
 
 data AuditConsumer : Set where
-  historicalConsumer
-  executionConsumer
-  empiricalConsumer
-  normativeConsumer
-  : AuditConsumer
+  historicalConsumer : AuditConsumer
+  executionConsumer : AuditConsumer
+  empiricalConsumer : AuditConsumer
+  normativeConsumer : AuditConsumer
+
 
 data AuditEvidence : Adequacy.AdequacyStage → AuditConsumer → Set where
   sourceForHistory : AuditEvidence Adequacy.sourceAcquired historicalConsumer

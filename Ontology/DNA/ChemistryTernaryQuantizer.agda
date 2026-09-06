@@ -56,7 +56,7 @@ record QuantizerDistortionCertificate (Coefficient : Set) : Set₁ where
 record TernaryMinimalityHypotheses (Alphabet : Set) : Set₁ where
   field
     negative : Alphabet
-    neutral : Alphabet
+    neutralSymbol : Alphabet
     positive : Alphabet
     signDistinct : Set
     neutralDistinct : Set

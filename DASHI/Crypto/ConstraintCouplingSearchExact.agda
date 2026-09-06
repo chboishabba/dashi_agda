@@ -36,7 +36,7 @@ record DisconnectedCut (graph : ConstraintCouplingGraph) : Set₁ where
     noCrossEdge : ∀ {u v} → Coupled graph u v → side u ≡ side v
 open DisconnectedCut public
 
-record CrossEdgeWitness (graph : ConstraintCouplingGraph) : Set where
+record CrossEdgeWitness (graph : ConstraintCouplingGraph) : Set₁ where
   constructor crossEdgeWitness
   field
     u v : Vertex graph

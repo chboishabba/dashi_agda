@@ -162,8 +162,13 @@ analyticBoundsGiveRadiusEightAbsorption B =
     (high-fits-certified-budget B)
     radiusEightControlsTailᴰ
   where
+  ≤ᴺ-step-r : ∀ {m n} → m ≤ᴺ n → m ≤ᴺ suc n
+  ≤ᴺ-step-r z≤n = z≤n
+  ≤ᴺ-step-r (s≤s p) = s≤s (≤ᴺ-step-r p)
+
   ≤ᴺ-+-mono : ∀ {a b c d} → a ≤ᴺ b → c ≤ᴺ d → a + c ≤ᴺ b + d
-  ≤ᴺ-+-mono z≤n q = q
+  ≤ᴺ-+-mono {zero} {zero} z≤n q = q
+  ≤ᴺ-+-mono {zero} {suc b} z≤n q = ≤ᴺ-step-r (≤ᴺ-+-mono {zero} {b} z≤n q)
   ≤ᴺ-+-mono (s≤s p) q = s≤s (≤ᴺ-+-mono p q)
 
   ≤ᴺ-+-combine :

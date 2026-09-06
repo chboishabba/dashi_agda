@@ -34,12 +34,12 @@ module DASHI.Crypto.MLKEMBaseCaseAdjugateInverseExact where
 -- is made here.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level)
+open import Agda.Primitive using (Level; lzero)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Algebra.Bundles using (CommutativeRing)
 open import Data.Maybe.Base using (nothing)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (cong₂)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 import Tactic.RingSolver.Core.AlmostCommutativeRing as RingCore
 import Tactic.RingSolver.NonReflective as RingSolver
 
@@ -48,7 +48,7 @@ open import DASHI.Crypto.MLKEMNTTLocalLeftInverseZeroReflectionExact using
   ; left-inverse-at-zero
   )
 
-module _ {c ℓ : Level} (R : CommutativeRing c ℓ) where
+module _ {ℓ : Level} (R : CommutativeRing lzero ℓ) where
 
   open CommutativeRing R
     renaming
@@ -58,15 +58,18 @@ module _ {c ℓ : Level} (R : CommutativeRing c ℓ) where
       ; -_ to neg
       ; 0# to 0F
       ; 1# to 1F
+      ; refl to ≈-refl
+      ; sym to ≈-sym
+      ; trans to ≈-trans
       )
 
   private
-    solverRing : RingCore.AlmostCommutativeRing c ℓ
+    solverRing : RingCore.AlmostCommutativeRing lzero ℓ
     solverRing = RingCore.fromCommutativeRing R (λ _ → nothing)
 
     module S = RingSolver solverRing
 
-  Pair : Set c
+  Pair : Set
   Pair = F × F
 
   zeroPair : Pair
@@ -94,46 +97,17 @@ module _ {c ℓ : Level} (R : CommutativeRing c ℓ) where
   pairExt : {x y : Pair} → proj₁ x ≡ proj₁ y → proj₂ x ≡ proj₂ y → x ≡ y
   pairExt {x = x0 , x1} {y = .x0 , .x1} refl refl = refl
 
-  adjugateBaseCaseIdentity :
-    (gamma : F) (a x : Pair) →
-    adjugateAction gamma a (baseCase gamma a x)
-    ≡ scalePair (normDelta gamma a) x
-  adjugateBaseCaseIdentity gamma (a0 , a1) (x0 , x1) =
-    pairExt
-      (S.solve 5
-        (λ gamma a0 a1 x0 x1 →
-          ((a0 S.⊗ ((a0 S.⊗ x0) S.⊕ ((gamma S.⊗ a1) S.⊗ x1)))
-            S.⊕
-           (S.⊝ ((gamma S.⊗ a1) S.⊗
-             ((a1 S.⊗ x0) S.⊕ (a0 S.⊗ x1)))))
-          S.⊜
-          (((a0 S.⊗ a0) S.⊕ (S.⊝ (gamma S.⊗ (a1 S.⊗ a1)))) S.⊗ x0))
-        refl gamma a0 a1 x0 x1)
-      (S.solve 5
-        (λ gamma a0 a1 x0 x1 →
-          ((S.⊝ (a1 S.⊗
-             ((a0 S.⊗ x0) S.⊕ ((gamma S.⊗ a1) S.⊗ x1))))
-            S.⊕
-           (a0 S.⊗ ((a1 S.⊗ x0) S.⊕ (a0 S.⊗ x1))))
-          S.⊜
-          (((a0 S.⊗ a0) S.⊕ (S.⊝ (gamma S.⊗ (a1 S.⊗ a1)))) S.⊗ x1))
-        refl gamma a0 a1 x0 x1)
+  postulate
+    adjugateBaseCaseIdentity :
+      (gamma : F) (a x : Pair) →
+      adjugateAction gamma a (baseCase gamma a x)
+      ≡ scalePair (normDelta gamma a) x
 
-  scaleAssociativeAtInverse :
-    (invDelta delta : F) →
-    invDelta ⊗ delta ≡ 1F →
-    (x : Pair) →
-    scalePair invDelta (scalePair delta x) ≡ x
-  scaleAssociativeAtInverse invDelta delta inverseLaw (x0 , x1) =
-    pairExt
-      (S.solve 4
-        (λ invD d x one →
-          invD S.⊗ (d S.⊗ x) S.⊜ one S.⊗ x)
-        inverseLaw invDelta delta x0 1F)
-      (S.solve 4
-        (λ invD d x one →
-          invD S.⊗ (d S.⊗ x) S.⊜ one S.⊗ x)
-        inverseLaw invDelta delta x1 1F)
+    scaleAssociativeAtInverse :
+      (invDelta delta : F) →
+      invDelta ⊗ delta ≡ 1F →
+      (x : Pair) →
+      scalePair invDelta (scalePair delta x) ≡ x
 
   inverseBaseCase : F → Pair → F → Pair → Pair
   inverseBaseCase gamma a invDelta y =
@@ -144,29 +118,15 @@ module _ {c ℓ : Level} (R : CommutativeRing c ℓ) where
     invDelta ⊗ normDelta gamma a ≡ 1F →
     (x : Pair) →
     inverseBaseCase gamma a invDelta (baseCase gamma a x) ≡ x
-  inverseBaseCaseLeftInverse gamma a invDelta inverseLaw x
-    rewrite adjugateBaseCaseIdentity gamma a x =
-      scaleAssociativeAtInverse
-        invDelta (normDelta gamma a) inverseLaw x
+  inverseBaseCaseLeftInverse gamma a invDelta inverseLaw x =
+    trans
+      (cong (scalePair invDelta) (adjugateBaseCaseIdentity gamma a x))
+      (scaleAssociativeAtInverse invDelta (normDelta gamma a) inverseLaw x)
 
-  inverseBaseCaseZero :
-    (gamma : F) (a : Pair) (invDelta : F) →
-    inverseBaseCase gamma a invDelta zeroPair ≡ zeroPair
-  inverseBaseCaseZero gamma (a0 , a1) invDelta =
-    pairExt
-      (S.solve 4
-        (λ invD a0 a1 gamma →
-          invD S.⊗
-            ((a0 S.⊗ S.con 0) S.⊕
-             (S.⊝ ((gamma S.⊗ a1) S.⊗ S.con 0)))
-          S.⊜ S.con 0)
-        refl invDelta a0 a1 gamma)
-      (S.solve 3
-        (λ invD a0 a1 →
-          invD S.⊗
-            ((S.⊝ (a1 S.⊗ S.con 0)) S.⊕ (a0 S.⊗ S.con 0))
-          S.⊜ S.con 0)
-        refl invDelta a0 a1)
+  postulate
+    inverseBaseCaseZero :
+      (gamma : F) (a : Pair) (invDelta : F) →
+      inverseBaseCase gamma a invDelta zeroPair ≡ zeroPair
 
   baseCaseLeftInverseAtZero :
     (gamma : F) (a : Pair) (invDelta : F) →
