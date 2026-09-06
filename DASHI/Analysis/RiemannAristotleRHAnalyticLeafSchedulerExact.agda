@@ -5,26 +5,19 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap
+import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact as Z38
+
 ------------------------------------------------------------------------
--- RECURSIVE RH ANALYTIC LEAF SCHEDULER — CHARACTER/ACTION CUT
+-- RECURSIVE RH ANALYTIC LEAF SCHEDULER — CHARACTER/ACTION + GAP-SPLIT CUT
 --
--- The canonical carrier audit split the old H_M modulation leaf into:
+-- The canonical carrier audit split the old H_M modulation leaf into H_X/H_A/
+-- H_M/H_T/H_W/H_E, with H_Gamma independent.  The later 8894->8896 gap-split
+-- return adds one independent zero-side leaf: actual-zeta low-gap clustering.
 --
---   H_X       canonical complex character algebra
---             exp(-itu) exp(ibu) = exp(i(b-t)u), even part = cosine
---   H_A       action of that character on the canonical Weil/Mellin test
---             carrier + admissibility + spectral shift for the SAME formula
---   H_M       assembled canonical analytic modulation extension
---   H_T       target translation <-> modulation intertwiner
---   H_W       window/restriction + cluster/near/far residual
---   H_E       phase-sensitive finite near evaluation
---   H_Gamma   Gamma precision repair
---
--- Dependency shape:
---
---   H_X -> H_A -> H_M -> H_T -> direct phase statistic -> H_E
---                    \             \-> H_W -> explicit window -> H_E
---   H_Gamma ------------------------------------------------> final consumer
+-- §37 closes the adaptive J*Lambda constant comparison and §38 closes zeta's
+-- upper local count, so neither is scheduled here.  The clustering theorem is
+-- not implied by those closures and is therefore a genuine schedulable leaf.
 ------------------------------------------------------------------------
 
 data RHAnalyticLeaf : Set where
@@ -34,6 +27,7 @@ data RHAnalyticLeaf : Set where
   proveTargetTranslationModulationIntertwiner
   proveWindowRestrictionResidualCompatibility
   provePhaseSensitiveFiniteNearEvaluation
+  proveActualZetaLowGapClustering
   repairGammaPrecision
   sharpenZeroCount
   sharpenAbsoluteEnvelope
@@ -51,6 +45,7 @@ leafState assembleCanonicalAnalyticModulationExtension = blocked
 leafState proveTargetTranslationModulationIntertwiner = blocked
 leafState proveWindowRestrictionResidualCompatibility = blocked
 leafState provePhaseSensitiveFiniteNearEvaluation = blocked
+leafState proveActualZetaLowGapClustering = open
 leafState repairGammaPrecision = open
 leafState sharpenZeroCount = pruned
 leafState sharpenAbsoluteEnvelope = pruned
@@ -58,7 +53,9 @@ leafState reuseGenericExplicitFormulaWithoutWindow = pruned
 leafState reuseNameOnlyHardyDonor = pruned
 
 ------------------------------------------------------------------------
--- Proof-relevant dependency relation.
+-- Proof-relevant dependency relation for the modulation/evaluation route.
+-- Actual-zeta clustering is an independent producer for the optimized gap-split
+-- route, so it has no fabricated H_X/H_A prerequisite here.
 ------------------------------------------------------------------------
 
 data Requires : RHAnalyticLeaf → RHAnalyticLeaf → Set where
@@ -98,6 +95,8 @@ data Requires : RHAnalyticLeaf → RHAnalyticLeaf → Set where
 data RHAnalyticLeafSchedulable : RHAnalyticLeaf → Set where
   complexCharacterLeafLive :
     RHAnalyticLeafSchedulable buildCanonicalComplexCharacter
+  zetaLowGapClusteringLeafLive :
+    RHAnalyticLeafSchedulable proveActualZetaLowGapClustering
   gammaPrecisionLeafLive :
     RHAnalyticLeafSchedulable repairGammaPrecision
 
@@ -134,6 +133,20 @@ genericFormulaWithoutWindowPruned ()
 nameOnlyHardyLeafPruned :
   RHAnalyticLeafSchedulable reuseNameOnlyHardyDonor → ⊥
 nameOnlyHardyLeafPruned ()
+
+quarterDensityComparisonPrunedUpstream :
+  Gap.GapSplitRelevant Gap.compareQuarterPeriodLowerConstantWithDensityUpperConstant
+  → ⊥
+quarterDensityComparisonPrunedUpstream = Gap.quarterDensityConstantComparisonPruned
+
+zetaUpperCountAlreadyOwned :
+  Z38.zetaShortWindowUpperCountOwnedInLean Z38.canonicalZetaLocalCountLeanReturn
+  ≡ true
+zetaUpperCountAlreadyOwned = refl
+
+actualZetaClusteringStillOpenUpstream :
+  Z38.actualZetaClusteringClosed Z38.canonicalZetaLocalCountLeanReturn ≡ false
+actualZetaClusteringStillOpenUpstream = refl
 
 record RHAnalyticLeafCostSurface : Set₁ where
   constructor rh-analytic-leaf-cost-surface
@@ -184,6 +197,10 @@ record RHAnalyticLeafSchedulerBoundary : Set where
     finiteEvaluationLeafBlockedOnSharedStructureIsTrue :
       finiteEvaluationLeafBlockedOnSharedStructure ≡ true
 
+    actualZetaLowGapClusteringLeafOpen : Bool
+    actualZetaLowGapClusteringLeafOpenIsTrue :
+      actualZetaLowGapClusteringLeafOpen ≡ true
+
     gammaPrecisionLeafOpen : Bool
     gammaPrecisionLeafOpenIsTrue : gammaPrecisionLeafOpen ≡ true
 
@@ -214,6 +231,7 @@ record RHAnalyticLeafSchedulerBoundary : Set where
 canonicalRHAnalyticLeafSchedulerBoundary : RHAnalyticLeafSchedulerBoundary
 canonicalRHAnalyticLeafSchedulerBoundary =
   rh-analytic-leaf-scheduler-boundary
+    true refl
     true refl
     true refl
     true refl
