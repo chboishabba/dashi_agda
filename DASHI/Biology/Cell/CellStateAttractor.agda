@@ -73,3 +73,41 @@ record CellStateBoundary : Set₁ where
     expressionIsNotCellTypeByDefinition : Set
     attractorIsNotSemanticIdentityByDefinition : Set
     historyAndEnvironmentRemainExplicit : Set
+
+------------------------------------------------------------------------
+-- Molecular/regulatory stress -> coupled-cell-state seam.
+--
+-- This permits domain-specific protein/redox perturbations to feed the
+-- pre-existing proteome/RNA/metabolic coordinates without identifying one
+-- altered regulator or one expression measurement with the complete cell state.
+------------------------------------------------------------------------
+
+record StressResponseCellStateBridge
+  (C : CoupledCellState) : Set₁ where
+  open CoupledCellState C
+  field
+    MolecularStress : Set
+    ProteinModificationState : Set
+    RegulatoryResponseState : Set
+    RecoveryState : Set
+
+    proteomeFromStress : MolecularStress → ProteinModificationState
+    regulationFromStress : MolecularStress → RegulatoryResponseState
+    recoveryFromStress : MolecularStress → RecoveryState
+
+    ProteinModificationFeedsProteomeState : Set
+    RegulatoryResponseFeedsRNAState : Set
+    RecoveryFeedsMetabolicState : Set
+    CombinedStressResponseFeedsCellState : Set
+
+    proteinToProteomeWitness : ProteinModificationFeedsProteomeState
+    regulationToRNAWitness : RegulatoryResponseFeedsRNAState
+    recoveryToMetabolismWitness : RecoveryFeedsMetabolicState
+    combinedToCellStateWitness : CombinedStressResponseFeedsCellState
+
+record StressResponseCellStateBoundary : Set₁ where
+  field
+    oneModifiedProteinIsNotCompleteProteomeState : Set
+    oneRegulatorShiftIsNotCompleteRNAState : Set
+    stressResponseIsNotCellDeathByDefinition : Set
+    recoveredGrowthIsNotPreStressCellStateIdentity : Set
