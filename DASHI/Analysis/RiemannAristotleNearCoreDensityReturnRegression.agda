@@ -6,6 +6,7 @@ import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact as Z
 import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap
 import DASHI.Analysis.RiemannG2AlpogeFurmanClusteringNonDescentExact as AFLocal
 import DASHI.Analysis.RiemannG2LowGapClusteringMomentReductionExact as Moment
+import DASHI.Analysis.RiemannG2SelectedTargetLocalMomentSameObjectExact as SelectedMoment
 import DASHI.Analysis.RiemannG2QuarterPeriodAnalyticRouteReconciliationExact as Quarter
 import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerExact as Root
 import DASHI.Analysis.RiemannAristotleRHAnalyticLeafSchedulerExact as Leaf
@@ -97,8 +98,8 @@ alpogeFurmanNeedsLocalization :
     AFLocal.canonicalGlobalSimpleToLocalClusteringBoundary ≡ true
 alpogeFurmanNeedsLocalization = refl
 
--- The target-local moment compiler is closed at the discrete/slack level, while
--- the actual selected-window analytic moment producer remains open.
+-- Target-local moment compiler is closed at discrete/slack level; the actual
+-- selected-window analytic producer remains open.
 localMomentRatioCompilerClosed :
   Moment.LocalMomentClusteringBoundary.natMomentToTwoToOneRatioCompilerClosedInAgda
     Moment.canonicalLocalMomentClusteringBoundary ≡ true
@@ -109,6 +110,33 @@ selectedTargetLocalMomentOpen :
     Moment.canonicalLocalMomentClusteringBoundary ≡ false
 selectedTargetLocalMomentOpen = refl
 
+-- Same-object weld: the moment uses the existing ActualSelectedPoleNearProducer,
+-- and separate target/near-family/multiplicity searches are pruned.
+selectedMomentExactConsumerShape :
+  SelectedMoment.SelectedTargetLocalMomentBoundary.selectedWindowMomentAttachmentIsExactConsumerShape
+    SelectedMoment.canonicalSelectedTargetLocalMomentBoundary ≡ true
+selectedMomentExactConsumerShape = refl
+
+selectedMomentProducerStillOpen :
+  SelectedMoment.SelectedTargetLocalMomentBoundary.selectedWindowMomentProducerInhabitedHere
+    SelectedMoment.canonicalSelectedTargetLocalMomentBoundary ≡ false
+selectedMomentProducerStillOpen = refl
+
+secondMomentTargetSearchPruned :
+  SelectedMoment.paymentState SelectedMoment.recoverSecondSelectedTarget
+  ≡ SelectedMoment.pruned
+secondMomentTargetSearchPruned = refl
+
+secondMomentNearFamilySearchPruned :
+  SelectedMoment.paymentState SelectedMoment.recoverSecondNearZeroFamily
+  ≡ SelectedMoment.pruned
+secondMomentNearFamilySearchPruned = refl
+
+secondMomentMultiplicitySearchPruned :
+  SelectedMoment.paymentState SelectedMoment.recoverSecondMultiplicityCarrier
+  ≡ SelectedMoment.pruned
+secondMomentMultiplicitySearchPruned = refl
+
 -- The former parallel width/crossing work package is closed in place.
 widthAndCrossingPackageClosed :
   Quarter.workState Quarter.widthAndCrossingScale ≡ Quarter.closed
@@ -118,8 +146,8 @@ quarterSchedulerRoutesToClustering :
   Quarter.workState Quarter.actualZetaLowGapClustering ≡ Quarter.live
 quarterSchedulerRoutesToClustering = refl
 
--- Canonical root scheduler sees both the parent clustering leaf and its concrete
--- target-local second-moment refinement.
+-- Canonical root scheduler sees both the parent clustering leaf and its exact
+-- same-selected-window second-moment refinement.
 rootSchedulerClusteringActive :
   Root.RHBidiSearchSchedulerBoundary.actualZetaLowGapClusteringActive
     Root.canonicalRHBidiSearchSchedulerBoundary ≡ true
@@ -129,6 +157,11 @@ rootSchedulerLocalMomentRefinementActive :
   Root.RHBidiSearchSchedulerBoundary.targetLocalSecondMomentRefinementActive
     Root.canonicalRHBidiSearchSchedulerBoundary ≡ true
 rootSchedulerLocalMomentRefinementActive = refl
+
+rootSchedulerMomentUsesSelectedWindow :
+  Root.RHBidiSearchSchedulerBoundary.targetLocalSecondMomentUsesExistingSelectedWindow
+    Root.canonicalRHBidiSearchSchedulerBoundary ≡ true
+rootSchedulerMomentUsesSelectedWindow = refl
 
 rootSchedulerGlobalSimpleDirectRoutePruned :
   Root.RHBidiSearchSchedulerBoundary.globalSimpleZeroProportionDirectClusteringRouteActive
