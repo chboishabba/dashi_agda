@@ -265,7 +265,7 @@ record NonCoordinateWitness
 
 nonCoordinateWitnessRulesOutCoordinateRepresentation :
   {X L : Set} {K : ThresholdKernel X L} →
-  NonCoordinateWitness K → ¬ CoordinateRepresentation K
+  NonCoordinateWitness K → CoordinateRepresentation K → ⊥
 nonCoordinateWitnessRulesOutCoordinateRepresentation witness representation =
   NonCoordinateWitness.differentOutput witness
     (trans
