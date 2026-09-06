@@ -13,4 +13,12 @@ import DASHI.Core.OperationalOutcomeSelectiveReopeningBidiExact
 import DASHI.Core.DeliberativeCyberneticLoopBidiExact
 import DASHI.Core.ResidualSalienceSchedulerBidiExact
 import DASHI.Core.BraidedRuntimeProofProvenanceBidiExact
+
+-- Reverse Lean -> Agda x-pollination.
+import DASHI.Core.QueryCompatibleFibreConsumerClosureBidiExact
+import DASHI.Core.ProvenanceSensitiveConsumerAdequacyBidiExact
+import DASHI.Core.PromotionTransportChainBidiExact
+import DASHI.Core.TemporalPromotionNonRetroactivityBidiExact
+import DASHI.Core.QueryPromotionResidualBidiExact
+
 import DASHI.Core.CrossDomainBidiReciprocal2026Validation
