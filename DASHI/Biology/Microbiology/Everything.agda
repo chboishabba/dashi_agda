@@ -14,5 +14,6 @@ import DASHI.Chemistry.AlliumOrganosulfurMechanismExact
 import DASHI.Chemistry.AlliumReactionNetworkCrossPollinationExact
 import DASHI.Chemistry.AlliumMolecularTrajectoryExact
 import DASHI.Biology.Cell.StaphylococcusAllicinRedoxRecoveryBidiExact
+import DASHI.Biology.Cell.StaphylococcusAllicinFunctionCellStateBidiExact
 import DASHI.Biology.Microbiology.BaldEyesalveNineDayMechanismWeldExact
 import DASHI.Biology.Microbiology.BaldEyesalveMechanismExperimentSelectionExact
