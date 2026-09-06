@@ -12,11 +12,12 @@ open import Agda.Builtin.String using (String)
 -- DOI 10.1038/s41467-026-72437-1;
 -- analysis code github:murthylab/lightbead-analysis.
 --
--- The public repository README declares ANTsPy for the signal-extraction
--- pipeline and contains batch_tiff_to_local_atlas_AL.sh. That launcher invokes
--- tiff_to_local_atlas.py, but the audited public repository does not provide
--- the referenced implementation. Therefore launcher presence is not an
--- executable transform receipt and does not close trial/anatomy -> atlas.
+-- The audited public repository README declares ANTsPy for the signal-
+-- extraction pipeline and contains batch_tiff_to_local_atlas_AL.sh. That
+-- launcher invokes tiff_to_local_atlas.py, but the referenced implementation
+-- is not present in the audited public repository tree. This is a scoped
+-- public-source result, not a claim that the implementation never existed in
+-- another repository or private processing environment.
 ------------------------------------------------------------------------
 
 record PublicAtlasSourceAudit : Set where
