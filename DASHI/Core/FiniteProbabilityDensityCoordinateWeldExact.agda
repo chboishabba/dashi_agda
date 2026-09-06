@@ -14,6 +14,7 @@ module DASHI.Core.FiniteProbabilityDensityCoordinateWeldExact where
 -- hidden carrier conversion.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Primitive using (Level; _⊔_; lsuc)
 
@@ -55,12 +56,10 @@ coordinateRoundTrip vector = refl
 record DensityCoordinateBoundary : Set where
   constructor densityCoordinateBoundary
   field
-    samePointwiseCarrier : Agda.Builtin.Bool.Bool
-    probabilityNormalizationIsExtraPredicate : Agda.Builtin.Bool.Bool
-    nonnegativityIsExtraPredicate : Agda.Builtin.Bool.Bool
-    hiddenCarrierIsomorphismNeeded : Agda.Builtin.Bool.Bool
-
-open import Agda.Builtin.Bool using (Bool; true; false)
+    samePointwiseCarrier : Bool
+    probabilityNormalizationIsExtraPredicate : Bool
+    nonnegativityIsExtraPredicate : Bool
+    hiddenCarrierIsomorphismNeeded : Bool
 
 canonicalDensityCoordinateBoundary : DensityCoordinateBoundary
 canonicalDensityCoordinateBoundary =
