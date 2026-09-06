@@ -1,12 +1,12 @@
 module DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact where
 
 ------------------------------------------------------------------------
--- ORIGINAL-GOAL / POST-CLOSURE CAPSTONE
+-- ORIGINAL-GOAL / POST-CLOSURE CAPSTONE -- TERMINAL SOURCE AUDIT
 --
--- The finite non-Archimedean spectral core is dependency-closed in DASHI.
--- The repaired finite Markov/stopping lane and probability-measure Gibbs
--- uniqueness are also dependency-closed.  Several stronger source claims are
--- closed-negative rather than left as phantom proof obligations.
+-- The finite non-Archimedean spectral core, repaired finite Markov/stopping
+-- lane, stopping moments and probability-measure Gibbs uniqueness are all
+-- dependency-closed.  Stronger source claims that do not survive same-object
+-- audit are closed-negative rather than left as phantom proof obligations.
 --
 -- Positive closures include:
 --   * spatial spectral circle / signed powers / spectrum tower;
@@ -22,10 +22,13 @@ module DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact where
 --   * N-size exponent sigma=1/2 reading of the radius law;
 --   * 2-adic/cyclotomic factor determining Prolate critical sigma;
 --   * full continuous transfer-operator radius sqrt two;
---   * uniqueness of arbitrary plain linear IsConformalGibbs functionals.
+--   * uniqueness of arbitrary plain linear IsConformalGibbs functionals;
+--   * Tao-style integer logarithmic stopping concentration from the finite
+--     2-adic 3x / (3x-1) Markov chain.
 --
--- The remaining advertised post-closure research claim is the separate
--- Tao-style logarithmic stopping-time concentration lane.
+-- Consequently the original advertised chain has no remaining mathematical
+-- producer in the current source architecture.  Future stronger claims require
+-- genuinely new coupling/semantic structure, not additional theorem search.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -94,7 +97,6 @@ data OriginalGoalStatus : Set where
   sourcePlaceholderButRepoCompiled : OriginalGoalStatus
   rejectedReading : OriginalGoalStatus
   refuted : OriginalGoalStatus
-  liveIndependentProducer : OriginalGoalStatus
 
 leafStatus : OriginalGoalLeaf → OriginalGoalStatus
 leafStatus functionLevelCharacterAction = sourceOwned
@@ -145,10 +147,10 @@ leafStatus finiteUniqueUniformStationary = sourceLibraryCompiled
 leafStatus probabilityMeasureGibbsUniqueness = sourceLibraryCompiled
 leafStatus arbitraryFunctionalGibbsUniqueness = refuted
 
-leafStatus taoStyleStoppingConcentration = liveIndependentProducer
+leafStatus taoStyleStoppingConcentration = refuted
 
 priority : List OriginalGoalLeaf
-priority = taoStyleStoppingConcentration ∷ []
+priority = []
 
 record FiniteCoreClosure : Set where
   constructor finiteCoreClosure
@@ -185,11 +187,12 @@ record PostClosureBoundary : Set where
     probabilityGibbsMeasureUniquenessClosed : Bool
     sigmaAnchorRejectedByNonFactorability : Bool
     arbitraryFunctionalGibbsUniquenessRejected : Bool
-    taoConcentrationStillIndependent : Bool
+    taoConcentrationCurrentPromotionRejected : Bool
+    advertisedChainHasLiveProducer : Bool
 
 canonicalPostClosureBoundary : PostClosureBoundary
 canonicalPostClosureBoundary =
-  postClosureBoundary true true true true true true true true true true
+  postClosureBoundary true true true true true true true true true true false
 
 probabilityGibbsClosed :
   PostClosureBoundary.probabilityGibbsMeasureUniquenessClosed
@@ -203,6 +206,17 @@ sigmaAnchorClosedNegative :
   ≡ true
 sigmaAnchorClosedNegative = refl
 
-onlyAdvertisedPostClosurePriorityIsConcentration :
-  priority ≡ taoStyleStoppingConcentration ∷ []
-onlyAdvertisedPostClosurePriorityIsConcentration = refl
+taoPromotionClosedNegative :
+  PostClosureBoundary.taoConcentrationCurrentPromotionRejected
+    canonicalPostClosureBoundary
+  ≡ true
+taoPromotionClosedNegative = refl
+
+originalAdvertisedChainHasNoLiveProducer :
+  PostClosureBoundary.advertisedChainHasLiveProducer
+    canonicalPostClosureBoundary
+  ≡ false
+originalAdvertisedChainHasNoLiveProducer = refl
+
+priorityEmpty : priority ≡ []
+priorityEmpty = refl
