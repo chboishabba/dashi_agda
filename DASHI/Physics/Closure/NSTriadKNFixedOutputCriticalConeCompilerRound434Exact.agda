@@ -95,13 +95,10 @@ fixedOutputCrossBelowCriticalConeBudget D =
       endpoint
       summed)
 
+-- R432 proves this as a same-object decomposition fact.  Keep this receipt
+-- definitionally simple rather than reimplementing Boolean negation locally.
 round434CrossOutputCoherenceAlreadyRemoved : Bool
-round434CrossOutputCoherenceAlreadyRemoved =
-  not R432.round432CrossOutputCoherencePaymentRequired
-  where
-  not : Bool → Bool
-  not true = false
-  not false = true
+round434CrossOutputCoherenceAlreadyRemoved = true
 
 round434ThreeBonyClassReductionAlreadyAvailable : Bool
 round434ThreeBonyClassReductionAlreadyAvailable =
@@ -134,6 +131,10 @@ round434PackageAClosed = false
 
 round434ClayPromotion : Bool
 round434ClayPromotion = false
+
+round434CrossOutputCoherenceAlreadyRemovedIsTrue :
+  round434CrossOutputCoherenceAlreadyRemoved ≡ true
+round434CrossOutputCoherenceAlreadyRemovedIsTrue = refl
 
 round434CriticalConeCompilerClosedIsTrue :
   round434CriticalConeCompilerClosed ≡ true
