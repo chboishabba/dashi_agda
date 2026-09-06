@@ -1,0 +1,33 @@
+module DASHI.Law.ConstitutionalValidityLawfulnessValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Law.ConstitutionalValidityLawfulnessCrossPollinationExact as Constitutional
+import DASHI.Law.JarrettPostBondiConstitutionalSourceReceiptsExact as Jarrett
+import DASHI.Governance.AuthorityPhaseSeparationExact as Phase
+
+jarrettStopsAtConstitutionalValidity :
+  Constitutional.firstOpenExtendedLawfulness Constitutional.jarrettShapeVector
+  ≡ Constitutional.firstOpenExtendedCoordinate Constitutional.constitutionalValidityCoordinate
+jarrettStopsAtConstitutionalValidity =
+  Constitutional.jarrettShapeStopsAtConstitutionalValidity
+
+enactedTextCanCoexistWithInvalidity :
+  Constitutional.enactedTextExists Constitutional.canonicalJarrettInvalidProducer ≡ true
+enactedTextCanCoexistWithInvalidity = refl
+
+jarrettReceiptRemainsCourtAttributed :
+  Jarrett.role (Constitutional.courtHoldingReceipt Constitutional.canonicalJarrettInvalidProducer)
+  ≡ Jarrett.courtHolding
+jarrettReceiptRemainsCourtAttributed = refl
+
+sameValidityDoesNotCollapseAuthorityPhase :
+  Constitutional.phaseRole Constitutional.responseValidAuthority ≡
+  Constitutional.phaseRole Constitutional.repairValidAuthority → ⊥
+sameValidityDoesNotCollapseAuthorityPhase =
+  Constitutional.phaseDifferenceSurvivesEqualValidity
+
+coarseAuthorityStillCannotDetermineEveryPhase :
+  Phase.oneAuthoritySurfaceCannotDetermineEveryPhase
+  ≡ Phase.oneAuthoritySurfaceCannotDetermineEveryPhase
+coarseAuthorityStillCannotDetermineEveryPhase = refl
