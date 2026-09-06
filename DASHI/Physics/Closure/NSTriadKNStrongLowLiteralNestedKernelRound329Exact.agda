@@ -48,6 +48,7 @@ import DASHI.Physics.Closure.NSTriadKNLerayOutputTransversalityRound30Exact as L
 import DASHI.Physics.Closure.NSTriadKNProjectedHelicalSelfForcingVectorRound106Exact as R106
 import DASHI.Physics.Closure.NSTriadKNExternalPureCommutatorPartnerRound120Exact as R120
 import DASHI.Physics.Closure.NSTriadKNInnerStrongLowOutputSubconeRound321Exact as R321
+import DASHI.Physics.Closure.NSTriadKNHHDualDefectRawCurlKernelRound172Exact as R172
 import DASHI.Physics.Closure.NSTriadKNPureCommutatorRawDualDefectWeldRound325Exact as R325
 import DASHI.Physics.Closure.NSTriadKNRawCurlLowOutputKernelMassRound178Exact as R178
 import DASHI.Physics.Closure.NSTriadKNPhysicalInnerCommutatorLowOutputBoundRound326Exact as R326
@@ -108,7 +109,7 @@ innerPairedForcingTransverseAtInnerOutput E I O system S L H W C =
     tau = inner C
     k = Physical.k tau
     raw =
-      DASHI.Physics.Closure.NSTriadKNHHDualDefectRawCurlKernelRound172Exact.rawDirectionalSlotKernel
+      R172.rawDirectionalSlotKernel
         (C3.modeVector E (Physical.p tau))
         (C3.modeVector E (Physical.q tau))
         (Audit.velocity system (Physical.p tau))
