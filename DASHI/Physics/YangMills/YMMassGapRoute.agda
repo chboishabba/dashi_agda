@@ -32,7 +32,9 @@ record YMMassGapRoute (N : Nat) : Setω where
     operatorContinuumFrontier : Frontier.YMOperatorContinuumFrontier
 
     eq119CompilerThroughRound184Available : Bool
-    eq119SelectedBackgroundAndCutPhysicalInstantiationClosed : Bool
+    eq119PhysicalPeriodicRealizationRound187Closed : Bool
+    eq119RawUnitPathHomomorphismRound189Closed : Bool
+    eq119CMP109TransportedRelativeEqualsCMP98LiteralContourClosed : Bool
 
     gaugeInvariantSubspaceCarrierSelected : Bool
     gaugeOrbitConfigurationQuotientRequired : Bool
@@ -64,8 +66,12 @@ record YMMassGapRoute (N : Nat) : Setω where
 
     eq119CompilerThroughRound184AvailableIsTrue :
       eq119CompilerThroughRound184Available ≡ true
-    eq119SelectedBackgroundAndCutPhysicalInstantiationClosedIsFalse :
-      eq119SelectedBackgroundAndCutPhysicalInstantiationClosed ≡ false
+    eq119PhysicalPeriodicRealizationRound187ClosedIsTrue :
+      eq119PhysicalPeriodicRealizationRound187Closed ≡ true
+    eq119RawUnitPathHomomorphismRound189ClosedIsTrue :
+      eq119RawUnitPathHomomorphismRound189Closed ≡ true
+    eq119CMP109TransportedRelativeEqualsCMP98LiteralContourClosedIsFalse :
+      eq119CMP109TransportedRelativeEqualsCMP98LiteralContourClosed ≡ false
 
     gaugeInvariantSubspaceCarrierSelectedIsTrue :
       gaugeInvariantSubspaceCarrierSelected ≡ true
@@ -114,7 +120,9 @@ canonicalYMMassGapRoute N = record
   ; operatorContinuumFrontier = Frontier.canonicalYMOperatorContinuumFrontier
 
   ; eq119CompilerThroughRound184Available = Frontier.cmp98Equation119CompilerThroughRound184Closed Frontier.canonicalYMOperatorContinuumFrontier
-  ; eq119SelectedBackgroundAndCutPhysicalInstantiationClosed = Frontier.cmp98SelectedBackgroundAndCutPhysicalInstantiationClosed Frontier.canonicalYMOperatorContinuumFrontier
+  ; eq119PhysicalPeriodicRealizationRound187Closed = Frontier.cmp98PhysicalPeriodicRealizationRound187Closed Frontier.canonicalYMOperatorContinuumFrontier
+  ; eq119RawUnitPathHomomorphismRound189Closed = Frontier.cmp98RawUnitPathHomomorphismRound189Closed Frontier.canonicalYMOperatorContinuumFrontier
+  ; eq119CMP109TransportedRelativeEqualsCMP98LiteralContourClosed = Frontier.cmp98CMP109TransportedRelativeEqualsCMP98LiteralContourClosed Frontier.canonicalYMOperatorContinuumFrontier
 
   ; gaugeInvariantSubspaceCarrierSelected = Frontier.gaugeInvariantSubspaceCarrierRouteSelected Frontier.canonicalYMOperatorContinuumFrontier
   ; gaugeOrbitConfigurationQuotientRequired = Frontier.gaugeOrbitConfigurationQuotientRequiredForSelectedCarrier Frontier.canonicalYMOperatorContinuumFrontier
@@ -145,7 +153,9 @@ canonicalYMMassGapRoute N = record
   ; clayYangMillsPromotedRoute = false
 
   ; eq119CompilerThroughRound184AvailableIsTrue = refl
-  ; eq119SelectedBackgroundAndCutPhysicalInstantiationClosedIsFalse = refl
+  ; eq119PhysicalPeriodicRealizationRound187ClosedIsTrue = refl
+  ; eq119RawUnitPathHomomorphismRound189ClosedIsTrue = refl
+  ; eq119CMP109TransportedRelativeEqualsCMP98LiteralContourClosedIsFalse = refl
   ; gaugeInvariantSubspaceCarrierSelectedIsTrue = refl
   ; gaugeOrbitConfigurationQuotientRequiredIsFalse = refl
   ; finiteSelectedHodgeVariationPairingAvailableIsTrue = refl
