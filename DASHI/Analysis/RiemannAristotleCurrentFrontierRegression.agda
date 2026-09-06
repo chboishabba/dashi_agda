@@ -78,6 +78,21 @@ zetaClusteringOpen :
     F.canonicalAristotleCurrentFrontier ≡ false
 zetaClusteringOpen = refl
 
+localMomentCompilerClosed :
+  F.AristotleCurrentFrontier.targetLocalSecondMomentCompilerClosedInAgda
+    F.canonicalAristotleCurrentFrontier ≡ true
+localMomentCompilerClosed = refl
+
+localMomentProducerOpen :
+  F.AristotleCurrentFrontier.targetLocalSecondMomentProducerClosed
+    F.canonicalAristotleCurrentFrontier ≡ false
+localMomentProducerOpen = refl
+
+alpogeFurmanNotDirectLocalClosure :
+  F.AristotleCurrentFrontier.alpogeFurmanGlobalSimpleProportionDirectlyClosesClustering
+    F.canonicalAristotleCurrentFrontier ≡ false
+alpogeFurmanNotDirectLocalClosure = refl
+
 nearFarCompilerClosed :
   F.AristotleCurrentFrontier.nearFarShellCompositionCompilerClosedInAgda
     F.canonicalAristotleCurrentFrontier ≡ true
