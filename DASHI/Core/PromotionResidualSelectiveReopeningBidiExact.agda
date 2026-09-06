@@ -10,7 +10,8 @@ import DASHI.Core.QueryPromotionResidualBidiExact as QueryPromotion
 --
 -- The first failed promotion coordinate becomes the exact reopening target.
 -- Earlier closed coordinates remain retained; later coordinates are not allowed
--- to repair an earlier missing obligation.
+-- to repair an earlier missing obligation.  A closed promotion has no reopen
+-- target at all.
 ------------------------------------------------------------------------
 
 data PromotionCoordinate : Set where
@@ -20,20 +21,24 @@ data PromotionCoordinate : Set where
   inhabitanceCoordinate
   : PromotionCoordinate
 
-coordinateForResidual : QueryPromotion.PromotionResidual → PromotionCoordinate
-coordinateForResidual QueryPromotion.missingArtifact = artifactCoordinate
-coordinateForResidual QueryPromotion.missingCorrespondence = correspondenceCoordinate
-coordinateForResidual QueryPromotion.missingTransport = transportCoordinate
-coordinateForResidual QueryPromotion.missingTargetInhabitance = inhabitanceCoordinate
-coordinateForResidual QueryPromotion.promotionClosed = inhabitanceCoordinate
+data ReopenTarget : Set where
+  reopen : PromotionCoordinate → ReopenTarget
+  noReopen : ReopenTarget
+
+targetForResidual : QueryPromotion.PromotionResidual → ReopenTarget
+targetForResidual QueryPromotion.missingArtifact = reopen artifactCoordinate
+targetForResidual QueryPromotion.missingCorrespondence = reopen correspondenceCoordinate
+targetForResidual QueryPromotion.missingTransport = reopen transportCoordinate
+targetForResidual QueryPromotion.missingTargetInhabitance = reopen inhabitanceCoordinate
+targetForResidual QueryPromotion.promotionClosed = noReopen
 
 record PromotionReopeningInstruction (status : QueryPromotion.PromotionStatus) : Set where
   constructor promotion-reopening-instruction
   field
     residual : QueryPromotion.PromotionResidual
     residualMatchesStatus : residual ≡ QueryPromotion.firstPromotionResidual status
-    targetCoordinate : PromotionCoordinate
-    targetMatchesResidual : targetCoordinate ≡ coordinateForResidual residual
+    target : ReopenTarget
+    targetMatchesResidual : target ≡ targetForResidual residual
     producer : QueryPromotion.ProducerKind
     producerMatchesResidual : producer ≡ QueryPromotion.producerFor residual
     reopeningReference : String
@@ -47,25 +52,32 @@ reopeningInstructionFor status =
   promotion-reopening-instruction
     (QueryPromotion.firstPromotionResidual status)
     refl
-    (coordinateForResidual (QueryPromotion.firstPromotionResidual status))
+    (targetForResidual (QueryPromotion.firstPromotionResidual status))
     refl
     (QueryPromotion.producerFor (QueryPromotion.firstPromotionResidual status))
     refl
-    "reopen only the first missing promotion coordinate"
+    "reopen only the first missing promotion coordinate; closed means no reopen"
 
 threeOfFourReopensOnlyInhabitance :
-  targetCoordinate
+  target
     (reopeningInstructionFor
       (QueryPromotion.promotion-status true true true false))
-  ≡ inhabitanceCoordinate
+  ≡ reopen inhabitanceCoordinate
 threeOfFourReopensOnlyInhabitance = refl
 
 missingCorrespondenceReopensCorrespondence :
-  targetCoordinate
+  target
     (reopeningInstructionFor
       (QueryPromotion.promotion-status true false true true))
-  ≡ correspondenceCoordinate
+  ≡ reopen correspondenceCoordinate
 missingCorrespondenceReopensCorrespondence = refl
+
+closedPromotionReopensNothing :
+  target
+    (reopeningInstructionFor
+      (QueryPromotion.promotion-status true true true true))
+  ≡ noReopen
+closedPromotionReopensNothing = refl
 
 ------------------------------------------------------------------------
 -- Retention is stage-local.  This is deliberately a logical policy surface,
@@ -100,11 +112,12 @@ threeOfFourRetainsTransport = tt
 record PromotionSelectiveReopeningBoundary : Set where
   constructor promotion-selective-reopening-boundary
   field
-    firstResidualDeterminesReopenCoordinate : Bool
+    firstResidualDeterminesReopenTarget : Bool
+    closedPromotionHasNoReopenTarget : Bool
     earlierClosedCoordinatesMayRemainRetained : Bool
     laterStageCanRepairEarlierGap : Bool
     reopeningOneStageRefutesWholePromotionHistory : Bool
 
 canonicalPromotionSelectiveReopeningBoundary : PromotionSelectiveReopeningBoundary
 canonicalPromotionSelectiveReopeningBoundary =
-  promotion-selective-reopening-boundary true true false false
+  promotion-selective-reopening-boundary true true true false false
