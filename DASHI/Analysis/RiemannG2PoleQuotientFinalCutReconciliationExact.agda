@@ -8,6 +8,7 @@ import DASHI.Analysis.RiemannAristotlePoleQuotientCurrentCutExact as Pole
 import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as R8889
 import DASHI.Analysis.RiemannG2QuarterPeriodPoleQuotientFinalCompilerExact as Final
 import DASHI.Analysis.RiemannG2PoleQuotientChannelAllowanceExact as Allowance
+import DASHI.Analysis.RiemannAristotlePoleQuotientSplitComplementBudgetExact as Split
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateBudgetTargetExact as Off
 import DASHI.Analysis.RiemannAristotlePoleQuotientGammaBudgetTargetExact as Gamma
 import DASHI.Analysis.RiemannAristotleG2dScalarDeterminantSumTargetExact as Det
@@ -140,9 +141,7 @@ LiteralFinalGammaPayment :
 LiteralFinalGammaPayment = ConsumerSufficientPoleQuotientGammaProducer
 
 FinalCommonCarrierAllowancePayment :
-  (surface :
-    DASHI.Analysis.RiemannAristotlePoleQuotientSplitComplementBudgetExact.OrderedAdditiveComplementSurface)
-  -> Set₁
+  (surface : Split.OrderedAdditiveComplementSurface) -> Set₁
 FinalCommonCarrierAllowancePayment = Allowance.PoleQuotientChannelAllowance
 
 ------------------------------------------------------------------------
