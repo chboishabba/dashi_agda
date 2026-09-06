@@ -9,6 +9,8 @@ import DASHI.Analysis.RiemannG2LowGapClusteringMomentReductionExact as Moment
 import DASHI.Analysis.RiemannG2SelectedTargetLocalMomentSameObjectExact as SelectedMoment
 import DASHI.Analysis.RiemannG2SelectedDirectFiniteMomentBidiExact as Shared
 import DASHI.Analysis.RiemannAristotlePoleNearPhaseStatisticExact as Phase
+import DASHI.Analysis.RiemannAristotlePoleQuotientDirectFiniteNearAttackExact as Direct
+import DASHI.Analysis.RiemannG2TargetCenteredScalarCancellationAssemblyExact as Literal
 import DASHI.Analysis.RiemannG2QuarterPeriodAnalyticRouteReconciliationExact as Quarter
 import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerExact as Root
 import DASHI.Analysis.RiemannAristotleRHAnalyticLeafSchedulerExact as Leaf
@@ -58,28 +60,42 @@ longWindowLowerDensityOpen :
     Z.canonicalZetaLocalCountLeanReturn ≡ false
 longWindowLowerDensityOpen = refl
 
-actualClusteringOpen :
+actualClusteringUnproved :
   Z.ZetaLocalCountLeanReturn.actualZetaClusteringClosed
     Z.canonicalZetaLocalCountLeanReturn ≡ false
-actualClusteringOpen = refl
+actualClusteringUnproved = refl
 
--- BIDI propagation: the old 8894 owner itself now routes to clustering.
-gapSplitRouteNowClustering :
+------------------------------------------------------------------------
+-- Gap-split semantics: clusteringRequired is an obstruction-state name, NOT a
+-- forward RH producer classification.
+------------------------------------------------------------------------
+
+gapSplitRouteStillNamesClusteringObstruction :
   Gap.currentGapSplitRouteState ≡ Gap.clusteringRequired
-gapSplitRouteNowClustering = refl
+gapSplitRouteStillNamesClusteringObstruction = refl
+
+gapSplitClusteringIsObstructionDiagnostic :
+  Gap.clusteringConditionIsGapSplitObstructionDiagnostic
+    Gap.canonicalGapSplitClusteringLeanReturn8894 ≡ true
+gapSplitClusteringIsObstructionDiagnostic = refl
+
+gapSplitClusteringDoesNotPayRH :
+  Gap.clusteringDirectlyPaysRHScalarConsumer
+    Gap.canonicalGapSplitClusteringLeanReturn8894 ≡ false
+gapSplitClusteringDoesNotPayRH = Gap.clusteringDoesNotDirectlyPayRH
 
 quarterDensitySearchLeafPruned :
-  Gap.GapSplitRelevant
-    Gap.compareQuarterPeriodLowerConstantWithDensityUpperConstant → ⊥
+  Gap.GapSplitRelevant Gap.compareQuarterPeriodLowerConstantWithDensityUpperConstant → ⊥
 quarterDensitySearchLeafPruned = Gap.quarterDensityConstantComparisonPruned
 
 zetaUpperCountSearchLeafPruned :
   Gap.GapSplitRelevant Gap.recoverZetaUpperLocalCount → ⊥
 zetaUpperCountSearchLeafPruned = Gap.zetaUpperLocalCountSearchPruned
 
--- Alpoge--Furman donor audit: same global >2/3-simple summary can coexist
--- with distinct target-local gap patterns, so global proportion does not descend
--- to the live clustering consumer without a localization theorem.
+------------------------------------------------------------------------
+-- Donor diagnostics remain valid but do not create RH producers.
+------------------------------------------------------------------------
+
 alpogeFurmanGlobalViewsCollide :
   AFLocal.globalSimpleView AFLocal.sameGlobalClustered ≡
   AFLocal.globalSimpleView AFLocal.sameGlobalUnclustered
@@ -95,71 +111,54 @@ alpogeFurmanDirectClusteringPruned :
     AFLocal.canonicalGlobalSimpleToLocalClusteringBoundary ≡ false
 alpogeFurmanDirectClusteringPruned = refl
 
-alpogeFurmanNeedsLocalization :
-  AFLocal.GlobalSimpleToLocalClusteringBoundary.additionalLocalizationTheoremRequired
-    AFLocal.canonicalGlobalSimpleToLocalClusteringBoundary ≡ true
-alpogeFurmanNeedsLocalization = refl
-
--- Target-local moment compiler is closed at discrete/slack level; the actual
--- selected-window analytic producer remains open.
 localMomentRatioCompilerClosed :
   Moment.LocalMomentClusteringBoundary.natMomentToTwoToOneRatioCompilerClosedInAgda
     Moment.canonicalLocalMomentClusteringBoundary ≡ true
 localMomentRatioCompilerClosed = refl
 
-selectedTargetLocalMomentOpen :
+selectedTargetLocalMomentUnproved :
   Moment.LocalMomentClusteringBoundary.exactSelectedTargetLocalSecondMomentProducerOwned
     Moment.canonicalLocalMomentClusteringBoundary ≡ false
-selectedTargetLocalMomentOpen = refl
+selectedTargetLocalMomentUnproved = refl
 
--- Same-object selected-window moment attachment.
 selectedMomentExactConsumerShape :
   SelectedMoment.SelectedTargetLocalMomentBoundary.selectedWindowMomentAttachmentIsExactConsumerShape
     SelectedMoment.canonicalSelectedTargetLocalMomentBoundary ≡ true
 selectedMomentExactConsumerShape = refl
 
-selectedMomentProducerStillOpen :
-  SelectedMoment.SelectedTargetLocalMomentBoundary.selectedWindowMomentProducerInhabitedHere
-    SelectedMoment.canonicalSelectedTargetLocalMomentBoundary ≡ false
-selectedMomentProducerStillOpen = refl
-
-secondMomentTargetSearchPruned :
-  SelectedMoment.paymentState SelectedMoment.recoverSecondSelectedTarget
-  ≡ SelectedMoment.pruned
-secondMomentTargetSearchPruned = refl
-
-secondMomentNearFamilySearchPruned :
-  SelectedMoment.paymentState SelectedMoment.recoverSecondNearZeroFamily
-  ≡ SelectedMoment.pruned
-secondMomentNearFamilySearchPruned = refl
-
-secondMomentMultiplicitySearchPruned :
-  SelectedMoment.paymentState SelectedMoment.recoverSecondMultiplicityCarrier
-  ≡ SelectedMoment.pruned
-secondMomentMultiplicitySearchPruned = refl
-
--- Shared selected/direct carrier: one zero-index/gap object must feed both the
--- clustering moment and finite-near evaluation.
-selectedDirectWeldRequired :
-  Shared.SelectedDirectFiniteMomentBoundary.selectedAndDirectViewsMustBeWelded
+selectedDirectWeldProofBearing :
+  Shared.SelectedDirectFiniteMomentBoundary.selectedDirectWeldClaimsAreProofBearing
     Shared.canonicalSelectedDirectFiniteMomentBoundary ≡ true
-selectedDirectWeldRequired = refl
+selectedDirectWeldProofBearing = refl
 
-selectedDirectWeldOpen :
-  Shared.SelectedDirectFiniteMomentBoundary.selectedDirectWeldInhabitedHere
-    Shared.canonicalSelectedDirectFiniteMomentBoundary ≡ false
-selectedDirectWeldOpen = refl
-
-sharedDirectCarrierFeedsBoth :
-  Shared.SelectedDirectFiniteMomentBoundary.oneDirectGapCarrierCanFeedClusteringAndFiniteEvaluation
+momentNormalizationProofBearing :
+  Shared.SelectedDirectFiniteMomentBoundary.momentNormalizationClaimsAreProofBearing
     Shared.canonicalSelectedDirectFiniteMomentBoundary ≡ true
-sharedDirectCarrierFeedsBoth = refl
+momentNormalizationProofBearing = refl
 
-secondDirectZeroFamilyPruned :
-  Shared.paymentState Shared.recoverSecondDirectZeroFamily ≡ Shared.pruned
-secondDirectZeroFamilyPruned = Shared.secondDirectZeroFamilyPruned
+secondMomentDefinitionPruned :
+  Shared.paymentState Shared.constructSecondMomentDefinition ≡ Shared.pruned
+secondMomentDefinitionPruned = Shared.secondMomentDefinitionPruned
 
--- The old phase-statistic carrier is compiler output from DirectFinitePoleNearProducer.
+------------------------------------------------------------------------
+-- Direct literal producer is the forward zero-side leaf.
+------------------------------------------------------------------------
+
+directProducerCarriesCanonicalConsumerPayment :
+  Direct.DirectFiniteNearAttackBoundary.directProducerCarriesCanonicalConsumerPayment
+    Direct.canonicalDirectFiniteNearAttackBoundary ≡ true
+directProducerCarriesCanonicalConsumerPayment = refl
+
+genericWithinAloneInsufficient :
+  Direct.DirectFiniteNearAttackBoundary.genericWithinReceiptAloneIsSufficient
+    Direct.canonicalDirectFiniteNearAttackBoundary ≡ false
+genericWithinAloneInsufficient = refl
+
+literalAcceptanceCompilerClosed :
+  Literal.TargetCenteredScalarCancellationBoundary.directSignedAcceptanceCompilesToExactConsumerReceipt
+    Literal.canonicalTargetCenteredScalarCancellationBoundary ≡ true
+literalAcceptanceCompilerClosed = refl
+
 concretePhaseStatisticNowOwned :
   Phase.PoleNearPhaseStatisticBoundary.repositoryAlreadyOwnsConcretePoleNearPhaseStatistic
     Phase.canonicalPoleNearPhaseStatisticBoundary ≡ true
@@ -169,50 +168,61 @@ secondPhaseCarrierPruned :
   Phase.paymentState Phase.constructSecondPhaseStatisticCarrier ≡ Phase.pruned
 secondPhaseCarrierPruned = Phase.secondPhaseStatisticCarrierPruned
 
-phaseStatisticDoesNotCloseNumericalEvaluation :
-  Phase.PoleNearPhaseStatisticBoundary.directFiniteNearClosed
-    Phase.canonicalPoleNearPhaseStatisticBoundary ≡ false
-phaseStatisticDoesNotCloseNumericalEvaluation = refl
+------------------------------------------------------------------------
+-- Quarter-period scheduler: compatibility closed, clustering diagnostic,
+-- literal direct signed producer forward-live.
+------------------------------------------------------------------------
 
--- The former parallel width/crossing work package is closed in place.
 widthAndCrossingPackageClosed :
   Quarter.workState Quarter.widthAndCrossingScale ≡ Quarter.closed
 widthAndCrossingPackageClosed = refl
 
-quarterSchedulerRoutesToClustering :
-  Quarter.workState Quarter.actualZetaLowGapClustering ≡ Quarter.live
-quarterSchedulerRoutesToClustering = refl
+quarterClusteringIsDiagnostic :
+  Quarter.workState Quarter.actualZetaLowGapClustering ≡ Quarter.diagnostic
+quarterClusteringIsDiagnostic = Quarter.actualZetaClusteringIsDiagnostic
 
--- Canonical root scheduler now exposes the shared same-object weld itself.
-rootSchedulerClusteringActive :
+quarterLiteralDirectProducerLive :
+  Quarter.workState Quarter.literalDirectSignedProducer ≡ Quarter.live
+quarterLiteralDirectProducerLive = Quarter.literalDirectSignedProducerIsLive
+
+------------------------------------------------------------------------
+-- Canonical root scheduler rejects clustering/moment as RH leaves.
+------------------------------------------------------------------------
+
+rootSchedulerClusteringInactive :
   Root.RHBidiSearchSchedulerBoundary.actualZetaLowGapClusteringActive
-    Root.canonicalRHBidiSearchSchedulerBoundary ≡ true
-rootSchedulerClusteringActive = refl
+    Root.canonicalRHBidiSearchSchedulerBoundary ≡ false
+rootSchedulerClusteringInactive = refl
 
-rootSchedulerSelectedDirectWeldActive :
+rootSchedulerClusteringDiagnostic :
+  Root.RHBidiSearchSchedulerBoundary.clusteringRetainedAsObstructionDiagnostic
+    Root.canonicalRHBidiSearchSchedulerBoundary ≡ true
+rootSchedulerClusteringDiagnostic = refl
+
+rootSchedulerDirectProducerActive :
+  Root.RHBidiSearchSchedulerBoundary.directFinitePoleNearProducerActive
+    Root.canonicalRHBidiSearchSchedulerBoundary ≡ true
+rootSchedulerDirectProducerActive = refl
+
+rootSchedulerDirectProducerCarriesPayment :
+  Root.RHBidiSearchSchedulerBoundary.directProducerCarriesCanonicalSignedConsumerPayment
+    Root.canonicalRHBidiSearchSchedulerBoundary ≡ true
+rootSchedulerDirectProducerCarriesPayment = refl
+
+rootSchedulerSelectedWeldDownstream :
   Root.RHBidiSearchSchedulerBoundary.selectedDirectZeroCarrierWeldActive
-    Root.canonicalRHBidiSearchSchedulerBoundary ≡ true
-rootSchedulerSelectedDirectWeldActive = refl
+    Root.canonicalRHBidiSearchSchedulerBoundary ≡ false
+rootSchedulerSelectedWeldDownstream = refl
 
-rootSchedulerLocalMomentRefinementActive :
+rootSchedulerMomentNotForwardActive :
   Root.RHBidiSearchSchedulerBoundary.targetLocalSecondMomentRefinementActive
-    Root.canonicalRHBidiSearchSchedulerBoundary ≡ true
-rootSchedulerLocalMomentRefinementActive = refl
+    Root.canonicalRHBidiSearchSchedulerBoundary ≡ false
+rootSchedulerMomentNotForwardActive = refl
 
-rootSchedulerMomentUsesSelectedWindow :
+rootSchedulerMomentStillUsesSelectedWindow :
   Root.RHBidiSearchSchedulerBoundary.targetLocalSecondMomentUsesExistingSelectedWindow
     Root.canonicalRHBidiSearchSchedulerBoundary ≡ true
-rootSchedulerMomentUsesSelectedWindow = refl
-
-rootSchedulerForcesSharedDirectCarrier :
-  Root.RHBidiSearchSchedulerBoundary.clusteringAndFiniteNearForcedOntoSameDirectCarrier
-    Root.canonicalRHBidiSearchSchedulerBoundary ≡ true
-rootSchedulerForcesSharedDirectCarrier = refl
-
-rootSchedulerGlobalSimpleDirectRoutePruned :
-  Root.RHBidiSearchSchedulerBoundary.globalSimpleZeroProportionDirectClusteringRouteActive
-    Root.canonicalRHBidiSearchSchedulerBoundary ≡ false
-rootSchedulerGlobalSimpleDirectRoutePruned = refl
+rootSchedulerMomentStillUsesSelectedWindow = refl
 
 rootSchedulerZetaUpperCountNotActive :
   Root.RHBidiSearchSchedulerBoundary.zetaUpperCountRemainsInActiveQueue
@@ -224,14 +234,33 @@ rootSchedulerQuarterDensityNotActive :
     Root.canonicalRHBidiSearchSchedulerBoundary ≡ false
 rootSchedulerQuarterDensityNotActive = refl
 
--- Canonical analytic-leaf scheduler exposes clustering as a real schedulable leaf.
-analyticLeafClusteringOpen :
-  Leaf.leafState Leaf.proveActualZetaLowGapClustering ≡ Leaf.open
-analyticLeafClusteringOpen = refl
+rootClusteringExperimentNotSchedulable :
+  Root.RHBidiSchedulable Root.proveActualZetaLowGapClustering → ⊥
+rootClusteringExperimentNotSchedulable = Root.zetaClusteringNotSchedulableAsRHProducer
 
-analyticLeafClusteringSchedulable :
-  Leaf.RHAnalyticLeafSchedulable Leaf.proveActualZetaLowGapClustering
-analyticLeafClusteringSchedulable = Leaf.zetaLowGapClusteringLeafLive
+rootDirectExperimentSchedulable :
+  Root.RHBidiSchedulable Root.recoverDirectFinitePoleNearProducer
+rootDirectExperimentSchedulable = Root.directFinitePoleNearProducerSchedulable
+
+------------------------------------------------------------------------
+-- Analytic-leaf scheduler agrees.
+------------------------------------------------------------------------
+
+analyticLeafClusteringPrunedFromRHQueue :
+  Leaf.leafState Leaf.proveActualZetaLowGapClustering ≡ Leaf.pruned
+analyticLeafClusteringPrunedFromRHQueue = refl
+
+analyticLeafClusteringNotSchedulable :
+  Leaf.RHAnalyticLeafSchedulable Leaf.proveActualZetaLowGapClustering → ⊥
+analyticLeafClusteringNotSchedulable = Leaf.zetaClusteringDiagnosticNotRHSchedulable
+
+analyticLeafMomentPrunedFromRHQueue :
+  Leaf.leafState Leaf.proveSelectedTargetLocalSecondMoment ≡ Leaf.pruned
+analyticLeafMomentPrunedFromRHQueue = refl
+
+analyticLeafDirectProducerSchedulable :
+  Leaf.RHAnalyticLeafSchedulable Leaf.recoverDirectFinitePoleNearProducer
+analyticLeafDirectProducerSchedulable = Leaf.directFiniteProducerLeafLive
 
 rhStillOpen :
   Z.ZetaLocalCountLeanReturn.rhDerived
