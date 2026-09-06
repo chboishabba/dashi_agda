@@ -88,6 +88,16 @@ localMomentProducerOpen :
     F.canonicalAristotleCurrentFrontier ≡ false
 localMomentProducerOpen = refl
 
+localMomentUsesSelectedWindow :
+  F.AristotleCurrentFrontier.targetLocalMomentUsesExistingSelectedWindow
+    F.canonicalAristotleCurrentFrontier ≡ true
+localMomentUsesSelectedWindow = refl
+
+transverseMomentNotOrdinateClustering :
+  F.AristotleCurrentFrontier.transverseMomentDirectlyControlsOrdinateClustering
+    F.canonicalAristotleCurrentFrontier ≡ false
+transverseMomentNotOrdinateClustering = refl
+
 alpogeFurmanNotDirectLocalClosure :
   F.AristotleCurrentFrontier.alpogeFurmanGlobalSimpleProportionDirectlyClosesClustering
     F.canonicalAristotleCurrentFrontier ≡ false
