@@ -4,11 +4,13 @@ module DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact where
 -- ORIGINAL-GOAL / POST-CLOSURE CAPSTONE
 --
 -- The finite non-Archimedean spectral core is dependency-closed in DASHI.
--- Post-closure audits separate sigma semantics, continuous-transfer claims,
--- finite Markov/mixing consumers, and stopping-time claims.  The source's
--- unit-prefactor L2 route and universal inverse-sqrt-two survival tail are both
--- refuted by exact n=3 witnesses.  Viable repairs use a level-dependent L2
--- prefactor and a constructive finite hitting-block tail.
+-- Post-closure audits now distinguish:
+--
+--   * false unit-prefactor / universal-tail claims (refuted);
+--   * repaired finite prefactored L2, covariance and TV consumers (closed);
+--   * constructive set-dependent stopping tails (closed);
+--   * polynomial stopping moments (one standard analytic consumer leaf);
+--   * sigma same-object promotion and infinite Gibbs uniqueness (still live).
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -43,6 +45,9 @@ data OriginalGoalLeaf : Set where
   prefactoredL2ShellCompiler : OriginalGoalLeaf
   parsevalShellEnergyWeld : OriginalGoalLeaf
   prefactoredL2WholeOperator : OriginalGoalLeaf
+  hilbertCorrelationDecay : OriginalGoalLeaf
+  stationaryCovarianceDecay : OriginalGoalLeaf
+  totalVariationMixing : OriginalGoalLeaf
 
   universalStoppingSurvivalBound : OriginalGoalLeaf
   forwardTranslationReachabilityCompiler : OriginalGoalLeaf
@@ -54,7 +59,10 @@ data OriginalGoalLeaf : Set where
   prefixHitAbsorptionWeld : OriginalGoalLeaf
   probabilityNormalization : OriginalGoalLeaf
   setDependentConstructiveTail : OriginalGoalLeaf
+  polynomialStoppingMoments : OriginalGoalLeaf
+  universalHalfLogTwoMGFDomain : OriginalGoalLeaf
 
+  finiteUniqueUniformStationary : OriginalGoalLeaf
   gibbsUniqueness : OriginalGoalLeaf
 
 
@@ -63,13 +71,13 @@ data OriginalGoalStatus : Set where
   owned : OriginalGoalStatus
   compiled : OriginalGoalStatus
   repoReusable : OriginalGoalStatus
+  sourceLibraryCompiled : OriginalGoalStatus
   sourcePlaceholderButRepoCompiled : OriginalGoalStatus
   rejectedReading : OriginalGoalStatus
   refuted : OriginalGoalStatus
   liveSameObjectWeld : OriginalGoalStatus
-  liveAdapter : OriginalGoalStatus
   liveIndependentProducer : OriginalGoalStatus
-  downstream : OriginalGoalStatus
+  liveStandardConsumer : OriginalGoalStatus
 
 leafStatus : OriginalGoalLeaf → OriginalGoalStatus
 leafStatus functionLevelCharacterAction = sourceOwned
@@ -96,31 +104,31 @@ leafStatus meanZeroInvariant = compiled
 leafStatus unitPrefactorOneStepL2 = refuted
 leafStatus explicitLevelSquaredPrefactor = owned
 leafStatus prefactoredL2ShellCompiler = compiled
-leafStatus parsevalShellEnergyWeld = liveSameObjectWeld
-leafStatus prefactoredL2WholeOperator = downstream
+leafStatus parsevalShellEnergyWeld = sourceLibraryCompiled
+leafStatus prefactoredL2WholeOperator = compiled
+leafStatus hilbertCorrelationDecay = sourceLibraryCompiled
+leafStatus stationaryCovarianceDecay = sourceLibraryCompiled
+leafStatus totalVariationMixing = sourceLibraryCompiled
 
 leafStatus universalStoppingSurvivalBound = refuted
 leafStatus forwardTranslationReachabilityCompiler = compiled
-leafStatus zmodCyclicPredecessorAdapter = liveAdapter
-leafStatus zmodFiniteEnumerationAdapter = liveAdapter
+leafStatus zmodCyclicPredecessorAdapter = sourceLibraryCompiled
+leafStatus zmodFiniteEnumerationAdapter = sourceOwned
 leafStatus finiteUniformHittingBlockCompiler = repoReusable
 leafStatus binaryOutcomeEnumeration = repoReusable
 leafStatus survivorCountDecay = repoReusable
-leafStatus prefixHitAbsorptionWeld = liveSameObjectWeld
-leafStatus probabilityNormalization = liveAdapter
-leafStatus setDependentConstructiveTail = downstream
+leafStatus prefixHitAbsorptionWeld = compiled
+leafStatus probabilityNormalization = repoReusable
+leafStatus setDependentConstructiveTail = compiled
+leafStatus polynomialStoppingMoments = liveStandardConsumer
+leafStatus universalHalfLogTwoMGFDomain = refuted
 
+leafStatus finiteUniqueUniformStationary = sourceLibraryCompiled
 leafStatus gibbsUniqueness = liveIndependentProducer
 
 priority : List OriginalGoalLeaf
 priority =
-  parsevalShellEnergyWeld ∷
-  prefactoredL2WholeOperator ∷
-  zmodCyclicPredecessorAdapter ∷
-  zmodFiniteEnumerationAdapter ∷
-  prefixHitAbsorptionWeld ∷
-  probabilityNormalization ∷
-  setDependentConstructiveTail ∷
+  polynomialStoppingMoments ∷
   cyclotomicToProlateSigmaAnchor ∷
   gibbsUniqueness ∷
   []
@@ -170,9 +178,10 @@ record MixingRepairBoundary : Set where
     unitPrefactorOneStepContractionValid : Bool
     explicitFiniteLevelPrefactorOwned : Bool
     shellPowerCompilerOwned : Bool
-    genericFiniteEnergyAssemblyOwned : Bool
     parsevalShellEnergySameObjectWeldOwned : Bool
     wholePrefactoredL2BoundOwned : Bool
+    stationaryCovarianceDecayOwned : Bool
+    totalVariationMixingOwned : Bool
     universalStoppingTailValid : Bool
     forwardTranslationCompilerOwned : Bool
     finiteUniformHittingBlockMathOwned : Bool
@@ -183,13 +192,14 @@ record MixingRepairBoundary : Set where
     prefixHitAbsorptionWeldOwned : Bool
     probabilityNormalizationOwned : Bool
     setDependentConstructiveTailOwned : Bool
+    allPolynomialStoppingMomentsOwned : Bool
+    universalHalfLogTwoMGFDomainValid : Bool
 
 canonicalMixingRepairBoundary : MixingRepairBoundary
 canonicalMixingRepairBoundary =
   mixingRepairBoundary
-    true false true true true false false false
-    true true true true
-    false false false false false
+    true false true true true true true true false
+    true true true true true true true true true false false
 
 unitPrefactorMixingRouteClosedNegative :
   MixingRepairBoundary.unitPrefactorOneStepContractionValid
@@ -197,23 +207,41 @@ unitPrefactorMixingRouteClosedNegative :
   ≡ false
 unitPrefactorMixingRouteClosedNegative = refl
 
+prefactoredMixingRouteClosedPositive :
+  MixingRepairBoundary.wholePrefactoredL2BoundOwned
+    canonicalMixingRepairBoundary
+  ≡ true
+prefactoredMixingRouteClosedPositive = refl
+
+totalVariationRouteClosedPositive :
+  MixingRepairBoundary.totalVariationMixingOwned
+    canonicalMixingRepairBoundary
+  ≡ true
+totalVariationRouteClosedPositive = refl
+
 universalStoppingTailClosedNegative :
   MixingRepairBoundary.universalStoppingTailValid
     canonicalMixingRepairBoundary
   ≡ false
 universalStoppingTailClosedNegative = refl
 
-constructiveStoppingInfrastructureOwned :
-  MixingRepairBoundary.forwardTranslationCompilerOwned
+constructiveStoppingTailClosedPositive :
+  MixingRepairBoundary.setDependentConstructiveTailOwned
     canonicalMixingRepairBoundary
   ≡ true
-constructiveStoppingInfrastructureOwned = refl
+constructiveStoppingTailClosedPositive = refl
 
-prefactoredMixingRouteStillLiveAtParsevalWeld :
-  MixingRepairBoundary.parsevalShellEnergySameObjectWeldOwned
+polynomialMomentsRemainConsumerLeaf :
+  MixingRepairBoundary.allPolynomialStoppingMomentsOwned
     canonicalMixingRepairBoundary
   ≡ false
-prefactoredMixingRouteStillLiveAtParsevalWeld = refl
+polynomialMomentsRemainConsumerLeaf = refl
+
+universalHalfLogTwoMGFDomainRejected :
+  MixingRepairBoundary.universalHalfLogTwoMGFDomainValid
+    canonicalMixingRepairBoundary
+  ≡ false
+universalHalfLogTwoMGFDomainRejected = refl
 
 localAndProlateHalvesDoNotAutoWeld :
   SigmaClosureBoundary.sameObjectAnchorLocated canonicalSigmaClosureBoundary
