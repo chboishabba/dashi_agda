@@ -254,7 +254,7 @@ approximateDescentPreservesDecision :
   ∀ fine →
   decide (consume fine)
   ≡ decide (quotientConsumer descent (project fine))
-approximateDescentPreservesDecision {consume = consume} descent margin fine =
+approximateDescentPreservesDecision {project = project} {consume = consume} descent margin fine =
   stableInsideMargin margin
     (consume fine)
     (quotientConsumer descent (project fine))
