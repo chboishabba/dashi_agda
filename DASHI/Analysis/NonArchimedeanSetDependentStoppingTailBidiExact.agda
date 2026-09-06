@@ -11,67 +11,93 @@ module DASHI.Analysis.NonArchimedeanSetDependentStoppingTailBidiExact where
 --   checked 3^L=1
 --   -> forward block a^(L-1);b is x -> x-1
 --   -> directed reachability on Z/2^nZ
---   -> finite state space gives one uniform hitting-block length m for fixed A
---   -> at least one of the 2^m words is killed from every survivor
---   -> S(q+1) <= (2^m-1) S(q)
---   -> S(q) <= (2^m-1)^q S(0)
---   -> P(T>qm) <= (1-2^(-m))^q.
+--   -> finite witness maximum gives one uniform hitting-block length m
+--   -> chosen forward word pads to an exact BinaryWord m
+--   -> complete binary enumeration has exactly 2^m outcomes
+--   -> prefix hit makes every padded extension killed
+--   -> Boolean survivor counting gives at most 2^m-1 survivors
+--   -> generic Nat recurrence gives geometric survivor-count decay
+--   -> exact finite-fraction normalization gives ((2^m-1)/2^m)^q.
 --
--- No principal-submatrix interlacing or normality assumption is used.
+-- The final predecessor-transitivity producer is now dependency-closed from
+-- Mathlib/source facts: ZMod N is additively cyclic; every residue is the natural
+-- cast of its canonical `val`; and k=(x-y).val predecessor steps satisfy
+-- pred^k x = x-k = y.  DASHI owns the generic difference-step compiler.
+--
+-- Authority boundary: this is a source/library dependency closure. We do not
+-- claim Agda kernel-checks Lean's ZMod or that a new Lean theorem was added to
+-- the external repository.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using (List; [])
 
 import DASHI.Analysis.NonArchimedeanForwardTranslationIrreducibilityCompilerExact as Forward
+import DASHI.Analysis.NonArchimedeanFiniteUniformHittingBlockCompilerExact as Uniform
+import DASHI.Analysis.NonArchimedeanHittingWordPaddingExact as Padding
+import DASHI.Analysis.NonArchimedeanZModStoppingCarrierSourceExact as SourceCarrier
+import DASHI.Analysis.NonArchimedeanForwardBinarySourcePathWeldExact as SourcePath
+import DASHI.Analysis.NonArchimedeanUniformBranchProbabilitySourceExact as SourceProbability
+import DASHI.Analysis.NonArchimedeanZModPredecessorTransitivitySourceExact as ZModPred
+import DASHI.Core.NatPredecessorDifferenceTransitivityExact as PredCompiler
+import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
+import DASHI.Core.FiniteBooleanSurvivorCountExact as Survivor
 import DASHI.Core.FiniteBlockSurvivalCountDecayExact as CountDecay
+import DASHI.Core.FinitePrefixAbsorptionExact as PrefixAbsorption
+import DASHI.Core.FiniteUniformProbabilityNormalizationExact as Probability
 
 
 data TailLeaf : Set where
   sourceFullPeriod : TailLeaf
+  sourceZModFiniteEnumeration : TailLeaf
+  sourceFiniteBinaryChoiceEnumeration : TailLeaf
+  sourceUniformBranchProbability : TailLeaf
   forwardTranslationBlock : TailLeaf
-  cyclicZModPredecessor : TailLeaf
+  forwardBinarySourcePathWeld : TailLeaf
+  zmodPredecessorDifferenceCompiler : TailLeaf
   directedIrreducibility : TailLeaf
   finiteUniformHittingBlock : TailLeaf
+  exactHittingWordPadding : TailLeaf
+  completeBinaryBranchEnumeration : TailLeaf
+  genericPrefixAbsorption : TailLeaf
   oneKilledWordCountBound : TailLeaf
   geometricSurvivorCountDecay : TailLeaf
-  probabilityNormalization : TailLeaf
+  finiteProbabilityNormalization : TailLeaf
   setDependentExponentialTail : TailLeaf
 
 
 data TailStatus : Set where
   sourceOwned : TailStatus
+  sourceLibraryCompiled : TailStatus
   compiled : TailStatus
   repoGeneric : TailStatus
-  liveAdapter : TailStatus
-  downstream : TailStatus
+  downstreamCompiled : TailStatus
 
 status : TailLeaf → TailStatus
 status sourceFullPeriod = sourceOwned
+status sourceZModFiniteEnumeration = sourceOwned
+status sourceFiniteBinaryChoiceEnumeration = sourceOwned
+status sourceUniformBranchProbability = sourceOwned
 status forwardTranslationBlock = compiled
-status cyclicZModPredecessor = liveAdapter
-status directedIrreducibility = downstream
-status finiteUniformHittingBlock = downstream
-status oneKilledWordCountBound = liveAdapter
+status forwardBinarySourcePathWeld = compiled
+status zmodPredecessorDifferenceCompiler = sourceLibraryCompiled
+status directedIrreducibility = downstreamCompiled
+status finiteUniformHittingBlock = repoGeneric
+status exactHittingWordPadding = compiled
+status completeBinaryBranchEnumeration = repoGeneric
+status genericPrefixAbsorption = repoGeneric
+status oneKilledWordCountBound = repoGeneric
 status geometricSurvivorCountDecay = repoGeneric
-status probabilityNormalization = liveAdapter
-status setDependentExponentialTail = downstream
+status finiteProbabilityNormalization = repoGeneric
+status setDependentExponentialTail = downstreamCompiled
 
 
 data TailObligation : Set where
-  needZModCyclicPredecessorAdapter : TailObligation
-  needFiniteUniformHittingBlockCompiler : TailObligation
-  needOneKilledWordCountBound : TailObligation
-  needProbabilityNormalization : TailObligation
+  noRemainingConstructiveTailProducer : TailObligation
 
 constructiveTailCutset : List TailObligation
-constructiveTailCutset =
-  needZModCyclicPredecessorAdapter ∷
-  needFiniteUniformHittingBlockCompiler ∷
-  needOneKilledWordCountBound ∷
-  needProbabilityNormalization ∷
-  []
+constructiveTailCutset = []
 
 record ConstructiveTailBoundary : Set where
   constructor constructiveTailBoundary
@@ -80,12 +106,25 @@ record ConstructiveTailBoundary : Set where
     killedKernelSpectralRadiusNeeded : Bool
     principalSubmatrixInterlacingNeeded : Bool
     sourceFullPeriodReused : Bool
+    sourceFiniteCarrierEnumerationOwned : Bool
+    sourceUniformBranchProbabilityOwned : Bool
+    forwardBinarySourcePathWeldOwned : Bool
+    zmodPredecessorMathematicsClosed : Bool
+    zmodPredecessorAgdaKernelChecked : Bool
+    uniformWitnessMaximumOwned : Bool
+    hittingWordPaddingOwned : Bool
+    binaryEnumerationOwned : Bool
+    genericPrefixAbsorptionOwned : Bool
+    oneKilledWordCountMathOwned : Bool
     genericCountDecayOwned : Bool
-    setDependentRateAllowed : Bool
+    finiteProbabilityNormalizationOwned : Bool
+    setDependentTailDependencyClosed : Bool
 
 canonicalConstructiveTailBoundary : ConstructiveTailBoundary
 canonicalConstructiveTailBoundary =
-  constructiveTailBoundary false false false true true true
+  constructiveTailBoundary
+    false false false true true true true true false
+    true true true true true true true true
 
 universalFalseRatePruned :
   ConstructiveTailBoundary.sourceUniversalRateStillUsed
@@ -93,14 +132,18 @@ universalFalseRatePruned :
   ≡ false
 universalFalseRatePruned = refl
 
-killedKernelSpectrumPruned :
-  ConstructiveTailBoundary.killedKernelSpectralRadiusNeeded
-    canonicalConstructiveTailBoundary
-  ≡ false
-killedKernelSpectrumPruned = refl
-
-constructiveSetDependentRouteLive :
-  ConstructiveTailBoundary.setDependentRateAllowed
+zmodPredecessorMathematicsClosed :
+  ConstructiveTailBoundary.zmodPredecessorMathematicsClosed
     canonicalConstructiveTailBoundary
   ≡ true
-constructiveSetDependentRouteLive = refl
+zmodPredecessorMathematicsClosed = refl
+
+crossKernelPretenceRejected :
+  ConstructiveTailBoundary.zmodPredecessorAgdaKernelChecked
+    canonicalConstructiveTailBoundary
+  ≡ false
+crossKernelPretenceRejected = refl
+
+constructiveTailDependencyClosed :
+  constructiveTailCutset ≡ []
+constructiveTailDependencyClosed = refl

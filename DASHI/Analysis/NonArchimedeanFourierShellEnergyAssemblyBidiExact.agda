@@ -1,96 +1,99 @@
 module DASHI.Analysis.NonArchimedeanFourierShellEnergyAssemblyBidiExact where
 
 ------------------------------------------------------------------------
--- FOURIER SHELL ENERGY ASSEMBLY BIDI
+-- FOURIER / DETAIL ENERGY ASSEMBLY BIDI
 --
--- Source/repo ingredients already available:
+-- Corrected closure:
 --
---   * `fourierBasisMatrix_mul_star`: theorem-bearing DFT unitarity;
---   * checked dyadic/detail resolution of identity;
---   * monomial character action and shell/cycle partition;
---   * explicit shell squared prefactor compiler;
---   * generic finite component inequality assembly in
---       DASHI.Core.FiniteComponentEnergyAssemblyExact.
+-- * source L2Space is literally finite EuclideanSpace on ZMod(2^n);
+-- * the checked rational Hadamard block similarity is NOT unitary as written;
+-- * half-normalised symmetric/antisymmetric energies are exact by the
+--   parallelogram identity, with no recursive conditioning loss;
+-- * the local DFT is genuinely normalized and unitary (F F*=F* F=I);
+-- * shell/cycle power envelopes are already compiled;
+-- * finite shell-prefactor maximum and finite energy assembly are repo-owned.
 --
--- The remaining same-object seam is not abstract orthogonality.  It is the
--- concrete identification of the source L2 squared norm with the finite list of
--- Fourier-shell energies consumed by the generic assembly theorem, before and
--- after P_n^t.
+-- Thus the old input/output Parseval same-object obligations are dependency-
+-- closed.  The closure is source/library-level across Lean/Agda, not a claim
+-- that Agda kernel-checks Mathlib's Complex Euclidean norm.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using (List; [])
 
-import DASHI.Core.FiniteComponentEnergyAssemblyExact as Assembly
-import DASHI.Analysis.NonArchimedeanExplicitSquaredMixingPrefactorExact as Prefactor
+import DASHI.Analysis.NonArchimedeanEuclideanL2SourceWeldExact as Euclidean
+import DASHI.Analysis.NonArchimedeanHadamardEnergyNormalizationExact as HadamardEnergy
+import DASHI.Analysis.NonArchimedeanLocalDFTParsevalSourceExact as DFT
+import DASHI.Analysis.NonArchimedeanFiniteTowerPrefactorMaximumExact as Maximum
+import DASHI.Analysis.NonArchimedeanPrefactoredL2TowerClosureExact as TowerClosure
+import DASHI.Core.FinitePrefactorEnergyAssemblyExact as Assembly
 
 
 data AssemblyLeaf : Set where
-  dftUnitary : AssemblyLeaf
-  detailResolutionIdentity : AssemblyLeaf
-  meanZeroExcludesPerronCharacter : AssemblyLeaf
+  sourceEuclideanL2Carrier : AssemblyLeaf
+  checkedHadamardSimilarity : AssemblyLeaf
+  normalisedHadamardEnergySplit : AssemblyLeaf
+  localDFTParseval : AssemblyLeaf
+  meanZeroConstantModeSeparation : AssemblyLeaf
   shellPartition : AssemblyLeaf
   shellSquaredPowerBounds : AssemblyLeaf
-  finiteComponentSumCompiler : AssemblyLeaf
-  inputNormEqualsShellEnergySum : AssemblyLeaf
-  outputNormEqualsShellEnergySum : AssemblyLeaf
+  finiteTowerPrefactorMaximum : AssemblyLeaf
+  finitePrefactorEnergyAssembly : AssemblyLeaf
   wholeL2SquaredPowerBound : AssemblyLeaf
 
 
 data AssemblyStatus : Set where
   sourceOwned : AssemblyStatus
+  sourceLibraryCompiled : AssemblyStatus
   compiled : AssemblyStatus
   repoGeneric : AssemblyStatus
-  liveSameObject : AssemblyStatus
-  downstream : AssemblyStatus
+  downstreamCompiled : AssemblyStatus
 
 assemblyStatus : AssemblyLeaf → AssemblyStatus
-assemblyStatus dftUnitary = sourceOwned
-assemblyStatus detailResolutionIdentity = sourceOwned
-assemblyStatus meanZeroExcludesPerronCharacter = compiled
+assemblyStatus sourceEuclideanL2Carrier = sourceOwned
+assemblyStatus checkedHadamardSimilarity = sourceOwned
+assemblyStatus normalisedHadamardEnergySplit = sourceLibraryCompiled
+assemblyStatus localDFTParseval = sourceLibraryCompiled
+assemblyStatus meanZeroConstantModeSeparation = compiled
 assemblyStatus shellPartition = compiled
 assemblyStatus shellSquaredPowerBounds = compiled
-assemblyStatus finiteComponentSumCompiler = repoGeneric
-assemblyStatus inputNormEqualsShellEnergySum = liveSameObject
-assemblyStatus outputNormEqualsShellEnergySum = liveSameObject
-assemblyStatus wholeL2SquaredPowerBound = downstream
+assemblyStatus finiteTowerPrefactorMaximum = repoGeneric
+assemblyStatus finitePrefactorEnergyAssembly = repoGeneric
+assemblyStatus wholeL2SquaredPowerBound = downstreamCompiled
 
 
 data AssemblyObligation : Set where
-  needInputParsevalShellEnergyWeld : AssemblyObligation
-  needOutputParsevalShellEnergyWeld : AssemblyObligation
+  noRemainingAssemblyProducer : AssemblyObligation
 
 assemblyCutset : List AssemblyObligation
-assemblyCutset =
-  needInputParsevalShellEnergyWeld ∷
-  needOutputParsevalShellEnergyWeld ∷
-  []
+assemblyCutset = []
 
 record FourierShellAssemblyBoundary : Set where
   constructor fourierShellAssemblyBoundary
   field
-    sourceDFTUnitarityAlreadyOwned : Bool
-    genericFiniteSumInequalityNeedsReproof : Bool
-    shellEnergySameObjectWeldsStillNeeded : Bool
-    eigenvalueRadiusCanReplacePowerNormWeld : Bool
+    sourceDFTUnitarityOwned : Bool
+    checkedHadamardSimilarityUnitaryAsWritten : Bool
+    halfNormalisedHadamardEnergyExact : Bool
+    sourceL2FiniteCoordinateSameObject : Bool
+    genericFinitePrefactorAssemblyOwned : Bool
+    finitePrefactoredL2DependencyClosed : Bool
     unitPrefactorCanBeRestored : Bool
+    agdaKernelChecksSourceComplexNorm : Bool
 
 canonicalFourierShellAssemblyBoundary : FourierShellAssemblyBoundary
 canonicalFourierShellAssemblyBoundary =
-  fourierShellAssemblyBoundary true false true false false
+  fourierShellAssemblyBoundary
+    true false true true true true false false
 
-assemblyInfrastructureAlreadyOwned :
-  FourierShellAssemblyBoundary.genericFiniteSumInequalityNeedsReproof
+hadamardNormalisationCorrectionRetained :
+  FourierShellAssemblyBoundary.checkedHadamardSimilarityUnitaryAsWritten
     canonicalFourierShellAssemblyBoundary
   ≡ false
-assemblyInfrastructureAlreadyOwned = refl
+hadamardNormalisationCorrectionRetained = refl
 
-sameObjectEnergyWeldStillLive :
-  FourierShellAssemblyBoundary.shellEnergySameObjectWeldsStillNeeded
-    canonicalFourierShellAssemblyBoundary
-  ≡ true
-sameObjectEnergyWeldStillLive = refl
+assemblyDependencyClosed : assemblyCutset ≡ []
+assemblyDependencyClosed = refl
 
 unitPrefactorCannotReturn :
   FourierShellAssemblyBoundary.unitPrefactorCanBeRestored

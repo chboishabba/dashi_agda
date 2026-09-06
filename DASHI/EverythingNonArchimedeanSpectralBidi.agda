@@ -73,8 +73,8 @@ import DASHI.Analysis.NonArchimedeanSigmaAnchorSameObjectBidiExact
 
 -- Corrected finite Markov/mixing route.  Both the source C=1 L2 estimate and
 -- its advertised universal inverse-sqrt-two stopping-survival tail are refuted
--- by exact n=3 witnesses.  Viable repairs use finite prefactors and a
--- constructive finite hitting-block route rather than non-normal interlacing.
+-- by exact n=3 witnesses.  Repaired finite consumers use finite prefactors,
+-- adjoint-aware law evolution and a constructive finite hitting-block route.
 import DASHI.Analysis.NonArchimedeanContinuousMixingBidiExact
 import DASHI.Analysis.NonArchimedeanMixingRateNormalizationExact
 import DASHI.Analysis.NonArchimedeanMeanZeroInvariantCompilerExact
@@ -85,10 +85,28 @@ import DASHI.Analysis.NonArchimedeanMonomialPowerPrefactorBidiExact
 import DASHI.Analysis.NonArchimedeanExplicitSquaredMixingPrefactorExact
 import DASHI.Analysis.NonArchimedeanPrefactoredL2PowerCompilerExact
 import DASHI.Analysis.NonArchimedeanFourierShellEnergyAssemblyBidiExact
+import DASHI.Analysis.NonArchimedeanHadamardEnergyNormalizationExact
+import DASHI.Analysis.NonArchimedeanLocalDFTParsevalSourceExact
+import DASHI.Analysis.NonArchimedeanEuclideanL2SourceWeldExact
+import DASHI.Analysis.NonArchimedeanFiniteTowerPrefactorMaximumExact
+import DASHI.Analysis.NonArchimedeanPrefactoredL2TowerClosureExact
+import DASHI.Analysis.NonArchimedeanHilbertCorrelationDecayExact
+import DASHI.Analysis.NonArchimedeanUniformStationaryCovarianceWeldExact
+import DASHI.Analysis.NonArchimedeanTotalVariationFromL2Exact
+import DASHI.Analysis.NonArchimedeanAdjointPowerTVWeldExact
 import DASHI.Analysis.NonArchimedeanStoppingSurvivalN3CounterexampleExact
 import DASHI.Analysis.NonArchimedeanForwardTranslationIrreducibilityCompilerExact
 import DASHI.Analysis.NonArchimedeanSetDependentStoppingTailBidiExact
+import DASHI.Analysis.NonArchimedeanStoppingMomentRepairBidiExact
+import DASHI.Analysis.NonArchimedeanFiniteStationaryVsGibbsBoundaryExact
 import DASHI.Analysis.NonArchimedeanStoppingTimeAuthorityBidiExact
+
+-- Generic x-pollinated finite-state kernels extracted from the repaired lane.
+import DASHI.Core.FiniteProbabilityDensityCoordinateWeldExact
+import DASHI.Core.FiniteUniformBranchingHittingTailExact
+import DASHI.Core.FinitePrefixAbsorptionExact
+import DASHI.Core.FiniteUniformProbabilityNormalizationExact
+import DASHI.Core.FinitePrefactorEnergyAssemblyExact
 
 import DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact
 
