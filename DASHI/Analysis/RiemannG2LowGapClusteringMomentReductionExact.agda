@@ -24,7 +24,7 @@ import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap
 --   highGapMass <= normalizedSecondMoment
 --   normalizedSecondMoment < 2 * lowGapMass
 --
--- imply
+-- imply a strict slack witness for
 --
 --   highGapMass < 2 * lowGapMass.
 --
@@ -48,6 +48,12 @@ congSuc refl = refl
 +-assoc zero b c = refl
 +-assoc (suc a) b c = congSuc (+-assoc a b c)
 
+sym : {A : Set} {x y : A} → x ≡ y → y ≡ x
+sym refl = refl
+
+trans : {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
+trans refl yz = yz
+
 record NormalizedLocalSecondMomentLedger : Set where
   constructor normalized-local-second-moment-ledger
   field
@@ -67,13 +73,16 @@ record NormalizedLocalSecondMomentLedger : Set where
 
 open NormalizedLocalSecondMomentLedger public
 
+-- Strictness is subtraction-free: the slack from high mass to twice-low mass is
+-- represented as a nonnegative prefix followed by a literal positive tail.
 record HighMassStrictlyBelowTwiceLow
     (l : NormalizedLocalSecondMomentLedger) : Set where
   constructor high-mass-strictly-below-twice-low
   field
-    strictGapPredecessor : Nat
-    highPlusPositiveGapIsTwiceLow :
-      highGapMass l + suc strictGapPredecessor
+    nonnegativePrefix : Nat
+    positiveTailPredecessor : Nat
+    highPlusStrictSlackIsTwiceLow :
+      highGapMass l + (nonnegativePrefix + suc positiveTailPredecessor)
         ≡ lowGapMass l + lowGapMass l
 
 open HighMassStrictlyBelowTwiceLow public
@@ -83,16 +92,27 @@ localSecondMomentForcesTwoToOneMassRatio :
   HighMassStrictlyBelowTwiceLow l
 localSecondMomentForcesTwoToOneMassRatio l =
   high-mass-strictly-below-twice-low
-    (highToMomentSlack l + momentToTwiceLowGapPredecessor l)
+    (highToMomentSlack l)
+    (momentToTwiceLowGapPredecessor l)
     proof
   where
   proof :
     highGapMass l
-      + suc (highToMomentSlack l + momentToTwiceLowGapPredecessor l)
+      + (highToMomentSlack l + suc (momentToTwiceLowGapPredecessor l))
       ≡ lowGapMass l + lowGapMass l
-  proof
-    rewrite highMassPlusSlackIsMoment l
-          | momentPlusPositiveGapIsTwiceLow l = refl
+  proof =
+    trans
+      (sym (+-assoc
+        (highGapMass l)
+        (highToMomentSlack l)
+        (suc (momentToTwiceLowGapPredecessor l))))
+      (trans
+        (congTail (highMassPlusSlackIsMoment l)
+          (suc (momentToTwiceLowGapPredecessor l)))
+        (momentPlusPositiveGapIsTwiceLow l))
+    where
+    congTail : {a b : Nat} → a ≡ b → (c : Nat) → a + c ≡ b + c
+    congTail refl c = refl
 
 ------------------------------------------------------------------------
 -- Existing-owner audit.
@@ -170,4 +190,4 @@ canonicalLocalMomentClusteringBoundary =
     true refl
     false refl
     false refl
-    "The live clustering theorem can be attacked through a target-local second moment rather than another coarse count. Normalize the radius-D second moment so every high-gap zero contributes at least one unit. If that moment is strictly below twice the low-gap mass, Agda mechanically gives highGapMass < 2*lowGapMass. The remaining coefficient bridge is the elementary real fact 4/pi^2 < 1/2. The actual unpaid analytic producer is therefore a SAME-target, SAME-window second-moment bound; existing pair-kernel and Hermitian-localization owners are relevant donors, while the global >2/3 simple-zero proportion is not a direct substitute."
+    "The live clustering theorem can be attacked through a target-local second moment rather than another coarse count. Normalize the radius-D second moment so every high-gap zero contributes at least one unit. If that moment is strictly below twice the low-gap mass, Agda mechanically gives a subtraction-free strict witness for highGapMass < 2*lowGapMass. The remaining coefficient bridge is the elementary real fact 4/pi^2 < 1/2. The actual unpaid analytic producer is therefore a SAME-target, SAME-window second-moment bound; existing pair-kernel and Hermitian-localization owners are relevant donors, while the global >2/3 simple-zero proportion is not a direct substitute."
