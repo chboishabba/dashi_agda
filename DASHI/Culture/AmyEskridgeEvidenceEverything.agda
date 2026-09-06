@@ -1,9 +1,9 @@
 module DASHI.Culture.AmyEskridgeEvidenceEverything where
 
 -- Focused aggregate for the evidence-hyperfabric lane.  The generic viewpoint,
--- open-science and knowledge-boundary BIDI cores are registered here without
--- treating Amy Eskridge as a member of the separate House-letter scientist
--- roster population.
+-- open-science, knowledge-boundary and scientific-mechanism BIDI cores are
+-- registered here without treating Amy Eskridge as a member of the separate
+-- House-letter scientist roster population.
 
 import DASHI.Core.EvidenceHyperfabricExact
 import DASHI.Core.EvidenceAcquisitionSelectiveReopeningExact
@@ -13,6 +13,8 @@ import DASHI.Core.KnowledgeBoundaryTransitionBidiExact
 import DASHI.Core.KnowledgeBoundaryCandidateIdentityBidiExact
 import DASHI.Core.KnowledgeObjectLineageBidiExact
 import DASHI.Core.LayeredKnowledgeReleaseBidiExact
+import DASHI.Core.ScientificMechanismEvidenceBidiExact
+import DASHI.Physics.POAMSScientificMechanismBoundaryExact
 import DASHI.Culture.AmyEskridgeEvidenceHyperfabricExact
 import DASHI.Culture.AmyEskridgeEvidenceCrossPollinationExact
 import DASHI.Culture.AmyEskridgeAcquisitionProofSearchExact
