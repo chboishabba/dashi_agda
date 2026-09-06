@@ -352,7 +352,7 @@ statisticsDoNotProveLandBackCounterfactual : ClosingGapStatisticsProveLandBackCo
 statisticsDoNotProveLandBackCounterfactual ()
 
 intersectionalCourtReformDoesNotEraseColonialRelation : IntersectionalCourtReformEliminatesColonialPowerRelation → ⊥
-intersectionalCourtReformDoesNotEraseColonialRelation ()
+intersectionalCourtReformDoesNotEraseColonialPowerRelation ()
 
 criticalLensDoesNotAutoBecomeWorldTruth : CriticalLensAutomaticallyBecomesWorldTruth → ⊥
 criticalLensDoesNotAutoBecomeWorldTruth ()
@@ -362,8 +362,9 @@ criticalLensDoesNotAutoBecomeWorldTruth ()
 ------------------------------------------------------------------------
 
 nativeTitleRecognitionStillNotSovereigntyRecognition :
-  Critical.nativeTitleRecognitionEqualsSovereigntyRecognition Critical.canonicalColonialSovereigntyCriticalBoundary ≡ false
-nativeTitleRecognitionStillNotSovereigntyRecognition = refl
+  Critical.NativeTitleRecognitionProvesSovereigntyRecognition → ⊥
+nativeTitleRecognitionStillNotSovereigntyRecognition =
+  Critical.nativeTitleDoesNotProveSovereigntyRecognition
 
 recognitionConditionStillDistinctFromContinuity :
   Minimal.axis Minimal.dawsonRecognitionConditionReceipt ≡ Minimal.recognitionConditionAxis
