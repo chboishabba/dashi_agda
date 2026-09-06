@@ -8,6 +8,7 @@ FILES=(
   DASHI/Analysis/RiemannAristotlePoleQuotientComplementMarginCompilerExact.agda
   DASHI/Analysis/RiemannAristotlePoleQuotientBidiMeetingExact.agda
   DASHI/Analysis/RiemannAristotlePoleQuotientSplitComplementBudgetExact.agda
+  DASHI/Analysis/RiemannG2PoleQuotientChannelAllowanceExact.agda
   DASHI/Analysis/RiemannAristotleRankTwoPoleQuotientLaneSeparationExact.agda
   DASHI/Analysis/RiemannAristotlePoleQuotientOffOrdinateBudgetTargetExact.agda
   DASHI/Analysis/RiemannAristotlePoleQuotientGammaBudgetTargetExact.agda
@@ -29,6 +30,7 @@ done
 if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotlePoleQuotientComplementMarginCompilerExact.agda
   agda DASHI/Analysis/RiemannAristotlePoleQuotientSplitComplementBudgetExact.agda
+  agda DASHI/Analysis/RiemannG2PoleQuotientChannelAllowanceExact.agda
   agda DASHI/Analysis/RiemannAristotlePoleQuotientBidiMeetingExact.agda
   agda DASHI/Analysis/RiemannAristotleRankTwoPoleQuotientLaneSeparationExact.agda
   agda DASHI/Analysis/RiemannAristotlePoleQuotientOffOrdinateBudgetTargetExact.agda
