@@ -7,15 +7,19 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.YangMills.YMAristotleOperatorReturn2026Exact as LeanReturn
 import DASHI.Physics.YangMills.YMOperatorDomainContinuumSources2026Exact as Src
+import DASHI.Physics.YangMills.BalabanClayDenseCoreSpectralGapExact as DenseGap
+import DASHI.Physics.YangMills.BalabanVacuumOrthogonalMoscoRecoveryExact as VacuumRecovery
+import DASHI.Physics.Closure.YMSprint129MoscoLiminfStrongResolventClosure as Sprint129
+import DASHI.Physics.Closure.SchrodingerSelfAdjointEvolutionReceipt as SelfAdjointReceipt
 
 ------------------------------------------------------------------------
--- BIDI return: Agda -> future Lean work.
+-- BIDI return: existing Agda theorems -> Lean.
 --
--- The Lean tranche removes generic algebraic scaffolding, but its current
--- total-function and bounded-CLM carriers deliberately do not discharge the
--- physical unbounded Hamiltonian / continuum passage.  This module makes the
--- missing interfaces explicit so that future cross-prover work has a typed
--- target rather than an ambiguous prose phrase such as "gap stability".
+-- This is not a parallel implementation.  The current YM frontier consumes
+-- the pre-existing theorem owners directly and returns their theorem shapes to
+-- the Lean lane.  The older Sprint129 boolean/evidence receipt is retained as
+-- provenance, but is not confused with a kernel theorem about actual closed
+-- forms or resolvents.
 ------------------------------------------------------------------------
 
 record AgdaToLeanInterface : Set where
@@ -24,7 +28,8 @@ record AgdaToLeanInterface : Set where
     interfaceName : String
     motivatingSource : String
     requiredShape : String
-    closedInCurrentLeanTranche : Bool
+    closedAsGenericCompiler : Bool
+    closedForPhysicalYMProducer : Bool
     boundedReading : String
 
 open AgdaToLeanInterface public
@@ -34,30 +39,55 @@ domainAwareHamiltonianInterface = agda-to-lean-interface
   "DomainAwareHamiltonian"
   "Tosio Kato, Perturbation Theory for Linear Operators, DOI 10.1007/978-3-642-66282-9"
   "carrier H; domain D(H); operator H : D(H) -> carrier; common invariant dense core; gauge-action invariance; symmetry/self-adjointness on the stated domain; quotient compatibility of domain and action"
-  false
-  "Current Lean uniqueness allows total H -> H generators with no boundedness hypothesis, but does not formalize a partial operator domain."
+  false false
+  "Current Lean uniqueness allows total H -> H generators with no boundedness hypothesis. Existing Agda SchrodingerSelfAdjointEvolutionReceipt explicitly remains an obligation surface rather than a physical self-adjoint Hamiltonian construction."
 
-closedFormContinuumInterface : AgdaToLeanInterface
-closedFormContinuumInterface = agda-to-lean-interface
-  "ClosedFormOrResolventGapTransport"
-  "Tosio Kato, Perturbation Theory for Linear Operators, DOI 10.1007/978-3-642-66282-9; Umberto Mosco, Convergence of Convex Sets and of Solutions of Variational Inequalities, DOI 10.1016/0001-8708(69)90009-7"
-  "closed semibounded quadratic forms or closed operators; a specified convergence mode such as Mosco / strong resolvent / norm resolvent; identification of the limiting physical Hamiltonian; theorem transporting the positive lower bound above the vacuum"
-  false
-  "MassGapFormTransport closes only pointwise strong-limit preservation for bounded continuous linear maps E ->L[C] E."
+vacuumRecoveryGapInterface : AgdaToLeanInterface
+vacuumRecoveryGapInterface = agda-to-lean-interface
+  "VacuumOrthogonalRecoveryGapTransport"
+  "Umberto Mosco, Convergence of Convex Sets and of Solutions of Variational Inequalities, DOI 10.1016/0001-8708(69)90009-7; Kazuhiro Kuwae and Takashi Shioya, Convergence of Spectral Structures: A Functional Analytic Theory and Its Applications to Spectral Geometry, DOI 10.4310/cag.2003.v11.n4.a1"
+  "for each limiting vacuum-orthogonal vector, provide a finite vacuum-orthogonal recovery vector with norm domination, the finite uniform gap, and recovery-energy upper bound"
+  true false
+  "BalabanVacuumOrthogonalMoscoRecoveryExact already proves the generic recovery-system compiler in Agda. What remains is the physical YM recovery-system producer."
+
+denseCoreGapInterface : AgdaToLeanInterface
+denseCoreGapInterface = agda-to-lean-interface
+  "DenseCoreSpectralExclusion"
+  "Konrad Osterwalder and Robert Schrader, Axioms for Euclidean Green's Functions I/II, DOI 10.1007/BF01645738 and 10.1007/BF01608978"
+  "clustering kills the positive-subgap projection on every vector of a dense centered core; continuity extends zero projection to the whole vacuum-orthogonal carrier"
+  true false
+  "BalabanClayDenseCoreSpectralGapExact is a genuine Agda theorem schema. Its physical dense-core/clustering/continuity producer remains conditional."
 
 osReconstructionIdentificationInterface : AgdaToLeanInterface
 osReconstructionIdentificationInterface = agda-to-lean-interface
   "OSReconstructedEvolutionIdentification"
   "Konrad Osterwalder and Robert Schrader, Axioms for Euclidean Green's Functions I/II, DOI 10.1007/BF01645738 and 10.1007/BF01608978"
-  "construct continuum Schwinger functions satisfying the required OS package; reconstruct the Hilbert-space dynamics; identify that evolution with the selected Yang--Mills Hamiltonian evolution on the physical carrier/common core"
-  false
-  "Generator uniqueness can consume equality of evolutions once supplied; it does not prove the equality of the Yang--Mills and OS-reconstructed evolutions."
+  "construct continuum Schwinger functions satisfying the required OS package; reconstruct Hilbert-space dynamics; identify that evolution with the selected Yang--Mills Hamiltonian evolution on the physical carrier/common core"
+  false false
+  "Generator uniqueness can consume equality of evolutions once supplied; it does not prove equality of Yang--Mills and OS-reconstructed evolutions."
 
 agdaToLeanInterfaces : List AgdaToLeanInterface
 agdaToLeanInterfaces =
   domainAwareHamiltonianInterface ∷
-  closedFormContinuumInterface ∷
+  vacuumRecoveryGapInterface ∷
+  denseCoreGapInterface ∷
   osReconstructionIdentificationInterface ∷ []
+
+------------------------------------------------------------------------
+-- Actual Agda theorem terms exported back to Lean-side work.
+------------------------------------------------------------------------
+
+denseCoreGapCompilerReturned :
+  ∀ {CoreVector HilbertVector}
+    (dataSet : DenseGap.DenseCoreProjectionData CoreVector HilbertVector) →
+  DenseGap.UniformDenseCoreClustering dataSet →
+  DenseGap.DenseCoreSpectralExclusion dataSet
+denseCoreGapCompilerReturned = DenseGap.denseLocalClusteringImpliesGap
+
+vacuumRecoveryGapCompilerReturned :
+  (system : VacuumRecovery.VacuumOrthogonalRecoverySystem) →
+  VacuumRecovery.PhysicalVacuumGapAfterRecovery system
+vacuumRecoveryGapCompilerReturned = VacuumRecovery.physicalVacuumGapAfterRecovery
 
 ------------------------------------------------------------------------
 -- Exact frontier ledger.
@@ -76,12 +106,24 @@ record YMOperatorContinuumFrontier : Set where
     carrierNonVacuityClosed : Bool
     boundedStrongLimitFormGapTransportClosed : Bool
 
+    -- Existing Agda generic theorem compilers now explicitly consumed.
+    denseCoreSpectralExclusionCompilerClosed : Bool
+    vacuumOrthogonalRecoveryGapCompilerClosed : Bool
+
+    -- Historical Sprint129 route is an evidence/Bool receipt, not the same
+    -- object as an analytic theorem over closed forms/resolvents.
+    sprint129MoscoEvidenceReceiptClosed : Bool
+    sprint129AnalyticClosedFormKernelTheoremClosed : Bool
+
+    -- Physical producers still required.
     balabanSelectedBackgroundAndStoredBondBudgetClosed : Bool
     literalYMActionVariationHamiltonianIdentificationClosed : Bool
     genuinePartialDomainHamiltonianFormalized : Bool
     commonInvariantDensePhysicalCoreConstructed : Bool
+    physicalDenseCoreClusteringContinuityProducerClosed : Bool
+    physicalVacuumRecoverySystemConstructed : Bool
     ymEvolutionEqualsOSReconstructedEvolutionClosed : Bool
-    unboundedClosedFormOrResolventGapTransportClosed : Bool
+    physicalClosedFormOrResolventIdentificationClosed : Bool
     finiteToContinuumYMConstructionClosed : Bool
     continuumOSWightmanPackageClosed : Bool
     clayPromotionClosed : Bool
@@ -91,24 +133,45 @@ open YMOperatorContinuumFrontier public
 canonicalYMOperatorContinuumFrontier : YMOperatorContinuumFrontier
 canonicalYMOperatorContinuumFrontier = ym-operator-continuum-frontier
   true true true true true true true true true
-  false false false false false false false false false
+  true true
+  Sprint129.mc1TheoremProvedHere false
+  false false false false false false false false false false false
 
 ------------------------------------------------------------------------
--- Regression theorems: the cross-pollination must not accidentally identify
--- the bounded theorem with the physical unbounded continuum theorem.
+-- Regression theorems.
 ------------------------------------------------------------------------
 
 boundedGapTransportClosedIsTrue :
   boundedStrongLimitFormGapTransportClosed canonicalYMOperatorContinuumFrontier ≡ true
 boundedGapTransportClosedIsTrue = refl
 
-unboundedGapTransportClosedIsFalse :
-  unboundedClosedFormOrResolventGapTransportClosed canonicalYMOperatorContinuumFrontier ≡ false
-unboundedGapTransportClosedIsFalse = refl
+vacuumRecoveryCompilerClosedIsTrue :
+  vacuumOrthogonalRecoveryGapCompilerClosed canonicalYMOperatorContinuumFrontier ≡ true
+vacuumRecoveryCompilerClosedIsTrue = refl
+
+denseCoreCompilerClosedIsTrue :
+  denseCoreSpectralExclusionCompilerClosed canonicalYMOperatorContinuumFrontier ≡ true
+denseCoreCompilerClosedIsTrue = refl
+
+sprint129ReceiptClosedIsTrue :
+  sprint129MoscoEvidenceReceiptClosed canonicalYMOperatorContinuumFrontier ≡ true
+sprint129ReceiptClosedIsTrue = refl
+
+sprint129ReceiptIsNotAnalyticKernelTheorem :
+  sprint129AnalyticClosedFormKernelTheoremClosed canonicalYMOperatorContinuumFrontier ≡ false
+sprint129ReceiptIsNotAnalyticKernelTheorem = refl
+
+physicalVacuumRecoveryProducerClosedIsFalse :
+  physicalVacuumRecoverySystemConstructed canonicalYMOperatorContinuumFrontier ≡ false
+physicalVacuumRecoveryProducerClosedIsFalse = refl
 
 genuinePartialDomainHamiltonianFormalizedIsFalse :
   genuinePartialDomainHamiltonianFormalized canonicalYMOperatorContinuumFrontier ≡ false
 genuinePartialDomainHamiltonianFormalizedIsFalse = refl
+
+physicalClosedFormOrResolventIdentificationClosedIsFalse :
+  physicalClosedFormOrResolventIdentificationClosed canonicalYMOperatorContinuumFrontier ≡ false
+physicalClosedFormOrResolventIdentificationClosedIsFalse = refl
 
 clayPromotionClosedIsFalse :
   clayPromotionClosed canonicalYMOperatorContinuumFrontier ≡ false
@@ -131,8 +194,16 @@ leanMassGapReturnIsNotFullUnboundedDomainTheorem :
 leanMassGapReturnIsNotFullUnboundedDomainTheorem = refl
 
 ------------------------------------------------------------------------
--- Source-presence witnesses: these are metadata inhabitants, not mathematical
--- proofs of the open interfaces.
+-- Existing Agda obligation-surface firewall.
+------------------------------------------------------------------------
+
+selfAdjointEvolutionReceiptStillStartsOpen :
+  SelfAdjointReceipt.defaultSchrodingerSelfAdjointEvolutionFirstMissingTheorem ≡
+  SelfAdjointReceipt.missingHilbertQuotientCarrier
+selfAdjointEvolutionReceiptStillStartsOpen = refl
+
+------------------------------------------------------------------------
+-- Source-presence witnesses: metadata inhabitants, not physical proofs.
 ------------------------------------------------------------------------
 
 katoSourcePresent : Src.LiteratureSource
