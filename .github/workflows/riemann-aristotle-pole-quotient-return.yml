@@ -8,6 +8,7 @@ on:
       - 'DASHI/Analysis/RiemannAristotlePoleQuotientSplitComplementBudgetExact.agda'
       - 'DASHI/Analysis/RiemannG2PoleQuotientProducerAllowanceTargetExact.agda'
       - 'DASHI/Analysis/RiemannG2PoleQuotientChannelAllowanceExact.agda'
+      - 'DASHI/Analysis/RiemannG2PoleQuotientOffAllowanceDirectCompilerExact.agda'
       - 'DASHI/Analysis/RiemannG2FinalSplitComplementSameObjectAssemblyExact.agda'
       - 'DASHI/Analysis/RiemannG2FinalSplitComplementAllowanceAssemblyExact.agda'
       - 'DASHI/Analysis/RiemannAristotleRankTwoPoleQuotientLaneSeparationExact.agda'
