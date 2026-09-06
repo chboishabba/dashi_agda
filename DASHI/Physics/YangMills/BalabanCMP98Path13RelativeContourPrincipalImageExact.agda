@@ -282,7 +282,7 @@ rawPathDefectBelowLengthBudget {selected = selected} weld site [] bound lengthBo
     (λ selectedValue →
       Telescope.defect (kernel weld) selectedValue
       ≤ Sums.natAsRational bound * Budget.perLinkDefectMajorant)
-    (sym (kernelIdentityIsQuaternionIdentity weld))
+    (kernelIdentityIsQuaternionIdentity weld)
     (subst
       (λ lower → lower
         ≤ Sums.natAsRational bound * Budget.perLinkDefectMajorant)
@@ -753,7 +753,5 @@ cmp98Path13RelativeContourPrincipalImageCompilerLevel = machineChecked
 cmp98Path13PointwisePrincipalImageReceiptPrunedLevel : ProofLevel
 cmp98Path13PointwisePrincipalImageReceiptPrunedLevel = machineChecked
 
--- One global representation/cut weld remains.  Pointwise contour admission is
--- downstream construction from it.
 literalCMP98Path13SelectedCutDefectWeldLevel : ProofLevel
 literalCMP98Path13SelectedCutDefectWeldLevel = conditional
