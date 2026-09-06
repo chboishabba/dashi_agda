@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 import DASHI.Analysis.RiemannAristotleQuarterPeriodDensityWindowLeanReturnExact as Q
 import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact as Z
 import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap
+import DASHI.Analysis.RiemannG2AlpogeFurmanClusteringNonDescentExact as AFLocal
 import DASHI.Analysis.RiemannG2QuarterPeriodAnalyticRouteReconciliationExact as Quarter
 import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerExact as Root
 import DASHI.Analysis.RiemannAristotleRHAnalyticLeafSchedulerExact as Leaf
@@ -71,6 +72,29 @@ quarterDensitySearchLeafPruned = Gap.quarterDensityConstantComparisonPruned
 zetaUpperCountSearchLeafPruned :
   Gap.GapSplitRelevant Gap.recoverZetaUpperLocalCount → ⊥
 zetaUpperCountSearchLeafPruned = Gap.zetaUpperLocalCountSearchPruned
+
+-- Alpöge--Furman donor audit: same global >2/3-simple summary can coexist
+-- with distinct target-local gap patterns, so global proportion does not descend
+-- to the live clustering consumer without a localization theorem.
+alpogeFurmanGlobalViewsCollide :
+  AFLocal.globalSimpleView AFLocal.sameGlobalClustered ≡
+  AFLocal.globalSimpleView AFLocal.sameGlobalUnclustered
+alpogeFurmanGlobalViewsCollide = AFLocal.sameGlobalSummary
+
+alpogeFurmanLocalViewsSeparate :
+  AFLocal.localGapView AFLocal.sameGlobalClustered ≡
+  AFLocal.localGapView AFLocal.sameGlobalUnclustered → ⊥
+alpogeFurmanLocalViewsSeparate = AFLocal.localPatternsDiffer
+
+alpogeFurmanDirectClusteringPruned :
+  AFLocal.GlobalSimpleToLocalClusteringBoundary.alpogeFurmanDirectlyClosesGapSplitClustering
+    AFLocal.canonicalGlobalSimpleToLocalClusteringBoundary ≡ false
+alpogeFurmanDirectClusteringPruned = refl
+
+alpogeFurmanNeedsLocalization :
+  AFLocal.GlobalSimpleToLocalClusteringBoundary.additionalLocalizationTheoremRequired
+    AFLocal.canonicalGlobalSimpleToLocalClusteringBoundary ≡ true
+alpogeFurmanNeedsLocalization = refl
 
 -- The former parallel width/crossing work package is closed in place.
 widthAndCrossingPackageClosed :
