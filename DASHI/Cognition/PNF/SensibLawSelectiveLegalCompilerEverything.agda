@@ -24,6 +24,8 @@ import DASHI.Cognition.PNF.SensibLawIssueIndexedAdjudicativeHyperfabricExact as 
 import DASHI.Cognition.PNF.SensibLawIssueBurdenStandardRemedyBidiExact as IssueBSR
 import DASHI.Cognition.PNF.SensibLawAdjudicativeTemporalNonRetroactivityExact as Temporal
 import DASHI.Cognition.PNF.SensibLawLegalOutcomeIdentifiabilityBidiExact as Outcome
+import DASHI.Cognition.PNF.SensibLawMaboPrimaryTextParserBatchMaterialisedExact as MaboBatch
+import DASHI.Cognition.PNF.SensibLawMaboBrennanDawsonIssueResidualLiveExact as Mabo
 
 ------------------------------------------------------------------------
 -- EXISTING SELECTIVE COMPILER PATH.
@@ -128,6 +130,40 @@ exactDispositionReasonCanRemainOpen = refl
 
 dispositionDoesNotUniquelyDetermineReason : Outcome.DispositionSurfaceUniquelyDeterminesReason → ⊥
 dispositionDoesNotUniquelyDetermineReason = Outcome.dispositionDoesNotUniquelyDetermineReason
+
+------------------------------------------------------------------------
+-- REAL PRIMARY-TEXT MABO/NATIVE-TITLE VERTICAL.
+------------------------------------------------------------------------
+
+applicantBatchRemainsCandidateOnly :
+  MaboBatch.candidateOnly MaboBatch.applicantSpecimen ≡ true
+applicantBatchRemainsCandidateOnly = refl
+
+brennanBatchRemainsCandidateOnly :
+  MaboBatch.candidateOnly MaboBatch.brennanSpecimen ≡ true
+brennanBatchRemainsCandidateOnly = refl
+
+dawsonBatchRemainsCandidateOnly :
+  MaboBatch.candidateOnly MaboBatch.dawsonSpecimen ≡ true
+dawsonBatchRemainsCandidateOnly = refl
+
+brennanDawsonContrastIsRecognitionBasis :
+  Mabo.primaryKind Mabo.brennanDawsonResidual ≡ Mabo.recognitionBasisContrast
+brennanDawsonContrastIsRecognitionBasis = refl
+
+maboResidualSearchTargetsRecognitionBasis :
+  Mabo.obligation Mabo.brennanDawsonSearch ≡ Mabo.inspectRecognitionBasis
+maboResidualSearchTargetsRecognitionBasis = refl
+
+maboSameIssueIsNotBooleanNegation : Mabo.SameIssueMeansLogicalNegation → ⊥
+maboSameIssueIsNotBooleanNegation = Mabo.sameIssueDoesNotMeanLogicalNegation
+
+maboParserDoesNotCreateHolding : Mabo.ParserCandidateCreatesJudicialHolding → ⊥
+maboParserDoesNotCreateHolding = Mabo.parserCandidateDoesNotCreateHolding
+
+maboFiveParagraphBatchDoesNotClaimGeneralCoverage :
+  MaboBatch.FiveParagraphBatchIsGeneralParserCoverage → ⊥
+maboFiveParagraphBatchDoesNotClaimGeneralCoverage = MaboBatch.fiveParagraphBatchDoesNotClaimGeneralCoverage
 
 ------------------------------------------------------------------------
 -- Aggregate import is not a kernel receipt.
