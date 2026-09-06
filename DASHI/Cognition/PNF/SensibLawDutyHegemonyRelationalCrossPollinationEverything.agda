@@ -31,6 +31,9 @@ import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact a
 import DASHI.Cognition.PNF.SensibLawSourceFormAuthorityRoleBidiExact as SourceRole
 import DASHI.Cognition.PNF.SensibLawPrecedentApplicabilityDistinguishingExact as Precedent
 import DASHI.Cognition.PNF.SensibLawStatutoryRuleStructureAlgebraExact as Statute
+import DASHI.Cognition.PNF.SensibLawJuridicalPersonhoodRemedyOperationalCrossPollinationExact as Operational
+import DASHI.Cognition.PNF.SensibLawBillyEffectiveRemedyTwoEyedSeeingExact as Billy
+import DASHI.Cognition.PNF.SensibLawMaboTerraNulliusJuridicalDehumanisationExact as Terra
 
 judicialPolicyStillNotLegislation : Edge.JudicialPolicyIsLegislation → ⊥
 judicialPolicyStillNotLegislation = Edge.judicialPolicyDoesNotBecomeLegislation
@@ -141,6 +144,62 @@ recognitionLayerDoesNotAutoDescendToRemedy :
 recognitionLayerDoesNotAutoDescendToRemedy = Layers.obligationDoesNotAutoCreateRemedy
 
 ------------------------------------------------------------------------
+-- Terra nullius: operative juridical non-personhood, source-attributed.
+------------------------------------------------------------------------
+
+terraNulliusJuridicalNonPersonhood : Operational.JuridicalNonPersonhoodReceipt
+terraNulliusJuridicalNonPersonhood = Operational.terraNulliusJuridicalNonPersonhood
+
+terraNulliusDeniedConstitutiveSovereigntyStanding :
+  Operational.sovereigntyCountsAsConstitutive terraNulliusJuridicalNonPersonhood
+  ≡ Operational.deniedConstitutiveStanding
+terraNulliusDeniedConstitutiveSovereigntyStanding = refl
+
+terraNulliusDeniedConstitutiveLawStanding :
+  Operational.lawCountsAsConstitutive terraNulliusJuridicalNonPersonhood
+  ≡ Operational.deniedConstitutiveStanding
+terraNulliusDeniedConstitutiveLawStanding = refl
+
+terraNulliusDeniedConstitutiveProprietorshipStanding :
+  Operational.proprietorshipCountsAgainstCrownTitle terraNulliusJuridicalNonPersonhood
+  ≡ Operational.deniedConstitutiveStanding
+terraNulliusDeniedConstitutiveProprietorshipStanding = refl
+
+terraNulliusClassificationDoesNotFabricateBrennanQuotation :
+  Operational.JuridicalNonPersonhoodMeansBiologicalNonHumanQuotation → ⊥
+terraNulliusClassificationDoesNotFabricateBrennanQuotation =
+  Operational.juridicalNonPersonhoodDoesNotFabricateBiologicalQuotation
+
+------------------------------------------------------------------------
+-- Billy effective remedy: finding != realization / compulsion.
+------------------------------------------------------------------------
+
+billyFullReparationStillLive :
+  Billy.currentPublicFullReparationStatus ≡ Billy.fullReparationResidualLive
+billyFullReparationStillLive = refl
+
+billyCompensationStillPoliticallyContingent :
+  Billy.prospectFor Billy.adequateCompensation ≡ Billy.politicallyContingentProspect
+billyCompensationStillPoliticallyContingent = refl
+
+billyTreatyViewDoesNotSelfExecuteAustralianCompensation :
+  Operational.HumanRightsCommitteeViewSelfExecutesAustralianCompensation → ⊥
+billyTreatyViewDoesNotSelfExecuteAustralianCompensation =
+  Operational.committeeViewDoesNotSelfExecuteCompensation
+
+billyExecutiveRoute : Operational.RemedyRouteAssessment
+billyExecutiveRoute = Operational.executiveImplementationRoute
+
+billyParliamentaryRoute : Operational.RemedyRouteAssessment
+billyParliamentaryRoute = Operational.parliamentaryImplementationRoute
+
+billyCommunityNegotiatedRoute : Operational.RemedyRouteAssessment
+billyCommunityNegotiatedRoute = Operational.communityNegotiatedRoute
+
+billyTreatyFollowUpRoute : Operational.RemedyRouteAssessment
+billyTreatyFollowUpRoute = Operational.treatyFollowUpRoute
+
+------------------------------------------------------------------------
 -- Judicial intervention/hegemony audit.
 ------------------------------------------------------------------------
 
@@ -174,7 +233,7 @@ metaFixtureDoesNotPromoteSettlementToUniversalAdmission =
   Meta.settlementDoesNotAdjudicateEverything
 
 ------------------------------------------------------------------------
--- Relational / consensus authority.
+-- Relational / consensus / Two-Eyed remedy authority.
 ------------------------------------------------------------------------
 
 haudenosauneeFixtureIsConcrete :
@@ -185,10 +244,45 @@ haudenosauneeFixtureUsesConsensus :
   Rel.closure Haud.haudenosauneeProcedure ≡ Rel.consensusClosure
 haudenosauneeFixtureUsesConsensus = refl
 
+haudenosauneeFixtureDoesNotGeneralizeToTorresStrait :
+  Rel.generalizedToAllIndigenousPeoples Haud.haudenosauneeCouncilReceipt ≡ false
+haudenosauneeFixtureDoesNotGeneralizeToTorresStrait = refl
+
 noCommonLawDutyDoesNotEraseRelationalObligation :
   Rel.NoCommonLawDutyMeansNoRelationalObligation → ⊥
 noCommonLawDutyDoesNotEraseRelationalObligation =
   Rel.noCommonLawDutyDoesNotEraseOtherObligationSystems
+
+billyTwoEyedCoordinationDoesNotFuseProvenance :
+  Operational.scientificObservationMayConvergeWithIndigenousObservation
+    Operational.canonicalPluralRemedyKnowledgeBoundary ≡ true
+  × Operational.convergenceFusesKnowledgeProvenance
+    Operational.canonicalPluralRemedyKnowledgeBoundary ≡ false
+billyTwoEyedCoordinationDoesNotFuseProvenance = refl , refl
+
+consultationDoesNotTransferCommunityAuthority :
+  Operational.ConsultationMeetingMeansCommunityAuthorityTransferred → ⊥
+consultationDoesNotTransferCommunityAuthority =
+  Operational.consultationDoesNotTransferCommunityAuthority
+
+------------------------------------------------------------------------
+-- A system is what it does: remedy closes on realized coordinates, not speech.
+------------------------------------------------------------------------
+
+declaredRemedyDoesNotEqualRealizedRemedy :
+  Operational.StateSaysRemedyMeansRemedyRealized → ⊥
+declaredRemedyDoesNotEqualRealizedRemedy =
+  Operational.declaredRemedyDoesNotEqualRealizedRemedy
+
+consultationAndFundingDoNotEqualFullReparation :
+  Operational.ConsultationAndFundingMeanFullReparationCompleted → ⊥
+consultationAndFundingDoNotEqualFullReparation =
+  Operational.activityDoesNotEqualFullReparation
+
+operationalClosureRequiresRealizedCoordinates :
+  Operational.operationalClosureRequiresRealizedCoordinates
+    Operational.currentBillyOperationalClosure ≡ true
+operationalClosureRequiresRealizedCoordinates = refl
 
 ------------------------------------------------------------------------
 -- Shared topology never collapses distinct doctrines/forums.
