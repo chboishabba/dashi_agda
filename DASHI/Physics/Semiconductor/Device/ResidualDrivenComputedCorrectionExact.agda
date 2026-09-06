@@ -44,8 +44,6 @@ currentMismatch Cell.q1 = overByTwo
 currentMismatch Cell.q3 = overByOne
 currentMismatch Cell.q5 = balanced
 
--- The mismatch classifier is not an independent label: its magnitude exactly
--- accounts for the excess of the current computed by solveCell over the target.
 currentMismatchAccounting :
   (q : Cell.SourceCharge) →
   targetTotalCurrent + mismatchCode (currentMismatch q) ≡ totalCurrent q
@@ -64,10 +62,6 @@ q5ComputedTotal = refl
 
 ------------------------------------------------------------------------
 -- Residual -> action policy.
---
--- The action constructor is not itself authority to mutate the state.  The
--- TypedDependencyCore system below carries indexed preconditions and exact
--- postconditions for each admitted move.
 ------------------------------------------------------------------------
 
 data CorrectionAction : Set where
@@ -133,8 +127,6 @@ admittedCorrection Cell.q5 = record
 residualDrivenStep : Cell.SourceCharge → Cell.SourceCharge
 residualDrivenStep q = Dependency.after (admittedCorrection q)
 
--- The historical lookup correction is now recovered as a theorem about the
--- residual/action pipeline rather than serving as the producer of that pipeline.
 residualDrivenStepAgreesWithOldCorrection :
   (q : Cell.SourceCharge) →
   residualDrivenStep q ≡ Cell.chargeCorrection q
@@ -164,10 +156,6 @@ q1ResidualLoopClosesInTwo = refl
 
 ------------------------------------------------------------------------
 -- Cross-pollination with ResidualObserverDependencyExact.
---
--- Its generic post-action score seam is reused directly: every admitted action
--- leaves a mismatch score no larger than before.  For the two unresolved states
--- we also record an explicit strict finite descent witness below.
 ------------------------------------------------------------------------
 
 currentResidualScore : Residual.ResidualStateScore Cell.SourceCharge
@@ -179,10 +167,6 @@ admittedCorrectionDoesNotIncreaseResidual :
 admittedCorrectionDoesNotIncreaseResidual Cell.q1 = s≤s z≤n
 admittedCorrectionDoesNotIncreaseResidual Cell.q3 = z≤n
 admittedCorrectionDoesNotIncreaseResidual Cell.q5 = z≤n
-
-data StrictResidualDrop : Cell.SourceCharge → Set where
-  q1Drops : StrictResidualDrop Cell.q1
-  q3Drops : StrictResidualDrop Cell.q3
 
 q1ScoreDropsTwoToOne :
   currentResidualScore (residualDrivenStep Cell.q1) ≡ 1
