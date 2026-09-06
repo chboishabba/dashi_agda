@@ -108,9 +108,9 @@ selectedNextBestActionPaysHistoricalProducer choice =
 -- Exact closed-world calibration.
 --
 -- Reuse the historical missing-transport trace and the existing coarse->middle
--- consumer-closing candidate.  The application-specific payment policy below
--- explicitly licenses that candidate for `proveTransport`; the compiler does
--- not infer this fact from the move label.
+-- and coarse->fine consumer-closing candidates. The declared comparison set is
+-- exactly those two routes. Both receive an explicit application-level receipt
+-- that they can pay `proveTransport`; no such fact is inferred from `lookMove`.
 ------------------------------------------------------------------------
 
 middleMixedClosing :
@@ -139,13 +139,14 @@ fineMixedClosing =
     2
     "synthetic finer calibrated look/measurement route"
 
-DeclaredCalibration :
+data DeclaredCalibration :
   Mixed.MixedClosingCandidate
     {Projection.Hidden}
     {Fibre.ToyExperiment}
     Projection.coarseFibre
-    Projection.middleDecision → Set
-DeclaredCalibration candidate = ⊤
+    Projection.middleDecision → Set where
+  middleDeclared : DeclaredCalibration middleMixedClosing
+  fineDeclared : DeclaredCalibration fineMixedClosing
 
 CalibrationCanPay :
   Mixed.MixedClosingCandidate
@@ -169,14 +170,14 @@ calibrationProblem =
     Historical.earlierTransportReportedLineage
     DeclaredCalibration
     CalibrationCanPay
-    "synthetic policy explicitly licenses calibrated observation routes as transport-payment candidates"
+    "synthetic policy explicitly licenses the two declared calibrated routes as transport-payment candidates"
     "middleDecision consumer"
 
 middleEligible : ProducerEligibleCandidate calibrationProblem
 middleEligible =
   producer-eligible-candidate
     middleMixedClosing
-    tt
+    middleDeclared
     tt
     "explicit calibration policy says middle route can pay proveTransport"
 
@@ -184,13 +185,43 @@ fineEligible : ProducerEligibleCandidate calibrationProblem
 fineEligible =
   producer-eligible-candidate
     fineMixedClosing
-    tt
+    fineDeclared
     tt
     "explicit calibration policy says fine route can pay proveTransport"
 
 middleEligibleCostsNoMoreThanFine :
   Mixed.cost (candidate middleEligible) ≤ Mixed.cost (candidate fineEligible)
 middleEligibleCostsNoMoreThanFine = s≤s z≤n
+
+calibrationMinimal :
+  (alternative : ProducerEligibleCandidate calibrationProblem) →
+  Mixed.cost (candidate middleEligible) ≤ Mixed.cost (candidate alternative)
+calibrationMinimal alternative with declared alternative
+... | middleDeclared = s≤s z≤n
+... | fineDeclared = s≤s z≤n
+
+calibrationNextBestChoice : NextBestProducerActionChoice calibrationProblem
+calibrationNextBestChoice =
+  next-best-producer-action-choice
+    middleEligible
+    calibrationMinimal
+    "among the two declared producer-paying consumer-closing routes, select cost-1 middle over cost-2 fine"
+
+calibrationRequiredProducerIsTransport :
+  requiredProducer calibrationProblem ≡ QueryPromotion.proveTransport
+calibrationRequiredProducerIsTransport = refl
+
+calibrationChoiceClosesConsumer :
+  Bidi.PointIdentifies Projection.middleFibre Projection.middleDecision
+calibrationChoiceClosesConsumer =
+  selectedNextBestActionClosesConsumer calibrationNextBestChoice
+
+calibrationChoicePaysRequiredProducer :
+  CalibrationCanPay
+    (candidate (selected calibrationNextBestChoice))
+    (requiredProducer calibrationProblem)
+calibrationChoicePaysRequiredProducer =
+  selectedNextBestActionPaysHistoricalProducer calibrationNextBestChoice
 
 ------------------------------------------------------------------------
 -- No-collapse boundaries.
@@ -200,9 +231,9 @@ data ProducerKindAutomaticallyDeterminesAction : Set where
 data ClosingConsumerAutomaticallyPaysProducer : Set where
 data CheapestProducerActionCreatesAuthority : Set where
 
-aProducerKindDoesNotAutomaticallyDetermineAction :
+producerKindDoesNotAutomaticallyDetermineAction :
   ProducerKindAutomaticallyDeterminesAction → ⊥
-aProducerKindDoesNotAutomaticallyDetermineAction ()
+producerKindDoesNotAutomaticallyDetermineAction ()
 
 consumerClosureDoesNotAutomaticallyPayProducer :
   ClosingConsumerAutomaticallyPaysProducer → ⊥
@@ -218,9 +249,10 @@ record HistoricalProducerActionBoundary : Set where
     historicalFailureDeterminesRequiredProducer : Bool
     candidateNeedsSeparateProducerPaymentReceipt : Bool
     candidateAlsoMustCloseConsumer : Bool
+    finiteCalibrationActuallySelectsCheapest : Bool
     producerKindAloneDeterminesAction : Bool
     cheapestChoiceCreatesActionAuthority : Bool
 
 canonicalHistoricalProducerActionBoundary : HistoricalProducerActionBoundary
 canonicalHistoricalProducerActionBoundary =
-  historical-producer-action-boundary true true true false false
+  historical-producer-action-boundary true true true true false false
