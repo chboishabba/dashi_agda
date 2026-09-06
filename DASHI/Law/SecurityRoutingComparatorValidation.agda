@@ -1,0 +1,34 @@
+module DASHI.Law.SecurityRoutingComparatorValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Law.SecurityRoutingComparatorHypervoxelExact as Comparator
+import DASHI.Law.HerzogPoliceCountryColonialityCrossPollinationExact as Coloniality
+
+sameIntensityCanHideOppositeRouting :
+  Comparator.coarseSecurityObserver Comparator.syntheticProtectiveHigh ≡
+  Comparator.coarseSecurityObserver Comparator.syntheticCoerciveHigh
+sameIntensityCanHideOppositeRouting = Comparator.sameCoarseIntensity
+
+coarseIntensityCannotDetermineProtectiveVsCoerciveRouting :
+  NF.FactorsThrough Comparator.coarseSecurityObserver Comparator.routingTarget → ⊥
+coarseIntensityCannotDetermineProtectiveVsCoerciveRouting =
+  Comparator.coarseSecurityIntensityCannotDetermineRouting
+
+observedRoutingDifferenceStillNeedsSecurityComparability :
+  Comparator.firstComparatorResidual
+    Comparator.routingDifferencePersistsAfterConditioning
+    Comparator.canonicalObservedRoutingOnly
+  ≡ Comparator.securityNeedResidual
+observedRoutingDifferenceStillNeedsSecurityComparability =
+  Comparator.routingDifferenceDoesNotSkipComparability
+
+asymmetricRoutingMapsToConcretePolicingMechanism :
+  Comparator.asymmetricRoutingMechanism ≡ Coloniality.differentialEscalation
+asymmetricRoutingMapsToConcretePolicingMechanism = refl
+
+routingDifferenceDoesNotAutoDiagnoseFascism :
+  Comparator.protectiveCoerciveDifferenceImpliesFascism
+    Comparator.canonicalComparatorCrossPollinationBoundary ≡ false
+routingDifferenceDoesNotAutoDiagnoseFascism = refl
