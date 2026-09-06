@@ -29,3 +29,10 @@ import DASHI.Core.QueryFibreAddedCoordinateProducerBidiExact
 import DASHI.Core.PromotionResidualSelectiveReopeningBidiExact
 import DASHI.Core.TemporalStrandProvenanceBidiExact
 import DASHI.Core.FibreRefinementExperimentSelectionBidiExact
+
+-- Third-order reciprocal compositions.
+import DASHI.Core.PathSensitiveSupportPolicyBidiExact
+import DASHI.Core.CostedFibreEliminationChoiceBidiExact
+import DASHI.Core.HistoricalFirstFailureTraceBidiExact
+import DASHI.Core.AskListenObservationProducerBidiExact
+import DASHI.Core.MinimalObservationLevelPerConsumerBidiExact
