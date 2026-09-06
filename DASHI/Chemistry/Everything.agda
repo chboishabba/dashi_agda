@@ -2,6 +2,7 @@ module DASHI.Chemistry.Everything where
 
 import DASHI.Chemistry.TransitionKernel
 import DASHI.Chemistry.MechanismDiscriminationExact
+import DASHI.Chemistry.MechanismDiscriminationCoreBridgeExact
 import DASHI.Chemistry.AdmissibleReactionTransitionBridgeExact
 import DASHI.Chemistry.TGO93PhEurPesticideMembershipExact
 import DASHI.Chemistry.RegulatoryAnalyteCoverageBidiExact
