@@ -26,6 +26,11 @@ import DASHI.Cognition.PNF.SensibLawJudicialInstitutionalProductionContextExact 
 import DASHI.Cognition.PNF.SensibLawReopenableRelationalAuthorityExact as Rel
 import DASHI.Cognition.PNF.SensibLawHaudenosauneeConsensusDeliberationReceiptExact as Haud
 import DASHI.Cognition.PNF.SensibLawDoctrinalGateInterventionDistributionExact as Gate
+import DASHI.Cognition.PNF.SensibLawUniversalLegalAlgebraEverything as Universal
+import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact as Negligence
+import DASHI.Cognition.PNF.SensibLawSourceFormAuthorityRoleBidiExact as SourceRole
+import DASHI.Cognition.PNF.SensibLawPrecedentApplicabilityDistinguishingExact as Precedent
+import DASHI.Cognition.PNF.SensibLawStatutoryRuleStructureAlgebraExact as Statute
 
 judicialPolicyStillNotLegislation : Edge.JudicialPolicyIsLegislation → ⊥
 judicialPolicyStillNotLegislation = Edge.judicialPolicyDoesNotBecomeLegislation
@@ -59,6 +64,36 @@ pabaiNoDutyDoesNotCloseAllClimateReformulations :
   Climate.PabaiNoDutyClosesEveryPossibleClimateDuty → ⊥
 pabaiNoDutyDoesNotCloseAllClimateReformulations =
   Climate.pabaiDoesNotCloseEveryReformulatedDutyByDefinition
+
+------------------------------------------------------------------------
+-- UNIVERSAL LEGAL ALGEBRA BIDI WELD.
+------------------------------------------------------------------------
+
+climateDutyNowReusesUniversalNegligenceWrongType :
+  Universal.Negligence.ClimateDutySpecialisation.wrongType
+    Universal.Negligence.australiaPhysicalInjuryDutySpecialisation
+  ≡ Universal.Negligence.negligenceWrongType
+climateDutyNowReusesUniversalNegligenceWrongType = refl
+
+climateDutyTargetsUniversalDutyElement :
+  Universal.Negligence.ClimateDutySpecialisation.targetElement
+    Universal.Negligence.australiaPhysicalInjuryDutySpecialisation
+  ≡ Universal.Negligence.dutyElement
+climateDutyTargetsUniversalDutyElement = refl
+
+sourceContainerDoesNotFlattenPropositionAuthority :
+  SourceRole.CaseSourceMakesEveryPropositionBindingRatio → ⊥
+sourceContainerDoesNotFlattenPropositionAuthority =
+  SourceRole.caseContainerDoesNotFlattenRoles
+
+precedentSimilarityStillDoesNotProveApplicability :
+  Precedent.SimilarFactsAutomaticallyApplyPrecedent → ⊥
+precedentSimilarityStillDoesNotProveApplicability =
+  Precedent.similarityDoesNotProveApplication
+
+statutoryDefinitionStillScoped :
+  Statute.DefinitionIsGlobalDictionaryMeaning → ⊥
+statutoryDefinitionStillScoped = Statute.definitionIsScoped
 
 ------------------------------------------------------------------------
 -- Mabo known-positive: recognition foothold rather than statutory creation.
