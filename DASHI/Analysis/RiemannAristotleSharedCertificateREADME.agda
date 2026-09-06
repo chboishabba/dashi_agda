@@ -26,16 +26,25 @@ open import DASHI.Core.Prelude
 --
 -- The final split-complement compiler is owned. The 8889 checked-Lean return
 -- also owns quantitative cluster-margin mathematics, leaving only same-object
--- attachment for that coordinate. Under closed-world repo search, the genuinely
--- analytic leaves are therefore exactly:
+-- attachment for that coordinate.
 --
---   * PoleQuotientOffOrdinateBudgetTarget on the literal universal
---     pole-quotient reflection-paired cosine carrier;
---   * same-taper Gamma precision repair to the owned sharp window.
+-- Consumer adequacy is now concrete on the final common ordered-additive carrier:
 --
--- Existing representation machinery is reused rather than re-searched:
--- canonical H_X compiles H_T; H_M is not a gate on the zero-side H_W route; an
--- ActualSelectedPoleNearProducer compiles the selected-test and near/far welds.
+--   B_off <= A_off
+--   B_Gamma <= A_Gamma
+--   A_off + A_Gamma < M_cluster
+--
+-- implies the required strict combined budget. This reuses the allowance pattern
+-- already present in the Riemann near/far and finite-Schur lanes and requires no
+-- subtraction, division, or synthetic half-margin operation.
+--
+-- The genuinely analytic high-ordinate leaves are therefore:
+--
+--   * literal universal-pole-quotient signed off evaluation at the selected
+--     quarter-period cutoff, with its budget below the assigned A_off;
+--   * same-taper Gamma precision, with its budget below the assigned A_Gamma.
+--
+-- Existing representation machinery is reused rather than re-searched.
 -- Uninhabited adapter records remain infrastructure obligations, not fabricated
 -- proof terms and not new harmonic-analysis programmes.
 --
@@ -65,6 +74,7 @@ import DASHI.Analysis.RiemannG2AdaptiveJLambdaConstantWindowExact
 import DASHI.Analysis.RiemannG2QuarterPeriodAnalyticRouteReconciliationExact
 import DASHI.Analysis.RiemannG2HighestAlphaAfter369Exact
 import DASHI.Analysis.RiemannG2HighestAlphaAfter8894Exact
+import DASHI.Analysis.RiemannG2PoleQuotientChannelAllowanceExact
 import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact
 import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerExact
 import DASHI.Analysis.RiemannAristotleRHAnalyticLeafSchedulerExact
