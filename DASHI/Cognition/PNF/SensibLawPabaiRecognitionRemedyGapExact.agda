@@ -15,6 +15,9 @@ module DASHI.Cognition.PNF.SensibLawPabaiRecognitionRemedyGapExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.DominantChartEpistemicCompressionExact as Compression
+
 ------------------------------------------------------------------------
 -- Source / proposition layers.
 ------------------------------------------------------------------------
@@ -101,11 +104,16 @@ appealFiledStatus = pabai-claim-receipt
 
 ------------------------------------------------------------------------
 -- Recognition does not mechanically factor to remedy.
+--
+-- The second state is explicitly synthetic. It is not a second Pabai fact. Its
+-- sole role is to make the representation theorem exact: the same harm-
+-- recognition surface is compatible with different remedy states, therefore
+-- recognition alone is insufficient to determine remedy.
 ------------------------------------------------------------------------
 
 data PabaiSituatedState : Set where
-  harmRecognisedRemedyUnavailable
-  harmRecognisedHypotheticalRemedyAvailable
+  actualFirstInstanceRecognitionRemedyUnavailable
+  syntheticSameRecognitionRemedyAvailable
   : PabaiSituatedState
 
 data HarmRecognitionSurface : Set where
@@ -117,32 +125,44 @@ data NegligenceRemedyState : Set where
   : NegligenceRemedyState
 
 harmRecognitionObserver : PabaiSituatedState → HarmRecognitionSurface
-harmRecognitionObserver harmRecognisedRemedyUnavailable = seriousClimateHarmRecognised
-harmRecognitionObserver harmRecognisedHypotheticalRemedyAvailable = seriousClimateHarmRecognised
+harmRecognitionObserver actualFirstInstanceRecognitionRemedyUnavailable = seriousClimateHarmRecognised
+harmRecognitionObserver syntheticSameRecognitionRemedyAvailable = seriousClimateHarmRecognised
 
 remedyState : PabaiSituatedState → NegligenceRemedyState
-remedyState harmRecognisedRemedyUnavailable = negligenceRemedyUnavailable
-remedyState harmRecognisedHypotheticalRemedyAvailable = negligenceRemedyAvailable
+remedyState actualFirstInstanceRecognitionRemedyUnavailable = negligenceRemedyUnavailable
+remedyState syntheticSameRecognitionRemedyAvailable = negligenceRemedyAvailable
 
 remedyStatesDiffer :
-  remedyState harmRecognisedRemedyUnavailable ≡
-  remedyState harmRecognisedHypotheticalRemedyAvailable → ⊥
+  remedyState actualFirstInstanceRecognitionRemedyUnavailable ≡
+  remedyState syntheticSameRecognitionRemedyAvailable → ⊥
 remedyStatesDiffer ()
 
-record RecognitionRemedyNonDescent : Set₁ where
-  constructor recognition-remedy-non-descent
-  field
-    sameRecognition :
-      harmRecognitionObserver harmRecognisedRemedyUnavailable ≡
-      harmRecognitionObserver harmRecognisedHypotheticalRemedyAvailable
-    differentRemedy :
-      remedyState harmRecognisedRemedyUnavailable ≡
-      remedyState harmRecognisedHypotheticalRemedyAvailable → ⊥
+pabaiRecognitionRemedyNonfactorability :
+  INF.NonFactorabilityWitness harmRecognitionObserver remedyState
+pabaiRecognitionRemedyNonfactorability =
+  INF.nonFactorabilityWitness
+    actualFirstInstanceRecognitionRemedyUnavailable
+    syntheticSameRecognitionRemedyAvailable
+    refl
+    remedyStatesDiffer
 
-open RecognitionRemedyNonDescent public
+harmRecognitionCannotDetermineNegligenceRemedy :
+  INF.FactorsThrough harmRecognitionObserver remedyState → ⊥
+harmRecognitionCannotDetermineNegligenceRemedy =
+  INF.witnessRulesOutEveryFlatFactorisation pabaiRecognitionRemedyNonfactorability
 
-canonicalRecognitionRemedyNonDescent : RecognitionRemedyNonDescent
-canonicalRecognitionRemedyNonDescent = recognition-remedy-non-descent refl remedyStatesDiffer
+pabaiDominantChartReceipt :
+  Compression.ProjectionInadequacyReceipt harmRecognitionObserver remedyState
+pabaiDominantChartReceipt = Compression.projection-inadequacy-receipt
+  Compression.juridicalRecognitionCompression
+  "judicial factual-harm recognition surface"
+  "consumer asking whether a negligence duty/remedy is legally available"
+  "recognition of serious harm does not itself encode duty, compensability or remedy"
+  pabaiRecognitionRemedyNonfactorability
+  true refl
+  false refl
+  false refl
+  false refl
 
 ------------------------------------------------------------------------
 -- Procedural temporal state.
@@ -224,6 +244,7 @@ data NoDutyHoldingMeansNoClimateHarm : Set where
 data NoCompensableAilanKastomLossMeansNoAilanKastomHarm : Set where
 data FirstInstanceHoldingEqualsAppealOutcome : Set where
 data CriticalDoctrinalWallLanguageIsCourtHolding : Set where
+data SyntheticCounterstateIsSecondPabaiFact : Set where
 
 factRecognitionDoesNotCreateDuty : FactRecognitionImpliesNegligenceDuty → ⊥
 factRecognitionDoesNotCreateDuty ()
@@ -245,6 +266,9 @@ criticalLanguageDoesNotBecomeCourtAuthorship :
   CriticalDoctrinalWallLanguageIsCourtHolding → ⊥
 criticalLanguageDoesNotBecomeCourtAuthorship ()
 
+syntheticCounterstateDoesNotBecomeCaseFact : SyntheticCounterstateIsSecondPabaiFact → ⊥
+syntheticCounterstateDoesNotBecomeCaseFact ()
+
 record PabaiRecognitionRemedyBoundary : Set where
   constructor pabai-recognition-remedy-boundary
   field
@@ -264,9 +288,12 @@ record PabaiRecognitionRemedyBoundary : Set where
     firstInstanceResultTreatedAsFinalAppealLaw : Bool
     firstInstanceResultTreatedAsFinalAppealLawIsFalse :
       firstInstanceResultTreatedAsFinalAppealLaw ≡ false
+    syntheticCounterstatePromotedToCaseFact : Bool
+    syntheticCounterstatePromotedToCaseFactIsFalse :
+      syntheticCounterstatePromotedToCaseFact ≡ false
 
 open PabaiRecognitionRemedyBoundary public
 
 canonicalPabaiRecognitionRemedyBoundary : PabaiRecognitionRemedyBoundary
 canonicalPabaiRecognitionRemedyBoundary = pabai-recognition-remedy-boundary
-  true refl false refl false refl false refl true refl false refl
+  true refl false refl false refl false refl true refl false refl false refl
