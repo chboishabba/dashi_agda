@@ -4,6 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.SensibLawMaboSovereigntyRecognitionRelationalBraidExact as Braid
+import DASHI.Cognition.PNF.SensibLawMaboColonialSovereigntyCriticalResidualExact as Critical
 import DASHI.Cognition.PNF.SensibLawMaboDawsonRecognitionConditionRefinementExact as Dawson
 import DASHI.Cognition.PNF.SensibLawMaboDawsonRecognitionResidualPlannerExact as Planner
 import DASHI.Cognition.PNF.SensibLawMaboMinimalDoctrinalDiscriminatorExact as Minimal
@@ -12,17 +13,59 @@ import DASHI.Cognition.PNF.SensibLawMaboMinimalDoctrinalHyperfabricBridgeExact a
 import DASHI.Cognition.PNF.SensibLawIssueIndexedAdjudicativeHyperfabricExact as Issue
 
 ------------------------------------------------------------------------
--- Focused recognition-condition capstone.
+-- Focused recognition-condition + critical-sovereignty capstone.
 ------------------------------------------------------------------------
 
-mereSovereigntyChangeDoesNotEncodeExtinguishment :
+crownLegalPremiseIsCourtInternal :
+  Critical.frame Critical.crownSovereigntyCourtPremise ≡ Critical.australianCourtInternalFrame
+crownLegalPremiseIsCourtInternal = refl
+
+indigenousCessionStatusIsIndependentFrame :
+  Critical.frame Critical.sovereigntyNeverCededCriticalClaim ≡ Critical.indigenousSovereigntyFrame
+indigenousCessionStatusIsIndependentFrame = refl
+
+nativeTitleRecognitionDoesNotCloseSovereigntyRecognition :
+  Critical.sovereigntyRecognitionClosed Critical.postMaboCriticalResidual ≡ false
+nativeTitleRecognitionDoesNotCloseSovereigntyRecognition = refl
+
+nativeTitleRecognitionDoesNotCloseLandRestitution :
+  Critical.landRestitutionClosed Critical.postMaboCriticalResidual ≡ false
+nativeTitleRecognitionDoesNotCloseLandRestitution = refl
+
+nativeTitleRecognitionDoesNotCloseMaterialReparation :
+  Critical.materialReparationClosed Critical.postMaboCriticalResidual ≡ false
+nativeTitleRecognitionDoesNotCloseMaterialReparation = refl
+
+landAndColonialityAxesRemainNonEraseable :
+  Critical.landAxisEraseableAfterNativeTitleRecognition Critical.canonicalCriticalAxisBoundary ≡ false
+landAndColonialityAxesRemainNonEraseable = refl
+
+colonialityAxisRemainsNonEraseable :
+  Critical.colonialityAxisEraseableAfterNativeTitleRecognition Critical.canonicalCriticalAxisBoundary ≡ false
+colonialityAxisRemainsNonEraseable = refl
+
+------------------------------------------------------------------------
+-- Earlier `mere change of sovereignty` label retained only as a compatibility
+-- theorem for the court-internal continuity rule, not as the preferred critical
+-- description of colonisation.
+------------------------------------------------------------------------
+
+earlierMereLabelIsCompatibilityOnly :
+  Critical.mereChangeLabelStatus ≡ Critical.retainedOnlyForCourtInternalCompatibility
+earlierMereLabelIsCompatibilityOnly = refl
+
+courtInternalTransitionAloneDoesNotEncodeExtinguishment :
   Braid.transitionEffect Braid.mereChangeOfSovereignty
   ≡ Braid.continuityNotDisplacedByTransitionAlone
-mereSovereigntyChangeDoesNotEncodeExtinguishment = refl
+courtInternalTransitionAloneDoesNotEncodeExtinguishment = refl
 
-mereSovereigntyBoundaryStillAllowsFurtherJuridicalChange :
+courtInternalContinuityRuleStillAllowsFurtherJuridicalActs :
   Braid.furtherJuridicalActMayAlterRights Braid.maboMereSovereigntyBoundary ≡ true
-mereSovereigntyBoundaryStillAllowsFurtherJuridicalChange = refl
+courtInternalContinuityRuleStillAllowsFurtherJuridicalActs = refl
+
+------------------------------------------------------------------------
+-- Dawson recognition-condition/evidence split.
+------------------------------------------------------------------------
 
 dawsonRecognitionConditionIsJuridical :
   Dawson.role Dawson.dawsonRecognitionConditionComponent ≡ Dawson.juridicalConditionRole
@@ -76,7 +119,32 @@ externalInterpretationDoesNotCreateCommunityAuthority :
 externalInterpretationDoesNotCreateCommunityAuthority = refl
 
 ------------------------------------------------------------------------
--- No-collapse laws.
+-- Critical repair non-substitution laws.
+------------------------------------------------------------------------
+
+nativeTitleRecognitionDoesNotProveSovereigntyRecognition : Critical.NativeTitleRecognitionProvesSovereigntyRecognition → ⊥
+nativeTitleRecognitionDoesNotProveSovereigntyRecognition = Critical.nativeTitleDoesNotProveSovereigntyRecognition
+
+nativeTitleRecognitionDoesNotRepairDispossession : Critical.NativeTitleRecognitionRepairsDispossession → ⊥
+nativeTitleRecognitionDoesNotRepairDispossession = Critical.nativeTitleDoesNotRepairDispossessionByItself
+
+apologyDoesNotEqualLandRestitution : Critical.FormalApologyEqualsLandRestitution → ⊥
+apologyDoesNotEqualLandRestitution = Critical.apologyDoesNotEqualLandRestitution
+
+politicalRecognitionDoesNotEqualLandReturn : Critical.PoliticalRecognitionEqualsLandReturn → ⊥
+politicalRecognitionDoesNotEqualLandReturn = Critical.politicalRecognitionDoesNotEqualLandReturn
+
+terraNulliusRejectionDoesNotCompleteDecolonisation : Critical.RejectionOfTerraNulliusCompletesDecolonisation → ⊥
+terraNulliusRejectionDoesNotCompleteDecolonisation = Critical.terraNulliusRejectionDoesNotCompleteDecolonisation
+
+courtPremiseDoesNotProveIndigenousCession : Critical.CrownLegalPremiseProvesIndigenousCession → ⊥
+courtPremiseDoesNotProveIndigenousCession = Critical.crownPremiseDoesNotProveCession
+
+courtPremiseDoesNotProveColonialLegitimacy : Critical.CrownLegalPremiseProvesColonialLegitimacy → ⊥
+courtPremiseDoesNotProveColonialLegitimacy = Critical.crownPremiseDoesNotProveLegitimacy
+
+------------------------------------------------------------------------
+-- Existing recognition no-collapse laws.
 ------------------------------------------------------------------------
 
 recognitionEvidenceDoesNotPayCondition : Dawson.RecognitionEvidencePaysJuridicalCondition → ⊥
@@ -84,9 +152,6 @@ recognitionEvidenceDoesNotPayCondition = Dawson.evidenceDoesNotPayCondition
 
 recognitionConditionDoesNotCreateAntecedentRight : Dawson.RecognitionConditionCreatesAntecedentCommunityRight → ⊥
 recognitionConditionDoesNotCreateAntecedentRight = Dawson.conditionDoesNotCreateAntecedentCommunityRight
-
-sovereigntyChangeAloneDoesNotExtinguish : Braid.SovereigntyChangeAloneExtinguishesAntecedentRight → ⊥
-sovereigntyChangeAloneDoesNotExtinguish = Braid.sovereigntyChangeAloneDoesNotEncodeExtinguishment
 
 governanceAnalogyDoesNotBecomeNativeTitleDoctrine : Braid.GovernanceRecognitionRuleIsNativeTitleDoctrine → ⊥
 governanceAnalogyDoesNotBecomeNativeTitleDoctrine = Braid.governanceRecognitionDoesNotBecomeNativeTitleDoctrine
