@@ -13,16 +13,20 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119RecoveredShortestSourceCut
 --   PeriodicBlock n = periodicTorus4Definition (suc n),
 --   PeriodicBondField n = BondField (suc n).
 --
--- Physical side 13 therefore uses historical n=12.  R192/R193/R216 now encode
+-- Physical side 13 therefore uses historical n=12.  R192/R193/R216 encode
 -- this explicitly.  The Path13 realization is counted as pruned only together
 -- with that repair; the superseded n=13 specialization must not be revived.
 --
 -- The two surviving source receipts remain:
 --   1. construct the selected variational/physical background directly on the
 --      literal Path13 background carrier;
---   2. weld the bond-indexed Path13 perturbation field to the local SU(2) Lie
---      values used by the Eq.(119) R0 recursion, including signed orientation,
---      scalar transport and a genuine global/local carrier distinction.
+--   2. rebuild the global/local Eq.(119) perturbation semantics so global Q'
+--      acts on the bond-indexed Path13 field while local R0 values live in the
+--      SU(2) Lie carrier, with literal scalar action on that local carrier.
+--
+-- Inside (2), both positive and signed bond projection are now constructed.
+-- The negative occurrence uses the exact -Ad_{U^-1} rule on the repaired
+-- side-13 rational background before the existing rational->real Lie compiler.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -54,6 +58,7 @@ record RecoveredEq119ShortestSourceStatus : Set where
     path13PeriodicRealizationPruned : Bool
 
     path13PositiveBondPerturbationProjectionClosed : Bool
+    path13RationalSignedBondPerturbationProjectionClosed : Bool
     path13SelectedPhysicalBackground13Constructed : Bool
     path13GlobalLocalPerturbationSemanticsConstructed : Bool
     recoveredShortestPhysicalEq119SourceClosed : Bool
@@ -74,6 +79,8 @@ record RecoveredEq119ShortestSourceStatus : Set where
       path13PeriodicRealizationPruned ≡ true
     path13PositiveBondPerturbationProjectionClosedIsTrue :
       path13PositiveBondPerturbationProjectionClosed ≡ true
+    path13RationalSignedBondPerturbationProjectionClosedIsTrue :
+      path13RationalSignedBondPerturbationProjectionClosed ≡ true
 
     path13SelectedPhysicalBackground13ConstructedIsFalse :
       path13SelectedPhysicalBackground13Constructed ≡ false
@@ -97,6 +104,7 @@ canonicalRecoveredEq119ShortestSourceStatus = record
   ; path13HistoricalPeriodicIndexRepairClosed = true
   ; path13PeriodicRealizationPruned = true
   ; path13PositiveBondPerturbationProjectionClosed = true
+  ; path13RationalSignedBondPerturbationProjectionClosed = true
   ; path13SelectedPhysicalBackground13Constructed = false
   ; path13GlobalLocalPerturbationSemanticsConstructed = false
   ; recoveredShortestPhysicalEq119SourceClosed = false
@@ -110,6 +118,7 @@ canonicalRecoveredEq119ShortestSourceStatus = record
   ; path13HistoricalPeriodicIndexRepairClosedIsTrue = refl
   ; path13PeriodicRealizationPrunedIsTrue = refl
   ; path13PositiveBondPerturbationProjectionClosedIsTrue = refl
+  ; path13RationalSignedBondPerturbationProjectionClosedIsTrue = refl
   ; path13SelectedPhysicalBackground13ConstructedIsFalse = refl
   ; path13GlobalLocalPerturbationSemanticsConstructedIsFalse = refl
   ; recoveredShortestPhysicalEq119SourceClosedIsFalse = refl
@@ -166,6 +175,10 @@ path13SelectedPhysicalBackgroundTargetLevel =
 path13PositiveBondPerturbationProjectionLevel : ProofLevel
 path13PositiveBondPerturbationProjectionLevel =
   PerturbationTarget.cmp98Path13PositiveBondPerturbationProjectionLevel
+
+path13RationalSignedBondPerturbationProjectionLevel : ProofLevel
+path13RationalSignedBondPerturbationProjectionLevel =
+  PerturbationTarget.cmp98Path13RationalSignedBondProjectionLevel
 
 literalCMP98RecoveredPath13BackgroundSameObjectLevel : ProofLevel
 literalCMP98RecoveredPath13BackgroundSameObjectLevel =
