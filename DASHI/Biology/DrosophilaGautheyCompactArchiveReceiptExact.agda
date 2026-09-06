@@ -1,21 +1,23 @@
 module DASHI.Biology.DrosophilaGautheyCompactArchiveReceiptExact where
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
--- Runtime-derived receipt for selectively accessible members of Gauthey et al.
+-- Runtime/source-derived receipt for selectively accessible Gauthey artifacts.
 --
 -- Scientific source:
---   Wayan Gauthey; Albert Lin; Osama M. Ahmed; Andrew M. Leifer; Mala Murthy;
---   Stephan Y. Thiberge,
---   "High-speed whole-brain imaging in Drosophila",
---   DOI 10.1038/s41467-026-72437-1.
---   Preprocessed data DOI 10.5281/zenodo.17618684.
+-- Wayan Gauthey; Albert Lin; Osama M. Ahmed; Andrew M. Leifer; Mala Murthy;
+-- Stephan Y. Thiberge, "High-speed whole-brain imaging in Drosophila",
+-- DOI 10.1038/s41467-026-72437-1;
+-- preprocessed data DOI 10.5281/zenodo.17618684;
+-- analysis code github:murthylab/lightbead-analysis.
 --
--- These fields record archive identity and observed runtime structure only.
--- They do not promote archive-array indices to anatomical ROI/neuron identity.
+-- Source correction: fig3_preprocessing.py sets min_dim = 668 for the 2p lane,
+-- slices dffs_corrected[:, :668], vertically stacks ROI rows across four trials,
+-- and exports dffs_all[audio_correlated, :]. Thus deposited 940 x 668 means
+-- 940 selected ROI rows x 668 time samples, not 668 functional units.
 ------------------------------------------------------------------------
 
 record GautheyCompactArchiveReceipt : Set where
@@ -23,16 +25,16 @@ record GautheyCompactArchiveReceipt : Set where
   field
     paperDOI : String
     datasetDOI : String
+    codeRepository : String
     archiveName : String
     functionalMember : String
-    functionalRows : Nat
-    functionalColumns : Nat
-    responsiveROIListMember : String
-    labelsMember : String
-    meanBrainMember : String
+    sourceArrayRows : Nat
+    sourceArrayColumns : Nat
+    selectedROIRows : Nat
+    timeSamples : Nat
+    sourceAxisSemantics : String
     remoteRangeSelectable : Bool
-    fullArchiveDownloadRequired : Bool
-    archiveUnitIdentityRegistered : Bool
+    selectedROIIdentityRegistered : Bool
 
 open GautheyCompactArchiveReceipt public
 
@@ -41,14 +43,14 @@ canonicalGautheyCompactArchiveReceipt =
   gautheyCompactArchiveReceipt
     "10.1038/s41467-026-72437-1"
     "10.5281/zenodo.17618684"
+    "github:murthylab/lightbead-analysis"
     "Data.zip"
     "Data/Dffs/Audio correlated/dffs_audio_2p_corr_top05_all.pkl"
     940
     668
-    "Data/Mean brain/audio_roi_04032024_6f_a2_r5_pval.csv"
-    "Data/Labels/04032024_6f_a2_r5_n2000_labels.h5"
-    "Data/Mean brain/04032024_GCamp6f_a2_r5_w3_mean_G.nii"
-    true
+    940
+    668
+    "selected-roi-by-time"
     true
     false
 
@@ -56,10 +58,10 @@ record GautheyCompactArchiveBoundary : Set where
   constructor gautheyCompactArchiveBoundary
   field
     selectiveRangeExtractionDoesNotRequireFullArchive : Bool
-    preprocessedMatrixDoesNotNameAnatomicalUnits : Bool
-    responsiveROIListDoesNotAutomaticallyIndexFunctionalMatrix : Bool
-    segmentationLabelsDoNotAutomaticallyProvideJRC2018Regions : Bool
-    meanBrainVolumeStillRequiresRegistrationTransform : Bool
+    sourceArrayColumnDoesNotMeanFunctionalUnit : Bool
+    selectedROIRowDoesNotNameSourceROI : Bool
+    pooled2PMatrixDoesNotInheritLBCompanionIdentity : Bool
+    sourceSelectionIndicesNeedRecovery : Bool
 
 canonicalGautheyCompactArchiveBoundary : GautheyCompactArchiveBoundary
 canonicalGautheyCompactArchiveBoundary =
