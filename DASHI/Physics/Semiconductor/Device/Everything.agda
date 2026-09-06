@@ -8,3 +8,4 @@ import DASHI.Physics.Semiconductor.Device.FinitePoissonGreenCrossPollinationExac
 import DASHI.Physics.Semiconductor.Device.DeviceResidualDependencyCrossPollinationExact
 import DASHI.Physics.Semiconductor.Device.DeviceDissipationMonotonicityBridgeExact
 import DASHI.Physics.Semiconductor.Device.GateGeometryObservationNonFactorabilityExact
+import DASHI.Physics.Semiconductor.Device.SameObjectGummelFiniteContractionExact
