@@ -40,14 +40,24 @@ firstTrancheBorrowing = sourceReceipt
   "SoftBank executed a USD 10 billion OpenAI investment tranche and stated that it borrowed USD 10 billion under the bridge facility to procure the required funds."
   true
 
+reportedOpenAIInvestmentGain : SourceReceipt
+reportedOpenAIInvestmentGain = sourceReceipt
+  "Reuters"
+  "2026-02-12"
+  "SoftBank quarterly-results report"
+  "Reuters reported that SoftBank booked an approximately USD 19.8 billion investment gain from its OpenAI stake for the October-December 2025 quarter, materially contributing to quarterly profit."
+  false
+
 record SoftBankOpenAIValuationLeverageCalibration : Set where
   constructor softBankOpenAIValuationLeverageCalibration
   field
     investmentReceipt : SourceReceipt
     bridgeReceipt : SourceReceipt
     borrowingReceipt : SourceReceipt
+    valuationGainReceipt : SourceReceipt
     largeValuationExposure : Bool
     investmentFinancedWithBorrowingAtFirstTranche : Bool
+    reportedOpenAIValuationGainObserved : Bool
     valuationMarkIsExternalCustomerCash : Bool
     leverageProvesInvestmentInvalid : Bool
     openAIFutureCashFlowsValidateInvestment : Bool
@@ -56,8 +66,8 @@ canonicalSoftBankOpenAIValuationLeverageCalibration :
   SoftBankOpenAIValuationLeverageCalibration
 canonicalSoftBankOpenAIValuationLeverageCalibration =
   softBankOpenAIValuationLeverageCalibration
-    followOnInvestment bridgeFacility firstTrancheBorrowing
-    true true false false false
+    followOnInvestment bridgeFacility firstTrancheBorrowing reportedOpenAIInvestmentGain
+    true true true false false false
 
 markedGainDoesNotCloseExternalCash :
   Econ.MarkedGainImpliesExternalCashPermission → ⊥
