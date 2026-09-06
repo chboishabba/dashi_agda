@@ -20,5 +20,7 @@ import DASHI.Core.ProvenanceSensitiveConsumerAdequacyBidiExact
 import DASHI.Core.PromotionTransportChainBidiExact
 import DASHI.Core.TemporalPromotionNonRetroactivityBidiExact
 import DASHI.Core.QueryPromotionResidualBidiExact
+import DASHI.Core.ProjectionHierarchyCompatibleFibreBidiExact
+import DASHI.Core.BraidedPromotionTransportBidiExact
 
 import DASHI.Core.CrossDomainBidiReciprocal2026Validation
