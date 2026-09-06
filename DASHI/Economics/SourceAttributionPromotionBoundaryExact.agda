@@ -83,6 +83,40 @@ record IndependentVerificationReceipt : Set where
 open IndependentVerificationReceipt public
 
 ------------------------------------------------------------------------
+-- Explicit promotion chain.
+--
+-- A stronger downstream layer must carry a producer specific to that step.
+-- Reusing a source receipt at a later layer is not itself a promotion proof.
+------------------------------------------------------------------------
+
+record PromotionStepReceipt : Set₁ where
+  constructor promotionStepReceipt
+  field
+    fromLayer : AttributionLayer
+    toLayer : AttributionLayer
+    upstreamReceipt : SourceAttributionReceipt
+    PromotionProducer : Set
+    promotionProducer : PromotionProducer
+    preservesClaimOwner : Bool
+    preservesBoundedProposition : Bool
+    authorityForThisStep : String
+
+open PromotionStepReceipt public
+
+record SourceToSystemicPromotionChain : Set₁ where
+  constructor sourceToSystemicPromotionChain
+  field
+    sourceUse : SourceUseReceipt
+    interpretationStep : PromotionStepReceipt
+    formalisationStep : PromotionStepReceipt
+    empiricalStep : PromotionStepReceipt
+    systemicStep : PromotionStepReceipt
+    sourceOwnershipPreservedEndToEnd : Bool
+    everyPromotionHasDistinctProducer : Bool
+
+open SourceToSystemicPromotionChain public
+
+------------------------------------------------------------------------
 -- Firewalls from previous attribution rounds.
 ------------------------------------------------------------------------
 
@@ -99,6 +133,10 @@ data TranscriptImpliesIndependentVerificationPermission : Set where
 data SourcePropositionImpliesSystemicClassificationPermission : Set where
 
 data SameContentImpliesIndependentProducerPermission : Set where
+
+data SourceReceiptImpliesPromotionStepPermission : Set where
+
+data OnePromotionProducerPaysAllLaterStagesPermission : Set where
 
 accessCarrierDoesNotAutoPromoteToAuthorship :
   AccessCarrierImpliesAuthorshipPermission → ⊥
@@ -127,3 +165,11 @@ sourcePropositionDoesNotAutoPromoteToSystemicClassification ()
 sameContentDoesNotAutoPromoteToIndependentProducer :
   SameContentImpliesIndependentProducerPermission → ⊥
 sameContentDoesNotAutoPromoteToIndependentProducer ()
+
+sourceReceiptDoesNotAutoPromoteToPromotionStep :
+  SourceReceiptImpliesPromotionStepPermission → ⊥
+sourceReceiptDoesNotAutoPromoteToPromotionStep ()
+
+onePromotionProducerDoesNotPayAllLaterStages :
+  OnePromotionProducerPaysAllLaterStagesPermission → ⊥
+onePromotionProducerDoesNotPayAllLaterStages ()
