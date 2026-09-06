@@ -8,6 +8,7 @@ import DASHI.Core.FibreRefinementExperimentSelectionBidiExact as Fibre
 import DASHI.Core.CostedFibreEliminationChoiceBidiExact as Costed
 import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Cost
 import DASHI.Core.MinimalObservationLevelPerConsumerBidiExact as Minimal
+import DASHI.Core.ProjectionHierarchyCompatibleFibreBidiExact as Projection
 
 ------------------------------------------------------------------------
 -- LEAST-COST CONSUMER-CLOSING EXPERIMENT
@@ -87,7 +88,7 @@ selectedChoiceEliminatesPriorCandidate choice =
 ------------------------------------------------------------------------
 
 middleAlreadyClosesCalibrationConsumer :
-  Minimal.ConsumerClosedAtLevel Minimal.Projection.middleDecision Minimal.middleLevel
+  Minimal.ConsumerClosedAtLevel Projection.middleDecision Minimal.middleLevel
 middleAlreadyClosesCalibrationConsumer = Minimal.middleDecisionClosedAtMiddle
 
 middleStillNotPointSingleton = Minimal.middleClosureStillNotPointSingleton
