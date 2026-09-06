@@ -7,4 +7,6 @@ module DASHI.Cognition.Everything where
 import DASHI.Cognition.PNF.PNFIRLearningEverything
 import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
 import DASHI.Cognition.VisualPatternModeGeometryEverything
-import DASHI.Cognition.PNF.SensibLawCountryUniversalLegalAlgebraEverything
+import DASHI.Cognition.PNF.SensibLawDutyHegemonyEpistemicCompressionV02Everything
+import DASHI.Cognition.PNF.SensibLawCountryEpistemicCompressionEverything
+import DASHI.Cognition.PNF.SensibLawFiniteLegalSearchEverything

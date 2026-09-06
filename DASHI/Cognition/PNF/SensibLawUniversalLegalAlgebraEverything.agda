@@ -11,6 +11,8 @@ import DASHI.Cognition.PNF.SensibLawStatutoryRuleStructureAlgebraExact as Statut
 import DASHI.Cognition.PNF.SensibLawWrongTypeLegalElementAlgebraExact as Elements
 import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact as Negligence
 import DASHI.Cognition.PNF.SensibLawClimateDutyRouteSearchExact as Climate
+import DASHI.Cognition.PNF.SensibLawLegalObserverResidualRefinementBidiExact as Residual
+import DASHI.Cognition.PNF.SensibLawLegalGraphRefinementReopeningExact as Refinement
 
 ------------------------------------------------------------------------
 -- Universal graph and issue-specific graph are one architecture.
@@ -80,6 +82,30 @@ causationClassIsDownstreamElement :
   Negligence.classifyDutyIssue Climate.causation
   ≡ Negligence.downstreamNegligenceElement
 causationClassIsDownstreamElement = refl
+
+------------------------------------------------------------------------
+-- NEW: the universal algebra now owns the reverse epistemic path too.
+------------------------------------------------------------------------
+
+statutoryCoherenceMissingnessRoutesToStatutoryText :
+  Residual.preferredRoute
+    (Residual.dutyResidualKind Climate.statutoryCoherence)
+  ≡ Residual.inspectStatutoryText
+statutoryCoherenceMissingnessRoutesToStatutoryText = refl
+
+corePolicyMissingnessRoutesToReasons :
+  Residual.preferredRoute
+    (Residual.dutyResidualKind Climate.coreGovernmentPolicy)
+  ≡ Residual.inspectJudicialReasons
+corePolicyMissingnessRoutesToReasons = refl
+
+richerGraphMayDefeatAsWellAsOpen :
+  Refinement.NewFactCanOnlyOpenAndNeverDefeat → ⊥
+richerGraphMayDefeatAsWellAsOpen = Refinement.newFactsMayActivateExceptionsOrDefeaters
+
+refinementDoesNotFreezeOldCut :
+  Refinement.OldMinimalCutRemainsMinimalAfterRefinement → ⊥
+refinementDoesNotFreezeOldCut = Refinement.minimalCutMustBeRechecked
 
 ------------------------------------------------------------------------
 -- Aggregate does not claim corpus-complete legal extraction or kernel receipt.
