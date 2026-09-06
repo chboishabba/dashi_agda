@@ -12,6 +12,7 @@ import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact as Z38
 import DASHI.Analysis.RiemannG2AlpogeFurmanClusteringNonDescentExact as AFLocal
 import DASHI.Analysis.RiemannG2LowGapClusteringMomentReductionExact as Moment
 import DASHI.Analysis.RiemannG2SelectedTargetLocalMomentSameObjectExact as SelectedMoment
+import DASHI.Analysis.RiemannG2SelectedDirectFiniteMomentBidiExact as Shared
 
 ------------------------------------------------------------------------
 -- RH-ONLY BIDI-AWARE SEARCH SCHEDULER
@@ -19,26 +20,30 @@ import DASHI.Analysis.RiemannG2SelectedTargetLocalMomentSameObjectExact as Selec
 -- Consumer first, recursively. A candidate experiment is schedulable only if
 -- it feeds an open producer node on the backward RH cut.
 --
--- 8896 BIDI update: the optimized gap-split route exposes an additional live
--- zero-side producer, actual-zeta low-gap clustering
+-- 8896 BIDI update: the optimized gap-split route exposes the live actual-zeta
+-- low-gap clustering theorem
 --
 --   (4/pi^2) * highGapMass < lowGapMass,
 --   D = pi/(3 Lambda).
 --
 -- The clustering node is refined by a target-local second-moment compiler. The
--- actual analytic moment is not allowed to float on a parallel target/window:
--- `RiemannG2SelectedTargetLocalMomentSameObjectExact` indexes it by the existing
--- `ActualSelectedPoleNearProducer`, reusing the SAME target-relative phase,
--- multiplicities and nearOffFinset. Once that attachment is inhabited, the
--- strict two-to-one mass ratio is compiler output.
+-- actual analytic moment is not allowed to float on a parallel target/window.
+-- More strongly, clustering and finite-near evaluation are now required to
+-- share one selected/direct zero carrier through
+-- `RiemannG2SelectedDirectFiniteMomentBidiExact.SelectedDirectFiniteWeld`.
 --
--- Direct clustering remains an admissible alternative route. The Alpöge--Furman
+-- Thus the same direct producer must carry targetRelativeGap, multiplicity,
+-- nearIndex and the signed finite-near evaluation while being identified with
+-- the existing ActualSelectedPoleNearProducer. The weld is a common upstream
+-- gate for both the delta-moment route and the finite-near evaluation route.
+--
+-- Direct clustering remains an admissible alternative route. The Alpoge--Furman
 -- global >2/3 simple/on-line theorem remains a relevant donor but is explicitly
 -- rejected as a direct target-local clustering proof without localization.
 --
 -- This is NOT the already-closed `clusterMarginSocket`: that socket is the
 -- off-line pole cluster margin M_cluster^pole. The new clustering theorem is a
--- property of the retained zeta-zero mass distribution and feeds H_off.
+-- property of the retained zeta-zero ordinate distribution and feeds H_off.
 ------------------------------------------------------------------------
 
 data ProducerNeed : Set where
@@ -59,6 +64,7 @@ currentNeed Search.clusterMarginSocket = producerClosed
 
 data RHProducerNode : Set where
   zetaLowGapClusteringNode
+  selectedDirectZeroCarrierWeldNode
   zetaTargetLocalSecondMomentNode
   offFiniteNearEvaluationNode
   gammaPrecisionNode
@@ -66,6 +72,7 @@ data RHProducerNode : Set where
 
 nodeFeedsSocket : RHProducerNode → Search.RHResearchSocket
 nodeFeedsSocket zetaLowGapClusteringNode = Search.offOrdinateSocket
+nodeFeedsSocket selectedDirectZeroCarrierWeldNode = Search.offOrdinateSocket
 nodeFeedsSocket zetaTargetLocalSecondMomentNode = Search.offOrdinateSocket
 nodeFeedsSocket offFiniteNearEvaluationNode = Search.offOrdinateSocket
 nodeFeedsSocket gammaPrecisionNode = Search.gammaSocket
@@ -73,6 +80,10 @@ nodeFeedsSocket gammaPrecisionNode = Search.gammaSocket
 data ProducerRefines : RHProducerNode → RHProducerNode → Set where
   targetLocalMomentRefinesClustering :
     ProducerRefines zetaTargetLocalSecondMomentNode zetaLowGapClusteringNode
+  selectedDirectWeldFeedsMoment :
+    ProducerRefines selectedDirectZeroCarrierWeldNode zetaTargetLocalSecondMomentNode
+  selectedDirectWeldFeedsFiniteNear :
+    ProducerRefines selectedDirectZeroCarrierWeldNode offFiniteNearEvaluationNode
 
 ------------------------------------------------------------------------
 -- Candidate experiment classes for the exact current cut.
@@ -80,6 +91,7 @@ data ProducerRefines : RHProducerNode → RHProducerNode → Set where
 
 data RHBidiExperiment : Set where
   proveActualZetaLowGapClustering
+  weldSelectedDirectZeroCarrier
   proveTargetLocalSecondMoment
   evaluateFiniteNearSignedSum
   improveGammaEvaluation
@@ -95,6 +107,7 @@ data RHBidiExperiment : Set where
 
 data RHExperimentOutputKind : Set where
   directClusteringProducer
+  sameObjectZeroCarrierWeld
   localMomentClusteringProducer
   directFiniteProducer
   consumerSufficientRepair
@@ -109,6 +122,7 @@ data RHExperimentOutputKind : Set where
 
 outputKind : RHBidiExperiment → RHExperimentOutputKind
 outputKind proveActualZetaLowGapClustering = directClusteringProducer
+outputKind weldSelectedDirectZeroCarrier = sameObjectZeroCarrierWeld
 outputKind proveTargetLocalSecondMoment = localMomentClusteringProducer
 outputKind evaluateFiniteNearSignedSum = directFiniteProducer
 outputKind improveGammaEvaluation = consumerSufficientRepair
@@ -128,6 +142,8 @@ outputKind auditNamedExternalDonor = donorAuditOnly
 data InhabitsLiveRHProducer : RHBidiExperiment → Set where
   zetaLowGapClusteringIsLive :
     InhabitsLiveRHProducer proveActualZetaLowGapClustering
+  selectedDirectZeroCarrierWeldIsLive :
+    InhabitsLiveRHProducer weldSelectedDirectZeroCarrier
   zetaTargetLocalSecondMomentIsLive :
     InhabitsLiveRHProducer proveTargetLocalSecondMoment
   finiteNearEvaluationIsLive :
@@ -193,13 +209,21 @@ zetaLowGapClusteringSchedulable =
     "RH off-ordinate backward consumer via optimized gap split"
     "actual zeta zeros: (4/pi^2) * highGapMass < lowGapMass at D = pi/(3 Lambda)"
 
+selectedDirectZeroCarrierWeldSchedulable :
+  RHBidiSchedulable weldSelectedDirectZeroCarrier
+selectedDirectZeroCarrierWeldSchedulable =
+  rh-bidi-schedulable
+    selectedDirectZeroCarrierWeldIsLive
+    "shared upstream gate for actual-zeta clustering and H_off finite-near evaluation"
+    "RiemannG2SelectedDirectFiniteMomentBidiExact.SelectedDirectFiniteWeld: identify the existing DirectFinitePoleNearProducer with the existing ActualSelectedPoleNearProducer on target, cutoff, zero family, multiplicity, targetRelativeGap, pole taper, finite signed value and explicit-formula object"
+
 zetaTargetLocalSecondMomentSchedulable :
   RHBidiSchedulable proveTargetLocalSecondMoment
 zetaTargetLocalSecondMomentSchedulable =
   rh-bidi-schedulable
     zetaTargetLocalSecondMomentIsLive
-    "actual-zeta low-gap clustering producer"
-    "RiemannG2SelectedTargetLocalMomentSameObjectExact.SelectedTargetLocalMomentAttachment indexed by the existing ActualSelectedPoleNearProducer; prove SAME-target/SAME-window M2_norm with highGapMass <= M2_norm < 2*lowGapMass"
+    "actual-zeta low-gap clustering producer after same-object selected/direct weld"
+    "SelectedDirectFiniteMomentProducer on the welded direct targetRelativeGap carrier; prove M2_norm with highGapMass <= M2_norm < 2*lowGapMass"
 
 finiteNearEvaluationSchedulable :
   RHBidiSchedulable evaluateFiniteNearSignedSum
@@ -207,7 +231,7 @@ finiteNearEvaluationSchedulable =
   rh-bidi-schedulable
     finiteNearEvaluationIsLive
     "RH pole-quotient backward consumer: B_off + B_Gamma < M_cluster"
-    "H_off^pole: finite reflection-paired target-centred nearOffFinset evaluation on the final high-ordinate pole taper"
+    "the SAME welded DirectFinitePoleNearProducer must carry the phase-preserving finite-near approximant/error receipt"
 
 gammaPrecisionRepairSchedulable :
   RHBidiSchedulable improveGammaEvaluation
@@ -218,12 +242,14 @@ gammaPrecisionRepairSchedulable =
     "H_Gamma consumer-sufficient O(|t|^-2)-scale evaluation"
 
 ------------------------------------------------------------------------
--- The active high-ordinate queue after the same-object local-moment refinement.
+-- The active high-ordinate queue after the shared-carrier refinement.
 ------------------------------------------------------------------------
 
 data ActiveHighOrdinateExperiment : RHBidiExperiment → Set where
   activeZetaClustering :
     ActiveHighOrdinateExperiment proveActualZetaLowGapClustering
+  activeSelectedDirectWeld :
+    ActiveHighOrdinateExperiment weldSelectedDirectZeroCarrier
   activeZetaLocalMoment :
     ActiveHighOrdinateExperiment proveTargetLocalSecondMoment
   activeFiniteNear : ActiveHighOrdinateExperiment evaluateFiniteNearSignedSum
@@ -234,6 +260,7 @@ schedulableIsActive :
   RHBidiSchedulable experiment →
   ActiveHighOrdinateExperiment experiment
 schedulableIsActive proveActualZetaLowGapClustering s = activeZetaClustering
+schedulableIsActive weldSelectedDirectZeroCarrier s = activeSelectedDirectWeld
 schedulableIsActive proveTargetLocalSecondMoment s = activeZetaLocalMoment
 schedulableIsActive evaluateFiniteNearSignedSum s = activeFiniteNear
 schedulableIsActive improveGammaEvaluation s = activeGammaRepair
@@ -338,20 +365,28 @@ selectedMomentSameObjectProducerStillOpen :
     SelectedMoment.canonicalSelectedTargetLocalMomentBoundary ≡ false
 selectedMomentSameObjectProducerStillOpen = refl
 
-secondMomentTargetSearchPruned :
-  SelectedMoment.paymentState SelectedMoment.recoverSecondSelectedTarget
-  ≡ SelectedMoment.pruned
-secondMomentTargetSearchPruned = refl
+selectedDirectWeldRequired :
+  Shared.SelectedDirectFiniteMomentBoundary.selectedAndDirectViewsMustBeWelded
+    Shared.canonicalSelectedDirectFiniteMomentBoundary ≡ true
+selectedDirectWeldRequired = refl
 
-secondMomentNearFamilySearchPruned :
-  SelectedMoment.paymentState SelectedMoment.recoverSecondNearZeroFamily
-  ≡ SelectedMoment.pruned
-secondMomentNearFamilySearchPruned = refl
+selectedDirectWeldStillOpen :
+  Shared.SelectedDirectFiniteMomentBoundary.selectedDirectWeldInhabitedHere
+    Shared.canonicalSelectedDirectFiniteMomentBoundary ≡ false
+selectedDirectWeldStillOpen = refl
 
-secondMomentMultiplicitySearchPruned :
-  SelectedMoment.paymentState SelectedMoment.recoverSecondMultiplicityCarrier
-  ≡ SelectedMoment.pruned
-secondMomentMultiplicitySearchPruned = refl
+sharedDirectCarrierFeedsBothConsumers :
+  Shared.SelectedDirectFiniteMomentBoundary.oneDirectGapCarrierCanFeedClusteringAndFiniteEvaluation
+    Shared.canonicalSelectedDirectFiniteMomentBoundary ≡ true
+sharedDirectCarrierFeedsBothConsumers = refl
+
+secondSelectedWindowSearchPruned :
+  Shared.paymentState Shared.recoverSecondSelectedWindow ≡ Shared.pruned
+secondSelectedWindowSearchPruned = Shared.secondSelectedWindowPruned
+
+secondDirectZeroFamilySearchPruned :
+  Shared.paymentState Shared.recoverSecondDirectZeroFamily ≡ Shared.pruned
+secondDirectZeroFamilySearchPruned = Shared.secondDirectZeroFamilyPruned
 
 globalSimpleProportionCannotDirectlyCloseClustering :
   AFLocal.GlobalSimpleToLocalClusteringBoundary.alpogeFurmanDirectlyClosesGapSplitClustering
@@ -397,6 +432,10 @@ record RHBidiSearchSchedulerBoundary : Set where
     actualZetaLowGapClusteringActiveIsTrue :
       actualZetaLowGapClusteringActive ≡ true
 
+    selectedDirectZeroCarrierWeldActive : Bool
+    selectedDirectZeroCarrierWeldActiveIsTrue :
+      selectedDirectZeroCarrierWeldActive ≡ true
+
     targetLocalSecondMomentRefinementActive : Bool
     targetLocalSecondMomentRefinementActiveIsTrue :
       targetLocalSecondMomentRefinementActive ≡ true
@@ -404,6 +443,10 @@ record RHBidiSearchSchedulerBoundary : Set where
     targetLocalSecondMomentUsesExistingSelectedWindow : Bool
     targetLocalSecondMomentUsesExistingSelectedWindowIsTrue :
       targetLocalSecondMomentUsesExistingSelectedWindow ≡ true
+
+    clusteringAndFiniteNearForcedOntoSameDirectCarrier : Bool
+    clusteringAndFiniteNearForcedOntoSameDirectCarrierIsTrue :
+      clusteringAndFiniteNearForcedOntoSameDirectCarrier ≡ true
 
     globalSimpleZeroProportionDirectClusteringRouteActive : Bool
     globalSimpleZeroProportionDirectClusteringRouteActiveIsFalse :
@@ -441,6 +484,8 @@ canonicalRHBidiSearchSchedulerBoundary =
     false refl
     false refl
     false refl
+    true refl
+    true refl
     true refl
     true refl
     true refl
