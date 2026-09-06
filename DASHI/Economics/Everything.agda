@@ -16,3 +16,14 @@ import DASHI.Economics.AICriticalInfrastructurePoliticsCrossPollinationExact
 import DASHI.Economics.AIScalingLawRegimeMonitorExact
 import DASHI.Economics.AIScalingEvidenceAuthorityCrossPollinationExact
 import DASHI.Economics.AIInfrastructureRegimeClassifierExact
+
+-- Source-bounded current-regime calibrations.  Each application owner retains
+-- its own source/interpretation/promotional boundaries.
+import DASHI.Economics.MicrosoftCloudAIMarginPressure2026Exact
+import DASHI.Economics.NvidiaCoreWeaveReflexiveInvestment2026Exact
+import DASHI.Economics.CoreWeaveGPUBackedStructuredFinance2026Exact
+import DASHI.Economics.SoftBankOpenAIValuationLeverage2026Exact
+import DASHI.Economics.TSMCHBMManufacturingDemandPolicy2026Exact
+import DASHI.Economics.MarxCapitalAIInfrastructureCrossPollinationExact
+import DASHI.Economics.AIInfrastructureYouTubeShortTranscriptBoundaryExact
+import DASHI.Economics.AICurrentRegimeCalibration2026Exact
