@@ -53,6 +53,43 @@ record CellOpenObligations
     bioelectricPatternIntervention : Set
     organelleAndCytoskeletalCoupling : Set
 
+------------------------------------------------------------------------
+-- Generic chemical-stress -> cellular recovery seam.
+--
+-- Molecular damage and detoxification/recovery are opposing causal lanes into
+-- the existing reaction-network, metabolic, regulatory and viability owners.
+-- Domain-specific chemistry supplies the witnesses; this owner stays generic.
+------------------------------------------------------------------------
+
+record ChemicalStressRecoveryBridge
+  (C : CellRecoveryBoundary) : Set₁ where
+  field
+    ChemicalDisturbance : Set
+    MolecularDamageState : Set
+    RecoveryAction : Set
+    RegulatoryResponse : Set
+
+    damageFrom : ChemicalDisturbance → MolecularDamageState
+    recoveryFor : MolecularDamageState → RecoveryAction
+    regulatoryResponseFor : MolecularDamageState → RegulatoryResponse
+
+    DamageFeedsProteinReactionNetwork : Set
+    RecoveryFeedsOpenMetabolism : Set
+    RegulationFeedsCellState : Set
+    RecoveryFeedsViability : Set
+
+    damageProteinWitness : DamageFeedsProteinReactionNetwork
+    recoveryMetabolismWitness : RecoveryFeedsOpenMetabolism
+    regulationCellStateWitness : RegulationFeedsCellState
+    recoveryViabilityWitness : RecoveryFeedsViability
+
+record ChemicalStressRecoveryBoundary : Set₁ where
+  field
+    disturbanceIsNotEquivalentToCellDeath : Set
+    recoveryResponseIsNotEquivalentToNoDamage : Set
+    molecularRepairIsNotEquivalentToWholeCellRecovery : Set
+    survivalIsNotEquivalentToUnchangedMolecularState : Set
+
 cellRecoveryAvailable :
   {C : CellRecoveryBoundary} →
   CellRecoveryWitness C → CellRecoveryWitness C
