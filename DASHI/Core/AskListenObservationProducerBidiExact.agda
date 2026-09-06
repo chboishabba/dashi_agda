@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.QueryFibreAddedCoordinateProducerBidiExact as Added
+import DASHI.Core.QueryCompatibleFibreConsumerClosureBidiExact as Query
 import DASHI.Core.DeliberativeCyberneticLoopBidiExact as Delib
 import DASHI.Core.ExperimentalCoordinateDesignExact as Design
 import DASHI.Core.BidiResidualApproximationExact as Bidi
@@ -29,7 +30,7 @@ asExtendedMove deliberateObservation = Delib.deliberateMove
 
 record DialogicObservationProducer
     {QueryT State Hidden Answer Control Value Dimension ExistingCode : Set}
-    {problem : Added.Query.QueryCompatibleProblem QueryT State Hidden Answer}
+    {problem : Query.QueryCompatibleProblem QueryT State Hidden Answer}
     {query : QueryT} {state : State}
     (collision : Added.QueryFibreCollision problem query state)
     (design : Design.ExperimentalCoordinateDesign Hidden Control Value Dimension)
@@ -46,7 +47,7 @@ open DialogicObservationProducer public
 
 dialogicMoveKind :
   ∀ {QueryT State Hidden Answer Control Value Dimension ExistingCode : Set}
-    {problem : Added.Query.QueryCompatibleProblem QueryT State Hidden Answer}
+    {problem : Query.QueryCompatibleProblem QueryT State Hidden Answer}
     {query : QueryT} {state : State}
     {collision : Added.QueryFibreCollision problem query state}
     {design : Design.ExperimentalCoordinateDesign Hidden Control Value Dimension}
@@ -57,7 +58,7 @@ dialogicMoveKind producer = asExtendedMove (kind producer)
 
 dialogicObservationRefinesQueryFibre :
   ∀ {QueryT State Hidden Answer Control Value Dimension ExistingCode : Set}
-    {problem : Added.Query.QueryCompatibleProblem QueryT State Hidden Answer}
+    {problem : Query.QueryCompatibleProblem QueryT State Hidden Answer}
     {query : QueryT} {state : State}
     {collision : Added.QueryFibreCollision problem query state}
     {design : Design.ExperimentalCoordinateDesign Hidden Control Value Dimension}
@@ -67,7 +68,7 @@ dialogicObservationRefinesQueryFibre :
   Bidi.FibreRefines
     (Added.MeasuredQueryFibre problem query state design
       (Design.coordinate (Added.separator (addedCoordinate producer))) observed)
-    (Added.Query.queryResidualFibre problem query state)
+    (Query.queryResidualFibre problem query state)
 dialogicObservationRefinesQueryFibre producer observed =
   Added.addedCoordinateAlwaysRefinesQueryFibre
     _ _ _ _
