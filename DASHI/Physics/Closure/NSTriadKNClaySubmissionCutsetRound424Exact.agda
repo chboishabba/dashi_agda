@@ -55,21 +55,37 @@ module DASHI.Physics.Closure.NSTriadKNClaySubmissionCutsetRound424Exact where
 -- cancellable scalar equality m(k)^2=|k|^2.  This firewall matters for generic
 -- lattice modes whose Euclidean radius need not be rational.
 --
--- R432 sharpens the aggregation frontier again.  R398 constructs the live R406
--- pair family by concatenating one fixed-output pair list at a time and proves
--- exact additivity of the weighted remainder under list append.  Therefore the
--- heat factorization can be performed output-fibre by output-fibre.  There is
--- NO cross-output coherence theorem left.  The remaining discovery theorem is
--- exactly:
+-- R432 sharpens the aggregation frontier: R398 constructs the live R406 pair
+-- family by concatenating one fixed-output pair list at a time and proves exact
+-- additivity of the weighted remainder under list append.  Therefore the heat
+-- factorization can be performed output-fibre by output-fibre.  There is NO
+-- cross-output coherence theorem left.
 --
---   (i) cutoff-uniform control of coherent signed cross INSIDE each fixed
---       output fibre, and
---   (ii) a cardinality-free summation of those fibre budgets by a critical
---        physical quantity.
+-- R433 then applies the already-owned physical R186 Bony classification to the
+-- SAME R329 outer incidence.  Every fixed-output nested cell belongs to one of
+-- exactly three swap-invariant classes: far-low, high-high, comparable.  The
+-- class split introduces no cutoff-dependent factor.
 --
--- Thus "global aggregate coherence" is now too broad a description.  The live
--- novel seam is fixed-output coherence plus physical summability of the fibre
--- budgets.
+-- Finally R434 reconnects that live fixed-output split to the sharper R284
+-- decomposition.  Deep far-low and deep high-high regions are already E*D
+-- payable.  The only genuinely novel coherent region is the parabolic critical
+-- cone:
+--
+--   FL shoulder + HH shoulder + comparable.
+--
+-- If its relative covariance satisfies
+--
+--   D_core <= theta Q_core + C_core E D,   theta < 1,
+--
+-- R434 compiles it with the already-paid deep regions into the fixed-output
+-- cross budget.  After that, only the cardinality-free SUM of fixed-output
+-- budgets must be paid by the global critical quantity.
+--
+-- Therefore the live mathematical frontier is no longer "global aggregate
+-- coherence".  It is exactly:
+--
+--   (i) physical relative covariance on the fixed-output critical cone, and
+--   (ii) cutoff-uniform summation of the resulting fixed-output budgets.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -87,6 +103,8 @@ import DASHI.Physics.Closure.NSTriadKNStrongLowLiteralNestedKernelRound329Exact 
 import DASHI.Physics.Closure.NSTriadKNLiteralNestedOuterAntiParallelNormRound430Exact as R430
 import DASHI.Physics.Closure.NSTriadKNLiteralNestedOuterRadiusDefectRound431Exact as R431
 import DASHI.Physics.Closure.NSTriadKNFixedOutputSignedCrossAggregationRound432Exact as R432
+import DASHI.Physics.Closure.NSTriadKNFixedOutputNestedBonyCrossRound433Exact as R433
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCriticalConeCompilerRound434Exact as R434
 import DASHI.Physics.Closure.NSTriadKNCriticalSimonUpgradeFollowsBarrierRound148Exact as R148
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalGalerkinSimonWeldRound104Exact as R104
 
@@ -177,12 +195,40 @@ round424OnlyFixedOutputCoherenceRemainsBeforeBudgetSummation : Bool
 round424OnlyFixedOutputCoherenceRemainsBeforeBudgetSummation =
   R432.round432OnlyFixedOutputCoherenceRemainsBeforeBudgetSummation
 
+round424NestedOuterPhysicalThreeBonyClassReductionClosed : Bool
+round424NestedOuterPhysicalThreeBonyClassReductionClosed =
+  R433.round433NestedOuterUsesLiteralR186BonyClassification
+
+round424BonyClassReductionAddsCutoffFactor : Bool
+round424BonyClassReductionAddsCutoffFactor =
+  R433.round433BonyClassReductionAddsCutoffFactor
+
+round424DeepFarLowAlreadyDelegatedToED : Bool
+round424DeepFarLowAlreadyDelegatedToED =
+  R434.round434DeepFarLowAlreadyDelegatedToED
+
+round424DeepHighHighAlreadyDelegatedToED : Bool
+round424DeepHighHighAlreadyDelegatedToED =
+  R434.round434DeepHighHighAlreadyDelegatedToED
+
+round424NovelFixedOutputRegionIsCriticalCone : Bool
+round424NovelFixedOutputRegionIsCriticalCone =
+  R434.round434NovelFixedOutputRegionIsCriticalCone
+
+round424CriticalConeCompilerClosed : Bool
+round424CriticalConeCompilerClosed =
+  R434.round434CriticalConeCompilerClosed
+
+round424PhysicalCriticalConeCovarianceClosed : Bool
+round424PhysicalCriticalConeCovarianceClosed =
+  R434.round434PhysicalCriticalConeCovarianceClosed
+
 round424CutoffUniformSumOfFixedOutputBudgetsClosed : Bool
 round424CutoffUniformSumOfFixedOutputBudgetsClosed =
   R432.round432CutoffUniformSumOfFibreBudgetsClosed
 
-round424RemainingNovelSeamIsFixedOutputCoherencePlusBudgetSummation : Bool
-round424RemainingNovelSeamIsFixedOutputCoherencePlusBudgetSummation = true
+round424RemainingNovelSeamIsCriticalConeCovariancePlusBudgetSummation : Bool
+round424RemainingNovelSeamIsCriticalConeCovariancePlusBudgetSummation = true
 
 round424PostBarrierNeedsNoNewNSDiscoveryEstimate : Bool
 round424PostBarrierNeedsNoNewNSDiscoveryEstimate =
@@ -300,14 +346,34 @@ round424OnlyFixedOutputCoherenceRemainsBeforeBudgetSummationIsTrue :
 round424OnlyFixedOutputCoherenceRemainsBeforeBudgetSummationIsTrue =
   R432.round432OnlyFixedOutputCoherenceRemainsBeforeBudgetSummationIsTrue
 
+round424NestedOuterPhysicalThreeBonyClassReductionClosedIsTrue :
+  round424NestedOuterPhysicalThreeBonyClassReductionClosed ≡ true
+round424NestedOuterPhysicalThreeBonyClassReductionClosedIsTrue =
+  R433.round433NestedOuterUsesLiteralR186BonyClassificationIsTrue
+
+round424BonyClassReductionAddsCutoffFactorIsFalse :
+  round424BonyClassReductionAddsCutoffFactor ≡ false
+round424BonyClassReductionAddsCutoffFactorIsFalse =
+  R433.round433BonyClassReductionAddsCutoffFactorIsFalse
+
+round424CriticalConeCompilerClosedIsTrue :
+  round424CriticalConeCompilerClosed ≡ true
+round424CriticalConeCompilerClosedIsTrue =
+  R434.round434CriticalConeCompilerClosedIsTrue
+
+round424PhysicalCriticalConeCovarianceClosedIsFalse :
+  round424PhysicalCriticalConeCovarianceClosed ≡ false
+round424PhysicalCriticalConeCovarianceClosedIsFalse =
+  R434.round434PhysicalCriticalConeCovarianceClosedIsFalse
+
 round424CutoffUniformSumOfFixedOutputBudgetsClosedIsFalse :
   round424CutoffUniformSumOfFixedOutputBudgetsClosed ≡ false
 round424CutoffUniformSumOfFixedOutputBudgetsClosedIsFalse =
   R432.round432CutoffUniformSumOfFibreBudgetsClosedIsFalse
 
-round424RemainingNovelSeamIsFixedOutputCoherencePlusBudgetSummationIsTrue :
-  round424RemainingNovelSeamIsFixedOutputCoherencePlusBudgetSummation ≡ true
-round424RemainingNovelSeamIsFixedOutputCoherencePlusBudgetSummationIsTrue = refl
+round424RemainingNovelSeamIsCriticalConeCovariancePlusBudgetSummationIsTrue :
+  round424RemainingNovelSeamIsCriticalConeCovariancePlusBudgetSummation ≡ true
+round424RemainingNovelSeamIsCriticalConeCovariancePlusBudgetSummationIsTrue = refl
 
 round424PostBarrierNeedsNoNewNSDiscoveryEstimateIsTrue :
   round424PostBarrierNeedsNoNewNSDiscoveryEstimate ≡ true
