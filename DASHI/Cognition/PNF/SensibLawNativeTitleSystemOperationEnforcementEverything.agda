@@ -21,10 +21,6 @@ import DASHI.Cognition.PNF.SensibLawSystemOperationProjectionEnforcementCrossPol
 import DASHI.Cognition.PNF.SensibLawMaboTerraNulliusTemporalLegalOperationExact as Terra
 import DASHI.Cognition.PNF.SensibLawClimateForumCompulsionEnforcementLatticeExact as Climate
 
-------------------------------------------------------------------------
--- Preserve the stronger Native Title critique/source constitution.
-------------------------------------------------------------------------
-
 nativeTitleMajorLegalAdvanceRetained :
   NativeTitle.majorLegalAdvanceRetained ≡ NativeTitle.majorLegalAdvanceRetained
 nativeTitleMajorLegalAdvanceRetained = refl
@@ -38,10 +34,6 @@ sourceFirewallSurvivesCriticalOrientation :
   NativeTitle.sourceAttributionFirewallSurvivesPoliticalCritique
     NativeTitle.canonicalNativeTitleRecognitionDominationCapstone ≡ true
 sourceFirewallSurvivesCriticalOrientation = refl
-
-------------------------------------------------------------------------
--- Temporal doctrine correction: operative then rejected is not never-operative.
-------------------------------------------------------------------------
 
 preMaboDoctrineLegallyOperative :
   Terra.preMaboDoctrineLegallyOperative Terra.canonicalTerraNulliusTemporalBoundary ≡ true
@@ -63,10 +55,6 @@ laterCorrectionDoesNotMeanPriorRuleNeverOperated =
 operativeLawDoesNotMeanLegitimateLaw : Terra.LegalValidityMeansMoralLegitimacy → ⊥
 operativeLawDoesNotMeanLegitimateLaw = Terra.legalValidityDoesNotConferMoralLegitimacy
 
-------------------------------------------------------------------------
--- Visibility is not existence.
-------------------------------------------------------------------------
-
 visibilityBoundary : Visibility.VisibilityExistenceBoundary
 visibilityBoundary = Visibility.canonicalVisibilityExistenceBoundary
 
@@ -75,10 +63,6 @@ invisibleToObserverDoesNotMeanNonexistent = Visibility.invisibleDoesNotMeanNonex
 
 categoryAbsenceDoesNotMeanWorldAbsence : Visibility.CategoryAbsenceMeansWorldAbsence → ⊥
 categoryAbsenceDoesNotMeanWorldAbsence = Visibility.categoryAbsenceDoesNotMeanWorldAbsence
-
-------------------------------------------------------------------------
--- Operational semantics / POSIWID.
-------------------------------------------------------------------------
 
 posiwidBoundary : Operation.POSIWIDSourceBoundary
 posiwidBoundary = Operation.canonicalPOSIWIDSourceBoundary
@@ -98,10 +82,6 @@ correctionResponseIsObservableOperation :
     Operation.canonicalOperationalDescriptionBoundary ≡ true
 correctionResponseIsObservableOperation = refl
 
-------------------------------------------------------------------------
--- Self-sealing / Amalek frontier.
-------------------------------------------------------------------------
-
 selfSealingWitness : SelfSeal.SelfSealingCorrectionWitness SelfSeal.canonicalLoop
 selfSealingWitness = SelfSeal.canonicalSelfSealingWitness
 
@@ -117,10 +97,6 @@ blindSpotDisclosureNeedNotForceRevision = refl
 
 closedLoopDoesNotProveItsChartTrue : SelfSeal.ClosedLoopProvesUnderlyingChartTrue → ⊥
 closedLoopDoesNotProveItsChartTrue = SelfSeal.closedLoopDoesNotProveChartTrue
-
-------------------------------------------------------------------------
--- Climate venue/remedy/enforcement comparison.
-------------------------------------------------------------------------
 
 pabaiAppealRemainsLive :
   Climate.proceedingState Climate.pabaiFirstInstanceAndAppeal
@@ -151,17 +127,13 @@ mandamusDoesNotCreateNewDuty :
   Climate.mandamusCreatesNewSubstantiveDuty Climate.canonicalExistingDutyCompulsionBoundary ≡ false
 mandamusDoesNotCreateNewDuty = refl
 
-------------------------------------------------------------------------
--- Ailan Kastom / Timber Creek cross-regime visibility stays carefully bounded.
-------------------------------------------------------------------------
-
 relatedCulturalHarmsCanReceiveDifferentLegalTreatment :
   Climate.relatedCulturalSpiritualHarmsCanReceiveDifferentLegalTreatment
     Climate.canonicalCulturalLossRegimeBoundary ≡ true
 relatedCulturalHarmsCanReceiveDifferentLegalTreatment = refl
 
 pabaiAndTimberCreekLossNotDeclaredFactuallyIdentical :
-  Climate.p'abalAilanKastomAndTimberCreekLossAreFactuallyIdentical
+  Climate.pabaiAilanKastomAndTimberCreekLossAreFactuallyIdentical
     Climate.canonicalCulturalLossRegimeBoundary ≡ false
 pabaiAndTimberCreekLossNotDeclaredFactuallyIdentical = refl
 
@@ -169,10 +141,6 @@ legalRegimeDoesNotCreateUnderlyingHarm :
   Climate.legalRegimeDeterminesWhetherTheUnderlyingHarmExists
     Climate.canonicalCulturalLossRegimeBoundary ≡ false
 legalRegimeDoesNotCreateUnderlyingHarm = refl
-
-------------------------------------------------------------------------
--- Unified ITIR diagnostic.
-------------------------------------------------------------------------
 
 systemDiagnostic : Cross.SystemIsWhatItDoesDiagnosticBoundary
 systemDiagnostic = Cross.canonicalSystemIsWhatItDoesDiagnosticBoundary
@@ -196,10 +164,6 @@ legalSuccessAndEnforcementRemainSeparate = refl
 historicalValidityAndLegitimacyRemainSeparate :
   Cross.historicalLegalValidityEqualsLegitimacy systemDiagnostic ≡ false
 historicalValidityAndLegitimacyRemainSeparate = refl
-
-------------------------------------------------------------------------
--- Final no-collapse laws.
-------------------------------------------------------------------------
 
 data DeclaredBenevolentPurposeCancelsObservedHarm : Set where
 data InvisibleInstitutionalCategoryMeansAbsentSocialRelation : Set where
