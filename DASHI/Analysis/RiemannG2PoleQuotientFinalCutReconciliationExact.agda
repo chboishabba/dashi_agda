@@ -7,10 +7,9 @@ open import Agda.Builtin.String using (String)
 import DASHI.Analysis.RiemannAristotlePoleQuotientCurrentCutExact as Pole
 import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as R8889
 import DASHI.Analysis.RiemannG2QuarterPeriodPoleQuotientFinalCompilerExact as Final
+import DASHI.Analysis.RiemannG2PoleQuotientProducerAllowanceTargetExact as ProducerAllowance
 import DASHI.Analysis.RiemannG2PoleQuotientChannelAllowanceExact as Allowance
 import DASHI.Analysis.RiemannAristotlePoleQuotientSplitComplementBudgetExact as Split
-import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateBudgetTargetExact as Off
-import DASHI.Analysis.RiemannAristotlePoleQuotientGammaBudgetTargetExact as Gamma
 import DASHI.Analysis.RiemannAristotleG2dScalarDeterminantSumTargetExact as Det
 
 ------------------------------------------------------------------------
@@ -28,23 +27,20 @@ import DASHI.Analysis.RiemannAristotleG2dScalarDeterminantSumTargetExact as Det
 --   Gamma <= B_Gamma
 --   B_off + B_Gamma < M_cluster.
 --
--- A bare local upper-bound target is too weak to count as the analytic payment:
--- an arbitrary oversized budget can satisfy a local upper theorem and be useless
--- to the strict final window. Likewise the producer must not be allowed to
--- choose its own meaning of "sharp enough". Consumer adequacy is therefore an
--- EXTERNAL predicate supplied by the downstream final consumer, and the producer
--- must inhabit that fixed predicate.
+-- Bare local upper-bound targets are too weak: arbitrarily oversized budgets
+-- can satisfy local upper theorems while missing the final strict window.
+-- The producer-facing leaf is therefore concrete even before same-object
+-- transport: a downstream-assigned allowance lives in the producer's scalar
+-- carrier, and the analytic proof must establish
 --
--- The repo already owns a more concrete allowance pattern in the Riemann lane.
--- `RiemannG2PoleQuotientChannelAllowanceExact` lifts that pattern to the final
--- off/Gamma split:
+--   B_off <= A_off       or       B_Gamma <= A_Gamma.
 --
---   B_off <= A_off
---   B_Gamma <= A_Gamma
---   A_off + A_Gamma < M_cluster
+-- After same-object transport, the final consumer proves
 --
--- compiles to B_off + B_Gamma < M_cluster. No midpoint/division structure is
--- required on the deliberately weak ordered-additive final carrier.
+--   A_off + A_Gamma < M_cluster,
+--
+-- and the generic allowance compiler derives the strict combined budget. No
+-- subtraction/division/midpoint structure is required.
 ------------------------------------------------------------------------
 
 data FinalHighOrdinateLeaf : Set where
@@ -86,59 +82,14 @@ finalCompilerRebuildIsPruned :
 finalCompilerRebuildIsPruned = refl
 
 ------------------------------------------------------------------------
--- CONSUMER-SUFFICIENT FINAL LEAVES
---
--- `OffAdequate` / `GammaAdequate` are parameters, not fields. Thus the final
--- consumer fixes the acceptance predicate and a producer cannot make its own
--- budget vacuously adequate by choosing a permissive relation.
---
--- On the final common ordered scalar carrier the canonical concrete adequacy
--- shape is the allowance ledger above. The abstract parameters remain here only
--- because off/Gamma target records still carry independent scalar types before
--- same-object transport.
+-- Exact producer-facing final leaf types.
 ------------------------------------------------------------------------
 
-record ConsumerSufficientPoleQuotientOffProducer
-    (OffAdequate : Off.PoleQuotientOffOrdinateBudgetTarget -> Set) : Set₁ where
-  field
-    target : Off.PoleQuotientOffOrdinateBudgetTarget
+LiteralFinalSignedOffPayment : Set₁
+LiteralFinalSignedOffPayment = ProducerAllowance.PoleQuotientOffAllowancePayment
 
-    crossingCutoffFeedsThisExactOffProducer : Set
-    crossingCutoffFeedsThisExactOffProducerReceipt :
-      crossingCutoffFeedsThisExactOffProducer
-
-    sameLiteralPoleQuotientTaperAsFinalConsumer : Set
-    sameLiteralPoleQuotientTaperAsFinalConsumerReceipt :
-      sameLiteralPoleQuotientTaperAsFinalConsumer
-
-    fitsSharpClusterAccuracyWindow : OffAdequate target
-
-    producerReference : String
-
-open ConsumerSufficientPoleQuotientOffProducer public
-
-record ConsumerSufficientPoleQuotientGammaProducer
-    (GammaAdequate : Gamma.PoleQuotientGammaBudgetTarget -> Set) : Set₁ where
-  field
-    target : Gamma.PoleQuotientGammaBudgetTarget
-
-    sameLiteralPoleQuotientTaperAsFinalConsumer : Set
-    sameLiteralPoleQuotientTaperAsFinalConsumerReceipt :
-      sameLiteralPoleQuotientTaperAsFinalConsumer
-
-    fitsSharpClusterAccuracyWindow : GammaAdequate target
-
-    producerReference : String
-
-open ConsumerSufficientPoleQuotientGammaProducer public
-
-LiteralFinalSignedOffPayment :
-  (OffAdequate : Off.PoleQuotientOffOrdinateBudgetTarget -> Set) -> Set₁
-LiteralFinalSignedOffPayment = ConsumerSufficientPoleQuotientOffProducer
-
-LiteralFinalGammaPayment :
-  (GammaAdequate : Gamma.PoleQuotientGammaBudgetTarget -> Set) -> Set₁
-LiteralFinalGammaPayment = ConsumerSufficientPoleQuotientGammaProducer
+LiteralFinalGammaPayment : Set₁
+LiteralFinalGammaPayment = ProducerAllowance.PoleQuotientGammaAllowancePayment
 
 FinalCommonCarrierAllowancePayment :
   (surface : Split.OrderedAdditiveComplementSurface) -> Set₁
@@ -182,6 +133,16 @@ determinantSignedLeafStillMathematicallyOpen :
     Det.canonicalG2dScalarDeterminantSumTarget ≡ false
 determinantSignedLeafStillMathematicallyOpen = refl
 
+producerAllowanceTargetIsConcrete :
+  ProducerAllowance.ProducerAllowanceTargetBoundary.offLeafIsBudgetBelowAssignedAllowance
+    ProducerAllowance.canonicalProducerAllowanceTargetBoundary ≡ true
+producerAllowanceTargetIsConcrete = refl
+
+gammaAllowanceTargetIsConcrete :
+  ProducerAllowance.ProducerAllowanceTargetBoundary.gammaLeafIsBudgetBelowAssignedAllowance
+    ProducerAllowance.canonicalProducerAllowanceTargetBoundary ≡ true
+gammaAllowanceTargetIsConcrete = refl
+
 allowanceCompilerUsesNoHalfMarginDivision :
   Allowance.PoleQuotientChannelAllowanceBoundary.halfMarginDivisionRequired
     Allowance.canonicalPoleQuotientChannelAllowanceBoundary ≡ false
@@ -211,9 +172,13 @@ record PoleQuotientFinalCutBoundary : Set where
     bareGammaTargetInhabitanceAloneIsConsumerSufficientIsFalse :
       bareGammaTargetInhabitanceAloneIsConsumerSufficient ≡ false
 
-    producerMayChooseItsOwnSharpWindowPredicate : Bool
-    producerMayChooseItsOwnSharpWindowPredicateIsFalse :
-      producerMayChooseItsOwnSharpWindowPredicate ≡ false
+    producerMayChooseItsOwnAllowance : Bool
+    producerMayChooseItsOwnAllowanceIsFalse :
+      producerMayChooseItsOwnAllowance ≡ false
+
+    producerFacingAllowanceTargetsAreConcrete : Bool
+    producerFacingAllowanceTargetsAreConcreteIsTrue :
+      producerFacingAllowanceTargetsAreConcrete ≡ true
 
     finalCommonCarrierHasConcreteAllowanceCompiler : Bool
     finalCommonCarrierHasConcreteAllowanceCompilerIsTrue :
@@ -222,14 +187,6 @@ record PoleQuotientFinalCutBoundary : Set where
     finalAllowanceCompilerRequiresHalfMarginDivision : Bool
     finalAllowanceCompilerRequiresHalfMarginDivisionIsFalse :
       finalAllowanceCompilerRequiresHalfMarginDivision ≡ false
-
-    finalOffLeafCarriesConsumerDefinedAdequacyReceipt : Bool
-    finalOffLeafCarriesConsumerDefinedAdequacyReceiptIsTrue :
-      finalOffLeafCarriesConsumerDefinedAdequacyReceipt ≡ true
-
-    finalGammaLeafCarriesConsumerDefinedAdequacyReceipt : Bool
-    finalGammaLeafCarriesConsumerDefinedAdequacyReceiptIsTrue :
-      finalGammaLeafCarriesConsumerDefinedAdequacyReceipt ≡ true
 
     literalUniversalPoleQuotientSignedOffIsForwardLeaf : Bool
     literalUniversalPoleQuotientSignedOffIsForwardLeafIsTrue :
@@ -265,13 +222,12 @@ canonicalPoleQuotientFinalCutBoundary =
     false refl
     false refl
     true refl
+    true refl
     false refl
     true refl
     true refl
-    true refl
-    true refl
     false refl
     false refl
     false refl
     false refl
-    "Treat the repository as closed-world for infrastructure, but preserve exact carrier ownership and consumer strength. The determinant q lane is diagnostic/scalarization and is not definitionally the final universal pole-quotient taper. Bare off/Gamma target inhabitance is insufficient because an arbitrary oversized budget need not fit the strict final window, and a producer may not define its own notion of adequacy. On the final common carrier, adequacy is now concrete: the consumer assigns off/Gamma allowances, each actual producer budget must lie below its assigned allowance, and the allowance sum must lie strictly below the quantitative cluster margin. The generic ordered-additive compiler then yields the strict combined budget without division or midpoint structure. The two live analytic leaves remain the literal universal-pole-quotient signed off estimate and same-taper Gamma precision; cluster mathematics and final contradiction algebra are already owned. RH is not derived."
+    "Treat the repository as closed-world for infrastructure, but preserve exact carrier ownership and consumer strength. The determinant q lane is diagnostic/scalarization and is not definitionally the final universal pole-quotient taper. Bare off/Gamma target inhabitance is insufficient. The producer-facing leaves now carry downstream-assigned allowances in their own scalar carriers and must prove B_off <= A_off or B_Gamma <= A_Gamma. After same-object transport, the final consumer proves A_off + A_Gamma < M_cluster; the ordered-additive allowance compiler yields the strict combined budget without division or midpoint structure, and the allowance-aware same-object assembly feeds the existing contradiction compiler. The two live analytic leaves remain the literal universal-pole-quotient signed off estimate and same-taper Gamma precision. Cluster mathematics is already owned; RH is not derived."
