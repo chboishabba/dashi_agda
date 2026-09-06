@@ -10,6 +10,7 @@ import DASHI.Analysis.RiemannExplicitFormula as Explicit
 import DASHI.Analysis.RiemannAristotleExplicitCutoffCarrierLeanReturnExact as Cutoff
 import DASHI.Analysis.RiemannAristotlePoleNearExplicitFormulaBridgeExact as Window
 import DASHI.Analysis.RiemannAristotlePoleQuotientFiniteNearEvaluationBidiExact as Eval
+import DASHI.Analysis.RiemannAristotlePoleQuotientDirectFiniteNearAttackExact as Direct
 import DASHI.Analysis.RiemannG2FkOrbitConsumerAttachmentExact as Orbit
 import DASHI.Analysis.RiemannG2SelectedPoleNearSingleProducerBidiExact as Selected
 
@@ -17,16 +18,71 @@ import DASHI.Analysis.RiemannG2SelectedPoleNearSingleProducerBidiExact as Select
 -- SELECTED TARGET WINDOW -> FINITE SIGNED EVALUATION, SAME OBJECT
 --
 -- The checked cutoff return already owns the finite near carrier, explicit far
--- shell, far decay and literal D_off cutoff transport.  The genuinely unpaid
+-- shell, far decay and literal D_off cutoff transport. The genuinely unpaid
 -- analytic coordinate is the signed target-centred finite-near evaluation.
 --
--- Eval.FiniteNearProducer is intentionally scalar-generic.  Therefore merely
+-- Eval.FiniteNearProducer is intentionally scalar-generic. Therefore merely
 -- possessing one does not show it evaluates the finitePoleNearSigned coordinate
--- of THIS selected PoleNearTargetWindow.  This owner makes that identity exact.
+-- of THIS selected PoleNearTargetWindow. This owner makes that identity exact.
+--
+-- BIDI UPDATE: DirectFinitePoleNearProducer already contains an actual signed
+-- value, approximant, error, Within relation and receipt. It therefore compiles
+-- directly to the canonical SignedFiniteNearEvaluationSurface below. No second
+-- evaluation surface is required for the direct route. Same-selected-window
+-- identity and budget transport remain separate downstream payments.
 ------------------------------------------------------------------------
 
 subst : ∀ {A : Set} (P : A → Set) {x y : A} → x ≡ y → P x → P y
 subst P refl px = px
+
+------------------------------------------------------------------------
+-- DIRECT PRODUCER -> CANONICAL EVALUATION SURFACE
+------------------------------------------------------------------------
+
+directToSignedFiniteNearEvaluationSurface :
+  Direct.DirectFinitePoleNearProducer → Eval.SignedFiniteNearEvaluationSurface
+directToSignedFiniteNearEvaluationSurface d =
+  Eval.signed-finite-near-evaluation-surface
+    (Direct.DirectFinitePoleNearProducer.Scalar d)
+    (Direct.DirectFinitePoleNearProducer.Scalar d)
+    (Direct.DirectFinitePoleNearProducer.finiteSignedNearValue d)
+    (Direct.DirectFinitePoleNearProducer.approximant d)
+    (Direct.DirectFinitePoleNearProducer.error d)
+    (Direct.DirectFinitePoleNearProducer.Within d)
+    (Direct.DirectFinitePoleNearProducer.evaluationReceipt d)
+    "compiled from DirectFinitePoleNearProducer; same signed value/approximant/error receipt"
+
+record SelectedDirectEvaluationAttachment
+    (space : Weil.WeilTestSpace)
+    (formula : Explicit.RiemannExplicitFormula space)
+    (orbit : Orbit.SourceFkOrbit)
+    (selected : Selected.ActualSelectedPoleNearProducer space formula orbit)
+    (direct : Direct.DirectFinitePoleNearProducer) : Set₁ where
+  private
+    evaluation = directToSignedFiniteNearEvaluationSurface direct
+
+  field
+    scalarCarrierIdentity :
+      Eval.SignedFiniteNearEvaluationSurface.Scalar evaluation
+      ≡ Weil.WeilTestSpace.Scalar space
+
+    signedNearValueIsSelectedWindowFiniteNear :
+      subst (λ X → X) scalarCarrierIdentity
+        (Eval.SignedFiniteNearEvaluationSurface.signedNearValue evaluation)
+      ≡
+      Window.PoleNearTargetWindow.finitePoleNearSigned
+        (Selected.ActualSelectedPoleNearProducer.targetWindow selected)
+
+    sameTargetRelativeGapCarrier : Set
+    sameNearIndexCarrier : Set
+    sameMultiplicityCarrier : Set
+    directAttachmentReference : String
+
+open SelectedDirectEvaluationAttachment public
+
+------------------------------------------------------------------------
+-- Existing generic finite-producer same-object attachment.
+------------------------------------------------------------------------
 
 record SelectedFiniteNearEvaluationAttachment
     (space : Weil.WeilTestSpace)
@@ -38,15 +94,10 @@ record SelectedFiniteNearEvaluationAttachment
     evaluation = Eval.FiniteNearProducer.evaluation finite
 
   field
-    -- The evaluator's scalar language is literally the canonical scalar
-    -- language of the selected Weil/explicit-formula object.
     scalarCarrierIdentity :
       Eval.SignedFiniteNearEvaluationSurface.Scalar evaluation
       ≡ Weil.WeilTestSpace.Scalar space
 
-    -- After transporting along that carrier identity, the value evaluated by
-    -- the finite producer is exactly the finite-near coordinate of the SAME
-    -- selected PoleNearTargetWindow.
     signedNearValueIsSelectedWindowFiniteNear :
       subst (λ X → X) scalarCarrierIdentity
         (Eval.SignedFiniteNearEvaluationSurface.signedNearValue evaluation)
@@ -60,14 +111,6 @@ open SelectedFiniteNearEvaluationAttachment public
 
 ------------------------------------------------------------------------
 -- BUDGET TRANSPORT: GENERIC EVALUATOR BUDGET -> SELECTED WEIL SCALAR
---
--- EvaluationProducesBudget is deliberately consumer-generic: its Budget carrier
--- need not be the same type as the selected Weil scalar.  The only additional
--- representation payment needed after a same-object finite evaluation is a
--- consumer transport from that abstract Budget into the selected scalar plus a
--- proof that the evaluator's existing ProducesRequiredUpper receipt becomes the
--- selected finite-near upper relation.  Once this transport exists, extracting
--- the selected near budget is compiler output rather than fresh analysis.
 ------------------------------------------------------------------------
 
 record SelectedFiniteNearBudgetTransport
@@ -175,8 +218,10 @@ data SelectedFiniteNearPayment : Set where
   reproveFarShellDecay
   reproveArbitraryAccuracyCutoff
   reproveDoffCutoffTransport
-  recoverSignedFiniteNearProducer
-  weldEvaluationToSelectedWindowFiniteNear
+  constructSecondEvaluationSurfaceForDirectRoute
+  recoverDirectFinitePoleNearProducer
+  attachDirectEvaluationToSelectedWindow
+  recoverGenericFiniteNearProducerBudget
   recoverBudgetTransportToSelectedScalar
   extractNearBudget
   : SelectedFiniteNearPayment
@@ -189,9 +234,11 @@ paymentStatus rebuildFiniteNearCarrier = pruned
 paymentStatus reproveFarShellDecay = pruned
 paymentStatus reproveArbitraryAccuracyCutoff = pruned
 paymentStatus reproveDoffCutoffTransport = pruned
-paymentStatus recoverSignedFiniteNearProducer = live
-paymentStatus weldEvaluationToSelectedWindowFiniteNear = live
-paymentStatus recoverBudgetTransportToSelectedScalar = live
+paymentStatus constructSecondEvaluationSurfaceForDirectRoute = pruned
+paymentStatus recoverDirectFinitePoleNearProducer = live
+paymentStatus attachDirectEvaluationToSelectedWindow = downstream
+paymentStatus recoverGenericFiniteNearProducerBudget = downstream
+paymentStatus recoverBudgetTransportToSelectedScalar = downstream
 paymentStatus extractNearBudget = downstream
 
 finiteCarrierRebuildPruned : paymentStatus rebuildFiniteNearCarrier ≡ pruned
@@ -202,6 +249,10 @@ farShellReproofPruned = refl
 
 cutoffReproofPruned : paymentStatus reproveArbitraryAccuracyCutoff ≡ pruned
 cutoffReproofPruned = refl
+
+secondDirectEvaluationSurfacePruned :
+  paymentStatus constructSecondEvaluationSurfaceForDirectRoute ≡ pruned
+secondDirectEvaluationSurfacePruned = refl
 
 nearBudgetExtractionIsCompilerOutput :
   paymentStatus extractNearBudget ≡ downstream
@@ -218,17 +269,25 @@ record SelectedFiniteNearSameObjectBoundary : Set where
     farShellFreshMathematicsRequiredIsFalse :
       farShellFreshMathematicsRequired ≡ false
 
-    finiteSignedEvaluationFreshMathematicsRequired : Bool
-    finiteSignedEvaluationFreshMathematicsRequiredIsTrue :
-      finiteSignedEvaluationFreshMathematicsRequired ≡ true
+    directProducerCompilesToCanonicalEvaluationSurface : Bool
+    directProducerCompilesToCanonicalEvaluationSurfaceIsTrue :
+      directProducerCompilesToCanonicalEvaluationSurface ≡ true
 
-    arbitraryFiniteNearEvaluationIsConsumerSufficient : Bool
-    arbitraryFiniteNearEvaluationIsConsumerSufficientIsFalse :
-      arbitraryFiniteNearEvaluationIsConsumerSufficient ≡ false
+    secondDirectEvaluationSurfaceRequired : Bool
+    secondDirectEvaluationSurfaceRequiredIsFalse :
+      secondDirectEvaluationSurfaceRequired ≡ false
+
+    directFiniteProducerFreshMathematicsRequired : Bool
+    directFiniteProducerFreshMathematicsRequiredIsTrue :
+      directFiniteProducerFreshMathematicsRequired ≡ true
 
     evaluatorMustUseSelectedWindowFiniteNear : Bool
     evaluatorMustUseSelectedWindowFiniteNearIsTrue :
       evaluatorMustUseSelectedWindowFiniteNear ≡ true
+
+    selectedDirectAttachmentClosedHere : Bool
+    selectedDirectAttachmentClosedHereIsFalse :
+      selectedDirectAttachmentClosedHere ≡ false
 
     genericEvaluatorBudgetAlreadyLivesInSelectedScalar : Bool
     genericEvaluatorBudgetAlreadyLivesInSelectedScalarIsFalse :
@@ -252,7 +311,9 @@ canonicalSelectedFiniteNearSameObjectBoundary =
     true refl
     false refl
     true refl
+    true refl
     false refl
     false refl
     false refl
-    "The checked 8883 cutoff return already owns the finite near carrier, explicit far-shell modulus/decay, arbitrary-accuracy cutoff and literal D_off cutoff transport. Do not reprove them. The live zero-side analytic payment is an actual phase-preserving FiniteNearProducer whose evaluation scalar carrier is identified with the selected Weil scalar and whose signedNearValue transports to exactly finitePoleNearSigned of the SAME selected PoleNearTargetWindow. EvaluationProducesBudget is already owned by that producer; after supplying the consumer-relative Budget -> selected-Scalar transport and proving its ProducesRequiredUpper receipt becomes the selected upper relation, the selected near budget and upper receipt are compiler output. RH remains open."
+    false refl
+    "The checked cutoff return owns the finite near carrier and far shell. An actual DirectFinitePoleNearProducer now compiles mechanically to the canonical SignedFiniteNearEvaluationSurface, so do not construct a second evaluation interface. The live analytic payment is recovering that direct producer itself. After it exists, identify its scalar/signedNearValue with finitePoleNearSigned of the SAME ActualSelectedPoleNearProducer; then transport or construct the consumer budget on that same object. The selected attachment and budget remain open; RH is not derived."
