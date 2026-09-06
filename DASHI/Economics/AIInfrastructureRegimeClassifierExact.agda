@@ -1,0 +1,84 @@
+module DASHI.Economics.AIInfrastructureRegimeClassifierExact where
+
+open import DASHI.Core.Prelude
+import DASHI.Economics.AIFinancingReflexivityExact as Reflexive
+import DASHI.Economics.AITerminalPayerEconomicValidationExact as Terminal
+import DASHI.Economics.AIManufacturingChokepointTimescaleExact as Manufacturing
+import DASHI.Economics.AIStructuredInfrastructureCommonFactorRiskExact as Structured
+import DASHI.Economics.UnitEconomicsMarginExact as Unit
+import DASHI.Economics.PolicyBackstopCommercialDisciplineExact as Policy
+
+------------------------------------------------------------------------
+-- MULTI-AXIS AI INFRASTRUCTURE REGIME CLASSIFIER
+--
+-- Deliberately not a linear enum and deliberately not `Bubble : Bool`.
+-- The axes are logically independent receipts.  A concrete current-regime
+-- classification must provide source-backed inhabitants for each promoted axis.
+------------------------------------------------------------------------
+
+record AIInfrastructureRegimeVector : Set₁ where
+  field
+    ExternalCashValidation CircularityIntensity ValuationReflexivity
+      LeverageIntensity MarginPressure ManufacturingScarcity PolicyBackstop : Set
+
+    externalCashValidation : ExternalCashValidation
+    circularityIntensity   : CircularityIntensity
+    valuationReflexivity   : ValuationReflexivity
+    leverageIntensity      : LeverageIntensity
+    marginPressure         : MarginPressure
+    manufacturingScarcity  : ManufacturingScarcity
+    policyBackstop         : PolicyBackstop
+
+open AIInfrastructureRegimeVector public
+
+record TechnologicalSuccessSignals : Set₁ where
+  field
+    CapabilityGrowth UsageGrowth EfficiencyGrowth PhysicalDeployment : Set
+    capabilityGrowth : CapabilityGrowth
+    usageGrowth      : UsageGrowth
+    efficiencyGrowth : EfficiencyGrowth
+    physicalDeployment : PhysicalDeployment
+
+open TechnologicalSuccessSignals public
+
+data TechnologicalSuccessImpliesFinancialViabilityPermission : Set where
+
+data RegimeVectorImpliesBubblePermission : Set where
+
+technologicalSuccessDoesNotAutoPromoteToFinancialViability :
+  TechnologicalSuccessImpliesFinancialViabilityPermission → ⊥
+technologicalSuccessDoesNotAutoPromoteToFinancialViability ()
+
+regimeVectorDoesNotAutoPromoteToBubble :
+  RegimeVectorImpliesBubblePermission → ⊥
+regimeVectorDoesNotAutoPromoteToBubble ()
+
+-- Cross-owner firewalls kept at the aggregate surface.
+markedGainDoesNotCloseExternalCash :
+  Reflexive.Econ.MarkedGainImpliesExternalCashPermission → ⊥
+markedGainDoesNotCloseExternalCash = Reflexive.markedGainDoesNotCloseExternalCash
+
+highUsageDoesNotClosePositiveUnitEconomics :
+  Unit.HighUsageImpliesPositiveUnitEconomicsPermission → ⊥
+highUsageDoesNotClosePositiveUnitEconomics =
+  Unit.highUsageDoesNotAutoPromoteToPositiveUnitEconomics
+
+scarcityDoesNotCloseDownstreamViability :
+  Manufacturing.Scarcity.ScarcityRentImpliesDownstreamViabilityPermission → ⊥
+scarcityDoesNotCloseDownstreamViability =
+  Manufacturing.scarcityRentDoesNotCloseDownstreamViability
+
+projectMultiplicityDoesNotCloseRiskIndependence :
+  Structured.Structured.ProjectMultiplicityImpliesRiskIndependencePermission → ⊥
+projectMultiplicityDoesNotCloseRiskIndependence =
+  Structured.projectMultiplicityDoesNotCloseRiskIndependence
+
+policySupportDoesNotCloseCommercialViability :
+  Policy.PolicySupportImpliesCommercialViabilityPermission → ⊥
+policySupportDoesNotCloseCommercialViability =
+  Policy.policySupportDoesNotAutoPromoteToCommercialViability
+
+surroundingSignalsDoNotCloseEconomicValidation :
+  Terminal.SurroundingSignalsImplyEconomicValidationPermission → ⊥
+surroundingSignalsDoNotCloseEconomicValidation =
+  Terminal.surroundingSignalsDoNotAutoPromoteToEconomicValidation
