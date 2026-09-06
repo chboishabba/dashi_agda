@@ -4,3 +4,4 @@ import DASHI.Biology.Agriculture.HungriaBiologicalNitrogenFixationSourceAtlas
 import DASHI.Biology.Agriculture.HungriaSoybeanBNFExact
 import DASHI.Biology.Agriculture.HungriaEconomicEmissionModel2023Exact
 import DASHI.Biology.Agriculture.NitrogenaseChemistryCrossPollinationExact
+import DASHI.Biology.Agriculture.Hungria2024HeadlineLineageWeldExact
