@@ -26,6 +26,22 @@ import DASHI.Cognition.PNF.SensibLawAdjudicativeTemporalNonRetroactivityExact as
 import DASHI.Cognition.PNF.SensibLawLegalOutcomeIdentifiabilityBidiExact as Outcome
 import DASHI.Cognition.PNF.SensibLawMaboPrimaryTextParserBatchMaterialisedExact as MaboBatch
 import DASHI.Cognition.PNF.SensibLawMaboBrennanDawsonIssueResidualLiveExact as Mabo
+import DASHI.Cognition.PNF.SensibLawDutyHegemonyRelationalCrossPollinationEverything as Thread
+import DASHI.Cognition.PNF.SensibLawDoctrinalGateInterventionDistributionExact as ThreadGate
+import DASHI.Cognition.PNF.SensibLawClimateDutyRouteSearchExact as ThreadClimate
+import DASHI.Cognition.PNF.SensibLawReopenableRelationalAuthorityExact as ThreadRel
+import DASHI.Cognition.PNF.SensibLawHaudenosauneeConsensusDeliberationReceiptExact as ThreadHaud
+import DASHI.Cognition.PNF.SensibLawCorporateConstraintAndEvidenceProvenanceExact as ThreadCorp
+import DASHI.Cognition.PNF.SensibLawMaboRecognitionCreationFootholdExact as Foothold
+import DASHI.Cognition.PNF.SensibLawAuthorityTransformationMinimalCutExact as Cut
+import DASHI.Cognition.PNF.SensibLawInternationalObligationDomesticRemedyTranslationExact as Intl
+import DASHI.Cognition.PNF.SensibLawRecognitionObligationRemedyLayerCrossPollinationExact as Layers
+import DASHI.Cognition.PNF.SensibLawMaboKirbyAttributionCorrectionExact as Attribution
+import DASHI.Cognition.PNF.SensibLawUniversalLegalAlgebraEverything as Universal
+import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact as Negligence
+import DASHI.Cognition.PNF.SensibLawPrecedentApplicabilityDistinguishingExact as Precedent
+import DASHI.Cognition.PNF.SensibLawStatutoryRuleStructureAlgebraExact as Statute
+import DASHI.Cognition.PNF.SensibLawAuthorityTransformationUniversalCutBridgeExact as CutBridge
 
 ------------------------------------------------------------------------
 -- EXISTING SELECTIVE COMPILER PATH.
@@ -146,6 +162,91 @@ maboParserDoesNotCreateHolding = Mabo.parserCandidateDoesNotCreateHolding
 maboFiveParagraphBatchDoesNotClaimGeneralCoverage :
   MaboBatch.FiveParagraphBatchIsGeneralParserCoverage → ⊥
 maboFiveParagraphBatchDoesNotClaimGeneralCoverage = MaboBatch.fiveParagraphBatchDoesNotClaimGeneralCoverage
+
+------------------------------------------------------------------------
+-- BIDI CONSUMPTION OF THE THREAD TRANCHE.
+------------------------------------------------------------------------
+
+canonicalCompilerRetainsNoDutyNoInterventionFirewall :
+  ThreadGate.NoDutyMeansNoIntervention → ⊥
+canonicalCompilerRetainsNoDutyNoInterventionFirewall =
+  Thread.noDutyDoesNotMeanNoIntervention
+
+canonicalCompilerRetainsClimateReopenability :
+  ThreadClimate.PabaiNoDutyClosesEveryPossibleClimateDuty → ⊥
+canonicalCompilerRetainsClimateReopenability =
+  Thread.pabaiNoDutyDoesNotCloseAllClimateReformulations
+
+canonicalCompilerConsumesConcreteConsensusFixture :
+  ThreadRel.empiricalInstantiation ThreadHaud.haudenosauneeProcedure ≡ true
+canonicalCompilerConsumesConcreteConsensusFixture = refl
+
+canonicalCompilerRetainsCorporateEvidenceTyping :
+  ThreadCorp.PartyDenialIsIndependentContraryEvidence → ⊥
+canonicalCompilerRetainsCorporateEvidenceTyping =
+  Thread.partyDenialIsNotIndependentEvidence
+
+canonicalCompilerRecognisesMaboFoothold :
+  Foothold.newLegislativeRightRequiredForRecognition Foothold.canonicalMaboFoothold ≡ false
+canonicalCompilerRecognisesMaboFoothold = refl
+
+canonicalCompilerPinsMaboPositiveCalibration :
+  Cut.reachableUnderCurrentAuthorities Cut.maboPositiveCalibration ≡ true
+canonicalCompilerPinsMaboPositiveCalibration = refl
+
+canonicalCompilerPinsPabaiNegativeCalibration :
+  Cut.reachableUnderCurrentAuthorities Cut.pabaiNegativeCalibration ≡ false
+canonicalCompilerPinsPabaiNegativeCalibration = refl
+
+canonicalCompilerRetainsInternationalDomesticTranslationGate :
+  Intl.InternationalObligationAutomaticallyCreatesDomesticCauseOfAction → ⊥
+canonicalCompilerRetainsInternationalDomesticTranslationGate =
+  Intl.internationalObligationDoesNotAutoCreateDomesticAction
+
+canonicalCompilerRetainsRecognitionRemedyNonDescent :
+  Layers.LegalObligationAutomaticallyCreatesAvailableRemedy → ⊥
+canonicalCompilerRetainsRecognitionRemedyNonDescent =
+  Layers.obligationDoesNotAutoCreateRemedy
+
+canonicalCompilerCorrectsMaboKirbyAttribution :
+  Attribution.LaterCommentaryIsOriginalJudgmentAuthorship → ⊥
+canonicalCompilerCorrectsMaboKirbyAttribution =
+  Attribution.laterKirbyCommentaryDoesNotRewriteAuthorship
+
+------------------------------------------------------------------------
+-- DIRECT UNIVERSAL LEGAL ALGEBRA CONSUMPTION.
+------------------------------------------------------------------------
+
+canonicalCompilerUsesUniversalNegligenceWrongType :
+  Negligence.ClimateDutySpecialisation.wrongType
+    Negligence.australiaPhysicalInjuryDutySpecialisation
+  ≡ Negligence.negligenceWrongType
+canonicalCompilerUsesUniversalNegligenceWrongType = refl
+
+canonicalCompilerClimateQueryTargetsDutyElement :
+  Negligence.ClimateDutySpecialisation.targetElement
+    Negligence.australiaPhysicalInjuryDutySpecialisation
+  ≡ Negligence.dutyElement
+canonicalCompilerClimateQueryTargetsDutyElement = refl
+
+canonicalCompilerKeepsIssueProjectionInsideUniversalGraph :
+  Universal.IssueSpecificPipelineIsSeparateLegalSystem → ⊥
+canonicalCompilerKeepsIssueProjectionInsideUniversalGraph =
+  Universal.issueProjectionIsNotSeparateSystem
+
+canonicalCompilerRequiresProofForPrecedentApplication :
+  Precedent.SimilarFactsAutomaticallyApplyPrecedent → ⊥
+canonicalCompilerRequiresProofForPrecedentApplication =
+  Precedent.similarityDoesNotProveApplication
+
+canonicalCompilerKeepsStatutoryDefinitionsScoped :
+  Statute.DefinitionIsGlobalDictionaryMeaning → ⊥
+canonicalCompilerKeepsStatutoryDefinitionsScoped = Statute.definitionIsScoped
+
+canonicalCompilerDoesNotCallLegacyCutComputed :
+  CutBridge.LegacyMinimalCutResultIsComputedCut → ⊥
+canonicalCompilerDoesNotCallLegacyCutComputed =
+  CutBridge.legacyCalibrationIsNotComputedCut
 
 ------------------------------------------------------------------------
 -- Aggregate import is not a kernel receipt.
