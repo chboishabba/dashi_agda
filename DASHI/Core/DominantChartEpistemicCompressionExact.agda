@@ -8,7 +8,7 @@ module DASHI.Core.DominantChartEpistemicCompressionExact where
 --   What distinctions does a proposed observer make impossible to see for the
 --   consumer that actually needs them?
 --
--- This owner is deliberately not a master political ontology.  Juridical,
+-- This owner is deliberately not a master political ontology. Juridical,
 -- economic, administrative, psychologising, representational, intersectional,
 -- commodity-form and terminalising compressions are separately typed families.
 -- A shared non-factorability shape does not make their histories, semantics or
@@ -123,10 +123,10 @@ open ResidualRepair public
 residualRepairStrictlyRefines :
   ∀ {Situated Surface Residual : Set}
     {observe : Situated → Surface} →
-  ResidualRepair observe →
+  (repair : ResidualRepair {Residual = Residual} observe) →
   Observer.StrictRefinement
     observe
-    (Observer.pairObserver observe (ResidualRepair.residual _))
+    (Observer.pairObserver observe (residual repair))
 residualRepairStrictlyRefines {observe = observe} repair =
   Observer.strictPairRefinement
     observe
@@ -137,7 +137,7 @@ residualRepairStrictlyRefines {observe = observe} repair =
     (residualSeparates repair)
 
 ------------------------------------------------------------------------
--- Category adequacy is not ontology.  This directly reuses the generic audit.
+-- Category adequacy is not ontology. This directly reuses the generic audit.
 ------------------------------------------------------------------------
 
 categoryAuthorityBoundary : CategoryAudit.CategoryAuthorityBoundary
