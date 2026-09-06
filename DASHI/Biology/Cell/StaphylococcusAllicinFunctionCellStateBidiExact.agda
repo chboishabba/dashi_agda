@@ -12,11 +12,6 @@ import DASHI.Biology.Cell.StaphylococcusAllicinRedoxRecoveryBidiExact as RedoxRe
 
 ------------------------------------------------------------------------
 -- S. AUREUS ALLICIN: PROTEIN FUNCTION <-> CELL-STATE BIDI
---
--- The earlier thiolome owner establishes modification targets; this layer does
--- not promote those modifications directly to inhibition.  It routes them into
--- the pre-existing ProteinFunctionProjection and CellStateAttractor seams and
--- names the measurements needed to establish each downstream arrow.
 ------------------------------------------------------------------------
 
 data TargetLane : Set where
@@ -54,86 +49,63 @@ open ProteinToCellStateReceipt public
 
 efTuFunctionCandidate : ProteinToCellStateReceipt
 efTuFunctionCandidate = proteinToCellStateReceipt
-  "EF-Tu"
-  translationLane
+  "EF-Tu" translationLane
   "S-thioallylation observed under allicin stress"
   "possible translation perturbation; modification alone does not establish loss of elongation function"
-  "proteome/translation state"
-  modificationObserved
-  "Loi et al. 2019 PMID 31121222"
-  false false
+  "proteome/translation state" modificationObserved
+  "Loi et al. 2019 PMID 31121222" false false
   "requires direct activity/translation readout under the complete preparation"
 
 guaBFunctionCandidate : ProteinToCellStateReceipt
 guaBFunctionCandidate = proteinToCellStateReceipt
-  "GuaB"
-  nucleotideMetabolismLane
+  "GuaB" nucleotideMetabolismLane
   "S-thioallylation observed under allicin stress"
   "possible IMP-dehydrogenase/nucleotide-metabolism perturbation"
-  "metabolic state"
-  modificationObserved
-  "Loi et al. 2019 PMID 31121222"
-  false false
+  "metabolic state" modificationObserved
+  "Loi et al. 2019 PMID 31121222" false false
   "requires target activity or metabolite-flux receipt"
 
 mgrAFunctionCandidate : ProteinToCellStateReceipt
 mgrAFunctionCandidate = proteinToCellStateReceipt
-  "MgrA"
-  globalRegulationLane
+  "MgrA" globalRegulationLane
   "S-thioallylation observed under allicin stress"
   "possible redox-sensitive regulatory-state change"
-  "RNA/regulatory state"
-  modificationObserved
-  "Loi et al. 2019 PMID 31121222"
-  false false
+  "RNA/regulatory state" modificationObserved
+  "Loi et al. 2019 PMID 31121222" false false
   "regulator modification is not a transcriptome or phenotype theorem"
 
 sarAFunctionCandidate : ProteinToCellStateReceipt
 sarAFunctionCandidate = proteinToCellStateReceipt
-  "SarA"
-  virulenceBiofilmRegulationLane
+  "SarA" virulenceBiofilmRegulationLane
   "S-thioallylation observed under allicin stress"
   "candidate change in SarA-dependent regulatory output relevant to biofilm/virulence context"
-  "RNA/regulatory and downstream biofilm state"
-  modificationObserved
-  "Loi et al. 2019 PMID 31121222"
-  false false
+  "RNA/regulatory and downstream biofilm state" modificationObserved
+  "Loi et al. 2019 PMID 31121222" false false
   "does not establish quorum sensing or anti-biofilm mediation"
 
 bshRecoveryCandidate : ProteinToCellStateReceipt
 bshRecoveryCandidate = proteinToCellStateReceipt
-  "BSH/BrxAB/YpdA/MerA network"
-  thiolHomeostasisLane
+  "BSH/BrxAB/YpdA/MerA network" thiolHomeostasisLane
   "allicin-linked thiol/disulfide stress and recovery machinery"
   "reversal/buffering of thiol modification stress"
-  "metabolic/redox recovery state"
-  functionalEffectDirectlyMeasured
-  "Loi et al. 2019 PMID 31121222"
-  false false
+  "metabolic/redox recovery state" functionalEffectDirectlyMeasured
+  "Loi et al. 2019 PMID 31121222" false false
   "pure-allicin recovery evidence does not establish complete-preparation recovery kinetics"
-
-------------------------------------------------------------------------
--- Cross-owner weld obligations.
-------------------------------------------------------------------------
 
 record FunctionCellStateWeld : Set₁ where
   field
     proteinFunctionSystem : ProteinFunction.ProteinFunctionSystem
     modificationFunctionBridge :
       ProteinFunction.ModificationFunctionBridge proteinFunctionSystem
-
     coupledCellState : CellState.CoupledCellState
     stressCellStateBridge : CellState.StressResponseCellStateBridge coupledCellState
-
     targetReceipt : ProteinToCellStateReceipt
-
     sameProteinTargetAsThiolome : Set
     modificationIdentityWeld : Set
     functionalEffectAssayWeld : Set
     proteomeOrRNAStateWeld : Set
     recoveryStateWeld : Set
     phenotypeMediationWeld : Set
-
     sameProteinWitness : sameProteinTargetAsThiolome
     modificationWitness : modificationIdentityWeld
     functionWitness : functionalEffectAssayWeld
@@ -147,19 +119,15 @@ record FunctionCellStateBoundary : Set where
     modifiedTargetEqualsInhibitedTarget : Bool
     modifiedTargetEqualsInhibitedTargetIsFalse :
       modifiedTargetEqualsInhibitedTarget ≡ false
-
     alteredRegulatorEqualsAlteredWholeTranscriptome : Bool
     alteredRegulatorEqualsAlteredWholeTranscriptomeIsFalse :
       alteredRegulatorEqualsAlteredWholeTranscriptome ≡ false
-
     alteredCellStateEqualsBiofilmCausation : Bool
     alteredCellStateEqualsBiofilmCausationIsFalse :
       alteredCellStateEqualsBiofilmCausation ≡ false
-
     recoveryNetworkCanFeedExistingCellRecoveryOwner : Bool
     recoveryNetworkCanFeedExistingCellRecoveryOwnerIsTrue :
       recoveryNetworkCanFeedExistingCellRecoveryOwner ≡ true
-
     matchedFunctionAndStateAssaysCanRefineMechanism : Bool
     matchedFunctionAndStateAssaysCanRefineMechanismIsTrue :
       matchedFunctionAndStateAssaysCanRefineMechanism ≡ true
@@ -168,9 +136,9 @@ canonicalFunctionCellStateBoundary : FunctionCellStateBoundary
 canonicalFunctionCellStateBoundary = functionCellStateBoundary
   false refl false refl false refl true refl true refl
 
--- Explicit reuse of the already-added recovery boundaries.
-existingChemicalStressBoundary : Recovery.ChemicalStressRecoveryBoundary → Recovery.ChemicalStressRecoveryBoundary
+existingChemicalStressBoundary :
+  Recovery.ChemicalStressRecoveryBoundary → Recovery.ChemicalStressRecoveryBoundary
 existingChemicalStressBoundary x = x
 
-existingAllicinRecoveryBoundary : RedoxRecovery.StaphylococcusAllicinRecoveryBoundary
-existingAllicinRecoveryBoundary = RedoxRecovery.canonicalStaphylococcusAllicinRecoveryBoundary
+existingAllicinRecoveryBoundary : RedoxRecovery.RedoxRecoveryInterpretationBoundary
+existingAllicinRecoveryBoundary = RedoxRecovery.canonicalRedoxRecoveryInterpretationBoundary
