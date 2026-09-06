@@ -13,16 +13,20 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119RecoveredShortestSourceCut
 --   PeriodicBlock n = periodicTorus4Definition (suc n),
 --   PeriodicBondField n = BondField (suc n).
 --
--- Physical side 13 therefore uses historical n=12.  R192/R193/R216 now encode
+-- Physical side 13 therefore uses historical n=12.  R192/R193/R216 encode
 -- this explicitly.  The Path13 realization is counted as pruned only together
 -- with that repair; the superseded n=13 specialization must not be revived.
 --
 -- The two surviving source receipts remain:
 --   1. construct the selected variational/physical background directly on the
 --      literal Path13 background carrier;
---   2. weld the bond-indexed Path13 perturbation field to the local SU(2) Lie
---      values used by the Eq.(119) R0 recursion, including signed orientation,
---      scalar transport and a genuine global/local carrier distinction.
+--   2. instantiate the now-generic two-carrier Eq.(119) family on the actual
+--      Path13 global perturbation field and the local SU(2) Lie carrier.
+--
+-- Inside (2), positive projection, signed orientation, canonical local scalar
+-- action, the two-carrier selected-bond formula, and generic coarse-bond field
+-- assembly are all constructed.  The surviving perturbation payment is now a
+-- same-object Path13 source-family inhabitant, not missing algebra.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -34,6 +38,7 @@ import DASHI.Physics.YangMills.BalabanCMP98Equation120RecoveredSourceFrontierRou
 import DASHI.Physics.YangMills.BalabanCMP98Path13PhysicalPeriodicRealizationRound192Exact as R192
 import DASHI.Physics.YangMills.BalabanPath13SelectedPhysicalBackgroundTargetExact as Path13Target
 import DASHI.Physics.YangMills.BalabanCMP98Path13PerturbationCarrierWeldExact as PerturbationTarget
+import DASHI.Physics.YangMills.BalabanCMP98Equation119TwoCarrierSelectedBondExact as TwoCarrier
 
 Path13SelectedPhysicalBackgroundProducer : Set → Set → Set₁
 Path13SelectedPhysicalBackgroundProducer =
@@ -54,6 +59,10 @@ record RecoveredEq119ShortestSourceStatus : Set where
     path13PeriodicRealizationPruned : Bool
 
     path13PositiveBondPerturbationProjectionClosed : Bool
+    path13RationalSignedBondPerturbationProjectionClosed : Bool
+    path13CanonicalLocalScalarActionClosed : Bool
+    twoCarrierSelectedBondEq119CompilerClosed : Bool
+    twoCarrierCoarseBondFieldAssemblyClosed : Bool
     path13SelectedPhysicalBackground13Constructed : Bool
     path13GlobalLocalPerturbationSemanticsConstructed : Bool
     recoveredShortestPhysicalEq119SourceClosed : Bool
@@ -74,6 +83,14 @@ record RecoveredEq119ShortestSourceStatus : Set where
       path13PeriodicRealizationPruned ≡ true
     path13PositiveBondPerturbationProjectionClosedIsTrue :
       path13PositiveBondPerturbationProjectionClosed ≡ true
+    path13RationalSignedBondPerturbationProjectionClosedIsTrue :
+      path13RationalSignedBondPerturbationProjectionClosed ≡ true
+    path13CanonicalLocalScalarActionClosedIsTrue :
+      path13CanonicalLocalScalarActionClosed ≡ true
+    twoCarrierSelectedBondEq119CompilerClosedIsTrue :
+      twoCarrierSelectedBondEq119CompilerClosed ≡ true
+    twoCarrierCoarseBondFieldAssemblyClosedIsTrue :
+      twoCarrierCoarseBondFieldAssemblyClosed ≡ true
 
     path13SelectedPhysicalBackground13ConstructedIsFalse :
       path13SelectedPhysicalBackground13Constructed ≡ false
@@ -97,6 +114,10 @@ canonicalRecoveredEq119ShortestSourceStatus = record
   ; path13HistoricalPeriodicIndexRepairClosed = true
   ; path13PeriodicRealizationPruned = true
   ; path13PositiveBondPerturbationProjectionClosed = true
+  ; path13RationalSignedBondPerturbationProjectionClosed = true
+  ; path13CanonicalLocalScalarActionClosed = true
+  ; twoCarrierSelectedBondEq119CompilerClosed = true
+  ; twoCarrierCoarseBondFieldAssemblyClosed = true
   ; path13SelectedPhysicalBackground13Constructed = false
   ; path13GlobalLocalPerturbationSemanticsConstructed = false
   ; recoveredShortestPhysicalEq119SourceClosed = false
@@ -110,6 +131,10 @@ canonicalRecoveredEq119ShortestSourceStatus = record
   ; path13HistoricalPeriodicIndexRepairClosedIsTrue = refl
   ; path13PeriodicRealizationPrunedIsTrue = refl
   ; path13PositiveBondPerturbationProjectionClosedIsTrue = refl
+  ; path13RationalSignedBondPerturbationProjectionClosedIsTrue = refl
+  ; path13CanonicalLocalScalarActionClosedIsTrue = refl
+  ; twoCarrierSelectedBondEq119CompilerClosedIsTrue = refl
+  ; twoCarrierCoarseBondFieldAssemblyClosedIsTrue = refl
   ; path13SelectedPhysicalBackground13ConstructedIsFalse = refl
   ; path13GlobalLocalPerturbationSemanticsConstructedIsFalse = refl
   ; recoveredShortestPhysicalEq119SourceClosedIsFalse = refl
@@ -166,6 +191,22 @@ path13SelectedPhysicalBackgroundTargetLevel =
 path13PositiveBondPerturbationProjectionLevel : ProofLevel
 path13PositiveBondPerturbationProjectionLevel =
   PerturbationTarget.cmp98Path13PositiveBondPerturbationProjectionLevel
+
+path13RationalSignedBondPerturbationProjectionLevel : ProofLevel
+path13RationalSignedBondPerturbationProjectionLevel =
+  PerturbationTarget.cmp98Path13RationalSignedBondProjectionLevel
+
+path13CanonicalLocalScalarActionLevel : ProofLevel
+path13CanonicalLocalScalarActionLevel =
+  PerturbationTarget.cmp98Path13CanonicalLocalScalarActionLevel
+
+twoCarrierSelectedBondEq119CompilerLevel : ProofLevel
+twoCarrierSelectedBondEq119CompilerLevel =
+  TwoCarrier.cmp98Equation119TwoCarrierSelectedBondLevel
+
+twoCarrierCoarseBondFieldAssemblyLevel : ProofLevel
+twoCarrierCoarseBondFieldAssemblyLevel =
+  TwoCarrier.cmp98Equation119TwoCarrierFieldAssemblyLevel
 
 literalCMP98RecoveredPath13BackgroundSameObjectLevel : ProofLevel
 literalCMP98RecoveredPath13BackgroundSameObjectLevel =
