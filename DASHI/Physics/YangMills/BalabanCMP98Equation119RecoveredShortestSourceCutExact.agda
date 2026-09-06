@@ -22,11 +22,12 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119RecoveredShortestSourceCut
 --      literal Path13 background carrier;
 --   2. rebuild the global/local Eq.(119) perturbation semantics so global Q'
 --      acts on the bond-indexed Path13 field while local R0 values live in the
---      SU(2) Lie carrier, with literal scalar action on that local carrier.
+--      SU(2) Lie carrier.
 --
--- Inside (2), both positive and signed bond projection are now constructed.
--- The negative occurrence uses the exact -Ad_{U^-1} rule on the repaired
--- side-13 rational background before the existing rational->real Lie compiler.
+-- Inside (2), positive projection, signed orientation and the canonical local
+-- scalar action are now constructed.  The surviving perturbation leaf is the
+-- two-carrier global/local Q' operator itself (plus inhabitance of any external
+-- scalar embedding interface consumed by the selected physical realization).
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -59,6 +60,7 @@ record RecoveredEq119ShortestSourceStatus : Set where
 
     path13PositiveBondPerturbationProjectionClosed : Bool
     path13RationalSignedBondPerturbationProjectionClosed : Bool
+    path13CanonicalLocalScalarActionClosed : Bool
     path13SelectedPhysicalBackground13Constructed : Bool
     path13GlobalLocalPerturbationSemanticsConstructed : Bool
     recoveredShortestPhysicalEq119SourceClosed : Bool
@@ -81,6 +83,8 @@ record RecoveredEq119ShortestSourceStatus : Set where
       path13PositiveBondPerturbationProjectionClosed ≡ true
     path13RationalSignedBondPerturbationProjectionClosedIsTrue :
       path13RationalSignedBondPerturbationProjectionClosed ≡ true
+    path13CanonicalLocalScalarActionClosedIsTrue :
+      path13CanonicalLocalScalarActionClosed ≡ true
 
     path13SelectedPhysicalBackground13ConstructedIsFalse :
       path13SelectedPhysicalBackground13Constructed ≡ false
@@ -105,6 +109,7 @@ canonicalRecoveredEq119ShortestSourceStatus = record
   ; path13PeriodicRealizationPruned = true
   ; path13PositiveBondPerturbationProjectionClosed = true
   ; path13RationalSignedBondPerturbationProjectionClosed = true
+  ; path13CanonicalLocalScalarActionClosed = true
   ; path13SelectedPhysicalBackground13Constructed = false
   ; path13GlobalLocalPerturbationSemanticsConstructed = false
   ; recoveredShortestPhysicalEq119SourceClosed = false
@@ -119,6 +124,7 @@ canonicalRecoveredEq119ShortestSourceStatus = record
   ; path13PeriodicRealizationPrunedIsTrue = refl
   ; path13PositiveBondPerturbationProjectionClosedIsTrue = refl
   ; path13RationalSignedBondPerturbationProjectionClosedIsTrue = refl
+  ; path13CanonicalLocalScalarActionClosedIsTrue = refl
   ; path13SelectedPhysicalBackground13ConstructedIsFalse = refl
   ; path13GlobalLocalPerturbationSemanticsConstructedIsFalse = refl
   ; recoveredShortestPhysicalEq119SourceClosedIsFalse = refl
@@ -179,6 +185,10 @@ path13PositiveBondPerturbationProjectionLevel =
 path13RationalSignedBondPerturbationProjectionLevel : ProofLevel
 path13RationalSignedBondPerturbationProjectionLevel =
   PerturbationTarget.cmp98Path13RationalSignedBondProjectionLevel
+
+path13CanonicalLocalScalarActionLevel : ProofLevel
+path13CanonicalLocalScalarActionLevel =
+  PerturbationTarget.cmp98Path13CanonicalLocalScalarActionLevel
 
 literalCMP98RecoveredPath13BackgroundSameObjectLevel : ProofLevel
 literalCMP98RecoveredPath13BackgroundSameObjectLevel =
