@@ -10,11 +10,9 @@ import DASHI.Analysis.RiemannAristotleG2eDeterminantTaperKernelExact as G2e
 ------------------------------------------------------------------------
 -- FINAL SCALAR BIDI ASSEMBLY
 --
--- All generic harmonic-analysis machinery is treated as existing repository
--- infrastructure. The RH payment is therefore not "have Fourier analysis" or
--- "have a vanishing-moment theorem". It is a same-object receipt on the exact
--- q, near-zero family, multiplicities, zero parameters, target and cutoff that
--- feed the literal G2d/G2e consumer.
+-- All generic harmonic-analysis machinery is existing repository infrastructure.
+-- The live theorem is on the exact q, near-zero family, multiplicities, zero
+-- parameters and target used by the literal G2d/G2e consumer.
 ------------------------------------------------------------------------
 
 record LiteralTargetCenteredScalarProblem : Set₁ where
@@ -73,14 +71,6 @@ open LiteralTargetCenteredScalarProblem public
 
 ------------------------------------------------------------------------
 -- CANONICAL TARGET-GAP / SECOND-MOMENT OBSERVABLE
---
--- This is the exact ordinate coordinate already present inside dSigma:
---
---   delta_sigma = b_sigma - t.
---
--- Defining it here prevents the clustering lane from inventing another local
--- zero carrier. The second moment uses the SAME finiteNearSum operator and SAME
--- multiplicity function as the literal signed G2 response.
 ------------------------------------------------------------------------
 
 targetRelativeGap :
@@ -102,8 +92,6 @@ targetRelativeGapSecondMoment :
 targetRelativeGapSecondMoment P =
   finiteNearSum P (weightedTargetRelativeGapSq P)
 
--- The literal kernel field already uses this exact gap; this theorem merely
--- exposes the named coordinate without changing the mathematical object.
 dSigmaIsLiteralKernelViaTargetGap :
   (P : LiteralTargetCenteredScalarProblem) ->
   (sigma : ZeroIndex P) ->
@@ -140,10 +128,48 @@ record TargetCenteredScalarCancellationReceipt
     mechanism : ScalarCancellationMechanism
     targetIntegralAccepted :
       AcceptableForG2Consumer P (targetCenteredIntegral P)
+
     sameLiteralProblemUsed : Set
+    sameLiteralProblemUsedReceipt : sameLiteralProblemUsed
+
     consumerReference : String
 
 open TargetCenteredScalarCancellationReceipt public
+
+------------------------------------------------------------------------
+-- Exact direct endpoint: acceptance of the literal total signed response is
+-- already acceptance of the target-centred integral, because the canonical
+-- problem owns their equality.
+------------------------------------------------------------------------
+
+subst : ∀ {A : Set} (Pred : A → Set) {x y : A} → x ≡ y → Pred x → Pred y
+subst Pred refl px = px
+
+record DirectSignedConsumerPayment
+    (P : LiteralTargetCenteredScalarProblem) : Set₁ where
+  field
+    totalSignedResponseAccepted :
+      AcceptableForG2Consumer P (totalSignedResponse P)
+    paymentReference : String
+
+open DirectSignedConsumerPayment public
+
+directSignedPaymentClosesCancellationReceipt :
+  (P : LiteralTargetCenteredScalarProblem) →
+  DirectSignedConsumerPayment P →
+  TargetCenteredScalarCancellationReceipt P
+directSignedPaymentClosesCancellationReceipt P payment =
+  record
+    { mechanism = directSignedCosineEstimate
+    ; targetIntegralAccepted =
+        subst
+          (AcceptableForG2Consumer P)
+          (totalSignedResponseIsTargetCenteredIntegral P)
+          (totalSignedResponseAccepted payment)
+    ; sameLiteralProblemUsed = P ≡ P
+    ; sameLiteralProblemUsedReceipt = refl
+    ; consumerReference = paymentReference payment
+    }
 
 record ExistingTargetCenteredHarmonicMachinery
     (P : LiteralTargetCenteredScalarProblem) : Set₁ where
@@ -166,6 +192,14 @@ existingMachineryClosesScalarConsumer :
 existingMachineryClosesScalarConsumer P M =
   g2d-scalar-consumer-closure (exactConsumerReceipt M)
 
+directSignedPaymentClosesScalarConsumer :
+  (P : LiteralTargetCenteredScalarProblem) →
+  DirectSignedConsumerPayment P →
+  G2dScalarConsumerClosure P
+directSignedPaymentClosesScalarConsumer P payment =
+  g2d-scalar-consumer-closure
+    (directSignedPaymentClosesCancellationReceipt P payment)
+
 ------------------------------------------------------------------------
 -- Search pruning. Structural facts about q only matter if they compile into
 -- the exact consumer receipt above.
@@ -185,6 +219,7 @@ record QStructureCompiler
     (fact : QStructuralFact) : Set₁ where
   field
     structuralReceipt : Set
+    structuralReceiptWitness : structuralReceipt
     compilesToExactCancellation : TargetCenteredScalarCancellationReceipt P
 
 open QStructureCompiler public
@@ -217,6 +252,14 @@ record TargetCenteredScalarCancellationBoundary : Set where
     literalTargetGapSecondMomentDefinedOnConsumerCarrierIsTrue :
       literalTargetGapSecondMomentDefinedOnConsumerCarrier ≡ true
 
+    directSignedAcceptanceCompilesToExactConsumerReceipt : Bool
+    directSignedAcceptanceCompilesToExactConsumerReceiptIsTrue :
+      directSignedAcceptanceCompilesToExactConsumerReceipt ≡ true
+
+    genericWithinReceiptAloneClosesConsumer : Bool
+    genericWithinReceiptAloneClosesConsumerIsFalse :
+      genericWithinReceiptAloneClosesConsumer ≡ false
+
     exactSameObjectScalarReceiptIsTheLivePayment : Bool
     exactSameObjectScalarReceiptIsTheLivePaymentIsTrue :
       exactSameObjectScalarReceiptIsTheLivePayment ≡ true
@@ -242,6 +285,8 @@ canonicalTargetCenteredScalarCancellationBoundary =
     true refl
     true refl
     false refl
+    true refl
     false refl
     false refl
-    "The target-relative ordinate gap delta_sigma = ordinate(sigma)-target and its weighted finite-near second moment are now literal observables of the SAME G2 scalar problem: M2_delta = finiteNearSum (m_sigma * delta_sigma^2). Do not invent another moment carrier. Generic harmonic machinery remains infrastructure; the live analytic payment is a same-object quantitative theorem on this literal problem strong enough for the signed G2 consumer and/or clustering compiler. A scalar receipt still does not bypass the separate projective-balance boundary, and RH is not derived."
+    false refl
+    "The exact target gap delta_sigma and M2_delta are literal observables of the SAME G2 scalar problem. A generic approximant/error relation is not itself closure. The direct theorem-bearing endpoint is now explicit: prove AcceptableForG2Consumer(totalSignedResponse) on this literal object. The canonical equality totalSignedResponse = targetCenteredIntegral then compiles that payment into TargetCenteredScalarCancellationReceipt and G2dScalarConsumerClosure. Moment/cosine/Fourier machinery is relevant only if it proves this exact payment or the independent clustering consumer. Projective balance and RH remain separate."
