@@ -6,15 +6,16 @@ open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.MechanismModelDiscriminationExact as Core
 import DASHI.Chemistry.TransitionKernel as TK
 
 ------------------------------------------------------------------------
--- GENERIC MECHANISM DISCRIMINATION
+-- CHEMISTRY-SPECIALISED MECHANISM DISCRIMINATION
 --
--- Cross-pollinates TransitionKernel experiment selection with explicit model
--- signatures, residuals, falsification/reopening and same-panel comparison.
--- This owner is qualitative: prediction scores are ordinal coordinates, not
--- probabilities or fitted effect sizes.
+-- This owner keeps chemistry's TransitionKernel experiment-selection carrier
+-- and domain terminology while explicitly consuming the domain-neutral Core
+-- model-discrimination boundary.  The reciprocal adapter back into Core lives
+-- in MechanismDiscriminationCoreBridgeExact.
 ------------------------------------------------------------------------
 
 data PredictionDirection : Set where
@@ -121,3 +122,7 @@ record DiscriminationBoundary : Set where
 canonicalDiscriminationBoundary : DiscriminationBoundary
 canonicalDiscriminationBoundary = discriminationBoundary
   false refl false refl false refl true refl true refl
+
+-- Core -> Chemistry direction of the BIDI seam.
+existingGenericModelDiscriminationBoundary : Core.ModelDiscriminationBoundary
+existingGenericModelDiscriminationBoundary = Core.canonicalModelDiscriminationBoundary
