@@ -31,16 +31,16 @@ open ConsumerClosingCandidate public
 record LeastCostConsumerClosingChoice {Hidden Experiment Decision : Set}
     (prior : Bidi.ResidualFibre Hidden)
     (consumer : Hidden → Decision)
-    (Declared : ConsumerClosingCandidate {Hidden} {Experiment} prior consumer → Set)
+    (Declared : ConsumerClosingCandidate {Hidden} {Experiment} {Decision} prior consumer → Set)
     : Set₁ where
   constructor least-cost-consumer-closing-choice
   field
-    selected : ConsumerClosingCandidate {Hidden} {Experiment} prior consumer
+    selected : ConsumerClosingCandidate {Hidden} {Experiment} {Decision} prior consumer
     selectedDeclared : Declared selected
     selectedStrict :
       Fibre.grade (Costed.refinement (costed selected)) ≡ Fibre.strictRefinement
     minimalCost :
-      (alternative : ConsumerClosingCandidate {Hidden} {Experiment} prior consumer) →
+      (alternative : ConsumerClosingCandidate {Hidden} {Experiment} {Decision} prior consumer) →
       Declared alternative →
       Fibre.grade (Costed.refinement (costed alternative)) ≡ Fibre.strictRefinement →
       Cost.cost (Costed.move (costed selected)) ≤
@@ -53,7 +53,7 @@ selectedChoiceClosesConsumer :
   ∀ {Hidden Experiment Decision : Set}
     {prior : Bidi.ResidualFibre Hidden}
     {consumer : Hidden → Decision}
-    {Declared : ConsumerClosingCandidate {Hidden} {Experiment} prior consumer → Set} →
+    {Declared : ConsumerClosingCandidate {Hidden} {Experiment} {Decision} prior consumer → Set} →
   (choice : LeastCostConsumerClosingChoice prior consumer Declared) →
   Bidi.PointIdentifies
     (Fibre.posterior (Costed.refinement (costed (selected choice))))
@@ -64,7 +64,7 @@ selectedChoiceEliminatesPriorCandidate :
   ∀ {Hidden Experiment Decision : Set}
     {prior : Bidi.ResidualFibre Hidden}
     {consumer : Hidden → Decision}
-    {Declared : ConsumerClosingCandidate {Hidden} {Experiment} prior consumer → Set} →
+    {Declared : ConsumerClosingCandidate {Hidden} {Experiment} {Decision} prior consumer → Set} →
   (choice : LeastCostConsumerClosingChoice prior consumer Declared) →
   Σ Hidden
     (λ hidden →
@@ -80,7 +80,9 @@ selectedChoiceEliminatesPriorCandidate choice =
 -- close the same consumer from the coarse prior, but the middle move is cheaper.
 ------------------------------------------------------------------------
 
-coarseToFineReceipt : Fibre.ExperimentRefinementReceipt Projection.coarseFibre
+coarseToFineReceipt :
+  Fibre.ExperimentRefinementReceipt
+    {Projection.Hidden} {Fibre.ToyExperiment} Projection.coarseFibre
 coarseToFineReceipt =
   Fibre.experiment-refinement-receipt
     Fibre.addFineObservation
@@ -106,7 +108,8 @@ fineMove = Cost.informationMove
   "declared calibrated observation"
 
 middleCostedCandidate :
-  Costed.CostedRefinementCandidate Projection.coarseFibre
+  Costed.CostedRefinementCandidate
+    {Projection.Hidden} {Fibre.ToyExperiment} Projection.coarseFibre
 middleCostedCandidate =
   Costed.costed-refinement-candidate
     Fibre.coarseToMiddleReceipt
@@ -115,7 +118,8 @@ middleCostedCandidate =
     "synthetic admitted middle observation"
 
 fineCostedCandidate :
-  Costed.CostedRefinementCandidate Projection.coarseFibre
+  Costed.CostedRefinementCandidate
+    {Projection.Hidden} {Fibre.ToyExperiment} Projection.coarseFibre
 fineCostedCandidate =
   Costed.costed-refinement-candidate
     coarseToFineReceipt
@@ -124,7 +128,9 @@ fineCostedCandidate =
     "synthetic admitted fine observation"
 
 middleClosingCandidate :
-  ConsumerClosingCandidate Projection.coarseFibre Projection.middleDecision
+  ConsumerClosingCandidate
+    {Projection.Hidden} {Fibre.ToyExperiment} {Projection.Decision}
+    Projection.coarseFibre Projection.middleDecision
 middleClosingCandidate =
   consumer-closing-candidate
     middleCostedCandidate
@@ -132,7 +138,9 @@ middleClosingCandidate =
     "middle posterior already closes the decision consumer"
 
 fineClosingCandidate :
-  ConsumerClosingCandidate Projection.coarseFibre Projection.middleDecision
+  ConsumerClosingCandidate
+    {Projection.Hidden} {Fibre.ToyExperiment} {Projection.Decision}
+    Projection.coarseFibre Projection.middleDecision
 fineClosingCandidate =
   consumer-closing-candidate
     fineCostedCandidate
