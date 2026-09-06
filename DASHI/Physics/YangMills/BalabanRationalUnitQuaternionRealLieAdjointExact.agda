@@ -15,15 +15,15 @@ module DASHI.Physics.YangMills.BalabanRationalUnitQuaternionRealLieAdjointExact 
 -- `RationalRealRingEmbedding`.  No new group law or adjoint axiom is added.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base using (ℚ)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as SU2
 import DASHI.Physics.YangMills.BalabanCMP98SelectedPhysicalUnitCarrierRound187Exact as R187
-import DASHI.Physics.YangMills.BalabanPhysicalSU2FiniteCoordinatesExact as Physical
 import DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedJacobianExact as Jacobian
 import DASHI.Physics.YangMills.BalabanPath13BackgroundGaugeAdjointDefectExact as Background
 import DASHI.Physics.YangMills.BalabanP33QuaternionAdjointPerturbationExact as Adjoint
+import DASHI.Physics.YangMills.BalabanFederbushRationalLieToRealSU2CarrierRound207Exact as R207
 import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as R208
 import DASHI.Physics.YangMills.BalabanFederbushCanonicalRealMatrixExtensionRound210Exact as R210
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as Lie
@@ -43,7 +43,7 @@ unitAdjointRationalMatrixEntryExact :
       (Adjoint.adjointTransport
         (R187.eraseUnitQuaternion unit)
         (Background.basisQuaternion column))
-unitAdjointRationalMatrixEntryExact unit row column = Agda.Builtin.Equality.refl
+unitAdjointRationalMatrixEntryExact unit row column = refl
 
 unitAdjointRealLie :
   R208.RationalRealRingEmbedding →
@@ -55,8 +55,7 @@ unitAdjointRealLie embedding unit =
 
 unitAdjointRealLieCoordinateExact :
   ∀ embedding unit vector coordinate →
-  DASHI.Physics.YangMills.BalabanFederbushRationalLieToRealSU2CarrierRound207Exact.realLieCoordinate
-    coordinate (unitAdjointRealLie embedding unit vector)
+  R207.realLieCoordinate coordinate (unitAdjointRealLie embedding unit vector)
   ≡ R210.realMatrixAction embedding
       (unitAdjointRationalMatrix unit) vector coordinate
 unitAdjointRealLieCoordinateExact embedding unit vector coordinate =
