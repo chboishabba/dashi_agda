@@ -14,6 +14,13 @@ module DASHI.Physics.Closure.NSTriadKNStrongLowLiteralNestedKernelRound329Exact 
 -- physical cell bound is R326.  The outer vector is the SAME R307/R145 slot
 -- kernel, and the scalar cell weight is the SAME swap-invariant R294 weight.
 --
+-- BIDI tightening: R325 identifies the inner pure commutator with (-i) times
+-- a Leray projection at the inner output.  R30 therefore proves it transverse
+-- to that output, and `innerOutputIsOuterForcing` transports the theorem to the
+-- literal outer p-leg.  Consequently R145's anti-parallel slot factorization
+-- is applicable to the ACTUAL R329 outer slot; no abstract replacement forcing
+-- is needed for that geometry.
+--
 -- This file contains no row sum, column sum, fibre cardinality, or heat
 -- integrability claim.  It only prevents later Schur code from replacing the
 -- physical nested object by a generic kernel proxy.
@@ -22,10 +29,13 @@ module DASHI.Physics.Closure.NSTriadKNStrongLowLiteralNestedKernelRound329Exact 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; _≤_)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
+import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as Scaling
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
@@ -34,8 +44,11 @@ import DASHI.Physics.Closure.NSTriadKNAntiParallelHelicitySlotKernelRound145Exac
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3LerayPythagoras as Leray
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
+import DASHI.Physics.Closure.NSTriadKNLerayOutputTransversalityRound30Exact as LerayOut
+import DASHI.Physics.Closure.NSTriadKNProjectedHelicalSelfForcingVectorRound106Exact as R106
 import DASHI.Physics.Closure.NSTriadKNExternalPureCommutatorPartnerRound120Exact as R120
 import DASHI.Physics.Closure.NSTriadKNInnerStrongLowOutputSubconeRound321Exact as R321
+import DASHI.Physics.Closure.NSTriadKNPureCommutatorRawDualDefectWeldRound325Exact as R325
 import DASHI.Physics.Closure.NSTriadKNRawCurlLowOutputKernelMassRound178Exact as R178
 import DASHI.Physics.Closure.NSTriadKNPhysicalInnerCommutatorLowOutputBoundRound326Exact as R326
 import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
@@ -77,6 +90,62 @@ innerPairedForcing :
   StrongLowLiteralNestedCell E I O system S L H W → C3.Complex3 F
 innerPairedForcing E I O system S L H W C =
   R120.pureCommutatorVector system (inner C) (innerHelical C)
+
+innerPairedForcingTransverseAtInnerOutput :
+  (E : C3.IntegerEmbedding F)
+  (I : C3.ModeInverseSquare F E)
+  (O : Leray.RationalInverseNormOrder E I)
+  (system : Audit.FiniteComplex3GalerkinSystem F E I)
+  (S : Helical.HelicalModeScalars F)
+  (L : Helical.PeriodicHelicalProjectorLaws F E I S)
+  (H : R142.HelicalHalfCalibration S)
+  (W : R294.SwapInvariantCellWeight F)
+  (C : StrongLowLiteralNestedCell E I O system S L H W) →
+  Helical.Transverse E (Physical.k (inner C))
+    (innerPairedForcing E I O system S L H W C)
+innerPairedForcingTransverseAtInnerOutput E I O system S L H W C =
+  let
+    tau = inner C
+    k = Physical.k tau
+    raw =
+      DASHI.Physics.Closure.NSTriadKNHHDualDefectRawCurlKernelRound172Exact.rawDirectionalSlotKernel
+        (C3.modeVector E (Physical.p tau))
+        (C3.modeVector E (Physical.q tau))
+        (Audit.velocity system (Physical.p tau))
+        (Audit.velocity system (Physical.q tau))
+    projected = C3.lerayProject3 E I k raw
+    scale = R106.minusI F
+    sameObject = R325.pureCommutatorIsMinusIProjectedRawKernel
+      system tau (innerHelical C)
+  in
+  trans
+    (cong (C3.bilinearDot3 (C3.modeVector E k)) sameObject)
+    (trans
+      (Scaling.bilinearDot3ScaleRight scale (C3.modeVector E k) projected)
+      (trans
+        (cong (C3.complexMultiply scale)
+          (LerayOut.lerayOutputTransverseExact
+            E I k (R120.outputNonzero (innerHelical C)) raw))
+        (Field.complexMultiplyZeroRight scale)))
+
+innerPairedForcingTransverseAtOuterForcing :
+  (E : C3.IntegerEmbedding F)
+  (I : C3.ModeInverseSquare F E)
+  (O : Leray.RationalInverseNormOrder E I)
+  (system : Audit.FiniteComplex3GalerkinSystem F E I)
+  (S : Helical.HelicalModeScalars F)
+  (L : Helical.PeriodicHelicalProjectorLaws F E I S)
+  (H : R142.HelicalHalfCalibration S)
+  (W : R294.SwapInvariantCellWeight F)
+  (C : StrongLowLiteralNestedCell E I O system S L H W) →
+  Helical.Transverse E (Physical.p (outer C))
+    (innerPairedForcing E I O system S L H W C)
+innerPairedForcingTransverseAtOuterForcing E I O system S L H W C =
+  subst
+    (λ mode → Helical.Transverse E mode
+      (innerPairedForcing E I O system S L H W C))
+    (innerOutputIsOuterForcing C)
+    (innerPairedForcingTransverseAtInnerOutput E I O system S L H W C)
 
 literalNestedOuterSlot :
   (E : C3.IntegerEmbedding F)
@@ -138,6 +207,12 @@ round329R294SwapInvariantWeightPreserved = true
 round329R326CellMajorantAttachedBeforeAggregation : Bool
 round329R326CellMajorantAttachedBeforeAggregation = true
 
+round329InnerPairedForcingTransverseAtOuterForcing : Bool
+round329InnerPairedForcingTransverseAtOuterForcing = true
+
+round329OuterAntiParallelFactorizationPhysicallyApplicable : Bool
+round329OuterAntiParallelFactorizationPhysicallyApplicable = true
+
 round329RowBudgetClosed : Bool
 round329RowBudgetClosed = false
 
@@ -149,3 +224,11 @@ round329PackageAClosed = false
 
 round329ClayPromotion : Bool
 round329ClayPromotion = false
+
+round329InnerPairedForcingTransverseAtOuterForcingIsTrue :
+  round329InnerPairedForcingTransverseAtOuterForcing ≡ true
+round329InnerPairedForcingTransverseAtOuterForcingIsTrue = refl
+
+round329OuterAntiParallelFactorizationPhysicallyApplicableIsTrue :
+  round329OuterAntiParallelFactorizationPhysicallyApplicable ≡ true
+round329OuterAntiParallelFactorizationPhysicallyApplicableIsTrue = refl
