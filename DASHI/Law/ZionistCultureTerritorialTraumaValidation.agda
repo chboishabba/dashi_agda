@@ -1,0 +1,49 @@
+module DASHI.Law.ZionistCultureTerritorialTraumaValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Law.ZionistPoliticalCultureSecurityRepertoireExact as Culture
+import DASHI.Law.UNZionismTerrorismAttributionBoundaryExact as UN
+import DASHI.Law.ZionistTerritorialMigrationExternalitySourceReceiptsExact as Territory
+import DASHI.Law.IsraeliMilitaryTraumaNonEssentialisationExact as Trauma
+import DASHI.Law.ZionismGlobalJewryExternalitySourceReceiptsExact as Jewry
+
+judaismIsNotCollapsedIntoZionism :
+  Culture.judaismEqualsZionism Culture.canonicalZionismIdentityBoundary ≡ false
+judaismIsNotCollapsedIntoZionism = refl
+
+jewishIdentityIsNotCollapsedIntoZionism :
+  Culture.jewishIdentityEqualsZionism Culture.canonicalZionismIdentityBoundary ≡ false
+jewishIdentityIsNotCollapsedIntoZionism = refl
+
+israeliCitizenshipIsNotCollapsedIntoZionism :
+  Culture.israeliCitizenshipEqualsZionism Culture.canonicalZionismIdentityBoundary ≡ false
+israeliCitizenshipIsNotCollapsedIntoZionism = refl
+
+unTerroristSympathyDesignationNotRecovered :
+  UN.formalUNTerroristSympathyGroupDesignationRecovered UN.canonicalUNDesignationBoundary ≡ false
+unTerroristSympathyDesignationNotRecovered = refl
+
+unMemberStateClaimDoesNotBecomeUNFinding :
+  UN.memberStateStatementEqualsUNFinding UN.canonicalUNDesignationBoundary ≡ false
+unMemberStateClaimDoesNotBecomeUNFinding = refl
+
+proposalDoesNotEqualImplementation :
+  Territory.proposalEqualsImplementation Territory.canonicalTerritorialExternalityBoundary ≡ false
+proposalDoesNotEqualImplementation = refl
+
+migrationDoesNotAutomaticallyEqualColonisation :
+  Territory.migrationEqualsColonisation Territory.canonicalTerritorialExternalityBoundary ≡ false
+migrationDoesNotAutomaticallyEqualColonisation = refl
+
+veteranTraumaDoesNotEssentialiseExConscripts :
+  Trauma.veteranClinicalFindingImpliesEveryExConscriptHasPTSD Trauma.canonicalTraumaPopulationBoundary ≡ false
+veteranTraumaDoesNotEssentialiseExConscripts = refl
+
+ptsdDoesNotExplainZionistIdeology :
+  Trauma.ptsdFindingExplainsZionistIdeology Trauma.canonicalTraumaPopulationBoundary ≡ false
+ptsdDoesNotExplainZionistIdeology = refl
+
+israelPolicyDoesNotTransferCollectiveResponsibilityToJews :
+  Jewry.israelPolicyMakesJewsCollectivelyResponsible Jewry.canonicalGlobalJewryBoundary ≡ false
+israelPolicyDoesNotTransferCollectiveResponsibilityToJews = refl
