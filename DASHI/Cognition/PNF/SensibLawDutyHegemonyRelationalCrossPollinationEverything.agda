@@ -34,6 +34,10 @@ import DASHI.Cognition.PNF.SensibLawStatutoryRuleStructureAlgebraExact as Statut
 import DASHI.Cognition.PNF.SensibLawJuridicalPersonhoodRemedyOperationalCrossPollinationExact as Operational
 import DASHI.Cognition.PNF.SensibLawBillyEffectiveRemedyTwoEyedSeeingExact as Billy
 import DASHI.Cognition.PNF.SensibLawMaboTerraNulliusJuridicalDehumanisationExact as Terra
+import DASHI.Cognition.PNF.SensibLawBillySituatedKnowledgeRemedyAdequacyExact as SituatedRemedy
+import DASHI.Cognition.PNF.SensibLawDeclaredReasonRealizedEffectOperationalExact as Realized
+import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Culture.IndigenousKnowledgeStoryTwoEyedSeeingBidiExact as Knowledge
 
 judicialPolicyStillNotLegislation : Edge.JudicialPolicyIsLegislation → ⊥
 judicialPolicyStillNotLegislation = Edge.judicialPolicyDoesNotBecomeLegislation
@@ -233,7 +237,7 @@ metaFixtureDoesNotPromoteSettlementToUniversalAdmission =
   Meta.settlementDoesNotAdjudicateEverything
 
 ------------------------------------------------------------------------
--- Relational / consensus / Two-Eyed remedy authority.
+-- Relational / consensus / Two-Eyed / situated knowledge remedy authority.
 ------------------------------------------------------------------------
 
 haudenosauneeFixtureIsConcrete :
@@ -265,8 +269,27 @@ consultationDoesNotTransferCommunityAuthority :
 consultationDoesNotTransferCommunityAuthority =
   Operational.consultationDoesNotTransferCommunityAuthority
 
+extractedContentCannotRecoverIndigenousAuthority :
+  INF.FactorsThrough Knowledge.extractedProposition Knowledge.authority → ⊥
+extractedContentCannotRecoverIndigenousAuthority =
+  SituatedRemedy.sameContentCannotRecoverAuthority
+
+consultationRecordCannotRecoverAuthorityBearingParticipation :
+  INF.FactorsThrough
+    SituatedRemedy.consultationSurface
+    SituatedRemedy.authorityParticipation → ⊥
+consultationRecordCannotRecoverAuthorityBearingParticipation =
+  SituatedRemedy.consultationRecordCannotRecoverAuthorityParticipation
+
+consultationRecordCannotRecoverReciprocalImplementation :
+  INF.FactorsThrough
+    SituatedRemedy.consultationSurface
+    SituatedRemedy.reciprocalImplementation → ⊥
+consultationRecordCannotRecoverReciprocalImplementation =
+  SituatedRemedy.consultationRecordCannotRecoverReciprocalImplementation
+
 ------------------------------------------------------------------------
--- A system is what it does: remedy closes on realized coordinates, not speech.
+-- A system is what it does: realized effect is not recoverable from declaration.
 ------------------------------------------------------------------------
 
 declaredRemedyDoesNotEqualRealizedRemedy :
@@ -283,6 +306,25 @@ operationalClosureRequiresRealizedCoordinates :
   Operational.operationalClosureRequiresRealizedCoordinates
     Operational.currentBillyOperationalClosure ≡ true
 operationalClosureRequiresRealizedCoordinates = refl
+
+declaredLegalRationaleCannotRecoverDistribution :
+  INF.FactorsThrough
+    Realized.declaredLegalRationale
+    Realized.realizedDistribution → ⊥
+declaredLegalRationaleCannotRecoverDistribution =
+  Realized.declaredRationaleCannotRecoverDistribution
+
+declaredRemedySurfaceCannotRecoverRealizedRepair :
+  INF.FactorsThrough
+    Realized.declaredRemedySurface
+    Realized.realizedRemedy → ⊥
+declaredRemedySurfaceCannotRecoverRealizedRepair =
+  Realized.declaredRemedyCannotRecoverRealizedRepair
+
+stateDefinedMetricDoesNotDetermineCommunityRemedyAdequacy :
+  Realized.stateDefinedMetricAloneDeterminesCommunityRemedyAdequacy
+    Realized.canonicalCommunityDefinedOutcomeBoundary ≡ false
+stateDefinedMetricDoesNotDetermineCommunityRemedyAdequacy = refl
 
 ------------------------------------------------------------------------
 -- Shared topology never collapses distinct doctrines/forums.
