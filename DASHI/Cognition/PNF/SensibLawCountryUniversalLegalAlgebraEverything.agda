@@ -8,6 +8,8 @@ import DASHI.Cognition.PNF.SensibLawCountrySystemRealisedJusticeEverything as Co
 import DASHI.Cognition.PNF.SensibLawCountrySystemRealisedJusticeBidiExact as System
 import DASHI.Cognition.PNF.SensibLawRemedyUniversalLegalAlgebraBridgeExact as Bridge
 import DASHI.Cognition.PNF.SensibLawUniversalLegalAlgebraEverything as Universal
+import DASHI.Cognition.PNF.SensibLawLegalObserverResidualRefinementBidiExact as Residual
+import DASHI.Cognition.PNF.SensibLawLegalGraphRefinementReopeningExact as Reopen
 
 ------------------------------------------------------------------------
 -- Legal derivability and operational realisation are sequential consumers.
@@ -33,6 +35,36 @@ communityOutcomeFailureDoesNotReopenLegalGraphByDefault = refl
 legalAuthorityFailureDoesReopenUniversalGraph :
   Bridge.reopenLegalRuleGraph Bridge.legalAuthorityFailureReopen ≡ true
 legalAuthorityFailureDoesReopenUniversalGraph = refl
+
+------------------------------------------------------------------------
+-- BIDI bridge into the typed residual/refinement algebra.
+------------------------------------------------------------------------
+
+countryCommunityResidualRequest : Reopen.LegalSelectiveReopenRequest
+countryCommunityResidualRequest =
+  Reopen.requestForResidual Residual.missingCommunityOutcome
+    "Country/community-defined remedy outcome"
+
+countryCommunityResidualStaysOperational :
+  Reopen.reopenOperationalOutcome countryCommunityResidualRequest ≡ true
+countryCommunityResidualStaysOperational = refl
+
+countryCommunityResidualDoesNotRewriteLawByDefault :
+  Reopen.reopenUniversalGraph countryCommunityResidualRequest ≡ false
+countryCommunityResidualDoesNotRewriteLawByDefault = refl
+
+countryLegalAuthorityResidualRequest : Reopen.LegalSelectiveReopenRequest
+countryLegalAuthorityResidualRequest =
+  Reopen.requestForResidual Residual.missingAuthorityRole
+    "Country/remedy legal authority"
+
+countryLegalAuthorityResidualReopensUniversalLaw :
+  Reopen.reopenUniversalGraph countryLegalAuthorityResidualRequest ≡ true
+countryLegalAuthorityResidualReopensUniversalLaw = refl
+
+countryLegalAuthorityResidualReopensIssueProjection :
+  Reopen.reopenIssueProjection countryLegalAuthorityResidualRequest ≡ true
+countryLegalAuthorityResidualReopensIssueProjection = refl
 
 ------------------------------------------------------------------------
 -- Existing Country operational frontier remains unchanged by importing legal
