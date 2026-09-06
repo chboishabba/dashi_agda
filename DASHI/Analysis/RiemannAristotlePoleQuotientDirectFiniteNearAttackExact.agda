@@ -10,24 +10,15 @@ import DASHI.Analysis.RiemannG2TargetCenteredScalarCancellationAssemblyExact as 
 ------------------------------------------------------------------------
 -- DIRECT FINITE POLE-NEAR ATTACK
 --
--- Final carrier to be evaluated:
+-- Final carrier:
 --
 --   sum_{sigma in nearOffFinset(t,J)}
 --     4 m_sigma integral g_pole(u) cosh(a_sigma u)
 --                         cos((b_sigma-t)u) du.
 --
--- This owner does three things.
---
--- (1) It isolates the exact data a direct finite proof must retain.
--- (2) It proves, on a finite calibration carrier, that count/magnitude data do
---     not determine the signed total.
--- (3) BIDI strengthening: every future direct producer must name the existing
---     LiteralTargetCenteredScalarProblem it realizes, with literal Scalar and
---     ZeroIndex carrier identities plus explicit same-object obligations for the
---     target, near family, multiplicity, ordinate gap and signed total.
---
--- Therefore a DirectFinitePoleNearProducer is no longer allowed to be an
--- unrelated finite exponential sum that happens to have matching field names.
+-- BIDI rule: this is not a second zero-sum ontology. Every successful producer
+-- names the canonical LiteralTargetCenteredScalarProblem it realizes. All
+-- preservation / same-object propositions are proof-bearing receipts.
 ------------------------------------------------------------------------
 
 record DirectFiniteNearCell : Set where
@@ -41,12 +32,6 @@ open DirectFiniteNearCell public
 
 cellContribution : DirectFiniteNearCell → ℚ
 cellContribution c = multiplicity c * signedPhaseResponse c
-
-record DirectFiniteNearObservation : Set where
-  constructor direct-finite-near-observation
-  field
-    countCode : ℚ
-    envelopeCode : ℚ
 
 sameCoarseObservation : DirectFiniteNearCell → DirectFiniteNearCell → Set
 sameCoarseObservation x y =
@@ -92,15 +77,25 @@ record DirectFinitePoleNearProducer : Set₁ where
     Within : Scalar → Scalar → Scalar → Set
 
     preservesPoleTaper : Set
+    preservesPoleTaperReceipt : preservesPoleTaper
+
     preservesTargetRelativeGap : Set
+    preservesTargetRelativeGapReceipt : preservesTargetRelativeGap
+
     preservesMultiplicity : Set
+    preservesMultiplicityReceipt : preservesMultiplicity
+
     preservesFiniteNearIndex : Set
+    preservesFiniteNearIndexReceipt : preservesFiniteNearIndex
+
     preservesSignedCosinePhase : Set
+    preservesSignedCosinePhaseReceipt : preservesSignedCosinePhase
+
     independentOfProjectiveBalance : Set
+    independentOfProjectiveBalanceReceipt : independentOfProjectiveBalance
 
     evaluationReceipt : Within finiteSignedNearValue approximant error
 
-    -- Exact canonical G2 owner that this direct producer claims to realize.
     literalProblem : Literal.LiteralTargetCenteredScalarProblem
 
     scalarCarrierIdentity :
@@ -109,27 +104,172 @@ record DirectFinitePoleNearProducer : Set₁ where
     zeroIndexCarrierIdentity :
       ZeroIndex ≡ Literal.LiteralTargetCenteredScalarProblem.ZeroIndex literalProblem
 
-    -- These semantic same-object witnesses remain proof obligations of the
-    -- concrete application; they are not inferred from matching names.
     targetIsLiteralTarget : Set
+    targetIsLiteralTargetReceipt : targetIsLiteralTarget
+
     nearIndexIsLiteralNearOff : Set
+    nearIndexIsLiteralNearOffReceipt : nearIndexIsLiteralNearOff
+
     multiplicityIsLiteralMultiplicity : Set
+    multiplicityIsLiteralMultiplicityReceipt : multiplicityIsLiteralMultiplicity
+
     horizontalDisplacementIsLiteralOffRealPart : Set
+    horizontalDisplacementIsLiteralOffRealPartReceipt :
+      horizontalDisplacementIsLiteralOffRealPart
+
     targetRelativeGapIsLiteralOrdinateMinusTarget : Set
+    targetRelativeGapIsLiteralOrdinateMinusTargetReceipt :
+      targetRelativeGapIsLiteralOrdinateMinusTarget
+
     finiteSignedNearValueIsLiteralTotalSignedResponse : Set
+    finiteSignedNearValueIsLiteralTotalSignedResponseReceipt :
+      finiteSignedNearValueIsLiteralTotalSignedResponse
+
     signedCosineCellIsLiteralKernelResponse : Set
+    signedCosineCellIsLiteralKernelResponseReceipt :
+      signedCosineCellIsLiteralKernelResponse
 
     producerReference : String
 
 open DirectFinitePoleNearProducer public
 
 ------------------------------------------------------------------------
--- Direct producer automatically exposes the literal target-centred gap shape.
+-- CANONICAL COMPILER FROM THE EXISTING LITERAL G2 SCALAR PROBLEM
+--
+-- This removes duplicate representation payments. The compiler fixes, by
+-- construction:
+--
+--   Scalar, ZeroIndex, target, nearIndex, multiplicity,
+--   horizontal displacement, target-relative gap, finite signed value.
+--
+-- A caller supplies only the genuinely extra direct-route data: pole taper /
+-- cutoff realization, the scalar signed-cell evaluator, and an actual
+-- approximant/error receipt. The signed-cell semantic realization remains an
+-- explicit proof input because LiteralTargetCenteredScalarProblem stores the
+-- integrated d_sigma kernel rather than this three-argument helper function.
 ------------------------------------------------------------------------
 
-directProducerNamesLiteralProblem :
-  (d : DirectFinitePoleNearProducer) → Literal.LiteralTargetCenteredScalarProblem
-directProducerNamesLiteralProblem d = literalProblem d
+record LiteralDirectFiniteInput
+    (P : Literal.LiteralTargetCenteredScalarProblem) : Set₁ where
+  field
+    Taper : Set
+    poleTaper : Taper
+    cutoff : Literal.Scalar P
+
+    signedCosineCell :
+      Taper → Literal.Scalar P → Literal.Scalar P → Literal.Scalar P
+
+    approximant : Literal.Scalar P
+    error : Literal.Scalar P
+    Within :
+      Literal.Scalar P → Literal.Scalar P → Literal.Scalar P → Set
+
+    evaluationReceipt :
+      Within (Literal.totalSignedResponse P) approximant error
+
+    poleTaperRealization : Set
+    poleTaperRealizationReceipt : poleTaperRealization
+
+    signedCosinePhaseRealization : Set
+    signedCosinePhaseRealizationReceipt : signedCosinePhaseRealization
+
+    signedCosineCellRealizesLiteralKernel : Set
+    signedCosineCellRealizesLiteralKernelReceipt :
+      signedCosineCellRealizesLiteralKernel
+
+    directRouteIndependentOfProjectiveBalance : Set
+    directRouteIndependentOfProjectiveBalanceReceipt :
+      directRouteIndependentOfProjectiveBalance
+
+    producerReference : String
+
+open LiteralDirectFiniteInput public
+
+compileLiteralDirectFiniteProducer :
+  (P : Literal.LiteralTargetCenteredScalarProblem) →
+  LiteralDirectFiniteInput P →
+  DirectFinitePoleNearProducer
+compileLiteralDirectFiniteProducer P input =
+  direct-finite-pole-near-producer
+    (Literal.Scalar P)
+    (Literal.ZeroIndex P)
+    (LiteralDirectFiniteInput.Taper input)
+    (LiteralDirectFiniteInput.poleTaper input)
+    (Literal.target P)
+    (LiteralDirectFiniteInput.cutoff input)
+    (Literal.nearOff P)
+    (Literal.multiplicity P)
+    (Literal.offRealPart P)
+    (Literal.targetRelativeGap P)
+    (LiteralDirectFiniteInput.signedCosineCell input)
+    (Literal.totalSignedResponse P)
+    (LiteralDirectFiniteInput.approximant input)
+    (LiteralDirectFiniteInput.error input)
+    (LiteralDirectFiniteInput.Within input)
+    (LiteralDirectFiniteInput.poleTaperRealization input)
+    (LiteralDirectFiniteInput.poleTaperRealizationReceipt input)
+    ((Literal.targetRelativeGap P) ≡ (Literal.targetRelativeGap P))
+    refl
+    ((Literal.multiplicity P) ≡ (Literal.multiplicity P))
+    refl
+    ((Literal.nearOff P) ≡ (Literal.nearOff P))
+    refl
+    (LiteralDirectFiniteInput.signedCosinePhaseRealization input)
+    (LiteralDirectFiniteInput.signedCosinePhaseRealizationReceipt input)
+    (LiteralDirectFiniteInput.directRouteIndependentOfProjectiveBalance input)
+    (LiteralDirectFiniteInput.directRouteIndependentOfProjectiveBalanceReceipt input)
+    (LiteralDirectFiniteInput.evaluationReceipt input)
+    P
+    refl
+    refl
+    ((Literal.target P) ≡ (Literal.target P))
+    refl
+    ((Literal.nearOff P) ≡ (Literal.nearOff P))
+    refl
+    ((Literal.multiplicity P) ≡ (Literal.multiplicity P))
+    refl
+    ((Literal.offRealPart P) ≡ (Literal.offRealPart P))
+    refl
+    ((Literal.targetRelativeGap P) ≡ (Literal.targetRelativeGap P))
+    refl
+    ((Literal.totalSignedResponse P) ≡ (Literal.totalSignedResponse P))
+    refl
+    (LiteralDirectFiniteInput.signedCosineCellRealizesLiteralKernel input)
+    (LiteralDirectFiniteInput.signedCosineCellRealizesLiteralKernelReceipt input)
+    (LiteralDirectFiniteInput.producerReference input)
+
+compiledDirectTargetIsLiteral :
+  ∀ (P : Literal.LiteralTargetCenteredScalarProblem)
+    (input : LiteralDirectFiniteInput P) →
+  target (compileLiteralDirectFiniteProducer P input) ≡ Literal.target P
+compiledDirectTargetIsLiteral P input = refl
+
+compiledDirectNearIndexIsLiteral :
+  ∀ (P : Literal.LiteralTargetCenteredScalarProblem)
+    (input : LiteralDirectFiniteInput P) →
+  nearIndex (compileLiteralDirectFiniteProducer P input) ≡ Literal.nearOff P
+compiledDirectNearIndexIsLiteral P input = refl
+
+compiledDirectMultiplicityIsLiteral :
+  ∀ (P : Literal.LiteralTargetCenteredScalarProblem)
+    (input : LiteralDirectFiniteInput P) →
+  multiplicityOf (compileLiteralDirectFiniteProducer P input)
+    ≡ Literal.multiplicity P
+compiledDirectMultiplicityIsLiteral P input = refl
+
+compiledDirectGapIsLiteral :
+  ∀ (P : Literal.LiteralTargetCenteredScalarProblem)
+    (input : LiteralDirectFiniteInput P) →
+  targetRelativeGap (compileLiteralDirectFiniteProducer P input)
+    ≡ Literal.targetRelativeGap P
+compiledDirectGapIsLiteral P input = refl
+
+compiledDirectSignedValueIsLiteral :
+  ∀ (P : Literal.LiteralTargetCenteredScalarProblem)
+    (input : LiteralDirectFiniteInput P) →
+  finiteSignedNearValue (compileLiteralDirectFiniteProducer P input)
+    ≡ Literal.totalSignedResponse P
+compiledDirectSignedValueIsLiteral P input = refl
 
 ------------------------------------------------------------------------
 -- Frontier.
@@ -154,6 +294,14 @@ record DirectFiniteNearAttackBoundary : Set where
     directProducerMustNameLiteralG2ScalarProblemIsTrue :
       directProducerMustNameLiteralG2ScalarProblem ≡ true
 
+    directProducerPreservationFieldsAreProofBearing : Bool
+    directProducerPreservationFieldsAreProofBearingIsTrue :
+      directProducerPreservationFieldsAreProofBearing ≡ true
+
+    canonicalLiteralFieldsCompileWithoutFreshProof : Bool
+    canonicalLiteralFieldsCompileWithoutFreshProofIsTrue :
+      canonicalLiteralFieldsCompileWithoutFreshProof ≡ true
+
     directProducerMayUseUnrelatedZeroCarrier : Bool
     directProducerMayUseUnrelatedZeroCarrierIsFalse :
       directProducerMayUseUnrelatedZeroCarrier ≡ false
@@ -170,6 +318,8 @@ canonicalDirectFiniteNearAttackBoundary =
     false refl
     true refl
     true refl
+    true refl
+    true refl
     false refl
     false refl
-    "Instantiate DirectFinitePoleNearProducer on the existing literal G2 target-centred scalar problem: same Scalar/ZeroIndex, actual nearOff family, multiplicity, off-real displacement, ordinate-minus-target gap, literal signed kernel and totalSignedResponse. Supply an explicit approximant/error strong enough for the RH complement window. Do not construct another generic zero sum."
+    "Start from the existing LiteralTargetCenteredScalarProblem and use compileLiteralDirectFiniteProducer. Scalar/ZeroIndex, target, nearOff, multiplicity, off-real displacement, delta = ordinate-target and totalSignedResponse are compiler output, not new research. Supply only the literal pole-taper/kernel realization and a consumer-useful approximant/error receipt. The hard payment is quantitative signed control on that exact G2 scalar object; RH remains open."
