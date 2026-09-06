@@ -32,30 +32,41 @@ module DASHI.Analysis.RiemannAristotleCurrentFrontierExact where
 --
 -- CURRENT NEAR-CORE FRONTIER
 --
--- The first live analytic obligation in this lane is the genuine clustering
--- statement
+-- The first live analytic obligation is the genuine clustering statement
 --
 --   (4/pi^2) * highGapMass < lowGapMass,
 --
--- for the actual zeta zeros at D = pi/(3 Lambda). The available coarse upper
--- counting theorem does not imply this.
+-- for the actual zeta zeros at D = pi/(3 Lambda).
 --
--- The strongest in-repo refinement currently targets a SAME-target/SAME-window
--- normalized second moment. Agda now owns the subtraction-free compiler
+-- The current highest-alpha refinement is a SAME-target/SAME-window second
+-- moment of the target-relative ORDINATE gap
 --
---   highGapMass <= M2_norm < 2*lowGapMass
---     -> highGapMass < 2*lowGapMass,
+--   delta = Im(rho) - t.
 --
--- while the actual analytic selected-window moment producer remains open. The
--- elementary real coefficient bridge 4/pi^2 < 1/2 then suffices to recover the
--- exact clustering coefficient. The Alpöge--Furman >2/3 simple/on-line theorem
--- is retained as a strong global donor but is explicitly non-descending to this
--- target-local consumer without an additional localization theorem.
+-- This is deliberately NOT the Alpöge--Furman/Hermitian transverse coordinate
+-- alpha = Re(rho)-1/2. A proof-bearing finite collision now records that equal
+-- alpha information can coexist with different delta information, so the
+-- transverse moment cannot directly close local gap clustering.
+--
+-- The correct in-repo carrier is PoleNearPhaseStatistic.targetRelativeGap. The
+-- moment socket is indexed by the already-existing ActualSelectedPoleNearProducer,
+-- reusing its selected target, multiplicities and nearOffFinset rather than
+-- creating a parallel zero/window object.
+--
+-- Agda owns the subtraction-free compiler
+--
+--   highGapMass <= M2_delta_norm < 2*lowGapMass
+--     -> highGapMass < 2*lowGapMass.
+--
+-- Together with the elementary real coefficient fact 4/pi^2 < 1/2 this is
+-- sufficient for the exact clustering coefficient. The actual selected-window
+-- delta-moment producer remains open. The same delta coordinate also occurs in
+-- the literal finite-near cosine phase cos((b_sigma-t)u), so a successful
+-- target-gap statistic may feed both clustering and finite-near evaluation.
 --
 -- Earlier finite-near Schur and nuisance-elimination obligations remain valid
--- architectural dependencies. Same-object finite-near evaluation, Gamma
--- precision, low-ordinate/global coverage, and the final RH implication remain
--- open where recorded.
+-- architectural dependencies. Gamma precision, low-ordinate/global coverage,
+-- and the final RH implication remain open where recorded.
 --
 -- No theorem here derives RH.
 ------------------------------------------------------------------------
@@ -133,6 +144,14 @@ record AristotleCurrentFrontier : Set where
     targetLocalSecondMomentProducerClosedIsFalse :
       targetLocalSecondMomentProducerClosed ≡ false
 
+    targetLocalMomentUsesExistingSelectedWindow : Bool
+    targetLocalMomentUsesExistingSelectedWindowIsTrue :
+      targetLocalMomentUsesExistingSelectedWindow ≡ true
+
+    transverseMomentDirectlyControlsOrdinateClustering : Bool
+    transverseMomentDirectlyControlsOrdinateClusteringIsFalse :
+      transverseMomentDirectlyControlsOrdinateClustering ≡ false
+
     alpogeFurmanGlobalSimpleProportionDirectlyClosesClustering : Bool
     alpogeFurmanGlobalSimpleProportionDirectlyClosesClusteringIsFalse :
       alpogeFurmanGlobalSimpleProportionDirectlyClosesClustering ≡ false
@@ -196,6 +215,8 @@ canonicalAristotleCurrentFrontier =
     false refl
     true refl
     false refl
+    true refl
+    false refl
     false refl
     true refl
     true refl
@@ -208,4 +229,4 @@ canonicalAristotleCurrentFrontier =
     false refl
     false refl
     false refl
-    "The newest checked Lean tranche reconciles the quarter-period lower cutoff with the density upper cutoff and discharges the zeta unit/short-window upper-count hypotheses. The density cut therefore does not kill inverse-width scaling. The first live optimized near-core analytic obligation is genuine zeta clustering: (4/pi^2) * highGapMass < lowGapMass at D = pi/(3 Lambda). The current highest-alpha refinement is a SAME-target/SAME-window normalized second-moment producer: Agda already compiles highGapMass <= M2_norm < 2*lowGapMass into a strict highGapMass < 2*lowGapMass witness, while the actual analytic moment estimate and the elementary real coefficient bridge remain open. The Alpöge--Furman global >2/3 simple/on-line result does not directly descend to this local consumer. Earlier finite-near Schur, nuisance-elimination, low-ordinate, and final RH obligations remain open where recorded; RH is not derived."
+    "The newest checked Lean tranche reconciles the quarter-period lower cutoff with the density upper cutoff and discharges the zeta unit/short-window upper-count hypotheses. The first live optimized near-core obligation is genuine zeta clustering at D = pi/(3 Lambda). Its current highest-alpha refinement is a SAME-selected-window second moment of delta = Im(rho)-t, not the unrelated transverse alpha = Re(rho)-1/2 coordinate. Agda owns the moment-to-two-to-one ratio compiler and the same-object selected-window attachment shape; the actual analytic delta-moment producer and elementary 4/pi^2 < 1/2 coefficient bridge remain open. The same delta coordinate is also the phase variable in the finite-near cosine sum, so this producer may feed both zero-side consumers. Earlier finite-near, Gamma, low-ordinate and final RH obligations remain open where recorded; RH is not derived."
