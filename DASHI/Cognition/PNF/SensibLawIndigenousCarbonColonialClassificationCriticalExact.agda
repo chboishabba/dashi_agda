@@ -6,6 +6,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.AttributedSourceCore as Attr
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Cognition.PNF.SensibLawIndigenousLandBackSourceAuthorityExact as Authority
 import DASHI.Cognition.PNF.SensibLawIndigenousCarbonValueProjectionNonFactorabilityExact as Projection
 import DASHI.Cognition.PNF.SensibLawIndigenousLandBackAttributedSourceAtlasExact as Sources
@@ -36,7 +38,7 @@ biaStoredCarbonNotTrustAsset : CarbonClassificationProposition
 biaStoredCarbonNotTrustAsset = carbonClassificationProposition
   agencyClassificationProposition
   "BIA policy classifies carbon/sequestration value as not a trust asset under the specified trust-asset/product framework because carbon is not harvested or extracted and the relevant value derives from storage"
-  (Sources.canonicalURL Sources.biaCarbon2023Source)
+  (Attr.canonicalURL Sources.biaCarbon2023Source)
   true
   false refl
 
@@ -67,13 +69,13 @@ biaAuthorityRemainsAdministrativePolicy :
 biaAuthorityRemainsAdministrativePolicy = refl
 
 biaMetadataDoesNotCreateAuthority :
-  Sources.Attr.citationCreatesAuthority Sources.biaCarbon2023Source ≡ false
+  Attr.citationCreatesAuthority Sources.biaCarbon2023Source ≡ false
 biaMetadataDoesNotCreateAuthority = refl
 
 trustAssetObserverStillCannotCarryStewardshipValue :
+  INF.FactorsThrough Projection.trustAssetObserver Projection.stewardshipValueOutcome → ⊥
+trustAssetObserverStillCannotCarryStewardshipValue =
   Projection.trustAssetCategoryCannotFactorStewardshipValue
-  ≡ Projection.trustAssetCategoryCannotFactorStewardshipValue
-trustAssetObserverStillCannotCarryStewardshipValue = refl
 
 record ExtractiveLegibilityBoundary : Set where
   constructor extractiveLegibilityBoundary
