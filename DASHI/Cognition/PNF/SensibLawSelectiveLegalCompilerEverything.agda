@@ -37,6 +37,11 @@ import DASHI.Cognition.PNF.SensibLawAuthorityTransformationMinimalCutExact as Cu
 import DASHI.Cognition.PNF.SensibLawInternationalObligationDomesticRemedyTranslationExact as Intl
 import DASHI.Cognition.PNF.SensibLawRecognitionObligationRemedyLayerCrossPollinationExact as Layers
 import DASHI.Cognition.PNF.SensibLawMaboKirbyAttributionCorrectionExact as Attribution
+import DASHI.Cognition.PNF.SensibLawUniversalLegalAlgebraEverything as Universal
+import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact as Negligence
+import DASHI.Cognition.PNF.SensibLawPrecedentApplicabilityDistinguishingExact as Precedent
+import DASHI.Cognition.PNF.SensibLawStatutoryRuleStructureAlgebraExact as Statute
+import DASHI.Cognition.PNF.SensibLawAuthorityTransformationUniversalCutBridgeExact as CutBridge
 
 ------------------------------------------------------------------------
 -- EXISTING SELECTIVE COMPILER PATH.
@@ -207,6 +212,41 @@ canonicalCompilerCorrectsMaboKirbyAttribution :
   Attribution.LaterCommentaryIsOriginalJudgmentAuthorship → ⊥
 canonicalCompilerCorrectsMaboKirbyAttribution =
   Attribution.laterKirbyCommentaryDoesNotRewriteAuthorship
+
+------------------------------------------------------------------------
+-- DIRECT UNIVERSAL LEGAL ALGEBRA CONSUMPTION.
+------------------------------------------------------------------------
+
+canonicalCompilerUsesUniversalNegligenceWrongType :
+  Negligence.ClimateDutySpecialisation.wrongType
+    Negligence.australiaPhysicalInjuryDutySpecialisation
+  ≡ Negligence.negligenceWrongType
+canonicalCompilerUsesUniversalNegligenceWrongType = refl
+
+canonicalCompilerClimateQueryTargetsDutyElement :
+  Negligence.ClimateDutySpecialisation.targetElement
+    Negligence.australiaPhysicalInjuryDutySpecialisation
+  ≡ Negligence.dutyElement
+canonicalCompilerClimateQueryTargetsDutyElement = refl
+
+canonicalCompilerKeepsIssueProjectionInsideUniversalGraph :
+  Universal.IssueSpecificPipelineIsSeparateLegalSystem → ⊥
+canonicalCompilerKeepsIssueProjectionInsideUniversalGraph =
+  Universal.issueProjectionIsNotSeparateSystem
+
+canonicalCompilerRequiresProofForPrecedentApplication :
+  Precedent.SimilarFactsAutomaticallyApplyPrecedent → ⊥
+canonicalCompilerRequiresProofForPrecedentApplication =
+  Precedent.similarityDoesNotProveApplication
+
+canonicalCompilerKeepsStatutoryDefinitionsScoped :
+  Statute.DefinitionIsGlobalDictionaryMeaning → ⊥
+canonicalCompilerKeepsStatutoryDefinitionsScoped = Statute.definitionIsScoped
+
+canonicalCompilerDoesNotCallLegacyCutComputed :
+  CutBridge.LegacyMinimalCutResultIsComputedCut → ⊥
+canonicalCompilerDoesNotCallLegacyCutComputed =
+  CutBridge.legacyCalibrationIsNotComputedCut
 
 ------------------------------------------------------------------------
 -- Aggregate import is not a kernel receipt.
