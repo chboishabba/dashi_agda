@@ -5,6 +5,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.HistoricalProducerResponsibilityTraceBidiExact as Responsibility
 import DASHI.Core.TypedProvenancePathBidiExact as Path
+import DASHI.Core.AmplificationLineageBidiCrossPollination2026Exact as Lineage
 import DASHI.Core.HistoricalFirstFailureTraceBidiExact as History
 import DASHI.Core.QueryPromotionResidualBidiExact as QueryPromotion
 
@@ -44,7 +45,7 @@ upstreamDependenceReading trace =
 
 ------------------------------------------------------------------------
 -- Exact calibration: reuse the earlier missing-transport responsibility and a
--- typed reported lineage path.  The current work producer is `proveTransport`,
+-- typed reported lineage path. The current work producer is `proveTransport`,
 -- while the upstream lineage semantics remain `reportedBy` rather than being
 -- rewritten as transport production.
 ------------------------------------------------------------------------
@@ -65,7 +66,7 @@ earlierLineageCurrentProducerIsTransport = refl
 
 earlierLineageSemanticsRemainReported :
   Path.edgeKinds (upstreamPath earlierTransportReportedLineage)
-  ≡ (Path.Lineage.reportedBy ∷ [])
+  ≡ (Lineage.reportedBy ∷ [])
 earlierLineageSemanticsRemainReported = refl
 
 ------------------------------------------------------------------------
