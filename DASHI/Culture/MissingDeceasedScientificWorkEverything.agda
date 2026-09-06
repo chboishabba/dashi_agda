@@ -8,9 +8,10 @@ module DASHI.Culture.MissingDeceasedScientificWorkEverything where
 -- discrimination, critical-knowledge BIDI acquisition, viewpoint-provenance
 -- testing, open-science/knowledge-release and externalisation-boundary BIDI
 -- testing, science-to-capability-carrier reconstruction, application-
--- transformation modelling, science-driven acquisition compilation,
--- disruption-benefit evidence testing, actor benefit/visibility/effect
--- intersection, and matched disruption-impact controls.
+-- transformation modelling, event-time alignment, organisational/custody
+-- confounders, science-driven acquisition compilation, disruption-benefit
+-- evidence testing, actor benefit/visibility/effect intersection, and matched
+-- disruption-impact controls.
 --
 -- The scientific formalisation is both memorial work and an investigative aid:
 -- it identifies the actual capability-bearing application transformations that
@@ -28,6 +29,8 @@ import DASHI.Core.ScientificMechanismEvidenceBidiExact
 import DASHI.Core.ScientificCapabilityCarrierBidiExact
 import DASHI.Core.ApplicationTransformationCapabilityBidiExact
 import DASHI.Core.DistributedApplicationSurfaceBidiExact
+import DASHI.Core.EventTimeCapabilityAlignmentBidiExact
+import DASHI.Core.CapabilityFragilityConfoundersBidiExact
 import DASHI.Core.TechnicalDependencyHypergraphExact
 import DASHI.Core.CommonSelectorVisibilityHyperfabricExact
 import DASHI.Core.SelectorDiscriminationSearchExact
@@ -68,6 +71,9 @@ import DASHI.Culture.LeBlancApplicationTransformationPossessionExact
 import DASHI.Culture.RezaApplicationTransformationPossessionExact
 import DASHI.Culture.MaiwaldActionSpectroscopyProjectSuccessionExact
 import DASHI.Culture.McCaslandEventTimeApplicationTransformationExact
+import DASHI.Culture.McCaslandOrganizationalTransitionSurfaceExact
+import DASHI.Culture.LoureiroEventAlternativeEvidenceExact
+import DASHI.Culture.MissingDeceasedOverlookedDimensionMatrixExact
 import DASHI.Culture.MissingDeceasedApplicationSuccessionFrontierExact
 import DASHI.Culture.MissingDeceasedRosterEnrichmentDesignExact
 import DASHI.Culture.MissingDeceasedHypothesisDiscriminatorMatrixExact
