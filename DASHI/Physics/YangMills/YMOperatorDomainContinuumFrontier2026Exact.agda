@@ -9,6 +9,7 @@ import DASHI.Physics.YangMills.YMAristotleOperatorReturn2026Exact as LeanReturn
 import DASHI.Physics.YangMills.YMOperatorDomainContinuumSources2026Exact as Src
 import DASHI.Physics.YangMills.BalabanClayDenseCoreSpectralGapExact as DenseGap
 import DASHI.Physics.YangMills.BalabanVacuumOrthogonalMoscoRecoveryExact as VacuumRecovery
+import DASHI.Physics.YangMills.BalabanCMP98Equation119PositiveBondSelectedCutFederbushRound184Exact as Eq119R184
 import DASHI.Physics.Closure.YMSprint129MoscoLiminfStrongResolventClosure as Sprint129
 import DASHI.Physics.Closure.SchrodingerSelfAdjointEvolutionReceipt as SelfAdjointReceipt
 
@@ -75,6 +76,15 @@ vacuumRecoveryGapCompilerReturned :
   VacuumRecovery.PhysicalVacuumGapAfterRecovery system
 vacuumRecoveryGapCompilerReturned = VacuumRecovery.physicalVacuumGapAfterRecovery
 
+-- Round184 is the strongest current Eq. (119) consumer.  Given the actual
+-- selected variational-background bridge and selected principal cut on the
+-- periodic realization, it constructs the one-step and multiscale Eq. (119)
+-- derivatives using the already-owned positive coarse bond and Federbush
+-- calculus.  The compiler is closed; the physical same-object instantiation
+-- of those two selected inputs is the remaining producer.
+eq119PositiveBondSelectedCutFederbushCompilerLevel =
+  Eq119R184.cmp98Equation119PositiveBondSelectedCutFederbushRound184Level
+
 record YMOperatorContinuumFrontier : Set where
   constructor ym-operator-continuum-frontier
   field
@@ -91,7 +101,13 @@ record YMOperatorContinuumFrontier : Set where
     vacuumOrthogonalRecoveryGapCompilerClosed : Bool
     sprint129MoscoEvidenceReceiptClosed : Bool
     sprint129AnalyticClosedFormKernelTheoremClosed : Bool
-    balabanSelectedBackgroundAndStoredBondBudgetClosed : Bool
+
+    -- Eq. (119) is no longer blocked by a generic stored-bond budget.  Round184
+    -- closes the entire downstream compiler.  Only the selected background/cut
+    -- same-object instantiation on the actual periodic realization remains.
+    cmp98Equation119CompilerThroughRound184Closed : Bool
+    cmp98SelectedBackgroundAndCutPhysicalInstantiationClosed : Bool
+
     literalYMActionVariationHamiltonianIdentificationClosed : Bool
     genuinePartialDomainHamiltonianFormalized : Bool
     commonInvariantDensePhysicalCoreConstructed : Bool
@@ -110,6 +126,7 @@ canonicalYMOperatorContinuumFrontier = ym-operator-continuum-frontier
   true true true true true true true true true
   true true
   Sprint129.mc1TheoremProvedHere false
+  true false
   false false false false false false false false false false false
 
 boundedGapTransportClosedIsTrue :
@@ -131,6 +148,14 @@ sprint129ReceiptClosedIsTrue = refl
 sprint129ReceiptIsNotAnalyticKernelTheorem :
   sprint129AnalyticClosedFormKernelTheoremClosed canonicalYMOperatorContinuumFrontier ≡ false
 sprint129ReceiptIsNotAnalyticKernelTheorem = refl
+
+eq119CompilerThroughRound184ClosedIsTrue :
+  cmp98Equation119CompilerThroughRound184Closed canonicalYMOperatorContinuumFrontier ≡ true
+eq119CompilerThroughRound184ClosedIsTrue = refl
+
+eq119SelectedBackgroundAndCutPhysicalInstantiationClosedIsFalse :
+  cmp98SelectedBackgroundAndCutPhysicalInstantiationClosed canonicalYMOperatorContinuumFrontier ≡ false
+eq119SelectedBackgroundAndCutPhysicalInstantiationClosedIsFalse = refl
 
 physicalVacuumRecoveryProducerClosedIsFalse :
   physicalVacuumRecoverySystemConstructed canonicalYMOperatorContinuumFrontier ≡ false
