@@ -4,13 +4,20 @@ module DASHI.Physics.Closure.NSTriadKNHeatWeightedNestedCotlarSteinRound350Exact
 -- ROUND350 / BIDI: ONCE MASS IS SUPPLIED, COTLAR IS ALREADY DONE
 --
 -- R349 puts the literal heat-weighted nested shell family into the old
--- two-sided OperatorCrossShellDecay interface.  R30 already owns both the
--- cutoff-uniform row-mass record and the finite Cotlar--Stein authority.
+-- two-sided OperatorCrossShellDecay interface.  R30 owns both the cutoff-
+-- uniform row-mass record and the finite Cotlar--Stein authority.
 --
--- Therefore the remaining assumed physical input at this stage is exactly a
--- `CutoffUniformCrossShellMass` for the R349 decay (or any older theorem that
--- produces it).  The squared operator estimate is then the old R30 theorem
--- verbatim.  No new almost-orthogonality compiler is introduced.
+-- 2026 BIDI RETURN
+-- ----------------
+-- RequestProject/NavierStokes/AlmostOrthogonalGramSchur.lean also closes, in
+-- Lean, the realized-family Schur -> heat-spacetime -> signed-Gram consumer
+-- compiler.  This owner now records that return directly instead of leaving the
+-- two compiler stages globally "open".  The firewall is explicit:
+--
+--   checked in Lean != re-proved in Agda != physical uniform-A producer.
+--
+-- The surviving physical obligation is the same-object truncation-uniform Gram
+-- producer (absolute Schur, block/operator, or direct signed fallback).
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level)
@@ -21,6 +28,7 @@ open import Data.Rational.Base using (_*_; _≤_)
 
 import DASHI.Physics.Closure.NSTriadKNCutoffUniformCotlarSteinRound30Exact as R30
 import DASHI.Physics.Closure.NSTriadKNHeatWeightedNestedOperatorDecayRound349Exact as R349
+import DASHI.Physics.Closure.NSTriadKNAlmostOrthogonalSchurCriticalRouteXPollination2026Exact as Return
 
 nestedFsCotlarSteinSquaredBound :
   ∀ {operatorLevel shellLevel : Level}
@@ -59,11 +67,26 @@ round350NoNewAlmostOrthogonalityCompiler = true
 round350CotlarSquaredBoundClosedConditionally : Bool
 round350CotlarSquaredBoundClosedConditionally = true
 
+-- Old names now mean Agda-native proof status.
 round350HeatSpacetimeIntegrationClosed : Bool
 round350HeatSpacetimeIntegrationClosed = false
 
 round350ResolventGramConsumptionClosed : Bool
 round350ResolventGramConsumptionClosed = false
+
+-- Cross-language return status: these stages are no longer research unknowns.
+round350HeatSpacetimeIntegrationClosedInLean : Bool
+round350HeatSpacetimeIntegrationClosedInLean =
+  Return.leanCriticalWienerConsumerExternallyChecked
+
+round350ResolventGramConsumptionClosedInLean : Bool
+round350ResolventGramConsumptionClosedInLean = true
+
+round350PhysicalUniformGramProducerClosed : Bool
+round350PhysicalUniformGramProducerClosed = false
+
+round350CriticalWienerIntegrabilityClosed : Bool
+round350CriticalWienerIntegrabilityClosed = false
 
 round350PackageAClosed : Bool
 round350PackageAClosed = false
@@ -74,6 +97,19 @@ round350ClayPromotion = false
 round350CotlarSquaredBoundClosedConditionallyIsTrue :
   round350CotlarSquaredBoundClosedConditionally ≡ true
 round350CotlarSquaredBoundClosedConditionallyIsTrue = refl
+
+round350HeatSpacetimeIntegrationClosedInLeanIsTrue :
+  round350HeatSpacetimeIntegrationClosedInLean ≡ true
+round350HeatSpacetimeIntegrationClosedInLeanIsTrue =
+  Return.leanCriticalWienerConsumerExternallyCheckedIsTrue
+
+round350ResolventGramConsumptionClosedInLeanIsTrue :
+  round350ResolventGramConsumptionClosedInLean ≡ true
+round350ResolventGramConsumptionClosedInLeanIsTrue = refl
+
+round350PhysicalUniformGramProducerClosedIsFalse :
+  round350PhysicalUniformGramProducerClosed ≡ false
+round350PhysicalUniformGramProducerClosedIsFalse = refl
 
 round350PackageAClosedIsFalse : round350PackageAClosed ≡ false
 round350PackageAClosedIsFalse = refl
