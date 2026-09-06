@@ -33,6 +33,26 @@ supplementAtlasDoesNotCreateAuthority :
   Attr.atlasCreatesAuthority Supplement.supplementarySourceAtlas ≡ false
 supplementAtlasDoesNotCreateAuthority = refl
 
+-- Representative exact metadata regressions.
+denBraberDoiPinned :
+  Attr.doiState Sources.denBraber2024Source
+  ≡ Attr.doiRecorded "10.1038/s41559-024-02458-w"
+denBraberDoiPinned = refl
+
+baragwanath2020DoiPinned :
+  Attr.doiState Sources.baragwanathBayi2020Source
+  ≡ Attr.doiRecorded "10.1073/pnas.1917874117"
+baragwanath2020DoiPinned = refl
+
+probst2020DoiPinned :
+  Attr.doiState Sources.probst2020Source
+  ≡ Attr.doiRecorded "10.1038/s41893-020-0537-2"
+probst2020DoiPinned = refl
+
+biaNoDoiClaimRemainsAtlasLocal :
+  Attr.doiState Sources.biaCarbon2023Source ≡ Attr.noDOIRecordedByAtlas
+biaNoDoiClaimRemainsAtlasLocal = refl
+
 ------------------------------------------------------------------------
 -- Dawson internal closure is one paraconsistent axis, not the global state.
 ------------------------------------------------------------------------
