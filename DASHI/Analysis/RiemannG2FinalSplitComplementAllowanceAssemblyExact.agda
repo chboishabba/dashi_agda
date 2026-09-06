@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 import DASHI.Analysis.RiemannAristotlePoleQuotientComplementMarginCompilerExact as Complement
 import DASHI.Analysis.RiemannAristotlePoleQuotientSplitComplementBudgetExact as Split
 import DASHI.Analysis.RiemannG2PoleQuotientChannelAllowanceExact as Allowance
+import DASHI.Analysis.RiemannG2PoleQuotientProducerAllowanceTargetExact as ProducerAllowance
 import DASHI.Analysis.RiemannG2FinalSplitComplementSameObjectAssemblyExact as Existing
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateBudgetTargetExact as Off
 import DASHI.Analysis.RiemannAristotlePoleQuotientGammaBudgetTargetExact as Gamma
@@ -16,22 +17,20 @@ import DASHI.Analysis.RiemannAristotlePoleQuotientClusterMarginTargetExact as Cl
 ------------------------------------------------------------------------
 -- ALLOWANCE-AWARE FINAL SAME-OBJECT ASSEMBLY
 --
--- The older same-object assembly correctly requires one scalar carrier and one
--- literal universal pole-quotient taper, but it takes
---
---   B_off + B_Gamma < M_cluster
---
--- as an input.  The new channel-allowance compiler derives that strict input
--- from consumer-selected allowances.  This owner joins the two surfaces so that
--- no post-analysis strict-budget theorem has to be reproved separately.
+-- This version consumes the producer-facing allowance payments themselves.
+-- Therefore final A_off / A_Gamma are literal transports of the allowances the
+-- analytic Off/Gamma proofs were assigned; the final assembly cannot silently
+-- substitute a different pair of allowances after those proofs are complete.
 ------------------------------------------------------------------------
 
 record FinalSplitComplementAllowanceAssembly
     (surface : Split.OrderedAdditiveComplementSurface)
-    (off : Off.PoleQuotientOffOrdinateBudgetTarget)
-    (gamma : Gamma.PoleQuotientGammaBudgetTarget)
+    (offPayment : ProducerAllowance.PoleQuotientOffAllowancePayment)
+    (gammaPayment : ProducerAllowance.PoleQuotientGammaAllowancePayment)
     (cluster : Cluster.PoleQuotientClusterMarginTarget) : Set₁ where
   private
+    off = ProducerAllowance.PoleQuotientOffAllowancePayment.target offPayment
+    gamma = ProducerAllowance.PoleQuotientGammaAllowancePayment.target gammaPayment
     FinalScalar = Complement.Scalar (Split.order surface)
 
   field
@@ -100,13 +99,26 @@ record FinalSplitComplementAllowanceAssembly
     gammaUpper :
       Complement._≤_ (Split.order surface) gammaResidual gammaBudget
 
-    -- Consumer-selected final allowances.
-    offAllowance gammaAllowance : FinalScalar
+    -- Final allowance values are fixed by the analytic producer payments.
+    offAllowance : FinalScalar
+    offAllowanceIsProducerAssignment :
+      offAllowance
+      ≡ Existing.cast offScalarIdentity
+          (ProducerAllowance.assignedOffAllowance offPayment)
 
-    offBudgetBelowAllowance :
+    gammaAllowance : FinalScalar
+    gammaAllowanceIsProducerAssignment :
+      gammaAllowance
+      ≡ Existing.cast gammaScalarIdentity
+          (ProducerAllowance.assignedGammaAllowance gammaPayment)
+
+    -- These are the same-order transports of the producer allowance theorems.
+    -- Scalar equality alone cannot transport an order relation, so the final
+    -- ordered carrier must prove these two compatibility receipts explicitly.
+    offBudgetBelowAssignedAllowance :
       Complement._≤_ (Split.order surface) offOrdinateBudget offAllowance
 
-    gammaBudgetBelowAllowance :
+    gammaBudgetBelowAssignedAllowance :
       Complement._≤_ (Split.order surface) gammaBudget gammaAllowance
 
     allowancesStrictBelowMargin :
@@ -123,8 +135,9 @@ open FinalSplitComplementAllowanceAssembly public
 ------------------------------------------------------------------------
 
 assemblyToInputsExceptStrictBudget :
-  ∀ {surface off gamma cluster} →
-  FinalSplitComplementAllowanceAssembly surface off gamma cluster →
+  ∀ {surface offPayment gammaPayment cluster} →
+  FinalSplitComplementAllowanceAssembly
+    surface offPayment gammaPayment cluster →
   Allowance.SplitInputsExceptStrictBudget surface
 assemblyToInputsExceptStrictBudget assembly = record
   { Allowance.clusterResponse = clusterResponse assembly
@@ -140,8 +153,9 @@ assemblyToInputsExceptStrictBudget assembly = record
   }
 
 assemblyToChannelAllowance :
-  ∀ {surface off gamma cluster} →
-  FinalSplitComplementAllowanceAssembly surface off gamma cluster →
+  ∀ {surface offPayment gammaPayment cluster} →
+  FinalSplitComplementAllowanceAssembly
+    surface offPayment gammaPayment cluster →
   Allowance.PoleQuotientChannelAllowance surface
 assemblyToChannelAllowance assembly = record
   { Allowance.offBudget = offOrdinateBudget assembly
@@ -149,14 +163,15 @@ assemblyToChannelAllowance assembly = record
   ; Allowance.offAllowance = offAllowance assembly
   ; Allowance.gammaAllowance = gammaAllowance assembly
   ; Allowance.clusterMargin = clusterMargin assembly
-  ; Allowance.offBudgetBelowAllowance = offBudgetBelowAllowance assembly
-  ; Allowance.gammaBudgetBelowAllowance = gammaBudgetBelowAllowance assembly
+  ; Allowance.offBudgetBelowAllowance = offBudgetBelowAssignedAllowance assembly
+  ; Allowance.gammaBudgetBelowAllowance = gammaBudgetBelowAssignedAllowance assembly
   ; Allowance.allowancesStrictBelowMargin = allowancesStrictBelowMargin assembly
   }
 
 assemblyToSplitComplementMargin :
-  ∀ {surface off gamma cluster} →
-  FinalSplitComplementAllowanceAssembly surface off gamma cluster →
+  ∀ {surface offPayment gammaPayment cluster} →
+  FinalSplitComplementAllowanceAssembly
+    surface offPayment gammaPayment cluster →
   Split.SplitPoleQuotientComplementMargin surface
 assemblyToSplitComplementMargin assembly =
   Allowance.allowanceToSplitComplementMargin
@@ -165,8 +180,9 @@ assemblyToSplitComplementMargin assembly =
     refl refl refl
 
 assemblyContradiction :
-  ∀ {surface off gamma cluster} →
-  FinalSplitComplementAllowanceAssembly surface off gamma cluster →
+  ∀ {surface offPayment gammaPayment cluster} →
+  FinalSplitComplementAllowanceAssembly
+    surface offPayment gammaPayment cluster →
   ⊥
 assemblyContradiction {surface} assembly =
   Split.splitPoleQuotientComplementContradiction surface
@@ -183,13 +199,17 @@ record FinalAllowanceAssemblyBoundary : Set where
     strictCombinedBudgetIsFreshPostAnalysisLeafIsFalse :
       strictCombinedBudgetIsFreshPostAnalysisLeaf ≡ false
 
+    finalAllowancesMayDifferFromAnalyticAssignedAllowances : Bool
+    finalAllowancesMayDifferFromAnalyticAssignedAllowancesIsFalse :
+      finalAllowancesMayDifferFromAnalyticAssignedAllowances ≡ false
+
     sameObjectTransportStillRequired : Bool
     sameObjectTransportStillRequiredIsTrue :
       sameObjectTransportStillRequired ≡ true
 
-    consumerAllowanceFitStillRequired : Bool
-    consumerAllowanceFitStillRequiredIsTrue :
-      consumerAllowanceFitStillRequired ≡ true
+    sameOrderTransportOfAllowanceBoundsStillRequired : Bool
+    sameOrderTransportOfAllowanceBoundsStillRequiredIsTrue :
+      sameOrderTransportOfAllowanceBoundsStillRequired ≡ true
 
     allowanceAssemblyAutomaticallyProducesContradiction : Bool
     allowanceAssemblyAutomaticallyProducesContradictionIsTrue :
@@ -205,8 +225,9 @@ canonicalFinalAllowanceAssemblyBoundary : FinalAllowanceAssemblyBoundary
 canonicalFinalAllowanceAssemblyBoundary =
   final-allowance-assembly-boundary
     false refl
+    false refl
     true refl
     true refl
     true refl
     false refl
-    "After literal Off/Gamma/Cluster producers are transported to one ordered scalar and one universal pole-quotient taper, the final consumer chooses A_off and A_Gamma, proves B_off <= A_off, B_Gamma <= A_Gamma and A_off + A_Gamma < M_cluster, and this owner compiles those receipts directly into the existing split-complement contradiction. The strict combined-budget theorem is no longer a separate research leaf. Same-object transport and the actual analytic allowance fits remain required. RH is not derived without those literal inputs."
+    "The final assembly now consumes the actual Off/Gamma allowance-payment records. A_off and A_Gamma are literal transports of the allowances those analytic proofs were assigned, so the final consumer cannot substitute easier allowances after the fact. Scalar/taper transport and same-order transport of the two allowance inequalities remain explicit proof engineering. Once those receipts and A_off + A_Gamma < M_cluster are present, the allowance compiler and existing split-complement contradiction are automatic. RH is not derived without the literal producer inputs."
