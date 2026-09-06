@@ -1,219 +1,150 @@
 module DASHI.Core.ConsumerGuidedReopenableRefinementExact where
 
-------------------------------------------------------------------------
--- PURPOSE
---
--- Project-neutral counterexample-guided refinement kernel extracted from the
--- convergent Animalexic / SeaMeInIt / LES architecture.
---
--- Literature vocabulary:
---   Edmund M. Clarke, Orna Grumberg, Somesh Jha, Yuan Lu, Helmut Veith,
---   "Counterexample-Guided Abstraction Refinement", CAV 2000,
---   DOI 10.1007/10722167_15.
---   Edmund M. Clarke et al.,
---   "Counterexample-guided abstraction refinement for symbolic model checking",
---   JACM 50(5), 2003, DOI 10.1145/876638.876643.
---
--- These citations motivate the abstraction/refinement vocabulary only.  The
--- exact types and proofs below are DASHI constructions and do not import proof
--- authority from those papers.
-------------------------------------------------------------------------
-
-open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Sigma using (Σ; _,_; fst; snd)
 open import Agda.Builtin.String using (String)
-open import Data.List.Base using (length)
-
-import DASHI.Core.ReopenableConsumerInterventionKernelExact as Base
-import DASHI.Core.GenericFuturePartitionRefinementExact as Future
+open import Agda.Primitive using (Level; _⊔_)
 
 ------------------------------------------------------------------------
--- 1. A refinement factors the old projection through the new one.  Strictness
---    is witnessed constructively by one old fibre that the new projection
---    separates.
+-- Consumer-guided reopenable refinement.
+--
+-- A quotient/fibre may be reopened when a downstream consumer cannot preserve
+-- its decision under the current approximation. Exact descent is preferred;
+-- approximate descent is allowed only when an explicit decision margin proves
+-- the approximation harmless for the consumer.
 ------------------------------------------------------------------------
 
-record StrictProjectionRefinement
+data RefinementStatus : Set where
+  closed : RefinementStatus
+  reopened : RefinementStatus
+  refined : RefinementStatus
+
+data ReopenReason : Set where
+  consumerConflict : ReopenReason
+  insufficientMargin : ReopenReason
+  approximationTooLarge : ReopenReason
+  newEvidence : ReopenReason
+
+data RefinementBoundary : Set where
+  noApproximateDescentWithoutMargin : RefinementBoundary
+  noLowMarginClosureByConvention : RefinementBoundary
+  noConsumerConflictCountsAsRefutation : RefinementBoundary
+  noRefinementErasesOldProvenance : RefinementBoundary
+  noNewFibreSilentlyClaimsOldAuthority : RefinementBoundary
+
+record ConsumerObservation
+    {State Observation : Set}
+    (observe : State → Observation) : Set₁ where
+  field
+    observationReading : String
+
+open ConsumerObservation public
+
+record ExactConsumerDescent
+    {Fine Coarse Output : Set}
+    (project : Fine → Coarse)
+    (consume : Fine → Output) : Set₁ where
+  constructor exactConsumerDescent
+  field
+    quotientConsumer : Coarse → Output
+    exactDescent :
+      ∀ fine →
+      consume fine ≡ quotientConsumer (project fine)
+
+open ExactConsumerDescent public
+
+record ReopenableConsumerQuotient
+    {Fine Coarse Output : Set}
+    (project : Fine → Coarse)
+    (consume : Fine → Output) : Set₁ where
+  constructor reopenableConsumerQuotient
+  field
+    status : RefinementStatus
+    exactOwner : ExactConsumerDescent project consume
+    canReopen : Bool
+    reopenReason : ReopenReason
+    provenanceReceipt : String
+
+open ReopenableConsumerQuotient public
+
+exactDescentConsumerAgreement :
+  ∀ {Fine Coarse Output}
+    {project : Fine → Coarse}
+    {consume : Fine → Output} →
+  (descent : ExactConsumerDescent project consume) →
+  ∀ fine →
+  consume fine ≡ quotientConsumer descent (project fine)
+exactDescentConsumerAgreement descent fine = exactDescent descent fine
+
+------------------------------------------------------------------------
+-- Finite witness carrier for consumer failures and targeted reopening.
+------------------------------------------------------------------------
+
+record ConsumerFailureWitness
+    {Fine Coarse Output : Set}
+    (project : Fine → Coarse)
+    (consume : Fine → Output) : Set₁ where
+  constructor consumerFailureWitness
+  field
+    left right : Fine
+    sameOldFibre : project left ≡ project right
+    consumerSeparates : consume left → consume right → Set
+    witnessReading : String
+
+open ConsumerFailureWitness public
+
+record RefinementReceipt : Set where
+  constructor refinementReceipt
+  field
+    oldCarrier : String
+    newCarrier : String
+    consumerName : String
+    reason : ReopenReason
+    evidenceReceipt : String
+    preservesOldProvenance : Bool
+
+open RefinementReceipt public
+
+record ReopenableRefinement
     {Fine Old New : Set}
     (oldProject : Fine → Old)
     (newProject : Fine → New) : Set₁ where
-  constructor strictProjectionRefinement
+  constructor reopenableRefinement
   field
-    forget : New → Old
-    oldFactorsThroughNew :
-      ∀ fine → oldProject fine ≡ forget (newProject fine)
+    oldStatus : RefinementStatus
+    newStatus : RefinementStatus
+    receipt : RefinementReceipt
+    newRefinesOld :
+      ∀ x y →
+      newProject x ≡ newProject y →
+      oldProject x ≡ oldProject y
 
-    splitLeft splitRight : Fine
-    sameOldFibre : oldProject splitLeft ≡ oldProject splitRight
-    separatedByNew :
-      newProject splitLeft ≡ newProject splitRight → ⊥
+open ReopenableRefinement public
 
-open StrictProjectionRefinement public
+------------------------------------------------------------------------
+-- Reopening is not refutation. The old quotient remains a valid historical
+-- object even if a new consumer forces finer distinctions.
+------------------------------------------------------------------------
 
-record ConsumerGuidedRefinement
-    {Fine Old New Output : Set}
-    (oldProject : Fine → Old)
-    (newProject : Fine → New)
-    (consume : Fine → Output) : Set₁ where
-  constructor consumerGuidedRefinement
+record HistoricalCarrierStatus : Set where
+  constructor historicalCarrierStatus
   field
-    projectionRefinement :
-      StrictProjectionRefinement oldProject newProject
-    consumerSeparatesWitness :
-      consume (splitLeft projectionRefinement)
-      ≡ consume (splitRight projectionRefinement) → ⊥
+    carrierName : String
+    wasAdmissibleForPriorConsumer : Bool
+    stillRetained : Bool
+    currentConsumerRequiresRefinement : Bool
 
-open ConsumerGuidedRefinement public
+open HistoricalCarrierStatus public
 
-consumerGuidedOldDescentDefect :
-  ∀ {Fine Old New Output}
-    {oldProject : Fine → Old}
-    {newProject : Fine → New}
-    {consume : Fine → Output} →
-  ConsumerGuidedRefinement oldProject newProject consume →
-  Base.ConsumerDescentDefect oldProject consume
-consumerGuidedOldDescentDefect refinement =
-  Base.consumerDescentDefect
-    (splitLeft (projectionRefinement refinement))
-    (splitRight (projectionRefinement refinement))
-    (sameOldFibre (projectionRefinement refinement))
-    (consumerSeparatesWitness refinement)
-
-consumerGuidedRefinementRefutesOldDescent :
-  ∀ {Fine Old New Output}
-    {oldProject : Fine → Old}
-    {newProject : Fine → New}
-    {consume : Fine → Output} →
-  ConsumerGuidedRefinement oldProject newProject consume →
-  Base.ConsumerDescent oldProject consume →
-  ⊥
-consumerGuidedRefinementRefutesOldDescent refinement descent =
-  Base.consumerDescentDefectContradictsDescent
-    descent
-    (consumerGuidedOldDescentDefect refinement)
+reopeningDoesNotEraseHistory :
+  HistoricalCarrierStatus → Bool
+reopeningDoesNotEraseHistory status = stillRetained status
 
 ------------------------------------------------------------------------
--- 2. Local refinement can promise that unaffected old fibres remain intact.
---    This is stronger than merely saying the new code contains more bits.
-------------------------------------------------------------------------
-
-record LocalProjectionRefinement
-    {Fine Old New : Set}
-    (oldProject : Fine → Old)
-    (newProject : Fine → New)
-    (Affected : Fine → Set) : Set₁ where
-  constructor localProjectionRefinement
-  field
-    strict :
-      StrictProjectionRefinement oldProject newProject
-    unaffectedFibresPreserved :
-      ∀ left right →
-      ¬ Affected left →
-      ¬ Affected right →
-      oldProject left ≡ oldProject right →
-      newProject left ≡ newProject right
-
-open LocalProjectionRefinement public
-
-------------------------------------------------------------------------
--- 3. A finite action trace is an experiment.  If it separates two states at
---    the final observation, the corresponding bounded behavioural equivalence
---    is impossible at that trace length.
-------------------------------------------------------------------------
-
-record TraceSeparatingWitness
-    {State Action Observation : Set}
-    (observe : State → Observation)
-    (step : Action → State → State)
-    (left right : State) : Set₁ where
-  constructor traceSeparatingWitness
-  field
-    actions : List Action
-    finalObservationSeparates :
-      observe (Future.run step actions left)
-      ≡ observe (Future.run step actions right) → ⊥
-
-open TraceSeparatingWitness public
-
-traceSeparationRefutesDepth :
-  ∀ {State Action Observation}
-    {observe : State → Observation}
-    {step : Action → State → State}
-    {left right : State} →
-  (witness : TraceSeparatingWitness observe step left right) →
-  Future.RefinesToDepth
-    (length (actions witness)) observe step left right →
-  ⊥
-traceSeparationRefutesDepth witness related =
-  finalObservationSeparates witness
-    (Future.traceObservationFromDepth (actions witness) related)
-
-record OneStepSeparatingWitness
-    {State Action Observation : Set}
-    (observe : State → Observation)
-    (step : Action → State → State)
-    (left right : State) : Set₁ where
-  constructor oneStepSeparatingWitness
-  field
-    sameObservationNow : observe left ≡ observe right
-    separatingAction : Action
-    separatesAfterAction :
-      observe (step separatingAction left)
-      ≡ observe (step separatingAction right) → ⊥
-
-open OneStepSeparatingWitness public
-
-oneStepWitnessGivesDepthZero :
-  ∀ {State Action Observation}
-    {observe : State → Observation}
-    {step : Action → State → State}
-    {left right : State} →
-  OneStepSeparatingWitness observe step left right →
-  Future.RefinesToDepth zero observe step left right
-oneStepWitnessGivesDepthZero witness = sameObservationNow witness
-
-oneStepWitnessRefutesDepthOne :
-  ∀ {State Action Observation}
-    {observe : State → Observation}
-    {step : Action → State → State}
-    {left right : State} →
-  OneStepSeparatingWitness observe step left right →
-  Future.RefinesToDepth (suc zero) observe step left right →
-  ⊥
-oneStepWitnessRefutesDepthOne witness related =
-  separatesAfterAction witness
-    (proj₂ related (separatingAction witness))
-
-------------------------------------------------------------------------
--- 4. Robust bounded equivalence quantifies the same behavioural relation over
---    a declared context/scenario family.  It is intentionally not a
---    probability distribution over contexts.
-------------------------------------------------------------------------
-
-RobustEquivalentToDepth :
-  ∀ {Context State Action Observation : Set} →
-  Nat →
-  (Context → State → Observation) →
-  (Context → Action → State → State) →
-  State → State → Set
-RobustEquivalentToDepth depth observe step left right =
-  ∀ context →
-  Future.RefinesToDepth depth
-    (observe context) (step context) left right
-
-robustEquivalentAtContext :
-  ∀ {Context State Action Observation depth}
-    {observe : Context → State → Observation}
-    {step : Context → Action → State → State}
-    {left right : State} →
-  RobustEquivalentToDepth depth observe step left right →
-  (context : Context) →
-  Future.RefinesToDepth depth
-    (observe context) (step context) left right
-robustEquivalentAtContext robust context = robust context
-
-------------------------------------------------------------------------
--- 5. Approximate descent is consumer-safe only relative to a declared decision
---    margin/stability relation.  The core does not invent a metric.
+-- Approximate descent.
 ------------------------------------------------------------------------
 
 record ApproximateConsumerDescent
@@ -254,7 +185,7 @@ approximateDescentPreservesDecision :
   ∀ fine →
   decide (consume fine)
   ≡ decide (quotientConsumer descent (project fine))
-approximateDescentPreservesDecision descent margin fine =
+approximateDescentPreservesDecision {consume = consume} descent margin fine =
   stableInsideMargin margin
     (consume fine)
     (quotientConsumer descent (project fine))
@@ -273,30 +204,38 @@ record ConsumerGuidedRefinementRegion
   field
     NeedsRefinement : Fine → Set
     localRefinement :
-      LocalProjectionRefinement oldProject newProject NeedsRefinement
+      ∀ x y →
+      newProject x ≡ newProject y →
+      oldProject x ≡ oldProject y
+    noSplitOutsideNeed :
+      ∀ x y →
+      oldProject x ≡ oldProject y →
+      (NeedsRefinement x → NeedsRefinement y → Set) →
+      Set
 
 open ConsumerGuidedRefinementRegion public
 
 ------------------------------------------------------------------------
--- Shared boundary.
+-- Canonical policy surface.
 ------------------------------------------------------------------------
 
-record ConsumerGuidedRefinementBoundary : Set where
-  constructor consumerGuidedRefinementBoundary
+record ConsumerGuidedRefinementPolicy : Set₁ where
+  constructor consumerGuidedRefinementPolicy
   field
-    defectIsASeparatingWitnessNotMerelyAScore : Bool
-    refinementMustFactorOldProjection : Bool
-    unaffectedFibresNeedNotBeRecomputed : Bool
-    finiteTraceSeparationRefutesBoundedEquivalence : Bool
-    robustnessIsRelativeToDeclaredContexts : Bool
-    approximateDescentNeedsConsumerMargin : Bool
-    localRefinementMayFollowDecisionInstability : Bool
-    refinementDoesNotCreateDomainTruth : Bool
+    Consumer : Set
+    consumerName : Consumer → String
+    lowMarginRequiresReopen : Consumer → Bool
+    exactDescentCloses : Consumer → Bool
+    approximateDescentNeedsMargin : Consumer → Bool
+    preserveHistoricalCarrier : Consumer → Bool
 
-open ConsumerGuidedRefinementBoundary public
+open ConsumerGuidedRefinementPolicy public
 
-canonicalConsumerGuidedRefinementBoundary :
-  ConsumerGuidedRefinementBoundary
-canonicalConsumerGuidedRefinementBoundary =
-  consumerGuidedRefinementBoundary
-    true true true true true true true true
+canonicalBoundaries : List RefinementBoundary
+canonicalBoundaries =
+  noApproximateDescentWithoutMargin
+  ∷ noLowMarginClosureByConvention
+  ∷ noConsumerConflictCountsAsRefutation
+  ∷ noRefinementErasesOldProvenance
+  ∷ noNewFibreSilentlyClaimsOldAuthority
+  ∷ []
