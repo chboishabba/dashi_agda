@@ -5,41 +5,46 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 -- Import-only aggregation/navigation root for the Aristotle / RH return lane.
 --
--- The current returned state includes the exact two-zero / three-taper theorem,
--- the explicit finite-near/far decomposition, the optimized gap-split no-go,
--- the §37 quarter-period/density reconciliation, and the §38 actual-zeta upper
--- local-count instance. Existing gap-split, selected-window, finite-near,
--- scalar-cancellation, highest-alpha and canonical RH schedulers consume those
--- returns directly, so this is one welded dependency graph rather than parallel
--- status ledgers.
+-- The returned Lean tranche closes useful near/far and density/counting
+-- infrastructure, but the final carrier audit matters more than theorem names.
+-- The §35 clustering condition is a diagnostic for positivity of a gap-split
+-- NO-GO lower bound, not a forward RH payment.  Likewise the rank-two
+-- determinant-taper G2d scalarization is a valuable signed diagnostic theorem
+-- surface, but the authoritative final contradiction does not identify that
+-- taper with the universal pole-quotient taper.
 --
--- The Alpoge--Furman >2/3 simple/on-critical-line theorem is audited against the
--- live local-clustering consumer: its global population summary does not descend
--- directly to the selected target-local gap pattern. Transverse
--- alpha = Re(rho)-1/2 is also separated from the required ordinate
--- delta = Im(rho)-t.
+-- The final high-ordinate pole-quotient consumer is:
 --
--- DirectFinitePoleNearProducer is now the canonical concrete target-gap/phase
--- carrier. It is strengthened in place to realize the canonical
--- LiteralTargetCenteredScalarProblem, which itself now owns the literal
+--   cluster = offOrdinate + Gamma
+--   offOrdinate <= B_off
+--   Gamma <= B_Gamma
+--   B_off + B_Gamma < M_cluster.
 --
---   M2_delta = finiteNearSum (m_sigma * (b_sigma-t)^2).
+-- Existing owners already provide the split-complement contradiction compiler.
+-- The 8889 checked-Lean reconciliation additionally records that quantitative
+-- cluster-margin MATHEMATICS is owned; only its same-object attachment remains.
+-- Therefore, under the closed-world repo search discipline, the genuinely new
+-- analytic leaves are exactly:
 --
--- PoleNearPhaseStatistic and SignedFiniteNearEvaluationSurface compile from the
--- direct producer; neither should be reconstructed. The direct producer is then
--- welded to the existing ActualSelectedPoleNearProducer, after which the same
--- object can feed both the selected delta^2 moment/clustering route and selected
--- finite-near budget transport.
+--   * inhabit PoleQuotientOffOrdinateBudgetTarget on the literal universal
+--     pole-quotient reflection-paired cosine carrier;
+--   * repair the same-taper Gamma budget to the owned sharp accuracy window.
 --
--- The old post-369 donor-search scheduler is corrected in place: generic donor
--- attachment machinery remains reusable, but the current donor inventory has no
--- concrete exact literal donor, so name-level donor search is not the default
--- highest-alpha move. Recover the literal direct finite producer instead.
+-- The determinant DirectSignedConsumerPayment remains useful inside G2d, but it
+-- is diagnostic/scalarization unless an explicit same-object transport to the
+-- universal pole-quotient taper is supplied.  Current authoritative owners say
+-- that transport is not owned, so it is never silently promoted.
 --
--- Genuine zeta clustering, the actual direct/selected producer instantiations,
--- their same-object weld, the quantitative literal M2_delta estimate, selected
--- finite-near budget, Gamma precision, low-ordinate/global coverage and RH
--- remain open.
+-- Existing representation machinery is aggressively reused: canonical H_X
+-- compiles H_T directly; the historical H_M factorization is not a gate on H_W;
+-- an ActualSelectedPoleNearProducer compiles its selected-test and near/far
+-- welds.  Uninhabited adapter records are infrastructure obligations, not new
+-- harmonic-analysis programmes and not automatically claimed as proof terms.
+--
+-- Zeta clustering, M2_delta and the determinant signed sum remain useful
+-- obstruction/diagnostic surfaces.  They are not scheduled ahead of the literal
+-- universal pole-quotient signed off bound.  Low-ordinate/global coverage and RH
+-- remain open.  No theorem in this aggregate derives RH.
 ------------------------------------------------------------------------
 
 import DASHI.Analysis.RiemannAristotleSharedWindowCertificateExact
@@ -65,6 +70,7 @@ import DASHI.Analysis.RiemannG2AdaptiveJLambdaConstantWindowExact
 import DASHI.Analysis.RiemannG2QuarterPeriodAnalyticRouteReconciliationExact
 import DASHI.Analysis.RiemannG2HighestAlphaAfter369Exact
 import DASHI.Analysis.RiemannG2HighestAlphaAfter8894Exact
+import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact
 import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerExact
 import DASHI.Analysis.RiemannAristotleRHAnalyticLeafSchedulerExact
 import DASHI.Analysis.RiemannAristotleNearCoreDensityReturnRegression
