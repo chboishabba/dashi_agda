@@ -19,8 +19,8 @@ module DASHI.Culture.MissingDeceasedScientificWorkEverything where
 -- interest or public governing physics alone.
 --
 -- Amy Eskridge is kept outside the House-letter denominator but included in the
--- full memorial application-transformation atlas so she is not dropped from the
--- comparative scientific/investigative surface.
+-- full memorial application-transformation atlas and acquisition compiler so she
+-- is not dropped from the comparative scientific/investigative surface.
 
 import DASHI.Core.ScientificWorkAttributionExact
 import DASHI.Core.ScientificSourceCitationExact
@@ -61,6 +61,7 @@ import DASHI.Culture.MissingDeceasedScienceDrivenAcquisitionExact
 import DASHI.Culture.MissingDeceasedApplicationTransformationMatrixExact
 import DASHI.Culture.AmyEskridgeApplicationTransformationExact
 import DASHI.Culture.MissingDeceasedFullApplicationTransformationAtlasExact
+import DASHI.Culture.MissingDeceasedFullApplicationAcquisitionExact
 import DASHI.Culture.ChavezApplicationTransformationPossessionExact
 import DASHI.Culture.LeBlancApplicationTransformationPossessionExact
 import DASHI.Culture.RezaApplicationTransformationPossessionExact
