@@ -6,77 +6,38 @@ module DASHI.Analysis.RiemannAristotleCurrentFrontierExact where
 -- Maintained bidirectionally: forward from machine-checked Lean owners and
 -- backward from the unweakened RH contradiction.
 --
--- NEWEST KERNEL-CHECKED LEAN ADVANCE (2026-08-30)
+-- §37 reconciles density cutoff with quarter-period crossing and §38 instantiates
+-- zeta's upper local count. These close two audit coordinates.
 --
--- The supplied Zeta23Bridge session reports `lake build Zeta23Bridge`
--- successful (8883 jobs) and the capstone axiom audit returning only
--- propext/Classical.choice/Quot.sound.
+-- IMPORTANT CORRECTION AFTER SOURCE RE-READ
 --
--- It now owns, for every cutoff J >= 1,
+-- §35 proves
 --
---   farShellBound A |t| J
---     = 18 A log(|t|+4)/J + 72 A/sqrt(J),
+--   positive gap-split lower bound
+--      -> (4/pi^2) * highGapMass < lowGapMass.
 --
--- together with:
+-- The positive lower bound is used by the checked no-go theorems to show the
+-- desired small signed-scalar hypothesis is unsatisfiable when the floor reaches
+-- the consumer threshold. Hence the clustering inequality is an OBSTRUCTION
+-- DIAGNOSTIC, not the first forward RH theorem.
 --
---   * a proof that the literal zero tail is bounded by that expression;
---   * convergence of this explicit bound to zero and arbitrary-accuracy cutoff
---     selection;
---   * a genuinely finite signed near shell carrier;
---   * transport of the decomposition onto the literal offOrdProjectiveDefect:
+-- The forward G2d/current-cut theorem remains the literal signed target-centred
+-- determinant response. BIDI compression now states it exactly as
 --
---       |D_off(g,t,r) - 1/2 nearSignedSum(t,J)|
---         <= 1/2 C farShellBound A |t| J.
+--   DirectSignedConsumerPayment P
+--     = AcceptableForG2Consumer P (totalSignedResponse P)
 --
--- The aggregate root also imports LiteralWeilDeterministicProjectiveSchur, so
--- the previously source-only deterministic Schur compiler is now part of this
--- reported kernel-checked Lean build.
+-- on the canonical LiteralTargetCenteredScalarProblem. A successful
+-- DirectFinitePoleNearProducer must carry this payment. Canonical Scalar,
+-- ZeroIndex, target, nearOff, multiplicity, off-real displacement, delta and
+-- totalSignedResponse compile from P; PoleNearPhaseStatistic and the generic
+-- evaluation surface compile from the direct producer.
 --
--- BIDI CONSEQUENCE
---
--- The infinite part of S2 is no longer a research socket.  For a three-taper
--- observer, let E denote exact elimination of the deterministic pole/Gamma
--- response vectors and let D_near(J) be the three-vector of finite signed near
--- sums.  Write
---
---   X = E D_off,
---   N = E D_near(J),
---   F = E (D_off - D_near(J)).
---
--- Then X = N + F, and the remaining finite theorem may be targeted through
---
---   ||X||^2 <= 2 ||N||^2 + 2 ||F||^2.
---
--- The far term F is mechanically controlled by the explicit cutoff theorem plus
--- Schur contraction.  Therefore the genuinely open S2 object is the finite
--- signed post-Schur near-core energy ||N||^2, not the infinite zero tail.
---
--- CURRENT RESEARCH CUTSET
---
---   S1. construct a short three-taper family such that the deterministic
---       pole/Gamma vectors have rank two and the off-line same-ordinate cluster
---       survives with an explicit positive Schur margin M_cluster;
---
---   S2a. CLOSED IN LEAN: explicit far-shell cutoff formula and literal D_off
---        finite-near/far decomposition;
---
---   S2b. prove a signed bound on the FINITE post-Schur near vector
---
---          ||E D_near(J)||^2 <= B_near(J)
---
---        for a jointly chosen cutoff J;
---
---   S2c. combine that finite bound with the explicit Lean far remainder so that
---
---          2 B_near(J) + 2 B_error(J) < M_cluster.
---
---        `RiemannAristotleFiniteNearCoreSchurCompilerExact` then closes the
---        strict off-carrier contradiction mechanically;
---
---   S3. certify the complementary low-ordinate region, or replace the split by
---       a universal construction;
---
---   S4. invoke the repository's existing unweakened RH proposition.
+-- Selected-window identity and selected-scalar budget transport are downstream
+-- after the direct producer. The literal M2_delta is still a useful diagnostic
+-- observable for the gap-split obstruction, but is not a forward RH payment.
+-- Gamma precision remains an independent live branch. Projective balance,
+-- low-ordinate/global coverage and RH remain separate.
 --
 -- No theorem here derives RH.
 ------------------------------------------------------------------------
@@ -122,6 +83,61 @@ record AristotleCurrentFrontier : Set where
     latestLeanBridgeBuildKernelChecked : Bool
     latestLeanBridgeBuildKernelCheckedIsTrue :
       latestLeanBridgeBuildKernelChecked ≡ true
+
+    quarterPeriodDensityReconciliationClosedInLean : Bool
+    quarterPeriodDensityReconciliationClosedInLeanIsTrue :
+      quarterPeriodDensityReconciliationClosedInLean ≡ true
+
+    zetaUnitLocalCountClosedInLean : Bool
+    zetaUnitLocalCountClosedInLeanIsTrue :
+      zetaUnitLocalCountClosedInLean ≡ true
+
+    zetaShortWindowUpperCountClosedInLean : Bool
+    zetaShortWindowUpperCountClosedInLeanIsTrue :
+      zetaShortWindowUpperCountClosedInLean ≡ true
+
+    densityCutRefutesInverseWidthRoute : Bool
+    densityCutRefutesInverseWidthRouteIsFalse :
+      densityCutRefutesInverseWidthRoute ≡ false
+
+    zetaLongWindowLowerDensityClosed : Bool
+    zetaLongWindowLowerDensityClosedIsFalse :
+      zetaLongWindowLowerDensityClosed ≡ false
+
+    actualZetaClusteringClosed : Bool
+    actualZetaClusteringClosedIsFalse : actualZetaClusteringClosed ≡ false
+
+    targetLocalSecondMomentCompilerClosedInAgda : Bool
+    targetLocalSecondMomentCompilerClosedInAgdaIsTrue :
+      targetLocalSecondMomentCompilerClosedInAgda ≡ true
+
+    targetLocalSecondMomentProducerClosed : Bool
+    targetLocalSecondMomentProducerClosedIsFalse :
+      targetLocalSecondMomentProducerClosed ≡ false
+
+    targetLocalMomentUsesExistingSelectedWindow : Bool
+    targetLocalMomentUsesExistingSelectedWindowIsTrue :
+      targetLocalMomentUsesExistingSelectedWindow ≡ true
+
+    concretePhaseStatisticCompilerClosedInAgda : Bool
+    concretePhaseStatisticCompilerClosedInAgdaIsTrue :
+      concretePhaseStatisticCompilerClosedInAgda ≡ true
+
+    selectedDirectZeroCarrierWeldClosed : Bool
+    selectedDirectZeroCarrierWeldClosedIsFalse :
+      selectedDirectZeroCarrierWeldClosed ≡ false
+
+    oneDirectGapCarrierFeedsClusteringAndFiniteNear : Bool
+    oneDirectGapCarrierFeedsClusteringAndFiniteNearIsTrue :
+      oneDirectGapCarrierFeedsClusteringAndFiniteNear ≡ true
+
+    transverseMomentDirectlyControlsOrdinateClustering : Bool
+    transverseMomentDirectlyControlsOrdinateClusteringIsFalse :
+      transverseMomentDirectlyControlsOrdinateClustering ≡ false
+
+    alpogeFurmanGlobalSimpleProportionDirectlyClosesClustering : Bool
+    alpogeFurmanGlobalSimpleProportionDirectlyClosesClusteringIsFalse :
+      alpogeFurmanGlobalSimpleProportionDirectlyClosesClustering ≡ false
 
     nearFarShellCompositionCompilerClosedInAgda : Bool
     nearFarShellCompositionCompilerClosedInAgdaIsTrue :
@@ -180,7 +196,70 @@ canonicalAristotleCurrentFrontier =
     false refl
     false refl
     false refl
+    true refl
+    false refl
+    true refl
+    true refl
+    false refl
+    true refl
+    false refl
+    false refl
+    true refl
+    true refl
+    true refl
     false refl
     false refl
     false refl
-    "The newest kernel-checked Lean tranche closes the explicit far-shell modulus, arbitrary-accuracy cutoff selection, the finite signed near carrier, and the literal D_off finite-near/far decomposition. The deterministic projective Schur compiler is also now inside the reported aggregate build. Agda therefore moves the first unproved S2 theorem to the finite post-Schur near-core energy: bound ||E D_near(J)||^2 strongly enough that its weighted sum with the explicit far-error energy lies below the surviving S1 cluster margin. The infinite zero tail is no longer the research bottleneck. S1 and low-ordinate certification remain open; RH is not derived."
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    "The checked Lean tranche closes quarter-period/density compatibility and zeta upper local counting. The §35 inequality (4/pi^2)*highGapMass < lowGapMass is retained as a condition for positivity of the gap-split NO-GO lower bound, not as a forward RH producer. The forward zero-side leaf is the literal target-centred signed determinant estimate, now typed as DirectSignedConsumerPayment = AcceptableForG2Consumer(totalSignedResponse) on the canonical LiteralTargetCenteredScalarProblem and required by DirectFinitePoleNearProducer. Canonical zero/gap fields, the phase-statistic view and generic evaluation surface are compiler output; selected-window/budget transport is downstream. M2_delta remains a same-carrier obstruction diagnostic, not an RH payment. Gamma precision, projective-balance breaking, low-ordinate coverage and final RH remain open. RH is not derived."
+
+------------------------------------------------------------------------
+-- Corrected high-level scheduler interpretation, kept outside the compatibility
+-- record so existing field projections remain stable.
+------------------------------------------------------------------------
+
+actualZetaClusteringIsForwardRHProducer : Bool
+actualZetaClusteringIsForwardRHProducer = false
+
+actualZetaClusteringIsForwardRHProducerIsFalse :
+  actualZetaClusteringIsForwardRHProducer ≡ false
+actualZetaClusteringIsForwardRHProducerIsFalse = refl
+
+actualZetaClusteringIsGapSplitObstructionDiagnostic : Bool
+actualZetaClusteringIsGapSplitObstructionDiagnostic = true
+
+actualZetaClusteringIsGapSplitObstructionDiagnosticIsTrue :
+  actualZetaClusteringIsGapSplitObstructionDiagnostic ≡ true
+actualZetaClusteringIsGapSplitObstructionDiagnosticIsTrue = refl
+
+targetLocalSecondMomentIsForwardRHProducer : Bool
+targetLocalSecondMomentIsForwardRHProducer = false
+
+targetLocalSecondMomentIsForwardRHProducerIsFalse :
+  targetLocalSecondMomentIsForwardRHProducer ≡ false
+targetLocalSecondMomentIsForwardRHProducerIsFalse = refl
+
+directSignedConsumerPaymentCompilerClosedInAgda : Bool
+directSignedConsumerPaymentCompilerClosedInAgda = true
+
+directSignedConsumerPaymentCompilerClosedInAgdaIsTrue :
+  directSignedConsumerPaymentCompilerClosedInAgda ≡ true
+directSignedConsumerPaymentCompilerClosedInAgdaIsTrue = refl
+
+literalDirectFiniteProducerClosed : Bool
+literalDirectFiniteProducerClosed = false
+
+literalDirectFiniteProducerClosedIsFalse :
+  literalDirectFiniteProducerClosed ≡ false
+literalDirectFiniteProducerClosedIsFalse = refl
+
+genericWithinReceiptAloneClosesLiteralG2 : Bool
+genericWithinReceiptAloneClosesLiteralG2 = false
+
+genericWithinReceiptAloneClosesLiteralG2IsFalse :
+  genericWithinReceiptAloneClosesLiteralG2 ≡ false
+genericWithinReceiptAloneClosesLiteralG2IsFalse = refl

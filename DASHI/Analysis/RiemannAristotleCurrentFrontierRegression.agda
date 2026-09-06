@@ -48,6 +48,107 @@ latestLeanBuildChecked :
     F.canonicalAristotleCurrentFrontier ≡ true
 latestLeanBuildChecked = refl
 
+quarterDensityReconciled :
+  F.AristotleCurrentFrontier.quarterPeriodDensityReconciliationClosedInLean
+    F.canonicalAristotleCurrentFrontier ≡ true
+quarterDensityReconciled = refl
+
+zetaUnitCountClosed :
+  F.AristotleCurrentFrontier.zetaUnitLocalCountClosedInLean
+    F.canonicalAristotleCurrentFrontier ≡ true
+zetaUnitCountClosed = refl
+
+zetaShortWindowCountClosed :
+  F.AristotleCurrentFrontier.zetaShortWindowUpperCountClosedInLean
+    F.canonicalAristotleCurrentFrontier ≡ true
+zetaShortWindowCountClosed = refl
+
+densityCutDoesNotKillInverseWidth :
+  F.AristotleCurrentFrontier.densityCutRefutesInverseWidthRoute
+    F.canonicalAristotleCurrentFrontier ≡ false
+densityCutDoesNotKillInverseWidth = refl
+
+zetaLongWindowLowerDensityOpen :
+  F.AristotleCurrentFrontier.zetaLongWindowLowerDensityClosed
+    F.canonicalAristotleCurrentFrontier ≡ false
+zetaLongWindowLowerDensityOpen = refl
+
+-- The theorem is still unproved, but no longer misclassified as a forward RH leaf.
+zetaClusteringUnproved :
+  F.AristotleCurrentFrontier.actualZetaClusteringClosed
+    F.canonicalAristotleCurrentFrontier ≡ false
+zetaClusteringUnproved = refl
+
+zetaClusteringNotForwardRHProducer :
+  F.actualZetaClusteringIsForwardRHProducer ≡ false
+zetaClusteringNotForwardRHProducer =
+  F.actualZetaClusteringIsForwardRHProducerIsFalse
+
+zetaClusteringIsGapSplitDiagnostic :
+  F.actualZetaClusteringIsGapSplitObstructionDiagnostic ≡ true
+zetaClusteringIsGapSplitDiagnostic =
+  F.actualZetaClusteringIsGapSplitObstructionDiagnosticIsTrue
+
+localMomentCompilerClosed :
+  F.AristotleCurrentFrontier.targetLocalSecondMomentCompilerClosedInAgda
+    F.canonicalAristotleCurrentFrontier ≡ true
+localMomentCompilerClosed = refl
+
+localMomentProducerUnproved :
+  F.AristotleCurrentFrontier.targetLocalSecondMomentProducerClosed
+    F.canonicalAristotleCurrentFrontier ≡ false
+localMomentProducerUnproved = refl
+
+localMomentUsesSelectedWindow :
+  F.AristotleCurrentFrontier.targetLocalMomentUsesExistingSelectedWindow
+    F.canonicalAristotleCurrentFrontier ≡ true
+localMomentUsesSelectedWindow = refl
+
+localMomentNotForwardRHProducer :
+  F.targetLocalSecondMomentIsForwardRHProducer ≡ false
+localMomentNotForwardRHProducer =
+  F.targetLocalSecondMomentIsForwardRHProducerIsFalse
+
+phaseStatisticCompilerClosed :
+  F.AristotleCurrentFrontier.concretePhaseStatisticCompilerClosedInAgda
+    F.canonicalAristotleCurrentFrontier ≡ true
+phaseStatisticCompilerClosed = refl
+
+selectedDirectWeldOpen :
+  F.AristotleCurrentFrontier.selectedDirectZeroCarrierWeldClosed
+    F.canonicalAristotleCurrentFrontier ≡ false
+selectedDirectWeldOpen = refl
+
+sharedDirectCarrierFeedsBothDiagnosticAndFiniteNear :
+  F.AristotleCurrentFrontier.oneDirectGapCarrierFeedsClusteringAndFiniteNear
+    F.canonicalAristotleCurrentFrontier ≡ true
+sharedDirectCarrierFeedsBothDiagnosticAndFiniteNear = refl
+
+transverseMomentNotOrdinateClustering :
+  F.AristotleCurrentFrontier.transverseMomentDirectlyControlsOrdinateClustering
+    F.canonicalAristotleCurrentFrontier ≡ false
+transverseMomentNotOrdinateClustering = refl
+
+alpogeFurmanNotDirectLocalClosure :
+  F.AristotleCurrentFrontier.alpogeFurmanGlobalSimpleProportionDirectlyClosesClustering
+    F.canonicalAristotleCurrentFrontier ≡ false
+alpogeFurmanNotDirectLocalClosure = refl
+
+-- Forward direct theorem boundary.
+directPaymentCompilerClosed :
+  F.directSignedConsumerPaymentCompilerClosedInAgda ≡ true
+directPaymentCompilerClosed =
+  F.directSignedConsumerPaymentCompilerClosedInAgdaIsTrue
+
+literalDirectProducerStillOpen :
+  F.literalDirectFiniteProducerClosed ≡ false
+literalDirectProducerStillOpen = F.literalDirectFiniteProducerClosedIsFalse
+
+genericWithinDoesNotCloseLiteralG2 :
+  F.genericWithinReceiptAloneClosesLiteralG2 ≡ false
+genericWithinDoesNotCloseLiteralG2 =
+  F.genericWithinReceiptAloneClosesLiteralG2IsFalse
+
 nearFarCompilerClosed :
   F.AristotleCurrentFrontier.nearFarShellCompositionCompilerClosedInAgda
     F.canonicalAristotleCurrentFrontier ≡ true
