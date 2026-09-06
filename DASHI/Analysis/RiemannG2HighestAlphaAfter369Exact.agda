@@ -5,27 +5,32 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannG2LiteralC3CovarianceSourceGateExact as SourceGate
-import DASHI.Analysis.RiemannG2C3ToScalarRouteCutExact as ScalarCut
 import DASHI.Analysis.RiemannAristotleG2eTargetCenteredSymmetryNoGoExact as TargetNoGo
 import DASHI.Analysis.RiemannAristotleG2dScalarDeterminantSumTargetExact as G2d
 import DASHI.Analysis.RiemannAristotleG2CurrentCutExact as Current
 import DASHI.Analysis.RiemannG2TargetCenteredScalarCancellationAssemblyExact as Assembly
 import DASHI.Analysis.RiemannG2ExistingScalarHarmonicSameObjectAttachmentExact as Attachment
+import DASHI.Analysis.RiemannG2ExistingScalarDonorInventoryExact as Inventory
+import DASHI.Analysis.RiemannAristotlePoleQuotientDirectFiniteNearAttackExact as Direct
 import DASHI.Core.FrontierRelationStrengthBidiExact as Relation
 
 ------------------------------------------------------------------------
--- G2 HIGHEST-ALPHA FRONTIER AFTER 369/MONSTER CROSS-POLLINATION
+-- G2 HIGHEST-ALPHA FRONTIER AFTER 369 / LATER BIDI CORRECTION
 --
--- User-directed invariant for this tranche: assume ordinary machinery already
--- exists.  That now applies both to C3/determinant algebra and to ordinary
--- Fourier/parity/moment/oscillatory machinery.
+-- The original post-369 scheduler assumed ordinary harmonic machinery existed
+-- and therefore prioritized identifying a same-object scalar donor.  The later
+-- repository donor inventory is stronger information: no concrete exact donor
+-- on the literal target-centred G2 scalar problem is currently identified.
 --
--- Therefore the live theorem-bearing payment is not "invent a new harmonic
--- method".  It is the exact same-object attachment between an existing scalar
--- harmonic donor and the literal G2 target-centred determinant problem.
+-- The live object has since been sharpened further.  DirectFinitePoleNearProducer
+-- is required to carry an explicit realization of the canonical
+-- LiteralTargetCenteredScalarProblem and an actual approximant/error receipt.
+-- The literal delta-moment is already defined on that SAME scalar problem.
 --
--- Literal C3 constructor recovery remains diagnostic only.  It can reopen the
--- symmetry branch solely if it yields an additional scalar q/phase identity.
+-- Therefore this owner is updated IN PLACE: do not schedule name-level donor
+-- search or exact identity to an unidentified donor.  Recover the literal direct
+-- finite producer instead.  A future exact donor remains admissible only if it
+-- literally inhabits the existing same-object attachment interface.
 ------------------------------------------------------------------------
 
 data Post369RHAction : Set where
@@ -33,6 +38,7 @@ data Post369RHAction : Set where
   recoverNontrivialScalarSymmetryLaw
   identifyExistingScalarDonor
   proveExactScalarProblemIdentity
+  recoverLiteralDirectFiniteProducer
   : Post369RHAction
 
 data Post369RHState : Set where
@@ -41,26 +47,32 @@ data Post369RHState : Set where
   scalarLawRecovered
   donorIdentified
   sameObjectScalarAttachmentClosed
+  literalDirectProducerRecovered
   : Post369RHState
 
 nextState : Post369RHState -> Post369RHAction -> Post369RHState
 nextState provenanceOnly recoverLiteralConstructors = constructorsRecovered
 nextState provenanceOnly recoverNontrivialScalarSymmetryLaw = provenanceOnly
-nextState provenanceOnly identifyExistingScalarDonor = donorIdentified
+nextState provenanceOnly identifyExistingScalarDonor = provenanceOnly
 nextState provenanceOnly proveExactScalarProblemIdentity = provenanceOnly
+nextState provenanceOnly recoverLiteralDirectFiniteProducer = literalDirectProducerRecovered
 nextState constructorsRecovered recoverLiteralConstructors = constructorsRecovered
 nextState constructorsRecovered recoverNontrivialScalarSymmetryLaw = scalarLawRecovered
-nextState constructorsRecovered identifyExistingScalarDonor = donorIdentified
+nextState constructorsRecovered identifyExistingScalarDonor = constructorsRecovered
 nextState constructorsRecovered proveExactScalarProblemIdentity = constructorsRecovered
+nextState constructorsRecovered recoverLiteralDirectFiniteProducer = literalDirectProducerRecovered
 nextState scalarLawRecovered recoverLiteralConstructors = scalarLawRecovered
 nextState scalarLawRecovered recoverNontrivialScalarSymmetryLaw = scalarLawRecovered
-nextState scalarLawRecovered identifyExistingScalarDonor = donorIdentified
+nextState scalarLawRecovered identifyExistingScalarDonor = scalarLawRecovered
 nextState scalarLawRecovered proveExactScalarProblemIdentity = scalarLawRecovered
+nextState scalarLawRecovered recoverLiteralDirectFiniteProducer = literalDirectProducerRecovered
 nextState donorIdentified recoverLiteralConstructors = donorIdentified
 nextState donorIdentified recoverNontrivialScalarSymmetryLaw = donorIdentified
 nextState donorIdentified identifyExistingScalarDonor = donorIdentified
 nextState donorIdentified proveExactScalarProblemIdentity = sameObjectScalarAttachmentClosed
+nextState donorIdentified recoverLiteralDirectFiniteProducer = literalDirectProducerRecovered
 nextState sameObjectScalarAttachmentClosed _ = sameObjectScalarAttachmentClosed
+nextState literalDirectProducerRecovered _ = literalDirectProducerRecovered
 
 currentState : Post369RHState
 currentState = provenanceOnly
@@ -69,17 +81,21 @@ sourceDiagnosticAction : Post369RHAction
 sourceDiagnosticAction = recoverLiteralConstructors
 
 highestAlphaTheoremAction : Post369RHAction
-highestAlphaTheoremAction = proveExactScalarProblemIdentity
+highestAlphaTheoremAction = recoverLiteralDirectFiniteProducer
 
-sourceRecoveryAloneDoesNotCloseSameObjectScalarAttachment :
+sourceRecoveryAloneDoesNotCloseDirectProducer :
   nextState provenanceOnly recoverLiteralConstructors
-    ≡ sameObjectScalarAttachmentClosed -> ⊥
-sourceRecoveryAloneDoesNotCloseSameObjectScalarAttachment ()
+    ≡ literalDirectProducerRecovered -> ⊥
+sourceRecoveryAloneDoesNotCloseDirectProducer ()
 
-donorIdentificationNeedsExactIdentity :
+unidentifiedDonorSearchDoesNotAdvanceCurrentState :
+  nextState provenanceOnly identifyExistingScalarDonor ≡ provenanceOnly
+unidentifiedDonorSearchDoesNotAdvanceCurrentState = refl
+
+legacyDonorIdentificationNeedsExactIdentity :
   nextState donorIdentified proveExactScalarProblemIdentity
     ≡ sameObjectScalarAttachmentClosed
-donorIdentificationNeedsExactIdentity = refl
+legacyDonorIdentificationNeedsExactIdentity = refl
 
 currentAgdaPayloadStillProvenanceOnly :
   SourceGate.currentLiteralC3SourceStage ≡ SourceGate.provenanceReturnOnly
@@ -90,17 +106,22 @@ symmetryOnlyRoutePruned :
     ≡ SourceGate.symmetryOnlyCancellationPruned
 symmetryOnlyRoutePruned = refl
 
-ordinaryHarmonicDonorAssumedAvailable :
+ordinaryHarmonicDonorInterfaceExists :
   Attachment.ordinaryHarmonicDonorAssumedAvailable
     Attachment.canonicalExistingScalarHarmonicAttachmentBoundary ≡ true
-ordinaryHarmonicDonorAssumedAvailable =
+ordinaryHarmonicDonorInterfaceExists =
   Attachment.ordinaryHarmonicDonorAssumedAvailableIsTrue
     Attachment.canonicalExistingScalarHarmonicAttachmentBoundary
 
-exactProblemIdentityIsRequired :
+concreteExactDonorNotIdentified :
+  Inventory.concreteExactLiteralDonorIdentifiedInCurrentInventory ≡ false
+concreteExactDonorNotIdentified =
+  Inventory.concreteExactLiteralDonorIdentifiedInCurrentInventoryIsFalse
+
+exactProblemIdentityWouldStillBeRequiredForFutureDonor :
   Attachment.exactProblemIdentityRequired
     Attachment.canonicalExistingScalarHarmonicAttachmentBoundary ≡ true
-exactProblemIdentityIsRequired =
+exactProblemIdentityWouldStillBeRequiredForFutureDonor =
   Attachment.exactProblemIdentityRequiredIsTrue
     Attachment.canonicalExistingScalarHarmonicAttachmentBoundary
 
@@ -124,6 +145,13 @@ currentG2LeafStillOpen :
 currentG2LeafStillOpen =
   Current.targetCenteredLocalZeroExponentialSumBoundClosedIsFalse
     Current.canonicalAristotleG2CurrentCut
+
+literalMomentAlreadyDefinedOnCanonicalProblem :
+  Assembly.literalTargetGapSecondMomentDefinedOnConsumerCarrier
+    Assembly.canonicalTargetCenteredScalarCancellationBoundary ≡ true
+literalMomentAlreadyDefinedOnCanonicalProblem =
+  Assembly.literalTargetGapSecondMomentDefinedOnConsumerCarrierIsTrue
+    Assembly.canonicalTargetCenteredScalarCancellationBoundary
 
 post369SearchRelation : Relation.RelationKind
 post369SearchRelation = Relation.provedSearchObstructionReuse
@@ -152,16 +180,29 @@ record Post369HighestAlphaBoundary : Set where
     symmetryOnlyCancellationRoutePrunedIsTrue :
       symmetryOnlyCancellationRoutePruned ≡ true
 
-    existingScalarDonorMayBeReused : Bool
-    existingScalarDonorMayBeReusedIsTrue : existingScalarDonorMayBeReused ≡ true
+    existingScalarDonorInterfaceMayBeReused : Bool
+    existingScalarDonorInterfaceMayBeReusedIsTrue :
+      existingScalarDonorInterfaceMayBeReused ≡ true
+
+    concreteExactScalarDonorCurrentlyIdentified : Bool
+    concreteExactScalarDonorCurrentlyIdentifiedIsFalse :
+      concreteExactScalarDonorCurrentlyIdentified ≡ false
 
     donorNameOrPartialParameterMatchIsEnough : Bool
     donorNameOrPartialParameterMatchIsEnoughIsFalse :
       donorNameOrPartialParameterMatchIsEnough ≡ false
 
     exactScalarProblemIdentityIsDefaultHighestAlpha : Bool
-    exactScalarProblemIdentityIsDefaultHighestAlphaIsTrue :
-      exactScalarProblemIdentityIsDefaultHighestAlpha ≡ true
+    exactScalarProblemIdentityIsDefaultHighestAlphaIsFalse :
+      exactScalarProblemIdentityIsDefaultHighestAlpha ≡ false
+
+    literalDirectFiniteProducerIsDefaultHighestAlpha : Bool
+    literalDirectFiniteProducerIsDefaultHighestAlphaIsTrue :
+      literalDirectFiniteProducerIsDefaultHighestAlpha ≡ true
+
+    literalTargetGapMomentAlreadyHasCanonicalDefinition : Bool
+    literalTargetGapMomentAlreadyHasCanonicalDefinitionIsTrue :
+      literalTargetGapMomentAlreadyHasCanonicalDefinition ≡ true
 
     symmetryRouteReopensOnlyWithExtraScalarLaw : Bool
     symmetryRouteReopensOnlyWithExtraScalarLawIsTrue :
@@ -179,6 +220,9 @@ canonicalPost369HighestAlphaBoundary =
     true refl
     true refl
     false refl
+    false refl
+    false refl
     true refl
     true refl
-    "Assume all ordinary symmetry and harmonic-analysis machinery already exists. The post-369 RH payment is therefore an exact same-object attachment: identify an existing scalar harmonic donor's complete LiteralTargetCenteredScalarProblem with the literal G2 determinant-taper/near-zero/target/cutoff problem. Literal C3 source recovery remains diagnostic and only reopens if it yields a nontrivial scalar q/phase law. Name similarity, theorem labels, or partial parameter agreement do not close the attachment."
+    true refl
+    "Later BIDI evidence supersedes the old donor-search priority. The generic same-object harmonic attachment remains reusable, but the current donor inventory identifies no concrete exact donor on the literal G2 target-centred scalar problem. Therefore the default highest-alpha theorem is to recover the literal DirectFinitePoleNearProducer itself, which must realize that canonical scalar problem and carry a consumer-useful signed approximant/error. The exact delta moment M2_delta is already defined on the same scalar carrier. Donor-name search, generic phase-statistic reconstruction and second moment definitions are not live work; RH remains open."
