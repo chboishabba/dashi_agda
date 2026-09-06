@@ -8,6 +8,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Cognition.PNF.SensibLawTerraNulliusJuridicalHumanityOperationalEquivalenceExact as Humanity
 import DASHI.Cognition.PNF.SensibLawTerraNulliusBillyTwoEyedOperationalJusticeExact as Operational
+import DASHI.Cognition.PNF.SensibLawCountrySystemFunctionTwoEyedRemedyRealisationExact as SystemFunction
 import DASHI.Cognition.PNF.SensibLawBillyEffectiveRemedyTwoEyedSeeingExact as Billy
 import DASHI.Cognition.PNF.SensibLawBillySituatedKnowledgeRemedyAdequacyExact as Situated
 import DASHI.Core.IntersectionalNonFactorability as INF
@@ -20,6 +21,15 @@ terraNulliusIsJuridicalNonHumanityInFoundationalRelation :
   Humanity.classify Humanity.terraNulliusCriterion
   ≡ Humanity.juridicallyNonHumanNonconstitutive
 terraNulliusIsJuridicalNonHumanityInFoundationalRelation = refl
+
+terraNulliusLegallyConstitutiveHumanityWasDenied :
+  Humanity.legallyConstitutiveHumanityDenied
+    Humanity.terraNulliusJuridicalNonHumanityReading ≡ true
+terraNulliusLegallyConstitutiveHumanityWasDenied = refl
+
+classificationIsNotMerelyMetaphorical :
+  Humanity.OperationalClassificationIsOnlyMetaphor → ⊥
+classificationIsNotMerelyMetaphorical = Humanity.juridicalClassificationIsNotMerelyMetaphor
 
 classificationRemainsLegalFunctionalNotBiologicalTaxonomy :
   Humanity.biologicalSpeciesClaimMade Humanity.terraNulliusJuridicalNonHumanityReading ≡ false
@@ -51,6 +61,21 @@ mechanismDoesNotDetermineProbability :
     Operational.canonicalBillyRemedyMeansOddsBoundary ≡ false
 mechanismDoesNotDetermineProbability = refl
 
+executiveImplementationMeansExist :
+  SystemFunction.executiveImplementationAvailable
+    SystemFunction.canonicalRemedyRealisationTopology ≡ true
+executiveImplementationMeansExist = refl
+
+parliamentaryImplementationMeansExist :
+  SystemFunction.parliamentaryImplementationAvailable
+    SystemFunction.canonicalRemedyRealisationTopology ≡ true
+parliamentaryImplementationMeansExist = refl
+
+committeeViewStillDoesNotSelfExecuteDomestically :
+  SystemFunction.committeeViewSelfExecutesDomestically
+    SystemFunction.canonicalRemedyRealisationTopology ≡ false
+committeeViewStillDoesNotSelfExecuteDomestically = refl
+
 ------------------------------------------------------------------------
 -- Two-Eyed / Country authority is operational, not decorative consultation.
 ------------------------------------------------------------------------
@@ -75,6 +100,16 @@ stateRecognitionDoesNotCreateCommunityAuthority :
     Operational.canonicalDecolonialRemedyAdequacyBoundary ≡ false
 stateRecognitionDoesNotCreateCommunityAuthority = refl
 
+stateReportDoesNotExhaustAffectedCommunityOutcome :
+  SystemFunction.stateReportExhaustsCommunityOutcome
+    SystemFunction.canonicalTwoEyedRealisationAssessment ≡ false
+stateReportDoesNotExhaustAffectedCommunityOutcome = refl
+
+communityOutcomeMayReopenImplementationAssessment :
+  SystemFunction.communityOutcomeMayReopenImplementationAssessment
+    SystemFunction.canonicalTwoEyedRealisationAssessment ≡ true
+communityOutcomeMayReopenImplementationAssessment = refl
+
 ------------------------------------------------------------------------
 -- POSIWID-style operational theorem.
 ------------------------------------------------------------------------
@@ -85,6 +120,41 @@ declaredMeaningfulConsultationDoesNotRecoverRealizedAuthority :
     Operational.consultationRealizedAuthority → ⊥
 declaredMeaningfulConsultationDoesNotRecoverRealizedAuthority =
   Operational.declaredMeaningfulCannotRecoverAuthorityBearingOperation
+
+declaredRemedyReportDoesNotRecoverRealisedCommunityAuthority :
+  INF.FactorsThrough
+    SystemFunction.declaredRemedySurface
+    SystemFunction.realisedRemedyOutcome → ⊥
+declaredRemedyReportDoesNotRecoverRealisedCommunityAuthority =
+  SystemFunction.declaredRemedyCannotRecoverRealisedAuthority
+
+correctionHandlingIsPartOfObservedSystemOperation :
+  SystemFunction.correctionResponseIsPartOfSystemOperation ≡ true
+correctionHandlingIsPartOfObservedSystemOperation = refl
+
+------------------------------------------------------------------------
+-- Realised justice, not declaration, is the preferred downstream consumer.
+------------------------------------------------------------------------
+
+landCountryControlRemainsOpen :
+  SystemFunction.systemFunctionState SystemFunction.landCountryControl
+  ≡ SystemFunction.residualFunctionOpen
+landCountryControlRemainsOpen = refl
+
+compensationAndReparationRemainOpen :
+  SystemFunction.systemFunctionState SystemFunction.compensationReparation
+  ≡ SystemFunction.residualFunctionOpen
+compensationAndReparationRemainOpen = refl
+
+materialSafetyNeedsCommunityOutcomeEvidence :
+  SystemFunction.systemFunctionState SystemFunction.materialSafety
+  ≡ SystemFunction.sourceOutcomeUnresolved
+materialSafetyNeedsCommunityOutcomeEvidence = refl
+
+culturalContinuityNeedsCommunityOutcomeEvidence :
+  SystemFunction.systemFunctionState SystemFunction.culturalContinuity
+  ≡ SystemFunction.sourceOutcomeUnresolved
+culturalContinuityNeedsCommunityOutcomeEvidence = refl
 
 ------------------------------------------------------------------------
 -- Deep x-pollination: foundational erasure can be legally rejected while an
@@ -107,6 +177,12 @@ record FoundationalToRemedialRepairBoundary : Set where
     repeatedRealizedEffectMayClassifySystemOperation : Bool
     repeatedRealizedEffectMayClassifySystemOperationIsTrue :
       repeatedRealizedEffectMayClassifySystemOperation ≡ true
+    doctrinalCorrectionAloneProvesMaterialTransformation : Bool
+    doctrinalCorrectionAloneProvesMaterialTransformationIsFalse :
+      doctrinalCorrectionAloneProvesMaterialTransformation ≡ false
+    stateImplementationReportAloneClosesCommunityDefinedJustice : Bool
+    stateImplementationReportAloneClosesCommunityDefinedJusticeIsFalse :
+      stateImplementationReportAloneClosesCommunityDefinedJustice ≡ false
 
 open FoundationalToRemedialRepairBoundary public
 
@@ -116,3 +192,5 @@ canonicalFoundationalToRemedialRepairBoundary = foundational-to-remedial-repair-
   false refl
   true refl
   true refl
+  false refl
+  false refl
