@@ -39,8 +39,10 @@ module DASHI.Physics.Closure.NSTriadKNHeatWeightedCommutatorSchurRound301Exact w
 -- to the oriented 4 x 4 route matrix and close the strongly-low heterochiral-HH
 -- exponent/cell-level gates. R342--R355 subsequently close the generic finite
 -- incidence, weighted-Schur, resolvent, signed-flux and Package-A COMPILERS.
--- Therefore the remaining Schur content is physical: instantiate the literal
--- finite row/column inequalities and a cutoff-uniform spacetime forcing payment.
+-- Those later owners depend downstream on R301, so they are documented here
+-- but deliberately NOT imported back into this owner. The remaining Schur
+-- content is physical: instantiate the literal finite row/column inequalities
+-- and a cutoff-uniform spacetime forcing payment.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -51,7 +53,6 @@ import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as Admission
 import DASHI.Physics.Closure.NSTriadKNNestedInnerHelicityRouteSplitRound311Exact as R311
 import DASHI.Physics.Closure.NSTriadKNNestedCriticalConeShellKernelRound313Exact as R313
 import DASHI.Physics.Closure.NSTriadKNHeatWeightedNestedFiniteSchurCertificateRound346Exact as R346
-import DASHI.Physics.Closure.NSTriadKNResolventPackageAFrontierCorrectionRound355Exact as R355
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCriticalConeCompilerRound434Exact as R434
 import DASHI.Physics.Closure.NSTriadKNNestedInnerForcingAggregationRound435Exact as R435
 
@@ -145,10 +146,6 @@ round301FiniteSchurPackagingAlreadyOwned : Bool
 round301FiniteSchurPackagingAlreadyOwned =
   R346.round346FiniteSchurPackagingClosed
 
-round301DownstreamPhysicalPackageACompilerChainAlreadyOwned : Bool
-round301DownstreamPhysicalPackageACompilerChainAlreadyOwned =
-  R355.round355PhysicalPackageAAdapterClosed
-
 round301PhysicalNestedHeatKernelRowBudgetClosed : Bool
 round301PhysicalNestedHeatKernelRowBudgetClosed = false
 
@@ -198,10 +195,6 @@ round301FiniteSchurPackagingAlreadyOwnedIsTrue :
   round301FiniteSchurPackagingAlreadyOwned ≡ true
 round301FiniteSchurPackagingAlreadyOwnedIsTrue =
   R346.round346FiniteSchurPackagingClosedIsTrue
-
-round301DownstreamPhysicalPackageACompilerChainAlreadyOwnedIsTrue :
-  round301DownstreamPhysicalPackageACompilerChainAlreadyOwned ≡ true
-round301DownstreamPhysicalPackageACompilerChainAlreadyOwnedIsTrue = refl
 
 round301DeepFLAndHHReprovedInsideSchurIsFalse :
   round301DeepFLAndHHReprovedInsideSchur ≡ false
