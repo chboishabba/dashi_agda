@@ -18,6 +18,9 @@ record MassGapSpectralStatement : Set₁ where
     eq119PhysicalPeriodicRealizationRound187Available : Bool
     eq119RawUnitPathHomomorphismRound189Available : Bool
     eq119CMP109TransportedRelativeEqualsCMP98LiteralContourAvailable : Bool
+    eq119SelectedCutPhysicalInputPackageAvailable : Bool
+    eq119DyadicCMP109PhysicalInputPackageAvailable : Bool
+    unconditionalPhysicalEq119ProducerAvailable : Bool
 
     gaugeInvariantSubspaceCarrierSelected : Bool
     finiteSelectedVariationPairingAvailable : Bool
@@ -55,6 +58,12 @@ record MassGapSpectralStatement : Set₁ where
       eq119RawUnitPathHomomorphismRound189Available ≡ true
     eq119CMP109TransportedRelativeEqualsCMP98LiteralContourAvailableIsFalse :
       eq119CMP109TransportedRelativeEqualsCMP98LiteralContourAvailable ≡ false
+    eq119SelectedCutPhysicalInputPackageAvailableIsFalse :
+      eq119SelectedCutPhysicalInputPackageAvailable ≡ false
+    eq119DyadicCMP109PhysicalInputPackageAvailableIsFalse :
+      eq119DyadicCMP109PhysicalInputPackageAvailable ≡ false
+    unconditionalPhysicalEq119ProducerAvailableIsFalse :
+      unconditionalPhysicalEq119ProducerAvailable ≡ false
 
     gaugeInvariantSubspaceCarrierSelectedIsTrue :
       gaugeInvariantSubspaceCarrierSelected ≡ true
@@ -111,6 +120,15 @@ canonicalMassGapSpectralStatement = record
   ; eq119CMP109TransportedRelativeEqualsCMP98LiteralContourAvailable =
       Frontier.cmp98CMP109TransportedRelativeEqualsCMP98LiteralContourClosed
         Frontier.canonicalYMOperatorContinuumFrontier
+  ; eq119SelectedCutPhysicalInputPackageAvailable =
+      Frontier.cmp98SelectedCutPhysicalInputPackageConstructed
+        Frontier.canonicalYMOperatorContinuumFrontier
+  ; eq119DyadicCMP109PhysicalInputPackageAvailable =
+      Frontier.cmp98DyadicCMP109PhysicalInputPackageConstructed
+        Frontier.canonicalYMOperatorContinuumFrontier
+  ; unconditionalPhysicalEq119ProducerAvailable =
+      Frontier.cmp98UnconditionalPhysicalEq119ProducerClosed
+        Frontier.canonicalYMOperatorContinuumFrontier
 
   ; gaugeInvariantSubspaceCarrierSelected =
       Frontier.gaugeInvariantSubspaceCarrierRouteSelected
@@ -157,7 +175,7 @@ canonicalMassGapSpectralStatement = record
         Frontier.canonicalYMOperatorContinuumFrontier
 
   ; gapBound =
-      "CMP98 Eq. (119) is now reduced to one physical same-object weld: Round187 constructs the physical periodic SU(2) realization and Round189 proves erasure preserves identity, multiplication, inverse, and arbitrary path holonomy. The remaining Eq. (119) leaf is CMP109 transportedRelativeBond = CMP98 relativeContourElement on the same positive coarse bond/embedded fine site. The gauge-invariant L2 subspace carrier and finite selected Hodge/action-variation pairing are available, while action-variation/H_YM same-object identification, a genuine operator domain/common invariant dense core, and analytic self-adjointness remain open. Lean bounded strong-limit, Agda vacuum-recovery, and Agda dense-core gap compilers are closed; Sprint129 recovery flags do not instantiate the recovery system. The Wightman endpoint queue is postulate-backed and therefore does not supply constructive OS dynamics or YM=OS evolution identification."
+      "CMP98 Eq. (119) has two theorem-level downstream compilers but no unconditional physical producer yet. Branch A requires an inhabited selected-background bond weld, selected-cut threshold input, and existing Federbush family. Branch B requires an inhabited DyadicCMP109PrintedPhysicalInputs package, a PositiveDyadicRelativeWeld including CMP109 transportedRelativeBond = CMP98 relativeContourElement, and an existing Federbush family. Round187 closes construction of the physical periodic SU(2) realization and Round189 closes the raw/unit path-homomorphism seam, but neither inhabits either complete physical source package. The gauge-invariant L2 subspace carrier and finite selected Hodge/action-variation pairing are available, while action-variation/H_YM same-object identification, a genuine operator domain/common invariant dense core, and analytic self-adjointness remain open. Lean bounded strong-limit, Agda vacuum-recovery, and Agda dense-core gap compilers are closed; Sprint129 recovery flags do not instantiate the recovery system. The Wightman endpoint queue is postulate-backed and therefore does not supply constructive OS dynamics or YM=OS evolution identification."
   ; clayPromoted = false
 
   ; physicalHamiltonianAvailableIsFalse = refl
@@ -169,6 +187,9 @@ canonicalMassGapSpectralStatement = record
   ; eq119PhysicalPeriodicRealizationRound187AvailableIsTrue = refl
   ; eq119RawUnitPathHomomorphismRound189AvailableIsTrue = refl
   ; eq119CMP109TransportedRelativeEqualsCMP98LiteralContourAvailableIsFalse = refl
+  ; eq119SelectedCutPhysicalInputPackageAvailableIsFalse = refl
+  ; eq119DyadicCMP109PhysicalInputPackageAvailableIsFalse = refl
+  ; unconditionalPhysicalEq119ProducerAvailableIsFalse = refl
   ; gaugeInvariantSubspaceCarrierSelectedIsTrue = refl
   ; finiteSelectedVariationPairingAvailableIsTrue = refl
   ; physicalActionVariationHamiltonianSameObjectAvailableIsFalse = refl
