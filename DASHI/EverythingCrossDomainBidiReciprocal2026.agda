@@ -41,4 +41,8 @@ import DASHI.Core.MinimalObservationLevelPerConsumerBidiExact
 import DASHI.Core.LeastCostConsumerClosingExperimentBidiExact
 import DASHI.Core.HistoricalProducerResponsibilityTraceBidiExact
 
+-- Fifth-order mixed observation / lineage-responsibility return.
+import DASHI.Core.CostedMixedConsumerClosingObservationSearchBidiExact
+import DASHI.Core.HistoricalResponsibilityLineageTraceBidiExact
+
 import DASHI.Core.CrossDomainBidiReciprocal2026Validation
