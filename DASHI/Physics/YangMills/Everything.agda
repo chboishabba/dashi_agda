@@ -16,3 +16,10 @@ import DASHI.Physics.YangMills.BalabanRGStepVLane
 import DASHI.Physics.YangMills.O4CovarianceRestorationGate
 import DASHI.Physics.YangMills.YMMassGapRoute
 import DASHI.Physics.YangMills.BalabanClayGate4LightweightValidation
+
+-- September 2026 bidirectional Lean/Agda operator-domain cross-pollination.
+-- Lean theorem ownership remains explicit; the Agda frontier records the
+-- genuine partial-domain and continuum-form obligations still open.
+import DASHI.Physics.YangMills.YMOperatorDomainContinuumSources2026Exact
+import DASHI.Physics.YangMills.YMAristotleOperatorReturn2026Exact
+import DASHI.Physics.YangMills.YMOperatorDomainContinuumFrontier2026Exact
