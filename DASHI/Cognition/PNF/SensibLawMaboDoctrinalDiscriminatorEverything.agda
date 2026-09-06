@@ -11,6 +11,7 @@ import DASHI.Cognition.PNF.SensibLawMaboMinimalDoctrinalCutsetExact as Cutset
 import DASHI.Cognition.PNF.SensibLawMaboDoctrinalConsumerClosureExact as Consumer
 import DASHI.Cognition.PNF.SensibLawIssueIndexedAdjudicativeHyperfabricExact as Issue
 import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityUseUpgradeExact as Upgrade
+import DASHI.Cognition.PNF.SensibLawMaboColonialSovereigntyCriticalResidualExact as Critical
 
 ------------------------------------------------------------------------
 -- Focused capstone: verified primary authority -> four-axis doctrinal
@@ -68,6 +69,27 @@ unifiedDoctrineConsumerStillOpen :
 unifiedDoctrineConsumerStillOpen = refl
 
 ------------------------------------------------------------------------
+-- Critical sovereignty residual: doctrinal source-map closure does not close
+-- cession, sovereignty, colonial legitimacy, land return, or material repair.
+------------------------------------------------------------------------
+
+crownPremiseRemainsCourtInternal :
+  Critical.frame Critical.crownSovereigntyCourtPremise ≡ Critical.australianCourtInternalFrame
+crownPremiseRemainsCourtInternal = refl
+
+nativeTitleMapMayCloseWhileSovereigntyRecognitionStaysOpen :
+  Critical.sovereigntyRecognitionClosed Critical.postMaboCriticalResidual ≡ false
+nativeTitleMapMayCloseWhileSovereigntyRecognitionStaysOpen = refl
+
+nativeTitleMapMayCloseWhileLandReturnStaysOpen :
+  Critical.landRestitutionClosed Critical.postMaboCriticalResidual ≡ false
+nativeTitleMapMayCloseWhileLandReturnStaysOpen = refl
+
+nativeTitleMapMayCloseWhileMaterialRepairStaysOpen :
+  Critical.materialReparationClosed Critical.postMaboCriticalResidual ≡ false
+nativeTitleMapMayCloseWhileMaterialRepairStaysOpen = refl
+
+------------------------------------------------------------------------
 -- Different open fibres compile to different work kinds.
 ------------------------------------------------------------------------
 
@@ -111,6 +133,27 @@ oneGlobalDoctrinalCutsetDoesNotFitEveryQuery : Cutset.OneGlobalDoctrinalCutsetFi
 oneGlobalDoctrinalCutsetDoesNotFitEveryQuery = Cutset.oneGlobalCutsetDoesNotFitEveryQuery
 oneProbeDoesNotFitEveryAxis : Hyper.OneProbeFitsAllMinimalAxes → ⊥
 oneProbeDoesNotFitEveryAxis = Hyper.oneProbeDoesNotFitAllAxes
+
+crownLegalPremiseDoesNotProveCession : Critical.CrownLegalPremiseProvesIndigenousCession → ⊥
+crownLegalPremiseDoesNotProveCession = Critical.crownPremiseDoesNotProveCession
+
+crownLegalPremiseDoesNotProveColonialLegitimacy : Critical.CrownLegalPremiseProvesColonialLegitimacy → ⊥
+crownLegalPremiseDoesNotProveColonialLegitimacy = Critical.crownPremiseDoesNotProveLegitimacy
+
+nativeTitleRecognitionDoesNotEqualSovereigntyRecognition : Critical.NativeTitleRecognitionProvesSovereigntyRecognition → ⊥
+nativeTitleRecognitionDoesNotEqualSovereigntyRecognition = Critical.nativeTitleDoesNotProveSovereigntyRecognition
+
+nativeTitleRecognitionDoesNotRepairDispossession : Critical.NativeTitleRecognitionRepairsDispossession → ⊥
+nativeTitleRecognitionDoesNotRepairDispossession = Critical.nativeTitleDoesNotRepairDispossessionByItself
+
+apologyDoesNotEqualLandRestitution : Critical.FormalApologyEqualsLandRestitution → ⊥
+apologyDoesNotEqualLandRestitution = Critical.apologyDoesNotEqualLandRestitution
+
+politicalRecognitionDoesNotEqualLandReturn : Critical.PoliticalRecognitionEqualsLandReturn → ⊥
+politicalRecognitionDoesNotEqualLandReturn = Critical.politicalRecognitionDoesNotEqualLandReturn
+
+terraNulliusRejectionDoesNotCompleteDecolonisation : Critical.RejectionOfTerraNulliusCompletesDecolonisation → ⊥
+terraNulliusRejectionDoesNotCompleteDecolonisation = Critical.terraNulliusRejectionDoesNotCompleteDecolonisation
 
 ------------------------------------------------------------------------
 -- Carry forward the source-authority firewall from the verified v0.2 root.
