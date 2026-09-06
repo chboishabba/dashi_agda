@@ -73,25 +73,41 @@ zetaLongWindowLowerDensityOpen :
     F.canonicalAristotleCurrentFrontier ≡ false
 zetaLongWindowLowerDensityOpen = refl
 
-zetaClusteringOpen :
+-- The theorem is still unproved, but no longer misclassified as a forward RH leaf.
+zetaClusteringUnproved :
   F.AristotleCurrentFrontier.actualZetaClusteringClosed
     F.canonicalAristotleCurrentFrontier ≡ false
-zetaClusteringOpen = refl
+zetaClusteringUnproved = refl
+
+zetaClusteringNotForwardRHProducer :
+  F.actualZetaClusteringIsForwardRHProducer ≡ false
+zetaClusteringNotForwardRHProducer =
+  F.actualZetaClusteringIsForwardRHProducerIsFalse
+
+zetaClusteringIsGapSplitDiagnostic :
+  F.actualZetaClusteringIsGapSplitObstructionDiagnostic ≡ true
+zetaClusteringIsGapSplitDiagnostic =
+  F.actualZetaClusteringIsGapSplitObstructionDiagnosticIsTrue
 
 localMomentCompilerClosed :
   F.AristotleCurrentFrontier.targetLocalSecondMomentCompilerClosedInAgda
     F.canonicalAristotleCurrentFrontier ≡ true
 localMomentCompilerClosed = refl
 
-localMomentProducerOpen :
+localMomentProducerUnproved :
   F.AristotleCurrentFrontier.targetLocalSecondMomentProducerClosed
     F.canonicalAristotleCurrentFrontier ≡ false
-localMomentProducerOpen = refl
+localMomentProducerUnproved = refl
 
 localMomentUsesSelectedWindow :
   F.AristotleCurrentFrontier.targetLocalMomentUsesExistingSelectedWindow
     F.canonicalAristotleCurrentFrontier ≡ true
 localMomentUsesSelectedWindow = refl
+
+localMomentNotForwardRHProducer :
+  F.targetLocalSecondMomentIsForwardRHProducer ≡ false
+localMomentNotForwardRHProducer =
+  F.targetLocalSecondMomentIsForwardRHProducerIsFalse
 
 phaseStatisticCompilerClosed :
   F.AristotleCurrentFrontier.concretePhaseStatisticCompilerClosedInAgda
@@ -103,10 +119,10 @@ selectedDirectWeldOpen :
     F.canonicalAristotleCurrentFrontier ≡ false
 selectedDirectWeldOpen = refl
 
-sharedDirectCarrierFeedsBoth :
+sharedDirectCarrierFeedsBothDiagnosticAndFiniteNear :
   F.AristotleCurrentFrontier.oneDirectGapCarrierFeedsClusteringAndFiniteNear
     F.canonicalAristotleCurrentFrontier ≡ true
-sharedDirectCarrierFeedsBoth = refl
+sharedDirectCarrierFeedsBothDiagnosticAndFiniteNear = refl
 
 transverseMomentNotOrdinateClustering :
   F.AristotleCurrentFrontier.transverseMomentDirectlyControlsOrdinateClustering
@@ -117,6 +133,21 @@ alpogeFurmanNotDirectLocalClosure :
   F.AristotleCurrentFrontier.alpogeFurmanGlobalSimpleProportionDirectlyClosesClustering
     F.canonicalAristotleCurrentFrontier ≡ false
 alpogeFurmanNotDirectLocalClosure = refl
+
+-- Forward direct theorem boundary.
+directPaymentCompilerClosed :
+  F.directSignedConsumerPaymentCompilerClosedInAgda ≡ true
+directPaymentCompilerClosed =
+  F.directSignedConsumerPaymentCompilerClosedInAgdaIsTrue
+
+literalDirectProducerStillOpen :
+  F.literalDirectFiniteProducerClosed ≡ false
+literalDirectProducerStillOpen = F.literalDirectFiniteProducerClosedIsFalse
+
+genericWithinDoesNotCloseLiteralG2 :
+  F.genericWithinReceiptAloneClosesLiteralG2 ≡ false
+genericWithinDoesNotCloseLiteralG2 =
+  F.genericWithinReceiptAloneClosesLiteralG2IsFalse
 
 nearFarCompilerClosed :
   F.AristotleCurrentFrontier.nearFarShellCompositionCompilerClosedInAgda
