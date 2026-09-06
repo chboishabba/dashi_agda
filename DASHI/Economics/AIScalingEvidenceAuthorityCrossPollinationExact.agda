@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Cognition.PNF.NeuralProposalEvidenceBoundaryExact as Neural
+import DASHI.Cognition.PNF.TypePressure as Pressure
 import DASHI.Economics.AIScalingLawRegimeMonitorExact as Monitor
 import DASHI.Economics.ComputeScalingUnitEconomicsExact as Scaling
 
@@ -43,8 +44,8 @@ record ScalingHypothesisPressure : Set₁ where
   field
     evidence : ScalingEvidenceReceipt
     priorHypothesis : Monitor.ScalingLawHypothesis
-    Pressure : Set
-    pressure : Pressure
+    PressureCarrier : Set
+    pressure : PressureCarrier
     pressureReference : String
 
 open ScalingHypothesisPressure public
@@ -88,7 +89,7 @@ neuralEvidenceBoundary : Neural.NeuralEvidenceBoundary
 neuralEvidenceBoundary = Neural.canonicalNeuralEvidenceBoundary
 
 neuralProposalCannotPromoteOntologyTruth :
-  Neural.Pressure.TypePressurePromotionPermission → ⊥
+  Pressure.TypePressurePromotionPermission → ⊥
 neuralProposalCannotPromoteOntologyTruth =
   Neural.neuralPressureCannotPromoteOntologyType
 
