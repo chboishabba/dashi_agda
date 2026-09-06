@@ -29,13 +29,6 @@ import DASHI.Biology.Morphogenesis.ReactionDiffusionHodgeBridge as Hodge
 
 ------------------------------------------------------------------------
 -- Minimal spatial semiconductor mesh.
---
--- Three nodes induce one interior control volume and two oriented faces:
---
---   left node ---- left face | interior | right face ---- right node
---
--- The current values are normalized codes.  Electron and hole equations are
--- kept separate because their conventional-current continuity signs differ.
 ------------------------------------------------------------------------
 
 data MeshNode : Set where
@@ -55,15 +48,6 @@ record InteriorCarrierFluxState : Set where
     recombinationCode : Nat
 
 open InteriorCarrierFluxState public
-
-------------------------------------------------------------------------
--- Same-object spatial state generated from the already-computed device cell.
---
--- Existing cell electron/hole currents become the left-face currents.  The
--- right-face values are fixed finite boundary data for this admitted fixture.
--- Generation and recombination are both one, so their net contribution is zero
--- here while remaining explicit coordinates of the balance law.
-------------------------------------------------------------------------
 
 spatialFluxState : Cell.SourceCharge → InteriorCarrierFluxState
 spatialFluxState Cell.q1 = interiorCarrierFluxState 14 10 1 3 1 1
@@ -87,14 +71,12 @@ holeLeftMatchesComputedCurrent Cell.q5 = refl
 ------------------------------------------------------------------------
 -- Discrete steady-state continuity residual.
 --
--- With normalized charge factor one and left-to-right orientation, the target
--- balance surfaces are written subtraction-free as:
+-- With normalized charge factor one and left-to-right orientation:
 --
 -- electron: Jn_right + R = Jn_left + G
 -- hole:     Jp_left  + G = Jp_right + R
 --
--- Residual coordinates pay the one-sided mismatch of these exact balances on
--- the admitted fixture.
+-- Residual coordinates pay the one-sided mismatch subtraction-free.
 ------------------------------------------------------------------------
 
 record SpatialContinuityResidual : Set where
@@ -174,9 +156,10 @@ closedSpatialScoreZero Cell.q5 q5SpatialContinuityClosed = refl
 ------------------------------------------------------------------------
 -- Cross-pollination with existing conservation / continuum / Hodge owners.
 --
--- RD owns a finite transport-conservation theorem.  We re-export that theorem
--- here as the generic conservation donor.  It does NOT identify biological
--- concentration quanta with semiconductor carriers.
+-- The actual finite conservation donor is reused.  Continuum and Hodge owners
+-- remain imported as the generic balance/coercivity architecture, but are not
+-- instantiated until a concrete semiconductor operator with physical units and
+-- boundary conditions is supplied.
 ------------------------------------------------------------------------
 
 reactionDiffusionConservationDonor :
@@ -184,19 +167,11 @@ reactionDiffusionConservationDonor :
   RD.totalMaterial (RD.diffuseLeftToRight x) ≡ RD.totalMaterial x
 reactionDiffusionConservationDonor = RD.diffusionConservesTotal
 
-record ExistingSpatialPhysicsSurface : Set₁ where
-  field
-    continuumReactionDiffusionLawAvailable : Set₁
-    hodgeIdentificationAvailable : Set₁
-    finiteConservationCarrierAvailable : Set
+continuumReactionDiffusionLawAvailable : Set₁
+continuumReactionDiffusionLawAvailable = Continuum.ReactionDiffusionLaw
 
-existingSpatialPhysicsSurface : ExistingSpatialPhysicsSurface
-existingSpatialPhysicsSurface = record
-  { continuumReactionDiffusionLawAvailable = Continuum.ReactionDiffusionLaw
-  ; hodgeIdentificationAvailable =
-      Hodge.ReactionDiffusionHodgeIdentification
-  ; finiteConservationCarrierAvailable = RD.TwoCompartment
-  }
+finiteConservationCarrierAvailable : Set
+finiteConservationCarrierAvailable = RD.TwoCompartment
 
 ------------------------------------------------------------------------
 -- Promotion boundary.
@@ -214,10 +189,11 @@ data PhysicalSpatialContinuityLeaf : Set where
   TimeDerivativeStorage : PhysicalSpatialContinuityLeaf
   MultiCellAssembly : PhysicalSpatialContinuityLeaf
   PhysicalBoundaryConditions : PhysicalSpatialContinuityLeaf
+  ConcreteSemiconductorHodgeIdentification : PhysicalSpatialContinuityLeaf
 
 -- Firewalls:
 -- finite face-current codes != SI current density.
 -- G=R=1 fixture != physical recombination kinetics.
 -- one interior control volume != a production transistor mesh.
 -- reaction-diffusion conservation architecture != semiconductor constitutive law.
--- Hodge coercivity availability != physical semiconductor convergence proof.
+-- imported Hodge machinery != an instantiated semiconductor coercivity proof.
