@@ -48,6 +48,36 @@ latestLeanBuildChecked :
     F.canonicalAristotleCurrentFrontier ≡ true
 latestLeanBuildChecked = refl
 
+quarterDensityReconciled :
+  F.AristotleCurrentFrontier.quarterPeriodDensityReconciliationClosedInLean
+    F.canonicalAristotleCurrentFrontier ≡ true
+quarterDensityReconciled = refl
+
+zetaUnitCountClosed :
+  F.AristotleCurrentFrontier.zetaUnitLocalCountClosedInLean
+    F.canonicalAristotleCurrentFrontier ≡ true
+zetaUnitCountClosed = refl
+
+zetaShortWindowCountClosed :
+  F.AristotleCurrentFrontier.zetaShortWindowUpperCountClosedInLean
+    F.canonicalAristotleCurrentFrontier ≡ true
+zetaShortWindowCountClosed = refl
+
+densityCutDoesNotKillInverseWidth :
+  F.AristotleCurrentFrontier.densityCutRefutesInverseWidthRoute
+    F.canonicalAristotleCurrentFrontier ≡ false
+densityCutDoesNotKillInverseWidth = refl
+
+zetaLongWindowLowerDensityOpen :
+  F.AristotleCurrentFrontier.zetaLongWindowLowerDensityClosed
+    F.canonicalAristotleCurrentFrontier ≡ false
+zetaLongWindowLowerDensityOpen = refl
+
+zetaClusteringOpen :
+  F.AristotleCurrentFrontier.actualZetaClusteringClosed
+    F.canonicalAristotleCurrentFrontier ≡ false
+zetaClusteringOpen = refl
+
 nearFarCompilerClosed :
   F.AristotleCurrentFrontier.nearFarShellCompositionCompilerClosedInAgda
     F.canonicalAristotleCurrentFrontier ≡ true
