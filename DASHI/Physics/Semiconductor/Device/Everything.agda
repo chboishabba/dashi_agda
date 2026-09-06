@@ -4,3 +4,7 @@ import DASHI.Physics.Semiconductor.Device.ElectrostaticMaxwellCrossPollinationEx
 import DASHI.Physics.Semiconductor.Device.DriftDiffusionContinuityExact
 import DASHI.Physics.Semiconductor.Device.ProcessElectricalNonFactorabilityExact
 import DASHI.Physics.Semiconductor.Device.ProcessToElectricalBidiExact
+import DASHI.Physics.Semiconductor.Device.FinitePoissonGreenCrossPollinationExact
+import DASHI.Physics.Semiconductor.Device.DeviceResidualDependencyCrossPollinationExact
+import DASHI.Physics.Semiconductor.Device.DeviceDissipationMonotonicityBridgeExact
+import DASHI.Physics.Semiconductor.Device.GateGeometryObservationNonFactorabilityExact
