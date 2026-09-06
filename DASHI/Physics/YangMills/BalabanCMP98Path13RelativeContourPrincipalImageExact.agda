@@ -255,7 +255,7 @@ rawOrientedFactorDefectSmall {selected = selected} weld site
     conjugateBound =
       subst
         (λ lower → lower ≤ Budget.perLinkDefectMajorant)
-        (kernelDefectConjugateInvariant weld positive)
+        (sym (kernelDefectConjugateInvariant weld positive))
         (path13PositiveLinkKernelDefectSmall weld predecessor axis)
   in
   subst
