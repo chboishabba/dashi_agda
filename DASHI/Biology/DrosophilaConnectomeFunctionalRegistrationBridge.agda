@@ -30,7 +30,7 @@ data RegistrationBoundary : Set where
 bifrostSource : Fly.ScientificSourceReceipt
 bifrostSource =
   Fly.scientificSourceReceipt
-    "BIFROST authors"
+    "Brezovec, Berger, Hao, Lin, Ahmed, Pacheco, Thiberge, Murthy, Clandinin"
     "BIFROST: A method for registering diverse imaging datasets of the Drosophila brain"
     "DOI:10.1073/pnas.2322687121"
     "Functional Drosophila Atlas and registration pipeline for aligning in vivo functional imaging with ex vivo resources including connectomes."
