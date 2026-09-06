@@ -18,6 +18,8 @@ import DASHI.Physics.YangMills.YMMassGapRoute
 import DASHI.Physics.YangMills.BalabanClayGate4LightweightValidation
 
 -- Existing theorem-level high-alpha route consumed by the operator/domain weld.
+import DASHI.Physics.YangMills.BalabanCMP98Equation119PositiveBondSelectedCutFederbushRound184Exact
+import DASHI.Physics.Closure.YMStrictSelectedHodgeVariationPairing
 import DASHI.Physics.YangMills.BalabanVacuumOrthogonalMoscoRecoveryExact
 import DASHI.Physics.YangMills.BalabanClayDenseCoreSpectralGapExact
 import DASHI.Physics.YangMills.BalabanOSExponentialClusteringImpliesHamiltonianGapExact
