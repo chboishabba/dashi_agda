@@ -30,6 +30,9 @@ record YMMassGapRoute (N : Nat) : Setω where
     spectralGap : MassGapSpectralStatement
     o4Restoration : O4RestorationLane
     operatorContinuumFrontier : Frontier.YMOperatorContinuumFrontier
+
+    eq119CompilerThroughRound184Available : Bool
+    eq119SelectedBackgroundAndCutPhysicalInstantiationClosed : Bool
     generatorUniquenessAvailable : Bool
     symmetryNullPreservationAvailable : Bool
     gaugeInvariantCarrierAvailable : Bool
@@ -47,6 +50,11 @@ record YMMassGapRoute (N : Nat) : Setω where
     witten : Bool
     qit : Bool
     clayYangMillsPromotedRoute : Bool
+
+    eq119CompilerThroughRound184AvailableIsTrue :
+      eq119CompilerThroughRound184Available ≡ true
+    eq119SelectedBackgroundAndCutPhysicalInstantiationClosedIsFalse :
+      eq119SelectedBackgroundAndCutPhysicalInstantiationClosed ≡ false
     generatorUniquenessAvailableIsTrue : generatorUniquenessAvailable ≡ true
     symmetryNullPreservationAvailableIsTrue : symmetryNullPreservationAvailable ≡ true
     gaugeInvariantCarrierAvailableIsTrue : gaugeInvariantCarrierAvailable ≡ true
@@ -77,6 +85,8 @@ canonicalYMMassGapRoute N = record
   ; spectralGap = canonicalMassGapSpectralStatement
   ; o4Restoration = canonicalO4RestorationLane
   ; operatorContinuumFrontier = Frontier.canonicalYMOperatorContinuumFrontier
+  ; eq119CompilerThroughRound184Available = Frontier.cmp98Equation119CompilerThroughRound184Closed Frontier.canonicalYMOperatorContinuumFrontier
+  ; eq119SelectedBackgroundAndCutPhysicalInstantiationClosed = Frontier.cmp98SelectedBackgroundAndCutPhysicalInstantiationClosed Frontier.canonicalYMOperatorContinuumFrontier
   ; generatorUniquenessAvailable = Frontier.generatorUniquenessClosedWithoutBoundednessHypothesisOnTotalMaps Frontier.canonicalYMOperatorContinuumFrontier
   ; symmetryNullPreservationAvailable = Frontier.symmetryImpliesNullPreservationClosedForTotalLinearMaps Frontier.canonicalYMOperatorContinuumFrontier
   ; gaugeInvariantCarrierAvailable = Frontier.gaugeInvariantL2CarrierClosed Frontier.canonicalYMOperatorContinuumFrontier
@@ -94,6 +104,8 @@ canonicalYMMassGapRoute N = record
   ; witten = false
   ; qit = false
   ; clayYangMillsPromotedRoute = false
+  ; eq119CompilerThroughRound184AvailableIsTrue = refl
+  ; eq119SelectedBackgroundAndCutPhysicalInstantiationClosedIsFalse = refl
   ; generatorUniquenessAvailableIsTrue = refl
   ; symmetryNullPreservationAvailableIsTrue = refl
   ; gaugeInvariantCarrierAvailableIsTrue = refl
