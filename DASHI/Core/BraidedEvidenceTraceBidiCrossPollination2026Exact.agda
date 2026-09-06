@@ -22,7 +22,8 @@ import DASHI.Combinatorics.ProofCarryingTextileHyperfabricExact as Textile
 -- DOI 10.1007/s13412-012-0086-8.
 --
 -- Textile donor authority is repository-owned:
--- DASHI.Combinatorics.ProofCarryingTextileHyperfabricExact.
+-- DASHI.Combinatorics.ProofCarryingTextileHyperfabricExact,
+-- merged through PR #690 (proof-carrying Jacquard hyperfabric motifs).
 --
 -- Bounded reading: distinct strands may be coordinated without being fused;
 -- provenance/authority/permission/obligation remain strand-local unless an
