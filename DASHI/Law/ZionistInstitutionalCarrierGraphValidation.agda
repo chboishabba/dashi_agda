@@ -1,0 +1,36 @@
+module DASHI.Law.ZionistInstitutionalCarrierGraphValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Law.ZionistInstitutionalCarrierGraphBidiExact as Carrier
+
+militaryAudienceIsClosed :
+  Carrier.firstCarrierResidual Carrier.repertoireReachedMilitaryAudience Carrier.canonicalCurrentCarrierCutset
+  ≡ Carrier.carrierClosed
+militaryAudienceIsClosed = refl
+
+materialLinkDoesNotCloseIdeology :
+  Carrier.firstCarrierResidual Carrier.materialSecurityLinkCarriedIdeologicalContent Carrier.canonicalCurrentCarrierCutset
+  ≡ Carrier.ideologicalContentResidual
+materialLinkDoesNotCloseIdeology = refl
+
+nswRepertoireClaimStopsBeforeMotive :
+  Carrier.firstCarrierResidual Carrier.zionistRepertoireReachedNSWPoliceClassification Carrier.canonicalCurrentCarrierCutset
+  ≡ Carrier.nswClassificationContentResidual
+nswRepertoireClaimStopsBeforeMotive = refl
+
+procurementDoesNotBecomeIdeologicalTransmission :
+  Carrier.procurementLinkEqualsIdeologicalTransmission Carrier.canonicalInstitutionalCarrierBoundary ≡ false
+procurementDoesNotBecomeIdeologicalTransmission = refl
+
+privateSecurityCoordinationDoesNotBecomeForeignControl :
+  Carrier.privateSecurityCoordinationEqualsForeignControl Carrier.canonicalInstitutionalCarrierBoundary ≡ false
+privateSecurityCoordinationDoesNotBecomeForeignControl = refl
+
+institutionalRepetitionDoesNotBecomeUniversalBelief :
+  Carrier.institutionalRepetitionEqualsUniversalZionistBelief Carrier.canonicalInstitutionalCarrierBoundary ≡ false
+institutionalRepetitionDoesNotBecomeUniversalBelief = refl
+
+correctionCarrierCannotBeErased :
+  Carrier.correctionCarrierMayBeErasedAsOutlier Carrier.canonicalInstitutionalCarrierBoundary ≡ false
+correctionCarrierCannotBeErased = refl
