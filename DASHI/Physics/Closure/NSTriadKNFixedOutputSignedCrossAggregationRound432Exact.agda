@@ -27,7 +27,7 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputSignedCrossAggregationRound432E
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
@@ -81,7 +81,7 @@ fixedOutputPaymentsBoundGlobalRemainder D =
       R299.four * sumSignedCross (payments D)
       ≤ R299.four * sumFibreBudget (payments D)
     scaled =
-      let instance fourNNI = Data.Rational.Base.nonNegative fourNN
+      let instance fourNNI = ℚ.nonNegative fourNN
       in ℚP.*-monoˡ-≤-nonNeg R299.four crossBound
   in
   subst
