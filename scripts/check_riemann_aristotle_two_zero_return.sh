@@ -36,6 +36,8 @@ FILES=(
   DASHI/Analysis/RiemannG2AdaptiveJLambdaConstantWindowExact.agda
   DASHI/Analysis/RiemannG2QuarterPeriodAnalyticRouteReconciliationExact.agda
   DASHI/Analysis/RiemannG2HighestAlphaAfter8894Exact.agda
+  DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerExact.agda
+  DASHI/Analysis/RiemannAristotleRHAnalyticLeafSchedulerExact.agda
   DASHI/Analysis/RiemannAristotleNearCoreDensityReturnRegression.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
@@ -76,6 +78,8 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannG2AdaptiveJLambdaConstantWindowExact.agda
   agda DASHI/Analysis/RiemannG2QuarterPeriodAnalyticRouteReconciliationExact.agda
   agda DASHI/Analysis/RiemannG2HighestAlphaAfter8894Exact.agda
+  agda DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerExact.agda
+  agda DASHI/Analysis/RiemannAristotleRHAnalyticLeafSchedulerExact.agda
   agda DASHI/Analysis/RiemannAristotleNearCoreDensityReturnRegression.agda
   agda DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
   agda DASHI/Analysis/RiemannAristotleSharedCertificateREADME.agda
