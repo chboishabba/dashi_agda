@@ -19,6 +19,15 @@ open import DASHI.Physics.YangMills.WightmanReconstructionLane
 open import DASHI.Physics.YangMills.MassGapSpectralStatement
 open import DASHI.Physics.YangMills.O4RestorationLane
 
+------------------------------------------------------------------------
+-- Authoritative route composition.
+--
+-- This route consumes both prover lanes and the older Agda theorem owners.
+-- Generic generator/null/carrier/gap compilers are no longer blockers.  The
+-- remaining blockers are the physical producers that instantiate those
+-- compilers on the literal continuum Yang--Mills object.
+------------------------------------------------------------------------
+
 record YMMassGapRoute (N : Nat) : Setω where
   field
     sunLane : SUNLane N
