@@ -64,16 +64,16 @@ record SelectedCutEq119Inputs
     (source : R182.PositiveCoarseBondEquation119Source
       R178.su2SignedCarrier n coarseSide Value group) : Set₁ where
   field
-    weld : R170.SelectedBackgroundBondWeld
+    selectedWeld : R170.SelectedBackgroundBondWeld
       {CoarseField = CoarseField}
       {FineField = FineField}
       {Lie = Lie.SU2LieAlgebra}
       (R182.asCanonicalL13Equation119Source source)
 
-    cutInputs : R175.SelectedExistingCutInputs
-      (R182.asCanonicalL13Equation119Source source) weld
+    selectedCutInputs : R175.SelectedExistingCutInputs
+      (R182.asCanonicalL13Equation119Source source) selectedWeld
 
-    federbushFamily : R177.ExistingFederbushConventionFamily
+    selectedFederbushFamily : R177.ExistingFederbushConventionFamily
 
 open SelectedCutEq119Inputs public
 
@@ -86,7 +86,10 @@ selectedCutEq119OneStep :
   R126.OneStepAveragingDerivative R178.su2AdditiveCarrier
 selectedCutEq119OneStep source inputs =
   R184.positiveBondSelectedCutFederbushOneStepDerivative
-    source (weld inputs) (cutInputs inputs) (federbushFamily inputs)
+    source
+    (selectedWeld inputs)
+    (selectedCutInputs inputs)
+    (selectedFederbushFamily inputs)
 
 selectedCutEq119Multiscale :
   ∀ {n coarseSide Value group CoarseField FineField}
@@ -97,7 +100,10 @@ selectedCutEq119Multiscale :
   Nat → R126.Operator R178.su2AdditiveCarrier
 selectedCutEq119Multiscale source inputs =
   R184.positiveBondSelectedCutFederbushMultiscaleDerivative
-    source (weld inputs) (cutInputs inputs) (federbushFamily inputs)
+    source
+    (selectedWeld inputs)
+    (selectedCutInputs inputs)
+    (selectedFederbushFamily inputs)
 
 ------------------------------------------------------------------------
 -- Branch B: dyadic CMP109 physical-input package / same-object relative weld.
@@ -110,8 +116,8 @@ record DyadicEq119Inputs
     (inputs : Dyadic.DyadicCMP109PrintedPhysicalInputs
       coarseN Field Group Lie.SU2LieAlgebra Scalar Radius Entry) : Set₁ where
   field
-    relativeWeld : R183.PositiveDyadicRelativeWeld source inputs
-    federbushFamily : R177.ExistingFederbushConventionFamily
+    dyadicRelativeWeld : R183.PositiveDyadicRelativeWeld source inputs
+    dyadicFederbushFamily : R177.ExistingFederbushConventionFamily
 
 open DyadicEq119Inputs public
 
@@ -128,7 +134,9 @@ dyadicEq119OneStep :
   R126.OneStepAveragingDerivative R178.su2AdditiveCarrier
 dyadicEq119OneStep source inputs eqInputs =
   R183.positiveDyadicOneStepDerivative
-    source inputs (relativeWeld eqInputs) (federbushFamily eqInputs)
+    source inputs
+    (dyadicRelativeWeld eqInputs)
+    (dyadicFederbushFamily eqInputs)
 
 dyadicEq119Multiscale :
   ∀ {n coarseN Group group Field Scalar Radius Entry}
@@ -140,7 +148,22 @@ dyadicEq119Multiscale :
   Nat → R126.Operator R178.su2AdditiveCarrier
 dyadicEq119Multiscale source inputs eqInputs =
   R183.positiveDyadicMultiscaleDerivative
-    source inputs (relativeWeld eqInputs) (federbushFamily eqInputs)
+    source inputs
+    (dyadicRelativeWeld eqInputs)
+    (dyadicFederbushFamily eqInputs)
+
+------------------------------------------------------------------------
+-- Theorem-level support already closed independently of either full physical
+-- source package.
+------------------------------------------------------------------------
+
+physicalPeriodicRealizationRound187Level : ProofLevel
+physicalPeriodicRealizationRound187Level =
+  R187.cmp98SelectedPhysicalPeriodicRealizationRound187Level
+
+rawUnitPathHomomorphismRound189Level : ProofLevel
+rawUnitPathHomomorphismRound189Level =
+  R189.cmp98RawUnitPathHolomorphismRound189Level
 
 ------------------------------------------------------------------------
 -- Canonical status: theorem compilers versus physical inhabitants.
