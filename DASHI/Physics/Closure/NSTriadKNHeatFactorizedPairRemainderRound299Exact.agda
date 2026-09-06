@@ -17,12 +17,19 @@ module DASHI.Physics.Closure.NSTriadKNHeatFactorizedPairRemainderRound299Exact w
 -- the analytic Laplace identity 1/(lambda_a+lambda_b)=integral e^-s lambda_a
 -- e^-s lambda_b ds.  The physical producer must identify its two finite
 -- double-sum halves with the exact same heat-weighted aggregate cross term.
+--
+-- SIGN FIREWALL
+-- -------------
+-- Later R428/R429 prove equality of two adjoint channels, hence vanishing of
+-- their DIFFERENCE.  That equality is useful for identifying the two R299
+-- product-rule halves with the same common cross.  It does not make their SUM
+-- vanish.  The exact witness below makes this non-implication proof-bearing.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; _+_; _*_)
+open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
@@ -60,6 +67,24 @@ pairRemainderIsFourTimesAggregateCross P =
       (cong₂ _+_ (firstHalfAggregates P) (secondHalfAggregates P))
       (solve (aggregateAmplitudeForcingCross P ∷ [])))
 
+-- Exact counterexample to the invalid inference
+--
+--   first half = second half  ==>  pair remainder = 0.
+--
+-- With common cross 1, both halves are 2 and the remainder is 4.
+equalNonzeroHalvesWitness : HeatFactorizedPairRemainder
+equalNonzeroHalvesWitness = heat-factorized-pair-remainder
+  two two four 1ℚ refl refl refl
+
+equalNonzeroHalvesAreEqual :
+  firstPairHalf equalNonzeroHalvesWitness
+  ≡ secondPairHalf equalNonzeroHalvesWitness
+equalNonzeroHalvesAreEqual = refl
+
+equalNonzeroHalvesRemainderIsFour :
+  pairRemainder equalNonzeroHalvesWitness ≡ four
+equalNonzeroHalvesRemainderIsFour = refl
+
 record PhysicalHeatFactorizedRemainderLeaf : Set where
   constructor physical-heat-factorized-remainder-leaf
   field
@@ -75,6 +100,12 @@ open PhysicalHeatFactorizedRemainderLeaf public
 
 round299FinitePairFactorizationCompilerClosed : Bool
 round299FinitePairFactorizationCompilerClosed = true
+
+round299EqualHalvesImplyRemainderCancellation : Bool
+round299EqualHalvesImplyRemainderCancellation = false
+
+round299AdjointEqualityUsefulForCommonCrossIdentification : Bool
+round299AdjointEqualityUsefulForCommonCrossIdentification = true
 
 round299AnalyticLaplaceRepresentationInstalled : Bool
 round299AnalyticLaplaceRepresentationInstalled = false
@@ -94,3 +125,11 @@ round299ClayPromotion = false
 round299FinitePairFactorizationCompilerClosedIsTrue :
   round299FinitePairFactorizationCompilerClosed ≡ true
 round299FinitePairFactorizationCompilerClosedIsTrue = refl
+
+round299EqualHalvesImplyRemainderCancellationIsFalse :
+  round299EqualHalvesImplyRemainderCancellation ≡ false
+round299EqualHalvesImplyRemainderCancellationIsFalse = refl
+
+round299AdjointEqualityUsefulForCommonCrossIdentificationIsTrue :
+  round299AdjointEqualityUsefulForCommonCrossIdentification ≡ true
+round299AdjointEqualityUsefulForCommonCrossIdentificationIsTrue = refl

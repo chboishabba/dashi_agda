@@ -11,18 +11,30 @@ module DASHI.Physics.Closure.NSTriadKNQuadraticCompanionSignedHeatToBarrierRound
 -- pre-norm heat cross pays the literal R406 remainder.  R421 then sends that
 -- same payment directly to the Round104 uniform critical barrier.
 --
--- This owner removes the last naming ambiguity between those lanes.  The
--- discovery theorem is allowed to prove a cutoff-uniform bound on a signed
--- quadratic-companion forcing cross.  It must then prove pointwise equality
--- with R415's integrated signed heat cross on the same cutoff/time.  No
--- positive Wiener envelope, no alternate companion and no second remainder
--- estimate are accepted.
+-- 2026 LEAN BIDI RETURN
+-- ---------------------
+-- RequestProject/NavierStokes/AlmostOrthogonalGramSchur.lean supplies a
+-- sufficient *producer strategy* for this owner: if a physical realized-family
+-- Schur estimate plus its critical spacetime payment produces a cutoff-uniform
+-- upper bound for this same quadratic-companion cross, it inhabits the existing
+-- target below.  It is not a second target and it is not necessary: direct
+-- signed cancellation or a block/operator estimate may inhabit the same target
+-- without first proving an absolute positive Wiener envelope.
+--
+-- Source calibration for that optional producer:
+--   Mischa Cotlar; Elias M. Stein,
+--   "A unified theory of Hilbert transforms and ergodic theorems" (1955),
+--   DOI not assigned/known.
+--   Fabian Waleffe,
+--   "The nature of triad interactions in homogeneous turbulence",
+--   DOI 10.1063/1.858309.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; _*_; _≤_)
+import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -61,33 +73,72 @@ module QuadraticCompanionBarrier
       (T : Dyn.PhysicalNSGalerkinTrajectory)
       (R : Support.LiteralNonzeroCutoffTrajectory T) : Set₁ where
     field
-      -- The analytic producer should define this directly from the signed
-      -- forcing of the homogeneity-correct R167/R420 quadratic companion.
       integratedQuadraticCompanionCross : Nat → Time → ℚ
       cutoffIndependentCompanionBound : Time → ℚ
 
-      -- Same-object weld to the pre-norm R299 heat-cross representation.
       integratedSignedHeatCross : Nat → Time → ℚ
       heatCrossIsQuadraticCompanionCross :
         (cutoff : Nat) (terminal : Time) →
         integratedSignedHeatCross cutoff terminal
         ≡ integratedQuadraticCompanionCross cutoff terminal
 
-      -- Literal R406 remainder identity.  This is the existing R415 boundary,
-      -- retained here so the final theorem cannot silently change remainder.
       literalR406RemainderIsFourSignedCross :
         (cutoff : Nat) (terminal : Time) →
         Heat.literalRemainderIntegral T R cutoff terminal
         ≡ R299.four * integratedSignedHeatCross cutoff terminal
 
-      -- The novel cutoff-uniform estimate is stated on the quadratic
-      -- companion cross, before any Wiener/l1 majorization.
       quadraticCompanionSignedBudget :
         (cutoff : Nat) (terminal : Time) →
         R299.four * integratedQuadraticCompanionCross cutoff terminal
         ≤ cutoffIndependentCompanionBound terminal
 
   open QuadraticCompanionSignedPayment public
+
+  record SchurCriticalProducer
+      (T : Dyn.PhysicalNSGalerkinTrajectory)
+      (R : Support.LiteralNonzeroCutoffTrajectory T) : Set₁ where
+    field
+      schurQuadraticCompanionCross : Nat → Time → ℚ
+      schurSignedHeatCross : Nat → Time → ℚ
+      schurHeatCrossIsQuadraticCompanionCross :
+        (cutoff : Nat) (terminal : Time) →
+        schurSignedHeatCross cutoff terminal
+        ≡ schurQuadraticCompanionCross cutoff terminal
+      schurLiteralR406RemainderIsFourSignedCross :
+        (cutoff : Nat) (terminal : Time) →
+        Heat.literalRemainderIntegral T R cutoff terminal
+        ≡ R299.four * schurSignedHeatCross cutoff terminal
+      intermediateSchurBudget : Nat → Time → ℚ
+      cutoffIndependentCriticalBound : Time → ℚ
+      schurControlsQuadraticCompanion :
+        (cutoff : Nat) (terminal : Time) →
+        R299.four * schurQuadraticCompanionCross cutoff terminal
+        ≤ intermediateSchurBudget cutoff terminal
+      criticalSpacetimeClosesSchurBudget :
+        (cutoff : Nat) (terminal : Time) →
+        intermediateSchurBudget cutoff terminal
+        ≤ cutoffIndependentCriticalBound terminal
+
+  open SchurCriticalProducer public
+
+  schurCriticalProducerBuildsSignedPayment :
+    (T : Dyn.PhysicalNSGalerkinTrajectory) →
+    (R : Support.LiteralNonzeroCutoffTrajectory T) →
+    SchurCriticalProducer T R →
+    QuadraticCompanionSignedPayment T R
+  schurCriticalProducerBuildsSignedPayment T R P = record
+    { integratedQuadraticCompanionCross = schurQuadraticCompanionCross P
+    ; cutoffIndependentCompanionBound = cutoffIndependentCriticalBound P
+    ; integratedSignedHeatCross = schurSignedHeatCross P
+    ; heatCrossIsQuadraticCompanionCross =
+        schurHeatCrossIsQuadraticCompanionCross P
+    ; literalR406RemainderIsFourSignedCross =
+        schurLiteralR406RemainderIsFourSignedCross P
+    ; quadraticCompanionSignedBudget = λ cutoff terminal →
+        ℚP.≤-trans
+          (schurControlsQuadraticCompanion P cutoff terminal)
+          (criticalSpacetimeClosesSchurBudget P cutoff terminal)
+    }
 
   toIntegratedSignedHeatCrossPayment :
     (T : Dyn.PhysicalNSGalerkinTrajectory) →
@@ -170,6 +221,12 @@ round423SecondRemainderEstimateRequired = false
 round423QuadraticCompanionSignedPaymentFeedsCriticalBarrier : Bool
 round423QuadraticCompanionSignedPaymentFeedsCriticalBarrier = true
 
+round423SchurCriticalRouteIsSufficientProducer : Bool
+round423SchurCriticalRouteIsSufficientProducer = true
+
+round423SchurCriticalRouteIsNecessaryProducer : Bool
+round423SchurCriticalRouteIsNecessaryProducer = false
+
 round423RemainingNovelProducerIsCutoffUniformSignedCompanionBudget : Bool
 round423RemainingNovelProducerIsCutoffUniformSignedCompanionBudget = true
 
@@ -180,3 +237,11 @@ round423PositiveWienerEnvelopeRequiredIsFalse = refl
 round423QuadraticCompanionSignedPaymentFeedsCriticalBarrierIsTrue :
   round423QuadraticCompanionSignedPaymentFeedsCriticalBarrier ≡ true
 round423QuadraticCompanionSignedPaymentFeedsCriticalBarrierIsTrue = refl
+
+round423SchurCriticalRouteIsSufficientProducerIsTrue :
+  round423SchurCriticalRouteIsSufficientProducer ≡ true
+round423SchurCriticalRouteIsSufficientProducerIsTrue = refl
+
+round423SchurCriticalRouteIsNecessaryProducerIsFalse :
+  round423SchurCriticalRouteIsNecessaryProducer ≡ false
+round423SchurCriticalRouteIsNecessaryProducerIsFalse = refl
