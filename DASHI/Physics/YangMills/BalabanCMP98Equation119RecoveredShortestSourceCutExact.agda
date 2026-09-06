@@ -16,17 +16,21 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119RecoveredShortestSourceCut
 --   * raw/unit path homomorphism (R189);
 --   * literal Path13 side-13 periodic realization (R192).
 --
--- Therefore the recovered source residual is exactly two same-object receipts:
+-- The first remaining Round218 receipt has now been type-refined.  It is not a
+-- same-typed equality between the old side-four selected fixture and the
+-- Path13 background.  The genuine constructive target is to instantiate the
+-- generic selected variational/physical background bridge directly on the
+-- literal Path13 carrier, with selected links definitionally/same-object equal
+-- to the Path13 links.
 --
---   1. the Path13 physical background is the selected variational/physical
---      background used by the analytic estimates;
---   2. the perturbation bond-component/scalar-action coordinates are the same
---      physical perturbation coordinates used by the selected finite YM
+-- Thus the recovered source residual is exactly:
+--
+--   1. construct `SelectedPhysicalBackground13Instantiation`;
+--   2. identify the perturbation bond-component/scalar-action coordinates with
+--      the physical perturbation coordinates of the selected finite YM
 --      action/IBP lane.
 --
--- This file does not claim either receipt is inhabited.  It prevents older
--- global-cut or realization coordinates from being reopened as if they were
--- still highest-alpha payments.
+-- Neither producer is inhabited here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -35,6 +39,12 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP98Equation119DisjunctivePhysicalSourceCutExact as Eq119Cut
 import DASHI.Physics.YangMills.BalabanCMP98Equation120RecoveredSourceFrontierRound218Exact as R218
+import DASHI.Physics.YangMills.BalabanPath13SelectedPhysicalBackgroundTargetExact as Path13Target
+
+-- Public shape of the first recovered physical producer.
+Path13SelectedPhysicalBackgroundProducer : Set → Set → Set₁
+Path13SelectedPhysicalBackgroundProducer =
+  Path13Target.SelectedPhysicalBackground13Instantiation
 
 record RecoveredEq119ShortestSourceStatus : Set where
   field
@@ -45,7 +55,7 @@ record RecoveredEq119ShortestSourceStatus : Set where
     rawUnitPathRepresentationPruned : Bool
     path13PeriodicRealizationPruned : Bool
 
-    path13BackgroundIsSelectedPhysicalBackgroundClosed : Bool
+    path13SelectedPhysicalBackground13Constructed : Bool
     perturbationCoordinateSemanticsClosed : Bool
     recoveredShortestPhysicalEq119SourceClosed : Bool
 
@@ -62,8 +72,8 @@ record RecoveredEq119ShortestSourceStatus : Set where
     path13PeriodicRealizationPrunedIsTrue :
       path13PeriodicRealizationPruned ≡ true
 
-    path13BackgroundIsSelectedPhysicalBackgroundClosedIsFalse :
-      path13BackgroundIsSelectedPhysicalBackgroundClosed ≡ false
+    path13SelectedPhysicalBackground13ConstructedIsFalse :
+      path13SelectedPhysicalBackground13Constructed ≡ false
     perturbationCoordinateSemanticsClosedIsFalse :
       perturbationCoordinateSemanticsClosed ≡ false
     recoveredShortestPhysicalEq119SourceClosedIsFalse :
@@ -82,7 +92,7 @@ canonicalRecoveredEq119ShortestSourceStatus = record
   ; selectedPhysicalPeriodicRealizationPruned = true
   ; rawUnitPathRepresentationPruned = true
   ; path13PeriodicRealizationPruned = true
-  ; path13BackgroundIsSelectedPhysicalBackgroundClosed = false
+  ; path13SelectedPhysicalBackground13Constructed = false
   ; perturbationCoordinateSemanticsClosed = false
   ; recoveredShortestPhysicalEq119SourceClosed = false
   ; pointwiseSemanticFallbackCompilerClosedIsTrue =
@@ -93,12 +103,25 @@ canonicalRecoveredEq119ShortestSourceStatus = record
   ; selectedPhysicalPeriodicRealizationPrunedIsTrue = refl
   ; rawUnitPathRepresentationPrunedIsTrue = refl
   ; path13PeriodicRealizationPrunedIsTrue = refl
-  ; path13BackgroundIsSelectedPhysicalBackgroundClosedIsFalse = refl
+  ; path13SelectedPhysicalBackground13ConstructedIsFalse = refl
   ; perturbationCoordinateSemanticsClosedIsFalse = refl
   ; recoveredShortestPhysicalEq119SourceClosedIsFalse = refl
   }
 
--- The imported proof-level receipts make the pruning provenance explicit.
+-- Compatibility reading of the older Round218 prose coordinate.
+path13BackgroundIsSelectedPhysicalBackgroundClosed :
+  RecoveredEq119ShortestSourceStatus → Bool
+path13BackgroundIsSelectedPhysicalBackgroundClosed =
+  path13SelectedPhysicalBackground13Constructed
+
+path13BackgroundIsSelectedPhysicalBackgroundClosedIsFalse :
+  path13BackgroundIsSelectedPhysicalBackgroundClosed
+    canonicalRecoveredEq119ShortestSourceStatus ≡ false
+path13BackgroundIsSelectedPhysicalBackgroundClosedIsFalse =
+  path13SelectedPhysicalBackground13ConstructedIsFalse
+    canonicalRecoveredEq119ShortestSourceStatus
+
+-- Imported proof-level receipts preserve archaeology provenance.
 principalYFederbushIndexPruningLevel : ProofLevel
 principalYFederbushIndexPruningLevel =
   R218.cmp98PrincipalYFrontierPrunedRound218Level
@@ -115,9 +138,13 @@ recoveredSourceFrontierLevel : ProofLevel
 recoveredSourceFrontierLevel =
   R218.cmp98Equation120RecoveredSourceFrontierRound218Level
 
+path13SelectedPhysicalBackgroundTargetLevel : ProofLevel
+path13SelectedPhysicalBackgroundTargetLevel =
+  Path13Target.cmp98Path13SelectedPhysicalBackgroundTargetLevel
+
 literalCMP98RecoveredPath13BackgroundSameObjectLevel : ProofLevel
 literalCMP98RecoveredPath13BackgroundSameObjectLevel =
-  R218.literalCMP98Path13SelectedPhysicalBackgroundSameObjectRound218Level
+  Path13Target.literalCMP98Path13SelectedPhysicalBackgroundProducerLevel
 
 literalCMP98RecoveredPerturbationCoordinateSemanticsLevel : ProofLevel
 literalCMP98RecoveredPerturbationCoordinateSemanticsLevel =
