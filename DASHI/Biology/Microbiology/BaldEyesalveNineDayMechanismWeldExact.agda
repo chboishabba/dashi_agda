@@ -6,11 +6,12 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Chemistry.AlliumMolecularTrajectoryExact as Trajectory
 import DASHI.Biology.Protein.StaphylococcusAllicinThiolomeExact as Thiolome
+import DASHI.Biology.Cell.StaphylococcusAllicinRedoxRecoveryBidiExact as CellRedox
 import DASHI.Biology.Microbiology.BaldEyesalveMechanismBoundaryExact as Eyesalve
 import DASHI.Biology.Microbiology.QuorumSensingContextExact as QS
 
 ------------------------------------------------------------------------
--- NINE-DAY PREPARATION -> MOLECULAR-MECHANISM WELD
+-- NINE-DAY PREPARATION -> MOLECULAR-MECHANISM -> RECOVERY WELD
 ------------------------------------------------------------------------
 
 data MechanismLane : Set where
@@ -21,6 +22,7 @@ data MechanismLane : Set where
   quorumRelatedRegulatoryPerturbation
   biofilmMatrixOrPenetration
   downstreamOrganosulfurChemistry
+  detoxificationRecoveryCompetition
   : MechanismLane
 
 record NineDayMechanismCandidate : Set where
@@ -68,6 +70,14 @@ downstreamChemistryCandidate = nineDayMechanismCandidate
   false false false
   "nine-day maturation makes time-resolved sulfur speciation a high-value missing producer"
 
+recoveryCompetitionCandidate : NineDayMechanismCandidate
+recoveryCompetitionCandidate = nineDayMechanismCandidate
+  detoxificationRecoveryCompetition
+  "allicin-mediated thiol modification opposed by cellular thiol-recovery chemistry"
+  "Loi et al. 2019 DOI 10.1016/j.freeradbiomed.2019.05.018; BSH/BrxAB/YpdA/MerA"
+  true false false
+  "phenotype depends on disturbance-versus-recovery dynamics, not chemical insult alone; the complete eyesalve recovery trajectory remains unmeasured"
+
 record DirectPromotionReceipt : Set where
   constructor directPromotionReceipt
   field
@@ -94,6 +104,9 @@ record NineDayMechanismBoundary : Set where
     garlicQuorumLiteratureProvesEyesalveQuorumMediation : Bool
     garlicQuorumLiteratureProvesEyesalveQuorumMediationIsFalse :
       garlicQuorumLiteratureProvesEyesalveQuorumMediation ≡ false
+    detoxificationResponseProvesCompletePhenotypicRecovery : Bool
+    detoxificationResponseProvesCompletePhenotypicRecoveryIsFalse :
+      detoxificationResponseProvesCompletePhenotypicRecovery ≡ false
     tangentialMechanismEvidenceCanReduceExperimentalSearchSpace : Bool
     tangentialMechanismEvidenceCanReduceExperimentalSearchSpaceIsTrue :
       tangentialMechanismEvidenceCanReduceExperimentalSearchSpace ≡ true
@@ -103,10 +116,11 @@ record NineDayMechanismBoundary : Set where
 
 canonicalNineDayMechanismBoundary : NineDayMechanismBoundary
 canonicalNineDayMechanismBoundary = nineDayMechanismBoundary
-  false refl false refl false refl true refl true refl
+  false refl false refl false refl false refl true refl true refl
 
 ------------------------------------------------------------------------
--- BIDI exports: consume canonical pre-existing owners explicitly.
+-- BIDI exports: consume canonical owners explicitly, including the newly
+-- extended generic cell-recovery seam through the S. aureus-specific adapter.
 ------------------------------------------------------------------------
 
 existingTrajectoryBoundary : Trajectory.MolecularTrajectoryBoundary
@@ -114,6 +128,9 @@ existingTrajectoryBoundary = Trajectory.canonicalMolecularTrajectoryBoundary
 
 existingStaphBoundary : Thiolome.StaphylococcusAllicinBoundary
 existingStaphBoundary = Thiolome.canonicalStaphylococcusAllicinBoundary
+
+existingCellRedoxBoundary : CellRedox.RedoxRecoveryInterpretationBoundary
+existingCellRedoxBoundary = CellRedox.canonicalRedoxRecoveryInterpretationBoundary
 
 existingEyesalveBoundary : Eyesalve.BaldEyesalveMechanismBoundary
 existingEyesalveBoundary = Eyesalve.canonicalBaldEyesalveMechanismBoundary
