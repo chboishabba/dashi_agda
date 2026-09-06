@@ -298,6 +298,27 @@ canonicalEq119DisjunctivePhysicalSourceStatus = record
   ; unconditionalPhysicalEq119ProducerClosedIsFalse = refl
   }
 
+------------------------------------------------------------------------
+-- Compatibility projections for existing canonical consumers.
+--
+-- The old selected-cut package coordinate now denotes the stronger historical
+-- A0 package, not the preferred A1 pointwise-semantic route.  Keeping these
+-- names avoids a constructor cascade while the new fields remain available to
+-- upgraded consumers.
+------------------------------------------------------------------------
+
+selectedCutPhysicalInputPackageConstructed :
+  Eq119DisjunctivePhysicalSourceStatus → Bool
+selectedCutPhysicalInputPackageConstructed =
+  historicalGlobalSelectedCutPhysicalPackageConstructed
+
+selectedCutPhysicalInputPackageConstructedIsFalse :
+  selectedCutPhysicalInputPackageConstructed
+    canonicalEq119DisjunctivePhysicalSourceStatus ≡ false
+selectedCutPhysicalInputPackageConstructedIsFalse =
+  historicalGlobalSelectedCutPhysicalPackageConstructedIsFalse
+    canonicalEq119DisjunctivePhysicalSourceStatus
+
 cmp98Equation119DisjunctiveSourceCompilerLevel : ProofLevel
 cmp98Equation119DisjunctiveSourceCompilerLevel = machineChecked
 
