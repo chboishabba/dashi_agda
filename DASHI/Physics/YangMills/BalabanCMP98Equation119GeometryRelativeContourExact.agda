@@ -15,12 +15,13 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119GeometryRelativeContourExa
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (_++_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109ShortestContourEnumerationExact as Contours
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109PeriodicContourFamilyInstantiationExact as Periodic
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredPeriodicEmbeddingExact as Embed
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredOddBlockCarrierExact as Centered
@@ -32,8 +33,7 @@ record Equation119GeometrySource
   field
     realization : Nat → Bond.PeriodicBondGaugeRealization n Value group
     minusEmbedding : Nat → Embed.CenteredPeriodicNoWrapEmbedding n 6
-    coarseSegment : Nat →
-      DASHI.Physics.YangMills.BalabanClayGate4CMP109ShortestContourEnumerationExact.AxisSegment
+    coarseSegment : Nat → Contours.AxisSegment
 
 open Equation119GeometrySource public
 
