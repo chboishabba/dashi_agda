@@ -15,15 +15,23 @@ module DASHI.Analysis.NonArchimedeanStoppingMomentRepairBidiExact where
 --
 --   alpha_m = -(1/m) log r_m.
 --
--- Standard geometric-tail probability theory then gives:
+-- The final analytic consumer is standard and already theorem-bearing in
+-- Mathlib.  In particular
 --
---   * every polynomial moment E[T^k] is finite;
---   * exponential moments are finite for Re(s) < alpha_m.
+--   `summable_pow_mul_exp_neg_nat_mul`
 --
--- This module records the exact promotion boundary.  It does not claim that
--- Agda kernel-checks real logarithms, infinite sums or the source's probability
--- space.  Those are standard analytic-consumer dependencies.  What is new and
--- repo-owned is the repaired finite geometric tail feeding that consumer.
+-- proves, for every k : Nat and every real r > 0,
+--
+--   Summable (fun n => n^k * exp (-r*n)).
+--
+-- Therefore any stopping tail dominated by exp (-alpha_m t), alpha_m > 0,
+-- has every polynomial moment finite.  Exponential moments are finite only in
+-- the repaired block-dependent strip Re(s) < alpha_m.  The old universal
+-- Re(s) < (1/2) log 2 strip is not inherited.
+--
+-- Authority firewall:
+--   dependency/source-library closure != Agda kernel-checking Mathlib's real
+--   analysis theorem or the source probability-space identification.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -34,6 +42,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 data MomentLeaf : Set where
   finiteHittingBlock : MomentLeaf
   geometricBlockTail : MomentLeaf
+  polynomialWeightedExponentialSeries : MomentLeaf
   allPolynomialMomentsFinite : MomentLeaf
   repairedExponentialMomentDomain : MomentLeaf
   sourceHalfLogTwoDomain : MomentLeaf
@@ -41,26 +50,47 @@ data MomentLeaf : Set where
 
 data MomentStatus : Set where
   repoOwned : MomentStatus
-  standardConsumer : MomentStatus
+  sourceLibraryOwned : MomentStatus
+  sourceLibraryCompiled : MomentStatus
   rejected : MomentStatus
 
 momentStatus : MomentLeaf → MomentStatus
 momentStatus finiteHittingBlock = repoOwned
 momentStatus geometricBlockTail = repoOwned
-momentStatus allPolynomialMomentsFinite = standardConsumer
-momentStatus repairedExponentialMomentDomain = standardConsumer
+momentStatus polynomialWeightedExponentialSeries = sourceLibraryOwned
+momentStatus allPolynomialMomentsFinite = sourceLibraryCompiled
+momentStatus repairedExponentialMomentDomain = sourceLibraryCompiled
 momentStatus sourceHalfLogTwoDomain = rejected
 
 
 data MomentObligation : Set where
-  needStandardGeometricTailMomentConsumer : MomentObligation
   rejectedUniversalHalfLogTwoMGFDomain : MomentObligation
 
 polynomialMomentCutset : List MomentObligation
-polynomialMomentCutset = needStandardGeometricTailMomentConsumer ∷ []
+polynomialMomentCutset = []
+
+repairedMGFDomainCutset : List MomentObligation
+repairedMGFDomainCutset = []
 
 sourceMGFDomainDisposition : List MomentObligation
 sourceMGFDomainDisposition = rejectedUniversalHalfLogTwoMGFDomain ∷ []
+
+record MathlibMomentConsumerReceipt : Set where
+  constructor mathlibMomentConsumerReceipt
+  field
+    theoremLocated : Bool
+    polynomialWeightedExponentialSummable : Bool
+    requiresPositiveRate : Bool
+    enoughForAllPolynomialMoments : Bool
+    agdaKernelChecksMathlibTheorem : Bool
+
+canonicalMathlibMomentConsumerReceipt : MathlibMomentConsumerReceipt
+canonicalMathlibMomentConsumerReceipt =
+  mathlibMomentConsumerReceipt true true true true false
+
+polynomialMomentConsumerDependencyClosed :
+  polynomialMomentCutset ≡ []
+polynomialMomentConsumerDependencyClosed = refl
 
 record RepairedMomentRateBoundary : Set where
   constructor repairedMomentRateBoundary
@@ -70,16 +100,23 @@ record RepairedMomentRateBoundary : Set where
     allPolynomialMomentsFollowFromGeometricTail : Bool
     sourceHalfLogTwoRateFollowsFromRepairedTail : Bool
     mgfDomainMustBeRecomputedFromBlockRatio : Bool
+    repairedMGFDomainDependencyClosed : Bool
 
 canonicalRepairedMomentRateBoundary : RepairedMomentRateBoundary
 canonicalRepairedMomentRateBoundary =
-  repairedMomentRateBoundary true true true false true
+  repairedMomentRateBoundary true true true false true true
 
 polynomialMomentsSurviveRepair :
   RepairedMomentRateBoundary.allPolynomialMomentsFollowFromGeometricTail
     canonicalRepairedMomentRateBoundary
   ≡ true
 polynomialMomentsSurviveRepair = refl
+
+repairedMGFDomainClosed :
+  RepairedMomentRateBoundary.repairedMGFDomainDependencyClosed
+    canonicalRepairedMomentRateBoundary
+  ≡ true
+repairedMGFDomainClosed = refl
 
 halfLogTwoDomainDoesNotSurviveRepair :
   RepairedMomentRateBoundary.sourceHalfLogTwoRateFollowsFromRepairedTail
