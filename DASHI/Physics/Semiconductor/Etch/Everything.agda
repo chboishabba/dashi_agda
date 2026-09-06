@@ -3,3 +3,6 @@ module DASHI.Physics.Semiconductor.Etch.Everything where
 import DASHI.Physics.Semiconductor.Etch.PlasmaEtchMaterialTransferExact
 import DASHI.Physics.Semiconductor.Etch.SheathIonEnergySkeletonExact
 import DASHI.Physics.Semiconductor.Etch.MaterialSelectivityExact
+import DASHI.Physics.Semiconductor.Etch.SurfaceReactionKineticsExact
+import DASHI.Physics.Semiconductor.Etch.AspectRatioTransportExact
+import DASHI.Physics.Semiconductor.Etch.FeatureChargingProfileExact
