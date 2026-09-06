@@ -12,6 +12,7 @@ module DASHI.Cognition.PNF.SensibLawNativeTitleSystemOperationEnforcementEveryth
 open import DASHI.Core.Prelude
 
 import DASHI.Core.EpistemicSystemOperationEverything
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.OperationalSystemBehaviourSemanticsExact as Operation
 import DASHI.Core.ObserverVisibilityExistenceNoncollapseExact as Visibility
 import DASHI.Core.SelfSealingCorrectionLoopExact as SelfSeal
@@ -83,8 +84,7 @@ posiwidBoundary : Operation.POSIWIDSourceBoundary
 posiwidBoundary = Operation.canonicalPOSIWIDSourceBoundary
 
 declaredPurposeCannotRecoverRealizedEffect :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    Operation.demoDeclared Operation.demoEffect → ⊥
+  INF.FactorsThrough Operation.demoDeclared Operation.demoEffect → ⊥
 declaredPurposeCannotRecoverRealizedEffect =
   Operation.declaredPurposeCannotRecoverRealizedEffect
 
