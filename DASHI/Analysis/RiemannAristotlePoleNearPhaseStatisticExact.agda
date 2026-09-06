@@ -4,6 +4,8 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Analysis.RiemannAristotlePoleQuotientDirectFiniteNearAttackExact as Direct
+
 ------------------------------------------------------------------------
 -- DIRECT ROUTE: MINIMUM PHASE-SENSITIVE INFORMATION
 --
@@ -13,8 +15,12 @@ open import Agda.Builtin.String using (String)
 --
 --   cos((b_sigma - t) u).
 --
--- This file does not invent such a statistic analytically.  It types the exact
--- information interface that any successful direct theorem must provide.
+-- BIDI UPDATE: the repository's existing DirectFinitePoleNearProducer is
+-- strictly richer than this interface. It already owns ZeroIndex, target,
+-- cutoff, nearIndex, multiplicity, targetRelativeGap, signed cosine data and an
+-- approximant/error receipt. Therefore the phase-statistic view is compiler
+-- output from a direct producer; a second zero/phase carrier is not a live
+-- research obligation.
 ------------------------------------------------------------------------
 
 record PoleNearPhaseStatistic : Set₁ where
@@ -53,6 +59,80 @@ record PhaseStatisticControlsFiniteNear
 
 open PhaseStatisticControlsFiniteNear public
 
+------------------------------------------------------------------------
+-- Direct producer -> phase-statistic compiler.
+--
+-- The phase code is literally targetRelativeGap. Coarse equality is represented
+-- minimally by multiplicity equality; phase separation is non-equality of the
+-- target gaps. The interface only asks for the separating proposition as a Set,
+-- not an analytic estimate, so no additional theorem is fabricated here.
+------------------------------------------------------------------------
+
+phaseStatisticFromDirectFiniteProducer :
+  Direct.DirectFinitePoleNearProducer → PoleNearPhaseStatistic
+phaseStatisticFromDirectFiniteProducer d =
+  pole-near-phase-statistic
+    (Direct.DirectFinitePoleNearProducer.ZeroIndex d)
+    (Direct.DirectFinitePoleNearProducer.Scalar d)
+    (Direct.DirectFinitePoleNearProducer.Scalar d)
+    (Direct.DirectFinitePoleNearProducer.target d)
+    (Direct.DirectFinitePoleNearProducer.cutoff d)
+    (Direct.DirectFinitePoleNearProducer.nearIndex d)
+    (Direct.DirectFinitePoleNearProducer.multiplicityOf d)
+    (Direct.DirectFinitePoleNearProducer.targetRelativeGap d)
+    (Direct.DirectFinitePoleNearProducer.targetRelativeGap d)
+    (λ x y →
+      Direct.DirectFinitePoleNearProducer.multiplicityOf d x
+      ≡ Direct.DirectFinitePoleNearProducer.multiplicityOf d y)
+    (λ a b → a ≡ b → ⊥)
+    (λ x y coarse separated →
+      Direct.DirectFinitePoleNearProducer.targetRelativeGap d x
+      ≡ Direct.DirectFinitePoleNearProducer.targetRelativeGap d y → ⊥)
+    (Direct.DirectFinitePoleNearProducer.preservesTargetRelativeGap d)
+    (Direct.DirectFinitePoleNearProducer.preservesMultiplicity d)
+    (Direct.DirectFinitePoleNearProducer.preservesFiniteNearIndex d)
+    "compiled from DirectFinitePoleNearProducer.targetRelativeGap"
+
+------------------------------------------------------------------------
+-- The direct producer's existing evaluation receipt also inhabits the weak
+-- `PhaseStatisticControlsFiniteNear` interface. This is not a new evaluation:
+-- it is the same `Within finiteSignedNearValue approximant error` receipt.
+------------------------------------------------------------------------
+
+phaseControlFromDirectFiniteProducer :
+  (d : Direct.DirectFinitePoleNearProducer) →
+  PhaseStatisticControlsFiniteNear (phaseStatisticFromDirectFiniteProducer d)
+phaseControlFromDirectFiniteProducer d =
+  phase-statistic-controls-finite-near
+    (Direct.DirectFinitePoleNearProducer.Within d
+      (Direct.DirectFinitePoleNearProducer.finiteSignedNearValue d)
+      (Direct.DirectFinitePoleNearProducer.approximant d)
+      (Direct.DirectFinitePoleNearProducer.error d))
+    (Direct.DirectFinitePoleNearProducer.evaluationReceipt d)
+    "same direct finite-near approximant/error receipt; no second phase evaluation"
+
+------------------------------------------------------------------------
+-- Search compression.
+------------------------------------------------------------------------
+
+data PhaseStatisticSearchPayment : Set where
+  constructSecondPhaseStatisticCarrier
+  compilePhaseStatisticFromDirectProducer
+  proveActualDirectFiniteEvaluation
+  : PhaseStatisticSearchPayment
+
+data PaymentState : Set where
+  pruned downstream live : PaymentState
+
+paymentState : PhaseStatisticSearchPayment → PaymentState
+paymentState constructSecondPhaseStatisticCarrier = pruned
+paymentState compilePhaseStatisticFromDirectProducer = downstream
+paymentState proveActualDirectFiniteEvaluation = live
+
+secondPhaseStatisticCarrierPruned :
+  paymentState constructSecondPhaseStatisticCarrier ≡ pruned
+secondPhaseStatisticCarrierPruned = refl
+
 record PoleNearPhaseStatisticBoundary : Set where
   constructor pole-near-phase-statistic-boundary
   field
@@ -64,8 +144,12 @@ record PoleNearPhaseStatisticBoundary : Set where
       targetRelativePhaseCoordinateRequired ≡ true
 
     repositoryAlreadyOwnsConcretePoleNearPhaseStatistic : Bool
-    repositoryAlreadyOwnsConcretePoleNearPhaseStatisticIsFalse :
-      repositoryAlreadyOwnsConcretePoleNearPhaseStatistic ≡ false
+    repositoryAlreadyOwnsConcretePoleNearPhaseStatisticIsTrue :
+      repositoryAlreadyOwnsConcretePoleNearPhaseStatistic ≡ true
+
+    phaseStatisticRequiresSecondZeroCarrier : Bool
+    phaseStatisticRequiresSecondZeroCarrierIsFalse :
+      phaseStatisticRequiresSecondZeroCarrier ≡ false
 
     directFiniteNearClosed : Bool
     directFiniteNearClosedIsFalse : directFiniteNearClosed ≡ false
@@ -77,6 +161,7 @@ canonicalPoleNearPhaseStatisticBoundary =
   pole-near-phase-statistic-boundary
     false refl
     true refl
+    true refl
     false refl
     false refl
-    "Construct a source-native target-relative phase statistic for zeros in nearOffFinset(t,J), and prove that it controls the literal reflection-paired finite pole-near signed evaluation strongly enough to yield the required approximant/error receipt."
+    "Do not construct another phase-statistic carrier. Compile the phase view from the existing DirectFinitePoleNearProducer, weld that direct producer to the existing selected pole-near producer, and improve the SAME direct producer's actual signed evaluation / target-gap moment strongly enough for the RH consumers."
