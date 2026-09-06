@@ -46,4 +46,6 @@ import DASHI.Law.HerzogRallyPoliceConductSourceAuditExact
 import DASHI.Law.SecurityClassificationProvenanceBidiExact
 import DASHI.Law.AustraliaMilitaryMarathonSecuritySourceReceiptsExact
 import DASHI.Law.SecurityClassificationHerzogAuditValidation
+import DASHI.Law.SecurityRoutingComparatorHypervoxelExact
+import DASHI.Law.SecurityRoutingComparatorValidation
 import DASHI.Law.CoerciveContactAuditValidation
