@@ -8,6 +8,7 @@ import DASHI.Analysis.RiemannAristotlePoleQuotientCurrentCutExact as Pole
 import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as R8889
 import DASHI.Analysis.RiemannG2QuarterPeriodPoleQuotientFinalCompilerExact as Final
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateBudgetTargetExact as Off
+import DASHI.Analysis.RiemannAristotlePoleQuotientGammaBudgetTargetExact as Gamma
 import DASHI.Analysis.RiemannAristotleG2dScalarDeterminantSumTargetExact as Det
 
 ------------------------------------------------------------------------
@@ -25,13 +26,11 @@ import DASHI.Analysis.RiemannAristotleG2dScalarDeterminantSumTargetExact as Det
 --   Gamma <= B_Gamma
 --   B_off + B_Gamma < M_cluster.
 --
--- The existing compiler turns those inputs into contradiction. The 8889 return
--- additionally says the quantitative cluster-margin mathematics is already
--- owned, leaving only same-object attachment. Under closed-world repo search,
--- the genuinely analytic leaves are therefore:
---
---   1. literal universal-pole-quotient signed off-ordinate bound;
---   2. same-taper Gamma precision repair.
+-- A bare local upper-bound target is still too weak to count as the analytic
+-- payment: an arbitrary oversized budget can satisfy a local upper theorem and
+-- be useless to the strict final window. Therefore this owner strengthens the
+-- final leaves with proof-bearing consumer-adequacy receipts while retaining the
+-- historical target APIs unchanged.
 ------------------------------------------------------------------------
 
 data FinalHighOrdinateLeaf : Set where
@@ -73,6 +72,57 @@ finalCompilerRebuildIsPruned :
 finalCompilerRebuildIsPruned = refl
 
 ------------------------------------------------------------------------
+-- CONSUMER-SUFFICIENT FINAL LEAVES
+--
+-- Each target already carries its local upper theorem. These wrappers add the
+-- exact facts a final-use producer must prove rather than merely name as Sets.
+------------------------------------------------------------------------
+
+record ConsumerSufficientPoleQuotientOffProducer : Set₁ where
+  field
+    target : Off.PoleQuotientOffOrdinateBudgetTarget
+
+    crossingCutoffFeedsThisExactOffProducer : Set
+    crossingCutoffFeedsThisExactOffProducerReceipt :
+      crossingCutoffFeedsThisExactOffProducer
+
+    sameLiteralPoleQuotientTaperAsFinalConsumer : Set
+    sameLiteralPoleQuotientTaperAsFinalConsumerReceipt :
+      sameLiteralPoleQuotientTaperAsFinalConsumer
+
+    FitsSharpClusterAccuracyWindow :
+      Off.PoleQuotientOffOrdinateBudgetTarget -> Set
+    fitsSharpClusterAccuracyWindow : FitsSharpClusterAccuracyWindow target
+
+    producerReference : String
+
+open ConsumerSufficientPoleQuotientOffProducer public
+
+record ConsumerSufficientPoleQuotientGammaProducer : Set₁ where
+  field
+    target : Gamma.PoleQuotientGammaBudgetTarget
+
+    sameLiteralPoleQuotientTaperAsFinalConsumer : Set
+    sameLiteralPoleQuotientTaperAsFinalConsumerReceipt :
+      sameLiteralPoleQuotientTaperAsFinalConsumer
+
+    FitsSharpClusterAccuracyWindow :
+      Gamma.PoleQuotientGammaBudgetTarget -> Set
+    fitsSharpClusterAccuracyWindow : FitsSharpClusterAccuracyWindow target
+
+    producerReference : String
+
+open ConsumerSufficientPoleQuotientGammaProducer public
+
+-- Canonical surviving signed analytic payment. This is deliberately stronger
+-- than merely inhabiting PoleQuotientOffOrdinateBudgetTarget.
+LiteralFinalSignedOffPayment : Set₁
+LiteralFinalSignedOffPayment = ConsumerSufficientPoleQuotientOffProducer
+
+LiteralFinalGammaPayment : Set₁
+LiteralFinalGammaPayment = ConsumerSufficientPoleQuotientGammaProducer
+
+------------------------------------------------------------------------
 -- Existing-owner pins.
 ------------------------------------------------------------------------
 
@@ -110,11 +160,6 @@ determinantSignedLeafStillMathematicallyOpen :
     Det.canonicalG2dScalarDeterminantSumTarget ≡ false
 determinantSignedLeafStillMathematicallyOpen = refl
 
--- Canonical type of the surviving signed analytic leaf. This aliases the
--- existing target; it does not create a weaker surrogate.
-LiteralFinalSignedOffPayment : Set₁
-LiteralFinalSignedOffPayment = Off.PoleQuotientOffOrdinateBudgetTarget
-
 record PoleQuotientFinalCutBoundary : Set where
   constructor pole-quotient-final-cut-boundary
   field
@@ -125,6 +170,22 @@ record PoleQuotientFinalCutBoundary : Set where
     determinantDirectPaymentAutomaticallyPaysFinalOffSocket : Bool
     determinantDirectPaymentAutomaticallyPaysFinalOffSocketIsFalse :
       determinantDirectPaymentAutomaticallyPaysFinalOffSocket ≡ false
+
+    bareOffTargetInhabitanceAloneIsConsumerSufficient : Bool
+    bareOffTargetInhabitanceAloneIsConsumerSufficientIsFalse :
+      bareOffTargetInhabitanceAloneIsConsumerSufficient ≡ false
+
+    bareGammaTargetInhabitanceAloneIsConsumerSufficient : Bool
+    bareGammaTargetInhabitanceAloneIsConsumerSufficientIsFalse :
+      bareGammaTargetInhabitanceAloneIsConsumerSufficient ≡ false
+
+    finalOffLeafCarriesSharpWindowAdequacyReceipt : Bool
+    finalOffLeafCarriesSharpWindowAdequacyReceiptIsTrue :
+      finalOffLeafCarriesSharpWindowAdequacyReceipt ≡ true
+
+    finalGammaLeafCarriesSharpWindowAdequacyReceipt : Bool
+    finalGammaLeafCarriesSharpWindowAdequacyReceiptIsTrue :
+      finalGammaLeafCarriesSharpWindowAdequacyReceipt ≡ true
 
     literalUniversalPoleQuotientSignedOffIsForwardLeaf : Bool
     literalUniversalPoleQuotientSignedOffIsForwardLeafIsTrue :
@@ -156,10 +217,14 @@ canonicalPoleQuotientFinalCutBoundary =
   pole-quotient-final-cut-boundary
     false refl
     false refl
+    false refl
+    false refl
+    true refl
+    true refl
     true refl
     true refl
     false refl
     false refl
     false refl
     false refl
-    "Treat the repository as closed-world for infrastructure, but preserve exact carrier ownership. The rank-two determinant q lane is diagnostic/scalarization and is not definitionally the universal pole-quotient taper. The final high-ordinate mathematical cut therefore has two analytic leaves: inhabit PoleQuotientOffOrdinateBudgetTarget on the exact universal pole-quotient reflection-cosine carrier, and repair the same-taper Gamma budget to the already-owned sharp window. The 8889 quantitative cluster margin is owned mathematics requiring only same-object attachment, and the final split-complement contradiction compiler is already closed. RH is not derived."
+    "Treat the repository as closed-world for infrastructure, but preserve exact carrier ownership and consumer strength. The determinant q lane is diagnostic/scalarization and is not definitionally the final universal pole-quotient taper. Bare off/Gamma target inhabitance is also insufficient because an arbitrary oversized budget need not fit the strict final window. The two live analytic leaves are proof-bearing consumer-sufficient producers: the exact universal pole-quotient reflection-cosine off bound with crossing/same-taper/sharp-window receipts, and the same-taper Gamma bound with a sharp-window receipt. The 8889 quantitative cluster margin is owned mathematics requiring only same-object attachment, and the final split-complement contradiction compiler is already closed. RH is not derived."
