@@ -49,9 +49,11 @@ record InteriorCarrierFluxState : Set where
 
 open InteriorCarrierFluxState public
 
+-- The unresolved states use G=2,R=1, so the source term genuinely contributes
+-- to the continuity residual.  The closed state uses G=R=1.
 spatialFluxState : Cell.SourceCharge → InteriorCarrierFluxState
-spatialFluxState Cell.q1 = interiorCarrierFluxState 14 10 1 3 1 1
-spatialFluxState Cell.q3 = interiorCarrierFluxState 12 10 2 3 1 1
+spatialFluxState Cell.q1 = interiorCarrierFluxState 14 10 1 3 2 1
+spatialFluxState Cell.q3 = interiorCarrierFluxState 12 10 2 3 2 1
 spatialFluxState Cell.q5 = interiorCarrierFluxState 10 10 3 3 1 1
 
 electronLeftMatchesComputedCurrent :
@@ -88,8 +90,8 @@ record SpatialContinuityResidual : Set where
 open SpatialContinuityResidual public
 
 spatialResidual : Cell.SourceCharge → SpatialContinuityResidual
-spatialResidual Cell.q1 = spatialContinuityResidual 4 2
-spatialResidual Cell.q3 = spatialContinuityResidual 2 1
+spatialResidual Cell.q1 = spatialContinuityResidual 5 1
+spatialResidual Cell.q3 = spatialContinuityResidual 3 0
 spatialResidual Cell.q5 = spatialContinuityResidual 0 0
 
 electronSpatialAccounting :
@@ -155,11 +157,6 @@ closedSpatialScoreZero Cell.q5 q5SpatialContinuityClosed = refl
 
 ------------------------------------------------------------------------
 -- Cross-pollination with existing conservation / continuum / Hodge owners.
---
--- The actual finite conservation donor is reused.  Continuum and Hodge owners
--- remain imported as the generic balance/coercivity architecture, but are not
--- instantiated until a concrete semiconductor operator with physical units and
--- boundary conditions is supplied.
 ------------------------------------------------------------------------
 
 reactionDiffusionConservationDonor :
@@ -193,7 +190,7 @@ data PhysicalSpatialContinuityLeaf : Set where
 
 -- Firewalls:
 -- finite face-current codes != SI current density.
--- G=R=1 fixture != physical recombination kinetics.
+-- finite G/R codes != physical generation-recombination kinetics.
 -- one interior control volume != a production transistor mesh.
 -- reaction-diffusion conservation architecture != semiconductor constitutive law.
 -- imported Hodge machinery != an instantiated semiconductor coercivity proof.
