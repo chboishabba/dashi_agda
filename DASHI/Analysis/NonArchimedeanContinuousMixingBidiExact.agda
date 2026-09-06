@@ -16,9 +16,13 @@ module DASHI.Analysis.NonArchimedeanContinuousMixingBidiExact where
 -- Hadamard detail energies, unitary local DFT, monomial shell powers, finite
 -- maximum prefactor and finite energy assembly.
 --
--- Mathlib Cauchy--Schwarz then closes Hilbert-space correlation decay.  The
--- stronger identification with a stochastic covariance remains a distinct
--- probability/expectation same-object consumer.
+-- Downstream finite consumers are now also dependency-closed:
+--
+--   * Hilbert correlation by Cauchy--Schwarz;
+--   * stationary covariance after uniform-stationarity and the 2^(-n)
+--     counting-vs-probability normalization weld;
+--   * total variation after adjoint-power orientation, density-coordinate
+--     identity, and finite L1/L2 Cauchy--Schwarz.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -27,6 +31,8 @@ open import Agda.Builtin.List using (List; []; _∷_)
 
 import DASHI.Analysis.NonArchimedeanPrefactoredL2TowerClosureExact as Tower
 import DASHI.Analysis.NonArchimedeanHilbertCorrelationDecayExact as Correlation
+import DASHI.Analysis.NonArchimedeanUniformStationaryCovarianceWeldExact as Covariance
+import DASHI.Analysis.NonArchimedeanAdjointPowerTVWeldExact as TV
 
 
 data MixingLeaf : Set where
@@ -44,7 +50,6 @@ data MixingStatus : Set where
   sourceAssumedButRefuted : MixingStatus
   sourceOrRepoOwned : MixingStatus
   sourceLibraryCompiled : MixingStatus
-  liveConsumer : MixingStatus
 
 mixingStatus : MixingLeaf → MixingStatus
 mixingStatus meanZeroInvariant = compiled
@@ -52,13 +57,11 @@ mixingStatus oneStepInverseSqrtTwoContraction = sourceAssumedButRefuted
 mixingStatus finiteSpectralRateHalf = sourceOrRepoOwned
 mixingStatus powerBoundWithFinitePrefactor = sourceLibraryCompiled
 mixingStatus hilbertCorrelationDecay = sourceLibraryCompiled
-mixingStatus stochasticCovarianceIdentification = liveConsumer
-mixingStatus finiteTotalVariationConsumer = liveConsumer
+mixingStatus stochasticCovarianceIdentification = sourceLibraryCompiled
+mixingStatus finiteTotalVariationConsumer = sourceLibraryCompiled
 
 
 data MixingObligation : Set where
-  needStationaryCovarianceExpectationWeld : MixingObligation
-  needFiniteTotalVariationConsumer : MixingObligation
   rejectedUnitConstantOneStepContraction : MixingObligation
 
 l2MixingCutset : List MixingObligation
@@ -68,10 +71,10 @@ hilbertCorrelationCutset : List MixingObligation
 hilbertCorrelationCutset = []
 
 stochasticCovarianceCutset : List MixingObligation
-stochasticCovarianceCutset = needStationaryCovarianceExpectationWeld ∷ []
+stochasticCovarianceCutset = []
 
 totalVariationCutset : List MixingObligation
-totalVariationCutset = needFiniteTotalVariationConsumer ∷ []
+totalVariationCutset = []
 
 oneStepClaimDisposition : List MixingObligation
 oneStepClaimDisposition = rejectedUnitConstantOneStepContraction ∷ []
@@ -83,12 +86,13 @@ record MixingFirewall : Set where
     spectralRadiusAloneControlsOneStepNormForNonNormalOperator : Bool
     checkedRationalHadamardSimilarityIsUnitaryAsWritten : Bool
     finitePrefactoredL2PowerDependencyClosed : Bool
-    hilbertCorrelationEqualsStochasticCovarianceAutomatically : Bool
+    stochasticCovarianceNeedsInverseStateCountNormalization : Bool
+    lawEvolutionUsesObservableOperatorWithoutAdjoint : Bool
     unitPrefactorCanReturn : Bool
 
 canonicalMixingFirewall : MixingFirewall
 canonicalMixingFirewall =
-  mixingFirewall false false false true false false
+  mixingFirewall false false false true true false false
 
 prefactoredL2MixingDependencyClosed : l2MixingCutset ≡ []
 prefactoredL2MixingDependencyClosed = refl
@@ -96,12 +100,19 @@ prefactoredL2MixingDependencyClosed = refl
 hilbertCorrelationDependencyClosed : hilbertCorrelationCutset ≡ []
 hilbertCorrelationDependencyClosed = refl
 
-stochasticCovarianceStillNeedsWeld :
-  stochasticCovarianceCutset
-  ≡ needStationaryCovarianceExpectationWeld ∷ []
-stochasticCovarianceStillNeedsWeld = refl
+stochasticCovarianceDependencyClosed : stochasticCovarianceCutset ≡ []
+stochasticCovarianceDependencyClosed = refl
+
+totalVariationDependencyClosed : totalVariationCutset ≡ []
+totalVariationDependencyClosed = refl
 
 falseUnitPrefactorCannotReturn :
   MixingFirewall.unitPrefactorCanReturn canonicalMixingFirewall
   ≡ false
 falseUnitPrefactorCannotReturn = refl
+
+observableLawOrientationShortcutRejected :
+  MixingFirewall.lawEvolutionUsesObservableOperatorWithoutAdjoint
+    canonicalMixingFirewall
+  ≡ false
+observableLawOrientationShortcutRejected = refl
