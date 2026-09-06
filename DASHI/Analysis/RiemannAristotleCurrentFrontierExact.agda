@@ -6,73 +6,38 @@ module DASHI.Analysis.RiemannAristotleCurrentFrontierExact where
 -- Maintained bidirectionally: forward from machine-checked Lean owners and
 -- backward from the unweakened RH contradiction.
 --
--- NEWEST CHECKED LEAN ADVANCE (2026-09-06)
+-- §37 reconciles density cutoff with quarter-period crossing and §38 instantiates
+-- zeta's upper local count. These close two audit coordinates.
 --
--- The reproduced Zeta23Bridge tranche reports 8894 jobs before the two new
--- modules and 8896 jobs after them. Section 37 reconciles the density cutoff
--- with the quarter-period requirement; Section 38 instantiates the upper-count
--- hypotheses for the repository's actual zeta zeros using the checked
--- Zeta23.RvM.zetaZeroConfig_local_count theorem.
+-- IMPORTANT CORRECTION AFTER SOURCE RE-READ
 --
--- Section 37 proves that, at D = pi/(3 Lambda), the density cutoff is
+-- §35 proves
 --
---   (pi/3 + pi^3 A/(6c))/Lambda + (1 + pi^2 A/(2c)),
+--   positive gap-split lower bound
+--      -> (4/pi^2) * highGapMass < lowGapMass.
 --
--- and that the leading compatibility window is nonempty exactly when
--- c < pi^2 A (for c > 0). It also gives an actual Nat cutoff in the joint
--- window under the stated hypotheses. Therefore the density cut does NOT
--- refute the adaptive inverse-width route; it converts it into a constant-
--- window compatibility problem on J*Lambda.
+-- The positive lower bound is used by the checked no-go theorems to show the
+-- desired small signed-scalar hypothesis is unsatisfiable when the floor reaches
+-- the consumer threshold. Hence the clustering inequality is an OBSTRUCTION
+-- DIAGNOSTIC, not the first forward RH theorem.
 --
--- Section 38 supplies the zeta unit-window upper count and derives the needed
--- short-window upper count by finite unit-window covering. Hence the upper
--- counting hypothesis is no longer open for zeta. The checked imported Lean
--- theorem is proof-carrying mathematics: it is neither an unproved authority
--- receipt nor an Agda proof.
+-- The forward G2d/current-cut theorem remains the literal signed target-centred
+-- determinant response. BIDI compression now states it exactly as
 --
--- CURRENT NEAR-CORE FRONTIER
+--   DirectSignedConsumerPayment P
+--     = AcceptableForG2Consumer P (totalSignedResponse P)
 --
--- The live clustering statement is
+-- on the canonical LiteralTargetCenteredScalarProblem. A successful
+-- DirectFinitePoleNearProducer must carry this payment. Canonical Scalar,
+-- ZeroIndex, target, nearOff, multiplicity, off-real displacement, delta and
+-- totalSignedResponse compile from P; PoleNearPhaseStatistic and the generic
+-- evaluation surface compile from the direct producer.
 --
---   (4/pi^2) * highGapMass < lowGapMass,
---
--- for the actual zeta zeros at D = pi/(3 Lambda).
---
--- The current highest-alpha refinement is a SAME-target/SAME-window second
--- moment of the target-relative ORDINATE gap
---
---   delta = Im(rho) - t.
---
--- This is deliberately NOT the Alpoge--Furman/Hermitian transverse coordinate
--- alpha = Re(rho)-1/2. Equal alpha information can coexist with different delta
--- information, so transverse-moment control is not a direct clustering donor.
---
--- BIDI compression has now removed another duplicate interface. The existing
--- DirectFinitePoleNearProducer already carries ZeroIndex, nearIndex,
--- multiplicity, targetRelativeGap and a signed approximant/error receipt.
--- Therefore PoleNearPhaseStatistic is compiler output from that direct producer;
--- a second phase-statistic carrier is not a research theorem.
---
--- The remaining SAME-OBJECT representation payment is narrower: identify that
--- direct producer with the existing ActualSelectedPoleNearProducer. This
--- SelectedDirectFiniteWeld is shared upstream of both the delta-moment clustering
--- route and the finite-near signed evaluation. It prevents those two consumers
--- from silently using different zero families, targets, cutoffs or multiplicity
--- functions.
---
--- Agda owns the subtraction-free compiler
---
---   highGapMass <= M2_delta_norm < 2*lowGapMass
---     -> highGapMass < 2*lowGapMass.
---
--- Together with the elementary real coefficient fact 4/pi^2 < 1/2 this is
--- sufficient for the exact clustering coefficient. The actual welded-window
--- delta-moment estimate remains open. The direct producer's numerical finite-
--- near evaluation also remains open at consumer-sufficient precision.
---
--- Earlier finite-near Schur and nuisance-elimination obligations remain valid
--- architectural dependencies. Gamma precision, low-ordinate/global coverage,
--- and the final RH implication remain open where recorded.
+-- Selected-window identity and selected-scalar budget transport are downstream
+-- after the direct producer. The literal M2_delta is still a useful diagnostic
+-- observable for the gap-split obstruction, but is not a forward RH payment.
+-- Gamma precision remains an independent live branch. Projective balance,
+-- low-ordinate/global coverage and RH remain separate.
 --
 -- No theorem here derives RH.
 ------------------------------------------------------------------------
@@ -250,4 +215,51 @@ canonicalAristotleCurrentFrontier =
     false refl
     false refl
     false refl
-    "The checked Lean tranche reconciles quarter-period versus density cutoffs and closes the zeta unit/short-window upper-count input. The live optimized near-core target is actual-zeta low-gap clustering at D = pi/(3 Lambda). Its highest-fanout refinement uses delta = Im(rho)-t on one SAME selected/direct zero carrier. PoleNearPhaseStatistic is now compiler output from DirectFinitePoleNearProducer, so a second phase carrier is pruned. The remaining representation seam is the SelectedDirectFiniteWeld identifying that direct producer with the existing ActualSelectedPoleNearProducer. Once welded, the same targetRelativeGap/multiplicity/nearIndex carrier can feed both the normalized delta^2 moment and the signed finite-near evaluation. Agda owns the moment-to-two-to-one ratio compiler; the actual delta-moment estimate, exact 4/pi^2 coefficient transport, consumer-sufficient finite-near evaluation, Gamma precision, low-ordinate coverage and final RH implication remain open. Transverse alpha moments and global >2/3 simple-zero abundance are not silently promoted to local ordinate clustering. RH is not derived."
+    "The checked Lean tranche closes quarter-period/density compatibility and zeta upper local counting. The §35 inequality (4/pi^2)*highGapMass < lowGapMass is retained as a condition for positivity of the gap-split NO-GO lower bound, not as a forward RH producer. The forward zero-side leaf is the literal target-centred signed determinant estimate, now typed as DirectSignedConsumerPayment = AcceptableForG2Consumer(totalSignedResponse) on the canonical LiteralTargetCenteredScalarProblem and required by DirectFinitePoleNearProducer. Canonical zero/gap fields, the phase-statistic view and generic evaluation surface are compiler output; selected-window/budget transport is downstream. M2_delta remains a same-carrier obstruction diagnostic, not an RH payment. Gamma precision, projective-balance breaking, low-ordinate coverage and final RH remain open. RH is not derived."
+
+------------------------------------------------------------------------
+-- Corrected high-level scheduler interpretation, kept outside the compatibility
+-- record so existing field projections remain stable.
+------------------------------------------------------------------------
+
+actualZetaClusteringIsForwardRHProducer : Bool
+actualZetaClusteringIsForwardRHProducer = false
+
+actualZetaClusteringIsForwardRHProducerIsFalse :
+  actualZetaClusteringIsForwardRHProducer ≡ false
+actualZetaClusteringIsForwardRHProducerIsFalse = refl
+
+actualZetaClusteringIsGapSplitObstructionDiagnostic : Bool
+actualZetaClusteringIsGapSplitObstructionDiagnostic = true
+
+actualZetaClusteringIsGapSplitObstructionDiagnosticIsTrue :
+  actualZetaClusteringIsGapSplitObstructionDiagnostic ≡ true
+actualZetaClusteringIsGapSplitObstructionDiagnosticIsTrue = refl
+
+targetLocalSecondMomentIsForwardRHProducer : Bool
+targetLocalSecondMomentIsForwardRHProducer = false
+
+targetLocalSecondMomentIsForwardRHProducerIsFalse :
+  targetLocalSecondMomentIsForwardRHProducer ≡ false
+targetLocalSecondMomentIsForwardRHProducerIsFalse = refl
+
+directSignedConsumerPaymentCompilerClosedInAgda : Bool
+directSignedConsumerPaymentCompilerClosedInAgda = true
+
+directSignedConsumerPaymentCompilerClosedInAgdaIsTrue :
+  directSignedConsumerPaymentCompilerClosedInAgda ≡ true
+directSignedConsumerPaymentCompilerClosedInAgdaIsTrue = refl
+
+literalDirectFiniteProducerClosed : Bool
+literalDirectFiniteProducerClosed = false
+
+literalDirectFiniteProducerClosedIsFalse :
+  literalDirectFiniteProducerClosed ≡ false
+literalDirectFiniteProducerClosedIsFalse = refl
+
+genericWithinReceiptAloneClosesLiteralG2 : Bool
+genericWithinReceiptAloneClosesLiteralG2 = false
+
+genericWithinReceiptAloneClosesLiteralG2IsFalse :
+  genericWithinReceiptAloneClosesLiteralG2 ≡ false
+genericWithinReceiptAloneClosesLiteralG2IsFalse = refl
