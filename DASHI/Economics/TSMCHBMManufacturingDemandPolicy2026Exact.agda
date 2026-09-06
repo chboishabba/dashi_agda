@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Economics.AIManufacturingChokepointTimescaleExact as Manufacturing
+import DASHI.Economics.ManufacturingScarcityTimescaleExact as Scarcity
 import DASHI.Economics.AICriticalInfrastructurePoliticsCrossPollinationExact as Politics
 
 record SourceReceipt : Set where
@@ -67,7 +68,7 @@ governmentSupportDoesNotAutoPromoteToCommercialReturn :
 governmentSupportDoesNotAutoPromoteToCommercialReturn ()
 
 scarcityDoesNotCloseDownstreamViability :
-  Manufacturing.Scarcity.ScarcityRentImpliesDownstreamViabilityPermission → ⊥
+  Scarcity.ScarcityRentImpliesDownstreamViabilityPermission → ⊥
 scarcityDoesNotCloseDownstreamViability =
   Manufacturing.scarcityRentDoesNotCloseDownstreamViability
 
