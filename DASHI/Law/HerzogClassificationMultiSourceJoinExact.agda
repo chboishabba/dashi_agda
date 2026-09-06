@@ -3,6 +3,7 @@ module DASHI.Law.HerzogClassificationMultiSourceJoinExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Law.DisclosureReadyClassificationInputAtomExact as Atom
 import DASHI.Law.IndependentEvidenceProvenanceExact as Independent
 import DASHI.Law.EvidenceProvenanceDependencyDagExact as Dag
@@ -11,7 +12,7 @@ import DASHI.Law.MaboCountrySecurityClassificationCrossPollinationExact as MaboC
 
 ------------------------------------------------------------------------
 -- Multi-source join for disclosed threat/classification propositions.
--- Multiple documents may repeat one upstream proposition.  Receipt count,
+-- Multiple documents may repeat one upstream proposition. Receipt count,
 -- semantic agreement, producer independence, and same-object lineage are
 -- therefore independent coordinates.
 ------------------------------------------------------------------------
@@ -110,7 +111,7 @@ fourCopiesDoNotCloseIndependence = refl
 ------------------------------------------------------------------------
 
 sameContentCannotReconstructIndependence :
-  Independent.NF.FactorsThrough Independent.contentProjection Independent.provenanceStrength → ⊥
+  NF.FactorsThrough Independent.contentProjection Independent.provenanceStrength → ⊥
 sameContentCannotReconstructIndependence = Independent.sameContentCannotReconstructIndependence
 
 multipleReceiptsNotAutomaticallyIndependent :
