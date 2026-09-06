@@ -23,4 +23,11 @@ import DASHI.Core.QueryPromotionResidualBidiExact
 import DASHI.Core.ProjectionHierarchyCompatibleFibreBidiExact
 import DASHI.Core.BraidedPromotionTransportBidiExact
 
+-- Second-order Agda return.
+import DASHI.Core.TypedProvenancePathBidiExact
+import DASHI.Core.QueryFibreAddedCoordinateProducerBidiExact
+import DASHI.Core.PromotionResidualSelectiveReopeningBidiExact
+import DASHI.Core.TemporalStrandProvenanceBidiExact
+import DASHI.Core.FibreRefinementExperimentSelectionBidiExact
+
 import DASHI.Core.CrossDomainBidiReciprocal2026Validation
