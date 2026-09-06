@@ -5,28 +5,30 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
--- Gauthey functional-column / segmentation-label alignment boundary.
+-- Gauthey selected-ROI / source-supervoxel alignment boundary.
 --
 -- Scientific source:
 -- Wayan Gauthey; Albert Lin; Osama M. Ahmed; Andrew M. Leifer; Mala Murthy;
 -- Stephan Y. Thiberge, "High-speed whole-brain imaging in Drosophila",
 -- DOI 10.1038/s41467-026-72437-1;
--- preprocessed data DOI 10.5281/zenodo.17618684.
+-- preprocessed data DOI 10.5281/zenodo.17618684;
+-- analysis code github:murthylab/lightbead-analysis.
 --
--- The deposited aggregate functional matrix has 668 archive-local columns.
--- Separate deposited segmentation and responsive-ROI objects do not by
--- themselves identify those columns with anatomical ROIs.
+-- Corrected source semantics:
+-- deposited 940 x 668 = 940 selected ROI rows x 668 time samples.
+-- The previously audited 04032024 n2000 labels/ROI list belong to the LBM lane,
+-- not the pooled conventional-2p lane used to create this matrix.
 ------------------------------------------------------------------------
 
 record ROIAlignmentDiagnostic : Set where
   constructor roiAlignmentDiagnostic
   field
-    functionalColumnCount : Nat
-    segmentationLabelCount : Nat
-    responsiveROICount : Nat
+    selectedFunctionalROICount : Nat
+    timeSampleCount : Nat
+    comparedSegmentationLabelCount : Nat
+    comparedResponsiveROICount : Nat
     sameCardinality : Bool
-    labelsContiguousFromOne : Bool
-    responsiveROIsSubsetOfLabels : Bool
+    comparisonIsSameAcquisitionLane : Bool
     explicitMappingPresent : Bool
     identityPromotable : Bool
     evidenceKind : String
@@ -36,39 +38,43 @@ open ROIAlignmentDiagnostic public
 record ROIAlignmentBoundary : Set where
   constructor roiAlignmentBoundary
   field
+    timeAxisDoesNotImplyFunctionalUnitCarrier : Bool
+    pooled2PDoesNotInheritLBLabelIdentity : Bool
     equalCardinalityDoesNotImplyIdentity : Bool
-    contiguousLabelsDoNotImplyColumnOrder : Bool
-    responsiveSubsetDoesNotImplyColumnMap : Bool
-    segmentationLabelDoesNotImplyFunctionalUnit : Bool
+    contiguousLabelsDoNotImplySelectedROIOrder : Bool
+    responsiveSubsetDoesNotImplySelectedROIMap : Bool
     explicitMappingRequiresDomainCoverage : Bool
-    explicitMappingRequiresExistingLabels : Bool
-    mappedCentroidStillDoesNotImplyNeuronIdentity : Bool
+    explicitMappingRequiresSameLaneSourceIdentity : Bool
+    mappedROIStillDoesNotImplyMaleCNSNeuronIdentity : Bool
 
 open ROIAlignmentBoundary public
 
 canonicalROIAlignmentBoundary : ROIAlignmentBoundary
 canonicalROIAlignmentBoundary =
-  roiAlignmentBoundary true true true true true true true
+  roiAlignmentBoundary true true true true true true true true
 
-unregistered668Diagnostic : ROIAlignmentDiagnostic
-unregistered668Diagnostic =
+-- Runtime diagnostic using the LB companion objects is retained as a negative
+-- cross-lane receipt, not as the candidate 2p mapping problem.
+legacyCrossLaneDiagnostic : ROIAlignmentDiagnostic
+legacyCrossLaneDiagnostic =
   roiAlignmentDiagnostic
+    940
     668
-    0
+    1999
     2967
     false
     false
     false
     false
-    false
-    "archive-column/ROI relationship unresolved; cardinality/domain checks are diagnostic only"
+    "cross-lane diagnostic: pooled 2p selected ROIs compared with LBM n2000 products"
 
 record ExplicitROIMapReceipt : Set where
   constructor explicitROIMapReceipt
   field
     mappingArtifactIdentifier : String
-    completeFunctionalDomain : Bool
-    labelsExistInSegmentation : Bool
+    completeSelectedROIDomain : Bool
+    sourceSupervoxelsExist : Bool
+    sameAcquisitionLane : Bool
     mappingProvenanceRecoverable : Bool
     sameAnimalIdentityClaimed : Bool
 
@@ -80,14 +86,13 @@ record ROIMapPromotionAssessment : Set where
     mappingPresent : Bool
     domainClosed : Bool
     codomainClosed : Bool
+    laneClosed : Bool
     provenanceClosed : Bool
     anatomicalROIIdentityAdmissible : Bool
     neuronIdentityAdmissible : Bool
 
 open ROIMapPromotionAssessment public
 
--- A canonical boundary witness: even an explicit anatomical ROI map does not
--- by itself establish MaleCNS neuron identity.
 canonicalExplicitMapBoundary : ROIMapPromotionAssessment
 canonicalExplicitMapBoundary =
-  roiMapPromotionAssessment true true true true true false
+  roiMapPromotionAssessment true true true true true true false
