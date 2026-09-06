@@ -6,17 +6,19 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.BidiResidualApproximationExact as Bidi
 import DASHI.Core.LeastCostConsumerClosingExperimentBidiExact as Closing
 import DASHI.Core.CostedFibreEliminationChoiceBidiExact as Costed
-import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Cost
 import DASHI.Core.FibreRefinementExperimentSelectionBidiExact as Fibre
 import DASHI.Core.AskListenObservationProducerBidiExact as Dialogic
 import DASHI.Core.DeliberativeCyberneticLoopBidiExact as Delib
+import DASHI.Core.QueryCompatibleFibreConsumerClosureBidiExact as Query
+import DASHI.Core.QueryFibreAddedCoordinateProducerBidiExact as Added
+import DASHI.Core.ExperimentalCoordinateDesignExact as Design
 
 ------------------------------------------------------------------------
 -- COSTED MIXED CONSUMER-CLOSING OBSERVATION SEARCH
 --
 -- Instrumental/test and ask/listen/deliberative moves may share one resource
 -- comparison only after each candidate carries proof that its resulting fibre
--- closes the selected consumer.  Dialogic candidates additionally retain their
+-- closes the selected consumer. Dialogic candidates additionally retain their
 -- actual separating-coordinate/calibration producer; a move label alone is not
 -- admitted as an observation.
 ------------------------------------------------------------------------
@@ -63,10 +65,10 @@ instrumentalClosingCandidate candidate moveKind resourceCost reference =
 
 record DialogicClosingWitness
     {QueryT State Hidden Answer Control Value Dimension ExistingCode Experiment Decision : Set}
-    {problem : Dialogic.Query.QueryCompatibleProblem QueryT State Hidden Answer}
+    {problem : Query.QueryCompatibleProblem QueryT State Hidden Answer}
     {query : QueryT} {state : State}
-    {collision : Dialogic.Added.QueryFibreCollision problem query state}
-    {design : Dialogic.Design.ExperimentalCoordinateDesign Hidden Control Value Dimension}
+    {collision : Added.QueryFibreCollision problem query state}
+    {design : Design.ExperimentalCoordinateDesign Hidden Control Value Dimension}
     {existing : Hidden → ExistingCode}
     {prior : Bidi.ResidualFibre Hidden}
     {consumer : Hidden → Decision}
@@ -75,9 +77,6 @@ record DialogicClosingWitness
   constructor dialogic-closing-witness
   field
     producer : Dialogic.DialogicObservationProducer collision design existing
-    producerMoveMatches :
-      Dialogic.dialogicMoveKind producer ≡
-      Dialogic.dialogicMoveKind producer
     closingReceipt : closingCandidate ≡ closingCandidate
     witnessReference : String
 
