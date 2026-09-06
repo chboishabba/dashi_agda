@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Analysis.RiemannAristotlePoleQuotientCurrentCutExact as Pole
 import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as R8889
 import DASHI.Analysis.RiemannG2QuarterPeriodPoleQuotientFinalCompilerExact as Final
+import DASHI.Analysis.RiemannG2PoleQuotientChannelAllowanceExact as Allowance
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateBudgetTargetExact as Off
 import DASHI.Analysis.RiemannAristotlePoleQuotientGammaBudgetTargetExact as Gamma
 import DASHI.Analysis.RiemannAristotleG2dScalarDeterminantSumTargetExact as Det
@@ -32,6 +33,17 @@ import DASHI.Analysis.RiemannAristotleG2dScalarDeterminantSumTargetExact as Det
 -- choose its own meaning of "sharp enough". Consumer adequacy is therefore an
 -- EXTERNAL predicate supplied by the downstream final consumer, and the producer
 -- must inhabit that fixed predicate.
+--
+-- The repo already owns a more concrete allowance pattern in the Riemann lane.
+-- `RiemannG2PoleQuotientChannelAllowanceExact` lifts that pattern to the final
+-- off/Gamma split:
+--
+--   B_off <= A_off
+--   B_Gamma <= A_Gamma
+--   A_off + A_Gamma < M_cluster
+--
+-- compiles to B_off + B_Gamma < M_cluster. No midpoint/division structure is
+-- required on the deliberately weak ordered-additive final carrier.
 ------------------------------------------------------------------------
 
 data FinalHighOrdinateLeaf : Set where
@@ -78,6 +90,11 @@ finalCompilerRebuildIsPruned = refl
 -- `OffAdequate` / `GammaAdequate` are parameters, not fields. Thus the final
 -- consumer fixes the acceptance predicate and a producer cannot make its own
 -- budget vacuously adequate by choosing a permissive relation.
+--
+-- On the final common ordered scalar carrier the canonical concrete adequacy
+-- shape is the allowance ledger above. The abstract parameters remain here only
+-- because off/Gamma target records still carry independent scalar types before
+-- same-object transport.
 ------------------------------------------------------------------------
 
 record ConsumerSufficientPoleQuotientOffProducer
@@ -122,6 +139,12 @@ LiteralFinalGammaPayment :
   (GammaAdequate : Gamma.PoleQuotientGammaBudgetTarget -> Set) -> Set₁
 LiteralFinalGammaPayment = ConsumerSufficientPoleQuotientGammaProducer
 
+FinalCommonCarrierAllowancePayment :
+  (surface :
+    DASHI.Analysis.RiemannAristotlePoleQuotientSplitComplementBudgetExact.OrderedAdditiveComplementSurface)
+  -> Set₁
+FinalCommonCarrierAllowancePayment = Allowance.PoleQuotientChannelAllowance
+
 ------------------------------------------------------------------------
 -- Existing-owner pins.
 ------------------------------------------------------------------------
@@ -160,6 +183,16 @@ determinantSignedLeafStillMathematicallyOpen :
     Det.canonicalG2dScalarDeterminantSumTarget ≡ false
 determinantSignedLeafStillMathematicallyOpen = refl
 
+allowanceCompilerUsesNoHalfMarginDivision :
+  Allowance.PoleQuotientChannelAllowanceBoundary.halfMarginDivisionRequired
+    Allowance.canonicalPoleQuotientChannelAllowanceBoundary ≡ false
+allowanceCompilerUsesNoHalfMarginDivision = refl
+
+allowanceCompilerProducesStrictCombinedBudget :
+  Allowance.PoleQuotientChannelAllowanceBoundary.separateProducerBoundsCompileToStrictCombinedBudget
+    Allowance.canonicalPoleQuotientChannelAllowanceBoundary ≡ true
+allowanceCompilerProducesStrictCombinedBudget = refl
+
 record PoleQuotientFinalCutBoundary : Set where
   constructor pole-quotient-final-cut-boundary
   field
@@ -182,6 +215,14 @@ record PoleQuotientFinalCutBoundary : Set where
     producerMayChooseItsOwnSharpWindowPredicate : Bool
     producerMayChooseItsOwnSharpWindowPredicateIsFalse :
       producerMayChooseItsOwnSharpWindowPredicate ≡ false
+
+    finalCommonCarrierHasConcreteAllowanceCompiler : Bool
+    finalCommonCarrierHasConcreteAllowanceCompilerIsTrue :
+      finalCommonCarrierHasConcreteAllowanceCompiler ≡ true
+
+    finalAllowanceCompilerRequiresHalfMarginDivision : Bool
+    finalAllowanceCompilerRequiresHalfMarginDivisionIsFalse :
+      finalAllowanceCompilerRequiresHalfMarginDivision ≡ false
 
     finalOffLeafCarriesConsumerDefinedAdequacyReceipt : Bool
     finalOffLeafCarriesConsumerDefinedAdequacyReceiptIsTrue :
@@ -225,11 +266,13 @@ canonicalPoleQuotientFinalCutBoundary =
     false refl
     false refl
     true refl
+    false refl
     true refl
     true refl
     true refl
+    true refl
     false refl
     false refl
     false refl
     false refl
-    "Treat the repository as closed-world for infrastructure, but preserve exact carrier ownership and consumer strength. The determinant q lane is diagnostic/scalarization and is not definitionally the final universal pole-quotient taper. Bare off/Gamma target inhabitance is insufficient because an arbitrary oversized budget need not fit the strict final window, and a producer may not define its own notion of adequacy. The two live analytic leaves are proof-bearing producers relative to fixed downstream consumer predicates: the exact universal pole-quotient reflection-cosine off bound with crossing/same-taper/consumer-adequacy receipts, and the same-taper Gamma bound with a consumer-adequacy receipt. The 8889 quantitative cluster margin is owned mathematics requiring only same-object attachment, and the final split-complement contradiction compiler is already closed. RH is not derived."
+    "Treat the repository as closed-world for infrastructure, but preserve exact carrier ownership and consumer strength. The determinant q lane is diagnostic/scalarization and is not definitionally the final universal pole-quotient taper. Bare off/Gamma target inhabitance is insufficient because an arbitrary oversized budget need not fit the strict final window, and a producer may not define its own notion of adequacy. On the final common carrier, adequacy is now concrete: the consumer assigns off/Gamma allowances, each actual producer budget must lie below its assigned allowance, and the allowance sum must lie strictly below the quantitative cluster margin. The generic ordered-additive compiler then yields the strict combined budget without division or midpoint structure. The two live analytic leaves remain the literal universal-pole-quotient signed off estimate and same-taper Gamma precision; cluster mathematics and final contradiction algebra are already owned. RH is not derived."
