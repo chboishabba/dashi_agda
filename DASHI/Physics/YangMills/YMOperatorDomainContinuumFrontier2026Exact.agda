@@ -12,6 +12,7 @@ import DASHI.Physics.YangMills.BalabanVacuumOrthogonalMoscoRecoveryExact as Vacu
 import DASHI.Physics.YangMills.BalabanCMP98Equation119PositiveBondSelectedCutFederbushRound184Exact as Eq119R184
 import DASHI.Physics.YangMills.BalabanCMP98SelectedPhysicalUnitCarrierRound187Exact as Eq119R187
 import DASHI.Physics.YangMills.BalabanCMP98RawUnitPathHomomorphismRound189Exact as Eq119R189
+import DASHI.Physics.YangMills.BalabanCMP98Equation119DisjunctivePhysicalSourceCutExact as Eq119Cut
 import DASHI.Physics.YangMills.WightmanEndpointLemmaQueue as WightmanQueue
 import DASHI.Physics.Closure.YMStrictSelectedHodgeVariationPairing as FiniteVariation
 import DASHI.Physics.Closure.YMSprint129MoscoLiminfStrongResolventClosure as Sprint129
@@ -82,15 +83,15 @@ vacuumRecoveryGapCompilerReturned :
 vacuumRecoveryGapCompilerReturned = VacuumRecovery.physicalVacuumGapAfterRecovery
 
 ------------------------------------------------------------------------
--- Eq. (119) theorem-level BIDI progression.
+-- Eq. (119) theorem-level BIDI progression and physical source cut.
 ------------------------------------------------------------------------
 
--- R184 closes the downstream selected-cut/Federbush derivative compiler.
+-- R184 closes one downstream selected-cut/Federbush derivative compiler.
 eq119PositiveBondSelectedCutFederbushCompilerLevel =
   Eq119R184.cmp98Equation119PositiveBondSelectedCutFederbushRound184Level
 
 -- R187 constructs the exact periodic unit-quaternion realization directly
--- from the already-selected physical background.
+-- from the selected physical background.
 eq119PhysicalPeriodicRealizationLevel =
   Eq119R187.cmp98SelectedPhysicalPeriodicRealizationRound187Level
 
@@ -99,10 +100,17 @@ eq119PhysicalPeriodicRealizationLevel =
 eq119RawUnitPathHomomorphismLevel =
   Eq119R189.cmp98RawUnitPathHolomorphismRound189Level
 
--- After these closures the exact source-side leaf is no longer "construct the
--- background" or "choose a principal cut".  It is the same-object equality
--- between the CMP109 transported-relative bond and CMP98 literal relative
--- contour on the shared positive coarse bond/embedded fine site.
+-- These support results do not inhabit the whole physical source package.
+-- The theorem-strength source cut is disjunctive:
+--
+--   A. SelectedBackgroundBondWeld + SelectedExistingCutInputs + Federbush;
+--   B. DyadicCMP109PrintedPhysicalInputs + PositiveDyadicRelativeWeld + Federbush.
+--
+-- The CMP109 transported-relative = CMP98 literal-contour equality is therefore
+-- one leaf of branch B, not the sole remaining source-side payment.
+
+eq119DisjunctiveSourceStatus : Eq119Cut.Eq119DisjunctivePhysicalSourceStatus
+eq119DisjunctiveSourceStatus = Eq119Cut.canonicalEq119DisjunctivePhysicalSourceStatus
 
 ------------------------------------------------------------------------
 -- Existing finite selected-Hodge/action-variation calculation.
@@ -195,12 +203,15 @@ record YMOperatorContinuumFrontier : Set where
     sprint129MoscoEvidenceReceiptClosed : Bool
     sprint129AnalyticClosedFormKernelTheoremClosed : Bool
 
-    -- Backward-compatible R184 status plus the stronger later physical route.
+    -- Compatibility coordinates plus the exact disjunctive physical source cut.
     cmp98Equation119CompilerThroughRound184Closed : Bool
     cmp98SelectedBackgroundAndCutPhysicalInstantiationClosed : Bool
     cmp98PhysicalPeriodicRealizationRound187Closed : Bool
     cmp98RawUnitPathHomomorphismRound189Closed : Bool
     cmp98CMP109TransportedRelativeEqualsCMP98LiteralContourClosed : Bool
+    cmp98SelectedCutPhysicalInputPackageConstructed : Bool
+    cmp98DyadicCMP109PhysicalInputPackageConstructed : Bool
+    cmp98UnconditionalPhysicalEq119ProducerClosed : Bool
 
     finiteSelectedHodgeVariationPairingClosed : Bool
     physicalSelectedVariationPairingPromoted : Bool
@@ -227,6 +238,9 @@ canonicalYMOperatorContinuumFrontier = ym-operator-continuum-frontier
   Sprint129.mc1TheoremProvedHere false
   true false
   true true false
+  (Eq119Cut.selectedCutPhysicalInputPackageConstructed eq119DisjunctiveSourceStatus)
+  (Eq119Cut.dyadicCMP109PhysicalInputPackageConstructed eq119DisjunctiveSourceStatus)
+  (Eq119Cut.unconditionalPhysicalEq119ProducerClosed eq119DisjunctiveSourceStatus)
   finiteSelectedVariationPairingCalculated
   finiteSelectedVariationPairingPhysicalPromotion
   false
@@ -277,6 +291,24 @@ eq119TransportedRelativeSameObjectStillOpen :
   cmp98CMP109TransportedRelativeEqualsCMP98LiteralContourClosed
     canonicalYMOperatorContinuumFrontier ≡ false
 eq119TransportedRelativeSameObjectStillOpen = refl
+
+eq119SelectedCutPhysicalInputPackageStillOpen :
+  cmp98SelectedCutPhysicalInputPackageConstructed
+    canonicalYMOperatorContinuumFrontier ≡ false
+eq119SelectedCutPhysicalInputPackageStillOpen =
+  Eq119Cut.selectedCutPhysicalInputPackageConstructedIsFalse eq119DisjunctiveSourceStatus
+
+eq119DyadicCMP109PhysicalInputPackageStillOpen :
+  cmp98DyadicCMP109PhysicalInputPackageConstructed
+    canonicalYMOperatorContinuumFrontier ≡ false
+eq119DyadicCMP109PhysicalInputPackageStillOpen =
+  Eq119Cut.dyadicCMP109PhysicalInputPackageConstructedIsFalse eq119DisjunctiveSourceStatus
+
+eq119UnconditionalPhysicalProducerStillOpen :
+  cmp98UnconditionalPhysicalEq119ProducerClosed
+    canonicalYMOperatorContinuumFrontier ≡ false
+eq119UnconditionalPhysicalProducerStillOpen =
+  Eq119Cut.unconditionalPhysicalEq119ProducerClosedIsFalse eq119DisjunctiveSourceStatus
 
 finiteSelectedHodgeVariationPairingClosedIsTrue :
   finiteSelectedHodgeVariationPairingClosed canonicalYMOperatorContinuumFrontier ≡ true
