@@ -2,54 +2,107 @@
 module DASHI.Physics.YangMills.BalabanCMP98TerminalHamiltonianBidiRound188Exact where
 
 ------------------------------------------------------------------------
--- ROUND188 TERMINAL BIDI: REUSE THE NEWER HAMILTONIAN/GAP CLOSURE OWNERS
--- RATHER THAN REOPENING THE OLDER SPRINT107/108 RECEIPT FRONTIER.
+-- ROUND188 TERMINAL BIDI: CORRECTED RECEIPT / KERNEL DISTINCTION
 --
--- This is a repository same-object/status compression, not a new Clay claim.
--- Sprint128 records the positive-contraction log functional calculus,
--- self-adjoint logarithmic generator and physical-domain stability as closed;
--- Sprint129 records Mosco/strong-resolvent lower-bound transport, isolated
--- vacuum, continuum Hamiltonian spectral gap and continuum mass gap as closed.
--- Clay promotion remains false in those owners and at the final boundary.
+-- Historical Sprint128/129 owners carry `...ProvedHere = true` Bool/evidence
+-- receipts for log functional calculus, self-adjointness/domain stability,
+-- Mosco/strong-resolvent transport and continuum gap.  Structural inspection
+-- shows those owners do not construct the corresponding operator domains,
+-- adjoints, closed forms, resolvents, recovery maps, or vector inequalities.
+--
+-- Therefore this module preserves those legacy bits as receipt facts only and
+-- consumes the current theorem-strength frontier for actual promotion status.
+-- The newer Lean/Agda theorem compilers remain reusable, but the physical M7,
+-- M8 and M9 instantiations remain open.  No Clay claim is made.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (true; false)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.Closure.YMSprint128CompactnessAndLogGeneratorClosure as S128
 import DASHI.Physics.Closure.YMSprint129SpectralGapTransportClosure as S129
 import DASHI.Physics.Closure.YMClayPromotionBoundary as Clay
+import DASHI.Physics.YangMills.YMOperatorDomainContinuumFrontier2026Exact as Frontier
 
-terminalLogFunctionalCalculusClosed :
+------------------------------------------------------------------------
+-- Legacy receipt facts.  These are deliberately named as receipt bits rather
+-- than theorem closure.
+------------------------------------------------------------------------
+
+legacyLogFunctionalCalculusReceiptBitIsTrue :
   S128.sc1LogFunctionalCalculusProvedHere ≡ true
-terminalLogFunctionalCalculusClosed =
+legacyLogFunctionalCalculusReceiptBitIsTrue =
   S128.sc1LogFunctionalCalculusProvedHereIsTrue
 
-terminalSelfAdjointLogGeneratorClosed :
+legacySelfAdjointLogGeneratorReceiptBitIsTrue :
   S128.sc1SelfAdjointnessProvedHere ≡ true
-terminalSelfAdjointLogGeneratorClosed =
+legacySelfAdjointLogGeneratorReceiptBitIsTrue =
   S128.sc1SelfAdjointnessProvedHereIsTrue
 
-terminalPhysicalDomainStabilityClosed :
+legacyPhysicalDomainStabilityReceiptBitIsTrue :
   S128.sc1DomainStabilityProvedHere ≡ true
-terminalPhysicalDomainStabilityClosed =
+legacyPhysicalDomainStabilityReceiptBitIsTrue =
   S128.sc1DomainStabilityProvedHereIsTrue
 
-terminalPositiveNonVacuumGapTransportClosed :
+legacyPositiveNonVacuumGapTransportReceiptBitIsTrue :
   S129.positiveNonVacuumGapTransportProvedHere ≡ true
-terminalPositiveNonVacuumGapTransportClosed =
+legacyPositiveNonVacuumGapTransportReceiptBitIsTrue =
   S129.positiveNonVacuumGapTransportProvedHereIsTrue
 
-terminalContinuumHamiltonianGapClosed :
+legacyContinuumHamiltonianGapReceiptBitIsTrue :
   S129.continuumHamiltonianSpectralGapProvedHere ≡ true
-terminalContinuumHamiltonianGapClosed =
+legacyContinuumHamiltonianGapReceiptBitIsTrue =
   S129.continuumHamiltonianSpectralGapProvedHereIsTrue
 
-terminalContinuumMassGapClosed :
+legacyContinuumMassGapReceiptBitIsTrue :
   S129.continuumMassGapProvedHere ≡ true
-terminalContinuumMassGapClosed =
+legacyContinuumMassGapReceiptBitIsTrue =
   S129.continuumMassGapProvedHereIsTrue
+
+------------------------------------------------------------------------
+-- Current theorem-strength status.  These are the promotion-relevant facts.
+------------------------------------------------------------------------
+
+physicalActionVariationHamiltonianSameObjectStillOpen :
+  Frontier.physicalActionVariationHamiltonianSameObjectClosed
+    Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+physicalActionVariationHamiltonianSameObjectStillOpen = refl
+
+physicalPartialDomainHamiltonianStillOpen :
+  Frontier.genuinePartialDomainHamiltonianFormalized
+    Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+physicalPartialDomainHamiltonianStillOpen = refl
+
+physicalCommonInvariantDenseCoreStillOpen :
+  Frontier.commonInvariantDensePhysicalCoreConstructed
+    Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+physicalCommonInvariantDenseCoreStillOpen = refl
+
+physicalAnalyticSelfAdjointYMFormStillOpen :
+  Frontier.physicalSelfAdjointSelectedYMFormClosed
+    Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+physicalAnalyticSelfAdjointYMFormStillOpen = refl
+
+physicalVacuumRecoverySystemStillOpen :
+  Frontier.physicalVacuumRecoverySystemConstructed
+    Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+physicalVacuumRecoverySystemStillOpen = refl
+
+physicalClosedFormOrResolventIdentificationStillOpen :
+  Frontier.physicalClosedFormOrResolventIdentificationClosed
+    Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+physicalClosedFormOrResolventIdentificationStillOpen = refl
+
+constructiveOSWightmanDynamicsStillOpen :
+  Frontier.continuumOSWightmanPackageClosed
+    Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+constructiveOSWightmanDynamicsStillOpen = refl
+
+ymOSEvolutionIdentificationStillOpen :
+  Frontier.ymEvolutionEqualsOSReconstructedEvolutionClosed
+    Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+ymOSEvolutionIdentificationStillOpen = refl
 
 terminalSprint129KeepsClayFalse :
   S129.clayYangMillsPromoted ≡ false
@@ -60,18 +113,52 @@ terminalClayBoundaryStillFailClosed :
   Clay.clayYangMillsPromoted ≡ false
 terminalClayBoundaryStillFailClosed = refl
 
+------------------------------------------------------------------------
+-- Corrected status owner.
+------------------------------------------------------------------------
+
+record TerminalHamiltonianBidiBoundary : Set where
+  field
+    sprint128ReceiptRecorded :
+      S128.sc1ClosedHere ≡ true
+    sprint129ReceiptRecorded :
+      S129.spectralGapTransportClosedHere ≡ true
+
+    sprint128AnalyticSelfAdjointKernelClosed :
+      Frontier.physicalSelfAdjointSelectedYMFormClosed
+        Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+
+    sprint129PhysicalRecoveryKernelClosed :
+      Frontier.physicalVacuumRecoverySystemConstructed
+        Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+
+    physicalHamiltonianSameObjectClosed :
+      Frontier.physicalActionVariationHamiltonianSameObjectClosed
+        Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+
+    constructiveOSDynamicsClosed :
+      Frontier.continuumOSWightmanPackageClosed
+        Frontier.canonicalYMOperatorContinuumFrontier ≡ false
+
+canonicalTerminalHamiltonianBidiBoundary : TerminalHamiltonianBidiBoundary
+canonicalTerminalHamiltonianBidiBoundary = record
+  { TerminalHamiltonianBidiBoundary.sprint128ReceiptRecorded =
+      S128.sc1ClosedHereIsTrue
+  ; TerminalHamiltonianBidiBoundary.sprint129ReceiptRecorded =
+      S129.spectralGapTransportClosedHereIsTrue
+  ; TerminalHamiltonianBidiBoundary.sprint128AnalyticSelfAdjointKernelClosed = refl
+  ; TerminalHamiltonianBidiBoundary.sprint129PhysicalRecoveryKernelClosed = refl
+  ; TerminalHamiltonianBidiBoundary.physicalHamiltonianSameObjectClosed = refl
+  ; TerminalHamiltonianBidiBoundary.constructiveOSDynamicsClosed = refl
+  }
+
 cmp98TerminalHamiltonianBidiRound188Level : ProofLevel
 cmp98TerminalHamiltonianBidiRound188Level = machineChecked
 
--- BIDI consequence:
---   older Sprint107/108 'missing log calculus / domain / normalization / gap
---   transport' surfaces are not the current shortest terminal frontier.
--- Newer Sprint128/129 owners have already absorbed those lanes.
---
--- The remaining mathematical Clay-facing seam must therefore be sought after
--- the continuum Hamiltonian/mass-gap object: statement-level identification
--- with the exact Clay Yang-Mills formulation and any provider-internalization
--- demanded by the final promotion boundary.  External review/acceptance is a
--- governance condition, not a mathematical lemma.
+-- Corrected BIDI consequence:
+-- Sprint128/129 receipt flags do not delete M7-M9.  The highest-alpha terminal
+-- mathematics remains physical same-object Hamiltonian/domain/self-adjointness,
+-- constructive OS dynamics plus YM=OS identification, and an actual physical
+-- vacuum-recovery or dense-core producer.
 terminalClayStatementIdentificationRound188Level : ProofLevel
 terminalClayStatementIdentificationRound188Level = conditional
