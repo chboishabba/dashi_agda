@@ -13,16 +13,21 @@ module DASHI.Physics.Closure.NSTriadKNCriticalConeRelativeCovarianceTargetRound2
 --       comparable interactions.
 --
 -- R214 proves that constant-width CC localization alone cannot control same-
--- output Gram debt.  Thus the novel physical theorem belongs only to the
--- signed critical cone and must exploit convolution/phase/helicity structure.
+-- output Gram debt.  The novel physical theorem therefore has to exploit
+-- structure beyond shell localization.
 --
--- Backward from R220/R283, it is sufficient for that core to satisfy a strict
--- relative covariance estimate
+-- Original backward target from R220/R283:
 --
---   D_core <= theta * Q_core + C_core E D,      theta < 1,
+--   D_core <= theta * Q_core + C_core E D,      theta < 1.
 --
--- while the deep regions are paid absolutely by E*D.  This is weaker than an
--- independently integrable absolute majorant for every coherent contribution.
+-- 2026 BIDI RETURN
+-- ----------------
+-- AlmostOrthogonalGramSchur exposes a second, more directly compiler-friendly
+-- sufficient route: a truncation-uniform normalized Gram Schur bound for the
+-- actual retained-output cells.  Absolute Schur is sufficient, not necessary;
+-- if it fails, block/operator Cotlar--Stein or direct signed-resolvent control
+-- remain admissible.  The old strict-relative-covariance route is retained as
+-- a fallback producer, not silently discarded.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -86,6 +91,24 @@ paidDeepRegionsCombine P =
   in
   subst (λ upper → paidDeepMass P ≤ upper) endpoint summed
 
+data CriticalConeGramControlRoute : Set where
+  uniformAbsoluteDataSchur
+  uniformBlockOperator
+  directSignedResolvent
+  strictRelativeCovariance : CriticalConeGramControlRoute
+
+round284PrimaryProducerAfterLeanReturn : CriticalConeGramControlRoute
+round284PrimaryProducerAfterLeanReturn = uniformAbsoluteDataSchur
+
+round284FallbackAfterAbsoluteSchurFailure : CriticalConeGramControlRoute
+round284FallbackAfterAbsoluteSchurFailure = uniformBlockOperator
+
+round284FallbackAfterBlockFailure : CriticalConeGramControlRoute
+round284FallbackAfterBlockFailure = directSignedResolvent
+
+round284OriginalRelativeCovarianceRouteRetained : CriticalConeGramControlRoute
+round284OriginalRelativeCovarianceRouteRetained = strictRelativeCovariance
+
 round284DeepFarLowDelegatedToRound234Region : Bool
 round284DeepFarLowDelegatedToRound234Region = true
 
@@ -101,6 +124,18 @@ round284ComparableLocalizationAloneSufficient = false
 round284StrictRelativeCriticalConeCovarianceIsBackwardTarget : Bool
 round284StrictRelativeCriticalConeCovarianceIsBackwardTarget = true
 
+round284AbsoluteSchurIsSufficientNotNecessary : Bool
+round284AbsoluteSchurIsSufficientNotNecessary = true
+
+round284PhysicalUniformAbsoluteSchurClosed : Bool
+round284PhysicalUniformAbsoluteSchurClosed = false
+
+round284PhysicalBlockOperatorClosed : Bool
+round284PhysicalBlockOperatorClosed = false
+
+round284PhysicalSignedResolventClosed : Bool
+round284PhysicalSignedResolventClosed = false
+
 round284PhysicalCriticalConeRelativeCovarianceClosed : Bool
 round284PhysicalCriticalConeRelativeCovarianceClosed = false
 
@@ -113,6 +148,14 @@ round284ClayPromotion = false
 round284ComparableLocalizationAloneSufficientIsFalse :
   round284ComparableLocalizationAloneSufficient ≡ false
 round284ComparableLocalizationAloneSufficientIsFalse = refl
+
+round284AbsoluteSchurIsSufficientNotNecessaryIsTrue :
+  round284AbsoluteSchurIsSufficientNotNecessary ≡ true
+round284AbsoluteSchurIsSufficientNotNecessaryIsTrue = refl
+
+round284PhysicalUniformAbsoluteSchurClosedIsFalse :
+  round284PhysicalUniformAbsoluteSchurClosed ≡ false
+round284PhysicalUniformAbsoluteSchurClosedIsFalse = refl
 
 round284PhysicalCriticalConeRelativeCovarianceClosedIsFalse :
   round284PhysicalCriticalConeRelativeCovarianceClosed ≡ false
