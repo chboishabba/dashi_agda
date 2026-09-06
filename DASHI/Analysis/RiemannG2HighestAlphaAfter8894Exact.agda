@@ -7,6 +7,8 @@ open import Agda.Builtin.String using (String)
 import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap
 import DASHI.Analysis.RiemannAristotleQuarterPeriodDensityWindowLeanReturnExact as Q37
 import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact as Z38
+import DASHI.Analysis.RiemannG2AlpogeFurmanClusteringNonDescentExact as AFLocal
+import DASHI.Analysis.RiemannG2LowGapClusteringMomentReductionExact as Moment
 import DASHI.Analysis.RiemannG2Zeta23FkActionRecoveryExact as Fk
 import DASHI.Analysis.RiemannG2Zeta23FkCheckedSourceReturnExact as FkChecked
 import DASHI.Analysis.RiemannG2FkOrbitConsumerAttachmentExact as Orbit
@@ -18,17 +20,21 @@ import DASHI.Analysis.RiemannG2GammaProducerSourceAcquisitionExact as GammaSourc
 import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as PQ
 
 ------------------------------------------------------------------------
--- HIGHEST-ALPHA SCHEDULER AFTER 8896
+-- HIGHEST-ALPHA SCHEDULER AFTER 8896 + LOCAL-MOMENT REFINEMENT
 --
--- This scheduler is intentionally updated in place rather than shadowed by a
--- new parallel owner.  §37 closes the adaptive J*Lambda constant comparison and
--- §38 closes the zeta upper local-count input.  They feed backward into the
--- 8894 gap-split owner, which now routes directly to actual-zeta clustering.
+-- This scheduler is updated in place rather than shadowed by a new owner.
+-- §37 closes the adaptive J*Lambda constant comparison and §38 closes the zeta
+-- upper local-count input.  The live clustering theorem is refined further by
+-- the target-local second-moment compiler: highGapMass <= M2_norm < 2*lowGapMass
+-- gives a strict two-to-one ratio in Agda; the selected-window analytic moment
+-- producer and elementary real coefficient bridge remain unpaid.
+--
+-- The Alpöge--Furman >2/3 simple/on-critical-line theorem is retained as a
+-- global donor but explicitly rejected as a direct local-clustering closure.
 --
 -- Separate older obligations remain real where their existing owners say so:
 -- the selected finite-near evaluator must still be inhabited on the SAME
--- finitePoleNearSigned object, and Gamma producer precision remains a separate
--- deterministic lane.  Neither is relabelled as solved by the density return.
+-- finitePoleNearSigned object, and Gamma producer precision remains independent.
 ------------------------------------------------------------------------
 
 data RH8894Leaf : Set where
@@ -54,7 +60,9 @@ data RH8894Leaf : Set where
   deriveClusteringFromCoarseCounting
   recoverZetaUpperLocalCount
   compareAdaptiveJLambdaConstants
+  reuseGlobalSimpleZeroProportionAsLocalClustering
   proveActualZetaLowGapClustering
+  proveTargetLocalSecondMoment
   supplyZetaLongWindowLowerDensity
 
   searchForAnyGammaBound
@@ -93,7 +101,9 @@ leafState retuneTaperForGapSplit = pruned
 leafState deriveClusteringFromCoarseCounting = pruned
 leafState recoverZetaUpperLocalCount = owned
 leafState compareAdaptiveJLambdaConstants = owned
+leafState reuseGlobalSimpleZeroProportionAsLocalClustering = pruned
 leafState proveActualZetaLowGapClustering = live
+leafState proveTargetLocalSecondMoment = live
 leafState supplyZetaLongWindowLowerDensity = conditional
 
 leafState searchForAnyGammaBound = pruned
@@ -195,6 +205,21 @@ actualZetaClusteringStillOpen :
   Z38.actualZetaClusteringClosed Z38.canonicalZetaLocalCountLeanReturn ≡ false
 actualZetaClusteringStillOpen = refl
 
+globalSimpleZeroDirectRouteRejected :
+  AFLocal.GlobalSimpleToLocalClusteringBoundary.alpogeFurmanDirectlyClosesGapSplitClustering
+    AFLocal.canonicalGlobalSimpleToLocalClusteringBoundary ≡ false
+globalSimpleZeroDirectRouteRejected = refl
+
+localMomentRatioCompilerOwned :
+  Moment.LocalMomentClusteringBoundary.natMomentToTwoToOneRatioCompilerClosedInAgda
+    Moment.canonicalLocalMomentClusteringBoundary ≡ true
+localMomentRatioCompilerOwned = refl
+
+selectedTargetLocalMomentStillOpen :
+  Moment.LocalMomentClusteringBoundary.exactSelectedTargetLocalSecondMomentProducerOwned
+    Moment.canonicalLocalMomentClusteringBoundary ≡ false
+selectedTargetLocalMomentStillOpen = refl
+
 genericGammaSearchNoLongerLive :
   PQ.LeafRelevant PQ.findAnyGammaUpperBound -> ⊥
 genericGammaSearchNoLongerLive = PQ.findAnyGammaUpperBoundPruned
@@ -263,9 +288,17 @@ record HighestAlphaAfter8894Boundary : Set where
     zetaUpperLocalCountStillOpen : Bool
     zetaUpperLocalCountStillOpenIsFalse : zetaUpperLocalCountStillOpen ≡ false
 
+    globalSimpleZeroProportionDirectClusteringRouteLive : Bool
+    globalSimpleZeroProportionDirectClusteringRouteLiveIsFalse :
+      globalSimpleZeroProportionDirectClusteringRouteLive ≡ false
+
     actualZetaLowGapClusteringStillRequired : Bool
     actualZetaLowGapClusteringStillRequiredIsTrue :
       actualZetaLowGapClusteringStillRequired ≡ true
+
+    targetLocalSecondMomentRefinementLive : Bool
+    targetLocalSecondMomentRefinementLiveIsTrue :
+      targetLocalSecondMomentRefinementLive ≡ true
 
     longWindowLowerDensityStillConditional : Bool
     longWindowLowerDensityStillConditionalIsTrue :
@@ -300,10 +333,12 @@ canonicalHighestAlphaAfter8894Boundary =
     false refl
     false refl
     false refl
+    false refl
+    true refl
     true refl
     true refl
     true refl
     false refl
     false refl
     false refl
-    "After the 8896 return, do not spend effort on the adaptive J*Lambda comparison or zeta upper local counting: both are checked Lean outputs and are wired back into the 8894 gap-split owner. The shortest zero-side analytic leaf is now the actual-zeta low-gap clustering inequality (4/pi^2) * highGapMass < lowGapMass at D = pi/(3 Lambda). The long-window lower-density theorem is conditional infrastructure for the density-comparison route, not a substitute for clustering. Existing same-object finite-near evaluation and Gamma-precision obligations remain genuine and must be inhabited rather than duplicated. Final strict budget assembly is downstream of those independent producers; RH remains open."
+    "After the 8896 return, do not spend effort on adaptive J*Lambda comparison or zeta upper local counting: both are checked Lean outputs wired into the 8894 owner. The global Alpöge--Furman >2/3 simple-zero theorem is not a direct local-clustering closure; an exact finite collision proves that global summary does not determine target-local gap pattern. The shortest concrete clustering refinement is now a SAME-target/SAME-window normalized second-moment theorem strong enough to force highGapMass < 2*lowGapMass; the Agda slack compiler for that implication is owned, while the actual analytic moment producer and elementary 4/pi^2 < 1/2 bridge remain. Existing same-object finite-near evaluation and Gamma-precision obligations remain genuine and must be inhabited rather than duplicated. Final strict budget assembly is downstream; RH remains open."
