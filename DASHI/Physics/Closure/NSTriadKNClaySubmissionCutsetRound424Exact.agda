@@ -29,18 +29,36 @@ module DASHI.Physics.Closure.NSTriadKNClaySubmissionCutsetRound424Exact where
 -- depends only on the swap-invariant cell rate preserves that equality. This
 -- supports R299's identification of its two product-rule halves with one common
 -- aggregate cross. It does NOT pay that common cross: R299 adds the two equal
--- halves rather than subtracting them, and R299 now contains an exact witness
--- with equal halves 2,2 and nonzero sum 4.
+-- halves rather than subtracting them, and R299 contains an exact witness with
+-- equal halves 2,2 and nonzero sum 4.
 --
 -- Classical divergence-free trilinear antisymmetry also does not close the
 -- target: the existing Cannone audit proves that integration by parts preserves
 -- the wrong frozen transport ordering and cannot derive the required first-
 -- adjoint estimate from the favourable second-adjoint ordering.
 --
--- Therefore the remaining novel seam is no longer "find some cancellation".
--- It is exactly a cutoff-uniform upper bound on the SAME common signed R299/R423
--- aggregate cross, using additional physical geometry beyond the already-owned
--- half-equality and classical antisymmetry identities.
+-- R329/R430 now close a further SAME-OBJECT pointwise seam.  The actual inner
+-- pure commutator is proved transverse at the outer p leg, the physical outer-q
+-- transversality is retained, and the literal nested outer slot therefore
+-- factors through the R145 anti-parallel defect.  R430 gives
+--
+--   ||G_outer||^2 <= 12 ||P+Q||^2 ||F_inner||^2 ||u_q||^2
+--
+-- on that exact R329 carrier, with no square root or cardinality factor.
+-- R431 supplies the division-free compiler that turns a physical radius
+-- calibration into
+--
+--   (r_p r_q)||G_outer||^2 <= 12 |k|^2 ||F_inner||^2 ||u_q||^2.
+--
+-- The radius calibration is deliberately NOT claimed globally on the rational
+-- helical carrier: R126 proves only the scalar-square ACTION identity, not the
+-- cancellable scalar equality m(k)^2=|k|^2.  This firewall matters for generic
+-- lattice modes whose Euclidean radius need not be rational.
+--
+-- Therefore the one novel NS obligation remains the cutoff-uniform bound on the
+-- SAME common signed R299/R423 aggregate cross.  The new pointwise geometry
+-- narrows candidate producers but does not silently replace aggregate coherence
+-- by a cellwise estimate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -54,6 +72,9 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputFluxToTemporalRealizationRound4
 import DASHI.Physics.Closure.NSTriadKNHeatFactorizedPairRemainderRound299Exact as R299
 import DASHI.Physics.Closure.NSTriadKNRateWeightedAdjointCancellationRound429Exact as R429
 import DASHI.Physics.Closure.NSTriadKNCannoneTrilinearAntisymmetryAudit as Anti
+import DASHI.Physics.Closure.NSTriadKNStrongLowLiteralNestedKernelRound329Exact as R329
+import DASHI.Physics.Closure.NSTriadKNLiteralNestedOuterAntiParallelNormRound430Exact as R430
+import DASHI.Physics.Closure.NSTriadKNLiteralNestedOuterRadiusDefectRound431Exact as R431
 import DASHI.Physics.Closure.NSTriadKNCriticalSimonUpgradeFollowsBarrierRound148Exact as R148
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalGalerkinSimonWeldRound104Exact as R104
 
@@ -112,6 +133,29 @@ round424AdjointEqualityUsefulForCommonCrossIdentification =
 round424ClassicalAntisymmetryClosesRequiredAdjointEstimate : Bool
 round424ClassicalAntisymmetryClosesRequiredAdjointEstimate =
   Anti.classicalAntisymmetryClosesFirstAdjointFunctionalEstimate
+
+round424LiteralNestedOuterTransversalityClosed : Bool
+round424LiteralNestedOuterTransversalityClosed =
+  R329.round329InnerPairedForcingTransverseAtOuterForcing
+
+round424LiteralNestedOuterAntiParallelFactorizationClosed : Bool
+round424LiteralNestedOuterAntiParallelFactorizationClosed =
+  R329.round329LiteralOuterSlotAntiParallelFactorized
+
+round424LiteralNestedOuterAngularNormBoundClosed : Bool
+round424LiteralNestedOuterAngularNormBoundClosed =
+  R430.round430LiteralR329OuterSlotAngularNormBoundClosed
+
+round424DivisionFreeOuterLowOutputCompilerClosed : Bool
+round424DivisionFreeOuterLowOutputCompilerClosed =
+  R431.round431DivisionFreeOuterLowOutputCompilerClosed
+
+round424GlobalRationalPhysicalRadiusCalibrationInstalled : Bool
+round424GlobalRationalPhysicalRadiusCalibrationInstalled =
+  R431.round431PhysicalRadiusCalibrationInhabitedForLiteralOuterCells
+
+round424PointwiseNestedGeometryPaysAggregateCoherence : Bool
+round424PointwiseNestedGeometryPaysAggregateCoherence = false
 
 round424RemainingNovelSeamIsCutoffUniformCommonSignedCrossBound : Bool
 round424RemainingNovelSeamIsCutoffUniformCommonSignedCrossBound = true
@@ -192,6 +236,35 @@ round424ClassicalAntisymmetryClosesRequiredAdjointEstimateIsFalse :
   round424ClassicalAntisymmetryClosesRequiredAdjointEstimate ≡ false
 round424ClassicalAntisymmetryClosesRequiredAdjointEstimateIsFalse =
   Anti.classicalAntisymmetryClosesFirstAdjointFunctionalEstimateIsFalse
+
+round424LiteralNestedOuterTransversalityClosedIsTrue :
+  round424LiteralNestedOuterTransversalityClosed ≡ true
+round424LiteralNestedOuterTransversalityClosedIsTrue =
+  R329.round329InnerPairedForcingTransverseAtOuterForcingIsTrue
+
+round424LiteralNestedOuterAntiParallelFactorizationClosedIsTrue :
+  round424LiteralNestedOuterAntiParallelFactorizationClosed ≡ true
+round424LiteralNestedOuterAntiParallelFactorizationClosedIsTrue =
+  R329.round329LiteralOuterSlotAntiParallelFactorizedIsTrue
+
+round424LiteralNestedOuterAngularNormBoundClosedIsTrue :
+  round424LiteralNestedOuterAngularNormBoundClosed ≡ true
+round424LiteralNestedOuterAngularNormBoundClosedIsTrue =
+  R430.round430LiteralR329OuterSlotAngularNormBoundClosedIsTrue
+
+round424DivisionFreeOuterLowOutputCompilerClosedIsTrue :
+  round424DivisionFreeOuterLowOutputCompilerClosed ≡ true
+round424DivisionFreeOuterLowOutputCompilerClosedIsTrue =
+  R431.round431DivisionFreeOuterLowOutputCompilerClosedIsTrue
+
+round424GlobalRationalPhysicalRadiusCalibrationInstalledIsFalse :
+  round424GlobalRationalPhysicalRadiusCalibrationInstalled ≡ false
+round424GlobalRationalPhysicalRadiusCalibrationInstalledIsFalse =
+  R431.round431PhysicalRadiusCalibrationInhabitedForLiteralOuterCellsIsFalse
+
+round424PointwiseNestedGeometryPaysAggregateCoherenceIsFalse :
+  round424PointwiseNestedGeometryPaysAggregateCoherence ≡ false
+round424PointwiseNestedGeometryPaysAggregateCoherenceIsFalse = refl
 
 round424RemainingNovelSeamIsCutoffUniformCommonSignedCrossBoundIsTrue :
   round424RemainingNovelSeamIsCutoffUniformCommonSignedCrossBound ≡ true
