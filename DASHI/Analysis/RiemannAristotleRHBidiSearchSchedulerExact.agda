@@ -7,24 +7,29 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannAristotleExperimentalProofSearchExact as Search
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as HOff
+import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap
+import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact as Z38
 
 ------------------------------------------------------------------------
 -- RH-ONLY BIDI-AWARE SEARCH SCHEDULER
 --
--- Consumer first, recursively.  A candidate experiment is schedulable only if
+-- Consumer first, recursively. A candidate experiment is schedulable only if
 -- it feeds an open producer node on the backward RH cut.
 --
--- The checked cutoff theorem is generic in taper g, so instantiating it at the
--- final high-ordinate pole taper is not a separate analytic research theorem.
--- The infinite far shell is already controlled.  Therefore H_off^pole now has
--- one genuine analytic producer node:
+-- 8896 BIDI update: the optimized gap-split route exposes an additional live
+-- zero-side producer, actual-zeta low-gap clustering
 --
---   finite signed target-centred nearOffFinset evaluation.
+--   (4/pi^2) * highGapMass < lowGapMass,
+--   D = pi/(3 Lambda).
 --
--- Together with the consumer-insufficient Gamma result, the active queue is:
+-- This is NOT the already-closed `clusterMarginSocket`: that socket is the
+-- off-line pole cluster margin M_cluster^pole.  The new clustering theorem is a
+-- property of the retained zeta-zero mass distribution and feeds H_off.
 --
---   (1) evaluate the finite signed near zero sum;
---   (2) repair H_Gamma to consumer-sufficient O(|t|^-2)-scale accuracy.
+-- The active high-ordinate queue is therefore three independent producer
+-- classes: actual-zeta clustering, same-object finite-near evaluation, and
+-- consumer-sufficient Gamma precision.  §37/§38 remove the constant-window and
+-- zeta-upper-count searches from that queue.
 ------------------------------------------------------------------------
 
 data ProducerNeed : Set where
@@ -44,11 +49,13 @@ currentNeed Search.clusterMarginSocket = producerClosed
 ------------------------------------------------------------------------
 
 data RHProducerNode : Set where
+  zetaLowGapClusteringNode
   offFiniteNearEvaluationNode
   gammaPrecisionNode
   : RHProducerNode
 
 nodeFeedsSocket : RHProducerNode → Search.RHResearchSocket
+nodeFeedsSocket zetaLowGapClusteringNode = Search.offOrdinateSocket
 nodeFeedsSocket offFiniteNearEvaluationNode = Search.offOrdinateSocket
 nodeFeedsSocket gammaPrecisionNode = Search.gammaSocket
 
@@ -57,9 +64,12 @@ nodeFeedsSocket gammaPrecisionNode = Search.gammaSocket
 ------------------------------------------------------------------------
 
 data RHBidiExperiment : Set where
+  proveActualZetaLowGapClustering
   evaluateFiniteNearSignedSum
   improveGammaEvaluation
-  repeatClusterMarginProof
+  repeatClosedPoleClusterMarginProof
+  repeatZetaUpperLocalCountProof
+  repeatQuarterDensityConstantComparison
   reproveGenericCutoffInstantiation
   reproveInfiniteFarShell
   sharpenBalanceBudgetRoute
@@ -67,9 +77,11 @@ data RHBidiExperiment : Set where
   : RHBidiExperiment
 
 data RHExperimentOutputKind : Set where
+  directClusteringProducer
   directFiniteProducer
   consumerSufficientRepair
   redundantClosedProducer
+  redundantCheckedProducer
   redundantGenericInstantiation
   redundantOwnedFarTail
   balanceDerived
@@ -77,9 +89,12 @@ data RHExperimentOutputKind : Set where
   : RHExperimentOutputKind
 
 outputKind : RHBidiExperiment → RHExperimentOutputKind
+outputKind proveActualZetaLowGapClustering = directClusteringProducer
 outputKind evaluateFiniteNearSignedSum = directFiniteProducer
 outputKind improveGammaEvaluation = consumerSufficientRepair
-outputKind repeatClusterMarginProof = redundantClosedProducer
+outputKind repeatClosedPoleClusterMarginProof = redundantClosedProducer
+outputKind repeatZetaUpperLocalCountProof = redundantCheckedProducer
+outputKind repeatQuarterDensityConstantComparison = redundantCheckedProducer
 outputKind reproveGenericCutoffInstantiation = redundantGenericInstantiation
 outputKind reproveInfiniteFarShell = redundantOwnedFarTail
 outputKind sharpenBalanceBudgetRoute = balanceDerived
@@ -90,6 +105,8 @@ outputKind auditNamedExternalDonor = donorAuditOnly
 ------------------------------------------------------------------------
 
 data InhabitsLiveRHProducer : RHBidiExperiment → Set where
+  zetaLowGapClusteringIsLive :
+    InhabitsLiveRHProducer proveActualZetaLowGapClustering
   finiteNearEvaluationIsLive :
     InhabitsLiveRHProducer evaluateFiniteNearSignedSum
   gammaPrecisionRepairIsLive :
@@ -104,13 +121,19 @@ record RHBidiSchedulable (experiment : RHBidiExperiment) : Set where
 
 open RHBidiSchedulable public
 
-------------------------------------------------------------------------
--- Exact pruning theorems.
-------------------------------------------------------------------------
+closedPoleClusterMarginRepeatNotSchedulable :
+  RHBidiSchedulable repeatClosedPoleClusterMarginProof → ⊥
+closedPoleClusterMarginRepeatNotSchedulable s with inhabitsLiveProducer s
+... | ()
 
-clusterMarginRepeatNotSchedulable :
-  RHBidiSchedulable repeatClusterMarginProof → ⊥
-clusterMarginRepeatNotSchedulable s with inhabitsLiveProducer s
+zetaUpperCountRepeatNotSchedulable :
+  RHBidiSchedulable repeatZetaUpperLocalCountProof → ⊥
+zetaUpperCountRepeatNotSchedulable s with inhabitsLiveProducer s
+... | ()
+
+quarterDensityComparisonRepeatNotSchedulable :
+  RHBidiSchedulable repeatQuarterDensityConstantComparison → ⊥
+quarterDensityComparisonRepeatNotSchedulable s with inhabitsLiveProducer s
 ... | ()
 
 genericCutoffInstantiationRepeatNotSchedulable :
@@ -133,6 +156,14 @@ nameOnlyDonorNotSchedulable :
 nameOnlyDonorNotSchedulable s with inhabitsLiveProducer s
 ... | ()
 
+zetaLowGapClusteringSchedulable :
+  RHBidiSchedulable proveActualZetaLowGapClustering
+zetaLowGapClusteringSchedulable =
+  rh-bidi-schedulable
+    zetaLowGapClusteringIsLive
+    "RH off-ordinate backward consumer via optimized gap split"
+    "actual zeta zeros: (4/pi^2) * highGapMass < lowGapMass at D = pi/(3 Lambda)"
+
 finiteNearEvaluationSchedulable :
   RHBidiSchedulable evaluateFiniteNearSignedSum
 finiteNearEvaluationSchedulable =
@@ -150,10 +181,12 @@ gammaPrecisionRepairSchedulable =
     "H_Gamma consumer-sufficient O(|t|^-2)-scale evaluation"
 
 ------------------------------------------------------------------------
--- The active high-ordinate queue is exactly the two live analytic producers.
+-- The active high-ordinate queue after 8896.
 ------------------------------------------------------------------------
 
 data ActiveHighOrdinateExperiment : RHBidiExperiment → Set where
+  activeZetaClustering :
+    ActiveHighOrdinateExperiment proveActualZetaLowGapClustering
   activeFiniteNear : ActiveHighOrdinateExperiment evaluateFiniteNearSignedSum
   activeGammaRepair : ActiveHighOrdinateExperiment improveGammaEvaluation
 
@@ -161,10 +194,15 @@ schedulableIsActive :
   (experiment : RHBidiExperiment) →
   RHBidiSchedulable experiment →
   ActiveHighOrdinateExperiment experiment
+schedulableIsActive proveActualZetaLowGapClustering s = activeZetaClustering
 schedulableIsActive evaluateFiniteNearSignedSum s = activeFiniteNear
 schedulableIsActive improveGammaEvaluation s = activeGammaRepair
-schedulableIsActive repeatClusterMarginProof s =
-  ⊥-elim (clusterMarginRepeatNotSchedulable s)
+schedulableIsActive repeatClosedPoleClusterMarginProof s =
+  ⊥-elim (closedPoleClusterMarginRepeatNotSchedulable s)
+schedulableIsActive repeatZetaUpperLocalCountProof s =
+  ⊥-elim (zetaUpperCountRepeatNotSchedulable s)
+schedulableIsActive repeatQuarterDensityConstantComparison s =
+  ⊥-elim (quarterDensityComparisonRepeatNotSchedulable s)
 schedulableIsActive reproveGenericCutoffInstantiation s =
   ⊥-elim (genericCutoffInstantiationRepeatNotSchedulable s)
 schedulableIsActive reproveInfiniteFarShell s =
@@ -229,6 +267,20 @@ finiteNearEvaluationStillOpen :
     HOff.canonicalPoleQuotientOffOrdinateNearFarBoundary ≡ false
 finiteNearEvaluationStillOpen = refl
 
+quarterDensityComparisonAlreadyPruned :
+  Gap.GapSplitRelevant Gap.compareQuarterPeriodLowerConstantWithDensityUpperConstant
+  → ⊥
+quarterDensityComparisonAlreadyPruned = Gap.quarterDensityConstantComparisonPruned
+
+zetaUpperCountAlreadyChecked :
+  Z38.zetaShortWindowUpperCountOwnedInLean Z38.canonicalZetaLocalCountLeanReturn
+  ≡ true
+zetaUpperCountAlreadyChecked = refl
+
+actualZetaClusteringNotYetClosed :
+  Z38.actualZetaClusteringClosed Z38.canonicalZetaLocalCountLeanReturn ≡ false
+actualZetaClusteringNotYetClosed = refl
+
 ------------------------------------------------------------------------
 -- Boundaries.
 ------------------------------------------------------------------------
@@ -252,9 +304,21 @@ record RHBidiSearchSchedulerBoundary : Set where
     infiniteFarShellRemainsPrimarySearchLeafIsFalse :
       infiniteFarShellRemainsPrimarySearchLeaf ≡ false
 
-    closedClusterMarginRemainsInActiveQueue : Bool
-    closedClusterMarginRemainsInActiveQueueIsFalse :
-      closedClusterMarginRemainsInActiveQueue ≡ false
+    closedPoleClusterMarginRemainsInActiveQueue : Bool
+    closedPoleClusterMarginRemainsInActiveQueueIsFalse :
+      closedPoleClusterMarginRemainsInActiveQueue ≡ false
+
+    zetaUpperCountRemainsInActiveQueue : Bool
+    zetaUpperCountRemainsInActiveQueueIsFalse :
+      zetaUpperCountRemainsInActiveQueue ≡ false
+
+    quarterDensityConstantComparisonRemainsInActiveQueue : Bool
+    quarterDensityConstantComparisonRemainsInActiveQueueIsFalse :
+      quarterDensityConstantComparisonRemainsInActiveQueue ≡ false
+
+    actualZetaLowGapClusteringActive : Bool
+    actualZetaLowGapClusteringActiveIsTrue :
+      actualZetaLowGapClusteringActive ≡ true
 
     balanceCircularityRouteRemainsInActiveQueue : Bool
     balanceCircularityRouteRemainsInActiveQueueIsFalse :
@@ -286,6 +350,9 @@ canonicalRHBidiSearchSchedulerBoundary =
     false refl
     false refl
     false refl
+    false refl
+    false refl
+    true refl
     false refl
     false refl
     true refl
