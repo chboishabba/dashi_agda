@@ -32,6 +32,12 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119DisjunctivePhysicalSourceC
 -- branch still requires the selected-background weld and the source-threshold
 -- inclusion in the chosen cut.
 --
+-- The selected-cut radius is also kept distinct from the canonical P4 chart
+-- radius.  P4 fixes 1/64 while R175 requires a selected cut admitting the 1/24
+-- source threshold.  The radius firewall proves that identifying those two
+-- radii would contradict the R175 requirement; it does not assert they are the
+-- same object.
+--
 -- Therefore the theorem-strength source cut is disjunctive.  The CMP109
 -- transported-relative equality is one leaf on branch B, not the sole
 -- source-side payment for equation (119).
@@ -54,6 +60,7 @@ import DASHI.Physics.YangMills.BalabanCMP98Equation119PositiveBondSelectedCutFed
 import DASHI.Physics.YangMills.BalabanCMP98SelectedPhysicalUnitCarrierRound187Exact as R187
 import DASHI.Physics.YangMills.BalabanCMP98RawUnitPathHomomorphismRound189Exact as R189
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicPrintedPhysicalInstantiationExact as Dyadic
+import DASHI.Physics.YangMills.BalabanCMP98Equation119CanonicalP4CutRadiusFirewallExact as RadiusFirewall
 
 ------------------------------------------------------------------------
 -- Branch A: selected background / selected cut.
@@ -104,6 +111,10 @@ selectedCutEq119Multiscale source inputs =
     (selectedWeld inputs)
     (selectedCutInputs inputs)
     (selectedFederbushFamily inputs)
+
+selectedCutCanonicalP4RadiusFirewallLevel : ProofLevel
+selectedCutCanonicalP4RadiusFirewallLevel =
+  RadiusFirewall.cmp98Equation119CanonicalP4CutRadiusFirewallLevel
 
 ------------------------------------------------------------------------
 -- Branch B: dyadic CMP109 physical-input package / same-object relative weld.
