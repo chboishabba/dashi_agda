@@ -15,7 +15,9 @@ record MassGapSpectralStatement : Set₁ where
     physicalContinuumSpectralGapPositive : Bool
 
     eq119CompilerThroughRound184Available : Bool
-    selectedBackgroundAndCutInstantiationAvailable : Bool
+    eq119PhysicalPeriodicRealizationRound187Available : Bool
+    eq119RawUnitPathHomomorphismRound189Available : Bool
+    eq119CMP109TransportedRelativeEqualsCMP98LiteralContourAvailable : Bool
 
     gaugeInvariantSubspaceCarrierSelected : Bool
     finiteSelectedVariationPairingAvailable : Bool
@@ -47,8 +49,12 @@ record MassGapSpectralStatement : Set₁ where
 
     eq119CompilerThroughRound184AvailableIsTrue :
       eq119CompilerThroughRound184Available ≡ true
-    selectedBackgroundAndCutInstantiationAvailableIsFalse :
-      selectedBackgroundAndCutInstantiationAvailable ≡ false
+    eq119PhysicalPeriodicRealizationRound187AvailableIsTrue :
+      eq119PhysicalPeriodicRealizationRound187Available ≡ true
+    eq119RawUnitPathHomomorphismRound189AvailableIsTrue :
+      eq119RawUnitPathHomomorphismRound189Available ≡ true
+    eq119CMP109TransportedRelativeEqualsCMP98LiteralContourAvailableIsFalse :
+      eq119CMP109TransportedRelativeEqualsCMP98LiteralContourAvailable ≡ false
 
     gaugeInvariantSubspaceCarrierSelectedIsTrue :
       gaugeInvariantSubspaceCarrierSelected ≡ true
@@ -96,8 +102,14 @@ canonicalMassGapSpectralStatement = record
   ; eq119CompilerThroughRound184Available =
       Frontier.cmp98Equation119CompilerThroughRound184Closed
         Frontier.canonicalYMOperatorContinuumFrontier
-  ; selectedBackgroundAndCutInstantiationAvailable =
-      Frontier.cmp98SelectedBackgroundAndCutPhysicalInstantiationClosed
+  ; eq119PhysicalPeriodicRealizationRound187Available =
+      Frontier.cmp98PhysicalPeriodicRealizationRound187Closed
+        Frontier.canonicalYMOperatorContinuumFrontier
+  ; eq119RawUnitPathHomomorphismRound189Available =
+      Frontier.cmp98RawUnitPathHomomorphismRound189Closed
+        Frontier.canonicalYMOperatorContinuumFrontier
+  ; eq119CMP109TransportedRelativeEqualsCMP98LiteralContourAvailable =
+      Frontier.cmp98CMP109TransportedRelativeEqualsCMP98LiteralContourClosed
         Frontier.canonicalYMOperatorContinuumFrontier
 
   ; gaugeInvariantSubspaceCarrierSelected =
@@ -145,7 +157,7 @@ canonicalMassGapSpectralStatement = record
         Frontier.canonicalYMOperatorContinuumFrontier
 
   ; gapBound =
-      "Round184 closes the downstream CMP98 Eq. (119) compiler; the selected background/cut same-object instantiation remains physical. The gauge-invariant L2 subspace carrier and finite selected Hodge/action-variation pairing are available, while action-variation/H_YM same-object identification, a genuine operator domain/common invariant dense core, and analytic self-adjointness remain open. Lean bounded strong-limit, Agda vacuum-recovery, and Agda dense-core gap compilers are closed; Sprint129 recovery flags do not instantiate the recovery system. The Wightman endpoint queue is postulate-backed and therefore does not supply constructive OS dynamics or YM=OS evolution identification."
+      "CMP98 Eq. (119) is now reduced to one physical same-object weld: Round187 constructs the physical periodic SU(2) realization and Round189 proves erasure preserves identity, multiplication, inverse, and arbitrary path holonomy. The remaining Eq. (119) leaf is CMP109 transportedRelativeBond = CMP98 relativeContourElement on the same positive coarse bond/embedded fine site. The gauge-invariant L2 subspace carrier and finite selected Hodge/action-variation pairing are available, while action-variation/H_YM same-object identification, a genuine operator domain/common invariant dense core, and analytic self-adjointness remain open. Lean bounded strong-limit, Agda vacuum-recovery, and Agda dense-core gap compilers are closed; Sprint129 recovery flags do not instantiate the recovery system. The Wightman endpoint queue is postulate-backed and therefore does not supply constructive OS dynamics or YM=OS evolution identification."
   ; clayPromoted = false
 
   ; physicalHamiltonianAvailableIsFalse = refl
@@ -154,7 +166,9 @@ canonicalMassGapSpectralStatement = record
   ; physicalContinuumSpectralGapPositiveIsFalse = refl
 
   ; eq119CompilerThroughRound184AvailableIsTrue = refl
-  ; selectedBackgroundAndCutInstantiationAvailableIsFalse = refl
+  ; eq119PhysicalPeriodicRealizationRound187AvailableIsTrue = refl
+  ; eq119RawUnitPathHomomorphismRound189AvailableIsTrue = refl
+  ; eq119CMP109TransportedRelativeEqualsCMP98LiteralContourAvailableIsFalse = refl
   ; gaugeInvariantSubspaceCarrierSelectedIsTrue = refl
   ; finiteSelectedVariationPairingAvailableIsTrue = refl
   ; physicalActionVariationHamiltonianSameObjectAvailableIsFalse = refl
