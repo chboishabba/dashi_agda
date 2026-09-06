@@ -4,72 +4,71 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
--- ── ClayPromotionAuthorityGate ──────────────────────────────────────
--- Separates mathematical source-intake readiness from Clay-grade
--- promotion.  CMI rules require ALL of:
---   §6 — publication in a qualifying outlet
---   §3(ii) — at least two years after publication
---   §3(iii) — general acceptance in the global mathematics community
--- before a proposed solution will even be considered.
+import DASHI.Physics.YangMills.YMOperatorDomainContinuumFrontier2026Exact as Frontier
+
+------------------------------------------------------------------------
+-- ClayPromotionAuthorityGate
 --
--- The Eriksson series is a viXra preprint sequence (not a qualifying
--- outlet).  No publication date has started the two-year clock.  No
--- community consensus exists — the CMI and Wikipedia still describe
--- Yang–Mills/mass gap as an open problem as of June 2026.
---
--- Mathematical source-intake is complete (33 postulates, all closed).
--- The package is auditable and ready for peer-review submission.
--- But clayYangMillsPromoted remains false because that is an
--- authority/adjudication gate, not a mathematical one.
+-- This is now a true terminal gate rather than a source-intake completion
+-- badge.  Historical P01--P33/source-intake closure is not identified with
+-- completion of the literal continuum Yang--Mills construction.  The live
+-- operator/domain frontier is consumed directly here.
+------------------------------------------------------------------------
 
 record ClayPromotionAuthorityGate : Set where
   field
-    mathematicalSourceIntakeClosed    : Bool
-    candidateForPeerReview            : Bool
-    candidateForClayTrack             : Bool
+    historicalSourceIntakeLedgerClosed : Bool
+    mathematicalPhysicalConstructionClosed : Bool
+    auditableForPeerReview : Bool
+    candidateForClayTrack : Bool
 
-    qualifyingJournalPublication      : Bool
-    twoYearWaitingPeriodElapsed       : Bool
-    globalMathematicsAcceptance       : Bool
-    clayOrSABConsiderationAvailable   : Bool
+    qualifyingJournalPublication : Bool
+    twoYearWaitingPeriodElapsed : Bool
+    globalMathematicsAcceptance : Bool
+    clayOrSABConsiderationAvailable : Bool
 
-    clayYangMillsPromoted             : Bool
+    clayYangMillsPromoted : Bool
 
-    mathematicalSourceIntakeClosedIsTrue    : mathematicalSourceIntakeClosed ≡ true
-    candidateForPeerReviewIsTrue           : candidateForPeerReview ≡ true
-    candidateForClayTrackIsTrue            : candidateForClayTrack ≡ true
+    historicalSourceIntakeLedgerClosedIsTrue :
+      historicalSourceIntakeLedgerClosed ≡ true
+    mathematicalPhysicalConstructionClosedIsFalse :
+      mathematicalPhysicalConstructionClosed ≡ false
+    auditableForPeerReviewIsTrue : auditableForPeerReview ≡ true
+    candidateForClayTrackIsFalse : candidateForClayTrack ≡ false
 
-    qualifyingJournalPublicationIsFalse    : qualifyingJournalPublication ≡ false
-    twoYearWaitingPeriodElapsedIsFalse     : twoYearWaitingPeriodElapsed ≡ false
-    globalMathematicsAcceptanceIsFalse     : globalMathematicsAcceptance ≡ false
+    qualifyingJournalPublicationIsFalse : qualifyingJournalPublication ≡ false
+    twoYearWaitingPeriodElapsedIsFalse : twoYearWaitingPeriodElapsed ≡ false
+    globalMathematicsAcceptanceIsFalse : globalMathematicsAcceptance ≡ false
     clayOrSABConsiderationAvailableIsFalse : clayOrSABConsiderationAvailable ≡ false
-
-    clayYangMillsPromotedIsFalse           : clayYangMillsPromoted ≡ false
+    clayYangMillsPromotedIsFalse : clayYangMillsPromoted ≡ false
 
     sources : String
     sourcesIsCanonical :
       sources ≡
-      "33 postulates closed through Step V KP, RG lane, DLR-LSI, OS0–OS4, OS1/O(4), Wightman reconstruction, continuum stability, triangular lock, gauge-fixing compatibility (OS route), link ellipticity. Package auditable and ready for peer-review. CMI rules not satisfied: no qualifying journal publication, no two-year waiting period, no global acceptance. clayYangMillsPromoted = false by authority/adjudication, not mathematics."
+      "Historical P01--P33/source-intake ledgers may be closed, but the physical mathematical construction is not: selected Balaban background/budget, literal action-variation Hamiltonian identification, genuine partial-domain/common-core construction, YM=OS evolution identification, unbounded form/resolvent continuum gap transport, finite-to-continuum construction, and the physical continuum OS/Wightman package remain open. The package is auditable for peer review, but candidateForClayTrack and clayYangMillsPromoted remain false."
 
 currentClayPromotionAuthorityGate : ClayPromotionAuthorityGate
 currentClayPromotionAuthorityGate = record
-  { mathematicalSourceIntakeClosed    = true
-  ; candidateForPeerReview            = true
-  ; candidateForClayTrack             = true
-  ; qualifyingJournalPublication      = false
-  ; twoYearWaitingPeriodElapsed       = false
-  ; globalMathematicsAcceptance       = false
-  ; clayOrSABConsiderationAvailable   = false
-  ; clayYangMillsPromoted             = false
-  ; mathematicalSourceIntakeClosedIsTrue    = refl
-  ; candidateForPeerReviewIsTrue           = refl
-  ; candidateForClayTrackIsTrue            = refl
-  ; qualifyingJournalPublicationIsFalse    = refl
-  ; twoYearWaitingPeriodElapsedIsFalse     = refl
-  ; globalMathematicsAcceptanceIsFalse     = refl
+  { historicalSourceIntakeLedgerClosed = true
+  ; mathematicalPhysicalConstructionClosed =
+      Frontier.clayPromotionClosed Frontier.canonicalYMOperatorContinuumFrontier
+  ; auditableForPeerReview = true
+  ; candidateForClayTrack = false
+  ; qualifyingJournalPublication = false
+  ; twoYearWaitingPeriodElapsed = false
+  ; globalMathematicsAcceptance = false
+  ; clayOrSABConsiderationAvailable = false
+  ; clayYangMillsPromoted = false
+  ; historicalSourceIntakeLedgerClosedIsTrue = refl
+  ; mathematicalPhysicalConstructionClosedIsFalse = refl
+  ; auditableForPeerReviewIsTrue = refl
+  ; candidateForClayTrackIsFalse = refl
+  ; qualifyingJournalPublicationIsFalse = refl
+  ; twoYearWaitingPeriodElapsedIsFalse = refl
+  ; globalMathematicsAcceptanceIsFalse = refl
   ; clayOrSABConsiderationAvailableIsFalse = refl
-  ; clayYangMillsPromotedIsFalse           = refl
+  ; clayYangMillsPromotedIsFalse = refl
   ; sources =
-      "33 postulates closed through Step V KP, RG lane, DLR-LSI, OS0–OS4, OS1/O(4), Wightman reconstruction, continuum stability, triangular lock, gauge-fixing compatibility (OS route), link ellipticity. Package auditable and ready for peer-review. CMI rules not satisfied: no qualifying journal publication, no two-year waiting period, no global acceptance. clayYangMillsPromoted = false by authority/adjudication, not mathematics."
+      "Historical P01--P33/source-intake ledgers may be closed, but the physical mathematical construction is not: selected Balaban background/budget, literal action-variation Hamiltonian identification, genuine partial-domain/common-core construction, YM=OS evolution identification, unbounded form/resolvent continuum gap transport, finite-to-continuum construction, and the physical continuum OS/Wightman package remain open. The package is auditable for peer review, but candidateForClayTrack and clayYangMillsPromoted remain false."
   ; sourcesIsCanonical = refl
   }
