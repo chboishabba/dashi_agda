@@ -3,7 +3,7 @@ module DASHI.Economics.SoftBankOpenAIValuationLeverage2026Exact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
-import DASHI.Economics.AIFinancingReflexivityExact as Reflexive
+import DASHI.Economics.ReflexiveFlowValidationExact as Econ
 
 record SourceReceipt : Set where
   constructor sourceReceipt
@@ -60,8 +60,8 @@ canonicalSoftBankOpenAIValuationLeverageCalibration =
     true true false false false
 
 markedGainDoesNotCloseExternalCash :
-  Reflexive.Econ.MarkedGainImpliesExternalCashPermission → ⊥
-markedGainDoesNotCloseExternalCash = Reflexive.markedGainDoesNotCloseExternalCash
+  Econ.MarkedGainImpliesExternalCashPermission → ⊥
+markedGainDoesNotCloseExternalCash = Econ.markedGainDoesNotAutoPromoteToExternalCash
 
 data BorrowedInvestmentImpliesBubblePermission : Set where
 
