@@ -29,17 +29,17 @@ terminalHoleCurrent : Nat
 terminalHoleCurrent = 3
 
 record ContinuityResidual : Set where
-  constructor continuityResidual
+  constructor mkContinuityResidual
   field
     electronExcess : Nat
     holeDeficit : Nat
 
 open ContinuityResidual public
 
-continuityResidual : Cell.SourceCharge → ContinuityResidual
-continuityResidual Cell.q1 = continuityResidual 4 2
-continuityResidual Cell.q3 = continuityResidual 2 1
-continuityResidual Cell.q5 = continuityResidual 0 0
+residualAt : Cell.SourceCharge → ContinuityResidual
+residualAt Cell.q1 = mkContinuityResidual 4 2
+residualAt Cell.q3 = mkContinuityResidual 2 1
+residualAt Cell.q5 = mkContinuityResidual 0 0
 
 ------------------------------------------------------------------------
 -- Exact accounting against the currents already computed by solveCell.
@@ -47,7 +47,7 @@ continuityResidual Cell.q5 = continuityResidual 0 0
 
 electronContinuityAccounting :
   (q : Cell.SourceCharge) →
-  terminalElectronCurrent + electronExcess (continuityResidual q)
+  terminalElectronCurrent + electronExcess (residualAt q)
     ≡ Cell.electronCurrent q
 electronContinuityAccounting Cell.q1 = refl
 electronContinuityAccounting Cell.q3 = refl
@@ -55,7 +55,7 @@ electronContinuityAccounting Cell.q5 = refl
 
 holeContinuityAccounting :
   (q : Cell.SourceCharge) →
-  Cell.holeCurrent q + holeDeficit (continuityResidual q)
+  Cell.holeCurrent q + holeDeficit (residualAt q)
     ≡ terminalHoleCurrent
 holeContinuityAccounting Cell.q1 = refl
 holeContinuityAccounting Cell.q3 = refl
@@ -63,8 +63,8 @@ holeContinuityAccounting Cell.q5 = refl
 
 residualScore : Cell.SourceCharge → Nat
 residualScore q =
-  electronExcess (continuityResidual q) +
-  holeDeficit (continuityResidual q)
+  electronExcess (residualAt q) +
+  holeDeficit (residualAt q)
 
 q1ResidualScore : residualScore Cell.q1 ≡ 6
 q1ResidualScore = refl
@@ -85,13 +85,13 @@ data ContinuityClosed : Cell.SourceCharge → Set where
 closedElectronExcessZero :
   (q : Cell.SourceCharge) →
   ContinuityClosed q →
-  electronExcess (continuityResidual q) ≡ 0
+  electronExcess (residualAt q) ≡ 0
 closedElectronExcessZero Cell.q5 q5ContinuityClosed = refl
 
 closedHoleDeficitZero :
   (q : Cell.SourceCharge) →
   ContinuityClosed q →
-  holeDeficit (continuityResidual q) ≡ 0
+  holeDeficit (residualAt q) ≡ 0
 closedHoleDeficitZero Cell.q5 q5ContinuityClosed = refl
 
 closedScoreZero :
