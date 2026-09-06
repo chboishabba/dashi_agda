@@ -30,10 +30,10 @@ module DASHI.Physics.Closure.NSTriadKNLiteralNestedOuterRadiusDefectRound431Exac
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; nonNegative)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -41,6 +41,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
+import DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation as Separation
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3LerayPythagoras as Leray
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNPhysicalOrderedTransferSquaredMajorantRound96Exact as R96
@@ -115,9 +116,11 @@ literalOuterSlotDivisionFreeLowOutputBound E I O system S L H W C cal =
       (Audit.velocity system (Physical.q (R329.outer C)))
     outputSquare = C3.normSquared I (Physical.k (R329.outer C))
 
-    innerNN = DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation.complex3NormSquaredNonnegative
+    defectNN = Separation.complex3NormSquaredNonnegative
+      (R329.outerAntiParallelDefect E I O system S L H W C)
+    innerNN = Separation.complex3NormSquaredNonnegative
       (R329.innerPairedForcing E I O system S L H W C)
-    qNN = DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation.complex3NormSquaredNonnegative
+    qNN = Separation.complex3NormSquaredNonnegative
       (Audit.velocity system (Physical.q (R329.outer C)))
 
     outerBound = R430.literalNestedOuterSlotAngularNormBound
@@ -138,15 +141,16 @@ literalOuterSlotDivisionFreeLowOutputBound E I O system S L H W C cal =
         (outputRadiusSquareMeaning cal)
         (scaledNormalizedDefectBound cal)
 
+    outputNN : 0ℚ ≤ outputSquare
+    outputNN = subst (0ℚ ≤_) (outputRadiusSquareMeaning cal) (outputSquareNN cal)
+
     innerScaled :
       (rpq * defect) * innerMass ≤ outputSquare * innerMass
     innerScaled =
       Rational.nonnegativeProductMonotone
-        (R96.productNonnegative (radiusProductNN cal)
-          (DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation.complex3NormSquaredNonnegative
-            (R329.outerAntiParallelDefect E I O system S L H W C)))
+        (R96.productNonnegative (radiusProductNN cal) defectNN)
         innerNN
-        (subst (0ℚ ≤_) (outputRadiusSquareMeaning cal) (outputSquareNN cal))
+        outputNN
         innerNN
         defectToOutput ℚP.≤-refl
 
@@ -156,21 +160,17 @@ literalOuterSlotDivisionFreeLowOutputBound E I O system S L H W C cal =
     qScaled =
       Rational.nonnegativeProductMonotone
         (R96.productNonnegative
-          (R96.productNonnegative (radiusProductNN cal)
-            (DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation.complex3NormSquaredNonnegative
-              (R329.outerAntiParallelDefect E I O system S L H W C)))
+          (R96.productNonnegative (radiusProductNN cal) defectNN)
           innerNN)
         qNN
-        (R96.productNonnegative
-          (subst (0ℚ ≤_) (outputRadiusSquareMeaning cal) (outputSquareNN cal))
-          innerNN)
+        (R96.productNonnegative outputNN innerNN)
         qNN
         innerScaled ℚP.≤-refl
 
     twelveNN : 0ℚ ≤ R174.twelve
     twelveNN =
       let
-        oneNN = Rational.squareNonnegative 1
+        oneNN = Rational.squareNonnegative 1ℚ
         twoNN = Rational.addNonnegative oneNN oneNN
         fourNN = Rational.addNonnegative twoNN twoNN
       in Rational.addNonnegative (Rational.addNonnegative fourNN fourNN) fourNN
