@@ -38,11 +38,15 @@ open import Data.Rational.Base using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
-  (Axis4; PositiveBond; pair)
+  (PositiveBond; pair)
 import DASHI.Physics.YangMills.BalabanPath13NormalizedAxisAverageExact as Side13
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Blocks
 import DASHI.Physics.YangMills.BalabanPhysicalSU2FiniteCoordinatesExact as Physical
+import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact as Word
 import DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedJacobianExact as Jacobian
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as Lie
+import DASHI.Physics.YangMills.BalabanCMP98MultiscaleAveragingDerivativeRound126Exact as R126
+import DASHI.Physics.YangMills.BalabanCMP98Equation119OneStepDerivativeRound146Exact as R146
 import DASHI.Physics.YangMills.BalabanCMP98Equation119FederbushSelectedCutProducerRound178Exact as R178
 import DASHI.Physics.YangMills.BalabanFederbushRationalLieToRealSU2CarrierRound207Exact as R207
 import DASHI.Physics.YangMills.BalabanA2RationalSensitivityToRealContractionRound104Exact as Embed
@@ -56,7 +60,6 @@ Path13RationalPerturbation = Path13PerturbationCoordinate → ℚ
 Path13PositiveBond : Set
 Path13PositiveBond = PositiveBond Side13.side13
 
--- Literal three rational coordinates of the positive bond (site,axis).
 positiveBondLie3 :
   Path13RationalPerturbation →
   Path13PositiveBond → Jacobian.Lie3Vector
@@ -66,26 +69,21 @@ positiveBondLie3 perturbation (pair site axis) coordinate =
 positiveBondLie3XExact :
   ∀ perturbation site axis →
   positiveBondLie3 perturbation (pair site axis) Physical.coordinateX
-  ≡ perturbation
-      (pair Physical.coordinateX (pair axis site))
+  ≡ perturbation (pair Physical.coordinateX (pair axis site))
 positiveBondLie3XExact perturbation site axis = refl
 
 positiveBondLie3YExact :
   ∀ perturbation site axis →
   positiveBondLie3 perturbation (pair site axis) Physical.coordinateY
-  ≡ perturbation
-      (pair Physical.coordinateY (pair axis site))
+  ≡ perturbation (pair Physical.coordinateY (pair axis site))
 positiveBondLie3YExact perturbation site axis = refl
 
 positiveBondLie3ZExact :
   ∀ perturbation site axis →
   positiveBondLie3 perturbation (pair site axis) Physical.coordinateZ
-  ≡ perturbation
-      (pair Physical.coordinateZ (pair axis site))
+  ≡ perturbation (pair Physical.coordinateZ (pair axis site))
 positiveBondLie3ZExact perturbation site axis = refl
 
--- R207 already supplies the carrier conversion once an ordered additive
--- rational-real embedding is supplied.
 positiveBondRealLie :
   Embed.OrderedAdditiveRationalRealEmbedding →
   Path13RationalPerturbation →
@@ -103,19 +101,12 @@ positiveBondRealLieCoordinateExact embedding perturbation bond coordinate =
   R207.embedRationalLie3CoordinateExact
     embedding (positiveBondLie3 perturbation bond) coordinate
 
--- Exact carrier audit: the historical R178 Eq.(119) operator acts only on one
--- local SU(2) Lie value.  It is not definitionally the Path13 field carrier.
 HistoricalEq119Vector : Set
-HistoricalEq119Vector =
-  DASHI.Physics.YangMills.BalabanCMP98MultiscaleAveragingDerivativeRound126Exact.Vector
-    (DASHI.Physics.YangMills.BalabanCMP98Equation119OneStepDerivativeRound146Exact.additive
-      R178.su2SignedCarrier)
+HistoricalEq119Vector = R126.Vector (R146.additive R178.su2SignedCarrier)
 
 historicalEq119VectorIsLocalLie : HistoricalEq119Vector → Lie.SU2LieAlgebra
 historicalEq119VectorIsLocalLie value = value
 
--- Constructive target replacing the vague Round218 perturbation-coordinate
--- receipt.  `GlobalPerturbation` and `LocalLie` are deliberately distinct.
 record Path13GlobalLocalPerturbationSemantics : Set₁ where
   field
     rationalRealEmbedding : Embed.OrderedAdditiveRationalRealEmbedding
@@ -134,19 +125,14 @@ record Path13GlobalLocalPerturbationSemantics : Set₁ where
       positiveBondProjection perturbation bond
       ≡ positiveBondRealLie rationalRealEmbedding perturbation bond
 
-    -- Physical signed occurrence projection.  The negative direction must use
-    -- the source's left-trivialized inverse-link rule, not an arbitrary sign.
     signedBondProjection :
       Path13RationalPerturbation →
-      Physical.PhysicalBlockL Side13.side13 →
-      DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact.SignedAxis4 →
+      Blocks.PhysicalBlockL Side13.side13 →
+      Word.SignedAxis4 →
       Lie.SU2LieAlgebra
 
-    -- Exact rational scalar action transported to the local real Lie carrier.
     scalarAction : ℚ → Lie.SU2LieAlgebra → Lie.SU2LieAlgebra
 
-    -- Global one-step averaging derivative must ultimately act on the physical
-    -- Path13 perturbation carrier, while R0 recursion is local-Lie-valued.
     physicalQPrime : Nat → Path13RationalPerturbation → Path13RationalPerturbation
 
 open Path13GlobalLocalPerturbationSemantics public
@@ -157,7 +143,5 @@ cmp98Path13PositiveBondPerturbationProjectionLevel = machineChecked
 cmp98HistoricalEq119LocalCarrierAuditLevel : ProofLevel
 cmp98HistoricalEq119LocalCarrierAuditLevel = machineChecked
 
--- Remaining producer: instantiate signed orientation, multiplicative scalar
--- transport and the two-carrier Eq.(119) formula on this exact Path13 field.
 literalCMP98Path13GlobalLocalPerturbationSemanticsLevel : ProofLevel
 literalCMP98Path13GlobalLocalPerturbationSemanticsLevel = conditional
