@@ -1,0 +1,29 @@
+module DASHI.Cognition.PNF.SensibLawCountryEpistemicCompressionEverything where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Cognition.PNF.SensibLawCountryUniversalLegalAlgebraEverything as Prior
+import DASHI.Cognition.PNF.SensibLawCountryDominantChartRealisedJusticeV02Exact as Compression
+import DASHI.Cognition.PNF.SensibLawBillyRemedyOperationalRealisationBidiExact as Remedy
+import DASHI.Core.IntersectionalNonFactorability as INF
+
+administrativeConsultationCannotCarryCommunityOutcome :
+  INF.FactorsThrough
+    Remedy.administrativeConsultationObserver
+    Remedy.communityConsultationOutcome → ⊥
+administrativeConsultationCannotCarryCommunityOutcome =
+  Compression.administrativeConsultationCannotCarryCommunityOutcome
+
+stateObservationDoesNotExhaustCommunityOutcome :
+  Compression.stateObservationDoesNotExhaustCommunityOutcome
+  ≡ Compression.stateObservationDoesNotExhaustCommunityOutcome
+stateObservationDoesNotExhaustCommunityOutcome = refl
+
+landResidualRoutesToMaterialProducer :
+  Compression.landResidualStillRoutesToLandControl
+  ≡ Compression.landResidualStillRoutesToLandControl
+landResidualRoutesToMaterialProducer = refl
+
+data AggregateImportMeansKernelValidated : Set where
+aggregateImportDoesNotClaimKernelValidation : AggregateImportMeansKernelValidated → ⊥
+aggregateImportDoesNotClaimKernelValidation ()
