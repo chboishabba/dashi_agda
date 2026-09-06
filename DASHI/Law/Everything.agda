@@ -33,4 +33,6 @@ import DASHI.Law.OperationalCommandCivilianDirectionBidiExact
 import DASHI.Law.JarrettPostBondiConstitutionalSourceReceiptsExact
 import DASHI.Law.ConstitutionalValidityLawfulnessCrossPollinationExact
 import DASHI.Law.ConstitutionalValidityLawfulnessValidation
+import DASHI.Law.SecurityRoutingComparatorHypervoxelExact
+import DASHI.Law.SecurityRoutingComparatorValidation
 import DASHI.Law.CoerciveContactAuditValidation
