@@ -30,8 +30,16 @@ FILES=(
   DASHI/Analysis/RiemannAristotleFarTailCutoffSelectorExact.agda
   DASHI/Analysis/RiemannAristotleNearFarAllowanceCompositionExact.agda
   DASHI/Analysis/RiemannAristotleFiniteNearCoreSchurCompilerExact.agda
+  DASHI/Analysis/RiemannAristotleQuarterPeriodDensityWindowLeanReturnExact.agda
+  DASHI/Analysis/RiemannAristotleZetaLocalCountLeanReturnExact.agda
+  DASHI/Analysis/RiemannG2GapSplitClusteringLeanReturn8894Exact.agda
+  DASHI/Analysis/RiemannG2AdaptiveJLambdaConstantWindowExact.agda
+  DASHI/Analysis/RiemannG2QuarterPeriodAnalyticRouteReconciliationExact.agda
+  DASHI/Analysis/RiemannG2HighestAlphaAfter8894Exact.agda
+  DASHI/Analysis/RiemannAristotleNearCoreDensityReturnRegression.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
+  DASHI/Analysis/RiemannAristotleSharedCertificateREADME.agda
 )
 
 for f in "${FILES[@]}"; do
@@ -62,7 +70,15 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotleFarTailCutoffSelectorExact.agda
   agda DASHI/Analysis/RiemannAristotleNearFarAllowanceCompositionExact.agda
   agda DASHI/Analysis/RiemannAristotleFiniteNearCoreSchurCompilerExact.agda
+  agda DASHI/Analysis/RiemannAristotleQuarterPeriodDensityWindowLeanReturnExact.agda
+  agda DASHI/Analysis/RiemannAristotleZetaLocalCountLeanReturnExact.agda
+  agda DASHI/Analysis/RiemannG2GapSplitClusteringLeanReturn8894Exact.agda
+  agda DASHI/Analysis/RiemannG2AdaptiveJLambdaConstantWindowExact.agda
+  agda DASHI/Analysis/RiemannG2QuarterPeriodAnalyticRouteReconciliationExact.agda
+  agda DASHI/Analysis/RiemannG2HighestAlphaAfter8894Exact.agda
+  agda DASHI/Analysis/RiemannAristotleNearCoreDensityReturnRegression.agda
   agda DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
+  agda DASHI/Analysis/RiemannAristotleSharedCertificateREADME.agda
 else
   echo "agda executable not present; trust scan only" >&2
 fi
