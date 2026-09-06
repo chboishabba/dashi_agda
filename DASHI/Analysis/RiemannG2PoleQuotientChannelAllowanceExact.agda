@@ -2,6 +2,7 @@ module DASHI.Analysis.RiemannG2PoleQuotientChannelAllowanceExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Data.Empty using (⊥)
 
 import DASHI.Analysis.RiemannAristotlePoleQuotientSplitComplementBudgetExact as Split
 import DASHI.Analysis.RiemannAristotlePoleQuotientComplementMarginCompilerExact as Complement
