@@ -3,12 +3,10 @@ module DASHI.Cognition.PNF.SensibLawMaboDawsonRadicalTitleRecognitionHingeExact 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.SensibLawMaboTwoLegalOrderFibreExact as TwoOrder
-import DASHI.Cognition.PNF.SensibLawMaboDawsonRecognitionConditionRefinementExact as Dawson
 import DASHI.Cognition.PNF.SensibLawMaboBrennanDawsonIssueResidualLiveExact as Mabo
 import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityPropositionWeldExact as Primary
 
@@ -122,7 +120,7 @@ amoduRadicalTitleModel : ContinuityModelReceipt
 amoduRadicalTitleModel = continuityModelReceipt
   communalRightLimitsRadicalTitle
   directPrimaryText
-  (Primary.sourcePassageReference Primary.amoduUsufructRadicalTitleProposition)
+  (Primary.sourceSpecimenReference Primary.amoduUsufructBurdenProposition)
   "Amodu: communal usufructuary title qualifies radical title and may reduce sovereign radical right to comparatively limited administrative interference"
 
 dawsonRecognitionMediatedModel : ContinuityModelReceipt
@@ -146,9 +144,9 @@ data HingeClosure : Set where
 record DawsonRadicalTitleRecognitionHinge : Set where
   constructor dawsonRadicalTitleRecognitionHinge
   field
-    sourceNode : TwoOrder.LegalOrderNode
-    targetNode : TwoOrder.LegalOrderNode
-    bridgeStatus : TwoOrder.CrossOrderBridgeStatus
+    sourceNode : TwoOrder.CrownOrderNode
+    targetNode : TwoOrder.CrownOrderNode
+    bridgeStatus : TwoOrder.CrownInternalBridgeStatus
     closure : HingeClosure
     directRecognitionEvidenceMapped : Bool
     directRecognitionEvidenceMappedIsTrue : directRecognitionEvidenceMapped ≡ true
