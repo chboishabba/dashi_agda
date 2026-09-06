@@ -115,8 +115,7 @@ costPerTokenDeclineDoesNotAutoPromoteToCostPerUsefulWorkDecline ()
 
 computeEfficiencyDoesNotAutoPromoteToLowerAggregateDemand :
   ComputeEfficiencyImpliesLowerAggregateDemandPermission → ⊥
-computeEfficiencyDoesNotAutoPromoteToLowerAggregateDemand =
-  Scaling.lowerCostPerTokenDoesNotAutoPromoteToLowerTotalComputeDemand
+computeEfficiencyDoesNotAutoPromoteToLowerAggregateDemand ()
 
 highUtilisationDoesNotAutoPromoteToHighResidualValue :
   HighUtilisationImpliesHighResidualValuePermission → ⊥
