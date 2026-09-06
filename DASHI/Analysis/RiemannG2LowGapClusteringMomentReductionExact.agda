@@ -1,0 +1,207 @@
+module DASHI.Analysis.RiemannG2LowGapClusteringMomentReductionExact where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.String using (String)
+
+import DASHI.Analysis.RiemannAristotlePoleNearPhaseStatisticExact as Phase
+import DASHI.Analysis.RiemannG2TransverseVsOrdinateMomentNonDescentExact as Coord
+import DASHI.Analysis.RiemannG2AlpogeFurmanClusteringNonDescentExact as AFLocal
+import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap
+
+------------------------------------------------------------------------
+-- TARGET-LOCAL ORDINATE SECOND-MOMENT REDUCTION
+--
+-- Live consumer (checked Lean 8894/8896 lane):
+--
+--   (4/pi^2) * highGapMass < lowGapMass,
+--   D = pi/(3 Lambda).
+--
+-- Here the moment coordinate is explicitly the target-relative ORDINATE gap
+--
+--   delta = Im(rho) - t,
+--
+-- not the transverse/off-critical-line coordinate
+--
+--   alpha = Re(rho) - 1/2.
+--
+-- The latter distinction is proof-bearing in
+-- `RiemannG2TransverseVsOrdinateMomentNonDescentExact`: equal alpha-data can
+-- coexist with different target-relative delta-data.  Therefore the correct
+-- in-repo carrier is `PoleNearPhaseStatistic.targetRelativeGap`.
+--
+-- Elementary search reduction:
+--
+--   highGapMass <= normalizedOrdinateSecondMoment
+--   normalizedOrdinateSecondMoment < 2 * lowGapMass
+--
+-- imply a strict slack witness for
+--
+--   highGapMass < 2 * lowGapMass.
+--
+-- Since 4/pi^2 < 1/2, that strict ratio is sufficient for the exact clustering
+-- inequality. This Agda module proves the discrete/slack part exactly and keeps
+-- the real coefficient bridge explicit rather than pretending pi arithmetic is
+-- available on this Nat carrier.
+------------------------------------------------------------------------
+
+congSuc : {x y : Nat} → x ≡ y → suc x ≡ suc y
+congSuc refl = refl
+
++-assoc : (a b c : Nat) → (a + b) + c ≡ a + (b + c)
++-assoc zero b c = refl
++-assoc (suc a) b c = congSuc (+-assoc a b c)
+
+sym : {A : Set} {x y : A} → x ≡ y → y ≡ x
+sym refl = refl
+
+trans : {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
+trans refl yz = yz
+
+record NormalizedLocalSecondMomentLedger : Set where
+  constructor normalized-local-second-moment-ledger
+  field
+    lowGapMass : Nat
+    highGapMass : Nat
+    normalizedSecondMoment : Nat
+
+    highToMomentSlack : Nat
+    momentToTwiceLowGapPredecessor : Nat
+
+    highMassPlusSlackIsMoment :
+      highGapMass + highToMomentSlack ≡ normalizedSecondMoment
+
+    momentPlusPositiveGapIsTwiceLow :
+      normalizedSecondMoment + suc momentToTwiceLowGapPredecessor
+        ≡ lowGapMass + lowGapMass
+
+open NormalizedLocalSecondMomentLedger public
+
+record HighMassStrictlyBelowTwiceLow
+    (l : NormalizedLocalSecondMomentLedger) : Set where
+  constructor high-mass-strictly-below-twice-low
+  field
+    nonnegativePrefix : Nat
+    positiveTailPredecessor : Nat
+    highPlusStrictSlackIsTwiceLow :
+      highGapMass l + (nonnegativePrefix + suc positiveTailPredecessor)
+        ≡ lowGapMass l + lowGapMass l
+
+open HighMassStrictlyBelowTwiceLow public
+
+localSecondMomentForcesTwoToOneMassRatio :
+  (l : NormalizedLocalSecondMomentLedger) →
+  HighMassStrictlyBelowTwiceLow l
+localSecondMomentForcesTwoToOneMassRatio l =
+  high-mass-strictly-below-twice-low
+    (highToMomentSlack l)
+    (momentToTwiceLowGapPredecessor l)
+    proof
+  where
+  proof :
+    highGapMass l
+      + (highToMomentSlack l + suc (momentToTwiceLowGapPredecessor l))
+      ≡ lowGapMass l + lowGapMass l
+  proof =
+    trans
+      (sym (+-assoc
+        (highGapMass l)
+        (highToMomentSlack l)
+        (suc (momentToTwiceLowGapPredecessor l))))
+      (trans
+        (congTail (highMassPlusSlackIsMoment l)
+          (suc (momentToTwiceLowGapPredecessor l)))
+        (momentPlusPositiveGapIsTwiceLow l))
+    where
+    congTail : {a b : Nat} → a ≡ b → (c : Nat) → a + c ≡ b + c
+    congTail refl c = refl
+
+------------------------------------------------------------------------
+-- Existing-owner / coordinate audit.
+------------------------------------------------------------------------
+
+transverseMomentDoesNotDetermineOrdinateMoment :
+  Coord.TransverseVsOrdinateMomentBoundary.transverseMomentDeterminesTargetOrdinateMoment
+    Coord.canonicalTransverseVsOrdinateMomentBoundary ≡ false
+transverseMomentDoesNotDetermineOrdinateMoment = refl
+
+targetRelativeGapIsCorrectCarrier :
+  Coord.TransverseVsOrdinateMomentBoundary.targetRelativePhaseGapCoordinateIsCorrectCarrier
+    Coord.canonicalTransverseVsOrdinateMomentBoundary ≡ true
+targetRelativeGapIsCorrectCarrier = refl
+
+concreteTargetRelativePhaseStatisticStillOpen :
+  Phase.PoleNearPhaseStatisticBoundary.repositoryAlreadyOwnsConcretePoleNearPhaseStatistic
+    Phase.canonicalPoleNearPhaseStatisticBoundary ≡ false
+concreteTargetRelativePhaseStatisticStillOpen = refl
+
+globalSimpleProportionStillNeedsLocalization :
+  AFLocal.GlobalSimpleToLocalClusteringBoundary.additionalLocalizationTheoremRequired
+    AFLocal.canonicalGlobalSimpleToLocalClusteringBoundary ≡ true
+globalSimpleProportionStillNeedsLocalization = refl
+
+existingGapSplitStillRoutesToClustering :
+  Gap.currentGapSplitRouteState ≡ Gap.clusteringRequired
+existingGapSplitStillRoutesToClustering = refl
+
+------------------------------------------------------------------------
+-- Precise next producer boundary.
+------------------------------------------------------------------------
+
+record LocalMomentClusteringBoundary : Set where
+  constructor local-moment-clustering-boundary
+  field
+    natMomentToTwoToOneRatioCompilerClosedInAgda : Bool
+    natMomentToTwoToOneRatioCompilerClosedInAgdaIsTrue :
+      natMomentToTwoToOneRatioCompilerClosedInAgda ≡ true
+
+    elementaryCoefficientFactFourOverPiSqLtHalfNeeded : Bool
+    elementaryCoefficientFactFourOverPiSqLtHalfNeededIsTrue :
+      elementaryCoefficientFactFourOverPiSqLtHalfNeeded ≡ true
+
+    coefficientBridgeProvedOnThisNatCarrier : Bool
+    coefficientBridgeProvedOnThisNatCarrierIsFalse :
+      coefficientBridgeProvedOnThisNatCarrier ≡ false
+
+    exactSelectedTargetLocalSecondMomentProducerOwned : Bool
+    exactSelectedTargetLocalSecondMomentProducerOwnedIsFalse :
+      exactSelectedTargetLocalSecondMomentProducerOwned ≡ false
+
+    targetRelativeGapLaneIsCorrectAnalyticCarrier : Bool
+    targetRelativeGapLaneIsCorrectAnalyticCarrierIsTrue :
+      targetRelativeGapLaneIsCorrectAnalyticCarrier ≡ true
+
+    transverseHermitianMomentIsDirectAnalyticDonor : Bool
+    transverseHermitianMomentIsDirectAnalyticDonorIsFalse :
+      transverseHermitianMomentIsDirectAnalyticDonor ≡ false
+
+    concreteTargetPhaseStatisticAlreadyOwned : Bool
+    concreteTargetPhaseStatisticAlreadyOwnedIsFalse :
+      concreteTargetPhaseStatisticAlreadyOwned ≡ false
+
+    globalSimpleZeroProportionDirectlySufficient : Bool
+    globalSimpleZeroProportionDirectlySufficientIsFalse :
+      globalSimpleZeroProportionDirectlySufficient ≡ false
+
+    rhDerived : Bool
+    rhDerivedIsFalse : rhDerived ≡ false
+
+    highestAlphaReading : String
+
+open LocalMomentClusteringBoundary public
+
+canonicalLocalMomentClusteringBoundary : LocalMomentClusteringBoundary
+canonicalLocalMomentClusteringBoundary =
+  local-moment-clustering-boundary
+    true refl
+    true refl
+    false refl
+    false refl
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+    "The live clustering theorem can be attacked through a target-local ORDINATE second moment rather than another coarse count. Normalize delta = Im(rho)-t by the radius D so every high-gap zero contributes at least one unit. If that moment is strictly below twice the low-gap mass, Agda mechanically gives highGapMass < 2*lowGapMass. The correct analytic carrier is PoleNearPhaseStatistic.targetRelativeGap on the existing selected near window. Do NOT use the Alpöge--Furman/Hermitian transverse alpha-moment as a direct donor: alpha and delta are independent coordinates. The actual target-relative moment producer and the elementary real 4/pi^2 < 1/2 bridge remain open."
