@@ -11,6 +11,7 @@ import DASHI.Cognition.PNF.SensibLawTerraNulliusBillyTwoEyedOperationalJusticeEx
 import DASHI.Cognition.PNF.SensibLawCountrySystemFunctionTwoEyedRemedyRealisationExact as SystemFunction
 import DASHI.Cognition.PNF.SensibLawBillyEffectiveRemedyTwoEyedSeeingExact as Billy
 import DASHI.Cognition.PNF.SensibLawBillySituatedKnowledgeRemedyAdequacyExact as Situated
+import DASHI.Cognition.PNF.SensibLawTerraNulliusAmalekTwoEyedCorrectionClosureExact as CorrectionClosure
 import DASHI.Core.IntersectionalNonFactorability as INF
 
 ------------------------------------------------------------------------
@@ -157,6 +158,73 @@ culturalContinuityNeedsCommunityOutcomeEvidence :
 culturalContinuityNeedsCommunityOutcomeEvidence = refl
 
 ------------------------------------------------------------------------
+-- Amalek / correction-closure x-pollination.
+--
+-- Terra nullius already pays the strong juridical non-humanity coordinate.
+-- The stronger Amalek-style terminalisation criterion additionally requires a
+-- closed correction loop.  Those extra historical coordinates are not silently
+-- fabricated; they remain separately sourceable where not yet paid.
+------------------------------------------------------------------------
+
+terraNulliusPaysConstitutiveHumanityErasureCoordinate :
+  CorrectionClosure.terraNulliusTerminalisationEvidenceState
+    CorrectionClosure.constitutiveHumanityErasure
+  ≡ CorrectionClosure.sourceOrOwnerPaid
+terraNulliusPaysConstitutiveHumanityErasureCoordinate = refl
+
+closedCorrectionLoopStillNeedsSeparateEvidence :
+  CorrectionClosure.terraNulliusTerminalisationEvidenceState
+    CorrectionClosure.independentCorrectionClosure
+  ≡ CorrectionClosure.separateEvidenceRequired
+closedCorrectionLoopStillNeedsSeparateEvidence = refl
+
+juridicalHumanityPlusClosedLoopHasTerminalisingClassification :
+  CorrectionClosure.classification CorrectionClosure.canonicalAbstractTerminalisationWitness
+  ≡ CorrectionClosure.terminalisingJuridicalErasure
+juridicalHumanityPlusClosedLoopHasTerminalisingClassification = refl
+
+historicalTerraNulliusIsNotSilentlyDeclaredLiterallyAmalek :
+  CorrectionClosure.TerraNulliusIsLiterallyAmalekHistoricalDoctrine → ⊥
+historicalTerraNulliusIsNotSilentlyDeclaredLiterallyAmalek =
+  CorrectionClosure.doesNotClaimHistoricalDoctrineIdentity
+
+humanGroupEnemyPromotionRemainsForbidden :
+  CorrectionClosure.AmalekMayNameAnIndigenousPeopleOrHumanGroup → ⊥
+humanGroupEnemyPromotionRemainsForbidden =
+  CorrectionClosure.humanGroupPromotionRemainsForbidden
+
+------------------------------------------------------------------------
+-- Correction is an operational justice coordinate, not a decorative process.
+------------------------------------------------------------------------
+
+stateRemedyDeclarationCannotRecoverCorrectionChannel :
+  INF.FactorsThrough
+    CorrectionClosure.stateRemedyDeclaration
+    CorrectionClosure.correctionChannelState → ⊥
+stateRemedyDeclarationCannotRecoverCorrectionChannel =
+  CorrectionClosure.declaredRemedyCannotRecoverCorrectionChannel
+
+affectedCommunityOutcomeIsIndependentRequiredStrand :
+  CorrectionClosure.affectedCommunityOutcomeIsIndependentRequiredStrand
+    CorrectionClosure.canonicalSystemFunctionCorrectionBoundary ≡ true
+affectedCommunityOutcomeIsIndependentRequiredStrand = refl
+
+repeatedAuthorityErasureMayClassifySystemOperation :
+  CorrectionClosure.repeatedAuthorityErasureMayClassifySystemOperation
+    CorrectionClosure.canonicalSystemFunctionCorrectionBoundary ≡ true
+repeatedAuthorityErasureMayClassifySystemOperation = refl
+
+repeatedCorrectionClosureMayClassifySystemOperation :
+  CorrectionClosure.repeatedCorrectionClosureMayClassifySystemOperation
+    CorrectionClosure.canonicalSystemFunctionCorrectionBoundary ≡ true
+repeatedCorrectionClosureMayClassifySystemOperation = refl
+
+operationalClassificationStillDoesNotEqualPrivateIntentFinding :
+  CorrectionClosure.operationalClassificationEqualsPrivateIntentFinding
+    CorrectionClosure.canonicalSystemFunctionCorrectionBoundary ≡ false
+operationalClassificationStillDoesNotEqualPrivateIntentFinding = refl
+
+------------------------------------------------------------------------
 -- Deep x-pollination: foundational erasure can be legally rejected while an
 -- operational remedy still has to prove it does not repeat authority-erasing
 -- structure in a new form.
@@ -183,6 +251,12 @@ record FoundationalToRemedialRepairBoundary : Set where
     stateImplementationReportAloneClosesCommunityDefinedJustice : Bool
     stateImplementationReportAloneClosesCommunityDefinedJusticeIsFalse :
       stateImplementationReportAloneClosesCommunityDefinedJustice ≡ false
+    correctionChannelMustRemainIndependentlyObservable : Bool
+    correctionChannelMustRemainIndependentlyObservableIsTrue :
+      correctionChannelMustRemainIndependentlyObservable ≡ true
+    stateSelfValidationCannotCloseDecolonialRemedy : Bool
+    stateSelfValidationCannotCloseDecolonialRemedyIsTrue :
+      stateSelfValidationCannotCloseDecolonialRemedy ≡ true
 
 open FoundationalToRemedialRepairBoundary public
 
@@ -194,3 +268,5 @@ canonicalFoundationalToRemedialRepairBoundary = foundational-to-remedial-repair-
   true refl
   false refl
   false refl
+  true refl
+  true refl
