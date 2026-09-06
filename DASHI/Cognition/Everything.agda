@@ -7,3 +7,4 @@ module DASHI.Cognition.Everything where
 import DASHI.Cognition.PNF.PNFIRLearningEverything
 import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
 import DASHI.Cognition.VisualPatternModeGeometryEverything
+import DASHI.Cognition.PNF.SensibLawCountrySystemRealisedJusticeEverything
