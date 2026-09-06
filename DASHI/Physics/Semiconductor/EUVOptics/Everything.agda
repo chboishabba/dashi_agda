@@ -4,3 +4,4 @@ import DASHI.Physics.Semiconductor.EUVOptics.MultilayerReflectionCascadeExact
 import DASHI.Physics.Semiconductor.EUVOptics.SourceToWaferPowerChainExact
 import DASHI.Physics.Semiconductor.EUVOptics.BraggPhaseMatchingExact
 import DASHI.Physics.Semiconductor.EUVOptics.TransferMatrixCompositionExact
+import DASHI.Physics.Semiconductor.EUVOptics.InterfaceAmplitudeSkeletonExact
