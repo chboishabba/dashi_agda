@@ -4,22 +4,20 @@ module DASHI.Analysis.NonArchimedeanSpectralBidiObligationExact where
 -- Reverse / BIDI obligation compiler for the non-Archimedean spectral lane.
 --
 -- Finite spectral closure is dependency-closed. Post-closure continuous and
--- Markov claims are routed at their actual theorem strength. Two advertised
--- unit/uniform estimates are refuted by exact finite witnesses:
+-- Markov claims are routed at their actual theorem strength.
 --
---   * unit-prefactor one-step L2 inverse-sqrt-two contraction;
---   * universal sqrt(|A^c|) 2^(-t/2) stopping-survival bound.
---
--- Repaired finite lanes now closed at dependency level:
---
+-- Closed-positive repaired lanes:
 --   * finite C_n-prefactored L2 power mixing;
 --   * Hilbert and normalized stationary covariance decay;
---   * total variation after adjoint-orientation and finite L1/L2 welds;
---   * constructive set-dependent geometric stopping tails.
+--   * total variation after adjoint orientation and finite L1/L2 welds;
+--   * constructive set-dependent geometric stopping tails;
+--   * all polynomial stopping moments and repaired block-dependent MGF strip.
 --
--- Stopping polynomial moments retain one standard infinite-series/probability
--- consumer leaf.  The source's universal Re(s)<(1/2)log 2 MGF domain is not
--- inherited by the repaired set-dependent tail.
+-- Closed-negative advertised lanes:
+--   * unit-prefactor one-step L2 inverse-sqrt-two contraction;
+--   * universal sqrt(|A^c|) 2^(-t/2) stopping-survival bound;
+--   * universal Re(s)<(1/2)log 2 stopping MGF strip;
+--   * cyclotomic/2-adic factor alone anchors the Prolate critical sigma.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -80,7 +78,7 @@ spectrumTowerClaim = bidiClaim literalOneStepSpectrumUnion
 directedSigmaClaim : BidiClaim
 directedSigmaClaim = bidiClaim directedRadiusSigmaHalf
   "directed twisted-circle radius convergence itself has size exponent sigma=1/2"
-  "independent definition of radius sigma + theorem connecting it to N=2^n scaling" false
+  "rejected N-scaling reading: log radius is proportional to N^-1" false
 
 cyclotomicSigmaClaim : BidiClaim
 cyclotomicSigmaClaim = bidiClaim cyclotomicSigmaHalf
@@ -94,8 +92,8 @@ prolateSigmaClaim = bidiClaim prolateCriticalLineHalf
 
 sigmaAnchorClaim : BidiClaim
 sigmaAnchorClaim = bidiClaim cyclotomicAnchorsProlateHalf
-  "cyclotomic sigma_cyc=1/2 algebraically anchors the Prolate critical-line sigma=1/2"
-  "two-sided sigma same-object weld preserving anchor and critical conditions" false
+  "cyclotomic sigma_cyc=1/2 algebraically determines the Prolate critical-line sigma=1/2"
+  "rejected by semilocal sigma non-factorability at fixed 2-adic factor" false
 
 gibbsUniquenessClaim : BidiClaim
 gibbsUniquenessClaim = bidiClaim uniqueHaarConformalGibbs
@@ -135,7 +133,7 @@ setDependentStoppingSurvivalClaim = bidiClaim setDependentStoppingSurvivalBound
 stoppingMomentsClaim : BidiClaim
 stoppingMomentsClaim = bidiClaim stoppingMomentFiniteness
   "all polynomial stopping moments are finite under the repaired set-dependent geometric tail"
-  "standard geometric-tail infinite-series/moment consumer" false
+  "Mathlib summable_pow_mul_exp_neg_nat_mul + repaired positive block rate" true
 
 taoConcentrationClaim : BidiClaim
 taoConcentrationClaim = bidiClaim taoStyleStoppingConcentration
@@ -174,13 +172,11 @@ ropeOptimalityClaim = bidiClaim ropeOptimality
 
 
 data MissingObligation : Set where
-  needDirectedRadiusSigmaDefinition : MissingObligation
-  needDirectedRadiusSigmaScalingTheorem : MissingObligation
-  needCyclotomicToProlateSigmaSameObjectWeld : MissingObligation
+  rejectedDirectedRadiusSizeExponentHalf : MissingObligation
+  rejectedCurrentSemilocalSigmaAnchor : MissingObligation
   needGibbsUniquenessTheorem : MissingObligation
   rejectedUnitPrefactorOneStepContraction : MissingObligation
   rejectedUniversalStoppingSurvivalBound : MissingObligation
-  needStandardGeometricTailMomentConsumer : MissingObligation
   rejectedUniversalHalfLogTwoMGFDomain : MissingObligation
   needMarkovConcentrationHypotheses : MissingObligation
   needDriftStoppingSameObjectWeld : MissingObligation
@@ -194,28 +190,21 @@ compileMissing : ClaimKind → List MissingObligation
 compileMissing spatialSpectralCircle = []
 compileMissing spatialTwistedPower = []
 compileMissing literalOneStepSpectrumUnion = []
-compileMissing directedRadiusSigmaHalf =
-  needDirectedRadiusSigmaDefinition ∷ needDirectedRadiusSigmaScalingTheorem ∷ []
+compileMissing directedRadiusSigmaHalf = rejectedDirectedRadiusSizeExponentHalf ∷ []
 compileMissing cyclotomicSigmaHalf = []
 compileMissing prolateCriticalLineHalf = []
-compileMissing cyclotomicAnchorsProlateHalf =
-  needCyclotomicToProlateSigmaSameObjectWeld ∷ []
+compileMissing cyclotomicAnchorsProlateHalf = rejectedCurrentSemilocalSigmaAnchor ∷ []
 compileMissing uniqueHaarConformalGibbs = needGibbsUniquenessTheorem ∷ []
-compileMissing unitPrefactorOneStepL2Contraction =
-  rejectedUnitPrefactorOneStepContraction ∷ []
+compileMissing unitPrefactorOneStepL2Contraction = rejectedUnitPrefactorOneStepContraction ∷ []
 compileMissing prefactoredL2PowerMixing = []
 compileMissing totalVariationMixing = []
 compileMissing correlationDecayAtInverseSqrtTwo = []
-compileMissing universalStoppingSurvivalBound =
-  rejectedUniversalStoppingSurvivalBound ∷ []
+compileMissing universalStoppingSurvivalBound = rejectedUniversalStoppingSurvivalBound ∷ []
 compileMissing setDependentStoppingSurvivalBound = []
-compileMissing stoppingMomentFiniteness =
-  needStandardGeometricTailMomentConsumer ∷ []
+compileMissing stoppingMomentFiniteness = []
 compileMissing taoStyleStoppingConcentration =
-  needMarkovConcentrationHypotheses ∷
-  needDriftStoppingSameObjectWeld ∷ []
-compileMissing fullContinuousTransferRadiusSqrtTwo =
-  rejectedFullTransferRadiusSqrtTwo ∷ []
+  needMarkovConcentrationHypotheses ∷ needDriftStoppingSameObjectWeld ∷ []
+compileMissing fullContinuousTransferRadiusSqrtTwo = rejectedFullTransferRadiusSqrtTwo ∷ []
 compileMissing orbitProduct = []
 compileMissing arbitraryDagCover = needGraphToDecompositionProducer ∷ []
 compileMissing depthDecaySparsity = needDepthDecayProducer ∷ []
@@ -228,10 +217,10 @@ finiteSpatialCoreClosed = refl
 spectrumTowerRepoClosed : compileMissing literalOneStepSpectrumUnion ≡ []
 spectrumTowerRepoClosed = refl
 
-sigmaAnchorSingleWeldCutset :
+sigmaAnchorClosedNegative :
   compileMissing cyclotomicAnchorsProlateHalf
-  ≡ needCyclotomicToProlateSigmaSameObjectWeld ∷ []
-sigmaAnchorSingleWeldCutset = refl
+  ≡ rejectedCurrentSemilocalSigmaAnchor ∷ []
+sigmaAnchorClosedNegative = refl
 
 gibbsUniquenessExactCutset :
   compileMissing uniqueHaarConformalGibbs ≡ needGibbsUniquenessTheorem ∷ []
@@ -242,12 +231,10 @@ unitOneStepContractionRejected :
   ≡ rejectedUnitPrefactorOneStepContraction ∷ []
 unitOneStepContractionRejected = refl
 
-prefactoredMixingClosed :
-  compileMissing prefactoredL2PowerMixing ≡ []
+prefactoredMixingClosed : compileMissing prefactoredL2PowerMixing ≡ []
 prefactoredMixingClosed = refl
 
-totalVariationMixingClosed :
-  compileMissing totalVariationMixing ≡ []
+totalVariationMixingClosed : compileMissing totalVariationMixing ≡ []
 totalVariationMixingClosed = refl
 
 stationaryCorrelationDecayClosed :
@@ -263,10 +250,8 @@ constructiveSetDependentStoppingTailClosed :
   compileMissing setDependentStoppingSurvivalBound ≡ []
 constructiveSetDependentStoppingTailClosed = refl
 
-stoppingMomentSingleConsumerLeaf :
-  compileMissing stoppingMomentFiniteness
-  ≡ needStandardGeometricTailMomentConsumer ∷ []
-stoppingMomentSingleConsumerLeaf = refl
+stoppingMomentsClosed : compileMissing stoppingMomentFiniteness ≡ []
+stoppingMomentsClosed = refl
 
 fullTransferSqrtTwoRejected :
   compileMissing fullContinuousTransferRadiusSqrtTwo
