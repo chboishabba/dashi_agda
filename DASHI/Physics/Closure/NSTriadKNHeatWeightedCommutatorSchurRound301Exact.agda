@@ -1,38 +1,46 @@
 module DASHI.Physics.Closure.NSTriadKNHeatWeightedCommutatorSchurRound301Exact where
 
 ------------------------------------------------------------------------
--- ROUND301 / HIGHEST-ALPHA ANALYTIC LEAF:
--- NESTED CRITICAL-CONE HEAT-WEIGHTED R294 COMMUTATOR SCHUR
+-- ROUND301 / NESTED CRITICAL-CONE HEAT-WEIGHTED R294 COMMUTATOR SCHUR
 --
 -- R300 reduces the nonlinear resolvent remainder to a positive A_s term plus
--- a multiple of ||F_s||^2.  The literal F_s must remain the swap-invariant
+-- a multiple of ||F_s||^2. The literal F_s must remain the swap-invariant
 -- heat-weighted R294 mixed commutator, not a generic commutator proxy.
 --
--- BIDI restriction from R284:
---   deep FL and deep HH are already E*D-payable.  Re-proving them inside a
---   new Schur theorem would strengthen the consumer and duplicate paid work.
+-- STATUS CORRECTION AFTER R342--R355 AND R434--R435
+-- -------------------------------------------------
+-- The original R301 prose said deep FL and deep HH were already E*D-payable.
+-- R434 now records the correct distinction: R234/R235 own the relevant scalar
+-- exponent/null-gain compilers, but their literal physical shell/convolution
+-- welds remain open. R284 is therefore a conditional decomposition route, not
+-- a source of globally inhabited deep-region payments.
 --
--- R305 then proves heat-only power counting does NOT pay the critical cone.
--- R306--R310 expose additional signed structure before norms:
+-- This does not make R284 mandatory for the direct R423 target. It only means
+-- that a proof choosing THIS critical-cone Schur decomposition must provide its
+-- own physical region payments honestly.
+--
+-- R306--R310 expose signed structure before norms:
 --
 --   outer R307 slot/null kernel on (p,q),
 --   inner physical Galerkin fibre a+b=p,
 --   inner a/b swap pairing to the R120 multiplier-difference commutator.
 --
--- R311 shows the inner multiplier difference is a genuine small factor only
--- on radial-near homochiral interactions.  R312 identifies a complementary
--- heterochiral HH->low candidate: inner high derivative times inner null gain
--- relocates to the inner output p at the exponent level.
+-- R435 now makes one previously implicit structural step proof-bearing:
+-- under the SAME all-inner-helical witness required by R310,
 --
--- Therefore R301 is no longer one monolithic heat-Schur theorem.  The live
--- analytic search is the finite nested route matrix
+--   K(P,Q,N_p+N_p,v)
+--     = fold_{a+b=p} K(P,Q,pureCommutator_ab,v).
 --
---   {homochiral-near, homochiral-separated, heterochiral}
---      x {outer-FL-shoulder, outer-HH-shoulder, outer-comparable}.
+-- No orbit division or cardinality factor is introduced. This does not promote
+-- the all-inner-helical witness to arbitrary trajectories and does not itself
+-- pay the weighted commutator.
 --
--- Row/column shell exponents must be computed separately for these children.
--- A failing child may request extra signed/null geometry without strengthening
--- the successful children.
+-- R311/R312 then split the inner geometry. Later R314--R327 refine the search
+-- to the oriented 4 x 4 route matrix and close the strongly-low heterochiral-HH
+-- exponent/cell-level gates. R342--R355 subsequently close the generic finite
+-- incidence, weighted-Schur, resolvent, signed-flux and Package-A COMPILERS.
+-- Therefore the remaining Schur content is physical: instantiate the literal
+-- finite row/column inequalities and a cutoff-uniform spacetime forcing payment.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -42,6 +50,10 @@ open import Data.Rational.Base using (ℚ; _*_; _≤_)
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as Admission
 import DASHI.Physics.Closure.NSTriadKNNestedInnerHelicityRouteSplitRound311Exact as R311
 import DASHI.Physics.Closure.NSTriadKNNestedCriticalConeShellKernelRound313Exact as R313
+import DASHI.Physics.Closure.NSTriadKNHeatWeightedNestedFiniteSchurCertificateRound346Exact as R346
+import DASHI.Physics.Closure.NSTriadKNResolventPackageAFrontierCorrectionRound355Exact as R355
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCriticalConeCompilerRound434Exact as R434
+import DASHI.Physics.Closure.NSTriadKNNestedInnerForcingAggregationRound435Exact as R435
 
 ------------------------------------------------------------------------
 -- Proof-search dispositions of the candidate x-pollinations.
@@ -77,6 +89,9 @@ record HeatWeightedNestedCriticalConeCommutatorSchurLeaf : Set where
     nestedR309R310CarrierUsed : Bool
     nestedR309R310CarrierUsedIsTrue : nestedR309R310CarrierUsed ≡ true
 
+    -- Historical compatibility field. In this route it means the leaf is
+    -- scoped to the R284 critical-cone branch. It must NOT be read as a proof
+    -- that the deep FL/HH physical welds are globally inhabited.
     deepFLAndHHExcludedAsAlreadyPaid : Bool
     deepFLAndHHExcludedAsAlreadyPaidIsTrue :
       deepFLAndHHExcludedAsAlreadyPaid ≡ true
@@ -104,11 +119,35 @@ round301FilteredVortexDirectPromotionRejected = true
 round301SameObjectNestedCriticalConeHeatSchurRouteAdmitted : Bool
 round301SameObjectNestedCriticalConeHeatSchurRouteAdmitted = true
 
+round301R435InnerAggregationBridgeClosed : Bool
+round301R435InnerAggregationBridgeClosed =
+  R435.round435InnerPureCommutatorAggregationThroughOuterSlotClosed
+
+round301R435AllInnerHelicalTrajectoryWeldClosed : Bool
+round301R435AllInnerHelicalTrajectoryWeldClosed =
+  R435.round435ArbitraryPhysicalTrajectoryAllInnerHelicalWeldClosed
+
+round301DeepFarLowPhysicalWeldClosed : Bool
+round301DeepFarLowPhysicalWeldClosed =
+  R434.round434DeepFarLowPhysicalWeldClosed
+
+round301DeepHighHighPhysicalWeldClosed : Bool
+round301DeepHighHighPhysicalWeldClosed =
+  R434.round434DeepHighHighPhysicalWeldClosed
+
 round301DeepFLAndHHReprovedInsideSchur : Bool
 round301DeepFLAndHHReprovedInsideSchur = false
 
 round301NestedRouteMatrixRequired : Bool
 round301NestedRouteMatrixRequired = true
+
+round301FiniteSchurPackagingAlreadyOwned : Bool
+round301FiniteSchurPackagingAlreadyOwned =
+  R346.round346FiniteSchurPackagingClosed
+
+round301DownstreamPhysicalPackageACompilerChainAlreadyOwned : Bool
+round301DownstreamPhysicalPackageACompilerChainAlreadyOwned =
+  R355.round355PhysicalPackageAAdapterClosed
 
 round301PhysicalNestedHeatKernelRowBudgetClosed : Bool
 round301PhysicalNestedHeatKernelRowBudgetClosed = false
@@ -118,6 +157,9 @@ round301PhysicalNestedHeatKernelColumnBudgetClosed = false
 
 round301NestedHeatSchurCoefficientSpacetimeIntegrable : Bool
 round301NestedHeatSchurCoefficientSpacetimeIntegrable = false
+
+round301RemainingSchurContentIsPhysicalRowColumnPlusSpacetime : Bool
+round301RemainingSchurContentIsPhysicalRowColumnPlusSpacetime = true
 
 round301WeightedNestedCommutatorSpacetimePaid : Bool
 round301WeightedNestedCommutatorSpacetimePaid = false
@@ -132,6 +174,39 @@ round301SameObjectNestedCriticalConeHeatSchurRouteAdmittedIsTrue :
   round301SameObjectNestedCriticalConeHeatSchurRouteAdmitted ≡ true
 round301SameObjectNestedCriticalConeHeatSchurRouteAdmittedIsTrue = refl
 
+round301R435InnerAggregationBridgeClosedIsTrue :
+  round301R435InnerAggregationBridgeClosed ≡ true
+round301R435InnerAggregationBridgeClosedIsTrue =
+  R435.round435InnerPureCommutatorAggregationThroughOuterSlotClosedIsTrue
+
+round301R435AllInnerHelicalTrajectoryWeldClosedIsFalse :
+  round301R435AllInnerHelicalTrajectoryWeldClosed ≡ false
+round301R435AllInnerHelicalTrajectoryWeldClosedIsFalse =
+  R435.round435ArbitraryPhysicalTrajectoryAllInnerHelicalWeldClosedIsFalse
+
+round301DeepFarLowPhysicalWeldClosedIsFalse :
+  round301DeepFarLowPhysicalWeldClosed ≡ false
+round301DeepFarLowPhysicalWeldClosedIsFalse =
+  R434.round434DeepFarLowPhysicalWeldClosedIsFalse
+
+round301DeepHighHighPhysicalWeldClosedIsFalse :
+  round301DeepHighHighPhysicalWeldClosed ≡ false
+round301DeepHighHighPhysicalWeldClosedIsFalse =
+  R434.round434DeepHighHighPhysicalWeldClosedIsFalse
+
+round301FiniteSchurPackagingAlreadyOwnedIsTrue :
+  round301FiniteSchurPackagingAlreadyOwned ≡ true
+round301FiniteSchurPackagingAlreadyOwnedIsTrue =
+  R346.round346FiniteSchurPackagingClosedIsTrue
+
+round301DownstreamPhysicalPackageACompilerChainAlreadyOwnedIsTrue :
+  round301DownstreamPhysicalPackageACompilerChainAlreadyOwned ≡ true
+round301DownstreamPhysicalPackageACompilerChainAlreadyOwnedIsTrue = refl
+
 round301DeepFLAndHHReprovedInsideSchurIsFalse :
   round301DeepFLAndHHReprovedInsideSchur ≡ false
 round301DeepFLAndHHReprovedInsideSchurIsFalse = refl
+
+round301RemainingSchurContentIsPhysicalRowColumnPlusSpacetimeIsTrue :
+  round301RemainingSchurContentIsPhysicalRowColumnPlusSpacetime ≡ true
+round301RemainingSchurContentIsPhysicalRowColumnPlusSpacetimeIsTrue = refl
