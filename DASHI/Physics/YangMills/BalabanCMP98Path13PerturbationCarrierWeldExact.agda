@@ -29,12 +29,12 @@ module DASHI.Physics.YangMills.BalabanCMP98Path13PerturbationCarrierWeldExact wh
 --
 -- The negative occurrence is constructed here entirely on the exact rational
 -- Path13 quaternion carrier before applying the existing R207 rational-Lie3 to
--- real-SU(2) embedding compiler.  No SFGC action-scalar fixture is involved.
+-- real-SU(2) embedding compiler.  The local scalar action is likewise fixed to
+-- literal Lie scaling by the embedded rational coefficient.
 --
 -- What remains open after this module is the genuinely global/local operator
 -- seam: rebuild Eq.(119) with global Q' acting on the Path13 field while local
--- R0 values live in SU2LieAlgebra, and identify its scalar action with literal
--- rational scalar multiplication on that same local Lie carrier.
+-- R0 values live in SU2LieAlgebra.  No SFGC action-scalar fixture is involved.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (true; false)
@@ -120,8 +120,6 @@ positiveBondRealLieCoordinateExact embedding perturbation bond coordinate =
 -- Signed occurrence projection on the exact rational Path13 background.
 ------------------------------------------------------------------------
 
--- The historical periodic API uses predecessor index 12, so this negative step
--- is definitionally a map on the physical side-13 site carrier.
 negativeUnderlyingSite :
   Blocks.PhysicalBlockL Side13.side13 → Axis4 →
   Blocks.PhysicalBlockL Side13.side13
@@ -134,8 +132,6 @@ signedUnderlyingBond site (pair axis true) = pair site axis
 signedUnderlyingBond site (pair axis false) =
   pair (negativeUnderlyingSite site axis) axis
 
--- Rational three-coordinate left-trivialized insertion.  Negative traversal
--- uses exactly -Ad_{U_b^-1} on the underlying positive bond b.
 rationalSignedBondLie3 :
   Background.RationalSU2Background13 →
   Path13RationalPerturbation →
@@ -196,6 +192,16 @@ signedBondRealLieCoordinateExact
     coordinate
 
 ------------------------------------------------------------------------
+-- Canonical local scalar action.
+------------------------------------------------------------------------
+
+canonicalLocalScalarAction :
+  Embed.OrderedAdditiveRationalRealEmbedding →
+  ℚ → Lie.SU2LieAlgebra → Lie.SU2LieAlgebra
+canonicalLocalScalarAction embedding scalar vector =
+  Lie.lieScale (Embed.embed (Embed.base embedding) scalar) vector
+
+------------------------------------------------------------------------
 -- Historical one-carrier audit and strengthened physical target.
 ------------------------------------------------------------------------
 
@@ -238,6 +244,9 @@ record Path13GlobalLocalPerturbationSemantics : Set₁ where
 
     scalarAction : ℚ → Lie.SU2LieAlgebra → Lie.SU2LieAlgebra
 
+    scalarActionIsCanonical :
+      scalarAction ≡ canonicalLocalScalarAction rationalRealEmbedding
+
     physicalQPrime : Nat → Path13RationalPerturbation → Path13RationalPerturbation
 
 open Path13GlobalLocalPerturbationSemantics public
@@ -251,11 +260,13 @@ cmp98Path13RationalSignedBondProjectionLevel = machineChecked
 cmp98Path13SignedBondRealEmbeddingCompilerLevel : ProofLevel
 cmp98Path13SignedBondRealEmbeddingCompilerLevel = machineChecked
 
+cmp98Path13CanonicalLocalScalarActionLevel : ProofLevel
+cmp98Path13CanonicalLocalScalarActionLevel = machineChecked
+
 cmp98HistoricalEq119LocalCarrierAuditLevel : ProofLevel
 cmp98HistoricalEq119LocalCarrierAuditLevel = machineChecked
 
--- Signed orientation is no longer an open subleaf.  The remaining producer is
--- the two-carrier global/local Eq.(119) operator semantics together with its
--- literal scalar action on the local Lie carrier.
+-- Bond projection and local scalar action are no longer open subleaves.  The
+-- surviving producer is the two-carrier global/local Eq.(119) operator itself.
 literalCMP98Path13GlobalLocalPerturbationSemanticsLevel : ProofLevel
 literalCMP98Path13GlobalLocalPerturbationSemanticsLevel = conditional
