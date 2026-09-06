@@ -6,39 +6,45 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.String using (String)
 
-import DASHI.Analysis.RiemannWeilPairKernelFrobeniusExact as Pair
-import DASHI.Analysis.RiemannHermitianDetectabilityGapExact as Detect
+import DASHI.Analysis.RiemannAristotlePoleNearPhaseStatisticExact as Phase
+import DASHI.Analysis.RiemannG2TransverseVsOrdinateMomentNonDescentExact as Coord
 import DASHI.Analysis.RiemannG2AlpogeFurmanClusteringNonDescentExact as AFLocal
 import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap
 
 ------------------------------------------------------------------------
--- TARGET-LOCAL SECOND-MOMENT REDUCTION FOR THE LIVE GAP-SPLIT CLUSTERING LEAF
+-- TARGET-LOCAL ORDINATE SECOND-MOMENT REDUCTION
 --
 -- Live consumer (checked Lean 8894/8896 lane):
 --
 --   (4/pi^2) * highGapMass < lowGapMass,
 --   D = pi/(3 Lambda).
 --
+-- Here the moment coordinate is explicitly the target-relative ORDINATE gap
+--
+--   delta = Im(rho) - t,
+--
+-- not the transverse/off-critical-line coordinate
+--
+--   alpha = Re(rho) - 1/2.
+--
+-- The latter distinction is proof-bearing in
+-- `RiemannG2TransverseVsOrdinateMomentNonDescentExact`: equal alpha-data can
+-- coexist with different target-relative delta-data.  Therefore the correct
+-- in-repo carrier is `PoleNearPhaseStatistic.targetRelativeGap`.
+--
 -- Elementary search reduction:
 --
---   highGapMass <= normalizedSecondMoment
---   normalizedSecondMoment < 2 * lowGapMass
+--   highGapMass <= normalizedOrdinateSecondMoment
+--   normalizedOrdinateSecondMoment < 2 * lowGapMass
 --
 -- imply a strict slack witness for
 --
 --   highGapMass < 2 * lowGapMass.
 --
 -- Since 4/pi^2 < 1/2, that strict ratio is sufficient for the exact clustering
--- inequality.  This Agda module proves the discrete/slack part exactly and keeps
+-- inequality. This Agda module proves the discrete/slack part exactly and keeps
 -- the real coefficient bridge explicit rather than pretending pi arithmetic is
 -- available on this Nat carrier.
---
--- The reduction is motivated by the already-existing pair/Hermitian lane:
--- `RiemannWeilPairKernelFrobeniusExact` explicitly exposes a weighted transverse
--- moment coordinate, and `RiemannHermitianDetectabilityGapExact` explicitly
--- exposes localization as an unpaid producer.  No new external analytic source
--- claim is introduced here; the reduction itself is elementary DASHI-owned
--- arithmetic.
 ------------------------------------------------------------------------
 
 congSuc : {x y : Nat} → x ≡ y → suc x ≡ suc y
@@ -73,8 +79,6 @@ record NormalizedLocalSecondMomentLedger : Set where
 
 open NormalizedLocalSecondMomentLedger public
 
--- Strictness is subtraction-free: the slack from high mass to twice-low mass is
--- represented as a nonnegative prefix followed by a literal positive tail.
 record HighMassStrictlyBelowTwiceLow
     (l : NormalizedLocalSecondMomentLedger) : Set where
   constructor high-mass-strictly-below-twice-low
@@ -115,18 +119,23 @@ localSecondMomentForcesTwoToOneMassRatio l =
     congTail refl c = refl
 
 ------------------------------------------------------------------------
--- Existing-owner audit.
+-- Existing-owner / coordinate audit.
 ------------------------------------------------------------------------
 
-pairKernelWeightedMomentStillOpen :
-  Pair.PairKernelFrobeniusBoundary.weightedTransverseMomentBoundProvedHere
-    Pair.pairKernelFrobeniusBoundary ≡ false
-pairKernelWeightedMomentStillOpen = refl
+transverseMomentDoesNotDetermineOrdinateMoment :
+  Coord.TransverseVsOrdinateMomentBoundary.transverseMomentDeterminesTargetOrdinateMoment
+    Coord.canonicalTransverseVsOrdinateMomentBoundary ≡ false
+transverseMomentDoesNotDetermineOrdinateMoment = refl
 
-hermitianLocalizationProducerStillOpen :
-  Detect.HermitianDetectabilityBoundary.localizationProducerConstructedHere
-    Detect.hermitianDetectabilityBoundary ≡ false
-hermitianLocalizationProducerStillOpen = refl
+targetRelativeGapIsCorrectCarrier :
+  Coord.TransverseVsOrdinateMomentBoundary.targetRelativePhaseGapCoordinateIsCorrectCarrier
+    Coord.canonicalTransverseVsOrdinateMomentBoundary ≡ true
+targetRelativeGapIsCorrectCarrier = refl
+
+concreteTargetRelativePhaseStatisticStillOpen :
+  Phase.PoleNearPhaseStatisticBoundary.repositoryAlreadyOwnsConcretePoleNearPhaseStatistic
+    Phase.canonicalPoleNearPhaseStatisticBoundary ≡ false
+concreteTargetRelativePhaseStatisticStillOpen = refl
 
 globalSimpleProportionStillNeedsLocalization :
   AFLocal.GlobalSimpleToLocalClusteringBoundary.additionalLocalizationTheoremRequired
@@ -160,13 +169,17 @@ record LocalMomentClusteringBoundary : Set where
     exactSelectedTargetLocalSecondMomentProducerOwnedIsFalse :
       exactSelectedTargetLocalSecondMomentProducerOwned ≡ false
 
-    existingPairKernelMomentLaneIsRelevant : Bool
-    existingPairKernelMomentLaneIsRelevantIsTrue :
-      existingPairKernelMomentLaneIsRelevant ≡ true
+    targetRelativeGapLaneIsCorrectAnalyticCarrier : Bool
+    targetRelativeGapLaneIsCorrectAnalyticCarrierIsTrue :
+      targetRelativeGapLaneIsCorrectAnalyticCarrier ≡ true
 
-    existingHermitianLocalizationLaneIsRelevant : Bool
-    existingHermitianLocalizationLaneIsRelevantIsTrue :
-      existingHermitianLocalizationLaneIsRelevant ≡ true
+    transverseHermitianMomentIsDirectAnalyticDonor : Bool
+    transverseHermitianMomentIsDirectAnalyticDonorIsFalse :
+      transverseHermitianMomentIsDirectAnalyticDonor ≡ false
+
+    concreteTargetPhaseStatisticAlreadyOwned : Bool
+    concreteTargetPhaseStatisticAlreadyOwnedIsFalse :
+      concreteTargetPhaseStatisticAlreadyOwned ≡ false
 
     globalSimpleZeroProportionDirectlySufficient : Bool
     globalSimpleZeroProportionDirectlySufficientIsFalse :
@@ -187,7 +200,8 @@ canonicalLocalMomentClusteringBoundary =
     false refl
     false refl
     true refl
-    true refl
     false refl
     false refl
-    "The live clustering theorem can be attacked through a target-local second moment rather than another coarse count. Normalize the radius-D second moment so every high-gap zero contributes at least one unit. If that moment is strictly below twice the low-gap mass, Agda mechanically gives a subtraction-free strict witness for highGapMass < 2*lowGapMass. The remaining coefficient bridge is the elementary real fact 4/pi^2 < 1/2. The actual unpaid analytic producer is therefore a SAME-target, SAME-window second-moment bound; existing pair-kernel and Hermitian-localization owners are relevant donors, while the global >2/3 simple-zero proportion is not a direct substitute."
+    false refl
+    false refl
+    "The live clustering theorem can be attacked through a target-local ORDINATE second moment rather than another coarse count. Normalize delta = Im(rho)-t by the radius D so every high-gap zero contributes at least one unit. If that moment is strictly below twice the low-gap mass, Agda mechanically gives highGapMass < 2*lowGapMass. The correct analytic carrier is PoleNearPhaseStatistic.targetRelativeGap on the existing selected near window. Do NOT use the Alpöge--Furman/Hermitian transverse alpha-moment as a direct donor: alpha and delta are independent coordinates. The actual target-relative moment producer and the elementary real 4/pi^2 < 1/2 bridge remain open."
