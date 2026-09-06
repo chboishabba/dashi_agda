@@ -36,7 +36,10 @@ open import DASHI.Core.Prelude
 --
 -- implies the required strict combined budget. This reuses the allowance pattern
 -- already present in the Riemann near/far and finite-Schur lanes and requires no
--- subtraction, division, or synthetic half-margin operation.
+-- subtraction, division, or synthetic half-margin operation. The allowance-aware
+-- same-object assembly then compiles literal Off/Gamma/Cluster producers and those
+-- allowance receipts directly into the existing contradiction consumer; the
+-- strict combined-budget theorem is not a separate research leaf.
 --
 -- The genuinely analytic high-ordinate leaves are therefore:
 --
@@ -75,6 +78,7 @@ import DASHI.Analysis.RiemannG2QuarterPeriodAnalyticRouteReconciliationExact
 import DASHI.Analysis.RiemannG2HighestAlphaAfter369Exact
 import DASHI.Analysis.RiemannG2HighestAlphaAfter8894Exact
 import DASHI.Analysis.RiemannG2PoleQuotientChannelAllowanceExact
+import DASHI.Analysis.RiemannG2FinalSplitComplementAllowanceAssemblyExact
 import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact
 import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerExact
 import DASHI.Analysis.RiemannAristotleRHAnalyticLeafSchedulerExact
