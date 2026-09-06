@@ -95,7 +95,7 @@ round282ConstantBandLocalizationPaysComparableDebt =
 
 round282FixedOutputMixedHelicityCollapseClosed : Bool
 round282FixedOutputMixedHelicityCollapseClosed =
-  R225.round225FixedOutputMixedHelicityCollapseClosed
+  R225.round225CompleteFixedOutputKernelMixedHelicityCollapseClosed
 
 round282CCGenericPointwiseHalfDerivativeGainExists : Bool
 round282CCGenericPointwiseHalfDerivativeGainExists =
@@ -187,7 +187,8 @@ round282ConstantBandLocalizationPaysComparableDebtIsFalse =
 
 round282FixedOutputMixedHelicityCollapseClosedIsTrue :
   round282FixedOutputMixedHelicityCollapseClosed ≡ true
-round282FixedOutputMixedHelicityCollapseClosedIsTrue = refl
+round282FixedOutputMixedHelicityCollapseClosedIsTrue =
+  R225.round225CompleteFixedOutputKernelMixedHelicityCollapseClosedIsTrue
 
 round282CCGenericPointwiseHalfDerivativeGainExistsIsFalse :
   round282CCGenericPointwiseHalfDerivativeGainExists ≡ false
