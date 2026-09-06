@@ -6,3 +6,6 @@ module DASHI.Physics.Semiconductor.Everything where
 
 import DASHI.Physics.Semiconductor.Lithography.Everything
 import DASHI.Physics.Semiconductor.EUVSource.Everything
+import DASHI.Physics.Semiconductor.EUVOptics.Everything
+import DASHI.Physics.Semiconductor.Resist.Everything
+import DASHI.Physics.Semiconductor.Etch.Everything
