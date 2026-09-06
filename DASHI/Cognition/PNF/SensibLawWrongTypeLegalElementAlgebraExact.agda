@@ -133,7 +133,7 @@ record ProofRelevantViolationBasis
   field
     provedElements :
       ∀ {element} →
-      element Algebra.∈ WrongTypeRuleBundle.elements bundle →
+      Algebra._∈_ element (WrongTypeRuleBundle.elements bundle) →
       ElementDerivation bundle facts element
     legacyViolationReceipt : Existing.ViolationReceipt
     sameWrongType :
