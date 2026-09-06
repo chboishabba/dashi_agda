@@ -14,6 +14,9 @@ FILES=(
   DASHI/Analysis/RiemannAristotlePoleQuotientClusterMarginTargetExact.agda
   DASHI/Analysis/RiemannAristotlePoleQuotientCurrentCutExact.agda
   DASHI/Analysis/RiemannAristotlePoleQuotientCurrentCutRegression.agda
+  DASHI/Analysis/RiemannG2PoleQuotientFinalCutReconciliationExact.agda
+  DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda
+  DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 )
 
 for f in "${FILES[@]}"; do
@@ -31,7 +34,9 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotlePoleQuotientOffOrdinateBudgetTargetExact.agda
   agda DASHI/Analysis/RiemannAristotlePoleQuotientGammaBudgetTargetExact.agda
   agda DASHI/Analysis/RiemannAristotlePoleQuotientClusterMarginTargetExact.agda
+  agda DASHI/Analysis/RiemannG2PoleQuotientFinalCutReconciliationExact.agda
   agda DASHI/Analysis/RiemannAristotlePoleQuotientCurrentCutRegression.agda
+  agda DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 else
   echo "agda executable not present; trust scan only" >&2
 fi
