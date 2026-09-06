@@ -12,6 +12,11 @@ open import DASHI.Core.Prelude
 -- and canonical RH schedulers consume those returns directly, so this is one
 -- welded dependency graph rather than parallel status ledgers.
 --
+-- The Alpöge--Furman >2/3 simple/on-critical-line theorem is also audited against
+-- the live local-clustering consumer.  Its global population summary is a strong
+-- donor but does not descend to the selected target-local gap pattern without a
+-- separate localization theorem.
+--
 -- Genuine zeta clustering, same-object finite-near evaluation, Gamma precision,
 -- remaining low-ordinate/global coverage and RH remain open.
 ------------------------------------------------------------------------
@@ -26,6 +31,7 @@ import DASHI.Analysis.ExactSelectedEliminationFarTailCompilerExact
 import DASHI.Analysis.RiemannAristotleQuarterPeriodDensityWindowLeanReturnExact
 import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact
 import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact
+import DASHI.Analysis.RiemannG2AlpogeFurmanClusteringNonDescentExact
 import DASHI.Analysis.RiemannG2AdaptiveJLambdaConstantWindowExact
 import DASHI.Analysis.RiemannG2QuarterPeriodAnalyticRouteReconciliationExact
 import DASHI.Analysis.RiemannG2HighestAlphaAfter8894Exact
