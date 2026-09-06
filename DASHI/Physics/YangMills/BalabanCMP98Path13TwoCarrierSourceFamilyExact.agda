@@ -23,11 +23,10 @@ module DASHI.Physics.YangMills.BalabanCMP98Path13TwoCarrierSourceFamilyExact whe
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Rational.Base using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Carrier
-import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Blocks
-import DASHI.Physics.YangMills.BalabanPhysicalSU2FiniteCoordinatesExact as Physical
 import DASHI.Physics.YangMills.BalabanPath13NormalizedAxisAverageExact as Side13
 import DASHI.Physics.YangMills.BalabanPath13BackgroundGaugeAdjointDefectExact as Background
 import DASHI.Physics.YangMills.BalabanPath13SelectedPhysicalBackgroundTargetExact as PathTarget
@@ -59,10 +58,6 @@ import DASHI.Physics.YangMills.BalabanPeriodicSegmentCommutationRound162Exact as
 
 Path13PositiveBond : Set
 Path13PositiveBond = Carrier.PositiveBond Side13.side13
-
-------------------------------------------------------------------------
--- Geometry/background data independent of the perturbation carrier.
-------------------------------------------------------------------------
 
 record Path13FamilyGeometry (CoarseField : Set) : Set₁ where
   field
@@ -122,10 +117,6 @@ path13PrincipalChart :
 path13PrincipalChart geometry =
   Selected.principalChart
     (PathTarget.bridge13 (selectedPhysical geometry))
-
-------------------------------------------------------------------------
--- Minimal remaining source inputs.
-------------------------------------------------------------------------
 
 record Path13TwoCarrierSourceFamilyInputs (CoarseField : Set) : Set₁ where
   field
@@ -194,10 +185,6 @@ path13Calculus :
 path13Calculus inputs =
   R177.asUniformAdjointDifferentialCalculus (federbushConvention inputs)
 
-------------------------------------------------------------------------
--- Construct one selected-bond two-carrier source.
-------------------------------------------------------------------------
-
 sourceAt :
   ∀ {CoarseField} →
   Path13TwoCarrierSourceFamilyInputs CoarseField →
@@ -212,50 +199,38 @@ sourceAt inputs bond = record
   { TwoCarrier.TwoCarrierEquation119PathData.realization =
       λ _ → R192.path13PhysicalPeriodicRealization
         (familyBackground (geometry inputs))
-
   ; TwoCarrier.TwoCarrierEquation119PathData.bondComponent =
       λ _ perturbation site direction →
         Perturbation.signedBondRealLie
           (R208.additive (scalarEmbedding inputs))
           (familyBackground (geometry inputs))
           perturbation site direction
-
   ; TwoCarrier.TwoCarrierEquation119PathData.adjointLink =
       λ _ → UnitAdjoint.unitAdjointRealLie (scalarEmbedding inputs)
-
   ; TwoCarrier.TwoCarrierEquation119PathData.scaleV =
       Perturbation.canonicalLocalScalarAction
         (R208.additive (scalarEmbedding inputs))
-
   ; TwoCarrier.TwoCarrierEquation119PathData.minusEmbedding =
       minusEmbeddingFor (geometry inputs) bond
-
   ; TwoCarrier.TwoCarrierEquation119PathData.plusEmbedding =
       λ step →
         R163.translatedEmbedding
           (minusEmbeddingFor (geometry inputs) bond step)
           (coarseSegmentFor bond)
-
   ; TwoCarrier.TwoCarrierEquation119PathData.coarseSegment =
       λ _ → coarseSegmentFor bond
-
   ; TwoCarrier.TwoCarrierEquation119PathData.coarseSegmentEndsAtPlusCentre =
       λ _ → refl
-
   ; TwoCarrier.TwoCarrierEquation119PathData.translationCommutation =
       R162.periodicSegmentCommutation R192.path13PeriodicIndex
-
   ; TwoCarrier.TwoCarrierEquation119PathData.dexpMinusOuter =
       λ step → R159.dexpMinusAt (path13Calculus inputs) (outerY inputs bond step)
-
   ; TwoCarrier.TwoCarrierEquation119PathData.inverseDexpMinusAt =
       λ step point →
         R159.jMinusAt (path13Calculus inputs) (pointY inputs bond step point)
-
   ; TwoCarrier.TwoCarrierEquation119PathData.adjointExpAt =
       λ step point →
         R159.adjointExp (path13Calculus inputs) (pointY inputs bond step point)
-
   ; TwoCarrier.TwoCarrierEquation119PathData.adjointExpOuter =
       λ step → R159.adjointExp (path13Calculus inputs) (outerY inputs bond step)
   }
@@ -305,10 +280,5 @@ cmp98Path13TwoCarrierSourceFamilyCompilerLevel = machineChecked
 cmp98Path13TwoCarrierFieldDerivativeCompilerLevel : ProofLevel
 cmp98Path13TwoCarrierFieldDerivativeCompilerLevel = machineChecked
 
--- The only remaining Path13 source-family payments are now inhabitance of the
--- narrow input record above: selected Path13 variational background, scalar
--- ring embedding, per-bond centered minus embeddings, and principal-image
--- admission of the literal erased relative contours.  Federbush calculus itself
--- is consumed from the existing family rather than reproved.
 literalCMP98Path13TwoCarrierSourceFamilyInputsLevel : ProofLevel
 literalCMP98Path13TwoCarrierSourceFamilyInputsLevel = conditional
