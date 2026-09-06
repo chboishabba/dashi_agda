@@ -93,6 +93,21 @@ localMomentUsesSelectedWindow :
     F.canonicalAristotleCurrentFrontier ≡ true
 localMomentUsesSelectedWindow = refl
 
+phaseStatisticCompilerClosed :
+  F.AristotleCurrentFrontier.concretePhaseStatisticCompilerClosedInAgda
+    F.canonicalAristotleCurrentFrontier ≡ true
+phaseStatisticCompilerClosed = refl
+
+selectedDirectWeldOpen :
+  F.AristotleCurrentFrontier.selectedDirectZeroCarrierWeldClosed
+    F.canonicalAristotleCurrentFrontier ≡ false
+selectedDirectWeldOpen = refl
+
+sharedDirectCarrierFeedsBoth :
+  F.AristotleCurrentFrontier.oneDirectGapCarrierFeedsClusteringAndFiniteNear
+    F.canonicalAristotleCurrentFrontier ≡ true
+sharedDirectCarrierFeedsBoth = refl
+
 transverseMomentNotOrdinateClustering :
   F.AristotleCurrentFrontier.transverseMomentDirectlyControlsOrdinateClustering
     F.canonicalAristotleCurrentFrontier ≡ false
