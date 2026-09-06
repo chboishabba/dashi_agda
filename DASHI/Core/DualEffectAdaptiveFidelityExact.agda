@@ -167,8 +167,8 @@ informationOnlyPreservesWorld :
   InformationOnly system action →
   ∀ state →
   nextState (executeDualEffect system action state) ≡ state
-informationOnlyPreservesWorld informationOnly state =
-  informationOnly state
+informationOnlyPreservesWorld isInfoOnly state =
+  isInfoOnly state
 
 ------------------------------------------------------------------------
 -- 5. Active experiment selection remains consumer/policy relative.

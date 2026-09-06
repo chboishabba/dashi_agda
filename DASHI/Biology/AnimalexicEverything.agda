@@ -11,6 +11,10 @@ open import DASHI.Biology.AnimalexicCrossPollinationExact
 open import DASHI.Biology.AnimalexicLexicIntegrationExact
 open import DASHI.Biology.AnimalexicRegression
 open import DASHI.Biology.AnimalexicLexicRegression
+open import DASHI.Biology.DrosophilaRealBenchmarkAuthorityExact
+open import DASHI.Biology.DrosophilaMaleCNSTier1ReceiptsExact
+open import DASHI.Biology.DrosophilaGautheyCompactArchiveReceiptExact
+open import DASHI.Biology.DrosophilaGautheyRegistrationStagingExact
 open import DASHI.Core.SufficientSupportFamilyInvalidationExact
 open import DASHI.Core.ProvenanceClosureIndependenceExact
 open import DASHI.Core.ExperimentLanguageEquivalenceExact
