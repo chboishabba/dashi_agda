@@ -70,15 +70,15 @@ pabaiNoDutyDoesNotCloseAllClimateReformulations =
 ------------------------------------------------------------------------
 
 climateDutyNowReusesUniversalNegligenceWrongType :
-  Universal.Negligence.ClimateDutySpecialisation.wrongType
-    Universal.Negligence.australiaPhysicalInjuryDutySpecialisation
-  ≡ Universal.Negligence.negligenceWrongType
+  Negligence.ClimateDutySpecialisation.wrongType
+    Negligence.australiaPhysicalInjuryDutySpecialisation
+  ≡ Negligence.negligenceWrongType
 climateDutyNowReusesUniversalNegligenceWrongType = refl
 
 climateDutyTargetsUniversalDutyElement :
-  Universal.Negligence.ClimateDutySpecialisation.targetElement
-    Universal.Negligence.australiaPhysicalInjuryDutySpecialisation
-  ≡ Universal.Negligence.dutyElement
+  Negligence.ClimateDutySpecialisation.targetElement
+    Negligence.australiaPhysicalInjuryDutySpecialisation
+  ≡ Negligence.dutyElement
 climateDutyTargetsUniversalDutyElement = refl
 
 sourceContainerDoesNotFlattenPropositionAuthority :
