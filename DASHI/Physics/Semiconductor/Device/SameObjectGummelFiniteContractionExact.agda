@@ -4,7 +4,7 @@ module DASHI.Physics.Semiconductor.Device.SameObjectGummelFiniteContractionExact
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Empty using (⊥)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 
 import DASHI.Analysis.StrictContractionUniqueness as SCU
