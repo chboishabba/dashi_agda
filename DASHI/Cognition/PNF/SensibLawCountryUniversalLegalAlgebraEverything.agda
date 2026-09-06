@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.SensibLawCountrySystemRealisedJusticeEverything as Country
+import DASHI.Cognition.PNF.SensibLawCountrySystemRealisedJusticeBidiExact as System
 import DASHI.Cognition.PNF.SensibLawRemedyUniversalLegalAlgebraBridgeExact as Bridge
 import DASHI.Cognition.PNF.SensibLawUniversalLegalAlgebraEverything as Universal
 
@@ -39,7 +40,7 @@ legalAuthorityFailureDoesReopenUniversalGraph = refl
 ------------------------------------------------------------------------
 
 countryCompensationResidualStillOpen :
-  Country.compensationState ≡ Country.System.residualOpen
+  Country.compensationState ≡ System.residualOpen
 countryCompensationResidualStillOpen = refl
 
 ------------------------------------------------------------------------
