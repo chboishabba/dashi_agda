@@ -1,0 +1,29 @@
+module DASHI.EverythingCrossDomainBidiEpistemicCompression2026 where
+
+open import DASHI.Core.Prelude
+
+import DASHI.EverythingCrossDomainBidiReciprocal2026 as Prior
+import DASHI.Core.EpistemicCompressionDeliberativeReopeningBidiExact as Compression
+
+correctionPolicy : Compression.CompressionCorrectionPolicy
+correctionPolicy = Compression.canonicalCompressionCorrectionPolicy
+
+collisionRequiresResidual :
+  Compression.collisionRequiresResidual correctionPolicy ≡ true
+collisionRequiresResidual = refl
+
+observerRelabellingAloneIsNotRepair :
+  Compression.observerRelabellingAloneCountsAsRepair correctionPolicy ≡ false
+observerRelabellingAloneIsNotRepair = refl
+
+failedOutcomeMaySelectivelyReopen :
+  Compression.failedRealisedOutcomeMaySelectivelyReopen correctionPolicy ≡ true
+failedOutcomeMaySelectivelyReopen = refl
+
+correctionDoesNotRewritePriorEvidence :
+  Compression.correctionRewritesPriorEvidence correctionPolicy ≡ false
+correctionDoesNotRewritePriorEvidence = refl
+
+data AggregateImportMeansKernelValidated : Set where
+aggregateImportDoesNotClaimKernelValidation : AggregateImportMeansKernelValidated → ⊥
+aggregateImportDoesNotClaimKernelValidation ()
