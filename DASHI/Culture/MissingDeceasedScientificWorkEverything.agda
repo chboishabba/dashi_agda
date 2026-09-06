@@ -9,9 +9,9 @@ module DASHI.Culture.MissingDeceasedScientificWorkEverything where
 -- testing, open-science/knowledge-release and externalisation-boundary BIDI
 -- testing, science-to-capability-carrier reconstruction, application-
 -- transformation modelling, event-time alignment, organisational/custody
--- confounders, science-driven acquisition compilation, disruption-benefit
--- evidence testing, actor benefit/visibility/effect intersection, and matched
--- disruption-impact controls.
+-- confounders, capability resilience, science-driven acquisition compilation,
+-- disruption-benefit evidence testing, actor benefit/visibility/effect
+-- intersection, and matched disruption-impact controls.
 --
 -- The scientific formalisation is both memorial work and an investigative aid:
 -- it identifies the actual capability-bearing application transformations that
@@ -31,6 +31,7 @@ import DASHI.Core.ApplicationTransformationCapabilityBidiExact
 import DASHI.Core.DistributedApplicationSurfaceBidiExact
 import DASHI.Core.EventTimeCapabilityAlignmentBidiExact
 import DASHI.Core.CapabilityFragilityConfoundersBidiExact
+import DASHI.Core.CapabilityResilienceBidiExact
 import DASHI.Core.TechnicalDependencyHypergraphExact
 import DASHI.Core.CommonSelectorVisibilityHyperfabricExact
 import DASHI.Core.SelectorDiscriminationSearchExact
