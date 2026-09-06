@@ -9,6 +9,7 @@ import DASHI.Economics.SoftBankOpenAIValuationLeverage2026Exact as SoftBank
 import DASHI.Economics.TSMCHBMManufacturingDemandPolicy2026Exact as Manufacturing
 import DASHI.Economics.MarxCapitalAIInfrastructureCrossPollinationExact as Marx
 import DASHI.Economics.AIInfrastructureYouTubeShortTranscriptBoundaryExact as Short
+import DASHI.Economics.ChinaUSAITrainingServingComputeSeparation2026Exact as ChinaUS
 
 ------------------------------------------------------------------------
 -- CURRENT-REGIME CALIBRATION AGGREGATOR, SEPTEMBER 2026
@@ -29,6 +30,7 @@ record AICurrentRegimeCalibration2026 : Set₁ where
     manufacturingDemandPolicy : Manufacturing.ManufacturingDemandPolicyCalibration
     marxCapitalBoundary : Marx.MarxAIEconomicReadingBoundary
     suppliedShortBoundary : Short.YouTubeShortSourceBoundary
+    chinaUSTrainingServing : ChinaUS.SourceBackedTrainingServingCalibration
 
     marginPressureSourceClosed : Bool
     vendorCustomerInvestmentSourceClosed : Bool
@@ -36,8 +38,11 @@ record AICurrentRegimeCalibration2026 : Set₁ where
     valuationLeverageSourceClosed : Bool
     manufacturingPolicySourceClosed : Bool
     marxCrossPollinationBounded : Bool
-
     suppliedShortTranscriptClosed : Bool
+    trainingServingSeparationEmpiricallySupported : Bool
+
+    fivePercentChipShareClosed : Bool
+    exactOpenWeightCausalResponseClosed : Bool
     terminalEconomicValidationClosed : Bool
     currentRegimeBubbleClassificationClosed : Bool
     fraudClassificationClosed : Bool
@@ -54,8 +59,9 @@ canonicalAICurrentRegimeCalibration2026 =
     Manufacturing.canonicalManufacturingDemandPolicyCalibration
     Marx.canonicalMarxAIEconomicReadingBoundary
     Short.canonicalYouTubeShortSourceBoundary
-    true true true true true true
-    false false false false
+    ChinaUS.canonicalSourceBackedTrainingServingCalibration
+    true true true true true true true true
+    false false false false false
 
 ------------------------------------------------------------------------
 -- Promotion firewalls.
