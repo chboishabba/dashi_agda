@@ -41,6 +41,12 @@ import DASHI.Biology.PsychogeographyEverything
 import DASHI.Biology.TrumpPsychogeographyEverything
 import DASHI.Biology.AliceBrownEpistemicGovernanceEverything
 
+-- Microbiology / ancientbiotics aggregate: existing Bald-eyesalve and quorum
+-- owners plus molecular trajectory, S. aureus thiolome and nine-day mechanism
+-- weld.  This makes the newer chemistry/protein results part of the biology
+-- domain spine rather than a parallel branch-local vocabulary.
+import DASHI.Biology.Microbiology.Everything
+
 -- Cross-branch evidence ledger for the #618 processing-geometry programme.
 -- This branch records sources/boundaries and a thin generic burden bridge; it
 -- does not duplicate #618's processing geometry.
