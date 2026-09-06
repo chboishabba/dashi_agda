@@ -5,16 +5,21 @@ module DASHI.Analysis.NonArchimedeanSpectralBidiObligationExact where
 --
 -- Finite spectral closure is dependency-closed. Post-closure continuous and
 -- Markov claims are routed at their actual theorem strength. Two advertised
--- unit/uniform Markov estimates are refuted by exact n=3 witnesses:
+-- unit/uniform estimates are refuted by exact finite witnesses:
 --
 --   * unit-prefactor one-step L2 inverse-sqrt-two contraction;
 --   * universal sqrt(|A^c|) 2^(-t/2) stopping-survival bound.
 --
--- The viable repairs are level-dependent prefactored L2 powers and a finite,
--- constructive hitting-block route for set-dependent stopping tails. All finite
--- stopping combinatorics, branch/probability semantics and absorption are now
--- owned. The only remaining constructive tail seam is predecessor transitivity
--- on the literal source ZMod (2^n) carrier.
+-- Repaired finite lanes now closed at dependency level:
+--
+--   * finite C_n-prefactored L2 power mixing;
+--   * Hilbert and normalized stationary covariance decay;
+--   * total variation after adjoint-orientation and finite L1/L2 welds;
+--   * constructive set-dependent geometric stopping tails.
+--
+-- Stopping polynomial moments retain one standard infinite-series/probability
+-- consumer leaf.  The source's universal Re(s)<(1/2)log 2 MGF domain is not
+-- inherited by the repaired set-dependent tail.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -105,17 +110,17 @@ unitOneStepClaim = bidiClaim unitPrefactorOneStepL2Contraction
 prefactoredMixingClaim : BidiClaim
 prefactoredMixingClaim = bidiClaim prefactoredL2PowerMixing
   "finite normalized walk has C_n-prefactored inverse-sqrt-two L2 power decay"
-  "explicit shell prefactor + Parseval shell-energy same-object weld" false
+  "Euclidean L2 weld + corrected Hadamard energy tower + unitary DFT + finite shell maximum" true
 
 totalVariationClaim : BidiClaim
 totalVariationClaim = bidiClaim totalVariationMixing
   "finite walk has total-variation mixing from repaired prefactored L2 decay"
-  "prefactored L2 power bound + finite Cauchy-Schwarz consumer" false
+  "adjoint-power norm weld + density coordinate identity + finite L1/L2 consumer" true
 
 correlationDecayClaim : BidiClaim
 correlationDecayClaim = bidiClaim correlationDecayAtInverseSqrtTwo
-  "correlations decay at inverse-sqrt-two spectral rate with a finite prefactor"
-  "prefactored L2 mixing + correlation consumer identification" false
+  "Hilbert and uniform-stationary covariance correlations decay at inverse-sqrt-two rate with finite prefactor"
+  "prefactored L2 mixing + uniform stationarity + inverse-state-count covariance normalization" true
 
 universalStoppingSurvivalClaim : BidiClaim
 universalStoppingSurvivalClaim = bidiClaim universalStoppingSurvivalBound
@@ -125,12 +130,12 @@ universalStoppingSurvivalClaim = bidiClaim universalStoppingSurvivalBound
 setDependentStoppingSurvivalClaim : BidiClaim
 setDependentStoppingSurvivalClaim = bidiClaim setDependentStoppingSurvivalBound
   "each fixed finite stopping set has some set-dependent exponential survival tail"
-  "single remaining ZMod predecessor transitivity adapter" false
+  "forward translation + finite witness maximum + prefix absorption + generic finite branching tail compiler" true
 
 stoppingMomentsClaim : BidiClaim
 stoppingMomentsClaim = bidiClaim stoppingMomentFiniteness
-  "finite stopping-time moments follow from a valid set-dependent survival tail"
-  "set-dependent finite fraction tail + generating-function/moment consumer" false
+  "all polynomial stopping moments are finite under the repaired set-dependent geometric tail"
+  "standard geometric-tail infinite-series/moment consumer" false
 
 taoConcentrationClaim : BidiClaim
 taoConcentrationClaim = bidiClaim taoStyleStoppingConcentration
@@ -174,12 +179,9 @@ data MissingObligation : Set where
   needCyclotomicToProlateSigmaSameObjectWeld : MissingObligation
   needGibbsUniquenessTheorem : MissingObligation
   rejectedUnitPrefactorOneStepContraction : MissingObligation
-  needInputParsevalShellEnergyWeld : MissingObligation
-  needOutputParsevalShellEnergyWeld : MissingObligation
-  needCorrelationConsumerWeld : MissingObligation
   rejectedUniversalStoppingSurvivalBound : MissingObligation
-  needZModCyclicPredecessorAdapter : MissingObligation
-  needStoppingTailGeneratingFunctionConsumer : MissingObligation
+  needStandardGeometricTailMomentConsumer : MissingObligation
+  rejectedUniversalHalfLogTwoMGFDomain : MissingObligation
   needMarkovConcentrationHypotheses : MissingObligation
   needDriftStoppingSameObjectWeld : MissingObligation
   rejectedFullTransferRadiusSqrtTwo : MissingObligation
@@ -201,23 +203,14 @@ compileMissing cyclotomicAnchorsProlateHalf =
 compileMissing uniqueHaarConformalGibbs = needGibbsUniquenessTheorem ∷ []
 compileMissing unitPrefactorOneStepL2Contraction =
   rejectedUnitPrefactorOneStepContraction ∷ []
-compileMissing prefactoredL2PowerMixing =
-  needInputParsevalShellEnergyWeld ∷
-  needOutputParsevalShellEnergyWeld ∷ []
-compileMissing totalVariationMixing =
-  needInputParsevalShellEnergyWeld ∷
-  needOutputParsevalShellEnergyWeld ∷ []
-compileMissing correlationDecayAtInverseSqrtTwo =
-  needInputParsevalShellEnergyWeld ∷
-  needOutputParsevalShellEnergyWeld ∷
-  needCorrelationConsumerWeld ∷ []
+compileMissing prefactoredL2PowerMixing = []
+compileMissing totalVariationMixing = []
+compileMissing correlationDecayAtInverseSqrtTwo = []
 compileMissing universalStoppingSurvivalBound =
   rejectedUniversalStoppingSurvivalBound ∷ []
-compileMissing setDependentStoppingSurvivalBound =
-  needZModCyclicPredecessorAdapter ∷ []
+compileMissing setDependentStoppingSurvivalBound = []
 compileMissing stoppingMomentFiniteness =
-  needZModCyclicPredecessorAdapter ∷
-  needStoppingTailGeneratingFunctionConsumer ∷ []
+  needStandardGeometricTailMomentConsumer ∷ []
 compileMissing taoStyleStoppingConcentration =
   needMarkovConcentrationHypotheses ∷
   needDriftStoppingSameObjectWeld ∷ []
@@ -249,21 +242,31 @@ unitOneStepContractionRejected :
   ≡ rejectedUnitPrefactorOneStepContraction ∷ []
 unitOneStepContractionRejected = refl
 
-prefactoredMixingExactCutset :
-  compileMissing prefactoredL2PowerMixing
-  ≡ needInputParsevalShellEnergyWeld ∷
-    needOutputParsevalShellEnergyWeld ∷ []
-prefactoredMixingExactCutset = refl
+prefactoredMixingClosed :
+  compileMissing prefactoredL2PowerMixing ≡ []
+prefactoredMixingClosed = refl
+
+totalVariationMixingClosed :
+  compileMissing totalVariationMixing ≡ []
+totalVariationMixingClosed = refl
+
+stationaryCorrelationDecayClosed :
+  compileMissing correlationDecayAtInverseSqrtTwo ≡ []
+stationaryCorrelationDecayClosed = refl
 
 universalStoppingSurvivalRejected :
   compileMissing universalStoppingSurvivalBound
   ≡ rejectedUniversalStoppingSurvivalBound ∷ []
 universalStoppingSurvivalRejected = refl
 
-constructiveSetDependentStoppingTailSingleLeaf :
-  compileMissing setDependentStoppingSurvivalBound
-  ≡ needZModCyclicPredecessorAdapter ∷ []
-constructiveSetDependentStoppingTailSingleLeaf = refl
+constructiveSetDependentStoppingTailClosed :
+  compileMissing setDependentStoppingSurvivalBound ≡ []
+constructiveSetDependentStoppingTailClosed = refl
+
+stoppingMomentSingleConsumerLeaf :
+  compileMissing stoppingMomentFiniteness
+  ≡ needStandardGeometricTailMomentConsumer ∷ []
+stoppingMomentSingleConsumerLeaf = refl
 
 fullTransferSqrtTwoRejected :
   compileMissing fullContinuousTransferRadiusSqrtTwo
