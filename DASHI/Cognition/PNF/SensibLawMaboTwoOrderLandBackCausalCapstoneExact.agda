@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Cognition.PNF.SensibLawMaboTwoOrderLandBackEverything as Base
 import DASHI.Cognition.PNF.SensibLawMaboDawsonRadicalTitleRecognitionHingeExact as Hinge
 import DASHI.Cognition.PNF.SensibLawLandBackIncomeProjectionNonFactorabilityExact as Income
@@ -141,13 +142,11 @@ recognitionEvidenceDoesNotProveConstitutiveCondition :
 recognitionEvidenceDoesNotProveConstitutiveCondition = Hinge.recognitionEvidenceDoesNotEntailCondition
 
 cashIncomeCannotFactorLandAuthority :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    Income.cashIncomeObserver Income.landAuthorityOutcome → ⊥
+  INF.FactorsThrough Income.cashIncomeObserver Income.landAuthorityOutcome → ⊥
 cashIncomeCannotFactorLandAuthority = Income.cashIncomeDoesNotFactorLandAuthority
 
 crownRecognitionCannotFactorIndigenousAuthority :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    Recognition.crownRecognitionObserver Recognition.indigenousAuthorityOutcome → ⊥
+  INF.FactorsThrough Recognition.crownRecognitionObserver Recognition.indigenousAuthorityOutcome → ⊥
 crownRecognitionCannotFactorIndigenousAuthority = Recognition.crownRecognitionDoesNotFactorIndigenousAuthority
 
 workingPaperDoesNotBecomePeerReviewedClosure :
