@@ -125,13 +125,13 @@ jasonThomasVPS34 =
 ------------------------------------------------------------------------
 
 data RosterRoleClass : Set where
-  documentedScientistOrEngineer
-  documentedTechnicalLeadership
-  administrativeInstitutionStaff
-  propertyOrAssetCustodian
-  intelligenceOrMilitaryRole
-  unresolvedRosterRole
-  : RosterRoleClass
+  documentedScientistOrEngineer : RosterRoleClass
+  documentedTechnicalLeadership : RosterRoleClass
+  administrativeInstitutionStaff : RosterRoleClass
+  propertyOrAssetCustodian : RosterRoleClass
+  intelligenceOrMilitaryRole : RosterRoleClass
+  unresolvedRosterRole : RosterRoleClass
+
 
 record RosterPersonRole : Set where
   constructor roster-person-role

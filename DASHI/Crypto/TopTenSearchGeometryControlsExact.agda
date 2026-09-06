@@ -15,24 +15,24 @@ open import Data.List.Base using (length)
 import DASHI.Crypto.TopTenCryptoBlueTeamProfilesExact as Profile
 
 data CandidateTestGeometry : Set where
-  affineReuseRelation
-  authenticatedPartition
-  modularForwardEquation
-  finiteGroupForwardEquation
-  ellipticScalarForwardEquation
-  randomizedReencryptionWitness
-  componentLocalComposition
-  noisyResidualAndReconciliation
+  affineReuseRelation : CandidateTestGeometry
+  authenticatedPartition : CandidateTestGeometry
+  modularForwardEquation : CandidateTestGeometry
+  finiteGroupForwardEquation : CandidateTestGeometry
+  ellipticScalarForwardEquation : CandidateTestGeometry
+  randomizedReencryptionWitness : CandidateTestGeometry
+  componentLocalComposition : CandidateTestGeometry
+  noisyResidualAndReconciliation : CandidateTestGeometry
   physicalStatisticalPartition : CandidateTestGeometry
 
 data ExtraSearchStructure : Set where
-  reuseCorrelation
-  hiddenDependentOutcome
-  publicInverseFactorisation
-  discreteLogFactorisation
-  randomnessRecoveryOrElimination
-  componentBreakOrCrossBoundaryLeak
-  localResidualEnumerationAndCheapReconciliation
+  reuseCorrelation : ExtraSearchStructure
+  hiddenDependentOutcome : ExtraSearchStructure
+  publicInverseFactorisation : ExtraSearchStructure
+  discreteLogFactorisation : ExtraSearchStructure
+  randomnessRecoveryOrElimination : ExtraSearchStructure
+  componentBreakOrCrossBoundaryLeak : ExtraSearchStructure
+  localResidualEnumerationAndCheapReconciliation : ExtraSearchStructure
   physicalObservationModel : ExtraSearchStructure
 
 record SearchControl : Set where
@@ -88,8 +88,8 @@ allSearchControlsCount = refl
 ------------------------------------------------------------------------
 
 data RuntimeObservationStatus : Set where
-  runtimeNotModelled
-  runtimeModelledNoSplitProved
+  runtimeNotModelled : RuntimeObservationStatus
+  runtimeModelledNoSplitProved : RuntimeObservationStatus
   runtimeSplitWitnessed : RuntimeObservationStatus
 
 record RuntimeAugmentedControl : Set where

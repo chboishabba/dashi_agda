@@ -15,28 +15,28 @@ import DASHI.Core.CriticalKnowledgeConcentrationBidiExact as K
 ------------------------------------------------------------------------
 
 data CapabilityCarrierKind : Set where
-  governingModel
-  constitutiveParameters
-  sourceCodeOrAlgorithm
-  calibrationData
-  rawExperimentalData
-  designGeometry
-  processWindow
-  fabricationRecipe
-  qualificationEvidence
-  failureModeMap
-  integrationProcedure
-  tacitTechnique
-  hardwareConfiguration
-  inverseModel
-  : CapabilityCarrierKind
+  governingModel : CapabilityCarrierKind
+  constitutiveParameters : CapabilityCarrierKind
+  sourceCodeOrAlgorithm : CapabilityCarrierKind
+  calibrationData : CapabilityCarrierKind
+  rawExperimentalData : CapabilityCarrierKind
+  designGeometry : CapabilityCarrierKind
+  processWindow : CapabilityCarrierKind
+  fabricationRecipe : CapabilityCarrierKind
+  qualificationEvidence : CapabilityCarrierKind
+  failureModeMap : CapabilityCarrierKind
+  integrationProcedure : CapabilityCarrierKind
+  tacitTechnique : CapabilityCarrierKind
+  hardwareConfiguration : CapabilityCarrierKind
+  inverseModel : CapabilityCarrierKind
+
 
 data CarrierEpistemicState : Set where
-  carrierPublic
-  carrierBounded
-  carrierPartial
-  carrierUnknown
-  : CarrierEpistemicState
+  carrierPublic : CarrierEpistemicState
+  carrierBounded : CarrierEpistemicState
+  carrierPartial : CarrierEpistemicState
+  carrierUnknown : CarrierEpistemicState
+
 
 record ScientificCapabilityCarrier : Set where
   constructor scientific-capability-carrier
@@ -57,15 +57,15 @@ open ScientificCapabilityCarrier public
 ------------------------------------------------------------------------
 
 data ReconstructiveRole : Set where
-  descriptiveOnly
-  reproducesModel
-  reproducesExperiment
-  reproducesProcess
-  enablesCalibration
-  enablesQualification
-  enablesDiagnosis
-  enablesExtension
-  : ReconstructiveRole
+  descriptiveOnly : ReconstructiveRole
+  reproducesModel : ReconstructiveRole
+  reproducesExperiment : ReconstructiveRole
+  reproducesProcess : ReconstructiveRole
+  enablesCalibration : ReconstructiveRole
+  enablesQualification : ReconstructiveRole
+  enablesDiagnosis : ReconstructiveRole
+  enablesExtension : ReconstructiveRole
+
 
 record ReconstructiveCarrierReceipt (c : ScientificCapabilityCarrier) : Set where
   constructor reconstructive-carrier-receipt
@@ -116,15 +116,15 @@ open CarrierSupportsCriticalityHypothesis public
 ------------------------------------------------------------------------
 
 data ScientificCriticalityTarget : Set where
-  carrierUniqueness
-  carrierNonPublicness
-  carrierIntegrationBreadth
-  carrierReplacementDifficulty
-  carrierStrategicRelevance
-  carrierObserverVisibility
-  personCarrierPossession
-  eventCausalLink
-  : ScientificCriticalityTarget
+  carrierUniqueness : ScientificCriticalityTarget
+  carrierNonPublicness : ScientificCriticalityTarget
+  carrierIntegrationBreadth : ScientificCriticalityTarget
+  carrierReplacementDifficulty : ScientificCriticalityTarget
+  carrierStrategicRelevance : ScientificCriticalityTarget
+  carrierObserverVisibility : ScientificCriticalityTarget
+  personCarrierPossession : ScientificCriticalityTarget
+  eventCausalLink : ScientificCriticalityTarget
+
 
 record ScientificCriticalityReverseObligation : Set where
   constructor scientific-criticality-reverse-obligation

@@ -26,17 +26,17 @@ import DASHI.Culture.ReligiousSanctionFeministWiccaCrossPollinationExact as FW
 ------------------------------------------------------------------------
 
 data SelfIdentificationPredicateRole : Set where
-  lexicalSelfDescription
-  religiousAffiliation
-  politicalReclamation
-  metaphysicalCommitment
-  ritualPractice
-  communityMembership
-  historicalGenealogy
-  authorityOverSelfDescription
-  publicPresentation
-  temporalIdentity
-  : SelfIdentificationPredicateRole
+  lexicalSelfDescription : SelfIdentificationPredicateRole
+  religiousAffiliation : SelfIdentificationPredicateRole
+  politicalReclamation : SelfIdentificationPredicateRole
+  metaphysicalCommitment : SelfIdentificationPredicateRole
+  ritualPractice : SelfIdentificationPredicateRole
+  communityMembership : SelfIdentificationPredicateRole
+  historicalGenealogy : SelfIdentificationPredicateRole
+  authorityOverSelfDescription : SelfIdentificationPredicateRole
+  publicPresentation : SelfIdentificationPredicateRole
+  temporalIdentity : SelfIdentificationPredicateRole
+
 
 record SelfIdentificationPredicate : Set where
   constructor self-identification-predicate
@@ -91,13 +91,13 @@ canonicalWitchSelfIdentification = witch-self-identification-assertion
 ------------------------------------------------------------------------
 
 data WitchIdentityState : Set where
-  wiccanReligiousIdentity
-  paganNonWiccanIdentity
-  feministPoliticalReclamation
-  artisticSymbolicIdentity
-  eclecticSpiritualIdentity
-  historicalReenactmentUse
-  : WitchIdentityState
+  wiccanReligiousIdentity : WitchIdentityState
+  paganNonWiccanIdentity : WitchIdentityState
+  feministPoliticalReclamation : WitchIdentityState
+  artisticSymbolicIdentity : WitchIdentityState
+  eclecticSpiritualIdentity : WitchIdentityState
+  historicalReenactmentUse : WitchIdentityState
+
 
 data WitchSentenceSurface : Set where
   iAmAWitchSurface : WitchSentenceSurface
@@ -139,12 +139,12 @@ sameSentenceCannotRecoverUse =
 ------------------------------------------------------------------------
 
 data AuthorityClaimKind : Set where
-  authorityToSelfDescribe
-  authorityToDefineCommunity
-  authorityToAssertGenealogy
-  authorityToAssertMetaphysicalTruth
-  authorityToClassifyHistoricalPersons
-  : AuthorityClaimKind
+  authorityToSelfDescribe : AuthorityClaimKind
+  authorityToDefineCommunity : AuthorityClaimKind
+  authorityToAssertGenealogy : AuthorityClaimKind
+  authorityToAssertMetaphysicalTruth : AuthorityClaimKind
+  authorityToClassifyHistoricalPersons : AuthorityClaimKind
+
 
 data SelfDescriptionPromotesCommunityAuthority : Set where
 data SelfDescriptionPromotesGenealogyAuthority : Set where
@@ -172,23 +172,23 @@ selfDescriptionDoesNotPromoteHistoricalClassificationAuthority ()
 ------------------------------------------------------------------------
 
 data SelfIdentificationObligationKind : Set where
-  lexicalMeaningObligation
-  affiliationObligation
-  reclamationObligation
-  metaphysicalCommitmentObligation
-  practiceObligation
-  communityMembershipObligation
-  genealogyObligation
-  selfAuthorityObligation
-  historicalContinuityObligation
-  : SelfIdentificationObligationKind
+  lexicalMeaningObligation : SelfIdentificationObligationKind
+  affiliationObligation : SelfIdentificationObligationKind
+  reclamationObligation : SelfIdentificationObligationKind
+  metaphysicalCommitmentObligation : SelfIdentificationObligationKind
+  practiceObligation : SelfIdentificationObligationKind
+  communityMembershipObligation : SelfIdentificationObligationKind
+  genealogyObligation : SelfIdentificationObligationKind
+  selfAuthorityObligation : SelfIdentificationObligationKind
+  historicalContinuityObligation : SelfIdentificationObligationKind
+
 
 data SelfIdentificationStatus : Set where
-  recoveredFromUtterance
-  requiresIndependentReceipt
-  unresolved
-  nonidentifiableFromSentence
-  : SelfIdentificationStatus
+  recoveredFromUtterance : SelfIdentificationStatus
+  requiresIndependentReceipt : SelfIdentificationStatus
+  unresolved : SelfIdentificationStatus
+  nonidentifiableFromSentence : SelfIdentificationStatus
+
 
 record SelfIdentificationAudit : Set where
   constructor self-identification-audit

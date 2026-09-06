@@ -78,14 +78,14 @@ iloConvention98 = labour-union-source-reference
 ------------------------------------------------------------------------
 
 data LabourUnionSourceRole : Set where
-  marxianCapitalRelation
-  marxianWorkingDayConflict
-  marxianCooperation
-  freedomOfAssociation
-  organisationAutonomy
-  antiUnionDiscrimination
-  collectiveBargaining
-  : LabourUnionSourceRole
+  marxianCapitalRelation : LabourUnionSourceRole
+  marxianWorkingDayConflict : LabourUnionSourceRole
+  marxianCooperation : LabourUnionSourceRole
+  freedomOfAssociation : LabourUnionSourceRole
+  organisationAutonomy : LabourUnionSourceRole
+  antiUnionDiscrimination : LabourUnionSourceRole
+  collectiveBargaining : LabourUnionSourceRole
+
 
 ------------------------------------------------------------------------
 -- No-promotion types.

@@ -21,9 +21,9 @@ data DeclaredComputation : Set where
   declaredDirectOnly : DeclaredComputation
 
 data RealisedInteractionTopology : Set where
-  realisedDirectOnly
-  realisedDirectPlusSharedStateProtocol
-  : RealisedInteractionTopology
+  realisedDirectOnly : RealisedInteractionTopology
+  realisedDirectPlusSharedStateProtocol : RealisedInteractionTopology
+
 
 data ProtocolOrigin : Set where
   designerDeclared discoveredDuringDeployment : ProtocolOrigin

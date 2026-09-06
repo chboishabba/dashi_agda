@@ -20,20 +20,20 @@ import DASHI.Core.CommonSelectorVisibilityHyperfabricExact as Visibility
 ------------------------------------------------------------------------
 
 data SupportGrade : Set where
-  sourceBacked
-  partiallySourceBacked
-  unlocated
-  knownAbsent
-  : SupportGrade
+  sourceBacked : SupportGrade
+  partiallySourceBacked : SupportGrade
+  unlocated : SupportGrade
+  knownAbsent : SupportGrade
+
 
 data DiscriminationGrade : Set where
-  extremelyCoarse
-  coarse
-  intermediate
-  narrow
-  rosterSpecific
-  unresolvedDiscrimination
-  : DiscriminationGrade
+  extremelyCoarse : DiscriminationGrade
+  coarse : DiscriminationGrade
+  intermediate : DiscriminationGrade
+  narrow : DiscriminationGrade
+  rosterSpecific : DiscriminationGrade
+  unresolvedDiscrimination : DiscriminationGrade
+
 
 record SelectorSearchCandidate : Set₁ where
   constructor selector-search-candidate
@@ -74,7 +74,7 @@ record AdmissibleSelectorExplanation (candidate : SelectorSearchCandidate) : Set
   field
     covers : CoversDeclaredRoster candidate
     discriminates : DiscriminatesDeclaredRoster candidate
-    sourceBacked : SourceBackedCandidate candidate
+    isSourceBacked : SourceBackedCandidate candidate
 
 open AdmissibleSelectorExplanation public
 
@@ -105,10 +105,10 @@ open LeastCostAdmissibleSelector public
 ------------------------------------------------------------------------
 
 data MissingSelectorReceipt : Set where
-  missingCoverage
-  missingDiscrimination
-  missingProvenance
-  : MissingSelectorReceipt
+  missingCoverage : MissingSelectorReceipt
+  missingDiscrimination : MissingSelectorReceipt
+  missingProvenance : MissingSelectorReceipt
+
 
 record SelectorAcquisitionFrontier : Set₁ where
   constructor selector-acquisition-frontier
@@ -142,6 +142,8 @@ record SelectorDiscriminationBoundary : Set where
     sourceBackedCommonObserverImpliesAdversary : Bool
     sourceBackedCommonObserverImpliesAdversaryIsFalse :
       sourceBackedCommonObserverImpliesAdversary ≡ false
+
+open SelectorDiscriminationBoundary public
 
 canonicalSelectorDiscriminationBoundary : SelectorDiscriminationBoundary
 canonicalSelectorDiscriminationBoundary =

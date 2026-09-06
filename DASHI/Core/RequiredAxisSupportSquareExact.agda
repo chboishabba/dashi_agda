@@ -259,9 +259,11 @@ record RequiredAxisSupportSquareBoundary : Set where
   field
     conflictingEqualsMissing : Bool
     positiveEvidenceSomewhereResolvesEveryRequiredAxis : Bool
-    missingRequiredAxisBlocksResolution : Bool
+    missingRequiredAxisBlocksResolutionFlag : Bool
     conflictingRequiredAxisCountsAsResolvedPositive : Bool
     missingCountsAsResolvedNegative : Bool
+
+open RequiredAxisSupportSquareBoundary public
 
 canonicalRequiredAxisSupportSquareBoundary :
   RequiredAxisSupportSquareBoundary

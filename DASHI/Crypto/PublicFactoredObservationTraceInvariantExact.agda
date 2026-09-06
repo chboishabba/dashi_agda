@@ -10,7 +10,7 @@ module DASHI.Crypto.PublicFactoredObservationTraceInvariantExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong₂)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂)
 
 record PublicTraceObservation : Set₁ where
   constructor publicTraceObservation
@@ -42,13 +42,8 @@ samePublicSameTrace :
 samePublicSameTrace samePublic [] = refl
 samePublicSameTrace {system} samePublic (q ∷ qs) =
   cong₂ _∷_
-    (congAnswer samePublic)
+    (cong (λ pub → answer system pub q) samePublic)
     (samePublicSameTrace samePublic qs)
-  where
-  congAnswer : ∀ {l r} →
-    project system l ≡ project system r →
-    answer system (project system l) q ≡ answer system (project system r) q
-  congAnswer refl = refl
 
 ------------------------------------------------------------------------
 -- Adaptive query choice may itself depend on the public state and prior public
@@ -71,18 +66,25 @@ record TwoRoundTranscript (system : PublicTraceObservation) : Set where
 
 open TwoRoundTranscript public
 
+twoRoundRunFromPublic :
+  (system : PublicTraceObservation) →
+  TwoRoundPublicPolicy system →
+  Public system →
+  TwoRoundTranscript system
+twoRoundRunFromPublic system policy pub =
+  let q1 = firstQuery policy pub
+      o1 = answer system pub q1
+      q2 = secondQuery policy pub o1
+      o2 = answer system pub q2
+  in twoRoundTranscript o1 o2
+
 twoRoundRun :
   (system : PublicTraceObservation) →
   TwoRoundPublicPolicy system →
   Hidden system →
   TwoRoundTranscript system
 twoRoundRun system policy hidden =
-  let public = project system hidden
-      q1 = firstQuery policy public
-      o1 = observe system hidden q1
-      q2 = secondQuery policy public o1
-      o2 = observe system hidden q2
-  in twoRoundTranscript o1 o2
+  twoRoundRunFromPublic system policy (project system hidden)
 
 samePublicSameAdaptiveTwoRoundTranscript :
   ∀ {system : PublicTraceObservation}
@@ -90,4 +92,5 @@ samePublicSameAdaptiveTwoRoundTranscript :
     {left right : Hidden system} →
   project system left ≡ project system right →
   twoRoundRun system policy left ≡ twoRoundRun system policy right
-samePublicSameAdaptiveTwoRoundTranscript policy refl = refl
+samePublicSameAdaptiveTwoRoundTranscript {system} policy eq =
+  cong (twoRoundRunFromPublic system policy) eq

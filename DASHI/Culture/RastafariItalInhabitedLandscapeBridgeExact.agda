@@ -24,7 +24,7 @@ import DASHI.Planning.InhabitedLandscapeExact as Landscape
 -- some co-occurring dimensions without erasing provenance.
 ------------------------------------------------------------------------
 
-record ItalSituatedLandscapePractice : Set where
+record ItalSituatedLandscapePractice : Set₁ where
   constructor italSituatedLandscapePractice
   field
     italProfile : Ital.ItalLivityProfile
@@ -100,6 +100,8 @@ record ItalLandscapeBridgeBoundary : Set where
 
     multifunctionalPlaceCarrierIsReusable : Bool
     multifunctionalPlaceCarrierIsReusableIsTrue : multifunctionalPlaceCarrierIsReusable ≡ true
+
+open ItalLandscapeBridgeBoundary public
 
 canonicalItalLandscapeBridgeBoundary : ItalLandscapeBridgeBoundary
 canonicalItalLandscapeBridgeBoundary =

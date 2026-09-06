@@ -81,16 +81,17 @@ record McCaslandAlgorithmBoundary : Set where
     failureAwarePlacementNeedsExplicitFailureSet : Bool
     failureAwarePlacementNeedsExplicitFailureSetIsTrue : failureAwarePlacementNeedsExplicitFailureSet ≡ true
 
+open McCaslandAlgorithmBoundary public
+
 canonicalMcCaslandAlgorithmBoundary : McCaslandAlgorithmBoundary
 canonicalMcCaslandAlgorithmBoundary = mccasland-algorithm-boundary false refl false refl false refl true refl
 
 data McCaslandReverseTarget : Set where
-  acquirePlantMatrices
-  acquireThroughputPath
-  acquireStateScaling
-  acquireGramianNorm
-  acquireCandidatePlacementSet
-  acquireFailureSet
-  acquireRedundancyConstraint
-  acquireReconfigurationRule
-  : McCaslandReverseTarget
+  acquirePlantMatrices : McCaslandReverseTarget
+  acquireThroughputPath : McCaslandReverseTarget
+  acquireStateScaling : McCaslandReverseTarget
+  acquireGramianNorm : McCaslandReverseTarget
+  acquireCandidatePlacementSet : McCaslandReverseTarget
+  acquireFailureSet : McCaslandReverseTarget
+  acquireRedundancyConstraint : McCaslandReverseTarget
+  acquireReconfigurationRule : McCaslandReverseTarget

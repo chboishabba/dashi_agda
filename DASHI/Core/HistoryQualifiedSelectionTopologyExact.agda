@@ -192,12 +192,12 @@ candidateFieldCannotRecoverSelectedFrontier =
 ------------------------------------------------------------------------
 
 data FilterState : Set where
-  initial
-  rightsFirst
-  profitFirst
-  rightsThenProfit
-  profitThenRights
-  : FilterState
+  initial : FilterState
+  rightsFirst : FilterState
+  profitFirst : FilterState
+  rightsThenProfit : FilterState
+  profitThenRights : FilterState
+
 
 rightsFilter : FilterState → FilterState
 rightsFilter initial = rightsFirst

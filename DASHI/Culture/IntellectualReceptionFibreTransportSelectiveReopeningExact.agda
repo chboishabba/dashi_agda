@@ -20,17 +20,17 @@ import DASHI.Culture.IntellectualReceptionComposableFibreTransportPathExact as P
 ------------------------------------------------------------------------
 
 data TransportEdgeInstance : Set where
-  earlyAcquire01
-  earlyCarry12
-  lateAbsent01
-  lateAcquire12
-  : TransportEdgeInstance
+  earlyAcquire01 : TransportEdgeInstance
+  earlyCarry12 : TransportEdgeInstance
+  lateAbsent01 : TransportEdgeInstance
+  lateAcquire12 : TransportEdgeInstance
+
 
 data TransportEdgeKind : Set where
-  authorityAcquisition
-  authorityCarry
-  authorityAbsent
-  : TransportEdgeKind
+  authorityAcquisition : TransportEdgeKind
+  authorityCarry : TransportEdgeKind
+  authorityAbsent : TransportEdgeKind
+
 
 edgeKind : TransportEdgeInstance → TransportEdgeKind
 edgeKind earlyAcquire01 = authorityAcquisition
@@ -104,13 +104,13 @@ lateAcquisitionDoesNotOccurInEarlyRoute ()
 ------------------------------------------------------------------------
 
 data FibreCertificateArtifact : Set where
-  earlyAcquire01Artifact
-  lateAcquire12Artifact
-  earlyTerminalFibreCertificate
-  lateTerminalFibreCertificate
-  earlyFutureUseCertificate
-  lateFutureUseCertificate
-  : FibreCertificateArtifact
+  earlyAcquire01Artifact : FibreCertificateArtifact
+  lateAcquire12Artifact : FibreCertificateArtifact
+  earlyTerminalFibreCertificate : FibreCertificateArtifact
+  lateTerminalFibreCertificate : FibreCertificateArtifact
+  earlyFutureUseCertificate : FibreCertificateArtifact
+  lateFutureUseCertificate : FibreCertificateArtifact
+
 
 data FibreCertificateDepends :
   FibreCertificateArtifact → FibreCertificateArtifact → Set where

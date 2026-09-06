@@ -30,7 +30,8 @@ module DASHI.Crypto.MLKEMResidualTouchPathLowerBoundExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Nat using (Nat; _≤_; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat using (_≤_; _+_; _*_; z≤n)
 import Data.Nat.Properties as NatP
 
 ------------------------------------------------------------------------
@@ -66,7 +67,7 @@ pathResidualTouchAreaLowerBound :
   ∀ {radius} →
   (steps : List (RadiusPricedTouchStep radius)) →
   pathDemand128 steps ≤ radius * totalResource steps
-pathResidualTouchAreaLowerBound [] = NatP.≤-refl
+pathResidualTouchAreaLowerBound [] = z≤n
 pathResidualTouchAreaLowerBound {radius} (step ∷ rest)
   rewrite NatP.*-distribˡ-+ radius (stepResource step) (totalResource rest) =
     NatP.+-mono-≤
@@ -100,7 +101,7 @@ fullRankPathResidualTouchAreaLowerBound :
   ∀ {radius} →
   (steps : List (FullRankRadiusPricedTouchStep radius)) →
   fullRankPathDemand128 steps ≤ radius * totalFullRankTouches steps
-fullRankPathResidualTouchAreaLowerBound [] = NatP.≤-refl
+fullRankPathResidualTouchAreaLowerBound [] = z≤n
 fullRankPathResidualTouchAreaLowerBound {radius} (step ∷ rest)
   rewrite NatP.*-distribˡ-+ radius
     (FullRankRadiusPricedTouchStep.touchCount step)

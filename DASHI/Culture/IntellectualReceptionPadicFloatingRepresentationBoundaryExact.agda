@@ -47,17 +47,17 @@ decimalP3DoesNotRequireDisplayBaseToEqualValuationPrime = refl
 ------------------------------------------------------------------------
 
 data ReceptionRepresentationCase : Set where
-  earlyAuthorityRepresentation
-  lateAuthorityRepresentation
-  : ReceptionRepresentationCase
+  earlyAuthorityRepresentation : ReceptionRepresentationCase
+  lateAuthorityRepresentation : ReceptionRepresentationCase
+
 
 data CoarseDisplayedEndpoint : Set where
   sameDisplayedMovementEndpoint : CoarseDisplayedEndpoint
 
 data FinePrefixAddressCode : Set where
-  acquisitionInFirstPrefix
-  acquisitionOnlyInSecondPrefix
-  : FinePrefixAddressCode
+  acquisitionInFirstPrefix : FinePrefixAddressCode
+  acquisitionOnlyInSecondPrefix : FinePrefixAddressCode
+
 
 coarseDisplayedEndpoint : ReceptionRepresentationCase → CoarseDisplayedEndpoint
 coarseDisplayedEndpoint _ = sameDisplayedMovementEndpoint

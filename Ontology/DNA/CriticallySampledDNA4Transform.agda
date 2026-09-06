@@ -1,7 +1,7 @@
 module Ontology.DNA.CriticallySampledDNA4Transform where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Vec using (Vec; []; _∷_)
 
 open import Ontology.DNA.Supervoxel4Adic using
@@ -173,7 +173,7 @@ coefficientCount = 1 + 3 + 12 + 48 + 192
 coefficientCount-is-256 : coefficientCount ≡ 256
 coefficientCount-is-256 = refl
 
-record CriticalSamplingReceipt : Set where
+record CriticalSamplingReceipt : Set₁ where
   field
     sourceSymbols : Nat
     coefficientSymbols : Nat

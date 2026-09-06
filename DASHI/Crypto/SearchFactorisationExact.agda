@@ -91,7 +91,7 @@ reconciledLocalSolutionsGiveGlobal {problem} assemblyMap solutions =
   rightProof = subst (LocalR problem) (sym rightEq) (rightValid (locals solutions))
 
   couplingProof : Reconcile problem (ρL problem hidden) (ρR problem hidden)
-  couplingProof = transport₂ (sym leftEq) (sym rightEq) (compatible solutions)
+  couplingProof = transport₂ {P = Reconcile problem} (sym leftEq) (sym rightEq) (compatible solutions)
 
 ------------------------------------------------------------------------
 -- Exact cost accounting.

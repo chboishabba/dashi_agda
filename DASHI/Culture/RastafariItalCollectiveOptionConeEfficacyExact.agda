@@ -24,13 +24,13 @@ data OrganisationState : Set where
   individualOnly formalAssociation effectiveCollective : OrganisationState
 
 data LabourOption : Set where
-  individualRefusal
-  collectiveRefusal
-  protectedWithdrawal
-  collectiveBargainingMove
-  ruleChangeProposal
-  viableMaterialExit
-  : LabourOption
+  individualRefusal : LabourOption
+  collectiveRefusal : LabourOption
+  protectedWithdrawal : LabourOption
+  collectiveBargainingMove : LabourOption
+  ruleChangeProposal : LabourOption
+  viableMaterialExit : LabourOption
+
 
 data LabourAvailable : OrganisationState → LabourOption → Set where
   individualRefusalIndividual : LabourAvailable individualOnly individualRefusal

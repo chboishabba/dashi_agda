@@ -39,8 +39,8 @@ data Resource : Set where
   water soil roadAccess : Resource
 
 data Function : Set where
-  home workplace foodProduction ecologicalPatch commercialEnterprise
-  socialInfrastructure disasterRefuge meetingSpace pollingPlace culturalVenue
+  home workplace foodProduction ecologicalPatch commercialEnterprise : Function
+  socialInfrastructure disasterRefuge meetingSpace pollingPlace culturalVenue : Function
   ecosystem drainage boundary recreation floodHazard culturalLandscape : Function
 
 data Activity : Set where

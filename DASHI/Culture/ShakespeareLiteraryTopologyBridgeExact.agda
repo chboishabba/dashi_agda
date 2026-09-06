@@ -23,12 +23,18 @@ import DASHI.Reasoning.StructuralMetaphorSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data Play : Set where
-  wintersTale tempest twelfthNight midsummer
-  romeoAndJuliet hamlet macbeth kingLear : Play
+  wintersTale : Play
+  tempest : Play
+  twelfthNight : Play
+  midsummer : Play
+  romeoAndJuliet : Play
+  hamlet : Play
+  macbeth : Play
+  kingLear : Play
 
 data ElasticityClass : Set where
-  highlyRecoverable deformedButRecoverable mixedContracting terminalRupture
-  : ElasticityClass
+  highlyRecoverable deformedButRecoverable mixedContracting terminalRupture : ElasticityClass
+
 
 elasticity : Play → ElasticityClass
 elasticity wintersTale = deformedButRecoverable
@@ -312,6 +318,8 @@ record ShakespeareLiteraryTopologyBoundary : Set where
     literaryTopologyIsUniversalMasterMethod : Bool
     literaryTopologyIsUniversalMasterMethodIsFalse :
       literaryTopologyIsUniversalMasterMethod ≡ false
+
+open ShakespeareLiteraryTopologyBoundary public
 
 canonicalShakespeareLiteraryTopologyBoundary : ShakespeareLiteraryTopologyBoundary
 canonicalShakespeareLiteraryTopologyBoundary =

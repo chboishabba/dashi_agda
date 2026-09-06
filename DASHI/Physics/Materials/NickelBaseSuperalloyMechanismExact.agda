@@ -12,18 +12,17 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data AlloyMechanism : Set where
-  gammaMatrix
-  gammaPrimePrecipitation
-  solidSolutionStrengthening
-  chromiaScaleFormation
-  aluminaScaleFormation
-  grainBoundaryControl
-  solutionHeatTreatment
-  ageingHeatTreatment
-  vacuumMelting
-  remelting
-  mechanicalWorking
-  : AlloyMechanism
+  gammaMatrix : AlloyMechanism
+  gammaPrimePrecipitation : AlloyMechanism
+  solidSolutionStrengthening : AlloyMechanism
+  chromiaScaleFormation : AlloyMechanism
+  aluminaScaleFormation : AlloyMechanism
+  grainBoundaryControl : AlloyMechanism
+  solutionHeatTreatment : AlloyMechanism
+  ageingHeatTreatment : AlloyMechanism
+  vacuumMelting : AlloyMechanism
+  remelting : AlloyMechanism
+  mechanicalWorking : AlloyMechanism
 
 record GammaPrimeSystem : Set where
   constructor gamma-prime-system
@@ -100,6 +99,8 @@ record SuperalloyBoundary : Set where
     publicCompositionDeterminesTacitProcess : Bool
     publicCompositionDeterminesTacitProcessIsFalse : publicCompositionDeterminesTacitProcess ≡ false
 
+open SuperalloyBoundary public
+
 canonicalSuperalloyBoundary : SuperalloyBoundary
 canonicalSuperalloyBoundary = superalloy-boundary
   false refl
@@ -109,11 +110,10 @@ canonicalSuperalloyBoundary = superalloy-boundary
   false refl
 
 data SuperalloyReverseTarget : Set where
-  needExactHeatTreatment
-  needGammaPrimeFractionAndSize
-  needGrainAndSecondaryPhaseState
-  needOxideScaleCharacterisation
-  needMechanicalTestProtocol
-  needBurnOrIgnitionProtocol
-  needProcessingHistory
-  : SuperalloyReverseTarget
+  needExactHeatTreatment : SuperalloyReverseTarget
+  needGammaPrimeFractionAndSize : SuperalloyReverseTarget
+  needGrainAndSecondaryPhaseState : SuperalloyReverseTarget
+  needOxideScaleCharacterisation : SuperalloyReverseTarget
+  needMechanicalTestProtocol : SuperalloyReverseTarget
+  needBurnOrIgnitionProtocol : SuperalloyReverseTarget
+  needProcessingHistory : SuperalloyReverseTarget

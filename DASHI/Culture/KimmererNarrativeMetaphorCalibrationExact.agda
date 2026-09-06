@@ -33,8 +33,8 @@ import DASHI.Reasoning.StructuralMetaphorSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data BraidFeature : Set where
-  multipleStrands retainedDifference reciprocity heldTension relationalCoherence
-  : BraidFeature
+  multipleStrands retainedDifference reciprocity heldTension relationalCoherence : BraidFeature
+
 
 data CalibrationStage : Set where
   initialBraidFrame relationallyCalibratedBraidFrame : CalibrationStage

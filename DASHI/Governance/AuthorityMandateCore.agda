@@ -19,7 +19,8 @@ import DASHI.Interop.RoleGrammarCore as RoleGrammar
 -- legitimacy.
 ------------------------------------------------------------------------
 
-data Never : Set where
+Never : Set
+Never = ⊥
 
 data AuthoritySource : Set where
   constituencyMandate : AuthoritySource
@@ -191,6 +192,8 @@ record MandateAuthorityBoundary : Set where
     mandateRequiresRecall : Bool
     mandateRequiresReview : Bool
     formalModelCreatesPopularLegitimacy : Bool
+
+open MandateAuthorityBoundary public
 
 canonicalMandateAuthorityBoundary : MandateAuthorityBoundary
 canonicalMandateAuthorityBoundary =

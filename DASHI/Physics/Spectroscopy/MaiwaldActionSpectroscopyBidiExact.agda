@@ -16,7 +16,7 @@ record ActionSpectroscopyExperiment : Set where
   constructor action-spectroscopy-experiment
   field
     target : SpectralObject
-    trapMinimumK trapMaximumK : ℕ
+    trapMinimumK trapMaximumK : Nat
     sourceReference : String
 
 open ActionSpectroscopyExperiment public
@@ -36,6 +36,8 @@ record ActionSpectroscopyBoundary : Set where
     actionSignalIsDirectAbsorptionSpectrumIsFalse : actionSignalIsDirectAbsorptionSpectrum ≡ false
     detectedFragmentAutomaticallyProvesBiosignature : Bool
     detectedFragmentAutomaticallyProvesBiosignatureIsFalse : detectedFragmentAutomaticallyProvesBiosignature ≡ false
+
+open ActionSpectroscopyBoundary public
 
 canonicalActionSpectroscopyBoundary : ActionSpectroscopyBoundary
 canonicalActionSpectroscopyBoundary = action-spectroscopy-boundary false refl true refl false refl false refl

@@ -46,8 +46,10 @@ preservedCoordinateRetainsLineage :
     (coordinate : Coordinate) →
   effect receipt coordinate ≡ Provenance.preservesCoordinate →
   lineageAt family target coordinate ≡ lineageAt family source coordinate
-preservedCoordinateRetainsLineage receipt coordinate refl =
-  transportEquation receipt coordinate
+preservedCoordinateRetainsLineage {family = family} {source = source} receipt coordinate preserves =
+  trans
+    (transportEquation receipt coordinate)
+    (cong (λ eff → Provenance.applyCoordinateEffect eff (lineageAt family source coordinate)) preserves)
 
 -- If an inherited coordinate is explicitly erased, the target lineage is
 -- absent.  Consumer safety on some other axis does not alter this theorem.
@@ -60,8 +62,10 @@ erasedInheritedCoordinateBecomesAbsent :
   lineageAt family source coordinate ≡ Provenance.inheritedCoordinate →
   effect receipt coordinate ≡ Provenance.erasesCoordinate →
   lineageAt family target coordinate ≡ Provenance.absentCoordinate
-erasedInheritedCoordinateBecomesAbsent receipt coordinate refl refl =
-  transportEquation receipt coordinate
+erasedInheritedCoordinateBecomesAbsent {family = family} {source = source} receipt coordinate inherited erases =
+  trans
+    (transportEquation receipt coordinate)
+    (cong (λ eff → Provenance.applyCoordinateEffect eff (lineageAt family source coordinate)) erases)
 
 -- Two context transitions compose coordinate-wise through the existing lineage
 -- action.  This is deliberately not collapsed to a single surface-level flag.
@@ -97,11 +101,17 @@ eraseThenAddAcrossContextsIsIntroduced :
   effect firstReceipt coordinate ≡ Provenance.erasesCoordinate →
   effect secondReceipt coordinate ≡ Provenance.addsCoordinate →
   lineageAt family third coordinate ≡ Provenance.introducedCoordinate
-eraseThenAddAcrossContextsIsIntroduced
-  firstReceipt secondReceipt coordinate refl refl refl =
+eraseThenAddAcrossContextsIsIntroduced {family = family} {first = first}
+  firstReceipt secondReceipt coordinate sourceInherited firstErases secondAdds =
   trans
     (twoStepTransportEquation firstReceipt secondReceipt coordinate)
-    Provenance.additionAfterErasureIsIntroducedNotInherited
+    (trans
+      (cong (λ e1 → Provenance.applyTwoEffects e1 (effect secondReceipt coordinate) (lineageAt family first coordinate)) firstErases)
+      (trans
+        (cong (λ e2 → Provenance.applyTwoEffects Provenance.erasesCoordinate e2 (lineageAt family first coordinate)) secondAdds)
+        (trans
+          (cong (λ l → Provenance.applyTwoEffects Provenance.erasesCoordinate Provenance.addsCoordinate l) sourceInherited)
+          Provenance.additionAfterErasureIsIntroducedNotInherited)))
 
 eraseThenAddAcrossContextsDoesNotRestoreInherited :
   ∀ {Context Coordinate : Set}

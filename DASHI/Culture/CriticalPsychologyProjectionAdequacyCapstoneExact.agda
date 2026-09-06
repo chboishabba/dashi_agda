@@ -35,34 +35,34 @@ import DASHI.Reasoning.LacanCapitalistDiscourseMutation as Capitalist
 ------------------------------------------------------------------------
 
 data ExplanatoryFibre : Set where
-  bodilyFibre
-  developmentalFibre
-  relationalFibre
-  individualPsychologicalFibre
-  symbolicDiscursiveFibre
-  ideologicalFibre
-  materialLabourFibre
-  intersectionalSituatedFibre
-  historicalFibre
-  : ExplanatoryFibre
+  bodilyFibre : ExplanatoryFibre
+  developmentalFibre : ExplanatoryFibre
+  relationalFibre : ExplanatoryFibre
+  individualPsychologicalFibre : ExplanatoryFibre
+  symbolicDiscursiveFibre : ExplanatoryFibre
+  ideologicalFibre : ExplanatoryFibre
+  materialLabourFibre : ExplanatoryFibre
+  intersectionalSituatedFibre : ExplanatoryFibre
+  historicalFibre : ExplanatoryFibre
+
 
 data ConsumerKind : Set where
-  selfDescriptionConsumer
-  clinicalConsumer
-  structuralCausalConsumer
-  relationalConsumer
-  ideologicalConsumer
-  materialPoliticalConsumer
-  intersectionalConsumer
-  historicalConsumer
-  : ConsumerKind
+  selfDescriptionConsumer : ConsumerKind
+  clinicalConsumer : ConsumerKind
+  structuralCausalConsumer : ConsumerKind
+  relationalConsumer : ConsumerKind
+  ideologicalConsumer : ConsumerKind
+  materialPoliticalConsumer : ConsumerKind
+  intersectionalConsumer : ConsumerKind
+  historicalConsumer : ConsumerKind
+
 
 data ProjectionJudgement : Set where
-  adequateProjection
-  residualRequired
-  causalClosureBlocked
-  authorityPromotionBlocked
-  : ProjectionJudgement
+  adequateProjection : ProjectionJudgement
+  residualRequired : ProjectionJudgement
+  causalClosureBlocked : ProjectionJudgement
+  authorityPromotionBlocked : ProjectionJudgement
+
 
 record CriticalPsychologyQuery : Set where
   constructor critical-psychology-query

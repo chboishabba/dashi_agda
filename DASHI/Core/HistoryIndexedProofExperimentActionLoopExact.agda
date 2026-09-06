@@ -21,27 +21,27 @@ import DASHI.Reasoning.HistoryTimeIndexedAlgorithmModelExact as Model
 ------------------------------------------------------------------------
 
 data EpistemicMoveKind : Set where
-  thinkMove
-  lookMove
-  testMove
-  actMove
-  : EpistemicMoveKind
+  thinkMove : EpistemicMoveKind
+  lookMove : EpistemicMoveKind
+  testMove : EpistemicMoveKind
+  actMove : EpistemicMoveKind
+
 
 data OODAPhase : Set where
-  observePhase
-  orientPhase
-  decidePhase
-  actPhase
-  feedbackPhase
-  : OODAPhase
+  observePhase : OODAPhase
+  orientPhase : OODAPhase
+  decidePhase : OODAPhase
+  actPhase : OODAPhase
+  feedbackPhase : OODAPhase
+
 
 data MoveOutcome : Set where
-  refined
-  closedForConsumer
-  physicallyExecuted
-  unresolved
-  rejected
-  : MoveOutcome
+  refined : MoveOutcome
+  closedForConsumer : MoveOutcome
+  physicallyExecuted : MoveOutcome
+  unresolved : MoveOutcome
+  rejected : MoveOutcome
+
 
 record LiveResidualFibre : Set₁ where
   constructor live-residual-fibre

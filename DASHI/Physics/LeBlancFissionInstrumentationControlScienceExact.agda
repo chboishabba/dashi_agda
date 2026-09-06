@@ -15,26 +15,26 @@ import DASHI.Core.ScientificMechanismEvidenceBidiExact as S
 ------------------------------------------------------------------------
 
 data ICFunction : Set where
-  sense
-  conditionSignal
-  estimateState
-  compareToRequirement
-  commandActuator
-  protectSystem
-  recordTelemetry
-  diagnoseFault
-  : ICFunction
+  sense : ICFunction
+  conditionSignal : ICFunction
+  estimateState : ICFunction
+  compareToRequirement : ICFunction
+  commandActuator : ICFunction
+  protectSystem : ICFunction
+  recordTelemetry : ICFunction
+  diagnoseFault : ICFunction
+
 
 data ICRiskAxis : Set where
-  radiation
-  temperature
-  lifetime
-  reliability
-  qualification
-  sensorDrift
-  electronicsDegradation
-  communication
-  : ICRiskAxis
+  radiation : ICRiskAxis
+  temperature : ICRiskAxis
+  lifetime : ICRiskAxis
+  reliability : ICRiskAxis
+  qualification : ICRiskAxis
+  sensorDrift : ICRiskAxis
+  electronicsDegradation : ICRiskAxis
+  communication : ICRiskAxis
+
 
 record ICChain : Set where
   constructor ic-chain
@@ -101,6 +101,8 @@ record CurrentLeBlancICScienceAssessment : Set where
     databaseAndWorkingGroupOwnedIsTrue : databaseAndWorkingGroupOwned ≡ true
     componentQualificationClosed : Bool
     componentQualificationClosedIsFalse : componentQualificationClosed ≡ false
+
+open CurrentLeBlancICScienceAssessment public
 
 canonicalCurrentLeBlancICScienceAssessment : CurrentLeBlancICScienceAssessment
 canonicalCurrentLeBlancICScienceAssessment = current-leblanc-ic-science-assessment

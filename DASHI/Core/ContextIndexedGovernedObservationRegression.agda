@@ -22,8 +22,8 @@ data DemoQuery : Set where
   inspectQuery useQuery actQuery : DemoQuery
 
 data DemoAxis : Set where
-  valueAxis verificationAxis provenanceAxis permissionAxis authorityAxis obligationAxis
-  : DemoAxis
+  valueAxis verificationAxis provenanceAxis permissionAxis authorityAxis obligationAxis : DemoAxis
+
 
 data DemoOutcome : Set where
   sameOutcome restrictedOutcome openOutcome : DemoOutcome

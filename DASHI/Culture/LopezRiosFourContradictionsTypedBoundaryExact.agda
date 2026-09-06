@@ -15,11 +15,11 @@ import DASHI.Culture.LopezRiosPsychologisationDialecticNonDescentExact as Psych
 ------------------------------------------------------------------------
 
 data LopezRiosContradictionClass : Set where
-  antiDialecticalIdealist
-  apoliticalNeutrality
-  servilityToExistingRelations
-  psychologisingMystification
-  : LopezRiosContradictionClass
+  antiDialecticalIdealist : LopezRiosContradictionClass
+  apoliticalNeutrality : LopezRiosContradictionClass
+  servilityToExistingRelations : LopezRiosContradictionClass
+  psychologisingMystification : LopezRiosContradictionClass
+
 
 record SourceNamedContradiction : Set where
   constructor source-named-contradiction

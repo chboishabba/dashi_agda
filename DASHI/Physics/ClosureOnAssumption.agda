@@ -16,13 +16,13 @@ open import DASHI.Physics.MaskedCone public
 open import DASHI.Physics.LorentzianCoreClosure public
 open import DASHI.Physics.MaskedSignature31Bridge public
 open import DASHI.Physics.DefectLorentzBridge public
-open import DASHI.Physics.MaskedConeStructure public
+open import DASHI.Physics.MaskedConeStructure public hiding (Null)
 open import DASHI.Physics.RealConeStructureInstance public
 open import DASHI.Physics.RealCausalStructureInstance public
 open import DASHI.Physics.OrbitFingerprintAssumptions public
 open import DASHI.Physics.OrbitFingerprintInstance public
 open import DASHI.Physics.OrbitShellPredicate public
-open import DASHI.Physics.MaskedClosureKit public
+open import DASHI.Physics.MaskedClosureKit public hiding (coreQσ)
 open import DASHI.Physics.TernaryRealInstanceShift
 open import DASHI.Physics.DimensionBoundAssumptions public
 
@@ -31,7 +31,7 @@ open import DASHI.Physics.GlobalDimensionUniqueness public
 open import DASHI.Physics.FiniteToContinuumGeometry public
 open import DASHI.Physics.BianchiLovelockCompletion public
 open import DASHI.Physics.CliffordRepresentationCompletion public
-open import DASHI.Physics.SpinDoubleCoverCompletion public
+open import DASHI.Physics.SpinDoubleCoverCompletion public renaming (spinGroup to coverSpinGroup)
 open import DASHI.Physics.CCRContinuumCompletion public
 open import DASHI.Physics.UnitaryCompletion public
 open import DASHI.Physics.StandardModelUniqueness public

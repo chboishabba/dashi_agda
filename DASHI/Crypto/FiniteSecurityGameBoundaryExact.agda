@@ -74,7 +74,7 @@ collisionRefutesPerfectDistinguisher :
     {adversary : Adversary game} →
   ChallengeObservationCollision game →
   PerfectDistinguisher game adversary → ⊥
-collisionRefutesPerfectDistinguisher {game} collision perfect =
+collisionRefutesPerfectDistinguisher {game} {adversary} collision perfect =
   falseNotTrue falseEqualsTrue
   where
   falseEqualsTrue : false ≡ true

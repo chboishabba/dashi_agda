@@ -25,9 +25,9 @@ import DASHI.Reasoning.AristotleActiveExperimentalProofSearchDynamicsExact as Dy
 ------------------------------------------------------------------------
 
 data AuthorityOutcomeBranch : Set where
-  authorityMissingBranch
-  authorityPresentBranch
-  : AuthorityOutcomeBranch
+  authorityMissingBranch : AuthorityOutcomeBranch
+  authorityPresentBranch : AuthorityOutcomeBranch
+
 
 outcomeBranch : Context.StabiliserExperimentValue → AuthorityOutcomeBranch
 outcomeBranch Context.semanticLawfulValue = authorityMissingBranch
@@ -59,9 +59,9 @@ reviewedOutcomeContinuation =
 ------------------------------------------------------------------------
 
 data OutcomeFutureCone : Set where
-  reopenSearchCone
-  eligibleActionCone
-  : OutcomeFutureCone
+  reopenSearchCone : OutcomeFutureCone
+  eligibleActionCone : OutcomeFutureCone
+
 
 branchFutureCone : AuthorityOutcomeBranch → OutcomeFutureCone
 branchFutureCone authorityMissingBranch = reopenSearchCone

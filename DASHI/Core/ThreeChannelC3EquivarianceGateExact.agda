@@ -52,13 +52,13 @@ open ThreeChannelC3Weld public
 ------------------------------------------------------------------------
 
 data C3EvidenceStage : Set where
-  threeNamedChannels
-  candidateCyclicPermutation
-  orderThreeActionProved
-  forwardEquivarianceProved
-  consumerEquivarianceProved
-  c3WeldClosed
-  : C3EvidenceStage
+  threeNamedChannels : C3EvidenceStage
+  candidateCyclicPermutation : C3EvidenceStage
+  orderThreeActionProved : C3EvidenceStage
+  forwardEquivarianceProved : C3EvidenceStage
+  consumerEquivarianceProved : C3EvidenceStage
+  c3WeldClosed : C3EvidenceStage
+
 
 threeChannelsNotAction : threeNamedChannels ≡ orderThreeActionProved → ⊥
 threeChannelsNotAction ()

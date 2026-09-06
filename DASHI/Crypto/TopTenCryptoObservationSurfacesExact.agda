@@ -25,15 +25,15 @@ data ObservationDependency : Set where
   publicOnly hiddenDependent physicalChannel : ObservationDependency
 
 data ObservationKind : Set where
-  ciphertextTranscript
-  publicKeyAgreementTranscript
-  authenticationAcceptReject
-  paddingValidityOutcome
-  sessionKeyConfirmation
-  publicElementAcceptance
-  hpkeOpenOutcome
-  implicitRejectionDownstreamOutcome
-  qkdParameterStatistics
+  ciphertextTranscript : ObservationKind
+  publicKeyAgreementTranscript : ObservationKind
+  authenticationAcceptReject : ObservationKind
+  paddingValidityOutcome : ObservationKind
+  sessionKeyConfirmation : ObservationKind
+  publicElementAcceptance : ObservationKind
+  hpkeOpenOutcome : ObservationKind
+  implicitRejectionDownstreamOutcome : ObservationKind
+  qkdParameterStatistics : ObservationKind
   qkdClassicalAuthenticationOutcome : ObservationKind
 
 record ObservationSurface : Set where

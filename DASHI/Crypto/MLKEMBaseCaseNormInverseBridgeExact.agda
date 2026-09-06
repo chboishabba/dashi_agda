@@ -25,7 +25,7 @@ module DASHI.Crypto.MLKEMBaseCaseNormInverseBridgeExact where
 -- in F_3329.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level)
+open import Agda.Primitive using (Level; lzero)
 open import Agda.Builtin.Equality using (_≡_)
 open import Algebra.Bundles using (CommutativeRing)
 open import Data.Empty using (⊥)
@@ -35,8 +35,8 @@ import DASHI.Crypto.MLKEMBaseCaseAdjugateInverseExact as Adjugate
 open import DASHI.Crypto.MLKEMNTTLocalLeftInverseZeroReflectionExact using
   ( LeftInverseAtZero )
 
-record NonzeroInverseSupplier {c ℓ : Level}
-  (R : CommutativeRing c ℓ) : Set (c Agda.Primitive.⊔ ℓ) where
+record NonzeroInverseSupplier {ℓ : Level}
+  (R : CommutativeRing lzero ℓ) : Set ℓ where
   open CommutativeRing R
     renaming
       ( Carrier to F
@@ -53,8 +53,8 @@ record NonzeroInverseSupplier {c ℓ : Level}
 
 open NonzeroInverseSupplier public
 
-module _ {c ℓ : Level}
-  (R : CommutativeRing c ℓ)
+module _ {ℓ : Level}
+  (R : CommutativeRing lzero ℓ)
   (inverseSupplier : NonzeroInverseSupplier R)
   where
 
@@ -64,13 +64,13 @@ module _ {c ℓ : Level}
       ; 0# to 0F
       )
 
-  Pair : Set c
+  Pair : Set
   Pair = F × F
 
   nonzeroPair : Pair → Set
   nonzeroPair (a0 , a1) = (a0 ≡ 0F → a1 ≡ 0F → ⊥)
 
-  record QuadraticNormSeparated (gamma : F) (a : Pair) : Set (c Agda.Primitive.⊔ ℓ) where
+  record QuadraticNormSeparated (gamma : F) (a : Pair) : Set ℓ where
     constructor quadratic-norm-separated
     field
       normNonzero :

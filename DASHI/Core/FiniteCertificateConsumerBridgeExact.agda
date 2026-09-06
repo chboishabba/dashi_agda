@@ -86,12 +86,12 @@ open CertificateConsumerClosure public
 ------------------------------------------------------------------------
 
 data CertificateEvidenceStage : Set where
-  certificateDescribed
-  certificateBytesRecovered
-  replaySucceeded
-  interpretationProved
-  consumerClosed
-  : CertificateEvidenceStage
+  certificateDescribed : CertificateEvidenceStage
+  certificateBytesRecovered : CertificateEvidenceStage
+  replaySucceeded : CertificateEvidenceStage
+  interpretationProved : CertificateEvidenceStage
+  consumerClosed : CertificateEvidenceStage
+
 
 replayNotConsumerClosure : replaySucceeded ≡ consumerClosed → ⊥
 replayNotConsumerClosure ()

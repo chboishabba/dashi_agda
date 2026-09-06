@@ -20,21 +20,21 @@ import DASHI.Core.ReopenableHypothesisForestExact as Forest
 ------------------------------------------------------------------------
 
 data TechnicalIntersectionTarget : Set where
-  rezaMcCaslandAirForceAwardOrContract
-  rezaMcCaslandJointProgrammeDocument
-  rezaMcCaslandNamedPersonnelRoster
-  scorpiusSpaceNuclearSharedSupplierOrTechnologyTransfer
-  scorpiusSpaceNuclearSharedPersonnel
-  loureiroFusionSpaceSpecificLineage
-  jplPlanetarySharedMissionOrInstrument
-  jplPlanetarySharedPublicationOrProposal
-  : TechnicalIntersectionTarget
+  rezaMcCaslandAirForceAwardOrContract : TechnicalIntersectionTarget
+  rezaMcCaslandJointProgrammeDocument : TechnicalIntersectionTarget
+  rezaMcCaslandNamedPersonnelRoster : TechnicalIntersectionTarget
+  scorpiusSpaceNuclearSharedSupplierOrTechnologyTransfer : TechnicalIntersectionTarget
+  scorpiusSpaceNuclearSharedPersonnel : TechnicalIntersectionTarget
+  loureiroFusionSpaceSpecificLineage : TechnicalIntersectionTarget
+  jplPlanetarySharedMissionOrInstrument : TechnicalIntersectionTarget
+  jplPlanetarySharedPublicationOrProposal : TechnicalIntersectionTarget
+
 
 data TargetStatus : Set where
-  targetNotLocated
-  targetPresent
-  targetKnownAbsent
-  : TargetStatus
+  targetNotLocated : TargetStatus
+  targetPresent : TargetStatus
+  targetKnownAbsent : TargetStatus
+
 
 record TechnicalIntersectionAcquisition : Set where
   constructor technical-intersection-acquisition
@@ -123,11 +123,11 @@ planetarySharedPublicationAcquisition =
 ------------------------------------------------------------------------
 
 data TechnicalConnectionHypothesis : Set where
-  rezaMcCaslandTechnicalConnection
-  scorpiusSpaceNuclearTechnicalConnection
-  loureiroFusionSpaceSpecificConnection
-  hicksMaiwaldTechnicalConnection
-  : TechnicalConnectionHypothesis
+  rezaMcCaslandTechnicalConnection : TechnicalConnectionHypothesis
+  scorpiusSpaceNuclearTechnicalConnection : TechnicalConnectionHypothesis
+  loureiroFusionSpaceSpecificConnection : TechnicalConnectionHypothesis
+  hicksMaiwaldTechnicalConnection : TechnicalConnectionHypothesis
+
 
 technicalConnectionSemantics : Forest.HypothesisSemantics TechnicalConnectionHypothesis
 technicalConnectionSemantics =

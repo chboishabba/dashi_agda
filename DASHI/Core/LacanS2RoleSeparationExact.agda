@@ -24,9 +24,9 @@ import DASHI.Core.TernaryRoleCarrierExact as Ternary
 ------------------------------------------------------------------------
 
 data LacanS2Use : Set where
-  fregeGenesisSecond
-  discourseKnowledgeS2
-  : LacanS2Use
+  fregeGenesisSecond : LacanS2Use
+  discourseKnowledgeS2 : LacanS2Use
+
 
 fregeS2≠discourseS2 : fregeGenesisSecond ≡ discourseKnowledgeS2 → ⊥
 fregeS2≠discourseS2 ()

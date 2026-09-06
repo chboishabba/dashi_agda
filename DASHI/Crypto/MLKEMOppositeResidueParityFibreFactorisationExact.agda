@@ -30,8 +30,8 @@ open import Agda.Primitive using (Level; _⊔_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Algebra.Bundles using (CommutativeRing)
 open import Data.Product using (_×_; _,_)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym)
-open import Relation.Binary.PropositionalEquality.≡-Reasoning
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; module ≡-Reasoning)
+open ≡-Reasoning
 
 import DASHI.Crypto.MLKEMOppositeResidueParityDecompositionExact as Opp
 
@@ -52,6 +52,9 @@ module _ {c ℓ : Level} (R : CommutativeRing c ℓ) where
       ( Carrier to F
       ; _+_ to _⊕_
       ; -_ to neg
+      ; refl to ≈-refl
+      ; sym to ≈-sym
+      ; trans to ≈-trans
       )
 
   sameOppositePairForcesSameEven :

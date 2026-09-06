@@ -137,17 +137,17 @@ institutionThenMovementHasLengthTwo = refl
 ------------------------------------------------------------------------
 
 data TwoLegAdmittedPath : Set where
-  movementThenInstitutionTrace
-  institutionThenMovementTrace
-  : TwoLegAdmittedPath
+  movementThenInstitutionTrace : TwoLegAdmittedPath
+  institutionThenMovementTrace : TwoLegAdmittedPath
+
 
 data AdmissibilityTraceCode : Set where
   twoAdmittedLegs : AdmissibilityTraceCode
 
 data OrderedPathCode : Set where
-  movementBeforeInstitution
-  institutionBeforeMovement
-  : OrderedPathCode
+  movementBeforeInstitution : OrderedPathCode
+  institutionBeforeMovement : OrderedPathCode
+
 
 admissibilityTrace : TwoLegAdmittedPath → AdmissibilityTraceCode
 admissibilityTrace _ = twoAdmittedLegs
@@ -308,12 +308,12 @@ sameLengthCannotRecoverOrderedPath =
 ------------------------------------------------------------------------
 
 data PathProjectionLevel : Set where
-  endpointLevel futureConeLevel admissibilityTraceLevel pathLengthLevel orderedPathLevel
-  : PathProjectionLevel
+  endpointLevel futureConeLevel admissibilityTraceLevel pathLengthLevel orderedPathLevel : PathProjectionLevel
+
 
 data PathProjectionStrength : Set where
-  endpointCoarse futureConeCoarse traceCoarse lengthCoarse orderedPathFine
-  : PathProjectionStrength
+  endpointCoarse futureConeCoarse traceCoarse lengthCoarse orderedPathFine : PathProjectionStrength
+
 
 projectionStrength : PathProjectionLevel → PathProjectionStrength
 projectionStrength endpointLevel = endpointCoarse

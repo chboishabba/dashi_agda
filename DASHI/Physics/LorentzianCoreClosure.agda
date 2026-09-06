@@ -5,7 +5,7 @@ open import Agda.Builtin.Nat using (Nat)
 
 open import Data.Vec using (Vec)
 open import Data.Product using (_×_; _,_)
-open import Data.Integer using (ℤ; +_; -[1+_])
+open import Data.Integer using (ℤ; +_; -[1+_]; _*_)
 
 open import DASHI.Algebra.Trit using (Trit)
 open import DASHI.Physics.CanonicalizationMinimal as CM

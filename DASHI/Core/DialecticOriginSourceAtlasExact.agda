@@ -26,20 +26,20 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data OriginPhase : Set where
-  visualRecursiveSplit
-  falseBinaryStateSpace
-  metaPositionPowerUp
-  higherOrderOdds
-  recursiveObserver
-  nonlinearThresholdGeometry
-  probabilityDensityRhizome
-  padicHierarchicalRefinement
-  dialecticalRemainder
-  relationalEpistemology
-  ethicalProcessArchitecture
-  operationalStateTensor
-  generalizedDashiAbstraction
-  : OriginPhase
+  visualRecursiveSplit : OriginPhase
+  falseBinaryStateSpace : OriginPhase
+  metaPositionPowerUp : OriginPhase
+  higherOrderOdds : OriginPhase
+  recursiveObserver : OriginPhase
+  nonlinearThresholdGeometry : OriginPhase
+  probabilityDensityRhizome : OriginPhase
+  padicHierarchicalRefinement : OriginPhase
+  dialecticalRemainder : OriginPhase
+  relationalEpistemology : OriginPhase
+  ethicalProcessArchitecture : OriginPhase
+  operationalStateTensor : OriginPhase
+  generalizedDashiAbstraction : OriginPhase
+
 
 record OriginSourceEntry : Set where
   constructor origin-source-entry

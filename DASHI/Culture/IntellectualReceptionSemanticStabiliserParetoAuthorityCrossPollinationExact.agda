@@ -27,11 +27,11 @@ import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact as Spect
 ------------------------------------------------------------------------
 
 data GeometricGenerator : Set where
-  identityGenerator
-  comparisonFlipXGenerator
-  swapXYGenerator
-  rotateXYZGenerator
-  : GeometricGenerator
+  identityGenerator : GeometricGenerator
+  comparisonFlipXGenerator : GeometricGenerator
+  swapXYGenerator : GeometricGenerator
+  rotateXYZGenerator : GeometricGenerator
+
 
 applyGeometricGenerator :
   GeometricGenerator →

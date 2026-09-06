@@ -30,7 +30,8 @@ module DASHI.Crypto.MLKEMNTTLocalOutcomeBudgetExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Nat using (Nat; zero; suc; _+_; _≤_; z≤n; s≤s)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat using (_+_; _*_; _≤_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
 
 ------------------------------------------------------------------------
@@ -38,11 +39,7 @@ import Data.Nat.Properties as NatP
 ------------------------------------------------------------------------
 
 data LocalResidueOutcome : Set where
-  inactiveRegular
-  inactiveSingular
-  activeSurvivesRegular
-  activeSurvivesSingular
-  activeKilledSingular : LocalResidueOutcome
+  inactiveRegular inactiveSingular activeSurvivesRegular activeSurvivesSingular activeKilledSingular : LocalResidueOutcome
 
 activeWeight : LocalResidueOutcome → Nat
 activeWeight inactiveRegular = 0

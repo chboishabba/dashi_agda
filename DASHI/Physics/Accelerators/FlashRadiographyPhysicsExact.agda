@@ -8,16 +8,15 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data FlashRadiographyStage : Set where
-  pulsedPower
-  electronInjection
-  inductionAcceleration
-  beamTransport
-  xRayConversion
-  objectTransmission
-  detectorResponse
-  imageReconstruction
-  physicalInference
-  : FlashRadiographyStage
+  pulsedPower : FlashRadiographyStage
+  electronInjection : FlashRadiographyStage
+  inductionAcceleration : FlashRadiographyStage
+  beamTransport : FlashRadiographyStage
+  xRayConversion : FlashRadiographyStage
+  objectTransmission : FlashRadiographyStage
+  detectorResponse : FlashRadiographyStage
+  imageReconstruction : FlashRadiographyStage
+  physicalInference : FlashRadiographyStage
 
 record BeamToImageChain : Set where
   constructor beam-to-image-chain
@@ -77,6 +76,8 @@ record FlashRadiographyBoundary : Set where
     sameImageMeansUniqueHydrodynamicState : Bool
     sameImageMeansUniqueHydrodynamicStateIsFalse : sameImageMeansUniqueHydrodynamicState ≡ false
 
+open FlashRadiographyBoundary public
+
 canonicalFlashRadiographyBoundary : FlashRadiographyBoundary
 canonicalFlashRadiographyBoundary = flash-radiography-boundary
   false refl
@@ -86,11 +87,10 @@ canonicalFlashRadiographyBoundary = flash-radiography-boundary
   false refl
 
 data FlashRadiographyReverseTarget : Set where
-  needBeamPhaseSpace
-  needConverterResponse
-  needDetectorCalibration
-  needScatterModel
-  needGeometryCalibration
-  needInverseModel
-  needUncertaintyPropagation
-  : FlashRadiographyReverseTarget
+  needBeamPhaseSpace : FlashRadiographyReverseTarget
+  needConverterResponse : FlashRadiographyReverseTarget
+  needDetectorCalibration : FlashRadiographyReverseTarget
+  needScatterModel : FlashRadiographyReverseTarget
+  needGeometryCalibration : FlashRadiographyReverseTarget
+  needInverseModel : FlashRadiographyReverseTarget
+  needUncertaintyPropagation : FlashRadiographyReverseTarget

@@ -92,11 +92,11 @@ spectroscopyReplacement = C.scientific-criticality-reverse-obligation
 ------------------------------------------------------------------------
 
 data ScienceDrivenPriority : Set where
-  highest
-  high
-  medium
-  control
-  : ScienceDrivenPriority
+  highest : ScienceDrivenPriority
+  high : ScienceDrivenPriority
+  medium : ScienceDrivenPriority
+  control : ScienceDrivenPriority
+
 
 record PrioritisedAcquisition : Set where
   constructor prioritised-acquisition

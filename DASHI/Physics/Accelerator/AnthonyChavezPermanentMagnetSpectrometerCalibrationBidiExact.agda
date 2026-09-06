@@ -54,6 +54,8 @@ record SpectrometerCalibrationBoundary : Set where
     calibrationAtOneConfigurationAutomaticallyTransfersToAllConfigurationsIsFalse :
       calibrationAtOneConfigurationAutomaticallyTransfersToAllConfigurations ≡ false
 
+open SpectrometerCalibrationBoundary public
+
 canonicalSpectrometerCalibrationBoundary : SpectrometerCalibrationBoundary
 canonicalSpectrometerCalibrationBoundary =
   spectrometer-calibration-boundary false refl false refl true refl false refl

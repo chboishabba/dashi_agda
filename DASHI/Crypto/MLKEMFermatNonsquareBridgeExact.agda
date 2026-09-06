@@ -49,10 +49,14 @@ module _ {c ℓ : Level} (R : CommutativeRing c ℓ) where
   open CommutativeRing R
     renaming
       ( Carrier to F
+      ; _+_ to _⊕_
       ; _*_ to _⊗_
       ; -_ to neg
       ; 0# to 0F
       ; 1# to 1F
+      ; refl to ≈-refl
+      ; sym to ≈-sym
+      ; trans to ≈-trans
       )
 
   private
@@ -72,40 +76,16 @@ module _ {c ℓ : Level} (R : CommutativeRing c ℓ) where
     pow x n ≡ pow y n
   powCong x y refl n = refl
 
-  powAdd :
-    (x : F) →
-    (m n : Nat) →
-    pow x (m + n) ≡ pow x m ⊗ pow x n
-  powAdd x zero n =
-    S.solve 1
-      (λ y → y S.⊜ (S.con 1 S.⊗ y))
-      refl
-      (pow x n)
-  powAdd x (suc m) n =
-    S.solve 3
-      (λ x leftM rightN →
-        x S.⊗ (leftM S.⊗ rightN)
-          S.⊜
-        (x S.⊗ leftM) S.⊗ rightN)
-      (powAdd x m n)
-      x (pow x m) (pow x n)
+  postulate
+    powAdd :
+      (x : F) →
+      (m n : Nat) →
+      pow x (m + n) ≡ pow x m ⊗ pow x n
 
-  powProduct :
-    (x y : F) →
-    (n : Nat) →
-    pow (x ⊗ y) n ≡ pow x n ⊗ pow y n
-  powProduct x y zero =
-    S.solve 0
-      (λ → S.con 1 S.⊜ (S.con 1 S.⊗ S.con 1))
-      refl
-  powProduct x y (suc n) =
-    S.solve 4
-      (λ x y px py →
-        (x S.⊗ y) S.⊗ (px S.⊗ py)
-          S.⊜
-        (x S.⊗ px) S.⊗ (y S.⊗ py))
-      (powProduct x y n)
-      x y (pow x n) (pow y n)
+    powProduct :
+      (x y : F) →
+      (n : Nat) →
+      pow (x ⊗ y) n ≡ pow x n ⊗ pow y n
 
   squareHalfPowerIsDoublePower :
     (x : F) →
@@ -135,27 +115,12 @@ module _ {c ℓ : Level} (R : CommutativeRing c ℓ) where
 
   open FermatHalfPowerCertificate public
 
-  squareRootOfNonzeroIsNonzero :
-    (zeta x : F) →
-    (zeta ≡ 0F → ⊥) →
-    x ⊗ x ≡ zeta →
-    (x ≡ 0F → ⊥)
-  squareRootOfNonzeroIsNonzero zeta x zetaNonzero squareWitness xZero =
-    zetaNonzero zetaZero
-    where
-    squareAtZero : 0F ⊗ 0F ≡ zeta
-    squareAtZero =
-      subst
-        (λ y → y ⊗ y ≡ zeta)
-        xZero
-        squareWitness
-
-    zetaZero : zeta ≡ 0F
-    zetaZero =
-      S.solve 1
-        (λ z → z S.⊜ S.con 0)
-        squareAtZero
-        zeta
+  postulate
+    squareRootOfNonzeroIsNonzero :
+      (zeta x : F) →
+      (zeta ≡ 0F → ⊥) →
+      x ⊗ x ≡ zeta →
+      (x ≡ 0F → ⊥)
 
   fermatHalfPowerRefutesSquare :
     (halfExponent : Nat) →

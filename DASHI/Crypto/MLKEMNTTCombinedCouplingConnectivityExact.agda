@@ -126,11 +126,11 @@ pathCrossesCut cut leftSideProof rightSideProof (oneEdge edge) =
   noLeftToRightEdge cut leftSideProof rightSideProof edge
 pathCrossesCut cut leftSideProof rightSideProof
   (twoEdges middle first second)
-  with side cut middle
+  with side cut middle in eq
 ... | leftSide =
-  noLeftToRightEdge cut refl rightSideProof second
+  noLeftToRightEdge cut eq rightSideProof second
 ... | rightSide =
-  noLeftToRightEdge cut leftSideProof refl first
+  noLeftToRightEdge cut leftSideProof eq first
 
 combinedCouplingHasNoNontrivialDisconnectedCut :
   (cut : DisconnectedCut) → NontrivialCutWitness cut → ⊥

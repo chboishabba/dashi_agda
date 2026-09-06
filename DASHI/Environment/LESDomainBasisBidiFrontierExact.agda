@@ -1,6 +1,7 @@
 module DASHI.Environment.LESDomainBasisBidiFrontierExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 
 import DASHI.Chemistry.TransitionKernel as Chemistry
 import DASHI.Chemistry.ExistingContentBridge as ChemistryReuse
@@ -65,23 +66,21 @@ ConservationCarrier = Conservation.ConservationBundle
 ------------------------------------------------------------------------
 
 data ProducerStrength : Set where
-  vocabularyOnly
-  relationalGrammar
-  transitionGrammar
-  transportConservationGrammar
-  quantitativeLawSurface
-  empiricalMechanisticModel
-  : ProducerStrength
+  vocabularyOnly : ProducerStrength
+  relationalGrammar : ProducerStrength
+  transitionGrammar : ProducerStrength
+  transportConservationGrammar : ProducerStrength
+  quantitativeLawSurface : ProducerStrength
+  empiricalMechanisticModel : ProducerStrength
 
 data EnvironmentalDomain : Set where
-  chemistry
-  plantEcology
-  fungalEcology
-  trophicEcology
-  hydrologyTransport
-  soilBiogeochemistry
-  geologyGeomorphology
-  : EnvironmentalDomain
+  chemistry : EnvironmentalDomain
+  plantEcology : EnvironmentalDomain
+  fungalEcology : EnvironmentalDomain
+  trophicEcology : EnvironmentalDomain
+  hydrologyTransport : EnvironmentalDomain
+  soilBiogeochemistry : EnvironmentalDomain
+  geologyGeomorphology : EnvironmentalDomain
 
 record ForwardDomainBasis : Set₁ where
   constructor forwardDomainBasis
@@ -278,6 +277,8 @@ record LESDomainBasisBoundary : Set where
     productOfDomainCarriersProvesCrossDomainCausality : Bool
     productOfDomainCarriersProvesCrossDomainCausalityIsFalse :
       productOfDomainCarriersProvesCrossDomainCausality ≡ false
+
+open LESDomainBasisBoundary public
 
 canonicalLESDomainBasisBoundary : LESDomainBasisBoundary
 canonicalLESDomainBasisBoundary =

@@ -18,6 +18,7 @@ module DASHI.Crypto.MLWEKeyStateResidualExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 record NoisyLinearKeyState : Set₁ where
   constructor noisyLinearKeyState
@@ -36,8 +37,8 @@ open NoisyLinearKeyState public
 CandidatePlausible :
   (state : NoisyLinearKeyState) →
   Public state → Secret state → Set
-CandidatePlausible state public candidate =
-  Small state (candidateResidual state public candidate)
+CandidatePlausible state pub candidate =
+  Small state (candidateResidual state pub candidate)
 
 trueSecretPassesResidualTest :
   ∀ {state : NoisyLinearKeyState}
@@ -46,8 +47,7 @@ trueSecretPassesResidualTest :
   Small state error →
   CandidatePlausible state (publish state secret error) secret
 trueSecretPassesResidualTest {state} {secret} {error} small =
-  let open import Relation.Binary.PropositionalEquality using (subst; sym)
-  in subst (Small state) (sym (correctResidual state secret error)) small
+  subst (Small state) (sym (correctResidual state secret error)) small
 
 ------------------------------------------------------------------------
 -- Search remains separate from testing.
@@ -58,19 +58,19 @@ record CandidateSearch (state : NoisyLinearKeyState) : Set₁ where
   field
     search : Public state → Secret state
     searchAlwaysPlausible :
-      ∀ public → CandidatePlausible state public (search public)
+      ∀ pub → CandidatePlausible state pub (search pub)
 
 open CandidateSearch public
 
 record UniqueResidualIdentification (state : NoisyLinearKeyState) : Set₁ where
   constructor uniqueResidualIdentification
   field
-    public : Public state
+    pub : Public state
     intendedSecret : Secret state
-    intendedPlausible : CandidatePlausible state public intendedSecret
+    intendedPlausible : CandidatePlausible state pub intendedSecret
     uniqueness :
       ∀ candidate →
-      CandidatePlausible state public candidate →
+      CandidatePlausible state pub candidate →
       candidate ≡ intendedSecret
 
 open UniqueResidualIdentification public

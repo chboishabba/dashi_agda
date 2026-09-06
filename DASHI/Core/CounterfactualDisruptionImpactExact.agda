@@ -13,21 +13,21 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ImpactAxis : Set where
-  milestoneDelay
-  replacementLatency
-  uniqueQualificationLoss
-  knowledgeTransferGap
-  programmeReorganisation
-  fundingOrContractShift
-  technicalPerformanceLoss
-  noMeasuredImpact
-  : ImpactAxis
+  milestoneDelay : ImpactAxis
+  replacementLatency : ImpactAxis
+  uniqueQualificationLoss : ImpactAxis
+  knowledgeTransferGap : ImpactAxis
+  programmeReorganisation : ImpactAxis
+  fundingOrContractShift : ImpactAxis
+  technicalPerformanceLoss : ImpactAxis
+  noMeasuredImpact : ImpactAxis
+
 
 data ImpactStatus : Set where
-  impactPresent
-  impactNotLocated
-  impactKnownAbsent
-  : ImpactStatus
+  impactPresent : ImpactStatus
+  impactNotLocated : ImpactStatus
+  impactKnownAbsent : ImpactStatus
+
 
 record DepartureImpactProfile : Set where
   constructor departure-impact-profile

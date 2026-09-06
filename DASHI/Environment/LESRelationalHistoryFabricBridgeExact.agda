@@ -35,8 +35,10 @@ data GateCode : Set where
   rapidTransitionGate stagedTransitionGate : GateCode
 
 data ReachableCode : Set where
-  rapidIsolatedReachable rapidRelatedReachable
-  stagedIsolatedReachable stagedRelatedReachable : ReachableCode
+  rapidIsolatedReachable : ReachableCode
+  rapidRelatedReachable : ReachableCode
+  stagedIsolatedReachable : ReachableCode
+  stagedRelatedReachable : ReachableCode
 
 data AffordanceCode : Set where
   isolatedAffordance relatedAffordance : AffordanceCode
@@ -205,6 +207,8 @@ record LESRelationalHistoryFabricBoundary : Set where
     privateCaseFactsEncoded : Bool
     privateCaseFactsEncodedIsFalse :
       privateCaseFactsEncoded ≡ false
+
+open LESRelationalHistoryFabricBoundary public
 
 canonicalLESRelationalHistoryFabricBoundary :
   LESRelationalHistoryFabricBoundary

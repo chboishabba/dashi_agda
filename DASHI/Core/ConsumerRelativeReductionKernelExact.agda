@@ -11,12 +11,7 @@ open import DASHI.Core.Prelude
 -- symmetry on applications which do not possess one.
 ------------------------------------------------------------------------
 
-run :
-  ∀ {State Action : Set} →
-  (Action → State → State) →
-  List Action → State → State
-run step [] state = state
-run step (action ∷ rest) state = run step rest (step action state)
+open import DASHI.Core.GenericFuturePartitionRefinementExact using (run) public
 
 record ConsumerRelativeReduction
     (Fine Action Observation : Set) : Set₁ where
@@ -183,8 +178,6 @@ record MeasurementDiscriminator
     currentlyCollapsed : encode rom left ≡ encode rom right
     measurementSeparates : measure left ≡ measure right → ⊥
 
-open MeasurementDiscriminator public
-
 record EvidenceRefinement (Fine : Set) : Set₁ where
   constructor evidenceRefinement
   field
@@ -197,6 +190,7 @@ record EvidenceRefinement (Fine : Set) : Set₁ where
   RefinedEvidence state = OldEvidence state × (measure state ≡ observed)
 
 open EvidenceRefinement public
+open MeasurementDiscriminator public
 
 refinedEvidenceDescendsToOldEvidence :
   ∀ {Fine} (refinement : EvidenceRefinement Fine) {state} →

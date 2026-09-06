@@ -3,8 +3,8 @@ module DASHI.Physics.SpinDoubleCoverCompletion where
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Sum using (_⊎_)
 
-open import DASHI.Physics.SpinAssumptions as SA
-open import DASHI.Physics.CliffordRepresentationCompletion as CRC
+import DASHI.Physics.SpinAssumptions as SA
+import DASHI.Physics.CliffordRepresentationCompletion as CRC
 
 ------------------------------------------------------------------------
 -- Realization of Spin as a genuine double cover, with explicit fibres.

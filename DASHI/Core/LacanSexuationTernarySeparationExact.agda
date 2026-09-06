@@ -27,21 +27,21 @@ import DASHI.Core.TernaryRoleCarrierExact as Ternary
 ------------------------------------------------------------------------
 
 data SexuationFormulaRole : Set where
-  masculineUniversalPhallicFunction
-  masculineExceptionToPhallicFunction
-  feminineNotAllPhallicFunction
-  feminineNoExceptionTerm
-  : SexuationFormulaRole
+  masculineUniversalPhallicFunction : SexuationFormulaRole
+  masculineExceptionToPhallicFunction : SexuationFormulaRole
+  feminineNotAllPhallicFunction : SexuationFormulaRole
+  feminineNoExceptionTerm : SexuationFormulaRole
+
 
 ------------------------------------------------------------------------
 -- Ternary count and sexuation are distinct source/formal surfaces.
 ------------------------------------------------------------------------
 
 data LacanFormalSurface : Set where
-  fregeDerivedCountSurface
-  discourseS1S2Surface
-  sexuationFormulaSurface
-  : LacanFormalSurface
+  fregeDerivedCountSurface : LacanFormalSurface
+  discourseS1S2Surface : LacanFormalSurface
+  sexuationFormulaSurface : LacanFormalSurface
+
 
 fregeCount≠sexuation : fregeDerivedCountSurface ≡ sexuationFormulaSurface → ⊥
 fregeCount≠sexuation ()

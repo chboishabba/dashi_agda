@@ -7,6 +7,7 @@ import DASHI.Core.PredictionEnvelopeExact as Prediction
 import DASHI.Core.RequiredAxisSupportSquareExact as Support
 import DASHI.Culture.KimmererTwoEyedSeeingInterpretationBoundaryExact as Kimmerer
 import DASHI.Culture.ProvenancePreservingCulturalHyperfabric as Cultural
+open Cultural
 import DASHI.Environment.LESRelationalHistoryFabricBridgeExact as LESFabric
 import DASHI.Governance.JusticeRequiredAxisEvidenceExact as JusticeEvidence
 import DASHI.Governance.RecognitionDistributionRepresentationAxesExact as Fraser
@@ -173,22 +174,22 @@ data LESBase : Set where
 lesCulturalHyperfabric : Cultural.CulturalHyperfabric
 lesCulturalHyperfabric =
   record
-    { Cultural.Base = LESBase
-    ; Cultural.Point = λ _ → SituatedEnvironmentalState
-    ; Cultural.Memory = λ _ _ → Kimmerer.KnowledgeHistory
-    ; Cultural.Practice = λ _ _ → Fraser.Recognition
-    ; Cultural.Relation = λ _ _ → Fraser.Representation
-    ; Cultural.Knowledge = λ _ _ → Kimmerer.Provenance
-    ; Cultural.MaterialRelation = λ _ _ → Fraser.Distribution
-    ; Cultural.Provenance = λ _ _ → Kimmerer.Provenance
+    { Base = LESBase
+    ; Point = λ _ → SituatedEnvironmentalState
+    ; Memory = λ _ _ → Kimmerer.KnowledgeHistory
+    ; Practice = λ _ _ → Fraser.Recognition
+    ; Relation = λ _ _ → Fraser.Representation
+    ; Knowledge = λ _ _ → Kimmerer.Provenance
+    ; MaterialRelation = λ _ _ → Fraser.Distribution
+    ; Provenance = λ _ _ → Kimmerer.Provenance
     }
 
 lesPublicEcologicalProjection :
   Cultural.PublicProjection lesCulturalHyperfabric
 lesPublicEcologicalProjection =
   record
-    { Cultural.Surface = Kimmerer.SharedEcologicalObservation
-    ; Cultural.project = λ _ state → coarseEcologicalObservation state
+    { Surface = Kimmerer.SharedEcologicalObservation
+    ; project = λ _ state → coarseEcologicalObservation state
     }
 
 lesPublicProjectionDoesNotBecomeGlobalIdentity :
@@ -202,10 +203,10 @@ lesProjectionWithPlanningResidual :
     lesCulturalHyperfabric lesPublicEcologicalProjection
 lesProjectionWithPlanningResidual =
   record
-    { Cultural.Residual = PlanningDistinction
-    ; Cultural.residual = λ _ state → planningDistinction state
-    ; Cultural.ReopeningEvidence = ⊤
-    ; Cultural.reopeningEvidence = λ _ _ → tt
+    { Residual = PlanningDistinction
+    ; residual = λ _ state → planningDistinction state
+    ; ReopeningEvidence = ⊤
+    ; reopeningEvidence = λ _ _ → tt
     }
 
 ------------------------------------------------------------------------
@@ -230,6 +231,9 @@ fullPlanningEvidenceHasUniqueEnvelope :
     planningEvidenceCompatible planningDistinction evidence
 fullPlanningEvidenceHasUniqueEnvelope evidence =
   Prediction.pointIdentifiableImpliesEnvelopeUnique
+    {compatible = planningEvidenceCompatible}
+    {consumer = planningDistinction}
+    {evidence = evidence}
     (fullPlanningEvidenceIsPointIdentifying evidence)
 
 coarseCompatible :
@@ -244,13 +248,13 @@ coarseObservationIsNotPointIdentifying :
     planningDistinction
     Kimmerer.convergentObservation →
   ⊥
-coarseObservationIsNotPointIdentifying identifiable =
-  (λ ())
-    (identifiable
-      indigenousLowDistribution
-      scientificLowDistribution
-      refl
-      refl)
+coarseObservationIsNotPointIdentifying identifiable with
+  identifiable
+    indigenousLowDistribution
+    scientificLowDistribution
+    refl
+    refl
+... | ()
 
 ------------------------------------------------------------------------
 -- Full LES product: ecological history/relation fabric × provenance/justice.
@@ -382,6 +386,9 @@ fullLESEvidenceHasUniqueEnvelope :
     fullEvidenceCompatible fullPlanningSignature evidence
 fullLESEvidenceHasUniqueEnvelope evidence =
   Prediction.pointIdentifiableImpliesEnvelopeUnique
+    {compatible = fullEvidenceCompatible}
+    {consumer = fullPlanningSignature}
+    {evidence = evidence}
     (fullLESEvidenceIsPointIdentifying evidence)
 
 ------------------------------------------------------------------------
@@ -467,6 +474,8 @@ record LESSituatedSocioEcologicalBoundary : Set where
     finiteSpecimenIsEmpiricalEnvironmentalModel : Bool
     finiteSpecimenIsEmpiricalEnvironmentalModelIsFalse :
       finiteSpecimenIsEmpiricalEnvironmentalModel ≡ false
+
+open LESSituatedSocioEcologicalBoundary public
 
 canonicalLESSituatedSocioEcologicalBoundary :
   LESSituatedSocioEcologicalBoundary

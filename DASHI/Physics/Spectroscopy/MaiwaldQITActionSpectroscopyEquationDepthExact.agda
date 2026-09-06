@@ -9,17 +9,16 @@ open import Agda.Builtin.String using (String)
 -- mapped to photodissociation yield, not directly to absorption by definition.
 
 data QITCoordinate : Set where
-  rfAmplitude
-  dcAmplitude
-  driveFrequency
-  trapRadius
-  ionCharge
-  ionMass
-  mathieuA
-  mathieuQ
-  secularMotion
-  micromotion
-  : QITCoordinate
+  rfAmplitude : QITCoordinate
+  dcAmplitude : QITCoordinate
+  driveFrequency : QITCoordinate
+  trapRadius : QITCoordinate
+  ionCharge : QITCoordinate
+  ionMass : QITCoordinate
+  mathieuA : QITCoordinate
+  mathieuQ : QITCoordinate
+  secularMotion : QITCoordinate
+  micromotion : QITCoordinate
 
 record MathieuOperatingPoint : Set where
   constructor mathieu-operating-point
@@ -100,17 +99,18 @@ record MaiwaldEquationDepthBoundary : Set where
     QITAndActionSpectroscopyMayProvideComplementaryChannels : Bool
     QITAndActionSpectroscopyMayProvideComplementaryChannelsIsTrue : QITAndActionSpectroscopyMayProvideComplementaryChannels ≡ true
 
+open MaiwaldEquationDepthBoundary public
+
 canonicalMaiwaldEquationDepthBoundary : MaiwaldEquationDepthBoundary
 canonicalMaiwaldEquationDepthBoundary = maiwald-equation-depth-boundary false refl false refl false refl false refl true refl
 
 data MaiwaldReverseTarget : Set where
-  acquireTrapGeometry
-  acquireRFDCOperatingPoint
-  acquireMathieuStabilityRegion
-  acquireMassCalibration
-  acquireImpactFragmentationModel
-  acquireLaserCalibration
-  acquireTagDissociationResponse
-  acquireReferenceActionSpectrum
-  acquireOrthogonalMassChannel
-  : MaiwaldReverseTarget
+  acquireTrapGeometry : MaiwaldReverseTarget
+  acquireRFDCOperatingPoint : MaiwaldReverseTarget
+  acquireMathieuStabilityRegion : MaiwaldReverseTarget
+  acquireMassCalibration : MaiwaldReverseTarget
+  acquireImpactFragmentationModel : MaiwaldReverseTarget
+  acquireLaserCalibration : MaiwaldReverseTarget
+  acquireTagDissociationResponse : MaiwaldReverseTarget
+  acquireReferenceActionSpectrum : MaiwaldReverseTarget
+  acquireOrthogonalMassChannel : MaiwaldReverseTarget

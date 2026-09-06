@@ -11,26 +11,26 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data DisruptionBenefitKind : Set where
-  delaysCompetingCapability
-  removesTacitKnowledge
-  removesIntegrationKnowledge
-  reducesKeyPersonRedundancy
-  increasesProgrammeFriction
-  shiftsFundingOrContractPosition
-  preservesIncumbentEconomicRent
-  strategicDenialBenefit
-  unresolvedBenefit
-  : DisruptionBenefitKind
+  delaysCompetingCapability : DisruptionBenefitKind
+  removesTacitKnowledge : DisruptionBenefitKind
+  removesIntegrationKnowledge : DisruptionBenefitKind
+  reducesKeyPersonRedundancy : DisruptionBenefitKind
+  increasesProgrammeFriction : DisruptionBenefitKind
+  shiftsFundingOrContractPosition : DisruptionBenefitKind
+  preservesIncumbentEconomicRent : DisruptionBenefitKind
+  strategicDenialBenefit : DisruptionBenefitKind
+  unresolvedBenefit : DisruptionBenefitKind
+
 
 data KnowledgeValueAxis : Set where
-  publishedKnowledge
-  tacitImplementationKnowledge
-  failureModeKnowledge
-  configurationKnowledge
-  programmeIntegrationKnowledge
-  technicalNetworkKnowledge
-  lowReplaceabilityKnowledge
-  : KnowledgeValueAxis
+  publishedKnowledge : KnowledgeValueAxis
+  tacitImplementationKnowledge : KnowledgeValueAxis
+  failureModeKnowledge : KnowledgeValueAxis
+  configurationKnowledge : KnowledgeValueAxis
+  programmeIntegrationKnowledge : KnowledgeValueAxis
+  technicalNetworkKnowledge : KnowledgeValueAxis
+  lowReplaceabilityKnowledge : KnowledgeValueAxis
+
 
 record CapabilityValueProfile : Set where
   constructor capability-value-profile
@@ -59,10 +59,10 @@ open DisruptionBeneficiaryHypothesis public
 ------------------------------------------------------------------------
 
 data PrecedentStrength : Set where
-  sourceBackedHistoricalPrecedent
-  boundedAnalogyOnly
-  unresolvedPrecedent
-  : PrecedentStrength
+  sourceBackedHistoricalPrecedent : PrecedentStrength
+  boundedAnalogyOnly : PrecedentStrength
+  unresolvedPrecedent : PrecedentStrength
+
 
 record MultidisciplinaryDisruptionPrecedent : Set where
   constructor multidisciplinary-disruption-precedent
@@ -82,14 +82,14 @@ open MultidisciplinaryDisruptionPrecedent public
 ------------------------------------------------------------------------
 
 data EnergyTransitionRelevance : Set where
-  directFusionPower
-  directFissionPower
-  electrificationEnabling
-  industrialHeatOrHydrogenEnabling
-  propulsionOnly
-  weakOrIndirectEnergyRelevance
-  noEstablishedEnergyRelevance
-  : EnergyTransitionRelevance
+  directFusionPower : EnergyTransitionRelevance
+  directFissionPower : EnergyTransitionRelevance
+  electrificationEnabling : EnergyTransitionRelevance
+  industrialHeatOrHydrogenEnabling : EnergyTransitionRelevance
+  propulsionOnly : EnergyTransitionRelevance
+  weakOrIndirectEnergyRelevance : EnergyTransitionRelevance
+  noEstablishedEnergyRelevance : EnergyTransitionRelevance
+
 
 record EnergyTransitionProfile : Set where
   constructor energy-transition-profile

@@ -16,14 +16,14 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data TechnicalNodeKind : Set where
-  personNode
-  technologyNode
-  programmeNode
-  institutionNode
-  fundingOrContractNode
-  publicationOrPatentNode
-  facilityNode
-  : TechnicalNodeKind
+  personNode : TechnicalNodeKind
+  technologyNode : TechnicalNodeKind
+  programmeNode : TechnicalNodeKind
+  institutionNode : TechnicalNodeKind
+  fundingOrContractNode : TechnicalNodeKind
+  publicationOrPatentNode : TechnicalNodeKind
+  facilityNode : TechnicalNodeKind
+
 
 record TechnicalNode : Set where
   constructor technical-node
@@ -34,29 +34,29 @@ record TechnicalNode : Set where
 open TechnicalNode public
 
 data TechnicalEdgeKind : Set where
-  workedOn
-  authoredOrInvented
-  ledOrDirected
-  programmeUsesTechnology
-  programmeHostedAtFacility
-  institutionRunsProgramme
-  programmeFundedBy
-  documentedTechnologyDomainBridge
-  sameInstitutionOnly
-  sameInstitutionalFamilyOnly
-  mediaAssociatedOnly
-  reportedRelationshipOnly
-  domainSimilarityOnly
-  : TechnicalEdgeKind
+  workedOn : TechnicalEdgeKind
+  authoredOrInvented : TechnicalEdgeKind
+  ledOrDirected : TechnicalEdgeKind
+  programmeUsesTechnology : TechnicalEdgeKind
+  programmeHostedAtFacility : TechnicalEdgeKind
+  institutionRunsProgramme : TechnicalEdgeKind
+  programmeFundedBy : TechnicalEdgeKind
+  documentedTechnologyDomainBridge : TechnicalEdgeKind
+  sameInstitutionOnly : TechnicalEdgeKind
+  sameInstitutionalFamilyOnly : TechnicalEdgeKind
+  mediaAssociatedOnly : TechnicalEdgeKind
+  reportedRelationshipOnly : TechnicalEdgeKind
+  domainSimilarityOnly : TechnicalEdgeKind
+
 
 data EdgeStrength : Set where
-  primaryTechnicalReceipt
-  primaryRoleReceipt
-  officialProgrammeReceipt
-  boundedSecondaryReceipt
-  mediaNarrativeReceipt
-  unresolvedReceipt
-  : EdgeStrength
+  primaryTechnicalReceipt : EdgeStrength
+  primaryRoleReceipt : EdgeStrength
+  officialProgrammeReceipt : EdgeStrength
+  boundedSecondaryReceipt : EdgeStrength
+  mediaNarrativeReceipt : EdgeStrength
+  unresolvedReceipt : EdgeStrength
+
 
 record TechnicalHyperedge : Set where
   constructor technical-hyperedge
@@ -80,12 +80,12 @@ open TechnicalHyperedge public
 ------------------------------------------------------------------------
 
 data QuotientDisposition : Set where
-  survivesTechnicalQuotient
-  erasedAsInstitutionOnly
-  erasedAsMediaOnly
-  erasedAsReportedRelationshipOnly
-  retainedAsUnresolvedCandidate
-  : QuotientDisposition
+  survivesTechnicalQuotient : QuotientDisposition
+  erasedAsInstitutionOnly : QuotientDisposition
+  erasedAsMediaOnly : QuotientDisposition
+  erasedAsReportedRelationshipOnly : QuotientDisposition
+  retainedAsUnresolvedCandidate : QuotientDisposition
+
 
 quotientDisposition : TechnicalHyperedge → QuotientDisposition
 quotientDisposition edge with edgeKind edge

@@ -4,6 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 open import Data.Vec using (Vec; []; _∷_)
+open import Data.Product using (_,_)
 open import Data.Integer using (ℤ; +_; -[1+_])
 
 open import DASHI.Algebra.Trit using (Trit; zer; pos)
@@ -16,20 +17,21 @@ open import DASHI.Physics.SignatureFromMask as SFM
 -- Integer order is kept as an explicit assumption seam so this module does
 -- not depend on stdlib-version-specific order constructor names.
 
+infix 4 _<ℤ_
 postulate
   _<ℤ_ : ℤ → ℤ → Set
 
 Negative :
   ∀ {m : Nat} → Vec IMQ.Sign m → Vec Trit m → Set
-Negative σ x = IMQ.Qσ σ x <ℤ + 0
+Negative σ x = IMQ.Qσ σ x <ℤ (+ 0)
 
 Null :
   ∀ {m : Nat} → Vec IMQ.Sign m → Vec Trit m → Set
-Null σ x = IMQ.Qσ σ x ≡ + 0
+Null σ x = IMQ.Qσ σ x ≡ (+ 0)
 
 Positive :
   ∀ {m : Nat} → Vec IMQ.Sign m → Vec Trit m → Set
-Positive σ x = + 0 <ℤ IMQ.Qσ σ x
+Positive σ x = (+ 0) <ℤ IMQ.Qσ σ x
 
 Orthogonal :
   ∀ {m : Nat} → Vec IMQ.Sign m → Vec Trit m → Vec Trit m → Set
@@ -108,8 +110,8 @@ record IndefiniteWitness {m : Nat} (σ : Vec IMQ.Sign m) : Set where
     positiveValue  : Positive σ positiveVector
 
 postulate
-  minusOne<zero : -[1+ 0 ] <ℤ + 0
-  zero<plusOne : + 0 <ℤ + 1
+  minusOne<zero : -[1+ 0 ] <ℤ (+ 0)
+  zero<plusOne : (+ 0) <ℤ (+ 1)
 
 lorentzIndefinite : IndefiniteWitness lorentzMask
 lorentzIndefinite =

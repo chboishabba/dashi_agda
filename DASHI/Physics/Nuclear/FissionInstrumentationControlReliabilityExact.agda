@@ -8,15 +8,14 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ICFunction : Set where
-  sense
-  conditionSignal
-  estimateState
-  compareToLimits
-  actuate
-  protect
-  recordTelemetry
-  diagnoseFault
-  : ICFunction
+  sense : ICFunction
+  conditionSignal : ICFunction
+  estimateState : ICFunction
+  compareToLimits : ICFunction
+  actuate : ICFunction
+  protect : ICFunction
+  recordTelemetry : ICFunction
+  diagnoseFault : ICFunction
 
 record HarshEnvironmentEnvelope : Set where
   constructor harsh-environment-envelope
@@ -103,6 +102,8 @@ record FissionICBoundary : Set where
     nominalCalibrationMeansEndOfLifeCalibration : Bool
     nominalCalibrationMeansEndOfLifeCalibrationIsFalse : nominalCalibrationMeansEndOfLifeCalibration ≡ false
 
+open FissionICBoundary public
+
 canonicalFissionICBoundary : FissionICBoundary
 canonicalFissionICBoundary = fission-ic-boundary
   false refl
@@ -112,10 +113,9 @@ canonicalFissionICBoundary = fission-ic-boundary
   false refl
 
 data FissionICReverseTarget : Set where
-  needEnvironmentSpectrum
-  needFailureRateModel
-  needCommonCauseModel
-  needCalibrationDriftData
-  needFaultToleranceArchitecture
-  needIntegratedQualificationReceipt
-  : FissionICReverseTarget
+  needEnvironmentSpectrum : FissionICReverseTarget
+  needFailureRateModel : FissionICReverseTarget
+  needCommonCauseModel : FissionICReverseTarget
+  needCalibrationDriftData : FissionICReverseTarget
+  needFaultToleranceArchitecture : FissionICReverseTarget
+  needIntegratedQualificationReceipt : FissionICReverseTarget

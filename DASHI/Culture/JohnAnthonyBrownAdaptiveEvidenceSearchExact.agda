@@ -31,23 +31,23 @@ paperAuthor = "John Anthony Brown"
 ------------------------------------------------------------------------
 
 data EvidenceMoveKind : Set where
-  verifyPrimarySource
-  validateInstrument
-  recoverPopulationStudy
-  reanalyseExistingData
-  acquireNewMeasurement
-  : EvidenceMoveKind
+  verifyPrimarySource : EvidenceMoveKind
+  validateInstrument : EvidenceMoveKind
+  recoverPopulationStudy : EvidenceMoveKind
+  reanalyseExistingData : EvidenceMoveKind
+  acquireNewMeasurement : EvidenceMoveKind
+
 
 data EvidenceMove : Set where
-  validateCoerciveExposureInstrument
-  validateOutcomeVectorMeasures
-  validateInstitutionalBetrayalMeasure
-  validateModerationMeasures
-  strengthenConfoundingModel
-  recoverAutonomyReceptionSource
-  recoverCatholicPopulationAssociation
-  runTargetPopulationReplication
-  : EvidenceMove
+  validateCoerciveExposureInstrument : EvidenceMove
+  validateOutcomeVectorMeasures : EvidenceMove
+  validateInstitutionalBetrayalMeasure : EvidenceMove
+  validateModerationMeasures : EvidenceMove
+  strengthenConfoundingModel : EvidenceMove
+  recoverAutonomyReceptionSource : EvidenceMove
+  recoverCatholicPopulationAssociation : EvidenceMove
+  runTargetPopulationReplication : EvidenceMove
+
 
 moveKind : EvidenceMove → EvidenceMoveKind
 moveKind validateCoerciveExposureInstrument = validateInstrument
@@ -117,11 +117,11 @@ searchCostTier runTargetPopulationReplication = 4
 ------------------------------------------------------------------------
 
 data PriorityTier : Set where
-  highestAlpha
-  highAlpha
-  mediumAlpha
-  boundedAlpha
-  : PriorityTier
+  highestAlpha : PriorityTier
+  highAlpha : PriorityTier
+  mediumAlpha : PriorityTier
+  boundedAlpha : PriorityTier
+
 
 priorityTier : EvidenceMove → PriorityTier
 priorityTier validateCoerciveExposureInstrument = highestAlpha
@@ -149,11 +149,11 @@ initialHighestAlphaReallyHighest = refl
 ------------------------------------------------------------------------
 
 data EvidenceSearchStage : Set where
-  initialStage
-  exposureMeasureProvisionallyResolved
-  outcomeMeasuresProvisionallyResolved
-  confoundingModelProvisionallyResolved
-  : EvidenceSearchStage
+  initialStage : EvidenceSearchStage
+  exposureMeasureProvisionallyResolved : EvidenceSearchStage
+  outcomeMeasuresProvisionallyResolved : EvidenceSearchStage
+  confoundingModelProvisionallyResolved : EvidenceSearchStage
+
 
 nextEvidenceMove : EvidenceSearchStage → EvidenceMove
 nextEvidenceMove initialStage = validateCoerciveExposureInstrument

@@ -25,10 +25,10 @@ import DASHI.Culture.IntellectualReceptionPadicFloatingRepresentationBoundaryExa
 ------------------------------------------------------------------------
 
 data PrefixCoordinate : Set where
-  presentCoordinate
-  futureCoordinate
-  authorityCoordinate
-  : PrefixCoordinate
+  presentCoordinate : PrefixCoordinate
+  futureCoordinate : PrefixCoordinate
+  authorityCoordinate : PrefixCoordinate
+
 
 record SharedObservedPrefixThroughT1 : Set where
   constructor shared-observed-prefix-through-t1
@@ -89,9 +89,9 @@ authorityReallyDiffersAtT1 =
 ------------------------------------------------------------------------
 
 data CertificateSupport : Set where
-  presentFutureSupport
-  authoritySensitiveSupport
-  : CertificateSupport
+  presentFutureSupport : CertificateSupport
+  authoritySensitiveSupport : CertificateSupport
+
 
 data SupportedCoordinate : CertificateSupport → PrefixCoordinate → Set where
   supportPresent :
