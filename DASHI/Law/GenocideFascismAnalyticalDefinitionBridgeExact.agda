@@ -5,13 +5,18 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Law.FascismAtrocitySourceCrossPollinationExact as Fascism
 import DASHI.Law.GazaGenocideHerzogZionismSourceReceiptsExact as Source
+import DASHI.Law.GenocideFascismSourceGenealogyExact as Genealogy
 
 ------------------------------------------------------------------------
--- DASHI analytical definition bridge.
+-- Genocide / fascism analytical bridge.
 --
--- User-specified analytical stance: genocide is treated as a paradigmatic
--- fascistic elimination/terminalisation mechanism.  This theorem is DASHI-owned
--- unless an external source independently applies the political label.
+-- The exact formal classifier is DASHI-owned, but it is not merely a
+-- conversation-supplied preference.  Its source genealogy is separately owned
+-- in GenocideFascismSourceGenealogyExact: Trainin/Penn's historical
+-- "genocide is fascism in action" formulation, USHMM evidence on exclusionary
+-- fascism/purifying violence and Nazi elimination, plus a comparative-scholarship
+-- boundary noting that the exact relation is debated rather than a universal
+-- definitional identity.
 ------------------------------------------------------------------------
 
 data DASHIFascismCriterion : Set where
@@ -35,6 +40,11 @@ genocideIsFascisticMechanism :
   criterionClassifiesAsFascistic genocidalElimination ≡ fascisticMechanism
 genocideIsFascisticMechanism = refl
 
+sourceGenealogyClassification :
+  Genealogy.genocideMechanismClassification
+  ≡ Genealogy.fascisticTerminalisationMechanism
+sourceGenealogyClassification = Genealogy.genocideToFascisticTerminalisation
+
 ------------------------------------------------------------------------
 -- Mapping into the existing fascism feature vocabulary.
 ------------------------------------------------------------------------
@@ -51,38 +61,44 @@ genocideSecondaryFeature = Fascism.collectiveGuiltTransport
 
 data AttributionRole : Set where
   externalGenocideFinding
-  externalFascismClassification
-  dashiAnalyticalClassification : AttributionRole
+  externalFascismGenealogy
+  dashiAnalyticalSynthesis : AttributionRole
 
 record GenocideFascismReceipt : Set where
   constructor genocideFascismReceipt
   field
     genocideSourceReference : String
     genocideSourceRole : AttributionRole
-    fascismClassificationRole : AttributionRole
-    externalSourceItselfUsedFascismLabel : Bool
+    fascismGenealogyReference : String
+    fascismGenealogyRole : AttributionRole
+    exactFormalSynthesisRole : AttributionRole
+    externalGenocideSourceItselfUsedFascismLabel : Bool
     boundedDescription : String
 
 open GenocideFascismReceipt public
 
-gazaCommissionToDASHIFascismReceipt : GenocideFascismReceipt
-gazaCommissionToDASHIFascismReceipt = genocideFascismReceipt
+gazaCommissionToSourcedFascismReceipt : GenocideFascismReceipt
+gazaCommissionToSourcedFascismReceipt = genocideFascismReceipt
   "UN Independent International Commission of Inquiry genocide finding, September 2025 and June 2026 continuation"
   externalGenocideFinding
-  dashiAnalyticalClassification
+  "Michelle Penn 2020 on Aron Trainin; USHMM fascism and Nazi-elimination sources; comparative fascism/extermination scholarship"
+  externalFascismGenealogy
+  dashiAnalyticalSynthesis
   false
-  "The Commission genocide finding is external; the statement that genocide is fascism/fascistic terminalisation is the DASHI analytical bridge unless separately sourced."
+  "The UN Commission supplies the genocide finding. External scholarship supplies the genocide/fascism genealogy. DASHI owns the exact typed synthesis: established genocidal elimination instantiates fascistic terminalisation."
 
 record GenocideFascismAttributionBoundary : Set where
   constructor genocideFascismAttributionBoundary
   field
     unGenocideFindingAutomaticallyAttributedAsUNFascismFinding : Bool
     unGenocideFindingAutomaticallyAttributedAsUNFascismFindingIsFalse : unGenocideFindingAutomaticallyAttributedAsUNFascismFinding ≡ false
-    dashiDefinitionMayStateGenocideIsFascistic : Bool
-    dashiDefinitionMayStateGenocideIsFascisticIsTrue : dashiDefinitionMayStateGenocideIsFascistic ≡ true
+    sourceGenealogyMaySupportDASHISynthesis : Bool
+    sourceGenealogyMaySupportDASHISynthesisIsTrue : sourceGenealogyMaySupportDASHISynthesis ≡ true
+    traininPennFormulationIsUniversalConsensus : Bool
+    traininPennFormulationIsUniversalConsensusIsFalse : traininPennFormulationIsUniversalConsensus ≡ false
     fascisticMechanismClassificationAutomaticallyProvesEveryInstitutionFascist : Bool
     fascisticMechanismClassificationAutomaticallyProvesEveryInstitutionFascistIsFalse : fascisticMechanismClassificationAutomaticallyProvesEveryInstitutionFascist ≡ false
 
 canonicalGenocideFascismAttributionBoundary : GenocideFascismAttributionBoundary
 canonicalGenocideFascismAttributionBoundary =
-  genocideFascismAttributionBoundary false refl true refl false refl
+  genocideFascismAttributionBoundary false refl true refl false refl false refl
