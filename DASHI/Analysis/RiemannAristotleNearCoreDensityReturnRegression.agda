@@ -5,6 +5,7 @@ import DASHI.Analysis.RiemannAristotleQuarterPeriodDensityWindowLeanReturnExact 
 import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact as Z
 import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap
 import DASHI.Analysis.RiemannG2AlpogeFurmanClusteringNonDescentExact as AFLocal
+import DASHI.Analysis.RiemannG2LowGapClusteringMomentReductionExact as Moment
 import DASHI.Analysis.RiemannG2QuarterPeriodAnalyticRouteReconciliationExact as Quarter
 import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerExact as Root
 import DASHI.Analysis.RiemannAristotleRHAnalyticLeafSchedulerExact as Leaf
@@ -96,6 +97,18 @@ alpogeFurmanNeedsLocalization :
     AFLocal.canonicalGlobalSimpleToLocalClusteringBoundary ≡ true
 alpogeFurmanNeedsLocalization = refl
 
+-- The target-local moment compiler is closed at the discrete/slack level, while
+-- the actual selected-window analytic moment producer remains open.
+localMomentRatioCompilerClosed :
+  Moment.LocalMomentClusteringBoundary.natMomentToTwoToOneRatioCompilerClosedInAgda
+    Moment.canonicalLocalMomentClusteringBoundary ≡ true
+localMomentRatioCompilerClosed = refl
+
+selectedTargetLocalMomentOpen :
+  Moment.LocalMomentClusteringBoundary.exactSelectedTargetLocalSecondMomentProducerOwned
+    Moment.canonicalLocalMomentClusteringBoundary ≡ false
+selectedTargetLocalMomentOpen = refl
+
 -- The former parallel width/crossing work package is closed in place.
 widthAndCrossingPackageClosed :
   Quarter.workState Quarter.widthAndCrossingScale ≡ Quarter.closed
@@ -105,11 +118,22 @@ quarterSchedulerRoutesToClustering :
   Quarter.workState Quarter.actualZetaLowGapClustering ≡ Quarter.live
 quarterSchedulerRoutesToClustering = refl
 
--- Canonical root scheduler now sees the new zero-spacing producer.
+-- Canonical root scheduler sees both the parent clustering leaf and its concrete
+-- target-local second-moment refinement.
 rootSchedulerClusteringActive :
   Root.RHBidiSearchSchedulerBoundary.actualZetaLowGapClusteringActive
     Root.canonicalRHBidiSearchSchedulerBoundary ≡ true
 rootSchedulerClusteringActive = refl
+
+rootSchedulerLocalMomentRefinementActive :
+  Root.RHBidiSearchSchedulerBoundary.targetLocalSecondMomentRefinementActive
+    Root.canonicalRHBidiSearchSchedulerBoundary ≡ true
+rootSchedulerLocalMomentRefinementActive = refl
+
+rootSchedulerGlobalSimpleDirectRoutePruned :
+  Root.RHBidiSearchSchedulerBoundary.globalSimpleZeroProportionDirectClusteringRouteActive
+    Root.canonicalRHBidiSearchSchedulerBoundary ≡ false
+rootSchedulerGlobalSimpleDirectRoutePruned = refl
 
 rootSchedulerZetaUpperCountNotActive :
   Root.RHBidiSearchSchedulerBoundary.zetaUpperCountRemainsInActiveQueue
