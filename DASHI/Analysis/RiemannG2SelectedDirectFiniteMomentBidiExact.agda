@@ -9,26 +9,27 @@ import DASHI.Analysis.RiemannExplicitFormula as Explicit
 import DASHI.Analysis.RiemannG2FkOrbitConsumerAttachmentExact as Orbit
 import DASHI.Analysis.RiemannG2SelectedPoleNearSingleProducerBidiExact as Selected
 import DASHI.Analysis.RiemannAristotlePoleQuotientDirectFiniteNearAttackExact as Direct
+import DASHI.Analysis.RiemannG2TargetCenteredScalarCancellationAssemblyExact as Literal
 import DASHI.Analysis.RiemannG2LowGapClusteringMomentReductionExact as Moment
 
 ------------------------------------------------------------------------
 -- SELECTED WINDOW <-> DIRECT FINITE GAP/MOMENT BIDI WELD
 --
--- Existing owners already separate two useful views of the same intended
--- mathematical object:
+-- Existing owners expose three views of one intended mathematical object:
 --
---   * ActualSelectedPoleNearProducer: exact selected Weil/formula/window object;
---   * DirectFinitePoleNearProducer: explicit finite zero-index carrier with
---       multiplicity, horizontal displacement, targetRelativeGap and signed
---       cosine evaluation.
+--   * ActualSelectedPoleNearProducer: selected Weil/formula/window object;
+--   * DirectFinitePoleNearProducer: explicit zero/gap + signed evaluation;
+--   * LiteralTargetCenteredScalarProblem: final G2 q/zero/target consumer.
 --
--- This module does NOT invent another zero family. It records the exact bridge
--- required to assert that a DirectFinitePoleNearProducer realizes the SAME
--- selected target/window. The local ordinate-moment ledger is then attached to
--- that direct producer, so the same delta data can feed both:
+-- The direct producer has now been strengthened in place: it names the literal
+-- scalar problem it realizes. Therefore this module does not introduce another
+-- moment definition. The only canonical unnormalised target-gap moment is
 --
---   (a) low-gap clustering, through the moment compiler; and
---   (b) the direct signed finite-near evaluation already carried by `direct`.
+--   Literal.targetRelativeGapSecondMoment (Direct.literalProblem direct).
+--
+-- The normalized Nat ledger below must be an explicit normalization/ordering
+-- realization of that literal scalar value. This keeps the discrete clustering
+-- compiler honest without pretending an arbitrary Scalar is Nat.
 ------------------------------------------------------------------------
 
 record SelectedDirectFiniteWeld
@@ -46,9 +47,16 @@ record SelectedDirectFiniteWeld
     samePoleTaper : Set
     sameFiniteSignedNearValue : Set
     sameExplicitFormulaObject : Set
+    selectedWindowIsDirectLiteralProblem : Set
     weldReference : String
 
 open SelectedDirectFiniteWeld public
+
+literalTargetGapSecondMomentOfDirect :
+  (direct : Direct.DirectFinitePoleNearProducer) →
+  Literal.Scalar (Direct.literalProblem direct)
+literalTargetGapSecondMomentOfDirect direct =
+  Literal.targetRelativeGapSecondMoment (Direct.literalProblem direct)
 
 record SelectedDirectFiniteMomentProducer
     (space : Weil.WeilTestSpace)
@@ -60,9 +68,12 @@ record SelectedDirectFiniteMomentProducer
   field
     normalizedOrdinateMoment : Moment.NormalizedLocalSecondMomentLedger
 
-    momentBuiltFromDirectTargetRelativeGap : Set
-    momentUsesDirectNearIndex : Set
-    momentUsesDirectMultiplicity : Set
+    -- The Nat ledger is not a second mathematical moment. It must be proved to
+    -- represent the exact literal Scalar-valued moment above under the selected
+    -- normalization/order structure.
+    normalizedLedgerRealizesLiteralTargetGapSecondMoment : Set
+    normalizationPreservesLiteralNearFamily : Set
+    normalizationPreservesLiteralMultiplicity : Set
     radiusIsSelectedGapSplitD : Set
     everyHighGapCellPaysUnitNormalizedMoment : Set
 
@@ -83,7 +94,7 @@ selectedDirectMomentGivesTwoToOneRatio producer =
 
 ------------------------------------------------------------------------
 -- Fan-out: one admitted direct producer already has the signed finite-near
--- evaluation receipt, while the attached moment supplies the clustering ratio.
+-- evaluation receipt, while the downstream moment supplies the clustering ratio.
 ------------------------------------------------------------------------
 
 directEvaluationReceiptStillAvailable :
@@ -104,9 +115,12 @@ directEvaluationReceiptStillAvailable {direct = direct} producer =
 data SharedZeroSidePayment : Set where
   recoverSecondSelectedWindow
   recoverSecondDirectZeroFamily
+  recoverDirectFinitePoleNearProducer
   weldExistingDirectProducerToSelectedWindow
-  proveOrdinateMomentOnWeldedDirectProducer
-  evaluateSignedFiniteNearOnWeldedDirectProducer
+  constructSecondMomentDefinition
+  proveLiteralOrdinateMomentBoundAfterWeld
+  reEvaluateSignedFiniteNearAfterDirectProducer
+  attachDirectEvaluationToSelectedConsumer
   transportMomentRatioToExactClusteringCoefficient
   : SharedZeroSidePayment
 
@@ -116,9 +130,12 @@ data PaymentState : Set where
 paymentState : SharedZeroSidePayment → PaymentState
 paymentState recoverSecondSelectedWindow = pruned
 paymentState recoverSecondDirectZeroFamily = pruned
-paymentState weldExistingDirectProducerToSelectedWindow = live
-paymentState proveOrdinateMomentOnWeldedDirectProducer = live
-paymentState evaluateSignedFiniteNearOnWeldedDirectProducer = live
+paymentState recoverDirectFinitePoleNearProducer = live
+paymentState weldExistingDirectProducerToSelectedWindow = downstream
+paymentState constructSecondMomentDefinition = pruned
+paymentState proveLiteralOrdinateMomentBoundAfterWeld = downstream
+paymentState reEvaluateSignedFiniteNearAfterDirectProducer = pruned
+paymentState attachDirectEvaluationToSelectedConsumer = downstream
 paymentState transportMomentRatioToExactClusteringCoefficient = downstream
 
 secondSelectedWindowPruned :
@@ -128,6 +145,14 @@ secondSelectedWindowPruned = refl
 secondDirectZeroFamilyPruned :
   paymentState recoverSecondDirectZeroFamily ≡ pruned
 secondDirectZeroFamilyPruned = refl
+
+secondMomentDefinitionPruned :
+  paymentState constructSecondMomentDefinition ≡ pruned
+secondMomentDefinitionPruned = refl
+
+secondFiniteEvaluationPruned :
+  paymentState reEvaluateSignedFiniteNearAfterDirectProducer ≡ pruned
+secondFiniteEvaluationPruned = refl
 
 record SelectedDirectFiniteMomentBoundary : Set where
   constructor selected-direct-finite-moment-boundary
@@ -140,21 +165,27 @@ record SelectedDirectFiniteMomentBoundary : Set where
     separateZeroFamilyForMomentRequiredIsFalse :
       separateZeroFamilyForMomentRequired ≡ false
 
+    literalTargetGapMomentAlreadyDefinedOnDirectProblem : Bool
+    literalTargetGapMomentAlreadyDefinedOnDirectProblemIsTrue :
+      literalTargetGapMomentAlreadyDefinedOnDirectProblem ≡ true
+
+    secondMomentDefinitionRequired : Bool
+    secondMomentDefinitionRequiredIsFalse : secondMomentDefinitionRequired ≡ false
+
     oneDirectGapCarrierCanFeedClusteringAndFiniteEvaluation : Bool
     oneDirectGapCarrierCanFeedClusteringAndFiniteEvaluationIsTrue :
       oneDirectGapCarrierCanFeedClusteringAndFiniteEvaluation ≡ true
 
     selectedDirectWeldInhabitedHere : Bool
-    selectedDirectWeldInhabitedHereIsFalse :
-      selectedDirectWeldInhabitedHere ≡ false
+    selectedDirectWeldInhabitedHereIsFalse : selectedDirectWeldInhabitedHere ≡ false
 
     selectedDirectMomentProducerInhabitedHere : Bool
     selectedDirectMomentProducerInhabitedHereIsFalse :
       selectedDirectMomentProducerInhabitedHere ≡ false
 
-    directFiniteEvaluationClosedHere : Bool
-    directFiniteEvaluationClosedHereIsFalse :
-      directFiniteEvaluationClosedHere ≡ false
+    secondSignedEvaluationRequiredAfterDirectProducer : Bool
+    secondSignedEvaluationRequiredAfterDirectProducerIsFalse :
+      secondSignedEvaluationRequiredAfterDirectProducer ≡ false
 
     exactClusteringClosedHere : Bool
     exactClusteringClosedHereIsFalse : exactClusteringClosedHere ≡ false
@@ -173,8 +204,10 @@ canonicalSelectedDirectFiniteMomentBoundary =
     false refl
     true refl
     false refl
+    true refl
     false refl
     false refl
     false refl
     false refl
-    "The highest-fanout zero-side object is not a new phase ontology. Weld an existing DirectFinitePoleNearProducer to the existing ActualSelectedPoleNearProducer, then derive the normalized ordinate-gap moment from that direct targetRelativeGap/multiplicity/nearIndex carrier. The same direct producer already carries the signed finite-near evaluation receipt, so one same-object zero carrier can feed both clustering and H_off evaluation. The weld, actual moment estimate, actual finite evaluation, coefficient transport and RH remain unproved here."
+    false refl
+    "The literal delta moment is no longer a free-floating search object: DirectFinitePoleNearProducer names a LiteralTargetCenteredScalarProblem, and that owner defines M2_delta = finiteNearSum(m_sigma*(ordinate-target)^2). Recover the actual direct producer first. Its signed approximant/error receipt is already part of that object, so do not re-evaluate a second finite sum. After the direct producer and existing selected producer are available, weld them; then prove the quantitative bound on the SAME literal M2_delta and attach the existing direct evaluation to the selected consumer. The discrete two-to-one compiler is downstream, and RH remains open."
