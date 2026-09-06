@@ -9,6 +9,8 @@ import DASHI.Analysis.RiemannAristotleQuarterPeriodDensityWindowLeanReturnExact 
 import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact as Z38
 import DASHI.Analysis.RiemannG2AlpogeFurmanClusteringNonDescentExact as AFLocal
 import DASHI.Analysis.RiemannG2LowGapClusteringMomentReductionExact as Moment
+import DASHI.Analysis.RiemannG2SelectedDirectFiniteMomentBidiExact as Shared
+import DASHI.Analysis.RiemannAristotlePoleNearPhaseStatisticExact as Phase
 import DASHI.Analysis.RiemannG2Zeta23FkActionRecoveryExact as Fk
 import DASHI.Analysis.RiemannG2Zeta23FkCheckedSourceReturnExact as FkChecked
 import DASHI.Analysis.RiemannG2FkOrbitConsumerAttachmentExact as Orbit
@@ -20,21 +22,26 @@ import DASHI.Analysis.RiemannG2GammaProducerSourceAcquisitionExact as GammaSourc
 import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as PQ
 
 ------------------------------------------------------------------------
--- HIGHEST-ALPHA SCHEDULER AFTER 8896 + LOCAL-MOMENT REFINEMENT
+-- HIGHEST-ALPHA SCHEDULER AFTER 8896 + SHARED DIRECT-CARRIER REFINEMENT
 --
--- This scheduler is updated in place rather than shadowed by a new owner.
--- §37 closes the adaptive J*Lambda constant comparison and §38 closes the zeta
--- upper local-count input.  The live clustering theorem is refined further by
--- the target-local second-moment compiler: highGapMass <= M2_norm < 2*lowGapMass
--- gives a strict two-to-one ratio in Agda; the selected-window analytic moment
--- producer and elementary real coefficient bridge remain unpaid.
+-- §37 closes the adaptive J*Lambda comparison and §38 closes zeta upper local
+-- counting. The live clustering consumer is refined by a target-local ordinate
+-- moment, but the dependency order is now explicit:
 --
--- The Alpöge--Furman >2/3 simple/on-critical-line theorem is retained as a
--- global donor but explicitly rejected as a direct local-clustering closure.
+--   recover ActualSelectedPoleNearProducer             LIVE
+--   recover DirectFinitePoleNearProducer               LIVE
+--      -> SelectedDirectFiniteWeld                     DOWNSTREAM
+--          -> selected delta^2 moment                  DOWNSTREAM
+--          -> selected finite-near consumer attachment DOWNSTREAM
 --
--- Separate older obligations remain real where their existing owners say so:
--- the selected finite-near evaluator must still be inhabited on the SAME
--- finitePoleNearSigned object, and Gamma producer precision remains independent.
+-- DirectFinitePoleNearProducer already carries targetRelativeGap and its signed
+-- approximant/error receipt. Consequently PoleNearPhaseStatistic is compiler
+-- output and a second phase carrier is pruned. The moment compiler itself is
+-- also already owned; what is unpaid is the actual selected/direct producer data
+-- and quantitative moment/evaluation strength.
+--
+-- Direct proof of the clustering inequality remains an independent live route.
+-- Gamma producer recovery remains independent.
 ------------------------------------------------------------------------
 
 data RH8894Leaf : Set where
@@ -50,7 +57,9 @@ data RH8894Leaf : Set where
   rebuildFiniteNearCarrier
   reproveFarShellDecay
   reproveArbitraryAccuracyCutoff
-  recoverPhasePreservingFiniteNearProducer
+  constructSecondPhaseStatisticCarrier
+  recoverDirectFinitePoleNearProducer
+  weldSelectedDirectZeroCarrier
   weldFiniteNearEvaluationToSelectedWindow
   recoverNearBudgetTransportToSelectedScalar
   extractSelectedNearBudget
@@ -91,9 +100,11 @@ leafState recoverActualSelectedPoleNearProducer = live
 leafState rebuildFiniteNearCarrier = pruned
 leafState reproveFarShellDecay = pruned
 leafState reproveArbitraryAccuracyCutoff = pruned
-leafState recoverPhasePreservingFiniteNearProducer = live
-leafState weldFiniteNearEvaluationToSelectedWindow = live
-leafState recoverNearBudgetTransportToSelectedScalar = live
+leafState constructSecondPhaseStatisticCarrier = pruned
+leafState recoverDirectFinitePoleNearProducer = live
+leafState weldSelectedDirectZeroCarrier = downstream
+leafState weldFiniteNearEvaluationToSelectedWindow = downstream
+leafState recoverNearBudgetTransportToSelectedScalar = downstream
 leafState extractSelectedNearBudget = downstream
 
 leafState sharpenQuadraticDecayGapSplit = pruned
@@ -103,7 +114,7 @@ leafState recoverZetaUpperLocalCount = owned
 leafState compareAdaptiveJLambdaConstants = owned
 leafState reuseGlobalSimpleZeroProportionAsLocalClustering = pruned
 leafState proveActualZetaLowGapClustering = live
-leafState proveTargetLocalSecondMoment = live
+leafState proveTargetLocalSecondMoment = downstream
 leafState supplyZetaLongWindowLowerDensity = conditional
 
 leafState searchForAnyGammaBound = pruned
@@ -173,6 +184,25 @@ nearBudgetExtractionIsDownstream :
   NearEval.paymentStatus NearEval.extractNearBudget ≡ NearEval.downstream
 nearBudgetExtractionIsDownstream = NearEval.nearBudgetExtractionIsCompilerOutput
 
+secondPhaseStatisticCarrierNoLongerLive :
+  Phase.paymentState Phase.constructSecondPhaseStatisticCarrier ≡ Phase.pruned
+secondPhaseStatisticCarrierNoLongerLive = Phase.secondPhaseStatisticCarrierPruned
+
+phaseStatisticCompilerOwned :
+  Phase.PoleNearPhaseStatisticBoundary.repositoryAlreadyOwnsConcretePoleNearPhaseStatistic
+    Phase.canonicalPoleNearPhaseStatisticBoundary ≡ true
+phaseStatisticCompilerOwned = refl
+
+selectedDirectWeldStillOpen :
+  Shared.SelectedDirectFiniteMomentBoundary.selectedDirectWeldInhabitedHere
+    Shared.canonicalSelectedDirectFiniteMomentBoundary ≡ false
+selectedDirectWeldStillOpen = refl
+
+sharedDirectCarrierCanFeedBoth :
+  Shared.SelectedDirectFiniteMomentBoundary.oneDirectGapCarrierCanFeedClusteringAndFiniteEvaluation
+    Shared.canonicalSelectedDirectFiniteMomentBoundary ≡ true
+sharedDirectCarrierCanFeedBoth = refl
+
 quadraticGapSplitSharpeningNoLongerLive :
   Gap.GapSplitRelevant Gap.sharpenSameQuadraticDecayDonor -> ⊥
 quadraticGapSplitSharpeningNoLongerLive = Gap.sameQuadraticDecayDonorPruned
@@ -235,8 +265,7 @@ guessGammaDigammaLossNoLongerLive =
   GammaSource.guessDigammaLossWithoutProducerPruned
 
 gammaSourceRecoveryStageIsArtifactRequired :
-  GammaSource.currentGammaProducerRecoveryStage
-  ≡ GammaSource.producerArtifactRequired
+  GammaSource.currentGammaProducerRecoveryStage ≡ GammaSource.producerArtifactRequired
 gammaSourceRecoveryStageIsArtifactRequired = refl
 
 adaptiveInverseWidthStillLogicallyOpen :
@@ -254,67 +283,58 @@ record HighestAlphaAfter8894Boundary : Set where
   constructor highest-alpha-after-8894-boundary
   field
     literalFkSourceMathematicsAlreadyRecovered : Bool
-    literalFkSourceMathematicsAlreadyRecoveredIsTrue :
-      literalFkSourceMathematicsAlreadyRecovered ≡ true
+    literalFkSourceMathematicsAlreadyRecoveredIsTrue : literalFkSourceMathematicsAlreadyRecovered ≡ true
 
     actualSelectedPoleNearProducerStillRequired : Bool
-    actualSelectedPoleNearProducerStillRequiredIsTrue :
-      actualSelectedPoleNearProducerStillRequired ≡ true
+    actualSelectedPoleNearProducerStillRequiredIsTrue : actualSelectedPoleNearProducerStillRequired ≡ true
+
+    directFinitePoleNearProducerStillRequired : Bool
+    directFinitePoleNearProducerStillRequiredIsTrue : directFinitePoleNearProducerStillRequired ≡ true
 
     finiteNearCarrierAndFarShellFreshMathematicsRequired : Bool
-    finiteNearCarrierAndFarShellFreshMathematicsRequiredIsFalse :
-      finiteNearCarrierAndFarShellFreshMathematicsRequired ≡ false
+    finiteNearCarrierAndFarShellFreshMathematicsRequiredIsFalse : finiteNearCarrierAndFarShellFreshMathematicsRequired ≡ false
+
+    secondPhaseStatisticCarrierRequired : Bool
+    secondPhaseStatisticCarrierRequiredIsFalse : secondPhaseStatisticCarrierRequired ≡ false
+
+    selectedDirectWeldIsDownstreamOfBothProducers : Bool
+    selectedDirectWeldIsDownstreamOfBothProducersIsTrue : selectedDirectWeldIsDownstreamOfBothProducers ≡ true
 
     selectedPhasePreservingFiniteEvaluationStillRequired : Bool
-    selectedPhasePreservingFiniteEvaluationStillRequiredIsTrue :
-      selectedPhasePreservingFiniteEvaluationStillRequired ≡ true
-
-    evaluatorMustBeWeldedToSelectedWindowFiniteNear : Bool
-    evaluatorMustBeWeldedToSelectedWindowFiniteNearIsTrue :
-      evaluatorMustBeWeldedToSelectedWindowFiniteNear ≡ true
+    selectedPhasePreservingFiniteEvaluationStillRequiredIsTrue : selectedPhasePreservingFiniteEvaluationStillRequired ≡ true
 
     nearBudgetNeedsOnlyConsumerTransportAfterEvaluation : Bool
-    nearBudgetNeedsOnlyConsumerTransportAfterEvaluationIsTrue :
-      nearBudgetNeedsOnlyConsumerTransportAfterEvaluation ≡ true
+    nearBudgetNeedsOnlyConsumerTransportAfterEvaluationIsTrue : nearBudgetNeedsOnlyConsumerTransportAfterEvaluation ≡ true
 
     sameQuadraticGapSplitRouteStillWorthSharpening : Bool
-    sameQuadraticGapSplitRouteStillWorthSharpeningIsFalse :
-      sameQuadraticGapSplitRouteStillWorthSharpening ≡ false
+    sameQuadraticGapSplitRouteStillWorthSharpeningIsFalse : sameQuadraticGapSplitRouteStillWorthSharpening ≡ false
 
     adaptiveConstantWindowComparisonLive : Bool
-    adaptiveConstantWindowComparisonLiveIsFalse :
-      adaptiveConstantWindowComparisonLive ≡ false
+    adaptiveConstantWindowComparisonLiveIsFalse : adaptiveConstantWindowComparisonLive ≡ false
 
     zetaUpperLocalCountStillOpen : Bool
     zetaUpperLocalCountStillOpenIsFalse : zetaUpperLocalCountStillOpen ≡ false
 
     globalSimpleZeroProportionDirectClusteringRouteLive : Bool
-    globalSimpleZeroProportionDirectClusteringRouteLiveIsFalse :
-      globalSimpleZeroProportionDirectClusteringRouteLive ≡ false
+    globalSimpleZeroProportionDirectClusteringRouteLiveIsFalse : globalSimpleZeroProportionDirectClusteringRouteLive ≡ false
 
     actualZetaLowGapClusteringStillRequired : Bool
-    actualZetaLowGapClusteringStillRequiredIsTrue :
-      actualZetaLowGapClusteringStillRequired ≡ true
+    actualZetaLowGapClusteringStillRequiredIsTrue : actualZetaLowGapClusteringStillRequired ≡ true
 
-    targetLocalSecondMomentRefinementLive : Bool
-    targetLocalSecondMomentRefinementLiveIsTrue :
-      targetLocalSecondMomentRefinementLive ≡ true
+    targetLocalSecondMomentIsDownstreamOfSelectedDirectWeld : Bool
+    targetLocalSecondMomentIsDownstreamOfSelectedDirectWeldIsTrue : targetLocalSecondMomentIsDownstreamOfSelectedDirectWeld ≡ true
 
     longWindowLowerDensityStillConditional : Bool
-    longWindowLowerDensityStillConditionalIsTrue :
-      longWindowLowerDensityStillConditional ≡ true
+    longWindowLowerDensityStillConditionalIsTrue : longWindowLowerDensityStillConditional ≡ true
 
     exactGammaProducerArtifactRecoveryLive : Bool
-    exactGammaProducerArtifactRecoveryLiveIsTrue :
-      exactGammaProducerArtifactRecoveryLive ≡ true
+    exactGammaProducerArtifactRecoveryLiveIsTrue : exactGammaProducerArtifactRecoveryLive ≡ true
 
     sourceFreeGammaLossGuessAdmissible : Bool
-    sourceFreeGammaLossGuessAdmissibleIsFalse :
-      sourceFreeGammaLossGuessAdmissible ≡ false
+    sourceFreeGammaLossGuessAdmissibleIsFalse : sourceFreeGammaLossGuessAdmissible ≡ false
 
     finalBudgetCombinationAlreadyUnconditional : Bool
-    finalBudgetCombinationAlreadyUnconditionalIsFalse :
-      finalBudgetCombinationAlreadyUnconditional ≡ false
+    finalBudgetCombinationAlreadyUnconditionalIsFalse : finalBudgetCombinationAlreadyUnconditional ≡ false
 
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
@@ -326,6 +346,8 @@ canonicalHighestAlphaAfter8894Boundary =
   highest-alpha-after-8894-boundary
     true refl
     true refl
+    true refl
+    false refl
     false refl
     true refl
     true refl
@@ -341,4 +363,4 @@ canonicalHighestAlphaAfter8894Boundary =
     false refl
     false refl
     false refl
-    "After the 8896 return, do not spend effort on adaptive J*Lambda comparison or zeta upper local counting: both are checked Lean outputs wired into the 8894 owner. The global Alpöge--Furman >2/3 simple-zero theorem is not a direct local-clustering closure; an exact finite collision proves that global summary does not determine target-local gap pattern. The shortest concrete clustering refinement is now a SAME-target/SAME-window normalized second-moment theorem strong enough to force highGapMass < 2*lowGapMass; the Agda slack compiler for that implication is owned, while the actual analytic moment producer and elementary 4/pi^2 < 1/2 bridge remain. Existing same-object finite-near evaluation and Gamma-precision obligations remain genuine and must be inhabited rather than duplicated. Final strict budget assembly is downstream; RH remains open."
+    "The search has compressed to actual producer objects rather than duplicate representations. Recover the existing selected pole-near producer and a DirectFinitePoleNearProducer carrying the literal nearIndex/multiplicity/targetRelativeGap plus signed approximant/error. The old PoleNearPhaseStatistic is compiler output from that direct producer. Once both producers exist, their SelectedDirectFiniteWeld is a downstream same-object payment; it then unlocks the selected delta^2 moment route to clustering and the selected finite-near consumer attachment. Direct proof of the clustering inequality remains an alternative. The §37 constant comparison and §38 zeta upper count are owned; global simple-zero abundance and transverse-alpha moments are not local-delta substitutes. Gamma precision remains independent. RH remains open."
