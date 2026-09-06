@@ -12,11 +12,6 @@ import DASHI.Core.ProjectionHierarchyCompatibleFibreBidiExact as Projection
 
 ------------------------------------------------------------------------
 -- LEAST-COST CONSUMER-CLOSING EXPERIMENT
---
--- Cross-weld of consumer-relative observation thresholds and costed fibre
--- elimination.  The objective is not maximal identification.  It is the least
--- declared cost among experiments whose posterior fibre is already sufficient
--- to close the selected consumer.
 ------------------------------------------------------------------------
 
 record ConsumerClosingCandidate {Hidden Experiment Decision : Set}
@@ -81,11 +76,73 @@ selectedChoiceEliminatesPriorCandidate choice =
     (selectedStrict choice)
 
 ------------------------------------------------------------------------
--- Exact calibration: the middle observation level already closes the existing
--- decision consumer while remaining non-singleton.  Therefore a policy whose
--- target is this consumer has no logical need to demand the fine singleton
--- fibre merely because it is more identifying.
+-- Exact finite calibration: both a middle observation and a finer observation
+-- close the same consumer from the coarse prior, but the middle move is cheaper.
 ------------------------------------------------------------------------
+
+coarseToFineReceipt : Fibre.ExperimentRefinementReceipt Projection.coarseFibre
+coarseToFineReceipt =
+  Fibre.experiment-refinement-receipt
+    Fibre.addFineObservation
+    Projection.fineFibre
+    (Bidi.fibreRefinesTrans Projection.fineRefinesMiddle Projection.middleRefinesCoarse)
+    Fibre.strictRefinement
+    (λ _ → Projection.h1 , (tt , (λ x → x)))
+    "synthetic fine observation from coarse prior"
+    "exact finite coarse-to-fine calibration"
+
+middleMove : Cost.InformationMove
+middleMove = Cost.informationMove
+  Cost.takeMeasurement 1
+  "middle-level observation"
+  "unit synthetic resource cost"
+  "declared calibrated observation"
+
+fineMove : Cost.InformationMove
+fineMove = Cost.informationMove
+  Cost.takeMeasurement 2
+  "fine-level observation"
+  "two-unit synthetic resource cost"
+  "declared calibrated observation"
+
+middleCostedCandidate :
+  Costed.CostedRefinementCandidate Projection.coarseFibre
+middleCostedCandidate =
+  Costed.costed-refinement-candidate
+    Fibre.coarseToMiddleReceipt
+    middleMove
+    "middle observation realizes coarse-to-middle refinement"
+    "synthetic admitted middle observation"
+
+fineCostedCandidate :
+  Costed.CostedRefinementCandidate Projection.coarseFibre
+fineCostedCandidate =
+  Costed.costed-refinement-candidate
+    coarseToFineReceipt
+    fineMove
+    "fine observation realizes coarse-to-fine refinement"
+    "synthetic admitted fine observation"
+
+middleClosingCandidate :
+  ConsumerClosingCandidate Projection.coarseFibre Projection.middleDecision
+middleClosingCandidate =
+  consumer-closing-candidate
+    middleCostedCandidate
+    Projection.middleConsumerClosed
+    "middle posterior already closes the decision consumer"
+
+fineClosingCandidate :
+  ConsumerClosingCandidate Projection.coarseFibre Projection.middleDecision
+fineClosingCandidate =
+  consumer-closing-candidate
+    fineCostedCandidate
+    Minimal.middleDecisionClosedAtFine
+    "fine posterior also closes the same decision consumer"
+
+middleCostsNoMoreThanFine :
+  Cost.cost (Costed.move (costed middleClosingCandidate)) ≤
+  Cost.cost (Costed.move (costed fineClosingCandidate))
+middleCostsNoMoreThanFine = s≤s z≤n
 
 middleAlreadyClosesCalibrationConsumer :
   Minimal.ConsumerClosedAtLevel Projection.middleDecision Minimal.middleLevel
@@ -115,9 +172,10 @@ record LeastCostConsumerClosingBoundary : Set where
     objectiveIsConsumerClosureNotPointIdentification : Bool
     selectedExperimentMustCloseConsumer : Bool
     selectedStrictExperimentStillEliminatesCandidate : Bool
+    cheaperMiddleMayCloseBeforeFineIdentification : Bool
     finestObservationAlwaysRequired : Bool
     closureCreatesAuthority : Bool
 
 canonicalLeastCostConsumerClosingBoundary : LeastCostConsumerClosingBoundary
 canonicalLeastCostConsumerClosingBoundary =
-  least-cost-consumer-closing-boundary true true true false false
+  least-cost-consumer-closing-boundary true true true true false false
