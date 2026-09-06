@@ -7,6 +7,8 @@ import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap
 import DASHI.Analysis.RiemannG2AlpogeFurmanClusteringNonDescentExact as AFLocal
 import DASHI.Analysis.RiemannG2LowGapClusteringMomentReductionExact as Moment
 import DASHI.Analysis.RiemannG2SelectedTargetLocalMomentSameObjectExact as SelectedMoment
+import DASHI.Analysis.RiemannG2SelectedDirectFiniteMomentBidiExact as Shared
+import DASHI.Analysis.RiemannAristotlePoleNearPhaseStatisticExact as Phase
 import DASHI.Analysis.RiemannG2QuarterPeriodAnalyticRouteReconciliationExact as Quarter
 import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerExact as Root
 import DASHI.Analysis.RiemannAristotleRHAnalyticLeafSchedulerExact as Leaf
@@ -75,7 +77,7 @@ zetaUpperCountSearchLeafPruned :
   Gap.GapSplitRelevant Gap.recoverZetaUpperLocalCount → ⊥
 zetaUpperCountSearchLeafPruned = Gap.zetaUpperLocalCountSearchPruned
 
--- Alpöge--Furman donor audit: same global >2/3-simple summary can coexist
+-- Alpoge--Furman donor audit: same global >2/3-simple summary can coexist
 -- with distinct target-local gap patterns, so global proportion does not descend
 -- to the live clustering consumer without a localization theorem.
 alpogeFurmanGlobalViewsCollide :
@@ -110,8 +112,7 @@ selectedTargetLocalMomentOpen :
     Moment.canonicalLocalMomentClusteringBoundary ≡ false
 selectedTargetLocalMomentOpen = refl
 
--- Same-object weld: the moment uses the existing ActualSelectedPoleNearProducer,
--- and separate target/near-family/multiplicity searches are pruned.
+-- Same-object selected-window moment attachment.
 selectedMomentExactConsumerShape :
   SelectedMoment.SelectedTargetLocalMomentBoundary.selectedWindowMomentAttachmentIsExactConsumerShape
     SelectedMoment.canonicalSelectedTargetLocalMomentBoundary ≡ true
@@ -137,6 +138,42 @@ secondMomentMultiplicitySearchPruned :
   ≡ SelectedMoment.pruned
 secondMomentMultiplicitySearchPruned = refl
 
+-- Shared selected/direct carrier: one zero-index/gap object must feed both the
+-- clustering moment and finite-near evaluation.
+selectedDirectWeldRequired :
+  Shared.SelectedDirectFiniteMomentBoundary.selectedAndDirectViewsMustBeWelded
+    Shared.canonicalSelectedDirectFiniteMomentBoundary ≡ true
+selectedDirectWeldRequired = refl
+
+selectedDirectWeldOpen :
+  Shared.SelectedDirectFiniteMomentBoundary.selectedDirectWeldInhabitedHere
+    Shared.canonicalSelectedDirectFiniteMomentBoundary ≡ false
+selectedDirectWeldOpen = refl
+
+sharedDirectCarrierFeedsBoth :
+  Shared.SelectedDirectFiniteMomentBoundary.oneDirectGapCarrierCanFeedClusteringAndFiniteEvaluation
+    Shared.canonicalSelectedDirectFiniteMomentBoundary ≡ true
+sharedDirectCarrierFeedsBoth = refl
+
+secondDirectZeroFamilyPruned :
+  Shared.paymentState Shared.recoverSecondDirectZeroFamily ≡ Shared.pruned
+secondDirectZeroFamilyPruned = Shared.secondDirectZeroFamilyPruned
+
+-- The old phase-statistic carrier is compiler output from DirectFinitePoleNearProducer.
+concretePhaseStatisticNowOwned :
+  Phase.PoleNearPhaseStatisticBoundary.repositoryAlreadyOwnsConcretePoleNearPhaseStatistic
+    Phase.canonicalPoleNearPhaseStatisticBoundary ≡ true
+concretePhaseStatisticNowOwned = refl
+
+secondPhaseCarrierPruned :
+  Phase.paymentState Phase.constructSecondPhaseStatisticCarrier ≡ Phase.pruned
+secondPhaseCarrierPruned = Phase.secondPhaseStatisticCarrierPruned
+
+phaseStatisticDoesNotCloseNumericalEvaluation :
+  Phase.PoleNearPhaseStatisticBoundary.directFiniteNearClosed
+    Phase.canonicalPoleNearPhaseStatisticBoundary ≡ false
+phaseStatisticDoesNotCloseNumericalEvaluation = refl
+
 -- The former parallel width/crossing work package is closed in place.
 widthAndCrossingPackageClosed :
   Quarter.workState Quarter.widthAndCrossingScale ≡ Quarter.closed
@@ -146,12 +183,16 @@ quarterSchedulerRoutesToClustering :
   Quarter.workState Quarter.actualZetaLowGapClustering ≡ Quarter.live
 quarterSchedulerRoutesToClustering = refl
 
--- Canonical root scheduler sees both the parent clustering leaf and its exact
--- same-selected-window second-moment refinement.
+-- Canonical root scheduler now exposes the shared same-object weld itself.
 rootSchedulerClusteringActive :
   Root.RHBidiSearchSchedulerBoundary.actualZetaLowGapClusteringActive
     Root.canonicalRHBidiSearchSchedulerBoundary ≡ true
 rootSchedulerClusteringActive = refl
+
+rootSchedulerSelectedDirectWeldActive :
+  Root.RHBidiSearchSchedulerBoundary.selectedDirectZeroCarrierWeldActive
+    Root.canonicalRHBidiSearchSchedulerBoundary ≡ true
+rootSchedulerSelectedDirectWeldActive = refl
 
 rootSchedulerLocalMomentRefinementActive :
   Root.RHBidiSearchSchedulerBoundary.targetLocalSecondMomentRefinementActive
@@ -162,6 +203,11 @@ rootSchedulerMomentUsesSelectedWindow :
   Root.RHBidiSearchSchedulerBoundary.targetLocalSecondMomentUsesExistingSelectedWindow
     Root.canonicalRHBidiSearchSchedulerBoundary ≡ true
 rootSchedulerMomentUsesSelectedWindow = refl
+
+rootSchedulerForcesSharedDirectCarrier :
+  Root.RHBidiSearchSchedulerBoundary.clusteringAndFiniteNearForcedOntoSameDirectCarrier
+    Root.canonicalRHBidiSearchSchedulerBoundary ≡ true
+rootSchedulerForcesSharedDirectCarrier = refl
 
 rootSchedulerGlobalSimpleDirectRoutePruned :
   Root.RHBidiSearchSchedulerBoundary.globalSimpleZeroProportionDirectClusteringRouteActive
