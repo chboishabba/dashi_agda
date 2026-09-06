@@ -10,10 +10,6 @@ import DASHI.Biology.Microbiology.BaldEyesalveNineDayMechanismWeldExact as Weld
 
 ------------------------------------------------------------------------
 -- MECHANISM-DISCRIMINATING EXPERIMENT SELECTION
---
--- This x-pollinates the generic Chemistry.TransitionKernel experiment-search
--- carrier into the Bald's-eyesalve mechanism frontier.  Scores are ordinal
--- qualitative priorities, not measured information gains.
 ------------------------------------------------------------------------
 
 timeResolvedSulfurSpeciation : TK.ExperimentCandidate
@@ -34,6 +30,15 @@ staphThiolomeUnderPreparation = record
   ; protocolReceiptRequired = true
   }
 
+proteinFunctionCellStatePanel : TK.ExperimentCandidate
+proteinFunctionCellStatePanel = record
+  { experimentId = "BE-X2F protein-function and coupled-cell-state panel"
+  ; measuredCarrier = "target activity/translation/metabolic flux plus matched proteome, RNA/regulatory and redox-recovery state"
+  ; uncertaintyTarget = "which observed S-thioallylations alter protein function and which functional changes propagate into coupled cell state"
+  ; expectedModelSpaceReduction = record { lower = 6 ; upper = 10 }
+  ; protocolReceiptRequired = true
+  }
+
 quorumReporterPanel : TK.ExperimentCandidate
 quorumReporterPanel = record
   { experimentId = "BE-X3 organism-appropriate quorum/virulence reporter panel"
@@ -46,7 +51,7 @@ quorumReporterPanel = record
 mechanismPerturbationRescue : TK.ExperimentCandidate
 mechanismPerturbationRescue = record
   { experimentId = "BE-X4 perturbation/rescue mediation panel"
-  ; measuredCarrier = "matched chemical, thiol/redox, regulatory and phenotype readouts under branch-selective perturbation or rescue"
+  ; measuredCarrier = "matched chemical, thiol/redox, protein-function, regulatory, cell-state and phenotype readouts under branch-selective perturbation or rescue"
   ; uncertaintyTarget = "causal mediation rather than association"
   ; expectedModelSpaceReduction = record { lower = 8 ; upper = 10 }
   ; protocolReceiptRequired = true
@@ -56,13 +61,14 @@ candidateExperiments : List TK.ExperimentCandidate
 candidateExperiments =
   timeResolvedSulfurSpeciation ∷
   staphThiolomeUnderPreparation ∷
+  proteinFunctionCellStatePanel ∷
   quorumReporterPanel ∷
   mechanismPerturbationRescue ∷ []
 
 canonicalMechanismExperimentSelection : TK.ExperimentSelection
 canonicalMechanismExperimentSelection = record
   { candidates = candidateExperiments
-  ; rankingCriterion = "first resolve target-preparation molecular identity/trajectory; then direct target-system molecular action; then regulatory association; finally causal mediation"
+  ; rankingCriterion = "resolve target-preparation chemistry; then target-system modification; then protein function/cell state; then regulatory association; finally perturbation/rescue mediation"
   ; selectedExperiment = "BE-X1 time-resolved sulfur speciation fresh-to-day-9"
   ; selectionValidated = false
   }
@@ -73,22 +79,23 @@ record ExperimentOrderingBoundary : Set where
     sourceBackedCandidateEqualsTargetPreparationPresence : Bool
     sourceBackedCandidateEqualsTargetPreparationPresenceIsFalse :
       sourceBackedCandidateEqualsTargetPreparationPresence ≡ false
-
+    proteinModificationEqualsFunctionalPerturbation : Bool
+    proteinModificationEqualsFunctionalPerturbationIsFalse :
+      proteinModificationEqualsFunctionalPerturbation ≡ false
+    functionalPerturbationEqualsWholeCellState : Bool
+    functionalPerturbationEqualsWholeCellStateIsFalse :
+      functionalPerturbationEqualsWholeCellState ≡ false
     reporterShiftEqualsMediation : Bool
     reporterShiftEqualsMediationIsFalse : reporterShiftEqualsMediation ≡ false
-
     phenotypeCovariationEqualsCausation : Bool
     phenotypeCovariationEqualsCausationIsFalse : phenotypeCovariationEqualsCausation ≡ false
-
     resolvingChemicalTrajectoryBeforeDownstreamMediationReducesConfounding : Bool
     resolvingChemicalTrajectoryBeforeDownstreamMediationReducesConfoundingIsTrue :
       resolvingChemicalTrajectoryBeforeDownstreamMediationReducesConfounding ≡ true
 
 canonicalExperimentOrderingBoundary : ExperimentOrderingBoundary
 canonicalExperimentOrderingBoundary =
-  experimentOrderingBoundary false refl false refl false refl true refl
+  experimentOrderingBoundary false refl false refl false refl false refl false refl true refl
 
--- The selection consumes the current welded frontier rather than inventing a
--- separate list of mechanism claims.
 existingNineDayBoundary : Weld.NineDayMechanismBoundary
 existingNineDayBoundary = Weld.canonicalNineDayMechanismBoundary
