@@ -73,10 +73,7 @@ import DASHI.Analysis.NonArchimedeanSigmaAnchorSameObjectBidiExact
 import DASHI.Analysis.NonArchimedeanGibbsFiniteProjectionUniquenessBidiExact
 import DASHI.Analysis.NonArchimedeanPadicCylinderBorelSourceExact
 
--- Corrected finite Markov/mixing route.  Both the source C=1 L2 estimate and
--- its advertised universal inverse-sqrt-two stopping-survival tail are refuted
--- by exact n=3 witnesses.  Repaired finite consumers use finite prefactors,
--- adjoint-aware law evolution and a constructive finite hitting-block route.
+-- Corrected finite Markov/mixing/stopping route.
 import DASHI.Analysis.NonArchimedeanContinuousMixingBidiExact
 import DASHI.Analysis.NonArchimedeanMixingRateNormalizationExact
 import DASHI.Analysis.NonArchimedeanMeanZeroInvariantCompilerExact
@@ -102,6 +99,7 @@ import DASHI.Analysis.NonArchimedeanSetDependentStoppingTailBidiExact
 import DASHI.Analysis.NonArchimedeanStoppingMomentRepairBidiExact
 import DASHI.Analysis.NonArchimedeanFiniteStationaryVsGibbsBoundaryExact
 import DASHI.Analysis.NonArchimedeanStoppingTimeAuthorityBidiExact
+import DASHI.Analysis.NonArchimedeanTaoConcentrationSameObjectNoGoExact
 
 -- Generic x-pollinated finite-state / projective kernels extracted from the repaired lane.
 import DASHI.Core.FiniteProbabilityDensityCoordinateWeldExact
