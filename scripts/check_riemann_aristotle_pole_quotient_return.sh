@@ -8,6 +8,7 @@ FILES=(
   DASHI/Analysis/RiemannAristotlePoleQuotientComplementMarginCompilerExact.agda
   DASHI/Analysis/RiemannAristotlePoleQuotientBidiMeetingExact.agda
   DASHI/Analysis/RiemannAristotlePoleQuotientSplitComplementBudgetExact.agda
+  DASHI/Analysis/RiemannG2PoleQuotientProducerAllowanceTargetExact.agda
   DASHI/Analysis/RiemannG2PoleQuotientChannelAllowanceExact.agda
   DASHI/Analysis/RiemannG2FinalSplitComplementSameObjectAssemblyExact.agda
   DASHI/Analysis/RiemannG2FinalSplitComplementAllowanceAssemblyExact.agda
@@ -18,6 +19,7 @@ FILES=(
   DASHI/Analysis/RiemannAristotlePoleQuotientCurrentCutExact.agda
   DASHI/Analysis/RiemannAristotlePoleQuotientCurrentCutRegression.agda
   DASHI/Analysis/RiemannG2PoleQuotientFinalCutReconciliationExact.agda
+  DASHI/Analysis/RiemannAristotleRHFinalAllowanceLeafSchedulerExact.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 )
@@ -32,6 +34,7 @@ done
 if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotlePoleQuotientComplementMarginCompilerExact.agda
   agda DASHI/Analysis/RiemannAristotlePoleQuotientSplitComplementBudgetExact.agda
+  agda DASHI/Analysis/RiemannG2PoleQuotientProducerAllowanceTargetExact.agda
   agda DASHI/Analysis/RiemannG2PoleQuotientChannelAllowanceExact.agda
   agda DASHI/Analysis/RiemannG2FinalSplitComplementSameObjectAssemblyExact.agda
   agda DASHI/Analysis/RiemannG2FinalSplitComplementAllowanceAssemblyExact.agda
@@ -41,6 +44,7 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotlePoleQuotientGammaBudgetTargetExact.agda
   agda DASHI/Analysis/RiemannAristotlePoleQuotientClusterMarginTargetExact.agda
   agda DASHI/Analysis/RiemannG2PoleQuotientFinalCutReconciliationExact.agda
+  agda DASHI/Analysis/RiemannAristotleRHFinalAllowanceLeafSchedulerExact.agda
   agda DASHI/Analysis/RiemannAristotlePoleQuotientCurrentCutRegression.agda
   agda DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
 else
