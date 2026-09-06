@@ -4,31 +4,25 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119RecoveredShortestSourceCut
 ------------------------------------------------------------------------
 -- CMP98 EQ. (119): RECOVERED SHORTEST SOURCE CUT AFTER ROUND218 ARCHAEOLOGY
 --
--- The pointwise selected-cut route remains a valid semantic fallback, but
--- Round218 proves that it is not the shortest source frontier once the later
--- physical/dyadic/path13 owners are taken into account.
+-- The pointwise selected-cut route remains a valid semantic fallback, but the
+-- later physical/dyadic/Path13 owners remove several older source coordinates.
 --
--- Already-owned coordinates:
---   * principal-Y / Federbush indexing (R179);
---   * dyadic physical principal-log admission without selected-cut-radius
---     comparison (R181);
---   * selected physical periodic realization (R187);
---   * raw/unit path homomorphism (R189);
---   * literal Path13 side-13 periodic realization (R192).
+-- IMPORTANT INDEX REPAIR:
+-- the historical periodic APIs are predecessor-indexed:
 --
--- The two surviving source receipts are now both type-refined:
+--   PeriodicBlock n = periodicTorus4Definition (suc n),
+--   PeriodicBondField n = BondField (suc n).
 --
---   1. instantiate the generic selected variational/physical background bridge
---      directly on the literal Path13 background carrier;
+-- Physical side 13 therefore uses historical n=12.  R192/R193/R216 now encode
+-- this explicitly.  The Path13 realization is counted as pruned only together
+-- with that repair; the superseded n=13 specialization must not be revived.
 --
---   2. weld the actual bond-indexed Path13 perturbation field to the local
---      SU(2) Lie values used by the Eq.(119) R0 recursion, including signed-link
---      orientation and scalar transport.  The positive-bond spatial projection
---      itself is already constructed exactly.
---
--- This deliberately corrects an earlier misleading reading of "scalar action":
--- it means scalar multiplication on the perturbation Lie carrier (`scaleV`),
--- not the unrelated SFGC selected finite Yang-Mills action-scalar fixture.
+-- The two surviving source receipts remain:
+--   1. construct the selected variational/physical background directly on the
+--      literal Path13 background carrier;
+--   2. weld the bond-indexed Path13 perturbation field to the local SU(2) Lie
+--      values used by the Eq.(119) R0 recursion, including signed orientation,
+--      scalar transport and a genuine global/local carrier distinction.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -37,6 +31,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP98Equation119DisjunctivePhysicalSourceCutExact as Eq119Cut
 import DASHI.Physics.YangMills.BalabanCMP98Equation120RecoveredSourceFrontierRound218Exact as R218
+import DASHI.Physics.YangMills.BalabanCMP98Path13PhysicalPeriodicRealizationRound192Exact as R192
 import DASHI.Physics.YangMills.BalabanPath13SelectedPhysicalBackgroundTargetExact as Path13Target
 import DASHI.Physics.YangMills.BalabanCMP98Path13PerturbationCarrierWeldExact as PerturbationTarget
 
@@ -55,6 +50,7 @@ record RecoveredEq119ShortestSourceStatus : Set where
     selectedCutRadiusPrunedOnShortestRoute : Bool
     selectedPhysicalPeriodicRealizationPruned : Bool
     rawUnitPathRepresentationPruned : Bool
+    path13HistoricalPeriodicIndexRepairClosed : Bool
     path13PeriodicRealizationPruned : Bool
 
     path13PositiveBondPerturbationProjectionClosed : Bool
@@ -72,6 +68,8 @@ record RecoveredEq119ShortestSourceStatus : Set where
       selectedPhysicalPeriodicRealizationPruned ≡ true
     rawUnitPathRepresentationPrunedIsTrue :
       rawUnitPathRepresentationPruned ≡ true
+    path13HistoricalPeriodicIndexRepairClosedIsTrue :
+      path13HistoricalPeriodicIndexRepairClosed ≡ true
     path13PeriodicRealizationPrunedIsTrue :
       path13PeriodicRealizationPruned ≡ true
     path13PositiveBondPerturbationProjectionClosedIsTrue :
@@ -96,6 +94,7 @@ canonicalRecoveredEq119ShortestSourceStatus = record
   ; selectedCutRadiusPrunedOnShortestRoute = true
   ; selectedPhysicalPeriodicRealizationPruned = true
   ; rawUnitPathRepresentationPruned = true
+  ; path13HistoricalPeriodicIndexRepairClosed = true
   ; path13PeriodicRealizationPruned = true
   ; path13PositiveBondPerturbationProjectionClosed = true
   ; path13SelectedPhysicalBackground13Constructed = false
@@ -108,6 +107,7 @@ canonicalRecoveredEq119ShortestSourceStatus = record
   ; selectedCutRadiusPrunedOnShortestRouteIsTrue = refl
   ; selectedPhysicalPeriodicRealizationPrunedIsTrue = refl
   ; rawUnitPathRepresentationPrunedIsTrue = refl
+  ; path13HistoricalPeriodicIndexRepairClosedIsTrue = refl
   ; path13PeriodicRealizationPrunedIsTrue = refl
   ; path13PositiveBondPerturbationProjectionClosedIsTrue = refl
   ; path13SelectedPhysicalBackground13ConstructedIsFalse = refl
@@ -115,7 +115,6 @@ canonicalRecoveredEq119ShortestSourceStatus = record
   ; recoveredShortestPhysicalEq119SourceClosedIsFalse = refl
   }
 
--- Compatibility readings of the older Round218 prose coordinates.
 path13BackgroundIsSelectedPhysicalBackgroundClosed :
   RecoveredEq119ShortestSourceStatus → Bool
 path13BackgroundIsSelectedPhysicalBackgroundClosed =
@@ -147,6 +146,10 @@ principalYFederbushIndexPruningLevel =
 selectedCutRadiusPruningLevel : ProofLevel
 selectedCutRadiusPruningLevel =
   R218.cmp98SelectedCutRadiusFrontierPrunedRound218Level
+
+path13HistoricalPeriodicIndexRepairLevel : ProofLevel
+path13HistoricalPeriodicIndexRepairLevel =
+  R192.cmp98Path13PhysicalPeriodicIndexRepairRound192Level
 
 pathRealizationPruningLevel : ProofLevel
 pathRealizationPruningLevel =
