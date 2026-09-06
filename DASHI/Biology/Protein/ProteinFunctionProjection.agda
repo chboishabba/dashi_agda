@@ -84,3 +84,42 @@ record ContextDependentFunctionWitness
           modification localisation history)
         (functionAt sequence conformation environment₂ partner₂
           modification localisation history)
+
+------------------------------------------------------------------------
+-- Modification-to-function BIDI seam.
+--
+-- This makes post-translational/covalent modification an explicit input to a
+-- functional perturbation claim while preserving the core non-inference:
+-- modification does not determine inhibition or whole-cell phenotype by itself.
+------------------------------------------------------------------------
+
+record ModificationFunctionBridge
+  (P : ProteinFunctionSystem) : Set₁ where
+  open ProteinFunctionSystem P
+  field
+    ProteinTarget : Set
+    ModificationReceipt : Set
+    FunctionalEffectReceipt : Set
+    RecoveryReceipt : Set
+
+    targetSequence : ProteinTarget → Sequence
+    modificationFor : ProteinTarget → ModificationReceipt → Modification
+
+    FunctionalEffectFromModification :
+      ProteinTarget → ModificationReceipt → Set
+
+    functionalEffectWitness :
+      (target : ProteinTarget) →
+      (receipt : ModificationReceipt) →
+      FunctionalEffectFromModification target receipt →
+      FunctionalEffectReceipt
+
+    RecoveryCanChangeModification :
+      ProteinTarget → ModificationReceipt → RecoveryReceipt → Set
+
+record ModificationFunctionBoundary : Set₁ where
+  field
+    modificationIsNotFunctionalInhibitionByDefinition : Set
+    functionalPerturbationIsNotWholeCellPhenotype : Set
+    recoveryReceiptIsNotGuaranteedFullFunctionRestoration : Set
+    sameModificationCanHaveContextDependentFunction : Set
