@@ -4,17 +4,13 @@ module DASHI.Cognition.PNF.SensibLawClimateForumCompulsionEnforcementLatticeExac
 -- CLIMATE FORUM / COMPULSION / ENFORCEMENT LATTICE
 --
 -- A legal finding, remedy, bindingness, domestic enforceability, constitutional
--- invalidity power and actual compliance are separate coordinates.  This owner
+-- invalidity power and actual compliance are separate coordinates. This owner
 -- compares Pabai, Daniel Billy and Neubauer without pretending their legal
 -- systems or causes of action are interchangeable.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
-
-------------------------------------------------------------------------
--- Generic forum coordinates.
-------------------------------------------------------------------------
 
 data ForumKind : Set where
   domesticOrdinaryCourt
@@ -73,10 +69,6 @@ record ForumEnforcementReceipt : Set where
 
 open ForumEnforcementReceipt public
 
-------------------------------------------------------------------------
--- Pabai: first-instance negligence loss, with a live appeal in 2026.
-------------------------------------------------------------------------
-
 pabaiFirstInstanceAndAppeal : ForumEnforcementReceipt
 pabaiFirstInstanceAndAppeal = forum-enforcement-receipt
   "Pabai Pabai & Anor v Commonwealth of Australia; VID622/2021 first instance; VID1479/2025 appeal"
@@ -96,10 +88,6 @@ pabaiFirstInstanceAndAppeal = forum-enforcement-receipt
 pabaiAppealRemainsLive :
   proceedingState pabaiFirstInstanceAndAppeal ≡ firstInstanceDecidedAppealPending
 pabaiAppealRemainsLive = refl
-
-------------------------------------------------------------------------
--- Billy: treaty-body violation + reparation, without Australian domestic writ.
-------------------------------------------------------------------------
 
 billyTorresStraitViews : ForumEnforcementReceipt
 billyTorresStraitViews = forum-enforcement-receipt
@@ -127,10 +115,6 @@ billyNotDirectAustralianDomesticExecution :
   directlySelfExecutingInAustralianDomesticCourt billyTorresStraitViews ≡ false
 billyNotDirectAustralianDomesticExecution = refl
 
-------------------------------------------------------------------------
--- Neubauer: constitutional incompatibility plus legislative correction duty.
-------------------------------------------------------------------------
-
 neubauerConstitutionalDecision : ForumEnforcementReceipt
 neubauerConstitutionalDecision = forum-enforcement-receipt
   "Neubauer et al v Germany, Federal Constitutional Court, 1 BvR 2656/18 et al"
@@ -150,10 +134,6 @@ neubauerConstitutionalDecision = forum-enforcement-receipt
 neubauerCanRequireLegislativeCorrection :
   canRequireLegislativeCorrection neubauerConstitutionalDecision ≡ true
 neubauerCanRequireLegislativeCorrection = refl
-
-------------------------------------------------------------------------
--- Mandamus/existing-duty boundary for Australian public law.
-------------------------------------------------------------------------
 
 record ExistingDutyCompulsionBoundary : Set where
   constructor existing-duty-compulsion-boundary
@@ -179,10 +159,6 @@ canonicalExistingDutyCompulsionBoundary = existing-duty-compulsion-boundary
   false refl
   false refl
 
-------------------------------------------------------------------------
--- Ailan Kastom / cultural-loss visibility is cause-of-action relative.
-------------------------------------------------------------------------
-
 data CulturalLossLegalRegime : Set where
   generalNegligenceRegime
   nativeTitleCompensationRegime
@@ -205,9 +181,9 @@ regimeChangesLegalVisibility ()
 record CulturalLossRegimeBoundary : Set where
   constructor cultural-loss-regime-boundary
   field
-    p'abalAilanKastomAndTimberCreekLossAreFactuallyIdentical : Bool
-    p'abalAilanKastomAndTimberCreekLossAreFactuallyIdenticalIsFalse :
-      p'abalAilanKastomAndTimberCreekLossAreFactuallyIdentical ≡ false
+    pabaiAilanKastomAndTimberCreekLossAreFactuallyIdentical : Bool
+    pabaiAilanKastomAndTimberCreekLossAreFactuallyIdenticalIsFalse :
+      pabaiAilanKastomAndTimberCreekLossAreFactuallyIdentical ≡ false
     relatedCulturalSpiritualHarmsCanReceiveDifferentLegalTreatment : Bool
     relatedCulturalSpiritualHarmsCanReceiveDifferentLegalTreatmentIsTrue :
       relatedCulturalSpiritualHarmsCanReceiveDifferentLegalTreatment ≡ true
@@ -226,10 +202,6 @@ canonicalCulturalLossRegimeBoundary = cultural-loss-regime-boundary
   true refl
   false refl
   false refl
-
-------------------------------------------------------------------------
--- Forum capability is multiaxial, not one scalar called "can compel".
-------------------------------------------------------------------------
 
 record ForumCapabilityBoundary : Set where
   constructor forum-capability-boundary
@@ -262,15 +234,11 @@ canonicalForumCapabilityBoundary = forum-capability-boundary
   false refl
   false refl
 
-------------------------------------------------------------------------
--- No-collapse laws.
-------------------------------------------------------------------------
-
 data FindingViolationMeansDomesticCompulsion : Set where
 data TreatyBodyViewIsAustralianDomesticMandamus : Set where
 data PabaiFirstInstanceIsFinalAppealDisposition : Set where
 data DifferentCompensationRegimeMeansDifferentUnderlyingReality : Set where
-\data NeubauerMeansEveryConstitutionalCourtCanOrderClimateTargets : Set where
+data NeubauerMeansEveryConstitutionalCourtCanOrderClimateTargets : Set where
 
 findingDoesNotEqualDomesticCompulsion : FindingViolationMeansDomesticCompulsion → ⊥
 findingDoesNotEqualDomesticCompulsion ()
