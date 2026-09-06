@@ -40,6 +40,7 @@ import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
 import DASHI.Physics.Closure.NSTriadKNStrongLowLiteralNestedKernelRound329Exact as R329
 
+F : C3.RealField _
 F = R329.F
 
 literalNestedOuterSlotAngularNormBound :
