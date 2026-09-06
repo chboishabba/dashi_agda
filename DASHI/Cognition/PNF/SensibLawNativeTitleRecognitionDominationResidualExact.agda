@@ -238,6 +238,9 @@ record NativeTitleCriticalBoundary : Set where
   field
     NativeTitleWasMajorLegalAdvance : Bool
     NativeTitleWasMajorLegalAdvanceIsTrue : NativeTitleWasMajorLegalAdvance ≡ true
+    NativeTitleLegallyOperativeWithinAustralianLaw : Bool
+    NativeTitleLegallyOperativeWithinAustralianLawIsTrue :
+      NativeTitleLegallyOperativeWithinAustralianLaw ≡ true
     NativeTitleExhaustsIndigenousSovereignty : Bool
     NativeTitleExhaustsIndigenousSovereigntyIsFalse :
       NativeTitleExhaustsIndigenousSovereignty ≡ false
@@ -264,6 +267,7 @@ open NativeTitleCriticalBoundary public
 canonicalNativeTitleCriticalBoundary : NativeTitleCriticalBoundary
 canonicalNativeTitleCriticalBoundary = native-title-critical-boundary
   true refl
+  true refl
   false refl
   false refl
   false refl
@@ -282,6 +286,7 @@ data CommonLawRecognitionConstitutesIndigenousOrder : Set where
 data DoctrinalAdvanceImpliesDecolonisation : Set where
 data CriticalCritiqueErasesLegalGain : Set where
 data NoCessionSourcePositionAdjudicatesWorldCessionTruth : Set where
+data LegalOperabilityImpliesDecolonialAdequacy : Set where
 
 recognitionDoesNotImplyEqualSovereignty : RecognitionImpliesEqualSovereignty → ⊥
 recognitionDoesNotImplyEqualSovereignty ()
@@ -303,3 +308,7 @@ critiqueDoesNotEraseLegalGain ()
 sourcePositionDoesNotAdjudicateCessionWorldTruth :
   NoCessionSourcePositionAdjudicatesWorldCessionTruth → ⊥
 sourcePositionDoesNotAdjudicateCessionWorldTruth ()
+
+legalOperabilityDoesNotProveDecolonialAdequacy :
+  LegalOperabilityImpliesDecolonialAdequacy → ⊥
+legalOperabilityDoesNotProveDecolonialAdequacy ()
