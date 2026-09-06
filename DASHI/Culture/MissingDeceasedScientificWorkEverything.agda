@@ -18,8 +18,9 @@ module DASHI.Culture.MissingDeceasedScientificWorkEverything where
 -- observers and events. None of those bridges are inferred from scientific
 -- interest or public governing physics alone.
 --
--- Kept separate from AmyEskridgeEvidenceEverything because Amy Eskridge is not
--- explicitly named in the 20 April 2026 House Oversight letter formalised here.
+-- Amy Eskridge is kept outside the House-letter denominator but included in the
+-- full memorial application-transformation atlas so she is not dropped from the
+-- comparative scientific/investigative surface.
 
 import DASHI.Core.ScientificWorkAttributionExact
 import DASHI.Core.ScientificSourceCitationExact
@@ -58,6 +59,8 @@ import DASHI.Culture.MissingDeceasedScientificCapabilityCarrierMatrixExact
 import DASHI.Culture.MissingDeceasedScientificCapabilityPublicControlsExact
 import DASHI.Culture.MissingDeceasedScienceDrivenAcquisitionExact
 import DASHI.Culture.MissingDeceasedApplicationTransformationMatrixExact
+import DASHI.Culture.AmyEskridgeApplicationTransformationExact
+import DASHI.Culture.MissingDeceasedFullApplicationTransformationAtlasExact
 import DASHI.Culture.ChavezApplicationTransformationPossessionExact
 import DASHI.Culture.LeBlancApplicationTransformationPossessionExact
 import DASHI.Culture.RezaApplicationTransformationPossessionExact
