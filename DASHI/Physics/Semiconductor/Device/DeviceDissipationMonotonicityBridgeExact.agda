@@ -13,13 +13,10 @@ import DASHI.Analysis.DissipationPathMonotonicity as DPM
 -- ACTUAL REPO ANALYSIS REUSE
 --
 -- DASHI.Analysis.DissipationPathMonotonicity already proves that any exact
--- balance
---
---   F(before) = F(after) + D
---
--- in an ordered additive energy space yields one-step and finite-path energy
--- descent.  Device solvers therefore should supply a physical/numerical energy
--- and an exact balance, rather than re-prove monotonicity ad hoc.
+-- balance F(before) = F(after) + D in an ordered additive energy space yields
+-- one-step and finite-path energy descent.  Device solvers should therefore
+-- supply a physical/numerical energy and exact balance rather than re-proving
+-- monotonicity ad hoc.
 ------------------------------------------------------------------------
 
 record DeviceDissipativeSolver
@@ -40,8 +37,8 @@ deviceMonotonicityCertificate :
     {Energy : Set e}
     {Input : Set i}
     {ES : EC.EnergySpace State Energy} →
-  DeviceDissipativeSolver ES Input →
-  DPM.DissipationMonotonicityCertificate (transition _)
+  (solver : DeviceDissipativeSolver ES Input) →
+  DPM.DissipationMonotonicityCertificate (transition solver)
 deviceMonotonicityCertificate solver =
   DPM.certifyDissipationMonotonicity (transition solver)
 
