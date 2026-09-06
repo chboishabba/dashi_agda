@@ -5,11 +5,14 @@ import DASHI.Economics.AIFinancingReflexivityExact as Reflexive
 import DASHI.Economics.AITerminalPayerEconomicValidationExact as Terminal
 import DASHI.Economics.AIManufacturingChokepointTimescaleExact as Manufacturing
 import DASHI.Economics.AIStructuredInfrastructureCommonFactorRiskExact as AIStructured
+import DASHI.Economics.AIScalingLawRegimeMonitorExact as ScalingMonitor
+import DASHI.Economics.AICriticalInfrastructurePoliticsCrossPollinationExact as Politics
 import DASHI.Economics.ReflexiveFlowValidationExact as Econ
 import DASHI.Economics.CommonFactorStructuredFinanceExact as Structured
 import DASHI.Economics.ManufacturingScarcityTimescaleExact as Scarcity
 import DASHI.Economics.UnitEconomicsMarginExact as Unit
 import DASHI.Economics.PolicyBackstopCommercialDisciplineExact as Policy
+import DASHI.Economics.ComputeScalingUnitEconomicsExact as Scaling
 
 ------------------------------------------------------------------------
 -- MULTI-AXIS AI INFRASTRUCTURE REGIME CLASSIFIER
@@ -22,7 +25,8 @@ import DASHI.Economics.PolicyBackstopCommercialDisciplineExact as Policy
 record AIInfrastructureRegimeVector : Set₁ where
   field
     ExternalCashValidation CircularityIntensity ValuationReflexivity
-      LeverageIntensity MarginPressure ManufacturingScarcity PolicyBackstop : Set
+      LeverageIntensity MarginPressure ManufacturingScarcity PolicyBackstop
+      ComputeScalingPressure : Set
 
     externalCashValidation : ExternalCashValidation
     circularityIntensity   : CircularityIntensity
@@ -31,6 +35,7 @@ record AIInfrastructureRegimeVector : Set₁ where
     marginPressure         : MarginPressure
     manufacturingScarcity  : ManufacturingScarcity
     policyBackstop         : PolicyBackstop
+    computeScalingPressure : ComputeScalingPressure
 
 open AIInfrastructureRegimeVector public
 
@@ -85,3 +90,18 @@ surroundingSignalsDoNotCloseEconomicValidation :
   Terminal.SurroundingSignalsImplyEconomicValidationPermission → ⊥
 surroundingSignalsDoNotCloseEconomicValidation =
   Terminal.surroundingSignalsDoNotAutoPromoteToEconomicValidation
+
+computeDeflationDoesNotCloseLowerAggregateDemand :
+  Scaling.LowerCostPerTokenImpliesLowerTotalComputeDemandPermission → ⊥
+computeDeflationDoesNotCloseLowerAggregateDemand =
+  Scaling.lowerCostPerTokenDoesNotAutoPromoteToLowerTotalComputeDemand
+
+historicalScalingFitDoesNotCloseFutureLaw :
+  ScalingMonitor.HistoricalFitImpliesUniversalFutureLawPermission → ⊥
+historicalScalingFitDoesNotCloseFutureLaw =
+  ScalingMonitor.historicalFitDoesNotAutoPromoteToUniversalFutureLaw
+
+criticalInfrastructureSupportDoesNotCloseCommercialViability :
+  Policy.PolicySupportImpliesCommercialViabilityPermission → ⊥
+criticalInfrastructureSupportDoesNotCloseCommercialViability =
+  Politics.policySupportDoesNotCloseCommercialViability
