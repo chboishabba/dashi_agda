@@ -26,7 +26,8 @@ import DASHI.Physics.Closure.NSTriadKNResonantNullGain
 -- structural-operator Schur, angular/helicity/phase producer frontiers,
 -- absolute->block->signed fallback hierarchy, zero-safe defect API, the
 -- literal R329 nested anti-parallel pointwise gain / radius-calibration seam,
--- and the exact reduction of global coherence to fixed-output fibres.
+-- exact reduction of global coherence to fixed-output fibres, physical
+-- three-class Bony reduction, and critical-cone compiler.
 import DASHI.Physics.Closure.NSTriadKNDataOperatorSchurCrossPollination2026Exact
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramProducerFrontier2026Exact
 import DASHI.Physics.Closure.NSTriadKNGramControlFallbackHierarchy2026Exact
@@ -35,6 +36,8 @@ import DASHI.Physics.Closure.NSTriadKNAlmostOrthogonalSchurCriticalRouteXPollina
 import DASHI.Physics.Closure.NSTriadKNLiteralNestedOuterAntiParallelNormRound430Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralNestedOuterRadiusDefectRound431Exact
 import DASHI.Physics.Closure.NSTriadKNFixedOutputSignedCrossAggregationRound432Exact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputNestedBonyCrossRound433Exact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCriticalConeCompilerRound434Exact
 
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
 -- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
