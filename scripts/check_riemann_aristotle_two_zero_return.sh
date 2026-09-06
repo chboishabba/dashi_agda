@@ -36,11 +36,15 @@ FILES=(
   DASHI/Analysis/RiemannG2AlpogeFurmanClusteringNonDescentExact.agda
   DASHI/Analysis/RiemannG2TransverseVsOrdinateMomentNonDescentExact.agda
   DASHI/Analysis/RiemannG2LowGapClusteringMomentReductionExact.agda
+  DASHI/Analysis/RiemannG2TargetCenteredScalarCancellationAssemblyExact.agda
+  DASHI/Analysis/RiemannAristotlePoleQuotientDirectFiniteNearAttackExact.agda
   DASHI/Analysis/RiemannG2SelectedTargetLocalMomentSameObjectExact.agda
   DASHI/Analysis/RiemannG2SelectedDirectFiniteMomentBidiExact.agda
   DASHI/Analysis/RiemannAristotlePoleNearPhaseStatisticExact.agda
+  DASHI/Analysis/RiemannG2SelectedPoleNearFiniteEvaluationSameObjectExact.agda
   DASHI/Analysis/RiemannG2AdaptiveJLambdaConstantWindowExact.agda
   DASHI/Analysis/RiemannG2QuarterPeriodAnalyticRouteReconciliationExact.agda
+  DASHI/Analysis/RiemannG2HighestAlphaAfter369Exact.agda
   DASHI/Analysis/RiemannG2HighestAlphaAfter8894Exact.agda
   DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerExact.agda
   DASHI/Analysis/RiemannAristotleRHAnalyticLeafSchedulerExact.agda
@@ -84,11 +88,15 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannG2AlpogeFurmanClusteringNonDescentExact.agda
   agda DASHI/Analysis/RiemannG2TransverseVsOrdinateMomentNonDescentExact.agda
   agda DASHI/Analysis/RiemannG2LowGapClusteringMomentReductionExact.agda
+  agda DASHI/Analysis/RiemannG2TargetCenteredScalarCancellationAssemblyExact.agda
+  agda DASHI/Analysis/RiemannAristotlePoleQuotientDirectFiniteNearAttackExact.agda
   agda DASHI/Analysis/RiemannG2SelectedTargetLocalMomentSameObjectExact.agda
   agda DASHI/Analysis/RiemannG2SelectedDirectFiniteMomentBidiExact.agda
   agda DASHI/Analysis/RiemannAristotlePoleNearPhaseStatisticExact.agda
+  agda DASHI/Analysis/RiemannG2SelectedPoleNearFiniteEvaluationSameObjectExact.agda
   agda DASHI/Analysis/RiemannG2AdaptiveJLambdaConstantWindowExact.agda
   agda DASHI/Analysis/RiemannG2QuarterPeriodAnalyticRouteReconciliationExact.agda
+  agda DASHI/Analysis/RiemannG2HighestAlphaAfter369Exact.agda
   agda DASHI/Analysis/RiemannG2HighestAlphaAfter8894Exact.agda
   agda DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerExact.agda
   agda DASHI/Analysis/RiemannAristotleRHAnalyticLeafSchedulerExact.agda
