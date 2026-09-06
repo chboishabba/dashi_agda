@@ -32,7 +32,7 @@ module DASHI.Analysis.RiemannAristotleCurrentFrontierExact where
 --
 -- CURRENT NEAR-CORE FRONTIER
 --
--- The first live analytic obligation is the genuine clustering statement
+-- The live clustering statement is
 --
 --   (4/pi^2) * highGapMass < lowGapMass,
 --
@@ -43,15 +43,22 @@ module DASHI.Analysis.RiemannAristotleCurrentFrontierExact where
 --
 --   delta = Im(rho) - t.
 --
--- This is deliberately NOT the Alpöge--Furman/Hermitian transverse coordinate
--- alpha = Re(rho)-1/2. A proof-bearing finite collision now records that equal
--- alpha information can coexist with different delta information, so the
--- transverse moment cannot directly close local gap clustering.
+-- This is deliberately NOT the Alpoge--Furman/Hermitian transverse coordinate
+-- alpha = Re(rho)-1/2. Equal alpha information can coexist with different delta
+-- information, so transverse-moment control is not a direct clustering donor.
 --
--- The correct in-repo carrier is PoleNearPhaseStatistic.targetRelativeGap. The
--- moment socket is indexed by the already-existing ActualSelectedPoleNearProducer,
--- reusing its selected target, multiplicities and nearOffFinset rather than
--- creating a parallel zero/window object.
+-- BIDI compression has now removed another duplicate interface. The existing
+-- DirectFinitePoleNearProducer already carries ZeroIndex, nearIndex,
+-- multiplicity, targetRelativeGap and a signed approximant/error receipt.
+-- Therefore PoleNearPhaseStatistic is compiler output from that direct producer;
+-- a second phase-statistic carrier is not a research theorem.
+--
+-- The remaining SAME-OBJECT representation payment is narrower: identify that
+-- direct producer with the existing ActualSelectedPoleNearProducer. This
+-- SelectedDirectFiniteWeld is shared upstream of both the delta-moment clustering
+-- route and the finite-near signed evaluation. It prevents those two consumers
+-- from silently using different zero families, targets, cutoffs or multiplicity
+-- functions.
 --
 -- Agda owns the subtraction-free compiler
 --
@@ -59,10 +66,9 @@ module DASHI.Analysis.RiemannAristotleCurrentFrontierExact where
 --     -> highGapMass < 2*lowGapMass.
 --
 -- Together with the elementary real coefficient fact 4/pi^2 < 1/2 this is
--- sufficient for the exact clustering coefficient. The actual selected-window
--- delta-moment producer remains open. The same delta coordinate also occurs in
--- the literal finite-near cosine phase cos((b_sigma-t)u), so a successful
--- target-gap statistic may feed both clustering and finite-near evaluation.
+-- sufficient for the exact clustering coefficient. The actual welded-window
+-- delta-moment estimate remains open. The direct producer's numerical finite-
+-- near evaluation also remains open at consumer-sufficient precision.
 --
 -- Earlier finite-near Schur and nuisance-elimination obligations remain valid
 -- architectural dependencies. Gamma precision, low-ordinate/global coverage,
@@ -148,6 +154,18 @@ record AristotleCurrentFrontier : Set where
     targetLocalMomentUsesExistingSelectedWindowIsTrue :
       targetLocalMomentUsesExistingSelectedWindow ≡ true
 
+    concretePhaseStatisticCompilerClosedInAgda : Bool
+    concretePhaseStatisticCompilerClosedInAgdaIsTrue :
+      concretePhaseStatisticCompilerClosedInAgda ≡ true
+
+    selectedDirectZeroCarrierWeldClosed : Bool
+    selectedDirectZeroCarrierWeldClosedIsFalse :
+      selectedDirectZeroCarrierWeldClosed ≡ false
+
+    oneDirectGapCarrierFeedsClusteringAndFiniteNear : Bool
+    oneDirectGapCarrierFeedsClusteringAndFiniteNearIsTrue :
+      oneDirectGapCarrierFeedsClusteringAndFiniteNear ≡ true
+
     transverseMomentDirectlyControlsOrdinateClustering : Bool
     transverseMomentDirectlyControlsOrdinateClusteringIsFalse :
       transverseMomentDirectlyControlsOrdinateClustering ≡ false
@@ -216,6 +234,9 @@ canonicalAristotleCurrentFrontier =
     true refl
     false refl
     true refl
+    true refl
+    false refl
+    true refl
     false refl
     false refl
     true refl
@@ -229,4 +250,4 @@ canonicalAristotleCurrentFrontier =
     false refl
     false refl
     false refl
-    "The newest checked Lean tranche reconciles the quarter-period lower cutoff with the density upper cutoff and discharges the zeta unit/short-window upper-count hypotheses. The first live optimized near-core obligation is genuine zeta clustering at D = pi/(3 Lambda). Its current highest-alpha refinement is a SAME-selected-window second moment of delta = Im(rho)-t, not the unrelated transverse alpha = Re(rho)-1/2 coordinate. Agda owns the moment-to-two-to-one ratio compiler and the same-object selected-window attachment shape; the actual analytic delta-moment producer and elementary 4/pi^2 < 1/2 coefficient bridge remain open. The same delta coordinate is also the phase variable in the finite-near cosine sum, so this producer may feed both zero-side consumers. Earlier finite-near, Gamma, low-ordinate and final RH obligations remain open where recorded; RH is not derived."
+    "The checked Lean tranche reconciles quarter-period versus density cutoffs and closes the zeta unit/short-window upper-count input. The live optimized near-core target is actual-zeta low-gap clustering at D = pi/(3 Lambda). Its highest-fanout refinement uses delta = Im(rho)-t on one SAME selected/direct zero carrier. PoleNearPhaseStatistic is now compiler output from DirectFinitePoleNearProducer, so a second phase carrier is pruned. The remaining representation seam is the SelectedDirectFiniteWeld identifying that direct producer with the existing ActualSelectedPoleNearProducer. Once welded, the same targetRelativeGap/multiplicity/nearIndex carrier can feed both the normalized delta^2 moment and the signed finite-near evaluation. Agda owns the moment-to-two-to-one ratio compiler; the actual delta-moment estimate, exact 4/pi^2 coefficient transport, consumer-sufficient finite-near evaluation, Gamma precision, low-ordinate coverage and final RH implication remain open. Transverse alpha moments and global >2/3 simple-zero abundance are not silently promoted to local ordinate clustering. RH is not derived."
