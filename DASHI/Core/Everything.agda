@@ -29,6 +29,8 @@ import DASHI.Core.ExperimentalCoordinateDesignExact
 import DASHI.Core.ActionabilityCostedExperimentChoiceExact
 import DASHI.Core.CommonExperimentRealisationExact
 import DASHI.Core.DiscriminatorSynthesisExact
+import DASHI.Core.MechanismModelDiscriminationExact
+import DASHI.Core.MechanismDiscriminationApplicationAtlasExact
 import DASHI.Core.SequentialConsumerExperimentPlannerExact
 import DASHI.Core.SequentialRobustActionabilityPlannerExact
 import DASHI.Core.SequentialRelationalExperimentPlannerExact
