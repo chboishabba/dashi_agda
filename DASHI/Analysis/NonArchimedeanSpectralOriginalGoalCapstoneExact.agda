@@ -4,13 +4,28 @@ module DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact where
 -- ORIGINAL-GOAL / POST-CLOSURE CAPSTONE
 --
 -- The finite non-Archimedean spectral core is dependency-closed in DASHI.
--- Post-closure audits now distinguish:
+-- The repaired finite Markov/stopping lane and probability-measure Gibbs
+-- uniqueness are also dependency-closed.  Several stronger source claims are
+-- closed-negative rather than left as phantom proof obligations.
 --
---   * false unit-prefactor / universal-tail claims (refuted);
---   * repaired finite prefactored L2, covariance and TV consumers (closed);
---   * constructive set-dependent stopping tails (closed);
---   * polynomial stopping moments (one standard analytic consumer leaf);
---   * sigma same-object promotion and infinite Gibbs uniqueness (still live).
+-- Positive closures include:
+--   * spatial spectral circle / signed powers / spectrum tower;
+--   * finite C_n-prefactored L2, covariance and TV mixing;
+--   * constructive set-dependent stopping tails;
+--   * all polynomial stopping moments and repaired MGF strip;
+--   * unique Haar probability Gibbs MEASURE via finite dyadic projections.
+--
+-- Closed-negative promotions include:
+--   * unit-prefactor one-step L2 contraction;
+--   * universal inverse-sqrt-two stopping tail;
+--   * universal half-log-two MGF strip;
+--   * N-size exponent sigma=1/2 reading of the radius law;
+--   * 2-adic/cyclotomic factor determining Prolate critical sigma;
+--   * full continuous transfer-operator radius sqrt two;
+--   * uniqueness of arbitrary plain linear IsConformalGibbs functionals.
+--
+-- The remaining advertised post-closure research claim is the separate
+-- Tao-style logarithmic stopping-time concentration lane.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -60,10 +75,14 @@ data OriginalGoalLeaf : Set where
   probabilityNormalization : OriginalGoalLeaf
   setDependentConstructiveTail : OriginalGoalLeaf
   polynomialStoppingMoments : OriginalGoalLeaf
+  repairedStoppingMGFDomain : OriginalGoalLeaf
   universalHalfLogTwoMGFDomain : OriginalGoalLeaf
 
   finiteUniqueUniformStationary : OriginalGoalLeaf
-  gibbsUniqueness : OriginalGoalLeaf
+  probabilityMeasureGibbsUniqueness : OriginalGoalLeaf
+  arbitraryFunctionalGibbsUniqueness : OriginalGoalLeaf
+
+  taoStyleStoppingConcentration : OriginalGoalLeaf
 
 
 data OriginalGoalStatus : Set where
@@ -75,9 +94,7 @@ data OriginalGoalStatus : Set where
   sourcePlaceholderButRepoCompiled : OriginalGoalStatus
   rejectedReading : OriginalGoalStatus
   refuted : OriginalGoalStatus
-  liveSameObjectWeld : OriginalGoalStatus
   liveIndependentProducer : OriginalGoalStatus
-  liveStandardConsumer : OriginalGoalStatus
 
 leafStatus : OriginalGoalLeaf → OriginalGoalStatus
 leafStatus functionLevelCharacterAction = sourceOwned
@@ -97,7 +114,7 @@ leafStatus directedRadiusSizeExponentHalf = rejectedReading
 leafStatus cyclotomicSigmaHalf = compiled
 leafStatus prolateCriticalLineHalf = sourceOwned
 leafStatus fullTransferRadiusSqrtTwo = rejectedReading
-leafStatus cyclotomicToProlateSigmaAnchor = liveSameObjectWeld
+leafStatus cyclotomicToProlateSigmaAnchor = refuted
 leafStatus undirectedGapExponentAlpha = sourceOwned
 
 leafStatus meanZeroInvariant = compiled
@@ -120,18 +137,18 @@ leafStatus survivorCountDecay = repoReusable
 leafStatus prefixHitAbsorptionWeld = compiled
 leafStatus probabilityNormalization = repoReusable
 leafStatus setDependentConstructiveTail = compiled
-leafStatus polynomialStoppingMoments = liveStandardConsumer
+leafStatus polynomialStoppingMoments = sourceLibraryCompiled
+leafStatus repairedStoppingMGFDomain = sourceLibraryCompiled
 leafStatus universalHalfLogTwoMGFDomain = refuted
 
 leafStatus finiteUniqueUniformStationary = sourceLibraryCompiled
-leafStatus gibbsUniqueness = liveIndependentProducer
+leafStatus probabilityMeasureGibbsUniqueness = sourceLibraryCompiled
+leafStatus arbitraryFunctionalGibbsUniqueness = refuted
+
+leafStatus taoStyleStoppingConcentration = liveIndependentProducer
 
 priority : List OriginalGoalLeaf
-priority =
-  polynomialStoppingMoments ∷
-  cyclotomicToProlateSigmaAnchor ∷
-  gibbsUniqueness ∷
-  []
+priority = taoStyleStoppingConcentration ∷ []
 
 record FiniteCoreClosure : Set where
   constructor finiteCoreClosure
@@ -156,100 +173,36 @@ finiteCoreHasNoRemainingMathematicalProducer :
   ≡ false
 finiteCoreHasNoRemainingMathematicalProducer = refl
 
-record SigmaClosureBoundary : Set where
-  constructor sigmaClosureBoundary
+record PostClosureBoundary : Set where
+  constructor postClosureBoundary
   field
-    primitiveTwistedRadiusAtTwoIsSqrtTwoOwned : Bool
-    localCyclotomicHalfCompiled : Bool
-    prolateCriticalHalfOwned : Bool
-    fullTransferOperatorRadiusSqrtTwoOwned : Bool
-    radiusNSizePowerHalfReadingValid : Bool
-    commonSemilocalTensorImpliesSigmaIdentification : Bool
-    sameObjectAnchorLocated : Bool
+    prefactoredL2Closed : Bool
+    totalVariationClosed : Bool
+    stationaryCovarianceClosed : Bool
+    constructiveStoppingTailClosed : Bool
+    polynomialMomentsClosed : Bool
+    repairedMGFDomainClosed : Bool
+    probabilityGibbsMeasureUniquenessClosed : Bool
+    sigmaAnchorRejectedByNonFactorability : Bool
+    arbitraryFunctionalGibbsUniquenessRejected : Bool
+    taoConcentrationStillIndependent : Bool
 
-canonicalSigmaClosureBoundary : SigmaClosureBoundary
-canonicalSigmaClosureBoundary =
-  sigmaClosureBoundary true true true false false false false
+canonicalPostClosureBoundary : PostClosureBoundary
+canonicalPostClosureBoundary =
+  postClosureBoundary true true true true true true true true true true
 
-record MixingRepairBoundary : Set where
-  constructor mixingRepairBoundary
-  field
-    meanZeroInvariantCompiled : Bool
-    unitPrefactorOneStepContractionValid : Bool
-    explicitFiniteLevelPrefactorOwned : Bool
-    shellPowerCompilerOwned : Bool
-    parsevalShellEnergySameObjectWeldOwned : Bool
-    wholePrefactoredL2BoundOwned : Bool
-    stationaryCovarianceDecayOwned : Bool
-    totalVariationMixingOwned : Bool
-    universalStoppingTailValid : Bool
-    forwardTranslationCompilerOwned : Bool
-    finiteUniformHittingBlockMathOwned : Bool
-    binaryOutcomeEnumerationOwned : Bool
-    survivorCountDecayOwned : Bool
-    zmodCyclicAdapterOwned : Bool
-    zmodFiniteEnumerationOwned : Bool
-    prefixHitAbsorptionWeldOwned : Bool
-    probabilityNormalizationOwned : Bool
-    setDependentConstructiveTailOwned : Bool
-    allPolynomialStoppingMomentsOwned : Bool
-    universalHalfLogTwoMGFDomainValid : Bool
-
-canonicalMixingRepairBoundary : MixingRepairBoundary
-canonicalMixingRepairBoundary =
-  mixingRepairBoundary
-    true false true true true true true true false
-    true true true true true true true true true false false
-
-unitPrefactorMixingRouteClosedNegative :
-  MixingRepairBoundary.unitPrefactorOneStepContractionValid
-    canonicalMixingRepairBoundary
-  ≡ false
-unitPrefactorMixingRouteClosedNegative = refl
-
-prefactoredMixingRouteClosedPositive :
-  MixingRepairBoundary.wholePrefactoredL2BoundOwned
-    canonicalMixingRepairBoundary
+probabilityGibbsClosed :
+  PostClosureBoundary.probabilityGibbsMeasureUniquenessClosed
+    canonicalPostClosureBoundary
   ≡ true
-prefactoredMixingRouteClosedPositive = refl
+probabilityGibbsClosed = refl
 
-totalVariationRouteClosedPositive :
-  MixingRepairBoundary.totalVariationMixingOwned
-    canonicalMixingRepairBoundary
+sigmaAnchorClosedNegative :
+  PostClosureBoundary.sigmaAnchorRejectedByNonFactorability
+    canonicalPostClosureBoundary
   ≡ true
-totalVariationRouteClosedPositive = refl
+sigmaAnchorClosedNegative = refl
 
-universalStoppingTailClosedNegative :
-  MixingRepairBoundary.universalStoppingTailValid
-    canonicalMixingRepairBoundary
-  ≡ false
-universalStoppingTailClosedNegative = refl
-
-constructiveStoppingTailClosedPositive :
-  MixingRepairBoundary.setDependentConstructiveTailOwned
-    canonicalMixingRepairBoundary
-  ≡ true
-constructiveStoppingTailClosedPositive = refl
-
-polynomialMomentsRemainConsumerLeaf :
-  MixingRepairBoundary.allPolynomialStoppingMomentsOwned
-    canonicalMixingRepairBoundary
-  ≡ false
-polynomialMomentsRemainConsumerLeaf = refl
-
-universalHalfLogTwoMGFDomainRejected :
-  MixingRepairBoundary.universalHalfLogTwoMGFDomainValid
-    canonicalMixingRepairBoundary
-  ≡ false
-universalHalfLogTwoMGFDomainRejected = refl
-
-localAndProlateHalvesDoNotAutoWeld :
-  SigmaClosureBoundary.sameObjectAnchorLocated canonicalSigmaClosureBoundary
-  ≡ false
-localAndProlateHalvesDoNotAutoWeld = refl
-
-sizeExponentHalfReadingRejected :
-  SigmaClosureBoundary.radiusNSizePowerHalfReadingValid
-    canonicalSigmaClosureBoundary
-  ≡ false
-sizeExponentHalfReadingRejected = refl
+onlyAdvertisedPostClosurePriorityIsConcentration :
+  priority ≡ taoStyleStoppingConcentration ∷ []
+onlyAdvertisedPostClosurePriorityIsConcentration = refl
