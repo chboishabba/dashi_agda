@@ -37,4 +37,8 @@ import DASHI.Core.HistoricalFirstFailureTraceBidiExact
 import DASHI.Core.AskListenObservationProducerBidiExact
 import DASHI.Core.MinimalObservationLevelPerConsumerBidiExact
 
+-- Fourth-order consumer-threshold / historical-responsibility return.
+import DASHI.Core.LeastCostConsumerClosingExperimentBidiExact
+import DASHI.Core.HistoricalProducerResponsibilityTraceBidiExact
+
 import DASHI.Core.CrossDomainBidiReciprocal2026Validation
