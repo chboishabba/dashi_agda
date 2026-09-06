@@ -17,13 +17,12 @@ import DASHI.Analysis.RiemannG2TargetCenteredScalarCancellationAssemblyExact as 
 --                         cos((b_sigma-t)u) du.
 --
 -- BIDI rule: this is not a second zero-sum ontology. Every successful producer
--- names the canonical LiteralTargetCenteredScalarProblem it realizes. All
--- preservation / same-object propositions are proof-bearing receipts.
+-- names the canonical LiteralTargetCenteredScalarProblem it realizes.
 --
--- `signedCosineCell` is retained only as a compatibility field for historical
--- consumers. The theorem-bearing kernel is the stronger integrated
--- Literal.dSigma / Literal.totalSignedResponse. No live RH payment may depend on
--- separately proving a semantics for the three-argument helper.
+-- A generic `Within` relation is useful for approximant/error transport but is
+-- NOT sufficient to close G2: the producer must also carry the canonical
+-- DirectSignedConsumerPayment for its literal problem. Thus recovering a direct
+-- producer now means recovering an actually consumer-sufficient signed theorem.
 ------------------------------------------------------------------------
 
 record DirectFiniteNearCell : Set where
@@ -105,6 +104,11 @@ record DirectFinitePoleNearProducer : Set₁ where
 
     literalProblem : Literal.LiteralTargetCenteredScalarProblem
 
+    -- The theorem-bearing endpoint. This cannot be replaced by an arbitrary
+    -- choice of `Within`.
+    directSignedConsumerPayment :
+      Literal.DirectSignedConsumerPayment literalProblem
+
     scalarCarrierIdentity :
       Scalar ≡ Literal.LiteralTargetCenteredScalarProblem.Scalar literalProblem
 
@@ -132,7 +136,6 @@ record DirectFinitePoleNearProducer : Set₁ where
     finiteSignedNearValueIsLiteralTotalSignedResponseReceipt :
       finiteSignedNearValueIsLiteralTotalSignedResponse
 
-    -- Compatibility firewall, not a theorem-bearing analytic obligation.
     signedCosineCellIsLiteralKernelResponse : Set
     signedCosineCellIsLiteralKernelResponseReceipt :
       signedCosineCellIsLiteralKernelResponse
@@ -142,18 +145,25 @@ record DirectFinitePoleNearProducer : Set₁ where
 open DirectFinitePoleNearProducer public
 
 ------------------------------------------------------------------------
+-- A recovered direct producer mechanically closes the existing literal scalar
+-- consumer through the canonical payment compiler. This is still not RH.
+------------------------------------------------------------------------
+
+directProducerClosesLiteralScalarConsumer :
+  (d : DirectFinitePoleNearProducer) →
+  Literal.G2dScalarConsumerClosure (literalProblem d)
+directProducerClosesLiteralScalarConsumer d =
+  Literal.directSignedPaymentClosesScalarConsumer
+    (literalProblem d)
+    (directSignedConsumerPayment d)
+
+------------------------------------------------------------------------
 -- CANONICAL COMPILER FROM THE EXISTING LITERAL G2 SCALAR PROBLEM
 --
 -- Scalar, ZeroIndex, target, nearIndex, multiplicity, horizontal displacement,
 -- target-relative gap and finite signed value are fixed by construction.
---
--- The only theorem-bearing quantitative input is
---
---   Within (Literal.totalSignedResponse P) approximant error.
---
--- The pole taper/cutoff remain explicit because the selected-window weld must
--- identify them. `signedCosineCell` survives only for API compatibility and gets
--- no separate semantic research payment.
+-- The caller supplies exactly the theorem-bearing DirectSignedConsumerPayment,
+-- plus an approximant/error receipt for later selected-budget transport.
 ------------------------------------------------------------------------
 
 record LiteralDirectFiniteInput
@@ -173,6 +183,8 @@ record LiteralDirectFiniteInput
 
     evaluationReceipt :
       Within (Literal.totalSignedResponse P) approximant error
+
+    consumerPayment : Literal.DirectSignedConsumerPayment P
 
     poleTaperRealization : Set
     poleTaperRealizationReceipt : poleTaperRealization
@@ -220,6 +232,7 @@ compileLiteralDirectFiniteProducer P input =
     (LiteralDirectFiniteInput.directRouteIndependentOfProjectiveBalanceReceipt input)
     (LiteralDirectFiniteInput.evaluationReceipt input)
     P
+    (LiteralDirectFiniteInput.consumerPayment input)
     refl
     refl
     ((Literal.target P) ≡ (Literal.target P))
@@ -271,6 +284,14 @@ compiledDirectSignedValueIsLiteral :
     ≡ Literal.totalSignedResponse P
 compiledDirectSignedValueIsLiteral P input = refl
 
+compiledDirectClosesLiteralScalarConsumer :
+  ∀ (P : Literal.LiteralTargetCenteredScalarProblem)
+    (input : LiteralDirectFiniteInput P) →
+  Literal.G2dScalarConsumerClosure P
+compiledDirectClosesLiteralScalarConsumer P input =
+  directProducerClosesLiteralScalarConsumer
+    (compileLiteralDirectFiniteProducer P input)
+
 ------------------------------------------------------------------------
 -- Frontier.
 ------------------------------------------------------------------------
@@ -293,6 +314,14 @@ record DirectFiniteNearAttackBoundary : Set where
     directProducerMustNameLiteralG2ScalarProblem : Bool
     directProducerMustNameLiteralG2ScalarProblemIsTrue :
       directProducerMustNameLiteralG2ScalarProblem ≡ true
+
+    directProducerCarriesCanonicalConsumerPayment : Bool
+    directProducerCarriesCanonicalConsumerPaymentIsTrue :
+      directProducerCarriesCanonicalConsumerPayment ≡ true
+
+    genericWithinReceiptAloneIsSufficient : Bool
+    genericWithinReceiptAloneIsSufficientIsFalse :
+      genericWithinReceiptAloneIsSufficient ≡ false
 
     directProducerPreservationFieldsAreProofBearing : Bool
     directProducerPreservationFieldsAreProofBearingIsTrue :
@@ -323,8 +352,10 @@ canonicalDirectFiniteNearAttackBoundary =
     true refl
     true refl
     true refl
+    false refl
+    true refl
     true refl
     false refl
     false refl
     false refl
-    "Start from the existing LiteralTargetCenteredScalarProblem and use compileLiteralDirectFiniteProducer. Scalar/ZeroIndex, target, nearOff, multiplicity, off-real displacement, delta = ordinate-target and totalSignedResponse are compiler output. The legacy signedCosineCell helper is compatibility-only because Literal.dSigma already owns the integrated kernel. The live analytic payment is now the consumer-useful Within(totalSignedResponse, approximant, error) estimate on the exact G2 scalar object, plus selected pole-taper/cutoff identity downstream. RH remains open."
+    "Recover the exact DirectSignedConsumerPayment on the existing LiteralTargetCenteredScalarProblem: AcceptableForG2Consumer(totalSignedResponse). Once that theorem is supplied, compileLiteralDirectFiniteProducer fixes Scalar/ZeroIndex, target, nearOff, multiplicity, off-real displacement, delta and totalSignedResponse by construction and the direct producer closes the existing G2d scalar consumer. The generic Within approximant/error remains useful only for selected-budget transport; it is not closure by itself. Selected-window identity, clustering, projective balance and RH remain separate."
