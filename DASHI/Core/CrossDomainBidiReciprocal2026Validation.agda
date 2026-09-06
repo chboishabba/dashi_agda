@@ -44,3 +44,6 @@ import DASHI.Core.HistoricalProducerResponsibilityTraceBidiExact
 -- Fifth-order mixed observation / lineage-responsibility return.
 import DASHI.Core.CostedMixedConsumerClosingObservationSearchBidiExact
 import DASHI.Core.HistoricalResponsibilityLineageTraceBidiExact
+
+-- Sixth-order residual -> producer -> action compiler.
+import DASHI.Core.HistoricalProducerNextBestActionCompilerBidiExact
