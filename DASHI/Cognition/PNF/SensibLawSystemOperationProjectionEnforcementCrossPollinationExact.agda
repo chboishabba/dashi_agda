@@ -15,6 +15,7 @@ module DASHI.Cognition.PNF.SensibLawSystemOperationProjectionEnforcementCrossPol
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.OperationalSystemBehaviourSemanticsExact as Operation
 import DASHI.Core.ObserverVisibilityExistenceNoncollapseExact as Visibility
 import DASHI.Core.SelfSealingCorrectionLoopExact as SelfSeal
@@ -55,8 +56,7 @@ invisibleDoesNotMeanNonexistent : Visibility.InvisibleMeansNonexistent → ⊥
 invisibleDoesNotMeanNonexistent = Visibility.invisibleDoesNotMeanNonexistent
 
 observerCannotRecoverExistenceFromVisibilityAlone :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    Visibility.demoVisibility Visibility.demoExistence → ⊥
+  INF.FactorsThrough Visibility.demoVisibility Visibility.demoExistence → ⊥
 observerCannotRecoverExistenceFromVisibilityAlone =
   Visibility.invisibleToDemoObserverDoesNotDetermineNonexistence
 
