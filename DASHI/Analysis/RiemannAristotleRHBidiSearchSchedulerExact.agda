@@ -9,35 +9,40 @@ import DASHI.Analysis.RiemannAristotleExperimentalProofSearchExact as Search
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as HOff
 import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap
 import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact as Z38
-import DASHI.Analysis.RiemannG2AlpogeFurmanClusteringNonDescentExact as AFLocal
-import DASHI.Analysis.RiemannG2LowGapClusteringMomentReductionExact as Moment
-import DASHI.Analysis.RiemannG2SelectedTargetLocalMomentSameObjectExact as SelectedMoment
+import DASHI.Analysis.RiemannAristotlePoleQuotientDirectFiniteNearAttackExact as Direct
+import DASHI.Analysis.RiemannG2TargetCenteredScalarCancellationAssemblyExact as Literal
 import DASHI.Analysis.RiemannG2SelectedDirectFiniteMomentBidiExact as Shared
 
 ------------------------------------------------------------------------
 -- RH-ONLY BIDI-AWARE SEARCH SCHEDULER
 --
--- Consumer first, recursively. A candidate experiment is schedulable only if
--- it feeds an open producer node on the backward RH cut.
+-- CORRECTED AFTER RE-READING THE CHECKED LEAN GAP-SPLIT THEOREMS.
 --
--- The actual-zeta low-gap consumer is
+-- The §35 inequality
 --
---   (4/pi^2) * highGapMass < lowGapMass,
---   D = pi/(3 Lambda).
+--   (4/pi^2) * highGapMass < lowGapMass
 --
--- IMPORTANT DEPENDENCY ORDER
+-- is necessary for POSITIVITY of the gap-split lower bound. That positive floor
+-- participates in a NO-GO (`not_scalar_bound_of_gap_split` / criterion variants)
+-- against the desired small signed-scalar hypothesis. Therefore clustering is
+-- useful obstruction information, but it is not a forward RH producer.
 --
--- `SelectedDirectFiniteWeld` is parameterised by a DirectFinitePoleNearProducer.
--- That direct producer already contains the target-relative gap carrier AND an
--- actual signed approximant/error receipt. Therefore the direct producer comes
--- first; only then can it be welded to the selected ActualSelectedPoleNearProducer.
--- The weld subsequently fans out to:
+-- The canonical G2d/current-cut forward leaf is instead the literal signed
+-- target-centred determinant sum. The direct owner now pins that theorem to
 --
---   * the target-local delta^2 moment -> clustering route; and
---   * the selected-window consumer attachment/budget route for H_off.
+--   DirectSignedConsumerPayment P
+--   = AcceptableForG2Consumer P (totalSignedResponse P),
 --
--- This corrects the earlier accidental reversal that described the weld as a
--- prerequisite for constructing the direct producer itself.
+-- and a recovered DirectFinitePoleNearProducer must carry that payment.
+--
+-- CURRENT LIVE QUEUE:
+--
+--   1. recover the literal consumer-sufficient DirectFinitePoleNearProducer;
+--   2. repair Gamma precision.
+--
+-- After (1), selected-window attachment/budget transport becomes downstream.
+-- The optional literal M2_delta / clustering audit remains diagnostic and may
+-- explain when the gap-split NO-GO bites, but it is not scheduled as an RH leaf.
 ------------------------------------------------------------------------
 
 data ProducerNeed : Set where
@@ -53,38 +58,45 @@ currentNeed Search.gammaSocket = consumerInsufficientProducer
 currentNeed Search.clusterMarginSocket = producerClosed
 
 ------------------------------------------------------------------------
--- Recursive producer nodes beneath the coarse RH sockets.
+-- Forward RH producer nodes only.
 ------------------------------------------------------------------------
 
 data RHProducerNode : Set where
-  zetaLowGapClusteringNode
   directFinitePoleNearProducerNode
   selectedDirectZeroCarrierWeldNode
-  zetaTargetLocalSecondMomentNode
   selectedFiniteNearConsumerAttachmentNode
   gammaPrecisionNode
   : RHProducerNode
 
 nodeFeedsSocket : RHProducerNode → Search.RHResearchSocket
-nodeFeedsSocket zetaLowGapClusteringNode = Search.offOrdinateSocket
 nodeFeedsSocket directFinitePoleNearProducerNode = Search.offOrdinateSocket
 nodeFeedsSocket selectedDirectZeroCarrierWeldNode = Search.offOrdinateSocket
-nodeFeedsSocket zetaTargetLocalSecondMomentNode = Search.offOrdinateSocket
 nodeFeedsSocket selectedFiniteNearConsumerAttachmentNode = Search.offOrdinateSocket
 nodeFeedsSocket gammaPrecisionNode = Search.gammaSocket
 
 data ProducerRefines : RHProducerNode → RHProducerNode → Set where
-  targetLocalMomentRefinesClustering :
-    ProducerRefines zetaTargetLocalSecondMomentNode zetaLowGapClusteringNode
   directProducerFeedsSelectedWeld :
     ProducerRefines directFinitePoleNearProducerNode selectedDirectZeroCarrierWeldNode
-  selectedDirectWeldFeedsMoment :
-    ProducerRefines selectedDirectZeroCarrierWeldNode zetaTargetLocalSecondMomentNode
   selectedDirectWeldFeedsFiniteConsumer :
     ProducerRefines selectedDirectZeroCarrierWeldNode selectedFiniteNearConsumerAttachmentNode
 
 ------------------------------------------------------------------------
--- Candidate experiment classes for the exact current cut.
+-- Gap-split diagnostics are deliberately outside RHProducerNode.
+------------------------------------------------------------------------
+
+data GapSplitDiagnosticNode : Set where
+  actualZetaLowGapClusteringDiagnostic
+  literalTargetLocalSecondMomentDiagnostic
+  : GapSplitDiagnosticNode
+
+data DiagnosticRefines : GapSplitDiagnosticNode → GapSplitDiagnosticNode → Set where
+  literalMomentRefinesClusteringDiagnostic :
+    DiagnosticRefines literalTargetLocalSecondMomentDiagnostic
+      actualZetaLowGapClusteringDiagnostic
+
+------------------------------------------------------------------------
+-- Candidate experiment classes. Old names remain so stale callers fail by
+-- schedulability rather than by silently changing meaning.
 ------------------------------------------------------------------------
 
 data RHBidiExperiment : Set where
@@ -105,10 +117,9 @@ data RHBidiExperiment : Set where
   : RHBidiExperiment
 
 data RHExperimentOutputKind : Set where
-  directClusteringProducer
+  obstructionDiagnostic
   directFiniteProducer
   sameObjectZeroCarrierWeld
-  localMomentClusteringProducer
   selectedFiniteConsumerAttachment
   consumerSufficientRepair
   rejectedNonlocalDonor
@@ -121,10 +132,10 @@ data RHExperimentOutputKind : Set where
   : RHExperimentOutputKind
 
 outputKind : RHBidiExperiment → RHExperimentOutputKind
-outputKind proveActualZetaLowGapClustering = directClusteringProducer
+outputKind proveActualZetaLowGapClustering = obstructionDiagnostic
 outputKind recoverDirectFinitePoleNearProducer = directFiniteProducer
 outputKind weldSelectedDirectZeroCarrier = sameObjectZeroCarrierWeld
-outputKind proveTargetLocalSecondMoment = localMomentClusteringProducer
+outputKind proveTargetLocalSecondMoment = obstructionDiagnostic
 outputKind attachDirectEvaluationToSelectedConsumer = selectedFiniteConsumerAttachment
 outputKind improveGammaEvaluation = consumerSufficientRepair
 outputKind reuseGlobalSimpleZeroProportionAsLocalClustering = rejectedNonlocalDonor
@@ -137,20 +148,12 @@ outputKind sharpenBalanceBudgetRoute = balanceDerived
 outputKind auditNamedExternalDonor = donorAuditOnly
 
 ------------------------------------------------------------------------
--- Consumer-first admissibility.
+-- Only genuinely live forward producers inhabit this relation NOW.
 ------------------------------------------------------------------------
 
 data InhabitsLiveRHProducer : RHBidiExperiment → Set where
-  zetaLowGapClusteringIsLive :
-    InhabitsLiveRHProducer proveActualZetaLowGapClustering
   directFinitePoleNearProducerIsLive :
     InhabitsLiveRHProducer recoverDirectFinitePoleNearProducer
-  selectedDirectZeroCarrierWeldIsLive :
-    InhabitsLiveRHProducer weldSelectedDirectZeroCarrier
-  zetaTargetLocalSecondMomentIsLive :
-    InhabitsLiveRHProducer proveTargetLocalSecondMoment
-  selectedFiniteConsumerAttachmentIsLive :
-    InhabitsLiveRHProducer attachDirectEvaluationToSelectedConsumer
   gammaPrecisionRepairIsLive :
     InhabitsLiveRHProducer improveGammaEvaluation
 
@@ -163,10 +166,29 @@ record RHBidiSchedulable (experiment : RHBidiExperiment) : Set where
 
 open RHBidiSchedulable public
 
+zetaClusteringNotSchedulableAsRHProducer :
+  RHBidiSchedulable proveActualZetaLowGapClustering → ⊥
+zetaClusteringNotSchedulableAsRHProducer s with inhabitsLiveProducer s
+... | ()
+
+targetLocalMomentNotSchedulableAsRHProducer :
+  RHBidiSchedulable proveTargetLocalSecondMoment → ⊥
+targetLocalMomentNotSchedulableAsRHProducer s with inhabitsLiveProducer s
+... | ()
+
+selectedWeldNotSchedulableBeforeDirectProducer :
+  RHBidiSchedulable weldSelectedDirectZeroCarrier → ⊥
+selectedWeldNotSchedulableBeforeDirectProducer s with inhabitsLiveProducer s
+... | ()
+
+selectedConsumerAttachmentNotSchedulableBeforeDirectProducer :
+  RHBidiSchedulable attachDirectEvaluationToSelectedConsumer → ⊥
+selectedConsumerAttachmentNotSchedulableBeforeDirectProducer s with inhabitsLiveProducer s
+... | ()
+
 globalSimpleZeroProportionNotSchedulableAsLocalClustering :
   RHBidiSchedulable reuseGlobalSimpleZeroProportionAsLocalClustering → ⊥
-globalSimpleZeroProportionNotSchedulableAsLocalClustering s
-  with inhabitsLiveProducer s
+globalSimpleZeroProportionNotSchedulableAsLocalClustering s with inhabitsLiveProducer s
 ... | ()
 
 closedPoleClusterMarginRepeatNotSchedulable :
@@ -204,45 +226,13 @@ nameOnlyDonorNotSchedulable :
 nameOnlyDonorNotSchedulable s with inhabitsLiveProducer s
 ... | ()
 
-zetaLowGapClusteringSchedulable :
-  RHBidiSchedulable proveActualZetaLowGapClustering
-zetaLowGapClusteringSchedulable =
-  rh-bidi-schedulable
-    zetaLowGapClusteringIsLive
-    "RH off-ordinate backward consumer via optimized gap split"
-    "actual zeta zeros: (4/pi^2) * highGapMass < lowGapMass at D = pi/(3 Lambda)"
-
 directFinitePoleNearProducerSchedulable :
   RHBidiSchedulable recoverDirectFinitePoleNearProducer
 directFinitePoleNearProducerSchedulable =
   rh-bidi-schedulable
     directFinitePoleNearProducerIsLive
-    "shared zero-side producer beneath clustering and H_off"
-    "RiemannAristotlePoleQuotientDirectFiniteNearAttackExact.DirectFinitePoleNearProducer with actual nearIndex, multiplicityOf, targetRelativeGap and signed approximant/error receipt"
-
-selectedDirectZeroCarrierWeldSchedulable :
-  RHBidiSchedulable weldSelectedDirectZeroCarrier
-selectedDirectZeroCarrierWeldSchedulable =
-  rh-bidi-schedulable
-    selectedDirectZeroCarrierWeldIsLive
-    "same-object identification after recovering the direct producer"
-    "SelectedDirectFiniteWeld identifies that DirectFinitePoleNearProducer with the existing ActualSelectedPoleNearProducer on target, cutoff, zero family, multiplicity, targetRelativeGap, pole taper, finite signed value and explicit-formula object"
-
-zetaTargetLocalSecondMomentSchedulable :
-  RHBidiSchedulable proveTargetLocalSecondMoment
-zetaTargetLocalSecondMomentSchedulable =
-  rh-bidi-schedulable
-    zetaTargetLocalSecondMomentIsLive
-    "actual-zeta low-gap clustering producer after the selected/direct weld"
-    "SelectedDirectFiniteMomentProducer on the welded direct targetRelativeGap carrier; prove M2_norm with highGapMass <= M2_norm < 2*lowGapMass"
-
-selectedFiniteConsumerAttachmentSchedulable :
-  RHBidiSchedulable attachDirectEvaluationToSelectedConsumer
-selectedFiniteConsumerAttachmentSchedulable =
-  rh-bidi-schedulable
-    selectedFiniteConsumerAttachmentIsLive
-    "RH pole-quotient backward consumer: B_off + B_Gamma < M_cluster"
-    "transport the direct producer's existing signed evaluation onto finitePoleNearSigned of the SAME selected PoleNearTargetWindow, then into the selected-scalar budget interface"
+    "G2d literal signed target-centred scalar consumer"
+    "DirectFinitePoleNearProducer carrying DirectSignedConsumerPayment = AcceptableForG2Consumer(totalSignedResponse) on the canonical LiteralTargetCenteredScalarProblem; canonical carrier fields compile from that problem"
 
 gammaPrecisionRepairSchedulable :
   RHBidiSchedulable improveGammaEvaluation
@@ -253,26 +243,28 @@ gammaPrecisionRepairSchedulable =
     "H_Gamma consumer-sufficient O(|t|^-2)-scale evaluation"
 
 ------------------------------------------------------------------------
--- Active high-ordinate queue after dependency correction.
+-- Active queue has exactly the two current forward leaves.
 ------------------------------------------------------------------------
 
 data ActiveHighOrdinateExperiment : RHBidiExperiment → Set where
-  activeZetaClustering : ActiveHighOrdinateExperiment proveActualZetaLowGapClustering
-  activeDirectFiniteProducer : ActiveHighOrdinateExperiment recoverDirectFinitePoleNearProducer
-  activeSelectedDirectWeld : ActiveHighOrdinateExperiment weldSelectedDirectZeroCarrier
-  activeZetaLocalMoment : ActiveHighOrdinateExperiment proveTargetLocalSecondMoment
-  activeSelectedFiniteConsumer : ActiveHighOrdinateExperiment attachDirectEvaluationToSelectedConsumer
-  activeGammaRepair : ActiveHighOrdinateExperiment improveGammaEvaluation
+  activeDirectFiniteProducer :
+    ActiveHighOrdinateExperiment recoverDirectFinitePoleNearProducer
+  activeGammaRepair :
+    ActiveHighOrdinateExperiment improveGammaEvaluation
 
 schedulableIsActive :
   (experiment : RHBidiExperiment) →
   RHBidiSchedulable experiment →
   ActiveHighOrdinateExperiment experiment
-schedulableIsActive proveActualZetaLowGapClustering s = activeZetaClustering
+schedulableIsActive proveActualZetaLowGapClustering s =
+  ⊥-elim (zetaClusteringNotSchedulableAsRHProducer s)
 schedulableIsActive recoverDirectFinitePoleNearProducer s = activeDirectFiniteProducer
-schedulableIsActive weldSelectedDirectZeroCarrier s = activeSelectedDirectWeld
-schedulableIsActive proveTargetLocalSecondMoment s = activeZetaLocalMoment
-schedulableIsActive attachDirectEvaluationToSelectedConsumer s = activeSelectedFiniteConsumer
+schedulableIsActive weldSelectedDirectZeroCarrier s =
+  ⊥-elim (selectedWeldNotSchedulableBeforeDirectProducer s)
+schedulableIsActive proveTargetLocalSecondMoment s =
+  ⊥-elim (targetLocalMomentNotSchedulableAsRHProducer s)
+schedulableIsActive attachDirectEvaluationToSelectedConsumer s =
+  ⊥-elim (selectedConsumerAttachmentNotSchedulableBeforeDirectProducer s)
 schedulableIsActive improveGammaEvaluation s = activeGammaRepair
 schedulableIsActive reuseGlobalSimpleZeroProportionAsLocalClustering s =
   ⊥-elim (globalSimpleZeroProportionNotSchedulableAsLocalClustering s)
@@ -328,7 +320,7 @@ highestAlphaAlwaysTargetsActiveRHLeaf surface selection =
   schedulableIsActive (selected selection) (selectedSchedulable selection)
 
 ------------------------------------------------------------------------
--- Source-backed frontier receipts feeding this recursive queue.
+-- Source-backed frontier receipts.
 ------------------------------------------------------------------------
 
 farShellAlreadyOwned :
@@ -359,48 +351,35 @@ actualZetaClusteringNotYetClosed :
   Z38.actualZetaClusteringClosed Z38.canonicalZetaLocalCountLeanReturn ≡ false
 actualZetaClusteringNotYetClosed = refl
 
-localMomentCompilerClosedInAgda :
-  Moment.LocalMomentClusteringBoundary.natMomentToTwoToOneRatioCompilerClosedInAgda
-    Moment.canonicalLocalMomentClusteringBoundary ≡ true
-localMomentCompilerClosedInAgda = refl
+clusteringIsGapSplitDiagnosticNotRHProducer :
+  Gap.clusteringDirectlyPaysRHScalarConsumer
+    Gap.canonicalGapSplitClusteringLeanReturn8894 ≡ false
+clusteringIsGapSplitDiagnosticNotRHProducer = Gap.clusteringDoesNotDirectlyPayRH
 
-selectedMomentSameObjectShapeOwned :
-  SelectedMoment.SelectedTargetLocalMomentBoundary.selectedWindowMomentAttachmentIsExactConsumerShape
-    SelectedMoment.canonicalSelectedTargetLocalMomentBoundary ≡ true
-selectedMomentSameObjectShapeOwned = refl
+directProducerRequiresCanonicalConsumerPayment :
+  Direct.DirectFiniteNearAttackBoundary.directProducerCarriesCanonicalConsumerPayment
+    Direct.canonicalDirectFiniteNearAttackBoundary ≡ true
+directProducerRequiresCanonicalConsumerPayment = refl
 
-selectedMomentSameObjectProducerStillOpen :
-  SelectedMoment.SelectedTargetLocalMomentBoundary.selectedWindowMomentProducerInhabitedHere
-    SelectedMoment.canonicalSelectedTargetLocalMomentBoundary ≡ false
-selectedMomentSameObjectProducerStillOpen = refl
+genericWithinAloneDoesNotCloseDirectConsumer :
+  Direct.DirectFiniteNearAttackBoundary.genericWithinReceiptAloneIsSufficient
+    Direct.canonicalDirectFiniteNearAttackBoundary ≡ false
+genericWithinAloneDoesNotCloseDirectConsumer = refl
 
-selectedDirectWeldRequired :
-  Shared.SelectedDirectFiniteMomentBoundary.selectedAndDirectViewsMustBeWelded
-    Shared.canonicalSelectedDirectFiniteMomentBoundary ≡ true
-selectedDirectWeldRequired = refl
+literalDirectAcceptanceCompilerOwned :
+  Literal.TargetCenteredScalarCancellationBoundary.directSignedAcceptanceCompilesToExactConsumerReceipt
+    Literal.canonicalTargetCenteredScalarCancellationBoundary ≡ true
+literalDirectAcceptanceCompilerOwned = refl
 
-selectedDirectWeldStillOpen :
-  Shared.SelectedDirectFiniteMomentBoundary.selectedDirectWeldInhabitedHere
-    Shared.canonicalSelectedDirectFiniteMomentBoundary ≡ false
-selectedDirectWeldStillOpen = refl
+selectedDirectWeldStillDownstream :
+  Shared.paymentState Shared.weldExistingDirectProducerToSelectedWindow
+    ≡ Shared.downstream
+selectedDirectWeldStillDownstream = refl
 
-sharedDirectCarrierFeedsBothConsumers :
-  Shared.SelectedDirectFiniteMomentBoundary.oneDirectGapCarrierCanFeedClusteringAndFiniteEvaluation
-    Shared.canonicalSelectedDirectFiniteMomentBoundary ≡ true
-sharedDirectCarrierFeedsBothConsumers = refl
-
-secondSelectedWindowSearchPruned :
-  Shared.paymentState Shared.recoverSecondSelectedWindow ≡ Shared.pruned
-secondSelectedWindowSearchPruned = Shared.secondSelectedWindowPruned
-
-secondDirectZeroFamilySearchPruned :
-  Shared.paymentState Shared.recoverSecondDirectZeroFamily ≡ Shared.pruned
-secondDirectZeroFamilySearchPruned = Shared.secondDirectZeroFamilyPruned
-
-globalSimpleProportionCannotDirectlyCloseClustering :
-  AFLocal.GlobalSimpleToLocalClusteringBoundary.alpogeFurmanDirectlyClosesGapSplitClustering
-    AFLocal.canonicalGlobalSimpleToLocalClusteringBoundary ≡ false
-globalSimpleProportionCannotDirectlyCloseClustering = refl
+literalMomentStillDownstreamDiagnostic :
+  Shared.paymentState Shared.proveLiteralOrdinateMomentBoundAfterWeld
+    ≡ Shared.downstream
+literalMomentStillDownstreamDiagnostic = refl
 
 ------------------------------------------------------------------------
 -- Boundary ledger.
@@ -431,37 +410,32 @@ record RHBidiSearchSchedulerBoundary : Set where
     quarterDensityConstantComparisonRemainsInActiveQueueIsFalse : quarterDensityConstantComparisonRemainsInActiveQueue ≡ false
 
     actualZetaLowGapClusteringActive : Bool
-    actualZetaLowGapClusteringActiveIsTrue : actualZetaLowGapClusteringActive ≡ true
+    actualZetaLowGapClusteringActiveIsFalse : actualZetaLowGapClusteringActive ≡ false
+
+    clusteringRetainedAsObstructionDiagnostic : Bool
+    clusteringRetainedAsObstructionDiagnosticIsTrue : clusteringRetainedAsObstructionDiagnostic ≡ true
 
     directFinitePoleNearProducerActive : Bool
     directFinitePoleNearProducerActiveIsTrue : directFinitePoleNearProducerActive ≡ true
 
+    directProducerCarriesCanonicalSignedConsumerPayment : Bool
+    directProducerCarriesCanonicalSignedConsumerPaymentIsTrue :
+      directProducerCarriesCanonicalSignedConsumerPayment ≡ true
+
     selectedDirectZeroCarrierWeldActive : Bool
-    selectedDirectZeroCarrierWeldActiveIsTrue : selectedDirectZeroCarrierWeldActive ≡ true
+    selectedDirectZeroCarrierWeldActiveIsFalse : selectedDirectZeroCarrierWeldActive ≡ false
 
     directProducerPrecedesSelectedDirectWeld : Bool
     directProducerPrecedesSelectedDirectWeldIsTrue : directProducerPrecedesSelectedDirectWeld ≡ true
 
     targetLocalSecondMomentRefinementActive : Bool
-    targetLocalSecondMomentRefinementActiveIsTrue : targetLocalSecondMomentRefinementActive ≡ true
+    targetLocalSecondMomentRefinementActiveIsFalse : targetLocalSecondMomentRefinementActive ≡ false
 
     targetLocalSecondMomentUsesExistingSelectedWindow : Bool
     targetLocalSecondMomentUsesExistingSelectedWindowIsTrue : targetLocalSecondMomentUsesExistingSelectedWindow ≡ true
 
-    clusteringAndFiniteNearForcedOntoSameDirectCarrier : Bool
-    clusteringAndFiniteNearForcedOntoSameDirectCarrierIsTrue : clusteringAndFiniteNearForcedOntoSameDirectCarrier ≡ true
-
     selectedFiniteConsumerAttachmentActive : Bool
-    selectedFiniteConsumerAttachmentActiveIsTrue : selectedFiniteConsumerAttachmentActive ≡ true
-
-    globalSimpleZeroProportionDirectClusteringRouteActive : Bool
-    globalSimpleZeroProportionDirectClusteringRouteActiveIsFalse : globalSimpleZeroProportionDirectClusteringRouteActive ≡ false
-
-    balanceCircularityRouteRemainsInActiveQueue : Bool
-    balanceCircularityRouteRemainsInActiveQueueIsFalse : balanceCircularityRouteRemainsInActiveQueue ≡ false
-
-    nameOnlyHardyDonorRemainsInActiveQueue : Bool
-    nameOnlyHardyDonorRemainsInActiveQueueIsFalse : nameOnlyHardyDonorRemainsInActiveQueue ≡ false
+    selectedFiniteConsumerAttachmentActiveIsFalse : selectedFiniteConsumerAttachmentActive ≡ false
 
     gammaPrecisionRepairActive : Bool
     gammaPrecisionRepairActiveIsTrue : gammaPrecisionRepairActive ≡ true
@@ -482,16 +456,14 @@ canonicalRHBidiSearchSchedulerBoundary =
     false refl
     false refl
     false refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
+    false refl
     true refl
     true refl
     true refl
     false refl
+    true refl
     false refl
+    true refl
     false refl
     true refl
     true refl
