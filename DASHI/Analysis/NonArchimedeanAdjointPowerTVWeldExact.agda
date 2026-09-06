@@ -67,9 +67,25 @@ record TVPromotionCutset : Set where
 
 canonicalTVPromotionCutset : TVPromotionCutset
 canonicalTVPromotionCutset =
-  tvPromotionCutset true true false true true
+  tvPromotionCutset true true true true true
 
-onlyProbabilityDensityCarrierWeldRemains :
+totalVariationPromotionDependencyClosed :
   TVPromotionCutset.probabilityDensityEuclideanWeld canonicalTVPromotionCutset
+  ≡ true
+totalVariationPromotionDependencyClosed = refl
+
+record TVRateBoundary : Set where
+  constructor tvRateBoundary
+  field
+    finiteStateFactorRequired : Bool
+    repairedPrefactorRequired : Bool
+    originalUnitPrefactorTVRateRestored : Bool
+
+canonicalTVRateBoundary : TVRateBoundary
+canonicalTVRateBoundary =
+  tvRateBoundary true true false
+
+unitPrefactorTVRateStillRejected :
+  TVRateBoundary.originalUnitPrefactorTVRateRestored canonicalTVRateBoundary
   ≡ false
-onlyProbabilityDensityCarrierWeldRemains = refl
+unitPrefactorTVRateStillRejected = refl
