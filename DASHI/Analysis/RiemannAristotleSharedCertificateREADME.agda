@@ -5,41 +5,41 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 -- Import-only aggregation/navigation root for the Aristotle / RH return lane.
 --
--- The current returned state includes the exact two-zero / three-taper theorem,
--- the explicit finite-near/far decomposition, the optimized gap-split no-go,
--- the §37 quarter-period/density reconciliation, and the §38 actual-zeta upper
--- local-count instance. Existing gap-split, selected-window, finite-near,
--- scalar-cancellation, highest-alpha and canonical RH schedulers consume those
--- returns directly, so this is one welded dependency graph rather than parallel
--- status ledgers.
+-- The §35--§38 return is retained as exact audit/scalarization infrastructure:
+-- quarter-period/density compatibility and zeta upper local counting are owned,
+-- while the clustering condition is a diagnostic for positivity of a gap-split
+-- NO-GO lower bound rather than a forward RH theorem.
 --
--- The Alpoge--Furman >2/3 simple/on-critical-line theorem is audited against the
--- live local-clustering consumer: its global population summary does not descend
--- directly to the selected target-local gap pattern. Transverse
--- alpha = Re(rho)-1/2 is also separated from the required ordinate
--- delta = Im(rho)-t.
+-- The rank-two determinant G2d lane similarly remains useful: it exposes the
+-- literal signed determinant sum, target-relative gap and M2_delta on one exact
+-- carrier. But the authoritative final contradiction owner explicitly does not
+-- identify that determinant taper with the universal pole-quotient taper.
+-- Therefore determinant DirectSignedConsumerPayment is diagnostic/scalarization
+-- unless an explicit same-object transport is supplied.
 --
--- DirectFinitePoleNearProducer is now the canonical concrete target-gap/phase
--- carrier. It is strengthened in place to realize the canonical
--- LiteralTargetCenteredScalarProblem, which itself now owns the literal
+-- The final high-ordinate pole-quotient consumer is already:
 --
---   M2_delta = finiteNearSum (m_sigma * (b_sigma-t)^2).
+--   cluster = offOrdinate + Gamma
+--   offOrdinate <= B_off
+--   Gamma <= B_Gamma
+--   B_off + B_Gamma < M_cluster.
 --
--- PoleNearPhaseStatistic and SignedFiniteNearEvaluationSurface compile from the
--- direct producer; neither should be reconstructed. The direct producer is then
--- welded to the existing ActualSelectedPoleNearProducer, after which the same
--- object can feed both the selected delta^2 moment/clustering route and selected
--- finite-near budget transport.
+-- The final split-complement compiler is owned. The 8889 checked-Lean return
+-- also owns quantitative cluster-margin mathematics, leaving only same-object
+-- attachment for that coordinate. Under closed-world repo search, the genuinely
+-- analytic leaves are therefore exactly:
 --
--- The old post-369 donor-search scheduler is corrected in place: generic donor
--- attachment machinery remains reusable, but the current donor inventory has no
--- concrete exact literal donor, so name-level donor search is not the default
--- highest-alpha move. Recover the literal direct finite producer instead.
+--   * PoleQuotientOffOrdinateBudgetTarget on the literal universal
+--     pole-quotient reflection-paired cosine carrier;
+--   * same-taper Gamma precision repair to the owned sharp window.
 --
--- Genuine zeta clustering, the actual direct/selected producer instantiations,
--- their same-object weld, the quantitative literal M2_delta estimate, selected
--- finite-near budget, Gamma precision, low-ordinate/global coverage and RH
--- remain open.
+-- Existing representation machinery is reused rather than re-searched:
+-- canonical H_X compiles H_T; H_M is not a gate on the zero-side H_W route; an
+-- ActualSelectedPoleNearProducer compiles the selected-test and near/far welds.
+-- Uninhabited adapter records remain infrastructure obligations, not fabricated
+-- proof terms and not new harmonic-analysis programmes.
+--
+-- Low-ordinate/global coverage and RH remain open. No theorem here derives RH.
 ------------------------------------------------------------------------
 
 import DASHI.Analysis.RiemannAristotleSharedWindowCertificateExact
@@ -65,6 +65,7 @@ import DASHI.Analysis.RiemannG2AdaptiveJLambdaConstantWindowExact
 import DASHI.Analysis.RiemannG2QuarterPeriodAnalyticRouteReconciliationExact
 import DASHI.Analysis.RiemannG2HighestAlphaAfter369Exact
 import DASHI.Analysis.RiemannG2HighestAlphaAfter8894Exact
+import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact
 import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerExact
 import DASHI.Analysis.RiemannAristotleRHAnalyticLeafSchedulerExact
 import DASHI.Analysis.RiemannAristotleNearCoreDensityReturnRegression
