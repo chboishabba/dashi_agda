@@ -15,32 +15,26 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119DisjunctivePhysicalSourceC
 -- Communications in Mathematical Physics 109 (1987), 249--301.
 -- DOI: 10.1007/BF01215223.
 --
--- This owner corrects an over-compressed frontier statement.  The repository
--- has two theorem-level downstream compilers for CMP98 equation (119):
+-- There are now three theorem-level downstream routes:
 --
---   A. selected variational background + selected principal cut + existing
---      Federbush convention family;
+--   A0. historical selected-background + global selected-cut threshold
+--       (R175/R184); sufficient but not least-privilege;
+--
+--   A1. preferred selected-background + pointwise ACTUAL-relative cut admission
+--       + existing Federbush family; this carries the semantic theorem
+--       exp(principalLog(relative)) = relative and avoids the global
+--       `1/24 <= selected cut radius` premise;
 --
 --   B. concrete dyadic CMP109 physical-input package + same-object relative
 --      weld + existing Federbush convention family.
 --
--- Round187 and Round189 genuinely close physical periodic-realization existence
--- and the raw/unit-quaternion path homomorphism.  They do NOT by themselves
--- inhabit `DyadicCMP109PrintedPhysicalInputs`, whose fields still include local
--- dependence, a physical principal-log meaning, the crossing-bond convention,
--- differentiated entries and support vanishing.  Likewise the selected-cut
--- branch still requires the selected-background weld and the source-threshold
--- inclusion in the chosen cut.
+-- R156's historical derivative constructor uses the chart but does not inspect
+-- the relative-contour image proof.  That syntactic fact is NOT used to claim
+-- physical closure: A1 keeps actual-relative admission as a public input and
+-- exports the exp/log same-object theorem beside the derivative constructor.
 --
--- The selected-cut radius is also kept distinct from the canonical P4 chart
--- radius.  P4 fixes 1/64 while R175 requires a selected cut admitting the 1/24
--- source threshold.  The radius firewall proves that identifying those two
--- radii would contradict the R175 requirement; it does not assert they are the
--- same object.
---
--- Therefore the theorem-strength source cut is disjunctive.  The CMP109
--- transported-relative equality is one leaf on branch B, not the sole
--- source-side payment for equation (119).
+-- Round187/R189 independently close periodic realization and raw/unit path
+-- algebra.  They do not inhabit the complete A1 or B physical packages.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -61,9 +55,10 @@ import DASHI.Physics.YangMills.BalabanCMP98SelectedPhysicalUnitCarrierRound187Ex
 import DASHI.Physics.YangMills.BalabanCMP98RawUnitPathHomomorphismRound189Exact as R189
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicPrintedPhysicalInstantiationExact as Dyadic
 import DASHI.Physics.YangMills.BalabanCMP98Equation119CanonicalP4CutRadiusFirewallExact as RadiusFirewall
+import DASHI.Physics.YangMills.BalabanCMP98Equation119PointwiseSemanticSelectedCutExact as PointwiseSemantic
 
 ------------------------------------------------------------------------
--- Branch A: selected background / selected cut.
+-- Branch A0: historical global selected-cut threshold adapter.
 ------------------------------------------------------------------------
 
 record SelectedCutEq119Inputs
@@ -117,6 +112,57 @@ selectedCutCanonicalP4RadiusFirewallLevel =
   RadiusFirewall.cmp98Equation119CanonicalP4CutRadiusFirewallLevel
 
 ------------------------------------------------------------------------
+-- Branch A1: preferred pointwise semantic selected-cut route.
+------------------------------------------------------------------------
+
+record PointwiseSemanticEq119Inputs
+    {n coarseSide Value group CoarseField FineField}
+    (source : R182.PositiveCoarseBondEquation119Source
+      R178.su2SignedCarrier n coarseSide Value group) : Set₁ where
+  field
+    pointwiseSelectedWeld : R170.SelectedBackgroundBondWeld
+      {CoarseField = CoarseField}
+      {FineField = FineField}
+      {Lie = Lie.SU2LieAlgebra}
+      (R182.asCanonicalL13Equation119Source source)
+
+    pointwiseActualRelativeCutFamily :
+      PointwiseSemantic.PointwiseSelectedCutFamily
+        source pointwiseSelectedWeld
+
+    pointwiseFederbushFamily : R177.ExistingFederbushConventionFamily
+
+open PointwiseSemanticEq119Inputs public
+
+pointwiseSemanticEq119OneStep :
+  ∀ {n coarseSide Value group CoarseField FineField}
+    (source : R182.PositiveCoarseBondEquation119Source
+      R178.su2SignedCarrier n coarseSide Value group) →
+  PointwiseSemanticEq119Inputs
+    {CoarseField = CoarseField} {FineField = FineField} source →
+  R126.OneStepAveragingDerivative R178.su2AdditiveCarrier
+pointwiseSemanticEq119OneStep source inputs =
+  PointwiseSemantic.pointwiseSemanticSelectedCutOneStepDerivative
+    source
+    (pointwiseSelectedWeld inputs)
+    (pointwiseActualRelativeCutFamily inputs)
+    (pointwiseFederbushFamily inputs)
+
+pointwiseSemanticEq119Multiscale :
+  ∀ {n coarseSide Value group CoarseField FineField}
+    (source : R182.PositiveCoarseBondEquation119Source
+      R178.su2SignedCarrier n coarseSide Value group) →
+  PointwiseSemanticEq119Inputs
+    {CoarseField = CoarseField} {FineField = FineField} source →
+  Nat → R126.Operator R178.su2AdditiveCarrier
+pointwiseSemanticEq119Multiscale source inputs =
+  PointwiseSemantic.pointwiseSemanticSelectedCutMultiscaleDerivative
+    source
+    (pointwiseSelectedWeld inputs)
+    (pointwiseActualRelativeCutFamily inputs)
+    (pointwiseFederbushFamily inputs)
+
+------------------------------------------------------------------------
 -- Branch B: dyadic CMP109 physical-input package / same-object relative weld.
 ------------------------------------------------------------------------
 
@@ -132,9 +178,6 @@ record DyadicEq119Inputs
 
 open DyadicEq119Inputs public
 
--- The caller supplies the CMP109 physical-input package itself separately from
--- this smaller Eq119-specific bundle.  This makes it impossible to mistake the
--- same-object equality for construction of that larger physical package.
 dyadicEq119OneStep :
   ∀ {n coarseN Group group Field Scalar Radius Entry}
     (source : R182.PositiveCoarseBondEquation119Source
@@ -164,8 +207,7 @@ dyadicEq119Multiscale source inputs eqInputs =
     (dyadicFederbushFamily eqInputs)
 
 ------------------------------------------------------------------------
--- Theorem-level support already closed independently of either full physical
--- source package.
+-- Theorem-level support already closed independently of full physical inputs.
 ------------------------------------------------------------------------
 
 physicalPeriodicRealizationRound187Level : ProofLevel
@@ -176,31 +218,48 @@ rawUnitPathHomomorphismRound189Level : ProofLevel
 rawUnitPathHomomorphismRound189Level =
   R189.cmp98RawUnitPathHolomorphismRound189Level
 
+pointwiseSemanticSelectedCutCompilerLevel : ProofLevel
+pointwiseSemanticSelectedCutCompilerLevel =
+  PointwiseSemantic.cmp98Equation119PointwiseSemanticSelectedCutCompilerLevel
+
 ------------------------------------------------------------------------
--- Canonical status: theorem compilers versus physical inhabitants.
+-- Canonical status: compiler closure versus physical source inhabitation.
 ------------------------------------------------------------------------
 
 record Eq119DisjunctivePhysicalSourceStatus : Set where
   field
-    selectedCutCompilerClosed : Bool
+    historicalGlobalSelectedCutCompilerClosed : Bool
+    pointwiseSemanticSelectedCutCompilerClosed : Bool
     dyadicCompilerClosed : Bool
     physicalPeriodicRealizationRound187Closed : Bool
     rawUnitPathHomomorphismRound189Closed : Bool
 
-    selectedCutPhysicalInputPackageConstructed : Bool
+    chartOnlyDerivativeSyntaxDoesNotClosePrincipalSemantics : Bool
+    selectedBackgroundWeldConstructed : Bool
+    pointwiseActualRelativeCutFamilyConstructed : Bool
+    historicalGlobalSelectedCutPhysicalPackageConstructed : Bool
     dyadicCMP109PhysicalInputPackageConstructed : Bool
     dyadicTransportedRelativeSameObjectClosed : Bool
     unconditionalPhysicalEq119ProducerClosed : Bool
 
-    selectedCutCompilerClosedIsTrue : selectedCutCompilerClosed ≡ true
+    historicalGlobalSelectedCutCompilerClosedIsTrue :
+      historicalGlobalSelectedCutCompilerClosed ≡ true
+    pointwiseSemanticSelectedCutCompilerClosedIsTrue :
+      pointwiseSemanticSelectedCutCompilerClosed ≡ true
     dyadicCompilerClosedIsTrue : dyadicCompilerClosed ≡ true
     physicalPeriodicRealizationRound187ClosedIsTrue :
       physicalPeriodicRealizationRound187Closed ≡ true
     rawUnitPathHomomorphismRound189ClosedIsTrue :
       rawUnitPathHomomorphismRound189Closed ≡ true
+    chartOnlyDerivativeSyntaxDoesNotClosePrincipalSemanticsIsTrue :
+      chartOnlyDerivativeSyntaxDoesNotClosePrincipalSemantics ≡ true
 
-    selectedCutPhysicalInputPackageConstructedIsFalse :
-      selectedCutPhysicalInputPackageConstructed ≡ false
+    selectedBackgroundWeldConstructedIsFalse :
+      selectedBackgroundWeldConstructed ≡ false
+    pointwiseActualRelativeCutFamilyConstructedIsFalse :
+      pointwiseActualRelativeCutFamilyConstructed ≡ false
+    historicalGlobalSelectedCutPhysicalPackageConstructedIsFalse :
+      historicalGlobalSelectedCutPhysicalPackageConstructed ≡ false
     dyadicCMP109PhysicalInputPackageConstructedIsFalse :
       dyadicCMP109PhysicalInputPackageConstructed ≡ false
     dyadicTransportedRelativeSameObjectClosedIsFalse :
@@ -213,19 +272,27 @@ open Eq119DisjunctivePhysicalSourceStatus public
 canonicalEq119DisjunctivePhysicalSourceStatus :
   Eq119DisjunctivePhysicalSourceStatus
 canonicalEq119DisjunctivePhysicalSourceStatus = record
-  { selectedCutCompilerClosed = true
+  { historicalGlobalSelectedCutCompilerClosed = true
+  ; pointwiseSemanticSelectedCutCompilerClosed = true
   ; dyadicCompilerClosed = true
   ; physicalPeriodicRealizationRound187Closed = true
   ; rawUnitPathHomomorphismRound189Closed = true
-  ; selectedCutPhysicalInputPackageConstructed = false
+  ; chartOnlyDerivativeSyntaxDoesNotClosePrincipalSemantics = true
+  ; selectedBackgroundWeldConstructed = false
+  ; pointwiseActualRelativeCutFamilyConstructed = false
+  ; historicalGlobalSelectedCutPhysicalPackageConstructed = false
   ; dyadicCMP109PhysicalInputPackageConstructed = false
   ; dyadicTransportedRelativeSameObjectClosed = false
   ; unconditionalPhysicalEq119ProducerClosed = false
-  ; selectedCutCompilerClosedIsTrue = refl
+  ; historicalGlobalSelectedCutCompilerClosedIsTrue = refl
+  ; pointwiseSemanticSelectedCutCompilerClosedIsTrue = refl
   ; dyadicCompilerClosedIsTrue = refl
   ; physicalPeriodicRealizationRound187ClosedIsTrue = refl
   ; rawUnitPathHomomorphismRound189ClosedIsTrue = refl
-  ; selectedCutPhysicalInputPackageConstructedIsFalse = refl
+  ; chartOnlyDerivativeSyntaxDoesNotClosePrincipalSemanticsIsTrue = refl
+  ; selectedBackgroundWeldConstructedIsFalse = refl
+  ; pointwiseActualRelativeCutFamilyConstructedIsFalse = refl
+  ; historicalGlobalSelectedCutPhysicalPackageConstructedIsFalse = refl
   ; dyadicCMP109PhysicalInputPackageConstructedIsFalse = refl
   ; dyadicTransportedRelativeSameObjectClosedIsFalse = refl
   ; unconditionalPhysicalEq119ProducerClosedIsFalse = refl
