@@ -19,14 +19,18 @@ open import DASHI.Core.Prelude
 -- A further carrier audit separates transverse alpha = Re(rho)-1/2 from the
 -- target-relative ordinate gap delta = Im(rho)-t. The existing Hermitian
 -- transverse-moment lane is therefore NOT a direct donor for low-gap clustering.
--- The correct in-repo carrier is the targetRelativeGap coordinate of the
--- PoleNearPhaseStatistic lane. The local second-moment compiler is welded to the
--- existing ActualSelectedPoleNearProducer, so target, multiplicity and
--- nearOffFinset cannot silently change.
+-- The correct in-repo coordinate is the targetRelativeGap carried by the direct
+-- finite-near/phase lane.
 --
--- Genuine zeta clustering, the selected-window delta-moment producer,
--- same-object finite-near evaluation, Gamma precision, low-ordinate/global
--- coverage and RH remain open.
+-- The local moment is not a second zero carrier. The selected-window attachment
+-- reuses ActualSelectedPoleNearProducer, and the selected-direct BIDI weld binds
+-- that selected window to DirectFinitePoleNearProducer, whose ZeroIndex,
+-- nearIndex, multiplicity, targetRelativeGap and signed cosine evaluation are
+-- the literal data needed by both clustering and finite-near evaluation.
+--
+-- Genuine zeta clustering, the selected-window delta-moment producer, the
+-- selected/direct weld and actual signed finite-near evaluation, Gamma precision,
+-- low-ordinate/global coverage and RH remain open.
 ------------------------------------------------------------------------
 
 import DASHI.Analysis.RiemannAristotleSharedWindowCertificateExact
@@ -43,6 +47,7 @@ import DASHI.Analysis.RiemannG2AlpogeFurmanClusteringNonDescentExact
 import DASHI.Analysis.RiemannG2TransverseVsOrdinateMomentNonDescentExact
 import DASHI.Analysis.RiemannG2LowGapClusteringMomentReductionExact
 import DASHI.Analysis.RiemannG2SelectedTargetLocalMomentSameObjectExact
+import DASHI.Analysis.RiemannG2SelectedDirectFiniteMomentBidiExact
 import DASHI.Analysis.RiemannG2AdaptiveJLambdaConstantWindowExact
 import DASHI.Analysis.RiemannG2QuarterPeriodAnalyticRouteReconciliationExact
 import DASHI.Analysis.RiemannG2HighestAlphaAfter8894Exact
