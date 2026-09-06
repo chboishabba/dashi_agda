@@ -33,6 +33,8 @@ FILES=(
   DASHI/Analysis/RiemannAristotleQuarterPeriodDensityWindowLeanReturnExact.agda
   DASHI/Analysis/RiemannAristotleZetaLocalCountLeanReturnExact.agda
   DASHI/Analysis/RiemannG2GapSplitClusteringLeanReturn8894Exact.agda
+  DASHI/Analysis/RiemannG2AlpogeFurmanClusteringNonDescentExact.agda
+  DASHI/Analysis/RiemannG2LowGapClusteringMomentReductionExact.agda
   DASHI/Analysis/RiemannG2AdaptiveJLambdaConstantWindowExact.agda
   DASHI/Analysis/RiemannG2QuarterPeriodAnalyticRouteReconciliationExact.agda
   DASHI/Analysis/RiemannG2HighestAlphaAfter8894Exact.agda
@@ -75,6 +77,8 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotleQuarterPeriodDensityWindowLeanReturnExact.agda
   agda DASHI/Analysis/RiemannAristotleZetaLocalCountLeanReturnExact.agda
   agda DASHI/Analysis/RiemannG2GapSplitClusteringLeanReturn8894Exact.agda
+  agda DASHI/Analysis/RiemannG2AlpogeFurmanClusteringNonDescentExact.agda
+  agda DASHI/Analysis/RiemannG2LowGapClusteringMomentReductionExact.agda
   agda DASHI/Analysis/RiemannG2AdaptiveJLambdaConstantWindowExact.agda
   agda DASHI/Analysis/RiemannG2QuarterPeriodAnalyticRouteReconciliationExact.agda
   agda DASHI/Analysis/RiemannG2HighestAlphaAfter8894Exact.agda
