@@ -1,0 +1,26 @@
+module DASHI.Core.ApplicationCapabilityEpistemicCompressionEverything where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Core.ApplicationTransformationCapabilityBidiExact as Application
+import DASHI.Core.ApplicationCapabilityDominantChartCompressionExact as Compression
+import DASHI.Core.IntersectionalNonFactorability as INF
+
+publicScienceCannotCarryOperationalCapability :
+  INF.FactorsThrough Compression.publicScienceObserver Compression.operationalCapability → ⊥
+publicScienceCannotCarryOperationalCapability =
+  Compression.publicScienceCannotCarryOperationalCapability
+
+sameEquationsStillDoNotDetermineCapability :
+  Application.sameEquationsImpliesSameCapability
+    Application.canonicalApplicationTransformationBoundary ≡ false
+sameEquationsStillDoNotDetermineCapability = refl
+
+projectionFailureStillDoesNotProveUniqueHolder :
+  Compression.projectionFailureProvesUniqueHumanHolder
+    Compression.canonicalApplicationCompressionBoundary ≡ false
+projectionFailureStillDoesNotProveUniqueHolder = refl
+
+data AggregateImportMeansKernelValidated : Set where
+aggregateImportDoesNotClaimKernelValidation : AggregateImportMeansKernelValidated → ⊥
+aggregateImportDoesNotClaimKernelValidation ()
