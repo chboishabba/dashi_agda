@@ -24,8 +24,9 @@ import DASHI.Physics.Closure.NSTriadKNResonantNullGain
 
 -- 2026 almost-orthogonal Gram/Schur x-pollination: realized-data vs
 -- structural-operator Schur, angular/helicity/phase producer frontiers,
--- absolute->block->signed fallback hierarchy, zero-safe defect API, and the
--- literal R329 nested anti-parallel pointwise gain / radius-calibration seam.
+-- absolute->block->signed fallback hierarchy, zero-safe defect API, the
+-- literal R329 nested anti-parallel pointwise gain / radius-calibration seam,
+-- and the exact reduction of global coherence to fixed-output fibres.
 import DASHI.Physics.Closure.NSTriadKNDataOperatorSchurCrossPollination2026Exact
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramProducerFrontier2026Exact
 import DASHI.Physics.Closure.NSTriadKNGramControlFallbackHierarchy2026Exact
@@ -33,6 +34,7 @@ import DASHI.Physics.Closure.NSTriadKNZeroSafeCollinearityDefectInterface2026Exa
 import DASHI.Physics.Closure.NSTriadKNAlmostOrthogonalSchurCriticalRouteXPollination2026Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralNestedOuterAntiParallelNormRound430Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralNestedOuterRadiusDefectRound431Exact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputSignedCrossAggregationRound432Exact
 
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
 -- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
