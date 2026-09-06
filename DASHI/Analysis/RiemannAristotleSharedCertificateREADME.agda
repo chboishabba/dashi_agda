@@ -9,10 +9,11 @@ open import DASHI.Core.Prelude
 -- the explicit finite-near/far decomposition, the optimized gap-split no-go,
 -- the §37 quarter-period/density reconciliation, and the §38 actual-zeta upper
 -- local-count instance.  The existing gap-split, adaptive-window, quarter-period
--- scheduler and highest-alpha owners consume those returns directly, so this is
--- one welded dependency graph rather than parallel status ledgers.
+-- and canonical RH schedulers consume those returns directly, so this is one
+-- welded dependency graph rather than parallel status ledgers.
 --
--- Genuine zeta clustering and long-window lower density remain open.
+-- Genuine zeta clustering, same-object finite-near evaluation, Gamma precision,
+-- remaining low-ordinate/global coverage and RH remain open.
 ------------------------------------------------------------------------
 
 import DASHI.Analysis.RiemannAristotleSharedWindowCertificateExact
@@ -28,6 +29,8 @@ import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact
 import DASHI.Analysis.RiemannG2AdaptiveJLambdaConstantWindowExact
 import DASHI.Analysis.RiemannG2QuarterPeriodAnalyticRouteReconciliationExact
 import DASHI.Analysis.RiemannG2HighestAlphaAfter8894Exact
+import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerExact
+import DASHI.Analysis.RiemannAristotleRHAnalyticLeafSchedulerExact
 import DASHI.Analysis.RiemannAristotleNearCoreDensityReturnRegression
 import DASHI.Analysis.RiemannAristotleCurrentFrontierExact
 import DASHI.Analysis.RiemannAristotleCurrentFrontierRegression
