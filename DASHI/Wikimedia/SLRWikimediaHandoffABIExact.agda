@@ -1,10 +1,12 @@
 module DASHI.Wikimedia.SLRWikimediaHandoffABIExact where
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Equality using (refl)
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Wikimedia.SensibLawSourceUnitReviewHandoffExact as Handoff
+import DASHI.Wikimedia.SensibLawBoundaryArtifactMorphismExact as Morph
 
 ------------------------------------------------------------------------
 -- SLR / RUST CONSUMER ABI
@@ -14,9 +16,6 @@ import DASHI.Wikimedia.SensibLawSourceUnitReviewHandoffExact as Handoff
 --   * sensiblaw-stream consumes parser observations and emits residuals;
 --   * parser sidecars never own canonical semantic state;
 --   * Rust owns deterministic compilation/publication boundaries.
---
--- This compiler lets SLR consume the generic SensibLaw review packet without
--- redefining Nat/Climate or Wikimedia source semantics.
 ------------------------------------------------------------------------
 
 slrMainReference : String
@@ -49,11 +48,61 @@ slrDoesNotOwnPromotionFromConsumption :
   Handoff.runtimeOwnsSemanticPromotion (handoffToSlr packet) ≡ false
 slrDoesNotOwnPromotionFromConsumption packet = refl
 
+------------------------------------------------------------------------
+-- Earlier handoff point: SourceUnit -> ObservationClaimPayload -> SLR.
+------------------------------------------------------------------------
+
+record SlrObservationHandoffReceipt : Set where
+  constructor slr-observation-handoff-receipt
+  field
+    extraction : Morph.ObservationExtractionReceipt
+    observationReference : String
+    sourceUnitReference : String
+    consumerContractReference : String
+    sourceIdentityPreserved : Bool
+    sourceIdentityPreservedIsTrue : sourceIdentityPreserved ≡ true
+    anchorsPreserved : Bool
+    anchorsPreservedIsTrue : anchorsPreserved ≡ true
+    slrOwnsSourceAuthority : Bool
+    slrOwnsSourceAuthorityIsFalse : slrOwnsSourceAuthority ≡ false
+    slrOwnsSemanticPromotion : Bool
+    slrOwnsSemanticPromotionIsFalse : slrOwnsSemanticPromotion ≡ false
+open SlrObservationHandoffReceipt public
+
+observationToSlr : Morph.ObservationExtractionReceipt → SlrObservationHandoffReceipt
+observationToSlr receipt =
+  slr-observation-handoff-receipt
+    receipt
+    (Morph.observationId (Morph.payload receipt))
+    (Handoff.sourceUnitId (Morph.sourceUnit (Morph.payload receipt)))
+    slrMainReference
+    true refl
+    true refl
+    false refl
+    false refl
+
+observationSourceIdentityPreserved :
+  (receipt : Morph.ObservationExtractionReceipt) →
+  sourceUnitReference (observationToSlr receipt)
+  ≡ Handoff.sourceUnitId (Morph.sourceUnit (Morph.payload receipt))
+observationSourceIdentityPreserved receipt = refl
+
+observationHandoffDoesNotCreateAuthority :
+  (receipt : Morph.ObservationExtractionReceipt) →
+  slrOwnsSourceAuthority (observationToSlr receipt) ≡ false
+observationHandoffDoesNotCreateAuthority receipt = refl
+
+observationHandoffDoesNotCreatePromotion :
+  (receipt : Morph.ObservationExtractionReceipt) →
+  slrOwnsSemanticPromotion (observationToSlr receipt) ≡ false
+observationHandoffDoesNotCreatePromotion receipt = refl
+
 -- Rust implementation of the carrier is not evidence that the carrier's
 -- source propositions are true, admissible, or migration-safe.
 data RustABIImplementsSourceAuthority : Set where
 data RustABIImplementsMigrationDecision : Set where
 data ParserSpanCreatesPromotionReceipt : Set where
+data ObservationConsumerCreatesCanonicalTruth : Set where
 
 rustAbiDoesNotImplementSourceAuthority : RustABIImplementsSourceAuthority → ⊥
 rustAbiDoesNotImplementSourceAuthority ()
@@ -63,3 +112,6 @@ rustAbiDoesNotChooseMigrationByItself ()
 
 parserSpanDoesNotCreatePromotionReceipt : ParserSpanCreatesPromotionReceipt → ⊥
 parserSpanDoesNotCreatePromotionReceipt ()
+
+observationConsumerDoesNotCreateCanonicalTruth : ObservationConsumerCreatesCanonicalTruth → ⊥
+observationConsumerDoesNotCreateCanonicalTruth ()
