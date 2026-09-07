@@ -11,15 +11,20 @@ import DASHI.Wikimedia.SensibLawBoundaryArtifactMorphismExact as Morph
 ------------------------------------------------------------------------
 -- SLR / RUST CONSUMER ABI
 --
--- Current slr/main README contract inspected 7 Sep 2026 at the then-current
--- main repository state: sensiblaw-core owns revision-scoped spans/promotion
--- receipt types; sensiblaw-stream consumes parser observations/residuals;
--- parser sidecars do not own canonical semantic state; Rust owns deterministic
--- compilation/publication boundaries.
+-- Inspected source surface:
+--   chboishabba/slr main README.md blob
+--   169995cdf939198345e0832ea0ec92f23376057b
+-- on 7 Sep 2026.
+--
+-- Contract: sensiblaw-core owns revision-scoped spans/promotion receipt types;
+-- sensiblaw-stream consumes parser observations/residuals; parser sidecars do
+-- not own canonical semantic state; Rust owns deterministic compilation and
+-- publication boundaries.
 ------------------------------------------------------------------------
 
 slrMainReference : String
-slrMainReference = "chboishabba/slr main README inspected 2026-09-07; repository main source surface"
+slrMainReference =
+  "chboishabba/slr README.md blob 169995cdf939198345e0832ea0ec92f23376057b inspected 2026-09-07"
 
 handoffToSlr : Handoff.SensibLawReviewPacket → Handoff.RuntimeHandoffReceipt
 handoffToSlr packet =
@@ -47,10 +52,6 @@ slrDoesNotOwnPromotionFromConsumption :
   (packet : Handoff.SensibLawReviewPacket) →
   Handoff.runtimeOwnsSemanticPromotion (handoffToSlr packet) ≡ false
 slrDoesNotOwnPromotionFromConsumption packet = refl
-
-------------------------------------------------------------------------
--- Earlier handoff point: SourceUnit -> ObservationClaimPayload -> SLR.
-------------------------------------------------------------------------
 
 record SlrObservationHandoffReceipt : Set where
   constructor slr-observation-handoff-receipt
