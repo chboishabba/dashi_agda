@@ -37,8 +37,8 @@ projectStatement statement qualifierInterpretation =
   Epistemic.statementEnvelope
     (Native.statementId statement)
     qualifierInterpretation
-    (referenceIds (Native.references statement))
-    (projectRank (Native.rank statement))
+    (referenceIds (Native.statementReferences statement))
+    (projectRank (Native.statementRank statement))
 
 statementIdPreserved :
   {QualifierAxis : Set}
@@ -53,7 +53,7 @@ rankPreserved :
   (statement : Native.Statement)
   (interpretation : QualifierAxis → Trit.EpistemicTrit) →
   Epistemic.rankMetadata (projectStatement statement interpretation)
-  ≡ projectRank (Native.rank statement)
+  ≡ projectRank (Native.statementRank statement)
 rankPreserved statement interpretation = refl
 
 referencesPreservedByIdentifier :
@@ -61,7 +61,7 @@ referencesPreservedByIdentifier :
   (statement : Native.Statement)
   (interpretation : QualifierAxis → Trit.EpistemicTrit) →
   Epistemic.sourceReferences (projectStatement statement interpretation)
-  ≡ referenceIds (Native.references statement)
+  ≡ referenceIds (Native.statementReferences statement)
 referencesPreservedByIdentifier statement interpretation = refl
 
 qualifierInterpretationPreserved :
