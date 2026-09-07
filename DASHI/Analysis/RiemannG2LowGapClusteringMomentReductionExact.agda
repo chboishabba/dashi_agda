@@ -14,7 +14,7 @@ import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap
 ------------------------------------------------------------------------
 -- TARGET-LOCAL ORDINATE SECOND-MOMENT REDUCTION
 --
--- Live consumer (checked Lean 8894/8896 lane):
+-- Diagnostic consumer (checked Lean 8894/8896 lane):
 --
 --   (4/pi^2) * highGapMass < lowGapMass,
 --   D = pi/(3 Lambda).
@@ -23,28 +23,13 @@ import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap
 --
 --   delta = Im(rho) - t,
 --
--- not the transverse/off-critical-line coordinate
+-- not the transverse/off-critical-line coordinate alpha = Re(rho)-1/2.
+-- The correct in-repo carrier is therefore
+-- PoleNearPhaseStatistic.targetRelativeGap.
 --
---   alpha = Re(rho) - 1/2.
---
--- The latter distinction is proof-bearing in
--- `RiemannG2TransverseVsOrdinateMomentNonDescentExact`: equal alpha-data can
--- coexist with different target-relative delta-data.  Therefore the correct
--- in-repo carrier is `PoleNearPhaseStatistic.targetRelativeGap`.
---
--- Elementary search reduction:
---
---   highGapMass <= normalizedOrdinateSecondMoment
---   normalizedOrdinateSecondMoment < 2 * lowGapMass
---
--- imply a strict slack witness for
---
---   highGapMass < 2 * lowGapMass.
---
--- Since 4/pi^2 < 1/2, that strict ratio is sufficient for the exact clustering
--- inequality. This Agda module proves the discrete/slack part exactly and keeps
--- the real coefficient bridge explicit rather than pretending pi arithmetic is
--- available on this Nat carrier.
+-- Later x-pollination now owns the concrete phase-statistic VIEW as compiler
+-- output from DirectFinitePoleNearProducer. That does not own the analytic local
+-- second moment itself; it only removes the old need for a second phase carrier.
 ------------------------------------------------------------------------
 
 congSuc : {x y : Nat} → x ≡ y → suc x ≡ suc y
@@ -132,10 +117,10 @@ targetRelativeGapIsCorrectCarrier :
     Coord.canonicalTransverseVsOrdinateMomentBoundary ≡ true
 targetRelativeGapIsCorrectCarrier = refl
 
-concreteTargetRelativePhaseStatisticStillOpen :
+concreteTargetRelativePhaseStatisticOwned :
   Phase.PoleNearPhaseStatisticBoundary.repositoryAlreadyOwnsConcretePoleNearPhaseStatistic
-    Phase.canonicalPoleNearPhaseStatisticBoundary ≡ false
-concreteTargetRelativePhaseStatisticStillOpen = refl
+    Phase.canonicalPoleNearPhaseStatisticBoundary ≡ true
+concreteTargetRelativePhaseStatisticOwned = refl
 
 globalSimpleProportionStillNeedsLocalization :
   AFLocal.GlobalSimpleToLocalClusteringBoundary.additionalLocalizationTheoremRequired
@@ -178,8 +163,8 @@ record LocalMomentClusteringBoundary : Set where
       transverseHermitianMomentIsDirectAnalyticDonor ≡ false
 
     concreteTargetPhaseStatisticAlreadyOwned : Bool
-    concreteTargetPhaseStatisticAlreadyOwnedIsFalse :
-      concreteTargetPhaseStatisticAlreadyOwned ≡ false
+    concreteTargetPhaseStatisticAlreadyOwnedIsTrue :
+      concreteTargetPhaseStatisticAlreadyOwned ≡ true
 
     globalSimpleZeroProportionDirectlySufficient : Bool
     globalSimpleZeroProportionDirectlySufficientIsFalse :
@@ -201,7 +186,7 @@ canonicalLocalMomentClusteringBoundary =
     false refl
     true refl
     false refl
+    true refl
     false refl
     false refl
-    false refl
-    "The live clustering theorem can be attacked through a target-local ORDINATE second moment rather than another coarse count. Normalize delta = Im(rho)-t by the radius D so every high-gap zero contributes at least one unit. If that moment is strictly below twice the low-gap mass, Agda mechanically gives highGapMass < 2*lowGapMass. The correct analytic carrier is PoleNearPhaseStatistic.targetRelativeGap on the existing selected near window. Do NOT use the Alpöge--Furman/Hermitian transverse alpha-moment as a direct donor: alpha and delta are independent coordinates. The actual target-relative moment producer and the elementary real 4/pi^2 < 1/2 bridge remain open."
+    "The target-relative phase-statistic VIEW is now compiler-owned from the existing direct finite producer; do not construct a second phase carrier. The actual target-relative second-moment estimate remains uninhabited, and this lane remains a clustering/obstruction diagnostic rather than a terminal RH payment. If a same-window moment is later supplied, the Nat two-to-one ratio compiler remains reusable. Do not schedule this moment producer ahead of the direct universal pole-quotient Off allowance theorem merely to recreate phase information already present there. RH is not derived."
