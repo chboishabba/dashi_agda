@@ -6,6 +6,8 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPaymentsToR423Round487Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR423FixedOutputProducerProofSearchRound488Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR423LocalPaymentPrerequisiteRound489Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPositiveRateLaplaceAuthorityRound490Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCauchyLaplaceWeldRound491Exact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/ns-r423-fixed-output-direct-compiler.yml'
   workflow_dispatch:
@@ -35,6 +37,16 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNR423FixedOutputProducerProofSearchRound488Exact.agda
+
+      - name: Type-check R490 standard positive-rate Laplace authority
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNPositiveRateLaplaceAuthorityRound490Exact.agda
+
+      - name: Type-check R491 physical Cauchy Laplace weld
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNPhysicalCauchyLaplaceWeldRound491Exact.agda
 
       - name: Type-check R489 local payment prerequisite scheduler
         run: >-
