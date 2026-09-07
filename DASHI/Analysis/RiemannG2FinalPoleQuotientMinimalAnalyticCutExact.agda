@@ -5,52 +5,36 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact as OffTransport
-import DASHI.Analysis.RiemannG2LiteralResponseNormalizedAnalyticCoresExact as Literal
-import DASHI.Analysis.RiemannG2IndependentComplementMarginFinalExact as OneLeaf
-import DASHI.Analysis.RiemannG2FinalSplitComplementOrderTransportCompilerExact as Final
+import DASHI.Analysis.RiemannG2LiteralComplementDirectTargetExact as Direct
+import DASHI.Analysis.RiemannG2DirectIndependentComplementMarginExact as Margin
 
 ------------------------------------------------------------------------
 -- AUTHORITATIVE MINIMAL HIGH-ORDINATE POLE-QUOTIENT CUT
 --
--- Least-privilege normalization now removes the need to expose separate
--- finite-near and Gamma upper-envelope theorems as primitive terminal leaves.
--- At one selected cutoff J choose
+-- The canonical route now bypasses the historical consumer-assigned allowance
+-- layer entirely.  At one selected cutoff J use the literal direct budgets
 --
---   B_near(J)  := D_near(J),
 --   B_off(J)   := D_near(J) + B_far(J),
 --   B_Gamma(g) := D_Gamma(g),
 --
--- using only source-order reflexivity for the channel upper/allowance fields.
--- The checked far-shell bound remains a genuine independent input.
+-- where the Off upper is compiler output from the checked near/far split,
+-- source-order reflexivity on D_near, and the transported far-shell upper; the
+-- Gamma upper is source-order reflexivity.
 --
--- The one scalar analytic leaf is therefore
+-- The ONE scalar analytic leaf is therefore
 --
 --   cast(D_near(J) + B_far(J))
 --     + cast(D_Gamma(g_pole))
 --       < cast(M_cluster).
 --
--- CRITICAL FIREWALL: this compression does not erase the finite-near phase or
--- Gamma mathematics.  They occur literally inside that joint inequality, which
--- must be proved independently of the final
+-- CRITICAL FIREWALL: finite-near phase and Gamma mathematics have not vanished.
+-- They occur literally inside this joint inequality, which must be proved
+-- independently of the downstream same-object balance
 --
---   cluster = Off + Gamma
+--   cluster = Off + Gamma.
 --
--- balance.  The 8889 budget-circularity no-go therefore remains respected.
---
--- CROSS-PROVER / REPRESENTATION
---   checked-Lean split/far theorem -> Agda transport;
---   source-order reflexivity;
---   source scalar/order/taper identities;
---   final cluster same-object attachment.
---
--- PRUNED AS PRIMITIVE TERMINAL LEAVES
---   separate chosen finite-near upper envelope;
---   separate fresh Gamma envelope upper;
---   intermediate epsilon / Off allowance slack;
---   separate Gamma allowance slack;
---   determinant direct payment;
---   all-cutoff near upper families;
---   rebuilding final contradiction algebra.
+-- Thus the 8889 budget-circularity no-go remains respected. No producer chooses
+-- a downstream consumer allowance on this route.
 ------------------------------------------------------------------------
 
 data FinalCutCoordinate : Set where
@@ -60,6 +44,7 @@ data FinalCutCoordinate : Set where
   transportFinalSourceOrders : FinalCutCoordinate
   attachFinalClusterSameObject : FinalCutCoordinate
 
+  assignConsumerChannelAllowances : FinalCutCoordinate
   proveChosenFiniteNearUpper : FinalCutCoordinate
   proveFreshGammaEnvelope : FinalCutCoordinate
   proveChosenNearLeavesFarAllowance : FinalCutCoordinate
@@ -81,6 +66,7 @@ coordinateClass sourceOrderReflexivity = crossProverRepresentation
 coordinateClass proveIndependentLiteralComplementMargin = analytic
 coordinateClass transportFinalSourceOrders = downstream
 coordinateClass attachFinalClusterSameObject = downstream
+coordinateClass assignConsumerChannelAllowances = pruned
 coordinateClass proveChosenFiniteNearUpper = pruned
 coordinateClass proveFreshGammaEnvelope = pruned
 coordinateClass proveChosenNearLeavesFarAllowance = pruned
@@ -90,7 +76,7 @@ coordinateClass recoverDeterminantDirectPayment = pruned
 coordinateClass rebuildFinalContradiction = pruned
 
 ------------------------------------------------------------------------
--- Exact regression pins against the new least-privilege compilers.
+-- Exact regression pins against the direct least-privilege compilers.
 ------------------------------------------------------------------------
 
 leanToAgdaTransportIsStillExplicit :
@@ -98,40 +84,45 @@ leanToAgdaTransportIsStillExplicit :
     OffTransport.canonicalExplicitCutoffNearFarAgdaTransportBoundary ≡ true
 leanToAgdaTransportIsStillExplicit = refl
 
+consumerAllowanceLayerPruned :
+  Margin.DirectIndependentComplementMarginBoundary.consumerAssignedAllowanceLayerRequired
+    Margin.canonicalDirectIndependentComplementMarginBoundary ≡ false
+consumerAllowanceLayerPruned = refl
+
+producerDoesNotChooseDownstreamAllowance :
+  Margin.DirectIndependentComplementMarginBoundary.producerChoosesDownstreamAllowance
+    Margin.canonicalDirectIndependentComplementMarginBoundary ≡ false
+producerDoesNotChooseDownstreamAllowance = refl
+
 separateFiniteNearUpperNoLongerPrimitive :
-  Literal.LiteralResponseNormalizedBoundary.separateFiniteNearUpperScalarRequired
-    Literal.canonicalLiteralResponseNormalizedBoundary ≡ false
+  Direct.DirectLiteralComplementTargetBoundary.separateFiniteNearEnvelopeRequired
+    Direct.canonicalDirectLiteralComplementTargetBoundary ≡ false
 separateFiniteNearUpperNoLongerPrimitive = refl
 
 transportedFarShellStillUsed :
-  Literal.LiteralResponseNormalizedBoundary.transportedFarShellUpperStillRequired
-    Literal.canonicalLiteralResponseNormalizedBoundary ≡ true
+  Direct.DirectLiteralComplementTargetBoundary.transportedFarShellUpperStillUsed
+    Direct.canonicalDirectLiteralComplementTargetBoundary ≡ true
 transportedFarShellStillUsed = refl
 
 separateGammaEnvelopeNoLongerPrimitive :
-  Literal.LiteralResponseNormalizedBoundary.separateGammaEnvelopeScalarRequired
-    Literal.canonicalLiteralResponseNormalizedBoundary ≡ false
+  Direct.DirectLiteralComplementTargetBoundary.separateGammaEnvelopeRequired
+    Direct.canonicalDirectLiteralComplementTargetBoundary ≡ false
 separateGammaEnvelopeNoLongerPrimitive = refl
 
 oneIndependentComplementMarginIsTerminalScalarLeaf :
-  OneLeaf.IndependentComplementMarginBoundary.oneIndependentComplementMarginIsScalarLeaf
-    OneLeaf.canonicalIndependentComplementMarginBoundary ≡ true
+  Margin.DirectIndependentComplementMarginBoundary.oneIndependentJointMarginIsScalarLeaf
+    Margin.canonicalDirectIndependentComplementMarginBoundary ≡ true
 oneIndependentComplementMarginIsTerminalScalarLeaf = refl
 
 finalBalanceCannotManufactureMargin :
-  OneLeaf.IndependentComplementMarginBoundary.finalBalanceMayBeUsedToProveThatMargin
-    OneLeaf.canonicalIndependentComplementMarginBoundary ≡ false
+  Margin.DirectIndependentComplementMarginBoundary.finalBalanceMayManufactureJointMargin
+    Margin.canonicalDirectIndependentComplementMarginBoundary ≡ false
 finalBalanceCannotManufactureMargin = refl
 
-oneLeafCompilesContradiction :
-  OneLeaf.IndependentComplementMarginBoundary.oneLeafCompilesExistingContradiction
-    OneLeaf.canonicalIndependentComplementMarginBoundary ≡ true
-oneLeafCompilesContradiction = refl
-
-finalOrderTransportCompilesContradiction :
-  Final.FinalOrderTransportBoundary.orderTransportPackageCompilesContradiction
-    Final.canonicalFinalOrderTransportBoundary ≡ true
-finalOrderTransportCompilesContradiction = refl
+directOneLeafCompilesContradiction :
+  Margin.DirectIndependentComplementMarginBoundary.directSplitCompilerProducesContradiction
+    Margin.canonicalDirectIndependentComplementMarginBoundary ≡ true
+directOneLeafCompilesContradiction = refl
 
 ------------------------------------------------------------------------
 -- Boundary receipt.
@@ -140,6 +131,10 @@ finalOrderTransportCompilesContradiction = refl
 record FinalPoleQuotientMinimalAnalyticCutBoundary : Set where
   constructor final-pole-quotient-minimal-analytic-cut-boundary
   field
+    consumerAssignedAllowanceLayerIsCanonicalRequirement : Bool
+    consumerAssignedAllowanceLayerIsCanonicalRequirementIsFalse :
+      consumerAssignedAllowanceLayerIsCanonicalRequirement ≡ false
+
     separateChosenFiniteNearUpperIsPrimitiveAnalyticRequirement : Bool
     separateChosenFiniteNearUpperIsPrimitiveAnalyticRequirementIsFalse :
       separateChosenFiniteNearUpperIsPrimitiveAnalyticRequirement ≡ false
@@ -195,6 +190,7 @@ canonicalFinalPoleQuotientMinimalAnalyticCutBoundary =
   final-pole-quotient-minimal-analytic-cut-boundary
     false refl
     false refl
+    false refl
     true refl
     true refl
     true refl
@@ -205,4 +201,4 @@ canonicalFinalPoleQuotientMinimalAnalyticCutBoundary =
     false refl
     false refl
     false refl
-    "The terminal scalar API is one independently proved same-case complement inequality: cast(D_near(J)+B_far(J)) + cast(D_Gamma(g_pole)) < cast(M_cluster). Separate finite-near and Gamma envelope upper theorems are no longer primitive terminal leaves because their channel budgets may be the literal responses under source-order reflexivity. Their mathematics has not disappeared: target-centred finite-near phase and the literal Gamma response occur inside the joint theorem itself, together with the independently transported far-shell budget. The joint theorem may not be manufactured from cluster=Off+Gamma; that balance remains a downstream same-object representation receipt. With source order/scalar/taper transport, the one scalar leaf compiles the existing contradiction. RH is not derived."
+    "The canonical high scalar cut is allowance-free and has one analytic theorem: independently prove cast(D_near(J)+B_far(J)) + cast(D_Gamma(g_pole)) < cast(M_cluster). Off's source upper is compiled from the checked split, D_near reflexivity, and the transported far upper; Gamma's source upper is reflexivity. Separate near/Gamma envelope theorems and channel allowances are not primitive terminal leaves. Their mathematics remains literally inside the joint theorem. The final cluster=Off+Gamma balance may not manufacture that theorem. With scalar/order/taper/cluster same-object transport, the direct split-complement compiler yields contradiction. RH is not derived."
