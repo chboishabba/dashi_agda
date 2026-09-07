@@ -8,18 +8,17 @@ import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 import DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact as Universal
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as NearFar
 import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact as OffTransport
-import DASHI.Analysis.RiemannG2LiteralResponseNormalizedAnalyticCoresExact as Literal
-import DASHI.Analysis.RiemannG2IndependentComplementMarginFinalExact as OneLeaf
-import DASHI.Analysis.RiemannG2FinalPoleQuotientAnalyticCoreExact as Core
-import DASHI.Analysis.RiemannG2FinalPoleQuotientTwoPaymentCutExact as Two
+import DASHI.Analysis.RiemannG2LiteralComplementDirectTargetExact as Direct
+import DASHI.Analysis.RiemannG2DirectIndependentComplementMarginExact as Margin
 
 ------------------------------------------------------------------------
--- UNIFORM HIGH-ZERO COMPILER FOR THE ONE-LEAF ROUTE
+-- UNIFORM HIGH-ZERO COMPILER FOR THE DIRECT ONE-LEAF ROUTE
 --
 -- For every arbitrary high off-line nontrivial zero, produce one SAME-CASE
--- literal-response-normalized packet plus the independently proved complement
--- margin and representation/order attachments.  Everything from that packet to
--- the existing prize-facing HighOffLineAnalyticCoreProducer is compiler output.
+-- literal complement target plus the independently proved joint margin and
+-- representation/order/cluster receipts.  The case compiles directly to bottom
+-- through the split-complement compiler; no allowance or payment record occurs
+-- on this canonical route.
 ------------------------------------------------------------------------
 
 record IndependentComplementHighOffLineCase : Set₁ where
@@ -27,55 +26,19 @@ record IndependentComplementHighOffLineCase : Set₁ where
     offSurface : NearFar.OrderedAdditiveNearFarSurface
     offTransport : OffTransport.ExplicitCutoffNearFarAgdaTransport offSurface
 
-    pair : Literal.LiteralResponseNormalizedCorePair offSurface offTransport
-
-    attachments :
-      Core.FinalPoleQuotientAnalyticCoreAttachments
-        (Literal.compiledLiteralCores pair)
+    targets : Direct.DirectLiteralComplementTargets offSurface offTransport
 
     finalInput :
-      OneLeaf.IndependentComplementMarginFinalInput pair attachments
+      Margin.DirectIndependentComplementMarginInput targets
 
     caseReference : String
 
 open IndependentComplementHighOffLineCase public
 
-caseCores :
-  IndependentComplementHighOffLineCase ->
-  Core.FinalPoleQuotientTwoAnalyticCores
-caseCores c = Literal.compiledLiteralCores (pair c)
-
-caseAttachments :
-  (c : IndependentComplementHighOffLineCase) ->
-  Core.FinalPoleQuotientAnalyticCoreAttachments (caseCores c)
-caseAttachments c = attachments c
-
-caseFinalAttachment :
-  (c : IndependentComplementHighOffLineCase) ->
-  Two.FinalPoleQuotientTwoPaymentAttachment
-    (Core.compileFinalTwoPayments (caseCores c) (caseAttachments c))
-caseFinalAttachment c = record
-  { Two.surface = OneLeaf.surface (finalInput c)
-  ; Two.cluster = OneLeaf.cluster (finalInput c)
-  ; Two.transport = OneLeaf.compileFinalOrderTransport (finalInput c)
-  ; Two.attachmentReference = caseReference c
-  }
-
-caseCompletion :
-  (c : IndependentComplementHighOffLineCase) ->
-  Core.FinalPoleQuotientAnalyticCompletion (caseCores c) (caseAttachments c)
-caseCompletion c = record
-  { Core.finalAttachment = caseFinalAttachment c
-  ; Core.completionReference = caseReference c
-  }
-
 caseContradiction :
   IndependentComplementHighOffLineCase -> ⊥
 caseContradiction c =
-  Core.compileAnalyticCoresToHighOrdinateContradiction
-    (caseCores c)
-    (caseAttachments c)
-    (caseCompletion c)
+  Margin.directIndependentComplementContradiction (finalInput c)
 
 record UniformIndependentComplementHighProducer
     (analytic : Analytic.AnalyticSubstrate)
@@ -89,23 +52,6 @@ record UniformIndependentComplementHighProducer
 
 open UniformIndependentComplementHighProducer public
 
-compileUniformHighProducer :
-  {analytic : Analytic.AnalyticSubstrate} ->
-  {High : Universal.AnalyticNontrivialZero analytic -> Set} ->
-  UniformIndependentComplementHighProducer analytic High ->
-  Universal.HighOffLineAnalyticCoreProducer analytic High
-compileUniformHighProducer producer = record
-  { Universal.coresForOffLineHigh =
-      λ rho high offLine ->
-        caseCores (caseForOffLineHigh producer rho high offLine)
-  ; Universal.attachmentsForOffLineHigh =
-      λ rho high offLine ->
-        caseAttachments (caseForOffLineHigh producer rho high offLine)
-  ; Universal.completionForOffLineHigh =
-      λ rho high offLine ->
-        caseCompletion (caseForOffLineHigh producer rho high offLine)
-  }
-
 uniformHighContradiction :
   {analytic : Analytic.AnalyticSubstrate} ->
   {High : Universal.AnalyticNontrivialZero analytic -> Set} ->
@@ -114,9 +60,21 @@ uniformHighContradiction :
   High rho ->
   Neg (Universal.analyticCritical rho) ->
   ⊥
-uniformHighContradiction producer =
-  Universal.highOffLineAnalyticCoreContradiction
-    (compileUniformHighProducer producer)
+uniformHighContradiction producer rho high offLine =
+  caseContradiction (caseForOffLineHigh producer rho high offLine)
+
+highCriticalFromIndependentComplement :
+  {analytic : Analytic.AnalyticSubstrate} ->
+  {High : Universal.AnalyticNontrivialZero analytic -> Set} ->
+  Universal.CriticalLineStable analytic ->
+  UniformIndependentComplementHighProducer analytic High ->
+  (rho : Universal.AnalyticNontrivialZero analytic) ->
+  High rho ->
+  Universal.analyticCritical rho
+highCriticalFromIndependentComplement stable producer rho high =
+  stable
+    (Universal.point rho)
+    (λ offLine -> uniformHighContradiction producer rho high offLine)
 
 ------------------------------------------------------------------------
 -- BOUNDARY
@@ -133,6 +91,10 @@ record UniformIndependentComplementHighBoundary : Set where
     arbitraryHighOffLineCaseFamilyStillRequiredIsTrue :
       arbitraryHighOffLineCaseFamilyStillRequired ≡ true
 
+    consumerAssignedAllowanceLayerUsedPerCase : Bool
+    consumerAssignedAllowanceLayerUsedPerCaseIsFalse :
+      consumerAssignedAllowanceLayerUsedPerCase ≡ false
+
     separateFiniteNearEnvelopeLeafRequiredPerCase : Bool
     separateFiniteNearEnvelopeLeafRequiredPerCaseIsFalse :
       separateFiniteNearEnvelopeLeafRequiredPerCase ≡ false
@@ -145,9 +107,13 @@ record UniformIndependentComplementHighBoundary : Set where
     independentLiteralComplementMarginRequiredPerCaseIsTrue :
       independentLiteralComplementMarginRequiredPerCase ≡ true
 
-    normalizedCaseCompilesPrizeFacingHighProducer : Bool
-    normalizedCaseCompilesPrizeFacingHighProducerIsTrue :
-      normalizedCaseCompilesPrizeFacingHighProducer ≡ true
+    directCaseCompilesContradiction : Bool
+    directCaseCompilesContradictionIsTrue :
+      directCaseCompilesContradiction ≡ true
+
+    criticalLineStabilityTurnsPerCaseContradictionIntoCriticality : Bool
+    criticalLineStabilityTurnsPerCaseContradictionIntoCriticalityIsTrue :
+      criticalLineStabilityTurnsPerCaseContradictionIntoCriticality ≡ true
 
     lowOrdinateCertificateManufacturedHere : Bool
     lowOrdinateCertificateManufacturedHereIsFalse :
@@ -166,8 +132,10 @@ canonicalUniformIndependentComplementHighBoundary =
     true refl
     false refl
     false refl
+    false refl
+    true refl
     true refl
     true refl
     false refl
     false refl
-    "There is no extra high-side theorem after the one-leaf packet. For every arbitrary high off-line nontrivial zero, provide the same-case cutoff/far transport, source-order reflexivity, literal-response channel cores, the independently proved complement margin, and the representation/order/cluster attachments. That compiles definitionally to the existing prize-facing HighOffLineAnalyticCoreProducer. Separate near/Gamma envelope leaves are not primitive per-case obligations, but their literal channel values remain inside the joint margin. Low ordinates stay independent and RH is not derived here."
+    "The canonical high route is allowance-free. For every arbitrary high off-line nontrivial zero, provide one same-case direct literal complement target and its independently proved joint margin plus representation/order/cluster receipts. That case compiles directly to bottom through SplitPoleQuotientComplementMargin. Critical-line stability then converts the exclusion of off-line high zeros into high criticality. Separate near/Gamma envelope APIs and consumer-assigned allowances are absent from the canonical path; low ordinates remain independent and RH is not derived here."
