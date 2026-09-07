@@ -10,16 +10,12 @@ module DASHI.Physics.YangMills.BalabanCMP98Path13CurrentPreferredSourceFrontierE
 --   * T3 right-Jacobian x-pollination;
 --   * pruning the whole Bishop bridge to the R208 ring-embedding boundary;
 --   * splitting Path13 physical variational/radius data from R171 standard
---     operator-representation authority.
---
--- Compiler-owned below this cut:
---   repaired side-13 indexing; physical periodic realization; signed bond
---   projection; local scalar action; two-carrier Eq.(119); radius-six geometry;
---   native radius derivation; 74-link telescope; principal Y_x / outer Y;
---   source-correct dexpPlus/Jplus/Ad(exp) role assignment; T3 inverse laws;
---   final positive-bond field assembly.
---
--- Remaining inputs are deliberately separated by authority class.
+--     operator-representation authority;
+--   * specializing the Bałaban variational theorem directly to the literal
+--     Path13 fine-field carrier, making selected-background and selected-link
+--     same-object receipts definitional;
+--   * deriving the historical variational-radius record from that specialization
+--     plus three exact normalization facts.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -29,6 +25,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP98Path13PreferredSplitPhysicalT3SourceFamilyExact as Preferred
 import DASHI.Physics.YangMills.BalabanPath13SplitPhysicalStandardOperatorCutExact as Split
 import DASHI.Physics.YangMills.BalabanPath13SelectedVariationalRadiusExact as VariationalRadius
+import DASHI.Physics.YangMills.BalabanPath13VariationalSpecializationExact as Specialization
+import DASHI.Physics.YangMills.BalabanPath13VariationalRadiusFromSpecializationExact as SpecializedRadius
 import DASHI.Physics.YangMills.BalabanCMP98SU2OperatorDefectFromPhysicalRadiusRound171Exact as R171
 import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as R208
 import DASHI.Physics.YangMills.BalabanCMP98Path13SplitT3SelectedSemanticsExact as T3
@@ -39,12 +37,20 @@ record CurrentPreferredEq119FrontierStatus : Set where
   field
     printedRoleCorrectionClosed : Bool
     t3PrintedOperatorAdapterClosed : Bool
+    path13VariationalSpecializationCompilerClosed : Bool
+    path13VariationalRadiusFromSpecializationCompilerClosed : Bool
     splitPhysicalStandardCompilerClosed : Bool
     splitPrincipalImageCompilerClosed : Bool
     finalSplitT3Eq119CompilerClosed : Bool
 
-    -- Path13 physical/source inputs.
+    -- Current Path13 source/normalization inputs.
+    path13VariationalSourceSpecializationConstructed : Bool
+    path13VariationalRadiusNormalizationConstructed : Bool
+
+    -- Historical compatibility summary: this larger object is compiler output
+    -- once the two refined inputs above are supplied.
     selectedPath13VariationalRadiusConstructed : Bool
+
     selectedCutOperatorSameObjectWeldConstructed : Bool
     selectedT3NormalizationConstructed : Bool
     selectedCutThresholdConstructed : Bool
@@ -59,8 +65,10 @@ open CurrentPreferredEq119FrontierStatus public
 canonicalCurrentPreferredEq119FrontierStatus : CurrentPreferredEq119FrontierStatus
 canonicalCurrentPreferredEq119FrontierStatus =
   currentPreferredEq119FrontierStatus
-    true true true true true
-    false false false false
+    true true true true true true true
+    false false
+    false
+    false false false
     false false
     false
 
@@ -71,6 +79,16 @@ printedRoleCorrectionClosedIsTrue = refl
 t3PrintedOperatorAdapterClosedIsTrue :
   t3PrintedOperatorAdapterClosed canonicalCurrentPreferredEq119FrontierStatus ≡ true
 t3PrintedOperatorAdapterClosedIsTrue = refl
+
+path13VariationalSpecializationCompilerClosedIsTrue :
+  path13VariationalSpecializationCompilerClosed
+    canonicalCurrentPreferredEq119FrontierStatus ≡ true
+path13VariationalSpecializationCompilerClosedIsTrue = refl
+
+path13VariationalRadiusFromSpecializationCompilerClosedIsTrue :
+  path13VariationalRadiusFromSpecializationCompilerClosed
+    canonicalCurrentPreferredEq119FrontierStatus ≡ true
+path13VariationalRadiusFromSpecializationCompilerClosedIsTrue = refl
 
 splitPhysicalStandardCompilerClosedIsTrue :
   splitPhysicalStandardCompilerClosed canonicalCurrentPreferredEq119FrontierStatus ≡ true
@@ -88,6 +106,15 @@ physicalEq119ClosedIsFalse = refl
 -- Typed surviving source surfaces.
 ------------------------------------------------------------------------
 
+Path13VariationalSourceSpecializationInput : Set → Set → Set₁
+Path13VariationalSourceSpecializationInput =
+  Specialization.Path13VariationalSpecialization
+
+Path13VariationalRadiusNormalizationInput : Set → Set₁
+Path13VariationalRadiusNormalizationInput =
+  SpecializedRadius.Path13VariationalRadiusNormalization
+
+-- Compatibility surface: now compiler output from the refined source cut.
 Path13PhysicalVariationalRadiusInput : Set → Set₁
 Path13PhysicalVariationalRadiusInput =
   VariationalRadius.Path13SelectedVariationalRadiusRepresentation
@@ -99,10 +126,6 @@ Path13StandardOperatorRepresentationInput =
 Path13RationalRealRingEmbeddingInput : Set₁
 Path13RationalRealRingEmbeddingInput = R208.RationalRealRingEmbedding
 
--- The selected-cut/operator weld and selected T3 normalization are dependent on
--- the exact chosen physical/standard source objects and are therefore exposed
--- through the preferred split records rather than flattened into unrelated
--- booleans.
 Path13SplitRepresentationInput : Set → Set₁
 Path13SplitRepresentationInput = Split.SplitPath13PhysicalStandardRepresentation
 
@@ -121,9 +144,20 @@ CurrentPreferredEq119Inputs = Preferred.PreferredSplitPhysicalT3Path13Inputs
 cmp98Path13CurrentPreferredSourceFrontierLevel : ProofLevel
 cmp98Path13CurrentPreferredSourceFrontierLevel = machineChecked
 
+path13VariationalSpecializationCompilerLevel : ProofLevel
+path13VariationalSpecializationCompilerLevel =
+  Specialization.path13VariationalSpecializationCompilerLevel
+
+path13VariationalRadiusFromSpecializationLevel : ProofLevel
+path13VariationalRadiusFromSpecializationLevel =
+  SpecializedRadius.path13VariationalRadiusFromSpecializationLevel
+
 -- These remain input surfaces, not theorem claims.
-literalCMP98Path13PhysicalVariationalRadiusLevel : ProofLevel
-literalCMP98Path13PhysicalVariationalRadiusLevel = conditional
+literalCMP98Path13VariationalSourceSpecializationLevel : ProofLevel
+literalCMP98Path13VariationalSourceSpecializationLevel = conditional
+
+literalCMP98Path13VariationalRadiusNormalizationLevel : ProofLevel
+literalCMP98Path13VariationalRadiusNormalizationLevel = conditional
 
 literalCMP98Path13SelectedCutOperatorWeldLevel : ProofLevel
 literalCMP98Path13SelectedCutOperatorWeldLevel = conditional
