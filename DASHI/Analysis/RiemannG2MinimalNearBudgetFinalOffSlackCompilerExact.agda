@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.WeilTestSpace as Weil
 import DASHI.Analysis.RiemannExplicitFormula as Explicit
+import DASHI.Analysis.RiemannAristotlePoleNearExplicitFormulaBridgeExact as Window
 import DASHI.Analysis.RiemannG2FkOrbitConsumerAttachmentExact as Orbit
 import DASHI.Analysis.RiemannG2SelectedPoleNearSingleProducerBidiExact as Selected
 import DASHI.Analysis.RiemannG2SelectedFiniteNearBudgetMinimalConsumerExact as Minimal
@@ -78,7 +79,7 @@ compiledSelectedUpperInFinalOrder :
       space formula orbit selected payment S d assigned) ->
   NearFar._≤_ S
     (Cast.cast (selectedScalarIdentity bridge)
-      (DASHI.Analysis.RiemannAristotlePoleNearExplicitFormulaBridgeExact.PoleNearTargetWindow.finitePoleNearSigned
+      (Window.PoleNearTargetWindow.finitePoleNearSigned
         (Selected.ActualSelectedPoleNearProducer.targetWindow selected)))
     (Cast.cast (selectedScalarIdentity bridge)
       (Minimal.selectedNearBudget payment))
