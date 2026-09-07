@@ -25,6 +25,10 @@ grep -q '^sourceEstablishedAlignedDeferredIsNotMathematicalDebt :' DASHI/Core/Pr
 grep -q '^record SourceAlignedDeferredTheorem' DASHI/Core/ProofDebtRouterExact.agda
 grep -q '^ConditionalDevelopment :' DASHI/Core/ProofDebtRouterExact.agda
 grep -q '^certifyDeferred :' DASHI/Core/ProofDebtRouterExact.agda
+grep -q '^scheduleAction :' DASHI/Core/ProofDebtRouterExact.agda
+grep -q '^constrainedHeavyEstablishedReplayGoesToAristotle :' DASHI/Core/ProofDebtRouterExact.agda
+grep -q '^constrainedMachineCannotReclassifyNovelMathematics :' DASHI/Core/ProofDebtRouterExact.agda
+grep -q '^unAlignedCertificationCannotBeDelegatedAsProofReplay :' DASHI/Core/ProofDebtRouterExact.agda
 
 grep -q '^coordinateRoute :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
 grep -q '^cutClass :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
