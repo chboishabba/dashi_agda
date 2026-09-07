@@ -9,5 +9,6 @@ import DASHI.Biology.Agriculture.BNFMechanismToFieldPromotionBidiExact
 import DASHI.Biology.Agriculture.BNFEconomicValidationCrossPollinationExact
 import DASHI.Biology.Agriculture.BNFClimateCountryLESCrossPollinationExact
 import DASHI.Biology.Agriculture.BNFQualifiedInterventionModelExact
+import DASHI.Biology.Agriculture.BNFSevenGenerationPlanningExact
 import DASHI.Biology.Agriculture.Hungria2024EconomicReplayInputAuditExact
 import DASHI.Biology.Agriculture.Hungria2024HeadlineLineageWeldExact
