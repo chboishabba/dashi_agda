@@ -6,7 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
-import DASHI.Physics.Closure.NSTriadKNDirectSignedCompanionFrontierRound442Exact as NS
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact as NS
 import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Exact as YM
 import DASHI.Analysis.RiemannAristotleRHFinalAllowanceLeafSchedulerExact as RH
 import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as Zeta
@@ -19,12 +19,23 @@ import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as Zeta
 -- value is that their current literal frontiers are now small enough to classify
 -- by producer motif, which prevents wasting search on already-owned compiler
 -- infrastructure.
+--
+-- NS UPDATE (R477)
+-- ----------------
+-- The older R442 direct signed-companion frontier exposed resolvent->heat and
+-- signed-spacetime leaves.  R477 installs the nonseparable Cauchy kernel
+-- directly on the fixed-output Gram quadratic form and proves the exact helical
+-- +/- split.  On the currently preferred projected route the terminal NS leaves
+-- are therefore the two scalar resolved GramOperatorBounds, not a separate
+-- Laplace-realization seam.  The older direct signed route remains a fallback,
+-- not the cross-domain scheduler's preferred NS frontier.
 ------------------------------------------------------------------------
 
 data TerminalProducerMotif : Set where
   sameObjectRepresentation
   assignedAllowancePayment
   signedIntegratedPayment
+  resolvedGramOperatorBound
   sourceSemanticsRecovery
   conjunctionOfIndependentChildren
   downstreamCompilerReuse
@@ -33,8 +44,8 @@ data TerminalProducerMotif : Set where
 data Programme : Set where navierStokes yangMills riemannZeta : Programme
 
 data TerminalCoordinate : Set where
-  nsResolventHeat
-  nsSignedSpacetime
+  nsPlusResolvedGram
+  nsMinusResolvedGram
   ymRound108Semantics
   ymRound108BC1SameObject
   rhOffAllowance
@@ -42,24 +53,26 @@ data TerminalCoordinate : Set where
   : TerminalCoordinate
 
 coordinateProgramme : TerminalCoordinate → Programme
-coordinateProgramme nsResolventHeat = navierStokes
-coordinateProgramme nsSignedSpacetime = navierStokes
+coordinateProgramme nsPlusResolvedGram = navierStokes
+coordinateProgramme nsMinusResolvedGram = navierStokes
 coordinateProgramme ymRound108Semantics = yangMills
 coordinateProgramme ymRound108BC1SameObject = yangMills
 coordinateProgramme rhOffAllowance = riemannZeta
 coordinateProgramme rhGammaAllowance = riemannZeta
 
 primaryMotif : TerminalCoordinate → TerminalProducerMotif
-primaryMotif nsResolventHeat = sameObjectRepresentation
-primaryMotif nsSignedSpacetime = signedIntegratedPayment
+primaryMotif nsPlusResolvedGram = resolvedGramOperatorBound
+primaryMotif nsMinusResolvedGram = resolvedGramOperatorBound
 primaryMotif ymRound108Semantics = sourceSemanticsRecovery
 primaryMotif ymRound108BC1SameObject = sameObjectRepresentation
 primaryMotif rhOffAllowance = assignedAllowancePayment
 primaryMotif rhGammaAllowance = assignedAllowancePayment
 
 coordinateReference : TerminalCoordinate → String
-coordinateReference nsResolventHeat = "NS: exact R290 Cauchy-resolvent -> one-cell heat-factor realization"
-coordinateReference nsSignedSpacetime = "NS: cutoff-uniform integrated payment of explicit R440/R441 common signed cross"
+coordinateReference nsPlusResolvedGram =
+  "NS: R477 physical plus-polarization Cauchy-resolved fixed-output GramOperatorBound"
+coordinateReference nsMinusResolvedGram =
+  "NS: R477 physical minus-polarization Cauchy-resolved fixed-output GramOperatorBound"
 coordinateReference ymRound108Semantics = "YM: source-fixed Round108 density semantics"
 coordinateReference ymRound108BC1SameObject = "YM: selected potential = BC1 same-object representation weld"
 coordinateReference rhOffAllowance = "RH/zeta: universal pole-quotient Off budget <= assigned A_off"
@@ -69,14 +82,21 @@ coordinateReference rhGammaAllowance = "RH/zeta: same-taper Gamma budget <= assi
 -- Exact pins to current terminality.
 ------------------------------------------------------------------------
 
-nsResolventStillOpen : NS.round442AnalyticResolventHeatRealizationClosed ≡ false
-nsResolventStillOpen = NS.round442AnalyticResolventHeatRealizationClosedIsFalse
+nsPlusResolvedGramStillOpen : NS.round477PhysicalPlusResolvedBoundClosed ≡ false
+nsPlusResolvedGramStillOpen = NS.round477PhysicalPlusResolvedBoundClosedIsFalse
 
-nsSignedSpacetimeStillOpen : NS.round442SignedCompanionSpacetimePaymentClosed ≡ false
-nsSignedSpacetimeStillOpen = NS.round442SignedCompanionSpacetimePaymentClosedIsFalse
+nsMinusResolvedGramStillOpen : NS.round477PhysicalMinusResolvedBoundClosed ≡ false
+nsMinusResolvedGramStillOpen = NS.round477PhysicalMinusResolvedBoundClosedIsFalse
 
-nsFiniteCompilerAlreadyOwned : NS.round442PhysicalR299RecordInhabited ≡ true
-nsFiniteCompilerAlreadyOwned = NS.round442PhysicalR299RecordInhabitedIsTrue
+nsResolvedHelicalCompilerAlreadyOwned : NS.round477TwoScalarResolvedBoundsCompile ≡ true
+nsResolvedHelicalCompilerAlreadyOwned = refl
+
+nsCauchyKernelAlreadyExplicit : NS.round477CauchyPairKernelExplicit ≡ true
+nsCauchyKernelAlreadyExplicit = refl
+
+nsResolventNormalizationAlreadyDivisionFree :
+  NS.round477ResolventNormalizationDivisionFree ≡ true
+nsResolventNormalizationAlreadyDivisionFree = refl
 
 ymDirectRouteRemainsAND :
   YM.routeTargets YM.directRound108ActionRoute
@@ -137,24 +157,27 @@ canonicalCrossDomainSearchPolicy =
 -- Search order as a dependency statement, not a numerical ranking.
 --
 -- 1. Remove representation/source seams that block an already-built compiler.
--- 2. Attack terminal analytic allowance/signed-payment leaves.
+-- 2. Attack terminal analytic/operator-bound leaves.
 -- 3. Let existing downstream compilers fire; do not rebuild them.
 --
--- This makes YM's source/same-object children and NS's resolvent same-object
--- realization natural early targets, while RH/zeta's two allowance payments and
--- NS signed spacetime payment remain the irreducible analytic leaves.  It does
--- NOT assert that any of these theorems has been proved.
+-- YM's source/same-object children remain natural early representation targets.
+-- NS no longer schedules the old resolvent->heat representation seam on the
+-- preferred projected route: R477 carries the Cauchy kernel directly and leaves
+-- exactly two scalar resolved Gram bounds.  RH/zeta's two allowance payments
+-- remain irreducible analytic leaves.  This does NOT assert that any of these
+-- theorems has been proved.
 ------------------------------------------------------------------------
 
 data ClosurePhase : Set where
   representationOrSource
   terminalAnalyticPayment
+  terminalOperatorBound
   downstreamCompiler
   : ClosurePhase
 
 phase : TerminalCoordinate → ClosurePhase
-phase nsResolventHeat = representationOrSource
-phase nsSignedSpacetime = terminalAnalyticPayment
+phase nsPlusResolvedGram = terminalOperatorBound
+phase nsMinusResolvedGram = terminalOperatorBound
 phase ymRound108Semantics = representationOrSource
 phase ymRound108BC1SameObject = representationOrSource
 phase rhOffAllowance = terminalAnalyticPayment
