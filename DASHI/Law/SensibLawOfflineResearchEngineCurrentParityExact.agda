@@ -7,19 +7,21 @@ open import Data.Empty using (⊥)
 import DASHI.Law.SensibLawOfflineResearchEngineRoadmapEverything as Roadmap
 import DASHI.Law.SensibLawOfficialHCAFullJudgmentLiveReceipt516867cExact as FullJudgment
 import DASHI.Law.SensibLawJudgmentFootnoteObserverRefinementExact as FootnoteRefinement
+import DASHI.Law.SensibLawJudgmentFootnoteAnchorObserverRefinementExact as AnchorRefinement
 
 ------------------------------------------------------------------------
 -- Current parity overlay.
 --
--- The older roadmap capstone remains the historical aggregate for the offline
--- and initial governed-online implementation.  This overlay owns the newer live
--- facts without rewriting history:
+-- Current observed state:
 --   * full official HCA DOCX acquisition/materialization is observed;
---   * both carrier and body-only canonical-text digests are pinned exactly;
---   * the first body-only citation queue observed only one self citation;
---   * the Rust observer refinement now preserves DOCX footnotes and reported /
---     parallel citation forms;
---   * the refined v0.2 queue is not yet runtime-observed;
+--   * exact carrier and body-only text digests are pinned;
+--   * body-only v0.1 citation observation was inadequate (1 candidate);
+--   * body+footnote v0.2 is observed at Rust head 00bb995... with 163
+--     footnotes, 190 candidates and 189 footnote candidates, network=0;
+--   * Mallonland reporter identities are recovered at footnote 90;
+--   * v0.3 body-paragraph <-> footnoteReference anchor preservation is source
+--     implemented but not yet runtime-observed;
+--   * extraction/anchors remain candidate observations, not treatment/payment;
 --   * local Rust validation is not Agda kernel certification.
 ------------------------------------------------------------------------
 
@@ -44,17 +46,21 @@ record CurrentResearchEngineParityBoundary : Set where
     bodyOnlyCitationObserverInadequacyObservedIsTrue :
       bodyOnlyCitationObserverInadequacyObserved ≡ true
 
-    footnoteObserverRefinementImplemented : Bool
-    footnoteObserverRefinementImplementedIsTrue :
-      footnoteObserverRefinementImplemented ≡ true
+    bodyFootnoteCitationQueueV02Observed : Bool
+    bodyFootnoteCitationQueueV02ObservedIsTrue :
+      bodyFootnoteCitationQueueV02Observed ≡ true
 
-    reportedCitationRefinementImplemented : Bool
-    reportedCitationRefinementImplementedIsTrue :
-      reportedCitationRefinementImplemented ≡ true
+    mallonlandReporterIdentityRecovered : Bool
+    mallonlandReporterIdentityRecoveredIsTrue :
+      mallonlandReporterIdentityRecovered ≡ true
 
-    refinedCitationQueueRuntimeObserved : Bool
-    refinedCitationQueueRuntimeObservedIsFalse :
-      refinedCitationQueueRuntimeObserved ≡ false
+    bodyFootnoteAnchorV03Implemented : Bool
+    bodyFootnoteAnchorV03ImplementedIsTrue :
+      bodyFootnoteAnchorV03Implemented ≡ true
+
+    bodyFootnoteAnchorV03RuntimeObserved : Bool
+    bodyFootnoteAnchorV03RuntimeObservedIsFalse :
+      bodyFootnoteAnchorV03RuntimeObserved ≡ false
 
     exactCurrentRustHeadLiveExecutionObserved : Bool
     exactCurrentRustHeadLiveExecutionObservedIsFalse :
@@ -66,6 +72,7 @@ record CurrentResearchEngineParityBoundary : Set where
 canonicalCurrentResearchEngineParityBoundary : CurrentResearchEngineParityBoundary
 canonicalCurrentResearchEngineParityBoundary =
   currentResearchEngineParityBoundary
+    true refl
     true refl
     true refl
     true refl
@@ -88,12 +95,18 @@ selectedFootnoteRefinementBoundary :
 selectedFootnoteRefinementBoundary =
   FootnoteRefinement.canonicalJudgmentFootnoteObserverRefinementBoundary
 
+selectedAnchorRefinementBoundary :
+  AnchorRefinement.FootnoteAnchorObserverRefinementBoundary
+selectedAnchorRefinementBoundary =
+  AnchorRefinement.canonicalFootnoteAnchorObserverRefinementBoundary
+
 ------------------------------------------------------------------------
 -- Current-parity firewalls.
 ------------------------------------------------------------------------
 
 data RuntimeObservationAutomaticallyKernelProof : Set where
 data ObserverRefinementAutomaticallyReviewedTreatment : Set where
+data AnchorObservationAutomaticallyResidualPayment : Set where
 
 runtimeObservationDoesNotBecomeKernelProof :
   RuntimeObservationAutomaticallyKernelProof → ⊥
@@ -102,3 +115,7 @@ runtimeObservationDoesNotBecomeKernelProof ()
 observerRefinementDoesNotBecomeReviewedTreatment :
   ObserverRefinementAutomaticallyReviewedTreatment → ⊥
 observerRefinementDoesNotBecomeReviewedTreatment ()
+
+anchorObservationDoesNotBecomeResidualPayment :
+  AnchorObservationAutomaticallyResidualPayment → ⊥
+anchorObservationDoesNotBecomeResidualPayment ()
