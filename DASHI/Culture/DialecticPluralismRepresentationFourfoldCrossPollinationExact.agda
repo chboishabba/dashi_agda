@@ -125,7 +125,26 @@ correlationDoesNotProveAestheticMechanism : Aesthetics.CorrelationProvesCausalAe
 correlationDoesNotProveAestheticMechanism = Aesthetics.correlationDoesNotProveMechanism
 
 ------------------------------------------------------------------------
--- 5. Magritte -> Foucault is an interpretation edge, not authorship transfer.
+-- 5. Empirical aesthetics adds an observer process without collapsing value.
+--
+-- Eye-tracking can establish relations between looking behaviour and later
+-- aesthetic evaluation in a particular experiment.  It does not collapse
+-- gaze, liking, expertise, institutional status, provenance and price.
+------------------------------------------------------------------------
+
+gazeDoesNotDetermineObjectiveBeauty :
+  Aesthetics.GazePatternDeterminesObjectiveBeauty → ⊥
+gazeDoesNotDetermineObjectiveBeauty = Aesthetics.gazeDoesNotDetermineObjectiveBeauty
+
+likingDoesNotEqualMarketValue : Aesthetics.SubjectiveLikingEqualsMarketValue → ⊥
+likingDoesNotEqualMarketValue = Aesthetics.likingDoesNotEqualMarketValue
+
+correlationDoesNotProveAestheticMechanism :
+  Aesthetics.CorrelationProvesCausalAestheticMechanism → ⊥
+correlationDoesNotProveAestheticMechanism = Aesthetics.correlationDoesNotProveMechanism
+
+------------------------------------------------------------------------
+-- 6. Magritte -> Foucault is an interpretation edge, not authorship transfer.
 ------------------------------------------------------------------------
 
 data InterpretationEdge : Set where artistWorkToLaterPhilosophicalReading sourceTheoryToDASHIFormalPattern : InterpretationEdge
@@ -166,7 +185,7 @@ indigenousPluralAuthorityDoesNotBecomeConceptualArt : IndigenousPluralAuthorityM
 indigenousPluralAuthorityDoesNotBecomeConceptualArt ()
 
 ------------------------------------------------------------------------
--- 7. Common reusable structure: relation-sensitive non-collapse.
+-- 8. Common reusable structure: relation-sensitive non-collapse.
 ------------------------------------------------------------------------
 
 data NoncollapseCoordinate : Set where
