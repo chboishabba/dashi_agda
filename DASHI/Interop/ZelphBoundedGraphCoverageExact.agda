@@ -3,17 +3,9 @@ module DASHI.Interop.ZelphBoundedGraphCoverageExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 import DASHI.Interop.ExternalContextSafetyBoundary as Safety
-
-------------------------------------------------------------------------
--- Zelph/Hugging Face bounded graph transport and query coverage.
---
--- Runtime parity: SensibLaw coverage states are observed, incomplete,
--- uninspected, invalid.  A successful manifest/shard fetch proves only that
--- requested transport objects were obtained; query completeness is always
--- relative to a declared policy and revision.
-------------------------------------------------------------------------
 
 data TransportStatus : Set where
   transportComplete transportPartial transportFailed : TransportStatus
@@ -85,10 +77,6 @@ invalidQueryCoverageAbstains :
   Safety.dispositionForCoverage (safetyCoverage queryCoverageInvalid)
   ≡ Safety.abstainForInvalidObservation
 invalidQueryCoverageAbstains = refl
-
-------------------------------------------------------------------------
--- Firewalls.
-------------------------------------------------------------------------
 
 data ShardFetchImpliesQueryCoverageComplete : Set where
 data PartialNonObservationImpliesGlobalAbsence : Set where
