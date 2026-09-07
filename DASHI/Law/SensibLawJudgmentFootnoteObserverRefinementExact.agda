@@ -27,7 +27,7 @@ rustBranch : String
 rustBranch = "agent/governed-online-r6-v2"
 
 rustRefinementSourceHead : String
-rustRefinementSourceHead = "f57934efe7ea636cebc943b1dc6770a1cb171c85"
+rustRefinementSourceHead = "23e34f4f92e06e147369a6daddd15c658eb317d6"
 
 oldQueueSchema : String
 oldQueueSchema = "sl.judgment_citation_review_queue.v0_1"
