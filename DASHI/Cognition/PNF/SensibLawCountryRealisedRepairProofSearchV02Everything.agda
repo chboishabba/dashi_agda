@@ -56,12 +56,6 @@ admittedCommunityOutcomeAdvancesToAuthority = refl
 
 ------------------------------------------------------------------------
 -- First genuine consumer-specific outcome payment.
---
--- Griffiths accepted evidence supports the narrowly declared Timber Creek
--- custodial-relation consumer: responsibility/concern to look after Country and
--- experienced failure of that responsibility when Country is harmed.  This is
--- not generalized to every Country consumer and it selects no particular State
--- remedy.
 ------------------------------------------------------------------------
 
 griffithsNarrowCustodialOutcomePaid :
