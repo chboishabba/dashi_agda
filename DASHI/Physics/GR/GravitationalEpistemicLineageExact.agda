@@ -91,6 +91,24 @@ record InternalTheoremProofLineage : Set where
 open InternalTheoremProofLineage public
 
 ------------------------------------------------------------------------
+-- Attribution residuals.  Incomplete metadata becomes explicit proof/search
+-- work rather than an invented field value.
+------------------------------------------------------------------------
+
+data GravitationalAttributionResidual : Set where
+  missingAuthorOrResponsibleBody : GravitationalAttributionResidual
+  missingTitle : GravitationalAttributionResidual
+  missingStableIdentifier : GravitationalAttributionResidual
+  missingCarrierLocation : GravitationalAttributionResidual
+  missingInspectionDate : GravitationalAttributionResidual
+  missingExactClaimScope : GravitationalAttributionResidual
+  carrierNotInspectedForClaim : GravitationalAttributionResidual
+  missingInternalModulePath : GravitationalAttributionResidual
+  missingInternalTheoremName : GravitationalAttributionResidual
+  missingRepositoryRevision : GravitationalAttributionResidual
+  missingProofStatementScope : GravitationalAttributionResidual
+
+------------------------------------------------------------------------
 -- Canonical firewalls.
 ------------------------------------------------------------------------
 
@@ -98,6 +116,7 @@ record GravitationalEpistemicLineageBoundary : Set where
   constructor gravitational-epistemic-lineage-boundary
   field
     externalScientificClaimRequiresAuthorTitleStableIdentifier : Bool
+    missingMetadataBecomesTypedResidual : Bool
     missingMetadataMayBeInvented : Bool
     sourceEntitledClaimEqualsDASHIReconstruction : Bool
     dashiReconstructionEqualsDerivedComparison : Bool
@@ -109,7 +128,7 @@ record GravitationalEpistemicLineageBoundary : Set where
 canonicalGravitationalEpistemicLineageBoundary : GravitationalEpistemicLineageBoundary
 canonicalGravitationalEpistemicLineageBoundary =
   gravitational-epistemic-lineage-boundary
-    true false false false false false false true
+    true true false false false false false false true
 
 ------------------------------------------------------------------------
 -- A local theorem carrier uses proof lineage rather than fake publication
