@@ -103,7 +103,8 @@ open ClosureProfile public
 
 record PromotionWitness
     (role : StatementRole)
-    (profile : ClosureProfile) : Set where
+    (profile : ClosureProfile) : Set₁ where
+
   field
     requiredAxes : List ClosureAxis
     requiredAxesAreClosed : Set

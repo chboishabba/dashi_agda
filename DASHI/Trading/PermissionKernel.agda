@@ -154,14 +154,14 @@ marketEquivalence = record
   }
 
 permissionKernel-respects-quotient :
-  ∀ {x y} → x ≈market y → permissionKernel x ≈market permissionKernel y
+  ∀ {x y : MarketWindowState} → x ≈market y → permissionKernel x ≈market permissionKernel y
 permissionKernel-respects-quotient related = related
 
 tradingQuotientKernel : QuotientKernel tradingKernelSystem
 tradingQuotientKernel = record
   { _≈_ = _≈market_
   ; equivalence = marketEquivalence
-  ; respects-quotient = permissionKernel-respects-quotient
+  ; respects-quotient = λ {x} {y} related → permissionKernel-respects-quotient {x} {y} related
   }
 
 tradingQuotientReadout : QuotientReadout tradingKernelSystem
@@ -186,7 +186,7 @@ permissionKernel-quotient-stable s = record
 permissionKernel-orbit-collapse :
   ∀ s → OrbitClassCollapse quotient permissionKernel s
 permissionKernel-orbit-collapse s =
-  quotientStable-everywhere⇒orbitCollapse permissionKernel-quotient-stable
+  quotientStable-everywhere⇒orbitCollapse (λ x → stableClass (permissionKernel-quotient-stable x))
 
 tradingAction : MarketWindowState → Nat
 tradingAction s = modelCost s + residualCost s + riskPenalty s
