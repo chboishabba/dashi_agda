@@ -24,10 +24,6 @@ import DASHI.Biology.DrosophilaDiagnosisRepairSchedulerBidiExact
 
 -- Temporal provenance return: append-only diagnosis-event history is the
 -- authority; the current live diagnosis fibre is a rebuildable projection.
--- Events carry typed result/debug-move triggers.  A diagnosis may be eliminated
--- and later reactivated without deleting the prior elimination or activation;
--- salience is recomputed against the current projection and an old debugger may
--- therefore become eligible again.
 import DASHI.Core.TemporalDiagnosisProvenanceHistoryBidiExact
 import DASHI.Core.TemporalDiagnosisFibreProjectionBidiExact
 import DASHI.Core.TemporalDiagnosisHotColdProjectionBidiExact
@@ -39,18 +35,23 @@ import DASHI.Governance.GovernanceTemporalDiagnosisHistoryBidiExact
 import DASHI.Cognition.PNF.SensibLawTemporalDiagnosisHistoryBidiExact
 import DASHI.Biology.DrosophilaTemporalDiagnosisHistoryBidiExact
 
--- Dependency-directed truth maintenance: every temporal diagnosis event may
--- carry the exact upstream affected-closure path that made it relevant. A later
--- reactivation localizes recomputation to that subgraph without deleting prior
--- lineage, invalidating unrelated certificates, or transferring authority.
+-- Dependency-directed truth maintenance: exact upstream lineage localizes the
+-- recompute frontier; unrelated history/certificates remain retained.
 import DASHI.Core.TemporalDiagnosisDependencyLineageBidiExact
 import DASHI.Core.IncrementalDiagnosisTruthMaintenanceBidiExact
 
--- Brown-lane x-pollination: source-bound Alice Brown epistemic-agency/observer
--- distinctions and John Anthony Brown H1-H5/reception audit paths consume the
--- same diagnosis, temporal and dependency-lineage methodology without merging
--- their source fibres or authorship/authority boundaries.
+-- N-dimensional / recursive-Pareto compatibility surface.  Classification into
+-- must/may/unaffected/authority-blocked happens before Pareto ranking.  Only
+-- residual-relevant semantic axes are materialised; ambient self-indexed or
+-- tetrational capacity does not force full search/materialisation.  This bridge
+-- is intentionally path-distinct from open PR #770's canonical recursive owner
+-- until shared ancestry exists.
+import DASHI.Core.SelectiveInvalidationParetoFrontierBidiExact
+
+-- Brown-lane x-pollination.
 import DASHI.Biology.AliceBrownDiagnosisRepairSchedulerBidiExact
 import DASHI.Biology.AliceBrownTemporalDiagnosisDependencyLineageBidiExact
+import DASHI.Biology.AliceBrownSelectiveInvalidationParetoBidiExact
 import DASHI.Culture.JohnAnthonyBrownDiagnosisRepairSchedulerBidiExact
 import DASHI.Culture.JohnAnthonyBrownTemporalDiagnosisDependencyLineageBidiExact
+import DASHI.Culture.JohnAnthonyBrownSelectiveInvalidationParetoBidiExact
