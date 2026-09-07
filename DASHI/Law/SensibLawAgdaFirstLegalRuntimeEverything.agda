@@ -188,7 +188,7 @@ selectedElementBoundary = Frontier.canonicalRuntimeWrongTypeElementBoundary
 data RustRuntimeMayDefineUnownedLegalDoctrine : Set where
 data ReferenceImplementationMayOverrideAgdaContract : Set where
 data QueenslandSection11FactualPaymentEqualsScopePayment : Set where
-\data ConsumerSourceClosureEqualsFinalLiability : Set where
+data ConsumerSourceClosureEqualsFinalLiability : Set where
 
 rustRuntimeDoesNotDefineUnownedDoctrine :
   RustRuntimeMayDefineUnownedLegalDoctrine → ⊥
