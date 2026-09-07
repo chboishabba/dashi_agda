@@ -27,7 +27,7 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; Positive; NonNegative; nonNegative; _+_; _*_; _-_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -233,7 +233,7 @@ module GlobalTerminalEndpoint
         0ℚ - R385.sumWeightedFlux (headPairs ++ tailPairs)
         ≡ (0ℚ - headFlux) + (0ℚ - tailFlux)
       lhsMeaning = trans
-        (congLocal (0ℚ -_) fluxAppend)
+        (cong (0ℚ -_) fluxAppend)
         (solve (headFlux ∷ tailFlux ∷ []))
 
       rhsMeaning :
@@ -246,9 +246,6 @@ module GlobalTerminalEndpoint
       (subst
         ((0ℚ - headFlux) + (0ℚ - tailFlux) ≤_)
         rhsMeaning added)
-    where
-    congLocal : ∀ {A B : Set} {x y : A} → (f : A → B) → x ≡ y → f x ≡ y |> f
-    congLocal f refl = refl
 
   globalNegativeFluxBelowSelectedMass :
     0ℚ - globalFlux ≤ W * Mass.selectedMass
