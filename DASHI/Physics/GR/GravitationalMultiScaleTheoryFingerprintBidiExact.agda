@@ -11,8 +11,9 @@ import DASHI.Physics.GR.GravitationalPredictionObservationBidiExact as Pred
 -- MULTI-SCALE GRAVITY THEORY FINGERPRINT
 --
 -- A candidate gravity theory is not characterized by one successful channel.
--- It exposes predictions across independent observational scales.  Every scale
--- prediction must belong to the same exact theory carrier and family.
+-- It exposes predictions across independent observational scales.  Every named
+-- slot must carry the exact scale it claims to represent and every prediction
+-- must belong to the same exact theory carrier and family.
 ------------------------------------------------------------------------
 
 data GravityScale : Set where
@@ -68,6 +69,19 @@ record MultiScaleTheoryFingerprint : Set where
     nanohertzTimingPrediction : ScalePrediction
     cosmologicalPropagationPrediction : ScalePrediction
 
+    freeFallScaleMatches :
+      scale laboratoryFreeFallPrediction ≡ laboratoryFreeFallScale
+    clockScaleMatches :
+      scale laboratoryClockPrediction ≡ laboratoryClockScale
+    orbitalScaleMatches :
+      scale orbitalTimingPrediction ≡ orbitalTimingScale
+    compactBinaryScaleMatches :
+      scale compactBinaryPrediction ≡ compactBinaryScale
+    nanohertzScaleMatches :
+      scale nanohertzTimingPrediction ≡ nanohertzTimingScale
+    cosmologicalScaleMatches :
+      scale cosmologicalPropagationPrediction ≡ cosmologicalPropagationScale
+
     freeFallTheoryIdentityMatches :
       Pred.theoryCarrier (prediction laboratoryFreeFallPrediction) ≡ theoryIdentity
     clockTheoryIdentityMatches :
@@ -101,6 +115,7 @@ open MultiScaleTheoryFingerprint public
 ------------------------------------------------------------------------
 
 data MultiScaleResidual : Set where
+  missingExactScaleSlotReceipt : MultiScaleResidual
   missingSameTheoryIdentityReceipt : MultiScaleResidual
   missingSameTheoryFamilyReceipt : MultiScaleResidual
   missingLaboratoryFreeFallComparison : MultiScaleResidual
@@ -115,6 +130,8 @@ data MultiScaleResidual : Set where
 record MultiScaleTheoryBoundary : Set where
   constructor multi-scale-theory-boundary
   field
+    namedSlotAutomaticallyFixesScale : Bool
+    exactScaleIdentityRequiredForEverySlot : Bool
     oneScaleAgreementEstablishesAllScaleAgreement : Bool
     laboratoryAnomalyAutomaticallyInvalidatesGWAgreement : Bool
     gwAgreementAutomaticallyClosesLaboratoryResidual : Bool
@@ -126,7 +143,8 @@ record MultiScaleTheoryBoundary : Set where
 
 canonicalMultiScaleTheoryBoundary : MultiScaleTheoryBoundary
 canonicalMultiScaleTheoryBoundary =
-  multi-scale-theory-boundary false false false true true false true false
+  multi-scale-theory-boundary
+    false true false false false true true false true false
 
 ------------------------------------------------------------------------
 -- Exact scale non-collapse witnesses.
