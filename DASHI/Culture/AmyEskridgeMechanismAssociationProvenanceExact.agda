@@ -21,13 +21,17 @@ data MechanismAssociationStatus : Set where
   dashiContextualReconstruction : MechanismAssociationStatus
   associationUnresolved : MechanismAssociationStatus
 
+data AmySourceLocatorStatus : Set where
+  exactAmySourceLocator : String → AmySourceLocatorStatus
+  amySourceLocatorUnresolved : AmySourceLocatorStatus
+
 record MechanismAssociationReceipt : Set where
   constructor mechanism-association-receipt
   field
     mechanism : Gravity.MechanismFamily
     status : MechanismAssociationStatus
     provenanceNote : String
-    exactAmySourceLocator : String
+    sourceLocatorStatus : AmySourceLocatorStatus
 
 open MechanismAssociationReceipt public
 
@@ -37,7 +41,7 @@ contextualAssociation mechanism note =
     mechanism
     dashiContextualReconstruction
     note
-    ""
+    amySourceLocatorUnresolved
 
 liTorrAssociation : MechanismAssociationReceipt
 liTorrAssociation = contextualAssociation
@@ -90,10 +94,11 @@ record AmyMechanismAssociationBoundary : Set where
   field
     chartMembershipEqualsAmySourceEntitlement : Bool
     physicsPaperAttributionRetroactivelyCreatesAmyStatement : Bool
+    emptyStringMayEncodeUnknownSourceLocator : Bool
     contextualMechanismMayGuideReverseSearch : Bool
     exactAmySourceRequiredForAmyEntitledMechanismClaim : Bool
     unresolvedAssociationMayBeGuessed : Bool
 
 canonicalAmyMechanismAssociationBoundary : AmyMechanismAssociationBoundary
 canonicalAmyMechanismAssociationBoundary =
-  amy-mechanism-association-boundary false false true true false
+  amy-mechanism-association-boundary false false false true true false
