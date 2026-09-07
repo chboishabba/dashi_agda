@@ -10,6 +10,7 @@ import DASHI.Law.SensibLawProductionLegalRuntimeABIExact as Runtime
 import DASHI.Law.SensibLawLegalResidualProducerSchedulerExact as Scheduler
 import DASHI.Law.SensibLawRuntimeWrongTypeElementFrontierExact as Frontier
 import DASHI.Law.SensibLawWrongTypeCausationElementExact as Element
+import DASHI.Law.SensibLawTemporalHealthEvidenceWrongTypeExact as TemporalHealth
 import DASHI.Law.QueenslandWrongTypeCausationDeclarationExact as Queensland
 
 ------------------------------------------------------------------------
@@ -180,6 +181,11 @@ selectedResidualSchedulerBoundary =
 
 selectedElementBoundary : Frontier.RuntimeWrongTypeElementBoundary
 selectedElementBoundary = Frontier.canonicalRuntimeWrongTypeElementBoundary
+
+selectedTemporalHealthEvidenceBoundary :
+  TemporalHealth.TemporalHealthEvidenceBoundary
+selectedTemporalHealthEvidenceBoundary =
+  TemporalHealth.canonicalTemporalHealthEvidenceBoundary
 
 ------------------------------------------------------------------------
 -- Firewalls.
