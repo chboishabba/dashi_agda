@@ -30,4 +30,7 @@ import DASHI.Core.PromotionResidualSelectiveReopeningBidiExact
 import DASHI.Core.TemporalStrandProvenanceBidiExact
 import DASHI.Core.FibreRefinementExperimentSelectionBidiExact
 
+-- Far-and-wide plural epistemic-progress methodology.
+import DASHI.Core.PluralEpistemicProgressCrossDomainEverything
+
 import DASHI.Core.CrossDomainBidiReciprocal2026Validation
