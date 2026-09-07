@@ -11,8 +11,10 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 -- consumer instead. R504 exposes the two independent Clay-facing analytic
 -- leaves. R506 records the web-audited low-drift-band/variation firewall.
 -- R507 reuses Round104 critical slices on the literal R406 carrier with exactly
--- one remainder same-object receipt, and R508 sharpens proof search for that
--- second critical-production leaf.
+-- one remainder same-object receipt, R508 sharpens proof search for that second
+-- critical-production leaf, and R509 binds the introspective method to the
+-- exact live residuals without treating visualization or candidate producers as
+-- mathematical payment.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.Closure.NSTriadKNR299NormalizedCompanionSameObjectRound494Exact
@@ -29,3 +31,4 @@ import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact
 import DASHI.Physics.Closure.NSTriadKNResidenceBandVariationNoGoRound506Exact
 import DASHI.Physics.Closure.NSTriadKNRound104ToLiteralR406CriticalSliceRound507Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralR406CriticalProductionProofSearchRound508Exact
+import DASHI.Physics.Closure.NSTriadKNClayResidualIntrospectionRound509Exact
