@@ -19,10 +19,10 @@ import DASHI.Wikimedia.WikidataPNFPredicateBridgeExact as WPNF
 -- Public source calibration inspected 7 Sep 2026:
 --   Wikipedia: Eddie Mabo, page id 439686; bounded permanent revision
 --              oldid=1373107539 (4 Sep 2026).
---   Wikidata: Q975866 Eddie Mabo.
---   Wikidata: Q1501525 Mabo v Queensland (No 2).
+--   Wikidata: Q975866 Eddie Mabo, oldid=2524901559.
+--   Wikidata: Q1501525 Mabo v Queensland (No 2), oldid=2333409615.
 --
--- Current observed Wikidata relations used below:
+-- Observed Wikidata relations used below:
 --   Q975866 P31 Q5                     (Eddie Mabo instance of human)
 --   Q1501525 P31 Q2334719              (Mabo No 2 instance of legal case)
 --   Q1501525 P710 Q975866              (case participant Eddie Mabo)
@@ -64,21 +64,21 @@ wikidataEddieReceipt : Source.SourceReceipt
 wikidataEddieReceipt =
   Source.sourceReceipt
     Source.wikidataStatementLayer
-    "https://www.wikidata.org/wiki/Q975866"
+    "https://www.wikidata.org/w/index.php?title=Q975866&oldid=2524901559"
     "Q975866"
-    "retrieved-2026-09-07"
+    "wikidata-oldid:2524901559"
     "not-pinned-in-first-native-fixture"
-    "bounded current Wikidata entity/statement observation; not DASHI theorem authority"
+    "bounded Wikidata entity/statement observation; not DASHI theorem authority"
 
 wikidataCaseReceipt : Source.SourceReceipt
 wikidataCaseReceipt =
   Source.sourceReceipt
     Source.wikidataStatementLayer
-    "https://www.wikidata.org/wiki/Q1501525"
+    "https://www.wikidata.org/w/index.php?title=Q1501525&oldid=2333409615"
     "Q1501525"
-    "retrieved-2026-09-07"
+    "wikidata-oldid:2333409615"
     "not-pinned-in-first-native-fixture"
-    "bounded current Wikidata case metadata observation; not the primary legal judgment"
+    "bounded Wikidata case metadata observation; not the primary legal judgment"
 
 wikipediaReceipt : Source.SourceReceipt
 wikipediaReceipt =
