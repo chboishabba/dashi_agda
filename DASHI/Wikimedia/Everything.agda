@@ -13,6 +13,7 @@ import DASHI.Wikimedia.NativeStatementExact
 import DASHI.Wikimedia.SourceProvenanceExact
 import DASHI.Wikimedia.NativeReferenceSemanticsExact
 import DASHI.Wikimedia.NativeReferenceAttributedSourceBridgeExact
+import DASHI.Wikimedia.SLRP854ExternalReferenceInspectionABIExact
 import DASHI.Wikimedia.ConceptEntityAlignmentExact
 import DASHI.Wikimedia.NativeSnakPNFLogicalForceExact
 import DASHI.Wikimedia.NativeEpistemicProjectionExact
