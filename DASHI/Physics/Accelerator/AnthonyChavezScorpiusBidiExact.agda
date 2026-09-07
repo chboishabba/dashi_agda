@@ -4,9 +4,14 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 import DASHI.Core.FiniteObservationClosureBidiExact as Closure
 
--- LANL National Security Science 2025 attributes Scorpius accelerator design
--- work to Anthony Chavez. Programme-level machine physics comes from LANL/LLNL
--- public Scorpius descriptions; no sole-inventor claim is made.
+-- LEGACY FILENAME / ATTRIBUTION CORRECTION.
+--
+-- The relevant LANL technical publications and Scorpius/DARHT engineering
+-- record identify MARK ANTHONY CHAVEZ. This module name predates the identity
+-- audit and MUST NOT be used to attribute this technical work to the separate
+-- missing 78-year-old Anthony Chavez without an independent same-person receipt.
+-- Programme-level machine physics comes from LANL/LLNL public Scorpius
+-- descriptions; no sole-inventor claim is made.
 
 data ScorpiusStage : Set where pulsedPower electronBeam xRayProduction radiographicFrame materialStateInference : ScorpiusStage
 
