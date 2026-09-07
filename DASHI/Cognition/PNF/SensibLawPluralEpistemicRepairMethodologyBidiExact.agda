@@ -3,29 +3,45 @@ module DASHI.Cognition.PNF.SensibLawPluralEpistemicRepairMethodologyBidiExact wh
 open import DASHI.Core.Prelude
 
 import DASHI.Cognition.PNF.SensibLawMaboLandBackEpistemicCompressionEverything as Law
+import DASHI.Cognition.PNF.SensibLawMaboCrownRecognitionProjectionNonFactorabilityExact as Crown
+import DASHI.Cognition.PNF.SensibLawLandBackIncomeProjectionNonFactorabilityExact as Income
+import DASHI.Cognition.PNF.SensibLawIndigenousCarbonValueProjectionNonFactorabilityExact as Carbon
+import DASHI.Cognition.PNF.SensibLawBillyEffectiveRemedyTwoEyedSeeingExact as Billy
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.PluralEpistemicProgressMethodologyBidiExact as Method
-import DASHI.Core.PairIndexedInformationLossLocusBidiExact as Loss
 import DASHI.Core.ReformulationClosureWithoutFibreRefinementBidiExact as Reform
 
 ------------------------------------------------------------------------
 -- SENSIBLAW EPISTEMIC COMPRESSION / REMEDY <-> PLURAL EPISTEMIC REPAIR
---
--- The existing SensibLaw capstone already asks which distinctions an observer
--- makes impossible to see, and already proves that post-hoc relabelling cannot
--- recover several erased Country/authority relations.  The plural methodology
--- identifies this as one route among several: new information may be required,
--- while reformulation may close a narrower question without pretending to
--- reconstruct the hidden relation.
 ------------------------------------------------------------------------
 
+compressionAuditQuestion : Law.EpistemicCompressionQuestion
 compressionAuditQuestion = Law.canonicalEpistemicCompressionQuestion
 
+crownRewordingStillCannotRecoverAuthority :
+  ∀ {Recharted : Set} →
+  (rechart : Crown.CrownRecognitionObservation → Recharted) →
+  INF.FactorsThrough
+    (λ state → rechart (Crown.crownRecognitionObserver state))
+    Crown.indigenousAuthorityOutcome → ⊥
 crownRewordingStillCannotRecoverAuthority =
   Law.posthocRewordingCannotRepairCrownProjection
 
+incomeReweightingStillCannotRecoverLandRelation :
+  ∀ {Recharted : Set} →
+  (rechart : Income.CashIncomeObservation → Recharted) →
+  INF.FactorsThrough
+    (λ state → rechart (Income.cashIncomeObserver state))
+    Income.landAuthorityOutcome → ⊥
 incomeReweightingStillCannotRecoverLandRelation =
   Law.posthocReweightingCannotRepairIncomeProjection
 
+biaRelabellingStillCannotRecoverStewardship :
+  ∀ {Recharted : Set} →
+  (rechart : Carbon.TrustAssetProjection → Recharted) →
+  INF.FactorsThrough
+    (λ state → rechart (Carbon.trustAssetObserver state))
+    Carbon.stewardshipValueOutcome → ⊥
 biaRelabellingStillCannotRecoverStewardship =
   Law.posthocBiaRelabellingCannotRepairStewardshipProjection
 
@@ -34,6 +50,8 @@ collisionRepairRequiresAddedInformation :
     Law.canonicalDeepEpistemicBoundary ≡ true
 collisionRepairRequiresAddedInformation = refl
 
+consultationStillDoesNotCloseFullReparation :
+  Billy.ConsultationEqualsFullReparation → ⊥
 consultationStillDoesNotCloseFullReparation =
   Law.billyConsultationDoesNotCloseFullReparation
 
