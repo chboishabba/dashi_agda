@@ -5,20 +5,23 @@ module DASHI.Physics.YangMills.BalabanClayT5CoerciveMomentMarkovContainmentExact
 -- COERCIVE MOMENT + MARKOV AUTHORITY -> COMPACT CONTAINMENT
 --
 -- The selected diagonal expectation producer already owns a literal cutoff-
--- indexed moment inequality.  The historical compactness ledgers did not type
--- the remaining geometric step.  This module isolates that step into the exact
--- same-object/coercivity and compact-sublevel hypotheses consumed by Markov.
+-- indexed moment inequality. Historical T5 compactness ledgers then jump to
+-- tightness through Set-valued receipts. This module isolates the exact typed
+-- physical geometry needed by the generic Markov/sublevel argument.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as Limit
 import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact as T5
 import DASHI.Physics.YangMills.BalabanClayT5MomentCompactContainmentExact as Moment
 
 ------------------------------------------------------------------------
--- Standard Markov/sublevel authority.  This is generic probability theory,
--- not Yang--Mills-specific analysis.
+-- Generic probability-theory authority.
+--
+-- It does not certify Yang--Mills coercivity or compactness. Those arrive as
+-- explicit premises on the exact selected physical observable/topology.
 ------------------------------------------------------------------------
 
 record MarkovCompactContainmentAuthority
@@ -27,14 +30,9 @@ record MarkovCompactContainmentAuthority
     Admissible : Epsilon → Witness → Set
     Controls : Epsilon → Witness → Measure → Set
 
-    -- A nonnegative/coercive observable and a compact sublevel witness are
-    -- enough to turn a moment upper bound into tail control.
     NonnegativeObservable : Observable → Set
-    CompactSublevelWitness : Observable → Nat → Epsilon → Witness
-
-    compactSublevelAdmissible :
-      ∀ observable degree epsilon →
-      Admissible epsilon (CompactSublevelWitness observable degree epsilon)
+    CoerciveForSelectedTopology : Observable → Set
+    sublevelWitness : Observable → Nat → Epsilon → Witness
 
     markovMomentBoundControlsSublevelComplement :
       ∀ {operations measureSequence RenormalizedObservable}
@@ -43,19 +41,17 @@ record MarkovCompactContainmentAuthority
             RenormalizedObservable)
         observable degree epsilon cutoff →
       NonnegativeObservable observable →
+      CoerciveForSelectedTopology observable →
+      Admissible epsilon (sublevelWitness observable degree epsilon) →
       Moment.MomentBoundAt producer degree observable cutoff →
       Controls epsilon
-        (CompactSublevelWitness observable degree epsilon)
+        (sublevelWitness observable degree epsilon)
         (measureSequence cutoff)
 
 open MarkovCompactContainmentAuthority public
 
 ------------------------------------------------------------------------
--- Yang--Mills same-object bridge.
---
--- This is deliberately the only physical seam.  It says that an observable on
--- the exact expectation-producer carrier is the coercive gauge-field observable
--- whose sublevel sets are compact in the selected measure topology.
+-- Exact physical same-object/coercivity bridge.
 ------------------------------------------------------------------------
 
 record PhysicalCoerciveMomentObservableBridge
@@ -66,8 +62,7 @@ record PhysicalCoerciveMomentObservableBridge
       MarkovCompactContainmentAuthority
         Measure Observable Scalar Epsilon Witness) : Set₁ where
   field
-    measureLimit :
-      DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact.SequentialLimit Measure
+    measureLimit : Limit.SequentialLimit Measure
 
     coerciveObservable : Epsilon → Observable
     coerciveMomentOrder : Epsilon → Nat
@@ -80,14 +75,20 @@ record PhysicalCoerciveMomentObservableBridge
     coerciveObservableNonnegative : ∀ epsilon →
       NonnegativeObservable authority (coerciveObservable epsilon)
 
-    -- Same-object theorem: this is not merely a similarly named finite-carrier
-    -- energy.  It is the observable interpreted by the selected diagonal
-    -- physical measure producer.
-    gaugeFieldCoerciveObservableSameObject : ∀ epsilon → Set
+    -- This is the exact same-object theorem missing from the historical reuse
+    -- surface: the observable integrated against diagonalMeasure is the physical
+    -- gauge-field coercive observable, not merely a similarly named finite form.
+    gaugeFieldCoerciveObservableSameObject : ∀ epsilon →
+      CoerciveForSelectedTopology authority (coerciveObservable epsilon)
 
-    -- Physical geometry/topology theorem: the authority's chosen sublevel
-    -- witness really is compact/admissible in the selected gauge-field topology.
-    coerciveSublevelCompactInSelectedTopology : ∀ epsilon → Set
+    -- The chosen sublevel witness is compact/admissible in the selected measure
+    -- topology. This is the physical topology half of compact containment.
+    coerciveSublevelCompactInSelectedTopology : ∀ epsilon →
+      Admissible authority epsilon
+        (sublevelWitness authority
+          (coerciveObservable epsilon)
+          (coerciveMomentOrder epsilon)
+          epsilon)
 
 open PhysicalCoerciveMomentObservableBridge public
 
@@ -102,30 +103,29 @@ compileMomentCompactContainmentInputs :
     Measure Observable Scalar Epsilon Witness expectationData authority →
   Moment.MomentCompactContainmentInputs
     Measure Observable Scalar Epsilon Witness expectationData
-compileMomentCompactContainmentInputs bridge = record
+compileMomentCompactContainmentInputs {authority = authority} bridge = record
   { measureLimit = measureLimit bridge
-  ; Admissible = Admissible _
-  ; Controls = Controls _
+  ; Admissible = Admissible authority
+  ; Controls = Controls authority
   ; tightnessObservable = coerciveObservable bridge
   ; momentOrder = coerciveMomentOrder bridge
   ; compactWitness = λ epsilon →
-      CompactSublevelWitness _
+      sublevelWitness authority
         (coerciveObservable bridge epsilon)
         (coerciveMomentOrder bridge epsilon)
         epsilon
   ; tightnessObservableRenormalized = coerciveObservableRenormalized bridge
-  ; compactWitnessAdmissible = λ epsilon →
-      compactSublevelAdmissible _
-        (coerciveObservable bridge epsilon)
-        (coerciveMomentOrder bridge epsilon)
-        epsilon
+  ; compactWitnessAdmissible =
+      coerciveSublevelCompactInSelectedTopology bridge
   ; momentBoundControlsCompactComplement = λ epsilon cutoff bound →
-      markovMomentBoundControlsSublevelComplement _
+      markovMomentBoundControlsSublevelComplement authority
         (T5.moments _)
         (coerciveObservable bridge epsilon)
         (coerciveMomentOrder bridge epsilon)
         epsilon cutoff
         (coerciveObservableNonnegative bridge epsilon)
+        (gaugeFieldCoerciveObservableSameObject bridge epsilon)
+        (coerciveSublevelCompactInSelectedTopology bridge epsilon)
         bound
   }
 
