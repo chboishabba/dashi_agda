@@ -4,7 +4,7 @@ module DASHI.Physics.Closure.NSTriadKNDirectSignedCompanionFrontierRound442Exact
 -- ROUND442 / AUTHORITATIVE DIRECT SIGNED-COMPANION FRONTIER AFTER R438--R441
 --
 -- The old post-R423 frontier still mixed finite same-object seams with the
--- genuinely analytic payment.  R436--R441 remove those finite seams in order:
+-- genuinely analytic payment. R436--R441 remove those finite seams in order:
 --
 --   R436 : projected NS forcing at output zero is exactly zero;
 --   R437 : every outer cell is R307 slot-kernel or exact zero;
@@ -26,22 +26,21 @@ module DASHI.Physics.Closure.NSTriadKNDirectSignedCompanionFrontierRound442Exact
 -- (1) RESOLVENT/HEAT REALIZATION.
 --     The literal R290 Cauchy resolvent weight must be represented by the
 --     one-cell heat factors used by R299/R440/R441 on an analytic carrier.
---     No within-repo theorem was found that installs this Laplace identity.
+--     The closed-world search found no existing theorem installing this exact
+--     Laplace identity; the Lean Schur sibling is a different producer route.
 --
 -- (2) SIGNED SPACETIME PAYMENT.
 --     The resulting explicit quadratic-companion common cross must satisfy a
 --     cutoff-uniform integrated upper bound of the exact R423 type.
 --
--- These may be supplied by one producer, but neither is manufactured by the
--- finite algebra.  The optional R301 Schur route remains a sufficient producer
+-- A single theorem may pay both coordinates. Neither is manufactured by the
+-- finite algebra. The optional R301 Schur route remains a sufficient producer
 -- strategy, not a mandatory intermediate theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-import DASHI.Physics.Closure.NSTriadKNQuadraticCompanionSignedHeatToBarrierRound423Exact as R423
-import DASHI.Physics.Closure.NSTriadKNHeatWeightedCommutatorSchurRound301Exact as R301
 import DASHI.Physics.Closure.NSTriadKNProjectedNonlinearityZeroOutputRound436Exact as R436
 import DASHI.Physics.Closure.NSTriadKNProjectedForcingOuterCellExhaustiveRound437Exact as R437
 import DASHI.Physics.Closure.NSTriadKNWeightedProjectedForcingOuterFoldRound438Exact as R438
