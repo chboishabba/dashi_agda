@@ -93,11 +93,10 @@ diversifiedStrategyRobust :
     diversifiedNitrogenStrategy
 diversifiedStrategyRobust =
   Robust.robust-across-hypotheses-and-horizon
-    λ hypothesis _ point _ →
-      case hypothesis , point of λ where
-        (optimisticPersistence , _) → tt
-        (stressSensitivePersistence , _) → tt
-        (recoveryLimitedPersistence , _) → tt
+    λ { optimisticPersistence _ _ _ → tt
+      ; stressSensitivePersistence _ _ _ → tt
+      ; recoveryLimitedPersistence _ _ _ → tt
+      }
 
 ------------------------------------------------------------------------
 -- No-collapse boundaries from the generic and BNF-specific owners.
