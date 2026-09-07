@@ -1,33 +1,38 @@
 module DASHI.Culture.DialecticLevelsAestheticConsumerFibreCrossPollinationExact where
 
 ------------------------------------------------------------------------
--- DIALECTIC / LEVELS / AESTHETIC CONSUMER-FIBRE CROSS-POLLINATION
+-- DIALECTIC / LEVELS / AESTHETIC x INTERSECTIONALITY APPLICATION
 --
--- This module adds no external historical or empirical proposition.  It reuses
--- already-source-bounded owners and the generic DASHI non-factorability theorem
--- to make three representation failures executable:
+-- CORRECTION / CANONICAL OWNER:
+-- The general theorem shape here is NOT new to this tranche.  The repository
+-- already owns it through:
 --
---   contradiction-present != full dialectic architecture
---   one level label != full developmental profile
---   gaze/liking surface != full aesthetic/value state
+--   DASHI.Core.IntersectionalNonFactorability
+--   DASHI.Core.IntersectionalConstraintGeometryExact
 --
--- The finite collision witnesses below are DASHI synthetic countermodels.  They
--- show insufficiency of a coarse observer for a declared consumer; they are not
--- population claims about people, artworks, Hegel, or hoe_math.
+-- Crenshaw's 1989/1991 work is the conceptual source for the intersectional
+-- warning that a situated joint relation need not be reconstructible from
+-- separately modelled/coarse single-axis surfaces.  The factorisation,
+-- recharting and finite interaction theorems are DASHI mathematical
+-- translations owned by those canonical Core modules, not by Hegel, hoe_math,
+-- aesthetic-psychology authors, or this application module.
+--
+-- This file therefore does ONLY application work: it instantiates those
+-- existing intersectionality owners on already-source-bounded dialectic,
+-- developmental-level and aesthetic coordinates.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
 import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Core.IntersectionalConstraintGeometryExact as ICG
 import DASHI.Culture.DASHIDialecticGenealogyAttributionCorrectionExact as Genealogy
 import DASHI.Culture.HegelDialecticPrimarySourceBoundaryExact as Hegel
 import DASHI.Culture.HoeMathLevelsSourceBoundaryExact as Levels
 import DASHI.Culture.AestheticPerceptionEyeTrackingSourceBoundaryExact as Aesthetics
 
 ------------------------------------------------------------------------
--- 1. Dialectic: the coarse fact "contradiction is present" cannot by itself
--- recover whether the downstream architecture is Hegel's selected self-movement
--- lane or DASHI's independently-developed residual/reopening lane.
+-- 1. Dialectic application.
 ------------------------------------------------------------------------
 
 data DialecticComparisonState : Set where
@@ -35,12 +40,10 @@ data DialecticComparisonState : Set where
   dashiContradictionResidualReopeningState
   : DialecticComparisonState
 
-data ContradictionSurface : Set where
-  contradictionPresent : ContradictionSurface
+data ContradictionSurface : Set where contradictionPresent : ContradictionSurface
 
 observeContradiction : DialecticComparisonState → ContradictionSurface
-observeContradiction hegelContradictionSelfMovementState = contradictionPresent
-observeContradiction dashiContradictionResidualReopeningState = contradictionPresent
+observeContradiction _ = contradictionPresent
 
 data ResidualReopeningOwnership : Set where
   notOwnedBySelectedHegelPassages
@@ -48,8 +51,10 @@ data ResidualReopeningOwnership : Set where
   : ResidualReopeningOwnership
 
 residualReopeningConsumer : DialecticComparisonState → ResidualReopeningOwnership
-residualReopeningConsumer hegelContradictionSelfMovementState = notOwnedBySelectedHegelPassages
-residualReopeningConsumer dashiContradictionResidualReopeningState = ownedByDASHIArchitecture
+residualReopeningConsumer hegelContradictionSelfMovementState =
+  notOwnedBySelectedHegelPassages
+residualReopeningConsumer dashiContradictionResidualReopeningState =
+  ownedByDASHIArchitecture
 
 residualOwnershipDiffers :
   residualReopeningConsumer hegelContradictionSelfMovementState ≡
@@ -62,8 +67,7 @@ contradictionSurfaceDoesNotFactorResidualArchitecture =
   NF.nonFactorabilityWitness
     hegelContradictionSelfMovementState
     dashiContradictionResidualReopeningState
-    refl
-    residualOwnershipDiffers
+    refl residualOwnershipDiffers
 
 contradictionAloneCannotRecoverResidualArchitecture :
   NF.FactorsThrough observeContradiction residualReopeningConsumer → ⊥
@@ -72,26 +76,23 @@ contradictionAloneCannotRecoverResidualArchitecture =
     contradictionSurfaceDoesNotFactorResidualArchitecture
 
 ------------------------------------------------------------------------
--- 2. Levels: one scalar/stage label can collide while a separately modelled
--- developmental line differs.  This is a structural countermodel matching the
--- source boundary's distinction between levels and independently developing
--- lines; it is not an empirical claim that any named person occupies a state.
+-- 2. Levels application.
+--
+-- This is exactly the intersectional warning in a different domain: a coarse
+-- single coordinate can remain fixed while a relevant joint/other coordinate
+-- changes.  It does NOT claim hoe_math's Levels model is intersectionality, nor
+-- that Crenshaw authored developmental-stage theory.
 ------------------------------------------------------------------------
 
 data DevelopmentProfileState : Set where
-  sameLevelLineLow
-  sameLevelLineHigh
-  : DevelopmentProfileState
+  sameLevelLineLow sameLevelLineHigh : DevelopmentProfileState
 
-data SimplifiedLevelLabel : Set where
-  sameSimplifiedLevel : SimplifiedLevelLabel
+data SimplifiedLevelLabel : Set where sameSimplifiedLevel : SimplifiedLevelLabel
 
 observeSimplifiedLevel : DevelopmentProfileState → SimplifiedLevelLabel
-observeSimplifiedLevel sameLevelLineLow = sameSimplifiedLevel
-observeSimplifiedLevel sameLevelLineHigh = sameSimplifiedLevel
+observeSimplifiedLevel _ = sameSimplifiedLevel
 
-data DevelopmentalLineState : Set where
-  lineLower lineHigher : DevelopmentalLineState
+data DevelopmentalLineState : Set where lineLower lineHigher : DevelopmentalLineState
 
 developmentalLineConsumer : DevelopmentProfileState → DevelopmentalLineState
 developmentalLineConsumer sameLevelLineLow = lineLower
@@ -112,23 +113,18 @@ singleLevelCannotRecoverFullLineState :
 singleLevelCannotRecoverFullLineState =
   NF.witnessRulesOutEveryFlatFactorisation singleLevelDoesNotFactorDevelopmentalLine
 
--- Any relabelling, score transform, or reweighting of the already-coarse level
--- observer remains insufficient for the line consumer.
 singleLevelRechartCannotRecoverLine :
   ∀ {Recharted : Set} →
   (rechart : SimplifiedLevelLabel → Recharted) →
   NF.FactorsThrough
     (λ state → rechart (observeSimplifiedLevel state))
-    developmentalLineConsumer →
-  ⊥
+    developmentalLineConsumer → ⊥
 singleLevelRechartCannotRecoverLine rechart =
   NF.rechartingCannotRecoverErasedPhenomenon
     rechart singleLevelDoesNotFactorDevelopmentalLine
 
 ------------------------------------------------------------------------
--- 3. Aesthetics: gaze is a measured behavioural surface, not a sufficient
--- carrier for subjective evaluation; and even gaze + personal liking is not a
--- sufficient carrier for institutional status or market value.
+-- 3. Aesthetic application.
 ------------------------------------------------------------------------
 
 data AestheticWorld : Set where
@@ -140,52 +136,34 @@ data AestheticWorld : Set where
   sameGazeLikingHighPrice
   : AestheticWorld
 
-data GazeCode : Set where
-  sameGaze : GazeCode
-
+data GazeCode : Set where sameGaze : GazeCode
 observeGaze : AestheticWorld → GazeCode
 observeGaze _ = sameGaze
 
-data LikingCode : Set where
-  lowLiking highLiking : LikingCode
+data LikingCode : Set where lowLiking highLiking : LikingCode
 
 likingConsumer : AestheticWorld → LikingCode
 likingConsumer sameGazeLowLiking = lowLiking
-likingConsumer sameGazeHighLiking = highLiking
-likingConsumer sameGazeLikingOutsideInstitution = highLiking
-likingConsumer sameGazeLikingInsideInstitution = highLiking
-likingConsumer sameGazeLikingLowPrice = highLiking
-likingConsumer sameGazeLikingHighPrice = highLiking
+likingConsumer _ = highLiking
 
 likingDiffersAtSameGaze :
   likingConsumer sameGazeLowLiking ≡ likingConsumer sameGazeHighLiking → ⊥
 likingDiffersAtSameGaze ()
 
-gazeDoesNotFactorLiking :
-  NF.NonFactorabilityWitness observeGaze likingConsumer
+gazeDoesNotFactorLiking : NF.NonFactorabilityWitness observeGaze likingConsumer
 gazeDoesNotFactorLiking =
   NF.nonFactorabilityWitness
-    sameGazeLowLiking
-    sameGazeHighLiking
-    refl
-    likingDiffersAtSameGaze
+    sameGazeLowLiking sameGazeHighLiking refl likingDiffersAtSameGaze
 
-data GazeLikingSurface : Set where
-  sameGazeAndHighLiking : GazeLikingSurface
-
+data GazeLikingSurface : Set where sameGazeAndHighLiking : GazeLikingSurface
 observeGazeAndLiking : AestheticWorld → GazeLikingSurface
 observeGazeAndLiking _ = sameGazeAndHighLiking
 
-data InstitutionalStatus : Set where
-  outsideInstitution insideInstitution : InstitutionalStatus
+data InstitutionalStatus : Set where outsideInstitution insideInstitution : InstitutionalStatus
 
 institutionalStatusConsumer : AestheticWorld → InstitutionalStatus
-institutionalStatusConsumer sameGazeLowLiking = outsideInstitution
-institutionalStatusConsumer sameGazeHighLiking = outsideInstitution
-institutionalStatusConsumer sameGazeLikingOutsideInstitution = outsideInstitution
 institutionalStatusConsumer sameGazeLikingInsideInstitution = insideInstitution
-institutionalStatusConsumer sameGazeLikingLowPrice = outsideInstitution
-institutionalStatusConsumer sameGazeLikingHighPrice = outsideInstitution
+institutionalStatusConsumer _ = outsideInstitution
 
 institutionalStatusDiffers :
   institutionalStatusConsumer sameGazeLikingOutsideInstitution ≡
@@ -198,19 +176,13 @@ gazeLikingDoesNotFactorInstitutionalStatus =
   NF.nonFactorabilityWitness
     sameGazeLikingOutsideInstitution
     sameGazeLikingInsideInstitution
-    refl
-    institutionalStatusDiffers
+    refl institutionalStatusDiffers
 
-data MarketValueBand : Set where
-  lowMarketValue highMarketValue : MarketValueBand
+data MarketValueBand : Set where lowMarketValue highMarketValue : MarketValueBand
 
 marketValueConsumer : AestheticWorld → MarketValueBand
-marketValueConsumer sameGazeLowLiking = lowMarketValue
-marketValueConsumer sameGazeHighLiking = lowMarketValue
-marketValueConsumer sameGazeLikingOutsideInstitution = lowMarketValue
-marketValueConsumer sameGazeLikingInsideInstitution = lowMarketValue
-marketValueConsumer sameGazeLikingLowPrice = lowMarketValue
 marketValueConsumer sameGazeLikingHighPrice = highMarketValue
+marketValueConsumer _ = lowMarketValue
 
 marketValueDiffers :
   marketValueConsumer sameGazeLikingLowPrice ≡
@@ -221,58 +193,75 @@ gazeLikingDoesNotFactorMarketValue :
   NF.NonFactorabilityWitness observeGazeAndLiking marketValueConsumer
 gazeLikingDoesNotFactorMarketValue =
   NF.nonFactorabilityWitness
-    sameGazeLikingLowPrice
-    sameGazeLikingHighPrice
-    refl
-    marketValueDiffers
+    sameGazeLikingLowPrice sameGazeLikingHighPrice refl marketValueDiffers
 
 ------------------------------------------------------------------------
--- 4. Shared theorem shape.
---
--- A coarse observation may be perfectly real and useful while remaining
--- insufficient for a different consumer.  The missing coordinate must be added
--- upstream; post-hoc reweighting of the coarse quotient cannot recreate it.
+-- 4. Canonical intersectionality pins.
 ------------------------------------------------------------------------
 
-data CoarseObservationIsFalseBecauseInsufficient : Set where
-data ConsumerMismatchMeansRelativism : Set where
-data MultiCoordinateStateMeansNoComparisonPossible : Set where
+intersectionalityAlreadyOwnsSingleAxisNonFactorability :
+  NF.FactorsThrough ICG.sexualityAxis ICG.jointConstraint → ⊥
+intersectionalityAlreadyOwnsSingleAxisNonFactorability =
+  ICG.sexualityAxisCannotRecoverJointConstraint
 
-coarseObservationNeedNotBeFalse : CoarseObservationIsFalseBecauseInsufficient → ⊥
-coarseObservationNeedNotBeFalse ()
+intersectionalityAlreadyOwnsRechartingNoRepair :
+  ∀ {Chart : Set} →
+  (rechart : ICG.SexualityAxisObservation → Chart) →
+  NF.FactorsThrough
+    (λ state → rechart (ICG.sexualityAxis state))
+    ICG.jointConstraint → ⊥
+intersectionalityAlreadyOwnsRechartingNoRepair =
+  ICG.rechartedSexualityAxisCannotRecoverJointConstraint
 
-consumerMismatchDoesNotMeanRelativism : ConsumerMismatchMeansRelativism → ⊥
-consumerMismatchDoesNotMeanRelativism ()
-
-multiCoordinateDoesNotMeanNoComparison : MultiCoordinateStateMeansNoComparisonPossible → ⊥
-multiCoordinateDoesNotMeanNoComparison ()
+intersectionalityAlreadyOwnsNonlinearInteraction :
+  ICG.marginalPublicRecognition ICG.jointAxes ≡
+  ICG.interactionPublicRecognition ICG.jointAxes → ⊥
+intersectionalityAlreadyOwnsNonlinearInteraction =
+  ICG.jointInteractionIsNotRecoveredByMarginalConjunction
 
 ------------------------------------------------------------------------
--- 5. Provenance / source-boundary weld.
+-- 5. Attribution / non-collapse.
 ------------------------------------------------------------------------
+
+data ApplicationMakesCrenshawAuthorOfHegel : Set where
+data ApplicationMakesCrenshawAuthorOfLevels : Set where
+data ApplicationMakesCrenshawAuthorOfAesthetics : Set where
+data ApplicationMakesHegelAuthorOfIntersectionality : Set where
+data SharedFormalShapeMeansSharedDoctrine : Set where
+
+crenshawNotMadeAuthorOfHegel : ApplicationMakesCrenshawAuthorOfHegel → ⊥
+crenshawNotMadeAuthorOfHegel ()
+crenshawNotMadeAuthorOfLevels : ApplicationMakesCrenshawAuthorOfLevels → ⊥
+crenshawNotMadeAuthorOfLevels ()
+crenshawNotMadeAuthorOfAesthetics : ApplicationMakesCrenshawAuthorOfAesthetics → ⊥
+crenshawNotMadeAuthorOfAesthetics ()
+hegelNotMadeAuthorOfIntersectionality : ApplicationMakesHegelAuthorOfIntersectionality → ⊥
+hegelNotMadeAuthorOfIntersectionality ()
+sharedFormalShapeDoesNotMeanSharedDoctrine : SharedFormalShapeMeansSharedDoctrine → ⊥
+sharedFormalShapeDoesNotMeanSharedDoctrine ()
 
 record DialecticLevelsAestheticConsumerFibreBoundary : Set where
   constructor dialectic-levels-aesthetic-consumer-fibre-boundary
   field
+    canonicalIntersectionalGeometry : ICG.IntersectionalConstraintGeometryBoundary
     genealogyBoundary : Genealogy.DASHIDialecticGenealogyCorrection
     hegelBoundary : Hegel.HegelDialecticPrimarySourceBoundary
     levelsBoundary : Levels.HoeMathLevelsSourceBoundary
     aestheticBoundary : Aesthetics.AestheticPerceptionEyeTrackingBoundary
-    contradictionCollisionOwned : Bool
-    levelCollisionOwned : Bool
-    gazeLikingCollisionOwned : Bool
-    gazeLikingInstitutionCollisionOwned : Bool
-    gazeLikingMarketCollisionOwned : Bool
+    generalNonFactorabilityAlreadyOwnedUpstream : Bool
+    rechartingNoRepairAlreadyOwnedUpstream : Bool
+    nonlinearInteractionAlreadyOwnedUpstream : Bool
+    thisModuleAddsOnlyDomainInstantiations : Bool
     syntheticWitnessesPromotedToEmpiricalPopulationClaims : Bool
-    coarseObserverDeclaredFalse : Bool
-    consumerSpecificAdequacyPreserved : Bool
+    sharedShapePromotedToSharedDoctrine : Bool
 
 canonicalDialecticLevelsAestheticConsumerFibreBoundary :
   DialecticLevelsAestheticConsumerFibreBoundary
 canonicalDialecticLevelsAestheticConsumerFibreBoundary =
   dialectic-levels-aesthetic-consumer-fibre-boundary
+    ICG.canonicalIntersectionalConstraintGeometryBoundary
     Genealogy.canonicalDASHIDialecticGenealogyCorrection
     Hegel.canonicalHegelDialecticPrimarySourceBoundary
     Levels.canonicalHoeMathLevelsSourceBoundary
     Aesthetics.canonicalAestheticPerceptionEyeTrackingBoundary
-    true true true true true false false true
+    true true true true false false
