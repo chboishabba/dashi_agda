@@ -18,20 +18,20 @@ module DASHI.Physics.Closure.NSTriadKNDiagonalResolventRateFloorRound449Exact wh
 -- The reciprocal antitonicity theorem is reused from the Yang--Mills interval
 -- arithmetic lane.  No Fourier normalization is assumed here; a physical
 -- consumer must separately prove the requested cell-rate floor on its exact
--- carrier.
+-- carrier.  The ceiling is proof-indexed: there is no proof-free reciprocal
+-- of a putatively positive floor and no hidden positivity postulate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; Positive; NonNegative; _+_; _*_; _≤_; _<_; _≟_; 1/_; positive; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; Positive; NonNegative; _+_; _*_; _≤_; _<_; _≟_; positive; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 open import Relation.Nullary using (yes; no)
 
-import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNRationalCauchySchurComplementRound443Exact as R443
 import DASHI.Physics.Closure.NSTriadKNResolventDiagonalNoCardinalityRound298Exact as R298
 import DASHI.Physics.YangMills.BalabanClayGate4RationalPositiveMassReciprocalExact as Reciprocal
@@ -81,7 +81,6 @@ record DiagonalRateFloorCell (floor : ℚ) : Set where
   constructor diagonal-rate-floor-cell
   field
     rate mass : ℚ
-    floorPositive : 0ℚ < floor
     ratePositive : 0ℚ < rate
     floorBelowRate : floor ≤ rate
     massNonnegative : 0ℚ ≤ mass
@@ -91,21 +90,6 @@ open DiagonalRateFloorCell public
 diagonalWeight : ∀ {floor} → DiagonalRateFloorCell floor → ℚ
 diagonalWeight cell = R443.cauchyEntry (rate cell) (rate cell)
 
-diagonalCeiling : ℚ → ℚ
-diagonalCeiling floor =
-  Quotient.positiveReciprocal (two * floor)
-    (twicePositive (floorPositive-placeholder floor))
-  where
-  -- This helper is never used directly by clients; the proof-bearing version
-  -- `diagonalCeilingAt` below carries the actual positivity witness.
-  floorPositive-placeholder : (x : ℚ) → 0ℚ < x
-  floorPositive-placeholder x = x-positive-boundary x
-
-  postulate
-    x-positive-boundary : (x : ℚ) → 0ℚ < x
-
--- Proof-bearing ceiling value.  Unlike the convenience name above, this
--- function cannot be formed without the physical floor positivity proof.
 diagonalCeilingAt :
   (floor : ℚ) → 0ℚ < floor → ℚ
 diagonalCeilingAt floor floorPositive =
@@ -113,42 +97,45 @@ diagonalCeilingAt floor floorPositive =
     (twicePositive floorPositive)
 
 diagonalWeightBelowFloorCeiling :
-  ∀ {floor} (cell : DiagonalRateFloorCell floor) →
-  diagonalWeight cell
-  ≤ diagonalCeilingAt floor (floorPositive cell)
-diagonalWeightBelowFloorCeiling {floor} cell =
+  ∀ {floor} →
+  (floorPositive : 0ℚ < floor) →
+  (cell : DiagonalRateFloorCell floor) →
+  diagonalWeight cell ≤ diagonalCeilingAt floor floorPositive
+diagonalWeightBelowFloorCeiling {floor} floorPositive cell =
   let
     rho = rate cell
-    floorPos = floorPositive cell
-    rhoPos = ratePositive cell
-    twoFloorPos = twicePositive floorPos
-    twoRhoPos = twicePositive rhoPos
+    rhoPositive = ratePositive cell
+    sumRhoPositive : 0ℚ < rho + rho
+    sumRhoPositive = ℚP.+-mono-<-< rhoPositive rhoPositive
+    twoFloorPositive = twicePositive floorPositive
+    twoRhoPositive = twicePositive rhoPositive
     twoFloorBelowTwoRho = twiceMonotone (floorBelowRate cell)
 
-    cauchyAsReciprocal :
+    rhoPlusRhoIsTwoRho : rho + rho ≡ two * rho
+    rhoPlusRhoIsTwoRho = solve (rho ∷ [])
+
+    cauchyAsPositiveReciprocal :
       diagonalWeight cell
-      ≡ Quotient.positiveReciprocal (two * rho) twoRhoPos
-    cauchyAsReciprocal =
-      trans
-        (safeReciprocalIsPositiveReciprocal
-          (rho + rho)
-          (ℚP.+-mono-<-< rhoPos rhoPos))
-        (cong
-          (λ denom → Quotient.positiveReciprocal denom
-            (subst (0ℚ <_) (sym (solve (rho ∷ []))) twoRhoPos))
-          (solve (rho ∷ [])))
+      ≡ Quotient.positiveReciprocal (rho + rho) sumRhoPositive
+    cauchyAsPositiveReciprocal =
+      safeReciprocalIsPositiveReciprocal (rho + rho) sumRhoPositive
+
+    reciprocalTransport :
+      Quotient.positiveReciprocal (rho + rho) sumRhoPositive
+      ≡ Quotient.positiveReciprocal (two * rho) twoRhoPositive
+    reciprocalTransport rewrite rhoPlusRhoIsTwoRho = refl
 
     antitone :
-      Quotient.positiveReciprocal (two * rho) twoRhoPos
-      ≤ Quotient.positiveReciprocal (two * floor) twoFloorPos
+      Quotient.positiveReciprocal (two * rho) twoRhoPositive
+      ≤ Quotient.positiveReciprocal (two * floor) twoFloorPositive
     antitone =
       Quotient.reciprocalAntitonePositive
         (two * floor) (two * rho)
-        twoFloorPos twoRhoPos twoFloorBelowTwoRho
+        twoFloorPositive twoRhoPositive twoFloorBelowTwoRho
   in
   subst
-    (λ selected → selected ≤ diagonalCeilingAt floor floorPos)
-    (sym cauchyAsReciprocal)
+    (λ selected → selected ≤ diagonalCeilingAt floor floorPositive)
+    (sym (trans cauchyAsPositiveReciprocal reciprocalTransport))
     antitone
 
 diagonalWeightNonnegative :
@@ -163,58 +150,17 @@ diagonalWeightNonnegative cell =
         (positive (ratePositive cell))))
 
 compileR298Cell :
-  ∀ {floor} (cell : DiagonalRateFloorCell floor) →
-  R298.WeightedDiagonalCell
-    (diagonalCeilingAt floor (floorPositive cell))
-compileR298Cell cell = R298.weighted-diagonal-cell
+  ∀ {floor} →
+  (floorPositive : 0ℚ < floor) →
+  (cell : DiagonalRateFloorCell floor) →
+  R298.WeightedDiagonalCell (diagonalCeilingAt floor floorPositive)
+compileR298Cell floorPositive cell = R298.weighted-diagonal-cell
   (mass cell)
   (diagonalWeight cell)
   (massNonnegative cell)
   (diagonalWeightNonnegative cell)
-  (diagonalWeightBelowFloorCeiling cell)
+  (diagonalWeightBelowFloorCeiling floorPositive cell)
 
-compileR298Cells :
-  ∀ {floor} →
-  (cells : List (DiagonalRateFloorCell floor)) →
-  List (R298.WeightedDiagonalCell
-    (diagonalCeilingAt floor
-      (caseFloorPositive cells)))
-compileR298Cells {floor} [] = []
-compileR298Cells {floor} (cell ∷ rest) =
-  transportCell cell ∷ compileTail rest
-  where
-  commonPositive : 0ℚ < floor
-  commonPositive = floorPositive cell
-
-  transportCell :
-    DiagonalRateFloorCell floor →
-    R298.WeightedDiagonalCell (diagonalCeilingAt floor commonPositive)
-  transportCell selected =
-    subst R298.WeightedDiagonalCell
-      (proofIrrelevantCeiling selected)
-      (compileR298Cell selected)
-
-  proofIrrelevantCeiling :
-    (selected : DiagonalRateFloorCell floor) →
-    diagonalCeilingAt floor (floorPositive selected)
-    ≡ diagonalCeilingAt floor commonPositive
-  proofIrrelevantCeiling selected = refl
-
-  compileTail :
-    List (DiagonalRateFloorCell floor) →
-    List (R298.WeightedDiagonalCell (diagonalCeilingAt floor commonPositive))
-  compileTail [] = []
-  compileTail (selected ∷ tail) =
-    transportCell selected ∷ compileTail tail
-
-  caseFloorPositive :
-    List (DiagonalRateFloorCell floor) → 0ℚ < floor
-  caseFloorPositive [] = commonPositive
-  caseFloorPositive (_ ∷ _) = commonPositive
-
--- Empty lists carry no floor witness, so the list-level compiler above is
--- intentionally not the preferred public API.  The stable boundary is an
--- explicit shared floor proof plus cells whose rates lie above that floor.
 record DiagonalRateFloorFamily (floor : ℚ) : Set where
   constructor diagonal-rate-floor-family
   field
@@ -223,29 +169,21 @@ record DiagonalRateFloorFamily (floor : ℚ) : Set where
 
 open DiagonalRateFloorFamily public
 
+compileCells :
+  ∀ {floor} →
+  (floorPositive : 0ℚ < floor) →
+  List (DiagonalRateFloorCell floor) →
+  List (R298.WeightedDiagonalCell (diagonalCeilingAt floor floorPositive))
+compileCells floorPositive [] = []
+compileCells floorPositive (cell ∷ rest) =
+  compileR298Cell floorPositive cell ∷ compileCells floorPositive rest
+
 compileFamilyToR298 :
   ∀ {floor} (family : DiagonalRateFloorFamily floor) →
   List (R298.WeightedDiagonalCell
     (diagonalCeilingAt floor (sharedFloorPositive family)))
-compileFamilyToR298 family = mapCells (cells family)
-  where
-  floorPos = sharedFloorPositive family
-
-  mapCells :
-    List (DiagonalRateFloorCell _) →
-    List (R298.WeightedDiagonalCell (diagonalCeilingAt _ floorPos))
-  mapCells [] = []
-  mapCells (cell ∷ rest) =
-    R298.weighted-diagonal-cell
-      (mass cell)
-      (diagonalWeight cell)
-      (massNonnegative cell)
-      (diagonalWeightNonnegative cell)
-      (subst
-        (λ upper → diagonalWeight cell ≤ upper)
-        refl
-        (diagonalWeightBelowFloorCeiling cell))
-    ∷ mapCells rest
+compileFamilyToR298 family =
+  compileCells (sharedFloorPositive family) (cells family)
 
 round449RateFloorToDiagonalCeilingCompilerClosed : Bool
 round449RateFloorToDiagonalCeilingCompilerClosed = true
@@ -259,6 +197,9 @@ round449RequiresOnlyPositiveSharedCellRateFloor = true
 round449IntroducesCardinalityTax : Bool
 round449IntroducesCardinalityTax = false
 
+round449ContainsPostulate : Bool
+round449ContainsPostulate = false
+
 round449PackageAClosed : Bool
 round449PackageAClosed = false
 
@@ -267,3 +208,6 @@ round449ClayPromotion = false
 
 round449IntroducesCardinalityTaxIsFalse : round449IntroducesCardinalityTax ≡ false
 round449IntroducesCardinalityTaxIsFalse = refl
+
+round449ContainsPostulateIsFalse : round449ContainsPostulate ≡ false
+round449ContainsPostulateIsFalse = refl
