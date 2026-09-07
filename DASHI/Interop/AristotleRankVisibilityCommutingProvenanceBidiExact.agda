@@ -6,7 +6,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.CommutingProvenanceBidiCrossPollination2026Exact as Commuting
-import DASHI.Interop.Ar istotleRankQualifierPropertyEngineBoundary as Aristotle
+import DASHI.Interop.AristotleRankQualifierPropertyEngineBoundary as Aristotle
 import DASHI.Interop.SensibLawWikidataItemPropertyEvidenceExact as Item
 
 -- Rank is statement-local; truthy visibility is computed from the whole covered
