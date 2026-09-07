@@ -11,8 +11,13 @@ module DASHI.Culture.DialecticPluralismRepresentationFourfoldCrossPollinationExa
 open import DASHI.Core.Prelude
 open import Data.Empty using (⊥)
 
+import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Culture.DialecticPluralismRepresentationSourceAtlasExact as Sources
 import DASHI.Core.DialecticOriginSourceAtlasExact as DashiDialectic
+import DASHI.Culture.DASHIDialecticGenealogyAttributionCorrectionExact as Genealogy
+import DASHI.Culture.HegelDialecticPrimarySourceBoundaryExact as Hegel
+import DASHI.Culture.HoeMathLevelsSourceBoundaryExact as Levels
+import DASHI.Culture.AestheticPerceptionEyeTrackingSourceBoundaryExact as Aesthetics
 import DASHI.Reasoning.ZizekPNFSourceAtlas as ZizekSources
 import DASHI.Philosophy.PolyphonicRelation as Polyphony
 import DASHI.Culture.FourfoldRetreatIndigenousPluralAuthorityCrossPollinationExact as IndigenousPlural
@@ -25,10 +30,7 @@ import DASHI.Culture.PhilosophyClaimProvenanceHistoryBidiExact as Philosophy
 ------------------------------------------------------------------------
 
 data DialecticReading : Set where
-  contradictionMediatedDevelopment
-  thesisAntithesisSynthesisRecipe
-  unresolvedRemainderDialectic
-  : DialecticReading
+  contradictionMediatedDevelopment thesisAntithesisSynthesisRecipe unresolvedRemainderDialectic : DialecticReading
 
 hegelCalibrationReading : DialecticReading
 hegelCalibrationReading = contradictionMediatedDevelopment
@@ -36,59 +38,42 @@ hegelCalibrationReading = contradictionMediatedDevelopment
 dashIHistoricalReading : DialecticReading
 dashIHistoricalReading = unresolvedRemainderDialectic
 
-hegelCalibrationNotRecipe :
-  hegelCalibrationReading ≡ thesisAntithesisSynthesisRecipe → ⊥
+hegelCalibrationNotRecipe : hegelCalibrationReading ≡ thesisAntithesisSynthesisRecipe → ⊥
 hegelCalibrationNotRecipe ()
 
-dashIDialecticNotClaimedAsHegelIdentity :
-  dashIHistoricalReading ≡ hegelCalibrationReading → ⊥
+dashIDialecticNotClaimedAsHegelIdentity : dashIHistoricalReading ≡ hegelCalibrationReading → ⊥
 dashIDialecticNotClaimedAsHegelIdentity ()
 
+hegelContradictionDoesNotMeanIrrationalism : Hegel.HegelContradictionMeansIrrationalism → ⊥
+hegelContradictionDoesNotMeanIrrationalism = Hegel.hegelContradictionDoesNotMeanIrrationalism
+
+hegelDoesNotOwnDASHIRemainder : Hegel.DASHIRemainderIsIdenticalToHegelDoctrine → ⊥
+hegelDoesNotOwnDASHIRemainder = Hegel.dashIRemainderNotIdentifiedWithHegelDoctrine
+
 ------------------------------------------------------------------------
--- 2. Dialectical materialism is not mere material primacy nor ideal fusion.
---
--- Žižek's source atlas owns the bibliographic calibration; this module only
--- supplies a bounded comparison category.  It does not claim this enum is
--- Žižek's terminology or a complete definition of dialectical materialism.
+-- 2. Dialectical materialism comparison remains bounded.
 ------------------------------------------------------------------------
 
 data MaterialistDialecticReading : Set where
-  contradictionWithinMaterialSocialReality
-  simpleOneWayMaterialDetermination
-  discourseOnlyIdealism
-  : MaterialistDialecticReading
+  contradictionWithinMaterialSocialReality simpleOneWayMaterialDetermination discourseOnlyIdealism : MaterialistDialecticReading
 
 zizekBoundedReading : MaterialistDialecticReading
 zizekBoundedReading = contradictionWithinMaterialSocialReality
 
-zizekBoundedReadingNotOneWayReduction :
-  zizekBoundedReading ≡ simpleOneWayMaterialDetermination → ⊥
+zizekBoundedReadingNotOneWayReduction : zizekBoundedReading ≡ simpleOneWayMaterialDetermination → ⊥
 zizekBoundedReadingNotOneWayReduction ()
 
-zizekBoundedReadingNotDiscourseOnly :
-  zizekBoundedReading ≡ discourseOnlyIdealism → ⊥
+zizekBoundedReadingNotDiscourseOnly : zizekBoundedReading ≡ discourseOnlyIdealism → ⊥
 zizekBoundedReadingNotDiscourseOnly ()
 
 ------------------------------------------------------------------------
 -- 3. Levels/pluralism: stage maps and perspective maps are not total orders.
---
--- hoe_math owns the assembled pedagogical chart/presentation.  Graves/Beck/
--- Cowan, Wilber and other cited developmental traditions retain authorship of
--- their underlying models.  DASHI does not import empirical validity from the
--- chart and does not treat "higher" as universal authority over every axis.
 ------------------------------------------------------------------------
 
 data PluralMapKind : Set where
-  singleScalarLadder
-  stagedDevelopmentMap
-  multidimensionalPerspectiveMap
-  polyphonicNoncollapseMap
-  : PluralMapKind
+  singleScalarLadder stagedDevelopmentMap multidimensionalPerspectiveMap polyphonicNoncollapseMap : PluralMapKind
 
-data PluralismAdequacy : Set where
-  oneRankExhaustsState
-  multipleCoordinatesRequired
-  : PluralismAdequacy
+data PluralismAdequacy : Set where oneRankExhaustsState multipleCoordinatesRequired : PluralismAdequacy
 
 hoeMathBoundedMap : PluralMapKind
 hoeMathBoundedMap = multidimensionalPerspectiveMap
@@ -96,42 +81,25 @@ hoeMathBoundedMap = multidimensionalPerspectiveMap
 hoeMathAdequacy : PluralismAdequacy
 hoeMathAdequacy = multipleCoordinatesRequired
 
-hoeMathMapNotSingleScalar :
-  hoeMathBoundedMap ≡ singleScalarLadder → ⊥
+hoeMathMapNotSingleScalar : hoeMathBoundedMap ≡ singleScalarLadder → ⊥
 hoeMathMapNotSingleScalar ()
 
-polyphonyDoesNotRequireFinalSynthesis :
-  Polyphony.oneFinalSynthesisRequired Polyphony.canonicalPolyphonyBoundary ≡ false
+hoeMathHigherNotUniversalAuthority : Levels.HigherLevelMeansAuthorityOnEveryCoordinate → ⊥
+hoeMathHigherNotUniversalAuthority = Levels.higherDoesNotMeanUniversalAuthority
+
+hoeMathChartDoesNotProveUniversality : Levels.ChartPresentationProvesEmpiricalUniversality → ⊥
+hoeMathChartDoesNotProveUniversality = Levels.chartDoesNotProveEmpiricalUniversality
+
+polyphonyDoesNotRequireFinalSynthesis : Polyphony.oneFinalSynthesisRequired Polyphony.canonicalPolyphonyBoundary ≡ false
 polyphonyDoesNotRequireFinalSynthesis = Polyphony.canonicalNoForcedFinalSynthesis
 
 ------------------------------------------------------------------------
--- 4. Representation: object, image, word, institutional designation and
--- provenance/history remain separable coordinates.
---
--- Magritte calibrates image/word/object non-identity; Duchamp calibrates
--- designation/context; Kosuth explicitly places object/image/definition in one
--- work; Rauschenberg makes provenance/event history indispensable to the
--- meaning of a nearly erased visible surface.  These relations are DASHI's
--- comparative abstraction, not a single doctrine attributed to the artists.
+-- 4. Representation and aesthetic observation remain distinct coordinates.
 ------------------------------------------------------------------------
 
 data RepresentationRegister : Set where
-  materialObject
-  pictorialImage
-  linguisticSign
-  institutionalDesignation
-  provenanceHistory
-  : RepresentationRegister
-
-data RepresentationCollapse : Set where
-  imageEqualsObject
-  wordEqualsObject
-  designationCreatesPhysicalIdentity
-  visibleSurfaceExhaustsProvenance
-  : RepresentationCollapse
-
-representationRegistersDistinct : Bool
-representationRegistersDistinct = true
+  materialObject pictorialImage linguisticSign institutionalDesignation provenanceHistory
+  viewerAttention subjectiveEvaluation marketEvaluation : RepresentationRegister
 
 data ImageMeansObjectIdentity : Set where
 data WordMeansObjectIdentity : Set where
@@ -140,40 +108,38 @@ data VisibleResidualMeansNoPriorCarrier : Set where
 
 imageDoesNotMeanObjectIdentity : ImageMeansObjectIdentity → ⊥
 imageDoesNotMeanObjectIdentity ()
-
 wordDoesNotMeanObjectIdentity : WordMeansObjectIdentity → ⊥
 wordDoesNotMeanObjectIdentity ()
-
-artDesignationDoesNotMeanPhysicalTransformation :
-  ArtDesignationMeansPhysicalTransformation → ⊥
+artDesignationDoesNotMeanPhysicalTransformation : ArtDesignationMeansPhysicalTransformation → ⊥
 artDesignationDoesNotMeanPhysicalTransformation ()
-
-visibleResidualDoesNotEraseProvenanceHistory :
-  VisibleResidualMeansNoPriorCarrier → ⊥
+visibleResidualDoesNotEraseProvenanceHistory : VisibleResidualMeansNoPriorCarrier → ⊥
 visibleResidualDoesNotEraseProvenanceHistory ()
+
+gazeDoesNotDetermineObjectiveBeauty : Aesthetics.GazePatternDeterminesObjectiveBeauty → ⊥
+gazeDoesNotDetermineObjectiveBeauty = Aesthetics.gazeDoesNotDetermineObjectiveBeauty
+
+likingDoesNotEqualMarketValue : Aesthetics.SubjectiveLikingEqualsMarketValue → ⊥
+likingDoesNotEqualMarketValue = Aesthetics.likingDoesNotEqualMarketValue
+
+correlationDoesNotProveAestheticMechanism : Aesthetics.CorrelationProvesCausalAestheticMechanism → ⊥
+correlationDoesNotProveAestheticMechanism = Aesthetics.correlationDoesNotProveMechanism
 
 ------------------------------------------------------------------------
 -- 5. Magritte -> Foucault is an interpretation edge, not authorship transfer.
 ------------------------------------------------------------------------
 
-data InterpretationEdge : Set where
-  artistWorkToLaterPhilosophicalReading
-  sourceTheoryToDASHIFormalPattern
-  : InterpretationEdge
+data InterpretationEdge : Set where artistWorkToLaterPhilosophicalReading sourceTheoryToDASHIFormalPattern : InterpretationEdge
 
 data LaterInterpretationOwnsUpstreamIntent : Set where
-
 data UpstreamArtworkOwnsLaterTheory : Set where
 
-laterInterpretationDoesNotOwnUpstreamIntent :
-  LaterInterpretationOwnsUpstreamIntent → ⊥
+laterInterpretationDoesNotOwnUpstreamIntent : LaterInterpretationOwnsUpstreamIntent → ⊥
 laterInterpretationDoesNotOwnUpstreamIntent ()
-
 upstreamArtworkDoesNotOwnLaterTheory : UpstreamArtworkOwnsLaterTheory → ⊥
 upstreamArtworkDoesNotOwnLaterTheory ()
 
 ------------------------------------------------------------------------
--- 6. Cross-pollination with Fourfold Retreat and Indigenous plural authority.
+-- 6. Fourfold-retreat / plural-authority non-promotions.
 ------------------------------------------------------------------------
 
 data DialecticMeansRetreatFromReason : Set where
@@ -186,26 +152,17 @@ data IndigenousPluralAuthorityMeansSameAsConceptualArt : Set where
 
 dialecticDoesNotMeanRetreatFromReason : DialecticMeansRetreatFromReason → ⊥
 dialecticDoesNotMeanRetreatFromReason ()
-
 contradictionDoesNotMeanIrrationalism : ContradictionMeansIrrationalism → ⊥
 contradictionDoesNotMeanIrrationalism ()
-
 multipleRegistersDoNotMeanRelativism : MultipleRegistersMeanRelativism → ⊥
 multipleRegistersDoNotMeanRelativism ()
-
 levelsMapDoesNotUniversalizeHierarchy : LevelsMapMeansEpistemicHierarchyEverywhere → ⊥
 levelsMapDoesNotUniversalizeHierarchy ()
-
-representationCritiqueDoesNotMeanImmaterialism :
-  RepresentationCritiqueMeansImmaterialism → ⊥
+representationCritiqueDoesNotMeanImmaterialism : RepresentationCritiqueMeansImmaterialism → ⊥
 representationCritiqueDoesNotMeanImmaterialism ()
-
-readymadeDoesNotMakeMaterialObjectIrrelevant :
-  ReadymadeMeansMaterialObjectIrrelevant → ⊥
+readymadeDoesNotMakeMaterialObjectIrrelevant : ReadymadeMeansMaterialObjectIrrelevant → ⊥
 readymadeDoesNotMakeMaterialObjectIrrelevant ()
-
-indigenousPluralAuthorityDoesNotBecomeConceptualArt :
-  IndigenousPluralAuthorityMeansSameAsConceptualArt → ⊥
+indigenousPluralAuthorityDoesNotBecomeConceptualArt : IndigenousPluralAuthorityMeansSameAsConceptualArt → ⊥
 indigenousPluralAuthorityDoesNotBecomeConceptualArt ()
 
 ------------------------------------------------------------------------
@@ -213,21 +170,11 @@ indigenousPluralAuthorityDoesNotBecomeConceptualArt ()
 ------------------------------------------------------------------------
 
 data NoncollapseCoordinate : Set where
-  contradictionHistory
-  materialCarrier
-  representationRegister
-  provenance
-  institutionalStatus
-  authority
-  unresolvedRemainder
-  : NoncollapseCoordinate
+  contradictionHistory materialCarrier representationRegister provenance institutionalStatus
+  authority unresolvedRemainder gazeProcess subjectivePreference economicValue : NoncollapseCoordinate
 
 data CoordinateTreatment : Set where
-  preserve
-  sourceSeparately
-  compareWithoutIdentity
-  leaveOpen
-  : CoordinateTreatment
+  preserve sourceSeparately compareWithoutIdentity leaveOpen observeWithoutPromotion : CoordinateTreatment
 
 treatment : NoncollapseCoordinate → CoordinateTreatment
 treatment contradictionHistory = preserve
@@ -237,16 +184,19 @@ treatment provenance = preserve
 treatment institutionalStatus = sourceSeparately
 treatment authority = sourceSeparately
 treatment unresolvedRemainder = leaveOpen
-
-------------------------------------------------------------------------
--- 8. Provenance weld.
-------------------------------------------------------------------------
+treatment gazeProcess = observeWithoutPromotion
+treatment subjectivePreference = observeWithoutPromotion
+treatment economicValue = sourceSeparately
 
 record DialecticPluralismRepresentationBoundary : Set where
   constructor dialectic-pluralism-representation-boundary
   field
     sourceAtlas : Source.AttributedSourceAtlas
     dashiDialecticOriginBoundary : DashiDialectic.DialecticOriginSourceAtlasBoundary
+    dashiGenealogyCorrection : Genealogy.DASHIDialecticGenealogyCorrection
+    hegelPrimaryBoundary : Hegel.HegelDialecticPrimarySourceBoundary
+    hoeMathLevelsBoundary : Levels.HoeMathLevelsSourceBoundary
+    aestheticEvidenceBoundary : Aesthetics.AestheticPerceptionEyeTrackingBoundary
     zizekSourceAtlas : Source.AttributedSourceAtlas
     philosophyBoundary : Philosophy.PhilosophyClaimProvenanceHistoryBoundary
     indigenousPluralBoundary : IndigenousPlural.FourfoldIndigenousCrossPollinationBoundary
@@ -259,16 +209,20 @@ record DialecticPluralismRepresentationBoundary : Set where
     dialecticNotReducedToThreeWordRecipe : Bool
     pluralismNotReducedToRelativism : Bool
     representationNotReducedToImmaterialism : Bool
+    gazeNotPromotedToObjectiveBeauty : Bool
 
-canonicalDialecticPluralismRepresentationBoundary :
-  DialecticPluralismRepresentationBoundary
+canonicalDialecticPluralismRepresentationBoundary : DialecticPluralismRepresentationBoundary
 canonicalDialecticPluralismRepresentationBoundary =
   dialectic-pluralism-representation-boundary
     Sources.sourceAtlas
     DashiDialectic.canonicalDialecticOriginSourceAtlasBoundary
+    Genealogy.canonicalDASHIDialecticGenealogyCorrection
+    Hegel.canonicalHegelDialecticPrimarySourceBoundary
+    Levels.canonicalHoeMathLevelsSourceBoundary
+    Aesthetics.canonicalAestheticPerceptionEyeTrackingBoundary
     ZizekSources.zizekPNFSourceAtlas
     Philosophy.canonicalPhilosophyClaimProvenanceHistoryBoundary
     IndigenousPlural.canonicalFourfoldIndigenousCrossPollinationBoundary
     Fourfold.canonicalFourfoldRetreatCrossPollinationWeld
     Foucault.canonicalFoucaultFourfoldSourceBoundary
-    true true true true true true true
+    true true true true true true true true
