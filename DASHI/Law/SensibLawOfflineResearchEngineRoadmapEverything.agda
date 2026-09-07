@@ -15,6 +15,7 @@ import DASHI.Law.SensibLawProofSearchParetoSaturationExact as Pareto
 import DASHI.Law.SensibLawGovernedLegalNetworkStrategyExact as Network
 import DASHI.Law.SensibLawOfflineResearchEngineRustReceiptsF93740fExact as RustValidated
 import DASHI.Law.SensibLawGovernedOnlineR6ParityExact as OnlineR6
+import DASHI.Law.SensibLawPreferredAustralianAuthorityAcquisitionExact as PreferredAU
 
 ------------------------------------------------------------------------
 -- OFFLINE RESEARCH ENGINE ROADMAP CAPSTONE
@@ -31,9 +32,11 @@ import DASHI.Law.SensibLawGovernedOnlineR6ParityExact as OnlineR6
 --
 -- Governed live legal access remains a separately authorised strategy.
 -- The validated Rust f93740f receipts are pinned as bounded runtime evidence,
--- never as Agda/kernel certification or legal/semantic authority.  OnlineR6
--- mirrors the newer Rust provider implementation while retaining its live
--- receipt as unvalidated until the explicit bounded smoke is actually run.
+-- never as Agda/kernel certification or legal/semantic authority.  OnlineR6 is
+-- the historical first live-provider parity owner. PreferredAU mirrors the
+-- newer Rust-led order: persisted -> OALC -> official court -> optional
+-- sanctioned/specialist provider -> unresolved. Its real official-source live
+-- receipt remains false until the explicit bounded run is actually certified.
 ------------------------------------------------------------------------
 
 record OfflineResearchEngineBoundary : Set where
@@ -119,6 +122,21 @@ selectedValidatedRustLocalAttestation =
 
 selectedGovernedOnlineR6Boundary : OnlineR6.GovernedOnlineR6Boundary
 selectedGovernedOnlineR6Boundary = OnlineR6.canonicalGovernedOnlineR6Boundary
+
+selectedPreferredProviderFailureCalibration : PreferredAU.ProviderFailureCalibration
+selectedPreferredProviderFailureCalibration =
+  PreferredAU.canonicalProviderFailureCalibration
+
+selectedPreferredOalcBoundary : PreferredAU.OalcExactMncBoundary
+selectedPreferredOalcBoundary = PreferredAU.canonicalOalcExactMncBoundary
+
+selectedPreferredOfficialCourtBoundary : PreferredAU.OfficialCourtAcquisitionBoundary
+selectedPreferredOfficialCourtBoundary =
+  PreferredAU.canonicalOfficialCourtAcquisitionBoundary
+
+selectedPreferredOptionalSpecialistBoundary : PreferredAU.OptionalSpecialistBoundary
+selectedPreferredOptionalSpecialistBoundary =
+  PreferredAU.canonicalOptionalSpecialistBoundary
 
 ------------------------------------------------------------------------
 -- Capstone firewalls.
