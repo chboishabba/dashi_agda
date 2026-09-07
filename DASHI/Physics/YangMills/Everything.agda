@@ -202,7 +202,7 @@ import DASHI.Physics.YangMills.BalabanPreferredSourceRealizationFrontierRound212
 -- is built directly from the regular E_k sector rather than the whole A_k.
 import DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExact
 import DASHI.Physics.YangMills.BalabanCMP122Theorem1ToRawCMP119ActiveExact
-import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119RawStateRound216Exact
+import DASHI.Physics.YangMills.BalabanCMP119RawStateFromFiniteBetaHistoryExact
 import DASHI.Physics.YangMills.BalabanCMP119RegularSectorCMP109116Round215Exact
 import DASHI.Physics.YangMills.BalabanCMP119RegularSectorBC1Round215Exact
 import DASHI.Physics.YangMills.BalabanPreferredRawSourceFrontierRound216Exact
