@@ -7,11 +7,6 @@ import DASHI.Core.DependencySensitiveClosureReopeningBidiExact
 import DASHI.Core.DependencyGraphResultBackpropagationBidiExact
 import DASHI.Core.SequentialOutcomeBackpropagationBidiExact
 
--- Diagnosis-fibre debugging: keep multiple causal/representational explanations
--- live after an adverse or indeterminate result, then select the next debugging
--- observation by strict diagnosis-fibre narrowing rather than raw magnitude.
--- Dependency weighting is separate again: priority is current consumer/graph
--- consequence, not signal size, confidence, probability, or authority.
 import DASHI.Core.DiagnosisFibreSalienceSchedulerBidiExact
 import DASHI.Core.DiagnosisExperimentPortfolioBidiExact
 import DASHI.Core.DependencyWeightedDiagnosisSchedulerBidiExact
@@ -22,8 +17,6 @@ import DASHI.Core.RuntimeDiagnosisRepairSchedulerBidiExact
 import DASHI.Cognition.PNF.SensibLawDiagnosisRepairSchedulerBidiExact
 import DASHI.Biology.DrosophilaDiagnosisRepairSchedulerBidiExact
 
--- Temporal provenance return: append-only diagnosis-event history is the
--- authority; the current live diagnosis fibre is a rebuildable projection.
 import DASHI.Core.TemporalDiagnosisProvenanceHistoryBidiExact
 import DASHI.Core.TemporalDiagnosisFibreProjectionBidiExact
 import DASHI.Core.TemporalDiagnosisHotColdProjectionBidiExact
@@ -35,20 +28,19 @@ import DASHI.Governance.GovernanceTemporalDiagnosisHistoryBidiExact
 import DASHI.Cognition.PNF.SensibLawTemporalDiagnosisHistoryBidiExact
 import DASHI.Biology.DrosophilaTemporalDiagnosisHistoryBidiExact
 
--- Dependency-directed truth maintenance: exact upstream lineage localizes the
--- recompute frontier; unrelated history/certificates remain retained.
 import DASHI.Core.TemporalDiagnosisDependencyLineageBidiExact
 import DASHI.Core.IncrementalDiagnosisTruthMaintenanceBidiExact
 
--- N-dimensional / recursive-Pareto compatibility surface.  Classification into
--- must/may/unaffected/authority-blocked happens before Pareto ranking.  Only
--- residual-relevant semantic axes are materialised; ambient self-indexed or
--- tetrational capacity does not force full search/materialisation.  This bridge
--- is intentionally path-distinct from open PR #770's canonical recursive owner
--- until shared ancestry exists.
+-- Selective invalidation + N-dimensional recursive-Pareto compatibility.
+-- Recompute classification precedes ranking.  The current bridge materialises
+-- only four residual-relevant semantic axes (consequence, diagnostic residual,
+-- authority, recompute cost), keeps 3^9=19683 as visualisation cardinality
+-- rather than Pareto dimension, and carries A_(n+1)=9^(A_n) symbolically so
+-- tetrational representational capacity never becomes a brute-force search
+-- obligation.  Canonical #770 owner paths are intentionally not duplicated
+-- while that PR remains on separate ancestry.
 import DASHI.Core.SelectiveInvalidationParetoFrontierBidiExact
 
--- Brown-lane x-pollination.
 import DASHI.Biology.AliceBrownDiagnosisRepairSchedulerBidiExact
 import DASHI.Biology.AliceBrownTemporalDiagnosisDependencyLineageBidiExact
 import DASHI.Biology.AliceBrownSelectiveInvalidationParetoBidiExact
