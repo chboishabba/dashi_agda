@@ -62,7 +62,10 @@ terminalPaymentRemovesFinalFlux R P =
       initial - terminal ≤ initial + terminalBound P
     endpointStep =
       let
-        shifted = ℚP.+-monoˡ-≤ initial (negativeTerminalFluxPaid P)
+        shifted :
+          initial + (0ℚ - terminal) ≤ initial + terminalBound P
+        shifted =
+          ℚP.+-mono-≤ ℚP.≤-refl (negativeTerminalFluxPaid P)
         leftMeaning : initial + (0ℚ - terminal) ≡ initial - terminal
         leftMeaning = solve (initial ∷ terminal ∷ [])
       in
@@ -74,7 +77,8 @@ terminalPaymentRemovesFinalFlux R P =
     withRemainder :
       (initial - terminal) + remainder
       ≤ (initial + terminalBound P) + remainder
-    withRemainder = ℚP.+-monoʳ-≤ remainder endpointStep
+    withRemainder =
+      ℚP.+-mono-≤ endpointStep ℚP.≤-refl
   in
   subst
     (λ lower →
@@ -106,7 +110,12 @@ initialRemainderPaymentsCloseTemporalBudget :
 initialRemainderPaymentsCloseTemporalBudget R T P =
   let
     first = terminalPaymentRemovesFinalFlux R T
-    endpoints = ℚP.+-monoˡ-≤ (terminalBound T) (initialFluxPaid P)
+    endpoints :
+      R393.literalOffDiagonalFlux R (R393.initialTime R)
+        + terminalBound T
+      ≤ initialBound P + terminalBound T
+    endpoints =
+      ℚP.+-mono-≤ (initialFluxPaid P) ℚP.≤-refl
     endpointsWithRemainder =
       ℚP.+-mono-≤ endpoints (integratedRemainderPaid P)
   in
