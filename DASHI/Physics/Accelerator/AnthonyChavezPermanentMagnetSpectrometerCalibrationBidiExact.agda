@@ -21,7 +21,10 @@ import DASHI.Core.InverseProblemIdentifiabilityBidiExact as Inv
 ------------------------------------------------------------------------
 
 data SpectrometerCoordinate : Set where
-  magneticFieldMap entranceGeometry detectorPosition electronEnergy : SpectrometerCoordinate
+  magneticFieldMap : SpectrometerCoordinate
+  entranceGeometry : SpectrometerCoordinate
+  detectorPosition : SpectrometerCoordinate
+  electronEnergy : SpectrometerCoordinate
 
 record PermanentMagnetSpectrometer : Set where
   constructor permanent-magnet-spectrometer

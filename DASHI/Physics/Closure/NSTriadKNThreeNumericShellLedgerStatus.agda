@@ -19,10 +19,15 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 data LedgerLeg : Set where
-  outputLeg firstAdjointLeg secondAdjointLeg : LedgerLeg
+  outputLeg : LedgerLeg
+  firstAdjointLeg : LedgerLeg
+  secondAdjointLeg : LedgerLeg
 
 data LedgerClass : Set where
-  lowHigh highLow highHighToLow near : LedgerClass
+  lowHigh : LedgerClass
+  highLow : LedgerClass
+  highHighToLow : LedgerClass
+  near : LedgerClass
   farLow farHigh transition residual : LedgerClass
 
 data LedgerRowStatus : Set where

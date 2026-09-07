@@ -23,7 +23,10 @@ import DASHI.Culture.IntellectualReceptionMultiResidueAdmissibilityLedgerExact a
 ------------------------------------------------------------------------
 
 data ReceptionTime : Set where
-  t0 t1 t2 t3 : ReceptionTime
+  t0 : ReceptionTime
+  t1 : ReceptionTime
+  t2 : ReceptionTime
+  t3 : ReceptionTime
 
 data TemporalReceptionHistory : Set where
   closureTemporalHistory : TemporalReceptionHistory
@@ -97,7 +100,9 @@ intermediateAuthorityDiffers ()
 ------------------------------------------------------------------------
 
 data TemporalContinuationMove : Set where
-  pluralContinuation movementContinuation authorityContinuation : TemporalContinuationMove
+  pluralContinuation : TemporalContinuationMove
+  movementContinuation : TemporalContinuationMove
+  authorityContinuation : TemporalContinuationMove
 
 
 enabledByLedger :
@@ -152,7 +157,8 @@ archivePluralEnabledAfterPluralExposure = refl
 ------------------------------------------------------------------------
 
 data AuthorityTimingCase : Set where
-  authorityEarly authorityLate : AuthorityTimingCase
+  authorityEarly : AuthorityTimingCase
+  authorityLate : AuthorityTimingCase
 
 data SameFinalLedgerCode : Set where sameMovementAuthorityFinal : SameFinalLedgerCode
 
@@ -182,7 +188,8 @@ sameFinalLedgerCannotRecoverAcquisitionTiming =
 ------------------------------------------------------------------------
 
 data IntermediateAuthorityProfile : Set where
-  authorityAlreadyEnabled authorityNotYetEnabled : IntermediateAuthorityProfile
+  authorityAlreadyEnabled : IntermediateAuthorityProfile
+  authorityNotYetEnabled : IntermediateAuthorityProfile
 
 intermediateAuthorityProfile : AuthorityTimingCase → IntermediateAuthorityProfile
 intermediateAuthorityProfile authorityEarly = authorityAlreadyEnabled
@@ -205,7 +212,10 @@ sameFinalLedgerCannotRecoverIntermediateAdmissibility =
 ------------------------------------------------------------------------
 
 data TemporalPoint : Set where
-  earlyT0 earlyT1 earlyT2 earlyT3 : TemporalPoint
+  earlyT0 : TemporalPoint
+  earlyT1 : TemporalPoint
+  earlyT2 : TemporalPoint
+  earlyT3 : TemporalPoint
   lateT0 lateT1 lateT2 lateT3 : TemporalPoint
 
 
@@ -261,7 +271,8 @@ lateAuthorityPersistsAfterAcquisition =
 ------------------------------------------------------------------------
 
 data TemporalTrajectoryCode : Set where
-  authorityEarlyTrajectory authorityLateTrajectory : TemporalTrajectoryCode
+  authorityEarlyTrajectory : TemporalTrajectoryCode
+  authorityLateTrajectory : TemporalTrajectoryCode
 
 temporalTrajectoryCode : AuthorityTimingCase → TemporalTrajectoryCode
 temporalTrajectoryCode authorityEarly = authorityEarlyTrajectory

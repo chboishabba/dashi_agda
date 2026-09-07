@@ -24,7 +24,10 @@ import DASHI.Core.TypedDependencyCore as Dependency
 ------------------------------------------------------------------------
 
 data SituatedPolicyState : Set where
-  contextANow contextBNow contextAAfter contextBAfter : SituatedPolicyState
+  contextANow : SituatedPolicyState
+  contextBNow : SituatedPolicyState
+  contextAAfter : SituatedPolicyState
+  contextBAfter : SituatedPolicyState
 
 data SupportAction : Set where
   uniformSupportAction : SupportAction

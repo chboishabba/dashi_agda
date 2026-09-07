@@ -48,7 +48,9 @@ prefixAndCarrierAreDifferentAtDepth3 =
 -- Scaled balanced-ternary decision polarity.
 
 data HalfPolarity : Set where
-  negativeHalf zeroHalf positiveHalf : HalfPolarity
+  negativeHalf : HalfPolarity
+  zeroHalf : HalfPolarity
+  positiveHalf : HalfPolarity
 
 tritToHalfPolarity : Trit → HalfPolarity
 tritToHalfPolarity neg = negativeHalf

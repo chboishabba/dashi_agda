@@ -76,7 +76,8 @@ strictReceiptEliminatesPriorCandidate receipt strict =
 ------------------------------------------------------------------------
 
 data ToyExperiment : Set where
-  addMiddleObservation addFineObservation : ToyExperiment
+  addMiddleObservation : ToyExperiment
+  addFineObservation : ToyExperiment
 
 coarseToMiddleReceipt :
   ExperimentRefinementReceipt Projection.coarseFibre

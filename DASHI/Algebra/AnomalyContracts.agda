@@ -4,7 +4,11 @@ open import Agda.Builtin.Nat using (Nat; zero)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 data Particle : Set where
-  QL uR dR LL eR : Particle
+  QL : Particle
+  uR : Particle
+  dR : Particle
+  LL : Particle
+  eR : Particle
 
 Y : Particle → Nat
 Y QL = 1

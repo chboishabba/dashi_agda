@@ -28,7 +28,8 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data CrossProverAuthority : Set where
-  checkedLeanSource openAgdaAttachment : CrossProverAuthority
+  checkedLeanSource : CrossProverAuthority
+  openAgdaAttachment : CrossProverAuthority
 
 record Zeta23FkCheckedSourceReturn : Set where
   constructor zeta23-fk-checked-source-return

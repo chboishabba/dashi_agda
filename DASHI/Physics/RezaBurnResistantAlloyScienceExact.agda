@@ -10,7 +10,15 @@ import DASHI.Core.ScientificMechanismEvidenceBidiExact as S
 ------------------------------------------------------------------------
 
 data AlloyElement : Set where
-  nickel cobalt chromium aluminum titanium carbon boron zirconium manganese : AlloyElement
+  nickel : AlloyElement
+  cobalt : AlloyElement
+  chromium : AlloyElement
+  aluminum : AlloyElement
+  titanium : AlloyElement
+  carbon : AlloyElement
+  boron : AlloyElement
+  zirconium : AlloyElement
+  manganese : AlloyElement
 
 
 data MetallurgicalRole : Set where

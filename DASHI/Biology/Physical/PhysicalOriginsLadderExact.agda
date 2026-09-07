@@ -85,7 +85,8 @@ replicateThriceFromOne = refl
 ------------------------------------------------------------------------
 
 data ViabilityState : Set where
-  damaged target : ViabilityState
+  damaged : ViabilityState
+  target : ViabilityState
 
 correctiveStep : ViabilityState → ViabilityState
 correctiveStep damaged = target

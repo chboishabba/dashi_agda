@@ -25,7 +25,8 @@ import DASHI.Cognition.PNF.ModularFourierGrokkingC3Exact as Grok
 import DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge as Wheel
 
 data RepresentationCandidate : Set where
-  memorizer characterRule : RepresentationCandidate
+  memorizer : RepresentationCandidate
+  characterRule : RepresentationCandidate
 
 candidateRule :
   RepresentationCandidate → Grok.InputPair → Wheel.DepthWheelPhase

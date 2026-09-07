@@ -48,13 +48,20 @@ producerGapCountIsSix = refl
 ------------------------------------------------------------------------
 
 data ResolutionAuthority : Set where
-  deterministicReviewedPolicy humanReview : ResolutionAuthority
+  deterministicReviewedPolicy : ResolutionAuthority
+  humanReview : ResolutionAuthority
 
 data CandidateScope : Set where
-  syntacticallyLocal scopeUnresolved attachmentUnresolved contextRequired : CandidateScope
+  syntacticallyLocal : CandidateScope
+  scopeUnresolved : CandidateScope
+  attachmentUnresolved : CandidateScope
+  contextRequired : CandidateScope
 
 data ResolvedScope : Set where
-  localSyntactic scopeResolved attachmentResolved contextResolved : ResolvedScope
+  localSyntactic : ResolvedScope
+  scopeResolved : ResolvedScope
+  attachmentResolved : ResolvedScope
+  contextResolved : ResolvedScope
 
 record StableCandidateKey : Set where
   constructor stableCandidateKey

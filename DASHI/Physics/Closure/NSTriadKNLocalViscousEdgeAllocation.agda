@@ -20,7 +20,9 @@ import DASHI.Physics.Closure.NSTriadKNWeightedFourierEnergyIdentity as Energy
 ------------------------------------------------------------------------
 
 data EdgeSlot : Set where
-  left-right left-out right-out : EdgeSlot
+  left-right : EdgeSlot
+  left-out : EdgeSlot
+  right-out : EdgeSlot
 
 record EdgeOccurrence : Set where
   constructor mkEdgeOccurrence

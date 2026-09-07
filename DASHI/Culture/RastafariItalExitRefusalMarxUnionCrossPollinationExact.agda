@@ -34,30 +34,43 @@ import DASHI.Planning.ParticipatoryPlanningGovernanceExact as Participation
 ------------------------------------------------------------------------
 
 data ParticipationStatus : Set where
-  participates doesNotParticipate : ParticipationStatus
+  participates : ParticipationStatus
+  doesNotParticipate : ParticipationStatus
 
 data RefusalStatus : Set where
-  refusalUnavailable refusalAvailable : RefusalStatus
+  refusalUnavailable : RefusalStatus
+  refusalAvailable : RefusalStatus
 
 data WithdrawalStatus : Set where
-  withdrawalUnavailable withdrawalAvailable : WithdrawalStatus
+  withdrawalUnavailable : WithdrawalStatus
+  withdrawalAvailable : WithdrawalStatus
 
 data RuleChangeStatus : Set where
-  noRuleChangePower consultRuleOnly collectiveRuleChange governingRuleChange : RuleChangeStatus
+  noRuleChangePower : RuleChangeStatus
+  consultRuleOnly : RuleChangeStatus
+  collectiveRuleChange : RuleChangeStatus
+  governingRuleChange : RuleChangeStatus
 
 
 data MaterialExitStatus : Set where
-  noViableMaterialExit fragileMaterialExit viableMaterialExit : MaterialExitStatus
+  noViableMaterialExit : MaterialExitStatus
+  fragileMaterialExit : MaterialExitStatus
+  viableMaterialExit : MaterialExitStatus
 
 data CollectiveOrganisationStatus : Set where
-  noCollectiveOrganisation associationPresent independentOrganisation : CollectiveOrganisationStatus
+  noCollectiveOrganisation : CollectiveOrganisationStatus
+  associationPresent : CollectiveOrganisationStatus
+  independentOrganisation : CollectiveOrganisationStatus
 
 
 data BargainingPowerStatus : Set where
-  bargainingAbsent bargainingNominal bargainingEffective : BargainingPowerStatus
+  bargainingAbsent : BargainingPowerStatus
+  bargainingNominal : BargainingPowerStatus
+  bargainingEffective : BargainingPowerStatus
 
 data DependenceStatus : Set where
-  lowDependence highDependence : DependenceStatus
+  lowDependence : DependenceStatus
+  highDependence : DependenceStatus
 
 record ExitRefusalLabourState : Set where
   constructor exit-refusal-labour-state

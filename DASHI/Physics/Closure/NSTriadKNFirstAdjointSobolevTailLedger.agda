@@ -32,7 +32,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 data FrozenAnalyticLeg : Set where
-  outputLeg firstAdjointLeg secondAdjointLeg : FrozenAnalyticLeg
+  outputLeg : FrozenAnalyticLeg
+  firstAdjointLeg : FrozenAnalyticLeg
+  secondAdjointLeg : FrozenAnalyticLeg
 
 data EstimateMechanism : Set where
   incompressibilityLowDerivative : EstimateMechanism

@@ -21,13 +21,23 @@ import DASHI.Biology.TrumpPsychogeographicPolicyAtlasExact as Trump
 ------------------------------------------------------------------------
 
 data AuthorityScale : Set where
-  familyScale institutionScale stateScale territorialScale : AuthorityScale
+  familyScale : AuthorityScale
+  institutionScale : AuthorityScale
+  stateScale : AuthorityScale
+  territorialScale : AuthorityScale
 
 data ExitMode : Set where
-  physicalExit materialExit socialBelongingExit epistemicExit territorialExit proceduralExit : ExitMode
+  physicalExit : ExitMode
+  materialExit : ExitMode
+  socialBelongingExit : ExitMode
+  epistemicExit : ExitMode
+  territorialExit : ExitMode
+  proceduralExit : ExitMode
 
 data ConstraintMode : Set where
-  bodilyConstraint detentionConstraint materialDependencyConstraint : ConstraintMode
+  bodilyConstraint : ConstraintMode
+  detentionConstraint : ConstraintMode
+  materialDependencyConstraint : ConstraintMode
   socialSanctionConstraint beliefClosureConstraint landDisplacementConstraint : ConstraintMode
   administrativeClassificationConstraint : ConstraintMode
 

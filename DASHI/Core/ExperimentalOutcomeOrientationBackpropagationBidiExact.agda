@@ -17,10 +17,14 @@ import DASHI.Core.TypedProvenanceDependencyGraphExact as Dependency
 ------------------------------------------------------------------------
 
 data ExperimentalOutcome : Set where
-  supportive adverse indeterminate : ExperimentalOutcome
+  supportive : ExperimentalOutcome
+  adverse : ExperimentalOutcome
+  indeterminate : ExperimentalOutcome
 
 data OrientationReading : Set where
-  positiveOrientation negativeOrientation degenerateOrientation : OrientationReading
+  positiveOrientation : OrientationReading
+  negativeOrientation : OrientationReading
+  degenerateOrientation : OrientationReading
 
 orientationOf : ExperimentalOutcome → OrientationReading
 orientationOf supportive = positiveOrientation

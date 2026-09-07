@@ -21,7 +21,9 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data SourceKind : Set where
-  peerReviewedConference arxivPreprint webEssay : SourceKind
+  peerReviewedConference : SourceKind
+  arxivPreprint : SourceKind
+  webEssay : SourceKind
 
 data SourceRole : Set where
   relationDecoderPropertyStructure : SourceRole

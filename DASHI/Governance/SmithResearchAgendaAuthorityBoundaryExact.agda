@@ -16,16 +16,20 @@ import DASHI.Governance.IndigenousAuthoritySourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data AgendaOrigin : Set where
-  communityAgenda externalAgenda : AgendaOrigin
+  communityAgenda : AgendaOrigin
+  externalAgenda : AgendaOrigin
 
 data DataQuality : Set where
-  incorrectData correctData : DataQuality
+  incorrectData : DataQuality
+  correctData : DataQuality
 
 data DownstreamUse : Set where
-  downstreamUnauthorized downstreamAuthorized : DownstreamUse
+  downstreamUnauthorized : DownstreamUse
+  downstreamAuthorized : DownstreamUse
 
 data DecolonizingAgendaStatus : Set where
-  agendaNotCommunityAuthorized agendaCommunityAuthorized : DecolonizingAgendaStatus
+  agendaNotCommunityAuthorized : DecolonizingAgendaStatus
+  agendaCommunityAuthorized : DecolonizingAgendaStatus
 
 agendaStatus : AgendaOrigin → DecolonizingAgendaStatus
 agendaStatus communityAgenda = agendaCommunityAuthorized

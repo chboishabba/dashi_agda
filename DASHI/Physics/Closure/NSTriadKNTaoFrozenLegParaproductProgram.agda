@@ -32,13 +32,19 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 data TriadLeg : Set where
-  leftLeg rightLeg outputLeg : TriadLeg
+  leftLeg : TriadLeg
+  rightLeg : TriadLeg
+  outputLeg : TriadLeg
 
 data FrozenLeg : Set where
-  freezeOutput freezeLeft freezeRight : FrozenLeg
+  freezeOutput : FrozenLeg
+  freezeLeft : FrozenLeg
+  freezeRight : FrozenLeg
 
 data RelativeRole : Set where
-  inputA inputB frozen : RelativeRole
+  inputA : RelativeRole
+  inputB : RelativeRole
+  frozen : RelativeRole
 
 roleUnderFreeze : FrozenLeg → TriadLeg → RelativeRole
 roleUnderFreeze freezeOutput leftLeg = inputA

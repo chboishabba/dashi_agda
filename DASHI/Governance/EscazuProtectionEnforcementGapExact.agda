@@ -17,10 +17,12 @@ import DASHI.Governance.EnvironmentalAuthoritySourceRegistryRound2Exact as Sourc
 ------------------------------------------------------------------------
 
 data TreatyStatus : Set where
-  noTreatyInstrument treatyInstrumentInForce : TreatyStatus
+  noTreatyInstrument : TreatyStatus
+  treatyInstrumentInForce : TreatyStatus
 
 data EnforcementStatus : Set where
-  effectiveProtection continuingLethalRisk : EnforcementStatus
+  effectiveProtection : EnforcementStatus
+  continuingLethalRisk : EnforcementStatus
 
 record ProtectionSystemState : Set where
   constructor protectionSystemState

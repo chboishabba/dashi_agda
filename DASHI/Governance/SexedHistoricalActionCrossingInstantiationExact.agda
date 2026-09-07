@@ -19,10 +19,16 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 ------------------------------------------------------------------------
 
 data HistoricalStrand : Set where
-  femininePosition masculinePosition institution network : HistoricalStrand
+  femininePosition : HistoricalStrand
+  masculinePosition : HistoricalStrand
+  institution : HistoricalStrand
+  network : HistoricalStrand
 
 data HistoricalAction : Set where
-  supportAction institutionaliseAction repairAction counterformationAction : HistoricalAction
+  supportAction : HistoricalAction
+  institutionaliseAction : HistoricalAction
+  repairAction : HistoricalAction
+  counterformationAction : HistoricalAction
 
 supportCrossing : Trace.CrossingEvent HistoricalStrand HistoricalAction
 supportCrossing =
@@ -69,14 +75,18 @@ counterformationThenRepair =
 ------------------------------------------------------------------------
 
 data TraceCode : Set where
-  supportInstitutionCode institutionSupportCode : TraceCode
+  supportInstitutionCode : TraceCode
+  institutionSupportCode : TraceCode
   repairCounterformationCode counterformationRepairCode : TraceCode
 
 data CoarseEndpoint : Set where
   reciprocalPresentSurface : CoarseEndpoint
 
 data HistoricalProvenance : Set where
-  supportFirst institutionFirst repairFirst counterformationFirst : HistoricalProvenance
+  supportFirst : HistoricalProvenance
+  institutionFirst : HistoricalProvenance
+  repairFirst : HistoricalProvenance
+  counterformationFirst : HistoricalProvenance
 
 coarseEndpoint : TraceCode → CoarseEndpoint
 coarseEndpoint _ = reciprocalPresentSurface

@@ -111,10 +111,12 @@ data CoarsePopulation : Set where
   sameDensity : CoarsePopulation
 
 data EnvironmentCase : Set where
-  lowRetention highRetention : EnvironmentCase
+  lowRetention : EnvironmentCase
+  highRetention : EnvironmentCase
 
 data SignalState : Set where
-  belowThreshold aboveThreshold : SignalState
+  belowThreshold : SignalState
+  aboveThreshold : SignalState
 
 coarsePopulation : EnvironmentCase → CoarsePopulation
 coarsePopulation lowRetention = sameDensity

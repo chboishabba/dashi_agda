@@ -24,7 +24,8 @@ import DASHI.Foundations.BalancedTernaryAntipodalResidualCodecExact as Codec
 import DASHI.Foundations.SSPTritCarrier as SSP
 
 data C2 : Set where
-  identity flip : C2
+  identity : C2
+  flip : C2
 
 combineC2 : C2 -> C2 -> C2
 combineC2 identity h = h

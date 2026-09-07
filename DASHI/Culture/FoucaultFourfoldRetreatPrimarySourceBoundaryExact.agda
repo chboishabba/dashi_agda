@@ -140,7 +140,10 @@ data AxisEvidenceStatus : Set where
 
 
 data FourfoldAxis : Set where
-  classAxis imperialismAxis materialismScienceAxis reasonAxis : FourfoldAxis
+  classAxis : FourfoldAxis
+  imperialismAxis : FourfoldAxis
+  materialismScienceAxis : FourfoldAxis
+  reasonAxis : FourfoldAxis
 
 foucaultAxisStatus : FourfoldAxis → AxisEvidenceStatus
 foucaultAxisStatus classAxis = openNeedsBroaderPrimaryCorpus

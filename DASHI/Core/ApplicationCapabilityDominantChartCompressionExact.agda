@@ -15,13 +15,15 @@ import DASHI.Core.ApplicationTransformationCapabilityBidiExact as Application
 ------------------------------------------------------------------------
 
 data ApplicationState : Set where
-  publicOnlyState calibratedApplicationState : ApplicationState
+  publicOnlyState : ApplicationState
+  calibratedApplicationState : ApplicationState
 
 data PublicScienceSurface : Set where
   samePublishedPhysics : PublicScienceSurface
 
 data OperationalCapabilityState : Set where
-  unreconstructedCapability reconstructedCapability : OperationalCapabilityState
+  unreconstructedCapability : OperationalCapabilityState
+  reconstructedCapability : OperationalCapabilityState
 
 publicScienceObserver : ApplicationState → PublicScienceSurface
 publicScienceObserver _ = samePublishedPhysics

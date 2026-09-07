@@ -38,7 +38,9 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 ------------------------------------------------------------------------
 
 data BranchingRegime : Set where
-  subcritical critical supercritical : BranchingRegime
+  subcritical : BranchingRegime
+  critical : BranchingRegime
+  supercritical : BranchingRegime
 
 classifyScaled : Nat → Nat → BranchingRegime
 classifyScaled zero zero = critical

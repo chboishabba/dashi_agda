@@ -56,7 +56,8 @@ data DrugCategoryHistoryState : Set where
 
 
 data ValueSign : Set where
-  negativeValue positiveValue : ValueSign
+  negativeValue : ValueSign
+  positiveValue : ValueSign
 
 data CategoryAuthorPosition : Set where
   externalStateAuthor : CategoryAuthorPosition

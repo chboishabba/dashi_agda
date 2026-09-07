@@ -113,7 +113,11 @@ outerSubsetCardinalityExact cell
 ... | true  | true  | true  | true  = refl
 
 data OrbitClass : Set where
-  infrared oneOuter twoOuter threeOuter fourOuter : OrbitClass
+  infrared : OrbitClass
+  oneOuter : OrbitClass
+  twoOuter : OrbitClass
+  threeOuter : OrbitClass
+  fourOuter : OrbitClass
 
 orbitClass : Grid.GridCell4 → OrbitClass
 orbitClass cell with outerCount cell

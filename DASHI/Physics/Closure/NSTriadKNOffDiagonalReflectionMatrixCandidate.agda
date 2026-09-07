@@ -21,7 +21,12 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 data ReflectionChart : Set where
-  yzPlus yzMinus xzPlus xzMinus xyPlus xyMinus : ReflectionChart
+  yzPlus : ReflectionChart
+  yzMinus : ReflectionChart
+  xzPlus : ReflectionChart
+  xzMinus : ReflectionChart
+  xyPlus : ReflectionChart
+  xyMinus : ReflectionChart
 
 chartCount : Nat
 chartCount = 6

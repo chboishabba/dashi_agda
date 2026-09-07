@@ -132,13 +132,15 @@ canonicalNoAutomaticPromotionBoundary =
     false refl false refl false refl false refl false refl false refl
 
 data FormationState : Set where
-  authorityThreatRoute alternativeRoute : FormationState
+  authorityThreatRoute : FormationState
+  alternativeRoute : FormationState
 
 data BehaviourSurface : Set where
   sameConformingSurface : BehaviourSurface
 
 data FormationRoute : Set where
-  authorityThreatFormation alternativeFormation : FormationRoute
+  authorityThreatFormation : FormationRoute
+  alternativeFormation : FormationRoute
 
 behaviourSurface : FormationState → BehaviourSurface
 behaviourSurface authorityThreatRoute = sameConformingSurface

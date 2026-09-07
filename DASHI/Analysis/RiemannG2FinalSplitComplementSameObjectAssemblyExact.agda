@@ -156,7 +156,9 @@ data FinalAssemblyPayment : Set where
 
 
 data PaymentStatus : Set where
-  pruned live downstream : PaymentStatus
+  pruned : PaymentStatus
+  live : PaymentStatus
+  downstream : PaymentStatus
 
 paymentStatus : FinalAssemblyPayment → PaymentStatus
 paymentStatus rebuildFinalContradictionCompiler = pruned

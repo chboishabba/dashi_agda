@@ -102,7 +102,12 @@ eval369-is-multiple-of-three e =
 -- The common refinement of the six- and nine-sector grids is C18.
 
 data Phase18 : Set where
-  p18-0 p18-1 p18-2 p18-3 p18-4 p18-5 : Phase18
+  p18-0 : Phase18
+  p18-1 : Phase18
+  p18-2 : Phase18
+  p18-3 : Phase18
+  p18-4 : Phase18
+  p18-5 : Phase18
   p18-6 p18-7 p18-8 p18-9 p18-10 p18-11 : Phase18
   p18-12 p18-13 p18-14 p18-15 p18-16 p18-17 : Phase18
 

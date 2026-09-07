@@ -18,7 +18,9 @@ import DASHI.Core.NDimParetoHyperfabricExact as NDim
 ------------------------------------------------------------------------
 
 data SchedulerAxis9 : Set where
-  gainAxis relevanceAxis splitAxis : SchedulerAxis9
+  gainAxis : SchedulerAxis9
+  relevanceAxis : SchedulerAxis9
+  splitAxis : SchedulerAxis9
   costAxis authorityAxis permissionAxis : SchedulerAxis9
   targetAxis pathAxis closureAxis : SchedulerAxis9
 
@@ -30,7 +32,9 @@ schedulerAxisCountIsNine : schedulerAxisCount ≡ 9
 schedulerAxisCountIsNine = refl
 
 data AxisView : Set where
-  epistemicView governanceView adaptiveContextView : AxisView
+  epistemicView : AxisView
+  governanceView : AxisView
+  adaptiveContextView : AxisView
 
 axisView : SchedulerAxis9 → AxisView
 axisView gainAxis = epistemicView

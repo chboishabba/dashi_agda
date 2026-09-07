@@ -20,7 +20,8 @@ import DASHI.Algebra.BalancedTernary as BT
 ------------------------------------------------------------------------
 
 data Orientation : Set where
-  forward reverse : Orientation
+  forward : Orientation
+  reverse : Orientation
 
 record SixCoordinates : Set where
   constructor sixCoordinates
@@ -114,7 +115,8 @@ triToBalanced Base.tri-high = BT.pos
 ------------------------------------------------------------------------
 
 data ZeroFibre6 : Set where
-  zeroForward zeroReverse : ZeroFibre6
+  zeroForward : ZeroFibre6
+  zeroReverse : ZeroFibre6
 
 zeroHex : ZeroFibre6 → Base.HexTruth
 zeroHex zeroForward = Base.hex-2
@@ -125,7 +127,9 @@ zeroHexProjectsToMid zeroForward = refl
 zeroHexProjectsToMid zeroReverse = refl
 
 data ZeroFibre9 : Set where
-  zeroRelLow zeroRelMid zeroRelHigh : ZeroFibre9
+  zeroRelLow : ZeroFibre9
+  zeroRelMid : ZeroFibre9
+  zeroRelHigh : ZeroFibre9
 
 zeroNonary : ZeroFibre9 → Base.NonaryTruth
 zeroNonary zeroRelLow = Base.non-3

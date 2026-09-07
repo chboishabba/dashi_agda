@@ -71,7 +71,8 @@ open PrimePairRelationalAdmission public
 ------------------------------------------------------------------------
 
 data ToyPrimeIndex : Set where
-  p₂ p₃ : ToyPrimeIndex
+  p₂ : ToyPrimeIndex
+  p₃ : ToyPrimeIndex
 
 toyMismatchKernel : ToyPrimeIndex → ToyPrimeIndex → Nat
 toyMismatchKernel p₂ p₂ = 0

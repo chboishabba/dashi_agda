@@ -33,7 +33,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 ------------------------------------------------------------------------
 
 data GramControlLevel : Set where
-  pairwiseCS absoluteSchur blockOperator signedResolvent : GramControlLevel
+  pairwiseCS : GramControlLevel
+  absoluteSchur : GramControlLevel
+  blockOperator : GramControlLevel
+  signedResolvent : GramControlLevel
 
 ------------------------------------------------------------------------
 -- Certificate/refutation carriers.  They are deliberately distinct types:

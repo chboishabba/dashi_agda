@@ -46,16 +46,19 @@ data SituatedPerson : Set where
   canonicalPerson : SituatedPerson
 
 data PublicEnvironment : Set where
-  lowDemandThirdPlace highDemandRestrictedSpace : PublicEnvironment
+  lowDemandThirdPlace : PublicEnvironment
+  highDemandRestrictedSpace : PublicEnvironment
 
 data DeclaredAccess : Set where
   nominallyPublic : DeclaredAccess
 
 data RealizedAccess : Set where
-  remainAvailable remainBlocked : RealizedAccess
+  remainAvailable : RealizedAccess
+  remainBlocked : RealizedAccess
 
 data ResidualStatus : Set where
-  declaredRealizedAligned declaredRealizedMismatch : ResidualStatus
+  declaredRealizedAligned : ResidualStatus
+  declaredRealizedMismatch : ResidualStatus
 
 declaredAccess : PublicEnvironment → DeclaredAccess
 declaredAccess lowDemandThirdPlace = nominallyPublic

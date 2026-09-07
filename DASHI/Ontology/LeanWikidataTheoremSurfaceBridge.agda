@@ -9,7 +9,10 @@ open import DASHI.Ontology.LeanWikidataCertificateBridge
 open import DASHI.Ontology.LeanWikidataFullSourceManifest
 
 data LeanProofRole : Set where
-  structuralTheorem checkerSoundness checkerExactness crossOntologyTheorem : LeanProofRole
+  structuralTheorem : LeanProofRole
+  checkerSoundness : LeanProofRole
+  checkerExactness : LeanProofRole
+  crossOntologyTheorem : LeanProofRole
   semanticExactness provenancePreservation dataModelTheorem contextPreservation : LeanProofRole
   identityTransport preservationTheorem repairSoundness diagnosticExactness : LeanProofRole
   serializationExactness negativeConstraintTheorem : LeanProofRole

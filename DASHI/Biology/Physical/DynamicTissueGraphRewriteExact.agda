@@ -26,7 +26,13 @@ record TissueGraphState : Set where
 open TissueGraphState public
 
 data CellAction : Set where
-  divide die connect disconnect move differentiate attach : CellAction
+  divide : CellAction
+  die : CellAction
+  connect : CellAction
+  disconnect : CellAction
+  move : CellAction
+  differentiate : CellAction
+  attach : CellAction
 
 rewrite : CellAction → TissueGraphState → TissueGraphState
 rewrite divide (tissueGraphState n j p d a) =

@@ -16,7 +16,9 @@ import DASHI.Algebra.BalancedTernary as BT
 ------------------------------------------------------------------------
 
 data Phase3 : Set where
-  phase0 phase1 phase2 : Phase3
+  phase0 : Phase3
+  phase1 : Phase3
+  phase2 : Phase3
 
 rotatePhase : Phase3 → Phase3
 rotatePhase phase0 = phase1
@@ -40,7 +42,9 @@ record PhaseEnrichedTrit : Set where
 open PhaseEnrichedTrit public
 
 data NatOrdering : Set where
-  less equal greater : NatOrdering
+  less : NatOrdering
+  equal : NatOrdering
+  greater : NatOrdering
 
 compareNat : Nat → Nat → NatOrdering
 compareNat zero zero = equal
@@ -142,7 +146,9 @@ zeroFromPhaseShift = zeroFibreWitness phaseShiftedBalancedOpposition refl
 ------------------------------------------------------------------------
 
 data PhaseRelation : Set where
-  aligned opposed unresolved : PhaseRelation
+  aligned : PhaseRelation
+  opposed : PhaseRelation
+  unresolved : PhaseRelation
 
 interferenceObservation : PhaseRelation → BT.Trit
 interferenceObservation aligned = BT.pos

@@ -36,7 +36,11 @@ import DASHI.Governance.DevelopmentalInfluenceSourceAtlas as Sources
 ------------------------------------------------------------------------
 
 data EvidenceGrade : Set where
-  gradeA gradeB gradeC gradeD gradeE : EvidenceGrade
+  gradeA : EvidenceGrade
+  gradeB : EvidenceGrade
+  gradeC : EvidenceGrade
+  gradeD : EvidenceGrade
+  gradeE : EvidenceGrade
 
 data PathwayRelation : Set where
   directDocumentedTransfer : PathwayRelation
@@ -49,7 +53,13 @@ data PathwayRelation : Set where
   analogyOnly : PathwayRelation
 
 data NodeKind : Set where
-  organisation person community technique narrative platform institution : NodeKind
+  organisation : NodeKind
+  person : NodeKind
+  community : NodeKind
+  technique : NodeKind
+  narrative : NodeKind
+  platform : NodeKind
+  institution : NodeKind
 
 record GenealogyNode : Set where
   constructor genealogyNode

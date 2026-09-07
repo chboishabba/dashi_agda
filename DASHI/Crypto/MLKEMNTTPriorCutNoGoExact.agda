@@ -23,7 +23,8 @@ import DASHI.Crypto.MLKEMNTTDataflowCouplingExact as NTT
 ------------------------------------------------------------------------
 
 data Side : Set where
-  leftSide rightSide : Side
+  leftSide : Side
+  rightSide : Side
 
 record DisconnectedComponentCut
     (component : NTT.ResidueComponent) : Set₁ where

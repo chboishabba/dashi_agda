@@ -33,14 +33,20 @@ import DASHI.Reasoning.StructuralMetaphorSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data BraidFeature : Set where
-  multipleStrands retainedDifference reciprocity heldTension relationalCoherence : BraidFeature
+  multipleStrands : BraidFeature
+  retainedDifference : BraidFeature
+  reciprocity : BraidFeature
+  heldTension : BraidFeature
+  relationalCoherence : BraidFeature
 
 
 data CalibrationStage : Set where
-  initialBraidFrame relationallyCalibratedBraidFrame : CalibrationStage
+  initialBraidFrame : CalibrationStage
+  relationallyCalibratedBraidFrame : CalibrationStage
 
 data Salience : Set where
-  backgroundFeature salientFeature : Salience
+  backgroundFeature : Salience
+  salientFeature : Salience
 
 featureSalience : CalibrationStage → BraidFeature → Salience
 featureSalience initialBraidFrame multipleStrands = salientFeature
@@ -67,13 +73,15 @@ heldTensionBecomesSalient = refl
 ------------------------------------------------------------------------
 
 data ToyBraidSituation : Set where
-  merelyJuxtaposed reciprocallyHeld : ToyBraidSituation
+  merelyJuxtaposed : ToyBraidSituation
+  reciprocallyHeld : ToyBraidSituation
 
 data InitialBraidReading : Set where
   severalStrands : InitialBraidReading
 
 data CalibratedBraidReading : Set where
-  juxtapositionReading reciprocalTensionReading : CalibratedBraidReading
+  juxtapositionReading : CalibratedBraidReading
+  reciprocalTensionReading : CalibratedBraidReading
 
 initialReading : ToyBraidSituation → InitialBraidReading
 initialReading _ = severalStrands

@@ -95,7 +95,10 @@ coarseProjectionIsNotInjective =
 ------------------------------------------------------------------------
 
 data Superply : Set where
-  superply0 superply1 superply2 superply3 : Superply
+  superply0 : Superply
+  superply1 : Superply
+  superply2 : Superply
+  superply3 : Superply
   superply4 superply5 superply6 superply7 : Superply
 
 data PlyPosition : Set where

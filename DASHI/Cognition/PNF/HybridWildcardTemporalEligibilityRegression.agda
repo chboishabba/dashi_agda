@@ -15,7 +15,8 @@ open import Data.Product using (_×_; _,_)
 ------------------------------------------------------------------------
 
 data Occurrence : Set where
-  earlierOccurrence laterOccurrence : Occurrence
+  earlierOccurrence : Occurrence
+  laterOccurrence : Occurrence
 
 data Demand : Set where
   demandBetweenOccurrences : Demand

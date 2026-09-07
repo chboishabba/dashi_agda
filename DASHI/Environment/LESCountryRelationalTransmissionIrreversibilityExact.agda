@@ -115,7 +115,8 @@ data FineRelationalState : Set where
 
 
 data TransmissionState : Set where
-  transmissionAbsent transmissionLiving : TransmissionState
+  transmissionAbsent : TransmissionState
+  transmissionLiving : TransmissionState
 
 coarseContinuityObserver : FineRelationalState → CoarseCountryContinuitySurface
 coarseContinuityObserver _ = sameCoarseContinuity
@@ -151,10 +152,12 @@ data TransmissionMoment : Set where
 
 
 data HistoricalOccurrenceState : Set where
-  occurredHistorically didNotOccurHistorically : HistoricalOccurrenceState
+  occurredHistorically : HistoricalOccurrenceState
+  didNotOccurHistorically : HistoricalOccurrenceState
 
 data FutureRelationalCapacity : Set where
-  futureReconstitutionOpen futureReconstitutionBlocked : FutureRelationalCapacity
+  futureReconstitutionOpen : FutureRelationalCapacity
+  futureReconstitutionBlocked : FutureRelationalCapacity
 
 historicalOccurrence : TransmissionMoment → HistoricalOccurrenceState
 historicalOccurrence transmissionOccurredAtHistoricalMoment = occurredHistorically
@@ -246,7 +249,8 @@ undripCountryFutureGenerationRelation = relational-source-proposition
 ------------------------------------------------------------------------
 
 data PlaceRelation : Set where
-  relationToThisCountry relationToDifferentCountry : PlaceRelation
+  relationToThisCountry : PlaceRelation
+  relationToDifferentCountry : PlaceRelation
 
 data GenericLandArea : Set where
   equalArea : GenericLandArea
@@ -255,7 +259,8 @@ areaObserver : PlaceRelation → GenericLandArea
 areaObserver _ = equalArea
 
 data CountryAttachment : Set where
-  thisCountryAttachment differentCountryAttachment : CountryAttachment
+  thisCountryAttachment : CountryAttachment
+  differentCountryAttachment : CountryAttachment
 
 attachment : PlaceRelation → CountryAttachment
 attachment relationToThisCountry = thisCountryAttachment

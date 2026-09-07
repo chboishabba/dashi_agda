@@ -21,7 +21,9 @@ open import DASHI.Physics.ShiftWaveRefinementHierarchy as SWRH
 --   * a finite two-step history surface for current candidates.
 
 data BoundedStepCount : Set where
-  zeroStep oneStep twoStep : BoundedStepCount
+  zeroStep : BoundedStepCount
+  oneStep : BoundedStepCount
+  twoStep : BoundedStepCount
 
 iterateBounded :
   {A : Set} →

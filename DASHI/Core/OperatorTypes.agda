@@ -27,7 +27,10 @@ record Regularizer {S : Set} (K : S → S) : Set where
 
 -- A simple operator “tag” classifier you can populate later.
 data OpClass : Set where
-  invertible projection regular other : OpClass
+  invertible : OpClass
+  projection : OpClass
+  regular : OpClass
+  other : OpClass
 
 -- Classification is a *goal*: you can decide per operator, not assumed.
 record Classifies {S : Set} (K : S → S) : Set₁ where

@@ -40,7 +40,12 @@ data Round6Leaf : Set where
   nestedLocalGlobalUnitBridge : Round6Leaf
 
 data LeafState : Set where
-  owned generated live pruned downstream parallel : LeafState
+  owned : LeafState
+  generated : LeafState
+  live : LeafState
+  pruned : LeafState
+  downstream : LeafState
+  parallel : LeafState
 
 leafState : Round6Leaf → LeafState
 leafState appraisalX6CarrierChart = owned

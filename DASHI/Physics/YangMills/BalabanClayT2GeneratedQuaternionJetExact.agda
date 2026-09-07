@@ -28,10 +28,15 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 
 data Link4 : Set where
-  link0 link1 link2 link3 : Link4
+  link0 : Link4
+  link1 : Link4
+  link2 : Link4
+  link3 : Link4
 
 data Coord3 : Set where
-  coord0 coord1 coord2 : Coord3
+  coord0 : Coord3
+  coord1 : Coord3
+  coord2 : Coord3
 
 record Variable12 : Set where
   constructor variable
@@ -42,7 +47,8 @@ record Variable12 : Set where
 open Variable12 public
 
 data Sign : Set where
-  positive negative : Sign
+  positive : Sign
+  negative : Sign
 
 record SignedCoefficient : Set where
   constructor signed

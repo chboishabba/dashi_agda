@@ -16,7 +16,10 @@ data Member {A : Set} (x : A) : List A → Set where
   memberThere : ∀ {y xs} → Member x xs → Member x (y ∷ xs)
 
 data RelationalRole : Set where
-  parentRole childRole caregiverRole dependentRole : RelationalRole
+  parentRole : RelationalRole
+  childRole : RelationalRole
+  caregiverRole : RelationalRole
+  dependentRole : RelationalRole
   siblingRole grandparentRole clinicianRole thirdPartyRole : RelationalRole
 
 record Participant : Set where
@@ -28,11 +31,16 @@ record Participant : Set where
 open Participant public
 
 data Topic : Set where
-  storyTopic practicalTopic planningTopic agreementTopic : Topic
+  storyTopic : Topic
+  practicalTopic : Topic
+  planningTopic : Topic
+  agreementTopic : Topic
   allegationTopic ruptureTopic repairTopic familyHistoryTopic : Topic
 
 data ContributionKind : Set where
-  storyContribution questionContribution preferenceContribution : ContributionKind
+  storyContribution : ContributionKind
+  questionContribution : ContributionKind
+  preferenceContribution : ContributionKind
   proposalContribution objectionContribution clarificationContribution : ContributionKind
   allegationContribution repairContribution withdrawalContribution : ContributionKind
 
@@ -46,33 +54,55 @@ record Contribution : Set where
 open Contribution public
 
 data RepresentationType : Set where
-  presentFeeling presentPreference rememberedEvent attributedIntention : RepresentationType
+  presentFeeling : RepresentationType
+  presentPreference : RepresentationType
+  rememberedEvent : RepresentationType
+  attributedIntention : RepresentationType
   expressedPreference proposalRepresentation assentRepresentation : RepresentationType
   commitmentRepresentation : RepresentationType
   unilateralDecisionRepresentation jointAgreementRepresentation : RepresentationType
   publicFactRepresentation unresolvedRepresentation : RepresentationType
 
 data DecisionKind : Set where
-  noDecision unilateralDecision jointDecision deferredDecision : DecisionKind
+  noDecision : DecisionKind
+  unilateralDecision : DecisionKind
+  jointDecision : DecisionKind
+  deferredDecision : DecisionKind
 
 data RuptureStatus : Set where
-  noRupture ruptureOpen ruptureAcknowledged ruptureRepaired : RuptureStatus
+  noRupture : RuptureStatus
+  ruptureOpen : RuptureStatus
+  ruptureAcknowledged : RuptureStatus
+  ruptureRepaired : RuptureStatus
 
 data Stance : Set where
-  rejectStance openStance affirmStance : Stance
+  rejectStance : Stance
+  openStance : Stance
+  affirmStance : Stance
 
 data ZeroKind : Set where
-  absentZero openZero suspendedZero cancelledZero : ZeroKind
+  absentZero : ZeroKind
+  openZero : ZeroKind
+  suspendedZero : ZeroKind
+  cancelledZero : ZeroKind
   expiredUnweighedZero completedNeutralZero blockedZero handoverZero : ZeroKind
 
 data DeliberativeStatus : Set where
-  notOpen openOption consideringOption : DeliberativeStatus
+  notOpen : DeliberativeStatus
+  openOption : DeliberativeStatus
+  consideringOption : DeliberativeStatus
 
 data SelectionStatus : Set where
-  noPreference preferOption intendOption selectedOption : SelectionStatus
+  noPreference : SelectionStatus
+  preferOption : SelectionStatus
+  intendOption : SelectionStatus
+  selectedOption : SelectionStatus
 
 data ObligationStatus : Set where
-  noObligation proposedObligation acceptedCommitment revokedCommitment : ObligationStatus
+  noObligation : ObligationStatus
+  proposedObligation : ObligationStatus
+  acceptedCommitment : ObligationStatus
+  revokedCommitment : ObligationStatus
 
 record CapacityState : Set where
   constructor capacityState

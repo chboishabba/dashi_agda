@@ -40,7 +40,8 @@ record SignedFraction : Set where
 open SignedFraction public
 
 data ProbeOutcome : Set where
-  zeroSlack infeasible : ProbeOutcome
+  zeroSlack : ProbeOutcome
+  infeasible : ProbeOutcome
 
 record RegularityProbe : Set where
   constructor probe

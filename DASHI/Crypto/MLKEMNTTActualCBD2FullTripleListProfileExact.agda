@@ -41,7 +41,11 @@ q : Nat
 q = 3329
 
 data D5 : Set where
-  d0 d1 d2 d3 d4 : D5
+  d0 : D5
+  d1 : D5
+  d2 : D5
+  d3 : D5
+  d4 : D5
 
 residue : D5 → Nat
 residue d0 = 3327

@@ -26,10 +26,12 @@ open import Data.Empty using (⊥)
 
 
 data Stakeholder : Set where
-  waterCustodian habitatCustodian : Stakeholder
+  waterCustodian : Stakeholder
+  habitatCustodian : Stakeholder
 
 data Plan : Set where
-  waterPlan habitatPlan : Plan
+  waterPlan : Plan
+  habitatPlan : Plan
 
 data StrictPreference : Stakeholder → Plan → Plan → Set where
   waterPrefersWater : StrictPreference waterCustodian waterPlan habitatPlan

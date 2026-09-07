@@ -66,13 +66,17 @@ FactorsThroughRecognition system =
 ------------------------------------------------------------------------
 
 data DemoState : Set where
-  unrecognizedWithoutAuthority unrecognizedWithAuthority recognizedWithAuthority : DemoState
+  unrecognizedWithoutAuthority : DemoState
+  unrecognizedWithAuthority : DemoState
+  recognizedWithAuthority : DemoState
 
 data DemoRecognition : Set where
-  unrecognized recognized : DemoRecognition
+  unrecognized : DemoRecognition
+  recognized : DemoRecognition
 
 data DemoAuthority : Set where
-  absentAuthority presentAuthority : DemoAuthority
+  absentAuthority : DemoAuthority
+  presentAuthority : DemoAuthority
 
 demoRecognition : DemoState → DemoRecognition
 demoRecognition unrecognizedWithoutAuthority = unrecognized

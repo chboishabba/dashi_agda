@@ -115,7 +115,10 @@ publicFactoredCannotSplitSamePublicFibre factored split =
 ------------------------------------------------------------------------
 
 data ObservationOrigin : Set where
-  alreadyPublic protocolOutcome implementationChannel physicalChannel : ObservationOrigin
+  alreadyPublic : ObservationOrigin
+  protocolOutcome : ObservationOrigin
+  implementationChannel : ObservationOrigin
+  physicalChannel : ObservationOrigin
 
 record ObservationCoordinate : Set₁ where
   constructor observationCoordinate

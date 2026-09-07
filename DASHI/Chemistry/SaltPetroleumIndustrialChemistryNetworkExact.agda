@@ -174,7 +174,9 @@ hydrogenToRefineryTreatment =
 ------------------------------------------------------------------------
 
 data PVCFeedAvailability : Set where
-  chlorineOnly ethyleneOnly bothFeedsAvailable : PVCFeedAvailability
+  chlorineOnly : PVCFeedAvailability
+  ethyleneOnly : PVCFeedAvailability
+  bothFeedsAvailable : PVCFeedAvailability
 
 data PVCProductionReady : PVCFeedAvailability → Set where
   pvcReady : PVCProductionReady bothFeedsAvailable

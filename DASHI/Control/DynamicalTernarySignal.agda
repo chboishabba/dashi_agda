@@ -107,10 +107,14 @@ classifyControl stateThreshold motionDeadZone previous current =
     (trendWithDeadZone motionDeadZone previous current)
 
 data AdmissibilityRegime : Set where
-  inadmissible marginal admissible : AdmissibilityRegime
+  inadmissible : AdmissibilityRegime
+  marginal : AdmissibilityRegime
+  admissible : AdmissibilityRegime
 
 data MotionRegime : Set where
-  leaving stationary entering : MotionRegime
+  leaving : MotionRegime
+  stationary : MotionRegime
+  entering : MotionRegime
 
 interpretState : Trit → AdmissibilityRegime
 interpretState neg = inadmissible

@@ -208,7 +208,8 @@ open ExtractiveInquiry public
 ------------------------------------------------------------------------
 
 data DemoAgent : Set where
-  demoResearcher demoStudent : DemoAgent
+  demoResearcher : DemoAgent
+  demoStudent : DemoAgent
 
 data DemoDatum : Set where
   demoStudentFeedback : DemoDatum

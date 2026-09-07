@@ -84,7 +84,11 @@ outerFlipExact Grid.positiveInner = refl
 outerFlipExact Grid.positiveOuter = refl
 
 data GeometricOrbit : Set where
-  infrared rank1 rank2 rank3 rank4 : GeometricOrbit
+  infrared : GeometricOrbit
+  rank1 : GeometricOrbit
+  rank2 : GeometricOrbit
+  rank3 : GeometricOrbit
+  rank4 : GeometricOrbit
 
 rank4Bits : Bool → Bool → Bool → Bool → GeometricOrbit
 rank4Bits false false false false = infrared
@@ -146,7 +150,14 @@ rank4Swap23 true false false true = refl
 rank4Swap23 true true false true = refl
 
 data HyperoctahedralGenerator : Set where
-  identity flip0 flip1 flip2 flip3 swap01 swap12 swap23 : HyperoctahedralGenerator
+  identity : HyperoctahedralGenerator
+  flip0 : HyperoctahedralGenerator
+  flip1 : HyperoctahedralGenerator
+  flip2 : HyperoctahedralGenerator
+  flip3 : HyperoctahedralGenerator
+  swap01 : HyperoctahedralGenerator
+  swap12 : HyperoctahedralGenerator
+  swap23 : HyperoctahedralGenerator
 
 act : HyperoctahedralGenerator → Grid.GridCell4 → Grid.GridCell4
 act identity cell = cell
@@ -224,7 +235,14 @@ rank3Bits false true true = t2
 rank3Bits true true true = t3
 
 data Axis0Orbit : Set where
-  a0t0 a0t1 a0t2 a0t3 a1t0 a1t1 a1t2 a1t3 : Axis0Orbit
+  a0t0 : Axis0Orbit
+  a0t1 : Axis0Orbit
+  a0t2 : Axis0Orbit
+  a0t3 : Axis0Orbit
+  a1t0 : Axis0Orbit
+  a1t1 : Axis0Orbit
+  a1t2 : Axis0Orbit
+  a1t3 : Axis0Orbit
 
 axis0Orbit : Grid.GridCell4 → Axis0Orbit
 axis0Orbit cell with outer (Grid.c0 cell) | rank3Bits (outer (Grid.c1 cell)) (outer (Grid.c2 cell)) (outer (Grid.c3 cell))

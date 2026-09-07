@@ -130,7 +130,8 @@ phaseEncodeAfterDecode (Phase.phase2 , (midValue , highValue))
 ------------------------------------------------------------------------
 
 data UnitPhase2 : Set where
-  unitCyclic unitReflective : UnitPhase2
+  unitCyclic : UnitPhase2
+  unitReflective : UnitPhase2
 
 data NonUnitPhase7 : Set where
   nonUnitLowLow

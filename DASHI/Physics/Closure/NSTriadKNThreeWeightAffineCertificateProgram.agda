@@ -34,10 +34,17 @@ open import Agda.Builtin.Nat using (Nat; _+_)
 import DASHI.Physics.Closure.NSTriadKNTriadicDyadicExponentSystem as Source
 
 data ConstraintOwner : Set where
-  outputConstraint firstAdjointConstraint secondAdjointConstraint : ConstraintOwner
+  outputConstraint : ConstraintOwner
+  firstAdjointConstraint : ConstraintOwner
+  secondAdjointConstraint : ConstraintOwner
 
 data OrderingClass : Set where
-  outputLow leftLow rightLow comparable transition residual : OrderingClass
+  outputLow : OrderingClass
+  leftLow : OrderingClass
+  rightLow : OrderingClass
+  comparable : OrderingClass
+  transition : OrderingClass
+  residual : OrderingClass
 
 record AffineConstraint {s : Level} : Set (lsuc s) where
   field

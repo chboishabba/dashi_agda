@@ -21,7 +21,9 @@ data DutyInterpretation : Set where
 
 
 data DutyObservation : Set where
-  dutyUnsupported dutyUnresolved dutySupported : DutyObservation
+  dutyUnsupported : DutyObservation
+  dutyUnresolved : DutyObservation
+  dutySupported : DutyObservation
 
 currentDutyLive : DutyInterpretation → Set
 currentDutyLive operationalPublicAuthorityConfiguration = ⊤

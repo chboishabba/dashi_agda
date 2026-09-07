@@ -6,7 +6,12 @@ import DASHI.Cognition.PNF.EventAlgebra as PNF
 import DASHI.Cognition.PNF.MemoryFibre as Memory
 
 data PNFLane : Set where
-  memoryLane expectationLane desireLane avoidanceLane actionLane observationLane : PNFLane
+  memoryLane : PNFLane
+  expectationLane : PNFLane
+  desireLane : PNFLane
+  avoidanceLane : PNFLane
+  actionLane : PNFLane
+  observationLane : PNFLane
 
 record PNFLaneState : Set where
   constructor pnfLaneState
@@ -24,7 +29,10 @@ data BraidTransportOutcome : Set where
   transportIncompatible : String → BraidTransportOutcome
 
 data BraidComparison : Set where
-  coherent equivalentUnderQuotient residuallyDifferent incompatible : BraidComparison
+  coherent : BraidComparison
+  equivalentUnderQuotient : BraidComparison
+  residuallyDifferent : BraidComparison
+  incompatible : BraidComparison
 
 memoryToAvoidance : Memory.MemoryFibre → PNF.EventPNF → BraidTransportOutcome
 memoryToAvoidance memory avoided =

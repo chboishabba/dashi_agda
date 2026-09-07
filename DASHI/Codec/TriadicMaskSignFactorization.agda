@@ -123,7 +123,10 @@ encodeTriple-decodeTriple (triple (active positive) (active positive) (active po
 -- The projected support mask has exactly eight shapes.
 
 data Mask3 : Set where
-  mask000 mask001 mask010 mask011 : Mask3
+  mask000 : Mask3
+  mask001 : Mask3
+  mask010 : Mask3
+  mask011 : Mask3
   mask100 mask101 mask110 mask111 : Mask3
 
 isActive : FactorizedTrit → Nat

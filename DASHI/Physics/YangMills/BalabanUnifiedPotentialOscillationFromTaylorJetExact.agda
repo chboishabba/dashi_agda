@@ -178,7 +178,9 @@ stationaryBaseOscillationMajorant dataSet stationary x y =
 ------------------------------------------------------------------------
 
 data ThreePoint : Set where
-  left centre right : ThreePoint
+  left : ThreePoint
+  centre : ThreePoint
+  right : ThreePoint
 
 affinePotential : ℚ → ThreePoint → ℚ
 affinePotential slope left = 0ℚ

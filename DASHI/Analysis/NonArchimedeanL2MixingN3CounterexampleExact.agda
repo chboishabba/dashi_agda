@@ -41,7 +41,14 @@ open import Relation.Nullary.Decidable.Core using (toWitness)
 ------------------------------------------------------------------------
 
 data I8 : Set where
-  i0 i1 i2 i3 i4 i5 i6 i7 : I8
+  i0 : I8
+  i1 : I8
+  i2 : I8
+  i3 : I8
+  i4 : I8
+  i5 : I8
+  i6 : I8
+  i7 : I8
 
 Vec8 : Set
 Vec8 = I8 → ℚ

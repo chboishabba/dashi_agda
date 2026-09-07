@@ -12,16 +12,21 @@ import DASHI.Core.ResidualObserverDependencyExact as Residual
 ------------------------------------------------------------------------
 
 data DeviceState : Set where
-  nominal hiddenInterfaceCoupling : DeviceState
+  nominal : DeviceState
+  hiddenInterfaceCoupling : DeviceState
 
 data DiagnosticAction : Set where
   sweepGateBias : DiagnosticAction
 
 data DeviceIndex : Set where
-  interfaceIndex electrostaticIndex mobilityIndex contactIndex : DeviceIndex
+  interfaceIndex : DeviceIndex
+  electrostaticIndex : DeviceIndex
+  mobilityIndex : DeviceIndex
+  contactIndex : DeviceIndex
 
 data DependencyCode : Set where
-  lowCoupling highCoupling : DependencyCode
+  lowCoupling : DependencyCode
+  highCoupling : DependencyCode
 
 data CoarseElectrical : Set where
   sameCoarseIV : CoarseElectrical
@@ -82,7 +87,10 @@ coarseIVCannotReconstructDependency =
 ------------------------------------------------------------------------
 
 data DiagnosticRoute : Set where
-  inspectInterface inspectElectrostatics inspectMobility inspectContact : DiagnosticRoute
+  inspectInterface : DiagnosticRoute
+  inspectElectrostatics : DiagnosticRoute
+  inspectMobility : DiagnosticRoute
+  inspectContact : DiagnosticRoute
 
 deviceCouplingScore : Residual.CouplingScore DeviceState DiagnosticRoute
 deviceCouplingScore nominal inspectInterface = 0

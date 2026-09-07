@@ -12,7 +12,9 @@ import DASHI.Planning.NonSubstitutionalReparationExact as Repair
 ------------------------------------------------------------------------
 
 data ClosureAuthority : Set where
-  affectedAuthority externalAdministrator wrongdoer : ClosureAuthority
+  affectedAuthority : ClosureAuthority
+  externalAdministrator : ClosureAuthority
+  wrongdoer : ClosureAuthority
 
 data ClosureReceipt : ClosureAuthority → Repair.RepairAxis → Set where
   affectedAuthorityClosesLand :

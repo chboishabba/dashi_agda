@@ -17,16 +17,32 @@ record WaveContact : Set where
     wavelengthBin amplitudeBin phaseBin : Nat
 
 data ColourSurface : Set where
-  opponentSurface pccsSurface rgbaSurface cmykaSurface semioticSurface : ColourSurface
+  opponentSurface : ColourSurface
+  pccsSurface : ColourSurface
+  rgbaSurface : ColourSurface
+  cmykaSurface : ColourSurface
+  semioticSurface : ColourSurface
 
 data ColourOperation : Set where
-  receptorProject opponentProject quantizePCCS emitRGBA printCMYKA interpretSign : ColourOperation
+  receptorProject : ColourOperation
+  opponentProject : ColourOperation
+  quantizePCCS : ColourOperation
+  emitRGBA : ColourOperation
+  printCMYKA : ColourOperation
+  interpretSign : ColourOperation
 
 data ColourResidual : Set where
-  observerVariance deviceVariance contextVariance spectrumLoss qualiaUnrecoverable : ColourResidual
+  observerVariance : ColourResidual
+  deviceVariance : ColourResidual
+  contextVariance : ColourResidual
+  spectrumLoss : ColourResidual
+  qualiaUnrecoverable : ColourResidual
 
 data ColourEvidence : Set where
-  calibrated measured reported candidateModel : ColourEvidence
+  calibrated : ColourEvidence
+  measured : ColourEvidence
+  reported : ColourEvidence
+  candidateModel : ColourEvidence
 
 ColourRole : FormalRole → Set
 ColourRole carrierSpaceRole    = WaveContact

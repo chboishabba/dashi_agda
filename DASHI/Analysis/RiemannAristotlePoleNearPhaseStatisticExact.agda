@@ -122,7 +122,9 @@ data PhaseStatisticSearchPayment : Set where
 
 
 data PaymentState : Set where
-  pruned downstream live : PaymentState
+  pruned : PaymentState
+  downstream : PaymentState
+  live : PaymentState
 
 paymentState : PhaseStatisticSearchPayment → PaymentState
 paymentState constructSecondPhaseStatisticCarrier = pruned

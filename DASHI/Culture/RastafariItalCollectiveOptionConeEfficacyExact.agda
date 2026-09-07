@@ -21,7 +21,9 @@ import DASHI.Governance.TypedBranchingOptionConeBridgeExact as BranchCone
 ------------------------------------------------------------------------
 
 data OrganisationState : Set where
-  individualOnly formalAssociation effectiveCollective : OrganisationState
+  individualOnly : OrganisationState
+  formalAssociation : OrganisationState
+  effectiveCollective : OrganisationState
 
 data LabourOption : Set where
   individualRefusal : LabourOption
@@ -106,10 +108,12 @@ canonicalFormalAssociationExpansion =
 ------------------------------------------------------------------------
 
 data AssociationSurface : Set where
-  associationAbsent associationPresent : AssociationSurface
+  associationAbsent : AssociationSurface
+  associationPresent : AssociationSurface
 
 data CollectiveEfficacy : Set where
-  nominalCollective effectiveCollectivePower : CollectiveEfficacy
+  nominalCollective : CollectiveEfficacy
+  effectiveCollectivePower : CollectiveEfficacy
 
 associationSurface : OrganisationState → AssociationSurface
 associationSurface individualOnly = associationAbsent

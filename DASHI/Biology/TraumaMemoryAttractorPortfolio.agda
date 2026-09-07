@@ -8,7 +8,12 @@ import DASHI.Biology.PredictiveMetastabilityTraumaBridge as Predictive
 import DASHI.Biology.ChildAuthorityTraumaSourceAtlas as Sources
 
 data FeasibilityLayer : Set where
-  logicalLayer institutionalLayer economicLayer agentLayer capacityLayer temporalLayer : FeasibilityLayer
+  logicalLayer : FeasibilityLayer
+  institutionalLayer : FeasibilityLayer
+  economicLayer : FeasibilityLayer
+  agentLayer : FeasibilityLayer
+  capacityLayer : FeasibilityLayer
+  temporalLayer : FeasibilityLayer
 
 record LivenessVector : Set where
   constructor livenessVector
@@ -33,7 +38,12 @@ data InteractionKind : Set where reinforcingInteraction independentInteraction i
 data FeasibilityClass : Set where infeasibleClass serviceableClass fragileClass overloadingClass : FeasibilityClass
 
 data DirectionClass : Set where
-  attractorAlignedClass informationalClass orthogonalClass circulatoryClass adverseClass trapDirectedClass : DirectionClass
+  attractorAlignedClass : DirectionClass
+  informationalClass : DirectionClass
+  orthogonalClass : DirectionClass
+  circulatoryClass : DirectionClass
+  adverseClass : DirectionClass
+  trapDirectedClass : DirectionClass
 
 record BranchValue : Set where
   constructor branchValue
@@ -55,7 +65,10 @@ record BranchInteraction : Set where
 open BranchInteraction public
 
 data ClosureReason : Set where
-  closedBySelection closedByRejection closedByExpiry closedByInfeasibility : ClosureReason
+  closedBySelection : ClosureReason
+  closedByRejection : ClosureReason
+  closedByExpiry : ClosureReason
+  closedByInfeasibility : ClosureReason
   closedByCapacityOverload closedByExternalBlock closedByRevocation : ClosureReason
   closedBySupersession stillOpen : ClosureReason
 
@@ -78,7 +91,10 @@ record BranchMemory : Set where
 open BranchMemory public
 
 data LearningResidueKind : Set where
-  eligibilityResidue documentaryRequirementResidue deadlineResidue contactResidue : LearningResidueKind
+  eligibilityResidue : LearningResidueKind
+  documentaryRequirementResidue : LearningResidueKind
+  deadlineResidue : LearningResidueKind
+  contactResidue : LearningResidueKind
   blockedBasinResidue interactionResidue noReusableResidue : LearningResidueKind
 
 record BranchLearningResidue : Set where
@@ -148,11 +164,14 @@ record MarginalBranchAssessment : Set where
     assessmentReading : String
 
 data TraumaPolicyDeformation : Set where
-  branchHoardingDeformation prematureClosureDeformation threatAttractorSubstitution : TraumaPolicyDeformation
+  branchHoardingDeformation : TraumaPolicyDeformation
+  prematureClosureDeformation : TraumaPolicyDeformation
+  threatAttractorSubstitution : TraumaPolicyDeformation
   contextSensitiveConstraintLearning : TraumaPolicyDeformation
 
 data MemoryCompressionKind : Set where
-  topologyPreservingCompression terminalOutcomeOnlyCompression : MemoryCompressionKind
+  topologyPreservingCompression : MemoryCompressionKind
+  terminalOutcomeOnlyCompression : MemoryCompressionKind
   allNonSuccessCollapsedToZero expectedRealisedDriftCollapsed : MemoryCompressionKind
 
 predictiveTraumaBridge : Predictive.PredictiveMetastabilityTraumaBridge

@@ -17,15 +17,27 @@ import DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact as Constitut
 ------------------------------------------------------------------------
 
 data SoilParameter : Set where
-  thetaResidual thetaSaturated alphaVG nVG saturatedConductivity poreConnectivity : SoilParameter
+  thetaResidual : SoilParameter
+  thetaSaturated : SoilParameter
+  alphaVG : SoilParameter
+  nVG : SoilParameter
+  saturatedConductivity : SoilParameter
+  poreConnectivity : SoilParameter
 
 
 data XylemParameter : Set where
-  maximumConductance vulnerabilityMidpoint vulnerabilitySlope capacitance : XylemParameter
+  maximumConductance : XylemParameter
+  vulnerabilityMidpoint : XylemParameter
+  vulnerabilitySlope : XylemParameter
+  capacitance : XylemParameter
 
 
 data LeafParameter : Set where
-  medlynG0 medlynG1 farquharVcmax farquharJmax leafRespiration : LeafParameter
+  medlynG0 : LeafParameter
+  medlynG1 : LeafParameter
+  farquharVcmax : LeafParameter
+  farquharJmax : LeafParameter
+  leafRespiration : LeafParameter
 
 
 data ParameterKind : Set where
@@ -53,10 +65,16 @@ data MeasurementKind : Set where
 
 
 data ExperimentRole : Set where
-  calibration heldOutValidation interventionTest : ExperimentRole
+  calibration : ExperimentRole
+  heldOutValidation : ExperimentRole
+  interventionTest : ExperimentRole
 
 data Compartment : Set where
-  soil root xylem leaf atmosphere : Compartment
+  soil : Compartment
+  root : Compartment
+  xylem : Compartment
+  leaf : Compartment
+  atmosphere : Compartment
 
 record ParameterSlot : Set where
   constructor parameterSlot

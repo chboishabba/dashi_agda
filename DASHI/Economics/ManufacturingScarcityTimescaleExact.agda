@@ -7,7 +7,11 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data ManufacturingStage : Set where
-  foundry hbm advancedPackaging networking power : ManufacturingStage
+  foundry : ManufacturingStage
+  hbm : ManufacturingStage
+  advancedPackaging : ManufacturingStage
+  networking : ManufacturingStage
+  power : ManufacturingStage
 
 record ManufacturingScarcitySystem : Set₁ where
   field

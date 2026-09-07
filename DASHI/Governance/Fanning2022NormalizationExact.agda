@@ -37,7 +37,8 @@ import DASHI.Governance.SafeJustSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data NormalizationAuthority : Set where
-  timeIndexedBiophysicalBoundary observedPeriodSocialMinimum : NormalizationAuthority
+  timeIndexedBiophysicalBoundary : NormalizationAuthority
+  observedPeriodSocialMinimum : NormalizationAuthority
 
 record BiophysicalNormalizationSpec : Set where
   constructor biophysicalNormalizationSpec

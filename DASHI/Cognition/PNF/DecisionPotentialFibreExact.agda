@@ -14,17 +14,23 @@ open import Data.Product using (_×_; _,_)
 ------------------------------------------------------------------------
 
 data FineState : Set where
-  threatState safetyState saddleState : FineState
+  threatState : FineState
+  safetyState : FineState
+  saddleState : FineState
 
 data CoarseObservation : Set where
   retainedMemory : CoarseObservation
   transitionState : CoarseObservation
 
 data Context : Set where
-  ordinaryContext threatContext blockedSafetyContext ambivalentContext : Context
+  ordinaryContext : Context
+  threatContext : Context
+  blockedSafetyContext : Context
+  ambivalentContext : Context
 
 data PotentialObserver : Set where
-  subjectObserver institutionObserver : PotentialObserver
+  subjectObserver : PotentialObserver
+  institutionObserver : PotentialObserver
 
 project : FineState → CoarseObservation
 project threatState = retainedMemory
@@ -130,7 +136,8 @@ sameMinimumEnergyNeedNotMeanSameState = refl , (λ ())
 ------------------------------------------------------------------------
 
 data SocialState : Set where
-  quietSuppressed quietJust : SocialState
+  quietSuppressed : SocialState
+  quietJust : SocialState
 
 observerPotential : PotentialObserver → SocialState → Nat
 observerPotential institutionObserver quietSuppressed = 0
@@ -151,7 +158,9 @@ observerMinimaNeedNotCoincide ()
 ------------------------------------------------------------------------
 
 data SignedPressure : Set where
-  positive negative neutral : SignedPressure
+  positive : SignedPressure
+  negative : SignedPressure
+  neutral : SignedPressure
 
 signedSumCancels : SignedPressure → SignedPressure → Bool
 signedSumCancels positive negative = true

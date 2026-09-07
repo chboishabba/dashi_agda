@@ -34,7 +34,9 @@ import DASHI.Governance.LegalDecisionDoubleProjectionExact as Legal
 ------------------------------------------------------------------------
 
 data LegalFibreWitnessState : Set where
-  blockedDonorState unresolvedDonorState blockedAdoptiveState : LegalFibreWitnessState
+  blockedDonorState : LegalFibreWitnessState
+  unresolvedDonorState : LegalFibreWitnessState
+  blockedAdoptiveState : LegalFibreWitnessState
 
 toLegalEpisode : LegalFibreWitnessState → Legal.LegalDecisionEpisode
 toLegalEpisode blockedDonorState = Legal.blockedDonor

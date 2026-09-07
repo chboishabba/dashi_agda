@@ -36,7 +36,8 @@ consumerStratum globalCompatibilityConsumer = Strata.edgeCentreStratum
 consumerStratum futureCorridorConsumer = Strata.cornerStratum
 
 data ConsumerDecision : Set where
-  institutionFirst distributedFirst : ConsumerDecision
+  institutionFirst : ConsumerDecision
+  distributedFirst : ConsumerDecision
   localRepairCone counterformationCone : ConsumerDecision
   compatibleGlobal blockedGlobal : ConsumerDecision
   reciprocityCorridor pluralCorridor : ConsumerDecision

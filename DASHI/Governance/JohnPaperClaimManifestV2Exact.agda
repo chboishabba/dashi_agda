@@ -29,11 +29,18 @@ record ClaimKey : Set where
 open ClaimKey public
 
 data ReceiptKind : Set where
-  constructReceipt domainInstantiationReceipt mechanismReceipt etiologyReceipt : ReceiptKind
+  constructReceipt : ReceiptKind
+  domainInstantiationReceipt : ReceiptKind
+  mechanismReceipt : ReceiptKind
+  etiologyReceipt : ReceiptKind
   rightsReceipt legalElementsReceipt normativeReceipt sourceCorrectionReceipt : ReceiptKind
 
 data ReceiptStatus : Set where
-  installed missing rejectedUnlessNarrowed superseded unresolved : ReceiptStatus
+  installed : ReceiptStatus
+  missing : ReceiptStatus
+  rejectedUnlessNarrowed : ReceiptStatus
+  superseded : ReceiptStatus
+  unresolved : ReceiptStatus
 
 record ClaimReceiptStatus : Set where
   constructor claimReceiptStatus

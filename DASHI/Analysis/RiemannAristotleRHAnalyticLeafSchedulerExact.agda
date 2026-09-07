@@ -51,7 +51,10 @@ data RHAnalyticLeaf : Set where
   reuseNameOnlyHardyDonor : RHAnalyticLeaf
 
 data LeafState : Set where
-  closed open blocked pruned : LeafState
+  closed : LeafState
+  open : LeafState
+  blocked : LeafState
+  pruned : LeafState
 
 leafState : RHAnalyticLeaf → LeafState
 leafState buildCanonicalComplexCharacter = open

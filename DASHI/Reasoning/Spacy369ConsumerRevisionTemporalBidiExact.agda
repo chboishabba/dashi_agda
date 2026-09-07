@@ -21,7 +21,9 @@ import DASHI.Reasoning.Spacy369MultiConsumerCoverageSelectiveReopeningExact as R
 ------------------------------------------------------------------------
 
 data RevisionEpoch : Set where
-  operationalEpoch subjectStandingEpoch allConsumersEpoch : RevisionEpoch
+  operationalEpoch : RevisionEpoch
+  subjectStandingEpoch : RevisionEpoch
+  allConsumersEpoch : RevisionEpoch
 
 consumerAt : RevisionEpoch → Scheduler.ConsumerBundle
 consumerAt operationalEpoch = Scheduler.operationalOnly

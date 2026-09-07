@@ -30,7 +30,9 @@ import DASHI.Physics.Closure.NSTriadKNSeparatedComponentLedger as Components
 import DASHI.Physics.Closure.NSTriadKNComponentAffineConstraintLedger as Ledger
 
 data SeparatedRow : Set where
-  outputLeftLow outputRightLow outputOutputLow : SeparatedRow
+  outputLeftLow : SeparatedRow
+  outputRightLow : SeparatedRow
+  outputOutputLow : SeparatedRow
   firstDirectLeftLow firstDirectRightLow firstDirectOutputLow : SeparatedRow
   firstSwappedLeftLow firstSwappedRightLow firstSwappedOutputLow : SeparatedRow
   secondLeftLow secondRightLow secondOutputLow : SeparatedRow
@@ -127,7 +129,9 @@ separatedFamilyMatchesRepositoryArchetype secondRightLow = secondFrozenMatch
 separatedFamilyMatchesRepositoryArchetype secondOutputLow = lowHighMatch
 
 data OverlapRow : Set where
-  outputNear outputTransition outputResidual : OverlapRow
+  outputNear : OverlapRow
+  outputTransition : OverlapRow
+  outputResidual : OverlapRow
   firstNear firstTransition firstResidual : OverlapRow
   secondNear secondTransition secondResidual : OverlapRow
 

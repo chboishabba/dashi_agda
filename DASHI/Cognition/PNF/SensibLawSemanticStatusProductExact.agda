@@ -20,16 +20,29 @@ import DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact as Admis
 ------------------------------------------------------------------------
 
 data ParticipantRole : Set where
-  agent patient theme experiencer recipient beneficiary instrument : ParticipantRole
+  agent : ParticipantRole
+  patient : ParticipantRole
+  theme : ParticipantRole
+  experiencer : ParticipantRole
+  recipient : ParticipantRole
+  beneficiary : ParticipantRole
+  instrument : ParticipantRole
   location source goal cause participantUnresolved : ParticipantRole
 
 data LegalParticipantRole : Set where
-  claimant respondent applicant authority decisionMaker : LegalParticipantRole
+  claimant : LegalParticipantRole
+  respondent : LegalParticipantRole
+  applicant : LegalParticipantRole
+  authority : LegalParticipantRole
+  decisionMaker : LegalParticipantRole
   rightsBearer dutyBearer powerHolder liabilityBearer : LegalParticipantRole
   legalParticipantUnresolved : LegalParticipantRole
 
 data ReferentKind : Set where
-  entityReferent eventualityReferent propositionReferent timeReferent : ReferentKind
+  entityReferent : ReferentKind
+  eventualityReferent : ReferentKind
+  propositionReferent : ReferentKind
+  timeReferent : ReferentKind
   placeReferent ruleReferent documentReferent spanReferent unknownReferent : ReferentKind
 
 
@@ -86,73 +99,130 @@ data TruthStatus : Set where
   falsityAdmitted : TruthStatus
 
 data AttributionRole : Set where
-  author speaker reporter quotedSpeaker propositionSource : AttributionRole
+  author : AttributionRole
+  speaker : AttributionRole
+  reporter : AttributionRole
+  quotedSpeaker : AttributionRole
+  propositionSource : AttributionRole
   attributionUnresolved : AttributionRole
 
 data EvidencePolarity : Set where
-  evidenceFor evidenceAgainst evidenceNeutral evidencePolarityUnresolved : EvidencePolarity
+  evidenceFor : EvidencePolarity
+  evidenceAgainst : EvidencePolarity
+  evidenceNeutral : EvidencePolarity
+  evidencePolarityUnresolved : EvidencePolarity
 
 
 data EvidenceKind : Set where
-  sourceEvidence testimonialEvidence documentaryEvidence parserEvidence : EvidenceKind
+  sourceEvidence : EvidenceKind
+  testimonialEvidence : EvidenceKind
+  documentaryEvidence : EvidenceKind
+  parserEvidence : EvidenceKind
   provenanceEvidence externalEvidence evidenceKindUnresolved : EvidenceKind
 
 data ModalityKind : Set where
-  deontic epistemic dynamicAbility bouletic teleological modalityKindUnresolved : ModalityKind
+  deontic : ModalityKind
+  epistemic : ModalityKind
+  dynamicAbility : ModalityKind
+  bouletic : ModalityKind
+  teleological : ModalityKind
+  modalityKindUnresolved : ModalityKind
 
 
 data ModalForce : Set where
-  obligation permission prohibition possibility necessity modalForceUnresolved : ModalForce
+  obligation : ModalForce
+  permission : ModalForce
+  prohibition : ModalForce
+  possibility : ModalForce
+  necessity : ModalForce
+  modalForceUnresolved : ModalForce
 
 
 data ScopeStatus : Set where
-  scopeUnresolved scopeLocalCandidate scopeResolved : ScopeStatus
+  scopeUnresolved : ScopeStatus
+  scopeLocalCandidate : ScopeStatus
+  scopeResolved : ScopeStatus
 
 data TemporalRelationKind : Set where
-  eventTime referenceTime documentTime legalEffectiveTime : TemporalRelationKind
+  eventTime : TemporalRelationKind
+  referenceTime : TemporalRelationKind
+  documentTime : TemporalRelationKind
+  legalEffectiveTime : TemporalRelationKind
   validityInterval commencement expiry repeal amendment temporalRelationUnresolved : TemporalRelationKind
 
 
 data ConditionKind : Set where
-  antecedentCondition exceptionCondition defeaterCondition unlessCondition : ConditionKind
+  antecedentCondition : ConditionKind
+  exceptionCondition : ConditionKind
+  defeaterCondition : ConditionKind
+  unlessCondition : ConditionKind
   providedThatCondition subjectToCondition overrideCondition conditionUnresolved : ConditionKind
 
 
 data JurisdictionKind : Set where
-  geographicJurisdiction legalSystemJurisdiction courtJurisdiction : JurisdictionKind
+  geographicJurisdiction : JurisdictionKind
+  legalSystemJurisdiction : JurisdictionKind
+  courtJurisdiction : JurisdictionKind
   personalJurisdiction subjectMatterJurisdiction jurisdictionUnresolved : JurisdictionKind
 
 
 data AuthorityKind : Set where
-  sourceAuthority legalAuthority institutionalAuthority promotionAuthority : AuthorityKind
+  sourceAuthority : AuthorityKind
+  legalAuthority : AuthorityKind
+  institutionalAuthority : AuthorityKind
+  promotionAuthority : AuthorityKind
   authorityUnresolved : AuthorityKind
 
 data ApplicabilityStatus : Set where
-  applicabilityUnresolved applicabilityCandidate applicabilityAdmitted : ApplicabilityStatus
+  applicabilityUnresolved : ApplicabilityStatus
+  applicabilityCandidate : ApplicabilityStatus
+  applicabilityAdmitted : ApplicabilityStatus
   inapplicabilityAdmitted : ApplicabilityStatus
 
 data ViolationStatus : Set where
-  violationUnresolved violationCandidate violationAdmitted noViolationAdmitted : ViolationStatus
+  violationUnresolved : ViolationStatus
+  violationCandidate : ViolationStatus
+  violationAdmitted : ViolationStatus
+  noViolationAdmitted : ViolationStatus
 
 
 data LiabilityStatus : Set where
-  liabilityUnresolved liabilityCandidate liabilityAdmitted noLiabilityAdmitted : LiabilityStatus
+  liabilityUnresolved : LiabilityStatus
+  liabilityCandidate : LiabilityStatus
+  liabilityAdmitted : LiabilityStatus
+  noLiabilityAdmitted : LiabilityStatus
 
 
 data BurdenKind : Set where
-  evidentialBurden persuasiveBurden burdenKindUnresolved : BurdenKind
+  evidentialBurden : BurdenKind
+  persuasiveBurden : BurdenKind
+  burdenKindUnresolved : BurdenKind
 
 data StandardOfProof : Set where
-  beyondReasonableDoubt balanceOfProbabilities clearAndConvincing : StandardOfProof
+  beyondReasonableDoubt : StandardOfProof
+  balanceOfProbabilities : StandardOfProof
+  clearAndConvincing : StandardOfProof
   standardUnresolved : StandardOfProof
 
 data JudicialDiscourseStatus : Set where
-  holding ratioCandidate obiter findingOfFact submission allegation order : JudicialDiscourseStatus
+  holding : JudicialDiscourseStatus
+  ratioCandidate : JudicialDiscourseStatus
+  obiter : JudicialDiscourseStatus
+  findingOfFact : JudicialDiscourseStatus
+  submission : JudicialDiscourseStatus
+  allegation : JudicialDiscourseStatus
+  order : JudicialDiscourseStatus
   disposition distinguished followed overruled judicialStatusUnresolved : JudicialDiscourseStatus
 
 
 data NormativeRelation : Set where
-  duty permissionRelation power liabilityRelation right privilege immunity : NormativeRelation
+  duty : NormativeRelation
+  permissionRelation : NormativeRelation
+  power : NormativeRelation
+  liabilityRelation : NormativeRelation
+  right : NormativeRelation
+  privilege : NormativeRelation
+  immunity : NormativeRelation
   disability normativeRelationUnresolved : NormativeRelation
 
 ------------------------------------------------------------------------
@@ -233,7 +303,10 @@ open SemanticCommitmentState public
 ------------------------------------------------------------------------
 
 data CommitmentStage : Set where
-  observationStage syntacticStage semanticCandidateStage referenceCandidateStage : CommitmentStage
+  observationStage : CommitmentStage
+  syntacticStage : CommitmentStage
+  semanticCandidateStage : CommitmentStage
+  referenceCandidateStage : CommitmentStage
   contextResolvedStage statusQualifiedStage evidentialCommitmentStage : CommitmentStage
   governedAdmissionStage consumerConclusionStage : CommitmentStage
 

@@ -65,7 +65,8 @@ compiledProofFabricLocallyCompatible codec proof =
 ------------------------------------------------------------------------
 
 data LocalFabricStatus : Set where
-  locallyAdmitted locallyMalformed : LocalFabricStatus
+  locallyAdmitted : LocalFabricStatus
+  locallyMalformed : LocalFabricStatus
 
 classifyTile : Fabric.ProofWeaveTile → LocalFabricStatus
 classifyTile Fabric.tile00 = locallyAdmitted

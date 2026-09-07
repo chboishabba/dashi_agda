@@ -88,13 +88,18 @@ residualSquaredSafeConstantIs2949120 :
 residualSquaredSafeConstantIs2949120 = refl
 
 data ConditionOwner : Set where
-  outputOwner firstAdjointOwner secondAdjointOwner : ConditionOwner
+  outputOwner : ConditionOwner
+  firstAdjointOwner : ConditionOwner
+  secondAdjointOwner : ConditionOwner
 
 data OverlapClass : Set where
-  nearClass transitionClass residualClass : OverlapClass
+  nearClass : OverlapClass
+  transitionClass : OverlapClass
+  residualClass : OverlapClass
 
 data TransportStage : Set where
-  beforeSquaring afterSquaring : TransportStage
+  beforeSquaring : TransportStage
+  afterSquaring : TransportStage
 
 transportedConstant : ConditionOwner → OverlapClass → TransportStage → Nat
 transportedConstant owner nearClass beforeSquaring = nearLinearConstant

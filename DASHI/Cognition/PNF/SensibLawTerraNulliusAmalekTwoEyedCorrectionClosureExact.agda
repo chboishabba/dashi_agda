@@ -243,7 +243,8 @@ data StateRemedyDeclaration : Set where
   sameDeclaredRemedy : StateRemedyDeclaration
 
 data CorrectionChannelState : Set where
-  correctionClosed correctionOpen : CorrectionChannelState
+  correctionClosed : CorrectionChannelState
+  correctionOpen : CorrectionChannelState
 
 stateRemedyDeclaration : RemedyProcessState → StateRemedyDeclaration
 stateRemedyDeclaration _ = sameDeclaredRemedy

@@ -26,7 +26,9 @@ import DASHI.Foundations.Base369MonsterNamedIdentityRegistryExact as Registry
 ------------------------------------------------------------------------
 
 data PuncturedFace8 : Set where
-  negNeg negZero negPos : PuncturedFace8
+  negNeg : PuncturedFace8
+  negZero : PuncturedFace8
+  negPos : PuncturedFace8
   zeroNeg zeroPos : PuncturedFace8
   posNeg posZero posPos : PuncturedFace8
 
@@ -90,7 +92,8 @@ data FaceDirection4 : Set where
 
 
 data FaceEndpointOrientation2 : Set where
-  negativeEndpoint positiveEndpoint : FaceEndpointOrientation2
+  negativeEndpoint : FaceEndpointOrientation2
+  positiveEndpoint : FaceEndpointOrientation2
 
 punctureToDirectionOrientation :
   PuncturedFace8 → FaceDirection4 × FaceEndpointOrientation2

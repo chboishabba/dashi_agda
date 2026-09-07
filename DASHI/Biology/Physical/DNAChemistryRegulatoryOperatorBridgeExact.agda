@@ -52,10 +52,12 @@ gcEnergyIsTwo = refl
 ------------------------------------------------------------------------
 
 data Accessibility : Set where
-  closed openState : Accessibility
+  closed : Accessibility
+  openState : Accessibility
 
 data RegulatoryParameter : Set where
-  lowExpression highExpression : RegulatoryParameter
+  lowExpression : RegulatoryParameter
+  highExpression : RegulatoryParameter
 
 compileRegulatoryParameter :
   Accessibility → Nat → RegulatoryParameter

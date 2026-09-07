@@ -8,7 +8,9 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.YangMills.YMOperatorDomainContinuumSources2026Exact as Src
 
 data ProofOwner : Set where
-  leanOwner agdaOwner openPhysicalObligation : ProofOwner
+  leanOwner : ProofOwner
+  agdaOwner : ProofOwner
+  openPhysicalObligation : ProofOwner
 
 record LeanReturnStatus : Set where
   constructor lean-return-status

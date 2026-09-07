@@ -16,13 +16,19 @@ open import DASHI.Cognition.PNF.NumericAuthority
 ------------------------------------------------------------------------
 
 data RegionKind : Set where
-  sentenceRegion adjacentSentenceRegion paragraphRegion : RegionKind
+  sentenceRegion : RegionKind
+  adjacentSentenceRegion : RegionKind
+  paragraphRegion : RegionKind
   adjacentParagraphRegion adaptiveBlockRegion provisionRegion : RegionKind
   sectionRegion chapterRegion executionWindowRegion : RegionKind
   documentRegion trancheRegion : RegionKind
 
 data RegionEdgeKind : Set where
-  containsEdge adjacentEdge exportsEdge resolvesEdge supportsEdge : RegionEdgeKind
+  containsEdge : RegionEdgeKind
+  adjacentEdge : RegionEdgeKind
+  exportsEdge : RegionEdgeKind
+  resolvesEdge : RegionEdgeKind
+  supportsEdge : RegionEdgeKind
   continuesEdge executionContainsEdge : RegionEdgeKind
 
 record RegionEdge : Set where
@@ -134,7 +140,8 @@ record ClosedInterface : Set where
 open ClosedInterface public
 
 data CoverageState : Set where
-  openCoverage closedCoverage : CoverageState
+  openCoverage : CoverageState
+  closedCoverage : CoverageState
 
 data WorldPublication : CoverageState → Set where
   publishClosedResidualInterface :

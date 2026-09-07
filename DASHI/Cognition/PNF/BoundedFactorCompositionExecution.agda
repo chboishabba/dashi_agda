@@ -26,7 +26,8 @@ record CompositionEnumeration : Set where
 open CompositionEnumeration public
 
 data CompositionOverflowState : Set where
-  completeWithinBudget overflowObserved : CompositionOverflowState
+  completeWithinBudget : CompositionOverflowState
+  overflowObserved : CompositionOverflowState
 
 record CompositionOverflowReceipt : Set where
   constructor compositionOverflowReceipt

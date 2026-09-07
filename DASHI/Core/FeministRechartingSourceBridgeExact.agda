@@ -153,13 +153,15 @@ positiveRechartingStrictlyRefinesInheritedChart {flatten = flatten} repair =
 ------------------------------------------------------------------------
 
 data SchematicSituated : Set where
-  positiveModeA positiveModeB : SchematicSituated
+  positiveModeA : SchematicSituated
+  positiveModeB : SchematicSituated
 
 data InheritedOne : Set where
   inheritedOne : InheritedOne
 
 data PositiveMultiplicity : Set where
-  multiplicityA multiplicityB : PositiveMultiplicity
+  multiplicityA : PositiveMultiplicity
+  multiplicityB : PositiveMultiplicity
 
 inheritedChart : SchematicSituated → InheritedOne
 inheritedChart positiveModeA = inheritedOne

@@ -28,16 +28,19 @@ record RelationalCompressionSurface : Set₁ where
 -- One finite checked instance.
 
 data LocalContext : Set where
-  sensoryContext ecologicalContext : LocalContext
+  sensoryContext : LocalContext
+  ecologicalContext : LocalContext
 
 data CompressedModel : Set where
   relationalTeachingModel : CompressedModel
 
 data ExampleProvenance : Set where
-  suppliedSensoryProvenance suppliedEcologicalProvenance : ExampleProvenance
+  suppliedSensoryProvenance : ExampleProvenance
+  suppliedEcologicalProvenance : ExampleProvenance
 
 data ExampleResidual : Set where
-  sensoryOmission ecologicalOmission : ExampleResidual
+  sensoryOmission : ExampleResidual
+  ecologicalOmission : ExampleResidual
 
 data GlobalAccount : Set where
   joinedRelationalAccount : GlobalAccount

@@ -63,7 +63,8 @@ record QualifiedUse
 ------------------------------------------------------------------------
 
 data DemoUse : Set where
-  studyUse interventionUse : DemoUse
+  studyUse : DemoUse
+  interventionUse : DemoUse
 
 data DemoCommunity : Set where community : DemoCommunity
 data DemoClaim : Set where claim : DemoClaim

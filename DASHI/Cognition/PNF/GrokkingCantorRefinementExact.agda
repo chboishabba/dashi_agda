@@ -9,7 +9,9 @@ import DASHI.Foundations.CantorCylinderMassExact as Cantor
 ------------------------------------------------------------------------
 
 data LearningStage : Set where
-  memorizationStage circuitFormationStage cleanupStage : LearningStage
+  memorizationStage : LearningStage
+  circuitFormationStage : LearningStage
+  cleanupStage : LearningStage
 
 trainingMassNumerator : LearningStage → Nat
 trainingMassNumerator memorizationStage = 1

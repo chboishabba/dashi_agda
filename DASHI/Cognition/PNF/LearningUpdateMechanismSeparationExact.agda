@@ -23,7 +23,9 @@ import DASHI.Cognition.PNF.MemoryFibre as Memory
 ------------------------------------------------------------------------
 
 data MemoryUpdateMechanism : Set where
-  extinctionUpdate reconsolidationUpdate erasureUpdate : MemoryUpdateMechanism
+  extinctionUpdate : MemoryUpdateMechanism
+  reconsolidationUpdate : MemoryUpdateMechanism
+  erasureUpdate : MemoryUpdateMechanism
 
 record UpdateSignature : Set where
   constructor updateSignature

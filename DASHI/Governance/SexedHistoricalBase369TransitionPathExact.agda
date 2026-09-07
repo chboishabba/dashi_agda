@@ -40,7 +40,8 @@ import DASHI.Governance.SexedHistoricalBinaryTernaryDialecticExact as BT
 ------------------------------------------------------------------------
 
 data Position2 : Set where
-  masculineObject feminineObject : Position2
+  masculineObject : Position2
+  feminineObject : Position2
 
 positionTrit : Position2 → SSP.SSPTrit
 positionTrit masculineObject = SSP.sspNegOne
@@ -51,7 +52,9 @@ positionTrit feminineObject = SSP.sspPosOne
 ------------------------------------------------------------------------
 
 data PathAdmissibility : Set where
-  rejectedPath unresolvedPath admittedPath : PathAdmissibility
+  rejectedPath : PathAdmissibility
+  unresolvedPath : PathAdmissibility
+  admittedPath : PathAdmissibility
 
 admissibilityTrit : PathAdmissibility → SSP.SSPTrit
 admissibilityTrit rejectedPath = SSP.sspNegOne
@@ -158,10 +161,14 @@ unresolvedCrossChannelIsEdgeCentre = refl
 ------------------------------------------------------------------------
 
 data CrossPath : Set where
-  masculineCrossBack feminineCrossBack : CrossPath
+  masculineCrossBack : CrossPath
+  feminineCrossBack : CrossPath
 
 data CompositeChannel : Set where
-  mmComposite mfComposite fmComposite ffComposite : CompositeChannel
+  mmComposite : CompositeChannel
+  mfComposite : CompositeChannel
+  fmComposite : CompositeChannel
+  ffComposite : CompositeChannel
 
 data CrossCountSurface : Set where
   crossedTwice : CrossCountSurface

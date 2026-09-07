@@ -17,10 +17,12 @@ import DASHI.Physics.Closure.GRNonFlatScalarAlgebraSurface as NF
 -- metric-compatibility, and Ricci cancellation remain named obligations.
 
 data GRSelectedFiniteRBase : Set where
-  selectedBase0 selectedBase1 : GRSelectedFiniteRBase
+  selectedBase0 : GRSelectedFiniteRBase
+  selectedBase1 : GRSelectedFiniteRBase
 
 data GRSelectedCoordinateIndex : Set where
-  selectedTime selectedRadial : GRSelectedCoordinateIndex
+  selectedTime : GRSelectedCoordinateIndex
+  selectedRadial : GRSelectedCoordinateIndex
 
 data GRSelectedConnectionCarrier : Set where
   selectedConnection : GRSelectedConnectionCarrier

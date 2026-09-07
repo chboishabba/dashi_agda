@@ -19,10 +19,14 @@ import DASHI.Governance.IndigenousEnvironmentalJusticeSourceRegistryExact as Sou
 ------------------------------------------------------------------------
 
 data Standing : Set where
-  communityStanding victimStanding protectedBeneficiary : Standing
+  communityStanding : Standing
+  victimStanding : Standing
+  protectedBeneficiary : Standing
 
 data EnforcementState : Set where
-  preventionEffective preventionFailed remedyIncomplete : EnforcementState
+  preventionEffective : EnforcementState
+  preventionFailed : EnforcementState
+  remedyIncomplete : EnforcementState
 
 data HasStanding : Standing → Set where
   communityHasStanding : HasStanding communityStanding

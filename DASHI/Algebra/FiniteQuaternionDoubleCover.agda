@@ -26,7 +26,10 @@ signMultiply negativeSign negativeSign = positiveSign
 
 
 data QuaternionBasis : Set where
-  basisOne basisI basisJ basisK : QuaternionBasis
+  basisOne : QuaternionBasis
+  basisI : QuaternionBasis
+  basisJ : QuaternionBasis
+  basisK : QuaternionBasis
 
 record Q8 : Set where
   constructor quaternion
@@ -84,7 +87,10 @@ minusK = quaternion negativeSign basisK
 
 
 data V4Rotation : Set where
-  identityRotation halfTurnX halfTurnY halfTurnZ : V4Rotation
+  identityRotation : V4Rotation
+  halfTurnX : V4Rotation
+  halfTurnY : V4Rotation
+  halfTurnZ : V4Rotation
 
 basisRotation : QuaternionBasis → V4Rotation
 basisRotation basisOne = identityRotation

@@ -15,14 +15,18 @@ open import DASHI.Cognition.PNF.SpacyNumericProjection
 ------------------------------------------------------------------------
 
 data ParserPartitionState : Set where
-  pendingPartition leasedPartition committedPartition : ParserPartitionState
+  pendingPartition : ParserPartitionState
+  leasedPartition : ParserPartitionState
+  committedPartition : ParserPartitionState
   stalePartition failedPartition : ParserPartitionState
 
 data FenceComparison : Set where
-  matchingFence staleFence : FenceComparison
+  matchingFence : FenceComparison
+  staleFence : FenceComparison
 
 data PartitionCommitDecision : Set where
-  commitPartition rejectStaleAttempt : PartitionCommitDecision
+  commitPartition : PartitionCommitDecision
+  rejectStaleAttempt : PartitionCommitDecision
 
 decidePartitionCommit : FenceComparison → PartitionCommitDecision
 decidePartitionCommit matchingFence = commitPartition

@@ -99,10 +99,14 @@ canonicalRecursiveMaintenanceBoundary =
 ------------------------------------------------------------------------
 
 data Axis0 : Set where
-  consequence0 diagnostic0 authority0 cost0 : Axis0
+  consequence0 : Axis0
+  diagnostic0 : Axis0
+  authority0 : Axis0
+  cost0 : Axis0
 
 data Candidate0 : Set where
-  model0 frame0 : Candidate0
+  model0 : Candidate0
+  frame0 : Candidate0
 
 axis0ToFrontier : Axis0 → Pareto.FrontierAxis
 axis0ToFrontier consequence0 = Pareto.consequenceAxis
@@ -170,10 +174,16 @@ costNotInvalidated diagnosticChanged ()
 
 -- Upper layer materialises the inherited four axes plus one new residual axis.
 data Axis1 : Set where
-  consequence1 diagnostic1 authority1 cost1 lineageResidual1 : Axis1
+  consequence1 : Axis1
+  diagnostic1 : Axis1
+  authority1 : Axis1
+  cost1 : Axis1
+  lineageResidual1 : Axis1
 
 data Candidate1 : Set where
-  model1 frame1 lineageDebugger1 : Candidate1
+  model1 : Candidate1
+  frame1 : Candidate1
+  lineageDebugger1 : Candidate1
 
 axis1ToFrontier : Axis1 → Pareto.FrontierAxis
 axis1ToFrontier consequence1 = Pareto.consequenceAxis

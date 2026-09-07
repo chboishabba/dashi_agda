@@ -12,7 +12,9 @@ import DASHI.Reasoning.RelationalStateCore as Core
 ------------------------------------------------------------------------
 
 data CandidateMechanism : Set where
-  rapidAssociation executiveInhibitionFailure workingMemoryPreservation : CandidateMechanism
+  rapidAssociation : CandidateMechanism
+  executiveInhibitionFailure : CandidateMechanism
+  workingMemoryPreservation : CandidateMechanism
   solutionImpulse stressDisorganisation learnedConversationHabit : CandidateMechanism
   unknownMechanism : CandidateMechanism
 

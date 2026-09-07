@@ -21,7 +21,9 @@ import DASHI.Cognition.Base369ZeroFibre as Fibre
 ------------------------------------------------------------------------
 
 data PsychoStage : Set where
-  idStage egoStage superegoStage : PsychoStage
+  idStage : PsychoStage
+  egoStage : PsychoStage
+  superegoStage : PsychoStage
 
 IdCarrier : Set
 IdCarrier = Base.TriTruth

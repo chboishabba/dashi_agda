@@ -34,7 +34,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- A tag only: it prevents the frontier root from silently requiring both a
 -- bounded Markov-kernel route and an unbounded symmetric-form route.
 data RGSpectralRoute : Set where
-  lawlerSokalRoute chenWangSymmetricFormRoute : RGSpectralRoute
+  lawlerSokalRoute : RGSpectralRoute
+  chenWangSymmetricFormRoute : RGSpectralRoute
 
 chenWangGeneralSymmetricFormCheegerLevel : ProofLevel
 chenWangGeneralSymmetricFormCheegerLevel = standardImported

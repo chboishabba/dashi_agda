@@ -17,7 +17,8 @@ open import DASHI.Cognition.PNF.ProducerCompleteDependencyProjectionExact
 ------------------------------------------------------------------------
 
 data TinyToken : Set where
-  root child : TinyToken
+  root : TinyToken
+  child : TinyToken
 
 tinyHead : TinyToken → TinyToken
 tinyHead root = root

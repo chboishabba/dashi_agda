@@ -80,7 +80,8 @@ subjectStandingToAllBackward =
 ------------------------------------------------------------------------
 
 data DirectionTag : Set where
-  forwardDirection backwardDirection : DirectionTag
+  forwardDirection : DirectionTag
+  backwardDirection : DirectionTag
 
 forwardNotBackward : forwardDirection ≡ backwardDirection → ⊥
 forwardNotBackward ()

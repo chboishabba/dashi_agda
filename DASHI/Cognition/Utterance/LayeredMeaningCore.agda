@@ -17,32 +17,56 @@ open import Data.List.Base using (List; []; _∷_)
 ------------------------------------------------------------------------
 
 data Layer : Set where
-  surfaceLayer textAtomLayer entityTypingLayer candidateLayer : Layer
+  surfaceLayer : Layer
+  textAtomLayer : Layer
+  entityTypingLayer : Layer
+  candidateLayer : Layer
   admissibilityLayer pnfLayer invariantLayer : Layer
 
 data EvidenceStatus : Set where
-  observedSurface emptyEvidenceChain supportedEvidenceChain : EvidenceStatus
+  observedSurface : EvidenceStatus
+  emptyEvidenceChain : EvidenceStatus
+  supportedEvidenceChain : EvidenceStatus
 
 data AgentClass : Set where
-  liveHuman minorHuman historicalPersonDeceased fictionalCharacter : AgentClass
+  liveHuman : AgentClass
+  minorHuman : AgentClass
+  historicalPersonDeceased : AgentClass
+  fictionalCharacter : AgentClass
   institution artefact unknownAgentClass : AgentClass
 
 data RuptureDomain : Set where
-  familyRupture collaboratorRupture peerRupture industryRupture : RuptureDomain
+  familyRupture : RuptureDomain
+  collaboratorRupture : RuptureDomain
+  peerRupture : RuptureDomain
+  industryRupture : RuptureDomain
   politicalSymbolicRupture racialHistoricalRupture : RuptureDomain
   childhoodSymbolRupture memeRupture absurdityRupture unknownRupture : RuptureDomain
 
 data Affect : Set where
-  pain betrayal grief anger alienation unknownAffect : Affect
+  pain : Affect
+  betrayal : Affect
+  grief : Affect
+  anger : Affect
+  alienation : Affect
+  unknownAffect : Affect
 
 data PromotionDisposition : Set where
-  literalBlocked symbolicAdmissible candidateDemoted factPromoted : PromotionDisposition
+  literalBlocked : PromotionDisposition
+  symbolicAdmissible : PromotionDisposition
+  candidateDemoted : PromotionDisposition
+  factPromoted : PromotionDisposition
 
 data BlockingGround : Set where
-  sourceTextViolation agentClassViolation evidenceChainViolation : BlockingGround
+  sourceTextViolation : BlockingGround
+  agentClassViolation : BlockingGround
+  evidenceChainViolation : BlockingGround
 
 data ScopeBasis : Set where
-  layoutAdjacency explicitGrammar explicitReference externalEvidence : ScopeBasis
+  layoutAdjacency : ScopeBasis
+  explicitGrammar : ScopeBasis
+  explicitReference : ScopeBasis
+  externalEvidence : ScopeBasis
 
 record SourceSurface : Set where
   constructor sourceSurface

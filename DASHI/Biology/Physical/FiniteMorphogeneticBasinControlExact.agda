@@ -9,7 +9,10 @@ open import DASHI.Core.Prelude
 import DASHI.Biology.Physical.GoalErrorDescentControllerExact as Descent
 
 data BasinState : Set where
-  failed far near target : BasinState
+  failed : BasinState
+  far : BasinState
+  near : BasinState
+  target : BasinState
 
 passiveRepair : BasinState → BasinState
 passiveRepair failed = failed
@@ -42,7 +45,9 @@ nearMoreRobustThanFar : robustnessDepth near < robustnessDepth far
 nearMoreRobustThanFar = s≤s z≤n
 
 data Intervention : Set where
-  noControl mildPulse strongPulse : Intervention
+  noControl : Intervention
+  mildPulse : Intervention
+  strongPulse : Intervention
 
 controlCost : Intervention → Nat
 controlCost noControl = 0
@@ -95,7 +100,10 @@ sameNominalCostDifferentControlPath :
 sameNominalCostDifferentControlPath = refl
 
 data TargetBasin : Set where
-  hand foot eye tail : TargetBasin
+  hand : TargetBasin
+  foot : TargetBasin
+  eye : TargetBasin
+  tail : TargetBasin
 
 data Bit : Set where b0 b1 : Bit
 

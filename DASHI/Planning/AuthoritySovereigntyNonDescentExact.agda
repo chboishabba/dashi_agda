@@ -13,13 +13,15 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 ------------------------------------------------------------------------
 
 data AuthorityOrigin : Set where
-  independentlyConstituted delegatedByState : AuthorityOrigin
+  independentlyConstituted : AuthorityOrigin
+  delegatedByState : AuthorityOrigin
 
 data StateRecognition : Set where
   sameRecognitionSurface : StateRecognition
 
 data AuthorityCode : Set where
-  independentAuthority delegatedAuthority : AuthorityCode
+  independentAuthority : AuthorityCode
+  delegatedAuthority : AuthorityCode
 
 recognitionObserver : AuthorityOrigin → StateRecognition
 recognitionObserver independentlyConstituted = sameRecognitionSurface

@@ -7,13 +7,24 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 -- Tiny finite artifact carrier.
 
 data Artifact : Set where
-  atomA atomB atomC atomD : Artifact
+  atomA : Artifact
+  atomB : Artifact
+  atomC : Artifact
+  atomD : Artifact
 
 data Depth : Set where
-  depth0 depth1 depth2 : Depth
+  depth0 : Depth
+  depth1 : Depth
+  depth2 : Depth
 
 data ProjectedArtifact : Set where
-  allAtoms leftPair rightPair pointA pointB pointC pointD : ProjectedArtifact
+  allAtoms : ProjectedArtifact
+  leftPair : ProjectedArtifact
+  rightPair : ProjectedArtifact
+  pointA : ProjectedArtifact
+  pointB : ProjectedArtifact
+  pointC : ProjectedArtifact
+  pointD : ProjectedArtifact
 
 project : Depth → Artifact → ProjectedArtifact
 project depth0 _ = allAtoms

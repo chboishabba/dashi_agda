@@ -11,7 +11,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 -- contradicted  : the available evidence contradicts the scoped claim
 
 data EpistemicTrit : Set where
-  contradicted unresolved supported : EpistemicTrit
+  contradicted : EpistemicTrit
+  unresolved : EpistemicTrit
+  supported : EpistemicTrit
 
 ------------------------------------------------------------------------
 -- Consensus composition.
@@ -91,7 +93,8 @@ disagreement-is-unresolved = refl
 -- These two common policies collapse unresolved into one determinate branch.
 
 data BinaryDecision : Set where
-  reject accept : BinaryDecision
+  reject : BinaryDecision
+  accept : BinaryDecision
 
 forceUnresolvedToAccept : EpistemicTrit → BinaryDecision
 forceUnresolvedToAccept contradicted = reject

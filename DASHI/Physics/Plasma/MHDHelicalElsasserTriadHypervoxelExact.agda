@@ -12,7 +12,8 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data BinarySign : Set where
-  plus minus : BinarySign
+  plus : BinarySign
+  minus : BinarySign
 
 data InteractionChannel : Set where
   velocityVelocity : InteractionChannel
@@ -22,7 +23,8 @@ data InteractionChannel : Set where
 
 
 data EquationSector : Set where
-  momentumSector inductionSector : EquationSector
+  momentumSector : EquationSector
+  inductionSector : EquationSector
 
 record WaveSlot : Set₁ where
   constructor wave-slot

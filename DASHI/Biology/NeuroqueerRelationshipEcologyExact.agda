@@ -16,25 +16,46 @@ import DASHI.Core.IntersectionalNonFactorability as NonFactor
 ------------------------------------------------------------------------
 
 data NeurotypeCoordinate : Set where
-  autisticCoordinate otherNeurodivergentCoordinate comparisonCoordinate : NeurotypeCoordinate
+  autisticCoordinate : NeurotypeCoordinate
+  otherNeurodivergentCoordinate : NeurotypeCoordinate
+  comparisonCoordinate : NeurotypeCoordinate
 
 data GenderCoordinate : Set where
-  cisGender transGender nonbinaryGender otherGender : GenderCoordinate
+  cisGender : GenderCoordinate
+  transGender : GenderCoordinate
+  nonbinaryGender : GenderCoordinate
+  otherGender : GenderCoordinate
 
 data SexualityCoordinate : Set where
-  heterosexual queerSexuality asexualSpectrum aromanticSpectrum otherSexuality : SexualityCoordinate
+  heterosexual : SexualityCoordinate
+  queerSexuality : SexualityCoordinate
+  asexualSpectrum : SexualityCoordinate
+  aromanticSpectrum : SexualityCoordinate
+  otherSexuality : SexualityCoordinate
 
 data RelationshipForm : Set where
-  conventionalEscalator nonEscalatorRelationship friendshipIntimacy consensualPlurality intentionallyUnpartnered otherRelationshipForm : RelationshipForm
+  conventionalEscalator : RelationshipForm
+  nonEscalatorRelationship : RelationshipForm
+  friendshipIntimacy : RelationshipForm
+  consensualPlurality : RelationshipForm
+  intentionallyUnpartnered : RelationshipForm
+  otherRelationshipForm : RelationshipForm
 
 data TemporalScript : Set where
-  linearMilestoneScript selfPacedScript nonLinearScript : TemporalScript
+  linearMilestoneScript : TemporalScript
+  selfPacedScript : TemporalScript
+  nonLinearScript : TemporalScript
 
 data NormRegime : Set where
-  heteronormativeRegime neuroheteronormativeRegime pluralAffirmingRegime : NormRegime
+  heteronormativeRegime : NormRegime
+  neuroheteronormativeRegime : NormRegime
+  pluralAffirmingRegime : NormRegime
 
 data QueeringPractice : Set where
-  questionNormativeScript loosenCategoryBoundary buildAlternativeRelationScript resistForcedNormalization : QueeringPractice
+  questionNormativeScript : QueeringPractice
+  loosenCategoryBoundary : QueeringPractice
+  buildAlternativeRelationScript : QueeringPractice
+  resistForcedNormalization : QueeringPractice
 
 record IntimateEcology : Set where
   constructor intimateEcology
@@ -79,7 +100,8 @@ data SexualityOnly : Set where queerLabel : SexualityOnly
 data RelationshipReading : Set where escalatorReading nonEscalatorReading : RelationshipReading
 
 data SituatedRelationship : Set where
-  queerEscalatorState queerNonEscalatorState : SituatedRelationship
+  queerEscalatorState : SituatedRelationship
+  queerNonEscalatorState : SituatedRelationship
 
 sexualityProjection : SituatedRelationship → SexualityOnly
 sexualityProjection queerEscalatorState = queerLabel

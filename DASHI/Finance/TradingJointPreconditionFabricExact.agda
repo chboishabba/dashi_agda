@@ -110,7 +110,8 @@ data DemoState : Set where
   liveState : DemoState
 
 data DemoTransition : Set where
-  conservativeTransition expansiveTransition : DemoTransition
+  conservativeTransition : DemoTransition
+  expansiveTransition : DemoTransition
 
 demoCarrier : TransitionCarrier
 demoCarrier = transitionCarrier DemoTransition exposure turn label

@@ -19,7 +19,9 @@ import DASHI.Reasoning.TernaryComparisonSynthesisExact as Synthesis
 ------------------------------------------------------------------------
 
 data ConsumerCoverageStatus : Set where
-  coverageOpen coverageSuspended coverageClosed : ConsumerCoverageStatus
+  coverageOpen : ConsumerCoverageStatus
+  coverageSuspended : ConsumerCoverageStatus
+  coverageClosed : ConsumerCoverageStatus
 
 coverageTrit : ConsumerCoverageStatus → Base.TriTruth
 coverageTrit coverageOpen = Base.tri-low

@@ -23,7 +23,11 @@ data HypothesisKind : Set where
   mixedHypothesis : HypothesisKind
 
 data HypothesisStatus : Set where
-  proposed supported qualified underdetermined rejected : HypothesisStatus
+  proposed : HypothesisStatus
+  supported : HypothesisStatus
+  qualified : HypothesisStatus
+  underdetermined : HypothesisStatus
+  rejected : HypothesisStatus
 
 record HypothesisCandidate : Set where
   constructor hypothesisCandidate

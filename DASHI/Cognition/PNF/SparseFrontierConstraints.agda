@@ -22,7 +22,8 @@ data ConstraintKind : Set where
   scopeConstraint : ConstraintKind
 
 data ConstraintPolarity : Set where
-  requirePresent forbidPresent : ConstraintPolarity
+  requirePresent : ConstraintPolarity
+  forbidPresent : ConstraintPolarity
 
 record TypedFrontierConstraint : Set where
   constructor typedFrontierConstraint

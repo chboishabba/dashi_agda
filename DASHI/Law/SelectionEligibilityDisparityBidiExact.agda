@@ -10,10 +10,17 @@ import DASHI.Law.CoerciveEncounterDenominatorIntegrityExact as Denom
 ------------------------------------------------------------------------
 
 data GroupStatus : Set where
-  groupRecorded groupNotRecorded groupMissing groupConflict : GroupStatus
+  groupRecorded : GroupStatus
+  groupNotRecorded : GroupStatus
+  groupMissing : GroupStatus
+  groupConflict : GroupStatus
 
 data SelectionObservation : Set where
-  eligibleObserved selectedObserved bothObserved observationMissing observationConflict : SelectionObservation
+  eligibleObserved : SelectionObservation
+  selectedObserved : SelectionObservation
+  bothObserved : SelectionObservation
+  observationMissing : SelectionObservation
+  observationConflict : SelectionObservation
 
 record SelectionEligibilityCell : Set where
   constructor selectionEligibilityCell
@@ -41,7 +48,10 @@ open DisparityCountSurface public
 ------------------------------------------------------------------------
 
 data DisparityEstimand : Set where
-  scanShare selectionRateByGroup selectionRateRatio selectionRateDifference : DisparityEstimand
+  scanShare : DisparityEstimand
+  selectionRateByGroup : DisparityEstimand
+  selectionRateRatio : DisparityEstimand
+  selectionRateDifference : DisparityEstimand
 
 record DisparityRatioRequest : Set where
   constructor disparityRatioRequest
@@ -74,10 +84,14 @@ selectionRateRequest s = disparityRatioRequest
 ------------------------------------------------------------------------
 
 data DisparityClaim : Set where
-  descriptiveScanShare descriptiveSelectionDisparity causalDiscrimination : DisparityClaim
+  descriptiveScanShare : DisparityClaim
+  descriptiveSelectionDisparity : DisparityClaim
+  causalDiscrimination : DisparityClaim
 
 data DisparityProducer : Set where
-  scanCountProducer eligibilityDenominatorProducer selectionProducer : DisparityProducer
+  scanCountProducer : DisparityProducer
+  eligibilityDenominatorProducer : DisparityProducer
+  selectionProducer : DisparityProducer
   personLinkageProducer missingStatusProducer causalSelectionModelProducer : DisparityProducer
 
 reverseDisparity : DisparityClaim → DisparityProducer
@@ -99,7 +113,10 @@ record SelectionDisparityCutset : Set where
 open SelectionDisparityCutset public
 
 data DisparityResidual : Set where
-  scanCountResidual eligibilityResidual selectionResidual linkageResidual : DisparityResidual
+  scanCountResidual : DisparityResidual
+  eligibilityResidual : DisparityResidual
+  selectionResidual : DisparityResidual
+  linkageResidual : DisparityResidual
   missingStatusResidual causalModelResidual disparityClosed : DisparityResidual
 
 firstDisparityResidual : DisparityClaim → SelectionDisparityCutset → DisparityResidual

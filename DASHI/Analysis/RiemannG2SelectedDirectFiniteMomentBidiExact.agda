@@ -149,7 +149,9 @@ data SharedZeroSidePayment : Set where
 
 
 data PaymentState : Set where
-  pruned live downstream : PaymentState
+  pruned : PaymentState
+  live : PaymentState
+  downstream : PaymentState
 
 paymentState : SharedZeroSidePayment → PaymentState
 paymentState recoverSecondSelectedWindow = pruned

@@ -35,7 +35,9 @@ import DASHI.Core.ObserverRefinementLatticeExact as Observer
 ------------------------------------------------------------------------
 
 data Order3 : Set where
-  less equal greater : Order3
+  less : Order3
+  equal : Order3
+  greater : Order3
 
 compareNat : Nat → Nat → Order3
 compareNat zero zero = equal
@@ -56,7 +58,9 @@ record RationalAvailability : Set where
 open RationalAvailability public
 
 data BranchingRegime : Set where
-  subcritical critical supercritical : BranchingRegime
+  subcritical : BranchingRegime
+  critical : BranchingRegime
+  supercritical : BranchingRegime
 
 reproductionNumerator : Nat → RationalAvailability → Nat
 reproductionNumerator arity a = arity * openNumerator a
@@ -139,7 +143,8 @@ threeAxisNinetyPercentDenominator = refl
 ------------------------------------------------------------------------
 
 data ToyFineState : Set where
-  narrow wide : ToyFineState
+  narrow : ToyFineState
+  wide : ToyFineState
 
 coarseToy : ToyFineState → Bool
 coarseToy narrow = false

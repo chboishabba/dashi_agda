@@ -20,7 +20,8 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data TransferStatus : Set where
-  structurallyFitting structurallyBroken : TransferStatus
+  structurallyFitting : TransferStatus
+  structurallyBroken : TransferStatus
 
 record StructuralTransferSurface : Set₁ where
   field
@@ -90,10 +91,12 @@ data ToyFrame : Set where
   continuityFrame : ToyFrame
 
 data ToyTarget : Set where
-  deformedRecoverable terminalRupture : ToyTarget
+  deformedRecoverable : ToyTarget
+  terminalRupture : ToyTarget
 
 data ToyInvariant : Set where
-  retainedConnection lostConnection : ToyInvariant
+  retainedConnection : ToyInvariant
+  lostConnection : ToyInvariant
 
 data RecoverableReceipt : ToyTarget → Set where
   recoverableDeformation : RecoverableReceipt deformedRecoverable

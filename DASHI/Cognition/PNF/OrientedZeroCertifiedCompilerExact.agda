@@ -17,7 +17,8 @@ import DASHI.Core.StablePartitionCanonicalFutureBridgeExact as Bridge
 ------------------------------------------------------------------------
 
 data PartitionCode : Set where
-  scalarPartition orientedPartition : PartitionCode
+  scalarPartition : PartitionCode
+  orientedPartition : PartitionCode
 
 advanceCode : PartitionCode → PartitionCode
 advanceCode scalarPartition = orientedPartition

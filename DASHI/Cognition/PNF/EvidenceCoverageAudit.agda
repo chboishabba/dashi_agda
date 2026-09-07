@@ -16,7 +16,10 @@ import DASHI.Cognition.PNF.SparseFibredFrontier as Sparse
 ------------------------------------------------------------------------
 
 data StructuralLevel : Set where
-  sentenceLevel paragraphLevel adaptiveLevel documentLevel : StructuralLevel
+  sentenceLevel : StructuralLevel
+  paragraphLevel : StructuralLevel
+  adaptiveLevel : StructuralLevel
+  documentLevel : StructuralLevel
 
 record IdentityFactorCoverageCell (level : StructuralLevel) : Set where
   constructor identityFactorCoverageCell

@@ -68,7 +68,8 @@ completeEnumerationLiftsNonDominance {Admissible = Admissible} {candidate = cand
 ------------------------------------------------------------------------
 
 data DemoTradeoffPlan : Set where
-  waterFirst habitatFirst : DemoTradeoffPlan
+  waterFirst : DemoTradeoffPlan
+  habitatFirst : DemoTradeoffPlan
 
 record PreferenceSelector : Set where
   constructor preferenceSelector

@@ -22,7 +22,8 @@ data AIInfraState : Set where
 
 
 data AIInfraObservation : Set where
-  strongDemandSurface recoveredCapacitySurface : AIInfraObservation
+  strongDemandSurface : AIInfraObservation
+  recoveredCapacitySurface : AIInfraObservation
 
 data AIInfraConsumer : Set where
   headlineDemandConsumer : AIInfraConsumer

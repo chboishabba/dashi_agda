@@ -27,7 +27,8 @@ import DASHI.Core.ReopenableConsumerInterventionKernelExact as Core
 
 
 data ActorDisposition : Set where
-  cooperate resist : ActorDisposition
+  cooperate : ActorDisposition
+  resist : ActorDisposition
 
 data Intervention : Set where
   voluntaryBuffer : Intervention
@@ -36,10 +37,12 @@ data StaticPlanScore : Set where
   sameDeclaredCost : StaticPlanScore
 
 data World : Set where
-  cooperativeWorld resistantWorld : World
+  cooperativeWorld : World
+  resistantWorld : World
 
 data Outcome : Set where
-  implemented blocked : Outcome
+  implemented : Outcome
+  blocked : Outcome
 
 actorOf : World → ActorDisposition
 actorOf cooperativeWorld = cooperate

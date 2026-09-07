@@ -18,7 +18,8 @@ open import Data.Product using (_×_; _,_)
 ------------------------------------------------------------------------
 
 data Context : Set where
-  readSupport readCounter : Context
+  readSupport : Context
+  readCounter : Context
 
 record MixedInputState : Set where
   constructor mixedInputState

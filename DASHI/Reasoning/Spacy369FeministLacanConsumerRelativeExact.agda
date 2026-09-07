@@ -63,7 +63,9 @@ operationalClosureReceipt =
 ------------------------------------------------------------------------
 
 data ScopeDecision : Set where
-  broadScopeDecision narrowScopeDecision otherScopeDecision : ScopeDecision
+  broadScopeDecision : ScopeDecision
+  narrowScopeDecision : ScopeDecision
+  otherScopeDecision : ScopeDecision
 
 scopeConsumer : Candidate.CandidateSemanticFragment → ScopeDecision
 scopeConsumer fragment with Candidate.formula fragment
@@ -94,7 +96,8 @@ scopeSensitiveConsumerNotClosed closed =
 ------------------------------------------------------------------------
 
 data SituatedSpacyReading : Set where
-  representedReading originatingReading : SituatedSpacyReading
+  representedReading : SituatedSpacyReading
+  originatingReading : SituatedSpacyReading
 
 parserSemanticSurface :
   SituatedSpacyReading → Candidate.CandidateSemanticFragment

@@ -32,7 +32,8 @@ data RelationExperiment : Set where
 
 
 data PairRole : Set where
-  markedMember baselineMember : PairRole
+  markedMember : PairRole
+  baselineMember : PairRole
 
 record SituatedContrastPair : Set where
   constructor situatedContrastPair
@@ -133,7 +134,8 @@ capabilityDoesNotRecoverFunctioning =
 ------------------------------------------------------------------------
 
 data EthicalFineState : Set where
-  helpfulWithChoice helpfulUnderCoercion : EthicalFineState
+  helpfulWithChoice : EthicalFineState
+  helpfulUnderCoercion : EthicalFineState
 
 data CoarsePositiveCode : Set where positiveCode : CoarsePositiveCode
 

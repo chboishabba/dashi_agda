@@ -16,7 +16,10 @@ import DASHI.Reasoning.SurplusChannelCore as Surplus
 ------------------------------------------------------------------------
 
 data ArrowState : Set where
-  forwardArrow reversedArrow blockedArrow absentArrow : ArrowState
+  forwardArrow : ArrowState
+  reversedArrow : ArrowState
+  blockedArrow : ArrowState
+  absentArrow : ArrowState
 
 record DiscourseGraph : Set where
   field

@@ -68,7 +68,9 @@ data HWSearchAction : Set where
 
 
 data SearchStatus : Set where
-  live pruned downstream : SearchStatus
+  live : SearchStatus
+  pruned : SearchStatus
+  downstream : SearchStatus
 
 searchStatus : HWSearchAction → SearchStatus
 searchStatus rebuildWindowRestrictionInterface = pruned

@@ -24,14 +24,24 @@ import DASHI.Reasoning.JusticeLeeSensibLawAdversarialProofGraphBidiExact as Lega
 ------------------------------------------------------------------------
 
 data LegalHypothesis : Set where
-  applicantAccount respondentAccount sharedAccount alternativeAccount : LegalHypothesis
+  applicantAccount : LegalHypothesis
+  respondentAccount : LegalHypothesis
+  sharedAccount : LegalHypothesis
+  alternativeAccount : LegalHypothesis
 
 data EvidenceProbe : Set where
-  inspectSourceSpan inspectAccountHistory inspectMessageThread inspectReport : EvidenceProbe
+  inspectSourceSpan : EvidenceProbe
+  inspectAccountHistory : EvidenceProbe
+  inspectMessageThread : EvidenceProbe
+  inspectReport : EvidenceProbe
   inspectWitness inspectCausalEdge inspectCharacterisation : EvidenceProbe
 
 data ProbeOutcome : Set where
-  supportsApplicant supportsRespondent supportsShared leavesUnderdetermined contradictsBoth : ProbeOutcome
+  supportsApplicant : ProbeOutcome
+  supportsRespondent : ProbeOutcome
+  supportsShared : ProbeOutcome
+  leavesUnderdetermined : ProbeOutcome
+  contradictsBoth : ProbeOutcome
 
 record LegalExperiment : Set where
   constructor legalExperiment
@@ -62,7 +72,10 @@ record DiscriminatorChoice : Set where
 open DiscriminatorChoice public
 
 data LegalSearchStage : Set where
-  liveControversy collisionLocated discriminatorSelected evidenceObserved : LegalSearchStage
+  liveControversy : LegalSearchStage
+  collisionLocated : LegalSearchStage
+  discriminatorSelected : LegalSearchStage
+  evidenceObserved : LegalSearchStage
   controversyRefined commonGroundMerged obligationsReopened proceduralConsumerClosed : LegalSearchStage
 
 record LegalSearchState : Set where
@@ -108,7 +121,10 @@ record CommonGroundMerge : Set where
 open CommonGroundMerge public
 
 data LegalArtifact : Set where
-  sourceCertificate propositionCertificate relationCertificate residualCertificate : LegalArtifact
+  sourceCertificate : LegalArtifact
+  propositionCertificate : LegalArtifact
+  relationCertificate : LegalArtifact
+  residualCertificate : LegalArtifact
   discriminatorCertificate proceduralCertificate : LegalArtifact
 
 data LegalDepends : LegalArtifact → LegalArtifact → Set where
@@ -187,10 +203,14 @@ canonicalRetrievalCrossPollinationBoundary = retrievalCrossPollinationBoundary
   false refl true refl false refl true refl
 
 data ExperimentArm : Set where
-  conventionalRetrievalSummary sensibLawProofGraph : ExperimentArm
+  conventionalRetrievalSummary : ExperimentArm
+  sensibLawProofGraph : ExperimentArm
 
 data EvaluationMetric : Set where
-  propositionRecall provenancePreservation commonGroundRecovery residualControversyPrecision : EvaluationMetric
+  propositionRecall : EvaluationMetric
+  provenancePreservation : EvaluationMetric
+  commonGroundRecovery : EvaluationMetric
+  residualControversyPrecision : EvaluationMetric
   contradictionGapRecovery irrelevantMaterialInspected partyCorrectionBurden : EvaluationMetric
 
 record ComparativeProtocol : Set where

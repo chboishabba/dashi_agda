@@ -20,7 +20,8 @@ open import Agda.Builtin.Nat using (Nat)
 ------------------------------------------------------------------------
 
 data Placement : Set where
-  localNative databaseAuthority : Placement
+  localNative : Placement
+  databaseAuthority : Placement
 
 data OperationClass : Set where
   parserProjection fibreAddress localPNFSolve localResidualJoin

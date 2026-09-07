@@ -28,13 +28,16 @@ import DASHI.Governance.ConsciousnessRealisedTopologyCrossPollinationExact as Co
 ------------------------------------------------------------------------
 
 data MaterialOrganisation : Set where
-  passiveLabel adaptiveMaterialOrganisation : MaterialOrganisation
+  passiveLabel : MaterialOrganisation
+  adaptiveMaterialOrganisation : MaterialOrganisation
 
 data RealisedProtocol : Set where
-  nominalOnly emergentSharedStateProtocol : RealisedProtocol
+  nominalOnly : RealisedProtocol
+  emergentSharedStateProtocol : RealisedProtocol
 
 data GoalDirectedEvidence : Set where
-  noGoalWitness perturbationRecoveryWitness : GoalDirectedEvidence
+  noGoalWitness : GoalDirectedEvidence
+  perturbationRecoveryWitness : GoalDirectedEvidence
 
 data ConsciousnessStatus : Set where
   consciousnessUnresolved : ConsciousnessStatus

@@ -26,7 +26,8 @@ import DASHI.Core.ProvenanceBearingQuotient as Provenance
 ------------------------------------------------------------------------
 
 data FineJusticeRecord : Set where
-  authorityPreservingRecord authorityViolatingRecord : FineJusticeRecord
+  authorityPreservingRecord : FineJusticeRecord
+  authorityViolatingRecord : FineJusticeRecord
 
 data PublicOutcome : Set where
   interventionRecorded : PublicOutcome
@@ -68,7 +69,8 @@ publicOutcomeCannotReconstructFullJusticeState reconstruction =
 ------------------------------------------------------------------------
 
 data JusticeReceipt : Set where
-  preservingReceipt violatingReceipt : JusticeReceipt
+  preservingReceipt : JusticeReceipt
+  violatingReceipt : JusticeReceipt
 
 receiptFor : FineJusticeRecord → JusticeReceipt
 receiptFor authorityPreservingRecord = preservingReceipt

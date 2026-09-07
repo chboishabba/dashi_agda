@@ -30,7 +30,8 @@ import DASHI.Reasoning.AttractorAlignedBranchSelectionExact as Branch
 ------------------------------------------------------------------------
 
 data NeuralContext : Set where
-  supportContext counterContext : NeuralContext
+  supportContext : NeuralContext
+  counterContext : NeuralContext
 
 contextAccess : NeuralContext → Pre.Candidate → Bool
 contextAccess supportContext Pre.supportingCandidate = true

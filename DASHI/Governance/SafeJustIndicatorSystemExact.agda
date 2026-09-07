@@ -11,13 +11,30 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data BiophysicalIndicator : Set where
-  co2Emissions phosphorus nitrogen blueWater eHANPP ecologicalFootprint materialFootprint : BiophysicalIndicator
+  co2Emissions : BiophysicalIndicator
+  phosphorus : BiophysicalIndicator
+  nitrogen : BiophysicalIndicator
+  blueWater : BiophysicalIndicator
+  eHANPP : BiophysicalIndicator
+  ecologicalFootprint : BiophysicalIndicator
+  materialFootprint : BiophysicalIndicator
 
 data SocialRole : Set where
-  needSatisfier wellbeingMeasure : SocialRole
+  needSatisfier : SocialRole
+  wellbeingMeasure : SocialRole
 
 data SocialIndicator : Set where
-  nutrition sanitation income energyAccess education socialSupport democraticQuality equality employment lifeSatisfaction healthyLifeExpectancy : SocialIndicator
+  nutrition : SocialIndicator
+  sanitation : SocialIndicator
+  income : SocialIndicator
+  energyAccess : SocialIndicator
+  education : SocialIndicator
+  socialSupport : SocialIndicator
+  democraticQuality : SocialIndicator
+  equality : SocialIndicator
+  employment : SocialIndicator
+  lifeSatisfaction : SocialIndicator
+  healthyLifeExpectancy : SocialIndicator
 
 socialRole : SocialIndicator → SocialRole
 socialRole lifeSatisfaction = wellbeingMeasure

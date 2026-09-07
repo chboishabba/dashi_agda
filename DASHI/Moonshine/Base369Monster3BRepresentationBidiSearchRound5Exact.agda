@@ -40,7 +40,12 @@ data Round5Leaf : Set where
   nestedLocalGlobalUnitBridge : Round5Leaf
 
 data LeafState : Set where
-  owned generated live pruned downstream parallel : LeafState
+  owned : LeafState
+  generated : LeafState
+  live : LeafState
+  pruned : LeafState
+  downstream : LeafState
+  parallel : LeafState
 
 leafState : Round5Leaf → LeafState
 leafState repoNativeVOAActionSurface = owned

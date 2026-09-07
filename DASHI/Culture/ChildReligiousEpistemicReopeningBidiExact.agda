@@ -65,13 +65,15 @@ closedEpistemicState = epistemic-reopening-state
 ------------------------------------------------------------------------
 
 data FineBeliefEpisode : Set where
-  revisablyEndorsed inheritedClosedProfession : FineBeliefEpisode
+  revisablyEndorsed : FineBeliefEpisode
+  inheritedClosedProfession : FineBeliefEpisode
 
 data ProfessionSurface : Set where
   sameProfession : ProfessionSurface
 
 data EpistemicRoute : Set where
-  reopenedRoute closedInheritanceRoute : EpistemicRoute
+  reopenedRoute : EpistemicRoute
+  closedInheritanceRoute : EpistemicRoute
 
 professionSurface : FineBeliefEpisode → ProfessionSurface
 professionSurface revisablyEndorsed = sameProfession
@@ -200,7 +202,10 @@ canonicalReopeningReceipt = epistemic-reopening-receipt
 ------------------------------------------------------------------------
 
 data RecoveryStatus : Set where
-  recovered bounded unresolved nonidentifiableFromProfession : RecoveryStatus
+  recovered : RecoveryStatus
+  bounded : RecoveryStatus
+  unresolved : RecoveryStatus
+  nonidentifiableFromProfession : RecoveryStatus
 
 record EpistemicBackwardAudit : Set where
   constructor epistemic-backward-audit

@@ -90,7 +90,8 @@ data HTSearchAction : Set where
 
 
 data SearchStatus : Set where
-  pruned downstream : SearchStatus
+  pruned : SearchStatus
+  downstream : SearchStatus
 
 searchStatus : HTSearchAction → SearchStatus
 searchStatus rebuildTranslationModulationIntertwiner = pruned

@@ -14,13 +14,22 @@ import DASHI.Planning.ParticipatoryPlanningGovernanceExact as Participation
 ------------------------------------------------------------------------
 
 data ConsentStage : Set where
-  informed reached consulted consentRequested consentGiven : ConsentStage
+  informed : ConsentStage
+  reached : ConsentStage
+  consulted : ConsentStage
+  consentRequested : ConsentStage
+  consentGiven : ConsentStage
 
 data ConsentScope : Set where
-  boundedUse irreversibleIntervention governanceChange : ConsentScope
+  boundedUse : ConsentScope
+  irreversibleIntervention : ConsentScope
+  governanceChange : ConsentScope
 
 data Contestability : Set where
-  noContest reviewOnly canRefuse canWithdraw : Contestability
+  noContest : Contestability
+  reviewOnly : Contestability
+  canRefuse : Contestability
+  canWithdraw : Contestability
 
 record CollectiveConsentEnvelope : Set where
   constructor collectiveConsentEnvelope

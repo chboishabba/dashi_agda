@@ -8,10 +8,15 @@ open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 ------------------------------------------------------------------------
 
 data Direction : Set where
-  down neutral up : Direction
+  down : Direction
+  neutral : Direction
+  up : Direction
 
 data Action : Set where
-  sell hold buy flatten : Action
+  sell : Action
+  hold : Action
+  buy : Action
+  flatten : Action
 
 record Decision : Set where
   constructor decision
@@ -30,7 +35,8 @@ compileDecision (decision up      true)  = hold
 -- Flattening is a separate risk-control request.  It is not the third value
 -- of a directional carrier and cannot be produced by compileDecision.
 data RiskDirective : Set where
-  preserveExposure closeExposure : RiskDirective
+  preserveExposure : RiskDirective
+  closeExposure : RiskDirective
 
 compileRisk : RiskDirective → Action → Action
 compileRisk preserveExposure a = a

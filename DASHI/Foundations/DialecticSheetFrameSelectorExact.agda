@@ -12,7 +12,8 @@ import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 ------------------------------------------------------------------------
 
 data Bit2 : Set where
-  bit0 bit1 : Bit2
+  bit0 : Bit2
+  bit1 : Bit2
 
 record BinaryDialecticAtom : Set where
   constructor binaryAtom
@@ -169,10 +170,13 @@ record FrameWitness
 open FrameWitness public
 
 data ExampleFrame : Set where
-  inhabitableFrame counterFrame : ExampleFrame
+  inhabitableFrame : ExampleFrame
+  counterFrame : ExampleFrame
 
 data ExampleCondition : Set where
-  firstCondition secondCondition joinedSynthesis : ExampleCondition
+  firstCondition : ExampleCondition
+  secondCondition : ExampleCondition
+  joinedSynthesis : ExampleCondition
 
 exampleEvaluate : ExampleFrame → ExampleCondition → BT.BalancedDigit
 exampleEvaluate inhabitableFrame firstCondition = BT.pos

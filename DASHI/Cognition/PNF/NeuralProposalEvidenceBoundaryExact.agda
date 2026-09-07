@@ -17,7 +17,8 @@ data Subject : Set where
   item : Subject
 
 data CandidateType : Set where
-  eventLike editionLike : CandidateType
+  eventLike : CandidateType
+  editionLike : CandidateType
 
 data NeuralEvidence : Set where
   modelProposal : NeuralEvidence

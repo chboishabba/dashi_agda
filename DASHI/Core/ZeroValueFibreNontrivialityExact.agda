@@ -30,13 +30,15 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 ------------------------------------------------------------------------
 
 data FineZeroState : Set where
-  hiddenApproach hiddenDeparture : FineZeroState
+  hiddenApproach : FineZeroState
+  hiddenDeparture : FineZeroState
 
 data ZeroObservation : Set where
   observedZero : ZeroObservation
 
 data FutureClass : Set where
-  remainsAtZero leavesZero : FutureClass
+  remainsAtZero : FutureClass
+  leavesZero : FutureClass
 
 zeroObserver : FineZeroState → ZeroObservation
 zeroObserver hiddenApproach = observedZero

@@ -16,7 +16,9 @@ open import DASHI.Ontology.ContextualClaimComposition
 -- statement identity, qualifiers/context, references, and rank metadata.
 
 data StatementRank : Set where
-  preferred normal deprecated : StatementRank
+  preferred : StatementRank
+  normal : StatementRank
+  deprecated : StatementRank
 
 record StatementEnvelope (QualifierAxis : Set) : Set where
   constructor statementEnvelope

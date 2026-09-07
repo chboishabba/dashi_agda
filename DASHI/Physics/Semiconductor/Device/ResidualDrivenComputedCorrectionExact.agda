@@ -32,7 +32,9 @@ totalCurrent : Cell.SourceCharge → Nat
 totalCurrent q = Cell.electronCurrent q + Cell.holeCurrent q
 
 data CurrentMismatch : Set where
-  overByTwo overByOne balanced : CurrentMismatch
+  overByTwo : CurrentMismatch
+  overByOne : CurrentMismatch
+  balanced : CurrentMismatch
 
 mismatchCode : CurrentMismatch → Nat
 mismatchCode overByTwo = 2
@@ -65,7 +67,9 @@ q5ComputedTotal = refl
 ------------------------------------------------------------------------
 
 data CorrectionAction : Set where
-  strongCurrentCorrection mildCurrentCorrection holdBalanced : CorrectionAction
+  strongCurrentCorrection : CorrectionAction
+  mildCurrentCorrection : CorrectionAction
+  holdBalanced : CorrectionAction
 
 actionForResidual : CurrentMismatch → CorrectionAction
 actionForResidual overByTwo = strongCurrentCorrection

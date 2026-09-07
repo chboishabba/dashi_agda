@@ -16,7 +16,8 @@ spacyProducerWitness : ExistingPNF.ParserProducer
 spacyProducerWitness = ExistingPNF.spaCyProducer
 
 data Capability : Set where
-  tokenizationCapability sentenceSegmentationCapability : Capability
+  tokenizationCapability : Capability
+  sentenceSegmentationCapability : Capability
   lemmaCapability posCapability tagCapability dependencyCapability : Capability
   morphologyCapability namedEntityCapability : Capability
 
@@ -48,10 +49,14 @@ open PipelineCapabilityReceipt public
 ------------------------------------------------------------------------
 
 data SentenceOwnership : Set where
-  fullyOwned boundaryCrossing outsideOwner : SentenceOwnership
+  fullyOwned : SentenceOwnership
+  boundaryCrossing : SentenceOwnership
+  outsideOwner : SentenceOwnership
 
 data SentenceDisposition : Set where
-  commitSentence queueBoundaryRepair ignoreOutside : SentenceDisposition
+  commitSentence : SentenceDisposition
+  queueBoundaryRepair : SentenceDisposition
+  ignoreOutside : SentenceDisposition
 
 disposeSentence : SentenceOwnership → SentenceDisposition
 disposeSentence fullyOwned = commitSentence

@@ -18,7 +18,9 @@ import DASHI.Core.IntersectionalNonFactorability as NF
 ------------------------------------------------------------------------
 
 data GateTopology : Set where
-  planarLike finLike gateAllAroundLike : GateTopology
+  planarLike : GateTopology
+  finLike : GateTopology
+  gateAllAroundLike : GateTopology
 
 record GateGeometry : Set where
   constructor gateGeometry

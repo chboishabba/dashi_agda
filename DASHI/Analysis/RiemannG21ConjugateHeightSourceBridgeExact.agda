@@ -73,7 +73,8 @@ open TwoHeightExteriorTarget public
 ------------------------------------------------------------------------
 
 data ToyHeight : Set where
-  lowHeight highHeight : ToyHeight
+  lowHeight : ToyHeight
+  highHeight : ToyHeight
 
 data ToyVector : Set where
   collapsedVector : ToyVector

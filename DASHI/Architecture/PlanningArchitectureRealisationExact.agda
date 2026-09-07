@@ -43,7 +43,8 @@ data Plan : Set where
   nominalPlan : Plan
 
 data Design : Set where
-  paperDesign buildableDesign : Design
+  paperDesign : Design
+  buildableDesign : Design
 
 Admits : Plan → Design → Set
 Admits nominalPlan paperDesign = ⊤

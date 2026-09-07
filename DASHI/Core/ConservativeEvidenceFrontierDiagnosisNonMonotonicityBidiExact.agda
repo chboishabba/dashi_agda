@@ -17,7 +17,8 @@ import DASHI.Core.IncrementalDiagnosisTruthMaintenanceBidiExact as Truth
 ------------------------------------------------------------------------
 
 data FrontierKind : Set where
-  corpusGapFrontier diagnosisFibreFrontier : FrontierKind
+  corpusGapFrontier : FrontierKind
+  diagnosisFibreFrontier : FrontierKind
 
 record FrontierEvolutionBoundary : Set where
   constructor frontier-evolution-boundary

@@ -21,7 +21,11 @@ module DASHI.Foundations.Base369FiveModePhaseQuotientExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 data D4IrreducibleType : Set where
-  A1 A2 B1 B2 E : D4IrreducibleType
+  A1 : D4IrreducibleType
+  A2 : D4IrreducibleType
+  B1 : D4IrreducibleType
+  B2 : D4IrreducibleType
+  E : D4IrreducibleType
 
 data BinaryOrientation : Set where
   negativeOrientation : BinaryOrientation
@@ -37,7 +41,11 @@ open OrientedMode public
 
 -- Nine ordinary cells plus one distinguished completion point.
 data PointedNonary10 : Set where
-  ordinary0 ordinary1 ordinary2 ordinary3 ordinary4 : PointedNonary10
+  ordinary0 : PointedNonary10
+  ordinary1 : PointedNonary10
+  ordinary2 : PointedNonary10
+  ordinary3 : PointedNonary10
+  ordinary4 : PointedNonary10
   ordinary5 ordinary6 ordinary7 ordinary8 : PointedNonary10
   completionJ : PointedNonary10
 

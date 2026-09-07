@@ -20,7 +20,9 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data TernaryRoleCode : Set where
-  code0 code1 code2 : TernaryRoleCode
+  code0 : TernaryRoleCode
+  code1 : TernaryRoleCode
+  code2 : TernaryRoleCode
 
 ------------------------------------------------------------------------
 -- The six explicit permutations of a three-element carrier.

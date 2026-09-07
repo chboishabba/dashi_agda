@@ -20,10 +20,17 @@ import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 ------------------------------------------------------------------------
 
 data Frontier3 : Set where
-  a b c : Frontier3
+  a : Frontier3
+  b : Frontier3
+  c : Frontier3
 
 data LinearOrder3 : Set where
-  abc acb bac bca cab cba : LinearOrder3
+  abc : LinearOrder3
+  acb : LinearOrder3
+  bac : LinearOrder3
+  bca : LinearOrder3
+  cab : LinearOrder3
+  cba : LinearOrder3
 
 abc≠acb : ¬ (abc ≡ acb)
 abc≠acb ()
@@ -223,7 +230,8 @@ unresolvedTailPatternHasS2 = BT.stage2PatternHasS2
 ------------------------------------------------------------------------
 
 data TailOrderResidual : Set where
-  bBeforeC cBeforeB : TailOrderResidual
+  bBeforeC : TailOrderResidual
+  cBeforeB : TailOrderResidual
 
 recoverTailFromFullSheet : LinearOrder3 → TailOrderResidual
 recoverTailFromFullSheet abc = bBeforeC

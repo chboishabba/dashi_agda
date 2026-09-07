@@ -20,7 +20,8 @@ _≢_ : ∀ {A : Set} → A → A → Set
 x ≢ y = x ≡ y → ⊥
 
 data Conformation : Set where
-  normal prion : Conformation
+  normal : Conformation
+  prion : Conformation
 
 normal≢prion : normal ≢ prion
 normal≢prion ()

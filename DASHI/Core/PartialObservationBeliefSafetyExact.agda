@@ -98,13 +98,18 @@ sameBeliefPreservesFiniteFutureObservation machine actions {left} {right} same
 ------------------------------------------------------------------------
 
 data DemoHistory : Set where
-  leftPast rightPast leftAfter rightAfter : DemoHistory
+  leftPast : DemoHistory
+  rightPast : DemoHistory
+  leftAfter : DemoHistory
+  rightAfter : DemoHistory
 
 data DemoAction : Set where
   probe : DemoAction
 
 data DemoObservation : Set where
-  sameNow leftResponse rightResponse : DemoObservation
+  sameNow : DemoObservation
+  leftResponse : DemoObservation
+  rightResponse : DemoObservation
 
 currentDemo : DemoHistory → DemoObservation
 currentDemo leftPast = sameNow

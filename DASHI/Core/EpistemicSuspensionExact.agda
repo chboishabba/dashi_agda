@@ -31,10 +31,14 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data EpistemicDisposition : Set where
-  rejectHere suspendAndRefine acceptHere : EpistemicDisposition
+  rejectHere : EpistemicDisposition
+  suspendAndRefine : EpistemicDisposition
+  acceptHere : EpistemicDisposition
 
 data TernaryEvidence : Set where
-  negativeEvidence neutralEvidence positiveEvidence : TernaryEvidence
+  negativeEvidence : TernaryEvidence
+  neutralEvidence : TernaryEvidence
+  positiveEvidence : TernaryEvidence
 
 disposition : TernaryEvidence → EpistemicDisposition
 disposition negativeEvidence = rejectHere
@@ -59,7 +63,8 @@ positiveIsNotNeutral ()
 ------------------------------------------------------------------------
 
 data BinaryDecision : Set where
-  no yes : BinaryDecision
+  no : BinaryDecision
+  yes : BinaryDecision
 
 collapseNeutralToNo : TernaryEvidence → BinaryDecision
 collapseNeutralToNo negativeEvidence = no

@@ -29,7 +29,9 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 
 data DiagramKind : Set where
-  gaugeLoop ghostLoop haarLoop : DiagramKind
+  gaugeLoop : DiagramKind
+  ghostLoop : DiagramKind
+  haarLoop : DiagramKind
 
 record LiteralBackgroundVertices
     (Background Fluctuation Operator Vertex : Set) : Set₁ where

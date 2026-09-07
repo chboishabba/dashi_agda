@@ -22,19 +22,27 @@ import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as Admission
 ------------------------------------------------------------------------
 
 data ActualFrontier : Set where
-  actualLeafOpen actualLeafClosed : ActualFrontier
+  actualLeafOpen : ActualFrontier
+  actualLeafClosed : ActualFrontier
 
 data ReportedFrontier : Set where
-  reportsOpen reportsClosed : ReportedFrontier
+  reportsOpen : ReportedFrontier
+  reportsClosed : ReportedFrontier
 
 data BelievedFrontier : Set where
-  believesOpen believesClosed : BelievedFrontier
+  believesOpen : BelievedFrontier
+  believesClosed : BelievedFrontier
 
 data SearchMove : Set where
-  elaborateCandidate reuseExisting reopenPrerequisite : SearchMove
+  elaborateCandidate : SearchMove
+  reuseExisting : SearchMove
+  reopenPrerequisite : SearchMove
 
 data FrontierProvenance : Set where
-  repoVerified staleSnapshot routeSelfReport unresolvedFrontier : FrontierProvenance
+  repoVerified : FrontierProvenance
+  staleSnapshot : FrontierProvenance
+  routeSelfReport : FrontierProvenance
+  unresolvedFrontier : FrontierProvenance
 
 record FrontierObservation : Set where
   constructor frontier-observation

@@ -118,7 +118,9 @@ codingContributionCanContestProjection = codingShapesProjection
 ------------------------------------------------------------------------
 
 data FlatAudienceAxis : Set where
-  ageAxis cultureAxis languageAxis : FlatAudienceAxis
+  ageAxis : FlatAudienceAxis
+  cultureAxis : FlatAudienceAxis
+  languageAxis : FlatAudienceAxis
 
 data SituatedAudienceAxis : Set where
   situatedAgeAxis : SituatedAudienceAxis
@@ -293,7 +295,9 @@ threeCsSafetyDoesNotEstablishPluralSafety =
 ------------------------------------------------------------------------
 
 data SampleStudent : Set where
-  studentOne studentTwo studentThree : SampleStudent
+  studentOne : SampleStudent
+  studentTwo : SampleStudent
+  studentThree : SampleStudent
 
 studentPositiveReception : SampleStudent → Bool
 studentPositiveReception studentOne = true

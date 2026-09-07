@@ -25,7 +25,11 @@ import DASHI.Reasoning.SurplusChannelCore as Surplus
 ------------------------------------------------------------------------
 
 data TypedGap : Set where
-  noGap compatibleGap contradictionGap residualGap parallaxNoMeet : TypedGap
+  noGap : TypedGap
+  compatibleGap : TypedGap
+  contradictionGap : TypedGap
+  residualGap : TypedGap
+  parallaxNoMeet : TypedGap
 
 comparisonToTypedGap : PNF.ComparisonResult → TypedGap
 comparisonToTypedGap PNF.equivalent = noGap
@@ -97,7 +101,9 @@ canonicalAnalyticResidualSeparation = record
 ------------------------------------------------------------------------
 
 data LearningMode : Set where
-  inhibitoryOverlay reconsolidationUpdate revaluationMode : LearningMode
+  inhibitoryOverlay : LearningMode
+  reconsolidationUpdate : LearningMode
+  revaluationMode : LearningMode
   reanchoringMode erasureCandidate : LearningMode
 
 record RelationalLearningTraumaHyperfabric : Set₁ where

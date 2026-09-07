@@ -32,7 +32,10 @@ import DASHI.Mathematics.Complexity.DeterministicNondeterministicMachineExact as
 open Machine.NondeterministicMachine
 
 data ToyState : Set where
-  startState workState acceptState rejectState : ToyState
+  startState : ToyState
+  workState : ToyState
+  acceptState : ToyState
+  rejectState : ToyState
 
 data AcceptingToyState : ToyState → Set where
   acceptingState : AcceptingToyState acceptState
@@ -141,7 +144,8 @@ record GeneralCookLevinBoundary : Set₁ where
     variableCountPolynomial : Set
 
 data CookLevinLayer : Set where
-  finiteToyTableauLayer generalCookLevinLayer : CookLevinLayer
+  finiteToyTableauLayer : CookLevinLayer
+  generalCookLevinLayer : CookLevinLayer
 
 toyTableauIsNotGeneralCookLevin :
   finiteToyTableauLayer ≡ generalCookLevinLayer → ⊥

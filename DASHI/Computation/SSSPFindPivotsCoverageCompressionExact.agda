@@ -72,7 +72,8 @@ open FindPivotsCertificate public
 ------------------------------------------------------------------------
 
 data Relevant2 : Set where
-  completedVertex pivotCoveredVertex : Relevant2
+  completedVertex : Relevant2
+  pivotCoveredVertex : Relevant2
 
 data CompletedInW2 : Relevant2 → Set where
   completedWitness : CompletedInW2 completedVertex

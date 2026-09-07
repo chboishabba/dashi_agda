@@ -45,7 +45,8 @@ asMDLProblem P =
     "declared residual/consumer context"
 
 data LiveExperimentAxis : Set where
-  residualSurvivalAxis resourceCostAxis : LiveExperimentAxis
+  residualSurvivalAxis : LiveExperimentAxis
+  resourceCostAxis : LiveExperimentAxis
 
 liveCosts :
   (P : LiveExperimentProblem) →

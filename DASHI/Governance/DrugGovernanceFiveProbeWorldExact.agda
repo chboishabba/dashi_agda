@@ -22,19 +22,24 @@ data TherapeuticSurface : Set where
   samePositivePsychedelicLegibility : TherapeuticSurface
 
 data SubjectPosition : Set where
-  representedSubject originatingSubject : SubjectPosition
+  representedSubject : SubjectPosition
+  originatingSubject : SubjectPosition
 
 data HistoricalPosition : Set where
-  erasedCriminalisationHistory retainedCriminalisationHistory : HistoricalPosition
+  erasedCriminalisationHistory : HistoricalPosition
+  retainedCriminalisationHistory : HistoricalPosition
 
 data AuthorityPosition : Set where
-  externallyImposedAuthority affectedSubjectAuthority : AuthorityPosition
+  externallyImposedAuthority : AuthorityPosition
+  affectedSubjectAuthority : AuthorityPosition
 
 data MaterialRoute : Set where
-  concentratedCommercialBenefit sharedOrCommunityBenefit : MaterialRoute
+  concentratedCommercialBenefit : MaterialRoute
+  sharedOrCommunityBenefit : MaterialRoute
 
 data SovereigntyPosition : Set where
-  externalObserverSovereignty originatingSovereignStanding : SovereigntyPosition
+  externalObserverSovereignty : SovereigntyPosition
+  originatingSovereignStanding : SovereigntyPosition
 
 record ProbeWorld : Set where
   constructor probeWorld

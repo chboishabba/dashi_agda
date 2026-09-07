@@ -74,7 +74,8 @@ open ConsumerSplit public
 ------------------------------------------------------------------------
 
 data RepresentativeSide : Set where
-  beforeRepresentative afterRepresentative : RepresentativeSide
+  beforeRepresentative : RepresentativeSide
+  afterRepresentative : RepresentativeSide
 
 record ReopenableConsumerCollapse
     {Strand Action : Set}

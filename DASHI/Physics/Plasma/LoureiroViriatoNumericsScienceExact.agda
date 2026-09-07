@@ -10,7 +10,9 @@ import DASHI.Core.ScientificMechanismEvidenceBidiExact as S
 ------------------------------------------------------------------------
 
 data PlasmaModel : Set where
-  KREHM KRMHD reducedMHDLimit : PlasmaModel
+  KREHM : PlasmaModel
+  KRMHD : PlasmaModel
+  reducedMHDLimit : PlasmaModel
 
 data ParallelScheme : Set where
   macCormack2 : ParallelScheme
@@ -26,7 +28,8 @@ data VelocitySpaceScheme : Set where
 
 
 data OperatorSplit : Set where
-  strang godunov : OperatorSplit
+  strang : OperatorSplit
+  godunov : OperatorSplit
 
 record ViriatoNumericalArchitecture : Set where
   constructor viriato-numerical-architecture

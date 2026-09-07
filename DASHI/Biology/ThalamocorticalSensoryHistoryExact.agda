@@ -105,10 +105,12 @@ canonicalSourceAttribution =
 ------------------------------------------------------------------------
 
 data MotionCue : Set where
-  cueLeft cueRight : MotionCue
+  cueLeft : MotionCue
+  cueRight : MotionCue
 
 data PreviousOutcome : Set where
-  previousCorrect previousIncorrect : PreviousOutcome
+  previousCorrect : PreviousOutcome
+  previousIncorrect : PreviousOutcome
 
 record TrialState : Set where
   constructor trialState
@@ -120,7 +122,8 @@ record TrialState : Set where
 open TrialState public
 
 data CueDeviation : Set where
-  similarToRecent changedFromRecent : CueDeviation
+  similarToRecent : CueDeviation
+  changedFromRecent : CueDeviation
 
 cueDeviation : MotionCue → MotionCue → CueDeviation
 cueDeviation cueLeft cueLeft = similarToRecent
@@ -190,7 +193,8 @@ contrastCannotDescendThroughCurrentCueAlone descent =
 ------------------------------------------------------------------------
 
 data DecisionDisposition : Set where
-  maintainPreviousDisposition reconsiderDisposition : DecisionDisposition
+  maintainPreviousDisposition : DecisionDisposition
+  reconsiderDisposition : DecisionDisposition
 
 behavioralDisposition : TrialState → DecisionDisposition
 behavioralDisposition (trialState previous current previousCorrect)

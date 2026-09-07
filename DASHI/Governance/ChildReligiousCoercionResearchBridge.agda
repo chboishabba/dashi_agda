@@ -10,20 +10,29 @@ import DASHI.Biology.TraumaMemoryAttractorPortfolio as TraumaMemory
 import DASHI.Biology.ChildAuthorityTraumaSourceAtlas as Sources
 
 data ExposureDimension : Set where
-  fearExposure compulsionExposure punishmentExposure isolationExposure : ExposureDimension
+  fearExposure : ExposureDimension
+  compulsionExposure : ExposureDimension
+  punishmentExposure : ExposureDimension
+  isolationExposure : ExposureDimension
   institutionalBetrayalExposure directAbuseExposure epistemicClosureExposure disclosureSuppressionExposure : ExposureDimension
 
 data OutcomeDimension : Set where
-  psychologicalDistressOutcome postTraumaticStressOutcome autonomyOutcome selfTrustOutcome : OutcomeDimension
+  psychologicalDistressOutcome : OutcomeDimension
+  postTraumaticStressOutcome : OutcomeDimension
+  autonomyOutcome : OutcomeDimension
+  selfTrustOutcome : OutcomeDimension
   interpersonalTrustOutcome relationalFunctionOutcome qualityOfLifeOutcome socialSupportOutcome : OutcomeDimension
   resilienceOutcome spiritualWellbeingOutcome : OutcomeDimension
 
 data ComparisonClass : Set where
-  coerciveReligiousExposureClass religiousInstitutionalAbuseClass : ComparisonClass
+  coerciveReligiousExposureClass : ComparisonClass
+  religiousInstitutionalAbuseClass : ComparisonClass
   otherChildhoodAdversityClass lowerExposureComparisonClass : ComparisonClass
 
 data EvidenceLevel : Set where
-  definitionEvidence logicalConsequenceEvidence mechanisticPlausibilityEvidence : EvidenceLevel
+  definitionEvidence : EvidenceLevel
+  logicalConsequenceEvidence : EvidenceLevel
+  mechanisticPlausibilityEvidence : EvidenceLevel
   crossSectionalAssociationEvidence longitudinalAssociationEvidence quasiCausalEvidence establishedCausalEvidence : EvidenceLevel
 
 record ExposureCoordinate : Set where
@@ -96,7 +105,11 @@ institutionalBetrayalClaim =
     "The predicate must be established from institution-specific prevention, response, retaliation, investigation, and remedy evidence."
 
 data ChildRightsSurface : Set where
-  safetyRight developmentRight conscienceRight participationRight familyRight : ChildRightsSurface
+  safetyRight : ChildRightsSurface
+  developmentRight : ChildRightsSurface
+  conscienceRight : ChildRightsSurface
+  participationRight : ChildRightsSurface
+  familyRight : ChildRightsSurface
   educationRight privacyRight remedyRight : ChildRightsSurface
 
 canonicalChildRightsSurfaces : List ChildRightsSurface
@@ -105,7 +118,9 @@ canonicalChildRightsSurfaces = safetyRight ∷ developmentRight ∷ conscienceRi
 data FollowUpPoint : Set where baselinePoint oneYearPoint threeYearPoint fiveYearPoint tenYearCandidatePoint : FollowUpPoint
 
 data AnalysisMethod : Set where
-  descriptiveAnalysis longitudinalMixedEffectsAnalysis multidimensionalExposureAnalysis : AnalysisMethod
+  descriptiveAnalysis : AnalysisMethod
+  longitudinalMixedEffectsAnalysis : AnalysisMethod
+  multidimensionalExposureAnalysis : AnalysisMethod
   mediationSensitivityAnalysis moderationAnalysis missingDataSensitivityAnalysis : AnalysisMethod
   qualitativeThematicAnalysis mixedMethodsIntegration : AnalysisMethod
 

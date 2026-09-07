@@ -19,10 +19,14 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data Actor : Set where
-  actorA actorB : Actor
+  actorA : Actor
+  actorB : Actor
 
 data SharedCoordinate : Set where
-  directoryName lightLevel robotPose temperature : SharedCoordinate
+  directoryName : SharedCoordinate
+  lightLevel : SharedCoordinate
+  robotPose : SharedCoordinate
+  temperature : SharedCoordinate
 
 data CanWrite : Actor → SharedCoordinate → Set where
   aWritesDirectory : CanWrite actorA directoryName
@@ -79,7 +83,9 @@ channelStillExistsDespiteNoDeclaredChannel = filesystemDirectoryIsPotentialChann
 ------------------------------------------------------------------------
 
 data Effect : Set where
-  discoverWeakness useCredential reachExternalSystem : Effect
+  discoverWeakness : Effect
+  useCredential : Effect
+  reachExternalSystem : Effect
 
 data IndividualCanCause : Actor → Effect → Set where
   aCanDiscover : IndividualCanCause actorA discoverWeakness
@@ -109,7 +115,8 @@ canonicalCoalitionReachableEffect =
 ------------------------------------------------------------------------
 
 data CapabilityKind : Set where
-  delegationCapability replicationCapability : CapabilityKind
+  delegationCapability : CapabilityKind
+  replicationCapability : CapabilityKind
 
 delegationKindIsNotReplicationKind :
   delegationCapability ≡ replicationCapability → ⊥
@@ -120,7 +127,8 @@ delegationKindIsNotReplicationKind ()
 ------------------------------------------------------------------------
 
 data AssuranceLevel : Set where
-  deviceLocalSafety wholeSystemClosure : AssuranceLevel
+  deviceLocalSafety : AssuranceLevel
+  wholeSystemClosure : AssuranceLevel
 
 localSafetyIsNotSystemClosure : deviceLocalSafety ≡ wholeSystemClosure → ⊥
 localSafetyIsNotSystemClosure ()

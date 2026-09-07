@@ -41,10 +41,15 @@ data BNFContext : Set where
 
 
 data SpatialScale : Set where
-  nationalScale stateScale farmScale landscapeScale : SpatialScale
+  nationalScale : SpatialScale
+  stateScale : SpatialScale
+  farmScale : SpatialScale
+  landscapeScale : SpatialScale
 
 data TemporalWindow : Set where
-  cropSeason multiSeason planningHorizon : TemporalWindow
+  cropSeason : TemporalWindow
+  multiSeason : TemporalWindow
+  planningHorizon : TemporalWindow
 
 data BNFIntervention : Set where
   inoculateBradyrhizobium : BNFIntervention

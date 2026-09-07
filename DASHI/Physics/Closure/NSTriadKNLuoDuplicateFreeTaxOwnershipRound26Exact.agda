@@ -34,7 +34,15 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 data TaxOwner : Set where
-  HH-good HH-bad LH HL CC Com kernel tail boundary : TaxOwner
+  HH-good : TaxOwner
+  HH-bad : TaxOwner
+  LH : TaxOwner
+  HL : TaxOwner
+  CC : TaxOwner
+  Com : TaxOwner
+  kernel : TaxOwner
+  tail : TaxOwner
+  boundary : TaxOwner
 
 record TaxAtom : Set where
   constructor tax-atom

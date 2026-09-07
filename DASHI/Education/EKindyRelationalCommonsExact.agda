@@ -56,10 +56,17 @@ canonicalEKindyRelationalLoop =
 ------------------------------------------------------------------------
 
 data LearningAim : Set where
-  countingAim languageAim sequencingAim measurementAim narrativeAim : LearningAim
+  countingAim : LearningAim
+  languageAim : LearningAim
+  sequencingAim : LearningAim
+  measurementAim : LearningAim
+  narrativeAim : LearningAim
 
 data LocalContext : Set where
-  harvestingContext homeRoutineContext communityEventContext localCountryContext : LocalContext
+  harvestingContext : LocalContext
+  homeRoutineContext : LocalContext
+  communityEventContext : LocalContext
+  localCountryContext : LocalContext
 
 record ContextualisedLearningActivity : Set where
   constructor contextualisedLearningActivity
@@ -87,7 +94,9 @@ harvestCountingActivity =
 ------------------------------------------------------------------------
 
 data CommonsResourceKind : Set where
-  curriculumMap activityLibrary multilingualResource : CommonsResourceKind
+  curriculumMap : CommonsResourceKind
+  activityLibrary : CommonsResourceKind
+  multilingualResource : CommonsResourceKind
   accessibilityResource localGroup professionalContact forumResource : CommonsResourceKind
 
 canonicalCommonsResources : List CommonsResourceKind

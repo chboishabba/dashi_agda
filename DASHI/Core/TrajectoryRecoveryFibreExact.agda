@@ -104,7 +104,9 @@ open RecoveryRequiresIndependentWitness public
 ------------------------------------------------------------------------
 
 data DemoState : Set where
-  original restoredWithoutResidue restoredWithResidue : DemoState
+  original : DemoState
+  restoredWithoutResidue : DemoState
+  restoredWithResidue : DemoState
 
 data DemoEndpoint : Set where sameEndpoint : DemoEndpoint
 data DemoRecovery : Set where recovered impaired : DemoRecovery

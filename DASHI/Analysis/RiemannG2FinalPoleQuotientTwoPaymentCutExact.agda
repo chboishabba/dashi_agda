@@ -88,7 +88,10 @@ data FinalAnalyticCoordinate : Set where
 
 
 data TerminalRole : Set where
-  producerInternal terminalAnalytic downstream compilerOutput : TerminalRole
+  producerInternal : TerminalRole
+  terminalAnalytic : TerminalRole
+  downstream : TerminalRole
+  compilerOutput : TerminalRole
 
 terminalRole : FinalAnalyticCoordinate -> TerminalRole
 terminalRole chosenFiniteNearUpper = producerInternal

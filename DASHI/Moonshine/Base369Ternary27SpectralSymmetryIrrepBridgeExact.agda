@@ -114,7 +114,9 @@ positiveCornerFixedByRotation = refl
 ------------------------------------------------------------------------
 
 data AxisFrequency : Set where
-  frequencyZero frequencyPositive frequencyNegative : AxisFrequency
+  frequencyZero : AxisFrequency
+  frequencyPositive : AxisFrequency
+  frequencyNegative : AxisFrequency
 
 frequencyRow : AxisFrequency → Fourier.FourierRow
 frequencyRow frequencyZero = Fourier.chi0

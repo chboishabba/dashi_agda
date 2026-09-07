@@ -8,13 +8,20 @@ import DASHI.Core.ConsumerRelativeReductionKernelExact as Reduction
 data Probe : Set where stressPulse : Probe
 
 data FineState : Set where
-  soilFast soilSlow soilFastAfter soilSlowAfter : FineState
+  soilFast : FineState
+  soilSlow : FineState
+  soilFastAfter : FineState
+  soilSlowAfter : FineState
   plantIntact plantVulnerable plantIntactAfter plantVulnerableAfter : FineState
   nutrientReplete nutrientLimited nutrientRepleteAfter nutrientLimitedAfter : FineState
 
 
 data Observation : Set where
-  baseline fastDrain slowDrain intactResponse vulnerableResponse : Observation
+  baseline : Observation
+  fastDrain : Observation
+  slowDrain : Observation
+  intactResponse : Observation
+  vulnerableResponse : Observation
   nutrientRepleteResponse nutrientLimitedResponse : Observation
 
 fineStep : Probe → FineState → FineState

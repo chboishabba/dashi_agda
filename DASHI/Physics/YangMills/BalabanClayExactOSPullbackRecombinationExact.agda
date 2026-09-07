@@ -91,7 +91,9 @@ blockedPositiveTimeHasOriginalPositiveTimeRepresentative dataSet blocked =
 ------------------------------------------------------------------------
 
 data LabelValue : Set where
-  negativeLabel positiveLabel recombinedValue : LabelValue
+  negativeLabel : LabelValue
+  positiveLabel : LabelValue
+  recombinedValue : LabelValue
 
 data LabelNonnegative : LabelValue → Set where
   positiveIsNonnegative : LabelNonnegative positiveLabel

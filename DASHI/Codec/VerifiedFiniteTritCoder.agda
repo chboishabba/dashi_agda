@@ -21,10 +21,14 @@ open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 -- an entropy-optimality or rANS theorem.
 
 data Bit : Set where
-  bit0 bit1 : Bit
+  bit0 : Bit
+  bit1 : Bit
 
 data Word2 : Set where
-  word00 word01 word10 word11 : Word2
+  word00 : Word2
+  word01 : Word2
+  word10 : Word2
+  word11 : Word2
 
 wordWidth : Nat
 wordWidth = suc (suc zero)

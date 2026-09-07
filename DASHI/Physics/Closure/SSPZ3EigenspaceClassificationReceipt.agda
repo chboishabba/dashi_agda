@@ -33,10 +33,14 @@ data Z3EigenspaceLabelling : Set where
     Z3EigenspaceLabelling
 
 data PsiIndex : Set where
-  psi0 psi1 psi2 : PsiIndex
+  psi0 : PsiIndex
+  psi1 : PsiIndex
+  psi2 : PsiIndex
 
 data OmegaPower : Set where
-  omega0 omega1 omega2 : OmegaPower
+  omega0 : OmegaPower
+  omega1 : OmegaPower
+  omega2 : OmegaPower
 
 psiAtTwo : PsiIndex → OmegaPower
 psiAtTwo psi0 = omega0

@@ -34,7 +34,9 @@ import DASHI.Reasoning.EvidenceDesignAdmissibilityExact as Design
 ------------------------------------------------------------------------
 
 data RecordedSexCategory : Set where
-  recordedMale recordedFemale recordedOtherOrUnresolved : RecordedSexCategory
+  recordedMale : RecordedSexCategory
+  recordedFemale : RecordedSexCategory
+  recordedOtherOrUnresolved : RecordedSexCategory
 
 data ConstructionDirection : Set where
   masculineToMasculine : ConstructionDirection
@@ -193,7 +195,8 @@ data AssociationSurface : Set where
   positiveAssociation : AssociationSurface
 
 data CausalStatus : Set where
-  causalUnidentified causalIdentified : CausalStatus
+  causalUnidentified : CausalStatus
+  causalIdentified : CausalStatus
 
 data AssociationFineState : Set where
   adjustedObservationalAssociation : AssociationFineState
@@ -296,7 +299,8 @@ data StatisticalSignificanceSurface : Set where
   conventionallySignificant : StatisticalSignificanceSurface
 
 data InstitutionalOutcomeSurface : Set where
-  noShift shift : InstitutionalOutcomeSurface
+  noShift : InstitutionalOutcomeSurface
+  shift : InstitutionalOutcomeSurface
 
 data SignificanceFineState : Set where
   significantWithoutInstitutionalShift : SignificanceFineState

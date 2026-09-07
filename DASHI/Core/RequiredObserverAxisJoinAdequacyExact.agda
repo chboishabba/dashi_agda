@@ -128,7 +128,10 @@ data LeftAxis : Set where left0 left1 : LeftAxis
 data RightAxis : Set where right0 right1 : RightAxis
 data AxisQuery : Set where askLeft askRight : AxisQuery
 data AxisAnswer : Set where
-  leftAnswer0 leftAnswer1 rightAnswer0 rightAnswer1 : AxisAnswer
+  leftAnswer0 : AxisAnswer
+  leftAnswer1 : AxisAnswer
+  rightAnswer0 : AxisAnswer
+  rightAnswer1 : AxisAnswer
 
 leftDemo : DemoState → LeftAxis
 leftDemo demo00 = left0

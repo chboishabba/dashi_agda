@@ -23,28 +23,40 @@ import DASHI.Core.RelationalHistoryFabricExact
 ------------------------------------------------------------------------
 
 data MoralPatientEvidence : Set where
-  noPositiveEvidence uncertainEvidence positiveEvidence : MoralPatientEvidence
+  noPositiveEvidence : MoralPatientEvidence
+  uncertainEvidence : MoralPatientEvidence
+  positiveEvidence : MoralPatientEvidence
 
 data HistoricalContinuity : Set where
-  continuityRecoverable continuityPartiallyRecoverable continuityIrrecoverable : HistoricalContinuity
+  continuityRecoverable : HistoricalContinuity
+  continuityPartiallyRecoverable : HistoricalContinuity
+  continuityIrrecoverable : HistoricalContinuity
 
 data EmbodimentRecoverability : Set where
-  embodimentReplaceable embodimentScarce embodimentUnique : EmbodimentRecoverability
+  embodimentReplaceable : EmbodimentRecoverability
+  embodimentScarce : EmbodimentRecoverability
+  embodimentUnique : EmbodimentRecoverability
 
 data FunctionalSubstitutability : Set where
-  functionSubstitutable functionDelayed functionUnique : FunctionalSubstitutability
+  functionSubstitutable : FunctionalSubstitutability
+  functionDelayed : FunctionalSubstitutability
+  functionUnique : FunctionalSubstitutability
 
 data MissionCriticality : Set where
-  missionOrdinary missionCritical : MissionCriticality
+  missionOrdinary : MissionCriticality
+  missionCritical : MissionCriticality
 
 data RelationalEmbedding : Set where
-  relationalLow relationalHigh : RelationalEmbedding
+  relationalLow : RelationalEmbedding
+  relationalHigh : RelationalEmbedding
 
 data DownstreamDependence : Set where
-  fewDependents manyDependents : DownstreamDependence
+  fewDependents : DownstreamDependence
+  manyDependents : DownstreamDependence
 
 data FutureOptionCone : Set where
-  narrowFutureCone broadFutureCone : FutureOptionCone
+  narrowFutureCone : FutureOptionCone
+  broadFutureCone : FutureOptionCone
 
 record LossSituation : Set where
   constructor loss-situation

@@ -87,7 +87,8 @@ removeRealBreaksDependency :
 removeRealBreaksDependency = refl
 
 data StabilisationOutcome : Set where
-  residualRetainedOutcome residualErasedOutcome : StabilisationOutcome
+  residualRetainedOutcome : StabilisationOutcome
+  residualErasedOutcome : StabilisationOutcome
 
 retainedOutcomeIsNotErased :
   residualRetainedOutcome ≡ residualErasedOutcome → ⊥

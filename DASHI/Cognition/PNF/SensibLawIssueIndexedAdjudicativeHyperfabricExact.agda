@@ -173,7 +173,11 @@ data LegalDiscriminator : Set where
 
 
 data EpistemicWorkKind : Set where
-  thinkWork lookWork testWork actWork noWork : EpistemicWorkKind
+  thinkWork : EpistemicWorkKind
+  lookWork : EpistemicWorkKind
+  testWork : EpistemicWorkKind
+  actWork : EpistemicWorkKind
+  noWork : EpistemicWorkKind
 
 obligationFor : AdjudicativeResidual → LegalProofObligation
 obligationFor issuePropositionResidual = establishIssueProposition

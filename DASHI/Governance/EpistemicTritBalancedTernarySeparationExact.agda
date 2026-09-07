@@ -26,7 +26,8 @@ import DASHI.Ontology.EpistemicTrit as Epistemic
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 
 data ResolvedPolarity : Set where
-  resolvedAgainst resolvedFor : ResolvedPolarity
+  resolvedAgainst : ResolvedPolarity
+  resolvedFor : ResolvedPolarity
 
 resolvedState : ResolvedPolarity → Epistemic.EpistemicTrit
 resolvedState resolvedAgainst = Epistemic.contradicted

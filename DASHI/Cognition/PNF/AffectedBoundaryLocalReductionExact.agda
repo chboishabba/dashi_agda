@@ -19,7 +19,11 @@ open import DASHI.Cognition.PNF.SparseFibredFrontier
 ------------------------------------------------------------------------
 
 data BoundaryKeyFamily : Set where
-  objectKey factorKey demandKey actorKey outwardKey : BoundaryKeyFamily
+  objectKey : BoundaryKeyFamily
+  factorKey : BoundaryKeyFamily
+  demandKey : BoundaryKeyFamily
+  actorKey : BoundaryKeyFamily
+  outwardKey : BoundaryKeyFamily
 
 record BoundaryKey : Set where
   constructor boundaryKey

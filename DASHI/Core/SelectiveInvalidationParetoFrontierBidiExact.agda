@@ -23,7 +23,10 @@ import DASHI.Core.DependencyWeightedDiagnosisSchedulerBidiExact as Weighted
 ------------------------------------------------------------------------
 
 data RecomputeClass : Set where
-  mustRecompute mayRecompute provablyUnaffected authorityBlocked : RecomputeClass
+  mustRecompute : RecomputeClass
+  mayRecompute : RecomputeClass
+  provablyUnaffected : RecomputeClass
+  authorityBlocked : RecomputeClass
 
 record CertificateCandidate : Set where
   constructor certificate-candidate
@@ -40,7 +43,10 @@ record CertificateCandidate : Set where
 open CertificateCandidate public
 
 data FrontierAxis : Set where
-  consequenceAxis diagnosticAxis authorityAxis recomputeCostAxis : FrontierAxis
+  consequenceAxis : FrontierAxis
+  diagnosticAxis : FrontierAxis
+  authorityAxis : FrontierAxis
+  recomputeCostAxis : FrontierAxis
 
 axisCost : FrontierAxis → CertificateCandidate → Nat
 axisCost consequenceAxis candidate = consequenceCost candidate
@@ -113,7 +119,10 @@ canonicalAmbientCapacity =
     true
 
 data LocalAxis : Set where
-  localConsequence localDiagnostic localAuthority localCost : LocalAxis
+  localConsequence : LocalAxis
+  localDiagnostic : LocalAxis
+  localAuthority : LocalAxis
+  localCost : LocalAxis
 
 canonicalResidualMaterialisation : ResidualMaterialisation canonicalAmbientCapacity
 canonicalResidualMaterialisation =

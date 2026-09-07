@@ -218,7 +218,8 @@ holeBResidualDifferenceExact before after =
 ------------------------------------------------------------------------
 
 data AdmittedSourceSecant : Set where
-  q1ToQ3 q3ToQ5 : AdmittedSourceSecant
+  q1ToQ3 : AdmittedSourceSecant
+  q3ToQ5 : AdmittedSourceSecant
 
 secantBefore : AdmittedSourceSecant → Cell.SourceCharge
 secantBefore q1ToQ3 = Cell.q1

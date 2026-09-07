@@ -10,16 +10,24 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data DirectionState : Set where
-  directionPresent directionAbsent directionUnresolved : DirectionState
+  directionPresent : DirectionState
+  directionAbsent : DirectionState
+  directionUnresolved : DirectionState
 
 data TransmissionState : Set where
-  transmitted notTransmitted transmissionUnresolved : TransmissionState
+  transmitted : TransmissionState
+  notTransmitted : TransmissionState
+  transmissionUnresolved : TransmissionState
 
 data ReceiptState : Set where
-  received notReceived receiptUnresolved : ReceiptState
+  received : ReceiptState
+  notReceived : ReceiptState
+  receiptUnresolved : ReceiptState
 
 data AuthorityStatus : Set where
-  authorityClosed authorityOpen authorityUnresolved : AuthorityStatus
+  authorityClosed : AuthorityStatus
+  authorityOpen : AuthorityStatus
+  authorityUnresolved : AuthorityStatus
 
 record OperationalDirectionFibre : Set where
   constructor operationalDirectionFibre
@@ -99,7 +107,13 @@ record DirectionCutset : Set where
 open DirectionCutset public
 
 data DirectionResidual : Set where
-  documentResidual authorityResidual chronologyResidual transmissionResidual fieldReceiptResidual executionResidual directionClosed : DirectionResidual
+  documentResidual : DirectionResidual
+  authorityResidual : DirectionResidual
+  chronologyResidual : DirectionResidual
+  transmissionResidual : DirectionResidual
+  fieldReceiptResidual : DirectionResidual
+  executionResidual : DirectionResidual
+  directionClosed : DirectionResidual
 
 firstDirectionResidual : DirectionClaim → DirectionCutset → DirectionResidual
 firstDirectionResidual directionExisted c with documentClosed c

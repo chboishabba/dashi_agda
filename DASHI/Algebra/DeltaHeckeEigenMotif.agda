@@ -53,7 +53,16 @@ eigenMass : Eigen3 → Nat
 eigenMass e = earth e + spoke e + hub e
 
 data Motif : Set where
-  M1 M2 M3 M4 M5 M6 M7 M8 M9 M10 : Motif
+  M1 : Motif
+  M2 : Motif
+  M3 : Motif
+  M4 : Motif
+  M5 : Motif
+  M6 : Motif
+  M7 : Motif
+  M8 : Motif
+  M9 : Motif
+  M10 : Motif
 
 -- Sparse flow support is treated conservatively; broad support is admitted.
 -- M10 remains an explicit overflow constructor for a parent-voxel classifier.

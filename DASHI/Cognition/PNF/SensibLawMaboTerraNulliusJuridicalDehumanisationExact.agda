@@ -38,7 +38,8 @@ data FoundationalJuridicalCapacity : Set where
 
 
 data RecognitionState : Set where
-  recognisedCapacity deniedCapacity : RecognitionState
+  recognisedCapacity : RecognitionState
+  deniedCapacity : RecognitionState
 
 data TerraNulliusOperation : Set where
   treatInhabitedAsLegallyUninhabited : TerraNulliusOperation

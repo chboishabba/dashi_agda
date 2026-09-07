@@ -19,7 +19,10 @@ open import DASHI.Ontology.LeanWikidataTheoremSurfaceBridge
 ------------------------------------------------------------------------
 
 data LeanDataProjection : Set where
-  fullStatementLayer truthyQueryLayer reifiedRdfLayer directRdfLayer : LeanDataProjection
+  fullStatementLayer : LeanDataProjection
+  truthyQueryLayer : LeanDataProjection
+  reifiedRdfLayer : LeanDataProjection
+  directRdfLayer : LeanDataProjection
 
 record LeanDataModelWitness : Set where
   constructor leanDataModelWitness
@@ -33,7 +36,11 @@ record LeanDataModelWitness : Set where
 open LeanDataModelWitness public
 
 data LeanDataContext : Set where
-  rankContext qualifierContext referenceContext temporalContext serializationContext : LeanDataContext
+  rankContext : LeanDataContext
+  qualifierContext : LeanDataContext
+  referenceContext : LeanDataContext
+  temporalContext : LeanDataContext
+  serializationContext : LeanDataContext
 
 dataModelWitnessState : LeanDataModelWitness → EpistemicTrit
 dataModelWitnessState witness =

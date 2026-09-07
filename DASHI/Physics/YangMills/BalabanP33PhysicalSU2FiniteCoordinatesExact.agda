@@ -50,7 +50,9 @@ import DASHI.Physics.YangMills.BalabanP33LiteralBondCellIncidenceExact as Incide
 ------------------------------------------------------------------------
 
 data LieCoordinate3 : Set where
-  coordinateX coordinateY coordinateZ : LieCoordinate3
+  coordinateX : LieCoordinate3
+  coordinateY : LieCoordinate3
+  coordinateZ : LieCoordinate3
 
 lieCoordinates3 : List LieCoordinate3
 lieCoordinates3 = coordinateX ∷ coordinateY ∷ coordinateZ ∷ []

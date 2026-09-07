@@ -111,7 +111,10 @@ data HASingleProducerSearchAction : Set where
 
 
 data SearchStatus : Set where
-  live pruned downstream parallel : SearchStatus
+  live : SearchStatus
+  pruned : SearchStatus
+  downstream : SearchStatus
+  parallel : SearchStatus
 
 searchStatus : HASingleProducerSearchAction → SearchStatus
 searchStatus recoverLiteralSourceNativeProducer = live

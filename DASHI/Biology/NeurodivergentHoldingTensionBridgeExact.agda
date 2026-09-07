@@ -22,7 +22,8 @@ structuralBurden : Tension.RepresentationMode → Nat
 structuralBurden = Tension.retainedCoordinates
 
 data PhysiologicalCostCode : Set where
-  lowMeasuredCost highMeasuredCost : PhysiologicalCostCode
+  lowMeasuredCost : PhysiologicalCostCode
+  highMeasuredCost : PhysiologicalCostCode
 
 record EmpiricalBurdenCostBridge : Set₁ where
   field

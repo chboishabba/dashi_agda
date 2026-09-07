@@ -240,10 +240,14 @@ generatedPermutationPreservesEndpoint action
 ------------------------------------------------------------------------
 
 data Axis4 : Set where
-  axis0 axis1 axis2 axis3 : Axis4
+  axis0 : Axis4
+  axis1 : Axis4
+  axis2 : Axis4
+  axis3 : Axis4
 
 data Direction : Set where
-  positive negative : Direction
+  positive : Direction
+  negative : Direction
 
 record SignedCount : Set where
   constructor signedCount

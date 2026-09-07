@@ -105,7 +105,9 @@ halfAsBinaryChartStillOneHalf : Chart.RatioEquivalent Chart.binaryPointOne Chart
 halfAsBinaryChartStillOneHalf = Chart.binaryPointOneIsOneHalf
 
 data BernoulliDistinguishedPoint : Set where
-  probabilityZero probabilityHalf probabilityOne : BernoulliDistinguishedPoint
+  probabilityZero : BernoulliDistinguishedPoint
+  probabilityHalf : BernoulliDistinguishedPoint
+  probabilityOne : BernoulliDistinguishedPoint
 
 complementPoint : BernoulliDistinguishedPoint → BernoulliDistinguishedPoint
 complementPoint probabilityZero = probabilityOne

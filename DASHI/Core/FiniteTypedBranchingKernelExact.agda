@@ -94,7 +94,9 @@ rowRegime kernel source =
 ------------------------------------------------------------------------
 
 data FineType : Set where
-  quietType criticalType expandingType : FineType
+  quietType : FineType
+  criticalType : FineType
+  expandingType : FineType
 
 fineTypes : List FineType
 fineTypes = quietType ∷ criticalType ∷ expandingType ∷ []

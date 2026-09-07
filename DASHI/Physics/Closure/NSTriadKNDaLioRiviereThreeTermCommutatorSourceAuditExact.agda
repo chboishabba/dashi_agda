@@ -89,7 +89,9 @@ threeTermProductCancellation qCenter qShift uCenter uShift =
 
 -- The source's paraproduct architecture has three genuinely distinct lanes.
 data ParaproductLane : Set where
-  highLow lowHigh highHigh : ParaproductLane
+  highLow : ParaproductLane
+  lowHigh : ParaproductLane
+  highHigh : ParaproductLane
 
 allThreeLanesDistinct₁ : highLow ≢ lowHigh
 allThreeLanesDistinct₁ ()

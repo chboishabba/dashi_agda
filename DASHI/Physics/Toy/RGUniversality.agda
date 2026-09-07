@@ -2367,7 +2367,8 @@ rgUniversalityObservableCollapse n O r {x} rx sameRelevant =
   rgRecovered-observables-depend-only-on-relevant n O rx refl sameRelevant
 
 data RGOperator : Set where
-  hold evolve : RGOperator
+  hold : RGOperator
+  evolve : RGOperator
 
 rgOperatorWitness : (n : Nat) → LW.OperatorWitness (rgShellTheory n)
 rgOperatorWitness n =

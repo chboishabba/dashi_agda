@@ -4,7 +4,9 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 
 -- Minimal finite-algebra candidate list scaffold (R, C, H).
 data BaseField : Set where
-  R C H : BaseField
+  R : BaseField
+  C : BaseField
+  H : BaseField
 
 record MatrixAlg : Set where
   field

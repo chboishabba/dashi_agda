@@ -13,7 +13,13 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data RelationKind : Set where
-  namedInRecord social financial political travel employment evidentiary : RelationKind
+  namedInRecord : RelationKind
+  social : RelationKind
+  financial : RelationKind
+  political : RelationKind
+  travel : RelationKind
+  employment : RelationKind
+  evidentiary : RelationKind
 
 record RelationalOrbitSystem : Set₁ where
   field
@@ -79,7 +85,8 @@ facilitationDoesNotAutomaticallyProveParticipation ()
 ------------------------------------------------------------------------
 
 data BoundaryRole : Set where
-  inside outside : BoundaryRole
+  inside : BoundaryRole
+  outside : BoundaryRole
 
 record PropositionLocalitySystem : Set₁ where
   field

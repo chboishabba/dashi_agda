@@ -178,10 +178,13 @@ open StratifiedResolutionTower public
 ------------------------------------------------------------------------
 
 data ToyCoarse : Set where
-  toyRegular toyFixed : ToyCoarse
+  toyRegular : ToyCoarse
+  toyFixed : ToyCoarse
 
 data ToyFine : Set where
-  regularFineLeft regularFineRight fixedFine : ToyFine
+  regularFineLeft : ToyFine
+  regularFineRight : ToyFine
+  fixedFine : ToyFine
 
 toyProject : ToyFine → ToyCoarse
 toyProject regularFineLeft = toyRegular
@@ -196,10 +199,12 @@ toyProjection = record
   }
 
 data ToyStratum : Set where
-  regularStratum fixedStratum : ToyStratum
+  regularStratum : ToyStratum
+  fixedStratum : ToyStratum
 
 data RegularFibreModel : Set where
-  regularLeft regularRight : RegularFibreModel
+  regularLeft : RegularFibreModel
+  regularRight : RegularFibreModel
 
 data FixedFibreModel : Set where
   fixedOnly : FixedFibreModel

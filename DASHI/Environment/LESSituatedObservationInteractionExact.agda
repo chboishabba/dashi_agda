@@ -34,22 +34,28 @@ import DASHI.Environment.LESSituatedSocioEcologicalHyperfabricExact as LES
 ------------------------------------------------------------------------
 
 data Site : Set where
-  wetlandMargin uplandPlot : Site
+  wetlandMargin : Site
+  uplandPlot : Site
 
 data Season : Set where
-  wetSeason drySeason : Season
+  wetSeason : Season
+  drySeason : Season
 
 data ObservationMethod : Set where
-  directFieldObservation instrumentSurvey : ObservationMethod
+  directFieldObservation : ObservationMethod
+  instrumentSurvey : ObservationMethod
 
 data EcologicalReading : Set where
-  sameVisibleCondition changedVisibleCondition : EcologicalReading
+  sameVisibleCondition : EcologicalReading
+  changedVisibleCondition : EcologicalReading
 
 data SmallInteraction : Set where
-  noIntervention reversibleProbe : SmallInteraction
+  noIntervention : SmallInteraction
+  reversibleProbe : SmallInteraction
 
 data ResponseReading : Set where
-  unchangedAfterProbe changedAfterProbe : ResponseReading
+  unchangedAfterProbe : ResponseReading
+  changedAfterProbe : ResponseReading
 
 record SituatedObservation : Set where
   constructor situatedObservation

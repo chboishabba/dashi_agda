@@ -64,10 +64,13 @@ coarseBulkDecomposesNinePlusOne = refl
 ------------------------------------------------------------------------
 
 data SituatedTriadRow : Set where
-  observationalRow governedRow : SituatedTriadRow
+  observationalRow : SituatedTriadRow
+  governedRow : SituatedTriadRow
 
 data SituatedTriadColumn : Set where
-  firstAxis secondAxis thirdAxis : SituatedTriadColumn
+  firstAxis : SituatedTriadColumn
+  secondAxis : SituatedTriadColumn
+  thirdAxis : SituatedTriadColumn
 
 record SituatedSlot : Set where
   constructor situated-slot

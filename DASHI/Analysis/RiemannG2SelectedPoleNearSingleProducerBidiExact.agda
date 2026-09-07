@@ -140,7 +140,9 @@ data SelectedPoleNearSearchAction : Set where
 
 
 data SearchStatus : Set where
-  live pruned downstream : SearchStatus
+  live : SearchStatus
+  pruned : SearchStatus
+  downstream : SearchStatus
 
 searchStatus : SelectedPoleNearSearchAction → SearchStatus
 searchStatus separatelyRecoverOrbitAttachment = pruned

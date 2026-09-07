@@ -7,7 +7,10 @@ import DASHI.Governance.GuardedPropositionResponseTree as Guarded
 import DASHI.Biology.InterventionConsentLongitudinalGovernance as ExistingConsent
 
 data RelationalRole : Set where
-  dependentChildRole caregiverRole delegatedSupporterRole educatorRole : RelationalRole
+  dependentChildRole : RelationalRole
+  caregiverRole : RelationalRole
+  delegatedSupporterRole : RelationalRole
+  educatorRole : RelationalRole
   religiousAuthorityRole institutionalAuthorityRole neutralCustodianRole : RelationalRole
 
 record DevelopmentalState : Set where
@@ -42,7 +45,12 @@ open ValidConsent public
 data AssentKind : Set where noAssent developmentalAssent pseudoAssent : AssentKind
 
 data LatentResponse : Set where
-  willingResponse uncertainResponse freezeResponse submitResponse fearResponse refusalResponse : LatentResponse
+  willingResponse : LatentResponse
+  uncertainResponse : LatentResponse
+  freezeResponse : LatentResponse
+  submitResponse : LatentResponse
+  fearResponse : LatentResponse
+  refusalResponse : LatentResponse
 
 data ObservedBehaviour : Set where observedCompliance observedSilence observedRefusal : ObservedBehaviour
 
@@ -74,7 +82,9 @@ record AuthorityRelation : Set where
 open AuthorityRelation public
 
 data CoerciveMechanism : Set where
-  divineSanctionMechanism familialBelongingMechanism institutionalDisciplineMechanism : CoerciveMechanism
+  divineSanctionMechanism : CoerciveMechanism
+  familialBelongingMechanism : CoerciveMechanism
+  institutionalDisciplineMechanism : CoerciveMechanism
   socialExclusionMechanism materialDeprivationMechanism bodilyForceMechanism : CoerciveMechanism
 
 data ThreatOutcomeKind : Set where finiteThreatOutcome indefiniteThreatOutcome eternalThreatOutcome : ThreatOutcomeKind

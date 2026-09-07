@@ -87,7 +87,11 @@ data GammaLineagePayment : Set where
 
 
 data PaymentStatus : Set where
-  pruned owned live blocked downstream : PaymentStatus
+  pruned : PaymentStatus
+  owned : PaymentStatus
+  live : PaymentStatus
+  blocked : PaymentStatus
+  downstream : PaymentStatus
 
 paymentStatus : GammaLineagePayment → PaymentStatus
 paymentStatus searchForAnyConcreteGammaSourceFamily = pruned

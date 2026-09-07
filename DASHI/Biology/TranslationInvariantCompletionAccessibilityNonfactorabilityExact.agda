@@ -30,13 +30,15 @@ completionReadoutSecondInvariant : ∀ {State : Set} (field : Torus.Field State)
 completionReadoutSecondInvariant field = refl
 
 data CompletionEmbodiedState : Set where
-  regulatedCompletion mobilisedCompletion : CompletionEmbodiedState
+  regulatedCompletion : CompletionEmbodiedState
+  mobilisedCompletion : CompletionEmbodiedState
 
 data CompletionSurface : Set where
   sameCompletionReadout : CompletionSurface
 
 data AccessibilityState : Set where
-  broadAccess contractedAccess : AccessibilityState
+  broadAccess : AccessibilityState
+  contractedAccess : AccessibilityState
 
 completionProjection : CompletionEmbodiedState → CompletionSurface
 completionProjection regulatedCompletion = sameCompletionReadout

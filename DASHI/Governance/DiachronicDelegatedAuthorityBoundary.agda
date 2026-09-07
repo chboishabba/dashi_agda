@@ -7,7 +7,9 @@ import DASHI.Governance.GuardedPropositionResponseTree as Guarded
 import DASHI.Algebra.Trit as Trit
 
 data TemporalRole : Set where
-  decisionSubjectRole caregiverSupporterRole delegatedAttorneyRole : TemporalRole
+  decisionSubjectRole : TemporalRole
+  caregiverSupporterRole : TemporalRole
+  delegatedAttorneyRole : TemporalRole
   serviceInstitutionRole neutralAdjudicatorRole neutralArchiveCustodianRole : TemporalRole
 
 record WillSnapshot : Set where
@@ -21,7 +23,9 @@ record WillSnapshot : Set where
 open WillSnapshot public
 
 data MandateSource : Set where
-  formalAuthoritySource contemporaneousInstructionSource recordedPriorInstructionSource : MandateSource
+  formalAuthoritySource : MandateSource
+  contemporaneousInstructionSource : MandateSource
+  recordedPriorInstructionSource : MandateSource
   establishedPracticeSource urgentPerceivedRiskSource : MandateSource
 
 record DelegatedMandate : Set where
@@ -62,7 +66,9 @@ canonicalRevocationPreservesHistory = refl
 data AutonomyModel : Set where synchronicAutonomy diachronicAutonomy supportedIntegratedAutonomy : AutonomyModel
 
 data TemporalConsistencyStatus : Set where
-  temporallyConsistent authenticChangeCandidate stateDependentChangeCandidate : TemporalConsistencyStatus
+  temporallyConsistent : TemporalConsistencyStatus
+  authenticChangeCandidate : TemporalConsistencyStatus
+  stateDependentChangeCandidate : TemporalConsistencyStatus
   undueInfluenceCandidate unresolvedTemporalConflict : TemporalConsistencyStatus
 
 record TemporalWillConflict : Set where
@@ -102,13 +108,18 @@ canonicalMeaningfullySupportedDecision : MeaningfullySupportedDecision canonical
 canonicalMeaningfullySupportedDecision = meaningfullySupportedDecision refl refl refl refl refl refl refl
 
 data ArchiveUse : Set where
-  memoryAidUse disabilityAccommodationUse instructionRepositoryUse legalEvidenceUse : ArchiveUse
+  memoryAidUse : ArchiveUse
+  disabilityAccommodationUse : ArchiveUse
+  instructionRepositoryUse : ArchiveUse
+  legalEvidenceUse : ArchiveUse
   sharedCareInfrastructureUse privateDataUse revocableAccessDomainUse : ArchiveUse
 
 data AccessStatus : Set where authorisedAccess contestedAccess revokedAccess : AccessStatus
 
 data ArchiveOperation : Set where
-  preserveExistingData retrieveKnownRelevantRecord broadExploratorySearch : ArchiveOperation
+  preserveExistingData : ArchiveOperation
+  retrieveKnownRelevantRecord : ArchiveOperation
+  broadExploratorySearch : ArchiveOperation
   monitorNewActivity alterCredentialsOrFiles : ArchiveOperation
 
 record ArchiveBoundary : Set where
@@ -129,7 +140,8 @@ canonicalContestedArchiveBoundary =
     "Historical evidentiary relevance and current privacy coexist; neutral custody separates preservation/retrieval from monitoring or control."
 
 data EvidentiaryProposition : Set where
-  previouslyAuthorisedProposition previouslyExpressedValueProposition : EvidentiaryProposition
+  previouslyAuthorisedProposition : EvidentiaryProposition
+  previouslyExpressedValueProposition : EvidentiaryProposition
   goodFaithContinuingMandateBeliefProposition authorityActuallyContinuedProposition : EvidentiaryProposition
 
 data EvidenceStrength : Set where noEvidence relevantEvidence strongEvidence conclusiveEvidence : EvidenceStrength
@@ -150,7 +162,10 @@ canonicalActualAuthorityNotConclusive : actualContinuingAuthorityStrength canoni
 canonicalActualAuthorityNotConclusive = refl
 
 data ProcessStepKind : Set where
-  alreadyCompletedStep unavoidableContinuationStep requiredClosureStep newDiscretionaryStep : ProcessStepKind
+  alreadyCompletedStep : ProcessStepKind
+  unavoidableContinuationStep : ProcessStepKind
+  requiredClosureStep : ProcessStepKind
+  newDiscretionaryStep : ProcessStepKind
 
 freshAuthorisationRequired : ProcessStepKind → Bool
 freshAuthorisationRequired alreadyCompletedStep = false

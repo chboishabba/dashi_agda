@@ -42,13 +42,16 @@ data DemoDeclared : Set where
   sameDeclaredPurpose : DemoDeclared
 
 data DemoBehaviour : Set where
-  openBehaviour closedBehaviour : DemoBehaviour
+  openBehaviour : DemoBehaviour
+  closedBehaviour : DemoBehaviour
 
 data DemoEffect : Set where
-  openEffect closedEffect : DemoEffect
+  openEffect : DemoEffect
+  closedEffect : DemoEffect
 
 data DemoCorrection : Set where
-  acceptsCorrection convertsCorrectionToFault : DemoCorrection
+  acceptsCorrection : DemoCorrection
+  convertsCorrectionToFault : DemoCorrection
 
 demoDeclared : DemoState → DemoDeclared
 demoDeclared declaredSameRealizedOpen = sameDeclaredPurpose
@@ -125,10 +128,14 @@ declaredPurposeCannotRecoverCorrectionResponse =
 ------------------------------------------------------------------------
 
 data Intent : Set where
-  benignIntent hostileIntent unknownIntent : Intent
+  benignIntent : Intent
+  hostileIntent : Intent
+  unknownIntent : Intent
 
 data Legitimacy : Set where
-  legitimate illegitimate contestedLegitimacy : Legitimacy
+  legitimate : Legitimacy
+  illegitimate : Legitimacy
+  contestedLegitimacy : Legitimacy
 
 record OperationalDescriptionBoundary : Set where
   constructor operational-description-boundary

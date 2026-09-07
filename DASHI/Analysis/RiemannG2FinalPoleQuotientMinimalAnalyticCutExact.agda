@@ -52,7 +52,10 @@ data FinalCutCoordinate : Set where
 
 
 data CoordinateClass : Set where
-  analytic crossProverRepresentation downstream pruned : CoordinateClass
+  analytic : CoordinateClass
+  crossProverRepresentation : CoordinateClass
+  downstream : CoordinateClass
+  pruned : CoordinateClass
 
 coordinateClass : FinalCutCoordinate -> CoordinateClass
 coordinateClass transportCheckedLeanSplitFarToAgda = crossProverRepresentation

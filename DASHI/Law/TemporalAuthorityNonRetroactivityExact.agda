@@ -9,13 +9,21 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data TimeOrder : Set where
-  before sameTime after : TimeOrder
+  before : TimeOrder
+  sameTime : TimeOrder
+  after : TimeOrder
 
 data PredicateKind : Set where
-  initialAuthority downstreamPredicate contrabandDiscovery nonCompliance : PredicateKind
+  initialAuthority : PredicateKind
+  downstreamPredicate : PredicateKind
+  contrabandDiscovery : PredicateKind
+  nonCompliance : PredicateKind
 
 data InterventionKind : Set where
-  stop wand search arrest : InterventionKind
+  stop : InterventionKind
+  wand : InterventionKind
+  search : InterventionKind
+  arrest : InterventionKind
 
 record TemporalProducerClaim : Set where
   constructor temporalProducerClaim
@@ -78,7 +86,8 @@ nonComplianceAfterStopIsRetroactive = retroactiveProducer refl refl
 ------------------------------------------------------------------------
 
 data TemporalClosure : Set where
-  chronologyClosed chronologyOpen : TemporalClosure
+  chronologyClosed : TemporalClosure
+  chronologyOpen : TemporalClosure
 
 data TemporalReverseResult : Set where
   temporalClosed : TemporalReverseResult

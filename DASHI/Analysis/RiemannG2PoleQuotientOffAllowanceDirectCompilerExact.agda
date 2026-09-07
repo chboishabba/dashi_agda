@@ -145,7 +145,9 @@ data OffAllowancePayment : Set where
 
 
 data PaymentState : Set where
-  live downstream pruned : PaymentState
+  live : PaymentState
+  downstream : PaymentState
+  pruned : PaymentState
 
 paymentState : OffAllowancePayment → PaymentState
 paymentState proveFullOffBoundFromScratch = pruned

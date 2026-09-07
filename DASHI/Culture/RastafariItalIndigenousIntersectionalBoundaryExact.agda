@@ -51,7 +51,8 @@ data ObligationPosition : Set where
 
 
 data PowerPosition : Set where
-  lowInstitutionalPower highInstitutionalPower : PowerPosition
+  lowInstitutionalPower : PowerPosition
+  highInstitutionalPower : PowerPosition
 
 record SituatedEcologicalPractice : Set where
   constructor situatedEcologicalPractice

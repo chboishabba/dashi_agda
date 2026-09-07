@@ -10,23 +10,35 @@ import DASHI.Core.ConsumerIndexedResidualRefinementExact as Consumer
 import DASHI.Core.ContextIndexedGovernedObservationExact as Contextual
 
 data DemoState : Set where
-  openState restrictedState : DemoState
+  openState : DemoState
+  restrictedState : DemoState
 
 data DemoSurface : Set where
   samePublicValue : DemoSurface
 
 data DemoContext : Set where
-  publicReading disclosureUse authorisedAction : DemoContext
+  publicReading : DemoContext
+  disclosureUse : DemoContext
+  authorisedAction : DemoContext
 
 data DemoQuery : Set where
-  inspectQuery useQuery actQuery : DemoQuery
+  inspectQuery : DemoQuery
+  useQuery : DemoQuery
+  actQuery : DemoQuery
 
 data DemoAxis : Set where
-  valueAxis verificationAxis provenanceAxis permissionAxis authorityAxis obligationAxis : DemoAxis
+  valueAxis : DemoAxis
+  verificationAxis : DemoAxis
+  provenanceAxis : DemoAxis
+  permissionAxis : DemoAxis
+  authorityAxis : DemoAxis
+  obligationAxis : DemoAxis
 
 
 data DemoOutcome : Set where
-  sameOutcome restrictedOutcome openOutcome : DemoOutcome
+  sameOutcome : DemoOutcome
+  restrictedOutcome : DemoOutcome
+  openOutcome : DemoOutcome
 
 data Never : Set where
 

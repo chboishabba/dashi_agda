@@ -51,7 +51,8 @@ record ChenWangBoundedCheegerData : Set where
 open ChenWangBoundedCheegerData public
 
 data ChenWangSymmetricFormRegime : Set where
-  boundedForm generalPossiblyUnboundedForm : ChenWangSymmetricFormRegime
+  boundedForm : ChenWangSymmetricFormRegime
+  generalPossiblyUnboundedForm : ChenWangSymmetricFormRegime
 
 record LiteralRGChenWangRegime : Set₁ where
   field

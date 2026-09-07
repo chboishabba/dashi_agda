@@ -8,7 +8,11 @@ open import DASHI.Algebra.PhysicsSignature using (Sig15; sig15)
 
 -- State is literally an enumeration of the witness inputs
 data State : Set where
-  s0 s1 s2 s3 s4 : State
+  s0 : State
+  s1 : State
+  s2 : State
+  s3 : State
+  s4 : State
   -- add as many as your computed witness set needs
 
 -- The witness list you claim coverage on

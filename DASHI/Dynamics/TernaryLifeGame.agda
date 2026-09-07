@@ -116,7 +116,9 @@ Strategy : Set
 Strategy = Trit
 
 data Outcome : Set where
-  loss hold win : Outcome
+  loss : Outcome
+  hold : Outcome
+  win : Outcome
 
 same : Trit → Trit → Bool
 same neg neg = true

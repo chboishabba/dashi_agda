@@ -80,7 +80,8 @@ observerContextIsStrictlyAdditionalRequirement = refl , refl
 ------------------------------------------------------------------------
 
 data Bit : Set where
-  bit0 bit1 : Bit
+  bit0 : Bit
+  bit1 : Bit
 
 bitNat : Bit → Nat
 bitNat bit0 = 0

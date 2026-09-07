@@ -26,10 +26,12 @@ record LogisticAnalyticLane : Set₁ where
 -- Two competitors with one binary partner/coalition coordinate give V4.
 
 data BinaryChoice : Set where
-  choice0 choice1 : BinaryChoice
+  choice0 : BinaryChoice
+  choice1 : BinaryChoice
 
 data Competitor : Set where
-  competitorA competitorB : Competitor
+  competitorA : Competitor
+  competitorB : Competitor
 
 record FourProfile : Set where
   constructor fourProfile
@@ -46,7 +48,10 @@ profileB1 = fourProfile competitorB choice1
 -- A cyclic four-state carrier is a different structure, even though it has the
 -- same cardinality as the product carrier above.
 data Cyclic4 : Set where
-  cycle0 cycle1 cycle2 cycle3 : Cyclic4
+  cycle0 : Cyclic4
+  cycle1 : Cyclic4
+  cycle2 : Cyclic4
+  cycle3 : Cyclic4
 
 record FourStateStructureBoundary : Set where
   constructor fourStateStructureBoundary

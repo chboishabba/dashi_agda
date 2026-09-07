@@ -36,7 +36,8 @@ climateShadow : EcosystemRecoveryState → ClimateShadow
 climateShadow _ = baselineLikeClimate
 
 data EcologicalHistoryResidue : Set where
-  noDamageResidue damageHistoryRetained : EcologicalHistoryResidue
+  noDamageResidue : EcologicalHistoryResidue
+  damageHistoryRetained : EcologicalHistoryResidue
 
 historyResidue : EcosystemRecoveryState → EcologicalHistoryResidue
 historyResidue baselineSystem = noDamageResidue
@@ -52,7 +53,8 @@ baselineAndRestoredRetainDifferentHistory :
 baselineAndRestoredRetainDifferentHistory ()
 
 data RecoveryStatus : Set where
-  recoveredToPriorSystem notRecoveredToPriorSystem : RecoveryStatus
+  recoveredToPriorSystem : RecoveryStatus
+  notRecoveredToPriorSystem : RecoveryStatus
 
 recoveryStatus : EcosystemRecoveryState → RecoveryStatus
 recoveryStatus baselineSystem = recoveredToPriorSystem

@@ -7,7 +7,9 @@ import DASHI.Culture.SemioticPhallicLackAmalekBridge as Semiotic
 import DASHI.Governance.DependentAuthorityCoercionKernel as Coercion
 
 data AuthorityProjectionSurface : Set where
-  sacredLegitimationSurface authorityTruthCollapseSurface doubtPenaltySurface : AuthorityProjectionSurface
+  sacredLegitimationSurface : AuthorityProjectionSurface
+  authorityTruthCollapseSurface : AuthorityProjectionSurface
+  doubtPenaltySurface : AuthorityProjectionSurface
   dissentEnemySurface disclosureAttackSurface survivorCastrationSurface : AuthorityProjectionSurface
   humanPollutantSurface missionShieldSurface neutralReviewSurface : AuthorityProjectionSurface
 
@@ -18,14 +20,22 @@ canonicalAuthorityProjectionSurfaces =
   ∷ humanPollutantSurface ∷ missionShieldSurface ∷ neutralReviewSurface ∷ []
 
 data ProjectionTargetKind : Set where
-  propositionTarget behaviourTarget institutionalRoleTarget namedPersonTarget : ProjectionTargetKind
+  propositionTarget : ProjectionTargetKind
+  behaviourTarget : ProjectionTargetKind
+  institutionalRoleTarget : ProjectionTargetKind
+  namedPersonTarget : ProjectionTargetKind
   childTarget survivorTarget humanGroupTarget : ProjectionTargetKind
 
 data AdmissibleAmalekUse : Set where
-  recursiveTerminalisationUse rememberedHarmToDominationProtocolUse enemyProductionRiskUse : AdmissibleAmalekUse
+  recursiveTerminalisationUse : AdmissibleAmalekUse
+  rememberedHarmToDominationProtocolUse : AdmissibleAmalekUse
+  enemyProductionRiskUse : AdmissibleAmalekUse
 
 data ForbiddenAmalekUse : Set where
-  childAsEnemyUse dissenterAsEnemyUse survivorAsEnemyUse religionAsEnemyUse : ForbiddenAmalekUse
+  childAsEnemyUse : ForbiddenAmalekUse
+  dissenterAsEnemyUse : ForbiddenAmalekUse
+  survivorAsEnemyUse : ForbiddenAmalekUse
+  religionAsEnemyUse : ForbiddenAmalekUse
   ethnicGroupAsEnemyUse nationalGroupAsEnemyUse inheritedCollectiveGuiltUse exterminatoryPermissionUse : ForbiddenAmalekUse
 
 data ForbiddenAmalekPromotion : Set where

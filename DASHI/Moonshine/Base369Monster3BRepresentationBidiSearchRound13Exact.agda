@@ -39,7 +39,12 @@ canonicalRound13Status =
     false  -- residual follows that split
 
 data SearchClass : Set where
-  OWNED GENERATED LIVE DOWNSTREAM PRUNED PARALLEL : SearchClass
+  OWNED : SearchClass
+  GENERATED : SearchClass
+  LIVE : SearchClass
+  DOWNSTREAM : SearchClass
+  PRUNED : SearchClass
+  PARALLEL : SearchClass
 
 faceGeometryClass : SearchClass
 faceGeometryClass = OWNED

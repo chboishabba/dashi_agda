@@ -80,7 +80,10 @@ asymmetryContradictsPluralSafety asymmetry plural =
 ------------------------------------------------------------------------
 
 data DemoState : Set where
-  leftNow rightNow leftAfter rightAfter : DemoState
+  leftNow : DemoState
+  rightNow : DemoState
+  leftAfter : DemoState
+  rightAfter : DemoState
 
 data DemoAction : Set where
   advance : DemoAction
@@ -131,7 +134,8 @@ rightAdvanceExecution =
 
 
 data DemoConsumer : Set where
-  boundedConsumer futureSensitiveConsumer : DemoConsumer
+  boundedConsumer : DemoConsumer
+  futureSensitiveConsumer : DemoConsumer
 
 demoProject : DemoConsumer → DemoState → Bool
 demoProject boundedConsumer _ = false

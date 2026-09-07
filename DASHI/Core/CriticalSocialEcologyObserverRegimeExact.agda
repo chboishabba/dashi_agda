@@ -40,13 +40,17 @@ data EcologyState : Set where
 
 
 data RealizedRemainAffordance : Set where
-  remainClosed remainOpen : RealizedRemainAffordance
+  remainClosed : RealizedRemainAffordance
+  remainOpen : RealizedRemainAffordance
 
 data DominantObserverReading : Set where
-  orderlyReading ambiguousReading disorderReading : DominantObserverReading
+  orderlyReading : DominantObserverReading
+  ambiguousReading : DominantObserverReading
+  disorderReading : DominantObserverReading
 
 data FeministObserverReading : Set where
-  restrictiveReading inclusiveReading : FeministObserverReading
+  restrictiveReading : FeministObserverReading
+  inclusiveReading : FeministObserverReading
 
 data NominalLiberatoryLabel : Set where
   liberatoryLabel : NominalLiberatoryLabel

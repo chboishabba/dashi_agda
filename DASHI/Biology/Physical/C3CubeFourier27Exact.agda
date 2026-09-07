@@ -92,7 +92,15 @@ cubeCharacterHomomorphism
 ------------------------------------------------------------------------
 
 data CubeCell27 : Set where
-  c000 c001 c002 c010 c011 c012 c020 c021 c022 : CubeCell27
+  c000 : CubeCell27
+  c001 : CubeCell27
+  c002 : CubeCell27
+  c010 : CubeCell27
+  c011 : CubeCell27
+  c012 : CubeCell27
+  c020 : CubeCell27
+  c021 : CubeCell27
+  c022 : CubeCell27
   c100 c101 c102 c110 c111 c112 c120 c121 c122 : CubeCell27
   c200 c201 c202 c210 c211 c212 c220 c221 c222 : CubeCell27
 

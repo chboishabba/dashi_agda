@@ -30,10 +30,27 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data NineRing0 : Set where
-  r0 r1 r2 r3 r4 r5 r6 r7 r8 : NineRing0
+  r0 : NineRing0
+  r1 : NineRing0
+  r2 : NineRing0
+  r3 : NineRing0
+  r4 : NineRing0
+  r5 : NineRing0
+  r6 : NineRing0
+  r7 : NineRing0
+  r8 : NineRing0
 
 data LinearTen : Set where
-  l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 : LinearTen
+  l1 : LinearTen
+  l2 : LinearTen
+  l3 : LinearTen
+  l4 : LinearTen
+  l5 : LinearTen
+  l6 : LinearTen
+  l7 : LinearTen
+  l8 : LinearTen
+  l9 : LinearTen
+  l10 : LinearTen
 
 zeroIndexedToOneIndexed : NineRing0 → LinearTen
 zeroIndexedToOneIndexed r0 = l1
@@ -133,7 +150,8 @@ canonicalZeroOneSeam = seam canonicalPointedAttachment
 ------------------------------------------------------------------------
 
 data JRepresentation : Set where
-  localOne transportedTen : JRepresentation
+  localOne : JRepresentation
+  transportedTen : JRepresentation
 
 forgetJRepresentation : JRepresentation → ExternalJ
 forgetJRepresentation localOne = jOne

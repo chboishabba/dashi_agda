@@ -27,7 +27,8 @@ import DASHI.Physics.QuantumVacuum.PhysicalQuantities as Q
 ------------------------------------------------------------------------
 
 data PerfectConductorPlate : Set where
-  lowerPlate upperPlate : PerfectConductorPlate
+  lowerPlate : PerfectConductorPlate
+  upperPlate : PerfectConductorPlate
 
 data BoundaryConditionClass : Set where
   tangentialElectricZero : BoundaryConditionClass

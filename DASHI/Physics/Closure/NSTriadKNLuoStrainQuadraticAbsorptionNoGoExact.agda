@@ -44,7 +44,8 @@ open import Relation.Binary.PropositionalEquality using (_≡_; _≢_; subst; sy
 import DASHI.Physics.Closure.NSTriadKNLuoStrainSpectralRigidityExact as SR
 
 data StrainOrientation : Set where
-  extensional compressive : StrainOrientation
+  extensional : StrainOrientation
+  compressive : StrainOrientation
 
 quadraticProjection : StrainOrientation → ℚ
 quadraticProjection extensional = SR.quadraticMagnitude 2 (- 1ℚ)

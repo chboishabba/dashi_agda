@@ -30,7 +30,9 @@ nonaryToTri non-7 = tri-mid
 nonaryToTri non-8 = tri-high
 
 data LiftDigit : Set where
-  lift-0 lift-1 lift-2 : LiftDigit
+  lift-0 : LiftDigit
+  lift-1 : LiftDigit
+  lift-2 : LiftDigit
 
 liftTriToNonary : TriTruth → LiftDigit → NonaryTruth
 liftTriToNonary tri-low  lift-0 = non-0
@@ -76,7 +78,8 @@ record NonaryRefinement (coarse : TriTruth) : Set where
 ------------------------------------------------------------------------
 
 data Bit : Set where
-  even odd : Bit
+  even : Bit
+  odd : Bit
 
 record HexCRT : Set where
   constructor _,_
@@ -123,10 +126,14 @@ hexCRT-observe-reconstruct (odd  , tri-high) = refl
 ------------------------------------------------------------------------
 
 data Lens369 : Set where
-  lens-3 lens-6 lens-9 : Lens369
+  lens-3 : Lens369
+  lens-6 : Lens369
+  lens-9 : Lens369
 
 data Time3 : Set where
-  past now future : Time3
+  past : Time3
+  now : Time3
+  future : Time3
 
 record Slot : Set where
   constructor slot
@@ -165,7 +172,12 @@ rootSheet (nestedSheet sheet children) = sheet
 ------------------------------------------------------------------------
 
 data Stage : Set where
-  stage-0 stage-1 stage-2 stage-3 stage-4 stage-5 : Stage
+  stage-0 : Stage
+  stage-1 : Stage
+  stage-2 : Stage
+  stage-3 : Stage
+  stage-4 : Stage
+  stage-5 : Stage
   stage-6 stage-7 stage-8 stage-9 stage-10 stage-11 : Stage
 
 previousFrame : Stage → Stage

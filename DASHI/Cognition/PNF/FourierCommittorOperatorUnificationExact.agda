@@ -101,7 +101,8 @@ committorIsOperatorAdapted = adapted committorHarmonicCoordinate
 ------------------------------------------------------------------------
 
 data OperatorNormalFormKind : Set where
-  oscillatoryMultiplicative harmonicZero : OperatorNormalFormKind
+  oscillatoryMultiplicative : OperatorNormalFormKind
+  harmonicZero : OperatorNormalFormKind
 
 coordinateKind :
   ∀ {State Value} → OperatorAdaptedCoordinate State Value → OperatorNormalFormKind → Set

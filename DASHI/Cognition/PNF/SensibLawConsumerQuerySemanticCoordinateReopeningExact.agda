@@ -17,7 +17,10 @@ data SemanticQuery : Set where
   customQuery : String → SemanticQuery
 
 data SemanticCoordinate : Set where
-  syntaxCoordinate discourseCoordinate referenceCoordinate attributionCoordinate : SemanticCoordinate
+  syntaxCoordinate : SemanticCoordinate
+  discourseCoordinate : SemanticCoordinate
+  referenceCoordinate : SemanticCoordinate
+  attributionCoordinate : SemanticCoordinate
   provenanceCoordinate temporalCoordinate evidenceCandidateCoordinate : SemanticCoordinate
   resolvedLegalEvidenceCoordinate scopeCandidateCoordinate resolvedScopeCoordinate : SemanticCoordinate
   propositionStatusCoordinate occurrenceCoordinate documentContextCoordinate : SemanticCoordinate

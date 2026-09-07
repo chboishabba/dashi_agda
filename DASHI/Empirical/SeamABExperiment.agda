@@ -6,10 +6,12 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 -- does not prematurely promote either lane as globally canonical.
 
 data Domain : Set where
-  base rom : Domain
+  base : Domain
+  rom : Domain
 
 data Direction : Set where
-  A-base-to-rom B-rom-to-base : Direction
+  A-base-to-rom : Direction
+  B-rom-to-base : Direction
 
 record DirectedResult (Metric : Set) : Set where
   constructor result
@@ -46,7 +48,10 @@ B-target-is-base = refl
 -- Any selector must be supplied with an explicit policy. DASHI does not derive
 -- a winner merely from the existence of the two lanes.
 data Selection : Set where
-  select-A select-B retain-both needs-human : Selection
+  select-A : Selection
+  select-B : Selection
+  retain-both : Selection
+  needs-human : Selection
 
 record SelectionPolicy (Metric : Set) : Set₁ where
   field

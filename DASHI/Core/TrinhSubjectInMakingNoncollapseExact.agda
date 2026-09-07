@@ -24,13 +24,15 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 ------------------------------------------------------------------------
 
 data TrinhFineState : Set where
-  enclosedNamedState subjectMakingState : TrinhFineState
+  enclosedNamedState : TrinhFineState
+  subjectMakingState : TrinhFineState
 
 data PublicCategorySurface : Set where
   sameNamedCategory : PublicCategorySurface
 
 data SubjectFormationPosition : Set where
-  enclosedPosition becomingPosition : SubjectFormationPosition
+  enclosedPosition : SubjectFormationPosition
+  becomingPosition : SubjectFormationPosition
 
 publicCategory : TrinhFineState → PublicCategorySurface
 publicCategory enclosedNamedState = sameNamedCategory
@@ -56,7 +58,9 @@ publicCategoryCannotRecoverSubjectFormation =
 ------------------------------------------------------------------------
 
 data TitlePosition : Set where
-  womanTitlePosition nativeTitlePosition otherTitlePosition : TitlePosition
+  womanTitlePosition : TitlePosition
+  nativeTitlePosition : TitlePosition
+  otherTitlePosition : TitlePosition
 
 record TrinhNoncollapseBoundary : Set where
   constructor trinh-noncollapse-boundary

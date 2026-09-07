@@ -17,13 +17,16 @@ import DASHI.Governance.IndigenousAuthoritySourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data Standing : Set where
-  exteriorIndigenousStanding settlerConferredStanding : Standing
+  exteriorIndigenousStanding : Standing
+  settlerConferredStanding : Standing
 
 data SettlerRecognition : Set where
-  notRecognized recognized : SettlerRecognition
+  notRecognized : SettlerRecognition
+  recognized : SettlerRecognition
 
 data SovereignAuthority : Set where
-  sovereignAuthority noSovereignAuthority : SovereignAuthority
+  sovereignAuthority : SovereignAuthority
+  noSovereignAuthority : SovereignAuthority
 
 settlerObserver : Standing → SettlerRecognition
 settlerObserver exteriorIndigenousStanding = notRecognized

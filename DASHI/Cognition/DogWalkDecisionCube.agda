@@ -100,7 +100,9 @@ data RoleMismatch : DogWalkState → Set where
 
 -- The joke phrase quotients several distinct latent states to one wording.
 data WalkPhrase : Set where
-  humanWalksDog dogWalksHuman walksTogether : WalkPhrase
+  humanWalksDog : WalkPhrase
+  dogWalksHuman : WalkPhrase
+  walksTogether : WalkPhrase
 
 phrase : DogWalkState → WalkPhrase
 phrase (dogWalk _ _ pos) = humanWalksDog

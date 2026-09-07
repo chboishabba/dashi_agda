@@ -414,7 +414,8 @@ scalarObservableInvariant n =
     }
 
 data ScalarOperator : Set where
-  hold evolve : ScalarOperator
+  hold : ScalarOperator
+  evolve : ScalarOperator
 
 scalarOperatorWitness : (n : Nat) → LW.OperatorWitness (scalarTheory n)
 scalarOperatorWitness n =

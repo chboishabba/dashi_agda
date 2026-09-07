@@ -27,19 +27,24 @@ import DASHI.Planning.NonSubstitutionalReparationExact as Repair
 ------------------------------------------------------------------------
 
 data MaterialReturnStatus : Set where
-  noMaterialReturn materialReturned : MaterialReturnStatus
+  noMaterialReturn : MaterialReturnStatus
+  materialReturned : MaterialReturnStatus
 
 data BenefitReturnStatus : Set where
-  noBenefitReturn benefitReturned : BenefitReturnStatus
+  noBenefitReturn : BenefitReturnStatus
+  benefitReturned : BenefitReturnStatus
 
 data ConsentRespectStatus : Set where
-  consentUnresolved consentRespected : ConsentRespectStatus
+  consentUnresolved : ConsentRespectStatus
+  consentRespected : ConsentRespectStatus
 
 data AuthorityRespectStatus : Set where
-  authorityUnresolved authorityRespected : AuthorityRespectStatus
+  authorityUnresolved : AuthorityRespectStatus
+  authorityRespected : AuthorityRespectStatus
 
 data RelationalClosureStatus : Set where
-  relationStillOpen relationClosed : RelationalClosureStatus
+  relationStillOpen : RelationalClosureStatus
+  relationClosed : RelationalClosureStatus
 
 record ReturnGovernanceState : Set where
   constructor returnGovernanceState

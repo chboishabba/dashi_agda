@@ -29,7 +29,9 @@ data InternalGate : Set where
 
 
 data GateVerdict : Set where
-  survives rejected held : GateVerdict
+  survives : GateVerdict
+  rejected : GateVerdict
+  held : GateVerdict
 
 record GateReceipt : Set where
   constructor gateReceipt

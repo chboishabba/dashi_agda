@@ -26,13 +26,15 @@ import DASHI.Governance.DependentReligiousEntrapmentCandidateExact as Entrapment
 ------------------------------------------------------------------------
 
 data ReligiousFormationState : Set where
-  authorityDependentConformity selfEndorsedFormation : ReligiousFormationState
+  authorityDependentConformity : ReligiousFormationState
+  selfEndorsedFormation : ReligiousFormationState
 
 data PublicReligiousBehaviour : Set where
   sameConformingSurface : PublicReligiousBehaviour
 
 data FormationRoute : Set where
-  heteronomousRoute selfEndorsedRoute : FormationRoute
+  heteronomousRoute : FormationRoute
+  selfEndorsedRoute : FormationRoute
 
 publicReligiousBehaviour : ReligiousFormationState → PublicReligiousBehaviour
 publicReligiousBehaviour authorityDependentConformity = sameConformingSurface
@@ -115,13 +117,15 @@ publicCategoryStillDoesNotRecoverSubjectFormation =
 ------------------------------------------------------------------------
 
 data FormationSituated : Set where
-  imposedNamedState selfMakingState : FormationSituated
+  imposedNamedState : FormationSituated
+  selfMakingState : FormationSituated
 
 data InheritedReligiousCategory : Set where
   inheritedBelieverCategory : InheritedReligiousCategory
 
 data FormationResidual : Set where
-  imposedResidual selfMakingResidual : FormationResidual
+  imposedResidual : FormationResidual
+  selfMakingResidual : FormationResidual
 
 inheritedReligiousCategory : FormationSituated → InheritedReligiousCategory
 inheritedReligiousCategory imposedNamedState = inheritedBelieverCategory

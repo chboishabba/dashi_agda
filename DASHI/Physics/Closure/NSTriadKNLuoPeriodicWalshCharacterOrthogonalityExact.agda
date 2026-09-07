@@ -33,7 +33,8 @@ open import Relation.Binary.PropositionalEquality as Eq using (cong; sym; trans)
 open Eq.≡-Reasoning
 
 data Bit : Set where
-  b0 b1 : Bit
+  b0 : Bit
+  b1 : Bit
 
 data Bit3 : Set where
   bit3 : Bit → Bit → Bit → Bit3

@@ -19,7 +19,8 @@ record History : Set where
 open History public
 
 data Query : Set where
-  askLocal askRemote : Query
+  askLocal : Query
+  askRemote : Query
 
 observeHistory : Query → History → Bool
 observeHistory askLocal h = localFact h
@@ -84,7 +85,8 @@ windowAndResidualDetermineHistory {history remote local} {history .remote .local
 ------------------------------------------------------------------------
 
 data Accessibility : Set where
-  accessible inaccessible : Accessibility
+  accessible : Accessibility
+  inaccessible : Accessibility
 
 remoteAccessibilityInWindow : History → Accessibility
 remoteAccessibilityInWindow h = inaccessible

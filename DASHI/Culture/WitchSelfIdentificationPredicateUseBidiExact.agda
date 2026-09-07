@@ -103,7 +103,12 @@ data WitchSentenceSurface : Set where
   iAmAWitchSurface : WitchSentenceSurface
 
 data WitchUseCode : Set where
-  wiccanCode paganCode feministCode artisticCode eclecticCode reenactmentCode : WitchUseCode
+  wiccanCode : WitchUseCode
+  paganCode : WitchUseCode
+  feministCode : WitchUseCode
+  artisticCode : WitchUseCode
+  eclecticCode : WitchUseCode
+  reenactmentCode : WitchUseCode
 
 witchSentence : WitchIdentityState → WitchSentenceSurface
 witchSentence wiccanReligiousIdentity = iAmAWitchSurface

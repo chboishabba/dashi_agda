@@ -17,7 +17,10 @@ open import DASHI.Ontology.ProgenitorParentProjectionFibre
 ------------------------------------------------------------------------
 
 data ParentAuthorityScope : Set where
-  careScope recordsScope medicalScope legalDecisionScope : ParentAuthorityScope
+  careScope : ParentAuthorityScope
+  recordsScope : ParentAuthorityScope
+  medicalScope : ParentAuthorityScope
+  legalDecisionScope : ParentAuthorityScope
 
 record ParentAuthoritySnapshot : Set where
   constructor parentAuthoritySnapshot

@@ -32,7 +32,9 @@ data EquityMassConsumer : Set where
   equityMassConsumer : EquityMassConsumer
 
 data EquityRegion : Set where
-  wholeEquityRegion majorityRegion minorityRegion : EquityRegion
+  wholeEquityRegion : EquityRegion
+  majorityRegion : EquityRegion
+  minorityRegion : EquityRegion
 
 equityMass : EquityMassConsumer → EquityRegion → Nat
 equityMass equityMassConsumer wholeEquityRegion = two

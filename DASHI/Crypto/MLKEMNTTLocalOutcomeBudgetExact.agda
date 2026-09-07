@@ -39,7 +39,11 @@ import Data.Nat.Properties as NatP
 ------------------------------------------------------------------------
 
 data LocalResidueOutcome : Set where
-  inactiveRegular inactiveSingular activeSurvivesRegular activeSurvivesSingular activeKilledSingular : LocalResidueOutcome
+  inactiveRegular : LocalResidueOutcome
+  inactiveSingular : LocalResidueOutcome
+  activeSurvivesRegular : LocalResidueOutcome
+  activeSurvivesSingular : LocalResidueOutcome
+  activeKilledSingular : LocalResidueOutcome
 
 activeWeight : LocalResidueOutcome → Nat
 activeWeight inactiveRegular = 0

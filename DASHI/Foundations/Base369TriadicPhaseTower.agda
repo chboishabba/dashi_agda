@@ -45,7 +45,15 @@ triToNonary-section tri-mid = refl
 triToNonary-section tri-high = refl
 
 data Phase27 : Set where
-  p27-0 p27-1 p27-2 p27-3 p27-4 p27-5 p27-6 p27-7 p27-8 : Phase27
+  p27-0 : Phase27
+  p27-1 : Phase27
+  p27-2 : Phase27
+  p27-3 : Phase27
+  p27-4 : Phase27
+  p27-5 : Phase27
+  p27-6 : Phase27
+  p27-7 : Phase27
+  p27-8 : Phase27
   p27-9 p27-10 p27-11 p27-12 p27-13 p27-14 p27-15 p27-16 p27-17 : Phase27
   p27-18 p27-19 p27-20 p27-21 p27-22 p27-23 p27-24 p27-25 p27-26 : Phase27
 

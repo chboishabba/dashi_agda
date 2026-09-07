@@ -15,7 +15,9 @@ open import DASHI.TrackedPrimes using (SSP)
 open import DASHI.Arithmetic.VpDepth using (minNat)
 
 data DecompositionKind : Set where
-  arithmetic wall count : DecompositionKind
+  arithmetic : DecompositionKind
+  wall : DecompositionKind
+  count : DecompositionKind
 
 record DecompositionSurface
   {ℓS ℓP : Level}

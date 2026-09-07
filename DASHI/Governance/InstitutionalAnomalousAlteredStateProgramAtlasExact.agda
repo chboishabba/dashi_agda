@@ -8,24 +8,33 @@ import DASHI.Governance.MenWhoStareAtGoatsEvidenceLayerExact as Goats
 import DASHI.Governance.DrugGovernanceMultiAxisRepairPlannerExact as RepairPlanner
 
 data ProgrammeFamily : Set where
-  bluebirdArtichokeFamily mkultraMksearchFamily stargateGrillFlameFamily : ProgrammeFamily
+  bluebirdArtichokeFamily : ProgrammeFamily
+  mkultraMksearchFamily : ProgrammeFamily
+  stargateGrillFlameFamily : ProgrammeFamily
   edgewoodHallucinogenFamily civilianPsychedelicResearchFamily : ProgrammeFamily
 
 data PhenomenonFamily : Set where
-  hypnosisSuggestion drugAlteredState isolationDeprivation remoteViewingPsi : PhenomenonFamily
+  hypnosisSuggestion : PhenomenonFamily
+  drugAlteredState : PhenomenonFamily
+  isolationDeprivation : PhenomenonFamily
+  remoteViewingPsi : PhenomenonFamily
   psychokineticExtraordinaryInfluence psychedelicTherapeuticEffect : PhenomenonFamily
 
 data InstitutionalObjective : Set where
-  interrogationControlObjective defensiveCountermeasureObjective : InstitutionalObjective
+  interrogationControlObjective : InstitutionalObjective
+  defensiveCountermeasureObjective : InstitutionalObjective
   intelligenceCollectionObjective militaryDisruptionObjective : InstitutionalObjective
   biomedicalTherapeuticObjective exploratoryMechanismObjective : InstitutionalObjective
 
 data SubjectRelation : Set where
-  volunteerParticipantRelation volunteerWithLimitedDisclosureRelation : SubjectRelation
+  volunteerParticipantRelation : SubjectRelation
+  volunteerWithLimitedDisclosureRelation : SubjectRelation
   unwittingSubjectRelation patientParticipantRelation humanCognitiveParticipantRelation : SubjectRelation
 
 data EfficacyStanding : Set where
-  programmeExistenceOnly phenomenonReported mixedOrUnresolvedEfficacy : EfficacyStanding
+  programmeExistenceOnly : EfficacyStanding
+  phenomenonReported : EfficacyStanding
+  mixedOrUnresolvedEfficacy : EfficacyStanding
   operationalUtilityNotEstablished therapeuticEvidenceDeveloping : EfficacyStanding
 
 record ProgrammeAtlasEntry : Set where
@@ -98,7 +107,10 @@ oddityCannotRecoverObjective = INF.witnessRulesOutEveryFlatFactorisation
   (INF.nonFactorabilityWitness artichokeWorld stargateWorld refl objectiveDiffers)
 
 data AtlasConsumer : Set where
-  programmeHistoryConsumer efficacyConsumer subjectEthicsConsumer therapeuticConsumer : AtlasConsumer
+  programmeHistoryConsumer : AtlasConsumer
+  efficacyConsumer : AtlasConsumer
+  subjectEthicsConsumer : AtlasConsumer
+  therapeuticConsumer : AtlasConsumer
   operationalUtilityConsumer institutionalRepairConsumer : AtlasConsumer
 
 data AtlasDemand : AtlasConsumer → Set where

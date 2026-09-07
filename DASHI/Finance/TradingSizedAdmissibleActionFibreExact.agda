@@ -15,22 +15,31 @@ import DASHI.Finance.TradingAdmissibleOptionConeSupersessionExact as Cone
 ------------------------------------------------------------------------
 
 data SizeBand : Set where
-  zeroSize smallSize mediumSize largeSize : SizeBand
+  zeroSize : SizeBand
+  smallSize : SizeBand
+  mediumSize : SizeBand
+  largeSize : SizeBand
 
 data LiquidityState : Set where
-  thinLiquidity normalLiquidity deepLiquidity : LiquidityState
+  thinLiquidity : LiquidityState
+  normalLiquidity : LiquidityState
+  deepLiquidity : LiquidityState
 
 data TurnoverState : Set where
-  turnoverTight turnoverOpen : TurnoverState
+  turnoverTight : TurnoverState
+  turnoverOpen : TurnoverState
 
 data NeutralityState : Set where
-  neutralityTight neutralityOpen : NeutralityState
+  neutralityTight : NeutralityState
+  neutralityOpen : NeutralityState
 
 data ExecutionState : Set where
-  executionFragile executionNormal : ExecutionState
+  executionFragile : ExecutionState
+  executionNormal : ExecutionState
 
 data TemporalState : Set where
-  pitValid pitInvalid : TemporalState
+  pitValid : TemporalState
+  pitInvalid : TemporalState
 
 record FullTradeState : Set where
   constructor fullTradeState

@@ -105,7 +105,8 @@ mlKem1024TwoParityBlocksCoverSecret = refl
 ------------------------------------------------------------------------
 
 data LocalComponent : Set where
-  component0 component1 : LocalComponent
+  component0 : LocalComponent
+  component1 : LocalComponent
 
 data UsesInputComponent : LocalComponent → LocalComponent → Set where
   c0Uses0 : UsesInputComponent component0 component0

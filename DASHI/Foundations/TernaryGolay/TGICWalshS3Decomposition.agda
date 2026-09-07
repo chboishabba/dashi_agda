@@ -29,7 +29,10 @@ evaluate : AffineY → ℚ → ℚ
 evaluate value y = constant value + yCoefficient value * y
 
 data LocalBitState : Set where
-  state000 state001 state010 state011 : LocalBitState
+  state000 : LocalBitState
+  state001 : LocalBitState
+  state010 : LocalBitState
+  state011 : LocalBitState
   state100 state101 state110 state111 : LocalBitState
 
 localKernel : LocalBitState → AffineY
@@ -43,7 +46,10 @@ localKernel state110 = affineY (50 / 3) 0ℚ
 localKernel state111 = affineY (997 / 60) 0ℚ
 
 data WalshMask : Set where
-  emptyMask xMask yMask zMask : WalshMask
+  emptyMask : WalshMask
+  xMask : WalshMask
+  yMask : WalshMask
+  zMask : WalshMask
   xyMask xzMask yzMask xyzMask : WalshMask
 
 -- Coefficients use the convention

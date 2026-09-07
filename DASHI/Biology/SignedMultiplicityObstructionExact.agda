@@ -36,7 +36,9 @@ delta : ∀ {I} → Multiplicity I → Multiplicity I → I → ℤ
 delta A B i = A i ⊖ B i
 
 data DefectOrientation : Set where
-  negativeDefect balancedDefect positiveDefect : DefectOrientation
+  negativeDefect : DefectOrientation
+  balancedDefect : DefectOrientation
+  positiveDefect : DefectOrientation
 
 orientationOfInteger : ℤ → DefectOrientation
 orientationOfInteger (+ zero) = balancedDefect
@@ -79,7 +81,8 @@ orientationSwap A B i
 ------------------------------------------------------------------------
 
 data Presence : Set where
-  absent present : Presence
+  absent : Presence
+  present : Presence
 
 presence : Nat → Presence
 presence zero = absent

@@ -27,10 +27,14 @@ record CapabilityFunctioningSystem (State Option : Set) : Set₁ where
 open CapabilityFunctioningSystem public
 
 data DemoState : Set where
-  wideSameAction narrowSameAction wideOtherAction : DemoState
+  wideSameAction : DemoState
+  narrowSameAction : DemoState
+  wideOtherAction : DemoState
 
 data DemoOption : Set where
-  remain leave recover : DemoOption
+  remain : DemoOption
+  leave : DemoOption
+  recover : DemoOption
 
 data DemoAvailable : DemoState → DemoOption → Set where
   wideRemain : DemoAvailable wideSameAction remain

@@ -188,7 +188,8 @@ standardCharacter2AtRIsZetaSquared = refl
 ------------------------------------------------------------------------
 
 data DeckC3Type : Set where
-  trivialC3 conjugateNontrivialPair : DeckC3Type
+  trivialC3 : DeckC3Type
+  conjugateNontrivialPair : DeckC3Type
 
 record ExtendedMarkedFingerprint : Set where
   constructor extendedFingerprint
@@ -219,7 +220,9 @@ extendedFingerprintsSeparate ()
 ------------------------------------------------------------------------
 
 data ReflectionParity : Set where
-  reflectionPlus reflectionMinus mixedReflection : ReflectionParity
+  reflectionPlus : ReflectionParity
+  reflectionMinus : ReflectionParity
+  mixedReflection : ReflectionParity
 
 record DeckS3Observation : Set where
   constructor deckS3Observation

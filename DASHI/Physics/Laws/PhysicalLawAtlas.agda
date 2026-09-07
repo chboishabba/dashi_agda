@@ -7,7 +7,9 @@ open import DASHI.Physics.Laws.PhysicalLawCore
 -- fundamental equations, conservation principles, constitutive/effective laws,
 -- statistical laws, and the limit maps connecting regimes.
 data CanonicalPhysicalLaw : Set where
-  causalIntervalLaw LorentzInvarianceLaw geodesicLaw : CanonicalPhysicalLaw
+  causalIntervalLaw : CanonicalPhysicalLaw
+  LorentzInvarianceLaw : CanonicalPhysicalLaw
+  geodesicLaw : CanonicalPhysicalLaw
   newtonMomentumLaw eulerLagrangeLaw hamiltonEquationLaw noetherLaw : CanonicalPhysicalLaw
   schrodingerLaw unitaryEvolutionLaw bornProbabilityLaw diracLaw : CanonicalPhysicalLaw
   microcausalityLaw aqftIsotonyLaw aqftTimeSliceLaw : CanonicalPhysicalLaw

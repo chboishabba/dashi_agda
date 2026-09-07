@@ -9,7 +9,14 @@ import DASHI.Culture.CulturalInstitutionalAmplificationCoreExact as CultureAmp
 import DASHI.Biology.DrosophilaSameTrialProvenanceDependenceExact as FlyDep
 
 data LineageEdgeKind : Set where
-  generatedFrom transformedBy selectedBy fundedBy circulatedBy reportedBy verifiedBy amplifiedBy : LineageEdgeKind
+  generatedFrom : LineageEdgeKind
+  transformedBy : LineageEdgeKind
+  selectedBy : LineageEdgeKind
+  fundedBy : LineageEdgeKind
+  circulatedBy : LineageEdgeKind
+  reportedBy : LineageEdgeKind
+  verifiedBy : LineageEdgeKind
+  amplifiedBy : LineageEdgeKind
 
 record LineageNode : Set where
   constructor lineage-node

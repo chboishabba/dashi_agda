@@ -25,7 +25,11 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 ------------------------------------------------------------------------
 
 data Domain : Set where
-  cryptoDomain governanceDomain proofDomain marketDomain ecologyDomain : Domain
+  cryptoDomain : Domain
+  governanceDomain : Domain
+  proofDomain : Domain
+  marketDomain : Domain
+  ecologyDomain : Domain
 
 data Scenario : Domain → Set where
   directAssetPath washLikeAssetPath : Scenario cryptoDomain
@@ -130,11 +134,20 @@ cryptoEndpointCannotRecoverProvenance =
 ------------------------------------------------------------------------
 
 data CrossDomainStrand : Set where
-  assetA assetB institutionA institutionB proofStateA proofStateB : CrossDomainStrand
+  assetA : CrossDomainStrand
+  assetB : CrossDomainStrand
+  institutionA : CrossDomainStrand
+  institutionB : CrossDomainStrand
+  proofStateA : CrossDomainStrand
+  proofStateB : CrossDomainStrand
   positionA positionB ecosystemA ecosystemB : CrossDomainStrand
 
 data CrossDomainAction : Set where
-  transferAction delegationAction vetoAction lemmaAction branchAction : CrossDomainAction
+  transferAction : CrossDomainAction
+  delegationAction : CrossDomainAction
+  vetoAction : CrossDomainAction
+  lemmaAction : CrossDomainAction
+  branchAction : CrossDomainAction
   hedgeAction rebalanceAction repairAction disturbanceAction : CrossDomainAction
 
 canonicalTransferCrossing : Trace.CrossingEvent CrossDomainStrand CrossDomainAction

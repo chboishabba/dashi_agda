@@ -31,7 +31,9 @@ conflictMask (directionEvidence true false)  = false
 conflictMask (directionEvidence true true)   = true
 
 data ActionabilityBand : Set where
-  low middle high : ActionabilityBand
+  low : ActionabilityBand
+  middle : ActionabilityBand
+  high : ActionabilityBand
 
 -- The order is the control-relevant quotient of an underlying [0,1]-valued
 -- actionability functional.  It is unsigned and monotone.
@@ -123,7 +125,9 @@ N-mask f x = N (f x)
 ------------------------------------------------------------------------
 
 data ControlState : Set where
-  HOLD BUY SELL : ControlState
+  HOLD : ControlState
+  BUY : ControlState
+  SELL : ControlState
 
 -- Exact hysteresis automaton over the three actionability bands.
 -- low exits, middle preserves the prior state, and high admits a clear

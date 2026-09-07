@@ -18,13 +18,16 @@ import DASHI.Governance.ConsentTemporalExternalitySourceAtlasExact as Sources
 ------------------------------------------------------------------------
 
 data TemporalResidual : Set where
-  temporalResolved temporalUnresolved : TemporalResidual
+  temporalResolved : TemporalResidual
+  temporalUnresolved : TemporalResidual
 
 data ConsentResidual : Set where
-  consentResolved consentUnresolved : ConsentResidual
+  consentResolved : ConsentResidual
+  consentUnresolved : ConsentResidual
 
 data DistributionResidual : Set where
-  distributionResolved distributionUnresolved : DistributionResidual
+  distributionResolved : DistributionResidual
+  distributionUnresolved : DistributionResidual
 
 record HighImpactGovernedAdmission
     (scope : Consent.ActionScope) : Set where
@@ -56,7 +59,10 @@ canonicalInitialHighImpactAdmission =
 ------------------------------------------------------------------------
 
 data ExecutionAdmissionState : Set where
-  fullyResolved unresolvedConsent unresolvedDistribution unresolvedTemporal : ExecutionAdmissionState
+  fullyResolved : ExecutionAdmissionState
+  unresolvedConsent : ExecutionAdmissionState
+  unresolvedDistribution : ExecutionAdmissionState
+  unresolvedTemporal : ExecutionAdmissionState
 
 
 coverageState : ExecutionAdmissionState → Execution.CoverageState

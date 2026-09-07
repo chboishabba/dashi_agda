@@ -121,10 +121,12 @@ open RefinementTriggered public
 ------------------------------------------------------------------------
 
 data DemoProjection : Set where
-  sameRelevanceLowDistortion sameRelevanceHighDistortion : DemoProjection
+  sameRelevanceLowDistortion : DemoProjection
+  sameRelevanceHighDistortion : DemoProjection
 
 data DemoDistortion : Set where
-  lowDistortion highDistortion : DemoDistortion
+  lowDistortion : DemoDistortion
+  highDistortion : DemoDistortion
 
 representedRelevanceIsComplete : DemoProjection → Bool
 representedRelevanceIsComplete sameRelevanceLowDistortion = true

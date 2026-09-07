@@ -93,7 +93,10 @@ proxyFutureDefectRefutesWelfareSufficiency sufficient defect =
 ------------------------------------------------------------------------
 
 data FiniteState : Set where
-  finiteLeftBefore finiteRightBefore finiteLeftAfter finiteRightAfter : FiniteState
+  finiteLeftBefore : FiniteState
+  finiteRightBefore : FiniteState
+  finiteLeftAfter : FiniteState
+  finiteRightAfter : FiniteState
 
 data FiniteAction : Set where advance : FiniteAction
 

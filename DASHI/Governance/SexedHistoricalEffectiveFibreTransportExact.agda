@@ -27,7 +27,10 @@ import DASHI.Governance.SexedHistoricalChoiceConeBridgeExact as Choice
 ------------------------------------------------------------------------
 
 data FormalChannel : Set where
-  formalMM formalMF formalFM formalFF : FormalChannel
+  formalMM : FormalChannel
+  formalMF : FormalChannel
+  formalFM : FormalChannel
+  formalFF : FormalChannel
 
 data HistoricalFibre : Set where
   inheritedClosedFibre : HistoricalFibre
@@ -37,7 +40,9 @@ data HistoricalFibre : Set where
 
 
 data LocalReachability : Set where
-  locallyBlocked locallyUnresolved locallyReachable : LocalReachability
+  locallyBlocked : LocalReachability
+  locallyUnresolved : LocalReachability
+  locallyReachable : LocalReachability
 
 formalExists : FormalChannel → Bool
 formalExists _ = true
@@ -124,7 +129,8 @@ unresolvedTransportRequestsRefinement = refl
 ------------------------------------------------------------------------
 
 data TransportState : Set where
-  samePresentClosed samePresentOpen : TransportState
+  samePresentClosed : TransportState
+  samePresentOpen : TransportState
 
 data PresentObservation : Set where sameFormalPresent : PresentObservation
 

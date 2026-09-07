@@ -7,14 +7,21 @@ import DASHI.Biology.DirectedAttractorPortfolioCalculus as Directed
 import DASHI.Biology.Levin.CompetentGoalExecution as Levin
 
 data PortfolioState : Set where
-  initialState nearDesiredState desiredState trapState circulationState : PortfolioState
+  initialState : PortfolioState
+  nearDesiredState : PortfolioState
+  desiredState : PortfolioState
+  trapState : PortfolioState
+  circulationState : PortfolioState
 
 data PortfolioGoal : Set where reachDesiredGoal : PortfolioGoal
 
 data PortfolioCommand : Set where moveTowardDesiredCommand : PortfolioCommand
 
 data BranchPolicy : Set where
-  alignedPolicy robustDetourPolicy exploratoryPolicy diffusedPolicy : BranchPolicy
+  alignedPolicy : BranchPolicy
+  robustDetourPolicy : BranchPolicy
+  exploratoryPolicy : BranchPolicy
+  diffusedPolicy : BranchPolicy
   trapDirectedPolicy circulationPolicy : BranchPolicy
 
 interpretCommand : PortfolioCommand → PortfolioGoal

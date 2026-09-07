@@ -55,7 +55,10 @@ record RefinedNestedRoute : Set where
 open RefinedNestedRoute public
 
 data SixteenCellIndex : Set where
-  nearLow nearHigh nearHH nearCC : SixteenCellIndex
+  nearLow : SixteenCellIndex
+  nearHigh : SixteenCellIndex
+  nearHH : SixteenCellIndex
+  nearCC : SixteenCellIndex
   separatedLow separatedHigh separatedHH separatedCC : SixteenCellIndex
   heteroHHInnerLow heteroHHInnerHigh heteroHHInnerOuterHH heteroHHInnerCC : SixteenCellIndex
   heteroOtherLow heteroOtherHigh heteroOtherHH heteroOtherCC : SixteenCellIndex

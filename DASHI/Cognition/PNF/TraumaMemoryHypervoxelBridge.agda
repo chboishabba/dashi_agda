@@ -30,7 +30,10 @@ import DASHI.Interop.SensibLawResidualLattice as Residual
 ------------------------------------------------------------------------
 
 data BodyMemoryChannel : Set where
-  breathChannel postureChannel arousalChannel affectChannel : BodyMemoryChannel
+  breathChannel : BodyMemoryChannel
+  postureChannel : BodyMemoryChannel
+  arousalChannel : BodyMemoryChannel
+  affectChannel : BodyMemoryChannel
   sensoryChannel memoryChannel relationChannel agencyChannel : BodyMemoryChannel
 
 channelResidualKind : BodyMemoryChannel → Epigenetic.BodyMemoryResidualKind
@@ -112,7 +115,9 @@ record PNFMemoryHypervoxel (rank depth : Nat) : Set₁ where
 ------------------------------------------------------------------------
 
 data MemoryDepthChange : Set where
-  depthPreserved depthRevalued depthReanchored : MemoryDepthChange
+  depthPreserved : MemoryDepthChange
+  depthRevalued : MemoryDepthChange
+  depthReanchored : MemoryDepthChange
 
 record MemoryDepthLearningReceipt : Set where
   field

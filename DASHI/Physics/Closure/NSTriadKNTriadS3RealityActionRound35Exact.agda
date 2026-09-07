@@ -38,10 +38,16 @@ import DASHI.Physics.Closure.NSTriadKNCanonicalTriadOrbitEnumeration as Orbit
 import DASHI.Physics.Closure.NSTriadKNSafeCanonicalTriadOrbitQuotientRound34Exact as Safe
 
 data PermutationAction6 : Set where
-  identity swap cycle swapCycle cycleTwice swapCycleTwice : PermutationAction6
+  identity : PermutationAction6
+  swap : PermutationAction6
+  cycle : PermutationAction6
+  swapCycle : PermutationAction6
+  cycleTwice : PermutationAction6
+  swapCycleTwice : PermutationAction6
 
 data RealityAction2 : Set where
-  direct reality : RealityAction2
+  direct : RealityAction2
+  reality : RealityAction2
 
 applyPermutation : PermutationAction6 → Lattice.LatticeTriad → Lattice.LatticeTriad
 applyPermutation identity τ = τ

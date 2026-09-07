@@ -18,13 +18,19 @@ import DASHI.Governance.SafeJustSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data EvidenceCluster : Set where
-  resourceLimits planetaryBoundaries decoupling wellbeingAndGDP : EvidenceCluster
+  resourceLimits : EvidenceCluster
+  planetaryBoundaries : EvidenceCluster
+  decoupling : EvidenceCluster
+  wellbeingAndGDP : EvidenceCluster
   ecologicalMacroeconomics policyPackages growthDependencies : EvidenceCluster
   provisioningSystems globalNorthSouthRelations politicsOfTransition : EvidenceCluster
 
 
 data EvidenceClass : Set where
-  empiricalCrossNational empiricalHistorical modelScenario modelReview : EvidenceClass
+  empiricalCrossNational : EvidenceClass
+  empiricalHistorical : EvidenceClass
+  modelScenario : EvidenceClass
+  modelReview : EvidenceClass
   caseStudy policyExperiment theoreticalSynthesis politicalEconomyAnalysis : EvidenceClass
   unresolvedResearchFrontier : EvidenceClass
 

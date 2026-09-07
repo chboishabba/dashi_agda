@@ -24,7 +24,11 @@ import DASHI.Reasoning.TypedHyperfabricCore as Hyperfabric
 ------------------------------------------------------------------------
 
 data WorldQuestion : Set where
-  plagueCause polyhedronValue townValue routeCost murdererIdentity : WorldQuestion
+  plagueCause : WorldQuestion
+  polyhedronValue : WorldQuestion
+  townValue : WorldQuestion
+  routeCost : WorldQuestion
+  murdererIdentity : WorldQuestion
 
 data PerspectiveEvidence :
     Constraint.Doctor → WorldQuestion → Set where
@@ -137,10 +141,14 @@ record PolytemporalKnowledge : Set where
 ------------------------------------------------------------------------
 
 data EndingProposal : Set where
-  bachelorProposal haruspexProposal changelingProposal : EndingProposal
+  bachelorProposal : EndingProposal
+  haruspexProposal : EndingProposal
+  changelingProposal : EndingProposal
 
 data PreservationTarget : Set where
-  preserveTown preservePolyhedron preserveBoth : PreservationTarget
+  preserveTown : PreservationTarget
+  preservePolyhedron : PreservationTarget
+  preserveBoth : PreservationTarget
 
 data Preserves : EndingProposal → PreservationTarget → Set where
   bachelorPreservesPolyhedron : Preserves bachelorProposal preservePolyhedron
@@ -148,7 +156,9 @@ data Preserves : EndingProposal → PreservationTarget → Set where
   changelingPreservesBoth : Preserves changelingProposal preserveBoth
 
 data EndingCost : Set where
-  townDestroyed polyhedronDestroyed consentingSacrifice : EndingCost
+  townDestroyed : EndingCost
+  polyhedronDestroyed : EndingCost
+  consentingSacrifice : EndingCost
 
 data PaysCost : EndingProposal → EndingCost → Set where
   bachelorPaysTownCost : PaysCost bachelorProposal townDestroyed
@@ -186,7 +196,13 @@ canonicalEndingParallax = record
 ------------------------------------------------------------------------
 
 data PathologicDay : Set where
-  prologue day-1 day-2 day-3 day-4 day-5 day-6 : PathologicDay
+  prologue : PathologicDay
+  day-1 : PathologicDay
+  day-2 : PathologicDay
+  day-3 : PathologicDay
+  day-4 : PathologicDay
+  day-5 : PathologicDay
+  day-6 : PathologicDay
   day-7 day-8 day-9 day-10 day-11 day-12 : PathologicDay
 
 dayToStage : PathologicDay → Stage.StageAtlasZeroToTwelve

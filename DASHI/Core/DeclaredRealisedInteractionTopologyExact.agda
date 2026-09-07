@@ -26,10 +26,12 @@ data RealisedInteractionTopology : Set where
 
 
 data ProtocolOrigin : Set where
-  designerDeclared discoveredDuringDeployment : ProtocolOrigin
+  designerDeclared : ProtocolOrigin
+  discoveredDuringDeployment : ProtocolOrigin
 
 data CoordinationSurface : Set where
-  noCrossAgentCoordination crossAgentCoordination : CoordinationSurface
+  noCrossAgentCoordination : CoordinationSurface
+  crossAgentCoordination : CoordinationSurface
 
 record DeploymentState : Set where
   constructor deployment-state

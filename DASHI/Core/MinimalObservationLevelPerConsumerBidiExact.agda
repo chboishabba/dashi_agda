@@ -14,7 +14,9 @@ import DASHI.Core.ProjectionHierarchyCompatibleFibreBidiExact as Projection
 ------------------------------------------------------------------------
 
 data ObservationLevel : Set where
-  coarseLevel middleLevel fineLevel : ObservationLevel
+  coarseLevel : ObservationLevel
+  middleLevel : ObservationLevel
+  fineLevel : ObservationLevel
 
 fibreAt : ObservationLevel → Bidi.ResidualFibre Projection.Hidden
 fibreAt coarseLevel = Projection.coarseFibre

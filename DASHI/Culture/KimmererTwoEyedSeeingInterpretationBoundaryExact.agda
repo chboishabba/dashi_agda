@@ -19,13 +19,15 @@ import DASHI.Reasoning.StructuralMetaphorTaskCompressionExact as Compression
 ------------------------------------------------------------------------
 
 data KnowledgeHistory : Set where
-  indigenousHistory scientificHistory : KnowledgeHistory
+  indigenousHistory : KnowledgeHistory
+  scientificHistory : KnowledgeHistory
 
 data SharedEcologicalObservation : Set where
   convergentObservation : SharedEcologicalObservation
 
 data Provenance : Set where
-  indigenousProvenance scientificProvenance : Provenance
+  indigenousProvenance : Provenance
+  scientificProvenance : Provenance
 
 data CoordinatedUse : Set where
   useDistinctKnowledgesTogether : CoordinatedUse

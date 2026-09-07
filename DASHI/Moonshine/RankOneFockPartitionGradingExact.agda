@@ -156,7 +156,8 @@ record RankOneHeisenbergVOABoundary : Set₁ where
     etaTransformationLaw : Set
 
 data FockCompletionLayer : Set where
-  finitePartitionPrefix infiniteHeisenbergVOA : FockCompletionLayer
+  finitePartitionPrefix : FockCompletionLayer
+  infiniteHeisenbergVOA : FockCompletionLayer
 
 finitePrefixIsNotInfiniteVOA :
   finitePartitionPrefix ≡ infiniteHeisenbergVOA → ⊥

@@ -58,7 +58,8 @@ SSSPBinaryTernaryRefinementCommutes =
 ------------------------------------------------------------------------
 
 data BinaryControl : Set where
-  successfulControl partialControl : BinaryControl
+  successfulControl : BinaryControl
+  partialControl : BinaryControl
 
 fromBMSSPOutcome : SSSP.BMSSPOutcome → BinaryControl
 fromBMSSPOutcome SSSP.successfulExecution = successfulControl

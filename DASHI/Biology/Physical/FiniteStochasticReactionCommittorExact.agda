@@ -28,7 +28,10 @@ open import Data.Rational.Tactic.RingSolver using (solve-∀)
 ------------------------------------------------------------------------
 
 data ChemicalState : Set where
-  extinct drivenChemistry replicator protoLife : ChemicalState
+  extinct : ChemicalState
+  drivenChemistry : ChemicalState
+  replicator : ChemicalState
+  protoLife : ChemicalState
 
 quarter : ℚ
 quarter = ½ * ½

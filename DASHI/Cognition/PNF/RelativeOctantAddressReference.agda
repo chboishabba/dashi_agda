@@ -19,7 +19,14 @@ open import DASHI.Cognition.PNF.ComplexityArithmetic
 ------------------------------------------------------------------------
 
 data Octant : Set where
-  o000 o001 o010 o011 o100 o101 o110 o111 : Octant
+  o000 : Octant
+  o001 : Octant
+  o010 : Octant
+  o011 : Octant
+  o100 : Octant
+  o101 : Octant
+  o110 : Octant
+  o111 : Octant
 
 encodeOctant : Octant → Nat
 encodeOctant o000 = 0

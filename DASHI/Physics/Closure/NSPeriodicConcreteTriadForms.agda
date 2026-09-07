@@ -9,7 +9,11 @@ open import DASHI.Physics.Closure.NSIntegerFourierLattice
 ------------------------------------------------------------------------
 
 data TriadPlacement : Set where
-  nearLowHigh nearHighLow nearHighHigh farLow farHigh : TriadPlacement
+  nearLowHigh : TriadPlacement
+  nearHighLow : TriadPlacement
+  nearHighHigh : TriadPlacement
+  farLow : TriadPlacement
+  farHigh : TriadPlacement
 
 record ConcreteTriad : Set where
   field
