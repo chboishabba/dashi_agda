@@ -244,3 +244,38 @@ constrainedMachineCannotReclassifyNovelMathematics = refl
 unAlignedCertificationCannotBeDelegatedAsProofReplay :
   scheduleAction certificationDebt transcribedUnaligned constrained32GB heavyReplay ≡ auditTranscription
 unAlignedCertificationCannotBeDelegatedAsProofReplay = refl
+
+------------------------------------------------------------------------
+-- DELEGATION RECEIPT
+--
+-- This record is the handoff gate for an external proof backend.  Its input is
+-- already a SourceAlignedDeferredTheorem, so an Aristotle/Lean job can never be
+-- created from a merely cited or unaligned statement through this API.
+------------------------------------------------------------------------
+
+record ExternalCertificationDemand (T : Set) : Set where
+  constructor external-certification-demand
+  field
+    alignedDeferred : SourceAlignedDeferredTheorem T
+    workload : ProofWorkload
+    backend : PreferredBackend
+
+open ExternalCertificationDemand public
+
+scheduleExternalCertification :
+  {T : Set} ->
+  SourceAlignedDeferredTheorem T ->
+  ProofWorkload ->
+  ExternalCertificationDemand T
+scheduleExternalCertification receipt tinyGlue =
+  external-certification-demand receipt tinyGlue localAgda
+scheduleExternalCertification receipt moderateReplay =
+  external-certification-demand receipt moderateReplay externalLean
+scheduleExternalCertification receipt heavyReplay =
+  external-certification-demand receipt heavyReplay aristotleLean
+
+heavyAlignedDemandUsesAristotle :
+  {T : Set} -> (receipt : SourceAlignedDeferredTheorem T) ->
+  ExternalCertificationDemand.backend
+    (scheduleExternalCertification receipt heavyReplay) ≡ aristotleLean
+heavyAlignedDemandUsesAristotle receipt = refl
