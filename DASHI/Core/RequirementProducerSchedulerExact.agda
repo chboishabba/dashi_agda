@@ -23,7 +23,7 @@ record RequirementSystem : Set₁ where
 
 open RequirementSystem public
 
-MissingFor : RequirementSystem → Question _ → Coordinate _ → Set
+MissingFor : (sys : RequirementSystem) → Question sys → Coordinate sys → Set
 MissingFor sys q c =
   (requiredFor sys q c ≡ true) × (closed sys c ≡ false)
 
