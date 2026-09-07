@@ -23,6 +23,7 @@ import DASHI.Wikimedia.SensibLawNatClimateReviewHandoffExact
 import DASHI.Wikimedia.SLRWikimediaHandoffABIExact
 import DASHI.Wikimedia.SensibLawNatClimateSLRFixtureExact
 import DASHI.Wikimedia.SensibLawNatObservationClaimSLRExact
+import DASHI.Wikimedia.SensibLawStatementBundleSparseReopenExact
 import DASHI.Wikimedia.NativePropertyTripleProjectionExact
 import DASHI.Wikimedia.NativeConcreteQidGraphProjectionExact
 import DASHI.Wikimedia.MaboNativeWikimediaBridgeExact
