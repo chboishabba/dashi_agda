@@ -50,14 +50,18 @@ canonicalTemporalDebugCycle =
     Diagnosis.smallFrameCheck
     Recalibration.frameCheckSalientAfterReactivation
 
-frameWasEliminatedBeforeCycle :
-  wasNotLiveBefore canonicalTemporalDebugCycle
-  ≡ Projection.frameNotLiveBefore
-frameWasEliminatedBeforeCycle = refl
+frameWasNotLiveBeforeCycle :
+  Projection.liveProjection
+    (beforeHistory canonicalTemporalDebugCycle)
+    (reactivatedDiagnosis canonicalTemporalDebugCycle)
+  → ⊥
+frameWasNotLiveBeforeCycle = wasNotLiveBefore canonicalTemporalDebugCycle
 
 frameIsLiveAfterCycle :
-  isLiveAfter canonicalTemporalDebugCycle
-frameIsLiveAfterCycle = Projection.frameLiveAfter
+  Projection.liveProjection
+    (afterHistory canonicalTemporalDebugCycle)
+    (reactivatedDiagnosis canonicalTemporalDebugCycle)
+frameIsLiveAfterCycle = isLiveAfter canonicalTemporalDebugCycle
 
 rescheduledFrameControlIsSalient :
   Diagnosis.DiagnosisSalientOn
