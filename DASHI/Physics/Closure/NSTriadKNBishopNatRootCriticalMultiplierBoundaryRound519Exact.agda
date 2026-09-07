@@ -26,6 +26,7 @@ open import Data.Nat.Base using (_≤_)
 
 import Real as BishopReal
 
+import DASHI.Foundations.BishopNatSquareRootApproximationExact as Approximation
 import DASHI.Foundations.BishopNatSquareRootRegularFloorExact as Root
 import DASHI.Foundations.BishopNatSquareRootNonnegativeExact as RootNN
 import DASHI.Foundations.BishopNatSquareRootSemanticSquareExact as RootSquare
@@ -42,8 +43,7 @@ canonicalNatRootSquaresToNat :
   (n : Nat) →
   BishopReal._≃_
     (BishopReal._*_ (sqrtNat n) (sqrtNat n))
-    (BishopReal._⋆
-      (DASHI.Foundations.BishopNatSquareRootApproximationExact.natAsRational n))
+    (BishopReal._⋆ (Approximation.natAsRational n))
 canonicalNatRootSquaresToNat = RootSquare.canonicalFloorSquareRootSquaresToNat
 
 record CanonicalNatRootMonotonicity : Set where
