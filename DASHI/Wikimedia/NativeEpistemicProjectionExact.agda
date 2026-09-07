@@ -3,6 +3,7 @@ module DASHI.Wikimedia.NativeEpistemicProjectionExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.String using (String)
 
 import DASHI.Ontology.EpistemicTrit as Trit
 import DASHI.Ontology.WikidataEpistemicBridge as Epistemic
@@ -63,7 +64,6 @@ referencesPreservedByIdentifier :
   ≡ referenceIds (Native.references statement)
 referencesPreservedByIdentifier statement interpretation = refl
 
--- The interpretation is explicit and survives projection unchanged.
 qualifierInterpretationPreserved :
   {QualifierAxis : Set}
   (statement : Native.Statement)
@@ -81,4 +81,4 @@ rankDoesNotDetermineEpistemicState ()
 
 snakDoesNotAutomaticallyInterpretQualifierAxis :
   NativeSnakAutomaticallyInterpretsQualifierAxis → ⊥
-snakDoesNotAutomaticallyInterpretsQualifierAxis ()
+snakDoesNotAutomaticallyInterpretQualifierAxis ()
