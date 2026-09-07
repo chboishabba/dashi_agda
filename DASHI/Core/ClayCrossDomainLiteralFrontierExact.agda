@@ -10,6 +10,7 @@ import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact as
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedDirectConsumerRound478Exact as R478
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedSignedResidualRound479Exact as R479
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedPhysicalSnapshotRound480Exact as NS
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedProofSearchRound481Exact as NSProof
 import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Exact as YM
 import DASHI.Analysis.RiemannAristotleRHFinalAllowanceLeafSchedulerExact as RH
 import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as Zeta
@@ -18,29 +19,21 @@ import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as Zeta
 -- CROSS-DOMAIN TERMINAL FRONTIER MOTIFS
 --
 -- This is reuse of proof-search shape, not transfer of theorem content.
--- NS, YM and RH/zeta remain mathematically independent programmes.  The shared
--- value is that their current literal frontiers are now small enough to classify
--- by producer motif, which prevents wasting search on already-owned compiler
--- infrastructure.
+-- NS, YM and RH/zeta remain mathematically independent programmes.
 --
--- NS UPDATE (R480)
+-- NS UPDATE (R481)
 -- ----------------
--- R477 installs the literal nonseparable Cauchy kernel and an exact helical
--- split.  R478 correctly notices that the TOTAL all-coefficient Gram bound is
--- weaker than demanding separate +/- bounds.  R479 adds a signed-residual
--- allowance producer so the paid diagonal can be separated from the genuinely
--- signed remainder without inserting absolute values.
+-- R477-R480 minimize the mathematical consumer down to the selected physical
+-- Cauchy-resolved snapshot.  R481 then applies the repo's first-missing rule:
 --
--- R480 then follows the actual R472 downstream type one step further: R432 does
--- not consume a theorem for every hypothetical coefficient vector.  It consumes
--- the selected physical coefficient snapshot.  The least-privilege terminal
--- packet is therefore:
+--   current status = snapshot weld missing + selected payment missing
+--   first missing   = snapshot weld
+--   mechanism       = Look
 --
---   exact physical snapshot/same-object weld
---   + bound at that selected physical coefficient.
---
--- The uniform R478 theorem remains a sufficient producer, not a mandatory
--- terminal obligation.
+-- Only after an actual snapshot/correspondence receipt exists does the selected
+-- resolved inequality become the live Think/analytic leaf.  Later-stage success
+-- cannot repair the missing same-object receipt and producer names are not
+-- receipts.
 ------------------------------------------------------------------------
 
 data TerminalProducerMotif : Set where
@@ -82,9 +75,9 @@ primaryMotif rhGammaAllowance = assignedAllowancePayment
 
 coordinateReference : TerminalCoordinate → String
 coordinateReference nsResolvedSnapshotWeld =
-  "NS: R480 actual physical Cauchy-resolved coefficient/signed-cross same-object snapshot"
+  "NS: R481 first-missing R480 physical Cauchy-resolved snapshot weld"
 coordinateReference nsSelectedResolvedPayment =
-  "NS: R480 selected physical Cauchy-resolved quadratic <= selected fibre budget"
+  "NS: R480 selected physical resolved payment; admitted only after snapshot receipt"
 coordinateReference ymRound108Semantics = "YM: source-fixed Round108 density semantics"
 coordinateReference ymRound108BC1SameObject = "YM: selected potential = BC1 same-object representation weld"
 coordinateReference rhOffAllowance = "RH/zeta: universal pole-quotient Off budget <= assigned A_off"
@@ -102,6 +95,24 @@ nsPhysicalSnapshotWeldStillOpen = NS.round480PhysicalSnapshotSameObjectWeldClose
 
 nsSelectedResolvedPaymentStillOpen : NS.round480PhysicalSelectedResolvedBoundClosed ≡ false
 nsSelectedResolvedPaymentStillOpen = NS.round480PhysicalSelectedResolvedBoundClosedIsFalse
+
+nsFirstMissingIsSnapshotWeld :
+  NSProof.firstR480Residual NSProof.currentR480Status
+  ≡ NSProof.missingPhysicalSnapshotWeld
+nsFirstMissingIsSnapshotWeld = NSProof.currentFirstMissingIsSnapshotWeld
+
+nsCurrentMechanismIsLook :
+  NSProof.firstR480Mechanism NSProof.currentR480Status ≡ NSProof.Look
+nsCurrentMechanismIsLook = NSProof.currentMechanismIsLook
+
+nsSelectedPaymentSearchNotYetAdmitted :
+  NSProof.round481SelectedPaymentSearchCurrentlyAdmitted ≡ false
+nsSelectedPaymentSearchNotYetAdmitted =
+  NSProof.round481SelectedPaymentSearchCurrentlyAdmittedIsFalse
+
+nsAfterSnapshotMechanismIsThink :
+  NSProof.firstR480Mechanism NSProof.afterSnapshotStatus ≡ NSProof.Think
+nsAfterSnapshotMechanismIsThink = NSProof.afterSnapshotMechanismIsThink
 
 nsUniformResolvedBoundSufficient : NS.round480UniformAllCoefficientBoundIsSufficient ≡ true
 nsUniformResolvedBoundSufficient = refl
@@ -180,15 +191,16 @@ canonicalCrossDomainSearchPolicy =
     false refl
 
 ------------------------------------------------------------------------
--- Search order as a dependency statement, not a numerical ranking.
+-- Search order is now executable first-missing scheduling, not merely prose.
 --
--- 1. Close the R480 physical same-object snapshot weld from already-owned
---    R447/R448/R451/R456/R472 infrastructure if possible.
--- 2. Attack only the selected physical signed-resolved payment left in that
---    snapshot.  The uniform all-coefficient bound is optional.
--- 3. Let R432 and the existing downstream compilers fire.
+-- CURRENT:
+--   R480 snapshot weld -> Look.
 --
--- YM and RH/zeta remain independent programmes with their own terminal leaves.
+-- AFTER that actual receipt:
+--   selected physical resolved payment -> Think.
+--
+-- AFTER that actual R480 proof object:
+--   R432/downstream compiler reuse.
 ------------------------------------------------------------------------
 
 data ClosurePhase : Set where
