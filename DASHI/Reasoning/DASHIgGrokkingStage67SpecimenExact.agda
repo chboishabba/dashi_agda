@@ -22,10 +22,12 @@ data CurrentPrelimEvidence : Set where
   pinnedTwoRunPhase2Surface : CurrentPrelimEvidence
 
 data FutureWorld : Set where
-  geometryVariantWinsHeldOut plainWinsHeldOut : FutureWorld
+  geometryVariantWinsHeldOut : FutureWorld
+  plainWinsHeldOut : FutureWorld
 
 data FutureArchitectureWinner : Set where
-  geometryVariantWinner plainWinner : FutureArchitectureWinner
+  geometryVariantWinner : FutureArchitectureWinner
+  plainWinner : FutureArchitectureWinner
 
 currentCompatible : CurrentPrelimEvidence → FutureWorld → Set
 currentCompatible pinnedTwoRunPhase2Surface geometryVariantWinsHeldOut = ⊤
@@ -79,7 +81,8 @@ currentPrelimDoesNotIdentifyFutureArchitectureWinner identifiable =
 ------------------------------------------------------------------------
 
 data HeldOutMeasurement : Set where
-  observedGeometryWinner observedPlainWinner : HeldOutMeasurement
+  observedGeometryWinner : HeldOutMeasurement
+  observedPlainWinner : HeldOutMeasurement
 
 measuresWinner : FutureWorld → HeldOutMeasurement
 measuresWinner geometryVariantWinsHeldOut = observedGeometryWinner

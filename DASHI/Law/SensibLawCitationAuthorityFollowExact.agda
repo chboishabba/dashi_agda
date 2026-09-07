@@ -37,11 +37,11 @@ record CitationIdentity (candidate : CitationCandidate) : Set where
 open CitationIdentity public
 
 data CitationAcquisitionState : Set where
-  authorityAlreadyInCorpus
-  authorityFetched
-  authorityFetchUnresolved
-  authorityFetchBlocked
-  : CitationAcquisitionState
+  authorityAlreadyInCorpus : CitationAcquisitionState
+  authorityFetched : CitationAcquisitionState
+  authorityFetchUnresolved : CitationAcquisitionState
+  authorityFetchBlocked : CitationAcquisitionState
+
 
 record ExactAuthorityAcquisition
     {candidate : CitationCandidate}

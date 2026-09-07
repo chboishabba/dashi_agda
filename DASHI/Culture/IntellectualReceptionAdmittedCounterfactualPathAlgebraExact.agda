@@ -244,7 +244,8 @@ twoRelationPathLength : pathLength twoRelationPath ≡ 2
 twoRelationPathLength = refl
 
 data SameEndpointPathCase : Set where
-  oneInstitutionShift twoInstitutionShifts : SameEndpointPathCase
+  oneInstitutionShift : SameEndpointPathCase
+  twoInstitutionShifts : SameEndpointPathCase
 
 data EndpointCode : Set where institutionalEndpoint : EndpointCode
 
@@ -274,12 +275,14 @@ sameEndpointCannotRecoverPathHistory =
 ------------------------------------------------------------------------
 
 data SameLengthPathCase : Set where
-  movementInstitutionLengthTwo institutionMovementLengthTwo : SameLengthPathCase
+  movementInstitutionLengthTwo : SameLengthPathCase
+  institutionMovementLengthTwo : SameLengthPathCase
 
 data PathLengthCode : Set where lengthTwo : PathLengthCode
 
 data FineOrderedLengthTwoPath : Set where
-  movementInstitutionFine institutionMovementFine : FineOrderedLengthTwoPath
+  movementInstitutionFine : FineOrderedLengthTwoPath
+  institutionMovementFine : FineOrderedLengthTwoPath
 
 pathLengthCode : SameLengthPathCase → PathLengthCode
 pathLengthCode _ = lengthTwo
@@ -308,11 +311,19 @@ sameLengthCannotRecoverOrderedPath =
 ------------------------------------------------------------------------
 
 data PathProjectionLevel : Set where
-  endpointLevel futureConeLevel admissibilityTraceLevel pathLengthLevel orderedPathLevel : PathProjectionLevel
+  endpointLevel : PathProjectionLevel
+  futureConeLevel : PathProjectionLevel
+  admissibilityTraceLevel : PathProjectionLevel
+  pathLengthLevel : PathProjectionLevel
+  orderedPathLevel : PathProjectionLevel
 
 
 data PathProjectionStrength : Set where
-  endpointCoarse futureConeCoarse traceCoarse lengthCoarse orderedPathFine : PathProjectionStrength
+  endpointCoarse : PathProjectionStrength
+  futureConeCoarse : PathProjectionStrength
+  traceCoarse : PathProjectionStrength
+  lengthCoarse : PathProjectionStrength
+  orderedPathFine : PathProjectionStrength
 
 
 projectionStrength : PathProjectionLevel → PathProjectionStrength

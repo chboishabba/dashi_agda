@@ -19,19 +19,30 @@ import DASHI.Education.EarlyLearningIntersectionalCapabilityExact as Intersectio
 ------------------------------------------------------------------------
 
 data PolicyAtom : Set where
-  familyCarePayment homeLearningResources qualifiedTeacherAccess : PolicyAtom
+  familyCarePayment : PolicyAtom
+  homeLearningResources : PolicyAtom
+  qualifiedTeacherAccess : PolicyAtom
   universalProfessionalEntitlement publicPedagogicalCommons : PolicyAtom
 
 data PolicyFrame : Set where
-  situatedCapabilityFrame parentalSovereigntyFrame institutionalExitFrame : PolicyFrame
+  situatedCapabilityFrame : PolicyFrame
+  parentalSovereigntyFrame : PolicyFrame
+  institutionalExitFrame : PolicyFrame
   antiWokeFrame publicEntitlementFrame : PolicyFrame
 
 data InfluenceEvidenceClass : Set where
-  publicStatement publishedPolicy lobbyingSubmission disclosedDonation : InfluenceEvidenceClass
+  publicStatement : InfluenceEvidenceClass
+  publishedPolicy : InfluenceEvidenceClass
+  lobbyingSubmission : InfluenceEvidenceClass
+  disclosedDonation : InfluenceEvidenceClass
   sharedConference transnationalNetworkStudy observedFrameConvergence inferredEcology : InfluenceEvidenceClass
 
 data ActorKind : Set where
-  childActor familyActor kinCommunityActor educatorActor governmentActor : ActorKind
+  childActor : ActorKind
+  familyActor : ActorKind
+  kinCommunityActor : ActorKind
+  educatorActor : ActorKind
+  governmentActor : ActorKind
   politicalPartyActor lobbyActor expertActor transnationalNetworkActor : ActorKind
 
 record FramedPolicyAtom : Set where
@@ -106,10 +117,13 @@ canonicalReappropriationResistanceGate =
     true refl true refl true refl true refl true refl true refl
 
 data EndorsementScope : Set where
-  atomOnly conditionalArchitecture fullProgramme : EndorsementScope
+  atomOnly : EndorsementScope
+  conditionalArchitecture : EndorsementScope
+  fullProgramme : EndorsementScope
 
 data EndorsementUse : Set where
-  faithfulConditionalUse decontextualisedChoiceQuote : EndorsementUse
+  faithfulConditionalUse : EndorsementUse
+  decontextualisedChoiceQuote : EndorsementUse
 
 record ExpertEndorsementReceipt : Set where
   constructor expertEndorsementReceipt

@@ -62,13 +62,13 @@ nicholsAuthority = Edge.source-identity
 ------------------------------------------------------------------------
 
 data GateProducer : Set where
-  parliamentaryRule
-  constitutionalRule
-  judicialCommonLawDevelopment
-  judicialPolicyConsideration
-  evidentialFinding
-  dashReconstruction
-  : GateProducer
+  parliamentaryRule : GateProducer
+  constitutionalRule : GateProducer
+  judicialCommonLawDevelopment : GateProducer
+  judicialPolicyConsideration : GateProducer
+  evidentialFinding : GateProducer
+  dashReconstruction : GateProducer
+
 
 record GateInterventionReceipt : Set where
   constructor gate-intervention-receipt
@@ -136,12 +136,12 @@ hegemonyHypothesisDoesNotMindRead ()
 ------------------------------------------------------------------------
 
 data LossBearer : Set where
-  claimantOrAffectedPerson
-  defendantOrRiskController
-  publicRevenue
-  distributedOrMixed
-  unresolvedBearer
-  : LossBearer
+  claimantOrAffectedPerson : LossBearer
+  defendantOrRiskController : LossBearer
+  publicRevenue : LossBearer
+  distributedOrMixed : LossBearer
+  unresolvedBearer : LossBearer
+
 
 record DistributionalGateEffect : Set where
   constructor distributional-gate-effect

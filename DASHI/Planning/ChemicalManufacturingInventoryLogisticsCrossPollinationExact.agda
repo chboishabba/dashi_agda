@@ -50,10 +50,14 @@ data MaterialRole : Set where
 
 
 data ShortageClass : Set where
-  noShortage substitutableShortage nonSubstitutableShortage : ShortageClass
+  noShortage : ShortageClass
+  substitutableShortage : ShortageClass
+  nonSubstitutableShortage : ShortageClass
 
 data Readiness : Set where
-  ready overrideRequired blocked : Readiness
+  ready : Readiness
+  overrideRequired : Readiness
+  blocked : Readiness
 
 readinessFromShortage : ShortageClass → Readiness
 readinessFromShortage noShortage = ready

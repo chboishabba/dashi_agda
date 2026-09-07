@@ -41,10 +41,10 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 ------------------------------------------------------------------------
 
 data PluralKnowledgeReading : Set where
-  coordinatedDistinctWarrants
-  fusedSingleEpistemology
-  anythingGoesRelativism
-  : PluralKnowledgeReading
+  coordinatedDistinctWarrants : PluralKnowledgeReading
+  fusedSingleEpistemology : PluralKnowledgeReading
+  anythingGoesRelativism : PluralKnowledgeReading
+
 
 twoEyedReading : PluralKnowledgeReading
 twoEyedReading = coordinatedDistinctWarrants
@@ -162,22 +162,22 @@ fourfoldRetreatDoesNotExhaustIndigenousEpistemology ()
 ------------------------------------------------------------------------
 
 data CoordinationCoordinate : Set where
-  propositionContent
-  provenance
-  authority
-  permission
-  obligation
-  materialRelation
-  legalOrder
-  translationInterface
-  : CoordinationCoordinate
+  propositionContent : CoordinationCoordinate
+  provenance : CoordinationCoordinate
+  authority : CoordinationCoordinate
+  permission : CoordinationCoordinate
+  obligation : CoordinationCoordinate
+  materialRelation : CoordinationCoordinate
+  legalOrder : CoordinationCoordinate
+  translationInterface : CoordinationCoordinate
+
 
 data CoordinationRequirement : Set where
-  preserveDistinct
-  coordinateWithoutFusion
-  independentlySource
-  cannotInferFromSurface
-  : CoordinationRequirement
+  preserveDistinct : CoordinationRequirement
+  coordinateWithoutFusion : CoordinationRequirement
+  independentlySource : CoordinationRequirement
+  cannotInferFromSurface : CoordinationRequirement
+
 
 requirement : CoordinationCoordinate → CoordinationRequirement
 requirement propositionContent = coordinateWithoutFusion

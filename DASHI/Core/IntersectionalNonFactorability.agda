@@ -105,7 +105,8 @@ rechartingCannotRecoverErasedPhenomenon rechart witness =
 ------------------------------------------------------------------------
 
 data SituatedState : Set where
-  sameLabelLowPower sameLabelHighPower : SituatedState
+  sameLabelLowPower : SituatedState
+  sameLabelHighPower : SituatedState
 
 data FlatSingleAxis : Set where
   sameDemographicLabel : FlatSingleAxis

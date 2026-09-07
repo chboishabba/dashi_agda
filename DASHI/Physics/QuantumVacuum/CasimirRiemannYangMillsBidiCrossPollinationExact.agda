@@ -15,7 +15,9 @@ import DASHI.Analysis.SumIntegralDefectExact as SID
 ------------------------------------------------------------------------
 
 data Lane : Set where
-  riemannLane yangMillsLane casimirLane : Lane
+  riemannLane : Lane
+  yangMillsLane : Lane
+  casimirLane : Lane
 
 data ReusableShape : Set where
   poissonSummationShape : ReusableShape

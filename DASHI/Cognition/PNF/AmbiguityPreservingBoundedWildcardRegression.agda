@@ -21,10 +21,13 @@ open import DASHI.Cognition.PNF.AmbiguityPreservingBoundedWildcardExact
 ------------------------------------------------------------------------
 
 data Candidate : Set where
-  candidateA candidateB : Candidate
+  candidateA : Candidate
+  candidateB : Candidate
 
 data Realization : Set where
-  allLower mixed allUpper : Realization
+  allLower : Realization
+  mixed : Realization
+  allUpper : Realization
 
 data Selected : Realization → Candidate → Set where
   lowerSelectsA : Selected allLower candidateA
@@ -53,7 +56,10 @@ mixedSelectsDifferentCandidate = mixedSelectsB
 ------------------------------------------------------------------------
 
 data Demand : Set where
-  stableDemand unstableDemand₁ unstableDemand₂ unstableDemand₃ : Demand
+  stableDemand : Demand
+  unstableDemand₁ : Demand
+  unstableDemand₂ : Demand
+  unstableDemand₃ : Demand
 
 data NeedsAmbiguityResidual : Demand → Set where
   unstable₁ : NeedsAmbiguityResidual unstableDemand₁

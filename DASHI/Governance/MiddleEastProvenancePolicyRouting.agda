@@ -53,10 +53,18 @@ record MiddleEastRoutingSystem : Set₁ where
 open MiddleEastRoutingSystem public
 
 data SubjectStatus : Set where
-  negotiatingSubject protectedSubject threatCarrier administrativeObject : SubjectStatus
+  negotiatingSubject : SubjectStatus
+  protectedSubject : SubjectStatus
+  threatCarrier : SubjectStatus
+  administrativeObject : SubjectStatus
 
 data PolicyChannel : Set where
-  recognition negotiation sanction militaryAttack reconstruction disarmament : PolicyChannel
+  recognition : PolicyChannel
+  negotiation : PolicyChannel
+  sanction : PolicyChannel
+  militaryAttack : PolicyChannel
+  reconstruction : PolicyChannel
+  disarmament : PolicyChannel
   detention withdrawal aid compensation : PolicyChannel
 
 record SubjectRouting (S : MiddleEastRoutingSystem) : Set₁ where

@@ -34,7 +34,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as Admission
 
 data CriticalConeSubproblem : Set where
-  flShoulder hhShoulder comparable : CriticalConeSubproblem
+  flShoulder : CriticalConeSubproblem
+  hhShoulder : CriticalConeSubproblem
+  comparable : CriticalConeSubproblem
 
 data RefinementState : Set where
   heatOnlyDiagnostic : RefinementState

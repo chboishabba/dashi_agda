@@ -42,7 +42,10 @@ half = + 1 / 2
 one = + 1 / 1
 
 data IntervalCell : Set where
-  negativeOuter negativeInner positiveInner positiveOuter : IntervalCell
+  negativeOuter : IntervalCell
+  negativeInner : IntervalCell
+  positiveInner : IntervalCell
+  positiveOuter : IntervalCell
 
 cellInterval : IntervalCell → Integral.RationalInterval
 cellInterval negativeOuter = Integral.interval minusOne minusHalf (ℚP.≤ᵇ⇒≤ tt)

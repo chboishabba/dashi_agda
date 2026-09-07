@@ -27,7 +27,9 @@ open import DASHI.Physics.Closure.ShiftContractTriadicFamily as STF
 -- without choosing one width ad hoc.
 
 data SupportWidth : Set where
-  width1 width2 width3 : SupportWidth
+  width1 : SupportWidth
+  width2 : SupportWidth
+  width3 : SupportWidth
 
 record ParametricShiftContractTriadicFamily : Set₂ where
   field

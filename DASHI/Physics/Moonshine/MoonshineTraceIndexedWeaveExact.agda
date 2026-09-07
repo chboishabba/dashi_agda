@@ -14,10 +14,13 @@ import DASHI.Core.IndexedWeaveHyperfabricExact as Indexed
 ------------------------------------------------------------------------
 
 data TraceProfile : Set where
-  tracePrefixA tracePrefixB : TraceProfile
+  tracePrefixA : TraceProfile
+  tracePrefixB : TraceProfile
 
 data FiniteTraceState : Set where
-  hiddenStateA hiddenStateB hiddenStateC : FiniteTraceState
+  hiddenStateA : FiniteTraceState
+  hiddenStateB : FiniteTraceState
+  hiddenStateC : FiniteTraceState
 
 traceObservation : FiniteTraceState → TraceProfile
 traceObservation hiddenStateA = tracePrefixA
@@ -25,7 +28,9 @@ traceObservation hiddenStateB = tracePrefixA
 traceObservation hiddenStateC = tracePrefixB
 
 data HiddenTraceTag : Set where
-  tagA tagB tagC : HiddenTraceTag
+  tagA : HiddenTraceTag
+  tagB : HiddenTraceTag
+  tagC : HiddenTraceTag
 
 hiddenTag : FiniteTraceState → HiddenTraceTag
 hiddenTag hiddenStateA = tagA

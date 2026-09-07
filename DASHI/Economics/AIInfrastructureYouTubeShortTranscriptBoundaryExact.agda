@@ -37,20 +37,20 @@ canonicalYouTubeShortSourceBoundary = youtubeShortSourceBoundary
 ------------------------------------------------------------------------
 
 data TranscriptClaim : Set where
-  chinaFrontierGapSevenMonths
-  chinaChipShareFivePercent
-  trainingFiniteServingPersistent
-  moonshotServingCapacitySuspension
-  moonshotOpenWeightReleaseAfterSuspension
-  deepSeekPeak278Nodes
-  macroPoloChinaTalent38Percent
-  macroPoloUSTalent24Percent
-  macroPoloChinaEducatedToUS72Percent
-  euvManufacturingChokepoint
-  asml314OperationalEUV
-  noASMLEUVInChina
-  openWeightsExternaliseServingCompute
-  : TranscriptClaim
+  chinaFrontierGapSevenMonths : TranscriptClaim
+  chinaChipShareFivePercent : TranscriptClaim
+  trainingFiniteServingPersistent : TranscriptClaim
+  moonshotServingCapacitySuspension : TranscriptClaim
+  moonshotOpenWeightReleaseAfterSuspension : TranscriptClaim
+  deepSeekPeak278Nodes : TranscriptClaim
+  macroPoloChinaTalent38Percent : TranscriptClaim
+  macroPoloUSTalent24Percent : TranscriptClaim
+  macroPoloChinaEducatedToUS72Percent : TranscriptClaim
+  euvManufacturingChokepoint : TranscriptClaim
+  asml314OperationalEUV : TranscriptClaim
+  noASMLEUVInChina : TranscriptClaim
+  openWeightsExternaliseServingCompute : TranscriptClaim
+
 
 record TranscriptClaimReceipt : Set where
   constructor transcriptClaimReceipt

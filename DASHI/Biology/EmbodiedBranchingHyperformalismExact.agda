@@ -27,7 +27,10 @@ import DASHI.Biology.TwoBoundaryHyperformalismExact as Two
 ------------------------------------------------------------------------
 
 data BranchStatus : Set where
-  liveBranch reweightedBranch highBarrierBranch gatedBranch : BranchStatus
+  liveBranch : BranchStatus
+  reweightedBranch : BranchStatus
+  highBarrierBranch : BranchStatus
+  gatedBranch : BranchStatus
 
 statusNotCollapsed :
   liveBranch ≡ gatedBranch → ⊥

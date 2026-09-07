@@ -59,7 +59,9 @@ open CorroboratedNameExpansion public
 -- Parser-token -> local-object anchoring is fail-closed. It is a bridge from
 -- observation to local object, not a claim that two objects are identical.
 data ParserObjectAnchorMultiplicity : Set where
-  noLocalObject oneLocalObject severalLocalObjects : ParserObjectAnchorMultiplicity
+  noLocalObject : ParserObjectAnchorMultiplicity
+  oneLocalObject : ParserObjectAnchorMultiplicity
+  severalLocalObjects : ParserObjectAnchorMultiplicity
 
 data ParserObjectAnchorPermission : ParserObjectAnchorMultiplicity → Set where
   oneLocalObjectMayAnchor : ParserObjectAnchorPermission oneLocalObject

@@ -8,7 +8,9 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ReceiptState : Set where
-  receiptClosed receiptOpen receiptConflict : ReceiptState
+  receiptClosed : ReceiptState
+  receiptOpen : ReceiptState
+  receiptConflict : ReceiptState
 
 record OperationalCommand : Set where
   constructor operationalCommand

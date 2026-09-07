@@ -33,7 +33,12 @@ fold combine unit [] = unit
 fold combine unit (x ∷ xs) = combine x (fold combine unit xs)
 
 data EvidenceStatus : Set where
-  exactProof rationalCertificate intervalCertificate floatingExperiment conjecture counterexample : EvidenceStatus
+  exactProof : EvidenceStatus
+  rationalCertificate : EvidenceStatus
+  intervalCertificate : EvidenceStatus
+  floatingExperiment : EvidenceStatus
+  conjecture : EvidenceStatus
+  counterexample : EvidenceStatus
 
 record EvidenceEnvelope {a : Level} (Claim : Set a) : Set (lsuc a) where
   field

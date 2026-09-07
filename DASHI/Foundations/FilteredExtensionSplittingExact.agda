@@ -46,7 +46,16 @@ data Grade0 : Set where
   coarseUnit : Grade0
 
 data Grade1 : Set where
-  fine0 fine1 fine2 fine3 fine4 fine5 fine6 fine7 fine8 fine9 : Grade1
+  fine0 : Grade1
+  fine1 : Grade1
+  fine2 : Grade1
+  fine3 : Grade1
+  fine4 : Grade1
+  fine5 : Grade1
+  fine6 : Grade1
+  fine7 : Grade1
+  fine8 : Grade1
+  fine9 : Grade1
 
 data Filtered11 : Set where
   retainedCoarse : Filtered11

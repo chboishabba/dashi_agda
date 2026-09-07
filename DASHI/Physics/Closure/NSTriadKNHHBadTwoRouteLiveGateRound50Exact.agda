@@ -105,7 +105,8 @@ softComKernelSummableForcingImpliesH0Strict input =
   summableForcingImpliesH2Strict (softComKernelSummableLiveInput input)
 
 data HHBadLiveRoute : Set where
-  strictContraction summableForcing : HHBadLiveRoute
+  strictContraction : HHBadLiveRoute
+  summableForcing : HHBadLiveRoute
 
 twoHHBadPhysicalRoutesReachSameHardGate : Bool
 twoHHBadPhysicalRoutesReachSameHardGate = true

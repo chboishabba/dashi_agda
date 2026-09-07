@@ -18,18 +18,18 @@ import DASHI.Law.SensibLawProductionLegalRuntimeABIExact as Runtime
 ------------------------------------------------------------------------
 
 data LegalResidualKind : Set where
-  legalRelevanceUnresolved
-  legalAuthorityAbsent
-  legalApplicabilityUnresolved
-  legalInterpretationUnresolved
-  legalElementPaymentMissing
-  : LegalResidualKind
+  legalRelevanceUnresolved : LegalResidualKind
+  legalAuthorityAbsent : LegalResidualKind
+  legalApplicabilityUnresolved : LegalResidualKind
+  legalInterpretationUnresolved : LegalResidualKind
+  legalElementPaymentMissing : LegalResidualKind
+
 
 data LegalResidualDisposition : Set where
-  residualOpen
-  residualBlocked
-  residualClosed
-  : LegalResidualDisposition
+  residualOpen : LegalResidualDisposition
+  residualBlocked : LegalResidualDisposition
+  residualClosed : LegalResidualDisposition
+
 
 producerForResidual : LegalResidualKind → Runtime.RuntimeLegalProducer
 producerForResidual legalRelevanceUnresolved = Runtime.legalSourceFollowProducer
@@ -78,11 +78,11 @@ open LegalResidualDemand public
 ------------------------------------------------------------------------
 
 data MissingLegalPlanCoordinate : Set where
-  missingStructuralSignature
-  missingJurisdiction
-  missingSourceRole
-  missingAuthorityLevel
-  : MissingLegalPlanCoordinate
+  missingStructuralSignature : MissingLegalPlanCoordinate
+  missingJurisdiction : MissingLegalPlanCoordinate
+  missingSourceRole : MissingLegalPlanCoordinate
+  missingAuthorityLevel : MissingLegalPlanCoordinate
+
 
 record BlockedLegalResidualDemand : Set where
   constructor blockedLegalResidualDemand

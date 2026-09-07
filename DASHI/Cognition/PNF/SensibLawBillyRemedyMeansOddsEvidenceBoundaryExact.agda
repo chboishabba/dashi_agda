@@ -21,20 +21,20 @@ import DASHI.Cognition.PNF.SensibLawCountrySystemRealisedJusticeBidiExact as Cou
 ------------------------------------------------------------------------
 
 data MeansEvidenceKind : Set where
-  committeeSpecifiedRemedy
-  stateReportedImplementation
-  domesticInstitutionalCapability
-  treatyBodyFollowUpCapability
-  communityNegotiationCapability
-  : MeansEvidenceKind
+  committeeSpecifiedRemedy : MeansEvidenceKind
+  stateReportedImplementation : MeansEvidenceKind
+  domesticInstitutionalCapability : MeansEvidenceKind
+  treatyBodyFollowUpCapability : MeansEvidenceKind
+  communityNegotiationCapability : MeansEvidenceKind
+
 
 data OddsEvidenceKind : Set where
-  calibratedBaseRate
-  comparableCaseFrequency
-  identifiedTransitionProbability
-  sourceReportedProbability
-  noCalibratedOddsEvidence
-  : OddsEvidenceKind
+  calibratedBaseRate : OddsEvidenceKind
+  comparableCaseFrequency : OddsEvidenceKind
+  identifiedTransitionProbability : OddsEvidenceKind
+  sourceReportedProbability : OddsEvidenceKind
+  noCalibratedOddsEvidence : OddsEvidenceKind
+
 
 record MeansReceipt : Set where
   constructor means-receipt
@@ -206,19 +206,19 @@ compensationReparationStillOperationallyOpen = refl
 ------------------------------------------------------------------------
 
 data RemedyQuestion : Set where
-  howCouldCompensationBeImplemented
-  howCouldFullReparationBeImplemented
-  whatIsProbabilityOfFullReparation
-  whatIsProbabilityOfCompensation
-  : RemedyQuestion
+  howCouldCompensationBeImplemented : RemedyQuestion
+  howCouldFullReparationBeImplemented : RemedyQuestion
+  whatIsProbabilityOfFullReparation : RemedyQuestion
+  whatIsProbabilityOfCompensation : RemedyQuestion
+
 
 data NextWork : Set where
-  inspectExecutiveAndAppropriationAuthority
-  inspectCommunityNegotiatedImplementation
-  recoverExecutionAndOutcomeReceipts
-  buildComparableCaseCalibrationDataset
-  recoverSourceReportedProbabilityIfAny
-  : NextWork
+  inspectExecutiveAndAppropriationAuthority : NextWork
+  inspectCommunityNegotiatedImplementation : NextWork
+  recoverExecutionAndOutcomeReceipts : NextWork
+  buildComparableCaseCalibrationDataset : NextWork
+  recoverSourceReportedProbabilityIfAny : NextWork
+
 
 nextWork : RemedyQuestion → NextWork
 nextWork howCouldCompensationBeImplemented = inspectExecutiveAndAppropriationAuthority

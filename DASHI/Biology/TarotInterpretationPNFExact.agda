@@ -204,7 +204,8 @@ canonicalInterpretationRetainsResidualDifference = refl
 ------------------------------------------------------------------------
 
 data CausalLane : Set where
-  independentlyFixedOutcome reflectiveActionIntervention : CausalLane
+  independentlyFixedOutcome : CausalLane
+  reflectiveActionIntervention : CausalLane
 
 fixedOutcomeIsNotReflectiveIntervention :
   independentlyFixedOutcome ≡ reflectiveActionIntervention → ⊥

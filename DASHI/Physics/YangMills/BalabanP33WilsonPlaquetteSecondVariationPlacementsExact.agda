@@ -35,13 +35,21 @@ open import Data.List.Base using (length)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 data PlaquetteLinkSlot4 : Set where
-  slot0 slot1 slot2 slot3 : PlaquetteLinkSlot4
+  slot0 : PlaquetteLinkSlot4
+  slot1 : PlaquetteLinkSlot4
+  slot2 : PlaquetteLinkSlot4
+  slot3 : PlaquetteLinkSlot4
 
 plaquetteLinkSlots4 : List PlaquetteLinkSlot4
 plaquetteLinkSlots4 = slot0 ∷ slot1 ∷ slot2 ∷ slot3 ∷ []
 
 data UnorderedSlotPair4 : Set where
-  pair01 pair02 pair03 pair12 pair13 pair23 : UnorderedSlotPair4
+  pair01 : UnorderedSlotPair4
+  pair02 : UnorderedSlotPair4
+  pair03 : UnorderedSlotPair4
+  pair12 : UnorderedSlotPair4
+  pair13 : UnorderedSlotPair4
+  pair23 : UnorderedSlotPair4
 
 unorderedSlotPairs4 : List UnorderedSlotPair4
 unorderedSlotPairs4 =

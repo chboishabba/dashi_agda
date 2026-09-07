@@ -42,7 +42,8 @@ fourCandidatesFitTwoBits =
 ------------------------------------------------------------------------
 
 data ObservationClass : Set where
-  ambiguousTwo identifiedOne : ObservationClass
+  ambiguousTwo : ObservationClass
+  identifiedOne : ObservationClass
 
 residualCertificate : ObservationClass → ResidualWidthCertificate
 residualCertificate ambiguousTwo = twoCandidatesFitOneBit

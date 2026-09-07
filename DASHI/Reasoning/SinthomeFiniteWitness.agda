@@ -13,7 +13,9 @@ import DASHI.Reasoning.SinthomeTypedStabilisation as Sinthome
 ------------------------------------------------------------------------
 
 data FabricState : Set where
-  rupturedState integratedState erasedState : FabricState
+  rupturedState : FabricState
+  integratedState : FabricState
+  erasedState : FabricState
 
 data Coherent : FabricState → Set where
   integratedCoherent : Coherent integratedState

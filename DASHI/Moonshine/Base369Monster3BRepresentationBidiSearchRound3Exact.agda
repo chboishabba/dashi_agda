@@ -37,7 +37,10 @@ data Round3Leaf : Set where
   actualFiveModeMonsterIdentification : Round3Leaf
 
 data LeafState : Set where
-  closed generated open blocked : LeafState
+  closed : LeafState
+  generated : LeafState
+  open : LeafState
+  blocked : LeafState
 
 leafState : Round3Leaf → LeafState
 leafState actualZetaActionRecognition = open

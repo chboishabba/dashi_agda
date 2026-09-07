@@ -23,7 +23,8 @@ import DASHI.Governance.FeministClimateJusticeSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data SituatedRecoveryState : Set where
-  lowerBurdenContext higherBurdenContext : SituatedRecoveryState
+  lowerBurdenContext : SituatedRecoveryState
+  higherBurdenContext : SituatedRecoveryState
 
 data EventStatus : Set where sameClimateEventStatus : EventStatus
 

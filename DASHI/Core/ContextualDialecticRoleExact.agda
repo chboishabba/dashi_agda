@@ -29,7 +29,10 @@ open import Relation.Binary.PropositionalEquality using (sym; trans)
 ------------------------------------------------------------------------
 
 data DialecticRole : Set where
-  initialRole counterRole mediatingRole closureRole : DialecticRole
+  initialRole : DialecticRole
+  counterRole : DialecticRole
+  mediatingRole : DialecticRole
+  closureRole : DialecticRole
 
 record ContextualRoleSystem (Frame Entity : Set) : Set₁ where
   field
@@ -68,7 +71,8 @@ roleChangeBlocksIntrinsicRole witness intrinsic agrees =
 ------------------------------------------------------------------------
 
 data DemoFrame : Set where
-  argumentA argumentB : DemoFrame
+  argumentA : DemoFrame
+  argumentB : DemoFrame
 
 data DemoEntity : Set where
   sameEntity : DemoEntity

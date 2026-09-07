@@ -35,13 +35,21 @@ import DASHI.Core.IntersectionalNonFactorability as NonFactor
 ------------------------------------------------------------------------
 
 data SourceKind : Set where
-  legislativeStandard regulatorGuidance pharmacopoeiaText socialMediaScreenshot : SourceKind
+  legislativeStandard : SourceKind
+  regulatorGuidance : SourceKind
+  pharmacopoeiaText : SourceKind
+  socialMediaScreenshot : SourceKind
 
 data SourceRole : Set where
-  normativeRequirement guidanceStatement methodText speakerAssertion : SourceRole
+  normativeRequirement : SourceRole
+  guidanceStatement : SourceRole
+  methodText : SourceRole
+  speakerAssertion : SourceRole
 
 data VerificationStatus : Set where
-  sourceTextRecovered independentlyEstablished unresolved : VerificationStatus
+  sourceTextRecovered : VerificationStatus
+  independentlyEstablished : VerificationStatus
+  unresolved : VerificationStatus
 
 record SourceAttribution : Set where
   constructor sourceAttribution
@@ -60,22 +68,29 @@ open SourceAttribution public
 ------------------------------------------------------------------------
 
 data Analyte : Set where
-  regulatedPesticideA regulatedPesticideB offPanelCompound : Analyte
+  regulatedPesticideA : Analyte
+  regulatedPesticideB : Analyte
+  offPanelCompound : Analyte
 
 data ScopeStatus : Set where
-  inScope outOfScope : ScopeStatus
+  inScope : ScopeStatus
+  outOfScope : ScopeStatus
 
 data Presence : Set where
-  absent present : Presence
+  absent : Presence
+  present : Presence
 
 data ComplianceResult : Set where
-  compliancePass complianceFail : ComplianceResult
+  compliancePass : ComplianceResult
+  complianceFail : ComplianceResult
 
 data DetectionResult : Set where
-  notDetected detected : DetectionResult
+  notDetected : DetectionResult
+  detected : DetectionResult
 
 data LegalStatus : Set where
-  noViolationEstablished violationEstablished : LegalStatus
+  noViolationEstablished : LegalStatus
+  violationEstablished : LegalStatus
 
 record RegulatoryPanel : Set where
   constructor regulatoryPanel
@@ -114,7 +129,8 @@ open BatchObservation public
 ------------------------------------------------------------------------
 
 data FineBatch : Set where
-  cleanPassingBatch offPanelPresentPassingBatch : FineBatch
+  cleanPassingBatch : FineBatch
+  offPanelPresentPassingBatch : FineBatch
 
 complianceSurface : FineBatch → ComplianceResult
 complianceSurface cleanPassingBatch = compliancePass
@@ -165,7 +181,8 @@ certificateCannotRecoverCompleteOffPanelState =
 ------------------------------------------------------------------------
 
 data CompoundObservation : Set where
-  unlistedUndetected unlistedDetected : CompoundObservation
+  unlistedUndetected : CompoundObservation
+  unlistedDetected : CompoundObservation
 
 detectionOf : CompoundObservation → DetectionResult
 detectionOf unlistedUndetected = notDetected

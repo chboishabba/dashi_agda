@@ -22,13 +22,24 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data Mediator : Set where
-  crh acth cortisol norepinephrine dopamine sympatheticDrive parasympatheticDrive : Mediator
+  crh : Mediator
+  acth : Mediator
+  cortisol : Mediator
+  norepinephrine : Mediator
+  dopamine : Mediator
+  sympatheticDrive : Mediator
+  parasympatheticDrive : Mediator
 
 data PhysiologicalSite : Set where
-  hypothalamus pituitary adrenalCortex locusCoeruleus autonomicEffector : PhysiologicalSite
+  hypothalamus : PhysiologicalSite
+  pituitary : PhysiologicalSite
+  adrenalCortex : PhysiologicalSite
+  locusCoeruleus : PhysiologicalSite
+  autonomicEffector : PhysiologicalSite
 
 data TimescaleClass : Set where
-  rapidRoute slowerEndocrineRoute : TimescaleClass
+  rapidRoute : TimescaleClass
+  slowerEndocrineRoute : TimescaleClass
 
 data CascadeEdge : Mediator → Mediator → Set where
   crhToActh : CascadeEdge crh acth
@@ -68,10 +79,12 @@ sympatheticAndCortisolTimescalesDiffer :
 sympatheticAndCortisolTimescalesDiffer ()
 
 data ControlAppraisal : Set where
-  controllable uncontrollable : ControlAppraisal
+  controllable : ControlAppraisal
+  uncontrollable : ControlAppraisal
 
 data RecruitmentProfile : Set where
-  adaptiveMobilisation strongerThreatRecruitment : RecruitmentProfile
+  adaptiveMobilisation : RecruitmentProfile
+  strongerThreatRecruitment : RecruitmentProfile
 
 recruitmentFor : ControlAppraisal → RecruitmentProfile
 recruitmentFor controllable = adaptiveMobilisation

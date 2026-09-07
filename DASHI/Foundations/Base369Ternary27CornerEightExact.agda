@@ -23,7 +23,8 @@ import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geomet
 import DASHI.Foundations.Base369Ternary27HypervoxelStratificationExact as Strata
 
 data OuterSign : Set where
-  negativeOuter positiveOuter : OuterSign
+  negativeOuter : OuterSign
+  positiveOuter : OuterSign
 
 outerTrit : OuterSign → SSP.SSPTrit
 outerTrit negativeOuter = SSP.sspNegOne

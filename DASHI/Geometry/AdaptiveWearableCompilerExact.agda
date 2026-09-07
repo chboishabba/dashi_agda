@@ -159,7 +159,10 @@ data PanelAction : Set where
     changeMaterial : PanelAction
 
 data WearableConsumer : Set where
-  seamSearch manufacturing thermalRouting supportZoning : WearableConsumer
+  seamSearch : WearableConsumer
+  manufacturing : WearableConsumer
+  thermalRouting : WearableConsumer
+  supportZoning : WearableConsumer
 
 record WearableState (Body Panel Fabric Provenance : Set) : Set where
   constructor wearableState

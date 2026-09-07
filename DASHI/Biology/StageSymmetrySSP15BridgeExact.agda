@@ -40,7 +40,9 @@ existingOggReceiptLaneCountIsFifteen :
 existingOggReceiptLaneCountIsFifteen = refl
 
 data LaneStatus : Set where
-  laneAffirmed laneOpen laneCountered : LaneStatus
+  laneAffirmed : LaneStatus
+  laneOpen : LaneStatus
+  laneCountered : LaneStatus
 
 record SymmetryLaneReading : Set where
   constructor symmetryLaneReading

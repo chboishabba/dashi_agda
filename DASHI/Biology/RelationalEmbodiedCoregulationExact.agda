@@ -7,10 +7,12 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data BodyRegime : Set where
-  regulated mobilised : BodyRegime
+  regulated : BodyRegime
+  mobilised : BodyRegime
 
 data SocialSignal : Set where
-  calmingSignal escalatingSignal : SocialSignal
+  calmingSignal : SocialSignal
+  escalatingSignal : SocialSignal
 
 record DyadState : Set where
   constructor dyadState
@@ -39,7 +41,9 @@ escalatingCanShiftBoth :
 escalatingCanShiftBoth = refl
 
 data CollectiveAttractor : Set where
-  escalationAttractor mutualCalmingAttractor mixedAttractor : CollectiveAttractor
+  escalationAttractor : CollectiveAttractor
+  mutualCalmingAttractor : CollectiveAttractor
+  mixedAttractor : CollectiveAttractor
 
 collectiveAttractor : DyadState → CollectiveAttractor
 collectiveAttractor (dyadState mobilised mobilised) = escalationAttractor
@@ -58,10 +62,12 @@ attractorsRemainDistinct ()
 ------------------------------------------------------------------------
 
 data InstitutionalProcedure : Set where
-  closedProcedure openProcedure : InstitutionalProcedure
+  closedProcedure : InstitutionalProcedure
+  openProcedure : InstitutionalProcedure
 
 data WorldRoute : Set where
-  reviewRoute supportRoute : WorldRoute
+  reviewRoute : WorldRoute
+  supportRoute : WorldRoute
 
 routeAvailable : InstitutionalProcedure → WorldRoute → Bool
 routeAvailable closedProcedure reviewRoute = false

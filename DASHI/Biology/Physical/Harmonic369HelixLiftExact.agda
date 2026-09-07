@@ -30,7 +30,9 @@ zero≢one : 0 ≢ 1
 zero≢one ()
 
 data SignedQuadrature : Set where
-  qNegative qZero qPositive : SignedQuadrature
+  qNegative : SignedQuadrature
+  qZero : SignedQuadrature
+  qPositive : SignedQuadrature
 
 record PhaseQuadrature : Set where
   constructor phaseQuadrature

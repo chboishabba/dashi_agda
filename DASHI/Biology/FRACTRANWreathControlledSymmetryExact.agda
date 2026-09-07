@@ -99,7 +99,8 @@ twoFiredWreathStepsReturn = W.localPermutationStepTwiceAt
 ------------------------------------------------------------------------
 
 data Bit : Set where
-  bit0 bit1 : Bit
+  bit0 : Bit
+  bit1 : Bit
 
 Injective : ∀ {A B : Set} → (A → B) → Set
 Injective f = ∀ {x y} → f x ≡ f y → x ≡ y

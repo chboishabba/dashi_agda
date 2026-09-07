@@ -66,13 +66,16 @@ data SyntheticMoleculeIdentity : Set where
   sameMolecule : SyntheticMoleculeIdentity
 
 data DetectionContext : Set where
-  responsiveMatrixContext suppressedMatrixContext : DetectionContext
+  responsiveMatrixContext : DetectionContext
+  suppressedMatrixContext : DetectionContext
 
 data ContextObservation : Set where
-  reliableResponse noReliableResponse : ContextObservation
+  reliableResponse : ContextObservation
+  noReliableResponse : ContextObservation
 
 data ThresholdCode : Set where
-  lowerThreshold higherThreshold : ThresholdCode
+  lowerThreshold : ThresholdCode
+  higherThreshold : ThresholdCode
 
 moleculeIdentity : DetectionContext → SyntheticMoleculeIdentity
 moleculeIdentity _ = sameMolecule
@@ -96,7 +99,8 @@ moleculeIdentityCannotRecoverMethodDetectability =
   NonFactor.witnessRulesOutEveryFlatFactorisation sameMoleculeDifferentDetection
 
 data MethodMatrixPair : Set where
-  moleculeMatrixA moleculeMatrixB : MethodMatrixPair
+  moleculeMatrixA : MethodMatrixPair
+  moleculeMatrixB : MethodMatrixPair
 
 methodFamilyProjection : MethodMatrixPair → Detection.MethodFamily
 methodFamilyProjection _ = Detection.liquidChromatographyMassSpectrometry

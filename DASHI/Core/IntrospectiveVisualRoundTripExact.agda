@@ -24,7 +24,10 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data TheoryNode : Set where
-  source projection fibre refinement : TheoryNode
+  source : TheoryNode
+  projection : TheoryNode
+  fibre : TheoryNode
+  refinement : TheoryNode
 
 data TheoryEdge : Set where
   source→projection : TheoryEdge

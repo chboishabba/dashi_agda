@@ -17,7 +17,18 @@ import DASHI.Foundations.TernaryGolay.SourceAtlas as BaseSources
 import DASHI.Foundations.TernaryGolay.SmallWittHexadCount as SmallWitt
 
 data Coordinate12 : Set where
-  c0 c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 : Coordinate12
+  c0 : Coordinate12
+  c1 : Coordinate12
+  c2 : Coordinate12
+  c3 : Coordinate12
+  c4 : Coordinate12
+  c5 : Coordinate12
+  c6 : Coordinate12
+  c7 : Coordinate12
+  c8 : Coordinate12
+  c9 : Coordinate12
+  c10 : Coordinate12
+  c11 : Coordinate12
 
 coordinateEq : Coordinate12 → Coordinate12 → Bool
 coordinateEq c0 c0 = true

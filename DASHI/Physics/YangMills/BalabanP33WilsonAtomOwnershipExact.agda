@@ -28,19 +28,27 @@ open import Data.List.Base using (length)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 data WilsonSubsetAtom : Set where
-  singleton0 singleton1 singleton2 singleton3 : WilsonSubsetAtom
+  singleton0 : WilsonSubsetAtom
+  singleton1 : WilsonSubsetAtom
+  singleton2 : WilsonSubsetAtom
+  singleton3 : WilsonSubsetAtom
   pair01 pair02 pair03 pair12 pair13 pair23 : WilsonSubsetAtom
   triple012 triple013 triple023 triple123 : WilsonSubsetAtom
   quartic0123 : WilsonSubsetAtom
 
 data AtomDegree : Set where
-  degree1 degree2 degree3 degree4 : AtomDegree
+  degree1 : AtomDegree
+  degree2 : AtomDegree
+  degree3 : AtomDegree
+  degree4 : AtomDegree
 
 data BudgetOwner : Set where
-  correlatedOwner deepOwner : BudgetOwner
+  correlatedOwner : BudgetOwner
+  deepOwner : BudgetOwner
 
 data SignStatus : Set where
-  curvatureSensitive youngControlled : SignStatus
+  curvatureSensitive : SignStatus
+  youngControlled : SignStatus
 
 atomDegree : WilsonSubsetAtom → AtomDegree
 atomDegree singleton0 = degree1

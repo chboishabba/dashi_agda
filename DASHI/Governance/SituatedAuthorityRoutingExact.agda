@@ -203,10 +203,14 @@ preferredPoliceRouteImpliesResidualPoliceDomain policeInFamily preferred =
 ------------------------------------------------------------------------
 
 data DemoSituation : Set where
-  nonviolentDistress imminentViolentThreat : DemoSituation
+  nonviolentDistress : DemoSituation
+  imminentViolentThreat : DemoSituation
 
 data DemoRoute : Set where
-  peerRoute clinicianRoute elderCommunityRoute policeRoute : DemoRoute
+  peerRoute : DemoRoute
+  clinicianRoute : DemoRoute
+  elderCommunityRoute : DemoRoute
+  policeRoute : DemoRoute
 
 demoSelectedRoute : DemoSituation → DemoRoute
 demoSelectedRoute nonviolentDistress = clinicianRoute

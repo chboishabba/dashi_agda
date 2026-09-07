@@ -15,43 +15,43 @@ import DASHI.Cognition.PNF.SensibLawGenocideConventionEnforcementSourceAtlasExac
 ------------------------------------------------------------------------
 
 data EnforcementGoal : Set where
-  preventFutureGenocide
-  stopOngoingConduct
-  punishIndividualPerpetrator
-  establishStateResponsibility
-  obtainStateReparation
-  enforceICJJudgmentAfterNonCompliance
-  monitorOrEscalateNonCompliance
-  : EnforcementGoal
+  preventFutureGenocide : EnforcementGoal
+  stopOngoingConduct : EnforcementGoal
+  punishIndividualPerpetrator : EnforcementGoal
+  establishStateResponsibility : EnforcementGoal
+  obtainStateReparation : EnforcementGoal
+  enforceICJJudgmentAfterNonCompliance : EnforcementGoal
+  monitorOrEscalateNonCompliance : EnforcementGoal
+
 
 data MechanismKind : Set where
-  domesticImplementingLegislation
-  domesticCriminalTribunal
-  internationalPenalTribunal
-  competentUNOrganRequest
-  icjInterstateMeritsRoute
-  icjProvisionalMeasuresRoute
-  securityCouncilArticle94Route
-  domesticExecutiveOrLegislativeCompliance
-  diplomaticPoliticalFollowup
-  : MechanismKind
+  domesticImplementingLegislation : MechanismKind
+  domesticCriminalTribunal : MechanismKind
+  internationalPenalTribunal : MechanismKind
+  competentUNOrganRequest : MechanismKind
+  icjInterstateMeritsRoute : MechanismKind
+  icjProvisionalMeasuresRoute : MechanismKind
+  securityCouncilArticle94Route : MechanismKind
+  domesticExecutiveOrLegislativeCompliance : MechanismKind
+  diplomaticPoliticalFollowup : MechanismKind
+
 
 data LegalForceKind : Set where
-  bindingTreatyObligation
-  bindingJudicialDecision
-  bindingProvisionalMeasure
-  criminalPunishmentIfJurisdictionEstablished
-  politicalOrInstitutionalLeverage
-  domesticImplementationDependent
-  : LegalForceKind
+  bindingTreatyObligation : LegalForceKind
+  bindingJudicialDecision : LegalForceKind
+  bindingProvisionalMeasure : LegalForceKind
+  criminalPunishmentIfJurisdictionEstablished : LegalForceKind
+  politicalOrInstitutionalLeverage : LegalForceKind
+  domesticImplementationDependent : LegalForceKind
+
 
 data ExecutionTopology : Set where
-  selfExecutingCoerciveActuatorAbsent
-  domesticStateActuatorRequired
-  securityCouncilActuatorAvailableButPolitical
-  tribunalPunitiveActuatorIfJurisdiction
-  monitoringLeverageOnly
-  : ExecutionTopology
+  selfExecutingCoerciveActuatorAbsent : ExecutionTopology
+  domesticStateActuatorRequired : ExecutionTopology
+  securityCouncilActuatorAvailableButPolitical : ExecutionTopology
+  tribunalPunitiveActuatorIfJurisdiction : ExecutionTopology
+  monitoringLeverageOnly : ExecutionTopology
+
 
 record EnforcementMechanismReceipt : Set where
   constructor enforcement-mechanism-receipt
@@ -145,17 +145,17 @@ securityCouncilArticle94Receipt = enforcement-mechanism-receipt
 ------------------------------------------------------------------------
 
 data EnforcementPrerequisite : Set where
-  statePartyTreatyObligationReceipt
-  domesticImplementingLawReceipt
-  competentDomesticTribunalJurisdictionReceipt
-  internationalPenalTribunalJurisdictionReceipt
-  interstateDisputeJurisdictionReceipt
-  provisionalMeasuresJurisdictionAndPlausibilityReceipt
-  finalICJJudgmentReceipt
-  nonComplianceReceipt
-  securityCouncilDecisionReceipt
-  domesticExecutiveImplementationReceipt
-  : EnforcementPrerequisite
+  statePartyTreatyObligationReceipt : EnforcementPrerequisite
+  domesticImplementingLawReceipt : EnforcementPrerequisite
+  competentDomesticTribunalJurisdictionReceipt : EnforcementPrerequisite
+  internationalPenalTribunalJurisdictionReceipt : EnforcementPrerequisite
+  interstateDisputeJurisdictionReceipt : EnforcementPrerequisite
+  provisionalMeasuresJurisdictionAndPlausibilityReceipt : EnforcementPrerequisite
+  finalICJJudgmentReceipt : EnforcementPrerequisite
+  nonComplianceReceipt : EnforcementPrerequisite
+  securityCouncilDecisionReceipt : EnforcementPrerequisite
+  domesticExecutiveImplementationReceipt : EnforcementPrerequisite
+
 
 record EnforcementRoute : Set where
   constructor enforcement-route
@@ -230,21 +230,21 @@ monitorEscalateRoute = enforcement-route
 ------------------------------------------------------------------------
 
 data TeethCoordinate : Set where
-  normativeObligation
-  adjudicativeAuthority
-  interimBindingOrder
-  punitiveJurisdiction
-  coerciveExecutionArm
-  politicalEnforcementActuator
-  domesticImplementationCapacity
-  : TeethCoordinate
+  normativeObligation : TeethCoordinate
+  adjudicativeAuthority : TeethCoordinate
+  interimBindingOrder : TeethCoordinate
+  punitiveJurisdiction : TeethCoordinate
+  coerciveExecutionArm : TeethCoordinate
+  politicalEnforcementActuator : TeethCoordinate
+  domesticImplementationCapacity : TeethCoordinate
+
 
 data CoordinateState : Set where
-  present
-  conditional
-  externallyDependent
-  absentAtForum
-  : CoordinateState
+  present : CoordinateState
+  conditional : CoordinateState
+  externallyDependent : CoordinateState
+  absentAtForum : CoordinateState
+
 
 icjTeethState : TeethCoordinate → CoordinateState
 icjTeethState normativeObligation = present

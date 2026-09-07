@@ -33,7 +33,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 ------------------------------------------------------------------------
 
 data GramControlLevel : Set where
-  pairwiseCS absoluteSchur blockOperator signedResolvent : GramControlLevel
+  pairwiseCS : GramControlLevel
+  absoluteSchur : GramControlLevel
+  blockOperator : GramControlLevel
+  signedResolvent : GramControlLevel
 
 ------------------------------------------------------------------------
 -- Certificate/refutation carriers.  They are deliberately distinct types:
@@ -96,8 +99,8 @@ coherentObstructionTargetsAbsoluteSchur _ = absolute-schur-refuted
 ------------------------------------------------------------------------
 
 data GramDiagnostic : Set where
-  absoluteNormalizedRowMass
-  blockOperatorMass
+  absoluteNormalizedRowMass : GramDiagnostic
+  blockOperatorMass : GramDiagnostic
   signedResolventQuadraticForm : GramDiagnostic
 
 firstDiagnostic : GramDiagnostic

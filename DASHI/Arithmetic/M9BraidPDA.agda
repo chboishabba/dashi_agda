@@ -13,7 +13,9 @@ open import Agda.Builtin.String using (String)
 -- refinement; no Euclidean order or interpolation is assumed.
 
 data Digit3 : Set where
-  d0 d1 d2 : Digit3
+  d0 : Digit3
+  d1 : Digit3
+  d2 : Digit3
 
 Prefix3 : Set
 Prefix3 = List Digit3
@@ -35,7 +37,9 @@ childBall d (ball3 p k) = ball3 (extend3 d p) (suc k)
 -- Three-valued kernel judgement.
 
 data Verdict : Set where
-  forbidden payable cleared : Verdict
+  forbidden : Verdict
+  payable : Verdict
+  cleared : Verdict
 
 ------------------------------------------------------------------------
 -- M9 braid vocabulary.

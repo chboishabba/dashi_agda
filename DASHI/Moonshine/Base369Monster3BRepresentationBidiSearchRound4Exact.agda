@@ -37,7 +37,10 @@ data Round4SearchAction : Set where
   recoverActualFiftyFourResidualAction : Round4SearchAction
 
 data SearchStatus : Set where
-  live pruned downstream parallel : SearchStatus
+  live : SearchStatus
+  pruned : SearchStatus
+  downstream : SearchStatus
+  parallel : SearchStatus
 
 searchStatus : Round4SearchAction → SearchStatus
 searchStatus recoverLiteralStateActionProducer = live

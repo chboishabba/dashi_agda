@@ -218,7 +218,9 @@ binaryCongruence
           Finite.finiteHistoricalContextSystem current rule premises)
 
 data BinderSubstitutionConstructor : Set where
-  particularizerCase generalizerCase recursorCase : BinderSubstitutionConstructor
+  particularizerCase : BinderSubstitutionConstructor
+  generalizerCase : BinderSubstitutionConstructor
+  recursorCase : BinderSubstitutionConstructor
 
 binderFunctor : BinderSubstitutionConstructor → Signature.HistoricalFunctor
 binderFunctor particularizerCase = Signature.particularizationFunctor

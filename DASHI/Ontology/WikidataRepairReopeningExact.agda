@@ -19,16 +19,20 @@ import DASHI.Core.ReopenableProjectionComposition as Reopenable
 ------------------------------------------------------------------------
 
 data TranscribedGraph : Set where
-  transcribedZero transcribedOne : TranscribedGraph
+  transcribedZero : TranscribedGraph
+  transcribedOne : TranscribedGraph
 
 data AlignedGraph : Set where
-  alignedZero alignedOne : AlignedGraph
+  alignedZero : AlignedGraph
+  alignedOne : AlignedGraph
 
 data DiagnosticSurface : Set where
-  diagnosticZero diagnosticOne : DiagnosticSurface
+  diagnosticZero : DiagnosticSurface
+  diagnosticOne : DiagnosticSurface
 
 data RepairCandidate : Set where
-  repairZero repairOne : RepairCandidate
+  repairZero : RepairCandidate
+  repairOne : RepairCandidate
 
 transcribedBit : TranscribedGraph → Bool
 transcribedBit transcribedZero = false

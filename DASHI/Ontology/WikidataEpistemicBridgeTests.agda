@@ -11,7 +11,8 @@ open import DASHI.Ontology.WikidataEpistemicBridge
 -- Minimal executable proof witnesses.
 
 data Axis : Set where
-  temporal jurisdictional : Axis
+  temporal : Axis
+  jurisdictional : Axis
 
 leftState : Axis → EpistemicTrit
 leftState temporal = supported

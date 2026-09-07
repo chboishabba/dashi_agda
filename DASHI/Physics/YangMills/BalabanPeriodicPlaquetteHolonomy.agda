@@ -51,7 +51,12 @@ open import DASHI.Physics.YangMills.BalabanGaugeTransformationCovariance using
   )
 
 data AxisPair4 : Set where
-  axes01 axes02 axes03 axes12 axes13 axes23 : AxisPair4
+  axes01 : AxisPair4
+  axes02 : AxisPair4
+  axes03 : AxisPair4
+  axes12 : AxisPair4
+  axes13 : AxisPair4
+  axes23 : AxisPair4
 
 firstAxis : AxisPair4 → Axis4
 firstAxis axes01 = axis₀

@@ -221,7 +221,9 @@ canonicalExtendedReopening = canonicalExtendedReopeningReceipt
 ------------------------------------------------------------------------
 
 data CertificateStatus : Set where
-  currentCertificate reopenableCertificate refutedCertificate : CertificateStatus
+  currentCertificate : CertificateStatus
+  reopenableCertificate : CertificateStatus
+  refutedCertificate : CertificateStatus
 
 reopenedNotRefuted : reopenableCertificate ≡ refutedCertificate → ⊥
 reopenedNotRefuted ()

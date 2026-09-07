@@ -10,23 +10,23 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ColonialSourceRole : Set where
-  highCourtHolding
-  firstNationsPoliticalStatement
-  governmentReconciliationHistory
-  humanRightsCommissionFinding
-  legalScholarship
+  highCourtHolding : ColonialSourceRole
+  firstNationsPoliticalStatement : ColonialSourceRole
+  governmentReconciliationHistory : ColonialSourceRole
+  humanRightsCommissionFinding : ColonialSourceRole
+  legalScholarship : ColonialSourceRole
   dashiAnalyticalSynthesis : ColonialSourceRole
 
 data ColonialSemanticProposition : Set where
-  preMaboSettledColonyAssumedNoRecognisedSovereign
-  preMaboSettledColonyAssumedNoRecognisedSettledLaw
-  terraNulliusEnabledOccupationSettlementClassification
-  protectionActsImposedColonialIdentityClassification
-  assimilationUsedClassificationAndAdministrativeControl
-  indigenousSovereigntyNeverCededUluruPosition
-  maboRejectedNoPriorLawFiction
-  maboDidNotAdjudicateCrownAcquisitionOfSovereignty
-  semanticDowngradingWasConstitutiveAdministrativeMechanism
+  preMaboSettledColonyAssumedNoRecognisedSovereign : ColonialSemanticProposition
+  preMaboSettledColonyAssumedNoRecognisedSettledLaw : ColonialSemanticProposition
+  terraNulliusEnabledOccupationSettlementClassification : ColonialSemanticProposition
+  protectionActsImposedColonialIdentityClassification : ColonialSemanticProposition
+  assimilationUsedClassificationAndAdministrativeControl : ColonialSemanticProposition
+  indigenousSovereigntyNeverCededUluruPosition : ColonialSemanticProposition
+  maboRejectedNoPriorLawFiction : ColonialSemanticProposition
+  maboDidNotAdjudicateCrownAcquisitionOfSovereignty : ColonialSemanticProposition
+  semanticDowngradingWasConstitutiveAdministrativeMechanism : ColonialSemanticProposition
   semanticDowngradingProvesSubjectiveColonialIntent : ColonialSemanticProposition
 
 record ColonialSemanticReceipt : Set where

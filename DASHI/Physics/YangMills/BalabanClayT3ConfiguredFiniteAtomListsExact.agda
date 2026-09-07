@@ -27,27 +27,42 @@ import DASHI.Physics.YangMills.BalabanClayT3LiteralPointwiseHessianEstimatesExac
 ------------------------------------------------------------------------
 
 data CurvatureAtom : Set where
-  curvatureBracket01 curvatureBracket02 curvatureBracket03 curvatureBracket12 : CurvatureAtom
+  curvatureBracket01 : CurvatureAtom
+  curvatureBracket02 : CurvatureAtom
+  curvatureBracket03 : CurvatureAtom
+  curvatureBracket12 : CurvatureAtom
   curvatureBracket13 curvatureBracket23 : CurvatureAtom
   curvatureTransport01 curvatureTransport02 curvatureTransport03 curvatureTransport10 : CurvatureAtom
   curvatureTransport12 curvatureTransport13 curvatureTransport20 curvatureTransport21 : CurvatureAtom
   curvatureTransport23 curvatureTransport30 curvatureTransport31 curvatureTransport32 : CurvatureAtom
 
 data TransportAtom : Set where
-  transportForward0 transportBackward0 transportForward1 transportBackward1 : TransportAtom
+  transportForward0 : TransportAtom
+  transportBackward0 : TransportAtom
+  transportForward1 : TransportAtom
+  transportBackward1 : TransportAtom
   transportForward2 transportBackward2 transportForward3 transportBackward3 : TransportAtom
 
 data ChartAtom : Set where
-  chartAxis chartPerpendicular0 chartPerpendicular1 chartSkew : ChartAtom
+  chartAxis : ChartAtom
+  chartPerpendicular0 : ChartAtom
+  chartPerpendicular1 : ChartAtom
+  chartSkew : ChartAtom
 
 data GaugeAtom : Set where
-  gaugeIncoming0 gaugeOutgoing0 gaugeIncoming1 gaugeOutgoing1 : GaugeAtom
+  gaugeIncoming0 : GaugeAtom
+  gaugeOutgoing0 : GaugeAtom
+  gaugeIncoming1 : GaugeAtom
+  gaugeOutgoing1 : GaugeAtom
   gaugeIncoming2 gaugeOutgoing2 gaugeIncoming3 gaugeOutgoing3 : GaugeAtom
   gaugeCross0 gaugeCross1 gaugeCross2 gaugeCross3 : GaugeAtom
   gaugeSquare0 gaugeSquare1 gaugeSquare2 gaugeSquare3 : GaugeAtom
 
 data ConstraintAtom : Set where
-  blockPath0Step0 blockPath0Step1 blockPath0Step2 blockPath0Step3 : ConstraintAtom
+  blockPath0Step0 : ConstraintAtom
+  blockPath0Step1 : ConstraintAtom
+  blockPath0Step2 : ConstraintAtom
+  blockPath0Step3 : ConstraintAtom
   blockPath1Step0 blockPath1Step1 blockPath1Step2 blockPath1Step3 : ConstraintAtom
   blockPath2Step0 blockPath2Step1 blockPath2Step2 blockPath2Step3 : ConstraintAtom
   blockPath3Step0 blockPath3Step1 blockPath3Step2 blockPath3Step3 : ConstraintAtom

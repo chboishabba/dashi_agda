@@ -36,7 +36,9 @@ earlyLive = Trajectory.Compatible Trajectory.psilocybinEarlyModernTrials
 ------------------------------------------------------------------------
 
 data EfficacyObservation : Set where
-  noTherapeuticSignal positiveTherapeuticSignal irrelevantEfficacySignal : EfficacyObservation
+  noTherapeuticSignal : EfficacyObservation
+  positiveTherapeuticSignal : EfficacyObservation
+  irrelevantEfficacySignal : EfficacyObservation
 
 efficacyObserve : Trajectory.Interpretation → EfficacyObservation
 efficacyObserve Trajectory.noPsilocybinTherapeuticEffect = noTherapeuticSignal
@@ -57,7 +59,10 @@ efficacyBundle = Disc.experimentBundle
 ------------------------------------------------------------------------
 
 data AttributionObservation : Set where
-  noEffectReadout drugContributionReadout expectancyContributionReadout irrelevantAttributionReadout : AttributionObservation
+  noEffectReadout : AttributionObservation
+  drugContributionReadout : AttributionObservation
+  expectancyContributionReadout : AttributionObservation
+  irrelevantAttributionReadout : AttributionObservation
 
 
 attributionObserve : Trajectory.Interpretation → AttributionObservation

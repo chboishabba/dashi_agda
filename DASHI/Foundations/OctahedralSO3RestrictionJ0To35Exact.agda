@@ -41,7 +41,11 @@ import DASHI.Foundations.FiniteRepresentationRestrictionCore as Core
 import DASHI.Foundations.SU2SO3IrrepDimensionExact as Spin
 
 data OctahedralIrrep : Set where
-  A1 A2 E T1 T2 : OctahedralIrrep
+  A1 : OctahedralIrrep
+  A2 : OctahedralIrrep
+  E : OctahedralIrrep
+  T1 : OctahedralIrrep
+  T2 : OctahedralIrrep
 
 octahedralIrrepDimension : OctahedralIrrep → Nat
 octahedralIrrepDimension A1 = 1
@@ -62,7 +66,11 @@ octahedralFamily =
     "rotational octahedral group O ~= S4; irreps A1,A2,E,T1,T2"
 
 data OctahedralClass : Set where
-  identityClass edgeHalfTurnClass faceHalfTurnClass thirdTurnClass quarterTurnClass : OctahedralClass
+  identityClass : OctahedralClass
+  edgeHalfTurnClass : OctahedralClass
+  faceHalfTurnClass : OctahedralClass
+  thirdTurnClass : OctahedralClass
+  quarterTurnClass : OctahedralClass
 
 irrepCharacter : OctahedralIrrep → OctahedralClass → ℤ
 irrepCharacter A1 identityClass = + 1
@@ -209,7 +217,30 @@ addSpectrum left right =
     (multiplicityT2 left + multiplicityT2 right)
 
 data LowJ0To23 : Set where
-  lowJ0 lowJ1 lowJ2 lowJ3 lowJ4 lowJ5 lowJ6 lowJ7 lowJ8 lowJ9 lowJ10 lowJ11 lowJ12 lowJ13 lowJ14 lowJ15 lowJ16 lowJ17 lowJ18 lowJ19 lowJ20 lowJ21 lowJ22 lowJ23 : LowJ0To23
+  lowJ0 : LowJ0To23
+  lowJ1 : LowJ0To23
+  lowJ2 : LowJ0To23
+  lowJ3 : LowJ0To23
+  lowJ4 : LowJ0To23
+  lowJ5 : LowJ0To23
+  lowJ6 : LowJ0To23
+  lowJ7 : LowJ0To23
+  lowJ8 : LowJ0To23
+  lowJ9 : LowJ0To23
+  lowJ10 : LowJ0To23
+  lowJ11 : LowJ0To23
+  lowJ12 : LowJ0To23
+  lowJ13 : LowJ0To23
+  lowJ14 : LowJ0To23
+  lowJ15 : LowJ0To23
+  lowJ16 : LowJ0To23
+  lowJ17 : LowJ0To23
+  lowJ18 : LowJ0To23
+  lowJ19 : LowJ0To23
+  lowJ20 : LowJ0To23
+  lowJ21 : LowJ0To23
+  lowJ22 : LowJ0To23
+  lowJ23 : LowJ0To23
 
 embedLowJ : LowJ0To23 → Spin.AngularMomentum0To35
 embedLowJ lowJ0 = Spin.j0

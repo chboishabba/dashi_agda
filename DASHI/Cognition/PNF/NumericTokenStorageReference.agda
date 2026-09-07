@@ -103,7 +103,8 @@ multiscaleStorageJoinSplitExact reference x =
 ------------------------------------------------------------------------
 
 data StorageUse : Set where
-  hotRandomAccess coldArchive : StorageUse
+  hotRandomAccess : StorageUse
+  coldArchive : StorageUse
 
 record StorageMeasurement : Set where
   constructor storageMeasurement

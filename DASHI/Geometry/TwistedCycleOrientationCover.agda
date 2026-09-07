@@ -12,7 +12,8 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data OrientationSign : Set where
-  plus minus : OrientationSign
+  plus : OrientationSign
+  minus : OrientationSign
 
 flipSign : OrientationSign → OrientationSign
 flipSign plus = minus
@@ -27,7 +28,8 @@ flipSignHasNoFixedPoint plus ()
 flipSignHasNoFixedPoint minus ()
 
 data CycleEdge : Set where
-  untwistedEdge twistedEdge : CycleEdge
+  untwistedEdge : CycleEdge
+  twistedEdge : CycleEdge
 
 edgeTransport : CycleEdge → OrientationSign → OrientationSign
 edgeTransport untwistedEdge sign = sign

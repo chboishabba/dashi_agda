@@ -68,7 +68,10 @@ data StructuralThread : Set where
   orbitClosureComplexity : StructuralThread
 
 data RelevanceLevel : Set where
-  foundational directSpecialCase indirect absent : RelevanceLevel
+  foundational : RelevanceLevel
+  directSpecialCase : RelevanceLevel
+  indirect : RelevanceLevel
+  absent : RelevanceLevel
 
 relevance : MillenniumProblem → StructuralThread → RelevanceLevel
 relevance yangMillsMassGap cayleyDicksonCompositionAlgebra = directSpecialCase

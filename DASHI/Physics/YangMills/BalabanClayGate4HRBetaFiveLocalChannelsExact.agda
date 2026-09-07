@@ -37,7 +37,11 @@ import DASHI.Physics.YangMills.BalabanClayGate4HRBetaLocalToUniformExact as HR
 ------------------------------------------------------------------------
 
 data HRBetaChannel : Set where
-  determinant interaction chart gauge localization : HRBetaChannel
+  determinant : HRBetaChannel
+  interaction : HRBetaChannel
+  chart : HRBetaChannel
+  gauge : HRBetaChannel
+  localization : HRBetaChannel
 
 allChannels : List HRBetaChannel
 allChannels =

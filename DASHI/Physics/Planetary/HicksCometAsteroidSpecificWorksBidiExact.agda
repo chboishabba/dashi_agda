@@ -17,11 +17,17 @@ import DASHI.Core.InverseProblemIdentifiabilityBidiExact as Inv
 ------------------------------------------------------------------------
 
 data CometObservable : Set where
-  continuumFlux molecularEmission radialEmissionProfile colour : CometObservable
+  continuumFlux : CometObservable
+  molecularEmission : CometObservable
+  radialEmissionProfile : CometObservable
+  colour : CometObservable
 
 
 data CometLatent : Set where
-  nucleusActivity comaProductionRate speciesAbundance dustContinuum : CometLatent
+  nucleusActivity : CometLatent
+  comaProductionRate : CometLatent
+  speciesAbundance : CometLatent
+  dustContinuum : CometLatent
 
 record CometSpectrophotometryPath : Set where
   constructor comet-spectrophotometry-path

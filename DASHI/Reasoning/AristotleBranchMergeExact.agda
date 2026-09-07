@@ -208,13 +208,16 @@ data Surface : Set where
   sameGoalSurface : Surface
 
 data DependencyCode : Set where
-  localDependency globalSensitiveDependency : DependencyCode
+  localDependency : DependencyCode
+  globalSensitiveDependency : DependencyCode
 
 data ProvenanceCode : Set where
-  inheritedHistory introducedHistory : ProvenanceCode
+  inheritedHistory : ProvenanceCode
+  introducedHistory : ProvenanceCode
 
 data Lemma : Set where
-  lemmaA lemmaB : Lemma
+  lemmaA : Lemma
+  lemmaB : Lemma
 
 knowledgeA : Knowledge Lemma
 knowledgeA = knowledge λ

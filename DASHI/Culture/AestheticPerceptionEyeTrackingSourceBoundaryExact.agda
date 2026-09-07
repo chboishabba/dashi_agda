@@ -35,12 +35,19 @@ mitrovic2020Source = Source.mkDOISource
   Source.publicAttribution
 
 data AestheticCoordinate : Set where
-  materialArtwork visualFeatures gazeTrajectory fixationDuration spontaneousViewingTime
-  subjectiveLiking expertEvaluation displayContext institutionalArtStatus
+  materialArtwork : AestheticCoordinate
+  visualFeatures : AestheticCoordinate
+  gazeTrajectory : AestheticCoordinate
+  fixationDuration : AestheticCoordinate
+  spontaneousViewingTime : AestheticCoordinate
+  subjectiveLiking expertEvaluation displayContext institutionalArtStatus : AestheticCoordinate
   provenanceHistory marketPrice : AestheticCoordinate
 
 data EvidenceKind : Set where
-  eyeTrackingObservation selfReportEvaluation expertDesignation institutionalClassification
+  eyeTrackingObservation : EvidenceKind
+  selfReportEvaluation : EvidenceKind
+  expertDesignation : EvidenceKind
+  institutionalClassification : EvidenceKind
   provenanceReceipt economicObservation : EvidenceKind
 
 evidenceKind : AestheticCoordinate → EvidenceKind

@@ -75,7 +75,10 @@ record BoundTransportCutset : Set where
 open BoundTransportCutset public
 
 data BoundTransportResidual : Set where
-  rawBoundsResidual mechanismReceiptResidual completeCaseTransportResidual boundTransportClosed : BoundTransportResidual
+  rawBoundsResidual : BoundTransportResidual
+  mechanismReceiptResidual : BoundTransportResidual
+  completeCaseTransportResidual : BoundTransportResidual
+  boundTransportClosed : BoundTransportResidual
 
 firstBoundTransportResidual : BoundConsumer → BoundTransportCutset → BoundTransportResidual
 firstBoundTransportResidual conservativeIdentifiedSet c with rawBoundsClosed c

@@ -59,10 +59,14 @@ open MandateBackedModification public
 ------------------------------------------------------------------------
 
 data DemoActor : Set where
-  observerOnly evaluatorOnly modifierOnly integratedActor : DemoActor
+  observerOnly : DemoActor
+  evaluatorOnly : DemoActor
+  modifierOnly : DemoActor
+  integratedActor : DemoActor
 
 data DemoState : Set where
-  closedState openState : DemoState
+  closedState : DemoState
+  openState : DemoState
 
 data DemoOption : Set where
   remainOption : DemoOption

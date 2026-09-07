@@ -33,30 +33,49 @@ import DASHI.Planning.ParticipatoryPlanningGovernanceExact as Participation
 ------------------------------------------------------------------------
 
 data ContributionStatus : Set where
-  noContribution labourContribution materialContribution mixedContribution : ContributionStatus
+  noContribution : ContributionStatus
+  labourContribution : ContributionStatus
+  materialContribution : ContributionStatus
+  mixedContribution : ContributionStatus
 
 
 data TitleStatus : Set where
-  noTitle individualTitle collectiveTitle institutionalTitle : TitleStatus
+  noTitle : TitleStatus
+  individualTitle : TitleStatus
+  collectiveTitle : TitleStatus
+  institutionalTitle : TitleStatus
 
 data DestinationControl : Set where
-  noDestinationControl advisoryDestinationInput sharedDestinationControl : DestinationControl
+  noDestinationControl : DestinationControl
+  advisoryDestinationInput : DestinationControl
+  sharedDestinationControl : DestinationControl
   unilateralDestinationControl : DestinationControl
 
 data DecisionRightStatus : Set where
-  noDecisionRight consultativeVoice coDecisionRight governingDecisionRight : DecisionRightStatus
+  noDecisionRight : DecisionRightStatus
+  consultativeVoice : DecisionRightStatus
+  coDecisionRight : DecisionRightStatus
+  governingDecisionRight : DecisionRightStatus
 
 
 data BenefitPosition : Set where
-  noBenefitPosition incidentalBenefit sharedBenefit controllingBenefit : BenefitPosition
+  noBenefitPosition : BenefitPosition
+  incidentalBenefit : BenefitPosition
+  sharedBenefit : BenefitPosition
+  controllingBenefit : BenefitPosition
 
 
 data ProvenanceCustody : Set where
-  noCustody recordedCustody communityCustody institutionalCustody : ProvenanceCustody
+  noCustody : ProvenanceCustody
+  recordedCustody : ProvenanceCustody
+  communityCustody : ProvenanceCustody
+  institutionalCustody : ProvenanceCustody
 
 
 data InstitutionalPower : Set where
-  lowInstitutionalPower sharedInstitutionalPower dominantInstitutionalPower : InstitutionalPower
+  lowInstitutionalPower : InstitutionalPower
+  sharedInstitutionalPower : InstitutionalPower
+  dominantInstitutionalPower : InstitutionalPower
 
 
 record LoopControlState : Set where

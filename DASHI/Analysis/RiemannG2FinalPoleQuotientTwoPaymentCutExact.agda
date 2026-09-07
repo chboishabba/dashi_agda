@@ -77,18 +77,21 @@ compileFinalHighOrdinateContradiction payments attachment =
 ------------------------------------------------------------------------
 
 data FinalAnalyticCoordinate : Set where
-  chosenFiniteNearUpper
-  chosenNearLeavesFarAllowance
-  freshSameTaperGammaEnvelope
-  gammaEnvelopeFitsAssignedAllowance
-  offAllowancePayment
-  gammaAllowancePayment
-  finalOrderSameObjectClusterAttachment
-  finalHighOrdinateContradiction
-  : FinalAnalyticCoordinate
+  chosenFiniteNearUpper : FinalAnalyticCoordinate
+  chosenNearLeavesFarAllowance : FinalAnalyticCoordinate
+  freshSameTaperGammaEnvelope : FinalAnalyticCoordinate
+  gammaEnvelopeFitsAssignedAllowance : FinalAnalyticCoordinate
+  offAllowancePayment : FinalAnalyticCoordinate
+  gammaAllowancePayment : FinalAnalyticCoordinate
+  finalOrderSameObjectClusterAttachment : FinalAnalyticCoordinate
+  finalHighOrdinateContradiction : FinalAnalyticCoordinate
+
 
 data TerminalRole : Set where
-  producerInternal terminalAnalytic downstream compilerOutput : TerminalRole
+  producerInternal : TerminalRole
+  terminalAnalytic : TerminalRole
+  downstream : TerminalRole
+  compilerOutput : TerminalRole
 
 terminalRole : FinalAnalyticCoordinate -> TerminalRole
 terminalRole chosenFiniteNearUpper = producerInternal

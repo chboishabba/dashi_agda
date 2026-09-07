@@ -78,7 +78,8 @@ import DASHI.Physics.Closure.NSTriadKNHHGoodFiniteKernelCauchyRound40Exact as Go
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 
 data DataEnergyLeg : Set where
-  leftEnergyLeg rightEnergyLeg : DataEnergyLeg
+  leftEnergyLeg : DataEnergyLeg
+  rightEnergyLeg : DataEnergyLeg
 
 allocatedEnergySquare :
   DataEnergyLeg → Physical.PhysicalVorticityPair → ℚ

@@ -20,7 +20,8 @@ import DASHI.Physics.Closure.TriadicRepresentationMDL as MDL
 -- Concrete prefix code for the five representation classes.
 
 data Bit : Set where
-  bit0 bit1 : Bit
+  bit0 : Bit
+  bit1 : Bit
 
 Codeword : Set
 Codeword = List Bit
@@ -258,7 +259,8 @@ riskConsistencyFromSelection A =
 -- Concrete noiseless triadic model: stronger than asymptotic recovery.
 
 data OracleCandidate : Set where
-  oracleModel alternativeModel : OracleCandidate
+  oracleModel : OracleCandidate
+  alternativeModel : OracleCandidate
 
 oracleCandidateEquality :
   (x y : OracleCandidate) → Dec (x ≡ y)

@@ -23,7 +23,8 @@ import DASHI.Foundations.Base369BinaryTernaryRefinement as R23
 ------------------------------------------------------------------------
 
 data TailBit : Set where
-  forwardTail reverseTail : TailBit
+  forwardTail : TailBit
+  reverseTail : TailBit
 
 record MinTailCode : Set where
   constructor minTailCode

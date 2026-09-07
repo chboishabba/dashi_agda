@@ -29,7 +29,10 @@ open import Data.Product using (_×_; _,_)
 import DASHI.Mathematics.AlgebraicGeometry.HodgeDecompositionCycleClassExact as H
 
 data P1Bidegree : Set where
-  degree00 degree10 degree01 degree11 : P1Bidegree
+  degree00 : P1Bidegree
+  degree10 : P1Bidegree
+  degree01 : P1Bidegree
+  degree11 : P1Bidegree
 
 swapBidegree : P1Bidegree → P1Bidegree
 swapBidegree degree00 = degree00

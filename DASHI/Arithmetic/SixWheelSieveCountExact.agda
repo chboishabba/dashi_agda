@@ -37,13 +37,22 @@ open import Data.Sum using (_⊎_; inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (cong)
 
 data Residue6 : Set where
-  r0 r1 r2 r3 r4 r5 : Residue6
+  r0 : Residue6
+  r1 : Residue6
+  r2 : Residue6
+  r3 : Residue6
+  r4 : Residue6
+  r5 : Residue6
 
 data ExcludedResidue6 : Set where
-  e0 e2 e3 e4 : ExcludedResidue6
+  e0 : ExcludedResidue6
+  e2 : ExcludedResidue6
+  e3 : ExcludedResidue6
+  e4 : ExcludedResidue6
 
 data SurvivorResidue6 : Set where
-  s1 s5 : SurvivorResidue6
+  s1 : SurvivorResidue6
+  s5 : SurvivorResidue6
 
 classifyResidue6 : Residue6 → ExcludedResidue6 ⊎ SurvivorResidue6
 classifyResidue6 r0 = inj₁ e0

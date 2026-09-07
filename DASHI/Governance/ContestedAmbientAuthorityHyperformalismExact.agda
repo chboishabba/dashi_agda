@@ -120,7 +120,8 @@ interfaceExhaustionContradictsIndependentExterior exhaustive independent =
 ------------------------------------------------------------------------
 
 data SourceState : Set where
-  sourceExterior sourceShared : SourceState
+  sourceExterior : SourceState
+  sourceShared : SourceState
 
 data OtherState : Set where
   otherShared : OtherState

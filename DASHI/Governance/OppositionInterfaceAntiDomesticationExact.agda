@@ -32,7 +32,8 @@ data OppositionDomain : Set where
     OppositionDomain
 
 data OppositionState : Set where
-  recognisedOpposition exteriorOpposition : OppositionState
+  recognisedOpposition : OppositionState
+  exteriorOpposition : OppositionState
 
 data AdministrativeState : Set where
   admittedAdministrativeObject : AdministrativeState
@@ -66,7 +67,8 @@ oppositionExteriorWitness =
 ------------------------------------------------------------------------
 
 data AdmissionRule : Set where
-  currentAdmissionRule revisedAdmissionRule : AdmissionRule
+  currentAdmissionRule : AdmissionRule
+  revisedAdmissionRule : AdmissionRule
 
 data RuleChangeAuthority : OppositionState → Set where
   recognisedCannotSelfIssueRuleChange :
@@ -114,7 +116,8 @@ canonicalBoundedOpposition domain =
 ------------------------------------------------------------------------
 
 data Position : Set where
-  positionA positionB : Position
+  positionA : Position
+  positionB : Position
 
 sameAdmissionRule : Position → AdmissionRule
 sameAdmissionRule _ = currentAdmissionRule

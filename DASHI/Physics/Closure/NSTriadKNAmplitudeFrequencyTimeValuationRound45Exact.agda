@@ -52,7 +52,9 @@ open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _/_; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 data TaxKind : Set where
-  hard youngSoft zeroTax : TaxKind
+  hard : TaxKind
+  youngSoft : TaxKind
+  zeroTax : TaxKind
 
 record AmplitudeFrequencyTimeValuation : Set where
   constructor aft-valuation

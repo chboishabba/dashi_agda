@@ -34,23 +34,23 @@ philosophyTubeHegelSource =
     Source.publicAttribution
 
 data GenealogyInput : Set where
-  philosophyTubeHegelVideo
-  friendDiscussion
-  spiralDevelopmentMaterial
-  nonginMaterial
-  hegelMemeTransmission
-  bottomUpDashiExploration
-  laterFormalisation
-  : GenealogyInput
+  philosophyTubeHegelVideo : GenealogyInput
+  friendDiscussion : GenealogyInput
+  spiralDevelopmentMaterial : GenealogyInput
+  nonginMaterial : GenealogyInput
+  hegelMemeTransmission : GenealogyInput
+  bottomUpDashiExploration : GenealogyInput
+  laterFormalisation : GenealogyInput
+
 
 data GenealogyAuthority : Set where
-  userReportedHistoricalInfluence
-  publicSecondaryInterpretation
-  privateConversationInfluence
-  culturalTransmissionInfluence
-  primaryPhilosophicalAuthority
-  formalTheoremOwner
-  : GenealogyAuthority
+  userReportedHistoricalInfluence : GenealogyAuthority
+  publicSecondaryInterpretation : GenealogyAuthority
+  privateConversationInfluence : GenealogyAuthority
+  culturalTransmissionInfluence : GenealogyAuthority
+  primaryPhilosophicalAuthority : GenealogyAuthority
+  formalTheoremOwner : GenealogyAuthority
+
 
 authority : GenealogyInput → GenealogyAuthority
 authority philosophyTubeHegelVideo = publicSecondaryInterpretation

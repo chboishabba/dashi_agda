@@ -13,7 +13,9 @@ import DASHI.Law.OperationalCommandAuthorityConstitutionalBidiExact as Command
 ------------------------------------------------------------------------
 
 data IdeologyRelationState : Set where
-  relationClosed relationOpen relationConflict : IdeologyRelationState
+  relationClosed : IdeologyRelationState
+  relationOpen : IdeologyRelationState
+  relationConflict : IdeologyRelationState
 
 record CommandIdeologyProvenanceFibre : Set where
   constructor commandIdeologyProvenanceFibre
@@ -62,7 +64,11 @@ record IdeologyCommandCutset : Set where
 open IdeologyCommandCutset public
 
 data IdeologyCommandResidual : Set where
-  commissionResidual commandContentBridgeResidual motiveResidual coordinationResidual ideologyCommandClosed : IdeologyCommandResidual
+  commissionResidual : IdeologyCommandResidual
+  commandContentBridgeResidual : IdeologyCommandResidual
+  motiveResidual : IdeologyCommandResidual
+  coordinationResidual : IdeologyCommandResidual
+  ideologyCommandClosed : IdeologyCommandResidual
 
 firstIdeologyCommandResidual : IdeologyCommandClaim → IdeologyCommandCutset → IdeologyCommandResidual
 firstIdeologyCommandResidual herzogHasCommissionIncitementFinding c with commissionFindingClosed c

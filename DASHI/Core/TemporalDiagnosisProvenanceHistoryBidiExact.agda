@@ -16,10 +16,13 @@ import DASHI.Core.AppendOnlyEvidenceResidualRevisionExact as AppendOnly
 ------------------------------------------------------------------------
 
 data DiagnosisTransition : Set where
-  activated eliminated reactivated : DiagnosisTransition
+  activated : DiagnosisTransition
+  eliminated : DiagnosisTransition
+  reactivated : DiagnosisTransition
 
 data CurrentDiagnosisStatus : Set where
-  currentlyLive currentlyEliminated : CurrentDiagnosisStatus
+  currentlyLive : CurrentDiagnosisStatus
+  currentlyEliminated : CurrentDiagnosisStatus
 
 data DiagnosisEventTrigger : Set where
   resultTrigger : Outcome.ExperimentalOutcome → DiagnosisEventTrigger

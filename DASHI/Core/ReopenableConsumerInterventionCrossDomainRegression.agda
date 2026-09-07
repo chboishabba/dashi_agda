@@ -25,7 +25,8 @@ import DASHI.Core.TypedEvidenceDependencyExact as Evidence
 ------------------------------------------------------------------------
 
 data Fine : Set where
-  left right : Fine
+  left : Fine
+  right : Fine
 
 data Coarse : Set where
   coarse : Coarse
@@ -37,7 +38,8 @@ data OneConsumer : Set where
   publicConsumer : OneConsumer
 
 data Obs : Set where
-  sameObs differentObs : Obs
+  sameObs : Obs
+  differentObs : Obs
 
 stepFine : OneAction → Fine → Fine
 stepFine _ state = state

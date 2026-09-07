@@ -9,13 +9,21 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ZeroKind : Set where
-  structuralZero samplingZero observedPositive zeroKindUnresolved : ZeroKind
+  structuralZero : ZeroKind
+  samplingZero : ZeroKind
+  observedPositive : ZeroKind
+  zeroKindUnresolved : ZeroKind
 
 data SuppressionState : Set where
-  notSuppressed privacySuppressed otherSuppressed suppressionUnresolved : SuppressionState
+  notSuppressed : SuppressionState
+  privacySuppressed : SuppressionState
+  otherSuppressed : SuppressionState
+  suppressionUnresolved : SuppressionState
 
 data SupportAdequacy : Set where
-  supportAdequate supportSparse supportUnknown : SupportAdequacy
+  supportAdequate : SupportAdequacy
+  supportSparse : SupportAdequacy
+  supportUnknown : SupportAdequacy
 
 record CellSupportFibre : Set where
   constructor cellSupportFibre

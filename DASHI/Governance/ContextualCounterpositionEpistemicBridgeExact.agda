@@ -41,7 +41,9 @@ foundationPartialCounterpositionNotFullInverse =
 ------------------------------------------------------------------------
 
 data GovernanceCounterMode : Set where
-  localChallenge globalInversion relationalReindex : GovernanceCounterMode
+  localChallenge : GovernanceCounterMode
+  globalInversion : GovernanceCounterMode
+  relationalReindex : GovernanceCounterMode
 
 counterModeToFoundation : GovernanceCounterMode → Counter.CounterContext
 counterModeToFoundation localChallenge = Counter.rejectThird

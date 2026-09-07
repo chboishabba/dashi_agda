@@ -99,7 +99,8 @@ maassTheoremToSharedEnclosure candidate
 ------------------------------------------------------------------------
 
 data TwoPointMode : Set where
-  modeTwo modeFive : TwoPointMode
+  modeTwo : TwoPointMode
+  modeFive : TwoPointMode
 
 twoPointEigenvalue : TwoPointMode → ℚ
 twoPointEigenvalue modeTwo = Spectral.two
@@ -142,7 +143,9 @@ finiteHilbertPolyaResidualsVanish mode =
 ------------------------------------------------------------------------
 
 data FiniteHodgeMode : Set where
-  exactMode harmonicMode coexactMode : FiniteHodgeMode
+  exactMode : FiniteHodgeMode
+  harmonicMode : FiniteHodgeMode
+  coexactMode : FiniteHodgeMode
 
 hodgeModeVector : FiniteHodgeMode → Hodge.HodgeTriple
 hodgeModeVector exactMode = Hodge.hodgeTriple 1ℚ 0ℚ 0ℚ

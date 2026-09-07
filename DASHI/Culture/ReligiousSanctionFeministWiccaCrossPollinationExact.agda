@@ -123,7 +123,9 @@ data InheritedMoralChart : Set where
   sameInheritedMoralSurface : InheritedMoralChart
 
 data RechartResidual : Set where
-  imposedResidual reclaimedResidual reconstitutedResidual : RechartResidual
+  imposedResidual : RechartResidual
+  reclaimedResidual : RechartResidual
+  reconstitutedResidual : RechartResidual
 
 inheritedMoralChart : SituatedFormation → InheritedMoralChart
 inheritedMoralChart imposedMoralCategory = sameInheritedMoralSurface

@@ -52,24 +52,24 @@ terraNulliusClassificationIsNotOnlyMetaphor =
 ------------------------------------------------------------------------
 
 data SystemFunctionCoordinate : Set where
-  juridicalConstitutiveStanding
-  indigenousLawAuthority
-  equalSovereignRelation
-  landCountryControl
-  materialSafety
-  culturalContinuity
-  compensationReparation
-  communityDefinedNeedSatisfaction
-  reciprocalCorrection
-  preventionOfRecurrence
-  : SystemFunctionCoordinate
+  juridicalConstitutiveStanding : SystemFunctionCoordinate
+  indigenousLawAuthority : SystemFunctionCoordinate
+  equalSovereignRelation : SystemFunctionCoordinate
+  landCountryControl : SystemFunctionCoordinate
+  materialSafety : SystemFunctionCoordinate
+  culturalContinuity : SystemFunctionCoordinate
+  compensationReparation : SystemFunctionCoordinate
+  communityDefinedNeedSatisfaction : SystemFunctionCoordinate
+  reciprocalCorrection : SystemFunctionCoordinate
+  preventionOfRecurrence : SystemFunctionCoordinate
+
 
 data SystemFunctionState : Set where
-  realisedFunction
-  partialFunction
-  residualFunctionOpen
-  sourceOutcomeUnresolved
-  : SystemFunctionState
+  realisedFunction : SystemFunctionState
+  partialFunction : SystemFunctionState
+  residualFunctionOpen : SystemFunctionState
+  sourceOutcomeUnresolved : SystemFunctionState
+
 
 systemFunctionState : SystemFunctionCoordinate → SystemFunctionState
 systemFunctionState juridicalConstitutiveStanding = partialFunction
@@ -158,11 +158,11 @@ noNumericOddsFromMechanismTopology = refl
 ------------------------------------------------------------------------
 
 data RealisationEvidenceStrand : Set where
-  stateImplementationEvidence
-  affectedCommunityOutcomeEvidence
-  independentMonitoringEvidence
-  treatyBodyFollowUpEvidence
-  : RealisationEvidenceStrand
+  stateImplementationEvidence : RealisationEvidenceStrand
+  affectedCommunityOutcomeEvidence : RealisationEvidenceStrand
+  independentMonitoringEvidence : RealisationEvidenceStrand
+  treatyBodyFollowUpEvidence : RealisationEvidenceStrand
+
 
 record TwoEyedRealisationAssessment : Set where
   constructor two-eyed-realisation-assessment
@@ -251,14 +251,14 @@ data DeclaredRemedySurface : Set where
   stateReportsMeaningfulConsultationAndAdaptation : DeclaredRemedySurface
 
 data RealisedRemedyOutcome : Set where
-  communityAuthorityNotCarried
-  communityAuthorityCarried
-  : RealisedRemedyOutcome
+  communityAuthorityNotCarried : RealisedRemedyOutcome
+  communityAuthorityCarried : RealisedRemedyOutcome
+
 
 data RemedyProcessState : Set where
-  reportedActivityWithoutAuthorityRealisation
-  reportedActivityWithAuthorityRealisation
-  : RemedyProcessState
+  reportedActivityWithoutAuthorityRealisation : RemedyProcessState
+  reportedActivityWithAuthorityRealisation : RemedyProcessState
+
 
 declaredRemedySurface : RemedyProcessState → DeclaredRemedySurface
 declaredRemedySurface _ = stateReportsMeaningfulConsultationAndAdaptation

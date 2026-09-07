@@ -78,7 +78,10 @@ robustNegativeSeparated a b =
     (natLT (negativeLeftProduct a b) (negativeRightProduct a b))
 
 data ArithmeticIdentification : Set where
-  arithmeticRobustPositive arithmeticRobustNegative arithmeticUnidentified malformedBounds : ArithmeticIdentification
+  arithmeticRobustPositive : ArithmeticIdentification
+  arithmeticRobustNegative : ArithmeticIdentification
+  arithmeticUnidentified : ArithmeticIdentification
+  malformedBounds : ArithmeticIdentification
 
 classifyRatioBounds : Bounds.RatioBounds → Bounds.RatioBounds → ArithmeticIdentification
 classifyRatioBounds a b with pairBoundsWellFormed a b

@@ -8,16 +8,22 @@ open import DASHI.Regulation.RegulatoryProjectionCore
 open import DASHI.Regulation.RegulatoryAuthorityBundle
 
 data Authority : Set where
-  au eu : Authority
+  au : Authority
+  eu : Authority
 
 data Activity : Set where
-  process transfer : Activity
+  process : Activity
+  transfer : Activity
 
 data Surface : Set where
-  recorded unrecorded : Surface
+  recorded : Surface
+  unrecorded : Surface
 
 data Duty : Set where
-  disclose obtainConsent retainRecord prohibitTransfer : Duty
+  disclose : Duty
+  obtainConsent : Duty
+  retainRecord : Duty
+  prohibitTransfer : Duty
 
 constantSurface : Activity → Surface
 constantSurface _ = recorded

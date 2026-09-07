@@ -16,7 +16,20 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data UnsupportedDependencyLabel : Set where
-  ROOT acomp agent attr case cc compound conj csubj csubjpass dative dep det expl : UnsupportedDependencyLabel
+  ROOT : UnsupportedDependencyLabel
+  acomp : UnsupportedDependencyLabel
+  agent : UnsupportedDependencyLabel
+  attr : UnsupportedDependencyLabel
+  case : UnsupportedDependencyLabel
+  cc : UnsupportedDependencyLabel
+  compound : UnsupportedDependencyLabel
+  conj : UnsupportedDependencyLabel
+  csubj : UnsupportedDependencyLabel
+  csubjpass : UnsupportedDependencyLabel
+  dative : UnsupportedDependencyLabel
+  dep : UnsupportedDependencyLabel
+  det : UnsupportedDependencyLabel
+  expl : UnsupportedDependencyLabel
   intj meta nummod oprd parataxis pcomp pobj poss preconj predet prep prt punct : UnsupportedDependencyLabel
   quantmod : UnsupportedDependencyLabel
 

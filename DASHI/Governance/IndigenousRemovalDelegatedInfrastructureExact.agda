@@ -77,7 +77,10 @@ royalCommissionSchools = institutionalReportReceipt
 ------------------------------------------------------------------------
 
 data InfrastructureRole : Set where
-  accommodationRole educationRole trainingRole workPlacementRole : InfrastructureRole
+  accommodationRole : InfrastructureRole
+  educationRole : InfrastructureRole
+  trainingRole : InfrastructureRole
+  workPlacementRole : InfrastructureRole
   recordsCustodyRole counsellingRole landInstitutionRole : InfrastructureRole
 
 record DelegatedRemovalInfrastructure : Set where

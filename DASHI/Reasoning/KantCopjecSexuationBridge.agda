@@ -13,7 +13,8 @@ import DASHI.Reasoning.KantAntinomyCore as Kant
 ------------------------------------------------------------------------
 
 data SexuationPosition : Set where
-  allWithExceptionPosition nonAllPosition : SexuationPosition
+  allWithExceptionPosition : SexuationPosition
+  nonAllPosition : SexuationPosition
 
 record KantCopjecHomology : Set where
   field

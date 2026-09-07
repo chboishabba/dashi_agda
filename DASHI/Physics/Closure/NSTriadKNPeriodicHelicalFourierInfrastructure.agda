@@ -135,7 +135,8 @@ helicalProjectorMinusDefinition :
 helicalProjectorMinusDefinition E I S k value = refl
 
 data HelicitySign : Set where
-  plus minus : HelicitySign
+  plus : HelicitySign
+  minus : HelicitySign
 
 helicalProjector :
   ∀ {r} {F : C3.RealField r}

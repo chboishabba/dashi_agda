@@ -13,16 +13,31 @@ import DASHI.Core.GenericReceipt as GenericReceipt
 ------------------------------------------------------------------------
 
 data KernelStatus : Set where
-  kernelChecked kernelRejected kernelUnchecked kernelBlocked : KernelStatus
+  kernelChecked : KernelStatus
+  kernelRejected : KernelStatus
+  kernelUnchecked : KernelStatus
+  kernelBlocked : KernelStatus
 
 data ViewKind : Set where
-  exactReversibleView lossyDiagnosticView schematicView decorativeView : ViewKind
+  exactReversibleView : ViewKind
+  lossyDiagnosticView : ViewKind
+  schematicView : ViewKind
+  decorativeView : ViewKind
 
 data InterpretationStatus : Set where
-  formalConsequence supportedInference analogy speculation satire : InterpretationStatus
+  formalConsequence : InterpretationStatus
+  supportedInference : InterpretationStatus
+  analogy : InterpretationStatus
+  speculation : InterpretationStatus
+  satire : InterpretationStatus
 
 data ProductMaturity : Set where
-  idea prototype verifiedComponent reproduciblePipeline integratedProduct independentlyValidated : ProductMaturity
+  idea : ProductMaturity
+  prototype : ProductMaturity
+  verifiedComponent : ProductMaturity
+  reproduciblePipeline : ProductMaturity
+  integratedProduct : ProductMaturity
+  independentlyValidated : ProductMaturity
 
 record FormalArtifact : Set where
   field

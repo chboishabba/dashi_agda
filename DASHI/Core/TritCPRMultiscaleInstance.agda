@@ -70,7 +70,8 @@ tritIdentityKernelTower =
     }
 
 data TritSymmetry : Set where
-  identitySymmetry inversionSymmetry : TritSymmetry
+  identitySymmetry : TritSymmetry
+  inversionSymmetry : TritSymmetry
 
 tritAct : ∀ {j} → TritSymmetry → TritTower j → TritTower j
 tritAct identitySymmetry x = x

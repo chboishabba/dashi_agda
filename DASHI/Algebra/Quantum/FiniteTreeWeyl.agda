@@ -16,11 +16,15 @@ open import DASHI.Unified.GRQuantumProofTerms using (⊥; WaveLiftCCRProof)
 
 
 data Qutrit : Set where
-  q0 q1 q2 : Qutrit
+  q0 : Qutrit
+  q1 : Qutrit
+  q2 : Qutrit
 
 
 data Phase3 : Set where
-  p0 p1 p2 : Phase3
+  p0 : Phase3
+  p1 : Phase3
+  p2 : Phase3
 
 phaseAdd : Phase3 → Phase3 → Phase3
 phaseAdd p0 right = right

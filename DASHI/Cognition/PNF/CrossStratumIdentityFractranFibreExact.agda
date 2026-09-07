@@ -18,7 +18,10 @@ data IdentityHypothesis : Set where
   identityHypothesis : Nat → IdentityHypothesis
 
 data ContextStratumKind : Set where
-  performanceStratum domesticStratum interviewStratum socialStratum : ContextStratumKind
+  performanceStratum : ContextStratumKind
+  domesticStratum : ContextStratumKind
+  interviewStratum : ContextStratumKind
+  socialStratum : ContextStratumKind
   genericStratum : Nat → ContextStratumKind
 
 record SituatedIdentityEvidence : Set where

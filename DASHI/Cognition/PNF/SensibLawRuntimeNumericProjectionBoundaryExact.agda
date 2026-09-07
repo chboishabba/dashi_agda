@@ -36,7 +36,8 @@ gwbV01PerformanceProjection =
 ------------------------------------------------------------------------
 
 data TimingFixture : Set where
-  parserDominatedA parserDominatedB : TimingFixture
+  parserDominatedA : TimingFixture
+  parserDominatedB : TimingFixture
 
 projection : TimingFixture → RuntimePerformanceProjection
 projection parserDominatedA =
@@ -45,7 +46,8 @@ projection parserDominatedB =
   runtime-performance-projection true GWB.production1_2x
 
 data ActiveWorkClass : Set where
-  lowerActiveWork higherActiveWork : ActiveWorkClass
+  lowerActiveWork : ActiveWorkClass
+  higherActiveWork : ActiveWorkClass
 
 activeWorkClass : TimingFixture → ActiveWorkClass
 activeWorkClass parserDominatedA = lowerActiveWork

@@ -57,7 +57,9 @@ open QualifiedEntry public
 ------------------------------------------------------------------------
 
 data HeatHistory : Set where
-  eliminated pending qualified : HeatHistory
+  eliminated : HeatHistory
+  pending : HeatHistory
+  qualified : HeatHistory
 
 data FinalNode : Set where
   finals : FinalNode
@@ -106,16 +108,19 @@ qualifiedMeansAccept = refl
 ------------------------------------------------------------------------
 
 data Competitor : Set where
-  alpha beta : Competitor
+  alpha : Competitor
+  beta : Competitor
 
 data OpponentIdentity : Set where
   sameOpponent : OpponentIdentity
 
 data OpponentPath : Set where
-  freshPath depletedPath : OpponentPath
+  freshPath : OpponentPath
+  depletedPath : OpponentPath
 
 data MatchOutcome : Set where
-  advances eliminatedOutcome : MatchOutcome
+  advances : MatchOutcome
+  eliminatedOutcome : MatchOutcome
 
 opponentIdentity : OpponentPath → OpponentIdentity
 opponentIdentity _ = sameOpponent
@@ -151,13 +156,15 @@ opponentIdentityCannotRecoverInteractionOutcome =
 ------------------------------------------------------------------------
 
 data TournamentTopology : Set where
-  bracket roundRobin : TournamentTopology
+  bracket : TournamentTopology
+  roundRobin : TournamentTopology
 
 data CandidateField : Set where
   sameField : CandidateField
 
 data Frontier : Set where
-  alphaFrontier betaFrontier : Frontier
+  alphaFrontier : Frontier
+  betaFrontier : Frontier
 
 fieldOf : TournamentTopology → CandidateField
 fieldOf _ = sameField
@@ -222,13 +229,15 @@ filterOrderNoncommutes ()
 ------------------------------------------------------------------------
 
 data RootedHistory : Set where
-  sameRootAdmitted sameRootBlocked : RootedHistory
+  sameRootAdmitted : RootedHistory
+  sameRootBlocked : RootedHistory
 
 data SharedRootCode : Set where
   commonRoot : SharedRootCode
 
 data AdmissionClass : Set where
-  admittedClass blockedClass : AdmissionClass
+  admittedClass : AdmissionClass
+  blockedClass : AdmissionClass
 
 sharedRoot : RootedHistory → SharedRootCode
 sharedRoot _ = commonRoot

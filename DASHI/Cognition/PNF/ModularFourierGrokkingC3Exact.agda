@@ -34,7 +34,15 @@ gromovTitle : String
 gromovTitle = "Grokking modular arithmetic"
 
 data InputPair : Set where
-  p00 p01 p02 p10 p11 p12 p20 p21 p22 : InputPair
+  p00 : InputPair
+  p01 : InputPair
+  p02 : InputPair
+  p10 : InputPair
+  p11 : InputPair
+  p12 : InputPair
+  p20 : InputPair
+  p21 : InputPair
+  p22 : InputPair
 
 leftPhase : InputPair → Wheel.DepthWheelPhase
 leftPhase p00 = Wheel.phase-0

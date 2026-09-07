@@ -42,7 +42,8 @@ composeTrace (traceStep xy rest) yz = traceStep xy (composeTrace rest yz)
 ------------------------------------------------------------------------
 
 data ResidueFlag : Set where
-  residueAbsent residuePresent : ResidueFlag
+  residueAbsent : ResidueFlag
+  residuePresent : ResidueFlag
 
 NoResidueErasure :
   ∀ {State : Set} →

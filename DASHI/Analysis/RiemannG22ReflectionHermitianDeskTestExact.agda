@@ -79,7 +79,9 @@ record ReflectionHermitianDiagonal
 ------------------------------------------------------------------------
 
 data ReflectionPrimeCoefficientShape : Set where
-  rawSinhGrowth boundedTanhDistortion otherCoefficient : ReflectionPrimeCoefficientShape
+  rawSinhGrowth : ReflectionPrimeCoefficientShape
+  boundedTanhDistortion : ReflectionPrimeCoefficientShape
+  otherCoefficient : ReflectionPrimeCoefficientShape
 
 record ReflectionPrimeGate : Set₁ where
   field

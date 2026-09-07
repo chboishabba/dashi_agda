@@ -14,20 +14,20 @@ import DASHI.Core.ScientificCapabilityCarrierBidiExact as C
 ------------------------------------------------------------------------
 
 data TransformationCoordinate : Set where
-  governingPhysics
-  applicationGeometry
-  constitutiveConfiguration
-  calibrationState
-  closureOrRegularisation
-  sourceOrAlgorithmImplementation
-  operatingWindow
-  failureHistory
-  qualificationEvidence
-  validationCorpus
-  uncertaintyModel
-  integrationWorkflow
-  tacitExecutionKnowledge
-  : TransformationCoordinate
+  governingPhysics : TransformationCoordinate
+  applicationGeometry : TransformationCoordinate
+  constitutiveConfiguration : TransformationCoordinate
+  calibrationState : TransformationCoordinate
+  closureOrRegularisation : TransformationCoordinate
+  sourceOrAlgorithmImplementation : TransformationCoordinate
+  operatingWindow : TransformationCoordinate
+  failureHistory : TransformationCoordinate
+  qualificationEvidence : TransformationCoordinate
+  validationCorpus : TransformationCoordinate
+  uncertaintyModel : TransformationCoordinate
+  integrationWorkflow : TransformationCoordinate
+  tacitExecutionKnowledge : TransformationCoordinate
+
 
 record ApplicationTransformation : Set where
   constructor application-transformation
@@ -52,22 +52,22 @@ record TransformationCapabilityReceipt : Set where
 open TransformationCapabilityReceipt public
 
 data TransformationReverseTarget : Set where
-  acquireApplicationGeometry
-  acquireCalibrationState
-  acquireConstitutiveConfiguration
-  acquireClosureOrRegularisation
-  acquireOperatingWindow
-  acquireFailureHistory
-  acquireQualificationEvidence
-  acquireValidationCorpus
-  acquireUncertaintyModel
-  acquireIntegrationWorkflow
-  acquireTacitExecutionKnowledge
-  acquirePersonRoleWeld
-  acquireSuccessorHandover
-  acquireObserverSurface
-  acquireEventLink
-  : TransformationReverseTarget
+  acquireApplicationGeometry : TransformationReverseTarget
+  acquireCalibrationState : TransformationReverseTarget
+  acquireConstitutiveConfiguration : TransformationReverseTarget
+  acquireClosureOrRegularisation : TransformationReverseTarget
+  acquireOperatingWindow : TransformationReverseTarget
+  acquireFailureHistory : TransformationReverseTarget
+  acquireQualificationEvidence : TransformationReverseTarget
+  acquireValidationCorpus : TransformationReverseTarget
+  acquireUncertaintyModel : TransformationReverseTarget
+  acquireIntegrationWorkflow : TransformationReverseTarget
+  acquireTacitExecutionKnowledge : TransformationReverseTarget
+  acquirePersonRoleWeld : TransformationReverseTarget
+  acquireSuccessorHandover : TransformationReverseTarget
+  acquireObserverSurface : TransformationReverseTarget
+  acquireEventLink : TransformationReverseTarget
+
 
 record ApplicationTransformationBoundary : Set where
   constructor application-transformation-boundary

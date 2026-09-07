@@ -27,27 +27,30 @@ import DASHI.Core.OperationalSystemBehaviourSemanticsExact as POSIWID
 ------------------------------------------------------------------------
 
 data ProtectedGroupKind : Set where
-  nationalGroup ethnicalGroup racialGroup religiousGroup : ProtectedGroupKind
+  nationalGroup : ProtectedGroupKind
+  ethnicalGroup : ProtectedGroupKind
+  racialGroup : ProtectedGroupKind
+  religiousGroup : ProtectedGroupKind
 
 data ConventionAct : Set where
-  killingMembers
-  seriousBodilyOrMentalHarm
-  destructiveConditionsOfLife
-  preventBirths
-  forciblyTransferChildren
-  : ConventionAct
+  killingMembers : ConventionAct
+  seriousBodilyOrMentalHarm : ConventionAct
+  destructiveConditionsOfLife : ConventionAct
+  preventBirths : ConventionAct
+  forciblyTransferChildren : ConventionAct
+
 
 data GroupDestructionIntent : Set where
-  specificIntentToDestroyGroupInWholeOrPart
-  intentNotEstablished
-  intentUnresolved
-  : GroupDestructionIntent
+  specificIntentToDestroyGroupInWholeOrPart : GroupDestructionIntent
+  intentNotEstablished : GroupDestructionIntent
+  intentUnresolved : GroupDestructionIntent
+
 
 data GenocideLegalStatus : Set where
-  conventionGenocideElementsClosed
-  conventionGenocideElementsOpen
-  conventionGenocideNotDetermined
-  : GenocideLegalStatus
+  conventionGenocideElementsClosed : GenocideLegalStatus
+  conventionGenocideElementsOpen : GenocideLegalStatus
+  conventionGenocideNotDetermined : GenocideLegalStatus
+
 
 record GenocideConventionElementReceipt : Set where
   constructor genocide-convention-element-receipt
@@ -85,11 +88,11 @@ bringingThemHomeGenocideFinding = genocide-convention-element-receipt
 ------------------------------------------------------------------------
 
 data RelationalDestructionStatus : Set where
-  sourceAcceptedPermanentIntergenerationalLoss
-  sourceAcceptedCulturalLinkDestruction
-  decolonialCulturalGenocideClassification
-  legalGenocideNotYetClassified
-  : RelationalDestructionStatus
+  sourceAcceptedPermanentIntergenerationalLoss : RelationalDestructionStatus
+  sourceAcceptedCulturalLinkDestruction : RelationalDestructionStatus
+  decolonialCulturalGenocideClassification : RelationalDestructionStatus
+  legalGenocideNotYetClassified : RelationalDestructionStatus
+
 
 record RelationalDestructionReceipt : Set where
   constructor relational-destruction-receipt

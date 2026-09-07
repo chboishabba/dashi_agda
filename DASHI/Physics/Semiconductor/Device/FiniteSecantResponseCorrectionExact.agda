@@ -74,7 +74,9 @@ secantResponseLaw q3ToQ5 = refl
 ------------------------------------------------------------------------
 
 data AdmittedResidual : Set where
-  residual6 residual3 residual0 : AdmittedResidual
+  residual6 : AdmittedResidual
+  residual3 : AdmittedResidual
+  residual0 : AdmittedResidual
 
 residualClass : Cell.SourceCharge → AdmittedResidual
 residualClass Cell.q1 = residual6

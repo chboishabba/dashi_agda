@@ -26,7 +26,8 @@ import DASHI.Ontology.EpistemicTrit as Epistemic
 ------------------------------------------------------------------------
 
 data ObservationContext : Set where
-  here there : ObservationContext
+  here : ObservationContext
+  there : ObservationContext
 
 data ScopedClaim : Set where
   focalClaim : ScopedClaim

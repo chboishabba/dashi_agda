@@ -76,7 +76,8 @@ archiveItinerary =
 ------------------------------------------------------------------------
 
 data ReconvergedCase : Set where
-  viaClosure viaArchive : ReconvergedCase
+  viaClosure : ReconvergedCase
+  viaArchive : ReconvergedCase
 
 data ItineraryCode : Set where
   sourceCanonClosureReconverge : ItineraryCode
@@ -187,7 +188,8 @@ closureRouteCannotManufacturePluralContinuation ()
 ------------------------------------------------------------------------
 
 data ReconvergedFineState : Set where
-  closureReconverged archiveReconverged : ReconvergedFineState
+  closureReconverged : ReconvergedFineState
+  archiveReconverged : ReconvergedFineState
 
 coarseReconverged : ReconvergedFineState → ReconvergedSurface
 coarseReconverged _ = sameReconvergedSurface

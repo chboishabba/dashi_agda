@@ -28,13 +28,16 @@ data CrudeSupplySurface : Set where
   crudeSupplyAdequate : CrudeSupplySurface
 
 data RefineryEffectiveCapacity : Set where
-  effectiveCapacityConstrained effectiveCapacityAvailable : RefineryEffectiveCapacity
+  effectiveCapacityConstrained : RefineryEffectiveCapacity
+  effectiveCapacityAvailable : RefineryEffectiveCapacity
 
 data DeliveredProductCapacity : Set where
-  deliveredProductConstrained deliveredProductAvailable : DeliveredProductCapacity
+  deliveredProductConstrained : DeliveredProductCapacity
+  deliveredProductAvailable : DeliveredProductCapacity
 
 data ConsumerAvailability : Set where
-  consumerSupplyTight consumerSupplyLoose : ConsumerAvailability
+  consumerSupplyTight : ConsumerAvailability
+  consumerSupplyLoose : ConsumerAvailability
 
 crudeSupplySurface : EnergyPlanningState → CrudeSupplySurface
 crudeSupplySurface _ = crudeSupplyAdequate
@@ -91,10 +94,20 @@ crudeSupplyCannotRecoverConsumerAvailability =
 ------------------------------------------------------------------------
 
 data EnergyNetworkStage : Set where
-  production gathering pipelineOrShipping refinery productStorage distribution retail : EnergyNetworkStage
+  production : EnergyNetworkStage
+  gathering : EnergyNetworkStage
+  pipelineOrShipping : EnergyNetworkStage
+  refinery : EnergyNetworkStage
+  productStorage : EnergyNetworkStage
+  distribution : EnergyNetworkStage
+  retail : EnergyNetworkStage
 
 data ConstraintKind : Set where
-  chemistryConstraint processCapacityConstraint logisticsConstraint storageConstraint demandConstraint : ConstraintKind
+  chemistryConstraint : ConstraintKind
+  processCapacityConstraint : ConstraintKind
+  logisticsConstraint : ConstraintKind
+  storageConstraint : ConstraintKind
+  demandConstraint : ConstraintKind
 
 record EnergyNetworkConstraintReceipt : Set where
   constructor energy-network-constraint-receipt

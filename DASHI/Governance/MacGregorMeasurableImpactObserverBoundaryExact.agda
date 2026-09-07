@@ -20,7 +20,8 @@ import DASHI.Governance.FeministClimateJusticeSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data ClimateDiscourseState : Set where
-  passiveVictimFraming activePoliticalAgentFraming : ClimateDiscourseState
+  passiveVictimFraming : ClimateDiscourseState
+  activePoliticalAgentFraming : ClimateDiscourseState
 
 data MeasuredImpactCode : Set where sameMeasuredImpact : MeasuredImpactCode
 

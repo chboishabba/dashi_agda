@@ -14,10 +14,16 @@ import DASHI.Biology.TarotCarrierExact as Tarot
 ------------------------------------------------------------------------
 
 data MeaningScale : Set where
-  regimeScale localProcessScale : MeaningScale
+  regimeScale : MeaningScale
+  localProcessScale : MeaningScale
 
 data ReversalMode : Set where
-  blocked internalised excessive deficient distorted releasing : ReversalMode
+  blocked : ReversalMode
+  internalised : ReversalMode
+  excessive : ReversalMode
+  deficient : ReversalMode
+  distorted : ReversalMode
+  releasing : ReversalMode
 
 record CardMeaning : Set where
   constructor cardMeaning

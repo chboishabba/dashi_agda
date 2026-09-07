@@ -43,7 +43,9 @@ import DASHI.Biology.NeurodivergentSocialEcologySourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data UnitIntervalHalfGrid : Set where
-  zeroScore halfScore oneScore : UnitIntervalHalfGrid
+  zeroScore : UnitIntervalHalfGrid
+  halfScore : UnitIntervalHalfGrid
+  oneScore : UnitIntervalHalfGrid
 
 complementScore : UnitIntervalHalfGrid → UnitIntervalHalfGrid
 complementScore zeroScore = oneScore
@@ -85,7 +87,8 @@ doubledAtLeastOne score = atOrAboveHalf score
 ------------------------------------------------------------------------
 
 data SCNDecision : Set where
-  continueDecision flagAndBifurcateDecision : SCNDecision
+  continueDecision : SCNDecision
+  flagAndBifurcateDecision : SCNDecision
 
 scnDecisionFromIncoherence : UnitIntervalHalfGrid → SCNDecision
 scnDecisionFromIncoherence zeroScore = continueDecision
@@ -153,7 +156,9 @@ scnThresholdSoundness measurement state =
 ------------------------------------------------------------------------
 
 data SCNAction : Set where
-  continueAction bifurcateAction quarantineAction : SCNAction
+  continueAction : SCNAction
+  bifurcateAction : SCNAction
+  quarantineAction : SCNAction
 
 SCNActionFor :
   ∀ {State : Set} →
@@ -249,16 +254,20 @@ canonicalHistoricalSCNSubstrate = historicalSCNSubstrate
 ------------------------------------------------------------------------
 
 data SystemIntegrity : Set where
-  coherentSystem inconsistentSystem : SystemIntegrity
+  coherentSystem : SystemIntegrity
+  inconsistentSystem : SystemIntegrity
 
 data SignalStrength : Set where
-  subThresholdSignal overThresholdSignal : SignalStrength
+  subThresholdSignal : SignalStrength
+  overThresholdSignal : SignalStrength
 
 data SystemRiskFlag : Set where
-  noSystemRiskFlag candidateSystemRiskFlag : SystemRiskFlag
+  noSystemRiskFlag : SystemRiskFlag
+  candidateSystemRiskFlag : SystemRiskFlag
 
 data DistressState : Set where
-  regulatedDistress elevatedDistress : DistressState
+  regulatedDistress : DistressState
+  elevatedDistress : DistressState
 
 systemicIntegrityCheck : SystemIntegrity → SignalStrength
 systemicIntegrityCheck coherentSystem = subThresholdSignal
@@ -281,10 +290,12 @@ inconsistentSystemFlagsCandidateRisk = refl
 ------------------------------------------------------------------------
 
 data ObserverStyle : Set where
-  systemSensitiveObserver otherObserver : ObserverStyle
+  systemSensitiveObserver : ObserverStyle
+  otherObserver : ObserverStyle
 
 data AutisticCategory : Set where
-  autisticCategory nonAutisticCategory : AutisticCategory
+  autisticCategory : AutisticCategory
+  nonAutisticCategory : AutisticCategory
 
 record PersonObserver : Set where
   constructor personObserver
@@ -307,7 +318,8 @@ autismDoesNotDefinitionallyImplySolisObserver ()
 ------------------------------------------------------------------------
 
 data Dissonance : Set where
-  lowDissonance highCandidatePsyberneticDissonance : Dissonance
+  lowDissonance : Dissonance
+  highCandidatePsyberneticDissonance : Dissonance
 
 candidateDissonance : ObserverStyle → SystemIntegrity → Dissonance
 candidateDissonance systemSensitiveObserver coherentSystem = lowDissonance
@@ -326,7 +338,8 @@ distressDoesNotProveSystemCollapse ()
 ------------------------------------------------------------------------
 
 data DistressEvidencePolicy : Set where
-  discardAsNoise preserveForInquiry : DistressEvidencePolicy
+  discardAsNoise : DistressEvidencePolicy
+  preserveForInquiry : DistressEvidencePolicy
 
 solisEvidencePolicy : DistressState → DistressEvidencePolicy
 solisEvidencePolicy regulatedDistress = preserveForInquiry
@@ -343,7 +356,9 @@ preservingDistressDoesNotMakeItInfallible ()
 ------------------------------------------------------------------------
 
 data SolisStage : Set where
-  stage3Assessment stage6Accumulation stage9Reorganisation : SolisStage
+  stage3Assessment : SolisStage
+  stage6Accumulation : SolisStage
+  stage9Reorganisation : SolisStage
 
 data Solis369IsBase369TheoremPermission : Set where
 
@@ -363,7 +378,9 @@ thresholdDoesNotAutoEqualPadicMinusHalf ()
 ------------------------------------------------------------------------
 
 data MarketPhase : Set where
-  incumbentAdvantage temporaryRedistribution expandedVertical : MarketPhase
+  incumbentAdvantage : MarketPhase
+  temporaryRedistribution : MarketPhase
+  expandedVertical : MarketPhase
 
 data SPNEIsGameTheoreticNashProofPermission : Set where
 

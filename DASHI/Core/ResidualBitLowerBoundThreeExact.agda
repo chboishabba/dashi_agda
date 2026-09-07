@@ -11,7 +11,9 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data Fine : Set where
-  first second third : Fine
+  first : Fine
+  second : Fine
+  third : Fine
 
 data Coarse : Set where
   commonClass : Coarse

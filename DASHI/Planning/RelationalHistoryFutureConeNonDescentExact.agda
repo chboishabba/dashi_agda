@@ -8,13 +8,15 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 ------------------------------------------------------------------------
 
 data SituatedHistoryState : Set where
-  samePresentContinuousRelation samePresentDisruptedRelation : SituatedHistoryState
+  samePresentContinuousRelation : SituatedHistoryState
+  samePresentDisruptedRelation : SituatedHistoryState
 
 data PresentPlanningView : Set where
   samePresentSurface : PresentPlanningView
 
 data FutureConeCode : Set where
-  continuityPreservingCone repairRequiredCone : FutureConeCode
+  continuityPreservingCone : FutureConeCode
+  repairRequiredCone : FutureConeCode
 
 presentObserver : SituatedHistoryState → PresentPlanningView
 presentObserver samePresentContinuousRelation = samePresentSurface

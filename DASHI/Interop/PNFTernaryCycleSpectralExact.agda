@@ -46,7 +46,9 @@ open RingZ using (Κ; _⊕_; _⊗_; ⊝_; solve)
 ------------------------------------------------------------------------
 
 data TriangleVertex : Set where
-  vertex0 vertex1 vertex2 : TriangleVertex
+  vertex0 : TriangleVertex
+  vertex1 : TriangleVertex
+  vertex2 : TriangleVertex
 
 pnfVertexRef : TriangleVertex → Hodge.PNFZeroCellRef
 pnfVertexRef vertex0 = Hodge.zeroCellRef Hodge.canonicalZeroCell0

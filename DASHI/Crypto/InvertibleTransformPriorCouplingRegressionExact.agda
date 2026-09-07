@@ -27,7 +27,10 @@ data V : Set where v0 v1 v4 : V
 
 -- Exactly the four reachable transformed states.
 data TargetState : Set where
-  t00 t14 t11 t20 : TargetState
+  t00 : TargetState
+  t14 : TargetState
+  t11 : TargetState
+  t20 : TargetState
 
 uCoord : TargetState → U
 uCoord t00 = u0

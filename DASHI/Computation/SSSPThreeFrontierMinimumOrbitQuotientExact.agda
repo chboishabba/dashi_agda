@@ -125,13 +125,16 @@ minimumClassesRemainSeparatedAC = neg≠pos
 ------------------------------------------------------------------------
 
 data MinAResidual : Set where
-  aThenBC aThenCB : MinAResidual
+  aThenBC : MinAResidual
+  aThenCB : MinAResidual
 
 data MinBResidual : Set where
-  bThenAC bThenCA : MinBResidual
+  bThenAC : MinBResidual
+  bThenCA : MinBResidual
 
 data MinCResidual : Set where
-  cThenAB cThenBA : MinCResidual
+  cThenAB : MinCResidual
+  cThenBA : MinCResidual
 
 record MinimumOrbitQuotientBoundary : Set where
   constructor minimumOrbitQuotientBoundary

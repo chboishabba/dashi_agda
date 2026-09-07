@@ -105,7 +105,9 @@ open ContextQualifiedWorldAttachment public
 ------------------------------------------------------------------------
 
 data ContextAxisDirection : Set where
-  contradictsContext neutralContext supportsContext : ContextAxisDirection
+  contradictsContext : ContextAxisDirection
+  neutralContext : ContextAxisDirection
+  supportsContext : ContextAxisDirection
 
 record ContextAxisEvidence : Set where
   constructor contextAxisEvidence

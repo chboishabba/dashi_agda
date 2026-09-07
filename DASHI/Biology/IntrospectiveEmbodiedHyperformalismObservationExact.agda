@@ -16,7 +16,10 @@ open import Data.Product using (_×_; _,_)
 ------------------------------------------------------------------------
 
 data RecoveredSupervoxel : Set where
-  recoveredS0 recoveredS1 recoveredS2 recoveredS3 : RecoveredSupervoxel
+  recoveredS0 : RecoveredSupervoxel
+  recoveredS1 : RecoveredSupervoxel
+  recoveredS2 : RecoveredSupervoxel
+  recoveredS3 : RecoveredSupervoxel
 
 observedFibreCount : RecoveredSupervoxel → Nat
 observedFibreCount recoveredS0 = 3

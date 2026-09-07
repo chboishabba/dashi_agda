@@ -12,7 +12,10 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data Four : Set where
-  colour0 colour1 colour2 colour3 : Four
+  colour0 : Four
+  colour1 : Four
+  colour2 : Four
+  colour3 : Four
 
 rotate : Four → Four
 rotate colour0 = colour1

@@ -40,7 +40,9 @@ open CertifiedPlan public
 ------------------------------------------------------------------------
 
 data CacheStrategy : Set where
-  fullCache periodicCheckpoint zeroCache : CacheStrategy
+  fullCache : CacheStrategy
+  periodicCheckpoint : CacheStrategy
+  zeroCache : CacheStrategy
 
 strategyPlan : CacheStrategy → ReopeningPlan
 strategyPlan fullCache = reopeningPlan 3 0

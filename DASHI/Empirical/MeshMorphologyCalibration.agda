@@ -9,13 +9,18 @@ open import Agda.Builtin.Nat using (Nat)
 -- signatures.
 
 data Morphology : Set where
-  human ogre : Morphology
+  human : Morphology
+  ogre : Morphology
 
 data Comparison : Set where
-  nearer-human nearer-ogre unresolved : Comparison
+  nearer-human : Comparison
+  nearer-ogre : Comparison
+  unresolved : Comparison
 
 data Classification : Set where
-  classified-human classified-ogre needs-human : Classification
+  classified-human : Classification
+  classified-ogre : Classification
+  needs-human : Classification
 
 record BarycentricRadialMassModel
        (Mesh Point Signature : Set) : Set₁ where

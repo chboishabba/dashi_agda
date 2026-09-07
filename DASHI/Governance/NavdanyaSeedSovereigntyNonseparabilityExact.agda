@@ -16,7 +16,8 @@ import DASHI.Governance.IndigenousEnvironmentalJusticeSourceRegistryExact as Sou
 ------------------------------------------------------------------------
 
 data SeedState : Set where
-  enclosedSeed communitySeed : SeedState
+  enclosedSeed : SeedState
+  communitySeed : SeedState
 
 data GermplasmCode : Set where sameSeedMaterial : GermplasmCode
 

@@ -40,7 +40,11 @@ data GammaHighestAlphaPayment : Set where
 
 
 data PaymentState : Set where
-  pruned owned live blocked downstream : PaymentState
+  pruned : PaymentState
+  owned : PaymentState
+  live : PaymentState
+  blocked : PaymentState
+  downstream : PaymentState
 
 paymentState : GammaHighestAlphaPayment → PaymentState
 paymentState discoverAnyConcreteGammaSourceFamily = pruned
@@ -142,14 +146,16 @@ canonicalGammaLineageHighestAlphaBoundary =
 ------------------------------------------------------------------------
 
 data FinalGammaProofRoute : Set where
-  freshFinalSameTaperTheorem
-  repairHistorical8889Producer
-  sourceFreeHistoricalLossGuess
-  unrelatedGammaBound
-  : FinalGammaProofRoute
+  freshFinalSameTaperTheorem : FinalGammaProofRoute
+  repairHistorical8889Producer : FinalGammaProofRoute
+  sourceFreeHistoricalLossGuess : FinalGammaProofRoute
+  unrelatedGammaBound : FinalGammaProofRoute
+
 
 data FinalGammaRouteState : Set where
-  finalLive historicalLive prunedRoute : FinalGammaRouteState
+  finalLive : FinalGammaRouteState
+  historicalLive : FinalGammaRouteState
+  prunedRoute : FinalGammaRouteState
 
 finalGammaRouteState : FinalGammaProofRoute → FinalGammaRouteState
 finalGammaRouteState freshFinalSameTaperTheorem = finalLive

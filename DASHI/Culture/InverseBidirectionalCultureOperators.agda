@@ -17,7 +17,9 @@ data ⊥ : Set where
 ¬ P = P → ⊥
 
 data Direction : Set where
-  forward backward bidirectional : Direction
+  forward : Direction
+  backward : Direction
+  bidirectional : Direction
 
 data CulturalAxis : Set where
   fiction nonfiction reading-aloud audience child art architecture poetry politics :

@@ -104,7 +104,8 @@ stage9SecondFineRefinementStillChartsToStage9 = refl
 ------------------------------------------------------------------------
 
 data CompletedResidualClass : Set where
-  complementRemains completedComplementClosed : CompletedResidualClass
+  complementRemains : CompletedResidualClass
+  completedComplementClosed : CompletedResidualClass
 
 completedResidualClass : Decimal.DecimalDigit → CompletedResidualClass
 completedResidualClass Decimal.d0 = complementRemains
@@ -120,7 +121,15 @@ completedResidualClass Decimal.d9 = completedComplementClosed
 
 -- Finite carrier for "every decimal digit below nine".
 data NonNineDigit : Set where
-  n0 n1 n2 n3 n4 n5 n6 n7 n8 : NonNineDigit
+  n0 : NonNineDigit
+  n1 : NonNineDigit
+  n2 : NonNineDigit
+  n3 : NonNineDigit
+  n4 : NonNineDigit
+  n5 : NonNineDigit
+  n6 : NonNineDigit
+  n7 : NonNineDigit
+  n8 : NonNineDigit
 
 asDigit : NonNineDigit → Decimal.DecimalDigit
 asDigit n0 = Decimal.d0

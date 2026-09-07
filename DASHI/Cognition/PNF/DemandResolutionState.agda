@@ -12,7 +12,10 @@ open import DASHI.Cognition.PNF.NumericAuthority
 ------------------------------------------------------------------------
 
 data DemandStatus : Set where
-  openDemand resolvedDemand deferredWorldDemand failedDemand : DemandStatus
+  openDemand : DemandStatus
+  resolvedDemand : DemandStatus
+  deferredWorldDemand : DemandStatus
+  failedDemand : DemandStatus
 
 record CandidateEvidence : Set where
   constructor candidateEvidence

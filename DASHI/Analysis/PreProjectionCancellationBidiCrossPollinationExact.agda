@@ -22,10 +22,14 @@ import DASHI.Physics.QuantumVacuum.ParallelPlateRegulatedDifferenceBidiExact as 
 ------------------------------------------------------------------------
 
 data Lane : Set where
-  navierStokes casimir spectralPairing : Lane
+  navierStokes : Lane
+  casimir : Lane
+  spectralPairing : Lane
 
 data ProjectionKind : Set where
-  normProjection absoluteValueProjection limitProjection : ProjectionKind
+  normProjection : ProjectionKind
+  absoluteValueProjection : ProjectionKind
+  limitProjection : ProjectionKind
 
 record PreProjectionCancellationShape : Set₁ where
   field

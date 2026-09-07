@@ -13,10 +13,19 @@ import DASHI.Biology.BraidedEmotionOperationalSemantics as Emotion
 -- pretending that one interpretive frame replaces clinical assessment.
 
 data SignalContext : Set where
-  personalContext relationalContext systemicContext mixedContext unknownContext : SignalContext
+  personalContext : SignalContext
+  relationalContext : SignalContext
+  systemicContext : SignalContext
+  mixedContext : SignalContext
+  unknownContext : SignalContext
 
 data DistressUse : Set where
-  selfDescriptionUse contextualHypothesisUse systemicCritiqueUse diagnosticUse causalClosureUse treatmentDirectionUse : DistressUse
+  selfDescriptionUse : DistressUse
+  contextualHypothesisUse : DistressUse
+  systemicCritiqueUse : DistressUse
+  diagnosticUse : DistressUse
+  causalClosureUse : DistressUse
+  treatmentDirectionUse : DistressUse
 
 record DistressSignal : Set where
   constructor distressSignal

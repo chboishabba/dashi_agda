@@ -79,19 +79,19 @@ modernColonialMechanismEstablished = Algebra.legal-proposition
 ------------------------------------------------------------------------
 
 data TranslationStatus : Set where
-  translationOpen
-  translationClosed
+  translationOpen : TranslationStatus
+  translationClosed : TranslationStatus
   translationConflict : TranslationStatus
 
 data TranslationProducer : Set where
-  sourceClassificationLineageProducer
-  beforeAfterAuthorityMeaningProducer
-  operationalPowerPrerequisiteProducer
-  sameObjectIncidentWeldProducer
-  analyticalElementProducer
-  applicabilityAndJurisdictionProducer
-  liabilityAndRemedyProducer
-  : TranslationProducer
+  sourceClassificationLineageProducer : TranslationProducer
+  beforeAfterAuthorityMeaningProducer : TranslationProducer
+  operationalPowerPrerequisiteProducer : TranslationProducer
+  sameObjectIncidentWeldProducer : TranslationProducer
+  analyticalElementProducer : TranslationProducer
+  applicabilityAndJurisdictionProducer : TranslationProducer
+  liabilityAndRemedyProducer : TranslationProducer
+
 
 record CrossSystemInterpretiveTranslation : Set where
   constructor cross-system-interpretive-translation
@@ -156,14 +156,14 @@ currentHerzogIncidentTranslation = cross-system-interpretive-translation
 ------------------------------------------------------------------------
 
 data HerzogColonialClaim : Set where
-  classificationBroadeningObserved
-  authorityErasureObserved
-  authorityErasureWasOperationalPrerequisite
-  sameObjectModernColonialMechanism
-  analyticalWrongTypeApplicable
-  analyticalWrongTypeViolated
-  analyticalWrongTypeCreatesLiability
-  : HerzogColonialClaim
+  classificationBroadeningObserved : HerzogColonialClaim
+  authorityErasureObserved : HerzogColonialClaim
+  authorityErasureWasOperationalPrerequisite : HerzogColonialClaim
+  sameObjectModernColonialMechanism : HerzogColonialClaim
+  analyticalWrongTypeApplicable : HerzogColonialClaim
+  analyticalWrongTypeViolated : HerzogColonialClaim
+  analyticalWrongTypeCreatesLiability : HerzogColonialClaim
+
 
 reverseHerzogColonial : HerzogColonialClaim → TranslationProducer
 reverseHerzogColonial classificationBroadeningObserved = sourceClassificationLineageProducer

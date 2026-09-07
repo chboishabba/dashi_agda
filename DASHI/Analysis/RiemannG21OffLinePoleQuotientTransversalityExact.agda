@@ -69,7 +69,8 @@ sourceHasNegativeDirection = refl
 ------------------------------------------------------------------------
 
 data SourceDirection : Set where
-  sourcePositive sourceNegative : SourceDirection
+  sourcePositive : SourceDirection
+  sourceNegative : SourceDirection
 
 data CollapsedObservation : Set where
   sameObservedDirection : CollapsedObservation
@@ -106,10 +107,14 @@ canonicalHyperbolicRankBoundary =
 ------------------------------------------------------------------------
 
 data Basis4 : Set where
-  eOffPlus eOffMinus ePolePlus ePoleMinus : Basis4
+  eOffPlus : Basis4
+  eOffMinus : Basis4
+  ePolePlus : Basis4
+  ePoleMinus : Basis4
 
 data ExteriorCode : Set where
-  volumeZero volumeNonzero : ExteriorCode
+  volumeZero : ExteriorCode
+  volumeNonzero : ExteriorCode
 
 exterior4Toy : Basis4 → Basis4 → Basis4 → Basis4 → ExteriorCode
 exterior4Toy eOffPlus eOffMinus ePolePlus ePoleMinus = volumeNonzero

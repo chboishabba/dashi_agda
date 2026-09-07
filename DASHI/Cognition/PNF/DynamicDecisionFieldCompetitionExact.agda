@@ -20,13 +20,18 @@ import DASHI.Cognition.PNF.AccessibleCandidateReasoningPipelineExact as Pre
 ------------------------------------------------------------------------
 
 data PreferenceState : Set where
-  balanced supportAhead counterAhead : PreferenceState
+  balanced : PreferenceState
+  supportAhead : PreferenceState
+  counterAhead : PreferenceState
 
 data EvidencePulse : Set where
-  supportPulse counterPulse : EvidencePulse
+  supportPulse : EvidencePulse
+  counterPulse : EvidencePulse
 
 data Interaction : Set where
-  reinforcing interfering independent : Interaction
+  reinforcing : Interaction
+  interfering : Interaction
+  independent : Interaction
 
 updatePreference : EvidencePulse → PreferenceState → PreferenceState
 updatePreference supportPulse balanced = supportAhead

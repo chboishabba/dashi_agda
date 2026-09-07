@@ -151,7 +151,9 @@ complexResonantPairFoldIdentity
             system leftCoefficient rightCoefficient output pairs = refl
 
 data ComplexPhysicalPairPiece : Set where
-  rp1Piece rp2Piece hardTailPiece : ComplexPhysicalPairPiece
+  rp1Piece : ComplexPhysicalPairPiece
+  rp2Piece : ComplexPhysicalPairPiece
+  hardTailPiece : ComplexPhysicalPairPiece
 
 record ClassifiedComplexResonantPair
     {r : Level}

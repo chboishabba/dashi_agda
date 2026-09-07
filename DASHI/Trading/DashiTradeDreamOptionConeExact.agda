@@ -51,25 +51,35 @@ legacyPermission state = Legacy.authorize (Legacy.quotient state)
 ------------------------------------------------------------------------
 
 data Direction : Set where
-  shortDirection flatDirection longDirection : Direction
+  shortDirection : Direction
+  flatDirection : Direction
+  longDirection : Direction
 
 data TradeAction : Set where
-  sellAction holdAction buyAction : TradeAction
+  sellAction : TradeAction
+  holdAction : TradeAction
+  buyAction : TradeAction
 
 data InventoryRegime : Set where
-  neutralInventory crowdedLongInventory : InventoryRegime
+  neutralInventory : InventoryRegime
+  crowdedLongInventory : InventoryRegime
 
 data LiquidityRegime : Set where
-  liquidBook thinBook : LiquidityRegime
+  liquidBook : LiquidityRegime
+  thinBook : LiquidityRegime
 
 data UncertaintyRegime : Set where
-  calibrated uncertain : UncertaintyRegime
+  calibrated : UncertaintyRegime
+  uncertain : UncertaintyRegime
 
 data HistoryRegime : Set where
-  stableHistory flipHeavyHistory : HistoryRegime
+  stableHistory : HistoryRegime
+  flipHeavyHistory : HistoryRegime
 
 data RiskRegime : Set where
-  riskClear riskCaution riskBlocked : RiskRegime
+  riskClear : RiskRegime
+  riskCaution : RiskRegime
+  riskBlocked : RiskRegime
 
 record TradingFabricState : Set where
   constructor tradingFabricState
@@ -254,7 +264,8 @@ jointCanStillClose = refl
 ------------------------------------------------------------------------
 
 data TradeRoute : Set where
-  lowTurnoverRoute churnRoute : TradeRoute
+  lowTurnoverRoute : TradeRoute
+  churnRoute : TradeRoute
 
 record TrajectoryCost : Set where
   constructor trajectoryCost

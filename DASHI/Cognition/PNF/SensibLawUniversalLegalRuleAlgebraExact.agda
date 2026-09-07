@@ -43,22 +43,22 @@ data All {A : Set} (P : A → Set) : List A → Set where
 ------------------------------------------------------------------------
 
 data AuthorityRole : Set where
-  constitutionalRuleRole
-  legislativeRuleRole
-  delegatedRuleRole
-  bindingRatioRole
-  persuasiveRatioRole
-  dictumRole
-  concurrenceRole
-  dissentRole
-  adjudicatedFactRole
-  partySubmissionRole
-  judicialPolicyReasonRole
-  interpretiveInputRole
-  empiricalEvidenceRole
-  communityNormRole
-  dashReconstructionRole
-  : AuthorityRole
+  constitutionalRuleRole : AuthorityRole
+  legislativeRuleRole : AuthorityRole
+  delegatedRuleRole : AuthorityRole
+  bindingRatioRole : AuthorityRole
+  persuasiveRatioRole : AuthorityRole
+  dictumRole : AuthorityRole
+  concurrenceRole : AuthorityRole
+  dissentRole : AuthorityRole
+  adjudicatedFactRole : AuthorityRole
+  partySubmissionRole : AuthorityRole
+  judicialPolicyReasonRole : AuthorityRole
+  interpretiveInputRole : AuthorityRole
+  empiricalEvidenceRole : AuthorityRole
+  communityNormRole : AuthorityRole
+  dashReconstructionRole : AuthorityRole
+
 
 record LegalSourceRef : Set where
   constructor legal-source-ref
@@ -75,17 +75,17 @@ open LegalSourceRef public
 ------------------------------------------------------------------------
 
 data PropositionKind : Set where
-  factualFeature
-  relationalFeature
-  doctrinalPredicate
-  institutionalConstraint
-  wrongElementPredicate
-  remedyConstraint
-  jurisdictionPredicate
-  temporalPredicate
-  authorityPredicate
-  otherLegalPredicate
-  : PropositionKind
+  factualFeature : PropositionKind
+  relationalFeature : PropositionKind
+  doctrinalPredicate : PropositionKind
+  institutionalConstraint : PropositionKind
+  wrongElementPredicate : PropositionKind
+  remedyConstraint : PropositionKind
+  jurisdictionPredicate : PropositionKind
+  temporalPredicate : PropositionKind
+  authorityPredicate : PropositionKind
+  otherLegalPredicate : PropositionKind
+
 
 record LegalProposition : Set where
   constructor legal-proposition
@@ -251,18 +251,18 @@ open MinimalCut public
 ------------------------------------------------------------------------
 
 data RuleTransformationKind : Set where
-  addRule
-  removeRule
-  narrowRulePremises
-  widenRulePremises
-  addException
-  removeException
-  addDefeater
-  removeDefeater
-  alterAuthorityRole
-  alterJurisdictionScope
-  alterTemporalScope
-  : RuleTransformationKind
+  addRule : RuleTransformationKind
+  removeRule : RuleTransformationKind
+  narrowRulePremises : RuleTransformationKind
+  widenRulePremises : RuleTransformationKind
+  addException : RuleTransformationKind
+  removeException : RuleTransformationKind
+  addDefeater : RuleTransformationKind
+  removeDefeater : RuleTransformationKind
+  alterAuthorityRole : RuleTransformationKind
+  alterJurisdictionScope : RuleTransformationKind
+  alterTemporalScope : RuleTransformationKind
+
 
 record LegalTransformation : Set where
   constructor legal-transformation

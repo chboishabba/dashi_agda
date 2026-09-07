@@ -47,7 +47,11 @@ record LawProfile : Set where
 open LawProfile public
 
 data ClassicalAlgebra : Set where
-  real complex quaternion octonion sedenion : ClassicalAlgebra
+  real : ClassicalAlgebra
+  complex : ClassicalAlgebra
+  quaternion : ClassicalAlgebra
+  octonion : ClassicalAlgebra
+  sedenion : ClassicalAlgebra
 
 algebraDimension : ClassicalAlgebra → Nat
 algebraDimension real       = 1

@@ -32,10 +32,13 @@ import DASHI.Biology.Morphogenesis.ReactionDiffusionHodgeBridge as Hodge
 ------------------------------------------------------------------------
 
 data MeshNode : Set where
-  leftNode interiorNode rightNode : MeshNode
+  leftNode : MeshNode
+  interiorNode : MeshNode
+  rightNode : MeshNode
 
 data MeshFace : Set where
-  leftFace rightFace : MeshFace
+  leftFace : MeshFace
+  rightFace : MeshFace
 
 record InteriorCarrierFluxState : Set where
   constructor interiorCarrierFluxState

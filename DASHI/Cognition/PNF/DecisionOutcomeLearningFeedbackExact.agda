@@ -18,7 +18,9 @@ import DASHI.Cognition.PNF.LearningAlgebra as Learning
 ------------------------------------------------------------------------
 
 data Outcome : Set where
-  reinforcingOutcome extinguishingOutcome neutralOutcome : Outcome
+  reinforcingOutcome : Outcome
+  extinguishingOutcome : Outcome
+  neutralOutcome : Outcome
 
 learnFromOutcome : Outcome → Memory.MemoryFibre → Memory.MemoryFibre
 learnFromOutcome reinforcingOutcome m = Memory.reinforce m

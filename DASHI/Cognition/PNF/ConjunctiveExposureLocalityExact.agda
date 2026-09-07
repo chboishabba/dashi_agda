@@ -26,7 +26,10 @@ open import Data.Nat using (_≤_)
 -- Four nullable object-candidate axes give exactly sixteen masks.  Constructors
 -- are named factor/kind/role/lexical in that bit order.
 data CandidateConstraintMask : Set where
-  mask0000 mask0001 mask0010 mask0011 : CandidateConstraintMask
+  mask0000 : CandidateConstraintMask
+  mask0001 : CandidateConstraintMask
+  mask0010 : CandidateConstraintMask
+  mask0011 : CandidateConstraintMask
   mask0100 mask0101 mask0110 mask0111 : CandidateConstraintMask
   mask1000 mask1001 mask1010 mask1011 : CandidateConstraintMask
   mask1100 mask1101 mask1110 mask1111 : CandidateConstraintMask
@@ -37,7 +40,10 @@ candidateMaskCardinality = 16
 -- Actor-retention deliberately omits lexical identity, hence eight masks over
 -- factor/kind/role.
 data RetentionConstraintMask : Set where
-  retention000 retention001 retention010 retention011 : RetentionConstraintMask
+  retention000 : RetentionConstraintMask
+  retention001 : RetentionConstraintMask
+  retention010 : RetentionConstraintMask
+  retention011 : RetentionConstraintMask
   retention100 retention101 retention110 retention111 : RetentionConstraintMask
 
 retentionMaskCardinality : Nat

@@ -15,10 +15,13 @@ import DASHI.Core.IntersectionalNonFactorability as Intersection
 ------------------------------------------------------------------------
 
 data EvidenceDirection : Set where
-  adverseSignal unresolvedSignal beneficialSignal : EvidenceDirection
+  adverseSignal : EvidenceDirection
+  unresolvedSignal : EvidenceDirection
+  beneficialSignal : EvidenceDirection
 
 data EntitlementState : Set where
-  entitlementAbsent entitlementRetained : EntitlementState
+  entitlementAbsent : EntitlementState
+  entitlementRetained : EntitlementState
 
 record EarlyLearningOutcomeVector : Set where
   constructor earlyLearningOutcomeVector
@@ -72,7 +75,8 @@ fiscalProjection = fiscalBalance
 ------------------------------------------------------------------------
 
 data LabourMatchedCase : Set where
-  labourGainChildAdverse labourGainChildBeneficial : LabourMatchedCase
+  labourGainChildAdverse : LabourMatchedCase
+  labourGainChildBeneficial : LabourMatchedCase
 
 labourMatchedProjection : LabourMatchedCase → EvidenceDirection
 labourMatchedProjection labourGainChildAdverse = beneficialSignal
@@ -102,7 +106,8 @@ labourGainCannotDetermineChildEffect =
 ------------------------------------------------------------------------
 
 data SameChildDifferentFiscal : Set where
-  adverseChildFiscalUnknown adverseChildFiscalPositive : SameChildDifferentFiscal
+  adverseChildFiscalUnknown : SameChildDifferentFiscal
+  adverseChildFiscalPositive : SameChildDifferentFiscal
 
 sameChildProjection : SameChildDifferentFiscal → EvidenceDirection
 sameChildProjection adverseChildFiscalUnknown = adverseSignal
@@ -134,7 +139,9 @@ childSignalCannotDetermineFiscalEffect =
 ------------------------------------------------------------------------
 
 data WholePolicyVerdict : Set where
-  rejectPolicy revisePolicy supportPolicy : WholePolicyVerdict
+  rejectPolicy : WholePolicyVerdict
+  revisePolicy : WholePolicyVerdict
+  supportPolicy : WholePolicyVerdict
 
 record ExplicitAggregationRule : Set₁ where
   constructor explicitAggregationRule

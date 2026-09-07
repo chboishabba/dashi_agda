@@ -45,7 +45,8 @@ complement A x = ¬ A x
 ------------------------------------------------------------------------
 
 data Stance : Set where
-  thesisSide antithesisSide : Stance
+  thesisSide : Stance
+  antithesisSide : Stance
 
 mirrorStance : Stance → Stance
 mirrorStance thesisSide = antithesisSide

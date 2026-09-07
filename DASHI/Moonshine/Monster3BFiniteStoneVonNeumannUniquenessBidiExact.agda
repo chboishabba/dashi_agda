@@ -22,7 +22,8 @@ import DASHI.Moonshine.Monster3BFiniteHeisenbergCommutantExact as Commutant
 ------------------------------------------------------------------------
 
 data NontrivialCentralPhase : Set where
-  zetaPhase zetaSquaredPhase : NontrivialCentralPhase
+  zetaPhase : NontrivialCentralPhase
+  zetaSquaredPhase : NontrivialCentralPhase
 
 data NonlinearCharacterSignature : Set where
   heisenbergZetaSignature : NonlinearCharacterSignature

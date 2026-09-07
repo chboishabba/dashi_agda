@@ -18,7 +18,9 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data DriftDirection : Set where
-  towardAttractor neutralDrift awayFromAttractor : DriftDirection
+  towardAttractor : DriftDirection
+  neutralDrift : DriftDirection
+  awayFromAttractor : DriftDirection
 
 record AttractorDrift : Set where
   constructor attractorDrift
@@ -54,7 +56,9 @@ record BranchMetric : Set where
 open BranchMetric public
 
 data InteractionDirection : Set where
-  reinforcing independent interfering : InteractionDirection
+  reinforcing : InteractionDirection
+  independent : InteractionDirection
+  interfering : InteractionDirection
 
 ------------------------------------------------------------------------
 -- Typed unordered interaction matrix.

@@ -25,16 +25,19 @@ import DASHI.Core.ReopenableConsumerInterventionKernelExact as Core
 ------------------------------------------------------------------------
 
 data Epoch : Set where
-  trainingEpoch shiftedEpoch : Epoch
+  trainingEpoch : Epoch
+  shiftedEpoch : Epoch
 
 data Input : Set where
   sameInput : Input
 
 data Target : Set where
-  oldResponse shiftedResponse : Target
+  oldResponse : Target
+  shiftedResponse : Target
 
 data TimedState : Set where
-  oldState newState : TimedState
+  oldState : TimedState
+  newState : TimedState
 
 inputOf : TimedState → Input
 inputOf oldState = sameInput
@@ -57,7 +60,8 @@ timeErasureCalibrationDefect =
     impossible ()
 
 data TimeAwareSurface : Set where
-  trainingSurface shiftedSurface : TimeAwareSurface
+  trainingSurface : TimeAwareSurface
+  shiftedSurface : TimeAwareSurface
 
 timeAwareProject : TimedState → TimeAwareSurface
 timeAwareProject oldState = trainingSurface
@@ -81,13 +85,15 @@ timeAwareCalibrationDescends = Core.consumerDescent timeAwareTarget proof
 ------------------------------------------------------------------------
 
 data FineMemoryState : Set where
-  driedThenWet wettedThenWet : FineMemoryState
+  driedThenWet : FineMemoryState
+  wettedThenWet : FineMemoryState
 
 data VisibleState : Set where
   currentlyWet : VisibleState
 
 data FineAfter : Set where
-  rapidDrain slowDrain : FineAfter
+  rapidDrain : FineAfter
+  slowDrain : FineAfter
 
 data CoarseAfter : Set where
   onePredictedDrainClass : CoarseAfter

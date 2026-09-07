@@ -19,13 +19,13 @@ import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as FinalC
 ------------------------------------------------------------------------
 
 data RHZetaMove : Set where
-  payUniversalOffAllowance
-  paySameTaperGammaAllowance
-  reopenDeterminantDiagnostic
-  redoClusterMarginAnalysis
-  rebuildFinalContradictionCompiler
-  chooseFarTailCutoffAlone
-  : RHZetaMove
+  payUniversalOffAllowance : RHZetaMove
+  paySameTaperGammaAllowance : RHZetaMove
+  reopenDeterminantDiagnostic : RHZetaMove
+  redoClusterMarginAnalysis : RHZetaMove
+  rebuildFinalContradictionCompiler : RHZetaMove
+  chooseFarTailCutoffAlone : RHZetaMove
+
 
 move : RHZetaMove → Literal.LiteralFrontierMove
 move payUniversalOffAllowance = record

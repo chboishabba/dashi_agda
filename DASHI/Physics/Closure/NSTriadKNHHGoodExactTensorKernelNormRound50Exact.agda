@@ -35,7 +35,9 @@ open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
 import DASHI.Physics.Closure.NSTriadKNHHGoodPeriodizedKernelUniformRound40Exact as Periodized
 
 data TensorKernelNorm : Set where
-  operatorNorm frobeniusNorm entrywiseL1Norm : TensorKernelNorm
+  operatorNorm : TensorKernelNorm
+  frobeniusNorm : TensorKernelNorm
+  entrywiseL1Norm : TensorKernelNorm
 
 record ExactTensorNormAnnularKernel
     {t : Level}

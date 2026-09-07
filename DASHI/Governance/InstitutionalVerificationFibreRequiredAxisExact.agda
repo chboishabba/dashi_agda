@@ -22,13 +22,15 @@ import DASHI.Governance.ContestabilityAccessCostExact as Contestability
 import DASHI.Governance.InstitutionalNoticeActuationCulpabilityExact as Notice
 
 data VerificationState : Set where
-  savingBranchActuallyDead savingBranchActuallyLive : VerificationState
+  savingBranchActuallyDead : VerificationState
+  savingBranchActuallyLive : VerificationState
 
 data VerificationQuestionSurface : Set where
   isThereSavingAuthorityQuestion : VerificationQuestionSurface
 
 data VerificationAnswer : Set where
-  verifiedDead verifiedLive : VerificationAnswer
+  verifiedDead : VerificationAnswer
+  verifiedLive : VerificationAnswer
 
 questionObserver :
   Observer.Observer VerificationState VerificationQuestionSurface
@@ -121,16 +123,19 @@ canonicalVerificationClosureGap =
     verificationPathNotAffordableInCanonicalBudget
 
 data SituatedAccessState : Set where
-  lowAccessAsynchronous highAccessInteractive : SituatedAccessState
+  lowAccessAsynchronous : SituatedAccessState
+  highAccessInteractive : SituatedAccessState
 
 data FlatSubjectLabel : Set where
   sameLaySubjectLabel : FlatSubjectLabel
 
 data RelationAccessAxis : Set where
-  lowVerificationAccess highVerificationAccess : RelationAccessAxis
+  lowVerificationAccess : RelationAccessAxis
+  highVerificationAccess : RelationAccessAxis
 
 data CommunicationAxis : Set where
-  asynchronousNotice interactiveTeachBack : CommunicationAxis
+  asynchronousNotice : CommunicationAxis
+  interactiveTeachBack : CommunicationAxis
 
 flatSubjectObserver : SituatedAccessState → FlatSubjectLabel
 flatSubjectObserver _ = sameLaySubjectLabel

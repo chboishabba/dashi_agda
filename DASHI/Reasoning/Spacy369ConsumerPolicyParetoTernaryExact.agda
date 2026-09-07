@@ -14,7 +14,8 @@ import Base369 as Base
 ------------------------------------------------------------------------
 
 data AxisLevel : Set where
-  weak strong : AxisLevel
+  weak : AxisLevel
+  strong : AxisLevel
 
 data _≤A_ : AxisLevel → AxisLevel → Set where
   weak≤weak : weak ≤A weak

@@ -12,7 +12,11 @@ sumℚ {zero} [] = 0ℚ
 sumℚ {suc n} (x ∷ xs) = x +ℚ sumℚ xs
 
 data Signature : Set where
-  sig31 sig13 sig22 sig40 sig04 : Signature
+  sig31 : Signature
+  sig13 : Signature
+  sig22 : Signature
+  sig40 : Signature
+  sig04 : Signature
 
 record MaskedQuadratic (n : Nat) : Set₁ where
   field

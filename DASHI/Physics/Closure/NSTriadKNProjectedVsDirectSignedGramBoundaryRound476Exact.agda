@@ -31,7 +31,7 @@ import DASHI.Physics.Closure.NSTriadKNGramOperatorBoundConsumerRound471Exact as 
 import DASHI.Physics.Closure.NSTriadKNWeightedHelicalGramOperatorSplitRound475Exact as R475
 
 data FixedOutputGramLane : Set where
-  projectedOuterGramOperator
+  projectedOuterGramOperator : FixedOutputGramLane
   directSignedCompanionCross : FixedOutputGramLane
 
 preferredProjectedConsumer : FixedOutputGramLane

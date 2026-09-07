@@ -35,7 +35,9 @@ import DASHI.Physics.Closure.NSTriadKNLuoCriticalRestartContradictionExact
 import DASHI.Physics.Closure.NSTriadKNLuoClayEndToEndCompositionRound23Exact
 
 data RequirementState : Set where
-  exactTarget checkedReducer physicalProducerOpen : RequirementState
+  exactTarget : RequirementState
+  checkedReducer : RequirementState
+  physicalProducerOpen : RequirementState
 
 record ClayPreconditions : Set where
   constructor clayPreconditions

@@ -41,7 +41,8 @@ import DASHI.Core.RelationalEpistemicProcessSourceBridgeExact as Relational
 ------------------------------------------------------------------------
 
 data InquiryDisposition : Set where
-  preserveForInquiry discardAsNoise : InquiryDisposition
+  preserveForInquiry : InquiryDisposition
+  discardAsNoise : InquiryDisposition
 
 preserveSCNSignal : Solis.SCNAction → InquiryDisposition
 preserveSCNSignal Solis.continueAction = preserveForInquiry
@@ -49,16 +50,20 @@ preserveSCNSignal Solis.bifurcateAction = preserveForInquiry
 preserveSCNSignal Solis.quarantineAction = preserveForInquiry
 
 data ContextReading : Set where
-  lowDemandContext highDemandContext : ContextReading
+  lowDemandContext : ContextReading
+  highDemandContext : ContextReading
 
 data RelationReading : Set where
-  declarationAligned declarationMismatch : RelationReading
+  declarationAligned : RelationReading
+  declarationMismatch : RelationReading
 
 data ReflectionReading : Set where
-  noRepairNeeded investigateEcology : ReflectionReading
+  noRepairNeeded : ReflectionReading
+  investigateEcology : ReflectionReading
 
 data InquiryAction : Set where
-  continueSituatedly seekContextualRepair : InquiryAction
+  continueSituatedly : InquiryAction
+  seekContextualRepair : InquiryAction
 
 contextualiseEnvironment : Integrity.PublicEnvironment → ContextReading
 contextualiseEnvironment Integrity.lowDemandThirdPlace = lowDemandContext

@@ -54,10 +54,14 @@ record Cube4 (N : Nat) : Set where
 open Cube4 public
 
 data Axis4 : Set where
-  axis₀ axis₁ axis₂ axis₃ : Axis4
+  axis₀ : Axis4
+  axis₁ : Axis4
+  axis₂ : Axis4
+  axis₃ : Axis4
 
 data FaceOrientation : Set where
-  forward backward : FaceOrientation
+  forward : FaceOrientation
+  backward : FaceOrientation
 
 FaceMove : Set
 FaceMove = Axis4 × FaceOrientation

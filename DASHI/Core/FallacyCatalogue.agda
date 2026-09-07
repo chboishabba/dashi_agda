@@ -9,7 +9,11 @@ open import DASHI.Core.ArgumentObstructionCore
 ------------------------------------------------------------------------
 
 data FallacyKind : Set where
-  appealToProbability argumentFromFallacy baseRateFallacy conjunctionFallacy maskedManFallacy : FallacyKind
+  appealToProbability : FallacyKind
+  argumentFromFallacy : FallacyKind
+  baseRateFallacy : FallacyKind
+  conjunctionFallacy : FallacyKind
+  maskedManFallacy : FallacyKind
   affirmingDisjunct affirmingConsequent denyingAntecedent existentialFallacy : FallacyKind
   affirmativeConclusionNegativePremise exclusivePremises fourTerms illicitMajor illicitMinor : FallacyKind
   negativeConclusionAffirmativePremises undistributedMiddle politiciansSyllogism modalFallacy modalScopeFallacy : FallacyKind

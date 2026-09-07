@@ -28,7 +28,9 @@ open import Data.Rational.Base using (0ℚ)
 import DASHI.Biology.EisensteinNineRingInterferenceExact as E
 
 data TernaryPhase : Set where
-  phaseOne phaseOmega phaseOmegaSquared : TernaryPhase
+  phaseOne : TernaryPhase
+  phaseOmega : TernaryPhase
+  phaseOmegaSquared : TernaryPhase
 
 nextPhase : TernaryPhase → TernaryPhase
 nextPhase phaseOne = phaseOmega
@@ -64,10 +66,12 @@ symmetricPhaseResultantOmegaIsZero :
 symmetricPhaseResultantOmegaIsZero = E.threePhaseCancellationOmega
 
 data Opposition : Set where
-  positive negative : Opposition
+  positive : Opposition
+  negative : Opposition
 
 data EisensteinUnit : Set where
-  plusOne minusOne : EisensteinUnit
+  plusOne : EisensteinUnit
+  minusOne : EisensteinUnit
   plusOmega minusOmega : EisensteinUnit
   plusOmegaSquared minusOmegaSquared : EisensteinUnit
 

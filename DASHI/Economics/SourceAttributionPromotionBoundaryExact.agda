@@ -21,24 +21,24 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data AttributionLayer : Set where
-  primarySourceProposition
-  secondarySourceReport
-  transcriptProposition
-  dashiBoundedInterpretation
-  dashiFormalConstruction
-  dashiTheorem
-  empiricalPromotion
-  systemicClassification
-  : AttributionLayer
+  primarySourceProposition : AttributionLayer
+  secondarySourceReport : AttributionLayer
+  transcriptProposition : AttributionLayer
+  dashiBoundedInterpretation : AttributionLayer
+  dashiFormalConstruction : AttributionLayer
+  dashiTheorem : AttributionLayer
+  empiricalPromotion : AttributionLayer
+  systemicClassification : AttributionLayer
+
 
 data AccessCarrierRole : Set where
-  canonicalCarrier
-  primaryCarrierMirror
-  secondaryReportingCarrier
-  transcriptCarrier
-  accessMirrorOnly
-  userSuppliedCarrier
-  : AccessCarrierRole
+  canonicalCarrier : AccessCarrierRole
+  primaryCarrierMirror : AccessCarrierRole
+  secondaryReportingCarrier : AccessCarrierRole
+  transcriptCarrier : AccessCarrierRole
+  accessMirrorOnly : AccessCarrierRole
+  userSuppliedCarrier : AccessCarrierRole
+
 
 record SourceAttributionReceipt : Set where
   constructor sourceAttributionReceipt

@@ -12,20 +12,27 @@ import DASHI.Biology.Cell.BioelectricNetwork as Bioelectric
 data Lineage : Set where plantLineage animalLineage : Lineage
 
 data ActionLayer : Set where
-  molecularLayer membraneElectricalLayer cellularProcessLayer tissueNetworkLayer : ActionLayer
+  molecularLayer : ActionLayer
+  membraneElectricalLayer : ActionLayer
+  cellularProcessLayer : ActionLayer
+  tissueNetworkLayer : ActionLayer
   wholeOrganismLayer consciousStateLayer : ActionLayer
 
 data SharedCellularSubstrate : Set where
-  ionChannelSubstrate membraneSubstrate cytoskeletalSubstrate : SharedCellularSubstrate
+  ionChannelSubstrate : SharedCellularSubstrate
+  membraneSubstrate : SharedCellularSubstrate
+  cytoskeletalSubstrate : SharedCellularSubstrate
   mitochondrialSubstrate coupledElectricalActivitySubstrate : SharedCellularSubstrate
 
 data PlantAnaestheticEndpoint : Set where
-  plantActionPotentialSuppressed plantOrganMovementSuppressed : PlantAnaestheticEndpoint
+  plantActionPotentialSuppressed : PlantAnaestheticEndpoint
+  plantOrganMovementSuppressed : PlantAnaestheticEndpoint
   plantEndocyticRecyclingAltered plantROSHomeostasisAltered : PlantAnaestheticEndpoint
   plantGerminationOrGrowthAltered plantRecoveryAfterRemoval : PlantAnaestheticEndpoint
 
 data AnimalAnaestheticEndpoint : Set where
-  neuronalExcitabilityAltered synapticTransmissionAltered : AnimalAnaestheticEndpoint
+  neuronalExcitabilityAltered : AnimalAnaestheticEndpoint
+  synapticTransmissionAltered : AnimalAnaestheticEndpoint
   neuralNetworkCoordinationDisrupted immobilityEndpoint amnesiaEndpoint : AnimalAnaestheticEndpoint
   unconsciousnessEndpoint recoveryAfterRemoval : AnimalAnaestheticEndpoint
 
@@ -34,7 +41,10 @@ data CrossKingdomEndpoint : Set where
   animalEndpointTag : AnimalAnaestheticEndpoint → CrossKingdomEndpoint
 
 data EvidentiaryStatus : Set where
-  directlyObserved mechanisticallySupported comparativeHypothesis notEstablished : EvidentiaryStatus
+  directlyObserved : EvidentiaryStatus
+  mechanisticallySupported : EvidentiaryStatus
+  comparativeHypothesis : EvidentiaryStatus
+  notEstablished : EvidentiaryStatus
 
 
 plantAndAnimalDistinct : plantLineage ≡ animalLineage → ⊥

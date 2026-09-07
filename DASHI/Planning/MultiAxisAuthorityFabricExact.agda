@@ -7,11 +7,18 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data AuthorityAxis : Set where
-  landAxis heritageAxis planningAxis infrastructureAxis ecologyAxis : AuthorityAxis
+  landAxis : AuthorityAxis
+  heritageAxis : AuthorityAxis
+  planningAxis : AuthorityAxis
+  infrastructureAxis : AuthorityAxis
+  ecologyAxis : AuthorityAxis
   knowledgeAxis practiceAxis consentAxis : AuthorityAxis
 
 data AuthorityNode : Set where
-  stateAuthority custodialAuthority communityAuthority technicalAuthority : AuthorityNode
+  stateAuthority : AuthorityNode
+  custodialAuthority : AuthorityNode
+  communityAuthority : AuthorityNode
+  technicalAuthority : AuthorityNode
 
 CanDecide : AuthorityNode → AuthorityAxis → Set
 CanDecide stateAuthority planningAxis = ⊤

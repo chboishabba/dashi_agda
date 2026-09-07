@@ -25,12 +25,12 @@ import DASHI.Core.ProofSearchExperimentalParetoCrossPollinationExact as Cross
 import DASHI.Physics.Closure.NSTriadKNDirectSignedCompanionFrontierRound442Exact as R442
 
 data Round443Move : Set where
-  realizeResolventHeat
-  paySignedSpacetimeCross
-  reopenFiniteFold
-  requireSchurIntermediate
-  numericalCrossDiagnosticAsClosure
-  : Round443Move
+  realizeResolventHeat : Round443Move
+  paySignedSpacetimeCross : Round443Move
+  reopenFiniteFold : Round443Move
+  requireSchurIntermediate : Round443Move
+  numericalCrossDiagnosticAsClosure : Round443Move
+
 
 move : Round443Move → Literal.LiteralFrontierMove
 move realizeResolventHeat = record

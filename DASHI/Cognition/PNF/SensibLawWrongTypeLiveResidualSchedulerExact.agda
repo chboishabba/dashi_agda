@@ -22,24 +22,24 @@ import DASHI.Cognition.PNF.SensibLawLegalObserverResidualRefinementBidiExact as 
 ------------------------------------------------------------------------
 
 data LegalLiveResidual : Set where
-  authorityMeaningOpen
-  operationalPrerequisiteOpen
-  sameObjectIncidentWeldOpen
-  applicabilityOpen
-  violationOpen
-  liabilityRemedyOpen
-  consumerActionClosed
-  : LegalLiveResidual
+  authorityMeaningOpen : LegalLiveResidual
+  operationalPrerequisiteOpen : LegalLiveResidual
+  sameObjectIncidentWeldOpen : LegalLiveResidual
+  applicabilityOpen : LegalLiveResidual
+  violationOpen : LegalLiveResidual
+  liabilityRemedyOpen : LegalLiveResidual
+  consumerActionClosed : LegalLiveResidual
+
 
 data LegalDiscriminator : Set where
-  recoverAuthorityMeaningEvidence
-  inspectPowerPrerequisite
-  recoverIncidentWeldEvidence
-  proveApplicability
-  proveViolation
-  inspectLiabilityRemedy
-  stopForConsumer
-  : LegalDiscriminator
+  recoverAuthorityMeaningEvidence : LegalDiscriminator
+  inspectPowerPrerequisite : LegalDiscriminator
+  recoverIncidentWeldEvidence : LegalDiscriminator
+  proveApplicability : LegalDiscriminator
+  proveViolation : LegalDiscriminator
+  inspectLiabilityRemedy : LegalDiscriminator
+  stopForConsumer : LegalDiscriminator
+
 
 preferredDiscriminator : LegalLiveResidual → LegalDiscriminator
 preferredDiscriminator authorityMeaningOpen = recoverAuthorityMeaningEvidence

@@ -69,7 +69,8 @@ open StrictMomentRatioComposition public
 ------------------------------------------------------------------------
 
 data DeterminantOrientation : Set where
-  positiveOrientation negativeOrientation : DeterminantOrientation
+  positiveOrientation : DeterminantOrientation
+  negativeOrientation : DeterminantOrientation
 
 record OrientedMomentDeterminant : Set₁ where
   field

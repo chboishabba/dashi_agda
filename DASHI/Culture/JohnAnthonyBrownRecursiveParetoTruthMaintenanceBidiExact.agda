@@ -16,7 +16,11 @@ import DASHI.Core.SelectiveInvalidationParetoFrontierBidiExact as Pareto
 ------------------------------------------------------------------------
 
 data BrownRoundCandidate : Set where
-  h1Outcome h1Exposure h5Confounding h1Consumer authoritySurface : BrownRoundCandidate
+  h1Outcome : BrownRoundCandidate
+  h1Exposure : BrownRoundCandidate
+  h5Confounding : BrownRoundCandidate
+  h1Consumer : BrownRoundCandidate
+  authoritySurface : BrownRoundCandidate
 
 brownCertificate : BrownRoundCandidate → Pareto.CertificateCandidate
 brownCertificate h1Outcome = Brown.h1OutcomeMeasurementCertificate

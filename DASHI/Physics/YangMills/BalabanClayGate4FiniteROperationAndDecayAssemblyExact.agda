@@ -54,7 +54,8 @@ localizedExpressionPartition dataSet term region
 ------------------------------------------------------------------------
 
 data ExpressionDisposition : Set where
-  regularDisposition boundaryDisposition : ExpressionDisposition
+  regularDisposition : ExpressionDisposition
+  boundaryDisposition : ExpressionDisposition
 
 sameDisposition : ExpressionDisposition → ExpressionDisposition → Bool
 sameDisposition regularDisposition regularDisposition = true

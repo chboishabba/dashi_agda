@@ -28,13 +28,15 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 ------------------------------------------------------------------------
 
 data RepresentedState : Set where
-  representedOnly originatingSubject : RepresentedState
+  representedOnly : RepresentedState
+  originatingSubject : RepresentedState
 
 data CategoryVisibility : Set where
   visibleCategory : CategoryVisibility
 
 data SubjectPosition : Set where
-  representedPosition originatingPosition : SubjectPosition
+  representedPosition : SubjectPosition
+  originatingPosition : SubjectPosition
 
 categoryVisibility : RepresentedState → CategoryVisibility
 categoryVisibility representedOnly = visibleCategory
@@ -60,13 +62,15 @@ categoryVisibilityCannotRecoverSubjectPosition =
 ------------------------------------------------------------------------
 
 data FineSubjectState : Set where
-  fineStateA fineStateB : FineSubjectState
+  fineStateA : FineSubjectState
+  fineStateB : FineSubjectState
 
 data UtteranceSurface : Set where
   sameUtterance : UtteranceSurface
 
 data FinePosition : Set where
-  finePositionA finePositionB : FinePosition
+  finePositionA : FinePosition
+  finePositionB : FinePosition
 
 speechObserver : FineSubjectState → UtteranceSurface
 speechObserver fineStateA = sameUtterance
@@ -91,13 +95,15 @@ speechSurfaceCannotRecoverFinePosition =
 ------------------------------------------------------------------------
 
 data ExchangeState : Set where
-  exchangedObjectState originatingAuthorityState : ExchangeState
+  exchangedObjectState : ExchangeState
+  originatingAuthorityState : ExchangeState
 
 data ExchangeSurface : Set where
   sameExchangeNode : ExchangeSurface
 
 data ExchangeAuthority : Set where
-  representedObjectRole originatingAuthorityRole : ExchangeAuthority
+  representedObjectRole : ExchangeAuthority
+  originatingAuthorityRole : ExchangeAuthority
 
 exchangeSurface : ExchangeState → ExchangeSurface
 exchangeSurface exchangedObjectState = sameExchangeNode

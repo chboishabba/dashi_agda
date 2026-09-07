@@ -13,10 +13,14 @@ import DASHI.Cognition.PNF.UnifiedDecisionDynamicsExact as Decision
 ------------------------------------------------------------------------
 
 data DecisionEpisode : Set where
-  informedWithdrawal blockedCommitment unresolvedInaction : DecisionEpisode
+  informedWithdrawal : DecisionEpisode
+  blockedCommitment : DecisionEpisode
+  unresolvedInaction : DecisionEpisode
 
 data FineDecisionState : Set where
-  informedState blockedCommittedState unresolvedState : FineDecisionState
+  informedState : FineDecisionState
+  blockedCommittedState : FineDecisionState
+  unresolvedState : FineDecisionState
 
 observedAction : DecisionEpisode → Decision.ExecutedAction
 observedAction informedWithdrawal = Decision.supportAction

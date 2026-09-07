@@ -146,7 +146,38 @@ addSpectrum left right =
     (multiplicityE left + multiplicityE right)
 
 data LowJ0To31 : Set where
-  lowJ0 lowJ1 lowJ2 lowJ3 lowJ4 lowJ5 lowJ6 lowJ7 lowJ8 lowJ9 lowJ10 lowJ11 lowJ12 lowJ13 lowJ14 lowJ15 lowJ16 lowJ17 lowJ18 lowJ19 lowJ20 lowJ21 lowJ22 lowJ23 lowJ24 lowJ25 lowJ26 lowJ27 lowJ28 lowJ29 lowJ30 lowJ31 : LowJ0To31
+  lowJ0 : LowJ0To31
+  lowJ1 : LowJ0To31
+  lowJ2 : LowJ0To31
+  lowJ3 : LowJ0To31
+  lowJ4 : LowJ0To31
+  lowJ5 : LowJ0To31
+  lowJ6 : LowJ0To31
+  lowJ7 : LowJ0To31
+  lowJ8 : LowJ0To31
+  lowJ9 : LowJ0To31
+  lowJ10 : LowJ0To31
+  lowJ11 : LowJ0To31
+  lowJ12 : LowJ0To31
+  lowJ13 : LowJ0To31
+  lowJ14 : LowJ0To31
+  lowJ15 : LowJ0To31
+  lowJ16 : LowJ0To31
+  lowJ17 : LowJ0To31
+  lowJ18 : LowJ0To31
+  lowJ19 : LowJ0To31
+  lowJ20 : LowJ0To31
+  lowJ21 : LowJ0To31
+  lowJ22 : LowJ0To31
+  lowJ23 : LowJ0To31
+  lowJ24 : LowJ0To31
+  lowJ25 : LowJ0To31
+  lowJ26 : LowJ0To31
+  lowJ27 : LowJ0To31
+  lowJ28 : LowJ0To31
+  lowJ29 : LowJ0To31
+  lowJ30 : LowJ0To31
+  lowJ31 : LowJ0To31
 
 embedLowJ : LowJ0To31 → Spin.AngularMomentum0To35
 embedLowJ lowJ0 = Spin.j0

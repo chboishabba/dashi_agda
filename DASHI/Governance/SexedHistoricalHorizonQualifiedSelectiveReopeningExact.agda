@@ -152,7 +152,8 @@ longForecastIsNotRetainedBelowDivergence ()
 ------------------------------------------------------------------------
 
 data ReopeningDisposition : Set where
-  retainCertificate reopenCertificate : ReopeningDisposition
+  retainCertificate : ReopeningDisposition
+  reopenCertificate : ReopeningDisposition
 
 reopeningDisposition : ForecastCertificate → ReopeningDisposition
 reopeningDisposition immediateActionCertificate = retainCertificate

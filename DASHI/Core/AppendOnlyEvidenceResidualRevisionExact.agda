@@ -61,19 +61,19 @@ open ConclusionRevision public
 ------------------------------------------------------------------------
 
 data FixtureEvidence : Set where
-  supportObservation
-  defeaterObservation
-  : FixtureEvidence
+  supportObservation : FixtureEvidence
+  defeaterObservation : FixtureEvidence
+
 
 data FixtureHistory : Set where
-  supportOnly
-  supportPlusDefeater
-  : FixtureHistory
+  supportOnly : FixtureHistory
+  supportPlusDefeater : FixtureHistory
+
 
 data FixtureConclusion : Set where
-  promoteCandidate
-  holdCandidate
-  : FixtureConclusion
+  promoteCandidate : FixtureConclusion
+  holdCandidate : FixtureConclusion
+
 
 data FixtureContains : FixtureEvidence → FixtureHistory → Set where
   supportInSupportOnly : FixtureContains supportObservation supportOnly

@@ -58,7 +58,8 @@ data Experience1 : Set where
   livedDistress : Experience1
 
 data Frame1 : Set where
-  selfFailureFrame systemicOrganisationFrame : Frame1
+  selfFailureFrame : Frame1
+  systemicOrganisationFrame : Frame1
 
 data Provenance1 : Set where
   firstPersonProvenance : Provenance1

@@ -13,7 +13,10 @@ open import DASHI.Governance.SafeJustIndicatorSystemExact
 ------------------------------------------------------------------------
 
 data AllocationRule : Set where
-  equalPerCapita grandfathering historicalResponsibility sufficiencyBased : AllocationRule
+  equalPerCapita : AllocationRule
+  grandfathering : AllocationRule
+  historicalResponsibility : AllocationRule
+  sufficiencyBased : AllocationRule
 
 record GlobalBoundary : Set where
   constructor globalBoundary

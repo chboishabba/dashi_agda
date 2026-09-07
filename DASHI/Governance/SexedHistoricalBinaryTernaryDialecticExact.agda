@@ -103,7 +103,8 @@ data HistoricalTritState : Set where
 
 
 data BinaryHistoricalPole : Set where
-  oldPole newPole : BinaryHistoricalPole
+  oldPole : BinaryHistoricalPole
+  newPole : BinaryHistoricalPole
 
 data FineHistoricalStatus : Set where
   inheritedFine : FineHistoricalStatus

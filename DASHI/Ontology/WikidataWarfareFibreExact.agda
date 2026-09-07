@@ -27,7 +27,12 @@ open import Data.Product using (_×_; _,_)
 ------------------------------------------------------------------------
 
 data Entity : Set where
-  warfare conflict typeOfWar typeOfConflict metaclass typeEntity : Entity
+  warfare : Entity
+  conflict : Entity
+  typeOfWar : Entity
+  typeOfConflict : Entity
+  metaclass : Entity
+  typeEntity : Entity
   navalWarfare submarineWarfare economicWarfare : Entity
   mountainWarfare coldWeatherWarfare skiWarfare trenchWarfare : Entity
   staticBattle militaryTactics : Entity
@@ -43,7 +48,11 @@ data Entity : Set where
 ------------------------------------------------------------------------
 
 data WDProperty : Set where
-  p31Prop p279Prop p1963Prop practicedByProp usesProp : WDProperty
+  p31Prop : WDProperty
+  p279Prop : WDProperty
+  p1963Prop : WDProperty
+  practicedByProp : WDProperty
+  usesProp : WDProperty
   partOfProp facetOfProp hasCauseProp hasEffectProp pointInTimeProp : WDProperty
   handledByProp associatedHazardProp fieldOfWorkProp : WDProperty
 

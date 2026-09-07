@@ -38,10 +38,9 @@ canonicalInstituteContinuityBoundary : InstituteContinuityBoundary
 canonicalInstituteContinuityBoundary = institute-continuity-boundary false refl false refl false refl false refl
 
 data InstitutePostDeathReverseTarget : Set where
-  acquirePostDeathOfficers
-  acquireAnnualReports
-  acquireTechnicalIPSchedule
-  acquireApparatusCustody
-  acquireNotebookRepositoryCustody
-  acquirePostDeathResearchActivity
-  : InstitutePostDeathReverseTarget
+  acquirePostDeathOfficers : InstitutePostDeathReverseTarget
+  acquireAnnualReports : InstitutePostDeathReverseTarget
+  acquireTechnicalIPSchedule : InstitutePostDeathReverseTarget
+  acquireApparatusCustody : InstitutePostDeathReverseTarget
+  acquireNotebookRepositoryCustody : InstitutePostDeathReverseTarget
+  acquirePostDeathResearchActivity : InstitutePostDeathReverseTarget

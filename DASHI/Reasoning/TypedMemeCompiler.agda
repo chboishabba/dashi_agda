@@ -12,10 +12,16 @@ import DASHI.Reasoning.SFMVerifiedClaimPresentation as SFM
 ------------------------------------------------------------------------
 
 data DeliveryKind : Set where
-  objectDelivery methodDelivery ecosystemDelivery interpretantDelivery : DeliveryKind
+  objectDelivery : DeliveryKind
+  methodDelivery : DeliveryKind
+  ecosystemDelivery : DeliveryKind
+  interpretantDelivery : DeliveryKind
 
 data CommitKind : Set where
-  featureCommit fixCommit refactorCommit documentationCommit : CommitKind
+  featureCommit : CommitKind
+  fixCommit : CommitKind
+  refactorCommit : CommitKind
+  documentationCommit : CommitKind
   testCommit revertCommit critiqueCommit reinterpretationCommit : CommitKind
 
 record IntellectualState : Set where
@@ -170,10 +176,18 @@ record PersistentDriveSystem (State Drive Action : Set) : Set₁ where
 ------------------------------------------------------------------------
 
 data EpistemicStatus : Set where
-  proved empirical plausible unsupported refuted : EpistemicStatus
+  proved : EpistemicStatus
+  empirical : EpistemicStatus
+  plausible : EpistemicStatus
+  unsupported : EpistemicStatus
+  refuted : EpistemicStatus
 
 data RhetoricalStatus : Set where
-  literal metaphorical satirical parodic wordplay : RhetoricalStatus
+  literal : RhetoricalStatus
+  metaphorical : RhetoricalStatus
+  satirical : RhetoricalStatus
+  parodic : RhetoricalStatus
+  wordplay : RhetoricalStatus
 
 record TypedClaim : Set where
   field

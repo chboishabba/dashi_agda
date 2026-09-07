@@ -24,16 +24,21 @@ data PhysicalState : Set where
   physicalStable : PhysicalState
 
 data ReportedState : Set where
-  reportStable reportEmergency : ReportedState
+  reportStable : ReportedState
+  reportEmergency : ReportedState
 
 data BelievedState : Set where
-  beliefStable beliefEmergency : BelievedState
+  beliefStable : BelievedState
+  beliefEmergency : BelievedState
 
 data SelectedAction : Set where
-  continueOrdinary seekAssistance : SelectedAction
+  continueOrdinary : SelectedAction
+  seekAssistance : SelectedAction
 
 data TelemetryProvenance : Set where
-  independentlyMeasured externallyInjected unresolvedTelemetry : TelemetryProvenance
+  independentlyMeasured : TelemetryProvenance
+  externallyInjected : TelemetryProvenance
+  unresolvedTelemetry : TelemetryProvenance
 
 record ObserverState : Set where
   constructor observer-state

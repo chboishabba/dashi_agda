@@ -79,13 +79,15 @@ zhangPostmaYorkLynch2014 =
 ------------------------------------------------------------------------
 
 data CroppingRelation : Set where
-  isolatedComponentStands coCultivatedThreeSisters : CroppingRelation
+  isolatedComponentStands : CroppingRelation
+  coCultivatedThreeSisters : CroppingRelation
 
 data ComponentInventory : Set where
   maizeBeanSquashPresent : ComponentInventory
 
 data RelationalOutcomeCode : Set where
-  isolatedReferenceOutcome complementarityAdvantageObserved : RelationalOutcomeCode
+  isolatedReferenceOutcome : RelationalOutcomeCode
+  complementarityAdvantageObserved : RelationalOutcomeCode
 
 componentInventory : CroppingRelation → ComponentInventory
 componentInventory _ = maizeBeanSquashPresent

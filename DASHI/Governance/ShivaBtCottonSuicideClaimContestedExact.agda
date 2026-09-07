@@ -18,7 +18,8 @@ import DASHI.Governance.NavdanyaSeedSovereigntyNonseparabilityExact as Seed
 ------------------------------------------------------------------------
 
 data ClaimClass : Set where
-  seedSovereigntyStructural btCottonNationalSuicideCausal : ClaimClass
+  seedSovereigntyStructural : ClaimClass
+  btCottonNationalSuicideCausal : ClaimClass
 
 data ClaimStatus : ClaimClass → Set where
   structurallyPromotable : ClaimStatus seedSovereigntyStructural

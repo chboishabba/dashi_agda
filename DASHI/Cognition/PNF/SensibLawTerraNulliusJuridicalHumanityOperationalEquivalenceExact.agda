@@ -51,10 +51,10 @@ terraNulliusCriterion = juridical-humanity-criterion
 ------------------------------------------------------------------------
 
 data JuridicalHumanityOperationalState : Set where
-  juridicallyHumanConstitutive
-  juridicallyNonHumanNonconstitutive
-  mixedOrUnresolved
-  : JuridicalHumanityOperationalState
+  juridicallyHumanConstitutive : JuridicalHumanityOperationalState
+  juridicallyNonHumanNonconstitutive : JuridicalHumanityOperationalState
+  mixedOrUnresolved : JuridicalHumanityOperationalState
+
 
 classify : JuridicalHumanityCriterion → JuridicalHumanityOperationalState
 classify (juridical-humanity-criterion _ true true true false false false false false) =

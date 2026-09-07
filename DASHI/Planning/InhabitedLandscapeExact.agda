@@ -27,27 +27,45 @@ record InhabitedLandscape : Set₁ where
     ConnectedBy  : Network → Place → Place → Set
 
 data Place : Set where
-  marketGarden communityHall creek : Place
+  marketGarden : Place
+  communityHall : Place
+  creek : Place
 
 data Time : Set where
-  wetSeason drySeason : Time
+  wetSeason : Time
+  drySeason : Time
 
 data Inhabitant : Set where
-  resident farmer visitor : Inhabitant
+  resident : Inhabitant
+  farmer : Inhabitant
+  visitor : Inhabitant
 
 data Resource : Set where
-  water soil roadAccess : Resource
+  water : Resource
+  soil : Resource
+  roadAccess : Resource
 
 data Function : Set where
-  home workplace foodProduction ecologicalPatch commercialEnterprise : Function
+  home : Function
+  workplace : Function
+  foodProduction : Function
+  ecologicalPatch : Function
+  commercialEnterprise : Function
   socialInfrastructure disasterRefuge meetingSpace pollingPlace culturalVenue : Function
   ecosystem drainage boundary recreation floodHazard culturalLandscape : Function
 
 data Activity : Set where
-  dwelling farming gathering emergencyShelter recreationUse : Activity
+  dwelling : Activity
+  farming : Activity
+  gathering : Activity
+  emergencyShelter : Activity
+  recreationUse : Activity
 
 data Network : Set where
-  euclidean road emergency ecological : Network
+  euclidean : Network
+  road : Network
+  emergency : Network
+  ecological : Network
 
 RoleRel : Place → Function → Set
 RoleRel marketGarden home = ⊤

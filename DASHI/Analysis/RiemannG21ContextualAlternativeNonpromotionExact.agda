@@ -93,16 +93,22 @@ data ThreeSourceSetup : Set where
   sameThreeCrystalExperiment : ThreeSourceSetup
 
 data GroupingContext : Set where
-  groupingABGivenC groupingAGivenBC : GroupingContext
+  groupingABGivenC : GroupingContext
+  groupingAGivenBC : GroupingContext
 
 data GroupedAlternative : Set where
-  groupedAB sourceC sourceA groupedBC : GroupedAlternative
+  groupedAB : GroupedAlternative
+  sourceC : GroupedAlternative
+  sourceA : GroupedAlternative
+  groupedBC : GroupedAlternative
 
 data AmplitudeStatus : Set where
-  groupedAmplitudeZero remainingAmplitudeNonzero : AmplitudeStatus
+  groupedAmplitudeZero : AmplitudeStatus
+  remainingAmplitudeNonzero : AmplitudeStatus
 
 data OriginNarrative : Set where
-  naiveOriginNL3 naiveOriginNL1 : OriginNarrative
+  naiveOriginNL3 : OriginNarrative
+  naiveOriginNL1 : OriginNarrative
 
 contextAlternative : GroupingContext → GroupedAlternative → Set
 contextAlternative groupingABGivenC groupedAB = ⊤

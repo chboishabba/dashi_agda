@@ -26,16 +26,16 @@ import DASHI.Physics.Foundations.TSFVFeynmanDerivationObligationsExact as Feynma
 ------------------------------------------------------------------------
 
 data PhysicalCompatibilityStatus : Set where
-  physicallyCompatible
-  physicallyIncompatible
-  physicalCompatibilityUnresolved
-  : PhysicalCompatibilityStatus
+  physicallyCompatible : PhysicalCompatibilityStatus
+  physicallyIncompatible : PhysicalCompatibilityStatus
+  physicalCompatibilityUnresolved : PhysicalCompatibilityStatus
+
 
 data PhysicalRealisationStatus : Set where
-  realisedByAcceptedPhysicalModel
-  counterfactualPhysicalModelOnly
-  physicalRealisationUnresolved
-  : PhysicalRealisationStatus
+  realisedByAcceptedPhysicalModel : PhysicalRealisationStatus
+  counterfactualPhysicalModelOnly : PhysicalRealisationStatus
+  physicalRealisationUnresolved : PhysicalRealisationStatus
+
 
 record CounterfactualPhysicalWeld : Set₁ where
   constructor counterfactual-physical-weld
@@ -101,20 +101,20 @@ viableParameterRegionDoesNotProveMultiverse = refl
 ------------------------------------------------------------------------
 
 data PhysicalCounterfactualNeed : Set where
-  acquirePhysicalModel
-  acquireBoundaryConditions
-  acquireConservationOrConstraintCheck
-  acquireCalibrationEvidence
-  acquireExperimentalDiscriminator
-  acquirePhysicalRealisationReceipt
-  : PhysicalCounterfactualNeed
+  acquirePhysicalModel : PhysicalCounterfactualNeed
+  acquireBoundaryConditions : PhysicalCounterfactualNeed
+  acquireConservationOrConstraintCheck : PhysicalCounterfactualNeed
+  acquireCalibrationEvidence : PhysicalCounterfactualNeed
+  acquireExperimentalDiscriminator : PhysicalCounterfactualNeed
+  acquirePhysicalRealisationReceipt : PhysicalCounterfactualNeed
+
 
 data PhysicalCounterfactualWork : Set where
-  modelWork
-  measurementWork
-  experimentWork
-  realisationWork
-  : PhysicalCounterfactualWork
+  modelWork : PhysicalCounterfactualWork
+  measurementWork : PhysicalCounterfactualWork
+  experimentWork : PhysicalCounterfactualWork
+  realisationWork : PhysicalCounterfactualWork
+
 
 workForPhysicalNeed : PhysicalCounterfactualNeed → PhysicalCounterfactualWork
 workForPhysicalNeed acquirePhysicalModel = modelWork

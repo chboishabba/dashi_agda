@@ -6,7 +6,8 @@ open import DASHI.Cognition.PNF.FreshReplayAuthorityAdmissionExact
 
 
 data TokenRow : Set where
-  rootRow childRow : TokenRow
+  rootRow : TokenRow
+  childRow : TokenRow
 
 freshRoot : AuthorityAdmission TokenRow rootRow
 freshRoot = freshAuthorityAdmission rootRow

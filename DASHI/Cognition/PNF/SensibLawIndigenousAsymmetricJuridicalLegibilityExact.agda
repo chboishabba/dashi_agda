@@ -29,18 +29,18 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 ------------------------------------------------------------------------
 
 data JuridicalRelation : Set where
-  foundationalLandSovereigntyRelation
-  coerciveGovernanceRelation
-  familyRemovalAdministrationRelation
-  welfareInstitutionRelation
-  : JuridicalRelation
+  foundationalLandSovereigntyRelation : JuridicalRelation
+  coerciveGovernanceRelation : JuridicalRelation
+  familyRemovalAdministrationRelation : JuridicalRelation
+  welfareInstitutionRelation : JuridicalRelation
+
 
 data JuridicalLegibility : Set where
-  constitutiveAuthorityLegible
-  governableSubjectLegible
-  serviceRecipientLegible
-  juridicallyErased
-  : JuridicalLegibility
+  constitutiveAuthorityLegible : JuridicalLegibility
+  governableSubjectLegible : JuridicalLegibility
+  serviceRecipientLegible : JuridicalLegibility
+  juridicallyErased : JuridicalLegibility
+
 
 record AsymmetricJuridicalLegibility : Set where
   constructor asymmetric-juridical-legibility
@@ -102,13 +102,15 @@ nonStateProviderDidNotPossessWholeSovereignAuthority = refl
 ------------------------------------------------------------------------
 
 data RelationIndexedState : Set where
-  samePeopleLandRelation samePeopleCoerciveRelation : RelationIndexedState
+  samePeopleLandRelation : RelationIndexedState
+  samePeopleCoerciveRelation : RelationIndexedState
 
 data CoarseHumanPresence : Set where
   humanPopulationPresent : CoarseHumanPresence
 
 data RelationSpecificStanding : Set where
-  sovereigntyConstitutiveStandingDenied coerciveGovernabilityImposed : RelationSpecificStanding
+  sovereigntyConstitutiveStandingDenied : RelationSpecificStanding
+  coerciveGovernabilityImposed : RelationSpecificStanding
 
 humanPresenceObserver : RelationIndexedState → CoarseHumanPresence
 humanPresenceObserver _ = humanPopulationPresent

@@ -183,7 +183,10 @@ privateRelationHeldFixed = refl
 ------------------------------------------------------------------------
 
 data AxisConfiguration : Set where
-  neitherAxis heteronormativeAxis patriarchalAxis jointAxes : AxisConfiguration
+  neitherAxis : AxisConfiguration
+  heteronormativeAxis : AxisConfiguration
+  patriarchalAxis : AxisConfiguration
+  jointAxes : AxisConfiguration
 
 heteronormativeMarginal : AxisConfiguration → Bool
 heteronormativeMarginal neitherAxis = false

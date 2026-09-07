@@ -17,20 +17,20 @@ import DASHI.Law.HerzogPoliceCountryColonialityCrossPollinationExact as Herzog
 ------------------------------------------------------------------------
 
 data CriticalInfrastructureCoordinate : Set where
-  commercialReturn
-  strategicValue
-  securityValue
-  industrialPolicyValue
-  directBeneficiary
-  ultimateCapitalProvider
-  foreignTechnologyDependency
-  domesticManufacturingDependency
-  energyAndWaterDependency
-  geographicConcentration
-  supplyChainSovereignty
-  distributionalIncidence
-  exitOrRetrenchmentPath
-  : CriticalInfrastructureCoordinate
+  commercialReturn : CriticalInfrastructureCoordinate
+  strategicValue : CriticalInfrastructureCoordinate
+  securityValue : CriticalInfrastructureCoordinate
+  industrialPolicyValue : CriticalInfrastructureCoordinate
+  directBeneficiary : CriticalInfrastructureCoordinate
+  ultimateCapitalProvider : CriticalInfrastructureCoordinate
+  foreignTechnologyDependency : CriticalInfrastructureCoordinate
+  domesticManufacturingDependency : CriticalInfrastructureCoordinate
+  energyAndWaterDependency : CriticalInfrastructureCoordinate
+  geographicConcentration : CriticalInfrastructureCoordinate
+  supplyChainSovereignty : CriticalInfrastructureCoordinate
+  distributionalIncidence : CriticalInfrastructureCoordinate
+  exitOrRetrenchmentPath : CriticalInfrastructureCoordinate
+
 
 record CriticalInfrastructureCoordinateReceipt : Set where
   constructor criticalInfrastructureCoordinateReceipt
@@ -69,22 +69,22 @@ open CriticalInfrastructureAudit public
 -- Reverse producer calculus: stronger political-economic claims require the
 -- coordinate that would otherwise have been erased by the umbrella label.
 data CriticalInfrastructureClaim : Set where
-  projectCommerciallySelfSustaining
-  projectStrategicallyNecessary
-  domesticSovereigntyImproved
-  foreignDependencyReduced
-  publicSupportBenefitsDomesticPublic
-  policyBackingRevealsIndependentDemand
-  : CriticalInfrastructureClaim
+  projectCommerciallySelfSustaining : CriticalInfrastructureClaim
+  projectStrategicallyNecessary : CriticalInfrastructureClaim
+  domesticSovereigntyImproved : CriticalInfrastructureClaim
+  foreignDependencyReduced : CriticalInfrastructureClaim
+  publicSupportBenefitsDomesticPublic : CriticalInfrastructureClaim
+  policyBackingRevealsIndependentDemand : CriticalInfrastructureClaim
+
 
 data CriticalInfrastructureProducer : Set where
-  commercialReturnProducer
-  strategicNecessityProducer
-  sovereigntyDependencyProducer
-  foreignDependencyProducer
-  beneficiaryDistributionProducer
-  terminalPayerProducer
-  : CriticalInfrastructureProducer
+  commercialReturnProducer : CriticalInfrastructureProducer
+  strategicNecessityProducer : CriticalInfrastructureProducer
+  sovereigntyDependencyProducer : CriticalInfrastructureProducer
+  foreignDependencyProducer : CriticalInfrastructureProducer
+  beneficiaryDistributionProducer : CriticalInfrastructureProducer
+  terminalPayerProducer : CriticalInfrastructureProducer
+
 
 reverseCriticalInfrastructure :
   CriticalInfrastructureClaim → CriticalInfrastructureProducer

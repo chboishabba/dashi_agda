@@ -29,10 +29,14 @@ import DASHI.Physics.Closure.TSFVBidirectionalCausticBridgeExact as Caustic
 ------------------------------------------------------------------------
 
 data HistoryPattern : Set where
-  abcPattern acbPattern otherPattern : HistoryPattern
+  abcPattern : HistoryPattern
+  acbPattern : HistoryPattern
+  otherPattern : HistoryPattern
 
 data HistorySensitiveChoice : Set where
-  continueABC continueACB deferChoice : HistorySensitiveChoice
+  continueABC : HistorySensitiveChoice
+  continueACB : HistorySensitiveChoice
+  deferChoice : HistorySensitiveChoice
 
 historyPattern : History.History3 → HistoryPattern
 historyPattern

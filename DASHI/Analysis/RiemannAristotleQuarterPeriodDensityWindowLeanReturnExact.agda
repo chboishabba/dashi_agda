@@ -27,7 +27,8 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data QuarterDensityAuthority : Set where
-  checkedLeanTheorem openAgdaTransport : QuarterDensityAuthority
+  checkedLeanTheorem : QuarterDensityAuthority
+  openAgdaTransport : QuarterDensityAuthority
 
 record QuarterPeriodDensityWindowReturn : Set where
   constructor quarter-period-density-window-return

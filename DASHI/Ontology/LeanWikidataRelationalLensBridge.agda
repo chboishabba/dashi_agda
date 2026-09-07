@@ -32,7 +32,8 @@ import DASHI.Reasoning.TernaryComparisonSynthesisExact as Synthesis
 ------------------------------------------------------------------------
 
 data ResolvedPolarity : Set where
-  resolvedAgainst resolvedFor : ResolvedPolarity
+  resolvedAgainst : ResolvedPolarity
+  resolvedFor : ResolvedPolarity
 
 resolvedEpistemicState : ResolvedPolarity → Epistemic.EpistemicTrit
 resolvedEpistemicState resolvedAgainst = Epistemic.contradicted
@@ -139,7 +140,8 @@ sourceMismatchCannotResolveFor contract label objectVerdict refs ()
 ------------------------------------------------------------------------
 
 data LeanEvidenceLens : Set where
-  leftEvidenceLens rightEvidenceLens : LeanEvidenceLens
+  leftEvidenceLens : LeanEvidenceLens
+  rightEvidenceLens : LeanEvidenceLens
 
 record ResolvedLeanComparison : Set where
   constructor resolvedLeanComparison

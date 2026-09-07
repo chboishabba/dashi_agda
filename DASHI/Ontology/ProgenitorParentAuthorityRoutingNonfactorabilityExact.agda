@@ -15,7 +15,8 @@ open import DASHI.Ontology.ProgenitorParentProjectionFibre
 ------------------------------------------------------------------------
 
 data ParentAuthorityRoute : Set where
-  noParentalAuthorityRoute legalParentDecisionRoute : ParentAuthorityRoute
+  noParentalAuthorityRoute : ParentAuthorityRoute
+  legalParentDecisionRoute : ParentAuthorityRoute
 
 routeParentAuthority : ParentCarrier → ParentAuthorityRoute
 routeParentAuthority carrier with legalParent (carrierRelation carrier)

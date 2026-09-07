@@ -33,7 +33,11 @@ open import Relation.Binary.PropositionalEquality using (subst; trans)
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteDyadicSupportCountExact as Support
 
 data Axis5 : Set where
-  minusTwo minusOne origin plusOne plusTwo : Axis5
+  minusTwo : Axis5
+  minusOne : Axis5
+  origin : Axis5
+  plusOne : Axis5
+  plusTwo : Axis5
 
 axis5 : List Axis5
 axis5 = minusTwo ∷ minusOne ∷ origin ∷ plusOne ∷ plusTwo ∷ []

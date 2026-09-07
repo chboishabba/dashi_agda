@@ -13,13 +13,19 @@ import DASHI.Foundations.RecursiveRadixHypervoxel as Hyper
 ------------------------------------------------------------------------
 
 data ReachLayer : Set where
-  worldLayer perceivedLayer accessibleLayer actionableLayer : ReachLayer
+  worldLayer : ReachLayer
+  perceivedLayer : ReachLayer
+  accessibleLayer : ReachLayer
+  actionableLayer : ReachLayer
 
 data BodyContext : Set where
-  regulatedContext mobilisedContext : BodyContext
+  regulatedContext : BodyContext
+  mobilisedContext : BodyContext
 
 data FutureBranch : Set where
-  flexiblePlanning seekSupport defensiveWithdrawal : FutureBranch
+  flexiblePlanning : FutureBranch
+  seekSupport : FutureBranch
+  defensiveWithdrawal : FutureBranch
 
 live : ReachLayer → BodyContext → FutureBranch → Bool
 
@@ -62,7 +68,9 @@ sameWorldButBodyChangesAccessibleSupport :
 sameWorldButBodyChangesAccessibleSupport ()
 
 data AccessibleSupervoxel : Set where
-  broadAccessible contractedAccessible reopenedAccessible : AccessibleSupervoxel
+  broadAccessible : AccessibleSupervoxel
+  contractedAccessible : AccessibleSupervoxel
+  reopenedAccessible : AccessibleSupervoxel
 
 liveFibreCount : AccessibleSupervoxel → Nat
 liveFibreCount broadAccessible = 3

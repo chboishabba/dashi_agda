@@ -89,7 +89,9 @@ import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
 data MarkedResponseKind : Set where
-  betaMark hessianMark compositeMark : MarkedResponseKind
+  betaMark : MarkedResponseKind
+  hessianMark : MarkedResponseKind
+  compositeMark : MarkedResponseKind
 
 record SharedMarkedAnalyticShellControl
     (Scale Volume Root : Set) : Set₁ where

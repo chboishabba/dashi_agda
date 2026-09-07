@@ -18,7 +18,9 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data SourceKind : Set where
-  peerReviewedArticle bookChapter book : SourceKind
+  peerReviewedArticle : SourceKind
+  bookChapter : SourceKind
+  book : SourceKind
 
 data SourceRole : Set where
   metaphorNetworkStructure : SourceRole

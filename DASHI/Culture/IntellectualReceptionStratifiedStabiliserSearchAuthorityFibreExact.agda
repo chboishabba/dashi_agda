@@ -34,7 +34,8 @@ data SearchFibreCode : Set where
   admittedInvestigation : SearchFibreCode
 
 data GovernanceGateCode : Set where
-  authorityPending authorityOpen : GovernanceGateCode
+  authorityPending : GovernanceGateCode
+  authorityOpen : GovernanceGateCode
 
 data StabiliserNextMove : Set where
   inspectAuthorityResidual : StabiliserNextMove

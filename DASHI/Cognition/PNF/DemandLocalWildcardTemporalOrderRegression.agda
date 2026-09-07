@@ -22,7 +22,9 @@ data Restricted : Set where
   earlierOnly : Restricted
 
 data Quotient : Set where
-  earlierObject laterObject noObject : Quotient
+  earlierObject : Quotient
+  laterObject : Quotient
+  noObject : Quotient
 
 restrictFineDemo : Fine → Restricted
 restrictFineDemo bothOccurrences = earlierOnly

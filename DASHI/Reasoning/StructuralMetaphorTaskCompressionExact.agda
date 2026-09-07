@@ -98,19 +98,22 @@ compressionFailureBlocksDescent witness =
 ------------------------------------------------------------------------
 
 data FineRelationalState : Set where
-  distinctButReciprocal distinctAndIndependent : FineRelationalState
+  distinctButReciprocal : FineRelationalState
+  distinctAndIndependent : FineRelationalState
 
 data BinarySlogan : Set where
   merelyDifferent : BinarySlogan
 
 data StructuralCode : Set where
-  heldRelationCode independentCode : StructuralCode
+  heldRelationCode : StructuralCode
+  independentCode : StructuralCode
 
 data RelationalQuestion : Set where
   relationQuestion : RelationalQuestion
 
 data RelationalAnswer : Set where
-  relationRetained relationAbsent : RelationalAnswer
+  relationRetained : RelationalAnswer
+  relationAbsent : RelationalAnswer
 
 binarySlogan : FineRelationalState → BinarySlogan
 binarySlogan _ = merelyDifferent

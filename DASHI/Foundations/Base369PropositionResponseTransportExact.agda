@@ -18,13 +18,21 @@ open import DASHI.Foundations.SSPTritCarrier using (SSPTrit; sspPosOne)
 open import DASHI.Foundations.Base369SignedMembershipExact using (ZeroKind)
 
 data DeliberativeStatus : Set where
-  excluded live mightConsider willConsider : DeliberativeStatus
+  excluded : DeliberativeStatus
+  live : DeliberativeStatus
+  mightConsider : DeliberativeStatus
+  willConsider : DeliberativeStatus
 
 data SelectionStatus : Set where
-  unselected preferred intended selected : SelectionStatus
+  unselected : SelectionStatus
+  preferred : SelectionStatus
+  intended : SelectionStatus
+  selected : SelectionStatus
 
 data ObligationStatus : Set where
-  noObligation selfPlan commitmentToAnother : ObligationStatus
+  noObligation : ObligationStatus
+  selfPlan : ObligationStatus
+  commitmentToAnother : ObligationStatus
 
 record FactoredModality : Set where
   constructor factoredModality
@@ -58,10 +66,15 @@ record DecisionEpisode : Set₁ where
 open DecisionEpisode public
 
 data CapacityState : Set where
-  noCapacity uncertainCapacity sufficientCapacity : CapacityState
+  noCapacity : CapacityState
+  uncertainCapacity : CapacityState
+  sufficientCapacity : CapacityState
 
 data ProvenanceKind : Set where
-  participantProduced observerAttributed recordingWitnessed reconstructed : ProvenanceKind
+  participantProduced : ProvenanceKind
+  observerAttributed : ProvenanceKind
+  recordingWitnessed : ProvenanceKind
+  reconstructed : ProvenanceKind
 
 record ResponseState : Set where
   constructor responseState

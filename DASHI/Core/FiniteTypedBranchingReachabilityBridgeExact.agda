@@ -127,7 +127,10 @@ supportedActionGivesOneStepReachability vocabulary action =
 ------------------------------------------------------------------------
 
 data RouteType : Set where
-  trapStart escapeStart trapped escapeGoal : RouteType
+  trapStart : RouteType
+  escapeStart : RouteType
+  trapped : RouteType
+  escapeGoal : RouteType
 
 routeTypes : List RouteType
 routeTypes = trapStart ∷ escapeStart ∷ trapped ∷ escapeGoal ∷ []
@@ -161,7 +164,9 @@ sameStartRowRegime :
 sameStartRowRegime = refl
 
 data RouteAction : Set where
-  enterTrap escapeDirectly stayTrapped : RouteAction
+  enterTrap : RouteAction
+  escapeDirectly : RouteAction
+  stayTrapped : RouteAction
 
 routeActionSource : RouteAction → RouteType
 routeActionSource enterTrap = trapStart
@@ -261,7 +266,8 @@ canonicalTypedBranchTrapBarrier =
 ------------------------------------------------------------------------
 
 data GoalReachabilityCode : Set where
-  goalBlocked goalReachable : GoalReachabilityCode
+  goalBlocked : GoalReachabilityCode
+  goalReachable : GoalReachabilityCode
 
 goalReachabilityCode : RouteType → GoalReachabilityCode
 goalReachabilityCode trapStart = goalBlocked
@@ -359,7 +365,9 @@ escapeAdvanceKernelSupported :
 escapeAdvanceKernelSupported = positive
 
 data RouteObservation : Set where
-  currentBand trapBand goalBand : RouteObservation
+  currentBand : RouteObservation
+  trapBand : RouteObservation
+  goalBand : RouteObservation
 
 routeObservation : RouteType → RouteObservation
 routeObservation trapStart = currentBand

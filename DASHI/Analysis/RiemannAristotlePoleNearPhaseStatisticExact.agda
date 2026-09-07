@@ -116,13 +116,15 @@ phaseControlFromDirectFiniteProducer d =
 ------------------------------------------------------------------------
 
 data PhaseStatisticSearchPayment : Set where
-  constructSecondPhaseStatisticCarrier
-  compilePhaseStatisticFromDirectProducer
-  proveActualDirectFiniteEvaluation
-  : PhaseStatisticSearchPayment
+  constructSecondPhaseStatisticCarrier : PhaseStatisticSearchPayment
+  compilePhaseStatisticFromDirectProducer : PhaseStatisticSearchPayment
+  proveActualDirectFiniteEvaluation : PhaseStatisticSearchPayment
+
 
 data PaymentState : Set where
-  pruned downstream live : PaymentState
+  pruned : PaymentState
+  downstream : PaymentState
+  live : PaymentState
 
 paymentState : PhaseStatisticSearchPayment → PaymentState
 paymentState constructSecondPhaseStatisticCarrier = pruned

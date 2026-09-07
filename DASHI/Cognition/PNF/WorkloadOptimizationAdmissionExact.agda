@@ -21,7 +21,9 @@ open import DASHI.Cognition.PNF.ComplexityArithmetic using (_≤ᶜ_)
 ------------------------------------------------------------------------
 
 data BackendFamily : Set where
-  packedScalar batchVector nativeSWAR : BackendFamily
+  packedScalar : BackendFamily
+  batchVector : BackendFamily
+  nativeSWAR : BackendFamily
   accelerator : BackendFamily
 
 record WorkloadGeometry : Set₁ where

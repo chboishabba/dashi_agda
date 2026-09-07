@@ -90,10 +90,12 @@ namedOrientedSymmetry symmetry = orientedSymmetry
   (namedOrientationReverses symmetry)
 
 data JetSign : Set where
-  positiveJet negativeJet : JetSign
+  positiveJet : JetSign
+  negativeJet : JetSign
 
 data GroupInversionFlag : Set where
-  directGroupElement inverseGroupElement : GroupInversionFlag
+  directGroupElement : GroupInversionFlag
+  inverseGroupElement : GroupInversionFlag
 
 record PlaquetteVariationFrame : Set where
   constructor variationFrame

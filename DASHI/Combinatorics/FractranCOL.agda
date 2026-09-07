@@ -41,7 +41,9 @@ inc1 ev i = set ev i (suc (get ev i))
 -- 1/7             : requires lane(7)>0, then lane(7)--
 
 data Rule : Set where
-  r1122 r53 r17 : Rule
+  r1122 : Rule
+  r53 : Rule
+  r17 : Rule
 
 apply : Rule → EV5 → Maybe EV5
 apply r1122 ev = dec1 ev 0

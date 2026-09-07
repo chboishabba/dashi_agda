@@ -9,7 +9,9 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data BalancedDigit : Set where
-  neg zeroDigit pos : BalancedDigit
+  neg : BalancedDigit
+  zeroDigit : BalancedDigit
+  pos : BalancedDigit
 
 record TriadPattern : Set where
   constructor triad

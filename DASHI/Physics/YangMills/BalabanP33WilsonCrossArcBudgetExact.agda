@@ -49,7 +49,12 @@ import Data.Rational.Tactic.RingSolver as ℚRing
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 data WilsonCrossPair6 : Set where
-  pair01 pair02 pair03 pair12 pair13 pair23 : WilsonCrossPair6
+  pair01 : WilsonCrossPair6
+  pair02 : WilsonCrossPair6
+  pair03 : WilsonCrossPair6
+  pair12 : WilsonCrossPair6
+  pair13 : WilsonCrossPair6
+  pair23 : WilsonCrossPair6
 
 wilsonCrossPairs6 : List WilsonCrossPair6
 wilsonCrossPairs6 =

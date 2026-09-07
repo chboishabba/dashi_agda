@@ -18,10 +18,12 @@ import DASHI.Governance.ProvisioningGeometryExact as Provisioning
 ------------------------------------------------------------------------
 
 data CapabilitySurface : Set where
-  restrictedCapability broadCapability : CapabilitySurface
+  restrictedCapability : CapabilitySurface
+  broadCapability : CapabilitySurface
 
 data Functioning : Set where
-  unmetFunctioning metFunctioning : Functioning
+  unmetFunctioning : Functioning
+  metFunctioning : Functioning
 
 record ProvisionedLifeState : Set where
   constructor provisionedLifeState

@@ -8,16 +8,26 @@ open import DASHI.Core.ProofLens
 -- Ramsey / correlated-colouring domain.
 
 data RamseyState : Set where
-  latentGeometry binaryColouring cliqueSurface : RamseyState
+  latentGeometry : RamseyState
+  binaryColouring : RamseyState
+  cliqueSurface : RamseyState
 
 data RamseyOperator : Set where
-  sampleEmbedding thresholdDistance countCliques restrictFibre : RamseyOperator
+  sampleEmbedding : RamseyOperator
+  thresholdDistance : RamseyOperator
+  countCliques : RamseyOperator
+  restrictFibre : RamseyOperator
 
 data RamseyObservable : Set where
-  redClique blueClique expectedCliqueCount lowerBound : RamseyObservable
+  redClique : RamseyObservable
+  blueClique : RamseyObservable
+  expectedCliqueCount : RamseyObservable
+  lowerBound : RamseyObservable
 
 data RamseyResidual : Set where
-  monochromaticCliqueRisk diagonalGap constructionGap : RamseyResidual
+  monochromaticCliqueRisk : RamseyResidual
+  diagonalGap : RamseyResidual
+  constructionGap : RamseyResidual
 
 RamseyRole : FormalRole → Set
 RamseyRole carrierSpaceRole    = RamseyState
@@ -53,16 +63,27 @@ ramseyDomain = record { Carrier = RamseyState ; RoleType = RamseyRole }
 -- Cross-jurisdiction regulation domain.
 
 data RegulatoryState : Set where
-  hiddenActivity documentedPolicy auditedActivity promotedCompliance : RegulatoryState
+  hiddenActivity : RegulatoryState
+  documentedPolicy : RegulatoryState
+  auditedActivity : RegulatoryState
+  promotedCompliance : RegulatoryState
 
 data RegulatoryOperator : Set where
-  projectJurisdiction compareObligations auditEvidence computeConflict : RegulatoryOperator
+  projectJurisdiction : RegulatoryOperator
+  compareObligations : RegulatoryOperator
+  auditEvidence : RegulatoryOperator
+  computeConflict : RegulatoryOperator
 
 data RegulatoryObservable : Set where
-  obligation permission prohibition reportingRequirement : RegulatoryObservable
+  obligation : RegulatoryObservable
+  permission : RegulatoryObservable
+  prohibition : RegulatoryObservable
+  reportingRequirement : RegulatoryObservable
 
 data RegulatoryResidual : Set where
-  jurisdictionConflict missingEvidence implementationUnknown : RegulatoryResidual
+  jurisdictionConflict : RegulatoryResidual
+  missingEvidence : RegulatoryResidual
+  implementationUnknown : RegulatoryResidual
 
 RegulatoryRole : FormalRole → Set
 RegulatoryRole carrierSpaceRole    = RegulatoryState
@@ -98,16 +119,28 @@ regulatoryDomain = record { Carrier = RegulatoryState ; RoleType = RegulatoryRol
 -- Physical/perceptual/semiotic colour domain.
 
 data ColourLayer : Set where
-  physicalColour perceptualColour coordinateColour semioticColour : ColourLayer
+  physicalColour : ColourLayer
+  perceptualColour : ColourLayer
+  coordinateColour : ColourLayer
+  semioticColour : ColourLayer
 
 data ColourOperator : Set where
-  spectralResponse opponentProjection coordinateEncode interpretSign : ColourOperator
+  spectralResponse : ColourOperator
+  opponentProjection : ColourOperator
+  coordinateEncode : ColourOperator
+  interpretSign : ColourOperator
 
 data ColourObservable : Set where
-  wavelength opponentCoordinate colourLabel signAssociation : ColourObservable
+  wavelength : ColourObservable
+  opponentCoordinate : ColourObservable
+  colourLabel : ColourObservable
+  signAssociation : ColourObservable
 
 data ColourResidual : Set where
-  metamerism observerVariance culturalVariance hiddenSpectrum : ColourResidual
+  metamerism : ColourResidual
+  observerVariance : ColourResidual
+  culturalVariance : ColourResidual
+  hiddenSpectrum : ColourResidual
 
 ColourRole : FormalRole → Set
 ColourRole carrierSpaceRole    = ColourLayer
@@ -143,16 +176,31 @@ colourUnifiedDomain = record { Carrier = ColourLayer ; RoleType = ColourRole }
 -- Cybersyn / viable feedback governance domain.
 
 data CyberneticState : Set where
-  realActivity sensedState modelState decisionState updatedState : CyberneticState
+  realActivity : CyberneticState
+  sensedState : CyberneticState
+  modelState : CyberneticState
+  decisionState : CyberneticState
+  updatedState : CyberneticState
 
 data CyberneticOperator : Set where
-  sense normalize simulate decide intervene feedback : CyberneticOperator
+  sense : CyberneticOperator
+  normalize : CyberneticOperator
+  simulate : CyberneticOperator
+  decide : CyberneticOperator
+  intervene : CyberneticOperator
+  feedback : CyberneticOperator
 
 data CyberneticObservable : Set where
-  productionSignal wellbeingSignal anomalySignal modelPrediction : CyberneticObservable
+  productionSignal : CyberneticObservable
+  wellbeingSignal : CyberneticObservable
+  anomalySignal : CyberneticObservable
+  modelPrediction : CyberneticObservable
 
 data CyberneticResidual : Set where
-  unmeasuredVariable sabotageSignal modelError legitimacyGap : CyberneticResidual
+  unmeasuredVariable : CyberneticResidual
+  sabotageSignal : CyberneticResidual
+  modelError : CyberneticResidual
+  legitimacyGap : CyberneticResidual
 
 CyberneticRole : FormalRole → Set
 CyberneticRole carrierSpaceRole    = CyberneticState

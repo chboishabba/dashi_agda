@@ -20,10 +20,13 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Closure.NSTriadKNTaoFrozenLegParaproductProgram as Tao
 
 data PhysicalLeg : Set where
-  leftMode rightMode outputMode : PhysicalLeg
+  leftMode : PhysicalLeg
+  rightMode : PhysicalLeg
+  outputMode : PhysicalLeg
 
 data ProjectorPlacement : Set where
-  originalOutputProjector transposeOutputProjector : ProjectorPlacement
+  originalOutputProjector : ProjectorPlacement
+  transposeOutputProjector : ProjectorPlacement
 
 data DerivativeDescription : Set where
   derivativeOnLeftMode : DerivativeDescription
@@ -32,7 +35,9 @@ data DerivativeDescription : Set where
   derivativeRemainsOnHighInput : DerivativeDescription
 
 data SobolevTarget : Set where
-  leftTarget rightTarget outputTarget : SobolevTarget
+  leftTarget : SobolevTarget
+  rightTarget : SobolevTarget
+  outputTarget : SobolevTarget
 
 frozenPhysicalLeg : Tao.FrozenLeg → PhysicalLeg
 frozenPhysicalLeg Tao.freezeOutput = outputMode

@@ -82,7 +82,8 @@ positivePartCannotPreserveAllSignedCancellations certificate refl =
 ------------------------------------------------------------------------
 
 data KernelRole : Set where
-  exactSignedOperator positiveMajorantOperator : KernelRole
+  exactSignedOperator : KernelRole
+  positiveMajorantOperator : KernelRole
 
 positivePartRole : KernelRole
 positivePartRole = positiveMajorantOperator

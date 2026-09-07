@@ -32,7 +32,9 @@ open import Data.Product using (Σ; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 data CentralPhase3 : Set where
-  phaseOne phaseZeta phaseZetaSquared : CentralPhase3
+  phaseOne : CentralPhase3
+  phaseZeta : CentralPhase3
+  phaseZetaSquared : CentralPhase3
 
 invertPhase : CentralPhase3 → CentralPhase3
 invertPhase phaseOne = phaseOne

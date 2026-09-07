@@ -32,13 +32,15 @@ data PhysicalAction : Set where
   physicalMove : PhysicalAction
 
 data ActionKind : Set where
-  simulationKind physicalKind : ActionKind
+  simulationKind : ActionKind
+  physicalKind : ActionKind
 
 data HardwareCommand : Set where
   compiledPhysicalMove : HardwareCommand
 
 data PhysicalOutcome : Set where
-  intendedOutcome alternateOutcome : PhysicalOutcome
+  intendedOutcome : PhysicalOutcome
+  alternateOutcome : PhysicalOutcome
 
 data SensorObservation : Set where
   sameSensorReading : SensorObservation
@@ -162,7 +164,8 @@ promoteSimulation simulateMove _ = physicalMove
 ------------------------------------------------------------------------
 
 data CapabilityState : Set where
-  boundedCapability expandedCapability : CapabilityState
+  boundedCapability : CapabilityState
+  expandedCapability : CapabilityState
 
 data ExternalDelegation : Set where
   explicitExternalDelegation : ExternalDelegation
@@ -200,7 +203,8 @@ agentActionPreservesShutdownAuthority = refl
 ------------------------------------------------------------------------
 
 data DeviceState : Set where
-  calibratedDevice degradedDevice : DeviceState
+  calibratedDevice : DeviceState
+  degradedDevice : DeviceState
 
 physicalEffect : DeviceState → HardwareCommand → PhysicalOutcome
 physicalEffect calibratedDevice compiledPhysicalMove = intendedOutcome

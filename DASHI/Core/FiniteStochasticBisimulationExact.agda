@@ -90,13 +90,16 @@ kernelDefectContradictsBisimulation bisimulation defect =
 ------------------------------------------------------------------------
 
 data DemoState : Set where
-  hiddenFast hiddenSlow : DemoState
+  hiddenFast : DemoState
+  hiddenSlow : DemoState
 
 data DemoAction : Set where
   storm : DemoAction
 
 data DemoCoarse : Set where
-  sameNow lowLoad highLoad : DemoCoarse
+  sameNow : DemoCoarse
+  lowLoad : DemoCoarse
+  highLoad : DemoCoarse
 
 projectDemo : DemoState → DemoCoarse
 projectDemo hiddenFast = sameNow

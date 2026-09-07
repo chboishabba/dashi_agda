@@ -12,11 +12,11 @@ import DASHI.Law.SecurityThreatSemanticBroadeningTopologyExact as Broad
 ------------------------------------------------------------------------
 
 data EscalationLevel : Set where
-  preservedLevel
-  narrowedLevel
-  broadenedScopeLevel
-  broadenedPredicateLevel
-  collectiveEnemyLevel
+  preservedLevel : EscalationLevel
+  narrowedLevel : EscalationLevel
+  broadenedScopeLevel : EscalationLevel
+  broadenedPredicateLevel : EscalationLevel
+  collectiveEnemyLevel : EscalationLevel
   terminalEnemyLevel : EscalationLevel
 
 levelCode : EscalationLevel → ℕ
@@ -70,19 +70,19 @@ syntheticPathStrict = refl
 ------------------------------------------------------------------------
 
 data EscalationClaim : Set where
-  semanticEscalationOccurred
-  escalationWasEvidenceJustified
-  escalationWasMonotoneAcrossInstitutions
-  collectiveEnemyStageReached
-  terminalEnemyStageReached
+  semanticEscalationOccurred : EscalationClaim
+  escalationWasEvidenceJustified : EscalationClaim
+  escalationWasMonotoneAcrossInstitutions : EscalationClaim
+  collectiveEnemyStageReached : EscalationClaim
+  terminalEnemyStageReached : EscalationClaim
   escalationWasIdeologicallyMotivated : EscalationClaim
 
 data EscalationProducer : Set where
-  semanticTransformationCorpusProducer
-  stageSpecificEvidenceAdequacyProducer
-  orderedSameObjectPathProducer
-  collectiveEnemyClassificationProducer
-  terminalisationCommandConductProducer
+  semanticTransformationCorpusProducer : EscalationProducer
+  stageSpecificEvidenceAdequacyProducer : EscalationProducer
+  orderedSameObjectPathProducer : EscalationProducer
+  collectiveEnemyClassificationProducer : EscalationProducer
+  terminalisationCommandConductProducer : EscalationProducer
   motiveCarrierProducer : EscalationProducer
 
 reverseEscalation : EscalationClaim → EscalationProducer

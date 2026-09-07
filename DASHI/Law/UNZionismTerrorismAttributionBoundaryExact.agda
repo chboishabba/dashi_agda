@@ -11,20 +11,20 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data UNSourceRole : Set where
-  generalAssemblyResolution
-  memberStateLetter
-  memberStateSpeech
-  ploStatement
-  unHistoricalCompilation
-  unSeminarContribution
+  generalAssemblyResolution : UNSourceRole
+  memberStateLetter : UNSourceRole
+  memberStateSpeech : UNSourceRole
+  ploStatement : UNSourceRole
+  unHistoricalCompilation : UNSourceRole
+  unSeminarContribution : UNSourceRole
   dashiAttributionConclusion : UNSourceRole
 
 data UNTerrorismProposition : Set where
-  unga3379ZionismRacism
-  irgunSternDescribedAsZionistTerroristGroups
-  zionismAchievedStatehoodThroughTerrorismClaim
-  israelPractisesStateTerrorismClaim
-  unFormallyDesignatedZionismTerroristIdeology
+  unga3379ZionismRacism : UNTerrorismProposition
+  irgunSternDescribedAsZionistTerroristGroups : UNTerrorismProposition
+  zionismAchievedStatehoodThroughTerrorismClaim : UNTerrorismProposition
+  israelPractisesStateTerrorismClaim : UNTerrorismProposition
+  unFormallyDesignatedZionismTerroristIdeology : UNTerrorismProposition
   unFormallyDesignatedZionismTerroristSympathyGroup : UNTerrorismProposition
 
 record UNAttributionReceipt : Set where

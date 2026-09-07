@@ -27,7 +27,9 @@ n = 256
 q = 3329
 
 data MLKEMParameterName : Set where
-  mlKem512 mlKem768 mlKem1024 : MLKEMParameterName
+  mlKem512 : MLKEMParameterName
+  mlKem768 : MLKEMParameterName
+  mlKem1024 : MLKEMParameterName
 
 record MLKEMParameters : Set where
   constructor mlkemParameters
@@ -108,7 +110,15 @@ failure1024 = refl
 ------------------------------------------------------------------------
 
 data FIPS203Algorithm : Set where
-  kPkeKeyGen kPkeEncrypt kPkeDecrypt mlKemKeyGenInternal mlKemEncapsInternal mlKemDecapsInternal mlKemKeyGen mlKemEncaps mlKemDecaps : FIPS203Algorithm
+  kPkeKeyGen : FIPS203Algorithm
+  kPkeEncrypt : FIPS203Algorithm
+  kPkeDecrypt : FIPS203Algorithm
+  mlKemKeyGenInternal : FIPS203Algorithm
+  mlKemEncapsInternal : FIPS203Algorithm
+  mlKemDecapsInternal : FIPS203Algorithm
+  mlKemKeyGen : FIPS203Algorithm
+  mlKemEncaps : FIPS203Algorithm
+  mlKemDecaps : FIPS203Algorithm
 
 algorithm13IsKPKEKeyGen : FIPS203Algorithm
 algorithm13IsKPKEKeyGen = kPkeKeyGen

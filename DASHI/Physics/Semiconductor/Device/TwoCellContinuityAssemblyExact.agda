@@ -32,10 +32,13 @@ import DASHI.Biology.Physical.FiniteReactionDiffusionConservationExact as RD
 ------------------------------------------------------------------------
 
 data InteriorCell : Set where
-  cellA cellB : InteriorCell
+  cellA : InteriorCell
+  cellB : InteriorCell
 
 data AssemblyFace : Set where
-  boundaryLeft sharedFace boundaryRight : AssemblyFace
+  boundaryLeft : AssemblyFace
+  sharedFace : AssemblyFace
+  boundaryRight : AssemblyFace
 
 record CarrierControlVolume : Set where
   constructor carrierControlVolume

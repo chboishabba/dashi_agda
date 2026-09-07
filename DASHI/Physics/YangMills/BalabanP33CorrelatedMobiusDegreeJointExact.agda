@@ -117,7 +117,10 @@ sumNonemptyByDegree value =
       Cube.tripleSubsets4 Cube.quarticSubsets4 value)
 
 data MobiusDegree : Set where
-  degree1 degree2 degree3 degree4 : MobiusDegree
+  degree1 : MobiusDegree
+  degree2 : MobiusDegree
+  degree3 : MobiusDegree
+  degree4 : MobiusDegree
 
 degreeSubsets : MobiusDegree → List Cube.Subset4
 degreeSubsets degree1 = Cube.singletonSubsets4

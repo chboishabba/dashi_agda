@@ -20,7 +20,9 @@ open import DASHI.Physics.Closure.NSWall1CanonicalFiniteSchur
 ------------------------------------------------------------------------
 
 data CanonicalPair01 : Set where
-  pair110010 pair101001 pair011001 : CanonicalPair01
+  pair110010 : CanonicalPair01
+  pair101001 : CanonicalPair01
+  pair011001 : CanonicalPair01
 
 canonicalPairs01 : List CanonicalPair01
 canonicalPairs01 = pair110010 ∷ pair101001 ∷ pair011001 ∷ []
@@ -100,7 +102,9 @@ canonicalPair01Certificate = record
 ------------------------------------------------------------------------
 
 data CanonicalPair10 : Set where
-  pair010110 pair001101 pair001011 : CanonicalPair10
+  pair010110 : CanonicalPair10
+  pair001101 : CanonicalPair10
+  pair001011 : CanonicalPair10
 
 canonicalPairs10 : List CanonicalPair10
 canonicalPairs10 = pair010110 ∷ pair001101 ∷ pair001011 ∷ []

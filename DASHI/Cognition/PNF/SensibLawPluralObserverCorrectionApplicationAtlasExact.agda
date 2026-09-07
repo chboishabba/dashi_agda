@@ -26,9 +26,9 @@ import DASHI.Cognition.PNF.SensibLawBillyRemedyActuationTwoEyedPOSIWIDExact as B
 ------------------------------------------------------------------------
 
 data BillySyntheticState : Set where
-  billyDeclarationWithoutOutcome
-  billyBraidedRealisation
-  : BillySyntheticState
+  billyDeclarationWithoutOutcome : BillySyntheticState
+  billyBraidedRealisation : BillySyntheticState
+
 
 data BillyDeclared : Set where billyDeclaredRepair : BillyDeclared
 data BillyInstitutional : Set where billyInstitutionReportsActivity : BillyInstitutional
@@ -99,24 +99,24 @@ billyExistingBraidedFixtureStillClosesRepair = refl
 ------------------------------------------------------------------------
 
 data ApplicationDomain : Set where
-  countryAndTreatyRemedy
-  legalRemedyAndCourtGate
-  securityRouting
-  scientificOperationalCapability
-  policeComplaintOversight
-  disabilityAccessibilityCompliance
-  healthcareQualityAndSafety
-  workplaceGrievance
-  environmentalLicensing
-  algorithmicGovernance
-  corporateESGReporting
-  educationInclusion
-  : ApplicationDomain
+  countryAndTreatyRemedy : ApplicationDomain
+  legalRemedyAndCourtGate : ApplicationDomain
+  securityRouting : ApplicationDomain
+  scientificOperationalCapability : ApplicationDomain
+  policeComplaintOversight : ApplicationDomain
+  disabilityAccessibilityCompliance : ApplicationDomain
+  healthcareQualityAndSafety : ApplicationDomain
+  workplaceGrievance : ApplicationDomain
+  environmentalLicensing : ApplicationDomain
+  algorithmicGovernance : ApplicationDomain
+  corporateESGReporting : ApplicationDomain
+  educationInclusion : ApplicationDomain
+
 
 data ApplicationStatus : Set where
-  exactInRepoInstance
-  prospectiveTemplateOnly
-  : ApplicationStatus
+  exactInRepoInstance : ApplicationStatus
+  prospectiveTemplateOnly : ApplicationStatus
+
 
 record ApplicationAuditPattern : Set where
   constructor application-audit-pattern

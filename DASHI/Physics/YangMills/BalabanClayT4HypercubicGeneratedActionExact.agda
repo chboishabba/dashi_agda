@@ -50,7 +50,13 @@ outerWeightFlipInvariant Grid.positiveInner = refl
 outerWeightFlipInvariant Grid.positiveOuter = refl
 
 data HypercubicGenerator : Set where
-  flip0 flip1 flip2 flip3 swap01 swap12 swap23 : HypercubicGenerator
+  flip0 : HypercubicGenerator
+  flip1 : HypercubicGenerator
+  flip2 : HypercubicGenerator
+  flip3 : HypercubicGenerator
+  swap01 : HypercubicGenerator
+  swap12 : HypercubicGenerator
+  swap23 : HypercubicGenerator
 
 act : HypercubicGenerator → Grid.GridCell4 → Grid.GridCell4
 act flip0 (Grid.gridCell4 a b c d) = Grid.gridCell4 (flipInterval a) b c d

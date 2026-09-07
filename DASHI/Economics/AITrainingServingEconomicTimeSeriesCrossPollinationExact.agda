@@ -17,20 +17,20 @@ import DASHI.Economics.AIEconomicUsefulWorkSourceAdmissionExact as Admission
 ------------------------------------------------------------------------
 
 data TrainingServingEconomicCoordinate : Set where
-  totalModelParameters
-  activeModelParameters
-  trainingComputePerModelRelease
-  amortisedTrainingComputePerSuccessfulTask
-  servingComputePerSuccessfulTask
-  inferenceComputePerToken
-  tokensPerSuccessfulTask
-  successfulTasksPerAcceleratorTime
-  revenuePerSuccessfulTask
-  fullyLoadedCostPerSuccessfulTask
-  grossContributionPerSuccessfulTask
-  acceleratorResidualRentalValue
-  acceleratorUtilisation
-  : TrainingServingEconomicCoordinate
+  totalModelParameters : TrainingServingEconomicCoordinate
+  activeModelParameters : TrainingServingEconomicCoordinate
+  trainingComputePerModelRelease : TrainingServingEconomicCoordinate
+  amortisedTrainingComputePerSuccessfulTask : TrainingServingEconomicCoordinate
+  servingComputePerSuccessfulTask : TrainingServingEconomicCoordinate
+  inferenceComputePerToken : TrainingServingEconomicCoordinate
+  tokensPerSuccessfulTask : TrainingServingEconomicCoordinate
+  successfulTasksPerAcceleratorTime : TrainingServingEconomicCoordinate
+  revenuePerSuccessfulTask : TrainingServingEconomicCoordinate
+  fullyLoadedCostPerSuccessfulTask : TrainingServingEconomicCoordinate
+  grossContributionPerSuccessfulTask : TrainingServingEconomicCoordinate
+  acceleratorResidualRentalValue : TrainingServingEconomicCoordinate
+  acceleratorUtilisation : TrainingServingEconomicCoordinate
+
 
 record TrainingServingEconomicObservation : Set₁ where
   constructor trainingServingEconomicObservation
@@ -112,13 +112,13 @@ open CapabilityServingEconomicDivergence public
 ------------------------------------------------------------------------
 
 data TrainingServingFutureClass : Set where
-  cheaperServingDemandExpansionMarginExpansion
-  cheaperServingDemandExpansionMarginCompression
-  cheaperServingDemandExpansionAssetImpairment
-  cheaperServingDemandDeclineOvercapacity
-  trainingCheapServingScarce
-  trainingExpensiveServingEfficient
-  : TrainingServingFutureClass
+  cheaperServingDemandExpansionMarginExpansion : TrainingServingFutureClass
+  cheaperServingDemandExpansionMarginCompression : TrainingServingFutureClass
+  cheaperServingDemandExpansionAssetImpairment : TrainingServingFutureClass
+  cheaperServingDemandDeclineOvercapacity : TrainingServingFutureClass
+  trainingCheapServingScarce : TrainingServingFutureClass
+  trainingExpensiveServingEfficient : TrainingServingFutureClass
+
 
 record TrainingServingFutureClassification : Set₁ where
   constructor trainingServingFutureClassification

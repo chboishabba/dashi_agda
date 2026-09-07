@@ -13,10 +13,14 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 data TruthStatus : Set where
-  supported refuted unresolved : TruthStatus
+  supported : TruthStatus
+  refuted : TruthStatus
+  unresolved : TruthStatus
 
 data ProcessStatus : Set where
-  ordinary altered unknown : ProcessStatus
+  ordinary : ProcessStatus
+  altered : ProcessStatus
+  unknown : ProcessStatus
 
 record PropositionAssessment (Proposition Evidence : Set) : Set₁ where
   constructor propositionAssessment

@@ -47,7 +47,12 @@ canonicalRound15Status =
     false  -- follows fixed-sector split
 
 data SearchClass : Set where
-  OWNED GENERATED LIVE DOWNSTREAM PRUNED PARALLEL : SearchClass
+  OWNED : SearchClass
+  GENERATED : SearchClass
+  LIVE : SearchClass
+  DOWNSTREAM : SearchClass
+  PRUNED : SearchClass
+  PARALLEL : SearchClass
 
 mixedRadixCarrierClass : SearchClass
 mixedRadixCarrierClass = OWNED

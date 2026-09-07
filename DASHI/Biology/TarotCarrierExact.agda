@@ -15,19 +15,38 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data MajorArcana : Set where
-  theFool theMagician theHighPriestess theEmpress theEmperor : MajorArcana
+  theFool : MajorArcana
+  theMagician : MajorArcana
+  theHighPriestess : MajorArcana
+  theEmpress : MajorArcana
+  theEmperor : MajorArcana
   theHierophant theLovers theChariot strength theHermit : MajorArcana
   wheelOfFortune justice theHangedMan death temperance : MajorArcana
   theDevil theTower theStar theMoon theSun judgement theWorld : MajorArcana
 
 data Suit : Set where
-  wands cups swords pentacles : Suit
+  wands : Suit
+  cups : Suit
+  swords : Suit
+  pentacles : Suit
 
 data PipRank : Set where
-  aceR twoR threeR fourR fiveR sixR sevenR eightR nineR tenR : PipRank
+  aceR : PipRank
+  twoR : PipRank
+  threeR : PipRank
+  fourR : PipRank
+  fiveR : PipRank
+  sixR : PipRank
+  sevenR : PipRank
+  eightR : PipRank
+  nineR : PipRank
+  tenR : PipRank
 
 data CourtRank : Set where
-  pageR knightR queenR kingR : CourtRank
+  pageR : CourtRank
+  knightR : CourtRank
+  queenR : CourtRank
+  kingR : CourtRank
 
 data MinorRank : Set where
   pip : PipRank → MinorRank
@@ -38,10 +57,13 @@ data Card : Set where
   minor : Suit → MinorRank → Card
 
 data Orientation : Set where
-  uprightOrientation reversedOrientation : Orientation
+  uprightOrientation : Orientation
+  reversedOrientation : Orientation
 
 data DeckTradition : Set where
-  riderWaiteSmith marseille thoth : DeckTradition
+  riderWaiteSmith : DeckTradition
+  marseille : DeckTradition
+  thoth : DeckTradition
   customTradition : String → DeckTradition
 
 record CardToken : Set where

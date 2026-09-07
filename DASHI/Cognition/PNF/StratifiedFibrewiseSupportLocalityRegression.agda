@@ -11,7 +11,8 @@ data Fibre : Set where
   sentenceFibre : Fibre
 
 data GlobalState : Set where
-  smallAccumulation largeAccumulation : GlobalState
+  smallAccumulation : GlobalState
+  largeAccumulation : GlobalState
 
 data Support : Set where
   sameLocalSupport : Support

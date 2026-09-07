@@ -34,7 +34,9 @@ open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong)
 
 data AuthorityDecision : Set where
-  promote abstain reject : AuthorityDecision
+  promote : AuthorityDecision
+  abstain : AuthorityDecision
+  reject : AuthorityDecision
 
 record ConsumerIndexedGovernedTransition
     (State Action Consumer Observation : Set) : Set₁ where

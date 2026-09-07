@@ -12,7 +12,9 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data UnitOrigin : Set where
-  freshExternalUnit labelledSubfibreUnit internalResidualUnit : UnitOrigin
+  freshExternalUnit : UnitOrigin
+  labelledSubfibreUnit : UnitOrigin
+  internalResidualUnit : UnitOrigin
 
 freshExternalIsNotInternal :
   freshExternalUnit ≡ internalResidualUnit → ⊥

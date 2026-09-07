@@ -34,7 +34,15 @@ data Tri : Set where
   pos : Tri
 
 data NonaryPhase : Set where
-  n00 n01 n02 n03 n04 n05 n06 n07 n08 : NonaryPhase
+  n00 : NonaryPhase
+  n01 : NonaryPhase
+  n02 : NonaryPhase
+  n03 : NonaryPhase
+  n04 : NonaryPhase
+  n05 : NonaryPhase
+  n06 : NonaryPhase
+  n07 : NonaryPhase
+  n08 : NonaryPhase
 
 ------------------------------------------------------------------------
 -- Optical/contact, receptor, opponent and colour-space surfaces.
@@ -71,12 +79,22 @@ record CMYKA : Set where
     cmykaAlpha   : Nat
 
 data Hue24 : Set where
-  h00 h01 h02 h03 h04 h05 h06 h07 : Hue24
+  h00 : Hue24
+  h01 : Hue24
+  h02 : Hue24
+  h03 : Hue24
+  h04 : Hue24
+  h05 : Hue24
+  h06 : Hue24
+  h07 : Hue24
   h08 h09 h10 h11 h12 h13 h14 h15 : Hue24
   h16 h17 h18 h19 h20 h21 h22 h23 : Hue24
 
 data PCCSTone : Set where
-  vivid bright strong deep : PCCSTone
+  vivid : PCCSTone
+  bright : PCCSTone
+  strong : PCCSTone
+  deep : PCCSTone
   light soft dull dark : PCCSTone
   pale grayish lightGrayish darkGrayish : PCCSTone
 
@@ -115,7 +133,9 @@ canonicalColourSurfaceLadder =
 -- quotient, not a theorem that human colour experience has exactly 27 states.
 
 data MCCPCell : Set where
-  mccpNNN mccpNN0 mccpNNP : MCCPCell
+  mccpNNN : MCCPCell
+  mccpNN0 : MCCPCell
+  mccpNNP : MCCPCell
   mccpN0N mccpN00 mccpN0P : MCCPCell
   mccpNPN mccpNP0 mccpNPP : MCCPCell
   mccp0NN mccp0N0 mccp0NP : MCCPCell

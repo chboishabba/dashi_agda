@@ -45,7 +45,9 @@ open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using (sq)
 ------------------------------------------------------------------------
 
 data LieCoordinate3 : Set where
-  coordinateX coordinateY coordinateZ : LieCoordinate3
+  coordinateX : LieCoordinate3
+  coordinateY : LieCoordinate3
+  coordinateZ : LieCoordinate3
 
 lieCoordinates3 : List LieCoordinate3
 lieCoordinates3 = coordinateX ∷ coordinateY ∷ coordinateZ ∷ []

@@ -29,7 +29,8 @@ import DASHI.Reasoning.RelationalStateCore as Core
 ------------------------------------------------------------------------
 
 data DevelopmentalRelation : Set where
-  parentChildRelation caregiverDependentRelation : DevelopmentalRelation
+  parentChildRelation : DevelopmentalRelation
+  caregiverDependentRelation : DevelopmentalRelation
 
 record DevelopmentalDyad : Set where
   constructor developmentalDyad

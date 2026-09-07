@@ -12,16 +12,33 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data ItalDimension : Set where
-  food body land community materialPractice spirituality : ItalDimension
+  food : ItalDimension
+  body : ItalDimension
+  land : ItalDimension
+  community : ItalDimension
+  materialPractice : ItalDimension
+  spirituality : ItalDimension
 
 data PracticeQuality : Set where
-  lifePromoting natural minimallyAdulterated locallyProduced communal : PracticeQuality
+  lifePromoting : PracticeQuality
+  natural : PracticeQuality
+  minimallyAdulterated : PracticeQuality
+  locallyProduced : PracticeQuality
+  communal : PracticeQuality
 
 data FoodPractice : Set where
-  plantFood localFood organicFood processedFood tinnedFood animalFood addedSalt artificialAdditive : FoodPractice
+  plantFood : FoodPractice
+  localFood : FoodPractice
+  organicFood : FoodPractice
+  processedFood : FoodPractice
+  tinnedFood : FoodPractice
+  animalFood : FoodPractice
+  addedSalt : FoodPractice
+  artificialAdditive : FoodPractice
 
 data LivityStrength : Set where
-  associatedPractice strictItal : LivityStrength
+  associatedPractice : LivityStrength
+  strictItal : LivityStrength
 
 record ItalLivityProfile : Set₁ where
   constructor italLivityProfile

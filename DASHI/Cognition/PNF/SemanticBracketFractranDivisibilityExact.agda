@@ -23,7 +23,8 @@ import DASHI.Biology.OrientedZeroWaveTransitionExact as Zero
 ------------------------------------------------------------------------
 
 data DiscriminatorBracket : Set where
-  bracketUnavailable bracketAvailable : DiscriminatorBracket
+  bracketUnavailable : DiscriminatorBracket
+  bracketAvailable : DiscriminatorBracket
 
 -- The distinguished dependency prime for this finite witness is 47.  A zero
 -- exponent means the denominator/dependency resource is absent; successor

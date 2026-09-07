@@ -8,7 +8,14 @@ open import Agda.Builtin.String using (String)
 -- reliability physics / accelerated testing, autonomy and corrective action.
 
 data QualificationAxis : Set where
-  neutronFluence gammaDose temperature operatingLife measurementIntegrity compactness autonomy failureProbability : QualificationAxis
+  neutronFluence : QualificationAxis
+  gammaDose : QualificationAxis
+  temperature : QualificationAxis
+  operatingLife : QualificationAxis
+  measurementIntegrity : QualificationAxis
+  compactness : QualificationAxis
+  autonomy : QualificationAxis
+  failureProbability : QualificationAxis
 
 data QualificationEvidence : Set where
   heritageKnowledge : QualificationEvidence

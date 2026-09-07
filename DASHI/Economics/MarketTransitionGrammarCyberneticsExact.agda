@@ -70,11 +70,17 @@ open InstrumentedMarketExperiment public
 ------------------------------------------------------------------------
 
 data DiscoveryDirection : Set where
-  discoveryReduced discoveryPreserved discoveryExpanded discoveryUnknown : DiscoveryDirection
+  discoveryReduced : DiscoveryDirection
+  discoveryPreserved : DiscoveryDirection
+  discoveryExpanded : DiscoveryDirection
+  discoveryUnknown : DiscoveryDirection
 
 
 data RiskDirection : Set where
-  riskReduced riskPreserved riskExpanded riskUnknown : RiskDirection
+  riskReduced : RiskDirection
+  riskPreserved : RiskDirection
+  riskExpanded : RiskDirection
+  riskUnknown : RiskDirection
 
 record RuleRevisionAssessment : Set where
   constructor ruleRevisionAssessment
@@ -115,7 +121,11 @@ open TypedMarketSignal public
 ------------------------------------------------------------------------
 
 data ProducerKind : Set where
-  marketProducer firmProducer governmentProducer aiProducer humanProducer : ProducerKind
+  marketProducer : ProducerKind
+  firmProducer : ProducerKind
+  governmentProducer : ProducerKind
+  aiProducer : ProducerKind
+  humanProducer : ProducerKind
 
 
 record TransitionProducerJurisdiction

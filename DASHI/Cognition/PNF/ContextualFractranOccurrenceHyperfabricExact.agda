@@ -19,7 +19,8 @@ import DASHI.Foundations.SSPTritCarrier as Trit
 ------------------------------------------------------------------------
 
 data SemanticRole : Set where
-  agentSemanticRole patientSemanticRole : SemanticRole
+  agentSemanticRole : SemanticRole
+  patientSemanticRole : SemanticRole
   sourceSemanticRole targetSemanticRole : SemanticRole
   giverSemanticRole recipientSemanticRole : SemanticRole
   premiseSemanticRole conclusionSemanticRole : SemanticRole

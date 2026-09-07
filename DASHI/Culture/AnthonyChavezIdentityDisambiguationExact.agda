@@ -11,10 +11,10 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data IdentityStatus : Set where
-  identitySourceBacked
-  identityNotLocated
-  identityContradicted
-  : IdentityStatus
+  identitySourceBacked : IdentityStatus
+  identityNotLocated : IdentityStatus
+  identityContradicted : IdentityStatus
+
 
 record PersonIdentitySurface : Set where
   constructor person-identity-surface
@@ -71,9 +71,8 @@ canonicalChavezIdentityBoundary = chavez-identity-boundary
   true refl
 
 data ChavezIdentityReverseTarget : Set where
-  acquireFullNameMatch
-  acquireDateOfBirthOrPersonnelMatch
-  acquireEmploymentHistoryMatch
-  acquireContemporaneousBiographyMatch
-  acquireInstitutionalIdentityReceipt
-  : ChavezIdentityReverseTarget
+  acquireFullNameMatch : ChavezIdentityReverseTarget
+  acquireDateOfBirthOrPersonnelMatch : ChavezIdentityReverseTarget
+  acquireEmploymentHistoryMatch : ChavezIdentityReverseTarget
+  acquireContemporaneousBiographyMatch : ChavezIdentityReverseTarget
+  acquireInstitutionalIdentityReceipt : ChavezIdentityReverseTarget

@@ -6,7 +6,12 @@ open import Agda.Builtin.String using (String)
 -- Source-shaped target-deconvolution pipeline for the STING high-content screen.
 
 data EvidenceLayer : Set where
-  primaryPhenotype miniSAR secondaryPathwayAssay chemicalProteomics geneticPerturbation resistantRescue : EvidenceLayer
+  primaryPhenotype : EvidenceLayer
+  miniSAR : EvidenceLayer
+  secondaryPathwayAssay : EvidenceLayer
+  chemicalProteomics : EvidenceLayer
+  geneticPerturbation : EvidenceLayer
+  resistantRescue : EvidenceLayer
 
 data TargetCandidate : Set where MAPKAPK5 MAPKAPK2 unresolvedTarget : TargetCandidate
 

@@ -150,7 +150,8 @@ canonicalFourWorkerSplitUsesWholeBudget = refl
 ------------------------------------------------------------------------
 
 data ParserWorkClass : Set where
-  inlineParserWork partitionedParserWork : ParserWorkClass
+  inlineParserWork : ParserWorkClass
+  partitionedParserWork : ParserWorkClass
 
 selectForLookahead : ParserWorkClass → Bool
 selectForLookahead inlineParserWork = false

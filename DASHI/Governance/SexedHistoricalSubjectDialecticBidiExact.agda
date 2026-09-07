@@ -24,7 +24,8 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 ------------------------------------------------------------------------
 
 data HistoricalGenderedPosition : Set where
-  masculineCoded feminineCoded : HistoricalGenderedPosition
+  masculineCoded : HistoricalGenderedPosition
+  feminineCoded : HistoricalGenderedPosition
 
 data HistoricalComparisonFrame : Set where
   inheritedPatriarchalFrame : HistoricalComparisonFrame

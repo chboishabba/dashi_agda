@@ -13,22 +13,34 @@ record Unit : Set where
   constructor unit
 
 data ShapeInvariant : Set where
-  downward flat upward : ShapeInvariant
+  downward : ShapeInvariant
+  flat : ShapeInvariant
+  upward : ShapeInvariant
 
 data EnergyInvariant : Set where
-  calm ordinary stressed : EnergyInvariant
+  calm : EnergyInvariant
+  ordinary : EnergyInvariant
+  stressed : EnergyInvariant
 
 data PersistenceInvariant : Set where
-  transient persistent unstable : PersistenceInvariant
+  transient : PersistenceInvariant
+  persistent : PersistenceInvariant
+  unstable : PersistenceInvariant
 
 data LiquidityInvariant : Set where
-  thin adequate deep : LiquidityInvariant
+  thin : LiquidityInvariant
+  adequate : LiquidityInvariant
+  deep : LiquidityInvariant
 
 data RiskGate : Set where
-  clear caution blocked : RiskGate
+  clear : RiskGate
+  caution : RiskGate
+  blocked : RiskGate
 
 data Permission : Set where
-  ACT HOLD BAN : Permission
+  ACT : Permission
+  HOLD : Permission
+  BAN : Permission
 
 record MarketWindowState : Set where
   constructor marketState
@@ -116,7 +128,8 @@ tradingKernelSystem = record
   }
 
 data TradingSchedule : Set where
-  synchronous snapshotSequential : TradingSchedule
+  synchronous : TradingSchedule
+  snapshotSequential : TradingSchedule
 
 scheduledPermissionKernel : TradingSchedule → MarketWindowState → MarketWindowState
 scheduledPermissionKernel synchronous = permissionKernel

@@ -6,7 +6,14 @@ open import Agda.Builtin.String using (String)
 import DASHI.Biology.DirectedAttractorPortfolioCalculus as Directed
 
 data Portfolio3 : Set where
-  emptyPortfolio alignedOnly exploreOnly trapOnly alignedExplore alignedTrap exploreTrap allThree : Portfolio3
+  emptyPortfolio : Portfolio3
+  alignedOnly : Portfolio3
+  exploreOnly : Portfolio3
+  trapOnly : Portfolio3
+  alignedExplore : Portfolio3
+  alignedTrap : Portfolio3
+  exploreTrap : Portfolio3
+  allThree : Portfolio3
 
 rawBranchCount : Portfolio3 → Nat
 rawBranchCount emptyPortfolio = 0

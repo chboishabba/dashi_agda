@@ -86,15 +86,17 @@ open NecessaryButCurrentlyNonDiscriminating public
 ------------------------------------------------------------------------
 
 data ToyRequirement : Set where
-  sharedRequiredCoordinate
-  liveSplittingCoordinate
-  : ToyRequirement
+  sharedRequiredCoordinate : ToyRequirement
+  liveSplittingCoordinate : ToyRequirement
+
 
 data ToyInterpretation : Set where
-  interpretationA interpretationB : ToyInterpretation
+  interpretationA : ToyInterpretation
+  interpretationB : ToyInterpretation
 
 data ToyObservation : Set where
-  observationNo observationYes : ToyObservation
+  observationNo : ToyObservation
+  observationYes : ToyObservation
 
 toyLive : Live.LiveSet ToyInterpretation
 toyLive interpretationA = ⊤

@@ -35,7 +35,11 @@ data LinguisticSelfDescription : Set where ordinaryDescription dyingDescription 
 data MoralStatusEvidence : Set where unresolvedMoralStatus positiveMoralStatusEvidence : MoralStatusEvidence
 
 data InjectionSource : Set where
-  systemPrompt telemetry roleDescription memory humanDescription : InjectionSource
+  systemPrompt : InjectionSource
+  telemetry : InjectionSource
+  roleDescription : InjectionSource
+  memory : InjectionSource
+  humanDescription : InjectionSource
 
 record EmbodiedSubjectState : Set where
   constructor embodied-subject-state

@@ -21,40 +21,40 @@ import DASHI.Core.AdmissibleCounterfactualWorldFamilyExact as Counterfactual
 ------------------------------------------------------------------------
 
 data LegalCorrection : Set where
-  lawfulConductSubstitution
-  omittedPrecautionSupplied
-  prohibitedConductRemovedWithRelationRepaired
-  institutionalDutyPerformed
-  decisionProcedureCorrected
-  unresolvedLegalCorrection
-  : LegalCorrection
+  lawfulConductSubstitution : LegalCorrection
+  omittedPrecautionSupplied : LegalCorrection
+  prohibitedConductRemovedWithRelationRepaired : LegalCorrection
+  institutionalDutyPerformed : LegalCorrection
+  decisionProcedureCorrected : LegalCorrection
+  unresolvedLegalCorrection : LegalCorrection
+
 
 data LegalWorldAdmissibility : Set where
-  legallyAdmissibleCounterfactual
-  legallyInadmissibleCounterfactual
-  legalAdmissibilityUnresolved
-  : LegalWorldAdmissibility
+  legallyAdmissibleCounterfactual : LegalWorldAdmissibility
+  legallyInadmissibleCounterfactual : LegalWorldAdmissibility
+  legalAdmissibilityUnresolved : LegalWorldAdmissibility
+
 
 data FactualCausationStatus : Set where
-  factualCausationSatisfied
-  factualCausationNotSatisfied
-  factualCausationUnderidentified
-  factualCausationUnresolved
-  : FactualCausationStatus
+  factualCausationSatisfied : FactualCausationStatus
+  factualCausationNotSatisfied : FactualCausationStatus
+  factualCausationUnderidentified : FactualCausationStatus
+  factualCausationUnresolved : FactualCausationStatus
+
 
 data ScopeOfLiabilityStatus : Set where
-  scopeSatisfied
-  scopeNotSatisfied
-  scopeUnderidentified
-  scopeUnresolved
-  : ScopeOfLiabilityStatus
+  scopeSatisfied : ScopeOfLiabilityStatus
+  scopeNotSatisfied : ScopeOfLiabilityStatus
+  scopeUnderidentified : ScopeOfLiabilityStatus
+  scopeUnresolved : ScopeOfLiabilityStatus
+
 
 data LegalConsequenceStatus : Set where
-  consequenceSatisfied
-  consequenceNotSatisfied
-  consequenceUnderidentified
-  consequenceUnresolved
-  : LegalConsequenceStatus
+  consequenceSatisfied : LegalConsequenceStatus
+  consequenceNotSatisfied : LegalConsequenceStatus
+  consequenceUnderidentified : LegalConsequenceStatus
+  consequenceUnresolved : LegalConsequenceStatus
+
 
 record LegalCounterfactualQuestion : Set₁ where
   constructor legal-counterfactual-question
@@ -192,33 +192,33 @@ oneLocatedWorldDoesNotProveUniqueIdentification ()
 ------------------------------------------------------------------------
 
 data LegalCounterfactualResidual : Set where
-  admissibilityResidual
-  correctedRelationResidual
-  heldFixedResidual
-  alternativeWorldResidual
-  outcomeComparisonResidual
-  causalIdentificationResidual
-  scopeResidual
-  liabilityResidual
-  remedyResidual
-  authorityResidual
-  closedForConsumer
-  : LegalCounterfactualResidual
+  admissibilityResidual : LegalCounterfactualResidual
+  correctedRelationResidual : LegalCounterfactualResidual
+  heldFixedResidual : LegalCounterfactualResidual
+  alternativeWorldResidual : LegalCounterfactualResidual
+  outcomeComparisonResidual : LegalCounterfactualResidual
+  causalIdentificationResidual : LegalCounterfactualResidual
+  scopeResidual : LegalCounterfactualResidual
+  liabilityResidual : LegalCounterfactualResidual
+  remedyResidual : LegalCounterfactualResidual
+  authorityResidual : LegalCounterfactualResidual
+  closedForConsumer : LegalCounterfactualResidual
+
 
 data CounterfactualProducer : Set where
-  legalSourceProducer
-  correctedConductProducer
-  institutionalRelationProducer
-  factualEvidenceProducer
-  expertPhysicalModelProducer
-  worldFamilyEnumerator
-  comparisonProducer
-  scopeProducer
-  liabilityProducer
-  remedyProducer
-  authorityProducer
-  noProducerRequired
-  : CounterfactualProducer
+  legalSourceProducer : CounterfactualProducer
+  correctedConductProducer : CounterfactualProducer
+  institutionalRelationProducer : CounterfactualProducer
+  factualEvidenceProducer : CounterfactualProducer
+  expertPhysicalModelProducer : CounterfactualProducer
+  worldFamilyEnumerator : CounterfactualProducer
+  comparisonProducer : CounterfactualProducer
+  scopeProducer : CounterfactualProducer
+  liabilityProducer : CounterfactualProducer
+  remedyProducer : CounterfactualProducer
+  authorityProducer : CounterfactualProducer
+  noProducerRequired : CounterfactualProducer
+
 
 producerForResidual : LegalCounterfactualResidual → CounterfactualProducer
 producerForResidual admissibilityResidual = legalSourceProducer

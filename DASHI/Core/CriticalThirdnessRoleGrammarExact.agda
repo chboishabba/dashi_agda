@@ -27,10 +27,12 @@ import DASHI.Core.RelationalRoleGrammarExact as Grammar
 ------------------------------------------------------------------------
 
 data BeauvoirPosition : Set where
-  onePosition otherPosition : BeauvoirPosition
+  onePosition : BeauvoirPosition
+  otherPosition : BeauvoirPosition
 
 data BeauvoirRole : Set where
-  selfGroundedSubject relationalOther : BeauvoirRole
+  selfGroundedSubject : BeauvoirRole
+  relationalOther : BeauvoirRole
 
 beauvoirRole : BeauvoirPosition → BeauvoirRole
 beauvoirRole onePosition = selfGroundedSubject
@@ -55,7 +57,9 @@ otherDoesNotSymmetricallyConstituteOne = refl
 ------------------------------------------------------------------------
 
 data AnzalduaRole : Set where
-  borderMestizaPosition inheritedPoleA inheritedPoleB : AnzalduaRole
+  borderMestizaPosition : AnzalduaRole
+  inheritedPoleA : AnzalduaRole
+  inheritedPoleB : AnzalduaRole
 
 anzalduaRole : Ternary.TernaryRoleCode → AnzalduaRole
 anzalduaRole Ternary.code0 = borderMestizaPosition
@@ -85,7 +89,9 @@ borderRelatesToSecondPole = refl
 ------------------------------------------------------------------------
 
 data BhabhaRole : Set where
-  thirdSpace retroactiveOriginA retroactiveOriginB : BhabhaRole
+  thirdSpace : BhabhaRole
+  retroactiveOriginA : BhabhaRole
+  retroactiveOriginB : BhabhaRole
 
 bhabhaRole : Ternary.TernaryRoleCode → BhabhaRole
 bhabhaRole Ternary.code0 = thirdSpace

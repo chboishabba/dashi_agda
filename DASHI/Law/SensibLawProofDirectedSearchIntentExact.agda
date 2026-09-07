@@ -20,44 +20,44 @@ import DASHI.Law.SensibLawLegalResidualProducerSchedulerExact as LegalResidual
 ------------------------------------------------------------------------
 
 data ProducerClass : Set where
-  exactCitedAuthorityProducer
-  authorityDiscoveryProducer
-  authorityTreatmentProducer
-  propositionSourceProducer
-  doctrinalComparisonProducer
-  identityProducer
-  occurrenceEvidenceProducer
-  attributionProducer
-  temporalProducer
-  historicalContextProducer
-  empiricalEvidenceProducer
-  wrongTypeProducer
-  elementRequirementProducer
-  elementPaymentProducer
-  applicabilityProducer
-  jurisdictionProducer
-  remedySourceProducer
-  contradictionProducer
-  counterexampleProducer
-  discriminatorProducer
-  : ProducerClass
+  exactCitedAuthorityProducer : ProducerClass
+  authorityDiscoveryProducer : ProducerClass
+  authorityTreatmentProducer : ProducerClass
+  propositionSourceProducer : ProducerClass
+  doctrinalComparisonProducer : ProducerClass
+  identityProducer : ProducerClass
+  occurrenceEvidenceProducer : ProducerClass
+  attributionProducer : ProducerClass
+  temporalProducer : ProducerClass
+  historicalContextProducer : ProducerClass
+  empiricalEvidenceProducer : ProducerClass
+  wrongTypeProducer : ProducerClass
+  elementRequirementProducer : ProducerClass
+  elementPaymentProducer : ProducerClass
+  applicabilityProducer : ProducerClass
+  jurisdictionProducer : ProducerClass
+  remedySourceProducer : ProducerClass
+  contradictionProducer : ProducerClass
+  counterexampleProducer : ProducerClass
+  discriminatorProducer : ProducerClass
+
 
 data SearchMode : Set where
-  exploitKnownResidual
-  exploreVocabulary
-  exploreAuthorityFamily
-  compareAuthorities
-  seekDefeater
-  seekCounterexample
-  : SearchMode
+  exploitKnownResidual : SearchMode
+  exploreVocabulary : SearchMode
+  exploreAuthorityFamily : SearchMode
+  compareAuthorities : SearchMode
+  seekDefeater : SearchMode
+  seekCounterexample : SearchMode
+
 
 data RequiredAuthorityClass : Set where
-  bindingAuthorityPreferred
-  persuasiveAuthorityPermitted
-  primaryTextRequired
-  supportingSourcePermitted
-  authorityClassOpen
-  : RequiredAuthorityClass
+  bindingAuthorityPreferred : RequiredAuthorityClass
+  persuasiveAuthorityPermitted : RequiredAuthorityClass
+  primaryTextRequired : RequiredAuthorityClass
+  supportingSourcePermitted : RequiredAuthorityClass
+  authorityClassOpen : RequiredAuthorityClass
+
 
 record SearchBudget : Set where
   constructor searchBudget
@@ -134,10 +134,10 @@ open CompiledProofDirectedIntent public
 ------------------------------------------------------------------------
 
 data ResidualSearchDisposition : Set where
-  residualCanCompileToSearch
-  residualRequiresNonSearchReview
-  residualBlockedBeforeSearch
-  : ResidualSearchDisposition
+  residualCanCompileToSearch : ResidualSearchDisposition
+  residualRequiresNonSearchReview : ResidualSearchDisposition
+  residualBlockedBeforeSearch : ResidualSearchDisposition
+
 
 searchDisposition : LegalResidual.LegalResidualKind → ResidualSearchDisposition
 searchDisposition LegalResidual.legalRelevanceUnresolved = residualCanCompileToSearch

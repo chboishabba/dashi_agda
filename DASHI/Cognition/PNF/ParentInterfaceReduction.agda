@@ -13,7 +13,9 @@ open import DASHI.Cognition.PNF.NumericAuthority
 ------------------------------------------------------------------------
 
 data InterfaceTargetKind : Set where
-  objectTarget factorTarget demandTarget : InterfaceTargetKind
+  objectTarget : InterfaceTargetKind
+  factorTarget : InterfaceTargetKind
+  demandTarget : InterfaceTargetKind
 
 record InterfaceMember : Set where
   constructor interfaceMember
@@ -25,7 +27,8 @@ record InterfaceMember : Set where
 open InterfaceMember public
 
 data ExportAdmission : Set where
-  admittedExport rejectedExport : ExportAdmission
+  admittedExport : ExportAdmission
+  rejectedExport : ExportAdmission
 
 data LookupProjection : ExportAdmission → Set where
   lookupOfAdmittedExport :
@@ -60,7 +63,8 @@ data ChildEvidenceState : Set where
   retainedChildEvidence : ChildEvidenceState
 
 data ParentBoundaryState : Set where
-  parentMemberAdmitted parentMemberRejected : ParentBoundaryState
+  parentMemberAdmitted : ParentBoundaryState
+  parentMemberRejected : ParentBoundaryState
 
 record ReductiveDisposition : Set where
   constructor reductiveDisposition

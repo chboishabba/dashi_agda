@@ -23,7 +23,8 @@ import DASHI.Chemistry.AlliumOrganosulfurMechanismExact as Mechanism
 ------------------------------------------------------------------------
 
 data ResidueKind : Set where
-  cysteine otherResidue : ResidueKind
+  cysteine : ResidueKind
+  otherResidue : ResidueKind
 
 data ThiolState : Set where
   reducedThiol : ThiolState

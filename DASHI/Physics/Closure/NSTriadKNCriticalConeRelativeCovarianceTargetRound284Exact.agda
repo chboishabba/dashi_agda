@@ -92,9 +92,9 @@ paidDeepRegionsCombine P =
   subst (λ upper → paidDeepMass P ≤ upper) endpoint summed
 
 data CriticalConeGramControlRoute : Set where
-  uniformAbsoluteDataSchur
-  uniformBlockOperator
-  directSignedResolvent
+  uniformAbsoluteDataSchur : CriticalConeGramControlRoute
+  uniformBlockOperator : CriticalConeGramControlRoute
+  directSignedResolvent : CriticalConeGramControlRoute
   strictRelativeCovariance : CriticalConeGramControlRoute
 
 round284PrimaryProducerAfterLeanReturn : CriticalConeGramControlRoute

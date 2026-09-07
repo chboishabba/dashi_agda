@@ -15,7 +15,9 @@ open import Agda.Builtin.Nat using (Nat; suc)
 ------------------------------------------------------------------------
 
 data RepairStatus : Set where
-  consistent inconsistent reopened : RepairStatus
+  consistent : RepairStatus
+  inconsistent : RepairStatus
+  reopened : RepairStatus
 
 record IncrementalSearchState : Set where
   constructor incrementalSearchState

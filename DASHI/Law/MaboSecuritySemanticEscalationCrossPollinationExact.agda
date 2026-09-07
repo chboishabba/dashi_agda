@@ -13,15 +13,15 @@ import DASHI.Law.SecuritySemanticEscalationDistanceExact as Esc
 ------------------------------------------------------------------------
 
 data RecognitionEscalationState : Set where
-  sameAdministrativeSurfaceAuthorityVisible
-  sameAdministrativeSurfaceAuthorityErased
-  : RecognitionEscalationState
+  sameAdministrativeSurfaceAuthorityVisible : RecognitionEscalationState
+  sameAdministrativeSurfaceAuthorityErased : RecognitionEscalationState
+
 
 data AdministrativeSurface : Set where
   sameRecognisedSecuritySurface : AdministrativeSurface
 
 data AuthorityMeaning : Set where
-  antecedentAuthorityVisible
+  antecedentAuthorityVisible : AuthorityMeaning
   antecedentAuthorityInvisible : AuthorityMeaning
 
 observeAdministrative : RecognitionEscalationState → AdministrativeSurface
@@ -60,17 +60,17 @@ securityCountryNonfactorabilityRetained = Country.securityClassificationCannotFa
 ------------------------------------------------------------------------
 
 data DynamicCountryClaim : Set where
-  semanticEscalationErasedCountryMeaning
-  recognitionSurfaceRemainedStableDuringErasure
-  escalationConvertedPoliticalMeaningIntoThreatMeaning
-  escalationReachedCollectiveEnemyStage
+  semanticEscalationErasedCountryMeaning : DynamicCountryClaim
+  recognitionSurfaceRemainedStableDuringErasure : DynamicCountryClaim
+  escalationConvertedPoliticalMeaningIntoThreatMeaning : DynamicCountryClaim
+  escalationReachedCollectiveEnemyStage : DynamicCountryClaim
   escalationReachedTerminalisingPractice : DynamicCountryClaim
 
 data DynamicCountryProducer : Set where
-  beforeAfterCountryMeaningProducer
-  stableAdministrativeSurfaceProducer
-  semanticTransformationAndCountryProducer
-  collectiveEnemyClassificationProducer
+  beforeAfterCountryMeaningProducer : DynamicCountryProducer
+  stableAdministrativeSurfaceProducer : DynamicCountryProducer
+  semanticTransformationAndCountryProducer : DynamicCountryProducer
+  collectiveEnemyClassificationProducer : DynamicCountryProducer
   terminalisationCommandConductProducer : DynamicCountryProducer
 
 reverseDynamicCountry : DynamicCountryClaim → DynamicCountryProducer

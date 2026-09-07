@@ -14,7 +14,9 @@ import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Choice
 ------------------------------------------------------------------------
 
 data RHResearchSocket : Set where
-  offOrdinateSocket gammaSocket clusterMarginSocket : RHResearchSocket
+  offOrdinateSocket : RHResearchSocket
+  gammaSocket : RHResearchSocket
+  clusterMarginSocket : RHResearchSocket
 
 data RHResearchMove : Set where
   attackOffOrdinateCancellation : RHResearchMove

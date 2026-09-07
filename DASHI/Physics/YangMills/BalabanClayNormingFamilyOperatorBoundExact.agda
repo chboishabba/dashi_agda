@@ -49,7 +49,9 @@ pointwiseNormingBoundsGiveOperatorNorm bridge operator bound pointwise =
 ------------------------------------------------------------------------
 
 data ThreeVector : Set where
-  zeroVector testedVector hiddenVector : ThreeVector
+  zeroVector : ThreeVector
+  testedVector : ThreeVector
+  hiddenVector : ThreeVector
 
 data SingletonTest : Set where
   onlyTest : SingletonTest

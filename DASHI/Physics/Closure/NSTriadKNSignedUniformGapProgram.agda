@@ -165,7 +165,9 @@ record UniformSignedSpectralGap
 open UniformSignedSpectralGap public
 
 data GapRouteSelected : Set where
-  viaPositiveMajorant viaSignedBlocks viaModifiedEnergy : GapRouteSelected
+  viaPositiveMajorant : GapRouteSelected
+  viaSignedBlocks : GapRouteSelected
+  viaModifiedEnergy : GapRouteSelected
 
 record UniformGapPromotion {c s : Level} : Set (lsuc (c ⊔ s)) where
   field

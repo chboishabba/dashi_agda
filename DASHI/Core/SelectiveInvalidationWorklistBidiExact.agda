@@ -49,12 +49,12 @@ classKeyUnique candidate left right refl refl = refl
 ------------------------------------------------------------------------
 
 data RepairDisposition : Set where
-  retainNoAction
-  provenSemanticsPreservingRepair
-  suggestedRepairNeedsProof
-  humanReviewRequired
-  authorityProducerRequired
-  : RepairDisposition
+  retainNoAction : RepairDisposition
+  provenSemanticsPreservingRepair : RepairDisposition
+  suggestedRepairNeedsProof : RepairDisposition
+  humanReviewRequired : RepairDisposition
+  authorityProducerRequired : RepairDisposition
+
 
 record WorklistRepairTask (key : Pareto.RecomputeClass) : Set₁ where
   constructor worklist-repair-task

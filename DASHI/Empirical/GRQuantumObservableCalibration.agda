@@ -16,7 +16,8 @@ open import Data.Nat using (_≤_)
 -- units as physics units.
 
 data PhysicalDimension : Set where
-  dimensionless probabilityDimension : PhysicalDimension
+  dimensionless : PhysicalDimension
+  probabilityDimension : PhysicalDimension
   timeDimension lengthDimension massDimension : PhysicalDimension
   energyDimension actionDimension frequencyDimension : PhysicalDimension
   velocityDimension curvatureDimension stressEnergyDimension : PhysicalDimension

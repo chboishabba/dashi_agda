@@ -14,7 +14,8 @@ import DASHI.Law.QueenslandWandingReachabilityBidiExact as Wand
 ------------------------------------------------------------------------
 
 data SupportState : Set where
-  supported unsupported : SupportState
+  supported : SupportState
+  unsupported : SupportState
 
 record TrajectoryEdge : Set where
   constructor trajectoryEdge
@@ -167,19 +168,28 @@ selectionDisparityReopensDenominator = refl
 ------------------------------------------------------------------------
 
 data CoarseOutcome : Set where
-  searchedOutcome releasedOutcome : CoarseOutcome
+  searchedOutcome : CoarseOutcome
+  releasedOutcome : CoarseOutcome
 
 data ResidualCode : Set where
-  noResidual authorityGap transitionGap searchGap recordingGap : ResidualCode
+  noResidual : ResidualCode
+  authorityGap : ResidualCode
+  transitionGap : ResidualCode
+  searchGap : ResidualCode
+  recordingGap : ResidualCode
 
 data ProbeAction : Set where
-  inspectStatute inspectTransitionTable inspectSearchRecord inspectRecording : ProbeAction
+  inspectStatute : ProbeAction
+  inspectTransitionTable : ProbeAction
+  inspectSearchRecord : ProbeAction
+  inspectRecording : ProbeAction
 
 data ProbeIndex : Set where
   encounterIndex : ProbeIndex
 
 data ReconstructionState : Set where
-  searchedWithClosedPath searchedWithTransitionGap : ReconstructionState
+  searchedWithClosedPath : ReconstructionState
+  searchedWithTransitionGap : ReconstructionState
 
 coarseOutcome : ReconstructionState → CoarseOutcome
 coarseOutcome searchedWithClosedPath = searchedOutcome

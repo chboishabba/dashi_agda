@@ -29,10 +29,12 @@ import DASHI.Governance.SafeJustSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data LongevityMeasure : Set where
-  healthyLifeExpectancy overallLifeExpectancy : LongevityMeasure
+  healthyLifeExpectancy : LongevityMeasure
+  overallLifeExpectancy : LongevityMeasure
 
 data PovertyLineRole : Set where
-  extremePoverty190 broaderPoverty550 : PovertyLineRole
+  extremePoverty190 : PovertyLineRole
+  broaderPoverty550 : PovertyLineRole
 
 record LongevityRevision : Set where
   constructor longevityRevision

@@ -12,15 +12,15 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ContinuityEvidenceKind : Set where
-  historicalRole
-  memorialRoleSummary
-  publicationAffiliation
-  currentEmploymentOrAppointment
-  activeProjectRoster
-  facilityOrRepositoryAccess
-  calibrationOrConfigurationCustody
-  sameCarrierOperationalUse
-  : ContinuityEvidenceKind
+  historicalRole : ContinuityEvidenceKind
+  memorialRoleSummary : ContinuityEvidenceKind
+  publicationAffiliation : ContinuityEvidenceKind
+  currentEmploymentOrAppointment : ContinuityEvidenceKind
+  activeProjectRoster : ContinuityEvidenceKind
+  facilityOrRepositoryAccess : ContinuityEvidenceKind
+  calibrationOrConfigurationCustody : ContinuityEvidenceKind
+  sameCarrierOperationalUse : ContinuityEvidenceKind
+
 
 record EventTimePossessionReceipt : Set where
   constructor event-time-possession-receipt
@@ -60,10 +60,9 @@ canonicalEventTimeEvidenceBoundary = event-time-evidence-boundary
   true refl
 
 data EventTimeReverseTarget : Set where
-  acquireCurrentEmploymentOrAppointment
-  acquireActiveProjectRoster
-  acquireFacilityAccess
-  acquireRepositoryOrDataAccess
-  acquireCalibrationOrConfigurationCustody
-  acquireSameCarrierOperationalUse
-  : EventTimeReverseTarget
+  acquireCurrentEmploymentOrAppointment : EventTimeReverseTarget
+  acquireActiveProjectRoster : EventTimeReverseTarget
+  acquireFacilityAccess : EventTimeReverseTarget
+  acquireRepositoryOrDataAccess : EventTimeReverseTarget
+  acquireCalibrationOrConfigurationCustody : EventTimeReverseTarget
+  acquireSameCarrierOperationalUse : EventTimeReverseTarget

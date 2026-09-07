@@ -10,31 +10,31 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data RepertoireSourceRole : Set where
-  scholarlyHistory
-  politicalTheory
-  officialIsraeliSpeech
-  unCommissionFinding
-  icjJudicialObservation
+  scholarlyHistory : RepertoireSourceRole
+  politicalTheory : RepertoireSourceRole
+  officialIsraeliSpeech : RepertoireSourceRole
+  unCommissionFinding : RepertoireSourceRole
+  icjJudicialObservation : RepertoireSourceRole
   dashiSynthesis : RepertoireSourceRole
 
 data ZionistCurrent : Set where
-  politicalZionism
-  labourZionism
-  revisionistZionism
-  religiousZionism
-  messianicHardalCurrent
+  politicalZionism : ZionistCurrent
+  labourZionism : ZionistCurrent
+  revisionistZionism : ZionistCurrent
+  religiousZionism : ZionistCurrent
+  messianicHardalCurrent : ZionistCurrent
   currentUnspecified : ZionistCurrent
 
 data RepertoireCoordinate : Set where
-  securityCentrality
-  existentialThreat
-  collectiveInsecurity
-  selfRelianceByForce
-  nationalSacrifice
-  collectiveResponsibility
-  territorialRedemption
-  biblicalEnemyRoleBinding
-  militaryCivilianInterpenetration
+  securityCentrality : RepertoireCoordinate
+  existentialThreat : RepertoireCoordinate
+  collectiveInsecurity : RepertoireCoordinate
+  selfRelianceByForce : RepertoireCoordinate
+  nationalSacrifice : RepertoireCoordinate
+  collectiveResponsibility : RepertoireCoordinate
+  territorialRedemption : RepertoireCoordinate
+  biblicalEnemyRoleBinding : RepertoireCoordinate
+  militaryCivilianInterpenetration : RepertoireCoordinate
   settlerColonialTerritoriality : RepertoireCoordinate
 
 record RepertoireReceipt : Set where
@@ -105,17 +105,17 @@ canonicalZionismIdentityBoundary =
 ------------------------------------------------------------------------
 
 data RepertoireClaim : Set where
-  coordinateOccursInZionistPoliticalCulture
-  coordinateOccursInSpecificCurrent
-  coordinateIsUniversallySharedByAllZionists
-  judaismAndZionismAreIdentical
+  coordinateOccursInZionistPoliticalCulture : RepertoireClaim
+  coordinateOccursInSpecificCurrent : RepertoireClaim
+  coordinateIsUniversallySharedByAllZionists : RepertoireClaim
+  judaismAndZionismAreIdentical : RepertoireClaim
   israeliPopulationAndZionismAreIdentical : RepertoireClaim
 
 data RepertoireProducer : Set where
-  multiSourceRepertoireProducer
-  currentSpecificCorpusProducer
-  universalPopulationSurveyProducer
-  religionIdeologyIdentityProducer
+  multiSourceRepertoireProducer : RepertoireProducer
+  currentSpecificCorpusProducer : RepertoireProducer
+  universalPopulationSurveyProducer : RepertoireProducer
+  religionIdeologyIdentityProducer : RepertoireProducer
   statePopulationIdeologyIdentityProducer : RepertoireProducer
 
 reverseRepertoire : RepertoireClaim → RepertoireProducer

@@ -20,7 +20,10 @@ import DASHI.Core.AuthorityNonPromotionCore as Authority
 ------------------------------------------------------------------------
 
 data LeanIdentityEvidenceKind : Set where
-  matchingEvidence sitelinkEvidence externalIdentifierEvidence lexemeDenotationEvidence : LeanIdentityEvidenceKind
+  matchingEvidence : LeanIdentityEvidenceKind
+  sitelinkEvidence : LeanIdentityEvidenceKind
+  externalIdentifierEvidence : LeanIdentityEvidenceKind
+  lexemeDenotationEvidence : LeanIdentityEvidenceKind
 
 record LeanIdentityWitness : Set where
   constructor leanIdentityWitness

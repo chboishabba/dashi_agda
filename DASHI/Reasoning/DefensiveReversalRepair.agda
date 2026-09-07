@@ -11,16 +11,28 @@ import DASHI.Reasoning.RelationalSharedStateUpdate as Shared
 ------------------------------------------------------------------------
 
 data ConflictRole : Set where
-  actorRole affectedRole objectorRole responderRole mediatorRole : ConflictRole
+  actorRole : ConflictRole
+  affectedRole : ConflictRole
+  objectorRole : ConflictRole
+  responderRole : ConflictRole
+  mediatorRole : ConflictRole
 
 data DefensiveRoute : Set where
-  reflectiveRoute egoDefensiveRoute mixedRoute undeterminedRoute : DefensiveRoute
+  reflectiveRoute : DefensiveRoute
+  egoDefensiveRoute : DefensiveRoute
+  mixedRoute : DefensiveRoute
+  undeterminedRoute : DefensiveRoute
 
 data DARVOPhase : Set where
-  noDARVOPhase denyPhase attackPhase reverseRolesPhase : DARVOPhase
+  noDARVOPhase : DARVOPhase
+  denyPhase : DARVOPhase
+  attackPhase : DARVOPhase
+  reverseRolesPhase : DARVOPhase
 
 data EvidenceStrength : Set where
-  stipulatedDefinition logicalConsequence mechanisticHypothesis : EvidenceStrength
+  stipulatedDefinition : EvidenceStrength
+  logicalConsequence : EvidenceStrength
+  mechanisticHypothesis : EvidenceStrength
   repeatedPatternEvidence quasiCausalEvidence establishedCausalEvidence : EvidenceStrength
 
 record RelationalMisconduct : Set where

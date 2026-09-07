@@ -20,13 +20,17 @@ import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Core.ResidualObserverDependencyExact as Residual
 
 data LocalState : Set where
-  entangled quiet healed : LocalState
+  entangled : LocalState
+  quiet : LocalState
+  healed : LocalState
 
 data LocalAction : Set where
-  repair inspect : LocalAction
+  repair : LocalAction
+  inspect : LocalAction
 
 data LocalIndex : Set where
-  leftObserver rightObserver : LocalIndex
+  leftObserver : LocalIndex
+  rightObserver : LocalIndex
 
 coarse : Observer.Observer LocalState Bool
 coarse entangled = false

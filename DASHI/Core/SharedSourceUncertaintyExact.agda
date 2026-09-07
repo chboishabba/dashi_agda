@@ -26,7 +26,9 @@ record UncertaintySource : Set where
 open UncertaintySource public
 
 data ConsumerKind : Set where
-  erosionConsumer machineryConsumer habitatConsumer : ConsumerKind
+  erosionConsumer : ConsumerKind
+  machineryConsumer : ConsumerKind
+  habitatConsumer : ConsumerKind
 
 record PropagatedUncertainty : Set where
   constructor propagatedUncertainty

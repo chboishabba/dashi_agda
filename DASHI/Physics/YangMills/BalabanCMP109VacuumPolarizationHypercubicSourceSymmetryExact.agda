@@ -41,10 +41,15 @@ import DASHI.Physics.YangMills.BalabanClayT4HypercubicGeneratedActionExact as Ac
 -- Coordinate reflections and adjacent transpositions are exactly the source
 -- generators needed to instantiate (5.7) and (5.6), respectively.
 data ReflectionAxis : Set where
-  reflect0 reflect1 reflect2 reflect3 : ReflectionAxis
+  reflect0 : ReflectionAxis
+  reflect1 : ReflectionAxis
+  reflect2 : ReflectionAxis
+  reflect3 : ReflectionAxis
 
 data AdjacentPermutation : Set where
-  permute01 permute12 permute23 : AdjacentPermutation
+  permute01 : AdjacentPermutation
+  permute12 : AdjacentPermutation
+  permute23 : AdjacentPermutation
 
 reflectionGenerator : ReflectionAxis → Action.HypercubicGenerator
 reflectionGenerator reflect0 = Action.flip0

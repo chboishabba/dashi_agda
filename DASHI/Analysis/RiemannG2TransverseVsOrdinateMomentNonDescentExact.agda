@@ -24,7 +24,8 @@ import DASHI.Analysis.RiemannAristotlePoleNearPhaseStatisticExact as Phase
 ------------------------------------------------------------------------
 
 data ZeroCoordinateWorld : Set where
-  sameTransverseNearOrdinate sameTransverseFarOrdinate : ZeroCoordinateWorld
+  sameTransverseNearOrdinate : ZeroCoordinateWorld
+  sameTransverseFarOrdinate : ZeroCoordinateWorld
 
 transverseDisplacementCode : ZeroCoordinateWorld → Nat
 transverseDisplacementCode sameTransverseNearOrdinate = 1

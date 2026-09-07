@@ -52,7 +52,11 @@ data TransitionAxis : Set where
 
 
 data AxisTransitionStatus : Set where
-  corrected changed persisted mixed unresolved : AxisTransitionStatus
+  corrected : AxisTransitionStatus
+  changed : AxisTransitionStatus
+  persisted : AxisTransitionStatus
+  mixed : AxisTransitionStatus
+  unresolved : AxisTransitionStatus
 
 transitionStatus :
   ∀ {before after} →
@@ -143,7 +147,8 @@ data FormalCorrectionSurface : Set where
   formalRepresentationCorrected : FormalCorrectionSurface
 
 data SymbolicClosureState : Set where
-  symbolicResidualOpen symbolicResidualClosed : SymbolicClosureState
+  symbolicResidualOpen : SymbolicClosureState
+  symbolicResidualClosed : SymbolicClosureState
 
 data FineTransitionState : Set where
   correctedWithSymbolicResidual : FineTransitionState
@@ -175,10 +180,12 @@ data SymbolicReconstitutionSurface : Set where
   positiveRechartPresent : SymbolicReconstitutionSurface
 
 data MaterialParityState : Set where
-  materialAsymmetryRetained materialParityReached : MaterialParityState
+  materialAsymmetryRetained : MaterialParityState
+  materialParityReached : MaterialParityState
 
 data RechartFineState : Set where
-  rechartWithAsymmetry rechartWithParity : RechartFineState
+  rechartWithAsymmetry : RechartFineState
+  rechartWithParity : RechartFineState
 
 symbolicRechartObserver : RechartFineState → SymbolicReconstitutionSurface
 symbolicRechartObserver _ = positiveRechartPresent

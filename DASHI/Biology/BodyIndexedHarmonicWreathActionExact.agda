@@ -21,10 +21,12 @@ import DASHI.Physics.Common.FiniteThreeCycleTorusExact as Torus
 ------------------------------------------------------------------------
 
 data BodyIndex : Set where
-  regulatedBody mobilisedBody : BodyIndex
+  regulatedBody : BodyIndex
+  mobilisedBody : BodyIndex
 
 data LocalGate : Set where
-  gateClosed gateOpen : LocalGate
+  gateClosed : LocalGate
+  gateOpen : LocalGate
 
 record IndexedState : Set where
   constructor indexedState

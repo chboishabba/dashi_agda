@@ -7,10 +7,13 @@ open import Data.Unit using (⊤; tt)
 open import DASHI.Cognition.PNF.IndexedSparseFrontierCandidateExposureExact
 
 data Demand : Set where
-  d₀ d₁ : Demand
+  d₀ : Demand
+  d₁ : Demand
 
 data Profile : Set where
-  p₀ p₁ p₂ : Profile
+  p₀ : Profile
+  p₁ : Profile
+  p₂ : Profile
 
 candidateRelation : Demand → Profile → Set
 candidateRelation d₀ p₀ = ⊤

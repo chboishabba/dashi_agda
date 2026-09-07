@@ -27,7 +27,10 @@ import DASHI.Governance.FeministClimateJusticeResidualBundleExact as ResidualGen
 ------------------------------------------------------------------------
 
 data FeministClimateSource : Set where
-  power2004 waring1988 macgregor2014 sultana2022 : FeministClimateSource
+  power2004 : FeministClimateSource
+  waring1988 : FeministClimateSource
+  macgregor2014 : FeministClimateSource
+  sultana2022 : FeministClimateSource
   alstonFullerKwarney2023 carterHoward2020 yusoff2018 maathai2004 : FeministClimateSource
 
 
@@ -88,7 +91,9 @@ verifiedYusoffSource = Sources.yusoff2018
 ------------------------------------------------------------------------
 
 data ActivityState : Set where
-  noActivity unpaidCare paidMarketActivity : ActivityState
+  noActivity : ActivityState
+  unpaidCare : ActivityState
+  paidMarketActivity : ActivityState
 
 countedOutput : ActivityState → Nat
 countedOutput noActivity = 0
@@ -119,7 +124,9 @@ strongWaringNonfactorabilityAvailable =
 ------------------------------------------------------------------------
 
 data ResidualKind : Set where
-  phenomenonResidual epistemicResidual responsibilityImpactAsymmetryResidual : ResidualKind
+  phenomenonResidual : ResidualKind
+  epistemicResidual : ResidualKind
+  responsibilityImpactAsymmetryResidual : ResidualKind
   categoricalAuthorityResidual democraticAuthorityResidual : ResidualKind
 
 phenomenonResidualDiffersFromEpistemicResidual :

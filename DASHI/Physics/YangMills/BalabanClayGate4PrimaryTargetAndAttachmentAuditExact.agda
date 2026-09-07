@@ -11,7 +11,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 
 data VerificationStatus : Set where
-  pendingPrimarySourceCheck primarySourceVerified : VerificationStatus
+  pendingPrimarySourceCheck : VerificationStatus
+  primarySourceVerified : VerificationStatus
 
 record PrimaryGate4Target : Set where
   constructor primaryTarget
@@ -162,7 +163,9 @@ erikssonUVLocator = locator
 ------------------------------------------------------------------------
 
 data AttachmentScope : Set where
-  gate4Primary gate4SecondaryLocator harmonicAnalysisOutsideGate4 : AttachmentScope
+  gate4Primary : AttachmentScope
+  gate4SecondaryLocator : AttachmentScope
+  harmonicAnalysisOutsideGate4 : AttachmentScope
 
 record AttachmentAudit : Set where
   constructor attachment

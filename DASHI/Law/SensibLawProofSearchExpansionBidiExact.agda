@@ -16,13 +16,13 @@ import DASHI.Law.SensibLawCorpusProducerRoutingExact as Corpus
 ------------------------------------------------------------------------
 
 data ExpansionKind : Set where
-  terminologyExpansion
-  authorityIdentityExpansion
-  citationNeighbourhoodExpansion
-  doctrinalSynonymExpansion
-  lexicalRealisationExpansion
-  proofCandidateExpansion
-  : ExpansionKind
+  terminologyExpansion : ExpansionKind
+  authorityIdentityExpansion : ExpansionKind
+  citationNeighbourhoodExpansion : ExpansionKind
+  doctrinalSynonymExpansion : ExpansionKind
+  lexicalRealisationExpansion : ExpansionKind
+  proofCandidateExpansion : ExpansionKind
+
 
 record QueryExpansion : Set₁ where
   constructor queryExpansion
@@ -41,11 +41,11 @@ record QueryExpansion : Set₁ where
 open QueryExpansion public
 
 data ProofExpansionStatus : Set where
-  proofExpansionUnresolved
-  proofExpansionCandidate
-  proofExpansionAdmitted
-  proofExpansionRejected
-  : ProofExpansionStatus
+  proofExpansionUnresolved : ProofExpansionStatus
+  proofExpansionCandidate : ProofExpansionStatus
+  proofExpansionAdmitted : ProofExpansionStatus
+  proofExpansionRejected : ProofExpansionStatus
+
 
 record ProofExpansion : Set₁ where
   constructor proofExpansion
@@ -65,13 +65,13 @@ open ProofExpansion public
 ------------------------------------------------------------------------
 
 data NavigationSourceKind : Set where
-  wikipediaNavigation
-  wikidataNavigation
-  journalNavigation
-  treatiseNavigation
-  digestNavigation
-  lawReformNavigation
-  : NavigationSourceKind
+  wikipediaNavigation : NavigationSourceKind
+  wikidataNavigation : NavigationSourceKind
+  journalNavigation : NavigationSourceKind
+  treatiseNavigation : NavigationSourceKind
+  digestNavigation : NavigationSourceKind
+  lawReformNavigation : NavigationSourceKind
+
 
 record NavigationExpansion : Set where
   constructor navigationExpansion

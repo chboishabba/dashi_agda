@@ -20,13 +20,17 @@ data AbstractCausalTopology : Set where
   sameAbstractTopology : AbstractCausalTopology
 
 data PhysicalConstitution : Set where
-  constitutionAlpha constitutionBeta : PhysicalConstitution
+  constitutionAlpha : PhysicalConstitution
+  constitutionBeta : PhysicalConstitution
 
 data InstantiationStatus : Set where
-  instantiationUnresolved instantiationSupported instantiationRejected : InstantiationStatus
+  instantiationUnresolved : InstantiationStatus
+  instantiationSupported : InstantiationStatus
+  instantiationRejected : InstantiationStatus
 
 data SimulationStatus : Set where
-  simulationPresent simulationAbsent : SimulationStatus
+  simulationPresent : SimulationStatus
+  simulationAbsent : SimulationStatus
 
 record ConsciousnessCandidate : Set where
   constructor consciousness-candidate
@@ -103,7 +107,11 @@ simulationDoesNotAutomaticallyImplyInstantiation ()
 ------------------------------------------------------------------------
 
 data SubstrateKind : Set where
-  biological digital neuromorphic hybrid unknownSubstrate : SubstrateKind
+  biological : SubstrateKind
+  digital : SubstrateKind
+  neuromorphic : SubstrateKind
+  hybrid : SubstrateKind
+  unknownSubstrate : SubstrateKind
 
 data SubstrateLabelAutomaticallySettlesConsciousness
     (s : SubstrateKind) : Set where
@@ -118,7 +126,9 @@ substrateLabelDoesNotSettleConsciousness ()
 ------------------------------------------------------------------------
 
 data MoralStatusDecision : Set where
-  moralStatusOpen moralStatusProtected moralStatusRejected : MoralStatusDecision
+  moralStatusOpen : MoralStatusDecision
+  moralStatusProtected : MoralStatusDecision
+  moralStatusRejected : MoralStatusDecision
 
 data OntologyClaimAutomaticallySettlesMoralStatus : Set where
 

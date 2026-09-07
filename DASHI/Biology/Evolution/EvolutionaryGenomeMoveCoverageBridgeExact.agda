@@ -33,7 +33,8 @@ import DASHI.Biology.Evolution.EvolutionaryGenomeTrajectoryResidueBridgeExact as
 ------------------------------------------------------------------------
 
 data ArchitectureGenerator : Set where
-  fusionGenerator dissociationGenerator : ArchitectureGenerator
+  fusionGenerator : ArchitectureGenerator
+  dissociationGenerator : ArchitectureGenerator
 
 data LabeledArchitectureStep :
   ArchitectureGenerator →

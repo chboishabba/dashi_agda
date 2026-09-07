@@ -21,7 +21,8 @@ import DASHI.Biology.Levin.MillerTravelingWaveAccessProducerExact as Miller
 ------------------------------------------------------------------------
 
 data BetaControl : Set where
-  betaHigh betaLow : BetaControl
+  betaHigh : BetaControl
+  betaLow : BetaControl
 
 data GammaContent : Set where
   gammaBurst : GammaContent

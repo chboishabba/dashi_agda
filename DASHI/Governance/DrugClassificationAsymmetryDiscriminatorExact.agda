@@ -176,7 +176,8 @@ data ClassificationCoordinate : Set where
 
 
 data CoordinateValue : Set where
-  veteranValue nonVeteranValue : CoordinateValue
+  veteranValue : CoordinateValue
+  nonVeteranValue : CoordinateValue
   racializedMinorityValue majorityValue racializedUnknownValue : CoordinateValue
   housedValue precariousValue unhousedValue housingUnknownValue : CoordinateValue
   qualifyingDiagnosisValue noDiagnosisValue diagnosisUnknownValue : CoordinateValue

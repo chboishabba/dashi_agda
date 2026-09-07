@@ -188,7 +188,10 @@ dihedralConjugationRelation Cube.slot2 = refl
 dihedralConjugationRelation Cube.slot3 = refl
 
 data NamedD4 : Set where
-  identity rotation90 rotation180 rotation270 : NamedD4
+  identity : NamedD4
+  rotation90 : NamedD4
+  rotation180 : NamedD4
+  rotation270 : NamedD4
   reflectionAxis reflectionEdge reflectionOppositeAxis reflectionOppositeEdge :
     NamedD4
 

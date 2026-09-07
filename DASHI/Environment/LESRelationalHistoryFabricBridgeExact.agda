@@ -26,13 +26,17 @@ import DASHI.Environment.ThreeSistersLESRelationalComplementarityBridgeExact as 
 ------------------------------------------------------------------------
 
 data SituatedPlanningState : Set where
-  shortIsolated shortRelated longIsolated longRelated : SituatedPlanningState
+  shortIsolated : SituatedPlanningState
+  shortRelated : SituatedPlanningState
+  longIsolated : SituatedPlanningState
+  longRelated : SituatedPlanningState
 
 data CoarsePlanningObservation : Set where
   sameCurrentPlanningSummary : CoarsePlanningObservation
 
 data GateCode : Set where
-  rapidTransitionGate stagedTransitionGate : GateCode
+  rapidTransitionGate : GateCode
+  stagedTransitionGate : GateCode
 
 data ReachableCode : Set where
   rapidIsolatedReachable : ReachableCode
@@ -41,10 +45,14 @@ data ReachableCode : Set where
   stagedRelatedReachable : ReachableCode
 
 data AffordanceCode : Set where
-  isolatedAffordance relatedAffordance : AffordanceCode
+  isolatedAffordance : AffordanceCode
+  relatedAffordance : AffordanceCode
 
 data JointFutureConeCode : Set where
-  shortIsolatedCone shortRelatedCone longIsolatedCone longRelatedCone : JointFutureConeCode
+  shortIsolatedCone : JointFutureConeCode
+  shortRelatedCone : JointFutureConeCode
+  longIsolatedCone : JointFutureConeCode
+  longRelatedCone : JointFutureConeCode
 
 historyCode : SituatedPlanningState → LES7.ManagementHistory
 historyCode shortIsolated = LES7.shortHorizonConfiguration

@@ -9,10 +9,15 @@ open import Agda.Builtin.String using (String)
 -- target, mechanism, measurement, falsifier, side-effect analysis, and rollback.
 
 data FeedbackState : Set where
-  baselineState interventionApplied responseObserved rollbackApplied : FeedbackState
+  baselineState : FeedbackState
+  interventionApplied : FeedbackState
+  responseObserved : FeedbackState
+  rollbackApplied : FeedbackState
 
 data InterventionAction : Set where
-  applyIntervention observeResponse rollbackIntervention : InterventionAction
+  applyIntervention : InterventionAction
+  observeResponse : InterventionAction
+  rollbackIntervention : InterventionAction
 
 feedbackStep : FeedbackState → InterventionAction → FeedbackState
 feedbackStep state applyIntervention = interventionApplied

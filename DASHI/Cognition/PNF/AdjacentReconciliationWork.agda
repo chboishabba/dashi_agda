@@ -15,7 +15,8 @@ open import DASHI.Cognition.PNF.NumericHyperfabric
 ------------------------------------------------------------------------
 
 data AdjacentScale : Set where
-  adjacentSentenceScale adjacentParagraphScale : AdjacentScale
+  adjacentSentenceScale : AdjacentScale
+  adjacentParagraphScale : AdjacentScale
 
 data LocalClosure : Set where
   memberLocallyClosed : LocalClosure
@@ -43,7 +44,8 @@ record OrderedAdjacentPair : Set where
 open OrderedAdjacentPair public
 
 data ReconciliationWorkState : Set where
-  reconciliationReady reconciliationLeased : ReconciliationWorkState
+  reconciliationReady : ReconciliationWorkState
+  reconciliationLeased : ReconciliationWorkState
   reconciliationCompleted reconciliationFailed : ReconciliationWorkState
 
 record AdjacentWorkItem : Set where

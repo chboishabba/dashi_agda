@@ -87,7 +87,10 @@ canonicalIranUS2026Observation =
 ------------------------------------------------------------------------
 
 data IranPolicyRoute : Set where
-  coerciveThreat settlement reconstruction compensationBargaining : IranPolicyRoute
+  coerciveThreat : IranPolicyRoute
+  settlement : IranPolicyRoute
+  reconstruction : IranPolicyRoute
+  compensationBargaining : IranPolicyRoute
 
 record IranPolicyTrajectory : Set where
   constructor iranPolicyTrajectory

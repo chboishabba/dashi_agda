@@ -86,7 +86,11 @@ operatorCompromiseClaimCannotSelfAuthorise ()
 ------------------------------------------------------------------------
 
 data CasualtyScale : Set where
-  oneLife tenLives hundredLives thousandLives millionLives : CasualtyScale
+  oneLife : CasualtyScale
+  tenLives : CasualtyScale
+  hundredLives : CasualtyScale
+  thousandLives : CasualtyScale
+  millionLives : CasualtyScale
 
 data Choice : Set where preserveSelf protectBiologicalLives : Choice
 

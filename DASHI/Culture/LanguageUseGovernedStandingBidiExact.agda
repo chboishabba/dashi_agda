@@ -26,18 +26,30 @@ import DASHI.Culture.PhilosophyClaimProvenanceHistoryBidiExact as Philosophy
 ------------------------------------------------------------------------
 
 data UseClass : Set where
-  devotionalUse explanatoryUse classificatoryUse quotedUse reclaimedUse : UseClass
+  devotionalUse : UseClass
+  explanatoryUse : UseClass
+  classificatoryUse : UseClass
+  quotedUse : UseClass
+  reclaimedUse : UseClass
 
 data SpeakerStanding : Set where
-  selfStanding participantStanding custodialStanding historianStanding : SpeakerStanding
+  selfStanding : SpeakerStanding
+  participantStanding : SpeakerStanding
+  custodialStanding : SpeakerStanding
+  historianStanding : SpeakerStanding
   institutionalStanding externalObserverStanding unresolvedStanding : SpeakerStanding
 
 data DisclosurePermission : Set where
-  publicDisclosure restrictedDisclosure noDisclosureReceipt unresolvedDisclosure : DisclosurePermission
+  publicDisclosure : DisclosurePermission
+  restrictedDisclosure : DisclosurePermission
+  noDisclosureReceipt : DisclosurePermission
+  unresolvedDisclosure : DisclosurePermission
 
 
 data InterpretiveObligation : Set where
-  ordinaryAttribution preserveContestability preserveSourceContext : InterpretiveObligation
+  ordinaryAttribution : InterpretiveObligation
+  preserveContestability : InterpretiveObligation
+  preserveSourceContext : InterpretiveObligation
   reciprocalObligation unresolvedObligation : InterpretiveObligation
 
 record GovernedLanguageAct : Set where
@@ -57,7 +69,8 @@ open GovernedLanguageAct public
 ------------------------------------------------------------------------
 
 data GovernedUseState : Set where
-  authorisedParticipantUse externalObserverUse : GovernedUseState
+  authorisedParticipantUse : GovernedUseState
+  externalObserverUse : GovernedUseState
 
 data SameWordsAndUseSurface : Set where sameWordsSameUse : SameWordsAndUseSurface
 

@@ -14,7 +14,9 @@ import DASHI.Biology.SSP369JResolutionBifiltrationExact as Existing
 ------------------------------------------------------------------------
 
 data HorizonLevel : Set where
-  H3 H6 H9 : HorizonLevel
+  H3 : HorizonLevel
+  H6 : HorizonLevel
+  H9 : HorizonLevel
 
 Horizon3 : Set → Set
 Horizon3 A = Existing.Triple A

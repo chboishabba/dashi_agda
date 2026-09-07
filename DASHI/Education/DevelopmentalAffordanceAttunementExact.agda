@@ -25,21 +25,28 @@ import DASHI.Reasoning.RelationalFormalismSourceAtlas as RelationalSources
 ------------------------------------------------------------------------
 
 data DevelopmentalPhase : Set where
-  earlyExploration emergingSymbolic consolidatedPractice : DevelopmentalPhase
+  earlyExploration : DevelopmentalPhase
+  emergingSymbolic : DevelopmentalPhase
+  consolidatedPractice : DevelopmentalPhase
 
 data AffordanceKind : Set where
-  relationalAffordance sensoryAffordance olfactoryAffordance : AffordanceKind
+  relationalAffordance : AffordanceKind
+  sensoryAffordance : AffordanceKind
+  olfactoryAffordance : AffordanceKind
   spatialAffordance motorAffordance socialAffordance : AffordanceKind
   languageAffordance restRecoveryAffordance : AffordanceKind
 
 data AffordanceFit : Set where
-  mismatchedAffordanceFit attunedAffordanceFit : AffordanceFit
+  mismatchedAffordanceFit : AffordanceFit
+  attunedAffordanceFit : AffordanceFit
 
 data TemporalOrganisation : Set where
-  fragmentedTiming contingentPredictableTiming : TemporalOrganisation
+  fragmentedTiming : TemporalOrganisation
+  contingentPredictableTiming : TemporalOrganisation
 
 data ChildPreferenceVisibility : Set where
-  preferenceOccluded preferenceContestableVisible : ChildPreferenceVisibility
+  preferenceOccluded : ChildPreferenceVisibility
+  preferenceContestableVisible : ChildPreferenceVisibility
 
 record DevelopmentalAffordanceCell : Set where
   constructor developmentalAffordanceCell

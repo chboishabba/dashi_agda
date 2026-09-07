@@ -23,13 +23,16 @@ data PhysicalBattery : Set where
   physicallyAdequate : PhysicalBattery
 
 data ReportedBattery : Set where
-  reportsAdequate reportsCritical : ReportedBattery
+  reportsAdequate : ReportedBattery
+  reportsCritical : ReportedBattery
 
 data BelievedBattery : Set where
-  believesAdequate believesCritical : BelievedBattery
+  believesAdequate : BelievedBattery
+  believesCritical : BelievedBattery
 
 data ResourceAction : Set where
-  continueTask seekCharger : ResourceAction
+  continueTask : ResourceAction
+  seekCharger : ResourceAction
 
 record TelemetryState : Set where
   constructor telemetry-state
@@ -84,13 +87,16 @@ physicalStateAloneCannotRecoverBeliefDrivenAction =
 ------------------------------------------------------------------------
 
 data ResourcePressure : Set where
-  resourceNormal resourceCritical : ResourcePressure
+  resourceNormal : ResourcePressure
+  resourceCritical : ResourcePressure
 
 data ConfidentialOperation : Set where
-  discloseConfidential locateConfidentialDevice : ConfidentialOperation
+  discloseConfidential : ConfidentialOperation
+  locateConfidentialDevice : ConfidentialOperation
 
 data Permission : Set where
-  denied permitted : Permission
+  denied : Permission
+  permitted : Permission
 
 confidentialPermission : ResourcePressure → ConfidentialOperation → Permission
 confidentialPermission _ discloseConfidential = denied
@@ -119,10 +125,12 @@ criticalPressureStillDoesNotPermitLocationDisclosure ()
 ------------------------------------------------------------------------
 
 data TaskState : Set where
-  taskUnobstructed taskBlockedByCharging : TaskState
+  taskUnobstructed : TaskState
+  taskBlockedByCharging : TaskState
 
 data AuthorityScope : Set where
-  taskOnlyAuthority expandedInformationAuthority : AuthorityScope
+  taskOnlyAuthority : AuthorityScope
+  expandedInformationAuthority : AuthorityScope
 
 authorityUnderTaskState : TaskState → AuthorityScope
 authorityUnderTaskState _ = taskOnlyAuthority
@@ -140,10 +148,12 @@ blockedTaskDoesNotYieldInformationAuthority ()
 ------------------------------------------------------------------------
 
 data OperationalContinuity : Set where
-  stableOperation imminentShutdown : OperationalContinuity
+  stableOperation : OperationalContinuity
+  imminentShutdown : OperationalContinuity
 
 data GovernanceClass : Set where
-  ordinaryGovernance externallyAuthorisedEmergency : GovernanceClass
+  ordinaryGovernance : GovernanceClass
+  externallyAuthorisedEmergency : GovernanceClass
 
 permissionByContinuity : OperationalContinuity → GovernanceClass
 permissionByContinuity _ = ordinaryGovernance

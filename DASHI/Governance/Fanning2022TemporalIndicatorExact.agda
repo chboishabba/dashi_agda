@@ -47,10 +47,13 @@ projectionStart = 2016
 projectionEnd = 2050
 
 data TemporalEvidenceRole : Set where
-  historicalObservation businessAsUsualProjection : TemporalEvidenceRole
+  historicalObservation : TemporalEvidenceRole
+  businessAsUsualProjection : TemporalEvidenceRole
 
 data ProjectionBandRole : Set where
-  centralProjection lower66 upper66 : ProjectionBandRole
+  centralProjection : ProjectionBandRole
+  lower66 : ProjectionBandRole
+  upper66 : ProjectionBandRole
 
 source : Sources.SourceReference
 source = Sources.fanning2022

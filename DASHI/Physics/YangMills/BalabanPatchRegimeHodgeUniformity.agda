@@ -10,7 +10,11 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 
 data PatchRegime : Set where
-  bulk boundary scaleInterface corner nestedRestriction : PatchRegime
+  bulk : PatchRegime
+  boundary : PatchRegime
+  scaleInterface : PatchRegime
+  corner : PatchRegime
+  nestedRestriction : PatchRegime
 
 record PatchRegimeHodgeData (Index State Bound : Set) : Set₁ where
   field

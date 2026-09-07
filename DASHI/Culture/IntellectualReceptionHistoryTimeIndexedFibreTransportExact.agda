@@ -83,7 +83,8 @@ archiveTransportChangesFutureCone ()
 ------------------------------------------------------------------------
 
 data ReconstructedEndpointCase : Set where
-  transportedEarly reconstructedLate : ReconstructedEndpointCase
+  transportedEarly : ReconstructedEndpointCase
+  reconstructedLate : ReconstructedEndpointCase
 
 data SameLaterCoarseEndpoint : Set where sameT2MovementEndpoint : SameLaterCoarseEndpoint
 

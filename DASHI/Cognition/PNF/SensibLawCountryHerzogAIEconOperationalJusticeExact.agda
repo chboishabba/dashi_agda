@@ -123,22 +123,22 @@ capitalRelationAloneDoesNotExhaustAIRegime = refl
 ------------------------------------------------------------------------
 
 data OperationalJusticeDomain : Set where
-  countryNativeTitleDomain
-  herzogPolicingDomain
-  aiInfrastructureDomain
-  : OperationalJusticeDomain
+  countryNativeTitleDomain : OperationalJusticeDomain
+  herzogPolicingDomain : OperationalJusticeDomain
+  aiInfrastructureDomain : OperationalJusticeDomain
+
 
 data DominantSurface : Set where
-  recognisedNativeTitleSurface
-  publicOrderSecuritySurface
-  criticalInfrastructureStrategicSurface
-  : DominantSurface
+  recognisedNativeTitleSurface : DominantSurface
+  publicOrderSecuritySurface : DominantSurface
+  criticalInfrastructureStrategicSurface : DominantSurface
+
 
 data MaterialConsumer : Set where
-  countryAuthorityAndLandControlConsumer
-  lawfulFieldExecutionAndPoliticalContentConsumer
-  terminalPayerBeneficiaryDependencyConsumer
-  : MaterialConsumer
+  countryAuthorityAndLandControlConsumer : MaterialConsumer
+  lawfulFieldExecutionAndPoliticalContentConsumer : MaterialConsumer
+  terminalPayerBeneficiaryDependencyConsumer : MaterialConsumer
+
 
 surfaceFor : OperationalJusticeDomain → DominantSurface
 surfaceFor countryNativeTitleDomain = recognisedNativeTitleSurface
@@ -240,13 +240,13 @@ sharedFormalFailureDoesNotMergePolitics = refl
 ------------------------------------------------------------------------
 
 data ColonialEconomicAuditCoordinate : Set where
-  authorityToDefineLegibleValue
-  authorityToDefineLegibleSecurity
-  authorityToDefineLegibleProperty
-  distributionOfMaterialBenefit
-  distributionOfMaterialBurden
-  correctionChannelAccess
-  : ColonialEconomicAuditCoordinate
+  authorityToDefineLegibleValue : ColonialEconomicAuditCoordinate
+  authorityToDefineLegibleSecurity : ColonialEconomicAuditCoordinate
+  authorityToDefineLegibleProperty : ColonialEconomicAuditCoordinate
+  distributionOfMaterialBenefit : ColonialEconomicAuditCoordinate
+  distributionOfMaterialBurden : ColonialEconomicAuditCoordinate
+  correctionChannelAccess : ColonialEconomicAuditCoordinate
+
 
 record ColonialEconomicAuditBoundary : Set where
   constructor colonial-economic-audit-boundary
@@ -282,18 +282,18 @@ canonicalColonialEconomicAuditBoundary = colonial-economic-audit-boundary
 ------------------------------------------------------------------------
 
 data OperationalJusticeClaim : Set where
-  nativeTitleHasRealisedEqualSovereignty
-  herzogFieldActionWasLawfullyGovernedByDirection
-  aiPublicSupportProducesDomesticPublicBenefit
-  aiPolicyBackingShowsIndependentDemand
-  : OperationalJusticeClaim
+  nativeTitleHasRealisedEqualSovereignty : OperationalJusticeClaim
+  herzogFieldActionWasLawfullyGovernedByDirection : OperationalJusticeClaim
+  aiPublicSupportProducesDomesticPublicBenefit : OperationalJusticeClaim
+  aiPolicyBackingShowsIndependentDemand : OperationalJusticeClaim
+
 
 data OperationalJusticeProducer : Set where
-  equalSovereigntyRealisationProducer
-  fieldReceiptAndLawfulExecutionProducer
-  beneficiaryDistributionProducer
-  terminalPayerProducer
-  : OperationalJusticeProducer
+  equalSovereigntyRealisationProducer : OperationalJusticeProducer
+  fieldReceiptAndLawfulExecutionProducer : OperationalJusticeProducer
+  beneficiaryDistributionProducer : OperationalJusticeProducer
+  terminalPayerProducer : OperationalJusticeProducer
+
 
 reverseOperationalJustice : OperationalJusticeClaim → OperationalJusticeProducer
 reverseOperationalJustice nativeTitleHasRealisedEqualSovereignty = equalSovereigntyRealisationProducer

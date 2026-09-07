@@ -12,10 +12,19 @@ import DASHI.Culture.IndigenousKnowledgeStoryTwoEyedSeeingBidiExact as IK
 -- DASHI extension only; not a universal Indigenous governance model.
 
 data EpistemicMoveKind : Set where
-  thinkMove lookMove testMove askMove listenMove deliberateMove actMove : EpistemicMoveKind
+  thinkMove : EpistemicMoveKind
+  lookMove : EpistemicMoveKind
+  testMove : EpistemicMoveKind
+  askMove : EpistemicMoveKind
+  listenMove : EpistemicMoveKind
+  deliberateMove : EpistemicMoveKind
+  actMove : EpistemicMoveKind
 
 data DeliberationOutcome : Set where
-  consensusReached legitimateResidualDisagreement proposalRevised moreHearingRequired : DeliberationOutcome
+  consensusReached : DeliberationOutcome
+  legitimateResidualDisagreement : DeliberationOutcome
+  proposalRevised : DeliberationOutcome
+  moreHearingRequired : DeliberationOutcome
 
 record SituatedParticipant : Set where
   constructor situated-participant

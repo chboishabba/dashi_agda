@@ -14,7 +14,9 @@ import DASHI.Reasoning.Spacy369MultiConsumerCoveragePathResidueExact as Path
 ------------------------------------------------------------------------
 
 data CoverageDepth : Set where
-  depth0 depth1 depth2 : CoverageDepth
+  depth0 : CoverageDepth
+  depth1 : CoverageDepth
+  depth2 : CoverageDepth
 
 data DeclaredConsumer : Set where
   operationalConsumer : DeclaredConsumer
@@ -24,7 +26,8 @@ data DeclaredConsumer : Set where
 
 
 data ClosureStatus : Set where
-  stillOpen closedHere : ClosureStatus
+  stillOpen : ClosureStatus
+  closedHere : ClosureStatus
 
 coverageStatus : CoverageDepth → DeclaredConsumer → ClosureStatus
 coverageStatus depth0 operationalConsumer = closedHere

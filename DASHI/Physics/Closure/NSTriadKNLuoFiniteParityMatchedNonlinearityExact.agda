@@ -32,7 +32,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 data Bit : Set where
-  b0 b1 : Bit
+  b0 : Bit
+  b1 : Bit
 
 infixl 6 _⊕_
 _⊕_ : Bit → Bit → Bit

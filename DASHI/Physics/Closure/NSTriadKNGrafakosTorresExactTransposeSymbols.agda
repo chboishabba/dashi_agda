@@ -32,10 +32,14 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNExactSignedGalerkinCoefficient as Signed
 
 data OperatorLeg : Set where
-  outputLeg firstInputLeg secondInputLeg : OperatorLeg
+  outputLeg : OperatorLeg
+  firstInputLeg : OperatorLeg
+  secondInputLeg : OperatorLeg
 
 data FormalTranspose : Set where
-  original firstTranspose secondTranspose : FormalTranspose
+  original : FormalTranspose
+  firstTranspose : FormalTranspose
+  secondTranspose : FormalTranspose
 
 kernelOutputLeg : FormalTranspose → OperatorLeg
 kernelOutputLeg original = outputLeg
@@ -70,10 +74,12 @@ kernelPermutationReceipt =
   kernel-permutation-receipt refl refl refl refl refl refl refl
 
 data FrozenInput : Set where
-  freezeFirstInput freezeSecondInput : FrozenInput
+  freezeFirstInput : FrozenInput
+  freezeSecondInput : FrozenInput
 
 data InheritedTranspose : Set where
-  inheritedFirstTranspose inheritedSecondTranspose : InheritedTranspose
+  inheritedFirstTranspose : InheritedTranspose
+  inheritedSecondTranspose : InheritedTranspose
 
 transposeAfterFreeze : FrozenInput → InheritedTranspose
 transposeAfterFreeze freezeFirstInput = inheritedSecondTranspose

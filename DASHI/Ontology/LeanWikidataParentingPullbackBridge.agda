@@ -169,7 +169,10 @@ latestParentPullbackTheoremContracts =
 ------------------------------------------------------------------------
 
 data JMDParentRole : Set where
-  jmdBiological jmdDonor jmdSurrogate jmdAdoptive : JMDParentRole
+  jmdBiological : JMDParentRole
+  jmdDonor : JMDParentRole
+  jmdSurrogate : JMDParentRole
+  jmdAdoptive : JMDParentRole
   jmdStep jmdFoster jmdGuardian jmdGodparent : JMDParentRole
 
 jmdIsGenetic : JMDParentRole → Bool

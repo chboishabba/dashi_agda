@@ -174,7 +174,11 @@ crochetExecutionMovesActiveRootToNewestLoop state action = refl
 ------------------------------------------------------------------------
 
 data CraftKind : Set where
-  braidCraft plaitCraft weaveCraft knitCraft crochetCraft : CraftKind
+  braidCraft : CraftKind
+  plaitCraft : CraftKind
+  weaveCraft : CraftKind
+  knitCraft : CraftKind
+  crochetCraft : CraftKind
 
 data DependencyGrammar : Set where
   adjacentPermutationGrammar : DependencyGrammar

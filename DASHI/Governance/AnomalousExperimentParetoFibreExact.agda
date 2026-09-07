@@ -197,7 +197,8 @@ surveyCannotEnterParetoFront front = surveyNotAdmitted (admitted front)
 ------------------------------------------------------------------------
 
 data StudyPreference : Set where
-  resourceBurdenPriority robustnessPriority : StudyPreference
+  resourceBurdenPriority : StudyPreference
+  robustnessPriority : StudyPreference
 
 preferredDesign : StudyPreference → StudyDesign
 preferredDesign resourceBurdenPriority = preregisteredStudy

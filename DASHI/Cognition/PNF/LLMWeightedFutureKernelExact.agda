@@ -23,7 +23,10 @@ totalWeight : BinaryWeightKernel → Nat
 totalWeight kernel = zeroWeight kernel + oneWeight kernel
 
 data KernelState : Set where
-  leftBefore rightBefore leftAfter rightAfter : KernelState
+  leftBefore : KernelState
+  rightBefore : KernelState
+  leftAfter : KernelState
+  rightAfter : KernelState
 
 data KernelAction : Set where
   extendContext : KernelAction

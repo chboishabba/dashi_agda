@@ -32,18 +32,21 @@ import DASHI.Analysis.RiemannG2TargetModulationFinalOffCutoffCompilerExact as Cu
 ------------------------------------------------------------------------
 
 data FinalPoleNearRoutePayment : Set where
-  recoverCarrierNeutralFiniteNearProducer
-  recoverHistoricalDeterminantDirectProducer
-  attachFiniteEvaluationToSelectedWindow
-  transportSelectedBudgetToFinalNearBudget
-  proveSelectedNearBudgetEpsilonSlack
-  constructLiteralTargetModulationWindow
-  identifyTargetWindowWithModulation
-  recoverLawfulExplicitFormulaExtraction
-  : FinalPoleNearRoutePayment
+  recoverCarrierNeutralFiniteNearProducer : FinalPoleNearRoutePayment
+  recoverHistoricalDeterminantDirectProducer : FinalPoleNearRoutePayment
+  attachFiniteEvaluationToSelectedWindow : FinalPoleNearRoutePayment
+  transportSelectedBudgetToFinalNearBudget : FinalPoleNearRoutePayment
+  proveSelectedNearBudgetEpsilonSlack : FinalPoleNearRoutePayment
+  constructLiteralTargetModulationWindow : FinalPoleNearRoutePayment
+  identifyTargetWindowWithModulation : FinalPoleNearRoutePayment
+  recoverLawfulExplicitFormulaExtraction : FinalPoleNearRoutePayment
+
 
 data PaymentState : Set where
-  live downstream compatibility conditional : PaymentState
+  live : PaymentState
+  downstream : PaymentState
+  compatibility : PaymentState
+  conditional : PaymentState
 
 paymentState : FinalPoleNearRoutePayment → PaymentState
 paymentState recoverCarrierNeutralFiniteNearProducer = live

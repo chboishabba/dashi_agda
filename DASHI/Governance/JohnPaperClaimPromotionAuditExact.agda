@@ -30,7 +30,11 @@ import DASHI.Governance.RepresentationCarrierVerificationCore as Verification
 ------------------------------------------------------------------------
 
 data ClaimLayer : Set where
-  descriptiveLayer empiricalLayer mechanismLayer normativeLayer legalLayer : ClaimLayer
+  descriptiveLayer : ClaimLayer
+  empiricalLayer : ClaimLayer
+  mechanismLayer : ClaimLayer
+  normativeLayer : ClaimLayer
+  legalLayer : ClaimLayer
 
 record PaperClaim : Set where
   constructor paperClaim

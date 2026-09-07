@@ -182,7 +182,8 @@ earlyLateSameAuthorityAtT2 = refl
 ------------------------------------------------------------------------
 
 data MovementTransportRouteCase : Set where
-  earlyAuthorityRoute lateAuthorityRoute : MovementTransportRouteCase
+  earlyAuthorityRoute : MovementTransportRouteCase
+  lateAuthorityRoute : MovementTransportRouteCase
 
 data SameCoarseT0T2EndpointCode : Set where
   sameMovementT0T2Endpoints : SameCoarseT0T2EndpointCode
@@ -252,13 +253,15 @@ lateAuthorityPresentAtT2 = refl
 ------------------------------------------------------------------------
 
 data SameTerminalEndpointCase : Set where
-  earlyTerminalRoute lateTerminalRoute : SameTerminalEndpointCase
+  earlyTerminalRoute : SameTerminalEndpointCase
+  lateTerminalRoute : SameTerminalEndpointCase
 
 data SameTerminalEndpointCode : Set where
   sameMovementAuthorityTerminal : SameTerminalEndpointCode
 
 data ComposedPathHistoryCode : Set where
-  earlyComposedHistory lateComposedHistory : ComposedPathHistoryCode
+  earlyComposedHistory : ComposedPathHistoryCode
+  lateComposedHistory : ComposedPathHistoryCode
 
 terminalEndpointCode : SameTerminalEndpointCase → SameTerminalEndpointCode
 terminalEndpointCode _ = sameMovementAuthorityTerminal

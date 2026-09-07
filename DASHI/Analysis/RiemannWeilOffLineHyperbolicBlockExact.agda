@@ -61,7 +61,8 @@ trans refl yz = yz
 ------------------------------------------------------------------------
 
 data HyperbolicDirection : Set where
-  positiveDirection negativeDirection : HyperbolicDirection
+  positiveDirection : HyperbolicDirection
+  negativeDirection : HyperbolicDirection
 
 record HyperbolicPairBlock : Set where
   constructor hyperbolicPairBlock

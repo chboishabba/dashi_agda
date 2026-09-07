@@ -27,11 +27,11 @@ import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExa
 ------------------------------------------------------------------------
 
 data RuntimeCarrierKind : Set where
-  directNumericPNFCarrier
-  legalIRObservationCarrier
-  legalTypedMeetCarrier
-  reviewedLegalPromotionCarrier
-  : RuntimeCarrierKind
+  directNumericPNFCarrier : RuntimeCarrierKind
+  legalIRObservationCarrier : RuntimeCarrierKind
+  legalTypedMeetCarrier : RuntimeCarrierKind
+  reviewedLegalPromotionCarrier : RuntimeCarrierKind
+
 
 record RuntimePNFReceipt : Set where
   constructor runtimePNFReceipt
@@ -116,12 +116,12 @@ open RuntimeLegalTypedMeet public
 ------------------------------------------------------------------------
 
 data RuntimeLegalPromotionStatus : Set where
-  noPromotion
-  applicabilityCandidatePromotion
-  applicabilityAdmittedPromotion
-  inapplicabilityAdmittedPromotion
-  promotionBlocked
-  : RuntimeLegalPromotionStatus
+  noPromotion : RuntimeLegalPromotionStatus
+  applicabilityCandidatePromotion : RuntimeLegalPromotionStatus
+  applicabilityAdmittedPromotion : RuntimeLegalPromotionStatus
+  inapplicabilityAdmittedPromotion : RuntimeLegalPromotionStatus
+  promotionBlocked : RuntimeLegalPromotionStatus
+
 
 promotionFor : Status.ApplicabilityStatus → RuntimeLegalPromotionStatus
 promotionFor Status.applicabilityUnresolved = noPromotion
@@ -146,15 +146,15 @@ open ReviewedRuntimeLegalPromotion public
 ------------------------------------------------------------------------
 
 data RuntimeLegalProducer : Set where
-  directPNFProducer
-  legalSourceFollowProducer
-  legalIRProjectionProducer
-  typedMeetProducer
-  authorityReviewProducer
-  applicabilityReviewProducer
-  wrongTypeElementProducer
-  evidencePaymentProducer
-  : RuntimeLegalProducer
+  directPNFProducer : RuntimeLegalProducer
+  legalSourceFollowProducer : RuntimeLegalProducer
+  legalIRProjectionProducer : RuntimeLegalProducer
+  typedMeetProducer : RuntimeLegalProducer
+  authorityReviewProducer : RuntimeLegalProducer
+  applicabilityReviewProducer : RuntimeLegalProducer
+  wrongTypeElementProducer : RuntimeLegalProducer
+  evidencePaymentProducer : RuntimeLegalProducer
+
 
 record RuntimeLegalProducerBoundary : Set where
   constructor runtimeLegalProducerBoundary
@@ -224,16 +224,16 @@ historicalRuntimeDoesNotDefineNewFormalSemantics ()
 ------------------------------------------------------------------------
 
 data ImplementationLayer : Set where
-  agdaFormalLayer
-  rustSLRRuntimeLayer
-  historicalSensibLawReferenceLayer
-  : ImplementationLayer
+  agdaFormalLayer : ImplementationLayer
+  rustSLRRuntimeLayer : ImplementationLayer
+  historicalSensibLawReferenceLayer : ImplementationLayer
+
 
 data ImplementationRole : Set where
-  formalSemanticAuthority
-  productionRuntimeConsumer
-  referenceOnlyProducer
-  : ImplementationRole
+  formalSemanticAuthority : ImplementationRole
+  productionRuntimeConsumer : ImplementationRole
+  referenceOnlyProducer : ImplementationRole
+
 
 roleOf : ImplementationLayer → ImplementationRole
 roleOf agdaFormalLayer = formalSemanticAuthority

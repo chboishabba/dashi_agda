@@ -26,26 +26,26 @@ data AllicinDisturbance : Set where
   allicinExposure : AllicinDisturbance
 
 data MolecularDamageState : Set where
-  proteinSThioallylation
-  lowMolecularWeightThiolShift
-  mixedDisulfideStress
-  regulatorModification
-  : MolecularDamageState
+  proteinSThioallylation : MolecularDamageState
+  lowMolecularWeightThiolShift : MolecularDamageState
+  mixedDisulfideStress : MolecularDamageState
+  regulatorModification : MolecularDamageState
+
 
 data RecoveryAction : Set where
-  bacillithiolBuffering
-  brxDependentDethioallylation
-  ypdAReduction
-  merADisulfideReduction
-  combinedThiolHomeostasis
-  : RecoveryAction
+  bacillithiolBuffering : RecoveryAction
+  brxDependentDethioallylation : RecoveryAction
+  ypdAReduction : RecoveryAction
+  merADisulfideReduction : RecoveryAction
+  combinedThiolHomeostasis : RecoveryAction
+
 
 data RegulatoryResponse : Set where
-  hypRResponse
-  mgrASarAContext
-  oxidativeStressResponse
-  unresolvedRegulatoryResponse
-  : RegulatoryResponse
+  hypRResponse : RegulatoryResponse
+  mgrASarAContext : RegulatoryResponse
+  oxidativeStressResponse : RegulatoryResponse
+  unresolvedRegulatoryResponse : RegulatoryResponse
+
 
 damageFromAllicin : AllicinDisturbance → MolecularDamageState
 damageFromAllicin allicinExposure = proteinSThioallylation

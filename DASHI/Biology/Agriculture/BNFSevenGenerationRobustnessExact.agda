@@ -10,21 +10,21 @@ import DASHI.Biology.Agriculture.BNFSevenGenerationPlanningExact as Seven
 import DASHI.Biology.Agriculture.BNFQualifiedInterventionModelExact as Qualified
 
 data BNFLongHorizonHypothesis : Set where
-  optimisticPersistence
-  stressSensitivePersistence
-  recoveryLimitedPersistence
-  : BNFLongHorizonHypothesis
+  optimisticPersistence : BNFLongHorizonHypothesis
+  stressSensitivePersistence : BNFLongHorizonHypothesis
+  recoveryLimitedPersistence : BNFLongHorizonHypothesis
+
 
 data BNFLongHorizonAction : Set where
-  baselineManagement
-  inoculationCentredManagement
-  diversifiedNitrogenStrategy
-  : BNFLongHorizonAction
+  baselineManagement : BNFLongHorizonAction
+  inoculationCentredManagement : BNFLongHorizonAction
+  diversifiedNitrogenStrategy : BNFLongHorizonAction
+
 
 data BNFLongHorizonOutcome : Set where
-  acceptableOutcome
-  impairedOutcome
-  : BNFLongHorizonOutcome
+  acceptableOutcome : BNFLongHorizonOutcome
+  impairedOutcome : BNFLongHorizonOutcome
+
 
 longHorizonSystem :
   Robust.HorizonInterventionSystem

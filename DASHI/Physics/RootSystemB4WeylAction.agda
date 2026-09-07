@@ -21,7 +21,12 @@ concatMapW : ∀ {A B : Set} → (A → List B) → List A → List B
 concatMapW f xs = concatW (map f xs)
 
 data Perm4 : Set where
-  p0123 p0132 p0213 p0231 p0312 p0321 : Perm4
+  p0123 : Perm4
+  p0132 : Perm4
+  p0213 : Perm4
+  p0231 : Perm4
+  p0312 : Perm4
+  p0321 : Perm4
   p1023 p1032 p1203 p1230 p1302 p1320 : Perm4
   p2013 p2031 p2103 p2130 p2301 p2310 : Perm4
   p3012 p3021 p3102 p3120 p3201 p3210 : Perm4

@@ -15,7 +15,10 @@ import DASHI.Foundations.RecursiveRadixHypervoxel as Hyper
 ------------------------------------------------------------------------
 
 data BodyTimescale : Set where
-  neuralFast autonomicFast endocrineSlower plasticSlow : BodyTimescale
+  neuralFast : BodyTimescale
+  autonomicFast : BodyTimescale
+  endocrineSlower : BodyTimescale
+  plasticSlow : BodyTimescale
 
 record BodySupervoxel : Set where
   constructor bodySupervoxel
@@ -78,10 +81,12 @@ historyBodyFutureCubie =
 ------------------------------------------------------------------------
 
 data PredictedDemand : Set where
-  lowDemand highDemand : PredictedDemand
+  lowDemand : PredictedDemand
+  highDemand : PredictedDemand
 
 data RegulatoryPolicy : Set where
-  recoverPolicy preparePolicy : RegulatoryPolicy
+  recoverPolicy : RegulatoryPolicy
+  preparePolicy : RegulatoryPolicy
 
 policyFor : PredictedDemand → RegulatoryPolicy
 policyFor lowDemand = recoverPolicy

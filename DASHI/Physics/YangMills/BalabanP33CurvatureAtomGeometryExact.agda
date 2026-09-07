@@ -57,7 +57,10 @@ axis2 = sucᵢ (sucᵢ zeroᵢ)
 axis3 = sucᵢ (sucᵢ (sucᵢ zeroᵢ))
 
 data DirectedAxisPair4 : Set where
-  directed01 directed02 directed03 directed10 : DirectedAxisPair4
+  directed01 : DirectedAxisPair4
+  directed02 : DirectedAxisPair4
+  directed03 : DirectedAxisPair4
+  directed10 : DirectedAxisPair4
   directed12 directed13 directed20 directed21 : DirectedAxisPair4
   directed23 directed30 directed31 directed32 : DirectedAxisPair4
 

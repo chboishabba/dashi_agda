@@ -8,10 +8,14 @@ import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 import DASHI.Foundations.DialecticSheetFrameSelectorExact as Selector
 
 data CandidateFrame : Set where
-  compactFrame expansiveFrame counterFrame : CandidateFrame
+  compactFrame : CandidateFrame
+  expansiveFrame : CandidateFrame
+  counterFrame : CandidateFrame
 
 data CandidateCondition : Set where
-  conditionP conditionQ synthesisS : CandidateCondition
+  conditionP : CandidateCondition
+  conditionQ : CandidateCondition
+  synthesisS : CandidateCondition
 
 candidateEvaluate :
   CandidateFrame → CandidateCondition → BT.BalancedDigit

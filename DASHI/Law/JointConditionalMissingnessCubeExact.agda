@@ -148,7 +148,11 @@ record JointMissingnessCutset : Set where
 open JointMissingnessCutset public
 
 data JointMissingnessResidual : Set where
-  officerMarginResidual outcomeMarginResidual officerOutcomeJointResidual fullCubeResidual jointMissingnessClosed : JointMissingnessResidual
+  officerMarginResidual : JointMissingnessResidual
+  outcomeMarginResidual : JointMissingnessResidual
+  officerOutcomeJointResidual : JointMissingnessResidual
+  fullCubeResidual : JointMissingnessResidual
+  jointMissingnessClosed : JointMissingnessResidual
 
 firstJointResidual : JointMissingnessClaim → JointMissingnessCutset → JointMissingnessResidual
 firstJointResidual officerMarginal c with officerMarginClosed c

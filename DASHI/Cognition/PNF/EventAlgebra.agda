@@ -11,19 +11,31 @@ import DASHI.Cognition.Utterance.LayeredMeaningCore as Utterance
 import DASHI.Interop.SensibLawResidualLattice as Residual
 
 data ParserProducer : Set where
-  spaCyProducer stanzaProducer asrProducer ruleProducer : ParserProducer
+  spaCyProducer : ParserProducer
+  stanzaProducer : ParserProducer
+  asrProducer : ParserProducer
+  ruleProducer : ParserProducer
   udProducer uccaProducer mrsProducer amrProducer specialistProducer : ParserProducer
 
 data CandidateValidity : Set where
-  admissible invalid undetermined inapplicable : CandidateValidity
+  admissible : CandidateValidity
+  invalid : CandidateValidity
+  undetermined : CandidateValidity
+  inapplicable : CandidateValidity
 
 data SemanticRole : Set where
-  actorRole actionRole objectRole modalityRole conditionRole : SemanticRole
+  actorRole : SemanticRole
+  actionRole : SemanticRole
+  objectRole : SemanticRole
+  modalityRole : SemanticRole
+  conditionRole : SemanticRole
   exceptionRole qualifierRole jurisdictionRole speakerRole : SemanticRole
   evidenceRole temporalRole provenanceRole unknownRole : SemanticRole
 
 data RevisionKind : Set where
-  parserCorrection entityResolutionCorrection translationRevision : RevisionKind
+  parserCorrection : RevisionKind
+  entityResolutionCorrection : RevisionKind
+  translationRevision : RevisionKind
   legalReclassification evidenceStrengthening evidenceWeakening : RevisionKind
   contextualRevaluation contradictionRevision supersessionRevision : RevisionKind
   promotionRevision demotionRevision : RevisionKind
@@ -106,7 +118,11 @@ record PNFRevision : Set where
 open PNFRevision public
 
 data ComparisonResult : Set where
-  equivalent compatible contradictory residuallyDifferent noTypedMeet : ComparisonResult
+  equivalent : ComparisonResult
+  compatible : ComparisonResult
+  contradictory : ComparisonResult
+  residuallyDifferent : ComparisonResult
+  noTypedMeet : ComparisonResult
 
 comparisonFromResidual : Residual.ResidualLevel → ComparisonResult
 comparisonFromResidual Residual.exact = equivalent

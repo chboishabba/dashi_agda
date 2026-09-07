@@ -16,7 +16,10 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data ObservedSupervoxel : Set where
-  s0 s1 s2 s3 : ObservedSupervoxel
+  s0 : ObservedSupervoxel
+  s1 : ObservedSupervoxel
+  s2 : ObservedSupervoxel
+  s3 : ObservedSupervoxel
 
 observedFibreCount : ObservedSupervoxel → Nat
 observedFibreCount s0 = 3
@@ -45,7 +48,8 @@ lowerRecoveredPath =
   composePath (edgePath e02) (edgePath e23)
 
 data RecoveredRoute : Set where
-  viaS1 viaS2 : RecoveredRoute
+  viaS1 : RecoveredRoute
+  viaS2 : RecoveredRoute
 
 intermediateOf : RecoveredRoute → ObservedSupervoxel
 intermediateOf viaS1 = s1

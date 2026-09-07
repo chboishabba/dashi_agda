@@ -13,7 +13,9 @@ import DASHI.Physics.Closure.KleinQuarticQMReceipt as Klein
 ------------------------------------------------------------------------
 
 data Factor3 : Set where
-  factorA factorB factorC : Factor3
+  factorA : Factor3
+  factorB : Factor3
+  factorC : Factor3
 
 swapAB : Factor3 → Factor3
 swapAB factorA = factorB

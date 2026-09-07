@@ -31,7 +31,9 @@ open import Data.Product using (_×_; _,_)
 
 
 data Polymer : Set where
-  alpha beta gamma : Polymer
+  alpha : Polymer
+  beta : Polymer
+  gamma : Polymer
 
 polymerActivity : Polymer → Nat
 polymerActivity alpha = 1

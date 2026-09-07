@@ -4,10 +4,16 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
 data LeanDevelopmentLayer : Set where
-  foundations classHierarchy propertyConstraints dataModel overview : LeanDevelopmentLayer
+  foundations : LeanDevelopmentLayer
+  classHierarchy : LeanDevelopmentLayer
+  propertyConstraints : LeanDevelopmentLayer
+  dataModel : LeanDevelopmentLayer
+  overview : LeanDevelopmentLayer
 
 data DASHIIntegrationAnchor : Set where
-  epistemicAnchor contextualClaimAnchor wikidataStatementAnchor : DASHIIntegrationAnchor
+  epistemicAnchor : DASHIIntegrationAnchor
+  contextualClaimAnchor : DASHIIntegrationAnchor
+  wikidataStatementAnchor : DASHIIntegrationAnchor
   derivationFibreAnchor candidateRoleAnchor repairReviewAnchor authorityBoundaryAnchor : DASHIIntegrationAnchor
 
 record LeanSourceModule : Set where

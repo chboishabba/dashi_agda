@@ -19,14 +19,14 @@ import DASHI.Core.ProofSearchExperimentalParetoCrossPollinationExact as Cross
 ------------------------------------------------------------------------
 
 data AssayFrontierAxis : Set where
-  presenceAxis
-  detectionAxis
-  quantificationAxis
-  extractionAxis
-  matrixAxis
-  detectorAxis
-  calibrationAxis
-  : AssayFrontierAxis
+  presenceAxis : AssayFrontierAxis
+  detectionAxis : AssayFrontierAxis
+  quantificationAxis : AssayFrontierAxis
+  extractionAxis : AssayFrontierAxis
+  matrixAxis : AssayFrontierAxis
+  detectorAxis : AssayFrontierAxis
+  calibrationAxis : AssayFrontierAxis
+
 
 axisReference : AssayFrontierAxis → String
 axisReference presenceAxis = "chemical presence"

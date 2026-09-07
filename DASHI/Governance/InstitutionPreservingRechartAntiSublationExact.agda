@@ -73,7 +73,8 @@ open AdmissibleRechart public
 ------------------------------------------------------------------------
 
 data InternalState : Set where
-  inheritedState correctedState : InternalState
+  inheritedState : InternalState
+  correctedState : InternalState
 
 data InternalInvariant : Set where
   continuityInvariant : InternalInvariant
@@ -159,7 +160,8 @@ hostObstructionDoesNotRefuteExternalValidity =
 ------------------------------------------------------------------------
 
 data DerivationRoute : Set where
-  inheritedHistoricalRoute reconstructedJustificationRoute : DerivationRoute
+  inheritedHistoricalRoute : DerivationRoute
+  reconstructedJustificationRoute : DerivationRoute
 
 data PresentDoctrine : Set where
   retainedPresentDoctrine : PresentDoctrine
@@ -198,13 +200,17 @@ canonicalGenealogyJustificationSeparation =
 ------------------------------------------------------------------------
 
 data PoliticalFineState : Set where
-  justQuietState suppressedQuietState visibleConflictState : PoliticalFineState
+  justQuietState : PoliticalFineState
+  suppressedQuietState : PoliticalFineState
+  visibleConflictState : PoliticalFineState
 
 data OrderObservation : Set where
-  quietOrder visibleDisturbance : OrderObservation
+  quietOrder : OrderObservation
+  visibleDisturbance : OrderObservation
 
 data JusticeObservation : Set where
-  justiceSatisfied justiceResidualOpen : JusticeObservation
+  justiceSatisfied : JusticeObservation
+  justiceResidualOpen : JusticeObservation
 
 orderObserver : Observer.Observer PoliticalFineState OrderObservation
 orderObserver justQuietState = quietOrder

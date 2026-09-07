@@ -37,10 +37,12 @@ candidateRowCapacityClosed (suc demands) maximumCandidates
   rewrite candidateRowCapacityClosed demands maximumCandidates = refl
 
 data PlanningExecution : Set where
-  perDemandProcedural setBasedRelational : PlanningExecution
+  perDemandProcedural : PlanningExecution
+  setBasedRelational : PlanningExecution
 
 data CandidateValidation : Set where
-  perCandidateRecursive setBasedContainment : CandidateValidation
+  perCandidateRecursive : CandidateValidation
+  setBasedContainment : CandidateValidation
 
 record DemandKeyBudget (keysPerDemand : Nat) : Set where
   constructor demandKeyBudget

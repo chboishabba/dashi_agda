@@ -19,7 +19,8 @@ open import DASHI.Cognition.PNF.IdentityEvidenceProduction
 ------------------------------------------------------------------------
 
 data ProperNameMentionContext : Set where
-  standaloneProperName embeddedInPersonSpan : ProperNameMentionContext
+  standaloneProperName : ProperNameMentionContext
+  embeddedInPersonSpan : ProperNameMentionContext
 
 data ProperNameExpansionSourcePermission : ProperNameMentionContext → Set where
   standaloneProperNameMayExpand :

@@ -21,7 +21,8 @@ open _×_ public
 ------------------------------------------------------------------------
 
 data Bit : Set where
-  bit0 bit1 : Bit
+  bit0 : Bit
+  bit1 : Bit
 
 data Vec (A : Set) : Nat → Set where
   []  : Vec A zero
@@ -51,10 +52,12 @@ wordValue {suc n} (b ∷ bs) =
 ------------------------------------------------------------------------
 
 data Radix : Set where
-  binaryRadix decimalRadix : Radix
+  binaryRadix : Radix
+  decimalRadix : Radix
 
 data ScalePolicy : Set where
-  fixedScale floatingScale : ScalePolicy
+  fixedScale : ScalePolicy
+  floatingScale : ScalePolicy
 
 record NumericFormat : Set where
   constructor numericFormat
@@ -225,7 +228,9 @@ bf16FractionWidth = refl
 ------------------------------------------------------------------------
 
 data CoordinateRole : Set where
-  orientationRole localRefinementRole scaleTransportRole : CoordinateRole
+  orientationRole : CoordinateRole
+  localRefinementRole : CoordinateRole
+  scaleTransportRole : CoordinateRole
 
 bf16SignRole : CoordinateRole
 bf16SignRole = orientationRole

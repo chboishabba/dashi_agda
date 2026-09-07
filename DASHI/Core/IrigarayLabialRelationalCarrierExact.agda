@@ -57,7 +57,8 @@ irigarayLabialChart = Ternary.role-chart irigarayLabialRole
 ------------------------------------------------------------------------
 
 data ForcedUnitaryReading : Set where
-  forceAsOne forceAsTwo : ForcedUnitaryReading
+  forceAsOne : ForcedUnitaryReading
+  forceAsTwo : ForcedUnitaryReading
 
 forcedReadingAdmitted :
   IrigarayLabialRole → ForcedUnitaryReading → Bool
@@ -80,7 +81,8 @@ neitherRejectsForcedTwo = refl
 ------------------------------------------------------------------------
 
 data LipAspect : Set where
-  lipA lipB : LipAspect
+  lipA : LipAspect
+  lipB : LipAspect
 
 data Contact : LipAspect → LipAspect → Set where
   aTouchesB : Contact lipA lipB
@@ -114,7 +116,8 @@ canonicalLabialState = labial-state lipA lipB aTouchesB
 ------------------------------------------------------------------------
 
 data TouchOrientation : Set where
-  aActiveBPassive bActiveAPassive : TouchOrientation
+  aActiveBPassive : TouchOrientation
+  bActiveAPassive : TouchOrientation
 
 orientationAdmitted : Contact lipA lipB → TouchOrientation → Bool
 orientationAdmitted aTouchesB aActiveBPassive = true

@@ -166,7 +166,8 @@ knownSixModeHelicityDissipationEvaluationIsZero :
 knownSixModeHelicityDissipationEvaluationIsZero = refl
 
 data HelicitySign : Set where
-  plus minus : HelicitySign
+  plus : HelicitySign
+  minus : HelicitySign
 
 baseQuadraticReserve quarticReserve cubicMagnitude discriminantGap : Nat
 baseQuadraticReserve = 8503484

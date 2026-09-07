@@ -56,7 +56,9 @@ coefficientExtractionInjective left right equality = equality
 ------------------------------------------------------------------------
 
 data CoordinateAxis : Set where
-  xAxis yAxis zAxis : CoordinateAxis
+  xAxis : CoordinateAxis
+  yAxis : CoordinateAxis
+  zAxis : CoordinateAxis
 
 coordinate :
   CoordinateAxis → Z3.FourierMode → ℤ

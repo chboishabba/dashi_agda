@@ -73,7 +73,9 @@ selectionRateBounds s = ratioBounds
 ------------------------------------------------------------------------
 
 data IdentificationStatus : Set where
-  disparityRobustPositive disparityRobustNegative disparityNotIdentified : IdentificationStatus
+  disparityRobustPositive : IdentificationStatus
+  disparityRobustNegative : IdentificationStatus
+  disparityNotIdentified : IdentificationStatus
 
 record TwoGroupRateBounds : Set where
   constructor twoGroupRateBounds
@@ -89,10 +91,16 @@ open TwoGroupRateBounds public
 ------------------------------------------------------------------------
 
 data MissingnessClaim : Set where
-  boundedGroupCount boundedSelectionRate robustSelectionDisparity pointIdentifiedSelectionRate : MissingnessClaim
+  boundedGroupCount : MissingnessClaim
+  boundedSelectionRate : MissingnessClaim
+  robustSelectionDisparity : MissingnessClaim
+  pointIdentifiedSelectionRate : MissingnessClaim
 
 data MissingnessProducer : Set where
-  unresolvedMassCount selectionEligibilityBounds worstCaseAllocationProof completeStatusObservation : MissingnessProducer
+  unresolvedMassCount : MissingnessProducer
+  selectionEligibilityBounds : MissingnessProducer
+  worstCaseAllocationProof : MissingnessProducer
+  completeStatusObservation : MissingnessProducer
 
 reverseMissingness : MissingnessClaim → MissingnessProducer
 reverseMissingness boundedGroupCount = unresolvedMassCount
@@ -112,7 +120,11 @@ record MissingnessCutset : Set where
 open MissingnessCutset public
 
 data MissingnessResidual : Set where
-  unresolvedMassResidual boundsResidual worstCaseResidual completeObservationResidual missingnessClosed : MissingnessResidual
+  unresolvedMassResidual : MissingnessResidual
+  boundsResidual : MissingnessResidual
+  worstCaseResidual : MissingnessResidual
+  completeObservationResidual : MissingnessResidual
+  missingnessClosed : MissingnessResidual
 
 firstMissingnessResidual : MissingnessClaim → MissingnessCutset → MissingnessResidual
 firstMissingnessResidual boundedGroupCount c with unresolvedMassClosed c

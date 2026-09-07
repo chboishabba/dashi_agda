@@ -51,7 +51,10 @@ routeDisposition route = Admission.admitted
 
 -- The finite search surface has twelve semantically distinct route cells.
 data TwelveCellIndex : Set where
-  nearLow nearHigh nearHH nearCC : TwelveCellIndex
+  nearLow : TwelveCellIndex
+  nearHigh : TwelveCellIndex
+  nearHH : TwelveCellIndex
+  nearCC : TwelveCellIndex
   separatedLow separatedHigh separatedHH separatedCC : TwelveCellIndex
   heteroLow heteroHigh heteroHH heteroCC : TwelveCellIndex
 

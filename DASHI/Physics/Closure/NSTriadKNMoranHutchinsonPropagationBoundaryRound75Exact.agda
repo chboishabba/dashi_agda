@@ -59,7 +59,8 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalCarlesonFundingRound73Exact as Car
 ------------------------------------------------------------------------
 
 data ToyPoint : Set where
-  leftPoint rightPoint : ToyPoint
+  leftPoint : ToyPoint
+  rightPoint : ToyPoint
 
 ParentSupport : ToyPoint → Bool
 ParentSupport leftPoint = true

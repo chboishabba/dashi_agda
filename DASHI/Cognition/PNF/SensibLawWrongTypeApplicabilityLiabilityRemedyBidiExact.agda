@@ -141,7 +141,10 @@ record WrongTypeApplicabilityReceipt : Set where
 open WrongTypeApplicabilityReceipt public
 
 data ElementDisposition : Set where
-  elementSatisfied elementUnsatisfied elementContested elementUnresolved : ElementDisposition
+  elementSatisfied : ElementDisposition
+  elementUnsatisfied : ElementDisposition
+  elementContested : ElementDisposition
+  elementUnresolved : ElementDisposition
 
 
 record WrongElementEvaluation : Set where
@@ -220,11 +223,16 @@ open RemedyEligibilityReceipt public
 ------------------------------------------------------------------------
 
 data LegalConsumerNeed : Set where
-  needsSemanticOccurrence needsApplicability needsViolation needsLiability : LegalConsumerNeed
+  needsSemanticOccurrence : LegalConsumerNeed
+  needsApplicability : LegalConsumerNeed
+  needsViolation : LegalConsumerNeed
+  needsLiability : LegalConsumerNeed
   needsBurden needsRemedy : LegalConsumerNeed
 
 data RequiredReceiptKind : Set where
-  semanticOccurrenceReceiptKind applicabilityReceiptKind violationReceiptKind : RequiredReceiptKind
+  semanticOccurrenceReceiptKind : RequiredReceiptKind
+  applicabilityReceiptKind : RequiredReceiptKind
+  violationReceiptKind : RequiredReceiptKind
   liabilityReceiptKind burdenReceiptKind remedyReceiptKind : RequiredReceiptKind
 
 requiredReceipt : LegalConsumerNeed → RequiredReceiptKind

@@ -28,10 +28,13 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 data FrequencySupport : Set where
-  annularSupport lowPassSupport highPassSupport : FrequencySupport
+  annularSupport : FrequencySupport
+  lowPassSupport : FrequencySupport
+  highPassSupport : FrequencySupport
 
 data PowerDirection : Set where
-  positiveDerivativeCost negativeTailDecay : PowerDirection
+  positiveDerivativeCost : PowerDirection
+  negativeTailDecay : PowerDirection
 
 record RationalPower : Set where
   constructor power

@@ -133,7 +133,9 @@ canonicalStage11Role = refl
 ------------------------------------------------------------------------
 
 data TernaryResolution : Set where
-  rejectHere refineDeeper acceptHere : TernaryResolution
+  rejectHere : TernaryResolution
+  refineDeeper : TernaryResolution
+  acceptHere : TernaryResolution
 
 resolutionFromSign : Nat → TernaryResolution
 resolutionFromSign zero = refineDeeper
@@ -148,7 +150,8 @@ zeroMeansRefine = refl
 ------------------------------------------------------------------------
 
 data SystemKind : Set where
-  canonicalStageSystem operationalMotifSystem : SystemKind
+  canonicalStageSystem : SystemKind
+  operationalMotifSystem : SystemKind
 
 differentSystemKinds :
   canonicalStageSystem ≡ operationalMotifSystem → ⊥

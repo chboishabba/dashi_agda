@@ -138,7 +138,11 @@ pnfUsesSameFibreCore system = PNF.fibreCore system
 ------------------------------------------------------------------------
 
 data ParentAxis : Set where
-  progenitorAxis geneticAxis gameteAxis mitochondrialAxis gestationalAxis : ParentAxis
+  progenitorAxis : ParentAxis
+  geneticAxis : ParentAxis
+  gameteAxis : ParentAxis
+  mitochondrialAxis : ParentAxis
+  gestationalAxis : ParentAxis
   genealogicalParentAxis intendedParentAxis legalParentAxis socialParentAxis caregiverAxis : ParentAxis
 
 axisValue : ParentAxis → RelationVector → Bool

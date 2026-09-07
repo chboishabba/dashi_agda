@@ -41,7 +41,8 @@ record ShiftWaveScalingInterface : Setω where
     nonClaimBoundary : List String
 
 data ShiftScale : Set where
-  coarse fine : ShiftScale
+  coarse : ShiftScale
+  fine : ShiftScale
 
 StateAtShift : ShiftScale → Set
 StateAtShift coarse = SPWSI.ShiftWavePhaseState

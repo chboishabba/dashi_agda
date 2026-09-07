@@ -22,7 +22,8 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ElsasserSpecies : Set where
-  plusSpecies minusSpecies : ElsasserSpecies
+  plusSpecies : ElsasserSpecies
+  minusSpecies : ElsasserSpecies
 
 oppositeSpecies : ElsasserSpecies → ElsasserSpecies
 oppositeSpecies plusSpecies = minusSpecies

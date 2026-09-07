@@ -61,7 +61,7 @@ def leading_ws(line: bytes) -> bytes:
 
 
 def is_simple_constructor_name(s: bytes) -> bool:
-    if not s or s.startswith(b"--") or b":" in s or b"=" in s or b"->" in s or b"\\" in s:
+    if not s or b" " in s or b"\t" in s or s.startswith(b"--") or b":" in s or b"=" in s or b"->" in s or b"\\" in s:
         return False
     forbidden_prefixes = (
         b"data ", b"record ", b"module ", b"open ", b"import ", b"private ",
@@ -69,6 +69,13 @@ def is_simple_constructor_name(s: bytes) -> bool:
         b"variable ", b"field ", b"postulate ", b"primitive ", b"{-#"
     )
     return not s.startswith(forbidden_prefixes)
+
+
+def simple_constructor_names(s: bytes) -> list[bytes] | None:
+    names = s.split()
+    if not names or any(not is_simple_constructor_name(name) for name in names):
+        return None
+    return names
 
 
 def migrate_file_lines(lines: list[bytes]) -> list[bytes] | None:
@@ -94,6 +101,7 @@ def migrate_file_lines(lines: list[bytes]) -> list[bytes] | None:
             ctor_lines: list[tuple[int, bytes, bytes]] = []  # (index, ctor_name, ending)
             found_sig = False
             found_attached_sig = False
+            attached_ctor_names: list[bytes] = []
             expected_sig = b": " + type_name
             target_indent = None
 
@@ -125,10 +133,12 @@ def migrate_file_lines(lines: list[bytes]) -> list[bytes] | None:
                     break
 
                 # Check if this line has trailing `: TypeName` attached to a constructor
-                if ctor_lines and (cur_stripped.endswith(b": " + type_name) or cur_stripped.endswith(b":" + type_name)):
+                if cur_stripped.endswith(b": " + type_name) or cur_stripped.endswith(b":" + type_name):
                     prefix = cur_stripped[:cur_stripped.rfind(b":")].strip()
-                    if is_simple_constructor_name(prefix):
+                    names = simple_constructor_names(prefix)
+                    if names is not None and (ctor_lines or len(names) > 1):
                         found_attached_sig = True
+                        attached_ctor_names = names
                         break
 
                 # Otherwise must be simple constructor name
@@ -148,12 +158,13 @@ def migrate_file_lines(lines: list[bytes]) -> list[bytes] | None:
                 changed = True
                 continue
 
-            if found_attached_sig and ctor_lines:
+            if found_attached_sig and (ctor_lines or attached_ctor_names):
                 # Valid candidate! Apply migration (trailing sig attached to line j)
                 out.append(line)
                 for _, ctor, c_ending in ctor_lines:
                     out.append(target_indent + ctor + b" : " + type_name + c_ending)
-                out.append(lines[j])
+                for ctor in attached_ctor_names:
+                    out.append(target_indent + ctor + b" : " + type_name + cur_ending)
                 i = j + 1
                 changed = True
                 continue

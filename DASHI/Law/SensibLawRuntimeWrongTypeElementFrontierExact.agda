@@ -22,11 +22,11 @@ import DASHI.Law.SensibLawProductionLegalRuntimeABIExact as Runtime
 ------------------------------------------------------------------------
 
 data ElementEvaluationSurfaceStatus : Set where
-  evaluationSatisfied
-  evaluationUnsatisfied
-  evaluationContested
-  evaluationUnresolved
-  : ElementEvaluationSurfaceStatus
+  evaluationSatisfied : ElementEvaluationSurfaceStatus
+  evaluationUnsatisfied : ElementEvaluationSurfaceStatus
+  evaluationContested : ElementEvaluationSurfaceStatus
+  evaluationUnresolved : ElementEvaluationSurfaceStatus
+
 
 evaluationSurfaceStatus :
   Legal.ElementDisposition → ElementEvaluationSurfaceStatus
@@ -81,14 +81,14 @@ data CausationElementPaymentState
 ------------------------------------------------------------------------
 
 data LegalElementFrontierStatus : Set where
-  paid
-  missing
-  contested
-  authorityBlocked
-  applicabilityBlocked
-  inapplicable
-  unresolved
-  : LegalElementFrontierStatus
+  paid : LegalElementFrontierStatus
+  missing : LegalElementFrontierStatus
+  contested : LegalElementFrontierStatus
+  authorityBlocked : LegalElementFrontierStatus
+  applicabilityBlocked : LegalElementFrontierStatus
+  inapplicable : LegalElementFrontierStatus
+  unresolved : LegalElementFrontierStatus
+
 
 frontierStatus :
   {declaration : Element.WrongTypeCausationElementDeclaration} →
@@ -168,12 +168,12 @@ open RuntimeWrongTypeElementFrontier public
 ------------------------------------------------------------------------
 
 data LegalConsumerGoal : Set where
-  inspectSourceBackedElement
-  inspectElementEvaluation
-  establishTypedElementPayment
-  establishViolation
-  establishLiability
-  : LegalConsumerGoal
+  inspectSourceBackedElement : LegalConsumerGoal
+  inspectElementEvaluation : LegalConsumerGoal
+  establishTypedElementPayment : LegalConsumerGoal
+  establishViolation : LegalConsumerGoal
+  establishLiability : LegalConsumerGoal
+
 
 data ConsumerGoalState : Set where goalOpen goalClosed goalBlocked : ConsumerGoalState
 

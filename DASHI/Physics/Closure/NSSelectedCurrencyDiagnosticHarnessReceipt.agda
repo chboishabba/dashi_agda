@@ -8,7 +8,12 @@ import DASHI.Physics.Closure.NSCoherenceBudgetResidenceReduction as Residence
 import DASHI.Physics.Closure.NSDepletionCurrencyFork as Currency
 
 data DiagnosticOutcome : Set where
-  bridgePass bridgeFails persistenceFails sourceFails budgetFails inconclusive : DiagnosticOutcome
+  bridgePass : DiagnosticOutcome
+  bridgeFails : DiagnosticOutcome
+  persistenceFails : DiagnosticOutcome
+  sourceFails : DiagnosticOutcome
+  budgetFails : DiagnosticOutcome
+  inconclusive : DiagnosticOutcome
 
 record SelectedCurrencyDiagnosticRow
     (A : Residence.OrderedBudgetArithmetic) : Set₁ where

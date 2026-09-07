@@ -30,7 +30,9 @@ import DASHI.Culture.PhilosophyClaimProvenanceHistoryBidiExact as Philosophy
 ------------------------------------------------------------------------
 
 data DialecticReading : Set where
-  contradictionMediatedDevelopment thesisAntithesisSynthesisRecipe unresolvedRemainderDialectic : DialecticReading
+  contradictionMediatedDevelopment : DialecticReading
+  thesisAntithesisSynthesisRecipe : DialecticReading
+  unresolvedRemainderDialectic : DialecticReading
 
 hegelCalibrationReading : DialecticReading
 hegelCalibrationReading = contradictionMediatedDevelopment
@@ -55,7 +57,9 @@ hegelDoesNotOwnDASHIRemainder = Hegel.dashIRemainderNotIdentifiedWithHegelDoctri
 ------------------------------------------------------------------------
 
 data MaterialistDialecticReading : Set where
-  contradictionWithinMaterialSocialReality simpleOneWayMaterialDetermination discourseOnlyIdealism : MaterialistDialecticReading
+  contradictionWithinMaterialSocialReality : MaterialistDialecticReading
+  simpleOneWayMaterialDetermination : MaterialistDialecticReading
+  discourseOnlyIdealism : MaterialistDialecticReading
 
 zizekBoundedReading : MaterialistDialecticReading
 zizekBoundedReading = contradictionWithinMaterialSocialReality
@@ -71,7 +75,10 @@ zizekBoundedReadingNotDiscourseOnly ()
 ------------------------------------------------------------------------
 
 data PluralMapKind : Set where
-  singleScalarLadder stagedDevelopmentMap multidimensionalPerspectiveMap polyphonicNoncollapseMap : PluralMapKind
+  singleScalarLadder : PluralMapKind
+  stagedDevelopmentMap : PluralMapKind
+  multidimensionalPerspectiveMap : PluralMapKind
+  polyphonicNoncollapseMap : PluralMapKind
 
 data PluralismAdequacy : Set where oneRankExhaustsState multipleCoordinatesRequired : PluralismAdequacy
 
@@ -98,7 +105,11 @@ polyphonyDoesNotRequireFinalSynthesis = Polyphony.canonicalNoForcedFinalSynthesi
 ------------------------------------------------------------------------
 
 data RepresentationRegister : Set where
-  materialObject pictorialImage linguisticSign institutionalDesignation provenanceHistory
+  materialObject : RepresentationRegister
+  pictorialImage : RepresentationRegister
+  linguisticSign : RepresentationRegister
+  institutionalDesignation : RepresentationRegister
+  provenanceHistory : RepresentationRegister
   viewerAttention subjectiveEvaluation marketEvaluation : RepresentationRegister
 
 data ImageMeansObjectIdentity : Set where
@@ -189,11 +200,19 @@ indigenousPluralAuthorityDoesNotBecomeConceptualArt ()
 ------------------------------------------------------------------------
 
 data NoncollapseCoordinate : Set where
-  contradictionHistory materialCarrier representationRegister provenance institutionalStatus
+  contradictionHistory : NoncollapseCoordinate
+  materialCarrier : NoncollapseCoordinate
+  representationRegister : NoncollapseCoordinate
+  provenance : NoncollapseCoordinate
+  institutionalStatus : NoncollapseCoordinate
   authority unresolvedRemainder gazeProcess subjectivePreference economicValue : NoncollapseCoordinate
 
 data CoordinateTreatment : Set where
-  preserve sourceSeparately compareWithoutIdentity leaveOpen observeWithoutPromotion : CoordinateTreatment
+  preserve : CoordinateTreatment
+  sourceSeparately : CoordinateTreatment
+  compareWithoutIdentity : CoordinateTreatment
+  leaveOpen : CoordinateTreatment
+  observeWithoutPromotion : CoordinateTreatment
 
 treatment : NoncollapseCoordinate → CoordinateTreatment
 treatment contradictionHistory = preserve

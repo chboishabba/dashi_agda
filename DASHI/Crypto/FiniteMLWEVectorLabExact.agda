@@ -26,7 +26,11 @@ import DASHI.Crypto.TranscriptProtectedLabelExact as Label
 ------------------------------------------------------------------------
 
 data Z5 : Set where
-  z0 z1 z2 z3 z4 : Z5
+  z0 : Z5
+  z1 : Z5
+  z2 : Z5
+  z3 : Z5
+  z4 : Z5
 
 add5 : Z5 → Z5 → Z5
 add5 z0 b = b

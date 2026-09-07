@@ -46,23 +46,23 @@ colleagueReactionQuote = Quote.quoteReceipt
 ------------------------------------------------------------------------
 
 data BodycamCoordinate : Set where
-  literalPumpedUtterance
-  firstPersonPunchingClaim
-  personDownClaim
-  colleagueReaction
-  forceOccurrence
-  forceLawfulness
-  officerMotive
-  commandCausation
-  unitCulture
+  literalPumpedUtterance : BodycamCoordinate
+  firstPersonPunchingClaim : BodycamCoordinate
+  personDownClaim : BodycamCoordinate
+  colleagueReaction : BodycamCoordinate
+  forceOccurrence : BodycamCoordinate
+  forceLawfulness : BodycamCoordinate
+  officerMotive : BodycamCoordinate
+  commandCausation : BodycamCoordinate
+  unitCulture : BodycamCoordinate
   institutionalPolicy : BodycamCoordinate
 
 data BodycamClosure : Set where
-  recordingBacked
-  mediaTranscriptionBacked
-  incidentCorroborated
-  independentlyInvestigated
-  adjudicated
+  recordingBacked : BodycamClosure
+  mediaTranscriptionBacked : BodycamClosure
+  incidentCorroborated : BodycamClosure
+  independentlyInvestigated : BodycamClosure
+  adjudicated : BodycamClosure
   openCoordinate : BodycamClosure
 
 coordinateClosure : BodycamCoordinate → BodycamClosure
@@ -102,21 +102,21 @@ bodycamIncidentIsSourceBacked = refl
 ------------------------------------------------------------------------
 
 data BodycamClaim : Set where
-  officerUtteredPumpedPhrase
-  officerSaidHePunchedDownedPerson
-  forceWasUnlawful
-  boastShowsOfficerMotive
-  colleagueReactionShowsUnitCulture
-  commandProducedForce
+  officerUtteredPumpedPhrase : BodycamClaim
+  officerSaidHePunchedDownedPerson : BodycamClaim
+  forceWasUnlawful : BodycamClaim
+  boastShowsOfficerMotive : BodycamClaim
+  colleagueReactionShowsUnitCulture : BodycamClaim
+  commandProducedForce : BodycamClaim
   institutionEndorsedConduct : BodycamClaim
 
 data BodycamProducer : Set where
-  bodycamVideoAndTranscriptProducer
-  bodycamFirstPersonConductProducer
-  forceLawfulnessProducer
-  motiveProducer
-  crossOfficerCultureCorpusProducer
-  commandProvenanceProducer
+  bodycamVideoAndTranscriptProducer : BodycamProducer
+  bodycamFirstPersonConductProducer : BodycamProducer
+  forceLawfulnessProducer : BodycamProducer
+  motiveProducer : BodycamProducer
+  crossOfficerCultureCorpusProducer : BodycamProducer
+  commandProvenanceProducer : BodycamProducer
   institutionalPolicyProducer : BodycamProducer
 
 reverseBodycam : BodycamClaim → BodycamProducer

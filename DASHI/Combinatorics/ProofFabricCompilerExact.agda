@@ -42,7 +42,10 @@ open ProofTritCodec public
 ------------------------------------------------------------------------
 
 data ProofWeaveTile : Set where
-  tile00 tile01 tile10 tile11 : ProofWeaveTile
+  tile00 : ProofWeaveTile
+  tile01 : ProofWeaveTile
+  tile10 : ProofWeaveTile
+  tile11 : ProofWeaveTile
 
 wordToTile : Codec.Word2 → ProofWeaveTile
 wordToTile Codec.word00 = tile00

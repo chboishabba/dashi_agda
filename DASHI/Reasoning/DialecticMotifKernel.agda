@@ -11,10 +11,14 @@ import DASHI.Algebra.Trit as T
 ------------------------------------------------------------------------
 
 data Lens : Set where
-  self norm mirror : Lens
+  self : Lens
+  norm : Lens
+  mirror : Lens
 
 data Time : Set where
-  past now future : Time
+  past : Time
+  now : Time
+  future : Time
 
 record State9 : Set where
   constructor state9
@@ -220,10 +224,27 @@ idPresentInvariant = projectionInvariant (λ _ → refl)
 ------------------------------------------------------------------------
 
 data Motif : Set where
-  M1 M2 M3 M4 M5 M6 M7 M8 M9 M10 : Motif
+  M1 : Motif
+  M2 : Motif
+  M3 : Motif
+  M4 : Motif
+  M5 : Motif
+  M6 : Motif
+  M7 : Motif
+  M8 : Motif
+  M9 : Motif
+  M10 : Motif
 
 data Policy : Set where
-  allow timingFence roleFence redesign buffer timeControl programOnly prohibit lift : Policy
+  allow : Policy
+  timingFence : Policy
+  roleFence : Policy
+  redesign : Policy
+  buffer : Policy
+  timeControl : Policy
+  programOnly : Policy
+  prohibit : Policy
+  lift : Policy
 
 policy : Motif → Policy
 policy M1 = allow
@@ -295,7 +316,8 @@ classifyLocal s with presentBackbone s
 -- Overflow is an explicit supervisor result. It is not inferred from the
 -- local tensor by an arbitrary numeric threshold.
 data Overflow : Set where
-  withinVoxel carryVoxel : Overflow
+  withinVoxel : Overflow
+  carryVoxel : Overflow
 
 supervise : Overflow → State9 → Motif
 supervise withinVoxel s = classifyLocal s

@@ -36,7 +36,9 @@ import DASHI.Foundations.StageSymmetryCarrierTowerExact as Sym
 import DASHI.Physics.Closure.SignedZeroTorsionReceipt as Signed
 
 data SignedNeutralPhase3 : Set where
-  minusZeroPhase neutralZeroPhase plusZeroPhase : SignedNeutralPhase3
+  minusZeroPhase : SignedNeutralPhase3
+  neutralZeroPhase : SignedNeutralPhase3
+  plusZeroPhase : SignedNeutralPhase3
 
 rotateSignedNeutral : SignedNeutralPhase3 → SignedNeutralPhase3
 rotateSignedNeutral minusZeroPhase = neutralZeroPhase

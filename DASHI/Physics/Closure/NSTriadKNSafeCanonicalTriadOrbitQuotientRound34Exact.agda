@@ -141,7 +141,12 @@ sameOrbitRefl τ = here refl
 ------------------------------------------------------------------------
 
 data TriadAction : Set where
-  identity swap cycle swapCycle cycleTwice swapCycleTwice : TriadAction
+  identity : TriadAction
+  swap : TriadAction
+  cycle : TriadAction
+  swapCycle : TriadAction
+  cycleTwice : TriadAction
+  swapCycleTwice : TriadAction
   negIdentity negSwap negCycle negSwapCycle
     negCycleTwice negSwapCycleTwice : TriadAction
 

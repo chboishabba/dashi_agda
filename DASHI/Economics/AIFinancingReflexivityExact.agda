@@ -11,7 +11,12 @@ import DASHI.Economics.ReflexiveFlowValidationExact as Econ
 ------------------------------------------------------------------------
 
 data AILayer : Set where
-  frontierLab hyperscaler acceleratorVendor neocloud datacentre financier : AILayer
+  frontierLab : AILayer
+  hyperscaler : AILayer
+  acceleratorVendor : AILayer
+  neocloud : AILayer
+  datacentre : AILayer
+  financier : AILayer
 
 record AIInfrastructureFlowSystem : Set₁ where
   field

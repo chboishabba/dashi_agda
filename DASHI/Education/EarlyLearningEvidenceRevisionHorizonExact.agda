@@ -20,13 +20,21 @@ import DASHI.Education.SituatedRelationalLearningAffordanceExact as Affordance
 ------------------------------------------------------------------------
 
 data EvidenceVintage : Set where
-  contemporaneousVintage schoolAgeVintage longRunVintage updatedFiscalVintage : EvidenceVintage
+  contemporaneousVintage : EvidenceVintage
+  schoolAgeVintage : EvidenceVintage
+  longRunVintage : EvidenceVintage
+  updatedFiscalVintage : EvidenceVintage
 
 data EvidenceAxis : Set where
-  childWellbeingAxis maternalLabourAxis caregiverWellbeingAxis fiscalAxis : EvidenceAxis
+  childWellbeingAxis : EvidenceAxis
+  maternalLabourAxis : EvidenceAxis
+  caregiverWellbeingAxis : EvidenceAxis
+  fiscalAxis : EvidenceAxis
 
 data EvidenceSignal : Set where
-  adverseEvidence unresolvedEvidence beneficialEvidence : EvidenceSignal
+  adverseEvidence : EvidenceSignal
+  unresolvedEvidence : EvidenceSignal
+  beneficialEvidence : EvidenceSignal
 
 record VersionedEvidenceObservation : Set where
   constructor versionedEvidenceObservation
@@ -59,7 +67,8 @@ quebecMaternalLabour =
 ------------------------------------------------------------------------
 
 data SameUpdatedVintageCase : Set where
-  updatedChildCase updatedFiscalCase : SameUpdatedVintageCase
+  updatedChildCase : SameUpdatedVintageCase
+  updatedFiscalCase : SameUpdatedVintageCase
 
 updatedVintageProjection : SameUpdatedVintageCase → EvidenceVintage
 updatedVintageProjection updatedChildCase = updatedFiscalVintage
@@ -87,7 +96,8 @@ vintageAloneCannotDetermineEvidenceSignal =
 ------------------------------------------------------------------------
 
 data HorizonMatchedCase : Set where
-  immediateAdverse immediateBeneficial : HorizonMatchedCase
+  immediateAdverse : HorizonMatchedCase
+  immediateBeneficial : HorizonMatchedCase
 
 horizonProjection : HorizonMatchedCase → Affordance.DevelopmentalMeasurementHorizon
 horizonProjection immediateAdverse = Affordance.immediateSnapshot

@@ -33,7 +33,10 @@ data Play : Set where
   kingLear : Play
 
 data ElasticityClass : Set where
-  highlyRecoverable deformedButRecoverable mixedContracting terminalRupture : ElasticityClass
+  highlyRecoverable : ElasticityClass
+  deformedButRecoverable : ElasticityClass
+  mixedContracting : ElasticityClass
+  terminalRupture : ElasticityClass
 
 
 elasticity : Play → ElasticityClass
@@ -208,10 +211,12 @@ data TopologyFrame : Set where
   continuityDeformationReturn : TopologyFrame
 
 data NarrativeTarget : Set where
-  wintersTaleTarget kingLearTarget : NarrativeTarget
+  wintersTaleTarget : NarrativeTarget
+  kingLearTarget : NarrativeTarget
 
 data NarrativeInvariant : Set where
-  retraceableRelation irrecoverableRelation : NarrativeInvariant
+  retraceableRelation : NarrativeInvariant
+  irrecoverableRelation : NarrativeInvariant
 
 data Recoverable : NarrativeTarget → Set where
   wintersTaleRecoverable : Recoverable wintersTaleTarget

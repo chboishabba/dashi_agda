@@ -89,10 +89,13 @@ open SemanticConsumerClosingProbe public
 ------------------------------------------------------------------------
 
 data ToySemantic : Set where
-  readingA readingB readingC : ToySemantic
+  readingA : ToySemantic
+  readingB : ToySemantic
+  readingC : ToySemantic
 
 data ToyDecision : Set where
-  sameDecision differentDecision : ToyDecision
+  sameDecision : ToyDecision
+  differentDecision : ToyDecision
 
 ToyFibre : ToySemantic → Set
 ToyFibre readingA = ⊤

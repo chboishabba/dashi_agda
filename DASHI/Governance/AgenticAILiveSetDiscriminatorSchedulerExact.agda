@@ -20,10 +20,19 @@ import DASHI.Governance.AgenticAIResidualRevisionCrossPollinationExact as Agent
 ------------------------------------------------------------------------
 
 data UncertaintyKind : Set where
-  targetUncertainty stateUncertainty pathUncertainty authorityUncertainty coalitionUncertainty : UncertaintyKind
+  targetUncertainty : UncertaintyKind
+  stateUncertainty : UncertaintyKind
+  pathUncertainty : UncertaintyKind
+  authorityUncertainty : UncertaintyKind
+  coalitionUncertainty : UncertaintyKind
 
 data ProbeKind : Set where
-  queryGoal inspectState inspectHistory inspectAuthority inspectSharedState holdProbe : ProbeKind
+  queryGoal : ProbeKind
+  inspectState : ProbeKind
+  inspectHistory : ProbeKind
+  inspectAuthority : ProbeKind
+  inspectSharedState : ProbeKind
+  holdProbe : ProbeKind
 
 bestProbeFor : UncertaintyKind → ProbeKind
 bestProbeFor targetUncertainty = queryGoal

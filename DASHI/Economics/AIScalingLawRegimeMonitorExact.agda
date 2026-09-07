@@ -18,18 +18,18 @@ import DASHI.Economics.HistoryIndexedMarketMechanismOODALoopExact as OODA
 ------------------------------------------------------------------------
 
 data ScalingCoordinate : Set where
-  totalParameters
-  activeParameters
-  trainingCompute
-  inferenceComputePerToken
-  tokensPerWorkload
-  usefulWorkPerWorkload
-  costPerToken
-  costPerUsefulWork
-  aggregateInferenceDemand
-  acceleratorResidualValue
-  acceleratorUtilisation
-  : ScalingCoordinate
+  totalParameters : ScalingCoordinate
+  activeParameters : ScalingCoordinate
+  trainingCompute : ScalingCoordinate
+  inferenceComputePerToken : ScalingCoordinate
+  tokensPerWorkload : ScalingCoordinate
+  usefulWorkPerWorkload : ScalingCoordinate
+  costPerToken : ScalingCoordinate
+  costPerUsefulWork : ScalingCoordinate
+  aggregateInferenceDemand : ScalingCoordinate
+  acceleratorResidualValue : ScalingCoordinate
+  acceleratorUtilisation : ScalingCoordinate
+
 
 record ScalingCoordinateReceipt : Set₁ where
   constructor scalingCoordinateReceipt

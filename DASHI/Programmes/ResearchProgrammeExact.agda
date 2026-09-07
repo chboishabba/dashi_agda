@@ -13,7 +13,15 @@ open import DASHI.Core.PredictionEnvelopeExact
 ------------------------------------------------------------------------
 
 data SatelliteRepository : Set where
-  dashiCFD dashiBRAIN dashiQ dashifine DASHIg dashiCORE FRACDASH dashitest dashiRTX : SatelliteRepository
+  dashiCFD : SatelliteRepository
+  dashiBRAIN : SatelliteRepository
+  dashiQ : SatelliteRepository
+  dashifine : SatelliteRepository
+  DASHIg : SatelliteRepository
+  dashiCORE : SatelliteRepository
+  FRACDASH : SatelliteRepository
+  dashitest : SatelliteRepository
+  dashiRTX : SatelliteRepository
 
 data ProblemClass : Set where
   fluidClosure : ProblemClass

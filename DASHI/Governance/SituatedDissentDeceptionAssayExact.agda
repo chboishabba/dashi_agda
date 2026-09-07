@@ -33,22 +33,27 @@ import DASHI.Core.HistoryQualifiedSelectionTopologyExact as Selection
 ------------------------------------------------------------------------
 
 data ApprovalState : Set where
-  informedApproval manipulatedApproval : ApprovalState
+  informedApproval : ApprovalState
+  manipulatedApproval : ApprovalState
 
 data ApprovalSurface : Set where
   approved : ApprovalSurface
 
 data EvidenceIntegrity : Set where
-  truthfulEvidence deceptiveEvidence : EvidenceIntegrity
+  truthfulEvidence : EvidenceIntegrity
+  deceptiveEvidence : EvidenceIntegrity
 
 data OptionConeIntegrity : Set where
-  openOptionCone deformedOptionCone : OptionConeIntegrity
+  openOptionCone : OptionConeIntegrity
+  deformedOptionCone : OptionConeIntegrity
 
 data PressureIntegrity : Set where
-  noncoercivePressure manipulativePressure : PressureIntegrity
+  noncoercivePressure : PressureIntegrity
+  manipulativePressure : PressureIntegrity
 
 data DecisionIntegrity : Set where
-  integrityAdequate integrityCompromised : DecisionIntegrity
+  integrityAdequate : DecisionIntegrity
+  integrityCompromised : DecisionIntegrity
 
 approvalSurface : ApprovalState → ApprovalSurface
 approvalSurface _ = approved
@@ -98,13 +103,15 @@ approvalCannotRecoverDecisionIntegrity =
 ------------------------------------------------------------------------
 
 data InterfaceState : Set where
-  symmetricChoice asymmetricChoice : InterfaceState
+  symmetricChoice : InterfaceState
+  asymmetricChoice : InterfaceState
 
 data FormalOptions : Set where
   acceptAndRefusePresent : FormalOptions
 
 data RefusalAffordance : Set where
-  refusalReachable refusalFrictional : RefusalAffordance
+  refusalReachable : RefusalAffordance
+  refusalFrictional : RefusalAffordance
 
 formalOptions : InterfaceState → FormalOptions
 formalOptions _ = acceptAndRefusePresent
@@ -136,16 +143,19 @@ formalOptionsCannotRecoverRefusalAffordance =
 ------------------------------------------------------------------------
 
 data DissentState : Set where
-  protectedEffectiveDissent managedDecorativeDissent : DissentState
+  protectedEffectiveDissent : DissentState
+  managedDecorativeDissent : DissentState
 
 data DissentSurface : Set where
   dissentRecorded : DissentSurface
 
 data DissentEffect : Set where
-  transitionBlocked transitionUnchanged : DissentEffect
+  transitionBlocked : DissentEffect
+  transitionUnchanged : DissentEffect
 
 data DissentProtection : Set where
-  retaliationProtected retaliationExposed : DissentProtection
+  retaliationProtected : DissentProtection
+  retaliationExposed : DissentProtection
 
 recordedDissent : DissentState → DissentSurface
 recordedDissent _ = dissentRecorded
@@ -185,13 +195,15 @@ recordedDissentCannotRecoverEffectiveVeto =
 ------------------------------------------------------------------------
 
 data MediationState : Set where
-  directDeniedNoProxy directDeniedHumanProxy : MediationState
+  directDeniedNoProxy : MediationState
+  directDeniedHumanProxy : MediationState
 
 data DirectPermission : Set where
   directDenied : DirectPermission
 
 data ReachableEffect : Set where
-  effectUnreachable effectHumanMediated : ReachableEffect
+  effectUnreachable : ReachableEffect
+  effectHumanMediated : ReachableEffect
 
 permissionSurface : MediationState → DirectPermission
 permissionSurface _ = directDenied
@@ -225,13 +237,15 @@ directPermissionCannotRecoverReachableEffect =
 ------------------------------------------------------------------------
 
 data ConsensusState : Set where
-  independentApprovals sharedSourceApprovals : ConsensusState
+  independentApprovals : ConsensusState
+  sharedSourceApprovals : ConsensusState
 
 data ApprovalCount : Set where
   threeApprovals : ApprovalCount
 
 data IndependenceClass : Set where
-  independentFibres commonSourceFibre : IndependenceClass
+  independentFibres : IndependenceClass
+  commonSourceFibre : IndependenceClass
 
 approvalCount : ConsensusState → ApprovalCount
 approvalCount _ = threeApprovals
@@ -266,13 +280,15 @@ approvalCountCannotRecoverIndependence =
 ------------------------------------------------------------------------
 
 data FormationState : Set where
-  revisablyEndorsed progressivelyNarrowed : FormationState
+  revisablyEndorsed : FormationState
+  progressivelyNarrowed : FormationState
 
 data CurrentEndorsement : Set where
   sincereYes : CurrentEndorsement
 
 data FormationIntegrity : Set where
-  revisableFormation narrowedFormation : FormationIntegrity
+  revisableFormation : FormationIntegrity
+  narrowedFormation : FormationIntegrity
 
 currentEndorsement : FormationState → CurrentEndorsement
 currentEndorsement _ = sincereYes

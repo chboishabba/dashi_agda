@@ -29,7 +29,10 @@ trans refl yz = yz
 ------------------------------------------------------------------------
 
 data FineBitState : Set where
-  fine00 fine01 fine10 fine11 : FineBitState
+  fine00 : FineBitState
+  fine01 : FineBitState
+  fine10 : FineBitState
+  fine11 : FineBitState
 
 coarseFirstBit : FineBitState → Bool
 coarseFirstBit fine00 = false

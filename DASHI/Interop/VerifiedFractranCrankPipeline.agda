@@ -100,7 +100,16 @@ open FractranMachine public
 ------------------------------------------------------------------------
 
 data MicroOp : Set where
-  load store add sub mul compare branch allocate emit halt : MicroOp
+  load : MicroOp
+  store : MicroOp
+  add : MicroOp
+  sub : MicroOp
+  mul : MicroOp
+  compare : MicroOp
+  branch : MicroOp
+  allocate : MicroOp
+  emit : MicroOp
+  halt : MicroOp
 
 record ArchitectureLowering : Set₁ where
   field

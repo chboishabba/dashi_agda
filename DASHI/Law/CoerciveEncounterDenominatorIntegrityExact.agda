@@ -13,16 +13,27 @@ import DASHI.Law.CoerciveEncounterPopulationAggregationExact as Population
 ------------------------------------------------------------------------
 
 data DenominatorDomain : Set where
-  encounterDomain uniquePersonDomain eligiblePopulationDomain selectedPopulationDomain : DenominatorDomain
+  encounterDomain : DenominatorDomain
+  uniquePersonDomain : DenominatorDomain
+  eligiblePopulationDomain : DenominatorDomain
+  selectedPopulationDomain : DenominatorDomain
 
 data IdentityState : Set where
-  stablePersonKey identityMissing identityConflict : IdentityState
+  stablePersonKey : IdentityState
+  identityMissing : IdentityState
+  identityConflict : IdentityState
 
 data EligibilityState : Set where
-  eligible notEligible eligibilityMissing eligibilityConflict : EligibilityState
+  eligible : EligibilityState
+  notEligible : EligibilityState
+  eligibilityMissing : EligibilityState
+  eligibilityConflict : EligibilityState
 
 data SelectionState : Set where
-  selected notSelected selectionMissing selectionConflict : SelectionState
+  selected : SelectionState
+  notSelected : SelectionState
+  selectionMissing : SelectionState
+  selectionConflict : SelectionState
 
 record PersonLinkedFixture : Set where
   constructor personLinkedFixture
@@ -75,10 +86,16 @@ open DenominatorIntegrityReceipt public
 ------------------------------------------------------------------------
 
 data DenominatorConsumer : Set where
-  perEncounterGatewayRate perPersonExposureRate selectionRate disparityRate : DenominatorConsumer
+  perEncounterGatewayRate : DenominatorConsumer
+  perPersonExposureRate : DenominatorConsumer
+  selectionRate : DenominatorConsumer
+  disparityRate : DenominatorConsumer
 
 data DenominatorObligation : Set where
-  encounterDenominator uniquePersonDenominator eligiblePopulationDenominator selectedPopulationDenominator : DenominatorObligation
+  encounterDenominator : DenominatorObligation
+  uniquePersonDenominator : DenominatorObligation
+  eligiblePopulationDenominator : DenominatorObligation
+  selectedPopulationDenominator : DenominatorObligation
 
 reverseDenominator : DenominatorConsumer → DenominatorObligation
 reverseDenominator perEncounterGatewayRate = encounterDenominator
@@ -99,10 +116,15 @@ selectionNeedsEligibilityDenominator = refl
 ------------------------------------------------------------------------
 
 data StatusObservation : Set where
-  statusPositive statusNegative statusMissing statusConflict : StatusObservation
+  statusPositive : StatusObservation
+  statusNegative : StatusObservation
+  statusMissing : StatusObservation
+  statusConflict : StatusObservation
 
 data StatusInterpretation : Set where
-  observedPositive observedNegative unresolvedStatus : StatusInterpretation
+  observedPositive : StatusInterpretation
+  observedNegative : StatusInterpretation
+  unresolvedStatus : StatusInterpretation
 
 interpretStatus : StatusObservation → StatusInterpretation
 interpretStatus statusPositive = observedPositive

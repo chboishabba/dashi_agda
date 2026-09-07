@@ -195,7 +195,9 @@ data MaboDiscriminator : Set where
 
 
 data MaboWorkKind : Set where
-  thinkWork lookWork testWork : MaboWorkKind
+  thinkWork : MaboWorkKind
+  lookWork : MaboWorkKind
+  testWork : MaboWorkKind
 
 record CompiledMaboResidualSearch : Set where
   constructor compiledMaboResidualSearch

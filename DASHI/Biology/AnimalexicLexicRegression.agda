@@ -16,14 +16,16 @@ import DASHI.Core.SetValuedEvidenceConflictExact as Evidence
 ------------------------------------------------------------------------
 
 data Assumption : Set where
-  cameraHealthy audioHealthy : Assumption
+  cameraHealthy : Assumption
+  audioHealthy : Assumption
 
 Holds : Assumption → Set
 Holds cameraHealthy = ⊤
 Holds audioHealthy = ⊤
 
 data Route : Set where
-  visualRoute acousticRoute : Route
+  visualRoute : Route
+  acousticRoute : Route
 
 Requires : Route → Assumption → Set
 Requires visualRoute cameraHealthy = ⊤
@@ -70,7 +72,9 @@ cameraFailureCannotHitEverySufficientRoute =
 ------------------------------------------------------------------------
 
 data Artifact : Set where
-  rawFrame poseEvidence gazeEvidence : Artifact
+  rawFrame : Artifact
+  poseEvidence : Artifact
+  gazeEvidence : Artifact
 
 data DependsTiny : Artifact → Artifact → Set where
   frameToPose : DependsTiny rawFrame poseEvidence
@@ -110,13 +114,18 @@ poseAndGazeAreNotIndependentByLineage =
 ------------------------------------------------------------------------
 
 data State : Set where
-  leftState rightState leftAfter rightAfter : State
+  leftState : State
+  rightState : State
+  leftAfter : State
+  rightAfter : State
 
 data Action : Set where
   probe : Action
 
 data Observation : Set where
-  sameNow leftResponse rightResponse : Observation
+  sameNow : Observation
+  leftResponse : Observation
+  rightResponse : Observation
 
 observe : State → Observation
 observe leftState = sameNow

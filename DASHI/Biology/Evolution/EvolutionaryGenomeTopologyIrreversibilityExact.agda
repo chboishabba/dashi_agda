@@ -147,7 +147,8 @@ data GenomeArchitecture : Set where
 -- A deliberately coarse shadow.  The first and third states have the same
 -- chromosome-count class despite different history-bearing architecture.
 data ChromosomeCountShadow : Set where
-  oneChromosome twoChromosomes : ChromosomeCountShadow
+  oneChromosome : ChromosomeCountShadow
+  twoChromosomes : ChromosomeCountShadow
 
 chromosomeCountShadow : GenomeArchitecture → ChromosomeCountShadow
 chromosomeCountShadow ancestralSeparated = twoChromosomes
@@ -156,7 +157,8 @@ chromosomeCountShadow postMixDissociated = twoChromosomes
 
 -- The permanent-history bit is finer than the count shadow.
 data MixingHistory : Set where
-  noRecordedMixing recordedMixing : MixingHistory
+  noRecordedMixing : MixingHistory
+  recordedMixing : MixingHistory
 
 mixingHistory : GenomeArchitecture → MixingHistory
 mixingHistory ancestralSeparated = noRecordedMixing

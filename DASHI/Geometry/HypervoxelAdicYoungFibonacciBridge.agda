@@ -50,7 +50,8 @@ open BTBraid public
 ------------------------------------------------------------------------
 
 data YoungFibonacciLetter : Set where
-  one two : YoungFibonacciLetter
+  one : YoungFibonacciLetter
+  two : YoungFibonacciLetter
 
 record YoungFibonacciGraph : Set₁ where
   field
@@ -88,7 +89,9 @@ open TenAdicYoungFibonacciShadow public
 ------------------------------------------------------------------------
 
 data BridgeRelation : Set where
-  projectedShadow embeddedChart definitionalIdentity : BridgeRelation
+  projectedShadow : BridgeRelation
+  embeddedChart : BridgeRelation
+  definitionalIdentity : BridgeRelation
 
 record HypervoxelAdicYoungFibonacciBridge
   (H : HypervoxelCarrier)

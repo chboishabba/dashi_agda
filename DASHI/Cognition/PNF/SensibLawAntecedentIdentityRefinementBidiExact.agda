@@ -27,7 +27,10 @@ record BindingCandidateSnapshot : Set where
 open BindingCandidateSnapshot public
 
 data RefinementDisposition : Set where
-  retainedAmbiguity narrowedAmbiguity uniqueCandidate noCandidate : RefinementDisposition
+  retainedAmbiguity : RefinementDisposition
+  narrowedAmbiguity : RefinementDisposition
+  uniqueCandidate : RefinementDisposition
+  noCandidate : RefinementDisposition
 
 
 record AntecedentRefinementReceipt

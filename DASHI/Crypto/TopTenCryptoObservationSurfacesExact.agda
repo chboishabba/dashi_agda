@@ -22,7 +22,9 @@ import DASHI.Crypto.TopTenCryptoBlueTeamProfilesExact as Profile
 -- physicalChannel: observation belongs to a physical channel model rather than
 -- a classical ciphertext/key state alone.
 data ObservationDependency : Set where
-  publicOnly hiddenDependent physicalChannel : ObservationDependency
+  publicOnly : ObservationDependency
+  hiddenDependent : ObservationDependency
+  physicalChannel : ObservationDependency
 
 data ObservationKind : Set where
   ciphertextTranscript : ObservationKind

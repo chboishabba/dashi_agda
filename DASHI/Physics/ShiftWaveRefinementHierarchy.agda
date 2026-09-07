@@ -21,7 +21,11 @@ open import Data.Integer using (-[1+_])
 -- Laplacian on embedded points for the current projection-based field lift.
 
 data ShiftPressurePoint5 : Set where
-  s0 s1 s2 s3 s4 : ShiftPressurePoint5
+  s0 : ShiftPressurePoint5
+  s1 : ShiftPressurePoint5
+  s2 : ShiftPressurePoint5
+  s3 : ShiftPressurePoint5
+  s4 : ShiftPressurePoint5
 
 embed3to5 :
   SPTI.ShiftPressurePoint → ShiftPressurePoint5

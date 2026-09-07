@@ -31,7 +31,9 @@ import DASHI.Physics.Foundations.AtomicValenceFermionBridgeExact as Atomic
 ------------------------------------------------------------------------
 
 data BackboneCandidate : Set where
-  carbonBackbone siliconBackbone otherBackbone : BackboneCandidate
+  carbonBackbone : BackboneCandidate
+  siliconBackbone : BackboneCandidate
+  otherBackbone : BackboneCandidate
 
 data ChemicalSuitabilityCoordinate : Set where
   tetravalentBonding : ChemicalSuitabilityCoordinate

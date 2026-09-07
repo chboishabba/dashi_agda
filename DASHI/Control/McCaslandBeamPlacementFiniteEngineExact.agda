@@ -16,7 +16,11 @@ import DASHI.Control.McCaslandFailureSetPlacementCompilerExact as Placement
 ------------------------------------------------------------------------
 
 data BeamCandidateSite : Set where
-  siteA siteB siteC siteD siteE : BeamCandidateSite
+  siteA : BeamCandidateSite
+  siteB : BeamCandidateSite
+  siteC : BeamCandidateSite
+  siteD : BeamCandidateSite
+  siteE : BeamCandidateSite
 
 data FiniteFailure : Set where
   nominal : FiniteFailure

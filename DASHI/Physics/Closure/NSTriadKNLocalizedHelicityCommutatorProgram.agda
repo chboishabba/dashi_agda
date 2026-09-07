@@ -48,7 +48,8 @@ open import Data.List.Base using (List; _∷_; [])
 open import Data.Nat.Base using (_≤_)
 
 data HelicitySign : Set where
-  plus minus : HelicitySign
+  plus : HelicitySign
+  minus : HelicitySign
 
 record HelicityTriple : Set where
   constructor triple

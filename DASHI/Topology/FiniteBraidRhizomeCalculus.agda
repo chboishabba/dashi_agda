@@ -11,10 +11,12 @@ data _⊎_ (A B : Set) : Set where
   inj₂ : B → A ⊎ B
 
 data Strand : Set where
-  leftStrand rightStrand : Strand
+  leftStrand : Strand
+  rightStrand : Strand
 
 data Braid2 : Set where
-  straight swap : Braid2
+  straight : Braid2
+  swap : Braid2
 
 compose : Braid2 → Braid2 → Braid2
 compose straight b = b
@@ -71,7 +73,8 @@ collisionFree straight = strandDistinct
 collisionFree swap ()
 
 data IsotopyClass2 : Set where
-  evenCrossing oddCrossing : IsotopyClass2
+  evenCrossing : IsotopyClass2
+  oddCrossing : IsotopyClass2
 
 classify : Braid2 → IsotopyClass2
 classify straight = evenCrossing
@@ -84,7 +87,8 @@ classificationComplete straight = inj₁ refl
 classificationComplete swap = inj₂ refl
 
 data FlexBudget : Set where
-  rigid flexible : FlexBudget
+  rigid : FlexBudget
+  flexible : FlexBudget
 
 data CanRealise : FlexBudget → Braid2 → Set where
   realiseStraightRigid : CanRealise rigid straight
@@ -92,7 +96,8 @@ data CanRealise : FlexBudget → Braid2 → Set where
   realiseSwapFlexible : CanRealise flexible swap
 
 data TranslationOutcome : Set where
-  translatedExactly translationNeedsRefinement : TranslationOutcome
+  translatedExactly : TranslationOutcome
+  translationNeedsRefinement : TranslationOutcome
 
 translateWithBudget : FlexBudget → Braid2 → TranslationOutcome
 translateWithBudget rigid straight = translatedExactly
@@ -109,10 +114,14 @@ realisationImpliesTranslation realiseStraightFlexible = refl
 realisationImpliesTranslation realiseSwapFlexible = refl
 
 data Tube : Set where
-  trunk leftBranch rightBranch : Tube
+  trunk : Tube
+  leftBranch : Tube
+  rightBranch : Tube
 
 data Junction : Set where
-  splitJunction mergeJunction reconnectJunction : Junction
+  splitJunction : Junction
+  mergeJunction : Junction
+  reconnectJunction : Junction
 
 data SectionRoute : Junction → Tube → Tube → Set where
   splitLeft : SectionRoute splitJunction trunk leftBranch

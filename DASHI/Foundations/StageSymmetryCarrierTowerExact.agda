@@ -11,7 +11,8 @@ import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 ------------------------------------------------------------------------
 
 data C2 : Set where
-  direct inverse : C2
+  direct : C2
+  inverse : C2
 
 flipC2 : C2 → C2
 flipC2 direct = inverse
@@ -22,7 +23,9 @@ flipC2Involutive direct = refl
 flipC2Involutive inverse = refl
 
 data C3 : Set where
-  negative neutral positive : C3
+  negative : C3
+  neutral : C3
+  positive : C3
 
 rotateC3 : C3 → C3
 rotateC3 negative = neutral

@@ -18,10 +18,10 @@ import DASHI.Core.BidiResidualApproximationExact as Bidi
 ------------------------------------------------------------------------
 
 data DialogicObservationKind : Set where
-  askObservation
-  listenObservation
-  deliberateObservation
-  : DialogicObservationKind
+  askObservation : DialogicObservationKind
+  listenObservation : DialogicObservationKind
+  deliberateObservation : DialogicObservationKind
+
 
 asExtendedMove : DialogicObservationKind → Delib.ExtendedMoveKind
 asExtendedMove askObservation = Delib.askMove

@@ -26,7 +26,8 @@ import DASHI.Crypto.BlueTeamAdversaryObservationExact as Observation
 ------------------------------------------------------------------------
 
 data DecapsulationRoute : Set where
-  candidateRoute fallbackRoute : DecapsulationRoute
+  candidateRoute : DecapsulationRoute
+  fallbackRoute : DecapsulationRoute
 
 record RoutedProtocolSurface : Set₁ where
   constructor routedProtocolSurface

@@ -36,7 +36,8 @@ import DASHI.Physics.Closure.NSTriadKNLuoAngularStrainDisplayedFormulaZeroExact 
 import DASHI.Physics.Closure.NSTriadKNDirectionalProjectorStabilizerRound37Exact as Projector
 
 data Orientation : Set where
-  preserve reverse : Orientation
+  preserve : Orientation
+  reverse : Orientation
 
 orientVector : Orientation → V.Vector3 → V.Vector3
 orientVector preserve vector = vector

@@ -26,7 +26,9 @@ import DASHI.Physics.Semiconductor.Device.DriftDiffusionContinuityExact as Trans
 ------------------------------------------------------------------------
 
 data SourceCharge : Set where
-  q1 q3 q5 : SourceCharge
+  q1 : SourceCharge
+  q3 : SourceCharge
+  q5 : SourceCharge
 
 chargeCode : SourceCharge → Nat
 chargeCode q1 = 1
@@ -214,7 +216,9 @@ q1ReachesFixedInTwo = refl
 ------------------------------------------------------------------------
 
 data CellDistance : Set where
-  d0 d1 d2 : CellDistance
+  d0 : CellDistance
+  d1 : CellDistance
+  d2 : CellDistance
 
 sourceDistance : SourceCharge → SourceCharge → CellDistance
 sourceDistance q1 q1 = d0

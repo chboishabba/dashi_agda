@@ -15,10 +15,12 @@ import DASHI.Reasoning.Spacy369TwoDirectionArchitectureBidiExact as Architecture
 ------------------------------------------------------------------------
 
 data ForwardVersion : Set where
-  originalForward revisedForward : ForwardVersion
+  originalForward : ForwardVersion
+  revisedForward : ForwardVersion
 
 data BackwardDemand : Set where
-  operationalDemand enlargedDemand : BackwardDemand
+  operationalDemand : BackwardDemand
+  enlargedDemand : BackwardDemand
 
 record RevisionCorner : Set where
   constructor revisionCorner
@@ -63,10 +65,12 @@ backwardThenForward =
 ------------------------------------------------------------------------
 
 data RevisionHistory : Set where
-  historyForwardThenBackward historyBackwardThenForward : RevisionHistory
+  historyForwardThenBackward : RevisionHistory
+  historyBackwardThenForward : RevisionHistory
 
 data RevisionOrderResidue : Set where
-  forwardThenBackwardResidue backwardThenForwardResidue : RevisionOrderResidue
+  forwardThenBackwardResidue : RevisionOrderResidue
+  backwardThenForwardResidue : RevisionOrderResidue
 
 terminalObserver : RevisionHistory → RevisionCorner
 terminalObserver historyForwardThenBackward = q11

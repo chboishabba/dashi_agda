@@ -38,7 +38,10 @@ open import Data.Rational.Base using
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 data Point4 : Set where
-  point0 point1 point2 point3 : Point4
+  point0 : Point4
+  point1 : Point4
+  point2 : Point4
+  point3 : Point4
 
 Signal4 : Set
 Signal4 = Point4 → ℚ

@@ -14,13 +14,19 @@ open import Data.Product using (Σ; _,_; proj₁)
 -- actual two-valued PNF data and must agree on the shared overlap.
 
 data TimeCell : Set where
-  past overlapCell future : TimeCell
+  past : TimeCell
+  overlapCell : TimeCell
+  future : TimeCell
 
 data OpenCell : Set where
-  U V UV whole : OpenCell
+  U : OpenCell
+  V : OpenCell
+  UV : OpenCell
+  whole : OpenCell
 
 data PNFValue : Set where
-  absent present : PNFValue
+  absent : PNFValue
+  present : PNFValue
 
 record LeftSection : Set where
   constructor leftSection

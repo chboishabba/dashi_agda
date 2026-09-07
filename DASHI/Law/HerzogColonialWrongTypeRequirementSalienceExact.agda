@@ -20,12 +20,14 @@ import DASHI.Law.HerzogColonialWrongTypeElementRequirementExact as Element
 ------------------------------------------------------------------------
 
 data HerzogInterpretation : Set where
-  securityClassificationOnly
-  authorityErasureCandidate
-  : HerzogInterpretation
+  securityClassificationOnly : HerzogInterpretation
+  authorityErasureCandidate : HerzogInterpretation
+
 
 data RequirementObservation : Set where
-  unsupported unresolved supported : RequirementObservation
+  unsupported : RequirementObservation
+  unresolved : RequirementObservation
+  supported : RequirementObservation
 
 currentLiveInterpretations : HerzogInterpretation → Set
 currentLiveInterpretations securityClassificationOnly = ⊤
@@ -145,9 +147,9 @@ incidentWeldStillRequiredButCurrentlyNonDiscriminating =
 ------------------------------------------------------------------------
 
 data AfterAuthorityInterpretation : Set where
-  authorityErasureNoPowerNeed
-  authorityErasurePowerNeed
-  : AfterAuthorityInterpretation
+  authorityErasureNoPowerNeed : AfterAuthorityInterpretation
+  authorityErasurePowerNeed : AfterAuthorityInterpretation
+
 
 afterAuthorityLive : AfterAuthorityInterpretation → Set
 afterAuthorityLive authorityErasureNoPowerNeed = ⊤

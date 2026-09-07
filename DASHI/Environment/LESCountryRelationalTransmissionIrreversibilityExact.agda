@@ -25,31 +25,31 @@ import DASHI.Cognition.PNF.SensibLawCountryRelationalIrreversibilitySourceAtlasE
 ------------------------------------------------------------------------
 
 data CountryRelationalCoordinate : Set where
-  accessToSpecificCountry
-  placeSpecificKnowledgeTransmission
-  storyLawLanguageTransmission
-  kinshipAndAncestralContinuity
-  ceremonialPracticeContinuity
-  custodialResponsibilityCapacity
-  permissionAndAuthorityContinuity
-  intergenerationalTeachingChain
-  ecologicalMemoryOfPlace
-  reciprocalObligationPractice
-  collectiveDecisionAuthority
-  communityReconstitutionCapacity
-  historicalTransmissionOccurrence
-  irreversibleRelationalLoss
-  : CountryRelationalCoordinate
+  accessToSpecificCountry : CountryRelationalCoordinate
+  placeSpecificKnowledgeTransmission : CountryRelationalCoordinate
+  storyLawLanguageTransmission : CountryRelationalCoordinate
+  kinshipAndAncestralContinuity : CountryRelationalCoordinate
+  ceremonialPracticeContinuity : CountryRelationalCoordinate
+  custodialResponsibilityCapacity : CountryRelationalCoordinate
+  permissionAndAuthorityContinuity : CountryRelationalCoordinate
+  intergenerationalTeachingChain : CountryRelationalCoordinate
+  ecologicalMemoryOfPlace : CountryRelationalCoordinate
+  reciprocalObligationPractice : CountryRelationalCoordinate
+  collectiveDecisionAuthority : CountryRelationalCoordinate
+  communityReconstitutionCapacity : CountryRelationalCoordinate
+  historicalTransmissionOccurrence : CountryRelationalCoordinate
+  irreversibleRelationalLoss : CountryRelationalCoordinate
+
 
 data RelationalCoordinateState : Set where
-  relationIntact
-  relationImpaired
-  transmissionInterrupted
-  reconstitutionInProgress
-  historicallyMissed
-  permanentlyLostInSourceRecord
-  sourceUnresolved
-  : RelationalCoordinateState
+  relationIntact : RelationalCoordinateState
+  relationImpaired : RelationalCoordinateState
+  transmissionInterrupted : RelationalCoordinateState
+  reconstitutionInProgress : RelationalCoordinateState
+  historicallyMissed : RelationalCoordinateState
+  permanentlyLostInSourceRecord : RelationalCoordinateState
+  sourceUnresolved : RelationalCoordinateState
+
 
 record CountryRelationalOutcome : Set where
   constructor country-relational-outcome
@@ -110,12 +110,13 @@ data CoarseCountryContinuitySurface : Set where
   sameCoarseContinuity : CoarseCountryContinuitySurface
 
 data FineRelationalState : Set where
-  accessWithoutTransmission
-  accessWithLivingTransmission
-  : FineRelationalState
+  accessWithoutTransmission : FineRelationalState
+  accessWithLivingTransmission : FineRelationalState
+
 
 data TransmissionState : Set where
-  transmissionAbsent transmissionLiving : TransmissionState
+  transmissionAbsent : TransmissionState
+  transmissionLiving : TransmissionState
 
 coarseContinuityObserver : FineRelationalState → CoarseCountryContinuitySurface
 coarseContinuityObserver _ = sameCoarseContinuity
@@ -145,16 +146,18 @@ coarseContinuityCannotRecoverTransmission =
 ------------------------------------------------------------------------
 
 data TransmissionMoment : Set where
-  transmissionOccurredAtHistoricalMoment
-  transmissionMissedAtHistoricalMoment
-  laterReconstitutionOccurred
-  : TransmissionMoment
+  transmissionOccurredAtHistoricalMoment : TransmissionMoment
+  transmissionMissedAtHistoricalMoment : TransmissionMoment
+  laterReconstitutionOccurred : TransmissionMoment
+
 
 data HistoricalOccurrenceState : Set where
-  occurredHistorically didNotOccurHistorically : HistoricalOccurrenceState
+  occurredHistorically : HistoricalOccurrenceState
+  didNotOccurHistorically : HistoricalOccurrenceState
 
 data FutureRelationalCapacity : Set where
-  futureReconstitutionOpen futureReconstitutionBlocked : FutureRelationalCapacity
+  futureReconstitutionOpen : FutureRelationalCapacity
+  futureReconstitutionBlocked : FutureRelationalCapacity
 
 historicalOccurrence : TransmissionMoment → HistoricalOccurrenceState
 historicalOccurrence transmissionOccurredAtHistoricalMoment = occurredHistorically
@@ -180,11 +183,11 @@ missedHistoryDoesNotProveFutureReconstitutionImpossible = refl
 ------------------------------------------------------------------------
 
 data RelationalSourceRole : Set where
-  highCourtAcceptedFinding
-  humanRightsInquiryFinding
-  internationalDeclarationProvision
-  dashiInterpretiveBridge
-  : RelationalSourceRole
+  highCourtAcceptedFinding : RelationalSourceRole
+  humanRightsInquiryFinding : RelationalSourceRole
+  internationalDeclarationProvision : RelationalSourceRole
+  dashiInterpretiveBridge : RelationalSourceRole
+
 
 record RelationalSourceProposition : Set where
   constructor relational-source-proposition
@@ -246,7 +249,8 @@ undripCountryFutureGenerationRelation = relational-source-proposition
 ------------------------------------------------------------------------
 
 data PlaceRelation : Set where
-  relationToThisCountry relationToDifferentCountry : PlaceRelation
+  relationToThisCountry : PlaceRelation
+  relationToDifferentCountry : PlaceRelation
 
 data GenericLandArea : Set where
   equalArea : GenericLandArea
@@ -255,7 +259,8 @@ areaObserver : PlaceRelation → GenericLandArea
 areaObserver _ = equalArea
 
 data CountryAttachment : Set where
-  thisCountryAttachment differentCountryAttachment : CountryAttachment
+  thisCountryAttachment : CountryAttachment
+  differentCountryAttachment : CountryAttachment
 
 attachment : PlaceRelation → CountryAttachment
 attachment relationToThisCountry = thisCountryAttachment

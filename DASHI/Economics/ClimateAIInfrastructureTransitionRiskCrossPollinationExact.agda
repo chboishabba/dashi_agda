@@ -18,11 +18,11 @@ import DASHI.Economics.PolicyBackstopCommercialDisciplineExact as Policy
 ------------------------------------------------------------------------
 
 data InfrastructureTransitionState : Set where
-  preBuild
-  capacityBuiltEconomicsIntact
-  capacityBuiltEconomicsImpaired
-  capacityRetrofittedButLegacyLossRetained
-  : InfrastructureTransitionState
+  preBuild : InfrastructureTransitionState
+  capacityBuiltEconomicsIntact : InfrastructureTransitionState
+  capacityBuiltEconomicsImpaired : InfrastructureTransitionState
+  capacityRetrofittedButLegacyLossRetained : InfrastructureTransitionState
+
 
 data CoarseCapacityShadow : Set where
   sameInstalledCapacity : CoarseCapacityShadow
@@ -31,11 +31,11 @@ capacityShadow : InfrastructureTransitionState → CoarseCapacityShadow
 capacityShadow _ = sameInstalledCapacity
 
 data CapitalHistoryResidue : Set where
-  noCapitalResidue
-  financingCommitmentRetained
-  obsolescenceLossRetained
-  policyLiabilityRetained
-  : CapitalHistoryResidue
+  noCapitalResidue : CapitalHistoryResidue
+  financingCommitmentRetained : CapitalHistoryResidue
+  obsolescenceLossRetained : CapitalHistoryResidue
+  policyLiabilityRetained : CapitalHistoryResidue
+
 
 capitalResidue : InfrastructureTransitionState → CapitalHistoryResidue
 capitalResidue preBuild = noCapitalResidue
@@ -52,27 +52,27 @@ sameCapacityCanRetainDifferentCapitalHistory ()
 ------------------------------------------------------------------------
 
 data TransitionRiskCoordinate : Set where
-  hardwareObsolescence
-  softwareEfficiencyDeflation
-  powerPriceExposure
-  gridConnectionDelay
-  waterConstraint
-  refinancingConstraint
-  demandRepricing
-  policyChange
-  exportControlChange
-  geographicConcentration
-  : TransitionRiskCoordinate
+  hardwareObsolescence : TransitionRiskCoordinate
+  softwareEfficiencyDeflation : TransitionRiskCoordinate
+  powerPriceExposure : TransitionRiskCoordinate
+  gridConnectionDelay : TransitionRiskCoordinate
+  waterConstraint : TransitionRiskCoordinate
+  refinancingConstraint : TransitionRiskCoordinate
+  demandRepricing : TransitionRiskCoordinate
+  policyChange : TransitionRiskCoordinate
+  exportControlChange : TransitionRiskCoordinate
+  geographicConcentration : TransitionRiskCoordinate
+
 
 data IncidenceCoordinate : Set where
-  equityHolderLoss
-  creditorLoss
-  publicSubsidyLoss
-  utilityRatepayerBurden
-  workerCommunityBurden
-  customerPriceBurden
-  foreignDependencyBurden
-  : IncidenceCoordinate
+  equityHolderLoss : IncidenceCoordinate
+  creditorLoss : IncidenceCoordinate
+  publicSubsidyLoss : IncidenceCoordinate
+  utilityRatepayerBurden : IncidenceCoordinate
+  workerCommunityBurden : IncidenceCoordinate
+  customerPriceBurden : IncidenceCoordinate
+  foreignDependencyBurden : IncidenceCoordinate
+
 
 record InfrastructureTransitionRiskReceipt : Set₁ where
   constructor infrastructureTransitionRiskReceipt
@@ -185,18 +185,18 @@ climateDomainDoesNotBecomeAIInfrastructureDomain ()
 ------------------------------------------------------------------------
 
 data TransitionRecoveryClaim : Set where
-  strandedAssetRecovered
-  publicSupportNetBeneficial
-  dependencyReduced
-  communityBurdenResolved
-  : TransitionRecoveryClaim
+  strandedAssetRecovered : TransitionRecoveryClaim
+  publicSupportNetBeneficial : TransitionRecoveryClaim
+  dependencyReduced : TransitionRecoveryClaim
+  communityBurdenResolved : TransitionRecoveryClaim
+
 
 data TransitionRecoveryProducer : Set where
-  independentAssetRecoveryProducer
-  fullPublicIncidenceProducer
-  supplyChainDependencyProducer
-  distributionalOutcomeProducer
-  : TransitionRecoveryProducer
+  independentAssetRecoveryProducer : TransitionRecoveryProducer
+  fullPublicIncidenceProducer : TransitionRecoveryProducer
+  supplyChainDependencyProducer : TransitionRecoveryProducer
+  distributionalOutcomeProducer : TransitionRecoveryProducer
+
 
 requiredTransitionProducer : TransitionRecoveryClaim → TransitionRecoveryProducer
 requiredTransitionProducer strandedAssetRecovered = independentAssetRecoveryProducer

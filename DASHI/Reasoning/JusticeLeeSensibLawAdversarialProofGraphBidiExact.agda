@@ -31,16 +31,35 @@ import DASHI.Interop.SensibLawResidualLattice as SL
 ------------------------------------------------------------------------
 
 data PartyRole : Set where
-  applicant respondent court externalWitness : PartyRole
+  applicant : PartyRole
+  respondent : PartyRole
+  court : PartyRole
+  externalWitness : PartyRole
 
 data LegalRole : Set where
-  pleadedFact evidentiaryFact legalProposition causalLink requestedOrder : LegalRole
+  pleadedFact : LegalRole
+  evidentiaryFact : LegalRole
+  legalProposition : LegalRole
+  causalLink : LegalRole
+  requestedOrder : LegalRole
 
 data EpistemicStatus : Set where
-  alleged admitted disputed supported proved rejected unresolved : EpistemicStatus
+  alleged : EpistemicStatus
+  admitted : EpistemicStatus
+  disputed : EpistemicStatus
+  supported : EpistemicStatus
+  proved : EpistemicStatus
+  rejected : EpistemicStatus
+  unresolved : EpistemicStatus
 
 data EvidenceKind : Set where
-  sourceText accountRecord message report testimony eventRecord otherEvidence : EvidenceKind
+  sourceText : EvidenceKind
+  accountRecord : EvidenceKind
+  message : EvidenceKind
+  report : EvidenceKind
+  testimony : EvidenceKind
+  eventRecord : EvidenceKind
+  otherEvidence : EvidenceKind
 
 record PropositionFibre : Set where
   constructor propositionFibre
