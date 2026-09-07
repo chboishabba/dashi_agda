@@ -3,13 +3,10 @@ module DASHI.Interop.AristotleRankQualifierPropertyEngineBoundary where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
 -- Source-level contracts rechecked against the attached Aristotle archive.
---
--- The Lean archive contains exactly 189 RequestProject/*.lean modules.  This
--- module does not transport Lean proofs into Agda; it records the distinctions
--- Nat/SensibLaw must preserve when consuming executable Wikidata observations.
 ------------------------------------------------------------------------
 
 record AristotleExecutableContract : Set where
@@ -77,7 +74,6 @@ data TruthyMeansSourceTrue : Set where
 data QualifierValidMeansMigrationSafe : Set where
 data PKBDerivableMeansCanonicalFact : Set where
 data TruthyItemStatementRetainsWholeNativeStatement : Set where
-
 data PropertyConstraintValidityCreatesEditAuthority : Set where
 
 truthyDoesNotCreateSourceTruth : TruthyMeansSourceTrue → ⊥
