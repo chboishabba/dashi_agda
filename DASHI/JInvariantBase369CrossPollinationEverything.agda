@@ -13,6 +13,7 @@ import DASHI.Moonshine.JInvariantIntrospectiveCrossPollinationExact
 -- three-sector spectral observer, signed-FRACTRAN conjugation, and first
 -- analytic residual before theta/j/Monster promotion.
 import DASHI.Moonshine.JInvariantColourWheelWaveSignedBidiExact
+import DASHI.Moonshine.JInvariantColourWheelPolyphaseSpectralBidiExact
 import DASHI.Moonshine.JInvariantColourWheelWaveSignedValidation
 
 -- Existing exact in-repo carriers consumed by the bridge.
