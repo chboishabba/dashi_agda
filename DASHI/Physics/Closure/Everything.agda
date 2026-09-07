@@ -83,17 +83,17 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalHHAndNestedRadiusCompilerRound468E
 import DASHI.Physics.Closure.NSTriadKNSelectedPairPhysicalTriadRoutingRound469Exact
 import DASHI.Physics.Closure.NSTriadKNOutputIndexedEDProvenanceRound470Exact
 
--- R471-R478 Lean<->Agda Gram-operator return.  The weakest fixed-output
--- consumer is the signed l2->l2 Gram quadratic-form bound; absolute Schur,
--- block Schur, operator-Schur and the separate +/- scalar pair are producers
--- rather than mandatory intermediates.  R473/R474/R475 reuse the literal
--- R180/R383 signed Gram and existing helical decomposition.  R476 keeps the
--- projected outer-cell lane distinct from R440's unprojected direct companion.
--- R477 installs the nonseparable Cauchy pair kernel and proves that two scalar
--- same-helicity bounds suffice.  R478 then restores least privilege: the live
--- terminal theorem target is one direct total Cauchy-resolved GramOperatorBound;
--- the +/- pair remains an optional sufficient producer so signed compensation
--- is not discarded by the scheduler.
+-- R471-R480 Lean<->Agda Gram-operator return and terminal minimization.
+-- R471 identifies the weakest uniform Gram-operator consumer.  R477 installs
+-- the literal nonseparable Cauchy pair kernel.  R478 removes the unnecessary
+-- requirement to prove separate +/- scalar bounds by preferring the total
+-- resolved all-coefficient bound.  R479 isolates a signed residual allowance
+-- producer so paid diagonal structure can be reused without absolute values.
+-- R480 follows the actual R472/R432 downstream type one step further: the final
+-- physical consumer needs only the selected physical coefficient snapshot, not
+-- a theorem for every hypothetical coefficient vector.  Thus the live cut is
+-- the physical same-object snapshot weld plus the selected resolved payment;
+-- uniform R478 and split R477 remain sufficient producer routes only.
 import DASHI.Physics.Closure.NSTriadKNGramOperatorBoundConsumerRound471Exact
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramOperatorPaymentRound472Exact
 import DASHI.Physics.Closure.NSTriadKNWeightedPhysicalGramOperatorCarrierRound473Exact
@@ -102,6 +102,9 @@ import DASHI.Physics.Closure.NSTriadKNWeightedHelicalGramOperatorSplitRound475Ex
 import DASHI.Physics.Closure.NSTriadKNProjectedVsDirectSignedGramBoundaryRound476Exact
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedDirectConsumerRound478Exact
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedSignedResidualRound479Exact
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedPhysicalSnapshotRound480Exact
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedTerminalEverythingRound479Exact
 
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
 -- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
