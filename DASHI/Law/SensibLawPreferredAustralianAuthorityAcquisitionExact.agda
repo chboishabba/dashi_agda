@@ -9,9 +9,11 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 -- Parity owner for the Rust-led Australian acquisition/failover tranche.
 --
--- The runtime implementation leads.  This module mirrors the implemented
--- acquisition order and its authority firewalls; it does not claim that the
--- first real official-source live receipt has already been produced.
+-- The runtime implementation leads.  A bounded official-HCA acquisition has
+-- now succeeded and its retained receipt/artifact are pinned separately.  The
+-- receipt embeds the pre-repair head 9c3007..., while bb6de85... is the later
+-- locally validated repair head.  Exact-current-head live execution remains a
+-- separate stronger condition.
 ------------------------------------------------------------------------
 
 rustRepository : String
@@ -20,8 +22,11 @@ rustRepository = "chboishabba/slr"
 rustBranch : String
 rustBranch = "agent/governed-online-r6-v2"
 
-rustSourceHead : String
-rustSourceHead = "9c3007be97f7e4a1e9a8bc9c7c85b92368515935"
+liveReceiptRuntimeHead : String
+liveReceiptRuntimeHead = "9c3007be97f7e4a1e9a8bc9c7c85b92368515935"
+
+locallyValidatedRepairHead : String
+locallyValidatedRepairHead = "bb6de859ca82700cba70d2784f11c39a2c4c1826"
 
 ------------------------------------------------------------------------
 -- Preferred acquisition order.
@@ -148,7 +153,10 @@ record OfficialCourtAcquisitionBoundary : Set where
     acquiredBytesRetainSHA256 : Bool
     acquiredBytesRetainSHA256IsTrue : acquiredBytesRetainSHA256 ≡ true
     boundedOfficialLiveReceiptValidated : Bool
-    boundedOfficialLiveReceiptValidatedIsFalse : boundedOfficialLiveReceiptValidated ≡ false
+    boundedOfficialLiveReceiptValidatedIsTrue : boundedOfficialLiveReceiptValidated ≡ true
+    exactRepairHeadLiveExecutionValidated : Bool
+    exactRepairHeadLiveExecutionValidatedIsFalse :
+      exactRepairHeadLiveExecutionValidated ≡ false
 
 canonicalOfficialCourtAcquisitionBoundary : OfficialCourtAcquisitionBoundary
 canonicalOfficialCourtAcquisitionBoundary =
@@ -160,6 +168,7 @@ canonicalOfficialCourtAcquisitionBoundary =
     true refl
     1 refl
     0 refl
+    true refl
     true refl
     false refl
 
