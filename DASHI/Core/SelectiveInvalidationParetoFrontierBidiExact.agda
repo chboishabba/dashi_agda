@@ -10,17 +10,16 @@ import DASHI.Core.DependencyWeightedDiagnosisSchedulerBidiExact as Weighted
 ------------------------------------------------------------------------
 -- SELECTIVE INVALIDATION + N-DIMENSIONAL / RECURSIVE PARETO BRIDGE
 --
--- Compatibility bridge to the methodology of open PR #770:
---   * arbitrary declared semantic axes, not a fixed scalar objective;
---   * residual-relevant materialisation only;
---   * inherited coordinates keep their meaning/cost;
---   * very large / self-indexed ambient capacity does not force brute-force
---     materialisation.
+-- Compatibility bridge to open PR #770's methodology without duplicating its
+-- canonical module paths while that PR remains on a separate ancestry.
 --
--- This file deliberately does NOT duplicate #770's canonical module paths while
--- that PR remains open.  It gives the truth-maintenance API a compatible local
--- frontier surface that can later be collapsed onto RecursiveParetoFrontier-
--- LiftingExact once that owner is on the shared ancestry.
+-- Keep three things separate:
+--   * declared semantic Pareto axes;
+--   * visualisation-state cardinality (e.g. 3^9 = 19683);
+--   * symbolic self-indexed/tetrational representational capacity
+--       A_(n+1) = 9^(A_n).
+--
+-- Only residual-relevant semantic coordinates are materialised.
 ------------------------------------------------------------------------
 
 data RecomputeClass : Set where
@@ -64,15 +63,33 @@ record ParetoFrontierCandidate (candidate : CertificateCandidate) : Set₁ where
 open ParetoFrontierCandidate public
 
 ------------------------------------------------------------------------
--- Tetrational/self-indexed ambient capacity is represented only as capacity
--- metadata.  Materialisation is a separate, consumer/residual-indexed family.
+-- Symbolic tetrational/self-indexed capacity.
+--
+-- We intentionally do not normalize gigantic natural-number powers.  The
+-- recurrence is represented as syntax because capacity is a language bound,
+-- not a request to enumerate all axes.
 ------------------------------------------------------------------------
+
+data CapacityExpr : Set where
+  baseNine : CapacityExpr
+  ninePower : CapacityExpr → CapacityExpr
+
+selfIndexedCapacity : Nat → CapacityExpr
+selfIndexedCapacity zero = baseNine
+selfIndexedCapacity (suc n) = ninePower (selfIndexedCapacity n)
+
+selfIndexedStep :
+  (n : Nat) →
+  selfIndexedCapacity (suc n) ≡ ninePower (selfIndexedCapacity n)
+selfIndexedStep n = refl
 
 record AmbientAxisCapacity : Set where
   constructor ambient-axis-capacity
   field
     level : Nat
-    capacity : Nat
+    capacityExpression : CapacityExpr
+    declaredSemanticAxisCount : Nat
+    ternaryVisualisationStateCount : Nat
     recurrenceReference : String
     mayGrowSelfIndexed : Bool
 
@@ -91,8 +108,12 @@ open ResidualMaterialisation public
 
 canonicalAmbientCapacity : AmbientAxisCapacity
 canonicalAmbientCapacity =
-  ambient-axis-capacity 3 19683
-    "finite calibration only: 3^9 visualisation scale; compatible with #770 self-indexed/tetrational capacity semantics"
+  ambient-axis-capacity
+    3
+    (selfIndexedCapacity 3)
+    4
+    19683
+    "#770-compatible: symbolic A_(n+1)=9^(A_n); 19683 is only the 3^9 ternary visualisation-state count, not Pareto dimension"
     true
 
 data LocalAxis : Set where
@@ -118,6 +139,13 @@ canonicalResidualMaterialisation =
     ref localDiagnostic = "materialise diagnostic residual only because diagnosis is live"
     ref localAuthority = "materialise authority gate separately"
     ref localCost = "materialise recompute cost for current frontier choice"
+
+semanticAxisCountIsFour : declaredSemanticAxisCount canonicalAmbientCapacity ≡ 4
+semanticAxisCountIsFour = refl
+
+visualisationStateCountIsNotDeclaredDimension :
+  ternaryVisualisationStateCount canonicalAmbientCapacity ≡ 19683
+visualisationStateCountIsNotDeclaredDimension = refl
 
 ------------------------------------------------------------------------
 -- Exact selective-invalidation fixture.
@@ -170,9 +198,8 @@ consumerFrontierCandidate =
     "may-recompute consumer branch remains Pareto-comparable, not automatically scheduled"
 
 ------------------------------------------------------------------------
--- Classification is not preference.  A must-recompute branch may still expose
--- several internal repair/debug candidates; Pareto axes rank those without
--- collapsing consequence, diagnostic reduction, authority, and cost.
+-- Classification is not preference. A recompute class determines eligibility;
+-- Pareto comparison ranks admitted residual-relevant repair/debug candidates.
 ------------------------------------------------------------------------
 
 frameDebugger : CertificateCandidate
@@ -221,8 +248,8 @@ data ParetoPreferenceMeansMustRecompute : Set where
 data ProvablyUnaffectedMeansDeleted : Set where
 data AuthorityBlockedMeansLowPriorityEvidence : Set where
 data RecomputeClassIsTruthValue : Set where
-
 data TetrationalCapacityMeansTetrationalRuntime : Set where
+data VisualisationStateCountIsParetoDimension : Set where
 
 ambientCapacityDoesNotForceMaterialisation : AmbientCapacityForcesMaterialisation → ⊥
 ambientCapacityDoesNotForceMaterialisation ()
@@ -242,11 +269,16 @@ recomputeClassIsNotTruthValue ()
 tetrationalCapacityDoesNotImplyRuntime : TetrationalCapacityMeansTetrationalRuntime → ⊥
 tetrationalCapacityDoesNotImplyRuntime ()
 
+visualisationCountDoesNotDefineParetoDimension :
+  VisualisationStateCountIsParetoDimension → ⊥
+visualisationCountDoesNotDefineParetoDimension ()
+
 record SelectiveInvalidationParetoBoundary : Set where
   constructor selective-invalidation-pareto-boundary
   field
     classificationSeparateFromParetoRanking : Bool
     fourSemanticAxesRemainDistinct : Bool
+    visualisationStateCountSeparateFromDimension : Bool
     residualMaterialisationMayBeStrictSubsetOfAmbient : Bool
     selfIndexedCapacityMayRemainUnmaterialised : Bool
     provablyUnaffectedCertificateMayBeRetained : Bool
@@ -257,4 +289,4 @@ record SelectiveInvalidationParetoBoundary : Set where
 canonicalSelectiveInvalidationParetoBoundary : SelectiveInvalidationParetoBoundary
 canonicalSelectiveInvalidationParetoBoundary =
   selective-invalidation-pareto-boundary
-    true true true true true true false false
+    true true true true true true true false false
