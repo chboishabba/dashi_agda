@@ -13,24 +13,38 @@ module DASHI.Analysis.RiemannAristotleCurrentFrontierExact where
 -- current cut explicitly does not identify the rank-two determinant taper with
 -- the final universal pole-quotient taper.
 --
--- The final high-ordinate consumer is therefore the existing pole-quotient split
+-- The final high-ordinate consumer is the existing pole-quotient split
 --
 --   cluster = offOrdinate + Gamma
 --   offOrdinate <= B_off
 --   Gamma <= B_Gamma
 --   B_off + B_Gamma < M_cluster.
 --
--- The 8889 return owns quantitative cluster-margin mathematics, leaving only
--- same-object attachment. The final split-complement compiler is already owned.
--- Under closed-world repo search, the two genuinely analytic high-ordinate
--- leaves are the literal universal-pole-quotient signed off-ordinate bound and
--- the same-taper Gamma precision repair. Low-ordinate/global coverage and RH
--- remain separate. No theorem here derives RH.
+-- Producer adequacy is now consumer-assigned:
+--
+--   B_off <= A_off
+--   B_Gamma <= A_Gamma
+--   A_off + A_Gamma < M_cluster.
+--
+-- The strict combined budget and final contradiction are compiler output. The
+-- Off payment must be established at one common quarter-period crossing cutoff
+-- J where signed near plus owned far fits A_off. Gamma has no J coordinate and
+-- must fit A_Gamma on the same universal pole-quotient taper. The 8889 return
+-- owns quantitative cluster-margin mathematics, leaving same-object attachment.
+-- Source-order transport is downstream proof engineering and is compiled once
+-- per source relation rather than by re-proving every transported inequality.
+--
+-- Low-ordinate/global coverage and RH remain separate. No theorem here derives
+-- RH.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as FinalCut
+import DASHI.Analysis.RiemannG2PoleQuotientProducerAllowanceTargetExact as AllowanceTarget
+import DASHI.Analysis.RiemannG2PoleQuotientOffAllowanceDirectCompilerExact as OffDirect
+import DASHI.Analysis.RiemannG2PoleQuotientGammaAllowanceDirectCompilerExact as GammaDirect
+import DASHI.Analysis.RiemannG2FinalSplitComplementOrderTransportCompilerExact as OrderTransport
 
 record AristotleCurrentFrontier : Set where
   constructor aristotle-current-frontier
@@ -202,7 +216,7 @@ canonicalAristotleCurrentFrontier =
     false refl
     false refl
     false refl
-    "The §35 clustering inequality and M2_delta are obstruction diagnostics, not forward RH payments. The determinant DirectSignedConsumerPayment remains a G2d scalarization theorem but does not automatically transport to the final universal pole-quotient taper. The authoritative high-ordinate forward cut is the literal universal pole-quotient signed off-ordinate budget plus same-taper Gamma precision; 8889 already owns quantitative cluster-margin mathematics and the final split-complement compiler is reusable. Representation attachments are downstream infrastructure. Low-ordinate/global coverage and the final RH implication remain open. RH is not derived."
+    "The §35 clustering inequality and M2_delta are obstruction diagnostics, not forward RH payments. The determinant DirectSignedConsumerPayment remains a G2d scalarization theorem but does not automatically transport to the final universal pole-quotient taper. The authoritative terminal payments are PoleQuotientOffAllowancePayment and PoleQuotientGammaAllowancePayment. Off must use one common quarter-period crossing cutoff J with B_near(J)+B_far(J)<=A_off; Gamma must satisfy B_Gamma(g_pole)<=A_Gamma on the same universal taper. Quantitative cluster-margin mathematics is owned in the 8889 checked-Lean return, while same-object/order attachment is downstream. Channel allowance composition, transported channel inequalities and the final split-complement contradiction are compiler output. Low-ordinate/global coverage and RH remain open."
 
 ------------------------------------------------------------------------
 -- Corrected high-level scheduler interpretation, kept outside the compatibility
@@ -284,3 +298,33 @@ finalContradictionCompilerRebuildNotRequired :
   FinalCut.PoleQuotientFinalCutBoundary.finalContradictionCompilerNeedsRebuilding
     FinalCut.canonicalPoleQuotientFinalCutBoundary ≡ false
 finalContradictionCompilerRebuildNotRequired = refl
+
+------------------------------------------------------------------------
+-- Terminal allowance / common-cutoff / order-transport pins.
+------------------------------------------------------------------------
+
+terminalOffPaymentType : Set₁
+terminalOffPaymentType = AllowanceTarget.PoleQuotientOffAllowancePayment
+
+terminalGammaPaymentType : Set₁
+terminalGammaPaymentType = AllowanceTarget.PoleQuotientGammaAllowancePayment
+
+terminalOffRequiresOneCommonCrossingCutoff :
+  OffDirect.PoleQuotientOffAllowanceDirectCompilerBoundary.oneCommonCrossingCutoffRequired
+    OffDirect.canonicalPoleQuotientOffAllowanceDirectCompilerBoundary ≡ true
+terminalOffRequiresOneCommonCrossingCutoff = refl
+
+terminalOffFarDecayAloneDoesNotSelectCutoff :
+  OffDirect.PoleQuotientOffAllowanceDirectCompilerBoundary.farDecayAloneSelectsFinalCutoff
+    OffDirect.canonicalPoleQuotientOffAllowanceDirectCompilerBoundary ≡ false
+terminalOffFarDecayAloneDoesNotSelectCutoff = refl
+
+terminalGammaHasNoCutoffCoordinate :
+  GammaDirect.PoleQuotientGammaAllowanceDirectCompilerBoundary.gammaFinalConsumerHasCutoffCoordinate
+    GammaDirect.canonicalPoleQuotientGammaAllowanceDirectCompilerBoundary ≡ false
+terminalGammaHasNoCutoffCoordinate = refl
+
+finalOrderTransportCompilesContradiction :
+  OrderTransport.FinalOrderTransportBoundary.orderTransportPackageCompilesContradiction
+    OrderTransport.canonicalFinalOrderTransportBoundary ≡ true
+finalOrderTransportCompilesContradiction = refl
