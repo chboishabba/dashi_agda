@@ -139,6 +139,12 @@ import DASHI.Physics.YangMills.BalabanClayT5SelectedWeakGramReflectionClosureExa
 import DASHI.Physics.YangMills.BalabanClayT5SelectedContinuumOSExact
 import DASHI.Physics.YangMills.BalabanClayT5SelectedContinuumOSGapBridgeExact
 
+-- Preferred expectation-linked continuum route: the thermodynamic producer
+-- already carries the continuum target and bounded-test expectation convergence
+-- to that exact target. Prokhorov is therefore compatibility-only here.
+import DASHI.Physics.YangMills.BalabanClayT5DirectExpectationPropertyClosureExact
+import DASHI.Physics.YangMills.BalabanClayT5ExpectationLinkedContinuumOSExact
+
 -- Compatibility / optional local coercive-observable routes. These do not
 -- replace the global selected-measure compact-containment theorem.
 import DASHI.Physics.YangMills.BalabanClayT5CoerciveMomentMarkovContainmentExact
@@ -184,6 +190,14 @@ import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound209Exact
 import DASHI.Physics.YangMills.BalabanClayT1ResidualIntrospectionRound210Exact
 import DASHI.Physics.YangMills.BalabanClayT1IntrospectiveBindingRound211Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound210Exact
+import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound211Exact
+
+-- Preferred literal source-realization route after introspective same-object
+-- elimination: BC1 is built directly from the Round108 continuation, and the
+-- Row-A scalar q<1 gate is compiler-owned once the literal response producer is
+-- instantiated. Round212 records the resulting source-level first missing cut.
+import DASHI.Physics.YangMills.BalabanR108BackedPresentCutActionExact
+import DASHI.Physics.YangMills.BalabanPreferredSourceRealizationFrontierRound212Exact
 
 import DASHI.Physics.YangMills.BalabanPath13Eq119SourceRouteProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119BishopBridgeProvenanceExact
