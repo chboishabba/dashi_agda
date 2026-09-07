@@ -5,62 +5,67 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact as OffTransport
-import DASHI.Analysis.RiemannG2WindowBudgetToTransportedNearUpperExact as WindowNear
-import DASHI.Analysis.RiemannG2SelectedFiniteNearBudgetMinimalConsumerExact as NearPayment
-import DASHI.Analysis.RiemannG2FreshSameTaperGammaEnvelopeCompilerExact as Gamma
+import DASHI.Analysis.RiemannG2LiteralResponseNormalizedAnalyticCoresExact as Literal
+import DASHI.Analysis.RiemannG2IndependentComplementMarginFinalExact as OneLeaf
 import DASHI.Analysis.RiemannG2FinalSplitComplementOrderTransportCompilerExact as Final
-import DASHI.Analysis.RiemannG2BudgetNormalizedAnalyticCoresExact as Normalized
 
 ------------------------------------------------------------------------
 -- AUTHORITATIVE MINIMAL HIGH-ORDINATE POLE-QUOTIENT CUT
 --
--- Allowance normalization removes two arbitrary slack variables.  Choose
+-- Least-privilege normalization now removes the need to expose separate
+-- finite-near and Gamma upper-envelope theorems as primitive terminal leaves.
+-- At one selected cutoff J choose
 --
---   A_off   := actual selected Off producer budget,
---   A_Gamma := actual Gamma producer budget.
+--   B_near(J)  := D_near(J),
+--   B_off(J)   := D_near(J) + B_far(J),
+--   B_Gamma(g) := D_Gamma(g),
 --
--- Then the per-channel core fits are self-order receipts and the only genuinely
--- quantitative compatibility theorem is the literal joint strict margin for the
--- two actual budgets.
+-- using only source-order reflexivity for the channel upper/allowance fields.
+-- The checked far-shell bound remains a genuine independent input.
 --
--- ANALYTIC
---   Off:   one proof-bearing finite-near upper at the selected cutoff J.
---   Gamma: one proof-bearing fresh Gamma response upper on the chosen taper.
---   Joint: actual B_off(J) + B_Gamma(g) is strictly below the final cluster
---          margin after the declared scalar/order transports.
+-- The one scalar analytic leaf is therefore
+--
+--   cast(D_near(J) + B_far(J))
+--     + cast(D_Gamma(g_pole))
+--       < cast(M_cluster).
+--
+-- CRITICAL FIREWALL: this compression does not erase the finite-near phase or
+-- Gamma mathematics.  They occur literally inside that joint inequality, which
+-- must be proved independently of the final
+--
+--   cluster = Off + Gamma
+--
+-- balance.  The 8889 budget-circularity no-go therefore remains respected.
 --
 -- CROSS-PROVER / REPRESENTATION
 --   checked-Lean split/far theorem -> Agda transport;
---   exact selected-window value/budget/order weld;
---   source self-order receipts used by the normalized core constructors;
---   final source-order/taper/cluster same-object attachment.
+--   source-order reflexivity;
+--   source scalar/order/taper identities;
+--   final cluster same-object attachment.
 --
--- PRUNED
---   intermediate epsilon / separate Off allowance slack;
+-- PRUNED AS PRIMITIVE TERMINAL LEAVES
+--   separate chosen finite-near upper envelope;
+--   separate fresh Gamma envelope upper;
+--   intermediate epsilon / Off allowance slack;
 --   separate Gamma allowance slack;
 --   determinant direct payment;
---   source-orbit metadata after exact window attachment;
---   all-cutoff near upper family;
+--   all-cutoff near upper families;
 --   rebuilding final contradiction algebra.
---
--- No theorem below is manufactured by a status Boolean.
 ------------------------------------------------------------------------
 
 data FinalCutCoordinate : Set where
   transportCheckedLeanSplitFarToAgda : FinalCutCoordinate
-  proveChosenFiniteNearUpper : FinalCutCoordinate
-  proveFreshGammaEnvelope : FinalCutCoordinate
-  proveActualTwoBudgetStrictMargin : FinalCutCoordinate
-  sourceBudgetSelfOrder : FinalCutCoordinate
-  identifyWindowWithTransportedNearCoordinates : FinalCutCoordinate
+  sourceOrderReflexivity : FinalCutCoordinate
+  proveIndependentLiteralComplementMargin : FinalCutCoordinate
   transportFinalSourceOrders : FinalCutCoordinate
   attachFinalClusterSameObject : FinalCutCoordinate
 
+  proveChosenFiniteNearUpper : FinalCutCoordinate
+  proveFreshGammaEnvelope : FinalCutCoordinate
   proveChosenNearLeavesFarAllowance : FinalCutCoordinate
   proveGammaFitsAssignedAllowance : FinalCutCoordinate
   rebuildNearFarBudgetFamilyForEveryCutoff : FinalCutCoordinate
   recoverDeterminantDirectPayment : FinalCutCoordinate
-  recoverSourceOrbitForTerminalNearConsumer : FinalCutCoordinate
   rebuildFinalContradiction : FinalCutCoordinate
 
 
@@ -72,22 +77,20 @@ data CoordinateClass : Set where
 
 coordinateClass : FinalCutCoordinate -> CoordinateClass
 coordinateClass transportCheckedLeanSplitFarToAgda = crossProverRepresentation
-coordinateClass proveChosenFiniteNearUpper = analytic
-coordinateClass proveFreshGammaEnvelope = analytic
-coordinateClass proveActualTwoBudgetStrictMargin = analytic
-coordinateClass sourceBudgetSelfOrder = crossProverRepresentation
-coordinateClass identifyWindowWithTransportedNearCoordinates = crossProverRepresentation
+coordinateClass sourceOrderReflexivity = crossProverRepresentation
+coordinateClass proveIndependentLiteralComplementMargin = analytic
 coordinateClass transportFinalSourceOrders = downstream
 coordinateClass attachFinalClusterSameObject = downstream
+coordinateClass proveChosenFiniteNearUpper = pruned
+coordinateClass proveFreshGammaEnvelope = pruned
 coordinateClass proveChosenNearLeavesFarAllowance = pruned
 coordinateClass proveGammaFitsAssignedAllowance = pruned
 coordinateClass rebuildNearFarBudgetFamilyForEveryCutoff = pruned
 coordinateClass recoverDeterminantDirectPayment = pruned
-coordinateClass recoverSourceOrbitForTerminalNearConsumer = pruned
 coordinateClass rebuildFinalContradiction = pruned
 
 ------------------------------------------------------------------------
--- Exact regression pins against the compiler owners.
+-- Exact regression pins against the new least-privilege compilers.
 ------------------------------------------------------------------------
 
 leanToAgdaTransportIsStillExplicit :
@@ -95,40 +98,35 @@ leanToAgdaTransportIsStillExplicit :
     OffTransport.canonicalExplicitCutoffNearFarAgdaTransportBoundary ≡ true
 leanToAgdaTransportIsStillExplicit = refl
 
-onlyChosenNearUpperNeededAfterTransport :
-  OffTransport.ExplicitCutoffNearFarAgdaTransportBoundary.afterTransportOnlyNearUpperIsFreshBudgetField
-    OffTransport.canonicalExplicitCutoffNearFarAgdaTransportBoundary ≡ true
-onlyChosenNearUpperNeededAfterTransport = refl
+separateFiniteNearUpperNoLongerPrimitive :
+  Literal.LiteralResponseNormalizedBoundary.separateFiniteNearUpperScalarRequired
+    Literal.canonicalLiteralResponseNormalizedBoundary ≡ false
+separateFiniteNearUpperNoLongerPrimitive = refl
 
-windowNearUpperIsTransportCompilerOutput :
-  WindowNear.WindowBudgetTransportBoundary.transportedNearUpperIsCompilerOutput
-    WindowNear.canonicalWindowBudgetTransportBoundary ≡ true
-windowNearUpperIsTransportCompilerOutput = refl
+transportedFarShellStillUsed :
+  Literal.LiteralResponseNormalizedBoundary.transportedFarShellUpperStillRequired
+    Literal.canonicalLiteralResponseNormalizedBoundary ≡ true
+transportedFarShellStillUsed = refl
 
-sourceOrbitNotTerminalNearRequirement :
-  NearPayment.SelectedFiniteNearMinimalConsumerBoundary.sourceOrbitAttachmentRequiredAfterExactWindowAttachment
-    NearPayment.canonicalSelectedFiniteNearMinimalConsumerBoundary ≡ false
-sourceOrbitNotTerminalNearRequirement = refl
+separateGammaEnvelopeNoLongerPrimitive :
+  Literal.LiteralResponseNormalizedBoundary.separateGammaEnvelopeScalarRequired
+    Literal.canonicalLiteralResponseNormalizedBoundary ≡ false
+separateGammaEnvelopeNoLongerPrimitive = refl
 
-freshGammaRouteHasNoHistoricalIdentityPrerequisite :
-  Gamma.FreshSameTaperGammaEnvelopeBoundary.historical8889IdentityRequiredForFreshEnvelope
-    Gamma.canonicalFreshSameTaperGammaEnvelopeBoundary ≡ false
-freshGammaRouteHasNoHistoricalIdentityPrerequisite = refl
+oneIndependentComplementMarginIsTerminalScalarLeaf :
+  OneLeaf.IndependentComplementMarginBoundary.oneIndependentComplementMarginIsScalarLeaf
+    OneLeaf.canonicalIndependentComplementMarginBoundary ≡ true
+oneIndependentComplementMarginIsTerminalScalarLeaf = refl
 
-offSeparateAllowanceSlackPruned :
-  Normalized.BudgetNormalizedAnalyticCoreBoundary.offSeparateAssignedAllowanceSlackRequired
-    Normalized.canonicalBudgetNormalizedAnalyticCoreBoundary ≡ false
-offSeparateAllowanceSlackPruned = refl
+finalBalanceCannotManufactureMargin :
+  OneLeaf.IndependentComplementMarginBoundary.finalBalanceMayBeUsedToProveThatMargin
+    OneLeaf.canonicalIndependentComplementMarginBoundary ≡ false
+finalBalanceCannotManufactureMargin = refl
 
-gammaSeparateAllowanceSlackPruned :
-  Normalized.BudgetNormalizedAnalyticCoreBoundary.gammaSeparateAssignedAllowanceSlackRequired
-    Normalized.canonicalBudgetNormalizedAnalyticCoreBoundary ≡ false
-gammaSeparateAllowanceSlackPruned = refl
-
-actualTwoBudgetMarginRemains :
-  Normalized.BudgetNormalizedAnalyticCoreBoundary.actualTwoBudgetStrictMarginRemainsNontrivial
-    Normalized.canonicalBudgetNormalizedAnalyticCoreBoundary ≡ true
-actualTwoBudgetMarginRemains = refl
+oneLeafCompilesContradiction :
+  OneLeaf.IndependentComplementMarginBoundary.oneLeafCompilesExistingContradiction
+    OneLeaf.canonicalIndependentComplementMarginBoundary ≡ true
+oneLeafCompilesContradiction = refl
 
 finalOrderTransportCompilesContradiction :
   Final.FinalOrderTransportBoundary.orderTransportPackageCompilesContradiction
@@ -142,49 +140,45 @@ finalOrderTransportCompilesContradiction = refl
 record FinalPoleQuotientMinimalAnalyticCutBoundary : Set where
   constructor final-pole-quotient-minimal-analytic-cut-boundary
   field
-    offAllCutoffNearFamilyIsAnalyticRequirement : Bool
-    offAllCutoffNearFamilyIsAnalyticRequirementIsFalse :
-      offAllCutoffNearFamilyIsAnalyticRequirement ≡ false
+    separateChosenFiniteNearUpperIsPrimitiveAnalyticRequirement : Bool
+    separateChosenFiniteNearUpperIsPrimitiveAnalyticRequirementIsFalse :
+      separateChosenFiniteNearUpperIsPrimitiveAnalyticRequirement ≡ false
 
-    offChosenNearUpperIsAnalyticRequirement : Bool
-    offChosenNearUpperIsAnalyticRequirementIsTrue :
-      offChosenNearUpperIsAnalyticRequirement ≡ true
+    separateFreshGammaEnvelopeIsPrimitiveAnalyticRequirement : Bool
+    separateFreshGammaEnvelopeIsPrimitiveAnalyticRequirementIsFalse :
+      separateFreshGammaEnvelopeIsPrimitiveAnalyticRequirement ≡ false
 
-    offSeparateAllowanceSlackIsAnalyticRequirement : Bool
-    offSeparateAllowanceSlackIsAnalyticRequirementIsFalse :
-      offSeparateAllowanceSlackIsAnalyticRequirement ≡ false
+    independentLiteralComplementMarginIsAnalyticRequirement : Bool
+    independentLiteralComplementMarginIsAnalyticRequirementIsTrue :
+      independentLiteralComplementMarginIsAnalyticRequirement ≡ true
+
+    literalFiniteNearPhaseStillOccursInJointTheorem : Bool
+    literalFiniteNearPhaseStillOccursInJointTheoremIsTrue :
+      literalFiniteNearPhaseStillOccursInJointTheorem ≡ true
+
+    literalGammaResponseStillOccursInJointTheorem : Bool
+    literalGammaResponseStillOccursInJointTheoremIsTrue :
+      literalGammaResponseStillOccursInJointTheorem ≡ true
+
+    transportedFarShellStillOccursInJointTheorem : Bool
+    transportedFarShellStillOccursInJointTheoremIsTrue :
+      transportedFarShellStillOccursInJointTheorem ≡ true
 
     leanSplitFarTransportIsNewHarmonicAnalysis : Bool
     leanSplitFarTransportIsNewHarmonicAnalysisIsFalse :
       leanSplitFarTransportIsNewHarmonicAnalysis ≡ false
 
-    gammaFreshEnvelopeUpperIsAnalyticRequirement : Bool
-    gammaFreshEnvelopeUpperIsAnalyticRequirementIsTrue :
-      gammaFreshEnvelopeUpperIsAnalyticRequirement ≡ true
+    sourceOrderReflexivityIsNewHarmonicAnalysis : Bool
+    sourceOrderReflexivityIsNewHarmonicAnalysisIsFalse :
+      sourceOrderReflexivityIsNewHarmonicAnalysis ≡ false
 
-    gammaSeparateAssignedAllowanceFitIsAnalyticRequirement : Bool
-    gammaSeparateAssignedAllowanceFitIsAnalyticRequirementIsFalse :
-      gammaSeparateAssignedAllowanceFitIsAnalyticRequirement ≡ false
-
-    actualTwoBudgetStrictMarginIsAnalyticRequirement : Bool
-    actualTwoBudgetStrictMarginIsAnalyticRequirementIsTrue :
-      actualTwoBudgetStrictMarginIsAnalyticRequirement ≡ true
-
-    sourceBudgetSelfOrderIsNewHarmonicAnalysis : Bool
-    sourceBudgetSelfOrderIsNewHarmonicAnalysisIsFalse :
-      sourceBudgetSelfOrderIsNewHarmonicAnalysis ≡ false
-
-    channelAllowancesCanBeNormalizedToActualBudgets : Bool
-    channelAllowancesCanBeNormalizedToActualBudgetsIsTrue :
-      channelAllowancesCanBeNormalizedToActualBudgets ≡ true
+    finalBalanceMayManufactureAnalyticMargin : Bool
+    finalBalanceMayManufactureAnalyticMarginIsFalse :
+      finalBalanceMayManufactureAnalyticMargin ≡ false
 
     determinantDirectPaymentIsFinalCarrierRequirement : Bool
     determinantDirectPaymentIsFinalCarrierRequirementIsFalse :
       determinantDirectPaymentIsFinalCarrierRequirement ≡ false
-
-    sourceOrbitIsTerminalNearRequirement : Bool
-    sourceOrbitIsTerminalNearRequirementIsFalse :
-      sourceOrbitIsTerminalNearRequirement ≡ false
 
     downstreamContradictionNeedsFreshAnalyticProof : Bool
     downstreamContradictionNeedsFreshAnalyticProofIsFalse :
@@ -200,16 +194,15 @@ canonicalFinalPoleQuotientMinimalAnalyticCutBoundary :
 canonicalFinalPoleQuotientMinimalAnalyticCutBoundary =
   final-pole-quotient-minimal-analytic-cut-boundary
     false refl
+    false refl
+    true refl
+    true refl
+    true refl
     true refl
     false refl
     false refl
-    true refl
-    false refl
-    true refl
-    false refl
-    true refl
     false refl
     false refl
     false refl
     false refl
-    "Normalize A_off and A_Gamma to the actual producer budgets. The scalar analytic cut is then: one selected finite-near upper for Off, one fresh Gamma response upper, and one strict final margin for the sum of those actual budgets. Separate Off near-slack/intermediate-epsilon and Gamma allowance-fit theorems are bookkeeping decompositions and are pruned. Source-order self-relations, Lean-to-Agda split/far transport, exact window transport, and final same-object/order/cluster welds remain explicit representation receipts. Determinant payment, source-orbit terminal ancestry, all-cutoff near families, and contradiction rebuilding remain pruned. RH is not derived."
+    "The terminal scalar API is one independently proved same-case complement inequality: cast(D_near(J)+B_far(J)) + cast(D_Gamma(g_pole)) < cast(M_cluster). Separate finite-near and Gamma envelope upper theorems are no longer primitive terminal leaves because their channel budgets may be the literal responses under source-order reflexivity. Their mathematics has not disappeared: target-centred finite-near phase and the literal Gamma response occur inside the joint theorem itself, together with the independently transported far-shell budget. The joint theorem may not be manufactured from cluster=Off+Gamma; that balance remains a downstream same-object representation receipt. With source order/scalar/taper transport, the one scalar leaf compiles the existing contradiction. RH is not derived."
