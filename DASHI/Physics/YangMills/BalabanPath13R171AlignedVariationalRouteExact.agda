@@ -2,12 +2,13 @@
 module DASHI.Physics.YangMills.BalabanPath13R171AlignedVariationalRouteExact where
 
 ------------------------------------------------------------------------
--- PATH13: CHOOSE THE R171 OPERATOR DEFECT AS THE SELECTED VARIATIONAL DEFECT
+-- PATH13: CHOOSE THE R171 OPERATOR DEFECT AS THE SELECTED/CUT DEFECT
 --
 -- The preferred source specialization can choose its defect algebra.  Choosing
--- the canonical adapter of the R171 operator kernel makes the later
--- selected-cut/operator defect equality definitional.  The standard operator
--- representation remains an authority input; the pointwise weld does not.
+-- the canonical adapter of the R171 operator kernel, and constructing the
+-- principal-log cut with that same algebra, makes the later selected-cut /
+-- operator-defect equality definitional.  The standard R171 representation
+-- remains an authority input; the pointwise weld does not.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -17,6 +18,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
 import DASHI.Physics.YangMills.BalabanR171OperatorKernelGroupDefectAdapterExact as Adapter
 import DASHI.Physics.YangMills.BalabanCMP98SU2OperatorDefectFromPhysicalRadiusRound171Exact as R171
+import DASHI.Physics.YangMills.BalabanCMP98UnitaryOperatorDefectTelescopeExact as Operator
 import DASHI.Physics.YangMills.BalabanPath13VariationalSpecializationExact as Specialization
 import DASHI.Physics.YangMills.BalabanPath13VariationalRadiusFromSpecializationExact as SpecializedRadius
 import DASHI.Physics.YangMills.BalabanPath13SplitPhysicalStandardOperatorCutExact as Split
@@ -42,7 +44,14 @@ record R171AlignedPath13VariationalSource
         CoarseField Background.RationalSU2Background13
         Target.Path13PositiveBond ℚ
 
-    cutData : Path.PrincipalLogCutData Q.RationalQuaternion ℚ
+    chartRadius : ℚ
+    PrincipalLogAdmissible : Q.RationalQuaternion → Set
+
+    defectBelowRadiusImpliesAdmissible : ∀ value →
+      Operator.defect (R171.kernel operatorRepresentation) value
+      ≤ chartRadius →
+      PrincipalLogAdmissible value
+
     principalChart :
       Log.StandardSU2PrincipalLogBall
         Lie.SU2LieAlgebra Q.RationalQuaternion ℚ
@@ -51,7 +60,7 @@ record R171AlignedPath13VariationalSource
       ∀ coarse
         (small : Variational.CoarseSmallField sourceTheorem coarse)
         site axis →
-      R171.defect (R171.kernel operatorRepresentation)
+      Operator.defect (R171.kernel operatorRepresentation)
         (Background.link
           (Variational.background sourceTheorem coarse small)
           axis site)
@@ -64,20 +73,28 @@ record R171AlignedPath13VariationalSource
     sourceOrderIsRationalOrder :
       Variational.LessEqual sourceTheorem ≡ _≤_
 
-    cutUsesR171DefectAlgebra :
-      Path.defectAlgebra cutData
-      ≡ Adapter.operatorKernelAsGroupDefectAlgebra
-          (R171.kernel operatorRepresentation)
-
     sourceUpperBelowChartRadius :
-      Selected.sourceFineBondUpper sourceTheorem
-      ≤ Path.chartRadius cutData
+      Selected.sourceFineBondUpper sourceTheorem ≤ chartRadius
 
     admissibleIsPrincipalImage :
-      Path.PrincipalLogAdmissible cutData
-      ≡ Log.InPrincipalImage principalChart
+      PrincipalLogAdmissible ≡ Log.InPrincipalImage principalChart
 
 open R171AlignedPath13VariationalSource public
+
+alignedCutData :
+  ∀ {CoarseField} →
+  R171AlignedPath13VariationalSource CoarseField →
+  Path.PrincipalLogCutData Q.RationalQuaternion ℚ
+alignedCutData source = record
+  { Path.PrincipalLogCutData.defectAlgebra =
+      Adapter.operatorKernelAsGroupDefectAlgebra
+        (R171.kernel (operatorRepresentation source))
+  ; Path.PrincipalLogCutData.chartRadius = chartRadius source
+  ; Path.PrincipalLogCutData.PrincipalLogAdmissible =
+      PrincipalLogAdmissible source
+  ; Path.PrincipalLogCutData.defectBelowRadiusImpliesAdmissible =
+      defectBelowRadiusImpliesAdmissible source
+  }
 
 asPath13VariationalSpecialization :
   ∀ {CoarseField} →
@@ -90,15 +107,14 @@ asPath13VariationalSpecialization source = record
   ; Specialization.Path13VariationalSpecialization.defectAlgebra =
       Adapter.operatorKernelAsGroupDefectAlgebra
         (R171.kernel (operatorRepresentation source))
-  ; Specialization.Path13VariationalSpecialization.cutData = cutData source
+  ; Specialization.Path13VariationalSpecialization.cutData = alignedCutData source
   ; Specialization.Path13VariationalSpecialization.principalChart =
       principalChart source
   ; Specialization.Path13VariationalSpecialization.physicalDefectMatchesSourceDeviation =
       operatorDefectMatchesSourceDeviation source
   ; Specialization.Path13VariationalSpecialization.sourceOrderIsChartOrder =
       sourceOrderIsRationalOrder source
-  ; Specialization.Path13VariationalSpecialization.sameDefectAlgebra =
-      cutUsesR171DefectAlgebra source
+  ; Specialization.Path13VariationalSpecialization.sameDefectAlgebra = refl
   ; Specialization.Path13VariationalSpecialization.sourceUpperBelowChartRadius =
       sourceUpperBelowChartRadius source
   ; Specialization.Path13VariationalSpecialization.admissibleIsPrincipalImage =
@@ -175,7 +191,7 @@ selectedCutOperatorDefectEqualityIsDefinitional :
         (Target.bridge13
           (SpecializedRadius.selected (asRadiusNormalization inputs)))))
     value
-  ≡ R171.defect
+  ≡ Operator.defect
       (R171.kernel (operatorRepresentation (alignedSource inputs))) value
 selectedCutOperatorDefectEqualityIsDefinitional inputs value = refl
 
