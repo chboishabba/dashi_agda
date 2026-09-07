@@ -1,0 +1,41 @@
+name: NS R423 fixed-output direct compiler
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPaymentsToR423Round487Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR423FixedOutputProducerProofSearchRound488Exact.agda'
+      - 'DASHI/Physics/Closure/Everything.agda'
+      - '.github/workflows/ns-r423-fixed-output-direct-compiler.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  r423-fixed-output:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Type-check R487 fixed-output to R423 compiler
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNFixedOutputPaymentsToR423Round487Exact.agda
+
+      - name: Type-check R488 first-missing producer scheduler
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNR423FixedOutputProducerProofSearchRound488Exact.agda
+
+      - name: Type-check authoritative closure rollup
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/Everything.agda
