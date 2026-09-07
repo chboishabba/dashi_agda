@@ -12,11 +12,12 @@ import DASHI.Analysis.RiemannG2UniformIndependentComplementHighProducerExact as 
 ------------------------------------------------------------------------
 -- CLAY-FACING TERMINAL CUT
 --
--- All assembly below is now exact.  The full same-substrate RH theorem needs:
+-- All assembly below is exact and the canonical route is allowance-free.
+-- The full same-substrate RH theorem needs:
 --
 --   L. one exact Platt--Trudgian low-region transport on the chosen Low part;
---   H. for every chosen High zero assumed off-line, one independent literal
---      complement-margin case;
+--   H. for every chosen High zero assumed off-line, one direct independent
+--      literal complement-margin case;
 --   C. a cover saying every nontrivial zero is Low or High;
 --   S. stability of the critical-line predicate under double negation.
 --
@@ -25,8 +26,9 @@ import DASHI.Analysis.RiemannG2UniformIndependentComplementHighProducerExact as 
 --
 --   cast(D_near(J)+B_far(J)) + cast(D_Gamma(g_pole)) < cast(M_cluster),
 --
--- proved independently of the final cluster balance.  No hidden payment or
--- contradiction theorem sits after H.
+-- proved independently of the final cluster balance.  The direct high case goes
+-- straight through SplitPoleQuotientComplementMargin to bottom.  No allowance,
+-- payment, analytic-core, or further contradiction theorem sits after H.
 ------------------------------------------------------------------------
 
 record ClayTerminalOneLeafInput
@@ -59,26 +61,28 @@ compiledLowCritical :
 compiledLowCritical input =
   Low.compileLowCertifiedCritical (lowTransport input)
 
-compiledHighProducer :
+compiledHighCritical :
   forall {analytic} ->
   (input : ClayTerminalOneLeafInput analytic) ->
-  Universal.HighOffLineAnalyticCoreProducer analytic (HighRegion input)
-compiledHighProducer input =
-  High.compileUniformHighProducer (highProducer input)
+  (rho : Universal.AnalyticNontrivialZero analytic) ->
+  HighRegion input rho ->
+  Universal.analyticCritical rho
+compiledHighCritical input =
+  High.highCriticalFromIndependentComplement
+    (criticalLineStable input)
+    (highProducer input)
 
 compiledAnalyticHighLowCompletion :
   forall {analytic} ->
   (input : ClayTerminalOneLeafInput analytic) ->
   Universal.AnalyticHighLowCompletion analytic
-compiledAnalyticHighLowCompletion {analytic} input =
-  Universal.compileAnalyticHighLowCompletion
-    analytic
+compiledAnalyticHighLowCompletion input =
+  Universal.analytic-high-low-completion
     (LowRegion input)
     (HighRegion input)
     (lowHighCover input)
     (compiledLowCritical input)
-    (criticalLineStable input)
-    (compiledHighProducer input)
+    (compiledHighCritical input)
 
 compileClayTerminalOneLeafToRH :
   forall {analytic} ->
@@ -96,6 +100,10 @@ compileClayTerminalOneLeafToRH {analytic} input =
 record ClayTerminalOneLeafBoundary : Set where
   constructor clay-terminal-one-leaf-boundary
   field
+    consumerAssignedAllowanceLayerOnCanonicalPath : Bool
+    consumerAssignedAllowanceLayerOnCanonicalPathIsFalse :
+      consumerAssignedAllowanceLayerOnCanonicalPath ≡ false
+
     extraHighOrdinatePaymentAfterUniformOneLeafProducer : Bool
     extraHighOrdinatePaymentAfterUniformOneLeafProducerIsFalse :
       extraHighOrdinatePaymentAfterUniformOneLeafProducer ≡ false
@@ -142,6 +150,7 @@ canonicalClayTerminalOneLeafBoundary =
     false refl
     false refl
     false refl
+    false refl
     true refl
     true refl
     true refl
@@ -149,4 +158,4 @@ canonicalClayTerminalOneLeafBoundary =
     true refl
     false refl
     false refl
-    "The prize-facing compiler is now explicit. Low-side work is one exact Platt--Trudgian verified-region transport plus the Low/High cover. High-side work is one uniform family of independent literal complement-margin cases; separate finite-near and Gamma envelope APIs are not primitive leaves. Critical-line stability is a logical/interface receipt already exposed by the existing Weil-square separator architecture. Given these inputs on the same AnalyticSubstrate, RiemannHypothesisFor is compiler output. None of the required inputs is fabricated here, so no unconditional RH theorem is claimed."
+    "The prize-facing compiler is now direct and allowance-free. Low-side work is one exact Platt--Trudgian verified-region transport plus the Low/High cover. High-side work is one uniform family of independent literal complement-margin cases, each compiling directly through the split-complement contradiction. Separate finite-near/Gamma envelope APIs, producer/payment records, and the consumer-assigned allowance layer are not on the canonical path. Critical-line stability remains the existing logical/interface receipt. Given these same-substrate inputs, RiemannHypothesisFor is compiler output. None is fabricated here, so no unconditional RH theorem is claimed."
