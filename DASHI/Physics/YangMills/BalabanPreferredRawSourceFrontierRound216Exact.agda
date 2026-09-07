@@ -16,14 +16,17 @@ module DASHI.Physics.YangMills.BalabanPreferredRawSourceFrontierRound216Exact wh
 --
 -- The complete action A_k must not be substituted for the Part-I/II regular
 -- E_k effective action differentiated in CMP109 Eq.(5.1).
+--
+-- The finite-history raw-state compiler is REUSED from the existing
+-- `BalabanCMP119RawStateFromFiniteBetaHistoryExact`; Round216 does not duplicate
+-- that constructor.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119RawStateRound216Exact as Raw
-import DASHI.Physics.YangMills.BalabanCMP122Theorem1ToRawCMP119ActiveExact as T1
+import DASHI.Physics.YangMills.BalabanCMP119RawStateFromFiniteBetaHistoryExact as Raw
 import DASHI.Physics.YangMills.BalabanCMP119RegularSectorCMP109116Round215Exact as Regular
 import DASHI.Physics.YangMills.BalabanCMP119RegularSectorBC1Round215Exact as BC1
 import DASHI.Physics.YangMills.BalabanPreferredSourceRealizationFrontierRound212Exact as R212
@@ -77,14 +80,12 @@ bc1RegularPotentialSameObjectClosed :
   preferredLeafState216 cmp119RegularEToBC1Potential ≡ closed
 bc1RegularPotentialSameObjectClosed = refl
 
-betaDrivenRawStateCompilerLevel : ProofLevel
-betaDrivenRawStateCompilerLevel = Raw.betaDrivenCMP119RawStateCompilerLevel
+rawStateFiniteHistoryCouplingLevel : ProofLevel
+rawStateFiniteHistoryCouplingLevel = Raw.cmp119RawStateFiniteHistoryCouplingLevel
 
-betaDrivenRawCouplingSameObjectLevel : ProofLevel
-betaDrivenRawCouplingSameObjectLevel = Raw.betaDrivenCMP119CouplingSameObjectLevel
-
-cmp122ActiveSection2CompilerLevel : ProofLevel
-cmp122ActiveSection2CompilerLevel = T1.cmp122Theorem1ProducesActiveSection2Level
+activeSection2FromTheorem1AssemblyLevel : ProofLevel
+activeSection2FromTheorem1AssemblyLevel =
+  Raw.cmp119RawStateActiveTheorem1AssemblyLevel
 
 cmp119RegularSectorContinuationLevel : ProofLevel
 cmp119RegularSectorContinuationLevel = Regular.cmp119RegularSectorContinuationCompilerLevel
@@ -93,7 +94,8 @@ cmp119RegularSectorBC1Level : ProofLevel
 cmp119RegularSectorBC1Level = BC1.cmp119RegularSectorBC1CompilerLevel
 
 literalBetaDrivenCMP119RawSourceFamilyLevel : ProofLevel
-literalBetaDrivenCMP119RawSourceFamilyLevel = Raw.literalBetaDrivenCMP119RawSourceInputsLevel
+literalBetaDrivenCMP119RawSourceFamilyLevel =
+  Raw.cmp119LiteralRawObjectsAndPredicateInstantiationLevel
 
 literalCMP119RegularESectorRealizationLevel : ProofLevel
 literalCMP119RegularESectorRealizationLevel = Regular.literalCMP119RegularSectorRealizationLevel
