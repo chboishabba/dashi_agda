@@ -16,27 +16,30 @@ import DASHI.Law.SensibLawGovernedLegalNetworkStrategyExact as Network
 import DASHI.Law.SensibLawOfflineResearchEngineRustReceiptsF93740fExact as RustValidated
 import DASHI.Law.SensibLawGovernedOnlineR6ParityExact as OnlineR6
 import DASHI.Law.SensibLawPreferredAustralianAuthorityAcquisitionExact as PreferredAU
+import DASHI.Law.SensibLawOfficialAcquisitionResearchHandoffExact as OfficialHandoff
 
 ------------------------------------------------------------------------
--- OFFLINE RESEARCH ENGINE ROADMAP CAPSTONE
+-- OFFLINE / GOVERNED-ONLINE RESEARCH ENGINE CAPSTONE
 --
 -- ProofFrontier
 --   -> candidate support/defeater/comparator/contradiction moves
 --   -> proof-reduction threshold + Pareto schedule
 --   -> provider-neutral query
---   -> local/persisted execution first
+--   -> persisted/OALC/official/sanctioned acquisition order
+--   -> local ingestion
+--   -> immutable source revision
 --   -> PNF + proposition-level citation/reasoning/condition extraction
 --   -> append-only world/research memory
 --   -> frontier delta
 --   -> next search
 --
--- Governed live legal access remains a separately authorised strategy.
--- The validated Rust f93740f receipts are pinned as bounded runtime evidence,
--- never as Agda/kernel certification or legal/semantic authority.  OnlineR6 is
--- the historical first live-provider parity owner. PreferredAU mirrors the
--- newer Rust-led order: persisted -> OALC -> official court -> optional
--- sanctioned/specialist provider -> unresolved. Its real official-source live
--- receipt remains false until the explicit bounded run is actually certified.
+-- The validated Rust f93740f offline receipts remain pinned as bounded runtime
+-- evidence, never as Agda/kernel certification. OnlineR6 records the historical
+-- first live-provider contract. PreferredAU mirrors the newer Rust-led provider
+-- order and typed provider failures. OfficialHandoff mirrors the concrete return
+-- seam from locally-ingested provider material back into the ordinary research
+-- world/reasoning/frontier machinery. The real official-source live receipt is
+-- still unvalidated until the explicit bounded run actually succeeds.
 ------------------------------------------------------------------------
 
 record OfflineResearchEngineBoundary : Set where
@@ -137,6 +140,11 @@ selectedPreferredOfficialCourtBoundary =
 selectedPreferredOptionalSpecialistBoundary : PreferredAU.OptionalSpecialistBoundary
 selectedPreferredOptionalSpecialistBoundary =
   PreferredAU.canonicalOptionalSpecialistBoundary
+
+selectedOfficialAcquisitionHandoffBoundary :
+  OfficialHandoff.OfficialAcquisitionResearchHandoffBoundary
+selectedOfficialAcquisitionHandoffBoundary =
+  OfficialHandoff.canonicalOfficialAcquisitionResearchHandoffBoundary
 
 ------------------------------------------------------------------------
 -- Capstone firewalls.
