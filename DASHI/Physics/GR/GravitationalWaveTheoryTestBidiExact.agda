@@ -8,7 +8,6 @@ import DASHI.Physics.GR.GravitationalObservationBidiExact as Obs
 import DASHI.Physics.GR.GravitationalObservationSourceAtlasExact as Sources
 import DASHI.Physics.GR.GravitationalPredictionObservationBidiExact as Pred
 import DASHI.Physics.GR.GravitationalPredictionAttributionBidiExact as Attr
-import DASHI.Physics.GR.GravitationalEpistemicLineageExact as Lineage
 
 ------------------------------------------------------------------------
 -- GRAVITATIONAL-WAVE THEORY TESTS
@@ -79,7 +78,9 @@ record WaveTheoryTestReceipt : Set where
         observation
     systematicBudget : String
     resultCarrier : Sources.ObservationAttributedSource
-    derivedComparisonLineage : Lineage.DASHIDerivedComparisonLineage
+    comparisonLineage :
+      Attr.PairedPredictionComparisonLineage
+        grPrediction alternativePrediction observation
     deviationDetected : Bool
 
 open WaveTheoryTestReceipt public
@@ -97,6 +98,7 @@ record WaveTheoryReverseCutset : Set where
     requiresAttributedAlternativePrediction : Bool
     requiresSameObservableGRPrediction : Bool
     requiresSameObservableAlternativePrediction : Bool
+    requiresBoundComparisonLineage : Bool
     requiresDetectorResponseModel : Bool
     requiresSystematicBudget : Bool
     residualAlonePromotesAlternativeGravity : Bool
@@ -104,11 +106,11 @@ record WaveTheoryReverseCutset : Set where
 cutsetFor : WaveTestFamily → WaveTheoryReverseCutset
 cutsetFor family =
   wave-theory-reverse-cutset family
-    true true true true true true true false
+    true true true true true true true true false
 
 ------------------------------------------------------------------------
 -- Introspective firewall: a comparator label alone cannot inhabit either
--- attributed prediction or its same-observation weld.
+-- attributed prediction, its same-observation weld, or the bound lineage.
 ------------------------------------------------------------------------
 
 record WaveComparatorAttributionBoundary : Set where
@@ -117,11 +119,12 @@ record WaveComparatorAttributionBoundary : Set where
     comparatorStringCountsAsAttributedPrediction : Bool
     sameTheoryCarrierCountsAsSupportedClaimScope : Bool
     attributedPredictionAloneCountsAsObservationMatch : Bool
+    genericDerivedLineageAutomaticallyMatchesConsumedInputs : Bool
     derivedComparisonCountsAsExternalSourceStatement : Bool
 
 canonicalWaveComparatorAttributionBoundary : WaveComparatorAttributionBoundary
 canonicalWaveComparatorAttributionBoundary =
-  wave-comparator-attribution-boundary false false false false
+  wave-comparator-attribution-boundary false false false false false
 
 ------------------------------------------------------------------------
 -- Current source-backed GR-test status.
