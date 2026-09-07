@@ -16,6 +16,7 @@ import DASHI.Cognition.PNF.SensibLawUniversalLegalRuleAlgebraExact as Algebra
 import DASHI.Cognition.PNF.SensibLawFiniteExecutableLegalSearchExact as Search
 import DASHI.Cognition.PNF.SensibLawFiniteLegalSearchRegressionExact as Regression
 import DASHI.Cognition.PNF.SensibLawFiniteLegalCutProofPromotionExact as CutProof
+import DASHI.Cognition.PNF.SensibLawPabaiTransformationPromotionExact as PabaiTransform
 import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact as Negligence
 import DASHI.Cognition.PNF.SensibLawCullenPublicAuthorityDutyCalibrationExact as Cullen
 
@@ -67,19 +68,20 @@ record ComputedCutPromotion
 
 open ComputedCutPromotion public
 
-record ComputedTransformationPromotion
-  (graph : Algebra.LegalGraph)
-  (facts : Algebra.FactSet)
-  (target : CutCalibrationTarget)
-  : Set where
-  constructor computed-transformation-promotion
-  field
-    cutPromotion : ComputedCutPromotion graph facts target
-    typedTransformation : Algebra.LegalTransformation
-    transformedGoalDerivation : Set
-    transformationLegallyAvailableUnderSourceGraph : Set
+------------------------------------------------------------------------
+-- Legal availability is intentionally a separate parameter/witness. A typed
+-- transformation plus a transformed proof does not prove that controlling law
+-- authorises the transformation.
+------------------------------------------------------------------------
 
-open ComputedTransformationPromotion public
+record LegallyAvailableTransformation
+  (transformation : Algebra.LegalTransformation)
+  (AvailableUnderControllingAuthorities : Set) : Set where
+  constructor legally-available-transformation
+  field
+    availabilityWitness : AvailableUnderControllingAuthorities
+
+open LegallyAvailableTransformation public
 
 data CutComputationStatus : Set where
   legacyCalibrationOnly
@@ -87,12 +89,10 @@ data CutComputationStatus : Set where
   finiteExecutableCandidateComputed
   proofRelevantCutComputed
   transformationCandidateReopensGoal
+  typedTransformationReopensGoal
   transformationLegallyPromoted
   : CutComputationStatus
 
--- Mabo has crossed both executable and proof-relevant cut stages on the finite
--- calibration graph. Pabai remains at current-route executable-negative plus
--- counterfactual transformation-candidate status.
 maboCutStatus : CutComputationStatus
 maboCutStatus = proofRelevantCutComputed
 
@@ -103,7 +103,7 @@ pabaiCutStatus : CutComputationStatus
 pabaiCutStatus = finiteExecutableCandidateComputed
 
 pabaiTransformationStatus : CutComputationStatus
-pabaiTransformationStatus = transformationCandidateReopensGoal
+pabaiTransformationStatus = typedTransformationReopensGoal
 
 maboExecutableReachability :
   ExecutableReachabilityCandidate
@@ -132,11 +132,28 @@ pabaiCurrentReachability :
     Negligence.dutyProposition ≡ false
 pabaiCurrentReachability = Regression.pabaiComputedCurrentlyUnreachable
 
+pabaiTypedTransformation : Algebra.LegalTransformation
+pabaiTypedTransformation = PabaiTransform.pabaiTypedTransformation
+
+pabaiTypedTransformationPromotion :
+  Search.TransformationPromotion
+    1 Negligence.dutyProposition Regression.pabaiReformulationCandidate
+pabaiTypedTransformationPromotion = PabaiTransform.pabaiTransformationPromotion
+
+pabaiLegalAvailabilityStillOpen :
+  PabaiTransform.PabaiTransformationAvailableUnderControllingAuthorities → ⊥
+pabaiLegalAvailabilityStillOpen = PabaiTransform.pabaiLegalAvailabilityStillOpen
+
+------------------------------------------------------------------------
+-- Firewalls.
+------------------------------------------------------------------------
+
 data LegacyMinimalCutResultIsComputedCut : Set where
 data ReachableBooleanIsDerivationTree : Set where
 data ExecutableCandidateIsProofRelevantCut : Set where
 data TransformationClassLabelProvesLegalAvailability : Set where
 data CounterfactualSearchCandidateIsCurrentLaw : Set where
+data TypedTransformationProvesAvailability : Set where
 
 legacyCalibrationIsNotComputedCut : LegacyMinimalCutResultIsComputedCut → ⊥
 legacyCalibrationIsNotComputedCut ()
@@ -155,3 +172,7 @@ classLabelDoesNotProveAvailableTransformation ()
 counterfactualCandidateDoesNotBecomeCurrentLaw :
   CounterfactualSearchCandidateIsCurrentLaw → ⊥
 counterfactualCandidateDoesNotBecomeCurrentLaw ()
+
+typedTransformationStillDoesNotProveAvailability :
+  TypedTransformationProvesAvailability → ⊥
+typedTransformationStillDoesNotProveAvailability ()
