@@ -9,3 +9,4 @@ import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
 import DASHI.Cognition.VisualPatternModeGeometryEverything
 import DASHI.Cognition.PNF.SensibLawCountryUniversalLegalAlgebraEverything
 import DASHI.Cognition.PNF.SensibLawCountryJuridicalHumanityOperationalRemedyEverything
+import DASHI.Cognition.PNF.SensibLawHerzogUniversalLegalCrossPollinationEverything
