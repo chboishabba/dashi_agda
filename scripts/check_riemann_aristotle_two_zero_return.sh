@@ -32,6 +32,8 @@ FILES=(
   DASHI/Analysis/RiemannAristotleFiniteNearCoreSchurCompilerExact.agda
   DASHI/Analysis/RiemannAristotleQuarterPeriodDensityWindowLeanReturnExact.agda
   DASHI/Analysis/RiemannAristotleZetaLocalCountLeanReturnExact.agda
+  DASHI/Analysis/RiemannAristotleG2CurrentCutExact.agda
+  DASHI/Analysis/RiemannAristotleG2CurrentCutRegression.agda
   DASHI/Analysis/RiemannG2GapSplitClusteringLeanReturn8894Exact.agda
   DASHI/Analysis/RiemannG2AlpogeFurmanClusteringNonDescentExact.agda
   DASHI/Analysis/RiemannG2TransverseVsOrdinateMomentNonDescentExact.agda
@@ -86,6 +88,7 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotleFiniteNearCoreSchurCompilerExact.agda
   agda DASHI/Analysis/RiemannAristotleQuarterPeriodDensityWindowLeanReturnExact.agda
   agda DASHI/Analysis/RiemannAristotleZetaLocalCountLeanReturnExact.agda
+  agda DASHI/Analysis/RiemannAristotleG2CurrentCutRegression.agda
   agda DASHI/Analysis/RiemannG2GapSplitClusteringLeanReturn8894Exact.agda
   agda DASHI/Analysis/RiemannG2AlpogeFurmanClusteringNonDescentExact.agda
   agda DASHI/Analysis/RiemannG2TransverseVsOrdinateMomentNonDescentExact.agda
