@@ -20,6 +20,10 @@ module DASHI.Physics.Closure.NSTriadKNRationalFiniteCauchyPSDCompilerRound445Exa
 -- where S=sum_i K(x,x_i)z_i and
 -- d_i=(x_i-x)K(x,x_i).  The recursive call is structurally on the tail.
 --
+-- Each point also retains one scalar coefficient.  The main theorem still
+-- quantifies over arbitrary coefficient functions; the retained coordinate is
+-- only a lossless adapter for later Complex3 coordinate lifts.
+--
 -- No exponential, improper integral, matrix determinant, square root,
 -- spectral theorem, or external positivity theorem is used.
 ------------------------------------------------------------------------
@@ -40,7 +44,7 @@ import DASHI.Physics.Closure.NSTriadKNFiniteKernelRankOneQuadraticSplitRound444E
 record PositiveRatePoint : Set where
   constructor positive-rate-point
   field
-    rate : ℚ
+    rate storedCoefficient : ℚ
     ratePositive : Positive rate
 
 open PositiveRatePoint public
@@ -51,6 +55,9 @@ cauchyKernel left right = R443.cauchyEntry (rate left) (rate right)
 cauchyQuadratic :
   (PositiveRatePoint → ℚ) → List PositiveRatePoint → ℚ
 cauchyQuadratic = R444.quadraticForm cauchyKernel
+
+storedCauchyQuadratic : List PositiveRatePoint → ℚ
+storedCauchyQuadratic = cauchyQuadratic storedCoefficient
 
 headBeta : PositiveRatePoint → ℚ
 headBeta head = (1ℚ + 1ℚ) * rate head
@@ -257,6 +264,12 @@ finiteCauchyQuadraticNonnegative (head ∷ rest) z =
     (0ℚ ≤_)
     (sym (headCauchySchurDecomposition head rest z))
     summed
+
+storedCauchyQuadraticNonnegative :
+  (items : List PositiveRatePoint) →
+  0ℚ ≤ storedCauchyQuadratic items
+storedCauchyQuadraticNonnegative items =
+  finiteCauchyQuadraticNonnegative items storedCoefficient
 
 round445FiniteRationalCauchyPSDClosed : Bool
 round445FiniteRationalCauchyPSDClosed = true
