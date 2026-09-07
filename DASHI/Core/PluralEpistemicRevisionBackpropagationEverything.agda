@@ -32,18 +32,23 @@ import DASHI.Core.TemporalDiagnosisDependencyLineageBidiExact
 import DASHI.Core.IncrementalDiagnosisTruthMaintenanceBidiExact
 
 -- Selective invalidation + N-dimensional recursive-Pareto compatibility.
--- Recompute classification precedes ranking.  The current bridge materialises
+-- Recompute classification precedes ranking. The current bridge materialises
 -- only four residual-relevant semantic axes (consequence, diagnostic residual,
 -- authority, recompute cost), keeps 3^9=19683 as visualisation cardinality
--- rather than Pareto dimension, and carries A_(n+1)=9^(A_n) symbolically so
--- tetrational representational capacity never becomes a brute-force search
--- obligation.  Canonical #770 owner paths are intentionally not duplicated
--- while that PR remains on separate ancestry.
+-- rather than Pareto dimension, and carries A_(n+1)=9^(A_n) symbolically.
 import DASHI.Core.SelectiveInvalidationParetoFrontierBidiExact
+
+-- Recursive maintenance: one classified/materialised frontier generates the
+-- next. Unaffected axes retain their semantic identity and inherited costs
+-- unless an explicit invalidation witness names them; new residual coordinates
+-- may be materialised without forcing ambient-capacity enumeration.
+import DASHI.Core.RecursiveSelectiveInvalidationParetoTruthMaintenanceBidiExact
 
 import DASHI.Biology.AliceBrownDiagnosisRepairSchedulerBidiExact
 import DASHI.Biology.AliceBrownTemporalDiagnosisDependencyLineageBidiExact
 import DASHI.Biology.AliceBrownSelectiveInvalidationParetoBidiExact
+import DASHI.Biology.AliceBrownRecursiveParetoTruthMaintenanceBidiExact
 import DASHI.Culture.JohnAnthonyBrownDiagnosisRepairSchedulerBidiExact
 import DASHI.Culture.JohnAnthonyBrownTemporalDiagnosisDependencyLineageBidiExact
 import DASHI.Culture.JohnAnthonyBrownSelectiveInvalidationParetoBidiExact
+import DASHI.Culture.JohnAnthonyBrownRecursiveParetoTruthMaintenanceBidiExact
