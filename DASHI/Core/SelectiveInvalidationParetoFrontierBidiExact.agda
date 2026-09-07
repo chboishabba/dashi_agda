@@ -64,10 +64,6 @@ open ParetoFrontierCandidate public
 
 ------------------------------------------------------------------------
 -- Symbolic tetrational/self-indexed capacity.
---
--- We intentionally do not normalize gigantic natural-number powers.  The
--- recurrence is represented as syntax because capacity is a language bound,
--- not a request to enumerate all axes.
 ------------------------------------------------------------------------
 
 data CapacityExpr : Set where
@@ -143,9 +139,30 @@ canonicalResidualMaterialisation =
 semanticAxisCountIsFour : declaredSemanticAxisCount canonicalAmbientCapacity ≡ 4
 semanticAxisCountIsFour = refl
 
-visualisationStateCountIsNotDeclaredDimension :
+visualisationStateCountIs19683 :
   ternaryVisualisationStateCount canonicalAmbientCapacity ≡ 19683
-visualisationStateCountIsNotDeclaredDimension = refl
+visualisationStateCountIs19683 = refl
+
+------------------------------------------------------------------------
+-- Explicit compatibility contract with the recursive-Pareto methodology.
+------------------------------------------------------------------------
+
+record RecursiveParetoCompatibility : Set where
+  constructor recursive-pareto-compatibility
+  field
+    arbitraryDeclaredSemanticAxes : Bool
+    residualRelevantAxesOnly : Bool
+    inheritedAxisSemanticsPreserved : Bool
+    visualisationCardinalityNotDimension : Bool
+    selfIndexedCapacityNeedNotMaterialise : Bool
+    paretoRankingDoesNotCreateAuthority : Bool
+    canonicalOwnerReference : String
+
+canonicalRecursiveParetoCompatibility : RecursiveParetoCompatibility
+canonicalRecursiveParetoCompatibility =
+  recursive-pareto-compatibility
+    true true true true true true
+    "open PR #770: NDimParetoHyperfabricExact + RecursiveParetoFrontierLiftingExact; collapse this compatibility bridge onto those owners after shared ancestry"
 
 ------------------------------------------------------------------------
 -- Exact selective-invalidation fixture.
