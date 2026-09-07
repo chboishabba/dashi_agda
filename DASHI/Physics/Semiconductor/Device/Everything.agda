@@ -24,3 +24,6 @@ import DASHI.Physics.Semiconductor.Device.BishopBernoulliScharfetterGummelBridge
 import DASHI.Physics.Semiconductor.Device.BishopScharfetterGummelFaceFluxExact
 import DASHI.Physics.Semiconductor.Device.BishopConcreteBernoulliPairExact
 import DASHI.Physics.Semiconductor.Device.BishopConcreteScharfetterGummelFaceFluxExact
+import DASHI.Physics.Semiconductor.Device.BishopThermalNormalizedDropExact
+import DASHI.Physics.Semiconductor.Device.BishopSameObjectComputedFaceFluxExact
+import DASHI.Physics.Semiconductor.Device.BishopTwoCellContinuityAssemblyExact
