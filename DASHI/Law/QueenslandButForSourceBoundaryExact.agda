@@ -9,12 +9,14 @@ open import Agda.Builtin.String using (String)
 -- QUEENSLAND FACTUAL CAUSATION SOURCE / ATTRIBUTION BOUNDARY
 --
 -- Attribution policy:
---   * Queensland legislation owns Queensland statutory propositions.
---   * High Court cases below are calibrations concerning the materially similar
---     NSW Civil Liability Act 2002 s 5D architecture; they are not represented
---     as the textual source of Queensland Civil Liability Act 2003 s 11.
+--   * Current Queensland legislation owns Queensland statutory propositions.
+--   * High Court cases below are calibrations concerning NSW Civil Liability
+--     Act 2002 s 5D; they are not represented as the textual source of
+--     Queensland Civil Liability Act 2003 s 11.
 --   * DASHI owns the typed records, counterfactual fibres, compilers and
 --     non-promotion firewalls built around those source propositions.
+--   * Statutory authority is not statutory applicability: ss 4, 5 and 7 remain
+--     external prerequisites/boundaries for a concrete matter.
 ------------------------------------------------------------------------
 
 data SourceRole : Set where
@@ -37,10 +39,10 @@ open LegalSourceAttribution public
 queenslandCivilLiabilityAct : LegalSourceAttribution
 queenslandCivilLiabilityAct = legalSourceAttribution
   primaryQueenslandLegislation
-  "Civil Liability Act 2003 (Qld), ss 10-12"
-  "Civil Liability Act 2003 (Qld) ss 10, 11, 12"
+  "Civil Liability Act 2003 (Qld), current text"
+  "Civil Liability Act 2003 (Qld) ss 4, 5, 7, 10, 11, 12"
   "https://www.legislation.qld.gov.au/view/whole/html/current/act-2003-016"
-  "Primary source for Queensland statutory necessary-condition factual causation, distinct scope of liability, exceptional-case route, subjective claimant counterfactual rule, and causation onus/balance-of-probabilities rule."
+  "Primary Queensland source. Section 11 owns the necessary-condition factual-causation and separate scope-of-liability propositions, exceptional route and subjective harmed-person counterfactual rule; s 12 owns the causation onus/balance-of-probabilities proposition; s 10 owns the avoidability-alone boundary; ss 4, 5 and 7 bound application, cause-of-action and non-codification claims."
 
 strongCalibration : LegalSourceAttribution
 strongCalibration = legalSourceAttribution
@@ -48,7 +50,7 @@ strongCalibration = legalSourceAttribution
   "Strong v Woolworths Limited"
   "[2012] HCA 5"
   "https://www.hcourt.gov.au/cases-and-judgments/judgments/judgments-1998-current/strong-v-woolworths-limited"
-  "High Court calibration concerning factual causation, necessary condition and evidentiary inference under NSW Civil Liability Act 2002 s 5D; not the textual source of Queensland s 11."
+  "High Court calibration concerning factual causation, necessary condition and evidentiary inference under Civil Liability Act 2002 (NSW) s 5D; not the textual source of Queensland s 11 and not a substitute for a Queensland applicability receipt."
 
 wallaceCalibration : LegalSourceAttribution
 wallaceCalibration = legalSourceAttribution
@@ -56,7 +58,7 @@ wallaceCalibration = legalSourceAttribution
   "Wallace v Kam"
   "[2013] HCA 19"
   "https://www.hcourt.gov.au/cases-and-judgments/judgments/judgments-1998-current/wallace-v-kam"
-  "High Court calibration separating factual causation from scope of liability under NSW Civil Liability Act 2002 s 5D; not the textual source of Queensland s 11."
+  "High Court calibration separating factual causation from scope of liability under Civil Liability Act 2002 (NSW) s 5D; not the textual source of Queensland s 11 and not a substitute for a Queensland applicability receipt."
 
 dashiButForArchitecture : LegalSourceAttribution
 dashiButForArchitecture = legalSourceAttribution
@@ -64,7 +66,7 @@ dashiButForArchitecture = legalSourceAttribution
   "DASHI legal but-for causation architecture"
   "DASHI-original"
   "DASHI/Law/LegalFactualCausationButForExact.agda"
-  "Typed breach-correction intervention, counterfactual fibre, robust/selected/underidentified counterfactual distinctions, parser bridge and compiler boundaries are DASHI abstractions, not language attributed to the legislature or High Court."
+  "Typed breach-correction intervention, counterfactual fibre, robust/selected/underidentified distinctions, WrongType element compiler, parser bridge and non-promotion firewalls are DASHI abstractions, not language attributed to the legislature or High Court."
 
 ------------------------------------------------------------------------
 -- Source-backed Queensland proposition coordinates.
@@ -96,6 +98,13 @@ record QueenslandCausationStatutoryCoordinates : Set where
     avoidabilityAloneEstablishesLiabilityIsFalse :
       avoidabilityAloneEstablishesLiability ≡ false
 
+    actCreatesIndependentCauseOfAction : Bool
+    actCreatesIndependentCauseOfActionIsFalse :
+      actCreatesIndependentCauseOfAction ≡ false
+
+    actIsCompleteCodification : Bool
+    actIsCompleteCodificationIsFalse : actIsCompleteCodification ≡ false
+
     primarySource : LegalSourceAttribution
 
 canonicalQueenslandCausationCoordinates : QueenslandCausationStatutoryCoordinates
@@ -107,6 +116,8 @@ canonicalQueenslandCausationCoordinates =
     true refl
     true refl
     false refl
+    false refl
+    false refl
     queenslandCivilLiabilityAct
 
 ------------------------------------------------------------------------
@@ -117,6 +128,11 @@ data HighCourtNSWCaseIsTextualSourceOfQueenslandSection11 : Set where
 data DASHICompilerIsLegislativeText : Set where
 data ParserOutputIsLegalSourceAuthority : Set where
 data SourceBackedPropositionTransfersAllDASHIAbstractionsToSource : Set where
+data SourceAuthorityAutomaticallyEstablishesApplicability : Set where
+
+data Section11CreatesCauseOfAction : Set where
+
+data Section11IsCompleteCodification : Set where
 
 highCourtCalibrationIsNotQueenslandTextualSource :
   HighCourtNSWCaseIsTextualSourceOfQueenslandSection11 → ⊥
@@ -132,6 +148,16 @@ sourcePropositionDoesNotOwnDashiAbstraction :
   SourceBackedPropositionTransfersAllDASHIAbstractionsToSource → ⊥
 sourcePropositionDoesNotOwnDashiAbstraction ()
 
+sourceAuthorityDoesNotAutoEstablishApplicability :
+  SourceAuthorityAutomaticallyEstablishesApplicability → ⊥
+sourceAuthorityDoesNotAutoEstablishApplicability ()
+
+section11DoesNotCreateCauseOfAction : Section11CreatesCauseOfAction → ⊥
+section11DoesNotCreateCauseOfAction ()
+
+section11DoesNotClaimCompleteCodification : Section11IsCompleteCodification → ⊥
+section11DoesNotClaimCompleteCodification ()
+
 record AttributionBoundary : Set where
   constructor attributionBoundary
   field
@@ -145,7 +171,9 @@ record AttributionBoundary : Set where
     dashiOwnsCompilerAbstractionIsTrue : dashiOwnsCompilerAbstraction ≡ true
     parserOwnsLegalAuthority : Bool
     parserOwnsLegalAuthorityIsFalse : parserOwnsLegalAuthority ≡ false
+    sourceAuthorityEqualsApplicability : Bool
+    sourceAuthorityEqualsApplicabilityIsFalse : sourceAuthorityEqualsApplicability ≡ false
 
 canonicalAttributionBoundary : AttributionBoundary
 canonicalAttributionBoundary =
-  attributionBoundary true refl false refl true refl false refl
+  attributionBoundary true refl false refl true refl false refl false refl
