@@ -18,27 +18,29 @@ record RequiredPropertyFamily : Set where
     coverageStatus : Zelph.QueryCoverageStatus
 open RequiredPropertyFamily public
 
-data PropertyPresence : Set where
-  propertyPresent propertyAbsent propertyPresenceUnresolved : PropertyPresence
+-- This is statement-family presence, not native Wikibase snak semantics.
+data PropertyStatementPresence : Set where
+  statementPresent noStatementObserved statementPresenceUnresolved : PropertyStatementPresence
 
-presenceFromCoverageAndRows : Zelph.QueryCoverageStatus → Bool → PropertyPresence
-presenceFromCoverageAndRows Zelph.queryCoverageComplete true = propertyPresent
-presenceFromCoverageAndRows Zelph.queryCoverageComplete false = propertyAbsent
-presenceFromCoverageAndRows Zelph.queryCoverageIncomplete _ = propertyPresenceUnresolved
-presenceFromCoverageAndRows Zelph.queryCoverageUninspected _ = propertyPresenceUnresolved
-presenceFromCoverageAndRows Zelph.queryCoverageInvalid _ = propertyPresenceUnresolved
+presenceFromCoverageAndRows :
+  Zelph.QueryCoverageStatus → Bool → PropertyStatementPresence
+presenceFromCoverageAndRows Zelph.queryCoverageComplete true = statementPresent
+presenceFromCoverageAndRows Zelph.queryCoverageComplete false = noStatementObserved
+presenceFromCoverageAndRows Zelph.queryCoverageIncomplete _ = statementPresenceUnresolved
+presenceFromCoverageAndRows Zelph.queryCoverageUninspected _ = statementPresenceUnresolved
+presenceFromCoverageAndRows Zelph.queryCoverageInvalid _ = statementPresenceUnresolved
 
-observedMissingRowIsObservedAbsence :
-  presenceFromCoverageAndRows Zelph.queryCoverageComplete false ≡ propertyAbsent
-observedMissingRowIsObservedAbsence = refl
+observedMissingRowIsNoStatementObserved :
+  presenceFromCoverageAndRows Zelph.queryCoverageComplete false ≡ noStatementObserved
+observedMissingRowIsNoStatementObserved = refl
 
-incompleteMissingRowIsNotAbsence :
-  presenceFromCoverageAndRows Zelph.queryCoverageIncomplete false ≡ propertyPresenceUnresolved
-incompleteMissingRowIsNotAbsence = refl
+incompleteMissingRowIsUnresolved :
+  presenceFromCoverageAndRows Zelph.queryCoverageIncomplete false ≡ statementPresenceUnresolved
+incompleteMissingRowIsUnresolved = refl
 
-uninspectedMissingRowIsNotAbsence :
-  presenceFromCoverageAndRows Zelph.queryCoverageUninspected false ≡ propertyPresenceUnresolved
-uninspectedMissingRowIsNotAbsence = refl
+uninspectedMissingRowIsUnresolved :
+  presenceFromCoverageAndRows Zelph.queryCoverageUninspected false ≡ statementPresenceUnresolved
+uninspectedMissingRowIsUnresolved = refl
 
 record RequiredPropertyInventory : Set where
   constructor required-property-inventory
@@ -48,7 +50,7 @@ record RequiredPropertyInventory : Set where
     coveragePolicyReference : String
     requiredPropertyReferences : List String
     observedWithStatementReferences : List String
-    observedAbsentPropertyReferences : List String
+    noStatementObservedPropertyReferences : List String
     unresolvedRequiredPropertyReferences : List String
 open RequiredPropertyInventory public
 
@@ -69,37 +71,38 @@ uninspectedFamilyBlocksRankVisibility :
   rankVisibilityDecisionForCoverage Zelph.queryCoverageUninspected ≡ rankVisibilityUnresolved
 uninspectedFamilyBlocksRankVisibility = refl
 
-data NoReturnedP14143ImpliesP14143Absent : Set where
+data NoReturnedP14143ImpliesNativeNoValue : Set where
 data ItemWideCoverageImpliesEveryRequiredFamilyCovered : Set where
-data ObservedPropertyAbsenceImpliesMigrationSafe : Set where
+data NoStatementObservedImpliesMigrationSafe : Set where
 
-noReturnedRowDoesNotProvePropertyAbsence :
-  NoReturnedP14143ImpliesP14143Absent → ⊥
-noReturnedRowDoesNotProvePropertyAbsence ()
+noReturnedRowDoesNotCreateNativeNoValue :
+  NoReturnedP14143ImpliesNativeNoValue → ⊥
+noReturnedRowDoesNotCreateNativeNoValue ()
 
 itemWideCoverageDoesNotReplaceFamilyCoverage :
   ItemWideCoverageImpliesEveryRequiredFamilyCovered → ⊥
 itemWideCoverageDoesNotReplaceFamilyCoverage ()
 
-observedAbsenceDoesNotProveMigrationSafety :
-  ObservedPropertyAbsenceImpliesMigrationSafe → ⊥
-observedAbsenceDoesNotProveMigrationSafety ()
+noStatementObservedDoesNotProveMigrationSafety :
+  NoStatementObservedImpliesMigrationSafe → ⊥
+noStatementObservedDoesNotProveMigrationSafety ()
 
 record RequiredPropertyCoverageBoundary : Set where
   constructor required-property-coverage-boundary
   field
-    absenceRequiresPropertyFamilyCoverage : Bool
+    statementPresenceRequiresPropertyFamilyCoverage : Bool
     incompleteFamilyBlocksTruthyDecision : Bool
     uninspectedFamilyBlocksTruthyDecision : Bool
-    observedMissingRowMayCountAsAbsence : Bool
-    incompleteMissingRowCountsAsAbsence : Bool
-    uninspectedMissingRowCountsAsAbsence : Bool
-    observedAbsenceCreatesMigrationSafety : Bool
+    observedMissingRowMayCountAsNoStatementObserved : Bool
+    observedMissingRowCountsAsNativeNoValue : Bool
+    incompleteMissingRowCountsAsNoStatementObserved : Bool
+    uninspectedMissingRowCountsAsNoStatementObserved : Bool
+    noStatementObservedCreatesMigrationSafety : Bool
 
 canonicalRequiredPropertyCoverageBoundary : RequiredPropertyCoverageBoundary
 canonicalRequiredPropertyCoverageBoundary =
-  required-property-coverage-boundary true true true true false false false
+  required-property-coverage-boundary true true true true false false false false
 
 requiredPropertyCoverageStatement : String
 requiredPropertyCoverageStatement =
-  "For a revision-bound Wikidata item Q, property presence/absence and rank truthiness are decided per required property family Q/P. Only policy-relative complete coverage of Q/P can turn a missing returned row into observed property absence or make rank visibility decidable. Incomplete, uninspected or invalid Q/P coverage remains unresolved and creates no migration authority."
+  "For a revision-bound Wikidata item Q, statement-family presence and rank truthiness are decided per required property family Q/P. Only policy-relative complete Q/P coverage can turn a missing returned row into noStatementObserved or make rank visibility decidable. noStatementObserved is not a native novalue snak. Incomplete, uninspected or invalid Q/P coverage remains unresolved and creates no migration authority."
