@@ -21,6 +21,7 @@ import DASHI.Law.SensibLawOfficialHCALiveAcquisitionReceipt9c3007Exact as HCALiv
 import DASHI.Law.SensibLawOfficialJudgmentResourceDiscoveryExact as JudgmentResource
 import DASHI.Law.SensibLawOfficialJudgmentCanonicalTextMaterializationExact as CanonicalText
 import DASHI.Law.SensibLawOfficialJudgmentCanonicalTextPnfHandoffExact as JudgmentPnf
+import DASHI.Law.SensibLawResidualBoundGovernedAcquisitionParityExact as BoundAcquisition
 
 ------------------------------------------------------------------------
 -- OFFLINE / GOVERNED-ONLINE RESEARCH ENGINE CAPSTONE
@@ -28,7 +29,8 @@ import DASHI.Law.SensibLawOfficialJudgmentCanonicalTextPnfHandoffExact as Judgme
 -- ProofFrontier
 --   -> candidate support/defeater/comparator/contradiction moves
 --   -> proof-reduction threshold + Pareto schedule
---   -> provider-neutral query
+--   -> exact residual/hypothesis/proposition/producer binding
+--   -> provider-neutral query / governed acquisition permit
 --   -> persisted/OALC/official/sanctioned acquisition order
 --   -> local landing-page ingestion
 --   -> zero-network official judgment resource discovery
@@ -41,13 +43,13 @@ import DASHI.Law.SensibLawOfficialJudgmentCanonicalTextPnfHandoffExact as Judgme
 --   -> frontier delta
 --   -> next search
 --
--- HCALive pins the observed successful HCA landing acquisition: first network=1,
--- SHA256-bound local ingestion, replay=0. JudgmentResource mirrors reuse of those
--- local landing bytes to discover DOCX/PDF with zero network and prefer DOCX.
--- CanonicalText mirrors DOCX -> canonical text with distinct carrier/text hashes.
--- JudgmentPnf then reuses the existing fail-closed EvidentialBridgeReceipt rather
--- than introducing a second semantic bridge. Current Rust head validation and the
--- one-request full-DOCX live receipt remain open coordinates.
+-- The introspective repair is now explicit in the preferred path: merely seeing
+-- a relevant source is not enough to schedule it.  BoundAcquisition requires the
+-- exact live open residual, selected hypothesis, target proposition, scheduled
+-- producer and jurisdiction to agree before governed research acquisition may be
+-- executed.  The resulting permit still does not pay semantics or close the
+-- consumer.  Current Rust head validation and the one-request full-DOCX live
+-- receipt remain open coordinates.
 ------------------------------------------------------------------------
 
 record OfflineResearchEngineBoundary : Set where
@@ -83,6 +85,9 @@ record OfflineResearchEngineBoundary : Set where
     canonicalJudgmentTextPnfHandoffImplemented : Bool
     canonicalJudgmentTextPnfHandoffImplementedIsTrue :
       canonicalJudgmentTextPnfHandoffImplemented ≡ true
+    residualBoundGovernedAcquisitionImplemented : Bool
+    residualBoundGovernedAcquisitionImplementedIsTrue :
+      residualBoundGovernedAcquisitionImplemented ≡ true
     fullJudgmentLiveAcquisitionObserved : Bool
     fullJudgmentLiveAcquisitionObservedIsFalse :
       fullJudgmentLiveAcquisitionObserved ≡ false
@@ -100,6 +105,7 @@ record OfflineResearchEngineBoundary : Set where
 canonicalOfflineResearchEngineBoundary : OfflineResearchEngineBoundary
 canonicalOfflineResearchEngineBoundary =
   offlineResearchEngineBoundary
+    true refl
     true refl
     true refl
     true refl
@@ -193,6 +199,11 @@ selectedCanonicalJudgmentPnfHandoffBoundary :
   JudgmentPnf.CanonicalJudgmentPnfHandoffBoundary
 selectedCanonicalJudgmentPnfHandoffBoundary =
   JudgmentPnf.canonicalCanonicalJudgmentPnfHandoffBoundary
+
+selectedResidualBoundGovernedAcquisitionBoundary :
+  BoundAcquisition.ResidualBoundGovernedAcquisitionBoundary
+selectedResidualBoundGovernedAcquisitionBoundary =
+  BoundAcquisition.canonicalResidualBoundGovernedAcquisitionBoundary
 
 ------------------------------------------------------------------------
 -- Capstone firewalls.
