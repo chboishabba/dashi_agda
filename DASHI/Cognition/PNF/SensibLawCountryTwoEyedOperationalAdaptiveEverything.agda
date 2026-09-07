@@ -6,6 +6,7 @@ import DASHI.Cognition.PNF.SensibLawCountryTwoEyedOperationalEpistemicEverything
 import DASHI.Cognition.PNF.SensibLawCountryPluralEpistemicOperationalAuditExact as Audit
 import DASHI.Cognition.PNF.SensibLawCountryCommunityAuthorityFirstCorrectionExact as Correction
 import DASHI.Cognition.PNF.SensibLawTerraNulliusOperationalJuridicalNonHumanityExact as Terra
+import DASHI.Cognition.PNF.SensibLawTerraNulliusFoundationalJuridicalPersonhoodExact as TerraFoundational
 import DASHI.Core.PluralEpistemicOperationalClosureExact as Operational
 import DASHI.Core.PluralOperationalEvidenceBraidBidiExact as Braid
 import DASHI.Core.PluralOperationalResidualActionLoopExact as Adaptive
@@ -77,12 +78,12 @@ preventionMustBeObserved = refl
 ------------------------------------------------------------------------
 
 terraNulliusTreatedNoConstitutivePeopleAsPresent :
-  DASHI.Cognition.PNF.SensibLawTerraNulliusFoundationalJuridicalPersonhoodExact.treatedAsIfNoJuridicallyConstitutivePeopleWerePresent
+  TerraFoundational.treatedAsIfNoJuridicallyConstitutivePeopleWerePresent
     Terra.foundationalNonHumanityReceipt ≡ true
 terraNulliusTreatedNoConstitutivePeopleAsPresent = refl
 
 terraNulliusClassificationIsJuridicalNotBiological :
-  DASHI.Cognition.PNF.SensibLawTerraNulliusFoundationalJuridicalPersonhoodExact.classificationIsBiologicalTaxonomy
+  TerraFoundational.classificationIsBiologicalTaxonomy
     Terra.foundationalNonHumanityReceipt ≡ false
 terraNulliusClassificationIsJuridicalNotBiological = refl
 
