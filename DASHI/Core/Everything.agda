@@ -32,9 +32,6 @@ import DASHI.Core.DiscriminatorSynthesisExact
 import DASHI.Core.MechanismModelDiscriminationExact
 import DASHI.Core.MechanismDiscriminationApplicationAtlasExact
 import DASHI.Core.AdaptiveMechanismDiscriminationPlannerExact
-import DASHI.Core.ResidualActionPolicyExact
-import DASHI.Core.ResidualActionApplicationAtlasExact
-import DASHI.Core.ResidualActionExecutionBoundaryExact
 import DASHI.Core.SequentialConsumerExperimentPlannerExact
 import DASHI.Core.SequentialRobustActionabilityPlannerExact
 import DASHI.Core.SequentialRelationalExperimentPlannerExact
@@ -139,6 +136,14 @@ import DASHI.Core.MultiaxialResidualBundleExact
 import DASHI.Core.RecognitionConstitutionNonfactorabilityExact
 import DASHI.Core.SituatedClaimAuthoritySystemExact
 import DASHI.Core.KnowledgeContentAuthoritySeparationExact
+
+-- Situated fibre dynamics / consumer-indexed adequacy.
+import DASHI.Core.SituatedActionabilityFibreExact
+import DASHI.Core.TrajectoryRecoveryFibreExact
+import DASHI.Core.MultiaxialIncidenceFibreExact
+import DASHI.Core.ConsumerIndexedTrajectoryFibreAdequacyExact
+import DASHI.Core.ConsumerFibreRefinementSchedulerExact
+import DASHI.Core.SituatedFibreDynamicsEverything
 
 -- Proof-carrying physical execution / shared-state coalition / proof-search
 -- least-privilege closure.
