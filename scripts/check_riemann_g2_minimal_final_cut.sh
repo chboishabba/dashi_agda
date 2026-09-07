@@ -26,6 +26,7 @@ FILES=(
   DASHI/Analysis/RiemannG2FreshGammaEnvelopeAnalyticCoreExact.agda
   DASHI/Analysis/RiemannG2BudgetNormalizedAnalyticCoresExact.agda
   DASHI/Analysis/RiemannG2BudgetNormalizedFinalOrderTransportExact.agda
+  DASHI/Analysis/RiemannG2UniformBudgetNormalizedHighProducerExact.agda
   DASHI/Analysis/RiemannG2FinalSplitComplementOrderTransportCompilerExact.agda
   DASHI/Analysis/RiemannG2FinalPoleQuotientMinimalAnalyticCutExact.agda
   DASHI/Analysis/RiemannG2FinalPoleQuotientTwoPaymentCutExact.agda
