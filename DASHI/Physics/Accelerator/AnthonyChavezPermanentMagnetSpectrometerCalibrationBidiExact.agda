@@ -5,9 +5,16 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.InverseProblemIdentifiabilityBidiExact as Inv
 
 ------------------------------------------------------------------------
--- Burris-Mog, Mark Anthony Chavez, Espy, Moir, Schillig, Volegov, Manard,
+-- LEGACY FILENAME / ATTRIBUTION CORRECTION.
+--
+-- Burris-Mog, MARK ANTHONY CHAVEZ, Espy, Moir, Schillig, Volegov, Manard,
 -- Trainham, Review of Scientific Instruments 89, 073303 (2018),
 -- DOI 10.1063/1.5029837.
+--
+-- This technical owner concerns Mark Anthony Chavez. The module name predates
+-- the roster identity audit and MUST NOT be used to transfer this calibration
+-- work to the separate missing 78-year-old Anthony Chavez without an independent
+-- same-person receipt.
 --
 -- The work calibrates two compact permanent-magnet spectrometers for high-
 -- current electron linear induction accelerators, including DARHT use.
