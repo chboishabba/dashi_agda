@@ -9,8 +9,8 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact as R477
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedDirectConsumerRound478Exact as R478
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedSignedResidualRound479Exact as R479
-import DASHI.Physics.Closure.NSTriadKNCauchyResolvedPhysicalSnapshotRound480Exact as NS
-import DASHI.Physics.Closure.NSTriadKNCauchyResolvedProofSearchRound481Exact as NSProof
+import DASHI.Physics.Closure.NSTriadKNCauchyFullVsSignedFluxBoundaryRound484Exact as NSBoundary
+import DASHI.Physics.Closure.NSTriadKNCauchySignedFluxProofSearchRound485Exact as NS
 import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Exact as YM
 import DASHI.Analysis.RiemannAristotleRHFinalAllowanceLeafSchedulerExact as RH
 import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as Zeta
@@ -18,22 +18,18 @@ import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as Zeta
 ------------------------------------------------------------------------
 -- CROSS-DOMAIN TERMINAL FRONTIER MOTIFS
 --
--- This is reuse of proof-search shape, not transfer of theorem content.
--- NS, YM and RH/zeta remain mathematically independent programmes.
+-- Reuse proof-search SHAPE only; never identify mathematical carriers across
+-- programmes.
 --
--- NS UPDATE (R481)
--- ----------------
--- R477-R480 minimize the mathematical consumer down to the selected physical
--- Cauchy-resolved snapshot.  R481 then applies the repo's first-missing rule:
---
---   current status = snapshot weld missing + selected payment missing
---   first missing   = snapshot weld
---   mechanism       = Look
---
--- Only after an actual snapshot/correspondence receipt exists does the selected
--- resolved inequality become the live Think/analytic leaf.  Later-stage success
--- cannot repair the missing same-object receipt and producer names are not
--- receipts.
+-- NS correction (R484/R485):
+--   R448 already owns the same-object representation
+--       literal R397/R385 signed flux = physical Cauchy offDiagonal.
+--   The R477/R478 resolved quadratic is the FULL Cauchy form
+--       full = diagonal + offDiagonal,
+--   so it is not the signed-cross consumer.  A full upper bound is an optional
+--   sufficient producer because diagonal >= 0, but the least-privilege live
+--   analytic leaf is only the POSITIVE signed-flux allowance.  R458 explicitly
+--   leaves that orientation open.
 ------------------------------------------------------------------------
 
 data TerminalProducerMotif : Set where
@@ -41,7 +37,6 @@ data TerminalProducerMotif : Set where
   assignedAllowancePayment : TerminalProducerMotif
   signedIntegratedPayment : TerminalProducerMotif
   resolvedGramOperatorBound : TerminalProducerMotif
-  selectedResolvedPayment : TerminalProducerMotif
   sourceSemanticsRecovery : TerminalProducerMotif
   conjunctionOfIndependentChildren : TerminalProducerMotif
   downstreamCompilerReuse : TerminalProducerMotif
@@ -50,94 +45,91 @@ data TerminalProducerMotif : Set where
 data Programme : Set where navierStokes yangMills riemannZeta : Programme
 
 data TerminalCoordinate : Set where
-  nsResolvedSnapshotWeld : TerminalCoordinate
-  nsSelectedResolvedPayment : TerminalCoordinate
+  nsPositiveSignedFluxAllowance : TerminalCoordinate
   ymRound108Semantics : TerminalCoordinate
   ymRound108BC1SameObject : TerminalCoordinate
   rhOffAllowance : TerminalCoordinate
   rhGammaAllowance : TerminalCoordinate
 
 coordinateProgramme : TerminalCoordinate → Programme
-coordinateProgramme nsResolvedSnapshotWeld = navierStokes
-coordinateProgramme nsSelectedResolvedPayment = navierStokes
+coordinateProgramme nsPositiveSignedFluxAllowance = navierStokes
 coordinateProgramme ymRound108Semantics = yangMills
 coordinateProgramme ymRound108BC1SameObject = yangMills
 coordinateProgramme rhOffAllowance = riemannZeta
 coordinateProgramme rhGammaAllowance = riemannZeta
 
 primaryMotif : TerminalCoordinate → TerminalProducerMotif
-primaryMotif nsResolvedSnapshotWeld = sameObjectRepresentation
-primaryMotif nsSelectedResolvedPayment = selectedResolvedPayment
+primaryMotif nsPositiveSignedFluxAllowance = signedIntegratedPayment
 primaryMotif ymRound108Semantics = sourceSemanticsRecovery
 primaryMotif ymRound108BC1SameObject = sameObjectRepresentation
 primaryMotif rhOffAllowance = assignedAllowancePayment
 primaryMotif rhGammaAllowance = assignedAllowancePayment
 
 coordinateReference : TerminalCoordinate → String
-coordinateReference nsResolvedSnapshotWeld =
-  "NS: R481 first-missing R480 physical Cauchy-resolved snapshot weld"
-coordinateReference nsSelectedResolvedPayment =
-  "NS: R480 selected physical resolved payment; admitted only after snapshot receipt"
+coordinateReference nsPositiveSignedFluxAllowance =
+  "NS: positive-orientation literal R397/R448 fixed-output signed-flux allowance"
 coordinateReference ymRound108Semantics = "YM: source-fixed Round108 density semantics"
 coordinateReference ymRound108BC1SameObject = "YM: selected potential = BC1 same-object representation weld"
 coordinateReference rhOffAllowance = "RH/zeta: universal pole-quotient Off budget <= assigned A_off"
 coordinateReference rhGammaAllowance = "RH/zeta: same-taper Gamma budget <= assigned A_Gamma"
 
 ------------------------------------------------------------------------
--- Exact pins to current terminality / producer hierarchy.
+-- Exact NS pins.
 ------------------------------------------------------------------------
 
-nsPhysicalSnapshotPreferred : NS.round480ActualPhysicalSnapshotIsPreferredConsumer ≡ true
-nsPhysicalSnapshotPreferred = refl
+nsR448RepresentationAlreadyOwned : NS.round485R448RepresentationAlreadyOwned ≡ true
+nsR448RepresentationAlreadyOwned = refl
 
-nsPhysicalSnapshotWeldStillOpen : NS.round480PhysicalSnapshotSameObjectWeldClosed ≡ false
-nsPhysicalSnapshotWeldStillOpen = NS.round480PhysicalSnapshotSameObjectWeldClosedIsFalse
+nsFullFormSameObjectRouteRejected :
+  NSBoundary.round484FullFormSameObjectAsSignedFlux ≡ false
+nsFullFormSameObjectRouteRejected =
+  NSBoundary.round484FullFormSameObjectAsSignedFluxIsFalse
 
-nsSelectedResolvedPaymentStillOpen : NS.round480PhysicalSelectedResolvedBoundClosed ≡ false
-nsSelectedResolvedPaymentStillOpen = NS.round480PhysicalSelectedResolvedBoundClosedIsFalse
+nsFullFormUpperBoundStillSufficientProducer :
+  NSBoundary.round484FullUpperBoundIsSufficientProducerForSignedFlux ≡ true
+nsFullFormUpperBoundStillSufficientProducer = refl
 
-nsFirstMissingIsSnapshotWeld :
-  NSProof.firstR480Residual NSProof.currentR480Status
-  ≡ NSProof.missingPhysicalSnapshotWeld
-nsFirstMissingIsSnapshotWeld = NSProof.currentFirstMissingIsSnapshotWeld
+nsFullFormUpperBoundNotMandatory :
+  NSBoundary.round484FullUpperBoundIsMandatoryProducerForSignedFlux ≡ false
+nsFullFormUpperBoundNotMandatory = refl
 
-nsCurrentMechanismIsLook :
-  NSProof.firstR480Mechanism NSProof.currentR480Status ≡ NSProof.Look
-nsCurrentMechanismIsLook = NSProof.currentMechanismIsLook
+nsCurrentFirstMissingIsPositiveSignedFluxAllowance :
+  NS.firstSignedFluxResidual NS.currentSignedFluxStatus
+  ≡ NS.missingPositiveSignedFluxAllowance
+nsCurrentFirstMissingIsPositiveSignedFluxAllowance =
+  NS.currentFirstMissingIsPositiveAllowance
 
-nsSelectedPaymentSearchNotYetAdmitted :
-  NSProof.round481SelectedPaymentSearchCurrentlyAdmitted ≡ false
-nsSelectedPaymentSearchNotYetAdmitted =
-  NSProof.round481SelectedPaymentSearchCurrentlyAdmittedIsFalse
+nsCurrentMechanismIsThink :
+  NS.mechanismFor (NS.firstSignedFluxResidual NS.currentSignedFluxStatus)
+  ≡ NS.Think
+nsCurrentMechanismIsThink = NS.currentMechanismIsThink
 
-nsAfterSnapshotMechanismIsThink :
-  NSProof.firstR480Mechanism NSProof.afterSnapshotStatus ≡ NSProof.Think
-nsAfterSnapshotMechanismIsThink = NSProof.afterSnapshotMechanismIsThink
+nsPositiveSignedFluxAllowanceStillOpen :
+  NS.round485PositiveSignedFluxAllowanceClosed ≡ false
+nsPositiveSignedFluxAllowanceStillOpen =
+  NS.round485PositiveSignedFluxAllowanceClosedIsFalse
 
-nsUniformResolvedBoundSufficient : NS.round480UniformAllCoefficientBoundIsSufficient ≡ true
-nsUniformResolvedBoundSufficient = refl
+nsSpacetimeRemainderStillOpen :
+  NS.round485SpacetimeRemainderClosed ≡ false
+nsSpacetimeRemainderStillOpen = NS.round485SpacetimeRemainderClosedIsFalse
 
-nsUniformResolvedBoundNotMandatory : NS.round480UniformAllCoefficientBoundIsMandatory ≡ false
-nsUniformResolvedBoundNotMandatory = NS.round480UniformAllCoefficientBoundIsMandatoryIsFalse
-
-nsR478DirectProducerPreferredWithinUniformLane : R478.round478DirectResolvedConsumerPreferred ≡ true
-nsR478DirectProducerPreferredWithinUniformLane = refl
+-- Stronger producer routes remain available but are not terminal requirements.
+nsR478DirectFullFormProducerExistsAsRoute : R478.round478DirectResolvedConsumerPreferred ≡ true
+nsR478DirectFullFormProducerExistsAsRoute = refl
 
 nsSplitScalarPairNotMandatory : R478.round478SplitScalarPairIsMandatory ≡ false
 nsSplitScalarPairNotMandatory = R478.round478SplitScalarPairIsMandatoryIsFalse
 
-nsSignedResidualProducerCompiles : R479.round479SignedResidualProducerCompilesToDirectConsumer ≡ true
-nsSignedResidualProducerCompiles = refl
-
-nsSignedResidualRemainsSigned : R479.round479ResidualRemainsSigned ≡ true
-nsSignedResidualRemainsSigned = refl
+nsSignedResidualProducerCompilesFullForm :
+  R479.round479SignedResidualProducerCompilesToDirectConsumer ≡ true
+nsSignedResidualProducerCompilesFullForm = refl
 
 nsCauchyKernelAlreadyExplicit : R477.round477CauchyPairKernelExplicit ≡ true
 nsCauchyKernelAlreadyExplicit = refl
 
-nsResolventNormalizationAlreadyDivisionFree :
-  R477.round477ResolventNormalizationDivisionFree ≡ true
-nsResolventNormalizationAlreadyDivisionFree = refl
+------------------------------------------------------------------------
+-- Other programmes remain independent.
+------------------------------------------------------------------------
 
 ymDirectRouteRemainsAND :
   YM.routeTargets YM.directRound108ActionRoute
@@ -191,16 +183,10 @@ canonicalCrossDomainSearchPolicy =
     false refl
 
 ------------------------------------------------------------------------
--- Search order is now executable first-missing scheduling, not merely prose.
+-- Current dependency order.
 --
--- CURRENT:
---   R480 snapshot weld -> Look.
---
--- AFTER that actual receipt:
---   selected physical resolved payment -> Think.
---
--- AFTER that actual R480 proof object:
---   R432/downstream compiler reuse.
+-- NS: representation already paid -> Think on positive signed-flux allowance.
+-- Do not reopen the full-form identity route; it is a carrier mismatch.
 ------------------------------------------------------------------------
 
 data ClosurePhase : Set where
@@ -210,8 +196,7 @@ data ClosurePhase : Set where
   downstreamCompiler : ClosurePhase
 
 phase : TerminalCoordinate → ClosurePhase
-phase nsResolvedSnapshotWeld = representationOrSource
-phase nsSelectedResolvedPayment = terminalAnalyticPayment
+phase nsPositiveSignedFluxAllowance = terminalAnalyticPayment
 phase ymRound108Semantics = representationOrSource
 phase ymRound108BC1SameObject = representationOrSource
 phase rhOffAllowance = terminalAnalyticPayment
