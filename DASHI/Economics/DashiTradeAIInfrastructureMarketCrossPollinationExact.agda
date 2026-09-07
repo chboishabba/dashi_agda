@@ -3,6 +3,7 @@ module DASHI.Economics.DashiTradeAIInfrastructureMarketCrossPollinationExact whe
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.SituatedActionabilityFibreExact as ActionFibre
 import DASHI.Finance.DashiTradeFibreBridgeExact as TradeBridge
 import DASHI.Trading.DashiTradeDreamOptionConeExact as Dream
 import DASHI.Trading.TradingDeclaredRealizedViabilityBridgeExact as Viability
@@ -12,10 +13,9 @@ import DASHI.Economics.AIEconomicUsefulWorkTimeSeriesExact as Useful
 ------------------------------------------------------------------------
 -- DASHITRADE x AI INFRASTRUCTURE MARKET ECONOMICS
 --
--- Structural reuse only.  A bullish signal or strong demand observation does
--- not create financing permission, refinancing capacity, executable liquidity
--- or realized capital viability.  Trading and AI infrastructure are not
--- identified as the same domain.
+-- Structural reuse only.  The generic theorem owner is now
+-- Core.SituatedActionabilityFibreExact.  dashiTRADE and AI infrastructure are
+-- separate application adapters to that owner.
 ------------------------------------------------------------------------
 
 data InfrastructureMarketSignal : Set where
@@ -67,7 +67,6 @@ record InfrastructureMarketFabric : Set where
 
 open InfrastructureMarketFabric public
 
--- Same bullish signal can sit inside very different financing fabrics.
 cleanDemandState : InfrastructureMarketFabric
 cleanDemandState = infrastructureMarketFabric
   demandStrong deepFundingMarket uncrowdedBuildout
@@ -101,6 +100,39 @@ refinanceViability state with liquidity state
 sameDemandDifferentRefinanceViability :
   refinanceViability cleanDemandState ≡ refinanceViability crowdedDemandState → ⊥
 sameDemandDifferentRefinanceViability ()
+
+------------------------------------------------------------------------
+-- Generic fibre instantiation.
+------------------------------------------------------------------------
+
+infrastructureActionabilityFibre : ActionFibre.SituatedActionabilityFibre
+infrastructureActionabilityFibre = record
+  { SituatedState = InfrastructureMarketFabric
+  ; Signal = InfrastructureMarketSignal
+  ; Context = InfrastructureMarketFabric
+  ; Actionability = RefinanceViability
+  ; signalOf = signal
+  ; contextOf = λ state → state
+  ; actionabilityOf = refinanceViability
+  ; fibreReading = "AI infrastructure refinancing is situated actionability over a richer financing fibre, not a function of the headline demand signal alone."
+  }
+
+infrastructureSameSignalDifferentActionability :
+  ActionFibre.SameSignalDifferentActionability infrastructureActionabilityFibre
+infrastructureSameSignalDifferentActionability = record
+  { leftState = cleanDemandState
+  ; rightState = crowdedDemandState
+  ; sameSignal = refl
+  ; actionabilityDiffers = sameDemandDifferentRefinanceViability
+  }
+
+infrastructureSignalCannotDecodeRefinancing :
+  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
+    (ActionFibre.signalOf infrastructureActionabilityFibre)
+    (ActionFibre.actionabilityOf infrastructureActionabilityFibre) → ⊥
+infrastructureSignalCannotDecodeRefinancing =
+  ActionFibre.signalOnlyActionabilityDecoderImpossible
+    infrastructureSameSignalDifferentActionability
 
 ------------------------------------------------------------------------
 -- dashiTRADE donor boundaries retained explicitly.
@@ -143,7 +175,6 @@ record InfrastructureTrajectoryCost : Set where
 
 open InfrastructureTrajectoryCost public
 
--- Equal endpoint capacity does not erase different financing/deployment paths.
 data SameEndpointImpliesSameTrajectoryCostPermission : Set where
 
 data DemandSignalImpliesFinancingPermission : Set where
@@ -187,8 +218,7 @@ tradeDomainDoesNotBecomeAIInfrastructureDomain :
 tradeDomainDoesNotBecomeAIInfrastructureDomain ()
 
 ------------------------------------------------------------------------
--- Promotion implications: refinancing and market-price signals need their own
--- producers, independent of the terminal economic validation producer.
+-- Promotion implications.
 ------------------------------------------------------------------------
 
 data InfrastructureMarketClaim : Set where
