@@ -1,29 +1,5 @@
 module DASHI.Physics.Closure.NSTriadKNStrictR423ProofSearchRound493Exact where
 
-------------------------------------------------------------------------
--- ROUND493 / STRICT R423 FIRST-MISSING SEARCH AFTER SAME-OBJECT AUDIT
---
--- R494 closes the instantaneous normalization
---
---   2 * C_k = literal R439 quadratic-companion cross.
---
--- But the physical dynamics exposes only an abstract
---
---   integrateTo : (Time -> Q) -> Time -> Q,
---
--- whose type contains no congruence or finite-additivity laws.  R495 therefore
--- isolates those standard integration transport laws as an explicit authority.
--- The strict Clay-facing sufficient route is now:
---
---   S0. integration transport authority;
---   S1. integrated R299-normalized companion same-object weld;
---   S2. same-output/same-scale signed spacetime estimate;
---   S3. cutoff-uniform sum of fibre budgets.
---
--- R490/R491 Laplace realization remains an optional producer strategy, not a
--- mandatory prerequisite of R423.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
@@ -36,12 +12,7 @@ import DASHI.Physics.Closure.NSTriadKNStrictFixedOutputCompanionToR423Round492Ex
 import DASHI.Physics.Closure.NSTriadKNR299NormalizedCompanionSameObjectRound494Exact as R494
 import DASHI.Physics.Closure.NSTriadKNIntegrationTransportAuthorityRound495Exact as R495
 
-------------------------------------------------------------------------
--- First-missing strict route.
-------------------------------------------------------------------------
-
 data StrictResidual : Set where
-  missingIntegrationTransportAuthority : StrictResidual
   missingLiteralIntegratedCompanionWeld : StrictResidual
   missingSignedSpacetimeEstimate : StrictResidual
   missingCutoffUniformBudgetSum : StrictResidual
@@ -50,7 +21,6 @@ data StrictResidual : Set where
 record StrictStatus : Set where
   constructor strict-status
   field
-    integrationTransportPresent : Bool
     companionWeldPresent : Bool
     signedEstimatePresent : Bool
     budgetSumPresent : Bool
@@ -58,27 +28,22 @@ record StrictStatus : Set where
 open StrictStatus public
 
 firstStrictResidual : StrictStatus → StrictResidual
-firstStrictResidual (strict-status false weld estimate budget) =
-  missingIntegrationTransportAuthority
-firstStrictResidual (strict-status true false estimate budget) =
+firstStrictResidual (strict-status false estimate budget) =
   missingLiteralIntegratedCompanionWeld
-firstStrictResidual (strict-status true true false budget) =
+firstStrictResidual (strict-status true false budget) =
   missingSignedSpacetimeEstimate
-firstStrictResidual (strict-status true true true false) =
+firstStrictResidual (strict-status true true false) =
   missingCutoffUniformBudgetSum
-firstStrictResidual (strict-status true true true true) =
+firstStrictResidual (strict-status true true true) =
   strictR423ProducerClosed
 
 data StrictMechanism : Set where
-  LookIntegrationTransportAuthority : StrictMechanism
   LookSameObjectTrajectoryCompanionWeld : StrictMechanism
   ThinkSameScaleSignedSpacetime : StrictMechanism
   ThinkCutoffUniformBudgetAggregation : StrictMechanism
   CompileStrictR492ToR423 : StrictMechanism
 
 mechanismFor : StrictResidual → StrictMechanism
-mechanismFor missingIntegrationTransportAuthority =
-  LookIntegrationTransportAuthority
 mechanismFor missingLiteralIntegratedCompanionWeld =
   LookSameObjectTrajectoryCompanionWeld
 mechanismFor missingSignedSpacetimeEstimate = ThinkSameScaleSignedSpacetime
@@ -86,43 +51,34 @@ mechanismFor missingCutoffUniformBudgetSum = ThinkCutoffUniformBudgetAggregation
 mechanismFor strictR423ProducerClosed = CompileStrictR492ToR423
 
 currentStrictStatus : StrictStatus
-currentStrictStatus = strict-status false false false false
+currentStrictStatus = strict-status false false false
 
 currentFirstStrictResidual :
   firstStrictResidual currentStrictStatus
-  ≡ missingIntegrationTransportAuthority
+  ≡ missingLiteralIntegratedCompanionWeld
 currentFirstStrictResidual = refl
 
 currentStrictMechanism :
   mechanismFor (firstStrictResidual currentStrictStatus)
-  ≡ LookIntegrationTransportAuthority
+  ≡ LookSameObjectTrajectoryCompanionWeld
 currentStrictMechanism = refl
 
-afterIntegrationTransportStatus : StrictStatus
-afterIntegrationTransportStatus = strict-status true false false false
-
-afterIntegrationTransportFirstResidual :
-  firstStrictResidual afterIntegrationTransportStatus
-  ≡ missingLiteralIntegratedCompanionWeld
-afterIntegrationTransportFirstResidual = refl
-
 afterCompanionWeldStatus : StrictStatus
-afterCompanionWeldStatus = strict-status true true false false
+afterCompanionWeldStatus = strict-status true false false
 
 afterCompanionWeldFirstResidual :
   firstStrictResidual afterCompanionWeldStatus
   ≡ missingSignedSpacetimeEstimate
 afterCompanionWeldFirstResidual = refl
 
-------------------------------------------------------------------------
--- Route classifications and exact pins.
-------------------------------------------------------------------------
-
 strictR492Disposition : Least.RouteDisposition
 strictR492Disposition = Least.admitted
 
-integrationTransportDisposition : Least.RouteDisposition
-integrationTransportDisposition = Least.admitted
+integrationTransportProducerDisposition : Least.RouteDisposition
+integrationTransportProducerDisposition = Least.admitted
+
+integrationTransportAsMandatoryDisposition : Least.RouteDisposition
+integrationTransportAsMandatoryDisposition = Least.rejected Least.hypothesisInflation
 
 laplaceProducerDisposition : Least.RouteDisposition
 laplaceProducerDisposition = Least.admitted
@@ -131,8 +87,7 @@ laplaceAsMandatoryDisposition : Least.RouteDisposition
 laplaceAsMandatoryDisposition = Least.rejected Least.hypothesisInflation
 
 estimateBeforeCompanionWeldDisposition : Least.RouteDisposition
-estimateBeforeCompanionWeldDisposition =
-  Least.rejected Least.missingPrerequisite
+estimateBeforeCompanionWeldDisposition = Least.rejected Least.missingPrerequisite
 
 r489DirectEstimateRemainsPhysicalLeafAfterWeld :
   R489.round489DirectFirstMissingIsSignedSpacetimeEstimate ≡ true
@@ -162,26 +117,21 @@ r491PhysicalKernelSpecializationNeedsNoNewNSIdentity =
   R491.round491PhysicalCellLaplaceWeldNeedsNoNewNSIdentityIsTrue
 
 data ScalarBudgetWithoutCompanionIdentityPaysR423 : Set where
-
 scalarBudgetCannotReplaceCompanionIdentity :
   ScalarBudgetWithoutCompanionIdentityPaysR423 → ⊥
 scalarBudgetCannotReplaceCompanionIdentity ()
 
-------------------------------------------------------------------------
--- Ledger.
-------------------------------------------------------------------------
-
-round493FirstMissingIsIntegrationTransportAuthority : Bool
-round493FirstMissingIsIntegrationTransportAuthority = true
+round493FirstMissingIsIntegratedCompanionWeld : Bool
+round493FirstMissingIsIntegratedCompanionWeld = true
 
 round493InstantaneousCompanionNormalizationClosed : Bool
 round493InstantaneousCompanionNormalizationClosed = true
 
+round493IntegrationTransportMandatory : Bool
+round493IntegrationTransportMandatory = false
+
 round493LaplaceMandatory : Bool
 round493LaplaceMandatory = false
-
-round493IntegrationTransportAuthorityClosed : Bool
-round493IntegrationTransportAuthorityClosed = false
 
 round493CompanionWeldClosed : Bool
 round493CompanionWeldClosed = false
@@ -198,9 +148,13 @@ round493StrictR423ProducerClosed = false
 round493ClayPromotion : Bool
 round493ClayPromotion = false
 
-round493FirstMissingIsIntegrationTransportAuthorityIsTrue :
-  round493FirstMissingIsIntegrationTransportAuthority ≡ true
-round493FirstMissingIsIntegrationTransportAuthorityIsTrue = refl
+round493FirstMissingIsIntegratedCompanionWeldIsTrue :
+  round493FirstMissingIsIntegratedCompanionWeld ≡ true
+round493FirstMissingIsIntegratedCompanionWeldIsTrue = refl
+
+round493IntegrationTransportMandatoryIsFalse :
+  round493IntegrationTransportMandatory ≡ false
+round493IntegrationTransportMandatoryIsFalse = refl
 
 round493LaplaceMandatoryIsFalse : round493LaplaceMandatory ≡ false
 round493LaplaceMandatoryIsFalse = refl
