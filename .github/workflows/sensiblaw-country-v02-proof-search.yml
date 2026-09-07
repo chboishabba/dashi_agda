@@ -9,6 +9,8 @@ on:
       - 'DASHI/Cognition/PNF/SensibLawCountryCommunityAuthorityAdmissibilityV02Exact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCountryCommunityOutcomeAuthorityPaymentCutV02Exact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCountryCommunityPaymentAcquisitionPlanV02Exact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawGriffithsCustodialOutcomePaymentV02Exact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawGriffithsCustodialAuthorityCutV02Exact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCountryRealisedRepairProofSearchV02Everything.agda'
       - '.github/workflows/sensiblaw-country-v02-proof-search.yml'
 
@@ -31,6 +33,8 @@ jobs:
             DASHI/Cognition/PNF/SensibLawCountryCommunityAuthorityAdmissibilityV02Exact.agda
             DASHI/Cognition/PNF/SensibLawCountryCommunityOutcomeAuthorityPaymentCutV02Exact.agda
             DASHI/Cognition/PNF/SensibLawCountryCommunityPaymentAcquisitionPlanV02Exact.agda
+            DASHI/Cognition/PNF/SensibLawGriffithsCustodialOutcomePaymentV02Exact.agda
+            DASHI/Cognition/PNF/SensibLawGriffithsCustodialAuthorityCutV02Exact.agda
             DASHI/Cognition/PNF/SensibLawCountryRealisedRepairProofSearchV02Everything.agda
           )
           for source in "${sources[@]}"; do
@@ -64,6 +68,16 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Cognition/PNF/SensibLawCountryCommunityPaymentAcquisitionPlanV02Exact.agda
+
+      - name: Type-check Griffiths custodial outcome payment
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawGriffithsCustodialOutcomePaymentV02Exact.agda
+
+      - name: Type-check Griffiths custodial authority cut
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawGriffithsCustodialAuthorityCutV02Exact.agda
 
       - name: Type-check V02 proof-search capstone
         run: >-
