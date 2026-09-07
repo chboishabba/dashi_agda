@@ -46,8 +46,9 @@ observerConflictRoutesToNewCoordinate :
   repairRoute Outcome.observationConflict ≡ Progress.addNewCoordinate
 observerConflictRoutesToNewCoordinate = refl
 
-existingGovernanceObserverRepairBoundary =
-  Governance.deterministicRechartStillCannotRestoreCollapsedPair
+-- The existing governance bridge already proves deterministic recharting cannot
+-- restore a collapsed pair; this scheduler consumes that methodology through
+-- its imported owner rather than duplicating the theorem locally.
 
 data AdverseGovernanceOutcomeMeansMoreIntervention : Set where
 data AuthorityMismatchSolvedByEpistemicEvidenceAlone : Set where
