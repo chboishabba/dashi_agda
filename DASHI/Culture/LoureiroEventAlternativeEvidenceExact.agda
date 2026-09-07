@@ -14,10 +14,10 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data EventAlternativeStatus : Set where
-  institutionalSourceBacked
-  partial
-  notLocated
-  : EventAlternativeStatus
+  institutionalSourceBacked : EventAlternativeStatus
+  partial : EventAlternativeStatus
+  notLocated : EventAlternativeStatus
+
 
 record EventAlternativeReceipt : Set where
   constructor event-alternative-receipt

@@ -9,19 +9,19 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data JewrySourceRole : Set where
-  diasporaJewishLeadershipStatement
-  jewishAntiZionistOrganizationStatement
-  unSpecialRapporteurFinding
-  governmentAntisemitismReport
-  scholarlyHistory
+  diasporaJewishLeadershipStatement : JewrySourceRole
+  jewishAntiZionistOrganizationStatement : JewrySourceRole
+  unSpecialRapporteurFinding : JewrySourceRole
+  governmentAntisemitismReport : JewrySourceRole
+  scholarlyHistory : JewrySourceRole
   dashiExternalityBridge : JewrySourceRole
 
 data JewryProposition : Set where
-  netanyahuGovernmentPoliciesEndangerGlobalJewryWarning
-  israelPoliciesFuelAntisemitismWarning
-  zionismNotInherentJewishCharacteristic
-  antiZionismNotAutomaticallyAntisemitism
-  israeliStateActionsMakeJewsCollectivelyResponsible
+  netanyahuGovernmentPoliciesEndangerGlobalJewryWarning : JewryProposition
+  israelPoliciesFuelAntisemitismWarning : JewryProposition
+  zionismNotInherentJewishCharacteristic : JewryProposition
+  antiZionismNotAutomaticallyAntisemitism : JewryProposition
+  israeliStateActionsMakeJewsCollectivelyResponsible : JewryProposition
   everyJewBearsZionistPoliticalResponsibility : JewryProposition
 
 record JewryReceipt : Set where

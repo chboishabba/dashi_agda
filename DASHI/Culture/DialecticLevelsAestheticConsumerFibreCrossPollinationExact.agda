@@ -36,9 +36,9 @@ import DASHI.Culture.AestheticPerceptionEyeTrackingSourceBoundaryExact as Aesthe
 ------------------------------------------------------------------------
 
 data DialecticComparisonState : Set where
-  hegelContradictionSelfMovementState
-  dashiContradictionResidualReopeningState
-  : DialecticComparisonState
+  hegelContradictionSelfMovementState : DialecticComparisonState
+  dashiContradictionResidualReopeningState : DialecticComparisonState
+
 
 data ContradictionSurface : Set where contradictionPresent : ContradictionSurface
 
@@ -46,9 +46,9 @@ observeContradiction : DialecticComparisonState → ContradictionSurface
 observeContradiction _ = contradictionPresent
 
 data ResidualReopeningOwnership : Set where
-  notOwnedBySelectedHegelPassages
-  ownedByDASHIArchitecture
-  : ResidualReopeningOwnership
+  notOwnedBySelectedHegelPassages : ResidualReopeningOwnership
+  ownedByDASHIArchitecture : ResidualReopeningOwnership
+
 
 residualReopeningConsumer : DialecticComparisonState → ResidualReopeningOwnership
 residualReopeningConsumer hegelContradictionSelfMovementState =
@@ -128,13 +128,13 @@ singleLevelRechartCannotRecoverLine rechart =
 ------------------------------------------------------------------------
 
 data AestheticWorld : Set where
-  sameGazeLowLiking
-  sameGazeHighLiking
-  sameGazeLikingOutsideInstitution
-  sameGazeLikingInsideInstitution
-  sameGazeLikingLowPrice
-  sameGazeLikingHighPrice
-  : AestheticWorld
+  sameGazeLowLiking : AestheticWorld
+  sameGazeHighLiking : AestheticWorld
+  sameGazeLikingOutsideInstitution : AestheticWorld
+  sameGazeLikingInsideInstitution : AestheticWorld
+  sameGazeLikingLowPrice : AestheticWorld
+  sameGazeLikingHighPrice : AestheticWorld
+
 
 data GazeCode : Set where sameGaze : GazeCode
 observeGaze : AestheticWorld → GazeCode

@@ -19,11 +19,11 @@ import DASHI.Core.PairIndexedInformationLossLocusBidiExact as Loss
 ------------------------------------------------------------------------
 
 data EpistemicProgressRoute : Set where
-  narrowLiveSet
-  reformulateQuestion
-  establishIndependentProvenance
-  addNewCoordinate
-  : EpistemicProgressRoute
+  narrowLiveSet : EpistemicProgressRoute
+  reformulateQuestion : EpistemicProgressRoute
+  establishIndependentProvenance : EpistemicProgressRoute
+  addNewCoordinate : EpistemicProgressRoute
+
 
 record EpistemicProgressReceipt : Set where
   constructor epistemic-progress-receipt

@@ -28,28 +28,28 @@ orientationOf adverse = negativeOrientation
 orientationOf indeterminate = degenerateOrientation
 
 data ReopenCoordinate : Set where
-  noReopen
-  reopenObservation
-  reopenFrame
-  reopenPremise
-  reopenRule
-  reopenModel
-  reopenConsumer
-  reopenProvenance
-  reopenAuthorityBoundary
-  : ReopenCoordinate
+  noReopen : ReopenCoordinate
+  reopenObservation : ReopenCoordinate
+  reopenFrame : ReopenCoordinate
+  reopenPremise : ReopenCoordinate
+  reopenRule : ReopenCoordinate
+  reopenModel : ReopenCoordinate
+  reopenConsumer : ReopenCoordinate
+  reopenProvenance : ReopenCoordinate
+  reopenAuthorityBoundary : ReopenCoordinate
+
 
 data OutcomeDiagnosis : Set where
-  observationConflict
-  frameConflict
-  premiseConflict
-  ruleConflict
-  modelConflict
-  consumerMismatch
-  provenanceConflict
-  authorityMismatch
-  insufficientResolution
-  : OutcomeDiagnosis
+  observationConflict : OutcomeDiagnosis
+  frameConflict : OutcomeDiagnosis
+  premiseConflict : OutcomeDiagnosis
+  ruleConflict : OutcomeDiagnosis
+  modelConflict : OutcomeDiagnosis
+  consumerMismatch : OutcomeDiagnosis
+  provenanceConflict : OutcomeDiagnosis
+  authorityMismatch : OutcomeDiagnosis
+  insufficientResolution : OutcomeDiagnosis
+
 
 reopenFor : ExperimentalOutcome → OutcomeDiagnosis → ReopenCoordinate
 reopenFor supportive observationConflict = noReopen

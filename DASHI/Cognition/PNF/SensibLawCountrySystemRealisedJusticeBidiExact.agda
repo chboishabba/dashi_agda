@@ -31,26 +31,26 @@ import DASHI.Culture.IndigenousKnowledgeStoryTwoEyedSeeingBidiExact as IK
 ------------------------------------------------------------------------
 
 data SystemMoment : Set where
-  terraNulliusFoundationalOperation
-  maboDoctrinalCorrection
-  nativeTitleMediatedRecognition
-  effectiveRemedyImplementation
-  : SystemMoment
+  terraNulliusFoundationalOperation : SystemMoment
+  maboDoctrinalCorrection : SystemMoment
+  nativeTitleMediatedRecognition : SystemMoment
+  effectiveRemedyImplementation : SystemMoment
+
 
 data JuridicalRelationState : Set where
-  foundationalJuridicalErasure
-  doctrinalRecognitionWithoutEqualSovereignty
-  crownMediatedRecognitionResidual
-  materialJusticeResidualLive
-  relationTransformed
-  : JuridicalRelationState
+  foundationalJuridicalErasure : JuridicalRelationState
+  doctrinalRecognitionWithoutEqualSovereignty : JuridicalRelationState
+  crownMediatedRecognitionResidual : JuridicalRelationState
+  materialJusticeResidualLive : JuridicalRelationState
+  relationTransformed : JuridicalRelationState
+
 
 data CorrectionDepth : Set where
-  noCorrection
-  doctrinalCorrection
-  implementationPartialCorrection
-  materialRelationTransformation
-  : CorrectionDepth
+  noCorrection : CorrectionDepth
+  doctrinalCorrection : CorrectionDepth
+  implementationPartialCorrection : CorrectionDepth
+  materialRelationTransformation : CorrectionDepth
+
 
 relationState : SystemMoment → JuridicalRelationState
 relationState terraNulliusFoundationalOperation = foundationalJuridicalErasure
@@ -151,11 +151,11 @@ currentCorrectionWithoutFullRepair = correction-without-full-repair
 ------------------------------------------------------------------------
 
 data RemedyKnowledgeStrand : Set where
-  stateImplementationStrand
-  affectedCommunityOutcomeStrand
-  independentMonitoringStrand
-  treatyBodyAssessmentStrand
-  : RemedyKnowledgeStrand
+  stateImplementationStrand : RemedyKnowledgeStrand
+  affectedCommunityOutcomeStrand : RemedyKnowledgeStrand
+  independentMonitoringStrand : RemedyKnowledgeStrand
+  treatyBodyAssessmentStrand : RemedyKnowledgeStrand
+
 
 record BraidedRemedyAssessment : Set where
   constructor braided-remedy-assessment
@@ -207,23 +207,23 @@ administrativeConsultationDoesNotRecoverCommunityOutcome =
 ------------------------------------------------------------------------
 
 data OperationalJusticeCoordinate : Set where
-  juridicalHumanityAndStanding
-  indigenousLawAuthorityContinuity
-  equalSovereignRelation
-  landAndCountryControl
-  materialSafety
-  culturalContinuity
-  compensationAndReparation
-  communityDefinedNeedSatisfaction
-  correctionAndPrevention
-  : OperationalJusticeCoordinate
+  juridicalHumanityAndStanding : OperationalJusticeCoordinate
+  indigenousLawAuthorityContinuity : OperationalJusticeCoordinate
+  equalSovereignRelation : OperationalJusticeCoordinate
+  landAndCountryControl : OperationalJusticeCoordinate
+  materialSafety : OperationalJusticeCoordinate
+  culturalContinuity : OperationalJusticeCoordinate
+  compensationAndReparation : OperationalJusticeCoordinate
+  communityDefinedNeedSatisfaction : OperationalJusticeCoordinate
+  correctionAndPrevention : OperationalJusticeCoordinate
+
 
 data OperationalJusticeState : Set where
-  realised
-  partiallyRealised
-  residualOpen
-  sourceStateUnresolved
-  : OperationalJusticeState
+  realised : OperationalJusticeState
+  partiallyRealised : OperationalJusticeState
+  residualOpen : OperationalJusticeState
+  sourceStateUnresolved : OperationalJusticeState
+
 
 currentOperationalJusticeState : OperationalJusticeCoordinate → OperationalJusticeState
 currentOperationalJusticeState juridicalHumanityAndStanding = partiallyRealised
@@ -261,14 +261,14 @@ compensationRemainsOperationalResidual = refl
 ------------------------------------------------------------------------
 
 data OperationalJusticeProducer : Set where
-  indigenousSovereigntyRelationProducer
-  landReturnOrControlProducer
-  compensationExecutionProducer
-  communityDefinedNeedsProducer
-  realisedSafetyOutcomeProducer
-  culturalContinuityOutcomeProducer
-  correctionLoopProducer
-  : OperationalJusticeProducer
+  indigenousSovereigntyRelationProducer : OperationalJusticeProducer
+  landReturnOrControlProducer : OperationalJusticeProducer
+  compensationExecutionProducer : OperationalJusticeProducer
+  communityDefinedNeedsProducer : OperationalJusticeProducer
+  realisedSafetyOutcomeProducer : OperationalJusticeProducer
+  culturalContinuityOutcomeProducer : OperationalJusticeProducer
+  correctionLoopProducer : OperationalJusticeProducer
+
 
 producerFor : OperationalJusticeCoordinate → OperationalJusticeProducer
 producerFor juridicalHumanityAndStanding = indigenousSovereigntyRelationProducer

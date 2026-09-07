@@ -63,11 +63,11 @@ open FactRefinement public
 ------------------------------------------------------------------------
 
 data RefinementCarrier : Set where
-  ruleCarrier
-  sourceCarrier
-  factCarrier
-  mixedCarrier
-  : RefinementCarrier
+  ruleCarrier : RefinementCarrier
+  sourceCarrier : RefinementCarrier
+  factCarrier : RefinementCarrier
+  mixedCarrier : RefinementCarrier
+
 
 record LegalRefinementReceipt
   (oldGraph newGraph : Algebra.LegalGraph)
@@ -93,12 +93,12 @@ open LegalRefinementReceipt public
 ------------------------------------------------------------------------
 
 data RerunDisposition : Set where
-  newlyReachable
-  stillReachable
-  newlyDefeated
-  stillUnreachable
-  unresolvedAfterRefinement
-  : RerunDisposition
+  newlyReachable : RerunDisposition
+  stillReachable : RerunDisposition
+  newlyDefeated : RerunDisposition
+  stillUnreachable : RerunDisposition
+  unresolvedAfterRefinement : RerunDisposition
+
 
 record LegalRerunResult
   (oldGraph newGraph : Algebra.LegalGraph)

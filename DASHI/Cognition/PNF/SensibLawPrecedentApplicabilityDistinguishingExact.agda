@@ -23,16 +23,16 @@ import DASHI.Cognition.PNF.SensibLawUniversalLegalRuleAlgebraExact as Algebra
 ------------------------------------------------------------------------
 
 data JudgmentPropositionRole : Set where
-  ratio
-  dictum
-  adjudicatedFact
-  policyReason
-  partySubmission
-  concurrence
-  dissent
-  proceduralHolding
-  remedyHolding
-  : JudgmentPropositionRole
+  ratio : JudgmentPropositionRole
+  dictum : JudgmentPropositionRole
+  adjudicatedFact : JudgmentPropositionRole
+  policyReason : JudgmentPropositionRole
+  partySubmission : JudgmentPropositionRole
+  concurrence : JudgmentPropositionRole
+  dissent : JudgmentPropositionRole
+  proceduralHolding : JudgmentPropositionRole
+  remedyHolding : JudgmentPropositionRole
+
 
 record PrecedentProposition : Set where
   constructor precedent-proposition
@@ -55,15 +55,15 @@ open PrecedentProposition public
 ------------------------------------------------------------------------
 
 data LaterTreatment : Set where
-  followed
-  applied
-  distinguished
-  doubted
-  disapproved
-  overruled
-  supersededByStatute
-  notYetClassified
-  : LaterTreatment
+  followed : LaterTreatment
+  applied : LaterTreatment
+  distinguished : LaterTreatment
+  doubted : LaterTreatment
+  disapproved : LaterTreatment
+  overruled : LaterTreatment
+  supersededByStatute : LaterTreatment
+  notYetClassified : LaterTreatment
+
 
 record TreatmentReceipt (p : PrecedentProposition) : Set where
   constructor treatment-receipt

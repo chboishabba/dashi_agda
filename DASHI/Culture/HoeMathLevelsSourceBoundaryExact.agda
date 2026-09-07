@@ -30,7 +30,7 @@ hoeMathChartSource = Source.mkNoDOISource
   Source.publicAttribution
 
 data LevelsComponent : Set where
-  simplifiedNineLevelPresentation spiralDynamicsComponent developmentalLevelsComponent
+  simplifiedNineLevelPresentation spiralDynamicsComponent developmentalLevelsComponent : LevelsComponent
   aqalQuadrants aqalLevels aqalLines aqalStates aqalTypes : LevelsComponent
 
 data ComponentOwnership : Set where
@@ -47,11 +47,11 @@ ownership aqalStates = underlyingNamedTradition
 ownership aqalTypes = underlyingNamedTradition
 
 data LevelsCoordinate : Set where
-  individualMind culture objectivePhysicalForm socialSystem developmentalLine
+  individualMind culture objectivePhysicalForm socialSystem developmentalLine : LevelsCoordinate
   stateMode typeVariation viewpointQuadrant : LevelsCoordinate
 
 data DevelopmentRelation : Set where
-  sequentialStageRelation independentlyDevelopingLine fluctuatingStateRelation
+  sequentialStageRelation independentlyDevelopingLine fluctuatingStateRelation : DevelopmentRelation
   orthogonalTypeRelation perspectiveRelation : DevelopmentRelation
 
 coordinateRelation : LevelsCoordinate → DevelopmentRelation

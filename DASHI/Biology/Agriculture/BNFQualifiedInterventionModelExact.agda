@@ -23,22 +23,22 @@ import DASHI.Cognition.PNF.SensibLawMaboTwoLegalOrderFibreExact as TwoOrder
 ------------------------------------------------------------------------
 
 data BNFConsumerQuestion : Set where
-  replayNationalAvoidedUreaExpenditure
-  estimateNationalAvoidedCO2e
-  predictLocalSoybeanYield
-  estimateFarmNetBenefit
-  predictEcologicalResponse
-  decideLandscapeIntervention
-  decideCountryAffectingIntervention
-  : BNFConsumerQuestion
+  replayNationalAvoidedUreaExpenditure : BNFConsumerQuestion
+  estimateNationalAvoidedCO2e : BNFConsumerQuestion
+  predictLocalSoybeanYield : BNFConsumerQuestion
+  estimateFarmNetBenefit : BNFConsumerQuestion
+  predictEcologicalResponse : BNFConsumerQuestion
+  decideLandscapeIntervention : BNFConsumerQuestion
+  decideCountryAffectingIntervention : BNFConsumerQuestion
+
 
 data BNFContext : Set where
-  brazilNational
-  stateRegional
-  localFarm
-  landscapeContext
-  countryAffectingContext
-  : BNFContext
+  brazilNational : BNFContext
+  stateRegional : BNFContext
+  localFarm : BNFContext
+  landscapeContext : BNFContext
+  countryAffectingContext : BNFContext
+
 
 data SpatialScale : Set where
   nationalScale stateScale farmScale landscapeScale : SpatialScale
@@ -47,10 +47,10 @@ data TemporalWindow : Set where
   cropSeason multiSeason planningHorizon : TemporalWindow
 
 data BNFIntervention : Set where
-  inoculateBradyrhizobium
-  noEffectiveBNF
-  mineralNSubstitution
-  : BNFIntervention
+  inoculateBradyrhizobium : BNFIntervention
+  noEffectiveBNF : BNFIntervention
+  mineralNSubstitution : BNFIntervention
+
 
 ------------------------------------------------------------------------
 -- Separate input carriers for each consumer family.
@@ -142,20 +142,20 @@ open AuthorityFibre public
 ------------------------------------------------------------------------
 
 data RequirementCoordinate : Set where
-  sourceIdentity
-  inputVersionIdentity
-  modelEquationIdentity
-  exactReplay
-  biologicalAdequacy
-  localSoilClimateAdequacy
-  farmUnitEconomics
-  uncertaintyAdequacy
-  climateAccountingAdequacy
-  ecologicalAdequacy
-  hydrologyAdequacy
-  distributionAdequacy
-  authorityAdequacy
-  : RequirementCoordinate
+  sourceIdentity : RequirementCoordinate
+  inputVersionIdentity : RequirementCoordinate
+  modelEquationIdentity : RequirementCoordinate
+  exactReplay : RequirementCoordinate
+  biologicalAdequacy : RequirementCoordinate
+  localSoilClimateAdequacy : RequirementCoordinate
+  farmUnitEconomics : RequirementCoordinate
+  uncertaintyAdequacy : RequirementCoordinate
+  climateAccountingAdequacy : RequirementCoordinate
+  ecologicalAdequacy : RequirementCoordinate
+  hydrologyAdequacy : RequirementCoordinate
+  distributionAdequacy : RequirementCoordinate
+  authorityAdequacy : RequirementCoordinate
+
 
 requiredFor : BNFConsumerQuestion → RequirementCoordinate → Bool
 requiredFor replayNationalAvoidedUreaExpenditure sourceIdentity = true

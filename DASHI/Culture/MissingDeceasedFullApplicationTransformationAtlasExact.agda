@@ -12,11 +12,11 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data AtlasStatus : Set where
-  atlasSourceBacked
-  atlasPartial
-  atlasNotLocated
-  atlasNotApplicable
-  : AtlasStatus
+  atlasSourceBacked : AtlasStatus
+  atlasPartial : AtlasStatus
+  atlasNotLocated : AtlasStatus
+  atlasNotApplicable : AtlasStatus
+
 
 record ApplicationAtlasRow : Set where
   constructor application-atlas-row

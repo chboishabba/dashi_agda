@@ -24,13 +24,13 @@ import DASHI.Culture.IndigenousKnowledgeStoryTwoEyedSeeingBidiExact as IK
 ------------------------------------------------------------------------
 
 data CalibrationState : Set where
-  sourceMappedPositive
-  sourceMappedPartial
-  sourceMappedNegativePressure
-  structuralConstraintMapped
-  comparatorOnly
-  liveResidual
-  : CalibrationState
+  sourceMappedPositive : CalibrationState
+  sourceMappedPartial : CalibrationState
+  sourceMappedNegativePressure : CalibrationState
+  structuralConstraintMapped : CalibrationState
+  comparatorOnly : CalibrationState
+  liveResidual : CalibrationState
+
 
 ------------------------------------------------------------------------
 -- Native-title determination coverage != control != sovereignty.
@@ -156,17 +156,17 @@ communityAuthorityBearingStatusV02 = structuralConstraintMapped
 ------------------------------------------------------------------------
 
 data JuukanRepairState : Set where
-  strongerLegislativeRepairInForce
-  strongerLegislativeRepairRepealed
-  : JuukanRepairState
+  strongerLegislativeRepairInForce : JuukanRepairState
+  strongerLegislativeRepairRepealed : JuukanRepairState
+
 
 data JuukanDeclarationSurface : Set where
   postJuukanProtectionCommitment : JuukanDeclarationSurface
 
 data JuukanRealisedCorrection : Set where
-  strongerCorrectionCapacityInForce
-  revertedProtectionArchitectureWithContinuingDestructionReports
-  : JuukanRealisedCorrection
+  strongerCorrectionCapacityInForce : JuukanRealisedCorrection
+  revertedProtectionArchitectureWithContinuingDestructionReports : JuukanRealisedCorrection
+
 
 juukanDeclaration : JuukanRepairState → JuukanDeclarationSurface
 juukanDeclaration _ = postJuukanProtectionCommitment

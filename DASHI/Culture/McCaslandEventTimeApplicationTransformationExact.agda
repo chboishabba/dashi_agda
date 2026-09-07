@@ -64,10 +64,9 @@ canonicalMcCaslandApplicationBoundary : McCaslandApplicationBoundary
 canonicalMcCaslandApplicationBoundary = mccasland-application-boundary false refl false refl false refl true refl
 
 data McCaslandApplicationReverseTarget : Set where
-  acquireEventTimeProgrammeList
-  acquireIRADOrTechnologyPortfolio
-  acquireConfigurationOrIntegrationRole
-  acquireProgrammeAccessReceipt
-  acquireNamedSuccessorOrHandover
-  acquireObserverOrReviewSurface
-  : McCaslandApplicationReverseTarget
+  acquireEventTimeProgrammeList : McCaslandApplicationReverseTarget
+  acquireIRADOrTechnologyPortfolio : McCaslandApplicationReverseTarget
+  acquireConfigurationOrIntegrationRole : McCaslandApplicationReverseTarget
+  acquireProgrammeAccessReceipt : McCaslandApplicationReverseTarget
+  acquireNamedSuccessorOrHandover : McCaslandApplicationReverseTarget
+  acquireObserverOrReviewSurface : McCaslandApplicationReverseTarget

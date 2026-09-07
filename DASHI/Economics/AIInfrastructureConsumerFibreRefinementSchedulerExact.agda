@@ -14,12 +14,12 @@ import DASHI.Economics.AIInfrastructureConsumerIndexedFibreAdequacyExact as AI
 ------------------------------------------------------------------------
 
 data AIProducer : Set where
-  refinancingContextProducer
-  financingHistoryProducer
-  residualAssetValueProducer
-  futureOptionalityProducer
-  lossIncidenceProducer
-  : AIProducer
+  refinancingContextProducer : AIProducer
+  financingHistoryProducer : AIProducer
+  residualAssetValueProducer : AIProducer
+  futureOptionalityProducer : AIProducer
+  lossIncidenceProducer : AIProducer
+
 
 producerForCoordinate : AI.AIFibreMissingCoordinate → AIProducer
 producerForCoordinate AI.refinancingContextCoordinate = refinancingContextProducer
@@ -80,12 +80,12 @@ incidenceResidual = Scheduler.consumerRefinementResidual
 ------------------------------------------------------------------------
 
 data EmpiricalProducerSurface : Set where
-  refinancingSpreadCoverageAndLiquidityPanel
-  financingTrajectoryAndWriteDownPanel
-  residualRentalValueAndForcedSalePanel
-  optionalityAndRecontractingPanel
-  creditorEquityPublicAndCommunityIncidencePanel
-  : EmpiricalProducerSurface
+  refinancingSpreadCoverageAndLiquidityPanel : EmpiricalProducerSurface
+  financingTrajectoryAndWriteDownPanel : EmpiricalProducerSurface
+  residualRentalValueAndForcedSalePanel : EmpiricalProducerSurface
+  optionalityAndRecontractingPanel : EmpiricalProducerSurface
+  creditorEquityPublicAndCommunityIncidencePanel : EmpiricalProducerSurface
+
 
 empiricalProducerFor : AIProducer → EmpiricalProducerSurface
 empiricalProducerFor refinancingContextProducer = refinancingSpreadCoverageAndLiquidityPanel

@@ -25,11 +25,11 @@ import DASHI.Culture.PhilosophyClaimProvenanceHistoryBidiExact as Philosophy
 ------------------------------------------------------------------------
 
 data AxisAppraisal : Set where
-  retreatSupportedBySelectedPrimarySources
-  retreatCounterevidencePresent
-  criticalMovePresentButRetreatOpen
-  insufficientPrimaryCorpus
-  : AxisAppraisal
+  retreatSupportedBySelectedPrimarySources : AxisAppraisal
+  retreatCounterevidencePresent : AxisAppraisal
+  criticalMovePresentButRetreatOpen : AxisAppraisal
+  insufficientPrimaryCorpus : AxisAppraisal
+
 
 data Thinker : Set where foucault derrida : Thinker
 data Axis : Set where class imperialism materialismScience reason : Axis

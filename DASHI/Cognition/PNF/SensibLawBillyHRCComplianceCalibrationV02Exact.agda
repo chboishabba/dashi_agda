@@ -22,19 +22,19 @@ import DASHI.Cognition.PNF.SensibLawCountryRealisedRepairSourceAtlasV02Exact as 
 ------------------------------------------------------------------------
 
 data ComplianceEvidenceKind : Set where
-  peerReviewedGlobalTreatyBodyDataset
-  officialAustraliaQualitativeAssessment
-  officialHRCFollowUpProcedure
-  separateUPRComparator
-  historicalSecondaryAustraliaEstimate
-  : ComplianceEvidenceKind
+  peerReviewedGlobalTreatyBodyDataset : ComplianceEvidenceKind
+  officialAustraliaQualitativeAssessment : ComplianceEvidenceKind
+  officialHRCFollowUpProcedure : ComplianceEvidenceKind
+  separateUPRComparator : ComplianceEvidenceKind
+  historicalSecondaryAustraliaEstimate : ComplianceEvidenceKind
+
 
 data PopulationRelation : Set where
-  sameInstitutionalMechanism
-  overlappingTreatyBodyRegime
-  separateUNReviewMechanism
-  historicalNonCurrentComparator
-  : PopulationRelation
+  sameInstitutionalMechanism : PopulationRelation
+  overlappingTreatyBodyRegime : PopulationRelation
+  separateUNReviewMechanism : PopulationRelation
+  historicalNonCurrentComparator : PopulationRelation
+
 
 record GlobalReferenceClassReceipt : Set where
   constructor global-reference-class-receipt
@@ -221,19 +221,19 @@ historicalT0HadNoNumericProbabilitySource = refl
 ------------------------------------------------------------------------
 
 data ProbabilityQuestion : Set where
-  globalTreatyBodyReferenceRate
-  currentAustraliaHRCFullComplianceRate
-  billyFullReparationProbability
-  billyAdequateCompensationProbability
-  : ProbabilityQuestion
+  globalTreatyBodyReferenceRate : ProbabilityQuestion
+  currentAustraliaHRCFullComplianceRate : ProbabilityQuestion
+  billyFullReparationProbability : ProbabilityQuestion
+  billyAdequateCompensationProbability : ProbabilityQuestion
+
 
 data CalibrationWork : Set where
-  referenceRateAvailable
-  recoverAustraliaHRCSubset
-  recoverBillyCurrentFollowUpOutcome
-  operationaliseCommunityDefinedClosure
-  buildCaseConditionedForecast
-  : CalibrationWork
+  referenceRateAvailable : CalibrationWork
+  recoverAustraliaHRCSubset : CalibrationWork
+  recoverBillyCurrentFollowUpOutcome : CalibrationWork
+  operationaliseCommunityDefinedClosure : CalibrationWork
+  buildCaseConditionedForecast : CalibrationWork
+
 
 nextCalibrationWork : ProbabilityQuestion → CalibrationWork
 nextCalibrationWork globalTreatyBodyReferenceRate = referenceRateAvailable

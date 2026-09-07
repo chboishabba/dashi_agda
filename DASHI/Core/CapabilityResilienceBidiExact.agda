@@ -12,26 +12,26 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ResilienceCoordinate : Set where
-  namedSuccessor
-  overlappingTeam
-  standardOperatingProcedures
-  notebooksOrRepositories
-  configurationManagement
-  calibrationArchive
-  qualificationArchive
-  failureHistoryArchive
-  hardwareCustodyContinuity
-  accessTransfer
-  crossTraining
-  externalReplication
-  : ResilienceCoordinate
+  namedSuccessor : ResilienceCoordinate
+  overlappingTeam : ResilienceCoordinate
+  standardOperatingProcedures : ResilienceCoordinate
+  notebooksOrRepositories : ResilienceCoordinate
+  configurationManagement : ResilienceCoordinate
+  calibrationArchive : ResilienceCoordinate
+  qualificationArchive : ResilienceCoordinate
+  failureHistoryArchive : ResilienceCoordinate
+  hardwareCustodyContinuity : ResilienceCoordinate
+  accessTransfer : ResilienceCoordinate
+  crossTraining : ResilienceCoordinate
+  externalReplication : ResilienceCoordinate
+
 
 data ResilienceState : Set where
-  sourceBacked
-  partial
-  notLocated
-  knownAbsent
-  : ResilienceState
+  sourceBacked : ResilienceState
+  partial : ResilienceState
+  notLocated : ResilienceState
+  knownAbsent : ResilienceState
+
 
 record ResilienceReceipt : Set where
   constructor resilience-receipt
@@ -55,19 +55,19 @@ record CapabilityResilienceProfile : Set where
 open CapabilityResilienceProfile public
 
 data ResilienceReverseTarget : Set where
-  acquireNamedSuccessor
-  acquireOverlapPeriod
-  acquireSOPCoverage
-  acquireNotebookRepositoryCustody
-  acquireConfigManagementHistory
-  acquireCalibrationArchive
-  acquireQualificationArchive
-  acquireFailureArchive
-  acquireHardwareTransfer
-  acquireAccessTransfer
-  acquireCrossTrainingEvidence
-  acquireExternalReproduction
-  : ResilienceReverseTarget
+  acquireNamedSuccessor : ResilienceReverseTarget
+  acquireOverlapPeriod : ResilienceReverseTarget
+  acquireSOPCoverage : ResilienceReverseTarget
+  acquireNotebookRepositoryCustody : ResilienceReverseTarget
+  acquireConfigManagementHistory : ResilienceReverseTarget
+  acquireCalibrationArchive : ResilienceReverseTarget
+  acquireQualificationArchive : ResilienceReverseTarget
+  acquireFailureArchive : ResilienceReverseTarget
+  acquireHardwareTransfer : ResilienceReverseTarget
+  acquireAccessTransfer : ResilienceReverseTarget
+  acquireCrossTrainingEvidence : ResilienceReverseTarget
+  acquireExternalReproduction : ResilienceReverseTarget
+
 
 record ResilienceBoundary : Set where
   constructor resilience-boundary

@@ -15,15 +15,15 @@ import DASHI.Core.MechanismModelDiscriminationExact as Core
 ------------------------------------------------------------------------
 
 data CircumstanceClass : Set where
-  biochemicalMechanism
-  engineeringFaultDiagnosis
-  softwareFailureDiagnosis
-  ecologicalCausalAttribution
-  financialModelDiscrimination
-  legalCausalExplanation
-  historicalProvenanceExplanation
-  sensorFusionDiagnosis
-  : CircumstanceClass
+  biochemicalMechanism : CircumstanceClass
+  engineeringFaultDiagnosis : CircumstanceClass
+  softwareFailureDiagnosis : CircumstanceClass
+  ecologicalCausalAttribution : CircumstanceClass
+  financialModelDiscrimination : CircumstanceClass
+  legalCausalExplanation : CircumstanceClass
+  historicalProvenanceExplanation : CircumstanceClass
+  sensorFusionDiagnosis : CircumstanceClass
+
 
 record CircumstanceTemplate : Set where
   constructor circumstanceTemplate

@@ -27,29 +27,29 @@ import DASHI.Culture.KimmererTwoEyedSeeingInterpretationBoundaryExact as TwoEyed
 ------------------------------------------------------------------------
 
 data CountryEcologicalCoordinate : Set where
-  carbonStorageAndSequestration
-  avoidedEmissions
-  waterRetentionAndQuality
-  biodiversityAndHabitat
-  soilIntegrity
-  fireAndDisturbanceRegime
-  countryRelationContinuity
-  culturalContinuity
-  intergenerationalBurden
-  collectiveDecisionAuthority
-  reciprocalObligationRealisation
-  materialLivelihood
-  publicFiscalTransfer
-  privateMarketRevenue
-  : CountryEcologicalCoordinate
+  carbonStorageAndSequestration : CountryEcologicalCoordinate
+  avoidedEmissions : CountryEcologicalCoordinate
+  waterRetentionAndQuality : CountryEcologicalCoordinate
+  biodiversityAndHabitat : CountryEcologicalCoordinate
+  soilIntegrity : CountryEcologicalCoordinate
+  fireAndDisturbanceRegime : CountryEcologicalCoordinate
+  countryRelationContinuity : CountryEcologicalCoordinate
+  culturalContinuity : CountryEcologicalCoordinate
+  intergenerationalBurden : CountryEcologicalCoordinate
+  collectiveDecisionAuthority : CountryEcologicalCoordinate
+  reciprocalObligationRealisation : CountryEcologicalCoordinate
+  materialLivelihood : CountryEcologicalCoordinate
+  publicFiscalTransfer : CountryEcologicalCoordinate
+  privateMarketRevenue : CountryEcologicalCoordinate
+
 
 data CoordinateObservationState : Set where
-  realisedPositive
-  realisedNegative
-  mixedOrContextDependent
-  unmeasured
-  sourceSpecific
-  : CoordinateObservationState
+  realisedPositive : CoordinateObservationState
+  realisedNegative : CoordinateObservationState
+  mixedOrContextDependent : CoordinateObservationState
+  unmeasured : CoordinateObservationState
+  sourceSpecific : CoordinateObservationState
+
 
 record MultiCoordinateOutcome : Set where
   constructor multi-coordinate-outcome
@@ -67,17 +67,17 @@ open MultiCoordinateOutcome public
 ------------------------------------------------------------------------
 
 data FineCountryState : Set where
-  sameRevenueHighStewardship
-  sameRevenueLowStewardship
-  : FineCountryState
+  sameRevenueHighStewardship : FineCountryState
+  sameRevenueLowStewardship : FineCountryState
+
 
 data RevenueSurface : Set where
   sameRevenueObservation : RevenueSurface
 
 data CountryStewardshipState : Set where
-  authorityBearingEcologicalContinuity
-  authorityPoorEcologicalDegradation
-  : CountryStewardshipState
+  authorityBearingEcologicalContinuity : CountryStewardshipState
+  authorityPoorEcologicalDegradation : CountryStewardshipState
+
 
 revenueObserver : FineCountryState → RevenueSurface
 revenueObserver _ = sameRevenueObservation
@@ -124,14 +124,14 @@ data CarbonSurface : Set where
   sameCarbonObservation : CarbonSurface
 
 data CountryAuthorityState : Set where
-  communityAuthorityPresent
-  communityAuthorityAbsent
-  : CountryAuthorityState
+  communityAuthorityPresent : CountryAuthorityState
+  communityAuthorityAbsent : CountryAuthorityState
+
 
 data CarbonAuthorityState : Set where
-  sameCarbonWithAuthority
-  sameCarbonWithoutAuthority
-  : CarbonAuthorityState
+  sameCarbonWithAuthority : CarbonAuthorityState
+  sameCarbonWithoutAuthority : CarbonAuthorityState
+
 
 carbonObserver : CarbonAuthorityState → CarbonSurface
 carbonObserver _ = sameCarbonObservation

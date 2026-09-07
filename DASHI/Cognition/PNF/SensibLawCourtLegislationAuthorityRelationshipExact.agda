@@ -32,25 +32,25 @@ constitutionAuthority = Edge.source-identity
   Edge.constitutionalText
 
 data Institution : Set where
-  constitution
-  parliament
-  court
-  executive
-  commonLaw
-  statuteBook
-  : Institution
+  constitution : Institution
+  parliament : Institution
+  court : Institution
+  executive : Institution
+  commonLaw : Institution
+  statuteBook : Institution
+
 
 data InstitutionalRelationKind : Set where
-  grantsOrLimitsPower
-  legislates
-  interprets
-  applies
-  invalidatesForConstitutionalInconsistency
-  developsCommonLaw
-  modifiesOrDisplacesCommonLaw
-  systematisesRecognisedRight
-  supervisesByAppeal
-  : InstitutionalRelationKind
+  grantsOrLimitsPower : InstitutionalRelationKind
+  legislates : InstitutionalRelationKind
+  interprets : InstitutionalRelationKind
+  applies : InstitutionalRelationKind
+  invalidatesForConstitutionalInconsistency : InstitutionalRelationKind
+  developsCommonLaw : InstitutionalRelationKind
+  modifiesOrDisplacesCommonLaw : InstitutionalRelationKind
+  systematisesRecognisedRight : InstitutionalRelationKind
+  supervisesByAppeal : InstitutionalRelationKind
+
 
 record InstitutionalRelation : Set where
   constructor institutional-relation
@@ -112,12 +112,12 @@ nativeTitleActAfterMabo = institutional-relation
 ------------------------------------------------------------------------
 
 data FootholdKind : Set where
-  constitutionalFoothold
-  statutoryConstructionFoothold
-  commonLawRecognitionFoothold
-  incrementalCommonLawFoothold
-  noCurrentJudicialFootholdShown
-  : FootholdKind
+  constitutionalFoothold : FootholdKind
+  statutoryConstructionFoothold : FootholdKind
+  commonLawRecognitionFoothold : FootholdKind
+  incrementalCommonLawFoothold : FootholdKind
+  noCurrentJudicialFootholdShown : FootholdKind
+
 
 record JudicialRouteAvailability : Set where
   constructor judicial-route-availability

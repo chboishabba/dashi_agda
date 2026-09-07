@@ -191,25 +191,25 @@ billyDirectDomesticExecutionWritUnavailableByDefault = refl
 ------------------------------------------------------------------------
 
 data RemedyRealisationAxis : Set where
-  meritsFinding
-  remedySpecification
-  directDomesticCompulsion
-  domesticImplementationCapacity
-  politicalActuation
-  communityAuthority
-  communityDefinedOutcome
-  independentMonitoring
-  correctiveRevision
-  terminalRealisedRepair
-  : RemedyRealisationAxis
+  meritsFinding : RemedyRealisationAxis
+  remedySpecification : RemedyRealisationAxis
+  directDomesticCompulsion : RemedyRealisationAxis
+  domesticImplementationCapacity : RemedyRealisationAxis
+  politicalActuation : RemedyRealisationAxis
+  communityAuthority : RemedyRealisationAxis
+  communityDefinedOutcome : RemedyRealisationAxis
+  independentMonitoring : RemedyRealisationAxis
+  correctiveRevision : RemedyRealisationAxis
+  terminalRealisedRepair : RemedyRealisationAxis
+
 
 data AxisState : Set where
-  paid
-  presentButConditional
-  absentByDefault
-  open
-  sourceOutcomeRequired
-  : AxisState
+  paid : AxisState
+  presentButConditional : AxisState
+  absentByDefault : AxisState
+  open : AxisState
+  sourceOutcomeRequired : AxisState
+
 
 billyCurrentActuationState : RemedyRealisationAxis → AxisState
 billyCurrentActuationState meritsFinding = paid

@@ -12,32 +12,32 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ReconstructionCoordinate : Set where
-  namedSuccessor
-  overlappingTeam
-  preservedApparatus
-  preservedRepository
-  preservedNotebooks
-  preservedCalibration
-  preservedQualification
-  preservedFailureHistory
-  preservedConfiguration
-  preservedAccess
-  crossTraining
-  documentedProcedure
-  duplicateCapability
-  rehiring
-  recalibration
-  requalification
-  rediscovery
-  scheduleSlip
-  : ReconstructionCoordinate
+  namedSuccessor : ReconstructionCoordinate
+  overlappingTeam : ReconstructionCoordinate
+  preservedApparatus : ReconstructionCoordinate
+  preservedRepository : ReconstructionCoordinate
+  preservedNotebooks : ReconstructionCoordinate
+  preservedCalibration : ReconstructionCoordinate
+  preservedQualification : ReconstructionCoordinate
+  preservedFailureHistory : ReconstructionCoordinate
+  preservedConfiguration : ReconstructionCoordinate
+  preservedAccess : ReconstructionCoordinate
+  crossTraining : ReconstructionCoordinate
+  documentedProcedure : ReconstructionCoordinate
+  duplicateCapability : ReconstructionCoordinate
+  rehiring : ReconstructionCoordinate
+  recalibration : ReconstructionCoordinate
+  requalification : ReconstructionCoordinate
+  rediscovery : ReconstructionCoordinate
+  scheduleSlip : ReconstructionCoordinate
+
 
 data ReconstructionCostClass : Set where
-  low
-  moderate
-  high
-  unknown
-  : ReconstructionCostClass
+  low : ReconstructionCostClass
+  moderate : ReconstructionCostClass
+  high : ReconstructionCostClass
+  unknown : ReconstructionCostClass
+
 
 record ReconstructionCostProfile : Set where
   constructor reconstruction-cost-profile
@@ -74,19 +74,18 @@ canonicalReconstructionCostBoundary = reconstruction-cost-boundary
   true refl
 
 data ReconstructionReverseTarget : Set where
-  acquireNamedSuccessor
-  acquireOverlappingTeam
-  acquireApparatusCustody
-  acquireRepositoryCustody
-  acquireNotebookCustody
-  acquireCalibrationTransfer
-  acquireQualificationTransfer
-  acquireFailureHistoryTransfer
-  acquireConfigurationTransfer
-  acquireAccessTransfer
-  acquireCrossTraining
-  acquireProcedureCompleteness
-  acquireRecalibrationEvidence
-  acquireRequalificationEvidence
-  acquireRebuildScheduleImpact
-  : ReconstructionReverseTarget
+  acquireNamedSuccessor : ReconstructionReverseTarget
+  acquireOverlappingTeam : ReconstructionReverseTarget
+  acquireApparatusCustody : ReconstructionReverseTarget
+  acquireRepositoryCustody : ReconstructionReverseTarget
+  acquireNotebookCustody : ReconstructionReverseTarget
+  acquireCalibrationTransfer : ReconstructionReverseTarget
+  acquireQualificationTransfer : ReconstructionReverseTarget
+  acquireFailureHistoryTransfer : ReconstructionReverseTarget
+  acquireConfigurationTransfer : ReconstructionReverseTarget
+  acquireAccessTransfer : ReconstructionReverseTarget
+  acquireCrossTraining : ReconstructionReverseTarget
+  acquireProcedureCompleteness : ReconstructionReverseTarget
+  acquireRecalibrationEvidence : ReconstructionReverseTarget
+  acquireRequalificationEvidence : ReconstructionReverseTarget
+  acquireRebuildScheduleImpact : ReconstructionReverseTarget

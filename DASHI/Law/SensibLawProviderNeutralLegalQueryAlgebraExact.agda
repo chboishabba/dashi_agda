@@ -33,10 +33,10 @@ data QueryExpr : Set where
   treatmentQ : String → QueryExpr
 
 data ProximityDirection : Set where
-  unorderedProximity
-  leftBeforeRight
-  rightBeforeLeft
-  : ProximityDirection
+  unorderedProximity : ProximityDirection
+  leftBeforeRight : ProximityDirection
+  rightBeforeLeft : ProximityDirection
+
 
 record ProximityConstraint : Set where
   constructor proximityConstraint
@@ -50,14 +50,14 @@ record ProximityConstraint : Set where
 open ProximityConstraint public
 
 data SearchProbeKind : Set where
-  supportingProbe
-  defeaterProbe
-  comparatorProbe
-  contradictionProbe
-  counterexampleProbe
-  vocabularyExplorationProbe
-  authorityFamilyExplorationProbe
-  : SearchProbeKind
+  supportingProbe : SearchProbeKind
+  defeaterProbe : SearchProbeKind
+  comparatorProbe : SearchProbeKind
+  contradictionProbe : SearchProbeKind
+  counterexampleProbe : SearchProbeKind
+  vocabularyExplorationProbe : SearchProbeKind
+  authorityFamilyExplorationProbe : SearchProbeKind
+
 
 record SearchHypothesis : Set₁ where
   constructor searchHypothesis
@@ -89,25 +89,25 @@ open SearchHypothesisFamily public
 ------------------------------------------------------------------------
 
 data SearchProvider : Set where
-  austliiProvider
-  jadeProvider
-  officialCourtProvider
-  officialLegislationProvider
-  wikipediaProvider
-  wikidataProvider
-  journalIndexProvider
-  localWorldModelProvider
-  : SearchProvider
+  austliiProvider : SearchProvider
+  jadeProvider : SearchProvider
+  officialCourtProvider : SearchProvider
+  officialLegislationProvider : SearchProvider
+  wikipediaProvider : SearchProvider
+  wikidataProvider : SearchProvider
+  journalIndexProvider : SearchProvider
+  localWorldModelProvider : SearchProvider
+
 
 data ProviderOperation : Set where
-  textualSearchOperation
-  exactCitationLookupOperation
-  citedByTraversalOperation
-  casesCitedTraversalOperation
-  legislationCitedTraversalOperation
-  entityLookupOperation
-  corpusGraphLookupOperation
-  : ProviderOperation
+  textualSearchOperation : ProviderOperation
+  exactCitationLookupOperation : ProviderOperation
+  citedByTraversalOperation : ProviderOperation
+  casesCitedTraversalOperation : ProviderOperation
+  legislationCitedTraversalOperation : ProviderOperation
+  entityLookupOperation : ProviderOperation
+  corpusGraphLookupOperation : ProviderOperation
+
 
 record ProviderCompiledQuery : Set₁ where
   constructor providerCompiledQuery

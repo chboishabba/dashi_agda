@@ -11,8 +11,8 @@ import DASHI.Law.HerzogConcreteIncidentHypervoxelExact as Incident
 ------------------------------------------------------------------------
 
 data IncidentLinkClosure : Set where
-  incidentLinkClosed
-  incidentLinkOpen
+  incidentLinkClosed : IncidentLinkClosure
+  incidentLinkOpen : IncidentLinkClosure
   incidentLinkConflict : IncidentLinkClosure
 
 record IncidentLineageWeld : Set where
@@ -72,19 +72,19 @@ bodycamOpenWeld = incidentLineageWeld
 ------------------------------------------------------------------------
 
 data IncidentLineageClaim : Set where
-  prayerInterventionProducedByThreatClassification
-  whiteShirtForceProducedByOperationalOrder
-  ricketsonArrestProducedByOperationalOrder
-  ocSprayProducedByClassification
-  bodycamForceProducedByCommandCulture
+  prayerInterventionProducedByThreatClassification : IncidentLineageClaim
+  whiteShirtForceProducedByOperationalOrder : IncidentLineageClaim
+  ricketsonArrestProducedByOperationalOrder : IncidentLineageClaim
+  ocSprayProducedByClassification : IncidentLineageClaim
+  bodycamForceProducedByCommandCulture : IncidentLineageClaim
   operationWideClassificationCausedCoercivePattern : IncidentLineageClaim
 
 data IncidentLineageProducer : Set where
-  prayerSameObjectWeldProducer
-  whiteShirtSameObjectWeldProducer
-  ricketsonSameObjectWeldProducer
-  ocSpraySameObjectWeldProducer
-  bodycamCommandCultureCorpusProducer
+  prayerSameObjectWeldProducer : IncidentLineageProducer
+  whiteShirtSameObjectWeldProducer : IncidentLineageProducer
+  ricketsonSameObjectWeldProducer : IncidentLineageProducer
+  ocSpraySameObjectWeldProducer : IncidentLineageProducer
+  bodycamCommandCultureCorpusProducer : IncidentLineageProducer
   crossIncidentSameClassificationProducer : IncidentLineageProducer
 
 reverseIncidentLineage : IncidentLineageClaim → IncidentLineageProducer

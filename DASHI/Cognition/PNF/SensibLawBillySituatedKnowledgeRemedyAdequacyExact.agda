@@ -22,21 +22,21 @@ import DASHI.Cognition.PNF.SensibLawDeclaredReasonRealizedEffectOperationalExact
 ------------------------------------------------------------------------
 
 data RemedyKnowledgeCoordinate : Set where
-  contentHeard
-  placeRelationPreserved
-  communityRelationPreserved
-  provenancePreserved
-  communityAuthorityPreserved
-  permissionProtocolPreserved
-  reciprocalObligationPreserved
-  implementationFeedbackClosed
-  : RemedyKnowledgeCoordinate
+  contentHeard : RemedyKnowledgeCoordinate
+  placeRelationPreserved : RemedyKnowledgeCoordinate
+  communityRelationPreserved : RemedyKnowledgeCoordinate
+  provenancePreserved : RemedyKnowledgeCoordinate
+  communityAuthorityPreserved : RemedyKnowledgeCoordinate
+  permissionProtocolPreserved : RemedyKnowledgeCoordinate
+  reciprocalObligationPreserved : RemedyKnowledgeCoordinate
+  implementationFeedbackClosed : RemedyKnowledgeCoordinate
+
 
 data CoordinateRequirement : Set where
-  requiredForAdequacy
-  usefulButNotSufficient
-  sourceSpecific
-  : CoordinateRequirement
+  requiredForAdequacy : CoordinateRequirement
+  usefulButNotSufficient : CoordinateRequirement
+  sourceSpecific : CoordinateRequirement
+
 
 requirement : RemedyKnowledgeCoordinate → CoordinateRequirement
 requirement contentHeard = usefulButNotSufficient
@@ -84,9 +84,9 @@ sameContentCannotRecoverObligation = Knowledge.propositionCannotRecoverObligatio
 ------------------------------------------------------------------------
 
 data ConsultationSurfaceState : Set where
-  sameStatementExtractedAuthorityIgnored
-  sameStatementExtractedAuthorityPreserved
-  : ConsultationSurfaceState
+  sameStatementExtractedAuthorityIgnored : ConsultationSurfaceState
+  sameStatementExtractedAuthorityPreserved : ConsultationSurfaceState
+
 
 data ConsultationSurface : Set where
   statementRecorded : ConsultationSurface

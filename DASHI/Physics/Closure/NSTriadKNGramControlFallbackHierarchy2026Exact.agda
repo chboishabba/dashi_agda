@@ -96,8 +96,8 @@ coherentObstructionTargetsAbsoluteSchur _ = absolute-schur-refuted
 ------------------------------------------------------------------------
 
 data GramDiagnostic : Set where
-  absoluteNormalizedRowMass
-  blockOperatorMass
+  absoluteNormalizedRowMass : GramDiagnostic
+  blockOperatorMass : GramDiagnostic
   signedResolventQuadraticForm : GramDiagnostic
 
 firstDiagnostic : GramDiagnostic

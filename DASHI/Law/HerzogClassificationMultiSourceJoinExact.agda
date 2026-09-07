@@ -18,26 +18,26 @@ import DASHI.Law.MaboCountrySecurityClassificationCrossPollinationExact as MaboC
 ------------------------------------------------------------------------
 
 data JoinSourceKind : Set where
-  policeIntelligenceCopy
-  protectedPersonSecurityCopy
-  foreignLiaisonCopy
-  privateSecurityCopy
-  operationalOrderCopy
-  unitBriefingCopy
-  mediaCopy
+  policeIntelligenceCopy : JoinSourceKind
+  protectedPersonSecurityCopy : JoinSourceKind
+  foreignLiaisonCopy : JoinSourceKind
+  privateSecurityCopy : JoinSourceKind
+  operationalOrderCopy : JoinSourceKind
+  unitBriefingCopy : JoinSourceKind
+  mediaCopy : JoinSourceKind
   unknownCopy : JoinSourceKind
 
 data JoinRelation : Set where
-  directDerivation
-  commonUpstreamProducer
-  independentProducer
-  semanticSimilarityOnly
-  relationOpen
+  directDerivation : JoinRelation
+  commonUpstreamProducer : JoinRelation
+  independentProducer : JoinRelation
+  semanticSimilarityOnly : JoinRelation
+  relationOpen : JoinRelation
   relationConflict : JoinRelation
 
 data JoinClosure : Set where
-  joinClosed
-  joinOpen
+  joinClosed : JoinClosure
+  joinOpen : JoinClosure
   joinConflict : JoinClosure
 
 record JoinedAtomReceipt : Set where
@@ -127,19 +127,19 @@ sharedProducerIsNotIndependentCorroboration = refl
 ------------------------------------------------------------------------
 
 data JoinClaim : Set where
-  threatPropositionAppearsInMultipleDocuments
-  threatPropositionHasIndependentCorroboration
-  foreignAndPoliceDocumentsAreIndependent
-  joinedPropositionEnteredClassification
-  joinedPropositionReachedSpecificIncident
+  threatPropositionAppearsInMultipleDocuments : JoinClaim
+  threatPropositionHasIndependentCorroboration : JoinClaim
+  foreignAndPoliceDocumentsAreIndependent : JoinClaim
+  joinedPropositionEnteredClassification : JoinClaim
+  joinedPropositionReachedSpecificIncident : JoinClaim
   countryMeaningAppearsInThreatInput : JoinClaim
 
 data JoinProducer : Set where
-  multiDocumentCorpusProducer
-  ultimateProducerSeparationProducer
-  crossInstitutionIndependenceProducer
-  classificationCrossReferenceProducer
-  incidentSameObjectJoinProducer
+  multiDocumentCorpusProducer : JoinProducer
+  ultimateProducerSeparationProducer : JoinProducer
+  crossInstitutionIndependenceProducer : JoinProducer
+  classificationCrossReferenceProducer : JoinProducer
+  incidentSameObjectJoinProducer : JoinProducer
   countryMeaningLiteralAtomProducer : JoinProducer
 
 reverseJoin : JoinClaim → JoinProducer
@@ -163,11 +163,11 @@ record CurrentJoinCutset : Set where
 open CurrentJoinCutset public
 
 data JoinResidual : Set where
-  corpusResidual
-  independenceResidual
-  classificationResidual
-  incidentResidual
-  countryMeaningResidual
+  corpusResidual : JoinResidual
+  independenceResidual : JoinResidual
+  classificationResidual : JoinResidual
+  incidentResidual : JoinResidual
+  countryMeaningResidual : JoinResidual
   joinComplete : JoinResidual
 
 firstJoinResidual : JoinClaim → CurrentJoinCutset → JoinResidual

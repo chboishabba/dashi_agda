@@ -20,18 +20,18 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data AlliumSpecies : Set where
-  alliin
-  allylSulfenicAcid
-  allicin
-  diallylDisulfide
-  diallylTrisulfide
-  diallylTetrasulfide
-  vinylDithiin
-  eAjoene
-  zAjoene
-  allylMercaptan
-  sAllylCysteine
-  : AlliumSpecies
+  alliin : AlliumSpecies
+  allylSulfenicAcid : AlliumSpecies
+  allicin : AlliumSpecies
+  diallylDisulfide : AlliumSpecies
+  diallylTrisulfide : AlliumSpecies
+  diallylTetrasulfide : AlliumSpecies
+  vinylDithiin : AlliumSpecies
+  eAjoene : AlliumSpecies
+  zAjoene : AlliumSpecies
+  allylMercaptan : AlliumSpecies
+  sAllylCysteine : AlliumSpecies
+
 
 record SpeciesIdentity : Set where
   constructor speciesIdentity
@@ -64,17 +64,17 @@ ajoeneIdentity = speciesIdentity eAjoene "C9H14OS3"
   "PubChem and garlic organosulfur chemistry literature"
 
 data TransformationDriver : Set where
-  tissueDisruption
-  alliinasePLP
-  spontaneousCondensation
-  time
-  temperature
-  solvent
-  pH
-  metalContact
-  biologicalThiol
-  redoxEnvironment
-  : TransformationDriver
+  tissueDisruption : TransformationDriver
+  alliinasePLP : TransformationDriver
+  spontaneousCondensation : TransformationDriver
+  time : TransformationDriver
+  temperature : TransformationDriver
+  solvent : TransformationDriver
+  pH : TransformationDriver
+  metalContact : TransformationDriver
+  biologicalThiol : TransformationDriver
+  redoxEnvironment : TransformationDriver
+
 
 record TransformationReceipt : Set where
   constructor transformationReceipt

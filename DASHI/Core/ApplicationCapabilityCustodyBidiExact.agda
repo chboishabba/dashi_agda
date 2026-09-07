@@ -13,29 +13,29 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data CustodyCoordinate : Set where
-  physicalApparatus
-  rawData
-  reducedData
-  sourceRepository
-  calibrationArchive
-  configurationArchive
-  qualificationArchive
-  failureHistory
-  notebooks
-  intellectualProperty
-  accessCredential
-  facilityAccess
-  supplierRelationship
-  : CustodyCoordinate
+  physicalApparatus : CustodyCoordinate
+  rawData : CustodyCoordinate
+  reducedData : CustodyCoordinate
+  sourceRepository : CustodyCoordinate
+  calibrationArchive : CustodyCoordinate
+  configurationArchive : CustodyCoordinate
+  qualificationArchive : CustodyCoordinate
+  failureHistory : CustodyCoordinate
+  notebooks : CustodyCoordinate
+  intellectualProperty : CustodyCoordinate
+  accessCredential : CustodyCoordinate
+  facilityAccess : CustodyCoordinate
+  supplierRelationship : CustodyCoordinate
+
 
 data CustodyState : Set where
-  publicCustody
-  institutionalCustody
-  crossInstitutionalCustody
-  privateCustody
-  distributedCustody
-  custodyUnknown
-  : CustodyState
+  publicCustody : CustodyState
+  institutionalCustody : CustodyState
+  crossInstitutionalCustody : CustodyState
+  privateCustody : CustodyState
+  distributedCustody : CustodyState
+  custodyUnknown : CustodyState
+
 
 record CapabilityCustodyReceipt : Set where
   constructor capability-custody-receipt
@@ -79,13 +79,12 @@ canonicalCustodyBoundary : CustodyBoundary
 canonicalCustodyBoundary = custody-boundary false refl false refl false refl false refl false refl
 
 data CustodyReverseTarget : Set where
-  acquirePhysicalCustody
-  acquireRepositoryCustody
-  acquireCalibrationArchiveCustody
-  acquireConfigurationArchiveCustody
-  acquireIPOwnership
-  acquireAccessCredentialHistory
-  acquireFacilityAccessHistory
-  acquirePostTransitionRole
-  acquireSameCarrierTransfer
-  : CustodyReverseTarget
+  acquirePhysicalCustody : CustodyReverseTarget
+  acquireRepositoryCustody : CustodyReverseTarget
+  acquireCalibrationArchiveCustody : CustodyReverseTarget
+  acquireConfigurationArchiveCustody : CustodyReverseTarget
+  acquireIPOwnership : CustodyReverseTarget
+  acquireAccessCredentialHistory : CustodyReverseTarget
+  acquireFacilityAccessHistory : CustodyReverseTarget
+  acquirePostTransitionRole : CustodyReverseTarget
+  acquireSameCarrierTransfer : CustodyReverseTarget

@@ -72,13 +72,13 @@ open RealisedLegalRemedy public
 ------------------------------------------------------------------------
 
 data RemedyResidualKind : Set where
-  legalAvailabilityResidual
-  lawfulAuthorityResidual
-  executionResidual
-  observedOutcomeResidual
-  communitySuccessResidual
-  feedbackCorrectionResidual
-  : RemedyResidualKind
+  legalAvailabilityResidual : RemedyResidualKind
+  lawfulAuthorityResidual : RemedyResidualKind
+  executionResidual : RemedyResidualKind
+  observedOutcomeResidual : RemedyResidualKind
+  communitySuccessResidual : RemedyResidualKind
+  feedbackCorrectionResidual : RemedyResidualKind
+
 
 record RemedyReopenRequest : Set where
   constructor remedy-reopen-request

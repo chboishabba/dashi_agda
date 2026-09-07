@@ -15,11 +15,11 @@ import DASHI.Law.MaboCountrySecurityClassificationCrossPollinationExact as Mabo
 ------------------------------------------------------------------------
 
 data BroadeningMechanism : Set where
-  individualToGroupAttribution
-  groupToWholeAssemblyAttribution
-  politicalMeaningErasure
-  enemyRolePropagation
-  terminalisingPropagation
+  individualToGroupAttribution : BroadeningMechanism
+  groupToWholeAssemblyAttribution : BroadeningMechanism
+  politicalMeaningErasure : BroadeningMechanism
+  enemyRolePropagation : BroadeningMechanism
+  terminalisingPropagation : BroadeningMechanism
   correctionPreservingInterruption : BroadeningMechanism
 
 broadeningToFascismFeature : BroadeningMechanism → Fascism.FascismFeature
@@ -86,15 +86,15 @@ canonicalMaboBroadeningBoundary = maboBroadeningBoundary false refl false refl f
 ------------------------------------------------------------------------
 
 data BroadeningRepairClaim : Set where
-  restoreIndividualGroupDistinction
-  requireEvidenceForScopeExpansion
-  reopenCorrectionAfterClassification
+  restoreIndividualGroupDistinction : BroadeningRepairClaim
+  requireEvidenceForScopeExpansion : BroadeningRepairClaim
+  reopenCorrectionAfterClassification : BroadeningRepairClaim
   preserveCountryPoliticalMeaning : BroadeningRepairClaim
 
 data BroadeningRepairProducer : Set where
-  distinctionRepairProducer
-  scopeEvidenceProducer
-  correctionChannelProducer
+  distinctionRepairProducer : BroadeningRepairProducer
+  scopeEvidenceProducer : BroadeningRepairProducer
+  correctionChannelProducer : BroadeningRepairProducer
   residualCoordinateProducer : BroadeningRepairProducer
 
 reverseRepair : BroadeningRepairClaim → BroadeningRepairProducer

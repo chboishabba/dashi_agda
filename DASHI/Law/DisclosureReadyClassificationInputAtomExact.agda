@@ -12,32 +12,32 @@ import DASHI.Law.SecurityClassificationInputLineageDagExact as Lineage
 ------------------------------------------------------------------------
 
 data DocumentSourceRole : Set where
-  policeIntelligenceDocument
-  operationalBriefing
-  protectedPersonSecurityBrief
-  federalSecurityInput
-  foreignDiplomaticInput
-  israeliSecurityInput
-  privateSecurityInput
-  executiveDirection
-  litigationDisclosure
-  secondaryReport
+  policeIntelligenceDocument : DocumentSourceRole
+  operationalBriefing : DocumentSourceRole
+  protectedPersonSecurityBrief : DocumentSourceRole
+  federalSecurityInput : DocumentSourceRole
+  foreignDiplomaticInput : DocumentSourceRole
+  israeliSecurityInput : DocumentSourceRole
+  privateSecurityInput : DocumentSourceRole
+  executiveDirection : DocumentSourceRole
+  litigationDisclosure : DocumentSourceRole
+  secondaryReport : DocumentSourceRole
   sourceRoleUnknown : DocumentSourceRole
 
 data SemanticTransport : Set where
-  exactPreservation
-  boundedParaphrase
-  narrowedMeaning
-  broadenedMeaning
-  reclassifiedMeaning
-  semanticConflict
+  exactPreservation : SemanticTransport
+  boundedParaphrase : SemanticTransport
+  narrowedMeaning : SemanticTransport
+  broadenedMeaning : SemanticTransport
+  reclassifiedMeaning : SemanticTransport
+  semanticConflict : SemanticTransport
   semanticOpen : SemanticTransport
 
 data AtomClosure : Set where
-  atomSourceBacked
-  atomDisclosedButUnverified
-  atomReported
-  atomOpen
+  atomSourceBacked : AtomClosure
+  atomDisclosedButUnverified : AtomClosure
+  atomReported : AtomClosure
+  atomOpen : AtomClosure
   atomConflict : AtomClosure
 
 record DisclosureInputAtom : Set where
@@ -127,21 +127,21 @@ canonicalOpenHerzogAtomChain = atomLineageChain
 ------------------------------------------------------------------------
 
 data AtomClaim : Set where
-  sourceActorKnown
-  literalThreatPropositionKnown
-  atomEnteredRiskAssessment
-  meaningPreservedIntoClassification
-  atomEnteredOperationalOrder
-  atomReachedFieldUnit
+  sourceActorKnown : AtomClaim
+  literalThreatPropositionKnown : AtomClaim
+  atomEnteredRiskAssessment : AtomClaim
+  meaningPreservedIntoClassification : AtomClaim
+  atomEnteredOperationalOrder : AtomClaim
+  atomReachedFieldUnit : AtomClaim
   atomCausedFieldTactic : AtomClaim
 
 data AtomProducer : Set where
-  sourceDocumentProducer
-  literalContentProducer
-  riskAssessmentCrossReferenceProducer
-  semanticTransportProducer
-  operationalOrderCrossReferenceProducer
-  unitBriefingReceiptProducer
+  sourceDocumentProducer : AtomProducer
+  literalContentProducer : AtomProducer
+  riskAssessmentCrossReferenceProducer : AtomProducer
+  semanticTransportProducer : AtomProducer
+  operationalOrderCrossReferenceProducer : AtomProducer
+  unitBriefingReceiptProducer : AtomProducer
   incidentCausalWeldProducer : AtomProducer
 
 reverseAtom : AtomClaim → AtomProducer

@@ -15,30 +15,30 @@ import DASHI.Economics.AIInfrastructureGenericFibreAdaptersExact as Generic
 ------------------------------------------------------------------------
 
 data AIInfraState : Set where
-  cleanExpansion
-  crowdedExpansion
-  impairedRecovery
-  publicLossRecovery
-  : AIInfraState
+  cleanExpansion : AIInfraState
+  crowdedExpansion : AIInfraState
+  impairedRecovery : AIInfraState
+  publicLossRecovery : AIInfraState
+
 
 data AIInfraObservation : Set where
   strongDemandSurface recoveredCapacitySurface : AIInfraObservation
 
 data AIInfraConsumer : Set where
-  headlineDemandConsumer
-  refinancingConsumer
-  capitalRecoveryConsumer
-  futureConeConsumer
-  incidenceConsumer
-  : AIInfraConsumer
+  headlineDemandConsumer : AIInfraConsumer
+  refinancingConsumer : AIInfraConsumer
+  capitalRecoveryConsumer : AIInfraConsumer
+  futureConeConsumer : AIInfraConsumer
+  incidenceConsumer : AIInfraConsumer
+
 
 data AIInfraAnswer : Set where
-  demandStrongAnswer
-  refinanceAvailableAnswer refinanceUnavailableAnswer
-  capitalRecoveredAnswer capitalImpairedAnswer
-  broadFutureAnswer constrainedFutureAnswer
-  privateIncidenceAnswer publicIncidenceAnswer
-  : AIInfraAnswer
+  demandStrongAnswer : AIInfraAnswer
+  refinanceAvailableAnswer refinanceUnavailableAnswer : AIInfraAnswer
+  capitalRecoveredAnswer capitalImpairedAnswer : AIInfraAnswer
+  broadFutureAnswer constrainedFutureAnswer : AIInfraAnswer
+  privateIncidenceAnswer publicIncidenceAnswer : AIInfraAnswer
+
 
 observeAIInfra : AIInfraState → AIInfraObservation
 observeAIInfra cleanExpansion = strongDemandSurface
@@ -130,12 +130,12 @@ genericIncidenceFibre = Generic.aiInfrastructureIncidenceFibre
 ------------------------------------------------------------------------
 
 data AIFibreMissingCoordinate : Set where
-  refinancingContextCoordinate
-  financingHistoryCoordinate
-  residualAssetValueCoordinate
-  futureOptionalityCoordinate
-  lossIncidenceCoordinate
-  : AIFibreMissingCoordinate
+  refinancingContextCoordinate : AIFibreMissingCoordinate
+  financingHistoryCoordinate : AIFibreMissingCoordinate
+  residualAssetValueCoordinate : AIFibreMissingCoordinate
+  futureOptionalityCoordinate : AIFibreMissingCoordinate
+  lossIncidenceCoordinate : AIFibreMissingCoordinate
+
 
 missingCoordinateFor : AIInfraConsumer → AIFibreMissingCoordinate
 missingCoordinateFor headlineDemandConsumer = refinancingContextCoordinate

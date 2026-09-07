@@ -16,42 +16,42 @@ import DASHI.Economics.AITerminalPayerEconomicValidationExact as Terminal
 ------------------------------------------------------------------------
 
 data CurrentRegimeClaim : Set where
-  microsoftIncrementalAIGrossMarginKnown
-  microsoftIncrementalAIUnitEconomicsPositive
-  nvidiaCoreWeaveDollarRevenueCircularityQuantified
-  nvidiaCoreWeaveTerminalDemandIndependent
-  coreWeaveFacilitiesAreClassicalCDO
-  coreWeavePortfolioRiskIndependent
-  softBankOpenAIValuationGainIsExternalCash
-  softBankOpenAIInvestmentEconomicallyValidated
-  tsmcPermanentManufacturingChokepoint
-  tsmcScarcityRentQuantified
-  chinaFivePercentChipShare
-  moonshotOpenWeightReleaseCausedByServingScarcity
-  chinaServingScarcityImpairsSubscriptionEconomics
-  currentAIInfrastructureBubble
-  currentAIInfrastructureFraud
-  incrementalAIInfrastructureTerminallyValidated
-  : CurrentRegimeClaim
+  microsoftIncrementalAIGrossMarginKnown : CurrentRegimeClaim
+  microsoftIncrementalAIUnitEconomicsPositive : CurrentRegimeClaim
+  nvidiaCoreWeaveDollarRevenueCircularityQuantified : CurrentRegimeClaim
+  nvidiaCoreWeaveTerminalDemandIndependent : CurrentRegimeClaim
+  coreWeaveFacilitiesAreClassicalCDO : CurrentRegimeClaim
+  coreWeavePortfolioRiskIndependent : CurrentRegimeClaim
+  softBankOpenAIValuationGainIsExternalCash : CurrentRegimeClaim
+  softBankOpenAIInvestmentEconomicallyValidated : CurrentRegimeClaim
+  tsmcPermanentManufacturingChokepoint : CurrentRegimeClaim
+  tsmcScarcityRentQuantified : CurrentRegimeClaim
+  chinaFivePercentChipShare : CurrentRegimeClaim
+  moonshotOpenWeightReleaseCausedByServingScarcity : CurrentRegimeClaim
+  chinaServingScarcityImpairsSubscriptionEconomics : CurrentRegimeClaim
+  currentAIInfrastructureBubble : CurrentRegimeClaim
+  currentAIInfrastructureFraud : CurrentRegimeClaim
+  incrementalAIInfrastructureTerminallyValidated : CurrentRegimeClaim
+
 
 data CurrentRegimeProducer : Set where
-  aiSpecificSegmentMarginProducer
-  aiUsefulWorkUnitEconomicsProducer
-  capitalRevenueFlowTracingProducer
-  terminalPayerPartitionProducer
-  classicalCDOStructureProducer
-  ultimateEconomicDriverIndependenceProducer
-  externalCashRealisationProducer
-  longHorizonExternalNPVProducer
-  manufacturingSubstitutionCapacityProducer
-  scarcityRentQuantificationProducer
-  patronusChipSharePrimaryProducer
-  moonshotCausalTimelineProducer
-  subscriptionServingEconomicsProducer
-  regimeClassificationProducer
-  fraudEvidenceProducer
-  terminalEconomicValidationProducer
-  : CurrentRegimeProducer
+  aiSpecificSegmentMarginProducer : CurrentRegimeProducer
+  aiUsefulWorkUnitEconomicsProducer : CurrentRegimeProducer
+  capitalRevenueFlowTracingProducer : CurrentRegimeProducer
+  terminalPayerPartitionProducer : CurrentRegimeProducer
+  classicalCDOStructureProducer : CurrentRegimeProducer
+  ultimateEconomicDriverIndependenceProducer : CurrentRegimeProducer
+  externalCashRealisationProducer : CurrentRegimeProducer
+  longHorizonExternalNPVProducer : CurrentRegimeProducer
+  manufacturingSubstitutionCapacityProducer : CurrentRegimeProducer
+  scarcityRentQuantificationProducer : CurrentRegimeProducer
+  patronusChipSharePrimaryProducer : CurrentRegimeProducer
+  moonshotCausalTimelineProducer : CurrentRegimeProducer
+  subscriptionServingEconomicsProducer : CurrentRegimeProducer
+  regimeClassificationProducer : CurrentRegimeProducer
+  fraudEvidenceProducer : CurrentRegimeProducer
+  terminalEconomicValidationProducer : CurrentRegimeProducer
+
 
 requiredProducer : CurrentRegimeClaim → CurrentRegimeProducer
 requiredProducer microsoftIncrementalAIGrossMarginKnown = aiSpecificSegmentMarginProducer

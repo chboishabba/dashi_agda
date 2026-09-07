@@ -12,29 +12,29 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data FragilityAxis : Set where
-  organisationalReorganisation
-  mergerOrAcquisition
-  fundingOrProcurementChange
-  contractOrIPTransition
-  accessControlChange
-  physicalArtifactCustody
-  dataRepositoryCustody
-  codificationQuality
-  teamRedundancy
-  externalLabourReplaceability
-  supplierDependency
-  facilityDependency
-  scheduledRetirementOrDeparture
-  ordinaryProjectSuccession
-  safetyOrFailureInvestigation
-  : FragilityAxis
+  organisationalReorganisation : FragilityAxis
+  mergerOrAcquisition : FragilityAxis
+  fundingOrProcurementChange : FragilityAxis
+  contractOrIPTransition : FragilityAxis
+  accessControlChange : FragilityAxis
+  physicalArtifactCustody : FragilityAxis
+  dataRepositoryCustody : FragilityAxis
+  codificationQuality : FragilityAxis
+  teamRedundancy : FragilityAxis
+  externalLabourReplaceability : FragilityAxis
+  supplierDependency : FragilityAxis
+  facilityDependency : FragilityAxis
+  scheduledRetirementOrDeparture : FragilityAxis
+  ordinaryProjectSuccession : FragilityAxis
+  safetyOrFailureInvestigation : FragilityAxis
+
 
 data AxisState : Set where
-  sourceBacked
-  partial
-  notLocated
-  knownAbsent
-  : AxisState
+  sourceBacked : AxisState
+  partial : AxisState
+  notLocated : AxisState
+  knownAbsent : AxisState
+
 
 record FragilityReceipt : Set where
   constructor fragility-receipt
@@ -48,20 +48,20 @@ record FragilityReceipt : Set where
 open FragilityReceipt public
 
 data FragilityReverseTarget : Set where
-  acquireOrgChartBeforeAfter
-  acquireMergerIntegrationRecord
-  acquireFundingTimeline
-  acquireContractOrIPAssignment
-  acquireAccessAuditOrTransfer
-  acquireHardwareCustodyRecord
-  acquireRepositoryOwnership
-  acquireSOPNotebookCodeCoverage
-  acquireBackupRoleMatrix
-  acquireRecruitmentOrReplacementEvidence
-  acquireSupplierOrFacilityDependency
-  acquireScheduledTransitionRecord
-  acquireSafetyIncidentRecord
-  : FragilityReverseTarget
+  acquireOrgChartBeforeAfter : FragilityReverseTarget
+  acquireMergerIntegrationRecord : FragilityReverseTarget
+  acquireFundingTimeline : FragilityReverseTarget
+  acquireContractOrIPAssignment : FragilityReverseTarget
+  acquireAccessAuditOrTransfer : FragilityReverseTarget
+  acquireHardwareCustodyRecord : FragilityReverseTarget
+  acquireRepositoryOwnership : FragilityReverseTarget
+  acquireSOPNotebookCodeCoverage : FragilityReverseTarget
+  acquireBackupRoleMatrix : FragilityReverseTarget
+  acquireRecruitmentOrReplacementEvidence : FragilityReverseTarget
+  acquireSupplierOrFacilityDependency : FragilityReverseTarget
+  acquireScheduledTransitionRecord : FragilityReverseTarget
+  acquireSafetyIncidentRecord : FragilityReverseTarget
+
 
 record FragilityBoundary : Set where
   constructor fragility-boundary

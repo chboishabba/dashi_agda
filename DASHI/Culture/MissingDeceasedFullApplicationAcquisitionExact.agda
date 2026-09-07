@@ -12,11 +12,11 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data AcquisitionPriority : Set where
-  priorityHighest
-  priorityHigh
-  priorityMedium
-  priorityControl
-  : AcquisitionPriority
+  priorityHighest : AcquisitionPriority
+  priorityHigh : AcquisitionPriority
+  priorityMedium : AcquisitionPriority
+  priorityControl : AcquisitionPriority
+
 
 record ApplicationAcquisitionTarget : Set where
   constructor application-acquisition-target

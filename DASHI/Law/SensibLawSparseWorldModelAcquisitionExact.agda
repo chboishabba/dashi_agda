@@ -20,13 +20,13 @@ import DASHI.Law.SensibLawProofSearchResultAssessmentExact as Result
 ------------------------------------------------------------------------
 
 data CompilationDepth : Set where
-  canonicalTextOnly
-  parserAnnotationGraph
-  basicPNFStructure
-  citationTopology
-  deepSemanticResolution
-  reviewedProofPayment
-  : CompilationDepth
+  canonicalTextOnly : CompilationDepth
+  parserAnnotationGraph : CompilationDepth
+  basicPNFStructure : CompilationDepth
+  citationTopology : CompilationDepth
+  deepSemanticResolution : CompilationDepth
+  reviewedProofPayment : CompilationDepth
+
 
 record CompiledCorpusArtifact : Set₁ where
   constructor compiledCorpusArtifact
@@ -44,11 +44,11 @@ record CompiledCorpusArtifact : Set₁ where
 open CompiledCorpusArtifact public
 
 data ResolutionPolicy : Set where
-  eagerCheapStructure
-  consumerDrivenDeepening
-  explicitAuditDeepening
-  noDeepeningRequired
-  : ResolutionPolicy
+  eagerCheapStructure : ResolutionPolicy
+  consumerDrivenDeepening : ResolutionPolicy
+  explicitAuditDeepening : ResolutionPolicy
+  noDeepeningRequired : ResolutionPolicy
+
 
 record CorpusDeepeningDemand : Set₁ where
   constructor corpusDeepeningDemand
@@ -110,10 +110,10 @@ open MemoisedResearchClosure public
 ------------------------------------------------------------------------
 
 data WorldSearchMode : Set where
-  externalSparseDiscovery
-  hybridLocalExternalSearch
-  directLocalGraphProofSearch
-  : WorldSearchMode
+  externalSparseDiscovery : WorldSearchMode
+  hybridLocalExternalSearch : WorldSearchMode
+  directLocalGraphProofSearch : WorldSearchMode
+
 
 record WorldSearchReadiness : Set where
   constructor worldSearchReadiness

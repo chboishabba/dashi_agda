@@ -17,10 +17,10 @@ import DASHI.Core.ExperimentalCoordinateDesignExact as Design
 ------------------------------------------------------------------------
 
 data RefinementGrade : Set where
-  noCertifiedRefinement
-  weakRefinement
-  strictRefinement
-  : RefinementGrade
+  noCertifiedRefinement : RefinementGrade
+  weakRefinement : RefinementGrade
+  strictRefinement : RefinementGrade
+
 
 record ExperimentRefinementReceipt {Hidden Experiment : Set}
     (prior : Bidi.ResidualFibre Hidden) : Set₁ where

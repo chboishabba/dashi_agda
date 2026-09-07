@@ -46,9 +46,9 @@ open GramOperatorBound public
 ------------------------------------------------------------------------
 
 data GramCertificateKind : Set where
-  absoluteRowSchur
-  blockSchur
-  operatorSchurEveryInput
+  absoluteRowSchur : GramCertificateKind
+  blockSchur : GramCertificateKind
+  operatorSchurEveryInput : GramCertificateKind
   directSignedGram : GramCertificateKind
 
 record GramCertificate

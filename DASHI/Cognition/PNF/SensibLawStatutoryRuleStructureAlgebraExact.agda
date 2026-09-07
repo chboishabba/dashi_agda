@@ -22,20 +22,20 @@ import DASHI.Cognition.PNF.SensibLawUniversalLegalRuleAlgebraExact as Algebra
 ------------------------------------------------------------------------
 
 data ProvisionKind : Set where
-  operativeProvision
-  definitionProvision
-  exceptionProvision
-  deemingProvision
-  provisoProvision
-  powerConferralProvision
-  dutyImpositionProvision
-  prohibitionProvision
-  remedyProvision
-  jurisdictionProvision
-  commencementProvision
-  repealProvision
-  amendmentProvision
-  : ProvisionKind
+  operativeProvision : ProvisionKind
+  definitionProvision : ProvisionKind
+  exceptionProvision : ProvisionKind
+  deemingProvision : ProvisionKind
+  provisoProvision : ProvisionKind
+  powerConferralProvision : ProvisionKind
+  dutyImpositionProvision : ProvisionKind
+  prohibitionProvision : ProvisionKind
+  remedyProvision : ProvisionKind
+  jurisdictionProvision : ProvisionKind
+  commencementProvision : ProvisionKind
+  repealProvision : ProvisionKind
+  amendmentProvision : ProvisionKind
+
 
 record StatutoryProvision : Set where
   constructor statutory-provision
@@ -72,13 +72,13 @@ open StatutoryDefinition public
 ------------------------------------------------------------------------
 
 data StatutoryChangeKind : Set where
-  insertText
-  substituteText
-  omitText
-  repealProvision
-  commenceProvision
-  expireProvision
-  : StatutoryChangeKind
+  insertText : StatutoryChangeKind
+  substituteText : StatutoryChangeKind
+  omitText : StatutoryChangeKind
+  repealProvision : StatutoryChangeKind
+  commenceProvision : StatutoryChangeKind
+  expireProvision : StatutoryChangeKind
+
 
 record StatutoryChange : Set where
   constructor statutory-change

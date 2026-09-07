@@ -15,11 +15,11 @@ import DASHI.Core.CapabilityFragilityConfoundersBidiExact as F
 ------------------------------------------------------------------------
 
 data DimensionState : Set where
-  closedPositive
-  closedNegative
-  partial
-  open
-  : DimensionState
+  closedPositive : DimensionState
+  closedNegative : DimensionState
+  partial : DimensionState
+  open : DimensionState
+
 
 record OverlookedCaseRow : Set where
   constructor overlooked-case-row

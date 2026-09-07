@@ -8,12 +8,12 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data EvidenceState : Set where
-  owned
-  partial
-  notLocated
-  contradicted
-  notApplicable
-  : EvidenceState
+  owned : EvidenceState
+  partial : EvidenceState
+  notLocated : EvidenceState
+  contradicted : EvidenceState
+  notApplicable : EvidenceState
+
 
 record CustodyEventTimeRow : Set where
   constructor custody-event-time-row

@@ -20,41 +20,41 @@ import DASHI.Economics.AIEconomicUsefulWorkTimeSeriesExact as Useful
 ------------------------------------------------------------------------
 
 data InfrastructureMarketSignal : Set where
-  demandStrong
-  utilisationHigh
-  orderBacklogLarge
-  acceleratorPricesFirm
-  equityValuationsRising
-  : InfrastructureMarketSignal
+  demandStrong : InfrastructureMarketSignal
+  utilisationHigh : InfrastructureMarketSignal
+  orderBacklogLarge : InfrastructureMarketSignal
+  acceleratorPricesFirm : InfrastructureMarketSignal
+  equityValuationsRising : InfrastructureMarketSignal
+
 
 data InfrastructureAction : Set where
-  financeNewCapacity
-  refinanceExistingDebt
-  holdCapacityFlat
-  sellOrRetrenchCapacity
-  : InfrastructureAction
+  financeNewCapacity : InfrastructureAction
+  refinanceExistingDebt : InfrastructureAction
+  holdCapacityFlat : InfrastructureAction
+  sellOrRetrenchCapacity : InfrastructureAction
+
 
 data InfrastructureLiquidityState : Set where
-  deepFundingMarket
-  thinFundingMarket
-  refinancingWindowClosed
-  : InfrastructureLiquidityState
+  deepFundingMarket : InfrastructureLiquidityState
+  thinFundingMarket : InfrastructureLiquidityState
+  refinancingWindowClosed : InfrastructureLiquidityState
+
 
 data InfrastructureCrowdingState : Set where
-  uncrowdedBuildout
-  crowdedSameThesisBuildout
-  : InfrastructureCrowdingState
+  uncrowdedBuildout : InfrastructureCrowdingState
+  crowdedSameThesisBuildout : InfrastructureCrowdingState
+
 
 data InfrastructureUncertaintyState : Set where
-  calibratedInfrastructureEconomics
-  uncertainTerminalEconomics
-  : InfrastructureUncertaintyState
+  calibratedInfrastructureEconomics : InfrastructureUncertaintyState
+  uncertainTerminalEconomics : InfrastructureUncertaintyState
+
 
 data InfrastructureRiskState : Set where
-  capitalRiskClear
-  capitalRiskCaution
-  capitalRiskBlocked
-  : InfrastructureRiskState
+  capitalRiskClear : InfrastructureRiskState
+  capitalRiskCaution : InfrastructureRiskState
+  capitalRiskBlocked : InfrastructureRiskState
+
 
 record InfrastructureMarketFabric : Set where
   constructor infrastructureMarketFabric
@@ -223,18 +223,18 @@ tradeDomainDoesNotBecomeAIInfrastructureDomain ()
 ------------------------------------------------------------------------
 
 data InfrastructureMarketClaim : Set where
-  refinancingWindowAdequate
-  acceleratorSecondaryMarketLiquid
-  marketPriceSupportsBookValue
-  crowdedBuildoutStillFinanceable
-  : InfrastructureMarketClaim
+  refinancingWindowAdequate : InfrastructureMarketClaim
+  acceleratorSecondaryMarketLiquid : InfrastructureMarketClaim
+  marketPriceSupportsBookValue : InfrastructureMarketClaim
+  crowdedBuildoutStillFinanceable : InfrastructureMarketClaim
+
 
 data InfrastructureMarketProducer : Set where
-  refinancingSpreadAndCoverageProducer
-  secondaryMarketDepthProducer
-  marketToBookAndForcedSaleProducer
-  crowdingFundingCapacityProducer
-  : InfrastructureMarketProducer
+  refinancingSpreadAndCoverageProducer : InfrastructureMarketProducer
+  secondaryMarketDepthProducer : InfrastructureMarketProducer
+  marketToBookAndForcedSaleProducer : InfrastructureMarketProducer
+  crowdingFundingCapacityProducer : InfrastructureMarketProducer
+
 
 requiredMarketProducer : InfrastructureMarketClaim → InfrastructureMarketProducer
 requiredMarketProducer refinancingWindowAdequate = refinancingSpreadAndCoverageProducer

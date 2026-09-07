@@ -44,12 +44,12 @@ import DASHI.Analysis.RiemannAristotleG2dScalarDeterminantSumTargetExact as Det
 ------------------------------------------------------------------------
 
 data FinalHighOrdinateLeaf : Set where
-  universalPoleQuotientSignedOff
-  sameTaperGammaPrecision
-  ownedClusterMarginAttachment
-  determinantSignedDiagnostic
-  rebuildFinalContradictionCompiler
-  : FinalHighOrdinateLeaf
+  universalPoleQuotientSignedOff : FinalHighOrdinateLeaf
+  sameTaperGammaPrecision : FinalHighOrdinateLeaf
+  ownedClusterMarginAttachment : FinalHighOrdinateLeaf
+  determinantSignedDiagnostic : FinalHighOrdinateLeaf
+  rebuildFinalContradictionCompiler : FinalHighOrdinateLeaf
+
 
 data FinalLeafState : Set where
   live downstream diagnostic pruned : FinalLeafState

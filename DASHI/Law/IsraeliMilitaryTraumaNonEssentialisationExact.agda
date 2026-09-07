@@ -10,19 +10,19 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data TraumaSourceRole : Set where
-  peerReviewedClinicalStudy
-  militaryClinicalCohort
-  prospectiveCombatantStudy
-  veteranLongitudinalStudy
+  peerReviewedClinicalStudy : TraumaSourceRole
+  militaryClinicalCohort : TraumaSourceRole
+  prospectiveCombatantStudy : TraumaSourceRole
+  veteranLongitudinalStudy : TraumaSourceRole
   dashiClinicalBoundary : TraumaSourceRole
 
 data TraumaProposition : Set where
-  moralInjuryAssociatedWithPsychiatricSymptoms
-  ptsdObservedAmongCombatVeterans
-  moralInjuryTrajectoriesAssociatedWithPTSDSymptoms
-  combatExposureCanProducePsychologicalExternalities
-  exConscriptBehaviourGenerallyIndicatesPTSD
-  israeliBehaviourGenerallyIndicatesPTSD
+  moralInjuryAssociatedWithPsychiatricSymptoms : TraumaProposition
+  ptsdObservedAmongCombatVeterans : TraumaProposition
+  moralInjuryTrajectoriesAssociatedWithPTSDSymptoms : TraumaProposition
+  combatExposureCanProducePsychologicalExternalities : TraumaProposition
+  exConscriptBehaviourGenerallyIndicatesPTSD : TraumaProposition
+  israeliBehaviourGenerallyIndicatesPTSD : TraumaProposition
   zionistBehaviourGenerallyIndicatesPTSD : TraumaProposition
 
 record TraumaReceipt : Set where
@@ -80,17 +80,17 @@ canonicalTraumaPopulationBoundary =
 ------------------------------------------------------------------------
 
 data TraumaClaim : Set where
-  exposedVeteranMayHavePTSDOrMoralInjury
-  particularPersonHasPTSD
-  traumaContributedToParticularBehaviour
-  diasporaExConscriptBehaviourIsTraumaDriven
+  exposedVeteranMayHavePTSDOrMoralInjury : TraumaClaim
+  particularPersonHasPTSD : TraumaClaim
+  traumaContributedToParticularBehaviour : TraumaClaim
+  diasporaExConscriptBehaviourIsTraumaDriven : TraumaClaim
   collectivePoliticalCultureIsPTSD : TraumaClaim
 
 data TraumaProducer : Set where
-  cohortClinicalProducer
-  individualClinicalAssessmentProducer
-  individualCausalClinicalProducer
-  individualHistoryAndAssessmentProducer
+  cohortClinicalProducer : TraumaProducer
+  individualClinicalAssessmentProducer : TraumaProducer
+  individualCausalClinicalProducer : TraumaProducer
+  individualHistoryAndAssessmentProducer : TraumaProducer
   populationPsychosocialCausalProducer : TraumaProducer
 
 reverseTrauma : TraumaClaim → TraumaProducer

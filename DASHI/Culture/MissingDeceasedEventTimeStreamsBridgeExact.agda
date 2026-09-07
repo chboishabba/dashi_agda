@@ -57,8 +57,7 @@ canonicalEventTimeStreamsBoundary = event-time-streams-boundary
   true refl
 
 data EventTimeTemporalReverseTarget : Set where
-  acquireValidTimeAnchor
-  acquireObservedTimeAnchor
-  acquireEventWindowOverlap
-  acquireSameCarrierOperationalUseAtValidTime
-  : EventTimeTemporalReverseTarget
+  acquireValidTimeAnchor : EventTimeTemporalReverseTarget
+  acquireObservedTimeAnchor : EventTimeTemporalReverseTarget
+  acquireEventWindowOverlap : EventTimeTemporalReverseTarget
+  acquireSameCarrierOperationalUseAtValidTime : EventTimeTemporalReverseTarget

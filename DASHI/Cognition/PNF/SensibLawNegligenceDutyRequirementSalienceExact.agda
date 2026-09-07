@@ -16,9 +16,9 @@ import DASHI.Cognition.PNF.SensibLawWrongTypeRequirementSalienceFrontierExact as
 ------------------------------------------------------------------------
 
 data DutyInterpretation : Set where
-  operationalPublicAuthorityConfiguration
-  corePolicyPublicAuthorityConfiguration
-  : DutyInterpretation
+  operationalPublicAuthorityConfiguration : DutyInterpretation
+  corePolicyPublicAuthorityConfiguration : DutyInterpretation
+
 
 data DutyObservation : Set where
   dutyUnsupported dutyUnresolved dutySupported : DutyObservation
@@ -118,9 +118,9 @@ statutoryCoherenceRequiredButCurrentlyNonDiscriminating =
 ------------------------------------------------------------------------
 
 data PostPolicyInterpretation : Set where
-  policyNoStatutoryConflict
-  policyStatutoryConflict
-  : PostPolicyInterpretation
+  policyNoStatutoryConflict : PostPolicyInterpretation
+  policyStatutoryConflict : PostPolicyInterpretation
+
 
 postPolicyLive : PostPolicyInterpretation → Set
 postPolicyLive policyNoStatutoryConflict = ⊤

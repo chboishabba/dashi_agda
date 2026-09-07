@@ -68,12 +68,11 @@ canonicalEskridgeCorporateCustodyBoundary : EskridgeCorporateCustodyBoundary
 canonicalEskridgeCorporateCustodyBoundary = eskridge-corporate-custody-boundary false refl false refl false refl false refl
 
 data EskridgeCorporateCustodyReverseTarget : Set where
-  acquireTechnicalIPAssignment
-  acquireApparatusTitleAndLocation
-  acquireRepositoryOwnership
-  acquireNotebookCustody
-  acquireLabOrLeaseRecord
-  acquirePostDeathAssetDisposition
-  acquireDirectorOrOfficerTransition
-  acquireFundingUseForResearchObject
-  : EskridgeCorporateCustodyReverseTarget
+  acquireTechnicalIPAssignment : EskridgeCorporateCustodyReverseTarget
+  acquireApparatusTitleAndLocation : EskridgeCorporateCustodyReverseTarget
+  acquireRepositoryOwnership : EskridgeCorporateCustodyReverseTarget
+  acquireNotebookCustody : EskridgeCorporateCustodyReverseTarget
+  acquireLabOrLeaseRecord : EskridgeCorporateCustodyReverseTarget
+  acquirePostDeathAssetDisposition : EskridgeCorporateCustodyReverseTarget
+  acquireDirectorOrOfficerTransition : EskridgeCorporateCustodyReverseTarget
+  acquireFundingUseForResearchObject : EskridgeCorporateCustodyReverseTarget

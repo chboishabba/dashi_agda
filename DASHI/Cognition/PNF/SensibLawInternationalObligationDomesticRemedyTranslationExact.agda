@@ -36,16 +36,16 @@ icj2024PalestineAuthority = Edge.source-identity
   Edge.internationalJudicialOpinion
 
 data NormativeLayer : Set where
-  fact
-  legalStatus
-  legalObligation
-  domesticCauseOfAction
-  domesticDuty
-  breach
-  compensableDamage
-  availableRemedy
-  executableRemedy
-  : NormativeLayer
+  fact : NormativeLayer
+  legalStatus : NormativeLayer
+  legalObligation : NormativeLayer
+  domesticCauseOfAction : NormativeLayer
+  domesticDuty : NormativeLayer
+  breach : NormativeLayer
+  compensableDamage : NormativeLayer
+  availableRemedy : NormativeLayer
+  executableRemedy : NormativeLayer
+
 
 record LayerClaim : Set where
   constructor layer-claim
@@ -78,17 +78,17 @@ icjOtherStatesNonRecognition = layer-claim legalObligation
   icj2024PalestineAuthority true
 
 data TranslationGate : Set where
-  domesticReceptionRule
-  jurisdiction
-  standing
-  causeOfAction
-  duty
-  breachGate
-  causation
-  damageRecognition
-  remedyJurisdiction
-  executionMechanism
-  : TranslationGate
+  domesticReceptionRule : TranslationGate
+  jurisdiction : TranslationGate
+  standing : TranslationGate
+  causeOfAction : TranslationGate
+  duty : TranslationGate
+  breachGate : TranslationGate
+  causation : TranslationGate
+  damageRecognition : TranslationGate
+  remedyJurisdiction : TranslationGate
+  executionMechanism : TranslationGate
+
 
 record TranslationRequirement : Set where
   constructor translation-requirement

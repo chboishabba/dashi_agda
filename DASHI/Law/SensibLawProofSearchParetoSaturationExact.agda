@@ -104,17 +104,17 @@ canonicalSearchParetoRefinementBoundary =
 ------------------------------------------------------------------------
 
 data AcquisitionFamily : Set where
-  exactCitationFamily
-  inboundCitationFamily
-  outboundCitationFamily
-  doctrinalTextSearchFamily
-  factPatternFamily
-  secondaryVocabularyFamily
-  defeaterFamily
-  comparatorFamily
-  contradictionFamily
-  localWorldGraphFamily
-  : AcquisitionFamily
+  exactCitationFamily : AcquisitionFamily
+  inboundCitationFamily : AcquisitionFamily
+  outboundCitationFamily : AcquisitionFamily
+  doctrinalTextSearchFamily : AcquisitionFamily
+  factPatternFamily : AcquisitionFamily
+  secondaryVocabularyFamily : AcquisitionFamily
+  defeaterFamily : AcquisitionFamily
+  comparatorFamily : AcquisitionFamily
+  contradictionFamily : AcquisitionFamily
+  localWorldGraphFamily : AcquisitionFamily
+
 
 record SearchRound : Set₁ where
   constructor searchRound
@@ -142,12 +142,12 @@ record SearchSaturationReceipt : Set₁ where
 open SearchSaturationReceipt public
 
 data SearchContinuationDecision : Set where
-  continueExploit
-  continueExplore
-  stopAtEmpiricalSaturation
-  stopAuthorityBlocked
-  stopUnderidentified
-  : SearchContinuationDecision
+  continueExploit : SearchContinuationDecision
+  continueExplore : SearchContinuationDecision
+  stopAtEmpiricalSaturation : SearchContinuationDecision
+  stopAuthorityBlocked : SearchContinuationDecision
+  stopUnderidentified : SearchContinuationDecision
+
 
 ------------------------------------------------------------------------
 -- Firewalls.

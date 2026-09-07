@@ -63,9 +63,9 @@ materialismCoordinateSeparatesConstructedProfiles same =
 ------------------------------------------------------------------------
 
 data SituatedReading : Set where
-  constructedDiscourseMaterialistReading
-  constructedDiscourseIdealistReading
-  : SituatedReading
+  constructedDiscourseMaterialistReading : SituatedReading
+  constructedDiscourseIdealistReading : SituatedReading
+
 
 data BroadSchoolLabel : Set where poststructuralistLabel : BroadSchoolLabel
 
@@ -109,10 +109,10 @@ poststructuralistLabelCannotDetermineRetreatProfile =
 ------------------------------------------------------------------------
 
 data TheoreticalMove : Set where
-  critiquesFoundationalReason
-  discourseConstitutive
-  abandonsMaterialismAndRationalExplanation
-  : TheoreticalMove
+  critiquesFoundationalReason : TheoreticalMove
+  discourseConstitutive : TheoreticalMove
+  abandonsMaterialismAndRationalExplanation : TheoreticalMove
+
 
 record ABReceipt : Set where
   constructor ab-receipt
@@ -133,10 +133,10 @@ abDoesNotAutoPromoteToC ()
 ------------------------------------------------------------------------
 
 data CausalArchitecture : Set where
-  materialOneWayDetermination
-  discursiveOneWayDetermination
-  reciprocalMaterialDiscursiveConstitution
-  : CausalArchitecture
+  materialOneWayDetermination : CausalArchitecture
+  discursiveOneWayDetermination : CausalArchitecture
+  reciprocalMaterialDiscursiveConstitution : CausalArchitecture
+
 
 reciprocalNotDiscursiveOneWay :
   reciprocalMaterialDiscursiveConstitution ≡ discursiveOneWayDetermination → ⊥
@@ -147,19 +147,19 @@ reciprocalNotDiscursiveOneWay ()
 ------------------------------------------------------------------------
 
 data StrategicCoordinate : Set where
-  productionRelation
-  classStructure
-  capitalAccumulation
-  statePower
-  imperialSystem
-  collectiveAgent
-  transformationTarget
-  : StrategicCoordinate
+  productionRelation : StrategicCoordinate
+  classStructure : StrategicCoordinate
+  capitalAccumulation : StrategicCoordinate
+  statePower : StrategicCoordinate
+  imperialSystem : StrategicCoordinate
+  collectiveAgent : StrategicCoordinate
+  transformationTarget : StrategicCoordinate
+
 
 data StrategicAdequacy : Set where
-  strategicallySpecified
-  strategicallyOpen
-  : StrategicAdequacy
+  strategicallySpecified : StrategicAdequacy
+  strategicallyOpen : StrategicAdequacy
+
 
 record StrategicResidual : Set where
   constructor strategic-residual
@@ -177,11 +177,11 @@ record StrategicResidual : Set where
 ------------------------------------------------------------------------
 
 data CrossPollinationClaimLayer : Set where
-  externalSourceProposition
-  dashIBoundedInterpretation
-  dashIFormalCountermodel
-  empiricalNamedThinkerClaim
-  : CrossPollinationClaimLayer
+  externalSourceProposition : CrossPollinationClaimLayer
+  dashIBoundedInterpretation : CrossPollinationClaimLayer
+  dashIFormalCountermodel : CrossPollinationClaimLayer
+  empiricalNamedThinkerClaim : CrossPollinationClaimLayer
+
 
 record SourceUseReceipt : Set where
   constructor source-use-receipt

@@ -31,33 +31,33 @@ import DASHI.Culture.IndigenousKnowledgeStoryTwoEyedSeeingBidiExact as IK
 ------------------------------------------------------------------------
 
 data RemedyActuator : Set where
-  stateExecutiveActuator
-  parliamentaryActuator
-  communityNegotiatedActuator
-  treatyBodyFollowUpActuator
-  periodicReportingActuator
-  publicAccountabilityActuator
-  separateDomesticCauseActuator
-  noDirectDomesticExecutionActuator
-  : RemedyActuator
+  stateExecutiveActuator : RemedyActuator
+  parliamentaryActuator : RemedyActuator
+  communityNegotiatedActuator : RemedyActuator
+  treatyBodyFollowUpActuator : RemedyActuator
+  periodicReportingActuator : RemedyActuator
+  publicAccountabilityActuator : RemedyActuator
+  separateDomesticCauseActuator : RemedyActuator
+  noDirectDomesticExecutionActuator : RemedyActuator
+
 
 data ActuationDependency : Set where
-  stateCanActDirectly
-  appropriationOrLegislationDependent
-  communityAgreementDependent
-  indirectExternalFollowUp
-  separateLegalRouteRequired
-  noSelfExecutingDomesticCompulsion
-  : ActuationDependency
+  stateCanActDirectly : ActuationDependency
+  appropriationOrLegislationDependent : ActuationDependency
+  communityAgreementDependent : ActuationDependency
+  indirectExternalFollowUp : ActuationDependency
+  separateLegalRouteRequired : ActuationDependency
+  noSelfExecutingDomesticCompulsion : ActuationDependency
+
 
 data ActuationProspect : Set where
-  comparativelyDirectButOutcomeOpen
-  politicallyDependent
-  communityAuthorityDependent
-  indirectFollowUpOnly
-  separateRouteOnly
-  noDirectExecutionRoute
-  : ActuationProspect
+  comparativelyDirectButOutcomeOpen : ActuationProspect
+  politicallyDependent : ActuationProspect
+  communityAuthorityDependent : ActuationProspect
+  indirectFollowUpOnly : ActuationProspect
+  separateRouteOnly : ActuationProspect
+  noDirectExecutionRoute : ActuationProspect
+
 
 record RemedyActuationReceipt : Set where
   constructor remedy-actuation-receipt
@@ -161,22 +161,22 @@ preventionActuation = remedy-actuation-receipt
 ------------------------------------------------------------------------
 
 data ProspectCoordinate : Set where
-  normSpecified
-  directDomesticWritAvailable
-  domesticActorCanAct
-  budgetOrLegislationRequired
-  communityAgreementRequired
-  externalFollowUpAvailable
-  realisedOutcomeObserved
-  correctionActuallyOccurs
-  : ProspectCoordinate
+  normSpecified : ProspectCoordinate
+  directDomesticWritAvailable : ProspectCoordinate
+  domesticActorCanAct : ProspectCoordinate
+  budgetOrLegislationRequired : ProspectCoordinate
+  communityAgreementRequired : ProspectCoordinate
+  externalFollowUpAvailable : ProspectCoordinate
+  realisedOutcomeObserved : ProspectCoordinate
+  correctionActuallyOccurs : ProspectCoordinate
+
 
 data ProspectState : Set where
-  present
-  absent
-  conditional
-  unresolved
-  : ProspectState
+  present : ProspectState
+  absent : ProspectState
+  conditional : ProspectState
+  unresolved : ProspectState
+
 
 compensationProspectState : ProspectCoordinate → ProspectState
 compensationProspectState normSpecified = present
@@ -314,12 +314,12 @@ observedOperationStillDoesNotProvePrivateIntent = refl
 ------------------------------------------------------------------------
 
 data RemedyReverseNeed : Set where
-  acquireCompensationExecutionReceipt
-  acquireCommunityDefinedNeedsReceipt
-  acquireRealisedSafetyOutcome
-  acquireCorrectionResponseReceipt
-  acquireRecurrencePreventionOutcome
-  : RemedyReverseNeed
+  acquireCompensationExecutionReceipt : RemedyReverseNeed
+  acquireCommunityDefinedNeedsReceipt : RemedyReverseNeed
+  acquireRealisedSafetyOutcome : RemedyReverseNeed
+  acquireCorrectionResponseReceipt : RemedyReverseNeed
+  acquireRecurrencePreventionOutcome : RemedyReverseNeed
+
 
 reverseNeed : Billy.RemedyCoordinate → RemedyReverseNeed
 reverseNeed Billy.adequateCompensation = acquireCompensationExecutionReceipt

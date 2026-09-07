@@ -15,13 +15,13 @@ import DASHI.Law.EvidenceProvenanceDependencyDagExact as Dag
 ------------------------------------------------------------------------
 
 data AdministrativeMultiplicityClaim : Set where
-  repeatedRecognitionCreatesIndigenousAuthority
-  repeatedThreatDocumentsCreateIndependentCorroboration
+  repeatedRecognitionCreatesIndigenousAuthority : AdministrativeMultiplicityClaim
+  repeatedThreatDocumentsCreateIndependentCorroboration : AdministrativeMultiplicityClaim
   repeatedClassificationCreatesIncidentCausation : AdministrativeMultiplicityClaim
 
 data AdministrativeMultiplicityProducer : Set where
-  indigenousAuthorityProducer
-  independentThreatProducer
+  indigenousAuthorityProducer : AdministrativeMultiplicityProducer
+  independentThreatProducer : AdministrativeMultiplicityProducer
   incidentCausalProducer : AdministrativeMultiplicityProducer
 
 reverseAdministrativeMultiplicity :

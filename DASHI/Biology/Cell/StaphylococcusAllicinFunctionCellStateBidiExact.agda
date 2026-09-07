@@ -15,21 +15,21 @@ import DASHI.Biology.Cell.StaphylococcusAllicinRedoxRecoveryBidiExact as RedoxRe
 ------------------------------------------------------------------------
 
 data TargetLane : Set where
-  translationLane
-  nucleotideMetabolismLane
-  oxidativeStressLane
-  globalRegulationLane
-  virulenceBiofilmRegulationLane
-  thiolHomeostasisLane
-  : TargetLane
+  translationLane : TargetLane
+  nucleotideMetabolismLane : TargetLane
+  oxidativeStressLane : TargetLane
+  globalRegulationLane : TargetLane
+  virulenceBiofilmRegulationLane : TargetLane
+  thiolHomeostasisLane : TargetLane
+
 
 data FunctionalStatus : Set where
-  modificationObserved
-  functionalEffectRelatedSource
-  functionalEffectDirectlyMeasured
-  cellStateEffectDirectlyMeasured
-  causalMediationEstablished
-  : FunctionalStatus
+  modificationObserved : FunctionalStatus
+  functionalEffectRelatedSource : FunctionalStatus
+  functionalEffectDirectlyMeasured : FunctionalStatus
+  cellStateEffectDirectlyMeasured : FunctionalStatus
+  causalMediationEstablished : FunctionalStatus
+
 
 record ProteinToCellStateReceipt : Set where
   constructor proteinToCellStateReceipt

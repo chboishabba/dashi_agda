@@ -28,19 +28,19 @@ import DASHI.Cognition.PNF.SensibLawCountrySystemRealisedJusticeBidiExact as Jus
 ------------------------------------------------------------------------
 
 data ObligationKind : Set where
-  indigenousTraditionalLawCustodialResponsibility
-  undripFutureGenerationResponsibility
-  hrcEffectiveRemedyObligation
-  australianNegligenceDutyCandidate
-  : ObligationKind
+  indigenousTraditionalLawCustodialResponsibility : ObligationKind
+  undripFutureGenerationResponsibility : ObligationKind
+  hrcEffectiveRemedyObligation : ObligationKind
+  australianNegligenceDutyCandidate : ObligationKind
+
 
 data ObligationAuthority : Set where
-  indigenousLawAndCustomAuthority
-  internationalDeclarationAuthority
-  treatyBodyViewsAuthority
-  australianCourtAuthority
-  dashiAnalyticalRoute
-  : ObligationAuthority
+  indigenousLawAndCustomAuthority : ObligationAuthority
+  internationalDeclarationAuthority : ObligationAuthority
+  treatyBodyViewsAuthority : ObligationAuthority
+  australianCourtAuthority : ObligationAuthority
+  dashiAnalyticalRoute : ObligationAuthority
+
 
 record CustodialDutyReceipt : Set where
   constructor custodial-duty-receipt
@@ -89,12 +89,12 @@ billyEffectiveRemedyDuty = custodial-duty-receipt
 ------------------------------------------------------------------------
 
 data RelationalDutyEvidenceKind : Set where
-  permanentIntergenerationalLossEvidence
-  custodialResponsibilityEvidence
-  placeSpecificNonFungibilityEvidence
-  communityDefinedHarmEvidence
-  treatyBodyRemedyEvidence
-  : RelationalDutyEvidenceKind
+  permanentIntergenerationalLossEvidence : RelationalDutyEvidenceKind
+  custodialResponsibilityEvidence : RelationalDutyEvidenceKind
+  placeSpecificNonFungibilityEvidence : RelationalDutyEvidenceKind
+  communityDefinedHarmEvidence : RelationalDutyEvidenceKind
+  treatyBodyRemedyEvidence : RelationalDutyEvidenceKind
+
 
 record DutyIssueEvidenceBridge : Set where
   constructor duty-issue-evidence-bridge

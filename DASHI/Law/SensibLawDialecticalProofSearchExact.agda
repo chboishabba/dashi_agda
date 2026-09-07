@@ -18,26 +18,26 @@ import DASHI.Law.SensibLawProviderNeutralLegalQueryAlgebraExact as Query
 ------------------------------------------------------------------------
 
 data EpistemicSearchRole : Set where
-  supportRole
-  defeaterRole
-  comparatorRole
-  contradictionRole
-  counterexampleRole
-  vocabularyDiscoveryRole
-  authorityDiscoveryRole
-  : EpistemicSearchRole
+  supportRole : EpistemicSearchRole
+  defeaterRole : EpistemicSearchRole
+  comparatorRole : EpistemicSearchRole
+  contradictionRole : EpistemicSearchRole
+  counterexampleRole : EpistemicSearchRole
+  vocabularyDiscoveryRole : EpistemicSearchRole
+  authorityDiscoveryRole : EpistemicSearchRole
+
 
 data DefeaterKind : Set where
-  separationOfPowersDefeater
-  policyOrInstitutionalCompetenceDefeater
-  statutorySchemeCoherenceDefeater
-  indeterminacyDefeater
-  nonJusticiabilityDefeater
-  authorityHierarchyDefeater
-  temporalValidityDefeater
-  factualDiscriminatorDefeater
-  otherDeclaredDefeater
-  : DefeaterKind
+  separationOfPowersDefeater : DefeaterKind
+  policyOrInstitutionalCompetenceDefeater : DefeaterKind
+  statutorySchemeCoherenceDefeater : DefeaterKind
+  indeterminacyDefeater : DefeaterKind
+  nonJusticiabilityDefeater : DefeaterKind
+  authorityHierarchyDefeater : DefeaterKind
+  temporalValidityDefeater : DefeaterKind
+  factualDiscriminatorDefeater : DefeaterKind
+  otherDeclaredDefeater : DefeaterKind
+
 
 record DialecticalProbePair : Set₁ where
   constructor dialecticalProbePair

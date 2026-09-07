@@ -18,12 +18,12 @@ import DASHI.Biology.Microbiology.BaldEyesalveMechanismDiscriminationBidiExact a
 ------------------------------------------------------------------------
 
 data PerturbationLane : Set where
-  sulfurReactivityPerturbation
-  thiolCompetitionPerturbation
-  recoveryCapacityPerturbation
-  quorumSignalRescuePerturbation
-  matrixTransportPerturbation
-  : PerturbationLane
+  sulfurReactivityPerturbation : PerturbationLane
+  thiolCompetitionPerturbation : PerturbationLane
+  recoveryCapacityPerturbation : PerturbationLane
+  quorumSignalRescuePerturbation : PerturbationLane
+  matrixTransportPerturbation : PerturbationLane
+
 
 record BranchSelectivePerturbation : Set where
   constructor branchSelectivePerturbation

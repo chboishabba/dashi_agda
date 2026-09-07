@@ -17,21 +17,21 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Intent
 ------------------------------------------------------------------------
 
 data CorpusClass : Set where
-  localCompiledWorldCorpus
-  officialCaseLawCorpus
-  researchCaseLawIndex
-  officialLegislationCorpus
-  regulationAndStandardCorpus
-  wikipediaCorpus
-  wikidataCorpus
-  journalCorpus
-  bookAndTreatiseCorpus
-  lawReformAndGovernmentReportCorpus
-  transcriptAndTestimonyCorpus
-  matterDocumentCorpus
-  archivalHistoricalCorpus
-  generalFreeTextCorpus
-  : CorpusClass
+  localCompiledWorldCorpus : CorpusClass
+  officialCaseLawCorpus : CorpusClass
+  researchCaseLawIndex : CorpusClass
+  officialLegislationCorpus : CorpusClass
+  regulationAndStandardCorpus : CorpusClass
+  wikipediaCorpus : CorpusClass
+  wikidataCorpus : CorpusClass
+  journalCorpus : CorpusClass
+  bookAndTreatiseCorpus : CorpusClass
+  lawReformAndGovernmentReportCorpus : CorpusClass
+  transcriptAndTestimonyCorpus : CorpusClass
+  matterDocumentCorpus : CorpusClass
+  archivalHistoricalCorpus : CorpusClass
+  generalFreeTextCorpus : CorpusClass
+
 
 eligibleCorpora : Intent.ProducerClass → List CorpusClass
 eligibleCorpora Intent.exactCitedAuthorityProducer =

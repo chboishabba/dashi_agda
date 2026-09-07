@@ -14,14 +14,14 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data InstituteRole : Set where
-  president
-  researchDirector
-  creativeDirector
-  governmentAffairsDirector
-  seniorElectricalEngineer
-  professorEmeritus
-  holoChronCTO
-  : InstituteRole
+  president : InstituteRole
+  researchDirector : InstituteRole
+  creativeDirector : InstituteRole
+  governmentAffairsDirector : InstituteRole
+  seniorElectricalEngineer : InstituteRole
+  professorEmeritus : InstituteRole
+  holoChronCTO : InstituteRole
+
 
 record TeamMemberReceipt : Set where
   constructor team-member-receipt
@@ -69,11 +69,10 @@ canonicalInstituteTeamBoundary : InstituteTeamBoundary
 canonicalInstituteTeamBoundary = institute-team-boundary false refl true refl true refl
 
 data EskridgeTeamReverseTarget : Set where
-  acquire2018To2020RoleContinuity
-  acquireExperimentAssignment
-  acquireNotebookOrRepositoryCustody
-  acquireApparatusCustody
-  acquireCalibrationDataCustody
-  acquireInstituteDerivativeIdentity
-  acquirePostDeathHandoverOrArchive
-  : EskridgeTeamReverseTarget
+  acquire2018To2020RoleContinuity : EskridgeTeamReverseTarget
+  acquireExperimentAssignment : EskridgeTeamReverseTarget
+  acquireNotebookOrRepositoryCustody : EskridgeTeamReverseTarget
+  acquireApparatusCustody : EskridgeTeamReverseTarget
+  acquireCalibrationDataCustody : EskridgeTeamReverseTarget
+  acquireInstituteDerivativeIdentity : EskridgeTeamReverseTarget
+  acquirePostDeathHandoverOrArchive : EskridgeTeamReverseTarget
