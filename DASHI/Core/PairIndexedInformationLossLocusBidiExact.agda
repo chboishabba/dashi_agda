@@ -46,15 +46,6 @@ record DeterministicStack {A B C : Set} : Set₁ where
 
 open DeterministicStack public
 
-lossPersistsThroughStack :
-  ∀ {A B C : Set}
-    (stack : DeterministicStack {A} {B} {C}) →
-  PairLossLocus (first stack) →
-  C × C → Set
-lossPersistsThroughStack stack loss outputs =
-  second stack (first stack (left loss)) ≡
-  second stack (first stack (right loss))
-
 pairLossPersistsThroughStack :
   ∀ {A B C : Set}
     (stack : DeterministicStack {A} {B} {C}) →
