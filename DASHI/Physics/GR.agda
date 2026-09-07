@@ -5,6 +5,7 @@ module DASHI.Physics.GR where
 import DASHI.Physics.GR.RiemannTensor
 import DASHI.Physics.GR.EinsteinTensor
 import DASHI.Physics.GR.StressEnergyCompatibility
+import DASHI.Physics.GR.GravitationalObservationBidiExact
 
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
