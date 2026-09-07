@@ -25,6 +25,7 @@ open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_)
 open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Foundations.RealAnalysisAxioms as Legacy
 import DASHI.Foundations.BishopConstructiveRealBridgeExact as Bridge
 import DASHI.Physics.Closure.NSTriadKNMurrayBishopDirectCanonicalCarrier as BishopQ
 import DASHI.Physics.YangMills.BalabanClayT4BishopFourCornerIntervalExact as BishopInterval
@@ -32,8 +33,7 @@ import DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102
 import DASHI.Physics.YangMills.BalabanA2RationalSensitivityToRealContractionRound104Exact as R104
 import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as R208
 
-legacyRationalEmbed : Bridge.BishopToDASHIRealBridge → ℚ →
-  DASHI.Foundations.RealAnalysisAxioms.ℝ
+legacyRationalEmbed : Bridge.BishopToDASHIRealBridge → ℚ → Legacy.ℝ
 legacyRationalEmbed bridge q =
   Bridge.embed bridge (BishopQ.bishopRationalEmbed q)
 
