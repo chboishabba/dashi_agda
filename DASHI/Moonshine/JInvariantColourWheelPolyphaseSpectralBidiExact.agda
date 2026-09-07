@@ -13,6 +13,7 @@ module DASHI.Moonshine.JInvariantColourWheelPolyphaseSpectralBidiExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Foundations.Base369PolyphaseCharacters as Polyphase
+import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact as Spectral
 import DASHI.Moonshine.JInvariantColourWheelWaveSignedBidiExact as Wheel
 
@@ -67,17 +68,17 @@ polyphaseConjugationMatchesSpectralConjugation Polyphase.negativeSequence = refl
 ------------------------------------------------------------------------
 
 signedMultiplicitySequence :
-  Wheel.Signed.SignedMultiplicity → Polyphase.C3Sequence
+  Signed.SignedMultiplicity → Polyphase.C3Sequence
 signedMultiplicitySequence m =
   frequencyToSequence (Wheel.signedMultiplicityFrequency m)
 
 signedNegationBecomesSequenceConjugation :
-  (m : Wheel.Signed.SignedMultiplicity) →
-  signedMultiplicitySequence (Wheel.Signed.negateMultiplicity m) ≡
+  (m : Signed.SignedMultiplicity) →
+  signedMultiplicitySequence (Signed.negateMultiplicity m) ≡
   conjugateSequence (signedMultiplicitySequence m)
-signedNegationBecomesSequenceConjugation (Wheel.Signed.negativeMultiplicity n) = refl
-signedNegationBecomesSequenceConjugation Wheel.Signed.zeroMultiplicity = refl
-signedNegationBecomesSequenceConjugation (Wheel.Signed.positiveMultiplicity n) = refl
+signedNegationBecomesSequenceConjugation (Signed.negativeMultiplicity n) = refl
+signedNegationBecomesSequenceConjugation Signed.zeroMultiplicity = refl
+signedNegationBecomesSequenceConjugation (Signed.positiveMultiplicity n) = refl
 
 ------------------------------------------------------------------------
 -- BIDI consequence: with the finite carrier correspondence paid, the first
