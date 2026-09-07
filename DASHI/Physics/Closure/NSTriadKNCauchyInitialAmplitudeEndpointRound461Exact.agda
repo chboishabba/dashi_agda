@@ -33,7 +33,7 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; Positive; NonNegative; _+_; _*_; _≤_; _<_; positive; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramRound179Exact as R179
@@ -47,9 +47,7 @@ import DASHI.Physics.YangMills.BalabanClayT4PositiveDenominatorQuotientEndpoints
 two : ℚ
 two = R449.two
 
-record InitialCauchyAmplitudeData
-    (floor : ℚ)
-    (cells : List R446.PositiveRateComplex3Cell) : Set₁ where
+record InitialCauchyAmplitudeData (floor : ℚ) : Set₁ where
   constructor initial-cauchy-amplitude-data
   field
     floorPositive : 0ℚ < floor
@@ -70,8 +68,8 @@ record InitialCauchyAmplitudeData
 open InitialCauchyAmplitudeData public
 
 pairKernelBelowFloorCeiling :
-  ∀ {floor cells}
-    (P : InitialCauchyAmplitudeData floor cells)
+  ∀ {floor}
+    (P : InitialCauchyAmplitudeData floor)
     (left right : R446.PositiveRateComplex3Cell) →
   R446.cauchyKernel left right
   ≤ R449.diagonalCeilingAt floor (floorPositive P)
@@ -130,8 +128,8 @@ literalPairFlux left right =
     * R179.realHermitianCross (R446.value left) (R446.value right)
 
 compileInitialEndpoint :
-  ∀ {floor cells} →
-  (P : InitialCauchyAmplitudeData floor cells) →
+  ∀ {floor} →
+  (P : InitialCauchyAmplitudeData floor) →
   R460.FiniteInitialCoherentEndpoint R446.PositiveRateComplex3Cell
 compileInitialEndpoint {floor} P =
   R460.finite-initial-coherent-endpoint
@@ -174,60 +172,69 @@ compileInitialEndpoint {floor} P =
         in ℚP.nonNegative⁻¹ product
 
       crossStep : K * cross ≤ K * product
-      crossStep = ℚP.*-monoˡ-≤-nonNeg K
-        (hermitianCrossBelowAmplitudeProduct P left right)
-        {{nonNegative KNN}}
+      crossStep =
+        let instance KNNI : NonNegative K = nonNegative KNN
+        in ℚP.*-monoˡ-≤-nonNeg K
+          (hermitianCrossBelowAmplitudeProduct P left right)
 
       kernelStep : K * product ≤ W * product
-      kernelStep = ℚP.*-monoʳ-≤-nonNeg product
-        (pairKernelBelowFloorCeiling P left right)
-        {{nonNegative productNN}}
+      kernelStep =
+        let instance productNNI : NonNegative product = nonNegative productNN
+        in ℚP.*-monoʳ-≤-nonNeg product
+          (pairKernelBelowFloorCeiling P left right)
 
       core = ℚP.≤-trans crossStep kernelStep
       twoNN = ℚP.<⇒≤ R449.twoPositive
-      scaled = ℚP.*-monoˡ-≤-nonNeg two core {{nonNegative twoNN}}
+      scaled : two * (K * cross) ≤ two * (W * product)
+      scaled =
+        let instance twoNNI : NonNegative two = nonNegative twoNN
+        in ℚP.*-monoˡ-≤-nonNeg two core
     in
     subst
       (λ upper → literalPairFlux left right ≤ upper)
       (solve (W ∷ product ∷ []))
       scaled
 
+compiledHeadIsR447Head :
+  ∀ {floor}
+    (P : InitialCauchyAmplitudeData floor)
+    (head : R446.PositiveRateComplex3Cell)
+    (rest : List R446.PositiveRateComplex3Cell) →
+  R460.headPairFlux (compileInitialEndpoint P) head rest
+  ≡ R447.offDiagonalRow head rest
+compiledHeadIsR447Head P head [] = refl
+compiledHeadIsR447Head P head (cell ∷ rest) =
+  cong₂ _+_ refl (compiledHeadIsR447Head P head rest)
+
 compiledOffDiagonalIsR447OffDiagonal :
-  ∀ {floor cells}
-    (P : InitialCauchyAmplitudeData floor cells) →
+  ∀ {floor}
+    (P : InitialCauchyAmplitudeData floor)
+    (cells : List R446.PositiveRateComplex3Cell) →
   R460.offDiagonalFlux (compileInitialEndpoint P) cells
   ≡ R447.offDiagonalForm cells
-compiledOffDiagonalIsR447OffDiagonal P {cells = []} = refl
-compiledOffDiagonalIsR447OffDiagonal P {cells = head ∷ rest} =
+compiledOffDiagonalIsR447OffDiagonal P [] = refl
+compiledOffDiagonalIsR447OffDiagonal P (head ∷ rest) =
   cong₂ _+_
-    (headExact head rest)
-    (compiledOffDiagonalIsR447OffDiagonal P {cells = rest})
-  where
-  headExact :
-    (selected : R446.PositiveRateComplex3Cell) →
-    (tail : List R446.PositiveRateComplex3Cell) →
-    R460.headPairFlux (compileInitialEndpoint P) selected tail
-    ≡ R447.offDiagonalRow selected tail
-  headExact selected [] = refl
-  headExact selected (next ∷ tail) =
-    cong₂ _+_ refl (headExact selected tail)
+    (compiledHeadIsR447Head P head rest)
+    (compiledOffDiagonalIsR447OffDiagonal P rest)
 
 r447OffDiagonalBelowInitialAmplitudeSquare :
-  ∀ {floor cells}
-    (P : InitialCauchyAmplitudeData floor cells) →
+  ∀ {floor}
+    (P : InitialCauchyAmplitudeData floor)
+    (cells : List R446.PositiveRateComplex3Cell) →
   R447.offDiagonalForm cells
   ≤
   R449.diagonalCeilingAt floor (floorPositive P)
     * (R460.sumAmplitude (compileInitialEndpoint P) cells
       * R460.sumAmplitude (compileInitialEndpoint P) cells)
-r447OffDiagonalBelowInitialAmplitudeSquare P =
+r447OffDiagonalBelowInitialAmplitudeSquare {floor} P cells =
   subst
     (λ selected → selected ≤
-      R449.diagonalCeilingAt _ (floorPositive P)
-        * (R460.sumAmplitude (compileInitialEndpoint P) _
-          * R460.sumAmplitude (compileInitialEndpoint P) _))
-    (compiledOffDiagonalIsR447OffDiagonal P)
-    (R460.offDiagonalBelowAmplitudeSquare (compileInitialEndpoint P) _)
+      R449.diagonalCeilingAt floor (floorPositive P)
+        * (R460.sumAmplitude (compileInitialEndpoint P) cells
+          * R460.sumAmplitude (compileInitialEndpoint P) cells))
+    (compiledOffDiagonalIsR447OffDiagonal P cells)
+    (R460.offDiagonalBelowAmplitudeSquare (compileInitialEndpoint P) cells)
 
 round461LiteralR447PositiveEndpointReducedToAmplitudeSquare : Bool
 round461LiteralR447PositiveEndpointReducedToAmplitudeSquare = true
