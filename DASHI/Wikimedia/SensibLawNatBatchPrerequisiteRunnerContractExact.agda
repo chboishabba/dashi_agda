@@ -5,16 +5,14 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Wikimedia.SensibLawStatementBundlePrerequisiteDAGExact as DAG
-import DASHI.Wikimedia.SensibLawZelphHFPrerequisiteBridgeExact as Zelph
 import DASHI.Wikimedia.SensibLawZelphHFSelectorResultPaymentExact as Result
 
 ------------------------------------------------------------------------
 -- BATCH PREREQUISITE RUNNER CONTRACT
 --
--- This is deliberately NOT 37,665 hand-written proof objects.
--- A runtime/script owns enumeration, grouping, dispatch and serialization.
--- Agda owns the generic laws that every generated row/group/batch artifact
--- must satisfy.
+-- The runtime/script enumerates, groups, dispatches and serialises rows.
+-- Agda proves what those generated artifacts mean.  There is intentionally no
+-- 37,665-row hand-written witness surface in this module.
 ------------------------------------------------------------------------
 
 data RoutingFamily : Set where
@@ -26,11 +24,7 @@ data RoutingFamily : Set where
   : RoutingFamily
 
 data SelectorClass : Set where
-  zelphHFSelector
-  theoremSearch
-  humanReview
-  noSelector
-  : SelectorClass
+  zelphHFSelector theoremSearch humanReview noSelector : SelectorClass
 
 selectorClassForMechanism : DAG.PrerequisiteMechanism → SelectorClass
 selectorClassForMechanism DAG.lookMechanism = zelphHFSelector
@@ -42,69 +36,69 @@ record BatchRowDescriptor : Set where
   constructor batch-row-descriptor
   field
     rowId : String
-    qid : String
-    statementReference : String
-    sourceCohort : String
-    routingFamily : RoutingFamily
-    sourceProperty : String
-    targetProperty : String
-    qualifierProperties : List String
-    referenceProperties : List String
+    rowQid : String
+    rowStatementReference : String
+    rowSourceCohort : String
+    rowRoutingFamily : RoutingFamily
+    rowSourceProperty : String
+    rowTargetProperty : String
+    rowQualifierProperties : List String
+    rowReferenceProperties : List String
     rowRevisionReference : String
     rowInputDigest : String
-    prerequisiteStatus : DAG.BundleObligationStatus
+    rowPrerequisiteStatus : DAG.BundleObligationStatus
 open BatchRowDescriptor public
 
 record WorkSignature : Set where
   constructor work-signature
   field
-    cohort : String
-    route : RoutingFamily
-    firstResidual : DAG.BundlePrerequisiteResidual
-    producer : DAG.BundlePrerequisiteProducer
-    mechanism : DAG.PrerequisiteMechanism
-    selectorClass : SelectorClass
-    sourceProperty : String
-    targetProperty : String
-    qualifierProperties : List String
-    referenceProperties : List String
+    signatureCohort : String
+    signatureRoute : RoutingFamily
+    signatureFirstResidual : DAG.BundlePrerequisiteResidual
+    signatureProducer : DAG.BundlePrerequisiteProducer
+    signatureMechanism : DAG.PrerequisiteMechanism
+    signatureSelectorClass : SelectorClass
+    signatureSourceProperty : String
+    signatureTargetProperty : String
+    signatureQualifierProperties : List String
+    signatureReferenceProperties : List String
 open WorkSignature public
 
 signatureFor : BatchRowDescriptor → WorkSignature
 signatureFor row =
-  let residual = DAG.firstMissingPrerequisite (prerequisiteStatus row)
+  let residual = DAG.firstMissingPrerequisite (rowPrerequisiteStatus row)
       producer = DAG.producerForResidual residual
       mechanism = DAG.mechanismForProducer producer
   in
   work-signature
-    (sourceCohort row)
-    (routingFamily row)
+    (rowSourceCohort row)
+    (rowRoutingFamily row)
     residual
     producer
     mechanism
     (selectorClassForMechanism mechanism)
-    (BatchRowDescriptor.sourceProperty row)
-    (BatchRowDescriptor.targetProperty row)
-    (qualifierProperties row)
-    (referenceProperties row)
+    (rowSourceProperty row)
+    (rowTargetProperty row)
+    (rowQualifierProperties row)
+    (rowReferenceProperties row)
 
 record SignatureAssignment (row : BatchRowDescriptor) : Set where
   constructor signature-assignment
   field
-    signature : WorkSignature
-    signatureExact : signature ≡ signatureFor row
-    assignmentReference : String
+    assignedSignature : WorkSignature
+    assignedSignatureExact : assignedSignature ≡ signatureFor row
+    signatureAssignmentReference : String
 open SignatureAssignment public
 
 canonicalSignatureAssignment :
   (row : BatchRowDescriptor) → SignatureAssignment row
 canonicalSignatureAssignment row =
   signature-assignment (signatureFor row) refl
-    "work signature is derived from row state; it is not a manually selected proof-search route"
+    "signature is derived from row state, not hand-selected"
 
 ------------------------------------------------------------------------
--- Equal signatures may share one bounded work strategy. They remain distinct
--- rows with distinct source/revision/statement lineage.
+-- Equal signatures may share one bounded dispatch strategy.  They do not
+-- become the same statement, source, semantics or consumer receipt.
 ------------------------------------------------------------------------
 
 record SignatureGroupMember
@@ -112,53 +106,41 @@ record SignatureGroupMember
     (row : BatchRowDescriptor) : Set where
   constructor signature-group-member
   field
-    assignment : SignatureAssignment row
-    sameSignature : signature assignment ≡ representative
-    rowLineageReference : String
+    groupMemberAssignment : SignatureAssignment row
+    groupMemberSameSignature :
+      assignedSignature groupMemberAssignment ≡ representative
+    groupMemberLineageReference : String
 open SignatureGroupMember public
 
 record BatchWorkGroup : Set where
   constructor batch-work-group
   field
-    groupId : String
-    representativeSignature : WorkSignature
-    memberCount : Nat
-    dispatchReference : String
-    groupContentDigest : String
+    workGroupId : String
+    workGroupSignature : WorkSignature
+    workGroupMemberCount : Nat
+    workGroupDispatchReference : String
+    workGroupContentDigest : String
 open BatchWorkGroup public
 
 ------------------------------------------------------------------------
--- Runtime result row. The decision is not reconstructed from an aggregate
--- count. It points to the exact content-addressed selector/proof/review result
--- and retains the atomic result semantics from SelectorResultPaymentExact.
+-- Per-row result carrier. Aggregate counts never reconstruct this information.
 ------------------------------------------------------------------------
 
-data BatchOutcome : Set where
-  paid
-  open
-  split
-  reactivated
-  : BatchOutcome
+data BatchOutcome : Set where paid open split reactivated : BatchOutcome
 
 record BatchRowResult (row : BatchRowDescriptor) : Set where
   constructor batch-row-result
   field
-    assignment : SignatureAssignment row
-    workGroupReference : String
-    boundedResultReference : String
-    boundedResultDigest : String
-    executionReceiptReference : String
-    consumerVerificationReference : String
-    outcome : BatchOutcome
-    nextPrerequisite : DAG.BundlePrerequisiteResidual
-    resultLineageReference : String
+    rowResultAssignment : SignatureAssignment row
+    rowResultWorkGroupReference : String
+    rowResultBoundedResultReference : String
+    rowResultBoundedResultDigest : String
+    rowResultExecutionReceiptReference : String
+    rowResultConsumerVerificationReference : String
+    rowResultOutcome : BatchOutcome
+    rowResultNextPrerequisite : DAG.BundlePrerequisiteResidual
+    rowResultLineageReference : String
 open BatchRowResult public
-
-------------------------------------------------------------------------
--- Outcome witnesses. These are deliberately stronger than a string enum.
--- A generated runtime row can say `paid`, but a theorem-level payment witness
--- still has to bind the atomic verified payment for that same bounded result.
-------------------------------------------------------------------------
 
 record PaidRowWitness
     (row : BatchRowDescriptor)
@@ -166,13 +148,13 @@ record PaidRowWitness
     (result : Result.BoundedSelectorResult) : Set where
   constructor paid-row-witness
   field
-    outcomeIsPaid : outcome batchRow ≡ paid
-    verifiedPayment : Result.VerifiedPrerequisitePayment result
-    resultTargetsCurrentFirstMissing :
+    paidRowOutcomeExact : rowResultOutcome batchRow ≡ paid
+    paidRowVerifiedPayment : Result.VerifiedPrerequisitePayment result
+    paidRowTargetsCurrentFirstMissing :
       Result.resultObligation result
       ≡ DAG.obligationForResidual
-          (DAG.firstMissingPrerequisite (prerequisiteStatus row))
-    exactResultReference : String
+          (DAG.firstMissingPrerequisite (rowPrerequisiteStatus row))
+    paidRowExactResultReference : String
 open PaidRowWitness public
 
 record OpenRowWitness
@@ -180,11 +162,11 @@ record OpenRowWitness
     (batchRow : BatchRowResult row) : Set where
   constructor open-row-witness
   field
-    outcomeIsOpen : outcome batchRow ≡ open
-    currentResidualStillOpen :
-      nextPrerequisite batchRow
-      ≡ DAG.firstMissingPrerequisite (prerequisiteStatus row)
-    openReasonReference : String
+    openRowOutcomeExact : rowResultOutcome batchRow ≡ open
+    openRowResidualStillCurrent :
+      rowResultNextPrerequisite batchRow
+      ≡ DAG.firstMissingPrerequisite (rowPrerequisiteStatus row)
+    openRowReasonReference : String
 open OpenRowWitness public
 
 record SplitRowWitness
@@ -192,10 +174,10 @@ record SplitRowWitness
     (batchRow : BatchRowResult row) : Set where
   constructor split-row-witness
   field
-    outcomeIsSplit : outcome batchRow ≡ split
-    splitPlanReference : String
-    splitPreservesSourceRow : Bool
-    splitPreservesSourceRowIsTrue : splitPreservesSourceRow ≡ true
+    splitRowOutcomeExact : rowResultOutcome batchRow ≡ split
+    splitRowPlanReference : String
+    splitRowPreservesSource : Bool
+    splitRowPreservesSourceIsTrue : splitRowPreservesSource ≡ true
 open SplitRowWitness public
 
 record ReactivatedRowWitness
@@ -203,53 +185,52 @@ record ReactivatedRowWitness
     (batchRow : BatchRowResult row) : Set where
   constructor reactivated-row-witness
   field
-    outcomeIsReactivated : outcome batchRow ≡ reactivated
-    changedEvidenceReference : String
-    historicalClosureReference : String
-    historicalClosurePreserved : Bool
-    historicalClosurePreservedIsTrue : historicalClosurePreserved ≡ true
+    reactivatedRowOutcomeExact : rowResultOutcome batchRow ≡ reactivated
+    reactivatedChangedEvidenceReference : String
+    reactivatedHistoricalClosureReference : String
+    reactivatedHistoricalClosurePreserved : Bool
+    reactivatedHistoricalClosurePreservedIsTrue :
+      reactivatedHistoricalClosurePreserved ≡ true
 open ReactivatedRowWitness public
 
 ------------------------------------------------------------------------
--- Batch artifact. Runtime owns the actual row serialization and exact counts.
--- The formal carrier only requires that the artifact is content-addressed,
--- schema/version pinned and keeps per-row results available by reference.
+-- Content-addressed generated artifact. The artifact points to row/group/receipt
+-- indexes; this formal carrier does not enumerate the cohort itself.
 ------------------------------------------------------------------------
 
 record BatchOutcomeCounts : Set where
   constructor batch-outcome-counts
   field
-    paidCount : Nat
-    openCount : Nat
-    splitCount : Nat
-    reactivatedCount : Nat
+    batchPaidCount : Nat
+    batchOpenCount : Nat
+    batchSplitCount : Nat
+    batchReactivatedCount : Nat
 open BatchOutcomeCounts public
 
 record ContentAddressedBatchArtifact : Set where
   constructor content-addressed-batch-artifact
   field
-    schemaVersion : String
-    laneId : String
-    sourceCohort : String
-    sourceRevisionReference : String
-    sourcePopulation : Nat
-    materializedRowCount : Nat
-    workGroupCount : Nat
-    counts : BatchOutcomeCounts
+    batchSchemaVersion : String
+    batchLaneId : String
+    batchSourceCohort : String
+    batchSourceRevisionReference : String
+    batchSourcePopulation : Nat
+    batchMaterializedRowCount : Nat
+    batchWorkGroupCount : Nat
+    batchCounts : BatchOutcomeCounts
     batchDigestAlgorithm : String
     batchInputDigest : String
     batchOutputDigest : String
-    perRowArtifactReference : String
-    workGroupArtifactReference : String
-    executionReceiptIndexReference : String
-    verificationReceiptIndexReference : String
-    lineageIndexReference : String
+    batchPerRowArtifactReference : String
+    batchWorkGroupArtifactReference : String
+    batchExecutionReceiptIndexReference : String
+    batchVerificationReceiptIndexReference : String
+    batchLineageIndexReference : String
 open ContentAddressedBatchArtifact public
 
 ------------------------------------------------------------------------
--- Nat population calibration from the mature handoff. This is a cohort
--- manifest receipt, not a claim that all 37,665 rows are materialized in the
--- current formal branch or safe for direct migration.
+-- Nat calibration: manifest population is real; this Agda fixture deliberately
+-- does not pretend that the whole runtime population has been materialized.
 ------------------------------------------------------------------------
 
 natBusinessFamilyBatchSurface : ContentAddressedBatchArtifact
@@ -258,7 +239,7 @@ natBusinessFamilyBatchSurface =
     "sl.nat_batch_prerequisite_result.v0_1"
     "wikidata-nat-p5991-p14143"
     "business_family_reconciled"
-    "SensibLaw Nat revision-locked sandbox/cohort-manifest lineage"
+    "SensibLaw revision-locked Nat cohort-manifest lineage"
     37665
     0
     0
@@ -266,22 +247,57 @@ natBusinessFamilyBatchSurface =
     "sha256"
     "unmaterialized-in-this-Agda-fixture"
     "unmaterialized-in-this-Agda-fixture"
-    "runtime-emitted per-row result artifact"
-    "runtime-emitted work-signature grouping artifact"
-    "runtime-emitted selector/proof/review execution receipt index"
-    "runtime-emitted consumer verification receipt index"
-    "runtime-emitted append-only row lineage index"
+    "runtime per-row result artifact"
+    "runtime work-signature grouping artifact"
+    "runtime execution-receipt index"
+    "runtime consumer-verification index"
+    "runtime append-only lineage index"
 
 natPopulationRemains37665 :
-  sourcePopulation natBusinessFamilyBatchSurface ≡ 37665
+  batchSourcePopulation natBusinessFamilyBatchSurface ≡ 37665
 natPopulationRemains37665 = refl
 
 natFormalFixtureDoesNotPretendToMaterializePopulation :
-  materializedRowCount natBusinessFamilyBatchSurface ≡ 0
+  batchMaterializedRowCount natBusinessFamilyBatchSurface ≡ 0
 natFormalFixtureDoesNotPretendToMaterializePopulation = refl
 
 ------------------------------------------------------------------------
--- Batch grouping is an execution optimisation only.
+-- Concrete row: signature computation, not manual proof-search selection.
+------------------------------------------------------------------------
+
+natQ10403939Row : BatchRowDescriptor
+natQ10403939Row =
+  batch-row-descriptor
+    "nat:Q10403939:P5991:source-support"
+    "Q10403939"
+    "Q10403939|P5991|bounded-bundle"
+    "business_family_reconciled"
+    splitAuto
+    "P5991"
+    "P14143"
+    ("P3831" ∷ "P459" ∷ "P518" ∷ "P580" ∷ "P582" ∷ [])
+    ("P854" ∷ [])
+    "revision-locked Nat source/bundle reference"
+    "sha256:runtime-row-input"
+    DAG.natCurrentPrerequisites
+
+natQ10403939Signature : WorkSignature
+natQ10403939Signature = signatureFor natQ10403939Row
+
+natQ10403939FirstResidualIsSourceSupport :
+  signatureFirstResidual natQ10403939Signature ≡ DAG.missingSourceSupport
+natQ10403939FirstResidualIsSourceSupport = refl
+
+natQ10403939ProducerIsSourceAcquisition :
+  signatureProducer natQ10403939Signature ≡ DAG.acquireSourceSupport
+natQ10403939ProducerIsSourceAcquisition = refl
+
+natQ10403939SelectorClassIsZelphHF :
+  signatureSelectorClass natQ10403939Signature ≡ zelphHFSelector
+natQ10403939SelectorClassIsZelphHF = refl
+
+------------------------------------------------------------------------
+-- Grouping is an execution optimisation only.
 ------------------------------------------------------------------------
 
 data SameWorkSignatureMeansSameSemantics : Set where
@@ -318,10 +334,6 @@ materializationDoesNotDefaultToManifestPopulation ()
 runtimeEnumDoesNotBecomeProofReceipt : RuntimeOutcomeEnumIsProofReceipt → ⊥
 runtimeEnumDoesNotBecomeProofReceipt ()
 
-------------------------------------------------------------------------
--- Formal runner boundary: what a future SensibLaw/SLR script must implement.
-------------------------------------------------------------------------
-
 record NatBatchPrerequisiteRunnerContract : Set where
   constructor nat-batch-prerequisite-runner-contract
   field
@@ -342,15 +354,4 @@ canonicalNatBatchPrerequisiteRunnerContract :
   NatBatchPrerequisiteRunnerContract
 canonicalNatBatchPrerequisiteRunnerContract =
   nat-batch-prerequisite-runner-contract
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    false
-    false
-    false
+    true true true true true true true true true false false false
