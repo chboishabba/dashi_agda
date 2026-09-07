@@ -4,7 +4,8 @@ module DASHI.Culture.MissingDeceasedScientificWorkCustodyEverything where
 -- surface. This tranche refines the existing critical-knowledge,
 -- externalisation-depth, temporal-provenance and counterfactual-disruption
 -- owners with custody, event-time possession, reconstruction-cost, platform
--- redundancy, institutional continuity and winding-up acquisition receipts.
+-- redundancy, institutional continuity, person-identity disambiguation and
+-- winding-up acquisition receipts.
 
 import DASHI.Culture.MissingDeceasedScientificWorkEverything
 import DASHI.Core.CustodyCriticalityDisruptionBridgeExact
@@ -12,6 +13,7 @@ import DASHI.Core.CapabilityReconstructionCostBidiExact
 import DASHI.Core.ApplicationCapabilityCustodyBidiExact
 import DASHI.Core.EventTimeOperationalPossessionEvidenceExact
 import DASHI.Culture.MissingDeceasedEventTimeStreamsBridgeExact
+import DASHI.Culture.AnthonyChavezIdentityDisambiguationExact
 import DASHI.Culture.MissingDeceasedReconstructionCostMatrixExact
 import DASHI.Culture.AmyEskridgeCorporateCustodySurfaceExact
 import DASHI.Culture.AmyEskridgeInstituteEntityContinuityExact
