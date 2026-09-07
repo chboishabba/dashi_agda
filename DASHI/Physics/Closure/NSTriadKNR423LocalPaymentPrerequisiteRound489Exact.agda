@@ -1,28 +1,21 @@
 module DASHI.Physics.Closure.NSTriadKNR423LocalPaymentPrerequisiteRound489Exact where
 
 ------------------------------------------------------------------------
--- ROUND489 / LOCAL R423 PAYMENT: STANDARD LAPLACE AUTHORITY BEFORE PHYSICS
+-- ROUND489 / LOCAL R423 PAYMENT: DIRECT SIGNED PAYMENT IS CANONICAL
 --
--- R440 already closes the finite physical same-object identification:
--- both nonlinear double-sum halves factor to the same fixed-output R439
--- quadratic-companion cross.  R295 already proves any function of the physical
--- cell rate is swap-invariant, so p/q reindexing is not the missing theorem.
+-- R423 itself does not require a Laplace representation.  Its primitive
+-- consumer asks for the integrated signed companion scalar, the same-object
+-- R406 = 4 * cross identity, and a cutoff-uniform upper budget.  R487 makes
+-- this explicit by setting the signed-heat and quadratic-companion scalars to
+-- the same fixed-output aggregate definitionally.
 --
--- R490 isolates the standard positive-rate Laplace theorem as a typed authority.
--- R491 then proves that a scalar realization for R443.cauchyEntry specializes
--- directly to the literal R446 physical cell kernel; there is no additional
--- Navier--Stokes kernel-identification theorem after that scalar authority.
+-- Therefore the canonical direct route is:
 --
--- The remaining ordered prerequisites are therefore:
+--   same-output/same-scale signed spacetime payment  ->  R487  ->  R423.
 --
---   L1. inhabit the STANDARD scalar positive-rate Laplace authority for the
---       literal rational Cauchy entry;
---
---   L2. prove the cutoff-uniform same-output/same-scale signed spacetime
---       estimate for the resulting heat-weighted quadratic-companion cross.
---
--- L1 is standard analysis / representation authority.  L2 is the genuinely
--- Navier--Stokes-specific analytic payment.
+-- The R490/R491 Laplace realization remains an admitted sufficient producer
+-- strategy for constructing that payment, but its standard-analysis authority
+-- is NOT a prerequisite of the direct R423 consumer.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -33,68 +26,87 @@ import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as Least
 import DASHI.Physics.Closure.NSTriadKNCellRateSwapInvariantWeightRound295Exact as R295
 import DASHI.Physics.Closure.NSTriadKNHeatFactorizedPairRemainderRound299Exact as R299
 import DASHI.Physics.Closure.NSTriadKNPhysicalHeatDoubleSumFactorizationRound440Exact as R440
+import DASHI.Physics.Closure.NSTriadKNQuadraticCompanionSignedHeatToBarrierRound423Exact as R423
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPaymentsToR423Round487Exact as R487
 import DASHI.Physics.Closure.NSTriadKNR423FixedOutputProducerProofSearchRound488Exact as R488
-import DASHI.Physics.Closure.NSTriadKNPositiveRateLaplaceAuthorityRound490Exact as R490
-import DASHI.Physics.Closure.NSTriadKNPhysicalCauchyLaplaceWeldRound491Exact as R491
 
 ------------------------------------------------------------------------
--- First-missing local prerequisites.
+-- Canonical direct-route scheduler.
 ------------------------------------------------------------------------
 
-data LocalPaymentResidual : Set where
-  missingStandardLaplaceAuthority : LocalPaymentResidual
-  missingSignedSpacetimeEstimate : LocalPaymentResidual
-  localPaymentClosed : LocalPaymentResidual
+data DirectPaymentResidual : Set where
+  missingSignedSpacetimeEstimate : DirectPaymentResidual
+  missingCutoffUniformBudgetSum : DirectPaymentResidual
+  directPaymentClosed : DirectPaymentResidual
 
-record LocalPaymentStatus : Set where
-  constructor local-payment-status
+record DirectPaymentStatus : Set where
+  constructor direct-payment-status
+  field
+    signedSpacetimeEstimatePresent : Bool
+    cutoffUniformBudgetSumPresent : Bool
+
+open DirectPaymentStatus public
+
+firstDirectResidual : DirectPaymentStatus → DirectPaymentResidual
+firstDirectResidual (direct-payment-status false budget) =
+  missingSignedSpacetimeEstimate
+firstDirectResidual (direct-payment-status true false) =
+  missingCutoffUniformBudgetSum
+firstDirectResidual (direct-payment-status true true) =
+  directPaymentClosed
+
+data DirectMechanism : Set where
+  ThinkSameScaleSignedSpacetime : DirectMechanism
+  ThinkCutoffUniformBudgetAggregation : DirectMechanism
+  CompileR487ToR423 : DirectMechanism
+
+mechanismFor : DirectPaymentResidual → DirectMechanism
+mechanismFor missingSignedSpacetimeEstimate = ThinkSameScaleSignedSpacetime
+mechanismFor missingCutoffUniformBudgetSum = ThinkCutoffUniformBudgetAggregation
+mechanismFor directPaymentClosed = CompileR487ToR423
+
+currentDirectStatus : DirectPaymentStatus
+currentDirectStatus = direct-payment-status false false
+
+currentFirstDirectResidual :
+  firstDirectResidual currentDirectStatus ≡ missingSignedSpacetimeEstimate
+currentFirstDirectResidual = refl
+
+currentDirectMechanism :
+  mechanismFor (firstDirectResidual currentDirectStatus)
+  ≡ ThinkSameScaleSignedSpacetime
+currentDirectMechanism = refl
+
+afterLocalPaymentStatus : DirectPaymentStatus
+afterLocalPaymentStatus = direct-payment-status true false
+
+afterLocalPaymentFirstResidual :
+  firstDirectResidual afterLocalPaymentStatus ≡ missingCutoffUniformBudgetSum
+afterLocalPaymentFirstResidual = refl
+
+------------------------------------------------------------------------
+-- Optional Laplace producer lane.
+------------------------------------------------------------------------
+
+data LaplaceProducerResidual : Set where
+  missingStandardLaplaceAuthority : LaplaceProducerResidual
+  missingLaplaceLaneSignedEstimate : LaplaceProducerResidual
+  laplaceProducerClosed : LaplaceProducerResidual
+
+record LaplaceProducerStatus : Set where
+  constructor laplace-producer-status
   field
     standardLaplaceAuthorityPresent : Bool
-    signedSpacetimeEstimatePresent : Bool
+    laplaceLaneSignedEstimatePresent : Bool
 
-open LocalPaymentStatus public
-
-firstLocalResidual : LocalPaymentStatus → LocalPaymentResidual
-firstLocalResidual (local-payment-status false estimate) =
+firstLaplaceProducerResidual :
+  LaplaceProducerStatus → LaplaceProducerResidual
+firstLaplaceProducerResidual (laplace-producer-status false estimate) =
   missingStandardLaplaceAuthority
-firstLocalResidual (local-payment-status true false) =
-  missingSignedSpacetimeEstimate
-firstLocalResidual (local-payment-status true true) =
-  localPaymentClosed
-
-data LocalMechanism : Set where
-  LookStandardLaplaceAuthority : LocalMechanism
-  ThinkSameScaleSignedSpacetime : LocalMechanism
-  CompileFixedOutputPayment : LocalMechanism
-
-mechanismFor : LocalPaymentResidual → LocalMechanism
-mechanismFor missingStandardLaplaceAuthority = LookStandardLaplaceAuthority
-mechanismFor missingSignedSpacetimeEstimate = ThinkSameScaleSignedSpacetime
-mechanismFor localPaymentClosed = CompileFixedOutputPayment
-
-currentLocalStatus : LocalPaymentStatus
-currentLocalStatus = local-payment-status false false
-
-currentFirstLocalResidual :
-  firstLocalResidual currentLocalStatus ≡ missingStandardLaplaceAuthority
-currentFirstLocalResidual = refl
-
-currentLocalMechanism :
-  mechanismFor (firstLocalResidual currentLocalStatus)
-  ≡ LookStandardLaplaceAuthority
-currentLocalMechanism = refl
-
-afterLaplaceStatus : LocalPaymentStatus
-afterLaplaceStatus = local-payment-status true false
-
-afterLaplaceFirstResidual :
-  firstLocalResidual afterLaplaceStatus ≡ missingSignedSpacetimeEstimate
-afterLaplaceFirstResidual = refl
-
-afterLaplaceMechanism :
-  mechanismFor (firstLocalResidual afterLaplaceStatus)
-  ≡ ThinkSameScaleSignedSpacetime
-afterLaplaceMechanism = refl
+firstLaplaceProducerResidual (laplace-producer-status true false) =
+  missingLaplaceLaneSignedEstimate
+firstLaplaceProducerResidual (laplace-producer-status true true) =
+  laplaceProducerClosed
 
 ------------------------------------------------------------------------
 -- Exact pins to owned infrastructure.
@@ -112,25 +124,6 @@ commonCrossAlreadyIdentifiedWithQuadraticCompanion :
   R440.round440CommonCrossIsR439QuadraticCompanionCross ≡ true
 commonCrossAlreadyIdentifiedWithQuadraticCompanion = refl
 
-standardLaplaceIsAuthorityLayer :
-  R490.round490StandardLaplaceTheoremIsAuthorityLayer ≡ true
-standardLaplaceIsAuthorityLayer =
-  R490.round490StandardLaplaceTheoremIsAuthorityLayerIsTrue
-
-physicalCellWeldNeedsNoNewNSIdentity :
-  R491.round491PhysicalCellLaplaceWeldNeedsNoNewNSIdentity ≡ true
-physicalCellWeldNeedsNoNewNSIdentity =
-  R491.round491PhysicalCellLaplaceWeldNeedsNoNewNSIdentityIsTrue
-
-standardAuthorityStillNeedsInhabitant :
-  R490.round490AuthorityInterfaceCreatesAuthorityInhabitant ≡ false
-standardAuthorityStillNeedsInhabitant =
-  R490.round490AuthorityInterfaceCreatesAuthorityInhabitantIsFalse
-
-signedSpacetimeEstimateStillOpen :
-  R440.round440SignedCrossSpacetimeEstimateClosed ≡ false
-signedSpacetimeEstimateStillOpen = refl
-
 r299FiniteFactorizationAlreadyClosed :
   R299.round299FinitePairFactorizationCompilerClosed ≡ true
 r299FiniteFactorizationAlreadyClosed =
@@ -141,29 +134,37 @@ r488LocalPaymentFamilyIsParentLeaf :
   ≡ R488.missingFixedOutputPaymentFamily
 r488LocalPaymentFamilyIsParentLeaf = R488.currentFirstMissing
 
+r487DirectCompilerAlreadyClosed :
+  R487.round487R432ToR423CompilerClosed ≡ true
+r487DirectCompilerAlreadyClosed = refl
+
+r423LaplaceRouteIsNotNecessary :
+  R423.round423SchurCriticalRouteIsNecessaryProducer ≡ false
+r423LaplaceRouteIsNotNecessary =
+  R423.round423SchurCriticalRouteIsNecessaryProducerIsFalse
+
 ------------------------------------------------------------------------
 -- Route dispositions / no-collapse boundaries.
 ------------------------------------------------------------------------
 
-laplaceAuthorityDisposition : Least.RouteDisposition
-laplaceAuthorityDisposition = Least.admitted
+directSignedPaymentDisposition : Least.RouteDisposition
+directSignedPaymentDisposition = Least.admitted
 
-signedSpacetimeDispositionAfterLaplace : Least.RouteDisposition
-signedSpacetimeDispositionAfterLaplace = Least.admitted
+laplaceProducerDisposition : Least.RouteDisposition
+laplaceProducerDisposition = Least.admitted
 
-estimateBeforeStandardAuthorityDisposition : Least.RouteDisposition
-estimateBeforeStandardAuthorityDisposition =
-  Least.rejected Least.missingPrerequisite
+makeLaplaceMandatoryDisposition : Least.RouteDisposition
+makeLaplaceMandatoryDisposition = Least.rejected Least.hypothesisInflation
 
 reproveFiniteDoubleSumDisposition : Least.RouteDisposition
 reproveFiniteDoubleSumDisposition = Least.redirectedReuse
 
-data AuthorityInterfaceCreatesInhabitant : Set where
+data OptionalProducerCreatesMandatoryPrerequisite : Set where
 data FiniteFactorizationPaysSpacetimeEstimate : Set where
 
-authorityInterfaceDoesNotCreateInhabitant :
-  AuthorityInterfaceCreatesInhabitant → ⊥
-authorityInterfaceDoesNotCreateInhabitant ()
+optionalProducerDoesNotCreateMandatoryPrerequisite :
+  OptionalProducerCreatesMandatoryPrerequisite → ⊥
+optionalProducerDoesNotCreateMandatoryPrerequisite ()
 
 finiteFactorizationDoesNotPaySpacetimeEstimate :
   FiniteFactorizationPaysSpacetimeEstimate → ⊥
@@ -176,26 +177,20 @@ finiteFactorizationDoesNotPaySpacetimeEstimate ()
 round489FiniteSameObjectWorkClosed : Bool
 round489FiniteSameObjectWorkClosed = true
 
-round489FirstMissingIsStandardLaplaceAuthority : Bool
-round489FirstMissingIsStandardLaplaceAuthority = true
+round489DirectFirstMissingIsSignedSpacetimeEstimate : Bool
+round489DirectFirstMissingIsSignedSpacetimeEstimate = true
 
-round489PhysicalLaplaceKernelWeldNeedsNoNewNSIdentity : Bool
-round489PhysicalLaplaceKernelWeldNeedsNoNewNSIdentity = true
+round489LaplaceAuthorityMandatoryForR423 : Bool
+round489LaplaceAuthorityMandatoryForR423 = false
 
-round489LaplaceLayerClassifiedAsStandardAnalysis : Bool
-round489LaplaceLayerClassifiedAsStandardAnalysis = true
-
-round489PhysicalDiscoveryLeafIsSignedSpacetimeEstimate : Bool
-round489PhysicalDiscoveryLeafIsSignedSpacetimeEstimate = true
-
-round489StandardLaplaceAuthorityInhabited : Bool
-round489StandardLaplaceAuthorityInhabited = false
+round489LaplaceLaneRemainsOptionalProducer : Bool
+round489LaplaceLaneRemainsOptionalProducer = true
 
 round489SignedSpacetimeEstimateClosed : Bool
 round489SignedSpacetimeEstimateClosed = false
 
-round489FixedOutputPaymentFamilyClosed : Bool
-round489FixedOutputPaymentFamilyClosed = false
+round489CutoffUniformBudgetSumClosed : Bool
+round489CutoffUniformBudgetSumClosed = false
 
 round489R423SignedCompanionBudgetClosed : Bool
 round489R423SignedCompanionBudgetClosed = false
@@ -203,9 +198,13 @@ round489R423SignedCompanionBudgetClosed = false
 round489ClayPromotion : Bool
 round489ClayPromotion = false
 
-round489StandardLaplaceAuthorityInhabitedIsFalse :
-  round489StandardLaplaceAuthorityInhabited ≡ false
-round489StandardLaplaceAuthorityInhabitedIsFalse = refl
+round489DirectFirstMissingIsSignedSpacetimeEstimateIsTrue :
+  round489DirectFirstMissingIsSignedSpacetimeEstimate ≡ true
+round489DirectFirstMissingIsSignedSpacetimeEstimateIsTrue = refl
+
+round489LaplaceAuthorityMandatoryForR423IsFalse :
+  round489LaplaceAuthorityMandatoryForR423 ≡ false
+round489LaplaceAuthorityMandatoryForR423IsFalse = refl
 
 round489SignedSpacetimeEstimateClosedIsFalse :
   round489SignedSpacetimeEstimateClosed ≡ false
