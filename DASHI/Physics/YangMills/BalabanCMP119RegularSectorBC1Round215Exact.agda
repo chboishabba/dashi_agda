@@ -5,9 +5,9 @@ module DASHI.Physics.YangMills.BalabanCMP119RegularSectorBC1Round215Exact where
 -- ROUND215 / DIRECT CMP119 E_k -> BC1 CONSTRUCTOR
 --
 -- BC1 consumes a CMP109/CMP116 continuation.  Round215 now constructs that
--- continuation directly from the literal CMP119 regular small-field E_k sector.
--- Therefore the preferred source path does not need an intermediate
--- Density -> Potential interpretation or an R108 potential weld.
+-- continuation directly from the literal CMP119 regular small-field E_k sector
+-- on the RAW source state.  Section-2 predicates remain theorem output rather
+-- than data-model assumptions.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -15,7 +15,7 @@ open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanCMP119Section2SourceNativeStateExact as CMP119
+import DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExact as CMP119
 import DASHI.Physics.YangMills.BalabanCMP119RegularSectorCMP109116Round215Exact as Regular
 import DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound103Exact as Finite
 import DASHI.Physics.YangMills.BalabanCMP109Equation51LocalizedHessianRound103Exact as Eq51
@@ -26,7 +26,7 @@ import DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound
 record CMP119RegularSectorBC1Inputs
     {Density Background Fluctuation Action WilsonTerm SmallFieldTerm
       RTerm BoundaryTerm Vacuum : Set}
-    {source : CMP119.CMP119Section2SourceNativeState
+    {source : CMP119.CMP119SourceNativeRawState
       Density Background Fluctuation Action WilsonTerm SmallFieldTerm
       RTerm BoundaryTerm Vacuum}
     (regular : Regular.CMP119RegularSectorRealization source) : Set₁ where
@@ -81,10 +81,5 @@ cmp119RegularSectorBC1CompilerLevel = machineChecked
 cmp119RegularSectorBC1SamePotentialLevel : ProofLevel
 cmp119RegularSectorBC1SamePotentialLevel = machineChecked
 
--- Remaining physical/source data after the direct source weld:
---   * literal E_k pointwise/localized realization (Round215 regular sector);
---   * literal D^2 calculus on its physical background carrier;
---   * CMP109 Eq.(5.1) bound to that exact continuation;
---   * four normalized CMP116 analytic-demand coefficients.
 literalCMP119RegularSectorBC1InputsLevel : ProofLevel
 literalCMP119RegularSectorBC1InputsLevel = conditional
