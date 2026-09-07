@@ -3,10 +3,9 @@ module DASHI.Physics.Closure.NSTriadKNDeepFarLowDyadicBernsteinWeldRound466Exact
 ------------------------------------------------------------------------
 -- ROUND466 / EXISTING DYADIC SUPPORT COUNT -> R465 -> R234
 --
--- R465 now reuses the repository's original finite rational Bernstein theorem.
--- Its only shell-routing input is that the retained coefficient count is below
--- the high derivative coefficient.  R466 pays that input from the already-
--- proved Luo finite dyadic support count:
+-- R465 reuses the repository's original finite rational Bernstein theorem.
+-- Its shell-routing input is paid here from the already-proved Luo dyadic
+-- support count
 --
 --   count(selected_q) <= 8^q count(base).
 --
@@ -21,10 +20,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (map)
-open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteBernstein as Bernstein
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteDyadicSupportCountExact as Support
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
@@ -37,10 +37,7 @@ supportCardinalityMapMeaning :
   ≡ Support.countMass items
 supportCardinalityMapMeaning coefficient [] = refl
 supportCardinalityMapMeaning coefficient (item ∷ items) =
-  cong (Data.Rational.Base.1ℚ +_)
-    (supportCardinalityMapMeaning coefficient items)
-  where
-  open import Data.Rational.Base using (1ℚ; _+_)
+  cong (1ℚ +_) (supportCardinalityMapMeaning coefficient items)
 
 record PhysicalDeepFarLowDyadicData (Slot : Set) : Set₁ where
   constructor physical-deep-far-low-dyadic-data
@@ -60,12 +57,11 @@ record PhysicalDeepFarLowDyadicData (Slot : Set) : Set₁ where
 
     productMassBelowFiniteBernsteinInput :
       productMass
-      ≤
-      DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2.square
-        (Bernstein.coefficientSum
-          (map coefficient
-            (Support.dyadicSupport shellPredicate baseCube shell)))
-        * highEnergy
+      ≤ Rational.square
+          (Bernstein.coefficientSum
+            (map coefficient
+              (Support.dyadicSupport shellPredicate baseCube shell)))
+          * highEnergy
 
 open PhysicalDeepFarLowDyadicData public
 
