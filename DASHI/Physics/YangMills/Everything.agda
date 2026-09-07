@@ -133,6 +133,10 @@ import DASHI.Physics.YangMills.BalabanClayT5UniformTightnessSubsequenceInheritan
 -- tightness once their coercive compact-containment interpretation is supplied.
 import DASHI.Physics.YangMills.BalabanClayT5MomentCompactContainmentExact
 
+-- Markov/sublevel compiler: only exact physical same-object coercivity and
+-- compactness of the selected observable's sublevel witnesses remain physical.
+import DASHI.Physics.YangMills.BalabanClayT5CoerciveMomentMarkovContainmentExact
+
 -- Current terminal schedulers after Eq. (119), Kato-M7 and T5 minimization.
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound191Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound192Exact
@@ -141,6 +145,7 @@ import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound194Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound195Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound196Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound197Exact
+import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound198Exact
 
 import DASHI.Physics.YangMills.BalabanPath13Eq119SourceRouteProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119BishopBridgeProvenanceExact
