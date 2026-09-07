@@ -11,6 +11,9 @@ FILES=(
   DASHI/Analysis/RiemannG2PoleQuotientProducerAllowanceTargetExact.agda
   DASHI/Analysis/RiemannG2PoleQuotientChannelAllowanceExact.agda
   DASHI/Analysis/RiemannG2PoleQuotientOffAllowanceDirectCompilerExact.agda
+  DASHI/Analysis/RiemannG2GammaPrecisionLossLocalizationExact.agda
+  DASHI/Analysis/RiemannG2GammaProducerSourceAcquisitionExact.agda
+  DASHI/Analysis/RiemannG2GammaCandidateSourceLineageRecoveryExact.agda
   DASHI/Analysis/RiemannG2PoleQuotientGammaAllowanceDirectCompilerExact.agda
   DASHI/Analysis/RiemannG2FinalSplitComplementSameObjectAssemblyExact.agda
   DASHI/Analysis/RiemannG2FinalSplitComplementAllowanceAssemblyExact.agda
@@ -39,6 +42,9 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannG2PoleQuotientProducerAllowanceTargetExact.agda
   agda DASHI/Analysis/RiemannG2PoleQuotientChannelAllowanceExact.agda
   agda DASHI/Analysis/RiemannG2PoleQuotientOffAllowanceDirectCompilerExact.agda
+  agda DASHI/Analysis/RiemannG2GammaPrecisionLossLocalizationExact.agda
+  agda DASHI/Analysis/RiemannG2GammaProducerSourceAcquisitionExact.agda
+  agda DASHI/Analysis/RiemannG2GammaCandidateSourceLineageRecoveryExact.agda
   agda DASHI/Analysis/RiemannG2PoleQuotientGammaAllowanceDirectCompilerExact.agda
   agda DASHI/Analysis/RiemannG2FinalSplitComplementSameObjectAssemblyExact.agda
   agda DASHI/Analysis/RiemannG2FinalSplitComplementAllowanceAssemblyExact.agda
