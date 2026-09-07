@@ -12,6 +12,7 @@ import DASHI.Physics.GR.GravitationalPredictionObservationBidiExact
 import DASHI.Physics.GR.GravitationalMultiScaleTheoryFingerprintBidiExact
 import DASHI.Physics.GR.GravitationalEpistemicLineageExact
 import DASHI.Physics.GR.GravitationalPredictionAttributionBidiExact
+import DASHI.Physics.GR.GravitationalAttributedMultiScaleFingerprintBidiExact
 
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
