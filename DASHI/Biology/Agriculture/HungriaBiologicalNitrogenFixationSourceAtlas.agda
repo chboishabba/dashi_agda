@@ -11,9 +11,11 @@ open import Agda.Builtin.String using (String)
 -- cross-source synthesis to Mariangela Hungria or her coauthors.
 --
 -- Repository rule used here:
+--   external source claim != later interpretation
 --   external source claim != DASHI formal reconstruction
 --   cross-source inference   != source quotation
 --   DASHI theorem           != externally reported empirical result
+--   source receipt          != stronger promotion receipt
 --
 -- Exact metadata is retained where available.  No DOI is invented for
 -- sources for which the surfaced record does not provide one.
@@ -22,7 +24,9 @@ open import Agda.Builtin.String using (String)
 data SourceAuthority : Set where
   peerReviewedExperiment : SourceAuthority
   peerReviewedSynthesis : SourceAuthority
+  peerReviewedEconomicModel : SourceAuthority
   institutionalRetrospective : SourceAuthority
+  institutionalNewsCarrier : SourceAuthority
 
 record BNFSource : Set where
   constructor bnfSource
@@ -86,6 +90,30 @@ hungria2020 =
     "Four Brazilian field experiments evaluating liquid Bradyrhizobium pre-inoculation with cell protectors; reported symbiotic performance comparable to a peat-based inoculant"
     "Does not by itself establish nationwide economic savings, global CO2 avoidance, or every implementation detail of commercial inoculants"
 
+tellesNogueiraHungria2023 : BNFSource
+tellesNogueiraHungria2023 =
+  bnfSource
+    "Tiago Santos Telles; Marco Antonio Nogueira; Mariangela Hungria"
+    "Economic value of biological nitrogen fixation in soybean crops in Brazil"
+    "Environmental Technology & Innovation 31:103158"
+    2023
+    "DOI 10.1016/j.eti.2023.103158"
+    peerReviewedEconomicModel
+    "Avoided-cost and greenhouse-gas accounting model for Brazilian soybean BNF; source-owned 2019-2020 outputs include USD 15.2 billion avoided urea cost and 183 million Mg CO2-e mitigated"
+    "Does not establish that later 2024/2025 headline values are a literal replay of the same model with an identified updated input vintage"
+
+embrapa2025PrizeNews : BNFSource
+embrapa2025PrizeNews =
+  bnfSource
+    "Embrapa institutional news publication"
+    "Mariangela Hungria to receive the World Food Prize, the Nobel Prize for Agriculture, in the United States"
+    "Embrapa Portal / Embrapa Soja"
+    2025
+    "No DOI assigned; Embrapa news item dated 16 October 2025"
+    institutionalNewsCarrier
+    "Reports estimated 2024 savings of about USD 25 billion from avoided nitrogen fertilizer and quotes Hungria stating mitigation of more than 230 million tonnes CO2-equivalent in 2024"
+    "Does not itself recover the unpublished calculation workbook, exact 2024 input vector, or proof that every sentence in the institutional article is personally authored by Hungria"
+
 worldFoodPrize2025 : BNFSource
 worldFoodPrize2025 =
   bnfSource
@@ -95,8 +123,8 @@ worldFoodPrize2025 =
     2025
     "No DOI assigned; institutional laureate biography"
     institutionalRetrospective
-    "Retrospective account of Hungria's multi-decade research programme, strain selection, stress testing, inoculant development, scale of adoption, and prize rationale"
-    "Institutional retrospective estimates are not substituted for the primary experimental evidence and are not treated as a single paper proving every economic or emissions number"
+    "Retrospective account of Hungria's multi-decade research programme, strain selection, stress testing, inoculant development, scale of adoption, and prize rationale; repeats roughly USD 25 billion annual savings, 230 million metric tons CO2-equivalent avoided, and more than 40 million hectares of adoption"
+    "Institutional retrospective estimates are not substituted for the primary experimental or model evidence and are not treated as a single paper proving every economic or emissions number"
 
 canonicalHungriaBNFSources : List BNFSource
 canonicalHungriaBNFSources =
@@ -104,6 +132,8 @@ canonicalHungriaBNFSources =
   ∷ hungriaMendes2015
   ∷ fukamiEtAl2016
   ∷ hungria2020
+  ∷ tellesNogueiraHungria2023
+  ∷ embrapa2025PrizeNews
   ∷ worldFoodPrize2025
   ∷ []
 
@@ -111,5 +141,5 @@ listCount : ∀ {A : Set} → List A → Nat
 listCount [] = 0
 listCount (_ ∷ xs) = suc (listCount xs)
 
-sourceCountIsFive : listCount canonicalHungriaBNFSources ≡ 5
-sourceCountIsFive = refl
+sourceCountIsSeven : listCount canonicalHungriaBNFSources ≡ 7
+sourceCountIsSeven = refl
