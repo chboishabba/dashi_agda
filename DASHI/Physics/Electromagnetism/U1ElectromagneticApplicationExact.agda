@@ -19,9 +19,8 @@ import DASHI.Physics.Units.SI as SI
 ------------------------------------------------------------------------
 
 data GaugeFamily : Set where
-  abelianU1
-  nonAbelianSUN
-  : GaugeFamily
+  abelianU1 : GaugeFamily
+  nonAbelianSUN : GaugeFamily
 
 record U1ElectromagneticFieldSocket : Set₁ where
   constructor u1ElectromagneticFieldSocket
@@ -108,3 +107,5 @@ canonicalU1ElectromagneticBoundary =
     false refl
     false refl
     true refl
+
+open U1ElectromagneticBoundary public

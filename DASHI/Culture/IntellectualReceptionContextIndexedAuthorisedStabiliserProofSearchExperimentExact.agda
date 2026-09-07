@@ -21,9 +21,9 @@ import DASHI.Governance.AuthorityMandateCore as Authority
 ------------------------------------------------------------------------
 
 data ReceptionAuthorityContext : Set where
-  baselineAuthorityContext
-  reviewedComparisonContext
-  : ReceptionAuthorityContext
+  baselineAuthorityContext : ReceptionAuthorityContext
+  reviewedComparisonContext : ReceptionAuthorityContext
+
 
 data ScopedGeneratorAuthority :
   ReceptionAuthorityContext →
@@ -214,10 +214,10 @@ data StabiliserExperimentCoordinate : Set where
   semanticStatusCoordinate authorityStatusCoordinate : StabiliserExperimentCoordinate
 
 data StabiliserExperimentValue : Set where
-  semanticLawfulValue
-  authorityMissingValue
-  authorityPresentValue
-  : StabiliserExperimentValue
+  semanticLawfulValue : StabiliserExperimentValue
+  authorityMissingValue : StabiliserExperimentValue
+  authorityPresentValue : StabiliserExperimentValue
+
 
 data StabiliserExperimentDimension : Set where
   semanticRoleDimension authorityScopeDimension : StabiliserExperimentDimension

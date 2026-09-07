@@ -13,15 +13,15 @@ import DASHI.Core.InverseProblemIdentifiabilityBidiExact as Inv
 ------------------------------------------------------------------------
 
 data RosterScienceLane : Set where
-  loureiroHermite
-  leblancSensors
-  maiwaldActionSpectrum
-  rezaAlloyPerformance
-  grillmairStreams
-  hicksSmallBodies
-  chavezRadiography
-  thomasSignalling
-  : RosterScienceLane
+  loureiroHermite : RosterScienceLane
+  leblancSensors : RosterScienceLane
+  maiwaldActionSpectrum : RosterScienceLane
+  rezaAlloyPerformance : RosterScienceLane
+  grillmairStreams : RosterScienceLane
+  hicksSmallBodies : RosterScienceLane
+  chavezRadiography : RosterScienceLane
+  thomasSignalling : RosterScienceLane
+
 
 record LaneInverseProfile : Set where
   constructor lane-inverse-profile

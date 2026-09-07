@@ -76,6 +76,8 @@ record DependencyClosureBoundary : Set where
     unrelatedRetentionNeedsAbsenceOfDependencyPathEvidence : Bool
     covarianceOrCorrelationDoesNotReplaceDependencyProof : Bool
 
+open DependencyClosureBoundary public
+
 canonicalDependencyClosureBoundary : DependencyClosureBoundary
 canonicalDependencyClosureBoundary =
   dependencyClosureBoundary true true true true

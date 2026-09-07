@@ -20,13 +20,13 @@ import DASHI.Core.RequiredAxisSupportSquareExact as Support
 ------------------------------------------------------------------------
 
 data ActorCaseAxis : Set where
-  benefitAxis
-  visibilityAxis
-  disruptionEffectAxis
-  threatPerceptionAxis
-  opportunityOrAccessAxis
-  operationalEvidenceAxis
-  : ActorCaseAxis
+  benefitAxis : ActorCaseAxis
+  visibilityAxis : ActorCaseAxis
+  disruptionEffectAxis : ActorCaseAxis
+  threatPerceptionAxis : ActorCaseAxis
+  opportunityOrAccessAxis : ActorCaseAxis
+  operationalEvidenceAxis : ActorCaseAxis
+
 
 record ActorCapabilityHypothesis : Set where
   constructor actor-capability-hypothesis

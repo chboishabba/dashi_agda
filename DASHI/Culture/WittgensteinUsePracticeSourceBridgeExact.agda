@@ -43,19 +43,19 @@ import DASHI.Culture.HistoricalSocialTotalityBidiExact as Totality
 ------------------------------------------------------------------------
 
 data PhilosophySourceRole : Set where
-  primaryWorkReference
-  secondaryRecoveryAid
-  repositoryInterpretiveBridge
-  repositoryFiniteTheorem
-  : PhilosophySourceRole
+  primaryWorkReference : PhilosophySourceRole
+  secondaryRecoveryAid : PhilosophySourceRole
+  repositoryInterpretiveBridge : PhilosophySourceRole
+  repositoryFiniteTheorem : PhilosophySourceRole
+
 
 data WittgensteinTopic : Set where
-  meaningUseTopic
-  languageGameTopic
-  activityFormOfLifeTopic
-  ruleFollowingTopic
-  agreementPracticeTopic
-  : WittgensteinTopic
+  meaningUseTopic : WittgensteinTopic
+  languageGameTopic : WittgensteinTopic
+  activityFormOfLifeTopic : WittgensteinTopic
+  ruleFollowingTopic : WittgensteinTopic
+  agreementPracticeTopic : WittgensteinTopic
+
 
 record WittgensteinSourceProposition : Set where
   constructor wittgenstein-source-proposition
@@ -101,20 +101,20 @@ secondaryRecovery = wittgenstein-source-proposition
 ------------------------------------------------------------------------
 
 data UtteranceState : Set where
-  devotionalUse
-  historicalReportUse
-  politicalReclamationUse
-  hostileAccusationUse
-  : UtteranceState
+  devotionalUse : UtteranceState
+  historicalReportUse : UtteranceState
+  politicalReclamationUse : UtteranceState
+  hostileAccusationUse : UtteranceState
+
 
 data UtteranceSurface : Set where sameWords : UtteranceSurface
 
 data PracticeUseCode : Set where
-  devotionalCode
-  historicalReportCode
-  reclamationCode
-  accusationCode
-  : PracticeUseCode
+  devotionalCode : PracticeUseCode
+  historicalReportCode : PracticeUseCode
+  reclamationCode : PracticeUseCode
+  accusationCode : PracticeUseCode
+
 
 utteranceSurface : UtteranceState → UtteranceSurface
 utteranceSurface devotionalUse = sameWords
@@ -150,20 +150,20 @@ sameWordsCannotRecoverPracticeUse =
 ------------------------------------------------------------------------
 
 data SituatedPracticeState : Set where
-  localVoluntaryPractice
-  stateBackedPractice
-  diasporicMinorityPractice
-  reclaimedCounterPractice
-  : SituatedPracticeState
+  localVoluntaryPractice : SituatedPracticeState
+  stateBackedPractice : SituatedPracticeState
+  diasporicMinorityPractice : SituatedPracticeState
+  reclaimedCounterPractice : SituatedPracticeState
+
 
 data SharedPracticeSurface : Set where sharedRitualVocabulary : SharedPracticeSurface
 
 data HistoricalPositionCode : Set where
-  localVoluntaryCode
-  stateBackedCode
-  diasporicMinorityCode
-  counterPracticeCode
-  : HistoricalPositionCode
+  localVoluntaryCode : HistoricalPositionCode
+  stateBackedCode : HistoricalPositionCode
+  diasporicMinorityCode : HistoricalPositionCode
+  counterPracticeCode : HistoricalPositionCode
+
 
 sharedPractice : SituatedPracticeState → SharedPracticeSurface
 sharedPractice localVoluntaryPractice = sharedRitualVocabulary
@@ -196,11 +196,11 @@ samePracticeCannotRecoverHistoricalPosition =
 ------------------------------------------------------------------------
 
 data AttributionLayer : Set where
-  sourceTextLayer
-  secondaryInterpretationLayer
-  repositoryBridgeLayer
-  finiteTheoremLayer
-  : AttributionLayer
+  sourceTextLayer : AttributionLayer
+  secondaryInterpretationLayer : AttributionLayer
+  repositoryBridgeLayer : AttributionLayer
+  finiteTheoremLayer : AttributionLayer
+
 
 sourceNotFiniteTheorem : sourceTextLayer ≡ finiteTheoremLayer → ⊥
 sourceNotFiniteTheorem ()

@@ -36,10 +36,10 @@ import DASHI.Crypto.MLKEMUncertaintyTransitionCostBridgeExact as Bridge
 
 record UncertaintyPricedSearchEdge
     (geometry : Search.ProtectedLabelSearchGeometry)
-    (public : Search.Public geometry) : Set₁ where
+    (pub : Search.Public geometry) : Set₁ where
   constructor uncertainty-priced-search-edge
   field
-    step : Search.SearchStep geometry public
+    step : Search.SearchStep geometry pub
 
     -- Same-object support data for the candidate difference represented by
     -- this edge.  changedSupport counts changed source coefficient positions;
@@ -61,8 +61,8 @@ record UncertaintyPricedSearchEdge
 open UncertaintyPricedSearchEdge public
 
 searchEdgeUncertaintyObstruction128 :
-  ∀ {geometry public} →
-  (priced : UncertaintyPricedSearchEdge geometry public) →
+  ∀ {geometry pub} →
+  (priced : UncertaintyPricedSearchEdge geometry pub) →
   128 ≤
     changedSupport priced *
     (Search.stepCost (step priced) + singularBudget priced)
@@ -82,10 +82,10 @@ searchEdgeUncertaintyObstruction128 priced =
 
 record FullRankUncertaintyPricedSearchEdge
     (geometry : Search.ProtectedLabelSearchGeometry)
-    (public : Search.Public geometry) : Set₁ where
+    (pub : Search.Public geometry) : Set₁ where
   constructor full-rank-uncertainty-priced-search-edge
   field
-    step : Search.SearchStep geometry public
+    step : Search.SearchStep geometry pub
     changedSupport : Nat
     survivingSupport : Nat
     fullRankUncertainty128 :
@@ -96,8 +96,8 @@ record FullRankUncertaintyPricedSearchEdge
 open FullRankUncertaintyPricedSearchEdge public
 
 fullRankSearchEdgeUncertaintyObstruction128 :
-  ∀ {geometry public} →
-  (priced : FullRankUncertaintyPricedSearchEdge geometry public) →
+  ∀ {geometry pub} →
+  (priced : FullRankUncertaintyPricedSearchEdge geometry pub) →
   128 ≤ changedSupport priced * Search.stepCost (step priced)
 fullRankSearchEdgeUncertaintyObstruction128 priced =
   Bridge.fullRankUncertaintyToTransitionWork
@@ -115,8 +115,8 @@ fullRankSearchEdgeUncertaintyObstruction128 priced =
 ------------------------------------------------------------------------
 
 boundedRadiusSearchEdgeObstruction128 :
-  ∀ {geometry public} →
-  (priced : UncertaintyPricedSearchEdge geometry public) →
+  ∀ {geometry pub} →
+  (priced : UncertaintyPricedSearchEdge geometry pub) →
   (radius : Nat) →
   changedSupport priced ≤ radius →
   128 ≤ radius * (Search.stepCost (step priced) + singularBudget priced)

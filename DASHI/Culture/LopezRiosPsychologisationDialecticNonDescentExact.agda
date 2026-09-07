@@ -25,9 +25,9 @@ import DASHI.Culture.LopezRiosMarxistPsychologySourceAtlasExact as Sources
 ------------------------------------------------------------------------
 
 data StructuralFrame : Set where
-  exploitativeLabourFrame
-  nonExploitativeLabourFrame
-  : StructuralFrame
+  exploitativeLabourFrame : StructuralFrame
+  nonExploitativeLabourFrame : StructuralFrame
+
 
 data Person : Set where
   samePerson : Person
@@ -36,9 +36,9 @@ data IndividualObservation : Set where
   distressObserved : IndividualObservation
 
 data StructuralDependency : Set where
-  exploitativeDependency
-  otherDependency
-  : StructuralDependency
+  exploitativeDependency : StructuralDependency
+  otherDependency : StructuralDependency
+
 
 individualObservation : StructuralFrame → Person → IndividualObservation
 individualObservation exploitativeLabourFrame samePerson = distressObserved

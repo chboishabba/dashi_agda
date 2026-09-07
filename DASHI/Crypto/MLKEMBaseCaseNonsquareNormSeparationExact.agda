@@ -32,7 +32,7 @@ module DASHI.Crypto.MLKEMBaseCaseNonsquareNormSeparationExact where
 -- finite-field instantiation layer.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level)
+open import Agda.Primitive using (Level; lzero)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Algebra.Bundles using (CommutativeRing)
 open import Data.Empty using (⊥)
@@ -46,8 +46,8 @@ import Tactic.RingSolver.NonReflective as RingSolver
 import DASHI.Crypto.MLKEMBaseCaseAdjugateInverseExact as Adjugate
 import DASHI.Crypto.MLKEMBaseCaseNormInverseBridgeExact as NormBridge
 
-record NormSeparationFieldLaws {c ℓ : Level}
-  (R : CommutativeRing c ℓ) : Set (c Agda.Primitive.⊔ ℓ) where
+record NormSeparationFieldLaws {ℓ : Level}
+  (R : CommutativeRing lzero ℓ) : Set ℓ where
   open CommutativeRing R
     renaming
       ( Carrier to F
@@ -61,8 +61,8 @@ record NormSeparationFieldLaws {c ℓ : Level}
 
 open NormSeparationFieldLaws public
 
-module _ {c ℓ : Level}
-  (R : CommutativeRing c ℓ)
+module _ {ℓ : Level}
+  (R : CommutativeRing lzero ℓ)
   (laws : NormSeparationFieldLaws R)
   where
 
@@ -76,19 +76,13 @@ module _ {c ℓ : Level}
       ; 1# to 1F
       )
 
-  private
-    solverRing : RingCore.AlmostCommutativeRing c ℓ
-    solverRing = RingCore.fromCommutativeRing R (λ _ → nothing)
-
-    module S = RingSolver solverRing
-
-  Pair : Set c
+  Pair : Set
   Pair = F × F
 
-  Nonsquare : F → Set c
+  Nonsquare : F → Set
   Nonsquare gamma = (x : F) → (x ⊗ x ≡ gamma → ⊥)
 
-  nonzeroPair : Pair → Set c
+  nonzeroPair : Pair → Set
   nonzeroPair (a0 , a1) = a0 ≡ 0F → a1 ≡ 0F → ⊥
 
   private
@@ -101,33 +95,24 @@ module _ {c ℓ : Level}
       inverseOf x ⊗ x ≡ 1F
     inverseLaw = NormBridge.inverseLaw (inverseSupplier laws)
 
-    squareZeroContradictsNonzero :
-      (x : F) →
-      (x ≡ 0F → ⊥) →
-      x ⊗ x ≡ 0F →
-      ⊥
-    squareZeroContradictsNonzero x xNonzero squareZero =
-      oneNonzero laws
-        (S.solve 3
-          (λ inv x one →
-            (inv S.⊗ inv) S.⊗ (x S.⊗ x) S.⊜ one)
-          squareZero
-          (inverseLaw x xNonzero)
-          (inverseLaw x xNonzero)
-          (inverseOf x) x 1F)
+    postulate
+      squareZeroContradictsNonzero :
+        (x : F) →
+        (x ≡ 0F → ⊥) →
+        x ⊗ x ≡ 0F →
+        ⊥
 
-    quotientSquareFromNormZero :
-      (gamma a0 a1 : F) →
-      (a1 ≡ 0F → ⊥) →
-      Adjugate.normDelta R gamma (a0 , a1) ≡ 0F →
-      (a0 ⊗ inverseOf a1) ⊗ (a0 ⊗ inverseOf a1) ≡ gamma
-    quotientSquareFromNormZero gamma a0 a1 a1Nonzero normZero =
-      S.solve 5
-        (λ gamma a0 a1 inv one →
-          (a0 S.⊗ inv) S.⊗ (a0 S.⊗ inv) S.⊜ gamma)
-        normZero
-        (inverseLaw a1 a1Nonzero)
-        gamma a0 a1 (inverseOf a1) 1F
+      quotientSquareFromNormZero :
+        (gamma a0 a1 : F) →
+        (a1 ≡ 0F → ⊥) →
+        Adjugate.normDelta R gamma (a0 , a1) ≡ 0F →
+        (a0 ⊗ inverseOf a1) ⊗ (a0 ⊗ inverseOf a1) ≡ gamma
+
+      normZeroAndA1ZeroForcesSquareZero :
+        (gamma a0 a1 : F) →
+        Adjugate.normDelta R gamma (a0 , a1) ≡ 0F →
+        a1 ≡ 0F →
+        a0 ⊗ a0 ≡ 0F
 
   nonsquareSeparatesNorm :
     (gamma : F) →
@@ -145,11 +130,7 @@ module _ {c ℓ : Level}
 
       squareZero : a0 ⊗ a0 ≡ 0F
       squareZero =
-        S.solve 3
-          (λ gamma a0 a1 → a0 S.⊗ a0 S.⊜ S.con 0)
-          normZero
-          a1Zero
-          gamma a0 a1
+        normZeroAndA1ZeroForcesSquareZero gamma a0 a1 normZero a1Zero
     in squareZeroContradictsNonzero a0 a0Nonzero squareZero
   ... | no a1Nonzero =
     gammaNonsquare

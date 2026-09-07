@@ -23,7 +23,8 @@ module DASHI.Crypto.MLKEMNTTLocalLeftInverseZeroReflectionExact where
 -- left inverse maps the output zero to the input zero.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong; trans; sym)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
 open import DASHI.Crypto.MLKEMNTTLocalMatrixOutcomeClassifierExact using
   ( ZeroReflectingMap

@@ -31,11 +31,11 @@ import DASHI.Culture.IntellectualReceptionAdmissibilityStratumWhatIfExact as Str
 ------------------------------------------------------------------------
 
 data RelationMode : Set where
-  detachedCommentary
-  institutionalAuthority
-  movementSolidarity
-  archivalRecoveryRelation
-  : RelationMode
+  detachedCommentary : RelationMode
+  institutionalAuthority : RelationMode
+  movementSolidarity : RelationMode
+  archivalRecoveryRelation : RelationMode
+
 
 record CounterfactualReceptionState : Set where
   constructor counterfactual-reception-state
@@ -56,12 +56,12 @@ seedState =
 ------------------------------------------------------------------------
 
 data CounterfactualIntervention : Set where
-  pluraliseTopology
-  shiftToMovementHistory
-  closeAdmissionGate
-  recoverSourceHistory
-  shiftRelationToInstitution
-  : CounterfactualIntervention
+  pluraliseTopology : CounterfactualIntervention
+  shiftToMovementHistory : CounterfactualIntervention
+  closeAdmissionGate : CounterfactualIntervention
+  recoverSourceHistory : CounterfactualIntervention
+  shiftRelationToInstitution : CounterfactualIntervention
+
 
 applyIntervention :
   CounterfactualIntervention →
@@ -301,14 +301,14 @@ admittedOrdersShareExactFutureCone :
 admittedOrdersShareExactFutureCone = refl
 
 data AdmittedCounterfactualOrder : Set where
-  movementThenInstitutionOrder
-  institutionThenMovementOrder
-  : AdmittedCounterfactualOrder
+  movementThenInstitutionOrder : AdmittedCounterfactualOrder
+  institutionThenMovementOrder : AdmittedCounterfactualOrder
+
 
 data AdmittedFineEndpoint : Set where
-  movementThenInstitutionEndpoint
-  institutionThenMovementEndpoint
-  : AdmittedFineEndpoint
+  movementThenInstitutionEndpoint : AdmittedFineEndpoint
+  institutionThenMovementEndpoint : AdmittedFineEndpoint
+
 
 admittedFutureCone : AdmittedCounterfactualOrder → Stratum.FutureConeCode
 admittedFutureCone movementThenInstitutionOrder =

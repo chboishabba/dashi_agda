@@ -27,12 +27,12 @@ import DASHI.Culture.WittgensteinUsePracticeSourceBridgeExact as Wittgenstein
 ------------------------------------------------------------------------
 
 data IntegrationLevel : Set where
-  historicalSourceProposition
-  boundedInterpretiveBridge
-  reusableFormalPattern
-  finiteDASHITheorem
-  empiricalPopulationClaim
-  : IntegrationLevel
+  historicalSourceProposition : IntegrationLevel
+  boundedInterpretiveBridge : IntegrationLevel
+  reusableFormalPattern : IntegrationLevel
+  finiteDASHITheorem : IntegrationLevel
+  empiricalPopulationClaim : IntegrationLevel
+
 
 sourceNotTheorem : historicalSourceProposition ≡ finiteDASHITheorem → ⊥
 sourceNotTheorem ()
@@ -130,18 +130,18 @@ canonicalCriticalTheorySourceWeld =
 ------------------------------------------------------------------------
 
 data PhilosophicalRegister : Set where
-  beauvoirSubjectOther
-  lacanianIdentificationDiscourse
-  irigarayanRelationalDifference
-  crenshawIntersectionality
-  anzalduanBorderlands
-  lugonesPurityCurdling
-  bhabhaThirdSpace
-  trinhSubjectInMaking
-  badiouVoidCountAsOne
-  bookchinSocialEcologyHierarchy
-  wittgensteinUseLanguageGame
-  : PhilosophicalRegister
+  beauvoirSubjectOther : PhilosophicalRegister
+  lacanianIdentificationDiscourse : PhilosophicalRegister
+  irigarayanRelationalDifference : PhilosophicalRegister
+  crenshawIntersectionality : PhilosophicalRegister
+  anzalduanBorderlands : PhilosophicalRegister
+  lugonesPurityCurdling : PhilosophicalRegister
+  bhabhaThirdSpace : PhilosophicalRegister
+  trinhSubjectInMaking : PhilosophicalRegister
+  badiouVoidCountAsOne : PhilosophicalRegister
+  bookchinSocialEcologyHierarchy : PhilosophicalRegister
+  wittgensteinUseLanguageGame : PhilosophicalRegister
+
 
 beauvoirNotLacan : beauvoirSubjectOther ≡ lacanianIdentificationDiscourse → ⊥
 beauvoirNotLacan ()

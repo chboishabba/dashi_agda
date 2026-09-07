@@ -25,12 +25,12 @@ import DASHI.Core.AdmissibleTransitionHyperfabricExact as Admissible
 ------------------------------------------------------------------------
 
 data ArrivalHistory : Set where
-  commentaryFirst institutionFirst movementFirst archivalRediscovery
-  : ArrivalHistory
+  commentaryFirst institutionFirst movementFirst archivalRediscovery : ArrivalHistory
+
 
 data ReceptionTopology : Set where
-  bracketLikeCanon roundRobinPluralReception movementNetwork archivalReview
-  : ReceptionTopology
+  bracketLikeCanon roundRobinPluralReception movementNetwork archivalReview : ReceptionTopology
+
 
 data CoarseReceptionPosition : Set where
   samePresentVocabulary : CoarseReceptionPosition
@@ -39,12 +39,12 @@ data AdmissionGate : Set where
   closedGate pendingGate openGate : AdmissionGate
 
 data AdmissibleMoveCode : Set where
-  narrowCanonMove pluralComparisonMove counterTraditionMove sourceRecoveryMove
-  : AdmissibleMoveCode
+  narrowCanonMove pluralComparisonMove counterTraditionMove sourceRecoveryMove : AdmissibleMoveCode
+
 
 data FutureConeCode : Set where
-  canonDominantCone pluralContestableCone movementReclamationCone archivalReconstructionCone
-  : FutureConeCode
+  canonDominantCone pluralContestableCone movementReclamationCone archivalReconstructionCone : FutureConeCode
+
 
 record ReceptionAdmissibilityStratum : Set where
   constructor reception-admissibility-stratum
@@ -187,8 +187,8 @@ sameTopologyCannotRecoverArrivalHistory =
 ------------------------------------------------------------------------
 
 data WhatIfIntervention : Set where
-  whatIfPluralTopology whatIfMovementReception whatIfSourceRecovered whatIfCanonClosed
-  : WhatIfIntervention
+  whatIfPluralTopology whatIfMovementReception whatIfSourceRecovered whatIfCanonClosed : WhatIfIntervention
+
 
 applyWhatIf : WhatIfIntervention → ReceptionAdmissibilityStratum → ReceptionAdmissibilityStratum
 applyWhatIf whatIfPluralTopology state =

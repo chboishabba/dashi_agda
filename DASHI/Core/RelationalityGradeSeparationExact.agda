@@ -31,12 +31,12 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data RelationalityGrade : Set where
-  endpointOnly
-  pairValued
-  endpointNonseparable
-  historyConditioned
-  observerContextConditioned
-  : RelationalityGrade
+  endpointOnly : RelationalityGrade
+  pairValued : RelationalityGrade
+  endpointNonseparable : RelationalityGrade
+  historyConditioned : RelationalityGrade
+  observerContextConditioned : RelationalityGrade
+
 
 hasPairCoordinate : RelationalityGrade → Bool
 hasPairCoordinate endpointOnly = false

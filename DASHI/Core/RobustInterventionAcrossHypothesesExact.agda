@@ -1,6 +1,7 @@
 module DASHI.Core.RobustInterventionAcrossHypothesesExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
 -- PURPOSE

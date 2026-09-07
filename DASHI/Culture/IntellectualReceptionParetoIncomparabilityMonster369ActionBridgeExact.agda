@@ -24,10 +24,10 @@ import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 ------------------------------------------------------------------------
 
 data IncomparabilityResponse : Set where
-  preserveAlternatives
-  seekDiscriminator
-  useIndependentAuthorisedRule
-  : IncomparabilityResponse
+  preserveAlternatives : IncomparabilityResponse
+  seekDiscriminator : IncomparabilityResponse
+  useIndependentAuthorisedRule : IncomparabilityResponse
+
 
 data IndependentDecisionAuthority : Set where
   explicitlySuppliedAuthority : IndependentDecisionAuthority

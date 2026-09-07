@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Int using (Int)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact as EM
 import DASHI.Physics.Units.SI as SI
@@ -39,13 +40,13 @@ open IonicSpeciesState public
 
 record NernstPlanckFluxLaw
     (species : IonicSpeciesState)
-    (field : EM.U1ElectromagneticFieldSocket) : Set₁ where
+    (emField : EM.U1ElectromagneticFieldSocket) : Set₁ where
   constructor nernstPlanckFluxLaw
   field
     CoupledState : Set
     FluxCarrier : Set
     speciesState : CoupledState → State species
-    fieldState : CoupledState → EM.FieldState field
+    fieldState : CoupledState → EM.FieldState emField
     diffusiveFlux : CoupledState → FluxCarrier
     electricMigrationFlux : CoupledState → FluxCarrier
     combineFlux : FluxCarrier → FluxCarrier → FluxCarrier
@@ -65,17 +66,17 @@ open NernstPlanckFluxLaw public
 
 record PoissonChargeCoupling
     {species : IonicSpeciesState}
-    {field : EM.U1ElectromagneticFieldSocket}
-    (np : NernstPlanckFluxLaw species field) : Set₁ where
+    {emField : EM.U1ElectromagneticFieldSocket}
+    (np : NernstPlanckFluxLaw species emField) : Set₁ where
   constructor poissonChargeCoupling
   field
     ionicChargeDensity :
       (state : CoupledState np) →
-      SI.Quantity SI.ChargeDensity (EM.chargeDensityScale field)
+      SI.Quantity SI.ChargeDensity (EM.chargeDensityScale emField)
     ionicAndFieldChargeDensityAgree :
       (state : CoupledState np) →
       ionicChargeDensity state
-      ≡ EM.chargeDensity field (fieldState np state)
+      ≡ EM.chargeDensity emField (fieldState np state)
     poissonEquationReference : String
     permittivityModelReference : String
     boundaryConditionReference : String
@@ -84,8 +85,8 @@ open PoissonChargeCoupling public
 
 record AdvectiveElectrodiffusionExtension
     {species : IonicSpeciesState}
-    {field : EM.U1ElectromagneticFieldSocket}
-    (np : NernstPlanckFluxLaw species field) : Set₁ where
+    {emField : EM.U1ElectromagneticFieldSocket}
+    (np : NernstPlanckFluxLaw species emField) : Set₁ where
   constructor advectiveElectrodiffusionExtension
   field
     FluidState : Set
@@ -119,14 +120,13 @@ open AdvectiveElectrodiffusionExtension public
 ------------------------------------------------------------------------
 
 data ElectrodiffusionApplication : Set where
-  neuronalMembrane
-  genericCellMembrane
-  plantExcitableMembrane
-  plantRootIonTransport
-  fungalIonExchange
-  soilPoreElectrochemistry
-  aqueousEnvironmentalTransport
-  : ElectrodiffusionApplication
+  neuronalMembrane : ElectrodiffusionApplication
+  genericCellMembrane : ElectrodiffusionApplication
+  plantExcitableMembrane : ElectrodiffusionApplication
+  plantRootIonTransport : ElectrodiffusionApplication
+  fungalIonExchange : ElectrodiffusionApplication
+  soilPoreElectrochemistry : ElectrodiffusionApplication
+  aqueousEnvironmentalTransport : ElectrodiffusionApplication
 
 plantExcitableMembraneIsNotPlantRootTransport :
   plantExcitableMembrane ≡ plantRootIonTransport → ⊥
@@ -177,3 +177,5 @@ canonicalPNPElectrodiffusionBoundary =
     false refl
     false refl
     true refl
+
+open PNPElectrodiffusionBoundary public

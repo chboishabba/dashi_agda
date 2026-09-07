@@ -125,3 +125,5 @@ canonicalItalSocioEcologicalFlowBoundary =
     false refl
     true refl
     true refl
+
+open ItalSocioEcologicalFlowBoundary public

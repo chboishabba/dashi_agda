@@ -34,12 +34,12 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 ------------------------------------------------------------------------
 
 data SanctionDomain : Set where
-  metaphysicalSanction
-  familialBelongingSanction
-  institutionalSanction
-  moralIdentitySanction
-  socialExclusionSanction
-  : SanctionDomain
+  metaphysicalSanction : SanctionDomain
+  familialBelongingSanction : SanctionDomain
+  institutionalSanction : SanctionDomain
+  moralIdentitySanction : SanctionDomain
+  socialExclusionSanction : SanctionDomain
+
 
 record ConditionalAuthoritySanction : Set where
   constructor conditional-authority-sanction
@@ -89,13 +89,13 @@ moralIdentitySanctionExample = conditional-authority-sanction
 ------------------------------------------------------------------------
 
 data SanctionedSubjectPosition : Set where
-  sanctionedByAuthority
-  publiclyCompliant
-  inheritedIdentityAttributed
-  counterIdentified
-  selfRecharting
-  subjectInMaking
-  : SanctionedSubjectPosition
+  sanctionedByAuthority : SanctionedSubjectPosition
+  publiclyCompliant : SanctionedSubjectPosition
+  inheritedIdentityAttributed : SanctionedSubjectPosition
+  counterIdentified : SanctionedSubjectPosition
+  selfRecharting : SanctionedSubjectPosition
+  subjectInMaking : SanctionedSubjectPosition
+
 
 sanctionedNotSelfRecharting : sanctionedByAuthority ≡ selfRecharting → ⊥
 sanctionedNotSelfRecharting ()
@@ -114,10 +114,10 @@ counterIdentityNotSubjectInMaking ()
 ------------------------------------------------------------------------
 
 data SituatedFormation : Set where
-  imposedMoralCategory
-  oppositionalReclaimedCategory
-  positivelyReconstitutedSubject
-  : SituatedFormation
+  imposedMoralCategory : SituatedFormation
+  oppositionalReclaimedCategory : SituatedFormation
+  positivelyReconstitutedSubject : SituatedFormation
+
 
 data InheritedMoralChart : Set where
   sameInheritedMoralSurface : InheritedMoralChart
@@ -153,18 +153,18 @@ canonicalSanctionPositiveRecharting =
 ------------------------------------------------------------------------
 
 data SanctionDialecticPosition : Set where
-  inheritedAuthorityPosition
-  feministCounterFormation
-  wiccanPaganReclamation
-  reciprocalReconstitution
-  : SanctionDialecticPosition
+  inheritedAuthorityPosition : SanctionDialecticPosition
+  feministCounterFormation : SanctionDialecticPosition
+  wiccanPaganReclamation : SanctionDialecticPosition
+  reciprocalReconstitution : SanctionDialecticPosition
+
 
 data SanctionDialecticFrame : Set where
-  inheritedAuthorityFrame
-  feministCritiqueFrame
-  reclamationFrame
-  reciprocalFrame
-  : SanctionDialecticFrame
+  inheritedAuthorityFrame : SanctionDialecticFrame
+  feministCritiqueFrame : SanctionDialecticFrame
+  reclamationFrame : SanctionDialecticFrame
+  reciprocalFrame : SanctionDialecticFrame
+
 
 sanctionRoleSystem :
   Dialectic.ContextualRoleSystem SanctionDialecticFrame SanctionDialecticPosition
@@ -229,19 +229,19 @@ canonicalFeministWiccaCrossPRReceipt = feminist-wicca-cross-pr-receipt
 ------------------------------------------------------------------------
 
 data LaterSpiritualIdentity : Set where
-  laterWiccan
-  laterPagan
-  laterSecular
-  laterSameReligion
-  laterPluralSpirituality
-  : LaterSpiritualIdentity
+  laterWiccan : LaterSpiritualIdentity
+  laterPagan : LaterSpiritualIdentity
+  laterSecular : LaterSpiritualIdentity
+  laterSameReligion : LaterSpiritualIdentity
+  laterPluralSpirituality : LaterSpiritualIdentity
+
 
 data ChildhoodFormationRoute : Set where
-  coerciveCandidateRoute
-  noncoerciveInheritedRoute
-  autonomousEarlyRoute
-  mixedUnresolvedRoute
-  : ChildhoodFormationRoute
+  coerciveCandidateRoute : ChildhoodFormationRoute
+  noncoerciveInheritedRoute : ChildhoodFormationRoute
+  autonomousEarlyRoute : ChildhoodFormationRoute
+  mixedUnresolvedRoute : ChildhoodFormationRoute
+
 
 data LaterIdentitySurface : Set where
   sameAlternativeSpiritualitySurface : LaterIdentitySurface

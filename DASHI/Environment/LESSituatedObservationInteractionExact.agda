@@ -205,6 +205,9 @@ situatedEvidenceHasUniqueSignatureEnvelope :
     situatedCompatible situatedObservationSignature evidence
 situatedEvidenceHasUniqueSignatureEnvelope evidence =
   Prediction.pointIdentifiableImpliesEnvelopeUnique
+    {compatible = situatedCompatible}
+    {consumer = situatedObservationSignature}
+    {evidence = evidence}
     (situatedEvidencePointIdentifiesSignature evidence)
 
 anonymousCompatible :
@@ -217,13 +220,13 @@ anonymousEvidenceDoesNotPointIdentifySignature :
     situatedObservationSignature
     sameVisibleCondition →
   ⊥
-anonymousEvidenceDoesNotPointIdentifySignature identifiable =
-  (λ ())
-    (identifiable
-      indigenousWetSeasonObservation
-      scientificWetSeasonObservation
-      refl
-      refl)
+anonymousEvidenceDoesNotPointIdentifySignature identifiable with
+  identifiable
+    indigenousWetSeasonObservation
+    scientificWetSeasonObservation
+    refl
+    refl
+... | ()
 
 ------------------------------------------------------------------------
 -- Observe -> interact -> observe again.
@@ -324,6 +327,8 @@ record ObserveInteractPlanningBoundary : Set where
     permaculturePrincipleProvesEmpiricalEnvironmentalDynamics : Bool
     permaculturePrincipleProvesEmpiricalEnvironmentalDynamicsIsFalse :
       permaculturePrincipleProvesEmpiricalEnvironmentalDynamics ≡ false
+
+open ObserveInteractPlanningBoundary public
 
 canonicalObserveInteractPlanningBoundary : ObserveInteractPlanningBoundary
 canonicalObserveInteractPlanningBoundary =

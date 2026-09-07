@@ -22,14 +22,14 @@ import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Choice
 ------------------------------------------------------------------------
 
 data ResidualInformationMoveKind : Set where
-  measurementResidualMove
-  fidelityResidualMove
-  perturbationResidualMove
-  replicationResidualMove
-  proofSearchResidualMove
-  sourceRecoveryResidualMove
-  contextAuditResidualMove
-  : ResidualInformationMoveKind
+  measurementResidualMove : ResidualInformationMoveKind
+  fidelityResidualMove : ResidualInformationMoveKind
+  perturbationResidualMove : ResidualInformationMoveKind
+  replicationResidualMove : ResidualInformationMoveKind
+  proofSearchResidualMove : ResidualInformationMoveKind
+  sourceRecoveryResidualMove : ResidualInformationMoveKind
+  contextAuditResidualMove : ResidualInformationMoveKind
+
 
 measurementNotProofSearch :
   measurementResidualMove ≡ proofSearchResidualMove → ⊥
@@ -162,11 +162,11 @@ open ResidualParetoChoice public
 ------------------------------------------------------------------------
 
 data ResidualMoveOutcomeGrade : Set where
-  partialResidualProgress
-  consumerClosed
-  exactMechanismIdentified
-  theoremProved
-  : ResidualMoveOutcomeGrade
+  partialResidualProgress : ResidualMoveOutcomeGrade
+  consumerClosed : ResidualMoveOutcomeGrade
+  exactMechanismIdentified : ResidualMoveOutcomeGrade
+  theoremProved : ResidualMoveOutcomeGrade
+
 
 partialProgressNotConsumerClosure :
   partialResidualProgress ≡ consumerClosed → ⊥

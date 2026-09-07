@@ -25,10 +25,10 @@ record RotatingSourceGeometry : Set₁ where
 
 open RotatingSourceGeometry public
 
-record WeakFieldGRKernel (g : RotatingSourceGeometry) : Set₁ where
+record WeakFieldGRKernel (g : RotatingSourceGeometry) : Set₂ where
   constructor weak-field-gr-kernel
   field
-    NewtonG SpeedOfLight ConventionFactor AngularMomentum : Set
+    NewtonG SpeedOfLight ConventionFactor AngularMomentum : Set₁
     angularMomentumExpression : String
     gravitomagneticScalingExpression : String
     sourceReference : String

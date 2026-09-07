@@ -27,15 +27,15 @@ import DASHI.Core.CategoryAuthorityAuditExact as CategoryAudit
 ------------------------------------------------------------------------
 
 data CompressionFamily : Set where
-  juridicalRecognitionCompression
-  economicScalarCompression
-  administrativeClassificationCompression
-  psychologisingIndividualisationCompression
-  representationalSubjectCompression
-  singleAxisIntersectionalCompression
-  commodityFormCompression
-  terminalisingEnemyCompression
-  : CompressionFamily
+  juridicalRecognitionCompression : CompressionFamily
+  economicScalarCompression : CompressionFamily
+  administrativeClassificationCompression : CompressionFamily
+  psychologisingIndividualisationCompression : CompressionFamily
+  representationalSubjectCompression : CompressionFamily
+  singleAxisIntersectionalCompression : CompressionFamily
+  commodityFormCompression : CompressionFamily
+  terminalisingEnemyCompression : CompressionFamily
+
 
 ------------------------------------------------------------------------
 -- A projection-inadequacy receipt carries the exact witness, not merely prose.

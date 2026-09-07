@@ -46,11 +46,11 @@ import DASHI.Core.ObserverRefinementLatticeExact as Observer
 ------------------------------------------------------------------------
 
 data RechartingSourceRole : Set where
-  phallocentricChartCritique
-  generativeExpression
-  positiveEndogenousPower
-  categoryRelationCritique
-  : RechartingSourceRole
+  phallocentricChartCritique : RechartingSourceRole
+  generativeExpression : RechartingSourceRole
+  positiveEndogenousPower : RechartingSourceRole
+  categoryRelationCritique : RechartingSourceRole
+
 
 record RechartingSource : Set where
   constructor recharting-source

@@ -146,19 +146,19 @@ ballisticsLedgerSeedsSearch = refl
 ------------------------------------------------------------------------
 
 data InvestigationArtifact : Set where
-  policeRecordArtifact
-  apartmentRecordArtifact
-  exPartnerWitnessArtifact
-  originalMediaArtifact
-  autopsyArtifact
-  toxicologyArtifact
-  ballisticsArtifact
-  intrusionPatternAssessment
-  threatChronologyAssessment
-  deathMechanismAssessment
-  deathMannerAssessment
-  caseHyperfabricAssessment
-  : InvestigationArtifact
+  policeRecordArtifact : InvestigationArtifact
+  apartmentRecordArtifact : InvestigationArtifact
+  exPartnerWitnessArtifact : InvestigationArtifact
+  originalMediaArtifact : InvestigationArtifact
+  autopsyArtifact : InvestigationArtifact
+  toxicologyArtifact : InvestigationArtifact
+  ballisticsArtifact : InvestigationArtifact
+  intrusionPatternAssessment : InvestigationArtifact
+  threatChronologyAssessment : InvestigationArtifact
+  deathMechanismAssessment : InvestigationArtifact
+  deathMannerAssessment : InvestigationArtifact
+  caseHyperfabricAssessment : InvestigationArtifact
+
 
 data EskridgeDepends : InvestigationArtifact → InvestigationArtifact → Set where
   policeToIntrusion : EskridgeDepends policeRecordArtifact intrusionPatternAssessment

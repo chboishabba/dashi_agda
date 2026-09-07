@@ -34,10 +34,10 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 ------------------------------------------------------------------------
 
 data EcologyState : Set where
-  dominantClosed
-  thirdOpen
-  rhetoricallyInclusiveClosed
-  : EcologyState
+  dominantClosed : EcologyState
+  thirdOpen : EcologyState
+  rhetoricallyInclusiveClosed : EcologyState
+
 
 data RealizedRemainAffordance : Set where
   remainClosed remainOpen : RealizedRemainAffordance

@@ -160,12 +160,12 @@ intelligenceProvenanceFrontier = Search.selector-acquisition-frontier
 ------------------------------------------------------------------------
 
 data AcquisitionPriority : Set where
-  firstTier
-  secondTier
-  thirdTier
-  : AcquisitionPriority
+  firstTier : AcquisitionPriority
+  secondTier : AcquisitionPriority
+  thirdTier : AcquisitionPriority
 
-record PrioritisedSelectorTarget : Set where
+
+record PrioritisedSelectorTarget : Set₁ where
   constructor prioritised-selector-target
   field
     priority : AcquisitionPriority
@@ -227,6 +227,8 @@ record SelectorFrontierBoundary : Set where
     privateSelectorMustBeSearchedBeforePublicArchivalSelectors : Bool
     privateSelectorMustBeSearchedBeforePublicArchivalSelectorsIsFalse :
       privateSelectorMustBeSearchedBeforePublicArchivalSelectors ≡ false
+
+open SelectorFrontierBoundary public
 
 canonicalSelectorFrontierBoundary : SelectorFrontierBoundary
 canonicalSelectorFrontierBoundary = selector-frontier-boundary

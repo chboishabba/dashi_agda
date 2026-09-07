@@ -14,7 +14,7 @@ open import Data.Product using (Σ; _,_; proj₁)
 -- actual two-valued PNF data and must agree on the shared overlap.
 
 data TimeCell : Set where
-  past overlap future : TimeCell
+  past overlapCell future : TimeCell
 
 data OpenCell : Set where
   U V UV whole : OpenCell

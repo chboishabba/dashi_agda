@@ -29,7 +29,7 @@ module DASHI.Crypto.MLKEMFIPS203AverageSuccessResourceExact where
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat using (_≤_; _+_; _*_)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; cong; trans)
 import Data.Nat.Properties as NatP
 
 import DASHI.Crypto.MLKEMFIPS203SourceExact as FIPS
@@ -106,9 +106,10 @@ fullRankAverageSuccessUpdateConstraint :
   128 ≤ sourceSupport certificate * touches certificate
 fullRankAverageSuccessUpdateConstraint certificate fullRank =
   subst
-    (λ sigma →
-      128 ≤ sourceSupport certificate * (touches certificate + sigma))
-    fullRank
+    (128 ≤_)
+    (cong (sourceSupport certificate *_)
+      (trans (cong (touches certificate +_) fullRank)
+             (NatP.+-identityʳ (touches certificate))))
     (uncertaintyUpdateBound certificate)
 
 ------------------------------------------------------------------------

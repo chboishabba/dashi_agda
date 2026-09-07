@@ -135,8 +135,8 @@ obligationCollisionBlocksGovernedSufficiency collision governed =
 ------------------------------------------------------------------------
 
 data CoordinateEffect : Set where
-  preservesCoordinate addsCoordinate erasesCoordinate unresolvedCoordinate
-  : CoordinateEffect
+  preservesCoordinate addsCoordinate erasesCoordinate unresolvedCoordinate : CoordinateEffect
+
 
 -- Lineage is deliberately richer than an availability Bool.  It distinguishes
 -- an inherited coordinate from information introduced downstream.

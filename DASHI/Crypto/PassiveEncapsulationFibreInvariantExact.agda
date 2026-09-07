@@ -37,17 +37,17 @@ samePublicKeySameHonestCiphertext :
   encapsulateCiphertext system (derivePublic system left) coins
   ≡ encapsulateCiphertext system (derivePublic system right) coins
 samePublicKeySameHonestCiphertext {system} samePublic coins =
-  cong (λ public → encapsulateCiphertext system public coins) samePublic
+  cong (λ pub → encapsulateCiphertext system pub coins) samePublic
 
 honestTranscript :
   (system : PublicOnlyEncapsulation) →
   PublicKey system →
   List (Coins system) →
   List (Ciphertext system)
-honestTranscript system public [] = []
-honestTranscript system public (coin ∷ coins) =
-  encapsulateCiphertext system public coin
-  ∷ honestTranscript system public coins
+honestTranscript system pub [] = []
+honestTranscript system pub (coin ∷ coins) =
+  encapsulateCiphertext system pub coin
+  ∷ honestTranscript system pub coins
 
 samePublicKeySameHonestTranscript :
   ∀ {system : PublicOnlyEncapsulation}
@@ -59,5 +59,5 @@ samePublicKeySameHonestTranscript :
 samePublicKeySameHonestTranscript {system} samePublic [] = refl
 samePublicKeySameHonestTranscript {system} samePublic (coin ∷ coins) =
   cong₂ _∷_
-    (samePublicKeySameHonestCiphertext samePublic coin)
-    (samePublicKeySameHonestTranscript samePublic coins)
+    (samePublicKeySameHonestCiphertext {system = system} samePublic coin)
+    (samePublicKeySameHonestTranscript {system = system} samePublic coins)

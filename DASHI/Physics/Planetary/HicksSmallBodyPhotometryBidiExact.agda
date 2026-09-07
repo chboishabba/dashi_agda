@@ -24,6 +24,8 @@ record SmallBodyInferenceBoundary : Set where
     scienceTeamMembershipImpliesOwnershipOfMissionPhysics : Bool
     scienceTeamMembershipImpliesOwnershipOfMissionPhysicsIsFalse : scienceTeamMembershipImpliesOwnershipOfMissionPhysics ≡ false
 
+open SmallBodyInferenceBoundary public
+
 canonicalSmallBodyInferenceBoundary : SmallBodyInferenceBoundary
 canonicalSmallBodyInferenceBoundary = small-body-inference-boundary false refl false refl true refl false refl
 

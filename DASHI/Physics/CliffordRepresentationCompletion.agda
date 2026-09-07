@@ -1,7 +1,7 @@
 module DASHI.Physics.CliffordRepresentationCompletion where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Integer using (ℤ; +_)
+open import Data.Integer using (ℤ; +_) renaming (_*_ to _*ℤ_)
 
 open import DASHI.Physics.LorentzianCoreClosure as LCC
 
@@ -26,7 +26,7 @@ record CliffordRepresentation (R : OperatorRing) : Set₁ where
         ≡ scalar (LCC.B₂₄ x y)
 
     squareLaw : ∀ x →
-      gamma x * gamma x ≡ scalar ((+ 2) * LCC.Q₄ x)
+      gamma x * gamma x ≡ scalar ((+ 2) *ℤ LCC.Q₄ x)
 
 record CliffordExistence : Set₁ where
   field

@@ -33,18 +33,18 @@ import DASHI.Core.HistoryConditionedChoiceExact as History
 ------------------------------------------------------------------------
 
 data BidiPhase : Set where
-  liveHypotheses
-  detectCollision
-  generateCandidateDiscriminator
-  verifyDiscriminator
-  verifyInterventionAuthority
-  executeMeasurement
-  assimilateEvidence
-  refineLiveFibre
-  reopenAffectedCertificates
-  checkBackwardConsumer
-  chooseNextMove
-  : BidiPhase
+  liveHypotheses : BidiPhase
+  detectCollision : BidiPhase
+  generateCandidateDiscriminator : BidiPhase
+  verifyDiscriminator : BidiPhase
+  verifyInterventionAuthority : BidiPhase
+  executeMeasurement : BidiPhase
+  assimilateEvidence : BidiPhase
+  refineLiveFibre : BidiPhase
+  reopenAffectedCertificates : BidiPhase
+  checkBackwardConsumer : BidiPhase
+  chooseNextMove : BidiPhase
+
 
 data BidiTransition : BidiPhase → BidiPhase → Set where
   liveToCollision : BidiTransition liveHypotheses detectCollision
@@ -81,10 +81,10 @@ canonicalOneIterationCycle =
   (bidiStep nextToLive bidiDone))))))))))
 
 data CycleDisposition : Set where
-  refineAgain
-  actUnderIndependentAuthority
-  closeForDeclaredConsumer
-  : CycleDisposition
+  refineAgain : CycleDisposition
+  actUnderIndependentAuthority : CycleDisposition
+  closeForDeclaredConsumer : CycleDisposition
+
 
 record ActiveBidiCycleReceipt : Set where
   constructor active-bidi-cycle-receipt

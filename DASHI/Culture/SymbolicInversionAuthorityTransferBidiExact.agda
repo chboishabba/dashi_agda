@@ -25,27 +25,27 @@ data SymbolToken : Set where
   witchToken hereticToken sinfulWomanToken deviantToken : SymbolToken
 
 data SymbolicUse : Set where
-  imposedCondemnation
-  externallyRecordedAccusation
-  defensiveRefusal
-  oppositionalReclamation
-  affirmativeSelfIdentification
-  artisticPoliticalUse
-  : SymbolicUse
+  imposedCondemnation : SymbolicUse
+  externallyRecordedAccusation : SymbolicUse
+  defensiveRefusal : SymbolicUse
+  oppositionalReclamation : SymbolicUse
+  affirmativeSelfIdentification : SymbolicUse
+  artisticPoliticalUse : SymbolicUse
+
 
 data SymbolicValence : Set where
   negativeValence contestedValence positiveValence mixedValence : SymbolicValence
 
 data AuthorityLocation : Set where
-  familyAuthority
-  clericalAuthority
-  institutionalAuthority
-  juridicalAuthority
-  communityAuthority
-  selfAuthority
-  collectiveCounterAuthority
-  unresolvedAuthority
-  : AuthorityLocation
+  familyAuthority : AuthorityLocation
+  clericalAuthority : AuthorityLocation
+  institutionalAuthority : AuthorityLocation
+  juridicalAuthority : AuthorityLocation
+  communityAuthority : AuthorityLocation
+  selfAuthority : AuthorityLocation
+  collectiveCounterAuthority : AuthorityLocation
+  unresolvedAuthority : AuthorityLocation
+
 
 record SymbolicEpisode : Set where
   constructor symbolic-episode

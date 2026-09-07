@@ -34,11 +34,11 @@ import DASHI.Reasoning.AttractorAlignedBranchSelectionExact as Basin
 ------------------------------------------------------------------------
 
 data StageBarrierKind : Set where
-  representationalBarrier
-  admissibilityBarrier
-  trapBasinBarrier
-  unresolvedResidualBarrier
-  : StageBarrierKind
+  representationalBarrier : StageBarrierKind
+  admissibilityBarrier : StageBarrierKind
+  trapBasinBarrier : StageBarrierKind
+  unresolvedResidualBarrier : StageBarrierKind
+
 
 ------------------------------------------------------------------------
 -- Reachability-level stuckness: no admissible finite trace to a declared

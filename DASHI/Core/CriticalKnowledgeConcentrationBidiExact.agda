@@ -17,21 +17,21 @@ import DASHI.Core.CapabilityIndexedSelectorSalienceExact as Salience
 ------------------------------------------------------------------------
 
 data KnowledgeCoordinate : Set where
-  publicKnowledge
-  tacitImplementationKnowledge
-  configurationSpecificKnowledge
-  failureModeKnowledge
-  integrationKnowledge
-  networkKnowledge
-  sensitiveOrRestrictedKnowledge
-  : KnowledgeCoordinate
+  publicKnowledge : KnowledgeCoordinate
+  tacitImplementationKnowledge : KnowledgeCoordinate
+  configurationSpecificKnowledge : KnowledgeCoordinate
+  failureModeKnowledge : KnowledgeCoordinate
+  integrationKnowledge : KnowledgeCoordinate
+  networkKnowledge : KnowledgeCoordinate
+  sensitiveOrRestrictedKnowledge : KnowledgeCoordinate
+
 
 data CoordinateStatus : Set where
-  coordinateSourceBacked
-  coordinatePartial
-  coordinateNotLocated
-  coordinateKnownAbsent
-  : CoordinateStatus
+  coordinateSourceBacked : CoordinateStatus
+  coordinatePartial : CoordinateStatus
+  coordinateNotLocated : CoordinateStatus
+  coordinateKnownAbsent : CoordinateStatus
+
 
 record KnowledgeCoordinateReceipt : Set where
   constructor knowledge-coordinate-receipt
@@ -49,12 +49,12 @@ open KnowledgeCoordinateReceipt public
 ------------------------------------------------------------------------
 
 data CriticalityAxis : Set where
-  uniqueness
-  nonPublicness
-  integrationBreadth
-  replacementDifficulty
-  strategicCapabilityRelevance
-  : CriticalityAxis
+  uniqueness : CriticalityAxis
+  nonPublicness : CriticalityAxis
+  integrationBreadth : CriticalityAxis
+  replacementDifficulty : CriticalityAxis
+  strategicCapabilityRelevance : CriticalityAxis
+
 
 record CriticalityReceipt : Set where
   constructor criticality-receipt
@@ -104,12 +104,12 @@ record StrongCriticalKnowledgeClaim : Set where
 open StrongCriticalKnowledgeClaim public
 
 data MissingCriticalityReceipt : Set where
-  needUniquenessEvidence
-  needNonPublicnessEvidence
-  needIntegrationBreadthEvidence
-  needReplacementDifficultyEvidence
-  needStrategicRelevanceEvidence
-  : MissingCriticalityReceipt
+  needUniquenessEvidence : MissingCriticalityReceipt
+  needNonPublicnessEvidence : MissingCriticalityReceipt
+  needIntegrationBreadthEvidence : MissingCriticalityReceipt
+  needReplacementDifficultyEvidence : MissingCriticalityReceipt
+  needStrategicRelevanceEvidence : MissingCriticalityReceipt
+
 
 record CriticalKnowledgeAcquisitionTarget : Set where
   constructor critical-knowledge-acquisition-target

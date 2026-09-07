@@ -35,24 +35,24 @@ import DASHI.Culture.IndigenousKnowledgeStoryTwoEyedSeeingBidiExact as Indigenou
 ------------------------------------------------------------------------
 
 data PhilosophyClaimLayer : Set where
-  primarySourceLayer
-  secondaryInterpretationLayer
-  comparativeBridgeLayer
-  reusablePatternLayer
-  finiteDASHITheoremLayer
-  empiricalClaimLayer
-  : PhilosophyClaimLayer
+  primarySourceLayer : PhilosophyClaimLayer
+  secondaryInterpretationLayer : PhilosophyClaimLayer
+  comparativeBridgeLayer : PhilosophyClaimLayer
+  reusablePatternLayer : PhilosophyClaimLayer
+  finiteDASHITheoremLayer : PhilosophyClaimLayer
+  empiricalClaimLayer : PhilosophyClaimLayer
+
 
 data PhilosophyEvidenceRole : Set where
-  primaryTextRole
-  secondaryScholarshipRole
-  empiricalStudyRole
-  historicalArchiveRole
-  participantTestimonyRole
-  legalAuthorityRole
-  repositoryConstructionRole
-  unresolvedRole
-  : PhilosophyEvidenceRole
+  primaryTextRole : PhilosophyEvidenceRole
+  secondaryScholarshipRole : PhilosophyEvidenceRole
+  empiricalStudyRole : PhilosophyEvidenceRole
+  historicalArchiveRole : PhilosophyEvidenceRole
+  participantTestimonyRole : PhilosophyEvidenceRole
+  legalAuthorityRole : PhilosophyEvidenceRole
+  repositoryConstructionRole : PhilosophyEvidenceRole
+  unresolvedRole : PhilosophyEvidenceRole
+
 
 record PhilosophyClaimReceipt : Set where
   constructor philosophy-claim-receipt
@@ -79,11 +79,11 @@ open PhilosophyClaimReceipt public
 ------------------------------------------------------------------------
 
 data ClaimHistoryState : Set where
-  sourceOccurrence
-  secondaryParaphrase
-  repositoryAnalogy
-  repositoryFiniteTheorem
-  : ClaimHistoryState
+  sourceOccurrence : ClaimHistoryState
+  secondaryParaphrase : ClaimHistoryState
+  repositoryAnalogy : ClaimHistoryState
+  repositoryFiniteTheorem : ClaimHistoryState
+
 
 data SharedWordingSurface : Set where sameWording : SharedWordingSurface
 
@@ -115,20 +115,20 @@ sameWordingCannotRecoverAttributionHistory =
 ------------------------------------------------------------------------
 
 data KeywordState : Set where
-  wittgensteinUse
-  badiouCount
-  bookchinHierarchy
-  irigarayDifference
-  : KeywordState
+  wittgensteinUse : KeywordState
+  badiouCount : KeywordState
+  bookchinHierarchy : KeywordState
+  irigarayDifference : KeywordState
+
 
 data GenericRelationWord : Set where relationWord : GenericRelationWord
 
 data ExactRegisterCode : Set where
-  wittgensteinRegister
-  badiouRegister
-  bookchinRegister
-  irigarayRegister
-  : ExactRegisterCode
+  wittgensteinRegister : ExactRegisterCode
+  badiouRegister : ExactRegisterCode
+  bookchinRegister : ExactRegisterCode
+  irigarayRegister : ExactRegisterCode
+
 
 genericRelationSurface : KeywordState → GenericRelationWord
 genericRelationSurface _ = relationWord
@@ -203,15 +203,15 @@ canonicalPhilosophyPNF =
 ------------------------------------------------------------------------
 
 data PhilosophyPromotionKind : Set where
-  sourceToInterpretation
-  localTextToWholeDoctrine
-  doctrineToPopulationLaw
-  historicalPeriodToPresent
-  influenceToDetermination
-  practiceToPrivateBelief
-  formalSimilarityToSameDoctrine
-  sourcePropositionToDASHITheorem
-  : PhilosophyPromotionKind
+  sourceToInterpretation : PhilosophyPromotionKind
+  localTextToWholeDoctrine : PhilosophyPromotionKind
+  doctrineToPopulationLaw : PhilosophyPromotionKind
+  historicalPeriodToPresent : PhilosophyPromotionKind
+  influenceToDetermination : PhilosophyPromotionKind
+  practiceToPrivateBelief : PhilosophyPromotionKind
+  formalSimilarityToSameDoctrine : PhilosophyPromotionKind
+  sourcePropositionToDASHITheorem : PhilosophyPromotionKind
+
 
 promotionDelta : PhilosophyPromotionKind → PNF.PromotionDelta
 promotionDelta sourceToInterpretation = PNF.sameAssertionStrength

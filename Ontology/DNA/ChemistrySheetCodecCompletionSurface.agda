@@ -4,4 +4,5 @@ open import Ontology.DNA.NonDegenerateChemistrySheetTower public
 open import Ontology.DNA.SantaLucia1998Thermodynamics public
 open import Ontology.DNA.ChemistryAdaptiveReferenceCodec public
 open import Ontology.DNA.PublishedChemistryAssayReceipts public
-open import Ontology.DNA.FixedPointTernaryAndTetration public
+open import Ontology.DNA.FixedPointTernaryAndTetration
+  renaming (reconstruct to reconstructFixedPoint) public

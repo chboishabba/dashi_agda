@@ -27,12 +27,11 @@ import DASHI.Physics.ExoticGravity.SuperconductingSourceConstitutiveEvidenceBidi
 ------------------------------------------------------------------------
 
 data HypothesisWorld : Set where
-  sourceOnlyWorld
-  constitutiveExcessWorld
-  geometryArtifactWorld
-  backgroundArtifactWorld
-  nullWorld
-  : HypothesisWorld
+  sourceOnlyWorld : HypothesisWorld
+  constitutiveExcessWorld : HypothesisWorld
+  geometryArtifactWorld : HypothesisWorld
+  backgroundArtifactWorld : HypothesisWorld
+  nullWorld : HypothesisWorld
 
 -- The coarse observer records only whether a phase-correlated external signal
 -- exists.  Source-only and constitutive-excess worlds collide here.
@@ -52,15 +51,14 @@ sourceConstitutiveCollision =
 ------------------------------------------------------------------------
 
 data SCGravityCoordinate : Set where
-  phaseState
-  sourceMassCurrent
-  sourceStressEnergy
-  sourceGeometry
-  probePosition
-  externalGravityChannel
-  ordinaryBackgroundChannel
-  sourceNormalisedResidual
-  : SCGravityCoordinate
+  phaseState : SCGravityCoordinate
+  sourceMassCurrent : SCGravityCoordinate
+  sourceStressEnergy : SCGravityCoordinate
+  sourceGeometry : SCGravityCoordinate
+  probePosition : SCGravityCoordinate
+  externalGravityChannel : SCGravityCoordinate
+  ordinaryBackgroundChannel : SCGravityCoordinate
+  sourceNormalisedResidual : SCGravityCoordinate
 
 roleOf : SCGravityCoordinate → Coordinate.CoordinateRole
 roleOf phaseState = Coordinate.controlledInput
@@ -104,12 +102,11 @@ residualReceipt = sc-gravity-coordinate-receipt
 ------------------------------------------------------------------------
 
 data JointObservation : Set where
-  sourceExplainsSignal
-  constitutiveResidualPersists
-  geometryExplainsSignal
-  backgroundExplainsSignal
-  noSignal
-  : JointObservation
+  sourceExplainsSignal : JointObservation
+  constitutiveResidualPersists : JointObservation
+  geometryExplainsSignal : JointObservation
+  backgroundExplainsSignal : JointObservation
+  noSignal : JointObservation
 
 jointObserve : HypothesisWorld → JointObservation
 jointObserve sourceOnlyWorld = sourceExplainsSignal
@@ -144,13 +141,12 @@ sourceNormalisedInformationMove = Disc.bundleInformationMove sourceNormalisedBun
 ------------------------------------------------------------------------
 
 data ExperimentStage : Set where
-  characteriseSource
-  crossPhaseBoundary
-  measureExternalProbe
-  closeNuisanceChannels
-  replicateDiscriminator
-  estimateConstitutiveResidual
-  : ExperimentStage
+  characteriseSource : ExperimentStage
+  crossPhaseBoundary : ExperimentStage
+  measureExternalProbe : ExperimentStage
+  closeNuisanceChannels : ExperimentStage
+  replicateDiscriminator : ExperimentStage
+  estimateConstitutiveResidual : ExperimentStage
 
 nextAfter : ExperimentStage → JointObservation → ExperimentStage
 nextAfter characteriseSource sourceExplainsSignal = crossPhaseBoundary
@@ -247,6 +243,8 @@ record ExperimentDesignProofSearchBoundary : Set where
     consumerClosureMayOccurBeforeFullWorldIdentity : Bool
     consumerClosureMayOccurBeforeFullWorldIdentityIsTrue :
       consumerClosureMayOccurBeforeFullWorldIdentity ≡ true
+
+open ExperimentDesignProofSearchBoundary public
 
 canonicalExperimentDesignProofSearchBoundary : ExperimentDesignProofSearchBoundary
 canonicalExperimentDesignProofSearchBoundary =

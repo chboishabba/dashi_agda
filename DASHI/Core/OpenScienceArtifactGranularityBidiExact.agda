@@ -14,14 +14,14 @@ import DASHI.Core.OpenScienceKnowledgeReleaseBidiExact as O
 ------------------------------------------------------------------------
 
 data ArtifactExposureClass : Set where
-  publicConceptDescription
-  publicMethodDescription
-  publicBenchmarkDisclosure
-  publicDataRelease
-  publicSourceCodeRelease
-  publicBuildOrReproductionInstructions
-  unresolvedArtifactExposure
-  : ArtifactExposureClass
+  publicConceptDescription : ArtifactExposureClass
+  publicMethodDescription : ArtifactExposureClass
+  publicBenchmarkDisclosure : ArtifactExposureClass
+  publicDataRelease : ArtifactExposureClass
+  publicSourceCodeRelease : ArtifactExposureClass
+  publicBuildOrReproductionInstructions : ArtifactExposureClass
+  unresolvedArtifactExposure : ArtifactExposureClass
+
 
 record ArtifactExposureReceipt : Set where
   constructor artifact-exposure-receipt

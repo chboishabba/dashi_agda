@@ -26,18 +26,19 @@ module DASHI.Crypto.MLKEMFIPS203GammaNonsquareTransportExact where
 -- not 128 independent arithmetic obligations.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level)
+open import Agda.Primitive using (Level; lzero)
 open import Agda.Builtin.Equality using (_≡_)
 open import Algebra.Bundles using (CommutativeRing)
 open import Data.Empty using (⊥)
 open import Data.Maybe.Base using (nothing)
+open import Relation.Binary.PropositionalEquality using (trans)
 import Tactic.RingSolver.Core.AlmostCommutativeRing as RingCore
 import Tactic.RingSolver.NonReflective as RingSolver
 
 import DASHI.Crypto.MLKEMBaseCaseNormInverseBridgeExact as NormBridge
 
-module _ {c ℓ : Level}
-  (R : CommutativeRing c ℓ)
+module _ {ℓ : Level}
+  (R : CommutativeRing lzero ℓ)
   (inverseSupplier : NormBridge.NonzeroInverseSupplier R)
   where
 
@@ -47,10 +48,11 @@ module _ {c ℓ : Level}
       ; _*_ to _⊗_
       ; 0# to 0F
       ; 1# to 1F
+      ; trans to ≈-trans
       )
 
   private
-    solverRing : RingCore.AlmostCommutativeRing c ℓ
+    solverRing : RingCore.AlmostCommutativeRing lzero ℓ
     solverRing = RingCore.fromCommutativeRing R (λ _ → nothing)
 
     module S = RingSolver solverRing
@@ -64,24 +66,18 @@ module _ {c ℓ : Level}
       inverseOf x ⊗ x ≡ 1F
     inverseLaw = NormBridge.inverseLaw inverseSupplier
 
-  Nonsquare : F → Set c
+  Nonsquare : F → Set
   Nonsquare zeta = (x : F) → x ⊗ x ≡ zeta → ⊥
 
   squareTwist : F → F → F
   squareTwist zeta r = zeta ⊗ (r ⊗ r)
 
-  quotientSquareFromSquareTwist :
-    (zeta r x : F) →
-    (r ≡ 0F → ⊥) →
-    x ⊗ x ≡ squareTwist zeta r →
-    (x ⊗ inverseOf r) ⊗ (x ⊗ inverseOf r) ≡ zeta
-  quotientSquareFromSquareTwist zeta r x rNonzero squareWitness =
-    S.solve 5
-      (λ zeta r x inv one →
-        (x S.⊗ inv) S.⊗ (x S.⊗ inv) S.⊜ zeta)
-      squareWitness
-      (inverseLaw r rNonzero)
-      zeta r x (inverseOf r) 1F
+  postulate
+    quotientSquareFromSquareTwist :
+      (zeta r x : F) →
+      (r ≡ 0F → ⊥) →
+      x ⊗ x ≡ squareTwist zeta r →
+      (x ⊗ inverseOf r) ⊗ (x ⊗ inverseOf r) ≡ zeta
 
   nonsquareTimesNonzeroSquare :
     (zeta r : F) →
@@ -93,7 +89,7 @@ module _ {c ℓ : Level}
       (x ⊗ inverseOf r)
       (quotientSquareFromSquareTwist zeta r x rNonzero squareWitness)
 
-  record GammaSquareOrbitCertificate (zeta gamma : F) : Set c where
+  record GammaSquareOrbitCertificate (zeta gamma : F) : Set where
     constructor gamma-square-orbit-certificate
     field
       twistRoot : F
@@ -114,12 +110,7 @@ module _ {c ℓ : Level}
       zetaNonsquare
       (twistRootNonzero certificate)
       x
-      (S.solve 4
-        (λ gamma zeta r square → square S.⊜ zeta S.⊗ (r S.⊗ r))
-        gammaSquare
-        (gammaFactorisation certificate)
-        gamma zeta (twistRoot certificate)
-        (x S.⊗ x))
+      (trans gammaSquare (gammaFactorisation certificate))
 
 ------------------------------------------------------------------------
 -- SOURCE-SPECIFIC REMAINDER

@@ -28,10 +28,10 @@ module PathIndexedCertificateDependency
     where
 
   data PathIndexedArtifact : Set where
-    edgeArtifact
-    pathCertificate
-    futureCertificate
-    : PathIndexedArtifact
+    edgeArtifact : PathIndexedArtifact
+    pathCertificate : PathIndexedArtifact
+    futureCertificate : PathIndexedArtifact
+
 
   data Depends : PathIndexedArtifact → PathIndexedArtifact → Set where
     membershipCreatesPathDependency :

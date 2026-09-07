@@ -23,10 +23,10 @@ import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact as Spect
 ------------------------------------------------------------------------
 
 data AuthorityStatus : Set where
-  authorityAbsent
-  authorityRequired
-  authoritySupplied
-  : AuthorityStatus
+  authorityAbsent : AuthorityStatus
+  authorityRequired : AuthorityStatus
+  authoritySupplied : AuthorityStatus
+
 
 responseTrit : Bridge.IncomparabilityResponse → SSP.SSPTrit
 responseTrit Bridge.preserveAlternatives = SSP.sspZero

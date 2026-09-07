@@ -21,15 +21,15 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data RelationKind : Set where
-  exactTheoremConsumerBridge
-  exactLemmaConsumerBridge
-  exactSameObjectRealisation
-  sharedAnalyticProblemDomain
-  exactCertificateSchemaReuse
-  provedSearchObstructionReuse
-  verificationProvenanceReuse
-  analogyOnlyRelation
-  : RelationKind
+  exactTheoremConsumerBridge : RelationKind
+  exactLemmaConsumerBridge : RelationKind
+  exactSameObjectRealisation : RelationKind
+  sharedAnalyticProblemDomain : RelationKind
+  exactCertificateSchemaReuse : RelationKind
+  provedSearchObstructionReuse : RelationKind
+  verificationProvenanceReuse : RelationKind
+  analogyOnlyRelation : RelationKind
+
 
 ------------------------------------------------------------------------
 -- Only relations carrying an exact theorem/lemma consumer bridge may directly
@@ -109,16 +109,16 @@ data ReuseCapability : RelationKind → Set where
 ------------------------------------------------------------------------
 
 data RelationState : Set where
-  exactConsumerRelated
-  sharedDomainRelated
-  : RelationState
+  exactConsumerRelated : RelationState
+  sharedDomainRelated : RelationState
+
 
 data CoarseRelatedSurface : Set where related : CoarseRelatedSurface
 
 data FineRelationSurface : Set where
-  theoremBearing
-  explorationOnly
-  : FineRelationSurface
+  theoremBearing : FineRelationSurface
+  explorationOnly : FineRelationSurface
+
 
 coarseRelated : RelationState → CoarseRelatedSurface
 coarseRelated _ = related

@@ -53,10 +53,9 @@ record EigenclassPromotion (operator : ContextIndexedOperator) : Set₁ where
 -- the finite physical DNA carrier merely because that carrier has four-way
 -- nesting.
 
-data TransformContext (A : Set) : Nat → Set where
-  atom : A → TransformContext A zero
-  nest : ∀ {n} → (TransformContext A n → TransformContext A n) →
-    TransformContext A (suc n)
+TransformContext : Set → Nat → Set
+TransformContext A zero = A
+TransformContext A (suc n) = TransformContext A n → TransformContext A n
 
 record TetrationalContextSemantics : Set₁ where
   field

@@ -20,23 +20,25 @@ import DASHI.Core.ObserverRefinementLatticeExact as Observer
 ------------------------------------------------------------------------
 
 data EskridgeClaim : Set where
-  repeatedResidentialIntrusions
-  preDeathThreatConcern
-  preDeathFutureSuicideDenial
-  publicSuicideClassification
-  homicideHypothesis
-  suicideHypothesis
-  accidentalHypothesis
+  repeatedResidentialIntrusions : EskridgeClaim
+  preDeathThreatConcern : EskridgeClaim
+  preDeathFutureSuicideDenial : EskridgeClaim
+  publicSuicideClassification : EskridgeClaim
+  homicideHypothesis : EskridgeClaim
+  suicideHypothesis : EskridgeClaim
+  accidentalHypothesis : EskridgeClaim
   undeterminedHypothesis : EskridgeClaim
 
 data EskridgeCaseState : Set where
-  publicSurfaceOnly enrichedEvidenceState : EskridgeCaseState
+  publicSurfaceOnly : EskridgeCaseState
+  enrichedEvidenceState : EskridgeCaseState
 
 data PublicLabel : Set where
   reportedSuicide : PublicLabel
 
 data ResidualCode : Set where
-  noResidualVisible primaryEvidencePresent : ResidualCode
+  noResidualVisible : ResidualCode
+  primaryEvidencePresent : ResidualCode
 
 publicLabel : Observer.Observer EskridgeCaseState PublicLabel
 publicLabel publicSurfaceOnly = reportedSuicide
@@ -131,10 +133,10 @@ autopsyNotLocated≠KnownAbsent = Evidence.notLocated≠knownAbsent
 ------------------------------------------------------------------------
 
 data IntrusionHypothesis : Set where
-  acquisitiveBurglary
-  intimidationOrSignalling
-  surveillanceOrSearch
-  interpersonalIntrusion
+  acquisitiveBurglary : IntrusionHypothesis
+  intimidationOrSignalling : IntrusionHypothesis
+  surveillanceOrSearch : IntrusionHypothesis
+  interpersonalIntrusion : IntrusionHypothesis
   nonIntrusionExplanation : IntrusionHypothesis
 
 record IntrusionPattern : Set where
@@ -169,7 +171,10 @@ intrusionHypothesesRemainOpen =
 ------------------------------------------------------------------------
 
 data DeathHypothesis : Set where
-  suicide homicide accident undetermined : DeathHypothesis
+  suicide : DeathHypothesis
+  homicide : DeathHypothesis
+  accident : DeathHypothesis
+  undetermined : DeathHypothesis
 
 record EskridgeDeathHypothesisSurface : Set where
   constructor eskridgeDeathHypothesisSurface

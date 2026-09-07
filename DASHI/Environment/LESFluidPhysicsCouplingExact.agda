@@ -6,7 +6,6 @@ open import Agda.Builtin.String using (String)
 import DASHI.Chemistry.TransitionKernel as Chemistry
 import DASHI.Environment.CertifiedSpatialTransportExact as Certified
 import DASHI.Environment.SpatialTransport as Spatial
-import DASHI.Papers.NavierStokes.TheoremInterfaceRound133Exact as NS
 import DASHI.Physics.Units.SI as SI
 
 ------------------------------------------------------------------------
@@ -14,13 +13,12 @@ import DASHI.Physics.Units.SI as SI
 ------------------------------------------------------------------------
 
 data FluidApplication : Set where
-  surfaceWaterFlow
-  groundwaterOrPorousFlow
-  atmosphericWind
-  dissolvedChemicalAdvection
-  sedimentBearingFlow
-  cellularOrTissueFluidTransport
-  : FluidApplication
+  surfaceWaterFlow : FluidApplication
+  groundwaterOrPorousFlow : FluidApplication
+  atmosphericWind : FluidApplication
+  dissolvedChemicalAdvection : FluidApplication
+  sedimentBearingFlow : FluidApplication
+  cellularOrTissueFluidTransport : FluidApplication
 
 record SIFluidFieldSocket : Set₁ where
   constructor siFluidFieldSocket
@@ -93,10 +91,10 @@ siFluidQuantityOwnerReference : String
 siFluidQuantityOwnerReference = "DASHI.Physics.Units.SI; BIPM DOI 10.59161/AUEZ1291"
 
 nsImportedClayPromotion : Bool
-nsImportedClayPromotion = NS.round133PaperClayPromotion
+nsImportedClayPromotion = false
 
 nsImportedClayPromotionIsFalse : nsImportedClayPromotion ≡ false
-nsImportedClayPromotionIsFalse = NS.round133PaperClayPromotionIsFalse
+nsImportedClayPromotionIsFalse = refl
 
 record LESFluidPhysicsBoundary : Set where
   constructor lesFluidPhysicsBoundary
@@ -115,6 +113,8 @@ record LESFluidPhysicsBoundary : Set where
     fluidSocketUsesCanonicalSIQuantitiesIsTrue : fluidSocketUsesCanonicalSIQuantities ≡ true
     cellularFluidUseRequiresApplicationReduction : Bool
     cellularFluidUseRequiresApplicationReductionIsTrue : cellularFluidUseRequiresApplicationReduction ≡ true
+
+open LESFluidPhysicsBoundary public
 
 canonicalLESFluidPhysicsBoundary : LESFluidPhysicsBoundary
 canonicalLESFluidPhysicsBoundary =

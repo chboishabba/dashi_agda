@@ -263,7 +263,7 @@ rowsAreCoupled : SharesSecretCoordinates row0 row1
 rowsAreCoupled = row0-row1
 
 record FiniteMLWELabSummary : Set where
-  constructor finiteMLWELabSummary
+  constructor mkFiniteMLWELabSummary
   field
     modulus : Nat
     secretCandidatesBefore : Nat
@@ -273,4 +273,4 @@ record FiniteMLWELabSummary : Set where
 open FiniteMLWELabSummary public
 
 finiteMLWELabSummary : FiniteMLWELabSummary
-finiteMLWELabSummary = finiteMLWELabSummary 5 4 2 1
+finiteMLWELabSummary = mkFiniteMLWELabSummary 5 4 2 1

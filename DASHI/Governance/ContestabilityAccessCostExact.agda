@@ -21,6 +21,7 @@ module DASHI.Governance.ContestabilityAccessCostExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Data.Nat using (_≤_; z≤n; s≤s)
 
 import DASHI.Governance.AsymmetricLegibilityContestabilityExact as Legibility
 import DASHI.Governance.DevelopmentalInfluenceSourceAtlas as Sources
@@ -89,7 +90,7 @@ finiteTotalCostIsFive : totalContestabilityCost finiteCost ≡ 5
 finiteTotalCostIsFive = refl
 
 fiveNotLeThree : 5 ≤ 3 → ⊥
-fiveNotLeThree ()
+fiveNotLeThree (s≤s (s≤s (s≤s ())))
 
 formalAvailabilityDoesNotEstablishAffordability :
   AffordableContestability finiteCost finiteBudget → ⊥
@@ -105,6 +106,8 @@ record ContestabilityAccessCostBoundary : Set where
     inaccessiblePathAutomaticallyIllegal : Bool
     subjectResourceConstraintsMayMatter : Bool
 
+open ContestabilityAccessCostBoundary public
+
 canonicalContestabilityAccessCostBoundary : ContestabilityAccessCostBoundary
 canonicalContestabilityAccessCostBoundary =
   contestabilityAccessCostBoundary false true false false true
@@ -114,6 +117,8 @@ record ContestabilityAccessCostReceipt : Set where
   field
     sources : List Sources.ScholarlySource
     boundary : ContestabilityAccessCostBoundary
+
+open ContestabilityAccessCostReceipt public
 
 canonicalContestabilityAccessCostReceipt : ContestabilityAccessCostReceipt
 canonicalContestabilityAccessCostReceipt =

@@ -34,9 +34,9 @@ open OperationalSystem public
 ------------------------------------------------------------------------
 
 data DemoState : Set where
-  declaredSameRealizedOpen
-  declaredSameRealizedClosed
-  : DemoState
+  declaredSameRealizedOpen : DemoState
+  declaredSameRealizedClosed : DemoState
+
 
 data DemoDeclared : Set where
   sameDeclaredPurpose : DemoDeclared

@@ -21,43 +21,43 @@ import DASHI.Crypto.TopTenCryptoBlueTeamProfilesExact as Profile
 ------------------------------------------------------------------------
 
 data Precondition : Set where
-  padUniformSecretAndOneUse
-  nonceUniqueForKey
-  keyGeneratedWithAdequateEntropy
-  rsaKeyWellFormed
-  oaepRandomnessFresh
-  groupParametersAccepted
-  peerElementAccepted
-  ephemeralExponentFresh
-  x25519InputHandledPerRFC7748
-  elGamalRandomnessFresh
-  hpkeSuiteAndModeBound
-  mlKemEncodedKeyAccepted
-  mlKemEncapsulationCoinsFresh
-  qkdClassicalChannelAuthenticated
+  padUniformSecretAndOneUse : Precondition
+  nonceUniqueForKey : Precondition
+  keyGeneratedWithAdequateEntropy : Precondition
+  rsaKeyWellFormed : Precondition
+  oaepRandomnessFresh : Precondition
+  groupParametersAccepted : Precondition
+  peerElementAccepted : Precondition
+  ephemeralExponentFresh : Precondition
+  x25519InputHandledPerRFC7748 : Precondition
+  elGamalRandomnessFresh : Precondition
+  hpkeSuiteAndModeBound : Precondition
+  mlKemEncodedKeyAccepted : Precondition
+  mlKemEncapsulationCoinsFresh : Precondition
+  qkdClassicalChannelAuthenticated : Precondition
   qkdDevicesAndParametersWithinModel : Precondition
 
 data Postcondition : Set where
-  plaintextRecovered
-  plaintextAuthenticatedOrRejected
-  sharedSecretAgrees
-  kemSharedSecretProduced
+  plaintextRecovered : Postcondition
+  plaintextAuthenticatedOrRejected : Postcondition
+  sharedSecretAgrees : Postcondition
+  kemSharedSecretProduced : Postcondition
   qkdKeyAcceptedOrProtocolAborts : Postcondition
 
 data Invariant : Set where
-  padNeverReused
-  nonceNeverRepeatedUnderSameKey
-  authenticationFailureNotPlaintext
-  publicOperationDoesNotExposeProtectedInverse
-  secretAgreementNotPubliclyDerived
-  publicElementValidationPreserved
-  x25519AllZeroSharedSecretHandled
-  ephemeralStateNotReused
-  hpkeComponentBoundariesPreserved
-  contextBindingPreserved
-  mlKemImplicitRejectionNotSplitExternally
-  mlKemProtectedLabelNotPubliclyFactored
-  qkdAuthenticationBindingPreserved
+  padNeverReused : Invariant
+  nonceNeverRepeatedUnderSameKey : Invariant
+  authenticationFailureNotPlaintext : Invariant
+  publicOperationDoesNotExposeProtectedInverse : Invariant
+  secretAgreementNotPubliclyDerived : Invariant
+  publicElementValidationPreserved : Invariant
+  x25519AllZeroSharedSecretHandled : Invariant
+  ephemeralStateNotReused : Invariant
+  hpkeComponentBoundariesPreserved : Invariant
+  contextBindingPreserved : Invariant
+  mlKemImplicitRejectionNotSplitExternally : Invariant
+  mlKemProtectedLabelNotPubliclyFactored : Invariant
+  qkdAuthenticationBindingPreserved : Invariant
   qkdAcceptedKeyFeedsApprovedSymmetricProtection : Invariant
 
 record CandidateStateContract : Set where

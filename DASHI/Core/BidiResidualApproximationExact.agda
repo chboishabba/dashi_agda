@@ -20,10 +20,10 @@ private
     Evidence Hidden Prediction Measurement : Set
 
 data BidiInferenceGrade : Set where
-  unresolvedGrade
-  approximatelyConstrainedGrade
-  exactlyIdentifiedGrade
-  : BidiInferenceGrade
+  unresolvedGrade : BidiInferenceGrade
+  approximatelyConstrainedGrade : BidiInferenceGrade
+  exactlyIdentifiedGrade : BidiInferenceGrade
+
 
 approximateNotExact :
   approximatelyConstrainedGrade ≡ exactlyIdentifiedGrade → ⊥

@@ -72,19 +72,19 @@ stage11IndexIsEleven = refl
 ------------------------------------------------------------------------
 
 data HistoricalStageRole : Set where
-  presemanticVoid
-  primitivePosition
-  polarRelation
-  firstStructuredTriad
-  expandedRelation
-  hingeOrConjecture
-  explicitTension
-  firstEscapeBeyondStaticOpposition
-  unresolvedOrRecursiveRemainder
-  closureWithinCurrentFrame
-  newAxisLift
-  nestedPostLiftExtension
-  : HistoricalStageRole
+  presemanticVoid : HistoricalStageRole
+  primitivePosition : HistoricalStageRole
+  polarRelation : HistoricalStageRole
+  firstStructuredTriad : HistoricalStageRole
+  expandedRelation : HistoricalStageRole
+  hingeOrConjecture : HistoricalStageRole
+  explicitTension : HistoricalStageRole
+  firstEscapeBeyondStaticOpposition : HistoricalStageRole
+  unresolvedOrRecursiveRemainder : HistoricalStageRole
+  closureWithinCurrentFrame : HistoricalStageRole
+  newAxisLift : HistoricalStageRole
+  nestedPostLiftExtension : HistoricalStageRole
+
 
 StageRole : Set
 StageRole = HistoricalStageRole

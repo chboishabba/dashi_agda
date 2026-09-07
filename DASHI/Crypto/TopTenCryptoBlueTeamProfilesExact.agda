@@ -56,26 +56,26 @@ open import Data.List.Base using (length)
 ------------------------------------------------------------------------
 
 data PrimitiveKind : Set where
-  informationTheoreticEncryption
-  symmetricAEAD
-  trapdoorPublicKeyEncryption
-  finiteGroupKeyAgreement
-  ellipticCurveKeyAgreement
-  randomizedPublicKeyEncryption
-  hybridPublicKeyEncryption
-  postQuantumKEM
+  informationTheoreticEncryption : PrimitiveKind
+  symmetricAEAD : PrimitiveKind
+  trapdoorPublicKeyEncryption : PrimitiveKind
+  finiteGroupKeyAgreement : PrimitiveKind
+  ellipticCurveKeyAgreement : PrimitiveKind
+  randomizedPublicKeyEncryption : PrimitiveKind
+  hybridPublicKeyEncryption : PrimitiveKind
+  postQuantumKEM : PrimitiveKind
   quantumKeyDistribution : PrimitiveKind
 
 data CryptoCandidate : Set where
-  oneTimePad
-  aesGcm
-  chacha20Poly1305
-  rsaOaep
-  diffieHellman
-  x25519
-  elGamal
-  hpke
-  mlKem
+  oneTimePad : CryptoCandidate
+  aesGcm : CryptoCandidate
+  chacha20Poly1305 : CryptoCandidate
+  rsaOaep : CryptoCandidate
+  diffieHellman : CryptoCandidate
+  x25519 : CryptoCandidate
+  elGamal : CryptoCandidate
+  hpke : CryptoCandidate
+  mlKem : CryptoCandidate
   qkdWithSymmetric : CryptoCandidate
 
 allTen : List CryptoCandidate
@@ -105,25 +105,25 @@ kind qkdWithSymmetric = quantumKeyDistribution
 ------------------------------------------------------------------------
 
 data AttackSurface : Set where
-  padReuse
-  nonceReuseUnderKey
-  weakKeyEntropy
-  publicInverseShortcut
-  paddingOrValidityOracle
-  discreteLogShortcut
-  publicElementValidation
-  allZeroSharedSecretOutcome
-  ephemeralReuse
-  componentKEMFailure
-  componentKDFFailure
-  componentAEADFailure
-  contextBindingFailure
-  moduleLWEResidualSearch
-  publicSecretFactorisation
-  implicitRejectVisibility
-  unauthenticatedClassicalChannel
-  quantumParameterTestFailure
-  followOnSymmetricFailure
+  padReuse : AttackSurface
+  nonceReuseUnderKey : AttackSurface
+  weakKeyEntropy : AttackSurface
+  publicInverseShortcut : AttackSurface
+  paddingOrValidityOracle : AttackSurface
+  discreteLogShortcut : AttackSurface
+  publicElementValidation : AttackSurface
+  allZeroSharedSecretOutcome : AttackSurface
+  ephemeralReuse : AttackSurface
+  componentKEMFailure : AttackSurface
+  componentKDFFailure : AttackSurface
+  componentAEADFailure : AttackSurface
+  contextBindingFailure : AttackSurface
+  moduleLWEResidualSearch : AttackSurface
+  publicSecretFactorisation : AttackSurface
+  implicitRejectVisibility : AttackSurface
+  unauthenticatedClassicalChannel : AttackSurface
+  quantumParameterTestFailure : AttackSurface
+  followOnSymmetricFailure : AttackSurface
   computationalModelShift : AttackSurface
 
 record BlueTeamProfile : Set where

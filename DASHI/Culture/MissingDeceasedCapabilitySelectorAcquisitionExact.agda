@@ -12,21 +12,21 @@ import DASHI.Core.ReopenableHypothesisForestExact as Forest
 ------------------------------------------------------------------------
 
 data CapabilitySelectorTarget : Set where
-  technicalPortfolioReview
-  strategicTechnologyRoadmap
-  programmeDependencyReview
-  keyPersonRiskRegister
-  technicalIntelligenceAssessment
-  crossProgrammeAdvisoryPanel
-  technologyTransferOrLicensingReview
-  fusionEnergyCompetitiveThreatAssessment
-  : CapabilitySelectorTarget
+  technicalPortfolioReview : CapabilitySelectorTarget
+  strategicTechnologyRoadmap : CapabilitySelectorTarget
+  programmeDependencyReview : CapabilitySelectorTarget
+  keyPersonRiskRegister : CapabilitySelectorTarget
+  technicalIntelligenceAssessment : CapabilitySelectorTarget
+  crossProgrammeAdvisoryPanel : CapabilitySelectorTarget
+  technologyTransferOrLicensingReview : CapabilitySelectorTarget
+  fusionEnergyCompetitiveThreatAssessment : CapabilitySelectorTarget
+
 
 data TargetStatus : Set where
-  targetPresent
-  targetNotLocated
-  targetKnownAbsent
-  : TargetStatus
+  targetPresent : TargetStatus
+  targetNotLocated : TargetStatus
+  targetKnownAbsent : TargetStatus
+
 
 record CapabilitySelectorAcquisition : Set where
   constructor capability-selector-acquisition
@@ -90,12 +90,12 @@ crossProgrammePanelAcquisition = capability-selector-acquisition
 ------------------------------------------------------------------------
 
 data CapabilitySelectorHypothesis : Set where
-  portfolioCapabilitySelector
-  keyPersonSelector
-  technicalIntelligenceSelector
-  fusionThreatSelector
-  advisoryNetworkSelector
-  : CapabilitySelectorHypothesis
+  portfolioCapabilitySelector : CapabilitySelectorHypothesis
+  keyPersonSelector : CapabilitySelectorHypothesis
+  technicalIntelligenceSelector : CapabilitySelectorHypothesis
+  fusionThreatSelector : CapabilitySelectorHypothesis
+  advisoryNetworkSelector : CapabilitySelectorHypothesis
+
 
 selectorSemantics : Forest.HypothesisSemantics CapabilitySelectorHypothesis
 selectorSemantics = Forest.hypothesisSemantics

@@ -11,12 +11,12 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data KnowledgeObjectKind : Set where
-  experimentalStudy
-  technicalReport
-  derivedPrivateWork
-  releaseReviewObject
-  publicDerivative
-  : KnowledgeObjectKind
+  experimentalStudy : KnowledgeObjectKind
+  technicalReport : KnowledgeObjectKind
+  derivedPrivateWork : KnowledgeObjectKind
+  releaseReviewObject : KnowledgeObjectKind
+  publicDerivative : KnowledgeObjectKind
+
 
 record KnowledgeObject : Set where
   constructor knowledge-object
@@ -29,12 +29,12 @@ record KnowledgeObject : Set where
 open KnowledgeObject public
 
 data LineageRelation : Set where
-  reportsResultsOf
-  maturesFrom
-  dependsOnReleaseOf
-  candidateSameObject
-  exactSameObject
-  : LineageRelation
+  reportsResultsOf : LineageRelation
+  maturesFrom : LineageRelation
+  dependsOnReleaseOf : LineageRelation
+  candidateSameObject : LineageRelation
+  exactSameObject : LineageRelation
+
 
 record KnowledgeObjectLineage : Set where
   constructor knowledge-object-lineage

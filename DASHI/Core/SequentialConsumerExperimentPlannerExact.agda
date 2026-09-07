@@ -23,7 +23,7 @@ OutcomePossible :
   (compatible : World → Set) →
   (bundle : Synthesis.ExperimentBundle World) →
   Synthesis.Observation bundle → Set
-OutcomePossible compatible bundle outcome =
+OutcomePossible {World} compatible bundle outcome =
   Σ World λ world → RefineByBundle compatible bundle outcome world
 
 data SequentialConsumerPlan
@@ -126,21 +126,9 @@ oneShotContinuation compatible consumer evidence bundle closes outcome possible 
       (proj₁ rightCompatible ,
         trans (proj₂ rightCompatible) (sym realisedOutcome))
   where
-    witness : World
     witness = proj₁ possible
-
-    witnessCompatible : compatible evidence witness
     witnessCompatible = proj₁ (proj₂ possible)
-
-    realisedOutcome : Synthesis.observe bundle witness ≡ outcome
     realisedOutcome = proj₂ (proj₂ possible)
-
-    closure :
-      Envelope.MeasurementClosesEnvelope
-        compatible
-        (Synthesis.observe bundle)
-        consumer
-        (evidence , Synthesis.observe bundle witness)
     closure = closes evidence witness witnessCompatible
 
 oneShotConsumerClosingPlan :
@@ -176,6 +164,8 @@ record SequentialExperimentPlannerBoundary : Set where
     worstCaseCostIsProbabilityWeightedExpectedCost : Bool
     worstCaseCostIsProbabilityWeightedExpectedCostIsFalse :
       worstCaseCostIsProbabilityWeightedExpectedCost ≡ false
+
+open SequentialExperimentPlannerBoundary public
 
 canonicalSequentialExperimentPlannerBoundary : SequentialExperimentPlannerBoundary
 canonicalSequentialExperimentPlannerBoundary =

@@ -40,7 +40,7 @@ RelationalOutcomePossible :
   (system : RelationalExperimentSystem Hypothesis Experiment Observation) →
   (live : Hypothesis → Set) →
   Experiment → Observation → Set
-RelationalOutcomePossible system live experiment observed =
+RelationalOutcomePossible {Hypothesis = Hypothesis} system live experiment observed =
   Σ Hypothesis λ hypothesis →
     RefineByOutcome system live experiment observed hypothesis
 
@@ -149,6 +149,8 @@ record SequentialRelationalPlannerBoundary : Set where
     terminalConsumerNeedNotBeFullHypothesisIdentity : Bool
     terminalConsumerNeedNotBeFullHypothesisIdentityIsTrue :
       terminalConsumerNeedNotBeFullHypothesisIdentity ≡ true
+
+open SequentialRelationalPlannerBoundary public
 
 canonicalSequentialRelationalPlannerBoundary :
   SequentialRelationalPlannerBoundary

@@ -24,52 +24,48 @@ import DASHI.Core.TechnicalDependencyHypergraphExact as Hypergraph
 ------------------------------------------------------------------------
 
 data FSPSystemRegion : Set where
-  PMAD
-  coldSideHeatExchanger
-  radiator
-  turbineCompressor
-  hotSideHeatExchanger
-  controlDrums
-  inCore
-  : FSPSystemRegion
+  PMAD : FSPSystemRegion
+  coldSideHeatExchanger : FSPSystemRegion
+  radiator : FSPSystemRegion
+  turbineCompressor : FSPSystemRegion
+  hotSideHeatExchanger : FSPSystemRegion
+  controlDrums : FSPSystemRegion
+  inCore : FSPSystemRegion
 
 data ICSensorKind : Set where
-  radiationDetector
-  temperatureSensor
-  pressureSensor
-  flowSensor
-  strainSensor
-  speedSensor
-  positionSensor
-  vibrationSensor
-  tiltSensor
-  potentiometer
-  hydrogenSensor
-  electromagneticSensor
-  : ICSensorKind
+  radiationDetector : ICSensorKind
+  temperatureSensor : ICSensorKind
+  pressureSensor : ICSensorKind
+  flowSensor : ICSensorKind
+  strainSensor : ICSensorKind
+  speedSensor : ICSensorKind
+  positionSensor : ICSensorKind
+  vibrationSensor : ICSensorKind
+  tiltSensor : ICSensorKind
+  potentiometer : ICSensorKind
+  hydrogenSensor : ICSensorKind
+  electromagneticSensor : ICSensorKind
 
 data ICFunction : Set where
-  measureState
-  selfDiagnosis
-  faultDetection
-  communicateState
-  automatedFaultResponse
-  processControl
-  reliabilityValidation
-  gapAnalysis
-  technologyRoadmapping
-  : ICFunction
+  measureState : ICFunction
+  selfDiagnosis : ICFunction
+  faultDetection : ICFunction
+  communicateState : ICFunction
+  automatedFaultResponse : ICFunction
+  processControl : ICFunction
+  reliabilityValidation : ICFunction
+  gapAnalysis : ICFunction
+  technologyRoadmapping : ICFunction
 
 data EnvironmentalAxis : Set where
-  temperature
-  neutronFlux
-  neutronFluence
-  gammaDose
-  pressure
-  massFlow
-  vibration
-  vacuum
-  : EnvironmentalAxis
+  temperature : EnvironmentalAxis
+  neutronFlux : EnvironmentalAxis
+  neutronFluence : EnvironmentalAxis
+  gammaDose : EnvironmentalAxis
+  pressure : EnvironmentalAxis
+  massFlow : EnvironmentalAxis
+  vibration : EnvironmentalAxis
+  vacuum : EnvironmentalAxis
 
 record SourceRange : Set where
   constructor source-range
@@ -221,6 +217,8 @@ record FSPICBidiBoundary : Set where
     autonomousControlRequiresObservableDiagnosticStateIsTrue :
       autonomousControlRequiresObservableDiagnosticState ≡ true
 
+open FSPICBidiBoundary public
+
 canonicalFSPICBidiBoundary : FSPICBidiBoundary
 canonicalFSPICBidiBoundary =
   fsp-ic-bidi-boundary
@@ -237,17 +235,16 @@ canonicalFSPICBidiBoundary =
 ------------------------------------------------------------------------
 
 data FSPICReverseTarget : Set where
-  acquireReferenceSystem
-  acquireEnvironmentalEnvelope
-  acquireMeasurementRequirement
-  acquireCandidateSensor
-  acquireStateOfArt
-  acquireQualificationProtocol
-  acquireFailureProbabilityModel
-  acquireFaultDetectionSemantics
-  acquireCorrectiveActionPolicy
-  acquireSubsystemIntegrationReceipt
-  : FSPICReverseTarget
+  acquireReferenceSystem : FSPICReverseTarget
+  acquireEnvironmentalEnvelope : FSPICReverseTarget
+  acquireMeasurementRequirement : FSPICReverseTarget
+  acquireCandidateSensor : FSPICReverseTarget
+  acquireStateOfArt : FSPICReverseTarget
+  acquireQualificationProtocol : FSPICReverseTarget
+  acquireFailureProbabilityModel : FSPICReverseTarget
+  acquireFaultDetectionSemantics : FSPICReverseTarget
+  acquireCorrectiveActionPolicy : FSPICReverseTarget
+  acquireSubsystemIntegrationReceipt : FSPICReverseTarget
 
 record FSPICReverseObligation : Set where
   constructor fsp-ic-reverse-obligation

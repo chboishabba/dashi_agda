@@ -76,7 +76,7 @@ aggregateBudgetLooksSufficient :
 aggregateBudgetLooksSufficient = s≤s (s≤s (s≤s (s≤s (s≤s z≤n))))
 
 fiveNotLeThree : 5 ≤ 3 → ⊥
-fiveNotLeThree ()
+fiveNotLeThree (s≤s (s≤s (s≤s ())))
 
 aggregateSufficiencyDoesNotEstablishCoordinateAccess :
   ResourceAccessWithin bottleneckDemand spreadBudget → ⊥
@@ -98,6 +98,8 @@ record ContestabilityAccessGeometryBoundary : Set where
     natCoordinatesAreEmpiricalRealWorldMeasurements : Bool
     accessGeometryCreatesLegalDuty : Bool
 
+open ContestabilityAccessGeometryBoundary public
+
 canonicalContestabilityAccessGeometryBoundary :
   ContestabilityAccessGeometryBoundary
 canonicalContestabilityAccessGeometryBoundary =
@@ -108,6 +110,8 @@ record ContestabilityAccessGeometryReceipt : Set where
   field
     sources : List Sources.ScholarlySource
     boundary : ContestabilityAccessGeometryBoundary
+
+open ContestabilityAccessGeometryReceipt public
 
 canonicalContestabilityAccessGeometryReceipt :
   ContestabilityAccessGeometryReceipt

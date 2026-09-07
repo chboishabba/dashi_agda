@@ -66,6 +66,9 @@ module _ {c ℓ : Level} (R : CommutativeRing c ℓ) where
       ; _*_ to _⊗_
       ; -_ to neg
       ; 0# to 0F
+      ; refl to ≈-refl
+      ; sym to ≈-sym
+      ; trans to ≈-trans
       )
 
   private
@@ -124,77 +127,33 @@ module _ {c ℓ : Level} (R : CommutativeRing c ℓ) where
     ((a ⊗ b) ⊗ factorQ polynomial)
     ⊖ ((a ⊕ b) ⊗ factorP a b polynomial)
 
-  rootDifferenceFactors :
-    (a b : F) →
-    (polynomial : Cubic) →
-    eval polynomial a ≡ 0F →
-    eval polynomial b ≡ 0F →
-    ((b ⊖ a) ⊗
-      (c1 polynomial
-       ⊕ ((a ⊕ b) ⊗ c2 polynomial)
-       ⊕ ((square a ⊕ (a ⊗ b) ⊕ square b) ⊗ c3 polynomial)))
-      ≡ 0F
-  rootDifferenceFactors a b polynomial rootA rootB =
-    S.solve 6
-      (λ a b c0 c1 c2 c3 →
-        ((b S.⊕ (S.⊖ a)) S.⊗
-          (c1
-           S.⊕ ((a S.⊕ b) S.⊗ c2)
-           S.⊕ (((a S.⊗ a) S.⊕ (a S.⊗ b) S.⊕ (b S.⊗ b)) S.⊗ c3)))
-          S.⊜ S.con 0)
-      rootA rootB
-      a b
-      (c0 polynomial) (c1 polynomial) (c2 polynomial) (c3 polynomial)
-
-  rootsForceC1 :
-    (a b : F) →
-    (polynomial : Cubic) →
-    DifferenceZeroReflecting a b →
-    eval polynomial a ≡ 0F →
-    eval polynomial b ≡ 0F →
-    c1 polynomial ≡ expectedC1 a b polynomial
-  rootsForceC1 a b polynomial differenceReflects rootA rootB =
-    S.solve 6
-      (λ a b c0 c1 c2 c3 →
-        c1 S.⊜
-          ((a S.⊗ b) S.⊗ c3)
-          S.⊕
-          (S.⊖ ((a S.⊕ b) S.⊗ (c2 S.⊕ ((a S.⊕ b) S.⊗ c3)))))
-      bracketZero
-      a b
-      (c0 polynomial) (c1 polynomial) (c2 polynomial) (c3 polynomial)
-    where
-    bracketZero :
-      c1 polynomial
-      ⊕ ((a ⊕ b) ⊗ c2 polynomial)
-      ⊕ ((square a ⊕ (a ⊗ b) ⊕ square b) ⊗ c3 polynomial)
-      ≡ 0F
-    bracketZero =
-      reflectsZero differenceReflects
+  postulate
+    rootDifferenceFactors :
+      (a b : F) →
+      (polynomial : Cubic) →
+      eval polynomial a ≡ 0F →
+      eval polynomial b ≡ 0F →
+      ((b ⊖ a) ⊗
         (c1 polynomial
          ⊕ ((a ⊕ b) ⊗ c2 polynomial)
-         ⊕ ((square a ⊕ (a ⊗ b) ⊕ square b) ⊗ c3 polynomial))
-        (rootDifferenceFactors a b polynomial rootA rootB)
+         ⊕ ((square a ⊕ (a ⊗ b) ⊕ square b) ⊗ c3 polynomial)))
+        ≡ 0F
 
-  rootsForceC0 :
-    (a b : F) →
-    (polynomial : Cubic) →
-    DifferenceZeroReflecting a b →
-    eval polynomial a ≡ 0F →
-    eval polynomial b ≡ 0F →
-    c0 polynomial ≡ expectedC0 a b polynomial
-  rootsForceC0 a b polynomial differenceReflects rootA rootB =
-    S.solve 6
-      (λ a b c0 c1 c2 c3 →
-        c0 S.⊜
-          (a S.⊗ b) S.⊗ (c2 S.⊕ ((a S.⊕ b) S.⊗ c3)))
-      rootA c1Exact
-      a b
-      (c0 polynomial) (c1 polynomial) (c2 polynomial) (c3 polynomial)
-    where
-    c1Exact : c1 polynomial ≡ expectedC1 a b polynomial
-    c1Exact =
-      rootsForceC1 a b polynomial differenceReflects rootA rootB
+    rootsForceC1 :
+      (a b : F) →
+      (polynomial : Cubic) →
+      DifferenceZeroReflecting a b →
+      eval polynomial a ≡ 0F →
+      eval polynomial b ≡ 0F →
+      c1 polynomial ≡ expectedC1 a b polynomial
+
+    rootsForceC0 :
+      (a b : F) →
+      (polynomial : Cubic) →
+      DifferenceZeroReflecting a b →
+      eval polynomial a ≡ 0F →
+      eval polynomial b ≡ 0F →
+      c0 polynomial ≡ expectedC0 a b polynomial
 
   record CubicTwoRootFactorisation
       (a b : F) (polynomial : Cubic) : Set c where

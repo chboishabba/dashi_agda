@@ -39,10 +39,10 @@ import DASHI.Core.BinaryInteractionNonseparabilityExact as Interaction
 ------------------------------------------------------------------------
 
 data IrigarayLabialRole : Set where
-  neitherOneNorTwo
-  firstLocalLipAspect
-  secondLocalLipAspect
-  : IrigarayLabialRole
+  neitherOneNorTwo : IrigarayLabialRole
+  firstLocalLipAspect : IrigarayLabialRole
+  secondLocalLipAspect : IrigarayLabialRole
+
 
 irigarayLabialRole : Ternary.TernaryRoleCode → IrigarayLabialRole
 irigarayLabialRole Ternary.code0 = neitherOneNorTwo

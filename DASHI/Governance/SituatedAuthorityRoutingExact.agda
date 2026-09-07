@@ -277,7 +277,7 @@ revokedProtectiveAuthorityCannotSelfRestoreFromPastEvidence =
 ------------------------------------------------------------------------
 
 record CommunityAuthorityWitness
-    (episode : Shared.ConsultationEpisode) : Set where
+    (episode : Shared.ConsultationEpisode) : Set₁ where
   constructor communityAuthorityWitness
   field
     voiceHeard : Set
@@ -313,6 +313,8 @@ record SituatedAuthorityRoutingBoundary : Set where
     routeAdmissibilityRequiresCurrentAuthority : Bool
     routeAdmissibilityRequiresSafety : Bool
     routeAdmissibilityRequiresRepairCapacity : Bool
+
+open SituatedAuthorityRoutingBoundary public
 
 canonicalSituatedAuthorityRoutingBoundary : SituatedAuthorityRoutingBoundary
 canonicalSituatedAuthorityRoutingBoundary =

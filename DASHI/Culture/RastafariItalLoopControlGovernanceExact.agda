@@ -33,8 +33,8 @@ import DASHI.Planning.ParticipatoryPlanningGovernanceExact as Participation
 ------------------------------------------------------------------------
 
 data ContributionStatus : Set where
-  noContribution labourContribution materialContribution mixedContribution
-  : ContributionStatus
+  noContribution labourContribution materialContribution mixedContribution : ContributionStatus
+
 
 data TitleStatus : Set where
   noTitle individualTitle collectiveTitle institutionalTitle : TitleStatus
@@ -44,20 +44,20 @@ data DestinationControl : Set where
   unilateralDestinationControl : DestinationControl
 
 data DecisionRightStatus : Set where
-  noDecisionRight consultativeVoice coDecisionRight governingDecisionRight
-  : DecisionRightStatus
+  noDecisionRight consultativeVoice coDecisionRight governingDecisionRight : DecisionRightStatus
+
 
 data BenefitPosition : Set where
-  noBenefitPosition incidentalBenefit sharedBenefit controllingBenefit
-  : BenefitPosition
+  noBenefitPosition incidentalBenefit sharedBenefit controllingBenefit : BenefitPosition
+
 
 data ProvenanceCustody : Set where
-  noCustody recordedCustody communityCustody institutionalCustody
-  : ProvenanceCustody
+  noCustody recordedCustody communityCustody institutionalCustody : ProvenanceCustody
+
 
 data InstitutionalPower : Set where
-  lowInstitutionalPower sharedInstitutionalPower dominantInstitutionalPower
-  : InstitutionalPower
+  lowInstitutionalPower sharedInstitutionalPower dominantInstitutionalPower : InstitutionalPower
+
 
 record LoopControlState : Set where
   constructor loopControlState
@@ -311,3 +311,5 @@ canonicalItalLoopControlGovernanceBoundary =
     false refl
     false refl
     true refl
+
+open ItalLoopControlGovernanceBoundary public

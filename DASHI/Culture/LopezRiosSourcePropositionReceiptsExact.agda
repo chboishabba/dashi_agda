@@ -19,24 +19,24 @@ import DASHI.Culture.LopezRiosMarxistPsychologySourceAtlasExact as Atlas
 ------------------------------------------------------------------------
 
 data LopezRiosPropositionId : Set where
-  LR22AntiDialecticalIdealist
-  LR22ApoliticalCharacter
-  LR22Servility
-  LR22PsychologisingMystification
-  LR22CapitalistOverdetermination
-  LR22LacanianPsychoanalysisRole
-  LR25StructuralCausality
-  LR25NeoliberalisationOfPsychology
-  LR25Psychologisation
-  LR25DepoliticisationPrivatisationOfDistress
-  : LopezRiosPropositionId
+  LR22AntiDialecticalIdealist : LopezRiosPropositionId
+  LR22ApoliticalCharacter : LopezRiosPropositionId
+  LR22Servility : LopezRiosPropositionId
+  LR22PsychologisingMystification : LopezRiosPropositionId
+  LR22CapitalistOverdetermination : LopezRiosPropositionId
+  LR22LacanianPsychoanalysisRole : LopezRiosPropositionId
+  LR25StructuralCausality : LopezRiosPropositionId
+  LR25NeoliberalisationOfPsychology : LopezRiosPropositionId
+  LR25Psychologisation : LopezRiosPropositionId
+  LR25DepoliticisationPrivatisationOfDistress : LopezRiosPropositionId
+
 
 data ReceiptKind : Set where
-  boundedSourceProposition
-  dashiInterpretiveBridge
-  dashiFiniteTheorem
-  empiricalPopulationClaim
-  : ReceiptKind
+  boundedSourceProposition : ReceiptKind
+  dashiInterpretiveBridge : ReceiptKind
+  dashiFiniteTheorem : ReceiptKind
+  empiricalPopulationClaim : ReceiptKind
+
 
 record SourcePropositionReceipt : Set where
   constructor source-proposition-receipt

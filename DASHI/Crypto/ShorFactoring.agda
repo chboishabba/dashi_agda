@@ -3,6 +3,7 @@ module DASHI.Crypto.ShorFactoring where
 open import DASHI.Core.Prelude
 open import DASHI.Crypto.FiniteFactorArithmetic
 open import DASHI.Crypto.ShorOrderFinding
+open import DASHI.Algebra.Quantum.GeneralShor
 
 ------------------------------------------------------------------------
 -- General Shor factoring programme.

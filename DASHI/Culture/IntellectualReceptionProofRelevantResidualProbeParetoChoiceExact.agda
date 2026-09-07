@@ -29,11 +29,11 @@ import DASHI.Culture.IntellectualReceptionStructuredAuthorityResidualSelectiveRe
 ------------------------------------------------------------------------
 
 data ResidualCoordinate : Set where
-  sourceCoordinate
-  scopeCoordinate
-  admissibilityCoordinate
-  provenanceCoordinate
-  : ResidualCoordinate
+  sourceCoordinate : ResidualCoordinate
+  scopeCoordinate : ResidualCoordinate
+  admissibilityCoordinate : ResidualCoordinate
+  provenanceCoordinate : ResidualCoordinate
+
 
 data UnresolvedAt : Residual.AuthorityResidual → ResidualCoordinate → Set where
   sourceStillUnresolved :
@@ -80,10 +80,10 @@ coordinateArtifact provenanceCoordinate = Residual.provenanceResidualArtifact
 ------------------------------------------------------------------------
 
 data AuthorityProbeExperiment : Set where
-  cheapSourceLookup
-  provenanceAudit
-  authorityCoreReview
-  : AuthorityProbeExperiment
+  cheapSourceLookup : AuthorityProbeExperiment
+  provenanceAudit : AuthorityProbeExperiment
+  authorityCoreReview : AuthorityProbeExperiment
+
 
 probeMove : AuthorityProbeExperiment → Choice.InformationMove
 probeMove cheapSourceLookup =
@@ -397,9 +397,9 @@ canonicalCheapestEligibleProbe =
 ------------------------------------------------------------------------
 
 data ProbeCostAxis : Set where
-  resourceCostAxis
-  remainingResidualBurdenAxis
-  : ProbeCostAxis
+  resourceCostAxis : ProbeCostAxis
+  remainingResidualBurdenAxis : ProbeCostAxis
+
 
 remainingResidualBurden : AuthorityProbeExperiment → Nat
 remainingResidualBurden cheapSourceLookup = 3

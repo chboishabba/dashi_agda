@@ -169,3 +169,5 @@ canonicalSPACBoundary =
     false refl
     true refl
     true refl
+
+open SPACBoundary public

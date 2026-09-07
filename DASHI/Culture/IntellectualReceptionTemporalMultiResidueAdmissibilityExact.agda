@@ -26,11 +26,11 @@ data ReceptionTime : Set where
   t0 t1 t2 t3 : ReceptionTime
 
 data TemporalReceptionHistory : Set where
-  closureTemporalHistory
-  archiveTemporalHistory
-  movementEarlyAuthorityHistory
-  movementLateAuthorityHistory
-  : TemporalReceptionHistory
+  closureTemporalHistory : TemporalReceptionHistory
+  archiveTemporalHistory : TemporalReceptionHistory
+  movementEarlyAuthorityHistory : TemporalReceptionHistory
+  movementLateAuthorityHistory : TemporalReceptionHistory
+
 
 archiveOnlyLedger : Ledger.ReceptionResidueLedger
 archiveOnlyLedger =
@@ -97,8 +97,8 @@ intermediateAuthorityDiffers ()
 ------------------------------------------------------------------------
 
 data TemporalContinuationMove : Set where
-  pluralContinuation movementContinuation authorityContinuation
-  : TemporalContinuationMove
+  pluralContinuation movementContinuation authorityContinuation : TemporalContinuationMove
+
 
 enabledByLedger :
   TemporalContinuationMove →
@@ -205,9 +205,9 @@ sameFinalLedgerCannotRecoverIntermediateAdmissibility =
 ------------------------------------------------------------------------
 
 data TemporalPoint : Set where
-  earlyT0 earlyT1 earlyT2 earlyT3
-  lateT0 lateT1 lateT2 lateT3
-  : TemporalPoint
+  earlyT0 earlyT1 earlyT2 earlyT3 : TemporalPoint
+  lateT0 lateT1 lateT2 lateT3 : TemporalPoint
+
 
 pointLedger : TemporalPoint → Ledger.ReceptionResidueLedger
 pointLedger earlyT0 = ledgerAt movementEarlyAuthorityHistory t0

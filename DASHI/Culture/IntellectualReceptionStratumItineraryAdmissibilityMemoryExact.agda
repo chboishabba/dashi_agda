@@ -23,13 +23,13 @@ import DASHI.Culture.IntellectualReceptionAdmissibilityStratumWhatIfExact as Str
 ------------------------------------------------------------------------
 
 data ItineraryState : Set where
-  sourceOpen
-  canonClosureVisited
-  archiveRecoveryVisited
-  reconvergedAfterClosure
-  reconvergedAfterArchive
-  pluralContinuationAfterArchive
-  : ItineraryState
+  sourceOpen : ItineraryState
+  canonClosureVisited : ItineraryState
+  archiveRecoveryVisited : ItineraryState
+  reconvergedAfterClosure : ItineraryState
+  reconvergedAfterArchive : ItineraryState
+  pluralContinuationAfterArchive : ItineraryState
+
 
 -- The two reconverged states intentionally expose the same present/future
 -- observer despite having traversed different intermediate strata.
@@ -79,9 +79,9 @@ data ReconvergedCase : Set where
   viaClosure viaArchive : ReconvergedCase
 
 data ItineraryCode : Set where
-  sourceCanonClosureReconverge
-  sourceArchiveRecoveryReconverge
-  : ItineraryCode
+  sourceCanonClosureReconverge : ItineraryCode
+  sourceArchiveRecoveryReconverge : ItineraryCode
+
 
 data ReconvergedSurface : Set where
   sameReconvergedSurface : ReconvergedSurface

@@ -29,12 +29,12 @@ import DASHI.Reasoning.DialecticMotifKernel as Motif
 ------------------------------------------------------------------------
 
 data ReasoningPhase : Set where
-  observationPhase
-  tensionPhase
-  classificationPhase
-  authorizationPhase
-  actionPhase
-  : ReasoningPhase
+  observationPhase : ReasoningPhase
+  tensionPhase : ReasoningPhase
+  classificationPhase : ReasoningPhase
+  authorizationPhase : ReasoningPhase
+  actionPhase : ReasoningPhase
+
 
 observation≠action : observationPhase ≡ actionPhase → ⊥
 observation≠action ()
@@ -66,14 +66,14 @@ open ReasoningPipeline public
 ------------------------------------------------------------------------
 
 data Authorization : Set where
-  continueAuthorized
-  bufferAuthorized
-  redesignAuthorized
-  timeControlAuthorized
-  restrictedAuthorized
-  prohibitAuthorized
-  liftAuthorized
-  : Authorization
+  continueAuthorized : Authorization
+  bufferAuthorized : Authorization
+  redesignAuthorized : Authorization
+  timeControlAuthorized : Authorization
+  restrictedAuthorized : Authorization
+  prohibitAuthorized : Authorization
+  liftAuthorized : Authorization
+
 
 authorizationFromPolicy : Motif.Policy → Authorization
 authorizationFromPolicy Motif.allow = continueAuthorized

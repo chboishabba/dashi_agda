@@ -79,7 +79,7 @@ samePublicFibreSamePublicFactoredObservation {system} factored samePublic q =
   let
     leftFactor = factorLaw factored _ q
     rightFactor = factorLaw factored _ q
-    middle = cong (λ public → answer factored public q) samePublic
+    middle = cong (λ pub → answer factored pub q) samePublic
   in
   trans leftFactor (trans middle (sym rightFactor))
   where
@@ -115,10 +115,7 @@ publicFactoredCannotSplitSamePublicFibre factored split =
 ------------------------------------------------------------------------
 
 data ObservationOrigin : Set where
-  alreadyPublic
-  protocolOutcome
-  implementationChannel
-  physicalChannel : ObservationOrigin
+  alreadyPublic protocolOutcome implementationChannel physicalChannel : ObservationOrigin
 
 record ObservationCoordinate : Set₁ where
   constructor observationCoordinate

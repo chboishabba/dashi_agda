@@ -15,15 +15,15 @@ import DASHI.Core.KnowledgeBoundaryTransitionBidiExact as T
 ------------------------------------------------------------------------
 
 data BoundaryKind : Set where
-  ordinaryPatentConfidentiality
-  contractualProprietaryBoundary
-  controlledGovernmentData
-  exportControlledBoundary
-  classifiedNationalSecurityBoundary
-  internalInstitutionalBoundary
-  discretionaryDisclosureBoundary
-  unresolvedBoundaryKind
-  : BoundaryKind
+  ordinaryPatentConfidentiality : BoundaryKind
+  contractualProprietaryBoundary : BoundaryKind
+  controlledGovernmentData : BoundaryKind
+  exportControlledBoundary : BoundaryKind
+  classifiedNationalSecurityBoundary : BoundaryKind
+  internalInstitutionalBoundary : BoundaryKind
+  discretionaryDisclosureBoundary : BoundaryKind
+  unresolvedBoundaryKind : BoundaryKind
+
 
 record TypedBoundaryTransition : Set where
   constructor typed-boundary-transition
@@ -74,12 +74,12 @@ canonicalBoundaryKindBoundary = boundary-kind-boundary
 ------------------------------------------------------------------------
 
 data BoundaryKindAcquisitionTarget : Set where
-  exactPriorPrivateState
-  exactPublicReleaseState
-  exactSameObjectWeld
-  exactBoundaryKindReceipt
-  matchedBoundaryKindControls
-  : BoundaryKindAcquisitionTarget
+  exactPriorPrivateState : BoundaryKindAcquisitionTarget
+  exactPublicReleaseState : BoundaryKindAcquisitionTarget
+  exactSameObjectWeld : BoundaryKindAcquisitionTarget
+  exactBoundaryKindReceipt : BoundaryKindAcquisitionTarget
+  matchedBoundaryKindControls : BoundaryKindAcquisitionTarget
+
 
 record BoundaryKindReverseObligation : Set where
   constructor boundary-kind-reverse-obligation

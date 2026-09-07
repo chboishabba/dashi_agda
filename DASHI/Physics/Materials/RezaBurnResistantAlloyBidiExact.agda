@@ -13,7 +13,7 @@ record WeightPercentRange : Set where
   constructor wt-range
   field
     element : AlloyElement
-    minimum maximum : ℕ
+    minimum maximum : Nat
     sourceReference : String
 
 open WeightPercentRange public
@@ -148,6 +148,8 @@ record RezaAlloyBoundary : Set where
     testedExampleAutomaticallyGeneralisesToWholeCompositionBoxIsFalse : testedExampleAutomaticallyGeneralisesToWholeCompositionBox ≡ false
     extinguishingThresholdAndTensileStrengthAreDistinctObjectives : Bool
     extinguishingThresholdAndTensileStrengthAreDistinctObjectivesIsTrue : extinguishingThresholdAndTensileStrengthAreDistinctObjectives ≡ true
+
+open RezaAlloyBoundary public
 
 canonicalRezaAlloyBoundary : RezaAlloyBoundary
 canonicalRezaAlloyBoundary = reza-alloy-boundary

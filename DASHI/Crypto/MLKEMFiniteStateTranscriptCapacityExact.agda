@@ -16,7 +16,7 @@ module DASHI.Crypto.MLKEMFiniteStateTranscriptCapacityExact where
 -- entropy, runtime, or any ML-KEM-specific hardness assumption.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; _⊔_)
+open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
@@ -69,8 +69,8 @@ sameJointCodeForcesSameProtected {recovery = recovery} {left} {right} jointSame 
     protected recovery right
   ∎
   where
-  open import Relation.Binary.PropositionalEquality using (cong; sym)
-  open import Relation.Binary.PropositionalEquality.≡-Reasoning
+  open import Relation.Binary.PropositionalEquality using (cong; sym; module ≡-Reasoning)
+  open ≡-Reasoning
 
 record ProtectedRepresentatives
     {h s t p : Level}
@@ -105,14 +105,14 @@ codeOfProtectedInjective {recovery = recovery} reps {left} {right} codeSame =
     left
       ≡⟨ sym (representativeCorrect reps left) ⟩
     protected recovery (representative reps left)
-      ≡⟨ sameJointCodeForcesSameProtected codeSame ⟩
+      ≡⟨ sameJointCodeForcesSameProtected {recovery = recovery} codeSame ⟩
     protected recovery (representative reps right)
       ≡⟨ representativeCorrect reps right ⟩
     right
   ∎
   where
-  open import Relation.Binary.PropositionalEquality using (sym)
-  open import Relation.Binary.PropositionalEquality.≡-Reasoning
+  open import Relation.Binary.PropositionalEquality using (sym; module ≡-Reasoning)
+  open ≡-Reasoning
 
 ------------------------------------------------------------------------
 -- Explicit finite-capacity interface.
@@ -128,7 +128,8 @@ codeOfProtectedInjective {recovery = recovery} reps {left} {right} codeSame =
 --   protectedCount <= stateCount * transcriptCount.
 ------------------------------------------------------------------------
 
-open import Data.Nat using (Nat; _≤_; _*_)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat using (_≤_; _*_)
 import Data.Nat.Properties as NatP
 
 stateTranscriptCapacityBound :

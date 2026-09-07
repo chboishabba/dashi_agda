@@ -122,7 +122,7 @@ capacityDeficitRefutesFIPSResource resource deficit =
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; cong; trans)
 
 fullRankFIPSUpdateConstraint :
   ∀ {parameters} →
@@ -131,9 +131,10 @@ fullRankFIPSUpdateConstraint :
   128 ≤ sourceSupport resource * touches resource
 fullRankFIPSUpdateConstraint resource fullRank =
   subst
-    (λ sigma →
-      128 ≤ sourceSupport resource * (touches resource + sigma))
-    fullRank
+    (128 ≤_)
+    (cong (sourceSupport resource *_)
+      (trans (cong (touches resource +_) fullRank)
+             (NatP.+-identityʳ (touches resource))))
     (uncertaintyUpdateBound resource)
 
 ------------------------------------------------------------------------

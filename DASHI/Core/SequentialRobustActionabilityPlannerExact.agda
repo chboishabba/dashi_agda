@@ -35,7 +35,7 @@ HypothesisOutcomePossible :
   (live : Hypothesis → Set) →
   (bundle : Synthesis.ExperimentBundle Hypothesis) →
   Synthesis.Observation bundle → Set
-HypothesisOutcomePossible live bundle observed =
+HypothesisOutcomePossible {Hypothesis = Hypothesis} live bundle observed =
   Σ Hypothesis λ hypothesis → RefineHypotheses live bundle observed hypothesis
 
 ------------------------------------------------------------------------
@@ -178,6 +178,8 @@ record SequentialActionabilityPlannerBoundary : Set where
     informationCanBeSkippedWhenRobustAuthorisedActionAlreadyExists : Bool
     informationCanBeSkippedWhenRobustAuthorisedActionAlreadyExistsIsTrue :
       informationCanBeSkippedWhenRobustAuthorisedActionAlreadyExists ≡ true
+
+open SequentialActionabilityPlannerBoundary public
 
 canonicalSequentialActionabilityPlannerBoundary :
   SequentialActionabilityPlannerBoundary

@@ -13,11 +13,10 @@ import DASHI.Physics.Plasma.HelicityElsasserBinaryAxesExact as Axes
 ------------------------------------------------------------------------
 
 data OrderedElsasserPair : Set where
-  plusPlus
-  plusMinus
-  minusPlus
-  minusMinus
-  : OrderedElsasserPair
+  plusPlus : OrderedElsasserPair
+  plusMinus : OrderedElsasserPair
+  minusPlus : OrderedElsasserPair
+  minusMinus : OrderedElsasserPair
 
 pairOf : Axes.ElsasserOrientation → Axes.ElsasserOrientation → OrderedElsasserPair
 pairOf Axes.elsasserPlus Axes.elsasserPlus = plusPlus
@@ -65,6 +64,8 @@ record SectorSelectionBoundary : Set where
     helicitySignDeterminesElsasserSelection : Bool
     helicitySignDeterminesElsasserSelectionIsFalse :
       helicitySignDeterminesElsasserSelection ≡ false
+
+open SectorSelectionBoundary public
 
 canonicalSectorSelectionBoundary : SectorSelectionBoundary
 canonicalSectorSelectionBoundary =

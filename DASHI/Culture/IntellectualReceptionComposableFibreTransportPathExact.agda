@@ -190,9 +190,9 @@ data SameCoarseT0T2EndpointCode : Set where
 data TwoStepTransportLengthCode : Set where twoTransportSteps : TwoStepTransportLengthCode
 
 data AuthorityTransportSignature : Set where
-  acquiredThenCarried
-  absentThenAcquired
-  : AuthorityTransportSignature
+  acquiredThenCarried : AuthorityTransportSignature
+  absentThenAcquired : AuthorityTransportSignature
+
 
 coarseT0T2Endpoints : MovementTransportRouteCase → SameCoarseT0T2EndpointCode
 coarseT0T2Endpoints _ = sameMovementT0T2Endpoints

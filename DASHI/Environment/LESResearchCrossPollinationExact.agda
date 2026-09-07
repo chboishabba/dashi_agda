@@ -137,7 +137,7 @@ sameRepresentationSameTaskOutput :
     {left right : State} →
   project left ≡ project right →
   evaluate task left ≡ evaluate task right
-sameRepresentationSameTaskOutput factor task same
+sameRepresentationSameTaskOutput factor task {left} {right} same
   rewrite factorises factor task left
         | factorises factor task right =
   cong (evaluateReduced factor task) same

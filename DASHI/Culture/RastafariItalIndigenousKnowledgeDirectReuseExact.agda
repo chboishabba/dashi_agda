@@ -91,3 +91,5 @@ canonicalItalIndigenousDirectReuseBoundary :
   ItalIndigenousDirectReuseBoundary
 canonicalItalIndigenousDirectReuseBoundary =
   italIndigenousDirectReuseBoundary true refl false refl false refl
+
+open ItalIndigenousDirectReuseBoundary public

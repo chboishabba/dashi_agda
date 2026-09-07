@@ -16,7 +16,7 @@ open import Verification.JacobianCounterexampleKernel as Kernel
     ; JacobianConjectureDimensionThreePlus
     ; jacobianConjectureDimensionThreePlusFalse
     )
-open import DASHI.Provenance.AIAssistedMathematicsProvenance as Provenance
+import DASHI.Provenance.AIAssistedMathematicsProvenance as Provenance
 
 -- Public attribution
 -- ------------------

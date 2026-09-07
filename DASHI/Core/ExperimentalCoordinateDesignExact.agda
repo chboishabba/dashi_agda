@@ -17,12 +17,12 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data CoordinateRole : Set where
-  referenceInvariant
-  controlledInput
-  measuredObservable
-  nuisanceCoordinate
-  derivedDiscriminator
-  : CoordinateRole
+  referenceInvariant : CoordinateRole
+  controlledInput : CoordinateRole
+  measuredObservable : CoordinateRole
+  nuisanceCoordinate : CoordinateRole
+  derivedDiscriminator : CoordinateRole
+
 
 record ExperimentalCoordinateDesign
     (World Control Value Dimension : Set) : Set₁ where

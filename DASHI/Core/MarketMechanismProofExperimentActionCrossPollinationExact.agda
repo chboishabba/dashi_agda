@@ -21,11 +21,11 @@ import DASHI.Economics.HistoryIndexedMarketMechanismOODALoopExact as MarketLoop
 ------------------------------------------------------------------------
 
 data MarketControlIntent : Set where
-  analyseRule
-  observeMarket
-  experimentWithMechanism
-  reviseRule
-  : MarketControlIntent
+  analyseRule : MarketControlIntent
+  observeMarket : MarketControlIntent
+  experimentWithMechanism : MarketControlIntent
+  reviseRule : MarketControlIntent
+
 
 intentMoveKind : MarketControlIntent → Loop.EpistemicMoveKind
 intentMoveKind analyseRule = Loop.thinkMove

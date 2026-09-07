@@ -15,11 +15,11 @@ import DASHI.Core.KnowledgeBoundaryKindBidiExact as K
 ------------------------------------------------------------------------
 
 data BoundaryClosureStatus : Set where
-  closedSameObject
-  documentedBoundaryNoCompletedSameObjectTransfer
-  contextualBoundaryAdjacency
-  unresolvedBoundary
-  : BoundaryClosureStatus
+  closedSameObject : BoundaryClosureStatus
+  documentedBoundaryNoCompletedSameObjectTransfer : BoundaryClosureStatus
+  contextualBoundaryAdjacency : BoundaryClosureStatus
+  unresolvedBoundary : BoundaryClosureStatus
+
 
 record BoundaryKindCase : Set where
   constructor boundary-kind-case

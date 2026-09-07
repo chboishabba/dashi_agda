@@ -28,21 +28,21 @@ paperAuthor = "John Anthony Brown"
 ------------------------------------------------------------------------
 
 data BrownAuditArtifact : Set where
-  conceptualReceptionEdge
-  autonomyConceptDefinition
-  exposureMeasurementEvidence
-  outcomeMeasurementEvidence
-  institutionalBetrayalMeasurementEvidence
-  moderationMeasurementEvidence
-  confoundingModelEvidence
-  h1AssociationClaim
-  h2OutcomeVectorClaim
-  h3IncrementalBetrayalClaim
-  h4ModerationClaim
-  h5AdjustedAssociationClaim
-  rightsPolicyInterpretation
-  manuscriptRevisionSurface
-  : BrownAuditArtifact
+  conceptualReceptionEdge : BrownAuditArtifact
+  autonomyConceptDefinition : BrownAuditArtifact
+  exposureMeasurementEvidence : BrownAuditArtifact
+  outcomeMeasurementEvidence : BrownAuditArtifact
+  institutionalBetrayalMeasurementEvidence : BrownAuditArtifact
+  moderationMeasurementEvidence : BrownAuditArtifact
+  confoundingModelEvidence : BrownAuditArtifact
+  h1AssociationClaim : BrownAuditArtifact
+  h2OutcomeVectorClaim : BrownAuditArtifact
+  h3IncrementalBetrayalClaim : BrownAuditArtifact
+  h4ModerationClaim : BrownAuditArtifact
+  h5AdjustedAssociationClaim : BrownAuditArtifact
+  rightsPolicyInterpretation : BrownAuditArtifact
+  manuscriptRevisionSurface : BrownAuditArtifact
+
 
 ------------------------------------------------------------------------
 -- 2. Declared dependency graph.
