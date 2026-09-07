@@ -11,6 +11,7 @@ import DASHI.Analysis.RiemannZetaProgramBoundary as RH
 import DASHI.Physics.GR.StressEnergyCompatibility as GR
 import DASHI.Physics.GR.GravitationalObservationBidiExact as Obs
 import DASHI.Physics.GR.GravitationalPredictionObservationBidiExact as Pred
+import DASHI.Physics.GR.GravitationalPredictionAttributionBidiExact as Attr
 import DASHI.Physics.Laws.PhysicalLawRecoveryBoundary as Laws
 
 ------------------------------------------------------------------------
@@ -91,9 +92,8 @@ observationChannelForClaim Anti.engineeredMetricResponse = Obs.clockOrRedshift
 ------------------------------------------------------------------------
 -- Observation-theory comparison hierarchy.
 --
--- The old Boolean "same observable compared" is deliberately replaced by two
--- literal prediction-observation welds.  GR and alternative predictions must
--- independently match the exact observation channel and observable.
+-- GR and alternative predictions must independently carry attribution/proof
+-- lineage and must independently weld to the exact observation coordinate.
 ------------------------------------------------------------------------
 
 data ObservationTheoryStatus : Set where
@@ -106,10 +106,16 @@ record ObservationTheoryComparison : Set where
   constructor observation-theory-comparison
   field
     observation : Obs.GravitationalObservationReceipt
-    ordinaryGRPrediction : Pred.GravitationalPredictionReceipt
-    modifiedGravityPrediction : Pred.GravitationalPredictionReceipt
-    ordinaryGRWeld : Pred.PredictionObservationWeld ordinaryGRPrediction observation
-    modifiedGravityWeld : Pred.PredictionObservationWeld modifiedGravityPrediction observation
+    ordinaryGRPrediction : Attr.AttributedGravitationalPrediction
+    modifiedGravityPrediction : Attr.AttributedGravitationalPrediction
+    ordinaryGRWeld :
+      Pred.PredictionObservationWeld
+        (Attr.prediction ordinaryGRPrediction)
+        observation
+    modifiedGravityWeld :
+      Pred.PredictionObservationWeld
+        (Attr.prediction modifiedGravityPrediction)
+        observation
     ordinaryResidualClosed : Bool
     modifiedResidualSmaller : Bool
     status : ObservationTheoryStatus
@@ -120,6 +126,7 @@ record AntigravityUnificationBoundary : Set where
   constructor antigravity-unification-boundary
   field
     gravitationalObservationIsEmpiricalComparator : Bool
+    predictionAttributionRequiredBeforeComparison : Bool
     grIsDirectPhysicsLane : Bool
     ymCanConstrainHighFieldSourceModels : Bool
     nsCanCloseOrdinaryMomentumConfounders : Bool
@@ -136,7 +143,7 @@ record AntigravityUnificationBoundary : Set where
 canonicalAntigravityUnificationBoundary : AntigravityUnificationBoundary
 canonicalAntigravityUnificationBoundary =
   antigravity-unification-boundary
-    true true true true false false false false false false false false true
+    true true true true true false false false false false false false false true
 
 ------------------------------------------------------------------------
 -- Existing fail-closed theorem/program/observation boundaries are imported by
@@ -160,6 +167,9 @@ existingCurrentObservationalStatus = Obs.canonicalCurrentObservationalStatusBoun
 
 existingPredictionObservationBoundary : Pred.PredictionObservationBoundary
 existingPredictionObservationBoundary = Pred.canonicalPredictionObservationBoundary
+
+existingPredictionAttributionBoundary : Attr.PredictionAttributionBoundary
+existingPredictionAttributionBoundary = Attr.canonicalPredictionAttributionBoundary
 
 ------------------------------------------------------------------------
 -- Explicit promotion firewall.
