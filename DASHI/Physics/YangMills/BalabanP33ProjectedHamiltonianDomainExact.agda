@@ -29,7 +29,8 @@ module DASHI.Physics.YangMills.BalabanP33ProjectedHamiltonianDomainExact where
 -- physical Yang--Mills Hamiltonian.  Those remain separate M7 payments.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
@@ -125,7 +126,7 @@ projectedHamiltonianMatrixSymmetric
 projectedHamiltonianQuadratic :
   ∀ {mask matrix} →
   FiniteProjectedHamiltonian mask matrix →
-  PhysicalVector → Data.Rational.Base.ℚ
+  PhysicalVector → ℚ
 projectedHamiltonianQuadratic {mask} {matrix} package vector =
   Projector.projectedPhysicalQuadratic mask matrix vector
 
@@ -172,12 +173,12 @@ assembleFiniteProjectedHamiltonianClosure :
   FiniteProjectedHamiltonianClosure package
 assembleFiniteProjectedHamiltonianClosure package = record
   { operator = projectedHamiltonianOperator package
-  ; operatorIsProjected = Agda.Builtin.Equality.refl
+  ; operatorIsProjected = refl
   ; physicalDomain = ProjectedPhysicalDomain package
-  ; physicalDomainIsProjectorImage = Agda.Builtin.Equality.refl
+  ; physicalDomainIsProjectorImage = refl
   ; invariantDomain = projectedHamiltonianPreservesPhysicalDomain package
   ; matrixRepresentative = projectedHamiltonianMatrix package
-  ; matrixRepresentativeIsProjected = Agda.Builtin.Equality.refl
+  ; matrixRepresentativeIsProjected = refl
   ; matrixRepresentativeSymmetric = projectedHamiltonianMatrixSymmetric package
   }
 
