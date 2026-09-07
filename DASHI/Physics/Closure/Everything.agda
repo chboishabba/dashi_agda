@@ -83,17 +83,19 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalHHAndNestedRadiusCompilerRound468E
 import DASHI.Physics.Closure.NSTriadKNSelectedPairPhysicalTriadRoutingRound469Exact
 import DASHI.Physics.Closure.NSTriadKNOutputIndexedEDProvenanceRound470Exact
 
--- R471-R480 Lean<->Agda Gram-operator return and terminal minimization.
--- R471 identifies the weakest uniform Gram-operator consumer.  R477 installs
--- the literal nonseparable Cauchy pair kernel.  R478 removes the unnecessary
--- requirement to prove separate +/- scalar bounds by preferring the total
--- resolved all-coefficient bound.  R479 isolates a signed residual allowance
--- producer so paid diagonal structure can be reused without absolute values.
--- R480 follows the actual R472/R432 downstream type one step further: the final
--- physical consumer needs only the selected physical coefficient snapshot, not
--- a theorem for every hypothetical coefficient vector.  Thus the live cut is
--- the physical same-object snapshot weld plus the selected resolved payment;
--- uniform R478 and split R477 remain sufficient producer routes only.
+-- R471-R481 Lean<->Agda Gram-operator return, terminal minimization, and
+-- first-missing proof-search routing.  R471 identifies the weakest uniform
+-- Gram-operator consumer.  R477 installs the literal nonseparable Cauchy pair
+-- kernel.  R478 removes the unnecessary requirement to prove separate +/-
+-- scalar bounds by preferring the total resolved all-coefficient bound.  R479
+-- isolates a signed residual allowance producer so paid diagonal structure can
+-- be reused without absolute values.  R480 follows the actual R472/R432
+-- downstream type one step further: the final physical consumer needs only the
+-- selected physical coefficient snapshot, not a theorem for every hypothetical
+-- coefficient vector.  R481 applies the repository first-missing discipline:
+-- construct the physical same-object snapshot first; only then admit the
+-- selected resolved inequality as the live analytic search.  Uniform R478 and
+-- split R477 remain sufficient producer routes only.
 import DASHI.Physics.Closure.NSTriadKNGramOperatorBoundConsumerRound471Exact
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramOperatorPaymentRound472Exact
 import DASHI.Physics.Closure.NSTriadKNWeightedPhysicalGramOperatorCarrierRound473Exact
@@ -104,6 +106,7 @@ import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedDirectConsumerRound478Exact
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedSignedResidualRound479Exact
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedPhysicalSnapshotRound480Exact
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedProofSearchRound481Exact
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedTerminalEverythingRound479Exact
 
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
