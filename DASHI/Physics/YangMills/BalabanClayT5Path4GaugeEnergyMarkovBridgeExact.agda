@@ -2,12 +2,12 @@
 module DASHI.Physics.YangMills.BalabanClayT5Path4GaugeEnergyMarkovBridgeExact where
 
 ------------------------------------------------------------------------
--- LITERAL PATH4 ENERGY SEMANTICS -> PREFERRED MARKOV/TIGHTNESS BRIDGE
+-- LITERAL PATH4 ENERGY SEMANTICS -> SELECTED MOMENT COMPACT CONTAINMENT
 --
--- The generic Markov interface carries predicates named NonnegativeObservable
--- and CoerciveForSelectedTopology.  On the preferred physical route we make
--- those predicates literal pointwise statements about the already-realized
--- Path4 gauge energy, rather than leaving them as opaque physical leaves.
+-- This preferred route is intentionally indexed by one exact expectationData.
+-- It does not try to inhabit the older over-general Markov authority quantified
+-- over arbitrary operations/measure sequences.  The existing typed moment bound
+-- on the selected diagonal producer is consumed directly.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -21,8 +21,6 @@ open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact using
 import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as Limit
 import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact as T5
 import DASHI.Physics.YangMills.BalabanClayT5MomentCompactContainmentExact as Moment
-import DASHI.Physics.YangMills.BalabanClayT5CoerciveMomentMarkovContainmentExact as Coercive
-import DASHI.Physics.YangMills.BalabanClayT5PreferredPhysicalCoerciveMomentBridgeExact as Preferred
 import DASHI.Physics.YangMills.BalabanClayT5Path4GaugeEnergyObservableRealizationExact as Realization
 
 Path4PointwiseNonnegative :
@@ -50,7 +48,7 @@ Path4PointwiseCoercive realization observable =
           (Realization.physicalTangentCoordinate realization configuration)
     ≤ Realization.observableValue realization observable configuration
 
-record Path4MarkovAuthorityInputs
+record Path4SelectedMomentContainmentInputs
     (Measure Observable Configuration Epsilon Witness : Set)
     (expectationData :
       T5.PhysicalExpectationProducerData Measure Observable ℚ)
@@ -58,116 +56,69 @@ record Path4MarkovAuthorityInputs
       Realization.Path4GaugeEnergyObservableRealization
         Measure Observable Configuration expectationData) : Set₁ where
   field
+    measureLimit : Limit.SequentialLimit Measure
+    momentOrder : Epsilon → Nat
+
     Admissible : Epsilon → Witness → Set
     Controls : Epsilon → Witness → Measure → Set
-    sublevelWitness : Observable → Nat → Epsilon → Witness
+    compactWitness : Epsilon → Witness
 
-    -- Standard probability/topology authority after the pointwise semantics
-    -- have been fixed.  No Yang--Mills coercivity estimate is hidden here.
-    markovMomentBoundControlsSublevelComplement :
-      (producer :
-        T5.ExponentialMomentProducer
-          (T5.operations (T5.thermodynamic expectationData))
-          (T5.diagonalMeasure expectationData)
-          (T5.RenormalizedObservable (T5.thermodynamic expectationData))) →
-      (observable : Observable) →
-      (degree : Nat) →
-      (epsilon : Epsilon) →
-      (cutoff : Nat) →
-      Path4PointwiseNonnegative realization observable →
-      Path4PointwiseCoercive realization observable →
-      Admissible epsilon (sublevelWitness observable degree epsilon) →
-      Moment.MomentBoundAt producer degree observable cutoff →
-      Controls epsilon
-        (sublevelWitness observable degree epsilon)
+    renormalized :
+      Realization.RenormalizedPath4GaugeEnergyObservable realization
+
+    compactWitnessAdmissible : ∀ epsilon →
+      Admissible epsilon (compactWitness epsilon)
+
+    -- Standard Markov/sublevel step on this exact selected producer.  The
+    -- Yang--Mills-specific nonnegativity and coercivity premises are supplied
+    -- below from the literal Path4 realization, not postulated here.
+    markovMomentBoundControlsCompactComplement : ∀ epsilon cutoff →
+      Path4PointwiseNonnegative realization
+        (Realization.path4GaugeEnergyObservable realization) →
+      Path4PointwiseCoercive realization
+        (Realization.path4GaugeEnergyObservable realization) →
+      Moment.MomentBoundAt (T5.moments expectationData)
+        (momentOrder epsilon)
+        (Realization.path4GaugeEnergyObservable realization)
+        cutoff →
+      Controls epsilon (compactWitness epsilon)
         (T5.diagonalMeasure expectationData cutoff)
 
-open Path4MarkovAuthorityInputs public
+open Path4SelectedMomentContainmentInputs public
 
-compilePath4MarkovAuthority :
+compilePath4MomentCompactContainmentInputs :
   ∀ {Measure Observable Configuration Epsilon Witness}
     {expectationData :
       T5.PhysicalExpectationProducerData Measure Observable ℚ}
     {realization :
       Realization.Path4GaugeEnergyObservableRealization
         Measure Observable Configuration expectationData} →
-  Path4MarkovAuthorityInputs
-    Measure Observable Configuration Epsilon Witness expectationData realization →
-  Coercive.MarkovCompactContainmentAuthority
-    Measure Observable ℚ Epsilon Witness
-compilePath4MarkovAuthority {expectationData = expectationData} inputs = record
-  { Admissible = Admissible inputs
-  ; Controls = Controls inputs
-  ; NonnegativeObservable = Path4PointwiseNonnegative _
-  ; CoerciveForSelectedTopology = Path4PointwiseCoercive _
-  ; sublevelWitness = sublevelWitness inputs
-  ; markovMomentBoundControlsSublevelComplement =
-      λ producer observable degree epsilon cutoff nonnegative coercive compact bound →
-        markovMomentBoundControlsSublevelComplement inputs
-          producer observable degree epsilon cutoff
-          nonnegative coercive compact bound
-  }
-
-record Path4PreferredCoerciveMomentInputs
-    (Measure Observable Configuration Epsilon Witness : Set)
-    (expectationData :
-      T5.PhysicalExpectationProducerData Measure Observable ℚ)
-    (realization :
-      Realization.Path4GaugeEnergyObservableRealization
-        Measure Observable Configuration expectationData)
-    (markovInputs :
-      Path4MarkovAuthorityInputs
-        Measure Observable Configuration Epsilon Witness
-        expectationData realization) : Set₁ where
-  field
-    measureLimit : Limit.SequentialLimit Measure
-    momentOrder : Epsilon → Nat
-
-    renormalized :
-      Realization.RenormalizedPath4GaugeEnergyObservable realization
-
-    compactSublevel : ∀ epsilon →
-      Admissible markovInputs epsilon
-        (sublevelWitness markovInputs
-          (Realization.path4GaugeEnergyObservable realization)
-          (momentOrder epsilon)
-          epsilon)
-
-open Path4PreferredCoerciveMomentInputs public
-
-compilePath4PreferredCoerciveMomentInputs :
-  ∀ {Measure Observable Configuration Epsilon Witness}
-    {expectationData :
-      T5.PhysicalExpectationProducerData Measure Observable ℚ}
-    {realization :
-      Realization.Path4GaugeEnergyObservableRealization
-        Measure Observable Configuration expectationData}
-    {markovInputs :
-      Path4MarkovAuthorityInputs
-        Measure Observable Configuration Epsilon Witness
-        expectationData realization} →
-  Path4PreferredCoerciveMomentInputs
+  Path4SelectedMomentContainmentInputs
     Measure Observable Configuration Epsilon Witness
-    expectationData realization markovInputs →
-  Preferred.PreferredPhysicalCoerciveMomentInputs
+    expectationData realization →
+  Moment.MomentCompactContainmentInputs
     Measure Observable ℚ Epsilon Witness expectationData
-    (compilePath4MarkovAuthority markovInputs)
-compilePath4PreferredCoerciveMomentInputs {realization = realization} inputs = record
+compilePath4MomentCompactContainmentInputs
+  {realization = realization} inputs = record
   { measureLimit = measureLimit inputs
-  ; physicalCoerciveObservable = λ epsilon →
+  ; Admissible = Admissible inputs
+  ; Controls = Controls inputs
+  ; tightnessObservable = λ epsilon →
       Realization.path4GaugeEnergyObservable realization
-  ; coerciveMomentOrder = momentOrder inputs
-  ; physicalCoerciveObservableRenormalized = λ epsilon →
+  ; momentOrder = momentOrder inputs
+  ; compactWitness = compactWitness inputs
+  ; tightnessObservableRenormalized = λ epsilon →
       Realization.path4GaugeEnergyRenormalized (renormalized inputs)
-  ; physicalCoerciveObservableNonnegative = λ epsilon →
-      Realization.path4GaugeEnergyObservablePointwiseNonnegative realization
-  ; physicalCoerciveObservableCoercive = λ epsilon →
-      Realization.path4GaugeEnergyObservablePointwiseCoercive realization
-  ; physicalCoerciveSublevelCompactInSelectedTopology = compactSublevel inputs
+  ; compactWitnessAdmissible = compactWitnessAdmissible inputs
+  ; momentBoundControlsCompactComplement = λ epsilon cutoff bound →
+      markovMomentBoundControlsCompactComplement inputs epsilon cutoff
+        (Realization.path4GaugeEnergyObservablePointwiseNonnegative realization)
+        (Realization.path4GaugeEnergyObservablePointwiseCoercive realization)
+        bound
   }
 
-path4PointwiseMarkovAuthorityCompilerLevel : ProofLevel
-path4PointwiseMarkovAuthorityCompilerLevel = machineChecked
+path4SelectedMomentContainmentCompilerLevel : ProofLevel
+path4SelectedMomentContainmentCompilerLevel = machineChecked
 
 path4FiniteNonnegativityAndCoercivityReuseLevel : ProofLevel
 path4FiniteNonnegativityAndCoercivityReuseLevel = machineChecked
