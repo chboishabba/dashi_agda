@@ -34,7 +34,6 @@ import DASHI.Physics.Closure.NSTriadKNIntegerFourierModeAddExact as Add
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
-import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 import DASHI.Physics.Closure.NSTriadKNComplex3AlgebraLaws as Algebra
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAlgebraProgram as Hermitian
 import DASHI.Physics.Closure.NSTriadKNComplex3TransverseDifference as Difference
@@ -43,6 +42,7 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as He
 import DASHI.Physics.Closure.NSTriadKNProjectedNonlinearityTransverseRound30Exact as R30
 import DASHI.Physics.Closure.NSTriadKNProjectedNonlinearityQuadraticHomogeneityRound94Exact as R94
 import DASHI.Physics.Closure.NSTriadKNProjectedHelicalSelfForcingVectorRound106Exact as R106
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact as R230
 import DASHI.Physics.Closure.NSTriadKNNestedInnerSwapCommutatorRound310Exact as R310
 
@@ -99,7 +99,6 @@ zeroOutputAdvectionScalar {F = F} {E = E}
     system velocityTransverse tau outputZero =
   let
     p = Physical.p tau
-    q = Physical.q tau
     uP = Audit.velocity system p
     qIsNegP = zeroOutputRightInputIsNegateLeft tau outputZero
   in
@@ -183,7 +182,7 @@ foldZeroOutputTerms :
       Helical.Transverse E mode (Audit.velocity system mode))
     (items : List Physical.PhysicalTriadIncidence) →
   R30.AllOutput Z3.zeroMode items →
-  R310.R224.foldVector (Audit.projectedOrderedTerm system) items
+  R224.foldVector (Audit.projectedOrderedTerm system) items
   ≡ C3.complex3Zero F
 foldZeroOutputTerms system velocityTransverse [] R30.all-output-empty = refl
 foldZeroOutputTerms system velocityTransverse (tau ∷ rest)
