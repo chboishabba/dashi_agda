@@ -43,6 +43,9 @@ import DASHI.Regulation.Everything
 import DASHI.Philosophy.Everything
 import DASHI.Music.Everything
 
+-- Knowledge-source / Wikimedia domain.
+import DASHI.Wikimedia.Everything
+
 -- Systems / tooling / cross-domain domains.
 import DASHI.Context.Everything
 import DASHI.Interop.Everything
