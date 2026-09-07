@@ -2,16 +2,15 @@
 module DASHI.Physics.YangMills.BalabanCMP98Path13CurrentPreferredSourceFrontierExact where
 
 ------------------------------------------------------------------------
--- PATH13 EQ. (119): CURRENT PREFERRED SOURCE FRONTIER
+-- PATH13 EQ. (119): CURRENT LEAST-PRIVILEGE SOURCE FRONTIER
 --
--- Current least-privilege route after source-sign repair, direct Path13
--- variational specialization, R171 defect-algebra alignment, and differential
--- interface minimization.
---
--- The old selected-background/link equalities and pointwise cut/operator weld
--- are compiler-owned by construction.  T3 remains a theorem-bearing producer
--- of the corrected printed semantics, but the Eq. (119) consumer requires only
--- PrintedSemanticOperators + PrintedOperatorChartWeld.
+-- Current preferred route after:
+--   * source-sign repair to dexpPlus/Jplus/Ad(exp);
+--   * direct Path13 variational specialization;
+--   * R171 defect-algebra alignment;
+--   * pruning full T3 to PrintedSemanticOperators + chart weld;
+--   * pruning the historical 1/24 cut to the literal 74-link budget
+--       37/1024 <= selected chart radius.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -29,6 +28,7 @@ import DASHI.Physics.YangMills.BalabanCMP98SU2OperatorDefectFromPhysicalRadiusRo
 import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as R208
 import DASHI.Physics.YangMills.BalabanCMP98Path13SplitT3SelectedSemanticsExact as T3
 import DASHI.Physics.YangMills.BalabanPath13SplitPhysicalPrincipalImageRouteExact as Principal
+import DASHI.Physics.YangMills.BalabanPath13DirectRelative74CutExact as Direct74
 
 record CurrentPreferredEq119FrontierStatus : Set where
   constructor currentPreferredEq119FrontierStatus
@@ -41,13 +41,13 @@ record CurrentPreferredEq119FrontierStatus : Set where
     r171AlignedVariationalRouteClosed : Bool
     selectedCutOperatorPointwiseWeldPruned : Bool
     minimalPrintedSemanticsRouteClosed : Bool
-    splitPrincipalImageCompilerClosed : Bool
+    directRelative74CutCompilerClosed : Bool
     currentPreferredEq119CompilerClosed : Bool
 
     -- Current independent source payments.
     r171AlignedPath13PhysicalSourceConstructed : Bool
     selectedPrintedSemanticsConstructed : Bool
-    selectedCutThresholdConstructed : Bool
+    relative74CutThresholdConstructed : Bool
     rationalRealRingEmbeddingConstructed : Bool
 
     -- Compatibility/producer coordinates retained for archaeology and reuse.
@@ -56,6 +56,7 @@ record CurrentPreferredEq119FrontierStatus : Set where
     selectedPath13VariationalRadiusConstructed : Bool
     selectedCutOperatorSameObjectWeldConstructed : Bool
     selectedT3NormalizationConstructed : Bool
+    selectedCutThresholdConstructed : Bool
     standardR171OperatorRepresentationConstructed : Bool
 
     physicalEq119Closed : Bool
@@ -66,54 +67,16 @@ canonicalCurrentPreferredEq119FrontierStatus =
   currentPreferredEq119FrontierStatus
     true true true true true true true true true true
     false false false false
-    false false false false false false
+    false false false false false false false
     false
-
-printedRoleCorrectionClosedIsTrue :
-  printedRoleCorrectionClosed canonicalCurrentPreferredEq119FrontierStatus ≡ true
-printedRoleCorrectionClosedIsTrue = refl
-
-t3PrintedOperatorAdapterClosedIsTrue :
-  t3PrintedOperatorAdapterClosed canonicalCurrentPreferredEq119FrontierStatus ≡ true
-t3PrintedOperatorAdapterClosedIsTrue = refl
-
-path13VariationalSpecializationCompilerClosedIsTrue :
-  path13VariationalSpecializationCompilerClosed
-    canonicalCurrentPreferredEq119FrontierStatus ≡ true
-path13VariationalSpecializationCompilerClosedIsTrue = refl
-
-path13VariationalRadiusFromSpecializationCompilerClosedIsTrue :
-  path13VariationalRadiusFromSpecializationCompilerClosed
-    canonicalCurrentPreferredEq119FrontierStatus ≡ true
-path13VariationalRadiusFromSpecializationCompilerClosedIsTrue = refl
-
-r171KernelGroupDefectAdapterClosedIsTrue :
-  r171KernelGroupDefectAdapterClosed
-    canonicalCurrentPreferredEq119FrontierStatus ≡ true
-r171KernelGroupDefectAdapterClosedIsTrue = refl
-
-r171AlignedVariationalRouteClosedIsTrue :
-  r171AlignedVariationalRouteClosed
-    canonicalCurrentPreferredEq119FrontierStatus ≡ true
-r171AlignedVariationalRouteClosedIsTrue = refl
-
-selectedCutOperatorPointwiseWeldPrunedIsTrue :
-  selectedCutOperatorPointwiseWeldPruned
-    canonicalCurrentPreferredEq119FrontierStatus ≡ true
-selectedCutOperatorPointwiseWeldPrunedIsTrue = refl
-
-minimalPrintedSemanticsRouteClosedIsTrue :
-  minimalPrintedSemanticsRouteClosed
-    canonicalCurrentPreferredEq119FrontierStatus ≡ true
-minimalPrintedSemanticsRouteClosedIsTrue = refl
 
 currentPreferredEq119CompilerClosedIsTrue :
   currentPreferredEq119CompilerClosed
     canonicalCurrentPreferredEq119FrontierStatus ≡ true
 currentPreferredEq119CompilerClosedIsTrue = refl
 
--- Compatibility alias used by canonical mass-gap consumers created before this
--- minimization.  It now points to the actual least-privilege compiler.
+-- Compatibility alias used by canonical consumers created before the
+-- least-privilege minimization.
 finalSplitT3Eq119CompilerClosed : CurrentPreferredEq119FrontierStatus → Bool
 finalSplitT3Eq119CompilerClosed = currentPreferredEq119CompilerClosed
 
@@ -145,9 +108,9 @@ Path13RationalRealRingEmbeddingInput = R208.RationalRealRingEmbedding
 Path13SplitRepresentationInput : Set → Set₁
 Path13SplitRepresentationInput = Split.SplitPath13PhysicalStandardRepresentation
 
-Path13CutThresholdInput :
+Path13Relative74CutThresholdInput :
   ∀ {CoarseField} → Path13SplitRepresentationInput CoarseField → Set
-Path13CutThresholdInput = Principal.SplitPath13CutThreshold
+Path13Relative74CutThresholdInput = Direct74.SplitPath13Relative74CutThreshold
 
 CurrentPreferredEq119Inputs : Set → Set₁
 CurrentPreferredEq119Inputs =
@@ -178,6 +141,10 @@ Path13SelectedT3Input :
 Path13SelectedT3Input representation Scalar =
   T3.SplitSelectedT3PrintedSemantics {Scalar = Scalar} representation
 
+Path13HistoricalCutThresholdInput :
+  ∀ {CoarseField} → Path13SplitRepresentationInput CoarseField → Set
+Path13HistoricalCutThresholdInput = Principal.SplitPath13CutThreshold
+
 cmp98Path13CurrentPreferredSourceFrontierLevel : ProofLevel
 cmp98Path13CurrentPreferredSourceFrontierLevel = machineChecked
 
@@ -201,6 +168,9 @@ minimalPrintedSemanticsRouteLevel : ProofLevel
 minimalPrintedSemanticsRouteLevel =
   Preferred.preferredR171AlignedPrintedSourceCompilerLevel
 
+directRelative74CutCompilerLevel : ProofLevel
+directRelative74CutCompilerLevel = Direct74.relative74DirectCutCompilerLevel
+
 -- Current independent input surfaces.
 literalCMP98Path13R171AlignedPhysicalSourceLevel : ProofLevel
 literalCMP98Path13R171AlignedPhysicalSourceLevel = conditional
@@ -208,8 +178,8 @@ literalCMP98Path13R171AlignedPhysicalSourceLevel = conditional
 literalCMP98Path13SelectedPrintedSemanticsLevel : ProofLevel
 literalCMP98Path13SelectedPrintedSemanticsLevel = conditional
 
-literalCMP98Path13CutThresholdLevel : ProofLevel
-literalCMP98Path13CutThresholdLevel = conditional
+literalCMP98Path13Relative74CutThresholdLevel : ProofLevel
+literalCMP98Path13Relative74CutThresholdLevel = conditional
 
 literalCMP98RationalRealRingEmbeddingLevel : ProofLevel
 literalCMP98RationalRealRingEmbeddingLevel =
