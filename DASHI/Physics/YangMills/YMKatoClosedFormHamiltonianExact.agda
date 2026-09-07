@@ -115,10 +115,10 @@ record KatoM7OperatorPackage
 open KatoM7OperatorPackage public
 
 katoDomainAndSelfAdjointCompiler :
-  ∀ {Hilbert Scalar} →
-  KatoM7OperatorPackage Hilbert Scalar →
+  ∀ {Hilbert Scalar}
+    (package : KatoM7OperatorPackage Hilbert Scalar) →
   AssociatedSelfAdjointOperator
-    (physicalForm (KatoM7OperatorPackage.physical _))
+    (physicalForm (KatoM7OperatorPackage.physical package))
 katoDomainAndSelfAdjointCompiler package =
   KatoM7OperatorPackage.hamiltonian package
 
