@@ -99,8 +99,9 @@ open BoundedSelectorRequest public
 ------------------------------------------------------------------------
 -- Which prerequisite classes may use Zelph/HF as an acquisition producer?
 -- This is deliberately narrow.  A selector may support same-carrier checking,
--- source acquisition, qualifier evidence and provenance discovery.  The actual
--- qualifier-transport theorem and terminal semantic theorem remain Think work;
+-- source acquisition and provenance discovery.  Qualifier-bearing source reads
+-- may prepare evidence for a later qualifier-transport theorem, but they do not
+-- pay the transport node themselves. Terminal semantics remain Think work;
 -- rank treatment remains Review work.
 ------------------------------------------------------------------------
 
@@ -167,21 +168,22 @@ natSelectorDoesNotCreateSemanticProof :
 natSelectorDoesNotCreateSemanticProof = refl
 
 ------------------------------------------------------------------------
--- Bounded qualifier-path selector.  This can acquire qualifier evidence for a
--- future transport proof, but cannot itself prove qualifier transport.
+-- A source-support selector may deliberately retain qualifier-bearing fields.
+-- This prepares the later transport proof while remaining payment for the
+-- current source-support acquisition node only.
 ------------------------------------------------------------------------
 
-natQualifierEvidenceSelector : BoundedSelectorRequest
-natQualifierEvidenceSelector =
+natQualifierBearingSourceSelector : BoundedSelectorRequest
+natQualifierBearingSourceSelector =
   bounded-selector-request
-    "sel:nat:q10403939:qualifier-evidence"
+    "sel:nat:q10403939:qualifier-bearing-source-support"
     routeSelector
     ((Id.itemId "Q10403939") ∷ [])
     ((Id.propertyId "P459") ∷ (Id.propertyId "P3831") ∷
      (Id.propertyId "P518") ∷ (Id.propertyId "P580") ∷
      (Id.propertyId "P582") ∷ [])
     (qualifierImport ∷ nodeRouteSelection ∷ selectedChunkRead ∷ [])
-    "zelph-hf-layout/v2 qualifier route selector"
+    "zelph-hf-layout/v2 qualifier-bearing route selector"
     sensibLawHFTransportReference
     DAG.sourceSupport
     true refl
@@ -189,6 +191,10 @@ natQualifierEvidenceSelector =
     false refl
     false refl
     false refl
+
+qualifierBearingSelectorStillTargetsSourceSupport :
+  prerequisite natQualifierBearingSourceSelector ≡ DAG.sourceSupport
+qualifierBearingSelectorStillTargetsSourceSupport = refl
 
 -- This selector is intentionally not a `ZelphHFPrerequisitePaymentCandidate`
 -- for `qualifierTransport`: acquisition can prepare evidence, but the transport
