@@ -9,8 +9,10 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 -- permissive R423-shaped compiler; R502 blocks conflation with the full R439
 -- square companion. R503 therefore targets the exact R415 signed-cross
 -- consumer instead. R504 exposes the two independent Clay-facing analytic
--- leaves: the literal R406 signed-cross payment and the phase-sensitive
--- critical-production slice.
+-- leaves. R506 records the web-audited low-drift-band/variation firewall.
+-- R507 reuses Round104 critical slices on the literal R406 carrier with exactly
+-- one remainder same-object receipt, and R508 sharpens proof search for that
+-- second critical-production leaf.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.Closure.NSTriadKNR299NormalizedCompanionSameObjectRound494Exact
@@ -24,3 +26,6 @@ import DASHI.Physics.Closure.NSTriadKNDirectResolventCompanionToR423Round501Exac
 import DASHI.Physics.Closure.NSTriadKNDirectResolventOffDiagonalBoundaryRound502Exact
 import DASHI.Physics.Closure.NSTriadKNDirectResolventSignedCrossToR415Round503Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact
+import DASHI.Physics.Closure.NSTriadKNResidenceBandVariationNoGoRound506Exact
+import DASHI.Physics.Closure.NSTriadKNRound104ToLiteralR406CriticalSliceRound507Exact
+import DASHI.Physics.Closure.NSTriadKNLiteralR406CriticalProductionProofSearchRound508Exact
