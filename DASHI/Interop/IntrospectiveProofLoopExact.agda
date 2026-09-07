@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.BoundAcquisitionDemandExact as Bound
 import DASHI.Core.ConsumerIndexedTrajectoryFibreAdequacyExact as Fibre
 import DASHI.Core.ConsumerFibreRefinementSchedulerExact as Scheduler
 import DASHI.Interop.DialecticalMaterialProofSearchExperimentLoopExact as Loop
@@ -14,25 +15,11 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 
 ------------------------------------------------------------------------
 -- INTROSPECTIVE PROOF LOOP
---
--- This module formalises the repository workflow used when inspecting a live
--- proof/search implementation:
---
---   model the current carrier -> visualise the actual data/proof flow ->
---   inspect the visual for mismatches -> encode only the mismatch that survives
---   inspection -> recompute the consumer-relative proof state.
---
--- The visual is diagnostic only.  It creates neither evidence nor closure.
 ------------------------------------------------------------------------
 
 private
   variable
     system : Fibre.ConsumerIndexedFibreSystem
-
-------------------------------------------------------------------------
--- ZKP-shaped audit frame.  These are references to the already-existing owners,
--- not a second ontology for them.
-------------------------------------------------------------------------
 
 record ZKPFrame : Set where
   constructor zkp-frame
@@ -49,9 +36,8 @@ record ZKPFrame : Set where
 open ZKPFrame public
 
 ------------------------------------------------------------------------
--- The generic refinement scheduler intentionally leaves MissingCoordinate and
--- Producer application-defined.  A source route therefore needs an explicit
--- adapter into the existing source-diligence/search vocabulary.
+-- Application adapter from generic refinement coordinates into the source
+-- diligence/search vocabulary.
 ------------------------------------------------------------------------
 
 record SourceRouteAlignment
@@ -74,11 +60,25 @@ record SourceRouteAlignment
 
 open SourceRouteAlignment public
 
+sourceAcquisitionAlignment :
+  ∀ {system : Fibre.ConsumerIndexedFibreSystem}
+    {schedule : Scheduler.RefinementSchedule system} →
+  SourceRouteAlignment schedule →
+  Bound.AcquisitionAlignment
+    (Scheduler.MissingCoordinate schedule)
+    Diligence.SourceDiligenceGap
+    Search.ProducerClass
+    MaterialSource.DialecticalSourceReopening
+sourceAcquisitionAlignment {schedule = schedule} alignment =
+  Bound.acquisition-alignment
+    (sourceGapFor alignment)
+    (λ coordinate → producerToSearch alignment (Scheduler.producerFor schedule coordinate))
+    MaterialSource.firstMissingSourceCoordinate
+    MaterialSource.requiredProducer
+
 ------------------------------------------------------------------------
--- Finding from the visual audit: the existing experiment route carries the
--- concrete consumer residual, but the source-reopening constructor is otherwise
--- independent of that residual.  This demand binds a source reopening back to
--- the exact live missing coordinate and scheduled producer.
+-- Preferred source-demand surface.  Core owns exact requirement/residual/
+-- producer binding; this wrapper owns the stronger consumer-residual indexing.
 ------------------------------------------------------------------------
 
 record ConsumerDefectSourceDemand
@@ -89,17 +89,23 @@ record ConsumerDefectSourceDemand
     (liveResidual : Scheduler.ConsumerRefinementResidual schedule consumer) : Set₁ where
   constructor consumer-defect-source-demand
   field
-    reopening : MaterialSource.DialecticalSourceReopening
-
-    reopeningGapMatchesResidual :
-      MaterialSource.firstMissingSourceCoordinate reopening ≡
-      sourceGapFor alignment (Scheduler.missingCoordinate liveResidual)
-
-    reopeningProducerMatchesResidual :
-      MaterialSource.requiredProducer reopening ≡
-      producerToSearch alignment (Scheduler.producer liveResidual)
+    boundDemand :
+      Bound.BoundAcquisitionDemand
+        (sourceAcquisitionAlignment alignment)
+        (Scheduler.missingCoordinate liveResidual)
+        (sourceGapFor alignment (Scheduler.missingCoordinate liveResidual))
 
 open ConsumerDefectSourceDemand public
+
+reopening :
+  ∀ {system : Fibre.ConsumerIndexedFibreSystem}
+    {schedule : Scheduler.RefinementSchedule system}
+    {consumer : Fibre.Consumer system}
+    {alignment : SourceRouteAlignment schedule}
+    {liveResidual : Scheduler.ConsumerRefinementResidual schedule consumer} →
+  ConsumerDefectSourceDemand alignment liveResidual →
+  MaterialSource.DialecticalSourceReopening
+reopening demand = Bound.acquisition (boundDemand demand)
 
 sourceRoutePaysScheduledGap :
   ∀ {system : Fibre.ConsumerIndexedFibreSystem}
@@ -110,7 +116,8 @@ sourceRoutePaysScheduledGap :
   (demand : ConsumerDefectSourceDemand alignment liveResidual) →
   MaterialSource.firstMissingSourceCoordinate (reopening demand) ≡
   sourceGapFor alignment (Scheduler.missingCoordinate liveResidual)
-sourceRoutePaysScheduledGap = reopeningGapMatchesResidual
+sourceRoutePaysScheduledGap demand =
+  Bound.acquisitionPaysSelectedResidual (boundDemand demand)
 
 sourceRouteUsesScheduledProducer :
   ∀ {system : Fibre.ConsumerIndexedFibreSystem}
@@ -121,12 +128,15 @@ sourceRouteUsesScheduledProducer :
   (demand : ConsumerDefectSourceDemand alignment liveResidual) →
   MaterialSource.requiredProducer (reopening demand) ≡
   producerToSearch alignment (Scheduler.producer liveResidual)
-sourceRouteUsesScheduledProducer = reopeningProducerMatchesResidual
+sourceRouteUsesScheduledProducer {alignment = alignment} {liveResidual = liveResidual} demand =
+  trans
+    (Bound.acquisitionUsesSelectedProducer (boundDemand demand))
+    (sym (cong (producerToSearch alignment)
+      (Scheduler.producerIsScheduled liveResidual)))
 
 ------------------------------------------------------------------------
 -- The experiment route already carries a residual.  For an introspective round
--- we additionally require that it is the same live residual currently under
--- review, rather than merely another defect for the same consumer.
+-- require that it is the same live residual currently under review.
 ------------------------------------------------------------------------
 
 record ConsumerDefectExperimentBinding
@@ -143,9 +153,7 @@ record ConsumerDefectExperimentBinding
 open ConsumerDefectExperimentBinding public
 
 ------------------------------------------------------------------------
--- A reviewed visual may expose a formal mismatch, but the finding itself does
--- not count as proof progress.  Progress is represented only by one of the three
--- typed routes below.
+-- Visual diagnosis remains non-promoting.
 ------------------------------------------------------------------------
 
 data VisualAuditFinding : Set where
@@ -195,12 +203,10 @@ record VerifiedIntrospectiveRound
 open VerifiedIntrospectiveRound public
 
 ------------------------------------------------------------------------
--- Firewalls: explanatory artefacts and audit metadata cannot manufacture a
--- successful formal step.
+-- Firewalls.
 ------------------------------------------------------------------------
 
 data VisualizationCreatesEvidencePermission : Set where
-
 data VisualizationCreatesConsumerClosurePermission : Set where
 data AuditFindingCreatesProgressPermission : Set where
 
