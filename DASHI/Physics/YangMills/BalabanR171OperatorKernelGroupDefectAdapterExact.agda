@@ -10,6 +10,7 @@ module DASHI.Physics.YangMills.BalabanR171OperatorKernelGroupDefectAdapterExact 
 -- downstream Path13 consumer to prove a separate defect-function equality.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _≤_)
 import Data.Rational.Properties as ℚP
 
@@ -47,7 +48,7 @@ operatorDefectIsAdaptedGroupDefect :
     value →
   Path.defect (operatorKernelAsGroupDefectAlgebra kernel) value
   ≡ Operator.defect kernel value
-operatorDefectIsAdaptedGroupDefect kernel value = Agda.Builtin.Equality.refl
+operatorDefectIsAdaptedGroupDefect kernel value = refl
 
 operatorKernelGroupDefectAdapterLevel : ProofLevel
 operatorKernelGroupDefectAdapterLevel = machineChecked
