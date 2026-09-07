@@ -20,6 +20,8 @@ FILES=(
   DASHI/Analysis/RiemannG2FinalPoleQuotientMinimalAnalyticCutExact.agda
   DASHI/Analysis/RiemannG2FinalPoleQuotientTwoPaymentCutExact.agda
   DASHI/Analysis/RiemannG2FinalPoleQuotientTwoPaymentCutRegression.agda
+  DASHI/Analysis/RiemannG2FinalPoleQuotientAnalyticCoreExact.agda
+  DASHI/Analysis/RiemannG2FinalPoleQuotientAnalyticCoreRegression.agda
   DASHI/Analysis/RiemannAristotleSharedCertificateREADME.agda
 )
 
