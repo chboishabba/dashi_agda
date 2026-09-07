@@ -8,6 +8,7 @@ import DASHI.Physics.GR.GravitationalWaveTheoryTestBidiExact as Wave
 import DASHI.Physics.GR.GravitationalPredictionObservationBidiExact as Pred
 import DASHI.Physics.GR.GravitationalMultiScaleTheoryFingerprintBidiExact as Multi
 import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact as Anti
+import DASHI.Physics.ExoticGravity.AntigravityUnificationInteractionExact as Unified
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 import DASHI.Papers.CoreTheoremInterfaces as Core
 
@@ -53,13 +54,31 @@ producerForPredictionResidual Pred.missingSystematicBudget = Search.empiricalEvi
 producerForPredictionResidual Pred.missingComparisonMetric = Search.discriminatorProducer
 producerForPredictionResidual Pred.residualRequiresTheoryRevision = Search.contradictionProducer
 
-observationChannelForAntigravityClaim : Anti.AntigravityClaim → Obs.GravitationalObservationChannel
-observationChannelForAntigravityClaim Anti.reducedPassiveWeight = Obs.freeFallEquivalence
-observationChannelForAntigravityClaim Anti.changedFreeFallResponse = Obs.freeFallEquivalence
-observationChannelForAntigravityClaim Anti.remoteRepulsiveField = Obs.localTestMassAcceleration
-observationChannelForAntigravityClaim Anti.alteredInertialResponse = Obs.freeFallEquivalence
-observationChannelForAntigravityClaim Anti.persistentPropulsiveImpulse = Obs.localTestMassAcceleration
-observationChannelForAntigravityClaim Anti.engineeredMetricResponse = Obs.clockOrRedshift
+------------------------------------------------------------------------
+-- Reuse the canonical antigravity route instead of maintaining a second total
+-- claim->gravity-channel map.  Inertia and propulsion stay outside GR
+-- observation and route to their actual downstream consumer lanes.
+------------------------------------------------------------------------
+
+observationRouteForAntigravityClaim :
+  Anti.AntigravityClaim → Unified.ClaimObservationRoute
+observationRouteForAntigravityClaim = Unified.observationRouteForClaim
+
+laneForAntigravityClaim : Anti.AntigravityClaim → CrossPollinationLane
+laneForAntigravityClaim Anti.reducedPassiveWeight = observationEvidenceLane
+laneForAntigravityClaim Anti.changedFreeFallResponse = observationEvidenceLane
+laneForAntigravityClaim Anti.remoteRepulsiveField = observationEvidenceLane
+laneForAntigravityClaim Anti.alteredInertialResponse = yangMillsSourceLane
+laneForAntigravityClaim Anti.persistentPropulsiveImpulse = navierStokesConfounderLane
+laneForAntigravityClaim Anti.engineeredMetricResponse = observationEvidenceLane
+
+inertialClaimDoesNotRouteToGravityEvidence :
+  laneForAntigravityClaim Anti.alteredInertialResponse ≡ observationEvidenceLane → ⊥
+inertialClaimDoesNotRouteToGravityEvidence ()
+
+impulseClaimDoesNotRouteToGravityEvidence :
+  laneForAntigravityClaim Anti.persistentPropulsiveImpulse ≡ observationEvidenceLane → ⊥
+impulseClaimDoesNotRouteToGravityEvidence ()
 
 laneForWaveResidual : Wave.WaveTestResidual → CrossPollinationLane
 laneForWaveResidual Wave.missingCalibratedData = observationEvidenceLane
@@ -106,6 +125,8 @@ record GravitationalCrossPollinationBoundary : Set where
   constructor gravitational-cross-pollination-boundary
   field
     observationResidualMayScheduleResearch : Bool
+    antigravityRouteIsReusedRatherThanDuplicated : Bool
+    inertialAndMomentumClaimsStayOutOfGravityObservation : Bool
     residualShapeTransfersNavierStokesClayProof : Bool
     residualShapeTransfersYangMillsMassGapProof : Bool
     spectralAnalogyTransfersRiemannHypothesisProof : Bool
@@ -118,7 +139,8 @@ record GravitationalCrossPollinationBoundary : Set where
 
 canonicalGravitationalCrossPollinationBoundary : GravitationalCrossPollinationBoundary
 canonicalGravitationalCrossPollinationBoundary =
-  gravitational-cross-pollination-boundary true false false false false false false true true true
+  gravitational-cross-pollination-boundary
+    true true true false false false false false false true true true
 
 existingCoreTheoremInterfaces : Core.CoreTheoremInterfaces
 existingCoreTheoremInterfaces = Core.canonicalCoreTheoremInterfaces
