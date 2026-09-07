@@ -133,7 +133,7 @@ import DASHI.Physics.YangMills.BalabanClayT5UniformTightnessSubsequenceInheritan
 -- tightness once their compact-containment interpretation is supplied.
 import DASHI.Physics.YangMills.BalabanClayT5MomentCompactContainmentExact
 
--- Compatibility / optional local coercive-observable routes.  These do not
+-- Compatibility / optional local coercive-observable routes. These do not
 -- replace the global selected-measure compact-containment theorem.
 import DASHI.Physics.YangMills.BalabanClayT5CoerciveMomentMarkovContainmentExact
 import DASHI.Physics.YangMills.BalabanClayT5PreferredPhysicalCoerciveMomentBridgeExact
@@ -173,6 +173,9 @@ import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound204Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound205Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound206Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound207Exact
+import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound208Exact
+import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound209Exact
+import DASHI.Physics.YangMills.BalabanClayT1ResidualIntrospectionRound210Exact
 
 import DASHI.Physics.YangMills.BalabanPath13Eq119SourceRouteProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119BishopBridgeProvenanceExact
