@@ -7,14 +7,6 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.GR.GravitationalObservationBidiExact as Obs
 import DASHI.Physics.GR.GravitationalPredictionObservationBidiExact as Pred
 
-------------------------------------------------------------------------
--- MULTI-SCALE GRAVITY THEORY FINGERPRINT
---
--- Detector channel is not the scale coordinate: compact-binary and
--- cosmological-propagation tests can both consume laser-interferometric strain.
--- A scale-context receipt therefore refines the observation before comparison.
-------------------------------------------------------------------------
-
 data GravityScale : Set where
   laboratoryFreeFallScale : GravityScale
   laboratoryClockScale : GravityScale
@@ -36,9 +28,7 @@ record ScalePrediction : Set where
   field
     scale : GravityScale
     prediction : Pred.GravitationalPredictionReceipt
-    channelMatchesScale :
-      Pred.channel prediction ≡ requiredChannelForScale scale
-
+    channelMatchesScale : Pred.channel prediction ≡ requiredChannelForScale scale
 open ScalePrediction public
 
 record ScaleIndexedObservation : Set where
@@ -49,7 +39,6 @@ record ScaleIndexedObservation : Set where
     observationChannelMatchesScale :
       Obs.channel observation ≡ requiredChannelForScale observationScale
     scaleContextCarrier : String
-
 open ScaleIndexedObservation public
 
 record ScaleComparison : Set where
@@ -57,18 +46,10 @@ record ScaleComparison : Set where
   field
     scalePrediction : ScalePrediction
     scaleObservation : ScaleIndexedObservation
-    sameScale :
-      scale scalePrediction ≡ observationScale scaleObservation
-    weld :
-      Pred.PredictionObservationWeld
-        (prediction scalePrediction)
-        (observation scaleObservation)
-
+    sameScale : scale scalePrediction ≡ observationScale scaleObservation
+    weld : Pred.PredictionObservationWeld
+      (prediction scalePrediction) (observation scaleObservation)
 open ScaleComparison public
-
-------------------------------------------------------------------------
--- Theory fingerprint carrier.
-------------------------------------------------------------------------
 
 record MultiScaleTheoryFingerprint : Set where
   constructor multi-scale-theory-fingerprint
@@ -82,56 +63,64 @@ record MultiScaleTheoryFingerprint : Set where
     nanohertzTimingPrediction : ScalePrediction
     cosmologicalPropagationPrediction : ScalePrediction
 
-    freeFallScaleMatches :
-      scale laboratoryFreeFallPrediction ≡ laboratoryFreeFallScale
-    clockScaleMatches :
-      scale laboratoryClockPrediction ≡ laboratoryClockScale
-    orbitalScaleMatches :
-      scale orbitalTimingPrediction ≡ orbitalTimingScale
-    compactBinaryScaleMatches :
-      scale compactBinaryPrediction ≡ compactBinaryScale
-    nanohertzScaleMatches :
-      scale nanohertzTimingPrediction ≡ nanohertzTimingScale
-    cosmologicalScaleMatches :
-      scale cosmologicalPropagationPrediction ≡ cosmologicalPropagationScale
+    freeFallScaleMatches : scale laboratoryFreeFallPrediction ≡ laboratoryFreeFallScale
+    clockScaleMatches : scale laboratoryClockPrediction ≡ laboratoryClockScale
+    orbitalScaleMatches : scale orbitalTimingPrediction ≡ orbitalTimingScale
+    compactBinaryScaleMatches : scale compactBinaryPrediction ≡ compactBinaryScale
+    nanohertzScaleMatches : scale nanohertzTimingPrediction ≡ nanohertzTimingScale
+    cosmologicalScaleMatches : scale cosmologicalPropagationPrediction ≡ cosmologicalPropagationScale
 
-    freeFallTheoryIdentityMatches :
-      Pred.theoryCarrier (prediction laboratoryFreeFallPrediction) ≡ theoryIdentity
-    clockTheoryIdentityMatches :
-      Pred.theoryCarrier (prediction laboratoryClockPrediction) ≡ theoryIdentity
-    orbitalTheoryIdentityMatches :
-      Pred.theoryCarrier (prediction orbitalTimingPrediction) ≡ theoryIdentity
-    compactBinaryTheoryIdentityMatches :
-      Pred.theoryCarrier (prediction compactBinaryPrediction) ≡ theoryIdentity
-    nanohertzTheoryIdentityMatches :
-      Pred.theoryCarrier (prediction nanohertzTimingPrediction) ≡ theoryIdentity
-    cosmologicalTheoryIdentityMatches :
-      Pred.theoryCarrier (prediction cosmologicalPropagationPrediction) ≡ theoryIdentity
+    freeFallTheoryIdentityMatches : Pred.theoryCarrier (prediction laboratoryFreeFallPrediction) ≡ theoryIdentity
+    clockTheoryIdentityMatches : Pred.theoryCarrier (prediction laboratoryClockPrediction) ≡ theoryIdentity
+    orbitalTheoryIdentityMatches : Pred.theoryCarrier (prediction orbitalTimingPrediction) ≡ theoryIdentity
+    compactBinaryTheoryIdentityMatches : Pred.theoryCarrier (prediction compactBinaryPrediction) ≡ theoryIdentity
+    nanohertzTheoryIdentityMatches : Pred.theoryCarrier (prediction nanohertzTimingPrediction) ≡ theoryIdentity
+    cosmologicalTheoryIdentityMatches : Pred.theoryCarrier (prediction cosmologicalPropagationPrediction) ≡ theoryIdentity
 
-    freeFallTheoryFamilyMatches :
-      Pred.theoryFamily (prediction laboratoryFreeFallPrediction) ≡ theoryFamily
-    clockTheoryFamilyMatches :
-      Pred.theoryFamily (prediction laboratoryClockPrediction) ≡ theoryFamily
-    orbitalTheoryFamilyMatches :
-      Pred.theoryFamily (prediction orbitalTimingPrediction) ≡ theoryFamily
-    compactBinaryTheoryFamilyMatches :
-      Pred.theoryFamily (prediction compactBinaryPrediction) ≡ theoryFamily
-    nanohertzTheoryFamilyMatches :
-      Pred.theoryFamily (prediction nanohertzTimingPrediction) ≡ theoryFamily
-    cosmologicalTheoryFamilyMatches :
-      Pred.theoryFamily (prediction cosmologicalPropagationPrediction) ≡ theoryFamily
-
+    freeFallTheoryFamilyMatches : Pred.theoryFamily (prediction laboratoryFreeFallPrediction) ≡ theoryFamily
+    clockTheoryFamilyMatches : Pred.theoryFamily (prediction laboratoryClockPrediction) ≡ theoryFamily
+    orbitalTheoryFamilyMatches : Pred.theoryFamily (prediction orbitalTimingPrediction) ≡ theoryFamily
+    compactBinaryTheoryFamilyMatches : Pred.theoryFamily (prediction compactBinaryPrediction) ≡ theoryFamily
+    nanohertzTheoryFamilyMatches : Pred.theoryFamily (prediction nanohertzTimingPrediction) ≡ theoryFamily
+    cosmologicalTheoryFamilyMatches : Pred.theoryFamily (prediction cosmologicalPropagationPrediction) ≡ theoryFamily
 open MultiScaleTheoryFingerprint public
 
 ------------------------------------------------------------------------
--- Cross-scale residuals and promotion boundary.
+-- Evaluated fingerprint: six comparisons must be comparisons of the exact six
+-- prediction slots above.  Merely collecting six comparison receipts is weaker.
 ------------------------------------------------------------------------
+
+record MultiScaleTheoryEvaluation : Set where
+  constructor multi-scale-theory-evaluation
+  field
+    fingerprint : MultiScaleTheoryFingerprint
+    laboratoryFreeFallComparison : ScaleComparison
+    laboratoryClockComparison : ScaleComparison
+    orbitalTimingComparison : ScaleComparison
+    compactBinaryComparison : ScaleComparison
+    nanohertzTimingComparison : ScaleComparison
+    cosmologicalPropagationComparison : ScaleComparison
+
+    freeFallComparisonMatchesFingerprint :
+      scalePrediction laboratoryFreeFallComparison ≡ laboratoryFreeFallPrediction fingerprint
+    clockComparisonMatchesFingerprint :
+      scalePrediction laboratoryClockComparison ≡ laboratoryClockPrediction fingerprint
+    orbitalComparisonMatchesFingerprint :
+      scalePrediction orbitalTimingComparison ≡ orbitalTimingPrediction fingerprint
+    compactBinaryComparisonMatchesFingerprint :
+      scalePrediction compactBinaryComparison ≡ compactBinaryPrediction fingerprint
+    nanohertzComparisonMatchesFingerprint :
+      scalePrediction nanohertzTimingComparison ≡ nanohertzTimingPrediction fingerprint
+    cosmologicalComparisonMatchesFingerprint :
+      scalePrediction cosmologicalPropagationComparison ≡ cosmologicalPropagationPrediction fingerprint
+open MultiScaleTheoryEvaluation public
 
 data MultiScaleResidual : Set where
   missingObservationScaleContext : MultiScaleResidual
   missingExactScaleSlotReceipt : MultiScaleResidual
   missingSameTheoryIdentityReceipt : MultiScaleResidual
   missingSameTheoryFamilyReceipt : MultiScaleResidual
+  missingEvaluationFingerprintWeld : MultiScaleResidual
   missingLaboratoryFreeFallComparison : MultiScaleResidual
   missingLaboratoryClockComparison : MultiScaleResidual
   missingOrbitalTimingComparison : MultiScaleResidual
@@ -148,6 +137,8 @@ record MultiScaleTheoryBoundary : Set where
     observationScaleContextRequired : Bool
     namedSlotAutomaticallyFixesScale : Bool
     exactScaleIdentityRequiredForEverySlot : Bool
+    sixComparisonReceiptsAutomaticallyFormOneFingerprintEvaluation : Bool
+    evaluationMustWeldEveryComparisonToFingerprint : Bool
     oneScaleAgreementEstablishesAllScaleAgreement : Bool
     laboratoryAnomalyAutomaticallyInvalidatesGWAgreement : Bool
     gwAgreementAutomaticallyClosesLaboratoryResidual : Bool
@@ -160,15 +151,10 @@ record MultiScaleTheoryBoundary : Set where
 canonicalMultiScaleTheoryBoundary : MultiScaleTheoryBoundary
 canonicalMultiScaleTheoryBoundary =
   multi-scale-theory-boundary
-    false true false true false false false true true false true false
-
-------------------------------------------------------------------------
--- Exact introspective collision: same detector channel, different scale.
-------------------------------------------------------------------------
+    false true false true false true false false false true true false true false
 
 compactBinaryAndCosmologicalChannelsCollide :
-  requiredChannelForScale compactBinaryScale
-    ≡ requiredChannelForScale cosmologicalPropagationScale
+  requiredChannelForScale compactBinaryScale ≡ requiredChannelForScale cosmologicalPropagationScale
 compactBinaryAndCosmologicalChannelsCollide = refl
 
 compactBinaryAndCosmologicalScalesDistinct :
@@ -176,16 +162,13 @@ compactBinaryAndCosmologicalScalesDistinct :
 compactBinaryAndCosmologicalScalesDistinct ()
 
 laboratoryAndCompactBinaryChannelsDistinct :
-  requiredChannelForScale laboratoryFreeFallScale
-    ≡ requiredChannelForScale compactBinaryScale → ⊥
+  requiredChannelForScale laboratoryFreeFallScale ≡ requiredChannelForScale compactBinaryScale → ⊥
 laboratoryAndCompactBinaryChannelsDistinct ()
 
 compactBinaryAndNanohertzChannelsDistinct :
-  requiredChannelForScale compactBinaryScale
-    ≡ requiredChannelForScale nanohertzTimingScale → ⊥
+  requiredChannelForScale compactBinaryScale ≡ requiredChannelForScale nanohertzTimingScale → ⊥
 compactBinaryAndNanohertzChannelsDistinct ()
 
 clockAndFreeFallChannelsDistinct :
-  requiredChannelForScale laboratoryClockScale
-    ≡ requiredChannelForScale laboratoryFreeFallScale → ⊥
+  requiredChannelForScale laboratoryClockScale ≡ requiredChannelForScale laboratoryFreeFallScale → ⊥
 clockAndFreeFallChannelsDistinct ()
