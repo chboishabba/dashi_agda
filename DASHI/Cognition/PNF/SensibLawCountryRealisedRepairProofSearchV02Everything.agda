@@ -6,6 +6,7 @@ import DASHI.Cognition.PNF.SensibLawCountryRealisedRepairTwoEyedPosiwidV02Everyt
 import DASHI.Cognition.PNF.SensibLawCountryRealisedRepairProofSearchBridgeV02Exact as Bridge
 import DASHI.Cognition.PNF.SensibLawCountryRealisedRepairCalibrationV02Exact as Repair
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
+import DASHI.Law.SensibLawProofSearchResultAssessmentExact as Assessment
 
 ------------------------------------------------------------------------
 -- Preferred V02 executable capstone.
@@ -36,14 +37,12 @@ currentFirstSearchExploresCommunityVocabulary = refl
 
 assessedCommunityOutcomeCandidateRecomputesCalibration :
   Bridge.recomputeActionFor
-    (DASHI.Law.SensibLawProofSearchResultAssessmentExact.change
-      Bridge.communityOutcomeCandidateDeltaV02)
+    (Assessment.change Bridge.communityOutcomeCandidateDeltaV02)
   ≡ Bridge.recomputeV02Calibration
 assessedCommunityOutcomeCandidateRecomputesCalibration = refl
 
 communityOutcomeCandidateDoesNotSkipAuthority :
-  DASHI.Law.SensibLawProofSearchResultAssessmentExact.firstResidualAfterReference
-    Bridge.communityOutcomeCandidateDeltaV02
+  Assessment.firstResidualAfterReference Bridge.communityOutcomeCandidateDeltaV02
   ≡ "communityAuthorityCapacityResidualV02"
 communityOutcomeCandidateDoesNotSkipAuthority = refl
 
