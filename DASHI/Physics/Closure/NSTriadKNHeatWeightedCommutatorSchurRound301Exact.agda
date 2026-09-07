@@ -7,7 +7,7 @@ module DASHI.Physics.Closure.NSTriadKNHeatWeightedCommutatorSchurRound301Exact w
 -- a multiple of ||F_s||^2. The literal F_s must remain the swap-invariant
 -- heat-weighted R294 mixed commutator, not a generic commutator proxy.
 --
--- STATUS CORRECTION AFTER R342--R355 AND R434--R435
+-- STATUS CORRECTION AFTER R342--R355 AND R434--R437
 -- -------------------------------------------------
 -- The original R301 prose said deep FL and deep HH were already E*D-payable.
 -- R434 now records the correct distinction: R234/R235 own the relevant scalar
@@ -25,18 +25,25 @@ module DASHI.Physics.Closure.NSTriadKNHeatWeightedCommutatorSchurRound301Exact w
 --   inner physical Galerkin fibre a+b=p,
 --   inner a/b swap pairing to the R120 multiplier-difference commutator.
 --
--- R435 now makes one previously implicit structural step proof-bearing:
+-- R435 makes one previously implicit inner structural step proof-bearing:
 -- under the SAME all-inner-helical witness required by R310,
 --
 --   K(P,Q,N_p+N_p,v)
 --     = fold_{a+b=p} K(P,Q,pureCommutator_ab,v).
 --
--- No orbit division or cardinality factor is introduced. This does not promote
--- the all-inner-helical witness to arbitrary trajectories and does not itself
--- pay the weighted commutator.
+-- R436/R437 close the distinct outer orientation seam WITHOUT any all-inner-
+-- helical assumption. On an all-mode transverse physical velocity field every
+-- projected-forcing outer cell is classified exactly as either
 --
--- R311/R312 then split the inner geometry. Later R314--R327 refine the search
--- to the oriented 4 x 4 route matrix and close the strongly-low heterochiral-HH
+--   p != 0 : the literal R307/R167 slot-kernel identity, or
+--   p  = 0 : projectedNonlinearity(p)=0 and the doubled R230 cell is zero.
+--
+-- Thus normalizedDirection is never requested at zero and the old p=0
+-- exception is removed before norms. This still does not pay the weighted R294
+-- fold or the R423 spacetime budget.
+--
+-- R311/R312 split the inner geometry. Later R314--R327 refine the search to the
+-- oriented 4 x 4 route matrix and close the strongly-low heterochiral-HH
 -- exponent/cell-level gates. R342--R355 subsequently close the generic finite
 -- incidence, weighted-Schur, resolvent, signed-flux and Package-A COMPILERS.
 -- Those later owners depend downstream on R301, so they are documented here
@@ -55,6 +62,7 @@ import DASHI.Physics.Closure.NSTriadKNNestedCriticalConeShellKernelRound313Exact
 import DASHI.Physics.Closure.NSTriadKNHeatWeightedNestedFiniteSchurCertificateRound346Exact as R346
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCriticalConeCompilerRound434Exact as R434
 import DASHI.Physics.Closure.NSTriadKNNestedInnerForcingAggregationRound435Exact as R435
+import DASHI.Physics.Closure.NSTriadKNProjectedForcingOuterCellExhaustiveRound437Exact as R437
 
 ------------------------------------------------------------------------
 -- Proof-search dispositions of the candidate x-pollinations.
@@ -128,6 +136,18 @@ round301R435AllInnerHelicalTrajectoryWeldClosed : Bool
 round301R435AllInnerHelicalTrajectoryWeldClosed =
   R435.round435ArbitraryPhysicalTrajectoryAllInnerHelicalWeldClosed
 
+round301ProjectedForcingOuterCellsExhaustivelySlotOrZero : Bool
+round301ProjectedForcingOuterCellsExhaustivelySlotOrZero =
+  R437.round437EveryOuterCellClassifiedSlotOrZero
+
+round301ZeroForcingLegDiscardedBeforeNorm : Bool
+round301ZeroForcingLegDiscardedBeforeNorm =
+  R437.round437ZeroForcingLegDiscardedBeforeNorm
+
+round301NormalizedDirectionAtZeroRequired : Bool
+round301NormalizedDirectionAtZeroRequired =
+  R437.round437NormalizedDirectionAtZeroRequired
+
 round301DeepFarLowPhysicalWeldClosed : Bool
 round301DeepFarLowPhysicalWeldClosed =
   R434.round434DeepFarLowPhysicalWeldClosed
@@ -180,6 +200,16 @@ round301R435AllInnerHelicalTrajectoryWeldClosedIsFalse :
   round301R435AllInnerHelicalTrajectoryWeldClosed ≡ false
 round301R435AllInnerHelicalTrajectoryWeldClosedIsFalse =
   R435.round435ArbitraryPhysicalTrajectoryAllInnerHelicalWeldClosedIsFalse
+
+round301ProjectedForcingOuterCellsExhaustivelySlotOrZeroIsTrue :
+  round301ProjectedForcingOuterCellsExhaustivelySlotOrZero ≡ true
+round301ProjectedForcingOuterCellsExhaustivelySlotOrZeroIsTrue =
+  R437.round437EveryOuterCellClassifiedSlotOrZeroIsTrue
+
+round301NormalizedDirectionAtZeroRequiredIsFalse :
+  round301NormalizedDirectionAtZeroRequired ≡ false
+round301NormalizedDirectionAtZeroRequiredIsFalse =
+  R437.round437NormalizedDirectionAtZeroRequiredIsFalse
 
 round301DeepFarLowPhysicalWeldClosedIsFalse :
   round301DeepFarLowPhysicalWeldClosed ≡ false
