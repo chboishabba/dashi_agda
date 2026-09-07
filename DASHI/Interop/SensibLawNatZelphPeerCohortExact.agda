@@ -7,13 +7,18 @@ open import Agda.Builtin.String using (String)
 import DASHI.Interop.ExternalContextSafetyBoundary as Safety
 import DASHI.Interop.GovernedResidualOntologyLearning as Learning
 import DASHI.Interop.ZelphBoundedGraphCoverageExact as Zelph
+import DASHI.Interop.SensibLawWikidataItemPropertyEvidenceExact as ItemEvidence
 
 ------------------------------------------------------------------------
 -- Nat P5991 -> P14143 peer-cohort residual.
 --
--- Runtime donor: SensibLaw's DomainPressureAssessment currently carries a
--- peer_cohort residual which remains unresolved until independently reviewed
--- conforming members and coverage-qualified graph evidence exist.
+-- Runtime parity:
+--   ItemPropertyEvidenceSurface + DomainInvariantSnapshot
+--     -> conditioned peer-cohort residual.
+--
+-- The item surface retains actual property inventory, property-family coverage,
+-- statement GUID/rank/visibility, qualifier/scope receipts and asserted/derived
+-- relation origin before cohort comparison occurs.
 ------------------------------------------------------------------------
 
 data PeerResidualState : Set where
@@ -22,11 +27,22 @@ data PeerResidualState : Set where
 data PeerComparisonStatus : Set where
   peerAdmissible peerMasked peerUnknown peerInadmissible : PeerComparisonStatus
 
+record NatItemPeerInput : Set where
+  constructor nat-item-peer-input
+  field
+    candidateReference : String
+    itemEvidence : ItemEvidence.ItemPropertyEvidenceSurface
+    domainInvariantReference : String
+    trustedCohortReference : String
+    trustedMemberCountReference : String
+open NatItemPeerInput public
+
 record NatPeerCohortAssessment : Set where
   constructor nat-peer-cohort-assessment
   field
     candidateReference : String
     sourceRevisionReference : String
+    itemEvidenceReference : String
     domainInvariantReference : String
     graphCoverage : Zelph.QueryCoverageReceipt
     trustedCohortReference : String
@@ -59,7 +75,6 @@ invalidCoverageKeepsPeerUnresolved = refl
 
 ------------------------------------------------------------------------
 -- Governed cohort admission is inherited from the generic learning owner.
--- Held/unresolved/incomplete members cannot train the empirical invariant.
 ------------------------------------------------------------------------
 
 heldMemberDoesNotTrainNatInvariant :
@@ -76,13 +91,18 @@ coverageIncompleteMemberDoesNotTrainNatInvariant =
   Learning.coverageIncompleteDoesNotTrainInvariant
 
 ------------------------------------------------------------------------
--- Firewalls.
+-- Item/property provenance cannot be discarded before peer comparison.
 ------------------------------------------------------------------------
 
+data FlattenedPeerLabelsReplaceItemEvidence : Set where
 data ExactPeerResidualImpliesMigrationSafe : Set where
 data ExactPeerResidualImpliesP5991EqualsP14143 : Set where
 data CohortMajorityCreatesPolicyAuthority : Set where
 data ExternalGraphIdentityCreatesNatRole : Set where
+
+flattenedPeerLabelsDoNotReplaceItemEvidence :
+  FlattenedPeerLabelsReplaceItemEvidence → ⊥
+flattenedPeerLabelsDoNotReplaceItemEvidence ()
 
 exactPeerResidualDoesNotProveMigrationSafety :
   ExactPeerResidualImpliesMigrationSafe → ⊥
@@ -103,8 +123,11 @@ externalGraphIdentityDoesNotCreateNatRole ()
 record NatPeerCohortBoundary : Set where
   constructor nat-peer-cohort-boundary
   field
+    itemEvidencePrecedesPeerComparison : Bool
+    propertyConditionsPreservedIntoPeerFeatures : Bool
     incompleteCoverageKeepsResidualUnresolved : Bool
     trustedMembersRequireGovernedAdmission : Bool
+    flattenedLabelsReplaceItemEvidence : Bool
     exactResidualCreatesMigrationSafety : Bool
     exactResidualEquatesSourceAndTargetProperty : Bool
     cohortMajorityCreatesPolicy : Bool
@@ -112,8 +135,8 @@ record NatPeerCohortBoundary : Set where
 
 canonicalNatPeerCohortBoundary : NatPeerCohortBoundary
 canonicalNatPeerCohortBoundary =
-  nat-peer-cohort-boundary true true false false false false
+  nat-peer-cohort-boundary true true true true false false false false false
 
 natPeerCohortStatement : String
 natPeerCohortStatement =
-  "Nat peer-cohort evidence may become exact, partial or contradictory only after bounded query coverage and governed reviewed-cohort admission. Incomplete/invalid coverage remains unresolved. Even exact peer agreement is diagnostic only: it does not prove migration safety, equate P5991 with P14143, create policy authority, or edit Wikidata."
+  "Nat peer-cohort comparison consumes revision-bound item/property evidence rather than detached peer labels. Actual property inventory, per-property coverage, statement GUID/rank/visibility, qualifier/scope state and relation origin remain conditioned coordinates. Incomplete coverage remains unresolved; governed reviewed members alone train the empirical invariant. Even exact peer agreement is diagnostic only and does not prove migration safety, equate P5991 with P14143, create policy authority, or edit Wikidata."
