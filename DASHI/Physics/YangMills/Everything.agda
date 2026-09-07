@@ -192,12 +192,20 @@ import DASHI.Physics.YangMills.BalabanClayT1IntrospectiveBindingRound211Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound210Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound211Exact
 
--- Preferred literal source-realization route after introspective same-object
--- elimination: BC1 is built directly from the Round108 continuation, and the
--- Row-A scalar q<1 gate is compiler-owned once the literal response producer is
--- instantiated. Round212 records the resulting source-level first missing cut.
+-- Compatibility source-realization route retained after introspection.
 import DASHI.Physics.YangMills.BalabanR108BackedPresentCutActionExact
 import DASHI.Physics.YangMills.BalabanPreferredSourceRealizationFrontierRound212Exact
+
+-- Preferred CMP119-native source route.  The raw source state carries the
+-- literal rho/U/E/R/B/A family; its running coupling is the finite beta-history
+-- coupling by construction. CMP122 supplies active Sect.-2 predicates, and BC1
+-- is built directly from the regular E_k sector rather than the whole A_k.
+import DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExact
+import DASHI.Physics.YangMills.BalabanCMP122Theorem1ToRawCMP119ActiveExact
+import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119RawStateRound216Exact
+import DASHI.Physics.YangMills.BalabanCMP119RegularSectorCMP109116Round215Exact
+import DASHI.Physics.YangMills.BalabanCMP119RegularSectorBC1Round215Exact
+import DASHI.Physics.YangMills.BalabanPreferredRawSourceFrontierRound216Exact
 
 import DASHI.Physics.YangMills.BalabanPath13Eq119SourceRouteProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119BishopBridgeProvenanceExact
