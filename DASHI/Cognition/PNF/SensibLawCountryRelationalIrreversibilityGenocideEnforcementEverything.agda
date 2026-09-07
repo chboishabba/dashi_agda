@@ -6,19 +6,20 @@ import DASHI.Cognition.PNF.SensibLawCountryRelationalIrreversibilityEverything a
 import DASHI.Cognition.PNF.SensibLawCountryGenocideWrongTypeEnforcementEverything as GenocideEnforcement
 import DASHI.Cognition.PNF.SensibLawGenocideConventionWrongTypeBidiExact as Wrong
 import DASHI.Cognition.PNF.SensibLawGenocideEnforcementMeansBidiExact as Enforce
+import DASHI.Cognition.PNF.SensibLawCountrySystemRealisedJusticeBidiExact as Justice
 
 ------------------------------------------------------------------------
 -- Existing Country/relational irreversibility state remains primary.
 ------------------------------------------------------------------------
 
 landCountryControlStillOpen :
-  Country.Justice.currentOperationalJusticeState Country.Justice.landAndCountryControl
-  ≡ Country.Justice.residualOpen
+  Justice.currentOperationalJusticeState Justice.landAndCountryControl
+  ≡ Justice.residualOpen
 landCountryControlStillOpen = refl
 
 compensationReparationStillOpen :
-  Country.Justice.currentOperationalJusticeState Country.Justice.compensationAndReparation
-  ≡ Country.Justice.residualOpen
+  Justice.currentOperationalJusticeState Justice.compensationAndReparation
+  ≡ Justice.residualOpen
 compensationReparationStillOpen = refl
 
 ------------------------------------------------------------------------
