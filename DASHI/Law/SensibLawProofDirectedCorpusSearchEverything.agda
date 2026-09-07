@@ -26,6 +26,7 @@ import DASHI.Law.SensibLawHistoricalLegalResearchOperatorExact as Historical
 import DASHI.Law.SensibLawProofGapExecutableSearchCompilerExact as Compiler
 import DASHI.Law.SensibLawIterativeProofSearchStateMachineExact as Iterative
 import DASHI.Law.SensibLawMaboPabaiExecutableProofSearchExact as Fixture
+import DASHI.Law.SensibLawOfflinePabaiLoopRustReceiptV01Exact as RustReceipt
 
 ------------------------------------------------------------------------
 -- PROOF-DIRECTED CORPUS NAVIGATION CAPSTONE
@@ -44,6 +45,9 @@ import DASHI.Law.SensibLawMaboPabaiExecutableProofSearchExact as Fixture
 --   -> proof payment / frontier delta
 --   -> costed iterative Pareto continuation or saturation
 --   -> memoised world-model extension
+--
+-- The exact Rust offline Pabai receipt is pinned separately as a bounded runtime
+-- witness and never upgrades candidate-only runtime output into Agda authority.
 ------------------------------------------------------------------------
 
 record ProofDirectedCorpusSearchContract : Set where
@@ -107,8 +111,12 @@ record ProofDirectedCorpusSearchContract : Set where
     maboAndPabaiAreSearchCalibrations : Bool
     maboAndPabaiAreSearchCalibrationsIsTrue : maboAndPabaiAreSearchCalibrations ≡ true
 
+    exactRustOfflineReceiptPinned : Bool
+    exactRustOfflineReceiptPinnedIsTrue : exactRustOfflineReceiptPinned ≡ true
+
 canonicalProofDirectedCorpusSearchContract : ProofDirectedCorpusSearchContract
 canonicalProofDirectedCorpusSearchContract = proofDirectedCorpusSearchContract
+  true refl
   true refl
   true refl
   true refl
@@ -198,6 +206,12 @@ selectedIterativeBoundary = Iterative.canonicalIterativeProofSearchBoundary
 selectedMaboPabaiBoundary : Fixture.MaboPabaiSearchBoundary
 selectedMaboPabaiBoundary = Fixture.canonicalMaboPabaiSearchBoundary
 
+selectedRustReceiptBoundary : RustReceipt.OfflinePabaiRustReceiptBoundary
+selectedRustReceiptBoundary = RustReceipt.canonicalOfflinePabaiRustReceiptBoundary
+
+selectedRustReceipt : RustReceipt.OfflinePabaiLoopReceiptV01
+selectedRustReceipt = RustReceipt.canonicalOfflinePabaiLoopReceiptV01
+
 ------------------------------------------------------------------------
 -- Canonical no-collapse laws.
 ------------------------------------------------------------------------
@@ -214,6 +228,7 @@ data RepeatedPublicationAutomaticallyIndependentTruth : Set where
 data HistoricalSparseSearchEqualsFinalWorldModel : Set where
 data ExecutableQueryCompilerMayBypassAssessment : Set where
 data CheapestExecutionAutomaticallyBestProofSearch : Set where
+data RustRuntimeReceiptAutomaticallyFormalProof : Set where
 
 searchResultDoesNotEqualTruth : SearchResultEqualsTruth → ⊥
 searchResultDoesNotEqualTruth ()
@@ -254,3 +269,7 @@ queryCompilerDoesNotBypassAssessment ()
 cheapestExecutionDoesNotAutomaticallyWin :
   CheapestExecutionAutomaticallyBestProofSearch → ⊥
 cheapestExecutionDoesNotAutomaticallyWin ()
+
+rustRuntimeReceiptDoesNotBecomeFormalProof :
+  RustRuntimeReceiptAutomaticallyFormalProof → ⊥
+rustRuntimeReceiptDoesNotBecomeFormalProof ()
