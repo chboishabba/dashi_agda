@@ -8,6 +8,7 @@ open import Agda.Builtin.Nat using (Nat)
 import DASHI.Physics.YangMills.BalabanSU2GeometryQ0Bundle
 import DASHI.Physics.YangMills.BalabanFiniteOneStepFrontierBundle
 import DASHI.Physics.YangMills.YMOperatorDomainContinuumFrontier2026Exact as Frontier
+import DASHI.Physics.YangMills.BalabanCMP98Path13CurrentPreferredSourceFrontierExact as CurrentEq119
 
 open import DASHI.Geometry.Gauge.SUNPrimitives
 open import DASHI.Geometry.Gauge.SUNLane
@@ -22,10 +23,11 @@ open import DASHI.Physics.YangMills.O4RestorationLane
 ------------------------------------------------------------------------
 -- Authoritative route composition.
 --
--- This route consumes both prover lanes and the older Agda theorem owners.
--- Generic generator/null/carrier/gap compilers are no longer blockers.  The
--- remaining blockers are the physical producers that instantiate those
--- compilers on the literal continuum Yang--Mills object.
+-- Historical Eq. (119) coordinates remain for compatibility, but the route now
+-- also owns the newest source-correct preferred frontier directly.  That
+-- frontier includes the R148/R153 printed-role correction, T3 right-Jacobian
+-- x-pollination, minimal R208 scalar boundary, and split Path13-physical / R171
+-- standard representation architecture.
 ------------------------------------------------------------------------
 
 record YMMassGapRoute (N : Nat) : Setω where
@@ -40,6 +42,12 @@ record YMMassGapRoute (N : Nat) : Setω where
     o4Restoration : O4RestorationLane
     operatorContinuumFrontier : Frontier.YMOperatorContinuumFrontier
 
+    -- Newest theorem-strength Eq. (119) source frontier.
+    currentEq119Frontier : CurrentEq119.CurrentPreferredEq119FrontierStatus
+    currentPreferredEq119CompilerClosed : Bool
+    currentPreferredPhysicalEq119Closed : Bool
+
+    -- Historical compatibility coordinates.
     eq119CompilerThroughRound184Available : Bool
     eq119PhysicalPeriodicRealizationRound187Closed : Bool
     eq119RawUnitPathHomomorphismRound189Closed : Bool
@@ -75,6 +83,11 @@ record YMMassGapRoute (N : Nat) : Setω where
     witten : Bool
     qit : Bool
     clayYangMillsPromotedRoute : Bool
+
+    currentPreferredEq119CompilerClosedIsTrue :
+      currentPreferredEq119CompilerClosed ≡ true
+    currentPreferredPhysicalEq119ClosedIsFalse :
+      currentPreferredPhysicalEq119Closed ≡ false
 
     eq119CompilerThroughRound184AvailableIsTrue :
       eq119CompilerThroughRound184Available ≡ true
@@ -137,6 +150,14 @@ canonicalYMMassGapRoute N = record
   ; o4Restoration = canonicalO4RestorationLane
   ; operatorContinuumFrontier = Frontier.canonicalYMOperatorContinuumFrontier
 
+  ; currentEq119Frontier = CurrentEq119.canonicalCurrentPreferredEq119FrontierStatus
+  ; currentPreferredEq119CompilerClosed =
+      CurrentEq119.finalSplitT3Eq119CompilerClosed
+        CurrentEq119.canonicalCurrentPreferredEq119FrontierStatus
+  ; currentPreferredPhysicalEq119Closed =
+      CurrentEq119.physicalEq119Closed
+        CurrentEq119.canonicalCurrentPreferredEq119FrontierStatus
+
   ; eq119CompilerThroughRound184Available = Frontier.cmp98Equation119CompilerThroughRound184Closed Frontier.canonicalYMOperatorContinuumFrontier
   ; eq119PhysicalPeriodicRealizationRound187Closed = Frontier.cmp98PhysicalPeriodicRealizationRound187Closed Frontier.canonicalYMOperatorContinuumFrontier
   ; eq119RawUnitPathHomomorphismRound189Closed = Frontier.cmp98RawUnitPathHomomorphismRound189Closed Frontier.canonicalYMOperatorContinuumFrontier
@@ -173,6 +194,10 @@ canonicalYMMassGapRoute N = record
   ; qit = false
   ; clayYangMillsPromotedRoute = false
 
+  ; currentPreferredEq119CompilerClosedIsTrue =
+      CurrentEq119.finalSplitT3Eq119CompilerClosedIsTrue
+  ; currentPreferredPhysicalEq119ClosedIsFalse =
+      CurrentEq119.physicalEq119ClosedIsFalse
   ; eq119CompilerThroughRound184AvailableIsTrue = refl
   ; eq119PhysicalPeriodicRealizationRound187ClosedIsTrue = refl
   ; eq119RawUnitPathHomomorphismRound189ClosedIsTrue = refl
