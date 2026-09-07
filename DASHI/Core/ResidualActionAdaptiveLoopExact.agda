@@ -9,14 +9,16 @@ import DASHI.Core.MechanismModelDiscriminationExact as Model
 import DASHI.Core.ResidualActionPolicyExact as Action
 import DASHI.Core.AdaptiveConsumerModelLoopExact as ConsumerLoop
 import DASHI.Core.AdaptiveMechanismDiscriminationPlannerExact as Planner
+import DASHI.Core.AppendOnlyEvidenceResidualRevisionExact as Revision
+import DASHI.Core.ResidualActionSalienceExact as Salience
 
 ------------------------------------------------------------------------
 -- ADAPTIVE RESIDUAL-ACTION FEEDBACK LOOP
 --
 -- The action layer is not terminal.  A measurement, perturbation, hold,
 -- reopening, acceptance or refutation changes what must be observed next.
--- This owner makes that feedback explicit while preserving the existing
--- evidence-update and consumer-relative stopping architecture.
+-- Evidence history may be append-only while residual/action conclusions remain
+-- non-monotone, and the salience of a residual remains consumer-relative.
 ------------------------------------------------------------------------
 
 data ActionOutcomeClass : Set where
@@ -88,6 +90,17 @@ record ResidualConditionedContinuation : Set₂ where
 
 open ResidualConditionedContinuation public
 
+------------------------------------------------------------------------
+-- Explicit BIDI seam: the loop consumes the append-only-history and salience
+-- boundaries rather than silently assuming confidence/action monotonicity.
+------------------------------------------------------------------------
+
+existingAppendOnlyRevisionBoundary : Revision.AppendOnlyEvidenceRevisionBoundary
+existingAppendOnlyRevisionBoundary = Revision.canonicalAppendOnlyEvidenceRevisionBoundary
+
+existingResidualSalienceBoundary : Salience.ResidualActionSalienceBoundary
+existingResidualSalienceBoundary = Salience.canonicalResidualActionSalienceBoundary
+
 record ResidualActionAdaptiveLoopBoundary : Set where
   constructor residualActionAdaptiveLoopBoundary
   field
@@ -115,11 +128,21 @@ record ResidualActionAdaptiveLoopBoundary : Set where
     evidenceUpdateNeedNotReopenUnrelatedCarriersIsTrue :
       evidenceUpdateNeedNotReopenUnrelatedCarriers ≡ true
 
+    appendOnlyEvidenceNeedNotMakeActionMonotone : Bool
+    appendOnlyEvidenceNeedNotMakeActionMonotoneIsTrue :
+      appendOnlyEvidenceNeedNotMakeActionMonotone ≡ true
+
+    residualSalienceMayChangeWithConsumer : Bool
+    residualSalienceMayChangeWithConsumerIsTrue :
+      residualSalienceMayChangeWithConsumer ≡ true
+
 canonicalResidualActionAdaptiveLoopBoundary : ResidualActionAdaptiveLoopBoundary
 canonicalResidualActionAdaptiveLoopBoundary =
   residualActionAdaptiveLoopBoundary
     false refl
     false refl
+    true refl
+    true refl
     true refl
     true refl
     true refl
