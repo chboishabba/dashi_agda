@@ -10,6 +10,7 @@ data GravitationalObservationChannel : Set where
   laserInterferometricStrain : GravitationalObservationChannel
   pulsarTimingResidual : GravitationalObservationChannel
   orbitalDecayTiming : GravitationalObservationChannel
+  staticLoadOrWeight : GravitationalObservationChannel
   freeFallEquivalence : GravitationalObservationChannel
   clockOrRedshift : GravitationalObservationChannel
   localTestMassAcceleration : GravitationalObservationChannel
@@ -18,6 +19,7 @@ data GravitationalObservable : Set where
   dimensionlessStrain : GravitationalObservable
   correlatedArrivalTimeResidual : GravitationalObservable
   orbitalPeriodDerivative : GravitationalObservable
+  staticForceOrWeightResidual : GravitationalObservable
   differentialAcceleration : GravitationalObservable
   frequencyRatioShift : GravitationalObservable
   localAccelerationResidual : GravitationalObservable
@@ -26,6 +28,7 @@ observableFor : GravitationalObservationChannel → GravitationalObservable
 observableFor laserInterferometricStrain = dimensionlessStrain
 observableFor pulsarTimingResidual = correlatedArrivalTimeResidual
 observableFor orbitalDecayTiming = orbitalPeriodDerivative
+observableFor staticLoadOrWeight = staticForceOrWeightResidual
 observableFor freeFallEquivalence = differentialAcceleration
 observableFor clockOrRedshift = frequencyRatioShift
 observableFor localTestMassAcceleration = localAccelerationResidual
@@ -52,6 +55,7 @@ record GravitationalObservationBoundary : Set where
     rawDetectorOutputIsCalibratedStrain : Bool
     calibratedStrainAloneIdentifiesAstrophysicalSource : Bool
     timingResidualAloneProvesGravitationalWaveBackground : Bool
+    staticWeightEqualsFreeFallObservable : Bool
     waveformAgreementAloneProvesGRUniquelyTrue : Bool
     detectorCalibrationAndNoiseModelRequired : Bool
     independentSourceModelComparisonRequired : Bool
@@ -63,7 +67,7 @@ record GravitationalObservationBoundary : Set where
 canonicalGravitationalObservationBoundary : GravitationalObservationBoundary
 canonicalGravitationalObservationBoundary =
   gravitational-observation-boundary
-    false false false false true true true true true false
+    false false false false false true true true true true false
 
 data ObservationResidual : Set where
   missingAttributedCarrier : ObservationResidual
@@ -98,6 +102,11 @@ pulsarTimingCutset =
   observation-reverse-cutset
     pulsarTimingResidual correlatedArrivalTimeResidual refl true true true true true
 
+staticWeightCutset : ObservationReverseCutset
+staticWeightCutset =
+  observation-reverse-cutset
+    staticLoadOrWeight staticForceOrWeightResidual refl true true true true true
+
 laserAndPulsarObservablesDistinct :
   observableFor laserInterferometricStrain ≡ observableFor pulsarTimingResidual → ⊥
 laserAndPulsarObservablesDistinct ()
@@ -105,6 +114,10 @@ laserAndPulsarObservablesDistinct ()
 freeFallAndStrainObservablesDistinct :
   observableFor freeFallEquivalence ≡ observableFor laserInterferometricStrain → ⊥
 freeFallAndStrainObservablesDistinct ()
+
+staticWeightAndFreeFallObservablesDistinct :
+  observableFor staticLoadOrWeight ≡ observableFor freeFallEquivalence → ⊥
+staticWeightAndFreeFallObservablesDistinct ()
 
 ------------------------------------------------------------------------
 -- Positive current status is represented by source-entitled claim receipts.
