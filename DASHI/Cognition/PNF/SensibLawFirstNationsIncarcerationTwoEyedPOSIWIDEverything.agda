@@ -11,8 +11,10 @@ module DASHI.Cognition.PNF.SensibLawFirstNationsIncarcerationTwoEyedPOSIWIDEvery
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.OperationalSystemBehaviourSemanticsExact as POSIWID
+import DASHI.Core.PluralOperationalRealisationDiscrepancyExact as Discrepancy
 import DASHI.Cognition.PNF.SensibLawFirstNationsIncarcerationSourceAtlasExact as Sources
 import DASHI.Cognition.PNF.SensibLawFirstNationsIncarcerationOperationalDiscrepancyExact as Incarceration
 import DASHI.Cognition.PNF.SensibLawCountryCommunityAuthorityFirstCorrectionExact as Correction
@@ -21,8 +23,7 @@ import DASHI.Cognition.PNF.SensibLawCountryCommunityAuthorityFirstCorrectionExac
 -- Source atlas and realised-operation discrepancy.
 ------------------------------------------------------------------------
 
-sourceCountIsSix :
-  DASHI.Core.AttributedSourceCore.sourceCount Sources.allSources ≡ 6
+sourceCountIsSix : Source.sourceCount Sources.allSources ≡ 6
 sourceCountIsSix = refl
 
 declaredTargetDoesNotDetermineRealisedTrajectory :
@@ -58,7 +59,7 @@ declaredPurposeCannotOverrideRepeatedEffect :
 declaredPurposeCannotOverrideRepeatedEffect = refl
 
 repeatedOperationMayReopenDeclaredSuccess :
-  DASHI.Core.PluralOperationalRealisationDiscrepancyExact.repeatedOperationMayReopenDeclaredSuccess
+  Discrepancy.repeatedOperationMayReopenDeclaredSuccess
     Correction.operationalDiscrepancyBoundary ≡ true
 repeatedOperationMayReopenDeclaredSuccess = refl
 
