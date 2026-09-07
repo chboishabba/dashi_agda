@@ -12,22 +12,6 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 
 ------------------------------------------------------------------------
 -- WOOGAROO / BARTY OUTREACH AS A SENSIBLAW + WRONGTYPE REGRESSION
---
--- This module does not assert that Ash Barty supports or opposes any
--- development.  It formalises the evidence and consent gates that must be
--- crossed before a Save Woogaroo Forest outreach step can be promoted into a
--- public attribution.
---
--- Core discipline:
---
---   association / local nexus
---     != endorsement
---     != authority
---     != consent to public attribution.
---
--- The point is exactly the WrongType/SensibLaw distinction between a visible
--- relation and the particular typed element required by the downstream
--- consumer.
 ------------------------------------------------------------------------
 
 data OutreachEvidenceKind : Set where
@@ -75,7 +59,7 @@ producerForResidual consentUnresolved = directConsentProducer
 producerForResidual attributablePositionUnresolved = directAttributionProducer
 
 ------------------------------------------------------------------------
--- Source-backed place/provenance receipts.
+-- Source-backed receipts.
 ------------------------------------------------------------------------
 
 record LocalNexusReceipt : Set where
@@ -110,6 +94,62 @@ record DevelopmentProvenanceReceipt : Set where
 
 open DevelopmentProvenanceReceipt public
 
+record DevelopmentProvenanceBundle : Set where
+  constructor developmentProvenanceBundle
+  field
+    peninsula : DevelopmentProvenanceReceipt
+    scenic : DevelopmentProvenanceReceipt
+
+open DevelopmentProvenanceBundle public
+
+------------------------------------------------------------------------
+-- Concrete current source receipts.
+--
+-- Scope is intentionally narrow.  The spatial receipt proves hydrological /
+-- ecological-system membership through Council carriers.  It does NOT prove
+-- that every named development footprint is adjacent to the playground, nor
+-- that Ash Barty holds a view about any proposal.
+------------------------------------------------------------------------
+
+bartyPlaygroundLocalNexus : LocalNexusReceipt
+bartyPlaygroundLocalNexus =
+  localNexusReceipt
+    "Ash Barty"
+    "Queensland Government media statement 21 March 2025; playground co-designed with Ash Barty and delivered with Ipswich City Council and Springfield City Group"
+    "Greater Springfield / Opossum Creek Parklands community"
+    "Ash Barty has a direct public community nexus to the playground project and Greater Springfield"
+
+opossumWoogarooSpatialReceipt : ExactEcologicalSpatialRelation
+opossumWoogarooSpatialReceipt =
+  exactEcologicalSpatialRelation
+    "Ash Barty Playground / Opossum Creek Parklands project carrier"
+    "Ipswich City Council: Opossum Creek Parklands, 58 Scoparia Drive, Brookwater"
+    "Ipswich City Council: Woogaroo Creek sub-catchment including Opossum Creek"
+    "Opossum Creek Parklands lies on the Opossum Creek system; Opossum Creek is a tributary within the Woogaroo Creek sub-catchment, and Council identifies significant natural vegetation and wildlife linkages along both Opossum and Woogaroo Creeks"
+    "Ipswich City Council Brisbane River Catchment page; Ipswich Planning Scheme Area 4 valuable-features statement; City of Ipswich Platypus Recovery Plan 2020"
+
+peninsulaDevelopmentReceipt : DevelopmentProvenanceReceipt
+peninsulaDevelopmentReceipt =
+  developmentProvenanceReceipt
+    "Springfield City Group"
+    "Peninsula Precinct, Springfield, Queensland; EPBC 2020/8629"
+    "Springfield / Woogaroo campaign landscape"
+    "National EPA / EPBC Act Public Portal"
+    "Peninsula Precinct is an EPBC-referred Springfield project under assessment; campaign attribution to Woogaroo is kept separate from the federal project-status fact"
+
+scenicDevelopmentReceipt : DevelopmentProvenanceReceipt
+scenicDevelopmentReceipt =
+  developmentProvenanceReceipt
+    "Springfield City Group Pty Ltd"
+    "Scenic Precinct, Springfield, Queensland; EPBC 2020/8651"
+    "Springfield / Woogaroo campaign landscape"
+    "National EPA / EPBC Act Public Portal preliminary documentation"
+    "Springfield City Group seeks EPBC approval for Scenic Precinct at Springfield College Drive; listed threatened species and communities are controlling provisions"
+
+currentDevelopmentProvenance : DevelopmentProvenanceBundle
+currentDevelopmentProvenance =
+  developmentProvenanceBundle peninsulaDevelopmentReceipt scenicDevelopmentReceipt
+
 ------------------------------------------------------------------------
 -- A factual invitation can be admissible without implying any policy view.
 ------------------------------------------------------------------------
@@ -119,7 +159,7 @@ record FactualOutreachBrief : Set where
   field
     localNexus : LocalNexusReceipt
     spatialRelation : ExactEcologicalSpatialRelation
-    developmentProvenance : DevelopmentProvenanceReceipt
+    developmentProvenance : DevelopmentProvenanceBundle
     campaignIdentity : String
     invitationScope : String
     noPredeterminedPosition : Bool
@@ -141,10 +181,6 @@ record AdmissibleOutreachAsk (brief : FactualOutreachBrief) : Set where
     proportionateIsTrue : proportionate ≡ true
 
 open AdmissibleOutreachAsk public
-
-------------------------------------------------------------------------
--- Consent is claim-scoped.  A meeting or visit is not consent to attribution.
-------------------------------------------------------------------------
 
 record RepresentativeConsentReceipt
     {brief : FactualOutreachBrief}
@@ -172,6 +208,30 @@ record PublicAttributionReceipt
     authorisedScopeMatchesClaim : authorisedScope ≡ attributableClaim
 
 open PublicAttributionReceipt public
+
+------------------------------------------------------------------------
+-- Current factual brief and safest initial ask.
+------------------------------------------------------------------------
+
+currentFactualBrief : FactualOutreachBrief
+currentFactualBrief =
+  factualOutreachBrief
+    bartyPlaygroundLocalNexus
+    opossumWoogarooSpatialReceipt
+    currentDevelopmentProvenance
+    "Save Woogaroo Forest"
+    "Private factual briefing and optional private site walk; no endorsement or public statement requested"
+    true
+    refl
+
+currentPrivateSiteWalkAsk : AdmissibleOutreachAsk currentFactualBrief
+currentPrivateSiteWalkAsk =
+  admissibleOutreachAsk
+    privateSiteWalk
+    true refl
+    true refl
+    true refl
+    true refl
 
 ------------------------------------------------------------------------
 -- Consumer-indexed outreach state.
@@ -228,11 +288,6 @@ goalState permitPublicAttribution s with publicAttributionReady s
 ... | true = goalClosed
 ... | false = goalOpen
 
-------------------------------------------------------------------------
--- First-live-residual scheduler.  Spatial relation is deliberately before
--- campaign promotion: proximity language cannot silently pay ecology.
-------------------------------------------------------------------------
-
 firstResidual : OutreachState → OutreachResidual
 firstResidual s with localNexusPaid s
 ... | false = localNexusUnresolved
@@ -256,6 +311,7 @@ nextProducer s = producerForResidual (firstResidual s)
 data AssociationAutomaticallyEndorsement : Set where
 data LocalNexusAutomaticallyPolicyObligation : Set where
 data PlaygroundProximityAutomaticallyEcologicalRelation : Set where
+data SameCatchmentAutomaticallyFootprintAdjacency : Set where
 data InvitationAutomaticallySupport : Set where
 data MeetingAutomaticallySupport : Set where
 data SiteVisitAutomaticallyOpposition : Set where
@@ -263,17 +319,17 @@ data ConsentToVisitAutomaticallyConsentToQuote : Set where
 data SponsorCompatibilityAutomaticallyConsent : Set where
 data PublicProfileAutomaticallyAuthority : Set where
 
-associationDoesNotAutoCreateEndorsement :
-  AssociationAutomaticallyEndorsement → ⊥
+associationDoesNotAutoCreateEndorsement : AssociationAutomaticallyEndorsement → ⊥
 associationDoesNotAutoCreateEndorsement ()
 
-localNexusDoesNotAutoCreatePolicyObligation :
-  LocalNexusAutomaticallyPolicyObligation → ⊥
+localNexusDoesNotAutoCreatePolicyObligation : LocalNexusAutomaticallyPolicyObligation → ⊥
 localNexusDoesNotAutoCreatePolicyObligation ()
 
-playgroundProximityDoesNotAutoCreateEcologicalRelation :
-  PlaygroundProximityAutomaticallyEcologicalRelation → ⊥
+playgroundProximityDoesNotAutoCreateEcologicalRelation : PlaygroundProximityAutomaticallyEcologicalRelation → ⊥
 playgroundProximityDoesNotAutoCreateEcologicalRelation ()
+
+sameCatchmentDoesNotAutoCreateFootprintAdjacency : SameCatchmentAutomaticallyFootprintAdjacency → ⊥
+sameCatchmentDoesNotAutoCreateFootprintAdjacency ()
 
 invitationDoesNotAutoCreateSupport : InvitationAutomaticallySupport → ⊥
 invitationDoesNotAutoCreateSupport ()
@@ -284,60 +340,56 @@ meetingDoesNotAutoCreateSupport ()
 siteVisitDoesNotAutoCreateOpposition : SiteVisitAutomaticallyOpposition → ⊥
 siteVisitDoesNotAutoCreateOpposition ()
 
-visitConsentDoesNotAutoCreateQuoteConsent :
-  ConsentToVisitAutomaticallyConsentToQuote → ⊥
+visitConsentDoesNotAutoCreateQuoteConsent : ConsentToVisitAutomaticallyConsentToQuote → ⊥
 visitConsentDoesNotAutoCreateQuoteConsent ()
 
-sponsorCompatibilityDoesNotAutoCreateConsent :
-  SponsorCompatibilityAutomaticallyConsent → ⊥
+sponsorCompatibilityDoesNotAutoCreateConsent : SponsorCompatibilityAutomaticallyConsent → ⊥
 sponsorCompatibilityDoesNotAutoCreateConsent ()
 
 publicProfileDoesNotAutoCreateAuthority : PublicProfileAutomaticallyAuthority → ⊥
 publicProfileDoesNotAutoCreateAuthority ()
 
 ------------------------------------------------------------------------
--- Canonical Barty/Woogaroo regression state.
---
--- We intentionally mark the public/local nexus as paid while leaving the exact
--- ecological-spatial relation open.  This captures the current proof-search
--- boundary: the playground/local-place relationship can motivate a search, but
--- it cannot itself prove the required playground <-> parklands <-> Woogaroo
--- ecological relation.
+-- Canonical Barty/Woogaroo state after source payment.
 ------------------------------------------------------------------------
 
 bartyWoogarooCurrentState : OutreachState
 bartyWoogarooCurrentState =
   outreachState
     true
-    false
-    false
-    false
+    true
+    true
+    true
     false
     false
 
 bartyWoogarooFirstResidual :
-  firstResidual bartyWoogarooCurrentState ≡ exactSpatialRelationUnresolved
+  firstResidual bartyWoogarooCurrentState ≡ consentUnresolved
 bartyWoogarooFirstResidual = refl
 
 bartyWoogarooNextProducer :
-  nextProducer bartyWoogarooCurrentState ≡ spatialEcologySourceProducer
+  nextProducer bartyWoogarooCurrentState ≡ directConsentProducer
 bartyWoogarooNextProducer = refl
+
+bartyWoogarooPrivateInvitationPermitted :
+  goalState permitPrivateInvitation bartyWoogarooCurrentState ≡ goalClosed
+bartyWoogarooPrivateInvitationPermitted = refl
+
+bartyWoogarooPublicAttributionStillOpen :
+  goalState permitPublicAttribution bartyWoogarooCurrentState ≡ goalOpen
+bartyWoogarooPublicAttributionStillOpen = refl
 
 record WoogarooBartyWrongTypeBoundary : Set where
   constructor woogarooBartyWrongTypeBoundary
   field
     associationEqualsEndorsement : Bool
     associationEqualsEndorsementIsFalse : associationEqualsEndorsement ≡ false
-
-    placeNexusEqualsSpatialProof : Bool
-    placeNexusEqualsSpatialProofIsFalse : placeNexusEqualsSpatialProof ≡ false
-
+    sameCatchmentEqualsFootprintAdjacency : Bool
+    sameCatchmentEqualsFootprintAdjacencyIsFalse : sameCatchmentEqualsFootprintAdjacency ≡ false
     visitEqualsPublicSupport : Bool
     visitEqualsPublicSupportIsFalse : visitEqualsPublicSupport ≡ false
-
     consentIsClaimScoped : Bool
     consentIsClaimScopedIsTrue : consentIsClaimScoped ≡ true
-
     proofSearchIsResidualDirected : Bool
     proofSearchIsResidualDirectedIsTrue : proofSearchIsResidualDirected ≡ true
 
