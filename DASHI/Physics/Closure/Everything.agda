@@ -39,6 +39,66 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputSignedCrossAggregationRound432E
 import DASHI.Physics.Closure.NSTriadKNFixedOutputNestedBonyCrossRound433Exact
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCriticalConeCompilerRound434Exact
 
+-- Finite rational Cauchy completion / diagonal endpoint tranche.  This keeps
+-- the full positive Cauchy form, literal R397 off-diagonal flux, normalized
+-- double-mixed mass, fixed-output energy-square routing, and temporal endpoint
+-- orientation on the same physical carrier.  The chain closes the negative
+-- terminal-flux endpoint conditional on the explicit Fourier/radius
+-- calibrations; Package A remains open at the initial positive-flux and
+-- integrated nonlinear-remainder leaves.
+import DASHI.Physics.Closure.NSTriadKNRationalCauchySchurComplementRound443Exact
+import DASHI.Physics.Closure.NSTriadKNFiniteKernelRankOneQuadraticSplitRound444Exact
+import DASHI.Physics.Closure.NSTriadKNRationalFiniteCauchyPSDCompilerRound445Exact
+import DASHI.Physics.Closure.NSTriadKNRationalComplex3CauchyPSDRound446Exact
+import DASHI.Physics.Closure.NSTriadKNPhysicalCauchyResolventCompletionRound447Exact
+import DASHI.Physics.Closure.NSTriadKNPhysicalCauchyOffDiagonalR397WeldRound448Exact
+import DASHI.Physics.Closure.NSTriadKNDiagonalResolventRateFloorRound449Exact
+import DASHI.Physics.Closure.NSTriadKNCanonicalFourierUnitGapRateFloorRound450Exact
+import DASHI.Physics.Closure.NSTriadKNPhysicalDiagonalR298WeldRound451Exact
+import DASHI.Physics.Closure.NSTriadKNNormalizedDoubleMixedCellMassRound452Exact
+import DASHI.Physics.Closure.NSTriadKNSelectedPairEnergySquareRound453Exact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputEnergySquareRoutingRound454Exact
+import DASHI.Physics.Closure.NSTriadKNRationalNormalizedDirectionUnitRound455Exact
+import DASHI.Physics.Closure.NSTriadKNPhysicalNormalizedDoubleMixedMassRound456Exact
+import DASHI.Physics.Closure.NSTriadKNPhysicalDiagonalEnergySquareEndpointRound457Exact
+import DASHI.Physics.Closure.NSTriadKNCauchyTerminalFluxEndpointRound458Exact
+import DASHI.Physics.Closure.NSTriadKNTerminalFluxPaidTemporalReductionRound459Exact
+import DASHI.Physics.Closure.NSTriadKNFiniteInitialCoherentEndpointRound460Exact
+import DASHI.Physics.Closure.NSTriadKNCauchyInitialAmplitudeEndpointRound461Exact
+import DASHI.Physics.Closure.NSTriadKNGlobalNormalizedCompanionMassRound462Exact
+import DASHI.Physics.Closure.NSTriadKNGlobalCauchyTerminalEndpointRound463Exact
+
+-- R464-R470 bidi/routing completion.  MHD supplies the reciprocal-radius law;
+-- the NS lane keeps only the representation-specific radius-square receipt.
+-- Existing rational Bernstein and dyadic support owners feed R234 without a
+-- duplicate finite-CS implementation.  R467 proves the literal normalized
+-- anti-parallel complement, R468 compiles it into both R177 and R431, and
+-- R469/R470 derive the global R109 ED routing from output-local provenance and
+-- the already-owned literal output-fibre partition.
+import DASHI.Physics.Closure.NSTriadKNMHDRadiusReciprocalToNormalizedDirectionRound464Exact
+import DASHI.Physics.Closure.NSTriadKNRationalInfinityShellBernsteinRound465Exact
+import DASHI.Physics.Closure.NSTriadKNDeepFarLowDyadicBernsteinWeldRound466Exact
+import DASHI.Physics.Closure.NSTriadKNPhysicalNormalizedAntiParallelComplementRound467Exact
+import DASHI.Physics.Closure.NSTriadKNPhysicalHHAndNestedRadiusCompilerRound468Exact
+import DASHI.Physics.Closure.NSTriadKNSelectedPairPhysicalTriadRoutingRound469Exact
+import DASHI.Physics.Closure.NSTriadKNOutputIndexedEDProvenanceRound470Exact
+
+-- R471-R477 Lean<->Agda Gram-operator return.  The weakest fixed-output
+-- consumer is the signed l2->l2 Gram quadratic-form bound; absolute Schur,
+-- block Schur, and operator-Schur are producers rather than mandatory
+-- intermediates.  R473/R474/R475 reuse the literal R180/R383 signed Gram and
+-- the existing helical +/- decomposition.  R476 keeps the fully projected
+-- outer-cell lane distinct from R440's unprojected direct signed companion.
+-- R477 installs the nonseparable Cauchy pair kernel explicitly, so the live
+-- analytic frontier is two scalar same-helicity resolved-form bounds.
+import DASHI.Physics.Closure.NSTriadKNGramOperatorBoundConsumerRound471Exact
+import DASHI.Physics.Closure.NSTriadKNPhysicalGramOperatorPaymentRound472Exact
+import DASHI.Physics.Closure.NSTriadKNWeightedPhysicalGramOperatorCarrierRound473Exact
+import DASHI.Physics.Closure.NSTriadKNHelicalSignedGramSplitRound474Exact
+import DASHI.Physics.Closure.NSTriadKNWeightedHelicalGramOperatorSplitRound475Exact
+import DASHI.Physics.Closure.NSTriadKNProjectedVsDirectSignedGramBoundaryRound476Exact
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact
+
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
 -- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
