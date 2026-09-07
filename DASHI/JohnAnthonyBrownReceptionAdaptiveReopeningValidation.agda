@@ -3,15 +3,22 @@ module DASHI.JohnAnthonyBrownReceptionAdaptiveReopeningValidation where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.AffectedDependencyClosureExact as Dependency
+import DASHI.Core.ExperimentalOutcomeOrientationBackpropagationBidiExact as Outcome
+import DASHI.Core.SequentialOutcomeBackpropagationBidiExact as Revision
+import DASHI.Core.TemporalDiagnosisDependencyLineageBidiExact as Lineage
+import DASHI.Core.SelectiveInvalidationParetoFrontierBidiExact as Pareto
+import DASHI.Core.RecursiveSelectiveInvalidationParetoTruthMaintenanceBidiExact as Recursive
+import DASHI.Core.DependencyDerivedMinimalInvalidationBidiExact as Derived
 import DASHI.Foundations.Base369Ternary27AdmissibilityPathDynamicsExact as BasePath
 import DASHI.Foundations.Base369Ternary27StabiliserOperatorHolonomyExact as Operator
 import DASHI.Governance.ReceptionEvidenceSelectiveReopeningExact as Reception
 import DASHI.Culture.JohnAnthonyBrownReceptionEvidenceReopeningBridgeExact as Brown
 import DASHI.Culture.JohnAnthonyBrownPaperSectionHypothesisManifestExact as Manifest
-
-------------------------------------------------------------------------
--- Base-path admissibility dynamics.
-------------------------------------------------------------------------
+import DASHI.Culture.JohnAnthonyBrownDiagnosisRepairSchedulerBidiExact as Diagnosis
+import DASHI.Culture.JohnAnthonyBrownTemporalDiagnosisDependencyLineageBidiExact as TemporalLineage
+import DASHI.Culture.JohnAnthonyBrownSelectiveInvalidationParetoBidiExact as Selective
+import DASHI.Culture.JohnAnthonyBrownRecursiveParetoTruthMaintenanceBidiExact as RecursiveBrown
+import DASHI.Culture.JohnAnthonyBrownDependencyDerivedInvalidationBidiExact as DerivedBrown
 
 swapReallyUnavailableBefore :
   Operator.OperatorAdmitted
@@ -31,10 +38,6 @@ rotationReallyAvailableAtFinalStep :
     Operator.rotateXYZOperator
 rotationReallyAvailableAtFinalStep = BasePath.rotateAvailableAtPath2
 
-------------------------------------------------------------------------
--- Reception graph reopening.
-------------------------------------------------------------------------
-
 edgeReclassificationReopensMeaning :
   Dependency.ReopeningObligation
     Reception.ReceptionDepends
@@ -48,10 +51,6 @@ sourceChangeReopensPolicy :
     Reception.sourceReceiptArtifact
     Reception.downstreamPolicyArtifact
 sourceChangeReopensPolicy = Reception.sourceChangeReopensPolicyTransitively
-
-------------------------------------------------------------------------
--- John Anthony Brown H1-H5 selective reopening.
-------------------------------------------------------------------------
 
 johnBrownAuthorPinned : Brown.paperAuthor ≡ "John Anthony Brown"
 johnBrownAuthorPinned = refl
@@ -83,3 +82,75 @@ wholePaperDoesNotAutoInvalidate = Brown.oneChangedSourceDoesNotInvalidateWholePa
 
 staleClaimDoesNotAutoRefute : Brown.StaleBrownClaimIsRefuted → ⊥
 staleClaimDoesNotAutoRefute = Brown.staleBrownClaimIsReopenableNotRefuted
+
+receptionFrameRequestsRechart :
+  Diagnosis.brownRevision Outcome.frameConflict ≡ Revision.rechartRepresentation
+receptionFrameRequestsRechart = Diagnosis.receptionFrameConflictRequestsRechart
+
+receptionReactivationLocalizedToH2 :
+  Lineage.LocalizedReactivation Brown.BrownDepends Outcome.frameConflict
+receptionReactivationLocalizedToH2 = TemporalLineage.localizedReceptionReactivation
+
+h1ObservationReactivationMayUseDifferentUpstreamMeasurement :
+  Lineage.LocalizedReactivation Brown.BrownDepends Outcome.observationConflict
+h1ObservationReactivationMayUseDifferentUpstreamMeasurement =
+  TemporalLineage.localizedH1ObservationReactivation
+
+currentH1OutcomePathIsMustRecompute :
+  Pareto.class Selective.h1OutcomeMeasurementCertificate ≡ Pareto.mustRecompute
+currentH1OutcomePathIsMustRecompute = refl
+
+historicalExposurePathIsRetained :
+  Pareto.class Selective.h1ExposureMeasurementCertificate ≡ Pareto.provablyUnaffected
+historicalExposurePathIsRetained = refl
+
+unrelatedH5PathIsRetained :
+  Pareto.class Selective.h5ConfoundingCertificate ≡ Pareto.provablyUnaffected
+unrelatedH5PathIsRetained = refl
+
+policyAuthorityIsBlockedFromEpistemicPromotion :
+  Pareto.class Selective.rightsPolicyAuthority ≡ Pareto.authorityBlocked
+policyAuthorityIsBlockedFromEpistemicPromotion = refl
+
+recursiveH1OutcomeStillDrivesCurrentRound :
+  RecursiveBrown.brownClass RecursiveBrown.h1Outcome ≡ Pareto.mustRecompute
+recursiveH1OutcomeStillDrivesCurrentRound = RecursiveBrown.h1OutcomeDrivesCurrentRound
+
+recursiveH1ExposureStillRetained :
+  RecursiveBrown.brownClass RecursiveBrown.h1Exposure ≡ Pareto.provablyUnaffected
+recursiveH1ExposureStillRetained = RecursiveBrown.h1ExposureAuditRemainsRetained
+
+recursiveH5StillRetained :
+  RecursiveBrown.brownClass RecursiveBrown.h5Confounding ≡ Pareto.provablyUnaffected
+recursiveH5StillRetained = RecursiveBrown.h5ConfoundingRemainsRetained
+
+recursiveSemanticDimensionStillFour :
+  Pareto.declaredSemanticAxisCount RecursiveBrown.brownNextAmbient ≡ 4
+recursiveSemanticDimensionStillFour = RecursiveBrown.brownSemanticDimensionStillFour
+
+recursiveGenericUnaffectedCandidateRemainsUnaffected :
+  Recursive.candidateClass Recursive.layer1
+    (Recursive.liftCandidate Recursive.recursiveStep01 Recursive.frame0)
+  ≡ Pareto.provablyUnaffected
+recursiveGenericUnaffectedCandidateRemainsUnaffected =
+  Recursive.frameClassStillUnaffectedAfterRecursiveLift
+
+------------------------------------------------------------------------
+-- Dependency-derived invalidation validation.
+------------------------------------------------------------------------
+
+johnBrownMinimalInvalidationIsDerived :
+  Derived.invalidation DerivedBrown.brownMinimalInvalidationReceipt
+  ≡ Derived.derivedExplicitInvalidation DerivedBrown.brownInvalidationProblem
+johnBrownMinimalInvalidationIsDerived = refl
+
+johnBrownDerivedAxisIsDiagnostic :
+  (item : Derived.DerivedInvalidatedAxis DerivedBrown.brownInvalidationProblem) →
+  Derived.derivedAxis item ≡ Recursive.diagnostic0
+johnBrownDerivedAxisIsDiagnostic = DerivedBrown.allBrownDerivedAxesAreDiagnostic
+
+johnBrownDerivedRecursiveUnaffectedCandidateRemainsUnaffected :
+  Recursive.candidateClass Recursive.layer1
+    (Recursive.liftCandidate DerivedBrown.brownDerivedRecursiveStep Recursive.frame0)
+  ≡ Pareto.provablyUnaffected
+johnBrownDerivedRecursiveUnaffectedCandidateRemainsUnaffected = refl

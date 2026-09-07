@@ -17,8 +17,15 @@ module DASHI.Physics.Closure.NSTriadKNComparableConstantBandGramNoGoRound214Exac
 -- Here we decorate that witness with *zero-width* shell data: both inputs and
 -- the output are assigned the same shell index.  Thus the strongest possible
 -- abstract constant-band hypothesis is compatible with strictly positive Gram
--- debt.  Any successful CC payment must therefore use physical signed
--- convolution / phase / orthogonality structure beyond shell localization.
+-- debt.
+--
+-- 2026 BIDI CORRECTION
+-- --------------------
+-- The AlmostOrthogonalGramSchur return makes the scope of this no-go sharper:
+-- it refutes shell-localization-as-payment, not the whole resolvent route.
+-- A truncation-uniform absolute Gram-Schur row bound, block/operator
+-- Cotlar--Stein bound, or direct signed-resolvent estimate may still close the
+-- same consumer.  Those are logically distinct physical producers.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -78,11 +85,28 @@ constantBandDataInsufficient =
     refl
     R183.betweenDebtOfTwoAlignedBlocksIsTwo
 
+data PostLocalizationGramProducer : Set where
+  absoluteDataSchur
+  blockOperatorCotlarStein
+  directSignedResolvent : PostLocalizationGramProducer
+
+firstPostLocalizationProducer : PostLocalizationGramProducer
+firstPostLocalizationProducer = absoluteDataSchur
+
 round214ConstantShellBandAlonePaysGramDebt : Bool
 round214ConstantShellBandAlonePaysGramDebt = false
 
 round214PhysicalSignedStructureStillRequired : Bool
 round214PhysicalSignedStructureStillRequired = true
+
+round214NoGoRefutesAbsoluteSchur : Bool
+round214NoGoRefutesAbsoluteSchur = false
+
+round214NoGoRefutesBlockOperatorControl : Bool
+round214NoGoRefutesBlockOperatorControl = false
+
+round214NoGoRefutesDirectSignedResolvent : Bool
+round214NoGoRefutesDirectSignedResolvent = false
 
 round214CCResidualBudgetClosed : Bool
 round214CCResidualBudgetClosed = false
@@ -100,3 +124,15 @@ round214ConstantShellBandAlonePaysGramDebtIsFalse = refl
 round214PhysicalSignedStructureStillRequiredIsTrue :
   round214PhysicalSignedStructureStillRequired ≡ true
 round214PhysicalSignedStructureStillRequiredIsTrue = refl
+
+round214NoGoRefutesAbsoluteSchurIsFalse :
+  round214NoGoRefutesAbsoluteSchur ≡ false
+round214NoGoRefutesAbsoluteSchurIsFalse = refl
+
+round214NoGoRefutesBlockOperatorControlIsFalse :
+  round214NoGoRefutesBlockOperatorControl ≡ false
+round214NoGoRefutesBlockOperatorControlIsFalse = refl
+
+round214NoGoRefutesDirectSignedResolventIsFalse :
+  round214NoGoRefutesDirectSignedResolvent ≡ false
+round214NoGoRefutesDirectSignedResolventIsFalse = refl

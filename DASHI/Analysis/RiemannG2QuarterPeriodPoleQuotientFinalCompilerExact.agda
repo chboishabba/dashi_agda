@@ -10,25 +10,23 @@ import DASHI.Analysis.RiemannG2CutoffComplementCoordinateSeparationExact as Sepa
 import DASHI.Analysis.RiemannAristotlePoleQuotientSplitComplementBudgetExact as Split
 import DASHI.Analysis.RiemannAristotlePoleQuotientComplementMarginCompilerExact as Complement
 import DASHI.Analysis.RiemannAristotlePoleQuotientBidiMeetingExact as Meeting
+import DASHI.Analysis.RiemannG2PoleQuotientChannelAllowanceExact as Allowance
 
 ------------------------------------------------------------------------
 -- QUARTER-PERIOD -> POLE-QUOTIENT FINAL COMPILER
 --
 -- Under the standing BIDI assumption that ordinary analytic machinery already
 -- exists, there is no reason to build a new final contradiction calculus.
--- The repository already owns exactly the needed split-complement compiler:
+-- The repository already owns exactly the needed split-complement compiler.
 --
---   cluster = offOrdinate + Gamma
---   offOrdinate <= B_off
---   Gamma <= B_Gamma
---   B_off + B_Gamma < M_cluster
+-- The only cutoff-dependent attachment introduced by quarter-period crossing is
+-- upstream: B_off must be produced on the literal oscillatory near/far carrier
+-- using the chosen crossing cutoff. Gamma and cluster remain taper-only.
 --
--- implies contradiction.
---
--- The only new attachment introduced by quarter-period crossing is upstream:
--- B_off must be produced on the literal oscillatory near/far carrier using the
--- chosen crossing cutoff.  Gamma and cluster remain the existing same-taper
--- complement coordinates.
+-- Newer allowance machinery also removes `B_off + B_Gamma < M_cluster` as an
+-- independent research theorem: producer payments establish B_off <= A_off and
+-- B_Gamma <= A_Gamma, while the final consumer supplies
+-- A_off + A_Gamma < M_cluster; composition is compiler output.
 ------------------------------------------------------------------------
 
 record QuarterPeriodOffBudgetAttachment
@@ -75,8 +73,13 @@ existingPoleQuotientBidiCompilerAlreadyClosed :
     Meeting.canonicalPoleQuotientBidiMeetingBoundary ≡ true
 existingPoleQuotientBidiCompilerAlreadyClosed = refl
 
+allowanceCompositionAlreadyClosed :
+  Allowance.PoleQuotientChannelAllowanceBoundary.separateProducerBoundsCompileToStrictCombinedBudget
+    Allowance.canonicalPoleQuotientChannelAllowanceBoundary ≡ true
+allowanceCompositionAlreadyClosed = refl
+
 ------------------------------------------------------------------------
--- BIDI cut after the 8890-job narrow-window theorem.
+-- Historical BIDI cut, reconciled with the final allowance architecture.
 ------------------------------------------------------------------------
 
 data LiveLeaf : Set where
@@ -93,8 +96,12 @@ LeafRelevant literalWidthLaw = ⊤
 LeafRelevant quarterPeriodOffBudget = ⊤
 LeafRelevant sameTaperGammaBudget = ⊤
 LeafRelevant quantitativeClusterMargin = ⊤
-LeafRelevant strictCombinedBudget = ⊤
+LeafRelevant strictCombinedBudget = ⊥
 LeafRelevant rebuildFinalContradictionCompiler = ⊥
+
+strictCombinedBudgetRebuildPruned :
+  LeafRelevant strictCombinedBudget -> ⊥
+strictCombinedBudgetRebuildPruned x = x
 
 finalCompilerRebuildPruned :
   LeafRelevant rebuildFinalContradictionCompiler -> ⊥
@@ -138,4 +145,4 @@ canonicalQuarterPeriodPoleQuotientBoundary =
     true refl
     true refl
     true refl
-    "After quarter-period crossing, do not redesign the final RH consumer. Feed the chosen crossing cutoff only into the literal signed off-ordinate producer. Then attach that resulting B_off to the already-owned pole-quotient split-complement surface together with the independent same-taper Gamma budget and quantitative cluster margin. The existing Agda compiler already turns B_off + B_Gamma < M_cluster into contradiction. The remaining research content is literal input assembly, not final contradiction algebra."
+    "After quarter-period crossing, feed the chosen cutoff only into the literal signed Off producer. Gamma and cluster remain same-taper, cutoff-free coordinates. Do not schedule a fresh proof of B_off + B_Gamma < M_cluster: the final allowance architecture derives it from B_off <= A_off, B_Gamma <= A_Gamma and A_off + A_Gamma < M_cluster. The existing split-complement contradiction remains reusable. Remaining research is literal Off/Gamma producer payment plus same-object cluster attachment, not final contradiction algebra."

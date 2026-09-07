@@ -1,0 +1,37 @@
+module DASHI.Law.MaboSecurityClassificationLineageValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Cognition.PNF.SensibLawMaboCrownRecognitionProjectionNonFactorabilityExact as Mabo
+import DASHI.Law.SecurityClassificationInputLineageDagExact as Lineage
+import DASHI.Law.MaboCountrySecurityClassificationCrossPollinationExact as Cross
+
+maboRecognitionNonfactorabilityRetained :
+  INF.FactorsThrough Mabo.crownRecognitionObserver Mabo.indigenousAuthorityOutcome → ⊥
+maboRecognitionNonfactorabilityRetained = Cross.maboRecognitionStillCannotRecoverAuthority
+
+securityClassificationNonfactorabilityOwned :
+  INF.FactorsThrough Cross.securityObserver Cross.politicalAuthorityOutcome → ⊥
+securityClassificationNonfactorabilityOwned = Cross.securityClassificationCannotFactorAuthority
+
+nativeTitleDoesNotResolveCession :
+  Cross.NativeTitle.sovereigntyCessionResolvedByNativeTitleDoctrine
+    Cross.NativeTitle.canonicalNativeTitleRecognitionDominationCapstone ≡ false
+nativeTitleDoesNotResolveCession = refl
+
+criticalLensDoesNotCreatePoliceIntent :
+  Cross.criticalColonialityLensAutomaticallyProvesPoliceIntent
+    Cross.canonicalSecurityCountryBoundary ≡ false
+criticalLensDoesNotCreatePoliceIntent = refl
+
+currentLineageStopsAtClassificationContent :
+  Lineage.firstLineageResidual
+    Lineage.zionistRepertoireReachedClassification
+    Lineage.canonicalCurrentLineageCutset
+  ≡ Lineage.classificationContentResidual
+currentLineageStopsAtClassificationContent = refl
+
+countryClassificationInputStillOpen :
+  Cross.actualClassificationInputAcquired Cross.canonicalColonialClassificationAudit ≡ false
+countryClassificationInputStillOpen = refl

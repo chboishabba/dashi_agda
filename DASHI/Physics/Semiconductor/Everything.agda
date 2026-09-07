@@ -10,3 +10,8 @@ import DASHI.Physics.Semiconductor.EUVOptics.Everything
 import DASHI.Physics.Semiconductor.Resist.Everything
 import DASHI.Physics.Semiconductor.Etch.Everything
 import DASHI.Physics.Semiconductor.Deposition.Everything
+import DASHI.Physics.Semiconductor.CMP.Everything
+import DASHI.Physics.Semiconductor.Doping.Everything
+import DASHI.Physics.Semiconductor.Epitaxy.Everything
+import DASHI.Physics.Semiconductor.Interfaces.Everything
+import DASHI.Physics.Semiconductor.Device.Everything

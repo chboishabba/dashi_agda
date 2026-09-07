@@ -2,16 +2,19 @@
 module DASHI.Physics.YangMills.BalabanCMP98Path13Equation119SourceRound193Exact where
 
 ------------------------------------------------------------------------
--- ROUND193 A1 BIDI: DELETE THE GENERIC-n REALIZATION SOCKET AT THE ACTUAL
--- PATH13 SOURCE SCALE.
+-- ROUND193 REPAIR: DELETE THE REALIZATION SOCKET AT PHYSICAL SIDE 13
 --
--- R192 constructs the literal side-13 periodic realization from the already-
--- owned L=13 physical background.  R182 still exposes caller-selectable
--- realization data; at the Path13 specialization that is redundant.
+-- The historical periodic APIs used by R147/R158 are predecessor-indexed:
+-- `PeriodicBlock n` and `PeriodicBondGaugeRealization n` both live on side
+-- `suc n`.  R192 now exposes the correct Path13 historical index 12.
+--
+-- This owner therefore uses:
+--   historical periodic index = R192.path13PeriodicIndex = 12,
+--   physical/coarse bond side  = Side13.side13 = 13.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -37,7 +40,7 @@ record Path13Equation119SourceData
 
     bondComponent :
       Nat → R126.Vector (R146.additive C) →
-      Blocks.PeriodicBlock Side13.side13 → Word.SignedAxis4 →
+      Blocks.PeriodicBlock R192.path13PeriodicIndex → Word.SignedAxis4 →
       R126.Vector (R146.additive C)
 
     adjointLink :
@@ -48,7 +51,7 @@ record Path13Equation119SourceData
 
     minusEmbedding :
       Nat → Embed.CenteredPeriodicNoWrapEmbedding
-        Side13.side13 R158.sourceRadius
+        R192.path13PeriodicIndex R158.sourceRadius
 
     coarseBond : Nat → Torus.PositiveBond Side13.side13
 
@@ -57,14 +60,16 @@ open Path13Equation119SourceData public
 path13RealizationAt :
   ∀ {C} → Path13Equation119SourceData C →
   Nat → Bond.PeriodicBondGaugeRealization
-    Side13.side13 SU2.RationalUnitQuaternion Group.rationalSU2ExactLinkGroup
+    R192.path13PeriodicIndex
+    SU2.RationalUnitQuaternion
+    Group.rationalSU2ExactLinkGroup
 path13RealizationAt source _ =
   R192.path13PhysicalPeriodicRealization (background source)
 
 asPositiveCoarseBondEquation119Source :
   ∀ {C} → Path13Equation119SourceData C →
   R182.PositiveCoarseBondEquation119Source
-    C Side13.side13 Side13.side13
+    C R192.path13PeriodicIndex Side13.side13
     SU2.RationalUnitQuaternion Group.rationalSU2ExactLinkGroup
 asPositiveCoarseBondEquation119Source source = record
   { R182.PositiveCoarseBondEquation119Source.realization =
@@ -86,9 +91,16 @@ path13SourceRealizationIsPhysical :
   ≡ R192.path13PhysicalPeriodicRealization (background source)
 path13SourceRealizationIsPhysical source step = refl
 
+path13HistoricalIndexIs12 :
+  R192.path13PeriodicIndex ≡ 12
+path13HistoricalIndexIs12 = refl
+
 path13CanonicalPeriodicSideIs13 :
-  Side13.side13 ≡ 13
+  suc R192.path13PeriodicIndex ≡ Side13.side13
 path13CanonicalPeriodicSideIs13 = refl
+
+cmp98Path13HistoricalIndexRepairRound193Level : ProofLevel
+cmp98Path13HistoricalIndexRepairRound193Level = machineChecked
 
 cmp98Path13Equation119SourceRound193Level : ProofLevel
 cmp98Path13Equation119SourceRound193Level = machineChecked

@@ -6,83 +6,55 @@ module DASHI.Analysis.RiemannAristotleCurrentFrontierExact where
 -- Maintained bidirectionally: forward from machine-checked Lean owners and
 -- backward from the unweakened RH contradiction.
 --
--- NEWEST KERNEL-CHECKED LEAN ADVANCE (2026-08-30)
+-- §35--§38 are retained as audit/scalarization infrastructure. In particular,
+-- the clustering inequality is a condition for positivity of a gap-split NO-GO
+-- lower bound and is not a forward RH producer. The determinant G2d signed-sum
+-- lane is likewise useful scalarization, but the authoritative pole-quotient
+-- current cut explicitly does not identify the rank-two determinant taper with
+-- the final universal pole-quotient taper.
 --
--- The supplied Zeta23Bridge session reports `lake build Zeta23Bridge`
--- successful (8883 jobs) and the capstone axiom audit returning only
--- propext/Classical.choice/Quot.sound.
+-- The final high-ordinate consumer is the existing pole-quotient split
 --
--- It now owns, for every cutoff J >= 1,
+--   cluster = offOrdinate + Gamma
+--   offOrdinate <= B_off
+--   Gamma <= B_Gamma
+--   B_off + B_Gamma < M_cluster.
 --
---   farShellBound A |t| J
---     = 18 A log(|t|+4)/J + 72 A/sqrt(J),
+-- Producer adequacy is now consumer-assigned:
 --
--- together with:
+--   B_off <= A_off
+--   B_Gamma <= A_Gamma
+--   A_off + A_Gamma < M_cluster.
 --
---   * a proof that the literal zero tail is bounded by that expression;
---   * convergence of this explicit bound to zero and arbitrary-accuracy cutoff
---     selection;
---   * a genuinely finite signed near shell carrier;
---   * transport of the decomposition onto the literal offOrdProjectiveDefect:
+-- The strict combined budget and final contradiction are compiler output. The
+-- Off payment must be established at one common quarter-period crossing cutoff
+-- J where signed near plus owned far fits A_off. Gamma has no J coordinate and
+-- must fit A_Gamma on the same universal pole-quotient taper. The 8889 return
+-- owns quantitative cluster-margin mathematics, leaving same-object attachment.
+-- Source-order transport is downstream proof engineering and is compiled once
+-- per source relation rather than by re-proving every transported inequality.
 --
---       |D_off(g,t,r) - 1/2 nearSignedSum(t,J)|
---         <= 1/2 C farShellBound A |t| J.
+-- The live analytic-core owner now compiles the two theorem-bearing high-
+-- ordinate cores, their representation attachments, and the already-owned
+-- final same-object/order/cluster attachment directly to contradiction.
+-- Therefore no further downstream high-ordinate theorem is on the research cut.
 --
--- The aggregate root also imports LiteralWeilDeterministicProjectiveSchur, so
--- the previously source-only deterministic Schur compiler is now part of this
--- reported kernel-checked Lean build.
---
--- BIDI CONSEQUENCE
---
--- The infinite part of S2 is no longer a research socket.  For a three-taper
--- observer, let E denote exact elimination of the deterministic pole/Gamma
--- response vectors and let D_near(J) be the three-vector of finite signed near
--- sums.  Write
---
---   X = E D_off,
---   N = E D_near(J),
---   F = E (D_off - D_near(J)).
---
--- Then X = N + F, and the remaining finite theorem may be targeted through
---
---   ||X||^2 <= 2 ||N||^2 + 2 ||F||^2.
---
--- The far term F is mechanically controlled by the explicit cutoff theorem plus
--- Schur contraction.  Therefore the genuinely open S2 object is the finite
--- signed post-Schur near-core energy ||N||^2, not the infinite zero tail.
---
--- CURRENT RESEARCH CUTSET
---
---   S1. construct a short three-taper family such that the deterministic
---       pole/Gamma vectors have rank two and the off-line same-ordinate cluster
---       survives with an explicit positive Schur margin M_cluster;
---
---   S2a. CLOSED IN LEAN: explicit far-shell cutoff formula and literal D_off
---        finite-near/far decomposition;
---
---   S2b. prove a signed bound on the FINITE post-Schur near vector
---
---          ||E D_near(J)||^2 <= B_near(J)
---
---        for a jointly chosen cutoff J;
---
---   S2c. combine that finite bound with the explicit Lean far remainder so that
---
---          2 B_near(J) + 2 B_error(J) < M_cluster.
---
---        `RiemannAristotleFiniteNearCoreSchurCompilerExact` then closes the
---        strict off-carrier contradiction mechanically;
---
---   S3. certify the complementary low-ordinate region, or replace the split by
---       a universal construction;
---
---   S4. invoke the repository's existing unweakened RH proposition.
+-- Low ordinates are independent.  The Platt--Trudgian published verified-zero
+-- source is recovered in-repo, but no proof term/import has been promoted into
+-- Agda.  Source recovery and Agda theorem attachment remain distinct.
 --
 -- No theorem here derives RH.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
+import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as FinalCut
+import DASHI.Analysis.RiemannG2PoleQuotientProducerAllowanceTargetExact as AllowanceTarget
+import DASHI.Analysis.RiemannG2PoleQuotientOffAllowanceDirectCompilerExact as OffDirect
+import DASHI.Analysis.RiemannG2PoleQuotientGammaAllowanceDirectCompilerExact as GammaDirect
+import DASHI.Analysis.RiemannG2FinalSplitComplementOrderTransportCompilerExact as OrderTransport
+import DASHI.Analysis.RiemannG2FinalPoleQuotientAnalyticCoreExact as AnalyticCore
+import DASHI.Analysis.DeBruijnNewman2026SourceWeldExact as DBN
 
 record AristotleCurrentFrontier : Set where
   constructor aristotle-current-frontier
@@ -122,6 +94,61 @@ record AristotleCurrentFrontier : Set where
     latestLeanBridgeBuildKernelChecked : Bool
     latestLeanBridgeBuildKernelCheckedIsTrue :
       latestLeanBridgeBuildKernelChecked ≡ true
+
+    quarterPeriodDensityReconciliationClosedInLean : Bool
+    quarterPeriodDensityReconciliationClosedInLeanIsTrue :
+      quarterPeriodDensityReconciliationClosedInLean ≡ true
+
+    zetaUnitLocalCountClosedInLean : Bool
+    zetaUnitLocalCountClosedInLeanIsTrue :
+      zetaUnitLocalCountClosedInLean ≡ true
+
+    zetaShortWindowUpperCountClosedInLean : Bool
+    zetaShortWindowUpperCountClosedInLeanIsTrue :
+      zetaShortWindowUpperCountClosedInLean ≡ true
+
+    densityCutRefutesInverseWidthRoute : Bool
+    densityCutRefutesInverseWidthRouteIsFalse :
+      densityCutRefutesInverseWidthRoute ≡ false
+
+    zetaLongWindowLowerDensityClosed : Bool
+    zetaLongWindowLowerDensityClosedIsFalse :
+      zetaLongWindowLowerDensityClosed ≡ false
+
+    actualZetaClusteringClosed : Bool
+    actualZetaClusteringClosedIsFalse : actualZetaClusteringClosed ≡ false
+
+    targetLocalSecondMomentCompilerClosedInAgda : Bool
+    targetLocalSecondMomentCompilerClosedInAgdaIsTrue :
+      targetLocalSecondMomentCompilerClosedInAgda ≡ true
+
+    targetLocalSecondMomentProducerClosed : Bool
+    targetLocalSecondMomentProducerClosedIsFalse :
+      targetLocalSecondMomentProducerClosed ≡ false
+
+    targetLocalMomentUsesExistingSelectedWindow : Bool
+    targetLocalMomentUsesExistingSelectedWindowIsTrue :
+      targetLocalMomentUsesExistingSelectedWindow ≡ true
+
+    concretePhaseStatisticCompilerClosedInAgda : Bool
+    concretePhaseStatisticCompilerClosedInAgdaIsTrue :
+      concretePhaseStatisticCompilerClosedInAgda ≡ true
+
+    selectedDirectZeroCarrierWeldClosed : Bool
+    selectedDirectZeroCarrierWeldClosedIsFalse :
+      selectedDirectZeroCarrierWeldClosed ≡ false
+
+    oneDirectGapCarrierFeedsClusteringAndFiniteNear : Bool
+    oneDirectGapCarrierFeedsClusteringAndFiniteNearIsTrue :
+      oneDirectGapCarrierFeedsClusteringAndFiniteNear ≡ true
+
+    transverseMomentDirectlyControlsOrdinateClustering : Bool
+    transverseMomentDirectlyControlsOrdinateClusteringIsFalse :
+      transverseMomentDirectlyControlsOrdinateClustering ≡ false
+
+    alpogeFurmanGlobalSimpleProportionDirectlyClosesClustering : Bool
+    alpogeFurmanGlobalSimpleProportionDirectlyClosesClusteringIsFalse :
+      alpogeFurmanGlobalSimpleProportionDirectlyClosesClustering ≡ false
 
     nearFarShellCompositionCompilerClosedInAgda : Bool
     nearFarShellCompositionCompilerClosedInAgdaIsTrue :
@@ -180,7 +207,166 @@ canonicalAristotleCurrentFrontier =
     false refl
     false refl
     false refl
+    true refl
+    false refl
+    true refl
+    true refl
+    false refl
+    true refl
+    false refl
+    false refl
+    true refl
+    true refl
+    true refl
     false refl
     false refl
     false refl
-    "The newest kernel-checked Lean tranche closes the explicit far-shell modulus, arbitrary-accuracy cutoff selection, the finite signed near carrier, and the literal D_off finite-near/far decomposition. The deterministic projective Schur compiler is also now inside the reported aggregate build. Agda therefore moves the first unproved S2 theorem to the finite post-Schur near-core energy: bound ||E D_near(J)||^2 strongly enough that its weighted sum with the explicit far-error energy lies below the surviving S1 cluster margin. The infinite zero tail is no longer the research bottleneck. S1 and low-ordinate certification remain open; RH is not derived."
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    "The §35 clustering inequality and M2_delta are obstruction diagnostics, not forward RH payments. The determinant DirectSignedConsumerPayment remains a G2d scalarization theorem but does not automatically transport to the final universal pole-quotient taper. The authoritative high-ordinate mathematical cores are OffAnalyticCore and GammaAnalyticCore; once inhabited, their representation attachments plus the final same-object/order/cluster attachment compile directly to contradiction. Off must use one common quarter-period crossing cutoff J with B_near(J)+B_far(J)<=A_off; Gamma must satisfy B_Gamma(g_pole)<=A_Gamma on the same universal taper. Quantitative cluster-margin mathematics is owned in the 8889 checked-Lean return, while same-object/order attachment is downstream. Low-ordinate source coverage is recovered from Platt--Trudgian but its theorem/import is not promoted into Agda. RH remains open."
+
+------------------------------------------------------------------------
+-- Corrected high-level scheduler interpretation, kept outside the compatibility
+-- record so existing field projections remain stable.
+------------------------------------------------------------------------
+
+actualZetaClusteringIsForwardRHProducer : Bool
+actualZetaClusteringIsForwardRHProducer = false
+
+actualZetaClusteringIsForwardRHProducerIsFalse :
+  actualZetaClusteringIsForwardRHProducer ≡ false
+actualZetaClusteringIsForwardRHProducerIsFalse = refl
+
+actualZetaClusteringIsGapSplitObstructionDiagnostic : Bool
+actualZetaClusteringIsGapSplitObstructionDiagnostic = true
+
+actualZetaClusteringIsGapSplitObstructionDiagnosticIsTrue :
+  actualZetaClusteringIsGapSplitObstructionDiagnostic ≡ true
+actualZetaClusteringIsGapSplitObstructionDiagnosticIsTrue = refl
+
+targetLocalSecondMomentIsForwardRHProducer : Bool
+targetLocalSecondMomentIsForwardRHProducer = false
+
+targetLocalSecondMomentIsForwardRHProducerIsFalse :
+  targetLocalSecondMomentIsForwardRHProducer ≡ false
+targetLocalSecondMomentIsForwardRHProducerIsFalse = refl
+
+directSignedConsumerPaymentCompilerClosedInAgda : Bool
+directSignedConsumerPaymentCompilerClosedInAgda = true
+
+directSignedConsumerPaymentCompilerClosedInAgdaIsTrue :
+  directSignedConsumerPaymentCompilerClosedInAgda ≡ true
+directSignedConsumerPaymentCompilerClosedInAgdaIsTrue = refl
+
+literalDirectFiniteProducerClosed : Bool
+literalDirectFiniteProducerClosed = false
+
+literalDirectFiniteProducerClosedIsFalse :
+  literalDirectFiniteProducerClosed ≡ false
+literalDirectFiniteProducerClosedIsFalse = refl
+
+genericWithinReceiptAloneClosesLiteralG2 : Bool
+genericWithinReceiptAloneClosesLiteralG2 = false
+
+genericWithinReceiptAloneClosesLiteralG2IsFalse :
+  genericWithinReceiptAloneClosesLiteralG2 ≡ false
+genericWithinReceiptAloneClosesLiteralG2IsFalse = refl
+
+------------------------------------------------------------------------
+-- Final-carrier precedence pins.
+------------------------------------------------------------------------
+
+determinantLaneIsNotFinalPoleQuotientCarrier :
+  FinalCut.PoleQuotientFinalCutBoundary.determinantLaneIsFinalPoleQuotientCarrier
+    FinalCut.canonicalPoleQuotientFinalCutBoundary ≡ false
+determinantLaneIsNotFinalPoleQuotientCarrier = refl
+
+determinantPaymentDoesNotAutoPayFinalOffSocket :
+  FinalCut.PoleQuotientFinalCutBoundary.determinantDirectPaymentAutomaticallyPaysFinalOffSocket
+    FinalCut.canonicalPoleQuotientFinalCutBoundary ≡ false
+determinantPaymentDoesNotAutoPayFinalOffSocket = refl
+
+universalPoleQuotientSignedOffIsForwardLeaf :
+  FinalCut.PoleQuotientFinalCutBoundary.literalUniversalPoleQuotientSignedOffIsForwardLeaf
+    FinalCut.canonicalPoleQuotientFinalCutBoundary ≡ true
+universalPoleQuotientSignedOffIsForwardLeaf = refl
+
+sameTaperGammaPrecisionIsForwardLeaf :
+  FinalCut.PoleQuotientFinalCutBoundary.sameTaperGammaPrecisionIsForwardLeaf
+    FinalCut.canonicalPoleQuotientFinalCutBoundary ≡ true
+sameTaperGammaPrecisionIsForwardLeaf = refl
+
+freshClusterMarginAnalysisNotRequired :
+  FinalCut.PoleQuotientFinalCutBoundary.freshClusterMarginAnalysisRequired
+    FinalCut.canonicalPoleQuotientFinalCutBoundary ≡ false
+freshClusterMarginAnalysisNotRequired = refl
+
+finalContradictionCompilerRebuildNotRequired :
+  FinalCut.PoleQuotientFinalCutBoundary.finalContradictionCompilerNeedsRebuilding
+    FinalCut.canonicalPoleQuotientFinalCutBoundary ≡ false
+finalContradictionCompilerRebuildNotRequired = refl
+
+------------------------------------------------------------------------
+-- Terminal allowance / common-cutoff / order-transport pins.
+------------------------------------------------------------------------
+
+terminalOffPaymentType : Set₁
+terminalOffPaymentType = AllowanceTarget.PoleQuotientOffAllowancePayment
+
+terminalGammaPaymentType : Set₁
+terminalGammaPaymentType = AllowanceTarget.PoleQuotientGammaAllowancePayment
+
+terminalOffRequiresOneCommonCrossingCutoff :
+  OffDirect.PoleQuotientOffAllowanceDirectCompilerBoundary.oneCommonCrossingCutoffRequired
+    OffDirect.canonicalPoleQuotientOffAllowanceDirectCompilerBoundary ≡ true
+terminalOffRequiresOneCommonCrossingCutoff = refl
+
+terminalOffFarDecayAloneDoesNotSelectCutoff :
+  OffDirect.PoleQuotientOffAllowanceDirectCompilerBoundary.farDecayAloneSelectsFinalCutoff
+    OffDirect.canonicalPoleQuotientOffAllowanceDirectCompilerBoundary ≡ false
+terminalOffFarDecayAloneDoesNotSelectCutoff = refl
+
+terminalGammaHasNoCutoffCoordinate :
+  GammaDirect.PoleQuotientGammaAllowanceDirectCompilerBoundary.gammaDependsOnQuarterPeriodCutoff
+    GammaDirect.canonicalPoleQuotientGammaAllowanceDirectCompilerBoundary ≡ false
+terminalGammaHasNoCutoffCoordinate = refl
+
+finalOrderTransportCompilesContradiction :
+  OrderTransport.FinalOrderTransportBoundary.orderTransportPackageCompilesContradiction
+    OrderTransport.canonicalFinalOrderTransportBoundary ≡ true
+finalOrderTransportCompilesContradiction = refl
+
+------------------------------------------------------------------------
+-- Exact current three-leaf global cut.
+------------------------------------------------------------------------
+
+highOrdinateAnalyticCoreCompilerOwned : Bool
+highOrdinateAnalyticCoreCompilerOwned = true
+
+highOrdinateAnalyticCoreCompilerOwnedIsTrue :
+  highOrdinateAnalyticCoreCompilerOwned ≡ true
+highOrdinateAnalyticCoreCompilerOwnedIsTrue = refl
+
+highOrdinateCompletionTheorem : Set₁
+highOrdinateCompletionTheorem =
+  (cores : AnalyticCore.FinalPoleQuotientTwoAnalyticCores) ->
+  (attachments : AnalyticCore.FinalPoleQuotientAnalyticCoreAttachments cores) ->
+  AnalyticCore.FinalPoleQuotientAnalyticCompletion cores attachments ->
+  ⊥
+
+plattTrudgianLowOrdinateSourceRecovered : Bool
+plattTrudgianLowOrdinateSourceRecovered = DBN.plattTrudgianSourceRecovered
+
+plattTrudgianLowOrdinateSourceRecoveredIsTrue :
+  plattTrudgianLowOrdinateSourceRecovered ≡ true
+plattTrudgianLowOrdinateSourceRecoveredIsTrue = refl
+
+plattTrudgianLowOrdinateTheoremImportedIntoAgda : Bool
+plattTrudgianLowOrdinateTheoremImportedIntoAgda = false
+
+plattTrudgianLowOrdinateTheoremImportedIntoAgdaIsFalse :
+  plattTrudgianLowOrdinateTheoremImportedIntoAgda ≡ false
+plattTrudgianLowOrdinateTheoremImportedIntoAgdaIsFalse = refl

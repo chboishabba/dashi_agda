@@ -11,29 +11,28 @@ import DASHI.Analysis.RiemannG2GammaPrecisionLossLocalizationExact as Localizati
 ------------------------------------------------------------------------
 -- GAMMA PRODUCER SOURCE ACQUISITION
 --
--- Repo-first BIDI result after the 8889 return:
+-- Dependency-lower source layer. Retained source history now gives one concrete
+-- candidate family, epsGamma / gammaConeEnvelope, so generic family discovery is
+-- no longer the search target. This module deliberately does NOT import the
+-- higher `GammaCandidateSourceLineageRecoveryExact` owner (which itself imports
+-- this file); doing so would create an import cycle.
 --
---   * existence of a uniform Gamma upper bound is already checked in Lean;
---   * that bound misses the sharp pole-quotient accuracy window;
---   * the current recovered Agda/PR surface does not identify the internal
---     producer decomposition or the first estimate responsible for the loss.
---
--- Therefore it is unsound to jump directly to a guessed Stirling/digamma/
--- envelope repair.  The next payment is source-exact recovery of the actual
--- same-taper Gamma producer chain, followed by a proof-relevant localization of
--- the first precision-losing step.
+-- The remaining source payment is same-consumer identity: prove that the
+-- recovered candidate family is the exact 8889 pole-quotient uniform-bound
+-- producer, or recover the actual alternate producer. Only after that identity
+-- may the first precision-losing transformation be localized without guessing.
 ------------------------------------------------------------------------
 
 data GammaProducerRecoveryStage : Set where
   coarseBoundKnown : GammaProducerRecoveryStage
-  producerArtifactRequired : GammaProducerRecoveryStage
+  candidateProducerRecovered : GammaProducerRecoveryStage
+  finalProducerIdentityRequired : GammaProducerRecoveryStage
   producerDecompositionRecovered : GammaProducerRecoveryStage
   precisionLossLocalized : GammaProducerRecoveryStage
   sharpSameTaperRepairOwned : GammaProducerRecoveryStage
 
-
 currentGammaProducerRecoveryStage : GammaProducerRecoveryStage
-currentGammaProducerRecoveryStage = producerArtifactRequired
+currentGammaProducerRecoveryStage = finalProducerIdentityRequired
 
 record GammaProducerSourceArtifact : Set₁ where
   field
@@ -61,26 +60,31 @@ open GammaProducerSourceLocalization public
 
 data GammaSourceSearchAction : Set where
   findAnotherGenericGammaBound : GammaSourceSearchAction
+  searchForAnyConcreteGammaFamily : GammaSourceSearchAction
   guessStirlingLossWithoutProducer : GammaSourceSearchAction
   guessDigammaLossWithoutProducer : GammaSourceSearchAction
-  recoverExactUniformBoundArtifact : GammaSourceSearchAction
-  recoverExactProducerDecomposition : GammaSourceSearchAction
+  proveRecoveredCandidateIsFinal8889Producer : GammaSourceSearchAction
+  recoverAlternateFinal8889Producer : GammaSourceSearchAction
   localizeFirstLossOnRecoveredProducer : GammaSourceSearchAction
   repairLocalizedSameTaperStep : GammaSourceSearchAction
 
-
 SearchRelevant : GammaSourceSearchAction -> Set
 SearchRelevant findAnotherGenericGammaBound = ⊥
+SearchRelevant searchForAnyConcreteGammaFamily = ⊥
 SearchRelevant guessStirlingLossWithoutProducer = ⊥
 SearchRelevant guessDigammaLossWithoutProducer = ⊥
-SearchRelevant recoverExactUniformBoundArtifact = ⊤
-SearchRelevant recoverExactProducerDecomposition = ⊤
+SearchRelevant proveRecoveredCandidateIsFinal8889Producer = ⊤
+SearchRelevant recoverAlternateFinal8889Producer = ⊤
 SearchRelevant localizeFirstLossOnRecoveredProducer = ⊤
 SearchRelevant repairLocalizedSameTaperStep = ⊤
 
 findAnotherGenericGammaBoundPruned :
   SearchRelevant findAnotherGenericGammaBound -> ⊥
 findAnotherGenericGammaBoundPruned x = x
+
+searchForAnyConcreteGammaFamilyPruned :
+  SearchRelevant searchForAnyConcreteGammaFamily -> ⊥
+searchForAnyConcreteGammaFamilyPruned x = x
 
 guessStirlingLossWithoutProducerPruned :
   SearchRelevant guessStirlingLossWithoutProducer -> ⊥
@@ -115,24 +119,38 @@ checkedLeanProofStillNotTransported =
   PQ8889.transportedIntoAgdaIsFalse
     PQ8889.canonicalCheckedLeanPoleQuotientReturn8889
 
+------------------------------------------------------------------------
+-- Bounded source-history status. These booleans record the later retained-source
+-- audit; they do not transport a Lean proof term or identify the candidate with
+-- the 8889 consumer. The higher lineage owner carries the detailed provenance.
+------------------------------------------------------------------------
+
 record GammaProducerSourceAcquisitionBoundary : Set where
   constructor gamma-producer-source-acquisition-boundary
   field
-    exactUniformGammaProducerArtifactRecoveredOnThisBranch : Bool
-    exactUniformGammaProducerArtifactRecoveredOnThisBranchIsFalse :
-      exactUniformGammaProducerArtifactRecoveredOnThisBranch ≡ false
+    concreteCandidateGammaProducerFamilyRecovered : Bool
+    concreteCandidateGammaProducerFamilyRecoveredIsTrue :
+      concreteCandidateGammaProducerFamilyRecovered ≡ true
+
+    exactUniformGammaProducerIdentityRecoveredOnThisBranch : Bool
+    exactUniformGammaProducerIdentityRecoveredOnThisBranchIsFalse :
+      exactUniformGammaProducerIdentityRecoveredOnThisBranch ≡ false
 
     firstPrecisionLosingAnalyticStepRecovered : Bool
     firstPrecisionLosingAnalyticStepRecoveredIsFalse :
       firstPrecisionLosingAnalyticStepRecovered ≡ false
 
-    genericAsymptoticGuessCanReplaceProducerRecovery : Bool
-    genericAsymptoticGuessCanReplaceProducerRecoveryIsFalse :
-      genericAsymptoticGuessCanReplaceProducerRecovery ≡ false
+    genericGammaSourceSearchStillLive : Bool
+    genericGammaSourceSearchStillLiveIsFalse :
+      genericGammaSourceSearchStillLive ≡ false
 
-    sourceExactProducerRecoveryIsLive : Bool
-    sourceExactProducerRecoveryIsLiveIsTrue :
-      sourceExactProducerRecoveryIsLive ≡ true
+    genericAsymptoticGuessCanReplaceProducerIdentity : Bool
+    genericAsymptoticGuessCanReplaceProducerIdentityIsFalse :
+      genericAsymptoticGuessCanReplaceProducerIdentity ≡ false
+
+    sameConsumerProducerIdentityIsLive : Bool
+    sameConsumerProducerIdentityIsLiveIsTrue :
+      sameConsumerProducerIdentityIsLive ≡ true
 
     sharpGammaRepairStillOpen : Bool
     sharpGammaRepairStillOpenIsTrue : sharpGammaRepairStillOpen ≡ true
@@ -140,16 +158,20 @@ record GammaProducerSourceAcquisitionBoundary : Set where
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
 
+    candidateSourceReference : String
     highestAlphaReading : String
 
 canonicalGammaProducerSourceAcquisitionBoundary :
   GammaProducerSourceAcquisitionBoundary
 canonicalGammaProducerSourceAcquisitionBoundary =
   gamma-producer-source-acquisition-boundary
+    true refl
+    false refl
     false refl
     false refl
     false refl
     true refl
     true refl
     false refl
-    "The 8889 return proves that a uniform Gamma bound exists and is too coarse, but the currently recovered theorem surface does not identify which internal estimate loses the sharp O(|t|^-2) window. Do not guess Stirling, digamma, envelope, or remainder as the culprit. Recover the exact same-taper uniform-bound producer and its decomposition first; then instantiate GammaPrecisionLossLocalization at the first source-verified losing step and repair only that step."
+    "retained Zeta23Bridge/LiteralWeilGammaConeBound.lean: epsGamma / gammaConeEnvelope; detailed provenance is owned by RiemannG2GammaCandidateSourceLineageRecoveryExact"
+    "A concrete epsGamma/gammaConeEnvelope Gamma producer family and downstream residual use are already recovered, so generic source discovery is pruned. The live source payment is same-consumer identity: prove that this recovered chain produces the exact 8889 universal pole-quotient Gamma bound, or recover the actual alternate 8889 producer. Do not localize Stirling, digamma, envelope, norm, uniformisation or remainder loss before that identity. After identity, localize the first precision-losing transformation and repair only that step until the final assigned allowance B_Gamma <= A_Gamma is met."

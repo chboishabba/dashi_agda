@@ -32,6 +32,8 @@ module DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
+import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
+import DASHI.Analysis.RiemannG2FinalPoleQuotientAnalyticCoreExact as FinalCore
 
 record UniversalEvenConeReturn : Set where
   constructor universal-even-cone-return
@@ -98,6 +100,186 @@ allCriticalFromHighLow :
 allCriticalFromHighLow d ρ with cover d ρ
 ... | inj₁ low = lowCertifiedCritical d ρ low
 ... | inj₂ high = highAnalyticCritical d ρ high
+
+------------------------------------------------------------------------
+-- SAME-SUBSTRATE RH WELD
+--
+-- The generic high/low compiler above is useful only if its Zero and Critical
+-- carriers are identified with the SAME completed-zeta object consumed by the
+-- prize-facing `RiemannHypothesisFor`.  The records below make that identity
+-- definitional rather than leaving a prose-level final bridge.
+------------------------------------------------------------------------
+
+record AnalyticNontrivialZero (analytic : Analytic.AnalyticSubstrate) : Set where
+  constructor analytic-nontrivial-zero
+  field
+    point :
+      Analytic.ComplexAnalyticCarrier.Complex
+        (Analytic.AnalyticSubstrate.carrier analytic)
+    nontrivial :
+      Analytic.CompletedRiemannZeta.nontrivialZero
+        (Analytic.AnalyticSubstrate.completed analytic)
+        point
+
+open AnalyticNontrivialZero public
+
+analyticCritical :
+  {analytic : Analytic.AnalyticSubstrate} →
+  AnalyticNontrivialZero analytic → Set
+analyticCritical {analytic} ρ =
+  Analytic.CompletedRiemannZeta.criticalLine
+    (Analytic.AnalyticSubstrate.completed analytic)
+    (point ρ)
+
+record AnalyticHighLowCompletion
+    (analytic : Analytic.AnalyticSubstrate) : Set₁ where
+  constructor analytic-high-low-completion
+  field
+    Low High : AnalyticNontrivialZero analytic → Set
+
+    cover :
+      (ρ : AnalyticNontrivialZero analytic) →
+      Low ρ ⊎ High ρ
+
+    lowCertifiedCritical :
+      (ρ : AnalyticNontrivialZero analytic) →
+      Low ρ →
+      analyticCritical ρ
+
+    highAnalyticCritical :
+      (ρ : AnalyticNontrivialZero analytic) →
+      High ρ →
+      analyticCritical ρ
+
+open AnalyticHighLowCompletion public
+
+toGenericHighLowCompletion :
+  {analytic : Analytic.AnalyticSubstrate} →
+  AnalyticHighLowCompletion analytic →
+  HighLowCompletion
+toGenericHighLowCompletion {analytic} d = record
+  { Zero = AnalyticNontrivialZero analytic
+  ; Critical = analyticCritical
+  ; Low = AnalyticHighLowCompletion.Low d
+  ; High = AnalyticHighLowCompletion.High d
+  ; cover = AnalyticHighLowCompletion.cover d
+  ; lowCertifiedCritical = AnalyticHighLowCompletion.lowCertifiedCritical d
+  ; highAnalyticCritical = AnalyticHighLowCompletion.highAnalyticCritical d
+  }
+
+analyticHighLowCompletionImpliesRH :
+  (analytic : Analytic.AnalyticSubstrate) →
+  AnalyticHighLowCompletion analytic →
+  Analytic.RiemannHypothesisFor analytic
+analyticHighLowCompletionImpliesRH analytic d s hz =
+  allCriticalFromHighLow
+    (toGenericHighLowCompletion d)
+    (analytic-nontrivial-zero s hz)
+
+------------------------------------------------------------------------
+-- OFF-LINE HIGH-ZERO -> FINAL ANALYTIC CORES -> CONTRADICTION.
+--
+-- This is the exact prize-facing role of the two final analytic cores.  They
+-- must be constructible for the SAME high nontrivial zero under the hypothesis
+-- that this zero is off the critical line.  The existing final-core compiler
+-- then produces bottom.  No unconditional `bottom` inhabitant is asserted.
+------------------------------------------------------------------------
+
+CriticalLineStable : Analytic.AnalyticSubstrate → Set
+CriticalLineStable analytic =
+  (s : Analytic.ComplexAnalyticCarrier.Complex
+    (Analytic.AnalyticSubstrate.carrier analytic)) →
+  Neg (Neg
+    (Analytic.CompletedRiemannZeta.criticalLine
+      (Analytic.AnalyticSubstrate.completed analytic) s)) →
+  Analytic.CompletedRiemannZeta.criticalLine
+    (Analytic.AnalyticSubstrate.completed analytic) s
+
+record HighOffLineAnalyticCoreProducer
+    (analytic : Analytic.AnalyticSubstrate)
+    (High : AnalyticNontrivialZero analytic → Set) : Set₁ where
+  constructor high-off-line-analytic-core-producer
+  field
+    coresForOffLineHigh :
+      (ρ : AnalyticNontrivialZero analytic) →
+      High ρ →
+      Neg (analyticCritical ρ) →
+      FinalCore.FinalPoleQuotientTwoAnalyticCores
+
+    attachmentsForOffLineHigh :
+      (ρ : AnalyticNontrivialZero analytic) →
+      (high : High ρ) →
+      (offLine : Neg (analyticCritical ρ)) →
+      FinalCore.FinalPoleQuotientAnalyticCoreAttachments
+        (coresForOffLineHigh ρ high offLine)
+
+    completionForOffLineHigh :
+      (ρ : AnalyticNontrivialZero analytic) →
+      (high : High ρ) →
+      (offLine : Neg (analyticCritical ρ)) →
+      FinalCore.FinalPoleQuotientAnalyticCompletion
+        (coresForOffLineHigh ρ high offLine)
+        (attachmentsForOffLineHigh ρ high offLine)
+
+open HighOffLineAnalyticCoreProducer public
+
+highOffLineAnalyticCoreContradiction :
+  {analytic : Analytic.AnalyticSubstrate} →
+  {High : AnalyticNontrivialZero analytic → Set} →
+  HighOffLineAnalyticCoreProducer analytic High →
+  (ρ : AnalyticNontrivialZero analytic) →
+  High ρ →
+  Neg (analyticCritical ρ) →
+  ⊥
+highOffLineAnalyticCoreContradiction producer ρ high offLine =
+  FinalCore.compileAnalyticCoresToHighOrdinateContradiction
+    (coresForOffLineHigh producer ρ high offLine)
+    (attachmentsForOffLineHigh producer ρ high offLine)
+    (completionForOffLineHigh producer ρ high offLine)
+
+highCriticalFromAnalyticCores :
+  {analytic : Analytic.AnalyticSubstrate} →
+  {High : AnalyticNontrivialZero analytic → Set} →
+  CriticalLineStable analytic →
+  HighOffLineAnalyticCoreProducer analytic High →
+  (ρ : AnalyticNontrivialZero analytic) →
+  High ρ →
+  analyticCritical ρ
+highCriticalFromAnalyticCores stable producer ρ high =
+  stable
+    (point ρ)
+    (λ offLine →
+      highOffLineAnalyticCoreContradiction producer ρ high offLine)
+
+compileAnalyticHighLowCompletion :
+  (analytic : Analytic.AnalyticSubstrate) →
+  (Low High : AnalyticNontrivialZero analytic → Set) →
+  ((ρ : AnalyticNontrivialZero analytic) → Low ρ ⊎ High ρ) →
+  ((ρ : AnalyticNontrivialZero analytic) → Low ρ → analyticCritical ρ) →
+  CriticalLineStable analytic →
+  HighOffLineAnalyticCoreProducer analytic High →
+  AnalyticHighLowCompletion analytic
+compileAnalyticHighLowCompletion analytic Low High coverLowHigh lowCritical stable producer =
+  analytic-high-low-completion
+    Low
+    High
+    coverLowHigh
+    lowCritical
+    (highCriticalFromAnalyticCores stable producer)
+
+analyticCoreHighLowCompletionImpliesRH :
+  (analytic : Analytic.AnalyticSubstrate) →
+  (Low High : AnalyticNontrivialZero analytic → Set) →
+  ((ρ : AnalyticNontrivialZero analytic) → Low ρ ⊎ High ρ) →
+  ((ρ : AnalyticNontrivialZero analytic) → Low ρ → analyticCritical ρ) →
+  CriticalLineStable analytic →
+  HighOffLineAnalyticCoreProducer analytic High →
+  Analytic.RiemannHypothesisFor analytic
+analyticCoreHighLowCompletionImpliesRH
+  analytic Low High coverLowHigh lowCritical stable producer =
+  analyticHighLowCompletionImpliesRH analytic
+    (compileAnalyticHighLowCompletion
+      analytic Low High coverLowHigh lowCritical stable producer)
 
 record UniversalEvenConeBoundary : Set where
   constructor universal-even-cone-boundary

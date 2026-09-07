@@ -15,14 +15,16 @@ module DASHI.Physics.Closure.NSTriadKNCutoffUniformCotlarSteinRound30Exact where
 -- Title: "Commutator Estimates and the Euler and Navier-Stokes Equations".
 -- DOI: 10.1002/cpa.3160410704.
 --
--- DASHI CONTRIBUTION
+-- 2026 BIDI RETURN:
+--   RequestProject/NavierStokes/AlmostOrthogonalGramSchur.lean sharpened the
+--   realized-family side of this owner.  Round 30 now owns both sides directly:
 --
--- Upgrade the scalar Round-29 cross-shell ledger to the exact operator-valued
--- input required by Cotlar--Stein.  Both products T_q* T_r and T_q T_r* are
--- controlled, their finite row masses are bounded uniformly in the Galerkin
--- cutoff, and the standard finite Cotlar--Stein theorem is consumed only after
--- those two-sided bounds refer to the same operator family.  The output is a
--- squared norm estimate with no square-root or real-completeness shortcut.
+--     structural OperatorSchur
+--       -> explicit OperatorToDataRealization seam
+--       -> realized DataSchur.
+--
+-- This is not a physical producer.  The compiler is closed; the truncation-
+-- uniform physical operator/data certificate remains open.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc; _⊔_)
@@ -207,16 +209,102 @@ geometricEnvelopeProducesUniformMass envelope = record
   ; rightMassBound = rightGeometricMass envelope
   }
 
+------------------------------------------------------------------------
+-- 2026 realized-data Schur return, folded into the old Round-30 owner.
+------------------------------------------------------------------------
+
+record DataSchur
+    {indexLevel : Level}
+    {Index : Set indexLevel}
+    (indices : List Index)
+    (absoluteRealGram : Index → Index → ℚ)
+    (size : Index → ℚ)
+    (A : ℚ) : Set indexLevel where
+  field
+    dataKernel : Index → Index → ℚ
+    dataKernelNonnegative : ∀ i j → 0ℚ ≤ dataKernel i j
+    dataKernelSymmetric : ∀ i j → dataKernel i j ≡ dataKernel j i
+    dataPairwiseDomination : ∀ i j →
+      absoluteRealGram i j ≤ dataKernel i j * (size i * size j)
+    dataRowMassBound : ∀ i → sumRational indices (dataKernel i) ≤ A
+
+open DataSchur public
+
+record OperatorSchur
+    {indexLevel : Level}
+    {Index : Set indexLevel}
+    (indices : List Index)
+    (operatorCoherence : Index → Index → ℚ)
+    (A : ℚ) : Set indexLevel where
+  field
+    operatorKernel : Index → Index → ℚ
+    operatorKernelNonnegative : ∀ i j → 0ℚ ≤ operatorKernel i j
+    operatorKernelSymmetric : ∀ i j → operatorKernel i j ≡ operatorKernel j i
+    operatorPairDomination : ∀ i j →
+      operatorCoherence i j ≤ operatorKernel i j
+    operatorRowMassBound : ∀ i → sumRational indices (operatorKernel i) ≤ A
+
+open OperatorSchur public
+
+record OperatorToDataRealization
+    {indexLevel : Level}
+    {Index : Set indexLevel}
+    {indices : List Index}
+    {operatorCoherence absoluteRealGram : Index → Index → ℚ}
+    {size : Index → ℚ}
+    {A : ℚ}
+    (O : OperatorSchur indices operatorCoherence A) : Set indexLevel where
+  field
+    realizedGramDominatedByOperatorKernel : ∀ i j →
+      absoluteRealGram i j
+      ≤ operatorKernel O i j * (size i * size j)
+
+open OperatorToDataRealization public
+
+operatorSchurImpliesDataSchur :
+  ∀ {indexLevel : Level}
+    {Index : Set indexLevel}
+    {indices : List Index}
+    {operatorCoherence absoluteRealGram : Index → Index → ℚ}
+    {size : Index → ℚ}
+    {A : ℚ}
+    (O : OperatorSchur indices operatorCoherence A) →
+  OperatorToDataRealization
+    {absoluteRealGram = absoluteRealGram}
+    {size = size} O →
+  DataSchur indices absoluteRealGram size A
+operatorSchurImpliesDataSchur O R = record
+  { dataKernel = operatorKernel O
+  ; dataKernelNonnegative = operatorKernelNonnegative O
+  ; dataKernelSymmetric = operatorKernelSymmetric O
+  ; dataPairwiseDomination = realizedGramDominatedByOperatorKernel R
+  ; dataRowMassBound = operatorRowMassBound O
+  }
+
 operatorValuedCotlarSteinReducerClosed : Bool
 operatorValuedCotlarSteinReducerClosed = true
 
+operatorToDataSchurCompilerClosed : Bool
+operatorToDataSchurCompilerClosed = true
+
 physicalCrossShellOperatorDecaySupplied : Bool
 physicalCrossShellOperatorDecaySupplied = false
+
+physicalOuterCellDataSchurSupplied : Bool
+physicalOuterCellDataSchurSupplied = false
 
 operatorValuedCotlarSteinReducerClosedIsTrue :
   operatorValuedCotlarSteinReducerClosed ≡ true
 operatorValuedCotlarSteinReducerClosedIsTrue = refl
 
+operatorToDataSchurCompilerClosedIsTrue :
+  operatorToDataSchurCompilerClosed ≡ true
+operatorToDataSchurCompilerClosedIsTrue = refl
+
 physicalCrossShellOperatorDecaySuppliedIsFalse :
   physicalCrossShellOperatorDecaySupplied ≡ false
 physicalCrossShellOperatorDecaySuppliedIsFalse = refl
+
+physicalOuterCellDataSchurSuppliedIsFalse :
+  physicalOuterCellDataSchurSupplied ≡ false
+physicalOuterCellDataSchurSuppliedIsFalse = refl
