@@ -62,6 +62,17 @@ twoNN = Rational.addNonnegative oneNN oneNN
 fourNN : 0ℚ ≤ four
 fourNN = Rational.addNonnegative twoNN twoNN
 
+twelveNN : 0ℚ ≤ R174.twelve
+twelveNN =
+  let
+    six = four + two
+    sixNN = Rational.addNonnegative fourNN twoNN
+  in
+  subst
+    (0ℚ ≤_)
+    (solve [])
+    (Rational.addNonnegative sixNN sixNN)
+
 record UnitDirectionPair (P Q : C3.Complex3 F) : Set where
   constructor unit-direction-pair
   field
@@ -108,15 +119,6 @@ normalizedSlotKernelMassBelowFortyEight P Q a b unit transverse =
       Rational.nonnegativeProductMonotone
         sigmaNN massNN fourNN massNN
         sigmaBound ℚP.≤-refl
-    twelveNN : 0ℚ ≤ R174.twelve
-    twelveNN =
-      let
-        six = R174.two + R174.two + R174.two
-        sixNN = Rational.addNonnegative
-          (Rational.addNonnegative R174.twoNN R174.twoNN)
-          R174.twoNN
-      in
-      Rational.addNonnegative sixNN sixNN
     scaled :
       R174.twelve * (norm sigma * norm a * norm b)
       ≤ R174.twelve * (four * (norm a * norm b))
