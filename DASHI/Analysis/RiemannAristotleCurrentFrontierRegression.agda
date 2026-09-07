@@ -2,6 +2,7 @@ module DASHI.Analysis.RiemannAristotleCurrentFrontierRegression where
 
 open import DASHI.Core.Prelude
 import DASHI.Analysis.RiemannAristotleCurrentFrontierExact as F
+import DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact as U
 
 evenConeClosed :
   F.AristotleCurrentFrontier.universalEvenConeConstructionClosedInLean
@@ -223,3 +224,24 @@ rhOpen :
   F.AristotleCurrentFrontier.finalRHImplicationClosed
     F.canonicalAristotleCurrentFrontier ≡ false
 rhOpen = refl
+
+------------------------------------------------------------------------
+-- Current global-cut regressions.
+------------------------------------------------------------------------
+
+highOrdinateCoreCompilerOwned : F.highOrdinateAnalyticCoreCompilerOwned ≡ true
+highOrdinateCoreCompilerOwned = F.highOrdinateAnalyticCoreCompilerOwnedIsTrue
+
+plattTrudgianSourceOwned : F.plattTrudgianLowOrdinateSourceRecovered ≡ true
+plattTrudgianSourceOwned = F.plattTrudgianLowOrdinateSourceRecoveredIsTrue
+
+plattTrudgianTheoremNotImported :
+  F.plattTrudgianLowOrdinateTheoremImportedIntoAgda ≡ false
+plattTrudgianTheoremNotImported =
+  F.plattTrudgianLowOrdinateTheoremImportedIntoAgdaIsFalse
+
+sameSubstrateHighLowCompilerTarget : Set₁
+sameSubstrateHighLowCompilerTarget =
+  (analytic : U.Analytic.AnalyticSubstrate) →
+  U.AnalyticHighLowCompletion analytic →
+  U.Analytic.RiemannHypothesisFor analytic
