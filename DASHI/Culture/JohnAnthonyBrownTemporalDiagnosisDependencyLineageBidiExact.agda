@@ -9,13 +9,6 @@ import DASHI.Core.DiagnosisExperimentPortfolioBidiExact as Portfolio
 import DASHI.Core.TemporalDiagnosisProvenanceHistoryBidiExact as Temporal
 import DASHI.Core.TemporalDiagnosisDependencyLineageBidiExact as Lineage
 
-------------------------------------------------------------------------
--- JOHN ANTHONY BROWN PAPER AUDIT -> TEMPORAL DIAGNOSIS DEPENDENCY LINEAGE
---
--- Reuses BrownDepends literally. These are audit/revision paths, not empirical
--- causal claims and not statements that a reopened claim is false.
-------------------------------------------------------------------------
-
 receptionToH2Path :
   Closure.AffectedClosure
     Brown.BrownDepends Brown.conceptualReceptionEdge Brown.h2OutcomeVectorClaim
@@ -93,13 +86,11 @@ localizedReceptionReactivation =
     receptionEliminationLineage
     receptionReactivationLineage
     refl
+    refl
+    refl
     Brown.conceptualReceptionEdge
     receptionToH2Path
     "localize reactivation to the reception -> autonomy-definition -> H2 subgraph"
-
-------------------------------------------------------------------------
--- Same diagnosis label, same H1 consumer, different measurement path.
-------------------------------------------------------------------------
 
 exposureObservationEliminated : Temporal.DiagnosisEvent Outcome.observationConflict
 exposureObservationEliminated =
@@ -140,13 +131,11 @@ localizedH1ObservationReactivation =
     exposureObservationLineage
     outcomeObservationLineage
     refl
+    refl
+    refl
     Brown.outcomeMeasurementEvidence
     outcomeToH1Path
     "same H1 observation diagnosis reactivated through a different upstream measurement edge"
-
-------------------------------------------------------------------------
--- Existing John Brown no-collapse boundaries remain controlling.
-------------------------------------------------------------------------
 
 selectiveReopeningBoundaryRetained : Brown.JohnBrownSelectiveReopeningBoundary
 selectiveReopeningBoundaryRetained = Brown.canonicalJohnBrownSelectiveReopeningBoundary
