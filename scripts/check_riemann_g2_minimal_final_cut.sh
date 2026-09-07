@@ -32,9 +32,12 @@ FILES=(
   DASHI/Analysis/RiemannG2LiteralComplementDirectTargetExact.agda
   DASHI/Analysis/RiemannG2DirectIndependentComplementMarginExact.agda
   DASHI/Analysis/RiemannG2UniformIndependentComplementHighProducerExact.agda
+  DASHI/Analysis/RiemannCriticalLineStabilityRefinementExact.agda
+  DASHI/Analysis/RiemannG2FinalPoleNearObserverRefinementExact.agda
   DASHI/Analysis/RiemannPlattTrudgianLowCompletionAdapterExact.agda
   DASHI/Analysis/RiemannG2ClayTerminalOneLeafCutExact.agda
   DASHI/Analysis/RiemannG2CurrentDirectOneLeafFrontierExact.agda
+  DASHI/Analysis/RiemannG2FinalCutIntrospectionExact.agda
   DASHI/Analysis/RiemannG2FinalSplitComplementOrderTransportCompilerExact.agda
   DASHI/Analysis/RiemannG2FinalPoleQuotientMinimalAnalyticCutExact.agda
   DASHI/Analysis/RiemannG2FinalPoleQuotientTwoPaymentCutExact.agda
