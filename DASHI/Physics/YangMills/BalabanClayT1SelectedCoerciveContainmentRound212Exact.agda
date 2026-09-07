@@ -10,10 +10,11 @@ module DASHI.Physics.YangMills.BalabanClayT1SelectedCoerciveContainmentRound212E
 --
 -- This owner removes that representation inflation.  Choose the physical
 -- coercive observable itself as the selected moment observable; if it is
--- nonnegative, coercive for the selected topology, and has admissibly compact
--- sublevels, the existing Markov authority compiles the already-owned selected
--- moment theorem directly to selected compact containment.  No convergence
--- carrier and no post-hoc observable equality theorem are required.
+-- nonnegative, coercive for the selected topology, has admissibly compact
+-- sublevels, AND the selected expectation has the probability/Markov semantics
+-- required by the authority below, the already-owned selected moment theorem
+-- compiles directly to selected compact containment.  No convergence carrier
+-- and no post-hoc observable equality theorem are required.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -111,8 +112,18 @@ round212PostHocObservableEqualityRequired = false
 round212SelectedMarkovContainmentCompilerClosed : Bool
 round212SelectedMarkovContainmentCompilerClosed = true
 
-round212RemainingPhysicalInputsAreCoercivityAndCompactSublevels : Bool
-round212RemainingPhysicalInputsAreCoercivityAndCompactSublevels = true
+-- The authority is an explicit premise, not something manufactured by this
+-- compiler.  On the literal T5 carrier, expectation/probability-integral
+-- semantics remain a physical/representation obligation before ordinary Markov
+-- reasoning can be applied.
+round212SelectedExpectationProbabilitySemanticsStillRequired : Bool
+round212SelectedExpectationProbabilitySemanticsStillRequired = true
+
+round212SelectedCoercivityStillRequired : Bool
+round212SelectedCoercivityStillRequired = true
+
+round212SelectedCompactSublevelsStillRequired : Bool
+round212SelectedCompactSublevelsStillRequired = true
 
 round212DirectContainmentRemainsLeastPrivilegeTarget : Bool
 round212DirectContainmentRemainsLeastPrivilegeTarget =
@@ -133,11 +144,18 @@ round212SelectedMarkovContainmentCompilerClosedIsTrue :
   round212SelectedMarkovContainmentCompilerClosed ≡ true
 round212SelectedMarkovContainmentCompilerClosedIsTrue = refl
 
+round212SelectedExpectationProbabilitySemanticsStillRequiredIsTrue :
+  round212SelectedExpectationProbabilitySemanticsStillRequired ≡ true
+round212SelectedExpectationProbabilitySemanticsStillRequiredIsTrue = refl
+
 round212ClayPromotionIsFalse : round212ClayPromotion ≡ false
 round212ClayPromotionIsFalse = refl
 
 currentYMTerminalCutsetRound212Level : ProofLevel
 currentYMTerminalCutsetRound212Level = machineChecked
+
+physicalSelectedExpectationProbabilitySemanticsLevel : ProofLevel
+physicalSelectedExpectationProbabilitySemanticsLevel = conditional
 
 physicalSelectedCoercivityAndCompactSublevelLevel : ProofLevel
 physicalSelectedCoercivityAndCompactSublevelLevel = conditional
