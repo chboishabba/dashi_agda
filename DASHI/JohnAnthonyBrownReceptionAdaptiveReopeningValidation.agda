@@ -7,6 +7,7 @@ import DASHI.Core.ExperimentalOutcomeOrientationBackpropagationBidiExact as Outc
 import DASHI.Core.SequentialOutcomeBackpropagationBidiExact as Revision
 import DASHI.Core.TemporalDiagnosisDependencyLineageBidiExact as Lineage
 import DASHI.Core.SelectiveInvalidationParetoFrontierBidiExact as Pareto
+import DASHI.Core.RecursiveSelectiveInvalidationParetoTruthMaintenanceBidiExact as Recursive
 import DASHI.Foundations.Base369Ternary27AdmissibilityPathDynamicsExact as BasePath
 import DASHI.Foundations.Base369Ternary27StabiliserOperatorHolonomyExact as Operator
 import DASHI.Governance.ReceptionEvidenceSelectiveReopeningExact as Reception
@@ -15,6 +16,7 @@ import DASHI.Culture.JohnAnthonyBrownPaperSectionHypothesisManifestExact as Mani
 import DASHI.Culture.JohnAnthonyBrownDiagnosisRepairSchedulerBidiExact as Diagnosis
 import DASHI.Culture.JohnAnthonyBrownTemporalDiagnosisDependencyLineageBidiExact as TemporalLineage
 import DASHI.Culture.JohnAnthonyBrownSelectiveInvalidationParetoBidiExact as Selective
+import DASHI.Culture.JohnAnthonyBrownRecursiveParetoTruthMaintenanceBidiExact as RecursiveBrown
 
 swapReallyUnavailableBefore :
   Operator.OperatorAdmitted
@@ -107,3 +109,26 @@ unrelatedH5PathIsRetained = refl
 policyAuthorityIsBlockedFromEpistemicPromotion :
   Pareto.class Selective.rightsPolicyAuthority ≡ Pareto.authorityBlocked
 policyAuthorityIsBlockedFromEpistemicPromotion = refl
+
+recursiveH1OutcomeStillDrivesCurrentRound :
+  RecursiveBrown.brownClass RecursiveBrown.h1Outcome ≡ Pareto.mustRecompute
+recursiveH1OutcomeStillDrivesCurrentRound = RecursiveBrown.h1OutcomeDrivesCurrentRound
+
+recursiveH1ExposureStillRetained :
+  RecursiveBrown.brownClass RecursiveBrown.h1Exposure ≡ Pareto.provablyUnaffected
+recursiveH1ExposureStillRetained = RecursiveBrown.h1ExposureAuditRemainsRetained
+
+recursiveH5StillRetained :
+  RecursiveBrown.brownClass RecursiveBrown.h5Confounding ≡ Pareto.provablyUnaffected
+recursiveH5StillRetained = RecursiveBrown.h5ConfoundingRemainsRetained
+
+recursiveSemanticDimensionStillFour :
+  Pareto.declaredSemanticAxisCount RecursiveBrown.brownNextAmbient ≡ 4
+recursiveSemanticDimensionStillFour = RecursiveBrown.brownSemanticDimensionStillFour
+
+recursiveGenericUnaffectedCandidateRemainsUnaffected :
+  Recursive.candidateClass Recursive.layer1
+    (Recursive.liftCandidate Recursive.recursiveStep01 Recursive.frame0)
+  ≡ Pareto.provablyUnaffected
+recursiveGenericUnaffectedCandidateRemainsUnaffected =
+  Recursive.frameClassStillUnaffectedAfterRecursiveLift
