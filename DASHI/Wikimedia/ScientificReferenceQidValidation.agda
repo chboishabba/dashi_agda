@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Wikimedia.ScientificReferenceEntityAtlasExact as Atlas
 import DASHI.Wikimedia.ScientificCitationQidBindingsExact as Citation
+import DASHI.Wikimedia.ScientificReferenceResidualAcquisitionExact as Residual
 import DASHI.Physics.YangMills.SourceEntityQidBindingsExact as YM
 import DASHI.Physics.Closure.NavierStokesSourceEntityQidBindingsExact as NS
 import DASHI.Physics.Closure.NavierStokesCitationIdentityAuditExact as NSAudit
@@ -25,6 +26,21 @@ atlasKeepsUnresolvedMappingsOpen :
   Atlas.ScientificReferenceEntityAtlasBoundary.unresolvedMappingsRemainExplicit
     Atlas.canonicalScientificReferenceEntityAtlasBoundary ≡ true
 atlasKeepsUnresolvedMappingsOpen = refl
+
+referenceDemandIsExactResidualIndexed :
+  Residual.ScientificReferenceResidualBoundary.acquisitionIsIndexedByExactResidual
+    Residual.canonicalScientificReferenceResidualBoundary ≡ true
+referenceDemandIsExactResidualIndexed = refl
+
+referenceRetrievalDoesNotPayResidual :
+  Residual.ScientificReferenceResidualBoundary.retrievalEqualsPayment
+    Residual.canonicalScientificReferenceResidualBoundary ≡ false
+referenceRetrievalDoesNotPayResidual = refl
+
+referenceCandidateQidDoesNotProveSamePerson :
+  Residual.ScientificReferenceResidualBoundary.candidateQidEqualsSamePersonProof
+    Residual.canonicalScientificReferenceResidualBoundary ≡ false
+referenceCandidateQidDoesNotProveSamePerson = refl
 
 ymQidDoesNotCloseClay :
   YM.YMReferenceEntityBoundary.qidClosesClayObligation
@@ -58,3 +74,6 @@ rhPolymathDomainWitness = Citation.domain Citation.polymath2019
 
 rhExtendedBindingWitness : RHExtended.ExtendedRiemannSourceBinding
 rhExtendedBindingWitness = RHExtended.bombieriClayRH
+
+robertKohnDemandWitness : Residual.ScientificReferenceAcquisitionDemand Residual.robertKohnIdentityResidual
+robertKohnDemandWitness = Residual.robertKohnIdentityDemand
