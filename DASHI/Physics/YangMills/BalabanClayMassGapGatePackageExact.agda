@@ -14,15 +14,16 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- Kazuhiro Kuwae and Takashi Shioya, Convergence of Spectral Structures,
 -- DOI 10.4310/cag.2003.v11.n4.a1.
 --
--- M7 was formerly one opaque "physical Hamiltonian/domain/common-core" gate.
--- The BIDI Lean/Agda pass makes the actual cut visible:
---   M7a selected finite action variation is promoted/identified with H_YM;
---   M7b H_YM has its genuine domain and common invariant dense core;
---   M7c the selected Yang--Mills form/operator is self-adjoint on that carrier.
+-- M7 is kept source-honest:
+--   M7a action variation = physical H_YM is a same-object identification;
+--   M7b/M7c now prefer the Kato closed-form route, where a densely-defined
+--     closed semibounded physical YM form produces its associated domain and
+--     self-adjoint operator together;
+--   the selected common invariant operator core remains a separate payment.
 --
 -- The gauge-invariant L2 subspace is the selected carrier route.  A separate
--- quotient of configuration space by gauge orbits is therefore not itself a
--- mandatory M7 payment.  Historical quotient-route receipts remain provenance.
+-- quotient of configuration space by gauge orbits is not a mandatory M7
+-- payment on this route.
 
 import DASHI.Physics.YangMills.BalabanClayPhysicalScaleExponentExact
 import DASHI.Physics.YangMills.BalabanClayDenseCoreSpectralGapExact
@@ -30,6 +31,7 @@ import DASHI.Physics.YangMills.BalabanClayExactOSPullbackRecombinationExact
 import DASHI.Physics.YangMills.BalabanClayObservableGapEdgeExact
 import DASHI.Physics.YangMills.BalabanClaySpectralUVCompatibilityExact
 import DASHI.Physics.YangMills.YMOperatorDomainContinuumFrontier2026Exact as Frontier
+import DASHI.Physics.YangMills.YMKatoClosedFormHamiltonianExact as Kato
 
 infixr 4 _or_
 data _or_ (A B : Set) : Set where
@@ -151,7 +153,43 @@ finiteSelectedHodgeVariationPairingClosed :
 finiteSelectedHodgeVariationPairingClosed = refl
 
 ------------------------------------------------------------------------
--- Exact M7 frontier: the finite calculation is not the physical Hamiltonian.
+-- Preferred Kato M7b/M7c compiler.
+------------------------------------------------------------------------
+
+M7PhysicalClosedSemiboundedFormInput : Set → Set → Set₁
+M7PhysicalClosedSemiboundedFormInput = Kato.PhysicalYMClosedFormInput
+
+M7KatoRepresentationAuthority : Set → Set → Set₁
+M7KatoRepresentationAuthority = Kato.KatoFirstRepresentationAuthority
+
+M7AssociatedSelfAdjointOperator :
+  ∀ {Hilbert Scalar} →
+  Kato.ClosedSemiboundedFormData Hilbert Scalar → Set₁
+M7AssociatedSelfAdjointOperator = Kato.AssociatedSelfAdjointOperator
+
+M7CommonInvariantOperatorCore :
+  ∀ {Hilbert Scalar}
+    {formData : Kato.ClosedSemiboundedFormData Hilbert Scalar} →
+  Kato.AssociatedSelfAdjointOperator formData → Set₁
+M7CommonInvariantOperatorCore = Kato.CommonInvariantOperatorCore
+
+katoDomainAndSelfAdjointCompilerLevel : ProofLevel
+katoDomainAndSelfAdjointCompilerLevel =
+  Kato.katoClosedFormHamiltonianCompilerLevel
+
+katoRepresentationAuthorityLevel : ProofLevel
+katoRepresentationAuthorityLevel =
+  Kato.katoFirstRepresentationTheoremAuthorityLevel
+
+-- Consequence for scheduling:
+-- M7b's operator-domain coordinate and M7c self-adjointness are not two
+-- independent analytic producers on the preferred route.  They are joint
+-- outputs of the Kato representation theorem once the physical closed form is
+-- supplied.  The common invariant operator core is deliberately NOT output by
+-- this compiler.
+
+------------------------------------------------------------------------
+-- Exact M7 physical frontier.
 ------------------------------------------------------------------------
 
 m7aPhysicalActionVariationHamiltonianSameObjectStillOpen :
@@ -173,6 +211,14 @@ m7cSelfAdjointSelectedYMFormStillOpen :
   Frontier.physicalSelfAdjointSelectedYMFormClosed
     Frontier.canonicalYMOperatorContinuumFrontier ≡ false
 m7cSelfAdjointSelectedYMFormStillOpen = refl
+
+literalM7PhysicalClosedSemiboundedFormLevel : ProofLevel
+literalM7PhysicalClosedSemiboundedFormLevel =
+  Kato.literalPhysicalYMClosedSemiboundedFormLevel
+
+literalM7CommonInvariantCoreLevel : ProofLevel
+literalM7CommonInvariantCoreLevel =
+  Kato.literalPhysicalYMCommonInvariantOperatorCoreLevel
 
 massGapGateSeparationLevel : ProofLevel
 massGapGateSeparationLevel = machineChecked
