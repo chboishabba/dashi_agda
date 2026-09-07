@@ -26,7 +26,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -41,6 +41,7 @@ import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as
 import DASHI.Physics.Closure.NSTriadKNAntiParallelHelicitySlotKernelRound145Exact as R145
 import DASHI.Physics.Closure.NSTriadKNCriticalSlotQuadraticKernelRound167Exact as R167
 import DASHI.Physics.Closure.NSTriadKNHHAntiParallelQuadraticKernelNormRound174Exact as R174
+import DASHI.Physics.Closure.NSTriadKNPhysicalOrderedTransferSquaredMajorantRound96Exact as R96
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact as R225
 import DASHI.Physics.Closure.NSTriadKNStrongLowLiteralNestedKernelRound329Exact as R329
 import DASHI.Physics.Closure.NSTriadKNNormalizedDoubleMixedCellMassRound452Exact as R452
@@ -174,8 +175,7 @@ fortyEightNN =
     sixNN = Rational.addNonnegative (Rational.addNonnegative twoNN twoNN) twoNN
     twelveNN = Rational.addNonnegative sixNN sixNN
   in
-  let instance twelveNNI = nonNegative twelveNN
-  in ℚP.*-monoˡ-≤-nonNeg R174.twelve fourNN
+  R96.productNonnegative twelveNN fourNN
 
 sumDoubleMixedMassBelowEnergyProducts :
   {E : C3.IntegerEmbedding F}
@@ -231,19 +231,20 @@ fixedOutputDoubleMixedMassBelowEnergySquare :
   ≤ R452.fortyEight
       * (R453.sumEnergy (physicalModalEnergy velocity) (Cube.cutoffModes cutoff)
         * R453.sumEnergy (physicalModalEnergy velocity) (Cube.cutoffModes cutoff))
-fixedOutputDoubleMixedMassBelowEnergySquare P C cutoff output =
+fixedOutputDoubleMixedMassBelowEnergySquare
+    {velocity = velocity} P C cutoff output =
   let
     fibre = Output.physicalOutputFiber cutoff output
     local = sumDoubleMixedMassBelowEnergyProducts P C fibre
     selected =
       R454.WithEnergy.physicalOutputFibreEnergyBelowSquare
-        (physicalModalEnergy _) cutoff output
+        (physicalModalEnergy velocity) cutoff output
     scaled :
       R452.fortyEight
-        * R454.triadEnergyProductSum (physicalEnergy _) fibre
+        * R454.triadEnergyProductSum (physicalEnergy velocity) fibre
       ≤ R452.fortyEight
-        * (R453.sumEnergy (physicalModalEnergy _) (Cube.cutoffModes cutoff)
-          * R453.sumEnergy (physicalModalEnergy _) (Cube.cutoffModes cutoff))
+        * (R453.sumEnergy (physicalModalEnergy velocity) (Cube.cutoffModes cutoff)
+          * R453.sumEnergy (physicalModalEnergy velocity) (Cube.cutoffModes cutoff))
     scaled =
       let instance fortyEightNNI = nonNegative fortyEightNN
       in ℚP.*-monoˡ-≤-nonNeg R452.fortyEight selected
