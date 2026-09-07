@@ -66,6 +66,45 @@ record ProofCarryingFiniteSumEnclosure
 
 open ProofCarryingFiniteSumEnclosure public
 
+------------------------------------------------------------------------
+-- ORDERED UPPER-ENDPOINT SPECIALIZATION
+--
+-- Many consumers do not need to reason about the entire interval object.  They
+-- need one theorem: the exact finite fold is below a certified upper endpoint.
+-- Keep the interval semantics generic, but require a proof-bearing eliminator
+-- from aggregate containment to the chosen order.  The resulting finite-sum
+-- upper theorem is then compiler output, not a second domain-level assumption.
+------------------------------------------------------------------------
+
+record ProofCarryingFiniteSumUpperEnclosure
+    (C : FiniteAdditiveCarrier)
+    (certificate : ProofCarryingFiniteSumEnclosure C) : Set₁ where
+  field
+    lessOrEqual : Scalar C → Scalar C → Set
+    certifiedUpper : Scalar C
+
+    aggregateContainmentImpliesUpper :
+      ∀ {value : Scalar C} →
+      Contains certificate (aggregate certificate) value →
+      lessOrEqual value certifiedUpper
+
+    upperReference : String
+
+open ProofCarryingFiniteSumUpperEnclosure public
+
+finiteSumBelowCertifiedUpper :
+  ∀ {C certificate} →
+  (upperCertificate : ProofCarryingFiniteSumUpperEnclosure C certificate) →
+  lessOrEqual upperCertificate
+    (foldScalars C
+      (mapValues
+        (evaluateTerm certificate)
+        (terms certificate)))
+    (certifiedUpper upperCertificate)
+finiteSumBelowCertifiedUpper {certificate = certificate} upperCertificate =
+  aggregateContainmentImpliesUpper upperCertificate
+    (aggregateContainsFiniteSum certificate)
+
 record ProofCarryingFiniteSumBoundary : Set where
   constructor proof-carrying-finite-sum-boundary
   field
@@ -77,6 +116,10 @@ record ProofCarryingFiniteSumBoundary : Set where
     finiteSumApproximationRequiresReceiptIsTrue :
       finiteSumApproximationRequiresReceipt ≡ true
 
+    upperEndpointEliminatesSecondFiniteSumUpperAssumption : Bool
+    upperEndpointEliminatesSecondFiniteSumUpperAssumptionIsTrue :
+      upperEndpointEliminatesSecondFiniteSumUpperAssumption ≡ true
+
     finiteCertificateImpliesUnstatedInfiniteLimit : Bool
     finiteCertificateImpliesUnstatedInfiniteLimitIsFalse :
       finiteCertificateImpliesUnstatedInfiniteLimit ≡ false
@@ -84,6 +127,7 @@ record ProofCarryingFiniteSumBoundary : Set where
 canonicalProofCarryingFiniteSumBoundary : ProofCarryingFiniteSumBoundary
 canonicalProofCarryingFiniteSumBoundary =
   proof-carrying-finite-sum-boundary
+    true refl
     true refl
     true refl
     false refl
