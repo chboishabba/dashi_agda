@@ -75,7 +75,7 @@ asPrintedRoleInputs inputs =
     representation = splitRepresentation (physical inputs)
     geometry = selectedGeometry (physical inputs)
     ops = operators (printedSemantics inputs)
-    admission = Principal.path13RelativeContourInPrincipalImageFromSplit
+    admission = Principal.relativeContourInPrincipalImage
       representation (cutThreshold inputs)
   in record
     { Source.PrintedRolePath13SourceFamilyInputs.geometry = geometry
