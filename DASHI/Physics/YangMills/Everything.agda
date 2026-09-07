@@ -78,6 +78,9 @@ import DASHI.Physics.YangMills.BalabanCMP98Path13SplitT3SelectedSemanticsExact
 import DASHI.Physics.YangMills.BalabanCMP98Path13PreferredSplitPhysicalT3SourceFamilyExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119SplitPhysicalStandardProvenanceExact
 
+-- Newest canonical status surface for the source-correct preferred route.
+import DASHI.Physics.YangMills.BalabanCMP98Path13CurrentPreferredSourceFrontierExact
+
 import DASHI.Physics.YangMills.BalabanPath13Eq119SourceRouteProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119BishopBridgeProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119DirectCalculusProvenanceExact
