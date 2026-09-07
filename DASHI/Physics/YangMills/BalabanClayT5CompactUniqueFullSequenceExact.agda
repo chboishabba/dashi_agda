@@ -8,11 +8,9 @@ module DASHI.Physics.YangMills.BalabanClayT5CompactUniqueFullSequenceExact where
 -- as Set-valued receipts.  Those do not by themselves inhabit the measure-level
 -- convergence relation consumed by FiniteToContinuumOSClosure.
 --
--- This module states the least-privilege typed theorem surface.  Once every
--- subsequence of the selected physical diagonal sequence has a further
--- convergent subsequence, and every such cluster point is the selected
--- continuum candidate, the standard compact/unique-limit theorem upgrades the
--- whole selected sequence to convergence.
+-- This module states the least-privilege typed theorem surface on literal
+-- natural-number subsequences.  Every extracted object sequence is definitionally
+-- obtained from the selected physical sequence by a Nat -> Nat index map.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -21,38 +19,45 @@ open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as Limit
 
+record SubsequenceWitness {Object : Set}
+    (sequence : Nat → Object) : Set₁ where
+  field
+    indices : Nat → Nat
+    StrictlyIncreasing : (Nat → Nat) → Set
+    indicesStrictlyIncreasing : StrictlyIncreasing indices
+
+  values : Nat → Object
+  values n = sequence (indices n)
+
+open SubsequenceWitness public
+
 record SequentialCompactUniqueData (Object : Set) : Set₁ where
   field
     convergence : Limit.SequentialLimit Object
     sequence : Nat → Object
     target : Object
 
-    Subsequence : Set
-    values : Subsequence → Nat → Object
+    -- Relative sequential compactness: every literal subsequence admits a
+    -- literal further subsequence.  Its values are therefore forced to be
+    -- values of the original sequence, not an unrelated carrier.
+    extractFurther :
+      (subsequence : SubsequenceWitness sequence) →
+      SubsequenceWitness (values subsequence)
 
-    FurtherSubsequence : Subsequence → Set
-    furtherValues : ∀ subsequence →
-      FurtherSubsequence subsequence → Nat → Object
+    clusterLimit :
+      (subsequence : SubsequenceWitness sequence) → Object
 
-    -- Every subsequence has a further subsequence which converges in the same
-    -- declared topology.  This is the typed relative sequential compactness
-    -- statement needed by the standard theorem.
-    relativelySequentiallyCompact : ∀ subsequence →
-      FurtherSubsequence subsequence
+    extractedSubsequenceConverges :
+      (subsequence : SubsequenceWitness sequence) →
+      Limit.Converges convergence
+        (values (extractFurther subsequence))
+        (clusterLimit subsequence)
 
-    clusterLimit : ∀ subsequence →
-      FurtherSubsequence subsequence → Object
-
-    extractedSubsequenceConverges : ∀ subsequence →
-      let further = relativelySequentiallyCompact subsequence
-      in Limit.Converges convergence
-        (furtherValues subsequence further)
-        (clusterLimit subsequence further)
-
-    -- Every cluster point of the selected sequence is the selected target.
-    uniqueClusterPoint : ∀ subsequence →
-      let further = relativelySequentiallyCompact subsequence
-      in clusterLimit subsequence further ≡ target
+    -- Every cluster point extracted from every subsequence is the selected
+    -- continuum target.
+    uniqueClusterPoint :
+      (subsequence : SubsequenceWitness sequence) →
+      clusterLimit subsequence ≡ target
 
 open SequentialCompactUniqueData public
 
@@ -81,9 +86,9 @@ fullSequenceConverges authority =
 compactUniqueFullSequenceCompilerLevel : ProofLevel
 compactUniqueFullSequenceCompilerLevel = machineChecked
 
--- This is a standard topology theorem authority, not Yang--Mills-specific
--- mathematics.  The physical work is instantiating the two typed premises on
--- the literal diagonal gauge-field measure sequence.
+-- Standard topology theorem authority.  The Yang--Mills work is the literal
+-- instantiation of relative sequential compactness and uniqueness of cluster
+-- points on the selected diagonal gauge-field measure sequence.
 compactUniqueFullConvergenceAuthorityLevel : ProofLevel
 compactUniqueFullConvergenceAuthorityLevel = standardImported
 
