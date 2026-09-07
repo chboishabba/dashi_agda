@@ -35,6 +35,7 @@ FILES=(
   DASHI/Analysis/RiemannCriticalLineStabilityRefinementExact.agda
   DASHI/Analysis/RiemannG2FinalPoleNearObserverRefinementExact.agda
   DASHI/Analysis/RiemannPlattTrudgianLowCompletionAdapterExact.agda
+  DASHI/Analysis/RiemannG2ConstructiveNegativeRHCompletionExact.agda
   DASHI/Analysis/RiemannG2ClayTerminalOneLeafCutExact.agda
   DASHI/Analysis/RiemannG2CurrentDirectOneLeafFrontierExact.agda
   DASHI/Analysis/RiemannG2FinalCutIntrospectionExact.agda
