@@ -7,19 +7,13 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.GR.GravitationalMultiScaleTheoryFingerprintBidiExact as Multi
 import DASHI.Physics.GR.GravitationalPredictionAttributionBidiExact as Attr
 
-------------------------------------------------------------------------
--- ATTRIBUTION-PRESERVING MULTI-SCALE FINGERPRINT
-------------------------------------------------------------------------
-
 record AttributedScalePrediction : Set where
   constructor attributed-scale-prediction
   field
     scalePrediction : Multi.ScalePrediction
     attributedPrediction : Attr.AttributedGravitationalPrediction
     samePrediction :
-      Attr.prediction attributedPrediction
-        ≡ Multi.prediction scalePrediction
-
+      Attr.prediction attributedPrediction ≡ Multi.prediction scalePrediction
 open AttributedScalePrediction public
 
 record AttributedScaleComparison : Set where
@@ -28,13 +22,11 @@ record AttributedScaleComparison : Set where
     attributedScalePrediction : AttributedScalePrediction
     scaleComparison : Multi.ScaleComparison
     sameScalePrediction :
-      scalePrediction attributedScalePrediction
-        ≡ Multi.scalePrediction scaleComparison
+      scalePrediction attributedScalePrediction ≡ Multi.scalePrediction scaleComparison
     comparisonLineage :
       Attr.SinglePredictionComparisonLineage
         (attributedPrediction attributedScalePrediction)
         (Multi.observation (Multi.scaleObservation scaleComparison))
-
 open AttributedScaleComparison public
 
 record AttributedMultiScaleTheoryFingerprint : Set where
@@ -48,25 +40,58 @@ record AttributedMultiScaleTheoryFingerprint : Set where
     nanohertzTimingAttribution : AttributedScalePrediction
     cosmologicalPropagationAttribution : AttributedScalePrediction
     freeFallMatchesFingerprint :
-      scalePrediction laboratoryFreeFallAttribution
-        ≡ Multi.laboratoryFreeFallPrediction fingerprint
+      scalePrediction laboratoryFreeFallAttribution ≡ Multi.laboratoryFreeFallPrediction fingerprint
     clockMatchesFingerprint :
-      scalePrediction laboratoryClockAttribution
-        ≡ Multi.laboratoryClockPrediction fingerprint
+      scalePrediction laboratoryClockAttribution ≡ Multi.laboratoryClockPrediction fingerprint
     orbitalMatchesFingerprint :
-      scalePrediction orbitalTimingAttribution
-        ≡ Multi.orbitalTimingPrediction fingerprint
+      scalePrediction orbitalTimingAttribution ≡ Multi.orbitalTimingPrediction fingerprint
     compactBinaryMatchesFingerprint :
-      scalePrediction compactBinaryAttribution
-        ≡ Multi.compactBinaryPrediction fingerprint
+      scalePrediction compactBinaryAttribution ≡ Multi.compactBinaryPrediction fingerprint
     nanohertzMatchesFingerprint :
-      scalePrediction nanohertzTimingAttribution
-        ≡ Multi.nanohertzTimingPrediction fingerprint
+      scalePrediction nanohertzTimingAttribution ≡ Multi.nanohertzTimingPrediction fingerprint
     cosmologicalMatchesFingerprint :
-      scalePrediction cosmologicalPropagationAttribution
-        ≡ Multi.cosmologicalPropagationPrediction fingerprint
-
+      scalePrediction cosmologicalPropagationAttribution ≡ Multi.cosmologicalPropagationPrediction fingerprint
 open AttributedMultiScaleTheoryFingerprint public
+
+------------------------------------------------------------------------
+-- Attributed evaluated fingerprint.  The raw six-comparison evaluation and
+-- the six lineage-bearing comparisons must refer to the same exact objects.
+------------------------------------------------------------------------
+
+record AttributedMultiScaleTheoryEvaluation : Set where
+  constructor attributed-multi-scale-theory-evaluation
+  field
+    attributedFingerprint : AttributedMultiScaleTheoryFingerprint
+    evaluation : Multi.MultiScaleTheoryEvaluation
+    evaluationFingerprintMatches :
+      Multi.fingerprint evaluation ≡ fingerprint attributedFingerprint
+
+    laboratoryFreeFallComparison : AttributedScaleComparison
+    laboratoryClockComparison : AttributedScaleComparison
+    orbitalTimingComparison : AttributedScaleComparison
+    compactBinaryComparison : AttributedScaleComparison
+    nanohertzTimingComparison : AttributedScaleComparison
+    cosmologicalPropagationComparison : AttributedScaleComparison
+
+    freeFallComparisonMatchesEvaluation :
+      scaleComparison laboratoryFreeFallComparison
+        ≡ Multi.laboratoryFreeFallComparison evaluation
+    clockComparisonMatchesEvaluation :
+      scaleComparison laboratoryClockComparison
+        ≡ Multi.laboratoryClockComparison evaluation
+    orbitalComparisonMatchesEvaluation :
+      scaleComparison orbitalTimingComparison
+        ≡ Multi.orbitalTimingComparison evaluation
+    compactBinaryComparisonMatchesEvaluation :
+      scaleComparison compactBinaryComparison
+        ≡ Multi.compactBinaryComparison evaluation
+    nanohertzComparisonMatchesEvaluation :
+      scaleComparison nanohertzTimingComparison
+        ≡ Multi.nanohertzTimingComparison evaluation
+    cosmologicalComparisonMatchesEvaluation :
+      scaleComparison cosmologicalPropagationComparison
+        ≡ Multi.cosmologicalPropagationComparison evaluation
+open AttributedMultiScaleTheoryEvaluation public
 
 record MultiScaleAttributionBoundary : Set where
   constructor multi-scale-attribution-boundary
@@ -78,7 +103,10 @@ record MultiScaleAttributionBoundary : Set where
     derivedCrossScaleComparisonIsExternalSourceClaim : Bool
     exactPredictionIdentityRequiredAtEveryScale : Bool
     scaleContextMayBeDroppedDuringAttribution : Bool
+    rawEvaluationAutomaticallyCarriesAttributedLineage : Bool
+    attributedEvaluationMustMatchRawEvaluationExactly : Bool
 
 canonicalMultiScaleAttributionBoundary : MultiScaleAttributionBoundary
 canonicalMultiScaleAttributionBoundary =
-  multi-scale-attribution-boundary false false false false false true false
+  multi-scale-attribution-boundary
+    false false false false false true false false true
