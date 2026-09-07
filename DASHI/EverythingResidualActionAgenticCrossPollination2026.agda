@@ -48,6 +48,7 @@ import DASHI.Biology.Microbiology.BaldEyesalveAssayLiteralFrontierSchedulerBidiE
 
 import DASHI.Analysis.RiemannZetaLiteralFrontierSchedulerExact
 import DASHI.Analysis.RiemannZetaTerminalPaymentCompressionExact
+import DASHI.Analysis.RiemannZetaDirectTerminalCompilerExact
 
 import DASHI.Physics.ProofSearchExperimentalParetoFrontierNSYMExact
 import DASHI.Physics.NSYMLiteralFrontierSchedulerExact
