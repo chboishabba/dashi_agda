@@ -38,6 +38,9 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNStrictLiteralR406CriticalLeafRound515Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNCriticalRadialRealizationProofSearchRound516Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNDyadicCriticalNormEquivalenceBoundaryRound517Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCanonicalDyadicEuclideanAnnulusRound518Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNBishopNatRootCriticalMultiplierBoundaryRound519Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNBishopNatRootApproximationMonotonicityRound520Exact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/ns-r423-fixed-output-direct-compiler.yml'
   workflow_dispatch:
@@ -114,13 +117,16 @@ jobs:
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNCommonInitialDatumCriticalCeilingNoGoRound511Exact.agda
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNInitialCriticalRealizationToR421Round512Exact.agda
 
-      - name: Type-check strict leaf-B realization R513-R517
+      - name: Type-check strict leaf-B realization R513-R520
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNR414CriticalObservableRealizationNoGoRound513Exact.agda
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNRetainedViscosityPositivityNoGoRound514Exact.agda
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNStrictLiteralR406CriticalLeafRound515Exact.agda
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNCriticalRadialRealizationProofSearchRound516Exact.agda
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNDyadicCriticalNormEquivalenceBoundaryRound517Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNCanonicalDyadicEuclideanAnnulusRound518Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNBishopNatRootCriticalMultiplierBoundaryRound519Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNBishopNatRootApproximationMonotonicityRound520Exact.agda
 
       - name: Type-check focused R505 aggregate
         run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiteralR406DirectTerminalEverythingRound505Exact.agda
