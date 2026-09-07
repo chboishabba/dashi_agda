@@ -203,6 +203,37 @@ record OperationalJusticeFrontierDelta : Set₁ where
 
 open OperationalJusticeFrontierDelta public
 
+communityOutcomeAssessedDelta : Assessment.SearchFrontierDelta
+communityOutcomeAssessedDelta = Assessment.searchFrontierDelta
+  "Country operational-justice consumer"
+  "frontier: affected-community-defined outcome open"
+  "frontier: community outcome candidate assessed; authority remains separate"
+  Assessment.frontierNarrowed
+  "communityOutcomeResidual"
+  "communityAuthorityResidual"
+  "community-originating outcome proposition retained with provenance"
+  "country/community-outcome/frontier-delta/v1"
+
+communityOutcomeOperationalDelta : OperationalJusticeFrontierDelta
+communityOutcomeOperationalDelta = operationalJusticeFrontierDelta
+  Adaptive.communityOutcomeResidual
+  communityOutcomeAssessedDelta
+  recomputeOperationalSnapshot
+  refl
+  "Country operational-justice consumer"
+  "community source -> proposition -> assessment lineage retained"
+  "community authority not inferred from proposition acquisition"
+  "country/community-outcome/operational-delta/v1"
+
+communityOutcomeDeltaTriggersRecompute :
+  action communityOutcomeOperationalDelta ≡ recomputeOperationalSnapshot
+communityOutcomeDeltaTriggersRecompute = refl
+
+communityOutcomeDeltaDoesNotSkipAuthority :
+  Assessment.firstResidualAfterReference communityOutcomeAssessedDelta
+  ≡ "communityAuthorityResidual"
+communityOutcomeDeltaDoesNotSkipAuthority = refl
+
 ------------------------------------------------------------------------
 -- Fail-closed boundaries.
 ------------------------------------------------------------------------
@@ -211,7 +242,6 @@ data SearchCompletionPaysOperationalResidual : Set where
 data CommunityPropositionIsCommunityAuthority : Set where
 data LegalAuthorityClassifiesCommunityMandate : Set where
 data FrontierClosedMeansWorldStateJusticeClosed : Set where
-
 data MoreStateDocumentsCanReplaceCommunityOutcomeSearch : Set where
 
 searchCompletionDoesNotPayOperationalResidual :
