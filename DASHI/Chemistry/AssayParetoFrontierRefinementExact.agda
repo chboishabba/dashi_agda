@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Chemistry.AssayDetectionEnvelopeExact as Assay
+import DASHI.Core.ExperimentalCoordinateDesignExact as Design
 import DASHI.Core.ProofSearchExperimentalParetoCrossPollinationExact as Cross
 
 ------------------------------------------------------------------------
@@ -41,7 +42,7 @@ record AssayResidualRefinement : Set where
   field
     selectedAxis : AssayFrontierAxis
     assayCoordinate : Assay.AssayCoordinate
-    role : Cross.Design.CoordinateRole
+    role : Design.CoordinateRole
     residualReference : String
     methodMatrixValidationReference : String
     consumerReference : String
@@ -53,7 +54,7 @@ canonicalCalibrationRefinement =
   assayResidualRefinement
     calibrationAxis
     Assay.calibratedConcentration
-    Cross.Design.derivedDiscriminator
+    Design.derivedDiscriminator
     "absence and sub-LOD states remain collided under noReliableSignal"
     "calibration remains analyte x matrix x preparation x instrument relative"
     "chemical presence/detection/quantification consumer"
@@ -77,3 +78,6 @@ record AssayParetoFrontierBoundary : Set where
 canonicalAssayParetoFrontierBoundary : AssayParetoFrontierBoundary
 canonicalAssayParetoFrontierBoundary =
   assayParetoFrontierBoundary false refl true refl false refl true refl
+
+existingExperimentalParetoBoundary : Cross.ProofSearchExperimentalParetoBoundary
+existingExperimentalParetoBoundary = Cross.canonicalProofSearchExperimentalParetoBoundary
