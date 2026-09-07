@@ -32,6 +32,7 @@ import DASHI.Moonshine.JInvariantSourceAtlasExact as Sources
 import DASHI.Moonshine.JInvariantLambdaOrbitBase369BridgeExact as Lambda
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact as Spectral
+import DASHI.Mathematics.NumberTheory.RiemannXiSymmetryExact as RH
 
 ------------------------------------------------------------------------
 -- 1. Exact finite theta-coordinate indexing from the sourced formula.
@@ -83,20 +84,24 @@ base369CubeHasTwentySevenFrequencyLabels = Spectral.cubeSectorCountIs27
 ------------------------------------------------------------------------
 -- 3. RH role is deliberately narrower than the modular/Monster bridge.
 --
--- Per the current research architecture, RH is assigned to arithmetic-prime
--- and reflection/spectral-symmetry work.  The interface below has NO
--- canonical inhabitant: an actual RH-side producer must supply the receipts.
+-- The existing RH owner already separates the exact rational reflection
+-- geometry from still-uninhabited analytic zero symmetry, and separately owns
+-- a PrimeZeroExplicitFormula interface with primeSide and zeroSide.  The
+-- cross-pollination role therefore consumes those exact repository surfaces
+-- rather than inventing a generic "RH solves everything" carrier.
 ------------------------------------------------------------------------
 
 record RHPrimeSymmetryInterface : Set₁ where
   field
-    PrimeSideReceipt : Set
-    ReflectionSymmetryReceipt : Set
-    primeSide : PrimeSideReceipt
-    reflectionSymmetrySide : ReflectionSymmetryReceipt
+    zeroSymmetry : RH.XiZeroSymmetry
+    primeZeroExplicitFormula : RH.PrimeZeroExplicitFormula
+
+open RHPrimeSymmetryInterface public
 
 -- There is intentionally no RHPrimeSymmetryInterface -> j-invariance,
 -- no RHPrimeSymmetryInterface -> Monster action, and no visual -> RH theorem.
+-- RH is used here only as the designated arithmetic prime/zero and reflection-
+-- symmetry producer family once an actual same-object bridge is supplied.
 
 ------------------------------------------------------------------------
 -- 4. Introspective observer: source-aligned coordinates versus visual prompts.
