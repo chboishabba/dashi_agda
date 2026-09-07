@@ -56,3 +56,7 @@ import DASHI.Biology.NeurodivergentHoldingTensionBridgeExact
 -- Explicit seam for the eventual #606 embodied-gate -> #618 social-ecology
 -- adapter once draft ancestry is reconciled.  No cross-draft owners are copied.
 import DASHI.Biology.EmbodiedSocialEcologyRelationalHistoryObligationExact
+
+-- Same-trial multimodal diagnosis/debugging return.
+import DASHI.Biology.DrosophilaPluralEpistemicProgressBidiExact
+import DASHI.Biology.DrosophilaDiagnosisRepairSchedulerBidiExact
