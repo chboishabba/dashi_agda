@@ -32,23 +32,29 @@ import DASHI.Core.TemporalDiagnosisDependencyLineageBidiExact
 import DASHI.Core.IncrementalDiagnosisTruthMaintenanceBidiExact
 
 -- Selective invalidation + N-dimensional recursive-Pareto compatibility.
--- Recompute classification precedes ranking. The current bridge materialises
--- only four residual-relevant semantic axes (consequence, diagnostic residual,
--- authority, recompute cost), keeps 3^9=19683 as visualisation cardinality
--- rather than Pareto dimension, and carries A_(n+1)=9^(A_n) symbolically.
 import DASHI.Core.SelectiveInvalidationParetoFrontierBidiExact
-
--- Recursive maintenance: one classified/materialised frontier generates the
--- next. Unaffected axes retain their semantic identity and inherited costs
--- unless an explicit invalidation witness names them; new residual coordinates
--- may be materialised without forcing ambient-capacity enumeration.
 import DASHI.Core.RecursiveSelectiveInvalidationParetoTruthMaintenanceBidiExact
+
+-- Uploaded Aristotle Lean methodology bridge + exact recompute worklist:
+-- conservative frontier extension, no-loss/no-dup grouping, proof-gated repair,
+-- provenance/source separation, and least-upper-bound merge are retained only
+-- as source-attributed methodology; Lean proofs are not silently transported.
+import DASHI.Core.AristotleFrontierWorklistTruthMaintenanceBridgeExact
+import DASHI.Core.SelectiveInvalidationWorklistBidiExact
+
+-- Remaining manual invalidation seam removed: changed artifact + proof-bearing
+-- dependency reachability + application-declared axis ownership derive the least
+-- invalidation set. The recursive compiler consumes that derived set directly.
+import DASHI.Core.DependencyDerivedMinimalInvalidationBidiExact
+import DASHI.Core.DependencyDerivedRecursiveParetoTruthMaintenanceBidiExact
 
 import DASHI.Biology.AliceBrownDiagnosisRepairSchedulerBidiExact
 import DASHI.Biology.AliceBrownTemporalDiagnosisDependencyLineageBidiExact
 import DASHI.Biology.AliceBrownSelectiveInvalidationParetoBidiExact
 import DASHI.Biology.AliceBrownRecursiveParetoTruthMaintenanceBidiExact
+import DASHI.Biology.AliceBrownDependencyDerivedInvalidationBidiExact
 import DASHI.Culture.JohnAnthonyBrownDiagnosisRepairSchedulerBidiExact
 import DASHI.Culture.JohnAnthonyBrownTemporalDiagnosisDependencyLineageBidiExact
 import DASHI.Culture.JohnAnthonyBrownSelectiveInvalidationParetoBidiExact
 import DASHI.Culture.JohnAnthonyBrownRecursiveParetoTruthMaintenanceBidiExact
+import DASHI.Culture.JohnAnthonyBrownDependencyDerivedInvalidationBidiExact
