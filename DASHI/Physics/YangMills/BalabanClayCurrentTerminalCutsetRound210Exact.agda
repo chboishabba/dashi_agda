@@ -22,6 +22,7 @@ module DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound210Exact whe
 -- surfaces only.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; _∷_; [])
 
