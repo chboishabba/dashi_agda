@@ -4,15 +4,9 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 import DASHI.Interop.ZelphBoundedGraphCoverageExact as Zelph
-
-------------------------------------------------------------------------
--- Runtime parity owner for SensibLaw item_property_evidence v0_2.
---
--- Meaningful property absence is indexed by QID, property, graph revision and
--- declared coverage policy.  No returned statement row for P is not enough.
-------------------------------------------------------------------------
 
 record RequiredPropertyFamily : Set where
   constructor required-property-family
@@ -27,8 +21,7 @@ open RequiredPropertyFamily public
 data PropertyPresence : Set where
   propertyPresent propertyAbsent propertyPresenceUnresolved : PropertyPresence
 
-presenceFromCoverageAndRows :
-  Zelph.QueryCoverageStatus → Bool → PropertyPresence
+presenceFromCoverageAndRows : Zelph.QueryCoverageStatus → Bool → PropertyPresence
 presenceFromCoverageAndRows Zelph.queryCoverageComplete true = propertyPresent
 presenceFromCoverageAndRows Zelph.queryCoverageComplete false = propertyAbsent
 presenceFromCoverageAndRows Zelph.queryCoverageIncomplete _ = propertyPresenceUnresolved
@@ -59,15 +52,10 @@ record RequiredPropertyInventory : Set where
     unresolvedRequiredPropertyReferences : List String
 open RequiredPropertyInventory public
 
-------------------------------------------------------------------------
--- Rank truthiness is also property-family coverage dependent.
-------------------------------------------------------------------------
-
 data RankVisibilityDecision : Set where
   rankVisibilityDecidable rankVisibilityUnresolved : RankVisibilityDecision
 
-rankVisibilityDecisionForCoverage :
-  Zelph.QueryCoverageStatus → RankVisibilityDecision
+rankVisibilityDecisionForCoverage : Zelph.QueryCoverageStatus → RankVisibilityDecision
 rankVisibilityDecisionForCoverage Zelph.queryCoverageComplete = rankVisibilityDecidable
 rankVisibilityDecisionForCoverage Zelph.queryCoverageIncomplete = rankVisibilityUnresolved
 rankVisibilityDecisionForCoverage Zelph.queryCoverageUninspected = rankVisibilityUnresolved
@@ -80,10 +68,6 @@ incompleteFamilyBlocksRankVisibility = refl
 uninspectedFamilyBlocksRankVisibility :
   rankVisibilityDecisionForCoverage Zelph.queryCoverageUninspected ≡ rankVisibilityUnresolved
 uninspectedFamilyBlocksRankVisibility = refl
-
-------------------------------------------------------------------------
--- Firewalls.
-------------------------------------------------------------------------
 
 data NoReturnedP14143ImpliesP14143Absent : Set where
 data ItemWideCoverageImpliesEveryRequiredFamilyCovered : Set where
