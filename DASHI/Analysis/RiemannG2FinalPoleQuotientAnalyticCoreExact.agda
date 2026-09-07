@@ -150,6 +150,36 @@ compileFinalTwoPayments cores attachments =
     (analyticReference cores)
 
 ------------------------------------------------------------------------
+-- END-TO-END HIGH-ORDINATE COMPILER
+--
+-- Once the two theorem-bearing analytic cores exist, representation attachment
+-- and the already-owned final same-object/order/cluster package are the only
+-- remaining inputs.  No fresh final contradiction theorem is required.
+------------------------------------------------------------------------
+
+record FinalPoleQuotientAnalyticCompletion
+    (cores : FinalPoleQuotientTwoAnalyticCores)
+    (attachments : FinalPoleQuotientAnalyticCoreAttachments cores) : Set₁ where
+  constructor final-pole-quotient-analytic-completion
+  field
+    finalAttachment :
+      Two.FinalPoleQuotientTwoPaymentAttachment
+        (compileFinalTwoPayments cores attachments)
+    completionReference : String
+
+open FinalPoleQuotientAnalyticCompletion public
+
+compileAnalyticCoresToHighOrdinateContradiction :
+  (cores : FinalPoleQuotientTwoAnalyticCores) ->
+  (attachments : FinalPoleQuotientAnalyticCoreAttachments cores) ->
+  FinalPoleQuotientAnalyticCompletion cores attachments ->
+  ⊥
+compileAnalyticCoresToHighOrdinateContradiction cores attachments completion =
+  Two.compileFinalHighOrdinateContradiction
+    (compileFinalTwoPayments cores attachments)
+    (FinalPoleQuotientAnalyticCompletion.finalAttachment completion)
+
+------------------------------------------------------------------------
 -- Boundary.
 ------------------------------------------------------------------------
 
@@ -199,4 +229,4 @@ canonicalFinalPoleQuotientAnalyticCoreBoundary =
     false refl
     false refl
     false refl
-    "The final analytic search target is smaller than the historical payment records suggested. Off analysis is exactly a sharp final Off budget together with its assigned-allowance inequality; crossing-cutoff identity and final-taper identity are representation attachments. Gamma analysis is exactly a sharp final Gamma budget together with its assigned-allowance inequality; final-taper identity is a representation attachment. These cores plus the attachments compile the existing two-payment terminal package. Neither analytic core is fabricated here and RH is not derived."
+    "The final analytic search target is smaller than the historical payment records suggested. Off analysis is exactly a sharp final Off budget together with its assigned-allowance inequality; crossing-cutoff identity and final-taper identity are representation attachments. Gamma analysis is exactly a sharp final Gamma budget together with its assigned-allowance inequality; final-taper identity is a representation attachment. These cores plus the attachments compile the existing two-payment terminal package, and the final same-object/order/cluster attachment then compiles directly to the already-owned high-ordinate contradiction. Neither analytic core is fabricated here and RH is not derived."
