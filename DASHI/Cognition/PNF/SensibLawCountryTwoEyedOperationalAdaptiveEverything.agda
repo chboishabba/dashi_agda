@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Cognition.PNF.SensibLawCountryTwoEyedOperationalEpistemicEverything as Country
 import DASHI.Cognition.PNF.SensibLawCountryPluralEpistemicOperationalAuditExact as Audit
 import DASHI.Cognition.PNF.SensibLawCountryCommunityAuthorityFirstCorrectionExact as Correction
+import DASHI.Cognition.PNF.SensibLawCountryOperationalResidualProofSearchBridgeExact as ProofSearch
 import DASHI.Cognition.PNF.SensibLawTerraNulliusOperationalJuridicalNonHumanityExact as Terra
 import DASHI.Cognition.PNF.SensibLawTerraNulliusFoundationalJuridicalPersonhoodExact as TerraFoundational
 import DASHI.Core.PluralEpistemicOperationalClosureExact as Operational
@@ -12,6 +13,7 @@ import DASHI.Core.PluralOperationalEvidenceBraidBidiExact as Braid
 import DASHI.Core.PluralOperationalResidualActionLoopExact as Adaptive
 import DASHI.Core.PluralOperationalRealisationDiscrepancyExact as Discrepancy
 import DASHI.Core.BraidedEvidenceTraceBidiCrossPollination2026Exact as EvidenceBraid
+import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 
 ------------------------------------------------------------------------
 -- Focused adaptive capstone: after current-master source-bounded compilation,
@@ -33,6 +35,18 @@ currentDefaultAction :
   Adaptive.defaultActionFor Adaptive.communityOutcomeResidual
   ≡ Adaptive.obtainAffectedCommunityOutcome
 currentDefaultAction = refl
+
+currentResearchProducer :
+  Search.producerClass
+    (ProofSearch.searchIntentForOperationalResidual Adaptive.communityOutcomeResidual)
+  ≡ Search.propositionSourceProducer
+currentResearchProducer = refl
+
+currentResearchMode :
+  Search.mode
+    (ProofSearch.searchIntentForOperationalResidual Adaptive.communityOutcomeResidual)
+  ≡ Search.exploreVocabulary
+currentResearchMode = refl
 
 communityOutcomePlanRetainsCommunityAuthority :
   Adaptive.authority Adaptive.communityOutcomePlan ≡ Adaptive.communityAuthorized
