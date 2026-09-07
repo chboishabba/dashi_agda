@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as NearFar
 import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact as Transport
+import DASHI.Analysis.RiemannG2QuarterPeriodScalingPropagationExact as Scaling
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateBudgetTargetExact as Off
 import DASHI.Analysis.RiemannAristotlePoleQuotientGammaBudgetTargetExact as Gamma
 
@@ -21,6 +22,11 @@ import DASHI.Analysis.RiemannAristotlePoleQuotientGammaBudgetTargetExact as Gamm
 --
 --   B_off(J) := D_near(J) + B_far(J).
 --
+-- The chosen J is definitionally tied, through an explicit carrier equality, to
+-- the existing MinimalQuarterPeriodCutoff inside QuarterPeriodScalingAdmission.
+-- This preserves the checked narrow-window no-go: the direct route cannot hide a
+-- subcritical cutoff behind the one-leaf API.
+--
 -- `full <= B_off` is compiler output from the checked split theorem, source-order
 -- reflexivity on D_near, and the transported far upper.  No separate finite-near
 -- envelope is introduced.
@@ -33,11 +39,29 @@ import DASHI.Analysis.RiemannAristotlePoleQuotientGammaBudgetTargetExact as Gamm
 -- analytic producer may not choose its own downstream allowance.
 ------------------------------------------------------------------------
 
+cast : {A B : Set} -> A ≡ B -> A -> B
+cast refl x = x
+
 record DirectLiteralOffTargetInput
     (S : NearFar.OrderedAdditiveNearFarSurface)
     (transport : Transport.ExplicitCutoffNearFarAgdaTransport S) : Set₁ where
   field
     chosenCutoff : Transport.Cutoff transport
+
+    widthLaw : Scaling.LiteralHighOrdinateWidthLaw
+    crossingAdmission : Scaling.QuarterPeriodScalingAdmission widthLaw
+
+    crossingCutoffCarrierIdentity :
+      Scaling.MinimalQuarterPeriodCutoff.Cutoff
+        (Scaling.QuarterPeriodScalingAdmission.cutoff crossingAdmission)
+      ≡ Transport.Cutoff transport
+
+    chosenCutoffIsCrossingCutoff :
+      cast crossingCutoffCarrierIdentity
+        (Scaling.MinimalQuarterPeriodCutoff.chosenCutoff
+          (Scaling.QuarterPeriodScalingAdmission.cutoff crossingAdmission))
+      ≡ chosenCutoff
+
     sourceOrderReflexive :
       (x : NearFar.Scalar S) -> NearFar._≤_ S x x
 
@@ -151,6 +175,18 @@ record DirectLiteralComplementTargetBoundary : Set where
     producerAssignedAllowanceUsedIsFalse :
       producerAssignedAllowanceUsed ≡ false
 
+    quarterPeriodCrossingAdmissionRequired : Bool
+    quarterPeriodCrossingAdmissionRequiredIsTrue :
+      quarterPeriodCrossingAdmissionRequired ≡ true
+
+    exactCrossingCutoffIdentifiedWithOffCutoff : Bool
+    exactCrossingCutoffIdentifiedWithOffCutoffIsTrue :
+      exactCrossingCutoffIdentifiedWithOffCutoff ≡ true
+
+    quarterPeriodAdmissionIsSeparateTerminalAnalyticLeaf : Bool
+    quarterPeriodAdmissionIsSeparateTerminalAnalyticLeafIsFalse :
+      quarterPeriodAdmissionIsSeparateTerminalAnalyticLeaf ≡ false
+
     separateFiniteNearEnvelopeRequired : Bool
     separateFiniteNearEnvelopeRequiredIsFalse :
       separateFiniteNearEnvelopeRequired ≡ false
@@ -185,6 +221,9 @@ canonicalDirectLiteralComplementTargetBoundary :
 canonicalDirectLiteralComplementTargetBoundary =
   direct-literal-complement-target-boundary
     false refl
+    true refl
+    true refl
+    false refl
     false refl
     true refl
     false refl
@@ -192,4 +231,4 @@ canonicalDirectLiteralComplementTargetBoundary =
     true refl
     false refl
     false refl
-    "Bypass the consumer-assigned allowance layer. The direct Off target uses B_off(J)=D_near(J)+B_far(J), with full<=B_off compiled from the checked split theorem, source-order reflexivity, and the transported far upper. The direct Gamma target uses B_Gamma=D_Gamma with source-order reflexivity. No producer chooses a downstream allowance, no separate near/Gamma envelope is primitive, and neither target is manufactured from the final cluster balance. RH is not derived here."
+    "Bypass the consumer-assigned allowance layer while preserving the checked narrow-window no-go. The chosen Off cutoff is exactly identified with the MinimalQuarterPeriodCutoff carried by the existing scaling admission. Then B_off(J)=D_near(J)+B_far(J), with full<=B_off compiled from the checked split theorem, source-order reflexivity, and the transported far upper. B_Gamma=D_Gamma by source-order reflexivity. Crossing is an admission/representation coordinate, not a second terminal analytic theorem. No producer chooses a downstream allowance and neither target is manufactured from the final cluster balance. RH is not derived here."
