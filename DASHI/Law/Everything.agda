@@ -86,4 +86,5 @@ import DASHI.Law.HerzogBodycamFascismAmalekValidation
 import DASHI.Law.HerzogIncidentFascismComparatorValidation
 import DASHI.Law.CoerciveContactAuditValidation
 import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything
+import DASHI.Law.SensibLawITIRParityEverything
 import DASHI.Law.SensibLawProofDirectedCorpusSearchEverything
