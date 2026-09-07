@@ -8,25 +8,18 @@ module DASHI.Physics.Closure.NSTriadKNWeightedCompanionHermitianCrossRound439Exa
 -- companion fold. R415/R423 consume a scalar signed aggregate cross rather
 -- than the forcing vector alone.
 --
--- This file closes that remaining forcing-side scalar transport without
--- inventing an amplitude proxy. For ANY supplied same-object amplitude
--- aggregate A_k,
+-- This file closes that remaining forcing-side scalar transport. For ANY
+-- same-object amplitude aggregate A_k,
 --
 --   Re < A_k , fold (2 w F) >
 --     = Re < A_k , fold (weighted quadratic companion) >.
 --
--- The theorem is just congruence through R179's literal rational Hermitian
--- cross. Thus a future R299/R415 producer only has to identify its amplitude
--- aggregate and prove the quantitative spacetime bound; there is no second
--- forcing-side same-object weld after R438.
+-- R440 now supplies the actual physical weighted amplitude aggregate and proves
+-- both finite R299 double-sum halves factor to this scalar shape. R439 itself
+-- remains the generic forcing-side transport theorem.
 --
--- CLAIM BOUNDARY
--- --------------
--- This does NOT identify R299's abstract `aggregateAmplitudeForcingCross` with
--- a physical scalar by itself, because R299 deliberately stores only a scalar
--- compiler. It proves the exact transport theorem needed once the physical
--- amplitude aggregate is supplied. No estimate, sign claim, norm, absolute
--- value, integration rule, or Package-A promotion is introduced.
+-- No estimate, sign claim, norm, absolute value, integration rule, or
+-- Package-A promotion is introduced here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -150,8 +143,10 @@ round439R438TransportedThroughLiteralHermitianCross = true
 round439ForcingSideSameObjectScalarWeldClosed : Bool
 round439ForcingSideSameObjectScalarWeldClosed = true
 
-round439R299PhysicalAmplitudeAggregateIdentified : Bool
-round439R299PhysicalAmplitudeAggregateIdentified = false
+-- Historical local flag: R439 alone is generic in the left amplitude. R440 is
+-- the downstream owner that supplies the physical amplitude aggregate.
+round439R299PhysicalAmplitudeAggregateIdentifiedLocally : Bool
+round439R299PhysicalAmplitudeAggregateIdentifiedLocally = false
 
 round439SignedCrossSpacetimeEstimateClosed : Bool
 round439SignedCrossSpacetimeEstimateClosed = false
@@ -169,9 +164,9 @@ round439ForcingSideSameObjectScalarWeldClosedIsTrue :
   round439ForcingSideSameObjectScalarWeldClosed ≡ true
 round439ForcingSideSameObjectScalarWeldClosedIsTrue = refl
 
-round439R299PhysicalAmplitudeAggregateIdentifiedIsFalse :
-  round439R299PhysicalAmplitudeAggregateIdentified ≡ false
-round439R299PhysicalAmplitudeAggregateIdentifiedIsFalse = refl
+round439R299PhysicalAmplitudeAggregateIdentifiedLocallyIsFalse :
+  round439R299PhysicalAmplitudeAggregateIdentifiedLocally ≡ false
+round439R299PhysicalAmplitudeAggregateIdentifiedLocallyIsFalse = refl
 
 round439SignedCrossSpacetimeEstimateClosedIsFalse :
   round439SignedCrossSpacetimeEstimateClosed ≡ false
