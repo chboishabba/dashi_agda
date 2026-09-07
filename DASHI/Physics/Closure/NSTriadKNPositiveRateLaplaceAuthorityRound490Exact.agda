@@ -19,7 +19,8 @@ module DASHI.Physics.Closure.NSTriadKNPositiveRateLaplaceAuthorityRound490Exact 
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; _<_; _+_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _<_; _*_)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 ------------------------------------------------------------------------
 -- Generic scalar authority.
@@ -34,7 +35,7 @@ record PositiveRateLaplaceAuthority : Set₁ where
 
     laplaceResolventIdentity :
       (x y : ℚ) →
-      0 < x → 0 < y →
+      0ℚ < x → 0ℚ < y →
       reciprocal x y
       ≡ Integral (λ s → heatWeight x s * heatWeight y s)
 
@@ -54,7 +55,7 @@ record PositiveRateKernelLaplaceRealization
     authority : PositiveRateLaplaceAuthority
     reciprocalIsKernel :
       (x y : ℚ) →
-      0 < x → 0 < y →
+      0ℚ < x → 0ℚ < y →
       reciprocal authority x y ≡ kernel x y
 
 open PositiveRateKernelLaplaceRealization public
@@ -63,8 +64,8 @@ kernelLaplaceIdentity :
   ∀ {kernel} →
   (R : PositiveRateKernelLaplaceRealization kernel) →
   (x y : ℚ) →
-  (xPositive : 0 < x) →
-  (yPositive : 0 < y) →
+  (xPositive : 0ℚ < x) →
+  (yPositive : 0ℚ < y) →
   kernel x y
   ≡ Integral (authority R)
       (λ s → heatWeight (authority R) x s * heatWeight (authority R) y s)
@@ -75,8 +76,6 @@ kernelLaplaceIdentity R x y xPositive yPositive =
     sameObject = reciprocalIsKernel R x y xPositive yPositive
   in
   trans (sym sameObject) standard
-  where
-  open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 ------------------------------------------------------------------------
 -- Trust / proof-search boundary.
