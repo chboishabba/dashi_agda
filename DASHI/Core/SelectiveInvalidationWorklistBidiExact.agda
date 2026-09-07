@@ -8,10 +8,6 @@ import DASHI.Core.SelectiveInvalidationParetoFrontierBidiExact as Pareto
 
 ------------------------------------------------------------------------
 -- SELECTIVE INVALIDATION WORKLIST
---
--- Aristotle's Lean Worklist proves that grouping diagnostic rows into tasks is
--- an exact partition.  Here the same theorem shape is expressed dependently:
--- every recompute candidate has exactly one semantic task key, its class.
 ------------------------------------------------------------------------
 
 record RecomputeTask (key : Pareto.RecomputeClass) : Set where
@@ -60,7 +56,7 @@ data RepairDisposition : Set where
   authorityProducerRequired
   : RepairDisposition
 
-record WorklistRepairTask (key : Pareto.RecomputeClass) : Set where
+record WorklistRepairTask (key : Pareto.RecomputeClass) : Set₁ where
   constructor worklist-repair-task
   field
     recomputeTask : RecomputeTask key
