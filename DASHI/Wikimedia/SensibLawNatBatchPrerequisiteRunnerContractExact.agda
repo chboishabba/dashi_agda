@@ -126,7 +126,8 @@ open BatchWorkGroup public
 -- Per-row result carrier. Aggregate counts never reconstruct this information.
 ------------------------------------------------------------------------
 
-data BatchOutcome : Set where paid open split reactivated : BatchOutcome
+data BatchOutcome : Set where
+  paidOutcome openOutcome splitOutcome reactivatedOutcome : BatchOutcome
 
 record BatchRowResult (row : BatchRowDescriptor) : Set where
   constructor batch-row-result
@@ -148,7 +149,7 @@ record PaidRowWitness
     (result : Result.BoundedSelectorResult) : Set where
   constructor paid-row-witness
   field
-    paidRowOutcomeExact : rowResultOutcome batchRow ≡ paid
+    paidRowOutcomeExact : rowResultOutcome batchRow ≡ paidOutcome
     paidRowVerifiedPayment : Result.VerifiedPrerequisitePayment result
     paidRowTargetsCurrentFirstMissing :
       Result.resultObligation result
@@ -162,7 +163,7 @@ record OpenRowWitness
     (batchRow : BatchRowResult row) : Set where
   constructor open-row-witness
   field
-    openRowOutcomeExact : rowResultOutcome batchRow ≡ open
+    openRowOutcomeExact : rowResultOutcome batchRow ≡ openOutcome
     openRowResidualStillCurrent :
       rowResultNextPrerequisite batchRow
       ≡ DAG.firstMissingPrerequisite (rowPrerequisiteStatus row)
@@ -174,7 +175,7 @@ record SplitRowWitness
     (batchRow : BatchRowResult row) : Set where
   constructor split-row-witness
   field
-    splitRowOutcomeExact : rowResultOutcome batchRow ≡ split
+    splitRowOutcomeExact : rowResultOutcome batchRow ≡ splitOutcome
     splitRowPlanReference : String
     splitRowPreservesSource : Bool
     splitRowPreservesSourceIsTrue : splitRowPreservesSource ≡ true
@@ -185,7 +186,7 @@ record ReactivatedRowWitness
     (batchRow : BatchRowResult row) : Set where
   constructor reactivated-row-witness
   field
-    reactivatedRowOutcomeExact : rowResultOutcome batchRow ≡ reactivated
+    reactivatedRowOutcomeExact : rowResultOutcome batchRow ≡ reactivatedOutcome
     reactivatedChangedEvidenceReference : String
     reactivatedHistoricalClosureReference : String
     reactivatedHistoricalClosurePreserved : Bool
