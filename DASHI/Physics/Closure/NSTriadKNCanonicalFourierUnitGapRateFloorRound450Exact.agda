@@ -23,11 +23,10 @@ module DASHI.Physics.Closure.NSTriadKNCanonicalFourierUnitGapRateFloorRound450Ex
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; Positive; NonNegative; _+_; _*_; _≤_; _<_; positive; nonNegative)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -35,7 +34,6 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
-import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R291
 import DASHI.Physics.Closure.NSTriadKNDoubleMixedGramPairToResolventRound389Exact as R389
 import DASHI.Physics.Closure.NSTriadKNNonzeroOutputInputAlternativeRound399Exact as R399
 import DASHI.Physics.Closure.NSTriadKNRationalPhysicalPairRatePositivityRound400Exact as R400
@@ -73,14 +71,6 @@ module PhysicalCellRateFloor
   nuNonnegative : 0ℚ ≤ nu
   nuNonnegative = ℚP.<⇒≤ nuPositive
 
-  normSquareNN :
-    (mode : Z3.FourierMode) →
-    0ℚ ≤ C3.normSquared (Field30.physicalInverseSquare physicalSystem) mode
-  normSquareNN =
-    R400.normSquaredNonnegative
-      (Field30.physicalEmbedding physicalSystem)
-      (Field30.physicalInverseSquare physicalSystem)
-
   decayRateAtLeastNuOnNonzero :
     (mode : Z3.FourierMode) →
     Z3.NonZeroMode mode →
@@ -111,7 +101,7 @@ module PhysicalCellRateFloor
       kNonzero : Z3.NonZeroMode (Physical.k tau)
       kNonzero = record
         { Z3.notZero = λ kZero →
-            Z3.notZero outputNonzero (subst (_≡ Z3.zeroMode) kExact kZero)
+            Z3.notZero outputNonzero (trans (sym kExact) kZero)
         }
       pNN = R400.decayRateNonnegative physicalSystem viscosityPositive (Physical.p tau)
       qNN = R400.decayRateNonnegative physicalSystem viscosityPositive (Physical.q tau)
