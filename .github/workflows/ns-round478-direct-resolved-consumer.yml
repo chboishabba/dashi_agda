@@ -1,10 +1,12 @@
-name: NS Round478 direct resolved Gram consumer
+name: NS Round478-479 direct resolved Gram consumer
 
 on:
   pull_request:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedGramOperatorRound477Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedDirectConsumerRound478Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedSignedResidualRound479Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedTerminalEverythingRound479Exact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - 'DASHI/Core/ClayCrossDomainLiteralFrontierExact.agda'
       - '.github/workflows/ns-round478-direct-resolved-consumer.yml'
@@ -14,7 +16,7 @@ permissions:
   contents: read
 
 jobs:
-  round478:
+  round478-479:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -30,6 +32,16 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNCauchyResolvedDirectConsumerRound478Exact.agda
+
+      - name: Type-check Round479 signed residual allowance producer
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNCauchyResolvedSignedResidualRound479Exact.agda
+
+      - name: Type-check focused Round479 terminal aggregate
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNCauchyResolvedTerminalEverythingRound479Exact.agda
 
       - name: Type-check authoritative closure rollup
         run: >-
