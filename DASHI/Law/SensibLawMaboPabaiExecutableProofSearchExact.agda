@@ -10,6 +10,7 @@ open import Data.Empty using (⊥)
 import DASHI.Cognition.PNF.SensibLawMaboDawsonRecognitionResidualPlannerExact as DawsonPlan
 import DASHI.Cognition.PNF.SensibLawClimateDutyRouteSearchExact as Climate
 import DASHI.Cognition.PNF.SensibLawMaboPabaiPositiveNegativeRegressionExact as Regression
+import DASHI.Cognition.PNF.SensibLawAuthorityTransformationMinimalCutExact as Cut
 import DASHI.Cognition.PNF.SensibLawTypedLegalAuthorityEdgeExact as Edge
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Intent
 import DASHI.Law.SensibLawProviderNeutralLegalQueryAlgebraExact as Query
@@ -218,15 +219,15 @@ pabaiSupportDefeaterPair = Dialectic.dialecticalProbePair
 ------------------------------------------------------------------------
 
 maboPositiveStillReachable :
-  Regression.Cut.reachableUnderCurrentAuthorities Regression.Cut.maboPositiveCalibration ≡ true
+  Cut.reachableUnderCurrentAuthorities Cut.maboPositiveCalibration ≡ true
 maboPositiveStillReachable = Regression.maboPositivePathIsReachable
 
 pabaiCurrentRouteStillUnreachable :
-  Regression.Cut.reachableUnderCurrentAuthorities Regression.Cut.pabaiNegativeCalibration ≡ false
+  Cut.reachableUnderCurrentAuthorities Cut.pabaiNegativeCalibration ≡ false
 pabaiCurrentRouteStillUnreachable = Regression.pabaiCandidatePathCurrentlyUnreachable
 
 pabaiSearchStillRequiresProof :
-  Regression.Cut.proofStillRequired Regression.Cut.pabaiNegativeCalibration ≡ true
+  Cut.proofStillRequired Cut.pabaiNegativeCalibration ≡ true
 pabaiSearchStillRequiresProof = Regression.pabaiCandidateStillNeedsProof
 
 ------------------------------------------------------------------------
