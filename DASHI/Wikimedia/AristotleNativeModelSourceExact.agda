@@ -93,8 +93,8 @@ recheckedContracts =
 data AristotleLeanProofIsAgdaProof : Set where
 data AristotleArchiveIsLiveWikidataAuthority : Set where
 
-a ristotleLeanProofDoesNotBecomeAgdaProof : AristotleLeanProofIsAgdaProof → ⊥
-a ristotleLeanProofDoesNotBecomeAgdaProof ()
+aristotleLeanProofDoesNotBecomeAgdaProof : AristotleLeanProofIsAgdaProof → ⊥
+aristotleLeanProofDoesNotBecomeAgdaProof ()
 
 archiveDoesNotBecomeLiveWikidataAuthority : AristotleArchiveIsLiveWikidataAuthority → ⊥
 archiveDoesNotBecomeLiveWikidataAuthority ()
