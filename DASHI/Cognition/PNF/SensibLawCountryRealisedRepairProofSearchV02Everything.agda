@@ -5,6 +5,9 @@ open import DASHI.Core.Prelude
 import DASHI.Cognition.PNF.SensibLawCountryRealisedRepairTwoEyedPosiwidV02Everything as RepairV02
 import DASHI.Cognition.PNF.SensibLawCountryRealisedRepairProofSearchBridgeV02Exact as Bridge
 import DASHI.Cognition.PNF.SensibLawCountryRealisedRepairCalibrationV02Exact as Repair
+import DASHI.Cognition.PNF.SensibLawCountryCommunityPaymentAcquisitionPlanV02Exact as Acquisition
+import DASHI.Cognition.PNF.SensibLawGriffithsCustodialOutcomePaymentV02Exact as GriffithsOutcome
+import DASHI.Cognition.PNF.SensibLawGriffithsCustodialAuthorityCutV02Exact as GriffithsAuthority
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 import DASHI.Law.SensibLawProofSearchResultAssessmentExact as Assessment
 
@@ -50,6 +53,36 @@ admittedCommunityOutcomeAdvancesToAuthority :
   Assessment.firstResidualAfterReference Bridge.communityOutcomeAdmittedDeltaV02
   ≡ "communityAuthorityCapacityResidualV02"
 admittedCommunityOutcomeAdvancesToAuthority = refl
+
+------------------------------------------------------------------------
+-- First genuine consumer-specific outcome payment.
+--
+-- Griffiths accepted evidence supports the narrowly declared Timber Creek
+-- custodial-relation consumer: responsibility/concern to look after Country and
+-- experienced failure of that responsibility when Country is harmed.  This is
+-- not generalized to every Country consumer and it selects no particular State
+-- remedy.
+------------------------------------------------------------------------
+
+griffithsNarrowCustodialOutcomePaid :
+  GriffithsOutcome.narrowConsumerOutcomePaid
+    GriffithsOutcome.canonicalGriffithsCustodialOutcomeBoundary ≡ true
+griffithsNarrowCustodialOutcomePaid = refl
+
+griffithsSpecificInstitutionalCorrectionStillOpen :
+  GriffithsOutcome.specificInstitutionalCorrectionPaid
+    GriffithsOutcome.griffithsCustodialOutcomePayment ≡ false
+griffithsSpecificInstitutionalCorrectionStillOpen = refl
+
+griffithsHistoricalRepresentationDoesNotPayPresentMandate :
+  GriffithsAuthority.provesPresentCommunityMandate
+    GriffithsAuthority.griffithsHistoricalRepresentation ≡ false
+griffithsHistoricalRepresentationDoesNotPayPresentMandate = refl
+
+griffithsNextProducerIsMandateAttribution :
+  Acquisition.producerForPaymentCoordinate GriffithsAuthority.nextSearchCoordinate
+  ≡ Search.attributionProducer
+griffithsNextProducerIsMandateAttribution = refl
 
 ------------------------------------------------------------------------
 -- Existing V02 positive evidence remains visible and bounded.
