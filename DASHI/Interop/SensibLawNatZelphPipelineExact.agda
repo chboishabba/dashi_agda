@@ -14,13 +14,12 @@ import DASHI.Interop.ZelphPrunedArtifactQueryPreservationExact as Preservation
 
 ------------------------------------------------------------------------
 -- Runtime parity owner for:
---
 --   src/policy/zelph_routed_relation_observations.py
 --   src/policy/nat_zelph_peer_pipeline.py
 --
--- ITIR bounded_graph_slice_plan is a transport plan, not a query result.  The
--- first runtime carrier below therefore begins after an actual routed Zelph
--- execution has emitted explicit normalized relation observations.
+-- ITIR bounded_graph_slice_plan is a transport plan, not a query result.  This
+-- carrier begins only after an actual routed Zelph execution has emitted
+-- explicit normalized P31/P279 relation observations.
 ------------------------------------------------------------------------
 
 data RoutedTypeRelation : Set where
@@ -54,15 +53,16 @@ record RoutedZelphObservationBatch : Set where
 open RoutedZelphObservationBatch public
 
 ------------------------------------------------------------------------
--- The concrete pipeline is an assembly of already-separated receipts.
+-- The runtime's ordinary pruned type path requires soundness only.  Negative
+-- completeness is intentionally not smuggled into this assembly.
 ------------------------------------------------------------------------
 
 record NatZelphPeerPipelineInput : Set where
   constructor nat-zelph-peer-pipeline-input
   field
     routedObservations : RoutedZelphObservationBatch
-    typePreservation : Preservation.QueryFamilyPreservationReceipt
-    typeModule : TypeModule.TypeClosureModuleReceipt
+    typePreservation : Preservation.QueryFamilySoundnessReceipt
+    typeModule : TypeModule.TypeClosureSoundnessReceipt
     joinedItemSurface : Join.WikibaseZelphItemSurface
     peerAssessment : Peer.NatPeerCohortAssessment
     existingPressure : Weld.ExistingNatPressureAssessment
@@ -138,7 +138,7 @@ record NatZelphPeerPipelineBoundary : Set where
   field
     transportPlanAndQueryResultAreDistinct : Bool
     routedResultRequiresExecutionReceipt : Bool
-    routedP31P279CanFeedConservativeTypeModule : Bool
+    routedP31P279CanFeedSoundTypeModule : Bool
     soundPositiveTypeResultCreatesNegativeCompleteness : Bool
     typeModuleReconstructsNativeStatements : Bool
     joinedSurfacePreservesTwoEvidencePlanes : Bool
@@ -154,4 +154,4 @@ canonicalNatZelphPeerPipelineBoundary =
 
 natZelphPeerPipelineStatement : String
 natZelphPeerPipelineStatement =
-  "The concrete Nat route begins after an actual routed Zelph execution produces receipt-bound normalized P31/P279 observations. Those graph observations may feed a query-family-preserved conservative type module, which joins a separate revision-pinned native Wikibase statement plane to form the item evidence surface. The governed peer evaluator may then replace only the peer_cohort residual of the existing Nat pressure assessment. Positive graph soundness does not create negative completeness, graph observations do not become native statements, and the pipeline creates no migration, promotion, or edit authority."
+  "The concrete Nat route begins after an actual routed Zelph execution produces receipt-bound normalized P31/P279 observations. Those graph observations may feed a query-family sound type module; positive soundness alone does not establish negative completeness. The graph module then joins a separate revision-pinned native Wikibase statement plane to form the item evidence surface, and the governed peer evaluator may replace only the peer_cohort residual of the existing Nat pressure assessment. Graph observations do not become native statements, and the pipeline creates no migration, promotion, or edit authority."
