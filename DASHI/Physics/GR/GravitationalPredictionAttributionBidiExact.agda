@@ -11,9 +11,8 @@ import DASHI.Physics.GR.GravitationalEpistemicLineageExact as Lineage
 ------------------------------------------------------------------------
 -- ATTRIBUTED PREDICTION <-> OBSERVATION
 --
--- Prediction provenance is carrier-sensitive.  An externally imported theory
--- model carries scientific attribution; an internal formal theorem carries
--- repository proof lineage.  Neither is silently coerced into the other.
+-- Carrier identity is not enough.  The exact claim scope supported by the
+-- authority must equal the exact prediction claim scope consumed downstream.
 ------------------------------------------------------------------------
 
 data PredictionAuthority : Set where
@@ -26,6 +25,12 @@ predictionAuthorityCarrier (externalTheoryAuthority source) =
 predictionAuthorityCarrier (internalTheoremAuthority theorem) =
   Lineage.modulePath theorem
 
+predictionAuthorityClaimScope : PredictionAuthority → String
+predictionAuthorityClaimScope (externalTheoryAuthority source) =
+  Lineage.exactSourceEntitledClaim source
+predictionAuthorityClaimScope (internalTheoremAuthority theorem) =
+  Lineage.proofStatementScope theorem
+
 record AttributedGravitationalPrediction : Set where
   constructor attributed-gravitational-prediction
   field
@@ -33,7 +38,8 @@ record AttributedGravitationalPrediction : Set where
     authority : PredictionAuthority
     authorityCarrierMatchesPrediction :
       predictionAuthorityCarrier authority ≡ Pred.theoryCarrier prediction
-    attributionScope : String
+    authorityScopeMatchesPredictionClaim :
+      predictionAuthorityClaimScope authority ≡ Pred.predictionClaimScope prediction
 
 open AttributedGravitationalPrediction public
 
@@ -51,6 +57,32 @@ record AttributedPredictionObservationComparison : Set where
 open AttributedPredictionObservationComparison public
 
 ------------------------------------------------------------------------
+-- Introspective collision: same authority carrier can support different scopes.
+-- A carrier-only observer therefore cannot determine consumer admissibility.
+------------------------------------------------------------------------
+
+data ScopeFixture : Set where
+  supportedScope unsupportedScope : ScopeFixture
+
+data ScopeDecision : Set where
+  scopeAdmitted scopeRejected : ScopeDecision
+
+coarseAuthorityObserver : ScopeFixture → String
+coarseAuthorityObserver _ = "same-authority-carrier"
+
+consumerScopeDecision : ScopeFixture → ScopeDecision
+consumerScopeDecision supportedScope = scopeAdmitted
+consumerScopeDecision unsupportedScope = scopeRejected
+
+coarseAuthorityCollision :
+  coarseAuthorityObserver supportedScope ≡ coarseAuthorityObserver unsupportedScope
+coarseAuthorityCollision = refl
+
+carrierOnlyObservationDoesNotFixScopeDecision :
+  consumerScopeDecision supportedScope ≡ consumerScopeDecision unsupportedScope → ⊥
+carrierOnlyObservationDoesNotFixScopeDecision ()
+
+------------------------------------------------------------------------
 -- Promotion / attribution firewall.
 ------------------------------------------------------------------------
 
@@ -59,6 +91,8 @@ record PredictionAttributionBoundary : Set where
   field
     externalTheoryNeedsScientificAttribution : Bool
     internalTheoremNeedsProofLineageInsteadOfFakeBibliography : Bool
+    authorityCarrierMatchAlonePaysClaimScope : Bool
+    exactAuthorityScopeMustMatchPredictionClaim : Bool
     attributedPredictionAutomaticallyMatchesObservation : Bool
     predictionObservationWeldAutomaticallyMakesSourceClaim : Bool
     derivedComparisonMustRemainDASHIInference : Bool
@@ -66,4 +100,4 @@ record PredictionAttributionBoundary : Set where
 
 canonicalPredictionAttributionBoundary : PredictionAttributionBoundary
 canonicalPredictionAttributionBoundary =
-  prediction-attribution-boundary true true false false true false
+  prediction-attribution-boundary true true false true false false true false
