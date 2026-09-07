@@ -89,11 +89,6 @@ open TemporalHealthCorrelation public
 
 ------------------------------------------------------------------------
 -- SensibLaw / WrongType intersection.
---
--- A correlation bundle may be admitted as evidence for an exact live
--- WrongType causation element.  It does not pay that element.  Payment remains
--- the existing FactualCausationElementPayment constructor, with its but-for or
--- exceptional causation receipt and same-object weld requirements.
 ------------------------------------------------------------------------
 
 record WrongTypeTemporalHealthEvidence
@@ -173,7 +168,7 @@ canonicalTemporalHealthEvidenceBoundary =
     true refl
 
 ------------------------------------------------------------------------
--- Firewalls: category mismatches are uninhabited.
+-- Firewalls.
 ------------------------------------------------------------------------
 
 data SubmittedChartAutomaticallyCausation : Set where
@@ -182,6 +177,7 @@ data ContemporaneousNoteAutomaticallyCausation : Set where
 data RequestedDamagesAutomaticallyScope : Set where
 data MeasurementAutomaticallyDiagnosis : Set where
 data CorrelationAutomaticallyParticularHarmIdentity : Set where
+data EmbeddedChartAutomaticallyIdentifiesExternalSpreadsheet : Set where
 
 submittedChartDoesNotAutoCause :
   SubmittedChartAutomaticallyCausation → ⊥
@@ -207,22 +203,40 @@ correlationDoesNotIdentifyParticularHarm :
   CorrelationAutomaticallyParticularHarmIdentity → ⊥
 correlationDoesNotIdentifyParticularHarm ()
 
+embeddedChartDoesNotIdentifyExternalSpreadsheet :
+  EmbeddedChartAutomaticallyIdentifiesExternalSpreadsheet → ⊥
+embeddedChartDoesNotIdentifyExternalSpreadsheet ()
+
 ------------------------------------------------------------------------
 -- QCAT 0096/22 regression fixture.
 --
--- These strings pin only provenance coordinates already present in the final
--- evidentiary bundle: the final carrier, pages 82-83 health charts/tables, and
--- selected dispute-event dates.  No physiological values are encoded here.
+-- Proven at the submission-carrier level:
+-- * the final carrier is the 83-page QCAT 0096/22 bundle;
+-- * pages 82-83 of that carrier are embedded health tables/charts;
+-- * selected January-February dispute events occur in the same carrier.
+--
+-- Deliberately unresolved here:
+-- * whether those embedded pages were generated from the separately recovered
+--   Recordings and Transcriptions spreadsheet;
+-- * whether a standalone blood-pressure spreadsheet was itself submitted.
 ------------------------------------------------------------------------
 
 qcat0096FinalBundle : String
 qcat0096FinalBundle = "QCAT:0096/22 final annotated Russell evidentiary bundle"
 
 qcat0096HealthPages : String
-qcat0096HealthPages = "pages 82-83 health tables/charts"
+qcat0096HealthPages = "pages 82-83 embedded health tables/charts"
 
 qcat0096HealthNarrative : String
 qcat0096HealthNarrative = "submitted hypertension/injury narrative"
+
+qcat0096ExternalSpreadsheetRelation : String
+qcat0096ExternalSpreadsheetRelation =
+  "relation between embedded pages and external Recordings and Transcriptions spreadsheet unresolved"
+
+qcat0096StandaloneSpreadsheetSubmission : String
+qcat0096StandaloneSpreadsheetSubmission =
+  "standalone blood-pressure spreadsheet submission unresolved"
 
 qcat0096Event26Jan : String
 qcat0096Event26Jan = "2022-01-26 notice/breach sequence"
@@ -247,6 +261,11 @@ record QCAT0096TemporalHealthFixture : Set₁ where
     healthEvidenceEmbeddedInFinalBundle : Set
     disputeEventsPresentInSameBundle : Set
 
+    externalSpreadsheetRelationReference : String
+    standaloneSpreadsheetSubmissionReference : String
+    externalSpreadsheetSameObjectReceipt : Set
+    standaloneSpreadsheetSubmissionReceipt : Set
+
     temporalCorrelationMayBeRecorded : Bool
     temporalCorrelationMayBeRecordedIsTrue :
       temporalCorrelationMayBeRecorded ≡ true
@@ -260,8 +279,14 @@ open QCAT0096TemporalHealthFixture public
 qcat0096Fixture :
   (embeddedReceipt : Set) →
   (eventReceipt : Set) →
+  (externalSpreadsheetSameObjectReceipt : Set) →
+  (standaloneSpreadsheetSubmissionReceipt : Set) →
   QCAT0096TemporalHealthFixture
-qcat0096Fixture embeddedReceipt eventReceipt =
+qcat0096Fixture
+  embeddedReceipt
+  eventReceipt
+  externalSpreadsheetSameObjectReceipt
+  standaloneSpreadsheetSubmissionReceipt =
   qcat0096TemporalHealthFixture
     qcat0096FinalBundle
     qcat0096HealthPages
@@ -272,5 +297,9 @@ qcat0096Fixture embeddedReceipt eventReceipt =
      qcat0096Event16Feb ∷ [])
     embeddedReceipt
     eventReceipt
+    qcat0096ExternalSpreadsheetRelation
+    qcat0096StandaloneSpreadsheetSubmission
+    externalSpreadsheetSameObjectReceipt
+    standaloneSpreadsheetSubmissionReceipt
     true refl
     false refl
