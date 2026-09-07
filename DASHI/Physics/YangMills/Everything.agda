@@ -50,6 +50,15 @@ import DASHI.Physics.YangMills.BalabanCMP98Path13DexpInversePairExact
 import DASHI.Physics.YangMills.BalabanCMP98Path13ReducedAdjointExpFamilyExact
 import DASHI.Physics.YangMills.BalabanCMP98Path13MinimalSemanticCalculusExact
 import DASHI.Physics.YangMills.BalabanCMP98Path13PreferredMinimalSemanticSourceFamilyExact
+
+-- Source-sign correction: the printed CMP98 Eq. (119) roles are
+-- dexpPlus/Jplus/Ad(exp), despite historical compatibility field names.
+import DASHI.Physics.YangMills.BalabanCMP98Path13PrintedSemanticOperatorsExact
+import DASHI.Physics.YangMills.BalabanCMP98Path13PrintedRoleSourceFamilyExact
+import DASHI.Physics.YangMills.BalabanCMP98Path13PrintedOperatorChartWeldExact
+import DASHI.Physics.YangMills.BalabanCMP98Path13PreferredPrintedRoleSourceFamilyExact
+import DASHI.Physics.YangMills.BalabanPath13Eq119PrintedRoleCorrectionProvenanceExact
+
 import DASHI.Physics.YangMills.BalabanPath13Eq119SourceRouteProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119BishopBridgeProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119DirectCalculusProvenanceExact
