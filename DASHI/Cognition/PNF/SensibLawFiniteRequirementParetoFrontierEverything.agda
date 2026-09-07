@@ -2,3 +2,4 @@ module DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierEverything wh
 
 import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierExact
 import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierRegression
+import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierSourceBoundaryExact
