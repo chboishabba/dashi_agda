@@ -6,6 +6,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 import DASHI.Physics.GR.GravitationalObservationBidiExact as Obs
 import DASHI.Physics.GR.GravitationalWaveTheoryTestBidiExact as Wave
 import DASHI.Physics.GR.GravitationalPredictionObservationBidiExact as Pred
+import DASHI.Physics.GR.GravitationalMultiScaleTheoryFingerprintBidiExact as Multi
 import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact as Anti
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 import DASHI.Papers.CoreTheoremInterfaces as Core
@@ -99,6 +100,30 @@ laneForWaveResidual Wave.residualConsistentWithZero = unificationConsumerLane
 laneForWaveResidual Wave.residualRequiresFurtherModelComparison = unificationConsumerLane
 
 ------------------------------------------------------------------------
+-- Multi-scale residual routing.
+------------------------------------------------------------------------
+
+laneForMultiScaleResidual : Multi.MultiScaleResidual → CrossPollinationLane
+laneForMultiScaleResidual Multi.missingLaboratoryFreeFallComparison = observationEvidenceLane
+laneForMultiScaleResidual Multi.missingLaboratoryClockComparison = observationEvidenceLane
+laneForMultiScaleResidual Multi.missingOrbitalTimingComparison = observationEvidenceLane
+laneForMultiScaleResidual Multi.missingCompactBinaryComparison = observationEvidenceLane
+laneForMultiScaleResidual Multi.missingNanohertzTimingComparison = observationEvidenceLane
+laneForMultiScaleResidual Multi.missingCosmologicalPropagationComparison = observationEvidenceLane
+laneForMultiScaleResidual Multi.inconsistentCrossScalePrediction = unificationConsumerLane
+laneForMultiScaleResidual Multi.unresolvedCrossScaleSystematics = observationEvidenceLane
+
+producerForMultiScaleResidual : Multi.MultiScaleResidual → Search.ProducerClass
+producerForMultiScaleResidual Multi.missingLaboratoryFreeFallComparison = Search.empiricalEvidenceProducer
+producerForMultiScaleResidual Multi.missingLaboratoryClockComparison = Search.empiricalEvidenceProducer
+producerForMultiScaleResidual Multi.missingOrbitalTimingComparison = Search.empiricalEvidenceProducer
+producerForMultiScaleResidual Multi.missingCompactBinaryComparison = Search.empiricalEvidenceProducer
+producerForMultiScaleResidual Multi.missingNanohertzTimingComparison = Search.empiricalEvidenceProducer
+producerForMultiScaleResidual Multi.missingCosmologicalPropagationComparison = Search.empiricalEvidenceProducer
+producerForMultiScaleResidual Multi.inconsistentCrossScalePrediction = Search.contradictionProducer
+producerForMultiScaleResidual Multi.unresolvedCrossScaleSystematics = Search.empiricalEvidenceProducer
+
+------------------------------------------------------------------------
 -- Firewalls across YM / NS / RH / GR / unification.
 ------------------------------------------------------------------------
 
@@ -111,6 +136,7 @@ record GravitationalCrossPollinationBoundary : Set where
     spectralAnalogyTransfersRiemannHypothesisProof : Bool
     waveResidualAutomaticallyPromotesModifiedGravity : Bool
     antigravityResidualAutomaticallyPromotesUnification : Bool
+    oneScaleGravityFitAutomaticallyClosesMultiScaleFingerprint : Bool
     ordinaryFluidClosureMayRefineLocalForceInterpretation : Bool
     gaugeSourceAnalysisMayRefineHighFieldInterpretation : Bool
     jointCrossScaleResidualMayReachUnificationConsumer : Bool
@@ -118,7 +144,7 @@ record GravitationalCrossPollinationBoundary : Set where
 canonicalGravitationalCrossPollinationBoundary : GravitationalCrossPollinationBoundary
 canonicalGravitationalCrossPollinationBoundary =
   gravitational-cross-pollination-boundary
-    true false false false false false true true true
+    true false false false false false false true true true
 
 ------------------------------------------------------------------------
 -- Existing terminal theorem firewalls are imported, not weakened.
@@ -126,6 +152,9 @@ canonicalGravitationalCrossPollinationBoundary =
 
 existingCoreTheoremInterfaces : Core.CoreTheoremInterfaces
 existingCoreTheoremInterfaces = Core.canonicalCoreTheoremInterfaces
+
+existingMultiScaleBoundary : Multi.MultiScaleTheoryBoundary
+existingMultiScaleBoundary = Multi.canonicalMultiScaleTheoryBoundary
 
 navierStokesTerminalStillFalse :
   Core.coreNavierStokesTerminalFalse ≡ Core.coreNavierStokesTerminalFalse
