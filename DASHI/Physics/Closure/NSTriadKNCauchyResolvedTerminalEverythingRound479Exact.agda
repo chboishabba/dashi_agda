@@ -6,6 +6,9 @@ module DASHI.Physics.Closure.NSTriadKNCauchyResolvedTerminalEverythingRound479Ex
 -- R478 is the direct all-coefficient resolved producer.  R479 isolates a signed
 -- residual allowance producer.  R480 then minimizes the literal downstream
 -- consumer again to the actual physical coefficient snapshot used by R432.
+-- R481 applies the repository's first-missing / least-privilege proof-search
+-- discipline: snapshot correspondence must be paid before the selected analytic
+-- inequality is admitted as the live theorem-search leaf.
 --
 -- Physical Cauchy archaeology retained here because it identifies what part of
 -- the selected resolved payment is already paid and what part remains genuinely
@@ -17,6 +20,7 @@ import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedDirectConsumerRound478Exact
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedSignedResidualRound479Exact
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedPhysicalSnapshotRound480Exact
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedProofSearchRound481Exact
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalCauchyResolventCompletionRound447Exact
 import DASHI.Physics.Closure.NSTriadKNPhysicalCauchyOffDiagonalR397WeldRound448Exact
