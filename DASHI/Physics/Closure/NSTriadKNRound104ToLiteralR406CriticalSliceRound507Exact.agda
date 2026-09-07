@@ -19,7 +19,7 @@ module DASHI.Physics.Closure.NSTriadKNRound104ToLiteralR406CriticalSliceRound507
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -77,8 +77,8 @@ module Compile
         subst
           (λ remainder →
             R104.integratedSignedProduction slice
-            R104.≤ R104.absorbedCoefficient slice
-              R104.* R104.criticalDissipation slice + remainder)
+            ≤ R104.absorbedCoefficient slice
+              * R104.criticalDissipation slice + remainder)
           (remainderSameObject weld)
           (R104.signedProductionEstimate slice)
     }
