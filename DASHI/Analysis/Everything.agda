@@ -5,3 +5,4 @@ module DASHI.Analysis.Everything where
 import DASHI.Analysis.Maass.Everything
 import DASHI.Analysis.RiemannLowOrdinateSourceAtlasExact
 import DASHI.Analysis.RiemannG2CurrentDirectOneLeafFrontierExact
+import DASHI.Analysis.RiemannG2FinalCutIntrospectionExact
