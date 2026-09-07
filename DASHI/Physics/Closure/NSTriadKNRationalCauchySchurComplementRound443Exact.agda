@@ -21,10 +21,6 @@ module DASHI.Physics.Closure.NSTriadKNRationalCauchySchurComplementRound443Exact
 -- diagonal coefficient rescaling.  Iterating therefore gives an LDL^T / sum
 -- of nonnegative squares certificate using only finite rational arithmetic.
 --
--- This file closes the delicate ENTRY algebra with the exact reciprocal used
--- elsewhere in DASHI.  It deliberately exposes the finite recursion as a
--- proof-bearing certificate rather than importing an improper integral.
---
 -- PROVENANCE
 -- ----------
 -- Errett Bishop and Douglas Bridges, Constructive Analysis, Springer, 1985,
@@ -37,16 +33,15 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; Positive; NonNegative; _+_; _-_; _*_; _≤_; _<_; positive; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; Positive; NonNegative; _+_; _-_; _*_; _≤_; _<_; 1/_; _≟_;
+   positive; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Nullary using (yes; no)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.YangMills.BalabanClayGate4RationalPositiveMassReciprocalExact as Reciprocal
-
-------------------------------------------------------------------------
--- Positive-rate arithmetic and the literal Cauchy entry.
 
 positivePlusPositive :
   ∀ {left right : ℚ} → Positive left → Positive right → Positive (left + right)
@@ -77,6 +72,16 @@ cauchyEntrySymmetric :
 cauchyEntrySymmetric left right =
   cong Reciprocal.safeRationalReciprocal (ℚP.+-comm left right)
 
+safeIsLiteralInverse :
+  (value : ℚ) → Positive value →
+  Reciprocal.safeRationalReciprocal value ≡ ℚ.1/_ value
+safeIsLiteralInverse value valuePositive with value ℚ.≟ 0ℚ
+... | yes valueZero =
+  Reciprocal.emptyEliminate
+    (Reciprocal.positiveZeroImpossible
+      (subst Positive valueZero valuePositive))
+... | no valueNonzero = refl
+
 cauchyEntryPositive :
   (left right : ℚ) →
   Positive left → Positive right →
@@ -90,27 +95,12 @@ cauchyEntryPositive left right leftPositive rightPositive =
       sumNonzeroI = ℚP.pos⇒nonZero (left + right)
       inversePositiveI = ℚP.1/pos⇒pos (left + right)
   in
-  subst
-    Positive
+  subst Positive
     (sym (safeIsLiteralInverse (left + right) sumPositive))
     inversePositiveI
-  where
-  safeIsLiteralInverse :
-    (value : ℚ) → Positive value →
-    Reciprocal.safeRationalReciprocal value ≡ ℚ.1/_ value
-  safeIsLiteralInverse value valuePositive with value ℚ.≟ 0ℚ
-  ... | Relation.Nullary.yes valueZero =
-    Reciprocal.emptyEliminate
-      (Reciprocal.positiveZeroImpossible
-        (subst Positive valueZero valuePositive))
-  ... | Relation.Nullary.no valueNonzero = refl
 
 ------------------------------------------------------------------------
 -- Exact pointwise Schur complement.
---
--- Keep all reciprocal values opaque to the ring solver.  The proof follows
--- the repository's established division-free pattern: polynomial regroup,
--- rewrite an explicit inverse law, polynomial regroup again.
 
 cauchySchurEntryIdentity :
   (x a b : ℚ) →
@@ -177,11 +167,6 @@ cauchySchurEntryIdentity x a b xPositive aPositive bPositive =
 
 ------------------------------------------------------------------------
 -- Finite certificate interface.
---
--- The scalar quadratic-form recursion is kept explicit.  A certificate at a
--- head cell supplies one nonnegative square pivot and recursively certifies the
--- diagonally rescaled tail.  `valueExact` prevents a caller from substituting
--- an unrelated positive number for the actual Cauchy form.
 
 record PositiveRateCoefficient : Set where
   constructor positive-rate-coefficient
@@ -232,9 +217,6 @@ pivotSquareTerm head rest =
   cauchyEntry (rate head) (rate head)
     * pivotLinearForm head rest * pivotLinearForm head rest
 
--- The exact n-dimensional Schur decomposition is represented recursively.
--- The pointwise kernel identity above is the sole nontrivial denominator
--- algebra required to construct these certificates by list induction.
 record FiniteCauchySchurCertificate
     (cells : List PositiveRateCoefficient) : Set where
   constructor finite-cauchy-schur-certificate
@@ -248,10 +230,6 @@ open FiniteCauchySchurCertificate public
 emptyCauchyCertificate : FiniteCauchySchurCertificate []
 emptyCauchyCertificate = finite-cauchy-schur-certificate 0ℚ refl ℚP.≤-refl
 
--- Compiler boundary: once the finite Schur equality for one head has been
--- assembled from `cauchySchurEntryIdentity`, positivity is automatic from the
--- positive pivot and the recursively certified tail.  This record keeps the
--- equality itself proof-bearing and local rather than hiding it in a Bool.
 record HeadSchurDecomposition
     (head : PositiveRateCoefficient)
     (rest : List PositiveRateCoefficient) : Set where
@@ -270,22 +248,24 @@ pivotSquareNonnegative :
   0ℚ ≤ pivotSquareTerm head rest
 pivotSquareNonnegative head rest =
   let
+    entry = cauchyEntry (rate head) (rate head)
+    form = pivotLinearForm head rest
     entryPositive = cauchyEntryPositive
       (rate head) (rate head) (ratePositive head) (ratePositive head)
-    entryNN = ℚP.<⇒≤ (ℚP.positive⁻¹ (cauchyEntry (rate head) (rate head)))
-    squareNN = Rational.squareNonnegative (pivotLinearForm head rest)
+    entryNN = ℚP.<⇒≤ (ℚP.positive⁻¹ entry)
+    squareNN = Rational.squareNonnegative form
     instance
-      entryNNI : NonNegative (cauchyEntry (rate head) (rate head))
+      entryNNI : NonNegative entry
       entryNNI = nonNegative entryNN
-      squareNNI : NonNegative (pivotLinearForm head rest * pivotLinearForm head rest)
+      squareNNI : NonNegative (form * form)
       squareNNI = nonNegative squareNN
-      productNNI = ℚP.nonNeg*nonNeg⇒nonNeg
-        (cauchyEntry (rate head) (rate head))
-        (pivotLinearForm head rest * pivotLinearForm head rest)
+      productNNI = ℚP.nonNeg*nonNeg⇒nonNeg entry (form * form)
+    rawNN : 0ℚ ≤ entry * (form * form)
+    rawNN = ℚP.nonNegative⁻¹ (entry * (form * form))
+    reassociate : entry * (form * form) ≡ entry * form * form
+    reassociate = solve (entry ∷ form ∷ [])
   in
-  ℚP.nonNegative⁻¹
-    (cauchyEntry (rate head) (rate head)
-      * (pivotLinearForm head rest * pivotLinearForm head rest))
+  subst (0ℚ ≤_) reassociate rawNN
 
 schurStepBuildsCertificate :
   (head : PositiveRateCoefficient) →
@@ -321,6 +301,9 @@ round443PointwiseSchurComplementIdentityClosed = true
 round443FinitePSDCompilerCarriesExactValueEquality : Bool
 round443FinitePSDCompilerCarriesExactValueEquality = true
 
+round443HeadDecompositionAutomaticallyConstructed : Bool
+round443HeadDecompositionAutomaticallyConstructed = false
+
 round443ImproperIntegralUsed : Bool
 round443ImproperIntegralUsed = false
 
@@ -338,6 +321,10 @@ round443ClayPromotion = false
 
 round443ImproperIntegralUsedIsFalse : round443ImproperIntegralUsed ≡ false
 round443ImproperIntegralUsedIsFalse = refl
+
+round443HeadDecompositionAutomaticallyConstructedIsFalse :
+  round443HeadDecompositionAutomaticallyConstructed ≡ false
+round443HeadDecompositionAutomaticallyConstructedIsFalse = refl
 
 round443PhysicalNSCauchyCertificateConstructedIsFalse :
   round443PhysicalNSCauchyCertificateConstructed ≡ false
