@@ -19,6 +19,7 @@ FILES=(
   DASHI/Analysis/RiemannG2FinalSplitComplementOrderTransportCompilerExact.agda
   DASHI/Analysis/RiemannG2FinalPoleQuotientMinimalAnalyticCutExact.agda
   DASHI/Analysis/RiemannG2FinalPoleQuotientTwoPaymentCutExact.agda
+  DASHI/Analysis/RiemannG2FinalPoleQuotientTwoPaymentCutRegression.agda
   DASHI/Analysis/RiemannAristotleSharedCertificateREADME.agda
 )
 
