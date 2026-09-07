@@ -27,7 +27,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -62,15 +62,6 @@ pairSelectedSum energy cutoff output (pair ∷ rest) with
   + pairSelectedSum energy cutoff output rest
 ... | false = pairSelectedSum energy cutoff output rest
 
-sumAppend :
-  (energy : Z3.FourierMode → ℚ) →
-  (left right : List Physical.PhysicalTriadIncidence) →
-  triadEnergyProductSum energy (Cube._++_ left right)
-  ≡ triadEnergyProductSum energy left + triadEnergyProductSum energy right
-sumAppend energy [] right = refl
-sumAppend energy (head ∷ rest) right
-  rewrite sumAppend energy rest right = refl
-
 pairSelectedAppend :
   (energy : Z3.FourierMode → ℚ) →
   (cutoff : Nat) (output : Z3.FourierMode) →
@@ -94,38 +85,15 @@ filteredEnumeratedPairSumExact :
 filteredEnumeratedPairSumExact energy cutoff output [] = refl
 filteredEnumeratedPairSumExact energy cutoff output (pair ∷ rest) with
   Physical.modeWithinCutoff cutoff
-    (Z3.addMode (Cube.first pair) (Cube.second pair)) in within
+    (Z3.addMode (Cube.first pair) (Cube.second pair))
 ... | true with Output.modeEqual
-  (Z3.addMode (Cube.first pair) (Cube.second pair)) output in sameOutput
+  (Z3.addMode (Cube.first pair) (Cube.second pair)) output
 ...   | true =
       cong₂ _+_ refl
         (filteredEnumeratedPairSumExact energy cutoff output rest)
 ...   | false = filteredEnumeratedPairSumExact energy cutoff output rest
 ... | false = filteredEnumeratedPairSumExact energy cutoff output rest
 
-mappedBlockSelectedExact :
-  (energy : Z3.FourierMode → ℚ) →
-  (cutoff : Nat) (output left : Z3.FourierMode) →
-  (rights : List Z3.FourierMode) →
-  pairSelectedSum energy cutoff output
-    (Cube.map (λ right → Cube.pair left right) rights)
-  ≡ R453.selectedEnergyInner
-      (R453.modal-energy energy (λ _ → dummyNN))
-      (fixedOutputSelector cutoff output)
-      left rights
-mappedBlockSelectedExact energy cutoff output left [] = refl
-mappedBlockSelectedExact energy cutoff output left (right ∷ rest) with
-  fixedOutputSelector cutoff output left right
-... | true =
-  cong₂ _+_ refl
-    (mappedBlockSelectedExact energy cutoff output left rest)
-... | false = mappedBlockSelectedExact energy cutoff output left rest
-  where
-  postulate dummyNN : ∀ {mode} → 0ℚ ≤ energy mode
-
--- The proof-bearing public theorem carries actual nonnegativity.  The local
--- structural lemma below is repeated with that witness rather than relying on
--- the convenience draft above.
 module WithEnergy
     (E : R453.ModalEnergy Z3.FourierMode) where
 
@@ -203,6 +171,9 @@ round454FixedOutputEnergyProductPaidByGlobalEnergySquare = true
 round454IntroducesCardinalityTax : Bool
 round454IntroducesCardinalityTax = false
 
+round454ContainsPostulate : Bool
+round454ContainsPostulate = false
+
 round454PackageAClosed : Bool
 round454PackageAClosed = false
 
@@ -212,3 +183,7 @@ round454ClayPromotion = false
 round454IntroducesCardinalityTaxIsFalse :
   round454IntroducesCardinalityTax ≡ false
 round454IntroducesCardinalityTaxIsFalse = refl
+
+round454ContainsPostulateIsFalse :
+  round454ContainsPostulate ≡ false
+round454ContainsPostulateIsFalse = refl
