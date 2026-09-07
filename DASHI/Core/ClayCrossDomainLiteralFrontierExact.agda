@@ -6,11 +6,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
-import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact as R477
-import DASHI.Physics.Closure.NSTriadKNCauchyResolvedDirectConsumerRound478Exact as R478
-import DASHI.Physics.Closure.NSTriadKNCauchyResolvedSignedResidualRound479Exact as R479
-import DASHI.Physics.Closure.NSTriadKNCauchyFullVsSignedFluxBoundaryRound484Exact as NSBoundary
-import DASHI.Physics.Closure.NSTriadKNCauchySignedFluxProofSearchRound485Exact as NS
+import DASHI.Physics.Closure.NSTriadKNCanonicalClayProofSearchRound486Exact as NS
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCriticalConeCompilerRound434Exact as NSCritical
+import DASHI.Physics.Closure.NSTriadKNCauchyFullVsSignedFluxBoundaryRound484Exact as NSCauchyBoundary
 import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Exact as YM
 import DASHI.Analysis.RiemannAristotleRHFinalAllowanceLeafSchedulerExact as RH
 import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as Zeta
@@ -21,15 +19,17 @@ import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as Zeta
 -- Reuse proof-search SHAPE only; never identify mathematical carriers across
 -- programmes.
 --
--- NS correction (R484/R485):
---   R448 already owns the same-object representation
---       literal R397/R385 signed flux = physical Cauchy offDiagonal.
---   The R477/R478 resolved quadratic is the FULL Cauchy form
---       full = diagonal + offDiagonal,
---   so it is not the signed-cross consumer.  A full upper bound is an optional
---   sufficient producer because diagonal >= 0, but the least-privilege live
---   analytic leaf is only the POSITIVE signed-flux allowance.  R458 explicitly
---   leaves that orientation open.
+-- NS canonical correction (R486)
+-- ------------------------------
+-- R481-R485 were useful Cauchy proof-search archaeology, but a downstream
+-- consumer audit shows that neither the full Cauchy form nor +F(T) is the
+-- canonical Clay target.  R282/R423 already own the shortest exact consumer:
+-- one cutoff-uniform INTEGRATED signed quadratic-companion heat-cross payment.
+-- R423 sends that payment directly to the critical barrier.
+--
+-- R284/R434, Cauchy/Schur/operator bounds and endpoint decompositions remain
+-- optional producer strategies.  Their unpaid children must not silently become
+-- mandatory prerequisites of the direct R423 route.
 ------------------------------------------------------------------------
 
 data TerminalProducerMotif : Set where
@@ -45,29 +45,29 @@ data TerminalProducerMotif : Set where
 data Programme : Set where navierStokes yangMills riemannZeta : Programme
 
 data TerminalCoordinate : Set where
-  nsPositiveSignedFluxAllowance : TerminalCoordinate
+  nsCutoffUniformIntegratedSignedCompanionBudget : TerminalCoordinate
   ymRound108Semantics : TerminalCoordinate
   ymRound108BC1SameObject : TerminalCoordinate
   rhOffAllowance : TerminalCoordinate
   rhGammaAllowance : TerminalCoordinate
 
 coordinateProgramme : TerminalCoordinate → Programme
-coordinateProgramme nsPositiveSignedFluxAllowance = navierStokes
+coordinateProgramme nsCutoffUniformIntegratedSignedCompanionBudget = navierStokes
 coordinateProgramme ymRound108Semantics = yangMills
 coordinateProgramme ymRound108BC1SameObject = yangMills
 coordinateProgramme rhOffAllowance = riemannZeta
 coordinateProgramme rhGammaAllowance = riemannZeta
 
 primaryMotif : TerminalCoordinate → TerminalProducerMotif
-primaryMotif nsPositiveSignedFluxAllowance = signedIntegratedPayment
+primaryMotif nsCutoffUniformIntegratedSignedCompanionBudget = signedIntegratedPayment
 primaryMotif ymRound108Semantics = sourceSemanticsRecovery
 primaryMotif ymRound108BC1SameObject = sameObjectRepresentation
 primaryMotif rhOffAllowance = assignedAllowancePayment
 primaryMotif rhGammaAllowance = assignedAllowancePayment
 
 coordinateReference : TerminalCoordinate → String
-coordinateReference nsPositiveSignedFluxAllowance =
-  "NS: positive-orientation literal R397/R448 fixed-output signed-flux allowance"
+coordinateReference nsCutoffUniformIntegratedSignedCompanionBudget =
+  "NS: R423 cutoff-uniform integrated signed quadratic-companion heat-cross budget"
 coordinateReference ymRound108Semantics = "YM: source-fixed Round108 density semantics"
 coordinateReference ymRound108BC1SameObject = "YM: selected potential = BC1 same-object representation weld"
 coordinateReference rhOffAllowance = "RH/zeta: universal pole-quotient Off budget <= assigned A_off"
@@ -77,55 +77,60 @@ coordinateReference rhGammaAllowance = "RH/zeta: same-taper Gamma budget <= assi
 -- Exact NS pins.
 ------------------------------------------------------------------------
 
-nsR448RepresentationAlreadyOwned : NS.round485R448RepresentationAlreadyOwned ≡ true
-nsR448RepresentationAlreadyOwned = refl
+nsCanonicalShortestConsumerIsR423 :
+  NS.round486R423IsCanonicalShortestConsumer ≡ true
+nsCanonicalShortestConsumerIsR423 = NS.round486R423IsCanonicalShortestConsumerIsTrue
 
-nsFullFormSameObjectRouteRejected :
-  NSBoundary.round484FullFormSameObjectAsSignedFlux ≡ false
-nsFullFormSameObjectRouteRejected =
-  NSBoundary.round484FullFormSameObjectAsSignedFluxIsFalse
+nsR423TargetIsCutoffUniformSignedCompanionBudget :
+  NS.round486R423TargetIsCutoffUniformSignedCompanionBudget ≡ true
+nsR423TargetIsCutoffUniformSignedCompanionBudget =
+  NS.round486R423TargetIsCutoffUniformSignedCompanionBudgetIsTrue
 
-nsFullFormUpperBoundStillSufficientProducer :
-  NSBoundary.round484FullUpperBoundIsSufficientProducerForSignedFlux ≡ true
-nsFullFormUpperBoundStillSufficientProducer = refl
-
-nsFullFormUpperBoundNotMandatory :
-  NSBoundary.round484FullUpperBoundIsMandatoryProducerForSignedFlux ≡ false
-nsFullFormUpperBoundNotMandatory = refl
-
-nsCurrentFirstMissingIsPositiveSignedFluxAllowance :
-  NS.firstSignedFluxResidual NS.currentSignedFluxStatus
-  ≡ NS.missingPositiveSignedFluxAllowance
-nsCurrentFirstMissingIsPositiveSignedFluxAllowance =
-  NS.currentFirstMissingIsPositiveAllowance
+nsCurrentFirstMissingIsDirectR423Budget :
+  NS.firstCanonicalNSResidual NS.currentCanonicalNSStatus
+  ≡ NS.missingCutoffUniformSignedCompanionBudget
+nsCurrentFirstMissingIsDirectR423Budget = NS.currentFirstMissingIsR423Budget
 
 nsCurrentMechanismIsThink :
-  NS.mechanismFor (NS.firstSignedFluxResidual NS.currentSignedFluxStatus)
+  NS.mechanismFor (NS.firstCanonicalNSResidual NS.currentCanonicalNSStatus)
   ≡ NS.Think
 nsCurrentMechanismIsThink = NS.currentMechanismIsThink
 
-nsPositiveSignedFluxAllowanceStillOpen :
-  NS.round485PositiveSignedFluxAllowanceClosed ≡ false
-nsPositiveSignedFluxAllowanceStillOpen =
-  NS.round485PositiveSignedFluxAllowanceClosedIsFalse
+nsDirectR423BudgetStillOpen : NS.round486DirectR423BudgetClosed ≡ false
+nsDirectR423BudgetStillOpen = NS.round486DirectR423BudgetClosedIsFalse
 
-nsSpacetimeRemainderStillOpen :
-  NS.round485SpacetimeRemainderClosed ≡ false
-nsSpacetimeRemainderStillOpen = NS.round485SpacetimeRemainderClosedIsFalse
+nsCrossOutputCoherenceNotRequired : NS.round486CrossOutputCoherenceRequired ≡ false
+nsCrossOutputCoherenceNotRequired = NS.round486CrossOutputCoherenceRequiredIsFalse
 
--- Stronger producer routes remain available but are not terminal requirements.
-nsR478DirectFullFormProducerExistsAsRoute : R478.round478DirectResolvedConsumerPreferred ≡ true
-nsR478DirectFullFormProducerExistsAsRoute = refl
+nsR284DecompositionNotMandatory : NS.round486R284DecompositionMandatory ≡ false
+nsR284DecompositionNotMandatory = NS.round486R284DecompositionMandatoryIsFalse
 
-nsSplitScalarPairNotMandatory : R478.round478SplitScalarPairIsMandatory ≡ false
-nsSplitScalarPairNotMandatory = R478.round478SplitScalarPairIsMandatoryIsFalse
+-- Optional R284/R434 producer route remains honestly open at three physical
+-- region payments.  These are NOT direct R423 prerequisites.
+nsOptionalR284DeepFarLowPhysicalWeldOpen :
+  NSCritical.round434DeepFarLowPhysicalWeldClosed ≡ false
+nsOptionalR284DeepFarLowPhysicalWeldOpen =
+  NSCritical.round434DeepFarLowPhysicalWeldClosedIsFalse
 
-nsSignedResidualProducerCompilesFullForm :
-  R479.round479SignedResidualProducerCompilesToDirectConsumer ≡ true
-nsSignedResidualProducerCompilesFullForm = refl
+nsOptionalR284DeepHighHighPhysicalWeldOpen :
+  NSCritical.round434DeepHighHighPhysicalWeldClosed ≡ false
+nsOptionalR284DeepHighHighPhysicalWeldOpen =
+  NSCritical.round434DeepHighHighPhysicalWeldClosedIsFalse
 
-nsCauchyKernelAlreadyExplicit : R477.round477CauchyPairKernelExplicit ≡ true
-nsCauchyKernelAlreadyExplicit = refl
+nsOptionalR284CriticalConeCovarianceOpen :
+  NSCritical.round434PhysicalCriticalConeCovarianceClosed ≡ false
+nsOptionalR284CriticalConeCovarianceOpen =
+  NSCritical.round434PhysicalCriticalConeCovarianceClosedIsFalse
+
+nsFullCauchyFormNotSignedCrossIdentity :
+  NSCauchyBoundary.round484FullFormSameObjectAsSignedFlux ≡ false
+nsFullCauchyFormNotSignedCrossIdentity =
+  NSCauchyBoundary.round484FullFormSameObjectAsSignedFluxIsFalse
+
+nsPositiveTerminalFluxNotCanonicalClayLeaf :
+  NS.round486PositiveTerminalFluxIsCanonicalClayLeaf ≡ false
+nsPositiveTerminalFluxNotCanonicalClayLeaf =
+  NS.round486PositiveTerminalFluxIsCanonicalClayLeafIsFalse
 
 ------------------------------------------------------------------------
 -- Other programmes remain independent.
@@ -185,8 +190,8 @@ canonicalCrossDomainSearchPolicy =
 ------------------------------------------------------------------------
 -- Current dependency order.
 --
--- NS: representation already paid -> Think on positive signed-flux allowance.
--- Do not reopen the full-form identity route; it is a carrier mismatch.
+-- NS: Think directly on R423.  Optional producer decompositions may be explored
+-- only when they improve the route; they do not enlarge the canonical cutset.
 ------------------------------------------------------------------------
 
 data ClosurePhase : Set where
@@ -196,7 +201,7 @@ data ClosurePhase : Set where
   downstreamCompiler : ClosurePhase
 
 phase : TerminalCoordinate → ClosurePhase
-phase nsPositiveSignedFluxAllowance = terminalAnalyticPayment
+phase nsCutoffUniformIntegratedSignedCompanionBudget = terminalAnalyticPayment
 phase ymRound108Semantics = representationOrSource
 phase ymRound108BC1SameObject = representationOrSource
 phase rhOffAllowance = terminalAnalyticPayment
