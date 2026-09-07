@@ -151,10 +151,10 @@ selectedPhysicalInverseLinkBelowPublishedUpper inputs site axis =
     (selectedBondDefectBelowPublishedUpper inputs site axis)
 
 selectedPath13NativeRadius :
-  ∀ {CoarseField} →
-  Path13SelectedVariationalRadiusRepresentation CoarseField →
+  ∀ {CoarseField}
+    (inputs : Path13SelectedVariationalRadiusRepresentation CoarseField) →
   Background.SelectedInverseLinkRadius13
-    (Target.path13Background (selected _))
+    (Target.path13Background (selected inputs))
 selectedPath13NativeRadius inputs = record
   { Background.SelectedInverseLinkRadius13.inverseLinkDefectBound =
       λ axis site →
