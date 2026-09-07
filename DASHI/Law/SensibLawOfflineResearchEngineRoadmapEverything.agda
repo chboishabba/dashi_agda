@@ -18,6 +18,7 @@ import DASHI.Law.SensibLawGovernedOnlineR6ParityExact as OnlineR6
 import DASHI.Law.SensibLawPreferredAustralianAuthorityAcquisitionExact as PreferredAU
 import DASHI.Law.SensibLawOfficialAcquisitionResearchHandoffExact as OfficialHandoff
 import DASHI.Law.SensibLawOfficialHCALiveAcquisitionReceipt9c3007Exact as HCALive
+import DASHI.Law.SensibLawOfficialJudgmentResourceDiscoveryExact as JudgmentResource
 
 ------------------------------------------------------------------------
 -- OFFLINE / GOVERNED-ONLINE RESEARCH ENGINE CAPSTONE
@@ -27,7 +28,9 @@ import DASHI.Law.SensibLawOfficialHCALiveAcquisitionReceipt9c3007Exact as HCALiv
 --   -> proof-reduction threshold + Pareto schedule
 --   -> provider-neutral query
 --   -> persisted/OALC/official/sanctioned acquisition order
---   -> local ingestion
+--   -> local landing-page ingestion
+--   -> zero-network official judgment resource discovery
+--   -> bounded full-judgment fetch
 --   -> immutable source revision
 --   -> PNF + proposition-level citation/reasoning/condition extraction
 --   -> append-only world/research memory
@@ -40,10 +43,10 @@ import DASHI.Law.SensibLawOfficialHCALiveAcquisitionReceipt9c3007Exact as HCALiv
 -- order and typed provider failures. OfficialHandoff mirrors the concrete return
 -- seam from locally-ingested provider material back into the ordinary research
 -- world/reasoning/frontier machinery. HCALive pins the observed successful HCA
--- acquisition: first network=1, SHA256-bound local ingestion, replay network=0.
--- It also preserves the stronger unresolved provenance coordinate: the receipt
--- embeds 9c3007..., while bb6de85... is the later locally validated repair head;
--- exact-clean/exact-current-head live execution is not silently inferred.
+-- landing acquisition: first network=1, SHA256-bound local ingestion, replay=0.
+-- JudgmentResource mirrors the next Rust step: reuse the local landing bytes,
+-- discover DOCX/PDF with zero network, prefer DOCX, then permit one bounded full
+-- judgment fetch whose live receipt remains unvalidated until actually run.
 ------------------------------------------------------------------------
 
 record OfflineResearchEngineBoundary : Set where
@@ -70,6 +73,12 @@ record OfflineResearchEngineBoundary : Set where
     boundedOfficialLiveAcquisitionObserved : Bool
     boundedOfficialLiveAcquisitionObservedIsTrue :
       boundedOfficialLiveAcquisitionObserved ≡ true
+    officialJudgmentResourceDiscoveryImplemented : Bool
+    officialJudgmentResourceDiscoveryImplementedIsTrue :
+      officialJudgmentResourceDiscoveryImplemented ≡ true
+    fullJudgmentLiveAcquisitionObserved : Bool
+    fullJudgmentLiveAcquisitionObservedIsFalse :
+      fullJudgmentLiveAcquisitionObserved ≡ false
     exactCurrentHeadLiveExecutionObserved : Bool
     exactCurrentHeadLiveExecutionObservedIsFalse :
       exactCurrentHeadLiveExecutionObserved ≡ false
@@ -93,6 +102,8 @@ canonicalOfflineResearchEngineBoundary =
     true refl
     true refl
     true refl
+    true refl
+    false refl
     false refl
     false refl
     false refl
@@ -161,6 +172,11 @@ selectedOfficialAcquisitionHandoffBoundary =
 selectedObservedOfficialHCALiveReceipt : HCALive.ObservedOfficialHCALiveReceipt
 selectedObservedOfficialHCALiveReceipt =
   HCALive.canonicalObservedOfficialHCALiveReceipt
+
+selectedOfficialJudgmentResourceDiscoveryBoundary :
+  JudgmentResource.OfficialJudgmentResourceDiscoveryBoundary
+selectedOfficialJudgmentResourceDiscoveryBoundary =
+  JudgmentResource.canonicalOfficialJudgmentResourceDiscoveryBoundary
 
 ------------------------------------------------------------------------
 -- Capstone firewalls.
