@@ -71,7 +71,7 @@ fullClosureStillImpossible = Country.fullCurrentOperationalClosureStillImpossibl
 
 data MoreStateReportingPaysCommunityOutcome : Set where
 data CommunityOutcomeEvidenceTransfersCommunityAuthorityToState : Set where
-\data FirstLiveResidualMeansOtherResidualsAreFalse : Set where
+data FirstLiveResidualMeansOtherResidualsAreFalse : Set where
 
 moreStateReportingDoesNotPayCommunityOutcome : MoreStateReportingPaysCommunityOutcome → ⊥
 moreStateReportingDoesNotPayCommunityOutcome ()
