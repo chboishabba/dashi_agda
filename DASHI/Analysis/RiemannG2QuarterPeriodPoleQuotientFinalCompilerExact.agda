@@ -74,7 +74,7 @@ existingPoleQuotientBidiCompilerAlreadyClosed :
 existingPoleQuotientBidiCompilerAlreadyClosed = refl
 
 allowanceCompositionAlreadyClosed :
-  Allowance.PoleQuotientChannelAllowanceBoundary.allowanceCompilerClosed
+  Allowance.PoleQuotientChannelAllowanceBoundary.separateProducerBoundsCompileToStrictCombinedBudget
     Allowance.canonicalPoleQuotientChannelAllowanceBoundary ≡ true
 allowanceCompositionAlreadyClosed = refl
 
