@@ -58,9 +58,21 @@ open import DASHI.Core.Prelude
 --
 -- No global reflexivity axiom is added; the concrete near self-order receipt is
 -- explicit. Far-tail decay is owned, but J still cannot be selected from the far
--- channel alone because the signed near core changes with J. The live zero-side
--- theorem remains phase-sensitive near control at the same chosen crossing J,
--- strong enough to leave the selected far allowance epsilon.
+-- channel alone because the signed near core changes with J.
+--
+-- The preferred direct near-side producer is now the carrier-neutral
+-- FiniteNearProducer: one signed evaluation plus one budget. The older
+-- DirectFinitePoleNearProducer also bundles the determinant-q literal consumer,
+-- so it is compatibility/diagnostic infrastructure rather than a prerequisite
+-- of the universal pole-quotient final carrier. After selected same-object budget
+-- transport, the live scalar theorem is exactly
+--
+--   cast(B_near_selected) + epsilon <= A_off.
+--
+-- If the explicit-formula target-window route is used, its source-native typed J
+-- already lives in PoleNearTargetModulation.cutoff. Same-selected-test identity
+-- connects the theorem-bearing target window to that f_{t,J}; do not mint another
+-- selected cutoff. The final Off input already owns the crossing receipt.
 --
 -- Gamma has no cutoff coordinate. Its terminal theorem is simply the same-taper
 -- assigned allowance fit B_Gamma(g_pole) <= A_Gamma. A concrete epsGamma /
@@ -100,6 +112,12 @@ import DASHI.Analysis.RiemannG2SelectedTargetLocalMomentSameObjectExact
 import DASHI.Analysis.RiemannG2SelectedDirectFiniteMomentBidiExact
 import DASHI.Analysis.RiemannAristotlePoleNearPhaseStatisticExact
 import DASHI.Analysis.RiemannG2SelectedPoleNearFiniteEvaluationSameObjectExact
+import DASHI.Analysis.RiemannG2SelectedNearBudgetFinalOffSlackCompilerExact
+import DASHI.Analysis.RiemannG2SelectedNearBudgetFinalOffSlackRegression
+import DASHI.Analysis.RiemannG2SelectedDirectCutoffFinalOffSameObjectExact
+import DASHI.Analysis.RiemannG2TargetModulationFinalOffCutoffCompilerExact
+import DASHI.Analysis.RiemannG2FinalPoleNearRouteReconciliationExact
+import DASHI.Analysis.RiemannG2FinalPoleNearRouteRegression
 import DASHI.Analysis.RiemannG2AdaptiveJLambdaConstantWindowExact
 import DASHI.Analysis.RiemannG2QuarterPeriodAnalyticRouteReconciliationExact
 import DASHI.Analysis.RiemannG2HighestAlphaAfter369Exact
