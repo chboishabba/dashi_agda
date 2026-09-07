@@ -134,6 +134,86 @@ compileSelectedFiniteNearBudgetPayment certified input = record
   ; Minimal.paymentReference = budgetReference input
   }
 
+------------------------------------------------------------------------
+-- STRONGER ORDERED-UPPER ROUTE
+--
+-- If the finite enclosure itself carries a theorem-bearing upper endpoint,
+-- `finiteSum <= certifiedUpper` is already Core compiler output.  The Riemann
+-- application therefore does not need to provide a second analytic
+-- `ProducesRequiredUpper` receipt.  It only provides the same-object/order
+-- transport from that source upper theorem to the selected Weil scalar.
+------------------------------------------------------------------------
+
+record CertifiedSelectedFiniteNearUpperInput
+    {space : Weil.WeilTestSpace}
+    {formula : Explicit.RiemannExplicitFormula space}
+    {window : Window.PoleNearTargetWindow space formula}
+    (certified : CertifiedSelectedFiniteNearEvaluation space formula window)
+    : Set₁ where
+  private
+    carrier0 = carrier certified
+    certificate0 = certificate certified
+    evaluation0 = compileSignedFiniteNearEvaluation certified
+  field
+    upperCertificate :
+      Cert.ProofCarryingFiniteSumUpperEnclosure carrier0 certificate0
+
+    SelectedUpper :
+      Weil.WeilTestSpace.Scalar space →
+      Weil.WeilTestSpace.Scalar space →
+      Set
+
+    sourceUpperBecomesSelectedUpper :
+      Cert.lessOrEqual upperCertificate
+        (Eval.SignedFiniteNearEvaluationSurface.signedNearValue evaluation0)
+        (Cert.certifiedUpper upperCertificate) →
+      SelectedUpper
+        (Window.PoleNearTargetWindow.finitePoleNearSigned window)
+        (Cast.cast
+          (scalarCarrierIdentity certified)
+          (Cert.certifiedUpper upperCertificate))
+
+    budgetReference : String
+
+open CertifiedSelectedFiniteNearUpperInput public
+
+compileUpperEvaluationProducesBudget :
+  ∀ {space formula window}
+    {certified : CertifiedSelectedFiniteNearEvaluation space formula window} →
+  CertifiedSelectedFiniteNearUpperInput certified →
+  Eval.EvaluationProducesBudget
+    (compileSignedFiniteNearEvaluation certified)
+compileUpperEvaluationProducesBudget {certified = certified} input = record
+  { Eval.Budget = Cert.Scalar (carrier certified)
+  ; Eval.nearBudget = Cert.certifiedUpper (upperCertificate input)
+  ; Eval.ProducesRequiredUpper = λ evaluation budget →
+      Cert.lessOrEqual (upperCertificate input)
+        (Eval.SignedFiniteNearEvaluationSurface.signedNearValue evaluation)
+        budget
+  ; Eval.producesRequiredUpper =
+      Cert.finiteSumBelowCertifiedUpper (upperCertificate input)
+  ; Eval.budgetReference = budgetReference input
+  }
+
+compileUpperSelectedFiniteNearBudgetPayment :
+  ∀ {space formula window}
+    (certified : CertifiedSelectedFiniteNearEvaluation space formula window) →
+  CertifiedSelectedFiniteNearUpperInput certified →
+  Minimal.SelectedFiniteNearBudgetPayment space formula window
+compileUpperSelectedFiniteNearBudgetPayment certified input = record
+  { Minimal.evaluation = compileSignedFiniteNearEvaluation certified
+  ; Minimal.budget = compileUpperEvaluationProducesBudget input
+  ; Minimal.scalarCarrierIdentity = scalarCarrierIdentity certified
+  ; Minimal.signedNearValueIsSelectedFiniteNear =
+      certifiedFiniteSumIsSelectedFiniteNear certified
+  ; Minimal.budgetToSelectedScalar =
+      Cast.cast (scalarCarrierIdentity certified)
+  ; Minimal.SelectedUpper = SelectedUpper input
+  ; Minimal.evaluatorUpperBecomesSelectedUpper =
+      sourceUpperBecomesSelectedUpper input
+  ; Minimal.paymentReference = budgetReference input
+  }
+
 record CertifiedFiniteNearCompilerBoundary : Set where
   constructor certified-finite-near-compiler-boundary
   field
@@ -166,6 +246,33 @@ canonicalCertifiedFiniteNearCompilerBoundary =
     false refl
     true refl
     true refl
+    true refl
+    true refl
+    false refl
+
+record CertifiedFiniteNearUpperRouteBoundary : Set where
+  constructor certified-finite-near-upper-route-boundary
+  field
+    secondAnalyticFiniteSumUpperReceiptRequired : Bool
+    secondAnalyticFiniteSumUpperReceiptRequiredIsFalse :
+      secondAnalyticFiniteSumUpperReceiptRequired ≡ false
+
+    sameObjectOrderTransportStillRequired : Bool
+    sameObjectOrderTransportStillRequiredIsTrue :
+      sameObjectOrderTransportStillRequired ≡ true
+
+    orderedUpperCertificateCompilesMinimalSelectedPayment : Bool
+    orderedUpperCertificateCompilesMinimalSelectedPaymentIsTrue :
+      orderedUpperCertificateCompilesMinimalSelectedPayment ≡ true
+
+    rhDerived : Bool
+    rhDerivedIsFalse : rhDerived ≡ false
+
+canonicalCertifiedFiniteNearUpperRouteBoundary :
+  CertifiedFiniteNearUpperRouteBoundary
+canonicalCertifiedFiniteNearUpperRouteBoundary =
+  certified-finite-near-upper-route-boundary
+    false refl
     true refl
     true refl
     false refl
