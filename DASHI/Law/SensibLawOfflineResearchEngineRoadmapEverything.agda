@@ -17,6 +17,7 @@ import DASHI.Law.SensibLawOfflineResearchEngineRustReceiptsF93740fExact as RustV
 import DASHI.Law.SensibLawGovernedOnlineR6ParityExact as OnlineR6
 import DASHI.Law.SensibLawPreferredAustralianAuthorityAcquisitionExact as PreferredAU
 import DASHI.Law.SensibLawOfficialAcquisitionResearchHandoffExact as OfficialHandoff
+import DASHI.Law.SensibLawOfficialHCALiveAcquisitionReceipt9c3007Exact as HCALive
 
 ------------------------------------------------------------------------
 -- OFFLINE / GOVERNED-ONLINE RESEARCH ENGINE CAPSTONE
@@ -38,8 +39,11 @@ import DASHI.Law.SensibLawOfficialAcquisitionResearchHandoffExact as OfficialHan
 -- first live-provider contract. PreferredAU mirrors the newer Rust-led provider
 -- order and typed provider failures. OfficialHandoff mirrors the concrete return
 -- seam from locally-ingested provider material back into the ordinary research
--- world/reasoning/frontier machinery. The real official-source live receipt is
--- still unvalidated until the explicit bounded run actually succeeds.
+-- world/reasoning/frontier machinery. HCALive pins the observed successful HCA
+-- acquisition: first network=1, SHA256-bound local ingestion, replay network=0.
+-- It also preserves the stronger unresolved provenance coordinate: the receipt
+-- embeds 9c3007..., while bb6de85... is the later locally validated repair head;
+-- exact-clean/exact-current-head live execution is not silently inferred.
 ------------------------------------------------------------------------
 
 record OfflineResearchEngineBoundary : Set where
@@ -63,6 +67,12 @@ record OfflineResearchEngineBoundary : Set where
     validatedRustReceiptBundlePinnedIsTrue : validatedRustReceiptBundlePinned ≡ true
     validatedRustExecutionWasNetworkFree : Bool
     validatedRustExecutionWasNetworkFreeIsTrue : validatedRustExecutionWasNetworkFree ≡ true
+    boundedOfficialLiveAcquisitionObserved : Bool
+    boundedOfficialLiveAcquisitionObservedIsTrue :
+      boundedOfficialLiveAcquisitionObserved ≡ true
+    exactCurrentHeadLiveExecutionObserved : Bool
+    exactCurrentHeadLiveExecutionObservedIsFalse :
+      exactCurrentHeadLiveExecutionObserved ≡ false
     liveNetworkExecutionImplicit : Bool
     liveNetworkExecutionImplicitIsFalse : liveNetworkExecutionImplicit ≡ false
     accumulatedResearchAutomaticallyTruth : Bool
@@ -82,6 +92,8 @@ canonicalOfflineResearchEngineBoundary =
     true refl
     true refl
     true refl
+    true refl
+    false refl
     false refl
     false refl
     false refl
@@ -145,6 +157,10 @@ selectedOfficialAcquisitionHandoffBoundary :
   OfficialHandoff.OfficialAcquisitionResearchHandoffBoundary
 selectedOfficialAcquisitionHandoffBoundary =
   OfficialHandoff.canonicalOfficialAcquisitionResearchHandoffBoundary
+
+selectedObservedOfficialHCALiveReceipt : HCALive.ObservedOfficialHCALiveReceipt
+selectedObservedOfficialHCALiveReceipt =
+  HCALive.canonicalObservedOfficialHCALiveReceipt
 
 ------------------------------------------------------------------------
 -- Capstone firewalls.
