@@ -86,8 +86,8 @@ fromSameTaperRoute envelope allowance = record
   ; assignedGammaAllowance =
       SameTaper.assignedGammaAllowance allowance
   ; envelopeBelowAssignedAllowance =
-      SameTaper.gammaEnvelopeBelowAssignedAllowance allowance
-  ; analyticReference = SameTaper.producerReference envelope
+      SameTaper.envelopeBelowAssignedAllowance allowance
+  ; analyticReference = SameTaper.allowanceReference allowance
   }
 
 sameTaperRouteCompilesGammaAnalyticCore :
