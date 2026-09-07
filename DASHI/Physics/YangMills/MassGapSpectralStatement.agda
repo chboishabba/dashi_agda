@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 
 open import DASHI.Geometry.Gauge.SUNPrimitives
 import DASHI.Physics.YangMills.YMOperatorDomainContinuumFrontier2026Exact as Frontier
+import DASHI.Physics.YangMills.BalabanCMP98Path13CurrentPreferredSourceFrontierExact as CurrentEq119
 
 record MassGapSpectralStatement : Set₁ where
   field
@@ -14,6 +15,12 @@ record MassGapSpectralStatement : Set₁ where
     physicalVacuumMultiplicityOneEstablished : Bool
     physicalContinuumSpectralGapPositive : Bool
 
+    -- Newest source-correct Eq. (119) status.
+    currentEq119Frontier : CurrentEq119.CurrentPreferredEq119FrontierStatus
+    currentPreferredEq119CompilerAvailable : Bool
+    currentPreferredPhysicalEq119Available : Bool
+
+    -- Historical compatibility coordinates.
     eq119CompilerThroughRound184Available : Bool
     eq119PhysicalPeriodicRealizationRound187Available : Bool
     eq119RawUnitPathHomomorphismRound189Available : Bool
@@ -49,6 +56,11 @@ record MassGapSpectralStatement : Set₁ where
       physicalVacuumMultiplicityOneEstablished ≡ false
     physicalContinuumSpectralGapPositiveIsFalse :
       physicalContinuumSpectralGapPositive ≡ false
+
+    currentPreferredEq119CompilerAvailableIsTrue :
+      currentPreferredEq119CompilerAvailable ≡ true
+    currentPreferredPhysicalEq119AvailableIsFalse :
+      currentPreferredPhysicalEq119Available ≡ false
 
     eq119CompilerThroughRound184AvailableIsTrue :
       eq119CompilerThroughRound184Available ≡ true
@@ -107,6 +119,14 @@ canonicalMassGapSpectralStatement = record
   ; physicalVacuumEigenvalueZeroEstablished = false
   ; physicalVacuumMultiplicityOneEstablished = false
   ; physicalContinuumSpectralGapPositive = false
+
+  ; currentEq119Frontier = CurrentEq119.canonicalCurrentPreferredEq119FrontierStatus
+  ; currentPreferredEq119CompilerAvailable =
+      CurrentEq119.finalSplitT3Eq119CompilerClosed
+        CurrentEq119.canonicalCurrentPreferredEq119FrontierStatus
+  ; currentPreferredPhysicalEq119Available =
+      CurrentEq119.physicalEq119Closed
+        CurrentEq119.canonicalCurrentPreferredEq119FrontierStatus
 
   ; eq119CompilerThroughRound184Available =
       Frontier.cmp98Equation119CompilerThroughRound184Closed
@@ -175,14 +195,17 @@ canonicalMassGapSpectralStatement = record
         Frontier.canonicalYMOperatorContinuumFrontier
 
   ; gapBound =
-      "CMP98 Eq. (119) has two theorem-level downstream compilers but no unconditional physical producer yet. Branch A requires an inhabited selected-background bond weld, selected-cut threshold input, and existing Federbush family. Branch B requires an inhabited DyadicCMP109PrintedPhysicalInputs package, a PositiveDyadicRelativeWeld including CMP109 transportedRelativeBond = CMP98 relativeContourElement, and an existing Federbush family. Round187 closes construction of the physical periodic SU(2) realization and Round189 closes the raw/unit path-homomorphism seam, but neither inhabits either complete physical source package. The gauge-invariant L2 subspace carrier and finite selected Hodge/action-variation pairing are available, while action-variation/H_YM same-object identification, a genuine operator domain/common invariant dense core, and analytic self-adjointness remain open. Lean bounded strong-limit, Agda vacuum-recovery, and Agda dense-core gap compilers are closed; Sprint129 recovery flags do not instantiate the recovery system. The Wightman endpoint queue is postulate-backed and therefore does not supply constructive OS dynamics or YM=OS evolution identification."
+      "The current source-correct Path13 Eq. (119) compiler is closed below its explicit inputs. The printed CMP98 roles are dexpPlus/Jplus/Ad(exp); T3 right-Jacobian data can compile those roles with inverse laws on the selected chart. Geometry, repaired side-13 indexing, signed perturbation projection, native-radius derivation, the exact erased 74-link telescope, principal Y_x/outer Y, and final two-carrier field assembly are compiler-owned. The surviving Path13 source inputs are: a selected variational/radius physical instantiation; source-independent R171 standard rational-SU(2) operator representation; the same-object equality between the selected cut defect and that standard operator defect; an R208 rational-to-legacy-real ring embedding; selected-normalized T3 differential data; and the scalar source-threshold inclusion in the selected cut. The old R184 selected-cut/Federbush and dyadic source packages remain compatibility archaeology, not the preferred source cut. Physical Eq. (119), action-variation/H_YM identification, genuine operator domain/common core, analytic self-adjointness, constructive OS dynamics, physical recovery data, finite-to-continuum identification, and the continuum mass gap all remain open."
   ; clayPromoted = false
 
   ; physicalHamiltonianAvailableIsFalse = refl
   ; physicalVacuumEigenvalueZeroEstablishedIsFalse = refl
   ; physicalVacuumMultiplicityOneEstablishedIsFalse = refl
   ; physicalContinuumSpectralGapPositiveIsFalse = refl
-
+  ; currentPreferredEq119CompilerAvailableIsTrue =
+      CurrentEq119.finalSplitT3Eq119CompilerClosedIsTrue
+  ; currentPreferredPhysicalEq119AvailableIsFalse =
+      CurrentEq119.physicalEq119ClosedIsFalse
   ; eq119CompilerThroughRound184AvailableIsTrue = refl
   ; eq119PhysicalPeriodicRealizationRound187AvailableIsTrue = refl
   ; eq119RawUnitPathHomomorphismRound189AvailableIsTrue = refl
@@ -196,13 +219,11 @@ canonicalMassGapSpectralStatement = record
   ; genuinePartialDomainHamiltonianAvailableIsFalse = refl
   ; commonInvariantDenseCoreAvailableIsFalse = refl
   ; analyticSelfAdjointSelectedYMFormAvailableIsFalse = refl
-
   ; boundedStrongLimitFormGapTransportAvailableIsTrue = refl
   ; vacuumOrthogonalRecoveryGapCompilerAvailableIsTrue = refl
   ; denseCoreSpectralExclusionCompilerAvailableIsTrue = refl
   ; physicalVacuumRecoverySystemAvailableIsFalse = refl
   ; physicalDenseCoreProducerAvailableIsFalse = refl
-
   ; constructiveOSReconstructedDynamicsAvailableIsFalse = refl
   ; ymOSEvolutionIdentificationAvailableIsFalse = refl
   ; physicalClosedFormOrResolventIdentificationAvailableIsFalse = refl
