@@ -16,6 +16,7 @@ import DASHI.Core.PluralObserverCorrectionRealisationExact as Plural
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.ApplicationCapabilityDominantChartCompressionExact as Capability
 import DASHI.Law.SecurityRoutingDominantChartCompressionExact as Security
+import DASHI.Law.SecurityRoutingComparatorHypervoxelExact as SecurityRouting
 import DASHI.Cognition.PNF.SensibLawDeclaredReasonRealizedEffectOperationalExact as LegalOperation
 import DASHI.Cognition.PNF.SensibLawBillyRemedyActuationTwoEyedPOSIWIDExact as Billy
 
@@ -288,7 +289,7 @@ publicScienceStillCannotCarryOperationalCapability =
   Capability.publicScienceCannotCarryOperationalCapability
 
 securityIntensityStillCannotCarryRouting :
-  INF.FactorsThrough Security.Routing.coarseSecurityObserver Security.Routing.routingTarget → ⊥
+  INF.FactorsThrough SecurityRouting.coarseSecurityObserver SecurityRouting.routingTarget → ⊥
 securityIntensityStillCannotCarryRouting = Security.securityIntensityCannotCarryRouting
 
 neutralLegalRationaleStillCannotCarryDistribution :
