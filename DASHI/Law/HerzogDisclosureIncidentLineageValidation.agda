@@ -1,0 +1,36 @@
+module DASHI.Law.HerzogDisclosureIncidentLineageValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Law.DisclosureReadyClassificationInputAtomExact as Atom
+import DASHI.Law.HerzogIncidentClassificationLineageWeldExact as Weld
+import DASHI.Law.MaboCountrySecurityClassificationCrossPollinationExact as MaboCross
+
+currentAtomChainRemainsOpen :
+  Atom.sameObjectChainClosed Atom.canonicalOpenHerzogAtomChain ≡ false
+currentAtomChainRemainsOpen = refl
+
+missingDocumentDoesNotMeanNoInput :
+  Atom.missingDocumentMeansNoInputExisted Atom.canonicalDisclosureAtomBoundary ≡ false
+missingDocumentDoesNotMeanNoInput = refl
+
+bodycamDoesNotProveUpstreamCommand :
+  Weld.bodycamUtteranceProvesUpstreamCommand Weld.canonicalIncidentLineageBoundary ≡ false
+bodycamDoesNotProveUpstreamCommand = refl
+
+prayerFailureDoesNotProveProvocationPolicy :
+  Weld.prayerPermissionFailureProvesProvocationPolicy Weld.canonicalIncidentLineageBoundary ≡ false
+prayerFailureDoesNotProveProvocationPolicy = refl
+
+sameOperationDoesNotProveCommonClassificationCause :
+  Weld.sameOperationProvesSameClassificationCause Weld.canonicalIncidentLineageBoundary ≡ false
+sameOperationDoesNotProveCommonClassificationCause = refl
+
+maboCountryResidualStillRequired :
+  MaboCross.countryResidualRequired MaboCross.canonicalColonialClassificationAudit ≡ true
+maboCountryResidualStillRequired = refl
+
+maboCriticalLensStillDoesNotCreateHistoricalFact :
+  MaboCross.colonialityInterpretationCreatesHistoricalFact
+    MaboCross.canonicalColonialClassificationAudit ≡ false
+maboCriticalLensStillDoesNotCreateHistoricalFact = refl

@@ -1,0 +1,34 @@
+module DASHI.Law.MaboNeverCededSemanticEscalationValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Law.AustralianColonialSemanticConstitutionSourceReceiptsExact as Colonial
+import DASHI.Law.MaboNeverCededSemanticEscalationCrossPollinationExact as Cross
+
+neverCededIsNotMisattributedAsHighCourtHolding :
+  Colonial.neverCededIsHighCourtHolding Colonial.canonicalColonialSemanticBoundary ≡ false
+neverCededIsNotMisattributedAsHighCourtHolding = refl
+
+maboDidNotInvalidateCrownSovereignty :
+  Colonial.maboHeldCrownSovereigntyInvalid Colonial.canonicalColonialSemanticBoundary ≡ false
+maboDidNotInvalidateCrownSovereignty = refl
+
+semanticConstitutionIsNotSubjectiveIntentFinding :
+  Colonial.semanticConstitutionEqualsSubjectiveIntentFinding Colonial.canonicalColonialSemanticBoundary ≡ false
+semanticConstitutionIsNotSubjectiveIntentFinding = refl
+
+colonialClassificationWasOperationalNotMerelyRhetorical :
+  Colonial.colonialAdministrativeClassificationWasMerelyRhetorical Colonial.canonicalColonialSemanticBoundary ≡ false
+colonialClassificationWasOperationalNotMerelyRhetorical = refl
+
+constitutiveDoesNotUniversaliseSubjectiveIntent :
+  Cross.constitutiveMechanismProvesUniversalSubjectiveIntent Cross.canonicalColonialEscalationBoundary ≡ false
+constitutiveDoesNotUniversaliseSubjectiveIntent = refl
+
+municipalNonJusticiabilityDoesNotEraseNeverCededPosition :
+  Cross.neverCededPositionErasedByMunicipalNonJusticiability Cross.canonicalColonialEscalationBoundary ≡ false
+municipalNonJusticiabilityDoesNotEraseNeverCededPosition = refl
+
+modernEscalationDoesNotAutomaticallyEqualColonialism :
+  Cross.modernSemanticEscalationAutomaticallyEqualsColonialism Cross.canonicalColonialEscalationBoundary ≡ false
+modernEscalationDoesNotAutomaticallyEqualColonialism = refl
