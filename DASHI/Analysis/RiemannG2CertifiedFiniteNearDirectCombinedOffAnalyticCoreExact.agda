@@ -8,6 +8,7 @@ import DASHI.Analysis.WeilTestSpace as Weil
 import DASHI.Analysis.RiemannExplicitFormula as Explicit
 import DASHI.Analysis.RiemannAristotlePoleNearExplicitFormulaBridgeExact as Window
 import DASHI.Analysis.RiemannG2CertifiedFiniteNearEvaluationCompilerExact as Certified
+import DASHI.Analysis.RiemannG2SelectedFiniteNearBudgetMinimalConsumerExact as Minimal
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as NearFar
 import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact as Transport
 import DASHI.Analysis.RiemannG2WindowBudgetToTransportedNearUpperExact as WindowTransport
@@ -65,7 +66,7 @@ compiledSelectedWindowPayment :
   forall {space formula window certified upper S transport} ->
   CertifiedFiniteNearDirectCombinedOffCoreInput
     space formula window certified upper S transport ->
-  _
+  Minimal.SelectedFiniteNearBudgetPayment space formula window
 compiledSelectedWindowPayment {certified = certified} {upper = upper} input =
   Certified.compileUpperSelectedFiniteNearBudgetPayment certified upper
 
