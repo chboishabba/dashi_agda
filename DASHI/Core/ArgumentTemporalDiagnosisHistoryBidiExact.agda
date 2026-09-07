@@ -3,16 +3,19 @@ module DASHI.Core.ArgumentTemporalDiagnosisHistoryBidiExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.ArgumentDiagnosisDebuggingBidiExact as Argument
+import DASHI.Core.ArgumentResponseNonGeometricOppositeBidiExact as Response
 import DASHI.Core.ExperimentalOutcomeOrientationBackpropagationBidiExact as Outcome
 import DASHI.Core.TemporalDiagnosisProvenanceHistoryBidiExact as Temporal
 import DASHI.Core.TemporalDiagnosisSalienceRecalibrationBidiExact as Recalibration
+import DASHI.Core.DiagnosisFibreSalienceSchedulerBidiExact as Diagnosis
+import DASHI.Core.TemporalDiagnosisFibreProjectionBidiExact as Projection
 
 ------------------------------------------------------------------------
 -- ARGUMENT DEBUGGING WITH TEMPORAL DIAGNOSIS HISTORY
 ------------------------------------------------------------------------
 
 reactivatedFrameDiagnosisStillTargetsFrameInspection :
-  Argument.responseDiagnosis DASHI.Core.ArgumentResponseNonGeometricOppositeBidiExact.disputeCharacterisation
+  Argument.responseDiagnosis Response.disputeCharacterisation
   ≡ Outcome.frameConflict
 reactivatedFrameDiagnosisStillTargetsFrameInspection = refl
 
@@ -24,10 +27,9 @@ priorFrameEliminationRemainsInArgumentHistory =
   Temporal.priorEliminationStillPresentAfterReactivation
 
 frameDebuggerMayBecomeSalientAgain :
-  DASHI.Core.DiagnosisFibreSalienceSchedulerBidiExact.DiagnosisSalientOn
-    DASHI.Core.DiagnosisFibreSalienceSchedulerBidiExact.smallFrameCheck
-    (DASHI.Core.TemporalDiagnosisFibreProjectionBidiExact.liveProjection
-      DASHI.Core.TemporalDiagnosisFibreProjectionBidiExact.afterReactivationBundle)
+  Diagnosis.DiagnosisSalientOn
+    Diagnosis.smallFrameCheck
+    (Projection.liveProjection Projection.afterReactivationBundle)
 frameDebuggerMayBecomeSalientAgain =
   Recalibration.frameCheckSalientAfterReactivation
 
@@ -40,7 +42,7 @@ reactivatedDiagnosisDoesNotRefuteConclusion ()
 
 laterReactivationDoesNotEraseEarlierAudit :
   LaterReactivationErasesEarlierCounterargumentAudit → ⊥
-laterReactivationDoesNotEraseEarlierAudit ()
+laterReactivationDoesNotEraseEarlierCounterargumentAudit ()
 
 record ArgumentTemporalDiagnosisBoundary : Set where
   constructor argument-temporal-diagnosis-boundary
