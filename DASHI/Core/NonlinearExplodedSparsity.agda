@@ -215,7 +215,10 @@ CSP→kernelClosed satisfies = satisfies
 kernelClosureIffCSP :
   {X L : Set} (K : ThresholdKernel X L) (s : State X) →
   KernelClosed K s ↔ SatisfiesAllLocalConstraints K s
-kernelClosureIffCSP K s = iff kernelClosed→CSP CSP→kernelClosed
+kernelClosureIffCSP K s =
+  iff
+    (kernelClosed→CSP {K = K} {s = s})
+    (CSP→kernelClosed {K = K} {s = s})
 
 kernelDefect→transitionDefect :
   {X L : Set} {K : ThresholdKernel X L} {s : State X} {x : X} →
