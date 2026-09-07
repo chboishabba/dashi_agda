@@ -56,3 +56,4 @@ import DASHI.Biology.AliceBrownCorpusLoom
 -- Plural-progress / diagnosis / temporal dependency-lineage return.
 import DASHI.Biology.AliceBrownDiagnosisRepairSchedulerBidiExact
 import DASHI.Biology.AliceBrownTemporalDiagnosisDependencyLineageBidiExact
+import DASHI.Biology.AliceBrownSelectiveInvalidationParetoBidiExact
