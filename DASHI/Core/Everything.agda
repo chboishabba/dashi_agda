@@ -29,6 +29,9 @@ import DASHI.Core.ExperimentalCoordinateDesignExact
 import DASHI.Core.ActionabilityCostedExperimentChoiceExact
 import DASHI.Core.CommonExperimentRealisationExact
 import DASHI.Core.DiscriminatorSynthesisExact
+import DASHI.Core.MechanismModelDiscriminationExact
+import DASHI.Core.MechanismDiscriminationApplicationAtlasExact
+import DASHI.Core.AdaptiveMechanismDiscriminationPlannerExact
 import DASHI.Core.SequentialConsumerExperimentPlannerExact
 import DASHI.Core.SequentialRobustActionabilityPlannerExact
 import DASHI.Core.SequentialRelationalExperimentPlannerExact
@@ -101,6 +104,8 @@ import DASHI.Core.ResidualObligationPropagationExact
 import DASHI.Core.TranslationRealisationCrossPollinationExact
 import DASHI.Core.DialecticalStageSpectrumExact
 import DASHI.Core.ContextualDialecticRoleExact
+import DASHI.Core.DialecticalMaterialRevisionExact
+import DASHI.Core.DialecticalMaterialFutureSafetyExact
 import DASHI.Core.EpistemicSuspensionExact
 import DASHI.Core.StageTransitionBarrierExact
 import DASHI.Core.DialecticStageMotifBridgeExact
@@ -133,6 +138,15 @@ import DASHI.Core.MultiaxialResidualBundleExact
 import DASHI.Core.RecognitionConstitutionNonfactorabilityExact
 import DASHI.Core.SituatedClaimAuthoritySystemExact
 import DASHI.Core.KnowledgeContentAuthoritySeparationExact
+import DASHI.Core.TerminalRealisationValidationExact
+
+-- Situated fibre dynamics / consumer-indexed adequacy.
+import DASHI.Core.SituatedActionabilityFibreExact
+import DASHI.Core.TrajectoryRecoveryFibreExact
+import DASHI.Core.MultiaxialIncidenceFibreExact
+import DASHI.Core.ConsumerIndexedTrajectoryFibreAdequacyExact
+import DASHI.Core.ConsumerFibreRefinementSchedulerExact
+import DASHI.Core.SituatedFibreDynamicsEverything
 
 -- Proof-carrying physical execution / shared-state coalition / proof-search
 -- least-privilege closure.

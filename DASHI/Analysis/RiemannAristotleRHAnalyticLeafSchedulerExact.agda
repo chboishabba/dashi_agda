@@ -5,26 +5,30 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap
+import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact as Z38
+import DASHI.Analysis.RiemannAristotlePoleNearPhaseStatisticExact as Phase
+import DASHI.Analysis.RiemannAristotlePoleQuotientDirectFiniteNearAttackExact as Direct
+import DASHI.Analysis.RiemannG2SelectedDirectFiniteMomentBidiExact as Shared
+
 ------------------------------------------------------------------------
--- RECURSIVE RH ANALYTIC LEAF SCHEDULER — CHARACTER/ACTION CUT
+-- RECURSIVE RH ANALYTIC LEAF SCHEDULER
 --
--- The canonical carrier audit split the old H_M modulation leaf into:
+-- The explicit-formula modulation route and the direct finite signed route are
+-- distinct proof routes meeting the same H_off/G2d consumer.
 --
---   H_X       canonical complex character algebra
---             exp(-itu) exp(ibu) = exp(i(b-t)u), even part = cosine
---   H_A       action of that character on the canonical Weil/Mellin test
---             carrier + admissibility + spectral shift for the SAME formula
---   H_M       assembled canonical analytic modulation extension
---   H_T       target translation <-> modulation intertwiner
---   H_W       window/restriction + cluster/near/far residual
---   H_E       phase-sensitive finite near evaluation
---   H_Gamma   Gamma precision repair
+-- CORRECTION: §35 clustering is not a forward RH producer. It is necessary for
+-- positivity of a gap-split lower bound used in a NO-GO against the desired
+-- small signed scalar estimate. The optional M2_delta refinement is therefore
+-- also diagnostic, not a schedulable RH leaf.
 --
--- Dependency shape:
+-- The direct route now starts at a consumer-sufficient DirectFinitePoleNearProducer.
+-- That producer must carry DirectSignedConsumerPayment on the canonical literal
+-- G2 scalar problem. PoleNearPhaseStatistic and the canonical evaluation surface
+-- are compiler output from it. Selected-window weld/budget transport is downstream.
 --
---   H_X -> H_A -> H_M -> H_T -> direct phase statistic -> H_E
---                    \             \-> H_W -> explicit window -> H_E
---   H_Gamma ------------------------------------------------> final consumer
+-- The explicit-formula route remains independently blocked on its H_X/H_A/H_M/H_T
+-- chain. Gamma remains independent.
 ------------------------------------------------------------------------
 
 data RHAnalyticLeaf : Set where
@@ -33,13 +37,18 @@ data RHAnalyticLeaf : Set where
   assembleCanonicalAnalyticModulationExtension : RHAnalyticLeaf
   proveTargetTranslationModulationIntertwiner : RHAnalyticLeaf
   proveWindowRestrictionResidualCompatibility : RHAnalyticLeaf
-  provePhaseSensitiveFiniteNearEvaluation : RHAnalyticLeaf
+  proveExplicitFormulaFiniteNearEvaluation : RHAnalyticLeaf
+  recoverDirectFinitePoleNearProducer : RHAnalyticLeaf
+  weldSelectedDirectZeroCarrier : RHAnalyticLeaf
+  proveSelectedTargetLocalSecondMoment : RHAnalyticLeaf
+  attachDirectEvaluationToSelectedConsumer : RHAnalyticLeaf
+  proveActualZetaLowGapClustering : RHAnalyticLeaf
   repairGammaPrecision : RHAnalyticLeaf
+  constructSecondPhaseStatisticCarrier : RHAnalyticLeaf
   sharpenZeroCount : RHAnalyticLeaf
   sharpenAbsoluteEnvelope : RHAnalyticLeaf
   reuseGenericExplicitFormulaWithoutWindow : RHAnalyticLeaf
   reuseNameOnlyHardyDonor : RHAnalyticLeaf
-
 
 data LeafState : Set where
   closed open blocked pruned : LeafState
@@ -50,15 +59,21 @@ leafState proveCanonicalTestModulationShift = blocked
 leafState assembleCanonicalAnalyticModulationExtension = blocked
 leafState proveTargetTranslationModulationIntertwiner = blocked
 leafState proveWindowRestrictionResidualCompatibility = blocked
-leafState provePhaseSensitiveFiniteNearEvaluation = blocked
+leafState proveExplicitFormulaFiniteNearEvaluation = blocked
+leafState recoverDirectFinitePoleNearProducer = open
+leafState weldSelectedDirectZeroCarrier = blocked
+leafState proveSelectedTargetLocalSecondMoment = pruned
+leafState attachDirectEvaluationToSelectedConsumer = blocked
+leafState proveActualZetaLowGapClustering = pruned
 leafState repairGammaPrecision = open
+leafState constructSecondPhaseStatisticCarrier = pruned
 leafState sharpenZeroCount = pruned
 leafState sharpenAbsoluteEnvelope = pruned
 leafState reuseGenericExplicitFormulaWithoutWindow = pruned
 leafState reuseNameOnlyHardyDonor = pruned
 
 ------------------------------------------------------------------------
--- Proof-relevant dependency relation.
+-- Proof-relevant forward dependencies.
 ------------------------------------------------------------------------
 
 data Requires : RHAnalyticLeaf → RHAnalyticLeaf → Set where
@@ -72,54 +87,70 @@ data Requires : RHAnalyticLeaf → RHAnalyticLeaf → Set where
     Requires assembleCanonicalAnalyticModulationExtension proveCanonicalTestModulationShift
 
   translationModulationNeedsCanonicalExtension :
-    Requires
-      proveTargetTranslationModulationIntertwiner
-      assembleCanonicalAnalyticModulationExtension
+    Requires proveTargetTranslationModulationIntertwiner assembleCanonicalAnalyticModulationExtension
 
   windowNeedsTranslationModulation :
-    Requires
-      proveWindowRestrictionResidualCompatibility
-      proveTargetTranslationModulationIntertwiner
+    Requires proveWindowRestrictionResidualCompatibility proveTargetTranslationModulationIntertwiner
 
-  evaluationNeedsTranslationModulation :
-    Requires
-      provePhaseSensitiveFiniteNearEvaluation
-      proveTargetTranslationModulationIntertwiner
+  explicitFiniteEvaluationNeedsWindow :
+    Requires proveExplicitFormulaFiniteNearEvaluation proveWindowRestrictionResidualCompatibility
 
-  evaluationExplicitFormulaBranchNeedsWindow :
-    Requires
-      provePhaseSensitiveFiniteNearEvaluation
-      proveWindowRestrictionResidualCompatibility
+  selectedDirectWeldNeedsDirectProducer :
+    Requires weldSelectedDirectZeroCarrier recoverDirectFinitePoleNearProducer
+
+  selectedFiniteConsumerNeedsSelectedDirectWeld :
+    Requires attachDirectEvaluationToSelectedConsumer weldSelectedDirectZeroCarrier
 
 ------------------------------------------------------------------------
--- Current genuinely schedulable producer leaves.
+-- Diagnostic relation outside the forward RH dependency chain.
+------------------------------------------------------------------------
+
+data GapSplitDiagnosticRefines : RHAnalyticLeaf → RHAnalyticLeaf → Set where
+  selectedMomentRefinesClusteringDiagnostic :
+    GapSplitDiagnosticRefines
+      proveSelectedTargetLocalSecondMoment
+      proveActualZetaLowGapClustering
+
+------------------------------------------------------------------------
+-- Currently schedulable forward leaves.
 ------------------------------------------------------------------------
 
 data RHAnalyticLeafSchedulable : RHAnalyticLeaf → Set where
-  complexCharacterLeafLive :
-    RHAnalyticLeafSchedulable buildCanonicalComplexCharacter
-  gammaPrecisionLeafLive :
-    RHAnalyticLeafSchedulable repairGammaPrecision
+  complexCharacterLeafLive : RHAnalyticLeafSchedulable buildCanonicalComplexCharacter
+  directFiniteProducerLeafLive : RHAnalyticLeafSchedulable recoverDirectFinitePoleNearProducer
+  gammaPrecisionLeafLive : RHAnalyticLeafSchedulable repairGammaPrecision
 
-testActionLeafNotYetSchedulable :
-  RHAnalyticLeafSchedulable proveCanonicalTestModulationShift → ⊥
+testActionLeafNotYetSchedulable : RHAnalyticLeafSchedulable proveCanonicalTestModulationShift → ⊥
 testActionLeafNotYetSchedulable ()
 
-modulationAssemblyLeafNotYetSchedulable :
-  RHAnalyticLeafSchedulable assembleCanonicalAnalyticModulationExtension → ⊥
+modulationAssemblyLeafNotYetSchedulable : RHAnalyticLeafSchedulable assembleCanonicalAnalyticModulationExtension → ⊥
 modulationAssemblyLeafNotYetSchedulable ()
 
-translationModulationLeafNotYetSchedulable :
-  RHAnalyticLeafSchedulable proveTargetTranslationModulationIntertwiner → ⊥
+translationModulationLeafNotYetSchedulable : RHAnalyticLeafSchedulable proveTargetTranslationModulationIntertwiner → ⊥
 translationModulationLeafNotYetSchedulable ()
 
-windowLeafNotYetSchedulable :
-  RHAnalyticLeafSchedulable proveWindowRestrictionResidualCompatibility → ⊥
+windowLeafNotYetSchedulable : RHAnalyticLeafSchedulable proveWindowRestrictionResidualCompatibility → ⊥
 windowLeafNotYetSchedulable ()
 
-evaluationLeafNotYetSchedulable :
-  RHAnalyticLeafSchedulable provePhaseSensitiveFiniteNearEvaluation → ⊥
-evaluationLeafNotYetSchedulable ()
+explicitFiniteEvaluationNotYetSchedulable : RHAnalyticLeafSchedulable proveExplicitFormulaFiniteNearEvaluation → ⊥
+explicitFiniteEvaluationNotYetSchedulable ()
+
+selectedDirectWeldNotYetSchedulable : RHAnalyticLeafSchedulable weldSelectedDirectZeroCarrier → ⊥
+selectedDirectWeldNotYetSchedulable ()
+
+selectedMomentDiagnosticNotRHSchedulable :
+  RHAnalyticLeafSchedulable proveSelectedTargetLocalSecondMoment → ⊥
+selectedMomentDiagnosticNotRHSchedulable ()
+
+selectedFiniteConsumerNotYetSchedulable : RHAnalyticLeafSchedulable attachDirectEvaluationToSelectedConsumer → ⊥
+selectedFiniteConsumerNotYetSchedulable ()
+
+zetaClusteringDiagnosticNotRHSchedulable :
+  RHAnalyticLeafSchedulable proveActualZetaLowGapClustering → ⊥
+zetaClusteringDiagnosticNotRHSchedulable ()
+
+secondPhaseCarrierPruned : RHAnalyticLeafSchedulable constructSecondPhaseStatisticCarrier → ⊥
+secondPhaseCarrierPruned ()
 
 zeroCountLeafPruned : RHAnalyticLeafSchedulable sharpenZeroCount → ⊥
 zeroCountLeafPruned ()
@@ -127,13 +158,50 @@ zeroCountLeafPruned ()
 absoluteEnvelopeLeafPruned : RHAnalyticLeafSchedulable sharpenAbsoluteEnvelope → ⊥
 absoluteEnvelopeLeafPruned ()
 
-genericFormulaWithoutWindowPruned :
-  RHAnalyticLeafSchedulable reuseGenericExplicitFormulaWithoutWindow → ⊥
+genericFormulaWithoutWindowPruned : RHAnalyticLeafSchedulable reuseGenericExplicitFormulaWithoutWindow → ⊥
 genericFormulaWithoutWindowPruned ()
 
-nameOnlyHardyLeafPruned :
-  RHAnalyticLeafSchedulable reuseNameOnlyHardyDonor → ⊥
+nameOnlyHardyLeafPruned : RHAnalyticLeafSchedulable reuseNameOnlyHardyDonor → ⊥
 nameOnlyHardyLeafPruned ()
+
+------------------------------------------------------------------------
+-- Upstream receipts.
+------------------------------------------------------------------------
+
+quarterDensityComparisonPrunedUpstream :
+  Gap.GapSplitRelevant Gap.compareQuarterPeriodLowerConstantWithDensityUpperConstant → ⊥
+quarterDensityComparisonPrunedUpstream = Gap.quarterDensityConstantComparisonPruned
+
+zetaUpperCountAlreadyOwned :
+  Z38.zetaShortWindowUpperCountOwnedInLean Z38.canonicalZetaLocalCountLeanReturn ≡ true
+zetaUpperCountAlreadyOwned = refl
+
+actualZetaClusteringStillUnprovedButDiagnostic :
+  Z38.actualZetaClusteringClosed Z38.canonicalZetaLocalCountLeanReturn ≡ false
+actualZetaClusteringStillUnprovedButDiagnostic = refl
+
+clusteringDoesNotDirectlyPayRH :
+  Gap.clusteringDirectlyPaysRHScalarConsumer
+    Gap.canonicalGapSplitClusteringLeanReturn8894 ≡ false
+clusteringDoesNotDirectlyPayRH = Gap.clusteringDoesNotDirectlyPayRH
+
+phaseStatisticCompilerAlreadyClosed :
+  Phase.PoleNearPhaseStatisticBoundary.repositoryAlreadyOwnsConcretePoleNearPhaseStatistic
+    Phase.canonicalPoleNearPhaseStatisticBoundary ≡ true
+phaseStatisticCompilerAlreadyClosed = refl
+
+directProducerCarriesExactConsumerPayment :
+  Direct.DirectFiniteNearAttackBoundary.directProducerCarriesCanonicalConsumerPayment
+    Direct.canonicalDirectFiniteNearAttackBoundary ≡ true
+directProducerCarriesExactConsumerPayment = refl
+
+selectedDirectWeldStillDownstream :
+  Shared.paymentState Shared.weldExistingDirectProducerToSelectedWindow ≡ Shared.downstream
+selectedDirectWeldStillDownstream = refl
+
+------------------------------------------------------------------------
+-- Highest-alpha selection surface.
+------------------------------------------------------------------------
 
 record RHAnalyticLeafCostSurface : Set₁ where
   constructor rh-analytic-leaf-cost-surface
@@ -165,31 +233,46 @@ record RHAnalyticLeafSchedulerBoundary : Set where
     complexCharacterLeafOpen : Bool
     complexCharacterLeafOpenIsTrue : complexCharacterLeafOpen ≡ true
 
-    testModulationActionBlockedOnHX : Bool
-    testModulationActionBlockedOnHXIsTrue :
-      testModulationActionBlockedOnHX ≡ true
+    explicitFormulaModulationChainStillBlocked : Bool
+    explicitFormulaModulationChainStillBlockedIsTrue :
+      explicitFormulaModulationChainStillBlocked ≡ true
 
-    modulationAssemblyBlockedOnHXAndHA : Bool
-    modulationAssemblyBlockedOnHXAndHAIsTrue :
-      modulationAssemblyBlockedOnHXAndHA ≡ true
+    directFiniteProducerLeafOpen : Bool
+    directFiniteProducerLeafOpenIsTrue : directFiniteProducerLeafOpen ≡ true
 
-    translationModulationLeafBlockedOnExtension : Bool
-    translationModulationLeafBlockedOnExtensionIsTrue :
-      translationModulationLeafBlockedOnExtension ≡ true
+    directFiniteProducerBlockedOnHX : Bool
+    directFiniteProducerBlockedOnHXIsFalse : directFiniteProducerBlockedOnHX ≡ false
 
-    windowRestrictionLeafBlockedOnHT : Bool
-    windowRestrictionLeafBlockedOnHTIsTrue : windowRestrictionLeafBlockedOnHT ≡ true
+    directProducerCarriesCanonicalConsumerPayment : Bool
+    directProducerCarriesCanonicalConsumerPaymentIsTrue :
+      directProducerCarriesCanonicalConsumerPayment ≡ true
 
-    finiteEvaluationLeafBlockedOnSharedStructure : Bool
-    finiteEvaluationLeafBlockedOnSharedStructureIsTrue :
-      finiteEvaluationLeafBlockedOnSharedStructure ≡ true
+    phaseStatisticCarrierStillNeedsIndependentConstruction : Bool
+    phaseStatisticCarrierStillNeedsIndependentConstructionIsFalse :
+      phaseStatisticCarrierStillNeedsIndependentConstruction ≡ false
+
+    selectedDirectWeldBlockedOnDirectProducer : Bool
+    selectedDirectWeldBlockedOnDirectProducerIsTrue :
+      selectedDirectWeldBlockedOnDirectProducer ≡ true
+
+    selectedFiniteConsumerAttachmentBlockedOnWeld : Bool
+    selectedFiniteConsumerAttachmentBlockedOnWeldIsTrue :
+      selectedFiniteConsumerAttachmentBlockedOnWeld ≡ true
+
+    actualZetaLowGapClusteringLeafOpen : Bool
+    actualZetaLowGapClusteringLeafOpenIsFalse :
+      actualZetaLowGapClusteringLeafOpen ≡ false
+
+    clusteringRetainedAsGapSplitDiagnostic : Bool
+    clusteringRetainedAsGapSplitDiagnosticIsTrue :
+      clusteringRetainedAsGapSplitDiagnostic ≡ true
+
+    targetLocalMomentIsForwardRHLeaf : Bool
+    targetLocalMomentIsForwardRHLeafIsFalse :
+      targetLocalMomentIsForwardRHLeaf ≡ false
 
     gammaPrecisionLeafOpen : Bool
     gammaPrecisionLeafOpenIsTrue : gammaPrecisionLeafOpen ≡ true
-
-    characterLawExcludesPoleCoshTaperFactor : Bool
-    characterLawExcludesPoleCoshTaperFactorIsTrue :
-      characterLawExcludesPoleCoshTaperFactor ≡ true
 
     countOnlyLeafActive : Bool
     countOnlyLeafActiveIsFalse : countOnlyLeafActive ≡ false
@@ -204,10 +287,6 @@ record RHAnalyticLeafSchedulerBoundary : Set where
     nameOnlyHardyLeafActive : Bool
     nameOnlyHardyLeafActiveIsFalse : nameOnlyHardyLeafActive ≡ false
 
-    monsterRepresentationAuthorityImportedIntoRH : Bool
-    monsterRepresentationAuthorityImportedIntoRHIsFalse :
-      monsterRepresentationAuthorityImportedIntoRH ≡ false
-
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
 
@@ -217,12 +296,15 @@ canonicalRHAnalyticLeafSchedulerBoundary =
     true refl
     true refl
     true refl
+    false refl
     true refl
-    true refl
-    true refl
+    false refl
     true refl
     true refl
     false refl
+    true refl
+    false refl
+    true refl
     false refl
     false refl
     false refl

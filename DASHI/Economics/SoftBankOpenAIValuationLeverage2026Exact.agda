@@ -1,0 +1,80 @@
+module DASHI.Economics.SoftBankOpenAIValuationLeverage2026Exact where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
+
+import DASHI.Economics.ReflexiveFlowValidationExact as Econ
+
+record SourceReceipt : Set where
+  constructor sourceReceipt
+  field
+    publisher : String
+    date : String
+    sourceLocation : String
+    boundedProposition : String
+    primarySource : Bool
+
+open SourceReceipt public
+
+followOnInvestment : SourceReceipt
+followOnInvestment = sourceReceipt
+  "SoftBank Group"
+  "2026-02-27"
+  "Follow-on Investments in OpenAI"
+  "SoftBank agreed to invest an additional USD 30 billion in OpenAI at a USD 730 billion pre-money valuation; cumulative investment was expected to reach USD 64.6 billion and approximately 13 percent ownership."
+  true
+
+bridgeFacility : SourceReceipt
+bridgeFacility = sourceReceipt
+  "SoftBank Group"
+  "2026-03-27"
+  "Execution of Bridge Facility Agreement Primarily for the Follow-on Investments in OpenAI"
+  "SoftBank entered a USD 40 billion bridge facility primarily to fund the OpenAI follow-on investment and general corporate purposes."
+  true
+
+firstTrancheBorrowing : SourceReceipt
+firstTrancheBorrowing = sourceReceipt
+  "SoftBank Group"
+  "2026-04-01"
+  "Execution of Follow-on Investment First Tranche"
+  "SoftBank executed a USD 10 billion OpenAI investment tranche and stated that it borrowed USD 10 billion under the bridge facility to procure the required funds."
+  true
+
+reportedOpenAIInvestmentGain : SourceReceipt
+reportedOpenAIInvestmentGain = sourceReceipt
+  "Reuters"
+  "2026-02-12"
+  "SoftBank quarterly-results report"
+  "Reuters reported that SoftBank booked an approximately USD 19.8 billion investment gain from its OpenAI stake for the October-December 2025 quarter, materially contributing to quarterly profit."
+  false
+
+record SoftBankOpenAIValuationLeverageCalibration : Set where
+  constructor softBankOpenAIValuationLeverageCalibration
+  field
+    investmentReceipt : SourceReceipt
+    bridgeReceipt : SourceReceipt
+    borrowingReceipt : SourceReceipt
+    valuationGainReceipt : SourceReceipt
+    largeValuationExposure : Bool
+    investmentFinancedWithBorrowingAtFirstTranche : Bool
+    reportedOpenAIValuationGainObserved : Bool
+    valuationMarkIsExternalCustomerCash : Bool
+    leverageProvesInvestmentInvalid : Bool
+    openAIFutureCashFlowsValidateInvestment : Bool
+
+canonicalSoftBankOpenAIValuationLeverageCalibration :
+  SoftBankOpenAIValuationLeverageCalibration
+canonicalSoftBankOpenAIValuationLeverageCalibration =
+  softBankOpenAIValuationLeverageCalibration
+    followOnInvestment bridgeFacility firstTrancheBorrowing reportedOpenAIInvestmentGain
+    true true true false false false
+
+markedGainDoesNotCloseExternalCash :
+  Econ.MarkedGainImpliesExternalCashPermission → ⊥
+markedGainDoesNotCloseExternalCash = Econ.markedGainDoesNotAutoPromoteToExternalCash
+
+data BorrowedInvestmentImpliesBubblePermission : Set where
+
+borrowedInvestmentDoesNotAutoPromoteToBubble :
+  BorrowedInvestmentImpliesBubblePermission → ⊥
+borrowedInvestmentDoesNotAutoPromoteToBubble ()

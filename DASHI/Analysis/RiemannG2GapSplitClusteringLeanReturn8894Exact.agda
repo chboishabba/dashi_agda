@@ -4,18 +4,25 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Analysis.RiemannAristotleQuarterPeriodDensityWindowLeanReturnExact as Q37
+import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact as Z38
+
 ------------------------------------------------------------------------
 -- CHECKED-LEAN RETURN: OPTIMIZED GAP SPLIT / TAPER-SHAPE NO-GO / DENSITY CUT
 --
--- Supplied Zeta23Bridge return reports a successful aggregate Lean build with
--- 8894 jobs and three new sorry-free modules:
+-- The §35 clustering inequality
 --
---   NearCoreGapSplitOptimization.lean
---   NearCoreTaperShapeNoGo.lean
---   NearCoreClusteringDensityCut.lean
+--   (4/pi^2) * highGapMass < lowGapMass
 --
--- This Agda owner records the theorem surface and its BIDI consequences only.
--- It does not transport Lean proof terms into Agda and does not assert RH.
+-- is a NECESSARY condition for the gap-split LOWER BOUND to be positive.
+-- Positivity of that lower bound is used by the checked Lean no-go theorems to
+-- refute the small signed-scalar hypothesis when the floor reaches the consumer
+-- threshold. Therefore clustering is an obstruction diagnostic for this route,
+-- NOT a forward RH producer.
+--
+-- §37 closes the J*Lambda compatibility question and §38 owns zeta upper local
+-- counting. Those facts narrow the obstruction audit, but they do not turn the
+-- clustering condition into a proof obligation for RH.
 ------------------------------------------------------------------------
 
 data CrossProverAuthority8894 : Set where
@@ -58,6 +65,14 @@ record GapSplitClusteringLeanReturn8894 : Set where
     positiveGapSplitRequiresLowGapClustering : Bool
     positiveGapSplitRequiresLowGapClusteringIsTrue :
       positiveGapSplitRequiresLowGapClustering ≡ true
+
+    clusteringConditionIsGapSplitObstructionDiagnostic : Bool
+    clusteringConditionIsGapSplitObstructionDiagnosticIsTrue :
+      clusteringConditionIsGapSplitObstructionDiagnostic ≡ true
+
+    clusteringDirectlyPaysRHScalarConsumer : Bool
+    clusteringDirectlyPaysRHScalarConsumerIsFalse :
+      clusteringDirectlyPaysRHScalarConsumer ≡ false
 
     densityBoundsCapCutoffOnInverseWidthScale : Bool
     densityBoundsCapCutoffOnInverseWidthScaleIsTrue :
@@ -115,6 +130,9 @@ canonicalGapSplitClusteringLeanReturn8894 =
     true refl
     true refl
     false refl
+    true refl
+    false refl
+    false refl
     false refl
     false refl
     false refl
@@ -122,13 +140,62 @@ canonicalGapSplitClusteringLeanReturn8894 =
     false refl
     false refl
     "At D = pi/(3 Lambda), lowGapMass * integral(q)/2 - escapeTerm <= integral(q*S), with lowGapMass >= 1 when a target-carrying near zero lies inside the optimized threshold."
-    "The checked Lean return proves integral(q) <= Lambda^2 * integral(abs(q'')); applied to the determinant taper this forces the optimized positivity criterion to imply (2J+1) A log(|t|+J+4) < pi^2/18, so the transported quadratic-decay sufficient criterion cannot be repaired by taper width or profile tuning once unit local count is present."
-    "Any positive gap-split floor requires (4/pi^2) * highGapMass < lowGapMass. This is a genuine local clustering requirement; coarse counting, absolute envelopes, and sharper use of the same quadratic-decay donor do not supply it."
-    "With explicit short-window upper density A and long-window lower density c, positivity forces J < 1 + D + pi^2 A (2D+2)/(4c). At D = pi/(3 Lambda) this is an inverse-width-scale cap J = O(1/Lambda)."
-    "Do not over-promote the density cut into a no-go for every adaptive route. The live quarter-period route also requires J on the inverse-width scale. For adaptive Lambda(t), especially Lambda(t) proportional to 1/|t|, the new return converts the surviving clustering route into a constant-window compatibility problem on J*Lambda rather than refuting inverse-width scaling itself. This is a BIDI reconciliation statement, not a transported Lean theorem."
+    "The checked Lean return proves integral(q) <= Lambda^2 * integral(abs(q'')); applied to the determinant taper this makes the optimized POSITIVITY criterion impossible at unit local count. This prunes the transported quadratic-decay sufficient criterion; it does not prove the desired signed cancellation estimate."
+    "If the gap-split lower bound is positive, then necessarily (4/pi^2) * highGapMass < lowGapMass. This quantifies when the NO-GO lower-bound mechanism could bite. It is not a theorem that this clustering holds, and proving it would not by itself pay the forward RH signed-scalar consumer."
+    "With explicit short-window upper density A and long-window lower density c, positivity of the gap-split lower bound forces J < 1 + D + pi^2 A (2D+2)/(4c)."
+    "The checked §37 return resolves the constant-window compatibility question and §38 resolves zeta upper local counting. These close two obstruction-audit coordinates. The forward RH leaf remains a consumer-sufficient signed target-centred scalar estimate on the literal G2 object, not the clustering diagnostic."
 
 ------------------------------------------------------------------------
--- Search pruning / live route selection.
+-- 8896 return-to-owner welds.
+------------------------------------------------------------------------
+
+quarterDensityReconciliationChecked :
+  Q37.QuarterPeriodDensityWindowReturn.machineCheckedInLean
+    Q37.canonicalQuarterPeriodDensityWindowReturn ≡ true
+quarterDensityReconciliationChecked = refl
+
+quarterDensityComparisonNotAgdaProof :
+  Q37.QuarterPeriodDensityWindowReturn.transportedIntoAgda
+    Q37.canonicalQuarterPeriodDensityWindowReturn ≡ false
+quarterDensityComparisonNotAgdaProof = refl
+
+integerJointWindowOwnedInLean :
+  Q37.QuarterPeriodDensityWindowReturn.explicitIntegerCutoffExistenceOwnedInLean
+    Q37.canonicalQuarterPeriodDensityWindowReturn ≡ true
+integerJointWindowOwnedInLean = refl
+
+zetaUpperLocalCountChecked :
+  Z38.ZetaLocalCountLeanReturn.importedProducerCheckedInLean
+    Z38.canonicalZetaLocalCountLeanReturn ≡ true
+zetaUpperLocalCountChecked = refl
+
+zetaShortWindowUpperCountChecked :
+  Z38.ZetaLocalCountLeanReturn.zetaShortWindowUpperCountOwnedInLean
+    Z38.canonicalZetaLocalCountLeanReturn ≡ true
+zetaShortWindowUpperCountChecked = refl
+
+zetaLongWindowLowerDensityStillOpen :
+  Z38.ZetaLocalCountLeanReturn.zetaLongWindowLowerDensityClosed
+    Z38.canonicalZetaLocalCountLeanReturn ≡ false
+zetaLongWindowLowerDensityStillOpen = refl
+
+actualZetaClusteringStillOpen :
+  Z38.ZetaLocalCountLeanReturn.actualZetaClusteringClosed
+    Z38.canonicalZetaLocalCountLeanReturn ≡ false
+actualZetaClusteringStillOpen = refl
+
+clusteringIsObstructionDiagnostic :
+  clusteringConditionIsGapSplitObstructionDiagnostic
+    canonicalGapSplitClusteringLeanReturn8894 ≡ true
+clusteringIsObstructionDiagnostic = refl
+
+clusteringDoesNotDirectlyPayRH :
+  clusteringDirectlyPaysRHScalarConsumer
+    canonicalGapSplitClusteringLeanReturn8894 ≡ false
+clusteringDoesNotDirectlyPayRH = refl
+
+------------------------------------------------------------------------
+-- Search classification.
 ------------------------------------------------------------------------
 
 data GapSplitSearchAction : Set where
@@ -136,20 +203,23 @@ data GapSplitSearchAction : Set where
   retuneTaperWidthOrProfile : GapSplitSearchAction
   deriveClusteringFromCoarseCountingOnly : GapSplitSearchAction
   reuseOptimizedGapSplitAsGrowingCutoffClosure : GapSplitSearchAction
-  proveNewLowGapClustering : GapSplitSearchAction
+  recoverZetaUpperLocalCount : GapSplitSearchAction
   compareQuarterPeriodLowerConstantWithDensityUpperConstant : GapSplitSearchAction
+  auditActualLowGapClusteringForObstruction : GapSplitSearchAction
+  supplyLongWindowLowerDensityForObstructionAudit : GapSplitSearchAction
   pursueDifferentSignedMechanism : GapSplitSearchAction
   repairGammaPrecisionInParallel : GapSplitSearchAction
   continueCanonicalTestModulationInParallel : GapSplitSearchAction
-
 
 GapSplitRelevant : GapSplitSearchAction → Set
 GapSplitRelevant sharpenSameQuadraticDecayDonor = ⊥
 GapSplitRelevant retuneTaperWidthOrProfile = ⊥
 GapSplitRelevant deriveClusteringFromCoarseCountingOnly = ⊥
 GapSplitRelevant reuseOptimizedGapSplitAsGrowingCutoffClosure = ⊥
-GapSplitRelevant proveNewLowGapClustering = ⊤
-GapSplitRelevant compareQuarterPeriodLowerConstantWithDensityUpperConstant = ⊤
+GapSplitRelevant recoverZetaUpperLocalCount = ⊥
+GapSplitRelevant compareQuarterPeriodLowerConstantWithDensityUpperConstant = ⊥
+GapSplitRelevant auditActualLowGapClusteringForObstruction = ⊤
+GapSplitRelevant supplyLongWindowLowerDensityForObstructionAudit = ⊤
 GapSplitRelevant pursueDifferentSignedMechanism = ⊤
 GapSplitRelevant repairGammaPrecisionInParallel = ⊤
 GapSplitRelevant continueCanonicalTestModulationInParallel = ⊤
@@ -170,5 +240,16 @@ optimizedGapSplitGrowingCutoffClosurePruned :
   GapSplitRelevant reuseOptimizedGapSplitAsGrowingCutoffClosure → ⊥
 optimizedGapSplitGrowingCutoffClosurePruned x = x
 
+zetaUpperLocalCountSearchPruned :
+  GapSplitRelevant recoverZetaUpperLocalCount → ⊥
+zetaUpperLocalCountSearchPruned x = x
+
+quarterDensityConstantComparisonPruned :
+  GapSplitRelevant compareQuarterPeriodLowerConstantWithDensityUpperConstant → ⊥
+quarterDensityConstantComparisonPruned x = x
+
+-- Compatibility alias for older downstream code. The route-state constructor
+-- `clusteringRequired` means required for POSITIVITY of the gap-split lower-bound
+-- obstruction, not required as an RH proof producer.
 currentGapSplitRouteState : GapSplitRouteState
-currentGapSplitRouteState = densityConstantWindowConditional
+currentGapSplitRouteState = clusteringRequired

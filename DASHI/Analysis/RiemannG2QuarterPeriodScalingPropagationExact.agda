@@ -13,10 +13,9 @@ import DASHI.Analysis.RiemannAristotlePoleQuotientGammaBudgetTargetExact as Gamm
 -- QUARTER-PERIOD SCALING PROPAGATION
 --
 -- The checked-Lean narrow-window theorem forces J*Lambda > pi/2 before the
--- literal near scalar can even enter a sign-oscillatory regime.  This module
--- assumes the repository's ordinary scaling/order/asymptotic machinery and
--- isolates only the same-object receipts needed to propagate the chosen J(t)
--- through the already-owned consumers.
+-- literal near scalar can enter a sign-oscillatory regime. The cutoff J belongs
+-- to the Off near/far producer only. The final Gamma response and cluster margin
+-- are functions of the same literal taper and have no J argument.
 --
 -- A key positive fact is already owned by the explicit-cutoff return:
 --
@@ -25,7 +24,6 @@ import DASHI.Analysis.RiemannAristotlePoleQuotientGammaBudgetTargetExact as Gamm
 --
 -- for every cutoff J, together with farShellBound -> 0 as J -> infinity.
 -- Thus growth of J is not intrinsically hostile to the far-shell channel.
--- The still-unclosed deterministic Gamma payment must remain separate.
 ------------------------------------------------------------------------
 
 data ScalingRegime : Set where
@@ -40,7 +38,6 @@ record LiteralHighOrdinateWidthLaw : Set₁ where
     targetHeight supportRadius : Scalar
     inverseWidthReference : String
 
-    -- Same-object theorem on the actual constructed taper width.
     highOrdinateInverseWidthLaw : Set
     exactSupportRadiusIsLiteralLambda : Set
     exactTargetHeightIsLiteralTarget : Set
@@ -76,19 +73,27 @@ record SameCutoffFarPropagation
 
 open SameCutoffFarPropagation public
 
-record SameCutoffGammaClusterPropagation
-    (W : LiteralHighOrdinateWidthLaw)
-    (J : MinimalQuarterPeriodCutoff W) : Set₁ where
+------------------------------------------------------------------------
+-- Corrected deterministic complement package: taper-only, not cutoff-indexed.
+------------------------------------------------------------------------
+
+record SameTaperGammaClusterPropagation
+    (W : LiteralHighOrdinateWidthLaw) : Set₁ where
   field
-    literalGammaBudgetAtChosenCutoff : Set
+    literalGammaBudgetOnSameTaper : Set
     gammaBudgetUsesSameLiteralTaper : Set
-    clusterMarginAtChosenCutoff : Set
-    gammaPlusFarFitsClusterMargin : Set
-    explicitFormulaWindowAtChosenCutoff : Set
-    exactChosenCutoffUsedEverywhere : Set
+    clusterMarginOnSameTaper : Set
+    gammaAllowanceCompatibleWithClusterMargin : Set
     propagationReference : String
 
-open SameCutoffGammaClusterPropagation public
+open SameTaperGammaClusterPropagation public
+
+-- Compatibility alias for historical consumers. The J parameter is deliberately
+-- ignored: keeping the old name must not reintroduce Gamma(J) or cluster(J).
+SameCutoffGammaClusterPropagation :
+  (W : LiteralHighOrdinateWidthLaw) ->
+  MinimalQuarterPeriodCutoff W -> Set₁
+SameCutoffGammaClusterPropagation W J = SameTaperGammaClusterPropagation W
 
 record QuarterPeriodScalingAdmission
     (W : LiteralHighOrdinateWidthLaw) : Set₁ where
@@ -96,7 +101,7 @@ record QuarterPeriodScalingAdmission
   field
     cutoff : MinimalQuarterPeriodCutoff W
     farPropagation : SameCutoffFarPropagation W cutoff
-    gammaClusterPropagation : SameCutoffGammaClusterPropagation W cutoff
+    gammaClusterPropagation : SameTaperGammaClusterPropagation W
 
 open QuarterPeriodScalingAdmission public
 
@@ -150,12 +155,6 @@ quarterPeriodCrossingNecessary =
 
 ------------------------------------------------------------------------
 -- Search disposition.
---
--- The far-shell formula is monotone-favourable in the only structural sense we
--- need here: the repository already owns convergence to zero as J grows.  So a
--- quarter-period cutoff of order inverse width does not by itself create a far
--- obstruction.  The next possible incompatibility is whether the SAME chosen J
--- and taper can satisfy the literal Gamma + cluster consumer.
 ------------------------------------------------------------------------
 
 data PropagationDisposition : Set where
@@ -208,4 +207,22 @@ canonicalQuarterPeriodScalingBoundary =
     true refl
     false refl
     false refl
-    "Assume ordinary scaling machinery is available and derive the literal Lambda(t) law on the actual taper. Choose the minimal same-object J(t) crossing pi/2. The explicit far-shell lane is not the likely obstruction: Lean already owns an every-cutoff formula and farShellBound -> 0 as J grows. The live compatibility payment is to bind that same enlarged J(t) to the literal deterministic Gamma response and surviving cluster margin. If Gamma+far cannot fit the cluster margin at the crossing scale, the present G2 architecture acquires a genuine large-window incompatibility no-go; otherwise the oscillatory scalar donor search reopens."
+    "Choose one same-object quarter-period crossing cutoff J for the signed Off near/far producer. The explicit far-shell lane is structurally compatible with cutoff growth because an every-cutoff bound and convergence to zero are already owned. Do not propagate J into Gamma or cluster: their final APIs are taper-only. The remaining deterministic complement payment is same-taper Gamma/cluster allowance compatibility, while the live J-dependent mathematics is the signed finite-near Off estimate at that common cutoff."
+
+------------------------------------------------------------------------
+-- Explicit coordinate correction pins.
+------------------------------------------------------------------------
+
+gammaPropagationCarriesCutoffCoordinate : Bool
+gammaPropagationCarriesCutoffCoordinate = false
+
+gammaPropagationCarriesCutoffCoordinateIsFalse :
+  gammaPropagationCarriesCutoffCoordinate ≡ false
+gammaPropagationCarriesCutoffCoordinateIsFalse = refl
+
+clusterPropagationCarriesCutoffCoordinate : Bool
+clusterPropagationCarriesCutoffCoordinate = false
+
+clusterPropagationCarriesCutoffCoordinateIsFalse :
+  clusterPropagationCarriesCutoffCoordinate ≡ false
+clusterPropagationCarriesCutoffCoordinateIsFalse = refl

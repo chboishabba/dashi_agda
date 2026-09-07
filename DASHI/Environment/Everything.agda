@@ -15,6 +15,8 @@ import DASHI.Environment.EcologicalEvidenceGates
 import DASHI.Environment.ParetoPlanning
 import DASHI.Environment.SpringfieldPondGoldenScenario
 import DASHI.Environment.LESResearchCrossPollinationExact
+import DASHI.Environment.LESCountryExternalityRealisationExact
+import DASHI.Environment.LESCountryRelationalTransmissionIrreversibilityExact
 
 -- Deep-time/climate path-dependence bridge into the LES open research frontier.
 import DASHI.Environment.LESClimateHysteresisRecoveryCrossPollinationExact

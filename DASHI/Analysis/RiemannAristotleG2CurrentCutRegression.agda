@@ -86,3 +86,42 @@ leanProofsNotAgdaProofs = refl
 
 rhStillOpen : G2.rhDerived G2.canonicalAristotleG2CurrentCut ≡ false
 rhStillOpen = refl
+
+------------------------------------------------------------------------
+-- Final-carrier reconciliation regression.
+------------------------------------------------------------------------
+
+determinantCutStillDiagnostic :
+  G2.historicalDeterminantCutStillValidAsDiagnostic
+    G2.canonicalG2CurrentCutFinalCarrierReconciliation ≡ true
+determinantCutStillDiagnostic = refl
+
+determinantCutNotAuthoritativeFinal :
+  G2.historicalDeterminantCutIsAuthoritativeFinalCarrier
+    G2.canonicalG2CurrentCutFinalCarrierReconciliation ≡ false
+determinantCutNotAuthoritativeFinal = refl
+
+poleQuotientCutHasSchedulerPriority :
+  G2.universalPoleQuotientFinalCarrierSupersedesSchedulerPriority
+    G2.canonicalG2CurrentCutFinalCarrierReconciliation ≡ true
+poleQuotientCutHasSchedulerPriority = refl
+
+balanceNoGoNeedsCarrierIdentityToTransfer :
+  G2.projectiveBalanceNoGoTransfersWithoutCarrierIdentity
+    G2.canonicalG2CurrentCutFinalCarrierReconciliation ≡ false
+balanceNoGoNeedsCarrierIdentityToTransfer = refl
+
+finalOffAllowanceStillOpen :
+  G2.finalOffAllowancePaymentClosed
+    G2.canonicalG2CurrentCutFinalCarrierReconciliation ≡ false
+finalOffAllowanceStillOpen = refl
+
+finalGammaAllowanceStillOpen :
+  G2.finalGammaAllowancePaymentClosed
+    G2.canonicalG2CurrentCutFinalCarrierReconciliation ≡ false
+finalGammaAllowanceStillOpen = refl
+
+finalCarrierRHStillOpen :
+  G2.rhDerivedAtFinalCarrier
+    G2.canonicalG2CurrentCutFinalCarrierReconciliation ≡ false
+finalCarrierRHStillOpen = refl

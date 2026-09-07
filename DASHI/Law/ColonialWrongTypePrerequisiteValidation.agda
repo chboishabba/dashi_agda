@@ -1,0 +1,44 @@
+module DASHI.Law.ColonialWrongTypePrerequisiteValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Law.AustralianColonialWrongTypeAuthorityReclassificationExact as ColonialWrong
+import DASHI.Law.AustralianColonialPrimarySourceAttributionExact as Primary
+import DASHI.Law.ColonialSemanticPrerequisiteWrongTypeCrossPollinationExact as Cross
+
+cooperProjectionChangesNormativeType :
+  ColonialWrong.sameNormativeType ColonialWrong.cooperSettledColonyReclassification ≡ false
+cooperProjectionChangesNormativeType = refl
+
+analyticalWrongTypeNotRecognisedCauseOfAction :
+  ColonialWrong.analyticalWrongTypeIsRecognisedCauseOfAction
+    ColonialWrong.canonicalColonialWrongTypeBoundary ≡ false
+analyticalWrongTypeNotRecognisedCauseOfAction = refl
+
+wrongTypeDoesNotCreatePresentLiability :
+  ColonialWrong.analyticalWrongTypeProvesPresentLiability
+    ColonialWrong.canonicalColonialWrongTypeBoundary ≡ false
+wrongTypeDoesNotCreatePresentLiability = refl
+
+uluruAttributionRemainsFirstNations :
+  Primary.sourceRole Primary.uluruNeverCededPrimaryReceipt ≡ Primary.firstNationsPoliticalStatement
+uluruAttributionRemainsFirstNations = refl
+
+cooperAttributionRemainsPrivyCouncil :
+  Primary.sourceRole Primary.cooperReceptionReceipt ≡ Primary.privyCouncilHolding
+cooperAttributionRemainsPrivyCouncil = refl
+
+structuralPrerequisiteNotCauseOfAction :
+  Cross.structuralPrerequisiteEqualsRecognisedCauseOfAction
+    Cross.canonicalWrongTypePrerequisiteBoundary ≡ false
+structuralPrerequisiteNotCauseOfAction = refl
+
+historicalMechanismDoesNotAutoCreateModernMotive :
+  Cross.historicalConstitutiveMechanismAutomaticallyModernPoliceMotive
+    Cross.canonicalWrongTypePrerequisiteBoundary ≡ false
+historicalMechanismDoesNotAutoCreateModernMotive = refl
+
+neverCededNotErasedByCrownClassification :
+  Cross.neverCededPositionErasedByCrownClassification
+    Cross.canonicalWrongTypePrerequisiteBoundary ≡ false
+neverCededNotErasedByCrownClassification = refl

@@ -1,0 +1,168 @@
+module DASHI.Cognition.PNF.SensibLawUniversalLegalAlgebraEverything where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
+
+import DASHI.Cognition.PNF.SensibLawUniversalLegalRuleAlgebraExact as Algebra
+import DASHI.Cognition.PNF.SensibLawSourceFormAuthorityRoleBidiExact as SourceRole
+import DASHI.Cognition.PNF.SensibLawPrecedentApplicabilityDistinguishingExact as Precedent
+import DASHI.Cognition.PNF.SensibLawStatutoryRuleStructureAlgebraExact as Statute
+import DASHI.Cognition.PNF.SensibLawWrongTypeLegalElementAlgebraExact as Elements
+import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact as Negligence
+import DASHI.Cognition.PNF.SensibLawNegligenceDutyRequirementSalienceExact as DutySalience
+import DASHI.Cognition.PNF.SensibLawNegligenceDutyGenericParetoFrontierExact as DutyPareto
+import DASHI.Cognition.PNF.SensibLawWrongTypeRequirementSalienceFrontierExact as Frontier
+import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierExact as Pareto
+import DASHI.Cognition.PNF.SensibLawClimateDutyRouteSearchExact as Climate
+import DASHI.Cognition.PNF.SensibLawLegalObserverResidualRefinementBidiExact as Residual
+import DASHI.Cognition.PNF.SensibLawLegalGraphRefinementReopeningExact as Refinement
+
+------------------------------------------------------------------------
+-- Universal graph and issue-specific graph are one architecture.
+------------------------------------------------------------------------
+
+data IssueSpecificPipelineIsSeparateLegalSystem : Set where
+issueProjectionIsNotSeparateSystem : IssueSpecificPipelineIsSeparateLegalSystem → ⊥
+issueProjectionIsNotSeparateSystem ()
+
+------------------------------------------------------------------------
+-- Duty has been lifted out of the climate-only vocabulary.
+------------------------------------------------------------------------
+
+climatePhysicalInjuryUsesNegligenceWrongType :
+  Negligence.ClimateDutySpecialisation.wrongType
+    Negligence.australiaPhysicalInjuryDutySpecialisation
+  ≡ Negligence.negligenceWrongType
+climatePhysicalInjuryUsesNegligenceWrongType = refl
+
+climatePhysicalInjuryTargetsDutyElement :
+  Negligence.ClimateDutySpecialisation.targetElement
+    Negligence.australiaPhysicalInjuryDutySpecialisation
+  ≡ Negligence.dutyElement
+climatePhysicalInjuryTargetsDutyElement = refl
+
+------------------------------------------------------------------------
+-- Source form and authority role remain orthogonal.
+------------------------------------------------------------------------
+
+caseContainerDoesNotFlattenPropositionRoles :
+  SourceRole.CaseSourceMakesEveryPropositionBindingRatio → ⊥
+caseContainerDoesNotFlattenPropositionRoles =
+  SourceRole.caseContainerDoesNotFlattenRoles
+
+similarFactSurfaceDoesNotAutomaticallyApplyPrecedent :
+  Precedent.SimilarFactsAutomaticallyApplyPrecedent → ⊥
+similarFactSurfaceDoesNotAutomaticallyApplyPrecedent =
+  Precedent.similarityDoesNotProveApplication
+
+statutoryDefinitionRemainsScoped :
+  Statute.DefinitionIsGlobalDictionaryMeaning → ⊥
+statutoryDefinitionRemainsScoped = Statute.definitionIsScoped
+
+------------------------------------------------------------------------
+-- Legacy WrongElement string references no longer count as proof.
+------------------------------------------------------------------------
+
+legacyElementReferenceIsNotElementDerivation :
+  Elements.ElementStringReferenceIsElementProof → ⊥
+legacyElementReferenceIsNotElementDerivation = Elements.stringReferenceDoesNotProveElement
+
+------------------------------------------------------------------------
+-- Duty-coordinate stratification and live salience are separate coordinates.
+------------------------------------------------------------------------
+
+foreseeabilityClassIsFactual :
+  Negligence.classifyDutyIssue Climate.reasonableForeseeability
+  ≡ Negligence.factualDutyFeature
+foreseeabilityClassIsFactual = refl
+
+corePolicyClassIsInstitutional :
+  Negligence.classifyDutyIssue Climate.coreGovernmentPolicy
+  ≡ Negligence.institutionalDutyConstraint
+corePolicyClassIsInstitutional = refl
+
+causationClassIsDownstreamElement :
+  Negligence.classifyDutyIssue Climate.causation
+  ≡ Negligence.downstreamNegligenceElement
+causationClassIsDownstreamElement = refl
+
+foreseeabilityMayRemainRequiredWithoutBeingCurrentSplitter :
+  Frontier.NecessaryButCurrentlyNonDiscriminating
+    DutySalience.currentDutyProblem
+    Climate.reasonableForeseeability
+foreseeabilityMayRemainRequiredWithoutBeingCurrentSplitter =
+  DutySalience.foreseeabilityRequiredButCurrentlyNonDiscriminating
+
+corePolicyMayBeCurrentDutySplitter :
+  Frontier.SalientRequirement
+    DutySalience.currentDutyProblem
+    Climate.coreGovernmentPolicy
+corePolicyMayBeCurrentDutySplitter = DutySalience.corePolicyCurrentlySplitsDutyFibre
+
+statutoryCoherenceMayBecomeSalientAfterPolicyClosure :
+  Frontier.SalientRequirement
+    DutySalience.postPolicyProblem
+    Climate.statutoryCoherence
+statutoryCoherenceMayBecomeSalientAfterPolicyClosure =
+  DutySalience.statutoryCoherenceBecomesSalientAfterPolicyClosure
+
+------------------------------------------------------------------------
+-- Generic finite Pareto frontier now computes the current question set.
+------------------------------------------------------------------------
+
+currentDutyParetoFrontierSelectsCorePolicy :
+  Pareto.paretoFrontier DutyPareto.currentDutyPortfolio
+  ≡ DutyPareto.currentCorePolicyCell ∷ []
+currentDutyParetoFrontierSelectsCorePolicy =
+  DutyPareto.currentDutyParetoFrontierIsCorePolicyOnly
+
+postPolicyParetoFrontierSelectsStatutoryCoherence :
+  Pareto.paretoFrontier DutyPareto.postPolicyPortfolio
+  ≡ DutyPareto.postPolicyStatutoryCoherenceCell ∷ []
+postPolicyParetoFrontierSelectsStatutoryCoherence =
+  DutyPareto.postPolicyParetoFrontierIsStatutoryCoherenceOnly
+
+foreseeabilityRemainsRequiredWhileOffParetoFrontier :
+  Pareto.requiredForConsumer DutyPareto.currentForeseeabilityCell ≡ true
+foreseeabilityRemainsRequiredWhileOffParetoFrontier =
+  DutyPareto.foreseeabilityRequiredButOffCurrentParetoFrontier
+
+------------------------------------------------------------------------
+-- Reverse epistemic path.
+------------------------------------------------------------------------
+
+statutoryCoherenceMissingnessRoutesToStatutoryText :
+  Residual.preferredRoute
+    (Residual.dutyResidualKind Climate.statutoryCoherence)
+  ≡ Residual.inspectStatutoryText
+statutoryCoherenceMissingnessRoutesToStatutoryText = refl
+
+corePolicyMissingnessRoutesToReasons :
+  Residual.preferredRoute
+    (Residual.dutyResidualKind Climate.coreGovernmentPolicy)
+  ≡ Residual.inspectJudicialReasons
+corePolicyMissingnessRoutesToReasons = refl
+
+richerGraphMayDefeatAsWellAsOpen :
+  Refinement.NewFactCanOnlyOpenAndNeverDefeat → ⊥
+richerGraphMayDefeatAsWellAsOpen = Refinement.newFactsMayActivateExceptionsOrDefeaters
+
+refinementDoesNotFreezeOldCut :
+  Refinement.OldMinimalCutRemainsMinimalAfterRefinement → ⊥
+refinementDoesNotFreezeOldCut = Refinement.minimalCutMustBeRechecked
+
+------------------------------------------------------------------------
+-- Aggregate does not claim corpus-complete legal extraction or kernel receipt.
+------------------------------------------------------------------------
+
+data UniversalAlgebraAggregateMeansCorpusComplete : Set where
+data UniversalAlgebraAggregateMeansKernelValidated : Set where
+
+aggregateDoesNotClaimCorpusCompleteness :
+  UniversalAlgebraAggregateMeansCorpusComplete → ⊥
+aggregateDoesNotClaimCorpusCompleteness ()
+
+aggregateDoesNotClaimKernelValidation :
+  UniversalAlgebraAggregateMeansKernelValidated → ⊥
+aggregateDoesNotClaimKernelValidation ()

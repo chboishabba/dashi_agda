@@ -5,29 +5,21 @@ module DASHI.Cognition.PNF.SensibLawTypedLegalAuthorityEdgeExact where
 --
 -- Source attribution policy:
 --   * external legal propositions retain recoverable authority identity;
---   * a statute, precedent, judicial policy consideration and empirical fact
---     never collapse merely because each can participate in a legal argument;
+--   * a statute, precedent, judicial policy consideration, international
+--     judicial opinion and empirical fact never collapse merely because each
+--     can participate in a legal argument;
 --   * DASHI graph structure below is a formal reconstruction, not a theorem
 --     attributed to any cited court or author.
 --
 -- Calibration authorities:
---   * Donoghue v Stevenson [1932] AC 562 (UKHL) -- neighbour principle / the
---     modern negligence lineage; stable law-report citation.
+--   * Donoghue v Stevenson [1932] AC 562 (UKHL).
 --   * Mabo v Queensland (No 2) [1992] HCA 23; 175 CLR 1.
 --   * Pabai v Commonwealth of Australia (No 2) [2025] FCA 796.
---   * Native Title Act 1993 (Cth), especially ss 3 and 223.
---
--- Detailed Mabo/Pabai and critical-theory source attribution is owned by:
---   SensibLawNativeTitleRecognitionCriticalSourceAtlasExact
---   SensibLawPabaiRecognitionRemedyGapExact
+--   * Native Title Act 1993 (Cth), C2004A04665.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
-
-------------------------------------------------------------------------
--- Recoverable source identity.
-------------------------------------------------------------------------
 
 data AuthorityKind : Set where
   constitutionalText : AuthorityKind
@@ -37,12 +29,12 @@ data AuthorityKind : Set where
   persuasivePrecedent : AuthorityKind
   commonLawDevelopment : AuthorityKind
   judicialPolicyConsideration : AuthorityKind
+  internationalJudicialOpinion : AuthorityKind
   adjudicatedFact : AuthorityKind
   partySubmission : AuthorityKind
   empiricalSource : AuthorityKind
   criticalTheorySource : AuthorityKind
   dashSyntheticInference : AuthorityKind
-
 
 record SourceIdentity : Set where
   constructor source-identity
@@ -66,10 +58,6 @@ record TypedLegalEdge : Set where
     crossSourceSynthesis : Bool
 
 open TypedLegalEdge public
-
-------------------------------------------------------------------------
--- A blocker is not merely a consideration that weighs against a result.
-------------------------------------------------------------------------
 
 data GateForce : Set where
   hardBlocker : GateForce
@@ -95,6 +83,7 @@ data JudicialPolicyIsLegislation : Set where
 data AdjudicatedFactIsLegalHolding : Set where
 data PartySubmissionIsAdjudicatedFact : Set where
 data CommonLawDevelopmentIsStatutoryText : Set where
+data InternationalJudicialOpinionIsDomesticBindingPrecedent : Set where
 
 factorAgainstDoesNotBecomeHardBlocker : FactorAgainstIsHardBlocker → ⊥
 factorAgainstDoesNotBecomeHardBlocker ()
@@ -111,9 +100,9 @@ partySubmissionDoesNotBecomeFact ()
 commonLawDevelopmentDoesNotBecomeStatutoryText : CommonLawDevelopmentIsStatutoryText → ⊥
 commonLawDevelopmentDoesNotBecomeStatutoryText ()
 
-------------------------------------------------------------------------
--- Stable calibration identities.
-------------------------------------------------------------------------
+internationalOpinionDoesNotBecomeDomesticPrecedent :
+  InternationalJudicialOpinionIsDomesticBindingPrecedent → ⊥
+internationalOpinionDoesNotBecomeDomesticPrecedent ()
 
 donoghueAuthority : SourceIdentity
 donoghueAuthority = source-identity
@@ -143,10 +132,6 @@ nativeTitleActAuthority = source-identity
   "C2004A04665; https://www.legislation.gov.au/C2004A04665/latest/text"
   legislation
 
-------------------------------------------------------------------------
--- Minimal-obstruction queries must preserve edge type and provenance.
-------------------------------------------------------------------------
-
 data LegalRouteState : Set where
   routeOpen : LegalRouteState
   routeBlocked : LegalRouteState
@@ -175,10 +160,6 @@ record MinimalLegalTransformation : Set where
     requiresIndependentProof : Bool
 
 open MinimalLegalTransformation public
-
-------------------------------------------------------------------------
--- Structural firewalls for corpus-scale search.
-------------------------------------------------------------------------
 
 data EveryEdgeHasSameNormativeForce : Set where
 data SourceIdentityMayBeDiscardedAfterParsing : Set where

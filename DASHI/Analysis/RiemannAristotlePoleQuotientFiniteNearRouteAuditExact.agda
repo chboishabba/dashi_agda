@@ -4,17 +4,24 @@ module DASHI.Analysis.RiemannAristotlePoleQuotientFiniteNearRouteAuditExact wher
 -- RH FINITE-NEAR ROUTE AUDIT
 --
 -- The live zero-side theorem is the literal finite reflection-paired
--- target-centred pole-quotient sum.  Two route classes are structurally
+-- target-centred pole-quotient sum. Two route classes remain structurally
 -- admissible:
 --
 --   A. estimate that finite signed exponential/cosine sum directly;
---   B. derive a literal target-centred explicit-formula transform for exactly
---      that carrier and estimate the transformed side.
+--   B. recover the literal selected target-window explicit-formula producer,
+--      supply lawful near extraction, then estimate the transformed side.
 --
--- The repository's older G3 explicit-formula bridge is useful source material,
--- but it transports a Hermitian matrix object Gz to Gp.  No theorem currently
--- identifies that matrix/Frobenius carrier with the final pole-quotient
--- nearOffFinset signed response.  It is therefore a donor, not a producer.
+-- Later target-window owners materially compress route B: PoleNearTargetWindow
+-- already carries the exact spectral cluster + finite-near + far equality, and
+-- RiemannG2PoleNearTargetWindowSpectralIdentificationCompilerExact compiles that
+-- equality into the modulation/HW view once same-selected-test identity is paid.
+-- Therefore a second spectral decomposition theorem is NOT a live prerequisite.
+--
+-- But the literal PoleNearTargetWindow / PoleNearTargetModulation producers are
+-- themselves still uninhabited in the current repo graph, and generic
+-- WeilTestSpace has no subtraction/cancellation operation from which near
+-- extraction follows automatically. Thus route B currently has strictly more
+-- producer prerequisites before reaching the same finite-near evaluation leaf.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -24,9 +31,12 @@ open import Agda.Builtin.String using (String)
 import DASHI.Analysis.RiemannAristotlePoleQuotientFiniteNearEvaluationBidiExact as Near
 import DASHI.Analysis.RiemannG3SourceTransportExact as G3
 import DASHI.Analysis.RiemannComplexPoissonFiniteRetentionExact as Poisson
+import DASHI.Analysis.RiemannAristotlePoleNearTargetModulationExact as Target
+import DASHI.Analysis.RiemannAristotlePoleNearExplicitFormulaBridgeExact as Window
+import DASHI.Analysis.RiemannG2PoleNearTargetWindowSpectralIdentificationCompilerExact as Spectral
 
 ------------------------------------------------------------------------
--- Literal explicit-formula bridge required by route B.
+-- Historical generic bridge language retained for compatibility.
 ------------------------------------------------------------------------
 
 record LiteralPoleNearExplicitFormulaBridge : Set₁ where
@@ -111,6 +121,35 @@ complexifyPoissonWithoutPoleCarrierMapDoesNotFeed :
 complexifyPoissonWithoutPoleCarrierMapDoesNotFeed ()
 
 ------------------------------------------------------------------------
+-- Later-owner reconciliation.
+------------------------------------------------------------------------
+
+targetModulationConstructionStillOpen :
+  Target.PoleNearTargetModulationBoundary.targetWindowConstructionClosed
+    Target.canonicalPoleNearTargetModulationBoundary ≡ false
+targetModulationConstructionStillOpen = refl
+
+literalTargetWindowStillOpen :
+  Spectral.PoleNearTargetWindowSpectralIdentificationBoundary.literalTargetWindowRecoveredHere
+    Spectral.canonicalPoleNearTargetWindowSpectralIdentificationBoundary ≡ false
+literalTargetWindowStillOpen = refl
+
+secondSpectralDecompositionReproofPruned :
+  Spectral.PoleNearTargetWindowSpectralIdentificationBoundary.secondSpectralDecompositionTheoremRequired
+    Spectral.canonicalPoleNearTargetWindowSpectralIdentificationBoundary ≡ false
+secondSpectralDecompositionReproofPruned = refl
+
+lawfulNearExtractionStillRequired :
+  Window.PoleNearExplicitFormulaBoundary.lawfulNearExtractionRequired
+    Window.canonicalPoleNearExplicitFormulaBoundary ≡ true
+lawfulNearExtractionStillRequired = refl
+
+explicitFormulaRouteStillOpen :
+  Window.PoleNearExplicitFormulaBoundary.explicitFormulaRouteClosed
+    Window.canonicalPoleNearExplicitFormulaBoundary ≡ false
+explicitFormulaRouteStillOpen = refl
+
+------------------------------------------------------------------------
 -- Source-boundary evidence.
 ------------------------------------------------------------------------
 
@@ -118,6 +157,24 @@ complexPoissonContinuationStillOpenInThatLane :
   Poisson.analyticComplexPoissonContinuationProvedHere
     Poisson.complexPoissonFiniteRetentionBoundary ≡ false
 complexPoissonContinuationStillOpenInThatLane = refl
+
+------------------------------------------------------------------------
+-- Non-record precedence pins keep the historical compatibility record stable.
+------------------------------------------------------------------------
+
+directRouteHasFewerUninhabitedProducerPrerequisites : Bool
+directRouteHasFewerUninhabitedProducerPrerequisites = true
+
+directRouteHasFewerUninhabitedProducerPrerequisitesIsTrue :
+  directRouteHasFewerUninhabitedProducerPrerequisites ≡ true
+directRouteHasFewerUninhabitedProducerPrerequisitesIsTrue = refl
+
+directRouteIsCurrentHighestAlphaZeroSideRoute : Bool
+directRouteIsCurrentHighestAlphaZeroSideRoute = true
+
+directRouteIsCurrentHighestAlphaZeroSideRouteIsTrue :
+  directRouteIsCurrentHighestAlphaZeroSideRoute ≡ true
+directRouteIsCurrentHighestAlphaZeroSideRouteIsTrue = refl
 
 ------------------------------------------------------------------------
 -- Boundary/status.
@@ -164,4 +221,4 @@ canonicalFiniteNearRouteAuditBoundary =
     false refl
     false refl
     false refl
-    "The source-native live alternatives are: directly evaluate the finite pole-near signed cosine sum, or first construct a literal target-centred explicit-formula bridge for that exact carrier. Existing Hermitian Gz=Gp / complex-Poisson machinery is not silently promoted because its carrier differs. No theorem-difficulty ordering between the two live alternatives is asserted."
+    "Both route classes remain logically admissible, but the later target-window owners remove the old ambiguity about scheduling. Route B no longer needs a second spectral cluster+near+far theorem, yet it still requires an uninhabited literal PoleNearTargetModulation/PoleNearTargetWindow producer, same-selected-test identity, and lawful extraction before it can evaluate the same finite near term. Route A directly attacks that finite signed cosine value and therefore has fewer uninhabited prerequisites. Under the current closed-world repo graph, direct finite evaluation is the highest-alpha zero-side route. Existing Hermitian G3 / complex-Poisson donors remain carrier-incompatible without an explicit bridge. RH is not derived."

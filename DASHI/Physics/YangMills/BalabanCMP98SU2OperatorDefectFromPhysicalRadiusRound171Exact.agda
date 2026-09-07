@@ -15,14 +15,14 @@ module DASHI.Physics.YangMills.BalabanCMP98SU2OperatorDefectFromPhysicalRadiusRo
 --   N(U^-1 - 1) <= 4 rho^2
 --      -> ||U - 1||_1 <= 1/2048.
 --
--- The only representation fact needed by CMP98 is the standard 2x2 SU(2)
--- estimate
+-- The standard representation boundary now records not only
 --
---   ||U-I||_op <= ||coordinates(U-I)||_1.
+--   ||U-I||_op <= ||coordinates(U-I)||_1,
 --
--- This file keeps that standard matrix-analysis identification isolated, then
--- machine-checks the complete selected-link consequence.  Thus no caller is
--- allowed to supply the final 1/2048 operator bound directly.
+-- but also that the operator-defect kernel is literally on the repository's
+-- rational-quaternion group operations: identity, multiplication, and
+-- conjugation-invariant defect.  These are representation facts, not Path13
+-- source data, and belong here rather than in every downstream weld.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -45,6 +45,16 @@ import DASHI.Physics.YangMills.BalabanP33RelaxedRadiusQuaternionL1SharpExact as 
 record RationalSU2OperatorDefectRepresentation : Set₁ where
   field
     kernel : Op.UnitaryOperatorDefectKernel Q.RationalQuaternion
+
+    kernelIdentityIsQuaternionIdentity :
+      Op.identity kernel ≡ Q.oneQ
+
+    kernelMultiplyIsQuaternionMultiply : ∀ left right →
+      Op.multiply kernel left right ≡ left Q.*q right
+
+    kernelDefectConjugateInvariant : ∀ value →
+      Op.defect kernel (Physical.quaternionConjugate value)
+      ≡ Op.defect kernel value
 
     operatorDefectBelowQuaternionL1 : ∀ value →
       Op.defect kernel value

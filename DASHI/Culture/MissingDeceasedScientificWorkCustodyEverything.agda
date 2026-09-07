@@ -1,0 +1,17 @@
+module DASHI.Culture.MissingDeceasedScientificWorkCustodyEverything where
+
+-- Thin continuation aggregate over the canonical memorial-science/investigation
+-- surface. This keeps custody/event-time continuity while adding explicit
+-- person-identity and role/category attribution audits. These audits refine the
+-- canonical memorial surface without restoring previously pruned parallel layers.
+
+import DASHI.Culture.MissingDeceasedScientificWorkEverything
+import DASHI.Core.PersonIdentityAttributionBidiExact
+import DASHI.Core.ApplicationCapabilityCustodyBidiExact
+import DASHI.Culture.MissingDeceasedIdentityAttributionAuditExact
+import DASHI.Culture.MissingDeceasedRosterRoleAndCommitteeWeldAuditExact
+import DASHI.Culture.AmyEskridgeCorporateCustodySurfaceExact
+import DASHI.Culture.MaiwaldCrossInstitutionalCarrierContinuityExact
+import DASHI.Culture.McCaslandPostAcquisitionContinuityFrontierExact
+import DASHI.Culture.HicksEventTimeRoleDiscontinuityExact
+import DASHI.Culture.MissingDeceasedCustodyEventTimeMatrixExact

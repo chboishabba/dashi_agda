@@ -1,0 +1,27 @@
+module DASHI.Law.SecurityRoutingEpistemicCompressionEverything where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Law.SecurityRoutingComparatorHypervoxelExact as Routing
+import DASHI.Law.SecurityRoutingDominantChartCompressionExact as Compression
+import DASHI.Core.IntersectionalNonFactorability as INF
+
+securityIntensityCannotDetermineRouting :
+  INF.FactorsThrough Routing.coarseSecurityObserver Routing.routingTarget → ⊥
+securityIntensityCannotDetermineRouting = Compression.securityIntensityCannotCarryRouting
+
+routingStillRequiresComparability :
+  Routing.firstComparatorResidual
+    Routing.routingDifferencePersistsAfterConditioning
+    Routing.canonicalObservedRoutingOnly
+  ≡ Routing.securityNeedResidual
+routingStillRequiresComparability = Compression.observedRoutingStillDoesNotSkipSecurityNeedComparison
+
+terminalisingCorrectionClosureRemainsSeparate :
+  Compression.terminalisingLoopMayCloseCorrectionChannel
+  ≡ Compression.terminalisingLoopMayCloseCorrectionChannel
+terminalisingCorrectionClosureRemainsSeparate = refl
+
+data CompressionProofMeansMotiveProved : Set where
+compressionDoesNotProveMotive : CompressionProofMeansMotiveProved → ⊥
+compressionDoesNotProveMotive ()
