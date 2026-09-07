@@ -47,15 +47,30 @@ open import DASHI.Core.Prelude
 --         <= B_near(J) + B_far(J)
 --         <= A_off.
 --
--- Far-tail decay is owned, but J cannot be selected from the far channel alone
--- because the signed near core changes with J. The live zero-side theorem is the
--- joint common-cutoff allowance fit on the exact universal pole-quotient taper.
+-- The joint allowance fit is no longer opaque. The intermediate-allowance
+-- compiler factors it through epsilon on the same weak ordered-additive carrier:
+--
+--   B_far(J) <= epsilon
+--   B_near(J) <= B_near(J)
+--   B_near(J) + epsilon <= A_off
+--   --------------------------------
+--   B_near(J) + B_far(J) <= A_off.
+--
+-- No global reflexivity axiom is added; the concrete near self-order receipt is
+-- explicit. Far-tail decay is owned, but J still cannot be selected from the far
+-- channel alone because the signed near core changes with J. The live zero-side
+-- theorem remains phase-sensitive near control at the same chosen crossing J,
+-- strong enough to leave the selected far allowance epsilon.
 --
 -- Gamma has no cutoff coordinate. Its terminal theorem is simply the same-taper
 -- assigned allowance fit B_Gamma(g_pole) <= A_Gamma. A concrete epsGamma /
 -- gammaConeEnvelope lineage is recovered historically. Generic Gamma-source
--- discovery is therefore pruned; same-consumer identity with the 8889 producer
--- remains the live source/provenance payment before precision-loss localization.
+-- discovery is pruned. Exact 8889 producer identity remains mandatory only on
+-- the historical precision-repair route, before attributing/localising a loss
+-- inside that producer. It is NOT a prerequisite for a fresh theorem proving
+-- the same final Gamma allowance directly on the literal g_pole. The final
+-- consumer is theorem-interface driven, while historical attribution remains
+-- provenance driven.
 --
 -- Existing representation machinery is reused rather than re-searched.
 -- Uninhabited adapter records remain infrastructure obligations, not fabricated
@@ -73,6 +88,8 @@ import DASHI.Analysis.RiemannAristotleTwoZeroThreeTaperReturnRegression
 import DASHI.Analysis.ExactSelectedEliminationFarTailCompilerExact
 import DASHI.Analysis.RiemannAristotleQuarterPeriodDensityWindowLeanReturnExact
 import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact
+import DASHI.Analysis.RiemannAristotleG2CurrentCutExact
+import DASHI.Analysis.RiemannAristotleG2CurrentCutRegression
 import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact
 import DASHI.Analysis.RiemannG2AlpogeFurmanClusteringNonDescentExact
 import DASHI.Analysis.RiemannG2TransverseVsOrdinateMomentNonDescentExact
@@ -90,9 +107,13 @@ import DASHI.Analysis.RiemannG2HighestAlphaAfter8894Exact
 import DASHI.Analysis.RiemannG2PoleQuotientProducerAllowanceTargetExact
 import DASHI.Analysis.RiemannG2PoleQuotientChannelAllowanceExact
 import DASHI.Analysis.RiemannG2PoleQuotientOffAllowanceDirectCompilerExact
+import DASHI.Analysis.RiemannG2PoleQuotientOffIntermediateAllowanceCompilerExact
+import DASHI.Analysis.RiemannG2FinalOffAllowanceFactorizationRegression
 import DASHI.Analysis.RiemannG2GammaProducerSourceAcquisitionExact
 import DASHI.Analysis.RiemannG2GammaCandidateSourceLineageRecoveryExact
+import DASHI.Analysis.RiemannG2GammaLineageHighestAlphaReconciliationExact
 import DASHI.Analysis.RiemannG2PoleQuotientGammaAllowanceDirectCompilerExact
+import DASHI.Analysis.RiemannG2FinalGammaRouteSchedulerRegression
 import DASHI.Analysis.RiemannG2FinalSplitComplementAllowanceAssemblyExact
 import DASHI.Analysis.RiemannG2FinalSplitComplementOrderTransportCompilerExact
 import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact

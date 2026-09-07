@@ -157,3 +157,64 @@ canonicalAristotleG2CurrentCut =
     false refl
     false refl
     "The 8885-job Lean return closes G2c itself, the finite signed Gram ledger, scalar Gram-debt identity, reflection-duplicate no-go, the literal determinant-taper near scalarization, the finite exponential-sum form, the far remainder in the same determinant coordinate, and the scalar off-energy consumer. Agda retains these as checked-Lean provenance rather than imported proof terms. The first unproved harmonic-analysis theorem is the target-centered local zero cosine/exponential-sum bound. Separately, the newly checked projective-balance no-go blocks the old strict off-energy-below-cluster consumer under unbroken balance, so any final contradiction architecture must make the balance-breaking step explicit. No generic Gram or Schur algebra remains and RH is not derived."
+
+------------------------------------------------------------------------
+-- FINAL-CARRIER RECONCILIATION
+--
+-- The record above is retained as the exact historical determinant-lane cut.
+-- Newer repository work separates that carrier from the universal
+-- pole-quotient final consumer.  Similar reflection-paired cosine kernels do
+-- not establish taper/carrier identity, so the determinant projective-balance
+-- no-go remains valid in its own lane but is not silently exported as a final
+-- pole-quotient premise.
+------------------------------------------------------------------------
+
+record G2CurrentCutFinalCarrierReconciliation : Set where
+  constructor g2-current-cut-final-carrier-reconciliation
+  field
+    historicalDeterminantCutStillValidAsDiagnostic : Bool
+    historicalDeterminantCutStillValidAsDiagnosticIsTrue :
+      historicalDeterminantCutStillValidAsDiagnostic ≡ true
+
+    historicalDeterminantCutIsAuthoritativeFinalCarrier : Bool
+    historicalDeterminantCutIsAuthoritativeFinalCarrierIsFalse :
+      historicalDeterminantCutIsAuthoritativeFinalCarrier ≡ false
+
+    universalPoleQuotientFinalCarrierSupersedesSchedulerPriority : Bool
+    universalPoleQuotientFinalCarrierSupersedesSchedulerPriorityIsTrue :
+      universalPoleQuotientFinalCarrierSupersedesSchedulerPriority ≡ true
+
+    projectiveBalanceNoGoTransfersWithoutCarrierIdentity : Bool
+    projectiveBalanceNoGoTransfersWithoutCarrierIdentityIsFalse :
+      projectiveBalanceNoGoTransfersWithoutCarrierIdentity ≡ false
+
+    finalOffAllowancePaymentClosed : Bool
+    finalOffAllowancePaymentClosedIsFalse :
+      finalOffAllowancePaymentClosed ≡ false
+
+    finalGammaAllowancePaymentClosed : Bool
+    finalGammaAllowancePaymentClosedIsFalse :
+      finalGammaAllowancePaymentClosed ≡ false
+
+    rhDerivedAtFinalCarrier : Bool
+    rhDerivedAtFinalCarrierIsFalse :
+      rhDerivedAtFinalCarrier ≡ false
+
+    authoritativeFinalCutReference : String
+    boundedFinalCarrierReading : String
+
+open G2CurrentCutFinalCarrierReconciliation public
+
+canonicalG2CurrentCutFinalCarrierReconciliation :
+  G2CurrentCutFinalCarrierReconciliation
+canonicalG2CurrentCutFinalCarrierReconciliation =
+  g2-current-cut-final-carrier-reconciliation
+    true refl
+    false refl
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+    "DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact"
+    "Keep the 8885 determinant G2 cut as checked-Lean/Agda diagnostic history. It is not the authoritative final RH carrier. The universal pole-quotient final cut has separate producer-assigned Off and Gamma allowance payments; neither is closed here. The determinant projective-balance no-go cannot be transported into that final consumer without an explicit carrier/taper identity. RH remains open."

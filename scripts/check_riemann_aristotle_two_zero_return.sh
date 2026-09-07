@@ -32,6 +32,8 @@ FILES=(
   DASHI/Analysis/RiemannAristotleFiniteNearCoreSchurCompilerExact.agda
   DASHI/Analysis/RiemannAristotleQuarterPeriodDensityWindowLeanReturnExact.agda
   DASHI/Analysis/RiemannAristotleZetaLocalCountLeanReturnExact.agda
+  DASHI/Analysis/RiemannAristotleG2CurrentCutExact.agda
+  DASHI/Analysis/RiemannAristotleG2CurrentCutRegression.agda
   DASHI/Analysis/RiemannG2GapSplitClusteringLeanReturn8894Exact.agda
   DASHI/Analysis/RiemannG2AlpogeFurmanClusteringNonDescentExact.agda
   DASHI/Analysis/RiemannG2TransverseVsOrdinateMomentNonDescentExact.agda
@@ -47,6 +49,9 @@ FILES=(
   DASHI/Analysis/RiemannG2HighestAlphaAfter369Exact.agda
   DASHI/Analysis/RiemannG2HighestAlphaAfter8894Exact.agda
   DASHI/Analysis/RiemannG2PoleQuotientChannelAllowanceExact.agda
+  DASHI/Analysis/RiemannG2PoleQuotientOffAllowanceDirectCompilerExact.agda
+  DASHI/Analysis/RiemannG2PoleQuotientOffIntermediateAllowanceCompilerExact.agda
+  DASHI/Analysis/RiemannG2FinalOffAllowanceFactorizationRegression.agda
   DASHI/Analysis/RiemannG2PoleQuotientFinalCutReconciliationExact.agda
   DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerExact.agda
   DASHI/Analysis/RiemannAristotleRHAnalyticLeafSchedulerExact.agda
@@ -86,6 +91,7 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotleFiniteNearCoreSchurCompilerExact.agda
   agda DASHI/Analysis/RiemannAristotleQuarterPeriodDensityWindowLeanReturnExact.agda
   agda DASHI/Analysis/RiemannAristotleZetaLocalCountLeanReturnExact.agda
+  agda DASHI/Analysis/RiemannAristotleG2CurrentCutRegression.agda
   agda DASHI/Analysis/RiemannG2GapSplitClusteringLeanReturn8894Exact.agda
   agda DASHI/Analysis/RiemannG2AlpogeFurmanClusteringNonDescentExact.agda
   agda DASHI/Analysis/RiemannG2TransverseVsOrdinateMomentNonDescentExact.agda
@@ -101,6 +107,8 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannG2HighestAlphaAfter369Exact.agda
   agda DASHI/Analysis/RiemannG2HighestAlphaAfter8894Exact.agda
   agda DASHI/Analysis/RiemannG2PoleQuotientChannelAllowanceExact.agda
+  agda DASHI/Analysis/RiemannG2PoleQuotientOffIntermediateAllowanceCompilerExact.agda
+  agda DASHI/Analysis/RiemannG2FinalOffAllowanceFactorizationRegression.agda
   agda DASHI/Analysis/RiemannG2PoleQuotientFinalCutReconciliationExact.agda
   agda DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerExact.agda
   agda DASHI/Analysis/RiemannAristotleRHAnalyticLeafSchedulerExact.agda
