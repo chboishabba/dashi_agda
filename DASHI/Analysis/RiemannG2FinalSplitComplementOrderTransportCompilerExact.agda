@@ -72,9 +72,6 @@ record FinalPoleQuotientOrderTransport
         (Existing.cast clusterScalarIdentity x)
         (Existing.cast clusterScalarIdentity y)
 
-    -- The final balance and strict allowance comparison genuinely combine
-    -- channels, so they remain final-carrier receipts rather than projections of
-    -- one source relation.
     clusterEqualsOffPlusGamma :
       Existing.cast clusterScalarIdentity
         (Cluster.ClusterResponse cluster (Cluster.universalPoleQuotientTaper cluster))
@@ -95,10 +92,6 @@ record FinalPoleQuotientOrderTransport
     transportReference : String
 
 open FinalPoleQuotientOrderTransport public
-
-------------------------------------------------------------------------
--- Derived channel inequalities.
-------------------------------------------------------------------------
 
 compiledOffUpper :
   ∀ {surface offPayment gammaPayment cluster} →
@@ -125,7 +118,7 @@ compiledGammaUpper :
         (Gamma.GammaBudget gamma (Gamma.universalPoleQuotientTaper gamma)))
 compiledGammaUpper {gammaPayment = gammaPayment} t =
   gammaOrderTransport t
-    (Gamma.gammaResidualUpper
+    (Gamma.gammaResponseUpper
       (Payment.PoleQuotientGammaAllowancePayment.target gammaPayment))
 
 compiledClusterLower :
@@ -162,10 +155,6 @@ compiledGammaAllowanceFit :
         (Payment.assignedGammaAllowance gammaPayment))
 compiledGammaAllowanceFit {gammaPayment = gammaPayment} t =
   gammaOrderTransport t (Payment.gammaBudgetBelowAssignedAllowance gammaPayment)
-
-------------------------------------------------------------------------
--- Compile the existing allowance-aware final assembly.
-------------------------------------------------------------------------
 
 compileFinalAllowanceAssembly :
   ∀ {surface offPayment gammaPayment cluster} →
@@ -240,10 +229,6 @@ orderTransportContradiction :
 orderTransportContradiction {surface} t =
   Assembly.assemblyContradiction {surface = surface}
     (compileFinalAllowanceAssembly t)
-
-------------------------------------------------------------------------
--- Boundary.
-------------------------------------------------------------------------
 
 record FinalOrderTransportBoundary : Set where
   constructor final-order-transport-boundary
