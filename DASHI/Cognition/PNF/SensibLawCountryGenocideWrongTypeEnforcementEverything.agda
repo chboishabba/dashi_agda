@@ -21,6 +21,7 @@ import DASHI.Cognition.PNF.SensibLawCountryRelationalLossGenocideBoundaryExact a
 import DASHI.Cognition.PNF.SensibLawGenocideConventionWrongTypeBidiExact as Wrong
 import DASHI.Cognition.PNF.SensibLawGenocideEnforcementMeansBidiExact as Enforce
 import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExact as GenericWrongBidi
+import DASHI.Cognition.PNF.SensibLawWrongTypeLegalElementAlgebraExact as ElementAlgebra
 import DASHI.Interop.SensibLawOntologyTopology as Ontology
 
 ------------------------------------------------------------------------
@@ -32,7 +33,7 @@ conventionWrongType = Wrong.genocideConventionWrongType
 
 specificIntentUsesMentalStateElement :
   Wrong.axisLegalElementKind Wrong.specificIntentAxis
-  ≡ Wrong.ElementAlgebra.mentalStateElement
+  ≡ ElementAlgebra.mentalStateElement
 specificIntentUsesMentalStateElement = refl
 
 record CountryRelationalConventionProbe : Set where
