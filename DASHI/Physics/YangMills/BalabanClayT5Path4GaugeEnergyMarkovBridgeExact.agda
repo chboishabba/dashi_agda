@@ -6,8 +6,15 @@ module DASHI.Physics.YangMills.BalabanClayT5Path4GaugeEnergyMarkovBridgeExact wh
 --
 -- This preferred route is intentionally indexed by one exact expectationData.
 -- It does not try to inhabit the older over-general Markov authority quantified
--- over arbitrary operations/measure sequences.  The existing typed moment bound
+-- over arbitrary operations/measure sequences. The existing typed moment bound
 -- on the selected diagonal producer is consumed directly.
+--
+-- IMPORTANT: T5.PhysicalOSOperations leaves `expectation` abstract. Therefore
+-- the Markov/sublevel implication below is NOT generic probability theory until
+-- the selected expectation has been identified with the probability integral
+-- of the same pointwise observable semantics. We keep that implication as an
+-- explicit physical/representation seam rather than hiding it in a standard
+-- authority label.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -69,10 +76,11 @@ record Path4SelectedMomentContainmentInputs
     compactWitnessAdmissible : ∀ epsilon →
       Admissible epsilon (compactWitness epsilon)
 
-    -- Standard Markov/sublevel step on this exact selected producer.  The
-    -- Yang--Mills-specific nonnegativity and coercivity premises are supplied
-    -- below from the literal Path4 realization, not postulated here.
-    markovMomentBoundControlsCompactComplement : ∀ epsilon cutoff →
+    -- This is the exact selected-expectation semantic seam. Once expectation is
+    -- known to be the probability integral of `observableValue`, ordinary
+    -- Markov/sublevel theory is the intended producer. T5 does not currently
+    -- expose that integral semantics, so this theorem remains explicit.
+    selectedExpectationMarkovSublevel : ∀ epsilon cutoff →
       Path4PointwiseNonnegative realization
         (Realization.path4GaugeEnergyObservable realization) →
       Path4PointwiseCoercive realization
@@ -111,7 +119,7 @@ compilePath4MomentCompactContainmentInputs
       Realization.path4GaugeEnergyRenormalized (renormalized inputs)
   ; compactWitnessAdmissible = compactWitnessAdmissible inputs
   ; momentBoundControlsCompactComplement = λ epsilon cutoff bound →
-      markovMomentBoundControlsCompactComplement inputs epsilon cutoff
+      selectedExpectationMarkovSublevel inputs epsilon cutoff
         (Realization.path4GaugeEnergyObservablePointwiseNonnegative realization)
         (Realization.path4GaugeEnergyObservablePointwiseCoercive realization)
         bound
@@ -123,8 +131,8 @@ path4SelectedMomentContainmentCompilerLevel = machineChecked
 path4FiniteNonnegativityAndCoercivityReuseLevel : ProofLevel
 path4FiniteNonnegativityAndCoercivityReuseLevel = machineChecked
 
-path4MarkovProbabilityAuthorityLevel : ProofLevel
-path4MarkovProbabilityAuthorityLevel = standardImported
+physicalSelectedExpectationMarkovSemanticsLevel : ProofLevel
+physicalSelectedExpectationMarkovSemanticsLevel = conditional
 
 path4GaugeEnergyCompactSublevelLevel : ProofLevel
 path4GaugeEnergyCompactSublevelLevel = conditional
