@@ -20,7 +20,7 @@ import DASHI.Analysis.RiemannG2FinalPoleQuotientTwoPaymentCutExact as Two
 -- the critical line, the producer must return one SAME-CASE normalized packet.
 --
 -- The packet already contains the literal current scalar leaves through its
--- normalized Off/Gamma inputs and final actual-budget strict margin.  Everything
+-- normalized Off/Gamma inputs and final actual-budget strict margin. Everything
 -- from that packet to HighOffLineAnalyticCoreProducer is compiler output here.
 ------------------------------------------------------------------------
 
@@ -98,13 +98,13 @@ compileUniformHighProducer :
   Universal.HighOffLineAnalyticCoreProducer analytic High
 compileUniformHighProducer producer = record
   { Universal.coresForOffLineHigh =
-      lambda rho high offLine ->
+      λ rho high offLine ->
         caseCores (caseForOffLineHigh producer rho high offLine)
   ; Universal.attachmentsForOffLineHigh =
-      lambda rho high offLine ->
+      λ rho high offLine ->
         caseAttachments (caseForOffLineHigh producer rho high offLine)
   ; Universal.completionForOffLineHigh =
-      lambda rho high offLine ->
+      λ rho high offLine ->
         caseCompletion (caseForOffLineHigh producer rho high offLine)
   }
 
