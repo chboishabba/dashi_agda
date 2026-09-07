@@ -39,6 +39,20 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputSignedCrossAggregationRound432E
 import DASHI.Physics.Closure.NSTriadKNFixedOutputNestedBonyCrossRound433Exact
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCriticalConeCompilerRound434Exact
 
+-- R471-R477 Lean<->Agda Gram-operator return.  The weakest fixed-output
+-- consumer is the signed l2->l2 Gram quadratic-form bound; Schur variants are
+-- producers, not mandatory intermediates.  The existing R180/R383 signed Gram
+-- and native helical +/- decomposition are reused directly.  R476 separates
+-- the fully projected outer-cell lane from R440's unprojected signed companion,
+-- and R477 installs the nonseparable Cauchy pair kernel explicitly.
+import DASHI.Physics.Closure.NSTriadKNGramOperatorBoundConsumerRound471Exact
+import DASHI.Physics.Closure.NSTriadKNPhysicalGramOperatorPaymentRound472Exact
+import DASHI.Physics.Closure.NSTriadKNWeightedPhysicalGramOperatorCarrierRound473Exact
+import DASHI.Physics.Closure.NSTriadKNHelicalSignedGramSplitRound474Exact
+import DASHI.Physics.Closure.NSTriadKNWeightedHelicalGramOperatorSplitRound475Exact
+import DASHI.Physics.Closure.NSTriadKNProjectedVsDirectSignedGramBoundaryRound476Exact
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact
+
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
 -- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact

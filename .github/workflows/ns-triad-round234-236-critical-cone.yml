@@ -1,4 +1,4 @@
-name: NS Round234-248 critical cone profiles trajectory extraction and bidi weld
+name: NS Round234-477 critical cone and Gram-operator bidi weld
 
 on:
   pull_request:
@@ -18,6 +18,14 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalNormalizedCurlHOneModeIsometryRound246Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalNormalizedCurlHOneFiniteSumRound247Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNMixedHelicitySobolevEndpointRound248Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNGramOperatorBoundConsumerRound471Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalGramOperatorPaymentRound472Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNWeightedPhysicalGramOperatorCarrierRound473Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNHelicalSignedGramSplitRound474Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNWeightedHelicalGramOperatorSplitRound475Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNProjectedVsDirectSignedGramBoundaryRound476Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedGramOperatorRound477Exact.agda'
+      - 'DASHI/Physics/Closure/Everything.agda'
       - 'scripts/audit_opposite_helicity_symbol_round232.py'
       - 'scripts/audit_mixed_helicity_forcing_work_round233.py'
       - '.github/workflows/ns-triad-round234-236-critical-cone.yml'
@@ -119,3 +127,43 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNMixedHelicitySobolevEndpointRound248Exact.agda
+
+      - name: Type-check Round471 weakest Gram consumer
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNGramOperatorBoundConsumerRound471Exact.agda
+
+      - name: Type-check Round472 physical Gram payment adapter
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNPhysicalGramOperatorPaymentRound472Exact.agda
+
+      - name: Type-check Round473 weighted literal signed Gram carrier
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNWeightedPhysicalGramOperatorCarrierRound473Exact.agda
+
+      - name: Type-check Round474 signed helical Gram split
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNHelicalSignedGramSplitRound474Exact.agda
+
+      - name: Type-check Round475 weighted helical Gram operator split
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNWeightedHelicalGramOperatorSplitRound475Exact.agda
+
+      - name: Type-check Round476 projected/direct boundary
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNProjectedVsDirectSignedGramBoundaryRound476Exact.agda
+
+      - name: Type-check Round477 Cauchy-resolved Gram operator
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNCauchyResolvedGramOperatorRound477Exact.agda
+
+      - name: Type-check closure rollup
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/Everything.agda
