@@ -4,15 +4,13 @@ open import DASHI.Core.Prelude
 
 import DASHI.Biology.AliceBrownDiagnosisRepairSchedulerBidiExact as Diagnosis
 import DASHI.Biology.AliceBrownTemporalDiagnosisDependencyLineageBidiExact as Lineage
+import DASHI.Core.AffectedDependencyClosureExact as Closure
 import DASHI.Core.ExperimentalOutcomeOrientationBackpropagationBidiExact as Outcome
+import DASHI.Core.SequentialOutcomeBackpropagationBidiExact as Revision
 import DASHI.Core.SelectiveInvalidationParetoFrontierBidiExact as Pareto
 
 ------------------------------------------------------------------------
 -- ALICE BROWN SELECTIVE INVALIDATION / PARETO RETURN
---
--- A changed survey/voice/observer path does not reopen every epistemic-agency
--- certificate.  The first pass classifies downstream objects; only residual-
--- relevant recompute candidates enter the Pareto scheduler.
 ------------------------------------------------------------------------
 
 voiceAgencyCertificate : Pareto.CertificateCandidate
@@ -52,24 +50,22 @@ authorityCertificate =
     "epistemic repair cannot manufacture subject or institutional authority"
 
 aliceFrameRepairStillRecharts :
-  Diagnosis.aliceRevision Outcome.frameConflict
-  ≡ DASHI.Core.SequentialOutcomeBackpropagationBidiExact.rechartRepresentation
+  Diagnosis.aliceRevision Outcome.frameConflict ≡ Revision.rechartRepresentation
 aliceFrameRepairStillRecharts = Diagnosis.frameConflictRequestsRechart
 
 aliceAuthorityStillSeparate :
-  Diagnosis.aliceRevision Outcome.authorityMismatch
-  ≡ DASHI.Core.SequentialOutcomeBackpropagationBidiExact.seekAuthorityReceipt
+  Diagnosis.aliceRevision Outcome.authorityMismatch ≡ Revision.seekAuthorityReceipt
 aliceAuthorityStillSeparate = Diagnosis.authorityMismatchRequestsAuthorityReceipt
 
 surveyPathRetained :
-  DASHI.Core.AffectedDependencyClosureExact.AffectedClosure
+  Closure.AffectedClosure
     Lineage.AliceDepends
     Lineage.surveyFeedbackSurface
     Lineage.participationAgencyConsumer
 surveyPathRetained = Lineage.surveyToAgencyPath
 
 parentPathRetained :
-  DASHI.Core.AffectedDependencyClosureExact.AffectedClosure
+  Closure.AffectedClosure
     Lineage.AliceDepends
     Lineage.parentObserverEvidence
     Lineage.multiObserverConsumer
@@ -77,7 +73,6 @@ parentPathRetained = Lineage.parentToMultiObserverPath
 
 data SurveyChangeReopensParentObserverAutomatically : Set where
 data ParetoPreferredVoiceRepairCreatesStudentAuthority : Set where
-
 data SameDiagnosisCollapsesAliceConsumers : Set where
 
 surveyChangeDoesNotReopenParentObserverAutomatically :
