@@ -13,6 +13,7 @@ module DASHI.Physics.YangMills.BalabanClayT5WeakExpectationPropertyClosureExact 
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as Limit
@@ -121,7 +122,7 @@ normalizedClosedFromWeakExpectation {topology = topology} semantics
       (λ _ → one semantics)
       (λ n → expectation topology (sequence n) (unitTest semantics))
       (one semantics)
-      (λ n → finiteNormalized n)
+      (λ n → sym (finiteNormalized n))
       (scalarConstantConverges topology (one semantics)))
 
 positiveClosedFromWeakExpectation :
@@ -164,7 +165,7 @@ gaugeInvariantClosedFromWeakExpectation {topology = topology} semantics
       (λ n → expectation topology (sequence n) test)
       (λ n → expectation topology (sequence n) (gaugeAct semantics gauge test))
       (expectation topology target test)
-      (λ n → finiteGauge n gauge test gaugeTest)
+      (λ n → sym (finiteGauge n gauge test gaugeTest))
       (expectationContinuous topology sequence target test convergence
         (gaugeTestsAdmissible semantics test gaugeTest)))
 
