@@ -352,7 +352,7 @@ statisticsDoNotProveLandBackCounterfactual : ClosingGapStatisticsProveLandBackCo
 statisticsDoNotProveLandBackCounterfactual ()
 
 intersectionalCourtReformDoesNotEraseColonialRelation : IntersectionalCourtReformEliminatesColonialPowerRelation → ⊥
-intersectionalCourtReformDoesNotEraseColonialPowerRelation ()
+intersectionalCourtReformDoesNotEraseColonialRelation ()
 
 criticalLensDoesNotAutoBecomeWorldTruth : CriticalLensAutomaticallyBecomesWorldTruth → ⊥
 criticalLensDoesNotAutoBecomeWorldTruth ()

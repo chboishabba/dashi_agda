@@ -78,6 +78,8 @@ data PropositionStatus : Set where
   rejectedProposition : PropositionStatus
   notDeterminedProposition : PropositionStatus
 
+pattern represented = propositionRepresented
+
 data TruthStatus : Set where
   truthUnresolved : TruthStatus
   candidateTrue : TruthStatus
@@ -262,6 +264,8 @@ record IdentityResolutionReceipt : Set where
     resolverReference : String
     policyReference : String
 
+open IdentityResolutionReceipt public
+
 record AntecedentResolutionReceipt : Set where
   constructor antecedentResolutionReceipt
   field
@@ -270,6 +274,8 @@ record AntecedentResolutionReceipt : Set where
     accessibilityWitnessReferences : List String
     candidateSetReference : String
     resolverReference : String
+
+open AntecedentResolutionReceipt public
 
 record OccurrenceResolutionReceipt : Set where
   constructor occurrenceResolutionReceipt
@@ -280,6 +286,8 @@ record OccurrenceResolutionReceipt : Set where
     evidenceReferences : List String
     resolverReference : String
 
+open OccurrenceResolutionReceipt public
+
 record PropositionResolutionReceipt : Set where
   constructor propositionResolutionReceipt
   field
@@ -289,6 +297,8 @@ record PropositionResolutionReceipt : Set where
     attributionReference : String
     evidenceReferences : List String
     resolverReference : String
+
+open PropositionResolutionReceipt public
 
 record ApplicabilityResolutionReceipt : Set where
   constructor applicabilityResolutionReceipt
@@ -301,6 +311,8 @@ record ApplicabilityResolutionReceipt : Set where
     authorityReference : String
     exceptionReference : String
     resolverReference : String
+
+open ApplicabilityResolutionReceipt public
 
 ------------------------------------------------------------------------
 -- Cross-axis no-collapse laws.

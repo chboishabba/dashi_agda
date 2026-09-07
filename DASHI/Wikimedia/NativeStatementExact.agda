@@ -31,7 +31,9 @@ data Snak : Set where
   noValue : Snak
 
 data StatementRank : Set where
-  preferred normal deprecated : StatementRank
+  preferred : StatementRank
+  normal : StatementRank
+  deprecated : StatementRank
 
 record Qualifier : Set where
   constructor qualifier

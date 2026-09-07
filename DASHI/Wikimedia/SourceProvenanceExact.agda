@@ -11,15 +11,14 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data SourceLayer : Set where
-  wikidataStatementLayer
-  wikidataReferenceLayer
-  wikipediaRevisionLayer
-  externalReferencedSourceLayer
-  dashiReconstructionLayer
-  dashiInferenceLayer
-  dashiTheoremLayer
-  promotionAdjudicationLayer
-  : SourceLayer
+  wikidataStatementLayer : SourceLayer
+  wikidataReferenceLayer : SourceLayer
+  wikipediaRevisionLayer : SourceLayer
+  externalReferencedSourceLayer : SourceLayer
+  dashiReconstructionLayer : SourceLayer
+  dashiInferenceLayer : SourceLayer
+  dashiTheoremLayer : SourceLayer
+  promotionAdjudicationLayer : SourceLayer
 
 record SourceReceipt : Set where
   constructor sourceReceipt

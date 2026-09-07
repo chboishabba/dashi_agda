@@ -112,12 +112,12 @@ hallClearPlainLaterSccCorroboration = calderTranscriptionVerification
 
 data PropositionTextAuthorityState : Set where
   ocrLocated : PropositionTextAuthorityState
-  authoritativeTranscriptionVerified : PropositionTextAuthorityState
+  authoritativeTranscriptionVerifiedState : PropositionTextAuthorityState
 
 
 verifiedTextAuthorityState : CalderTranscriptionVerification Primary.hallSurvivalWithoutRecognitionProposition → PropositionTextAuthorityState
-verifiedTextAuthorityState _ = authoritativeTranscriptionVerified
-hallSurvivalTextNowVerified : verifiedTextAuthorityState hallSurvivalWithoutRecognitionVerified ≡ authoritativeTranscriptionVerified
+verifiedTextAuthorityState _ = authoritativeTranscriptionVerifiedState
+hallSurvivalTextNowVerified : verifiedTextAuthorityState hallSurvivalWithoutRecognitionVerified ≡ authoritativeTranscriptionVerifiedState
 hallSurvivalTextNowVerified = refl
 hallRecognitionTextNowVerified : authoritativeTranscriptionVerified hallRecognitionNotPrerequisiteVerified ≡ true
 hallRecognitionTextNowVerified = refl

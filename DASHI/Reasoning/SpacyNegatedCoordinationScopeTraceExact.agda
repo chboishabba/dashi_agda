@@ -1,9 +1,10 @@
 module DASHI.Reasoning.SpacyNegatedCoordinationScopeTraceExact where
 
-open import DASHI.Core.Prelude
+open import DASHI.Core.Prelude hiding (sym)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
+open import Data.String using (_++_)
 open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.NumericAuthority as Authority

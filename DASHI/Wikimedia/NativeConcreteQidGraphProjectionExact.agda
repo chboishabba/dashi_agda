@@ -28,9 +28,8 @@ p279 : Id.PropertyId
 p279 = Id.propertyId "P279"
 
 data KernelRelationKind : Set where
-  instanceRelation
-  subclassRelation
-  : KernelRelationKind
+  instanceRelation : KernelRelationKind
+  subclassRelation : KernelRelationKind
 
 propertyFor : KernelRelationKind → Id.PropertyId
 propertyFor instanceRelation = p31

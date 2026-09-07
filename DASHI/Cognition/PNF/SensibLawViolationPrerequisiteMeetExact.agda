@@ -90,7 +90,7 @@ open ViolationMeetInput public
 compileViolationMeet :
   ∀ {state} → ViolationMeetInput state → Legal.ViolationReceipt
 compileViolationMeet input =
-  Legal.violationReceipt
+  Legal.violationReceiptRecord
     (receipt (applicability (prerequisites input)))
     (elementEvaluations input)
     (resultingViolation (decision input))

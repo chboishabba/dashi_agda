@@ -6,7 +6,7 @@ open import Data.Empty using (⊥)
 open import Data.Integer using (ℤ; +_; _+_)
 open import Data.List.Base using (List; []; _∷_)
 
-open import DASHI.Cognition.PNF.NumericAuthority
+open import DASHI.Cognition.PNF.NumericAuthority hiding (roleSymbol)
 import DASHI.Core.ClassificationEdge as Classification
 import DASHI.Reasoning.AttractorAlignedBranchSelection as Selection
 import DASHI.Reasoning.RelationalBranchInterference as Interference

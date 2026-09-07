@@ -1,6 +1,6 @@
 module DASHI.Cognition.PNF.SensibLawMaboPrimaryTextParserBatchMaterialisedExact where
 
-open import DASHI.Core.Prelude
+open import DASHI.Core.Prelude hiding (sym)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
