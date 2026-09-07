@@ -22,6 +22,7 @@ open import Data.Rational.Base using (ℚ; _*_)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
@@ -49,8 +50,7 @@ twoR299CommonIsLiteralCompanion :
   R441.two * R441.fixedOutputR299CommonCross W S system output
   ≡ R439.fixedOutputWeightedCompanionCross E I S W system output
       (R440.weightedAmplitudeAggregate W S system
-        (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
-          (Audit.cutoff system) output))
+        (Output.physicalOutputFiber (Audit.cutoff system) output))
 twoR299CommonIsLiteralCompanion S L H W system velocityTransverse output =
   trans
     (sym (R441.r440CommonCrossIsTwoR299CommonCross W S system output))
