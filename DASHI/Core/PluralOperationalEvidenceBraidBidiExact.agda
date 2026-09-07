@@ -4,8 +4,8 @@ module DASHI.Core.PluralOperationalEvidenceBraidBidiExact where
 -- PLURAL OPERATIONAL EVIDENCE BRAID -- BIDI
 --
 -- Operational closure consumes multiple epistemic strands without fusing their
--- provenance, authority, permission or obligation.  Crossings require explicit
--- receipts.  Agreement does not transfer authority; disagreement does not erase
+-- provenance, authority, permission or obligation. Crossings require explicit
+-- receipts. Agreement does not transfer authority; disagreement does not erase
 -- either strand; an affected-community strand may reopen a prior institutional
 -- success assessment.
 ------------------------------------------------------------------------
@@ -93,10 +93,6 @@ communityCorrectionTranslation = Braid.braided-crossing
   "translation must preserve the source community and must not claim authority transfer"
   true refl
   true refl
-
-------------------------------------------------------------------------
--- Crossing identity regressions.
-------------------------------------------------------------------------
 
 stateIdentityRetainedAtCommunityComparison :
   Braid.leftIdentityRetained stateCommunityComparison ≡ true
@@ -200,7 +196,7 @@ data StateReportAbsorbsCommunityAuthority : Set where
 data CorroborationMakesSourcesIdentical : Set where
 data TranslationMakesInstitutionCommunityAuthor : Set where
 data DisagreementInvalidatesBothStrands : Set where
-\data MonitoringAloneClosesCommunityAuthority : Set where
+data MonitoringAloneClosesCommunityAuthority : Set where
 
 stateReportDoesNotAbsorbCommunityAuthority : StateReportAbsorbsCommunityAuthority → ⊥
 stateReportDoesNotAbsorbCommunityAuthority ()
