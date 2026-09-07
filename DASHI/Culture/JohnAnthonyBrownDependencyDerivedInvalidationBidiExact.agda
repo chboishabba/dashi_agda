@@ -11,22 +11,17 @@ import DASHI.Core.SelectiveInvalidationParetoFrontierBidiExact as Pareto
 
 ------------------------------------------------------------------------
 -- JOHN ANTHONY BROWN DEPENDENCY-DERIVED INVALIDATION
---
--- The current H1 diagnostic coordinate depends on the H1 association consumer.
--- A changed outcome-measurement artifact reaches that consumer through the
--- existing literal BrownDepends edge/path, so the recursive diagnostic
--- invalidation is graph-derived rather than hand selected.
 ------------------------------------------------------------------------
 
 data BrownAxisDependency :
-    Brown.BrownArtifact → Recursive.Axis0 → Set where
+    Brown.BrownAuditArtifact → Recursive.Axis0 → Set where
   h1OwnsDiagnostic :
     BrownAxisDependency Brown.h1AssociationClaim Recursive.diagnostic0
 
 brownInvalidationProblem : Derived.DependencyInvalidationProblem Recursive.layer0
 brownInvalidationProblem =
   Derived.dependency-invalidation-problem
-    Brown.BrownArtifact
+    Brown.BrownAuditArtifact
     Brown.BrownDepends
     BrownAxisDependency
     Brown.outcomeMeasurementEvidence
