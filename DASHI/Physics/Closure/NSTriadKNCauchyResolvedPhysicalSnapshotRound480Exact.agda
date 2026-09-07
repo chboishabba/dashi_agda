@@ -21,10 +21,11 @@ module DASHI.Physics.Closure.NSTriadKNCauchyResolvedPhysicalSnapshotRound480Exac
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; _≤_)
+open import Data.Rational.Base using (ℚ; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNFixedOutputSignedCrossAggregationRound432Exact as R432
+import DASHI.Physics.Closure.NSTriadKNGramOperatorBoundConsumerRound471Exact as R471
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramOperatorPaymentRound472Exact as R472
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact as R477
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedDirectConsumerRound478Exact as R478
@@ -54,7 +55,7 @@ physicalResolvedSnapshotPaysR432 :
     {A : ℚ} →
   PhysicalResolvedSnapshotPayment family A →
   R432.FixedOutputSignedCrossPayment
-physicalResolvedSnapshotPaysR432 payment =
+physicalResolvedSnapshotPaysR432 {family = family} payment =
   let
     S = snapshot payment
     selected = selectedResolvedBound payment
@@ -67,7 +68,7 @@ physicalResolvedSnapshotPaysR432 payment =
           (λ lower → lower ≤ R472.fibreBudget S)
           (sym (R472.signedCrossMeaning S))
           (subst
-            ((R477.resolvedQuadratic _ (R472.coeff S)) ≤_)
+            ((R477.resolvedQuadratic family (R472.coeff S)) ≤_)
             (sym (R472.fibreBudgetMeaning S))
             selected)
     }
@@ -86,7 +87,7 @@ uniformDirectBoundPaysPhysicalSnapshot :
 uniformDirectBoundPaysPhysicalSnapshot bound S =
   physical-resolved-snapshot-payment
     S
-    (R478.R477.R471.quadraticBound bound (R472.coeff S))
+    (R471.quadraticBound bound (R472.coeff S))
 
 ------------------------------------------------------------------------
 -- Trust / search boundary.
