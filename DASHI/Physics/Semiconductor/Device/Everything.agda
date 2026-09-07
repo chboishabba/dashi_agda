@@ -27,3 +27,6 @@ import DASHI.Physics.Semiconductor.Device.BishopConcreteScharfetterGummelFaceFlu
 import DASHI.Physics.Semiconductor.Device.BishopThermalNormalizedDropExact
 import DASHI.Physics.Semiconductor.Device.BishopSameObjectComputedFaceFluxExact
 import DASHI.Physics.Semiconductor.Device.BishopTwoCellContinuityAssemblyExact
+import DASHI.Physics.Semiconductor.Device.BishopSGPopulationJacobianExact
+import DASHI.Physics.Semiconductor.Device.BishopTwoCellSparsePopulationResponseExact
+import DASHI.Physics.Semiconductor.Device.BishopSameObjectResidualSecantExact
