@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.ArgumentObstructionCore as Argument
 import DASHI.Core.ArgumentLevelTransportHyperformalismExact as Transport
 import DASHI.Core.ExperimentalOutcomeOrientationBackpropagationBidiExact as Backprop
+import DASHI.Interop.InspectionRelativeNoTypedMeet as Inspect
 
 ------------------------------------------------------------------------
 -- OPPOSITE ARGUMENT != GEOMETRIC OPPOSITE
@@ -81,22 +82,22 @@ qualifiedAcceptanceResponse =
 ------------------------------------------------------------------------
 
 currentNoTypedMeetMayReopenByDeeperParse :
-  Transport.Inspect.NoTypedMeetAtInspection.revisableUnderDeeperParse
-    Transport.Inspect.canonicalNoTypedMeetAtCurrentInspection
+  Inspect.NoTypedMeetAtInspection.revisableUnderDeeperParse
+    Inspect.canonicalNoTypedMeetAtCurrentInspection
   ≡ true
 currentNoTypedMeetMayReopenByDeeperParse =
   Transport.currentNoTypedMeetMayReviseByDeeperParse
 
 currentNoTypedMeetMayReopenByBridge :
-  Transport.Inspect.NoTypedMeetAtInspection.revisableUnderBridge
-    Transport.Inspect.canonicalNoTypedMeetAtCurrentInspection
+  Inspect.NoTypedMeetAtInspection.revisableUnderBridge
+    Inspect.canonicalNoTypedMeetAtCurrentInspection
   ≡ true
 currentNoTypedMeetMayReopenByBridge =
   Transport.currentNoTypedMeetMayReviseByBridge
 
 currentNoTypedMeetMayReopenByRoleAssignment :
-  Transport.Inspect.NoTypedMeetAtInspection.revisableUnderNewRoleAssignment
-    Transport.Inspect.canonicalNoTypedMeetAtCurrentInspection
+  Inspect.NoTypedMeetAtInspection.revisableUnderNewRoleAssignment
+    Inspect.canonicalNoTypedMeetAtCurrentInspection
   ≡ true
 currentNoTypedMeetMayReopenByRoleAssignment =
   Transport.currentNoTypedMeetMayReviseByRoleAssignment
