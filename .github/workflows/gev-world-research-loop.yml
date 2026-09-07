@@ -7,6 +7,7 @@ on:
       - 'DASHI/Interop/GodsEyeViewExecutableWorldResearchLoopExact.agda'
       - 'DASHI/Interop/GodsEyeViewAcquisitionResultAssessmentBridgeExact.agda'
       - 'DASHI/Interop/GodsEyeViewP854InspectionWorldAdapterExact.agda'
+      - 'DASHI/Interop/GodsEyeViewMarketAcquisitionWorldAdapterExact.agda'
       - 'DASHI/Interop/GodsEyeViewWorldResearchFrontierActionExact.agda'
       - 'DASHI/Interop/IntrospectiveProofLoopExact.agda'
       - 'DASHI/Interop/Everything.agda'
@@ -48,6 +49,11 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Interop/GodsEyeViewP854InspectionWorldAdapterExact.agda
+
+      - name: Type-check market world adapter
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Interop/GodsEyeViewMarketAcquisitionWorldAdapterExact.agda
 
       - name: Type-check world frontier action compiler
         run: >-
