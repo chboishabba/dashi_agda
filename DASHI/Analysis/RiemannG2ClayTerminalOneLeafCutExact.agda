@@ -6,7 +6,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 import DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact as Universal
-import DASHI.Analysis.RiemannPlattTrudgianLowCompletionAdapterExact as Low
+import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
 import DASHI.Analysis.RiemannG2UniformIndependentComplementHighProducerExact as High
 import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact as Stability
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
@@ -17,36 +17,31 @@ import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
 -- All assembly below is exact and the canonical route is allowance-free.
 -- The full same-substrate RH theorem needs:
 --
---   L. one exact Platt--Trudgian low-region transport on the chosen Low part;
+--   L. one exact Platt--Trudgian verified-region transport on this analytic
+--      completed-zeta carrier;
 --   H. for every chosen High zero assumed off-line, one direct independent
 --      literal complement-margin case;
---   C. a cover saying every nontrivial zero is Low or High;
+--   C. a cover saying every nontrivial zero is in the verified region or High;
 --   S. an exact refinement of the abstract completed-zeta criticalLine
 --      predicate to a concrete stable predicate.
 --
--- L+H+C compile first to constructive double-negated RH.  S is used only in the
--- final logical conversion to positive prize-facing RH.  Thus stability is no
--- longer entangled with the harmonic-analysis producer.
---
--- H is the only remaining high-side scalar analytic family.  Its per-case heart
--- is the one-leaf inequality
---
---   cast(D_near(J)+B_far(J)) + cast(D_Gamma(g_pole)) < cast(M_cluster),
---
--- proved independently of the final cluster balance.
+-- There is no arbitrary Low predicate on the canonical path: Low is
+-- definitionally the verified region supplied by L.  L+H+C compile first to
+-- constructive double-negated RH.  S is used only in the final logical
+-- conversion to positive prize-facing RH.
 ------------------------------------------------------------------------
 
 record ClayTerminalOneLeafInput
     (analytic : Analytic.AnalyticSubstrate) : Set₁ where
   field
-    LowRegion HighRegion : Universal.AnalyticNontrivialZero analytic -> Set
-
-    lowHighCover :
-      (rho : Universal.AnalyticNontrivialZero analytic) ->
-      LowRegion rho ⊎ HighRegion rho
-
     lowTransport :
-      Low.PlattTrudgianLowCriticalityTransport analytic LowRegion
+      Low.PlattTrudgianVerifiedRegionTransport analytic
+
+    HighRegion : Universal.AnalyticNontrivialZero analytic -> Set
+
+    verifiedOrHighCover :
+      (rho : Universal.AnalyticNontrivialZero analytic) ->
+      Low.CanonicalLowRegion lowTransport rho ⊎ HighRegion rho
 
     highProducer :
       High.UniformIndependentComplementHighProducer analytic HighRegion
@@ -63,10 +58,9 @@ compiledNegativeRHInput :
   ClayTerminalOneLeafInput analytic ->
   Negative.DirectOneLeafNegativeRHInput analytic
 compiledNegativeRHInput input = record
-  { Negative.LowRegion = LowRegion input
+  { Negative.lowTransport = lowTransport input
   ; Negative.HighRegion = HighRegion input
-  ; Negative.lowHighCover = lowHighCover input
-  ; Negative.lowTransport = lowTransport input
+  ; Negative.verifiedOrHighCover = verifiedOrHighCover input
   ; Negative.highProducer = highProducer input
   ; Negative.completionReference = terminalReference input
   }
@@ -121,13 +115,21 @@ record ClayTerminalOneLeafBoundary : Set where
     uniformIndependentComplementMarginIsHighAnalyticFamilyIsTrue :
       uniformIndependentComplementMarginIsHighAnalyticFamily ≡ true
 
-    plattTrudgianLowTransportStillRequired : Bool
-    plattTrudgianLowTransportStillRequiredIsTrue :
-      plattTrudgianLowTransportStillRequired ≡ true
+    arbitraryLowPredicateOnCanonicalPath : Bool
+    arbitraryLowPredicateOnCanonicalPathIsFalse :
+      arbitraryLowPredicateOnCanonicalPath ≡ false
 
-    lowHighCoverStillRequired : Bool
-    lowHighCoverStillRequiredIsTrue :
-      lowHighCoverStillRequired ≡ true
+    separateLowSubsetVerifiedRegionProofRequired : Bool
+    separateLowSubsetVerifiedRegionProofRequiredIsFalse :
+      separateLowSubsetVerifiedRegionProofRequired ≡ false
+
+    plattTrudgianSameCarrierVerifiedRegionTheoremStillRequired : Bool
+    plattTrudgianSameCarrierVerifiedRegionTheoremStillRequiredIsTrue :
+      plattTrudgianSameCarrierVerifiedRegionTheoremStillRequired ≡ true
+
+    verifiedRegionOrHighCoverStillRequired : Bool
+    verifiedRegionOrHighCoverStillRequiredIsTrue :
+      verifiedRegionOrHighCoverStillRequired ≡ true
 
     analyticHighLowRouteCompilesDoubleNegatedRHWithoutStability : Bool
     analyticHighLowRouteCompilesDoubleNegatedRHWithoutStabilityIsTrue :
@@ -165,6 +167,8 @@ canonicalClayTerminalOneLeafBoundary =
     false refl
     false refl
     true refl
+    false refl
+    false refl
     true refl
     true refl
     true refl
@@ -174,4 +178,4 @@ canonicalClayTerminalOneLeafBoundary =
     true refl
     false refl
     false refl
-    "The prize-facing compiler is direct and allowance-free. Low verified-region transport, the Low/High cover, and the uniform high contradiction compile first to double-negated RH with no critical-line stability assumption. Only the final conversion to positive RH consumes the exact critical-predicate refinement. The high scalar work remains one uniform family of independent literal complement-margin cases. Separate finite-near/Gamma envelope APIs, payment records and consumer-assigned allowances are not canonical prerequisites. None of the substantive inputs is fabricated here, so no unconditional RH theorem is claimed."
+    "The prize-facing compiler is now normalized on both sides. High work is one uniform family of independent literal complement-margin cases. Low is definitionally the exact Platt--Trudgian verified-region predicate, so no arbitrary Low carrier or Low-subset theorem remains; only the same-carrier verified-region criticality theorem and verified-region-or-High cover are required. Those analytic/low inputs compile to double-negated RH without critical-line stability. Only the final conversion to positive RH consumes the exact critical-predicate refinement. No substantive input is fabricated here."
