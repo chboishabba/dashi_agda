@@ -6,6 +6,8 @@ import DASHI.Core.PluralEpistemicOperationalClosureExact as Operational
 import DASHI.Core.DominantChartEpistemicCompressionExact as Compression
 import DASHI.Core.AppendOnlyEvidenceResidualRevisionExact as Revision
 import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.RequiredAxisSupportSquareExact as Square
+import DASHI.Core.OperationalSystemBehaviourSemanticsExact as POSIWID
 import DASHI.Cognition.PNF.SensibLawCountryPluralEpistemicOperationalAuditExact as Audit
 import DASHI.Cognition.PNF.SensibLawCountryOperationalRevisionParaconsistentExact as Temporal
 import DASHI.Cognition.PNF.SensibLawMaboTwoOrderParaconsistentSpaceExact as Para
@@ -74,13 +76,11 @@ communityOutcomeMayReopenStateAssessment = refl
 ------------------------------------------------------------------------
 
 declaredPurposeDoesNotOverrideRepeatedEffect :
-  Operational.declaredPurposeDoesNotOverrideRepeatedEffect
-  ≡ Operational.declaredPurposeDoesNotOverrideRepeatedEffect
+  POSIWID.declaredPurposeOverridesRepeatedRealizedEffect Operational.posiwidBoundary ≡ false
 declaredPurposeDoesNotOverrideRepeatedEffect = refl
 
 correctionResponseCountsAsSystemBehaviour :
-  Operational.correctionHandlingIsPartOfOperation
-  ≡ Operational.correctionHandlingIsPartOfOperation
+  POSIWID.correctionResponseIsPartOfObservableOperation Operational.posiwidBoundary ≡ true
 correctionResponseCountsAsSystemBehaviour = refl
 
 operationalClassificationDoesNotProvePrivateIntent :
@@ -130,13 +130,11 @@ affectedCommunityResidualCanReopenOperationalSuccess = refl
 ------------------------------------------------------------------------
 
 crownExhaustivenessRemainsConflicting :
-  Para.axisState Para.crownExhaustiveSourceAxis
-  ≡ DASHI.Core.RequiredAxisSupportSquareExact.conflictingState
+  Para.axisState Para.crownExhaustiveSourceAxis ≡ Square.conflictingState
 crownExhaustivenessRemainsConflicting = refl
 
 indigenousOrderIndependenceRemainsPositive :
-  Para.axisState Para.indigenousOrderIndependenceAxis
-  ≡ DASHI.Core.RequiredAxisSupportSquareExact.positiveOnly
+  Para.axisState Para.indigenousOrderIndependenceAxis ≡ Square.positiveOnly
 indigenousOrderIndependenceRemainsPositive = refl
 
 ------------------------------------------------------------------------
