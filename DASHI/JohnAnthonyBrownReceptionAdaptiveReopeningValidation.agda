@@ -8,6 +8,7 @@ import DASHI.Core.SequentialOutcomeBackpropagationBidiExact as Revision
 import DASHI.Core.TemporalDiagnosisDependencyLineageBidiExact as Lineage
 import DASHI.Core.SelectiveInvalidationParetoFrontierBidiExact as Pareto
 import DASHI.Core.RecursiveSelectiveInvalidationParetoTruthMaintenanceBidiExact as Recursive
+import DASHI.Core.DependencyDerivedMinimalInvalidationBidiExact as Derived
 import DASHI.Foundations.Base369Ternary27AdmissibilityPathDynamicsExact as BasePath
 import DASHI.Foundations.Base369Ternary27StabiliserOperatorHolonomyExact as Operator
 import DASHI.Governance.ReceptionEvidenceSelectiveReopeningExact as Reception
@@ -17,6 +18,7 @@ import DASHI.Culture.JohnAnthonyBrownDiagnosisRepairSchedulerBidiExact as Diagno
 import DASHI.Culture.JohnAnthonyBrownTemporalDiagnosisDependencyLineageBidiExact as TemporalLineage
 import DASHI.Culture.JohnAnthonyBrownSelectiveInvalidationParetoBidiExact as Selective
 import DASHI.Culture.JohnAnthonyBrownRecursiveParetoTruthMaintenanceBidiExact as RecursiveBrown
+import DASHI.Culture.JohnAnthonyBrownDependencyDerivedInvalidationBidiExact as DerivedBrown
 
 swapReallyUnavailableBefore :
   Operator.OperatorAdmitted
@@ -132,3 +134,23 @@ recursiveGenericUnaffectedCandidateRemainsUnaffected :
   ≡ Pareto.provablyUnaffected
 recursiveGenericUnaffectedCandidateRemainsUnaffected =
   Recursive.frameClassStillUnaffectedAfterRecursiveLift
+
+------------------------------------------------------------------------
+-- Dependency-derived invalidation validation.
+------------------------------------------------------------------------
+
+johnBrownMinimalInvalidationIsDerived :
+  Derived.invalidation DerivedBrown.brownMinimalInvalidationReceipt
+  ≡ Derived.derivedExplicitInvalidation DerivedBrown.brownInvalidationProblem
+johnBrownMinimalInvalidationIsDerived = refl
+
+johnBrownDerivedAxisIsDiagnostic :
+  (item : Derived.DerivedInvalidatedAxis DerivedBrown.brownInvalidationProblem) →
+  Derived.derivedAxis item ≡ Recursive.diagnostic0
+johnBrownDerivedAxisIsDiagnostic = DerivedBrown.allBrownDerivedAxesAreDiagnostic
+
+johnBrownDerivedRecursiveUnaffectedCandidateRemainsUnaffected :
+  Recursive.candidateClass Recursive.layer1
+    (Recursive.liftCandidate DerivedBrown.brownDerivedRecursiveStep Recursive.frame0)
+  ≡ Pareto.provablyUnaffected
+johnBrownDerivedRecursiveUnaffectedCandidateRemainsUnaffected = refl
