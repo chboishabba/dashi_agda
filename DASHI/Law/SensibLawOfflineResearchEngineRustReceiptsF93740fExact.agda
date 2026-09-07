@@ -14,7 +14,7 @@ import DASHI.Law.SensibLawProofSearchIterationReceiptABIExact as ABI
 -- EXACT LOCALLY VALIDATED RUST RECEIPT BUNDLE
 --
 -- These records pin deterministic runtime outputs emitted by slr at the exact
--- validated Rust head below.  They are runtime evidence only.  They do not
+-- validated Rust head below. They are runtime evidence only. They do not
 -- become legal authority, semantic truth, publication authority, or Agda proof.
 ------------------------------------------------------------------------
 
@@ -289,7 +289,7 @@ data LocalRustValidationMeansAgdaKernelCertification : Set where
 data CandidateSatisfiedResidualMeansLegalProofClosed : Set where
 data LearnedQueryTermMeansDoctrine : Set where
 data LearnedAuthorityNeighbourhoodMeansCurrentAuthority : Set where
-\data RuntimeReceiptMeansPublicationAuthority : Set where
+data RuntimeReceiptMeansPublicationAuthority : Set where
 
 localRustValidationDoesNotMeanAgdaKernelCertification :
   LocalRustValidationMeansAgdaKernelCertification → ⊥
