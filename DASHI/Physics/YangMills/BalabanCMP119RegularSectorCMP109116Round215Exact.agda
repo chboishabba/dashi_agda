@@ -68,11 +68,10 @@ asCMP109116Continuation :
     {Density} {Background} {Fluctuation} {Action} {WilsonTerm} {SmallFieldTerm}
     {RTerm} {BoundaryTerm} {Vacuum} source →
   Continue.CMP109116LiteralEffectiveActionContinuation
-asCMP109116Continuation {source = source} realization = record
+asCMP109116Continuation {Background = Background} {source = source} realization = record
   { Continue.CMP109116LiteralEffectiveActionContinuation.Scale = Nat
   ; Continue.CMP109116LiteralEffectiveActionContinuation.Volume = Volume realization
-  ; Continue.CMP109116LiteralEffectiveActionContinuation.Background =
-      CMP119.Background _
+  ; Continue.CMP109116LiteralEffectiveActionContinuation.Background = Background
   ; Continue.CMP109116LiteralEffectiveActionContinuation.Tangent = Tangent realization
   ; Continue.CMP109116LiteralEffectiveActionContinuation.Component = Component realization
   ; Continue.CMP109116LiteralEffectiveActionContinuation.components =
