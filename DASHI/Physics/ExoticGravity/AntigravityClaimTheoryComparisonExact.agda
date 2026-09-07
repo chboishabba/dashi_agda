@@ -15,9 +15,13 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 -- CLAIM-INDEXED ATTRIBUTED THEORY COMPARISON
 --
 -- ObservationTheoryComparison already binds observation and attributed
--- predictions.  This wrapper adds the missing originating antigravity consumer:
+-- predictions.  This wrapper retains the originating antigravity consumer:
 -- the exact claim, its exact gravitational route and one shared comparison claim
 -- scope consumed by both predictions and the experimental result analysis.
+-- Current typed gravitational routes distinguish the currently enumerated
+-- gravitational claims; the explicit claim index is retained for scope,
+-- provenance and future-refinement stability rather than to repair a present
+-- typed-channel collision.
 ------------------------------------------------------------------------
 
 record AntigravityMeasurementClaimBinding
@@ -96,42 +100,43 @@ producerForClaimComparisonResidual comparisonResidualOpen =
   Search.contradictionProducer
 
 ------------------------------------------------------------------------
--- Introspective collision: same observation channel does not by itself identify
--- the consumer claim.  This finite fixture keeps the channel fixed while the
--- downstream claim differs.
+-- Introspective collision at the deliberately coarse observation-family level.
+-- The current exact typed routes are distinct; the coarse label below erases
+-- that distinction and therefore cannot determine the downstream consumer.
 ------------------------------------------------------------------------
 
-data SameChannelClaimFixture : Set where
-  freeFallClaimFixture passiveWeightClaimFixture : SameChannelClaimFixture
+data CoarseLaboratoryClaimFixture : Set where
+  freeFallClaimFixture passiveWeightClaimFixture : CoarseLaboratoryClaimFixture
 
-data CoarseChannelLabel : Set where
-  laboratoryGravityChannel : CoarseChannelLabel
+data CoarseObservationFamily : Set where
+  laboratoryGravityObservation : CoarseObservationFamily
 
 data ClaimDecision : Set where
   freeFallConsumerDecision passiveWeightConsumerDecision : ClaimDecision
 
-coarseChannelObserver : SameChannelClaimFixture → CoarseChannelLabel
-coarseChannelObserver _ = laboratoryGravityChannel
+coarseObservationFamily : CoarseLaboratoryClaimFixture → CoarseObservationFamily
+coarseObservationFamily _ = laboratoryGravityObservation
 
-fixtureClaimDecision : SameChannelClaimFixture → ClaimDecision
+fixtureClaimDecision : CoarseLaboratoryClaimFixture → ClaimDecision
 fixtureClaimDecision freeFallClaimFixture = freeFallConsumerDecision
 fixtureClaimDecision passiveWeightClaimFixture = passiveWeightConsumerDecision
 
-sameChannelCollision :
-  coarseChannelObserver freeFallClaimFixture
-    ≡ coarseChannelObserver passiveWeightClaimFixture
-sameChannelCollision = refl
+coarseObservationFamilyCollision :
+  coarseObservationFamily freeFallClaimFixture
+    ≡ coarseObservationFamily passiveWeightClaimFixture
+coarseObservationFamilyCollision = refl
 
-channelAloneDoesNotFixClaimDecision :
+coarseFamilyDoesNotFixClaimDecision :
   fixtureClaimDecision freeFallClaimFixture
     ≡ fixtureClaimDecision passiveWeightClaimFixture → ⊥
-channelAloneDoesNotFixClaimDecision ()
+coarseFamilyDoesNotFixClaimDecision ()
 
 record ClaimTheoryComparisonBoundary : Set where
   constructor claim-theory-comparison-boundary
   field
-    observationChannelAloneFixesConsumerClaim : Bool
-    exactOriginatingClaimRequired : Bool
+    coarseLaboratoryGravityLabelFixesConsumerClaim : Bool
+    currentTypedGravityRoutesSeparateEnumeratedGravityClaims : Bool
+    exactOriginatingClaimRetainedForScopeAndProvenance : Bool
     exactSharedPredictionClaimScopeRequired : Bool
     ordinaryPredictionMustBeGR : Bool
     attributedPredictionsAutomaticallyMatchMeasurement : Bool
@@ -142,4 +147,4 @@ record ClaimTheoryComparisonBoundary : Set where
 canonicalClaimTheoryComparisonBoundary : ClaimTheoryComparisonBoundary
 canonicalClaimTheoryComparisonBoundary =
   claim-theory-comparison-boundary
-    false true true true false false false true
+    false true true true true false false false true
