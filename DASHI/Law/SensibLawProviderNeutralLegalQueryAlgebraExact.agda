@@ -12,10 +12,6 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Intent
 
 ------------------------------------------------------------------------
 -- PROVIDER-NEUTRAL LEGAL QUERY ALGEBRA
---
--- Executable provider strings are lowerings of this object. They do not own
--- the research intent and lexical proximity is never upgraded to a semantic
--- relation merely because a backend returned a hit.
 ------------------------------------------------------------------------
 
 data QueryExpr : Set where
@@ -106,6 +102,7 @@ data ProviderOperation : Set where
   casesCitedTraversalOperation
   legislationCitedTraversalOperation
   entityLookupOperation
+  conceptNavigationOperation
   corpusGraphLookupOperation
   : ProviderOperation
 
@@ -148,9 +145,7 @@ orderedCommonLawDevelopmentQuery = beforeQ 15
   (phraseQ "duty of care")
 
 ------------------------------------------------------------------------
--- AustLII/SINO proximity is modelled explicitly rather than hidden inside a
--- string renderer. `near` is the provider's fixed broad proximity form;
--- `w/n` and `/n/` are unordered bounded forms; `pre/n` is ordered.
+-- AustLII/SINO proximity.
 ------------------------------------------------------------------------
 
 data SinoProximityOperator : Set where
@@ -179,6 +174,14 @@ dutyPolicyConstraint = proximityConstraint
   unorderedProximity
   "duty-policy within ten indexed words"
 
+dutyPolicyNear50Constraint : ProximityConstraint
+dutyPolicyNear50Constraint = proximityConstraint
+  (phraseQ "duty of care")
+  (phraseQ "government policy")
+  50
+  unorderedProximity
+  "duty-policy broad provider-near window"
+
 maboQueenslandConstraint : ProximityConstraint
 maboQueenslandConstraint = proximityConstraint
   (termQ "Mabo")
@@ -197,11 +200,11 @@ orderedDevelopmentConstraint = proximityConstraint
 
 sinoNearFixture : AustLIIProximityLowering
 sinoNearFixture = austLIIProximityLowering
-  dutyPolicyConstraint
+  dutyPolicyNear50Constraint
   sinoNear50
   "\"duty of care\" near \"government policy\""
   true refl
-  "provider broad-near lowering; fixed provider window retained as provider semantics"
+  "provider broad-near lowering; provider fixed window retained explicitly"
 
 sinoWithinFixture : AustLIIProximityLowering
 sinoWithinFixture = austLIIProximityLowering
@@ -228,7 +231,7 @@ sinoPreFixture = austLIIProximityLowering
   "ordered proximity lowered to SINO pre/n"
 
 ------------------------------------------------------------------------
--- Finite executable-query compiler fixtures.
+-- Finite AustLII executable-query compiler fixtures.
 ------------------------------------------------------------------------
 
 data AustLIIQueryTemplate : Set where
@@ -284,6 +287,44 @@ compiledAustLIIDutyPolicy = compileAustLII dutyPolicyTemplate
 compiledAustLIIMaboQueensland : ProviderCompiledQuery
 compiledAustLIIMaboQueensland = compileAustLII maboQueenslandTemplate
 
+------------------------------------------------------------------------
+-- Wikipedia / Wikidata navigation lowerings.
+------------------------------------------------------------------------
+
+compileWikipediaConceptLookup : String → ProviderCompiledQuery
+compileWikipediaConceptLookup concept = providerCompiledQuery
+  (termQ concept)
+  wikipediaProvider
+  conceptNavigationOperation
+  concept
+  ⊤
+  "Wikipedia supplies navigation/terminology candidates, not legal authority"
+  "concept navigation lowering"
+
+compileWikidataEntityLookup : String → ProviderCompiledQuery
+compileWikidataEntityLookup entity = providerCompiledQuery
+  (termQ entity)
+  wikidataProvider
+  entityLookupOperation
+  entity
+  ⊤
+  "Wikidata supplies revisioned identity/entity candidates, not truth or legal authority"
+  "entity-navigation lowering"
+
+compileLocalWorldGraphLookup : String → ProviderCompiledQuery
+compileLocalWorldGraphLookup target = providerCompiledQuery
+  (termQ target)
+  localWorldModelProvider
+  corpusGraphLookupOperation
+  target
+  ⊤
+  "local world graph remains provenance- and consumer-indexed"
+  "direct local graph lookup lowering"
+
+------------------------------------------------------------------------
+-- Jade authority graph traversal.
+------------------------------------------------------------------------
+
 record CitationTraversal : Set where
   constructor citationTraversal
   field
@@ -319,8 +360,10 @@ data ExecutableQueryStringDefinesSearchIntent : Set where
 data ProviderSyntaxMayChangeProofObligation : Set where
 data CitationTraversalAutomaticallyMeansFollowing : Set where
 data QueryExpansionEqualsProofExpansion : Set where
-
 data NearAndPreHaveSameDirectionSemantics : Set where
+
+data WikipediaResultAutomaticallyAuthority : Set where
+data WikidataResultAutomaticallyIdentityResolved : Set where
 
 proximityDoesNotProveSemanticRelation :
   TextualProximityAutomaticallySemanticRelation → ⊥
@@ -341,6 +384,12 @@ queryExpansionDoesNotEqualProofExpansion ()
 nearDoesNotCollapseIntoPre : NearAndPreHaveSameDirectionSemantics → ⊥
 nearDoesNotCollapseIntoPre ()
 
+wikipediaDoesNotBecomeAuthority : WikipediaResultAutomaticallyAuthority → ⊥
+wikipediaDoesNotBecomeAuthority ()
+
+wikidataDoesNotAutoResolveIdentity : WikidataResultAutomaticallyIdentityResolved → ⊥
+wikidataDoesNotAutoResolveIdentity ()
+
 record QueryAlgebraBoundary : Set where
   constructor queryAlgebraBoundary
   field
@@ -358,7 +407,10 @@ record QueryAlgebraBoundary : Set where
     orderedAndUnorderedProximityRemainDistinct : Bool
     orderedAndUnorderedProximityRemainDistinctIsTrue :
       orderedAndUnorderedProximityRemainDistinct ≡ true
+    wikipediaAndWikidataAreNavigationProducers : Bool
+    wikipediaAndWikidataAreNavigationProducersIsTrue :
+      wikipediaAndWikidataAreNavigationProducers ≡ true
 
 canonicalQueryAlgebraBoundary : QueryAlgebraBoundary
 canonicalQueryAlgebraBoundary =
-  queryAlgebraBoundary true refl false refl false refl true refl true refl
+  queryAlgebraBoundary true refl false refl false refl true refl true refl true refl
