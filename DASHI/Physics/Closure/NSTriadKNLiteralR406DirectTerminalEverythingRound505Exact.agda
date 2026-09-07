@@ -3,20 +3,28 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 ------------------------------------------------------------------------
 -- ROUND505 / FOCUSED AGGREGATE FOR THE LITERAL R406 DIRECT TERMINAL CONE
 --
--- R494-R495 retain normalization / optional integration-transport archaeology.
--- R496-R500 build the exact nonseparable off-diagonal resolvent signed cross on
--- the literal live R406 carrier. R501 is retained as an intentionally audited
--- permissive R423-shaped compiler; R502 blocks conflation with the full R439
--- square companion. R503 therefore targets the exact R415 signed-cross
--- consumer instead. R504 exposes the two independent Clay-facing analytic
--- leaves. R506 records the web-audited low-drift-band/variation firewall.
--- R507 reuses Round104 critical slices on the literal R406 carrier with exactly
--- one remainder same-object receipt, R508 sharpens proof search for that second
--- critical-production leaf, R509 binds introspection to the exact live residuals,
--- R510 attaches the physical meaning, R511 compiles actual signed boundary
--- and forcing budgets through the exact R106 whole-network normal form, and
--- R512 indexes producer admission by the exact residual so the R511 leaf-B
--- compiler cannot masquerade as payment of leaf A.
+-- R494-R505 retain the direct literal-R406 signed-cross construction and its
+-- strict full/off-diagonal firewalls.
+--
+-- R506-R508 retain the web/source audit and the first sharpened leaf-B search.
+--
+-- Two compatible introspective tranches now follow:
+--
+--   * ClayResidualIntrospection/PhysicalMeaning/SignedNetworkBudget/
+--     ResidualIndexedProducerAdmission keep the GLOBAL terminal cut honest:
+--     leaf A remains first, and the signed network normal form is admitted only
+--     for the exact leaf-B residual it can attack.
+--
+--   * IntrospectiveCriticalLeafObserver through DyadicCriticalNormEquivalence
+--     audit the INTERNAL adequacy of leaf B.  They expose missing consumer
+--     coordinates that the older two-bit observer omitted: physical realization
+--     of the critical scalars, a separate uniform initial-critical ceiling, and
+--     positive retained viscosity.  The physical-realization search then
+--     reduces to the standard cutoff-uniform dyadic H^(1/2)/H^(3/2) norm
+--     equivalence seam after finite packet/shell arithmetic is reused.
+--
+-- Neither tranche manufactures an analytic payment.  Clay promotion remains
+-- fail-closed.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.Closure.NSTriadKNR299NormalizedCompanionSameObjectRound494Exact
@@ -33,7 +41,20 @@ import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact
 import DASHI.Physics.Closure.NSTriadKNResidenceBandVariationNoGoRound506Exact
 import DASHI.Physics.Closure.NSTriadKNRound104ToLiteralR406CriticalSliceRound507Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralR406CriticalProductionProofSearchRound508Exact
+
+-- Global residual-indexed introspection tranche.
 import DASHI.Physics.Closure.NSTriadKNClayResidualIntrospectionRound509Exact
 import DASHI.Physics.Closure.NSTriadKNPhysicalMeaningSignedCancellationRound510Exact
 import DASHI.Physics.Closure.NSTriadKNSignedNetworkBudgetCompilerRound511Exact
 import DASHI.Physics.Closure.NSTriadKNResidualIndexedProducerAdmissionRound512Exact
+
+-- Strict leaf-B consumer-adequacy introspection tranche.
+import DASHI.Physics.Closure.NSTriadKNIntrospectiveCriticalLeafObserverRound509Exact
+import DASHI.Physics.Closure.NSTriadKNIntrospectiveCriticalProductionSchedulerRound510Exact
+import DASHI.Physics.Closure.NSTriadKNCommonInitialDatumCriticalCeilingNoGoRound511Exact
+import DASHI.Physics.Closure.NSTriadKNInitialCriticalRealizationToR421Round512Exact
+import DASHI.Physics.Closure.NSTriadKNR414CriticalObservableRealizationNoGoRound513Exact
+import DASHI.Physics.Closure.NSTriadKNRetainedViscosityPositivityNoGoRound514Exact
+import DASHI.Physics.Closure.NSTriadKNStrictLiteralR406CriticalLeafRound515Exact
+import DASHI.Physics.Closure.NSTriadKNCriticalRadialRealizationProofSearchRound516Exact
+import DASHI.Physics.Closure.NSTriadKNDyadicCriticalNormEquivalenceBoundaryRound517Exact
