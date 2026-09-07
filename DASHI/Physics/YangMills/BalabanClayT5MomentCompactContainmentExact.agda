@@ -5,8 +5,8 @@ module DASHI.Physics.YangMills.BalabanClayT5MomentCompactContainmentExact where
 -- TYPED MOMENT BOUND -> UNIFORM COMPACT CONTAINMENT
 --
 -- The existing ExponentialMomentProducer already owns a literal cutoff-indexed
--- polynomial-moment inequality on its selected measureSequence.  Historical T5
--- ledgers then jump to tightness through Set-valued receipts.  This module keeps
+-- polynomial-moment inequality on its selected measureSequence. Historical T5
+-- ledgers then jump to tightness through Set-valued receipts. This module keeps
 -- the moment inequality as an actual theorem and isolates only the missing
 -- coercive/compact-containment interpretation needed to obtain uniform
 -- tightness of the selected physical sequence.
@@ -31,7 +31,8 @@ MomentBoundAt :
     {RenormalizedObservable : Observable → Set} →
   T5.ExponentialMomentProducer operations measureSequence RenormalizedObservable →
   Nat → Observable → Nat → Set
-MomentBoundAt producer degree observable cutoff =
+MomentBoundAt {operations = operations} {measureSequence = measureSequence}
+  producer degree observable cutoff =
   T5.LessEqual producer
     (Gram.expectation operations (measureSequence cutoff)
       (T5.powerObservable producer degree
@@ -83,7 +84,7 @@ record MomentCompactContainmentInputs
     compactWitnessAdmissible : ∀ epsilon →
       Admissible epsilon (compactWitness epsilon)
 
-    -- This is the remaining physical geometry/coercivity statement.  Markov's
+    -- This is the remaining physical geometry/coercivity statement. Markov's
     -- inequality or its selected measure-space analogue can inhabit it once the
     -- observable is shown to dominate escape from the chosen compact set.
     momentBoundControlsCompactComplement : ∀ epsilon cutoff →
@@ -97,20 +98,21 @@ open MomentCompactContainmentInputs public
 selectedDiagonalUniformTightnessCertificate :
   ∀ {Measure Observable Scalar Epsilon Witness}
     {expectationData : T5.PhysicalExpectationProducerData
-      Measure Observable Scalar} →
-  MomentCompactContainmentInputs
-    Measure Observable Scalar Epsilon Witness expectationData →
+      Measure Observable Scalar}
+    (inputs : MomentCompactContainmentInputs
+      Measure Observable Scalar Epsilon Witness expectationData) →
   Uniform.UniformTightnessCertificate
     Measure Epsilon Witness
-    (Admissible _) (Controls _)
+    (Admissible inputs) (Controls inputs)
     (T5.diagonalMeasure expectationData)
-selectedDiagonalUniformTightnessCertificate inputs = record
+selectedDiagonalUniformTightnessCertificate
+  {expectationData = expectationData} inputs = record
   { witness = compactWitness inputs
   ; witnessAdmissible = compactWitnessAdmissible inputs
   ; controlsAll = λ epsilon cutoff →
       momentBoundControlsCompactComplement inputs epsilon cutoff
         (producerMomentBoundAt
-          (T5.moments _)
+          (T5.moments expectationData)
           (momentOrder inputs epsilon)
           (tightnessObservable inputs epsilon)
           (tightnessObservableRenormalized inputs epsilon)
@@ -120,13 +122,14 @@ selectedDiagonalUniformTightnessCertificate inputs = record
 compileSelectedPhysicalUniformTightnessInputs :
   ∀ {Measure Observable Scalar Epsilon Witness}
     {expectationData : T5.PhysicalExpectationProducerData
-      Measure Observable Scalar} →
-  MomentCompactContainmentInputs
-    Measure Observable Scalar Epsilon Witness expectationData →
+      Measure Observable Scalar}
+    (inputs : MomentCompactContainmentInputs
+      Measure Observable Scalar Epsilon Witness expectationData) →
   Uniform.SelectedPhysicalUniformTightnessInputs Measure Epsilon Witness
-compileSelectedPhysicalUniformTightnessInputs inputs = record
+compileSelectedPhysicalUniformTightnessInputs
+  {expectationData = expectationData} inputs = record
   { convergence = measureLimit inputs
-  ; sequence = T5.diagonalMeasure _
+  ; sequence = T5.diagonalMeasure expectationData
   ; Admissible = Admissible inputs
   ; Controls = Controls inputs
   ; selectedSequenceUniformlyTight =
@@ -137,7 +140,7 @@ typedMomentToUniformTightnessCompilerLevel : ProofLevel
 typedMomentToUniformTightnessCompilerLevel = machineChecked
 
 -- The moment inequality itself is inherited from the existing expectation
--- producer.  The genuinely remaining Yang--Mills input is the compact-containment
+-- producer. The genuinely remaining Yang--Mills input is the compact-containment
 -- interpretation of a selected coercive moment observable.
 physicalMomentCompactContainmentLevel : ProofLevel
 physicalMomentCompactContainmentLevel = conditional
