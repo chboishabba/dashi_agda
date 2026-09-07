@@ -7,6 +7,10 @@ import DASHI.Core.PathResidualActionRevisionExact
 import DASHI.Core.ResidualActionPolicyExact
 import DASHI.Core.ResidualActionAdaptiveLoopExact
 import DASHI.Core.ResidualActionInterventionDiscriminatorExact
+import DASHI.Core.ResidualLiveSetSalienceSchedulerBidiExact
+import DASHI.Core.ExpectedFibreReductionCostExact
+import DASHI.Core.ResidualConditionedExperimentPortfolioExact
+import DASHI.Core.ActionFibreClosureStoppingExact
 
 import DASHI.Biology.AgenticMaterialsControlCore
 import DASHI.Biology.Levin.LevinBioelectricAgencyCore
@@ -16,6 +20,8 @@ import DASHI.Biology.AgenticLevinWolframResidualCrossPollinationExact
 
 import DASHI.Governance.MHSButterBenchPhysicalAgentCrossPollinationExact
 import DASHI.Governance.AgenticAIResidualRevisionCrossPollinationExact
+import DASHI.Governance.AgenticAILiveSetDiscriminatorSchedulerExact
 
 import DASHI.Biology.Microbiology.BaldEyesalveEvidenceRevisionBidiExact
 import DASHI.Biology.Microbiology.BaldEyesalveAdaptiveResidualLoopBidiExact
+import DASHI.Biology.Microbiology.BaldEyesalveLiveSetSchedulerBidiExact
