@@ -33,6 +33,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanR108BackedPresentCutActionExact as R108Backed
 import DASHI.Physics.YangMills.BalabanA2PresentCutFallbackRound120Exact as A2
 import DASHI.Physics.YangMills.BalabanYM4WardQuarticResponseProducerAdapterExact as Producer
+import DASHI.Physics.YangMills.BalabanBC1PhysicalCompositeD1ReductionRound152Exact as R152
 
 ------------------------------------------------------------------------
 -- PREFERRED LIVE COORDINATES
@@ -104,16 +105,20 @@ rowAScalarSensitivityFromProducerLevel : ProofLevel
 rowAScalarSensitivityFromProducerLevel = A2.a2PresentCutFullSubunitLevel
 
 literalR108BackedPresentCutInputsLevel : ProofLevel
-literalR108BackedPresentCutInputsLevel = conditional
+literalR108BackedPresentCutInputsLevel =
+  R108Backed.literalR108BackedPresentCutInputsLevel
 
 literalCMP109GeneratedHistoryResponseProducerLevel : ProofLevel
-literalCMP109GeneratedHistoryResponseProducerLevel = conditional
+literalCMP109GeneratedHistoryResponseProducerLevel =
+  A2.literalA2WardResponseProducerLevel
 
 literalCMP109BetaDifferenceDecompositionLevel : ProofLevel
-literalCMP109BetaDifferenceDecompositionLevel = conditional
+literalCMP109BetaDifferenceDecompositionLevel =
+  A2.literalA2BetaDifferenceDecompositionLevel
 
 literalPhysicalCompositeD1ChainRuleLevel : ProofLevel
-literalPhysicalCompositeD1ChainRuleLevel = conditional
+literalPhysicalCompositeD1ChainRuleLevel =
+  R152.literalPhysicalCompositeD1ChainRuleLevel
 
 round212PhysicalSourceClosure : Bool
 round212PhysicalSourceClosure = false
