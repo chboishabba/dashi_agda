@@ -139,19 +139,19 @@ compileUniformCertifiedHighOffLineProducer :
   Universal.HighOffLineAnalyticCoreProducer analytic High
 compileUniformCertifiedHighOffLineProducer producer = record
   { Universal.coresForOffLineHigh =
-      lambda rho high offLine ->
+      λ rho high offLine ->
         let case0 = certifiedCaseForOffLineHigh producer rho high offLine
         in compiledTwoCores
           (CertifiedHighOffLineCase.offWitness case0)
           (CertifiedHighOffLineCase.gammaWitness case0)
   ; Universal.attachmentsForOffLineHigh =
-      lambda rho high offLine ->
+      λ rho high offLine ->
         let case0 = certifiedCaseForOffLineHigh producer rho high offLine
         in compiledTwoAttachments
           (CertifiedHighOffLineCase.offWitness case0)
           (CertifiedHighOffLineCase.gammaWitness case0)
   ; Universal.completionForOffLineHigh =
-      lambda rho high offLine ->
+      λ rho high offLine ->
         CertifiedHighOffLineCase.completion
           (certifiedCaseForOffLineHigh producer rho high offLine)
   }
