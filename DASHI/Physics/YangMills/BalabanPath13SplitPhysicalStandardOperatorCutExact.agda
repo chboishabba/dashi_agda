@@ -3,19 +3,6 @@ module DASHI.Physics.YangMills.BalabanPath13SplitPhysicalStandardOperatorCutExac
 
 ------------------------------------------------------------------------
 -- PATH13 EQ. (119): SPLIT PHYSICAL VARIATIONAL DATA FROM STANDARD OPERATOR DATA
---
--- The previous preferred owner `SelectedPath13VariationalOperatorRepresentation`
--- bundled three conceptually different coordinates:
---
---   * selected Path13 variational/radius physics;
---   * R171's source-independent standard rational-SU(2) operator representation;
---   * the same-object equality between the selected cut defect and that
---     standard operator defect.
---
--- R171 itself marks its representation as `standardImported`, so it should not
--- be counted as part of the Path13 physical background producer.  This module
--- separates those fibres and leaves only the actual crossing equality as the
--- physical/representation weld.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -30,6 +17,7 @@ import DASHI.Physics.YangMills.BalabanPath13SelectedPhysicalBackgroundTargetExac
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationalChartBridgeExact as Selected
 import DASHI.Physics.YangMills.BalabanClayGate4SU2PrincipalLogPathBoundExact as Path
 import DASHI.Physics.YangMills.BalabanClayGate4PrimaryQkFiniteKernelBudgetExact as Scale
+import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as Lie
 
 record SplitPath13PhysicalStandardRepresentation
     (CoarseField : Set) : Set₁ where
@@ -53,7 +41,7 @@ open SplitPath13PhysicalStandardRepresentation public
 selectedPhysical :
   ∀ {CoarseField} →
   SplitPath13PhysicalStandardRepresentation CoarseField →
-  _
+  Target.SelectedPhysicalBackground13Instantiation CoarseField Lie.SU2LieAlgebra
 selectedPhysical inputs =
   VariationalRadius.selected (physicalVariationalRadius inputs)
 
@@ -76,8 +64,5 @@ selectedCutOrderIsRationalOrder inputs =
 cmp98Path13SplitPhysicalStandardRepresentationLevel : ProofLevel
 cmp98Path13SplitPhysicalStandardRepresentationLevel = machineChecked
 
--- The R171 representation is source-independent standard authority.  The
--- remaining Path13-specific representation payment is only the selected-cut /
--- standard-operator same-object equality above.
 literalCMP98Path13SelectedCutStandardOperatorWeldLevel : ProofLevel
 literalCMP98Path13SelectedCutStandardOperatorWeldLevel = conditional
