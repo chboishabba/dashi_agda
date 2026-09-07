@@ -29,8 +29,6 @@ module DASHI.Physics.Closure.NSTriadKNProjectedNonlinearityZeroOutputRound436Exa
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; []; _∷_)
-import Data.Integer.Base as ℤ
-import Data.Integer.Properties as ℤP
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -50,40 +48,27 @@ import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact 
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact as R230
 import DASHI.Physics.Closure.NSTriadKNNestedInnerSwapCommutatorRound310Exact as R310
 
-sumZeroRightIsNegateLeft :
-  (left right : ℤ.ℤ) →
-  left ℤ.+ right ≡ ℤ.+ 0 →
-  right ≡ ℤ.- left
-sumZeroRightIsNegateLeft left right sumZero =
-  trans
-    (sym (ℤP.+-identityˡ right))
-    (trans
-      (cong (λ value → value ℤ.+ right)
-        (sym (ℤP.+-inverseˡ left)))
-      (trans
-        (ℤP.+-assoc (ℤ.- left) left right)
-        (trans
-          (cong ((ℤ.- left) ℤ.+_) sumZero)
-          (ℤP.+-identityʳ (ℤ.- left)))))
-
 zeroOutputRightInputIsNegateLeft :
   (tau : Physical.PhysicalTriadIncidence) →
   Physical.k tau ≡ Z3.zeroMode →
   Physical.q tau ≡ Z3.negateMode (Physical.p tau)
 zeroOutputRightInputIsNegateLeft tau outputZero =
-  Add.modeExt
-    (sumZeroRightIsNegateLeft
-      (Z3.kx (Physical.p tau))
-      (Z3.kx (Physical.q tau))
-      (cong Z3.kx (trans (Physical.resonance tau) outputZero)))
-    (sumZeroRightIsNegateLeft
-      (Z3.ky (Physical.p tau))
-      (Z3.ky (Physical.q tau))
-      (cong Z3.ky (trans (Physical.resonance tau) outputZero)))
-    (sumZeroRightIsNegateLeft
-      (Z3.kz (Physical.p tau))
-      (Z3.kz (Physical.q tau))
-      (cong Z3.kz (trans (Physical.resonance tau) outputZero)))
+  let
+    p = Physical.p tau
+    q = Physical.q tau
+    resonanceZero : Z3.addMode p q ≡ Z3.zeroMode
+    resonanceZero = trans (Physical.resonance tau) outputZero
+  in
+  trans
+    (sym (Add.addZeroLeft q))
+    (trans
+      (cong (λ left → Z3.addMode left q)
+        (sym (Add.addNegateLeft p)))
+      (trans
+        (Add.addAssociative (Z3.negateMode p) p q)
+        (trans
+          (cong (Z3.addMode (Z3.negateMode p)) resonanceZero)
+          (Add.addZeroRight (Z3.negateMode p)))))
 
 zeroOutputAdvectionScalar :
   ∀ {r} {F : C3.RealField r}
