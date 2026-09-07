@@ -20,11 +20,14 @@ import DASHI.Foundations.Base369NDimParetoChartExact
 import DASHI.Moonshine.Monster369DiscriminatorSymmetryBoundaryExact
 import DASHI.Moonshine.Monster369NDimParetoTetrationBridgeExact
 
+import DASHI.Cognition.RecursiveFibreTower
+
 import DASHI.Biology.AgenticMaterialsControlCore
 import DASHI.Biology.Levin.LevinBioelectricAgencyCore
 import DASHI.Biology.Levin.HierarchicalGoalMemory
 import DASHI.Biology.NaturalSystemsHyperfabricExact
 import DASHI.Biology.AgenticLevinWolframResidualCrossPollinationExact
+import DASHI.Biology.SelfIndexingHyperfabricTetrationExact
 import DASHI.Biology.SelfIndexedParetoHyperfabricTetrationExact
 
 import DASHI.Governance.MHSButterBenchPhysicalAgentCrossPollinationExact
