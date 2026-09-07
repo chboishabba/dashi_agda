@@ -108,6 +108,8 @@ record RelationResolutionAdmissionBoundary : Set where
     directRuntimeNeedsSecondRelationalRuntime : Bool
     consumerParityMayIgnoreFineExecutionIdentity : Bool
 
+open RelationResolutionAdmissionBoundary public
+
 canonicalRelationResolutionAdmissionBoundary : RelationResolutionAdmissionBoundary
 canonicalRelationResolutionAdmissionBoundary =
   relationResolutionAdmissionBoundary

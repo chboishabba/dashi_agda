@@ -91,14 +91,14 @@ record DeterminerResolution
 open DeterminerResolution public
 
 universalDeterminerRule : (witness : DependencyWitness) → DeterminerResolution witness universalDeterminer → String → String → Formula → CandidateSemanticFragment
-universalDeterminerRule witness resolution variable domain body = candidateSemanticFragment
-  "rulebank-det-universal" quantifierFragment (forallF variable domain body) witness
+universalDeterminerRule witness resolution varName domain body = candidateSemanticFragment
+  "rulebank-det-universal" quantifierFragment (forallF varName domain body) witness
   "resolved determiner proposes universal quantification over the nominated scope"
   (resolverReference resolution) true refl
 
 existentialDeterminerRule : (witness : DependencyWitness) → DeterminerResolution witness existentialDeterminer → String → String → Formula → CandidateSemanticFragment
-existentialDeterminerRule witness resolution variable domain body = candidateSemanticFragment
-  "rulebank-det-existential" quantifierFragment (existsF variable domain body) witness
+existentialDeterminerRule witness resolution varName domain body = candidateSemanticFragment
+  "rulebank-det-existential" quantifierFragment (existsF varName domain body) witness
   "resolved determiner proposes existential quantification over the nominated scope"
   (resolverReference resolution) true refl
 
@@ -117,12 +117,6 @@ modalQualificationRule witness admission modalReading eventName =
     (ruleVersionReference admission)
     true refl
 
-clausalComplementRule : (witness : DependencyWitness) → ShapeAdmission witness clausalComplement → String → String → CandidateSemanticFragment
-clausalComplementRule witness admission governorEvent contentEvent = candidateSemanticFragment
-  "rulebank-ccomp-content" contentClauseFragment
-  (atom "ContentClause" (Candidate.eventTerm governorEvent ∷ Candidate.eventTerm contentEvent ∷ [])) witness
-  "ccomp proposes governor/content-event structure; reporting, truth and legal status remain unresolved"
-  (ruleVersionReference admission) true refl
 
 ------------------------------------------------------------------------
 -- Domain-neutral clausal rules.
@@ -235,6 +229,8 @@ record ExecutableSemanticRuleBoundary : Set where
     clausalComplementCreatesReportingTheoremIsFalse : clausalComplementCreatesReportingTheorem ≡ false
     clausalDependencyCreatesLegalStatus : Bool
     clausalDependencyCreatesLegalStatusIsFalse : clausalDependencyCreatesLegalStatus ≡ false
+
+open ExecutableSemanticRuleBoundary public
 
 canonicalExecutableSemanticRuleBoundary : ExecutableSemanticRuleBoundary
 canonicalExecutableSemanticRuleBoundary =

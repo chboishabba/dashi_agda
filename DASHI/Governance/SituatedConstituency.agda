@@ -162,6 +162,8 @@ record AxisAwareRepresentationBoundary : Set where
     affectedConstituencyMayArticulateAxes : Bool
     axisBundleIsExhaustiveClaimed : Bool
 
+open AxisAwareRepresentationBoundary public
+
 canonicalAxisAwareRepresentationBoundary :
   AxisAwareRepresentationBoundary
 canonicalAxisAwareRepresentationBoundary =

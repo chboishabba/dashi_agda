@@ -278,4 +278,4 @@ radicalTitleDoesNotByItselfProveDawsonCondition ()
 translationDoesNotMeanIdentity : CrossOrderTranslationMeansSemanticIdentity → ⊥
 translationDoesNotMeanIdentity ()
 municipalEffectDoesNotProveLegitimateTransfer : MunicipalLegalEffectProvesLegitimateSovereigntyTransfer → ⊥
-municipalEffectDoesNotProveLegitimateSovereigntyTransfer ()
+municipalEffectDoesNotProveLegitimateTransfer ()

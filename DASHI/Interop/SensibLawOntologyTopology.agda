@@ -174,15 +174,35 @@ record Principle : Set where
 -- Faceted abstract wrong ontology.
 
 data InterestSubjectKind : Set where
-  individual child group community state environment ancestors : InterestSubjectKind
+  individual : InterestSubjectKind
+  child : InterestSubjectKind
+  group : InterestSubjectKind
+  community : InterestSubjectKind
+  state : InterestSubjectKind
+  environment : InterestSubjectKind
+  ancestors : InterestSubjectKind
 
 data InterestObjectKind : Set where
-  body mind property data reputation relationship culture territory ecosystem
-    lineage status : InterestObjectKind
+  body : InterestObjectKind
+  mind : InterestObjectKind
+  property : InterestObjectKind
+  dataInterest : InterestObjectKind
+  reputation : InterestObjectKind
+  relationship : InterestObjectKind
+  culture : InterestObjectKind
+  territory : InterestObjectKind
+  ecosystem : InterestObjectKind
+  lineage : InterestObjectKind
+  socialStatus : InterestObjectKind
 
 data InterestModality : Set where
-  integrity useAndEnjoyment control privacy honourMana development
-    nonDomination : InterestModality
+  integrity : InterestModality
+  useAndEnjoyment : InterestModality
+  control : InterestModality
+  privacy : InterestModality
+  honourMana : InterestModality
+  development : InterestModality
+  nonDomination : InterestModality
 
 record ProtectedInterestType : Set where
   constructor protectedInterest
@@ -195,7 +215,11 @@ record ProtectedInterestType : Set where
 
 
 data Culpability : Set where
-  strict negligent reckless intentional mixed : Culpability
+  strict : Culpability
+  negligent : Culpability
+  reckless : Culpability
+  intentional : Culpability
+  mixed : Culpability
 
 record WrongType : Set where
   constructor wrongTypeRecord
@@ -216,7 +240,10 @@ record WrongType : Set where
 -- One event can therefore carry several non-collapsed interpretations.
 
 data ClassificationStatus : Set where
-  suggested contested confirmed rejected : ClassificationStatus
+  suggested : ClassificationStatus
+  contested : ClassificationStatus
+  confirmed : ClassificationStatus
+  rejected : ClassificationStatus
 
 record WrongTypeInterpretation : Set where
   constructor interpretation
@@ -244,10 +271,25 @@ record HarmInstance : Set where
 -- Explicit graph topology.
 
 data EdgeKind : Set where
-  hasEvidence describedIn involves concerns frames appliesTo instantiates
-    protects harmedIn authorisedBy extractedAs evaluatedUnder respondsTo
-    functionalAnalogue broaderThan narrowerThan inspiredBy conflictsWith
-    sameAsCandidate : EdgeKind
+  hasEvidence : EdgeKind
+  describedIn : EdgeKind
+  involves : EdgeKind
+  concerns : EdgeKind
+  frames : EdgeKind
+  appliesTo : EdgeKind
+  instantiates : EdgeKind
+  protects : EdgeKind
+  harmedIn : EdgeKind
+  authorisedBy : EdgeKind
+  extractedAs : EdgeKind
+  evaluatedUnder : EdgeKind
+  respondsTo : EdgeKind
+  functionalAnalogue : EdgeKind
+  broaderThan : EdgeKind
+  narrowerThan : EdgeKind
+  inspiredBy : EdgeKind
+  conflictsWith : EdgeKind
+  sameAsCandidate : EdgeKind
 
 record OntologyEdge : Set where
   constructor edge
@@ -265,8 +307,16 @@ record OntologyEdge : Set where
 -- is not a canonical identity link until a separate decision accepts it.
 
 data FeatureKind : Set where
-  exactName fuzzyName longestName characterNGram contextTerms ontologyTags
-    articleVector categoryVector topSense multimodalAlignment : FeatureKind
+  exactName : FeatureKind
+  fuzzyName : FeatureKind
+  longestName : FeatureKind
+  characterNGram : FeatureKind
+  contextTermsFeature : FeatureKind
+  ontologyTags : FeatureKind
+  articleVector : FeatureKind
+  categoryVector : FeatureKind
+  topSense : FeatureKind
+  multimodalAlignment : FeatureKind
 
 record FeatureObservation : Set where
   constructor featureObservation

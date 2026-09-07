@@ -16,7 +16,9 @@ open import DASHI.Ontology.ContextualClaimComposition
 -- statement identity, qualifiers/context, references, and rank metadata.
 
 data StatementRank : Set where
-  preferred normal deprecated : StatementRank
+  preferred : StatementRank
+  normal : StatementRank
+  deprecated : StatementRank
 
 record StatementEnvelope (QualifierAxis : Set) : Set where
   constructor statementEnvelope
@@ -108,4 +110,4 @@ conflictingStatementsRemainUnresolved :
   qualifierState left axis ≡ supported →
   qualifierState right axis ≡ contradicted →
   stateAt (composeStatements left right) axis ≡ unresolved
-conflictingStatementsRemainUnresolved left right axis refl refl = refl
+conflictingStatementsRemainUnresolved left right axis h1 h2 rewrite h1 | h2 = refl

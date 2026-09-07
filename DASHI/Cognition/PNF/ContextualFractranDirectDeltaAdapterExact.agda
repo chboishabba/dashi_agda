@@ -56,6 +56,8 @@ record DirectContextualBoundary : Set where
     consumerParityCanIgnoreFineExecutionIdentity : Bool
     backwardRestrictionNeedsObservationCommutation : Bool
 
+open DirectContextualBoundary public
+
 canonicalDirectContextualBoundary : DirectContextualBoundary
 canonicalDirectContextualBoundary =
   directContextualBoundary false false false true true

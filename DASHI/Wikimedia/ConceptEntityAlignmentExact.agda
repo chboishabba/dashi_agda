@@ -23,24 +23,22 @@ record DashiConceptRef : Set where
 open DashiConceptRef public
 
 data AlignmentKind : Set where
-  candidateAlignment
-  directIdentifierEvidence
-  sitelinkAssociation
-  externalIdentifierMatch
-  exactMatchRelation
-  equivalentClassRelation
-  subclassRelation
-  lexicalSenseCandidate
-  reviewedSemanticAlignment
-  : AlignmentKind
+  candidateAlignment : AlignmentKind
+  directIdentifierEvidence : AlignmentKind
+  sitelinkAssociation : AlignmentKind
+  externalIdentifierMatch : AlignmentKind
+  exactMatchRelation : AlignmentKind
+  equivalentClassRelation : AlignmentKind
+  subclassRelation : AlignmentKind
+  lexicalSenseCandidate : AlignmentKind
+  reviewedSemanticAlignment : AlignmentKind
 
 data AlignmentStatus : Set where
-  candidate
-  sourceBacked
-  ambiguous
-  rejected
-  reviewedAccepted
-  : AlignmentStatus
+  candidate : AlignmentStatus
+  sourceBacked : AlignmentStatus
+  ambiguous : AlignmentStatus
+  rejected : AlignmentStatus
+  reviewedAccepted : AlignmentStatus
 
 record ConceptEntityAlignment : Set where
   constructor conceptEntityAlignment

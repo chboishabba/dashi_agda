@@ -104,7 +104,7 @@ open LiabilityMeetInput public
 compileLiabilityMeet :
   ∀ {state} → LiabilityMeetInput state → Legal.LiabilityReceipt
 compileLiabilityMeet input =
-  Legal.liabilityReceipt
+  Legal.liabilityReceiptRecord
     (Bridge.receipt (violation (prerequisites input)))
     (culpability input)
     (culpabilityMatchesWrongType input)

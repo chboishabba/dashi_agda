@@ -6,6 +6,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.Integer using (ℤ; +_; -[1+_]; _+_; _-_; _*_)
 open import Data.List.Base using (List; []; _∷_)
+open import Data.Product using (_,_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import Data.Integer.Tactic.RingSolver as IntRS
@@ -167,13 +168,21 @@ pairInterferenceWith ψ [] = + 0
 pairInterferenceWith ψ (χ ∷ χs) =
   pairInterference ψ χ + pairInterferenceWith ψ χs
 
+pairInterferenceZeroRight : (ψ : BranchWave) → pairInterference ψ zeroWave ≡ + 0
+pairInterferenceZeroRight (Wave.mkDiscreteWave xr xi) =
+  RingZ.solve 2
+    (λ xr xi →
+      ( (Κ (+ 2)) ⊗ ((xr ⊗ (Κ (+ 0))) ⊕ (xi ⊗ (Κ (+ 0))))
+      , Κ (+ 0) ))
+    refl xr xi
+
 pairInterferenceWithSum :
   (ψ : BranchWave) →
   (ψs : List BranchWave) →
   pairInterference ψ (sumWaves ψs)
   ≡
   pairInterferenceWith ψ ψs
-pairInterferenceWithSum ψ [] = refl
+pairInterferenceWithSum ψ [] = pairInterferenceZeroRight ψ
 pairInterferenceWithSum ψ (χ ∷ χs) =
   trans
     (pairInterferenceDistributesRight ψ χ (sumWaves χs))
@@ -283,27 +292,23 @@ thirdOrderResidualZero
   RingZ.solve 6
     (λ xr xi yr yi zr zi →
       let
-        nx = (xr ⊗ xr) ⊕ (xi ⊗ xi)
-        ny = (yr ⊗ yr) ⊕ (yi ⊗ yi)
-        nz = (zr ⊗ zr) ⊕ (zi ⊗ zi)
-        nxy =
-          ((xr ⊕ yr) ⊗ (xr ⊕ yr))
-          ⊕
-          ((xi ⊕ yi) ⊗ (xi ⊕ yi))
-        nxz =
-          ((xr ⊕ zr) ⊗ (xr ⊕ zr))
-          ⊕
-          ((xi ⊕ zi) ⊗ (xi ⊕ zi))
-        nyz =
-          ((yr ⊕ zr) ⊗ (yr ⊕ zr))
-          ⊕
-          ((yi ⊕ zi) ⊗ (yi ⊕ zi))
-        nxyz =
-          (((xr ⊕ yr) ⊕ zr) ⊗ ((xr ⊕ yr) ⊕ zr))
-          ⊕
-          (((xi ⊕ yi) ⊕ zi) ⊗ ((xi ⊕ yi) ⊕ zi))
+        z0 = Κ (+ 0)
+        syr = yr ⊕ z0
+        syi = yi ⊕ z0
+        szr = zr ⊕ z0
+        szi = zi ⊕ z0
+        sxyzr = xr ⊕ (yr ⊕ szr)
+        sxyzi = xi ⊕ (yi ⊕ szi)
+
+        nxyz = (sxyzr ⊗ sxyzr) ⊕ (sxyzi ⊗ sxyzi)
+        nxy  = ((xr ⊕ syr) ⊗ (xr ⊕ syr)) ⊕ ((xi ⊕ syi) ⊗ (xi ⊕ syi))
+        nxz  = ((xr ⊕ szr) ⊗ (xr ⊕ szr)) ⊕ ((xi ⊕ szi) ⊗ (xi ⊕ szi))
+        nyz  = ((yr ⊕ szr) ⊗ (yr ⊕ szr)) ⊕ ((yi ⊕ szi) ⊗ (yi ⊕ szi))
+        nx   = (xr ⊗ xr) ⊕ (xi ⊗ xi)
+        ny   = (yr ⊗ yr) ⊕ (yi ⊗ yi)
+        nz   = (zr ⊗ zr) ⊕ (zi ⊗ zi)
       in
-      ( ((((((nxyz ⊝ nxy) ⊝ nxz) ⊝ nyz) ⊕ nx) ⊕ ny) ⊕ nz)
+      ( ((((((nxyz ⊕ (⊝ nxy)) ⊕ (⊝ nxz)) ⊕ (⊝ nyz)) ⊕ nx) ⊕ ny) ⊕ nz)
       , Κ (+ 0) ))
     refl xr xi yr yi zr zi
 

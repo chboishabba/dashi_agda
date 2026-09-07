@@ -156,7 +156,7 @@ record WrongElementEvaluation : Set where
 open WrongElementEvaluation public
 
 record ViolationReceipt : Set where
-  constructor violationReceipt
+  constructor violationReceiptRecord
   field
     applicabilityReceipt : WrongTypeApplicabilityReceipt
     elementEvaluations : List WrongElementEvaluation
@@ -169,7 +169,7 @@ record ViolationReceipt : Set where
 open ViolationReceipt public
 
 record LiabilityReceipt : Set where
-  constructor liabilityReceipt
+  constructor liabilityReceiptRecord
   field
     violationReceipt : ViolationReceipt
     culpability : Ontology.Culpability
