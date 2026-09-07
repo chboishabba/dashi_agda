@@ -1,0 +1,13 @@
+module DASHI.Culture.MissingDeceasedScientificWorkCustodyEverything where
+
+-- Thin continuation aggregate over the canonical memorial-science/investigation
+-- surface.  This tranche adds custody and event-time continuity without
+-- duplicating the existing scientific-work architecture.
+
+import DASHI.Culture.MissingDeceasedScientificWorkEverything
+import DASHI.Core.ApplicationCapabilityCustodyBidiExact
+import DASHI.Culture.AmyEskridgeCorporateCustodySurfaceExact
+import DASHI.Culture.MaiwaldCrossInstitutionalCarrierContinuityExact
+import DASHI.Culture.McCaslandPostAcquisitionContinuityFrontierExact
+import DASHI.Culture.HicksEventTimeRoleDiscontinuityExact
+import DASHI.Culture.MissingDeceasedCustodyEventTimeMatrixExact
