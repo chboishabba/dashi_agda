@@ -14,6 +14,8 @@ import DASHI.Core.ActionFibreClosureStoppingExact
 import DASHI.Core.LiveSetParetoExperimentSchedulerExact
 import DASHI.Core.NDimParetoHyperfabricExact
 import DASHI.Core.ParetoSymmetryQuotientAdmissionExact
+import DASHI.Core.RecursiveParetoFrontierLiftingExact
+import DASHI.Core.ProofSearchExperimentalParetoCrossPollinationExact
 
 import DASHI.Foundations.Base369Ternary27DiscriminatorPortfolioBridgeExact
 import DASHI.Foundations.Base369NDimParetoChartExact
@@ -30,6 +32,8 @@ import DASHI.Biology.AgenticLevinWolframResidualCrossPollinationExact
 import DASHI.Biology.SelfIndexingHyperfabricTetrationExact
 import DASHI.Biology.SelfIndexedParetoHyperfabricTetrationExact
 
+import DASHI.Chemistry.AssayParetoFrontierRefinementExact
+
 import DASHI.Governance.MHSButterBenchPhysicalAgentCrossPollinationExact
 import DASHI.Governance.AgenticAIResidualRevisionCrossPollinationExact
 import DASHI.Governance.AgenticAILiveSetDiscriminatorSchedulerExact
@@ -37,3 +41,6 @@ import DASHI.Governance.AgenticAILiveSetDiscriminatorSchedulerExact
 import DASHI.Biology.Microbiology.BaldEyesalveEvidenceRevisionBidiExact
 import DASHI.Biology.Microbiology.BaldEyesalveAdaptiveResidualLoopBidiExact
 import DASHI.Biology.Microbiology.BaldEyesalveLiveSetSchedulerBidiExact
+import DASHI.Biology.Microbiology.BaldEyesalveRecursiveParetoFrontierBidiExact
+
+import DASHI.Physics.ProofSearchExperimentalParetoFrontierNSYMExact
