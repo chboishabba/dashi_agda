@@ -6,6 +6,7 @@ import DASHI.Core.AffectedDependencyClosureExact as Dependency
 import DASHI.Core.ExperimentalOutcomeOrientationBackpropagationBidiExact as Outcome
 import DASHI.Core.SequentialOutcomeBackpropagationBidiExact as Revision
 import DASHI.Core.TemporalDiagnosisDependencyLineageBidiExact as Lineage
+import DASHI.Core.SelectiveInvalidationParetoFrontierBidiExact as Pareto
 import DASHI.Foundations.Base369Ternary27AdmissibilityPathDynamicsExact as BasePath
 import DASHI.Foundations.Base369Ternary27StabiliserOperatorHolonomyExact as Operator
 import DASHI.Governance.ReceptionEvidenceSelectiveReopeningExact as Reception
@@ -13,6 +14,7 @@ import DASHI.Culture.JohnAnthonyBrownReceptionEvidenceReopeningBridgeExact as Br
 import DASHI.Culture.JohnAnthonyBrownPaperSectionHypothesisManifestExact as Manifest
 import DASHI.Culture.JohnAnthonyBrownDiagnosisRepairSchedulerBidiExact as Diagnosis
 import DASHI.Culture.JohnAnthonyBrownTemporalDiagnosisDependencyLineageBidiExact as TemporalLineage
+import DASHI.Culture.JohnAnthonyBrownSelectiveInvalidationParetoBidiExact as Selective
 
 ------------------------------------------------------------------------
 -- Base-path admissibility dynamics.
@@ -87,7 +89,7 @@ wholePaperDoesNotAutoInvalidate : Brown.OneChangedSourceInvalidatesWholePaper �
 wholePaperDoesNotAutoInvalidate = Brown.oneChangedSourceDoesNotInvalidateWholePaper
 
 staleClaimDoesNotAutoRefute : Brown.StaleBrownClaimIsRefuted → ⊥
-staleClaimDoesNotAutoRefute = Brown.staleBrownClaimIsReopenableNotRefuted
+staleClaimDoesNotAutoRefute = Brown.staleClaimIsReopenableNotRefuted
 
 ------------------------------------------------------------------------
 -- Diagnosis scheduler + temporal dependency-lineage return.
@@ -105,3 +107,23 @@ h1ObservationReactivationMayUseDifferentUpstreamMeasurement :
   Lineage.LocalizedReactivation Brown.BrownDepends Outcome.observationConflict
 h1ObservationReactivationMayUseDifferentUpstreamMeasurement =
   TemporalLineage.localizedH1ObservationReactivation
+
+------------------------------------------------------------------------
+-- Selective invalidation / Pareto validation.
+------------------------------------------------------------------------
+
+currentH1OutcomePathIsMustRecompute :
+  Pareto.class Selective.h1OutcomeMeasurementCertificate ≡ Pareto.mustRecompute
+currentH1OutcomePathIsMustRecompute = refl
+
+historicalExposurePathIsRetained :
+  Pareto.class Selective.h1ExposureMeasurementCertificate ≡ Pareto.provablyUnaffected
+historicalExposurePathIsRetained = refl
+
+unrelatedH5PathIsRetained :
+  Pareto.class Selective.h5ConfoundingCertificate ≡ Pareto.provablyUnaffected
+unrelatedH5PathIsRetained = refl
+
+policyAuthorityIsBlockedFromEpistemicPromotion :
+  Pareto.class Selective.rightsPolicyAuthority ≡ Pareto.authorityBlocked
+policyAuthorityIsBlockedFromEpistemicPromotion = refl
