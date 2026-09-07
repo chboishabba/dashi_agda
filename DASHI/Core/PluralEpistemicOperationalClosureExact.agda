@@ -11,7 +11,7 @@ module DASHI.Core.PluralEpistemicOperationalClosureExact where
 --   correction response is itself part of system operation.
 --
 -- Source-specific Two-Eyed Seeing, POSIWID, Indigenous knowledge, legal and
--- remedy applications remain attributed in their own owners.  The records and
+-- remedy applications remain attributed in their own owners. The records and
 -- finite theorem shapes here are DASHI constructions.
 ------------------------------------------------------------------------
 
@@ -21,10 +21,6 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.OperationalSystemBehaviourSemanticsExact as POSIWID
 import DASHI.Culture.KimmererTwoEyedSeeingInterpretationBoundaryExact as TwoEyed
-
-------------------------------------------------------------------------
--- A plural operational system preserves distinct evidence/authority strands.
-------------------------------------------------------------------------
 
 record PluralOperationalSystem
     (State Declared Behaviour Effect Correction StateObservation
@@ -40,10 +36,6 @@ record PluralOperationalSystem
     communityOutcome : State → CommunityOutcome
 
 open PluralOperationalSystem public
-
-------------------------------------------------------------------------
--- Closure coordinates are typed separately.  No single report pays all of them.
-------------------------------------------------------------------------
 
 data OperationalClosureCoordinate : Set where
   declaredCommitmentCoordinate
@@ -79,10 +71,6 @@ record FullOperationalClosure (snapshot : OperationalClosureSnapshot) : Set wher
     monitoringPaid : stateFor snapshot independentMonitoringCoordinate ≡ coordinatePaid
     correctionPaid : stateFor snapshot correctionResponseCoordinate ≡ coordinatePaid
     recurrencePreventionPaid : stateFor snapshot preventionOfRecurrenceCoordinate ≡ coordinatePaid
-
-------------------------------------------------------------------------
--- Two-Eyed / plural-knowledge closure does not fuse evidence histories.
-------------------------------------------------------------------------
 
 data EvidenceStrand : Set where
   institutionalSelfReportStrand
@@ -122,11 +110,6 @@ canonicalPluralEvidenceAssessment = plural-evidence-assessment
   true refl
   true refl
 
-------------------------------------------------------------------------
--- Operational description: what the system repeatedly does is not recoverable
--- from its declaration alone.
-------------------------------------------------------------------------
-
 posiwidBoundary : POSIWID.OperationalDescriptionBoundary
 posiwidBoundary = POSIWID.canonicalOperationalDescriptionBoundary
 
@@ -146,10 +129,6 @@ operationalDescriptionDoesNotProveLegitimacy :
   POSIWID.operationalDescriptionProvesLegitimacy posiwidBoundary ≡ false
 operationalDescriptionDoesNotProveLegitimacy = refl
 
-------------------------------------------------------------------------
--- Two-Eyed Seeing boundary: coordination does not fuse provenance/history.
-------------------------------------------------------------------------
-
 twoEyedBoundary : TwoEyed.KimmererTwoEyedSeeingBoundary
 twoEyedBoundary = TwoEyed.canonicalKimmererTwoEyedSeeingBoundary
 
@@ -161,44 +140,20 @@ coordinatedUseDoesNotRequireFusion :
   TwoEyed.coordinatedUseRequiresEpistemicFusion twoEyedBoundary ≡ false
 coordinatedUseDoesNotRequireFusion = refl
 
-------------------------------------------------------------------------
--- Finite witness: the same declaration/report can coexist with different
--- realised community outcomes and different correction responses.
-------------------------------------------------------------------------
-
 data DemoState : Set where
   reportSameOutcomeUnrepaired
   reportSameOutcomeRepaired
   : DemoState
 
-data DemoDeclaration : Set where
-  sameBenevolentDeclaration : DemoDeclaration
-
+data DemoDeclaration : Set where sameBenevolentDeclaration : DemoDeclaration
 data DemoBehaviour : Set where
-  activityWithoutAuthorityShift
-  authorityBearingCorrectionBehaviour
-  : DemoBehaviour
-
-data DemoEffect : Set where
-  materialResidualPersists
-  materialResidualReduced
-  : DemoEffect
-
-data DemoCorrection : Set where
-  feedbackRecordedOnly
-  feedbackChangesOperation
-  : DemoCorrection
-
-data DemoStateObservation : Set where
-  sameImplementationReport : DemoStateObservation
-
-data DemoCommunityObservation : Set where
-  sameCommunityIssueReported : DemoCommunityObservation
-
+  activityWithoutAuthorityShift authorityBearingCorrectionBehaviour : DemoBehaviour
+data DemoEffect : Set where materialResidualPersists materialResidualReduced : DemoEffect
+data DemoCorrection : Set where feedbackRecordedOnly feedbackChangesOperation : DemoCorrection
+data DemoStateObservation : Set where sameImplementationReport : DemoStateObservation
+data DemoCommunityObservation : Set where sameCommunityIssueReported : DemoCommunityObservation
 data DemoCommunityOutcome : Set where
-  communityOutcomeUnchanged
-  communityOutcomeImproved
-  : DemoCommunityOutcome
+  communityOutcomeUnchanged communityOutcomeImproved : DemoCommunityOutcome
 
 demoDeclared : DemoState → DemoDeclaration
 demoDeclared _ = sameBenevolentDeclaration
@@ -281,10 +236,6 @@ declarationCannotRecoverCorrectionResponse =
       reportSameOutcomeUnrepaired reportSameOutcomeRepaired
       sameDeclarationsCollide correctionResponsesDiffer)
 
-------------------------------------------------------------------------
--- Classification of operational relation, not private motive.
-------------------------------------------------------------------------
-
 data OperationalRelationClass : Set where
   declaredOnly
   activityWithoutRealisedClosure
@@ -309,10 +260,6 @@ record OperationalRelationReceipt : Set where
 
 open OperationalRelationReceipt public
 
-------------------------------------------------------------------------
--- BIDI: first open operational coordinate routes to a producer.
-------------------------------------------------------------------------
-
 data OperationalProducer : Set where
   realisedOutcomeProducer
   communityAuthorityProducer
@@ -330,17 +277,13 @@ producerFor independentMonitoringCoordinate = independentMonitoringProducer
 producerFor correctionResponseCoordinate = correctionLoopProducer
 producerFor preventionOfRecurrenceCoordinate = recurrencePreventionProducer
 
-------------------------------------------------------------------------
--- No-collapse laws.
-------------------------------------------------------------------------
-
 data DeclarationEqualsRealisedJustice : Set where
 data InstitutionalReportEqualsCommunityOutcome : Set where
 data ConsultationEqualsCommunityAuthority : Set where
 data SharedObservationTransfersEpistemicAuthority : Set where
 data MonitoringWithoutCorrectionClosesSystem : Set where
 data DoctrinalCorrectionEqualsMaterialTransformation : Set where
-\data OperationalClassificationProvesPrivateIntent : Set where
+data OperationalClassificationProvesPrivateIntent : Set where
 
 declarationDoesNotEqualRealisedJustice : DeclarationEqualsRealisedJustice → ⊥
 declarationDoesNotEqualRealisedJustice ()
