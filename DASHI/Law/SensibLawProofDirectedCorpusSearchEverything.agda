@@ -18,12 +18,11 @@ import DASHI.Law.SensibLawPrecedentGeometryStatisticsExact as Geometry
 import DASHI.Law.SensibLawProofSearchExpansionBidiExact as Expansion
 import DASHI.Law.SensibLawBidirectionalWorldLawProofSearchExact as Bidi
 import DASHI.Law.SensibLawWaterproofArgumentGapSearchExact as Waterproof
+import DASHI.Law.SensibLawTextWitnessTransmissionProvenanceExact as Witness
 import DASHI.Law.SensibLawMaboPabaiExecutableProofSearchExact as Fixture
 
 ------------------------------------------------------------------------
 -- PROOF-DIRECTED CORPUS NAVIGATION CAPSTONE
---
--- Canonical order:
 --
 -- consumer/question
 --   -> proof cutset / smallest live gap
@@ -33,7 +32,7 @@ import DASHI.Law.SensibLawMaboPabaiExecutableProofSearchExact as Fixture
 --   -> provider-neutral query algebra
 --   -> provider lowering or citation traversal
 --   -> acquisition
---   -> same parser / PNF re-entry
+--   -> same parser / PNF re-entry with witness lineage retained
 --   -> proposition/authority/treatment assessment
 --   -> proof payment / frontier delta
 --   -> Pareto continuation or saturation
@@ -58,6 +57,9 @@ record ProofDirectedCorpusSearchContract : Set where
     citationAcquisitionReentersPNF : Bool
     citationAcquisitionReentersPNFIsTrue : citationAcquisitionReentersPNF ≡ true
 
+    transmissionWitnessLineageRetained : Bool
+    transmissionWitnessLineageRetainedIsTrue : transmissionWitnessLineageRetained ≡ true
+
     retrievalRequiresProofAssessment : Bool
     retrievalRequiresProofAssessmentIsTrue : retrievalRequiresProofAssessment ≡ true
 
@@ -80,6 +82,7 @@ record ProofDirectedCorpusSearchContract : Set where
 
 canonicalProofDirectedCorpusSearchContract : ProofDirectedCorpusSearchContract
 canonicalProofDirectedCorpusSearchContract = proofDirectedCorpusSearchContract
+  true refl
   true refl
   true refl
   true refl
@@ -138,6 +141,9 @@ selectedBidirectionalBoundary = Bidi.canonicalBidirectionalSearchBoundary
 selectedWaterproofBoundary : Waterproof.WaterproofArgumentBoundary
 selectedWaterproofBoundary = Waterproof.canonicalWaterproofArgumentBoundary
 
+selectedWitnessBoundary : Witness.TextWitnessBoundary
+selectedWitnessBoundary = Witness.canonicalTextWitnessBoundary
+
 selectedMaboPabaiBoundary : Fixture.MaboPabaiSearchBoundary
 selectedMaboPabaiBoundary = Fixture.canonicalMaboPabaiSearchBoundary
 
@@ -152,8 +158,8 @@ data SearchResultEqualsProofPayment : Set where
 data WorldModelCompletenessRequiredBeforeUse : Set where
 data MaboTopologyAutomaticallyTransfersToPabaiDoctrine : Set where
 data StatisticalSeparatorAutomaticallyLegalRule : Set where
-
 data MoreCasesAutomaticallyMakeArgumentWaterproof : Set where
+data RepeatedPublicationAutomaticallyIndependentTruth : Set where
 
 searchResultDoesNotEqualTruth : SearchResultEqualsTruth → ⊥
 searchResultDoesNotEqualTruth ()
@@ -178,3 +184,7 @@ statisticalSeparatorDoesNotBecomeRule ()
 
 moreCasesDoNotAutomaticallyWaterproofArgument : MoreCasesAutomaticallyMakeArgumentWaterproof → ⊥
 moreCasesDoNotAutomaticallyWaterproofArgument ()
+
+repeatedPublicationDoesNotCreateIndependentTruth :
+  RepeatedPublicationAutomaticallyIndependentTruth → ⊥
+repeatedPublicationDoesNotCreateIndependentTruth ()
