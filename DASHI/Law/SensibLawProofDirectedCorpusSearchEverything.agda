@@ -19,6 +19,10 @@ import DASHI.Law.SensibLawProofSearchExpansionBidiExact as Expansion
 import DASHI.Law.SensibLawBidirectionalWorldLawProofSearchExact as Bidi
 import DASHI.Law.SensibLawWaterproofArgumentGapSearchExact as Waterproof
 import DASHI.Law.SensibLawTextWitnessTransmissionProvenanceExact as Witness
+import DASHI.Law.SensibLawLegalFollowProofSearchBridgeExact as LegalFollow
+import DASHI.Law.SensibLawHistoricalLegalResearchOperatorExact as Historical
+import DASHI.Law.SensibLawProofGapExecutableSearchCompilerExact as Compiler
+import DASHI.Law.SensibLawIterativeProofSearchStateMachineExact as Iterative
 import DASHI.Law.SensibLawMaboPabaiExecutableProofSearchExact as Fixture
 
 ------------------------------------------------------------------------
@@ -31,11 +35,11 @@ import DASHI.Law.SensibLawMaboPabaiExecutableProofSearchExact as Fixture
 --   -> support/defeater/comparator hypothesis family
 --   -> provider-neutral query algebra
 --   -> provider lowering or citation traversal
---   -> acquisition
+--   -> bounded legal-follow / corpus acquisition
 --   -> same parser / PNF re-entry with witness lineage retained
 --   -> proposition/authority/treatment assessment
 --   -> proof payment / frontier delta
---   -> Pareto continuation or saturation
+--   -> iterative Pareto continuation or saturation
 --   -> memoised world-model extension
 ------------------------------------------------------------------------
 
@@ -60,6 +64,19 @@ record ProofDirectedCorpusSearchContract : Set where
     transmissionWitnessLineageRetained : Bool
     transmissionWitnessLineageRetainedIsTrue : transmissionWitnessLineageRetained ≡ true
 
+    legalFollowConstraintsSurviveCompilation : Bool
+    legalFollowConstraintsSurviveCompilationIsTrue :
+      legalFollowConstraintsSurviveCompilation ≡ true
+
+    historicalSparseResearchAvailable : Bool
+    historicalSparseResearchAvailableIsTrue : historicalSparseResearchAvailable ≡ true
+
+    gapCompilesEndToEnd : Bool
+    gapCompilesEndToEndIsTrue : gapCompilesEndToEnd ≡ true
+
+    iterativeFrontierSearchOwned : Bool
+    iterativeFrontierSearchOwnedIsTrue : iterativeFrontierSearchOwned ≡ true
+
     retrievalRequiresProofAssessment : Bool
     retrievalRequiresProofAssessmentIsTrue : retrievalRequiresProofAssessment ≡ true
 
@@ -82,6 +99,10 @@ record ProofDirectedCorpusSearchContract : Set where
 
 canonicalProofDirectedCorpusSearchContract : ProofDirectedCorpusSearchContract
 canonicalProofDirectedCorpusSearchContract = proofDirectedCorpusSearchContract
+  true refl
+  true refl
+  true refl
+  true refl
   true refl
   true refl
   true refl
@@ -144,6 +165,18 @@ selectedWaterproofBoundary = Waterproof.canonicalWaterproofArgumentBoundary
 selectedWitnessBoundary : Witness.TextWitnessBoundary
 selectedWitnessBoundary = Witness.canonicalTextWitnessBoundary
 
+selectedLegalFollowBoundary : LegalFollow.LegalFollowProofSearchBoundary
+selectedLegalFollowBoundary = LegalFollow.canonicalLegalFollowProofSearchBoundary
+
+selectedHistoricalBoundary : Historical.HistoricalResearchBoundary
+selectedHistoricalBoundary = Historical.canonicalHistoricalResearchBoundary
+
+selectedCompilerBoundary : Compiler.EndToEndSearchCompilerBoundary
+selectedCompilerBoundary = Compiler.canonicalEndToEndSearchCompilerBoundary
+
+selectedIterativeBoundary : Iterative.IterativeProofSearchBoundary
+selectedIterativeBoundary = Iterative.canonicalIterativeProofSearchBoundary
+
 selectedMaboPabaiBoundary : Fixture.MaboPabaiSearchBoundary
 selectedMaboPabaiBoundary = Fixture.canonicalMaboPabaiSearchBoundary
 
@@ -160,6 +193,10 @@ data MaboTopologyAutomaticallyTransfersToPabaiDoctrine : Set where
 data StatisticalSeparatorAutomaticallyLegalRule : Set where
 data MoreCasesAutomaticallyMakeArgumentWaterproof : Set where
 data RepeatedPublicationAutomaticallyIndependentTruth : Set where
+
+data HistoricalSparseSearchEqualsFinalWorldModel : Set where
+
+data ExecutableQueryCompilerMayBypassAssessment : Set where
 
 searchResultDoesNotEqualTruth : SearchResultEqualsTruth → ⊥
 searchResultDoesNotEqualTruth ()
@@ -188,3 +225,11 @@ moreCasesDoNotAutomaticallyWaterproofArgument ()
 repeatedPublicationDoesNotCreateIndependentTruth :
   RepeatedPublicationAutomaticallyIndependentTruth → ⊥
 repeatedPublicationDoesNotCreateIndependentTruth ()
+
+historicalSparseSearchDoesNotEqualFinalWorld :
+  HistoricalSparseSearchEqualsFinalWorldModel → ⊥
+historicalSparseSearchDoesNotEqualFinalWorld ()
+
+queryCompilerDoesNotBypassAssessment :
+  ExecutableQueryCompilerMayBypassAssessment → ⊥
+queryCompilerDoesNotBypassAssessment ()
