@@ -137,10 +137,13 @@ import DASHI.Physics.YangMills.BalabanClayT5MomentCompactContainmentExact
 -- compactness of the selected observable's sublevel witnesses remain physical.
 import DASHI.Physics.YangMills.BalabanClayT5CoerciveMomentMarkovContainmentExact
 
--- Before finite-volume coercivity can feed the diagonal sequence, the diagonal
--- measure itself must be typed equal to the selected physical finite-volume
--- measure. Expectation transport is then pure congruence.
+-- Historical compatibility weld for arbitrary expectation producers.
 import DASHI.Physics.YangMills.BalabanClayT5DiagonalFiniteVolumeSameObjectExact
+
+-- Preferred expectation producer defines the diagonal sequence literally as the
+-- selected finite-volume family, making that same-object weld and expectation
+-- transport definitional (`refl`) on the shortest Clay route.
+import DASHI.Physics.YangMills.BalabanClayT5PreferredDiagonalExpectationProducerExact
 
 -- Current terminal schedulers after Eq. (119), Kato-M7 and T5 minimization.
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound191Exact
@@ -152,6 +155,7 @@ import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound196Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound197Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound198Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound199Exact
+import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound200Exact
 
 import DASHI.Physics.YangMills.BalabanPath13Eq119SourceRouteProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119BishopBridgeProvenanceExact
