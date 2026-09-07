@@ -1,0 +1,97 @@
+name: fourfold-retreat-poststructuralism
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'DASHI/Culture/RockhillFosterFourfoldRetreatSourceBoundaryExact.agda'
+      - 'DASHI/Culture/PoststructuralismFourfoldRetreatCrossPollinationExact.agda'
+      - 'DASHI/Culture/FoucaultFourfoldRetreatPrimarySourceBoundaryExact.agda'
+      - 'DASHI/Culture/DerridaFourfoldRetreatPrimarySourceBoundaryExact.agda'
+      - 'DASHI/Culture/FoucaultDerridaFourfoldRetreatAxisCrossPollinationExact.agda'
+      - 'DASHI/Culture/FourfoldRetreatIndigenousPluralAuthorityCrossPollinationExact.agda'
+      - 'DASHI/Culture/DialecticPluralismRepresentationSourceAtlasExact.agda'
+      - 'DASHI/Culture/DialecticPluralismRepresentationFourfoldCrossPollinationExact.agda'
+      - 'DASHI/Culture/Everything.agda'
+      - '.github/workflows/fourfold-retreat-poststructuralism.yml'
+
+concurrency:
+  group: fourfold-retreat-poststructuralism-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-kernel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Agda and standard library
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+
+      - name: Reject trust escapes in fourfold-retreat tranche
+        run: |
+          sources=(
+            DASHI/Culture/RockhillFosterFourfoldRetreatSourceBoundaryExact.agda
+            DASHI/Culture/PoststructuralismFourfoldRetreatCrossPollinationExact.agda
+            DASHI/Culture/FoucaultFourfoldRetreatPrimarySourceBoundaryExact.agda
+            DASHI/Culture/DerridaFourfoldRetreatPrimarySourceBoundaryExact.agda
+            DASHI/Culture/FoucaultDerridaFourfoldRetreatAxisCrossPollinationExact.agda
+            DASHI/Culture/FourfoldRetreatIndigenousPluralAuthorityCrossPollinationExact.agda
+            DASHI/Culture/DialecticPluralismRepresentationSourceAtlasExact.agda
+            DASHI/Culture/DialecticPluralismRepresentationFourfoldCrossPollinationExact.agda
+          )
+          for source in "${sources[@]}"; do
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+              echo "forbidden trust escape in $source" >&2
+              exit 1
+            fi
+          done
+
+      - name: Kernel-check Rockhill-Foster source boundary
+        run: |
+          agda --version
+          agda -i . -l standard-library \
+            DASHI/Culture/RockhillFosterFourfoldRetreatSourceBoundaryExact.agda
+
+      - name: Kernel-check poststructuralism generic cross-pollination
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Culture/PoststructuralismFourfoldRetreatCrossPollinationExact.agda
+
+      - name: Kernel-check Foucault primary-source lane
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Culture/FoucaultFourfoldRetreatPrimarySourceBoundaryExact.agda
+
+      - name: Kernel-check Derrida primary-source lane
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Culture/DerridaFourfoldRetreatPrimarySourceBoundaryExact.agda
+
+      - name: Kernel-check named-thinker axis cross-pollination
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Culture/FoucaultDerridaFourfoldRetreatAxisCrossPollinationExact.agda
+
+      - name: Kernel-check Indigenous plural-authority cross-pollination
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Culture/FourfoldRetreatIndigenousPluralAuthorityCrossPollinationExact.agda
+
+      - name: Kernel-check dialectic pluralism representation sources
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Culture/DialecticPluralismRepresentationSourceAtlasExact.agda
+
+      - name: Kernel-check dialectic pluralism representation cross-pollination
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Culture/DialecticPluralismRepresentationFourfoldCrossPollinationExact.agda
+
+      - name: Kernel-check Culture aggregate
+        run: |
+          agda -i . -l standard-library DASHI/Culture/Everything.agda
