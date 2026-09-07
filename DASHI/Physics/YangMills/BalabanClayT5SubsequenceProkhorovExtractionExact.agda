@@ -16,6 +16,7 @@ module DASHI.Physics.YangMills.BalabanClayT5SubsequenceProkhorovExtractionExact 
 -- extraction.  No unrelated measure family may satisfy the premise.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
