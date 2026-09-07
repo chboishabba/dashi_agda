@@ -10,7 +10,9 @@ module DASHI.Physics.YangMills.BalabanClayT5CoerciveMomentMarkovContainmentExact
 -- physical geometry needed by the generic Markov/sublevel argument.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as Limit
@@ -52,6 +54,14 @@ open MarkovCompactContainmentAuthority public
 
 ------------------------------------------------------------------------
 -- Exact physical same-object/coercivity bridge.
+--
+-- Two observable values are explicit:
+--   * `momentObservable`: the literal Observable consumed by the selected
+--     diagonal-measure moment theorem;
+--   * `physicalCoerciveObservable`: the observable independently justified by
+--     the physical gauge-field coercivity theorem.
+--
+-- Their identification is an actual equality, not a predicate or Set receipt.
 ------------------------------------------------------------------------
 
 record PhysicalCoerciveMomentObservableBridge
@@ -64,33 +74,57 @@ record PhysicalCoerciveMomentObservableBridge
   field
     measureLimit : Limit.SequentialLimit Measure
 
-    coerciveObservable : Epsilon → Observable
+    momentObservable : Epsilon → Observable
+    physicalCoerciveObservable : Epsilon → Observable
     coerciveMomentOrder : Epsilon → Nat
 
-    coerciveObservableRenormalized : ∀ epsilon →
+    momentObservableRenormalized : ∀ epsilon →
       T5.RenormalizedObservable
         (T5.thermodynamic expectationData)
-        (coerciveObservable epsilon)
+        (momentObservable epsilon)
 
-    coerciveObservableNonnegative : ∀ epsilon →
-      NonnegativeObservable authority (coerciveObservable epsilon)
+    momentObservableNonnegative : ∀ epsilon →
+      NonnegativeObservable authority (momentObservable epsilon)
 
-    -- This is the exact same-object theorem missing from the historical reuse
-    -- surface: the observable integrated against diagonalMeasure is the physical
-    -- gauge-field coercive observable, not merely a similarly named finite form.
-    gaugeFieldCoerciveObservableSameObject : ∀ epsilon →
-      CoerciveForSelectedTopology authority (coerciveObservable epsilon)
+    physicalCoerciveObservableCoercive : ∀ epsilon →
+      CoerciveForSelectedTopology authority
+        (physicalCoerciveObservable epsilon)
 
-    -- The chosen sublevel witness is compact/admissible in the selected measure
-    -- topology. This is the physical topology half of compact containment.
+    -- Literal same-object theorem. This is the firewall that prevents a
+    -- finite-carrier or merely similarly named coercive quantity from paying
+    -- the moment observable requirement.
+    momentObservableIsPhysicalCoerciveObservable : ∀ epsilon →
+      momentObservable epsilon ≡ physicalCoerciveObservable epsilon
+
+    -- The selected moment observable's sublevel witness is compact/admissible
+    -- in the selected measure topology.
     coerciveSublevelCompactInSelectedTopology : ∀ epsilon →
       Admissible authority epsilon
         (sublevelWitness authority
-          (coerciveObservable epsilon)
+          (momentObservable epsilon)
           (coerciveMomentOrder epsilon)
           epsilon)
 
 open PhysicalCoerciveMomentObservableBridge public
+
+momentObservableCoercive :
+  ∀ {Measure Observable Scalar Epsilon Witness}
+    {expectationData :
+      T5.PhysicalExpectationProducerData Measure Observable Scalar}
+    {authority :
+      MarkovCompactContainmentAuthority
+        Measure Observable Scalar Epsilon Witness}
+    (bridge :
+      PhysicalCoerciveMomentObservableBridge
+        Measure Observable Scalar Epsilon Witness expectationData authority)
+    epsilon →
+  CoerciveForSelectedTopology authority (momentObservable bridge epsilon)
+momentObservableCoercive {authority = authority} bridge epsilon =
+  subst
+    (CoerciveForSelectedTopology authority)
+    (Relation.Binary.PropositionalEquality.sym
+      (momentObservableIsPhysicalCoerciveObservable bridge epsilon))
+    (physicalCoerciveObservableCoercive bridge epsilon)
 
 compileMomentCompactContainmentInputs :
   ∀ {Measure Observable Scalar Epsilon Witness}
@@ -107,24 +141,24 @@ compileMomentCompactContainmentInputs {authority = authority} bridge = record
   { measureLimit = measureLimit bridge
   ; Admissible = Admissible authority
   ; Controls = Controls authority
-  ; tightnessObservable = coerciveObservable bridge
+  ; tightnessObservable = momentObservable bridge
   ; momentOrder = coerciveMomentOrder bridge
   ; compactWitness = λ epsilon →
       sublevelWitness authority
-        (coerciveObservable bridge epsilon)
+        (momentObservable bridge epsilon)
         (coerciveMomentOrder bridge epsilon)
         epsilon
-  ; tightnessObservableRenormalized = coerciveObservableRenormalized bridge
+  ; tightnessObservableRenormalized = momentObservableRenormalized bridge
   ; compactWitnessAdmissible =
       coerciveSublevelCompactInSelectedTopology bridge
   ; momentBoundControlsCompactComplement = λ epsilon cutoff bound →
       markovMomentBoundControlsSublevelComplement authority
         (T5.moments _)
-        (coerciveObservable bridge epsilon)
+        (momentObservable bridge epsilon)
         (coerciveMomentOrder bridge epsilon)
         epsilon cutoff
-        (coerciveObservableNonnegative bridge epsilon)
-        (gaugeFieldCoerciveObservableSameObject bridge epsilon)
+        (momentObservableNonnegative bridge epsilon)
+        (momentObservableCoercive bridge epsilon)
         (coerciveSublevelCompactInSelectedTopology bridge epsilon)
         bound
   }
@@ -132,11 +166,17 @@ compileMomentCompactContainmentInputs {authority = authority} bridge = record
 coerciveMomentMarkovContainmentCompilerLevel : ProofLevel
 coerciveMomentMarkovContainmentCompilerLevel = machineChecked
 
+coerciveObservableEqualityTransportLevel : ProofLevel
+coerciveObservableEqualityTransportLevel = machineChecked
+
 markovCompactContainmentAuthorityLevel : ProofLevel
 markovCompactContainmentAuthorityLevel = standardImported
 
 physicalCoerciveMomentObservableSameObjectLevel : ProofLevel
 physicalCoerciveMomentObservableSameObjectLevel = conditional
+
+physicalCoerciveObservableCoercivityLevel : ProofLevel
+physicalCoerciveObservableCoercivityLevel = conditional
 
 physicalCoerciveSublevelCompactnessLevel : ProofLevel
 physicalCoerciveSublevelCompactnessLevel = conditional
