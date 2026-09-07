@@ -7,20 +7,12 @@ open import Agda.Builtin.List using (List; []; _∷_)
 
 import DASHI.Wikimedia.IdentifierExact as Id
 import DASHI.Wikimedia.SourceProvenanceExact as Source
-import DASHI.Wikimedia.NativeReferenceSemanticsExact as Ref
 import DASHI.Wikimedia.SensibLawSourceUnitReviewHandoffExact as Handoff
 import DASHI.Wikimedia.SensibLawNatClimateReviewHandoffExact as Climate
 import DASHI.Wikimedia.SLRWikimediaHandoffABIExact as SLR
 
 ------------------------------------------------------------------------
 -- CONCRETE REVISION-LOCKED NAT SOURCE-UNIT / REVIEW / SLR FIXTURE
---
--- Source:
--- SensibLaw/tests/fixtures/wikidata/
---   wiki_revision_nat_wdu_sandbox_p5991_p14143_20260401.json
---
--- This reproduces the source-unit identity, revision, URL and bounded anchors.
--- The source text below is the exact pinned fixture text inspected 7 Sep 2026.
 ------------------------------------------------------------------------
 
 natSandboxQid : Id.ItemId
@@ -39,7 +31,7 @@ natSourceReceipt =
 natRevision : Handoff.SourceRevision
 natRevision =
   Handoff.source-revision
-    "provided_snapshot_2026-04-01"
+    (Handoff.textualRevisionId "provided_snapshot_2026-04-01")
     "2026-04-01T00:00:00+10:00"
     Handoff.wikiRevision
 
@@ -47,8 +39,8 @@ natOrigin : Handoff.SourceOrigin
 natOrigin =
   Handoff.source-origin
     Handoff.wikiSource
-    "https://www.wikidata.org/wiki/User:Nat_(WDU)/Sandbox/Fossil_fuel_industries/Migrate_from_carbon_footprint_to_GHG_emissions"
-    "User:Nat (WDU)/Sandbox/Fossil fuel industries/Migrate from carbon footprint to GHG emissions"
+    (Handoff.presentText "https://www.wikidata.org/wiki/User:Nat_(WDU)/Sandbox/Fossil_fuel_industries/Migrate_from_carbon_footprint_to_GHG_emissions")
+    (Handoff.presentText "User:Nat (WDU)/Sandbox/Fossil fuel industries/Migrate from carbon footprint to GHG emissions")
 
 natContent : Handoff.SourceContent
 natContent =
@@ -58,11 +50,11 @@ natContent =
 
 natAnchors : List Handoff.SourceAnchor
 natAnchors =
-  Handoff.source-anchor "goal" 0 257 "migration_goal"
-  ∷ Handoff.source-anchor "cohort_business_family" 408 585 "cohort_business_family"
-  ∷ Handoff.source-anchor "qualifier_family" 588 847 "expected_qualifier_family"
-  ∷ Handoff.source-anchor "reference_family" 1047 1289 "expected_reference_family"
-  ∷ Handoff.source-anchor "query_anchor" 1655 1737 "query_anchor"
+  Handoff.source-anchor "goal" 0 257 (Handoff.presentText "migration_goal")
+  ∷ Handoff.source-anchor "cohort_business_family" 408 585 (Handoff.presentText "cohort_business_family")
+  ∷ Handoff.source-anchor "qualifier_family" 588 847 (Handoff.presentText "expected_qualifier_family")
+  ∷ Handoff.source-anchor "reference_family" 1047 1289 (Handoff.presentText "expected_reference_family")
+  ∷ Handoff.source-anchor "query_anchor" 1655 1737 (Handoff.presentText "query_anchor")
   ∷ []
 
 natSourceUnit : Handoff.SensibLawSourceUnit
@@ -75,6 +67,7 @@ natSourceUnit =
     natOrigin
     natContent
     natAnchors
+    "metadata: migration P5991 -> P14143; proposal_scope=migration_cohort_and_constraint_surface"
     natSourceReceipt
     "SensibLaw sl.source_unit.v1 fixture; revision-locked source input only"
 
