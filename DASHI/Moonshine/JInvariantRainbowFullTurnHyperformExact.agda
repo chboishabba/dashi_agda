@@ -18,6 +18,7 @@ module DASHI.Moonshine.JInvariantRainbowFullTurnHyperformExact where
 --     separate semantic carriers even though they share the same sector count.
 ------------------------------------------------------------------------
 
+open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _*_)
