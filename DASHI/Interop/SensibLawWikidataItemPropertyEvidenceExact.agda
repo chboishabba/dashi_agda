@@ -7,18 +7,13 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Interop.AristotleRankQualifierPropertyEngineBoundary as Aristotle
 import DASHI.Interop.ZelphBoundedGraphCoverageExact as Zelph
+import DASHI.Interop.SensibLawWikidataRequiredPropertyCoverageExact as Required
 
 ------------------------------------------------------------------------
--- Runtime parity owner for SensibLaw src/policy/item_property_evidence.py.
+-- Runtime parity owner for SensibLaw item_property_evidence v0_2.
 --
--- The observed object is hierarchical:
---   item -> property family -> statement -> value/rank/qualifiers/references.
--- Peer coordinates are conditioned projections of that carrier, not detached
--- labels such as "company" or "ghg_protocol".
---
--- Crucially, rank truthiness is property-family relative.  A partial P-family
--- cannot decide whether a normal statement is truthy because an unseen
--- preferred sibling could suppress it.
+-- item -> required/observed property family -> statement -> native bundle.
+-- Peer coordinates are conditioned projections of that carrier.
 ------------------------------------------------------------------------
 
 data StatementRank : Set where
@@ -38,6 +33,7 @@ data RelationOrigin : Set where
 
 data ConditionedFeatureKind : Set where
   propertyFamilyCoverageFeature
+  propertyPresenceFeature
   statementRankFeature
   statementVisibilityFeature
   qualifierConstraintFeature
@@ -80,8 +76,11 @@ open StatementEvidence public
 record PropertyInventory : Set where
   constructor property-inventory
   field
+    requiredPropertyReferences : List String
     observedPropertyReferences : List String
     truthyPropertyReferences : List String
+    observedAbsentPropertyReferences : List String
+    unresolvedRequiredPropertyReferences : List String
     coverageByProperty : List PropertyFamilyCoverage
     statementCountReference : String
 open PropertyInventory public
@@ -145,36 +144,48 @@ normalNonTruthyCoordinate : RankVisibilityCoordinate
 normalNonTruthyCoordinate = rank-visibility-coordinate normalRank nonTruthyVisibility
 
 visibilityForFamilyCoverage :
-  Zelph.QueryCoverageStatus →
-  StatementVisibility →
-  StatementVisibility
+  Zelph.QueryCoverageStatus → StatementVisibility → StatementVisibility
 visibilityForFamilyCoverage Zelph.queryCoverageComplete visibility = visibility
-visibilityForFamilyCoverage Zelph.queryCoverageIncomplete visibility = unresolvedVisibility
-visibilityForFamilyCoverage Zelph.queryCoverageInvalid visibility = unresolvedVisibility
+visibilityForFamilyCoverage Zelph.queryCoverageIncomplete _ = unresolvedVisibility
+visibilityForFamilyCoverage Zelph.queryCoverageUninspected _ = unresolvedVisibility
+visibilityForFamilyCoverage Zelph.queryCoverageInvalid _ = unresolvedVisibility
 
 incompleteFamilyCoverageMakesVisibilityUnresolved :
   (visibility : StatementVisibility) →
   visibilityForFamilyCoverage Zelph.queryCoverageIncomplete visibility ≡ unresolvedVisibility
 incompleteFamilyCoverageMakesVisibilityUnresolved visibility = refl
 
-invalidFamilyCoverageMakesVisibilityUnresolved :
+uninspectedFamilyCoverageMakesVisibilityUnresolved :
   (visibility : StatementVisibility) →
-  visibilityForFamilyCoverage Zelph.queryCoverageInvalid visibility ≡ unresolvedVisibility
-invalidFamilyCoverageMakesVisibilityUnresolved visibility = refl
+  visibilityForFamilyCoverage Zelph.queryCoverageUninspected visibility ≡ unresolvedVisibility
+uninspectedFamilyCoverageMakesVisibilityUnresolved visibility = refl
+
+propertyPresenceOwner :
+  Zelph.QueryCoverageStatus → Bool → Required.PropertyPresence
+propertyPresenceOwner = Required.presenceFromCoverageAndRows
+
+observedMissingRequiredPropertyIsAbsence :
+  propertyPresenceOwner Zelph.queryCoverageComplete false ≡ Required.propertyAbsent
+observedMissingRequiredPropertyIsAbsence = refl
+
+uninspectedMissingRequiredPropertyIsUnresolved :
+  propertyPresenceOwner Zelph.queryCoverageUninspected false ≡ Required.propertyPresenceUnresolved
+uninspectedMissingRequiredPropertyIsUnresolved = refl
 
 ------------------------------------------------------------------------
--- Condition references retain the actual Wikidata location of each feature.
--- Examples at runtime include:
---   property_family_coverage | P5991
---   statement_rank            | P5991|<GUID>
---   statement_visibility      | P5991|<GUID>
---   property_scope            | P459:qualifier
---   property_relation         | P31->Q783794
+-- Condition references retain exact Wikidata location:
+--   property_family_coverage | P14143
+--   property_presence        | P14143
+--   statement_rank           | P5991|<GUID>
+--   statement_visibility     | P5991|<GUID>
+--   property_scope           | P459:qualifier
+--   property_relation        | P31->Q783794
 ------------------------------------------------------------------------
 
 data SameSerializedValueImpliesSameEvidenceSurface : Set where
 data SameRankForcesSameVisibility : Set where
 data IncompleteFamilyCoverageCanAssertTruthyVisibility : Set where
+data UninspectedFamilyCoverageCanAssertPropertyAbsence : Set where
 data ItemPropertyPresenceImpliesLocalRole : Set where
 data DerivedRelationIsDirectAssertion : Set where
 data TruthyStatementImpliesMigrationSafe : Set where
@@ -191,6 +202,10 @@ sameRankDoesNotForceSameVisibility ()
 incompleteFamilyCoverageCannotAssertTruthyVisibility :
   IncompleteFamilyCoverageCanAssertTruthyVisibility → ⊥
 incompleteFamilyCoverageCannotAssertTruthyVisibility ()
+
+uninspectedFamilyCannotAssertPropertyAbsence :
+  UninspectedFamilyCoverageCanAssertPropertyAbsence → ⊥
+uninspectedFamilyCannotAssertPropertyAbsence ()
 
 itemPropertyPresenceDoesNotCreateLocalRole :
   ItemPropertyPresenceImpliesLocalRole → ⊥
@@ -212,10 +227,13 @@ record ItemPropertyEvidenceBoundary : Set where
   constructor item-property-evidence-boundary
   field
     itemOwnsObservedPropertyInventory : Bool
+    requiredPropertyFamiliesAreFirstClass : Bool
     propertyFamilyCoverageIsFirstClass : Bool
+    observedAbsenceRequiresFamilyCoverage : Bool
     statementsRemainPropertyAndGuidConditioned : Bool
     rankAndVisibilityRemainSeparate : Bool
     incompleteFamilyLeavesVisibilityUnresolved : Bool
+    uninspectedFamilyLeavesVisibilityUnresolved : Bool
     qualifierAndScopeReceiptsRemainSeparate : Bool
     assertedAndDerivedRelationsRemainSeparate : Bool
     equalSerializedValuesCollapseEvidence : Bool
@@ -226,8 +244,8 @@ record ItemPropertyEvidenceBoundary : Set where
 canonicalItemPropertyEvidenceBoundary : ItemPropertyEvidenceBoundary
 canonicalItemPropertyEvidenceBoundary =
   item-property-evidence-boundary
-    true true true true true true true false false false false
+    true true true true true true true true true true false false false false
 
 itemPropertyEvidenceStatement : String
 itemPropertyEvidenceStatement =
-  "SensibLaw peer evidence is projected from the revision-bound Wikidata item itself. Property inventory and per-property-family coverage are first-class; statement GUIDs, values, ranks, computed truthy visibility, qualifiers, property-slot constraints, references, and asserted/derived relation origin remain distinct conditioned coordinates. Incomplete property-family coverage leaves rank visibility unresolved, because an unseen preferred sibling may exist. Equal-looking climate rows therefore need not collapse. The carrier is diagnostic only and creates no local role, migration safety, promotion, or edit authority."
+  "SensibLaw peer evidence is projected from the revision-bound Wikidata item itself. Required property families, per-family coverage, observed presence/absence, statement GUIDs, values, ranks, computed truthy visibility, qualifiers, property-slot constraints, references, and asserted/derived relation origin remain distinct conditioned coordinates. Only complete Q/P coverage can establish meaningful property absence or rank visibility; incomplete or uninspected Q/P coverage remains unresolved. The carrier is diagnostic only and creates no local role, migration safety, promotion, or edit authority."
