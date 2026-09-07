@@ -9,19 +9,26 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 -- Residual-indexed review shortlist after the anchored Cullen observer.
 --
--- Observed Rust v0.3 at fc5aeec...:
+-- Observed anchored queue at fc5aeec...:
 --   202 body paragraphs
 --   163 material footnotes
 --   163 body -> footnote anchors
 --   190 citation candidates
 --   189 anchored footnote candidates
 --   network = 0
+--
+-- Observed shortlist at c8d4b37...:
+--   190 input candidates -> 23 shortlist candidates
+--   Robinson [2018] AC 736 = 6 shortlisted occurrences
+--   Modbury (2000) 205 CLR 254 = 3 shortlisted occurrences
+--   Mallonland (2024) 98 ALJR 956 = 0 shortlisted occurrences
+--   network = 0
 --   authority = experimental_candidate_only
 --
--- The next Rust layer does not infer legal treatment.  The application supplies
--- criteria indexed by the exact live residual/proposition, and the runtime merely
--- selects unreviewed citation occurrences whose preserved body-anchor text
--- matches those criteria.  This is a review-work reduction, not proof payment.
+-- A later Rust-only refactor removes PR13 Python orchestration/validation from
+-- this lane.  That current source state is represented separately and is not
+-- promoted to local-validation status merely because the earlier shortlist run
+-- was validated.
 ------------------------------------------------------------------------
 
 rustRepository : String
@@ -33,9 +40,11 @@ rustBranch = "agent/governed-online-r6-v2"
 observedAnchoredQueueHead : String
 observedAnchoredQueueHead = "fc5aeec3607fb908259d2d890f48435987c87320"
 
-shortlistSourceHeadBeforeLocalValidation : String
-shortlistSourceHeadBeforeLocalValidation =
-  "cd3697c807f07ceb484215d19c90594f96655a35"
+validatedShortlistHead : String
+validatedShortlistHead = "c8d4b37034a62a9baaba09929dcee67922a31a8b"
+
+currentRustOnlyRefactorSourceHead : String
+currentRustOnlyRefactorSourceHead = "b88e3f6c4f9a649899152a66257e9b635508e6f4"
 
 anchoredQueueSchema : String
 anchoredQueueSchema = "sl.judgment_citation_review_queue.v0_3"
@@ -54,6 +63,9 @@ robinsonCitation = "[2018] AC 736"
 
 modburyCitation : String
 modburyCitation = "(2000) 205 CLR 254"
+
+mallonlandCitation : String
+mallonlandCitation = "(2024) 98 ALJR 956"
 
 record CullenResidualCitationReviewShortlistBoundary : Set where
   constructor cullenResidualCitationReviewShortlistBoundary
@@ -97,7 +109,39 @@ record CullenResidualCitationReviewShortlistBoundary : Set where
       shortlistNetworkFreeByConstruction ≡ true
 
     shortlistRuntimeObserved : Bool
-    shortlistRuntimeObservedIsFalse : shortlistRuntimeObserved ≡ false
+    shortlistRuntimeObservedIsTrue : shortlistRuntimeObserved ≡ true
+
+    shortlistInputCandidateCount : Nat
+    shortlistInputCandidateCountIs190 : shortlistInputCandidateCount ≡ 190
+
+    shortlistCandidateCount : Nat
+    shortlistCandidateCountIs23 : shortlistCandidateCount ≡ 23
+
+    robinsonShortlistedOccurrenceCount : Nat
+    robinsonShortlistedOccurrenceCountIs6 :
+      robinsonShortlistedOccurrenceCount ≡ 6
+
+    modburyShortlistedOccurrenceCount : Nat
+    modburyShortlistedOccurrenceCountIs3 :
+      modburyShortlistedOccurrenceCount ≡ 3
+
+    mallonlandShortlistedOccurrenceCount : Nat
+    mallonlandShortlistedOccurrenceCountIsZero :
+      mallonlandShortlistedOccurrenceCount ≡ 0
+
+    shortlistObservedNetworkRequests : Nat
+    shortlistObservedNetworkRequestsIsZero : shortlistObservedNetworkRequests ≡ 0
+
+    shortlistObservedCandidateOnly : Bool
+    shortlistObservedCandidateOnlyIsTrue : shortlistObservedCandidateOnly ≡ true
+
+    currentRustOnlyRefactorSourceWritten : Bool
+    currentRustOnlyRefactorSourceWrittenIsTrue :
+      currentRustOnlyRefactorSourceWritten ≡ true
+
+    currentRustOnlyRefactorLocallyValidated : Bool
+    currentRustOnlyRefactorLocallyValidatedIsFalse :
+      currentRustOnlyRefactorLocallyValidated ≡ false
 
     shortlistAutomaticallySemanticPayment : Bool
     shortlistAutomaticallySemanticPaymentIsFalse :
@@ -131,6 +175,15 @@ canonicalCullenResidualCitationReviewShortlistBoundary =
     true refl
     true refl
     true refl
+    true refl
+    190 refl
+    23 refl
+    6 refl
+    3 refl
+    0 refl
+    0 refl
+    true refl
+    true refl
     false refl
     false refl
     false refl
@@ -145,6 +198,7 @@ data ShortlistMembershipAutomaticallySupport : Set where
 data AnchorPhraseAutomaticallyTreatment : Set where
 data ReviewPriorityAutomaticallyAuthority : Set where
 data FewerCandidatesAutomaticallyClosure : Set where
+data RustOnlyRefactorAutomaticallyValidated : Set where
 
 shortlistMembershipDoesNotBecomeSupport :
   ShortlistMembershipAutomaticallySupport → ⊥
@@ -158,3 +212,7 @@ reviewPriorityDoesNotBecomeAuthority ()
 
 fewerCandidatesDoNotCloseConsumer : FewerCandidatesAutomaticallyClosure → ⊥
 fewerCandidatesDoNotCloseConsumer ()
+
+rustOnlyRefactorDoesNotManufactureValidation :
+  RustOnlyRefactorAutomaticallyValidated → ⊥
+rustOnlyRefactorDoesNotManufactureValidation ()
