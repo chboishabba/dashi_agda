@@ -11,15 +11,15 @@ import DASHI.Wikimedia.SensibLawBoundaryArtifactMorphismExact as Morph
 ------------------------------------------------------------------------
 -- SLR / RUST CONSUMER ABI
 --
--- Current slr/main README contract inspected 7 Sep 2026:
---   * sensiblaw-core owns revision-scoped spans and promotion receipt types;
---   * sensiblaw-stream consumes parser observations and emits residuals;
---   * parser sidecars never own canonical semantic state;
---   * Rust owns deterministic compilation/publication boundaries.
+-- Current slr/main README contract inspected 7 Sep 2026 at the then-current
+-- main repository state: sensiblaw-core owns revision-scoped spans/promotion
+-- receipt types; sensiblaw-stream consumes parser observations/residuals;
+-- parser sidecars do not own canonical semantic state; Rust owns deterministic
+-- compilation/publication boundaries.
 ------------------------------------------------------------------------
 
 slrMainReference : String
-slrMainReference = "chboishabba/slr main README inspected 2026-09-07"
+slrMainReference = "chboishabba/slr main README inspected 2026-09-07; repository main source surface"
 
 handoffToSlr : Handoff.SensibLawReviewPacket → Handoff.RuntimeHandoffReceipt
 handoffToSlr packet =
@@ -97,8 +97,6 @@ observationHandoffDoesNotCreatePromotion :
   slrOwnsSemanticPromotion (observationToSlr receipt) ≡ false
 observationHandoffDoesNotCreatePromotion receipt = refl
 
--- Rust implementation of the carrier is not evidence that the carrier's
--- source propositions are true, admissible, or migration-safe.
 data RustABIImplementsSourceAuthority : Set where
 data RustABIImplementsMigrationDecision : Set where
 data ParserSpanCreatesPromotionReceipt : Set where
@@ -106,12 +104,9 @@ data ObservationConsumerCreatesCanonicalTruth : Set where
 
 rustAbiDoesNotImplementSourceAuthority : RustABIImplementsSourceAuthority → ⊥
 rustAbiDoesNotImplementSourceAuthority ()
-
 rustAbiDoesNotChooseMigrationByItself : RustABIImplementsMigrationDecision → ⊥
 rustAbiDoesNotChooseMigrationByItself ()
-
 parserSpanDoesNotCreatePromotionReceipt : ParserSpanCreatesPromotionReceipt → ⊥
 parserSpanDoesNotCreatePromotionReceipt ()
-
 observationConsumerDoesNotCreateCanonicalTruth : ObservationConsumerCreatesCanonicalTruth → ⊥
 observationConsumerDoesNotCreateCanonicalTruth ()
