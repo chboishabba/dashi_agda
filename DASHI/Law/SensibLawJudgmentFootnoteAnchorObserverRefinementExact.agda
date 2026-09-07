@@ -9,14 +9,14 @@ open import Data.Empty using (⊥)
 -- Second introspective refinement of the retained Cullen judgment observer.
 --
 -- v0.2 has now been observed to recover 190 citation candidates from body plus
--- 163 material footnotes.  That observer still leaves a consumer-relevant
+-- 163 material footnotes. That observer still leaves a consumer-relevant
 -- collision: a citation in footnote N does not itself say which body proposition
--- invoked footnote N.  The exact missing coordinate is the WordprocessingML
+-- invoked footnote N. The exact missing coordinate is the WordprocessingML
 -- body paragraph -> w:footnoteReference/@w:id relation.
 --
 -- Rust v0.3 preserves that relation and propagates it to each footnote citation
--- candidate as anchor paragraph locator(s) and anchor text(s).  This is source
--- provenance only.  It cannot itself establish residual relevance, treatment,
+-- candidate as anchor paragraph locator(s) and anchor text(s). This is source
+-- provenance only. It cannot itself establish residual relevance, treatment,
 -- proposition correspondence, authority or payment.
 ------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ lastObservedV02Head : String
 lastObservedV02Head = "00bb9957ace2d3c2ea7d6104ad5cab100dd29369"
 
 v03SourceHeadBeforeLocalValidation : String
-v03SourceHeadBeforeLocalValidation = "4f211918a1c5e24fbf287322f6f1787e5d859bc5"
+v03SourceHeadBeforeLocalValidation = "fc5aeec3607fb908259d2d890f48435987c87320"
 
 v02Schema : String
 v02Schema = "sl.judgment_citation_review_queue.v0_2"
