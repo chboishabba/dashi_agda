@@ -40,7 +40,7 @@ record StatementPredicateBridge (statement : WD.Statement) : Set where
   constructor statement-predicate-bridge
   field
     alignment : PropertyPredicateAlignment
-    propertyMatches : WD.property statement ≡ property alignment
+    propertyMatches : WD.statementProperty statement ≡ property alignment
     bridgeReference : String
 open StatementPredicateBridge public
 
@@ -54,7 +54,7 @@ statementPredicateNamePreserved :
   {statement : WD.Statement} →
   (bridge : StatementPredicateBridge statement) →
   PNF.predicateName (statementPredicateAtom bridge)
-  ≡ Id.rawPropertyId (WD.property statement)
+  ≡ Id.rawPropertyId (WD.statementProperty statement)
 statementPredicateNamePreserved {statement} (statement-predicate-bridge alignment refl ref) = refl
 
 -- Property metadata and PNF inferential force remain orthogonal.
