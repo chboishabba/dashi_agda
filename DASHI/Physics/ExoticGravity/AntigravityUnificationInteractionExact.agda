@@ -3,6 +3,7 @@ module DASHI.Physics.ExoticGravity.AntigravityUnificationInteractionExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
+open import Agda.Primitive using (Setω)
 
 import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact as Anti
 import DASHI.Papers.CoreTheoremInterfaces as Core
@@ -148,5 +149,5 @@ canonicalResearchPriorities =
 -- control, quantum-gravity, or universal-theory obligations.
 ------------------------------------------------------------------------
 
-physicalLawBoundaryTypeAvailable : Set₁
+physicalLawBoundaryTypeAvailable : Setω
 physicalLawBoundaryTypeAvailable = Laws.PhysicalLawRecoveryBoundary
