@@ -5,17 +5,9 @@ module DASHI.Physics.YangMills.BalabanCMP98Path13CurrentPreferredSourceFrontierE
 -- PATH13 EQ. (119): CURRENT PREFERRED SOURCE FRONTIER
 --
 -- This status supersedes the older recovered-source archaeology without
--- deleting it.  It tracks the actual preferred compiler after:
---   * the R148/R153 source-sign correction;
---   * T3 right-Jacobian x-pollination;
---   * pruning the whole Bishop bridge to the R208 ring-embedding boundary;
---   * splitting Path13 physical variational/radius data from R171 standard
---     operator-representation authority;
---   * specializing the Bałaban variational theorem directly to the literal
---     Path13 fine-field carrier, making selected-background and selected-link
---     same-object receipts definitional;
---   * deriving the historical variational-radius record from that specialization
---     plus three exact normalization facts.
+-- deleting it.  The preferred route now also aligns the selected/cut defect
+-- algebra definitionally with the R171 operator kernel.  Therefore the old
+-- pointwise selected-cut/operator weld is not a separate source payment.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -27,6 +19,8 @@ import DASHI.Physics.YangMills.BalabanPath13SplitPhysicalStandardOperatorCutExac
 import DASHI.Physics.YangMills.BalabanPath13SelectedVariationalRadiusExact as VariationalRadius
 import DASHI.Physics.YangMills.BalabanPath13VariationalSpecializationExact as Specialization
 import DASHI.Physics.YangMills.BalabanPath13VariationalRadiusFromSpecializationExact as SpecializedRadius
+import DASHI.Physics.YangMills.BalabanR171OperatorKernelGroupDefectAdapterExact as R171Adapter
+import DASHI.Physics.YangMills.BalabanPath13R171AlignedVariationalRouteExact as R171Aligned
 import DASHI.Physics.YangMills.BalabanCMP98SU2OperatorDefectFromPhysicalRadiusRound171Exact as R171
 import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as R208
 import DASHI.Physics.YangMills.BalabanCMP98Path13SplitT3SelectedSemanticsExact as T3
@@ -39,25 +33,32 @@ record CurrentPreferredEq119FrontierStatus : Set where
     t3PrintedOperatorAdapterClosed : Bool
     path13VariationalSpecializationCompilerClosed : Bool
     path13VariationalRadiusFromSpecializationCompilerClosed : Bool
+    r171KernelGroupDefectAdapterClosed : Bool
+    r171AlignedVariationalRouteClosed : Bool
+    selectedCutOperatorPointwiseWeldPruned : Bool
     splitPhysicalStandardCompilerClosed : Bool
     splitPrincipalImageCompilerClosed : Bool
     finalSplitT3Eq119CompilerClosed : Bool
 
-    -- Current Path13 source/normalization inputs.
+    -- Current preferred Path13 source input.  This nests the standard R171
+    -- representation and source/physical normalization facts in one same-object
+    -- carrier; the pointwise cut/operator weld is compiler output.
+    r171AlignedPath13PhysicalSourceConstructed : Bool
+
+    -- Historical compatibility coordinates retained for older consumers.
     path13VariationalSourceSpecializationConstructed : Bool
     path13VariationalRadiusNormalizationConstructed : Bool
-
-    -- Historical compatibility summary: this larger object is compiler output
-    -- once the two refined inputs above are supplied.
     selectedPath13VariationalRadiusConstructed : Bool
-
     selectedCutOperatorSameObjectWeldConstructed : Bool
+
+    -- Still-live independent inputs after R171 alignment.
     selectedT3NormalizationConstructed : Bool
     selectedCutThresholdConstructed : Bool
-
-    -- Source-independent/foundational authorities still requiring inhabitants.
-    standardR171OperatorRepresentationConstructed : Bool
     rationalRealRingEmbeddingConstructed : Bool
+
+    -- R171 authority remains inside the aligned physical source, rather than as
+    -- an independent pointwise-defect weld.
+    standardR171OperatorRepresentationConstructed : Bool
 
     physicalEq119Closed : Bool
 open CurrentPreferredEq119FrontierStatus public
@@ -65,11 +66,11 @@ open CurrentPreferredEq119FrontierStatus public
 canonicalCurrentPreferredEq119FrontierStatus : CurrentPreferredEq119FrontierStatus
 canonicalCurrentPreferredEq119FrontierStatus =
   currentPreferredEq119FrontierStatus
-    true true true true true true true
-    false false
+    true true true true true true true true true true
     false
+    false false false false
     false false false
-    false false
+    false
     false
 
 printedRoleCorrectionClosedIsTrue :
@@ -90,6 +91,21 @@ path13VariationalRadiusFromSpecializationCompilerClosedIsTrue :
     canonicalCurrentPreferredEq119FrontierStatus ≡ true
 path13VariationalRadiusFromSpecializationCompilerClosedIsTrue = refl
 
+r171KernelGroupDefectAdapterClosedIsTrue :
+  r171KernelGroupDefectAdapterClosed
+    canonicalCurrentPreferredEq119FrontierStatus ≡ true
+r171KernelGroupDefectAdapterClosedIsTrue = refl
+
+r171AlignedVariationalRouteClosedIsTrue :
+  r171AlignedVariationalRouteClosed
+    canonicalCurrentPreferredEq119FrontierStatus ≡ true
+r171AlignedVariationalRouteClosedIsTrue = refl
+
+selectedCutOperatorPointwiseWeldPrunedIsTrue :
+  selectedCutOperatorPointwiseWeldPruned
+    canonicalCurrentPreferredEq119FrontierStatus ≡ true
+selectedCutOperatorPointwiseWeldPrunedIsTrue = refl
+
 splitPhysicalStandardCompilerClosedIsTrue :
   splitPhysicalStandardCompilerClosed canonicalCurrentPreferredEq119FrontierStatus ≡ true
 splitPhysicalStandardCompilerClosedIsTrue = refl
@@ -106,6 +122,11 @@ physicalEq119ClosedIsFalse = refl
 -- Typed surviving source surfaces.
 ------------------------------------------------------------------------
 
+Path13R171AlignedPhysicalSourceInput : Set → Set₁
+Path13R171AlignedPhysicalSourceInput =
+  R171Aligned.R171AlignedPath13PhysicalInputs
+
+-- Compatibility surfaces below the current preferred cut.
 Path13VariationalSourceSpecializationInput : Set → Set → Set₁
 Path13VariationalSourceSpecializationInput =
   Specialization.Path13VariationalSpecialization
@@ -114,7 +135,6 @@ Path13VariationalRadiusNormalizationInput : Set → Set₁
 Path13VariationalRadiusNormalizationInput =
   SpecializedRadius.Path13VariationalRadiusNormalization
 
--- Compatibility surface: now compiler output from the refined source cut.
 Path13PhysicalVariationalRadiusInput : Set → Set₁
 Path13PhysicalVariationalRadiusInput =
   VariationalRadius.Path13SelectedVariationalRadiusRepresentation
@@ -152,15 +172,20 @@ path13VariationalRadiusFromSpecializationLevel : ProofLevel
 path13VariationalRadiusFromSpecializationLevel =
   SpecializedRadius.path13VariationalRadiusFromSpecializationLevel
 
--- These remain input surfaces, not theorem claims.
-literalCMP98Path13VariationalSourceSpecializationLevel : ProofLevel
-literalCMP98Path13VariationalSourceSpecializationLevel = conditional
+r171KernelGroupDefectAdapterLevel : ProofLevel
+r171KernelGroupDefectAdapterLevel =
+  R171Adapter.operatorKernelGroupDefectAdapterLevel
 
-literalCMP98Path13VariationalRadiusNormalizationLevel : ProofLevel
-literalCMP98Path13VariationalRadiusNormalizationLevel = conditional
+r171AlignedVariationalRouteLevel : ProofLevel
+r171AlignedVariationalRouteLevel =
+  R171Aligned.r171AlignedPath13VariationalRouteLevel
 
-literalCMP98Path13SelectedCutOperatorWeldLevel : ProofLevel
-literalCMP98Path13SelectedCutOperatorWeldLevel = conditional
+selectedCutOperatorPointwiseWeldPruningLevel : ProofLevel
+selectedCutOperatorPointwiseWeldPruningLevel = machineChecked
+
+-- Current independent input surfaces.
+literalCMP98Path13R171AlignedPhysicalSourceLevel : ProofLevel
+literalCMP98Path13R171AlignedPhysicalSourceLevel = conditional
 
 literalCMP98Path13SelectedT3NormalizationLevel : ProofLevel
 literalCMP98Path13SelectedT3NormalizationLevel = conditional
@@ -168,10 +193,11 @@ literalCMP98Path13SelectedT3NormalizationLevel = conditional
 literalCMP98Path13CutThresholdLevel : ProofLevel
 literalCMP98Path13CutThresholdLevel = conditional
 
-literalCMP98R171StandardOperatorRepresentationLevel : ProofLevel
-literalCMP98R171StandardOperatorRepresentationLevel =
-  R171.cmp98RationalSU2OperatorRepresentationRound171Level
-
 literalCMP98RationalRealRingEmbeddingLevel : ProofLevel
 literalCMP98RationalRealRingEmbeddingLevel =
   R208.rationalRealMultiplicativeEmbeddingRound208Level
+
+-- Compatibility authority/status surfaces.
+literalCMP98R171StandardOperatorRepresentationLevel : ProofLevel
+literalCMP98R171StandardOperatorRepresentationLevel =
+  R171.cmp98RationalSU2OperatorRepresentationRound171Level
