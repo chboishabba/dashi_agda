@@ -8,41 +8,60 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Choice
 import DASHI.Physics.ExoticGravity.SuperconductingGravityExperimentSearchHypergraphExact as Hyper
 import DASHI.Physics.ExoticGravity.SuperconductingSourceConstitutiveEvidenceBidiExact as Evidence
+import DASHI.Physics.ExoticGravity.SuperconductingGravityCouplingResidualBidiExact as Coupling
+import DASHI.Physics.ExoticGravity.LiTorrStandardGRComparatorBidiExact as GRComparator
+import DASHI.Physics.ExoticGravity.LiTorrGeometryAcquisitionBidiExact as Geometry
 import DASHI.Physics.ExoticGravity.AntigravityUnificationInteractionExact as Unified
-import DASHI.Physics.GR.GravitationalObservationBidiExact as Obs
 
 ------------------------------------------------------------------------
 -- ANTIGRAVITY PROOF-SEARCH FRONTIER
 --
--- This owner does not add a second search engine.  It reads the exact current
--- superconducting-gravity evidence state through the existing evidence owner,
--- refines its first open leaf into the existing hypergraph dependencies, and
--- declares only the information moves needed along that reachable cut.
+-- Keep the independent state machines independent.  Evidence closure,
+-- coupling-coefficient closure, same-apparatus GR comparison and literal
+-- geometry closure are different consumers.  No one frontier silently pays
+-- another.
 ------------------------------------------------------------------------
 
 data AntigravitySearchResidual : Set where
   sourceCharacterisationResidual : AntigravitySearchResidual
   transitionLockResidual : AntigravitySearchResidual
+  externalProbeResidual : AntigravitySearchResidual
   backgroundClosureResidual : AntigravitySearchResidual
+  replicationResidual : AntigravitySearchResidual
   constitutiveResidual : AntigravitySearchResidual
+  couplingStateWeldResidual : AntigravitySearchResidual
+  ordinaryGRComparatorResidual : AntigravitySearchResidual
+  scalingLawResidual : AntigravitySearchResidual
   theoryComparisonResidual : AntigravitySearchResidual
 
 residualForEvidenceLeaf : Evidence.EvidenceLeaf → AntigravitySearchResidual
 residualForEvidenceLeaf Evidence.sourceCharacterisationLeaf = sourceCharacterisationResidual
 residualForEvidenceLeaf Evidence.transitionLockLeaf = transitionLockResidual
-residualForEvidenceLeaf Evidence.externalProbeLeaf = theoryComparisonResidual
+residualForEvidenceLeaf Evidence.externalProbeLeaf = externalProbeResidual
 residualForEvidenceLeaf Evidence.backgroundClosureLeaf = backgroundClosureResidual
-residualForEvidenceLeaf Evidence.replicationLeaf = theoryComparisonResidual
+residualForEvidenceLeaf Evidence.replicationLeaf = replicationResidual
 residualForEvidenceLeaf Evidence.constitutiveResidualLeaf = constitutiveResidual
-residualForEvidenceLeaf Evidence.boundedNoPromotionLeaf = theoryComparisonResidual
+residualForEvidenceLeaf Evidence.boundedNoPromotionLeaf = couplingStateWeldResidual
 
 ------------------------------------------------------------------------
--- Exact current public-literature frontier.
+-- Exact current independent frontiers.
 ------------------------------------------------------------------------
 
 currentEvidenceLeafIsSourceCharacterisation :
   Evidence.currentFirstOpenEvidenceLeaf ≡ Evidence.sourceCharacterisationLeaf
 currentEvidenceLeafIsSourceCharacterisation = refl
+
+currentCouplingLeafIsSourceObservable :
+  Coupling.currentFirstOpenAlphaLeaf ≡ Coupling.sourceObservableLeaf
+currentCouplingLeafIsSourceObservable = refl
+
+currentGRComparatorLeafIsGeometry :
+  GRComparator.currentFirstOpenGRComparatorLeaf ≡ GRComparator.apparatusGeometryLeaf
+currentGRComparatorLeafIsGeometry = refl
+
+currentGeometryLeafIsSourceShape :
+  Geometry.currentFirstOpenGeometryLeaf ≡ Geometry.sourceShapeLeaf
+currentGeometryLeafIsSourceShape = refl
 
 currentAntigravityResidual : AntigravitySearchResidual
 currentAntigravityResidual = residualForEvidenceLeaf Evidence.currentFirstOpenEvidenceLeaf
@@ -82,22 +101,20 @@ canonicalCurrentSourceCharacterisationDemand =
 
 ------------------------------------------------------------------------
 -- Introspective skip proofs: external-probe ownership and replication are
--- already true in the current evidence carrier, so neither may be scheduled as
--- the first live leaf merely because they are scientifically interesting.
+-- already true in the current EvidenceClosureState, so neither is first there.
+-- This says nothing about similarly named coordinates in another state machine.
 ------------------------------------------------------------------------
 
-externalProbeIsNotCurrentFirstOpenLeaf :
+externalProbeIsNotCurrentEvidenceLeaf :
   Evidence.currentFirstOpenEvidenceLeaf ≡ Evidence.externalProbeLeaf → ⊥
-externalProbeIsNotCurrentFirstOpenLeaf ()
+externalProbeIsNotCurrentEvidenceLeaf ()
 
-replicationIsNotCurrentFirstOpenLeaf :
+replicationIsNotCurrentEvidenceLeaf :
   Evidence.currentFirstOpenEvidenceLeaf ≡ Evidence.replicationLeaf → ⊥
-replicationIsNotCurrentFirstOpenLeaf ()
+replicationIsNotCurrentEvidenceLeaf ()
 
 ------------------------------------------------------------------------
--- Counterfactual frontier recomputation after paying only the current leaf.
--- The already-owned external probe and replication are retained.  Therefore
--- the shortest reachable sequence skips them rather than paying them twice.
+-- Counterfactual recomputation inside the evidence state machine only.
 ------------------------------------------------------------------------
 
 afterSourceCharacterisation : Evidence.EvidenceClosureState
@@ -136,12 +153,6 @@ afterConstitutiveFirstOpen :
     ≡ Evidence.boundedNoPromotionLeaf
 afterConstitutiveFirstOpen = refl
 
-------------------------------------------------------------------------
--- Existing information moves for the first three reachable residuals.  The
--- final constitutive computation is a thin declared move because the generic
--- hypergraph has the leaf/action but no InformationMove wrapper for it.
-------------------------------------------------------------------------
-
 sourceCharacterisationMove : Choice.InformationMove
 sourceCharacterisationMove = Hyper.characteriseSourceMove
 
@@ -158,59 +169,112 @@ constitutiveResidualMove = Choice.informationMove
   "requires paid source-characterisation, transition-lock, external-probe, background-closure and replication receipts"
   "consumer-bound constitutive-residual calculation on the exact completed apparatus state"
 
-shortestReachableDeclaredMoves : List Choice.InformationMove
-shortestReachableDeclaredMoves =
+shortestEvidenceClosureMoves : List Choice.InformationMove
+shortestEvidenceClosureMoves =
   sourceCharacterisationMove ∷
   transitionLockMove ∷
   backgroundClosureMove ∷
   constitutiveResidualMove ∷ []
 
 ------------------------------------------------------------------------
--- Completing the experimental/evidence cut does not yield antigravity.  It
--- reaches the theory-comparison consumer, where an attributed ordinary-GR
--- prediction and a competing prediction must be welded to the same observation.
+-- Critical correction: bounded evidence closure is not coupling-alpha closure.
+-- The coupling state has extra coordinates, notably ordinary GR and a scaling
+-- law.  There is no definition in the imported owners equating
+-- constitutiveResidualOwned with scalingLawOwned or supplying ordinaryGROwned.
 ------------------------------------------------------------------------
 
-postEvidenceRoute : Unified.ClaimObservationRoute → AntigravitySearchResidual
-postEvidenceRoute (Unified.gravitationalObservationRoute channel) = theoryComparisonResidual
-postEvidenceRoute Unified.inertialComparisonRoute = theoryComparisonResidual
-postEvidenceRoute Unified.ordinaryMomentumClosureRoute = theoryComparisonResidual
+data PostEvidenceWorld : Set where
+  couplingStillOpen couplingClosed : PostEvidenceWorld
+
+postEvidenceObservation : PostEvidenceWorld → Evidence.EvidenceClosureState
+postEvidenceObservation _ = afterConstitutiveResidual
+
+postEvidenceAlphaState : PostEvidenceWorld → Coupling.AlphaClosureState
+postEvidenceAlphaState couplingStillOpen =
+  Coupling.alpha-closure-state true true true false true true false
+postEvidenceAlphaState couplingClosed =
+  Coupling.alpha-closure-state true true true true true true true
+
+boundedEvidenceCollision :
+  postEvidenceObservation couplingStillOpen ≡ postEvidenceObservation couplingClosed
+boundedEvidenceCollision = refl
+
+postEvidenceCouplingDecisionDistinct :
+  Coupling.firstOpenAlphaLeaf (postEvidenceAlphaState couplingStillOpen)
+    ≡ Coupling.firstOpenAlphaLeaf (postEvidenceAlphaState couplingClosed) → ⊥
+postEvidenceCouplingDecisionDistinct ()
+
+boundedEvidenceDoesNotDetermineCouplingClosure : AntigravitySearchResidual
+boundedEvidenceDoesNotDetermineCouplingClosure = couplingStateWeldResidual
+
+------------------------------------------------------------------------
+-- Multi-consumer shared-source cut.  All four imported owners currently point
+-- at source/apparatus characterisation, but a candidate acquisition does not
+-- pay all four merely because its prose mentions geometry and stress-energy.
+------------------------------------------------------------------------
+
+record SharedSourceAcquisitionReceipt : Set where
+  constructor shared-source-acquisition-receipt
+  field
+    apparatusCarrier : String
+    evidenceCarrier : String
+    couplingCarrier : String
+    grComparatorCarrier : String
+    geometryCarrier : String
+    evidenceCarrierMatches : evidenceCarrier ≡ apparatusCarrier
+    couplingCarrierMatches : couplingCarrier ≡ apparatusCarrier
+    grComparatorCarrierMatches : grComparatorCarrier ≡ apparatusCarrier
+    geometryCarrierMatches : geometryCarrier ≡ apparatusCarrier
+
+    evidenceState : Evidence.EvidenceClosureState
+    evidenceSourcePaid : Evidence.sourceCharacterised evidenceState ≡ true
+
+    couplingState : Coupling.AlphaClosureState
+    couplingSourcePaid : Coupling.sourceObservableOwned couplingState ≡ true
+
+    grComparatorState : GRComparator.GRComparatorState
+    grGeometryPaid : GRComparator.geometryOwned grComparatorState ≡ true
+
+    geometryState : Geometry.GeometryClosureState
+    sourceShapePaid : Geometry.sourceShapeOwned geometryState ≡ true
+
+open SharedSourceAcquisitionReceipt public
+
+data SharedSourceReceiptAuthority : Set where
+
+candidateMoveDoesNotManufactureSharedReceipt :
+  SharedSourceReceiptAuthority → ⊥
+candidateMoveDoesNotManufactureSharedReceipt ()
+
+------------------------------------------------------------------------
+-- Even after the evidence cut, theory comparison is downstream of a coupling
+-- weld / ordinary-GR / scaling-law frontier.  Observation-route type remains
+-- relevant but does not skip those coordinates.
+------------------------------------------------------------------------
+
+postCouplingRoute : Unified.ClaimObservationRoute → AntigravitySearchResidual
+postCouplingRoute (Unified.gravitationalObservationRoute channel) = theoryComparisonResidual
+postCouplingRoute Unified.inertialComparisonRoute = theoryComparisonResidual
+postCouplingRoute Unified.ordinaryMomentumClosureRoute = theoryComparisonResidual
 
 record AntigravityProofSearchBoundary : Set where
   constructor antigravity-proof-search-boundary
   field
-    currentFirstResidualIsSourceCharacterisation : Bool
+    currentFirstEvidenceResidualIsSourceCharacterisation : Bool
+    currentCouplingResidualIsSourceObservable : Bool
+    currentGRComparatorResidualIsGeometry : Bool
+    currentLiteralGeometryResidualIsSourceShape : Bool
     sourceCharacterisationIsSingleScalarLeaf : Bool
-    alreadyOwnedExternalProbeMustBeReacquiredFirst : Bool
-    alreadyOwnedReplicationMustBeReacquiredFirst : Bool
-    shortestPathMaySkipAlreadyOwnedLeaves : Bool
-    completedEvidenceCutAutomaticallyProvesAntigravity : Bool
-    completedEvidenceCutReachesTheoryComparison : Bool
+    alreadyOwnedEvidenceLeavesMayBeSkippedInsideEvidenceState : Bool
+    completedEvidenceCutAutomaticallyClosesCouplingAlpha : Bool
+    constitutiveResidualAutomaticallyEqualsScalingLaw : Bool
+    completedEvidenceCutAutomaticallySuppliesOrdinaryGR : Bool
+    sharedSourceCandidateMoveAutomaticallyPaysAllConsumers : Bool
+    explicitSameApparatusReceiptRequiredForSharedPayment : Bool
+    completedCouplingCutAutomaticallyProvesAntigravity : Bool
     rawExperimentalFindingAutomaticallyClosesKernelProof : Bool
 
 canonicalAntigravityProofSearchBoundary : AntigravityProofSearchBoundary
 canonicalAntigravityProofSearchBoundary =
   antigravity-proof-search-boundary
-    true false false false true false true false
-
-------------------------------------------------------------------------
--- Observation-channel fixtures remain typed at the consumer boundary.
-------------------------------------------------------------------------
-
-freeFallPostEvidenceResidual : AntigravitySearchResidual
-freeFallPostEvidenceResidual =
-  postEvidenceRoute
-    (Unified.gravitationalObservationRoute Obs.freeFallEquivalence)
-
-remoteFieldPostEvidenceResidual : AntigravitySearchResidual
-remoteFieldPostEvidenceResidual =
-  postEvidenceRoute
-    (Unified.gravitationalObservationRoute Obs.localTestMassAcceleration)
-
-freeFallPostEvidenceNeedsTheoryComparison :
-  freeFallPostEvidenceResidual ≡ theoryComparisonResidual
-freeFallPostEvidenceNeedsTheoryComparison = refl
-
-remoteFieldPostEvidenceNeedsTheoryComparison :
-  remoteFieldPostEvidenceResidual ≡ theoryComparisonResidual
-remoteFieldPostEvidenceNeedsTheoryComparison = refl
+    true true true true false true false false false false true false false
