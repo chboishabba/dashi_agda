@@ -45,9 +45,9 @@ runMachine-cong :
   {left right : W.State machine} →
   left ≡ right →
   runMachine machine actions left ≡ runMachine machine actions right
-runMachine-cong [] refl = refl
+runMachine-cong {machine} [] refl = refl
 runMachine-cong {machine} (action ∷ rest) equality =
-  runMachine-cong rest (cong (W.step machine action) equality)
+  runMachine-cong {machine = machine} rest (cong (W.step machine action) equality)
 
 ------------------------------------------------------------------------
 -- Mixed-generator simulation theorem.
@@ -66,7 +66,8 @@ finiteTraceSimulation {machine} simulation (action ∷ rest) term =
   trans
     (finiteTraceSimulation simulation rest
       (W.syntaxStep simulation action term))
-    (runMachine-cong rest (W.stepCommutes simulation action term))
+    (runMachine-cong {machine = machine} rest (W.stepCommutes simulation action term))
+
 
 ------------------------------------------------------------------------
 -- Kernel/admissibility preservation over arbitrary finite rule traces.

@@ -81,8 +81,9 @@ record Wette1969Rule915InductionScaffoldProducerBoundary : Set where
   field
     premise9IsAnExplicitHistoricalConclusionProducer : Bool
     premise9IsAnExplicitHistoricalConclusionProducerIsTrue : premise9IsAnExplicitHistoricalConclusionProducer ≡ true
-    premises8_9_16_17GeneratedBeforePremise18 : Bool
-    premises8_9_16_17GeneratedBeforePremise18IsTrue : premises8_9_16_17GeneratedBeforePremise18 ≡ true
+    premises8-9-16-17GeneratedBeforePremise18 : Bool
+    premises8-9-16-17GeneratedBeforePremise18IsTrue : premises8-9-16-17GeneratedBeforePremise18 ≡ true
+
     producerChainDoesNotManufacturePremise18 : Bool
     producerChainDoesNotManufacturePremise18IsTrue : producerChainDoesNotManufacturePremise18 ≡ true
 

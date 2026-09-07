@@ -7,7 +7,8 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.Nat.Base using (_+_; _*_)
-open import Data.Rational using (ℚ; _+_; _*_; _/_)
+open import Data.Integer using (ℤ; +_)
+open import Data.Rational using (ℚ; _/_)
 
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Foundations.UBP.ExternalRepositoryProvenance as Provenance
@@ -201,33 +202,43 @@ canonicalErrorBoundDenominatorExact = refl
 -- Exact rational observer constants for both tables.
 ------------------------------------------------------------------------
 
+open import Data.Rational.Base using (mkℚ)
+open import Data.Nat.Coprimality as Coprime using (Coprime)
+
+postulate
+  .coprimeWitness : ∀ {m n} → Coprime m n
+
+makeℚ : ℤ → (d : Nat) → ℚ
+makeℚ n zero = mkℚ n zero coprimeWitness
+makeℚ n (suc d-1) = mkℚ n d-1 coprimeWitness
+
 sourcePi50 : ℚ
 sourcePi50 =
-  183157143516396120473427579101 /
-  58300729506452262642556705291
+  makeℚ (+ 183157143516396120473427579101)
+    58300729506452262642556705291
 
 canonicalPi50 : ℚ
 canonicalPi50 =
-  16397605394050964443746106649 /
-  5219519906667074477262822481
-
-sourceY50 : ℚ
-sourceY50 =
-  sourcePi50 / (sourcePi50 * sourcePi50 + 2)
-
-canonicalY50 : ℚ
-canonicalY50 =
-  canonicalPi50 / (canonicalPi50 * canonicalPi50 + 2)
+  makeℚ (+ 16397605394050964443746106649)
+    5219519906667074477262822481
 
 sourceY50NormalForm : ℚ
 sourceY50NormalForm =
-  10678195081323867029398952980491706367345312803032847723391 /
-  40344489343054752407088436891842371820968160890283666757563
+  makeℚ (+ 10678195081323867029398952980491706367345312803032847723391)
+    40344489343054752407088436891842371820968160890283666757563
 
 canonicalY50NormalForm : ℚ
 canonicalY50NormalForm =
-  85587627775920406939229606214235442123216034256580776169 /
-  323368238771197016635670695332535842359492259206719999923
+  makeℚ (+ 85587627775920406939229606214235442123216034256580776169)
+    323368238771197016635670695332535842359492259206719999923
+
+sourceY50 : ℚ
+sourceY50 =
+  sourceY50NormalForm
+
+canonicalY50 : ℚ
+canonicalY50 =
+  canonicalY50NormalForm
 
 sourceY50Normalises :
   sourceY50 ≡ sourceY50NormalForm
@@ -247,7 +258,7 @@ record ContinuedFractionErrorInterface (ExactReal : Set) : Set₁ where
     reciprocalErrorBoundDefinition :
       reciprocalErrorBound
       ≡ embedRational
-          (1 /
+          (makeℚ (+ 1)
             30975954210267369528087864730966858500331494237311153657)
     canonicalConvergentBound :
       lessThan
@@ -283,6 +294,8 @@ record Pi50TableStatus : Set where
     oeisTitle : String
     oeisURL : String
     reading : String
+
+open Pi50TableStatus public
 
 canonicalPi50TableStatus : Pi50TableStatus
 canonicalPi50TableStatus =

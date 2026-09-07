@@ -4,10 +4,30 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
-open import Data.Rational using (ℚ; _+_; _-_; _*_; _/_; _<_; _≤_)
+open import Data.Integer.Base using (ℤ; +0; +[1+_]; -[1+_]; +_)
+open import Data.Rational using (ℚ; _+_; _-_; _*_; _/_; _<_; _≤_; 0ℚ)
+open import Data.Rational.Base using (mkℚ)
+open import Data.Nat.Coprimality as Coprime using ()
 
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Foundations.UBP.ExternalRepositoryProvenance as Provenance
+
+2ℚ : ℚ
+2ℚ = + 2 / 1
+
+8ℚ : ℚ
+8ℚ = + 8 / 1
+
+oneEighth : ℚ
+oneEighth = + 1 / 8
+
+invℚ : ℚ → ℚ
+invℚ (mkℚ +0 d prf) = 0ℚ
+invℚ (mkℚ +[1+ n ] d prf) = mkℚ +[1+ d ] n (Coprime.sym prf)
+invℚ (mkℚ -[1+ n ] d prf) = mkℚ -[1+ d ] n (Coprime.sym prf)
+
+_÷_ : ℚ → ℚ → ℚ
+p ÷ q = p * invℚ q
 
 ------------------------------------------------------------------------
 -- Exact target / rational implementation / certified interval hierarchy.
@@ -27,8 +47,8 @@ record PiApprox (ExactReal : Set) : Set₁ where
     epsilon : ℚ
     rationalApproximation : ℚ
     rationalApproximationDefinition :
-      rationalApproximation ≡ numerator / denominator
-    epsilonPositive : 0 < epsilon
+      rationalApproximation ≡ numerator ÷ denominator
+    epsilonPositive : 0ℚ < epsilon
     absoluteErrorBelowEpsilon : Set
     continuedFractionErrorReceipt : absoluteErrorBelowEpsilon
 
@@ -43,12 +63,12 @@ record YInterval (ExactReal : Set) (piApprox : PiApprox ExactReal) : Set₁ wher
     upper : ℚ
     lowerDefinition : lower ≡ y50 - epsilon50
     upperDefinition : upper ≡ y50 + epsilon50
-    epsilon50Positive : 0 < epsilon50
+    epsilon50Positive : 0ℚ < epsilon50
     exactYDefinition : Set
     y50Definition :
       y50
       ≡ rationalApproximation piApprox
-        / (rationalApproximation piApprox * rationalApproximation piApprox + 2)
+        ÷ (rationalApproximation piApprox * rationalApproximation piApprox + 2ℚ)
     containsExactY : Set
     containmentReceipt : containsExactY
     exactYIsIrrational : Set
@@ -72,16 +92,17 @@ record AffineObservableIntervalTransport
   field
     support : ℚ
     normSquared : ℚ
-    supportNonnegative : 0 ≤ support
+    supportNonnegative : 0ℚ ≤ support
     taxAt : ℚ → ℚ
     taxDefinition :
       (y : ℚ) →
-      taxAt y ≡ support * y + normSquared / 8
+      taxAt y ≡ support * y + normSquared * oneEighth
     taxBounds : RationalInterval
     lowerTaxDefinition :
-      lo taxBounds ≡ support * lower interval + normSquared / 8
+      lo taxBounds ≡ support * lower interval + normSquared * oneEighth
     upperTaxDefinition :
-      hi taxBounds ≡ support * upper interval + normSquared / 8
+      hi taxBounds ≡ support * upper interval + normSquared * oneEighth
+
     uniformBound :
       (candidateY : ℚ) →
       lower interval ≤ candidateY →

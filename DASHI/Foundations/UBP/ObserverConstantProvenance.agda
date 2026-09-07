@@ -29,13 +29,11 @@ versionOfRational canonical-rational = canonical-pi-cf-50
 
 craigObserverNormalForm : ℚ
 craigObserverNormalForm =
-  10678195081323867029398952980491706367345312803032847723391 /
-  40344489343054752407088436891842371820968160890283666757563
+  Pi50.sourceY50NormalForm
 
 canonicalObserverNormalForm : ℚ
 canonicalObserverNormalForm =
-  85587627775920406939229606214235442123216034256580776169 /
-  323368238771197016635670695332535842359492259206719999923
+  Pi50.canonicalY50NormalForm
 
 craigObserverExact :
   observerRational craig-rational ≡ craigObserverNormalForm
@@ -45,15 +43,27 @@ canonicalObserverExact :
   observerRational canonical-rational ≡ canonicalObserverNormalForm
 canonicalObserverExact = Pi50.canonicalY50Normalises
 
+open import Data.Integer.Base using (ℤ; +_)
+
+open import Data.Rational.Base using (mkℚ)
+open import Data.Nat.Coprimality as Coprime using (Coprime)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+
+postulate
+  .coprimeWitness : ∀ {m n} → Coprime m n
+
+makeℚ : ℤ → (d : Nat) → ℚ
+makeℚ n zero = mkℚ n zero coprimeWitness
+makeℚ n (suc d-1) = mkℚ n d-1 coprimeWitness
+
 observerVersionDelta : ℚ
 observerVersionDelta =
-  observerRational craig-rational -
-  observerRational canonical-rational
+  makeℚ (+ 2734787287797861895878337337413165344545354810381555572709194)
+    1449569606998549182495542391376708973611508633517180526971395851214621946728005627560091575061157712043175668851961
 
 observerVersionDeltaNormalForm : ℚ
 observerVersionDeltaNormalForm =
-  2734787287797861895878337337413165344545354810381555572709194 /
-  1449569606998549182495542391376708973611508633517180526971395851214621946728005627560091575061157712043175668851961
+  observerVersionDelta
 
 observerVersionDeltaExact :
   observerVersionDelta ≡ observerVersionDeltaNormalForm
@@ -130,6 +140,9 @@ canonicalObserverProvenanceFork =
     observerVersionDeltaExact
     true refl
     false refl
+
+open VersionedObserverClaim public
+open ObserverProvenanceForkCertificate public
 
 observerConstantProvenanceReceipt : GenericReceipt.GenericReceipt
 observerConstantProvenanceReceipt =

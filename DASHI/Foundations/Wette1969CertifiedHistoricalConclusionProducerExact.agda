@@ -75,7 +75,8 @@ transportProducerTargetEvidence :
   formula Finite.∈Context (PCRA.runCertifiedTrace historicalSystem tail)
 transportProducerTargetEvidence producer tail =
   Closure.certifiedTracePreservesPriorFormula
-    tail formula (producedAtTarget producer)
+    tail _ (producedAtTarget producer)
+
 
 record Wette1969CertifiedHistoricalConclusionProducerBoundary : Set where
   constructor wette1969CertifiedHistoricalConclusionProducerBoundary

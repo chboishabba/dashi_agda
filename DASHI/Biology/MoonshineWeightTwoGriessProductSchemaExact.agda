@@ -27,7 +27,7 @@ module DASHI.Biology.MoonshineWeightTwoGriessProductSchemaExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Fin using (Fin)
+open import Data.Fin using (Fin)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat using (_+_)
 

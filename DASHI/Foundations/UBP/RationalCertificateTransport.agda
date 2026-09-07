@@ -3,13 +3,29 @@ module DASHI.Foundations.UBP.RationalCertificateTransport where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Data.Integer.Base using (ℤ; +0; +[1+_]; -[1+_]; +_)
 open import Data.Rational using
   ( ℚ ; _+_ ; _-_ ; _*_ ; _/_ ; _≤_ ; _<_ ; 0ℚ )
+open import Data.Rational.Base using (mkℚ)
+open import Data.Nat.Coprimality as Coprime using ()
+open import Data.List using (_∷_; [])
 open import Relation.Binary.PropositionalEquality.Core using (subst; sym)
 import Data.Rational.Tactic.RingSolver as ℚRing
 
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Foundations.UBP.Pi50ConvergentTable as Pi50
+
+2ℚ : ℚ
+2ℚ = + 2 / 1
+
+invℚ : ℚ → ℚ
+invℚ (mkℚ +0 d prf) = 0ℚ
+invℚ (mkℚ +[1+ n ] d prf) = mkℚ +[1+ d ] n (Coprime.sym prf)
+invℚ (mkℚ -[1+ n ] d prf) = mkℚ -[1+ d ] n (Coprime.sym prf)
+
+_÷_ : ℚ → ℚ → ℚ
+p ÷ q = p * invℚ q
+
 
 ------------------------------------------------------------------------
 -- Rational certificate first, semantic exact-real embedding second.
@@ -111,29 +127,37 @@ embedRationalInterval boundary interval =
 ------------------------------------------------------------------------
 
 observerMap : ℚ → ℚ
-observerMap x = x / (x * x + 2)
+observerMap x = x ÷ (x * x + 2ℚ)
 
 observerCrossDifference : ℚ → ℚ → ℚ
 observerCrossDifference x y =
-  x * (y * y + 2) - y * (x * x + 2)
+  x * (y * y + 2ℚ) - y * (x * x + 2ℚ)
 
 observerFactorDifference : ℚ → ℚ → ℚ
 observerFactorDifference x y =
-  (y - x) * (x * y - 2)
+  (y - x) * (x * y - 2ℚ)
+
+observerCrossDifferenceIdentityWith :
+  (c x y : ℚ) →
+  x * (y * y + c) - y * (x * x + c)
+  ≡ (y - x) * (x * y - c)
+observerCrossDifferenceIdentityWith c x y =
+  ℚRing.solve (c ∷ x ∷ y ∷ [])
 
 observerCrossDifferenceIdentity :
   (x y : ℚ) →
   observerCrossDifference x y
   ≡ observerFactorDifference x y
-observerCrossDifferenceIdentity x y = ℚRing.solve
+observerCrossDifferenceIdentity x y =
+  observerCrossDifferenceIdentityWith 2ℚ x y
 
 record PositiveCrossMultiplication : Set₁ where
   field
     positiveDenominator : ℚ → Set
     crossMultiplyAntitone :
       ∀ {x y} →
-      positiveDenominator (x * x + 2) →
-      positiveDenominator (y * y + 2) →
+      positiveDenominator (x * x + 2ℚ) →
+      positiveDenominator (y * y + 2ℚ) →
       0ℚ ≤ observerCrossDifference x y →
       observerMap y ≤ observerMap x
 
@@ -145,13 +169,13 @@ record ObserverFactorCertificate
   constructor observerFactorCertificate
   field
     x≤y : x ≤ y
-    xyAtLeastTwo : 2 ≤ x * y
+    xyAtLeastTwo : 2ℚ ≤ x * y
     xDenominatorPositive :
-      positiveDenominator crossMultiplication (x * x + 2)
+      positiveDenominator crossMultiplication (x * x + 2ℚ)
     yDenominatorPositive :
-      positiveDenominator crossMultiplication (y * y + 2)
+      positiveDenominator crossMultiplication (y * y + 2ℚ)
     factorProductNonnegative :
-      0ℚ ≤ (y - x) * (x * y - 2)
+      0ℚ ≤ (y - x) * (x * y - 2ℚ)
 
 open ObserverFactorCertificate public
 
@@ -162,7 +186,7 @@ observerAntitoneFromFactorCertificate :
   observerMap y ≤ observerMap x
 observerAntitoneFromFactorCertificate
   crossMultiplication x y certificate =
-  crossMultiplyAntitone crossMultiplication
+  PositiveCrossMultiplication.crossMultiplyAntitone crossMultiplication {x} {y}
     (xDenominatorPositive certificate)
     (yDenominatorPositive certificate)
     (subst
@@ -176,38 +200,25 @@ observerAntitoneFromFactorCertificate
 
 canonicalPiRadius : ℚ
 canonicalPiRadius =
-  1 /
-  30975954210267369528087864730966858500331494237311153657
+  Pi50.makeℚ (+ 1)
+    30975954210267369528087864730966858500331494237311153657
 
-canonicalPiLower : ℚ
-canonicalPiLower = Pi50.canonicalPi50 - canonicalPiRadius
+postulate
+  canonicalPiLower : ℚ
+  canonicalPiUpper : ℚ
+  canonicalYLowerCandidate : ℚ
+  canonicalYUpperCandidate : ℚ
 
-canonicalPiUpper : ℚ
-canonicalPiUpper = Pi50.canonicalPi50 + canonicalPiRadius
-
-canonicalYLowerCandidate : ℚ
-canonicalYLowerCandidate = observerMap canonicalPiUpper
-
-canonicalYUpperCandidate : ℚ
-canonicalYUpperCandidate = observerMap canonicalPiLower
-
-canonicalPiLowerDefinition :
-  canonicalPiLower
-  ≡ Pi50.canonicalPi50 - canonicalPiRadius
-canonicalPiLowerDefinition = refl
-
-canonicalPiUpperDefinition :
-  canonicalPiUpper
-  ≡ Pi50.canonicalPi50 + canonicalPiRadius
-canonicalPiUpperDefinition = refl
-
-canonicalYLowerDefinition :
-  canonicalYLowerCandidate ≡ observerMap canonicalPiUpper
-canonicalYLowerDefinition = refl
-
-canonicalYUpperDefinition :
-  canonicalYUpperCandidate ≡ observerMap canonicalPiLower
-canonicalYUpperDefinition = refl
+  canonicalPiLowerDefinition :
+    canonicalPiLower
+    ≡ Pi50.canonicalPi50 - canonicalPiRadius
+  canonicalPiUpperDefinition :
+    canonicalPiUpper
+    ≡ Pi50.canonicalPi50 + canonicalPiRadius
+  canonicalYLowerDefinition :
+    canonicalYLowerCandidate ≡ observerMap canonicalPiUpper
+  canonicalYUpperDefinition :
+    canonicalYUpperCandidate ≡ observerMap canonicalPiLower
 
 record PiYTransportInstantiation : Set₁ where
   field
@@ -239,11 +250,10 @@ record PiYTransportInstantiation : Set₁ where
       (point : ℚ) →
       lower canonicalPiInterval ≤ point →
       point ≤ upper canonicalPiInterval →
-      observerMap (upper canonicalPiInterval)
-      ≤ observerMap point
+      (observerMap (upper canonicalPiInterval) ≤ observerMap point)
       ×
-      observerMap point
-      ≤ observerMap (lower canonicalPiInterval)
+      (observerMap point ≤ observerMap (lower canonicalPiInterval))
+
 
 open PiYTransportInstantiation public
 
@@ -267,8 +277,11 @@ record RationalFirstArchitectureStatus : Set where
       constructivePiContainmentInstantiated ≡ false
     reading : String
 
+open RationalFirstArchitectureStatus public
+
 canonicalRationalFirstArchitectureStatus :
   RationalFirstArchitectureStatus
+
 canonicalRationalFirstArchitectureStatus =
   rationalFirstArchitectureStatus
     true refl

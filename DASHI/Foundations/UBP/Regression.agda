@@ -59,7 +59,7 @@ activationDifferenceRegression :
   (y support normSquared coordinateSquare : ℚ) →
   Algebra.symmetryTax
     y
-    (support + 1)
+    (support + Algebra.1ℚ)
     (normSquared + coordinateSquare)
   - Algebra.symmetryTax y support normSquared
   ≡
@@ -69,8 +69,8 @@ activationDifferenceRegression =
 
 longCycleCancellationRegression :
   (y : ℚ) →
-  2 * Algebra.activationQuantum y 1
-  + 2 * Algebra.deexcitationQuantum y 4
+  Algebra.2ℚ * Algebra.activationQuantum y Algebra.1ℚ
+  + Algebra.2ℚ * Algebra.deexcitationQuantum y Algebra.4ℚ
   ≡
   0ℚ - Algebra.threeQuarters
 longCycleCancellationRegression =

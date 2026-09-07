@@ -1,7 +1,7 @@
 module DASHI.Foundations.Base369NestedUnitCompletionMonsterAssemblyExact where
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Fin using (Fin)
+open import Data.Fin using (Fin)
 
 import DASHI.Foundations.Base369FiveModePhaseQuotientExact as Five
 import DASHI.Foundations.Base369StableAlgebraicIdentityTowerExact as Stable
