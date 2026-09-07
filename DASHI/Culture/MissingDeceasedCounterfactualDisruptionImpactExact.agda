@@ -5,9 +5,9 @@ open import DASHI.Core.Prelude
 import DASHI.Core.CounterfactualDisruptionImpactExact as Impact
 
 ------------------------------------------------------------------------
--- Case-specific impact searches.  Current status is notLocated: the public
--- technical-role evidence establishes expertise, not the counterfactual impact
--- of losing that expertise.
+-- Case-specific impact searches. Current impact promotion remains conservative:
+-- expertise, title, programme continuity, and same-name technical publications
+-- are not substitutes for measured counterfactual departure impact.
 ------------------------------------------------------------------------
 
 loureiroImpact : Impact.DepartureImpactProfile
@@ -21,12 +21,12 @@ loureiroImpact = Impact.departure-impact-profile
 
 chavezImpact : Impact.DepartureImpactProfile
 chavezImpact = Impact.departure-impact-profile
-  "Anthony Chavez"
-  "DARHT / Scorpius accelerator engineering"
-  (Impact.replacementLatency ∷ Impact.uniqueQualificationLoss ∷ Impact.knowledgeTransferGap ∷ Impact.milestoneDelay ∷ [])
+  "Anthony Chavez, missing Los Alamos resident born 1947-01-07"
+  "exact event-time technical carrier unresolved"
+  (Impact.replacementLatency ∷ Impact.knowledgeTransferGap ∷ Impact.milestoneDelay ∷ [])
   Impact.impactNotLocated
-  "need role/succession records, unique qualification or subsystem ownership evidence, Scorpius milestone effects and replacement timing"
-  "25+ years of experience motivates the test but is not itself a measured impact receipt"
+  "first resolve the missing-person subject's actual LANL role and event-time carrier; DARHT/Scorpius technical publications identify Mark Anthony Chavez and cannot be inherited by name similarity"
+  "Scorpius programme resilience cannot currently be used as a departure-impact control for the missing Anthony Chavez because the same-person technical-role weld is not owned"
 
 mccaslandImpact : Impact.DepartureImpactProfile
 mccaslandImpact = Impact.departure-impact-profile
@@ -68,14 +68,16 @@ loureiroDepartureControl = Impact.matched-departure-control
   "predefined pre/post window"
   "control departures must be selected without conditioning on whether disruption was large or small"
 
+-- Retained for API compatibility, but it is not an admissible accelerator-role
+-- matched control until the missing Anthony Chavez's technical identity is owned.
 chavezDepartureControl : Impact.MatchedDepartureControl
 chavezDepartureControl = Impact.matched-departure-control
   chavezImpact
-  ("specialized facility engineering" ∷ "tenure" ∷ "technical responsibility" ∷ "programme phase" ∷ [])
-  "comparable long-tenure accelerator/facility engineers leaving high-energy experimental programmes"
-  "replacement latency, unique qualification loss and milestone consequences"
+  ("verified LANL role" ∷ "tenure" ∷ "technical responsibility" ∷ "programme phase" ∷ [])
+  "comparable departures matched only after the missing subject's actual technical role is independently established"
+  "replacement latency, knowledge-transfer gap and milestone consequences"
   "predefined pre/post window"
-  "do not choose controls for having unusually smooth succession"
+  "do not select an accelerator-engineering control population from a same-name technical attribution"
 
 crossRosterDepartureControl : Impact.MatchedDepartureControl
 crossRosterDepartureControl = Impact.matched-departure-control
