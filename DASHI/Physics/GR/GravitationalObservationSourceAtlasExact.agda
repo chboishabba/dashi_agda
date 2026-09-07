@@ -12,6 +12,7 @@ data ObservationSourceKind : Set where
   collaborationCatalog : ObservationSourceKind
   collaborationGRTest : ObservationSourceKind
   pulsarTimingCollaborationResult : ObservationSourceKind
+  laboratoryGravityExperimentResult : ObservationSourceKind
   futureMissionAuthority : ObservationSourceKind
 
 data StableIdentifierKind : Set where
@@ -130,6 +131,8 @@ record GravitationalObservationSourceBoundary : Set where
     missingMetadataMayBeGuessed : Bool
     sourceExactUseEqualsAllClaimsInCarrier : Bool
     positiveCurrentStatusNeedsTypedSourceEntitledClaim : Bool
+    laboratoryObservationHasDedicatedSourceKind : Bool
+    laboratorySourceKindAutomaticallyCreatesPositiveResult : Bool
     catalogSourceProvesEveryEventModel : Bool
     collaborationGRTestProvesGRIsUniquePossibleTheory : Bool
     pulsarTimingEvidenceIdentifiesUniqueBackgroundPopulation : Bool
@@ -140,4 +143,4 @@ record GravitationalObservationSourceBoundary : Set where
 canonicalGravitationalObservationSourceBoundary : GravitationalObservationSourceBoundary
 canonicalGravitationalObservationSourceBoundary =
   gravitational-observation-source-boundary
-    true false false true false false false false true false
+    true false false true true false false false false false true false
