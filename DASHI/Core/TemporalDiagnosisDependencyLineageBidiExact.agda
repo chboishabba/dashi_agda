@@ -7,15 +7,6 @@ import DASHI.Core.AffectedDependencyClosureExact as Closure
 import DASHI.Core.ExperimentalOutcomeOrientationBackpropagationBidiExact as Outcome
 import DASHI.Core.TemporalDiagnosisProvenanceHistoryBidiExact as Temporal
 
-------------------------------------------------------------------------
--- TEMPORAL DIAGNOSIS EVENT + EXACT UPSTREAM DEPENDENCY PATH
---
--- The event says when/how a diagnosis changed status.  The lineage says which
--- upstream artifact path made that diagnosis relevant to the current consumer.
--- Reactivation may therefore be localized to a changed subgraph rather than
--- treated as a global reversal.
-------------------------------------------------------------------------
-
 record DiagnosisLineageEvent
     {Artifact : Set}
     (Depends : Artifact → Artifact → Set)
@@ -39,6 +30,10 @@ record LocalizedReactivation
   field
     priorElimination : DiagnosisLineageEvent Depends diagnosis
     laterReactivation : DiagnosisLineageEvent Depends diagnosis
+    priorWasElimination :
+      Temporal.transition (temporalEvent priorElimination) ≡ Temporal.eliminated
+    laterWasReactivation :
+      Temporal.transition (temporalEvent laterReactivation) ≡ Temporal.reactivated
     sameConsumer :
       diagnosisConsumer priorElimination ≡ diagnosisConsumer laterReactivation
     changedUpstream : Artifact
@@ -70,6 +65,7 @@ record TemporalDiagnosisDependencyLineageBoundary : Set where
   constructor temporal-diagnosis-dependency-lineage-boundary
   field
     eventCarriesExactDependencyPath : Bool
+    localizedReactivationChecksTransitions : Bool
     reactivationMayLocalizeToChangedSubgraph : Bool
     sameDiagnosisMayHaveDifferentHistoricalCauses : Bool
     lineageTransfersAuthority : Bool
@@ -79,4 +75,4 @@ record TemporalDiagnosisDependencyLineageBoundary : Set where
 canonicalTemporalDiagnosisDependencyLineageBoundary :
   TemporalDiagnosisDependencyLineageBoundary
 canonicalTemporalDiagnosisDependencyLineageBoundary =
-  temporal-diagnosis-dependency-lineage-boundary true true true false false false
+  temporal-diagnosis-dependency-lineage-boundary true true true true false false false
