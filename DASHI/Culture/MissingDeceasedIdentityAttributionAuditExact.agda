@@ -57,12 +57,12 @@ joshuaLeBlancIdentity = I.identity-receipt
 
 monicaRezaJacintoIdentity : I.IdentityReceipt
 monicaRezaJacintoIdentity = I.identity-receipt
-  "Monica Reza"
-  "Monica A. Jacinto"
-  (I.fullLegalOrPublishedName ∷ I.familyOrAlias ∷ I.technicalField ∷ [])
-  I.identityPartial
-  "Patent record names Monica A. Jacinto as alloy inventor; current public reporting identifies missing Monica Jacinto Reza / Monica Reza and links Jacinto as former/birth name"
-  "The alloy inventor and missing-person match is plausible and widely reported, but a primary same-person alias/name-change receipt has not yet been located in this audit."
+  "Monica Jacinto Reza"
+  "Monica Andrea Jacinto / Monica A. Jacinto / Monica Jacinto"
+  (I.fullLegalOrPublishedName ∷ I.middleNameOrInitial ∷ I.familyOrAlias ∷ I.technicalField ∷ [])
+  I.identitySourceBacked
+  "California DOJ missing-person record names Monica Jacinto Reza and gives AKA Monica Andrea Jacinto; Boeing identifies Monica Jacinto as a Rocketdyne metallurgical engineer and Mondaloy co-inventor; patent records name Monica Jacinto / Monica A. Jacinto"
+  "The event identity is explicitly welded by the California DOJ to the Jacinto alias used in the professional/patent record. This establishes same-person attribution, not every later JPL-role or capability claim."
 
 williamMcCaslandIdentity : I.IdentityReceipt
 williamMcCaslandIdentity = I.identity-receipt
