@@ -8,3 +8,6 @@ import DASHI.Cognition.PNF.PNFIRLearningEverything
 import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
 import DASHI.Cognition.VisualPatternModeGeometryEverything
 import DASHI.Cognition.PNF.SensibLawCountryUniversalLegalAlgebraEverything
+
+-- Plural epistemic-progress / remedy methodology.
+import DASHI.Cognition.PNF.SensibLawPluralEpistemicRepairMethodologyBidiExact
