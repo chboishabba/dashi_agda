@@ -146,6 +146,7 @@ import DASHI.Core.TrajectoryRecoveryFibreExact
 import DASHI.Core.MultiaxialIncidenceFibreExact
 import DASHI.Core.ConsumerIndexedTrajectoryFibreAdequacyExact
 import DASHI.Core.ConsumerFibreRefinementSchedulerExact
+import DASHI.Core.BoundAcquisitionDemandExact
 import DASHI.Core.SituatedFibreDynamicsEverything
 
 -- Proof-carrying physical execution / shared-state coalition / proof-search
