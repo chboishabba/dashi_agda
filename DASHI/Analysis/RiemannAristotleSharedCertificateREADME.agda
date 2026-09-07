@@ -5,41 +5,63 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 -- Import-only aggregation/navigation root for the Aristotle / RH return lane.
 --
--- The current returned state includes the exact two-zero / three-taper theorem,
--- the explicit finite-near/far decomposition, the optimized gap-split no-go,
--- the §37 quarter-period/density reconciliation, and the §38 actual-zeta upper
--- local-count instance. Existing gap-split, selected-window, finite-near,
--- scalar-cancellation, highest-alpha and canonical RH schedulers consume those
--- returns directly, so this is one welded dependency graph rather than parallel
--- status ledgers.
+-- The §35--§38 return is retained as exact audit/scalarization infrastructure:
+-- quarter-period/density compatibility and zeta upper local counting are owned,
+-- while the clustering condition is a diagnostic for positivity of a gap-split
+-- NO-GO lower bound rather than a forward RH theorem.
 --
--- The Alpoge--Furman >2/3 simple/on-critical-line theorem is audited against the
--- live local-clustering consumer: its global population summary does not descend
--- directly to the selected target-local gap pattern. Transverse
--- alpha = Re(rho)-1/2 is also separated from the required ordinate
--- delta = Im(rho)-t.
+-- The rank-two determinant G2d lane similarly remains useful: it exposes the
+-- literal signed determinant sum, target-relative gap and M2_delta on one exact
+-- carrier. But the authoritative final contradiction owner explicitly does not
+-- identify that determinant taper with the universal pole-quotient taper.
+-- Therefore determinant DirectSignedConsumerPayment is diagnostic/scalarization
+-- unless an explicit same-object transport is supplied.
 --
--- DirectFinitePoleNearProducer is now the canonical concrete target-gap/phase
--- carrier. It is strengthened in place to realize the canonical
--- LiteralTargetCenteredScalarProblem, which itself now owns the literal
+-- The final high-ordinate pole-quotient consumer is already:
 --
---   M2_delta = finiteNearSum (m_sigma * (b_sigma-t)^2).
+--   cluster = offOrdinate + Gamma
+--   offOrdinate <= B_off
+--   Gamma <= B_Gamma
+--   B_off + B_Gamma < M_cluster.
 --
--- PoleNearPhaseStatistic and SignedFiniteNearEvaluationSurface compile from the
--- direct producer; neither should be reconstructed. The direct producer is then
--- welded to the existing ActualSelectedPoleNearProducer, after which the same
--- object can feed both the selected delta^2 moment/clustering route and selected
--- finite-near budget transport.
+-- The final split-complement compiler is owned. The 8889 checked-Lean return
+-- also owns quantitative cluster-margin mathematics, leaving only same-object
+-- attachment for that coordinate.
 --
--- The old post-369 donor-search scheduler is corrected in place: generic donor
--- attachment machinery remains reusable, but the current donor inventory has no
--- concrete exact literal donor, so name-level donor search is not the default
--- highest-alpha move. Recover the literal direct finite producer instead.
+-- Consumer adequacy is concrete on the final common ordered-additive carrier:
 --
--- Genuine zeta clustering, the actual direct/selected producer instantiations,
--- their same-object weld, the quantitative literal M2_delta estimate, selected
--- finite-near budget, Gamma precision, low-ordinate/global coverage and RH
--- remain open.
+--   B_off <= A_off
+--   B_Gamma <= A_Gamma
+--   A_off + A_Gamma < M_cluster.
+--
+-- The allowance-aware final assembly consumes the actual producer-payment
+-- records, so A_off/A_Gamma are literal transports of the allowances paid by
+-- the analytic theorems. The newer order-transport compiler compresses four
+-- downstream inequality transports into one relation-level order transport per
+-- Off/Gamma/Cluster source carrier. After those relation transports, the source
+-- upper/lower theorems and producer allowance fits compile automatically.
+--
+-- The Off leaf is further decomposed on one common quarter-period cutoff J:
+--
+--   D_off <= D_near(J) + D_far(J)
+--         <= B_near(J) + B_far(J)
+--         <= A_off.
+--
+-- Far-tail decay is owned, but J cannot be selected from the far channel alone
+-- because the signed near core changes with J. The live zero-side theorem is the
+-- joint common-cutoff allowance fit on the exact universal pole-quotient taper.
+--
+-- Gamma has no cutoff coordinate. Its terminal theorem is simply the same-taper
+-- assigned allowance fit B_Gamma(g_pole) <= A_Gamma. A concrete epsGamma /
+-- gammaConeEnvelope lineage is recovered historically. Generic Gamma-source
+-- discovery is therefore pruned; same-consumer identity with the 8889 producer
+-- remains the live source/provenance payment before precision-loss localization.
+--
+-- Existing representation machinery is reused rather than re-searched.
+-- Uninhabited adapter records remain infrastructure obligations, not fabricated
+-- proof terms and not new harmonic-analysis programmes.
+--
+-- Low-ordinate/global coverage and RH remain open. No theorem here derives RH.
 ------------------------------------------------------------------------
 
 import DASHI.Analysis.RiemannAristotleSharedWindowCertificateExact
@@ -65,6 +87,16 @@ import DASHI.Analysis.RiemannG2AdaptiveJLambdaConstantWindowExact
 import DASHI.Analysis.RiemannG2QuarterPeriodAnalyticRouteReconciliationExact
 import DASHI.Analysis.RiemannG2HighestAlphaAfter369Exact
 import DASHI.Analysis.RiemannG2HighestAlphaAfter8894Exact
+import DASHI.Analysis.RiemannG2PoleQuotientProducerAllowanceTargetExact
+import DASHI.Analysis.RiemannG2PoleQuotientChannelAllowanceExact
+import DASHI.Analysis.RiemannG2PoleQuotientOffAllowanceDirectCompilerExact
+import DASHI.Analysis.RiemannG2GammaProducerSourceAcquisitionExact
+import DASHI.Analysis.RiemannG2GammaCandidateSourceLineageRecoveryExact
+import DASHI.Analysis.RiemannG2PoleQuotientGammaAllowanceDirectCompilerExact
+import DASHI.Analysis.RiemannG2FinalSplitComplementAllowanceAssemblyExact
+import DASHI.Analysis.RiemannG2FinalSplitComplementOrderTransportCompilerExact
+import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact
+import DASHI.Analysis.RiemannAristotleRHFinalAllowanceLeafSchedulerExact
 import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerExact
 import DASHI.Analysis.RiemannAristotleRHAnalyticLeafSchedulerExact
 import DASHI.Analysis.RiemannAristotleNearCoreDensityReturnRegression
