@@ -79,7 +79,7 @@ record LargestSignedComponent
 
 ShellAt :
   {X : Set} → GraphGeometry X → (X → Set) → Nat → X → Set
-ShellAt G Source n x =
+ShellAt {X} G Source n x =
   Σ X (λ y → Source y × ExactDistance G x y n)
 
 BoundaryShell :
