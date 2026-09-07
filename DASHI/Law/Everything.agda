@@ -87,3 +87,4 @@ import DASHI.Law.HerzogIncidentFascismComparatorValidation
 import DASHI.Law.CoerciveContactAuditValidation
 import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything
 import DASHI.Law.SensibLawProofDirectedCorpusSearchEverything
+import DASHI.Law.SensibLawWoogarooBartyOutreachExact
