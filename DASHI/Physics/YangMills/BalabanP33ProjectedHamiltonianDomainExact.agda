@@ -15,14 +15,19 @@ module DASHI.Physics.YangMills.BalabanP33ProjectedHamiltonianDomainExact where
 --   symmetry(M) -> symmetry(PMP),
 --   v^T(PMP)v = (Pv)^T M(Pv).
 --
--- This module packages exactly the finite operator/domain consequence needed
--- by the M7 lane.  The operator is defined by construction as
+-- The existing physical SU(2) matrix-coercivity owner also proves that a
+-- literal matrix representation of the physical Hessian inherits the P33
+-- floor 1/32 on every coordinate vector.
+--
+-- This module packages the finite operator/domain consequence needed by the
+-- M7 lane.  The operator is defined by construction as
 --
 --   H_P(v) = P(M(Pv)).
 --
 -- Hence H_P(v) lies in im(P) for every v, so the physical projected domain is
--- invariant.  The existing matrix theorem identifies this operator pointwise
--- with the literal PMP matrix representative, and matrix symmetry is preserved.
+-- invariant.  On im(P), the P33 quadratic floor transports exactly to H_P.
+-- The floor is deliberately NOT asserted on the whole ambient carrier, where
+-- PMP can have zero modes outside im(P).
 --
 -- This is NOT continuum analytic self-adjointness, does not construct a dense
 -- operator core, and does not identify this finite Hessian with the continuum
@@ -30,11 +35,16 @@ module DASHI.Physics.YangMills.BalabanP33ProjectedHamiltonianDomainExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_)
+open import Relation.Binary.PropositionalEquality using (cong; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact as Sq
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateProjectorExact as Projector
+import DASHI.Physics.YangMills.BalabanP33PhysicalSU2MatrixCoercivityExact as MatrixCoercivity
+import DASHI.Physics.YangMills.BalabanP33Path4SignedRemainderCoercivityExact as P33
 
 PhysicalVector : Set
 PhysicalVector = Projector.PhysicalVector
@@ -142,6 +152,59 @@ projectedHamiltonianQuadraticMatchesMatrix
   Projector.projectedLiteralHessianMatrixRepresentsForm
     mask matrix vector
 
+projectedNormSqExactOnPhysicalDomain :
+  ∀ mask vector →
+  Projector.PhysicalConstraintProjectorImage mask vector →
+  Physical.physicalSU2CoordinateNormSq
+    (Projector.physicalCoordinateProject mask vector)
+  ≡ Physical.physicalSU2CoordinateNormSq vector
+projectedNormSqExactOnPhysicalDomain mask vector image =
+  Sums.sumRationalCong
+    Physical.physicalSU2Coordinates4
+    (λ coordinate →
+      Sq.sq (Projector.physicalCoordinateProject mask vector coordinate))
+    (λ coordinate → Sq.sq (vector coordinate))
+    (λ coordinate →
+      cong Sq.sq
+        (Projector.physicalConstraintProjectorImageCharacterizationForward
+          mask vector image coordinate))
+
+record CoerciveFiniteProjectedHamiltonian
+    (mask : PhysicalCoordinateMask) : Set₁ where
+  field
+    hessian : MatrixCoercivity.PhysicalSU2MatrixHessian
+    hessianSymmetric : ∀ left right →
+      MatrixCoercivity.matrix hessian left right
+      ≡ MatrixCoercivity.matrix hessian right left
+
+open CoerciveFiniteProjectedHamiltonian public
+
+coerciveProjectedHamiltonian :
+  ∀ {mask} →
+  CoerciveFiniteProjectedHamiltonian mask →
+  FiniteProjectedHamiltonian
+    mask
+    (MatrixCoercivity.matrix
+      (CoerciveFiniteProjectedHamiltonian.hessian _))
+coerciveProjectedHamiltonian package = record
+  { matrixSymmetric = hessianSymmetric package }
+
+projectedP33FloorOnPhysicalDomain :
+  ∀ {mask}
+    (package : CoerciveFiniteProjectedHamiltonian mask)
+    vector →
+  ProjectedPhysicalDomain
+    (coerciveProjectedHamiltonian package) vector →
+  P33.p33PhysicalFloor
+    * Physical.physicalSU2CoordinateNormSq vector
+  ≤ projectedHamiltonianQuadratic
+      (coerciveProjectedHamiltonian package) vector
+projectedP33FloorOnPhysicalDomain {mask} package vector image
+  rewrite sym (projectedNormSqExactOnPhysicalDomain mask vector image) =
+  MatrixCoercivity.physicalP33FloorTransfersToEveryCoordinate
+    (hessian package)
+    (Projector.physicalCoordinateProject mask vector)
+
 record FiniteProjectedHamiltonianClosure
     {mask : PhysicalCoordinateMask}
     {matrix : PhysicalMatrix}
@@ -191,10 +254,13 @@ p33ProjectedHamiltonianMatrixRepresentationLevel = machineChecked
 p33ProjectedHamiltonianFiniteSymmetryLevel : ProofLevel
 p33ProjectedHamiltonianFiniteSymmetryLevel = machineChecked
 
+p33ProjectedHamiltonianPhysicalFloorLevel : ProofLevel
+p33ProjectedHamiltonianPhysicalFloorLevel = machineChecked
+
 -- Promotion firewall.
 --
--- Finite rational projected-domain invariance and symmetric matrix
--- representation do not by themselves imply:
+-- Finite rational projected-domain invariance, symmetric matrix representation,
+-- and the 1/32 floor on the projector image do not by themselves imply:
 --   * a complete Hilbert carrier,
 --   * a genuine unbounded operator domain,
 --   * a common invariant dense operator core,
