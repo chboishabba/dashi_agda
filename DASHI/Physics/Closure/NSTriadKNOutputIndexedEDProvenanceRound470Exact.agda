@@ -3,20 +3,20 @@ module DASHI.Physics.Closure.NSTriadKNOutputIndexedEDProvenanceRound470Exact whe
 ------------------------------------------------------------------------
 -- ROUND470 / OUTPUT-LOCAL ED PROVENANCE -> GLOBAL R436 ROUTING
 --
--- R435 erases the modal-pair provenance of each scalar `cellED`.  R436 therefore
+-- R435 erases the modal-pair provenance of each scalar `cellED`. R436 therefore
 -- had to ask a caller for one global equality between `sumED` and an R109
--- selected-pair sum.  That global receipt is too late: the information was
+-- selected-pair sum. That global receipt is too late: the information was
 -- already erased.
 --
--- This owner repairs the direction of compilation.  Each fixed-output cell is
+-- This owner repairs the direction of compilation. Each fixed-output cell is
 -- constructed together with the local same-object receipt
 --
 --   cellED(k) = fold_{tau : outputFiber(k)} selectedPairED(tau).
 --
 -- From those local receipts only, list induction gives the sum over all output
--- fibres.  R39 identifies their concatenation with the complete physical triad
+-- fibres. R39 identifies their concatenation with the complete physical triad
 -- enumeration, and R469 identifies that physical fold with the R109 selected
--- cartesian pair sum.  Thus R436.PhysicalFixedOutputEDRouting is constructed
+-- cartesian pair sum. Thus R436.PhysicalFixedOutputEDRouting is constructed
 -- automatically: no caller-supplied global partition equality remains.
 ------------------------------------------------------------------------
 
@@ -25,14 +25,15 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (map)
-open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
+open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
+import DASHI.Physics.Closure.NSTriadKNSelectedPairEnergyDissipationProductRound109Exact as R109
 import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact as R38
 import DASHI.Physics.Closure.NSTriadKNF4GlobalOutputFiberPartitionRound39Exact as R39
 import DASHI.Physics.Closure.NSTriadKNPhysicalRawCurlCellEDAdapterRound219Exact as R219
@@ -74,18 +75,6 @@ cellsForOutputs :
   List (R435.UniformFixedOutputCriticalConeCell theta coefficient)
 cellsForOutputs family outputs = map (cellAt family) outputs
 
-selectedEDTriadValue :
-  ∀ {theta coefficient E I velocity cutoff select} →
-  OutputIndexedPhysicalEDFamily
-    {theta} {coefficient} E I velocity cutoff select →
-  Z3.FourierMode →
-  Z3.FourierMode →
-  Bool →
-  Set
-selectedEDTriadValue family left right decision = Set
-
--- The preceding phantom-free value is kept local through the theorem below;
--- the actual scalar function is R469.selectedTriadValue.
 sumEDCellsForOutputs :
   ∀ {theta coefficient E I velocity cutoff select}
     (family : OutputIndexedPhysicalEDFamily
@@ -136,8 +125,6 @@ globalEDPartitionEquality {E = E} {I = I} {velocity = velocity}
     (sym
       (R469.selectedPairsEqualOutputFibrePartitionFold
         (R219.physicalModalED E I velocity) cutoff select))
-  where
-  import DASHI.Physics.Closure.NSTriadKNSelectedPairEnergyDissipationProductRound109Exact as R109
 
 physicalRoutingFromOutputIndexedFamily :
   ∀ {theta coefficient E I velocity cutoff select}
