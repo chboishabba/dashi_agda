@@ -13,16 +13,13 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 
 ------------------------------------------------------------------------
 -- CLAIM-INDEXED ATTRIBUTED THEORY COMPARISON
---
--- ObservationTheoryComparison already binds observation and attributed
--- predictions.  This wrapper retains the originating antigravity consumer:
--- the exact claim, its exact gravitational route and one shared comparison claim
--- scope consumed by both predictions and the experimental result analysis.
--- Current typed gravitational routes distinguish the currently enumerated
--- gravitational claims; the explicit claim index is retained for scope,
--- provenance and future-refinement stability rather than to repair a present
--- typed-channel collision.
 ------------------------------------------------------------------------
+
+data IsAlternativeGravityFamily : Pred.GravityTheoryFamily → Set where
+  modifiedGravityFamily :
+    IsAlternativeGravityFamily Pred.modifiedGravityTheory
+  phenomenologicalGravityFamily :
+    IsAlternativeGravityFamily Pred.phenomenologicalGravityTheory
 
 record AntigravityMeasurementClaimBinding
     (claim : Anti.AntigravityClaim) : Set where
@@ -64,6 +61,11 @@ record ClaimIndexedTheoryComparison
         (Attr.prediction (Unified.ordinaryGRPrediction comparison))
         ≡ Pred.generalRelativityTheory
 
+    alternativePredictionIsNonGR :
+      IsAlternativeGravityFamily
+        (Pred.theoryFamily
+          (Attr.prediction (Unified.modifiedGravityPrediction comparison)))
+
 open ClaimIndexedTheoryComparison public
 
 ------------------------------------------------------------------------
@@ -74,6 +76,7 @@ data ClaimComparisonResidual : Set where
   missingClaimBoundMeasurement : ClaimComparisonResidual
   missingOrdinaryAttributedPrediction : ClaimComparisonResidual
   missingAlternativeAttributedPrediction : ClaimComparisonResidual
+  alternativePredictionFamilyNotTyped : ClaimComparisonResidual
   missingOrdinaryPredictionWeld : ClaimComparisonResidual
   missingAlternativePredictionWeld : ClaimComparisonResidual
   missingExactSharedClaimScope : ClaimComparisonResidual
@@ -88,6 +91,8 @@ producerForClaimComparisonResidual missingOrdinaryAttributedPrediction =
   Search.propositionSourceProducer
 producerForClaimComparisonResidual missingAlternativeAttributedPrediction =
   Search.propositionSourceProducer
+producerForClaimComparisonResidual alternativePredictionFamilyNotTyped =
+  Search.discriminatorProducer
 producerForClaimComparisonResidual missingOrdinaryPredictionWeld =
   Search.identityProducer
 producerForClaimComparisonResidual missingAlternativePredictionWeld =
@@ -100,9 +105,7 @@ producerForClaimComparisonResidual comparisonResidualOpen =
   Search.contradictionProducer
 
 ------------------------------------------------------------------------
--- Introspective collision at the deliberately coarse observation-family level.
--- The current exact typed routes are distinct; the coarse label below erases
--- that distinction and therefore cannot determine the downstream consumer.
+-- Coarse observation-family collision.  Exact typed routes remain distinct.
 ------------------------------------------------------------------------
 
 data CoarseLaboratoryClaimFixture : Set where
@@ -131,6 +134,11 @@ coarseFamilyDoesNotFixClaimDecision :
     ≡ fixtureClaimDecision passiveWeightClaimFixture → ⊥
 coarseFamilyDoesNotFixClaimDecision ()
 
+------------------------------------------------------------------------
+-- A field name does not enforce a theory family.  The wrapper above supplies
+-- the missing type-level non-GR witness for the comparison's alternative slot.
+------------------------------------------------------------------------
+
 record ClaimTheoryComparisonBoundary : Set where
   constructor claim-theory-comparison-boundary
   field
@@ -139,6 +147,8 @@ record ClaimTheoryComparisonBoundary : Set where
     exactOriginatingClaimRetainedForScopeAndProvenance : Bool
     exactSharedPredictionClaimScopeRequired : Bool
     ordinaryPredictionMustBeGR : Bool
+    fieldNamedModifiedPredictionGuaranteesNonGRFamily : Bool
+    explicitAlternativeFamilyWitnessRequired : Bool
     attributedPredictionsAutomaticallyMatchMeasurement : Bool
     betterAlternativeFitAutomaticallyProvesAlternativeTheory : Bool
     completedComparisonAutomaticallyProvesAntigravity : Bool
@@ -147,4 +157,4 @@ record ClaimTheoryComparisonBoundary : Set where
 canonicalClaimTheoryComparisonBoundary : ClaimTheoryComparisonBoundary
 canonicalClaimTheoryComparisonBoundary =
   claim-theory-comparison-boundary
-    false true true true true false false false true
+    false true true true true false true false false false true
