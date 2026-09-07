@@ -108,7 +108,8 @@ exampleBundle = record
   { SharedActivity = Activity
   ; AuthorityIndex = Authority
   ; projectionAt = projectionAtExample
-  ; embedActivity = λ _ activity → activity
+  ; embedActivity = λ { au activity → activity ; eu activity → activity }
+
   ; bundleReading = "Two independent authority projections over one activity carrier."
   }
 

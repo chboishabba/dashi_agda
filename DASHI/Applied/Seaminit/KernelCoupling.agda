@@ -28,9 +28,8 @@ record ROMKernel (Pose : Set) : Set₁ where
     pathEnd        : Path → Pose
     loadCocycle    : Path → Debt
 
-record FabricKernel : Set₁ where
+record FabricKernel (Fabric : Set) : Set₁ where
   field
-    Fabric          : Set
     FabricFeature   : Set
     feature         : Fabric → FabricFeature
     admissible      : Fabric → Bool
@@ -61,13 +60,14 @@ record CoefficientCoupler
 record FieldFamily
   (Pose Fabric Vertex Coeff Field : Set)
   (rom : ROMKernel Pose)
-  (fab : FabricKernel)
+  (fab : FabricKernel Fabric)
   (basis : BodyBasis Vertex Coeff Field)
   (coupler : CoefficientCoupler
     (ROMKernel.Feature rom)
     (FabricKernel.FabricFeature fab)
     Coeff)
   : Set₁ where
+
 
   private
     module R = ROMKernel rom
@@ -133,7 +133,7 @@ record SeaminitKernelEngine : Set₂ where
 
     geometry      : BodyGeometry
     rom           : ROMKernel Pose
-    fabricKernel  : FabricKernel
+    fabricKernel  : FabricKernel Fabric
     basis         : BodyBasis Vertex Coeff Field
     coupler       : CoefficientCoupler
       (ROMKernel.Feature rom)
