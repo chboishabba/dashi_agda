@@ -13,6 +13,8 @@ import DASHI.Law.SensibLawWrongTypeCausationElementExact as Element
 import DASHI.Law.SensibLawTemporalHealthEvidenceWrongTypeExact as TemporalHealth
 import DASHI.Law.SensibLawBackupNegativeEvidenceBoundaryExact as BackupEvidence
 import DASHI.Law.SensibLawRecordingManifestLineageExact as RecordingLineage
+import DASHI.Interop.ITIRSuiteNormalizedCompilerParityExact as ITIRParity
+import DASHI.Interop.ITIRRecordingManifestSensibLawAdapterExact as ITIRRecording
 import DASHI.Law.QueenslandWrongTypeCausationDeclarationExact as Queensland
 
 ------------------------------------------------------------------------
@@ -53,7 +55,6 @@ data CoordinateRequirement : Set where
   requiredCoordinate : CoordinateRequirement
   conditionallyRequiredCoordinate : CoordinateRequirement
   downstreamCoordinate : CoordinateRequirement
-
 
 coordinateRequirement : LegalRuntimeCoordinate → CoordinateRequirement
 coordinateRequirement runtimePNFCoordinate = requiredCoordinate
@@ -193,6 +194,16 @@ selectedRecordingManifestLineageBoundary :
   RecordingLineage.RecordingManifestLineageBoundary
 selectedRecordingManifestLineageBoundary =
   RecordingLineage.canonicalRecordingManifestLineageBoundary
+
+selectedITIRNormalizedCompilerParityBoundary :
+  ITIRParity.ITIRSuiteNormalizedParityBoundary
+selectedITIRNormalizedCompilerParityBoundary =
+  ITIRParity.canonicalITIRSuiteNormalizedParityBoundary
+
+selectedITIRRecordingSensibLawParityBoundary :
+  ITIRRecording.ITIRRecordingSensibLawParityBoundary
+selectedITIRRecordingSensibLawParityBoundary =
+  ITIRRecording.canonicalITIRRecordingSensibLawParityBoundary
 
 ------------------------------------------------------------------------
 -- Firewalls.
