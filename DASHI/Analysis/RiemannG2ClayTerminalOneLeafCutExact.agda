@@ -9,6 +9,7 @@ import DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact as Universal
 import DASHI.Analysis.RiemannPlattTrudgianLowCompletionAdapterExact as Low
 import DASHI.Analysis.RiemannG2UniformIndependentComplementHighProducerExact as High
 import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact as Stability
+import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
 
 ------------------------------------------------------------------------
 -- CLAY-FACING TERMINAL CUT
@@ -23,17 +24,16 @@ import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact as Stability
 --   S. an exact refinement of the abstract completed-zeta criticalLine
 --      predicate to a concrete stable predicate.
 --
--- The old naked `CriticalLineStable` assumption is no longer a primitive field
--- of this terminal input.  It is compiler output from S.
+-- L+H+C compile first to constructive double-negated RH.  S is used only in the
+-- final logical conversion to positive prize-facing RH.  Thus stability is no
+-- longer entangled with the harmonic-analysis producer.
 --
 -- H is the only remaining high-side scalar analytic family.  Its per-case heart
 -- is the one-leaf inequality
 --
 --   cast(D_near(J)+B_far(J)) + cast(D_Gamma(g_pole)) < cast(M_cluster),
 --
--- proved independently of the final cluster balance.  The direct high case goes
--- straight through SplitPoleQuotientComplementMargin to bottom.  No allowance,
--- payment, analytic-core, or further contradiction theorem sits after H.
+-- proved independently of the final cluster balance.
 ------------------------------------------------------------------------
 
 record ClayTerminalOneLeafInput
@@ -48,63 +48,51 @@ record ClayTerminalOneLeafInput
     lowTransport :
       Low.PlattTrudgianLowCriticalityTransport analytic LowRegion
 
-    criticalLineRefinement :
-      Stability.CriticalLinePredicateRefinement analytic
-
     highProducer :
       High.UniformIndependentComplementHighProducer analytic HighRegion
+
+    criticalLineRefinement :
+      Stability.CriticalLinePredicateRefinement analytic
 
     terminalReference : String
 
 open ClayTerminalOneLeafInput public
 
-compiledLowCritical :
+compiledNegativeRHInput :
   forall {analytic} ->
-  (input : ClayTerminalOneLeafInput analytic) ->
-  (rho : Universal.AnalyticNontrivialZero analytic) ->
-  LowRegion input rho ->
-  Universal.analyticCritical rho
-compiledLowCritical input =
-  Low.compileLowCertifiedCritical (lowTransport input)
+  ClayTerminalOneLeafInput analytic ->
+  Negative.DirectOneLeafNegativeRHInput analytic
+compiledNegativeRHInput input = record
+  { Negative.LowRegion = LowRegion input
+  ; Negative.HighRegion = HighRegion input
+  ; Negative.lowHighCover = lowHighCover input
+  ; Negative.lowTransport = lowTransport input
+  ; Negative.highProducer = highProducer input
+  ; Negative.completionReference = terminalReference input
+  }
+
+compiledDoubleNegatedRH :
+  forall {analytic} ->
+  ClayTerminalOneLeafInput analytic ->
+  Negative.DoubleNegatedRiemannHypothesisFor analytic
+compiledDoubleNegatedRH input =
+  Negative.compileDirectOneLeafNegativeRH (compiledNegativeRHInput input)
 
 compiledCriticalLineStable :
   forall {analytic} ->
-  (input : ClayTerminalOneLeafInput analytic) ->
+  ClayTerminalOneLeafInput analytic ->
   Universal.CriticalLineStable analytic
 compiledCriticalLineStable input =
   Stability.compileCriticalLineStable (criticalLineRefinement input)
-
-compiledHighCritical :
-  forall {analytic} ->
-  (input : ClayTerminalOneLeafInput analytic) ->
-  (rho : Universal.AnalyticNontrivialZero analytic) ->
-  HighRegion input rho ->
-  Universal.analyticCritical rho
-compiledHighCritical input =
-  High.highCriticalFromIndependentComplement
-    (compiledCriticalLineStable input)
-    (highProducer input)
-
-compiledAnalyticHighLowCompletion :
-  forall {analytic} ->
-  (input : ClayTerminalOneLeafInput analytic) ->
-  Universal.AnalyticHighLowCompletion analytic
-compiledAnalyticHighLowCompletion input =
-  Universal.analytic-high-low-completion
-    (LowRegion input)
-    (HighRegion input)
-    (lowHighCover input)
-    (compiledLowCritical input)
-    (compiledHighCritical input)
 
 compileClayTerminalOneLeafToRH :
   forall {analytic} ->
   ClayTerminalOneLeafInput analytic ->
   Analytic.RiemannHypothesisFor analytic
-compileClayTerminalOneLeafToRH {analytic} input =
-  Universal.analyticHighLowCompletionImpliesRH
-    analytic
-    (compiledAnalyticHighLowCompletion input)
+compileClayTerminalOneLeafToRH input =
+  Negative.negativeRHPlusPredicateRefinementImpliesRH
+    (criticalLineRefinement input)
+    (compiledDoubleNegatedRH input)
 
 ------------------------------------------------------------------------
 -- BOUNDARY
@@ -141,13 +129,17 @@ record ClayTerminalOneLeafBoundary : Set where
     lowHighCoverStillRequiredIsTrue :
       lowHighCoverStillRequired ≡ true
 
+    analyticHighLowRouteCompilesDoubleNegatedRHWithoutStability : Bool
+    analyticHighLowRouteCompilesDoubleNegatedRHWithoutStabilityIsTrue :
+      analyticHighLowRouteCompilesDoubleNegatedRHWithoutStability ≡ true
+
     nakedCriticalLineStabilityIsPrimitiveTerminalField : Bool
     nakedCriticalLineStabilityIsPrimitiveTerminalFieldIsFalse :
       nakedCriticalLineStabilityIsPrimitiveTerminalField ≡ false
 
-    exactCriticalLinePredicateRefinementStillRequired : Bool
-    exactCriticalLinePredicateRefinementStillRequiredIsTrue :
-      exactCriticalLinePredicateRefinementStillRequired ≡ true
+    exactCriticalLinePredicateRefinementStillRequiredForPositiveRH : Bool
+    exactCriticalLinePredicateRefinementStillRequiredForPositiveRHIsTrue :
+      exactCriticalLinePredicateRefinementStillRequiredForPositiveRH ≡ true
 
     criticalLineStabilityCompilesFromRefinement : Bool
     criticalLineStabilityCompilesFromRefinementIsTrue :
@@ -175,10 +167,11 @@ canonicalClayTerminalOneLeafBoundary =
     true refl
     true refl
     true refl
+    true refl
     false refl
     true refl
     true refl
     true refl
     false refl
     false refl
-    "The prize-facing compiler is direct and allowance-free. Low-side work is one exact Platt--Trudgian verified-region transport plus the Low/High cover. High-side scalar work is one uniform family of independent literal complement-margin cases, each compiling directly through the split-complement contradiction. The previous naked CriticalLineStable premise is removed from the canonical input: instead identify the abstract completed-zeta criticalLine predicate with an exact stable refinement, from which stability compiles constructively. Separate finite-near/Gamma envelope APIs, payment records and consumer-assigned allowances are not canonical prerequisites. Given these same-substrate inputs, RiemannHypothesisFor is compiler output. None is fabricated here, so no unconditional RH theorem is claimed."
+    "The prize-facing compiler is direct and allowance-free. Low verified-region transport, the Low/High cover, and the uniform high contradiction compile first to double-negated RH with no critical-line stability assumption. Only the final conversion to positive RH consumes the exact critical-predicate refinement. The high scalar work remains one uniform family of independent literal complement-margin cases. Separate finite-near/Gamma envelope APIs, payment records and consumer-assigned allowances are not canonical prerequisites. None of the substantive inputs is fabricated here, so no unconditional RH theorem is claimed."
