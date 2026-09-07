@@ -19,8 +19,9 @@ import DASHI.Interop.AristotleEvidenceSurfaceIdentityBoundaryExact as Identity
 --   native Wikibase owns GUID / snak / rank / qualifiers / references;
 --   bounded Zelph owns adjacency / derived graph context / type module.
 --
--- Pruned-graph query preservation, Q/P statement-family coverage, constraint
--- profile coverage and revision alignment remain separate receipts.
+-- Pruned-graph query soundness, optional negative completeness, Q/P statement-
+-- family coverage, constraint-profile coverage and revision alignment remain
+-- separate receipts.
 ------------------------------------------------------------------------
 
 record NativeWikibaseStatementPlane : Set where
@@ -48,7 +49,7 @@ record ZelphGraphContextPlane : Set where
     graphRevisionReference : String
     boundedAdjacencyReference : String
     derivedRelationReference : String
-    typeModule : Modules.TypeClosureModuleReceipt
+    typeModule : Modules.TypeClosureSoundnessReceipt
     queryPreservation : Preservation.QueryFamilySoundnessReceipt
     ownsNativeStatementBundle : Bool
     ownsNativeStatementBundleIsFalse : ownsNativeStatementBundle ≡ false
@@ -136,7 +137,8 @@ record WikibaseZelphJoinBoundary : Set where
     nativeAndGraphPlanesRemainDistinct : Bool
     nativePlaneOwnsStatementBundleSemantics : Bool
     graphPlaneOwnsBoundedRelationContext : Bool
-    prunedGraphNeedsQueryFamilyPreservation : Bool
+    prunedGraphNeedsQueryFamilySoundness : Bool
+    positiveSoundnessCreatesNegativeCompleteness : Bool
     graphCompletenessCertifiesNativeFamilyCoverage : Bool
     differentRevisionIdentifiersNeedAlignment : Bool
     joinedSurfaceHasContentIdentity : Bool
@@ -146,8 +148,8 @@ record WikibaseZelphJoinBoundary : Set where
 
 canonicalWikibaseZelphJoinBoundary : WikibaseZelphJoinBoundary
 canonicalWikibaseZelphJoinBoundary =
-  wikibase-zelph-join-boundary true true true true false true true false false false
+  wikibase-zelph-join-boundary true true true true false false true true false false false
 
 wikibaseZelphJoinStatement : String
 wikibaseZelphJoinStatement =
-  "SensibLaw joins a revision-pinned native Wikibase statement plane with a bounded Zelph graph-context plane without collapsing their authority or information content. Native Wikibase owns GUID/snak/rank/qualifier/reference semantics; Zelph owns bounded adjacency and derived graph context. A pruned graph needs a query-family preservation receipt, complete graph coverage does not certify native Q/P statement-family completeness, different revision identifiers require an explicit alignment receipt, and canonical content identity is replay-only. The joined surface creates neither promotion nor edit authority."
+  "SensibLaw joins a revision-pinned native Wikibase statement plane with a bounded Zelph graph-context plane without collapsing their authority or information content. Native Wikibase owns GUID/snak/rank/qualifier/reference semantics; Zelph owns bounded adjacency and derived graph context. A pruned graph needs query-family positive-answer soundness before derived relations are admitted; that soundness alone does not create negative completeness. Complete graph coverage does not certify native Q/P statement-family completeness, different revision identifiers require an explicit alignment receipt, and canonical content identity is replay-only. The joined surface creates neither promotion nor edit authority."
