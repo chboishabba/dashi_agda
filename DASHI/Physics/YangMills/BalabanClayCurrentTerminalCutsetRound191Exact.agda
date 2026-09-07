@@ -24,7 +24,7 @@ module DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound191Exact whe
 -- are useful archaeology but are not the preferred proof-search cutset.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; _∷_; [])
 
@@ -119,16 +119,9 @@ eq119ScalarEmbeddingStillOpen = refl
 M7PreferredOperatorInput : Set → Set → Set₁
 M7PreferredOperatorInput = Kato.KatoM7OperatorPackage
 
-m7DomainAndSelfAdjointnessCompiler :
-  ∀ {Hilbert Scalar} →
-  M7PreferredOperatorInput Hilbert Scalar →
-  Kato.AssociatedSelfAdjointOperator
-    (Kato.physicalForm ∘ Kato.KatoM7OperatorPackage.physical)
-  -- The eta-expanded form below is used at call sites; this declaration is
-  -- intentionally not exported as a new physical inhabitant.
-  
--- Keep the executable compiler under its canonical owner rather than duplicate
--- its dependent result type here.
+-- Keep the executable dependent compiler under the canonical Kato owner.
+-- Round191 exposes its proof level and source cut rather than duplicating the
+-- result type and accidentally creating a parallel terminal API.
 m7DomainAndSelfAdjointnessCompilerLevel : ProofLevel
 m7DomainAndSelfAdjointnessCompilerLevel = Kato.katoClosedFormHamiltonianCompilerLevel
 
@@ -157,7 +150,7 @@ m7RawSelfAdjointStatusStillOpen :
 m7RawSelfAdjointStatusStillOpen = refl
 
 -- Scheduler law: the two raw false coordinates above must not be interpreted as
--- two independent analytic theorem searches.  Their preferred producer is the
+-- two independent analytic theorem searches. Their preferred producer is the
 -- one Kato package; the common invariant core is not produced by Kato.
 
 ------------------------------------------------------------------------
