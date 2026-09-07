@@ -1,25 +1,28 @@
 module DASHI.Physics.Closure.NSTriadKNR423LocalPaymentPrerequisiteRound489Exact where
 
 ------------------------------------------------------------------------
--- ROUND489 / LOCAL R423 PAYMENT: STANDARD LAPLACE REALIZATION BEFORE PHYSICS
+-- ROUND489 / LOCAL R423 PAYMENT: STANDARD LAPLACE AUTHORITY BEFORE PHYSICS
 --
 -- R440 already closes the finite physical same-object identification:
 -- both nonlinear double-sum halves factor to the same fixed-output R439
 -- quadratic-companion cross.  R295 already proves any function of the physical
 -- cell rate is swap-invariant, so p/q reindexing is not the missing theorem.
 --
--- The remaining local producer has two ordered prerequisites:
+-- R490 isolates the standard positive-rate Laplace theorem as a typed authority.
+-- R491 then proves that a scalar realization for R443.cauchyEntry specializes
+-- directly to the literal R446 physical cell kernel; there is no additional
+-- Navier--Stokes kernel-identification theorem after that scalar authority.
 --
---   L1. analytic Laplace/heat realization of the literal Cauchy resolvent
---       pair weight on the SAME positive-rate physical cells;
+-- The remaining ordered prerequisites are therefore:
 --
---   L2. cutoff-uniform same-output/same-scale signed spacetime estimate for
---       the resulting heat-weighted quadratic-companion cross.
+--   L1. inhabit the STANDARD scalar positive-rate Laplace authority for the
+--       literal rational Cauchy entry;
 --
--- L1 is standard-analysis / representation authority.  L2 is the genuinely
--- Navier--Stokes-specific analytic payment.  The scheduler prevents L2 from
--- being claimed on a heat carrier before L1 has actually identified that heat
--- carrier with the resolvent object consumed downstream.
+--   L2. prove the cutoff-uniform same-output/same-scale signed spacetime
+--       estimate for the resulting heat-weighted quadratic-companion cross.
+--
+-- L1 is standard analysis / representation authority.  L2 is the genuinely
+-- Navier--Stokes-specific analytic payment.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -31,27 +34,29 @@ import DASHI.Physics.Closure.NSTriadKNCellRateSwapInvariantWeightRound295Exact a
 import DASHI.Physics.Closure.NSTriadKNHeatFactorizedPairRemainderRound299Exact as R299
 import DASHI.Physics.Closure.NSTriadKNPhysicalHeatDoubleSumFactorizationRound440Exact as R440
 import DASHI.Physics.Closure.NSTriadKNR423FixedOutputProducerProofSearchRound488Exact as R488
+import DASHI.Physics.Closure.NSTriadKNPositiveRateLaplaceAuthorityRound490Exact as R490
+import DASHI.Physics.Closure.NSTriadKNPhysicalCauchyLaplaceWeldRound491Exact as R491
 
 ------------------------------------------------------------------------
 -- First-missing local prerequisites.
 ------------------------------------------------------------------------
 
 data LocalPaymentResidual : Set where
-  missingLaplaceHeatRealization : LocalPaymentResidual
+  missingStandardLaplaceAuthority : LocalPaymentResidual
   missingSignedSpacetimeEstimate : LocalPaymentResidual
   localPaymentClosed : LocalPaymentResidual
 
 record LocalPaymentStatus : Set where
   constructor local-payment-status
   field
-    laplaceHeatRealizationPresent : Bool
+    standardLaplaceAuthorityPresent : Bool
     signedSpacetimeEstimatePresent : Bool
 
 open LocalPaymentStatus public
 
 firstLocalResidual : LocalPaymentStatus → LocalPaymentResidual
 firstLocalResidual (local-payment-status false estimate) =
-  missingLaplaceHeatRealization
+  missingStandardLaplaceAuthority
 firstLocalResidual (local-payment-status true false) =
   missingSignedSpacetimeEstimate
 firstLocalResidual (local-payment-status true true) =
@@ -63,7 +68,7 @@ data LocalMechanism : Set where
   CompileFixedOutputPayment : LocalMechanism
 
 mechanismFor : LocalPaymentResidual → LocalMechanism
-mechanismFor missingLaplaceHeatRealization = LookStandardLaplaceAuthority
+mechanismFor missingStandardLaplaceAuthority = LookStandardLaplaceAuthority
 mechanismFor missingSignedSpacetimeEstimate = ThinkSameScaleSignedSpacetime
 mechanismFor localPaymentClosed = CompileFixedOutputPayment
 
@@ -71,7 +76,7 @@ currentLocalStatus : LocalPaymentStatus
 currentLocalStatus = local-payment-status false false
 
 currentFirstLocalResidual :
-  firstLocalResidual currentLocalStatus ≡ missingLaplaceHeatRealization
+  firstLocalResidual currentLocalStatus ≡ missingStandardLaplaceAuthority
 currentFirstLocalResidual = refl
 
 currentLocalMechanism :
@@ -92,7 +97,7 @@ afterLaplaceMechanism :
 afterLaplaceMechanism = refl
 
 ------------------------------------------------------------------------
--- Exact pins to owned finite infrastructure.
+-- Exact pins to owned infrastructure.
 ------------------------------------------------------------------------
 
 cellRateFunctionAlreadyBuildsSwapInvariantWeight :
@@ -107,9 +112,20 @@ commonCrossAlreadyIdentifiedWithQuadraticCompanion :
   R440.round440CommonCrossIsR439QuadraticCompanionCross ≡ true
 commonCrossAlreadyIdentifiedWithQuadraticCompanion = refl
 
-analyticLaplaceRealizationStillOpen :
-  R440.round440AnalyticLaplaceRepresentationInstalled ≡ false
-analyticLaplaceRealizationStillOpen = refl
+standardLaplaceIsAuthorityLayer :
+  R490.round490StandardLaplaceTheoremIsAuthorityLayer ≡ true
+standardLaplaceIsAuthorityLayer =
+  R490.round490StandardLaplaceTheoremIsAuthorityLayerIsTrue
+
+physicalCellWeldNeedsNoNewNSIdentity :
+  R491.round491PhysicalCellLaplaceWeldNeedsNoNewNSIdentity ≡ true
+physicalCellWeldNeedsNoNewNSIdentity =
+  R491.round491PhysicalCellLaplaceWeldNeedsNoNewNSIdentityIsTrue
+
+standardAuthorityStillNeedsInhabitant :
+  R490.round490AuthorityInterfaceCreatesAuthorityInhabitant ≡ false
+standardAuthorityStillNeedsInhabitant =
+  R490.round490AuthorityInterfaceCreatesAuthorityInhabitantIsFalse
 
 signedSpacetimeEstimateStillOpen :
   R440.round440SignedCrossSpacetimeEstimateClosed ≡ false
@@ -135,18 +151,19 @@ laplaceAuthorityDisposition = Least.admitted
 signedSpacetimeDispositionAfterLaplace : Least.RouteDisposition
 signedSpacetimeDispositionAfterLaplace = Least.admitted
 
-estimateBeforeSameObjectRealizationDisposition : Least.RouteDisposition
-estimateBeforeSameObjectRealizationDisposition =
+estimateBeforeStandardAuthorityDisposition : Least.RouteDisposition
+estimateBeforeStandardAuthorityDisposition =
   Least.rejected Least.missingPrerequisite
 
 reproveFiniteDoubleSumDisposition : Least.RouteDisposition
 reproveFiniteDoubleSumDisposition = Least.redirectedReuse
 
-data HeatNameCreatesLaplaceReceipt : Set where
+data AuthorityInterfaceCreatesInhabitant : Set where
 data FiniteFactorizationPaysSpacetimeEstimate : Set where
 
-heatNameDoesNotCreateLaplaceReceipt : HeatNameCreatesLaplaceReceipt → ⊥
-heatNameDoesNotCreateLaplaceReceipt ()
+authorityInterfaceDoesNotCreateInhabitant :
+  AuthorityInterfaceCreatesInhabitant → ⊥
+authorityInterfaceDoesNotCreateInhabitant ()
 
 finiteFactorizationDoesNotPaySpacetimeEstimate :
   FiniteFactorizationPaysSpacetimeEstimate → ⊥
@@ -159,8 +176,11 @@ finiteFactorizationDoesNotPaySpacetimeEstimate ()
 round489FiniteSameObjectWorkClosed : Bool
 round489FiniteSameObjectWorkClosed = true
 
-round489FirstMissingIsLaplaceHeatRealization : Bool
-round489FirstMissingIsLaplaceHeatRealization = true
+round489FirstMissingIsStandardLaplaceAuthority : Bool
+round489FirstMissingIsStandardLaplaceAuthority = true
+
+round489PhysicalLaplaceKernelWeldNeedsNoNewNSIdentity : Bool
+round489PhysicalLaplaceKernelWeldNeedsNoNewNSIdentity = true
 
 round489LaplaceLayerClassifiedAsStandardAnalysis : Bool
 round489LaplaceLayerClassifiedAsStandardAnalysis = true
@@ -168,8 +188,8 @@ round489LaplaceLayerClassifiedAsStandardAnalysis = true
 round489PhysicalDiscoveryLeafIsSignedSpacetimeEstimate : Bool
 round489PhysicalDiscoveryLeafIsSignedSpacetimeEstimate = true
 
-round489AnalyticLaplaceRealizationClosed : Bool
-round489AnalyticLaplaceRealizationClosed = false
+round489StandardLaplaceAuthorityInhabited : Bool
+round489StandardLaplaceAuthorityInhabited = false
 
 round489SignedSpacetimeEstimateClosed : Bool
 round489SignedSpacetimeEstimateClosed = false
@@ -183,9 +203,9 @@ round489R423SignedCompanionBudgetClosed = false
 round489ClayPromotion : Bool
 round489ClayPromotion = false
 
-round489AnalyticLaplaceRealizationClosedIsFalse :
-  round489AnalyticLaplaceRealizationClosed ≡ false
-round489AnalyticLaplaceRealizationClosedIsFalse = refl
+round489StandardLaplaceAuthorityInhabitedIsFalse :
+  round489StandardLaplaceAuthorityInhabited ≡ false
+round489StandardLaplaceAuthorityInhabitedIsFalse = refl
 
 round489SignedSpacetimeEstimateClosedIsFalse :
   round489SignedSpacetimeEstimateClosed ≡ false
