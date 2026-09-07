@@ -76,11 +76,11 @@ williamMcCaslandIdentity = I.identity-receipt
 jasonThomasIdentity : I.IdentityReceipt
 jasonThomasIdentity = I.identity-receipt
   "Jason Thomas"
-  "Jason R Thomas"
-  (I.fullLegalOrPublishedName ∷ I.middleNameOrInitial ∷ I.institution ∷ I.technicalField ∷ I.roleTitle ∷ [])
-  I.identityPartial
-  "Event reporting identifies Jason Thomas as Novartis assistant director of chemical biology; PubMed identifies Jason R Thomas as a Novartis Cambridge chemical-biology author through 2024"
-  "Institution and technical field align strongly, but an explicit primary source welding the event subject to the middle-initial publication identity has not yet been located."
+  "Jason R. Thomas"
+  (I.fullLegalOrPublishedName ∷ I.middleNameOrInitial ∷ I.institution ∷ I.technicalField ∷ I.roleTitle ∷ I.familyOrAlias ∷ [])
+  I.identitySourceBacked
+  "Family obituary names Jason R. Thomas and his Novartis chemical-biology leadership career; NBC/Dateline reporting identifies missing Jason Thomas in the same Novartis chemical-biology role and family context; PubMed identifies Jason R. Thomas as a Novartis Cambridge chemical-biology author"
+  "Full name from the family obituary plus the same employer, discipline, leadership role and family context provide a source-backed weld to the publication identity."
 
 carlGrillmairIdentity : I.IdentityReceipt
 carlGrillmairIdentity = I.identity-receipt
