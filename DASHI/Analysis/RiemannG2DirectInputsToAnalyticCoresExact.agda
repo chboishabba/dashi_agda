@@ -6,9 +6,9 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannG2PoleQuotientOffAllowanceDirectCompilerExact as Off
 import DASHI.Analysis.RiemannG2PoleQuotientGammaAllowanceDirectCompilerExact as Gamma
-import DASHI.Analysis.RiemannG2PoleQuotientProducerAllowanceTargetExact as Payment
 import DASHI.Analysis.RiemannG2FinalPoleQuotientAnalyticCoreExact as Core
 import DASHI.Analysis.RiemannG2CertifiedFiniteNearToOffPaymentExact as CertifiedOff
+import DASHI.Analysis.RiemannG2AllowancePaymentsToAnalyticCoresExact as Factor
 
 ------------------------------------------------------------------------
 -- HISTORICAL DIRECT INPUTS -> MINIMAL ANALYTIC CORES
@@ -86,29 +86,17 @@ directGammaPaymentFactorsThroughAnalyticCore input = refl
 ------------------------------------------------------------------------
 -- Certified finite-upper Off route -> current analytic core.
 --
--- The newer proof-carrying finite route already compiles a final Off payment.
--- Project only its theorem-bearing fields into the authoritative core; the
--- payment's cutoff/taper receipts remain representation data.
+-- Reuse the generic terminal-payment -> core factorization owner rather than
+-- maintaining a second payment projection here.
 ------------------------------------------------------------------------
-
-paymentToOffAnalyticCore :
-  Payment.PoleQuotientOffAllowancePayment →
-  Core.OffAnalyticCore
-paymentToOffAnalyticCore payment =
-  Core.off-analytic-core
-    (Payment.PoleQuotientOffAllowancePayment.target payment)
-    (Payment.PoleQuotientOffAllowancePayment.assignedOffAllowance payment)
-    (Payment.PoleQuotientOffAllowancePayment.offBudgetBelowAssignedAllowance payment)
-    (Payment.PoleQuotientOffAllowancePayment.producerReference payment)
 
 certifiedFiniteUpperOffAnalyticCore :
   ∀ {space formula window S transport} →
   CertifiedOff.CertifiedFiniteNearUpperOffPacket
     space formula window S transport →
   Core.OffAnalyticCore
-certifiedFiniteUpperOffAnalyticCore packet =
-  paymentToOffAnalyticCore
-    (CertifiedOff.compileCertifiedFiniteNearUpperOffPayment packet)
+certifiedFiniteUpperOffAnalyticCore =
+  Factor.certifiedFiniteNearUpperToOffAnalyticCore
 
 record DirectInputsToAnalyticCoresBoundary : Set where
   constructor direct-inputs-to-analytic-cores-boundary
@@ -128,6 +116,10 @@ record DirectInputsToAnalyticCoresBoundary : Set where
     certifiedFiniteUpperRouteCompilesOffAnalyticCore : Bool
     certifiedFiniteUpperRouteCompilesOffAnalyticCoreIsTrue :
       certifiedFiniteUpperRouteCompilesOffAnalyticCore ≡ true
+
+    genericPaymentFactorizationReused : Bool
+    genericPaymentFactorizationReusedIsTrue :
+      genericPaymentFactorizationReused ≡ true
 
     representationReceiptsCountAsFreshAnalysis : Bool
     representationReceiptsCountAsFreshAnalysisIsFalse :
@@ -150,7 +142,8 @@ canonicalDirectInputsToAnalyticCoresBoundary =
     true refl
     true refl
     true refl
+    true refl
     false refl
     false refl
     false refl
-    "Historical direct Off/Gamma inputs factor definitionally through the newer analytic-core split, so they are implementations of the minimal route rather than independent terminal search surfaces. The proof-carrying finite-upper Off route also projects to OffAnalyticCore. Cutoff/taper identity remains representation data. No analytic core is fabricated and RH is not derived."
+    "Historical direct Off/Gamma inputs factor definitionally through the newer analytic-core split, so they are implementations of the minimal route rather than independent terminal search surfaces. Generic payment-to-core factorization is reused for the proof-carrying finite-upper Off route instead of duplicating projection logic. Cutoff/taper identity remains representation data. No analytic core is fabricated and RH is not derived."
