@@ -48,13 +48,13 @@ open SelectedMomentCompactContainmentInputs public
 selectedDiagonalUniformTightnessCertificate :
   ∀ {Measure Observable Scalar Epsilon Witness}
     {expectationData :
-      T5.PhysicalExpectationProducerData Measure Observable Scalar} →
-  SelectedMomentCompactContainmentInputs
-    Measure Observable Scalar Epsilon Witness expectationData →
+      T5.PhysicalExpectationProducerData Measure Observable Scalar}
+    (inputs : SelectedMomentCompactContainmentInputs
+      Measure Observable Scalar Epsilon Witness expectationData) →
   Uniform.UniformTightnessCertificate
     Measure Epsilon Witness
-    (Admissible _)
-    (Controls _)
+    (Admissible inputs)
+    (Controls inputs)
     (T5.diagonalMeasure expectationData)
 selectedDiagonalUniformTightnessCertificate
   {expectationData = expectationData} inputs = record
