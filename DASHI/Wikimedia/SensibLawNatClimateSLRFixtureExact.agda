@@ -3,7 +3,7 @@ module DASHI.Wikimedia.SensibLawNatClimateSLRFixtureExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_)
 
 import DASHI.Wikimedia.IdentifierExact as Id
 import DASHI.Wikimedia.SourceProvenanceExact as Source
@@ -56,7 +56,7 @@ natContent =
     Handoff.textFormat
     "Since the cretion of P14143 I have to migrate most of the P5991 statements with their references and qualifiers to use this new property (This has been discussed in the property proposal and documented in Wikiproject climate change).\n\ntasks\ndone\n\n- is there any documentation or protocol on how to make this kind of migrations? Asked Jan and Wikiproject onthology\n- get the units wip query\n\nto do\n\n- evaluate migration for 22514 statements on items that are instances of business (Q4830453), 7138 instances of enterprise (Q6881511) and 7913 instances of public company (Q891723)\n- capture all \"extra\" qualifiers wip: for these 3 \"instance of\" we are capturing all the qualifiers we can find: determination method or standard (P459), object of statement has role (P3831), point in time (P585), start time (P580), end time (P582), applies to part (P518), reason for preferred rank (P7452)\n- check if there really are not extra qualifiers within the items that are instances of instance of empresa, negocio, banco, biopharmaceutical company, compañía, empresa de capital abierto, institución financiera)\n- capture the references. the first set (things that are instance of empresa, negocio, banco, biopharmaceutical company, compañía, empresa de capital abierto, institución financiera) we found only the following reference properties: reference URL (P854), archive URL (P1065), retrieved (P813), title (P1476), archive date (P2960)\n- is it necesary to add the rank?\n- evaluate migration for all other reconciled \"instance of\"\n- look for any unexpected qualifiers\n- capture references\n- evaluate migrations of statements cuyo determination method no es GHG protocol (otro determination method o no tiene el determination method)\n- evaluate migration for 1395 statements cuyo sujeto no tiene un \"instance of\"\n- look for any unexpected qualifiers\n- capture references\n- evaluar migración para 142 declaraciones cuyo sujeto tiene un instance of que no pudo ser reconciliado\n- look for any unexpected qualifiers\n- capture references\n\nqueries\n\n- https://w.wiki/KR5d all carbon footprint statements. 57835 results on march 27th"
 
-natAnchors : Agda.Builtin.List.List Handoff.SourceAnchor
+natAnchors : List Handoff.SourceAnchor
 natAnchors =
   Handoff.source-anchor "goal" 0 257 "migration_goal"
   ∷ Handoff.source-anchor "cohort_business_family" 408 585 "cohort_business_family"
@@ -100,7 +100,7 @@ natParsedSignals =
     Climate.expectedNatReferences
     "bounded deterministic parsing of the pinned Nat source unit"
 
-natFollowReceipts : Agda.Builtin.List.List Handoff.FollowReceipt
+natFollowReceipts : List Handoff.FollowReceipt
 natFollowReceipts =
   Handoff.follow-receipt
     "https://w.wiki/KR5d"
@@ -145,8 +145,6 @@ natPacketStaysSplitRequired :
   Handoff.disposition (Handoff.splitContext natReviewPacket) ≡ Handoff.splitRequired
 natPacketStaysSplitRequired = refl
 
--- P854 being expected in the Nat surface stays a source-candidate statement,
--- not an authority or migration-safety theorem.
 data ExpectedReferenceMeansVerifiedReference : Set where
 data ReviewPacketMeansMigrationApproved : Set where
 
