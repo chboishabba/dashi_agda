@@ -3,28 +3,47 @@ module DASHI.Governance.PluralEpistemicRepairMethodologyBidiExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Governance.ConsumerAdequacyResidualInterventionCapstoneExact as Governance
+import DASHI.Core.ConsumerIndexedTranslationRealisationExact as Adequacy
+import DASHI.Core.ResidualObligationPropagationExact as Residual
+import DASHI.Governance.InterventionMechanismDecompositionExact as Intervention
 import DASHI.Core.PluralEpistemicProgressMethodologyBidiExact as Method
 import DASHI.Core.ProvenanceQuorumAdequacyBidiExact as Quorum
+import DASHI.Core.ProvenanceSensitiveConsumerAdequacyBidiExact as Provenance
 import DASHI.Core.PairIndexedInformationLossLocusBidiExact as Loss
 
 ------------------------------------------------------------------------
 -- GOVERNANCE / INTERVENTION <-> PLURAL EPISTEMIC REPAIR
---
--- Governance already separates consumer adequacy, surviving residuals and
--- intervention coordinates.  The plural methodology adds two constraints:
--- visible support multiplicity does not create provenance independence, and a
--- collapsed distinction cannot be repaired by deterministic relabelling alone.
 ------------------------------------------------------------------------
 
+structuralAdequacyStillConsumerRelative :
+  Adequacy.ConsumerRelativeAdequacyWitness
+    Adequacy.demoSystem
+    Adequacy.sourceText
+    Adequacy.structuralConsumer
+    Adequacy.empiricalConsumer
 structuralAdequacyStillConsumerRelative =
   Governance.adequateForStructuralNotEmpirical
 
+semanticResidualStillLivesAtTheorem :
+  Residual.carries
+    Residual.demoFlow
+    Residual.theoremStage
+    Residual.missingSemanticBridge
 semanticResidualStillLivesAtTheorem =
   Governance.residualSurvivesTheoremProduction
 
+resourceRepairStillDoesNotGuaranteeCapability :
+  Intervention.ResourceRepair Intervention.demoMechanisms Intervention.resourceOnly →
+  Intervention.CapabilityExpanded Intervention.demoMechanisms Intervention.resourceOnly → ⊥
 resourceRepairStillDoesNotGuaranteeCapability =
   Governance.resourceOnlyDoesNotExpandCapability
 
+headcountSupportStillNeedsIndependentRoots :
+  Quorum.IndependentProvenanceQuorumTwo
+    Provenance.toyPolicy
+    Provenance.targetConsumer
+    Provenance.firstReport
+    Provenance.secondReport → ⊥
 headcountSupportStillNeedsIndependentRoots =
   Quorum.toyHeadcountDoesNotCreateIndependentQuorum
 
