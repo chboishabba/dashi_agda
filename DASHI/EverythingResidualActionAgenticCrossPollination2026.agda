@@ -11,6 +11,10 @@ import DASHI.Core.ResidualLiveSetSalienceSchedulerBidiExact
 import DASHI.Core.ExpectedFibreReductionCostExact
 import DASHI.Core.ResidualConditionedExperimentPortfolioExact
 import DASHI.Core.ActionFibreClosureStoppingExact
+import DASHI.Core.LiveSetParetoExperimentSchedulerExact
+
+import DASHI.Foundations.Base369Ternary27DiscriminatorPortfolioBridgeExact
+import DASHI.Moonshine.Monster369DiscriminatorSymmetryBoundaryExact
 
 import DASHI.Biology.AgenticMaterialsControlCore
 import DASHI.Biology.Levin.LevinBioelectricAgencyCore
