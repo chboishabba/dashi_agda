@@ -135,6 +135,24 @@ claimSourceReceipt r =
     (exactTextHash (carrier (extraction r)))
     (sourceBoundaryReference r)
 
+claimSourceLayerExact :
+  (r : CorpusClaimReceipt) →
+  Source.layer (claimSourceReceipt r) ≡ Source.externalReferencedSourceLayer
+claimSourceLayerExact r = refl
+
+claimSourceStableEntryExact :
+  (r : CorpusClaimReceipt) →
+  Source.stableIdentifier (claimSourceReceipt r)
+    ≡ stableEntryIdentifier
+        (entry (entryVersion (carrier (extraction r))))
+claimSourceStableEntryExact r = refl
+
+claimSourceExactPassageHashExact :
+  (r : CorpusClaimReceipt) →
+  Source.sourceContentHash (claimSourceReceipt r)
+    ≡ exactTextHash (carrier (extraction r))
+claimSourceExactPassageHashExact r = refl
+
 claimToCitedSourceHorizon :
   (r : CorpusClaimReceipt) →
   CorpusWorld.ResolutionStatus →
