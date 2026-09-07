@@ -3,6 +3,7 @@ module DASHI.Analysis.RiemannG2ProofRelevantTargetTranslationModulationExact whe
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
 -- PROOF-RELEVANT TARGET TRANSLATION / MODULATION
