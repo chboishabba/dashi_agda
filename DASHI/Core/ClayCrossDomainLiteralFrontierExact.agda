@@ -7,7 +7,9 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact as R477
-import DASHI.Physics.Closure.NSTriadKNCauchyResolvedDirectConsumerRound478Exact as NS
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedDirectConsumerRound478Exact as R478
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedSignedResidualRound479Exact as R479
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedPhysicalSnapshotRound480Exact as NS
 import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Exact as YM
 import DASHI.Analysis.RiemannAristotleRHFinalAllowanceLeafSchedulerExact as RH
 import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as Zeta
@@ -21,16 +23,24 @@ import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as Zeta
 -- by producer motif, which prevents wasting search on already-owned compiler
 -- infrastructure.
 --
--- NS UPDATE (R478)
+-- NS UPDATE (R480)
 -- ----------------
--- R477 installs the literal nonseparable Cauchy kernel and proves an exact
--- helical +/- split.  It also proves that two same-helicity scalar resolved
--- GramOperatorBounds are a sufficient producer for the total physical bound.
--- R471's least-privilege consumer contract, however, asks only for the TOTAL
--- resolved GramOperatorBound.  R478 therefore makes that one direct bound the
--- preferred terminal coordinate.  The +/- pair remains an optional stronger
--- producer route; the scheduler must not require it and thereby throw away
--- compensation that may be visible only in the summed signed quadratic form.
+-- R477 installs the literal nonseparable Cauchy kernel and an exact helical
+-- split.  R478 correctly notices that the TOTAL all-coefficient Gram bound is
+-- weaker than demanding separate +/- bounds.  R479 adds a signed-residual
+-- allowance producer so the paid diagonal can be separated from the genuinely
+-- signed remainder without inserting absolute values.
+--
+-- R480 then follows the actual R472 downstream type one step further: R432 does
+-- not consume a theorem for every hypothetical coefficient vector.  It consumes
+-- the selected physical coefficient snapshot.  The least-privilege terminal
+-- packet is therefore:
+--
+--   exact physical snapshot/same-object weld
+--   + bound at that selected physical coefficient.
+--
+-- The uniform R478 theorem remains a sufficient producer, not a mandatory
+-- terminal obligation.
 ------------------------------------------------------------------------
 
 data TerminalProducerMotif : Set where
@@ -38,6 +48,7 @@ data TerminalProducerMotif : Set where
   assignedAllowancePayment : TerminalProducerMotif
   signedIntegratedPayment : TerminalProducerMotif
   resolvedGramOperatorBound : TerminalProducerMotif
+  selectedResolvedPayment : TerminalProducerMotif
   sourceSemanticsRecovery : TerminalProducerMotif
   conjunctionOfIndependentChildren : TerminalProducerMotif
   downstreamCompilerReuse : TerminalProducerMotif
@@ -46,30 +57,34 @@ data TerminalProducerMotif : Set where
 data Programme : Set where navierStokes yangMills riemannZeta : Programme
 
 data TerminalCoordinate : Set where
-  nsDirectResolvedGram : TerminalCoordinate
+  nsResolvedSnapshotWeld : TerminalCoordinate
+  nsSelectedResolvedPayment : TerminalCoordinate
   ymRound108Semantics : TerminalCoordinate
   ymRound108BC1SameObject : TerminalCoordinate
   rhOffAllowance : TerminalCoordinate
   rhGammaAllowance : TerminalCoordinate
 
-
 coordinateProgramme : TerminalCoordinate → Programme
-coordinateProgramme nsDirectResolvedGram = navierStokes
+coordinateProgramme nsResolvedSnapshotWeld = navierStokes
+coordinateProgramme nsSelectedResolvedPayment = navierStokes
 coordinateProgramme ymRound108Semantics = yangMills
 coordinateProgramme ymRound108BC1SameObject = yangMills
 coordinateProgramme rhOffAllowance = riemannZeta
 coordinateProgramme rhGammaAllowance = riemannZeta
 
 primaryMotif : TerminalCoordinate → TerminalProducerMotif
-primaryMotif nsDirectResolvedGram = resolvedGramOperatorBound
+primaryMotif nsResolvedSnapshotWeld = sameObjectRepresentation
+primaryMotif nsSelectedResolvedPayment = selectedResolvedPayment
 primaryMotif ymRound108Semantics = sourceSemanticsRecovery
 primaryMotif ymRound108BC1SameObject = sameObjectRepresentation
 primaryMotif rhOffAllowance = assignedAllowancePayment
 primaryMotif rhGammaAllowance = assignedAllowancePayment
 
 coordinateReference : TerminalCoordinate → String
-coordinateReference nsDirectResolvedGram =
-  "NS: R478 direct total Cauchy-resolved fixed-output GramOperatorBound"
+coordinateReference nsResolvedSnapshotWeld =
+  "NS: R480 actual physical Cauchy-resolved coefficient/signed-cross same-object snapshot"
+coordinateReference nsSelectedResolvedPayment =
+  "NS: R480 selected physical Cauchy-resolved quadratic <= selected fibre budget"
 coordinateReference ymRound108Semantics = "YM: source-fixed Round108 density semantics"
 coordinateReference ymRound108BC1SameObject = "YM: selected potential = BC1 same-object representation weld"
 coordinateReference rhOffAllowance = "RH/zeta: universal pole-quotient Off budget <= assigned A_off"
@@ -79,20 +94,32 @@ coordinateReference rhGammaAllowance = "RH/zeta: same-taper Gamma budget <= assi
 -- Exact pins to current terminality / producer hierarchy.
 ------------------------------------------------------------------------
 
-nsDirectResolvedGramStillOpen : NS.round478PhysicalDirectResolvedBoundClosed ≡ false
-nsDirectResolvedGramStillOpen = NS.round478PhysicalDirectResolvedBoundClosedIsFalse
+nsPhysicalSnapshotPreferred : NS.round480ActualPhysicalSnapshotIsPreferredConsumer ≡ true
+nsPhysicalSnapshotPreferred = refl
 
-nsDirectResolvedConsumerPreferred : NS.round478DirectResolvedConsumerPreferred ≡ true
-nsDirectResolvedConsumerPreferred = refl
+nsPhysicalSnapshotWeldStillOpen : NS.round480PhysicalSnapshotSameObjectWeldClosed ≡ false
+nsPhysicalSnapshotWeldStillOpen = NS.round480PhysicalSnapshotSameObjectWeldClosedIsFalse
 
-nsSplitScalarPairSufficient : NS.round478SplitScalarPairIsSufficientProducer ≡ true
-nsSplitScalarPairSufficient = refl
+nsSelectedResolvedPaymentStillOpen : NS.round480PhysicalSelectedResolvedBoundClosed ≡ false
+nsSelectedResolvedPaymentStillOpen = NS.round480PhysicalSelectedResolvedBoundClosedIsFalse
 
-nsSplitScalarPairNotMandatory : NS.round478SplitScalarPairIsMandatory ≡ false
-nsSplitScalarPairNotMandatory = NS.round478SplitScalarPairIsMandatoryIsFalse
+nsUniformResolvedBoundSufficient : NS.round480UniformAllCoefficientBoundIsSufficient ≡ true
+nsUniformResolvedBoundSufficient = refl
 
-nsResolvedHelicalCompilerAlreadyOwned : R477.round477TwoScalarResolvedBoundsCompile ≡ true
-nsResolvedHelicalCompilerAlreadyOwned = refl
+nsUniformResolvedBoundNotMandatory : NS.round480UniformAllCoefficientBoundIsMandatory ≡ false
+nsUniformResolvedBoundNotMandatory = NS.round480UniformAllCoefficientBoundIsMandatoryIsFalse
+
+nsR478DirectProducerPreferredWithinUniformLane : R478.round478DirectResolvedConsumerPreferred ≡ true
+nsR478DirectProducerPreferredWithinUniformLane = refl
+
+nsSplitScalarPairNotMandatory : R478.round478SplitScalarPairIsMandatory ≡ false
+nsSplitScalarPairNotMandatory = R478.round478SplitScalarPairIsMandatoryIsFalse
+
+nsSignedResidualProducerCompiles : R479.round479SignedResidualProducerCompilesToDirectConsumer ≡ true
+nsSignedResidualProducerCompiles = refl
+
+nsSignedResidualRemainsSigned : R479.round479ResidualRemainsSigned ≡ true
+nsSignedResidualRemainsSigned = refl
 
 nsCauchyKernelAlreadyExplicit : R477.round477CauchyPairKernelExplicit ≡ true
 nsCauchyKernelAlreadyExplicit = refl
@@ -121,10 +148,6 @@ rhDownstreamBudgetCompilerNotFreshLeaf = refl
 
 ------------------------------------------------------------------------
 -- Highest-alpha shared search policy.
---
--- Search one literal coordinate at a time unless the exact consumer explicitly
--- permits a single producer theorem to pay more than one coordinate.  Reuse
--- infrastructure by MOTIF, never by silently identifying mathematical carriers.
 ------------------------------------------------------------------------
 
 record CrossDomainSearchPolicy : Set where
@@ -159,15 +182,13 @@ canonicalCrossDomainSearchPolicy =
 ------------------------------------------------------------------------
 -- Search order as a dependency statement, not a numerical ranking.
 --
--- 1. Remove representation/source seams that block an already-built compiler.
--- 2. Attack terminal analytic/operator-bound leaves.
--- 3. Let existing downstream compilers fire; do not rebuild them.
+-- 1. Close the R480 physical same-object snapshot weld from already-owned
+--    R447/R448/R451/R456/R472 infrastructure if possible.
+-- 2. Attack only the selected physical signed-resolved payment left in that
+--    snapshot.  The uniform all-coefficient bound is optional.
+-- 3. Let R432 and the existing downstream compilers fire.
 --
--- YM's source/same-object children remain natural early representation targets.
--- NS has no preferred resolvent->heat seam and no mandatory +/- pair at the
--- terminal boundary: R478 leaves one direct total Cauchy-resolved Gram bound.
--- RH/zeta's two allowance payments remain irreducible analytic leaves.  This
--- does NOT assert that any of these theorems has been proved.
+-- YM and RH/zeta remain independent programmes with their own terminal leaves.
 ------------------------------------------------------------------------
 
 data ClosurePhase : Set where
@@ -176,9 +197,9 @@ data ClosurePhase : Set where
   terminalOperatorBound : ClosurePhase
   downstreamCompiler : ClosurePhase
 
-
 phase : TerminalCoordinate → ClosurePhase
-phase nsDirectResolvedGram = terminalOperatorBound
+phase nsResolvedSnapshotWeld = representationOrSource
+phase nsSelectedResolvedPayment = terminalAnalyticPayment
 phase ymRound108Semantics = representationOrSource
 phase ymRound108BC1SameObject = representationOrSource
 phase rhOffAllowance = terminalAnalyticPayment
