@@ -92,7 +92,12 @@ record CurrentCase : Set where
 open CurrentCase public
 
 ------------------------------------------------------------------------
--- Material factual/doctrinal correspondence is explicit.
+-- Legacy material factual/doctrinal correspondence.
+--
+-- Kept for compatibility. `mapsFeature` is selected inside the witness, so this
+-- shape is not strong enough by itself for promotion from a finite missing-
+-- feature search. The policy-indexed layer below is the preferred executable
+-- promotion surface.
 ------------------------------------------------------------------------
 
 record FeatureMap (p : PrecedentProposition) (c : CurrentCase) : Set where
@@ -142,12 +147,6 @@ record DistinguishingSet (p : PrecedentProposition) (c : CurrentCase) : Set wher
 
 open DistinguishingSet public
 
-------------------------------------------------------------------------
--- A minimal distinguishing set is not just the shortest prose explanation: it
--- must be sufficient to block the claimed application and each retained
--- difference must be necessary relative to the encoded application proof.
-------------------------------------------------------------------------
-
 record MinimalDistinguishingSet (p : PrecedentProposition) (c : CurrentCase) : Set where
   constructor minimal-distinguishing-set
   field
@@ -160,8 +159,71 @@ record MinimalDistinguishingSet (p : PrecedentProposition) (c : CurrentCase) : S
 open MinimalDistinguishingSet public
 
 ------------------------------------------------------------------------
--- Role-to-authority bridge. This keeps source form separate from proposition
--- role, while allowing ratios/other roles to participate in the universal graph.
+-- Preferred policy-indexed applicability layer.
+--
+-- A correspondence policy is fixed before application is attempted. This avoids
+-- both unsound extremes:
+--   * `same StableId` silently becoming universal materiality;
+--   * the applicability witness privately choosing any relation it needs.
+------------------------------------------------------------------------
+
+record MaterialCorrespondencePolicy
+  (p : PrecedentProposition)
+  (c : CurrentCase) : Set where
+  constructor material-correspondence-policy
+  field
+    corresponds : Algebra.LegalProposition → Algebra.LegalProposition → Set
+    criterionLabel : String
+    criterionAuthority : Algebra.LegalSourceRef
+    criterionItselfRequiresLegalJustification : Bool
+
+open MaterialCorrespondencePolicy public
+
+record PolicyFeatureMap
+  {p : PrecedentProposition}
+  {c : CurrentCase}
+  (policy : MaterialCorrespondencePolicy p c) : Set where
+  constructor policy-feature-map
+  field
+    everyMaterialFeatureMappedUnderPolicy :
+      ∀ {f} → Algebra._∈_ f (materialFeatures p) →
+      Σ Algebra.LegalProposition (λ g →
+        Algebra._∈_ g (factsAndFeatures c) ×
+        MaterialCorrespondencePolicy.corresponds policy f g)
+
+open PolicyFeatureMap public
+
+record PolicyPrecedentApplicable
+  {p : PrecedentProposition}
+  {c : CurrentCase}
+  (policy : MaterialCorrespondencePolicy p c) : Set where
+  constructor policy-precedent-applicable
+  field
+    jurisdictionCompatibleUnderPolicy : String
+    issueIdentityUnderPolicy : issueReference p ≡ issueReference c
+    roleCanCarryRuleUnderPolicy : Set
+    policyFeatureMap : PolicyFeatureMap policy
+    notOverruledForThisPropositionUnderPolicy : Set
+
+open PolicyPrecedentApplicable public
+
+record PolicyMinimalDistinguishingSet
+  {p : PrecedentProposition}
+  {c : CurrentCase}
+  (policy : MaterialCorrespondencePolicy p c) : Set where
+  constructor policy-minimal-distinguishing-set
+  field
+    policyDistinguishing : DistinguishingSet p c
+    sufficientAgainstPolicyApplication :
+      PolicyPrecedentApplicable policy → ⊥
+    eachPolicyDifferenceNecessary :
+      ∀ {d} →
+      Algebra._∈_ d (DistinguishingSet.differences policyDistinguishing) → Set
+
+open PolicyMinimalDistinguishingSet public
+
+------------------------------------------------------------------------
+-- Role-to-authority bridge.
 ------------------------------------------------------------------------
 
 roleAuthority : JudgmentPropositionRole → Algebra.AuthorityRole
@@ -183,6 +245,8 @@ data SameCaseMeansSameAuthorityRole : Set where
 data SimilarFactsAutomaticallyApplyPrecedent : Set where
 data DistinctionAutomaticallyOverrulesPrecedent : Set where
 data DissentIsBindingRatioBySourceContainer : Set where
+data LegacyFeatureMapSupportsExecutablePromotionByItself : Set where
+data OneCorrespondencePolicyIsUniversalMateriality : Set where
 
 sameCaseDoesNotFlattenRoles : SameCaseMeansSameAuthorityRole → ⊥
 sameCaseDoesNotFlattenRoles ()
@@ -195,3 +259,11 @@ distinguishingDoesNotOverrule ()
 
 dissentDoesNotBecomeBindingRatio : DissentIsBindingRatioBySourceContainer → ⊥
 dissentDoesNotBecomeBindingRatio ()
+
+legacyFeatureMapDoesNotSupportSafeSearchPromotion :
+  LegacyFeatureMapSupportsExecutablePromotionByItself → ⊥
+legacyFeatureMapDoesNotSupportSafeSearchPromotion ()
+
+correspondencePolicyDoesNotBecomeUniversalLaw :
+  OneCorrespondencePolicyIsUniversalMateriality → ⊥
+correspondencePolicyDoesNotBecomeUniversalLaw ()
