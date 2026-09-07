@@ -1,11 +1,13 @@
 module DASHI.Culture.MissingDeceasedScientificWorkCustodyEverything where
 
 -- Thin continuation aggregate over the canonical memorial-science/investigation
--- surface. This tranche adds reconstruction-cost, custody, event-time continuity,
--- platform redundancy, institutional continuity and winding-up acquisition
--- surfaces without duplicating the existing scientific-work architecture.
+-- surface. This tranche refines the existing critical-knowledge,
+-- externalisation-depth and counterfactual-disruption owners with custody,
+-- event-time possession, reconstruction-cost, platform redundancy,
+-- institutional continuity and winding-up acquisition receipts.
 
 import DASHI.Culture.MissingDeceasedScientificWorkEverything
+import DASHI.Core.CustodyCriticalityDisruptionBridgeExact
 import DASHI.Core.CapabilityReconstructionCostBidiExact
 import DASHI.Core.ApplicationCapabilityCustodyBidiExact
 import DASHI.Core.EventTimeOperationalPossessionEvidenceExact
