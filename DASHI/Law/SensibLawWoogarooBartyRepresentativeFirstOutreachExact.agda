@@ -142,6 +142,99 @@ brandFitDoesNotAutoCreateCampaignEndorsement :
 brandFitDoesNotAutoCreateCampaignEndorsement ()
 
 ------------------------------------------------------------------------
+-- SOCIAL-APPROPRIATENESS / WRONGTYPE GATES
+--
+-- A factually justified contact can still instantiate the wrong social object.
+-- These gates prevent a normal professional invitation from silently becoming
+-- parasocial familiarity, moral pressure, identity leverage, sponsor leverage,
+-- persistence pressure, or an over-engineered demand.
+------------------------------------------------------------------------
+
+data PublicFigureFamiliarityEqualsPersonalRelationship : Set where
+data PlaygroundLegacyCreatesPersonalObligation : Set where
+data IndigenousIdentityCreatesCampaignDuty : Set where
+data BrandPartnerSensitivityCreatesLeverage : Set where
+data NoReplyCreatesPermissionToEscalate : Set where
+data FormalProofArchitectureBelongsInFirstContact : Set where
+data DetailedCampaignTheoryEqualsUsefulTriageBrief : Set where
+data CommunityImportanceCreatesUrgencyEntitlement : Set where
+
+publicFamiliarityDoesNotCreatePersonalRelationship :
+  PublicFigureFamiliarityEqualsPersonalRelationship → ⊥
+publicFamiliarityDoesNotCreatePersonalRelationship ()
+
+playgroundLegacyDoesNotCreatePersonalObligation :
+  PlaygroundLegacyCreatesPersonalObligation → ⊥
+playgroundLegacyDoesNotCreatePersonalObligation ()
+
+indigenousIdentityDoesNotCreateCampaignDuty :
+  IndigenousIdentityCreatesCampaignDuty → ⊥
+indigenousIdentityDoesNotCreateCampaignDuty ()
+
+brandSensitivityDoesNotCreateLeverage :
+  BrandPartnerSensitivityCreatesLeverage → ⊥
+brandSensitivityDoesNotCreateLeverage ()
+
+noReplyDoesNotCreateEscalationPermission :
+  NoReplyCreatesPermissionToEscalate → ⊥
+noReplyDoesNotCreateEscalationPermission ()
+
+formalArchitectureDoesNotBelongInFirstContact :
+  FormalProofArchitectureBelongsInFirstContact → ⊥
+formalArchitectureDoesNotBelongInFirstContact ()
+
+detailedTheoryDoesNotEqualUsefulTriageBrief :
+  DetailedCampaignTheoryEqualsUsefulTriageBrief → ⊥
+detailedTheoryDoesNotEqualUsefulTriageBrief ()
+
+communityImportanceDoesNotCreateUrgencyEntitlement :
+  CommunityImportanceCreatesUrgencyEntitlement → ⊥
+communityImportanceDoesNotCreateUrgencyEntitlement ()
+
+record SocialAppropriatenessGate : Set where
+  constructor socialAppropriatenessGate
+  field
+    professionalChannelUsed : Bool
+    professionalChannelUsedIsTrue : professionalChannelUsed ≡ true
+
+    firstContactShortAndTriageable : Bool
+    firstContactShortAndTriageableIsTrue : firstContactShortAndTriageable ≡ true
+
+    noParasocialFamiliarity : Bool
+    noParasocialFamiliarityIsTrue : noParasocialFamiliarity ≡ true
+
+    noPersonalObligationFraming : Bool
+    noPersonalObligationFramingIsTrue : noPersonalObligationFraming ≡ true
+
+    noIdentityLeverage : Bool
+    noIdentityLeverageIsTrue : noIdentityLeverage ≡ true
+
+    noSponsorPressure : Bool
+    noSponsorPressureIsTrue : noSponsorPressure ≡ true
+
+    noPublicPressureOnSilence : Bool
+    noPublicPressureOnSilenceIsTrue : noPublicPressureOnSilence ≡ true
+
+    noFormalismDumpInFirstContact : Bool
+    noFormalismDumpInFirstContactIsTrue : noFormalismDumpInFirstContact ≡ true
+
+    easyDeclineOrNoReplyPath : Bool
+    easyDeclineOrNoReplyPathIsTrue : easyDeclineOrNoReplyPath ≡ true
+
+canonicalSocialAppropriatenessGate : SocialAppropriatenessGate
+canonicalSocialAppropriatenessGate =
+  socialAppropriatenessGate
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+
+------------------------------------------------------------------------
 -- Preferred routing order.
 ------------------------------------------------------------------------
 
@@ -174,6 +267,9 @@ record RepresentativeFirstBoundary : Set where
     bypassAroundRepresentativeByDefaultIsFalse :
       bypassAroundRepresentativeByDefault ≡ false
 
+    socialAppropriatenessChecked : Bool
+    socialAppropriatenessCheckedIsTrue : socialAppropriatenessChecked ≡ true
+
 canonicalRepresentativeFirstBoundary : RepresentativeFirstBoundary
 canonicalRepresentativeFirstBoundary =
   representativeFirstBoundary
@@ -182,3 +278,4 @@ canonicalRepresentativeFirstBoundary =
     false refl
     false refl
     false refl
+    true refl
