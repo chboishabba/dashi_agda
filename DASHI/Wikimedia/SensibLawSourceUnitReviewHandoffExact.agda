@@ -3,7 +3,7 @@ module DASHI.Wikimedia.SensibLawSourceUnitReviewHandoffExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
@@ -17,10 +17,15 @@ import DASHI.Wikimedia.SourceProvenanceExact as Source
 --   schemas/sl.source_unit.v1.schema.yaml
 --   docs/planning/wikidata_review_packet_contract_20260401.md
 --   src/ontology/wikidata.py
---
--- This is intentionally broader than the climate lane.  Nat/Climate, Wikipedia,
--- PDFs and later SLR producers can share one revision-locked carrier.
 ------------------------------------------------------------------------
+
+data OptionalText : Set where
+  absentText : OptionalText
+  presentText : String → OptionalText
+
+data RevisionId : Set where
+  textualRevisionId : String → RevisionId
+  numericRevisionId : Nat → RevisionId
 
 data RetrievalMethod : Set where
   pdfSnapshot htmlSnapshot wikiRevision csvSnapshot chatCapture otherRetrieval
@@ -37,7 +42,7 @@ data ContentFormat : Set where
 record SourceRevision : Set where
   constructor source-revision
   field
-    revisionId : String
+    revisionId : RevisionId
     revisionTimestamp : String
     retrievalMethod : RetrievalMethod
 open SourceRevision public
@@ -46,8 +51,8 @@ record SourceOrigin : Set where
   constructor source-origin
   field
     sourceType : SourceType
-    sourceUrl : String
-    title : String
+    sourceUrl : OptionalText
+    title : OptionalText
 open SourceOrigin public
 
 record SourceAnchor : Set where
@@ -56,7 +61,7 @@ record SourceAnchor : Set where
     anchorId : String
     startOffset : Nat
     endOffset : Nat
-    anchorLabel : String
+    anchorLabel : OptionalText
 open SourceAnchor public
 
 record SourceContent : Set where
@@ -76,6 +81,7 @@ record SensibLawSourceUnit : Set where
     origin : SourceOrigin
     content : SourceContent
     anchors : List SourceAnchor
+    sourceMetadataReference : String
     sourceReceipt : Source.SourceReceipt
     contractReference : String
 open SensibLawSourceUnit public
@@ -162,11 +168,6 @@ open SensibLawReviewPacket public
 
 ------------------------------------------------------------------------
 -- SLR reuse boundary.
---
--- Current slr/main README: Rust owns deterministic compilation/publication
--- boundaries; parser sidecars do not own canonical semantic state.  The same
--- discipline applies here: consuming a source unit or review packet does not
--- grant the runtime source authority or promotion rights.
 ------------------------------------------------------------------------
 
 data RuntimeConsumer : Set where
@@ -191,7 +192,6 @@ record RuntimeHandoffReceipt : Set where
     runtimeOwnsSemanticPromotionIsFalse : runtimeOwnsSemanticPromotion ≡ false
 open RuntimeHandoffReceipt public
 
--- Review aid / parser / runtime output boundaries.
 data ReviewPacketCreatesAuthority : Set where
 data ShallowParseIsFullSemanticDecomposition : Set where
 data FollowReceiptMeansGroundedTruth : Set where
@@ -200,16 +200,12 @@ data SplitRequiredMeansUnsafeSource : Set where
 
 reviewPacketDoesNotCreateAuthority : ReviewPacketCreatesAuthority → ⊥
 reviewPacketDoesNotCreateAuthority ()
-
 shallowParseDoesNotBecomeFullSemantics : ShallowParseIsFullSemanticDecomposition → ⊥
 shallowParseDoesNotBecomeFullSemantics ()
-
 followReceiptDoesNotMeanGroundedTruth : FollowReceiptMeansGroundedTruth → ⊥
 followReceiptDoesNotMeanGroundedTruth ()
-
 runtimeConsumptionDoesNotMeanPromotion : RuntimeConsumptionMeansPromotion → ⊥
 runtimeConsumptionDoesNotMeanPromotion ()
-
 splitRequiredDoesNotMeanSourceUnsafe : SplitRequiredMeansUnsafeSource → ⊥
 splitRequiredDoesNotMeanSourceUnsafe ()
 
@@ -217,6 +213,8 @@ record SensibLawHandoffBoundary : Set where
   constructor sensiblaw-handoff-boundary
   field
     sourceUnitsRevisionLocked : Bool
+    sourceUnitSchemaPreservesNullableOriginFields : Bool
+    sourceUnitSchemaPreservesStringOrIntegerRevisionIds : Bool
     reviewPacketsPreserveSplitBaseline : Bool
     reviewPacketsTransferAuthority : Bool
     parserOutputOwnsCanonicalSemantics : Bool
@@ -224,4 +222,4 @@ record SensibLawHandoffBoundary : Set where
 
 canonicalSensibLawHandoffBoundary : SensibLawHandoffBoundary
 canonicalSensibLawHandoffBoundary =
-  sensiblaw-handoff-boundary true true false false false
+  sensiblaw-handoff-boundary true true true true false false false
