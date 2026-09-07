@@ -32,6 +32,7 @@ module DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
+import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 
 record UniversalEvenConeReturn : Set where
   constructor universal-even-cone-return
@@ -98,6 +99,81 @@ allCriticalFromHighLow :
 allCriticalFromHighLow d ρ with cover d ρ
 ... | inj₁ low = lowCertifiedCritical d ρ low
 ... | inj₂ high = highAnalyticCritical d ρ high
+
+------------------------------------------------------------------------
+-- SAME-SUBSTRATE RH WELD
+--
+-- The generic high/low compiler above is useful only if its Zero and Critical
+-- carriers are identified with the SAME completed-zeta object consumed by the
+-- prize-facing `RiemannHypothesisFor`.  The records below make that identity
+-- definitional rather than leaving a prose-level final bridge.
+------------------------------------------------------------------------
+
+record AnalyticNontrivialZero (analytic : Analytic.AnalyticSubstrate) : Set where
+  constructor analytic-nontrivial-zero
+  field
+    point :
+      Analytic.ComplexAnalyticCarrier.Complex
+        (Analytic.AnalyticSubstrate.carrier analytic)
+    nontrivial :
+      Analytic.CompletedRiemannZeta.nontrivialZero
+        (Analytic.AnalyticSubstrate.completed analytic)
+        point
+
+open AnalyticNontrivialZero public
+
+analyticCritical :
+  {analytic : Analytic.AnalyticSubstrate} →
+  AnalyticNontrivialZero analytic → Set
+analyticCritical {analytic} ρ =
+  Analytic.CompletedRiemannZeta.criticalLine
+    (Analytic.AnalyticSubstrate.completed analytic)
+    (point ρ)
+
+record AnalyticHighLowCompletion
+    (analytic : Analytic.AnalyticSubstrate) : Set₁ where
+  constructor analytic-high-low-completion
+  field
+    Low High : AnalyticNontrivialZero analytic → Set
+
+    cover :
+      (ρ : AnalyticNontrivialZero analytic) →
+      Low ρ ⊎ High ρ
+
+    lowCertifiedCritical :
+      (ρ : AnalyticNontrivialZero analytic) →
+      Low ρ →
+      analyticCritical ρ
+
+    highAnalyticCritical :
+      (ρ : AnalyticNontrivialZero analytic) →
+      High ρ →
+      analyticCritical ρ
+
+open AnalyticHighLowCompletion public
+
+toGenericHighLowCompletion :
+  {analytic : Analytic.AnalyticSubstrate} →
+  AnalyticHighLowCompletion analytic →
+  HighLowCompletion
+toGenericHighLowCompletion {analytic} d = record
+  { Zero = AnalyticNontrivialZero analytic
+  ; Critical = analyticCritical
+  ; Low = AnalyticHighLowCompletion.Low d
+  ; High = AnalyticHighLowCompletion.High d
+  ; cover = AnalyticHighLowCompletion.cover d
+  ; lowCertifiedCritical = AnalyticHighLowCompletion.lowCertifiedCritical d
+  ; highAnalyticCritical = AnalyticHighLowCompletion.highAnalyticCritical d
+  }
+
+analyticHighLowCompletionImpliesRH :
+  (analytic : Analytic.AnalyticSubstrate) →
+  AnalyticHighLowCompletion analytic →
+  Analytic.RiemannHypothesisFor analytic
+analyticHighLowCompletionImpliesRH analytic d s hz =
+  allCriticalFromHighLow
+    (toGenericHighLowCompletion d)
+    (analytic-nontrivial-zero s hz)
 
 record UniversalEvenConeBoundary : Set where
   constructor universal-even-cone-boundary
