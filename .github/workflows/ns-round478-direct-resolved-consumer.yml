@@ -1,4 +1,4 @@
-name: NS Round478-485 signed-flux terminal cone
+name: NS Round478-486 proof-search reconciliation
 
 on:
   pull_request:
@@ -12,6 +12,7 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedOrderedHermitianRound483Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNCauchyFullVsSignedFluxBoundaryRound484Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNCauchySignedFluxProofSearchRound485Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCanonicalClayProofSearchRound486Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedTerminalEverythingRound479Exact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - 'DASHI/Core/ClayCrossDomainLiteralFrontierExact.agda'
@@ -22,7 +23,7 @@ permissions:
   contents: read
 
 jobs:
-  round478-485:
+  round478-486:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -34,30 +35,15 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v3
 
-      - name: Type-check R478-R481 historical minimization cone
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNCauchyResolvedProofSearchRound481Exact.agda
-
-      - name: Type-check R482 positive-cell resolved carrier
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNCauchyResolvedPositiveCellCarrierRound482Exact.agda
-
-      - name: Type-check R483 ordered Hermitian identity
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNCauchyResolvedOrderedHermitianRound483Exact.agda
-
-      - name: Type-check R484 full-vs-signed-flux boundary
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNCauchyFullVsSignedFluxBoundaryRound484Exact.agda
-
-      - name: Type-check R485 corrected proof-search scheduler
+      - name: Type-check historical Cauchy proof-search cone
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNCauchySignedFluxProofSearchRound485Exact.agda
+
+      - name: Type-check R486 canonical R423 reconciliation
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNCanonicalClayProofSearchRound486Exact.agda
 
       - name: Type-check focused terminal aggregate
         run: >-
