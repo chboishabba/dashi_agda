@@ -10,6 +10,7 @@ import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as FinalC
 import DASHI.Analysis.RiemannG2PoleQuotientProducerAllowanceTargetExact as ProducerAllowance
 import DASHI.Analysis.RiemannG2PoleQuotientOffAllowanceDirectCompilerExact as OffDirect
 import DASHI.Analysis.RiemannG2FinalSplitComplementAllowanceAssemblyExact as Assembly
+import DASHI.Analysis.RiemannG2FinalSplitComplementOrderTransportCompilerExact as OrderTransport
 
 ------------------------------------------------------------------------
 -- AUTHORITATIVE FINAL-CARRIER RH ANALYTIC SCHEDULER
@@ -155,6 +156,11 @@ allowanceAssemblyMakesStrictBudgetCompilerOutput :
     Assembly.canonicalFinalAllowanceAssemblyBoundary ≡ false
 allowanceAssemblyMakesStrictBudgetCompilerOutput = refl
 
+finalOrderTransportCompilesContradiction :
+  OrderTransport.FinalOrderTransportBoundary.orderTransportPackageCompilesContradiction
+    OrderTransport.canonicalFinalOrderTransportBoundary ≡ true
+finalOrderTransportCompilesContradiction = refl
+
 historicalSchedulerRetainedForRouteDiagnostics : Bool
 historicalSchedulerRetainedForRouteDiagnostics = true
 
@@ -219,4 +225,4 @@ canonicalFinalRHAllowanceSchedulerBoundary =
     false refl
     false refl
     false refl
-    "Use the historical analytic scheduler only to navigate possible proof routes. Terminal high-ordinate RH scheduling occurs on the universal pole-quotient carrier and admits exactly two analytic payments: PoleQuotientOffAllowancePayment and PoleQuotientGammaAllowancePayment. The Off payment must be established at one common quarter-period crossing cutoff where the signed near budget plus the owned far budget fits the assigned A_off; far-tail decay alone cannot choose that cutoff. Cluster attachment and same-order transport are downstream engineering; strict budget composition and final contradiction are compiler output. Do not schedule determinant scalarization, H_X infrastructure, or gap-split clustering ahead of the literal final allowance leaves. RH is not derived."
+    "Use the historical analytic scheduler only to navigate possible proof routes. Terminal high-ordinate RH scheduling occurs on the universal pole-quotient carrier and admits exactly two analytic payments: PoleQuotientOffAllowancePayment and PoleQuotientGammaAllowancePayment. The Off payment must be established at one common quarter-period crossing cutoff where the signed near budget plus the owned far budget fits the assigned A_off; far-tail decay alone cannot choose that cutoff. Cluster attachment and source-order transport are downstream engineering; the order-transport compiler then generates the channel inequality transports, strict budget composition and final contradiction. Do not schedule determinant scalarization, H_X infrastructure, or gap-split clustering ahead of the literal final allowance leaves. RH is not derived."
