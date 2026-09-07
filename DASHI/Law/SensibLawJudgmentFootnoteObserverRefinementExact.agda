@@ -9,15 +9,16 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 -- Introspective observer refinement for the retained Cullen judgment.
 --
--- Observed v0.1 queue:
---   body-only canonical observer -> one self-citation candidate.
+-- v0.1 was observed inadequate: body-only canonical text produced one
+-- self-citation candidate.  v0.2 is now locally observed on the retained
+-- official DOCX at Rust head 00bb995...: 163 material footnotes, 190 citation
+-- candidates, 189 footnote candidates, zero network, candidate-only.  The
+-- Mallonland reporter identities are recovered at exact footnote locator 90.
 --
--- Artifact inspection shows the exact missing carrier class: the DOCX contains
--- material footnote bodies in word/footnotes.xml, and those footnotes carry the
--- reporter identities needed by the citation/treatment consumer.  The Rust
--- repair preserves those footnotes by stable footnote id, adds reported/parallel
--- citation-shape extraction, and produces a distinct body+footnotes observer
--- digest.  The repaired v0.2 queue remains unobserved until local execution.
+-- This still does not establish treatment, proposition correspondence, ratio,
+-- current authority or consumer closure.  The next introspective coordinate is
+-- the body-paragraph <-> footnote-reference anchor needed to decide which of the
+-- 190 candidates actually bears on a live residual.
 ------------------------------------------------------------------------
 
 rustRepository : String
@@ -26,8 +27,8 @@ rustRepository = "chboishabba/slr"
 rustBranch : String
 rustBranch = "agent/governed-online-r6-v2"
 
-rustRefinementSourceHead : String
-rustRefinementSourceHead = "23e34f4f92e06e147369a6daddd15c658eb317d6"
+rustObservedRefinementHead : String
+rustObservedRefinementHead = "00bb9957ace2d3c2ea7d6104ad5cab100dd29369"
 
 oldQueueSchema : String
 oldQueueSchema = "sl.judgment_citation_review_queue.v0_1"
@@ -43,14 +44,20 @@ bodyOnlyCanonicalTextDigest : String
 bodyOnlyCanonicalTextDigest =
   "sha256:53f4037cbb6a254634b43e5747bf398f44519a8eea1c9a904d146f7674564b5a"
 
-missingCoordinate : String
-missingCoordinate = "DOCX footnote bodies + reported/parallel citation forms"
+missingCoordinateV01 : String
+missingCoordinateV01 = "DOCX footnote bodies + reported/parallel citation forms"
+
+nextMissingCoordinate : String
+nextMissingCoordinate = "body paragraph <-> DOCX footnoteReference anchor"
 
 mallonlandReportedCitation : String
 mallonlandReportedCitation = "(2024) 98 ALJR 956"
 
 mallonlandParallelCitation : String
 mallonlandParallelCitation = "418 ALR 639"
+
+mallonlandLocator : String
+mallonlandLocator = "document:hca:[2026]-HCA-19:docx#footnote-90"
 
 record JudgmentFootnoteObserverRefinementBoundary : Set where
   constructor judgmentFootnoteObserverRefinementBoundary
@@ -61,12 +68,23 @@ record JudgmentFootnoteObserverRefinementBoundary : Set where
     oldQueueCandidateCount : Nat
     oldQueueCandidateCountIsOne : oldQueueCandidateCount ≡ 1
 
-    oldQueueAllCandidatesReviewed : Bool
-    oldQueueAllCandidatesReviewedIsFalse : oldQueueAllCandidatesReviewed ≡ false
+    refinedQueueNetworkRequests : Nat
+    refinedQueueNetworkRequestsIsZero : refinedQueueNetworkRequests ≡ 0
 
-    oldQueueClaimedSemanticCorrespondence : Bool
-    oldQueueClaimedSemanticCorrespondenceIsFalse :
-      oldQueueClaimedSemanticCorrespondence ≡ false
+    refinedQueueFootnoteCount : Nat
+    refinedQueueFootnoteCountIs163 : refinedQueueFootnoteCount ≡ 163
+
+    refinedQueueCandidateCount : Nat
+    refinedQueueCandidateCountIs190 : refinedQueueCandidateCount ≡ 190
+
+    refinedQueueFootnoteCandidateCount : Nat
+    refinedQueueFootnoteCandidateCountIs189 : refinedQueueFootnoteCandidateCount ≡ 189
+
+    refinedQueueRuntimeObserved : Bool
+    refinedQueueRuntimeObservedIsTrue : refinedQueueRuntimeObserved ≡ true
+
+    refinedQueueCandidateOnly : Bool
+    refinedQueueCandidateOnlyIsTrue : refinedQueueCandidateOnly ≡ true
 
     refinedObserverPreservesBody : Bool
     refinedObserverPreservesBodyIsTrue : refinedObserverPreservesBody ≡ true
@@ -74,10 +92,6 @@ record JudgmentFootnoteObserverRefinementBoundary : Set where
     refinedObserverPreservesFootnoteIds : Bool
     refinedObserverPreservesFootnoteIdsIsTrue :
       refinedObserverPreservesFootnoteIds ≡ true
-
-    refinedObserverUsesDistinctDigest : Bool
-    refinedObserverUsesDistinctDigestIsTrue :
-      refinedObserverUsesDistinctDigest ≡ true
 
     mediumNeutralCitationExtractionRetained : Bool
     mediumNeutralCitationExtractionRetainedIsTrue :
@@ -89,19 +103,20 @@ record JudgmentFootnoteObserverRefinementBoundary : Set where
     parallelReporterExtractionAdded : Bool
     parallelReporterExtractionAddedIsTrue : parallelReporterExtractionAdded ≡ true
 
-    footnoteCandidatesHaveStableLocators : Bool
-    footnoteCandidatesHaveStableLocatorsIsTrue :
-      footnoteCandidatesHaveStableLocators ≡ true
+    mallonlandReportedCitationObserved : Bool
+    mallonlandReportedCitationObservedIsTrue :
+      mallonlandReportedCitationObserved ≡ true
 
-    mallonlandReporterCandidateRequiredByValidation : Bool
-    mallonlandReporterCandidateRequiredByValidationIsTrue :
-      mallonlandReporterCandidateRequiredByValidation ≡ true
+    mallonlandParallelCitationObserved : Bool
+    mallonlandParallelCitationObservedIsTrue :
+      mallonlandParallelCitationObserved ≡ true
 
-    refinedQueueNetworkRequests : Nat
-    refinedQueueNetworkRequestsIsZero : refinedQueueNetworkRequests ≡ 0
+    mallonlandFootnoteLocatorObserved : Bool
+    mallonlandFootnoteLocatorObservedIsTrue :
+      mallonlandFootnoteLocatorObserved ≡ true
 
-    refinedQueueRuntimeObserved : Bool
-    refinedQueueRuntimeObservedIsFalse : refinedQueueRuntimeObserved ≡ false
+    bodyFootnoteAnchorPreserved : Bool
+    bodyFootnoteAnchorPreservedIsFalse : bodyFootnoteAnchorPreserved ≡ false
 
     extractionAutomaticallyCitationTreatment : Bool
     extractionAutomaticallyCitationTreatmentIsFalse :
@@ -117,17 +132,20 @@ canonicalJudgmentFootnoteObserverRefinementBoundary =
   judgmentFootnoteObserverRefinementBoundary
     0 refl
     1 refl
-    false refl
-    false refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
     0 refl
+    163 refl
+    190 refl
+    189 refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
     false refl
     false refl
     false refl
@@ -140,6 +158,7 @@ data FootnotePresenceAutomaticallyCitationTreatment : Set where
 data ReporterShapeAutomaticallyAuthorityIdentity : Set where
 data MoreCitationCandidatesAutomaticallyConsumerClosure : Set where
 data ObserverRefinementAutomaticallyFormalProgress : Set where
+data FootnoteIdentityAutomaticallyResidualRelevance : Set where
 
 footnotePresenceDoesNotBecomeCitationTreatment :
   FootnotePresenceAutomaticallyCitationTreatment → ⊥
@@ -156,3 +175,7 @@ moreCitationCandidatesDoNotCloseConsumer ()
 observerRefinementDoesNotBecomeFormalProgress :
   ObserverRefinementAutomaticallyFormalProgress → ⊥
 observerRefinementDoesNotBecomeFormalProgress ()
+
+footnoteIdentityDoesNotBecomeResidualRelevance :
+  FootnoteIdentityAutomaticallyResidualRelevance → ⊥
+footnoteIdentityDoesNotBecomeResidualRelevance ()
