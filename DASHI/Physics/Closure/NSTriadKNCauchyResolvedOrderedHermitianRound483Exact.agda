@@ -2,16 +2,6 @@ module DASHI.Physics.Closure.NSTriadKNCauchyResolvedOrderedHermitianRound483Exac
 
 ------------------------------------------------------------------------
 -- ROUND483 / ORDERED FULL CAUCHY SUM = R446 HERMITIAN FORM
---
--- R482 reduces the R477 selected physical quadratic to the ordered double sum
--- of the literal R446 Hermitian Cauchy pair terms.  R446 writes the same
--- symmetric form as
---
---   diagonal + 2 * upperTriangle.
---
--- This file closes that finite bookkeeping identity using only symmetry of the
--- Cauchy kernel and symmetry of the real Hermitian cross.  No estimate or
--- Navier--Stokes hypothesis is introduced.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -25,6 +15,7 @@ import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramRound179Exact as R179
 import DASHI.Physics.Closure.NSTriadKNRationalCauchySchurComplementRound443Exact as R443
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3CauchyPSDRound446Exact as R446
 import DASHI.Physics.Closure.NSTriadKNWaleffeOutputHelicityGramRound287Exact as R287
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact as R477
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedPositiveCellCarrierRound482Exact as R482
 
 PositiveCell : Set
@@ -108,7 +99,7 @@ orderedFullRowsEqualHermitianCauchyForm (head ∷ rest)
 
 resolvedQuadraticAtSelectedCoefficientIsR446HermitianCauchyForm :
   (cells : List PositiveCell) →
-  DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact.resolvedQuadratic
+  R477.resolvedQuadratic
     (R482.positiveCellResolvedFamily cells)
     R482.selectedCoefficient
   ≡ R446.hermitianCauchyForm cells
@@ -116,10 +107,6 @@ resolvedQuadraticAtSelectedCoefficientIsR446HermitianCauchyForm cells =
   trans
     (R482.resolvedQuadraticAtSelectedCoefficientIsOrderedHermitianRows cells)
     (orderedFullRowsEqualHermitianCauchyForm cells)
-
-------------------------------------------------------------------------
--- Search boundary.
-------------------------------------------------------------------------
 
 round483FiniteSymmetryBookkeepingClosed : Bool
 round483FiniteSymmetryBookkeepingClosed = true
