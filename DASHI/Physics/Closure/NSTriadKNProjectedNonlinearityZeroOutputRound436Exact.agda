@@ -3,7 +3,7 @@ module DASHI.Physics.Closure.NSTriadKNProjectedNonlinearityZeroOutputRound436Exa
 ------------------------------------------------------------------------
 -- ROUND436 / THE LITERAL PROJECTED NS NONLINEARITY VANISHES AT OUTPUT ZERO
 --
--- The remaining R307 orientation seam was the forcing-leg case p = 0.  On the
+-- The remaining R307 orientation seam was the forcing-leg case p = 0. On the
 -- actual projected NS forcing this is not an analytic exceptional case.
 --
 -- For every inner physical incidence a+b=0, exact Z^3 resonance gives b=-a.
@@ -11,15 +11,19 @@ module DASHI.Physics.Closure.NSTriadKNProjectedNonlinearityZeroOutputRound436Exa
 --
 --   u_a . b = u_a . (-a) = -(u_a . a) = 0.
 --
--- Hence the ordered Galerkin interaction vanishes BEFORE any estimate.  The
+-- Hence the ordered Galerkin interaction vanishes BEFORE any estimate. The
 -- complete output-zero fibre is therefore a finite sum of zero vectors:
 --
 --   projectedNonlinearity system 0 = 0.
 --
--- The all-mode transversality hypothesis is not invented here: the physical
--- trajectory carrier used by R228/R240 already owns exactly that field.  No
--- mean-zero folklore, shell estimate, helicity assumption, inverse-square law
--- at zero, or cutoff-uniform estimate is used.
+-- AUTHORITY BOUNDARY
+-- ------------------
+-- The all-mode transversality hypothesis is already a field of the physical
+-- mixed-helicity trajectory carrier used by R228/R240. This theorem is still a
+-- local compiler over an arbitrary finite system plus that explicit witness;
+-- it does not assert every FiniteComplex3GalerkinSystem carries transversality.
+-- No mean-zero folklore, shell estimate, helicity assumption, inverse-square
+-- law at zero, or cutoff-uniform estimate is used.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
