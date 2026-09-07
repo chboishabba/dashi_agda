@@ -36,21 +36,21 @@ data StatementRank : Set where
 record Qualifier : Set where
   constructor qualifier
   field
-    property : Id.PropertyId
-    snak : Snak
+    qualifierProperty : Id.PropertyId
+    qualifierSnak : Snak
 open Qualifier public
 
 record ReferenceSnak : Set where
   constructor referenceSnak
   field
-    property : Id.PropertyId
-    snak : Snak
+    referenceProperty : Id.PropertyId
+    referenceSnakValue : Snak
 open ReferenceSnak public
 
 record ReferenceBlock : Set where
   constructor referenceBlock
   field
-    snaks : List ReferenceSnak
+    referenceSnaks : List ReferenceSnak
     referenceId : String
 open ReferenceBlock public
 
@@ -58,37 +58,37 @@ record Statement : Set where
   constructor statement
   field
     statementId : String
-    subject : Id.EntityId
-    property : Id.PropertyId
+    statementSubject : Id.EntityId
+    statementProperty : Id.PropertyId
     mainsnak : Snak
-    rank : StatementRank
-    qualifiers : List Qualifier
-    references : List ReferenceBlock
+    statementRank : StatementRank
+    statementQualifiers : List Qualifier
+    statementReferences : List ReferenceBlock
 open Statement public
 
 record Sitelink : Set where
   constructor sitelink
   field
-    site : String
-    page : String
+    sitelinkSite : String
+    sitelinkPage : String
 open Sitelink public
 
 record EntitySitelink : Set where
   constructor entitySitelink
   field
-    item : Id.ItemId
-    link : Sitelink
+    sitelinkItem : Id.ItemId
+    entityLink : Sitelink
 open EntitySitelink public
 
 record EntitySnapshot : Set where
   constructor entitySnapshot
   field
-    item : Id.ItemId
-    labels : List (String × String)
-    statements : List Statement
-    sitelinks : List EntitySitelink
+    snapshotItem : Id.ItemId
+    snapshotLabels : List (String × String)
+    snapshotStatements : List Statement
+    snapshotSitelinks : List EntitySitelink
     snapshotReference : String
-    contentHash : String
+    snapshotContentHash : String
 open EntitySnapshot public
 
 -- Open-world and rank boundaries inherited from the current DASHI bridge.
