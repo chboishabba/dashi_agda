@@ -15,7 +15,6 @@ module DASHI.Core.PluralObserverCorrectionRealisationExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.String using (String)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
 
@@ -181,7 +180,8 @@ correctionDoesNotRecoverRealisedOutcome collision =
       (differentRealisedOutcome collision))
 
 ------------------------------------------------------------------------
--- Finite regression fixture.
+-- Finite regression fixture 1: same institutional report / monitoring,
+-- different affected observation / correction response.
 ------------------------------------------------------------------------
 
 data DemoState : Set where
@@ -237,17 +237,6 @@ demoMonitoringCollision = monitoring-correction-collision
   refl
   (λ ())
 
-demoCorrectionOutcomeCollision : CorrectionOutcomeCollision demoSystem
-demoCorrectionOutcomeCollision = correction-outcome-collision
-  institutionSaysClosedAffectedOpen
-  institutionSaysClosedAffectedClosed
-  -- Deliberately use a second finite witness below for same correction / distinct outcome.
-  -- This collision constructor is not inhabited by the first demo pair.
-  -- Kept separate from the canonical witnesses to avoid manufacturing equality.
-  -- No value is constructed here.
-  {!!}
-  {!!}
-
 institutionalSelfReportCannotRecoverAffectedOutcome :
   INF.FactorsThrough demoInstitutional demoAffected → ⊥
 institutionalSelfReportCannotRecoverAffectedOutcome =
@@ -257,6 +246,72 @@ monitoringPresenceCannotRecoverRevision :
   INF.FactorsThrough demoIndependent demoCorrection → ⊥
 monitoringPresenceCannotRecoverRevision =
   monitoringDoesNotRecoverCorrection demoMonitoringCollision
+
+------------------------------------------------------------------------
+-- Finite regression fixture 2: same correction activity, different realised
+-- outcome. Activity alone is not a sufficient statistic for repair.
+------------------------------------------------------------------------
+
+data OutcomeFixtureState : Set where
+  sameCorrectionHarmPersists
+  sameCorrectionRepairRealised
+  : OutcomeFixtureState
+
+data OutcomeFixtureDeclared : Set where outcomeDeclaredRepair : OutcomeFixtureDeclared
+data OutcomeFixtureInstitutional : Set where outcomeInstitutionReportsAction : OutcomeFixtureInstitutional
+data OutcomeFixtureAffected : Set where outcomeAffectedOpen outcomeAffectedClosed : OutcomeFixtureAffected
+data OutcomeFixtureIndependent : Set where outcomeIndependentReview : OutcomeFixtureIndependent
+data OutcomeFixtureCorrection : Set where sameCorrectionActivity : OutcomeFixtureCorrection
+data OutcomeFixtureOutcome : Set where outcomeHarmPersists outcomeRepairRealised : OutcomeFixtureOutcome
+
+outcomeDeclared : OutcomeFixtureState → OutcomeFixtureDeclared
+outcomeDeclared _ = outcomeDeclaredRepair
+
+outcomeInstitutional : OutcomeFixtureState → OutcomeFixtureInstitutional
+outcomeInstitutional _ = outcomeInstitutionReportsAction
+
+outcomeAffected : OutcomeFixtureState → OutcomeFixtureAffected
+outcomeAffected sameCorrectionHarmPersists = outcomeAffectedOpen
+outcomeAffected sameCorrectionRepairRealised = outcomeAffectedClosed
+
+outcomeIndependent : OutcomeFixtureState → OutcomeFixtureIndependent
+outcomeIndependent _ = outcomeIndependentReview
+
+outcomeCorrection : OutcomeFixtureState → OutcomeFixtureCorrection
+outcomeCorrection _ = sameCorrectionActivity
+
+outcomeRealised : OutcomeFixtureState → OutcomeFixtureOutcome
+outcomeRealised sameCorrectionHarmPersists = outcomeHarmPersists
+outcomeRealised sameCorrectionRepairRealised = outcomeRepairRealised
+
+outcomeFixtureSystem :
+  PluralOperationalSystem
+    OutcomeFixtureState
+    OutcomeFixtureDeclared
+    OutcomeFixtureInstitutional
+    OutcomeFixtureAffected
+    OutcomeFixtureIndependent
+    OutcomeFixtureCorrection
+    OutcomeFixtureOutcome
+outcomeFixtureSystem = plural-operational-system
+  outcomeDeclared
+  outcomeInstitutional
+  outcomeAffected
+  outcomeIndependent
+  outcomeCorrection
+  outcomeRealised
+
+outcomeFixtureCollision : CorrectionOutcomeCollision outcomeFixtureSystem
+outcomeFixtureCollision = correction-outcome-collision
+  sameCorrectionHarmPersists
+  sameCorrectionRepairRealised
+  refl
+  (λ ())
+
+correctionActivityCannotRecoverRealisedRepair :
+  INF.FactorsThrough outcomeCorrection outcomeRealised → ⊥
+correctionActivityCannotRecoverRealisedRepair =
+  correctionDoesNotRecoverRealisedOutcome outcomeFixtureCollision
 
 ------------------------------------------------------------------------
 -- Generic operational boundary.
