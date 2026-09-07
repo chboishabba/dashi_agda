@@ -23,7 +23,14 @@ module DASHI.Physics.Closure.NSTriadKNForcingSlotKernelRound307Exact where
 -- transversality-weld flag was stale: the forcing-side compiler is already
 -- available. The only cell hypotheses retained below are exactly the ones the
 -- physical consumer must provide: p is nonzero and the q-velocity is
--- transverse. No all-cell/global claim is inferred from the compiler itself.
+-- transverse.
+--
+-- R436/R437 subsequently close the complementary p=0 branch by proving the
+-- actual projected nonlinearity vanishes at zero output and hence the doubled
+-- R230 cell is exactly zero. They intentionally live downstream of this owner
+-- to avoid a dependency cycle. Therefore the historical flag below still says
+-- not EVERY cell meets the R307 nonzero-p hypotheses; the stronger exhaustive
+-- statement is `R437.every cell = slot-kernel OR zero`.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -177,12 +184,11 @@ round307OuterHHNullGeometryReusable = true
 round307ProjectedNSForcingTransversalityCompilerClosed : Bool
 round307ProjectedNSForcingTransversalityCompilerClosed = true
 
--- Compatibility status, now interpreted as the forcing-side same-object weld.
--- Global availability of p-nonzero/q-transverse hypotheses remains a separate
--- physical-family question and is not smuggled into this flag.
 round307PhysicalProjectedNSForcingTransversalityWeldClosed : Bool
 round307PhysicalProjectedNSForcingTransversalityWeldClosed = true
 
+-- Intentionally remains false: zero-p cells are handled downstream by R436/R437
+-- rather than being forced into a nonzero-direction hypothesis.
 round307AllOuterCellsMeetCompilerHypotheses : Bool
 round307AllOuterCellsMeetCompilerHypotheses = false
 
