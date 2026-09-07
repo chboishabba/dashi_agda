@@ -16,10 +16,6 @@ import DASHI.Culture.JohnAnthonyBrownDiagnosisRepairSchedulerBidiExact as Diagno
 import DASHI.Culture.JohnAnthonyBrownTemporalDiagnosisDependencyLineageBidiExact as TemporalLineage
 import DASHI.Culture.JohnAnthonyBrownSelectiveInvalidationParetoBidiExact as Selective
 
-------------------------------------------------------------------------
--- Base-path admissibility dynamics.
-------------------------------------------------------------------------
-
 swapReallyUnavailableBefore :
   Operator.OperatorAdmitted
     (BasePath.b0 BasePath.canonicalAdmissionPath)
@@ -38,10 +34,6 @@ rotationReallyAvailableAtFinalStep :
     Operator.rotateXYZOperator
 rotationReallyAvailableAtFinalStep = BasePath.rotateAvailableAtPath2
 
-------------------------------------------------------------------------
--- Reception graph reopening.
-------------------------------------------------------------------------
-
 edgeReclassificationReopensMeaning :
   Dependency.ReopeningObligation
     Reception.ReceptionDepends
@@ -55,10 +47,6 @@ sourceChangeReopensPolicy :
     Reception.sourceReceiptArtifact
     Reception.downstreamPolicyArtifact
 sourceChangeReopensPolicy = Reception.sourceChangeReopensPolicyTransitively
-
-------------------------------------------------------------------------
--- John Anthony Brown H1-H5 selective reopening.
-------------------------------------------------------------------------
 
 johnBrownAuthorPinned : Brown.paperAuthor ≡ "John Anthony Brown"
 johnBrownAuthorPinned = refl
@@ -89,11 +77,7 @@ wholePaperDoesNotAutoInvalidate : Brown.OneChangedSourceInvalidatesWholePaper �
 wholePaperDoesNotAutoInvalidate = Brown.oneChangedSourceDoesNotInvalidateWholePaper
 
 staleClaimDoesNotAutoRefute : Brown.StaleBrownClaimIsRefuted → ⊥
-staleClaimDoesNotAutoRefute = Brown.staleClaimIsReopenableNotRefuted
-
-------------------------------------------------------------------------
--- Diagnosis scheduler + temporal dependency-lineage return.
-------------------------------------------------------------------------
+staleClaimDoesNotAutoRefute = Brown.staleBrownClaimIsReopenableNotRefuted
 
 receptionFrameRequestsRechart :
   Diagnosis.brownRevision Outcome.frameConflict ≡ Revision.rechartRepresentation
@@ -107,10 +91,6 @@ h1ObservationReactivationMayUseDifferentUpstreamMeasurement :
   Lineage.LocalizedReactivation Brown.BrownDepends Outcome.observationConflict
 h1ObservationReactivationMayUseDifferentUpstreamMeasurement =
   TemporalLineage.localizedH1ObservationReactivation
-
-------------------------------------------------------------------------
--- Selective invalidation / Pareto validation.
-------------------------------------------------------------------------
 
 currentH1OutcomePathIsMustRecompute :
   Pareto.class Selective.h1OutcomeMeasurementCertificate ≡ Pareto.mustRecompute
