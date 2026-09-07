@@ -21,6 +21,11 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 --     self-adjoint operator together;
 --   the selected common invariant operator core remains a separate payment.
 --
+-- The finite P33 lane now separately owns a literal projected operator
+-- H_P = PMP whose projector-image domain is invariant and whose matrix
+-- representative is symmetric whenever M is symmetric.  This is a genuine
+-- finite precursor, not the continuum M7b/M7c payment.
+--
 -- The gauge-invariant L2 subspace is the selected carrier route.  A separate
 -- quotient of configuration space by gauge orbits is not a mandatory M7
 -- payment on this route.
@@ -32,6 +37,7 @@ import DASHI.Physics.YangMills.BalabanClayObservableGapEdgeExact
 import DASHI.Physics.YangMills.BalabanClaySpectralUVCompatibilityExact
 import DASHI.Physics.YangMills.YMOperatorDomainContinuumFrontier2026Exact as Frontier
 import DASHI.Physics.YangMills.YMKatoClosedFormHamiltonianExact as Kato
+import DASHI.Physics.YangMills.BalabanP33ProjectedHamiltonianDomainExact as P33Projected
 
 infixr 4 _or_
 data _or_ (A B : Set) : Set where
@@ -151,6 +157,28 @@ finiteSelectedHodgeVariationPairingClosed :
   Frontier.finiteSelectedHodgeVariationPairingClosed
     Frontier.canonicalYMOperatorContinuumFrontier ≡ true
 finiteSelectedHodgeVariationPairingClosed = refl
+
+------------------------------------------------------------------------
+-- New finite P33 operator/domain precursor.
+------------------------------------------------------------------------
+
+p33FiniteProjectedHamiltonianInvariantDomainLevel : ProofLevel
+p33FiniteProjectedHamiltonianInvariantDomainLevel =
+  P33Projected.p33ProjectedHamiltonianInvariantDomainLevel
+
+p33FiniteProjectedHamiltonianMatrixRepresentationLevel : ProofLevel
+p33FiniteProjectedHamiltonianMatrixRepresentationLevel =
+  P33Projected.p33ProjectedHamiltonianMatrixRepresentationLevel
+
+p33FiniteProjectedHamiltonianSymmetryLevel : ProofLevel
+p33FiniteProjectedHamiltonianSymmetryLevel =
+  P33Projected.p33ProjectedHamiltonianFiniteSymmetryLevel
+
+-- Scheduling consequence:
+-- the finite P33 carrier no longer needs a separate proof that the projected
+-- operator preserves the projector-image physical domain.  That follows by
+-- construction from H_P(v) = P(M(Pv)).  The remaining M7 domain/core work is
+-- therefore genuinely continuum/analytic rather than finite projector wiring.
 
 ------------------------------------------------------------------------
 -- Preferred Kato M7b/M7c compiler.
