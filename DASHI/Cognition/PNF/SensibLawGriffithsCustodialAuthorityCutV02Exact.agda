@@ -10,6 +10,7 @@ import DASHI.Cognition.PNF.SensibLawGriffithsCustodialOutcomePaymentV02Exact as 
 import DASHI.Cognition.PNF.SensibLawCountryCommunityAuthorityAdmissibilityV02Exact as Authority
 import DASHI.Cognition.PNF.SensibLawCountryCommunityPaymentAcquisitionPlanV02Exact as Acquisition
 import DASHI.Governance.NativeTitleAuthorityLayerExact as NativeTitle
+import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 
 ------------------------------------------------------------------------
 -- GRIFFITHS CUSTODIAL AUTHORITY CUT V02
@@ -79,7 +80,7 @@ nextSearchCoordinate = Acquisition.communityMandateScopeCoordinate
 
 nextSearchProducerExact :
   Acquisition.producerForPaymentCoordinate nextSearchCoordinate
-  ≡ DASHI.Law.SensibLawProofDirectedSearchIntentExact.attributionProducer
+  ≡ Search.attributionProducer
 nextSearchProducerExact = refl
 
 record PresentMandatePaymentV02 : Set₁ where
@@ -130,6 +131,8 @@ record GriffithsAuthorityCutBoundary : Set where
     presentMandatePaidIsFalse : presentMandatePaid ≡ false
     nextProducerIsMandateAttribution : Bool
     nextProducerIsMandateAttributionIsTrue : nextProducerIsMandateAttribution ≡ true
+
+open GriffithsAuthorityCutBoundary public
 
 canonicalGriffithsAuthorityCutBoundary : GriffithsAuthorityCutBoundary
 canonicalGriffithsAuthorityCutBoundary = griffiths-authority-cut-boundary
