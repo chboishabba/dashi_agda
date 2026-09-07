@@ -226,7 +226,7 @@ canonicalReclaimedAttribution = attribution-dialogue
 -- 6. Weld to self-identification and symbolic-inversion owners.
 ------------------------------------------------------------------------
 
-record WitchRelationalAttributionWeld : Set where
+record WitchRelationalAttributionWeld : Set₁ where
   constructor witch-relational-attribution-weld
   field
     selfBoundary : Self.WitchSelfIdentificationBoundary

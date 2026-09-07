@@ -164,3 +164,6 @@ canonicalReceptionPadicFloatingCrossPollination :
 canonicalReceptionPadicFloatingCrossPollination =
   reception-padic-floating-cross-pollination
     true false false false false false true true
+
+open ReceptionPadicFloatingCrossPollination public
+

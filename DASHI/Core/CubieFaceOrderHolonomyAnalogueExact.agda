@@ -80,10 +80,10 @@ orderedEndpointsShareCoarseFace = refl
 
 cubieFaceOrderNonfactorability :
   NF.NonFactorabilityWitness
-    (Order.orderedSurface firstTransport secondTransport root)
+    (Order.orderedSurface {core = faceCore} firstTransport secondTransport root)
     (Order.orderedEndpoint firstTransport secondTransport root)
 cubieFaceOrderNonfactorability =
-  Order.orderEndpointNonfactorability
+  Order.orderEndpointNonfactorability {core = faceCore}
     firstPreservesFace
     secondPreservesFace
     root
@@ -91,10 +91,10 @@ cubieFaceOrderNonfactorability =
 
 coarseFaceCannotDecodeTransportOrder :
   NF.FactorsThrough
-    (Order.orderedSurface firstTransport secondTransport root)
+    (Order.orderedSurface {core = faceCore} firstTransport secondTransport root)
     (Order.orderedEndpoint firstTransport secondTransport root) → ⊥
 coarseFaceCannotDecodeTransportOrder =
-  Order.surfaceCannotDecodeOrderedEndpoint
+  Order.surfaceCannotDecodeOrderedEndpoint {core = faceCore}
     firstPreservesFace
     secondPreservesFace
     root
@@ -118,6 +118,8 @@ record CubieHolonomyBoundary : Set where
     literalGaugeConnectionConstructed : Bool
     wilsonLoopComputed : Bool
     quantumBrainClaimed : Bool
+
+open CubieHolonomyBoundary public
 
 canonicalCubieHolonomyBoundary : CubieHolonomyBoundary
 canonicalCubieHolonomyBoundary =

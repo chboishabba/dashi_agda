@@ -320,7 +320,7 @@ counterFormationDoesNotPromoteSynthesis ()
 -- 8. Weld back to current #656 autonomy / epistemic reopening boundaries.
 ------------------------------------------------------------------------
 
-record ReligiousSanctionFeministWiccaWeld : Set where
+record ReligiousSanctionFeministWiccaWeld : Set₁ where
   constructor religious-sanction-feminist-wicca-weld
   field
     threatBoundary : Threat.ReligiousThreatPredicateDialecticBoundary

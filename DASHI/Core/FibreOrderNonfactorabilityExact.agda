@@ -38,12 +38,12 @@ data UpdateOrder : Set where
   secondAfterFirst : UpdateOrder
 
 orderedEndpoint :
-  ∀ {core : Fibre.FibreRestrictionCore} →
-  Dynamics.CarrierOperator core →
-  Dynamics.CarrierOperator core →
-  Fibre.Carrier core →
+  ∀ {Carrier : Set} →
+  (Carrier → Carrier) →
+  (Carrier → Carrier) →
+  Carrier →
   UpdateOrder →
-  Fibre.Carrier core
+  Carrier
 orderedEndpoint first second x firstAfterSecond = first (second x)
 orderedEndpoint first second x secondAfterFirst = second (first x)
 
@@ -64,7 +64,7 @@ compositeSurfaceInvariant :
   Dynamics.SurfaceInvariant core second →
   (x : Fibre.Carrier core) →
   Fibre.project core (first (second x)) ≡ Fibre.project core x
-compositeSurfaceInvariant firstInvariant secondInvariant x =
+compositeSurfaceInvariant {core} {first} {second} firstInvariant secondInvariant x =
   trans
     (firstInvariant (second x))
     (secondInvariant x)
@@ -75,12 +75,12 @@ orderedCompositesShareSurface :
   Dynamics.SurfaceInvariant core first →
   Dynamics.SurfaceInvariant core second →
   (x : Fibre.Carrier core) →
-  orderedSurface first second x firstAfterSecond
-  ≡ orderedSurface first second x secondAfterFirst
-orderedCompositesShareSurface firstInvariant secondInvariant x =
+  orderedSurface {core} first second x firstAfterSecond
+  ≡ orderedSurface {core} first second x secondAfterFirst
+orderedCompositesShareSurface {core} {first} {second} firstInvariant secondInvariant x =
   trans
-    (compositeSurfaceInvariant firstInvariant secondInvariant x)
-    (sym (compositeSurfaceInvariant secondInvariant firstInvariant x))
+    (compositeSurfaceInvariant {core} {first} {second} firstInvariant secondInvariant x)
+    (sym (compositeSurfaceInvariant {core} {second} {first} secondInvariant firstInvariant x))
 
 orderEndpointNonfactorability :
   ∀ {core : Fibre.FibreRestrictionCore}
@@ -90,13 +90,13 @@ orderEndpointNonfactorability :
   (x : Fibre.Carrier core) →
   (first (second x) ≡ second (first x) → ⊥) →
   NF.NonFactorabilityWitness
-    (orderedSurface first second x)
+    (orderedSurface {core} first second x)
     (orderedEndpoint first second x)
-orderEndpointNonfactorability firstInvariant secondInvariant x noncommutes =
+orderEndpointNonfactorability {core} {first} {second} firstInvariant secondInvariant x noncommutes =
   NF.nonFactorabilityWitness
     firstAfterSecond
     secondAfterFirst
-    (orderedCompositesShareSurface firstInvariant secondInvariant x)
+    (orderedCompositesShareSurface {core} {first} {second} firstInvariant secondInvariant x)
     noncommutes
 
 surfaceCannotDecodeOrderedEndpoint :
@@ -107,12 +107,12 @@ surfaceCannotDecodeOrderedEndpoint :
   (x : Fibre.Carrier core) →
   (first (second x) ≡ second (first x) → ⊥) →
   NF.FactorsThrough
-    (orderedSurface first second x)
+    (orderedSurface {core} first second x)
     (orderedEndpoint first second x) →
   ⊥
-surfaceCannotDecodeOrderedEndpoint firstInvariant secondInvariant x noncommutes =
+surfaceCannotDecodeOrderedEndpoint {core} {first} {second} firstInvariant secondInvariant x noncommutes =
   NF.witnessRulesOutEveryFlatFactorisation
-    (orderEndpointNonfactorability
+    (orderEndpointNonfactorability {core} {first} {second}
       firstInvariant secondInvariant x noncommutes)
 
 automorphismOrderNonfactorability :
@@ -122,10 +122,10 @@ automorphismOrderNonfactorability :
   (Dynamics.forward first (Dynamics.forward second x)
     ≡ Dynamics.forward second (Dynamics.forward first x) → ⊥) →
   NF.NonFactorabilityWitness
-    (orderedSurface (Dynamics.forward first) (Dynamics.forward second) x)
+    (orderedSurface {core} (Dynamics.forward first) (Dynamics.forward second) x)
     (orderedEndpoint (Dynamics.forward first) (Dynamics.forward second) x)
-automorphismOrderNonfactorability first second x noncommutes =
-  orderEndpointNonfactorability
+automorphismOrderNonfactorability {core} first second x noncommutes =
+  orderEndpointNonfactorability {core}
     (Dynamics.forwardPreservesSurface first)
     (Dynamics.forwardPreservesSurface second)
     x

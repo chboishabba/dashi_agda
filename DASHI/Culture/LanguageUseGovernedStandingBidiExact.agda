@@ -195,7 +195,7 @@ indigenousKnowledgeDoesNotPromoteWittgensteinTheory ()
 -- 7. Canonical weld and boundary.
 ------------------------------------------------------------------------
 
-record LanguageUseGovernedStandingWeld : Set where
+record LanguageUseGovernedStandingWeld : Set₁ where
   constructor language-use-governed-standing-weld
   field
     wittgensteinBoundary : Wittgenstein.WittgensteinUsePracticeBoundary
@@ -234,3 +234,7 @@ record LanguageUseGovernedStandingBoundary : Set where
 canonicalLanguageUseGovernedStandingBoundary : LanguageUseGovernedStandingBoundary
 canonicalLanguageUseGovernedStandingBoundary =
   language-use-governed-standing-boundary false false false false false false false true true
+
+open LanguageUseGovernedStandingWeld public
+open LanguageUseGovernedStandingBoundary public
+

@@ -71,34 +71,14 @@ NonseparableAdditiveInteraction surface =
 -- Rectangle identity forced by every additive endpoint decomposition.
 ------------------------------------------------------------------------
 
+open import Data.Nat.Solver using (module +-*-Solver)
+open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
+
 natRectangleRearrange :
   (a b c d : Nat) →
   (a + c) + (b + d) ≡ (a + d) + (b + c)
-natRectangleRearrange a b c d =
-  trans
-    (trans
-      (sym (+-assoc a c (b + d)))
-      (trans
-        (cong (λ z → a + z)
-          (trans
-            (+-assoc c b d)
-            (trans
-              (cong (λ z → z + d) (+-comm c b))
-              (sym (+-assoc b c d)))))
-        (+-assoc a b (c + d))))
-    (sym
-      (trans
-        (trans
-          (sym (+-assoc a d (b + c)))
-          (trans
-            (cong (λ z → a + z)
-              (trans
-                (+-assoc d b c)
-                (trans
-                  (cong (λ z → z + c) (+-comm d b))
-                  (sym (+-assoc b d c)))))
-            (+-assoc a b (d + c))))
-        (cong (λ z → (a + b) + z) (+-comm d c))))
+natRectangleRearrange =
+  solve 4 (λ a b c d → (a :+ c) :+ (b :+ d) := (a :+ d) :+ (b :+ c)) refl
 
 endpointSeparableImpliesRectangle :
   (surface : BinaryNatSurface) →

@@ -95,6 +95,8 @@ record AuthorityBearingLegibilityBoundary : Set where
     judicialCorrectionEqualsCompleteMaterialRepair : Bool
     terraNulliusCorrectionRetainsHistoricalConsequencesAsSeparateQuestion : Bool
 
+open AuthorityBearingLegibilityBoundary public
+
 canonicalAuthorityBearingLegibilityBoundary : AuthorityBearingLegibilityBoundary
 canonicalAuthorityBearingLegibilityBoundary =
   authorityBearingLegibilityBoundary true false false true

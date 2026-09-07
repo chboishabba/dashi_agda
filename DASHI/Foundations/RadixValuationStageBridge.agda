@@ -90,6 +90,8 @@ record DisplayValuationReading : Set where
     displayBaseEqualsValuationPrimeRequired : Bool
     readingLabel : String
 
+open DisplayValuationReading public
+
 canonicalDecimalPAdicReading : Nat → DisplayValuationReading
 canonicalDecimalPAdicReading p = record
   { displayBase = 10
@@ -118,15 +120,15 @@ data RadixOriginPrefix {chart : RadixChart} :
   radix-prefix-zero :
     ∀ {depth}
       {x y : RadialAddress chart depth} →
-    RadixOriginPrefix 0 x y
+    RadixOriginPrefix {chart = chart} 0 x y
 
   radix-prefix-cons :
     ∀ {depth matched}
       {x y : Fin (radix chart)}
       {xs ys : RadialAddress chart depth} →
     x ≡ y →
-    RadixOriginPrefix matched xs ys →
-    RadixOriginPrefix
+    RadixOriginPrefix {chart = chart} matched xs ys →
+    RadixOriginPrefix {chart = chart}
       (suc matched)
       (x Vec.∷ xs)
       (y Vec.∷ ys)
@@ -134,10 +136,10 @@ data RadixOriginPrefix {chart : RadixChart} :
 radixPrefixReflexive :
   ∀ {chart depth}
     (address : RadialAddress chart depth) →
-  RadixOriginPrefix depth address address
-radixPrefixReflexive Vec.[] = radix-prefix-zero
-radixPrefixReflexive (x Vec.∷ xs) =
-  radix-prefix-cons refl (radixPrefixReflexive xs)
+  RadixOriginPrefix {chart} depth address address
+radixPrefixReflexive {chart} Vec.[] = radix-prefix-zero {chart = chart}
+radixPrefixReflexive {chart} (x Vec.∷ xs) =
+  radix-prefix-cons {chart = chart} refl (radixPrefixReflexive {chart} xs)
 
 record PrefixUltrametricReading
   {chart : RadixChart}
@@ -145,8 +147,9 @@ record PrefixUltrametricReading
   (x y : RadialAddress chart depth) : Set where
   field
     sharedFromOrigin : Nat
-    prefixWitness : RadixOriginPrefix sharedFromOrigin x y
+    prefixWitness : RadixOriginPrefix {chart} sharedFromOrigin x y
     firstDifferenceDeterminesScale : Bool
+
 
 ------------------------------------------------------------------------
 -- Generic p/rank/depth geometry: (Fin p)^(rank * depth).
@@ -398,6 +401,8 @@ canonicalRadixStageAuthorityBoundary = record
   ; zeroRadixConstructible = false
   ; primeRankDepthGeometryExplicit = true
   }
+
+open RadixStageAuthorityBoundary public
 
 radixStageSummary : String
 radixStageSummary =

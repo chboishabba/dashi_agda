@@ -112,6 +112,8 @@ record RecognitionConstitutionBoundary : Set where
     authorityRequiresRecognitionToExistIsFalse :
       authorityRequiresRecognitionToExist ≡ false
 
+open RecognitionConstitutionBoundary public
+
 canonicalRecognitionConstitutionBoundary : RecognitionConstitutionBoundary
 canonicalRecognitionConstitutionBoundary =
   recognitionConstitutionBoundary false refl false refl false refl

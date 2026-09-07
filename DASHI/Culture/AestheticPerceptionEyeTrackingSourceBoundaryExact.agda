@@ -1,6 +1,7 @@
 module DASHI.Culture.AestheticPerceptionEyeTrackingSourceBoundaryExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 import DASHI.Core.AttributedSourceCore as Source
 
 ------------------------------------------------------------------------
@@ -75,6 +76,8 @@ record AestheticEmpiricalReceipt : Set where
     objectiveBeautyEstablished : Bool
     marketValueEstablished : Bool
 
+open AestheticEmpiricalReceipt public
+
 jankowskiReceipt : AestheticEmpiricalReceipt
 jankowskiReceipt = aesthetic-empirical-receipt
   jankowski2020Source "40 participants" "140 figurative paintings"
@@ -128,6 +131,8 @@ record AestheticPerceptionEyeTrackingBoundary : Set where
     objectiveBeautyLawRecovered : Bool
     exhaustiveAestheticMechanismRecovered : Bool
     candidateStudyIdentityUniqueFromVagueMemory : Bool
+
+open AestheticPerceptionEyeTrackingBoundary public
 
 canonicalAestheticPerceptionEyeTrackingBoundary : AestheticPerceptionEyeTrackingBoundary
 canonicalAestheticPerceptionEyeTrackingBoundary =

@@ -126,15 +126,6 @@ artDesignationDoesNotMeanPhysicalTransformation ()
 visibleResidualDoesNotEraseProvenanceHistory : VisibleResidualMeansNoPriorCarrier → ⊥
 visibleResidualDoesNotEraseProvenanceHistory ()
 
-gazeDoesNotDetermineObjectiveBeauty : Aesthetics.GazePatternDeterminesObjectiveBeauty → ⊥
-gazeDoesNotDetermineObjectiveBeauty = Aesthetics.gazeDoesNotDetermineObjectiveBeauty
-
-likingDoesNotEqualMarketValue : Aesthetics.SubjectiveLikingEqualsMarketValue → ⊥
-likingDoesNotEqualMarketValue = Aesthetics.likingDoesNotEqualMarketValue
-
-correlationDoesNotProveAestheticMechanism : Aesthetics.CorrelationProvesCausalAestheticMechanism → ⊥
-correlationDoesNotProveAestheticMechanism = Aesthetics.correlationDoesNotProveMechanism
-
 ------------------------------------------------------------------------
 -- 5. Empirical aesthetics adds an observer process without collapsing value.
 --

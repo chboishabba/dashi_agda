@@ -63,7 +63,7 @@ fibreEndomorphismHiddenWhenNontrivial :
   ∀ {core : Fibre.FibreRestrictionCore}
     (endomorphism : FibreEndomorphism core)
     (x : Fibre.Carrier core) →
-  operator endomorphism x ≡ x → ⊥ →
+  (operator endomorphism x ≡ x → ⊥) →
   HiddenTransition core (operator endomorphism) x
 fibreEndomorphismHiddenWhenNontrivial endomorphism x changes =
   hiddenTransition changes (preservesSurface endomorphism x)
@@ -178,6 +178,8 @@ record FibrePreservingDynamicsBoundary : Set where
     surfaceStabilityImpliesFineStateIdentity : Bool
     surfaceStabilityImpliesFineStateIdentityIsFalse :
       surfaceStabilityImpliesFineStateIdentity ≡ false
+
+open FibrePreservingDynamicsBoundary public
 
 canonicalFibrePreservingDynamicsBoundary : FibrePreservingDynamicsBoundary
 canonicalFibrePreservingDynamicsBoundary =

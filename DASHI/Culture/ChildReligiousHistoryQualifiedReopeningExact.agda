@@ -75,25 +75,25 @@ revisionCone revisablyEndorsedHistory = openRevisionCone
 
 religiousHistoryChoiceSurface : History.HistoryConditionedChoiceSurface
 religiousHistoryChoiceSurface = record
-  { History.History = FormationHistory
-  ; History.Observation = PresentParticipation
-  ; History.Pattern = FormationPattern
-  ; History.Choice = PresentChoice
-  ; History.observe = presentParticipation
-  ; History.patternOf = formationPattern
-  ; History.choose = historyQualifiedChoice
-  ; History.historyReading =
+  { History = FormationHistory
+  ; Observation = PresentParticipation
+  ; Pattern = FormationPattern
+  ; Choice = PresentChoice
+  ; observe = presentParticipation
+  ; patternOf = formationPattern
+  ; choose = historyQualifiedChoice
+  ; historyReading =
       "Same present religious participation may arise from an inherited closed route or a later revisably endorsed route; present participation alone does not recover the history-sensitive revision choice."
   }
 
 religiousHistoryChoiceWitness :
   History.DistinctHistoriesSameObservationDifferentChoice religiousHistoryChoiceSurface
 religiousHistoryChoiceWitness = record
-  { History.leftHistory = inheritedClosedHistory
-  ; History.rightHistory = revisablyEndorsedHistory
-  ; History.historiesDistinct = λ ()
-  ; History.samePresentObservation = refl
-  ; History.choicesDiffer = λ ()
+  { leftHistory = inheritedClosedHistory
+  ; rightHistory = revisablyEndorsedHistory
+  ; historiesDistinct = λ ()
+  ; samePresentObservation = refl
+  ; choicesDiffer = λ ()
   }
 
 presentParticipationCannotRecoverHistoryQualifiedChoice :
@@ -104,22 +104,22 @@ presentParticipationCannotRecoverHistoryQualifiedChoice =
 
 religiousFutureConeSurface : History.HistoryConditionedFutureConeSurface
 religiousFutureConeSurface = record
-  { History.FutureHistory = FormationHistory
-  ; History.FutureObservation = PresentParticipation
-  ; History.FutureConeCode = ReachableRevisionCone
-  ; History.observeFutureHistory = presentParticipation
-  ; History.futureCone = revisionCone
-  ; History.futureReading =
+  { FutureHistory = FormationHistory
+  ; FutureObservation = PresentParticipation
+  ; FutureConeCode = ReachableRevisionCone
+  ; observeFutureHistory = presentParticipation
+  ; futureCone = revisionCone
+  ; futureReading =
       "The same outward participation surface can coexist with different reachable revision/exit cones."
   }
 
 religiousFutureConeWitness :
   History.SameObservationDifferentFutureCone religiousFutureConeSurface
 religiousFutureConeWitness = record
-  { History.futureLeftHistory = inheritedClosedHistory
-  ; History.futureRightHistory = revisablyEndorsedHistory
-  ; History.futureSameObservation = refl
-  ; History.futureConesDiffer = λ ()
+  { futureLeftHistory = inheritedClosedHistory
+  ; futureRightHistory = revisablyEndorsedHistory
+  ; futureSameObservation = refl
+  ; futureConesDiffer = λ ()
   }
 
 presentParticipationCannotRecoverRevisionCone :

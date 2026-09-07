@@ -74,7 +74,7 @@ remoteCannotReachFarProvider : Reachable farProvider remoteResources → ⊥
 remoteCannotReachFarProvider r = impossible (Reachable.transportWithin r)
   where
     impossible : 4 ≤ 1 → ⊥
-    impossible ()
+    impossible (s≤s ())
 
 data NationalPluralityPromotesLocalPlurality : Set where
 
@@ -99,6 +99,8 @@ record SituatedEffectiveChoiceBoundary : Set where
     freightAndCompetitionMustRemainSeparateCauses : Bool
     unequalFeasibleChoiceFieldsCanExist : Bool
     localScarcityEqualsCoercion : Bool
+
+open SituatedEffectiveChoiceBoundary public
 
 canonicalSituatedEffectiveChoiceBoundary : SituatedEffectiveChoiceBoundary
 canonicalSituatedEffectiveChoiceBoundary =

@@ -123,6 +123,8 @@ record DeclaredRealizedBoundary : Set where
     samePersonCanHaveDifferentResidualAcrossEnvironmentsIsTrue :
       samePersonCanHaveDifferentResidualAcrossEnvironments ≡ true
 
+open DeclaredRealizedBoundary public
+
 canonicalDeclaredRealizedBoundary : DeclaredRealizedBoundary
 canonicalDeclaredRealizedBoundary =
   declared-realized-boundary false refl false refl false refl true refl

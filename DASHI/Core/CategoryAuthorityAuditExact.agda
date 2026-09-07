@@ -54,6 +54,8 @@ record CategoryAuthorityBoundary : Set where
     genesisCritiqueImpliesTechnicalInvalidityIsFalse :
       genesisCritiqueImpliesTechnicalInvalidity ≡ false
 
+open CategoryAuthorityBoundary public
+
 canonicalCategoryAuthorityBoundary : CategoryAuthorityBoundary
 canonicalCategoryAuthorityBoundary =
   categoryAuthorityBoundary false refl false refl false refl false refl

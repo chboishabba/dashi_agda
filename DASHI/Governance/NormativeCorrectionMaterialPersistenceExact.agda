@@ -39,7 +39,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 record CorrectionSource : Set where
-  constructor correctionSource
+  constructor mkCorrectionSource
   field
     authorOrCourt : String
     title : String
@@ -83,7 +83,7 @@ record CorrectionPersistenceCase : Set where
 open CorrectionPersistenceCase public
 
 maboSource : CorrectionSource
-maboSource = correctionSource
+maboSource = mkCorrectionSource
   "High Court of Australia"
   "Mabo v Queensland (No 2)"
   1992
@@ -91,7 +91,7 @@ maboSource = correctionSource
   "rejects enlarged terra-nullius doctrine / permits native-title recognition; no complete-repair inference"
 
 williams2012Source : CorrectionSource
-williams2012Source = correctionSource
+williams2012Source = mkCorrectionSource
   "High Court of Australia"
   "Williams v Commonwealth"
   2012
@@ -99,7 +99,7 @@ williams2012Source = correctionSource
   "constitutional funding/executive-power correction; not a theorem of institutional disappearance"
 
 williams2014Source : CorrectionSource
-williams2014Source = correctionSource
+williams2014Source = mkCorrectionSource
   "High Court of Australia"
   "Williams v Commonwealth"
   2014
@@ -107,7 +107,7 @@ williams2014Source = correctionSource
   "second constitutional invalidity holding; program persistence remains a separate empirical question"
 
 barker2015Source : CorrectionSource
-barker2015Source = correctionSource
+barker2015Source = mkCorrectionSource
   "Renae Barker"
   "A Critical Analysis of Religious Aspects of the Australian Chaplaincy Cases"
   2015
@@ -168,6 +168,8 @@ record NormativeCorrectionMaterialPersistenceBoundary : Set where
     materialPersistenceErasesLegalVictory : Bool
     MaboJudgmentAloneEstablishesCompleteRestitution : Bool
     WilliamsInvalidityAloneEstablishesProgramDisappearance : Bool
+
+open NormativeCorrectionMaterialPersistenceBoundary public
 
 canonicalNormativeCorrectionMaterialPersistenceBoundary :
   NormativeCorrectionMaterialPersistenceBoundary

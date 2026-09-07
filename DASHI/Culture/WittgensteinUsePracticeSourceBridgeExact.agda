@@ -219,7 +219,7 @@ bridgeNotSource ()
 -- authorship of those theorems to Wittgenstein.
 ------------------------------------------------------------------------
 
-record WittgensteinUsePracticeCrossPollinationReceipt : Set where
+record WittgensteinUsePracticeCrossPollinationReceipt : Set₁ where
   constructor wittgenstein-use-practice-cross-pollination-receipt
   field
     witchPredicateUseBoundary : WitchUse.WitchSelfIdentificationBoundary

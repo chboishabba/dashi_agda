@@ -38,17 +38,18 @@ open AppendOnlyEvidenceSystem public
 record ConclusionRevision
     (system : AppendOnlyEvidenceSystem) : Set₁ where
   constructor conclusionRevision
-  open AppendOnlyEvidenceSystem system
+  private
+    module S = AppendOnlyEvidenceSystem system
   field
-    before : History
-    newEvidence : Evidence
-    oldEvidence : Evidence
-    oldPresentBefore : Contains oldEvidence before
-    oldStillPresentAfter : Contains oldEvidence (append before newEvidence)
-    conclusionBefore : Conclusion
-    conclusionAfter : Conclusion
-    beforeMatches : conclusionAt before ≡ conclusionBefore
-    afterMatches : conclusionAt (append before newEvidence) ≡ conclusionAfter
+    before : S.History
+    newEvidence : S.Evidence
+    oldEvidence : S.Evidence
+    oldPresentBefore : S.Contains oldEvidence before
+    oldStillPresentAfter : S.Contains oldEvidence (S.append before newEvidence)
+    conclusionBefore : S.Conclusion
+    conclusionAfter : S.Conclusion
+    beforeMatches : S.conclusionAt before ≡ conclusionBefore
+    afterMatches : S.conclusionAt (S.append before newEvidence) ≡ conclusionAfter
     conclusionsDiffer : conclusionBefore ≡ conclusionAfter → ⊥
     revisionReference : String
 

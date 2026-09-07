@@ -263,7 +263,7 @@ presentIdentityDoesNotPromoteChildhoodFormationRoute ()
 -- 6. Weld to symbolic inversion / Wicca-feminist boundaries.
 ------------------------------------------------------------------------
 
-record WitchSelfIdentificationWeld : Set where
+record WitchSelfIdentificationWeld : Set₁ where
   constructor witch-self-identification-weld
   field
     symbolicBoundary : Symbol.SymbolicInversionAuthorityTransferBoundary

@@ -300,6 +300,8 @@ record RemedyConsultationBoundary : Set where
     remedyCanBeCoordinatedWithoutEpistemicFusionIsTrue :
       remedyCanBeCoordinatedWithoutEpistemicFusion ≡ true
 
+open RemedyConsultationBoundary public
+
 canonicalRemedyConsultationBoundary : RemedyConsultationBoundary
 canonicalRemedyConsultationBoundary = remedy-consultation-boundary
   false refl
@@ -332,6 +334,8 @@ record RemedyOperationalSemantics : Set where
     implementationMustBeMonitoredAgainstCommunityDefinedOutcome : Bool
     implementationMustBeMonitoredAgainstCommunityDefinedOutcomeIsTrue :
       implementationMustBeMonitoredAgainstCommunityDefinedOutcome ≡ true
+
+open RemedyOperationalSemantics public
 
 canonicalRemedyOperationalSemantics : RemedyOperationalSemantics
 canonicalRemedyOperationalSemantics = remedy-operational-semantics

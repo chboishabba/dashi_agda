@@ -132,7 +132,7 @@ open PositiveRecharting public
 positiveRechartingStrictlyRefinesInheritedChart :
   ∀ {Situated Flat Residual : Set}
     {flatten : Situated → Flat} →
-  (repair : PositiveRecharting flatten) →
+  (repair : PositiveRecharting {Residual = Residual} flatten) →
   Observer.StrictRefinement
     flatten
     (Observer.pairObserver flatten (residual repair))
@@ -171,7 +171,7 @@ positiveMultiplicity : SchematicSituated → PositiveMultiplicity
 positiveMultiplicity positiveModeA = multiplicityA
 positiveMultiplicity positiveModeB = multiplicityB
 
-canonicalPositiveRecharting : PositiveRecharting inheritedChart
+canonicalPositiveRecharting : PositiveRecharting {Residual = PositiveMultiplicity} inheritedChart
 canonicalPositiveRecharting =
   positive-recharting
     positiveMultiplicity

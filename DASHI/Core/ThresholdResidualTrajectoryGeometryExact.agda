@@ -14,11 +14,6 @@ data Orientation : Set where
   higherIsBetter : Orientation
   lowerIsBetter : Orientation
 
-_≤ᵇ_ : Nat → Nat → Bool
-zero ≤ᵇ n = true
-suc m ≤ᵇ zero = false
-suc m ≤ᵇ suc n = m ≤ᵇ n
-
 record ThresholdObservation : Set where
   constructor thresholdObservation
   field
@@ -152,6 +147,8 @@ record ThresholdTrajectoryBoundary : Set where
     aggregateEqualityMeansSameTrajectoryMeaning : Bool
     aggregateEqualityMeansSameTrajectoryMeaningIsFalse :
       aggregateEqualityMeansSameTrajectoryMeaning ≡ false
+
+open ThresholdTrajectoryBoundary public
 
 canonicalThresholdTrajectoryBoundary : ThresholdTrajectoryBoundary
 canonicalThresholdTrajectoryBoundary =
