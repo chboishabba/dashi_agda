@@ -22,6 +22,7 @@ module DASHI.Physics.Semiconductor.Device.FiniteScharfetterGummelFluxExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Nat.Base using (_∸_)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Physics.Semiconductor.Device.ComputedFiniteDeviceCellExact as Cell
 
@@ -58,17 +59,13 @@ nodePotential q node = Cell.centrePotential q + nodeOffset node
 
 q1PotentialProfile :
   nodePotential Cell.q1 node0 ≡ 3
-  × nodePotential Cell.q1 node1 ≡ 4
-  × nodePotential Cell.q1 node2 ≡ 5
-  × nodePotential Cell.q1 node3 ≡ 6
-q1PotentialProfile = refl , refl , refl , refl
+  × (nodePotential Cell.q1 node1 ≡ 4
+  × (nodePotential Cell.q1 node2 ≡ 5
+  × nodePotential Cell.q1 node3 ≡ 6))
+q1PotentialProfile = refl , (refl , (refl , refl))
 
 ------------------------------------------------------------------------
 -- Finite Bernoulli calibration.
---
--- This is a deliberately small exact surrogate for the two oriented weights
--- consumed by an exponential-fitting face balance.  Physical promotion still
--- requires a real exponential/Bernoulli implementation and unit calibration.
 ------------------------------------------------------------------------
 
 data PotentialDropClass : Set where
@@ -88,10 +85,6 @@ faceDropClass q face = unitForwardDrop
 
 ------------------------------------------------------------------------
 -- Nodal carrier profiles.
---
--- node0 is tied to the already-computed carrier state; downstream nodal values
--- are finite calibration data chosen to expose exact flux production across all
--- three faces.  They are not physical carrier densities.
 ------------------------------------------------------------------------
 
 electronPopulationAt : Cell.SourceCharge → SGNode → Nat
@@ -122,9 +115,6 @@ holePopulationAt Cell.q5 node1 = 7
 holePopulationAt Cell.q5 node2 = 11
 holePopulationAt Cell.q5 node3 = 19
 
--- Left boundary populations are explicit functions of the already-computed
--- one-cell populations, so the spatial carrier is not completely detached from
--- the previous same-object state.
 electronNode0MatchesComputedPopulation :
   (q : Cell.SourceCharge) →
   electronPopulationAt q node0 ≡ Cell.electronPopulation q + 13
@@ -141,14 +131,6 @@ holeNode0MatchesComputedPopulation Cell.q5 = refl
 
 ------------------------------------------------------------------------
 -- Oriented finite SG-style face producer.
---
--- For the admitted orientation the forward weighted term exceeds the backward
--- weighted term, so Nat monus is exact on this fixture:
---
---   J_face = u_L * B_forward - u_R * B_backward.
---
--- This is computationally downstream of nodal populations and the finite
--- Bernoulli calibration; there is no separately supplied face-current table.
 ------------------------------------------------------------------------
 
 weightedForward : Nat → Nat
@@ -215,8 +197,6 @@ q5HoleFace12 = refl
 q5HoleFace23 : holeFaceFlux Cell.q5 face23 ≡ 3
 q5HoleFace23 = refl
 
--- The left boundary face recovers the earlier computed transport current as a
--- theorem rather than taking that current as an input to this face producer.
 electronLeftFaceRecoversComputedCurrent :
   (q : Cell.SourceCharge) →
   electronFaceFlux q face01 ≡ Cell.electronCurrent q
