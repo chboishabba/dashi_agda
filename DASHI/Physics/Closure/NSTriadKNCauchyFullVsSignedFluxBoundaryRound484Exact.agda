@@ -2,39 +2,15 @@ module DASHI.Physics.Closure.NSTriadKNCauchyFullVsSignedFluxBoundaryRound484Exac
 
 ------------------------------------------------------------------------
 -- ROUND484 / FULL CAUCHY FORM IS A PRODUCER, NOT THE SIGNED-FLUX CONSUMER
---
--- Same-object correction discovered by R481 proof search.
---
--- R473/R432 consume the signed cross / Gram debt.  On the literal physical
--- Cauchy carrier, R447/R448 instead give three distinct scalars:
---
---   full = diagonal + offDiagonal
---   offDiagonal = literal R397/R385 weighted signed flux.
---
--- Therefore
---
---   full != offDiagonal
---
--- as a same-object identification unless an additional diagonal = 0 receipt is
--- supplied.  No such receipt is part of the physical route.
---
--- A FULL upper bound is still a valid sufficient producer for the signed flux:
--- if 0 <= diagonal and full <= budget, then offDiagonal <= full <= budget.
--- Thus R477/R478 remain useful producer routes, but they are strictly stronger
--- than the literal R432/R397 signed-flux consumer and must not be used as its
--- identity receipt.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
-
-------------------------------------------------------------------------
--- Generic algebra/order boundary.
-------------------------------------------------------------------------
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 fullEqualsOffDiagonalForcesDiagonalZero :
   (full diagonal offDiagonal : ℚ) →
@@ -83,10 +59,6 @@ fullUpperBoundPaysOffDiagonal full diagonal offDiagonal budget fullSplit diagona
   ℚP.≤-trans
     (offDiagonalBelowFull full diagonal offDiagonal fullSplit diagonalNN)
     fullBound
-
-------------------------------------------------------------------------
--- Search / trust boundary.
-------------------------------------------------------------------------
 
 round484R432ConsumerIsSignedFluxNotFullCauchyForm : Bool
 round484R432ConsumerIsSignedFluxNotFullCauchyForm = true
