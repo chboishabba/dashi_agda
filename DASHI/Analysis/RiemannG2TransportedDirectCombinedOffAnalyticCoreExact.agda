@@ -74,7 +74,7 @@ compileOffTarget {S = S} {transport = transport} input =
     (chosenOffBudget input)
     (NearFar._≤_ S)
     (Transport.universalPoleQuotientTaper transport)
-    (NearFar.compiledOffOrdinateUpper (chosenNearFarBudget input))
+    (NearFar.compiledOffOrdinateUpper S (chosenNearFarBudget input))
 
 compileOffAnalyticCore :
   forall {S transport} ->
