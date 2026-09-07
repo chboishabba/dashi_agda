@@ -3,6 +3,9 @@ module DASHI.JohnAnthonyBrownReceptionAdaptiveReopeningValidation where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.AffectedDependencyClosureExact as Dependency
+import DASHI.Core.ExperimentalOutcomeOrientationBackpropagationBidiExact as Outcome
+import DASHI.Core.SequentialOutcomeBackpropagationBidiExact as Revision
+import DASHI.Core.TemporalDiagnosisDependencyLineageBidiExact as Lineage
 import DASHI.Foundations.Base369Ternary27AdmissibilityPathDynamicsExact as BasePath
 import DASHI.Foundations.Base369Ternary27StabiliserOperatorHolonomyExact as Operator
 import DASHI.Governance.ReceptionEvidenceSelectiveReopeningExact as Reception
@@ -91,19 +94,14 @@ staleClaimDoesNotAutoRefute = Brown.staleBrownClaimIsReopenableNotRefuted
 ------------------------------------------------------------------------
 
 receptionFrameRequestsRechart :
-  Diagnosis.brownRevision DASHI.Core.ExperimentalOutcomeOrientationBackpropagationBidiExact.frameConflict
-  ≡ DASHI.Core.SequentialOutcomeBackpropagationBidiExact.rechartRepresentation
+  Diagnosis.brownRevision Outcome.frameConflict ≡ Revision.rechartRepresentation
 receptionFrameRequestsRechart = Diagnosis.receptionFrameConflictRequestsRechart
 
 receptionReactivationLocalizedToH2 :
-  DASHI.Core.TemporalDiagnosisDependencyLineageBidiExact.LocalizedReactivation
-    Brown.BrownDepends
-    DASHI.Core.ExperimentalOutcomeOrientationBackpropagationBidiExact.frameConflict
+  Lineage.LocalizedReactivation Brown.BrownDepends Outcome.frameConflict
 receptionReactivationLocalizedToH2 = TemporalLineage.localizedReceptionReactivation
 
 h1ObservationReactivationMayUseDifferentUpstreamMeasurement :
-  DASHI.Core.TemporalDiagnosisDependencyLineageBidiExact.LocalizedReactivation
-    Brown.BrownDepends
-    DASHI.Core.ExperimentalOutcomeOrientationBackpropagationBidiExact.observationConflict
+  Lineage.LocalizedReactivation Brown.BrownDepends Outcome.observationConflict
 h1ObservationReactivationMayUseDifferentUpstreamMeasurement =
   TemporalLineage.localizedH1ObservationReactivation
