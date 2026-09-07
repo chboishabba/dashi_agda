@@ -17,15 +17,15 @@ import DASHI.Governance.IndigenousAuthorityEnvelopeExact as Indigenous
 ------------------------------------------------------------------------
 
 data DrugRepairAxis : Set where
-  acknowledgementAxis
-  truthHistoryAxis
-  materialRestitutionBenefitAxis
-  institutionalReformAxis
-  categoryAuthorityRestorationAxis
-  decisionRightsAxis
-  sovereignAuthorityAxis
-  nonRepetitionAxis
-  : DrugRepairAxis
+  acknowledgementAxis : DrugRepairAxis
+  truthHistoryAxis : DrugRepairAxis
+  materialRestitutionBenefitAxis : DrugRepairAxis
+  institutionalReformAxis : DrugRepairAxis
+  categoryAuthorityRestorationAxis : DrugRepairAxis
+  decisionRightsAxis : DrugRepairAxis
+  sovereignAuthorityAxis : DrugRepairAxis
+  nonRepetitionAxis : DrugRepairAxis
+
 
 data DrugRepairStatus : Set where
   openRepair acknowledgedRepair repairedRepair : DrugRepairStatus

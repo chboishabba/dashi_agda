@@ -19,30 +19,30 @@ import DASHI.Governance.TrumpDrugPolicyPsychedelicClassificationBidiExact as Tru
 ------------------------------------------------------------------------
 
 data DrugPolicyGoal : Set where
-  reduceOverdoseMortality
-  reduceProblematicUse
-  reduceIllicitSupply
-  reduceViolence
-  improveTreatmentAccess
-  reduceCriminalJusticeHarm
-  improveHousingAndSocialStability
-  : DrugPolicyGoal
+  reduceOverdoseMortality : DrugPolicyGoal
+  reduceProblematicUse : DrugPolicyGoal
+  reduceIllicitSupply : DrugPolicyGoal
+  reduceViolence : DrugPolicyGoal
+  improveTreatmentAccess : DrugPolicyGoal
+  reduceCriminalJusticeHarm : DrugPolicyGoal
+  improveHousingAndSocialStability : DrugPolicyGoal
+
 
 data GoalOutcome : Set where
-  goalImproved
-  goalUnchanged
-  goalWorsened
-  goalMixedOrUnresolved
-  : GoalOutcome
+  goalImproved : GoalOutcome
+  goalUnchanged : GoalOutcome
+  goalWorsened : GoalOutcome
+  goalMixedOrUnresolved : GoalOutcome
+
 
 data PolicyCostAxis : Set where
-  policingCost
-  incarcerationCost
-  displacementCost
-  treatmentOpportunityCost
-  stigmaCost
-  housingInstabilityCost
-  : PolicyCostAxis
+  policingCost : PolicyCostAxis
+  incarcerationCost : PolicyCostAxis
+  displacementCost : PolicyCostAxis
+  treatmentOpportunityCost : PolicyCostAxis
+  stigmaCost : PolicyCostAxis
+  housingInstabilityCost : PolicyCostAxis
+
 
 record GoalRelativeFailureAssessment : Set where
   constructor goalRelativeFailureAssessment
@@ -63,13 +63,13 @@ open GoalRelativeFailureAssessment public
 ------------------------------------------------------------------------
 
 data DrugPolicyNarrativeCarrier : Set where
-  externalCartelCarrier
-  illicitDealerCarrier
-  criminalizedUserCarrier
-  domesticStructuralConditionCarrier
-  treatmentSystemCapacityCarrier
-  housingPovertyConditionCarrier
-  : DrugPolicyNarrativeCarrier
+  externalCartelCarrier : DrugPolicyNarrativeCarrier
+  illicitDealerCarrier : DrugPolicyNarrativeCarrier
+  criminalizedUserCarrier : DrugPolicyNarrativeCarrier
+  domesticStructuralConditionCarrier : DrugPolicyNarrativeCarrier
+  treatmentSystemCapacityCarrier : DrugPolicyNarrativeCarrier
+  housingPovertyConditionCarrier : DrugPolicyNarrativeCarrier
+
 
 record ExternalisingDrugNarrativeCandidate : Set where
   constructor externalisingDrugNarrativeCandidate

@@ -17,15 +17,15 @@ data CrossProverAuthority : Set where
   checkedLeanReturn openAgdaObligation : CrossProverAuthority
 
 data WindowRegime : Set where
-  narrowQuarterPeriod
-  oscillatoryBeyondQuarterPeriod
-  : WindowRegime
+  narrowQuarterPeriod : WindowRegime
+  oscillatoryBeyondQuarterPeriod : WindowRegime
+
 
 data ScalarRouteDisposition : Set where
-  directEstimateBlocked
-  explicitFormulaWindowBlocked
-  oscillatoryRouteLive
-  : ScalarRouteDisposition
+  directEstimateBlocked : ScalarRouteDisposition
+  explicitFormulaWindowBlocked : ScalarRouteDisposition
+  oscillatoryRouteLive : ScalarRouteDisposition
+
 
 record NarrowWindowNoCancellationReturn : Set where
   constructor narrow-window-no-cancellation-return

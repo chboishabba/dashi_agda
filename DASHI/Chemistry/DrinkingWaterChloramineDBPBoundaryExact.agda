@@ -8,6 +8,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Chemistry.ChlorAlkaliSaltIndustryExact as Industry
 import DASHI.Chemistry.DrinkingWaterChlorineSpeciationExact as Free
 import DASHI.Chemistry.TransitionKernel as Chemistry
+open Chemistry
 
 ------------------------------------------------------------------------
 -- CHLORAMINE / DISINFECTION-BYPRODUCT BOUNDARY
@@ -35,67 +36,67 @@ import DASHI.Chemistry.TransitionKernel as Chemistry
 
 ammoniaSpecies : Chemistry.Species
 ammoniaSpecies = record
-  { Chemistry.speciesId = "ammonia"
-  ; Chemistry.phase = Chemistry.dissolved
-  ; Chemistry.chargeLabel = "0 bulk NH3 representation"
-  ; Chemistry.compositionLabel = "NH3"
-  ; Chemistry.mobilityClass = Chemistry.mobile
-  ; Chemistry.activityModelLabel = "aqueous ammonia/ammonium speciation supplied by application"
-  ; Chemistry.opticalRoleLabel = "not asserted"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { speciesId = "ammonia"
+  ; phase = Chemistry.dissolved
+  ; chargeLabel = "0 bulk NH3 representation"
+  ; compositionLabel = "NH3"
+  ; mobilityClass = Chemistry.mobile
+  ; activityModelLabel = "aqueous ammonia/ammonium speciation supplied by application"
+  ; opticalRoleLabel = "not asserted"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 monochloramineSpecies : Chemistry.Species
 monochloramineSpecies = record
-  { Chemistry.speciesId = "monochloramine"
-  ; Chemistry.phase = Chemistry.dissolved
-  ; Chemistry.chargeLabel = "0"
-  ; Chemistry.compositionLabel = "NH2Cl"
-  ; Chemistry.mobilityClass = Chemistry.mobile
-  ; Chemistry.activityModelLabel = "aqueous chloramine model supplied by application"
-  ; Chemistry.opticalRoleLabel = "not asserted"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { speciesId = "monochloramine"
+  ; phase = Chemistry.dissolved
+  ; chargeLabel = "0"
+  ; compositionLabel = "NH2Cl"
+  ; mobilityClass = Chemistry.mobile
+  ; activityModelLabel = "aqueous chloramine model supplied by application"
+  ; opticalRoleLabel = "not asserted"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 chloramineCondition : Chemistry.Condition
 chloramineCondition = record
-  { Chemistry.conditionLabel = "chloramine formation regime"
-  ; Chemistry.environment = Free.waterTreatmentEnvironment
-  ; Chemistry.guardExpression = "free chlorine and ammonia/ammonium present; pH, ratio, mixing and time supplied"
+  { conditionLabel = "chloramine formation regime"
+  ; environment = Free.waterTreatmentEnvironment
+  ; guardExpression = "free chlorine and ammonia/ammonium present; pH, ratio, mixing and time supplied"
   }
 
 chloramineRate : Chemistry.RateLaw
 chloramineRate = record
-  { Chemistry.rateLawKind = Chemistry.empirical
-  ; Chemistry.symbolicForm = "chloramine formation/breakpoint kinetics supplied by treatment model"
-  ; Chemistry.parameters = []
-  ; Chemistry.validityRegime = "application-specific drinking-water chloramination"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { rateLawKind = Chemistry.empirical
+  ; symbolicForm = "chloramine formation/breakpoint kinetics supplied by treatment model"
+  ; parameters = []
+  ; validityRegime = "application-specific drinking-water chloramination"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 monochloramineFormationTransition : Chemistry.Transition
 monochloramineFormationTransition = record
-  { Chemistry.transitionId = "monochloramine formation from HOCl and ammonia"
-  ; Chemistry.transitionKind = Chemistry.chemicalReaction
-  ; Chemistry.reactants =
-      record { Chemistry.species = Free.hypochlorousAcidSpecies ; Chemistry.coefficient = 1 }
-      ∷ record { Chemistry.species = ammoniaSpecies ; Chemistry.coefficient = 1 }
+  { transitionId = "monochloramine formation from HOCl and ammonia"
+  ; transitionKind = Chemistry.chemicalReaction
+  ; reactants =
+      record { species = Free.hypochlorousAcidSpecies ; coefficient = 1 }
+      ∷ record { species = ammoniaSpecies ; coefficient = 1 }
       ∷ []
-  ; Chemistry.products =
-      record { Chemistry.species = monochloramineSpecies ; Chemistry.coefficient = 1 }
-      ∷ record { Chemistry.species = Industry.waterSpecies ; Chemistry.coefficient = 1 }
+  ; products =
+      record { species = monochloramineSpecies ; coefficient = 1 }
+      ∷ record { species = Industry.waterSpecies ; coefficient = 1 }
       ∷ []
-  ; Chemistry.catalysts = []
-  ; Chemistry.rateLaw = chloramineRate
-  ; Chemistry.condition = chloramineCondition
-  ; Chemistry.reversibility = Chemistry.conditionallyReversible
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  ; catalysts = []
+  ; rateLaw = chloramineRate
+  ; condition = chloramineCondition
+  ; reversibility = Chemistry.conditionallyReversible
+  ; evidence = Chemistry.literatureEstablished
   }
 
 data ResidualKind : Set where
-  freeChlorineResidual
-  combinedChlorineResidual
-  : ResidualKind
+  freeChlorineResidual : ResidualKind
+  combinedChlorineResidual : ResidualKind
+
 
 record CombinedChlorineResidualState : Set₁ where
   constructor combinedChlorineResidualState

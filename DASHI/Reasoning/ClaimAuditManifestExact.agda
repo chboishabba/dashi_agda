@@ -20,30 +20,30 @@ import DASHI.Reasoning.DialecticalOppositionNonExplosionExact as Dialectic
 ------------------------------------------------------------------------
 
 data ClaimReceiptKind : Set where
-  predicateContentReceipt
-  constructReceipt
-  mechanismReceipt
-  domainInstantiationReceipt
-  associationReceipt
-  causalReceipt
-  etiologyReceipt
-  comparatorReceipt
-  outcomeReceipt
-  transportReceipt
-  practicalSignificanceReceipt
-  rightsReceipt
-  legalElementsReceipt
-  normativeReceipt
-  sourceCorrectionReceipt
+  predicateContentReceipt : ClaimReceiptKind
+  constructReceipt : ClaimReceiptKind
+  mechanismReceipt : ClaimReceiptKind
+  domainInstantiationReceipt : ClaimReceiptKind
+  associationReceipt : ClaimReceiptKind
+  causalReceipt : ClaimReceiptKind
+  etiologyReceipt : ClaimReceiptKind
+  comparatorReceipt : ClaimReceiptKind
+  outcomeReceipt : ClaimReceiptKind
+  transportReceipt : ClaimReceiptKind
+  practicalSignificanceReceipt : ClaimReceiptKind
+  rightsReceipt : ClaimReceiptKind
+  legalElementsReceipt : ClaimReceiptKind
+  normativeReceipt : ClaimReceiptKind
+  sourceCorrectionReceipt : ClaimReceiptKind
   reproductionReceipt : ClaimReceiptKind
 
 data ClaimReceiptStatus : Set where
-  installed
-  partiallyInstalled
-  missing
-  unresolved
-  contradictedAtSameScope
-  rejectedUnlessNarrowed
+  installed : ClaimReceiptStatus
+  partiallyInstalled : ClaimReceiptStatus
+  missing : ClaimReceiptStatus
+  unresolved : ClaimReceiptStatus
+  contradictedAtSameScope : ClaimReceiptStatus
+  rejectedUnlessNarrowed : ClaimReceiptStatus
   superseded : ClaimReceiptStatus
 
 record TypedClaimReceipt : Set where
@@ -62,21 +62,21 @@ open TypedClaimReceipt public
 ------------------------------------------------------------------------
 
 data AuditStage : Set where
-  registered
-  sourceRecovered
-  citationCompared
-  primaryChainTraced
-  designAudited
-  independentlyCoded
-  dualCoded
-  reproductionReady
+  registered : AuditStage
+  sourceRecovered : AuditStage
+  citationCompared : AuditStage
+  primaryChainTraced : AuditStage
+  designAudited : AuditStage
+  independentlyCoded : AuditStage
+  dualCoded : AuditStage
+  reproductionReady : AuditStage
   independentlyReproduced : AuditStage
 
 data SourceChainLevel : Set where
-  publishedSurface
-  citedSecondarySource
-  citedPrimaryStudy
-  underlyingDatasetOrArtifact
+  publishedSurface : SourceChainLevel
+  citedSecondarySource : SourceChainLevel
+  citedPrimaryStudy : SourceChainLevel
+  underlyingDatasetOrArtifact : SourceChainLevel
   independentReproduction : SourceChainLevel
 
 record SourceChainCoordinate : Set where
@@ -95,22 +95,22 @@ open SourceChainCoordinate public
 ------------------------------------------------------------------------
 
 data ClaimConsequence : Set where
-  ordinaryConsequence
-  frameworkCentral
-  universalScopeConsequence
-  causalConsequence
-  comparativeConsequence
-  normativeConsequence
+  ordinaryConsequence : ClaimConsequence
+  frameworkCentral : ClaimConsequence
+  universalScopeConsequence : ClaimConsequence
+  causalConsequence : ClaimConsequence
+  comparativeConsequence : ClaimConsequence
+  normativeConsequence : ClaimConsequence
   downstreamPolicyRelevant : ClaimConsequence
 
 data ClaimAuditCoding : Set where
-  sourceMatches
-  sourcePlausible
-  sourceDoesNotMatch
-  independentFullyAdmissible
-  independentPartiallyAdmissible
-  independentMismatch
-  independentUnresolved
+  sourceMatches : ClaimAuditCoding
+  sourcePlausible : ClaimAuditCoding
+  sourceDoesNotMatch : ClaimAuditCoding
+  independentFullyAdmissible : ClaimAuditCoding
+  independentPartiallyAdmissible : ClaimAuditCoding
+  independentMismatch : ClaimAuditCoding
+  independentUnresolved : ClaimAuditCoding
   codingDisagreement : ClaimAuditCoding
 
 record ManifestClaim : Set where

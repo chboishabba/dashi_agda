@@ -191,15 +191,15 @@ sourceAuditStillDistinguishesProvenance ()
 ------------------------------------------------------------------------
 
 data HARecoveryProbe : Set where
-  recoverImplementationIdentity
-  recoverParameterizedAction
-  recoverAdmissibility
-  recoverCanonicalHXAgreement
-  recoverSameFormulaSpectralShift
-  recoverSameWeilTransformShift
-  recoverSourceProvenance
-  compileProofRelevantHA
-  : HARecoveryProbe
+  recoverImplementationIdentity : HARecoveryProbe
+  recoverParameterizedAction : HARecoveryProbe
+  recoverAdmissibility : HARecoveryProbe
+  recoverCanonicalHXAgreement : HARecoveryProbe
+  recoverSameFormulaSpectralShift : HARecoveryProbe
+  recoverSameWeilTransformShift : HARecoveryProbe
+  recoverSourceProvenance : HARecoveryProbe
+  compileProofRelevantHA : HARecoveryProbe
+
 
 nextHARecoveryProbe : HARecoveryState → HARecoveryProbe
 nextHARecoveryProbe

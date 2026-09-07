@@ -27,13 +27,13 @@ import DASHI.Analysis.RiemannG2HARecoveryDependencyFrontierExact as Frontier
 ------------------------------------------------------------------------
 
 data HAConsumer : Set where
-  admissibilityReceiptConsumer
-  canonicalHXAgreementConsumer
-  sameFormulaShiftConsumer
-  sameWeilTransformShiftConsumer
-  mathematicalHACompilerConsumer
-  sourceAuditConsumer
-  : HAConsumer
+  admissibilityReceiptConsumer : HAConsumer
+  canonicalHXAgreementConsumer : HAConsumer
+  sameFormulaShiftConsumer : HAConsumer
+  sameWeilTransformShiftConsumer : HAConsumer
+  mathematicalHACompilerConsumer : HAConsumer
+  sourceAuditConsumer : HAConsumer
+
 
 probeConsumers : HA.HARecoveryProbe → List HAConsumer
 probeConsumers HA.recoverImplementationIdentity =

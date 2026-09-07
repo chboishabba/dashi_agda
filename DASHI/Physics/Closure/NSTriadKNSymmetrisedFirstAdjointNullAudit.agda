@@ -23,19 +23,19 @@ open import Agda.Builtin.Nat using (Nat)
 import DASHI.Physics.Closure.NSTriadKNLiteralVectorAdjointCandidates as Adjoints
 
 data StaticGainDecision : Set where
-  primitiveLowGain
-  projectorDifferenceGain
-  noUniversalStaticLowGain
+  primitiveLowGain : StaticGainDecision
+  projectorDifferenceGain : StaticGainDecision
+  noUniversalStaticLowGain : StaticGainDecision
   dynamicPhaseGeometryStillOpen : StaticGainDecision
 
 orderedPairFirstAdjointDecision : StaticGainDecision
 orderedPairFirstAdjointDecision = noUniversalStaticLowGain
 
 data WitnessRole : Set where
-  lowFirstAdjointOutput
-  highRightInput
-  highOriginalOutput
-  transverseRightPolarisation
+  lowFirstAdjointOutput : WitnessRole
+  highRightInput : WitnessRole
+  highOriginalOutput : WitnessRole
+  transverseRightPolarisation : WitnessRole
   transverseTestPolarisation : WitnessRole
 
 witnessScale : Nat

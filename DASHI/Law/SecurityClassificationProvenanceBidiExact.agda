@@ -11,38 +11,38 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ClassificationLabel : Set where
-  ordinaryPoliticalAssembly
-  publicOrderRisk
-  aggressiveCrowd
-  volatileCrowd
-  hostileCrowd
-  publicDisorder
-  protectedPersonSecurityRisk
-  counterTerrorSecurityRisk
-  prohibitedMarchRisk
-  intelligencePriority
+  ordinaryPoliticalAssembly : ClassificationLabel
+  publicOrderRisk : ClassificationLabel
+  aggressiveCrowd : ClassificationLabel
+  volatileCrowd : ClassificationLabel
+  hostileCrowd : ClassificationLabel
+  publicDisorder : ClassificationLabel
+  protectedPersonSecurityRisk : ClassificationLabel
+  counterTerrorSecurityRisk : ClassificationLabel
+  prohibitedMarchRisk : ClassificationLabel
+  intelligencePriority : ClassificationLabel
   classificationUnresolved : ClassificationLabel
 
 data ClassifierRole : Set where
-  policeCommand
-  intelligenceUnit
-  ministerOrExecutive
-  protectedPersonSecurityTeam
-  privateSecurityLiaison
-  eventOrganiser
-  operationalOfficer
-  mediaOrPublicNarrative
+  policeCommand : ClassifierRole
+  intelligenceUnit : ClassifierRole
+  ministerOrExecutive : ClassifierRole
+  protectedPersonSecurityTeam : ClassifierRole
+  privateSecurityLiaison : ClassifierRole
+  eventOrganiser : ClassifierRole
+  operationalOfficer : ClassifierRole
+  mediaOrPublicNarrative : ClassifierRole
   classifierUnknown : ClassifierRole
 
 data ClassificationEvidenceKind : Set where
-  writtenRiskAssessment
-  intelligenceProduct
-  operationalOrder
-  briefingNote
-  oralCommand
-  liaisonCommunication
-  contemporaneousObservation
-  postHocCharacterisation
+  writtenRiskAssessment : ClassificationEvidenceKind
+  intelligenceProduct : ClassificationEvidenceKind
+  operationalOrder : ClassificationEvidenceKind
+  briefingNote : ClassificationEvidenceKind
+  oralCommand : ClassificationEvidenceKind
+  liaisonCommunication : ClassificationEvidenceKind
+  contemporaneousObservation : ClassificationEvidenceKind
+  postHocCharacterisation : ClassificationEvidenceKind
   evidenceUnknown : ClassificationEvidenceKind
 
 record SecurityClassificationReceipt : Set where
@@ -64,15 +64,15 @@ open SecurityClassificationReceipt public
 ------------------------------------------------------------------------
 
 data CoerciveUnlock : Set where
-  increasedPoliceDeployment
-  containmentOrCordon
-  mountedUnitDeployment
-  pepperSprayAvailability
-  moveOnOrDispersalDirection
-  searchOrArrestAttention
-  protectedPersonEscort
-  intelligenceCollection
-  specialistUnitDeployment
+  increasedPoliceDeployment : CoerciveUnlock
+  containmentOrCordon : CoerciveUnlock
+  mountedUnitDeployment : CoerciveUnlock
+  pepperSprayAvailability : CoerciveUnlock
+  moveOnOrDispersalDirection : CoerciveUnlock
+  searchOrArrestAttention : CoerciveUnlock
+  protectedPersonEscort : CoerciveUnlock
+  intelligenceCollection : CoerciveUnlock
+  specialistUnitDeployment : CoerciveUnlock
   noAdditionalPower : CoerciveUnlock
 
 record ClassificationToPowerEdge : Set where
@@ -92,19 +92,19 @@ open ClassificationToPowerEdge public
 ------------------------------------------------------------------------
 
 data SecurityClassificationClaim : Set where
-  assemblyWasClassifiedAsRiskBeforeAction
-  classificationWasSuppliedByNamedActor
-  classificationUnlockedOperationalTactic
-  classificationHadLawfulAuthorityEffect
-  classificationWasIdeologicallyMotivated
+  assemblyWasClassifiedAsRiskBeforeAction : SecurityClassificationClaim
+  classificationWasSuppliedByNamedActor : SecurityClassificationClaim
+  classificationUnlockedOperationalTactic : SecurityClassificationClaim
+  classificationHadLawfulAuthorityEffect : SecurityClassificationClaim
+  classificationWasIdeologicallyMotivated : SecurityClassificationClaim
   classificationWasForeignSupplied : SecurityClassificationClaim
 
 data SecurityClassificationProducer : Set where
-  preActionClassificationDocumentProducer
-  classifierIdentityProducer
-  commandAndDeploymentLinkProducer
-  legalAuthorityProducer
-  motiveProducer
+  preActionClassificationDocumentProducer : SecurityClassificationProducer
+  classifierIdentityProducer : SecurityClassificationProducer
+  commandAndDeploymentLinkProducer : SecurityClassificationProducer
+  legalAuthorityProducer : SecurityClassificationProducer
+  motiveProducer : SecurityClassificationProducer
   foreignLiaisonProducer : SecurityClassificationProducer
 
 reverseSecurityClassification : SecurityClassificationClaim → SecurityClassificationProducer

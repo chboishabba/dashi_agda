@@ -78,10 +78,10 @@ conjunctionRule witness admission left right = candidateSemanticFragment
   (ruleVersionReference admission) true refl
 
 data DeterminerReading : Set where
-  universalDeterminer
-  existentialDeterminer
-  unresolvedDeterminer
-  : DeterminerReading
+  universalDeterminer : DeterminerReading
+  existentialDeterminer : DeterminerReading
+  unresolvedDeterminer : DeterminerReading
+
 
 record DeterminerResolution
     (witness : DependencyWitness)

@@ -35,21 +35,21 @@ import DASHI.Physics.Closure.NSTriadKNCellRateSwapInvariantWeightRound295Exact a
 ------------------------------------------------------------------------
 
 data NSProofState : Set where
-  criticalConeGramUnpaid
-  pointwiseAbsorptionUnpaid
-  signedIntegratedGramUnpaid
-  resolventEndpointUnpaid
-  weightedCommutatorUnpaid
-  literalRound240PackageA
-  : NSProofState
+  criticalConeGramUnpaid : NSProofState
+  pointwiseAbsorptionUnpaid : NSProofState
+  signedIntegratedGramUnpaid : NSProofState
+  resolventEndpointUnpaid : NSProofState
+  weightedCommutatorUnpaid : NSProofState
+  literalRound240PackageA : NSProofState
+
 
 data NSProofAction : Set where
-  tryPointwiseSymmetry
-  tryNaiveNonlinearFlux
-  useResolventFlux
-  closeSignedGramFromResolvent
-  closePackageAFromSignedGram
-  : NSProofAction
+  tryPointwiseSymmetry : NSProofAction
+  tryNaiveNonlinearFlux : NSProofAction
+  useResolventFlux : NSProofAction
+  closeSignedGramFromResolvent : NSProofAction
+  closePackageAFromSignedGram : NSProofAction
+
 
 source : NSProofAction → NSProofState
 source tryPointwiseSymmetry = criticalConeGramUnpaid

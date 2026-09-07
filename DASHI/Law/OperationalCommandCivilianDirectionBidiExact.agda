@@ -53,15 +53,15 @@ open ForceAfterDirectionFibre public
 ------------------------------------------------------------------------
 
 data DirectionClaim : Set where
-  officerWasOrderedToAdvance
-  civilianWasLawfullyDirectedToMove
-  forceFollowedLawfulNonCompliance
+  officerWasOrderedToAdvance : DirectionClaim
+  civilianWasLawfullyDirectedToMove : DirectionClaim
+  forceFollowedLawfulNonCompliance : DirectionClaim
   fieldOfficerKnewLimitingAuthorisation : DirectionClaim
 
 data DirectionProducer : Set where
-  commandTransmissionReceipt
-  civilianDirectionReceipt
-  lawfulNonComplianceReceipt
+  commandTransmissionReceipt : DirectionProducer
+  civilianDirectionReceipt : DirectionProducer
+  lawfulNonComplianceReceipt : DirectionProducer
   limitingAuthorisationFieldReceipt : DirectionProducer
 
 reverseDirection : DirectionClaim → DirectionProducer

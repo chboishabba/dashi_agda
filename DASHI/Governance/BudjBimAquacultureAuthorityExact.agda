@@ -15,11 +15,11 @@ import DASHI.Governance.EnvironmentalAuthoritySourceRegistryRound2Exact as Sourc
 ------------------------------------------------------------------------
 
 data BudjBimEvidence : Set where
-  deliberateHydrologicalEngineering
-  systematicKooyangAquaculture
-  sixMillenniaEconomicSocialBase
-  continuingGunditjmaraKnowledge
-  : BudjBimEvidence
+  deliberateHydrologicalEngineering : BudjBimEvidence
+  systematicKooyangAquaculture : BudjBimEvidence
+  sixMillenniaEconomicSocialBase : BudjBimEvidence
+  continuingGunditjmaraKnowledge : BudjBimEvidence
+
 
 data EvidenceAuthority : BudjBimEvidence → Set where
   unescoEngineering : EvidenceAuthority deliberateHydrologicalEngineering

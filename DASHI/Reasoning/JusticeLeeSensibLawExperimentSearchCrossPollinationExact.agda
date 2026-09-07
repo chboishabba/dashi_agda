@@ -27,7 +27,7 @@ data LegalHypothesis : Set where
   applicantAccount respondentAccount sharedAccount alternativeAccount : LegalHypothesis
 
 data EvidenceProbe : Set where
-  inspectSourceSpan inspectAccountHistory inspectMessageThread inspectReport
+  inspectSourceSpan inspectAccountHistory inspectMessageThread inspectReport : EvidenceProbe
   inspectWitness inspectCausalEdge inspectCharacterisation : EvidenceProbe
 
 data ProbeOutcome : Set where
@@ -62,7 +62,7 @@ record DiscriminatorChoice : Set where
 open DiscriminatorChoice public
 
 data LegalSearchStage : Set where
-  liveControversy collisionLocated discriminatorSelected evidenceObserved
+  liveControversy collisionLocated discriminatorSelected evidenceObserved : LegalSearchStage
   controversyRefined commonGroundMerged obligationsReopened proceduralConsumerClosed : LegalSearchStage
 
 record LegalSearchState : Set where
@@ -108,7 +108,7 @@ record CommonGroundMerge : Set where
 open CommonGroundMerge public
 
 data LegalArtifact : Set where
-  sourceCertificate propositionCertificate relationCertificate residualCertificate
+  sourceCertificate propositionCertificate relationCertificate residualCertificate : LegalArtifact
   discriminatorCertificate proceduralCertificate : LegalArtifact
 
 data LegalDepends : LegalArtifact → LegalArtifact → Set where
@@ -190,7 +190,7 @@ data ExperimentArm : Set where
   conventionalRetrievalSummary sensibLawProofGraph : ExperimentArm
 
 data EvaluationMetric : Set where
-  propositionRecall provenancePreservation commonGroundRecovery residualControversyPrecision
+  propositionRecall provenancePreservation commonGroundRecovery residualControversyPrecision : EvaluationMetric
   contradictionGapRecovery irrelevantMaterialInspected partyCorrectionBurden : EvaluationMetric
 
 record ComparativeProtocol : Set where

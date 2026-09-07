@@ -17,12 +17,12 @@ import DASHI.Cognition.PNF.SensibLawIndigenousLandBackSourceAuthorityExact as So
 ------------------------------------------------------------------------
 
 data PreferredModeratorEvidenceStatus : Set where
-  independentPolicyAssociationMapped
-  historicalPeerReviewedMechanismMapped
-  institutionalEconomicValuationMapped
-  sourceSuggestedMechanismMapped
-  criticalModeratorHypothesisOnly
-  : PreferredModeratorEvidenceStatus
+  independentPolicyAssociationMapped : PreferredModeratorEvidenceStatus
+  historicalPeerReviewedMechanismMapped : PreferredModeratorEvidenceStatus
+  institutionalEconomicValuationMapped : PreferredModeratorEvidenceStatus
+  sourceSuggestedMechanismMapped : PreferredModeratorEvidenceStatus
+  criticalModeratorHypothesisOnly : PreferredModeratorEvidenceStatus
+
 
 record ModeratorAttributionCorrection : Set where
   constructor moderatorAttributionCorrection

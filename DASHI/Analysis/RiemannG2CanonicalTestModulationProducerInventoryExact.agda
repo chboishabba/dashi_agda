@@ -17,21 +17,21 @@ import DASHI.Analysis.RiemannG2CanonicalTestModulationHighestAlphaExact as HA
 ------------------------------------------------------------------------
 
 data CandidateModulationDonor : Set where
-  genericWeilTransform
-  bombieriLiftedConvolutionSquare
-  automorphicMellinReflection
-  primeCountingPerronMellin
-  poleNearTargetModulationInterface
-  exactCanonicalTargetModulationProducer
-  : CandidateModulationDonor
+  genericWeilTransform : CandidateModulationDonor
+  bombieriLiftedConvolutionSquare : CandidateModulationDonor
+  automorphicMellinReflection : CandidateModulationDonor
+  primeCountingPerronMellin : CandidateModulationDonor
+  poleNearTargetModulationInterface : CandidateModulationDonor
+  exactCanonicalTargetModulationProducer : CandidateModulationDonor
+
 
 data DonorDisposition : Set where
-  carrierInfrastructureOnly
-  admissibilityInfrastructureOnly
-  differentTransformIdentity
-  consumerInterfaceOnly
-  exactSameObjectProducer
-  : DonorDisposition
+  carrierInfrastructureOnly : DonorDisposition
+  admissibilityInfrastructureOnly : DonorDisposition
+  differentTransformIdentity : DonorDisposition
+  consumerInterfaceOnly : DonorDisposition
+  exactSameObjectProducer : DonorDisposition
+
 
 disposition : CandidateModulationDonor -> DonorDisposition
 disposition genericWeilTransform = carrierInfrastructureOnly

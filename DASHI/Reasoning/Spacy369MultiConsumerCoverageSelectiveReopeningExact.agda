@@ -15,15 +15,15 @@ import DASHI.Reasoning.Spacy369MultiConsumerCoverageFiltrationExact as Filtratio
 ------------------------------------------------------------------------
 
 data CoverageArtifact : Set where
-  sharedContextCoordinate
-  closureResidualCoordinate
-  subjectCertificate
-  standingCertificate
-  closureCertificate
-  operationalCertificate
-  parserEvidenceArtifact
-  logicalEntailmentArtifact
-  : CoverageArtifact
+  sharedContextCoordinate : CoverageArtifact
+  closureResidualCoordinate : CoverageArtifact
+  subjectCertificate : CoverageArtifact
+  standingCertificate : CoverageArtifact
+  closureCertificate : CoverageArtifact
+  operationalCertificate : CoverageArtifact
+  parserEvidenceArtifact : CoverageArtifact
+  logicalEntailmentArtifact : CoverageArtifact
+
 
 data Depends : CoverageArtifact → CoverageArtifact → Set where
   sharedFeedsSubject : Depends sharedContextCoordinate subjectCertificate

@@ -20,24 +20,24 @@ import DASHI.Governance.IndigenousAuthorityEnvelopeExact as Indigenous
 ------------------------------------------------------------------------
 
 data TranslationCoordinate : Set where
-  lexicalCategoryCoordinate
-  usePracticeCoordinate
-  clinicalFactCoordinate
-  subjectAuthorshipCoordinate
-  communityVoiceCoordinate
-  historicalPathCoordinate
-  democraticLegitimacyCoordinate
-  materialBenefitCoordinate
-  sovereignAuthorityCoordinate
-  : TranslationCoordinate
+  lexicalCategoryCoordinate : TranslationCoordinate
+  usePracticeCoordinate : TranslationCoordinate
+  clinicalFactCoordinate : TranslationCoordinate
+  subjectAuthorshipCoordinate : TranslationCoordinate
+  communityVoiceCoordinate : TranslationCoordinate
+  historicalPathCoordinate : TranslationCoordinate
+  democraticLegitimacyCoordinate : TranslationCoordinate
+  materialBenefitCoordinate : TranslationCoordinate
+  sovereignAuthorityCoordinate : TranslationCoordinate
+
 
 data TranslationStatus : Set where
-  preservedExactly
-  translatedWithResidual
-  erasedInTarget
-  introducedInTarget
-  unresolvedTranslation
-  : TranslationStatus
+  preservedExactly : TranslationStatus
+  translatedWithResidual : TranslationStatus
+  erasedInTarget : TranslationStatus
+  introducedInTarget : TranslationStatus
+  unresolvedTranslation : TranslationStatus
+
 
 record ChartTranslation : Set where
   constructor chartTranslation
@@ -223,15 +223,15 @@ historicalPathAddedAfterErasureIsIntroduced =
 ------------------------------------------------------------------------
 
 data TranslationResidual : Set where
-  lexicalResidual
-  useResidual
-  subjectResidual
-  communityResidual
-  historyResidual
-  legitimacyResidual
-  materialResidual
-  sovereigntyResidual
-  : TranslationResidual
+  lexicalResidual : TranslationResidual
+  useResidual : TranslationResidual
+  subjectResidual : TranslationResidual
+  communityResidual : TranslationResidual
+  historyResidual : TranslationResidual
+  legitimacyResidual : TranslationResidual
+  materialResidual : TranslationResidual
+  sovereigntyResidual : TranslationResidual
+
 
 data ResidualFromStatus : TranslationStatus → TranslationResidual → Set where
   translatedLexicalResidual : ResidualFromStatus translatedWithResidual lexicalResidual

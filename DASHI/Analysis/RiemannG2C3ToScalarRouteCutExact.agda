@@ -19,13 +19,13 @@ import DASHI.Core.FrontierRelationStrengthBidiExact as Relation
 ------------------------------------------------------------------------
 
 data ScalarSymmetryOutcome : Set where
-  qInvariantOnly
-  qCharacterLaw
-  qSignLaw
-  qFactorization
-  targetPhaseCancellation
-  noUsefulScalarLaw
-  : ScalarSymmetryOutcome
+  qInvariantOnly : ScalarSymmetryOutcome
+  qCharacterLaw : ScalarSymmetryOutcome
+  qSignLaw : ScalarSymmetryOutcome
+  qFactorization : ScalarSymmetryOutcome
+  targetPhaseCancellation : ScalarSymmetryOutcome
+  noUsefulScalarLaw : ScalarSymmetryOutcome
+
 
 UsefulForOpenScalarLeaf : ScalarSymmetryOutcome -> Set
 UsefulForOpenScalarLeaf qInvariantOnly = ⊥

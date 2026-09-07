@@ -16,8 +16,8 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data UnsupportedDependencyLabel : Set where
-  ROOT acomp agent attr case cc compound conj csubj csubjpass dative dep det expl
-  intj meta nummod oprd parataxis pcomp pobj poss preconj predet prep prt punct
+  ROOT acomp agent attr case cc compound conj csubj csubjpass dative dep det expl : UnsupportedDependencyLabel
+  intj meta nummod oprd parataxis pcomp pobj poss preconj predet prep prt punct : UnsupportedDependencyLabel
   quantmod : UnsupportedDependencyLabel
 
 labelCount : UnsupportedDependencyLabel → Nat

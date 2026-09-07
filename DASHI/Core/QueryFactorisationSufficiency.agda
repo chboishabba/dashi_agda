@@ -100,14 +100,14 @@ demoProject visibleLeft = sameSurface
 demoProject visibleRight = sameSurface
 
 demoWhoFactors : FactorsThrough demoQuestions demoProject whoQuestion
-demoWhoFactors = factorsThrough quotientAnswer proof
+demoWhoFactors = factorsThrough demoQuotientAnswer proof
   where
-    quotientAnswer : DemoSurface → DemoAnswer
-    quotientAnswer sameSurface = johnAnswer
+    demoQuotientAnswer : DemoSurface → DemoAnswer
+    demoQuotientAnswer sameSurface = johnAnswer
 
     proof :
       (state : DemoState) →
-      ask demoQuestions whoQuestion state ≡ quotientAnswer (demoProject state)
+      ask demoQuestions whoQuestion state ≡ demoQuotientAnswer (demoProject state)
     proof visibleLeft = refl
     proof visibleRight = refl
 

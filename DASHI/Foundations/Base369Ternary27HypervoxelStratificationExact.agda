@@ -50,11 +50,11 @@ supportPattern p =
 ------------------------------------------------------------------------
 
 data VoxelStratum : Set where
-  centreStratum
-  faceCentreStratum
-  edgeCentreStratum
-  cornerStratum
-  : VoxelStratum
+  centreStratum : VoxelStratum
+  faceCentreStratum : VoxelStratum
+  edgeCentreStratum : VoxelStratum
+  cornerStratum : VoxelStratum
+
 
 patternStratum : SupportPattern3 → VoxelStratum
 patternStratum (supportPattern3 centralBit centralBit centralBit) = centreStratum

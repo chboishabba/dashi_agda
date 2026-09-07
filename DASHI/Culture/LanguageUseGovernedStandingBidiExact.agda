@@ -29,7 +29,7 @@ data UseClass : Set where
   devotionalUse explanatoryUse classificatoryUse quotedUse reclaimedUse : UseClass
 
 data SpeakerStanding : Set where
-  selfStanding participantStanding custodialStanding historianStanding
+  selfStanding participantStanding custodialStanding historianStanding : SpeakerStanding
   institutionalStanding externalObserverStanding unresolvedStanding : SpeakerStanding
 
 data DisclosurePermission : Set where
@@ -37,7 +37,7 @@ data DisclosurePermission : Set where
 
 
 data InterpretiveObligation : Set where
-  ordinaryAttribution preserveContestability preserveSourceContext
+  ordinaryAttribution preserveContestability preserveSourceContext : InterpretiveObligation
   reciprocalObligation unresolvedObligation : InterpretiveObligation
 
 record GovernedLanguageAct : Set where

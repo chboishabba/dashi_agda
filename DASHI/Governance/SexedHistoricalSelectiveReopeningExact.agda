@@ -30,14 +30,14 @@ import DASHI.Governance.SexedHistoricalReopenableSynthesisEndOfHistoryBoundaryEx
 ------------------------------------------------------------------------
 
 data HistoricalJoinArtifact : Set where
-  counterformationResidual
-  powerGateCertificate
-  localReachabilityCertificate
-  affordanceExpansionCertificate
-  productiveJoinCertificate
-  nextJoinSearchCertificate
-  sourceAttributionCertificate
-  : HistoricalJoinArtifact
+  counterformationResidual : HistoricalJoinArtifact
+  powerGateCertificate : HistoricalJoinArtifact
+  localReachabilityCertificate : HistoricalJoinArtifact
+  affordanceExpansionCertificate : HistoricalJoinArtifact
+  productiveJoinCertificate : HistoricalJoinArtifact
+  nextJoinSearchCertificate : HistoricalJoinArtifact
+  sourceAttributionCertificate : HistoricalJoinArtifact
+
 
 ------------------------------------------------------------------------
 -- 2. Reverse dependency graph.

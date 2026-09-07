@@ -14,38 +14,38 @@ import DASHI.Governance.Kallis2025EvidenceAtlasExact as Atlas
 ------------------------------------------------------------------------
 
 data ReviewClaim : Set where
-  materialFootprintCouplingClaim
-  materialDecouplingReviewClaim
-  optimisticTechnologyProjectionClaim
-  postGrowthMitigationScenarioClaim
-  lowGrowCanadaClaim
-  eurogreenFranceClaim
-  workingTimeCarbonAssociationClaim
-  policyPackageSynthesisClaim
-  growthDependencyClaim
-  provisioningSystemsClaim
-  lowEnergyNeedSatisfactionClaim
-  unequalExchangeClaim
-  postDevelopmentClaim
-  gdp15000Claim
-  : ReviewClaim
+  materialFootprintCouplingClaim : ReviewClaim
+  materialDecouplingReviewClaim : ReviewClaim
+  optimisticTechnologyProjectionClaim : ReviewClaim
+  postGrowthMitigationScenarioClaim : ReviewClaim
+  lowGrowCanadaClaim : ReviewClaim
+  eurogreenFranceClaim : ReviewClaim
+  workingTimeCarbonAssociationClaim : ReviewClaim
+  policyPackageSynthesisClaim : ReviewClaim
+  growthDependencyClaim : ReviewClaim
+  provisioningSystemsClaim : ReviewClaim
+  lowEnergyNeedSatisfactionClaim : ReviewClaim
+  unequalExchangeClaim : ReviewClaim
+  postDevelopmentClaim : ReviewClaim
+  gdp15000Claim : ReviewClaim
+
 
 data ClaimConsumer : Set where
-  descriptiveSynthesisConsumer
-  scenarioInterpretationConsumer
-  causalMechanismConsumer
-  policyDesignConsumer
-  politicalProgrammeConsumer
-  : ClaimConsumer
+  descriptiveSynthesisConsumer : ClaimConsumer
+  scenarioInterpretationConsumer : ClaimConsumer
+  causalMechanismConsumer : ClaimConsumer
+  policyDesignConsumer : ClaimConsumer
+  politicalProgrammeConsumer : ClaimConsumer
+
 
 data LiveResidual : Set where
-  associationNotCausation
-  scenarioNotObservation
-  reviewNotMandate
-  distributionStillOpen
-  politicalTransitionStillOpen
-  noAdditionalResidualRecorded
-  : LiveResidual
+  associationNotCausation : LiveResidual
+  scenarioNotObservation : LiveResidual
+  reviewNotMandate : LiveResidual
+  distributionStillOpen : LiveResidual
+  politicalTransitionStillOpen : LiveResidual
+  noAdditionalResidualRecorded : LiveResidual
+
 
 record ClaimEvidenceRealization : Set where
   constructor claimEvidenceRealization

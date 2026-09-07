@@ -23,9 +23,9 @@ import DASHI.Core.ObservationInterventionTrustFibreExact as Observation
 ------------------------------------------------------------------------
 
 data MaterialPlanningModel : Set where
-  passiveScalarInventory
-  statefulResponsiveInventory
-  : MaterialPlanningModel
+  passiveScalarInventory : MaterialPlanningModel
+  statefulResponsiveInventory : MaterialPlanningModel
+
 
 data ProcessResponse : Set where
   unchangedResponse adaptiveRecoveryResponse degradedResponse : ProcessResponse

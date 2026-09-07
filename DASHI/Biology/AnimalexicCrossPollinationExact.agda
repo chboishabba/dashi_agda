@@ -50,7 +50,7 @@ animalCurrentObservationCanBeFutureUnsafe =
 -- 2. Active information / identifiability reuse.
 ------------------------------------------------------------------------
 
-AnimalExperimentSystem : Set → Set → Set → Set₁
+AnimalExperimentSystem : Set → Set → Set → Set
 AnimalExperimentSystem = ActiveInfo.ExperimentSystem
 
 AnimalDistinguishingExperiment :
@@ -69,7 +69,7 @@ animalActiveInformationHasExactDecisionValue =
 --    A stochastic transition defect is not an epistemic independence receipt.
 ------------------------------------------------------------------------
 
-AnimalProjectedFiniteKernel : Set → Set → Set → Set₁
+AnimalProjectedFiniteKernel : Set → Set → Set → Set
 AnimalProjectedFiniteKernel = Stochastic.ProjectedFiniteKernel
 
 animalStochasticProjectionDefectRecorded :

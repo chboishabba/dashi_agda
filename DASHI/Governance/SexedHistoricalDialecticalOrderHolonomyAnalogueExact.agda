@@ -29,24 +29,24 @@ import DASHI.Governance.SexedHistoricalStatisticalExperimentHyperfabricExact as 
 ------------------------------------------------------------------------
 
 data SymbolicGrammar : Set where
-  inheritedGrammar
-  reinterpretedGrammar
-  institutionallyNormalisedGrammar
-  contestedRearticulation
-  : SymbolicGrammar
+  inheritedGrammar : SymbolicGrammar
+  reinterpretedGrammar : SymbolicGrammar
+  institutionallyNormalisedGrammar : SymbolicGrammar
+  contestedRearticulation : SymbolicGrammar
+
 
 data InstitutionalStatus : Set where
-  inheritedInstitution
-  formallyCorrectedInstitution
-  contestedInstitution
-  : InstitutionalStatus
+  inheritedInstitution : InstitutionalStatus
+  formallyCorrectedInstitution : InstitutionalStatus
+  contestedInstitution : InstitutionalStatus
+
 
 data HistoricalResidue : Set where
-  inheritedResidue
-  reinterpretationResidue
-  institutionalResidue
-  mixedResidue
-  : HistoricalResidue
+  inheritedResidue : HistoricalResidue
+  reinterpretationResidue : HistoricalResidue
+  institutionalResidue : HistoricalResidue
+  mixedResidue : HistoricalResidue
+
 
 record FineHistoricalState : Set where
   constructor fine-historical-state
@@ -123,9 +123,9 @@ orderDefect ()
 ------------------------------------------------------------------------
 
 data CoarseHistoricalStratum : Set where
-  formallyCorrectedContested
-  inheritedCoarse
-  : CoarseHistoricalStratum
+  formallyCorrectedContested : CoarseHistoricalStratum
+  inheritedCoarse : CoarseHistoricalStratum
+
 
 coarseStratum : FineHistoricalState → CoarseHistoricalStratum
 coarseStratum s with institution s
@@ -143,14 +143,14 @@ sameCoarseStratumAfterBothOrders = refl
 ------------------------------------------------------------------------
 
 data PathOrder : Set where
-  institutionThenReinterpret
-  reinterpretThenInstitution
-  : PathOrder
+  institutionThenReinterpret : PathOrder
+  reinterpretThenInstitution : PathOrder
+
 
 data OrderFineState : Set where
-  institutionFirstState
-  reinterpretationFirstState
-  : OrderFineState
+  institutionFirstState : OrderFineState
+  reinterpretationFirstState : OrderFineState
+
 
 orderState : OrderFineState → FineHistoricalState
 orderState institutionFirstState = reinterpretAfterInstitutionalise
@@ -178,9 +178,9 @@ coarseStratumCannotRecoverTransportOrder =
 ------------------------------------------------------------------------
 
 data OrderMeasurementRole : Set where
-  routeRecorded
-  routeCollapsed
-  : OrderMeasurementRole
+  routeRecorded : OrderMeasurementRole
+  routeCollapsed : OrderMeasurementRole
+
 
 data HistoricalSequencePromotesStageTheory : Set where
 

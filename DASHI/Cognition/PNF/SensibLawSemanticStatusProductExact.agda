@@ -20,18 +20,18 @@ import DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact as Admis
 ------------------------------------------------------------------------
 
 data ParticipantRole : Set where
-  agent patient theme experiencer recipient beneficiary instrument
+  agent patient theme experiencer recipient beneficiary instrument : ParticipantRole
   location source goal cause participantUnresolved : ParticipantRole
 
 data LegalParticipantRole : Set where
-  claimant respondent applicant authority decisionMaker
-  rightsBearer dutyBearer powerHolder liabilityBearer
+  claimant respondent applicant authority decisionMaker : LegalParticipantRole
+  rightsBearer dutyBearer powerHolder liabilityBearer : LegalParticipantRole
   legalParticipantUnresolved : LegalParticipantRole
 
 data ReferentKind : Set where
-  entityReferent eventualityReferent propositionReferent timeReferent
-  placeReferent ruleReferent documentReferent spanReferent unknownReferent
-  : ReferentKind
+  entityReferent eventualityReferent propositionReferent timeReferent : ReferentKind
+  placeReferent ruleReferent documentReferent spanReferent unknownReferent : ReferentKind
+
 
 data IdentityStatus : Set where
   identityUnresolved : IdentityStatus
@@ -86,73 +86,73 @@ data TruthStatus : Set where
   falsityAdmitted : TruthStatus
 
 data AttributionRole : Set where
-  author speaker reporter quotedSpeaker propositionSource
+  author speaker reporter quotedSpeaker propositionSource : AttributionRole
   attributionUnresolved : AttributionRole
 
 data EvidencePolarity : Set where
-  evidenceFor evidenceAgainst evidenceNeutral evidencePolarityUnresolved
-  : EvidencePolarity
+  evidenceFor evidenceAgainst evidenceNeutral evidencePolarityUnresolved : EvidencePolarity
+
 
 data EvidenceKind : Set where
-  sourceEvidence testimonialEvidence documentaryEvidence parserEvidence
+  sourceEvidence testimonialEvidence documentaryEvidence parserEvidence : EvidenceKind
   provenanceEvidence externalEvidence evidenceKindUnresolved : EvidenceKind
 
 data ModalityKind : Set where
-  deontic epistemic dynamicAbility bouletic teleological modalityKindUnresolved
-  : ModalityKind
+  deontic epistemic dynamicAbility bouletic teleological modalityKindUnresolved : ModalityKind
+
 
 data ModalForce : Set where
-  obligation permission prohibition possibility necessity modalForceUnresolved
-  : ModalForce
+  obligation permission prohibition possibility necessity modalForceUnresolved : ModalForce
+
 
 data ScopeStatus : Set where
   scopeUnresolved scopeLocalCandidate scopeResolved : ScopeStatus
 
 data TemporalRelationKind : Set where
-  eventTime referenceTime documentTime legalEffectiveTime
-  validityInterval commencement expiry repeal amendment temporalRelationUnresolved
-  : TemporalRelationKind
+  eventTime referenceTime documentTime legalEffectiveTime : TemporalRelationKind
+  validityInterval commencement expiry repeal amendment temporalRelationUnresolved : TemporalRelationKind
+
 
 data ConditionKind : Set where
-  antecedentCondition exceptionCondition defeaterCondition unlessCondition
-  providedThatCondition subjectToCondition overrideCondition conditionUnresolved
-  : ConditionKind
+  antecedentCondition exceptionCondition defeaterCondition unlessCondition : ConditionKind
+  providedThatCondition subjectToCondition overrideCondition conditionUnresolved : ConditionKind
+
 
 data JurisdictionKind : Set where
-  geographicJurisdiction legalSystemJurisdiction courtJurisdiction
-  personalJurisdiction subjectMatterJurisdiction jurisdictionUnresolved
-  : JurisdictionKind
+  geographicJurisdiction legalSystemJurisdiction courtJurisdiction : JurisdictionKind
+  personalJurisdiction subjectMatterJurisdiction jurisdictionUnresolved : JurisdictionKind
+
 
 data AuthorityKind : Set where
-  sourceAuthority legalAuthority institutionalAuthority promotionAuthority
+  sourceAuthority legalAuthority institutionalAuthority promotionAuthority : AuthorityKind
   authorityUnresolved : AuthorityKind
 
 data ApplicabilityStatus : Set where
-  applicabilityUnresolved applicabilityCandidate applicabilityAdmitted
+  applicabilityUnresolved applicabilityCandidate applicabilityAdmitted : ApplicabilityStatus
   inapplicabilityAdmitted : ApplicabilityStatus
 
 data ViolationStatus : Set where
-  violationUnresolved violationCandidate violationAdmitted noViolationAdmitted
-  : ViolationStatus
+  violationUnresolved violationCandidate violationAdmitted noViolationAdmitted : ViolationStatus
+
 
 data LiabilityStatus : Set where
-  liabilityUnresolved liabilityCandidate liabilityAdmitted noLiabilityAdmitted
-  : LiabilityStatus
+  liabilityUnresolved liabilityCandidate liabilityAdmitted noLiabilityAdmitted : LiabilityStatus
+
 
 data BurdenKind : Set where
   evidentialBurden persuasiveBurden burdenKindUnresolved : BurdenKind
 
 data StandardOfProof : Set where
-  beyondReasonableDoubt balanceOfProbabilities clearAndConvincing
+  beyondReasonableDoubt balanceOfProbabilities clearAndConvincing : StandardOfProof
   standardUnresolved : StandardOfProof
 
 data JudicialDiscourseStatus : Set where
-  holding ratioCandidate obiter findingOfFact submission allegation order
-  disposition distinguished followed overruled judicialStatusUnresolved
-  : JudicialDiscourseStatus
+  holding ratioCandidate obiter findingOfFact submission allegation order : JudicialDiscourseStatus
+  disposition distinguished followed overruled judicialStatusUnresolved : JudicialDiscourseStatus
+
 
 data NormativeRelation : Set where
-  duty permissionRelation power liabilityRelation right privilege immunity
+  duty permissionRelation power liabilityRelation right privilege immunity : NormativeRelation
   disability normativeRelationUnresolved : NormativeRelation
 
 ------------------------------------------------------------------------
@@ -233,8 +233,8 @@ open SemanticCommitmentState public
 ------------------------------------------------------------------------
 
 data CommitmentStage : Set where
-  observationStage syntacticStage semanticCandidateStage referenceCandidateStage
-  contextResolvedStage statusQualifiedStage evidentialCommitmentStage
+  observationStage syntacticStage semanticCandidateStage referenceCandidateStage : CommitmentStage
+  contextResolvedStage statusQualifiedStage evidentialCommitmentStage : CommitmentStage
   governedAdmissionStage consumerConclusionStage : CommitmentStage
 
 infix 4 _⇒stage_

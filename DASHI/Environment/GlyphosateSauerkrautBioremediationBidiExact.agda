@@ -8,6 +8,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Chemistry.TransitionKernel as Chemistry
+open Chemistry
 import DASHI.Environment.SoilBiogeochemistryProcessNetworkExact as Soil
 
 ------------------------------------------------------------------------
@@ -44,29 +45,29 @@ sourceDOI = "10.21273/HORTSCI18041-24"
 ------------------------------------------------------------------------
 
 data TreatmentKind : Set where
-  untreatedWaterControl
-  rawSauerkrautJuice
-  PB027InWater
-  PB027PlusRawSauerkrautJuice
-  catawaterPlusRawSauerkrautJuice
-  catawaterInWater
-  : TreatmentKind
+  untreatedWaterControl : TreatmentKind
+  rawSauerkrautJuice : TreatmentKind
+  PB027InWater : TreatmentKind
+  PB027PlusRawSauerkrautJuice : TreatmentKind
+  catawaterPlusRawSauerkrautJuice : TreatmentKind
+  catawaterInWater : TreatmentKind
+
 
 data ResidueAnalyte : Set where
-  glyphosateAnalyte
-  ampaAnalyte
-  totalEffectiveGlyphosateAnalyte
-  : ResidueAnalyte
+  glyphosateAnalyte : ResidueAnalyte
+  ampaAnalyte : ResidueAnalyte
+  totalEffectiveGlyphosateAnalyte : ResidueAnalyte
+
 
 data SoilSite : Set where
-  shioctonSiltLoam
-  kidderSandyLoam
-  : SoilSite
+  shioctonSiltLoam : SoilSite
+  kidderSandyLoam : SoilSite
+
 
 data DesignKind : Set where
-  longitudinalStripComparison
-  randomizedCompleteBlock
-  : DesignKind
+  longitudinalStripComparison : DesignKind
+  randomizedCompleteBlock : DesignKind
+
 
 shioctonAndKidderDistinct : shioctonSiltLoam ≡ kidderSandyLoam → ⊥
 shioctonAndKidderDistinct ()
@@ -119,26 +120,26 @@ reportedRSKJDose = treatmentDose
 
 glyphosateSpecies : Chemistry.Species
 glyphosateSpecies = record
-  { Chemistry.speciesId = "glyphosate"
-  ; Chemistry.phase = Chemistry.dissolved
-  ; Chemistry.chargeLabel = "pH-dependent ionic state; application model required"
-  ; Chemistry.compositionLabel = "N-(phosphonomethyl)glycine"
-  ; Chemistry.mobilityClass = Chemistry.restricted
-  ; Chemistry.activityModelLabel = "soil solution/sorption speciation model required"
-  ; Chemistry.opticalRoleLabel = "not asserted"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { speciesId = "glyphosate"
+  ; phase = Chemistry.dissolved
+  ; chargeLabel = "pH-dependent ionic state; application model required"
+  ; compositionLabel = "N-(phosphonomethyl)glycine"
+  ; mobilityClass = Chemistry.restricted
+  ; activityModelLabel = "soil solution/sorption speciation model required"
+  ; opticalRoleLabel = "not asserted"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 ampaSpecies : Chemistry.Species
 ampaSpecies = record
-  { Chemistry.speciesId = "AMPA"
-  ; Chemistry.phase = Chemistry.dissolved
-  ; Chemistry.chargeLabel = "pH-dependent ionic state; application model required"
-  ; Chemistry.compositionLabel = "aminomethylphosphonic acid"
-  ; Chemistry.mobilityClass = Chemistry.restricted
-  ; Chemistry.activityModelLabel = "soil solution/sorption speciation model required"
-  ; Chemistry.opticalRoleLabel = "not asserted"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { speciesId = "AMPA"
+  ; phase = Chemistry.dissolved
+  ; chargeLabel = "pH-dependent ionic state; application model required"
+  ; compositionLabel = "aminomethylphosphonic acid"
+  ; mobilityClass = Chemistry.restricted
+  ; activityModelLabel = "soil solution/sorption speciation model required"
+  ; opticalRoleLabel = "not asserted"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 ------------------------------------------------------------------------
@@ -146,12 +147,12 @@ ampaSpecies = record
 ------------------------------------------------------------------------
 
 data GlyphosateStateKind : Set where
-  dissolvedGlyphosate
-  adsorbedGlyphosate
-  bioavailableGlyphosate
-  microbialSubstrateGlyphosate
-  extractableMeasuredGlyphosate
-  : GlyphosateStateKind
+  dissolvedGlyphosate : GlyphosateStateKind
+  adsorbedGlyphosate : GlyphosateStateKind
+  bioavailableGlyphosate : GlyphosateStateKind
+  microbialSubstrateGlyphosate : GlyphosateStateKind
+  extractableMeasuredGlyphosate : GlyphosateStateKind
+
 
 dissolvedNotMeasured : dissolvedGlyphosate ≡ extractableMeasuredGlyphosate → ⊥
 dissolvedNotMeasured ()
@@ -168,15 +169,15 @@ bioavailableNotMeasured ()
 ------------------------------------------------------------------------
 
 data CandidateMechanism : Set where
-  introducedLacticAcidBacterialDegradation
-  stimulatedIndigenousMicrobialDegradation
-  acidityDrivenSpeciationOrAvailabilityShift
-  organicCarbonNutrientStimulation
-  sorptionDesorptionRedistribution
-  ionicStrengthPerturbation
-  combinedMechanism
-  unresolvedMechanism
-  : CandidateMechanism
+  introducedLacticAcidBacterialDegradation : CandidateMechanism
+  stimulatedIndigenousMicrobialDegradation : CandidateMechanism
+  acidityDrivenSpeciationOrAvailabilityShift : CandidateMechanism
+  organicCarbonNutrientStimulation : CandidateMechanism
+  sorptionDesorptionRedistribution : CandidateMechanism
+  ionicStrengthPerturbation : CandidateMechanism
+  combinedMechanism : CandidateMechanism
+  unresolvedMechanism : CandidateMechanism
+
 
 introducedLABNotIndigenous :
   introducedLacticAcidBacterialDegradation ≡ stimulatedIndigenousMicrobialDegradation → ⊥
@@ -289,22 +290,22 @@ shioctonTEGAfter = scaledMeasurement 2659 "0.01" "ng/g" "Harle et al. 2024 Table
 ------------------------------------------------------------------------
 
 data BoundStatus : Set where
-  exactFromMeasurement
-  intervalFromKnownQuantities
-  oneSidedBound
-  unresolvedBound
-  : BoundStatus
+  exactFromMeasurement : BoundStatus
+  intervalFromKnownQuantities : BoundStatus
+  oneSidedBound : BoundStatus
+  unresolvedBound : BoundStatus
+
 
 data ResidualKind : Set where
-  treatmentAssociatedComponent
-  elapsedTimeNaturalDecay
-  indigenousMicrobiomeComponent
-  weatherMoistureComponent
-  samplingAssayComponent
-  newGlyphosateInputComponent
-  sorptionAvailabilityComponent
-  unmodelledResidualComponent
-  : ResidualKind
+  treatmentAssociatedComponent : ResidualKind
+  elapsedTimeNaturalDecay : ResidualKind
+  indigenousMicrobiomeComponent : ResidualKind
+  weatherMoistureComponent : ResidualKind
+  samplingAssayComponent : ResidualKind
+  newGlyphosateInputComponent : ResidualKind
+  sorptionAvailabilityComponent : ResidualKind
+  unmodelledResidualComponent : ResidualKind
+
 
 record ApproximationEnvelope : Set where
   constructor approximationEnvelope
@@ -369,9 +370,9 @@ shioctonHeadlineBackpropagation = bidiResidualBackpropagation
 ------------------------------------------------------------------------
 
 data InferenceStatus : Set where
-  approximatelyConstrained
-  exactlyMechanismIdentified
-  : InferenceStatus
+  approximatelyConstrained : InferenceStatus
+  exactlyMechanismIdentified : InferenceStatus
+
 
 approximateNotExact :
   approximatelyConstrained ≡ exactlyMechanismIdentified → ⊥

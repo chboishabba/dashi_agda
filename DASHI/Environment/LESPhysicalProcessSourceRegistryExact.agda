@@ -16,11 +16,11 @@ data SourceKind : Set where
   standard journalArticle scholarlyBook : SourceKind
 
 data SourceRole : Set where
-  siMetrology electrodiffusionArchitecture rootWaterArchitecture
-  rootNutrientArchitecture mycorrhizalNutritionArchitecture soilCNArchitecture
-  xylemHydraulicArchitecture c3PhotosynthesisArchitecture
-  stomatalWaterEconomyArchitecture spacArchitecture unsaturatedFlowEquation
-  unsaturatedConductivityModel soilRetentionConductivityModel
+  siMetrology electrodiffusionArchitecture rootWaterArchitecture : SourceRole
+  rootNutrientArchitecture mycorrhizalNutritionArchitecture soilCNArchitecture : SourceRole
+  xylemHydraulicArchitecture c3PhotosynthesisArchitecture : SourceRole
+  stomatalWaterEconomyArchitecture spacArchitecture unsaturatedFlowEquation : SourceRole
+  unsaturatedConductivityModel soilRetentionConductivityModel : SourceRole
   stomatalConductanceModel : SourceRole
 
 record SourceReference : Set where

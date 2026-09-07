@@ -27,7 +27,7 @@ import DASHI.Physics.Closure.NSTriadKNGrafakosTorresThreeFunctionSchurProgram as
 import DASHI.Physics.Closure.NSTriadKNComponentAffineConstraintLedger as Affine
 
 data SixGeometryClass : Set where
-  leftLowClass rightLowClass outputLowClass
+  leftLowClass rightLowClass outputLowClass : SixGeometryClass
   comparableClass transitionClass residualClass : SixGeometryClass
 
 record SixClassOrderedAdditiveCarrier {s : Level} : Set (lsuc s) where

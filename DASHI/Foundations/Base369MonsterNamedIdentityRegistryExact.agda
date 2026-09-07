@@ -199,25 +199,25 @@ namedMonsterDecisionIso =
 ------------------------------------------------------------------------
 
 data StableIdentityTag : Set where
-  identity2Orientation
-  identity3Ternary
-  identity4NontrivialModes
-  identity5Modes
-  identity6SituatedSlots
-  identity8ReducedNonary
-  identity8VoxelCorners
-  identity9ComparisonNonary
-  identity10PointedNonary
-  identity12VoxelEdges
-  identity27DecisionCondition
-  identity45ModeNonary
-  identity53ReducedModeBoundary
-  identity54SituatedCompletion
-  identity54ModeBoundary
-  identity729SituatedAppraisal
-  identity19683FineDecisionAppraisal
-  identity196830NamedMonsterDecisionSpace
-  : StableIdentityTag
+  identity2Orientation : StableIdentityTag
+  identity3Ternary : StableIdentityTag
+  identity4NontrivialModes : StableIdentityTag
+  identity5Modes : StableIdentityTag
+  identity6SituatedSlots : StableIdentityTag
+  identity8ReducedNonary : StableIdentityTag
+  identity8VoxelCorners : StableIdentityTag
+  identity9ComparisonNonary : StableIdentityTag
+  identity10PointedNonary : StableIdentityTag
+  identity12VoxelEdges : StableIdentityTag
+  identity27DecisionCondition : StableIdentityTag
+  identity45ModeNonary : StableIdentityTag
+  identity53ReducedModeBoundary : StableIdentityTag
+  identity54SituatedCompletion : StableIdentityTag
+  identity54ModeBoundary : StableIdentityTag
+  identity729SituatedAppraisal : StableIdentityTag
+  identity19683FineDecisionAppraisal : StableIdentityTag
+  identity196830NamedMonsterDecisionSpace : StableIdentityTag
+
 
 ------------------------------------------------------------------------
 -- 7. Stable meaning receipt.

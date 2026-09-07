@@ -17,12 +17,12 @@ import DASHI.Algebra.Quantum.GeneralShor as Shor
 ------------------------------------------------------------------------
 
 data ComputationModelKind : Set where
-  candidateFibreVerifier
-  classicalRecoveryArchitecture
-  shorPeriodFindingMachine
-  shorProbabilityModel
-  physicalQuantumImplementation
-  : ComputationModelKind
+  candidateFibreVerifier : ComputationModelKind
+  classicalRecoveryArchitecture : ComputationModelKind
+  shorPeriodFindingMachine : ComputationModelKind
+  shorProbabilityModel : ComputationModelKind
+  physicalQuantumImplementation : ComputationModelKind
+
 
 record QuantumCryptoModelVersion : Set where
   constructor quantumCryptoModelVersion

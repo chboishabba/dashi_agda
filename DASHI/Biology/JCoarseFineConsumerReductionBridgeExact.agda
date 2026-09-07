@@ -80,7 +80,7 @@ jCoarseExactReductionRetainingJFine :
   Σ (Reduction.ConsumerRelativeReduction
       Modular.AbsoluteAddress Action Observation)
     (λ rom → Reduction.ExactResidualReopening rom)
-jCoarseExactReductionRetainingJFine dynamics consumer =
+jCoarseExactReductionRetainingJFine {Action = Action} {Observation = Observation} dynamics consumer =
   rom , Fibre.coarseProjectionRetainsRelativeFineResidual
           jCoarseFineReopening dynamics consumer
   where

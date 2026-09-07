@@ -36,19 +36,19 @@ import DASHI.Core.OperationalSystemBehaviourSemanticsExact as Operational
 ------------------------------------------------------------------------
 
 data ProductionContextKind : Set where
-  culture
-  schooling
-  professionalFormation
-  legalRecruitment
-  professionalSelection
-  judicialAppointment
-  institutionalHistory
-  educationalCanon
-  appointmentStructure
-  classComposition
-  politicalContext
-  dominantSocialNorms
-  : ProductionContextKind
+  culture : ProductionContextKind
+  schooling : ProductionContextKind
+  professionalFormation : ProductionContextKind
+  legalRecruitment : ProductionContextKind
+  professionalSelection : ProductionContextKind
+  judicialAppointment : ProductionContextKind
+  institutionalHistory : ProductionContextKind
+  educationalCanon : ProductionContextKind
+  appointmentStructure : ProductionContextKind
+  classComposition : ProductionContextKind
+  politicalContext : ProductionContextKind
+  dominantSocialNorms : ProductionContextKind
+
 
 record ProductionContextReceipt : Set where
   constructor production-context-receipt
@@ -67,14 +67,14 @@ open ProductionContextReceipt public
 ------------------------------------------------------------------------
 
 data InstitutionalAxis : Set where
-  decisionalIndependence
-  electoralAccountability
-  appellateAccountability
-  reasonsGiving
-  legislativeOverrideSubjectToConstitution
-  constitutionalAuthorization
-  democraticLegitimacy
-  : InstitutionalAxis
+  decisionalIndependence : InstitutionalAxis
+  electoralAccountability : InstitutionalAxis
+  appellateAccountability : InstitutionalAxis
+  reasonsGiving : InstitutionalAxis
+  legislativeOverrideSubjectToConstitution : InstitutionalAxis
+  constitutionalAuthorization : InstitutionalAxis
+  democraticLegitimacy : InstitutionalAxis
+
 
 data IntentionalDesignImpliesNormativeJustification : Set where
 data JudicialIndependenceImpliesDemocraticAccountability : Set where

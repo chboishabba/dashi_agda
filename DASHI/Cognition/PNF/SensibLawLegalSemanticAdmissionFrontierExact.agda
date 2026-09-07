@@ -99,13 +99,13 @@ admitWithReceipt candidate receipt =
 ------------------------------------------------------------------------
 
 data ResidualKind : Set where
-  negationScopeUnresolved
-  modalityScopeUnresolved
-  temporalAnchorUnresolved
-  conditionalScopeUnresolved
-  clauseInterpretationAmbiguous
-  referenceAttachmentUnresolved
-  qualifierAttachmentUnresolved
+  negationScopeUnresolved : ResidualKind
+  modalityScopeUnresolved : ResidualKind
+  temporalAnchorUnresolved : ResidualKind
+  conditionalScopeUnresolved : ResidualKind
+  clauseInterpretationAmbiguous : ResidualKind
+  referenceAttachmentUnresolved : ResidualKind
+  qualifierAttachmentUnresolved : ResidualKind
   unsupportedDependency : ResidualKind
 
 record ResidualFrontierObservation : Set where

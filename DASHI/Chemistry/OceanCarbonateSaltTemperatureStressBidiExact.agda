@@ -25,25 +25,25 @@ import DASHI.Core.ActiveBidiDiscriminatorLoopExact as Bidi
 ------------------------------------------------------------------------
 
 data OceanStressCoordinate : Set where
-  temperature
-  salinity
-  dissolvedCO2
-  pH
-  totalAlkalinity
-  dissolvedInorganicCarbon
-  carbonateIonAvailability
-  oxygenState
-  nutrientState
-  : OceanStressCoordinate
+  temperature : OceanStressCoordinate
+  salinity : OceanStressCoordinate
+  dissolvedCO2 : OceanStressCoordinate
+  pH : OceanStressCoordinate
+  totalAlkalinity : OceanStressCoordinate
+  dissolvedInorganicCarbon : OceanStressCoordinate
+  carbonateIonAvailability : OceanStressCoordinate
+  oxygenState : OceanStressCoordinate
+  nutrientState : OceanStressCoordinate
+
 
 data EcologicalResponseCoordinate : Set where
-  calcificationCapacity
-  metabolicTolerance
-  reproductiveSuccess
-  habitatSuitability
-  foodWebSupport
-  populationPersistence
-  : EcologicalResponseCoordinate
+  calcificationCapacity : EcologicalResponseCoordinate
+  metabolicTolerance : EcologicalResponseCoordinate
+  reproductiveSuccess : EcologicalResponseCoordinate
+  habitatSuitability : EcologicalResponseCoordinate
+  foodWebSupport : EcologicalResponseCoordinate
+  populationPersistence : EcologicalResponseCoordinate
+
 
 record OceanCarbonateObservationReceipt : Set where
   constructor ocean-carbonate-observation-receipt

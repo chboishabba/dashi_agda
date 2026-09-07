@@ -26,8 +26,8 @@ attractorSources =
   Sources.bressloffGeometricHallucinations ∷ []
 
 data CompletionState : Set where
-  noisyUnderdetermined
-  geometricIntermediate
+  noisyUnderdetermined : CompletionState
+  geometricIntermediate : CompletionState
   semanticCompletion : CompletionState
 
 commitmentOf : CompletionState → BT.Trit

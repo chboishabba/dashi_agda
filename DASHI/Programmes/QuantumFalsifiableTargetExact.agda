@@ -14,10 +14,10 @@ open import DASHI.Physics.Foundations.PhysicalTheoryExperimentDiscriminationExac
 ------------------------------------------------------------------------
 
 data QuantumResearchTarget : Set where
-  emergentLocality
-  lorentzInvarianceViolation
-  emergentRandomness
-  projectionTimeAsymmetry
+  emergentLocality : QuantumResearchTarget
+  lorentzInvarianceViolation : QuantumResearchTarget
+  emergentRandomness : QuantumResearchTarget
+  projectionTimeAsymmetry : QuantumResearchTarget
   lowEnergyRecovery : QuantumResearchTarget
 
 record FalsifiableQuantumTarget
@@ -42,10 +42,12 @@ falsifiableTargetRefutesCurrentEquivalence :
       (predicts targetSocket)
       (leftCandidate targetSocket)
       (rightCandidate targetSocket))
-falsifiableTargetRefutesCurrentEquivalence targetSocket =
+falsifiableTargetRefutesCurrentEquivalence targetSocket eq =
   includedDiscriminatorRefutesEquivalence
+    {predicts = predicts targetSocket}
     (targetIsAdmissibleExperiment targetSocket)
     (targetDiscriminatesCandidates targetSocket)
+    eq
 
 ------------------------------------------------------------------------
 -- Physical promotion remains strictly stronger than possessing one useful

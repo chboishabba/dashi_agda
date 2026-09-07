@@ -14,23 +14,23 @@ import DASHI.Analysis.MeasureIntegralLimitKernelBidiExact as MIL
 ------------------------------------------------------------------------
 
 data AnalyticLane : Set where
-  moonshineLane
-  riemannLane
-  yangMillsLane
-  casimirLane
-  navierStokesLane
-  : AnalyticLane
+  moonshineLane : AnalyticLane
+  riemannLane : AnalyticLane
+  yangMillsLane : AnalyticLane
+  casimirLane : AnalyticLane
+  navierStokesLane : AnalyticLane
+
 
 data AnalyticShape : Set where
-  regularisationParameterShape
-  localConvergenceDomainShape
-  measureIntegrabilityShape
-  dominationShape
-  operationInterchangeShape
-  parameterisedLimitShape
-  cutoffRemovalShape
-  subtractionBeforeLimitShape
-  : AnalyticShape
+  regularisationParameterShape : AnalyticShape
+  localConvergenceDomainShape : AnalyticShape
+  measureIntegrabilityShape : AnalyticShape
+  dominationShape : AnalyticShape
+  operationInterchangeShape : AnalyticShape
+  parameterisedLimitShape : AnalyticShape
+  cutoffRemovalShape : AnalyticShape
+  subtractionBeforeLimitShape : AnalyticShape
+
 
 record AnalyticCrossPollinationEdge : Set where
   field

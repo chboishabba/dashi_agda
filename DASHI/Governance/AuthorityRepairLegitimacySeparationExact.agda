@@ -14,10 +14,10 @@ open import DASHI.Core.Prelude
 import DASHI.Governance.LegitimacyEvidenceSeparationExact as Legitimacy
 
 data RepairActor : Set where
-  scopedButIneffective
-  effectiveButIllegitimate
-  legitimateAndEffective
-  : RepairActor
+  scopedButIneffective : RepairActor
+  effectiveButIllegitimate : RepairActor
+  legitimateAndEffective : RepairActor
+
 
 data CanModify : RepairActor → Set where
   scopedCanModify : CanModify scopedButIneffective
@@ -44,8 +44,7 @@ canModifyDoesNotGuaranteeEffect scopedCanModify ()
 effectiveChangeDoesNotGiveLegitimacyEvidence :
   Effective effectiveButIllegitimate →
   Legitimacy.AdmittedLegitimacy Legitimacy.demoEvidence Legitimacy.effectiveRepairNoLegitimacy → ⊥
-effectiveChangeDoesNotGiveLegitimacyEvidence effectiveWorked legitimacy =
-  (λ ()) (Legitimacy.ruleWitness legitimacy)
+effectiveChangeDoesNotGiveLegitimacyEvidence effectiveWorked (Legitimacy.admitted-legitimacy () justification consent)
 
 record AuthorityRepairBoundary : Set where
   constructor authority-repair-boundary

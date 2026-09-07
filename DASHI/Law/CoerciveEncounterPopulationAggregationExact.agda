@@ -84,7 +84,7 @@ countWands = countFieldTrue Fixture.wandOccurred
 ------------------------------------------------------------------------
 
 data EstimandKind : Set where
-  searchGivenWand searchGivenNoAlarm nonWeaponChargeGivenWand
+  searchGivenWand searchGivenNoAlarm nonWeaponChargeGivenWand : EstimandKind
   lawfulnessClosedGivenSearch : EstimandKind
 
 record CountRatio : Set where

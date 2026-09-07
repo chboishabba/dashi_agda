@@ -69,11 +69,11 @@ open HermitianExplicitFormulaDonor public
 ------------------------------------------------------------------------
 
 data FiniteNearRouteState : Set where
-  routeOpenDirect
-  routeBlockedOnCarrierBridge
-  routeRejectedInformationLoss
-  routeClosed
-  : FiniteNearRouteState
+  routeOpenDirect : FiniteNearRouteState
+  routeBlockedOnCarrierBridge : FiniteNearRouteState
+  routeRejectedInformationLoss : FiniteNearRouteState
+  routeClosed : FiniteNearRouteState
+
 
 currentRouteState : Near.FiniteNearRoute → FiniteNearRouteState
 currentRouteState Near.directFiniteExponentialSum = routeOpenDirect
@@ -91,11 +91,11 @@ currentRouteState Near.namedHardyDonorOnly = routeRejectedInformationLoss
 ------------------------------------------------------------------------
 
 data FiniteNearResearchExperiment : Set where
-  directlyEvaluatePoleNearSum
-  constructLiteralPoleNearExplicitFormulaBridge
-  reuseHermitianG3WithoutBridge
-  complexifyPoissonWithoutPoleCarrierMap
-  : FiniteNearResearchExperiment
+  directlyEvaluatePoleNearSum : FiniteNearResearchExperiment
+  constructLiteralPoleNearExplicitFormulaBridge : FiniteNearResearchExperiment
+  reuseHermitianG3WithoutBridge : FiniteNearResearchExperiment
+  complexifyPoissonWithoutPoleCarrierMap : FiniteNearResearchExperiment
+
 
 data FeedsFiniteNearProducer : FiniteNearResearchExperiment → Set where
   directRouteFeeds : FeedsFiniteNearProducer directlyEvaluatePoleNearSum

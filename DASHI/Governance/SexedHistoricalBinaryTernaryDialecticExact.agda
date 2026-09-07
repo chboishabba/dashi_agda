@@ -27,10 +27,10 @@ import DASHI.Governance.SexedHistoricalStatisticalExperimentHyperfabricExact as 
 ------------------------------------------------------------------------
 
 data HistoricalEvaluationMode : Set where
-  binaryLogicalEvaluation
-  ternaryEpistemicEvaluation
-  dialecticalConstructionEvaluation
-  : HistoricalEvaluationMode
+  binaryLogicalEvaluation : HistoricalEvaluationMode
+  ternaryEpistemicEvaluation : HistoricalEvaluationMode
+  dialecticalConstructionEvaluation : HistoricalEvaluationMode
+
 
 binaryModeNotTernaryMode :
   binaryLogicalEvaluation ≡ ternaryEpistemicEvaluation → ⊥
@@ -97,19 +97,19 @@ historicalContextDifferenceDoesNotManufactureContradiction =
 ------------------------------------------------------------------------
 
 data HistoricalTritState : Set where
-  inheritedPole
-  unresolvedTransition
-  reconstitutedPole
-  : HistoricalTritState
+  inheritedPole : HistoricalTritState
+  unresolvedTransition : HistoricalTritState
+  reconstitutedPole : HistoricalTritState
+
 
 data BinaryHistoricalPole : Set where
   oldPole newPole : BinaryHistoricalPole
 
 data FineHistoricalStatus : Set where
-  inheritedFine
-  unresolvedFine
-  reconstitutedFine
-  : FineHistoricalStatus
+  inheritedFine : FineHistoricalStatus
+  unresolvedFine : FineHistoricalStatus
+  reconstitutedFine : FineHistoricalStatus
+
 
 collapseUnresolvedBackward : HistoricalTritState → BinaryHistoricalPole
 collapseUnresolvedBackward inheritedPole = oldPole
@@ -160,10 +160,10 @@ binarySexCodingStillCannotRecoverConstructionDirection =
 ------------------------------------------------------------------------
 
 data PathAssessment : Set where
-  pathRejected
-  pathUnresolved
-  pathSupported
-  : PathAssessment
+  pathRejected : PathAssessment
+  pathUnresolved : PathAssessment
+  pathSupported : PathAssessment
+
 
 assessPath : Order.PathOrder → PathAssessment
 assessPath Order.institutionThenReinterpret = pathUnresolved

@@ -67,11 +67,11 @@ canonicalSolisProjectProvenance =
 ------------------------------------------------------------------------
 
 data AttributionRole : Set where
-  solisConceptualSource
-  dashiHistoricalSubstrate
-  dashiCurrentFormalExtension
-  peerReviewedEmpiricalSource
-  : AttributionRole
+  solisConceptualSource : AttributionRole
+  dashiHistoricalSubstrate : AttributionRole
+  dashiCurrentFormalExtension : AttributionRole
+  peerReviewedEmpiricalSource : AttributionRole
+
 
 solisHandleRole : AttributionRole
 solisHandleRole = solisConceptualSource

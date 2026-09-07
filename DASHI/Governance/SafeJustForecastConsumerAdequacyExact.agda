@@ -11,11 +11,11 @@ import DASHI.Governance.Fanning2022ForecastAuthorityExact as Forecast
 ------------------------------------------------------------------------
 
 data ForecastConsumer : Set where
-  forecastConsumer
-  causalMechanismConsumer
-  observedFutureConsumer
-  normativePolicyConsumer
-  : ForecastConsumer
+  forecastConsumer : ForecastConsumer
+  causalMechanismConsumer : ForecastConsumer
+  observedFutureConsumer : ForecastConsumer
+  normativePolicyConsumer : ForecastConsumer
+
 
 data AdequateFor : Forecast.BAUProjectionReceipt → ForecastConsumer → Set where
   canonicalForecastAdequate :

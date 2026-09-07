@@ -17,8 +17,8 @@ import DASHI.Education.EarlyLearningChoicePNFHyperfabricBridge as Choice
 ------------------------------------------------------------------------
 
 data DeliveryArchitecture : Set where
-  universalProfessionalArchitecture
-  universalPlusParallelFamilyArchitecture
+  universalProfessionalArchitecture : DeliveryArchitecture
+  universalPlusParallelFamilyArchitecture : DeliveryArchitecture
   substitutionaryExitArchitecture : DeliveryArchitecture
 
 universalEntitlement : DeliveryArchitecture → Bool
@@ -94,7 +94,7 @@ expandedChoiceStillCannotDetermineProfessionalFloor =
 ------------------------------------------------------------------------
 
 data NordicPolicyArchitecture : Set where
-  universalAccessWithoutParallelCashCare
+  universalAccessWithoutParallelCashCare : NordicPolicyArchitecture
   universalAccessWithParallelCashCare : NordicPolicyArchitecture
 
 nordicUniversalEntitlement : NordicPolicyArchitecture → Bool

@@ -31,30 +31,30 @@ record LegalIssue : Set where
 open LegalIssue public
 
 data AdjudicativeQuery : Set where
-  identifyBurdenQuery
-  identifyStandardQuery
-  evaluateIssueQuery
-  remedyEligibilityQuery
-  explainObservedDispositionQuery
-  : AdjudicativeQuery
+  identifyBurdenQuery : AdjudicativeQuery
+  identifyStandardQuery : AdjudicativeQuery
+  evaluateIssueQuery : AdjudicativeQuery
+  remedyEligibilityQuery : AdjudicativeQuery
+  explainObservedDispositionQuery : AdjudicativeQuery
+
 
 data AdjudicativeCoordinate : Set where
-  issuePropositionCoordinate
-  burdenAllocationCoordinate
-  standardOfProofCoordinate
-  resolvedIssueEvidenceCoordinate
-  authorityCoordinate
-  jurisdictionCoordinate
-  temporalValidityCoordinate
-  applicabilityCoordinate
-  violationCoordinate
-  liabilityCoordinate
-  harmCoordinate
-  protectedInterestCoordinate
-  remedySourceCoordinate
-  remedyEligibilityCoordinate
-  dispositionExplanationCoordinate
-  : AdjudicativeCoordinate
+  issuePropositionCoordinate : AdjudicativeCoordinate
+  burdenAllocationCoordinate : AdjudicativeCoordinate
+  standardOfProofCoordinate : AdjudicativeCoordinate
+  resolvedIssueEvidenceCoordinate : AdjudicativeCoordinate
+  authorityCoordinate : AdjudicativeCoordinate
+  jurisdictionCoordinate : AdjudicativeCoordinate
+  temporalValidityCoordinate : AdjudicativeCoordinate
+  applicabilityCoordinate : AdjudicativeCoordinate
+  violationCoordinate : AdjudicativeCoordinate
+  liabilityCoordinate : AdjudicativeCoordinate
+  harmCoordinate : AdjudicativeCoordinate
+  protectedInterestCoordinate : AdjudicativeCoordinate
+  remedySourceCoordinate : AdjudicativeCoordinate
+  remedyEligibilityCoordinate : AdjudicativeCoordinate
+  dispositionExplanationCoordinate : AdjudicativeCoordinate
+
 
 record AdjudicativeCutset : Set where
   constructor adjudicativeCutset
@@ -78,22 +78,22 @@ record AdjudicativeCutset : Set where
 open AdjudicativeCutset public
 
 data AdjudicativeResidual : Set where
-  issuePropositionResidual
-  burdenResidual
-  standardResidual
-  evidenceResidual
-  authorityResidual
-  jurisdictionResidual
-  temporalValidityResidual
-  applicabilityResidual
-  violationResidual
-  liabilityResidual
-  harmResidual
-  protectedInterestResidual
-  remedySourceResidual
-  dispositionExplanationResidual
-  adjudicativeClosed
-  : AdjudicativeResidual
+  issuePropositionResidual : AdjudicativeResidual
+  burdenResidual : AdjudicativeResidual
+  standardResidual : AdjudicativeResidual
+  evidenceResidual : AdjudicativeResidual
+  authorityResidual : AdjudicativeResidual
+  jurisdictionResidual : AdjudicativeResidual
+  temporalValidityResidual : AdjudicativeResidual
+  applicabilityResidual : AdjudicativeResidual
+  violationResidual : AdjudicativeResidual
+  liabilityResidual : AdjudicativeResidual
+  harmResidual : AdjudicativeResidual
+  protectedInterestResidual : AdjudicativeResidual
+  remedySourceResidual : AdjudicativeResidual
+  dispositionExplanationResidual : AdjudicativeResidual
+  adjudicativeClosed : AdjudicativeResidual
+
 
 firstAdjudicativeResidual : AdjudicativeQuery → AdjudicativeCutset → AdjudicativeResidual
 firstAdjudicativeResidual identifyBurdenQuery c with issuePropositionClosed c
@@ -137,40 +137,40 @@ firstAdjudicativeResidual explainObservedDispositionQuery c with dispositionExpl
 ------------------------------------------------------------------------
 
 data LegalProofObligation : Set where
-  establishIssueProposition
-  allocateBurden
-  establishStandard
-  establishEvidenceAdequacy
-  establishAuthority
-  establishJurisdiction
-  establishTemporalValidity
-  establishApplicability
-  establishViolation
-  establishLiability
-  establishHarm
-  establishProtectedInterest
-  establishRemedySource
-  explainDisposition
-  noFurtherObligation
-  : LegalProofObligation
+  establishIssueProposition : LegalProofObligation
+  allocateBurden : LegalProofObligation
+  establishStandard : LegalProofObligation
+  establishEvidenceAdequacy : LegalProofObligation
+  establishAuthority : LegalProofObligation
+  establishJurisdiction : LegalProofObligation
+  establishTemporalValidity : LegalProofObligation
+  establishApplicability : LegalProofObligation
+  establishViolation : LegalProofObligation
+  establishLiability : LegalProofObligation
+  establishHarm : LegalProofObligation
+  establishProtectedInterest : LegalProofObligation
+  establishRemedySource : LegalProofObligation
+  explainDisposition : LegalProofObligation
+  noFurtherObligation : LegalProofObligation
+
 
 data LegalDiscriminator : Set where
-  propositionDiscriminator
-  burdenRuleDiscriminator
-  standardRuleDiscriminator
-  evidenceDiscriminator
-  authorityDiscriminator
-  jurisdictionDiscriminator
-  temporalDiscriminator
-  applicabilityDiscriminator
-  violationDiscriminator
-  liabilityDiscriminator
-  harmDiscriminator
-  protectedInterestDiscriminator
-  remedySourceDiscriminator
-  dispositionCauseDiscriminator
-  noDiscriminator
-  : LegalDiscriminator
+  propositionDiscriminator : LegalDiscriminator
+  burdenRuleDiscriminator : LegalDiscriminator
+  standardRuleDiscriminator : LegalDiscriminator
+  evidenceDiscriminator : LegalDiscriminator
+  authorityDiscriminator : LegalDiscriminator
+  jurisdictionDiscriminator : LegalDiscriminator
+  temporalDiscriminator : LegalDiscriminator
+  applicabilityDiscriminator : LegalDiscriminator
+  violationDiscriminator : LegalDiscriminator
+  liabilityDiscriminator : LegalDiscriminator
+  harmDiscriminator : LegalDiscriminator
+  protectedInterestDiscriminator : LegalDiscriminator
+  remedySourceDiscriminator : LegalDiscriminator
+  dispositionCauseDiscriminator : LegalDiscriminator
+  noDiscriminator : LegalDiscriminator
+
 
 data EpistemicWorkKind : Set where
   thinkWork lookWork testWork actWork noWork : EpistemicWorkKind

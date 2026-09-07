@@ -23,20 +23,20 @@ import DASHI.Reasoning.Spacy369FeministLacanConsumerRelativeExact as Consumer
 ------------------------------------------------------------------------
 
 data CriticalAuditLens : Set where
-  parserScopeAudit
-  lacanianClosureResidualAudit
-  feministSubjectPositionAudit
-  irigarayanReciprocalRelationAudit
-  intersectionalMissingCoordinateAudit
-  : CriticalAuditLens
+  parserScopeAudit : CriticalAuditLens
+  lacanianClosureResidualAudit : CriticalAuditLens
+  feministSubjectPositionAudit : CriticalAuditLens
+  irigarayanReciprocalRelationAudit : CriticalAuditLens
+  intersectionalMissingCoordinateAudit : CriticalAuditLens
+
 
 data ResidualDemand : Set where
-  moreScopeEvidence
-  inspectMasterPredicateAndExcludedResidual
-  addOriginatingSubjectPosition
-  inspectReciprocalNonSovereignRelation
-  addIntersectingSituatedCoordinate
-  : ResidualDemand
+  moreScopeEvidence : ResidualDemand
+  inspectMasterPredicateAndExcludedResidual : ResidualDemand
+  addOriginatingSubjectPosition : ResidualDemand
+  inspectReciprocalNonSovereignRelation : ResidualDemand
+  addIntersectingSituatedCoordinate : ResidualDemand
+
 
 auditDemand : CriticalAuditLens → ResidualDemand
 auditDemand parserScopeAudit = moreScopeEvidence

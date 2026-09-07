@@ -17,11 +17,11 @@ data CoverageDepth : Set where
   depth0 depth1 depth2 : CoverageDepth
 
 data DeclaredConsumer : Set where
-  operationalConsumer
-  subjectPositionConsumer
-  governedStandingConsumer
-  closureResidualConsumer
-  : DeclaredConsumer
+  operationalConsumer : DeclaredConsumer
+  subjectPositionConsumer : DeclaredConsumer
+  governedStandingConsumer : DeclaredConsumer
+  closureResidualConsumer : DeclaredConsumer
+
 
 data ClosureStatus : Set where
   stillOpen closedHere : ClosureStatus

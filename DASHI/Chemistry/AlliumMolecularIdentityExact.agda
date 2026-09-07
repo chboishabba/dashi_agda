@@ -102,13 +102,13 @@ alliinNitrogen = refl
 ------------------------------------------------------------------------
 
 data FunctionalMotif : Set where
-  allyl
-  sulfoxide
-  thiosulfinate
-  disulfide
-  aminoAcid
-  carboxyl
-  : FunctionalMotif
+  allyl : FunctionalMotif
+  sulfoxide : FunctionalMotif
+  thiosulfinate : FunctionalMotif
+  disulfide : FunctionalMotif
+  aminoAcid : FunctionalMotif
+  carboxyl : FunctionalMotif
+
 
 record StructuralMotifReceipt : Set where
   constructor structuralMotifReceipt

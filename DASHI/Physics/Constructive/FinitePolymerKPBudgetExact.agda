@@ -114,10 +114,10 @@ finiteKPCriterion gamma = ≤-refl
 ------------------------------------------------------------------------
 
 data CompatibleFamily : Set where
-  emptyFamily
-  alphaFamily
-  betaFamily
-  gammaFamily
+  emptyFamily : CompatibleFamily
+  alphaFamily : CompatibleFamily
+  betaFamily : CompatibleFamily
+  gammaFamily : CompatibleFamily
   betaGammaFamily : CompatibleFamily
 
 familyWeight : CompatibleFamily → Nat

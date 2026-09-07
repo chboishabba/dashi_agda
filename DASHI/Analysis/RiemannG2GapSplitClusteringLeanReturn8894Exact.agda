@@ -22,11 +22,11 @@ data CrossProverAuthority8894 : Set where
   checkedLeanReturn8894 openAgdaTransport : CrossProverAuthority8894
 
 data GapSplitRouteState : Set where
-  optimizedCriterionAvailable
-  quadraticDecayDonorPruned
-  clusteringRequired
-  densityConstantWindowConditional
-  : GapSplitRouteState
+  optimizedCriterionAvailable : GapSplitRouteState
+  quadraticDecayDonorPruned : GapSplitRouteState
+  clusteringRequired : GapSplitRouteState
+  densityConstantWindowConditional : GapSplitRouteState
+
 
 record GapSplitClusteringLeanReturn8894 : Set where
   constructor gap-split-clustering-lean-return-8894
@@ -132,16 +132,16 @@ canonicalGapSplitClusteringLeanReturn8894 =
 ------------------------------------------------------------------------
 
 data GapSplitSearchAction : Set where
-  sharpenSameQuadraticDecayDonor
-  retuneTaperWidthOrProfile
-  deriveClusteringFromCoarseCountingOnly
-  reuseOptimizedGapSplitAsGrowingCutoffClosure
-  proveNewLowGapClustering
-  compareQuarterPeriodLowerConstantWithDensityUpperConstant
-  pursueDifferentSignedMechanism
-  repairGammaPrecisionInParallel
-  continueCanonicalTestModulationInParallel
-  : GapSplitSearchAction
+  sharpenSameQuadraticDecayDonor : GapSplitSearchAction
+  retuneTaperWidthOrProfile : GapSplitSearchAction
+  deriveClusteringFromCoarseCountingOnly : GapSplitSearchAction
+  reuseOptimizedGapSplitAsGrowingCutoffClosure : GapSplitSearchAction
+  proveNewLowGapClustering : GapSplitSearchAction
+  compareQuarterPeriodLowerConstantWithDensityUpperConstant : GapSplitSearchAction
+  pursueDifferentSignedMechanism : GapSplitSearchAction
+  repairGammaPrecisionInParallel : GapSplitSearchAction
+  continueCanonicalTestModulationInParallel : GapSplitSearchAction
+
 
 GapSplitRelevant : GapSplitSearchAction → Set
 GapSplitRelevant sharpenSameQuadraticDecayDonor = ⊥

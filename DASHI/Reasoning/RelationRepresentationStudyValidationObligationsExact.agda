@@ -27,36 +27,36 @@ import DASHI.Reasoning.RelationRepresentationSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data ValidationArtifact : Set where
-  exactModelIdentity
-  modelRevisionOrWeightHash
-  tokenizerOrInputEncoding
-  datasetIdentityAndVersion
-  rawPairedExamples
-  trainValidationTestSplit
-  preprocessingReceipt
-  layerOrRepresentationLocation
-  rawEmbeddingsOrActivations
-  fittedOperatorParameters
-  baselineOperatorParameters
-  metricImplementation
-  rawPredictionOrSimilarityScores
-  groundTruthOrHumanJudgments
-  statisticalTestReceipt
-  randomSeedsAndEnvironment
-  codeRevision
-  syntheticGenerationPromptAndModel
-  deduplicationOrCollisionReceipt
-  checkpointSeries
-  weightOrParameterSnapshots
-  spectralDiagnosticReceipt
-  alternativeDiagnosticReceipt
-  interventionTrajectory
-  fittedGeometryOrManifold
-  outputDistributionTrajectory
-  compressionPartition
-  compressionTolerance
-  parameterCountOrCompressionRatio
-  : ValidationArtifact
+  exactModelIdentity : ValidationArtifact
+  modelRevisionOrWeightHash : ValidationArtifact
+  tokenizerOrInputEncoding : ValidationArtifact
+  datasetIdentityAndVersion : ValidationArtifact
+  rawPairedExamples : ValidationArtifact
+  trainValidationTestSplit : ValidationArtifact
+  preprocessingReceipt : ValidationArtifact
+  layerOrRepresentationLocation : ValidationArtifact
+  rawEmbeddingsOrActivations : ValidationArtifact
+  fittedOperatorParameters : ValidationArtifact
+  baselineOperatorParameters : ValidationArtifact
+  metricImplementation : ValidationArtifact
+  rawPredictionOrSimilarityScores : ValidationArtifact
+  groundTruthOrHumanJudgments : ValidationArtifact
+  statisticalTestReceipt : ValidationArtifact
+  randomSeedsAndEnvironment : ValidationArtifact
+  codeRevision : ValidationArtifact
+  syntheticGenerationPromptAndModel : ValidationArtifact
+  deduplicationOrCollisionReceipt : ValidationArtifact
+  checkpointSeries : ValidationArtifact
+  weightOrParameterSnapshots : ValidationArtifact
+  spectralDiagnosticReceipt : ValidationArtifact
+  alternativeDiagnosticReceipt : ValidationArtifact
+  interventionTrajectory : ValidationArtifact
+  fittedGeometryOrManifold : ValidationArtifact
+  outputDistributionTrajectory : ValidationArtifact
+  compressionPartition : ValidationArtifact
+  compressionTolerance : ValidationArtifact
+  parameterCountOrCompressionRatio : ValidationArtifact
+
 
 record StudyValidationProfile : Set where
   constructor studyValidationProfile

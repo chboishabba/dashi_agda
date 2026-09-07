@@ -41,10 +41,10 @@ import DASHI.Physics.Closure.NSTriadKNThreeWeightAffineCertificateProgram as Cer
 import DASHI.Physics.Closure.NSTriadKNStage3KiriukhinWeightedSchurProgram as Stage3Schur
 
 data CandidateBranch : Set where
-  globalHelicity
-  scalarLocalizedHelicity
-  projectedAxisMatrixCoherence
-  complexTriadPhaseCoherence
+  globalHelicity : CandidateBranch
+  scalarLocalizedHelicity : CandidateBranch
+  projectedAxisMatrixCoherence : CandidateBranch
+  complexTriadPhaseCoherence : CandidateBranch
   triadDirectionCoherence : CandidateBranch
 
 data FiniteBranchDecision : CandidateBranch → Set where
@@ -95,14 +95,14 @@ finiteDecisionReceipt =
     Direction.exactPolarizationDiagnostic
 
 data HarmonicRoute : Set where
-  rawOrbitRow
-  symmetricOrbitStretching
-  grafakosTorresThreeFunction
-  exactTransposeSymbols
-  frozenOutputTwoFunction
-  frozenLegParametrizedTrichotomy
-  asymmetricHighHighCancellation
-  exactAffineCertificate
+  rawOrbitRow : HarmonicRoute
+  symmetricOrbitStretching : HarmonicRoute
+  grafakosTorresThreeFunction : HarmonicRoute
+  exactTransposeSymbols : HarmonicRoute
+  frozenOutputTwoFunction : HarmonicRoute
+  frozenLegParametrizedTrichotomy : HarmonicRoute
+  asymmetricHighHighCancellation : HarmonicRoute
+  exactAffineCertificate : HarmonicRoute
   paraproductPartialAdjoints : HarmonicRoute
 
 data HarmonicRouteDecision : HarmonicRoute → Set where

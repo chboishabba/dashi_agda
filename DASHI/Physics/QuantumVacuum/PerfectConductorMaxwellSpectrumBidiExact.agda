@@ -30,12 +30,12 @@ data PerfectConductorPlate : Set where
   lowerPlate upperPlate : PerfectConductorPlate
 
 data BoundaryConditionClass : Set where
-  tangentialElectricZero
-  normalMagneticZero
+  tangentialElectricZero : BoundaryConditionClass
+  normalMagneticZero : BoundaryConditionClass
   sourceFreeInterior : BoundaryConditionClass
 
 data ModeFamily : Set where
-  transverseElectric
+  transverseElectric : ModeFamily
   transverseMagnetic : ModeFamily
 
 record PerfectConductorBoundaryProblem : Set₁ where

@@ -24,36 +24,36 @@ import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact a
 ------------------------------------------------------------------------
 
 data IonicRole : Set where
-  calciumEntryRole
-  anionDepolarisationRole
-  potassiumRepolarisationRole
-  protonPumpRepolarisationRole
-  sodiumDepolarisationRole
-  potassiumAnimalRepolarisationRole
-  : IonicRole
+  calciumEntryRole : IonicRole
+  anionDepolarisationRole : IonicRole
+  potassiumRepolarisationRole : IonicRole
+  protonPumpRepolarisationRole : IonicRole
+  sodiumDepolarisationRole : IonicRole
+  potassiumAnimalRepolarisationRole : IonicRole
+
 
 data APPhase : Set where
-  restingPhase
-  triggerPhase
-  depolarisationPhase
-  repolarisationPhase
-  afterHyperpolarisationPhase
-  recoveredPhase
-  : APPhase
+  restingPhase : APPhase
+  triggerPhase : APPhase
+  depolarisationPhase : APPhase
+  repolarisationPhase : APPhase
+  afterHyperpolarisationPhase : APPhase
+  recoveredPhase : APPhase
+
 
 data PropagationStatus : Set where
-  propagates
-  propagationSuppressed
-  recoveredPropagation
-  : PropagationStatus
+  propagates : PropagationStatus
+  propagationSuppressed : PropagationStatus
+  recoveredPropagation : PropagationStatus
+
 
 data ExcitabilityInvariant : Set where
-  thresholdTriggeredTransition
-  membranePotentialExcursion
-  spatialPropagation
-  refractoryOrRecoveryStructure
-  reversibleSuppression
-  : ExcitabilityInvariant
+  thresholdTriggeredTransition : ExcitabilityInvariant
+  membranePotentialExcursion : ExcitabilityInvariant
+  spatialPropagation : ExcitabilityInvariant
+  refractoryOrRecoveryStructure : ExcitabilityInvariant
+  reversibleSuppression : ExcitabilityInvariant
+
 
 record PlantActionPotentialArchitecture : Set₁ where
   constructor plantActionPotentialArchitecture

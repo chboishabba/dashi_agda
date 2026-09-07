@@ -230,10 +230,10 @@ commutingRefinementGivesSameCandidatePredicate
 ------------------------------------------------------------------------
 
 data ObservationSpecSynthetic : Set where
-  behaviourOnly
-  behaviourPlusVoltage
-  behaviourPlusVoltageCurrent
-  : ObservationSpecSynthetic
+  behaviourOnly : ObservationSpecSynthetic
+  behaviourPlusVoltage : ObservationSpecSynthetic
+  behaviourPlusVoltageCurrent : ObservationSpecSynthetic
+
 
 data SyntheticObservationCompatible :
     Fibre.MechanismCandidate → ObservationSpecSynthetic → Set where

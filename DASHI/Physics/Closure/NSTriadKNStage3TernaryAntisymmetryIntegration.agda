@@ -28,9 +28,9 @@ import DASHI.Physics.Closure.NSTriadKNFirstAdjointSobolevTailLedger as Tail
 import DASHI.Physics.Closure.NSTriadKNStage3KiriukhinWeightedSchurProgram as Stage3
 
 data IntegratedFirstAdjointDecision : Set where
-  directTailRemainsPrimary
-  classicalAntisymmetrySuppliesStructuralCrossCheck
-  classicalAntisymmetrySuppliesEstimateBypass
+  directTailRemainsPrimary : IntegratedFirstAdjointDecision
+  classicalAntisymmetrySuppliesStructuralCrossCheck : IntegratedFirstAdjointDecision
+  classicalAntisymmetrySuppliesEstimateBypass : IntegratedFirstAdjointDecision
   preprintPhaseGeometryConsumedAsTheorem : IntegratedFirstAdjointDecision
 
 primaryIntegratedDecision : IntegratedFirstAdjointDecision

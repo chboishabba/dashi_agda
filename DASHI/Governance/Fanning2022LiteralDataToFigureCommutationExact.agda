@@ -17,11 +17,11 @@ import DASHI.Governance.Fanning2022NormalizationExact as Normalization
 ------------------------------------------------------------------------
 
 data PublishedViewRole : Set where
-  thresholdCountPoint
-  extentPoint
-  temporalTrendPoint
-  indicatorDoughnutPoint
-  : PublishedViewRole
+  thresholdCountPoint : PublishedViewRole
+  extentPoint : PublishedViewRole
+  temporalTrendPoint : PublishedViewRole
+  indicatorDoughnutPoint : PublishedViewRole
+
 
 record LiteralTransformationReceipt
   (datum : Data.CountryYearDatum)

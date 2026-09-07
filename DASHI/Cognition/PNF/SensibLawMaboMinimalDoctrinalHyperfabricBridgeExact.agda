@@ -16,31 +16,31 @@ import DASHI.Cognition.PNF.SensibLawMaboMinimalDoctrinalDiscriminatorExact as Mi
 ------------------------------------------------------------------------
 
 data MinimalDoctrinalResidual : Set where
-  existenceContinuityResidual
-  recognitionConditionResidual
-  recognitionEvidenceResidual
-  extinguishmentResidual
-  unifiedTheoryResidual
-  doctrinalClosed
-  : MinimalDoctrinalResidual
+  existenceContinuityResidual : MinimalDoctrinalResidual
+  recognitionConditionResidual : MinimalDoctrinalResidual
+  recognitionEvidenceResidual : MinimalDoctrinalResidual
+  extinguishmentResidual : MinimalDoctrinalResidual
+  unifiedTheoryResidual : MinimalDoctrinalResidual
+  doctrinalClosed : MinimalDoctrinalResidual
+
 
 data MinimalProofObligation : Set where
-  establishExistenceContinuityRule
-  establishRecognitionConditionRule
-  establishRecognitionEvidenceBasis
-  establishExtinguishmentRule
-  reconcileMinimalDoctrine
-  noMinimalObligation
-  : MinimalProofObligation
+  establishExistenceContinuityRule : MinimalProofObligation
+  establishRecognitionConditionRule : MinimalProofObligation
+  establishRecognitionEvidenceBasis : MinimalProofObligation
+  establishExtinguishmentRule : MinimalProofObligation
+  reconcileMinimalDoctrine : MinimalProofObligation
+  noMinimalObligation : MinimalProofObligation
+
 
 data MinimalDiscriminator : Set where
-  continuityAuthorityDiscriminator
-  recognitionConditionAuthorityDiscriminator
-  conductEvidenceDiscriminator
-  extinguishmentAuthorityDiscriminator
-  crossAxisReconciliationDiscriminator
-  noMinimalDiscriminator
-  : MinimalDiscriminator
+  continuityAuthorityDiscriminator : MinimalDiscriminator
+  recognitionConditionAuthorityDiscriminator : MinimalDiscriminator
+  conductEvidenceDiscriminator : MinimalDiscriminator
+  extinguishmentAuthorityDiscriminator : MinimalDiscriminator
+  crossAxisReconciliationDiscriminator : MinimalDiscriminator
+  noMinimalDiscriminator : MinimalDiscriminator
+
 
 residualForQuery : Minimal.MinimalDoctrinalQuery → MinimalDoctrinalResidual
 residualForQuery Minimal.identifyExistenceContinuity = existenceContinuityResidual

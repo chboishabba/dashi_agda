@@ -9,12 +9,12 @@ import DASHI.Cognition.PNF.SensibLawMaboBrennanDawsonIssueResidualLiveExact as M
 import DASHI.Cognition.PNF.SensibLawMaboRecognitionCoordinateFactorisationExact as Factor
 
 data MaboAdjudicativeResidual : Set where
-  continuityResidual
-  enforceabilityResidual
-  recognitionRequirementResidual
-  recognitionConductResidual
-  exactTheoryResidual
-  : MaboAdjudicativeResidual
+  continuityResidual : MaboAdjudicativeResidual
+  enforceabilityResidual : MaboAdjudicativeResidual
+  recognitionRequirementResidual : MaboAdjudicativeResidual
+  recognitionConductResidual : MaboAdjudicativeResidual
+  exactTheoryResidual : MaboAdjudicativeResidual
+
 
 coordinateResidual : Factor.RecognitionCoordinate → MaboAdjudicativeResidual
 coordinateResidual Factor.antecedentRightExistence = continuityResidual
@@ -27,12 +27,12 @@ coordinateResidual Factor.evidentialInferenceOfRecognition = recognitionConductR
 coordinateResidual Factor.authorityInterpretation = exactTheoryResidual
 
 data MaboProofObligation : Set where
-  establishContinuityRule
-  establishEnforceabilityStructure
-  establishRecognitionRequirement
-  establishRecognitionByConduct
-  establishAuthorityInterpretation
-  : MaboProofObligation
+  establishContinuityRule : MaboProofObligation
+  establishEnforceabilityStructure : MaboProofObligation
+  establishRecognitionRequirement : MaboProofObligation
+  establishRecognitionByConduct : MaboProofObligation
+  establishAuthorityInterpretation : MaboProofObligation
+
 
 residualObligation : MaboAdjudicativeResidual → MaboProofObligation
 residualObligation continuityResidual = establishContinuityRule
@@ -42,12 +42,12 @@ residualObligation recognitionConductResidual = establishRecognitionByConduct
 residualObligation exactTheoryResidual = establishAuthorityInterpretation
 
 data MaboGenericDiscriminator : Set where
-  continuityAuthorityDiscriminator
-  radicalTitleDiscriminator
-  recognitionDoctrineDiscriminator
-  conductInferenceDiscriminator
-  authorityInterpretationDiscriminator
-  : MaboGenericDiscriminator
+  continuityAuthorityDiscriminator : MaboGenericDiscriminator
+  radicalTitleDiscriminator : MaboGenericDiscriminator
+  recognitionDoctrineDiscriminator : MaboGenericDiscriminator
+  conductInferenceDiscriminator : MaboGenericDiscriminator
+  authorityInterpretationDiscriminator : MaboGenericDiscriminator
+
 
 obligationDiscriminator : MaboProofObligation → MaboGenericDiscriminator
 obligationDiscriminator establishContinuityRule = continuityAuthorityDiscriminator

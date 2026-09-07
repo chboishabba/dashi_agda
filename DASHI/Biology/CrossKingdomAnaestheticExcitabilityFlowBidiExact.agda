@@ -29,43 +29,43 @@ import DASHI.Physics.Units.SI as SI
 ------------------------------------------------------------------------
 
 data PerturbationTarget : Set where
-  ionChannelTarget
-  membraneTarget
-  protonPumpTarget
-  synapticTarget
-  networkIntegrationTarget
-  unresolvedTarget
-  : PerturbationTarget
+  ionChannelTarget : PerturbationTarget
+  membraneTarget : PerturbationTarget
+  protonPumpTarget : PerturbationTarget
+  synapticTarget : PerturbationTarget
+  networkIntegrationTarget : PerturbationTarget
+  unresolvedTarget : PerturbationTarget
+
 
 data ThresholdStatus : Set where
-  belowThreshold
-  thresholdReached
-  thresholdCrossingSuppressed
-  thresholdRecovered
-  : ThresholdStatus
+  belowThreshold : ThresholdStatus
+  thresholdReached : ThresholdStatus
+  thresholdCrossingSuppressed : ThresholdStatus
+  thresholdRecovered : ThresholdStatus
+
 
 data BehaviouralResponse : Set where
-  plantMovementAvailable
-  plantMovementSuppressed
-  plantMovementRecovered
-  animalMotorResponseAvailable
-  animalMotorResponseSuppressed
-  animalMotorResponseRecovered
-  : BehaviouralResponse
+  plantMovementAvailable : BehaviouralResponse
+  plantMovementSuppressed : BehaviouralResponse
+  plantMovementRecovered : BehaviouralResponse
+  animalMotorResponseAvailable : BehaviouralResponse
+  animalMotorResponseSuppressed : BehaviouralResponse
+  animalMotorResponseRecovered : BehaviouralResponse
+
 
 data AttributionStatus : Set where
-  identified
-  boundedCandidate
-  unresolved
-  : AttributionStatus
+  identified : AttributionStatus
+  boundedCandidate : AttributionStatus
+  unresolved : AttributionStatus
+
 
 data ObservationLayer : Set where
-  currentObservation
-  voltageObservation
-  thresholdObservation
-  propagationObservation
-  behaviourObservation
-  : ObservationLayer
+  currentObservation : ObservationLayer
+  voltageObservation : ObservationLayer
+  thresholdObservation : ObservationLayer
+  propagationObservation : ObservationLayer
+  behaviourObservation : ObservationLayer
+
 
 record ExcitabilityTrace : Set₁ where
   constructor excitabilityTrace

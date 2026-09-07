@@ -62,10 +62,10 @@ asCostedResidualMove candidate = Costed.residualInformationMove
 ------------------------------------------------------------------------
 
 data AristotleSearchProgressGrade : Set where
-  residualSearchProgress
-  actionProvedGrade
-  stateProvedGrade
-  : AristotleSearchProgressGrade
+  residualSearchProgress : AristotleSearchProgressGrade
+  actionProvedGrade : AristotleSearchProgressGrade
+  stateProvedGrade : AristotleSearchProgressGrade
+
 
 residualProgressNotActionProof :
   residualSearchProgress ≡ actionProvedGrade → ⊥

@@ -28,11 +28,11 @@ import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as
 ------------------------------------------------------------------------
 
 data ProducerNeed : Set where
-  unpaidProducer
-  consumerInsufficientProducer
-  producerClosed
-  routeRefuted
-  : ProducerNeed
+  unpaidProducer : ProducerNeed
+  consumerInsufficientProducer : ProducerNeed
+  producerClosed : ProducerNeed
+  routeRefuted : ProducerNeed
+
 
 currentNeed : Search.RHResearchSocket → ProducerNeed
 currentNeed Search.offOrdinateSocket = unpaidProducer
@@ -44,9 +44,9 @@ currentNeed Search.clusterMarginSocket = producerClosed
 ------------------------------------------------------------------------
 
 data RHProducerNode : Set where
-  offFiniteNearEvaluationNode
-  gammaPrecisionNode
-  : RHProducerNode
+  offFiniteNearEvaluationNode : RHProducerNode
+  gammaPrecisionNode : RHProducerNode
+
 
 nodeFeedsSocket : RHProducerNode → Search.RHResearchSocket
 nodeFeedsSocket offFiniteNearEvaluationNode = Search.offOrdinateSocket
@@ -57,24 +57,24 @@ nodeFeedsSocket gammaPrecisionNode = Search.gammaSocket
 ------------------------------------------------------------------------
 
 data RHBidiExperiment : Set where
-  evaluateFiniteNearSignedSum
-  improveGammaEvaluation
-  repeatClusterMarginProof
-  reproveGenericCutoffInstantiation
-  reproveInfiniteFarShell
-  sharpenBalanceBudgetRoute
-  auditNamedExternalDonor
-  : RHBidiExperiment
+  evaluateFiniteNearSignedSum : RHBidiExperiment
+  improveGammaEvaluation : RHBidiExperiment
+  repeatClusterMarginProof : RHBidiExperiment
+  reproveGenericCutoffInstantiation : RHBidiExperiment
+  reproveInfiniteFarShell : RHBidiExperiment
+  sharpenBalanceBudgetRoute : RHBidiExperiment
+  auditNamedExternalDonor : RHBidiExperiment
+
 
 data RHExperimentOutputKind : Set where
-  directFiniteProducer
-  consumerSufficientRepair
-  redundantClosedProducer
-  redundantGenericInstantiation
-  redundantOwnedFarTail
-  balanceDerived
-  donorAuditOnly
-  : RHExperimentOutputKind
+  directFiniteProducer : RHExperimentOutputKind
+  consumerSufficientRepair : RHExperimentOutputKind
+  redundantClosedProducer : RHExperimentOutputKind
+  redundantGenericInstantiation : RHExperimentOutputKind
+  redundantOwnedFarTail : RHExperimentOutputKind
+  balanceDerived : RHExperimentOutputKind
+  donorAuditOnly : RHExperimentOutputKind
+
 
 outputKind : RHBidiExperiment → RHExperimentOutputKind
 outputKind evaluateFiniteNearSignedSum = directFiniteProducer

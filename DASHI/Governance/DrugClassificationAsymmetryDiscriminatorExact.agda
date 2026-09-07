@@ -17,67 +17,67 @@ import DASHI.Governance.WarOnDrugsHistoricalGenealogyExact as Genealogy
 ------------------------------------------------------------------------
 
 data VeteranStatus : Set where
-  veteran
-  nonVeteran
-  : VeteranStatus
+  veteran : VeteranStatus
+  nonVeteran : VeteranStatus
+
 
 data RacializedPosition : Set where
-  racializedMinorityPosition
-  majorityPosition
-  unspecifiedRacializedPosition
-  : RacializedPosition
+  racializedMinorityPosition : RacializedPosition
+  majorityPosition : RacializedPosition
+  unspecifiedRacializedPosition : RacializedPosition
+
 
 data ClassHousingPosition : Set where
-  housedSecure
-  precariouslyHoused
-  unhoused
-  classHousingUnspecified
-  : ClassHousingPosition
+  housedSecure : ClassHousingPosition
+  precariouslyHoused : ClassHousingPosition
+  unhoused : ClassHousingPosition
+  classHousingUnspecified : ClassHousingPosition
+
 
 data MedicalDiagnosisStatus : Set where
-  qualifyingDiagnosis
-  noQualifyingDiagnosis
-  diagnosisUnspecified
-  : MedicalDiagnosisStatus
+  qualifyingDiagnosis : MedicalDiagnosisStatus
+  noQualifyingDiagnosis : MedicalDiagnosisStatus
+  diagnosisUnspecified : MedicalDiagnosisStatus
+
 
 data CommercialSponsorship : Set where
-  sponsoredClinicalProgram
-  commercialProductSponsor
-  noSponsor
-  : CommercialSponsorship
+  sponsoredClinicalProgram : CommercialSponsorship
+  commercialProductSponsor : CommercialSponsorship
+  noSponsor : CommercialSponsorship
+
 
 data IndigenousSovereigntyStatus : Set where
-  indigenousSovereignProtocol
-  externalNonIndigenousRoute
-  sovereigntyUnspecified
-  : IndigenousSovereigntyStatus
+  indigenousSovereignProtocol : IndigenousSovereigntyStatus
+  externalNonIndigenousRoute : IndigenousSovereigntyStatus
+  sovereigntyUnspecified : IndigenousSovereigntyStatus
+
 
 data DrugIdentityClass : Set where
-  psilocybinClass
-  mdmaClass
-  cannabisClass
-  opioidClass
-  stimulantClass
-  unspecifiedDrugClass
-  : DrugIdentityClass
+  psilocybinClass : DrugIdentityClass
+  mdmaClass : DrugIdentityClass
+  cannabisClass : DrugIdentityClass
+  opioidClass : DrugIdentityClass
+  stimulantClass : DrugIdentityClass
+  unspecifiedDrugClass : DrugIdentityClass
+
 
 data InstitutionalSetting : Set where
-  vaClinicalSetting
-  fdaRegulatedTrialSetting
-  ordinaryMedicalSetting
-  commercialMarketSetting
-  streetPolicingSetting
-  indigenousCeremonialSetting
-  : InstitutionalSetting
+  vaClinicalSetting : InstitutionalSetting
+  fdaRegulatedTrialSetting : InstitutionalSetting
+  ordinaryMedicalSetting : InstitutionalSetting
+  commercialMarketSetting : InstitutionalSetting
+  streetPolicingSetting : InstitutionalSetting
+  indigenousCeremonialSetting : InstitutionalSetting
+
 
 data GovernanceCone : Set where
-  careResearchCone
-  regulatedMedicalCone
-  commercialAccessCone
-  punitiveSecurityCone
-  sovereignCeremonialCone
-  mixedOrUnresolvedCone
-  : GovernanceCone
+  careResearchCone : GovernanceCone
+  regulatedMedicalCone : GovernanceCone
+  commercialAccessCone : GovernanceCone
+  punitiveSecurityCone : GovernanceCone
+  sovereignCeremonialCone : GovernanceCone
+  mixedOrUnresolvedCone : GovernanceCone
+
 
 record ClassificationWorld : Set where
   constructor classificationWorld
@@ -165,26 +165,26 @@ routeDiffersVeteranIndigenous ()
 ------------------------------------------------------------------------
 
 data ClassificationCoordinate : Set where
-  veteranCoordinate
-  racializedPositionCoordinate
-  classHousingCoordinate
-  diagnosisCoordinate
-  sponsorshipCoordinate
-  sovereigntyCoordinate
-  drugIdentityCoordinate
-  institutionalSettingCoordinate
-  : ClassificationCoordinate
+  veteranCoordinate : ClassificationCoordinate
+  racializedPositionCoordinate : ClassificationCoordinate
+  classHousingCoordinate : ClassificationCoordinate
+  diagnosisCoordinate : ClassificationCoordinate
+  sponsorshipCoordinate : ClassificationCoordinate
+  sovereigntyCoordinate : ClassificationCoordinate
+  drugIdentityCoordinate : ClassificationCoordinate
+  institutionalSettingCoordinate : ClassificationCoordinate
+
 
 data CoordinateValue : Set where
-  veteranValue nonVeteranValue
-  racializedMinorityValue majorityValue racializedUnknownValue
-  housedValue precariousValue unhousedValue housingUnknownValue
-  qualifyingDiagnosisValue noDiagnosisValue diagnosisUnknownValue
-  sponsoredClinicalValue commercialSponsorValue noSponsorValue
-  indigenousSovereignValue externalRouteValue sovereigntyUnknownValue
-  psilocybinValue mdmaValue cannabisValue opioidValue stimulantValue drugUnknownValue
-  vaSettingValue fdaSettingValue ordinaryMedicalValue commercialMarketValue streetPolicingValue indigenousCeremonialValue
-  : CoordinateValue
+  veteranValue nonVeteranValue : CoordinateValue
+  racializedMinorityValue majorityValue racializedUnknownValue : CoordinateValue
+  housedValue precariousValue unhousedValue housingUnknownValue : CoordinateValue
+  qualifyingDiagnosisValue noDiagnosisValue diagnosisUnknownValue : CoordinateValue
+  sponsoredClinicalValue commercialSponsorValue noSponsorValue : CoordinateValue
+  indigenousSovereignValue externalRouteValue sovereigntyUnknownValue : CoordinateValue
+  psilocybinValue mdmaValue cannabisValue opioidValue stimulantValue drugUnknownValue : CoordinateValue
+  vaSettingValue fdaSettingValue ordinaryMedicalValue commercialMarketValue streetPolicingValue indigenousCeremonialValue : CoordinateValue
+
 
 readCoordinate : ClassificationCoordinate → ClassificationWorld → CoordinateValue
 readCoordinate veteranCoordinate world with veteranStatus world
@@ -292,12 +292,12 @@ settingDifferenceDoesNotPromoteInstitutionalCause ()
 ------------------------------------------------------------------------
 
 data HistoricalCarrierPosition : Set where
-  hippieCountercultureCarrier
-  antiwarYouthCarrier
-  blackPoliticalCarrier
-  vietnamVeteranCarrier
-  contemporaryVeteranClinicalCarrier
-  : HistoricalCarrierPosition
+  hippieCountercultureCarrier : HistoricalCarrierPosition
+  antiwarYouthCarrier : HistoricalCarrierPosition
+  blackPoliticalCarrier : HistoricalCarrierPosition
+  vietnamVeteranCarrier : HistoricalCarrierPosition
+  contemporaryVeteranClinicalCarrier : HistoricalCarrierPosition
+
 
 historicalGenealogyBoundary : Genealogy.WarOnDrugsHistoricalGenealogyBoundary
 historicalGenealogyBoundary = Genealogy.canonicalWarOnDrugsHistoricalGenealogyBoundary

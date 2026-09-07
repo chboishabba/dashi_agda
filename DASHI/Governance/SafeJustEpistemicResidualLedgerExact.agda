@@ -15,18 +15,18 @@ data PhenomenonResidual : Set where
   socialShortfallResidual ecologicalOvershootResidual : PhenomenonResidual
 
 data EpistemicResidual : Set where
-  missingNationalBlueWaterSeries
-  heterogeneousTemporalCoverage
-  projectionIsNotObservation
-  predictionIntervalUncertainty
-  aggregateErasesIndicatorCoordinates
-  : EpistemicResidual
+  missingNationalBlueWaterSeries : EpistemicResidual
+  heterogeneousTemporalCoverage : EpistemicResidual
+  projectionIsNotObservation : EpistemicResidual
+  predictionIntervalUncertainty : EpistemicResidual
+  aggregateErasesIndicatorCoordinates : EpistemicResidual
+
 
 data EvidenceStage : Set where
-  fanningHistoricalStage
-  fanningProjectionStage
-  kallisSynthesisStage
-  : EvidenceStage
+  fanningHistoricalStage : EvidenceStage
+  fanningProjectionStage : EvidenceStage
+  kallisSynthesisStage : EvidenceStage
+
 
 data Carries : EvidenceStage → EpistemicResidual → Set where
   historicalBlueWater : Carries fanningHistoricalStage missingNationalBlueWaterSeries

@@ -16,12 +16,12 @@ import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact as B369
 ------------------------------------------------------------------------
 
 data CyberneticRole : Set where
-  observedRole
-  orientedRole
-  candidateDecisionRole
-  executedRole
-  feedbackRevisionRole
-  : CyberneticRole
+  observedRole : CyberneticRole
+  orientedRole : CyberneticRole
+  candidateDecisionRole : CyberneticRole
+  executedRole : CyberneticRole
+  feedbackRevisionRole : CyberneticRole
+
 
 roleSector : CyberneticRole → B369.CubeFrequencySector
 roleSector observedRole = Observer.roleSector Observer.observationRole

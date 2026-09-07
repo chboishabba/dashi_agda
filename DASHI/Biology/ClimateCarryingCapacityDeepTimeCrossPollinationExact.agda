@@ -23,24 +23,24 @@ import DASHI.Core.ActiveBidiDiscriminatorLoopExact as Bidi
 ------------------------------------------------------------------------
 
 data ClimateEcologyCoordinate : Set where
-  temperatureRegime
-  precipitationHydrology
-  atmosphericCO2
-  oceanPH
-  oceanSalinity
-  oxygenAvailability
-  nutrientAvailability
-  habitatArea
-  trophicSupport
-  disturbanceRegime
-  : ClimateEcologyCoordinate
+  temperatureRegime : ClimateEcologyCoordinate
+  precipitationHydrology : ClimateEcologyCoordinate
+  atmosphericCO2 : ClimateEcologyCoordinate
+  oceanPH : ClimateEcologyCoordinate
+  oceanSalinity : ClimateEcologyCoordinate
+  oxygenAvailability : ClimateEcologyCoordinate
+  nutrientAvailability : ClimateEcologyCoordinate
+  habitatArea : ClimateEcologyCoordinate
+  trophicSupport : ClimateEcologyCoordinate
+  disturbanceRegime : ClimateEcologyCoordinate
+
 
 data DeepTimeComparisonRegime : Set where
-  carboniferousWetlandCoalWorld
-  mesozoicFaunalWorld
-  preindustrialHolocene
-  industrialAnthropocene
-  : DeepTimeComparisonRegime
+  carboniferousWetlandCoalWorld : DeepTimeComparisonRegime
+  mesozoicFaunalWorld : DeepTimeComparisonRegime
+  preindustrialHolocene : DeepTimeComparisonRegime
+  industrialAnthropocene : DeepTimeComparisonRegime
+
 
 record CarryingCapacityContext : Set where
   constructor carrying-capacity-context

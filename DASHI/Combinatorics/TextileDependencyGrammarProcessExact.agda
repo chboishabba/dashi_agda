@@ -177,12 +177,12 @@ data CraftKind : Set where
   braidCraft plaitCraft weaveCraft knitCraft crochetCraft : CraftKind
 
 data DependencyGrammar : Set where
-  adjacentPermutationGrammar
-  flatAdjacentPermutationGrammar
-  bipartiteInterlacementGrammar
-  retainedLoopGrammar
-  activeRootedLoopGrammar
-  : DependencyGrammar
+  adjacentPermutationGrammar : DependencyGrammar
+  flatAdjacentPermutationGrammar : DependencyGrammar
+  bipartiteInterlacementGrammar : DependencyGrammar
+  retainedLoopGrammar : DependencyGrammar
+  activeRootedLoopGrammar : DependencyGrammar
+
 
 grammarOf : CraftKind → DependencyGrammar
 grammarOf braidCraft = adjacentPermutationGrammar

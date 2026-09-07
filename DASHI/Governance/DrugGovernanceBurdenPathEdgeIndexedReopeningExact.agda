@@ -14,20 +14,20 @@ import DASHI.Governance.DrugGovernanceHistoricalBurdenPathExact as Path
 ------------------------------------------------------------------------
 
 data BurdenEdgeInstance : Set where
-  punitiveExternalisationEdge
-  therapeuticReopeningEdge
-  commercialCaptureEdge
-  repairAcknowledgementEdge
-  repairDischargeEdge
-  : BurdenEdgeInstance
+  punitiveExternalisationEdge : BurdenEdgeInstance
+  therapeuticReopeningEdge : BurdenEdgeInstance
+  commercialCaptureEdge : BurdenEdgeInstance
+  repairAcknowledgementEdge : BurdenEdgeInstance
+  repairDischargeEdge : BurdenEdgeInstance
+
 
 data BurdenConsequence : Set where
-  materialBenefitConsequence
-  historicalRepairConsequence
-  classificationLegitimacyConsequence
-  clinicalEfficacyConsequence
-  chemistryIdentityConsequence
-  : BurdenConsequence
+  materialBenefitConsequence : BurdenConsequence
+  historicalRepairConsequence : BurdenConsequence
+  classificationLegitimacyConsequence : BurdenConsequence
+  clinicalEfficacyConsequence : BurdenConsequence
+  chemistryIdentityConsequence : BurdenConsequence
+
 
 data EdgeOccurs : BurdenEdgeInstance → BurdenConsequence → Set where
   punitiveOccursInHistoricalRepair :

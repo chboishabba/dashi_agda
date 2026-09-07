@@ -24,9 +24,9 @@ import DASHI.Governance.SexedHistoricalStatisticalExperimentHyperfabricExact as 
 ------------------------------------------------------------------------
 
 data HiddenHistory : Set where
-  institutionFirstHistory
-  reinterpretationFirstHistory
-  : HiddenHistory
+  institutionFirstHistory : HiddenHistory
+  reinterpretationFirstHistory : HiddenHistory
+
 
 coarsePresent : HiddenHistory → Order.CoarseHistoricalStratum
 coarsePresent _ = Order.formallyCorrectedContested
@@ -50,20 +50,20 @@ coarsePresentCannotRecoverHiddenHistory =
 ------------------------------------------------------------------------
 
 data MeasurementKind : Set where
-  currentStatusOnly
-  sequenceArchive
-  symbolicTimingInterview
-  institutionalTimingArchive
-  powerHistoryMeasure
-  networkMemoryMeasure
-  : MeasurementKind
+  currentStatusOnly : MeasurementKind
+  sequenceArchive : MeasurementKind
+  symbolicTimingInterview : MeasurementKind
+  institutionalTimingArchive : MeasurementKind
+  powerHistoryMeasure : MeasurementKind
+  networkMemoryMeasure : MeasurementKind
+
 
 data MeasurementResult : Set where
-  sameCurrentStatus
-  institutionPrecedesReinterpretation
-  reinterpretationPrecedesInstitution
-  routeStillUnresolved
-  : MeasurementResult
+  sameCurrentStatus : MeasurementResult
+  institutionPrecedesReinterpretation : MeasurementResult
+  reinterpretationPrecedesInstitution : MeasurementResult
+  routeStillUnresolved : MeasurementResult
+
 
 measure : MeasurementKind → HiddenHistory → MeasurementResult
 measure currentStatusOnly _ = sameCurrentStatus
@@ -116,16 +116,16 @@ sequenceMeasurementIsAdmissibleForPathSeparation = refl
 ------------------------------------------------------------------------
 
 data ResearchQuestion : Set where
-  recoverPathOrder
-  estimatePowerContext
-  estimateConstructionDirection
-  : ResearchQuestion
+  recoverPathOrder : ResearchQuestion
+  estimatePowerContext : ResearchQuestion
+  estimateConstructionDirection : ResearchQuestion
+
 
 data DiagnosticValue : Set where
-  nonDiagnostic
-  partiallyDiagnostic
-  separatingDiagnostic
-  : DiagnosticValue
+  nonDiagnostic : DiagnosticValue
+  partiallyDiagnostic : DiagnosticValue
+  separatingDiagnostic : DiagnosticValue
+
 
 diagnosticFor : ResearchQuestion → MeasurementKind → DiagnosticValue
 diagnosticFor recoverPathOrder currentStatusOnly = nonDiagnostic

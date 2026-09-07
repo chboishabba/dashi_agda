@@ -18,17 +18,17 @@ import DASHI.Cognition.PNF.SensibLawMaboTwoLegalOrderFibreExact as TwoOrder
 ------------------------------------------------------------------------
 
 data SituatedCrossOrderState : Set where
-  sameCrownRecognitionWeakCommunityAuthority
-  sameCrownRecognitionStrongCommunityAuthority
-  : SituatedCrossOrderState
+  sameCrownRecognitionWeakCommunityAuthority : SituatedCrossOrderState
+  sameCrownRecognitionStrongCommunityAuthority : SituatedCrossOrderState
+
 
 data CrownRecognitionObservation : Set where
   sameCrownRecognitionStatus : CrownRecognitionObservation
 
 data IndigenousAuthorityOutcome : Set where
-  communityAuthorityConstrained
-  communityAuthorityEffective
-  : IndigenousAuthorityOutcome
+  communityAuthorityConstrained : IndigenousAuthorityOutcome
+  communityAuthorityEffective : IndigenousAuthorityOutcome
+
 
 crownRecognitionObserver : SituatedCrossOrderState → CrownRecognitionObservation
 crownRecognitionObserver sameCrownRecognitionWeakCommunityAuthority = sameCrownRecognitionStatus

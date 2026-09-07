@@ -49,9 +49,9 @@ needsResolutionRefutesDeferral :
   NeedsResolution debt residual consumer →
   Deferred policy residual →
   ⊥
-needsResolutionRefutesDeferral need deferred =
+needsResolutionRefutesDeferral {policy = policy} need deferred =
   proj₂ need
-    (deferredRelevantDebtMustBeCovered _ _ deferred (proj₁ need))
+    (deferredRelevantDebtMustBeCovered policy _ _ deferred (proj₁ need))
 
 ConsumerIrrelevant :
   ∀ {Residual Consumer} →

@@ -93,15 +93,15 @@ open QuarterPeriodOffOrdinateAttachment public
 ------------------------------------------------------------------------
 
 data PoleQuotientLeaf : Set where
-  reproveClusterPositivity
-  deriveFreshClusterMargin
-  attachOwnedQuantitativeClusterMargin
-  findAnyGammaUpperBound
-  repairGammaToSharpWindow
-  proveQuarterPeriodOffOrdinateBound
-  rebuildFinalComplementCompiler
-  proveStrictCombinedBudget
-  : PoleQuotientLeaf
+  reproveClusterPositivity : PoleQuotientLeaf
+  deriveFreshClusterMargin : PoleQuotientLeaf
+  attachOwnedQuantitativeClusterMargin : PoleQuotientLeaf
+  findAnyGammaUpperBound : PoleQuotientLeaf
+  repairGammaToSharpWindow : PoleQuotientLeaf
+  proveQuarterPeriodOffOrdinateBound : PoleQuotientLeaf
+  rebuildFinalComplementCompiler : PoleQuotientLeaf
+  proveStrictCombinedBudget : PoleQuotientLeaf
+
 
 LeafRelevant : PoleQuotientLeaf -> Set
 LeafRelevant reproveClusterPositivity = ⊥

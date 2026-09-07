@@ -7,16 +7,16 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Governance.InstitutionalAnomalousAlteredStateProgramAtlasExact as Atlas
 
 data ResearchFamily : Set where
-  ganzfeldPsiResearch freeResponsePsiResearch meditationResearch flotationRESTResearch
+  ganzfeldPsiResearch freeResponsePsiResearch meditationResearch flotationRESTResearch : ResearchFamily
   hypnosisResearch psychedelicConsciousnessResearch : ResearchFamily
 
 data MethodFamily : Set where
-  controlledTargetGuessing freeResponseProtocol contemplativePractice
-  restrictedEnvironmentalStimulation hypnoticSuggestionProtocol
+  controlledTargetGuessing freeResponseProtocol contemplativePractice : MethodFamily
+  restrictedEnvironmentalStimulation hypnoticSuggestionProtocol : MethodFamily
   pharmacologicalAlteredStateProtocol : MethodFamily
 
 data ResearchStanding : Set where
-  contestedMetaAnalyticEvidence heterogeneousDevelopingEvidence
+  contestedMetaAnalyticEvidence heterogeneousDevelopingEvidence : ResearchStanding
   phenomenologyEstablishedMechanismIncomplete therapeuticSignalWithLimitations : ResearchStanding
 
 record ResearchEvidenceEntry : Set where

@@ -20,10 +20,10 @@ import DASHI.Foundations.Base369Ternary27StratumStabiliserFibreAdmissibilityExac
 ------------------------------------------------------------------------
 
 data OrbitLanguage : Set where
-  identityOnlyOrbit
-  swapGeneratedOrbit
-  swapRotateGeneratedOrbit
-  : OrbitLanguage
+  identityOnlyOrbit : OrbitLanguage
+  swapGeneratedOrbit : OrbitLanguage
+  swapRotateGeneratedOrbit : OrbitLanguage
+
 
 orbitLanguageAtBase : Geometry.Ternary27Point -> OrbitLanguage
 orbitLanguageAtBase base with Sector.sectorClassAtBase base

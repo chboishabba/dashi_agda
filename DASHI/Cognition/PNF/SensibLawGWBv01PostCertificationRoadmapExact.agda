@@ -17,10 +17,10 @@ import DASHI.Cognition.PNF.SensibLawGWBv01RuntimeCertificationExact as GWB
 ------------------------------------------------------------------------
 
 data PostGWBStage : Set where
-  boundedParityClosed
-  productionCutoverDecision
-  semanticDeltaExpansion
-  multiCorpusRebenchmark
+  boundedParityClosed : PostGWBStage
+  productionCutoverDecision : PostGWBStage
+  semanticDeltaExpansion : PostGWBStage
+  multiCorpusRebenchmark : PostGWBStage
   cryptographicPublication : PostGWBStage
 
 record PostGWBFrontier : Set where
@@ -74,12 +74,12 @@ oldRoadmapSnapshotWasAtBoundedParity = refl
 ------------------------------------------------------------------------
 
 data NextSemanticLane : Set where
-  richerLegalRoleDelta
-  negationScopeDelta
-  modalityDelta
-  conditionalDelta
-  temporalDelta
-  referenceDelta
+  richerLegalRoleDelta : NextSemanticLane
+  negationScopeDelta : NextSemanticLane
+  modalityDelta : NextSemanticLane
+  conditionalDelta : NextSemanticLane
+  temporalDelta : NextSemanticLane
+  referenceDelta : NextSemanticLane
   crossSentenceDelta : NextSemanticLane
 
 record SemanticExpansionBoundary : Set where

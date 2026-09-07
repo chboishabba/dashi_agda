@@ -24,28 +24,28 @@ import DASHI.Core.ActiveBidiDiscriminatorLoopExact as Bidi
 ------------------------------------------------------------------------
 
 data ParameterCoordinate : Set where
-  electromagneticStrength
-  gravitationalStrength
-  strongInteractionStrength
-  weakInteractionStrength
-  lightQuarkMass
-  electronMass
-  vacuumEnergyDensity
-  baryonPhotonRatio
-  primordialFluctuationAmplitude
-  spatialDimension
-  : ParameterCoordinate
+  electromagneticStrength : ParameterCoordinate
+  gravitationalStrength : ParameterCoordinate
+  strongInteractionStrength : ParameterCoordinate
+  weakInteractionStrength : ParameterCoordinate
+  lightQuarkMass : ParameterCoordinate
+  electronMass : ParameterCoordinate
+  vacuumEnergyDensity : ParameterCoordinate
+  baryonPhotonRatio : ParameterCoordinate
+  primordialFluctuationAmplitude : ParameterCoordinate
+  spatialDimension : ParameterCoordinate
+
 
 data ViabilityLayer : Set where
-  mathematicalConsistency
-  longLivedStructure
-  sustainedStars
-  nucleosynthesis
-  carbonOxygenAvailability
-  stableChemistry
-  habitableEnvironment
-  prebioticOpportunity
-  : ViabilityLayer
+  mathematicalConsistency : ViabilityLayer
+  longLivedStructure : ViabilityLayer
+  sustainedStars : ViabilityLayer
+  nucleosynthesis : ViabilityLayer
+  carbonOxygenAvailability : ViabilityLayer
+  stableChemistry : ViabilityLayer
+  habitableEnvironment : ViabilityLayer
+  prebioticOpportunity : ViabilityLayer
+
 
 data ParameterRegionStatus : Set where
   viable unresolved nonviable : ParameterRegionStatus

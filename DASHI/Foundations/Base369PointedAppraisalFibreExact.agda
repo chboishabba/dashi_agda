@@ -77,7 +77,7 @@ fineRelationalSurface90Exact = refl
 ------------------------------------------------------------------------
 
 data InteractionPositionKind : Set where
-  noncentralPositionKind
+  noncentralPositionKind : InteractionPositionKind
   centralPositionKind : InteractionPositionKind
 
 positionKind : PointedAppraisal729 → InteractionPositionKind

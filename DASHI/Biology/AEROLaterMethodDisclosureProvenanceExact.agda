@@ -19,9 +19,9 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data TemporalSourceRole : Set where
-  contemporaneousCitation
-  laterMethodDisclosure
-  laterCorrection
+  contemporaneousCitation : TemporalSourceRole
+  laterMethodDisclosure : TemporalSourceRole
+  laterCorrection : TemporalSourceRole
   laterReplication : TemporalSourceRole
 
 record TemporalMethodReceipt : Set where
@@ -51,9 +51,9 @@ contextReview2024 =
 ------------------------------------------------------------------------
 
 data ReviewDepth : Set where
-  articleSummary
-  metaAnalyticUmbrella
-  individualStudyReview
+  articleSummary : ReviewDepth
+  metaAnalyticUmbrella : ReviewDepth
+  individualStudyReview : ReviewDepth
   rawDataReanalysis : ReviewDepth
 
 contextReviewDepth : ReviewDepth
@@ -72,13 +72,13 @@ metaUmbrella≢rawDataReanalysis ()
 ------------------------------------------------------------------------
 
 data MethodLimitation : Set where
-  nonExhaustiveSearch
-  noIndividualStudyReview
-  qualitativeEvidenceExcluded
-  contextVariablesSometimesSparse
-  interventionSpecificityVariable
-  outcomeMeasuresVariable
-  researcherHarmonisationRequired
+  nonExhaustiveSearch : MethodLimitation
+  noIndividualStudyReview : MethodLimitation
+  qualitativeEvidenceExcluded : MethodLimitation
+  contextVariablesSometimesSparse : MethodLimitation
+  interventionSpecificityVariable : MethodLimitation
+  outcomeMeasuresVariable : MethodLimitation
+  researcherHarmonisationRequired : MethodLimitation
   limitedAustralianContextEvidence : MethodLimitation
 
 contextReviewLimitations : List MethodLimitation

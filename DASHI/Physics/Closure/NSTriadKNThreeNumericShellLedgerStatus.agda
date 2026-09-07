@@ -22,12 +22,12 @@ data LedgerLeg : Set where
   outputLeg firstAdjointLeg secondAdjointLeg : LedgerLeg
 
 data LedgerClass : Set where
-  lowHigh highLow highHighToLow near
+  lowHigh highLow highHighToLow near : LedgerClass
   farLow farHigh transition residual : LedgerClass
 
 data LedgerRowStatus : Set where
-  numericExponentClosed
-  finiteOverlapOnly
+  numericExponentClosed : LedgerRowStatus
+  finiteOverlapOnly : LedgerRowStatus
   analyticOpen : LedgerRowStatus
 
 rowStatus : LedgerLeg → LedgerClass → LedgerRowStatus

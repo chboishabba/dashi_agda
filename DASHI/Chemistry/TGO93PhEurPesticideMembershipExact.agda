@@ -24,18 +24,18 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data PhEurEdition : Set where
-  phEur11_0Revision01_2022 : PhEurEdition
+  phEur11-0Revision01-2022 : PhEurEdition
 
 data NamedPesticide : Set where
-  acephate
-  alachlor
-  aldrinDieldrinSum
-  chlorpyriphosEthyl
-  chlorpyriphosMethyl
-  ddtSum
-  deltamethrin
-  diazinon
-  : NamedPesticide
+  acephate : NamedPesticide
+  alachlor : NamedPesticide
+  aldrinDieldrinSum : NamedPesticide
+  chlorpyriphosEthyl : NamedPesticide
+  chlorpyriphosMethyl : NamedPesticide
+  ddtSum : NamedPesticide
+  deltamethrin : NamedPesticide
+  diazinon : NamedPesticide
+
 
 -- Exact integer carrier: micrograms per kilogram.  This avoids importing
 -- floating-point arithmetic for table values stated in mg/kg.
@@ -65,56 +65,56 @@ open PhEurTableMembership public
 
 membership : (pesticide : NamedPesticide) → PhEurTableMembership pesticide
 membership acephate = phEurTableMembership
-  phEur11_0Revision01_2022
+  phEur11-0Revision01-2022
   "European Pharmacopoeia 11.0; 01/2022:20813 Pesticide residues"
   "Table 2.8.13.-1"
   "Acephate"
   100 refl
   "Ph Eur 11.0, chapter 2.8.13, Table 2.8.13.-1: Acephate 0.1 mg/kg"
 membership alachlor = phEurTableMembership
-  phEur11_0Revision01_2022
+  phEur11-0Revision01-2022
   "European Pharmacopoeia 11.0; 01/2022:20813 Pesticide residues"
   "Table 2.8.13.-1"
   "Alachlor"
   50 refl
   "Ph Eur 11.0, chapter 2.8.13, Table 2.8.13.-1: Alachlor 0.05 mg/kg"
 membership aldrinDieldrinSum = phEurTableMembership
-  phEur11_0Revision01_2022
+  phEur11-0Revision01-2022
   "European Pharmacopoeia 11.0; 01/2022:20813 Pesticide residues"
   "Table 2.8.13.-1"
   "Aldrin and dieldrin (sum of)"
   50 refl
   "Ph Eur 11.0, chapter 2.8.13, Table 2.8.13.-1: Aldrin and dieldrin sum 0.05 mg/kg"
 membership chlorpyriphosEthyl = phEurTableMembership
-  phEur11_0Revision01_2022
+  phEur11-0Revision01-2022
   "European Pharmacopoeia 11.0; 01/2022:20813 Pesticide residues"
   "Table 2.8.13.-1"
   "Chlorpyriphos-ethyl"
   200 refl
   "Ph Eur 11.0, chapter 2.8.13, Table 2.8.13.-1: Chlorpyriphos-ethyl 0.2 mg/kg"
 membership chlorpyriphosMethyl = phEurTableMembership
-  phEur11_0Revision01_2022
+  phEur11-0Revision01-2022
   "European Pharmacopoeia 11.0; 01/2022:20813 Pesticide residues"
   "Table 2.8.13.-1"
   "Chlorpyriphos-methyl"
   100 refl
   "Ph Eur 11.0, chapter 2.8.13, Table 2.8.13.-1: Chlorpyriphos-methyl 0.1 mg/kg"
 membership ddtSum = phEurTableMembership
-  phEur11_0Revision01_2022
+  phEur11-0Revision01-2022
   "European Pharmacopoeia 11.0; 01/2022:20813 Pesticide residues"
   "Table 2.8.13.-1"
   "DDT (sum of specified DDE/DDT/TDE isomers)"
   1000 refl
   "Ph Eur 11.0, chapter 2.8.13, Table 2.8.13.-1: DDT sum 1 mg/kg"
 membership deltamethrin = phEurTableMembership
-  phEur11_0Revision01_2022
+  phEur11-0Revision01-2022
   "European Pharmacopoeia 11.0; 01/2022:20813 Pesticide residues"
   "Table 2.8.13.-1"
   "Deltamethrin"
   500 refl
   "Ph Eur 11.0, chapter 2.8.13, Table 2.8.13.-1: Deltamethrin 0.5 mg/kg"
 membership diazinon = phEurTableMembership
-  phEur11_0Revision01_2022
+  phEur11-0Revision01-2022
   "European Pharmacopoeia 11.0; 01/2022:20813 Pesticide residues"
   "Table 2.8.13.-1"
   "Diazinon"
@@ -183,10 +183,10 @@ chlorpyriphosEthylIsPresentInAustralianTGO93PhEurPanel =
 ------------------------------------------------------------------------
 
 data RegulatoryLimitRoute : Set where
-  explicitPhEurTable
-  eu396CrossReference
-  calculatedADILimit
-  : RegulatoryLimitRoute
+  explicitPhEurTable : RegulatoryLimitRoute
+  eu396CrossReference : RegulatoryLimitRoute
+  calculatedADILimit : RegulatoryLimitRoute
+
 
 record PesticideMembershipBoundary : Set where
   constructor pesticideMembershipBoundary

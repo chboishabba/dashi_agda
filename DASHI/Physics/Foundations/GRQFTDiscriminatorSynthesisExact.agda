@@ -78,7 +78,12 @@ selectedExtensionRefutesEquivalence :
       (right search))
 selectedExtensionRefutesEquivalence search =
   Physical.includedDiscriminatorRefutesEquivalence
-    selectedIsInExtendedLanguage
+    {language = ExtendedLanguage (currentLanguage search) (selected search)}
+    {predicts = predicts search}
+    {experiment = selected search}
+    {left = left search}
+    {right = right search}
+    (selectedIsInExtendedLanguage {current = currentLanguage search})
     (selectedDiscriminates search)
 
 ------------------------------------------------------------------------

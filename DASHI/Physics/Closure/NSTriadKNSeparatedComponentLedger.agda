@@ -33,15 +33,15 @@ open Geometry using
    comparableTag; transitionTag; residualTag)
 
 data DerivativeOwner : Set where
-  derivativeLeft derivativeRight derivativeOutput
+  derivativeLeft derivativeRight derivativeOutput : DerivativeOwner
   derivativeOnLow derivativeOnHigh mixedDerivativeOwner : DerivativeOwner
 
 data AnalyticArchetype : Set where
-  lowBernsteinDerivativeHigh
-  lowBernsteinDerivativeLow
-  highHighFirstAdjointConvolution
-  outputRelocationGain
-  secondAdjointFrozenLowDerivative
+  lowBernsteinDerivativeHigh : AnalyticArchetype
+  lowBernsteinDerivativeLow : AnalyticArchetype
+  highHighFirstAdjointConvolution : AnalyticArchetype
+  outputRelocationGain : AnalyticArchetype
+  secondAdjointFrozenLowDerivative : AnalyticArchetype
   finiteOverlapMajorant : AnalyticArchetype
 
 record ShellComponent : Set where

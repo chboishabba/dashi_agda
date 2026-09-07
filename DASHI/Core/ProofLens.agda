@@ -6,15 +6,15 @@ open import DASHI.Core.FormalRole
 -- Reusable ways in which a domain-specific role may be supported,
 -- constrained, decomposed, or compared.
 data ProofLens : Set where
-  waveLens
-  btBraidLens
-  spectralLens
-  graphLens
-  categoryLens
-  hamiltonianLens
-  statisticalLens
-  pnfLens
-  historicalLens
+  waveLens : ProofLens
+  btBraidLens : ProofLens
+  spectralLens : ProofLens
+  graphLens : ProofLens
+  categoryLens : ProofLens
+  hamiltonianLens : ProofLens
+  statisticalLens : ProofLens
+  pnfLens : ProofLens
+  historicalLens : ProofLens
   otherLens : ProofLens
 
 -- Lens semantics remain domain- and role-indexed.  A spectral witness for an

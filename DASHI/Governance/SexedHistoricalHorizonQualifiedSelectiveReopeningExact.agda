@@ -14,13 +14,13 @@ import DASHI.Governance.SexedHistoricalHorizonFiltrationFirstDivergenceExact as 
 ------------------------------------------------------------------------
 
 data ForecastCertificate : Set where
-  immediateActionCertificate
-  shortForecastCertificate
-  mediumForecastCertificate
-  longForecastCertificate
-  longPlanningCertificate
-  longCollectiveFutureCertificate
-  : ForecastCertificate
+  immediateActionCertificate : ForecastCertificate
+  shortForecastCertificate : ForecastCertificate
+  mediumForecastCertificate : ForecastCertificate
+  longForecastCertificate : ForecastCertificate
+  longPlanningCertificate : ForecastCertificate
+  longCollectiveFutureCertificate : ForecastCertificate
+
 
 certificateHorizon : ForecastCertificate → Horizon.Horizon
 certificateHorizon immediateActionCertificate = Horizon.shortHorizon

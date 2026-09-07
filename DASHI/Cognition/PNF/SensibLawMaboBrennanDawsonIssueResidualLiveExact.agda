@@ -150,10 +150,10 @@ brennanDawsonSameIssue = reviewedSameIssueAlignment
 ------------------------------------------------------------------------
 
 data MaboContrastKind : Set where
-  recognitionBasisContrast
-  legalCharacterisationContrast
-  evidentialInferenceContrast
-  : MaboContrastKind
+  recognitionBasisContrast : MaboContrastKind
+  legalCharacterisationContrast : MaboContrastKind
+  evidentialInferenceContrast : MaboContrastKind
+
 
 record MaboControversyResidual : Set where
   constructor maboControversyResidual
@@ -181,18 +181,18 @@ brennanDawsonResidual = maboControversyResidual
 ------------------------------------------------------------------------
 
 data MaboResidualObligation : Set where
-  inspectRecognitionBasis
-  inspectAuthorityChain
-  inspectTemporalSovereigntyRelation
-  inspectFullReasonsBeforeAdjudication
-  : MaboResidualObligation
+  inspectRecognitionBasis : MaboResidualObligation
+  inspectAuthorityChain : MaboResidualObligation
+  inspectTemporalSovereigntyRelation : MaboResidualObligation
+  inspectFullReasonsBeforeAdjudication : MaboResidualObligation
+
 
 data MaboDiscriminator : Set where
-  recognitionRuleDiscriminator
-  authorityChainDiscriminator
-  chronologyDiscriminator
-  fullReasonsDiscriminator
-  : MaboDiscriminator
+  recognitionRuleDiscriminator : MaboDiscriminator
+  authorityChainDiscriminator : MaboDiscriminator
+  chronologyDiscriminator : MaboDiscriminator
+  fullReasonsDiscriminator : MaboDiscriminator
+
 
 data MaboWorkKind : Set where
   thinkWork lookWork testWork : MaboWorkKind

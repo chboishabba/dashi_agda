@@ -131,9 +131,9 @@ globalAsNineTimes21870 = refl
 ------------------------------------------------------------------------
 
 data ResolutionKind : Set where
-  localSituatedBoundary
-  globalPointedFineBulk
-  : ResolutionKind
+  localSituatedBoundary : ResolutionKind
+  globalPointedFineBulk : ResolutionKind
+
 
 resolveJ : ResolutionKind → Nat
 resolveJ localSituatedBoundary = 6 * sharedJ

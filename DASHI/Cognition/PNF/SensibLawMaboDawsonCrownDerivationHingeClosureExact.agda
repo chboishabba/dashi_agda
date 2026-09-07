@@ -23,17 +23,17 @@ import DASHI.Cognition.PNF.SensibLawMaboTwoLegalOrderFibreExact as TwoOrder
 ------------------------------------------------------------------------
 
 data PrimaryReproductionQuality : Set where
-  reviewedPrimaryJudgmentReproduction
-  officialCourtTranscriptionNotYetWelded
-  : PrimaryReproductionQuality
+  reviewedPrimaryJudgmentReproduction : PrimaryReproductionQuality
+  officialCourtTranscriptionNotYetWelded : PrimaryReproductionQuality
+
 
 data DawsonDerivationPremiseKind : Set where
-  annexationVestsUltimateTitleInCrown
-  radicalTitleMakesCrownParamountMunicipalSource
-  plaintiffsRightsMustBeHeldUnderCrown
-  preExistingInterestsRetainedOnlyIfCrownRecognises
-  recognitionMediatesContinuingMunicipalEffect
-  : DawsonDerivationPremiseKind
+  annexationVestsUltimateTitleInCrown : DawsonDerivationPremiseKind
+  radicalTitleMakesCrownParamountMunicipalSource : DawsonDerivationPremiseKind
+  plaintiffsRightsMustBeHeldUnderCrown : DawsonDerivationPremiseKind
+  preExistingInterestsRetainedOnlyIfCrownRecognises : DawsonDerivationPremiseKind
+  recognitionMediatesContinuingMunicipalEffect : DawsonDerivationPremiseKind
+
 
 record DawsonPrimaryDerivationPremise : Set where
   constructor dawsonPrimaryDerivationPremise
@@ -88,17 +88,17 @@ recognitionMediationPremise = dawsonPrimaryDerivationPremise
 ------------------------------------------------------------------------
 
 data DawsonHingeConsumer : Set where
-  reconstructDawsonInternalLogic
-  determineMajorityNativeTitleRule
-  evaluateColonialLegitimacy
-  compareIndependentIndigenousLegalOrder
-  : DawsonHingeConsumer
+  reconstructDawsonInternalLogic : DawsonHingeConsumer
+  determineMajorityNativeTitleRule : DawsonHingeConsumer
+  evaluateColonialLegitimacy : DawsonHingeConsumer
+  compareIndependentIndigenousLegalOrder : DawsonHingeConsumer
+
 
 data ConsumerClosure : Set where
-  consumerClosed
-  consumerOpen
-  consumerCriticalConflictLocated
-  : ConsumerClosure
+  consumerClosed : ConsumerClosure
+  consumerOpen : ConsumerClosure
+  consumerCriticalConflictLocated : ConsumerClosure
+
 
 consumerClosure : DawsonHingeConsumer → ConsumerClosure
 consumerClosure reconstructDawsonInternalLogic = consumerClosed
@@ -119,12 +119,12 @@ majorityRuleStillNotClosedByDawson = refl
 ------------------------------------------------------------------------
 
 data DawsonCrownDerivationNode : Set where
-  crownSovereigntyNode
-  crownUltimateRadicalTitleNode
-  crownDerivativeRightsNode
-  crownRecognitionChoiceNode
-  continuingMunicipalEffectNode
-  : DawsonCrownDerivationNode
+  crownSovereigntyNode : DawsonCrownDerivationNode
+  crownUltimateRadicalTitleNode : DawsonCrownDerivationNode
+  crownDerivativeRightsNode : DawsonCrownDerivationNode
+  crownRecognitionChoiceNode : DawsonCrownDerivationNode
+  continuingMunicipalEffectNode : DawsonCrownDerivationNode
+
 
 nextNode : DawsonCrownDerivationNode → DawsonCrownDerivationNode
 nextNode crownSovereigntyNode = crownUltimateRadicalTitleNode
@@ -146,9 +146,9 @@ derivativeRightsLeadToRecognitionChoice = refl
 ------------------------------------------------------------------------
 
 data DerivationModelConflictKind : Set where
-  crownDerivativeSourceModel
-  antecedentIndependentIndigenousSourceModel
-  : DerivationModelConflictKind
+  crownDerivativeSourceModel : DerivationModelConflictKind
+  antecedentIndependentIndigenousSourceModel : DerivationModelConflictKind
+
 
 record TwoOrderDerivationConflict : Set where
   constructor twoOrderDerivationConflict

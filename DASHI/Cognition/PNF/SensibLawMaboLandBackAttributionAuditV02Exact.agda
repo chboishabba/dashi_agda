@@ -20,10 +20,10 @@ import DASHI.Cognition.PNF.SensibLawIndigenousLandBackSourceAuthorityExact as So
 ------------------------------------------------------------------------
 
 data AuditTemporalStatus : Set where
-  historicalAuditStatePreserved
-  laterCorrectionApplied
-  laterSourceClosureApplied
-  : AuditTemporalStatus
+  historicalAuditStatePreserved : AuditTemporalStatus
+  laterCorrectionApplied : AuditTemporalStatus
+  laterSourceClosureApplied : AuditTemporalStatus
+
 
 record LaterAuditReceipt : Set where
   constructor laterAuditReceipt

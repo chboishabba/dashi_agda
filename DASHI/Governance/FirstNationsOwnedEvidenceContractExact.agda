@@ -23,20 +23,20 @@ import DASHI.Governance.IndigenousAuthorityEnvelopeExact as Envelope
 ------------------------------------------------------------------------
 
 data EvidenceProvenance : Set where
-  firstNationsOwned
-  firstNationsCoAuthored
-  firstNationsInstitutional
-  externalHistoricalReconstruction
-  externalSecondaryInterpretation
-  : EvidenceProvenance
+  firstNationsOwned : EvidenceProvenance
+  firstNationsCoAuthored : EvidenceProvenance
+  firstNationsInstitutional : EvidenceProvenance
+  externalHistoricalReconstruction : EvidenceProvenance
+  externalSecondaryInterpretation : EvidenceProvenance
+
 
 data EvidenceUse : Set where
-  bibliographicBackground
-  comparativeContext
-  situatedKnowledgeAuthority
-  landManagementAuthority
-  normativeAuthority
-  : EvidenceUse
+  bibliographicBackground : EvidenceUse
+  comparativeContext : EvidenceUse
+  situatedKnowledgeAuthority : EvidenceUse
+  landManagementAuthority : EvidenceUse
+  normativeAuthority : EvidenceUse
+
 
 -- Only low-authority background/comparison routes are inhabited here.
 -- Higher-authority uses must use the richer envelope/protocol/permission

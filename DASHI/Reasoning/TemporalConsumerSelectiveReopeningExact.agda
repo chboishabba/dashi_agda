@@ -14,12 +14,12 @@ import DASHI.Reasoning.TemporalConsumerIndexedSemanticFibreExact as Temporal
 ------------------------------------------------------------------------
 
 data TemporalConsumerCertificate : Set where
-  consumerDefinitionCertificate
-  consumerClosureCertificate
-  implicationConeForConsumerCertificate
-  downstreamUseCertificate
-  semanticProducerCertificate
-  : TemporalConsumerCertificate
+  consumerDefinitionCertificate : TemporalConsumerCertificate
+  consumerClosureCertificate : TemporalConsumerCertificate
+  implicationConeForConsumerCertificate : TemporalConsumerCertificate
+  downstreamUseCertificate : TemporalConsumerCertificate
+  semanticProducerCertificate : TemporalConsumerCertificate
+
 
 data ConsumerDepends :
     TemporalConsumerCertificate → TemporalConsumerCertificate → Set where

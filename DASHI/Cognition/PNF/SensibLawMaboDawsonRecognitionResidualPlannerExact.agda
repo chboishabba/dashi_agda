@@ -21,22 +21,22 @@ import DASHI.Cognition.PNF.SensibLawIssueIndexedAdjudicativeHyperfabricExact as 
 ------------------------------------------------------------------------
 
 data DawsonRecognitionProbe : Set where
-  inspectDawsonCrownDerivationPremise
-  inspectDawsonRecognitionAcceptanceRule
-  inspectDawsonNoPresumptionRule
-  inspectDawsonFactSpecificRecognitionRule
-  inspectDawsonAcquiescenceEvidence
-  compareDawsonWithVerifiedHallRecognitionIndependence
-  compareDawsonWithAmoduContinuity
-  inspectCalderJudsonOnlyIfStillNeeded
-  : DawsonRecognitionProbe
+  inspectDawsonCrownDerivationPremise : DawsonRecognitionProbe
+  inspectDawsonRecognitionAcceptanceRule : DawsonRecognitionProbe
+  inspectDawsonNoPresumptionRule : DawsonRecognitionProbe
+  inspectDawsonFactSpecificRecognitionRule : DawsonRecognitionProbe
+  inspectDawsonAcquiescenceEvidence : DawsonRecognitionProbe
+  compareDawsonWithVerifiedHallRecognitionIndependence : DawsonRecognitionProbe
+  compareDawsonWithAmoduContinuity : DawsonRecognitionProbe
+  inspectCalderJudsonOnlyIfStillNeeded : DawsonRecognitionProbe
+
 
 data ProbeRole : Set where
-  conditionRuleProbe
-  evidenceProbe
-  crossAuthorityComparisonProbe
-  contingentAuthorityInterpretationProbe
-  : ProbeRole
+  conditionRuleProbe : ProbeRole
+  evidenceProbe : ProbeRole
+  crossAuthorityComparisonProbe : ProbeRole
+  contingentAuthorityInterpretationProbe : ProbeRole
+
 
 probeRole : DawsonRecognitionProbe → ProbeRole
 probeRole inspectDawsonCrownDerivationPremise = conditionRuleProbe

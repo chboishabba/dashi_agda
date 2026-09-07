@@ -154,7 +154,7 @@ canonicalReachableButNotLawfullyClosed =
 ------------------------------------------------------------------------
 
 data RemedyState : Set where
-  exclusion suppression civilRemedy disciplinaryRemedy criminalConsequence
+  exclusion suppression civilRemedy disciplinaryRemedy criminalConsequence : RemedyState
   noAvailableRemedy remedyUnresolved : RemedyState
 
 record RemedyConsumer : Set where

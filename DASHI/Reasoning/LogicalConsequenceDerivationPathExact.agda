@@ -17,14 +17,14 @@ import DASHI.Reasoning.PredicateNormalFormEvidenceAuditExact as EvidencePNF
 ------------------------------------------------------------------------
 
 data DerivationEdgeKind : Set where
-  parserObservationEdge
-  semanticResolutionEdge
-  logicalEntailmentEdge
-  empiricalPromotionEdge
-  residualRefinementEdge
-  designDischargeEdge
-  sourceWorldResolutionEdge
-  : DerivationEdgeKind
+  parserObservationEdge : DerivationEdgeKind
+  semanticResolutionEdge : DerivationEdgeKind
+  logicalEntailmentEdge : DerivationEdgeKind
+  empiricalPromotionEdge : DerivationEdgeKind
+  residualRefinementEdge : DerivationEdgeKind
+  designDischargeEdge : DerivationEdgeKind
+  sourceWorldResolutionEdge : DerivationEdgeKind
+
 
 logicalNotEmpirical : logicalEntailmentEdge ≡ empiricalPromotionEdge → ⊥
 logicalNotEmpirical ()
@@ -33,12 +33,12 @@ semanticNotDesign : semanticResolutionEdge ≡ designDischargeEdge → ⊥
 semanticNotDesign ()
 
 data AuthorityGrade : Set where
-  parserCandidateAuthority
-  reviewedSemanticAuthority
-  logicalTheoremAuthority
-  empiricalQualifiedAuthority
-  empiricalDischargedAuthority
-  : AuthorityGrade
+  parserCandidateAuthority : AuthorityGrade
+  reviewedSemanticAuthority : AuthorityGrade
+  logicalTheoremAuthority : AuthorityGrade
+  empiricalQualifiedAuthority : AuthorityGrade
+  empiricalDischargedAuthority : AuthorityGrade
+
 
 record DerivationNode : Set where
   constructor derivationNode

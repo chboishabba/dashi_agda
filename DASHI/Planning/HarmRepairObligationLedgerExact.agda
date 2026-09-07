@@ -8,7 +8,7 @@ import DASHI.Planning.NonSubstitutionalReparationExact as Repair
 ------------------------------------------------------------------------
 
 data HarmAxis : Set where
-  dispossessionHarm exclusionFromDecisionHarm institutionalAbuseHarm
+  dispossessionHarm exclusionFromDecisionHarm institutionalAbuseHarm : HarmAxis
   irreversibleDestructionHarm : HarmAxis
 
 Obliges : HarmAxis → Repair.RepairAxis → Set

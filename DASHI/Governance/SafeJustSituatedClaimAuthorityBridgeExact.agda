@@ -52,11 +52,11 @@ data SafeJustAuthorityContext : Set where
   repositorySourceRegistryContext : SafeJustAuthorityContext
 
 data SafeJustSituatedConsumer : Set where
-  forecastResearchConsumer
-  descriptiveResearchConsumer
-  causalMechanismConsumer
-  policyInterventionConsumer
-  : SafeJustSituatedConsumer
+  forecastResearchConsumer : SafeJustSituatedConsumer
+  descriptiveResearchConsumer : SafeJustSituatedConsumer
+  causalMechanismConsumer : SafeJustSituatedConsumer
+  policyInterventionConsumer : SafeJustSituatedConsumer
+
 
 data SafeJustUse : Set where
   researchSynthesisUse causalPromotionUse policyInterventionUse : SafeJustUse

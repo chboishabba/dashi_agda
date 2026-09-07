@@ -53,17 +53,17 @@ corkySoftInventorySource =
 ------------------------------------------------------------------------
 
 data OperationalPattern : Set where
-  lifecycleHandoff
-  planExecutionSeparation
-  physicalCustody
-  shortageReadiness
-  governedSubstitution
-  roleAuthority
-  telemetryVsReality
-  exceptionReplanning
-  reconciliationHistory
-  adaptiveUpdateGovernance
-  : OperationalPattern
+  lifecycleHandoff : OperationalPattern
+  planExecutionSeparation : OperationalPattern
+  physicalCustody : OperationalPattern
+  shortageReadiness : OperationalPattern
+  governedSubstitution : OperationalPattern
+  roleAuthority : OperationalPattern
+  telemetryVsReality : OperationalPattern
+  exceptionReplanning : OperationalPattern
+  reconciliationHistory : OperationalPattern
+  adaptiveUpdateGovernance : OperationalPattern
+
 
 ------------------------------------------------------------------------
 -- Plan and execution are not one state.

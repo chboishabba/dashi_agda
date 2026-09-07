@@ -28,38 +28,38 @@ import DASHI.Governance.SexedHistoricalCollectiveThresholdNetworkExact as Collec
 ------------------------------------------------------------------------
 
 data ReceptionMode : Set where
-  directReception
-  selectiveReception
-  criticalReinterpretation
-  polemicalReversal
-  archivalRecovery
-  unresolvedReception
-  : ReceptionMode
+  directReception : ReceptionMode
+  selectiveReception : ReceptionMode
+  criticalReinterpretation : ReceptionMode
+  polemicalReversal : ReceptionMode
+  archivalRecovery : ReceptionMode
+  unresolvedReception : ReceptionMode
+
 
 data InstitutionalisationStatus : Set where
-  notInstitutionalised
-  locallyInstitutionalised
-  broadlyInstitutionalised
-  laterDiscontinued
-  reintroducedElsewhere
-  : InstitutionalisationStatus
+  notInstitutionalised : InstitutionalisationStatus
+  locallyInstitutionalised : InstitutionalisationStatus
+  broadlyInstitutionalised : InstitutionalisationStatus
+  laterDiscontinued : InstitutionalisationStatus
+  reintroducedElsewhere : InstitutionalisationStatus
+
 
 data SemanticRelation : Set where
-  meaningRetained
-  meaningNarrowed
-  meaningExpanded
-  meaningReversed
-  meaningHybridised
-  meaningUnresolved
-  : SemanticRelation
+  meaningRetained : SemanticRelation
+  meaningNarrowed : SemanticRelation
+  meaningExpanded : SemanticRelation
+  meaningReversed : SemanticRelation
+  meaningHybridised : SemanticRelation
+  meaningUnresolved : SemanticRelation
+
 
 data AuthorityRelation : Set where
-  sourceAuthorityRetained
-  sourceAuthorityQualified
-  newAuthorityIntroduced
-  authorityDisputed
-  authorityAbsent
-  : AuthorityRelation
+  sourceAuthorityRetained : AuthorityRelation
+  sourceAuthorityQualified : AuthorityRelation
+  newAuthorityIntroduced : AuthorityRelation
+  authorityDisputed : AuthorityRelation
+  authorityAbsent : AuthorityRelation
+
 
 record ReceptionHistoryState : Set where
   constructor reception-history-state
@@ -80,9 +80,9 @@ open ReceptionHistoryState public
 ------------------------------------------------------------------------
 
 data VocabularyFineState : Set where
-  retainedMeaningHistory
-  reversedMeaningHistory
-  : VocabularyFineState
+  retainedMeaningHistory : VocabularyFineState
+  reversedMeaningHistory : VocabularyFineState
+
 
 vocabularySurface : VocabularyFineState → String
 vocabularySurface _ = "shared inherited term"
@@ -107,9 +107,9 @@ sameVocabularyCannotRecoverSemanticHistory =
 ------------------------------------------------------------------------
 
 data InstitutionalFineState : Set where
-  vocabularyWithInstitutionalContinuity
-  vocabularyAfterInstitutionalBreak
-  : InstitutionalFineState
+  vocabularyWithInstitutionalContinuity : InstitutionalFineState
+  vocabularyAfterInstitutionalBreak : InstitutionalFineState
+
 
 institutionalVocabularySurface : InstitutionalFineState → String
 institutionalVocabularySurface _ = "same present vocabulary"
@@ -133,9 +133,9 @@ sameVocabularyCannotRecoverInstitutionalHistory =
 ------------------------------------------------------------------------
 
 data PresentUseFineState : Set where
-  useWithSourceAuthority
-  useWithNewAuthority
-  : PresentUseFineState
+  useWithSourceAuthority : PresentUseFineState
+  useWithNewAuthority : PresentUseFineState
+
 
 presentUseSurface : PresentUseFineState → String
 presentUseSurface _ = "same present practical use"

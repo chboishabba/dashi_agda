@@ -11,9 +11,9 @@ import DASHI.Governance.SexedHistoricalStratifiedCounterfactualPathExact as Path
 ------------------------------------------------------------------------
 
 data FuturePathHistory : Set where
-  repairedThenPluralised
-  repairedThenInstitutionalised
-  : FuturePathHistory
+  repairedThenPluralised : FuturePathHistory
+  repairedThenInstitutionalised : FuturePathHistory
+
 
 data PresentSurface : Set where
   sameEndpointStratumFidelityChoice : PresentSurface
@@ -22,9 +22,9 @@ data ImmediateChoice : Set where
   continueReciprocalSearch : ImmediateChoice
 
 data FutureConeCode : Set where
-  pluralNegotiationCone
-  institutionalReciprocityCone
-  : FutureConeCode
+  pluralNegotiationCone : FutureConeCode
+  institutionalReciprocityCone : FutureConeCode
+
 
 observeFuturePath : FuturePathHistory → PresentSurface
 observeFuturePath _ = sameEndpointStratumFidelityChoice

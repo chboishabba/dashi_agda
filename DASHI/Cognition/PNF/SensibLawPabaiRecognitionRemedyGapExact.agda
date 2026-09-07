@@ -23,12 +23,12 @@ import DASHI.Core.DominantChartEpistemicCompressionExact as Compression
 ------------------------------------------------------------------------
 
 data PabaiLayer : Set where
-  firstInstanceFactualFinding
-  firstInstanceLegalHolding
-  applicantAllegation
-  criticalInterpretation
-  appealProceduralStatus
-  : PabaiLayer
+  firstInstanceFactualFinding : PabaiLayer
+  firstInstanceLegalHolding : PabaiLayer
+  applicantAllegation : PabaiLayer
+  criticalInterpretation : PabaiLayer
+  appealProceduralStatus : PabaiLayer
+
 
 record PabaiClaimReceipt : Set where
   constructor pabai-claim-receipt
@@ -112,17 +112,17 @@ appealFiledStatus = pabai-claim-receipt
 ------------------------------------------------------------------------
 
 data PabaiSituatedState : Set where
-  actualFirstInstanceRecognitionRemedyUnavailable
-  syntheticSameRecognitionRemedyAvailable
-  : PabaiSituatedState
+  actualFirstInstanceRecognitionRemedyUnavailable : PabaiSituatedState
+  syntheticSameRecognitionRemedyAvailable : PabaiSituatedState
+
 
 data HarmRecognitionSurface : Set where
   seriousClimateHarmRecognised : HarmRecognitionSurface
 
 data NegligenceRemedyState : Set where
-  negligenceRemedyUnavailable
-  negligenceRemedyAvailable
-  : NegligenceRemedyState
+  negligenceRemedyUnavailable : NegligenceRemedyState
+  negligenceRemedyAvailable : NegligenceRemedyState
+
 
 harmRecognitionObserver : PabaiSituatedState → HarmRecognitionSurface
 harmRecognitionObserver actualFirstInstanceRecognitionRemedyUnavailable = seriousClimateHarmRecognised
@@ -169,11 +169,11 @@ pabaiDominantChartReceipt = Compression.projection-inadequacy-receipt
 ------------------------------------------------------------------------
 
 data AppealState : Set where
-  appealFiled
-  appealHeardMaterialsRecorded
-  appealJudgmentLocated
-  appealOutcomeUnresolvedInAtlas
-  : AppealState
+  appealFiled : AppealState
+  appealHeardMaterialsRecorded : AppealState
+  appealJudgmentLocated : AppealState
+  appealOutcomeUnresolvedInAtlas : AppealState
+
 
 record PabaiAppealTemporalReceipt : Set where
   constructor pabai-appeal-temporal-receipt
@@ -209,21 +209,21 @@ currentPabaiAppealReceipt = pabai-appeal-temporal-receipt
 ------------------------------------------------------------------------
 
 data PabaiCoordinate : Set where
-  physicalClimateHarm
-  culturalAilanKastomHarm
-  governmentScienceConsideration
-  negligenceDuty
-  compensableCulturalLoss
-  damagesOrInjunctionRemedy
-  appealOutcome
-  : PabaiCoordinate
+  physicalClimateHarm : PabaiCoordinate
+  culturalAilanKastomHarm : PabaiCoordinate
+  governmentScienceConsideration : PabaiCoordinate
+  negligenceDuty : PabaiCoordinate
+  compensableCulturalLoss : PabaiCoordinate
+  damagesOrInjunctionRemedy : PabaiCoordinate
+  appealOutcome : PabaiCoordinate
+
 
 data PabaiCoordinateState : Set where
-  factFound
-  legalRouteDenied
-  reliefNotObtainedAtFirstInstance
-  procedurallyLive
-  : PabaiCoordinateState
+  factFound : PabaiCoordinateState
+  legalRouteDenied : PabaiCoordinateState
+  reliefNotObtainedAtFirstInstance : PabaiCoordinateState
+  procedurallyLive : PabaiCoordinateState
+
 
 coordinateState : PabaiCoordinate → PabaiCoordinateState
 coordinateState physicalClimateHarm = factFound

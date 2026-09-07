@@ -24,14 +24,14 @@ import DASHI.Reasoning.RelationRepresentationStudyValidationObligationsExact as 
 ------------------------------------------------------------------------
 
 data InferenceStage : Set where
-  evidenceFibreStage
-  predictionEnvelopeStage
-  calibratedInferenceStage
-  certifiedSensitivityStage
-  robustnessDiscrepancyStage
-  heldOutValidationStage
-  experimentDiscriminationStage
-  : InferenceStage
+  evidenceFibreStage : InferenceStage
+  predictionEnvelopeStage : InferenceStage
+  calibratedInferenceStage : InferenceStage
+  certifiedSensitivityStage : InferenceStage
+  robustnessDiscrepancyStage : InferenceStage
+  heldOutValidationStage : InferenceStage
+  experimentDiscriminationStage : InferenceStage
+
 
 record ArtifactHandoff : Set where
   constructor artifactHandoff

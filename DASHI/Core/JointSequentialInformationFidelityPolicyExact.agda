@@ -54,8 +54,8 @@ EvidenceOutcomePossible :
   (Hypothesis → Set) →
   (move : EvidenceMove Hypothesis) →
   Observation move → Set
-EvidenceOutcomePossible live move observed =
-  Σ Hypothesis λ hypothesis → RefineLive live move observed hypothesis
+EvidenceOutcomePossible {Hypothesis = Hypothesis} live move observed =
+  Σ Hypothesis (λ hypothesis → RefineLive live move observed hypothesis)
 
 record FidelityMove (ModelState : Set) (current : ModelState) : Set where
   constructor fidelityMove

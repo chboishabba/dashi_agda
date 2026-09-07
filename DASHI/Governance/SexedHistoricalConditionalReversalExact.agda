@@ -21,9 +21,9 @@ import DASHI.Governance.SexedHistoricalCoConstitutionHyperfabricExact as Hyper
 ------------------------------------------------------------------------
 
 data StudyStratum : Set where
-  highOpportunityStratum
-  lowOpportunityStratum
-  : StudyStratum
+  highOpportunityStratum : StudyStratum
+  lowOpportunityStratum : StudyStratum
+
 
 record BinomialCell : Set where
   constructor binomial-cell
@@ -88,10 +88,10 @@ malePooledSuccesses = refl
 ------------------------------------------------------------------------
 
 data ContrastDirection : Set where
-  femaleHigher
-  maleHigher
-  equalOrUnresolved
-  : ContrastDirection
+  femaleHigher : ContrastDirection
+  maleHigher : ContrastDirection
+  equalOrUnresolved : ContrastDirection
+
 
 withinStratumDirection : StudyStratum → ContrastDirection
 withinStratumDirection highOpportunityStratum = femaleHigher
@@ -113,9 +113,9 @@ withinLowDiffersFromPooled ()
 ------------------------------------------------------------------------
 
 data CompositionFineState : Set where
-  femaleMostlyHighOpportunity
-  femaleMostlyLowOpportunity
-  : CompositionFineState
+  femaleMostlyHighOpportunity : CompositionFineState
+  femaleMostlyLowOpportunity : CompositionFineState
+
 
 recordedSex : CompositionFineState → Stats.RecordedSexCategory
 recordedSex _ = Stats.recordedFemale

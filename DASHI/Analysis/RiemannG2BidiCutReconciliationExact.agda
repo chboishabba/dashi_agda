@@ -24,11 +24,11 @@ import DASHI.Core.FrontierRelationStrengthBidiExact as Relation
 ------------------------------------------------------------------------
 
 data FrontierLevel : Set where
-  scalarLocalZeroProducer
-  finitePostSchurNearConsumer
-  jointNearFarMarginConsumer
-  finalRHConsumer
-  : FrontierLevel
+  scalarLocalZeroProducer : FrontierLevel
+  finitePostSchurNearConsumer : FrontierLevel
+  jointNearFarMarginConsumer : FrontierLevel
+  finalRHConsumer : FrontierLevel
+
 
 record G2ScalarToFiniteSchurBridge : Set₁ where
   constructor g2ScalarToFiniteSchurBridge

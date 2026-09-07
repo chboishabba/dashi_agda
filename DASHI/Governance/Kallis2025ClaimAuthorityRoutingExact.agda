@@ -14,11 +14,11 @@ import DASHI.Governance.SafeJustSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data ClaimRole : Set where
-  empiricalRestatement empiricalSynthesis causalInterpretation
+  empiricalRestatement empiricalSynthesis causalInterpretation : ClaimRole
   normativeRecommendation politicalProgramme conceptualFraming : ClaimRole
 
 data AuthorityKind : Set where
-  empiricalObservationAuthority reviewSynthesisAuthority causalIdentificationAuthority
+  empiricalObservationAuthority reviewSynthesisAuthority causalIdentificationAuthority : AuthorityKind
   normativeMandateAuthority politicalProgrammeAuthority conceptualInterpretiveAuthority : AuthorityKind
 
 data Authorizes : AuthorityKind → ClaimRole → Set where

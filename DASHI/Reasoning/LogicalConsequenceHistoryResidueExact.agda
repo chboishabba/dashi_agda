@@ -17,12 +17,12 @@ import DASHI.Core.IntersectionalNonFactorability as NonFactor
 ------------------------------------------------------------------------
 
 data DerivationState : Set where
-  sourceState
-  logicalIntermediate
-  empiricalIntermediate
-  reconvergedLogical
-  reconvergedEmpirical
-  : DerivationState
+  sourceState : DerivationState
+  logicalIntermediate : DerivationState
+  empiricalIntermediate : DerivationState
+  reconvergedLogical : DerivationState
+  reconvergedEmpirical : DerivationState
+
 
 data DerivationTransition : DerivationState → DerivationState → Set where
   sourceToLogical : DerivationTransition sourceState logicalIntermediate
@@ -93,9 +93,9 @@ patternOf reconvergedLogical = logicOnlyPattern
 patternOf reconvergedEmpirical = empiricalQualifiedPattern
 
 data LaterAdmission : Set where
-  requiresFreshEvidence
-  empiricalContinuationAdmissible
-  : LaterAdmission
+  requiresFreshEvidence : LaterAdmission
+  empiricalContinuationAdmissible : LaterAdmission
+
 
 laterAdmission : DerivationState → LaterAdmission
 laterAdmission sourceState = requiresFreshEvidence

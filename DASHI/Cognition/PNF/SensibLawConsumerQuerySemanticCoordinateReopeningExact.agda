@@ -17,14 +17,14 @@ data SemanticQuery : Set where
   customQuery : String → SemanticQuery
 
 data SemanticCoordinate : Set where
-  syntaxCoordinate discourseCoordinate referenceCoordinate attributionCoordinate
-  provenanceCoordinate temporalCoordinate evidenceCandidateCoordinate
-  resolvedLegalEvidenceCoordinate scopeCandidateCoordinate resolvedScopeCoordinate
-  propositionStatusCoordinate occurrenceCoordinate documentContextCoordinate
-  jurisdictionCandidateCoordinate resolvedLegalJurisdictionCoordinate
-  semanticAdmissionAuthorityCoordinate legalSourceAuthorityCoordinate
-  legalRoleCoordinate applicabilityCoordinate violationCoordinate liabilityCoordinate
-  : SemanticCoordinate
+  syntaxCoordinate discourseCoordinate referenceCoordinate attributionCoordinate : SemanticCoordinate
+  provenanceCoordinate temporalCoordinate evidenceCandidateCoordinate : SemanticCoordinate
+  resolvedLegalEvidenceCoordinate scopeCandidateCoordinate resolvedScopeCoordinate : SemanticCoordinate
+  propositionStatusCoordinate occurrenceCoordinate documentContextCoordinate : SemanticCoordinate
+  jurisdictionCandidateCoordinate resolvedLegalJurisdictionCoordinate : SemanticCoordinate
+  semanticAdmissionAuthorityCoordinate legalSourceAuthorityCoordinate : SemanticCoordinate
+  legalRoleCoordinate applicabilityCoordinate violationCoordinate liabilityCoordinate : SemanticCoordinate
+
 
 data Requires : Consumer.ConsumerKind → SemanticQuery → SemanticCoordinate → Set where
   parseNeedsSyntax : ∀ {consumer} → Requires consumer parseStructureQuery syntaxCoordinate

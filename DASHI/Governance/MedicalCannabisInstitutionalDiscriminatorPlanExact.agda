@@ -19,12 +19,12 @@ import DASHI.Governance.MedicalCannabisComparativeInstitutionalMeaningExact as C
 ------------------------------------------------------------------------
 
 data CannabisInstitutionalStudy : Set where
-  matchedJurisdictionCannabisStudy
-  regulatoryDiscontinuityCannabisStudy
-  longitudinalEnforcementChangeCannabisStudy
-  ownershipProvisioningContrastCannabisStudy
-  medicalCannabisPolicyTransitionStudy
-  : CannabisInstitutionalStudy
+  matchedJurisdictionCannabisStudy : CannabisInstitutionalStudy
+  regulatoryDiscontinuityCannabisStudy : CannabisInstitutionalStudy
+  longitudinalEnforcementChangeCannabisStudy : CannabisInstitutionalStudy
+  ownershipProvisioningContrastCannabisStudy : CannabisInstitutionalStudy
+  medicalCannabisPolicyTransitionStudy : CannabisInstitutionalStudy
+
 
 studyKind : CannabisInstitutionalStudy → Discriminator.InstitutionalStudyKind
 studyKind matchedJurisdictionCannabisStudy = Discriminator.matchedJurisdictionStudy

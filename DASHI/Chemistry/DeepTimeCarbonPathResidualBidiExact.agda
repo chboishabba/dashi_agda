@@ -19,18 +19,18 @@ import DASHI.Core.HistoryConditionedChoiceExact as History
 ------------------------------------------------------------------------
 
 data CarbonRoute : Set where
-  fossilViaAtmosphereToOcean
-  fossilDirectBookkeepingToOcean
-  : CarbonRoute
+  fossilViaAtmosphereToOcean : CarbonRoute
+  fossilDirectBookkeepingToOcean : CarbonRoute
+
 
 routeEndpoint : CarbonRoute → Carbon.CarbonLedger
 routeEndpoint fossilViaAtmosphereToOcean = Carbon.afterOneOceanUptakeTransfer
 routeEndpoint fossilDirectBookkeepingToOcean = Carbon.afterOneOceanUptakeTransfer
 
 data AtmosphericPulseHistory : Set where
-  atmosphericPulseOccurred
-  noAtmosphericPulseInFixture
-  : AtmosphericPulseHistory
+  atmosphericPulseOccurred : AtmosphericPulseHistory
+  noAtmosphericPulseInFixture : AtmosphericPulseHistory
+
 
 routePulseHistory : CarbonRoute → AtmosphericPulseHistory
 routePulseHistory fossilViaAtmosphereToOcean = atmosphericPulseOccurred
@@ -47,9 +47,9 @@ routesRetainDifferentPulseHistory :
 routesRetainDifferentPulseHistory ()
 
 data HistorySensitiveEcologyConsumer : Set where
-  transientExposureRelevant
-  noTransientExposureInFixture
-  : HistorySensitiveEcologyConsumer
+  transientExposureRelevant : HistorySensitiveEcologyConsumer
+  noTransientExposureInFixture : HistorySensitiveEcologyConsumer
+
 
 ecologyConsumer : CarbonRoute → HistorySensitiveEcologyConsumer
 ecologyConsumer fossilViaAtmosphereToOcean = transientExposureRelevant

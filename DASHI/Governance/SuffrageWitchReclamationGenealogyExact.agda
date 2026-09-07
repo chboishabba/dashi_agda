@@ -36,29 +36,29 @@ import DASHI.Governance.WitchTrialEvidenceSubjectAttributionExact as WitchTrial
 ------------------------------------------------------------------------
 
 data HistoricalNode : Set where
-  earlyModernWitchPersecution
-  suffrageEraWitchPersecutionCritique
-  spiritualistWomenReligiousAuthority
-  modernPaganWitchcraftEmergence
-  feministWitchReclamation
-  : HistoricalNode
+  earlyModernWitchPersecution : HistoricalNode
+  suffrageEraWitchPersecutionCritique : HistoricalNode
+  spiritualistWomenReligiousAuthority : HistoricalNode
+  modernPaganWitchcraftEmergence : HistoricalNode
+  feministWitchReclamation : HistoricalNode
+
 
 data GenealogyRelationKind : Set where
-  archivalMemory
-  politicalReinterpretation
-  movementOverlap
-  culturalAntecedent
-  symbolicReclamation
-  institutionalContinuity
-  practitionerLineage
-  : GenealogyRelationKind
+  archivalMemory : GenealogyRelationKind
+  politicalReinterpretation : GenealogyRelationKind
+  movementOverlap : GenealogyRelationKind
+  culturalAntecedent : GenealogyRelationKind
+  symbolicReclamation : GenealogyRelationKind
+  institutionalContinuity : GenealogyRelationKind
+  practitionerLineage : GenealogyRelationKind
+
 
 data GenealogyEvidenceStrength : Set where
-  primarySourceWitness
-  scholarlySynthesis
-  candidateNeighbourhood
-  unsupportedForPromotion
-  : GenealogyEvidenceStrength
+  primarySourceWitness : GenealogyEvidenceStrength
+  scholarlySynthesis : GenealogyEvidenceStrength
+  candidateNeighbourhood : GenealogyEvidenceStrength
+  unsupportedForPromotion : GenealogyEvidenceStrength
+
 
 record GenealogySource : Set where
   constructor genealogy-source
@@ -177,10 +177,10 @@ symbolicReclamationDoesNotRewriteOriginalSelfIdentification ()
 ------------------------------------------------------------------------
 
 data ReclamationOperation : Set where
-  valueReversal
-  imposedCategoryReclamation
-  positiveSubjectReconstitution
-  : ReclamationOperation
+  valueReversal : ReclamationOperation
+  imposedCategoryReclamation : ReclamationOperation
+  positiveSubjectReconstitution : ReclamationOperation
+
 
 reversal≠reclamation : valueReversal ≡ imposedCategoryReclamation → ⊥
 reversal≠reclamation ()

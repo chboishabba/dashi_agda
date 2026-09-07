@@ -7,6 +7,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Chemistry.TransitionKernel as Chemistry
+open Chemistry
 import DASHI.Geology.SaltGeochemistryExact as Salt
 
 ------------------------------------------------------------------------
@@ -24,50 +25,50 @@ import DASHI.Geology.SaltGeochemistryExact as Salt
 
 waterSpecies : Chemistry.Species
 waterSpecies = record
-  { Chemistry.speciesId = "water"
-  ; Chemistry.phase = Chemistry.liquid
-  ; Chemistry.chargeLabel = "0"
-  ; Chemistry.compositionLabel = "H2O"
-  ; Chemistry.mobilityClass = Chemistry.mobile
-  ; Chemistry.activityModelLabel = "aqueous solvent model supplied by application"
-  ; Chemistry.opticalRoleLabel = "not asserted"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { speciesId = "water"
+  ; phase = Chemistry.liquid
+  ; chargeLabel = "0"
+  ; compositionLabel = "H2O"
+  ; mobilityClass = Chemistry.mobile
+  ; activityModelLabel = "aqueous solvent model supplied by application"
+  ; opticalRoleLabel = "not asserted"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 chlorineGasSpecies : Chemistry.Species
 chlorineGasSpecies = record
-  { Chemistry.speciesId = "chlorine gas"
-  ; Chemistry.phase = Chemistry.gas
-  ; Chemistry.chargeLabel = "0"
-  ; Chemistry.compositionLabel = "Cl2"
-  ; Chemistry.mobilityClass = Chemistry.volatile
-  ; Chemistry.activityModelLabel = "gas activity/fugacity model supplied by application"
-  ; Chemistry.opticalRoleLabel = "not asserted"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { speciesId = "chlorine gas"
+  ; phase = Chemistry.gas
+  ; chargeLabel = "0"
+  ; compositionLabel = "Cl2"
+  ; mobilityClass = Chemistry.volatile
+  ; activityModelLabel = "gas activity/fugacity model supplied by application"
+  ; opticalRoleLabel = "not asserted"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 hydrogenGasSpecies : Chemistry.Species
 hydrogenGasSpecies = record
-  { Chemistry.speciesId = "hydrogen gas"
-  ; Chemistry.phase = Chemistry.gas
-  ; Chemistry.chargeLabel = "0"
-  ; Chemistry.compositionLabel = "H2"
-  ; Chemistry.mobilityClass = Chemistry.volatile
-  ; Chemistry.activityModelLabel = "gas activity/fugacity model supplied by application"
-  ; Chemistry.opticalRoleLabel = "not asserted"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { speciesId = "hydrogen gas"
+  ; phase = Chemistry.gas
+  ; chargeLabel = "0"
+  ; compositionLabel = "H2"
+  ; mobilityClass = Chemistry.volatile
+  ; activityModelLabel = "gas activity/fugacity model supplied by application"
+  ; opticalRoleLabel = "not asserted"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 sodiumHydroxideSpecies : Chemistry.Species
 sodiumHydroxideSpecies = record
-  { Chemistry.speciesId = "sodium hydroxide in product liquor"
-  ; Chemistry.phase = Chemistry.dissolved
-  ; Chemistry.chargeLabel = "bulk neutral electrolyte/product representation"
-  ; Chemistry.compositionLabel = "NaOH"
-  ; Chemistry.mobilityClass = Chemistry.mobile
-  ; Chemistry.activityModelLabel = "strong-electrolyte product model supplied by application"
-  ; Chemistry.opticalRoleLabel = "not asserted"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { speciesId = "sodium hydroxide in product liquor"
+  ; phase = Chemistry.dissolved
+  ; chargeLabel = "bulk neutral electrolyte/product representation"
+  ; compositionLabel = "NaOH"
+  ; mobilityClass = Chemistry.mobile
+  ; activityModelLabel = "strong-electrolyte product model supplied by application"
+  ; opticalRoleLabel = "not asserted"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 ------------------------------------------------------------------------
@@ -82,48 +83,48 @@ sodiumHydroxideSpecies = record
 
 chlorAlkaliRate : Chemistry.RateLaw
 chlorAlkaliRate = record
-  { Chemistry.rateLawKind = Chemistry.empirical
-  ; Chemistry.symbolicForm = "electrolysis-controlled chlor-alkali rate supplied by plant model"
-  ; Chemistry.parameters = []
-  ; Chemistry.validityRegime = "purified brine and cell-specific electrochemical regime"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { rateLawKind = Chemistry.empirical
+  ; symbolicForm = "electrolysis-controlled chlor-alkali rate supplied by plant model"
+  ; parameters = []
+  ; validityRegime = "purified brine and cell-specific electrochemical regime"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 chlorAlkaliEnvironment : Chemistry.Environment
 chlorAlkaliEnvironment = record
-  { Chemistry.temperatureCarrier = "cell operating temperature supplied by plant receipt"
-  ; Chemistry.pHCarrier = "anolyte/catholyte pH supplied by cell model"
-  ; Chemistry.pressureCarrier = "cell/product pressure supplied by plant receipt"
-  ; Chemistry.humidityCarrier = "not primary state variable"
-  ; Chemistry.illuminationCarrier = "not primary state variable"
-  ; Chemistry.ionicStrengthCarrier = "purified concentrated brine ionic-strength model"
+  { temperatureCarrier = "cell operating temperature supplied by plant receipt"
+  ; pHCarrier = "anolyte/catholyte pH supplied by cell model"
+  ; pressureCarrier = "cell/product pressure supplied by plant receipt"
+  ; humidityCarrier = "not primary state variable"
+  ; illuminationCarrier = "not primary state variable"
+  ; ionicStrengthCarrier = "purified concentrated brine ionic-strength model"
   }
 
 chlorAlkaliCondition : Chemistry.Condition
 chlorAlkaliCondition = record
-  { Chemistry.conditionLabel = "electrolytic chlor-alkali operation"
-  ; Chemistry.environment = chlorAlkaliEnvironment
-  ; Chemistry.guardExpression = "cell energised; brine purification and separator obligations satisfied"
+  { conditionLabel = "electrolytic chlor-alkali operation"
+  ; environment = chlorAlkaliEnvironment
+  ; guardExpression = "cell energised; brine purification and separator obligations satisfied"
   }
 
 chlorAlkaliOverallTransition : Chemistry.Transition
 chlorAlkaliOverallTransition = record
-  { Chemistry.transitionId = "overall chlor-alkali electrolysis"
-  ; Chemistry.transitionKind = Chemistry.chemicalReaction
-  ; Chemistry.reactants =
-      record { Chemistry.species = Salt.haliteSpecies ; Chemistry.coefficient = 2 }
-      ∷ record { Chemistry.species = waterSpecies ; Chemistry.coefficient = 2 }
+  { transitionId = "overall chlor-alkali electrolysis"
+  ; transitionKind = Chemistry.chemicalReaction
+  ; reactants =
+      record { species = Salt.haliteSpecies ; coefficient = 2 }
+      ∷ record { species = waterSpecies ; coefficient = 2 }
       ∷ []
-  ; Chemistry.products =
-      record { Chemistry.species = chlorineGasSpecies ; Chemistry.coefficient = 1 }
-      ∷ record { Chemistry.species = hydrogenGasSpecies ; Chemistry.coefficient = 1 }
-      ∷ record { Chemistry.species = sodiumHydroxideSpecies ; Chemistry.coefficient = 2 }
+  ; products =
+      record { species = chlorineGasSpecies ; coefficient = 1 }
+      ∷ record { species = hydrogenGasSpecies ; coefficient = 1 }
+      ∷ record { species = sodiumHydroxideSpecies ; coefficient = 2 }
       ∷ []
-  ; Chemistry.catalysts = []
-  ; Chemistry.rateLaw = chlorAlkaliRate
-  ; Chemistry.condition = chlorAlkaliCondition
-  ; Chemistry.reversibility = Chemistry.irreversible
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  ; catalysts = []
+  ; rateLaw = chlorAlkaliRate
+  ; condition = chlorAlkaliCondition
+  ; reversibility = Chemistry.irreversible
+  ; evidence = Chemistry.literatureEstablished
   }
 
 ------------------------------------------------------------------------
@@ -188,22 +189,22 @@ open ChlorAlkaliProductionReceipt public
 ------------------------------------------------------------------------
 
 data ChlorineApplicationKind : Set where
-  drinkingWaterPrimaryDisinfection
-  drinkingWaterSecondaryDisinfectantProduction
-  sodiumHypochloriteProduction
-  hydrochloricAcidProduction
-  vinylChloridePVCChain
-  pulpPaperBleachingChemistry
-  industrialOxidationChlorination
-  : ChlorineApplicationKind
+  drinkingWaterPrimaryDisinfection : ChlorineApplicationKind
+  drinkingWaterSecondaryDisinfectantProduction : ChlorineApplicationKind
+  sodiumHypochloriteProduction : ChlorineApplicationKind
+  hydrochloricAcidProduction : ChlorineApplicationKind
+  vinylChloridePVCChain : ChlorineApplicationKind
+  pulpPaperBleachingChemistry : ChlorineApplicationKind
+  industrialOxidationChlorination : ChlorineApplicationKind
+
 
 data CausticApplicationKind : Set where
-  waterTreatmentPHControl
-  pulpPaperCausticProcessing
-  soapDetergentChemistry
-  aluminaProcessing
-  generalIndustrialNeutralisation
-  : CausticApplicationKind
+  waterTreatmentPHControl : CausticApplicationKind
+  pulpPaperCausticProcessing : CausticApplicationKind
+  soapDetergentChemistry : CausticApplicationKind
+  aluminaProcessing : CausticApplicationKind
+  generalIndustrialNeutralisation : CausticApplicationKind
+
 
 record ChlorineApplicationReceipt
     {lineage : Salt.SaltMaterialLineage}

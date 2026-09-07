@@ -86,9 +86,9 @@ open IndexedConsequenceCertificate public
 ------------------------------------------------------------------------
 
 data PathOccurrenceArtifact : Set where
-  changedEdgeInstanceArtifact
-  consequenceCertificateArtifact
-  : PathOccurrenceArtifact
+  changedEdgeInstanceArtifact : PathOccurrenceArtifact
+  consequenceCertificateArtifact : PathOccurrenceArtifact
+
 
 data OccurrenceDepends
     {a b : Path.DerivationNode}

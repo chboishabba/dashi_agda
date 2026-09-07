@@ -147,10 +147,10 @@ semanticFibre = Candidate.candidateSemanticFibre
 ------------------------------------------------------------------------
 
 data ReducedInferentialReading : Set where
-  descriptiveReductionReading
-  associationalReductionReading
-  causalReductionReading
-  : ReducedInferentialReading
+  descriptiveReductionReading : ReducedInferentialReading
+  associationalReductionReading : ReducedInferentialReading
+  causalReductionReading : ReducedInferentialReading
+
 
 record ReducedReadingFibre : Set where
   constructor reducedReadingFibre

@@ -19,22 +19,22 @@ import DASHI.Cognition.PNF.SensibLawCalderAuthoritativeTranscriptionVerification
 ------------------------------------------------------------------------
 
 data PrimaryEvidenceGrade : Set where
-  sourceUnrecovered
-  primaryOcrParserEvidence
-  primaryTextNativeParserEvidence
-  reviewedPrimaryPropositionEvidence
-  authoritativeTranscriptionVerified
-  : PrimaryEvidenceGrade
+  sourceUnrecovered : PrimaryEvidenceGrade
+  primaryOcrParserEvidence : PrimaryEvidenceGrade
+  primaryTextNativeParserEvidence : PrimaryEvidenceGrade
+  reviewedPrimaryPropositionEvidence : PrimaryEvidenceGrade
+  authoritativeTranscriptionVerified : PrimaryEvidenceGrade
+
 
 data RefinedCoordinateState : Set where
-  coordinateUnassessed
-  candidateFromReviewedUse
-  strengthenedByPrimaryOcr
-  strengthenedByPrimaryTextNative
-  primaryInterpretiveContrastLocated
-  authoritativePrimaryContrastVerified
-  coordinateResolved
-  : RefinedCoordinateState
+  coordinateUnassessed : RefinedCoordinateState
+  candidateFromReviewedUse : RefinedCoordinateState
+  strengthenedByPrimaryOcr : RefinedCoordinateState
+  strengthenedByPrimaryTextNative : RefinedCoordinateState
+  primaryInterpretiveContrastLocated : RefinedCoordinateState
+  authoritativePrimaryContrastVerified : RefinedCoordinateState
+  coordinateResolved : RefinedCoordinateState
+
 
 record RefinedCoordinateReceipt : Set where
   constructor refinedCoordinateReceipt
@@ -94,18 +94,18 @@ authorityInterpretationAfterV02 = refinedCoordinateReceipt
 ------------------------------------------------------------------------
 
 data PostV02Residual : Set where
-  verifyRemainingCalderJudsonOcrIfNeeded
-  compareHallRecognitionIndependenceWithDawsonUse
-  compareAmoduContinuityWithDawsonRecognitionUse
-  reconcileContinuityAndRecognitionCoordinates
-  synthesizeExactUnifiedTheory
-  : PostV02Residual
+  verifyRemainingCalderJudsonOcrIfNeeded : PostV02Residual
+  compareHallRecognitionIndependenceWithDawsonUse : PostV02Residual
+  compareAmoduContinuityWithDawsonRecognitionUse : PostV02Residual
+  reconcileContinuityAndRecognitionCoordinates : PostV02Residual
+  synthesizeExactUnifiedTheory : PostV02Residual
+
 
 data PostV02WorkKind : Set where
-  verifySourceWork
-  comparePropositionsWork
-  synthesizeTheoryWork
-  : PostV02WorkKind
+  verifySourceWork : PostV02WorkKind
+  comparePropositionsWork : PostV02WorkKind
+  synthesizeTheoryWork : PostV02WorkKind
+
 
 record PostV02WorkPlan : Set where
   constructor postV02WorkPlan

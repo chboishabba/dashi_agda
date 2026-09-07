@@ -14,12 +14,12 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 
 data NumericalIngredientKind : Set where
-  axiom theorem definition empiricalCalibration dimensionalAnchor
-  discreteModellingChoice normalisationConvention numericalSolution
+  axiom theorem definition empiricalCalibration dimensionalAnchor : NumericalIngredientKind
+  discreteModellingChoice normalisationConvention numericalSolution : NumericalIngredientKind
   withheldPrediction : NumericalIngredientKind
 
 data DependencyUse : Set where
-  proves defines calibrates fixesUnits selectsConvention computes predicts
+  proves defines calibrates fixesUnits selectsConvention computes predicts : DependencyUse
   audits : DependencyUse
 
 record NumericalIngredient : Set where

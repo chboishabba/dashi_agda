@@ -18,17 +18,17 @@ import DASHI.Chemistry.RegulatoryAnalyteCoverageBidiExact as Coverage
 ------------------------------------------------------------------------
 
 data TrueAnalyteState : Set where
-  trulyAbsent
-  presentBelowLOD
-  presentBetweenLODAndLOQ
-  presentAtOrAboveLOQ
-  : TrueAnalyteState
+  trulyAbsent : TrueAnalyteState
+  presentBelowLOD : TrueAnalyteState
+  presentBetweenLODAndLOQ : TrueAnalyteState
+  presentAtOrAboveLOQ : TrueAnalyteState
+
 
 data AssayObservation : Set where
-  noReliableSignal
-  detectedNotQuantified
-  quantifiedSignal
-  : AssayObservation
+  noReliableSignal : AssayObservation
+  detectedNotQuantified : AssayObservation
+  quantifiedSignal : AssayObservation
+
 
 presenceOf : TrueAnalyteState → Coverage.Presence
 presenceOf trulyAbsent = Coverage.absent
@@ -62,18 +62,18 @@ notDetectedCannotRecoverTrueAbsence =
 ------------------------------------------------------------------------
 
 data MethodFamily : Set where
-  gasChromatographyMassSpectrometry
-  liquidChromatographyMassSpectrometry
-  tandemMassSpectrometry
-  opticalSpectroscopy
-  otherValidatedAnalyticalMethod
-  : MethodFamily
+  gasChromatographyMassSpectrometry : MethodFamily
+  liquidChromatographyMassSpectrometry : MethodFamily
+  tandemMassSpectrometry : MethodFamily
+  opticalSpectroscopy : MethodFamily
+  otherValidatedAnalyticalMethod : MethodFamily
+
 
 data ValidationStatus : Set where
-  validatedForDeclaredAnalyteMatrix
-  unresolvedForDeclaredAnalyteMatrix
-  unsuitableForDeclaredAnalyteMatrix
-  : ValidationStatus
+  validatedForDeclaredAnalyteMatrix : ValidationStatus
+  unresolvedForDeclaredAnalyteMatrix : ValidationStatus
+  unsuitableForDeclaredAnalyteMatrix : ValidationStatus
+
 
 record MethodDetectionReceipt : Set where
   constructor methodDetectionReceipt
@@ -115,15 +115,15 @@ open MethodDetectionReceipt public
 ------------------------------------------------------------------------
 
 data AssayCoordinate : Set where
-  analyteConcentration
-  extractionRecovery
-  separationResponse
-  signalOrIonisationYield
-  detectorResponse
-  matrixEffect
-  calibratedConcentration
-  decisionThreshold
-  : AssayCoordinate
+  analyteConcentration : AssayCoordinate
+  extractionRecovery : AssayCoordinate
+  separationResponse : AssayCoordinate
+  signalOrIonisationYield : AssayCoordinate
+  detectorResponse : AssayCoordinate
+  matrixEffect : AssayCoordinate
+  calibratedConcentration : AssayCoordinate
+  decisionThreshold : AssayCoordinate
+
 
 assayCoordinateRole : AssayCoordinate → Design.CoordinateRole
 assayCoordinateRole analyteConcentration = Design.measuredObservable

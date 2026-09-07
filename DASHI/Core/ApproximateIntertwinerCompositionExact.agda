@@ -73,7 +73,7 @@ exactIntertwinerIsZeroApproximate :
   Core.Intertwiner projectIn projectOut fineMap coarseMap →
   ApproximateIntertwiner
     dOut projectIn projectOut fineMap coarseMap zero
-exactIntertwinerIsZeroApproximate dOut exact =
+exactIntertwinerIsZeroApproximate {projectIn = projectIn} {projectOut = projectOut} {fineMap = fineMap} {coarseMap = coarseMap} dOut exact =
   approximateIntertwiner proof
   where
     proof : ∀ fine →
@@ -99,7 +99,7 @@ composeApproximateIntertwiners :
     (λ a → h (f a))
     (λ a' → k (g a'))
     (epsilon2 + epsilon1)
-composeApproximateIntertwiners first second kNonexpansive =
+composeApproximateIntertwiners {dC = dC} {qA = qA} {qB = qB} {qC = qC} {f = f} {h = h} {g = g} {k = k} {epsilon1 = epsilon1} {epsilon2 = epsilon2} first second kNonexpansive =
   approximateIntertwiner compositeBound
   where
     compositeBound :

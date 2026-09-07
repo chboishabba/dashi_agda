@@ -16,32 +16,32 @@ import DASHI.Governance.SocioTechnicalPowerSelectionAssayExact as Power
 ------------------------------------------------------------------------
 
 data BurdenEpoch : Set where
-  punitiveEpoch
-  therapeuticReopeningEpoch
-  commercialExpansionEpoch
-  : BurdenEpoch
+  punitiveEpoch : BurdenEpoch
+  therapeuticReopeningEpoch : BurdenEpoch
+  commercialExpansionEpoch : BurdenEpoch
+
 
 data HistoricalBurdenBearer : Set where
-  criminalisedCarrier
-  careExcludedCarrier
-  affectedCommunity
-  indigenousSovereignCommunity
-  publicInstitution
-  commercialActor
-  : HistoricalBurdenBearer
+  criminalisedCarrier : HistoricalBurdenBearer
+  careExcludedCarrier : HistoricalBurdenBearer
+  affectedCommunity : HistoricalBurdenBearer
+  indigenousSovereignCommunity : HistoricalBurdenBearer
+  publicInstitution : HistoricalBurdenBearer
+  commercialActor : HistoricalBurdenBearer
+
 
 data BenefitRecipient : Set where
-  noPositiveBenefitRecipient
-  clinicalInstitutionBenefit
-  commercialBenefitRecipient
-  communityBenefitRecipient
-  : BenefitRecipient
+  noPositiveBenefitRecipient : BenefitRecipient
+  clinicalInstitutionBenefit : BenefitRecipient
+  commercialBenefitRecipient : BenefitRecipient
+  communityBenefitRecipient : BenefitRecipient
+
 
 data RepairResponsibilityState : Set where
-  repairBurdenOutstanding
-  repairBurdenAcknowledged
-  repairBurdenDischargedByReceipt
-  : RepairResponsibilityState
+  repairBurdenOutstanding : RepairResponsibilityState
+  repairBurdenAcknowledged : RepairResponsibilityState
+  repairBurdenDischargedByReceipt : RepairResponsibilityState
+
 
 data PublicSurface : Set where
   samePositiveTherapeuticSurface : PublicSurface
@@ -115,12 +115,12 @@ positiveTherapeuticSurfaceDoesNotErasePunitiveResidue ()
 ------------------------------------------------------------------------
 
 data BurdenTransferMode : Set where
-  burdenRetainedByInstitution
-  burdenExternalisedToClassifiedCarrier
-  burdenExternalisedToAffectedCommunity
-  burdenAcknowledgedForRepair
-  burdenDischargedWithIndependentReceipt
-  : BurdenTransferMode
+  burdenRetainedByInstitution : BurdenTransferMode
+  burdenExternalisedToClassifiedCarrier : BurdenTransferMode
+  burdenExternalisedToAffectedCommunity : BurdenTransferMode
+  burdenAcknowledgedForRepair : BurdenTransferMode
+  burdenDischargedWithIndependentReceipt : BurdenTransferMode
+
 
 record HistoricalBurdenTransfer : Set where
   constructor historicalBurdenTransfer

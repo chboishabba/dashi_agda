@@ -72,12 +72,12 @@ record LiteralTargetCenteredScalarProblem : Set₁ where
 open LiteralTargetCenteredScalarProblem public
 
 data ScalarCancellationMechanism : Set where
-  targetCenteredPhasePairing
-  exactFourierWindow
-  vanishingMomentTransfer
-  integrationByPartsDecay
-  directSignedCosineEstimate
-  : ScalarCancellationMechanism
+  targetCenteredPhasePairing : ScalarCancellationMechanism
+  exactFourierWindow : ScalarCancellationMechanism
+  vanishingMomentTransfer : ScalarCancellationMechanism
+  integrationByPartsDecay : ScalarCancellationMechanism
+  directSignedCosineEstimate : ScalarCancellationMechanism
+
 
 record TargetCenteredScalarCancellationReceipt
     (P : LiteralTargetCenteredScalarProblem) : Set₁ where
@@ -117,13 +117,13 @@ existingMachineryClosesScalarConsumer P M =
 ------------------------------------------------------------------------
 
 data QStructuralFact : Set where
-  qEven
-  qOdd
-  qHasVanishingMoments
-  qHasCompactFourierSupport
-  qHasSignedFactorization
-  qHasTargetPhaseIdentity
-  : QStructuralFact
+  qEven : QStructuralFact
+  qOdd : QStructuralFact
+  qHasVanishingMoments : QStructuralFact
+  qHasCompactFourierSupport : QStructuralFact
+  qHasSignedFactorization : QStructuralFact
+  qHasTargetPhaseIdentity : QStructuralFact
+
 
 record QStructureCompiler
     (P : LiteralTargetCenteredScalarProblem)

@@ -22,13 +22,13 @@ import DASHI.Physics.Foundations.FundamentalConstantViabilityFibreExact as Viabi
 ------------------------------------------------------------------------
 
 data ChemicalOrganisationStage : Set where
-  molecularAvailability
-  reactionNetwork
-  autocatalyticOrganisation
-  compartmentalisedNetwork
-  maintainedNonequilibriumSystem
-  openEndedEvolutionCandidate
-  : ChemicalOrganisationStage
+  molecularAvailability : ChemicalOrganisationStage
+  reactionNetwork : ChemicalOrganisationStage
+  autocatalyticOrganisation : ChemicalOrganisationStage
+  compartmentalisedNetwork : ChemicalOrganisationStage
+  maintainedNonequilibriumSystem : ChemicalOrganisationStage
+  openEndedEvolutionCandidate : ChemicalOrganisationStage
+
 
 record PrebioticTransitionReceipt : Set where
   constructor prebiotic-transition-receipt

@@ -31,36 +31,36 @@ import DASHI.Cognition.PNF.SensibLawPabaiRecognitionRemedyGapExact as Pabai
 ------------------------------------------------------------------------
 
 data CandidatePlaintiffClass : Set where
-  personsPresentInAustralia
-  pleadedTorresStraitApplicantClass
-  otherPreciselyDefinedClass
-  : CandidatePlaintiffClass
+  personsPresentInAustralia : CandidatePlaintiffClass
+  pleadedTorresStraitApplicantClass : CandidatePlaintiffClass
+  otherPreciselyDefinedClass : CandidatePlaintiffClass
+
 
 data CandidateHarm : Set where
-  climateAttributedPhysicalInjury
-  climateAttributedDeath
-  culturalOrRelationalLoss
-  propertyLoss
-  otherSpecifiedHarm
-  : CandidateHarm
+  climateAttributedPhysicalInjury : CandidateHarm
+  climateAttributedDeath : CandidateHarm
+  culturalOrRelationalLoss : CandidateHarm
+  propertyLoss : CandidateHarm
+  otherSpecifiedHarm : CandidateHarm
+
 
 data DutyIssue : Set where
-  reasonableForeseeability
-  knowledge
-  control
-  vulnerability
-  assumptionOfResponsibility
-  plaintiffClassDeterminacy
-  harmTypeDeterminacy
-  temporalScope
-  causation
-  scopeOfDuty
-  statutoryCoherence
-  coreGovernmentPolicy
-  institutionalCompetence
-  publicAuthorityFunction
-  compensability
-  : DutyIssue
+  reasonableForeseeability : DutyIssue
+  knowledge : DutyIssue
+  control : DutyIssue
+  vulnerability : DutyIssue
+  assumptionOfResponsibility : DutyIssue
+  plaintiffClassDeterminacy : DutyIssue
+  harmTypeDeterminacy : DutyIssue
+  temporalScope : DutyIssue
+  causation : DutyIssue
+  scopeOfDuty : DutyIssue
+  statutoryCoherence : DutyIssue
+  coreGovernmentPolicy : DutyIssue
+  institutionalCompetence : DutyIssue
+  publicAuthorityFunction : DutyIssue
+  compensability : DutyIssue
+
 
 record CandidateClimateDuty : Set where
   constructor candidate-climate-duty
@@ -100,14 +100,14 @@ australiaDeathCandidate = candidate-climate-duty
 ------------------------------------------------------------------------
 
 data IssueState : Set where
-  satisfied
-  weighsForDuty
-  weighsAgainstDuty
-  hardBlock
-  disputed
-  untested
-  notApplicable
-  : IssueState
+  satisfied : IssueState
+  weighsForDuty : IssueState
+  weighsAgainstDuty : IssueState
+  hardBlock : IssueState
+  disputed : IssueState
+  untested : IssueState
+  notApplicable : IssueState
+
 
 record DutyIssueReceipt : Set where
   constructor duty-issue-receipt

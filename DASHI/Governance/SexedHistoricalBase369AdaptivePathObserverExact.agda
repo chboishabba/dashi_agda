@@ -24,9 +24,9 @@ import DASHI.Governance.SexedHistoricalAdaptiveMeasurementRefinementExact as Exi
 ------------------------------------------------------------------------
 
 data HiddenConstructionPath : Set where
-  hiddenMasculineCrossBack
-  hiddenFeminineCrossBack
-  : HiddenConstructionPath
+  hiddenMasculineCrossBack : HiddenConstructionPath
+  hiddenFeminineCrossBack : HiddenConstructionPath
+
 
 pathCode : HiddenConstructionPath → Path.CrossPath
 pathCode hiddenMasculineCrossBack = Path.masculineCrossBack
@@ -81,22 +81,22 @@ base369StratumCannotRecoverComposite =
 ------------------------------------------------------------------------
 
 data PathMeasurement : Set where
-  coarseStratumOnly
-  crossingCountOnly
-  endpointIdentity
-  orderedSequence
-  admissibilityReceipt
-  : PathMeasurement
+  coarseStratumOnly : PathMeasurement
+  crossingCountOnly : PathMeasurement
+  endpointIdentity : PathMeasurement
+  orderedSequence : PathMeasurement
+  admissibilityReceipt : PathMeasurement
+
 
 data PathMeasurementResult : Set where
-  sameCornerStratum
-  sameDoubleCrossing
-  closesAtMasculine
-  closesAtFeminine
-  masculineFirstSequence
-  feminineFirstSequence
-  admittedReceipt
-  : PathMeasurementResult
+  sameCornerStratum : PathMeasurementResult
+  sameDoubleCrossing : PathMeasurementResult
+  closesAtMasculine : PathMeasurementResult
+  closesAtFeminine : PathMeasurementResult
+  masculineFirstSequence : PathMeasurementResult
+  feminineFirstSequence : PathMeasurementResult
+  admittedReceipt : PathMeasurementResult
+
 
 observe : PathMeasurement → HiddenConstructionPath → PathMeasurementResult
 observe coarseStratumOnly _ = sameCornerStratum
@@ -132,10 +132,10 @@ sequenceMeasurementSeparates ()
 ------------------------------------------------------------------------
 
 data PathResearchQuestion : Set where
-  recoverCompositeEndpoint
-  recoverConstructionOrder
-  recoverAdmissibility
-  : PathResearchQuestion
+  recoverCompositeEndpoint : PathResearchQuestion
+  recoverConstructionOrder : PathResearchQuestion
+  recoverAdmissibility : PathResearchQuestion
+
 
 nextPathMeasurement :
   PathResearchQuestion → Suspension.EpistemicDisposition → PathMeasurement

@@ -37,10 +37,10 @@ import DASHI.Physics.Closure.NSTriadKNLuoExplicitCutoffLocalizedCriterionExact a
 ------------------------------------------------------------------------
 
 data ExistingBlockerSemanticKind : Set where
-  weightedSchurRestrictedRow
-  weakStrongQuadraticGapCompatibility
-  localizedGradientCutoffMajorant
-  localizedVorticityProjection
+  weightedSchurRestrictedRow : ExistingBlockerSemanticKind
+  weakStrongQuadraticGapCompatibility : ExistingBlockerSemanticKind
+  localizedGradientCutoffMajorant : ExistingBlockerSemanticKind
+  localizedVorticityProjection : ExistingBlockerSemanticKind
   timeDependentDissipationThreshold : ExistingBlockerSemanticKind
 
 forcedTailBlockerSemanticKind : ExistingBlockerSemanticKind

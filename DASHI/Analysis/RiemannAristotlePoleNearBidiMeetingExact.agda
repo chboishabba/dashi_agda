@@ -17,9 +17,9 @@ import DASHI.Analysis.RiemannAristotlePoleNearExplicitFormulaBridgeExact as EFBr
 ------------------------------------------------------------------------
 
 data PoleNearAttackRoute : Set where
-  directPhaseRoute
-  explicitFormulaWindowRoute
-  : PoleNearAttackRoute
+  directPhaseRoute : PoleNearAttackRoute
+  explicitFormulaWindowRoute : PoleNearAttackRoute
+
 
 record PoleNearRouteEvaluation (route : PoleNearAttackRoute) : Set₁ where
   constructor pole-near-route-evaluation

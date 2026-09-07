@@ -87,7 +87,7 @@ triadicNineAsTwoPlusSevenCocycle : MultiplicativeScaleCocycle
 triadicNineAsTwoPlusSevenCocycle =
   multiplicativeScaleCocycle 9 2187 19683 refl
 
-record RingScaleBoundary : Set where
+record RingScaleBoundary : Set₁ where
   constructor ringScaleBoundary
   field
     largestDigitIsBaseCardinality : Set

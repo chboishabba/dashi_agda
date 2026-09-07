@@ -31,18 +31,18 @@ import DASHI.Chemistry.DefensiveRegulatoryAssayStressAuditExact as Stress
 ------------------------------------------------------------------------
 
 data AssayExperimentCoordinate : Set where
-  regulatoryLimitRoute
-  analyteIdentity
-  matrixState
-  extractionRecovery
-  separationResponse
-  signalOrIonisationYield
-  detectorResponse
-  lodMargin
-  loqMargin
-  complianceDecisionMargin
-  orthogonalMethodDiscriminator
-  : AssayExperimentCoordinate
+  regulatoryLimitRoute : AssayExperimentCoordinate
+  analyteIdentity : AssayExperimentCoordinate
+  matrixState : AssayExperimentCoordinate
+  extractionRecovery : AssayExperimentCoordinate
+  separationResponse : AssayExperimentCoordinate
+  signalOrIonisationYield : AssayExperimentCoordinate
+  detectorResponse : AssayExperimentCoordinate
+  lodMargin : AssayExperimentCoordinate
+  loqMargin : AssayExperimentCoordinate
+  complianceDecisionMargin : AssayExperimentCoordinate
+  orthogonalMethodDiscriminator : AssayExperimentCoordinate
+
 
 assayCoordinateRole : AssayExperimentCoordinate → Coordinate.CoordinateRole
 assayCoordinateRole regulatoryLimitRoute = Coordinate.referenceInvariant
@@ -79,28 +79,28 @@ detectorResponseIsMeasured = refl
 ------------------------------------------------------------------------
 
 data AssaySearchState : Set where
-  realAssayStressFinding
-  availabilityUseLeaf
-  regulatoryRouteLeaf
-  actualMethodScopeLeaf
-  extractionMatrixLeaf
-  signalDetectorLeaf
-  lodLoqLeaf
-  decisionRuleLeaf
-  safetyRelevanceLeaf
-  : AssaySearchState
+  realAssayStressFinding : AssaySearchState
+  availabilityUseLeaf : AssaySearchState
+  regulatoryRouteLeaf : AssaySearchState
+  actualMethodScopeLeaf : AssaySearchState
+  extractionMatrixLeaf : AssaySearchState
+  signalDetectorLeaf : AssaySearchState
+  lodLoqLeaf : AssaySearchState
+  decisionRuleLeaf : AssaySearchState
+  safetyRelevanceLeaf : AssaySearchState
+
 
 data AssaySearchAction : Set where
-  assembleRealFinding
-  inspectAvailabilityUse
-  inspectRegulatoryRoute
-  inspectActualMethodScope
-  inspectExtractionMatrix
-  inspectSignalDetector
-  inspectLodLoq
-  inspectDecisionRule
-  inspectSafetyRelevance
-  : AssaySearchAction
+  assembleRealFinding : AssaySearchAction
+  inspectAvailabilityUse : AssaySearchAction
+  inspectRegulatoryRoute : AssaySearchAction
+  inspectActualMethodScope : AssaySearchAction
+  inspectExtractionMatrix : AssaySearchAction
+  inspectSignalDetector : AssaySearchAction
+  inspectLodLoq : AssaySearchAction
+  inspectDecisionRule : AssaySearchAction
+  inspectSafetyRelevance : AssaySearchAction
+
 
 assayActionSource : AssaySearchAction → AssaySearchState
 assayActionSource assembleRealFinding = realAssayStressFinding
@@ -155,12 +155,12 @@ realFindingRequiresEightLeaves = refl
 ------------------------------------------------------------------------
 
 data AssaySearchModality : Set where
-  repositoryProofReuse
-  sourceReconstruction
-  analyticalMethodReview
-  numericalOrCalibrationExperiment
-  physicalMeasurement
-  : AssaySearchModality
+  repositoryProofReuse : AssaySearchModality
+  sourceReconstruction : AssaySearchModality
+  analyticalMethodReview : AssaySearchModality
+  numericalOrCalibrationExperiment : AssaySearchModality
+  physicalMeasurement : AssaySearchModality
+
 
 routeDisposition : AssaySearchModality → Least.RouteDisposition
 routeDisposition repositoryProofReuse = Least.redirectedReuse

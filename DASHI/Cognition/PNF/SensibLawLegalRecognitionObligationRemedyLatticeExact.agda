@@ -26,15 +26,15 @@ import DASHI.Cognition.PNF.SensibLawPabaiRecognitionRemedyGapExact as Pabai
 ------------------------------------------------------------------------
 
 data JuridicalCoordinate : Set where
-  fact
-  legalStatus
-  legalObligation
-  privateLawDuty
-  causeOfAction
-  compensableHeadOfLoss
-  availableRemedy
-  domesticEnforceability
-  : JuridicalCoordinate
+  fact : JuridicalCoordinate
+  legalStatus : JuridicalCoordinate
+  legalObligation : JuridicalCoordinate
+  privateLawDuty : JuridicalCoordinate
+  causeOfAction : JuridicalCoordinate
+  compensableHeadOfLoss : JuridicalCoordinate
+  availableRemedy : JuridicalCoordinate
+  domesticEnforceability : JuridicalCoordinate
+
 
 record JuridicalReceipt : Set where
   constructor juridical-receipt
@@ -88,11 +88,11 @@ noDutyDoesNotMeanNoIntervention ()
 ------------------------------------------------------------------------
 
 data LossBearer : Set where
-  claimant
-  defendant
-  publicFund
-  distributedOrUnresolved
-  : LossBearer
+  claimant : LossBearer
+  defendant : LossBearer
+  publicFund : LossBearer
+  distributedOrUnresolved : LossBearer
+
 
 record DistributionalEffect : Set where
   constructor distributional-effect
@@ -117,12 +117,12 @@ preservationIsObservableOutcome = refl
 ------------------------------------------------------------------------
 
 data MaboPropertyNode : Set where
-  crownSovereignty
-  crownRadicalTitle
-  crownBeneficialOwnershipOfAllLand
-  antecedentNativeTitle
-  survivingNativeTitle
-  : MaboPropertyNode
+  crownSovereignty : MaboPropertyNode
+  crownRadicalTitle : MaboPropertyNode
+  crownBeneficialOwnershipOfAllLand : MaboPropertyNode
+  antecedentNativeTitle : MaboPropertyNode
+  survivingNativeTitle : MaboPropertyNode
+
 
 record MaboDecompositionReceipt : Set where
   constructor mabo-decomposition-receipt

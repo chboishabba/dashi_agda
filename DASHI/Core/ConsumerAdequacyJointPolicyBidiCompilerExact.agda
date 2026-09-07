@@ -35,7 +35,7 @@ CertifiedAdequacyJointPolicy :
     (interface : Adequacy.FirstOrderAdequacyInterface
       ExactRealises ApproxRealises) →
   (Hypothesis → Set) → ModelState → Set₁
-CertifiedAdequacyJointPolicy system Authority ExactRealises ApproxRealises
+CertifiedAdequacyJointPolicy {ModelState = ModelState} system Authority ExactRealises ApproxRealises
     interface live model =
   Joint.JointSequentialPolicy
     system Authority ModelState
@@ -64,8 +64,8 @@ actFromDerivedAdequacy :
   Authority intervention →
   CertifiedAdequacyJointPolicy
     system Authority ExactRealises ApproxRealises interface live model
-actFromDerivedAdequacy {intervention = intervention}
-    interface robust proof authority =
+actFromDerivedAdequacy interface {intervention = intervention}
+    robust proof authority =
   Joint.actNow intervention robust
     (Adequacy.proofToToken interface proof)
     authority

@@ -9,24 +9,24 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data LinkSourceRole : Set where
-  australianGovernmentStatement
-  parliamentaryEvidence
-  royalCommissionEvidence
-  mediaReport
-  civilSocietyAllegation
-  pendingLitigationAllegation
+  australianGovernmentStatement : LinkSourceRole
+  parliamentaryEvidence : LinkSourceRole
+  royalCommissionEvidence : LinkSourceRole
+  mediaReport : LinkSourceRole
+  civilSocietyAllegation : LinkSourceRole
+  pendingLitigationAllegation : LinkSourceRole
   dashiInterpretiveBridge : LinkSourceRole
 
 data LinkKind : Set where
-  f35GlobalSupplyChain
-  militaryExportPermit
-  israeliDefenceIndustryContract
-  privateCommunitySecurityCoordination
-  armedPrivateSecurityAtFixedSites
-  proposedArmingAtPublicEvents
-  israelTrainingAllegation
-  recognitionOfPalestine
-  settlerSanctions
+  f35GlobalSupplyChain : LinkKind
+  militaryExportPermit : LinkKind
+  israeliDefenceIndustryContract : LinkKind
+  privateCommunitySecurityCoordination : LinkKind
+  armedPrivateSecurityAtFixedSites : LinkKind
+  proposedArmingAtPublicEvents : LinkKind
+  israelTrainingAllegation : LinkKind
+  recognitionOfPalestine : LinkKind
+  settlerSanctions : LinkKind
   directNSWPoliceIsraelOperationalTransfer : LinkKind
 
 record AustraliaIsraelLinkReceipt : Set where
@@ -134,19 +134,19 @@ canonicalBilateralPolicyFibre = bilateralPolicyFibre
 ------------------------------------------------------------------------
 
 data AustraliaIsraelClaim : Set where
-  australiaMilitaryIndustriallyLinkedToIsrael
-  australiaDirectlySuppliesEveryIsraeliMilitaryOperation
-  israelSecurityPracticeTransferredToNSWPolice
-  privateSecurityArmedAtSomeFixedSites
-  privateSecurityGenerallyAuthorisedForArmedPublicPatrols
+  australiaMilitaryIndustriallyLinkedToIsrael : AustraliaIsraelClaim
+  australiaDirectlySuppliesEveryIsraeliMilitaryOperation : AustraliaIsraelClaim
+  israelSecurityPracticeTransferredToNSWPolice : AustraliaIsraelClaim
+  privateSecurityArmedAtSomeFixedSites : AustraliaIsraelClaim
+  privateSecurityGenerallyAuthorisedForArmedPublicPatrols : AustraliaIsraelClaim
   australiaPolicyUniformlySupportsIsraeliGovernment : AustraliaIsraelClaim
 
 data AustraliaIsraelProducer : Set where
-  militarySupplyChainProducer
-  operationSpecificTransferProducer
-  policeTrainingOperationalTransferProducer
-  licensedFixedSiteSecurityProducer
-  publicArmingLegalAuthorityProducer
+  militarySupplyChainProducer : AustraliaIsraelProducer
+  operationSpecificTransferProducer : AustraliaIsraelProducer
+  policeTrainingOperationalTransferProducer : AustraliaIsraelProducer
+  licensedFixedSiteSecurityProducer : AustraliaIsraelProducer
+  publicArmingLegalAuthorityProducer : AustraliaIsraelProducer
   completeBilateralPolicyProducer : AustraliaIsraelProducer
 
 reverseAustraliaIsrael : AustraliaIsraelClaim → AustraliaIsraelProducer

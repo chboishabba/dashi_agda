@@ -16,12 +16,12 @@ import DASHI.Governance.EnvironmentalAuthoritySourceRegistryRound2Exact as Sourc
 ------------------------------------------------------------------------
 
 data MithakaClaim : Set where
-  largeScaleQuarrying
-  grindstoneProduction
-  substantialDwellings
-  confirmedVillageSettlementAtAllTestedSites
-  continentWideAgricultureClassification
-  : MithakaClaim
+  largeScaleQuarrying : MithakaClaim
+  grindstoneProduction : MithakaClaim
+  substantialDwellings : MithakaClaim
+  confirmedVillageSettlementAtAllTestedSites : MithakaClaim
+  continentWideAgricultureClassification : MithakaClaim
+
 
 data ClaimStatus : MithakaClaim → Set where
   evidencedQuarrying : ClaimStatus largeScaleQuarrying

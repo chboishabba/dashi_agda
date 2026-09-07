@@ -34,10 +34,10 @@ planningVoice =
 ------------------------------------------------------------------------
 
 data ParticipationStage : Set where
-  informedStage
-  respondentStage
-  contestingStage
-  coDecidingStage
+  informedStage : ParticipationStage
+  respondentStage : ParticipationStage
+  contestingStage : ParticipationStage
+  coDecidingStage : ParticipationStage
   governingStage : ParticipationStage
 
 stageLevel : ParticipationStage → Inquiry.AuthorityLevel

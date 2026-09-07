@@ -268,9 +268,9 @@ narrowBody : Formula
 narrowBody = notF mutateSurface
 
 data ScopeReading : Set where
-  broadDeMorganReading
-  narrowReading
-  : ScopeReading
+  broadDeMorganReading : ScopeReading
+  narrowReading : ScopeReading
+
 
 readingFormula : ScopeReading → Formula
 readingFormula broadDeMorganReading = broadBody

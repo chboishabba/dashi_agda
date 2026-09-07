@@ -12,11 +12,11 @@ import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityPropositionWeldExact as 
 import DASHI.Cognition.PNF.SensibLawMaboRecognitionCoordinateFactorisationExact as Factor
 
 data PrimaryUseRelation : Set where
-  primarySupportsLaterUse
-  primaryQualifiesLaterUse
-  primaryContrastsLaterUse
-  primaryRelationUnresolved
-  : PrimaryUseRelation
+  primarySupportsLaterUse : PrimaryUseRelation
+  primaryQualifiesLaterUse : PrimaryUseRelation
+  primaryContrastsLaterUse : PrimaryUseRelation
+  primaryRelationUnresolved : PrimaryUseRelation
+
 
 record PrimaryAuthorityUseWeld
     {maboProposition : Mabo.ReviewedJudicialProposition}

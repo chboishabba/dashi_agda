@@ -75,16 +75,16 @@ open EvaluationProducesBudget public
 ------------------------------------------------------------------------
 
 data FiniteNearRoute : Set where
-  directFiniteExponentialSum
-  targetCenteredExplicitFormula
-  localZeroCountOnly
-  reflectionOnly
-  absoluteEnvelopeMajorant
-  montgomeryVaughanDirect
-  unbridgedHermitianPoisson
-  unbridgedPairKernelFrobenius
-  namedHardyDonorOnly
-  : FiniteNearRoute
+  directFiniteExponentialSum : FiniteNearRoute
+  targetCenteredExplicitFormula : FiniteNearRoute
+  localZeroCountOnly : FiniteNearRoute
+  reflectionOnly : FiniteNearRoute
+  absoluteEnvelopeMajorant : FiniteNearRoute
+  montgomeryVaughanDirect : FiniteNearRoute
+  unbridgedHermitianPoisson : FiniteNearRoute
+  unbridgedPairKernelFrobenius : FiniteNearRoute
+  namedHardyDonorOnly : FiniteNearRoute
+
 
 ------------------------------------------------------------------------
 -- What an admitted route must preserve before it is allowed to claim it can

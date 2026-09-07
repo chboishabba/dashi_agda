@@ -16,20 +16,20 @@ import DASHI.Governance.DrugClassificationAsymmetryDiscriminatorExact as Classif
 ------------------------------------------------------------------------
 
 data RuleCoordinate : Set where
-  punitiveWeightCoordinate
-  treatmentAuthorityCoordinate
-  veteranExceptionCoordinate
-  medicalDiagnosisGateCoordinate
-  sponsorshipContainmentCoordinate
-  sovereigntyRecognitionCoordinate
-  : RuleCoordinate
+  punitiveWeightCoordinate : RuleCoordinate
+  treatmentAuthorityCoordinate : RuleCoordinate
+  veteranExceptionCoordinate : RuleCoordinate
+  medicalDiagnosisGateCoordinate : RuleCoordinate
+  sponsorshipContainmentCoordinate : RuleCoordinate
+  sovereigntyRecognitionCoordinate : RuleCoordinate
+
 
 data RuleState : Set where
-  ruleInstalled
-  ruleAbsent
-  rulePartial
-  ruleUnknown
-  : RuleState
+  ruleInstalled : RuleState
+  ruleAbsent : RuleState
+  rulePartial : RuleState
+  ruleUnknown : RuleState
+
 
 record HistoricalRuleWorld : Set where
   constructor historicalRuleWorld
@@ -132,10 +132,10 @@ medicalDiagnosisGateSeparatesHistoricalClassifierWorlds = record
 ------------------------------------------------------------------------
 
 data RouteFlipQuestion : Set where
-  punishmentToCareFlip
-  punishmentToCeremonialAuthorityFlip
-  punishmentToRegulatedMedicalFlip
-  : RouteFlipQuestion
+  punishmentToCareFlip : RouteFlipQuestion
+  punishmentToCeremonialAuthorityFlip : RouteFlipQuestion
+  punishmentToRegulatedMedicalFlip : RouteFlipQuestion
+
 
 data CandidateRuleDemand : RouteFlipQuestion → RuleCoordinate → Set where
   careNeedsTreatmentAuthority :

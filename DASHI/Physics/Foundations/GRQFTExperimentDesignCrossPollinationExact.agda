@@ -23,16 +23,16 @@ import DASHI.Programmes.QuantumFalsifiableTargetExact as Quantum
 ------------------------------------------------------------------------
 
 data FundamentalExperimentCoordinate : Set where
-  grRecoveryCoordinate
-  qftRecoveryCoordinate
-  emergentLocalityCoordinate
-  lorentzViolationCoordinate
-  emergentRandomnessCoordinate
-  projectionTimeAsymmetryCoordinate
-  apparatusControlCoordinate
-  nuisanceSystematicCoordinate
-  derivedTheoryDiscriminatorCoordinate
-  : FundamentalExperimentCoordinate
+  grRecoveryCoordinate : FundamentalExperimentCoordinate
+  qftRecoveryCoordinate : FundamentalExperimentCoordinate
+  emergentLocalityCoordinate : FundamentalExperimentCoordinate
+  lorentzViolationCoordinate : FundamentalExperimentCoordinate
+  emergentRandomnessCoordinate : FundamentalExperimentCoordinate
+  projectionTimeAsymmetryCoordinate : FundamentalExperimentCoordinate
+  apparatusControlCoordinate : FundamentalExperimentCoordinate
+  nuisanceSystematicCoordinate : FundamentalExperimentCoordinate
+  derivedTheoryDiscriminatorCoordinate : FundamentalExperimentCoordinate
+
 
 coordinateRole : FundamentalExperimentCoordinate → Design.CoordinateRole
 coordinateRole grRecoveryCoordinate = Design.referenceInvariant

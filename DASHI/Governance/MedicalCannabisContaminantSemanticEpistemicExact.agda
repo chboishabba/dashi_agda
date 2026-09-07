@@ -24,15 +24,15 @@ data CannabisObservation : Set where
   validatedReleasedBatchContaminantDetection : CannabisObservation
 
 data CannabisMeaning : Set where
-  localProductSafetyMeaning
-  possibleProductionControlFailure
-  possibleTestingOrReleaseControlFailure
-  possibleRegulatoryOversightGap
-  possibleEnforcementCapacityGap
-  possiblePrivateIncentiveMisalignment
-  possibleExternalityShiftToPatient
-  possibleStructuralCapitalistContribution
-  : CannabisMeaning
+  localProductSafetyMeaning : CannabisMeaning
+  possibleProductionControlFailure : CannabisMeaning
+  possibleTestingOrReleaseControlFailure : CannabisMeaning
+  possibleRegulatoryOversightGap : CannabisMeaning
+  possibleEnforcementCapacityGap : CannabisMeaning
+  possiblePrivateIncentiveMisalignment : CannabisMeaning
+  possibleExternalityShiftToPatient : CannabisMeaning
+  possibleStructuralCapitalistContribution : CannabisMeaning
+
 
 meaningScale : CannabisMeaning → SemEpi.InterpretationScale
 meaningScale localProductSafetyMeaning = SemEpi.localObservationScale
@@ -205,19 +205,19 @@ capitalismBackwardDemands =
 ------------------------------------------------------------------------
 
 data FineSystemState : Set where
-  isolatedProducerDeviation
-  weakOversightAndEnforcement
-  incentiveExternalisationPattern
-  : FineSystemState
+  isolatedProducerDeviation : FineSystemState
+  weakOversightAndEnforcement : FineSystemState
+  incentiveExternalisationPattern : FineSystemState
+
 
 data CoarseContaminationSurface : Set where
   sameValidatedDetection : CoarseContaminationSurface
 
 data FineSystemExplanation : Set where
-  producerLocalExplanation
-  governanceCapacityExplanation
-  marketIncentiveExplanation
-  : FineSystemExplanation
+  producerLocalExplanation : FineSystemExplanation
+  governanceCapacityExplanation : FineSystemExplanation
+  marketIncentiveExplanation : FineSystemExplanation
+
 
 coarseObservation : FineSystemState → CoarseContaminationSurface
 coarseObservation _ = sameValidatedDetection

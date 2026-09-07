@@ -18,11 +18,11 @@ data Lane : Set where
   riemannLane yangMillsLane casimirLane : Lane
 
 data ReusableShape : Set where
-  poissonSummationShape
-  cutoffRemovalShape
-  sumIntegralDefectShape
-  renormalisedDifferenceShape
-  sameObjectWeldShape
+  poissonSummationShape : ReusableShape
+  cutoffRemovalShape : ReusableShape
+  sumIntegralDefectShape : ReusableShape
+  renormalisedDifferenceShape : ReusableShape
+  sameObjectWeldShape : ReusableShape
   nonFactorabilityShape : ReusableShape
 
 record CrossPollinationEdge : Set where

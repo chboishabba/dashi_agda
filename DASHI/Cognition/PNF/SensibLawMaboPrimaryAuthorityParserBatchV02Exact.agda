@@ -17,9 +17,9 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data TextProjectionKind : Set where
-  textNativePdfProjection
-  ocrDerivedProjection
-  : TextProjectionKind
+  textNativePdfProjection : TextProjectionKind
+  ocrDerivedProjection : TextProjectionKind
+
 
 record PrimaryAuthoritySpecimenReceipt : Set where
   constructor primaryAuthoritySpecimenReceipt

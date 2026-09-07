@@ -28,21 +28,21 @@ import DASHI.Governance.RevolutionaryPracticeBraid as Practice
 ------------------------------------------------------------------------
 
 data EnactedAction : Set where
-  suffrageActivism
-  religiousExit
-  witchSelfIdentification
-  crossSexSolidarity
-  masculineCounterReaction
-  reciprocalCareRearticulation
-  : EnactedAction
+  suffrageActivism : EnactedAction
+  religiousExit : EnactedAction
+  witchSelfIdentification : EnactedAction
+  crossSexSolidarity : EnactedAction
+  masculineCounterReaction : EnactedAction
+  reciprocalCareRearticulation : EnactedAction
+
 
 data FeedbackChannel : Set where
-  selfConstructionFeedback
-  otherConstructionFeedback
-  institutionalPowerFeedback
-  historicalMemoryFeedback
-  laterOptionConeFeedback
-  : FeedbackChannel
+  selfConstructionFeedback : FeedbackChannel
+  otherConstructionFeedback : FeedbackChannel
+  institutionalPowerFeedback : FeedbackChannel
+  historicalMemoryFeedback : FeedbackChannel
+  laterOptionConeFeedback : FeedbackChannel
+
 
 data FeedbackStatus : Set where
   expands contracts revises persists contested unresolved : FeedbackStatus
@@ -108,9 +108,9 @@ canonicalSuffrageRepressedReceipt =
 ------------------------------------------------------------------------
 
 data ChoiceToActionFineState : Set where
-  conceivedButNotEnacted
-  conceivedAndEnacted
-  : ChoiceToActionFineState
+  conceivedButNotEnacted : ChoiceToActionFineState
+  conceivedAndEnacted : ChoiceToActionFineState
+
 
 conceivedSurface : ChoiceToActionFineState → Choice.ConceivedChoiceSurface
 conceivedSurface _ = Choice.conceivedAsPossible
@@ -136,9 +136,9 @@ conceivedChoiceCannotRecoverEnactment =
 ------------------------------------------------------------------------
 
 data ActionFeedbackFineState : Set where
-  suffrageActionWithExpansion
-  suffrageActionWithRepression
-  : ActionFeedbackFineState
+  suffrageActionWithExpansion : ActionFeedbackFineState
+  suffrageActionWithRepression : ActionFeedbackFineState
+
 
 actionSurface : ActionFeedbackFineState → EnactedAction
 actionSurface _ = suffrageActivism

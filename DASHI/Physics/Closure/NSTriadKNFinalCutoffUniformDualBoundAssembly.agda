@@ -25,7 +25,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Closure.NSTriadKNGrafakosTorresComponentAssembly as GT
 
 data ConstantFactor : Set where
-  shellFactor overlapFactor orbitFactor helicityFactor realityFactor
+  shellFactor overlapFactor orbitFactor helicityFactor realityFactor : ConstantFactor
   directionFactor : ConstantFactor
 
 record FinalDualBoundCarrier

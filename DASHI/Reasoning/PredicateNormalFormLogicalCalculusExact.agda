@@ -55,10 +55,10 @@ record LogicalToEvidenceReadback
 open LogicalToEvidenceReadback public
 
 data ConsequenceAuthority : Set where
-  purelyLogicalConsequence
-  requiresAdditionalEmpiricalEvidence
-  blockedByMissingEvidence
-  : ConsequenceAuthority
+  purelyLogicalConsequence : ConsequenceAuthority
+  requiresAdditionalEmpiricalEvidence : ConsequenceAuthority
+  blockedByMissingEvidence : ConsequenceAuthority
+
 
 record EvidenceQualifiedConsequence : Set₁ where
   constructor evidenceQualifiedConsequence

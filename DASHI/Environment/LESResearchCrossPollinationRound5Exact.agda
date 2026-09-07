@@ -76,7 +76,7 @@ hybridCommandsAreWorldOnly system command =
 consumerRelativityRegression :
   (depth : Nat) →
   Governed.FutureEquivalent
-    Regression.publicSystem Regression.public depth Regression.left Regression.right
+    Regression.publicSystem Regression.publicConsumer depth Regression.left Regression.right
 consumerRelativityRegression = Regression.publicStatesEquivalentAtEveryRequestedDepth
 
 round5BuildsOnRound4 : Round4.LESRound4FormalClosureStatus

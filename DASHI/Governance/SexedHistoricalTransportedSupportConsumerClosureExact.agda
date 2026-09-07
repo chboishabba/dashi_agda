@@ -40,9 +40,9 @@ data CompatibleSupportHistory :
 ------------------------------------------------------------------------
 
 data ReopeningPriority : Set where
-  institutionFirstReopening
-  distributedCounterformationReopening
-  : ReopeningPriority
+  institutionFirstReopening : ReopeningPriority
+  distributedCounterformationReopening : ReopeningPriority
+
 
 reopeningPriority : Transported.SupportHistoryFine → ReopeningPriority
 reopeningPriority Transported.repairedThenCounterformed = institutionFirstReopening

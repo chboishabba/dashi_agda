@@ -22,13 +22,13 @@ import DASHI.Governance.OptionConeCoercionExact as Cone
 ------------------------------------------------------------------------
 
 data GovernanceTrigger : Set where
-  unresolvedClassificationTrigger
-  chillingAfterFaultTrigger
-  admittedVoiceWithoutMetaRuleTrigger
-  sameFunctioningDifferentCapabilityTrigger
-  materialBenefitAsymmetryTrigger
-  sovereigntyErasureTrigger
-  : GovernanceTrigger
+  unresolvedClassificationTrigger : GovernanceTrigger
+  chillingAfterFaultTrigger : GovernanceTrigger
+  admittedVoiceWithoutMetaRuleTrigger : GovernanceTrigger
+  sameFunctioningDifferentCapabilityTrigger : GovernanceTrigger
+  materialBenefitAsymmetryTrigger : GovernanceTrigger
+  sovereigntyErasureTrigger : GovernanceTrigger
+
 
 triggerProbe : GovernanceTrigger → Costed.ProbeKind
 triggerProbe unresolvedClassificationTrigger = Costed.historyProbe

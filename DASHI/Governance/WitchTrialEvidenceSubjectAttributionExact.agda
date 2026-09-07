@@ -73,15 +73,15 @@ spectralReportCannotRecoverMechanism =
 ------------------------------------------------------------------------
 
 data WitchEvidenceStage : Set where
-  reportedExperience
-  testimonyAdmitted
-  mechanismAttributed
-  agentAttributed
-  witchCategoryImposed
-  culpabilityAttributed
-  convictionEntered
-  historicalReconstruction
-  : WitchEvidenceStage
+  reportedExperience : WitchEvidenceStage
+  testimonyAdmitted : WitchEvidenceStage
+  mechanismAttributed : WitchEvidenceStage
+  agentAttributed : WitchEvidenceStage
+  witchCategoryImposed : WitchEvidenceStage
+  culpabilityAttributed : WitchEvidenceStage
+  convictionEntered : WitchEvidenceStage
+  historicalReconstruction : WitchEvidenceStage
+
 
 report≠mechanism : reportedExperience ≡ mechanismAttributed → ⊥
 report≠mechanism ()
@@ -102,10 +102,10 @@ conviction≠historicalReconstruction ()
 ------------------------------------------------------------------------
 
 data WitchIdentitySource : Set where
-  externallyAccusedWitch
-  selfIdentifiedWitch
-  laterReclaimedWitchSymbol
-  : WitchIdentitySource
+  externallyAccusedWitch : WitchIdentitySource
+  selfIdentifiedWitch : WitchIdentitySource
+  laterReclaimedWitchSymbol : WitchIdentitySource
+
 
 accusation≠selfIdentification :
   externallyAccusedWitch ≡ selfIdentifiedWitch → ⊥
@@ -121,11 +121,11 @@ selfIdentification≠laterReclamation ()
 ------------------------------------------------------------------------
 
 data TestimonyProvenance : Set where
-  independentTestimony
-  interrogationGeneratedTestimony
-  confessionNamingGeneratedTestimony
-  repeatedCommunityNarrative
-  : TestimonyProvenance
+  independentTestimony : TestimonyProvenance
+  interrogationGeneratedTestimony : TestimonyProvenance
+  confessionNamingGeneratedTestimony : TestimonyProvenance
+  repeatedCommunityNarrative : TestimonyProvenance
+
 
 interrogationGenerated≠independent :
   interrogationGeneratedTestimony ≡ independentTestimony → ⊥

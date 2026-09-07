@@ -24,11 +24,11 @@ import DASHI.Reasoning.AristotleMCGSHypergraphExact as Aristotle
 ------------------------------------------------------------------------
 
 data MergeStrategy : Set where
-  fastForward
-  threeWay
-  monotoneKnowledgeJoin
-  guardedReconcile
-  : MergeStrategy
+  fastForward : MergeStrategy
+  threeWay : MergeStrategy
+  monotoneKnowledgeJoin : MergeStrategy
+  guardedReconcile : MergeStrategy
+
 
 ------------------------------------------------------------------------
 -- Monotone branch-local proved knowledge.

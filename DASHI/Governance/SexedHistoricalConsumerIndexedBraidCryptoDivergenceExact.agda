@@ -31,20 +31,20 @@ import DASHI.Governance.SexedHistoricalHorizonFiltrationFirstDivergenceExact as 
 import DASHI.Governance.SexedHistoricalHorizonQualifiedSelectiveReopeningExact as Reopen
 
 data HistoricalConsumer : Set where
-  immediateActionConsumer
-  shortForecastConsumer
-  mediumForecastConsumer
-  longForecastConsumer
-  braidProvenanceConsumer
-  riskControlConsumer
-  : HistoricalConsumer
+  immediateActionConsumer : HistoricalConsumer
+  shortForecastConsumer : HistoricalConsumer
+  mediumForecastConsumer : HistoricalConsumer
+  longForecastConsumer : HistoricalConsumer
+  braidProvenanceConsumer : HistoricalConsumer
+  riskControlConsumer : HistoricalConsumer
+
 
 data ConsumerDivergenceCode : Set where
-  noDivergenceWithinDeclaredScope
-  firstVisibleAtLongHorizon
-  braidTraceAlreadySeparates
-  independentRiskDirectiveRequired
-  : ConsumerDivergenceCode
+  noDivergenceWithinDeclaredScope : ConsumerDivergenceCode
+  firstVisibleAtLongHorizon : ConsumerDivergenceCode
+  braidTraceAlreadySeparates : ConsumerDivergenceCode
+  independentRiskDirectiveRequired : ConsumerDivergenceCode
+
 
 consumerDivergence : HistoricalConsumer → ConsumerDivergenceCode
 consumerDivergence immediateActionConsumer = noDivergenceWithinDeclaredScope
@@ -65,9 +65,9 @@ longAndBraidConsumersDiffer :
 longAndBraidConsumersDiffer ()
 
 data BraidTrace : Set where
-  pluralisationBeforeInstitutionalClosure
-  institutionalClosureBeforePluralisation
-  : BraidTrace
+  pluralisationBeforeInstitutionalClosure : BraidTrace
+  institutionalClosureBeforePluralisation : BraidTrace
+
 
 braidTrace : Future.FuturePathHistory → BraidTrace
 braidTrace Future.repairedThenPluralised = pluralisationBeforeInstitutionalClosure

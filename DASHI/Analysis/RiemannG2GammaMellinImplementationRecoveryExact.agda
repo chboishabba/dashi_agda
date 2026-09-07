@@ -64,14 +64,14 @@ open ImplementedMellinAction public
 ------------------------------------------------------------------------
 
 data MellinImplementationSearchAction : Set where
-  reuseDomainLocalFourierOperator
-  reuseFiniteC3CharacterAction
-  inferCarrierFromSimilarFunctionShape
-  recoverGammaMellinImplementationCarrier
-  recoverActionOnThatImplementation
-  recoverAdmissibilityTheorem
-  recoverSameFormulaShiftTheorem
-  : MellinImplementationSearchAction
+  reuseDomainLocalFourierOperator : MellinImplementationSearchAction
+  reuseFiniteC3CharacterAction : MellinImplementationSearchAction
+  inferCarrierFromSimilarFunctionShape : MellinImplementationSearchAction
+  recoverGammaMellinImplementationCarrier : MellinImplementationSearchAction
+  recoverActionOnThatImplementation : MellinImplementationSearchAction
+  recoverAdmissibilityTheorem : MellinImplementationSearchAction
+  recoverSameFormulaShiftTheorem : MellinImplementationSearchAction
+
 
 SearchRelevant : MellinImplementationSearchAction → Set
 SearchRelevant reuseDomainLocalFourierOperator = ⊥

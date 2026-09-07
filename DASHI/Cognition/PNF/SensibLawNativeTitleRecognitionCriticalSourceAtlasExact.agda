@@ -27,17 +27,17 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ClaimLayer : Set where
-  primaryCourtHolding
-  primaryCourtInternalPremise
-  primaryStatutoryText
-  indigenousSovereignPosition
-  sourceCriticalTheory
-  sourceAnthropologicalTheory
-  sourceHistoricalTheory
-  dashCriticalSynthesis
-  structuralAnalogy
-  proceduralStatus
-  : ClaimLayer
+  primaryCourtHolding : ClaimLayer
+  primaryCourtInternalPremise : ClaimLayer
+  primaryStatutoryText : ClaimLayer
+  indigenousSovereignPosition : ClaimLayer
+  sourceCriticalTheory : ClaimLayer
+  sourceAnthropologicalTheory : ClaimLayer
+  sourceHistoricalTheory : ClaimLayer
+  dashCriticalSynthesis : ClaimLayer
+  structuralAnalogy : ClaimLayer
+  proceduralStatus : ClaimLayer
+
 
 record LayeredClaimReceipt : Set where
   constructor layered-claim-receipt

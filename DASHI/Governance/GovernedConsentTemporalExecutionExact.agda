@@ -56,8 +56,8 @@ canonicalInitialHighImpactAdmission =
 ------------------------------------------------------------------------
 
 data ExecutionAdmissionState : Set where
-  fullyResolved unresolvedConsent unresolvedDistribution unresolvedTemporal
-  : ExecutionAdmissionState
+  fullyResolved unresolvedConsent unresolvedDistribution unresolvedTemporal : ExecutionAdmissionState
+
 
 coverageState : ExecutionAdmissionState → Execution.CoverageState
 coverageState fullyResolved = Execution.completeCoverage

@@ -24,11 +24,11 @@ import DASHI.Analysis.RiemannG2CommonC3DeterminantCovarianceCompilerExact as Com
 ------------------------------------------------------------------------
 
 data LiteralC3SourceStage : Set where
-  provenanceReturnOnly
-  literalConstructorsRecovered
-  commonActionRecovered
-  scalarIdentityRecovered
-  : LiteralC3SourceStage
+  provenanceReturnOnly : LiteralC3SourceStage
+  literalConstructorsRecovered : LiteralC3SourceStage
+  commonActionRecovered : LiteralC3SourceStage
+  scalarIdentityRecovered : LiteralC3SourceStage
+
 
 currentLiteralC3SourceStage : LiteralC3SourceStage
 currentLiteralC3SourceStage = provenanceReturnOnly
@@ -109,10 +109,10 @@ currentReturnExportsCommonC3ActionIsFalse = refl
 ------------------------------------------------------------------------
 
 data C3RouteDisposition : Set where
-  sourceRecoveryDiagnostic
-  symmetryOnlyCancellationPruned
-  scalarSignedDeterminantAttackLive
-  : C3RouteDisposition
+  sourceRecoveryDiagnostic : C3RouteDisposition
+  symmetryOnlyCancellationPruned : C3RouteDisposition
+  scalarSignedDeterminantAttackLive : C3RouteDisposition
+
 
 literalC3SourceRecoveryDisposition : C3RouteDisposition
 literalC3SourceRecoveryDisposition = sourceRecoveryDiagnostic

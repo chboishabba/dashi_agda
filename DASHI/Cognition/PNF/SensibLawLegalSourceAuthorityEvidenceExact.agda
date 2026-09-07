@@ -19,8 +19,8 @@ import DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact as Admis
 ------------------------------------------------------------------------
 
 data SourceValidityStatus : Set where
-  validityCurrent validityExpired validityRepealed validitySuperseded validityUnresolved
-  : SourceValidityStatus
+  validityCurrent validityExpired validityRepealed validitySuperseded validityUnresolved : SourceValidityStatus
+
 
 data CurrentValidity : SourceValidityStatus → Set where
   currentValidity : CurrentValidity validityCurrent

@@ -194,16 +194,16 @@ materialInterestStillDiffers ()
 ------------------------------------------------------------------------
 
 data CandidateDriver : Set where
-  crudeSupply
-  refineryCapacity
-  productInventory
-  shippingRisk
-  sanctionsPolicy
-  militaryEscalation
-  tariffsAndTrade
-  seasonalDemand
-  refineryOutage
-  : CandidateDriver
+  crudeSupply : CandidateDriver
+  refineryCapacity : CandidateDriver
+  productInventory : CandidateDriver
+  shippingRisk : CandidateDriver
+  sanctionsPolicy : CandidateDriver
+  militaryEscalation : CandidateDriver
+  tariffsAndTrade : CandidateDriver
+  seasonalDemand : CandidateDriver
+  refineryOutage : CandidateDriver
+
 
 record EnergyCausalClaim : Set where
   constructor energy-causal-claim

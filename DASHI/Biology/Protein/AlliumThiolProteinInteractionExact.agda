@@ -26,13 +26,13 @@ data ResidueKind : Set where
   cysteine otherResidue : ResidueKind
 
 data ThiolState : Set where
-  reducedThiol
-  thiolateLike
-  oxidized
-  disulfideBound
-  sThioallylated
-  inaccessible
-  : ThiolState
+  reducedThiol : ThiolState
+  thiolateLike : ThiolState
+  oxidized : ThiolState
+  disulfideBound : ThiolState
+  sThioallylated : ThiolState
+  inaccessible : ThiolState
+
 
 record ProteinSite : Set where
   constructor proteinSite
@@ -95,13 +95,13 @@ canonicalAllicinProteinThiolReceipt = sThioallylationReceipt
 ------------------------------------------------------------------------
 
 data ProteinFunctionalEffect : Set where
-  noResolvedEffect
-  reducedActivity
-  increasedActivity
-  alteredBinding
-  alteredLocalization
-  destabilized
-  : ProteinFunctionalEffect
+  noResolvedEffect : ProteinFunctionalEffect
+  reducedActivity : ProteinFunctionalEffect
+  increasedActivity : ProteinFunctionalEffect
+  alteredBinding : ProteinFunctionalEffect
+  alteredLocalization : ProteinFunctionalEffect
+  destabilized : ProteinFunctionalEffect
+
 
 record ProteinFunctionModificationReceipt : Set where
   constructor proteinFunctionModificationReceipt

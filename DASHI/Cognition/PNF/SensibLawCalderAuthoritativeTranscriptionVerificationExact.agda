@@ -12,14 +12,14 @@ import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityPropositionWeldExact as 
 -- SCC transcription is a distinct source receipt over the same proposition.
 
 data AuthoritativeSourceKind : Set where
-  supremeCourtOfCanadaDecisionTranscription
-  laterSupremeCourtOfCanadaQuotation
-  : AuthoritativeSourceKind
+  supremeCourtOfCanadaDecisionTranscription : AuthoritativeSourceKind
+  laterSupremeCourtOfCanadaQuotation : AuthoritativeSourceKind
+
 
 data VerificationGrade : Set where
-  semanticPropositionVerified
-  verbatimBoundedSentenceVerified
-  : VerificationGrade
+  semanticPropositionVerified : VerificationGrade
+  verbatimBoundedSentenceVerified : VerificationGrade
+
 
 record CalderTranscriptionVerification
     (ocrProposition : Primary.ReviewedPrimaryAuthorityProposition) : Set where
@@ -111,9 +111,9 @@ hallClearPlainLaterSccCorroboration = calderTranscriptionVerification
   "later SCC reasons independently quote the same Hall p 404 onus/clear-and-plain formulation and adopt clear-and-plain intention as the extinguishment test"
 
 data PropositionTextAuthorityState : Set where
-  ocrLocated
-  authoritativeTranscriptionVerified
-  : PropositionTextAuthorityState
+  ocrLocated : PropositionTextAuthorityState
+  authoritativeTranscriptionVerified : PropositionTextAuthorityState
+
 
 verifiedTextAuthorityState : CalderTranscriptionVerification Primary.hallSurvivalWithoutRecognitionProposition → PropositionTextAuthorityState
 verifiedTextAuthorityState _ = authoritativeTranscriptionVerified

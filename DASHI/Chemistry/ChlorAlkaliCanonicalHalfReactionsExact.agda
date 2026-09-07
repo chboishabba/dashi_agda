@@ -6,6 +6,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 import DASHI.Chemistry.ChlorAlkaliHalfReactionExact as Half
 import DASHI.Chemistry.ChlorAlkaliSaltIndustryExact as Industry
 import DASHI.Chemistry.TransitionKernel as Chemistry
+open Chemistry
 import DASHI.Geology.SaltGeochemistryExact as Salt
 
 ------------------------------------------------------------------------
@@ -18,80 +19,80 @@ import DASHI.Geology.SaltGeochemistryExact as Salt
 
 halfReactionEnvironment : Chemistry.Environment
 halfReactionEnvironment = record
-  { Chemistry.temperatureCarrier = "cell operating temperature supplied by plant receipt"
-  ; Chemistry.pHCarrier = "electrode-compartment pH supplied by cell model"
-  ; Chemistry.pressureCarrier = "cell/product pressure supplied by plant receipt"
-  ; Chemistry.humidityCarrier = "not primary state variable"
-  ; Chemistry.illuminationCarrier = "not primary state variable"
-  ; Chemistry.ionicStrengthCarrier = "concentrated electrolyte model supplied by plant receipt"
+  { temperatureCarrier = "cell operating temperature supplied by plant receipt"
+  ; pHCarrier = "electrode-compartment pH supplied by cell model"
+  ; pressureCarrier = "cell/product pressure supplied by plant receipt"
+  ; humidityCarrier = "not primary state variable"
+  ; illuminationCarrier = "not primary state variable"
+  ; ionicStrengthCarrier = "concentrated electrolyte model supplied by plant receipt"
   }
 
 anodeCondition : Chemistry.Condition
 anodeCondition = record
-  { Chemistry.conditionLabel = "chlor-alkali anode oxidation"
-  ; Chemistry.environment = halfReactionEnvironment
-  ; Chemistry.guardExpression = "anode polarised; chloride-containing anolyte; cell-specific electrode obligations satisfied"
+  { conditionLabel = "chlor-alkali anode oxidation"
+  ; environment = halfReactionEnvironment
+  ; guardExpression = "anode polarised; chloride-containing anolyte; cell-specific electrode obligations satisfied"
   }
 
 cathodeCondition : Chemistry.Condition
 cathodeCondition = record
-  { Chemistry.conditionLabel = "chlor-alkali cathode reduction"
-  ; Chemistry.environment = halfReactionEnvironment
-  ; Chemistry.guardExpression = "cathode polarised; aqueous catholyte; cell-specific electrode obligations satisfied"
+  { conditionLabel = "chlor-alkali cathode reduction"
+  ; environment = halfReactionEnvironment
+  ; guardExpression = "cathode polarised; aqueous catholyte; cell-specific electrode obligations satisfied"
   }
 
 anodeRate : Chemistry.RateLaw
 anodeRate = record
-  { Chemistry.rateLawKind = Chemistry.empirical
-  ; Chemistry.symbolicForm = "chloride oxidation electrode kinetics supplied by cell model"
-  ; Chemistry.parameters = []
-  ; Chemistry.validityRegime = "chlor-alkali anode regime"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { rateLawKind = Chemistry.empirical
+  ; symbolicForm = "chloride oxidation electrode kinetics supplied by cell model"
+  ; parameters = []
+  ; validityRegime = "chlor-alkali anode regime"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 cathodeRate : Chemistry.RateLaw
 cathodeRate = record
-  { Chemistry.rateLawKind = Chemistry.empirical
-  ; Chemistry.symbolicForm = "water reduction electrode kinetics supplied by cell model"
-  ; Chemistry.parameters = []
-  ; Chemistry.validityRegime = "chlor-alkali cathode regime"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { rateLawKind = Chemistry.empirical
+  ; symbolicForm = "water reduction electrode kinetics supplied by cell model"
+  ; parameters = []
+  ; validityRegime = "chlor-alkali cathode regime"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 canonicalAnodeHalfReaction : Chemistry.Transition
 canonicalAnodeHalfReaction = record
-  { Chemistry.transitionId = "chlor-alkali anode: chloride oxidation"
-  ; Chemistry.transitionKind = Chemistry.chemicalReaction
-  ; Chemistry.reactants =
-      record { Chemistry.species = Salt.chlorideIonSpecies ; Chemistry.coefficient = 2 } ∷ []
-  ; Chemistry.products =
-      record { Chemistry.species = Industry.chlorineGasSpecies ; Chemistry.coefficient = 1 }
-      ∷ record { Chemistry.species = Half.electronSpecies ; Chemistry.coefficient = 2 }
+  { transitionId = "chlor-alkali anode: chloride oxidation"
+  ; transitionKind = Chemistry.chemicalReaction
+  ; reactants =
+      record { species = Salt.chlorideIonSpecies ; coefficient = 2 } ∷ []
+  ; products =
+      record { species = Industry.chlorineGasSpecies ; coefficient = 1 }
+      ∷ record { species = Half.electronSpecies ; coefficient = 2 }
       ∷ []
-  ; Chemistry.catalysts = []
-  ; Chemistry.rateLaw = anodeRate
-  ; Chemistry.condition = anodeCondition
-  ; Chemistry.reversibility = Chemistry.irreversible
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  ; catalysts = []
+  ; rateLaw = anodeRate
+  ; condition = anodeCondition
+  ; reversibility = Chemistry.irreversible
+  ; evidence = Chemistry.literatureEstablished
   }
 
 canonicalCathodeHalfReaction : Chemistry.Transition
 canonicalCathodeHalfReaction = record
-  { Chemistry.transitionId = "chlor-alkali cathode: water reduction"
-  ; Chemistry.transitionKind = Chemistry.chemicalReaction
-  ; Chemistry.reactants =
-      record { Chemistry.species = Industry.waterSpecies ; Chemistry.coefficient = 2 }
-      ∷ record { Chemistry.species = Half.electronSpecies ; Chemistry.coefficient = 2 }
+  { transitionId = "chlor-alkali cathode: water reduction"
+  ; transitionKind = Chemistry.chemicalReaction
+  ; reactants =
+      record { species = Industry.waterSpecies ; coefficient = 2 }
+      ∷ record { species = Half.electronSpecies ; coefficient = 2 }
       ∷ []
-  ; Chemistry.products =
-      record { Chemistry.species = Industry.hydrogenGasSpecies ; Chemistry.coefficient = 1 }
-      ∷ record { Chemistry.species = Half.hydroxideIonSpecies ; Chemistry.coefficient = 2 }
+  ; products =
+      record { species = Industry.hydrogenGasSpecies ; coefficient = 1 }
+      ∷ record { species = Half.hydroxideIonSpecies ; coefficient = 2 }
       ∷ []
-  ; Chemistry.catalysts = []
-  ; Chemistry.rateLaw = cathodeRate
-  ; Chemistry.condition = cathodeCondition
-  ; Chemistry.reversibility = Chemistry.irreversible
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  ; catalysts = []
+  ; rateLaw = cathodeRate
+  ; condition = cathodeCondition
+  ; reversibility = Chemistry.irreversible
+  ; evidence = Chemistry.literatureEstablished
   }
 
 record CanonicalHalfReactionPair : Set where
@@ -102,9 +103,9 @@ record CanonicalHalfReactionPair : Set where
     anodeIsCanonical : anode ≡ canonicalAnodeHalfReaction
     cathodeIsCanonical : cathode ≡ canonicalCathodeHalfReaction
     anodeElectronMultiplicity : Chemistry.coefficient
-      (record { Chemistry.species = Half.electronSpecies ; Chemistry.coefficient = 2 }) ≡ 2
+      (record { species = Half.electronSpecies ; coefficient = 2 }) ≡ 2
     cathodeElectronMultiplicity : Chemistry.coefficient
-      (record { Chemistry.species = Half.electronSpecies ; Chemistry.coefficient = 2 }) ≡ 2
+      (record { species = Half.electronSpecies ; coefficient = 2 }) ≡ 2
 
 canonicalHalfReactionPairReceipt : CanonicalHalfReactionPair
 canonicalHalfReactionPairReceipt = record

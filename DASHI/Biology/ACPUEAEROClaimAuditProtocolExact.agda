@@ -18,32 +18,32 @@ import DASHI.Reasoning.PredicateNormalFormEvidenceAuditExact as PNF
 ------------------------------------------------------------------------
 
 data ACPUESourceCode : Set where
-  acpueMatches
-  acpuePlausible
-  acpueDoesNotMatch
+  acpueMatches : ACPUESourceCode
+  acpuePlausible : ACPUESourceCode
+  acpueDoesNotMatch : ACPUESourceCode
   acpueCodeNotYetRecovered : ACPUESourceCode
 
 data SourceTypeStratum : Set where
-  primaryEmpiricalStudy
-  systematicOrMetaSynthesis
-  scholarlyReview
-  practitionerOrAgencySynthesis
-  popularLevelBook
-  policyOrStandardsDocument
+  primaryEmpiricalStudy : SourceTypeStratum
+  systematicOrMetaSynthesis : SourceTypeStratum
+  scholarlyReview : SourceTypeStratum
+  practitionerOrAgencySynthesis : SourceTypeStratum
+  popularLevelBook : SourceTypeStratum
+  policyOrStandardsDocument : SourceTypeStratum
   sourceTypeUnresolved : SourceTypeStratum
 
 data LogicalStrengthStratum : Set where
-  boundedDescriptive
-  associational
-  boundedCausal
-  transportClaim
-  universalClaim
-  comparativeBestClaim
+  boundedDescriptive : LogicalStrengthStratum
+  associational : LogicalStrengthStratum
+  boundedCausal : LogicalStrengthStratum
+  transportClaim : LogicalStrengthStratum
+  universalClaim : LogicalStrengthStratum
+  comparativeBestClaim : LogicalStrengthStratum
   normativeOrPolicyClaim : LogicalStrengthStratum
 
 data AuditPriority : Set where
-  calibrationPriority
-  ordinaryPriority
+  calibrationPriority : AuditPriority
+  ordinaryPriority : AuditPriority
   highConsequencePriority : AuditPriority
 
 record AuditCandidate : Set where
@@ -123,9 +123,9 @@ canonicalClaimAuditWorkflow =
 ------------------------------------------------------------------------
 
 data SamplingFrame : Set where
-  fullCensus106
-  stratifiedCalibrationTranche
-  purposiveHighConsequenceTranche
+  fullCensus106 : SamplingFrame
+  stratifiedCalibrationTranche : SamplingFrame
+  purposiveHighConsequenceTranche : SamplingFrame
   probabilitySample : SamplingFrame
 
 data SupportsPrevalenceInference : SamplingFrame → Set where

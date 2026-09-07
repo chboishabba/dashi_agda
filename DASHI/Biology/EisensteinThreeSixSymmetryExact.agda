@@ -67,8 +67,8 @@ data Opposition : Set where
   positive negative : Opposition
 
 data EisensteinUnit : Set where
-  plusOne minusOne
-  plusOmega minusOmega
+  plusOne minusOne : EisensteinUnit
+  plusOmega minusOmega : EisensteinUnit
   plusOmegaSquared minusOmegaSquared : EisensteinUnit
 
 unitPhase : EisensteinUnit → TernaryPhase

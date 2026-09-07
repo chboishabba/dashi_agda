@@ -22,22 +22,22 @@ import DASHI.Cognition.PNF.SensibLawMaboRecognitionCoordinateFactorisationExact 
 ------------------------------------------------------------------------
 
 data MinimalDoctrinalAxis : Set where
-  existenceContinuityAxis
-  recognitionConditionAxis
-  recognitionEvidenceAxis
-  extinguishmentAxis
-  : MinimalDoctrinalAxis
+  existenceContinuityAxis : MinimalDoctrinalAxis
+  recognitionConditionAxis : MinimalDoctrinalAxis
+  recognitionEvidenceAxis : MinimalDoctrinalAxis
+  extinguishmentAxis : MinimalDoctrinalAxis
+
 
 data DoctrinalPosition : Set where
-  supportsIndependentContinuity
-  requiresRecognitionCondition
-  recognitionMayBeInferredFromConduct
-  recognitionEvidenceOnly
-  extinguishmentRequiresPositiveLegalAct
-  extinguishmentRequiresClearPlainIntent
-  positionQualified
-  positionUnresolved
-  : DoctrinalPosition
+  supportsIndependentContinuity : DoctrinalPosition
+  requiresRecognitionCondition : DoctrinalPosition
+  recognitionMayBeInferredFromConduct : DoctrinalPosition
+  recognitionEvidenceOnly : DoctrinalPosition
+  extinguishmentRequiresPositiveLegalAct : DoctrinalPosition
+  extinguishmentRequiresClearPlainIntent : DoctrinalPosition
+  positionQualified : DoctrinalPosition
+  positionUnresolved : DoctrinalPosition
+
 
 record MinimalDoctrinalReceipt : Set where
   constructor minimalDoctrinalReceipt
@@ -181,12 +181,12 @@ amoduContinuityAxisContrast = laterUseAxisContrast
 ------------------------------------------------------------------------
 
 data MinimalDoctrinalQuery : Set where
-  identifyExistenceContinuity
-  identifyRecognitionCondition
-  identifyRecognitionEvidence
-  identifyExtinguishmentRule
-  identifyUnifiedRecognitionTheory
-  : MinimalDoctrinalQuery
+  identifyExistenceContinuity : MinimalDoctrinalQuery
+  identifyRecognitionCondition : MinimalDoctrinalQuery
+  identifyRecognitionEvidence : MinimalDoctrinalQuery
+  identifyExtinguishmentRule : MinimalDoctrinalQuery
+  identifyUnifiedRecognitionTheory : MinimalDoctrinalQuery
+
 
 requiredAxes : MinimalDoctrinalQuery → List MinimalDoctrinalAxis
 requiredAxes identifyExistenceContinuity = existenceContinuityAxis ∷ []
@@ -196,11 +196,11 @@ requiredAxes identifyExtinguishmentRule = extinguishmentAxis ∷ []
 requiredAxes identifyUnifiedRecognitionTheory = existenceContinuityAxis ∷ recognitionConditionAxis ∷ recognitionEvidenceAxis ∷ extinguishmentAxis ∷ []
 
 data MinimalAxisState : Set where
-  axisCandidateSupported
-  axisAuthoritativelySourced
-  axisInterpretiveContrast
-  axisResolved
-  : MinimalAxisState
+  axisCandidateSupported : MinimalAxisState
+  axisAuthoritativelySourced : MinimalAxisState
+  axisInterpretiveContrast : MinimalAxisState
+  axisResolved : MinimalAxisState
+
 
 record MinimalDoctrinalState : Set where
   constructor minimalDoctrinalState

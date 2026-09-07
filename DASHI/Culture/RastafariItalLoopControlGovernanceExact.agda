@@ -40,7 +40,7 @@ data TitleStatus : Set where
   noTitle individualTitle collectiveTitle institutionalTitle : TitleStatus
 
 data DestinationControl : Set where
-  noDestinationControl advisoryDestinationInput sharedDestinationControl
+  noDestinationControl advisoryDestinationInput sharedDestinationControl : DestinationControl
   unilateralDestinationControl : DestinationControl
 
 data DecisionRightStatus : Set where

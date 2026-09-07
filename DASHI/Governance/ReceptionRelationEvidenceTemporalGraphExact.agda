@@ -21,40 +21,40 @@ import DASHI.Governance.CollectiveMemoryReceptionHistoryExact as Reception
 ------------------------------------------------------------------------
 
 data ReceptionNode : Set where
-  sourceText
-  firstReception
-  institutionalVocabulary
-  laterReinterpretation
-  presentUseNode
-  independentRediscoveryNode
-  : ReceptionNode
+  sourceText : ReceptionNode
+  firstReception : ReceptionNode
+  institutionalVocabulary : ReceptionNode
+  laterReinterpretation : ReceptionNode
+  presentUseNode : ReceptionNode
+  independentRediscoveryNode : ReceptionNode
+
 
 data ReceptionRelationKind : Set where
-  directCitation
-  explicitReinterpretation
-  lexicalBorrowing
-  institutionalAdoption
-  independentRediscovery
-  contestedGenealogy
-  archivalRecoveryRelation
-  : ReceptionRelationKind
+  directCitation : ReceptionRelationKind
+  explicitReinterpretation : ReceptionRelationKind
+  lexicalBorrowing : ReceptionRelationKind
+  institutionalAdoption : ReceptionRelationKind
+  independentRediscovery : ReceptionRelationKind
+  contestedGenealogy : ReceptionRelationKind
+  archivalRecoveryRelation : ReceptionRelationKind
+
 
 data ReceptionEvidenceStrength : Set where
-  directPrimaryReceipt
-  explicitSecondaryReceipt
-  circumstantialReceipt
-  contestedReceipt
-  unsupportedReceipt
-  : ReceptionEvidenceStrength
+  directPrimaryReceipt : ReceptionEvidenceStrength
+  explicitSecondaryReceipt : ReceptionEvidenceStrength
+  circumstantialReceipt : ReceptionEvidenceStrength
+  contestedReceipt : ReceptionEvidenceStrength
+  unsupportedReceipt : ReceptionEvidenceStrength
+
 
 data TemporalProvenance : Set where
-  contemporaneousWithSource
-  nearContemporaryReception
-  laterInstitutionalLayer
-  retrospectiveReconstruction
-  presentInterpretationLayer
-  unresolvedTemporalLayer
-  : TemporalProvenance
+  contemporaneousWithSource : TemporalProvenance
+  nearContemporaryReception : TemporalProvenance
+  laterInstitutionalLayer : TemporalProvenance
+  retrospectiveReconstruction : TemporalProvenance
+  presentInterpretationLayer : TemporalProvenance
+  unresolvedTemporalLayer : TemporalProvenance
+
 
 record ReceptionSourceReceipt : Set where
   constructor reception-source-receipt
@@ -198,9 +198,9 @@ temporalProximityDoesNotPromoteInfluence ()
 ------------------------------------------------------------------------
 
 data ReceptionPathFineState : Set where
-  transmittedVocabularyPath
-  independentlyRediscoveredPath
-  : ReceptionPathFineState
+  transmittedVocabularyPath : ReceptionPathFineState
+  independentlyRediscoveredPath : ReceptionPathFineState
+
 
 presentVocabulary : ReceptionPathFineState -> String
 presentVocabulary _ = "same present term"

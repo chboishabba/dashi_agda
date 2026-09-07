@@ -18,10 +18,10 @@ import DASHI.Cognition.PNF.SensibLawIndigenousLandBackAttributedSourceAtlasExact
 ------------------------------------------------------------------------
 
 data CarbonClassificationPropositionKind : Set where
-  agencyClassificationProposition
-  criticalInstitutionalInterpretation
-  decolonialNormativeInterpretation
-  : CarbonClassificationPropositionKind
+  agencyClassificationProposition : CarbonClassificationPropositionKind
+  criticalInstitutionalInterpretation : CarbonClassificationPropositionKind
+  decolonialNormativeInterpretation : CarbonClassificationPropositionKind
+
 
 record CarbonClassificationProposition : Set where
   constructor carbonClassificationProposition

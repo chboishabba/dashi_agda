@@ -16,12 +16,12 @@ import DASHI.Governance.DrugGovernanceBenefitCaptureRepairResidueExact as Benefi
 ------------------------------------------------------------------------
 
 data BurdenStage : Set where
-  punitiveExternalisedStage
-  therapeuticReopenedStage
-  commercialCaptureStage
-  repairAcknowledgedStage
-  repairDischargedStage
-  : BurdenStage
+  punitiveExternalisedStage : BurdenStage
+  therapeuticReopenedStage : BurdenStage
+  commercialCaptureStage : BurdenStage
+  repairAcknowledgedStage : BurdenStage
+  repairDischargedStage : BurdenStage
+
 
 data BurdenEdge : BurdenStage → BurdenStage → Set where
   punitiveToTherapeutic :
@@ -83,17 +83,17 @@ canonicalCommercialPathContainsCapture =
 ------------------------------------------------------------------------
 
 data BurdenHistoryVariant : Set where
-  commercialisedHistory
-  directAcknowledgementHistory
-  : BurdenHistoryVariant
+  commercialisedHistory : BurdenHistoryVariant
+  directAcknowledgementHistory : BurdenHistoryVariant
+
 
 data PresentEndpointSurface : Set where
   samePositiveAcknowledgedEndpoint : PresentEndpointSurface
 
 data RetainedPathCode : Set where
-  commercialCaptureRetained
-  directAcknowledgementRetained
-  : RetainedPathCode
+  commercialCaptureRetained : RetainedPathCode
+  directAcknowledgementRetained : RetainedPathCode
+
 
 presentEndpoint : BurdenHistoryVariant → PresentEndpointSurface
 presentEndpoint _ = samePositiveAcknowledgedEndpoint

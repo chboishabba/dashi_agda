@@ -11,7 +11,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 
 data MechanismAuthorityClass : Set where
-  primaryMathematicalSource peerReviewedMethodology textbookNormalization
+  primaryMathematicalSource peerReviewedMethodology textbookNormalization : MechanismAuthorityClass
   locatorOnly alternativeStrategy systemicOverclaimRisk : MechanismAuthorityClass
 
 record MechanismAuditEntry : Set where

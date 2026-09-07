@@ -144,13 +144,13 @@ subjectPositionExtendsParserLanguage =
 ------------------------------------------------------------------------
 
 data AuditInformationPolicy : Set where
-  noFurtherProbe
-  runScopeDiscriminator
-  acquireSubjectPositionCoordinate
-  inspectClosureResidual
-  inspectReciprocalRelation
-  acquireSituatedIntersectionalCoordinate
-  : AuditInformationPolicy
+  noFurtherProbe : AuditInformationPolicy
+  runScopeDiscriminator : AuditInformationPolicy
+  acquireSubjectPositionCoordinate : AuditInformationPolicy
+  inspectClosureResidual : AuditInformationPolicy
+  inspectReciprocalRelation : AuditInformationPolicy
+  acquireSituatedIntersectionalCoordinate : AuditInformationPolicy
+
 
 policyForAudit : Audit.CriticalAuditLens → AuditInformationPolicy
 policyForAudit Audit.parserScopeAudit = runScopeDiscriminator

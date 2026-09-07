@@ -121,12 +121,12 @@ open BackpropThresholdSelection public
 ------------------------------------------------------------------------
 
 data BackpropStage : Set where
-  blockedClaimStage
-  experimentSelectedStage
-  evidenceAcquiredStage
-  obligationReauditedStage
-  implicationSupportedStage
-  : BackpropStage
+  blockedClaimStage : BackpropStage
+  experimentSelectedStage : BackpropStage
+  evidenceAcquiredStage : BackpropStage
+  obligationReauditedStage : BackpropStage
+  implicationSupportedStage : BackpropStage
+
 
 experimentSelectedNotSupported :
   experimentSelectedStage ≡ implicationSupportedStage → ⊥

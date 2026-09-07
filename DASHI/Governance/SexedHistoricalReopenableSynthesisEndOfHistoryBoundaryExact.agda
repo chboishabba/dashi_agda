@@ -49,11 +49,11 @@ import DASHI.Governance.SexedHistoricalProductiveDialecticalFibreJoinExact as Jo
 ------------------------------------------------------------------------
 
 data EndOfHistorySourceRole : Set where
-  fukuyama1989IdeologicalEndpoint
-  fukuyama1992LiberalDemocraticCulmination
-  kojeveRecognitionCompletionReading
-  hegelReceptionBackgroundOnly
-  : EndOfHistorySourceRole
+  fukuyama1989IdeologicalEndpoint : EndOfHistorySourceRole
+  fukuyama1992LiberalDemocraticCulmination : EndOfHistorySourceRole
+  kojeveRecognitionCompletionReading : EndOfHistorySourceRole
+  hegelReceptionBackgroundOnly : EndOfHistorySourceRole
+
 
 record EndOfHistorySource : Set where
   constructor end-of-history-source
@@ -106,18 +106,18 @@ hegelReceptionBackground =
 ------------------------------------------------------------------------
 
 data JoinMoment : Set where
-  productiveJoinAtT
-  counterformationAtNext
-  revisedJoinLater
-  : JoinMoment
+  productiveJoinAtT : JoinMoment
+  counterformationAtNext : JoinMoment
+  revisedJoinLater : JoinMoment
+
 
 data ReopeningTrigger : Set where
-  newCounterformation
-  changedPowerRelation
-  newEvidence
-  networkRecomposition
-  memoryReinterpretation
-  : ReopeningTrigger
+  newCounterformation : ReopeningTrigger
+  changedPowerRelation : ReopeningTrigger
+  newEvidence : ReopeningTrigger
+  networkRecomposition : ReopeningTrigger
+  memoryReinterpretation : ReopeningTrigger
+
 
 data JoinTransport : JoinMoment → JoinMoment → Set where
   reopenByCounterformation :
@@ -141,17 +141,17 @@ canonicalProductiveJoinStillAvailable = Join.canonicalProductiveJoin
 ------------------------------------------------------------------------
 
 data FineJoinPresent : Set where
-  sameJoinThenCounterformation
-  sameJoinThenRevision
-  : FineJoinPresent
+  sameJoinThenCounterformation : FineJoinPresent
+  sameJoinThenRevision : FineJoinPresent
+
 
 data JoinPresentSurface : Set where
   productiveJoinNow : JoinPresentSurface
 
 data NextHistoricalContinuation : Set where
-  counterformationContinuation
-  revisedJoinContinuation
-  : NextHistoricalContinuation
+  counterformationContinuation : NextHistoricalContinuation
+  revisedJoinContinuation : NextHistoricalContinuation
+
 
 joinPresentSurface : FineJoinPresent → JoinPresentSurface
 joinPresentSurface _ = productiveJoinNow
@@ -179,10 +179,10 @@ productiveJoinSurfaceCannotRecoverNextHistory =
 ------------------------------------------------------------------------
 
 data HistoricalFinalityStatus : Set where
-  finalityRejected
-  finalityUnresolved
-  finalityEstablished
-  : HistoricalFinalityStatus
+  finalityRejected : HistoricalFinalityStatus
+  finalityUnresolved : HistoricalFinalityStatus
+  finalityEstablished : HistoricalFinalityStatus
+
 
 finalityDisposition : HistoricalFinalityStatus → Suspension.EpistemicDisposition
 finalityDisposition finalityRejected = Suspension.rejectHere

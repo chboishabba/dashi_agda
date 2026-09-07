@@ -26,28 +26,28 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data InterpretationScale : Set where
-  localObservationScale
-  operationalProcessScale
-  institutionalGovernanceScale
-  incentiveStructureScale
-  politicalEconomyScale
-  : InterpretationScale
+  localObservationScale : InterpretationScale
+  operationalProcessScale : InterpretationScale
+  institutionalGovernanceScale : InterpretationScale
+  incentiveStructureScale : InterpretationScale
+  politicalEconomyScale : InterpretationScale
+
 
 data SystemEvidenceDemand : Set where
-  assayValidationDemand
-  recurrenceDemand
-  processTraceabilityDemand
-  releaseControlDemand
-  regulatoryRuleDemand
-  enforcementPracticeDemand
-  incentiveStructureDemand
-  ownershipMarketStructureDemand
-  externalityAllocationDemand
-  causalMediationDemand
-  comparativeInstitutionalDemand
-  counterfactualInstitutionalDemand
-  populationTransportDemand
-  : SystemEvidenceDemand
+  assayValidationDemand : SystemEvidenceDemand
+  recurrenceDemand : SystemEvidenceDemand
+  processTraceabilityDemand : SystemEvidenceDemand
+  releaseControlDemand : SystemEvidenceDemand
+  regulatoryRuleDemand : SystemEvidenceDemand
+  enforcementPracticeDemand : SystemEvidenceDemand
+  incentiveStructureDemand : SystemEvidenceDemand
+  ownershipMarketStructureDemand : SystemEvidenceDemand
+  externalityAllocationDemand : SystemEvidenceDemand
+  causalMediationDemand : SystemEvidenceDemand
+  comparativeInstitutionalDemand : SystemEvidenceDemand
+  counterfactualInstitutionalDemand : SystemEvidenceDemand
+  populationTransportDemand : SystemEvidenceDemand
+
 
 record SemanticEpistemicProblem : Set₁ where
   constructor semanticEpistemicProblem
@@ -128,10 +128,10 @@ open SemanticEpistemicBidi public
 ------------------------------------------------------------------------
 
 data InterpretationAuthority : Set where
-  candidateInterpretation
-  evidenceQualifiedInterpretation
-  supportedSystemInterpretation
-  : InterpretationAuthority
+  candidateInterpretation : InterpretationAuthority
+  evidenceQualifiedInterpretation : InterpretationAuthority
+  supportedSystemInterpretation : InterpretationAuthority
+
 
 candidateNotSupported :
   candidateInterpretation ≡ supportedSystemInterpretation → ⊥

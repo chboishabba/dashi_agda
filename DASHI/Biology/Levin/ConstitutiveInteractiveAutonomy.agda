@@ -18,11 +18,11 @@ record AutonomyObservation : Set where
     scaleExplicit : Bool
     problemSpaceExplicit : Bool
 
-record ConstitutiveInteractiveAutonomyBoundary : Set where
+record ConstitutiveInteractiveAutonomyBoundary : Set₁ where
   field
     problemSpaceBoundary : Problem.ProblemSpaceAgencyBoundary
     separabilityType     : Set
-    identityBoundary     : Identity.MultiscaleIdentityDissociationBoundary
+    identityBoundary     : Identity.IdentityDissociationBoundary
     constitutiveAutonomyNotIsolation : Bool
     interactiveAutonomyNotIndependence : Bool
     observerBoundaryNotNecessarilySystemBoundary : Bool
@@ -36,8 +36,8 @@ canonicalConstitutiveInteractiveAutonomyBoundary :
   ConstitutiveInteractiveAutonomyBoundary
 canonicalConstitutiveInteractiveAutonomyBoundary = record
   { problemSpaceBoundary = Problem.canonicalProblemSpaceAgencyBoundary
-  ; separabilityType = Boundary.SeparableBoundaryPersistence
-  ; identityBoundary = Identity.canonicalMultiscaleIdentityDissociationBoundary
+  ; separabilityType = Boundary.BoundaryPersistenceBoundary
+  ; identityBoundary = Identity.canonicalIdentityDissociationBoundary
   ; constitutiveAutonomyNotIsolation = true
   ; interactiveAutonomyNotIndependence = true
   ; observerBoundaryNotNecessarilySystemBoundary = true

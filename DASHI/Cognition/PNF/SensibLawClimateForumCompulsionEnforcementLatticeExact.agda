@@ -13,40 +13,40 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 data ForumKind : Set where
-  domesticOrdinaryCourt
-  domesticConstitutionalCourt
-  internationalTreatyBody
-  internationalCourtAdvisory
-  : ForumKind
+  domesticOrdinaryCourt : ForumKind
+  domesticConstitutionalCourt : ForumKind
+  internationalTreatyBody : ForumKind
+  internationalCourtAdvisory : ForumKind
+
 
 data NormSource : Set where
-  commonLawNegligence
-  domesticConstitutionalRights
-  treatyHumanRights
-  generalInternationalLaw
-  : NormSource
+  commonLawNegligence : NormSource
+  domesticConstitutionalRights : NormSource
+  treatyHumanRights : NormSource
+  generalInternationalLaw : NormSource
+
 
 data DecisionForm : Set where
-  meritsJudgment
-  constitutionalIncompatibilityOrder
-  treatyBodyViews
-  advisoryOpinion
-  : DecisionForm
+  meritsJudgment : DecisionForm
+  constitutionalIncompatibilityOrder : DecisionForm
+  treatyBodyViews : DecisionForm
+  advisoryOpinion : DecisionForm
+
 
 data EnforcementChannel : Set where
-  domesticJudicialExecution
-  legislativeCorrectionDuty
-  treatyImplementationAndReporting
-  diplomaticAndInterpretivePressure
-  noPositiveDutyRecognised
-  : EnforcementChannel
+  domesticJudicialExecution : EnforcementChannel
+  legislativeCorrectionDuty : EnforcementChannel
+  treatyImplementationAndReporting : EnforcementChannel
+  diplomaticAndInterpretivePressure : EnforcementChannel
+  noPositiveDutyRecognised : EnforcementChannel
+
 
 data ProceedingState : Set where
-  firstInstanceDecidedAppealPending
-  finalDomesticConstitutionalDecision
-  treatyBodyViewsAdopted
-  advisoryOpinionIssued
-  : ProceedingState
+  firstInstanceDecidedAppealPending : ProceedingState
+  finalDomesticConstitutionalDecision : ProceedingState
+  treatyBodyViewsAdopted : ProceedingState
+  advisoryOpinionIssued : ProceedingState
+
 
 record ForumEnforcementReceipt : Set where
   constructor forum-enforcement-receipt
@@ -160,14 +160,14 @@ canonicalExistingDutyCompulsionBoundary = existing-duty-compulsion-boundary
   false refl
 
 data CulturalLossLegalRegime : Set where
-  generalNegligenceRegime
-  nativeTitleCompensationRegime
-  : CulturalLossLegalRegime
+  generalNegligenceRegime : CulturalLossLegalRegime
+  nativeTitleCompensationRegime : CulturalLossLegalRegime
+
 
 data CulturalLossCompensabilitySurface : Set where
-  notRecognisedOnCurrentNegligenceRoute
-  culturallyCompensableUnderNativeTitleStatute
-  : CulturalLossCompensabilitySurface
+  notRecognisedOnCurrentNegligenceRoute : CulturalLossCompensabilitySurface
+  culturallyCompensableUnderNativeTitleStatute : CulturalLossCompensabilitySurface
+
 
 culturalLossVisibility : CulturalLossLegalRegime → CulturalLossCompensabilitySurface
 culturalLossVisibility generalNegligenceRegime = notRecognisedOnCurrentNegligenceRoute

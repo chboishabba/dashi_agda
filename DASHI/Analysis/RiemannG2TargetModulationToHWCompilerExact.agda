@@ -60,12 +60,12 @@ fixedSpectralIdentificationToHW {space} H_T m identification =
 ------------------------------------------------------------------------
 
 data HWSearchAction : Set where
-  rebuildWindowRestrictionInterface
-  recoverLiteralPoleNearTargetModulation
-  recoverExactSpectralClusterNearFarIdentification
-  compileHistoricalHW
-  proceedToFinitePhaseEvaluation
-  : HWSearchAction
+  rebuildWindowRestrictionInterface : HWSearchAction
+  recoverLiteralPoleNearTargetModulation : HWSearchAction
+  recoverExactSpectralClusterNearFarIdentification : HWSearchAction
+  compileHistoricalHW : HWSearchAction
+  proceedToFinitePhaseEvaluation : HWSearchAction
+
 
 data SearchStatus : Set where
   live pruned downstream : SearchStatus

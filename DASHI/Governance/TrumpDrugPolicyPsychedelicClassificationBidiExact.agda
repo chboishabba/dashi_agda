@@ -24,21 +24,21 @@ data PolicyActor : Set where
   namedPolicyActor : String → PolicyActor
 
 data DrugGovernanceRoute : Set where
-  punitiveIllicitSupplyRoute
-  therapeuticResearchRoute
-  veteranClinicalTrialRoute
-  regulatedMedicalAccessRoute
-  commercialConsumerProductRoute
-  indigenousCeremonialAuthorityRoute
-  : DrugGovernanceRoute
+  punitiveIllicitSupplyRoute : DrugGovernanceRoute
+  therapeuticResearchRoute : DrugGovernanceRoute
+  veteranClinicalTrialRoute : DrugGovernanceRoute
+  regulatedMedicalAccessRoute : DrugGovernanceRoute
+  commercialConsumerProductRoute : DrugGovernanceRoute
+  indigenousCeremonialAuthorityRoute : DrugGovernanceRoute
+
 
 data PolicySurface : Set where
-  nationalDrugControlStrategy2026
-  psychedelicMentalHealthExecutiveOrder2026
-  vaPsilocybinTrial2026
-  vaMDMATrial2026
-  fdaPsychedelicGuidance2026
-  : PolicySurface
+  nationalDrugControlStrategy2026 : PolicySurface
+  psychedelicMentalHealthExecutiveOrder2026 : PolicySurface
+  vaPsilocybinTrial2026 : PolicySurface
+  vaMDMATrial2026 : PolicySurface
+  fdaPsychedelicGuidance2026 : PolicySurface
+
 
 record SourceBoundPolicyObservation : Set where
   constructor sourceBoundPolicyObservation

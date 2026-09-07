@@ -46,7 +46,7 @@ open CommandWithAuthority public
 ------------------------------------------------------------------------
 
 data CommandAuthorityCoordinate : Set where
-  powerCoordinate applicableLawCoordinate constitutionalValidityCoordinate
+  powerCoordinate applicableLawCoordinate constitutionalValidityCoordinate : CommandAuthorityCoordinate
   issuerCompetenceCoordinate phaseCoordinate scopeCoordinate : CommandAuthorityCoordinate
 
 data CoordinateState : Set where
@@ -100,19 +100,19 @@ jarrettInvalidCommandValidity = Constitutional.jarrettInvalidityReceipt
 ------------------------------------------------------------------------
 
 data CommandAuthorityClaim : Set where
-  commandDocumentExisted
-  commandHadValidLegalProducer
-  commandIssuerWasCompetent
-  commandWasWithinPhaseAuthority
-  commandWasWithinScope
+  commandDocumentExisted : CommandAuthorityClaim
+  commandHadValidLegalProducer : CommandAuthorityClaim
+  commandIssuerWasCompetent : CommandAuthorityClaim
+  commandWasWithinPhaseAuthority : CommandAuthorityClaim
+  commandWasWithinScope : CommandAuthorityClaim
   commandGovernedFieldActionLawfully : CommandAuthorityClaim
 
 data CommandAuthorityProducer : Set where
-  commandDocumentProducer
-  applicableLawAndValidityProducer
-  issuerCompetenceProducer
-  phaseAuthorityProducer
-  scopeProducer
+  commandDocumentProducer : CommandAuthorityProducer
+  applicableLawAndValidityProducer : CommandAuthorityProducer
+  issuerCompetenceProducer : CommandAuthorityProducer
+  phaseAuthorityProducer : CommandAuthorityProducer
+  scopeProducer : CommandAuthorityProducer
   executionProvenanceProducer : CommandAuthorityProducer
 
 reverseCommandAuthority : CommandAuthorityClaim → CommandAuthorityProducer
@@ -141,7 +141,7 @@ record CommandExecutionCutset : Set where
 open CommandExecutionCutset public
 
 data CommandExecutionResidual : Set where
-  documentResidual authorityResidual transmissionResidual fieldReceiptResidual
+  documentResidual authorityResidual transmissionResidual fieldReceiptResidual : CommandExecutionResidual
   civilianDirectionResidual executionResidual executionClosedResult : CommandExecutionResidual
 
 firstCommandExecutionResidual : CommandExecutionCutset → CommandExecutionResidual

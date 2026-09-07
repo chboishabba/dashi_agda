@@ -15,11 +15,11 @@ data ProblemSpaceKind : Set where
   physiological : ProblemSpaceKind
   transcriptional : ProblemSpaceKind
   social : ProblemSpaceKind
-  abstract : ProblemSpaceKind
+  abstractSpace : ProblemSpaceKind
 
 canonicalProblemSpaces : List ProblemSpaceKind
 canonicalProblemSpaces =
-  physical3D ∷ anatomical ∷ physiological ∷ transcriptional ∷ social ∷ abstract ∷ []
+  physical3D ∷ anatomical ∷ physiological ∷ transcriptional ∷ social ∷ abstractSpace ∷ []
 
 record ProblemSpaceNavigation : Set where
   field

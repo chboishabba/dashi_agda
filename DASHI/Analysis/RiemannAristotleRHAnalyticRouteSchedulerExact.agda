@@ -27,20 +27,20 @@ import DASHI.Analysis.RiemannAristotlePoleQuotientFiniteNearRouteAuditExact as R
 ------------------------------------------------------------------------
 
 data RHAnalyticExperiment : Set where
-  directPoleNearEvaluation
-  buildPoleNearExplicitFormulaBridge
-  repairGammaPrecision
-  reuseHermitianG3AsIfSameCarrier
-  complexPoissonWithoutCarrierBridge
-  countZerosOnly
-  absoluteMajorizeNearSum
-  namedHardySearchWithoutBridge
-  : RHAnalyticExperiment
+  directPoleNearEvaluation : RHAnalyticExperiment
+  buildPoleNearExplicitFormulaBridge : RHAnalyticExperiment
+  repairGammaPrecision : RHAnalyticExperiment
+  reuseHermitianG3AsIfSameCarrier : RHAnalyticExperiment
+  complexPoissonWithoutCarrierBridge : RHAnalyticExperiment
+  countZerosOnly : RHAnalyticExperiment
+  absoluteMajorizeNearSum : RHAnalyticExperiment
+  namedHardySearchWithoutBridge : RHAnalyticExperiment
+
 
 data RHAnalyticProducer : Set where
-  finiteNearProducer
-  gammaPrecisionProducer
-  : RHAnalyticProducer
+  finiteNearProducer : RHAnalyticProducer
+  gammaPrecisionProducer : RHAnalyticProducer
+
 
 experimentFeeds : RHAnalyticExperiment → RHAnalyticProducer
 experimentFeeds directPoleNearEvaluation = finiteNearProducer

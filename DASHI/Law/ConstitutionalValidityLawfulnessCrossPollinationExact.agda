@@ -50,8 +50,8 @@ open ConstitutionallyLawfulEdge public
 ------------------------------------------------------------------------
 
 data ExtendedLawfulnessCoordinate : Set where
-  applicableLawCoordinate
-  constitutionalValidityCoordinate
+  applicableLawCoordinate : ExtendedLawfulnessCoordinate
+  constitutionalValidityCoordinate : ExtendedLawfulnessCoordinate
   ordinaryLawfulnessCoordinate : ExtendedLawfulnessCoordinate
 
 data ExtendedCoordinateState : Set where

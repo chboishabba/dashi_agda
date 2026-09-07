@@ -13,7 +13,7 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 ------------------------------------------------------------------------
 
 data ActionScope : Set where
-  observeOnly collectMaterial initialResearch downstreamReuse publishResult
+  observeOnly collectMaterial initialResearch downstreamReuse publishResult : ActionScope
   commercialise interveneDeploy : ActionScope
 
 data ConsentStatus : Set where

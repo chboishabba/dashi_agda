@@ -155,15 +155,15 @@ historySensitiveMergeCannotDescendThroughVisibleState =
 ------------------------------------------------------------------------
 
 data LoopStage : Set where
-  liveHypotheses
-  collisionLocated
-  discriminatorSynthesised
-  experimentObserved
-  fibreRefined
-  discoveriesMerged
-  certificatesReopened
-  consumerClosed
-  : LoopStage
+  liveHypotheses : LoopStage
+  collisionLocated : LoopStage
+  discriminatorSynthesised : LoopStage
+  experimentObserved : LoopStage
+  fibreRefined : LoopStage
+  discoveriesMerged : LoopStage
+  certificatesReopened : LoopStage
+  consumerClosed : LoopStage
+
 
 record SearchIteration : Set₁ where
   constructor searchIteration
@@ -300,11 +300,11 @@ canonicalAdmittedMerge = Governance.canonicalAdmittedCompatibleMerge
 ------------------------------------------------------------------------
 
 data Artifact : Set where
-  dependencyCertificate
-  mergeCertificate
-  consumerCertificate
-  unrelatedCertificate
-  : Artifact
+  dependencyCertificate : Artifact
+  mergeCertificate : Artifact
+  consumerCertificate : Artifact
+  unrelatedCertificate : Artifact
+
 
 data Depends : Artifact → Artifact → Set where
   dependencyAffectsMerge : Depends dependencyCertificate mergeCertificate

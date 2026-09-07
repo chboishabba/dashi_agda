@@ -14,12 +14,12 @@ import DASHI.Reasoning.LogicalConsequenceDerivationPathExact as Path
 ------------------------------------------------------------------------
 
 data ProtocolStage : Set where
-  parserCandidateStage
-  reviewedSemanticStage
-  logicalConsequenceStage
-  empiricalQualifiedStage
-  empiricallySupportedStage
-  : ProtocolStage
+  parserCandidateStage : ProtocolStage
+  reviewedSemanticStage : ProtocolStage
+  logicalConsequenceStage : ProtocolStage
+  empiricalQualifiedStage : ProtocolStage
+  empiricallySupportedStage : ProtocolStage
+
 
 data ProtocolStep : ProtocolStage → ProtocolStage → Set where
   parserToReviewedSemantic :

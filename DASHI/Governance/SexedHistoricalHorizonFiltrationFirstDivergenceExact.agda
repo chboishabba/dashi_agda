@@ -42,11 +42,11 @@ data HorizonLe : Horizon → Horizon → Set where
 ------------------------------------------------------------------------
 
 data HorizonConeCode : Set where
-  commonShortCone
-  commonMediumCone
-  pluralLongCone
-  institutionalLongCone
-  : HorizonConeCode
+  commonShortCone : HorizonConeCode
+  commonMediumCone : HorizonConeCode
+  pluralLongCone : HorizonConeCode
+  institutionalLongCone : HorizonConeCode
+
 
 coneAt : Horizon → Future.FuturePathHistory → HorizonConeCode
 coneAt shortHorizon _ = commonShortCone
@@ -142,10 +142,10 @@ mediumObserverCannotRecoverLongCone =
 ------------------------------------------------------------------------
 
 data HorizonDisposition : Set where
-  closeAtShort
-  closeAtMedium
-  reopenAtLongDivergence
-  : HorizonDisposition
+  closeAtShort : HorizonDisposition
+  closeAtMedium : HorizonDisposition
+  reopenAtLongDivergence : HorizonDisposition
+
 
 forecastDisposition : Horizon → HorizonDisposition
 forecastDisposition shortHorizon = closeAtShort

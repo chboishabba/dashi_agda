@@ -75,10 +75,10 @@ mixedSignCornerHasS2 = refl
 ------------------------------------------------------------------------
 
 data FibreSectorClass : Set where
-  fullySymmetricSector
-  pairSymmetricSector
-  genericSector
-  : FibreSectorClass
+  fullySymmetricSector : FibreSectorClass
+  pairSymmetricSector : FibreSectorClass
+  genericSector : FibreSectorClass
+
 
 sectorClassOfStabiliser : Symmetry.StabiliserType → FibreSectorClass
 sectorClassOfStabiliser Symmetry.fullStabiliserS3 = fullySymmetricSector

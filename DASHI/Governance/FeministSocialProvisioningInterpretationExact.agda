@@ -20,21 +20,21 @@ import DASHI.Governance.FeministClimateJusticeSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data SocialProvisioningRole : Set where
-  careAndUnpaidLabour
-  wellbeingCriterion
-  economicPoliticalSocialProcess
-  powerRelations
-  ethicalGoalsAndValues
-  intersectionalDifference
-  : SocialProvisioningRole
+  careAndUnpaidLabour : SocialProvisioningRole
+  wellbeingCriterion : SocialProvisioningRole
+  economicPoliticalSocialProcess : SocialProvisioningRole
+  powerRelations : SocialProvisioningRole
+  ethicalGoalsAndValues : SocialProvisioningRole
+  intersectionalDifference : SocialProvisioningRole
+
 
 data DashiInterpretiveTarget : Set where
-  provisioningActivity
-  functioningOrNeedOutcome
-  institutionalAuthorityContext
-  explicitNormativeClaimRole
-  situatedIntersectionalCoordinates
-  : DashiInterpretiveTarget
+  provisioningActivity : DashiInterpretiveTarget
+  functioningOrNeedOutcome : DashiInterpretiveTarget
+  institutionalAuthorityContext : DashiInterpretiveTarget
+  explicitNormativeClaimRole : DashiInterpretiveTarget
+  situatedIntersectionalCoordinates : DashiInterpretiveTarget
+
 
 interpretRole : SocialProvisioningRole → DashiInterpretiveTarget
 interpretRole careAndUnpaidLabour = provisioningActivity

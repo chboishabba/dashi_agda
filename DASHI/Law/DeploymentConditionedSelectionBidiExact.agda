@@ -10,11 +10,11 @@ import DASHI.Law.WandingOperationDeploymentProofExact as Deployment
 ------------------------------------------------------------------------
 
 data DeploymentSelectionClaim : Set where
-  exposureOpportunityRate eligibleExposureRate conditionalSelectionRate
+  exposureOpportunityRate eligibleExposureRate conditionalSelectionRate : DeploymentSelectionClaim
   deploymentAdjustedGroupDisparity : DeploymentSelectionClaim
 
 data DeploymentSelectionProducer : Set where
-  trafficObservationProducer exposureSetProducer eligibilityProducer
+  trafficObservationProducer exposureSetProducer eligibilityProducer : DeploymentSelectionProducer
   selectionProducer groupLinkageProducer missingnessProducer : DeploymentSelectionProducer
 
 reverseDeploymentSelection : DeploymentSelectionClaim → DeploymentSelectionProducer
@@ -37,7 +37,7 @@ record DeploymentSelectionCutset : Set where
 open DeploymentSelectionCutset public
 
 data DeploymentSelectionResidual : Set where
-  deploymentResidual exposureSetResidual eligibilityResidual selectionResidual
+  deploymentResidual exposureSetResidual eligibilityResidual selectionResidual : DeploymentSelectionResidual
   groupLinkageResidual missingnessResidual selectionClaimClosed : DeploymentSelectionResidual
 
 firstDeploymentSelectionResidual :

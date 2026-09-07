@@ -17,21 +17,21 @@ import DASHI.Governance.DrugWarReflectingPoolFailureBoundaryExact as Failure
 ------------------------------------------------------------------------
 
 data RevisionEvidenceKind : Set where
-  goalFailureEvidence
-  clinicalTherapeuticEvidence
-  accessDisparityEvidence
-  indigenousSovereigntyEvidence
-  enforcementOutcomeEvidence
-  historicalTargetingEvidence
-  : RevisionEvidenceKind
+  goalFailureEvidence : RevisionEvidenceKind
+  clinicalTherapeuticEvidence : RevisionEvidenceKind
+  accessDisparityEvidence : RevisionEvidenceKind
+  indigenousSovereigntyEvidence : RevisionEvidenceKind
+  enforcementOutcomeEvidence : RevisionEvidenceKind
+  historicalTargetingEvidence : RevisionEvidenceKind
+
 
 data ClassifierRule : Set where
-  punitiveStreetRule
-  veteranClinicalExceptionRule
-  indigenousCeremonialAuthorityRule
-  commercialMedicalizationRule
-  countercultureThreatClassificationRule
-  : ClassifierRule
+  punitiveStreetRule : ClassifierRule
+  veteranClinicalExceptionRule : ClassifierRule
+  indigenousCeremonialAuthorityRule : ClassifierRule
+  commercialMedicalizationRule : ClassifierRule
+  countercultureThreatClassificationRule : ClassifierRule
+
 
 record ClassifierRevisionDemand : Set where
   constructor classifierRevisionDemand

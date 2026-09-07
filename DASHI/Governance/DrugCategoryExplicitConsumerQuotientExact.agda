@@ -21,23 +21,23 @@ import DASHI.Governance.DrugCategoryConsumerRelativeQuotientInverseExact as Inve
 ------------------------------------------------------------------------
 
 data TranslationState : Set where
-  stateLegalState
-  biomedicalState
-  livedSubjectState
-  : TranslationState
+  stateLegalState : TranslationState
+  biomedicalState : TranslationState
+  livedSubjectState : TranslationState
+
 
 data ClinicalObservation : Set where
   sameClinicalFact : ClinicalObservation
 
 data SubjectObservation : Set where
-  externallyRepresentedSubject
-  livedOriginatingSubject
-  : SubjectObservation
+  externallyRepresentedSubject : SubjectObservation
+  livedOriginatingSubject : SubjectObservation
+
 
 data HistoryObservation : Set where
-  erasedHistory
-  retainedOrReintroducedHistory
-  : HistoryObservation
+  erasedHistory : HistoryObservation
+  retainedOrReintroducedHistory : HistoryObservation
+
 
 clinicalObserver : TranslationState → ClinicalObservation
 clinicalObserver stateLegalState = sameClinicalFact

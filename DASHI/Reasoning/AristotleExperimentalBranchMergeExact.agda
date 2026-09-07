@@ -16,12 +16,12 @@ import DASHI.Reasoning.AristotleMCGSHypergraphExact as Aristotle
 ------------------------------------------------------------------------
 
 data MergeStrategy : Set where
-  fastForward
-  commonRefinement
-  threeWayReconciliation
-  monotoneKnowledgeJoin
-  conflictReview
-  : MergeStrategy
+  fastForward : MergeStrategy
+  commonRefinement : MergeStrategy
+  threeWayReconciliation : MergeStrategy
+  monotoneKnowledgeJoin : MergeStrategy
+  conflictReview : MergeStrategy
+
 
 record CommonLemmaRefinement
     (left right merged : Aristotle.LemmaLedger) : Set₁ where

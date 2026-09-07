@@ -16,30 +16,30 @@ data SatelliteRepository : Set where
   dashiCFD dashiBRAIN dashiQ dashifine DASHIg dashiCORE FRACDASH dashitest dashiRTX : SatelliteRepository
 
 data ProblemClass : Set where
-  fluidClosure
-  connectomeKernelClosure
-  quantumProjectionPhysics
-  spectralLearningGeometry
-  grokkingValidation
-  coreSemanticReference
-  executableCompilation
-  heterogeneousExperimentHarness
+  fluidClosure : ProblemClass
+  connectomeKernelClosure : ProblemClass
+  quantumProjectionPhysics : ProblemClass
+  spectralLearningGeometry : ProblemClass
+  grokkingValidation : ProblemClass
+  coreSemanticReference : ProblemClass
+  executableCompilation : ProblemClass
+  heterogeneousExperimentHarness : ProblemClass
   lightTransportGeometry : ProblemClass
 
 data FormalOwnerFamily : Set where
-  navierStokesClosure
-  biologyNetworkGeometry
-  physicsFoundations
-  corePredictionInference
-  coreKernelDefectAdmissibility
-  foundationsClaimTransport
-  fractranCrossPollination
+  navierStokesClosure : FormalOwnerFamily
+  biologyNetworkGeometry : FormalOwnerFamily
+  physicsFoundations : FormalOwnerFamily
+  corePredictionInference : FormalOwnerFamily
+  coreKernelDefectAdmissibility : FormalOwnerFamily
+  foundationsClaimTransport : FormalOwnerFamily
+  fractranCrossPollination : FormalOwnerFamily
   ultrametricMDLGeometry : FormalOwnerFamily
 
 data CoverageDepth : Set where
-  theoremDeep
-  explicitBridge
-  semanticAdapter
+  theoremDeep : CoverageDepth
+  explicitBridge : CoverageDepth
+  semanticAdapter : CoverageDepth
   frontierAdapter : CoverageDepth
 
 record ResearchProgramme : Set where

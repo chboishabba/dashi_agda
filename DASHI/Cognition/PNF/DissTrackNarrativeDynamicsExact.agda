@@ -36,32 +36,32 @@ data CorpusRing : Set where
   causalPrehistory directBattle adjacentWar : CorpusRing
 
 data Artifact : Set where
-  buriedAliveInterlude
-  poeticJustice
-  fuckinProblems
-  controlVerse
-  betCypher2013
-  theLanguage
-  kingKunta
-  hundred
-  element
-  theHillbillies
-  firstPersonShooter
-  likeThat
-  pushUps
-  taylorMadeFreestyle
-  euphoria
-  sixSixteenInLA
-  familyMatters
-  meetTheGrahams
-  notLikeUs
-  theHeartPart6
-  sevenMinuteDrill
-  champagneMoments
-  allToMyself
-  showOfHands
-  bblDrizzy
-  uMyEverything
+  buriedAliveInterlude : Artifact
+  poeticJustice : Artifact
+  fuckinProblems : Artifact
+  controlVerse : Artifact
+  betCypher2013 : Artifact
+  theLanguage : Artifact
+  kingKunta : Artifact
+  hundred : Artifact
+  element : Artifact
+  theHillbillies : Artifact
+  firstPersonShooter : Artifact
+  likeThat : Artifact
+  pushUps : Artifact
+  taylorMadeFreestyle : Artifact
+  euphoria : Artifact
+  sixSixteenInLA : Artifact
+  familyMatters : Artifact
+  meetTheGrahams : Artifact
+  notLikeUs : Artifact
+  theHeartPart6 : Artifact
+  sevenMinuteDrill : Artifact
+  champagneMoments : Artifact
+  allToMyself : Artifact
+  showOfHands : Artifact
+  bblDrizzy : Artifact
+  uMyEverything : Artifact
   adjacentUnresolved : Artifact
 
 ringOf : Artifact → CorpusRing
@@ -98,16 +98,16 @@ ringOf adjacentUnresolved = adjacentWar
 ------------------------------------------------------------------------
 
 data OperatorRole : Set where
-  rankingProposal
-  rankingRejection
-  commercialCounter
-  responsePhasePressure
-  authenticityReframe
-  provenanceAttack
-  hiddenFibreAttack
-  relationalFibreAttack
-  categoricalCompression
-  evidentiaryReopening
+  rankingProposal : OperatorRole
+  rankingRejection : OperatorRole
+  commercialCounter : OperatorRole
+  responsePhasePressure : OperatorRole
+  authenticityReframe : OperatorRole
+  provenanceAttack : OperatorRole
+  hiddenFibreAttack : OperatorRole
+  relationalFibreAttack : OperatorRole
+  categoricalCompression : OperatorRole
+  evidentiaryReopening : OperatorRole
   adjacentResponse : OperatorRole
 
 roleOf : Artifact → OperatorRole

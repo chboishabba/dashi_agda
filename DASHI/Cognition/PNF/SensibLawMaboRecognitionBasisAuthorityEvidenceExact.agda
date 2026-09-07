@@ -20,26 +20,26 @@ import DASHI.Cognition.PNF.SensibLawMaboBrennanDawsonIssueResidualLiveExact as M
 ------------------------------------------------------------------------
 
 data SourceTier : Set where
-  primaryJudgmentReproduction
-  officialInstitutionalSummary
-  secondaryDoctrinalAnalysis
-  : SourceTier
+  primaryJudgmentReproduction : SourceTier
+  officialInstitutionalSummary : SourceTier
+  secondaryDoctrinalAnalysis : SourceTier
+
 
 data AuthorityUseKind : Set where
-  continuityRuleUse
-  recognitionDoctrineUse
-  radicalTitleCompatibilityUse
-  evidentialRecognitionUse
-  contraryRuleUse
-  authorityInterpretationUse
-  : AuthorityUseKind
+  continuityRuleUse : AuthorityUseKind
+  recognitionDoctrineUse : AuthorityUseKind
+  radicalTitleCompatibilityUse : AuthorityUseKind
+  evidentialRecognitionUse : AuthorityUseKind
+  contraryRuleUse : AuthorityUseKind
+  authorityInterpretationUse : AuthorityUseKind
+
 
 data CitationRelation : Set where
-  citedSupportively
-  citedAsContrary
-  citedAndQualified
-  citedToExplain
-  : CitationRelation
+  citedSupportively : CitationRelation
+  citedAsContrary : CitationRelation
+  citedAndQualified : CitationRelation
+  citedToExplain : CitationRelation
+
 
 record LegalAuthorityIdentity : Set where
   constructor legalAuthorityIdentity

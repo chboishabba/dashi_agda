@@ -17,9 +17,9 @@ import DASHI.Physics.Closure.NSTriadKNHighestAlphaFrontierRound285Exact as NS285
 ------------------------------------------------------------------------
 
 data CriticalConeState : Set where
-  sameShellPositiveCoherence
-  sameShellNegativeCoherence
-  : CriticalConeState
+  sameShellPositiveCoherence : CriticalConeState
+  sameShellNegativeCoherence : CriticalConeState
+
 
 data ProbeAction : Set where inspectSignedCoherence : ProbeAction
 

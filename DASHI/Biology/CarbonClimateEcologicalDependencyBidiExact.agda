@@ -21,17 +21,17 @@ import DASHI.Biology.ClimateCarryingCapacityDeepTimeCrossPollinationExact as Eco
 ------------------------------------------------------------------------
 
 data ClimateEcologyArtifact : Set where
-  fossilReleaseCertificate
-  atmosphericCarbonCertificate
-  oceanCarbonateCertificate
-  temperatureStressCertificate
-  salinityHydrologyCertificate
-  oxygenNutrientCertificate
-  habitatSuitabilityCertificate
-  carryingCapacityCertificate
-  ecologicalFutureConeCertificate
-  unrelatedTaxonomyCertificate
-  : ClimateEcologyArtifact
+  fossilReleaseCertificate : ClimateEcologyArtifact
+  atmosphericCarbonCertificate : ClimateEcologyArtifact
+  oceanCarbonateCertificate : ClimateEcologyArtifact
+  temperatureStressCertificate : ClimateEcologyArtifact
+  salinityHydrologyCertificate : ClimateEcologyArtifact
+  oxygenNutrientCertificate : ClimateEcologyArtifact
+  habitatSuitabilityCertificate : ClimateEcologyArtifact
+  carryingCapacityCertificate : ClimateEcologyArtifact
+  ecologicalFutureConeCertificate : ClimateEcologyArtifact
+  unrelatedTaxonomyCertificate : ClimateEcologyArtifact
+
 
 data Depends : ClimateEcologyArtifact → ClimateEcologyArtifact → Set where
   fossilReleaseToAtmosphere :

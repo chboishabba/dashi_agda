@@ -8,6 +8,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Chemistry.TransitionKernel as Chemistry
+open Chemistry
 import DASHI.Geology.SaltGeochemistryExact as Salt
 import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact as PNP
 
@@ -29,52 +30,52 @@ import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact a
 
 saltDissolutionRate : Chemistry.RateLaw
 saltDissolutionRate = record
-  { Chemistry.rateLawKind = Chemistry.empirical
-  ; Chemistry.symbolicForm = "halite dissolution rate supplied by application"
-  ; Chemistry.parameters = []
-  ; Chemistry.validityRegime = "aqueous halite dissolution regime"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { rateLawKind = Chemistry.empirical
+  ; symbolicForm = "halite dissolution rate supplied by application"
+  ; parameters = []
+  ; validityRegime = "aqueous halite dissolution regime"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 saltDissolutionCondition : Chemistry.Condition
 saltDissolutionCondition = record
-  { Chemistry.conditionLabel = "halite in contact with undersaturated aqueous phase"
-  ; Chemistry.environment = Chemistry.emptyEnvironment
-  ; Chemistry.guardExpression = "aqueous phase present; activity/solubility criterion supplied"
+  { conditionLabel = "halite in contact with undersaturated aqueous phase"
+  ; environment = Chemistry.emptyEnvironment
+  ; guardExpression = "aqueous phase present; activity/solubility criterion supplied"
   }
 
 canonicalHaliteDissolution : Chemistry.Transition
 canonicalHaliteDissolution = record
-  { Chemistry.transitionId = "canonical halite dissolution"
-  ; Chemistry.transitionKind = Chemistry.phaseTransition
-  ; Chemistry.reactants =
-      record { Chemistry.species = Salt.haliteSpecies ; Chemistry.coefficient = 1 } ∷ []
-  ; Chemistry.products =
-      record { Chemistry.species = Salt.sodiumIonSpecies ; Chemistry.coefficient = 1 }
-      ∷ record { Chemistry.species = Salt.chlorideIonSpecies ; Chemistry.coefficient = 1 }
+  { transitionId = "canonical halite dissolution"
+  ; transitionKind = Chemistry.phaseTransition
+  ; reactants =
+      record { species = Salt.haliteSpecies ; coefficient = 1 } ∷ []
+  ; products =
+      record { species = Salt.sodiumIonSpecies ; coefficient = 1 }
+      ∷ record { species = Salt.chlorideIonSpecies ; coefficient = 1 }
       ∷ []
-  ; Chemistry.catalysts = []
-  ; Chemistry.rateLaw = saltDissolutionRate
-  ; Chemistry.condition = saltDissolutionCondition
-  ; Chemistry.reversibility = Chemistry.conditionallyReversible
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  ; catalysts = []
+  ; rateLaw = saltDissolutionRate
+  ; condition = saltDissolutionCondition
+  ; reversibility = Chemistry.conditionallyReversible
+  ; evidence = Chemistry.literatureEstablished
   }
 
 canonicalHalitePrecipitation : Chemistry.Transition
 canonicalHalitePrecipitation = record
-  { Chemistry.transitionId = "canonical halite precipitation"
-  ; Chemistry.transitionKind = Chemistry.phaseTransition
-  ; Chemistry.reactants =
-      record { Chemistry.species = Salt.sodiumIonSpecies ; Chemistry.coefficient = 1 }
-      ∷ record { Chemistry.species = Salt.chlorideIonSpecies ; Chemistry.coefficient = 1 }
+  { transitionId = "canonical halite precipitation"
+  ; transitionKind = Chemistry.phaseTransition
+  ; reactants =
+      record { species = Salt.sodiumIonSpecies ; coefficient = 1 }
+      ∷ record { species = Salt.chlorideIonSpecies ; coefficient = 1 }
       ∷ []
-  ; Chemistry.products =
-      record { Chemistry.species = Salt.haliteSpecies ; Chemistry.coefficient = 1 } ∷ []
-  ; Chemistry.catalysts = []
-  ; Chemistry.rateLaw = saltDissolutionRate
-  ; Chemistry.condition = saltDissolutionCondition
-  ; Chemistry.reversibility = Chemistry.conditionallyReversible
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  ; products =
+      record { species = Salt.haliteSpecies ; coefficient = 1 } ∷ []
+  ; catalysts = []
+  ; rateLaw = saltDissolutionRate
+  ; condition = saltDissolutionCondition
+  ; reversibility = Chemistry.conditionallyReversible
+  ; evidence = Chemistry.literatureEstablished
   }
 
 ------------------------------------------------------------------------
@@ -159,13 +160,13 @@ open OneToOneNeutralElectrolyteReceipt public
 ------------------------------------------------------------------------
 
 data SaltConsumerDomain : Set where
-  groundwaterTransport
-  soilPoreTransport
-  plantRootTransport
-  fungalExchange
-  industrialBrineFeed
-  drinkingWaterTreatment
-  : SaltConsumerDomain
+  groundwaterTransport : SaltConsumerDomain
+  soilPoreTransport : SaltConsumerDomain
+  plantRootTransport : SaltConsumerDomain
+  fungalExchange : SaltConsumerDomain
+  industrialBrineFeed : SaltConsumerDomain
+  drinkingWaterTreatment : SaltConsumerDomain
+
 
 record SaltDomainMaterialReceipt
     (lineage : Salt.SaltMaterialLineage)

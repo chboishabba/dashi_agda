@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Chemistry.ChlorAlkaliSaltIndustryExact as Industry
 import DASHI.Chemistry.TransitionKernel as Chemistry
+open Chemistry
 import DASHI.Geology.SaltConservationSpineExact as SaltConservation
 import DASHI.Geology.SaltGeochemistryExact as Salt
 
@@ -25,26 +26,26 @@ import DASHI.Geology.SaltGeochemistryExact as Salt
 
 electronSpecies : Chemistry.Species
 electronSpecies = record
-  { Chemistry.speciesId = "electron"
-  ; Chemistry.phase = Chemistry.dissolved
-  ; Chemistry.chargeLabel = "-1 elementary charge"
-  ; Chemistry.compositionLabel = "e-"
-  ; Chemistry.mobilityClass = Chemistry.mobile
-  ; Chemistry.activityModelLabel = "electrode electron bookkeeping carrier"
-  ; Chemistry.opticalRoleLabel = "not asserted"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { speciesId = "electron"
+  ; phase = Chemistry.dissolved
+  ; chargeLabel = "-1 elementary charge"
+  ; compositionLabel = "e-"
+  ; mobilityClass = Chemistry.mobile
+  ; activityModelLabel = "electrode electron bookkeeping carrier"
+  ; opticalRoleLabel = "not asserted"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 hydroxideIonSpecies : Chemistry.Species
 hydroxideIonSpecies = record
-  { Chemistry.speciesId = "hydroxide ion"
-  ; Chemistry.phase = Chemistry.dissolved
-  ; Chemistry.chargeLabel = "-1"
-  ; Chemistry.compositionLabel = "OH-"
-  ; Chemistry.mobilityClass = Chemistry.mobile
-  ; Chemistry.activityModelLabel = "aqueous electrolyte activity model supplied by application"
-  ; Chemistry.opticalRoleLabel = "not asserted"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { speciesId = "hydroxide ion"
+  ; phase = Chemistry.dissolved
+  ; chargeLabel = "-1"
+  ; compositionLabel = "OH-"
+  ; mobilityClass = Chemistry.mobile
+  ; activityModelLabel = "aqueous electrolyte activity model supplied by application"
+  ; opticalRoleLabel = "not asserted"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 record ElectrodeHalfReactionReceipt : Set₁ where

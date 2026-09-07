@@ -98,11 +98,11 @@ record AristotleReopenedResidualAction
 open AristotleReopenedResidualAction public
 
 data ReopenedProofSearchStatus : Set where
-  actionCurrent
-  actionReopenable
-  actionRefuted
-  actionProved
-  : ReopenedProofSearchStatus
+  actionCurrent : ReopenedProofSearchStatus
+  actionReopenable : ReopenedProofSearchStatus
+  actionRefuted : ReopenedProofSearchStatus
+  actionProved : ReopenedProofSearchStatus
+
 
 reopenableNotRefuted : actionReopenable ≡ actionRefuted → ⊥
 reopenableNotRefuted ()

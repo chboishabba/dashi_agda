@@ -14,20 +14,20 @@ import DASHI.Governance.IndigenousEnvironmentalJusticeSourceRegistryExact as Sou
 ------------------------------------------------------------------------
 
 data AuthorityRole : Set where
-  traditionalOwnerCommunity
-  commonLawHolder
-  claimApplicant
-  prescribedBodyCorporate
-  registeredNativeTitleBodyCorporate
-  : AuthorityRole
+  traditionalOwnerCommunity : AuthorityRole
+  commonLawHolder : AuthorityRole
+  claimApplicant : AuthorityRole
+  prescribedBodyCorporate : AuthorityRole
+  registeredNativeTitleBodyCorporate : AuthorityRole
+
 
 data RoleFunction : Set where
-  holdsTraditionalLawCustom
-  holdsRecognizedNativeTitleInterest
-  conductsClaimProcedure
-  holdsOrManagesRecognizedRights
-  representsInterestsUnderStatute
-  : RoleFunction
+  holdsTraditionalLawCustom : RoleFunction
+  holdsRecognizedNativeTitleInterest : RoleFunction
+  conductsClaimProcedure : RoleFunction
+  holdsOrManagesRecognizedRights : RoleFunction
+  representsInterestsUnderStatute : RoleFunction
+
 
 data Performs : AuthorityRole → RoleFunction → Set where
   communityLawCustom : Performs traditionalOwnerCommunity holdsTraditionalLawCustom

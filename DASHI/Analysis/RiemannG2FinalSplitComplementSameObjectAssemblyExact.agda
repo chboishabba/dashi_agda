@@ -144,16 +144,16 @@ assemblyContradiction {surface} assembly =
 ------------------------------------------------------------------------
 
 data FinalAssemblyPayment : Set where
-  rebuildFinalContradictionCompiler
-  separatelyInventWholeComplementBudget
-  attachOffProducerToFinalScalar
-  attachGammaProducerToFinalScalar
-  attachClusterProducerToFinalScalar
-  proveSameUniversalTaper
-  proveFinalClusterBalance
-  proveFinalThreeChannelBounds
-  proveStrictCombinedBudget
-  : FinalAssemblyPayment
+  rebuildFinalContradictionCompiler : FinalAssemblyPayment
+  separatelyInventWholeComplementBudget : FinalAssemblyPayment
+  attachOffProducerToFinalScalar : FinalAssemblyPayment
+  attachGammaProducerToFinalScalar : FinalAssemblyPayment
+  attachClusterProducerToFinalScalar : FinalAssemblyPayment
+  proveSameUniversalTaper : FinalAssemblyPayment
+  proveFinalClusterBalance : FinalAssemblyPayment
+  proveFinalThreeChannelBounds : FinalAssemblyPayment
+  proveStrictCombinedBudget : FinalAssemblyPayment
+
 
 data PaymentStatus : Set where
   pruned live downstream : PaymentStatus

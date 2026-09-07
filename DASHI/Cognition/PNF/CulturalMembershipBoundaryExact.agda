@@ -29,18 +29,18 @@ open import Relation.Binary.PropositionalEquality using (trans; sym)
 ------------------------------------------------------------------------
 
 data ProvenanceKind : Set where
-  westCoastBlackAmerican
-  puertoRicanCaribbean
+  westCoastBlackAmerican : ProvenanceKind
+  puertoRicanCaribbean : ProvenanceKind
   stateNational : ProvenanceKind
 
 data MembershipMove : Set where
-  protectProvenanceBoundary
-  expandMembershipDomain
+  protectProvenanceBoundary : MembershipMove
+  expandMembershipDomain : MembershipMove
   enforcePolityBoundary : MembershipMove
 
 data ActionProjection : Set where
-  rhetoricalClassification
-  culturalDomainExpansion
+  rhetoricalClassification : ActionProjection
+  culturalDomainExpansion : ActionProjection
   stateCoercion : ActionProjection
 
 data CoarseBoundarySign : Set where

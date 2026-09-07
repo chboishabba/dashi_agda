@@ -29,6 +29,7 @@ record LESDecisionAdequacyBridge
         (Basis.Control mechanism)
         (Basis.Observation mechanism) → Set
     interface : Adequacy.FirstOrderAdequacyInterface
+      {Intervention = Basis.Control mechanism}
       ExactRealises ApproxRealises
     exactModelRealisationReference : String
     approximateModelRealisationReference : String

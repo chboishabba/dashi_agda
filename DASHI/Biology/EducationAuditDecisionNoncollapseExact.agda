@@ -19,20 +19,20 @@ import DASHI.Cognition.PNF.DecisionConfidenceNoncollapseExact as Confidence
 ------------------------------------------------------------------------
 
 data AuditEvidenceState : Set where
-  auditRegistered
-  boundedSupportAccumulated
-  independentAuditCompleted
+  auditRegistered : AuditEvidenceState
+  boundedSupportAccumulated : AuditEvidenceState
+  independentAuditCompleted : AuditEvidenceState
   reproducedBoundedFinding : AuditEvidenceState
 
 data AuditConfidence : Set where
-  confidenceUnreported
-  lowAuditConfidence
-  moderateAuditConfidence
+  confidenceUnreported : AuditConfidence
+  lowAuditConfidence : AuditConfidence
+  moderateAuditConfidence : AuditConfidence
   highAuditConfidence : AuditConfidence
 
 data PolicyCommitment : Set where
-  noPolicyCommitment
-  recommendationForReview
+  noPolicyCommitment : PolicyCommitment
+  recommendationForReview : PolicyCommitment
   authorisedPolicyPromotion : PolicyCommitment
 
 data PolicyAuthorityReceipt : Set where

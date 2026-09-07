@@ -29,23 +29,23 @@ import DASHI.Reasoning.RelationRepresentationSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data TransformationFamily : Set where
-  fixedTranslation
-  linearRotation
-  affineTransformation
-  learnedNonlinearTransformation
-  quotientCompression
-  manifoldConstrainedTransformation
-  applicationSuppliedTransformation
-  : TransformationFamily
+  fixedTranslation : TransformationFamily
+  linearRotation : TransformationFamily
+  affineTransformation : TransformationFamily
+  learnedNonlinearTransformation : TransformationFamily
+  quotientCompression : TransformationFamily
+  manifoldConstrainedTransformation : TransformationFamily
+  applicationSuppliedTransformation : TransformationFamily
+
 
 data ComparisonGeometry : Set where
-  cosineLikeGeometry
-  ordinalConcordanceGeometry
-  magnitudeAwareGeometry
-  calibratedMonotoneGeometry
-  riemannianGeodesicGeometry
-  applicationSuppliedGeometry
-  : ComparisonGeometry
+  cosineLikeGeometry : ComparisonGeometry
+  ordinalConcordanceGeometry : ComparisonGeometry
+  magnitudeAwareGeometry : ComparisonGeometry
+  calibratedMonotoneGeometry : ComparisonGeometry
+  riemannianGeodesicGeometry : ComparisonGeometry
+  applicationSuppliedGeometry : ComparisonGeometry
+
 
 record SituatedRelationRepresentation
     (State Context Representation RelationCode Similarity : Set) : Set₁ where

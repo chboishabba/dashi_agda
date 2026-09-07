@@ -12,16 +12,16 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data RepairAxis : Set where
-  acknowledgementAxis
-  truthAxis
-  restitutionAxis
-  landReturnAxis
-  compensationAxis
-  institutionalReformAxis
-  authorityRestorationAxis
-  decisionRightsAxis
-  nonRepetitionAxis
-  : RepairAxis
+  acknowledgementAxis : RepairAxis
+  truthAxis : RepairAxis
+  restitutionAxis : RepairAxis
+  landReturnAxis : RepairAxis
+  compensationAxis : RepairAxis
+  institutionalReformAxis : RepairAxis
+  authorityRestorationAxis : RepairAxis
+  decisionRightsAxis : RepairAxis
+  nonRepetitionAxis : RepairAxis
+
 
 data RepairStatus : Set where
   open repaired : RepairStatus

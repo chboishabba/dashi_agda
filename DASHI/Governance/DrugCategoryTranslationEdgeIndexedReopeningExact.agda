@@ -16,22 +16,22 @@ import DASHI.Governance.DrugCategoryTranslationPathResidueExact as PathResidue
 ------------------------------------------------------------------------
 
 data TranslationEdgeInstance : Set where
-  stateToClinicalEdge
-  clinicalToLivedEdge
-  stateToCommercialEdge
-  commercialToLivedEdge
-  stateToSovereignCommunityEdge
-  sovereignCommunityToLivedEdge
-  indigenousToCommercialEdge
-  : TranslationEdgeInstance
+  stateToClinicalEdge : TranslationEdgeInstance
+  clinicalToLivedEdge : TranslationEdgeInstance
+  stateToCommercialEdge : TranslationEdgeInstance
+  commercialToLivedEdge : TranslationEdgeInstance
+  stateToSovereignCommunityEdge : TranslationEdgeInstance
+  sovereignCommunityToLivedEdge : TranslationEdgeInstance
+  indigenousToCommercialEdge : TranslationEdgeInstance
+
 
 data TranslationConsequence : Set where
-  clinicalSafetyConsequence
-  livedSubjectConsequence
-  commercialPsychedelicConsequence
-  sovereignCommunityConsequence
-  positivePsychedelicLegibilityConsequence
-  : TranslationConsequence
+  clinicalSafetyConsequence : TranslationConsequence
+  livedSubjectConsequence : TranslationConsequence
+  commercialPsychedelicConsequence : TranslationConsequence
+  sovereignCommunityConsequence : TranslationConsequence
+  positivePsychedelicLegibilityConsequence : TranslationConsequence
+
 
 ------------------------------------------------------------------------
 -- Proof-relevant edge occurrence in the exact consequence history.

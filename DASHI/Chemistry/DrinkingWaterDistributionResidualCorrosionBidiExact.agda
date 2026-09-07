@@ -24,17 +24,17 @@ import DASHI.Geology.SaltGeochemistryExact as Salt
 ------------------------------------------------------------------------
 
 data DistributionResidualKind : Set where
-  freeResidual
-  combinedResidual
-  : DistributionResidualKind
+  freeResidual : DistributionResidualKind
+  combinedResidual : DistributionResidualKind
+
 
 data PipeMaterialClass : Set where
-  ironContaining
-  copperContaining
-  cementitious
-  polymeric
-  mixedOrUnknown
-  : PipeMaterialClass
+  ironContaining : PipeMaterialClass
+  copperContaining : PipeMaterialClass
+  cementitious : PipeMaterialClass
+  polymeric : PipeMaterialClass
+  mixedOrUnknown : PipeMaterialClass
+
 
 record DistributionHydraulicState : Set where
   constructor distributionHydraulicState

@@ -30,15 +30,15 @@ import DASHI.Governance.SexedHistoricalHorizonQualifiedSelectiveReopeningExact a
 ------------------------------------------------------------------------
 
 data HistoricalControlDirective : Set where
-  continueImmediateAction
-  suspendLongForecast
-  explicitlyCloseBranch
-  : HistoricalControlDirective
+  continueImmediateAction : HistoricalControlDirective
+  suspendLongForecast : HistoricalControlDirective
+  explicitlyCloseBranch : HistoricalControlDirective
+
 
 data BranchStatus : Set where
-  branchRetained
-  branchClosed
-  : BranchStatus
+  branchRetained : BranchStatus
+  branchClosed : BranchStatus
+
 
 applyHistoricalControl : HistoricalControlDirective → BranchStatus → BranchStatus
 applyHistoricalControl continueImmediateAction status = status

@@ -20,10 +20,10 @@ import DASHI.Governance.SexedHistoricalProductiveDialecticalFibreJoinExact as Jo
 ------------------------------------------------------------------------
 
 data CandidateJoin : Set where
-  coexistenceOnly
-  residualPreservingNoExpansion
-  productiveRelationalJoin
-  : CandidateJoin
+  coexistenceOnly : CandidateJoin
+  residualPreservingNoExpansion : CandidateJoin
+  productiveRelationalJoin : CandidateJoin
+
 
 data CoarseCandidateSurface : Set where bothContributionsVisible : CoarseCandidateSurface
 
@@ -69,27 +69,27 @@ residualAloneCannotRecoverProductivity =
 ------------------------------------------------------------------------
 
 data JoinObligation : Set where
-  verifyBothContributions
-  verifyResidualRetention
-  verifyStrictAffordanceExpansion
-  verifyLocalReachability
-  : JoinObligation
+  verifyBothContributions : JoinObligation
+  verifyResidualRetention : JoinObligation
+  verifyStrictAffordanceExpansion : JoinObligation
+  verifyLocalReachability : JoinObligation
+
 
 data JoinMeasurement : Set where
-  contributionTrace
-  pathOrderProbe
-  optionConeProbe
-  historyPowerGateProbe
-  : JoinMeasurement
+  contributionTrace : JoinMeasurement
+  pathOrderProbe : JoinMeasurement
+  optionConeProbe : JoinMeasurement
+  historyPowerGateProbe : JoinMeasurement
+
 
 data MeasurementValue : Set where
-  bothSeen
-  residualMissing
-  residualSeen
-  expansionMissing
-  expansionSeen
-  localGateUnknown
-  : MeasurementValue
+  bothSeen : MeasurementValue
+  residualMissing : MeasurementValue
+  residualSeen : MeasurementValue
+  expansionMissing : MeasurementValue
+  expansionSeen : MeasurementValue
+  localGateUnknown : MeasurementValue
+
 
 measure : JoinMeasurement → CandidateJoin → MeasurementValue
 measure contributionTrace _ = bothSeen

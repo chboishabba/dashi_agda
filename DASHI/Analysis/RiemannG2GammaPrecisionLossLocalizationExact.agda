@@ -24,14 +24,14 @@ import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as PQ
 ------------------------------------------------------------------------
 
 data GammaPrecisionStage : Set where
-  sourceKernelEstimate
-  absoluteEnvelope
-  taperNormEstimate
-  parameterUniformisation
-  asymptoticRemainder
-  finalConstantComparison
-  sourceLocalizationStillRequired
-  : GammaPrecisionStage
+  sourceKernelEstimate : GammaPrecisionStage
+  absoluteEnvelope : GammaPrecisionStage
+  taperNormEstimate : GammaPrecisionStage
+  parameterUniformisation : GammaPrecisionStage
+  asymptoticRemainder : GammaPrecisionStage
+  finalConstantComparison : GammaPrecisionStage
+  sourceLocalizationStillRequired : GammaPrecisionStage
+
 
 record ExistingCoarseGammaProducer : Set₁ where
   field
@@ -85,15 +85,15 @@ sharpProducerClosesGammaPrecisionRepair producer = record
 ------------------------------------------------------------------------
 
 data GammaRepairAction : Set where
-  reuseCoarseUniformBoundUnchanged
-  localizeFirstPrecisionLoss
-  sharpenLocatedKernelStep
-  sharpenLocatedEnvelopeStep
-  sharpenLocatedTaperNormStep
-  sharpenLocatedUniformisationStep
-  sharpenLocatedRemainderStep
-  repairFinalConstantComparison
-  : GammaRepairAction
+  reuseCoarseUniformBoundUnchanged : GammaRepairAction
+  localizeFirstPrecisionLoss : GammaRepairAction
+  sharpenLocatedKernelStep : GammaRepairAction
+  sharpenLocatedEnvelopeStep : GammaRepairAction
+  sharpenLocatedTaperNormStep : GammaRepairAction
+  sharpenLocatedUniformisationStep : GammaRepairAction
+  sharpenLocatedRemainderStep : GammaRepairAction
+  repairFinalConstantComparison : GammaRepairAction
+
 
 RepairRelevant : GammaRepairAction -> Set
 RepairRelevant reuseCoarseUniformBoundUnchanged = ⊥

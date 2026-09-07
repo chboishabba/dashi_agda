@@ -11,21 +11,21 @@ import DASHI.Physics.Foundations.GRQFTExperimentDesignCrossPollinationExact as G
 import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Exact as R146
 
 data BalabanFrontierCoordinate : Set where
-  a1CouplingHistoryResidual
-  a2CouplingHistoryResidual
-  densityActionResidual
-  round108SemanticsProvenanceResidual
-  round108PotentialMatchResidual
-  combinedRGDensityStateResidual
-  combinedRGStatePotentialResidual
-  physicalD1ChainRuleResidual
-  stressSumResidual
-  metricDomainMargin
-  schwingerPairingResidual
-  cutoffSystematic
-  finiteVolumeSystematic
-  discretizationSystematic
-  : BalabanFrontierCoordinate
+  a1CouplingHistoryResidual : BalabanFrontierCoordinate
+  a2CouplingHistoryResidual : BalabanFrontierCoordinate
+  densityActionResidual : BalabanFrontierCoordinate
+  round108SemanticsProvenanceResidual : BalabanFrontierCoordinate
+  round108PotentialMatchResidual : BalabanFrontierCoordinate
+  combinedRGDensityStateResidual : BalabanFrontierCoordinate
+  combinedRGStatePotentialResidual : BalabanFrontierCoordinate
+  physicalD1ChainRuleResidual : BalabanFrontierCoordinate
+  stressSumResidual : BalabanFrontierCoordinate
+  metricDomainMargin : BalabanFrontierCoordinate
+  schwingerPairingResidual : BalabanFrontierCoordinate
+  cutoffSystematic : BalabanFrontierCoordinate
+  finiteVolumeSystematic : BalabanFrontierCoordinate
+  discretizationSystematic : BalabanFrontierCoordinate
+
 
 coordinateRole : BalabanFrontierCoordinate → Design.CoordinateRole
 coordinateRole a1CouplingHistoryResidual = Design.derivedDiscriminator

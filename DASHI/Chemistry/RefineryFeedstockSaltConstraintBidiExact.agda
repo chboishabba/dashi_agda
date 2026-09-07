@@ -29,9 +29,9 @@ import DASHI.Chemistry.DrinkingWaterDistributionResidualCorrosionBidiExact as Co
 ------------------------------------------------------------------------
 
 data FeedstockState : Set where
-  sameNominalCrudeLowSaltBurden
-  sameNominalCrudeHighSaltBurden
-  : FeedstockState
+  sameNominalCrudeLowSaltBurden : FeedstockState
+  sameNominalCrudeHighSaltBurden : FeedstockState
+
 
 data NominalCrudeSurface : Set where
   sameCrudeGradeLabel : NominalCrudeSurface

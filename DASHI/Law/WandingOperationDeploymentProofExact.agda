@@ -11,7 +11,7 @@ open import Agda.Builtin.String using (String)
 data Closure : Set where open closed : Closure
 
 data DeploymentCoordinate : Set where
-  authorisationCoordinate placeCoordinate timeCoordinate officerDeploymentCoordinate
+  authorisationCoordinate placeCoordinate timeCoordinate officerDeploymentCoordinate : DeploymentCoordinate
   publicTrafficCoordinate exposureSetCoordinate : DeploymentCoordinate
 
 record OperationDeployment : Set where

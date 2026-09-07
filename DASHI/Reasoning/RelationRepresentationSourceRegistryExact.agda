@@ -24,16 +24,16 @@ data SourceKind : Set where
   peerReviewedConference arxivPreprint webEssay : SourceKind
 
 data SourceRole : Set where
-  relationDecoderPropertyStructure
-  rotationalSemanticTransformation
-  manifoldSteeringGeometry
-  ordinalSimilarityMetric
-  magnitudeAwareSimilarityMetric
-  calibratedSimilarityMetric
-  differentialEquivalenceCompression
-  grokkingDynamicFailure
-  eigenslurConceptualResidual
-  : SourceRole
+  relationDecoderPropertyStructure : SourceRole
+  rotationalSemanticTransformation : SourceRole
+  manifoldSteeringGeometry : SourceRole
+  ordinalSimilarityMetric : SourceRole
+  magnitudeAwareSimilarityMetric : SourceRole
+  calibratedSimilarityMetric : SourceRole
+  differentialEquivalenceCompression : SourceRole
+  grokkingDynamicFailure : SourceRole
+  eigenslurConceptualResidual : SourceRole
+
 
 record SourceReference : Set where
   constructor sourceReference

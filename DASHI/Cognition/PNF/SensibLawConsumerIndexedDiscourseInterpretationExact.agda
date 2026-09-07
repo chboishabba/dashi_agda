@@ -23,15 +23,15 @@ data ConsumerKind : Set where
   customConsumer : String → ConsumerKind
 
 data GeneralDiscourseKind : Set where
-  assertionDiscourse
-  reportDiscourse
-  quotationDiscourse
-  denialDiscourse
-  testimonyDiscourse
-  questionDiscourse
-  hypotheticalDiscourse
-  unresolvedDiscourse
-  : GeneralDiscourseKind
+  assertionDiscourse : GeneralDiscourseKind
+  reportDiscourse : GeneralDiscourseKind
+  quotationDiscourse : GeneralDiscourseKind
+  denialDiscourse : GeneralDiscourseKind
+  testimonyDiscourse : GeneralDiscourseKind
+  questionDiscourse : GeneralDiscourseKind
+  hypotheticalDiscourse : GeneralDiscourseKind
+  unresolvedDiscourse : GeneralDiscourseKind
+
 
 record DiscourseActCandidate : Set where
   constructor discourseActCandidate

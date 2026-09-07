@@ -27,11 +27,11 @@ data ClosureResidual : Set where
   closureResidualOpen closureResidualClosed : ClosureResidual
 
 data SharedAuditWorld : Set where
-  representedOpen
-  representedClosed
-  originatingOpen
-  originatingClosed
-  : SharedAuditWorld
+  representedOpen : SharedAuditWorld
+  representedClosed : SharedAuditWorld
+  originatingOpen : SharedAuditWorld
+  originatingClosed : SharedAuditWorld
+
 
 subjectPosition : SharedAuditWorld → Subject.SubjectPosition
 subjectPosition representedOpen = Subject.representedPosition

@@ -31,11 +31,11 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 ------------------------------------------------------------------------
 
 data ScaleRole : Set where
-  shellIndexRole
-  dyadicWavenumberRole
-  parabolicDenominatorRole
-  finiteModeCountRole
-  profileDepthRole
+  shellIndexRole : ScaleRole
+  dyadicWavenumberRole : ScaleRole
+  parabolicDenominatorRole : ScaleRole
+  finiteModeCountRole : ScaleRole
+  profileDepthRole : ScaleRole
   galerkinCutoffRole : ScaleRole
 
 record TaggedScale : Set where

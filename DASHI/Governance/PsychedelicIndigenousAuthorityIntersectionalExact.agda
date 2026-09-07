@@ -17,23 +17,23 @@ import DASHI.Biology.KluverFormConstantPsychedelicBoundaryExact as Kluver
 ------------------------------------------------------------------------
 
 data PsychedelicKnowledgeSurface : Set where
-  biomedicalClinicalSurface
-  neurophenomenologySurface
-  indigenousCeremonialKnowledgeSurface
-  commercialExtractionSurface
-  publicPolicySurface
-  : PsychedelicKnowledgeSurface
+  biomedicalClinicalSurface : PsychedelicKnowledgeSurface
+  neurophenomenologySurface : PsychedelicKnowledgeSurface
+  indigenousCeremonialKnowledgeSurface : PsychedelicKnowledgeSurface
+  commercialExtractionSurface : PsychedelicKnowledgeSurface
+  publicPolicySurface : PsychedelicKnowledgeSurface
+
 
 data AuthorityRequirement : Set where
-  clinicalEvidenceAuthority
-  participantConsentAuthority
-  communityGovernanceAuthority
-  culturalProtocolAuthority
-  sovereignPermissionAuthority
-  benefitSharingAuthority
-  intellectualPropertyAuthority
-  ecologicalStewardshipAuthority
-  : AuthorityRequirement
+  clinicalEvidenceAuthority : AuthorityRequirement
+  participantConsentAuthority : AuthorityRequirement
+  communityGovernanceAuthority : AuthorityRequirement
+  culturalProtocolAuthority : AuthorityRequirement
+  sovereignPermissionAuthority : AuthorityRequirement
+  benefitSharingAuthority : AuthorityRequirement
+  intellectualPropertyAuthority : AuthorityRequirement
+  ecologicalStewardshipAuthority : AuthorityRequirement
+
 
 record PsychedelicAuthorityRoute : Set where
   constructor psychedelicAuthorityRoute

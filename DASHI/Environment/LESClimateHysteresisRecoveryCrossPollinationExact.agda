@@ -34,9 +34,9 @@ lesPathDependenceGapIsExplicit :
 lesPathDependenceGapIsExplicit = refl
 
 data LESClimateScenario : Set where
-  lowRateBaselineHistory
-  highRateRestoredShadowHistory
-  : LESClimateScenario
+  lowRateBaselineHistory : LESClimateScenario
+  highRateRestoredShadowHistory : LESClimateScenario
+
 
 data ResolvedClimateShadow : Set where
   sameResolvedClimate : ResolvedClimateShadow
@@ -45,9 +45,9 @@ resolvedClimate : LESClimateScenario → ResolvedClimateShadow
 resolvedClimate _ = sameResolvedClimate
 
 data HiddenTrajectoryState : Set where
-  noRetainedDamageHistory
-  retainedDamageHistory
-  : HiddenTrajectoryState
+  noRetainedDamageHistory : HiddenTrajectoryState
+  retainedDamageHistory : HiddenTrajectoryState
+
 
 hiddenTrajectory : LESClimateScenario → HiddenTrajectoryState
 hiddenTrajectory lowRateBaselineHistory = noRetainedDamageHistory
@@ -64,9 +64,9 @@ hiddenTrajectoriesDiffer :
 hiddenTrajectoriesDiffer ()
 
 data PlanningRecoveryConsumer : Set where
-  baselineRecoveryCone
-  alteredRecoveryCone
-  : PlanningRecoveryConsumer
+  baselineRecoveryCone : PlanningRecoveryConsumer
+  alteredRecoveryCone : PlanningRecoveryConsumer
+
 
 planningRecoveryConsumer : LESClimateScenario → PlanningRecoveryConsumer
 planningRecoveryConsumer lowRateBaselineHistory = baselineRecoveryCone

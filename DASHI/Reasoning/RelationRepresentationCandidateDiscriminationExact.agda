@@ -21,18 +21,18 @@ import DASHI.Reasoning.RelationRepresentationAdequacyExact as Adequacy
 ------------------------------------------------------------------------
 
 data CandidateFamily : Set where
-  offsetCandidate
-  rotationCandidate
-  affineCandidate
-  contextualCandidate
-  : CandidateFamily
+  offsetCandidate : CandidateFamily
+  rotationCandidate : CandidateFamily
+  affineCandidate : CandidateFamily
+  contextualCandidate : CandidateFamily
+
 
 data ExperimentProbe : Set where
-  inSampleFitProbe
-  heldOutTargetProbe
-  heldOutContextProbe
-  localPerturbationProbe
-  : ExperimentProbe
+  inSampleFitProbe : ExperimentProbe
+  heldOutTargetProbe : ExperimentProbe
+  heldOutContextProbe : ExperimentProbe
+  localPerturbationProbe : ExperimentProbe
+
 
 data ProbeOutcome : Set where
   pass fail : ProbeOutcome

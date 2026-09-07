@@ -27,9 +27,9 @@ import DASHI.Reasoning.RelationRepresentationSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data RelationExperiment : Set where
-  eigenslurResidualExperiment
-  flourishingImprovementExperiment
-  : RelationExperiment
+  eigenslurResidualExperiment : RelationExperiment
+  flourishingImprovementExperiment : RelationExperiment
+
 
 data PairRole : Set where
   markedMember baselineMember : PairRole

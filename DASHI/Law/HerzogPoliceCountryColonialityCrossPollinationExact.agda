@@ -17,14 +17,14 @@ import DASHI.Law.FascismAtrocitySourceCrossPollinationExact as Fascism
 ------------------------------------------------------------------------
 
 data ColonialityAuditFeature : Set where
-  priorSovereignPeoplehood
-  imposedRecognitionRegime
-  landOrTerritoryDispossession
-  settlementOrDemographicTransformation
-  securityRationalisation
-  differentialMovementOrAccess
-  policingOfPoliticalDissent
-  collectiveAttribution
+  priorSovereignPeoplehood : ColonialityAuditFeature
+  imposedRecognitionRegime : ColonialityAuditFeature
+  landOrTerritoryDispossession : ColonialityAuditFeature
+  settlementOrDemographicTransformation : ColonialityAuditFeature
+  securityRationalisation : ColonialityAuditFeature
+  differentialMovementOrAccess : ColonialityAuditFeature
+  policingOfPoliticalDissent : ColonialityAuditFeature
+  collectiveAttribution : ColonialityAuditFeature
   correctionChannelClosure : ColonialityAuditFeature
 
 record ColonialityFeatureReceipt : Set where
@@ -88,11 +88,11 @@ canonicalCountryPalestineAudit = countryPalestineColonialityAudit
 ------------------------------------------------------------------------
 
 data CountryConsumer : Set where
-  crownRecognisedPropertyInterest
-  countryRelation
-  collectiveAuthority
-  lawAndObligation
-  materialEcologicalContinuity
+  crownRecognisedPropertyInterest : CountryConsumer
+  countryRelation : CountryConsumer
+  collectiveAuthority : CountryConsumer
+  lawAndObligation : CountryConsumer
+  materialEcologicalContinuity : CountryConsumer
   sovereigntyAndSelfDetermination : CountryConsumer
 
 record CountryRecognitionBoundary : Set where
@@ -119,17 +119,17 @@ canonicalCountryRecognitionBoundary =
 ------------------------------------------------------------------------
 
 data HerzogPolicingCoordinate : Set where
-  protestPoliticalContent
-  palestinianSelfDeterminationContent
-  herzogSourceContext
-  commandAuthority
-  commandContent
-  transmission
-  civilianDirection
-  opportunityToComply
-  forcePath
-  groupSelection
-  exitAccess
+  protestPoliticalContent : HerzogPolicingCoordinate
+  palestinianSelfDeterminationContent : HerzogPolicingCoordinate
+  herzogSourceContext : HerzogPolicingCoordinate
+  commandAuthority : HerzogPolicingCoordinate
+  commandContent : HerzogPolicingCoordinate
+  transmission : HerzogPolicingCoordinate
+  civilianDirection : HerzogPolicingCoordinate
+  opportunityToComply : HerzogPolicingCoordinate
+  forcePath : HerzogPolicingCoordinate
+  groupSelection : HerzogPolicingCoordinate
+  exitAccess : HerzogPolicingCoordinate
   foreignPolicySecurityContext : HerzogPolicingCoordinate
 
 record HerzogPolicingColonialityFibre : Set where
@@ -159,11 +159,11 @@ canonicalHerzogColonialityFibre = herzogPolicingColonialityFibre
 ------------------------------------------------------------------------
 
 data PolicingMechanism : Set where
-  groupBasedSelection
-  differentialEscalation
-  differentialExitAccess
-  sourceIdentityAsLiabilityProxy
-  aggregateCategoryErasesIndividualLawfulness
+  groupBasedSelection : PolicingMechanism
+  differentialEscalation : PolicingMechanism
+  differentialExitAccess : PolicingMechanism
+  sourceIdentityAsLiabilityProxy : PolicingMechanism
+  aggregateCategoryErasesIndividualLawfulness : PolicingMechanism
   dissentAsConfirmingFault : PolicingMechanism
 
 featureToPolicingMechanism : Fascism.FascismFeature → PolicingMechanism
@@ -193,19 +193,19 @@ canonicalFascismPolicingAuditBoundary =
 ------------------------------------------------------------------------
 
 data HerzogCountryClaim : Set where
-  publicOrderObserverIsEpistemicallyComplete
-  australiaPalestineStructuralColonialityHomology
-  australiaReplicatesPalestineExactColonisation
-  nswPoliceImportedIsraeliSecurityPractice
-  herzogPoliceResponseForeignPolicyMotivated
+  publicOrderObserverIsEpistemicallyComplete : HerzogCountryClaim
+  australiaPalestineStructuralColonialityHomology : HerzogCountryClaim
+  australiaReplicatesPalestineExactColonisation : HerzogCountryClaim
+  nswPoliceImportedIsraeliSecurityPractice : HerzogCountryClaim
+  herzogPoliceResponseForeignPolicyMotivated : HerzogCountryClaim
   countrySovereigntyContentErasedByPropertyOnlyChart : HerzogCountryClaim
 
 data HerzogCountryProducer : Set where
-  completePoliticalContentProducer
-  pairedColonialityCoordinateProducer
-  exactHistoricalMechanismProducer
-  operationalTransferReceiptProducer
-  motiveAndCoordinationProducer
+  completePoliticalContentProducer : HerzogCountryProducer
+  pairedColonialityCoordinateProducer : HerzogCountryProducer
+  exactHistoricalMechanismProducer : HerzogCountryProducer
+  operationalTransferReceiptProducer : HerzogCountryProducer
+  motiveAndCoordinationProducer : HerzogCountryProducer
   countryAuthorityResidualProducer : HerzogCountryProducer
 
 reverseHerzogCountry : HerzogCountryClaim → HerzogCountryProducer

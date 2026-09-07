@@ -19,16 +19,16 @@ data DispositionSurface : Set where
   allowed dismissed refused granted remitted stayed unresolvedDisposition : DispositionSurface
 
 data LegalExplanationKind : Set where
-  meritsExplanation
-  jurisdictionExplanation
-  limitationExplanation
-  evidenceFailureExplanation
-  proceduralDefaultExplanation
-  discretionExplanation
-  constitutionalExplanation
-  settlementOrConsentExplanation
-  explanationUnresolved
-  : LegalExplanationKind
+  meritsExplanation : LegalExplanationKind
+  jurisdictionExplanation : LegalExplanationKind
+  limitationExplanation : LegalExplanationKind
+  evidenceFailureExplanation : LegalExplanationKind
+  proceduralDefaultExplanation : LegalExplanationKind
+  discretionExplanation : LegalExplanationKind
+  constitutionalExplanation : LegalExplanationKind
+  settlementOrConsentExplanation : LegalExplanationKind
+  explanationUnresolved : LegalExplanationKind
+
 
 record LegalOutcomeModel : Set₁ where
   constructor legalOutcomeModel
@@ -98,19 +98,19 @@ record OutcomeExplanationFibre : Set where
 open OutcomeExplanationFibre public
 
 data ExplanationResidual : Set where
-  sourceReasonResidual
-  proceduralHistoryResidual
-  jurisdictionResidual
-  reasonsForJudgmentResidual
-  exactExplanationClosed
-  : ExplanationResidual
+  sourceReasonResidual : ExplanationResidual
+  proceduralHistoryResidual : ExplanationResidual
+  jurisdictionResidual : ExplanationResidual
+  reasonsForJudgmentResidual : ExplanationResidual
+  exactExplanationClosed : ExplanationResidual
+
 
 data ExplanationProducer : Set where
-  inspectDispositionSource
-  inspectProceduralHistory
-  inspectJurisdictionRecord
-  inspectReasonsForJudgment
-  : ExplanationProducer
+  inspectDispositionSource : ExplanationProducer
+  inspectProceduralHistory : ExplanationProducer
+  inspectJurisdictionRecord : ExplanationProducer
+  inspectReasonsForJudgment : ExplanationProducer
+
 
 producerForExplanationResidual : ExplanationResidual → ExplanationProducer
 producerForExplanationResidual sourceReasonResidual = inspectDispositionSource

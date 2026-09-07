@@ -80,13 +80,13 @@ existingPoleQuotientBidiCompilerAlreadyClosed = refl
 ------------------------------------------------------------------------
 
 data LiveLeaf : Set where
-  literalWidthLaw
-  quarterPeriodOffBudget
-  sameTaperGammaBudget
-  quantitativeClusterMargin
-  strictCombinedBudget
-  rebuildFinalContradictionCompiler
-  : LiveLeaf
+  literalWidthLaw : LiveLeaf
+  quarterPeriodOffBudget : LiveLeaf
+  sameTaperGammaBudget : LiveLeaf
+  quantitativeClusterMargin : LiveLeaf
+  strictCombinedBudget : LiveLeaf
+  rebuildFinalContradictionCompiler : LiveLeaf
+
 
 LeafRelevant : LiveLeaf -> Set
 LeafRelevant literalWidthLaw = ⊤

@@ -24,36 +24,36 @@ import DASHI.Governance.SituatedConstituency as Situated
 ------------------------------------------------------------------------
 
 data SovereigntyFrame : Set where
-  australianCourtInternalFrame
-  indigenousSovereigntyFrame
-  decolonialCriticalFrame
-  reparativeJusticeFrame
-  : SovereigntyFrame
+  australianCourtInternalFrame : SovereigntyFrame
+  indigenousSovereigntyFrame : SovereigntyFrame
+  decolonialCriticalFrame : SovereigntyFrame
+  reparativeJusticeFrame : SovereigntyFrame
+
 
 data ColonialSovereigntyCoordinate : Set where
-  crownLegalSovereigntyPremise
-  indigenousSovereigntyContinuity
-  cessionStatus
-  colonialAcquisitionLegitimacy
-  landDispossession
-  nativeTitleRecognition
-  indigenousSovereigntyRecognition
-  politicalRepresentationRecognition
-  apologyOrAcknowledgement
-  treatyOrAgreement
-  landRestitutionOrReturn
-  materialReparation
-  institutionalRepair
-  : ColonialSovereigntyCoordinate
+  crownLegalSovereigntyPremise : ColonialSovereigntyCoordinate
+  indigenousSovereigntyContinuity : ColonialSovereigntyCoordinate
+  cessionStatus : ColonialSovereigntyCoordinate
+  colonialAcquisitionLegitimacy : ColonialSovereigntyCoordinate
+  landDispossession : ColonialSovereigntyCoordinate
+  nativeTitleRecognition : ColonialSovereigntyCoordinate
+  indigenousSovereigntyRecognition : ColonialSovereigntyCoordinate
+  politicalRepresentationRecognition : ColonialSovereigntyCoordinate
+  apologyOrAcknowledgement : ColonialSovereigntyCoordinate
+  treatyOrAgreement : ColonialSovereigntyCoordinate
+  landRestitutionOrReturn : ColonialSovereigntyCoordinate
+  materialReparation : ColonialSovereigntyCoordinate
+  institutionalRepair : ColonialSovereigntyCoordinate
+
 
 data PropositionLayer : Set where
-  courtHoldingOrPremiseLayer
-  affectedCommunityClaimLayer
-  historicalEvidenceLayer
-  criticalInterpretationLayer
-  normativeDemandLayer
-  unresolvedLayer
-  : PropositionLayer
+  courtHoldingOrPremiseLayer : PropositionLayer
+  affectedCommunityClaimLayer : PropositionLayer
+  historicalEvidenceLayer : PropositionLayer
+  criticalInterpretationLayer : PropositionLayer
+  normativeDemandLayer : PropositionLayer
+  unresolvedLayer : PropositionLayer
+
 
 record FramedSovereigntyProposition : Set where
   constructor framedSovereigntyProposition
@@ -122,15 +122,15 @@ nativeTitleRecognitionProposition = framedSovereigntyProposition
 ------------------------------------------------------------------------
 
 data ReparativeResponseKind : Set where
-  symbolicRecognition
-  formalApology
-  consultativeRepresentation
-  treatyMaking
-  sovereigntyRecognitionResponse
-  landReturnResponse
-  materialReparationResponse
-  institutionalReformResponse
-  : ReparativeResponseKind
+  symbolicRecognition : ReparativeResponseKind
+  formalApology : ReparativeResponseKind
+  consultativeRepresentation : ReparativeResponseKind
+  treatyMaking : ReparativeResponseKind
+  sovereigntyRecognitionResponse : ReparativeResponseKind
+  landReturnResponse : ReparativeResponseKind
+  materialReparationResponse : ReparativeResponseKind
+  institutionalReformResponse : ReparativeResponseKind
+
 
 responseCoordinate : ReparativeResponseKind → ColonialSovereigntyCoordinate
 responseCoordinate symbolicRecognition = politicalRepresentationRecognition
@@ -204,9 +204,9 @@ canonicalCriticalAxisBoundary = criticalAxisBoundary
 ------------------------------------------------------------------------
 
 data EarlierLabelStatus : Set where
-  deprecatedAsPrimaryCriticalDescription
-  retainedOnlyForCourtInternalCompatibility
-  : EarlierLabelStatus
+  deprecatedAsPrimaryCriticalDescription : EarlierLabelStatus
+  retainedOnlyForCourtInternalCompatibility : EarlierLabelStatus
+
 
 mereChangeLabelStatus : EarlierLabelStatus
 mereChangeLabelStatus = retainedOnlyForCourtInternalCompatibility

@@ -135,9 +135,9 @@ record CompleteGapPromotionChain : Set₁ where
 open CompleteGapPromotionChain public
 
 data GapAuthorityLabel : Set where
-  finiteBackgroundGaussian
-  uniformLatticeFluctuation
-  gaugeInvariantClustering
+  finiteBackgroundGaussian : GapAuthorityLabel
+  uniformLatticeFluctuation : GapAuthorityLabel
+  gaugeInvariantClustering : GapAuthorityLabel
   osHamiltonianSpectral : GapAuthorityLabel
 
 finiteIsNotOS : finiteBackgroundGaussian ≡ osHamiltonianSpectral → ⊥

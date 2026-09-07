@@ -56,7 +56,7 @@ data SubjectStatus : Set where
   negotiatingSubject protectedSubject threatCarrier administrativeObject : SubjectStatus
 
 data PolicyChannel : Set where
-  recognition negotiation sanction militaryAttack reconstruction disarmament
+  recognition negotiation sanction militaryAttack reconstruction disarmament : PolicyChannel
   detention withdrawal aid compensation : PolicyChannel
 
 record SubjectRouting (S : MiddleEastRoutingSystem) : Set₁ where

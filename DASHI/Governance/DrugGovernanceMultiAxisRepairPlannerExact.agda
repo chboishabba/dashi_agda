@@ -15,15 +15,15 @@ import DASHI.Governance.DrugGovernanceRepairMandateGateExact as Mandate
 ------------------------------------------------------------------------
 
 data RepairConsumer : Set where
-  acknowledgementConsumer
-  truthHistoryConsumer
-  materialRepairConsumer
-  institutionalReformConsumer
-  categoryAuthorityConsumer
-  decisionRightsConsumer
-  sovereigntyRepairConsumer
-  nonRepetitionConsumer
-  : RepairConsumer
+  acknowledgementConsumer : RepairConsumer
+  truthHistoryConsumer : RepairConsumer
+  materialRepairConsumer : RepairConsumer
+  institutionalReformConsumer : RepairConsumer
+  categoryAuthorityConsumer : RepairConsumer
+  decisionRightsConsumer : RepairConsumer
+  sovereigntyRepairConsumer : RepairConsumer
+  nonRepetitionConsumer : RepairConsumer
+
 
 consumerAxis : RepairConsumer → Fibre.DrugRepairAxis
 consumerAxis acknowledgementConsumer = Fibre.acknowledgementAxis

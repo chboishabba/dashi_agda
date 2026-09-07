@@ -35,7 +35,7 @@ open JointCell public
 ------------------------------------------------------------------------
 
 data InteractionPattern : Set where
-  missingOnOfficerAWhenSearched
+  missingOnOfficerAWhenSearched : InteractionPattern
   missingOnOfficerAWhenNotSearched : InteractionPattern
 
 record InteractionPopulation : Set where
@@ -119,15 +119,15 @@ separateCrosstabRechartCannotRecoverInteraction rechart =
 ------------------------------------------------------------------------
 
 data JointMissingnessClaim : Set where
-  officerMarginal
-  outcomeMarginal
-  officerOutcomeInteraction
+  officerMarginal : JointMissingnessClaim
+  outcomeMarginal : JointMissingnessClaim
+  officerOutcomeInteraction : JointMissingnessClaim
   fullJointConditionalMechanism : JointMissingnessClaim
 
 data JointMissingnessProducer : Set where
-  officerCrossTabProducer
-  outcomeCrossTabProducer
-  officerOutcomeJointTableProducer
+  officerCrossTabProducer : JointMissingnessProducer
+  outcomeCrossTabProducer : JointMissingnessProducer
+  officerOutcomeJointTableProducer : JointMissingnessProducer
   fullJointCubeProducer : JointMissingnessProducer
 
 reverseJointMissingness : JointMissingnessClaim → JointMissingnessProducer

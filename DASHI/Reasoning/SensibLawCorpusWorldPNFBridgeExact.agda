@@ -16,16 +16,16 @@ import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Cone
 ------------------------------------------------------------------------
 
 data PNFResolutionHorizon : Set where
-  documentLocalHorizon
-  citedSourceCorpusHorizon
-  externalWorldHorizon
-  : PNFResolutionHorizon
+  documentLocalHorizon : PNFResolutionHorizon
+  citedSourceCorpusHorizon : PNFResolutionHorizon
+  externalWorldHorizon : PNFResolutionHorizon
+
 
 data ResolutionStatus : Set where
-  unresolvedResolution
-  partiallyResolved
-  resolvedWithReceipt
-  : ResolutionStatus
+  unresolvedResolution : ResolutionStatus
+  partiallyResolved : ResolutionStatus
+  resolvedWithReceipt : ResolutionStatus
+
 
 record HorizonResolutionReceipt : Set where
   constructor horizonResolutionReceipt

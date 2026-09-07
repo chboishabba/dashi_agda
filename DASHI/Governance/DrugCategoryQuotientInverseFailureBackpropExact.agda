@@ -19,10 +19,10 @@ import DASHI.Governance.DrugCategoryTranslationSelectiveReopeningExact as Reopen
 ------------------------------------------------------------------------
 
 data InverseFailureKind : Set where
-  subjectAuthorshipInverseFailure
-  historicalContinuityInverseFailure
-  sovereignAuthorityInverseFailure
-  : InverseFailureKind
+  subjectAuthorshipInverseFailure : InverseFailureKind
+  historicalContinuityInverseFailure : InverseFailureKind
+  sovereignAuthorityInverseFailure : InverseFailureKind
+
 
 failureConsumer : InverseFailureKind → Admission.TranslationConsumer
 failureConsumer subjectAuthorshipInverseFailure =

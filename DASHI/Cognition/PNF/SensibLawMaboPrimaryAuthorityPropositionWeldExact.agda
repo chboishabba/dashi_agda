@@ -13,19 +13,19 @@ import DASHI.Cognition.PNF.SensibLawMaboRecognitionCoordinateFactorisationExact 
 import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 
 data PrimaryTextQuality : Set where
-  textNativePrimary
-  ocrPrimaryProjection
-  : PrimaryTextQuality
+  textNativePrimary : PrimaryTextQuality
+  ocrPrimaryProjection : PrimaryTextQuality
+
 
 data CoordinatePositionKind : Set where
-  supportsCoordinate
-  deniesDependency
-  statesContinuityPresumption
-  statesExtinguishmentCondition
-  allocatesProofBurden
-  distinguishesTitleStructure
-  authorityInterpretationPosition
-  : CoordinatePositionKind
+  supportsCoordinate : CoordinatePositionKind
+  deniesDependency : CoordinatePositionKind
+  statesContinuityPresumption : CoordinatePositionKind
+  statesExtinguishmentCondition : CoordinatePositionKind
+  allocatesProofBurden : CoordinatePositionKind
+  distinguishesTitleStructure : CoordinatePositionKind
+  authorityInterpretationPosition : CoordinatePositionKind
+
 
 record ReviewedPrimaryAuthorityProposition : Set where
   constructor reviewedPrimaryAuthorityProposition

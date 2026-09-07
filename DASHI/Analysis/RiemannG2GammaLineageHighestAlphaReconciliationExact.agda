@@ -25,14 +25,14 @@ import DASHI.Analysis.RiemannG2GammaCandidateSourceLineageRecoveryExact as Candi
 ------------------------------------------------------------------------
 
 data GammaHighestAlphaPayment : Set where
-  discoverAnyConcreteGammaSourceFamily
-  recoverEpsGammaEnvelopeLineage
-  proveLineageIs8889PoleQuotientProducer
-  recoverAlternate8889ProducerIfNot
-  localizeFirstLossBeforeConsumerIdentity
-  localizeFirstLossAfterConsumerIdentity
-  repairIdentifiedLoss
-  : GammaHighestAlphaPayment
+  discoverAnyConcreteGammaSourceFamily : GammaHighestAlphaPayment
+  recoverEpsGammaEnvelopeLineage : GammaHighestAlphaPayment
+  proveLineageIs8889PoleQuotientProducer : GammaHighestAlphaPayment
+  recoverAlternate8889ProducerIfNot : GammaHighestAlphaPayment
+  localizeFirstLossBeforeConsumerIdentity : GammaHighestAlphaPayment
+  localizeFirstLossAfterConsumerIdentity : GammaHighestAlphaPayment
+  repairIdentifiedLoss : GammaHighestAlphaPayment
+
 
 data PaymentState : Set where
   pruned owned live blocked downstream : PaymentState

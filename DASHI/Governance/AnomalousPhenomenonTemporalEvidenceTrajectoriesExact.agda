@@ -16,28 +16,28 @@ import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
 ------------------------------------------------------------------------
 
 data Phenomenon : Set where
-  bemPrecognition
-  presentimentPhysiology
-  stargateRemoteViewing
-  ganzfeldPsi
-  psilocybinDepression
-  ndeCardiacArrestConsciousness
-  : Phenomenon
+  bemPrecognition : Phenomenon
+  presentimentPhysiology : Phenomenon
+  stargateRemoteViewing : Phenomenon
+  ganzfeldPsi : Phenomenon
+  psilocybinDepression : Phenomenon
+  ndeCardiacArrestConsciousness : Phenomenon
+
 
 data EvidenceMoment : Set where
-  bemInitial2011
-  transparentPsi2025
-  presentimentMeta2012
-  presentimentUpdate2018
-  stargateExperimentalEra
-  stargateOperationalReview1995
-  ganzfeldPositiveMetaEra
-  ganzfeldContestedCurrent
-  psilocybinEarlyModernTrials
-  psilocybinMeta2025_2026
-  ndeProspective2001
-  awareII2023
-  : EvidenceMoment
+  bemInitial2011 : EvidenceMoment
+  transparentPsi2025 : EvidenceMoment
+  presentimentMeta2012 : EvidenceMoment
+  presentimentUpdate2018 : EvidenceMoment
+  stargateExperimentalEra : EvidenceMoment
+  stargateOperationalReview1995 : EvidenceMoment
+  ganzfeldPositiveMetaEra : EvidenceMoment
+  ganzfeldContestedCurrent : EvidenceMoment
+  psilocybinEarlyModernTrials : EvidenceMoment
+  psilocybinMeta2025_2026 : EvidenceMoment
+  ndeProspective2001 : EvidenceMoment
+  awareII2023 : EvidenceMoment
+
 
 momentPhenomenon : EvidenceMoment → Phenomenon
 momentPhenomenon bemInitial2011 = bemPrecognition
@@ -131,11 +131,11 @@ Compatible _ _ = ⊥
 ------------------------------------------------------------------------
 
 data CurrentSummary : Set where
-  downgradedButResidualOpen
-  contestedAnomaly
-  developingClinicalEvidence
-  experienceEstablishedMechanismOpen
-  : CurrentSummary
+  downgradedButResidualOpen : CurrentSummary
+  contestedAnomaly : CurrentSummary
+  developingClinicalEvidence : CurrentSummary
+  experienceEstablishedMechanismOpen : CurrentSummary
+
 
 summaryAt : EvidenceMoment → CurrentSummary
 summaryAt bemInitial2011 = contestedAnomaly

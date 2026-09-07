@@ -17,33 +17,33 @@ import DASHI.Chemistry.TransitionKernel as Chemistry
 ------------------------------------------------------------------------
 
 data MetalKind : Set where
-  iron
-  copper
-  lead
-  zinc
-  manganese
-  nickel
-  mixedMetal
-  : MetalKind
+  iron : MetalKind
+  copper : MetalKind
+  lead : MetalKind
+  zinc : MetalKind
+  manganese : MetalKind
+  nickel : MetalKind
+  mixedMetal : MetalKind
+
 
 data MetalReleaseMechanism : Set where
-  solubleCorrosionRelease
-  particulateScaleRelease
-  galvanicRelease
-  scaleDissolution
-  scaleDestabilisation
-  hydraulicParticleMobilisation
-  unknownOrMixedRelease
-  : MetalReleaseMechanism
+  solubleCorrosionRelease : MetalReleaseMechanism
+  particulateScaleRelease : MetalReleaseMechanism
+  galvanicRelease : MetalReleaseMechanism
+  scaleDissolution : MetalReleaseMechanism
+  scaleDestabilisation : MetalReleaseMechanism
+  hydraulicParticleMobilisation : MetalReleaseMechanism
+  unknownOrMixedRelease : MetalReleaseMechanism
+
 
 data ScaleStateKind : Set where
-  absentOrUnresolvedScale
-  adherentProtectiveScale
-  porousReactiveScale
-  destabilisedScale
-  detachedParticulateScale
-  mixedScale
-  : ScaleStateKind
+  absentOrUnresolvedScale : ScaleStateKind
+  adherentProtectiveScale : ScaleStateKind
+  porousReactiveScale : ScaleStateKind
+  destabilisedScale : ScaleStateKind
+  detachedParticulateScale : ScaleStateKind
+  mixedScale : ScaleStateKind
+
 
 record CorrosionMaterialSource : Set where
   constructor corrosionMaterialSource

@@ -19,28 +19,28 @@ import DASHI.Governance.ChildReligiousCoercionResearchBridge as Research
 ------------------------------------------------------------------------
 
 data ReligiousChildhoodCoordinate : Set where
-  divinePunishmentFear
-  familyReligiousTransmission
-  autonomySupportOrControl
-  apostasyOrExitTransition
-  refusalPenalty
-  restrictedAlternatives
-  developmentalTiming
-  : ReligiousChildhoodCoordinate
+  divinePunishmentFear : ReligiousChildhoodCoordinate
+  familyReligiousTransmission : ReligiousChildhoodCoordinate
+  autonomySupportOrControl : ReligiousChildhoodCoordinate
+  apostasyOrExitTransition : ReligiousChildhoodCoordinate
+  refusalPenalty : ReligiousChildhoodCoordinate
+  restrictedAlternatives : ReligiousChildhoodCoordinate
+  developmentalTiming : ReligiousChildhoodCoordinate
+
 
 data CoverageStatus : Set where
-  directMeasuredCoverage
-  partialProxyCoverage
-  contextualCoverage
-  notCovered
-  : CoverageStatus
+  directMeasuredCoverage : CoverageStatus
+  partialProxyCoverage : CoverageStatus
+  contextualCoverage : CoverageStatus
+  notCovered : CoverageStatus
+
 
 data StudyDesignClass : Set where
-  parentChildDiaryStudy
-  retrospectiveCollegeSample
-  scaleValidationStudy
-  religiousSocializationStudy
-  : StudyDesignClass
+  parentChildDiaryStudy : StudyDesignClass
+  retrospectiveCollegeSample : StudyDesignClass
+  scaleValidationStudy : StudyDesignClass
+  religiousSocializationStudy : StudyDesignClass
+
 
 record EmpiricalSourceReceipt : Set where
   constructor empirical-source-receipt

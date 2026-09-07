@@ -29,13 +29,13 @@ import DASHI.Core.FrontierRelationStrengthBidiExact as Relation
 ------------------------------------------------------------------------
 
 data LiteralG2Component : Set where
-  determinantTaperTest
-  fullSpectralZeroObject
-  finiteNearReflectionPairedObject
-  explicitFarRemainderObject
-  postSchurNearEnergy
-  postSchurFarEnergy
-  : LiteralG2Component
+  determinantTaperTest : LiteralG2Component
+  fullSpectralZeroObject : LiteralG2Component
+  finiteNearReflectionPairedObject : LiteralG2Component
+  explicitFarRemainderObject : LiteralG2Component
+  postSchurNearEnergy : LiteralG2Component
+  postSchurFarEnergy : LiteralG2Component
+
 
 ------------------------------------------------------------------------
 -- The weld is parameterised by the already-existing abstract explicit-formula

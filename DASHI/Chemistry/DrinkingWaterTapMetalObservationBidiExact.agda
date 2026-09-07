@@ -17,20 +17,20 @@ import DASHI.Core.EmpiricalContactReceipt as Contact
 ------------------------------------------------------------------------
 
 data TapSamplingProtocolKind : Set where
-  firstDraw
-  postStagnation
-  flushed
-  sequentialVolumeProfile
-  randomDaytime
-  compositeOrOther
-  : TapSamplingProtocolKind
+  firstDraw : TapSamplingProtocolKind
+  postStagnation : TapSamplingProtocolKind
+  flushed : TapSamplingProtocolKind
+  sequentialVolumeProfile : TapSamplingProtocolKind
+  randomDaytime : TapSamplingProtocolKind
+  compositeOrOther : TapSamplingProtocolKind
+
 
 data MetalMeasurementFraction : Set where
-  dissolvedFraction
-  particulateFraction
-  totalFraction
-  operationallyDefinedFraction
-  : MetalMeasurementFraction
+  dissolvedFraction : MetalMeasurementFraction
+  particulateFraction : MetalMeasurementFraction
+  totalFraction : MetalMeasurementFraction
+  operationallyDefinedFraction : MetalMeasurementFraction
+
 
 record TapMetalSamplingState : Set where
   constructor tapMetalSamplingState

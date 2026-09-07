@@ -32,9 +32,9 @@ import DASHI.Governance.SexedHistoricalDialecticalOrderHolonomyAnalogueExact as 
 ------------------------------------------------------------------------
 
 data GrammarContribution : Set where
-  nonSovereignRelationalSubject
-  positiveIrreducibleDifference
-  : GrammarContribution
+  nonSovereignRelationalSubject : GrammarContribution
+  positiveIrreducibleDifference : GrammarContribution
+
 
 data TransportOrder : Set where
   lacanThenRechart rechartThenLacan : TransportOrder
@@ -43,10 +43,10 @@ data OrderResidual : Set where
   residualLR residualRL : OrderResidual
 
 data JoinState : Set where
-  oneSidedLacan
-  oneSidedRechart
-  reciprocalResidualJoin
-  : JoinState
+  oneSidedLacan : JoinState
+  oneSidedRechart : JoinState
+  reciprocalResidualJoin : JoinState
+
 
 leftContributionPresent : JoinState → Bool
 leftContributionPresent oneSidedLacan = true
@@ -109,11 +109,11 @@ canonicalProductiveJoin =
 ------------------------------------------------------------------------
 
 data RelationalOption : Set where
-  inheritedIdentification
-  oppositionalInversion
-  reciprocalRecognition
-  relationalAutonomy
-  : RelationalOption
+  inheritedIdentification : RelationalOption
+  oppositionalInversion : RelationalOption
+  reciprocalRecognition : RelationalOption
+  relationalAutonomy : RelationalOption
+
 
 data RelationalWorld : Set where
   lacanWorld rechartWorld joinedWorld : RelationalWorld

@@ -28,9 +28,9 @@ physicalDiffusionSources =
   Sources.borrotoEscuelaVolumeTransmission ∷ []
 
 data PhysicalPropagation : Set where
-  voltageGatedAxonalPropagation
-  vesicularReleaseAndReceptorBinding
-  gapJunctionCurrent
+  voltageGatedAxonalPropagation : PhysicalPropagation
+  vesicularReleaseAndReceptorBinding : PhysicalPropagation
+  gapJunctionCurrent : PhysicalPropagation
   extracellularConcentrationDiffusion : PhysicalPropagation
 
 record TwoCompartmentConcentration : Set where

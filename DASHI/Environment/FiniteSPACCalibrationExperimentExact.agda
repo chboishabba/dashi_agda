@@ -17,16 +17,16 @@ import DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact as Constitut
 ------------------------------------------------------------------------
 
 data SoilParameter : Set where
-  thetaResidual thetaSaturated alphaVG nVG saturatedConductivity poreConnectivity
-  : SoilParameter
+  thetaResidual thetaSaturated alphaVG nVG saturatedConductivity poreConnectivity : SoilParameter
+
 
 data XylemParameter : Set where
-  maximumConductance vulnerabilityMidpoint vulnerabilitySlope capacitance
-  : XylemParameter
+  maximumConductance vulnerabilityMidpoint vulnerabilitySlope capacitance : XylemParameter
+
 
 data LeafParameter : Set where
-  medlynG0 medlynG1 farquharVcmax farquharJmax leafRespiration
-  : LeafParameter
+  medlynG0 medlynG1 farquharVcmax farquharJmax leafRespiration : LeafParameter
+
 
 data ParameterKind : Set where
   soilParameter : SoilParameter → ParameterKind
@@ -34,23 +34,23 @@ data ParameterKind : Set where
   leafParameter : LeafParameter → ParameterKind
 
 data MeasurementKind : Set where
-  soilWaterContent
-  soilMatricPotential
-  soilHydraulicConductivity
-  soilFlux
-  xylemWaterPotential
-  sapFlow
-  relativeXylemConductance
-  leafTranspiration
-  leafAssimilation
-  stomatalConductance
-  vapourPressureDeficit
-  leafTemperature
-  light
-  atmosphericCO2
-  precipitation
-  wind
-  : MeasurementKind
+  soilWaterContent : MeasurementKind
+  soilMatricPotential : MeasurementKind
+  soilHydraulicConductivity : MeasurementKind
+  soilFlux : MeasurementKind
+  xylemWaterPotential : MeasurementKind
+  sapFlow : MeasurementKind
+  relativeXylemConductance : MeasurementKind
+  leafTranspiration : MeasurementKind
+  leafAssimilation : MeasurementKind
+  stomatalConductance : MeasurementKind
+  vapourPressureDeficit : MeasurementKind
+  leafTemperature : MeasurementKind
+  light : MeasurementKind
+  atmosphericCO2 : MeasurementKind
+  precipitation : MeasurementKind
+  wind : MeasurementKind
+
 
 data ExperimentRole : Set where
   calibration heldOutValidation interventionTest : ExperimentRole

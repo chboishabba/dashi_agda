@@ -14,16 +14,16 @@ import DASHI.Governance.DrugCategoryClinicalQuotientRelativeFibreExact as Relati
 ------------------------------------------------------------------------
 
 data RefinementCoordinate : Set where
-  addSubjectPosition
-  addHistoricalPosition
-  addSubjectAndHistory
-  : RefinementCoordinate
+  addSubjectPosition : RefinementCoordinate
+  addHistoricalPosition : RefinementCoordinate
+  addSubjectAndHistory : RefinementCoordinate
+
 
 data RefinementDemand : Set where
-  subjectConsumerDemand
-  historyConsumerDemand
-  fullSemanticStateDemand
-  : RefinementDemand
+  subjectConsumerDemand : RefinementDemand
+  historyConsumerDemand : RefinementDemand
+  fullSemanticStateDemand : RefinementDemand
+
 
 requiredRefinement : RefinementDemand → RefinementCoordinate
 requiredRefinement subjectConsumerDemand = addSubjectPosition

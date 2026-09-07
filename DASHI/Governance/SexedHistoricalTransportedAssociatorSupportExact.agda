@@ -29,11 +29,11 @@ import DASHI.Governance.SexedHistoricalDistributedCompatibilityReopeningExact as
 ------------------------------------------------------------------------
 
 data SupportStage : Set where
-  initialAssociatorStage
-  localRepairStage
-  networkCounterformationStage
-  institutionalPersistenceStage
-  : SupportStage
+  initialAssociatorStage : SupportStage
+  localRepairStage : SupportStage
+  networkCounterformationStage : SupportStage
+  institutionalPersistenceStage : SupportStage
+
 
 data ActiveAt : SupportStage → Support.SignatureLine → Set where
   initialLine1 : ActiveAt initialAssociatorStage Support.line1
@@ -183,9 +183,9 @@ finalLine4StillReopensCollectiveFuture = Support.line4ReopensCollectiveFuture
 ------------------------------------------------------------------------
 
 data SupportHistoryFine : Set where
-  repairedThenCounterformed
-  counterformedThenRepaired
-  : SupportHistoryFine
+  repairedThenCounterformed : SupportHistoryFine
+  counterformedThenRepaired : SupportHistoryFine
+
 
 data CoarseSupportSurface : Set where
   onePersistentCentreResidual : CoarseSupportSurface

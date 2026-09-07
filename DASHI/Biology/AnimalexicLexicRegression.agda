@@ -193,8 +193,9 @@ requestPlayNeedsResolution = tt , (λ margin → margin)
 
 requestPlayCannotBeDeferred :
   Deferred requestPlayAmbiguity → ⊥
-requestPlayCannotBeDeferred =
-  Debt.needsResolutionRefutesDeferral requestPlayNeedsResolution
+requestPlayCannotBeDeferred deferred =
+  Debt.needsResolutionRefutesDeferral {debt = semanticDebt} {policy = deferralPolicy}
+    requestPlayNeedsResolution deferred
 
 ------------------------------------------------------------------------
 -- 5. Exact finite set-valued ambiguity witness is exposed in regression.

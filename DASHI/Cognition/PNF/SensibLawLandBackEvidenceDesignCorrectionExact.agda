@@ -16,14 +16,14 @@ import DASHI.Cognition.PNF.SensibLawIndigenousLandBackSourceAuthorityExact as So
 ------------------------------------------------------------------------
 
 data PreferredDesignKind : Set where
-  fixedEffectsCausalChainDesign
-  peerReviewedComparativeMatchedDesign
-  : PreferredDesignKind
+  fixedEffectsCausalChainDesign : PreferredDesignKind
+  peerReviewedComparativeMatchedDesign : PreferredDesignKind
+
 
 data ClaimVerbBoundary : Set where
-  sourceReportsCausalEffect
-  sourceReportsComparativeAssociationOrEstimatedDifference
-  : ClaimVerbBoundary
+  sourceReportsCausalEffect : ClaimVerbBoundary
+  sourceReportsComparativeAssociationOrEstimatedDifference : ClaimVerbBoundary
+
 
 -- Dedicated source identity for Probst et al.; no foreign authority placeholder.
 probst2020Authority : Source.SourceAuthorityReceipt

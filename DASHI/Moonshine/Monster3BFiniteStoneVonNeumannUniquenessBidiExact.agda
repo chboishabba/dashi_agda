@@ -25,9 +25,9 @@ data NontrivialCentralPhase : Set where
   zetaPhase zetaSquaredPhase : NontrivialCentralPhase
 
 data NonlinearCharacterSignature : Set where
-  heisenbergZetaSignature
-  heisenbergZetaSquaredSignature
-  : NonlinearCharacterSignature
+  heisenbergZetaSignature : NonlinearCharacterSignature
+  heisenbergZetaSquaredSignature : NonlinearCharacterSignature
+
 
 centralPhaseOfSignature : NonlinearCharacterSignature → NontrivialCentralPhase
 centralPhaseOfSignature heisenbergZetaSignature = zetaPhase
@@ -161,14 +161,14 @@ fixedPhaseRepresentationsAreIsomorphic theory left right samePhase =
 ------------------------------------------------------------------------
 
 data UniquenessLeaf : Set where
-  nonlinearSignatureInventory
-  fixedPhaseSelectsUniqueSignature
-  modelWitnessedIrreducibility
-  modelScalarCommutant
-  instantiateCharacterDeterminationTheorem
-  attachActualRestrictedIrreduciblesToSignature
-  constructActualZetaRecognition
-  : UniquenessLeaf
+  nonlinearSignatureInventory : UniquenessLeaf
+  fixedPhaseSelectsUniqueSignature : UniquenessLeaf
+  modelWitnessedIrreducibility : UniquenessLeaf
+  modelScalarCommutant : UniquenessLeaf
+  instantiateCharacterDeterminationTheorem : UniquenessLeaf
+  attachActualRestrictedIrreduciblesToSignature : UniquenessLeaf
+  constructActualZetaRecognition : UniquenessLeaf
+
 
 data LeafStatus : Set where closed open blocked : LeafStatus
 

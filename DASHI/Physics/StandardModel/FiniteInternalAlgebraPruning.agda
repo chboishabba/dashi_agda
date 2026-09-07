@@ -20,13 +20,13 @@ open import DASHI.Physics.StandardModel.FiniteRealStarAlgebraCandidates
 ------------------------------------------------------------------------
 
 data InternalGate : Set where
-  reality
-  grading
-  firstOrder
-  commutant
-  anomalyFreedom
-  minimality
-  : InternalGate
+  reality : InternalGate
+  grading : InternalGate
+  firstOrder : InternalGate
+  commutant : InternalGate
+  anomalyFreedom : InternalGate
+  minimality : InternalGate
+
 
 data GateVerdict : Set where
   survives rejected held : GateVerdict

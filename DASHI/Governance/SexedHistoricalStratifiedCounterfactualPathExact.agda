@@ -22,10 +22,10 @@ import DASHI.Governance.SexedHistoricalStratifiedFidelityEscalationExact as Fide
 ------------------------------------------------------------------------
 
 data HistoricalMove : Set where
-  localRepairMove
-  networkCounterformationMove
-  institutionalAccommodationMove
-  : HistoricalMove
+  localRepairMove : HistoricalMove
+  networkCounterformationMove : HistoricalMove
+  institutionalAccommodationMove : HistoricalMove
+
 
 data AdmittedMove : HistoricalMove → Set where
   localRepairAdmitted : AdmittedMove localRepairMove
@@ -95,10 +95,10 @@ canonicalPathsShareCoarseObservation = refl
 ------------------------------------------------------------------------
 
 data PathPattern : Set where
-  repairPrecedesCounterformation
-  counterformationPrecedesRepair
-  otherPattern
-  : PathPattern
+  repairPrecedesCounterformation : PathPattern
+  counterformationPrecedesRepair : PathPattern
+  otherPattern : PathPattern
+
 
 patternOfPath : AdmittedPath → PathPattern
 patternOfPath
@@ -112,10 +112,10 @@ patternOfPath
 patternOfPath _ = otherPattern
 
 data NextHistoricalChoice : Set where
-  reopenInstitutionalCompatibilityFirst
-  reopenDistributedCounterformationFirst
-  continueGenericSearch
-  : NextHistoricalChoice
+  reopenInstitutionalCompatibilityFirst : NextHistoricalChoice
+  reopenDistributedCounterformationFirst : NextHistoricalChoice
+  continueGenericSearch : NextHistoricalChoice
+
 
 chooseNext : AdmittedPath → NextHistoricalChoice
 chooseNext

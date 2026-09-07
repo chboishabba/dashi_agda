@@ -27,9 +27,9 @@ data TheoryNode : Set where
   source projection fibre refinement : TheoryNode
 
 data TheoryEdge : Set where
-  source→projection
-  source→fibre
-  projection→refinement
+  source→projection : TheoryEdge
+  source→fibre : TheoryEdge
+  projection→refinement : TheoryEdge
   fibre→refinement : TheoryEdge
 
 ------------------------------------------------------------------------
@@ -41,9 +41,9 @@ data TheoryEdge : Set where
 ------------------------------------------------------------------------
 
 data VisualEdge : Set where
-  horizontalTop
-  verticalLeft
-  verticalRight
+  horizontalTop : VisualEdge
+  verticalLeft : VisualEdge
+  verticalRight : VisualEdge
   horizontalBottom : VisualEdge
 
 renderEdge : TheoryEdge → VisualEdge
@@ -57,9 +57,9 @@ renderEdge fibre→refinement = horizontalBottom
 ------------------------------------------------------------------------
 
 data VisionEdge : Set where
-  sawSourceProjection
-  sawSourceFibre
-  sawProjectionRefinement
+  sawSourceProjection : VisionEdge
+  sawSourceFibre : VisionEdge
+  sawProjectionRefinement : VisionEdge
   sawFibreRefinement : VisionEdge
 
 idealVision : VisualEdge → VisionEdge
@@ -86,9 +86,9 @@ renderVisionRoundTrip fibre→refinement = refl
 ------------------------------------------------------------------------
 
 data LeanEdgeModel : Set where
-  leanSourceProjection
-  leanSourceFibre
-  leanProjectionRefinement
+  leanSourceProjection : LeanEdgeModel
+  leanSourceFibre : LeanEdgeModel
+  leanProjectionRefinement : LeanEdgeModel
   leanFibreRefinement : LeanEdgeModel
 
 reifyLean : VisionEdge → LeanEdgeModel

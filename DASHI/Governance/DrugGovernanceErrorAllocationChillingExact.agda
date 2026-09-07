@@ -19,23 +19,23 @@ data ClassificationErrorSurface : Set where
   sameUnresolvedClassification : ClassificationErrorSurface
 
 data DrugErrorAllocation : Set where
-  refineClassification
-  attributeFaultAndSanction
-  : DrugErrorAllocation
+  refineClassification : DrugErrorAllocation
+  attributeFaultAndSanction : DrugErrorAllocation
+
 
 data DrugResponseState : Set where
-  beforeAllocation
-  repairResponse
-  faultResponse
-  : DrugResponseState
+  beforeAllocation : DrugResponseState
+  repairResponse : DrugResponseState
+  faultResponse : DrugResponseState
+
 
 data DrugOption : Set where
-  immediateSafetyAccess
-  futureHelpSeeking
-  categoryContest
-  clinicalReassessment
-  communitySupport
-  : DrugOption
+  immediateSafetyAccess : DrugOption
+  futureHelpSeeking : DrugOption
+  categoryContest : DrugOption
+  clinicalReassessment : DrugOption
+  communitySupport : DrugOption
+
 
 errorSurface : DrugErrorAllocation → ClassificationErrorSurface
 errorSurface _ = sameUnresolvedClassification

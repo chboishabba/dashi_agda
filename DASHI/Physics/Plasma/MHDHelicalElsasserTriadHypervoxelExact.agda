@@ -15,11 +15,11 @@ data BinarySign : Set where
   plus minus : BinarySign
 
 data InteractionChannel : Set where
-  velocityVelocity
-  magneticMagnetic
-  velocityMagnetic
-  magneticVelocity
-  : InteractionChannel
+  velocityVelocity : InteractionChannel
+  magneticMagnetic : InteractionChannel
+  velocityMagnetic : InteractionChannel
+  magneticVelocity : InteractionChannel
+
 
 data EquationSector : Set where
   momentumSector inductionSector : EquationSector

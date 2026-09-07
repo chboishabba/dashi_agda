@@ -123,12 +123,12 @@ canonicalHXAndProofRelevantHAToHM H_X H_A bridge =
 ------------------------------------------------------------------------
 
 data HMSearchAction : Set where
-  rebuildTargetCharacterTheory
-  rebuildTestModulation
-  recoverCanonicalPhaseActionFactorization
-  compileHistoricalHM
-  recoverHTAdapter
-  : HMSearchAction
+  rebuildTargetCharacterTheory : HMSearchAction
+  rebuildTestModulation : HMSearchAction
+  recoverCanonicalPhaseActionFactorization : HMSearchAction
+  compileHistoricalHM : HMSearchAction
+  recoverHTAdapter : HMSearchAction
+
 
 data SearchStatus : Set where
   live pruned downstream : SearchStatus

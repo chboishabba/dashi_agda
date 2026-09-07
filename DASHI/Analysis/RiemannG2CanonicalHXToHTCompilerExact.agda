@@ -84,10 +84,10 @@ canonicalHXToHT H_X =
 ------------------------------------------------------------------------
 
 data HTSearchAction : Set where
-  rebuildTranslationModulationIntertwiner
-  compileHTFromCanonicalHX
-  attachHTToPoleNearAdapter
-  : HTSearchAction
+  rebuildTranslationModulationIntertwiner : HTSearchAction
+  compileHTFromCanonicalHX : HTSearchAction
+  attachHTToPoleNearAdapter : HTSearchAction
+
 
 data SearchStatus : Set where
   pruned downstream : SearchStatus

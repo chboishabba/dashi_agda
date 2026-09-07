@@ -18,28 +18,28 @@ import DASHI.Governance.WarOnDrugsHistoricalGenealogyExact as Genealogy
 ------------------------------------------------------------------------
 
 data DrugPolicyEpoch : Set where
-  anslingerFederalProhibitionEpoch
-  nixonBifurcatedWarOnDrugsEpoch
-  reaganPunitiveEscalationEpoch
-  trumpPsychedelicSplitEpoch
-  : DrugPolicyEpoch
+  anslingerFederalProhibitionEpoch : DrugPolicyEpoch
+  nixonBifurcatedWarOnDrugsEpoch : DrugPolicyEpoch
+  reaganPunitiveEscalationEpoch : DrugPolicyEpoch
+  trumpPsychedelicSplitEpoch : DrugPolicyEpoch
+
 
 data ClassifierVersion : Set where
-  federalNarcoticsVersion
-  nixonEnforcementTreatmentVersion
-  reaganEscalationVersion
-  trumpPunitiveTherapeuticSplitVersion
-  : ClassifierVersion
+  federalNarcoticsVersion : ClassifierVersion
+  nixonEnforcementTreatmentVersion : ClassifierVersion
+  reaganEscalationVersion : ClassifierVersion
+  trumpPunitiveTherapeuticSplitVersion : ClassifierVersion
+
 
 data DrugPolicyHistory : Set where
   canonicalUnitedStatesDrugPolicyHistory : DrugPolicyHistory
 
 data HistoricalCarrierProfile : Set where
-  veteranDiagnosedPsilocybinProfile
-  counterculturePsilocybinProfile
-  genericStreetPsilocybinProfile
-  indigenousCeremonialPsilocybinProfile
-  : HistoricalCarrierProfile
+  veteranDiagnosedPsilocybinProfile : HistoricalCarrierProfile
+  counterculturePsilocybinProfile : HistoricalCarrierProfile
+  genericStreetPsilocybinProfile : HistoricalCarrierProfile
+  indigenousCeremonialPsilocybinProfile : HistoricalCarrierProfile
+
 
 ------------------------------------------------------------------------
 -- Same carrier profile, different historical classifier.

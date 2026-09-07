@@ -14,12 +14,12 @@ import DASHI.Governance.DrugCategoryPartialTranslationPathCategoryExact as Path
 ------------------------------------------------------------------------
 
 data TranslationConsumer : Set where
-  clinicalSafetyConsumer
-  livedSubjectAuthorityConsumer
-  historicalContinuityConsumer
-  sovereignAuthorityConsumer
-  commercialBenefitConsumer
-  : TranslationConsumer
+  clinicalSafetyConsumer : TranslationConsumer
+  livedSubjectAuthorityConsumer : TranslationConsumer
+  historicalContinuityConsumer : TranslationConsumer
+  sovereignAuthorityConsumer : TranslationConsumer
+  commercialBenefitConsumer : TranslationConsumer
+
 
 data RequiresCoordinate :
     TranslationConsumer → Translation.TranslationCoordinate → Set where

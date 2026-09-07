@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Chemistry.ChlorAlkaliSaltIndustryExact as Industry
 import DASHI.Chemistry.TransitionKernel as Chemistry
+open Chemistry
 import DASHI.Geology.SaltGeochemistryExact as Salt
 
 ------------------------------------------------------------------------
@@ -31,115 +32,115 @@ import DASHI.Geology.SaltGeochemistryExact as Salt
 
 hypochlorousAcidSpecies : Chemistry.Species
 hypochlorousAcidSpecies = record
-  { Chemistry.speciesId = "hypochlorous acid"
-  ; Chemistry.phase = Chemistry.dissolved
-  ; Chemistry.chargeLabel = "0"
-  ; Chemistry.compositionLabel = "HOCl"
-  ; Chemistry.mobilityClass = Chemistry.mobile
-  ; Chemistry.activityModelLabel = "aqueous acid-base activity model supplied by application"
-  ; Chemistry.opticalRoleLabel = "not asserted"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { speciesId = "hypochlorous acid"
+  ; phase = Chemistry.dissolved
+  ; chargeLabel = "0"
+  ; compositionLabel = "HOCl"
+  ; mobilityClass = Chemistry.mobile
+  ; activityModelLabel = "aqueous acid-base activity model supplied by application"
+  ; opticalRoleLabel = "not asserted"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 hypochloriteSpecies : Chemistry.Species
 hypochloriteSpecies = record
-  { Chemistry.speciesId = "hypochlorite ion"
-  ; Chemistry.phase = Chemistry.dissolved
-  ; Chemistry.chargeLabel = "-1"
-  ; Chemistry.compositionLabel = "OCl-"
-  ; Chemistry.mobilityClass = Chemistry.mobile
-  ; Chemistry.activityModelLabel = "aqueous acid-base activity model supplied by application"
-  ; Chemistry.opticalRoleLabel = "not asserted"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { speciesId = "hypochlorite ion"
+  ; phase = Chemistry.dissolved
+  ; chargeLabel = "-1"
+  ; compositionLabel = "OCl-"
+  ; mobilityClass = Chemistry.mobile
+  ; activityModelLabel = "aqueous acid-base activity model supplied by application"
+  ; opticalRoleLabel = "not asserted"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 protonSpecies : Chemistry.Species
 protonSpecies = record
-  { Chemistry.speciesId = "aqueous proton bookkeeping species"
-  ; Chemistry.phase = Chemistry.dissolved
-  ; Chemistry.chargeLabel = "+1"
-  ; Chemistry.compositionLabel = "H+"
-  ; Chemistry.mobilityClass = Chemistry.mobile
-  ; Chemistry.activityModelLabel = "aqueous proton activity model supplied by application"
-  ; Chemistry.opticalRoleLabel = "not asserted"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { speciesId = "aqueous proton bookkeeping species"
+  ; phase = Chemistry.dissolved
+  ; chargeLabel = "+1"
+  ; compositionLabel = "H+"
+  ; mobilityClass = Chemistry.mobile
+  ; activityModelLabel = "aqueous proton activity model supplied by application"
+  ; opticalRoleLabel = "not asserted"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 waterTreatmentEnvironment : Chemistry.Environment
 waterTreatmentEnvironment = record
-  { Chemistry.temperatureCarrier = "water temperature supplied by treatment-state receipt"
-  ; Chemistry.pHCarrier = "measured treatment-water pH"
-  ; Chemistry.pressureCarrier = "treatment/distribution pressure supplied by application"
-  ; Chemistry.humidityCarrier = "not primary state variable"
-  ; Chemistry.illuminationCarrier = "photolysis exposure supplied if relevant"
-  ; Chemistry.ionicStrengthCarrier = "finished-water ionic-strength/activity model"
+  { temperatureCarrier = "water temperature supplied by treatment-state receipt"
+  ; pHCarrier = "measured treatment-water pH"
+  ; pressureCarrier = "treatment/distribution pressure supplied by application"
+  ; humidityCarrier = "not primary state variable"
+  ; illuminationCarrier = "photolysis exposure supplied if relevant"
+  ; ionicStrengthCarrier = "finished-water ionic-strength/activity model"
   }
 
 chlorineHydrolysisCondition : Chemistry.Condition
 chlorineHydrolysisCondition = record
-  { Chemistry.conditionLabel = "chlorine hydrolysis in aqueous treatment state"
-  ; Chemistry.environment = waterTreatmentEnvironment
-  ; Chemistry.guardExpression = "aqueous chlorine present; pH/temperature/activity regime supplied"
+  { conditionLabel = "chlorine hydrolysis in aqueous treatment state"
+  ; environment = waterTreatmentEnvironment
+  ; guardExpression = "aqueous chlorine present; pH/temperature/activity regime supplied"
   }
 
 hypochlorousDissociationCondition : Chemistry.Condition
 hypochlorousDissociationCondition = record
-  { Chemistry.conditionLabel = "HOCl/OCl- acid-base speciation"
-  ; Chemistry.environment = waterTreatmentEnvironment
-  ; Chemistry.guardExpression = "aqueous free chlorine present; pH/temperature/activity regime supplied"
+  { conditionLabel = "HOCl/OCl- acid-base speciation"
+  ; environment = waterTreatmentEnvironment
+  ; guardExpression = "aqueous free chlorine present; pH/temperature/activity regime supplied"
   }
 
 speciationRate : Chemistry.RateLaw
 speciationRate = record
-  { Chemistry.rateLawKind = Chemistry.massAction
-  ; Chemistry.symbolicForm = "equilibrium/speciation law supplied by application"
-  ; Chemistry.parameters = []
-  ; Chemistry.validityRegime = "aqueous drinking-water chlorine speciation"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { rateLawKind = Chemistry.massAction
+  ; symbolicForm = "equilibrium/speciation law supplied by application"
+  ; parameters = []
+  ; validityRegime = "aqueous drinking-water chlorine speciation"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 chlorineHydrolysisTransition : Chemistry.Transition
 chlorineHydrolysisTransition = record
-  { Chemistry.transitionId = "chlorine hydrolysis to hypochlorous acid"
-  ; Chemistry.transitionKind = Chemistry.chemicalReaction
-  ; Chemistry.reactants =
-      record { Chemistry.species = Industry.chlorineGasSpecies ; Chemistry.coefficient = 1 }
-      ∷ record { Chemistry.species = Industry.waterSpecies ; Chemistry.coefficient = 1 }
+  { transitionId = "chlorine hydrolysis to hypochlorous acid"
+  ; transitionKind = Chemistry.chemicalReaction
+  ; reactants =
+      record { species = Industry.chlorineGasSpecies ; coefficient = 1 }
+      ∷ record { species = Industry.waterSpecies ; coefficient = 1 }
       ∷ []
-  ; Chemistry.products =
-      record { Chemistry.species = hypochlorousAcidSpecies ; Chemistry.coefficient = 1 }
-      ∷ record { Chemistry.species = protonSpecies ; Chemistry.coefficient = 1 }
-      ∷ record { Chemistry.species = Salt.chlorideIonSpecies ; Chemistry.coefficient = 1 }
+  ; products =
+      record { species = hypochlorousAcidSpecies ; coefficient = 1 }
+      ∷ record { species = protonSpecies ; coefficient = 1 }
+      ∷ record { species = Salt.chlorideIonSpecies ; coefficient = 1 }
       ∷ []
-  ; Chemistry.catalysts = []
-  ; Chemistry.rateLaw = speciationRate
-  ; Chemistry.condition = chlorineHydrolysisCondition
-  ; Chemistry.reversibility = Chemistry.reversible
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  ; catalysts = []
+  ; rateLaw = speciationRate
+  ; condition = chlorineHydrolysisCondition
+  ; reversibility = Chemistry.reversible
+  ; evidence = Chemistry.literatureEstablished
   }
 
 hypochlorousDissociationTransition : Chemistry.Transition
 hypochlorousDissociationTransition = record
-  { Chemistry.transitionId = "hypochlorous acid dissociation"
-  ; Chemistry.transitionKind = Chemistry.chemicalReaction
-  ; Chemistry.reactants =
-      record { Chemistry.species = hypochlorousAcidSpecies ; Chemistry.coefficient = 1 } ∷ []
-  ; Chemistry.products =
-      record { Chemistry.species = protonSpecies ; Chemistry.coefficient = 1 }
-      ∷ record { Chemistry.species = hypochloriteSpecies ; Chemistry.coefficient = 1 }
+  { transitionId = "hypochlorous acid dissociation"
+  ; transitionKind = Chemistry.chemicalReaction
+  ; reactants =
+      record { species = hypochlorousAcidSpecies ; coefficient = 1 } ∷ []
+  ; products =
+      record { species = protonSpecies ; coefficient = 1 }
+      ∷ record { species = hypochloriteSpecies ; coefficient = 1 }
       ∷ []
-  ; Chemistry.catalysts = []
-  ; Chemistry.rateLaw = speciationRate
-  ; Chemistry.condition = hypochlorousDissociationCondition
-  ; Chemistry.reversibility = Chemistry.reversible
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  ; catalysts = []
+  ; rateLaw = speciationRate
+  ; condition = hypochlorousDissociationCondition
+  ; reversibility = Chemistry.reversible
+  ; evidence = Chemistry.literatureEstablished
   }
 
 data FreeChlorineSpeciesKind : Set where
-  dissolvedMolecularChlorine
-  hypochlorousAcid
-  hypochloriteIon
-  : FreeChlorineSpeciesKind
+  dissolvedMolecularChlorine : FreeChlorineSpeciesKind
+  hypochlorousAcid : FreeChlorineSpeciesKind
+  hypochloriteIon : FreeChlorineSpeciesKind
+
 
 record FreeChlorineResidualState : Set₁ where
   constructor freeChlorineResidualState

@@ -17,13 +17,13 @@ import DASHI.Cognition.PNF.SensibLawIssueIndexedAdjudicativeHyperfabricExact as 
 data SnapshotOrder : Set where before sameTime after : SnapshotOrder
 
 data AdjudicativeSnapshotStage : Set where
-  pleadingsSnapshot
-  evidenceSnapshot
-  hearingSnapshot
-  decisionSnapshot
-  appealSnapshot
-  laterDiscoverySnapshot
-  : AdjudicativeSnapshotStage
+  pleadingsSnapshot : AdjudicativeSnapshotStage
+  evidenceSnapshot : AdjudicativeSnapshotStage
+  hearingSnapshot : AdjudicativeSnapshotStage
+  decisionSnapshot : AdjudicativeSnapshotStage
+  appealSnapshot : AdjudicativeSnapshotStage
+  laterDiscoverySnapshot : AdjudicativeSnapshotStage
+
 
 record AdjudicativeSnapshot (issue : Issue.LegalIssue) : Set where
   constructor adjudicativeSnapshot
@@ -87,20 +87,20 @@ open SnapshotRefinement public
 ------------------------------------------------------------------------
 
 data HistoricalAdjudicativeQuestion : Set where
-  whatBurdenWasAvailable
-  whatStandardWasAvailable
-  whatEvidenceWasAvailable
-  whatAuthorityWasAvailable
-  whatJurisdictionWasAvailable
-  : HistoricalAdjudicativeQuestion
+  whatBurdenWasAvailable : HistoricalAdjudicativeQuestion
+  whatStandardWasAvailable : HistoricalAdjudicativeQuestion
+  whatEvidenceWasAvailable : HistoricalAdjudicativeQuestion
+  whatAuthorityWasAvailable : HistoricalAdjudicativeQuestion
+  whatJurisdictionWasAvailable : HistoricalAdjudicativeQuestion
+
 
 data HistoricalProducer : Set where
-  burdenAtTimeProducer
-  standardAtTimeProducer
-  evidenceAtTimeProducer
-  authorityAtTimeProducer
-  jurisdictionAtTimeProducer
-  : HistoricalProducer
+  burdenAtTimeProducer : HistoricalProducer
+  standardAtTimeProducer : HistoricalProducer
+  evidenceAtTimeProducer : HistoricalProducer
+  authorityAtTimeProducer : HistoricalProducer
+  jurisdictionAtTimeProducer : HistoricalProducer
+
 
 reverseHistoricalQuestion : HistoricalAdjudicativeQuestion → HistoricalProducer
 reverseHistoricalQuestion whatBurdenWasAvailable = burdenAtTimeProducer

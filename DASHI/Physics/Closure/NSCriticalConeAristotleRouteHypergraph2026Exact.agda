@@ -20,21 +20,21 @@ import DASHI.Physics.Closure.NSTriadKNHighestAlphaFrontierRound285Exact as R285
 ------------------------------------------------------------------------
 
 data NSState : Set where
-  packageA
-  criticalConeSignedCovariance
-  integratedSignedBudgetLeaf
-  relativeAbsorptionLeaf
-  thresholdEscapeProfileLeaf
-  rejectedBoundedCompactRoute
-  : NSState
+  packageA : NSState
+  criticalConeSignedCovariance : NSState
+  integratedSignedBudgetLeaf : NSState
+  relativeAbsorptionLeaf : NSState
+  thresholdEscapeProfileLeaf : NSState
+  rejectedBoundedCompactRoute : NSState
+
 
 data NSAction : Set where
-  directCriticalCone
-  integratedBudgetRoute
-  relativeAbsorptionRoute
-  profileRoute
-  boundedCompactAttempt
-  : NSAction
+  directCriticalCone : NSAction
+  integratedBudgetRoute : NSAction
+  relativeAbsorptionRoute : NSAction
+  profileRoute : NSAction
+  boundedCompactAttempt : NSAction
+
 
 source : NSAction → NSState
 source directCriticalCone = packageA

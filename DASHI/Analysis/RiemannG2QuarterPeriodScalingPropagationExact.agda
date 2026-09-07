@@ -29,10 +29,10 @@ import DASHI.Analysis.RiemannAristotlePoleQuotientGammaBudgetTargetExact as Gamm
 ------------------------------------------------------------------------
 
 data ScalingRegime : Set where
-  inverseWidthScaling
-  quarterPeriodCrossingScaling
-  downstreamCompatibleScaling
-  : ScalingRegime
+  inverseWidthScaling : ScalingRegime
+  quarterPeriodCrossingScaling : ScalingRegime
+  downstreamCompatibleScaling : ScalingRegime
+
 
 record LiteralHighOrdinateWidthLaw : Set₁ where
   field
@@ -159,10 +159,10 @@ quarterPeriodCrossingNecessary =
 ------------------------------------------------------------------------
 
 data PropagationDisposition : Set where
-  farChannelStructurallyCompatibleWithCutoffGrowth
-  gammaClusterSameObjectPaymentOpen
-  fullOscillatoryAdmissionClosed
-  : PropagationDisposition
+  farChannelStructurallyCompatibleWithCutoffGrowth : PropagationDisposition
+  gammaClusterSameObjectPaymentOpen : PropagationDisposition
+  fullOscillatoryAdmissionClosed : PropagationDisposition
+
 
 currentFarDisposition : PropagationDisposition
 currentFarDisposition = farChannelStructurallyCompatibleWithCutoffGrowth

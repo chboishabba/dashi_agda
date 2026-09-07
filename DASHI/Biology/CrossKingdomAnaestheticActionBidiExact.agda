@@ -12,21 +12,21 @@ import DASHI.Biology.Cell.BioelectricNetwork as Bioelectric
 data Lineage : Set where plantLineage animalLineage : Lineage
 
 data ActionLayer : Set where
-  molecularLayer membraneElectricalLayer cellularProcessLayer tissueNetworkLayer
+  molecularLayer membraneElectricalLayer cellularProcessLayer tissueNetworkLayer : ActionLayer
   wholeOrganismLayer consciousStateLayer : ActionLayer
 
 data SharedCellularSubstrate : Set where
-  ionChannelSubstrate membraneSubstrate cytoskeletalSubstrate
+  ionChannelSubstrate membraneSubstrate cytoskeletalSubstrate : SharedCellularSubstrate
   mitochondrialSubstrate coupledElectricalActivitySubstrate : SharedCellularSubstrate
 
 data PlantAnaestheticEndpoint : Set where
-  plantActionPotentialSuppressed plantOrganMovementSuppressed
-  plantEndocyticRecyclingAltered plantROSHomeostasisAltered
+  plantActionPotentialSuppressed plantOrganMovementSuppressed : PlantAnaestheticEndpoint
+  plantEndocyticRecyclingAltered plantROSHomeostasisAltered : PlantAnaestheticEndpoint
   plantGerminationOrGrowthAltered plantRecoveryAfterRemoval : PlantAnaestheticEndpoint
 
 data AnimalAnaestheticEndpoint : Set where
-  neuronalExcitabilityAltered synapticTransmissionAltered
-  neuralNetworkCoordinationDisrupted immobilityEndpoint amnesiaEndpoint
+  neuronalExcitabilityAltered synapticTransmissionAltered : AnimalAnaestheticEndpoint
+  neuralNetworkCoordinationDisrupted immobilityEndpoint amnesiaEndpoint : AnimalAnaestheticEndpoint
   unconsciousnessEndpoint recoveryAfterRemoval : AnimalAnaestheticEndpoint
 
 data CrossKingdomEndpoint : Set where
@@ -34,8 +34,8 @@ data CrossKingdomEndpoint : Set where
   animalEndpointTag : AnimalAnaestheticEndpoint → CrossKingdomEndpoint
 
 data EvidentiaryStatus : Set where
-  directlyObserved mechanisticallySupported comparativeHypothesis notEstablished
-  : EvidentiaryStatus
+  directlyObserved mechanisticallySupported comparativeHypothesis notEstablished : EvidentiaryStatus
+
 
 plantAndAnimalDistinct : plantLineage ≡ animalLineage → ⊥
 plantAndAnimalDistinct ()

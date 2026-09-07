@@ -93,6 +93,7 @@ def migrate_file_lines(lines: list[bytes]) -> list[bytes] | None:
             j = i + 1
             ctor_lines: list[tuple[int, bytes, bytes]] = []  # (index, ctor_name, ending)
             found_sig = False
+            found_attached_sig = False
             expected_sig = b": " + type_name
             target_indent = None
 
@@ -123,6 +124,13 @@ def migrate_file_lines(lines: list[bytes]) -> list[bytes] | None:
                     found_sig = True
                     break
 
+                # Check if this line has trailing `: TypeName` attached to a constructor
+                if ctor_lines and (cur_stripped.endswith(b": " + type_name) or cur_stripped.endswith(b":" + type_name)):
+                    prefix = cur_stripped[:cur_stripped.rfind(b":")].strip()
+                    if is_simple_constructor_name(prefix):
+                        found_attached_sig = True
+                        break
+
                 # Otherwise must be simple constructor name
                 if is_simple_constructor_name(cur_stripped):
                     ctor_lines.append((j, cur_stripped, cur_ending))
@@ -131,11 +139,21 @@ def migrate_file_lines(lines: list[bytes]) -> list[bytes] | None:
                     break
 
             if found_sig and ctor_lines:
-                # Valid candidate! Apply migration
+                # Valid candidate! Apply migration (trailing sig on its own line)
                 out.append(line)
                 for _, ctor, c_ending in ctor_lines:
                     out.append(target_indent + ctor + b" : " + type_name + c_ending)
                 out.append(strip_line_ending(lines[j])[1])  # preserve trailing signature newline
+                i = j + 1
+                changed = True
+                continue
+
+            if found_attached_sig and ctor_lines:
+                # Valid candidate! Apply migration (trailing sig attached to line j)
+                out.append(line)
+                for _, ctor, c_ending in ctor_lines:
+                    out.append(target_indent + ctor + b" : " + type_name + c_ending)
+                out.append(lines[j])
                 i = j + 1
                 changed = True
                 continue

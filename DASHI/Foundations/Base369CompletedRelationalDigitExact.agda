@@ -22,12 +22,12 @@ open import DASHI.Foundations.SSPTritCarrier using
   )
 
 data CompletionBit : Set where
-  uninstantiated
+  uninstantiated : CompletionBit
   instantiated : CompletionBit
 
 data RelationalZeroWitness : Set where
-  emptyZero
-  balancedEvaluationZero
+  emptyZero : RelationalZeroWitness
+  balancedEvaluationZero : RelationalZeroWitness
   invariantNeutralZero : RelationalZeroWitness
 
 record RelationalDigit9 : Set where

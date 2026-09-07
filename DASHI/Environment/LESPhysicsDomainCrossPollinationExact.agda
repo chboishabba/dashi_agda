@@ -31,12 +31,12 @@ import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact as EM
 import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact as PNP
 
 data PhysicsReuseLane : Set where
-  fluidMechanicsLane gaugeElectromagneticLane reactionTransportLane
-  bioelectricElectrochemicalLane rootSoilFungalPhysiologyLane
-  soilBiogeochemistryLane plantHydraulicAtmosphereCarbonLane
-  soilPlantAtmosphereContinuumLane constitutiveSPACCalibrationLane
-  consumerRelativeReductionLane activeExperimentDesignLane
-  : PhysicsReuseLane
+  fluidMechanicsLane gaugeElectromagneticLane reactionTransportLane : PhysicsReuseLane
+  bioelectricElectrochemicalLane rootSoilFungalPhysiologyLane : PhysicsReuseLane
+  soilBiogeochemistryLane plantHydraulicAtmosphereCarbonLane : PhysicsReuseLane
+  soilPlantAtmosphereContinuumLane constitutiveSPACCalibrationLane : PhysicsReuseLane
+  consumerRelativeReductionLane activeExperimentDesignLane : PhysicsReuseLane
+
 
 record PhysicsToDomainWeld : Set where
   constructor physicsToDomainWeld

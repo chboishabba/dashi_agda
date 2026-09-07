@@ -21,11 +21,11 @@ import DASHI.Physics.Closure.TSFVMultiverseViabilityCrossPollinationExact as TSF
 ------------------------------------------------------------------------
 
 data ExplanationHypothesis : Set where
-  observerSelectedMultiverse
-  dynamicalAttractor
-  uniqueLawSelection
-  tsfvHistoryConditionedSelection
-  : ExplanationHypothesis
+  observerSelectedMultiverse : ExplanationHypothesis
+  dynamicalAttractor : ExplanationHypothesis
+  uniqueLawSelection : ExplanationHypothesis
+  tsfvHistoryConditionedSelection : ExplanationHypothesis
+
 
 data PresentConstantObservation : Set where
   observedViableConstants : PresentConstantObservation
@@ -34,11 +34,11 @@ presentObservation : ExplanationHypothesis → PresentConstantObservation
 presentObservation _ = observedViableConstants
 
 data CandidateSignature : Set where
-  populationSelectionSignature
-  basinDynamicsSignature
-  lawConstraintSignature
-  historyTrajectorySignature
-  : CandidateSignature
+  populationSelectionSignature : CandidateSignature
+  basinDynamicsSignature : CandidateSignature
+  lawConstraintSignature : CandidateSignature
+  historyTrajectorySignature : CandidateSignature
+
 
 candidateSignature : ExplanationHypothesis → CandidateSignature
 candidateSignature observerSelectedMultiverse = populationSelectionSignature

@@ -230,15 +230,15 @@ threeStrandBraidRelation (triple a b c) = refl
 ------------------------------------------------------------------------
 
 data DiamondNode : Set where
-  diamondRoot
-  diamondLeft
-  diamondRight
+  diamondRoot : DiamondNode
+  diamondLeft : DiamondNode
+  diamondRight : DiamondNode
   diamondJoin : DiamondNode
 
 data DiamondEdge : Set where
-  rootToLeft
-  rootToRight
-  leftToJoin
+  rootToLeft : DiamondEdge
+  rootToRight : DiamondEdge
+  leftToJoin : DiamondEdge
   rightToJoin : DiamondEdge
 
 diamondSource : DiamondEdge → DiamondNode
@@ -302,7 +302,7 @@ localSwapEquivariance :
 localSwapEquivariance (pairState a b) = refl
 
 data ParticipantRole : Set where
-  roleA
+  roleA : ParticipantRole
   roleB : ParticipantRole
 
 contextualPropagate : ParticipantRole → PairState → PairState

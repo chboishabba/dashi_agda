@@ -87,14 +87,14 @@ open SameCarrierTestModulationPayment public
 ------------------------------------------------------------------------
 
 data HATestAction : Set where
-  rebuildWeilTestSpace
-  chooseIndependentTargetCarrier
-  chooseIndependentMellinTestCarrier
-  useDifferentExplicitFormula
-  recoverExistingTestModulation
-  proveAdmissibilityPreservation
-  recoverSameFormulaSpectralShift
-  : HATestAction
+  rebuildWeilTestSpace : HATestAction
+  chooseIndependentTargetCarrier : HATestAction
+  chooseIndependentMellinTestCarrier : HATestAction
+  useDifferentExplicitFormula : HATestAction
+  recoverExistingTestModulation : HATestAction
+  proveAdmissibilityPreservation : HATestAction
+  recoverSameFormulaSpectralShift : HATestAction
+
 
 HARelevant : HATestAction → Set
 HARelevant rebuildWeilTestSpace = ⊥

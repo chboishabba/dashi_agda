@@ -29,19 +29,19 @@ import DASHI.Core.FrontierRelationStrengthBidiExact as Relation
 ------------------------------------------------------------------------
 
 data Post369RHAction : Set where
-  recoverLiteralConstructors
-  recoverNontrivialScalarSymmetryLaw
-  identifyExistingScalarDonor
-  proveExactScalarProblemIdentity
-  : Post369RHAction
+  recoverLiteralConstructors : Post369RHAction
+  recoverNontrivialScalarSymmetryLaw : Post369RHAction
+  identifyExistingScalarDonor : Post369RHAction
+  proveExactScalarProblemIdentity : Post369RHAction
+
 
 data Post369RHState : Set where
-  provenanceOnly
-  constructorsRecovered
-  scalarLawRecovered
-  donorIdentified
-  sameObjectScalarAttachmentClosed
-  : Post369RHState
+  provenanceOnly : Post369RHState
+  constructorsRecovered : Post369RHState
+  scalarLawRecovered : Post369RHState
+  donorIdentified : Post369RHState
+  sameObjectScalarAttachmentClosed : Post369RHState
+
 
 nextState : Post369RHState -> Post369RHAction -> Post369RHState
 nextState provenanceOnly recoverLiteralConstructors = constructorsRecovered

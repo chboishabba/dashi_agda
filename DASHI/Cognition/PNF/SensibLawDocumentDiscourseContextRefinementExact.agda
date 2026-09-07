@@ -19,8 +19,8 @@ import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 ------------------------------------------------------------------------
 
 data DocumentDiscourseRole : Set where
-  applicantSubmission respondentSubmission witnessEvidence
-  courtFinding courtHolding quotedMaterial proceduralOrder
+  applicantSubmission respondentSubmission witnessEvidence : DocumentDiscourseRole
+  courtFinding courtHolding quotedMaterial proceduralOrder : DocumentDiscourseRole
   neutralNarrative unresolvedDiscourseRole : DocumentDiscourseRole
 
 record DocumentDiscourseFrame : Set where
