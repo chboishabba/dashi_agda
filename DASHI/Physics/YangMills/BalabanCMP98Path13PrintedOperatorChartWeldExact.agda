@@ -9,6 +9,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP98Path13PrintedSemanticOperatorsExact as Printed
 import DASHI.Physics.YangMills.BalabanCMP98Path13TwoCarrierSourceFamilyExact as Historical
 import DASHI.Physics.YangMills.BalabanClayGate4SU2PrincipalLogBallExact as Log
+import DASHI.Physics.YangMills.BalabanCMP98Equation119DifferentialDexpRound159Exact as R159
+import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as Lie
 
 record PrintedOperatorChartWeld
     {CoarseField : Set}
@@ -29,16 +31,16 @@ principalPointYRelevant :
   Log.InPrincipalImage (Historical.path13PrincipalChart geometry) value →
   Printed.RelevantY operators
     (Log.principalLog (Historical.path13PrincipalChart geometry) value)
-principalPointYRelevant weld value inImage =
+principalPointYRelevant {geometry = geometry} weld value inImage =
   selectedBallIsRelevant weld
-    (Log.principalLog _ value)
-    (Log.principalLogMapsImage _ value inImage)
+    (Log.principalLog (Historical.path13PrincipalChart geometry) value)
+    (Log.principalLogMapsImage
+      (Historical.path13PrincipalChart geometry) value inImage)
 
 fromR159EverywhereRelevant :
   ∀ {CoarseField}
     (geometry : Historical.Path13FamilyGeometry CoarseField)
-    (calculus : DASHI.Physics.YangMills.BalabanCMP98Equation119DifferentialDexpRound159Exact.UniformAdjointDifferentialCalculus
-      DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier.SU2LieAlgebra) →
+    (calculus : R159.UniformAdjointDifferentialCalculus Lie.SU2LieAlgebra) →
   PrintedOperatorChartWeld geometry (Printed.fromR159UniformCalculus calculus)
 fromR159EverywhereRelevant geometry calculus = record
   { PrintedOperatorChartWeld.selectedBallIsRelevant =
