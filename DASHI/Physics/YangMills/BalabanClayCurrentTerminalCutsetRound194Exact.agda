@@ -4,10 +4,11 @@ module DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound194Exact whe
 ------------------------------------------------------------------------
 -- ROUND194: REFINE THE MEASURE-LIMIT LEAF
 --
--- Round193 left four preferred T5 continuum analytic classes.  The first,
+-- Round193 left four preferred T5 continuum analytic classes. The first,
 -- physicalMeasureLimitConvergence, is itself not primitive: on the preferred
--- topology route it is compiled from relative sequential compactness plus
--- uniqueness of every cluster point, using the standard compact-unique theorem.
+-- topology route it is compiled from literal relative sequential compactness
+-- plus uniqueness of every cluster point, using the standard compact-unique
+-- convergence theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List; _∷_; [])
