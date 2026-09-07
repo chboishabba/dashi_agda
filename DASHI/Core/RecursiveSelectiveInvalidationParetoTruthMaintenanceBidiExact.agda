@@ -10,9 +10,9 @@ import DASHI.Core.SelectiveInvalidationParetoFrontierBidiExact as Pareto
 ------------------------------------------------------------------------
 -- RECURSIVE SELECTIVE INVALIDATION / PARETO TRUTH MAINTENANCE
 --
--- One maintenance round produces the next frontier.  The ambient language may
+-- One maintenance round produces the next frontier. The ambient language may
 -- grow recursively/self-indexedly, but the next round materialises only axes
--- declared relevant by the changed dependency frontier.  Old materialised axes
+-- declared relevant by the changed dependency frontier. Old materialised axes
 -- retain their semantic meaning and old candidate costs unless an explicit
 -- invalidation witness names that axis as changed.
 ------------------------------------------------------------------------
@@ -286,12 +286,9 @@ recursiveStep01 =
     residualRelevant lineageResidual1 = ⊤
 
 inheritedConsequenceCostPreservedOnModel :
-  Pareto.axisCost consequence1AsFrontier Pareto.modelBranch
+  Pareto.axisCost (axis1ToFrontier consequence1) Pareto.modelBranch
   ≡ Pareto.axisCost Pareto.consequenceAxis Pareto.modelBranch
 inheritedConsequenceCostPreservedOnModel = refl
-  where
-    consequence1AsFrontier : Pareto.FrontierAxis
-    consequence1AsFrontier = axis1ToFrontier consequence1
 
 frameClassStillUnaffectedAfterRecursiveLift :
   candidateClass layer1 (liftCandidate recursiveStep01 frame0)
