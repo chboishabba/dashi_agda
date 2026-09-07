@@ -13,10 +13,6 @@ import DASHI.Law.SensibLawLegalResidualProducerSchedulerExact as LegalResidual
 
 ------------------------------------------------------------------------
 -- PROOF-DIRECTED SEARCH INTENT
---
--- The search engine does not begin with a provider or a string. It begins with
--- one consumer-relative proof gap, identifies the proposition/source shape
--- capable of paying that gap, and only then lowers to executable retrieval.
 ------------------------------------------------------------------------
 
 data ProducerClass : Set where
@@ -40,6 +36,7 @@ data ProducerClass : Set where
   contradictionProducer
   counterexampleProducer
   discriminatorProducer
+  noSearchProducer
   : ProducerClass
 
 data SearchMode : Set where
@@ -49,6 +46,7 @@ data SearchMode : Set where
   compareAuthorities
   seekDefeater
   seekCounterexample
+  noSearchRequired
   : SearchMode
 
 data RequiredAuthorityClass : Set where
@@ -107,14 +105,14 @@ producerForObligation Issue.establishHarm = occurrenceEvidenceProducer
 producerForObligation Issue.establishProtectedInterest = elementRequirementProducer
 producerForObligation Issue.establishRemedySource = remedySourceProducer
 producerForObligation Issue.explainDisposition = doctrinalComparisonProducer
-producerForObligation Issue.noFurtherObligation = discriminatorProducer
+producerForObligation Issue.noFurtherObligation = noSearchProducer
 
 modeForWork : Issue.EpistemicWorkKind → SearchMode
 modeForWork Issue.lookWork = exploitKnownResidual
 modeForWork Issue.testWork = seekCounterexample
 modeForWork Issue.thinkWork = compareAuthorities
 modeForWork Issue.actWork = exploreAuthorityFamily
-modeForWork Issue.noWork = exploitKnownResidual
+modeForWork Issue.noWork = noSearchRequired
 
 record CompiledProofDirectedIntent : Set₁ where
   constructor compiledProofDirectedIntent
@@ -130,7 +128,7 @@ record CompiledProofDirectedIntent : Set₁ where
 open CompiledProofDirectedIntent public
 
 ------------------------------------------------------------------------
--- Legal-adjunct residual bridge. This does not broaden blocked source plans.
+-- Legal-adjunct residual bridge.
 ------------------------------------------------------------------------
 
 data ResidualSearchDisposition : Set where
@@ -155,6 +153,7 @@ data ProviderDefinesProofObligation : Set where
 data SearchHitAutomaticallyPaysProofGap : Set where
 data MoreDocumentsAutomaticallyImproveProof : Set where
 data SupportingSearchMayOmitDefeaterSearch : Set where
+data ClosedConsumerMustStillSearch : Set where
 
 searchStringDoesNotDefineIntent : SearchStringDefinesResearchIntent → ⊥
 searchStringDoesNotDefineIntent ()
@@ -171,6 +170,9 @@ moreDocumentsDoNotAutomaticallyImproveProof ()
 supportSearchDoesNotEraseDefeaterDuty : SupportingSearchMayOmitDefeaterSearch → ⊥
 supportSearchDoesNotEraseDefeaterDuty ()
 
+closedConsumerDoesNotNeedDummySearch : ClosedConsumerMustStillSearch → ⊥
+closedConsumerDoesNotNeedDummySearch ()
+
 record ProofDirectedSearchBoundary : Set where
   constructor proofDirectedSearchBoundary
   field
@@ -184,7 +186,9 @@ record ProofDirectedSearchBoundary : Set where
     retrievalEqualsProofPaymentIsFalse : retrievalEqualsProofPayment ≡ false
     explorationMayRemainExplicit : Bool
     explorationMayRemainExplicitIsTrue : explorationMayRemainExplicit ≡ true
+    closedConsumerCompilesToNoSearch : Bool
+    closedConsumerCompilesToNoSearchIsTrue : closedConsumerCompilesToNoSearch ≡ true
 
 canonicalProofDirectedSearchBoundary : ProofDirectedSearchBoundary
 canonicalProofDirectedSearchBoundary =
-  proofDirectedSearchBoundary true refl true refl false refl false refl true refl
+  proofDirectedSearchBoundary true refl true refl false refl false refl true refl true refl
