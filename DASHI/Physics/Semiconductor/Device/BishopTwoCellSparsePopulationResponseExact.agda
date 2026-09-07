@@ -18,6 +18,7 @@ import DASHI.Physics.Semiconductor.Device.ComputedFiniteDeviceCellExact as Cell
 import DASHI.Physics.Semiconductor.Device.FiniteScharfetterGummelFluxExact as Mesh
 import DASHI.Physics.Semiconductor.Device.BishopThermalNormalizedDropExact as Thermal
 import DASHI.Physics.Semiconductor.Device.BishopSameObjectComputedFaceFluxExact as Base
+import DASHI.Physics.Semiconductor.Device.BishopConcreteScharfetterGummelFaceFluxExact as ConcreteSG
 import DASHI.Physics.Semiconductor.Device.BishopSGPopulationJacobianExact as FaceJ
 
 record NodePerturbation : Set where
@@ -145,9 +146,9 @@ electronFaceDifferenceExact :
   (face : Mesh.SGFace) →
   BishopReal._≃_
     (BishopReal._-_
-      (DASHI.Physics.Semiconductor.Device.BishopConcreteScharfetterGummelFaceFluxExact.concreteBishopSGFaceFlux
+      (ConcreteSG.concreteBishopSGFaceFlux
         (FaceJ.perturbedFace (facePerturbation (electronBasePopulation q) p face)))
-      (DASHI.Physics.Semiconductor.Device.BishopConcreteScharfetterGummelFaceFluxExact.concreteBishopSGFaceFlux
+      (ConcreteSG.concreteBishopSGFaceFlux
         (FaceJ.baseFace (facePerturbation (electronBasePopulation q) p face))))
     (faceResponse (electronBasePopulation q) p face)
 electronFaceDifferenceExact q p face =
