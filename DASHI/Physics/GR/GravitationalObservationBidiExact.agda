@@ -4,6 +4,8 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Physics.GR.GravitationalObservationSourceAtlasExact as Sources
+
 ------------------------------------------------------------------------
 -- GRAVITATIONAL OBSERVATION AS A TYPED EVIDENCE LAYER
 --
@@ -53,6 +55,7 @@ record GravitationalObservationReceipt : Set where
     analysisPipeline : String
     sourceModel : String
     exactResultLocator : String
+    attributedObservationSource : Sources.ObservationAttributedSource
 
 open GravitationalObservationReceipt public
 
@@ -65,19 +68,21 @@ record GravitationalObservationBoundary : Set where
     waveformAgreementAloneProvesGRUniquelyTrue : Bool
     detectorCalibrationAndNoiseModelRequired : Bool
     independentSourceModelComparisonRequired : Bool
+    attributedObservationCarrierRequired : Bool
     observationMayConstrainModifiedGravity : Bool
     observationAutomaticallyPromotesModifiedGravity : Bool
 
 canonicalGravitationalObservationBoundary : GravitationalObservationBoundary
 canonicalGravitationalObservationBoundary =
   gravitational-observation-boundary
-    false false false false true true true false
+    false false false false true true true true false
 
 ------------------------------------------------------------------------
 -- Reverse obligations by channel.
 ------------------------------------------------------------------------
 
 data ObservationResidual : Set where
+  missingAttributedCarrier : ObservationResidual
   missingCalibration : ObservationResidual
   missingNoiseCharacterisation : ObservationResidual
   missingCoincidenceOrCorrelation : ObservationResidual
@@ -93,6 +98,7 @@ record ObservationReverseCutset : Set where
     channel : GravitationalObservationChannel
     requiredPrimaryObservable : GravitationalObservable
     primaryObservableMatches : observableFor channel ≡ requiredPrimaryObservable
+    attributedCarrierRequired : Bool
     calibrationRequired : Bool
     noiseModelRequired : Bool
     sourceComparatorRequired : Bool
@@ -101,12 +107,12 @@ record ObservationReverseCutset : Set where
 laserInterferometerCutset : ObservationReverseCutset
 laserInterferometerCutset =
   observation-reverse-cutset
-    laserInterferometricStrain dimensionlessStrain refl true true true true
+    laserInterferometricStrain dimensionlessStrain refl true true true true true
 
 pulsarTimingCutset : ObservationReverseCutset
 pulsarTimingCutset =
   observation-reverse-cutset
-    pulsarTimingResidual correlatedArrivalTimeResidual refl true true true true
+    pulsarTimingResidual correlatedArrivalTimeResidual refl true true true true true
 
 ------------------------------------------------------------------------
 -- Detector-family non-collapse.
@@ -120,15 +126,31 @@ freeFallAndStrainObservablesDistinct :
   observableFor freeFallEquivalence ≡ observableFor laserInterferometricStrain → ⊥
 freeFallAndStrainObservablesDistinct ()
 
+------------------------------------------------------------------------
+-- Current observational status is explicitly source-backed.  These are bounded
+-- status claims about the inspected carriers, not a closed-world statement
+-- about all gravitational observations or all possible gravity theories.
+------------------------------------------------------------------------
+
 record CurrentObservationalStatusBoundary : Set where
   constructor current-observational-status-boundary
   field
+    compactBinaryCatalogSource : Sources.ObservationAttributedSource
     compactBinaryStrainObservationsExist : Bool
+    nanohertzBackgroundSource : Sources.ObservationAttributedSource
     stochasticNanohertzBackgroundEvidenceExists : Bool
+    currentGRTestSource : Sources.ObservationAttributedSource
     gravitationalWaveObservationsTestGR : Bool
     allObservedSignalsRequireBeyondGR : Bool
     observationLayerProvesAntigravity : Bool
 
 canonicalCurrentObservationalStatusBoundary : CurrentObservationalStatusBoundary
 canonicalCurrentObservationalStatusBoundary =
-  current-observational-status-boundary true true true false false
+  current-observational-status-boundary
+    Sources.lvkGWTC5 true
+    Sources.nanoGrav15Year true
+    Sources.lvkGRTests2026 true
+    false false
+
+sourceBoundary : Sources.GravitationalObservationSourceBoundary
+sourceBoundary = Sources.canonicalGravitationalObservationSourceBoundary
