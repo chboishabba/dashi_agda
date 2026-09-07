@@ -121,9 +121,13 @@ import DASHI.Physics.YangMills.BalabanClayT5QuantitativeContinuumClosureCompiler
 import DASHI.Physics.YangMills.BalabanClayT5CompactUniqueFullSequenceExact
 
 -- Typed Prokhorov route: literal subsequence tightness -> convergent further
--- literal subsequence.  Historical Set-valued compactness receipts are not used
+-- literal subsequence. Historical Set-valued compactness receipts are not used
 -- as substitutes for this theorem.
 import DASHI.Physics.YangMills.BalabanClayT5SubsequenceProkhorovExtractionExact
+
+-- Uniform tightness restricts definitionally to every literal subsequence, so
+-- only one selected-sequence uniform-tightness theorem remains physical.
+import DASHI.Physics.YangMills.BalabanClayT5UniformTightnessSubsequenceInheritanceExact
 
 -- Current terminal schedulers after Eq. (119), Kato-M7 and T5 minimization.
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound191Exact
@@ -131,6 +135,7 @@ import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound192Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound193Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound194Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound195Exact
+import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound196Exact
 
 import DASHI.Physics.YangMills.BalabanPath13Eq119SourceRouteProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119BishopBridgeProvenanceExact
