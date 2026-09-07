@@ -17,22 +17,29 @@ import DASHI.Core.ObserverRefinementLatticeExact as Observer
 ------------------------------------------------------------------------
 
 data Situation : Set where
-  benignAmbiguity hostileAmbiguity : Situation
+  benignAmbiguity : Situation
+  hostileAmbiguity : Situation
 
 data SelfObservation : Set where
   ambiguousSocialSignal : SelfObservation
 
 data FriendContext : Set where
-  likelyBenignContext likelyUnsafeContext : FriendContext
+  likelyBenignContext : FriendContext
+  likelyUnsafeContext : FriendContext
 
 data RelationKind : Set where
-  trustedFriend formalSupporter unfamiliarPerson absentRelation : RelationKind
+  trustedFriend : RelationKind
+  formalSupporter : RelationKind
+  unfamiliarPerson : RelationKind
+  absentRelation : RelationKind
 
 data RegulationState : Set where
-  regulatedState mobilisedState : RegulationState
+  regulatedState : RegulationState
+  mobilisedState : RegulationState
 
 data Decision : Set where
-  remainDecision leaveDecision : Decision
+  remainDecision : Decision
+  leaveDecision : Decision
 
 selfObserver : Situation → SelfObservation
 selfObserver benignAmbiguity = ambiguousSocialSignal
@@ -125,10 +132,13 @@ trustedFriendEcologyOpensRecovery = refl
 ------------------------------------------------------------------------
 
 data RelationalScaffoldMode : Set where
-  contextualTranslation sharedCode lowTranslationNeed : RelationalScaffoldMode
+  contextualTranslation : RelationalScaffoldMode
+  sharedCode : RelationalScaffoldMode
+  lowTranslationNeed : RelationalScaffoldMode
 
 data CommunicationCost : Set where
-  lowCommunicationCost highCommunicationCost : CommunicationCost
+  lowCommunicationCost : CommunicationCost
+  highCommunicationCost : CommunicationCost
 
 communicationCost : RelationalScaffoldMode → CommunicationCost
 communicationCost contextualTranslation = lowCommunicationCost

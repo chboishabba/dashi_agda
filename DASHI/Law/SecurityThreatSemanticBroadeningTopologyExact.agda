@@ -14,33 +14,33 @@ import DASHI.Law.HerzogClassificationMultiSourceJoinExact as Join
 ------------------------------------------------------------------------
 
 data ThreatScope : Set where
-  namedIndividual
-  smallNamedGroup
-  eventSubset
-  wholeAssembly
-  politicalCommunity
-  populationCategory
+  namedIndividual : ThreatScope
+  smallNamedGroup : ThreatScope
+  eventSubset : ThreatScope
+  wholeAssembly : ThreatScope
+  politicalCommunity : ThreatScope
+  populationCategory : ThreatScope
   scopeUnresolved : ThreatScope
 
 data ThreatPredicate : Set where
-  concreteActRisk
-  weaponsRisk
-  violenceRisk
-  disruptionRisk
-  hostilityRisk
-  aggressiveCrowdRisk
-  publicOrderRisk
-  enemyRisk
+  concreteActRisk : ThreatPredicate
+  weaponsRisk : ThreatPredicate
+  violenceRisk : ThreatPredicate
+  disruptionRisk : ThreatPredicate
+  hostilityRisk : ThreatPredicate
+  aggressiveCrowdRisk : ThreatPredicate
+  publicOrderRisk : ThreatPredicate
+  enemyRisk : ThreatPredicate
   predicateUnresolved : ThreatPredicate
 
 data PropagationTransform : Set where
-  preserved
-  narrowed
-  broadenedByScope
-  broadenedByPredicate
-  broadenedByScopeAndPredicate
-  reclassified
-  conflicted
+  preserved : PropagationTransform
+  narrowed : PropagationTransform
+  broadenedByScope : PropagationTransform
+  broadenedByPredicate : PropagationTransform
+  broadenedByScopeAndPredicate : PropagationTransform
+  reclassified : PropagationTransform
+  conflicted : PropagationTransform
   transformOpen : PropagationTransform
 
 record ThreatNode : Set where
@@ -140,8 +140,8 @@ canonicalCollectiveBroadeningPath = threatPropagationPath
 ------------------------------------------------------------------------
 
 data CollectiveAttributionStatus : Set where
-  noCollectiveJump
-  collectiveJumpObserved
+  noCollectiveJump : CollectiveAttributionStatus
+  collectiveJumpObserved : CollectiveAttributionStatus
   collectiveJumpOpen : CollectiveAttributionStatus
 
 collectiveJumpStatus : ThreatPropagationPath → CollectiveAttributionStatus
@@ -159,19 +159,19 @@ canonicalCollectiveJumpObserved = refl
 ------------------------------------------------------------------------
 
 data BroadeningClaim : Set where
-  specificThreatBecameGroupThreat
-  groupThreatBecameWholeAssemblyThreat
-  wholeAssemblyThreatProducedOperationalOrder
-  collectiveAttributionWasEvidenceJustified
-  collectiveAttributionReachedSpecificIncident
+  specificThreatBecameGroupThreat : BroadeningClaim
+  groupThreatBecameWholeAssemblyThreat : BroadeningClaim
+  wholeAssemblyThreatProducedOperationalOrder : BroadeningClaim
+  collectiveAttributionWasEvidenceJustified : BroadeningClaim
+  collectiveAttributionReachedSpecificIncident : BroadeningClaim
   broadeningWasIdeologicallyMotivated : BroadeningClaim
 
 data BroadeningProducer : Set where
-  sourceToGroupSemanticProducer
-  groupToAssemblySemanticProducer
-  classificationOrderProducer
-  collectiveEvidenceAdequacyProducer
-  incidentCausalWeldProducer
+  sourceToGroupSemanticProducer : BroadeningProducer
+  groupToAssemblySemanticProducer : BroadeningProducer
+  classificationOrderProducer : BroadeningProducer
+  collectiveEvidenceAdequacyProducer : BroadeningProducer
+  incidentCausalWeldProducer : BroadeningProducer
   motiveAndCarrierProducer : BroadeningProducer
 
 reverseBroadening : BroadeningClaim → BroadeningProducer

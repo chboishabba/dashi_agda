@@ -38,7 +38,10 @@ import DASHI.Foundations.FiniteRepresentationRestrictionCore as Core
 import DASHI.Foundations.SU2SO3IrrepDimensionExact as Spin
 
 data CyclicRotationProbe : Set where
-  C2Probe C3Probe C4Probe C5Probe : CyclicRotationProbe
+  C2Probe : CyclicRotationProbe
+  C3Probe : CyclicRotationProbe
+  C4Probe : CyclicRotationProbe
+  C5Probe : CyclicRotationProbe
 
 probeLabel : CyclicRotationProbe → String
 probeLabel C2Probe = "C2 axial half-turn fixed subspace"

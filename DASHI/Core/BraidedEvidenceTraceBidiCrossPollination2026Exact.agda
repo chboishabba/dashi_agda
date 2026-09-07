@@ -27,10 +27,18 @@ import DASHI.Combinatorics.ProofCarryingTextileHyperfabricExact as Textile
 ------------------------------------------------------------------------
 
 data StrandRole : Set where
-  provenanceWarp authorityWarp permissionWarp obligationWarp observationWeft proofWeft : StrandRole
+  provenanceWarp : StrandRole
+  authorityWarp : StrandRole
+  permissionWarp : StrandRole
+  obligationWarp : StrandRole
+  observationWeft : StrandRole
+  proofWeft : StrandRole
 
 data CrossingKind : Set where
-  coexistenceCrossing translationCrossing comparisonCrossing corroborationCrossing : CrossingKind
+  coexistenceCrossing : CrossingKind
+  translationCrossing : CrossingKind
+  comparisonCrossing : CrossingKind
+  corroborationCrossing : CrossingKind
 
 record EvidenceStrand : Set where
   constructor evidence-strand

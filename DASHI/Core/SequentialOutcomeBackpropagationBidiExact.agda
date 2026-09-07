@@ -20,16 +20,16 @@ import DASHI.Core.PluralEpistemicProgressMethodologyBidiExact as Progress
 ------------------------------------------------------------------------
 
 data RevisionAction : Set where
-  retainClosure
-  reacquireObservation
-  rechartRepresentation
-  inspectPremise
-  inspectRule
-  reviseModel
-  reformulateConsumer
-  acquireIndependentProvenance
-  seekAuthorityReceipt
-  : RevisionAction
+  retainClosure : RevisionAction
+  reacquireObservation : RevisionAction
+  rechartRepresentation : RevisionAction
+  inspectPremise : RevisionAction
+  inspectRule : RevisionAction
+  reviseModel : RevisionAction
+  reformulateConsumer : RevisionAction
+  acquireIndependentProvenance : RevisionAction
+  seekAuthorityReceipt : RevisionAction
+
 
 revisionFor : Backprop.ReopenCoordinate → RevisionAction
 revisionFor Backprop.noReopen = retainClosure

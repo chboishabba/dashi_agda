@@ -39,7 +39,9 @@ import DASHI.Physics.Closure.NSTriadKNSignedConstituentTreeRound28Exact as Signe
 import DASHI.Physics.Closure.NSTriadKNLuoDuplicateFreeTaxOwnershipRound26Exact as Tax
 
 data LiteralKernelOwnershipOutcome : Set where
-  independentKernel exactZero duplicateExistingOwner : LiteralKernelOwnershipOutcome
+  independentKernel : LiteralKernelOwnershipOutcome
+  exactZero : LiteralKernelOwnershipOutcome
+  duplicateExistingOwner : LiteralKernelOwnershipOutcome
 
 record PhysicalKernelConstituentInstantiation : Set where
   field

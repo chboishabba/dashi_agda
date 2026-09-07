@@ -29,7 +29,9 @@ coarseBinary establishedFalse = false
 coarseBinary unresolvedWithResidual = false
 
 data ResolutionPolicy : Set where
-  actAsTrue actAsFalse holdAndInvestigate : ResolutionPolicy
+  actAsTrue : ResolutionPolicy
+  actAsFalse : ResolutionPolicy
+  holdAndInvestigate : ResolutionPolicy
 
 resolutionPolicy : RichEpistemicState → ResolutionPolicy
 resolutionPolicy establishedTrue = actAsTrue
@@ -60,7 +62,8 @@ binaryProjectionCannotRecoverResolutionPolicy =
 ------------------------------------------------------------------------
 
 data Context : Set where
-  contextHere contextElsewhere : Context
+  contextHere : Context
+  contextElsewhere : Context
 
 data PropositionSubject : Set where
   oneSubject : PropositionSubject
@@ -93,14 +96,16 @@ falseHereDoesNotEstablishFalseEverywhere (falseEverywhere proof) with proof cont
 ------------------------------------------------------------------------
 
 data RepresentationMode : Set where
-  binaryCompressed relationalResidualPreserving : RepresentationMode
+  binaryCompressed : RepresentationMode
+  relationalResidualPreserving : RepresentationMode
 
 retainedCoordinates : RepresentationMode → Nat
 retainedCoordinates binaryCompressed = 1
 retainedCoordinates relationalResidualPreserving = 3
 
 data CommitmentMode : Set where
-  earlyBinaryCommit carryUnresolvedRelation : CommitmentMode
+  earlyBinaryCommit : CommitmentMode
+  carryUnresolvedRelation : CommitmentMode
 
 commitmentFor : RepresentationMode → CommitmentMode
 commitmentFor binaryCompressed = earlyBinaryCommit

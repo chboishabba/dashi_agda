@@ -25,16 +25,20 @@ import DASHI.Culture.IntellectualReceptionSemanticStabiliserParetoAuthorityCross
 ------------------------------------------------------------------------
 
 data SourceResidualStatus : Set where
-  sourceUnresolved sourceRecovered : SourceResidualStatus
+  sourceUnresolved : SourceResidualStatus
+  sourceRecovered : SourceResidualStatus
 
 data ScopeResidualStatus : Set where
-  scopeUnresolved scopeRecovered : ScopeResidualStatus
+  scopeUnresolved : ScopeResidualStatus
+  scopeRecovered : ScopeResidualStatus
 
 data AdmissibilityResidualStatus : Set where
-  admissibilityUnresolved admissibilityRecovered : AdmissibilityResidualStatus
+  admissibilityUnresolved : AdmissibilityResidualStatus
+  admissibilityRecovered : AdmissibilityResidualStatus
 
 data ProvenanceResidualStatus : Set where
-  provenanceUnresolved provenanceRecovered : ProvenanceResidualStatus
+  provenanceUnresolved : ProvenanceResidualStatus
+  provenanceRecovered : ProvenanceResidualStatus
 
 AuthorityResidual : Set
 AuthorityResidual =

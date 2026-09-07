@@ -16,7 +16,8 @@ import DASHI.Algebra.BalancedTernary as BT
 ------------------------------------------------------------------------
 
 data FiniteClaim : Set where
-  present absent : FiniteClaim
+  present : FiniteClaim
+  absent : FiniteClaim
 
 data IsPresent : FiniteClaim → Set where
   presentWitness : IsPresent present

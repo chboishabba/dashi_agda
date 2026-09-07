@@ -22,10 +22,12 @@ import DASHI.Governance.SafeJustSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data ForecastFamily : Set where
-  ets arima : ForecastFamily
+  ets : ForecastFamily
+  arima : ForecastFamily
 
 data SelectionCriterion : Set where
-  aicc timeSeriesCrossValidationMeanStandardError : SelectionCriterion
+  aicc : SelectionCriterion
+  timeSeriesCrossValidationMeanStandardError : SelectionCriterion
 
 record WithinFamilySelection : Set where
   constructor withinFamilySelection

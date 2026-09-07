@@ -28,10 +28,12 @@ import DASHI.Biology.TrustedFriendRelationalGateExact as FriendGate
 ------------------------------------------------------------------------
 
 data EcologyCondition : Set where
-  highDemandCondition repairedCondition : EcologyCondition
+  highDemandCondition : EcologyCondition
+  repairedCondition : EcologyCondition
 
 data RelationCondition : Set where
-  aloneCondition trustedFriendCondition : RelationCondition
+  aloneCondition : RelationCondition
+  trustedFriendCondition : RelationCondition
 
 ecologyFor : EcologyCondition → RelationCondition → Ecology.Ecology
 ecologyFor highDemandCondition aloneCondition = FriendGate.alonePartialEcology

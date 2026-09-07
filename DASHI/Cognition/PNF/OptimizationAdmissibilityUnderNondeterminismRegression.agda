@@ -17,10 +17,12 @@ data Demand : Set where
   demand38 : Demand
 
 data Candidate : Set where
-  object22 object23 : Candidate
+  object22 : Candidate
+  object23 : Candidate
 
 data Observation : Set where
-  selected22 selected23 : Observation
+  selected22 : Observation
+  selected23 : Observation
 
 legacySpecification : RelationalSpecification Demand Candidate Observation
 legacySpecification = record

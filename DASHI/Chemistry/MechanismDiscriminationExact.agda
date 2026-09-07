@@ -19,10 +19,19 @@ import DASHI.Chemistry.TransitionKernel as TK
 ------------------------------------------------------------------------
 
 data PredictionDirection : Set where
-  stronglyDown down unchanged up stronglyUp unresolved : PredictionDirection
+  stronglyDown : PredictionDirection
+  down : PredictionDirection
+  unchanged : PredictionDirection
+  up : PredictionDirection
+  stronglyUp : PredictionDirection
+  unresolved : PredictionDirection
 
 data ResidualStatus : Set where
-  consistent tension discriminating falsified unresolvedResidual : ResidualStatus
+  consistent : ResidualStatus
+  tension : ResidualStatus
+  discriminating : ResidualStatus
+  falsified : ResidualStatus
+  unresolvedResidual : ResidualStatus
 
 record ObservableCoordinate : Set where
   constructor observableCoordinate

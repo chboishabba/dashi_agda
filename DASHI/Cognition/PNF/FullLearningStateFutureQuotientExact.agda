@@ -3,16 +3,20 @@ module DASHI.Cognition.PNF.FullLearningStateFutureQuotientExact where
 open import DASHI.Core.Prelude
 
 data Parameter : Set where
-  neutralParam positiveParam : Parameter
+  neutralParam : Parameter
+  positiveParam : Parameter
 
 data Optimizer : Set where
-  momentumLeft momentumRight : Optimizer
+  momentumLeft : Optimizer
+  momentumRight : Optimizer
 
 data Provenance : Set where
-  curriculumA curriculumB : Provenance
+  curriculumA : Provenance
+  curriculumB : Provenance
 
 data Replay : Set where
-  replayCold replayWarm : Replay
+  replayCold : Replay
+  replayWarm : Replay
 
 data Batch : Set where
   commonBatch : Batch
@@ -88,7 +92,8 @@ learningResidualReopensExact :
 learningResidualReopensExact (learnerState parameter optimizer provenance replay) = refl
 
 data Consumer : Set where
-  inferenceConsumer continuedLearningConsumer : Consumer
+  inferenceConsumer : Consumer
+  continuedLearningConsumer : Consumer
 
 consumerObservation : Consumer → LearnerState → Parameter
 consumerObservation inferenceConsumer state = visibleModel state

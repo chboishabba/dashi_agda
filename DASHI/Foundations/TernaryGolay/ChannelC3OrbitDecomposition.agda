@@ -23,19 +23,26 @@ open import DASHI.Foundations.RecursiveRadixHypervoxel using
 ------------------------------------------------------------------------
 
 data Channel : Set where
-  low-low low-mid low-high : Channel
+  low-low : Channel
+  low-mid : Channel
+  low-high : Channel
   mid-low mid-mid mid-high : Channel
   high-low high-mid high-high : Channel
 
 data DirectedFace : Set where
-  low-to-mid mid-to-high high-to-low : DirectedFace
+  low-to-mid : DirectedFace
+  mid-to-high : DirectedFace
+  high-to-low : DirectedFace
   mid-to-low high-to-mid low-to-high : DirectedFace
 
 data C3Orbit : Set where
-  diagonalOrbit cyclicOrbit antiCyclicOrbit : C3Orbit
+  diagonalOrbit : C3Orbit
+  cyclicOrbit : C3Orbit
+  antiCyclicOrbit : C3Orbit
 
 data S3Orbit : Set where
-  diagonalS3Orbit offDiagonalS3Orbit : S3Orbit
+  diagonalS3Orbit : S3Orbit
+  offDiagonalS3Orbit : S3Orbit
 
 channel : Axis3 → Axis3 → Channel
 channel axis-low axis-low = low-low

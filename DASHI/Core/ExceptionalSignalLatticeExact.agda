@@ -21,10 +21,13 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data SignalMode : Set where
-  quiet signaling : SignalMode
+  quiet : SignalMode
+  signaling : SignalMode
 
 data ExceptionKind : Set where
-  metaBoundary voidState paradoxState : ExceptionKind
+  metaBoundary : ExceptionKind
+  voidState : ExceptionKind
+  paradoxState : ExceptionKind
 
 record ExceptionalSignal : Set where
   constructor exceptionalSignal
@@ -79,7 +82,8 @@ signalingParadoxDominatesQuietVoid = refl
 ------------------------------------------------------------------------
 
 data ControlSurfaceKind : Set where
-  ordinaryValueSurface exceptionalControlSurface : ControlSurfaceKind
+  ordinaryValueSurface : ControlSurfaceKind
+  exceptionalControlSurface : ControlSurfaceKind
 
 ordinaryAndExceptionalAreDistinct :
   ordinaryValueSurface ≡ exceptionalControlSurface → ⊥

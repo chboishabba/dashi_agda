@@ -55,16 +55,16 @@ genocideConventionWrongType = Ontology.wrongTypeRecord
 ------------------------------------------------------------------------
 
 data ConventionElementAxis : Set where
-  protectedGroupAxis
-  enumeratedActAxis
-  specificIntentAxis
-  : ConventionElementAxis
+  protectedGroupAxis : ConventionElementAxis
+  enumeratedActAxis : ConventionElementAxis
+  specificIntentAxis : ConventionElementAxis
+
 
 data ElementState : Set where
-  elementSatisfied
-  elementFailed
-  elementOpen
-  : ElementState
+  elementSatisfied : ElementState
+  elementFailed : ElementState
+  elementOpen : ElementState
+
 
 axisLegalElementKind : ConventionElementAxis → ElementAlgebra.LegalElementKind
 axisLegalElementKind protectedGroupAxis = ElementAlgebra.statutoryElement
@@ -87,10 +87,10 @@ record ConventionElementState : Set where
 open ConventionElementState public
 
 data ConventionWrongTypeStatus : Set where
-  conventionWrongTypeClosed
-  conventionWrongTypeOpen
-  conventionWrongTypeRejectedOnCurrentRecord
-  : ConventionWrongTypeStatus
+  conventionWrongTypeClosed : ConventionWrongTypeStatus
+  conventionWrongTypeOpen : ConventionWrongTypeStatus
+  conventionWrongTypeRejectedOnCurrentRecord : ConventionWrongTypeStatus
+
 
 classifyConventionWrongType : ConventionElementState → ConventionWrongTypeStatus
 classifyConventionWrongType receipt with protectedGroupState receipt
@@ -136,20 +136,20 @@ genocideConventionElementBridge = convention-element-bridge
 ------------------------------------------------------------------------
 
 data AlternativeClassificationTarget : Set where
-  iccprHumanRightsViolationCandidate
-  crimesAgainstHumanityCandidate
-  forcibleChildTransferGenocideInquiryFindingLane
-  domesticStatutoryOrCommonLawWrongCandidate
-  decolonialCulturalGenocideCriticalLane
-  countryRelationalDestructionLane
-  : AlternativeClassificationTarget
+  iccprHumanRightsViolationCandidate : AlternativeClassificationTarget
+  crimesAgainstHumanityCandidate : AlternativeClassificationTarget
+  forcibleChildTransferGenocideInquiryFindingLane : AlternativeClassificationTarget
+  domesticStatutoryOrCommonLawWrongCandidate : AlternativeClassificationTarget
+  decolonialCulturalGenocideCriticalLane : AlternativeClassificationTarget
+  countryRelationalDestructionLane : AlternativeClassificationTarget
+
 
 data RouteAuthority : Set where
-  legalWrongTypeSearch
-  institutionalFindingSearch
-  criticalInterpretiveSearch
-  relationalHarmSearch
-  : RouteAuthority
+  legalWrongTypeSearch : RouteAuthority
+  institutionalFindingSearch : RouteAuthority
+  criticalInterpretiveSearch : RouteAuthority
+  relationalHarmSearch : RouteAuthority
+
 
 record WrongTypeReverseRoute : Set where
   constructor wrong-type-reverse-route
@@ -201,10 +201,10 @@ childTransferToBTHRoute = wrong-type-reverse-route
 ------------------------------------------------------------------------
 
 data ConventionProducerNeed : Set where
-  produceProtectedGroupReceipt
-  produceEnumeratedActReceipt
-  produceSpecificIntentReceipt
-  : ConventionProducerNeed
+  produceProtectedGroupReceipt : ConventionProducerNeed
+  produceEnumeratedActReceipt : ConventionProducerNeed
+  produceSpecificIntentReceipt : ConventionProducerNeed
+
 
 firstMissingProducer : ConventionElementState → ConventionProducerNeed
 firstMissingProducer receipt with protectedGroupState receipt

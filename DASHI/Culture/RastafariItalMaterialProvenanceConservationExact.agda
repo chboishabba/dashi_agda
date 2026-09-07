@@ -17,10 +17,19 @@ import DASHI.Environment.SoilPlantAtmosphereContinuumExact as SPAC
 ------------------------------------------------------------------------
 
 data MaterialKind : Set where
-  waterMaterial nitrogenMaterial carbonMaterial cropMaterial biomassMaterial : MaterialKind
+  waterMaterial : MaterialKind
+  nitrogenMaterial : MaterialKind
+  carbonMaterial : MaterialKind
+  cropMaterial : MaterialKind
+  biomassMaterial : MaterialKind
 
 data ProvenanceStage : Set where
-  source production transformation transfer use returnOrExport : ProvenanceStage
+  source : ProvenanceStage
+  production : ProvenanceStage
+  transformation : ProvenanceStage
+  transfer : ProvenanceStage
+  use : ProvenanceStage
+  returnOrExport : ProvenanceStage
 
 record MaterialProvenanceReceipt : Set where
   constructor materialProvenanceReceipt

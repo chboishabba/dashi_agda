@@ -11,7 +11,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 ------------------------------------------------------------------------
 
 data DivisionCarrier : Set where
-  real complex quaternion : DivisionCarrier
+  real : DivisionCarrier
+  complex : DivisionCarrier
+  quaternion : DivisionCarrier
 
 record MatrixFactor : Set where
   constructor matrixFactor
@@ -45,7 +47,9 @@ moritaType (f ∷ fs) = moritaFactor f ∷ moritaType fs
 ------------------------------------------------------------------------
 
 data CompactFamily : Set where
-  orthogonalFamily unitaryFamily symplecticFamily : CompactFamily
+  orthogonalFamily : CompactFamily
+  unitaryFamily : CompactFamily
+  symplecticFamily : CompactFamily
 
 compactFamily : MatrixFactor → CompactFamily
 compactFamily (matrixFactor real _) = orthogonalFamily

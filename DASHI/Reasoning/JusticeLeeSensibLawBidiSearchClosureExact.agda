@@ -138,7 +138,9 @@ compiledProbeIsDeterminedByTypedResidual consumer residual = refl
 ------------------------------------------------------------------------
 
 data ProbeCost : Set where
-  lowCost mediumCost highCost : ProbeCost
+  lowCost : ProbeCost
+  mediumCost : ProbeCost
+  highCost : ProbeCost
 
 record ProbePolicy : Set where
   constructor probePolicy

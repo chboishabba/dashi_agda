@@ -24,7 +24,8 @@ import DASHI.Core.ExperimentalCoordinateDesignExact as Design
 ------------------------------------------------------------------------
 
 data ObservationRouteKind : Set where
-  instrumentalRoute dialogicRoute : ObservationRouteKind
+  instrumentalRoute : ObservationRouteKind
+  dialogicRoute : ObservationRouteKind
 
 record MixedClosingCandidate {Hidden Experiment Decision : Set}
     (prior : Bidi.ResidualFibre Hidden)

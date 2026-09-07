@@ -28,7 +28,9 @@ data InstitutionalCoordinate : Set where
 
 
 data CoordinateRelation : Set where
-  heldMatched intentionallyVaried unresolvedCoordinate : CoordinateRelation
+  heldMatched : CoordinateRelation
+  intentionallyVaried : CoordinateRelation
+  unresolvedCoordinate : CoordinateRelation
 
 record InstitutionalWorld : Set₁ where
   constructor institutionalWorld
@@ -111,7 +113,10 @@ open ComparativeStructuralMeaning public
 ------------------------------------------------------------------------
 
 data PoliticalEconomyLabel : Set where
-  capitalismLabel cooperativeLabel publicProvisionLabel mixedEconomyLabel : PoliticalEconomyLabel
+  capitalismLabel : PoliticalEconomyLabel
+  cooperativeLabel : PoliticalEconomyLabel
+  publicProvisionLabel : PoliticalEconomyLabel
+  mixedEconomyLabel : PoliticalEconomyLabel
 
 
 record ComparativeInstitutionalMeaningBoundary : Set where

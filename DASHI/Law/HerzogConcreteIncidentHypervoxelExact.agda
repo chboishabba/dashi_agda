@@ -10,36 +10,36 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data IncidentKind : Set where
-  authorisedPrayerInterruption
-  whiteShirtPunching
-  ricketsonArrest
-  teenagerDetention
-  grandmotherBackInjury
-  disabledPersonForce
-  firstNationsOrganiserArrest
-  blockedExitOrCrowdCrushRisk
-  ocSprayWithoutPriorDirection
-  searchWithoutApparentBasis
-  legalObserverForce
-  bodycamBoastAfterPunching
+  authorisedPrayerInterruption : IncidentKind
+  whiteShirtPunching : IncidentKind
+  ricketsonArrest : IncidentKind
+  teenagerDetention : IncidentKind
+  grandmotherBackInjury : IncidentKind
+  disabledPersonForce : IncidentKind
+  firstNationsOrganiserArrest : IncidentKind
+  blockedExitOrCrowdCrushRisk : IncidentKind
+  ocSprayWithoutPriorDirection : IncidentKind
+  searchWithoutApparentBasis : IncidentKind
+  legalObserverForce : IncidentKind
+  bodycamBoastAfterPunching : IncidentKind
   policeAssaultedOfficerCounterclaim : IncidentKind
 
 data IncidentSourceRole : Set where
-  policeAdmission
-  abcVerifiedVideo
-  abcWitnessReport
-  legalObserversFinding
-  civilPleading
-  bodyWornVideo
-  policePublicAccount
-  leccInvestigationScope
+  policeAdmission : IncidentSourceRole
+  abcVerifiedVideo : IncidentSourceRole
+  abcWitnessReport : IncidentSourceRole
+  legalObserversFinding : IncidentSourceRole
+  civilPleading : IncidentSourceRole
+  bodyWornVideo : IncidentSourceRole
+  policePublicAccount : IncidentSourceRole
+  leccInvestigationScope : IncidentSourceRole
   finalAdjudicatedFinding : IncidentSourceRole
 
 data ClosureState : Set where
-  sourceBacked
-  reportedOrAlleged
-  independentlyInvestigated
-  adjudicated
+  sourceBacked : ClosureState
+  reportedOrAlleged : ClosureState
+  independentlyInvestigated : ClosureState
+  adjudicated : ClosureState
   unresolved : ClosureState
 
 record HerzogIncidentHypervoxel : Set where
@@ -173,25 +173,25 @@ canonicalHerzogIncidentBoundary =
 ------------------------------------------------------------------------
 
 data IncidentAuditClaim : Set where
-  prayerInterventionLawful
-  whiteShirtForceLawful
-  ricketsonArrestLawful
-  teenagerForceLawful
-  elderlyInjuryForceLawful
-  blockedExitOperationallyJustified
-  ocSprayIncidentLawful
-  searchIncidentLawful
+  prayerInterventionLawful : IncidentAuditClaim
+  whiteShirtForceLawful : IncidentAuditClaim
+  ricketsonArrestLawful : IncidentAuditClaim
+  teenagerForceLawful : IncidentAuditClaim
+  elderlyInjuryForceLawful : IncidentAuditClaim
+  blockedExitOperationallyJustified : IncidentAuditClaim
+  ocSprayIncidentLawful : IncidentAuditClaim
+  searchIncidentLawful : IncidentAuditClaim
   operationWideSystemicPattern : IncidentAuditClaim
 
 data IncidentAuditProducer : Set where
-  prayerCommandTransmissionAndAuthorityProducer
-  whiteShirtFullSequenceAndForceAuthorityProducer
-  ricketsonArrestGroundsAndForceProducer
-  teenagerCompletePrecursorProducer
-  elderlyIncidentMedicalAndForceProducer
-  exitGeometryAndCommandProducer
-  ocSprayDirectionAndForceAuthorityProducer
-  searchGroundsProducer
+  prayerCommandTransmissionAndAuthorityProducer : IncidentAuditProducer
+  whiteShirtFullSequenceAndForceAuthorityProducer : IncidentAuditProducer
+  ricketsonArrestGroundsAndForceProducer : IncidentAuditProducer
+  teenagerCompletePrecursorProducer : IncidentAuditProducer
+  elderlyIncidentMedicalAndForceProducer : IncidentAuditProducer
+  exitGeometryAndCommandProducer : IncidentAuditProducer
+  ocSprayDirectionAndForceAuthorityProducer : IncidentAuditProducer
+  searchGroundsProducer : IncidentAuditProducer
   crossIncidentPatternProducer : IncidentAuditProducer
 
 reverseIncidentAudit : IncidentAuditClaim → IncidentAuditProducer

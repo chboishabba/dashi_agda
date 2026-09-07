@@ -38,7 +38,10 @@ MCube4 : Nat → Set
 MCube4 = Cube4
 
 data VertexCubeCorner : Set where
-  c0000 c0001 c0010 c0011 : VertexCubeCorner
+  c0000 : VertexCubeCorner
+  c0001 : VertexCubeCorner
+  c0010 : VertexCubeCorner
+  c0011 : VertexCubeCorner
   c0100 c0101 c0110 c0111 : VertexCubeCorner
   c1000 c1001 c1010 c1011 : VertexCubeCorner
   c1100 c1101 c1110 c1111 : VertexCubeCorner

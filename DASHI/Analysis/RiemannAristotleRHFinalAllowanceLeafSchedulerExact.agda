@@ -26,18 +26,20 @@ import DASHI.Analysis.RiemannG2FinalSplitComplementOrderTransportCompilerExact a
 ------------------------------------------------------------------------
 
 data FinalRHAnalyticLeaf : Set where
-  proveUniversalPoleQuotientOffAllowancePayment
-  proveSameTaperGammaAllowancePayment
-  attachOwnedClusterMarginSameObject
-  transportAllowancePaymentsToFinalOrder
-  rebuildStrictCombinedBudget
-  rebuildFinalContradictionCompiler
-  reopenDeterminantDiagnosticAsFinalCarrier
-  reopenGapSplitClusteringAsForwardProducer
-  : FinalRHAnalyticLeaf
+  proveUniversalPoleQuotientOffAllowancePayment : FinalRHAnalyticLeaf
+  proveSameTaperGammaAllowancePayment : FinalRHAnalyticLeaf
+  attachOwnedClusterMarginSameObject : FinalRHAnalyticLeaf
+  transportAllowancePaymentsToFinalOrder : FinalRHAnalyticLeaf
+  rebuildStrictCombinedBudget : FinalRHAnalyticLeaf
+  rebuildFinalContradictionCompiler : FinalRHAnalyticLeaf
+  reopenDeterminantDiagnosticAsFinalCarrier : FinalRHAnalyticLeaf
+  reopenGapSplitClusteringAsForwardProducer : FinalRHAnalyticLeaf
+
 
 data FinalLeafState : Set where
-  open downstream pruned : FinalLeafState
+  open : FinalLeafState
+  downstream : FinalLeafState
+  pruned : FinalLeafState
 
 finalLeafState : FinalRHAnalyticLeaf → FinalLeafState
 finalLeafState proveUniversalPoleQuotientOffAllowancePayment = open

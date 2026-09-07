@@ -36,10 +36,12 @@ data GlobalSimpleSummary : Set where
   twoThirdsSimpleSummary : GlobalSimpleSummary
 
 data LocalGapPattern : Set where
-  locallyClustered locallyUnclustered : LocalGapPattern
+  locallyClustered : LocalGapPattern
+  locallyUnclustered : LocalGapPattern
 
 data FiniteZeroWorld : Set where
-  sameGlobalClustered sameGlobalUnclustered : FiniteZeroWorld
+  sameGlobalClustered : FiniteZeroWorld
+  sameGlobalUnclustered : FiniteZeroWorld
 
 globalSimpleView : FiniteZeroWorld → GlobalSimpleSummary
 globalSimpleView sameGlobalClustered = twoThirdsSimpleSummary

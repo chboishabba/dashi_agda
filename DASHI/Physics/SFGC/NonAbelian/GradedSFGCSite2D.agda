@@ -14,7 +14,9 @@ open import DASHI.Physics.Closure.TriadicMatrixGenerationTheorem as TMG
 -- It does not claim a quotient theorem or a carrier-level multiplication law.
 
 data WeakLane : Set where
-  lane7 lane11 lane13 : WeakLane
+  lane7 : WeakLane
+  lane11 : WeakLane
+  lane13 : WeakLane
 
 laneVal : WeakLane → Nat
 laneVal lane7 = 7

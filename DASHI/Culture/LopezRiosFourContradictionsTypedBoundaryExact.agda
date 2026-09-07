@@ -51,7 +51,8 @@ data StructureState : Set where
   structureUnchanged : StructureState
 
 data IndividualState : Set where
-  distressed adapted : IndividualState
+  distressed : IndividualState
+  adapted : IndividualState
 
 record SocialPsychState : Set where
   constructor social-psych-state

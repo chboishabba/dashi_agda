@@ -43,7 +43,8 @@ earlyLateAcquisitionShareKind :
 earlyLateAcquisitionShareKind = refl
 
 data EdgeInstanceCase : Set where
-  earlyAcquisitionInstance lateAcquisitionInstance : EdgeInstanceCase
+  earlyAcquisitionInstance : EdgeInstanceCase
+  lateAcquisitionInstance : EdgeInstanceCase
 
 coarseAcquisitionKind : EdgeInstanceCase → TransportEdgeKind
 coarseAcquisitionKind _ = authorityAcquisition
@@ -72,7 +73,8 @@ sameEdgeKindCannotRecoverEdgeInstance =
 ------------------------------------------------------------------------
 
 data MovementRoute : Set where
-  earlyRoute lateRoute : MovementRoute
+  earlyRoute : MovementRoute
+  lateRoute : MovementRoute
 
 data EdgeOccursInRoute : TransportEdgeInstance → MovementRoute → Set where
   earlyAcquireOccurs : EdgeOccursInRoute earlyAcquire01 earlyRoute

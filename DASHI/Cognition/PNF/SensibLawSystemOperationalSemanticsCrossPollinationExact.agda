@@ -29,9 +29,9 @@ import DASHI.Law.HerzogPoliceCountryColonialityCrossPollinationExact as Herzog
 ------------------------------------------------------------------------
 
 data FormalisationMergeState : Set where
-  mergedOnMaster
-  openDraftExternalBranch
-  : FormalisationMergeState
+  mergedOnMaster : FormalisationMergeState
+  openDraftExternalBranch : FormalisationMergeState
+
 
 record FormalisationProvenanceReceipt : Set where
   constructor formalisation-provenance-receipt
@@ -79,15 +79,15 @@ aiMarxCapitalBranchReceipt = formalisation-provenance-receipt
 ------------------------------------------------------------------------
 
 data OperationalLayer : Set where
-  declaredLayer
-  authorisedLayer
-  transmittedLayer
-  receivedLayer
-  executedLayer
-  realisedMaterialLayer
-  distributionalLayer
-  correctionFeedbackLayer
-  : OperationalLayer
+  declaredLayer : OperationalLayer
+  authorisedLayer : OperationalLayer
+  transmittedLayer : OperationalLayer
+  receivedLayer : OperationalLayer
+  executedLayer : OperationalLayer
+  realisedMaterialLayer : OperationalLayer
+  distributionalLayer : OperationalLayer
+  correctionFeedbackLayer : OperationalLayer
+
 
 record SystemOperationalSemantics : Set where
   constructor system-operational-semantics
@@ -222,19 +222,19 @@ remedyCanCoordinateWithoutEpistemicFusion = refl
 ------------------------------------------------------------------------
 
 data OperationalDomain : Set where
-  terraNulliusDomain
-  billyRemedyDomain
-  herzogPolicingDomain
-  aiInfrastructureEconomicsDomain
-  : OperationalDomain
+  terraNulliusDomain : OperationalDomain
+  billyRemedyDomain : OperationalDomain
+  herzogPolicingDomain : OperationalDomain
+  aiInfrastructureEconomicsDomain : OperationalDomain
+
 
 data OperationalFailureMode : Set where
-  declarationRealisationGap
-  authorisationExecutionGap
-  labelDistributionGap
-  recognitionAuthorityGap
-  correctionFeedbackGap
-  : OperationalFailureMode
+  declarationRealisationGap : OperationalFailureMode
+  authorisationExecutionGap : OperationalFailureMode
+  labelDistributionGap : OperationalFailureMode
+  recognitionAuthorityGap : OperationalFailureMode
+  correctionFeedbackGap : OperationalFailureMode
+
 
 record CrossDomainOperationalBridge : Set where
   constructor cross-domain-operational-bridge
@@ -291,20 +291,20 @@ aiEconomicsBridge = cross-domain-operational-bridge
 ------------------------------------------------------------------------
 
 data SystemEvaluationConsumer : Set where
-  declaredComplianceConsumer
-  realisedRemedyConsumer
-  lawfulExecutionConsumer
-  materialDistributionConsumer
-  sovereigntyAuthorityConsumer
-  : SystemEvaluationConsumer
+  declaredComplianceConsumer : SystemEvaluationConsumer
+  realisedRemedyConsumer : SystemEvaluationConsumer
+  lawfulExecutionConsumer : SystemEvaluationConsumer
+  materialDistributionConsumer : SystemEvaluationConsumer
+  sovereigntyAuthorityConsumer : SystemEvaluationConsumer
+
 
 data SystemEvaluationSurface : Set where
-  declarationSurface
-  implementationSurface
-  executionSurface
-  distributionSurface
-  authoritySurface
-  : SystemEvaluationSurface
+  declarationSurface : SystemEvaluationSurface
+  implementationSurface : SystemEvaluationSurface
+  executionSurface : SystemEvaluationSurface
+  distributionSurface : SystemEvaluationSurface
+  authoritySurface : SystemEvaluationSurface
+
 
 requiredSurface : SystemEvaluationConsumer → SystemEvaluationSurface
 requiredSurface declaredComplianceConsumer = declarationSurface

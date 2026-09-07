@@ -113,7 +113,9 @@ couplingRaisesSupportExactly = refl
 ------------------------------------------------------------------------
 
 data NatOrdering : Set where
-  less equal greater : NatOrdering
+  less : NatOrdering
+  equal : NatOrdering
+  greater : NatOrdering
 
 compareNat : Nat → Nat → NatOrdering
 compareNat zero zero = equal

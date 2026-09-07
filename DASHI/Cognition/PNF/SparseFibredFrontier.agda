@@ -22,7 +22,8 @@ data BoundaryCarrier : Set where
   explicitScopeCarrier : BoundaryCarrier
 
 data BoundaryAdmission : Set where
-  admittedBoundary rejectedInterior : BoundaryAdmission
+  admittedBoundary : BoundaryAdmission
+  rejectedInterior : BoundaryAdmission
 
 data OutsideObservation : BoundaryAdmission → BoundaryCarrier → Set where
   observePromotedExport :
@@ -112,7 +113,9 @@ open WitnessedActorBinding public
 ------------------------------------------------------------------------
 
 data WitnessMultiplicity : Set where
-  noWitness oneWitness severalWitnesses : WitnessMultiplicity
+  noWitness : WitnessMultiplicity
+  oneWitness : WitnessMultiplicity
+  severalWitnesses : WitnessMultiplicity
 
 data FrontierOutcome : WitnessMultiplicity → Set where
   noLocalWitness : FrontierOutcome noWitness

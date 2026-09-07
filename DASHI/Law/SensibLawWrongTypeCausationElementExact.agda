@@ -25,11 +25,11 @@ import DASHI.Law.SensibLawCausationQualifiedLiabilityBridgeExact as Qualified
 ------------------------------------------------------------------------
 
 data CausationElementKind : Set where
-  ordinaryFactualCausationElement
-  exceptionalFactualCausationElement
-  scopeOfLiabilityElement
-  causationElementKindUnresolved
-  : CausationElementKind
+  ordinaryFactualCausationElement : CausationElementKind
+  exceptionalFactualCausationElement : CausationElementKind
+  scopeOfLiabilityElement : CausationElementKind
+  causationElementKindUnresolved : CausationElementKind
+
 
 record WrongTypeCausationElementDeclaration : Set₁ where
   constructor wrongTypeCausationElementDeclaration
@@ -120,11 +120,11 @@ open ScopeElementPayment public
 ------------------------------------------------------------------------
 
 data CausationElementProducer : Set where
-  ordinaryButForProducer
-  exceptionalEstablishedPrinciplesProducer
-  scopeResponsibilityProducer
-  causationProducerUnresolved
-  : CausationElementProducer
+  ordinaryButForProducer : CausationElementProducer
+  exceptionalEstablishedPrinciplesProducer : CausationElementProducer
+  scopeResponsibilityProducer : CausationElementProducer
+  causationProducerUnresolved : CausationElementProducer
+
 
 producerFor : CausationElementKind → CausationElementProducer
 producerFor ordinaryFactualCausationElement = ordinaryButForProducer
@@ -149,12 +149,12 @@ open MissingCausationElementDemand public
 ------------------------------------------------------------------------
 
 data CausationPaymentMismatch : Set where
-  scopeOfferedForFactualCausation
-  factualCausationOfferedForScope
-  parserCandidateOfferedAsElementPayment
-  differentWrongTypeOffered
-  differentElementOffered
-  : CausationPaymentMismatch
+  scopeOfferedForFactualCausation : CausationPaymentMismatch
+  factualCausationOfferedForScope : CausationPaymentMismatch
+  parserCandidateOfferedAsElementPayment : CausationPaymentMismatch
+  differentWrongTypeOffered : CausationPaymentMismatch
+  differentElementOffered : CausationPaymentMismatch
+
 
 record RejectedCausationElementPayment : Set where
   constructor rejectedCausationElementPayment

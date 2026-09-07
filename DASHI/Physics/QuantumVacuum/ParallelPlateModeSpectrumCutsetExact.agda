@@ -20,7 +20,8 @@ import DASHI.Physics.QuantumVacuum.PhysicalQuantities as Q
 ------------------------------------------------------------------------
 
 data Polarisation : Set where
-  TE TM : Polarisation
+  TE : Polarisation
+  TM : Polarisation
 
 record ParallelPlateModeIndex (Transverse : Set) : Set where
   constructor parallelPlateMode

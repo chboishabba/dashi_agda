@@ -15,7 +15,8 @@ open import Data.Nat using (ℕ; _≤_)
 ------------------------------------------------------------------------
 
 data Scope : Set where
-  selectedDocument corpusGlobal : Scope
+  selectedDocument : Scope
+  corpusGlobal : Scope
 
 data AnchorEvaluation : Scope → Set where
   documentScopedAnchor : AnchorEvaluation selectedDocument
@@ -24,7 +25,8 @@ corpusGlobalAnchorForbidden : AnchorEvaluation corpusGlobal → ⊥
 corpusGlobalAnchorForbidden ()
 
 data ExactSupportAvailability : Set where
-  exactSupportPresent exactSupportAbsent : ExactSupportAvailability
+  exactSupportPresent : ExactSupportAvailability
+  exactSupportAbsent : ExactSupportAvailability
 
 data AnchorRoute : ExactSupportAvailability → Set where
   exactTokenSupportRoute : AnchorRoute exactSupportPresent
@@ -57,7 +59,9 @@ record DocumentAnchorCarrier (carrier : DocumentCarrier) : Set where
 open DocumentAnchorCarrier public
 
 data EvidenceLane : Set where
-  appositionLane properNameLane aliasLane : EvidenceLane
+  appositionLane : EvidenceLane
+  properNameLane : EvidenceLane
+  aliasLane : EvidenceLane
 
 -- All parser-evidence lanes consume the same document anchor carrier. This is
 -- the formal counterpart of SQL MATERIALIZED doc_anchor.

@@ -8,10 +8,16 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data EvidenceNode : Set where
-  officerStatement bodyCamera agencyDatabase agencySummary independentWitness medicalRecord : EvidenceNode
+  officerStatement : EvidenceNode
+  bodyCamera : EvidenceNode
+  agencyDatabase : EvidenceNode
+  agencySummary : EvidenceNode
+  independentWitness : EvidenceNode
+  medicalRecord : EvidenceNode
 
 data ProvenanceRelation : Set where
-  derivesFrom independentOf : ProvenanceRelation
+  derivesFrom : ProvenanceRelation
+  independentOf : ProvenanceRelation
 
 record ProvenanceEdge : Set where
   constructor provenanceEdge
@@ -66,10 +72,14 @@ canonicalSharedProducer = sharedUltimateProducer
 ------------------------------------------------------------------------
 
 data ReceiptMultiplicity : Set where
-  oneReceipt twoReceipts threeOrMoreReceipts : ReceiptMultiplicity
+  oneReceipt : ReceiptMultiplicity
+  twoReceipts : ReceiptMultiplicity
+  threeOrMoreReceipts : ReceiptMultiplicity
 
 data IndependenceState : Set where
-  independent dependent independenceUnresolved : IndependenceState
+  independent : IndependenceState
+  dependent : IndependenceState
+  independenceUnresolved : IndependenceState
 
 record CorroborationSurface : Set where
   constructor corroborationSurface
@@ -107,10 +117,12 @@ canonicalProvenanceDagBoundary =
 ------------------------------------------------------------------------
 
 data ProvenanceConsumer : Set where
-  existenceOfRecord independentCorroborationConsumer : ProvenanceConsumer
+  existenceOfRecord : ProvenanceConsumer
+  independentCorroborationConsumer : ProvenanceConsumer
 
 data ProvenanceObligation : Set where
-  anyReceiptReceipt independentProducerReceipt : ProvenanceObligation
+  anyReceiptReceipt : ProvenanceObligation
+  independentProducerReceipt : ProvenanceObligation
 
 reverseProvenance : ProvenanceConsumer → ProvenanceObligation
 reverseProvenance existenceOfRecord = anyReceiptReceipt

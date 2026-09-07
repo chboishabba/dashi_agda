@@ -13,7 +13,10 @@ record FiniteInstance {b : Level} (Background : Set b) : Set b where
 open FiniteInstance public
 
 data FiniteEvidenceKind : Set where
-  exactFinite rationalFinite intervalFinite floatingFinite : FiniteEvidenceKind
+  exactFinite : FiniteEvidenceKind
+  rationalFinite : FiniteEvidenceKind
+  intervalFinite : FiniteEvidenceKind
+  floatingFinite : FiniteEvidenceKind
 
 record FiniteCertificate
   {b c : Level}

@@ -19,14 +19,14 @@ import DASHI.Law.SensibLawProofSearchResultAssessmentExact as Result
 ------------------------------------------------------------------------
 
 data ArgumentNodeStatus : Set where
-  premisePaid
-  premiseContested
-  premiseMissing
-  premiseInapplicable
-  premiseAuthorityBlocked
-  conclusionCandidate
-  conclusionAdmitted
-  : ArgumentNodeStatus
+  premisePaid : ArgumentNodeStatus
+  premiseContested : ArgumentNodeStatus
+  premiseMissing : ArgumentNodeStatus
+  premiseInapplicable : ArgumentNodeStatus
+  premiseAuthorityBlocked : ArgumentNodeStatus
+  conclusionCandidate : ArgumentNodeStatus
+  conclusionAdmitted : ArgumentNodeStatus
+
 
 record ArgumentNode : Set where
   constructor argumentNode

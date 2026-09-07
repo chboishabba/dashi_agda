@@ -124,7 +124,9 @@ open ResidualDomination public
 ------------------------------------------------------------------------
 
 data EstimateStrategy : Set where
-  positiveMajorant signedBlockCancellation modifiedEnergy : EstimateStrategy
+  positiveMajorant : EstimateStrategy
+  signedBlockCancellation : EstimateStrategy
+  modifiedEnergy : EstimateStrategy
 
 record ClasswisePromotionCertificate
     {c s : Level}

@@ -26,7 +26,8 @@ import DASHI.Analysis.RiemannAristotleZetaLocalCountLeanReturnExact as Z38
 ------------------------------------------------------------------------
 
 data CrossProverAuthority8894 : Set where
-  checkedLeanReturn8894 openAgdaTransport : CrossProverAuthority8894
+  checkedLeanReturn8894 : CrossProverAuthority8894
+  openAgdaTransport : CrossProverAuthority8894
 
 data GapSplitRouteState : Set where
   optimizedCriterionAvailable : GapSplitRouteState

@@ -18,47 +18,47 @@ import DASHI.Law.SensibLawCitationAuthorityFollowExact as Follow
 ------------------------------------------------------------------------
 
 data CitationUseStatus : Set where
-  citedMention
-  quotedUse
-  reliedOnUse
-  adoptedUse
-  appliedUse
-  followedUse
-  distinguishedUse
-  criticisedUse
-  rejectedUse
-  overruledUse
-  historicalBackgroundUse
-  partySubmissionUse
-  citationUseUnresolved
-  : CitationUseStatus
+  citedMention : CitationUseStatus
+  quotedUse : CitationUseStatus
+  reliedOnUse : CitationUseStatus
+  adoptedUse : CitationUseStatus
+  appliedUse : CitationUseStatus
+  followedUse : CitationUseStatus
+  distinguishedUse : CitationUseStatus
+  criticisedUse : CitationUseStatus
+  rejectedUse : CitationUseStatus
+  overruledUse : CitationUseStatus
+  historicalBackgroundUse : CitationUseStatus
+  partySubmissionUse : CitationUseStatus
+  citationUseUnresolved : CitationUseStatus
+
 
 data JudicialSegmentKind : Set where
-  majorityReasonsSegment
-  pluralityReasonsSegment
-  concurringReasonsSegment
-  dissentSegment
-  partySubmissionSegment
-  factualBackgroundSegment
-  orderSegment
-  segmentUnresolved
-  : JudicialSegmentKind
+  majorityReasonsSegment : JudicialSegmentKind
+  pluralityReasonsSegment : JudicialSegmentKind
+  concurringReasonsSegment : JudicialSegmentKind
+  dissentSegment : JudicialSegmentKind
+  partySubmissionSegment : JudicialSegmentKind
+  factualBackgroundSegment : JudicialSegmentKind
+  orderSegment : JudicialSegmentKind
+  segmentUnresolved : JudicialSegmentKind
+
 
 data AuthorityTreatmentStatus : Set where
-  treatmentPositive
-  treatmentNegative
-  treatmentNeutral
-  treatmentMixed
-  treatmentUnresolved
-  : AuthorityTreatmentStatus
+  treatmentPositive : AuthorityTreatmentStatus
+  treatmentNegative : AuthorityTreatmentStatus
+  treatmentNeutral : AuthorityTreatmentStatus
+  treatmentMixed : AuthorityTreatmentStatus
+  treatmentUnresolved : AuthorityTreatmentStatus
+
 
 data CurrentAuthorityStatus : Set where
-  currentAuthorityUnresolved
-  currentBindingCandidate
-  currentPersuasiveCandidate
-  historicalOnlyCandidate
-  supersededCandidate
-  : CurrentAuthorityStatus
+  currentAuthorityUnresolved : CurrentAuthorityStatus
+  currentBindingCandidate : CurrentAuthorityStatus
+  currentPersuasiveCandidate : CurrentAuthorityStatus
+  historicalOnlyCandidate : CurrentAuthorityStatus
+  supersededCandidate : CurrentAuthorityStatus
+
 
 record PropositionCitationUse : Set₁ where
   constructor propositionCitationUse
@@ -109,11 +109,11 @@ open CitationUseFromFollow public
 ------------------------------------------------------------------------
 
 data SourceVerificationStatus : Set where
-  sourceSupportVerified
-  sourceSupportContradicted
-  sourceSupportPartial
-  sourceSupportUnresolved
-  : SourceVerificationStatus
+  sourceSupportVerified : SourceVerificationStatus
+  sourceSupportContradicted : SourceVerificationStatus
+  sourceSupportPartial : SourceVerificationStatus
+  sourceSupportUnresolved : SourceVerificationStatus
+
 
 record SourceVerificationAssessment : Set₁ where
   constructor sourceVerificationAssessment

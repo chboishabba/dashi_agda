@@ -19,12 +19,12 @@ import DASHI.Core.TechnicalExternalisationDepthBidiExact as X
 ------------------------------------------------------------------------
 
 data BridgeStage : Set where
-  custodyEvidence
-  eventTimePossession
-  criticalityAssessment
-  counterfactualImpact
-  matchedDepartureComparison
-  : BridgeStage
+  custodyEvidence : BridgeStage
+  eventTimePossession : BridgeStage
+  criticalityAssessment : BridgeStage
+  counterfactualImpact : BridgeStage
+  matchedDepartureComparison : BridgeStage
+
 
 record CustodyCriticalityBridgeReceipt : Set where
   constructor custody-criticality-bridge-receipt
@@ -128,12 +128,11 @@ canonicalCustodyCriticalityDisruptionBoundary = custody-criticality-disruption-b
   true refl
 
 data ReconciledReverseTarget : Set where
-  acquireSameCarrierCustody
-  acquireEventTimeOperationalUse
-  acquireUniquenessReceipt
-  acquireNonPublicnessReceipt
-  acquireIntegrationBreadthReceipt
-  acquireReplacementDifficultyReceipt
-  acquireMeasuredDepartureImpact
-  acquireMatchedOrdinaryDepartureControl
-  : ReconciledReverseTarget
+  acquireSameCarrierCustody : ReconciledReverseTarget
+  acquireEventTimeOperationalUse : ReconciledReverseTarget
+  acquireUniquenessReceipt : ReconciledReverseTarget
+  acquireNonPublicnessReceipt : ReconciledReverseTarget
+  acquireIntegrationBreadthReceipt : ReconciledReverseTarget
+  acquireReplacementDifficultyReceipt : ReconciledReverseTarget
+  acquireMeasuredDepartureImpact : ReconciledReverseTarget
+  acquireMatchedOrdinaryDepartureControl : ReconciledReverseTarget

@@ -24,7 +24,10 @@ import DASHI.Foundations.RecursiveRadixHypervoxel as Hyper
 ------------------------------------------------------------------------
 
 data Cell : Set where
-  startCell threatIntermediate safeIntermediate goalCell : Cell
+  startCell : Cell
+  threatIntermediate : Cell
+  safeIntermediate : Cell
+  goalCell : Cell
 
 data Edge : Cell → Cell → Set where
   startThreat : Edge startCell threatIntermediate
@@ -73,10 +76,13 @@ samePastAndFutureAdmitDistinctIntermediateCells :
 samePastAndFutureAdmitDistinctIntermediateCells ()
 
 data FutureBoundaryKind : Set where
-  actualPostselected predictedFuture desiredFuture : FutureBoundaryKind
+  actualPostselected : FutureBoundaryKind
+  predictedFuture : FutureBoundaryKind
+  desiredFuture : FutureBoundaryKind
 
 data FutureConstraint : Set where
-  avoidThreatGoal flexibleSafetyGoal : FutureConstraint
+  avoidThreatGoal : FutureConstraint
+  flexibleSafetyGoal : FutureConstraint
 
 chosenIntermediate : FutureConstraint → Cell
 chosenIntermediate avoidThreatGoal = threatIntermediate
@@ -93,7 +99,8 @@ samePastDifferentFutureConstraintChangesSection ()
 ------------------------------------------------------------------------
 
 data EmbodiedHistory : Set where
-  flexibleHistory threatBiasedHistory : EmbodiedHistory
+  flexibleHistory : EmbodiedHistory
+  threatBiasedHistory : EmbodiedHistory
 
 historyConditionedIntermediate : EmbodiedHistory → FutureConstraint → Cell
 historyConditionedIntermediate flexibleHistory flexibleSafetyGoal = safeIntermediate

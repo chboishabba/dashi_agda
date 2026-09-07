@@ -17,7 +17,12 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 ------------------------------------------------------------------------
 
 data CoordinateMeaning : Set where
-  shellIndex modeIndex orientation helicity permutation realityOrbit : CoordinateMeaning
+  shellIndex : CoordinateMeaning
+  modeIndex : CoordinateMeaning
+  orientation : CoordinateMeaning
+  helicity : CoordinateMeaning
+  permutation : CoordinateMeaning
+  realityOrbit : CoordinateMeaning
   angularSector phaseSector multiplicityResidue unexplained : CoordinateMeaning
 
 ------------------------------------------------------------------------
@@ -153,7 +158,8 @@ open ExactLegacyPromotion public
 ------------------------------------------------------------------------
 
 data LegacyDisposition : Set where
-  retainValidatedSubtype replaceWithPhysicalCode : LegacyDisposition
+  retainValidatedSubtype : LegacyDisposition
+  replaceWithPhysicalCode : LegacyDisposition
 
 record LegacyCoordinateDecision : Set where
   field

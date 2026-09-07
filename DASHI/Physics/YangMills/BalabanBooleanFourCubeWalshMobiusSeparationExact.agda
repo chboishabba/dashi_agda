@@ -55,7 +55,9 @@ walshIsNotMobiusOnSameCarrier ()
 ------------------------------------------------------------------------
 
 data AdjacentPermutation4 : Set where
-  swap01 swap12 swap23 : AdjacentPermutation4
+  swap01 : AdjacentPermutation4
+  swap12 : AdjacentPermutation4
+  swap23 : AdjacentPermutation4
 
 permuteSubset : AdjacentPermutation4 → Cube.Subset4 → Cube.Subset4
 permuteSubset swap01 Cube.empty = Cube.empty

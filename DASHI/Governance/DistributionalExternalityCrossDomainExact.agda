@@ -46,7 +46,8 @@ canonicalDistributionallyCoveredHighImpact =
     Dist.canonicalDistributionalCoverage
 
 data DistributionResidual : Set where
-  distributionResolved distributionUnresolved : DistributionResidual
+  distributionResolved : DistributionResidual
+  distributionUnresolved : DistributionResidual
 
 executionCoverage : DistributionResidual → Execution.CoverageState
 executionCoverage distributionResolved = Execution.completeCoverage
@@ -95,7 +96,8 @@ industrialSameMachineryStillDoesNotFixDistribution =
 ------------------------------------------------------------------------
 
 data EducationDistributionState : Set where
-  sameGainLowLearnerBurden sameGainHighLearnerBurden : EducationDistributionState
+  sameGainLowLearnerBurden : EducationDistributionState
+  sameGainHighLearnerBurden : EducationDistributionState
 
 data EducationAggregate : Set where sameMeasuredLearningGain : EducationAggregate
 

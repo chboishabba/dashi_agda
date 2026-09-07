@@ -50,7 +50,9 @@ rawAscendedPlateauCannotBypassSelection :
 rawAscendedPlateauCannotBypassSelection ()
 
 data ReconstructionBackend : Set where
-  poisson ballPivoting splatMesh : ReconstructionBackend
+  poisson : ReconstructionBackend
+  ballPivoting : ReconstructionBackend
+  splatMesh : ReconstructionBackend
 
 record BackendReceipt : Set where
   constructor backendReceipt

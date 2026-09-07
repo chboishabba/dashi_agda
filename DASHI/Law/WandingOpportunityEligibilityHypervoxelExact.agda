@@ -10,16 +10,24 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data OpportunityState : Set where
-  opportunityPresent opportunityAbsent opportunityUnresolved : OpportunityState
+  opportunityPresent : OpportunityState
+  opportunityAbsent : OpportunityState
+  opportunityUnresolved : OpportunityState
 
 data EligibilityState : Set where
-  eligible ineligible eligibilityUnresolved : EligibilityState
+  eligible : EligibilityState
+  ineligible : EligibilityState
+  eligibilityUnresolved : EligibilityState
 
 data SelectionState : Set where
-  selected notSelected selectionUnresolved : SelectionState
+  selected : SelectionState
+  notSelected : SelectionState
+  selectionUnresolved : SelectionState
 
 data GroupState : Set where
-  targetGroup comparisonGroup groupUnresolved : GroupState
+  targetGroup : GroupState
+  comparisonGroup : GroupState
+  groupUnresolved : GroupState
 
 record OpportunityEligibilityHypervoxel : Set where
   constructor opportunityEligibilityHypervoxel
@@ -113,10 +121,14 @@ canonicalOpportunityEligibilityBoundary =
 ------------------------------------------------------------------------
 
 data OpportunityConsumer : Set where
-  exposureOpportunityClaim eligibilityClaim conditionalSelectionClaim : OpportunityConsumer
+  exposureOpportunityClaim : OpportunityConsumer
+  eligibilityClaim : OpportunityConsumer
+  conditionalSelectionClaim : OpportunityConsumer
 
 data OpportunityProducer : Set where
-  presenceOperationReceipt legalScopeReceipt selectedEligibleCrossTab : OpportunityProducer
+  presenceOperationReceipt : OpportunityProducer
+  legalScopeReceipt : OpportunityProducer
+  selectedEligibleCrossTab : OpportunityProducer
 
 reverseOpportunityConsumer : OpportunityConsumer → OpportunityProducer
 reverseOpportunityConsumer exposureOpportunityClaim = presenceOperationReceipt

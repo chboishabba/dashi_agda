@@ -118,7 +118,13 @@ distance a b = primFloatSqrt (distanceSq a b)
 -- Protein-facing atom metadata.
 
 data Element : Set where
-  hydrogen carbon nitrogen oxygen sulfur phosphorus otherElement : Element
+  hydrogen : Element
+  carbon : Element
+  nitrogen : Element
+  oxygen : Element
+  sulfur : Element
+  phosphorus : Element
+  otherElement : Element
 
 record Atom : Set where
   constructor atom

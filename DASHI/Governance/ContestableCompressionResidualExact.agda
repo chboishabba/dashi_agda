@@ -76,7 +76,8 @@ exactAppealResidualIsFutureRelevant :
 exactAppealResidualIsFutureRelevant = Residual.exactResidualIsRelevant
 
 data ReopeningStrength : Set where
-  futureRelevantReopening exactRepresentativeReopening : ReopeningStrength
+  futureRelevantReopening : ReopeningStrength
+  exactRepresentativeReopening : ReopeningStrength
 
 record ContestableCompressionReceipt : Set where
   constructor contestableCompressionReceipt

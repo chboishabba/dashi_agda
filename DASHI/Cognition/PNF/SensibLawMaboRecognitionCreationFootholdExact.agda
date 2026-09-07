@@ -88,14 +88,14 @@ maboPreservesSovereigntyBoundary = refl
 ------------------------------------------------------------------------
 
 data TransformationMode : Set where
-  recognisePreExistingInterest
-  reinterpretExistingCommonLaw
-  incrementalCommonLawDevelopment
-  construeExistingStatute
-  constitutionalInvalidation
-  requireNewLegislation
-  internationalInterpretiveInputOnly
-  : TransformationMode
+  recognisePreExistingInterest : TransformationMode
+  reinterpretExistingCommonLaw : TransformationMode
+  incrementalCommonLawDevelopment : TransformationMode
+  construeExistingStatute : TransformationMode
+  constitutionalInvalidation : TransformationMode
+  requireNewLegislation : TransformationMode
+  internationalInterpretiveInputOnly : TransformationMode
+
 
 record FootholdSearchResult : Set where
   constructor foothold-search-result
@@ -135,14 +135,14 @@ climateCandidateSearch = foothold-search-result
 ------------------------------------------------------------------------
 
 data LegalLayer : Set where
-  factLayer
-  antecedentLegalOrderLayer
-  commonLawLayer
-  statuteLayer
-  constitutionLayer
-  judicialHoldingLayer
-  laterLegislationLayer
-  : LegalLayer
+  factLayer : LegalLayer
+  antecedentLegalOrderLayer : LegalLayer
+  commonLawLayer : LegalLayer
+  statuteLayer : LegalLayer
+  constitutionLayer : LegalLayer
+  judicialHoldingLayer : LegalLayer
+  laterLegislationLayer : LegalLayer
+
 
 record LayerTransition : Set where
   constructor layer-transition

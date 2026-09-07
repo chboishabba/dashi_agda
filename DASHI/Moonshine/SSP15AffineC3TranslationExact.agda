@@ -193,7 +193,9 @@ largestThreeOggProductIsMonsterDimension = refl
 -- modulo 9 and +42 is +6 = -3 modulo 9, so they induce inverse cycles.
 
 data MobileComplementMode3 : Set where
-  mobile45 mobile18 mobile27 : MobileComplementMode3
+  mobile45 : MobileComplementMode3
+  mobile18 : MobileComplementMode3
+  mobile27 : MobileComplementMode3
 
 advance12 : MobileComplementMode3 → MobileComplementMode3
 advance12 mobile45 = mobile18

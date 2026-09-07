@@ -16,7 +16,9 @@ import DASHI.Governance.AuthorityPhaseSeparationExact as Phase
 ------------------------------------------------------------------------
 
 data ConstitutionalValidityState : Set where
-  constitutionallyValid constitutionallyInvalid validityUnresolved : ConstitutionalValidityState
+  constitutionallyValid : ConstitutionalValidityState
+  constitutionallyInvalid : ConstitutionalValidityState
+  validityUnresolved : ConstitutionalValidityState
 
 record ConstitutionalValidityReceipt : Set where
   constructor constitutionalValidityReceipt
@@ -55,7 +57,8 @@ data ExtendedLawfulnessCoordinate : Set where
   ordinaryLawfulnessCoordinate : ExtendedLawfulnessCoordinate
 
 data ExtendedCoordinateState : Set where
-  extendedClosed extendedOpen : ExtendedCoordinateState
+  extendedClosed : ExtendedCoordinateState
+  extendedOpen : ExtendedCoordinateState
 
 record ExtendedLawfulnessVector : Set where
   constructor extendedLawfulnessVector

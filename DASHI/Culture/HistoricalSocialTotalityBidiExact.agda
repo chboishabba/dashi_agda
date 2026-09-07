@@ -50,7 +50,10 @@ record HistoricalSocialTotality : Set where
 open HistoricalSocialTotality public
 
 data TotalityMoment : Set where
-  materialMoment institutionalMoment juridicalMoment kinshipMoment : TotalityMoment
+  materialMoment : TotalityMoment
+  institutionalMoment : TotalityMoment
+  juridicalMoment : TotalityMoment
+  kinshipMoment : TotalityMoment
   culturalMoment subjectMoment historicalRelationMoment : TotalityMoment
 
 materialNotCulture : materialMoment ≡ culturalMoment → ⊥
@@ -74,7 +77,8 @@ data CulturalSurface : Set where
   sameChristianCulturalSurface : CulturalSurface
 
 data SubjectRoute : Set where
-  selfEndorsedRoute dissentingRoute : SubjectRoute
+  selfEndorsedRoute : SubjectRoute
+  dissentingRoute : SubjectRoute
 
 culturalObserver : CulturalFormationState → CulturalSurface
 culturalObserver sharedChristianEnvironmentSelfEndorsed = sameChristianCulturalSurface
@@ -103,13 +107,15 @@ cultureCannotRecoverUniqueSubjectRoute =
 ------------------------------------------------------------------------
 
 data EconomicFormationState : Set where
-  sameClassPositionIdeologyA sameClassPositionIdeologyB : EconomicFormationState
+  sameClassPositionIdeologyA : EconomicFormationState
+  sameClassPositionIdeologyB : EconomicFormationState
 
 data EconomicSurface : Set where
   sameEconomicPosition : EconomicSurface
 
 data IdeologicalPosition : Set where
-  ideologyA ideologyB : IdeologicalPosition
+  ideologyA : IdeologicalPosition
+  ideologyB : IdeologicalPosition
 
 economicObserver : EconomicFormationState → EconomicSurface
 economicObserver sameClassPositionIdeologyA = sameEconomicPosition
@@ -152,13 +158,15 @@ record ReligiousHistoricalFormation : Set where
 open ReligiousHistoricalFormation public
 
 data ReligiousLabelState : Set where
-  sameLabelFormationA sameLabelFormationB : ReligiousLabelState
+  sameLabelFormationA : ReligiousLabelState
+  sameLabelFormationB : ReligiousLabelState
 
 data ReligiousLabelSurface : Set where
   sameReligiousLabel : ReligiousLabelSurface
 
 data InstitutionalForm : Set where
-  institutionA institutionB : InstitutionalForm
+  institutionA : InstitutionalForm
+  institutionB : InstitutionalForm
 
 religiousLabelObserver : ReligiousLabelState → ReligiousLabelSurface
 religiousLabelObserver sameLabelFormationA = sameReligiousLabel
@@ -207,13 +215,15 @@ secularisationStyleWitness = historical-transition
 ------------------------------------------------------------------------
 
 data CivilisationalState : Set where
-  sameCivilisationalSurfacePoliticalA sameCivilisationalSurfacePoliticalB : CivilisationalState
+  sameCivilisationalSurfacePoliticalA : CivilisationalState
+  sameCivilisationalSurfacePoliticalB : CivilisationalState
 
 data CivilisationalSurface : Set where
   sameCivilisationalIdentification : CivilisationalSurface
 
 data PoliticalTrajectory : Set where
-  politicalTrajectoryA politicalTrajectoryB : PoliticalTrajectory
+  politicalTrajectoryA : PoliticalTrajectory
+  politicalTrajectoryB : PoliticalTrajectory
 
 civilisationalObserver : CivilisationalState → CivilisationalSurface
 civilisationalObserver sameCivilisationalSurfacePoliticalA = sameCivilisationalIdentification

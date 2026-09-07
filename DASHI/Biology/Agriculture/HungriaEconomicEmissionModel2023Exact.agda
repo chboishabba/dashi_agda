@@ -36,7 +36,10 @@ data ModelCoordinate : Set where
   emissionCoefficient : ModelCoordinate
 
 data ProducerKind : Set where
-  observedRegionalInput literatureAssumption accountingCoefficient computedOutput : ProducerKind
+  observedRegionalInput : ProducerKind
+  literatureAssumption : ProducerKind
+  accountingCoefficient : ProducerKind
+  computedOutput : ProducerKind
 
 record ModelInputLineage : Set where
   constructor modelInputLineage

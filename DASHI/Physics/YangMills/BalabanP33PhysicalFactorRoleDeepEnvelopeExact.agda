@@ -42,7 +42,8 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYou
 import DASHI.Physics.YangMills.BalabanP33WilsonPairDeepBudgetExact as Budget
 
 data LinkOrientationRole : Set where
-  positiveOrientation inverseOrientation : LinkOrientationRole
+  positiveOrientation : LinkOrientationRole
+  inverseOrientation : LinkOrientationRole
 
 record PhysicalFactorRole : Set where
   constructor factorRole

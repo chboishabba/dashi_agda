@@ -31,7 +31,8 @@ import DASHI.Governance.Kallis2025ClaimByClaimEvidenceRealizationExact as Kallis
 ------------------------------------------------------------------------
 
 data SafeJustWorld : Set where
-  observedCountryYearWorld projectedCountryYearWorld : SafeJustWorld
+  observedCountryYearWorld : SafeJustWorld
+  projectedCountryYearWorld : SafeJustWorld
 
 data SafeJustAgenda : Set where
   safeJustResearchAgenda : SafeJustAgenda
@@ -43,10 +44,12 @@ data SafeJustMeasurement : Set where
   normalizedIndicatorMeasurement : SafeJustMeasurement
 
 data SafeJustRepresentation : Set where
-  residualAggregateRepresentation reviewClaimRepresentation : SafeJustRepresentation
+  residualAggregateRepresentation : SafeJustRepresentation
+  reviewClaimRepresentation : SafeJustRepresentation
 
 data SafeJustSituatedClaim : Set where
-  fanningBAUProjectionClaim kallisGDP15000Claim : SafeJustSituatedClaim
+  fanningBAUProjectionClaim : SafeJustSituatedClaim
+  kallisGDP15000Claim : SafeJustSituatedClaim
 
 data SafeJustAuthorityContext : Set where
   repositorySourceRegistryContext : SafeJustAuthorityContext
@@ -59,7 +62,9 @@ data SafeJustSituatedConsumer : Set where
 
 
 data SafeJustUse : Set where
-  researchSynthesisUse causalPromotionUse policyInterventionUse : SafeJustUse
+  researchSynthesisUse : SafeJustUse
+  causalPromotionUse : SafeJustUse
+  policyInterventionUse : SafeJustUse
 
 data SafeJustUseObligation : Set where
   attributionAndResidualCarriage : SafeJustUseObligation

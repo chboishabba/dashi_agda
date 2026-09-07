@@ -9,7 +9,9 @@ open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 data NearClass : Set where
-  lowHigh highLow highHigh : NearClass
+  lowHigh : NearClass
+  highLow : NearClass
+  highHigh : NearClass
 
 record ClassifiedNearFamily
     {i : Level}

@@ -107,7 +107,10 @@ selectedVariationSpilloverUpper {charge} {residuals} bounds =
     (fourResidualBoundsSum bounds)
 
 data ResidualOwner : Set where
-  gaugeOwner constraintOwner transportOwner boundaryOwner : ResidualOwner
+  gaugeOwner : ResidualOwner
+  constraintOwner : ResidualOwner
+  transportOwner : ResidualOwner
+  boundaryOwner : ResidualOwner
 
 data ExtractionResidualAtom : Set where
   gaugeRepairAtom constraintRepairAtom

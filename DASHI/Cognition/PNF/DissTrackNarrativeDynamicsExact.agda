@@ -33,7 +33,9 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data CorpusRing : Set where
-  causalPrehistory directBattle adjacentWar : CorpusRing
+  causalPrehistory : CorpusRing
+  directBattle : CorpusRing
+  adjacentWar : CorpusRing
 
 data Artifact : Set where
   buriedAliveInterlude : Artifact
@@ -164,7 +166,11 @@ data DirectSuccessor : Artifact → Artifact → Set where
 ------------------------------------------------------------------------
 
 data PublicPhase : Set where
-  openField drakeWindow kendrickCaptured anthemCompressed reopeningWindow : PublicPhase
+  openField : PublicPhase
+  drakeWindow : PublicPhase
+  kendrickCaptured : PublicPhase
+  anthemCompressed : PublicPhase
+  reopeningWindow : PublicPhase
 
 familyMattersUpdate : PublicPhase → PublicPhase
 familyMattersUpdate state = drakeWindow
@@ -202,7 +208,8 @@ heartPart6AttemptsReopeningAfterCompression = refl
 ------------------------------------------------------------------------
 
 data UpdateOrder : Set where
-  drakeThenKendrick kendrickThenDrake : UpdateOrder
+  drakeThenKendrick : UpdateOrder
+  kendrickThenDrake : UpdateOrder
 
 orderSensitive : UpdateOrder → PublicPhase
 orderSensitive drakeThenKendrick = kendrickCaptured

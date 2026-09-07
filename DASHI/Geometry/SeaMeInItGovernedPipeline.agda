@@ -15,10 +15,13 @@ data Hash : Set where
   sha256 : Nat → Hash
 
 data BodyState : Set where
-  rawImageFit refinedCandidate repairedExport : BodyState
+  rawImageFit : BodyState
+  refinedCandidate : BodyState
+  repairedExport : BodyState
 
 data CanonicalSource : Set where
-  rawImageSource refinedCandidateSource : CanonicalSource
+  rawImageSource : CanonicalSource
+  refinedCandidateSource : CanonicalSource
 
 data GateWarning : Set where
   lowViewDiversity : GateWarning
@@ -39,7 +42,11 @@ data GateBlocker : Set where
   missingLineage : GateBlocker
 
 data Consumer : Set where
-  undersuit hardShell panelTransfer patternExport manufacturingExport : Consumer
+  undersuit : Consumer
+  hardShell : Consumer
+  panelTransfer : Consumer
+  patternExport : Consumer
+  manufacturingExport : Consumer
 
 ------------------------------------------------------------------------
 -- Synchronized calibrated multi-view observations strengthen evidence but do

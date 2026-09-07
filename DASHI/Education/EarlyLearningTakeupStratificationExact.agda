@@ -20,13 +20,16 @@ data CashCareAvailability : Set where
   sameCashCareOption : CashCareAvailability
 
 data UptakePosition : Set where
-  lowerObservedUptakePosition higherObservedUptakePosition : UptakePosition
+  lowerObservedUptakePosition : UptakePosition
+  higherObservedUptakePosition : UptakePosition
 
 data UptakeLevel : Set where
-  lowerUptake higherUptake : UptakeLevel
+  lowerUptake : UptakeLevel
+  higherUptake : UptakeLevel
 
 data LabourIncidence : Set where
-  lowerExitPressure higherExitPressure : LabourIncidence
+  lowerExitPressure : LabourIncidence
+  higherExitPressure : LabourIncidence
 
 availabilityProjection : UptakePosition → CashCareAvailability
 availabilityProjection lowerObservedUptakePosition = sameCashCareOption

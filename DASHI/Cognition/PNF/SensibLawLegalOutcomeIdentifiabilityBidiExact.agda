@@ -16,7 +16,13 @@ import DASHI.Cognition.PNF.SensibLawIssueIndexedAdjudicativeHyperfabricExact as 
 ------------------------------------------------------------------------
 
 data DispositionSurface : Set where
-  allowed dismissed refused granted remitted stayed unresolvedDisposition : DispositionSurface
+  allowed : DispositionSurface
+  dismissed : DispositionSurface
+  refused : DispositionSurface
+  granted : DispositionSurface
+  remitted : DispositionSurface
+  stayed : DispositionSurface
+  unresolvedDisposition : DispositionSurface
 
 data LegalExplanationKind : Set where
   meritsExplanation : LegalExplanationKind
@@ -147,7 +153,8 @@ firstExplanationResidual c with sourceReasonClosed c
 ------------------------------------------------------------------------
 
 data ExplanationConsumerGoal : Set where
-  listCompatibleExplanations exactDispositionReason : ExplanationConsumerGoal
+  listCompatibleExplanations : ExplanationConsumerGoal
+  exactDispositionReason : ExplanationConsumerGoal
 
 data ExplanationGoalStatus : Set where explanationGoalClosed explanationGoalOpen : ExplanationGoalStatus
 

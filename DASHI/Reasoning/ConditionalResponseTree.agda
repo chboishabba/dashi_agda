@@ -14,20 +14,33 @@ x ≢ y = x ≡ y → ⊥
 ------------------------------------------------------------------------
 
 data Action : Set where
-  converse consult decide help maintain transfer closeProcess : Action
+  converse : Action
+  consult : Action
+  decide : Action
+  help : Action
+  maintain : Action
+  transfer : Action
+  closeProcess : Action
   customAction : String → Action
 
 data ContextAtom : Set where
-  urgentContext sufficientCapacity noLessBurdensomeAlternative : ContextAtom
+  urgentContext : ContextAtom
+  sufficientCapacity : ContextAtom
+  noLessBurdensomeAlternative : ContextAtom
   boundedInstance currentAuthority liveOpportunity : ContextAtom
   customContext : String → ContextAtom
 
 data ExceptionAtom : Set where
-  revokedException unsafeException unavailableException : ExceptionAtom
+  revokedException : ExceptionAtom
+  unsafeException : ExceptionAtom
+  unavailableException : ExceptionAtom
   customException : String → ExceptionAtom
 
 data Modality : Set where
-  openModality considerModality preferModality intendModality : Modality
+  openModality : Modality
+  considerModality : Modality
+  preferModality : Modality
+  intendModality : Modality
   commitModality authorisePursuitModality : Modality
 
 consider≢commit : considerModality ≢ commitModality

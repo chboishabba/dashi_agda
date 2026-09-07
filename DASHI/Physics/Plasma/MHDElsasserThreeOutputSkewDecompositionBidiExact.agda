@@ -15,7 +15,8 @@ import DASHI.Physics.Plasma.MHDElsasserCouplingExchangeAntisymmetryExact as A
 ------------------------------------------------------------------------
 
 data ElsasserSpecies : Set where
-  plusSpecies minusSpecies : ElsasserSpecies
+  plusSpecies : ElsasserSpecies
+  minusSpecies : ElsasserSpecies
 
 record ThreeOutputSkewDecomposition
     (coupling : A.ElsasserCouplingExchange) : Set₁ where

@@ -13,7 +13,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 ------------------------------------------------------------------------
 
 data Status : Set where
-  alive dead : Status
+  alive : Status
+  dead : Status
 
 record FirstWitnessSystem : Set₁ where
   field

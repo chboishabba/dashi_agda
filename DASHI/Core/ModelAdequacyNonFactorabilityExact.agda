@@ -51,7 +51,8 @@ inadequacyWitnessRulesOutAdequacy receipt =
 ------------------------------------------------------------------------
 
 data FixtureWorld : Set where
-  lowHydrology highHydrology : FixtureWorld
+  lowHydrology : FixtureWorld
+  highHydrology : FixtureWorld
 
 data EconomicObservation : Set where
   sameAvoidedCost : EconomicObservation
@@ -60,7 +61,8 @@ data EconomicOutcome : Set where
   sameEconomicOutcome : EconomicOutcome
 
 data EcologicalOutcome : Set where
-  lowEcologicalResponse highEcologicalResponse : EcologicalOutcome
+  lowEcologicalResponse : EcologicalOutcome
+  highEcologicalResponse : EcologicalOutcome
 
 economicObservation : FixtureWorld → EconomicObservation
 economicObservation lowHydrology = sameAvoidedCost

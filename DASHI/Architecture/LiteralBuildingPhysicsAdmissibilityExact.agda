@@ -7,10 +7,17 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data BuildingSystem : Set where
-  egress accessibility thermal daylight structure services occupancy : BuildingSystem
+  egress : BuildingSystem
+  accessibility : BuildingSystem
+  thermal : BuildingSystem
+  daylight : BuildingSystem
+  structure : BuildingSystem
+  services : BuildingSystem
+  occupancy : BuildingSystem
 
 data Status : Set where
-  passes fails : Status
+  passes : Status
+  fails : Status
 
 record BuildingAssessment : Set where
   constructor buildingAssessment

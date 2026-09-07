@@ -15,7 +15,9 @@ import DASHI.Governance.EnvironmentalAuthoritySourceRegistryRound2Exact as Sourc
 ------------------------------------------------------------------------
 
 data EvidenceScale : Set where
-  caseSpecificJudicial institutionalRecognition globalMonitoring : EvidenceScale
+  caseSpecificJudicial : EvidenceScale
+  institutionalRecognition : EvidenceScale
+  globalMonitoring : EvidenceScale
 
 record DefenderEvidenceLayer : Set where
   constructor defenderEvidenceLayer

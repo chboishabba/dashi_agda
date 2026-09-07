@@ -12,7 +12,9 @@ open import DASHI.Cognition.Utterance.LayeredMeaningCore
 ------------------------------------------------------------------------
 
 data LiteralSourceShape : Set where
-  itemwiseAssertion frameLabelOnly ambiguousSourceShape : LiteralSourceShape
+  itemwiseAssertion : LiteralSourceShape
+  frameLabelOnly : LiteralSourceShape
+  ambiguousSourceShape : LiteralSourceShape
 
 data MoralAgency : AgentClass → Set where
   liveHumanMoralAgency : MoralAgency liveHuman

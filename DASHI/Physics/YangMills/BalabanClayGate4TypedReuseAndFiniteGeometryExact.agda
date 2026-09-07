@@ -144,7 +144,8 @@ largeFieldBlockDecidable carrier =
 ------------------------------------------------------------------------
 
 data LocalizedClass : Set where
-  firstClass secondClass : LocalizedClass
+  firstClass : LocalizedClass
+  secondClass : LocalizedClass
 
 record SupportLargeFieldIntersection (Term Region : Set) : Set₁ where
   field

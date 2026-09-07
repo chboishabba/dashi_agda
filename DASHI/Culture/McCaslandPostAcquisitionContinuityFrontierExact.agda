@@ -66,11 +66,10 @@ canonicalMcCaslandPostAcquisitionBoundary : McCaslandPostAcquisitionBoundary
 canonicalMcCaslandPostAcquisitionBoundary = mccasland-post-acquisition-boundary false refl false refl false refl true refl
 
 data McCaslandPostAcquisitionReverseTarget : Set where
-  acquire2025to2026Title
-  acquire2025to2026ProgrammePortfolio
-  acquireIRADAuthorityAfterClose
-  acquireAccessCredentialContinuity
-  acquireReportingLineAfterClose
-  acquireHandoverOrSuccessor
-  acquireRoleChangeOrExitRecord
-  : McCaslandPostAcquisitionReverseTarget
+  acquire2025to2026Title : McCaslandPostAcquisitionReverseTarget
+  acquire2025to2026ProgrammePortfolio : McCaslandPostAcquisitionReverseTarget
+  acquireIRADAuthorityAfterClose : McCaslandPostAcquisitionReverseTarget
+  acquireAccessCredentialContinuity : McCaslandPostAcquisitionReverseTarget
+  acquireReportingLineAfterClose : McCaslandPostAcquisitionReverseTarget
+  acquireHandoverOrSuccessor : McCaslandPostAcquisitionReverseTarget
+  acquireRoleChangeOrExitRecord : McCaslandPostAcquisitionReverseTarget

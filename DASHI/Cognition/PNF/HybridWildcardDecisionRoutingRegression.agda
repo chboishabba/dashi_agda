@@ -16,10 +16,12 @@ open import DASHI.Cognition.PNF.HybridWildcardDecisionRoutingExact
 ------------------------------------------------------------------------
 
 data Demand : Set where
-  certifiedDemand residualDemand : Demand
+  certifiedDemand : Demand
+  residualDemand : Demand
 
 data Observation : Set where
-  candidateSetA candidateSetB : Observation
+  candidateSetA : Observation
+  candidateSetB : Observation
 
 data Residual : Set where
   unresolvedScoreAndProducerFibre : Residual

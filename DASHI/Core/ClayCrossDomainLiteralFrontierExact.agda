@@ -22,24 +22,24 @@ import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as Zeta
 ------------------------------------------------------------------------
 
 data TerminalProducerMotif : Set where
-  sameObjectRepresentation
-  assignedAllowancePayment
-  signedIntegratedPayment
-  sourceSemanticsRecovery
-  conjunctionOfIndependentChildren
-  downstreamCompilerReuse
-  : TerminalProducerMotif
+  sameObjectRepresentation : TerminalProducerMotif
+  assignedAllowancePayment : TerminalProducerMotif
+  signedIntegratedPayment : TerminalProducerMotif
+  sourceSemanticsRecovery : TerminalProducerMotif
+  conjunctionOfIndependentChildren : TerminalProducerMotif
+  downstreamCompilerReuse : TerminalProducerMotif
+
 
 data Programme : Set where navierStokes yangMills riemannZeta : Programme
 
 data TerminalCoordinate : Set where
-  nsResolventHeat
-  nsSignedSpacetime
-  ymRound108Semantics
-  ymRound108BC1SameObject
-  rhOffAllowance
-  rhGammaAllowance
-  : TerminalCoordinate
+  nsResolventHeat : TerminalCoordinate
+  nsSignedSpacetime : TerminalCoordinate
+  ymRound108Semantics : TerminalCoordinate
+  ymRound108BC1SameObject : TerminalCoordinate
+  rhOffAllowance : TerminalCoordinate
+  rhGammaAllowance : TerminalCoordinate
+
 
 coordinateProgramme : TerminalCoordinate → Programme
 coordinateProgramme nsResolventHeat = navierStokes
@@ -147,10 +147,10 @@ canonicalCrossDomainSearchPolicy =
 ------------------------------------------------------------------------
 
 data ClosurePhase : Set where
-  representationOrSource
-  terminalAnalyticPayment
-  downstreamCompiler
-  : ClosurePhase
+  representationOrSource : ClosurePhase
+  terminalAnalyticPayment : ClosurePhase
+  downstreamCompiler : ClosurePhase
+
 
 phase : TerminalCoordinate → ClosurePhase
 phase nsResolventHeat = representationOrSource

@@ -26,10 +26,15 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 ------------------------------------------------------------------------
 
 data AssetStrand : Set where
-  originStrand relayStrand sinkStrand : AssetStrand
+  originStrand : AssetStrand
+  relayStrand : AssetStrand
+  sinkStrand : AssetStrand
 
 data TransactionKind : Set where
-  transferCrossing splitCrossing mergeCrossing returnCrossing : TransactionKind
+  transferCrossing : TransactionKind
+  splitCrossing : TransactionKind
+  mergeCrossing : TransactionKind
+  returnCrossing : TransactionKind
 
 record TransactionCrossing : Set where
   constructor transaction-crossing
@@ -41,7 +46,9 @@ record TransactionCrossing : Set where
 open TransactionCrossing public
 
 data TransactionTrace : Set where
-  directTrace washLikeTrace peelLikeTrace : TransactionTrace
+  directTrace : TransactionTrace
+  washLikeTrace : TransactionTrace
+  peelLikeTrace : TransactionTrace
 
 ------------------------------------------------------------------------
 -- 2. Coarse endpoint can collide while provenance differs.
@@ -51,7 +58,9 @@ data EndpointCode : Set where
   sameTerminalAssetSurface : EndpointCode
 
 data ProvenanceCode : Set where
-  directOriginToSink returnedThroughRelay serialRelayPeel : ProvenanceCode
+  directOriginToSink : ProvenanceCode
+  returnedThroughRelay : ProvenanceCode
+  serialRelayPeel : ProvenanceCode
 
 endpoint : TransactionTrace → EndpointCode
 endpoint _ = sameTerminalAssetSurface
@@ -125,7 +134,9 @@ canonicalPeelHistory = peelSerialHistory
 ------------------------------------------------------------------------
 
 data ProvenanceDepth : Set where
-  oneCrossing twoCrossings manyCrossings : ProvenanceDepth
+  oneCrossing : ProvenanceDepth
+  twoCrossings : ProvenanceDepth
+  manyCrossings : ProvenanceDepth
 
 traceDepth : TransactionTrace → ProvenanceDepth
 traceDepth directTrace = oneCrossing
@@ -133,7 +144,9 @@ traceDepth washLikeTrace = twoCrossings
 traceDepth peelLikeTrace = manyCrossings
 
 data ProvenanceDisposition : Set where
-  directlyAttributed attributionRequiresPathReview attributionRequiresSerialPathReview : ProvenanceDisposition
+  directlyAttributed : ProvenanceDisposition
+  attributionRequiresPathReview : ProvenanceDisposition
+  attributionRequiresSerialPathReview : ProvenanceDisposition
 
 provenanceDisposition : TransactionTrace → ProvenanceDisposition
 provenanceDisposition directTrace = directlyAttributed

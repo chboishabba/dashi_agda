@@ -15,11 +15,11 @@ import DASHI.Core.TemporalPromotionNonRetroactivityBidiExact as Temporal
 ------------------------------------------------------------------------
 
 data StrandObligation : Set where
-  artifactObligation
-  correspondenceObligation
-  transportObligation
-  inhabitanceObligation
-  : StrandObligation
+  artifactObligation : StrandObligation
+  correspondenceObligation : StrandObligation
+  transportObligation : StrandObligation
+  inhabitanceObligation : StrandObligation
+
 
 record TimedStrandReceipt : Set where
   constructor timed-strand-receipt

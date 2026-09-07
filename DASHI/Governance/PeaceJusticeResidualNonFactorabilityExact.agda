@@ -18,7 +18,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Governance.InstitutionPreservingRechartAntiSublationExact as Rechart
 
 data JusticeResidualStatus : Set where
-  residualResolved residualOpen : JusticeResidualStatus
+  residualResolved : JusticeResidualStatus
+  residualOpen : JusticeResidualStatus
 
 justiceResidual : Rechart.PoliticalFineState → JusticeResidualStatus
 justiceResidual Rechart.justQuietState = residualResolved

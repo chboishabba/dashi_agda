@@ -17,7 +17,10 @@ import DASHI.Reasoning.LacanSignifierSubjectCore as Lacan
 ------------------------------------------------------------------------
 
 data DiscoursePosition : Set where
-  agent other truth product : DiscoursePosition
+  agent : DiscoursePosition
+  other : DiscoursePosition
+  truth : DiscoursePosition
+  product : DiscoursePosition
 
 data StandardDiscourse : Set where
   masterDiscourse hystericDiscourse analystDiscourse universityDiscourse :

@@ -96,7 +96,11 @@ m12OrderFromSharpFiveTransitivity = refl
 ------------------------------------------------------------------------
 
 data MathieuLevel : Set where
-  M8Level M9Level M10Level M11Level M12Level : MathieuLevel
+  M8Level : MathieuLevel
+  M9Level : MathieuLevel
+  M10Level : MathieuLevel
+  M11Level : MathieuLevel
+  M12Level : MathieuLevel
 
 levelOrder : MathieuLevel → Nat
 levelOrder M8Level = 8

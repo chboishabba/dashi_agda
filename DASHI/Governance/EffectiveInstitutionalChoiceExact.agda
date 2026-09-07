@@ -76,7 +76,8 @@ record EffectivelyAccessible
 open EffectivelyAccessible public
 
 data Provider : Set where
-  religiousSchool secularSchool : Provider
+  religiousSchool : Provider
+  secularSchool : Provider
 
 formalProviders : List Provider
 formalProviders = religiousSchool ∷ secularSchool ∷ []

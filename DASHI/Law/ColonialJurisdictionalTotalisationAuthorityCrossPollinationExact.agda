@@ -22,22 +22,22 @@ import DASHI.Law.MaboCountrySecurityClassificationCrossPollinationExact as MaboC
 ------------------------------------------------------------------------
 
 data NormativeOrderPosition : Set where
-  governingOrder
-  coexistingOrder
-  subordinatedOrder
-  nonGoverningOrder
+  governingOrder : NormativeOrderPosition
+  coexistingOrder : NormativeOrderPosition
+  subordinatedOrder : NormativeOrderPosition
+  nonGoverningOrder : NormativeOrderPosition
   erasedFromDominantObserver : NormativeOrderPosition
 
 data JurisdictionalReach : Set where
-  localReach
-  limitedReach
-  coexistingReach
+  localReach : JurisdictionalReach
+  limitedReach : JurisdictionalReach
+  coexistingReach : JurisdictionalReach
   assertedTotalReach : JurisdictionalReach
 
 data AuthorityFrame : Set where
-  intraSystemLegalAuthority
-  crossSystemNormativePriority
-  historicalLegitimacy
+  intraSystemLegalAuthority : AuthorityFrame
+  crossSystemNormativePriority : AuthorityFrame
+  historicalLegitimacy : AuthorityFrame
   politicalConstitutionalClaim : AuthorityFrame
 
 record FramedAuthorityClaim : Set where
@@ -150,19 +150,19 @@ applicabilityRequiresSameSystemWeld = refl
 ------------------------------------------------------------------------
 
 data JurisdictionalClaim : Set where
-  crownSystemHasResolvedJurisdiction
-  crownSourceHasIntraSystemAuthority
-  crownJurisdictionExhaustsAllNormativeAuthority
-  firstNationsSovereigntyWasCeded
-  jurisdictionalTotalisationRequiredAuthorityReclassification
+  crownSystemHasResolvedJurisdiction : JurisdictionalClaim
+  crownSourceHasIntraSystemAuthority : JurisdictionalClaim
+  crownJurisdictionExhaustsAllNormativeAuthority : JurisdictionalClaim
+  firstNationsSovereigntyWasCeded : JurisdictionalClaim
+  jurisdictionalTotalisationRequiredAuthorityReclassification : JurisdictionalClaim
   modernPoliceJurisdictionRepeatsColonialTotalisation : JurisdictionalClaim
 
 data JurisdictionalProducer : Set where
-  intraSystemJurisdictionReceiptProducer
-  intraSystemSourceAuthorityProducer
-  crossSystemAuthorityExhaustionProducer
-  cessionConsentProducer
-  sameObjectPrerequisiteDoctrineProducer
+  intraSystemJurisdictionReceiptProducer : JurisdictionalProducer
+  intraSystemSourceAuthorityProducer : JurisdictionalProducer
+  crossSystemAuthorityExhaustionProducer : JurisdictionalProducer
+  cessionConsentProducer : JurisdictionalProducer
+  sameObjectPrerequisiteDoctrineProducer : JurisdictionalProducer
   modernSameObjectPowerPrerequisiteProducer : JurisdictionalProducer
 
 reverseJurisdictional : JurisdictionalClaim → JurisdictionalProducer

@@ -14,13 +14,16 @@ import DASHI.Governance.EnvironmentalAuthoritySourceRegistryRound2Exact as Sourc
 ------------------------------------------------------------------------
 
 data ConservationCoverage : Set where
-  belowThirty targetThirty : ConservationCoverage
+  belowThirty : ConservationCoverage
+  targetThirty : ConservationCoverage
 
 data TerritorialAuthority : Set where
-  externallyAdministered originatingCommunityAuthority : TerritorialAuthority
+  externallyAdministered : TerritorialAuthority
+  originatingCommunityAuthority : TerritorialAuthority
 
 data RightsImplementation : Set where
-  rightsTextOnly rightsRespectOperationalized : RightsImplementation
+  rightsTextOnly : RightsImplementation
+  rightsRespectOperationalized : RightsImplementation
 
 record Target3State : Set where
   constructor target3State

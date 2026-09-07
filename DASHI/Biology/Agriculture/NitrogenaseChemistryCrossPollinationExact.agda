@@ -32,10 +32,18 @@ import DASHI.Chemistry.AdmissibleReactionTransitionBridgeExact as Chemistry
 ------------------------------------------------------------------------
 
 data ChemicalSpecies : Set where
-  N2 Hplus electron MgATP NH3 H2 MgADP Pi : ChemicalSpecies
+  N2 : ChemicalSpecies
+  Hplus : ChemicalSpecies
+  electron : ChemicalSpecies
+  MgATP : ChemicalSpecies
+  NH3 : ChemicalSpecies
+  H2 : ChemicalSpecies
+  MgADP : ChemicalSpecies
+  Pi : ChemicalSpecies
 
 data Side : Set where
-  reactant product : Side
+  reactant : Side
+  product : Side
 
 record StoichiometricTerm : Set where
   constructor term

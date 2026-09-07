@@ -90,7 +90,11 @@ noPostulatePromotion c refl = postulateIsNotGrounded
 -- A spiritual, existential, mathematical, or Indigenous interpretive frame
 -- can organize meaning without pretending to be a causal explanation.
 data MeaningMode : Set where
-  spiritual relational mathematical existential contemplative : MeaningMode
+  spiritual : MeaningMode
+  relational : MeaningMode
+  mathematical : MeaningMode
+  existential : MeaningMode
+  contemplative : MeaningMode
 
 record InterpretiveFrame (Phenomenon Meaning : Set) : Set₁ where
   field

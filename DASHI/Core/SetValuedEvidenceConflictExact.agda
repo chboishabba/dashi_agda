@@ -51,10 +51,13 @@ totalConflictRefutesNormalizationAuthority total authority =
 ------------------------------------------------------------------------
 
 data DemoHypothesis : Set where
-  request play genericAttention : DemoHypothesis
+  request : DemoHypothesis
+  play : DemoHypothesis
+  genericAttention : DemoHypothesis
 
 data DemoFocal : Set where
-  requestOrPlay whole : DemoFocal
+  requestOrPlay : DemoFocal
+  whole : DemoFocal
 
 DemoContains : DemoFocal → DemoHypothesis → Set
 DemoContains requestOrPlay request = ⊤

@@ -14,7 +14,9 @@ open import DASHI.ArithmeticGeometry.LocalGlobalObstruction
 ------------------------------------------------------------------------
 
 data Genus : Set where
-  genus0 genus1 higherGenus : Genus
+  genus0 : Genus
+  genus1 : Genus
+  higherGenus : Genus
 
 record PrimeWindow : Set where
   constructor primeWindow

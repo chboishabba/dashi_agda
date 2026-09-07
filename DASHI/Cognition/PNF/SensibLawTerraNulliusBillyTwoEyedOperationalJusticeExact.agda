@@ -24,19 +24,19 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 ------------------------------------------------------------------------
 
 data RemedyCompulsionMode : Set where
-  selfExecutingDomesticCommand
-  directDomesticImplementationCapacity
-  indirectTreatyBodyPressure
-  communityNegotiatedImplementation
-  separateDomesticLitigation
-  : RemedyCompulsionMode
+  selfExecutingDomesticCommand : RemedyCompulsionMode
+  directDomesticImplementationCapacity : RemedyCompulsionMode
+  indirectTreatyBodyPressure : RemedyCompulsionMode
+  communityNegotiatedImplementation : RemedyCompulsionMode
+  separateDomesticLitigation : RemedyCompulsionMode
+
 
 data RealisationControl : Set where
-  highDirectControl
-  politicallyContingentControl
-  indirectExternalPressure
-  separateJurisdictionalRoute
-  : RealisationControl
+  highDirectControl : RealisationControl
+  politicallyContingentControl : RealisationControl
+  indirectExternalPressure : RealisationControl
+  separateJurisdictionalRoute : RealisationControl
+
 
 controlFor : RemedyCompulsionMode → RealisationControl
 controlFor selfExecutingDomesticCommand = highDirectControl
@@ -100,10 +100,10 @@ compensationPublicReceiptStillNotRecovered = refl
 ------------------------------------------------------------------------
 
 data PublicBillyOperationalState : Set where
-  noImplementationMapped
-  partialImplementationMapped
-  realisedFullReparationMapped
-  : PublicBillyOperationalState
+  noImplementationMapped : PublicBillyOperationalState
+  partialImplementationMapped : PublicBillyOperationalState
+  realisedFullReparationMapped : PublicBillyOperationalState
+
 
 currentPublicBillyOperationalState : PublicBillyOperationalState
 currentPublicBillyOperationalState = partialImplementationMapped
@@ -155,15 +155,15 @@ consultationRecordDoesNotRecoverReciprocity =
 ------------------------------------------------------------------------
 
 data AuthorityErasureSite : Set where
-  foundationalAcquisitionSite
-  remedialConsultationSite
-  : AuthorityErasureSite
+  foundationalAcquisitionSite : AuthorityErasureSite
+  remedialConsultationSite : AuthorityErasureSite
+
 
 data AuthorityRelationState : Set where
-  authorityConstitutive
-  authorityObservedButNonconstitutive
-  authorityErasedFromDecision
-  : AuthorityRelationState
+  authorityConstitutive : AuthorityRelationState
+  authorityObservedButNonconstitutive : AuthorityRelationState
+  authorityErasedFromDecision : AuthorityRelationState
+
 
 record AuthorityErasurePattern : Set where
   constructor authority-erasure-pattern
@@ -205,14 +205,14 @@ data ConsultationDeclaredLabel : Set where
   meaningfulConsultationDeclared : ConsultationDeclaredLabel
 
 data ConsultationRealizedAuthority : Set where
-  authorityNotCarriedIntoDecision
-  authorityCarriedIntoDecision
-  : ConsultationRealizedAuthority
+  authorityNotCarriedIntoDecision : ConsultationRealizedAuthority
+  authorityCarriedIntoDecision : ConsultationRealizedAuthority
+
 
 data ConsultationSystemState : Set where
-  declaredMeaningfulButExtractive
-  declaredMeaningfulAndAuthorityBearing
-  : ConsultationSystemState
+  declaredMeaningfulButExtractive : ConsultationSystemState
+  declaredMeaningfulAndAuthorityBearing : ConsultationSystemState
+
 
 consultationDeclaredLabel : ConsultationSystemState → ConsultationDeclaredLabel
 consultationDeclaredLabel _ = meaningfulConsultationDeclared

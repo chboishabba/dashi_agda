@@ -40,19 +40,23 @@ import DASHI.Culture.JohnAnthonyBrownRetrospectiveExposureProvenanceExact as Ret
 ------------------------------------------------------------------------
 
 data FormationHistory : Set where
-  inheritedClosedHistory revisablyEndorsedHistory : FormationHistory
+  inheritedClosedHistory : FormationHistory
+  revisablyEndorsedHistory : FormationHistory
 
 data PresentParticipation : Set where
   sameReligiousParticipation : PresentParticipation
 
 data FormationPattern : Set where
-  closedAuthorityPattern reopenedRevisionPattern : FormationPattern
+  closedAuthorityPattern : FormationPattern
+  reopenedRevisionPattern : FormationPattern
 
 data PresentChoice : Set where
-  continueWithoutRevision reviseOrReendorse : PresentChoice
+  continueWithoutRevision : PresentChoice
+  reviseOrReendorse : PresentChoice
 
 data ReachableRevisionCone : Set where
-  constrainedRevisionCone openRevisionCone : ReachableRevisionCone
+  constrainedRevisionCone : ReachableRevisionCone
+  openRevisionCone : ReachableRevisionCone
 
 presentParticipation : FormationHistory -> PresentParticipation
 presentParticipation _ = sameReligiousParticipation
@@ -128,10 +132,12 @@ presentParticipationCannotRecoverRevisionCone =
 ------------------------------------------------------------------------
 
 data ReopeningState : Set where
-  closedSituatedState reopenedSituatedState : ReopeningState
+  closedSituatedState : ReopeningState
+  reopenedSituatedState : ReopeningState
 
 data ReopeningParameter : Set where
-  noReopeningSupport reopeningSupport : ReopeningParameter
+  noReopeningSupport : ReopeningParameter
+  reopeningSupport : ReopeningParameter
 
 data ReopeningMove : Set where
   reviseCommitment : ReopeningMove

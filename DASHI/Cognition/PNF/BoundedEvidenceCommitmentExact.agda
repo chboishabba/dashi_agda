@@ -16,13 +16,17 @@ open import Data.Product using (_×_; _,_)
 ------------------------------------------------------------------------
 
 data EvidenceLevel : Set where
-  e0 e1 e2 : EvidenceLevel
+  e0 : EvidenceLevel
+  e1 : EvidenceLevel
+  e2 : EvidenceLevel
 
 data RelevantContext : Set where
-  attendEvidence ignoreEvidence : RelevantContext
+  attendEvidence : RelevantContext
+  ignoreEvidence : RelevantContext
 
 data ThresholdCommitment : Set where
-  stillDeliberating committed : ThresholdCommitment
+  stillDeliberating : ThresholdCommitment
+  committed : ThresholdCommitment
 
 increment : EvidenceLevel → EvidenceLevel
 increment e0 = e1

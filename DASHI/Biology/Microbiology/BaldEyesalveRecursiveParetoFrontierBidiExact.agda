@@ -19,14 +19,14 @@ import DASHI.Core.RecursiveParetoFrontierLiftingExact as Recursive
 ------------------------------------------------------------------------
 
 data MechanismFrontierLane : Set where
-  chemistryLane
-  thiolLane
-  functionCellStateLane
-  recoveryLane
-  quorumLane
-  matrixTransportLane
-  mediationLane
-  : MechanismFrontierLane
+  chemistryLane : MechanismFrontierLane
+  thiolLane : MechanismFrontierLane
+  functionCellStateLane : MechanismFrontierLane
+  recoveryLane : MechanismFrontierLane
+  quorumLane : MechanismFrontierLane
+  matrixTransportLane : MechanismFrontierLane
+  mediationLane : MechanismFrontierLane
+
 
 laneReference : MechanismFrontierLane → String
 laneReference chemistryLane = "fresh-to-day-9 sulfur trajectory"

@@ -80,10 +80,13 @@ universalEntitlementCannotDetermineRolloutCapacity =
 ------------------------------------------------------------------------
 
 data ProcessQualityState : Set where
-  processQualityUnknown constrainedInteractions richAdaptiveInteractions : ProcessQualityState
+  processQualityUnknown : ProcessQualityState
+  constrainedInteractions : ProcessQualityState
+  richAdaptiveInteractions : ProcessQualityState
 
 data WorkforceCapacityState : Set where
-  workforceConstrained workforceSustainable : WorkforceCapacityState
+  workforceConstrained : WorkforceCapacityState
+  workforceSustainable : WorkforceCapacityState
 
 record QualityCapacityGate : Set where
   constructor qualityCapacityGate

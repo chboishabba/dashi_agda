@@ -23,10 +23,16 @@ import DASHI.Physics.Closure.TriadicSpectralCompletionRegression
 -- future target.
 
 data DialecticalStage : Set where
-  thesis antithesis synthesis completion : DialecticalStage
+  thesis : DialecticalStage
+  antithesis : DialecticalStage
+  synthesis : DialecticalStage
+  completion : DialecticalStage
 
 data M2BasisElement : Set where
-  e11 e12 e21 e22 : M2BasisElement
+  e11 : M2BasisElement
+  e12 : M2BasisElement
+  e21 : M2BasisElement
+  e22 : M2BasisElement
 
 canonicalDialecticalStageOrder : List DialecticalStage
 canonicalDialecticalStageOrder =

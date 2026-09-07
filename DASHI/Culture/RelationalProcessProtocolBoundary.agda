@@ -12,7 +12,10 @@ import DASHI.Culture.DerivedCulturalUseAdmissibility as Cultural
 -- This is not claimed to reproduce or replace living Indigenous knowledge.
 
 data ProcessPhase : Set where
-  respectPhase connectPhase reflectPhase directPhase : ProcessPhase
+  respectPhase : ProcessPhase
+  connectPhase : ProcessPhase
+  reflectPhase : ProcessPhase
+  directPhase : ProcessPhase
 
 record ProtocolStep : Set where
   constructor protocolStep

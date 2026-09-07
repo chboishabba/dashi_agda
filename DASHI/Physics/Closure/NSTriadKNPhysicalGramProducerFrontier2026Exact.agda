@@ -70,7 +70,8 @@ angularProducerToDataSchur P = record
   }
 
 data Helicity : Set where
-  plus minus : Helicity
+  plus : Helicity
+  minus : Helicity
 
 record HelicitySchurProducer
     {Mode : Set}

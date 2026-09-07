@@ -15867,7 +15867,10 @@ yangMillsGate3GenuineFirstMissingNextIterationLieBlockerIsExact =
 -- finite Lie3, reference Wilson-loop, D_A^2, and epsilon-contraction witnesses.
 
 data YMSFGCFiniteFourIndex : Set where
-  ymFin0 ymFin1 ymFin2 ymFin3 : YMSFGCFiniteFourIndex
+  ymFin0 : YMSFGCFiniteFourIndex
+  ymFin1 : YMSFGCFiniteFourIndex
+  ymFin2 : YMSFGCFiniteFourIndex
+  ymFin3 : YMSFGCFiniteFourIndex
 
 ymChristoffelTwoTimesProbe :
   YMSFGCFiniteFourIndex →

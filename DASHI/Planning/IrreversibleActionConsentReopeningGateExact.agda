@@ -8,10 +8,12 @@ import DASHI.Planning.CollectiveTerritorialConsentExact as Consent
 ------------------------------------------------------------------------
 
 data ImpactKind : Set where
-  reversibleImpact irreversibleNonSubstitutableImpact : ImpactKind
+  reversibleImpact : ImpactKind
+  irreversibleNonSubstitutableImpact : ImpactKind
 
 data MaterialEvidenceState : Set where
-  currentEvidence materiallyChangedEvidence : MaterialEvidenceState
+  currentEvidence : MaterialEvidenceState
+  materiallyChangedEvidence : MaterialEvidenceState
 
 record IrreversibleActionGate
     (envelope : Consent.CollectiveConsentEnvelope)

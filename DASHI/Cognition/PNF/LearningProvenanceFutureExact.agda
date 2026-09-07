@@ -12,10 +12,12 @@ import DASHI.Core.PathDependentAccessibilityExact as Path
 ------------------------------------------------------------------------
 
 data Parameter : Set where
-  neutral specialized : Parameter
+  neutral : Parameter
+  specialized : Parameter
 
 data OptimizerProvenance : Set where
-  warmMomentum coldMomentum : OptimizerProvenance
+  warmMomentum : OptimizerProvenance
+  coldMomentum : OptimizerProvenance
 
 data LearningAction : Set where
   trainOnce : LearningAction

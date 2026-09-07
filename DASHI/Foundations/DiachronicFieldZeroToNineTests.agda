@@ -51,7 +51,9 @@ six-closure-survives-nine :
 six-closure-survives-nine = refl
 
 data Axis3 : Set where
-  somatic temporal social : Axis3
+  somatic : Axis3
+  temporal : Axis3
+  social : Axis3
 
 data Axis9 : Set where
   old : Axis3 → Axis9

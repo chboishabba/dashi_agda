@@ -84,14 +84,14 @@ record LegallyAvailableTransformation
 open LegallyAvailableTransformation public
 
 data CutComputationStatus : Set where
-  legacyCalibrationOnly
-  typedGoalMaterialised
-  finiteExecutableCandidateComputed
-  proofRelevantCutComputed
-  transformationCandidateReopensGoal
-  typedTransformationReopensGoal
-  transformationLegallyPromoted
-  : CutComputationStatus
+  legacyCalibrationOnly : CutComputationStatus
+  typedGoalMaterialised : CutComputationStatus
+  finiteExecutableCandidateComputed : CutComputationStatus
+  proofRelevantCutComputed : CutComputationStatus
+  transformationCandidateReopensGoal : CutComputationStatus
+  typedTransformationReopensGoal : CutComputationStatus
+  transformationLegallyPromoted : CutComputationStatus
+
 
 maboCutStatus : CutComputationStatus
 maboCutStatus = proofRelevantCutComputed

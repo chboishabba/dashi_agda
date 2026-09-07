@@ -28,7 +28,10 @@ open import Data.Integer.Base using (+_)
 import DASHI.Physics.Closure.NSTriadKNLocalizedHelicityExactReconnaissance as Exact
 
 data FixedSymbolKind : Set where
-  lowPass highPass smoothWindow dyadicBand : FixedSymbolKind
+  lowPass : FixedSymbolKind
+  highPass : FixedSymbolKind
+  smoothWindow : FixedSymbolKind
+  dyadicBand : FixedSymbolKind
 
 record FixedSymbolCandidate : Set where
   constructor fixed-symbol
@@ -61,7 +64,10 @@ fixedCandidateCannotRepairWitness candidate epsilon =
     (candidateIntegerProxy candidate) epsilon
 
 data QuarterPhase : Set where
-  phase0 phase1 phase2 phase3 : QuarterPhase
+  phase0 : QuarterPhase
+  phase1 : QuarterPhase
+  phase2 : QuarterPhase
+  phase3 : QuarterPhase
 
 phaseAdd : QuarterPhase → QuarterPhase → QuarterPhase
 phaseAdd phase0 b = b
@@ -127,7 +133,8 @@ dangerousRelativePhaseHasZeroLocalizedCorrection phase2 antiAlignedDangerous =
   refl , refl , refl
 
 data AmplitudeChoice : Set where
-  amplitudeOne amplitudeTwo : AmplitudeChoice
+  amplitudeOne : AmplitudeChoice
+  amplitudeTwo : AmplitudeChoice
 
 phaseChoiceCount amplitudeChoiceCount phaseAmplitudeVariantCount : Nat
 phaseChoiceCount = 4 * 4 * 4

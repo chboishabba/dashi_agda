@@ -79,7 +79,9 @@ data PoleNearHTSearchAction : Set where
 
 
 data SearchStatus : Set where
-  live pruned downstream : SearchStatus
+  live : SearchStatus
+  pruned : SearchStatus
+  downstream : SearchStatus
 
 searchStatus : PoleNearHTSearchAction → SearchStatus
 searchStatus rebuildHTIntertwiner = pruned

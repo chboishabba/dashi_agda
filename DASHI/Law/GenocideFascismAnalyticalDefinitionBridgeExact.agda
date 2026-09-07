@@ -20,10 +20,10 @@ import DASHI.Law.GenocideFascismSourceGenealogyExact as Genealogy
 ------------------------------------------------------------------------
 
 data DASHIFascismCriterion : Set where
-  genocidalElimination
-  terminalisingEnemyConstruction
-  collectiveGuiltTransfer
-  coerciveDistinctionErasure
+  genocidalElimination : DASHIFascismCriterion
+  terminalisingEnemyConstruction : DASHIFascismCriterion
+  collectiveGuiltTransfer : DASHIFascismCriterion
+  coerciveDistinctionErasure : DASHIFascismCriterion
   asymmetricExclusionaryRouting : DASHIFascismCriterion
 
 data DASHIFascismClassification : Set where
@@ -60,8 +60,8 @@ genocideSecondaryFeature = Fascism.collectiveGuiltTransport
 ------------------------------------------------------------------------
 
 data AttributionRole : Set where
-  externalGenocideFinding
-  externalFascismGenealogy
+  externalGenocideFinding : AttributionRole
+  externalFascismGenealogy : AttributionRole
   dashiAnalyticalSynthesis : AttributionRole
 
 record GenocideFascismReceipt : Set where

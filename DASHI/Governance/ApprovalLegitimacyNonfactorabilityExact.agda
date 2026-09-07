@@ -21,10 +21,12 @@ data ApprovalSurface : Set where
   recordedApproved : ApprovalSurface
 
 data ProceduralState : Set where
-  scopedContestableApproval unscopedUnappealableApproval : ProceduralState
+  scopedContestableApproval : ProceduralState
+  unscopedUnappealableApproval : ProceduralState
 
 data LegitimacyAssessment : Set where
-  procedurallyAdmissible procedurallyDefective : LegitimacyAssessment
+  procedurallyAdmissible : LegitimacyAssessment
+  procedurallyDefective : LegitimacyAssessment
 
 approvalProjection : ProceduralState → ApprovalSurface
 approvalProjection scopedContestableApproval = recordedApproved

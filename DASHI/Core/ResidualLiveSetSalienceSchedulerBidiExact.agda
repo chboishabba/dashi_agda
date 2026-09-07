@@ -88,7 +88,8 @@ largeResidualIsNotSalient receipt with eliminated receipt
 ... | h2 , (before , notAfter) = notAfter before
 
 data SchedulerChoice : Set where
-  chooseLargeInert chooseSmallSeparating : SchedulerChoice
+  chooseLargeInert : SchedulerChoice
+  chooseSmallSeparating : SchedulerChoice
 
 magnitudeGreedy : SchedulerChoice
 magnitudeGreedy = chooseLargeInert

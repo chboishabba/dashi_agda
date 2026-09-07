@@ -70,7 +70,8 @@ fiveCompleteSectorDimensionIs45 = Nonary.fiveCompleteNonarySectorsIsFortyFive
 ------------------------------------------------------------------------
 
 data DistinguishedResidual8 : Set where
-  residualA2negative residualA2positive : DistinguishedResidual8
+  residualA2negative : DistinguishedResidual8
+  residualA2positive : DistinguishedResidual8
   residualB1negative residualB1positive : DistinguishedResidual8
   residualB2negative residualB2positive : DistinguishedResidual8
   residualEnegative residualEpositive : DistinguishedResidual8

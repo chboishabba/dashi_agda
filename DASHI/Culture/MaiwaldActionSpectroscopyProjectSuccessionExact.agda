@@ -61,10 +61,9 @@ canonicalProjectVsCarrierBoundary : ProjectVsCarrierBoundary
 canonicalProjectVsCarrierBoundary = project-vs-carrier-boundary false refl false refl true refl
 
 data MaiwaldSuccessionReverseTarget : Set where
-  acquireApparatusConfigurationContinuity
-  acquireCalibrationTransfer
-  acquireTagResponseModelContinuity
-  acquireFailureHistoryTransfer
-  acquireQualificationTransfer
-  acquireRepositoryOrNotebookContinuity
-  : MaiwaldSuccessionReverseTarget
+  acquireApparatusConfigurationContinuity : MaiwaldSuccessionReverseTarget
+  acquireCalibrationTransfer : MaiwaldSuccessionReverseTarget
+  acquireTagResponseModelContinuity : MaiwaldSuccessionReverseTarget
+  acquireFailureHistoryTransfer : MaiwaldSuccessionReverseTarget
+  acquireQualificationTransfer : MaiwaldSuccessionReverseTarget
+  acquireRepositoryOrNotebookContinuity : MaiwaldSuccessionReverseTarget

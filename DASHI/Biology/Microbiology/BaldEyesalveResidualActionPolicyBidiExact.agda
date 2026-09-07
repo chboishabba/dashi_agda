@@ -20,15 +20,15 @@ import DASHI.Biology.Microbiology.BaldEyesalveMechanismExperimentSelectionExact 
 ------------------------------------------------------------------------
 
 data ResidualLane : Set where
-  sulfurIdentityLane
-  thiolDamageLane
-  recoveryLane
-  functionCellStateLane
-  quorumLane
-  matrixPenetrationLane
-  mixedMechanismLane
-  unresolvedLane
-  : ResidualLane
+  sulfurIdentityLane : ResidualLane
+  thiolDamageLane : ResidualLane
+  recoveryLane : ResidualLane
+  functionCellStateLane : ResidualLane
+  quorumLane : ResidualLane
+  matrixPenetrationLane : ResidualLane
+  mixedMechanismLane : ResidualLane
+  unresolvedLane : ResidualLane
+
 
 record EyesalveActionRecommendation : Set where
   constructor eyesalveActionRecommendation

@@ -29,7 +29,11 @@ branchCount : ProductionState → Nat
 branchCount s = length (legalBases s)
 
 data Arity : Set where
-  arity0 arity1 arity2 arity3 arity4 : Arity
+  arity0 : Arity
+  arity1 : Arity
+  arity2 : Arity
+  arity3 : Arity
+  arity4 : Arity
 
 arityOf : List Base → Arity
 arityOf [] = arity0
@@ -45,7 +49,10 @@ data NonEmpty {X : Set} : List X → Set where
   nonEmpty : ∀ {x xs} → NonEmpty (x ∷ xs)
 
 data OperationalArity : Set where
-  operational1 operational2 operational3 operational4 : OperationalArity
+  operational1 : OperationalArity
+  operational2 : OperationalArity
+  operational3 : OperationalArity
+  operational4 : OperationalArity
 
 operationalArity : ∀ {xs : List Base} → NonEmpty xs → OperationalArity
 operationalArity {x ∷ []} nonEmpty = operational1

@@ -249,10 +249,13 @@ complementUnitResidueInvolutive unit7 = refl
 complementUnitResidueInvolutive unit8 = refl
 
 data UnitComplementMode : Set where
-  mode18 mode27 mode45 : UnitComplementMode
+  mode18 : UnitComplementMode
+  mode27 : UnitComplementMode
+  mode45 : UnitComplementMode
 
 data UnitOrientation : Set where
-  directOrientation counterOrientation : UnitOrientation
+  directOrientation : UnitOrientation
+  counterOrientation : UnitOrientation
 
 unitComplementMode : ∀ {residue} → UnitResidue9 residue → UnitComplementMode
 unitComplementMode unit1 = mode18
@@ -346,7 +349,9 @@ proposedFractranOrderedPlusThreeImpossible proposed =
 ------------------------------------------------------------------------
 
 data ActualFractranReplacement : Set where
-  replace23By47 replace7By59 replace11By71 : ActualFractranReplacement
+  replace23By47 : ActualFractranReplacement
+  replace7By59 : ActualFractranReplacement
+  replace11By71 : ActualFractranReplacement
 
 replacementSourcePrime : ActualFractranReplacement → Lane.MonsterPrimeLane
 replacementSourcePrime replace23By47 = Lane.p23
@@ -428,7 +433,9 @@ fortyOneIsPointedMidpointOfEightyOne : 2 * 41 ≡ 81 + 1
 fortyOneIsPointedMidpointOfEightyOne = refl
 
 data DepthTwoReflectionPair : Set where
-  pair11And71 pair23And59 pair41And41 : DepthTwoReflectionPair
+  pair11And71 : DepthTwoReflectionPair
+  pair23And59 : DepthTwoReflectionPair
+  pair41And41 : DepthTwoReflectionPair
 
 leftPrimeValue : DepthTwoReflectionPair → Nat
 leftPrimeValue pair11And71 = 11
@@ -455,7 +462,10 @@ fortyOneIsReflectionFixedPoint = refl
 ------------------------------------------------------------------------
 
 data SevenAPrefixDegree : Set where
-  poleDegree constantDegree qOneDegree qTwoDegree : SevenAPrefixDegree
+  poleDegree : SevenAPrefixDegree
+  constantDegree : SevenAPrefixDegree
+  qOneDegree : SevenAPrefixDegree
+  qTwoDegree : SevenAPrefixDegree
 
 unnormalizedSevenAEtaQuotientCoefficient : SevenAPrefixDegree → Nat
 unnormalizedSevenAEtaQuotientCoefficient poleDegree = 1

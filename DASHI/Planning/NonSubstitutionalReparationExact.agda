@@ -24,7 +24,8 @@ data RepairAxis : Set where
 
 
 data RepairStatus : Set where
-  open repaired : RepairStatus
+  open : RepairStatus
+  repaired : RepairStatus
 
 record ReparativeBundle : Set where
   constructor reparativeBundle

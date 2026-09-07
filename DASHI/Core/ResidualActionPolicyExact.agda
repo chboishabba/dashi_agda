@@ -17,13 +17,13 @@ import DASHI.Core.MechanismModelDiscriminationExact as Model
 ------------------------------------------------------------------------
 
 data ResidualActionKind : Set where
-  reopen
-  measure
-  perturb
-  hold
-  acceptForConsumer
-  refute
-  : ResidualActionKind
+  reopen : ResidualActionKind
+  measure : ResidualActionKind
+  perturb : ResidualActionKind
+  hold : ResidualActionKind
+  acceptForConsumer : ResidualActionKind
+  refute : ResidualActionKind
+
 
 record ResidualActionSemantics : Set₁ where
   constructor residualActionSemantics

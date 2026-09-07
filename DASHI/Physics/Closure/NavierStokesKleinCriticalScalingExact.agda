@@ -82,7 +82,9 @@ serrinDefectAffineExact qInv pInv qShift pShift =
   solve (qInv ∷ pInv ∷ qShift ∷ pShift ∷ [])
 
 data ScalingClassification : Set where
-  subcritical critical supercritical : ScalingClassification
+  subcritical : ScalingClassification
+  critical : ScalingClassification
+  supercritical : ScalingClassification
 
 criticalSerrinSurface : ScalingClassification
 criticalSerrinSurface = critical

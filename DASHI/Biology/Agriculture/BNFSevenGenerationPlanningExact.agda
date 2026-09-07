@@ -29,40 +29,40 @@ import DASHI.Cognition.PNF.SensibLawMaboTwoLegalOrderFibreExact as TwoOrder
 ------------------------------------------------------------------------
 
 data SevenGenerationQuestion : Set where
-  sevenGenerationLandscapeDecision
-  sevenGenerationCountryAffectingDecision
-  : SevenGenerationQuestion
+  sevenGenerationLandscapeDecision : SevenGenerationQuestion
+  sevenGenerationCountryAffectingDecision : SevenGenerationQuestion
+
 
 data LongHorizonCoordinate : Set where
-  presentBiologicalAdequacy
-  presentFarmEconomics
-  generation1SoilWater
-  generation2SoilWater
-  generation3Biodiversity
-  generation4ClimateExposure
-  generation5EconomicResilience
-  generation6DistributionContinuity
-  generation7FutureOptionSet
-  longRunReversibility
-  ecologicalFutureConeAdequacy
-  intergenerationalUncertainty
-  countryAuthorityContinuity
-  communityConsentScopeThroughTime
-  : LongHorizonCoordinate
+  presentBiologicalAdequacy : LongHorizonCoordinate
+  presentFarmEconomics : LongHorizonCoordinate
+  generation1SoilWater : LongHorizonCoordinate
+  generation2SoilWater : LongHorizonCoordinate
+  generation3Biodiversity : LongHorizonCoordinate
+  generation4ClimateExposure : LongHorizonCoordinate
+  generation5EconomicResilience : LongHorizonCoordinate
+  generation6DistributionContinuity : LongHorizonCoordinate
+  generation7FutureOptionSet : LongHorizonCoordinate
+  longRunReversibility : LongHorizonCoordinate
+  ecologicalFutureConeAdequacy : LongHorizonCoordinate
+  intergenerationalUncertainty : LongHorizonCoordinate
+  countryAuthorityContinuity : LongHorizonCoordinate
+  communityConsentScopeThroughTime : LongHorizonCoordinate
+
 
 data EvidenceProducer : Set where
-  fieldExperimentProducer
-  farmEconomicProducer
-  lesSoilHydrologyProducer
-  lesBiodiversityProducer
-  climateScenarioProducer
-  resilienceDistributionProducer
-  futureConeProducer
-  reversibilityProducer
-  uncertaintyProducer
-  communityAuthorityProducer
-  consentScopeProducer
-  : EvidenceProducer
+  fieldExperimentProducer : EvidenceProducer
+  farmEconomicProducer : EvidenceProducer
+  lesSoilHydrologyProducer : EvidenceProducer
+  lesBiodiversityProducer : EvidenceProducer
+  climateScenarioProducer : EvidenceProducer
+  resilienceDistributionProducer : EvidenceProducer
+  futureConeProducer : EvidenceProducer
+  reversibilityProducer : EvidenceProducer
+  uncertaintyProducer : EvidenceProducer
+  communityAuthorityProducer : EvidenceProducer
+  consentScopeProducer : EvidenceProducer
+
 
 requiredFor : SevenGenerationQuestion → LongHorizonCoordinate → Bool
 requiredFor sevenGenerationLandscapeDecision presentBiologicalAdequacy = true
@@ -137,17 +137,17 @@ countryAuthorityProducerIsIndependent : countryAuthorityProducer ≡ communityAu
 countryAuthorityProducerIsIndependent = refl
 
 data LongHorizonWorld : Set where
-  samePresentProfitNarrowFuture
-  samePresentProfitBroadFuture
-  : LongHorizonWorld
+  samePresentProfitNarrowFuture : LongHorizonWorld
+  samePresentProfitBroadFuture : LongHorizonWorld
+
 
 data PresentEconomicObservation : Set where
   samePresentPositiveEconomics : PresentEconomicObservation
 
 data GenerationSevenFutureOption : Set where
-  constrainedFutureOptions
-  broadFutureOptions
-  : GenerationSevenFutureOption
+  constrainedFutureOptions : GenerationSevenFutureOption
+  broadFutureOptions : GenerationSevenFutureOption
+
 
 presentEconomicObserver : LongHorizonWorld → PresentEconomicObservation
 presentEconomicObserver samePresentProfitNarrowFuture = samePresentPositiveEconomics

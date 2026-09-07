@@ -208,10 +208,12 @@ liveProofSearchDoesNotAuthoriseBaselineReflection _ =
 ------------------------------------------------------------------------
 
 data StabiliserExperimentControl : Set where
-  inspectSemanticStatus inspectAuthorityStatus : StabiliserExperimentControl
+  inspectSemanticStatus : StabiliserExperimentControl
+  inspectAuthorityStatus : StabiliserExperimentControl
 
 data StabiliserExperimentCoordinate : Set where
-  semanticStatusCoordinate authorityStatusCoordinate : StabiliserExperimentCoordinate
+  semanticStatusCoordinate : StabiliserExperimentCoordinate
+  authorityStatusCoordinate : StabiliserExperimentCoordinate
 
 data StabiliserExperimentValue : Set where
   semanticLawfulValue : StabiliserExperimentValue
@@ -220,7 +222,8 @@ data StabiliserExperimentValue : Set where
 
 
 data StabiliserExperimentDimension : Set where
-  semanticRoleDimension authorityScopeDimension : StabiliserExperimentDimension
+  semanticRoleDimension : StabiliserExperimentDimension
+  authorityScopeDimension : StabiliserExperimentDimension
 
 applyInspection :
   StabiliserExperimentControl →
@@ -357,7 +360,8 @@ authorityJoinedObservationSeparates =
 ------------------------------------------------------------------------
 
 data ReflectionAuthorityDecision : Set where
-  reflectionBlocked reflectionAuthorised : ReflectionAuthorityDecision
+  reflectionBlocked : ReflectionAuthorityDecision
+  reflectionAuthorised : ReflectionAuthorityDecision
 
 reflectionAuthorityDecision :
   ReceptionAuthorityContext → ReflectionAuthorityDecision

@@ -77,7 +77,12 @@ data RH8894Leaf : Set where
   : RH8894Leaf
 
 data LeafState : Set where
-  pruned owned live conditional downstream diagnostic : LeafState
+  pruned : LeafState
+  owned : LeafState
+  live : LeafState
+  conditional : LeafState
+  downstream : LeafState
+  diagnostic : LeafState
 
 leafState : RH8894Leaf -> LeafState
 leafState searchForModulationOperation = owned

@@ -201,7 +201,8 @@ coarseMeasurementCannotReconstructEffectiveDependency =
   Residual.hiddenResidualDependencyBlocksDescent hiddenEffectiveDependency
 
 data NeuralControlAction : Set where
-  retainRecurrentRoute closeEffectiveRoute : NeuralControlAction
+  retainRecurrentRoute : NeuralControlAction
+  closeEffectiveRoute : NeuralControlAction
 
 initialControlState : BrainState
 initialControlState =

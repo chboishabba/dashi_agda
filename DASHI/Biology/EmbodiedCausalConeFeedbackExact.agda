@@ -14,13 +14,16 @@ import DASHI.Biology.ObserverRelativeReachableSubfabricExact as Subfabric
 ------------------------------------------------------------------------
 
 data WorldState : Set where
-  constrainedWorld openedWorld : WorldState
+  constrainedWorld : WorldState
+  openedWorld : WorldState
 
 data InternalRegime : Set where
-  regulatedInternal mobilisedInternal : InternalRegime
+  regulatedInternal : InternalRegime
+  mobilisedInternal : InternalRegime
 
 data HistoryState : Set where
-  ordinaryHistory learnedThreatHistory : HistoryState
+  ordinaryHistory : HistoryState
+  learnedThreatHistory : HistoryState
 
 record EmbodiedSystemState : Set where
   constructor embodiedSystemState
@@ -40,7 +43,10 @@ regulatedConstrained =
   embodiedSystemState constrainedWorld regulatedInternal learnedThreatHistory
 
 data Action : Set where
-  leaveAction seekHelpAction freezeAction restAction : Action
+  leaveAction : Action
+  seekHelpAction : Action
+  freezeAction : Action
+  restAction : Action
 
 act : Action → EmbodiedSystemState → EmbodiedSystemState
 act leaveAction state =
@@ -96,10 +102,12 @@ regulatedFutureReachable = reachStep regulationStep
 ------------------------------------------------------------------------
 
 data TransitionLaw : Set where
-  baselineLaw learnedThreatLaw : TransitionLaw
+  baselineLaw : TransitionLaw
+  learnedThreatLaw : TransitionLaw
 
 data CandidateTransition : Set where
-  approachSafety defensiveWithdrawal : CandidateTransition
+  approachSafety : CandidateTransition
+  defensiveWithdrawal : CandidateTransition
 
 gate : TransitionLaw → CandidateTransition → Bool
 gate baselineLaw approachSafety = true

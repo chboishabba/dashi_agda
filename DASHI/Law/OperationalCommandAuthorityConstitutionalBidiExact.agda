@@ -13,7 +13,8 @@ import DASHI.Law.JarrettPostBondiConstitutionalSourceReceiptsExact as Jarrett
 ------------------------------------------------------------------------
 
 data CommandAuthorityState : Set where
-  commandAuthorityClosed commandAuthorityOpen : CommandAuthorityState
+  commandAuthorityClosed : CommandAuthorityState
+  commandAuthorityOpen : CommandAuthorityState
 
 record CommandAuthorityFibre : Set where
   constructor commandAuthorityFibre
@@ -46,11 +47,14 @@ open CommandWithAuthority public
 ------------------------------------------------------------------------
 
 data CommandAuthorityCoordinate : Set where
-  powerCoordinate applicableLawCoordinate constitutionalValidityCoordinate : CommandAuthorityCoordinate
+  powerCoordinate : CommandAuthorityCoordinate
+  applicableLawCoordinate : CommandAuthorityCoordinate
+  constitutionalValidityCoordinate : CommandAuthorityCoordinate
   issuerCompetenceCoordinate phaseCoordinate scopeCoordinate : CommandAuthorityCoordinate
 
 data CoordinateState : Set where
-  closed open : CoordinateState
+  closed : CoordinateState
+  open : CoordinateState
 
 record CommandAuthorityVector : Set where
   constructor commandAuthorityVector
@@ -141,7 +145,10 @@ record CommandExecutionCutset : Set where
 open CommandExecutionCutset public
 
 data CommandExecutionResidual : Set where
-  documentResidual authorityResidual transmissionResidual fieldReceiptResidual : CommandExecutionResidual
+  documentResidual : CommandExecutionResidual
+  authorityResidual : CommandExecutionResidual
+  transmissionResidual : CommandExecutionResidual
+  fieldReceiptResidual : CommandExecutionResidual
   civilianDirectionResidual executionResidual executionClosedResult : CommandExecutionResidual
 
 firstCommandExecutionResidual : CommandExecutionCutset → CommandExecutionResidual

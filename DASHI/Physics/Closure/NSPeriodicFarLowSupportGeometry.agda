@@ -43,7 +43,9 @@ farLowRightSupported G t =
   and within (overlap G) (shellLevel G (Near.p t)) (outputShell G)
 
 data FarLowPlacement : Set where
-  leftLow rightLow unsupported : FarLowPlacement
+  leftLow : FarLowPlacement
+  rightLow : FarLowPlacement
+  unsupported : FarLowPlacement
 
 classifyFarLow : FarLowGeometry → Near.ConcreteNearTriad → FarLowPlacement
 classifyFarLow G t with farLowLeftSupported G t

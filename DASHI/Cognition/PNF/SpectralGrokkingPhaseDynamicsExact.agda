@@ -15,7 +15,9 @@ import DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge as Wheel
 ------------------------------------------------------------------------
 
 data LearningTime : Set where
-  memorizing characterFormation cleanup : LearningTime
+  memorizing : LearningTime
+  characterFormation : LearningTime
+  cleanup : LearningTime
 
 characterAmplitude : LearningTime → Nat
 characterAmplitude memorizing = 0
@@ -80,7 +82,8 @@ heldOutTwoPlusTwoUsesWrappedCharacter = refl
 ------------------------------------------------------------------------
 
 data ZeroProgressDirection : Set where
-  approachingGeneralization leavingPlateau : ZeroProgressDirection
+  approachingGeneralization : ZeroProgressDirection
+  leavingPlateau : ZeroProgressDirection
 
 record PreGeneralizationState : Set where
   constructor preGeneralizationState

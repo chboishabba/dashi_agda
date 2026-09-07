@@ -83,7 +83,8 @@ observeFinal : DerivationState → VisibleAssertion
 observeFinal _ = sameFinalAssertion
 
 data DerivationPattern : Set where
-  logicOnlyPattern empiricalQualifiedPattern : DerivationPattern
+  logicOnlyPattern : DerivationPattern
+  empiricalQualifiedPattern : DerivationPattern
 
 patternOf : DerivationState → DerivationPattern
 patternOf sourceState = logicOnlyPattern
@@ -141,7 +142,8 @@ laterAdmissionCannotDescendThroughFinalAssertion =
 ------------------------------------------------------------------------
 
 data FutureConeCode : Set where
-  logicOnlyCone empiricalQualifiedCone : FutureConeCode
+  logicOnlyCone : FutureConeCode
+  empiricalQualifiedCone : FutureConeCode
 
 futureCone : DerivationState → FutureConeCode
 futureCone sourceState = logicOnlyCone

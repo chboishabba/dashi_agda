@@ -16,33 +16,33 @@ import DASHI.Law.HerzogPoliceCountryColonialityCrossPollinationExact as Colonial
 ------------------------------------------------------------------------
 
 data ComparatorEvent : Set where
-  herzogTownHallProtest
-  sydneyMarathonIsraeliMilitaryDelegation
-  jewishInstitutionOrBondiSecurityOperation
+  herzogTownHallProtest : ComparatorEvent
+  sydneyMarathonIsraeliMilitaryDelegation : ComparatorEvent
+  jewishInstitutionOrBondiSecurityOperation : ComparatorEvent
   syntheticComparatorEvent : ComparatorEvent
 
 data PoliticalPosition : Set where
-  antiGenocidePalestinianSolidarity
-  israeliStateOrMilitaryAssociated
-  jewishCommunityProtectionContext
-  politicalPositionMixed
+  antiGenocidePalestinianSolidarity : PoliticalPosition
+  israeliStateOrMilitaryAssociated : PoliticalPosition
+  jewishCommunityProtectionContext : PoliticalPosition
+  politicalPositionMixed : PoliticalPosition
   politicalPositionUnresolved : PoliticalPosition
 
 data SupportState : Set where
-  supportObserved
-  supportReported
-  supportOpen
+  supportObserved : SupportState
+  supportReported : SupportState
+  supportOpen : SupportState
   supportConflict : SupportState
 
 data RoutingPattern : Set where
-  protectiveDominant
-  coerciveDominant
-  mixedRouting
+  protectiveDominant : RoutingPattern
+  coerciveDominant : RoutingPattern
+  mixedRouting : RoutingPattern
   routingUnresolved : RoutingPattern
 
 data CoarseSecurityIntensity : Set where
-  lowSecurityIntensity
-  elevatedSecurityIntensity
+  lowSecurityIntensity : CoarseSecurityIntensity
+  elevatedSecurityIntensity : CoarseSecurityIntensity
   highSecurityIntensity : CoarseSecurityIntensity
 
 record SecurityRoutingHypervoxel : Set where
@@ -193,17 +193,17 @@ coarseSecurityIntensityCannotDetermineRouting =
 ------------------------------------------------------------------------
 
 data ComparatorClaim : Set where
-  protectiveCoerciveRoutingDiffers
-  eventsComparableOnSecurityNeed
-  routingDifferencePersistsAfterConditioning
-  identityOrPoliticalProvenanceAffectedRouting
+  protectiveCoerciveRoutingDiffers : ComparatorClaim
+  eventsComparableOnSecurityNeed : ComparatorClaim
+  routingDifferencePersistsAfterConditioning : ComparatorClaim
+  identityOrPoliticalProvenanceAffectedRouting : ComparatorClaim
   ideologicalMotiveClosed : ComparatorClaim
 
 data ComparatorProducer : Set where
-  eventRoutingReceiptProducer
-  securityNeedCovariateProducer
-  conditionedComparatorProducer
-  classificationDecisionProvenanceProducer
+  eventRoutingReceiptProducer : ComparatorProducer
+  securityNeedCovariateProducer : ComparatorProducer
+  conditionedComparatorProducer : ComparatorProducer
+  classificationDecisionProvenanceProducer : ComparatorProducer
   motiveProducer : ComparatorProducer
 
 reverseComparator : ComparatorClaim → ComparatorProducer
@@ -226,11 +226,11 @@ record ComparatorCutset : Set where
 open ComparatorCutset public
 
 data ComparatorResidual : Set where
-  routingResidual
-  securityNeedResidual
-  conditionedComparisonResidual
-  classificationProvenanceResidual
-  motiveResidual
+  routingResidual : ComparatorResidual
+  securityNeedResidual : ComparatorResidual
+  conditionedComparisonResidual : ComparatorResidual
+  classificationProvenanceResidual : ComparatorResidual
+  motiveResidual : ComparatorResidual
   comparatorClosed : ComparatorResidual
 
 firstComparatorResidual : ComparatorClaim → ComparatorCutset → ComparatorResidual

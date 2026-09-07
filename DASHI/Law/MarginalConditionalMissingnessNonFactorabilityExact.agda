@@ -11,7 +11,8 @@ import DASHI.Core.IntersectionalNonFactorability as NF
 ------------------------------------------------------------------------
 
 data SearchStratum : Set where
-  searched notSearched : SearchStratum
+  searched : SearchStratum
+  notSearched : SearchStratum
 
 data MissingnessPattern : Set where
   missingConcentratedAfterSearch : MissingnessPattern
@@ -88,13 +89,18 @@ marginalRechartCannotRecoverConditionalMechanism rechart =
 ------------------------------------------------------------------------
 
 data OutcomeAxis : Set where
-  searchOccurred searchDidNotOccur : OutcomeAxis
+  searchOccurred : OutcomeAxis
+  searchDidNotOccur : OutcomeAxis
 
 data OfficerAxis : Set where
-  officerA officerB officerUnknown : OfficerAxis
+  officerA : OfficerAxis
+  officerB : OfficerAxis
+  officerUnknown : OfficerAxis
 
 data PlaceAxis : Set where
-  placeA placeB placeUnknown : PlaceAxis
+  placeA : PlaceAxis
+  placeB : PlaceAxis
+  placeUnknown : PlaceAxis
 
 record MissingnessStratum : Set where
   constructor missingnessStratum
@@ -160,7 +166,11 @@ record MissingnessStructureCutset : Set where
 open MissingnessStructureCutset public
 
 data MissingnessStructureResidual : Set where
-  marginalResidual outcomeCrossTabResidual officerCrossTabResidual placeCrossTabResidual structureClosed : MissingnessStructureResidual
+  marginalResidual : MissingnessStructureResidual
+  outcomeCrossTabResidual : MissingnessStructureResidual
+  officerCrossTabResidual : MissingnessStructureResidual
+  placeCrossTabResidual : MissingnessStructureResidual
+  structureClosed : MissingnessStructureResidual
 
 firstMissingnessStructureResidual : MissingnessStructureClaim → MissingnessStructureCutset → MissingnessStructureResidual
 firstMissingnessStructureResidual marginalMissingnessRate c with marginalClosed c

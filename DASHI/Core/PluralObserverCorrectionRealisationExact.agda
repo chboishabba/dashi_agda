@@ -185,9 +185,9 @@ correctionDoesNotRecoverRealisedOutcome collision =
 ------------------------------------------------------------------------
 
 data DemoState : Set where
-  institutionSaysClosedAffectedOpen
-  institutionSaysClosedAffectedClosed
-  : DemoState
+  institutionSaysClosedAffectedOpen : DemoState
+  institutionSaysClosedAffectedClosed : DemoState
+
 
 data DemoDeclared : Set where declaredRepair : DemoDeclared
 data DemoInstitutional : Set where institutionReportsCompliant : DemoInstitutional
@@ -253,9 +253,9 @@ monitoringPresenceCannotRecoverRevision =
 ------------------------------------------------------------------------
 
 data OutcomeFixtureState : Set where
-  sameCorrectionHarmPersists
-  sameCorrectionRepairRealised
-  : OutcomeFixtureState
+  sameCorrectionHarmPersists : OutcomeFixtureState
+  sameCorrectionRepairRealised : OutcomeFixtureState
+
 
 data OutcomeFixtureDeclared : Set where outcomeDeclaredRepair : OutcomeFixtureDeclared
 data OutcomeFixtureInstitutional : Set where outcomeInstitutionReportsAction : OutcomeFixtureInstitutional

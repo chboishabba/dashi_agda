@@ -53,7 +53,11 @@ data _↝_ : SemanticStage → SemanticStage → Set where
 ------------------------------------------------------------------------
 
 data SyntacticRole : Set where
-  subjectRole objectRole obliqueRole complementRole argumentRole : SyntacticRole
+  subjectRole : SyntacticRole
+  objectRole : SyntacticRole
+  obliqueRole : SyntacticRole
+  complementRole : SyntacticRole
+  argumentRole : SyntacticRole
 
 data AccessibilityPath : Set where
   sameClause : AccessibilityPath

@@ -49,7 +49,9 @@ data OrganicSourceFamily : Set where
 
 
 data FossilCarbonFamily : Set where
-  coal petroleum naturalGas : FossilCarbonFamily
+  coal : FossilCarbonFamily
+  petroleum : FossilCarbonFamily
+  naturalGas : FossilCarbonFamily
 
 record FossilCarbonFormationReceipt : Set where
   constructor fossil-carbon-formation-receipt

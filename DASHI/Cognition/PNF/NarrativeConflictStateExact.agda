@@ -107,7 +107,8 @@ open VerifiedReconstruction public
 ------------------------------------------------------------------------
 
 data FinePersona : Set where
-  fineA fineB : FinePersona
+  fineA : FinePersona
+  fineB : FinePersona
 
 data PublicPersona : Set where
   samePublic : PublicPersona

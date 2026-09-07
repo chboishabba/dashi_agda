@@ -22,7 +22,8 @@ data Environment : Set where
   stairOnlyConnection : Environment
 
 data Agent : Set where
-  stairUser stepFreeUser : Agent
+  stairUser : Agent
+  stepFreeUser : Agent
 
 data Activity : Set where
   reachUpperLevel : Activity

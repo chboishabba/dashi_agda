@@ -8,15 +8,24 @@ open import Data.List.Base using (List; []; _∷_)
 import DASHI.Cognition.PNF.EventAlgebra as PNF
 
 data IRDomain : Set where
-  legalDomain timelineDomain retrievalDomain memoryDomain nashiDomain : IRDomain
+  legalDomain : IRDomain
+  timelineDomain : IRDomain
+  retrievalDomain : IRDomain
+  memoryDomain : IRDomain
+  nashiDomain : IRDomain
   genericSemanticDomain : IRDomain
 
 data IRValidationState : Set where
-  operationallyValid missingRequiredField supersededRule : IRValidationState
+  operationallyValid : IRValidationState
+  missingRequiredField : IRValidationState
+  supersededRule : IRValidationState
   blockedByException executionGateFailed insufficientForDomain : IRValidationState
 
 data ExecutionOutcome : Set where
-  executed refused insufficient superseded : ExecutionOutcome
+  executed : ExecutionOutcome
+  refused : ExecutionOutcome
+  insufficient : ExecutionOutcome
+  superseded : ExecutionOutcome
 
 record DomainIR : Set where
   constructor domainIR

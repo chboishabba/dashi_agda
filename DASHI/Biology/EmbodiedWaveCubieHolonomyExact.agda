@@ -20,7 +20,11 @@ import DASHI.Core.IntersectionalNonFactorability as NF
 ------------------------------------------------------------------------
 
 data FineEmbodiedWaveState : Set where
-  rootState waveShifted bodyShifted waveAfterBody bodyAfterWave : FineEmbodiedWaveState
+  rootState : FineEmbodiedWaveState
+  waveShifted : FineEmbodiedWaveState
+  bodyShifted : FineEmbodiedWaveState
+  waveAfterBody : FineEmbodiedWaveState
+  bodyAfterWave : FineEmbodiedWaveState
 
 data PublicSurface : Set where
   samePublicSurface : PublicSurface
@@ -52,7 +56,8 @@ orderedEndpointsSharePublicSurface :
 orderedEndpointsSharePublicSurface = refl
 
 data OrderChoice : Set where
-  waveFirst bodyFirst : OrderChoice
+  waveFirst : OrderChoice
+  bodyFirst : OrderChoice
 
 orderedEndpoint : OrderChoice → FineEmbodiedWaveState
 orderedEndpoint waveFirst = waveThenBody

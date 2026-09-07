@@ -36,10 +36,13 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 data SourceReviewStatus : Set where
-  peerReviewed unreviewedPreprint : SourceReviewStatus
+  peerReviewed : SourceReviewStatus
+  unreviewedPreprint : SourceReviewStatus
 
 data SourceUse : Set where
-  theoremDependency structuralComparator reconnaissanceOnly : SourceUse
+  theoremDependency : SourceUse
+  structuralComparator : SourceUse
+  reconnaissanceOnly : SourceUse
 
 publishedResidenceTimeStatus : SourceReviewStatus
 publishedResidenceTimeStatus = peerReviewed

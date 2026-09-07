@@ -18,22 +18,43 @@ import DASHI.Governance.BritishColumbiaDecriminalizationBundleExact as BC
 ------------------------------------------------------------------------
 
 data PersonKind : Set where
-  genericPerson autisticPerson neurodivergentPerson unhousedPerson : PersonKind
+  genericPerson : PersonKind
+  autisticPerson : PersonKind
+  neurodivergentPerson : PersonKind
+  unhousedPerson : PersonKind
 
 data BuiltEnvironment : Set where
-  adjustableRetreatSpace denseUncontrolledSpace segmentedHostileSpace neutralPublicSpace : BuiltEnvironment
+  adjustableRetreatSpace : BuiltEnvironment
+  denseUncontrolledSpace : BuiltEnvironment
+  segmentedHostileSpace : BuiltEnvironment
+  neutralPublicSpace : BuiltEnvironment
 
 data SocialNormRegime : Set where
-  lowDemandNorms conformityDemandNorms exclusionaryNorms : SocialNormRegime
+  lowDemandNorms : SocialNormRegime
+  conformityDemandNorms : SocialNormRegime
+  exclusionaryNorms : SocialNormRegime
 
 data InstitutionalRegime : Set where
-  permissiveRegime partialPermissionRegime restrictiveRegime : InstitutionalRegime
+  permissiveRegime : InstitutionalRegime
+  partialPermissionRegime : InstitutionalRegime
+  restrictiveRegime : InstitutionalRegime
 
 data RelationContext : Set where
-  aloneRelation trustedFriendRelation unknownRelation : RelationContext
+  aloneRelation : RelationContext
+  trustedFriendRelation : RelationContext
+  unknownRelation : RelationContext
 
 data Action : Set where
-  enterAction remainAction restAction recoverAction observeAction interactAction declineInteractionAction leaveAction returnAction sleepAction : Action
+  enterAction : Action
+  remainAction : Action
+  restAction : Action
+  recoverAction : Action
+  observeAction : Action
+  interactAction : Action
+  declineInteractionAction : Action
+  leaveAction : Action
+  returnAction : Action
+  sleepAction : Action
 
 record Ecology : Set where
   constructor ecology
@@ -135,7 +156,9 @@ thirdPlaceSupportsExitAndReturn = refl , refl
 ------------------------------------------------------------------------
 
 data DesignIntent : Set where
-  exclusionaryIntent inclusiveIntent unknownIntent : DesignIntent
+  exclusionaryIntent : DesignIntent
+  inclusiveIntent : DesignIntent
+  unknownIntent : DesignIntent
 
 record DesignedEcology : Set where
   constructor designedEcology

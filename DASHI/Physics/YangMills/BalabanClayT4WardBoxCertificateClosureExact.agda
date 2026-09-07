@@ -34,10 +34,12 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 
 data WardGenerator : Set where
-  gaugePairGenerator measurePairGenerator : WardGenerator
+  gaugePairGenerator : WardGenerator
+  measurePairGenerator : WardGenerator
 
 data WardSign : Set where
-  positive negative : WardSign
+  positive : WardSign
+  negative : WardSign
 
 record SignedWardAtom : Set where
   constructor signedWardAtom

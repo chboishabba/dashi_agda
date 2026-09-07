@@ -37,13 +37,15 @@ ludditeArchiveReceipt = historical-source-receipt
 ------------------------------------------------------------------------
 
 data FineFactoryFireState : Set where
-  accidentalIndustrialFire politicallyMotivatedArson : FineFactoryFireState
+  accidentalIndustrialFire : FineFactoryFireState
+  politicallyMotivatedArson : FineFactoryFireState
 
 data BurnedFactorySurface : Set where
   sameBurnedFactory : BurnedFactorySurface
 
 data FireCauseClass : Set where
-  accidentalCause politicalArsonCause : FireCauseClass
+  accidentalCause : FireCauseClass
+  politicalArsonCause : FireCauseClass
 
 factorySurface : FineFactoryFireState → BurnedFactorySurface
 factorySurface accidentalIndustrialFire = sameBurnedFactory

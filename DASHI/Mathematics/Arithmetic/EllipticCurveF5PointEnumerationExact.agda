@@ -22,7 +22,11 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Product using (_×_; _,_)
 
 data F5 : Set where
-  f0 f1 f2 f3 f4 : F5
+  f0 : F5
+  f1 : F5
+  f2 : F5
+  f3 : F5
+  f4 : F5
 
 allF5 : List F5
 allF5 = f0 ∷ f1 ∷ f2 ∷ f3 ∷ f4 ∷ []

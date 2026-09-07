@@ -28,7 +28,11 @@ import DASHI.Foundations.RecursiveRadixHypervoxel as Hyper
 ------------------------------------------------------------------------
 
 data FaceState : Set where
-  root aOnly bOnly aAfterB bAfterA : FaceState
+  root : FaceState
+  aOnly : FaceState
+  bOnly : FaceState
+  aAfterB : FaceState
+  bAfterA : FaceState
 
 data FaceSurface : Set where coarseFace : FaceSurface
 

@@ -10,13 +10,23 @@ import DASHI.Law.CoerciveEncounterLawfulnessBidiExact as Law
 ------------------------------------------------------------------------
 
 data ProducerRelation : Set where
-  actorUnderReview sameInstitution independentInstitution independentThirdParty : ProducerRelation
+  actorUnderReview : ProducerRelation
+  sameInstitution : ProducerRelation
+  independentInstitution : ProducerRelation
+  independentThirdParty : ProducerRelation
 
 data CorroborationState : Set where
-  uncorroborated internallyCorroborated independentlyCorroborated : CorroborationState
+  uncorroborated : CorroborationState
+  internallyCorroborated : CorroborationState
+  independentlyCorroborated : CorroborationState
 
 data AcquisitionMode : Set where
-  officerReport bodyCamera deviceTelemetry medicalRecord civilianVideo witnessStatement : AcquisitionMode
+  officerReport : AcquisitionMode
+  bodyCamera : AcquisitionMode
+  deviceTelemetry : AcquisitionMode
+  medicalRecord : AcquisitionMode
+  civilianVideo : AcquisitionMode
+  witnessStatement : AcquisitionMode
 
 record EvidenceReceipt : Set where
   constructor evidenceReceipt
@@ -51,10 +61,12 @@ data EvidenceContent : Set where
   noForceRecorded : EvidenceContent
 
 data ProvenanceStrength : Set where
-  dependentStrength independentStrength : ProvenanceStrength
+  dependentStrength : ProvenanceStrength
+  independentStrength : ProvenanceStrength
 
 data ProvenanceWitnessState : Set where
-  sameContentDependent sameContentIndependent : ProvenanceWitnessState
+  sameContentDependent : ProvenanceWitnessState
+  sameContentIndependent : ProvenanceWitnessState
 
 contentProjection : ProvenanceWitnessState → EvidenceContent
 contentProjection sameContentDependent = noForceRecorded

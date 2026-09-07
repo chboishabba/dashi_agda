@@ -30,7 +30,9 @@ data NineCell : Set where
   northWest northEast southEast southWest : NineCell
 
 data CellOrbit : Set where
-  centreOrbit edgeOrbit cornerOrbit : CellOrbit
+  centreOrbit : CellOrbit
+  edgeOrbit : CellOrbit
+  cornerOrbit : CellOrbit
 
 orbitOf : NineCell → CellOrbit
 orbitOf centre = centreOrbit

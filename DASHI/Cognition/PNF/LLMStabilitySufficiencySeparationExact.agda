@@ -39,7 +39,8 @@ nonExpansiveComposition fStable gStable =
 ------------------------------------------------------------------------
 
 data TwoState : Set where
-  leftState rightState : TwoState
+  leftState : TwoState
+  rightState : TwoState
 
 fineDistance : TwoState → TwoState → Nat
 fineDistance leftState leftState = 0

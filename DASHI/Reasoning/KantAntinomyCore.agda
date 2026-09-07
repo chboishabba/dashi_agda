@@ -11,7 +11,8 @@ import DASHI.Reasoning.KantCriticalCompiler as Kant
 ------------------------------------------------------------------------
 
 data AntinomyKind : Set where
-  mathematicalAntinomy dynamicalAntinomy : AntinomyKind
+  mathematicalAntinomy : AntinomyKind
+  dynamicalAntinomy : AntinomyKind
 
 record AntinomyReceipt : Set₁ where
   field

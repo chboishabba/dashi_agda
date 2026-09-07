@@ -12,7 +12,9 @@ open import Data.List.Base using (List; []; _∷_)
 -- YM stubs, which are still under active development elsewhere in the tree.
 
 data SU2Gen : Set where
-  T1 T2 T3 : SU2Gen
+  T1 : SU2Gen
+  T2 : SU2Gen
+  T3 : SU2Gen
 
 data SU2Signed : Set where
   zero : SU2Signed
@@ -34,7 +36,8 @@ SU2Element : Set
 SU2Element = List SU2Signed
 
 data LatticeSite : Set where
-  source target : LatticeSite
+  source : LatticeSite
+  target : LatticeSite
 
 data LatticeEdge : Set where
   edge01 : LatticeEdge
@@ -119,7 +122,9 @@ adInvariance T3 T3 T3 = refl
 -- Finite plaquette carrier and action.
 
 data Plaquette : Set where
-  p12 p23 p31 : Plaquette
+  p12 : Plaquette
+  p23 : Plaquette
+  p31 : Plaquette
 
 plaquettes : List Plaquette
 plaquettes = p12 ∷ p23 ∷ p31 ∷ []

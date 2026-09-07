@@ -83,10 +83,13 @@ currentP279ProjectionNonDescent =
 ------------------------------------------------------------------------
 
 data Film : Set where
-  submarineFilm trenchFilm weatherFilm : Film
+  submarineFilm : Film
+  trenchFilm : Film
+  weatherFilm : Film
 
 data FilmProperty : Set where
-  mainSubject depicts : FilmProperty
+  mainSubject : FilmProperty
+  depicts : FilmProperty
 
 data FilmAssertion : FilmProperty → Film → W.Entity → Set where
   submarine-main-subject :

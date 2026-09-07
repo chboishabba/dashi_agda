@@ -55,20 +55,20 @@ colonialAuthorityReclassificationWrongType = Ontology.wrongTypeRecord
 ------------------------------------------------------------------------
 
 data AntecedentAuthorityType : Set where
-  sovereignNormativeOrder
-  communityPoliticalAuthority
+  sovereignNormativeOrder : AntecedentAuthorityType
+  communityPoliticalAuthority : AntecedentAuthorityType
   countryLawRelation : AntecedentAuthorityType
 
 data ColonialAdministrativeType : Set where
-  settledTerritory
-  crownLandAdministration
-  protectedPopulation
+  settledTerritory : ColonialAdministrativeType
+  crownLandAdministration : ColonialAdministrativeType
+  protectedPopulation : ColonialAdministrativeType
   assimilablePopulation : ColonialAdministrativeType
 
 data ReclassificationEffect : Set where
-  receptionOfEnglishLaw
-  crownLandAvailability
-  administrativeControl
+  receptionOfEnglishLaw : ReclassificationEffect
+  crownLandAvailability : ReclassificationEffect
+  administrativeControl : ReclassificationEffect
   assimilationControl : ReclassificationEffect
 
 record AuthorityReclassification : Set where
@@ -128,17 +128,17 @@ colonialWrongTypeInterpretation = Ontology.interpretation
 ------------------------------------------------------------------------
 
 data ColonialWrongTypeClaim : Set where
-  colonialAuthorityReclassificationIsCandidateWrongType
-  colonialAuthorityReclassificationIsApplicableLegalWrong
-  colonialWrongTypeWasViolated
-  colonialWrongTypeCreatesPresentLiability
+  colonialAuthorityReclassificationIsCandidateWrongType : ColonialWrongTypeClaim
+  colonialAuthorityReclassificationIsApplicableLegalWrong : ColonialWrongTypeClaim
+  colonialWrongTypeWasViolated : ColonialWrongTypeClaim
+  colonialWrongTypeCreatesPresentLiability : ColonialWrongTypeClaim
   colonialProjectionErasedAntecedentAuthority : ColonialWrongTypeClaim
 
 data ColonialWrongTypeProducer : Set where
-  analyticalWrongTypeInterpretationProducer
-  applicabilityAndJurisdictionProducer
-  proofRelevantElementProducer
-  liabilityAndRemedyProducer
+  analyticalWrongTypeInterpretationProducer : ColonialWrongTypeProducer
+  applicabilityAndJurisdictionProducer : ColonialWrongTypeProducer
+  proofRelevantElementProducer : ColonialWrongTypeProducer
+  liabilityAndRemedyProducer : ColonialWrongTypeProducer
   beforeAfterAuthorityProjectionProducer : ColonialWrongTypeProducer
 
 reverseColonialWrongType : ColonialWrongTypeClaim → ColonialWrongTypeProducer

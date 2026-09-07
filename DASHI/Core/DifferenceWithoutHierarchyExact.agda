@@ -82,10 +82,12 @@ uniformTreatmentCannotRecoverSituatedOutcome failure =
 ------------------------------------------------------------------------
 
 data SituatedMode : Set where
-  modeA modeB : SituatedMode
+  modeA : SituatedMode
+  modeB : SituatedMode
 
 data ModeObservation : Set where
-  observedA observedB : ModeObservation
+  observedA : ModeObservation
+  observedB : ModeObservation
 
 data EqualStanding : Set where
   sameStanding : EqualStanding
@@ -111,7 +113,8 @@ data NominalTreatment : Set where
   sameRule : NominalTreatment
 
 data RealizedOutcome : Set where
-  realizedA realizedB : RealizedOutcome
+  realizedA : RealizedOutcome
+  realizedB : RealizedOutcome
 
 nominalTreatment : SituatedMode → NominalTreatment
 nominalTreatment modeA = sameRule

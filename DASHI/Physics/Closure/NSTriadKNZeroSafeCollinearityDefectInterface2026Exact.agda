@@ -28,7 +28,8 @@ open import Data.Rational.Base using (ℚ; 0ℚ; _-_)
 ------------------------------------------------------------------------
 
 data CellActivity : Set where
-  zeroCell activeCell : CellActivity
+  zeroCell : CellActivity
+  activeCell : CellActivity
 
 zeroSafeDefect :
   ∀ {Index : Set} →

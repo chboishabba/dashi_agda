@@ -14,11 +14,15 @@ import DASHI.Governance.SafeJustSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data ClaimRole : Set where
-  empiricalRestatement empiricalSynthesis causalInterpretation : ClaimRole
+  empiricalRestatement : ClaimRole
+  empiricalSynthesis : ClaimRole
+  causalInterpretation : ClaimRole
   normativeRecommendation politicalProgramme conceptualFraming : ClaimRole
 
 data AuthorityKind : Set where
-  empiricalObservationAuthority reviewSynthesisAuthority causalIdentificationAuthority : AuthorityKind
+  empiricalObservationAuthority : AuthorityKind
+  reviewSynthesisAuthority : AuthorityKind
+  causalIdentificationAuthority : AuthorityKind
   normativeMandateAuthority politicalProgrammeAuthority conceptualInterpretiveAuthority : AuthorityKind
 
 data Authorizes : AuthorityKind → ClaimRole → Set where
@@ -66,7 +70,10 @@ canonicalKallisSynthesisRoute =
 ------------------------------------------------------------------------
 
 data PostGrowthFamily : Set where
-  doughnutEconomics wellbeingEconomics steadyStateEconomics degrowth : PostGrowthFamily
+  doughnutEconomics : PostGrowthFamily
+  wellbeingEconomics : PostGrowthFamily
+  steadyStateEconomics : PostGrowthFamily
+  degrowth : PostGrowthFamily
 
 record PostGrowthConcept : Set where
   constructor postGrowthConcept
@@ -83,7 +90,10 @@ canonicalPostGrowthConcept = postGrowthConcept false true true
 ------------------------------------------------------------------------
 
 data UpstreamEvidenceOwner : Set where
-  oneill2018Owner fanning2022Owner collste2021Owner otherReviewEvidence : UpstreamEvidenceOwner
+  oneill2018Owner : UpstreamEvidenceOwner
+  fanning2022Owner : UpstreamEvidenceOwner
+  collste2021Owner : UpstreamEvidenceOwner
+  otherReviewEvidence : UpstreamEvidenceOwner
 
 record ReviewRestatement : Set where
   constructor reviewRestatement

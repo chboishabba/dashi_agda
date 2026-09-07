@@ -29,7 +29,11 @@ import DASHI.Interop.WikidataCandidateRoleBridge as CandidateRole
 ------------------------------------------------------------------------
 
 data ImportedSurfaceKind : Set where
-  classFact propertyFact constraintFact statementFact provenanceFact : ImportedSurfaceKind
+  classFact : ImportedSurfaceKind
+  propertyFact : ImportedSurfaceKind
+  constraintFact : ImportedSurfaceKind
+  statementFact : ImportedSurfaceKind
+  provenanceFact : ImportedSurfaceKind
   temporalFact identityFact lexicalFact rdfFact diagnosticFact repairFact : ImportedSurfaceKind
 
 record WholeBridgeReceipt : Set where

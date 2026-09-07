@@ -25,10 +25,12 @@ ReopenableFibreExtension = Quotient.ProvenanceBearingQuotient
 ------------------------------------------------------------------------
 
 data SuppressionState : Set where
-  currentlySalient currentlySuppressed : SuppressionState
+  currentlySalient : SuppressionState
+  currentlySuppressed : SuppressionState
 
 data ExecutionRetention : Set where
-  retainedForExecution prunedFromExecution : ExecutionRetention
+  retainedForExecution : ExecutionRetention
+  prunedFromExecution : ExecutionRetention
 
 record RefutationSystem (Candidate Evidence : Set) : Set₁ where
   field

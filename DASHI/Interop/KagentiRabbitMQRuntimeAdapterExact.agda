@@ -19,10 +19,14 @@ import DASHI.Core.RuntimeEventExecutionBridgeExact as Runtime
 ------------------------------------------------------------------------
 
 data AgentTransition : Set where
-  createAgent updateAgent deleteAgent : AgentTransition
+  createAgent : AgentTransition
+  updateAgent : AgentTransition
+  deleteAgent : AgentTransition
 
 data KagentiAgentEventKind : Set where
-  Created Updated Deleted : KagentiAgentEventKind
+  Created : KagentiAgentEventKind
+  Updated : KagentiAgentEventKind
+  Deleted : KagentiAgentEventKind
 
 transitionFor : KagentiAgentEventKind → AgentTransition
 transitionFor Created = createAgent

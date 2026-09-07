@@ -30,10 +30,12 @@ import DASHI.Governance.OptionConeCoercionExact as Cone
 ------------------------------------------------------------------------
 
 data HistoryContext : Set where
-  regulatedHistory mobilisedHistory : HistoryContext
+  regulatedHistory : HistoryContext
+  mobilisedHistory : HistoryContext
 
 data EcologyContext : Set where
-  supportiveEcology hostileEcology : EcologyContext
+  supportiveEcology : EcologyContext
+  hostileEcology : EcologyContext
 
 record SituatedState : Set where
   constructor situated-state
@@ -68,7 +70,11 @@ sameRegulatedHistory = refl
 ------------------------------------------------------------------------
 
 data SocialOption : Set where
-  remain recover optionalInteraction exit returnLater : SocialOption
+  remain : SocialOption
+  recover : SocialOption
+  optionalInteraction : SocialOption
+  exit : SocialOption
+  returnLater : SocialOption
 
 data Available : SituatedState → SocialOption → Set where
   rsRemain : Available regulatedSupportive remain

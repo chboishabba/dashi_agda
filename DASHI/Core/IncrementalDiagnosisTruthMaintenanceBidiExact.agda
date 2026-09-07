@@ -56,7 +56,10 @@ record IncrementalRevisionReceipt
 open IncrementalRevisionReceipt public
 
 data Artifact : Set where
-  observation model frame consumer : Artifact
+  observation : Artifact
+  model : Artifact
+  frame : Artifact
+  consumer : Artifact
 
 data Depends : Artifact → Artifact → Set where
   observationToModel : Depends observation model

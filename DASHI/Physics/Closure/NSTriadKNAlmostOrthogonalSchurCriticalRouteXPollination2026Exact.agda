@@ -169,8 +169,8 @@ physicalCertificateAdvancesRoute _ = physicalUniformGramProducerAvailable
 ------------------------------------------------------------------------
 
 data PhysicalProducerMechanism : Set where
-  angularSeparation
-  helicityPolarisation
+  angularSeparation : PhysicalProducerMechanism
+  helicityPolarisation : PhysicalProducerMechanism
   oscillatoryConvolutionPhase : PhysicalProducerMechanism
 
 firstAngularCandidate : PhysicalProducerMechanism

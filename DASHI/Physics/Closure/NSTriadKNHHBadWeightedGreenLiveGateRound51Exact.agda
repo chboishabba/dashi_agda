@@ -99,7 +99,9 @@ softComKernelWeightedGreenImpliesH0Strict input =
   weightedGreenImpliesH2Strict (softComKernelWeightedLiveInput input)
 
 data HHBadPhysicalRoute51 : Set where
-  strictContraction rawSummable weightedGreen : HHBadPhysicalRoute51
+  strictContraction : HHBadPhysicalRoute51
+  rawSummable : HHBadPhysicalRoute51
+  weightedGreen : HHBadPhysicalRoute51
 
 weightedGreenIsMasterHHBadFallback : Bool
 weightedGreenIsMasterHHBadFallback = true

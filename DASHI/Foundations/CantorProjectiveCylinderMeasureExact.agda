@@ -21,7 +21,8 @@ BitStream : Set
 BitStream = Nat → Bool
 
 data CantorTrit : Set where
-  leftTrit rightTrit : CantorTrit
+  leftTrit : CantorTrit
+  rightTrit : CantorTrit
 
 cantorTritOfBit : Bool → CantorTrit
 cantorTritOfBit false = leftTrit

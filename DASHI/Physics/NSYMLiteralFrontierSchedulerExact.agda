@@ -20,11 +20,11 @@ import DASHI.Physics.YangMills.BalabanFrontierRouteAdmissionRound147Exact as YM1
 ------------------------------------------------------------------------
 
 data NSMove : Set where
-  boundedAlmostPeriodicRoute
-  directCriticalConeRoute
-  constantBandLocalizationRoute
-  numericalCriticalConeDiagnostic
-  : NSMove
+  boundedAlmostPeriodicRoute : NSMove
+  directCriticalConeRoute : NSMove
+  constantBandLocalizationRoute : NSMove
+  numericalCriticalConeDiagnostic : NSMove
+
 
 nsLiteralMove : NSMove → Literal.LiteralFrontierMove
 nsLiteralMove boundedAlmostPeriodicRoute = Literal.literalFrontierMove
@@ -108,12 +108,12 @@ nsCriticalLeafOpen = NS.round285PhysicalCriticalConeSignedCovarianceClosedIsFals
 ------------------------------------------------------------------------
 
 data YMMove : Set where
-  directRound108Route
-  combinedRGFallbackRoute
-  round108SemanticsChild
-  round108BC1MatchChild
-  numericalDensityDiagnostic
-  : YMMove
+  directRound108Route : YMMove
+  combinedRGFallbackRoute : YMMove
+  round108SemanticsChild : YMMove
+  round108BC1MatchChild : YMMove
+  numericalDensityDiagnostic : YMMove
+
 
 ymLiteralMove : YMMove → Literal.LiteralFrontierMove
 ymLiteralMove directRound108Route = Literal.literalFrontierMove

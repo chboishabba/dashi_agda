@@ -13,10 +13,14 @@ open import DASHI.Physics.SFGC.NonAbelian.GradedSFGCSite2D using
 -- relations computable by normalization rather than postulate.
 
 data Sign : Set where
-  plus minus : Sign
+  plus : Sign
+  minus : Sign
 
 data EvenBasis : Set where
-  one e12 e23 e13 : EvenBasis
+  one : EvenBasis
+  e12 : EvenBasis
+  e23 : EvenBasis
+  e13 : EvenBasis
 
 data SignedEven : Set where
   signed : Sign → EvenBasis → SignedEven

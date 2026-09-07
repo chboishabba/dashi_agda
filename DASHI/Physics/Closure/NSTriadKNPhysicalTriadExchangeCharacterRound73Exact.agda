@@ -31,7 +31,8 @@ open import Data.Rational.Base using (ℚ; 0ℚ; _+_; -_)
 import Data.Rational.Properties as ℚP
 
 data ExchangeSector : Set where
-  exchangeEven exchangeOdd : ExchangeSector
+  exchangeEven : ExchangeSector
+  exchangeOdd : ExchangeSector
 
 record ExchangePair : Set where
   constructor exchange-pair

@@ -48,7 +48,8 @@ import DASHI.Moonshine.P11MarkedX2DeckCharacterSeparationExact as Char
 ------------------------------------------------------------------------
 
 data CollisionSector : Set where
-  brandtSector standardSector : CollisionSector
+  brandtSector : CollisionSector
+  standardSector : CollisionSector
 
 coarseObservation : CollisionSector → Dec.JointEigenFingerprint
 coarseObservation brandtSector = Dec.brandtNewformFingerprint

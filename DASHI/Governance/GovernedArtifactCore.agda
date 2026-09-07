@@ -14,13 +14,19 @@ open import Agda.Builtin.Nat using (Nat)
 
 
 data DiagnosticSeverity : Set where
-  pass warn fail : DiagnosticSeverity
+  pass : DiagnosticSeverity
+  warn : DiagnosticSeverity
+  fail : DiagnosticSeverity
 
 data Decision : Set where
-  promote abstain reject : Decision
+  promote : Decision
+  abstain : Decision
+  reject : Decision
 
 data SearchDecision : Set where
-  admitToBeam discardFromBeam rejectTransition : SearchDecision
+  admitToBeam : SearchDecision
+  discardFromBeam : SearchDecision
+  rejectTransition : SearchDecision
 
 record CandidateEnvelope
   (State Policy Evidence Hash : Set) : Set where

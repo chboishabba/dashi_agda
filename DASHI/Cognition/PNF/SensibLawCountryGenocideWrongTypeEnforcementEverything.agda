@@ -199,20 +199,20 @@ substantiveCouncilActionCanBeVetoBlocked = refl
 ------------------------------------------------------------------------
 
 data EnforcementResidual : Set where
-  noJurisdictionYet
-  bindingOrderWithoutOwnExecutionArm
-  nonComplianceAwaitingExternalActuator
-  punitiveForumNotYetAvailable
-  domesticImplementationMissing
-  : EnforcementResidual
+  noJurisdictionYet : EnforcementResidual
+  bindingOrderWithoutOwnExecutionArm : EnforcementResidual
+  nonComplianceAwaitingExternalActuator : EnforcementResidual
+  punitiveForumNotYetAvailable : EnforcementResidual
+  domesticImplementationMissing : EnforcementResidual
+
 
 data EnforcementProducer : Set where
-  produceJurisdictionReceipt
-  produceDomesticImplementationReceipt
-  produceSecurityCouncilDecisionOrAlternativePressure
-  produceCriminalForumJurisdiction
-  produceComplianceEvidence
-  : EnforcementProducer
+  produceJurisdictionReceipt : EnforcementProducer
+  produceDomesticImplementationReceipt : EnforcementProducer
+  produceSecurityCouncilDecisionOrAlternativePressure : EnforcementProducer
+  produceCriminalForumJurisdiction : EnforcementProducer
+  produceComplianceEvidence : EnforcementProducer
+
 
 producerForResidual : EnforcementResidual → EnforcementProducer
 producerForResidual noJurisdictionYet = produceJurisdictionReceipt

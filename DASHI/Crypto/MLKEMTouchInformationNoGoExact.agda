@@ -30,10 +30,16 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data Hidden4 : Set where
-  h0 h1 h2 h3 : Hidden4
+  h0 : Hidden4
+  h1 : Hidden4
+  h2 : Hidden4
+  h3 : Hidden4
 
 data Cell4 : Set where
-  c0 c1 c2 c3 : Cell4
+  c0 : Cell4
+  c1 : Cell4
+  c2 : Cell4
+  c3 : Cell4
 
 observeOneCell : Hidden4 → Cell4
 observeOneCell h0 = c0

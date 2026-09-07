@@ -21,12 +21,12 @@ import DASHI.Governance.TraumaExploitationAttractor as Trauma
 ------------------------------------------------------------------------
 
 data AntiFascistMechanism : Set where
-  restoreDistinctions
-  reopenCorrectionChannel
-  blockCollectiveGuiltTransport
-  blockTerminalisation
-  interruptCoerciveRecursion
-  preserveSourceProvenance
+  restoreDistinctions : AntiFascistMechanism
+  reopenCorrectionChannel : AntiFascistMechanism
+  blockCollectiveGuiltTransport : AntiFascistMechanism
+  blockTerminalisation : AntiFascistMechanism
+  interruptCoerciveRecursion : AntiFascistMechanism
+  preserveSourceProvenance : AntiFascistMechanism
   protectTargetedCivilianStatus : AntiFascistMechanism
 
 record AntiFascistAuditFibre : Set where
@@ -71,15 +71,15 @@ open AntiFascistInterruptionAdapter public
 ------------------------------------------------------------------------
 
 data AmalekAuditCoordinate : Set where
-  sourceProvenance
-  modernRoleBinding
-  commandTransport
-  collectivePropagation
+  sourceProvenance : AmalekAuditCoordinate
+  modernRoleBinding : AmalekAuditCoordinate
+  commandTransport : AmalekAuditCoordinate
+  collectivePropagation : AmalekAuditCoordinate
   terminalisationEvidence : AmalekAuditCoordinate
 
 data AmalekAuditStatus : Set where
-  sourceClosed
-  evidenceOpen
+  sourceClosed : AmalekAuditStatus
+  evidenceOpen : AmalekAuditStatus
   evidenceClosed : AmalekAuditStatus
 
 canonicalAmalekAuditStatus : AmalekAuditCoordinate → AmalekAuditStatus
@@ -109,21 +109,21 @@ amalekCommandTransportNeedsEvidence = refl
 ------------------------------------------------------------------------
 
 data BodycamFascismAuditCoordinate : Set where
-  exactUtterance
-  firstPersonConductClaim
-  celebratoryReaction
-  demeaningVictimReference
-  forceAgainstDownedPersonClaim
-  crossOfficerNormalisation
-  commandTolerance
-  institutionalTolerance
+  exactUtterance : BodycamFascismAuditCoordinate
+  firstPersonConductClaim : BodycamFascismAuditCoordinate
+  celebratoryReaction : BodycamFascismAuditCoordinate
+  demeaningVictimReference : BodycamFascismAuditCoordinate
+  forceAgainstDownedPersonClaim : BodycamFascismAuditCoordinate
+  crossOfficerNormalisation : BodycamFascismAuditCoordinate
+  commandTolerance : BodycamFascismAuditCoordinate
+  institutionalTolerance : BodycamFascismAuditCoordinate
   correctionFailure : BodycamFascismAuditCoordinate
 
 data AuditClosure : Set where
-  quoteBacked
-  incidentBacked
-  corpusRequired
-  commandEvidenceRequired
+  quoteBacked : AuditClosure
+  incidentBacked : AuditClosure
+  corpusRequired : AuditClosure
+  commandEvidenceRequired : AuditClosure
   institutionalEvidenceRequired : AuditClosure
 
 bodycamAuditClosure : BodycamFascismAuditCoordinate → AuditClosure
@@ -177,17 +177,17 @@ canonicalGenocideAmalekBoundary =
 ------------------------------------------------------------------------
 
 data CrossClaim : Set where
-  bodycamLiteralQuoteEstablished
-  bodycamShowsInstitutionalFascistCulture
-  genocideIsFascisticTerminalisationClaim
-  contemporaryAmalekCommandTransportClaim
+  bodycamLiteralQuoteEstablished : CrossClaim
+  bodycamShowsInstitutionalFascistCulture : CrossClaim
+  genocideIsFascisticTerminalisationClaim : CrossClaim
+  contemporaryAmalekCommandTransportClaim : CrossClaim
   antifascistInterruptionRequired : CrossClaim
 
 data CrossProducer : Set where
-  bodycamQuoteProducer
-  crossOfficerInstitutionalCultureProducer
-  genocideFindingAndSourceGenealogyProducer
-  amalekRoleBindingAndCommandTransportProducer
+  bodycamQuoteProducer : CrossProducer
+  crossOfficerInstitutionalCultureProducer : CrossProducer
+  genocideFindingAndSourceGenealogyProducer : CrossProducer
+  amalekRoleBindingAndCommandTransportProducer : CrossProducer
   interruptionAndCorrectionProducer : CrossProducer
 
 reverseCross : CrossClaim → CrossProducer

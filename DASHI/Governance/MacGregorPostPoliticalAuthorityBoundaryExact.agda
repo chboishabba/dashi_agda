@@ -18,7 +18,8 @@ import DASHI.Governance.FeministClimateJusticeSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data ClimateAlternative : Set where
-  technocraticPath democraticDeliberationPath : ClimateAlternative
+  technocraticPath : ClimateAlternative
+  democraticDeliberationPath : ClimateAlternative
 
 data ClimateParticipant : Set where affectedPublic : ClimateParticipant
 

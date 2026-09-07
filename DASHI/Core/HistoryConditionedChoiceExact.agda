@@ -166,19 +166,23 @@ futureConeCannotDescendThroughPresentObservation witness =
 ------------------------------------------------------------------------
 
 data ToyHistory : Set where
-  historyAlpha historyBeta : ToyHistory
+  historyAlpha : ToyHistory
+  historyBeta : ToyHistory
 
 data ToyObservation : Set where
   sameNow : ToyObservation
 
 data ToyPattern : Set where
-  patternAlpha patternBeta : ToyPattern
+  patternAlpha : ToyPattern
+  patternBeta : ToyPattern
 
 data ToyChoice : Set where
-  continueAlpha continueBeta : ToyChoice
+  continueAlpha : ToyChoice
+  continueBeta : ToyChoice
 
 data ToyFutureCone : Set where
-  alphaCone betaCone : ToyFutureCone
+  alphaCone : ToyFutureCone
+  betaCone : ToyFutureCone
 
 toyChoiceSurface : HistoryConditionedChoiceSurface
 toyChoiceSurface =

@@ -13,7 +13,9 @@ import DASHI.Algebra.Jacobian.ThreeDimensionalCounterexample as Three
 -- the external sparse-polynomial computation.
 
 data WitnessPoint : Set where
-  p₀ p₁ p₂ : WitnessPoint
+  p₀ : WitnessPoint
+  p₁ : WitnessPoint
+  p₂ : WitnessPoint
 
 data CommonImage : Set where
   q : CommonImage

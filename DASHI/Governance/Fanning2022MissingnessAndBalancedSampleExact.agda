@@ -4,7 +4,10 @@ open import DASHI.Core.Prelude
 import DASHI.Governance.SafeJustSourceRegistryExact as Sources
 
 data CoverageRole : Set where
-  fullVocabulary longPeriodComparable shortWindowSummary balancedHistoricalPath : CoverageRole
+  fullVocabulary : CoverageRole
+  longPeriodComparable : CoverageRole
+  shortWindowSummary : CoverageRole
+  balancedHistoricalPath : CoverageRole
 
 socialVocabularyCount longPeriodSocialCount balancedRequiredSocialCount : Nat
 socialVocabularyCount = 11
@@ -23,7 +26,9 @@ historicalEnd = 2015
 socialSupportStart = 2005
 
 data DataCoverageResidual : Set where
-  noLongitudinalBlueWaterSeries socialSupportBeginsIn2005 heterogeneousSocialCoverage : DataCoverageResidual
+  noLongitudinalBlueWaterSeries : DataCoverageResidual
+  socialSupportBeginsIn2005 : DataCoverageResidual
+  heterogeneousSocialCoverage : DataCoverageResidual
 
 record CoverageResidualWitness : Set where
   constructor coverageResidualWitness

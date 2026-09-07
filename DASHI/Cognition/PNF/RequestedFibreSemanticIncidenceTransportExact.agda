@@ -18,7 +18,8 @@ import DASHI.Foundations.Base369Ternary27HypervoxelStratificationExact as Strata
 import DASHI.Cognition.PNF.RequestedFibreSemanticStratumExact as Semantic
 
 data IncidenceDirection : Set where
-  resolveOneCoordinate reopenOneCoordinate : IncidenceDirection
+  resolveOneCoordinate : IncidenceDirection
+  reopenOneCoordinate : IncidenceDirection
 
 record TypedIncidenceTransport
     (before after : Semantic.InterpretedRequestedCubie3) : Set₁ where

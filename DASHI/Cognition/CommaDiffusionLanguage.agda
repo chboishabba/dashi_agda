@@ -152,7 +152,9 @@ interruptionRecoversCoarseBasis = refl
 ------------------------------------------------------------------------
 
 data DenoisePosition : Set where
-  boundaryPosition leftPosition rightPosition : DenoisePosition
+  boundaryPosition : DenoisePosition
+  leftPosition : DenoisePosition
+  rightPosition : DenoisePosition
 
 anchorFirstPlan : List DenoisePosition
 anchorFirstPlan =

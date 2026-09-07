@@ -41,7 +41,8 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data ReflectionSide : Set where
-  left right : ReflectionSide
+  left : ReflectionSide
+  right : ReflectionSide
 
 data CentredReflectionState : Set where
   criticalCentre : CentredReflectionState

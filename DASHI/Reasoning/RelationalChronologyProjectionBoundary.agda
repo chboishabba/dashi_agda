@@ -13,7 +13,9 @@ import DASHI.Governance.DiachronicDelegatedAuthorityBoundary as Diachronic
 ------------------------------------------------------------------------
 
 data TrianglePosition : Set where
-  dependentSubjectPosition witnessPosition messengerPosition : TrianglePosition
+  dependentSubjectPosition : TrianglePosition
+  witnessPosition : TrianglePosition
+  messengerPosition : TrianglePosition
   potentialAllyPosition symbolicExtensionPosition independentParticipantPosition : TrianglePosition
 
 record RelationalTriangle : Set where
@@ -51,7 +53,9 @@ data PriorLoad : Set where noInheritedPrior inheritedNegativePrior : PriorLoad
 data CurrentAct : Set where requestParticularsAct boundaryWithdrawalAct ordinaryAssistanceAct : CurrentAct
 
 data ActAppraisal : Set where
-  clarificationAppraisal selfProtectionAppraisal facilitationAppraisal : ActAppraisal
+  clarificationAppraisal : ActAppraisal
+  selfProtectionAppraisal : ActAppraisal
+  facilitationAppraisal : ActAppraisal
   confirmingFaultAppraisal controllingAppraisal : ActAppraisal
 
 appraise : PriorLoad → CurrentAct → ActAppraisal
@@ -91,7 +95,8 @@ canonicalPriorContaminatedProjection =
 ------------------------------------------------------------------------
 
 data ChronologyShape : Set where
-  actImpactObjectionResponseShape objectionDistressBlameShape : ChronologyShape
+  actImpactObjectionResponseShape : ChronologyShape
+  objectionDistressBlameShape : ChronologyShape
 
 causalShapeDistinctFromReversedShape :
   ¬ (actImpactObjectionResponseShape ≡ objectionDistressBlameShape)
@@ -166,7 +171,9 @@ canonicalPresentPreferencePromotion =
 ------------------------------------------------------------------------
 
 data EvidenceLayer : Set where
-  originalRecordingLayer contemporaneousConversationLayer accountRecordLayer : EvidenceLayer
+  originalRecordingLayer : EvidenceLayer
+  contemporaneousConversationLayer : EvidenceLayer
+  accountRecordLayer : EvidenceLayer
   professionalRecordLayer swornStatementLayer laterReconstructionLayer : EvidenceLayer
   generatedInterpretationLayer : EvidenceLayer
 
@@ -291,7 +298,8 @@ liveAccountExposure = proceduralExposure liveInteractiveAccount true true true t
   "Reciprocally testable, but exposed to procedural compression, time, and demeanour interpretation."
 
 data LivedRelationalHistory : Set where
-  sameRecordDifferentContext₁ sameRecordDifferentContext₂ : LivedRelationalHistory
+  sameRecordDifferentContext₁ : LivedRelationalHistory
+  sameRecordDifferentContext₂ : LivedRelationalHistory
 
 data AdjudicatedRecord : Set where canonicalOrderRecord : AdjudicatedRecord
 

@@ -167,7 +167,10 @@ rankOneObstructionOwner = Interaction.mismatchRankOneObstruction
 ------------------------------------------------------------------------
 
 data AxisPhase4 : Set where
-  axisX axisY axisNegX axisNegY : AxisPhase4
+  axisX : AxisPhase4
+  axisY : AxisPhase4
+  axisNegX : AxisPhase4
+  axisNegY : AxisPhase4
 
 quarterTurn : AxisPhase4 → AxisPhase4
 quarterTurn axisX = axisY

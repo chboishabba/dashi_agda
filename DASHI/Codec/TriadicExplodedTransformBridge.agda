@@ -19,10 +19,12 @@ import DASHI.Physics.Closure.W9MDLTerminationSeamRoute as W9
 -- Exact support/sign factorisation of one balanced trit.
 
 data Support : Set where
-  inactive active : Support
+  inactive : Support
+  active : Support
 
 data Sign : Set where
-  negative positive : Sign
+  negative : Sign
+  positive : Sign
 
 data FoldedTrit : Set where
   atZero : FoldedTrit

@@ -183,7 +183,10 @@ negativeScalarBelowYoung value left right normExact leftNN rightNN =
 ------------------------------------------------------------------------
 
 data Slot4 : Set where
-  slot0 slot1 slot2 slot3 : Slot4
+  slot0 : Slot4
+  slot1 : Slot4
+  slot2 : Slot4
+  slot3 : Slot4
 
 chargeAt : Slot4 → ℚ → ℚ → ℚ → ℚ → ℚ
 chargeAt slot0 n0 n1 n2 n3 = n0

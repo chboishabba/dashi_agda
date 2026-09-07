@@ -21,10 +21,12 @@ import DASHI.Reasoning.SpacyNegatedCoordinationScopeTraceExact as Trace
 ------------------------------------------------------------------------
 
 data GovernedStanding : Set where
-  representedStanding selfSituatedStanding : GovernedStanding
+  representedStanding : GovernedStanding
+  selfSituatedStanding : GovernedStanding
 
 data ClosureResidual : Set where
-  closureResidualOpen closureResidualClosed : ClosureResidual
+  closureResidualOpen : ClosureResidual
+  closureResidualClosed : ClosureResidual
 
 data SharedAuditWorld : Set where
   representedOpen : SharedAuditWorld

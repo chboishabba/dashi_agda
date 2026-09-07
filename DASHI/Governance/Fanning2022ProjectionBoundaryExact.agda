@@ -22,10 +22,14 @@ import DASHI.Governance.SafeJustSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data PublishedView : Set where
-  thresholdCountView extentView temporalTrendView indicatorDoughnutView : PublishedView
+  thresholdCountView : PublishedView
+  extentView : PublishedView
+  temporalTrendView : PublishedView
+  indicatorDoughnutView : PublishedView
 
 data DomainAxis : Set where
-  socialShortfallAxis ecologicalOvershootAxis : DomainAxis
+  socialShortfallAxis : DomainAxis
+  ecologicalOvershootAxis : DomainAxis
 
 figure2View figure3View figure4View figure5View : PublishedView
 figure2View = thresholdCountView

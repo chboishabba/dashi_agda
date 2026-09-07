@@ -76,13 +76,18 @@ polyspermyDOIExact = refl
 ------------------------------------------------------------------------
 
 data NodeLevel : Set where
-  individualLevel lineageLevel : NodeLevel
+  individualLevel : NodeLevel
+  lineageLevel : NodeLevel
 
 data ProgenitorMode : Set where
-  genericLineage gametic nuclear mitochondrial : ProgenitorMode
+  genericLineage : ProgenitorMode
+  gametic : ProgenitorMode
+  nuclear : ProgenitorMode
+  mitochondrial : ProgenitorMode
 
 data ReproductiveProfile : Set where
-  unrestrictedProfile ordinaryBiparentalNuclearProfile : ReproductiveProfile
+  unrestrictedProfile : ReproductiveProfile
+  ordinaryBiparentalNuclearProfile : ReproductiveProfile
 
 record ProgenitorContribution : Set where
   constructor progenitorContribution
@@ -223,10 +228,18 @@ identityKnowledgeAndDisclosureAreIndependentCoordinates = refl , refl
 ------------------------------------------------------------------------
 
 data WikidataParentSlot : Set where
-  fatherP22 motherP25 parentP8810 hybridOfP1531 : WikidataParentSlot
+  fatherP22 : WikidataParentSlot
+  motherP25 : WikidataParentSlot
+  parentP8810 : WikidataParentSlot
+  hybridOfP1531 : WikidataParentSlot
 
 data EntitySurfaceType : Set where
-  humanSurface animalSurface cultivarSurface cellSurface deitySurface otherSurface : EntitySurfaceType
+  humanSurface : EntitySurfaceType
+  animalSurface : EntitySurfaceType
+  cultivarSurface : EntitySurfaceType
+  cellSurface : EntitySurfaceType
+  deitySurface : EntitySurfaceType
+  otherSurface : EntitySurfaceType
 
 record WikidataParentProjection : Set where
   constructor wikidataParentProjection

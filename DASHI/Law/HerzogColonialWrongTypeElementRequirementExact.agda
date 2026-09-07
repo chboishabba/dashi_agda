@@ -45,10 +45,10 @@ authorityReclassificationMechanismElement = Elements.legal-element
 ------------------------------------------------------------------------
 
 data MechanismRequirementKind : Set where
-  requiresAuthorityMeaningErasure
-  requiresOperationalPrerequisite
-  requiresSameObjectProjectionPowerIncident
-  : MechanismRequirementKind
+  requiresAuthorityMeaningErasure : MechanismRequirementKind
+  requiresOperationalPrerequisite : MechanismRequirementKind
+  requiresSameObjectProjectionPowerIncident : MechanismRequirementKind
+
 
 record OpenMechanismRequirement : Set where
   constructor open-mechanism-requirement
@@ -155,26 +155,26 @@ postHocHerzogFactStillCannotReachColonialElement = refl
 ------------------------------------------------------------------------
 
 data ColonialElementConsumerNeed : Set where
-  needClassificationContent
-  needAuthorityMeaningComparison
-  needOperationalPrerequisite
-  needIncidentSameObjectWeld
-  needAnalyticalElementProof
-  needWrongTypeApplicability
-  needWrongTypeViolation
-  needWrongTypeLiability
-  : ColonialElementConsumerNeed
+  needClassificationContent : ColonialElementConsumerNeed
+  needAuthorityMeaningComparison : ColonialElementConsumerNeed
+  needOperationalPrerequisite : ColonialElementConsumerNeed
+  needIncidentSameObjectWeld : ColonialElementConsumerNeed
+  needAnalyticalElementProof : ColonialElementConsumerNeed
+  needWrongTypeApplicability : ColonialElementConsumerNeed
+  needWrongTypeViolation : ColonialElementConsumerNeed
+  needWrongTypeLiability : ColonialElementConsumerNeed
+
 
 data ColonialElementProducer : Set where
-  classificationContentProducer
-  authorityMeaningProducer
-  powerPrerequisiteProducer
-  incidentWeldProducer
-  proofRelevantElementProducer
-  applicabilityJurisdictionProducer
-  violationProducer
-  liabilityRemedyProducer
-  : ColonialElementProducer
+  classificationContentProducer : ColonialElementProducer
+  authorityMeaningProducer : ColonialElementProducer
+  powerPrerequisiteProducer : ColonialElementProducer
+  incidentWeldProducer : ColonialElementProducer
+  proofRelevantElementProducer : ColonialElementProducer
+  applicabilityJurisdictionProducer : ColonialElementProducer
+  violationProducer : ColonialElementProducer
+  liabilityRemedyProducer : ColonialElementProducer
+
 
 reverseElementNeed : ColonialElementConsumerNeed → ColonialElementProducer
 reverseElementNeed needClassificationContent = classificationContentProducer

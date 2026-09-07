@@ -22,13 +22,26 @@ import DASHI.Environment.QuantitiesConservation as Conservation
 ------------------------------------------------------------------------
 
 data ReturnKind : Set where
-  compostReturn cropResidueReturn foodWasteReturn waterReuse seedRetention communityRedistribution : ReturnKind
+  compostReturn : ReturnKind
+  cropResidueReturn : ReturnKind
+  foodWasteReturn : ReturnKind
+  waterReuse : ReturnKind
+  seedRetention : ReturnKind
+  communityRedistribution : ReturnKind
 
 data ReturnStatus : Set where
-  generated recoveredUnverified transformedForReturn reintroducedVerified exportedOrLost : ReturnStatus
+  generated : ReturnStatus
+  recoveredUnverified : ReturnStatus
+  transformedForReturn : ReturnStatus
+  reintroducedVerified : ReturnStatus
+  exportedOrLost : ReturnStatus
 
 data CircularityClass : Set where
-  linearFlow reuseOnly partialMeasuredCycle measuredClosedCycle regenerativeClaim : CircularityClass
+  linearFlow : CircularityClass
+  reuseOnly : CircularityClass
+  partialMeasuredCycle : CircularityClass
+  measuredClosedCycle : CircularityClass
+  regenerativeClaim : CircularityClass
 
 record ReturnFlowReceipt (u : Conservation.Unit) : Set where
   constructor returnFlowReceipt

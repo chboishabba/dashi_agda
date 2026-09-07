@@ -16,7 +16,9 @@ open import DASHI.Cognition.PNF.DirectDeltaCompilerArchitectureExact
 ------------------------------------------------------------------------
 
 data GateState : Set where
-  inactive executable productionCertified : GateState
+  inactive : GateState
+  executable : GateState
+  productionCertified : GateState
 
 record DirectSentenceActivation : Set where
   constructor directSentenceActivation

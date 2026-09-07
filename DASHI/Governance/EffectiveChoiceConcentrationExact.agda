@@ -22,7 +22,10 @@ import DASHI.Governance.EffectiveInstitutionalChoiceExact as Choice
 ------------------------------------------------------------------------
 
 data ChoiceTopology : Set where
-  pluralCompetitive concentratedPlural dominantPair effectiveMonopoly : ChoiceTopology
+  pluralCompetitive : ChoiceTopology
+  concentratedPlural : ChoiceTopology
+  dominantPair : ChoiceTopology
+  effectiveMonopoly : ChoiceTopology
 
 record EffectiveChoiceField : Set where
   constructor effectiveChoiceField
@@ -93,7 +96,10 @@ record ConcentratedDependencyEntrapmentCandidate : Set where
 ------------------------------------------------------------------------
 
 data ChoiceObserver : Set where
-  consumerObserver supplierObserver workerObserver studentObserver : ChoiceObserver
+  consumerObserver : ChoiceObserver
+  supplierObserver : ChoiceObserver
+  workerObserver : ChoiceObserver
+  studentObserver : ChoiceObserver
   patientObserver voterObserver regulatorObserver : ChoiceObserver
 
 record ObserverChoiceProjection : Set where

@@ -34,7 +34,14 @@ open import Relation.Binary.PropositionalEquality using (trans; sym)
 import DASHI.Crypto.MLKEMFIPS203SourceExact as FIPS
 
 data ButterflyStage : Set where
-  sourceStage stage1 stage2 stage3 stage4 stage5 stage6 finalNTTStage : ButterflyStage
+  sourceStage : ButterflyStage
+  stage1 : ButterflyStage
+  stage2 : ButterflyStage
+  stage3 : ButterflyStage
+  stage4 : ButterflyStage
+  stage5 : ButterflyStage
+  stage6 : ButterflyStage
+  finalNTTStage : ButterflyStage
 
 sourceSupportWidth : ButterflyStage → Nat
 sourceSupportWidth sourceStage = 1

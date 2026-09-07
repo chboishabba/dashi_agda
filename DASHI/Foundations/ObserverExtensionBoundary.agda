@@ -15,7 +15,15 @@ import DASHI.Promotion.MetacognitiveFrameBearingState as Meta
 -- 2. X x C2: a reflexive stance coordinate available over every state.
 
 data NineState : Set where
-  n0 n1 n2 n3 n4 n5 n6 n7 n8 : NineState
+  n0 : NineState
+  n1 : NineState
+  n2 : NineState
+  n3 : NineState
+  n4 : NineState
+  n5 : NineState
+  n6 : NineState
+  n7 : NineState
+  n8 : NineState
 
 data ExceptionalObserver (X : Set) : Set where
   ordinaryPoint : X → ExceptionalObserver X

@@ -15,10 +15,16 @@ import DASHI.Governance.EnvironmentalAuthoritySourceRegistryRound2Exact as Sourc
 ------------------------------------------------------------------------
 
 data EnvironmentalAxis : Set where
-  ecologicalCondition socialJustice racializedExposure representation : EnvironmentalAxis
+  ecologicalCondition : EnvironmentalAxis
+  socialJustice : EnvironmentalAxis
+  racializedExposure : EnvironmentalAxis
+  representation : EnvironmentalAxis
 
 data ThomasRole : Set where
-  movementFraming activistProgramme empiricalCausalLaw intersectionalityGenealogy : ThomasRole
+  movementFraming : ThomasRole
+  activistProgramme : ThomasRole
+  empiricalCausalLaw : ThomasRole
+  intersectionalityGenealogy : ThomasRole
 
 data AuthorizedThomasUse : ThomasRole → Set where
   framingUse : AuthorizedThomasUse movementFraming

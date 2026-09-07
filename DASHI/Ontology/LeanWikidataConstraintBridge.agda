@@ -19,7 +19,10 @@ import DASHI.Cognition.PNF.WikidataRepairProposal as Repair
 ------------------------------------------------------------------------
 
 data LeanConstraintKind : Set where
-  propertyConstraint statementConstraint typePropertyConstraint schemaConstraint : LeanConstraintKind
+  propertyConstraint : LeanConstraintKind
+  statementConstraint : LeanConstraintKind
+  typePropertyConstraint : LeanConstraintKind
+  schemaConstraint : LeanConstraintKind
   pathConstraint mereologyNoClassConfusion : LeanConstraintKind
 
 record LeanConstraintWitness : Set where

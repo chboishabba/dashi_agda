@@ -94,7 +94,8 @@ allScalarCoordinatesConnectedWithinTwo
 ------------------------------------------------------------------------
 
 data Side : Set where
-  leftSide rightSide : Side
+  leftSide : Side
+  rightSide : Side
 
 record DisconnectedCut : Set₁ where
   constructor disconnectedCut

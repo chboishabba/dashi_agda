@@ -36,7 +36,13 @@ aristotleMathNamedDeclarationCount : Nat
 aristotleMathNamedDeclarationCount = 409
 
 data ParityStatus : Set where
-  nearCoreParity substantialCore partial minimalPartial unportedCore unported aggregateOnly : ParityStatus
+  nearCoreParity : ParityStatus
+  substantialCore : ParityStatus
+  partial : ParityStatus
+  minimalPartial : ParityStatus
+  unportedCore : ParityStatus
+  unported : ParityStatus
+  aggregateOnly : ParityStatus
 
 record AristotleMathModuleParity : Set where
   constructor aristotleMathModuleParity

@@ -12,11 +12,16 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data DependencyLayer : Set where
-  logicalLayer relationalLayer operationalLayer epistemicLayer : DependencyLayer
+  logicalLayer : DependencyLayer
+  relationalLayer : DependencyLayer
+  operationalLayer : DependencyLayer
+  epistemicLayer : DependencyLayer
   temporalLayer provenanceLayer authorityLayer topologicalLayer : DependencyLayer
 
 data DependencyDisposition : Set where
-  requiredDependency optionalDependency forbiddenDependency : DependencyDisposition
+  requiredDependency : DependencyDisposition
+  optionalDependency : DependencyDisposition
+  forbiddenDependency : DependencyDisposition
 
 record DependencyWitness
     {Source Target : Set}

@@ -80,7 +80,8 @@ secondScalarSeparatesOldCollision ()
 ------------------------------------------------------------------------
 
 data Candidate : Set where
-  candidateA candidateB : Candidate
+  candidateA : Candidate
+  candidateB : Candidate
 
 source : Candidate → First.CBD2TripleSlice
 source candidateA = First.sourceA

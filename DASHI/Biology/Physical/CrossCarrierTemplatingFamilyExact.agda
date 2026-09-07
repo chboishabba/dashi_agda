@@ -38,7 +38,8 @@ conformationTemplateSystem = record
   }
 
 data EpigeneticState : Set where
-  closed openState : EpigeneticState
+  closed : EpigeneticState
+  openState : EpigeneticState
 
 epigeneticTemplate : TemplateSystem
 epigeneticTemplate = record
@@ -48,7 +49,8 @@ epigeneticTemplate = record
   }
 
 data BioelectricPattern : Set where
-  lowPattern highPattern : BioelectricPattern
+  lowPattern : BioelectricPattern
+  highPattern : BioelectricPattern
 
 bioelectricTemplate : TemplateSystem
 bioelectricTemplate = record
@@ -58,7 +60,8 @@ bioelectricTemplate = record
   }
 
 data MorphologyPattern : Set where
-  damagedPattern targetPattern : MorphologyPattern
+  damagedPattern : MorphologyPattern
+  targetPattern : MorphologyPattern
 
 morphologyRepairTemplate : TemplateSystem
 morphologyRepairTemplate = record

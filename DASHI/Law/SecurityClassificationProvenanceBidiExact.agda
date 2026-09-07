@@ -129,7 +129,13 @@ record ClassificationCutset : Set where
 open ClassificationCutset public
 
 data ClassificationResidual : Set where
-  preActionDocumentResidual classifierResidual commandDeploymentResidual legalAuthorityResidual motiveResidual foreignLiaisonResidual classificationClosed : ClassificationResidual
+  preActionDocumentResidual : ClassificationResidual
+  classifierResidual : ClassificationResidual
+  commandDeploymentResidual : ClassificationResidual
+  legalAuthorityResidual : ClassificationResidual
+  motiveResidual : ClassificationResidual
+  foreignLiaisonResidual : ClassificationResidual
+  classificationClosed : ClassificationResidual
 
 firstClassificationResidual : SecurityClassificationClaim → ClassificationCutset → ClassificationResidual
 firstClassificationResidual assemblyWasClassifiedAsRiskBeforeAction c with preActionDocumentClosed c

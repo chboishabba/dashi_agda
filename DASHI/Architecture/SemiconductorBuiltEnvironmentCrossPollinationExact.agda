@@ -36,7 +36,11 @@ nextBuilt construction = asBuilt
 nextBuilt asBuilt = asBuilt
 
 data Domain : Set where
-  town building fab wafer chip : Domain
+  town : Domain
+  building : Domain
+  fab : Domain
+  wafer : Domain
+  chip : Domain
 
 -- Nested realised carriers: a city can contain a fab; the fab provides the
 -- execution environment for wafer fabrication; the process fabricates chips.

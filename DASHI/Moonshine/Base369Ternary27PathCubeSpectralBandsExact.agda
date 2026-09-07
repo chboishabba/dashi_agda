@@ -29,7 +29,9 @@ import DASHI.Moonshine.Base369Ternary27CharacterAdjacencyEquivarianceExact as Ch
 ------------------------------------------------------------------------
 
 data Path3SpectralMode : Set where
-  negativePathMode zeroPathMode positivePathMode : Path3SpectralMode
+  negativePathMode : Path3SpectralMode
+  zeroPathMode : Path3SpectralMode
+  positivePathMode : Path3SpectralMode
 
 ------------------------------------------------------------------------
 -- 2. Seven tensor-sum bands for P3 □ P3 □ P3.

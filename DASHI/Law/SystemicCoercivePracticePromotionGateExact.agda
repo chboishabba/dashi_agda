@@ -12,10 +12,15 @@ import DASHI.Law.CoerciveEncounterPopulationAggregationExact as Population
 ------------------------------------------------------------------------
 
 data PopulationClaim : Set where
-  descriptiveGatewayPattern systemicPractice pretextualIntent causalDeterrence : PopulationClaim
+  descriptiveGatewayPattern : PopulationClaim
+  systemicPractice : PopulationClaim
+  pretextualIntent : PopulationClaim
+  causalDeterrence : PopulationClaim
 
 data PopulationProducer : Set where
-  typedEncounterPopulation samplingFrame comparableEncounterDefinition : PopulationProducer
+  typedEncounterPopulation : PopulationProducer
+  samplingFrame : PopulationProducer
+  comparableEncounterDefinition : PopulationProducer
   transitionCrossTab repeatedPattern operationalPolicyReceipt intentReceipt : PopulationProducer
   counterfactualControl : PopulationProducer
 
@@ -35,7 +40,10 @@ record SystemicPromotionCutset : Set where
 open SystemicPromotionCutset public
 
 data PromotionResidual : Set where
-  samplingFrameResidual comparabilityResidual transitionResidual repeatedPatternResidual : PromotionResidual
+  samplingFrameResidual : PromotionResidual
+  comparabilityResidual : PromotionResidual
+  transitionResidual : PromotionResidual
+  repeatedPatternResidual : PromotionResidual
   operationalPolicyResidual intentResidual counterfactualResidual promotionClosed : PromotionResidual
 
 firstSystemicResidual : PopulationClaim → SystemicPromotionCutset → PromotionResidual

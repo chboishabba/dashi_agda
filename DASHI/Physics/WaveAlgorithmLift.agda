@@ -34,7 +34,9 @@ open import DASHI.Physics.ShiftUnitaryLikeConstraint as SULC
 -- 1. Balanced-ternary carrier and involution.
 
 data Trit : Set where
-  neg zero pos : Trit
+  neg : Trit
+  zero : Trit
+  pos : Trit
 
 tritInvolution : Trit → Trit
 tritInvolution neg = pos

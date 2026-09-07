@@ -92,13 +92,15 @@ fibreAt historyHere timeHere =
 ------------------------------------------------------------------------
 
 data SameTimePresentFutureCase : Set where
-  earlyAuthorityAtT1 lateAuthorityAtT1 : SameTimePresentFutureCase
+  earlyAuthorityAtT1 : SameTimePresentFutureCase
+  lateAuthorityAtT1 : SameTimePresentFutureCase
 
 data SameTimePresentFutureCode : Set where
   sameT1PresentMovementFuture : SameTimePresentFutureCode
 
 data FineFibreCode : Set where
-  earlyAuthorityFibre lateAuthorityFibre : FineFibreCode
+  earlyAuthorityFibre : FineFibreCode
+  lateAuthorityFibre : FineFibreCode
 
 sameTimePresentFuture : SameTimePresentFutureCase → SameTimePresentFutureCode
 sameTimePresentFuture _ = sameT1PresentMovementFuture
@@ -164,10 +166,12 @@ archiveFutureConeChanges ()
 ------------------------------------------------------------------------
 
 data FibrePoint : Set where
-  earlyPoint latePoint : FibrePoint
+  earlyPoint : FibrePoint
+  latePoint : FibrePoint
 
 data FibreHistoryCode : Set where
-  earlyAuthorityHistoryCode lateAuthorityHistoryCode : FibreHistoryCode
+  earlyAuthorityHistoryCode : FibreHistoryCode
+  lateAuthorityHistoryCode : FibreHistoryCode
 
 data FibreRelationCode : Set where sameReceptionRelation : FibreRelationCode
 

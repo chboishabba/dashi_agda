@@ -34,7 +34,9 @@ data OddTaylorQuantitativeArrow : Set where
   finiteOddMinorSign : OddTaylorQuantitativeArrow
 
 data QuantitativeStatus : Set where
-  sourceAudited structurallyDerived analyticOpen : QuantitativeStatus
+  sourceAudited : QuantitativeStatus
+  structurallyDerived : QuantitativeStatus
+  analyticOpen : QuantitativeStatus
 
 record QuantitativeEntry : Set where
   constructor quantitativeEntry

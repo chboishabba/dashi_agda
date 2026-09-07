@@ -32,7 +32,8 @@ OutputEqualityTransfersAcrossIndices system =
   interpret system rightIndex x ≡ interpret system rightIndex y
 
 data DemoState : Set where
-  state₀ state₁ : DemoState
+  state₀ : DemoState
+  state₁ : DemoState
 
 data DemoOperator : Set where
   observeOperator : DemoOperator
@@ -41,7 +42,8 @@ data DemoContext : Set where
   sharedContext : DemoContext
 
 data DemoQuery : Set where
-  coarseQuery fineQuery : DemoQuery
+  coarseQuery : DemoQuery
+  fineQuery : DemoQuery
 
 data DemoRole : Set where
   observationRole : DemoRole

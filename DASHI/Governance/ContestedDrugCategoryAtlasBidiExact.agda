@@ -160,10 +160,12 @@ samePatientWordCannotRecoverPractice =
 data FlatDrugChart : Set where sameFlatDrugCode : FlatDrugChart
 
 data FineDrugState : Set where
-  externallyNamedState selfAuthoredState : FineDrugState
+  externallyNamedState : FineDrugState
+  selfAuthoredState : FineDrugState
 
 data AuthorshipResidual : Set where
-  externalAuthorship selfAuthorship : AuthorshipResidual
+  externalAuthorship : AuthorshipResidual
+  selfAuthorship : AuthorshipResidual
 
 flatDrugChart : FineDrugState → FlatDrugChart
 flatDrugChart _ = sameFlatDrugCode

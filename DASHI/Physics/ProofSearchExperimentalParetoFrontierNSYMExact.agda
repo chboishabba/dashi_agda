@@ -23,12 +23,12 @@ import DASHI.Physics.YangMills.BalabanFrontierRouteAdmissionRound147Exact as YM1
 data PhysicsFrontierDomain : Set where navierStokes yangMills : PhysicsFrontierDomain
 
 data PhysicsRefinementKind : Set where
-  theoremReuse
-  sourceReconstruction
-  symbolicDerivation
-  numericalDiagnostic
-  physicalMeasurement
-  : PhysicsRefinementKind
+  theoremReuse : PhysicsRefinementKind
+  sourceReconstruction : PhysicsRefinementKind
+  symbolicDerivation : PhysicsRefinementKind
+  numericalDiagnostic : PhysicsRefinementKind
+  physicalMeasurement : PhysicsRefinementKind
+
 
 record PhysicsFrontierRefinement : Set where
   constructor physicsFrontierRefinement

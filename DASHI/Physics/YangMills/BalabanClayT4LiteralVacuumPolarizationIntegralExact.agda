@@ -37,7 +37,9 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 
 data Color3 : Set where
-  color1 color2 color3 : Color3
+  color1 : Color3
+  color2 : Color3
+  color3 : Color3
 
 allColors : List Color3
 allColors = color1 ∷ color2 ∷ color3 ∷ []

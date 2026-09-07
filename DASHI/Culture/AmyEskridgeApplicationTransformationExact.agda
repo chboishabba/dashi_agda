@@ -78,17 +78,17 @@ canonicalAmyApplicationTransformationFrontier = amy-application-transformation-f
   true refl true refl false refl false refl false refl false refl false refl false refl false refl
 
 data AmyApplicationReverseTarget : Set where
-  acquireInstituteDerivedObjectIdentity
-  acquireApparatusGeometry
-  acquireCalibrationProcedure
-  acquireRawAndReducedData
-  acquireNullAndFailureHistory
-  acquireValidationProtocol
-  acquireUncertaintyModel
-  acquireLabNotebookOrVersionedWorkflow
-  acquireSuccessorOrHandover
-  acquireIndependentEventLink
-  : AmyApplicationReverseTarget
+  acquireInstituteDerivedObjectIdentity : AmyApplicationReverseTarget
+  acquireApparatusGeometry : AmyApplicationReverseTarget
+  acquireCalibrationProcedure : AmyApplicationReverseTarget
+  acquireRawAndReducedData : AmyApplicationReverseTarget
+  acquireNullAndFailureHistory : AmyApplicationReverseTarget
+  acquireValidationProtocol : AmyApplicationReverseTarget
+  acquireUncertaintyModel : AmyApplicationReverseTarget
+  acquireLabNotebookOrVersionedWorkflow : AmyApplicationReverseTarget
+  acquireSuccessorOrHandover : AmyApplicationReverseTarget
+  acquireIndependentEventLink : AmyApplicationReverseTarget
+
 
 firstAmyApplicationMissingLeaf : AmyApplicationReverseTarget
 firstAmyApplicationMissingLeaf = acquireInstituteDerivedObjectIdentity

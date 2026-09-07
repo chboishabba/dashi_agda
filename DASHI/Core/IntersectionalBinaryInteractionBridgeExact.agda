@@ -40,7 +40,8 @@ import DASHI.Core.IntersectionalConstraintGeometryExact as Intersection
 ------------------------------------------------------------------------
 
 data AxisPresence : Set where
-  absent present : AxisPresence
+  absent : AxisPresence
+  present : AxisPresence
 
 intersectionInteractionCode : AxisPresence → AxisPresence → Nat
 intersectionInteractionCode absent absent = 0

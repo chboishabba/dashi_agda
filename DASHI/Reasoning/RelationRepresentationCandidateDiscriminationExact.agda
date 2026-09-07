@@ -35,7 +35,8 @@ data ExperimentProbe : Set where
 
 
 data ProbeOutcome : Set where
-  pass fail : ProbeOutcome
+  pass : ProbeOutcome
+  fail : ProbeOutcome
 
 candidateOutcome : CandidateFamily → ExperimentProbe → ProbeOutcome
 candidateOutcome offsetCandidate inSampleFitProbe = pass

@@ -311,7 +311,9 @@ ciliateMolecularContext = record
 -- the quotient.
 
 data StopCodon : Set where
-  TAA TAG TGA : StopCodon
+  TAA : StopCodon
+  TAG : StopCodon
+  TGA : StopCodon
 
 Ω : Set
 Ω = StopCodon

@@ -14,11 +14,14 @@ import DASHI.Governance.ComparativeCrisisClimateAtlas as Crisis
 ------------------------------------------------------------------------
 
 data PlanningCase : Set where
-  juukanGorgeCase voiceTreatyTruthCase deathsInCustodyCase : PlanningCase
+  juukanGorgeCase : PlanningCase
+  voiceTreatyTruthCase : PlanningCase
+  deathsInCustodyCase : PlanningCase
   britishColumbiaCase trumpIranPalestineCase goldCoastPlanningCase : PlanningCase
 
 data SourceFreshness : Set where
-  stableHistoricalAnchor liveRefreshRequired : SourceFreshness
+  stableHistoricalAnchor : SourceFreshness
+  liveRefreshRequired : SourceFreshness
 
 record CaseSource : Set where
   constructor caseSource

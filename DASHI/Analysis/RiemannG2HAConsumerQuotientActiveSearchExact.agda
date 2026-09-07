@@ -51,10 +51,12 @@ sourceNativeToProofRelevantCanonicalHA P proof =
 ------------------------------------------------------------------------
 
 data Evidence : Set where
-  missing owned : Evidence
+  missing : Evidence
+  owned : Evidence
 
 data Provenance : Set where
-  anonymous sourceNative : Provenance
+  anonymous : Provenance
+  sourceNative : Provenance
 
 record HARecoveryState : Set where
   constructor ha-recovery-state
@@ -96,7 +98,8 @@ observeHAProvenance = provenanceEvidence
 ------------------------------------------------------------------------
 
 data ProvenanceSymmetry : Set where
-  keepProvenance flipProvenance : ProvenanceSymmetry
+  keepProvenance : ProvenanceSymmetry
+  flipProvenance : ProvenanceSymmetry
 
 composeProvenance : ProvenanceSymmetry → ProvenanceSymmetry → ProvenanceSymmetry
 composeProvenance keepProvenance g = g

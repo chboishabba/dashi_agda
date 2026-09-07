@@ -6,10 +6,18 @@ open import Agda.Builtin.Nat using (Nat)
 -- Neutral empirical codomain.  The constructors do not carry therapeutic,
 -- taxonomic, or mechanistic meaning.
 data TerpeneCluster : Set where
-  cluster₀ cluster₁ cluster₂ cluster₃ cluster₄ cluster₅ : TerpeneCluster
+  cluster₀ : TerpeneCluster
+  cluster₁ : TerpeneCluster
+  cluster₂ : TerpeneCluster
+  cluster₃ : TerpeneCluster
+  cluster₄ : TerpeneCluster
+  cluster₅ : TerpeneCluster
 
 data TraditionalLabel : Set where
-  indica sativa hybrid unlabeled : TraditionalLabel
+  indica : TraditionalLabel
+  sativa : TraditionalLabel
+  hybrid : TraditionalLabel
+  unlabeled : TraditionalLabel
 
 record TerpeneProfile (Terpene : Set) : Set where
   field

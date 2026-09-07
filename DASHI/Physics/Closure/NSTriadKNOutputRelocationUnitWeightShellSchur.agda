@@ -33,7 +33,9 @@ import DASHI.Physics.Closure.NSTriadKNOutputRelocationPositiveKernelMajorant as 
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
 
 data SchurOrientation : Set where
-  outputCondition firstAdjointCondition secondAdjointCondition : SchurOrientation
+  outputCondition : SchurOrientation
+  firstAdjointCondition : SchurOrientation
+  secondAdjointCondition : SchurOrientation
 
 orientationKernel : SchurOrientation → Nat → Nat → ℚ
 orientationKernel outputCondition = Majorant.canonicalKernel

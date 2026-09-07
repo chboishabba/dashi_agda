@@ -87,7 +87,8 @@ noPropositionalToSetoidLeak ()
 ------------------------------------------------------------------------
 
 data Lane : Set where
-  yangMills casimir : Lane
+  yangMills : Lane
+  casimir : Lane
 
 record CrossPollinationEdge : Set where
   field

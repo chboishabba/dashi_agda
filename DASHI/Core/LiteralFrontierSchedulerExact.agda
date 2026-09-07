@@ -26,20 +26,20 @@ import DASHI.Core.RecursiveParetoFrontierLiftingExact as Recursive
 ------------------------------------------------------------------------
 
 data LiteralDisposition : Set where
-  closeLeaf
-  redirectFrontier
-  rejectMove
-  : LiteralDisposition
+  closeLeaf : LiteralDisposition
+  redirectFrontier : LiteralDisposition
+  rejectMove : LiteralDisposition
+
 
 data RejectionReason : Set where
-  knownNoGo
-  carrierMismatch
-  scopeMismatch
-  consumerMismatch
-  staleOrAlreadyOwned
-  authorityInsufficient
-  residualIrrelevant
-  : RejectionReason
+  knownNoGo : RejectionReason
+  carrierMismatch : RejectionReason
+  scopeMismatch : RejectionReason
+  consumerMismatch : RejectionReason
+  staleOrAlreadyOwned : RejectionReason
+  authorityInsufficient : RejectionReason
+  residualIrrelevant : RejectionReason
+
 
 record LiteralFrontierMove : Set where
   constructor literalFrontierMove

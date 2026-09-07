@@ -36,7 +36,9 @@ import DASHI.Moonshine.MonsterC3CyclotomicEvaluationExact as C3
 ------------------------------------------------------------------------
 
 data C3Phase : Set where
-  identityPhase zetaPhase zetaInversePhase : C3Phase
+  identityPhase : C3Phase
+  zetaPhase : C3Phase
+  zetaInversePhase : C3Phase
 
 invertC3Phase : C3Phase → C3Phase
 invertC3Phase identityPhase = identityPhase
@@ -80,7 +82,8 @@ completePhaseOrbitCancels = refl
 ------------------------------------------------------------------------
 
 data OrbitRole : Set where
-  fixedRole inversePairRole : OrbitRole
+  fixedRole : OrbitRole
+  inversePairRole : OrbitRole
 
 c3OrbitRole : C3Phase → OrbitRole
 c3OrbitRole identityPhase = fixedRole

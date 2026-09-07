@@ -14,19 +14,19 @@ import DASHI.Law.GazaGenocideHerzogZionismSourceReceiptsExact as Gaza
 ------------------------------------------------------------------------
 
 data GenealogySourceRole : Set where
-  historicalLegalTheory
-  peerReviewedHistoricalScholarship
-  holocaustMuseumSynthesis
-  comparativeFascismScholarship
-  unCommissionFinding
+  historicalLegalTheory : GenealogySourceRole
+  peerReviewedHistoricalScholarship : GenealogySourceRole
+  holocaustMuseumSynthesis : GenealogySourceRole
+  comparativeFascismScholarship : GenealogySourceRole
+  unCommissionFinding : GenealogySourceRole
   dashiSynthesis : GenealogySourceRole
 
 data GenealogyProposition : Set where
-  genocideIsFascismInActionHistoricalFormulation
-  fascismUsesPurifyingRedemptiveViolence
-  naziFascismProducedEliminationistGenocide
-  fascismGenocideRelationIsComparativelyDebated
-  israelGenocideFinding
+  genocideIsFascismInActionHistoricalFormulation : GenealogyProposition
+  fascismUsesPurifyingRedemptiveViolence : GenealogyProposition
+  naziFascismProducedEliminationistGenocide : GenealogyProposition
+  fascismGenocideRelationIsComparativelyDebated : GenealogyProposition
+  israelGenocideFinding : GenealogyProposition
   genocideInstantiatesFascisticTerminalisation : GenealogyProposition
 
 record GenealogyReceipt : Set where

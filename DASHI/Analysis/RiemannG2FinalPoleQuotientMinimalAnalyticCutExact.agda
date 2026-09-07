@@ -37,22 +37,25 @@ import DASHI.Analysis.RiemannG2FinalSplitComplementOrderTransportCompilerExact a
 ------------------------------------------------------------------------
 
 data FinalCutCoordinate : Set where
-  transportCheckedLeanSplitFarToAgda
-  proveChosenFiniteNearUpper
-  proveChosenNearLeavesFarAllowance
-  proveFreshSameTaperGammaEnvelope
-  proveGammaFitsAssignedAllowance
-  identifyWindowWithTransportedNearCoordinates
-  transportFinalSourceOrders
-  attachFinalClusterSameObject
-  rebuildNearFarBudgetFamilyForEveryCutoff
-  recoverDeterminantDirectPayment
-  recoverSourceOrbitForTerminalNearConsumer
-  rebuildFinalContradiction
-  : FinalCutCoordinate
+  transportCheckedLeanSplitFarToAgda : FinalCutCoordinate
+  proveChosenFiniteNearUpper : FinalCutCoordinate
+  proveChosenNearLeavesFarAllowance : FinalCutCoordinate
+  proveFreshSameTaperGammaEnvelope : FinalCutCoordinate
+  proveGammaFitsAssignedAllowance : FinalCutCoordinate
+  identifyWindowWithTransportedNearCoordinates : FinalCutCoordinate
+  transportFinalSourceOrders : FinalCutCoordinate
+  attachFinalClusterSameObject : FinalCutCoordinate
+  rebuildNearFarBudgetFamilyForEveryCutoff : FinalCutCoordinate
+  recoverDeterminantDirectPayment : FinalCutCoordinate
+  recoverSourceOrbitForTerminalNearConsumer : FinalCutCoordinate
+  rebuildFinalContradiction : FinalCutCoordinate
+
 
 data CoordinateClass : Set where
-  analytic crossProverRepresentation downstream pruned : CoordinateClass
+  analytic : CoordinateClass
+  crossProverRepresentation : CoordinateClass
+  downstream : CoordinateClass
+  pruned : CoordinateClass
 
 coordinateClass : FinalCutCoordinate -> CoordinateClass
 coordinateClass transportCheckedLeanSplitFarToAgda = crossProverRepresentation

@@ -137,19 +137,21 @@ directEvaluationReceiptStillAvailable {direct = direct} producer =
 ------------------------------------------------------------------------
 
 data SharedZeroSidePayment : Set where
-  recoverSecondSelectedWindow
-  recoverSecondDirectZeroFamily
-  recoverDirectFinitePoleNearProducer
-  weldExistingDirectProducerToSelectedWindow
-  constructSecondMomentDefinition
-  proveLiteralOrdinateMomentBoundAfterWeld
-  reEvaluateSignedFiniteNearAfterDirectProducer
-  attachDirectEvaluationToSelectedConsumer
-  transportMomentRatioToExactClusteringCoefficient
-  : SharedZeroSidePayment
+  recoverSecondSelectedWindow : SharedZeroSidePayment
+  recoverSecondDirectZeroFamily : SharedZeroSidePayment
+  recoverDirectFinitePoleNearProducer : SharedZeroSidePayment
+  weldExistingDirectProducerToSelectedWindow : SharedZeroSidePayment
+  constructSecondMomentDefinition : SharedZeroSidePayment
+  proveLiteralOrdinateMomentBoundAfterWeld : SharedZeroSidePayment
+  reEvaluateSignedFiniteNearAfterDirectProducer : SharedZeroSidePayment
+  attachDirectEvaluationToSelectedConsumer : SharedZeroSidePayment
+  transportMomentRatioToExactClusteringCoefficient : SharedZeroSidePayment
+
 
 data PaymentState : Set where
-  pruned live downstream : PaymentState
+  pruned : PaymentState
+  live : PaymentState
+  downstream : PaymentState
 
 paymentState : SharedZeroSidePayment → PaymentState
 paymentState recoverSecondSelectedWindow = pruned

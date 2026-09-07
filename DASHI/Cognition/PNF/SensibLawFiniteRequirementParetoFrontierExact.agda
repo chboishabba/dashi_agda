@@ -115,11 +115,11 @@ paretoFrontier portfolio = filterFrontier portfolio portfolio
 ------------------------------------------------------------------------
 
 data ToyRequirement : Set where
-  cheapModerate
-  costlyHighGain
-  costlyLowGain
-  inadmissibleHugeGain
-  : ToyRequirement
+  cheapModerate : ToyRequirement
+  costlyHighGain : ToyRequirement
+  costlyLowGain : ToyRequirement
+  inadmissibleHugeGain : ToyRequirement
+
 
 cheapCell : RequirementCandidate ToyRequirement
 cheapCell = requirement-candidate

@@ -24,7 +24,10 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data ObservedSupervoxel : Set where
-  s0 s1 s2 s3 : ObservedSupervoxel
+  s0 : ObservedSupervoxel
+  s1 : ObservedSupervoxel
+  s2 : ObservedSupervoxel
+  s3 : ObservedSupervoxel
 
 observedFibreCount : ObservedSupervoxel → Nat
 observedFibreCount s0 = 3
@@ -39,16 +42,20 @@ data ObservedEdge : ObservedSupervoxel → ObservedSupervoxel → Set where
   edge23 : ObservedEdge s2 s3
 
 data RecoveredGeometry : Set where
-  sourceLikeRecovered rotationalLikeRecovered : RecoveredGeometry
+  sourceLikeRecovered : RecoveredGeometry
+  rotationalLikeRecovered : RecoveredGeometry
 
 data RecoveredChirality : Set where
-  neutralChirality positiveChirality : RecoveredChirality
+  neutralChirality : RecoveredChirality
+  positiveChirality : RecoveredChirality
 
 data RecoveredOrientation : Set where
-  nearHorizontal nearDiagonal : RecoveredOrientation
+  nearHorizontal : RecoveredOrientation
+  nearDiagonal : RecoveredOrientation
 
 data RecoveredGate : Set where
-  openOutline closedFilled : RecoveredGate
+  openOutline : RecoveredGate
+  closedFilled : RecoveredGate
 
 record RecoveredModeObservation : Set where
   constructor recoveredModeObservation

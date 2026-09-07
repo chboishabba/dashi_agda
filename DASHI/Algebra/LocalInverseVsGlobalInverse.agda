@@ -87,7 +87,9 @@ alpogeAllLocalButNoGlobal authority =
 -- A sheet label restores the information erased by the visible target.
 
 data SheetLabel : Set where
-  negativeSheet centralSheet positiveSheet : SheetLabel
+  negativeSheet : SheetLabel
+  centralSheet : SheetLabel
+  positiveSheet : SheetLabel
 
 record SheetedSource : Set where
   constructor sheetedSource

@@ -11,7 +11,8 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data Orientation : Set where
-  higherIsBetter lowerIsBetter : Orientation
+  higherIsBetter : Orientation
+  lowerIsBetter : Orientation
 
 _≤ᵇ_ : Nat → Nat → Bool
 zero ≤ᵇ n = true

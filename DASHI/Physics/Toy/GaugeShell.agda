@@ -133,7 +133,8 @@ gaugeObservableInvariant n =
     }
 
 data GaugeOperator : Set where
-  gaugeHold gaugeEvolve : GaugeOperator
+  gaugeHold : GaugeOperator
+  gaugeEvolve : GaugeOperator
 
 gaugeOperatorWitness : (n : Nat) → LW.OperatorWitness (gaugeTheory n)
 gaugeOperatorWitness n =

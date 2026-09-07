@@ -21,26 +21,26 @@ import DASHI.Core.CounterfactualModelContractExact as Counterfactual
 ------------------------------------------------------------------------
 
 data WorldAdmissibilityStatus : Set where
-  admissibleWorld
-  inadmissibleWorld
-  admissibilityUnresolved
-  : WorldAdmissibilityStatus
+  admissibleWorld : WorldAdmissibilityStatus
+  inadmissibleWorld : WorldAdmissibilityStatus
+  admissibilityUnresolved : WorldAdmissibilityStatus
+
 
 data CorrectionKind : Set where
-  correctedConduct
-  correctedInstitutionalRelation
-  correctedPhysicalIntervention
-  correctedPolicyRegime
-  correctedBoundaryCondition
-  unresolvedCorrection
-  : CorrectionKind
+  correctedConduct : CorrectionKind
+  correctedInstitutionalRelation : CorrectionKind
+  correctedPhysicalIntervention : CorrectionKind
+  correctedPolicyRegime : CorrectionKind
+  correctedBoundaryCondition : CorrectionKind
+  unresolvedCorrection : CorrectionKind
+
 
 data CounterfactualIdentificationStatus : Set where
-  uniquelyIdentifiedAcrossAdmissibleWorlds
-  underidentifiedAcrossAdmissibleWorlds
-  noAdmissibleWorldLocated
-  identificationUnresolved
-  : CounterfactualIdentificationStatus
+  uniquelyIdentifiedAcrossAdmissibleWorlds : CounterfactualIdentificationStatus
+  underidentifiedAcrossAdmissibleWorlds : CounterfactualIdentificationStatus
+  noAdmissibleWorldLocated : CounterfactualIdentificationStatus
+  identificationUnresolved : CounterfactualIdentificationStatus
+
 
 record AdmissibleWorldFamily : Set₁ where
   constructor admissible-world-family

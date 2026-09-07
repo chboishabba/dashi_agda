@@ -21,7 +21,9 @@ record OpportunitySelectionCounts : Set where
 open OpportunitySelectionCounts public
 
 data ConditionalEstimand : Set where
-  opportunityRateByGroup eligibilityGivenOpportunity selectionGivenEligibility : ConditionalEstimand
+  opportunityRateByGroup : ConditionalEstimand
+  eligibilityGivenOpportunity : ConditionalEstimand
+  selectionGivenEligibility : ConditionalEstimand
   unconditionalSelectionRate : ConditionalEstimand
 
 record ConditionalRatioRequest : Set where
@@ -76,11 +78,15 @@ unconditionalSelectionRateRequest s = conditionalRatioRequest
 ------------------------------------------------------------------------
 
 data OpportunityDisparityClaim : Set where
-  deploymentOpportunityDisparity eligibilityConditionalDisparity : OpportunityDisparityClaim
+  deploymentOpportunityDisparity : OpportunityDisparityClaim
+  eligibilityConditionalDisparity : OpportunityDisparityClaim
   officerSelectionConditionalDisparity unconditionalObservedDisparity : OpportunityDisparityClaim
 
 data OpportunityDisparityProducer : Set where
-  populationExposureFrame opportunityCrossTab legalEligibilityCrossTab selectedEligibleCrossTab : OpportunityDisparityProducer
+  populationExposureFrame : OpportunityDisparityProducer
+  opportunityCrossTab : OpportunityDisparityProducer
+  legalEligibilityCrossTab : OpportunityDisparityProducer
+  selectedEligibleCrossTab : OpportunityDisparityProducer
   completeDecompositionReceipt : OpportunityDisparityProducer
 
 reverseOpportunityDisparity : OpportunityDisparityClaim → OpportunityDisparityProducer
@@ -102,7 +108,10 @@ record OpportunityDisparityCutset : Set where
 open OpportunityDisparityCutset public
 
 data OpportunityDisparityResidual : Set where
-  populationFrameResidual opportunityResidual eligibilityResidual selectionResidual : OpportunityDisparityResidual
+  populationFrameResidual : OpportunityDisparityResidual
+  opportunityResidual : OpportunityDisparityResidual
+  eligibilityResidual : OpportunityDisparityResidual
+  selectionResidual : OpportunityDisparityResidual
   missingnessResidual opportunityDisparityClosed : OpportunityDisparityResidual
 
 firstOpportunityDisparityResidual :

@@ -19,16 +19,23 @@ import DASHI.Reasoning.AttractorAlignedBranchSelectionExact as Branch
 ------------------------------------------------------------------------
 
 data Accumulator : Set where
-  balanced supportLead counterLead : Accumulator
+  balanced : Accumulator
+  supportLead : Accumulator
+  counterLead : Accumulator
 
 data Commitment : Set where
-  uncommitted supportCommitted counterCommitted : Commitment
+  uncommitted : Commitment
+  supportCommitted : Commitment
+  counterCommitted : Commitment
 
 data ActuationGate : Set where
-  blocked released : ActuationGate
+  blocked : ActuationGate
+  released : ActuationGate
 
 data ExecutedAction : Set where
-  noAction supportAction counterAction : ExecutedAction
+  noAction : ExecutedAction
+  supportAction : ExecutedAction
+  counterAction : ExecutedAction
 
 accumulate : Pre.Candidate → Accumulator → Accumulator
 accumulate Pre.supportingCandidate balanced = supportLead
@@ -71,7 +78,8 @@ sameCommitmentDifferentActuation ()
 ------------------------------------------------------------------------
 
 data ConsiderationMode : Set where
-  narrowConsideration broadConsideration : ConsiderationMode
+  narrowConsideration : ConsiderationMode
+  broadConsideration : ConsiderationMode
 
 considered : ConsiderationMode → Pre.Candidate → Bool
 considered narrowConsideration Pre.supportingCandidate = true

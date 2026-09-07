@@ -21,7 +21,9 @@ open import Data.Nat.Base using (_*_)
 open import Relation.Binary.PropositionalEquality using (cong)
 
 data C3 : Set where
-  c0 c1 c2 : C3
+  c0 : C3
+  c1 : C3
+  c2 : C3
 
 _∙_ : C3 → C3 → C3
 c0 ∙ x = x

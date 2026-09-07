@@ -14,7 +14,10 @@ import DASHI.Biology.JMDSporadicTarotV2CorrespondenceExact as JMD
 ------------------------------------------------------------------------
 
 data JankoIndex : Set where
-  janko1 janko2 janko3 janko4 : JankoIndex
+  janko1 : JankoIndex
+  janko2 : JankoIndex
+  janko3 : JankoIndex
+  janko4 : JankoIndex
 
 localOffset : JankoIndex → Nat
 localOffset janko1 = 1

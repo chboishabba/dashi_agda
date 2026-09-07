@@ -19,7 +19,8 @@ import DASHI.Cognition.PNF.UnifiedDecisionDynamicsExact as Decision
 ------------------------------------------------------------------------
 
 data GateEvidence : Set where
-  low high : GateEvidence
+  low : GateEvidence
+  high : GateEvidence
 
 releaseGate : GateEvidence → GateEvidence → Decision.ActuationGate
 releaseGate high low = Decision.released

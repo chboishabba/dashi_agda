@@ -20,52 +20,52 @@ import DASHI.Law.SecurityClassificationProvenanceBidiExact as Security
 ------------------------------------------------------------------------
 
 data InstitutionalCarrier : Set where
-  israeliExecutive
-  knesset
-  idf
-  israeliDefenceIndustry
-  settlerInstitution
-  diasporaPoliticalAdvocacy
-  diasporaJewishCorrectionCarrier
-  privateSecurityOrganisation
-  australianGovernment
-  australianDefenceIndustry
-  nswPolice
-  foreignSecurityPartner
+  israeliExecutive : InstitutionalCarrier
+  knesset : InstitutionalCarrier
+  idf : InstitutionalCarrier
+  israeliDefenceIndustry : InstitutionalCarrier
+  settlerInstitution : InstitutionalCarrier
+  diasporaPoliticalAdvocacy : InstitutionalCarrier
+  diasporaJewishCorrectionCarrier : InstitutionalCarrier
+  privateSecurityOrganisation : InstitutionalCarrier
+  australianGovernment : InstitutionalCarrier
+  australianDefenceIndustry : InstitutionalCarrier
+  nswPolice : InstitutionalCarrier
+  foreignSecurityPartner : InstitutionalCarrier
   publicNarrativeCarrier : InstitutionalCarrier
 
 data TransmissionChannel : Set where
-  officialSpeech
-  soldierMessage
-  parliamentaryRecord
-  militaryEcho
-  doctrineOrTraining
-  procurement
-  exportSupplyChain
-  liaison
-  advocacy
-  publicStatement
-  privateSecurityCoordination
+  officialSpeech : TransmissionChannel
+  soldierMessage : TransmissionChannel
+  parliamentaryRecord : TransmissionChannel
+  militaryEcho : TransmissionChannel
+  doctrineOrTraining : TransmissionChannel
+  procurement : TransmissionChannel
+  exportSupplyChain : TransmissionChannel
+  liaison : TransmissionChannel
+  advocacy : TransmissionChannel
+  publicStatement : TransmissionChannel
+  privateSecurityCoordination : TransmissionChannel
   mediaNarrative : TransmissionChannel
 
 data OperationalOutput : Set where
-  militaryAudience
-  securityClassification
-  targetClassification
-  publicThreatNarrative
-  procurementIntegration
-  securityProtectionRouting
-  securityCoerciveRouting
-  settlementOrTerritorialPolicy
-  foreignSecurityInput
+  militaryAudience : OperationalOutput
+  securityClassification : OperationalOutput
+  targetClassification : OperationalOutput
+  publicThreatNarrative : OperationalOutput
+  procurementIntegration : OperationalOutput
+  securityProtectionRouting : OperationalOutput
+  securityCoerciveRouting : OperationalOutput
+  settlementOrTerritorialPolicy : OperationalOutput
+  foreignSecurityInput : OperationalOutput
   correctionWarning : OperationalOutput
 
 data EdgeClosure : Set where
-  directReceipt
-  echoReceipt
-  contextualReceipt
-  allegationOnly
-  edgeOpen
+  directReceipt : EdgeClosure
+  echoReceipt : EdgeClosure
+  contextualReceipt : EdgeClosure
+  allegationOnly : EdgeClosure
+  edgeOpen : EdgeClosure
   edgeConflict : EdgeClosure
 
 record RepertoireCarrierEdge : Set where
@@ -176,23 +176,23 @@ diasporaWarningToExecutive = correctionCarrierEdge
 ------------------------------------------------------------------------
 
 data CarrierClaim : Set where
-  repertoireReachedMilitaryAudience
-  repertoireInstitutionallyReproduced
-  materialSecurityLinkExists
-  materialSecurityLinkCarriedIdeologicalContent
-  privateSecurityLinkReachedNSWPolice
-  zionistRepertoireReachedNSWPoliceClassification
-  diasporaJewishCritiqueExists
+  repertoireReachedMilitaryAudience : CarrierClaim
+  repertoireInstitutionallyReproduced : CarrierClaim
+  materialSecurityLinkExists : CarrierClaim
+  materialSecurityLinkCarriedIdeologicalContent : CarrierClaim
+  privateSecurityLinkReachedNSWPolice : CarrierClaim
+  zionistRepertoireReachedNSWPoliceClassification : CarrierClaim
+  diasporaJewishCritiqueExists : CarrierClaim
   institutionalCarrierProvesPopulationBelief : CarrierClaim
 
 data CarrierProducer : Set where
-  directMilitaryAudienceProducer
-  multiInstitutionReproductionProducer
-  materialLinkProducer
-  ideologicalContentTransportProducer
-  policeCoordinationProducer
-  nswClassificationContentAndForeignLiaisonProducer
-  diasporaCorrectionProducer
+  directMilitaryAudienceProducer : CarrierProducer
+  multiInstitutionReproductionProducer : CarrierProducer
+  materialLinkProducer : CarrierProducer
+  ideologicalContentTransportProducer : CarrierProducer
+  policeCoordinationProducer : CarrierProducer
+  nswClassificationContentAndForeignLiaisonProducer : CarrierProducer
+  diasporaCorrectionProducer : CarrierProducer
   populationBeliefProducer : CarrierProducer
 
 reverseCarrier : CarrierClaim → CarrierProducer
@@ -221,14 +221,14 @@ record CarrierCutset : Set where
 open CarrierCutset public
 
 data CarrierResidual : Set where
-  militaryAudienceResidual
-  institutionalReproductionResidual
-  materialLinkResidual
-  ideologicalContentResidual
-  policeCoordinationResidual
-  nswClassificationContentResidual
-  foreignLiaisonResidual
-  correctionResidual
+  militaryAudienceResidual : CarrierResidual
+  institutionalReproductionResidual : CarrierResidual
+  materialLinkResidual : CarrierResidual
+  ideologicalContentResidual : CarrierResidual
+  policeCoordinationResidual : CarrierResidual
+  nswClassificationContentResidual : CarrierResidual
+  foreignLiaisonResidual : CarrierResidual
+  correctionResidual : CarrierResidual
   carrierClosed : CarrierResidual
 
 firstCarrierResidual : CarrierClaim → CarrierCutset → CarrierResidual

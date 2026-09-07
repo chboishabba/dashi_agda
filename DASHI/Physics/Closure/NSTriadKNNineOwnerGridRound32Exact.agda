@@ -15,10 +15,14 @@ open import Agda.Builtin.List using (List; []; _∷_)
 
 
 data OwnerRow : Set where
-  high mixed closure : OwnerRow
+  high : OwnerRow
+  mixed : OwnerRow
+  closure : OwnerRow
 
 data OwnerColumn : Set where
-  aligned misaligned crossScale : OwnerColumn
+  aligned : OwnerColumn
+  misaligned : OwnerColumn
+  crossScale : OwnerColumn
 
 record OwnerCell : Set where
   constructor owner-cell
@@ -29,7 +33,15 @@ record OwnerCell : Set where
 open OwnerCell public
 
 data PhysicalOwner : Set where
-  HHGood HHBad LH HL CC Com kernel tail boundary : PhysicalOwner
+  HHGood : PhysicalOwner
+  HHBad : PhysicalOwner
+  LH : PhysicalOwner
+  HL : PhysicalOwner
+  CC : PhysicalOwner
+  Com : PhysicalOwner
+  kernel : PhysicalOwner
+  tail : PhysicalOwner
+  boundary : PhysicalOwner
 
 ownerCell : PhysicalOwner → OwnerCell
 ownerCell HHGood = owner-cell high aligned

@@ -115,7 +115,10 @@ noTwoInputsThreeShellsBelowOutput τ pGap qGap
       qShell≤pShell)
 
 data TriadicSourceClass : Set where
-  LH HL HH CC : TriadicSourceClass
+  LH : TriadicSourceClass
+  HL : TriadicSourceClass
+  HH : TriadicSourceClass
+  CC : TriadicSourceClass
 
 regimeForClass : TriadicSourceClass → Scale.ScaleRegime
 regimeForClass LH = Scale.lowHigh

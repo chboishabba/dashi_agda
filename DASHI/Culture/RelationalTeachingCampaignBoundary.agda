@@ -10,7 +10,8 @@ import DASHI.Culture.DerivedCulturalUseAdmissibility as Cultural
 -- User-supplied examples are retained as bounded case-study analogies.
 
 data CaseKind : Set where
-  plantTeachingCase advertiserPressureCampaignCase : CaseKind
+  plantTeachingCase : CaseKind
+  advertiserPressureCampaignCase : CaseKind
 
 record CaseStudy : Set where
   constructor caseStudy

@@ -19,14 +19,20 @@ import DASHI.Core.HistoryConditionedChoiceExact as History
 ------------------------------------------------------------------------
 
 data Generation : Set where
-  generation1 generation2 generation3 generation4 generation5 generation6 generation7 : Generation
+  generation1 : Generation
+  generation2 : Generation
+  generation3 : Generation
+  generation4 : Generation
+  generation5 : Generation
+  generation6 : Generation
+  generation7 : Generation
 
 data HorizonKind : Set where
-  oneSeason
-  multiSeason
-  sevenGenerationHorizon
-  openEndedIntergenerationalHorizon
-  : HorizonKind
+  oneSeason : HorizonKind
+  multiSeason : HorizonKind
+  sevenGenerationHorizon : HorizonKind
+  openEndedIntergenerationalHorizon : HorizonKind
+
 
 record IntergenerationalHorizon : Set₁ where
   constructor intergenerational-horizon

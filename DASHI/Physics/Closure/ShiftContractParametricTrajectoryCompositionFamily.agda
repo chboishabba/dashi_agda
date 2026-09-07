@@ -59,7 +59,9 @@ open import DASHI.Physics.Closure.ShiftContractTriadicFamily as STF
 -- theorem code quantify over one theorem-bearing generator interface.
 
 data GeneratorClass : Set where
-  explicitWidth1 explicitWidth2 explicitWidth3 : GeneratorClass
+  explicitWidth1 : GeneratorClass
+  explicitWidth2 : GeneratorClass
+  explicitWidth3 : GeneratorClass
   balancedCycle : GeneratorClass
   denseComposed : GeneratorClass
   balancedComposed : GeneratorClass

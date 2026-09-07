@@ -37,7 +37,10 @@ import DASHI.Foundations.SU2SO3IrrepDimensionExact as Spin
 import DASHI.Foundations.PolyhedralFixedSpaceSpectrumJ0To35Exact as Fixed
 
 data TetrahedralIrrep : Set where
-  T1 T1Omega T1OmegaSquared T3 : TetrahedralIrrep
+  T1 : TetrahedralIrrep
+  T1Omega : TetrahedralIrrep
+  T1OmegaSquared : TetrahedralIrrep
+  T3 : TetrahedralIrrep
 
 tetrahedralIrrepDimension : TetrahedralIrrep → Nat
 tetrahedralIrrepDimension T1 = 1
@@ -46,7 +49,10 @@ tetrahedralIrrepDimension T1OmegaSquared = 1
 tetrahedralIrrepDimension T3 = 3
 
 data TetrahedralClass : Set where
-  identityClass halfTurnClass thirdTurnClass thirdTurnInverseClass : TetrahedralClass
+  identityClass : TetrahedralClass
+  halfTurnClass : TetrahedralClass
+  thirdTurnClass : TetrahedralClass
+  thirdTurnInverseClass : TetrahedralClass
 
 record EisensteinInt : Set where
   constructor eisenstein

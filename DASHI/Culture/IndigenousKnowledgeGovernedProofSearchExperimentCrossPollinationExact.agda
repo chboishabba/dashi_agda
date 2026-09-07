@@ -139,19 +139,25 @@ proofAdmissionDoesNotManufactureCustodialPermission proofRoute safe =
   Consumer.coarseCollisionBlocksSufficiency permissionCollision safe
 
 data KnowledgeExperimentWorld : Set where
-  custodialWorld researchWorld : KnowledgeExperimentWorld
+  custodialWorld : KnowledgeExperimentWorld
+  researchWorld : KnowledgeExperimentWorld
 
 data KnowledgeExperimentControl : Set where
-  readOnlyObservation collectSample : KnowledgeExperimentControl
+  readOnlyObservation : KnowledgeExperimentControl
+  collectSample : KnowledgeExperimentControl
 
 data KnowledgeExperimentValue : Set where
-  sameEfficacyReading custodialCode researchCode : KnowledgeExperimentValue
+  sameEfficacyReading : KnowledgeExperimentValue
+  custodialCode : KnowledgeExperimentValue
+  researchCode : KnowledgeExperimentValue
 
 data KnowledgeExperimentDimension : Set where
-  efficacyDimension governanceDimension : KnowledgeExperimentDimension
+  efficacyDimension : KnowledgeExperimentDimension
+  governanceDimension : KnowledgeExperimentDimension
 
 data KnowledgeExperimentCoordinate : Set where
-  efficacyCoordinate permissionCoordinate : KnowledgeExperimentCoordinate
+  efficacyCoordinate : KnowledgeExperimentCoordinate
+  permissionCoordinate : KnowledgeExperimentCoordinate
 
 worldPermission : KnowledgeExperimentWorld → IK.PermissionStatus
 worldPermission custodialWorld = IK.restrictedPermission

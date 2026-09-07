@@ -61,7 +61,12 @@ hypervoxelStateCountIs27 = refl
 ------------------------------------------------------------------------
 
 data Face6 : Set where
-  xNegativeFace xPositiveFace yNegativeFace yPositiveFace zNegativeFace zPositiveFace : Face6
+  xNegativeFace : Face6
+  xPositiveFace : Face6
+  yNegativeFace : Face6
+  yPositiveFace : Face6
+  zNegativeFace : Face6
+  zPositiveFace : Face6
 
 faceAxis : Face6 → Axis3
 faceAxis xNegativeFace = xAxis

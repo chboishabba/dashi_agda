@@ -10,7 +10,9 @@ open import DASHI.Physics.Constraints.Closure
 
 -- A concrete, small constraint system with three generators.
 data C : Set where
-  CR CP CC : C
+  CR : C
+  CP : C
+  CC : C
 
 CS : ConstraintSystem
 CS =

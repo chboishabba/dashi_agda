@@ -30,10 +30,13 @@ open import DASHI.Physics.Closure.TriadicMatrixGenerationTheorem using
 -- triadic M2 basis bridge already present in the repo.
 
 data Sign : Set where
-  pos neg : Sign
+  pos : Sign
+  neg : Sign
 
 data SelectedPrimeLane : Set where
-  lane7 lane11 lane13 : SelectedPrimeLane
+  lane7 : SelectedPrimeLane
+  lane11 : SelectedPrimeLane
+  lane13 : SelectedPrimeLane
 
 canonicalSelectedPrimeLaneOrder : List SelectedPrimeLane
 canonicalSelectedPrimeLaneOrder =

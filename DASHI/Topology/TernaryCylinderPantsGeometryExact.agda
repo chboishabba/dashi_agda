@@ -85,7 +85,9 @@ child6Child9ShareParentPrefix parent =
 ------------------------------------------------------------------------
 
 data BranchSlot : Set where
-  slot3 slot6 slot9 : BranchSlot
+  slot3 : BranchSlot
+  slot6 : BranchSlot
+  slot9 : BranchSlot
 
 slotOfDigit : U369.Digit369 → BranchSlot
 slotOfDigit U369.digit3 = slot3

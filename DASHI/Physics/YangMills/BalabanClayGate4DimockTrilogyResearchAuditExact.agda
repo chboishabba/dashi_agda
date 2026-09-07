@@ -36,7 +36,9 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 
 data DimockPart : Set where
-  smallFields largeFields convergence : DimockPart
+  smallFields : DimockPart
+  largeFields : DimockPart
+  convergence : DimockPart
 
 record DimockTrilogyScope : Set₁ where
   field

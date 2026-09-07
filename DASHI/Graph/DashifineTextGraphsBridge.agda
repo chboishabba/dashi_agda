@@ -25,7 +25,9 @@ open import Data.Empty using (⊥)
 -- Canonical ternary state carrier.
 
 data Trit : Set where
-  neg zer pos : Trit
+  neg : Trit
+  zer : Trit
+  pos : Trit
 
 record ConversationState : Set where
   constructor state
@@ -38,7 +40,10 @@ open ConversationState public
 -- Small signed invariant carrier sufficient for the current A→I fixture.
 
 data Invariant : Set where
-  minusOne zero one three : Invariant
+  minusOne : Invariant
+  zero : Invariant
+  one : Invariant
+  three : Invariant
 
 record BridgeRow : Set where
   constructor row
@@ -162,7 +167,8 @@ canonicalBridgeConformance =
 -- ZKP / PNF evidence separation.
 
 data EvidenceKind : Set where
-  transportParity graphDerived : EvidenceKind
+  transportParity : EvidenceKind
+  graphDerived : EvidenceKind
 
 record Evidence (kind : EvidenceKind) : Set where
   constructor evidence

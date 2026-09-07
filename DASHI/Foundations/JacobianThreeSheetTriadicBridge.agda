@@ -27,7 +27,9 @@ open import Verification.JacobianCounterexampleKernel as J
 -- infer the fibre from numerology or from decimal digits.
 
 data BalancedTrit : Set where
-  negativeTrit zeroTrit positiveTrit : BalancedTrit
+  negativeTrit : BalancedTrit
+  zeroTrit : BalancedTrit
+  positiveTrit : BalancedTrit
 
 sheetPoint : BalancedTrit → Point3
 sheetPoint negativeTrit = pNegative

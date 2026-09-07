@@ -84,7 +84,8 @@ moonshineCarrierPlusOneExact =
   Marked.carrierPlusOne moonshineMarkedUnitExtension
 
 data HyphenReading : Set where
-  compoundSubfibreLabel subtractionExpression : HyphenReading
+  compoundSubfibreLabel : HyphenReading
+  subtractionExpression : HyphenReading
 
 intendedJPreviousSubfibreReading : HyphenReading
 intendedJPreviousSubfibreReading = compoundSubfibreLabel

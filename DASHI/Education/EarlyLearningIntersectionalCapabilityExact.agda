@@ -21,34 +21,46 @@ import DASHI.Education.EarlyLearningChoicePNFHyperfabricBridge as Existing
 ------------------------------------------------------------------------
 
 data ChildPosition : Set where
-  childPositionA childPositionB : ChildPosition
+  childPositionA : ChildPosition
+  childPositionB : ChildPosition
 
 data CaregiverPosition : Set where
-  caregiverPositionA caregiverPositionB : CaregiverPosition
+  caregiverPositionA : CaregiverPosition
+  caregiverPositionB : CaregiverPosition
 
 data HouseholdPosition : Set where
-  householdPositionA householdPositionB : HouseholdPosition
+  householdPositionA : HouseholdPosition
+  householdPositionB : HouseholdPosition
 
 data PlacePosition : Set where
-  urban regional remote : PlacePosition
+  urban : PlacePosition
+  regional : PlacePosition
+  remote : PlacePosition
 
 data LabourPosition : Set where
-  secureFlexible precariousTimePoor : LabourPosition
+  secureFlexible : LabourPosition
+  precariousTimePoor : LabourPosition
 
 data AccessPosition : Set where
-  ordinaryAccess specialistAccessRequired : AccessPosition
+  ordinaryAccess : AccessPosition
+  specialistAccessRequired : AccessPosition
 
 data CultureLanguagePosition : Set where
-  dominantLanguage multilingualOrCommunityLanguage : CultureLanguagePosition
+  dominantLanguage : CultureLanguagePosition
+  multilingualOrCommunityLanguage : CultureLanguagePosition
 
 data GenderedCarePosition : Set where
-  lowerCareBurden higherCareBurden : GenderedCarePosition
+  lowerCareBurden : GenderedCarePosition
+  higherCareBurden : GenderedCarePosition
 
 data CommunityAuthorityPosition : Set where
-  nuclearHouseholdOnly kinCommunityGoverned : CommunityAuthorityPosition
+  nuclearHouseholdOnly : CommunityAuthorityPosition
+  kinCommunityGoverned : CommunityAuthorityPosition
 
 data InstitutionalRelation : Set where
-  institutionTrusted institutionMixed institutionHistoricallyUnsafe : InstitutionalRelation
+  institutionTrusted : InstitutionalRelation
+  institutionMixed : InstitutionalRelation
+  institutionHistoricallyUnsafe : InstitutionalRelation
 
 record SituatedEarlyLearningPosition : Set where
   constructor situatedEarlyLearningPosition
@@ -126,11 +138,17 @@ familyChoiceCannotDetermineEffectiveCapability =
 ------------------------------------------------------------------------
 
 data AuthorityDomain : Set where
-  childPreferenceDomain familyContextDomain kinCommunityDomain : AuthorityDomain
+  childPreferenceDomain : AuthorityDomain
+  familyContextDomain : AuthorityDomain
+  kinCommunityDomain : AuthorityDomain
   professionalPedagogyDomain safeguardingDomain publicEntitlementDomain : AuthorityDomain
 
 data AuthorityHolder : Set where
-  childHolder familyHolder kinCommunityHolder professionalHolder publicHolder : AuthorityHolder
+  childHolder : AuthorityHolder
+  familyHolder : AuthorityHolder
+  kinCommunityHolder : AuthorityHolder
+  professionalHolder : AuthorityHolder
+  publicHolder : AuthorityHolder
 
 canonicalAuthorityHolder : AuthorityDomain → AuthorityHolder
 canonicalAuthorityHolder childPreferenceDomain = childHolder
@@ -153,7 +171,10 @@ parentalSovereigntyOverEveryDomainIsFalse = refl
 ------------------------------------------------------------------------
 
 data SupportKind : Set where
-  connectivitySupport teacherContactSupport incomeTimeSupport transportSupport : SupportKind
+  connectivitySupport : SupportKind
+  teacherContactSupport : SupportKind
+  incomeTimeSupport : SupportKind
+  transportSupport : SupportKind
   multilingualSupport culturalGovernanceSupport specialistSupport accessibilitySupport : SupportKind
   peerCommunitySupport respiteSupport professionalECECSupport : SupportKind
 

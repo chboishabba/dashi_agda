@@ -20,7 +20,11 @@ open import DASHI.Physics.ShiftPhaseTableInterference as SPTI4
 --   * transport compatibility is stated for the existing discrete advance only.
 
 data RefinementToken : Set where
-  carrier-only amplitude-shadow phase-shadow wave-shadow phase-wave : RefinementToken
+  carrier-only : RefinementToken
+  amplitude-shadow : RefinementToken
+  phase-shadow : RefinementToken
+  wave-shadow : RefinementToken
+  phase-wave : RefinementToken
 
 record CoarseObservation : Set where
   constructor mkCoarseObservation

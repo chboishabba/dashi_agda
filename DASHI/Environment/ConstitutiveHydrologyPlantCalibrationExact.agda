@@ -28,10 +28,15 @@ medlynSource : Sources.SourceReference
 medlynSource = Sources.medlynEtAl2011
 
 data SoilRetentionModelKind : Set where
-  measuredLookup vanGenuchtenRetention applicationSpecificRetention : SoilRetentionModelKind
+  measuredLookup : SoilRetentionModelKind
+  vanGenuchtenRetention : SoilRetentionModelKind
+  applicationSpecificRetention : SoilRetentionModelKind
 
 data SoilConductivityModelKind : Set where
-  measuredConductivity mualemConductivity vanGenuchtenMualemConductivity applicationSpecificConductivity : SoilConductivityModelKind
+  measuredConductivity : SoilConductivityModelKind
+  mualemConductivity : SoilConductivityModelKind
+  vanGenuchtenMualemConductivity : SoilConductivityModelKind
+  applicationSpecificConductivity : SoilConductivityModelKind
 
 record SoilRetentionConductivityLaw : Set₁ where
   constructor soilRetentionConductivityLaw
@@ -88,7 +93,9 @@ record SoilHydraulicCalibrationReceipt
 open SoilHydraulicCalibrationReceipt public
 
 data XylemVulnerabilityModelKind : Set where
-  empiricalVulnerabilityCurve segmentedHydraulicNetwork applicationSpecificVulnerability : XylemVulnerabilityModelKind
+  empiricalVulnerabilityCurve : XylemVulnerabilityModelKind
+  segmentedHydraulicNetwork : XylemVulnerabilityModelKind
+  applicationSpecificVulnerability : XylemVulnerabilityModelKind
 
 record XylemConstitutiveCalibration
     {root : RootSoil.RootSoilIonWaterMechanism}
@@ -108,7 +115,8 @@ record XylemConstitutiveCalibration
 open XylemConstitutiveCalibration public
 
 data StomatalModelKind : Set where
-  medlynOptimalEmpirical applicationSpecificStomatalModel : StomatalModelKind
+  medlynOptimalEmpirical : StomatalModelKind
+  applicationSpecificStomatalModel : StomatalModelKind
 
 record LeafCarbonWaterCalibration
     (leaf : Plant.LeafGasExchangeReceipt) : Set₁ where

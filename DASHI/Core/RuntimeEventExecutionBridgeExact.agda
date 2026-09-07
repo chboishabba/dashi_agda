@@ -12,10 +12,14 @@ import DASHI.Core.ContentAddressedTransitionIdentityExact as Identity
 ------------------------------------------------------------------------
 
 data RuntimeEventKind : Set where
-  created updated deleted : RuntimeEventKind
+  created : RuntimeEventKind
+  updated : RuntimeEventKind
+  deleted : RuntimeEventKind
 
 data RuntimeExecutionOutcome : Set where
-  runtimeExecuted runtimeRejected runtimePartial : RuntimeExecutionOutcome
+  runtimeExecuted : RuntimeExecutionOutcome
+  runtimeRejected : RuntimeExecutionOutcome
+  runtimePartial : RuntimeExecutionOutcome
 
 record RuntimeEvent {Transition : Set} (canonical : Transition) : Set₁ where
   constructor runtime-event

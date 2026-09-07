@@ -21,7 +21,10 @@ _≢_ : ∀ {A : Set} → A → A → Set
 x ≢ y = x ≡ y → ⊥
 
 data Phase4 : Set where
-  p0 p1 p2 p3 : Phase4
+  p0 : Phase4
+  p1 : Phase4
+  p2 : Phase4
+  p3 : Phase4
 
 rotate : Phase4 → Phase4
 rotate p0 = p1
@@ -84,7 +87,8 @@ halfTurnCommutesWithRotation p3 = refl
 ------------------------------------------------------------------------
 
 data Strand : Set where
-  primary complementary : Strand
+  primary : Strand
+  complementary : Strand
 
 toggleStrand : Strand → Strand
 toggleStrand primary = complementary

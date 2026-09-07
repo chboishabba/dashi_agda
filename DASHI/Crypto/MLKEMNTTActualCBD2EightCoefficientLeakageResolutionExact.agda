@@ -229,10 +229,12 @@ coarseningCollisionRefutesObservedInjectivity {channel} witness observedInjectiv
 ------------------------------------------------------------------------
 
 data Secret2 : Set where
-  secret0 secret1 : Secret2
+  secret0 : Secret2
+  secret1 : Secret2
 
 data Raw2 : Set where
-  raw0 raw1 : Raw2
+  raw0 : Raw2
+  raw1 : Raw2
 
 data Observed1 : Set where
   observed : Observed1

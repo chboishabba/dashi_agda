@@ -19,7 +19,11 @@ data _⊎_ (A B : Set) : Set where
 -- Exact field with five elements.
 
 data F5 : Set where
-  f0 f1 f2 f3 f4 : F5
+  f0 : F5
+  f1 : F5
+  f2 : F5
+  f3 : F5
+  f4 : F5
 
 addF5 : F5 → F5 → F5
 addF5 f0 y = y

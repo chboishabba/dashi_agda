@@ -87,7 +87,8 @@ open GeneratedAgreementFailure public
 ------------------------------------------------------------------------
 
 data DecapsulationRoute : Set where
-  validRoute implicitRejectRoute : DecapsulationRoute
+  validRoute : DecapsulationRoute
+  implicitRejectRoute : DecapsulationRoute
 
 record RoutedDecapsulation (machine : KEMStateMachine) : Set₁ where
   constructor routedDecapsulation

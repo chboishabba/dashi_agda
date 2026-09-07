@@ -28,7 +28,9 @@ data DrugRepairAxis : Set where
 
 
 data DrugRepairStatus : Set where
-  openRepair acknowledgedRepair repairedRepair : DrugRepairStatus
+  openRepair : DrugRepairStatus
+  acknowledgedRepair : DrugRepairStatus
+  repairedRepair : DrugRepairStatus
 
 record DrugReparativeFibre : Set where
   constructor drugReparativeFibre
@@ -111,7 +113,8 @@ data CoarseRepairSurface : Set where
   samePositiveRepairNarrative : CoarseRepairSurface
 
 data RepairVariant : Set where
-  acknowledgedVariant materialVariant : RepairVariant
+  acknowledgedVariant : RepairVariant
+  materialVariant : RepairVariant
 
 coarseRepair : RepairVariant → CoarseRepairSurface
 coarseRepair _ = samePositiveRepairNarrative

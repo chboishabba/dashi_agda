@@ -96,7 +96,9 @@ stage11AbsoluteMatchesExistingOwner = refl
 ------------------------------------------------------------------------
 
 data ElevenRole : Set where
-  decimalRetentionRole triadicJDepthRole stageCrossScaleJoinRole : ElevenRole
+  decimalRetentionRole : ElevenRole
+  triadicJDepthRole : ElevenRole
+  stageCrossScaleJoinRole : ElevenRole
 
 record JCoarseFineDepthBridgeBoundary : Set where
   constructor j-coarse-fine-depth-bridge-boundary

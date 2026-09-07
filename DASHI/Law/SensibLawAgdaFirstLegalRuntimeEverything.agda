@@ -34,23 +34,23 @@ import DASHI.Law.QueenslandWrongTypeCausationDeclarationExact as Queensland
 ------------------------------------------------------------------------
 
 data LegalRuntimeCoordinate : Set where
-  runtimePNFCoordinate
-  legalResidualCoordinate
-  legalSourcePlanCoordinate
-  legalIRCoordinate
-  typedMeetCoordinate
-  authorityCoordinate
-  applicabilityCoordinate
-  wrongTypeElementCoordinate
-  evidencePaymentCoordinate
-  consumerClosureCoordinate
-  : LegalRuntimeCoordinate
+  runtimePNFCoordinate : LegalRuntimeCoordinate
+  legalResidualCoordinate : LegalRuntimeCoordinate
+  legalSourcePlanCoordinate : LegalRuntimeCoordinate
+  legalIRCoordinate : LegalRuntimeCoordinate
+  typedMeetCoordinate : LegalRuntimeCoordinate
+  authorityCoordinate : LegalRuntimeCoordinate
+  applicabilityCoordinate : LegalRuntimeCoordinate
+  wrongTypeElementCoordinate : LegalRuntimeCoordinate
+  evidencePaymentCoordinate : LegalRuntimeCoordinate
+  consumerClosureCoordinate : LegalRuntimeCoordinate
+
 
 data CoordinateRequirement : Set where
-  requiredCoordinate
-  conditionallyRequiredCoordinate
-  downstreamCoordinate
-  : CoordinateRequirement
+  requiredCoordinate : CoordinateRequirement
+  conditionallyRequiredCoordinate : CoordinateRequirement
+  downstreamCoordinate : CoordinateRequirement
+
 
 coordinateRequirement : LegalRuntimeCoordinate → CoordinateRequirement
 coordinateRequirement runtimePNFCoordinate = requiredCoordinate

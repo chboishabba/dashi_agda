@@ -7,7 +7,10 @@ open import Agda.Builtin.String using (String)
 -- spectroscopy, astronomical filtering, biological screening, or sensor fusion.
 
 data ClosureStage : Set where
-  latentState finiteObservation inferredState decisionOrEvolution : ClosureStage
+  latentState : ClosureStage
+  finiteObservation : ClosureStage
+  inferredState : ClosureStage
+  decisionOrEvolution : ClosureStage
 
 record ObservationClosure : Set₁ where
   constructor observation-closure

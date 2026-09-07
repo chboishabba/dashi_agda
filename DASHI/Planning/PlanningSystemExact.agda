@@ -41,7 +41,11 @@ open PlanAt public
 -- concrete time model can instantiate it with equality at t₀.
 
 data PlanningStage : Set where
-  proposed admissible approved implemented observed : PlanningStage
+  proposed : PlanningStage
+  admissible : PlanningStage
+  approved : PlanningStage
+  implemented : PlanningStage
+  observed : PlanningStage
 
 proposalIsNotApproval : proposed ≡ approved → ⊥
 proposalIsNotApproval ()

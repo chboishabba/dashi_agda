@@ -88,7 +88,10 @@ data ClaimHistoryState : Set where
 data SharedWordingSurface : Set where sameWording : SharedWordingSurface
 
 data ClaimHistoryCode : Set where
-  sourceCode secondaryCode analogyCode theoremCode : ClaimHistoryCode
+  sourceCode : ClaimHistoryCode
+  secondaryCode : ClaimHistoryCode
+  analogyCode : ClaimHistoryCode
+  theoremCode : ClaimHistoryCode
 
 wordingSurface : ClaimHistoryState → SharedWordingSurface
 wordingSurface _ = sameWording

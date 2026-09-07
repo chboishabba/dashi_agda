@@ -214,7 +214,9 @@ record ActionEquivalent {G : SearchHypergraph}
 ------------------------------------------------------------------------
 
 data LemmaStatus : Set where
-  unknown unproved proved : LemmaStatus
+  unknown : LemmaStatus
+  unproved : LemmaStatus
+  proved : LemmaStatus
 
 record LemmaLedger : Set₁ where
   field

@@ -57,7 +57,12 @@ canonicalRound7Frontier =
 ------------------------------------------------------------------------
 
 data Round7Status : Set where
-  OWNED GENERATED LIVE DOWNSTREAM PRUNED PARALLEL : Round7Status
+  OWNED : Round7Status
+  GENERATED : Round7Status
+  LIVE : Round7Status
+  DOWNSTREAM : Round7Status
+  PRUNED : Round7Status
+  PARALLEL : Round7Status
 
 data Round7Leaf : Set where
   appraisalX6 : Round7Leaf

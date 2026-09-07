@@ -53,7 +53,9 @@ emptyCycleDoesNotProduceRight :
 emptyCycleDoesNotProduceRight cycle impossible = impossible
 
 data ClosurePredicate : Set where
-  weakNonAlignment dissipativeInequality finiteTimeContinuation : ClosurePredicate
+  weakNonAlignment : ClosurePredicate
+  dissipativeInequality : ClosurePredicate
+  finiteTimeContinuation : ClosurePredicate
 
 record ClaimedClosureArrows : Set₁ where
   constructor claimedClosureArrows

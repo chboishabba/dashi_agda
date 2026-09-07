@@ -17,13 +17,21 @@ import DASHI.Governance.IndigenousEnvironmentalJusticeSourceRegistryExact as Sou
 ------------------------------------------------------------------------
 
 data KnowledgeKind : Set where
-  scientificKnowledge indigenousKnowledge localKnowledge : KnowledgeKind
+  scientificKnowledge : KnowledgeKind
+  indigenousKnowledge : KnowledgeKind
+  localKnowledge : KnowledgeKind
 
 data AssessmentSurface : Set where
-  wgIPhysicalScience wgIIImpactsAdaptation wgIIChapter14 wgIIInclusivePlanning wgIIIAmitigation : AssessmentSurface
+  wgIPhysicalScience : AssessmentSurface
+  wgIIImpactsAdaptation : AssessmentSurface
+  wgIIChapter14 : AssessmentSurface
+  wgIIInclusivePlanning : AssessmentSurface
+  wgIIIAmitigation : AssessmentSurface
 
 data IntegrationLevel : Set where
-  sparseReference substantiveIntegration indigenousAuthorship : IntegrationLevel
+  sparseReference : IntegrationLevel
+  substantiveIntegration : IntegrationLevel
+  indigenousAuthorship : IntegrationLevel
 
 integration : AssessmentSurface → KnowledgeKind → IntegrationLevel
 integration wgIPhysicalScience indigenousKnowledge = sparseReference

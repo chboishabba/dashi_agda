@@ -25,25 +25,39 @@ import DASHI.Core.AdmissibleTransitionHyperfabricExact as Admissible
 ------------------------------------------------------------------------
 
 data ArrivalHistory : Set where
-  commentaryFirst institutionFirst movementFirst archivalRediscovery : ArrivalHistory
+  commentaryFirst : ArrivalHistory
+  institutionFirst : ArrivalHistory
+  movementFirst : ArrivalHistory
+  archivalRediscovery : ArrivalHistory
 
 
 data ReceptionTopology : Set where
-  bracketLikeCanon roundRobinPluralReception movementNetwork archivalReview : ReceptionTopology
+  bracketLikeCanon : ReceptionTopology
+  roundRobinPluralReception : ReceptionTopology
+  movementNetwork : ReceptionTopology
+  archivalReview : ReceptionTopology
 
 
 data CoarseReceptionPosition : Set where
   samePresentVocabulary : CoarseReceptionPosition
 
 data AdmissionGate : Set where
-  closedGate pendingGate openGate : AdmissionGate
+  closedGate : AdmissionGate
+  pendingGate : AdmissionGate
+  openGate : AdmissionGate
 
 data AdmissibleMoveCode : Set where
-  narrowCanonMove pluralComparisonMove counterTraditionMove sourceRecoveryMove : AdmissibleMoveCode
+  narrowCanonMove : AdmissibleMoveCode
+  pluralComparisonMove : AdmissibleMoveCode
+  counterTraditionMove : AdmissibleMoveCode
+  sourceRecoveryMove : AdmissibleMoveCode
 
 
 data FutureConeCode : Set where
-  canonDominantCone pluralContestableCone movementReclamationCone archivalReconstructionCone : FutureConeCode
+  canonDominantCone : FutureConeCode
+  pluralContestableCone : FutureConeCode
+  movementReclamationCone : FutureConeCode
+  archivalReconstructionCone : FutureConeCode
 
 
 record ReceptionAdmissibilityStratum : Set where
@@ -124,7 +138,8 @@ samePresentCannotRecoverFutureCone =
 data SameInterpretiveField : Set where sameInterpretiveField : SameInterpretiveField
 
 data SelectedReceptionFrontier : Set where
-  canonicalFrontier pluralFrontier : SelectedReceptionFrontier
+  canonicalFrontier : SelectedReceptionFrontier
+  pluralFrontier : SelectedReceptionFrontier
 
 interpretiveField : ReceptionTopology → SameInterpretiveField
 interpretiveField _ = sameInterpretiveField
@@ -158,12 +173,14 @@ sameHistoryDifferentTopologyMoveDiffers ()
 -- Both states below deliberately have the same topology code.  The theorem is
 -- only that topology alone cannot reconstruct which arrival path produced it.
 data SameTopologyHistoryState : Set where
-  canonViaCommentary canonViaInstitution : SameTopologyHistoryState
+  canonViaCommentary : SameTopologyHistoryState
+  canonViaInstitution : SameTopologyHistoryState
 
 data SameTopologyCode : Set where sameCanonTopology : SameTopologyCode
 
 data FineHistoryEndpoint : Set where
-  commentaryCanonEndpoint institutionalCanonEndpoint : FineHistoryEndpoint
+  commentaryCanonEndpoint : FineHistoryEndpoint
+  institutionalCanonEndpoint : FineHistoryEndpoint
 
 sameTopologySurface : SameTopologyHistoryState → SameTopologyCode
 sameTopologySurface _ = sameCanonTopology
@@ -187,7 +204,10 @@ sameTopologyCannotRecoverArrivalHistory =
 ------------------------------------------------------------------------
 
 data WhatIfIntervention : Set where
-  whatIfPluralTopology whatIfMovementReception whatIfSourceRecovered whatIfCanonClosed : WhatIfIntervention
+  whatIfPluralTopology : WhatIfIntervention
+  whatIfMovementReception : WhatIfIntervention
+  whatIfSourceRecovered : WhatIfIntervention
+  whatIfCanonClosed : WhatIfIntervention
 
 
 applyWhatIf : WhatIfIntervention → ReceptionAdmissibilityStratum → ReceptionAdmissibilityStratum
@@ -243,7 +263,10 @@ relationalHistoryCanPropagateToFutureCone =
 ------------------------------------------------------------------------
 
 data ReceptionMove : Set where
-  enterCanon enterPlural enterMovement recoverSource : ReceptionMove
+  enterCanon : ReceptionMove
+  enterPlural : ReceptionMove
+  enterMovement : ReceptionMove
+  recoverSource : ReceptionMove
 
 data ReceptionParameter : Set where ordinaryReception : ReceptionParameter
 

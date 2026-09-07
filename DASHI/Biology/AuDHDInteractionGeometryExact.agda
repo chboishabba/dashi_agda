@@ -25,10 +25,12 @@ import DASHI.Biology.NeurodivergentSocialEcologySourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data AutismAxis : Set where
-  autismAbsent autismPresent : AutismAxis
+  autismAbsent : AutismAxis
+  autismPresent : AutismAxis
 
 data ADHDAxis : Set where
-  adhdAbsent adhdPresent : ADHDAxis
+  adhdAbsent : ADHDAxis
+  adhdPresent : ADHDAxis
 
 responseCode : AutismAxis → ADHDAxis → Nat
 responseCode autismAbsent adhdAbsent = 0

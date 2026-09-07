@@ -52,7 +52,9 @@ two = + 2 / 1
 minusOne = 0ℚ - one
 
 data SU2Colour : Set where
-  c0 c1 c2 : SU2Colour
+  c0 : SU2Colour
+  c1 : SU2Colour
+  c2 : SU2Colour
 
 -- Standard orientation epsilon_012 = +1.
 epsilon : SU2Colour → SU2Colour → SU2Colour → ℚ

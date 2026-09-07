@@ -19,7 +19,10 @@ open import Data.Empty using (⊥)
 open import Data.Sum.Base using (_⊎_)
 
 data SpectralRegime : Set where
-  zero concentrated transition diffuse : SpectralRegime
+  zero : SpectralRegime
+  concentrated : SpectralRegime
+  transition : SpectralRegime
+  diffuse : SpectralRegime
 
 record AdaptiveQuarticInvariantRegion
     {c t s h r : Level} :

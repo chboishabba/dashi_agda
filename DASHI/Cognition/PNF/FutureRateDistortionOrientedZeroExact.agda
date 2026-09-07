@@ -13,7 +13,8 @@ import DASHI.Cognition.PNF.OrientedZeroFutureQuotientExact as Wave
 ------------------------------------------------------------------------
 
 data Scheme : Set where
-  scalarOnly orientedResidual : Scheme
+  scalarOnly : Scheme
+  orientedResidual : Scheme
 
 rate : Scheme → Nat
 rate scalarOnly = 0

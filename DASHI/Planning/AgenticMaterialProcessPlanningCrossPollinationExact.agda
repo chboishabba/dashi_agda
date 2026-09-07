@@ -28,13 +28,17 @@ data MaterialPlanningModel : Set where
 
 
 data ProcessResponse : Set where
-  unchangedResponse adaptiveRecoveryResponse degradedResponse : ProcessResponse
+  unchangedResponse : ProcessResponse
+  adaptiveRecoveryResponse : ProcessResponse
+  degradedResponse : ProcessResponse
 
 data PlannerObservation : Set where
-  nominalSpecOnly stateAndHistoryObserved : PlannerObservation
+  nominalSpecOnly : PlannerObservation
+  stateAndHistoryObserved : PlannerObservation
 
 data ProcessAdmissibility : Set where
-  processAdmitted processBlocked : ProcessAdmissibility
+  processAdmitted : ProcessAdmissibility
+  processBlocked : ProcessAdmissibility
 
 record StatefulMaterialPlanningState : Set where
   constructor stateful-material-planning-state

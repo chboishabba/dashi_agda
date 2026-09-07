@@ -67,7 +67,8 @@ zeroIndex128 = index128 0 (s≤s z≤n)
 ------------------------------------------------------------------------
 
 data ResidueComponent : Set where
-  constantPart linearPart : ResidueComponent
+  constantPart : ResidueComponent
+  linearPart : ResidueComponent
 
 record NTTScalarCoordinate : Set where
   constructor scalarCoordinate

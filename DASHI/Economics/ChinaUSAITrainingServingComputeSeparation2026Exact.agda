@@ -56,21 +56,21 @@ canonicalSourceBackedTrainingServingCalibration =
 ------------------------------------------------------------------------
 
 data TrainingServingClaim : Set where
-  frontierCapabilityCloseDespiteComputeAsymmetry
-  hostedServiceCapacityAdequate
-  openWeightReleaseShiftsServingBurden
-  exportControlExplainsCapabilityGap
-  servingScarcityImpairsSubscriptionExpansion
-  : TrainingServingClaim
+  frontierCapabilityCloseDespiteComputeAsymmetry : TrainingServingClaim
+  hostedServiceCapacityAdequate : TrainingServingClaim
+  openWeightReleaseShiftsServingBurden : TrainingServingClaim
+  exportControlExplainsCapabilityGap : TrainingServingClaim
+  servingScarcityImpairsSubscriptionExpansion : TrainingServingClaim
+
 
 data TrainingServingProducer : Set where
-  chipStockProducer
-  capabilityBenchmarkProducer
-  hostedCapacityProducer
-  openWeightDeploymentProducer
-  exportControlCausalProducer
-  subscriptionAndServingEconomicsProducer
-  : TrainingServingProducer
+  chipStockProducer : TrainingServingProducer
+  capabilityBenchmarkProducer : TrainingServingProducer
+  hostedCapacityProducer : TrainingServingProducer
+  openWeightDeploymentProducer : TrainingServingProducer
+  exportControlCausalProducer : TrainingServingProducer
+  subscriptionAndServingEconomicsProducer : TrainingServingProducer
+
 
 requiredProducer : TrainingServingClaim → TrainingServingProducer
 requiredProducer frontierCapabilityCloseDespiteComputeAsymmetry = capabilityBenchmarkProducer

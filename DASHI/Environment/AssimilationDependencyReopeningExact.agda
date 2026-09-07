@@ -14,7 +14,11 @@ import DASHI.Core.AffectedDependencyClosureExact as Closure
 
 
 data Artifact : Set where
-  newObservation stateEstimate modelRun candidatePlan unrelatedArchive : Artifact
+  newObservation : Artifact
+  stateEstimate : Artifact
+  modelRun : Artifact
+  candidatePlan : Artifact
+  unrelatedArchive : Artifact
 
 data Depends : Artifact → Artifact → Set where
   observationUpdatesState : Depends newObservation stateEstimate

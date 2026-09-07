@@ -12,10 +12,15 @@ import DASHI.Interop.SensibLawResidualLattice as Residual
 ------------------------------------------------------------------------
 
 data LacanianTerm : Set where
-  masterSignifier knowledgeNetwork barredSubjectTerm objetATerm : LacanianTerm
+  masterSignifier : LacanianTerm
+  knowledgeNetwork : LacanianTerm
+  barredSubjectTerm : LacanianTerm
+  objetATerm : LacanianTerm
 
 data LacanianRegister : Set where
-  imaginaryRegister symbolicRegister realRegister : LacanianRegister
+  imaginaryRegister : LacanianRegister
+  symbolicRegister : LacanianRegister
+  realRegister : LacanianRegister
 
 record SignifierLink : Set₁ where
   field
@@ -54,7 +59,8 @@ record BigOtherPresentation : Set₁ where
 
 
 data KnowledgeAuthorityKind : Set where
-  supposedAuthority verifiedAuthority : KnowledgeAuthorityKind
+  supposedAuthority : KnowledgeAuthorityKind
+  verifiedAuthority : KnowledgeAuthorityKind
 
 supposedAuthorityIsNotVerified :
   supposedAuthority ≡ verifiedAuthority → ⊥

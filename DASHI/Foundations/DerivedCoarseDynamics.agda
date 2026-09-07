@@ -45,7 +45,9 @@ deterministicAsSetValued quotient =
     }
 
 data CoarseDynamicsKind : Set where
-  deterministic setValued stochastic : CoarseDynamicsKind
+  deterministic : CoarseDynamicsKind
+  setValued : CoarseDynamicsKind
+  stochastic : CoarseDynamicsKind
 
 classifyCoarseDynamics : Bool → Bool → CoarseDynamicsKind
 classifyCoarseDynamics true _ = deterministic

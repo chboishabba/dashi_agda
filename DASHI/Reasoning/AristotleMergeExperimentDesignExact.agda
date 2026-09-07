@@ -26,7 +26,10 @@ import DASHI.Reasoning.AristotleBranchMergeExact as Merge
 ------------------------------------------------------------------------
 
 data BranchWorld : Set where
-  leftWorld compatibleWorld hiddenDependencyWorld reintroducedWorld : BranchWorld
+  leftWorld : BranchWorld
+  compatibleWorld : BranchWorld
+  hiddenDependencyWorld : BranchWorld
+  reintroducedWorld : BranchWorld
 
 snapshotOf :
   BranchWorld →
@@ -54,7 +57,8 @@ provenanceObserver world = Merge.provenance (snapshotOf world)
 ------------------------------------------------------------------------
 
 data MergeDecision : Set where
-  mergeAdmissible refineBeforeMerge : MergeDecision
+  mergeAdmissible : MergeDecision
+  refineBeforeMerge : MergeDecision
 
 mergeDecisionCode :
   Merge.DependencyCode × Merge.ProvenanceCode → MergeDecision

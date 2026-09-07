@@ -4,7 +4,14 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 data RoleType : Set where
-  researchScientist researchEngineer technicalProgrammeLeader administrativeStaff propertyCustodian retiredTechnicalOrConstructionStaff institutionalMember roleTypeUnresolved : RoleType
+  researchScientist : RoleType
+  researchEngineer : RoleType
+  technicalProgrammeLeader : RoleType
+  administrativeStaff : RoleType
+  propertyCustodian : RoleType
+  retiredTechnicalOrConstructionStaff : RoleType
+  institutionalMember : RoleType
+  roleTypeUnresolved : RoleType
 
 data WeldStatus : Set where weldSourceBacked weldPartial weldNotLocated weldContradicted : WeldStatus
 

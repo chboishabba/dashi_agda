@@ -36,7 +36,9 @@ import DASHI.Physics.Closure.NSTriadKNPartnerBlockGramLedgerRound181Exact as R18
 F = R178.F
 
 data PartnerBonyClass : Set where
-  farLowClass highHighClass comparableClass : PartnerBonyClass
+  farLowClass : PartnerBonyClass
+  highHighClass : PartnerBonyClass
+  comparableClass : PartnerBonyClass
 
 partnerBonyClass : Physical.PhysicalTriadIncidence → PartnerBonyClass
 partnerBonyClass tau with Bony.bonyTag tau

@@ -18,13 +18,13 @@ import DASHI.Economics.ComputeScalingUnitEconomicsExact as Scaling
 ------------------------------------------------------------------------
 
 data ScalingEvidenceRole : Set where
-  vendorBenchmark
-  independentBenchmark
-  productionTelemetry
-  customerWorkload
-  accountingDisclosure
-  marketPriceObservation
-  : ScalingEvidenceRole
+  vendorBenchmark : ScalingEvidenceRole
+  independentBenchmark : ScalingEvidenceRole
+  productionTelemetry : ScalingEvidenceRole
+  customerWorkload : ScalingEvidenceRole
+  accountingDisclosure : ScalingEvidenceRole
+  marketPriceObservation : ScalingEvidenceRole
+
 
 record ScalingEvidenceReceipt : Set where
   constructor scalingEvidenceReceipt

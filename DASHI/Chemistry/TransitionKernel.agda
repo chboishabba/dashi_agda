@@ -19,10 +19,19 @@ open import Agda.Builtin.Unit using (⊤; tt)
 -- Material vocabulary.
 
 data Phase : Set where
-  solid liquid gas gel emulsion adsorbed dissolved : Phase
+  solid : Phase
+  liquid : Phase
+  gas : Phase
+  gel : Phase
+  emulsion : Phase
+  adsorbed : Phase
+  dissolved : Phase
 
 data MobilityClass : Set where
-  immobile restricted mobile volatile : MobilityClass
+  immobile : MobilityClass
+  restricted : MobilityClass
+  mobile : MobilityClass
+  volatile : MobilityClass
 
 data TransitionKind : Set where
   chemicalReaction : TransitionKind
@@ -33,7 +42,9 @@ data TransitionKind : Set where
   mechanicalEvent : TransitionKind
 
 data Reversibility : Set where
-  irreversible reversible conditionallyReversible : Reversibility
+  irreversible : Reversibility
+  reversible : Reversibility
+  conditionallyReversible : Reversibility
 
 data EvidenceStatus : Set where
   literatureEstablished : EvidenceStatus
@@ -45,7 +56,10 @@ data EvidenceStatus : Set where
   unresolved : EvidenceStatus
 
 data ParameterStatus : Set where
-  exactParameter intervalParameter symbolicParameter unknownParameter : ParameterStatus
+  exactParameter : ParameterStatus
+  intervalParameter : ParameterStatus
+  symbolicParameter : ParameterStatus
+  unknownParameter : ParameterStatus
 
 record Interval : Set where
   field

@@ -53,10 +53,20 @@ canonicalAsymmetry =
 ------------------------------------------------------------------------
 
 data Axis : Set where
-  authorityAxis contactAxis scannerAxis searchAxis forceAxis traceAxis recordingAxis outcomeAxis : Axis
+  authorityAxis : Axis
+  contactAxis : Axis
+  scannerAxis : Axis
+  searchAxis : Axis
+  forceAxis : Axis
+  traceAxis : Axis
+  recordingAxis : Axis
+  outcomeAxis : Axis
 
 data TransportKind : Set where
-  admissibleTransition observerProjection provenanceWeld consumerPromotion : TransportKind
+  admissibleTransition : TransportKind
+  observerProjection : TransportKind
+  provenanceWeld : TransportKind
+  consumerPromotion : TransportKind
 
 record FabricTransport : Set where
   constructor fabricTransport
@@ -84,7 +94,10 @@ forceToRecordProjection = fabricTransport
 ------------------------------------------------------------------------
 
 data Residual : Set where
-  authorityResidual transitionResidual denominatorResidual counterfactualResidual : Residual
+  authorityResidual : Residual
+  transitionResidual : Residual
+  denominatorResidual : Residual
+  counterfactualResidual : Residual
   traceResidual recordingResidual telemetryResidual witnessResidual : Residual
 
 claimResidual : Wand.ConsumerClaim → Residual

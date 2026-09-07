@@ -39,7 +39,10 @@ import DASHI.Mathematics.AlgebraicGeometry.HodgeDecompositionCycleClassExact as 
 import DASHI.Mathematics.Arithmetic.EllipticCurveFrobeniusExact as E
 
 data EllipticBidegree : Set where
-  elliptic00 elliptic10 elliptic01 elliptic11 : EllipticBidegree
+  elliptic00 : EllipticBidegree
+  elliptic10 : EllipticBidegree
+  elliptic01 : EllipticBidegree
+  elliptic11 : EllipticBidegree
 
 ellipticConjugateDegree : EllipticBidegree → EllipticBidegree
 ellipticConjugateDegree elliptic00 = elliptic00

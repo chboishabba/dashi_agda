@@ -102,7 +102,9 @@ module _ {c ℓ : Level} (R : CommutativeRing c ℓ) where
 ------------------------------------------------------------------------
 
 data ExactResidualCellOutcome : Set where
-  unchangedUntouched unchangedTouched changedTouched : ExactResidualCellOutcome
+  unchangedUntouched : ExactResidualCellOutcome
+  unchangedTouched : ExactResidualCellOutcome
+  changedTouched : ExactResidualCellOutcome
 
 changedWeight : ExactResidualCellOutcome → Nat
 changedWeight unchangedUntouched = 0

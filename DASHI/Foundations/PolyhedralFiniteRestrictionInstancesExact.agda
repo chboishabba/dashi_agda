@@ -107,7 +107,8 @@ d4Branching j =
     "exact rotational-D4 restriction"
 
 data D4FixedProbe : Set where
-  d4C2 d4C4 : D4FixedProbe
+  d4C2 : D4FixedProbe
+  d4C4 : D4FixedProbe
 
 d4FixedDimension :
   Spin.AngularMomentum0To35 → D4FixedProbe → Nat
@@ -210,7 +211,8 @@ tetrahedralBranching j =
     "exact rotational-tetrahedral restriction"
 
 data TetrahedralFixedProbe : Set where
-  tetrahedralC2 tetrahedralC3 : TetrahedralFixedProbe
+  tetrahedralC2 : TetrahedralFixedProbe
+  tetrahedralC3 : TetrahedralFixedProbe
 
 tetrahedralFixedDimension :
   Spin.AngularMomentum0To35 → TetrahedralFixedProbe → Nat
@@ -245,7 +247,9 @@ tetrahedralFiniteRestriction j =
 ------------------------------------------------------------------------
 
 data OctahedralFixedProbe : Set where
-  octahedralC2 octahedralC3 octahedralC4 : OctahedralFixedProbe
+  octahedralC2 : OctahedralFixedProbe
+  octahedralC3 : OctahedralFixedProbe
+  octahedralC4 : OctahedralFixedProbe
 
 octahedralFixedDimension :
   Spin.AngularMomentum0To35 → OctahedralFixedProbe → Nat
@@ -282,7 +286,9 @@ octahedralFiniteRestriction j =
 ------------------------------------------------------------------------
 
 data IcosahedralFixedProbe : Set where
-  icosahedralC2 icosahedralC3 icosahedralC5 : IcosahedralFixedProbe
+  icosahedralC2 : IcosahedralFixedProbe
+  icosahedralC3 : IcosahedralFixedProbe
+  icosahedralC5 : IcosahedralFixedProbe
 
 icosahedralFixedDimension :
   Spin.AngularMomentum0To35 → IcosahedralFixedProbe → Nat

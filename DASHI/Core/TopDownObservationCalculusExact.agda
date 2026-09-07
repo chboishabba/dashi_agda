@@ -113,7 +113,8 @@ dependentCodeIsAdequateForEveryConsumer projection consumer left right sameCode 
 ------------------------------------------------------------------------
 
 data Bit2 : Set where
-  bit0 bit1 : Bit2
+  bit0 : Bit2
+  bit1 : Bit2
 
 bit0NotBit1 : bit0 ≡ bit1 → ⊥
 bit0NotBit1 ()

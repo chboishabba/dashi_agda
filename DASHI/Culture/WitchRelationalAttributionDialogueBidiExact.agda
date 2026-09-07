@@ -90,7 +90,9 @@ historicalWitch = relational-attribution
 ------------------------------------------------------------------------
 
 data RelationalWitchState : Set where
-  selfUse externalUse historicalUse : RelationalWitchState
+  selfUse : RelationalWitchState
+  externalUse : RelationalWitchState
+  historicalUse : RelationalWitchState
 
 data WitchPredicateSurface : Set where witchPredicate : WitchPredicateSurface
 

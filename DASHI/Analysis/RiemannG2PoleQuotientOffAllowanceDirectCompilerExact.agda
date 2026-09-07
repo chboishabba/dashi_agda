@@ -136,16 +136,18 @@ compilePoleQuotientOffAllowancePayment input = record
 ------------------------------------------------------------------------
 
 data OffAllowancePayment : Set where
-  proveFullOffBoundFromScratch
-  reproveFarShell
-  chooseFarCutoffIndependentlyOfNearCore
-  proveSignedNearBudgetAtCommonCutoff
-  fitChosenNearPlusOwnedFarIntoAssignedAllowance
-  compileFinalOffAllowancePayment
-  : OffAllowancePayment
+  proveFullOffBoundFromScratch : OffAllowancePayment
+  reproveFarShell : OffAllowancePayment
+  chooseFarCutoffIndependentlyOfNearCore : OffAllowancePayment
+  proveSignedNearBudgetAtCommonCutoff : OffAllowancePayment
+  fitChosenNearPlusOwnedFarIntoAssignedAllowance : OffAllowancePayment
+  compileFinalOffAllowancePayment : OffAllowancePayment
+
 
 data PaymentState : Set where
-  live downstream pruned : PaymentState
+  live : PaymentState
+  downstream : PaymentState
+  pruned : PaymentState
 
 paymentState : OffAllowancePayment → PaymentState
 paymentState proveFullOffBoundFromScratch = pruned

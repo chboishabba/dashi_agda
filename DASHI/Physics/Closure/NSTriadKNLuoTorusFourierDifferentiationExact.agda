@@ -33,7 +33,9 @@ import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Algebra
 import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
 
 data Axis : Set where
-  axisX axisY axisZ : Axis
+  axisX : Axis
+  axisY : Axis
+  axisZ : Axis
 
 record FrequencyTriple
     {r : Level}

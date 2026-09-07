@@ -136,31 +136,42 @@ audhdCannotAutoCollapseToAutismPlusADHD ()
 ------------------------------------------------------------------------
 
 data RepresentationalResolution : Set where
-  compressedResolution fineResolution : RepresentationalResolution
+  compressedResolution : RepresentationalResolution
+  fineResolution : RepresentationalResolution
 
 data SearchBreadth : Set where
-  narrowSearch broadSearch : SearchBreadth
+  narrowSearch : SearchBreadth
+  broadSearch : SearchBreadth
 
 data ProcessingDepth : Set where
-  shallowPass persistentDeepPass : ProcessingDepth
+  shallowPass : ProcessingDepth
+  persistentDeepPass : ProcessingDepth
 
 data IntegrationMode : Set where
-  earlyGlobalCompression detailRetainingIntegration : IntegrationMode
+  earlyGlobalCompression : IntegrationMode
+  detailRetainingIntegration : IntegrationMode
 
 data CommitmentThreshold : Set where
-  earlyCommit highEvidenceCommit : CommitmentThreshold
+  earlyCommit : CommitmentThreshold
+  highEvidenceCommit : CommitmentThreshold
 
 data SwitchingProfile : Set where
-  lowSwitchCost highSwitchCost : SwitchingProfile
+  lowSwitchCost : SwitchingProfile
+  highSwitchCost : SwitchingProfile
 
 data RuleSearchStyle : Set where
-  implicitHeuristic explicitRuleSearch mixedRuleSearch : RuleSearchStyle
+  implicitHeuristic : RuleSearchStyle
+  explicitRuleSearch : RuleSearchStyle
+  mixedRuleSearch : RuleSearchStyle
 
 data SensoryBandwidth : Set where
-  selectiveBandwidth wideBandwidth variableBandwidth : SensoryBandwidth
+  selectiveBandwidth : SensoryBandwidth
+  wideBandwidth : SensoryBandwidth
+  variableBandwidth : SensoryBandwidth
 
 data InteroceptiveProfile : Set where
-  interoceptionNotSpecified mixedInteroceptiveProfile : InteroceptiveProfile
+  interoceptionNotSpecified : InteroceptiveProfile
+  mixedInteroceptiveProfile : InteroceptiveProfile
 
 record ProcessingGeometry : Set where
   constructor processingGeometry
@@ -196,7 +207,8 @@ deepRuleGeometry =
 ------------------------------------------------------------------------
 
 data ResponseLatency : Set where
-  shortLatency longLatency : ResponseLatency
+  shortLatency : ResponseLatency
+  longLatency : ResponseLatency
 
 latencyObserver : ProcessingGeometry → ResponseLatency
 latencyObserver
@@ -221,7 +233,8 @@ latencyDoesNotDetermineResolution sameLatency ()
 ------------------------------------------------------------------------
 
 data RulePreferenceEvidence : Set where
-  historicalSystemizingEvidence contemporaryMixedEvidence : RulePreferenceEvidence
+  historicalSystemizingEvidence : RulePreferenceEvidence
+  contemporaryMixedEvidence : RulePreferenceEvidence
 
 record RuleProcessingBoundary : Set where
   constructor ruleProcessingBoundary
@@ -242,13 +255,17 @@ canonicalRuleProcessingBoundary =
 ------------------------------------------------------------------------
 
 data ExteroceptiveWeighting : Set where
-  lowExteroceptiveWeight balancedExteroceptiveWeight highExteroceptiveWeight : ExteroceptiveWeighting
+  lowExteroceptiveWeight : ExteroceptiveWeighting
+  balancedExteroceptiveWeight : ExteroceptiveWeighting
+  highExteroceptiveWeight : ExteroceptiveWeighting
 
 data SensoryContext : Set where
-  quietContext denseContext : SensoryContext
+  quietContext : SensoryContext
+  denseContext : SensoryContext
 
 data SensoryLoad : Set where
-  manageableLoad overloadedLoad : SensoryLoad
+  manageableLoad : SensoryLoad
+  overloadedLoad : SensoryLoad
 
 sensoryLoad : ExteroceptiveWeighting → SensoryContext → SensoryLoad
 sensoryLoad lowExteroceptiveWeight quietContext = manageableLoad

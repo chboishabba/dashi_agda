@@ -31,7 +31,8 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data CrossProverOwner : Set where
-  leanAristotleOwner openObligation : CrossProverOwner
+  leanAristotleOwner : CrossProverOwner
+  openObligation : CrossProverOwner
 
 record TwoZeroThreeTaperReturn : Set where
   constructor two-zero-three-taper-return

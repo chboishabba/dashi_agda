@@ -30,10 +30,14 @@ import DASHI.Physics.Closure.NSTriadKNSeparatedComponentEndpointProfiles as Prof
 import DASHI.Physics.Closure.NSTriadKNFiniteOverlapCanonicalConstants as Overlap
 
 data ConstraintOwner : Set where
-  outputOwner firstAdjointOwner secondAdjointOwner : ConstraintOwner
+  outputOwner : ConstraintOwner
+  firstAdjointOwner : ConstraintOwner
+  secondAdjointOwner : ConstraintOwner
 
 data FiniteOverlapClass : Set where
-  nearClass transitionClass residualClass : FiniteOverlapClass
+  nearClass : FiniteOverlapClass
+  transitionClass : FiniteOverlapClass
+  residualClass : FiniteOverlapClass
 
 record AffineWeightFunction {s : Level} (Scalar : Set s) : Set s where
   constructor affine-weight

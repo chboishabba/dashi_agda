@@ -35,7 +35,9 @@ Comparison9 : Set
 Comparison9 = Base.TriTruth × Base.TriTruth
 
 data Agreement3 : Set where
-  agreeLow agreeMid agreeHigh : Agreement3
+  agreeLow : Agreement3
+  agreeMid : Agreement3
+  agreeHigh : Agreement3
 
 data DirectedDisagreement6 : Set where
   lowToMid

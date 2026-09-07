@@ -18,7 +18,8 @@ open import DASHI.Cognition.PNF.SparseFibredFrontier
 ------------------------------------------------------------------------
 
 data NormativeAdmission : Set where
-  rejectedNormative admittedNormative : NormativeAdmission
+  rejectedNormative : NormativeAdmission
+  admittedNormative : NormativeAdmission
 
 record PackedNormativeSparseArchitecture
     (Input Delta : Set) : Set₁ where

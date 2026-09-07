@@ -54,7 +54,10 @@ import DASHI.Physics.Closure.NSTriadKNComLiteralOddPQKernelRound57Exact as Odd
 import DASHI.Physics.Closure.NSTriadKNLiteralBonyInteractionRoutingRound63Exact as Routing
 
 data BonyTag : Set where
-  lhTag hlTag hhToLowTag comparableTag : BonyTag
+  lhTag : BonyTag
+  hlTag : BonyTag
+  hhToLowTag : BonyTag
+  comparableTag : BonyTag
 
 bonyTagEqual : BonyTag → BonyTag → Bool
 bonyTagEqual lhTag lhTag = true

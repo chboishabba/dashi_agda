@@ -180,7 +180,9 @@ ternaryCancellationLedger = refl
 ------------------------------------------------------------------------
 
 data OrderedAlignment : Set where
-  alignedDirection openOrthogonalDirection opposedDirection : OrderedAlignment
+  alignedDirection : OrderedAlignment
+  openOrthogonalDirection : OrderedAlignment
+  opposedDirection : OrderedAlignment
 
 orderedWave : OrderedAlignment → Cartesian.BranchWave
 orderedWave alignedDirection =
@@ -225,7 +227,8 @@ orderedThreeWayIntensityIsOne = refl
 ------------------------------------------------------------------------
 
 data TernaryGeometryKind : Set where
-  symmetricRootsOfUnity orderedHalfCircle : TernaryGeometryKind
+  symmetricRootsOfUnity : TernaryGeometryKind
+  orderedHalfCircle : TernaryGeometryKind
 
 record TernaryGeometryChoice : Set where
   constructor ternaryGeometryChoice

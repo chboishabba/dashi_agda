@@ -176,7 +176,9 @@ inverseUnitJetNormProfile unit insertion unitNorm =
 ------------------------------------------------------------------------
 
 data FactorSelection : Set where
-  valueSelection firstSelection secondSelection : FactorSelection
+  valueSelection : FactorSelection
+  firstSelection : FactorSelection
+  secondSelection : FactorSelection
 
 applySelection :
   FactorSelection → Q.QuaternionFactorJet → Q.RationalQuaternion

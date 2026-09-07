@@ -41,7 +41,9 @@ open import Data.Integer using (ℤ; +_; -[1+_])
 import DASHI.Moonshine.RamanujanTauHecke23Exact as Tau
 
 data Sample123 : Set where
-  sample1 sample2 sample3 : Sample123
+  sample1 : Sample123
+  sample2 : Sample123
+  sample3 : Sample123
 
 sampleTau : Sample123 → ℤ
 sampleTau sample1 = + 1

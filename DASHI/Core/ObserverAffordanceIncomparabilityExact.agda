@@ -68,10 +68,12 @@ data SquareState : Set where
 
 
 data SquareObservation : Set where
-  approved disapproved : SquareObservation
+  approved : SquareObservation
+  disapproved : SquareObservation
 
 data SquareAffordance : Set where
-  affordanceClosed affordanceOpen : SquareAffordance
+  affordanceClosed : SquareAffordance
+  affordanceOpen : SquareAffordance
 
 squareObservation : SquareState → SquareObservation
 squareObservation closedApproved = approved

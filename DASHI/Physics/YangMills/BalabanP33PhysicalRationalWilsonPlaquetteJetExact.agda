@@ -167,7 +167,12 @@ inverseLinkJet background bondField site axis =
 ------------------------------------------------------------------------
 
 data AxisPair6 : Set where
-  pair01 pair02 pair03 pair12 pair13 pair23 : AxisPair6
+  pair01 : AxisPair6
+  pair02 : AxisPair6
+  pair03 : AxisPair6
+  pair12 : AxisPair6
+  pair13 : AxisPair6
+  pair23 : AxisPair6
 
 axisPairs6 : List AxisPair6
 axisPairs6 = pair01 ∷ pair02 ∷ pair03 ∷ pair12 ∷ pair13 ∷ pair23 ∷ []

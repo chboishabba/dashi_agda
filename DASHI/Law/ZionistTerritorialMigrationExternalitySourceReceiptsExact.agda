@@ -10,31 +10,31 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data TerritorialSourceRole : Set where
-  foundingText
-  scholarlyHistory
-  territorialistHistory
-  archivalInstitution
-  secondaryHistory
+  foundingText : TerritorialSourceRole
+  scholarlyHistory : TerritorialSourceRole
+  territorialistHistory : TerritorialSourceRole
+  archivalInstitution : TerritorialSourceRole
+  secondaryHistory : TerritorialSourceRole
   dashiComparison : TerritorialSourceRole
 
 data TerritorialProject : Set where
-  palestineProject
-  argentinaConsideration
-  eastAfricaUgandaScheme
-  mesopotamiaScheme
-  angolaTerritorialistScheme
-  cyrenaicaTerritorialistScheme
-  hondurasTerritorialistScheme
-  australiaTerritorialistConsideration
+  palestineProject : TerritorialProject
+  argentinaConsideration : TerritorialProject
+  eastAfricaUgandaScheme : TerritorialProject
+  mesopotamiaScheme : TerritorialProject
+  angolaTerritorialistScheme : TerritorialProject
+  cyrenaicaTerritorialistScheme : TerritorialProject
+  hondurasTerritorialistScheme : TerritorialProject
+  australiaTerritorialistConsideration : TerritorialProject
   otherTerritorialProposal : TerritorialProject
 
 data TerritorialStatus : Set where
-  considered
-  formallyProposed
-  commissionInvestigated
-  attemptedSettlement
-  implementedSettlement
-  notImplemented
+  considered : TerritorialStatus
+  formallyProposed : TerritorialStatus
+  commissionInvestigated : TerritorialStatus
+  attemptedSettlement : TerritorialStatus
+  implementedSettlement : TerritorialStatus
+  notImplemented : TerritorialStatus
   statusUnresolved : TerritorialStatus
 
 record TerritorialReceipt : Set where
@@ -83,13 +83,13 @@ multiTerritoryReceipt = territorialReceipt
 ------------------------------------------------------------------------
 
 data ExternalityCoordinate : Set where
-  indigenousLandClaim
-  demographicDisplacement
-  imperialSponsor
-  settlementInfrastructure
-  migrationPressure
-  sovereigntyConflict
-  ecologicalMaterialChange
+  indigenousLandClaim : ExternalityCoordinate
+  demographicDisplacement : ExternalityCoordinate
+  imperialSponsor : ExternalityCoordinate
+  settlementInfrastructure : ExternalityCoordinate
+  migrationPressure : ExternalityCoordinate
+  sovereigntyConflict : ExternalityCoordinate
+  ecologicalMaterialChange : ExternalityCoordinate
   localPoliticalResistance : ExternalityCoordinate
 
 record TerritorialExternalityBoundary : Set where
@@ -113,17 +113,17 @@ canonicalTerritorialExternalityBoundary =
 ------------------------------------------------------------------------
 
 data TerritorialClaim : Set where
-  zionistMovementConsideredMultipleTerritories
-  territorialistMovementConsideredMultipleContinents
-  schemeWasImplemented
-  migrationProducedColonialExternality
+  zionistMovementConsideredMultipleTerritories : TerritorialClaim
+  territorialistMovementConsideredMultipleContinents : TerritorialClaim
+  schemeWasImplemented : TerritorialClaim
+  migrationProducedColonialExternality : TerritorialClaim
   diasporaZionistsShareColonisingBehaviour : TerritorialClaim
 
 data TerritorialProducer : Set where
-  historicalProposalCorpusProducer
-  territorialistCorpusProducer
-  implementationReceiptProducer
-  siteSpecificExternalityProducer
+  historicalProposalCorpusProducer : TerritorialProducer
+  territorialistCorpusProducer : TerritorialProducer
+  implementationReceiptProducer : TerritorialProducer
+  siteSpecificExternalityProducer : TerritorialProducer
   populationBehaviourProducer : TerritorialProducer
 
 reverseTerritorial : TerritorialClaim → TerritorialProducer

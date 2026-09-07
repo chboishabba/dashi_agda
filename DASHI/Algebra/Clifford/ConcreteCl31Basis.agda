@@ -17,14 +17,18 @@ open import Data.Product using (_×_; _,_)
 -- multivectors and the universal-property adapter remain separate layers.
 
 data Sign : Set where
-  plus minus : Sign
+  plus : Sign
+  minus : Sign
 
 negSign : Sign → Sign
 negSign plus = minus
 negSign minus = plus
 
 data Generator : Set where
-  e0 e1 e2 e3 : Generator
+  e0 : Generator
+  e1 : Generator
+  e2 : Generator
+  e3 : Generator
 
 data Blade : Set where
   one : Blade

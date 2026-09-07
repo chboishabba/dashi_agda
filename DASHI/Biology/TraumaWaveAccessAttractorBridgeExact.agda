@@ -19,10 +19,12 @@ import DASHI.Cognition.PNF.PNFFastAccessMemoryLearningBridgeExact as AccessMemor
 ------------------------------------------------------------------------
 
 data ControlLearningState : Set where
-  flexibleControl threatBiasedControl : ControlLearningState
+  flexibleControl : ControlLearningState
+  threatBiasedControl : ControlLearningState
 
 data CueContext : Set where
-  ambiguousCue explicitSafetyCue : CueContext
+  ambiguousCue : CueContext
+  explicitSafetyCue : CueContext
 
 record AccessProfile : Set where
   constructor accessProfile

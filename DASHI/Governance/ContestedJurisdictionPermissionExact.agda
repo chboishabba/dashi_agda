@@ -22,7 +22,8 @@ data SharedAct : Set where
   maintainAssembly : SharedAct
 
 data PermissionStatus : Set where
-  permitted denied : PermissionStatus
+  permitted : PermissionStatus
+  denied : PermissionStatus
 
 record JurisdictionalPermissionSystem : Set where
   constructor jurisdictionalPermissionSystem
@@ -81,7 +82,8 @@ data AdministrativeSurface : Set where
   unauthorisedPresenceSurface : AdministrativeSurface
 
 data JurisdictionalSurface : Set where
-  hostOnlyReading independentAuthorityReading : JurisdictionalSurface
+  hostOnlyReading : JurisdictionalSurface
+  independentAuthorityReading : JurisdictionalSurface
 
 administrativeObserver :
   Observer.Observer JurisdictionalFineState AdministrativeSurface
@@ -116,7 +118,8 @@ jurisdictionalRefinesAdministrative =
     (λ ())
 
 data PhysicalSurface : Set where
-  occupiedSurface clearedSurface : PhysicalSurface
+  occupiedSurface : PhysicalSurface
+  clearedSurface : PhysicalSurface
 
 data SourceAuthorityResidual : Set where
   residualOpen : SourceAuthorityResidual

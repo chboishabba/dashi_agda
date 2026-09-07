@@ -28,10 +28,14 @@ import DASHI.Education.RelationalEducationGateAlgebra as Education
 ------------------------------------------------------------------------
 
 data CareRoute : Set where
-  professionalEarlyLearning familyCare familyDayCare outsideSchoolHoursCare : CareRoute
+  professionalEarlyLearning : CareRoute
+  familyCare : CareRoute
+  familyDayCare : CareRoute
+  outsideSchoolHoursCare : CareRoute
 
 data FamilyPosition : Set where
-  lowerSupportPosition higherSupportPosition : FamilyPosition
+  lowerSupportPosition : FamilyPosition
+  higherSupportPosition : FamilyPosition
 
 data PublicChoiceProjection : Set where
   universalChoiceMenu : PublicChoiceProjection
@@ -81,7 +85,8 @@ uniformChoiceCannotByItselfDetermineSituatedOpportunity =
 ------------------------------------------------------------------------
 
 data ChoiceCapacityState : Set where
-  supportedAdditionalAlternative substitutionaryAlternative : ChoiceCapacityState
+  supportedAdditionalAlternative : ChoiceCapacityState
+  substitutionaryAlternative : ChoiceCapacityState
 
 data ExpandedChoiceLabel : Set where
   expandedChoice : ExpandedChoiceLabel
@@ -206,7 +211,11 @@ canonicalEarlyLearningEducationGateReceipt =
 ------------------------------------------------------------------------
 
 data LearningContextChannel : Set where
-  relationalContext sensoryContext olfactoryContext spatialContext socialContext : LearningContextChannel
+  relationalContext : LearningContextChannel
+  sensoryContext : LearningContextChannel
+  olfactoryContext : LearningContextChannel
+  spatialContext : LearningContextChannel
+  socialContext : LearningContextChannel
 
 record ContextualFibreLearningReceipt : Set where
   constructor contextualFibreLearningReceipt

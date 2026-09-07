@@ -214,7 +214,8 @@ rationalFrameAvailableOnlyFromLiteralEntries authority realisation = record
   ; realisation = realisation }
 
 data CoefficientFieldClaim : Set where
-  literalSelectedField rationalSpecialisation : CoefficientFieldClaim
+  literalSelectedField : CoefficientFieldClaim
+  rationalSpecialisation : CoefficientFieldClaim
 
 literalFieldIsNotRationalSpecialisation :
   literalSelectedField ≡ rationalSpecialisation → ⊥

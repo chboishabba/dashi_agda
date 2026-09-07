@@ -70,7 +70,10 @@ record GRCarrierScalarOperations : Set₁ where
       List String
 
 data GRFiniteRScalar : Set where
-  r0 r1 r2 r3 : GRFiniteRScalar
+  r0 : GRFiniteRScalar
+  r1 : GRFiniteRScalar
+  r2 : GRFiniteRScalar
+  r3 : GRFiniteRScalar
 
 data GRDiscretePartial (A : Set) : Set where
   unavailable :
@@ -253,7 +256,10 @@ grFiniteRScalarRealContractionFixedZero = refl
 -- connection/shift law that downstream Bianchi surfaces can consume.
 
 data GRFiniteRChartPoint : Set where
-  chart0 chart1 chart2 chart3 : GRFiniteRChartPoint
+  chart0 : GRFiniteRChartPoint
+  chart1 : GRFiniteRChartPoint
+  chart2 : GRFiniteRChartPoint
+  chart3 : GRFiniteRChartPoint
 
 grFiniteRAllCharts :
   List GRFiniteRChartPoint
@@ -1534,7 +1540,10 @@ selectedNonFlatScalarAlgebraReceiptFirstMissing :
 selectedNonFlatScalarAlgebraReceiptFirstMissing = refl
 
 data GRFiniteRCoordinateIndex : Set where
-  coord0 coord1 coord2 coord3 : GRFiniteRCoordinateIndex
+  coord0 : GRFiniteRCoordinateIndex
+  coord1 : GRFiniteRCoordinateIndex
+  coord2 : GRFiniteRCoordinateIndex
+  coord3 : GRFiniteRCoordinateIndex
 
 data GRSelectedFiniteRMetricCarrier : Set where
   selectedFourChartIdentityMetric :

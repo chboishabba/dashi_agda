@@ -15,7 +15,10 @@ import DASHI.Foundations.JChartSuccessorBoundary as Charts
 -- views.  They are not silently coercible into one another.
 
 data ReadingKind : Set where
-  decimalSymbolReading canonical3AdicReading phaseReading chartReading : ReadingKind
+  decimalSymbolReading : ReadingKind
+  canonical3AdicReading : ReadingKind
+  phaseReading : ReadingKind
+  chartReading : ReadingKind
 
 record DecimalSymbolAddress : Set where
   constructor decimalSymbolAddress
@@ -59,7 +62,9 @@ feigenbaumDecimalSymbolAddress =
 -- Decimal midpoint 5 becomes zero only in an explicit centred chart.
 
 data CentredSign : Set where
-  negativeSide zeroCrossing positiveSide : CentredSign
+  negativeSide : CentredSign
+  zeroCrossing : CentredSign
+  positiveSide : CentredSign
 
 centreAtFive : Nat → CentredSign
 centreAtFive zero = negativeSide

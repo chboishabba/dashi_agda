@@ -18,7 +18,9 @@ import DASHI.Biology.NeurotypeProcessingGeometryExact as Processing
 ------------------------------------------------------------------------
 
 data ProcessingAction : Set where
-  rapidReorient sustainedRuleAnalysis remainUnderLoad : ProcessingAction
+  rapidReorient : ProcessingAction
+  sustainedRuleAnalysis : ProcessingAction
+  remainUnderLoad : ProcessingAction
 
 processingActionAvailable :
   Processing.ProcessingGeometry →

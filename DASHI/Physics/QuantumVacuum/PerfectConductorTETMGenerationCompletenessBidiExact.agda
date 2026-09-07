@@ -23,7 +23,8 @@ import DASHI.Analysis.SineNaturalMultiplePiZeroBidiExact as Sine
 ------------------------------------------------------------------------
 
 data Polarisation : Set where
-  TE TM : Polarisation
+  TE : Polarisation
+  TM : Polarisation
 
 record GeneratedPlateMode : Set₁ where
   field

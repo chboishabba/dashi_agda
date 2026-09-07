@@ -34,7 +34,8 @@ import Data.Integer.Base as Int
 -- Quantifier-shape countermodel.
 
 data ToyTrajectory : Set where
-  measureSupported selectedTrajectory : ToyTrajectory
+  measureSupported : ToyTrajectory
+  selectedTrajectory : ToyTrajectory
 
 regularityProperty : ToyTrajectory → Bool
 regularityProperty measureSupported = true

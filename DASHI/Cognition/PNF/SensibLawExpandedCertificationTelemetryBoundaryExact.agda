@@ -125,7 +125,11 @@ rawHashFailure0833 =
 ------------------------------------------------------------------------
 
 data StreamFrameClass : Set where
-  documentFrame paragraphOpenFrame sentenceFrame tokenFrame sentenceEndFrame : StreamFrameClass
+  documentFrame : StreamFrameClass
+  paragraphOpenFrame : StreamFrameClass
+  sentenceFrame : StreamFrameClass
+  tokenFrame : StreamFrameClass
+  sentenceEndFrame : StreamFrameClass
   paragraphEndFrame runtimeTimingTelemetryFrame : StreamFrameClass
 
 semanticObservationFrame : StreamFrameClass → Bool

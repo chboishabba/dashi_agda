@@ -21,7 +21,8 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 -- Exact thirds and their signs.
 
 data Sign : Set where
-  positive negative : Sign
+  positive : Sign
+  negative : Sign
 
 record Thirds : Set where
   constructor _/3
@@ -41,7 +42,8 @@ data Negative : Thirds -> Set where
 -- STV orders.  higher k denotes n = 3 + k.
 
 data STVOrder : Set where
-  orderOne orderTwo : STVOrder
+  orderOne : STVOrder
+  orderTwo : STVOrder
   higher : Nat -> STVOrder
 
 orderNumber : STVOrder -> Nat

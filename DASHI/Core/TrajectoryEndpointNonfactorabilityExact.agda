@@ -123,10 +123,12 @@ postprocessedEndpointStillCannotRecoverTrajectoryCode rechart witness =
 ------------------------------------------------------------------------
 
 data DemoState : Set where
-  demoStart demoGoal : DemoState
+  demoStart : DemoState
+  demoGoal : DemoState
 
 data DemoRoute : Set where
-  lowCostRoute highCostRoute : DemoRoute
+  lowCostRoute : DemoRoute
+  highCostRoute : DemoRoute
 
 demoStartOf : DemoRoute → DemoState
 demoStartOf lowCostRoute = demoStart

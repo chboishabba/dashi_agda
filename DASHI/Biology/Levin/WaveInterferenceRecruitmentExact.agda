@@ -25,7 +25,8 @@ import DASHI.Biology.Levin.NeuralWaveAnalogComputation as Analog
 ------------------------------------------------------------------------
 
 data RelativePhase : Set where
-  inPhase antiPhase : RelativePhase
+  inPhase : RelativePhase
+  antiPhase : RelativePhase
 
 combinedAmplitude : Nat → RelativePhase → Nat
 combinedAmplitude amplitude inPhase = amplitude + amplitude

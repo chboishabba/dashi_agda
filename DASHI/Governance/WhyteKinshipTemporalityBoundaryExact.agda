@@ -17,13 +17,15 @@ import DASHI.Governance.IndigenousAuthoritySourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data RelationalHistory : Set where
-  disruptedKinRelations sustainedKinRelations : RelationalHistory
+  disruptedKinRelations : RelationalHistory
+  sustainedKinRelations : RelationalHistory
 
 data PresentBurdenCode : Set where
   samePresentBurden : PresentBurdenCode
 
 data RelationalJusticeCode : Set where
-  disruptedHistory sustainedHistory : RelationalJusticeCode
+  disruptedHistory : RelationalJusticeCode
+  sustainedHistory : RelationalJusticeCode
 
 presentBurdenObserver : RelationalHistory → PresentBurdenCode
 presentBurdenObserver disruptedKinRelations = samePresentBurden

@@ -46,19 +46,19 @@ terraNulliusDeniedLegallyConstitutiveHumanity = refl
 ------------------------------------------------------------------------
 
 data TerminalisationCoordinate : Set where
-  constitutiveHumanityErasure
-  authoritySelfValidation
-  externalCorrectionDelegitimation
-  doubtPenalty
-  dissentReclassifiedAsFault
-  independentCorrectionClosure
-  : TerminalisationCoordinate
+  constitutiveHumanityErasure : TerminalisationCoordinate
+  authoritySelfValidation : TerminalisationCoordinate
+  externalCorrectionDelegitimation : TerminalisationCoordinate
+  doubtPenalty : TerminalisationCoordinate
+  dissentReclassifiedAsFault : TerminalisationCoordinate
+  independentCorrectionClosure : TerminalisationCoordinate
+
 
 data CoordinateEvidenceState : Set where
-  sourceOrOwnerPaid
-  criticalStructuralInference
-  separateEvidenceRequired
-  : CoordinateEvidenceState
+  sourceOrOwnerPaid : CoordinateEvidenceState
+  criticalStructuralInference : CoordinateEvidenceState
+  separateEvidenceRequired : CoordinateEvidenceState
+
 
 terraNulliusTerminalisationEvidenceState :
   TerminalisationCoordinate → CoordinateEvidenceState
@@ -175,20 +175,20 @@ operationalClassificationDoesNotRequirePrivateIntentProof = refl
 ------------------------------------------------------------------------
 
 data CorrectionAdequacyCoordinate : Set where
-  affectedCommunityAuthorityBearing
-  independentReviewAvailable
-  externalEvidenceAdmissible
-  dissentDoesNotSelfInvalidate
-  correctionCanChangeDecision
-  realisedCountryOutcomeObserved
-  recurrencePreventionObserved
-  : CorrectionAdequacyCoordinate
+  affectedCommunityAuthorityBearing : CorrectionAdequacyCoordinate
+  independentReviewAvailable : CorrectionAdequacyCoordinate
+  externalEvidenceAdmissible : CorrectionAdequacyCoordinate
+  dissentDoesNotSelfInvalidate : CorrectionAdequacyCoordinate
+  correctionCanChangeDecision : CorrectionAdequacyCoordinate
+  realisedCountryOutcomeObserved : CorrectionAdequacyCoordinate
+  recurrencePreventionObserved : CorrectionAdequacyCoordinate
+
 
 data CorrectionAdequacyState : Set where
-  paid
-  open
-  outcomeEvidenceRequired
-  : CorrectionAdequacyState
+  paid : CorrectionAdequacyState
+  open : CorrectionAdequacyState
+  outcomeEvidenceRequired : CorrectionAdequacyState
+
 
 currentCorrectionAdequacyState :
   CorrectionAdequacyCoordinate → CorrectionAdequacyState
@@ -235,15 +235,16 @@ open ClosureReceipt public
 ------------------------------------------------------------------------
 
 data RemedyProcessState : Set where
-  declarationWithoutIndependentCorrection
-  declarationWithIndependentCorrection
-  : RemedyProcessState
+  declarationWithoutIndependentCorrection : RemedyProcessState
+  declarationWithIndependentCorrection : RemedyProcessState
+
 
 data StateRemedyDeclaration : Set where
   sameDeclaredRemedy : StateRemedyDeclaration
 
 data CorrectionChannelState : Set where
-  correctionClosed correctionOpen : CorrectionChannelState
+  correctionClosed : CorrectionChannelState
+  correctionOpen : CorrectionChannelState
 
 stateRemedyDeclaration : RemedyProcessState → StateRemedyDeclaration
 stateRemedyDeclaration _ = sameDeclaredRemedy

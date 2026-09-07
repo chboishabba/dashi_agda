@@ -21,11 +21,11 @@ import DASHI.Biology.Microbiology.BaldEyesalveRecursiveParetoFrontierBidiExact a
 ------------------------------------------------------------------------
 
 data AssayMove : Set where
-  inferAbsenceFromNonDetect
-  validateCalibrationCoordinate
-  inspectMatrixEffect
-  repeatUnchangedReadout
-  : AssayMove
+  inferAbsenceFromNonDetect : AssayMove
+  validateCalibrationCoordinate : AssayMove
+  inspectMatrixEffect : AssayMove
+  repeatUnchangedReadout : AssayMove
+
 
 assayLiteralMove : AssayMove → Literal.LiteralFrontierMove
 assayLiteralMove inferAbsenceFromNonDetect = Literal.literalFrontierMove
@@ -100,13 +100,13 @@ assayNonDetectCannotCloseAbsence = Assay.nonDetectCannotAutoPromoteToAbsent
 ------------------------------------------------------------------------
 
 data BaldMove : Set where
-  sulfurTrajectoryX1
-  thiolRecoveryX2X2F
-  quorumAssociationX3
-  mediationX4
-  forceMixedMechanism
-  repeatResolvedSulfurPanel
-  : BaldMove
+  sulfurTrajectoryX1 : BaldMove
+  thiolRecoveryX2X2F : BaldMove
+  quorumAssociationX3 : BaldMove
+  mediationX4 : BaldMove
+  forceMixedMechanism : BaldMove
+  repeatResolvedSulfurPanel : BaldMove
+
 
 baldLiteralMove : BaldMove → Literal.LiteralFrontierMove
 baldLiteralMove sulfurTrajectoryX1 = Literal.literalFrontierMove

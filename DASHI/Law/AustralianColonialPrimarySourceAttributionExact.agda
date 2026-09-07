@@ -8,20 +8,20 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data PrimarySourceRole : Set where
-  privyCouncilHolding
-  highCourtHolding
-  firstNationsPoliticalStatement
-  highCourtCurrentDoctrine
+  privyCouncilHolding : PrimarySourceRole
+  highCourtHolding : PrimarySourceRole
+  firstNationsPoliticalStatement : PrimarySourceRole
+  highCourtCurrentDoctrine : PrimarySourceRole
   dashiSynthesis : PrimarySourceRole
 
 data PrimaryProposition : Set where
-  cooperClassifiedNSWAsSettledWithoutSettledLaw
-  cooperUsedClassificationToReceiveEnglishLaw
-  maboRejectedEnlargedTerraNulliusForNativeTitle
-  maboRecognisedPreExistingNativeTitleRatherThanCreatingIt
-  uluruStatesSovereigntyNeverCeded
-  loveRecognisesDistinctConstitutionalConnectionToCountry
-  classificationOperationallyChangedAvailableLegalConsequences
+  cooperClassifiedNSWAsSettledWithoutSettledLaw : PrimaryProposition
+  cooperUsedClassificationToReceiveEnglishLaw : PrimaryProposition
+  maboRejectedEnlargedTerraNulliusForNativeTitle : PrimaryProposition
+  maboRecognisedPreExistingNativeTitleRatherThanCreatingIt : PrimaryProposition
+  uluruStatesSovereigntyNeverCeded : PrimaryProposition
+  loveRecognisesDistinctConstitutionalConnectionToCountry : PrimaryProposition
+  classificationOperationallyChangedAvailableLegalConsequences : PrimaryProposition
   semanticReclassificationWasNecessaryToSettledColonyReceptionLogic : PrimaryProposition
 
 record PrimaryReceipt : Set where

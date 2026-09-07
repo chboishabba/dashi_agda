@@ -67,7 +67,12 @@ mathieuDegreeRegression :
 mathieuDegreeRegression = refl
 
 data PosterBlock : Set where
-  mathieuBlock conwayBlock hsMcLBlock jankoBlock terminalBlock omittedBlock : PosterBlock
+  mathieuBlock : PosterBlock
+  conwayBlock : PosterBlock
+  hsMcLBlock : PosterBlock
+  jankoBlock : PosterBlock
+  terminalBlock : PosterBlock
+  omittedBlock : PosterBlock
 
 posterBlock : Sporadic.SporadicGroup → PosterBlock
 posterBlock Sporadic.M11 = mathieuBlock
@@ -139,7 +144,11 @@ syntheticCo4FillsOrdinalEight :
 syntheticCo4FillsOrdinalEight = refl
 
 data FitStrength : Set where
-  noFit weakFit moderateFit strongFit maximalFit : FitStrength
+  noFit : FitStrength
+  weakFit : FitStrength
+  moderateFit : FitStrength
+  strongFit : FitStrength
+  maximalFit : FitStrength
 
 record CorrespondenceScore : Set where
   constructor correspondenceScore

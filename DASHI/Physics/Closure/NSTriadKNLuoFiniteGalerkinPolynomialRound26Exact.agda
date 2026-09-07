@@ -37,10 +37,13 @@ import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 
 data CoordinateAxis : Set where
-  xAxis yAxis zAxis : CoordinateAxis
+  xAxis : CoordinateAxis
+  yAxis : CoordinateAxis
+  zAxis : CoordinateAxis
 
 data CoordinatePart : Set where
-  realPart imaginaryPart : CoordinatePart
+  realPart : CoordinatePart
+  imaginaryPart : CoordinatePart
 
 record CoordinateVariable : Set where
   constructor coordinate-variable

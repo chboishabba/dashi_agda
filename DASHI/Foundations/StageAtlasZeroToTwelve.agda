@@ -21,7 +21,13 @@ import DASHI.Foundations.StageAtlasZeroToEleven as Legacy
 ------------------------------------------------------------------------
 
 data StageAtlasZeroToTwelve : Set where
-  stage-0 stage-1 stage-2 stage-3 stage-4 stage-5 stage-6 : StageAtlasZeroToTwelve
+  stage-0 : StageAtlasZeroToTwelve
+  stage-1 : StageAtlasZeroToTwelve
+  stage-2 : StageAtlasZeroToTwelve
+  stage-3 : StageAtlasZeroToTwelve
+  stage-4 : StageAtlasZeroToTwelve
+  stage-5 : StageAtlasZeroToTwelve
+  stage-6 : StageAtlasZeroToTwelve
   stage-7 stage-8 stage-9 stage-10 stage-11 stage-12 : StageAtlasZeroToTwelve
 
 toNat : StageAtlasZeroToTwelve → Nat

@@ -13,7 +13,8 @@ import DASHI.Foundations.TernaryNativeMinimalityExact as Native
 ------------------------------------------------------------------------
 
 data C2 : Set where
-  c2Identity c2Flip : C2
+  c2Identity : C2
+  c2Flip : C2
 
 c2Combine : C2 → C2 → C2
 c2Combine c2Identity h = h
@@ -57,7 +58,8 @@ ternaryC2Action =
     c2IdentityActs c2CombineActs c2InverseLeftActs c2InverseRightActs
 
 data PoleClass : Set where
-  centreClass signedClass : PoleClass
+  centreClass : PoleClass
+  signedClass : PoleClass
 
 poleClass : SSP.SSPTrit → PoleClass
 poleClass SSP.sspNegOne = signedClass

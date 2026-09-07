@@ -14,7 +14,10 @@ import DASHI.Interop.SensibLawResidualLattice as Residual
 ------------------------------------------------------------------------
 
 data SurplusKind : Set where
-  valueSurplus enjoymentSurplus knowledgeSurplus powerSurplus : SurplusKind
+  valueSurplus : SurplusKind
+  enjoymentSurplus : SurplusKind
+  knowledgeSurplus : SurplusKind
+  powerSurplus : SurplusKind
 
 record SurplusChannel (State Output : Set) : Set₁ where
   field

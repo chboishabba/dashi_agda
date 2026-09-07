@@ -12,7 +12,8 @@ import DASHI.Biology.TwoBoundaryHyperformalismExact as Two
 ------------------------------------------------------------------------
 
 data RouteLabel : Set where
-  threatRoute safeRoute : RouteLabel
+  threatRoute : RouteLabel
+  safeRoute : RouteLabel
 
 record HistoryCost : Set where
   constructor historyCost

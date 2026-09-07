@@ -15,13 +15,25 @@ import DASHI.Biology.Microbiology.BaldEyesalveMechanismExperimentSelectionExact 
 ------------------------------------------------------------------------
 
 data MechanismWorld : Set where
-  sulfurDominant recoveryBuffered quorumDominant matrixDominant mixedPositive : MechanismWorld
+  sulfurDominant : MechanismWorld
+  recoveryBuffered : MechanismWorld
+  quorumDominant : MechanismWorld
+  matrixDominant : MechanismWorld
+  mixedPositive : MechanismWorld
 
 data Experiment : Set where
-  sulfurSpeciation thiolFunctionPanel recoveryPanel quorumPerturbation matrixSpatialPanel : Experiment
+  sulfurSpeciation : Experiment
+  thiolFunctionPanel : Experiment
+  recoveryPanel : Experiment
+  quorumPerturbation : Experiment
+  matrixSpatialPanel : Experiment
 
 data ResidualStage : Set where
-  chemistryOpen chemistryClosedThiolRecoveryLive quorumCollision matrixCollision actionClosed : ResidualStage
+  chemistryOpen : ResidualStage
+  chemistryClosedThiolRecoveryLive : ResidualStage
+  quorumCollision : ResidualStage
+  matrixCollision : ResidualStage
+  actionClosed : ResidualStage
 
 record SchedulerRoute : Set where
   constructor schedulerRoute

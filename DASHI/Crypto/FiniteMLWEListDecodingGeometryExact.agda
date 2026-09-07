@@ -59,7 +59,9 @@ score11Two : Lab.candidateScore Lab.public22 Lab.s11 ≡ 2
 score11Two = Lab.score11
 
 data DecodingRegime : Set where
-  uniqueDecoding smallListDecoding fullList : DecodingRegime
+  uniqueDecoding : DecodingRegime
+  smallListDecoding : DecodingRegime
+  fullList : DecodingRegime
 
 regimeAt0 : DecodingRegime
 regimeAt0 = smallListDecoding

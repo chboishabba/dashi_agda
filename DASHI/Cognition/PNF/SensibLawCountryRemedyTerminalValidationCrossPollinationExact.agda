@@ -33,16 +33,16 @@ import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact a
 ------------------------------------------------------------------------
 
 data TerminalValidationDomain : Set where
-  externalEconomicPayerValidation
-  effectiveRemedyRealisation
-  countrySocioEcologicalRealisation
-  : TerminalValidationDomain
+  externalEconomicPayerValidation : TerminalValidationDomain
+  effectiveRemedyRealisation : TerminalValidationDomain
+  countrySocioEcologicalRealisation : TerminalValidationDomain
+
 
 data ValidationStatus : Set where
-  surroundingSignalsOnly
-  terminalReceiptPresent
-  residualOpen
-  : ValidationStatus
+  surroundingSignalsOnly : ValidationStatus
+  terminalReceiptPresent : ValidationStatus
+  residualOpen : ValidationStatus
+
 
 record CrossDomainValidationBoundary : Set where
   constructor cross-domain-validation-boundary
@@ -200,16 +200,16 @@ unpricedDoesNotMeanNonexistent = refl
 ------------------------------------------------------------------------
 
 data ExternalityDutyBridgeRole : Set where
-  mayInformForeseeability
-  mayInformKnowledge
-  mayInformControl
-  mayInformVulnerability
-  mayInformHarmCharacterisation
-  cannotAutoPayCausation
-  cannotAutoPayCorePolicyGate
-  cannotAutoPayInstitutionalCompetence
-  cannotAutoPayCompensability
-  : ExternalityDutyBridgeRole
+  mayInformForeseeability : ExternalityDutyBridgeRole
+  mayInformKnowledge : ExternalityDutyBridgeRole
+  mayInformControl : ExternalityDutyBridgeRole
+  mayInformVulnerability : ExternalityDutyBridgeRole
+  mayInformHarmCharacterisation : ExternalityDutyBridgeRole
+  cannotAutoPayCausation : ExternalityDutyBridgeRole
+  cannotAutoPayCorePolicyGate : ExternalityDutyBridgeRole
+  cannotAutoPayInstitutionalCompetence : ExternalityDutyBridgeRole
+  cannotAutoPayCompensability : ExternalityDutyBridgeRole
+
 
 externalityRoleForDutyIssue : Climate.DutyIssue → ExternalityDutyBridgeRole
 externalityRoleForDutyIssue Climate.reasonableForeseeability = mayInformForeseeability

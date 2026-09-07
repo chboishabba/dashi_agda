@@ -25,7 +25,8 @@ import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact as Subject
 ------------------------------------------------------------------------
 
 data LabialSituated : Set where
-  firstSituated secondSituated : LabialSituated
+  firstSituated : LabialSituated
+  secondSituated : LabialSituated
 
 data InheritedUnitaryChart : Set where
   inheritedUnit : InheritedUnitaryChart

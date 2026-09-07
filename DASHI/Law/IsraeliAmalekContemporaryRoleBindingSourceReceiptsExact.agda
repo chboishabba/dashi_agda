@@ -16,20 +16,20 @@ import DASHI.Governance.AmalekProvenanceRoleBinding as Amalek
 ------------------------------------------------------------------------
 
 data ContemporaryAmalekSourceRole : Set where
-  primeMinisterWarSpeech
-  primeMinisterLetterToSoldiers
-  knessetOfficialRecord
-  icjPartySubmission
-  icjJudicialObservation
+  primeMinisterWarSpeech : ContemporaryAmalekSourceRole
+  primeMinisterLetterToSoldiers : ContemporaryAmalekSourceRole
+  knessetOfficialRecord : ContemporaryAmalekSourceRole
+  icjPartySubmission : ContemporaryAmalekSourceRole
+  icjJudicialObservation : ContemporaryAmalekSourceRole
   secondaryReport : ContemporaryAmalekSourceRole
 
 data ContemporaryAmalekProposition : Set where
-  netanyahuInvokedAmalekInGazaWarContext
-  netanyahuRepeatedAmalekToSoldiers
-  knessetInstitutionallyRepeatedAmalekVerse
-  parliamentaryLightDarkEnemyFraming
-  inflammatoryRhetoricEchoedByArmedForces
-  palestiniansLiterallyIdenticalToScripturalAmalek
+  netanyahuInvokedAmalekInGazaWarContext : ContemporaryAmalekProposition
+  netanyahuRepeatedAmalekToSoldiers : ContemporaryAmalekProposition
+  knessetInstitutionallyRepeatedAmalekVerse : ContemporaryAmalekProposition
+  parliamentaryLightDarkEnemyFraming : ContemporaryAmalekProposition
+  inflammatoryRhetoricEchoedByArmedForces : ContemporaryAmalekProposition
+  palestiniansLiterallyIdenticalToScripturalAmalek : ContemporaryAmalekProposition
   exterminatoryCommandOperationallyImported : ContemporaryAmalekProposition
 
 record ContemporaryAmalekReceipt : Set where
@@ -106,17 +106,17 @@ canonicalContemporaryAmalekBoundary =
 ------------------------------------------------------------------------
 
 data ContemporaryAmalekClaim : Set where
-  contemporaryStateAmalekRoleBindingExists
-  roleBindingReachedMilitaryAudience
-  rhetoricWasEchoedInMilitaryContext
-  palestiniansAreLiterallyScripturalAmalek
+  contemporaryStateAmalekRoleBindingExists : ContemporaryAmalekClaim
+  roleBindingReachedMilitaryAudience : ContemporaryAmalekClaim
+  rhetoricWasEchoedInMilitaryContext : ContemporaryAmalekClaim
+  palestiniansAreLiterallyScripturalAmalek : ContemporaryAmalekClaim
   scripturalErasureCommandBecameOperationalOrder : ContemporaryAmalekClaim
 
 data ContemporaryAmalekProducer : Set where
-  executiveSpeechProducer
-  soldierMessageProducer
-  judicialEchoReceiptProducer
-  literalIdentityProducer
+  executiveSpeechProducer : ContemporaryAmalekProducer
+  soldierMessageProducer : ContemporaryAmalekProducer
+  judicialEchoReceiptProducer : ContemporaryAmalekProducer
+  literalIdentityProducer : ContemporaryAmalekProducer
   commandTransportProducer : ContemporaryAmalekProducer
 
 reverseContemporaryAmalek : ContemporaryAmalekClaim → ContemporaryAmalekProducer

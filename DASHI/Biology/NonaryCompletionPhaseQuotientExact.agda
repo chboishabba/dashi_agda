@@ -36,13 +36,27 @@ open import Data.Product using (_×_; _,_; proj₁; proj₂)
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
 
 data DecimalCompletionState : Set where
-  d0 d1 d2 d3 d4 d5 d6 d7 d8 j9 : DecimalCompletionState
+  d0 : DecimalCompletionState
+  d1 : DecimalCompletionState
+  d2 : DecimalCompletionState
+  d3 : DecimalCompletionState
+  d4 : DecimalCompletionState
+  d5 : DecimalCompletionState
+  d6 : DecimalCompletionState
+  d7 : DecimalCompletionState
+  d8 : DecimalCompletionState
+  j9 : DecimalCompletionState
 
 data ComplementMode5 : Set where
-  mode09 mode18 mode27 mode36 mode45 : ComplementMode5
+  mode09 : ComplementMode5
+  mode18 : ComplementMode5
+  mode27 : ComplementMode5
+  mode36 : ComplementMode5
+  mode45 : ComplementMode5
 
 data BinaryPhase : Set where
-  directPhase counterPhase : BinaryPhase
+  directPhase : BinaryPhase
+  counterPhase : BinaryPhase
 
 flipBinaryPhase : BinaryPhase → BinaryPhase
 flipBinaryPhase directPhase = counterPhase

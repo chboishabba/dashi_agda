@@ -11,15 +11,27 @@ import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 import DASHI.Cognition.PNF.SensibLawConsumerQuerySemanticCoordinateReopeningExact as Demand
 
 data CoordinateEvidenceDisposition : Set where
-  currentUnassessed currentResolved currentMissing currentConflicting stalePreviouslyResolved : CoordinateEvidenceDisposition
+  currentUnassessed : CoordinateEvidenceDisposition
+  currentResolved : CoordinateEvidenceDisposition
+  currentMissing : CoordinateEvidenceDisposition
+  currentConflicting : CoordinateEvidenceDisposition
+  stalePreviouslyResolved : CoordinateEvidenceDisposition
 
 
 data RequirementDisposition : Set where
-  needsInspection alreadySatisfied missingEvidence conflictingEvidence reopenRequired : RequirementDisposition
+  needsInspection : RequirementDisposition
+  alreadySatisfied : RequirementDisposition
+  missingEvidence : RequirementDisposition
+  conflictingEvidence : RequirementDisposition
+  reopenRequired : RequirementDisposition
 
 
 data RequirementExecutionAction : Set where
-  inspectForEvidence reuseExisting acquireMissingEvidence resolveConflict revalidateStaleEvidence : RequirementExecutionAction
+  inspectForEvidence : RequirementExecutionAction
+  reuseExisting : RequirementExecutionAction
+  acquireMissingEvidence : RequirementExecutionAction
+  resolveConflict : RequirementExecutionAction
+  revalidateStaleEvidence : RequirementExecutionAction
 
 
 record CoordinateEvidenceReceipt

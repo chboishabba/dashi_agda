@@ -45,7 +45,10 @@ layerOwner valuesRemedies = SensibLaw
 -- Constructors denote schema roles, not physical SQL naming requirements.
 
 data OntologyTable : Set where
-  coreActor actorAlias actorClass roleMarker : OntologyTable
+  coreActor : OntologyTable
+  actorAlias : OntologyTable
+  actorClass : OntologyTable
+  roleMarker : OntologyTable
   relationshipBasis relationshipShape relationshipIntensity actorRelation : OntologyTable
   coreEvent eventClass eventParticipant : OntologyTable
   evidenceItem evidenceDerivation eventEvidence : OntologyTable

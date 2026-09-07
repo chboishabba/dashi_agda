@@ -50,7 +50,9 @@ import DASHI.Physics.YangMills.BalabanP33WilsonPlacementQuaternionAtomIdentifica
 import DASHI.Physics.YangMills.BalabanP33QuaternionFourFactorTelescopeExact as Telescope
 
 data FactorSelection : Set where
-  valueSelection firstSelection secondSelection : FactorSelection
+  valueSelection : FactorSelection
+  firstSelection : FactorSelection
+  secondSelection : FactorSelection
 
 applySelection :
   FactorSelection → Q.QuaternionFactorJet → Q.RationalQuaternion

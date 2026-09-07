@@ -29,7 +29,9 @@ import DASHI.Governance.HistoryConditionedSocialEcologyOptionConeExact as Ecolog
 ------------------------------------------------------------------------
 
 data LocalSite : Set where
-  feminineSite masculineSite institutionalSite : LocalSite
+  feminineSite : LocalSite
+  masculineSite : LocalSite
+  institutionalSite : LocalSite
 
 data LocalContinuation : LocalSite → Set where
   feminineReciprocal femininePlural : LocalContinuation feminineSite
@@ -170,7 +172,8 @@ canonicalGlobalRestrictsToInstitution = refl
 ------------------------------------------------------------------------
 
 data FeminineFineAtFace : Set where
-  faceReciprocal facePlural : FeminineFineAtFace
+  faceReciprocal : FeminineFineAtFace
+  facePlural : FeminineFineAtFace
 
 feminineStratumSurface : FeminineFineAtFace → Strata.VoxelStratum
 feminineStratumSurface _ = Strata.faceCentreStratum
@@ -199,7 +202,8 @@ data GlobalPublicSurface : Set where
   formalEqualityAndReciprocalNorm : GlobalPublicSurface
 
 data GlobalIntegrity : Set where
-  compatibleLocalEndorsement forcedHomogenisation : GlobalIntegrity
+  compatibleLocalEndorsement : GlobalIntegrity
+  forcedHomogenisation : GlobalIntegrity
 
 globalPublicSurface : GlobalFineState → GlobalPublicSurface
 globalPublicSurface _ = formalEqualityAndReciprocalNorm

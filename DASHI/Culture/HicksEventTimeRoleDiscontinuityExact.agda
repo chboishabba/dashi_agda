@@ -67,10 +67,9 @@ canonicalHicksTemporalBoundary : HicksTemporalBoundary
 canonicalHicksTemporalBoundary = hicks-temporal-boundary false refl false refl false refl true refl
 
 data HicksEventTimeReverseTarget : Set where
-  acquirePost2022Consulting
-  acquirePost2022MissionRole
-  acquirePost2022RepositoryAccess
-  acquirePost2022ObservingProgramme
-  acquirePost2022DataCustody
-  acquireEventTimeInstitutionalAffiliation
-  : HicksEventTimeReverseTarget
+  acquirePost2022Consulting : HicksEventTimeReverseTarget
+  acquirePost2022MissionRole : HicksEventTimeReverseTarget
+  acquirePost2022RepositoryAccess : HicksEventTimeReverseTarget
+  acquirePost2022ObservingProgramme : HicksEventTimeReverseTarget
+  acquirePost2022DataCustody : HicksEventTimeReverseTarget
+  acquireEventTimeInstitutionalAffiliation : HicksEventTimeReverseTarget

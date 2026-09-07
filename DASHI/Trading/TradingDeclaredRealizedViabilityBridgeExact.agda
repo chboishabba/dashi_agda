@@ -29,7 +29,8 @@ data TradingAgent : Set where
   canonicalTradingAgent : TradingAgent
 
 data ViabilityResidual : Set where
-  proposalViabilityAligned proposalViabilityMismatch : ViabilityResidual
+  proposalViabilityAligned : ViabilityResidual
+  proposalViabilityMismatch : ViabilityResidual
 
 proposalObservation : Dream.TradingFabricState → Dream.Direction
 proposalObservation = Dream.candidateObserver

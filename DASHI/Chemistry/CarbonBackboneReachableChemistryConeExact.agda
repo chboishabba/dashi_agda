@@ -19,7 +19,8 @@ import DASHI.Governance.OptionConeCoercionExact as Cone
 ------------------------------------------------------------------------
 
 data BackboneState : Set where
-  carbonCarrier siliconComparison : BackboneState
+  carbonCarrier : BackboneState
+  siliconComparison : BackboneState
 
 data ChemistryCapability : Set where
   stableChainFormation : ChemistryCapability

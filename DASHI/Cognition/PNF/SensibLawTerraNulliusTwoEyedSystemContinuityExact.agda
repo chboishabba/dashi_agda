@@ -47,24 +47,24 @@ terraNulliusDeniedConstitutiveHumanity = refl
 ------------------------------------------------------------------------
 
 data RelationTransformationCoordinate : Set where
-  doctrineRejected
-  indigenousOrderConstitutiveStanding
-  communityAuthorityBearing
-  landCountryControl
-  communityDefinedOutcomeAuthority
-  independentCorrectionAvailable
-  externalEvidenceCanChangeDecision
-  dissentRemainsAdmissibleEvidence
-  compensationAndReparationRealised
-  recurrencePreventionRealised
-  : RelationTransformationCoordinate
+  doctrineRejected : RelationTransformationCoordinate
+  indigenousOrderConstitutiveStanding : RelationTransformationCoordinate
+  communityAuthorityBearing : RelationTransformationCoordinate
+  landCountryControl : RelationTransformationCoordinate
+  communityDefinedOutcomeAuthority : RelationTransformationCoordinate
+  independentCorrectionAvailable : RelationTransformationCoordinate
+  externalEvidenceCanChangeDecision : RelationTransformationCoordinate
+  dissentRemainsAdmissibleEvidence : RelationTransformationCoordinate
+  compensationAndReparationRealised : RelationTransformationCoordinate
+  recurrencePreventionRealised : RelationTransformationCoordinate
+
 
 data CoordinateState : Set where
-  paid
-  partial
-  open
-  sourceOutcomeRequired
-  : CoordinateState
+  paid : CoordinateState
+  partial : CoordinateState
+  open : CoordinateState
+  sourceOutcomeRequired : CoordinateState
+
 
 currentCoordinateState : RelationTransformationCoordinate → CoordinateState
 currentCoordinateState doctrineRejected = paid
@@ -96,10 +96,10 @@ compensationStillOpen = refl
 ------------------------------------------------------------------------
 
 data StructuralContinuityClassification : Set where
-  foundationalRelationTransformed
-  structuralContinuityRisk
-  insufficientEvidence
-  : StructuralContinuityClassification
+  foundationalRelationTransformed : StructuralContinuityClassification
+  structuralContinuityRisk : StructuralContinuityClassification
+  insufficientEvidence : StructuralContinuityClassification
+
 
 record RelationTransformationEvidence : Set where
   constructor relation-transformation-evidence
@@ -148,17 +148,17 @@ fullyTransformedFixtureClosesRelation = refl
 ------------------------------------------------------------------------
 
 data RemedyRelationState : Set where
-  stateDeclaredRepairWithoutAuthorityShift
-  stateDeclaredRepairWithAuthorityShift
-  : RemedyRelationState
+  stateDeclaredRepairWithoutAuthorityShift : RemedyRelationState
+  stateDeclaredRepairWithAuthorityShift : RemedyRelationState
+
 
 data DeclaredRepairSurface : Set where
   sameDeclaredRepair : DeclaredRepairSurface
 
 data RealizedAuthorityRelation : Set where
-  stateMediatedAuthorityRelation
-  communityAuthorityBearingRelation
-  : RealizedAuthorityRelation
+  stateMediatedAuthorityRelation : RealizedAuthorityRelation
+  communityAuthorityBearingRelation : RealizedAuthorityRelation
+
 
 declaredRepairSurface : RemedyRelationState → DeclaredRepairSurface
 declaredRepairSurface _ = sameDeclaredRepair
@@ -239,17 +239,17 @@ operationDoesNotByItselfProvePrivateIntent = refl
 ------------------------------------------------------------------------
 
 data CorrectionClosureCoordinate : Set where
-  authoritySelfValidates
-  externalCorrectionDelegitimised
-  doubtPenalised
-  dissentReclassifiedAsFault
-  independentCorrectionClosed
-  : CorrectionClosureCoordinate
+  authoritySelfValidates : CorrectionClosureCoordinate
+  externalCorrectionDelegitimised : CorrectionClosureCoordinate
+  doubtPenalised : CorrectionClosureCoordinate
+  dissentReclassifiedAsFault : CorrectionClosureCoordinate
+  independentCorrectionClosed : CorrectionClosureCoordinate
+
 
 data CorrectionClosureEvidence : Set where
-  notYetPaid
-  separatelySourcePaid
-  : CorrectionClosureEvidence
+  notYetPaid : CorrectionClosureEvidence
+  separatelySourcePaid : CorrectionClosureEvidence
+
 
 currentTerraNulliusClosureEvidence : CorrectionClosureCoordinate → CorrectionClosureEvidence
 currentTerraNulliusClosureEvidence _ = notYetPaid

@@ -70,7 +70,8 @@ record MaassMoonshineSharedFibre
 -- MaassMoonshineSharedFibre and BaseCompatible.
 
 data SharedBaseProjectionObject : Set where
-  pairedObject groupObject : SharedBaseProjectionObject
+  pairedObject : SharedBaseProjectionObject
+  groupObject : SharedBaseProjectionObject
 
 SharedBaseUnderlying :
   (MaassForm McKayThompsonSeries MonsterClass FuchsianGroup : Set) →

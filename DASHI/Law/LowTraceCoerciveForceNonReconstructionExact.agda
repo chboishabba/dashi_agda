@@ -9,13 +9,21 @@ import DASHI.Core.IntersectionalNonFactorability as NF
 ------------------------------------------------------------------------
 
 data ForceKind : Set where
-  noForce physicalControl conductedElectricalContact projectileElectrical : ForceKind
+  noForce : ForceKind
+  physicalControl : ForceKind
+  conductedElectricalContact : ForceKind
+  projectileElectrical : ForceKind
 
 data TraceState : Set where
-  noTrace transientTrace durableTrace : TraceState
+  noTrace : TraceState
+  transientTrace : TraceState
+  durableTrace : TraceState
 
 data RecordingState : Set where
-  noRecording cameraOff cameraOn partialRecording : RecordingState
+  noRecording : RecordingState
+  cameraOff : RecordingState
+  cameraOn : RecordingState
+  partialRecording : RecordingState
 
 record ForceHypervoxel : Set where
   constructor forceHypervoxel
@@ -120,7 +128,8 @@ canonicalAuditabilityBoundary = auditabilityBoundary false refl false refl false
 ------------------------------------------------------------------------
 
 data DeliveryGeometry : Set where
-  directContact firedProbes : DeliveryGeometry
+  directContact : DeliveryGeometry
+  firedProbes : DeliveryGeometry
 
 record ElectricalCoerciveDevice : Set where
   constructor electricalCoerciveDevice
