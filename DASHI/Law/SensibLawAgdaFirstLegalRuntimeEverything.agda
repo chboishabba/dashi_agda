@@ -11,6 +11,7 @@ import DASHI.Law.SensibLawLegalResidualProducerSchedulerExact as Scheduler
 import DASHI.Law.SensibLawRuntimeWrongTypeElementFrontierExact as Frontier
 import DASHI.Law.SensibLawWrongTypeCausationElementExact as Element
 import DASHI.Law.SensibLawTemporalHealthEvidenceWrongTypeExact as TemporalHealth
+import DASHI.Law.SensibLawBackupNegativeEvidenceBoundaryExact as BackupEvidence
 import DASHI.Law.QueenslandWrongTypeCausationDeclarationExact as Queensland
 
 ------------------------------------------------------------------------
@@ -186,6 +187,11 @@ selectedTemporalHealthEvidenceBoundary :
   TemporalHealth.TemporalHealthEvidenceBoundary
 selectedTemporalHealthEvidenceBoundary =
   TemporalHealth.canonicalTemporalHealthEvidenceBoundary
+
+selectedBackupNegativeEvidenceBoundary :
+  BackupEvidence.BackupNegativeEvidenceBoundary
+selectedBackupNegativeEvidenceBoundary =
+  BackupEvidence.canonicalBackupNegativeEvidenceBoundary
 
 ------------------------------------------------------------------------
 -- Firewalls.
