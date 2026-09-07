@@ -47,17 +47,13 @@ record SelectedDirectFinalOffCutoffBridge
     selectedDirectCutoffReceipt :
       Weld.SelectedDirectFiniteWeld.sameSelectedCutoff weld
 
-    finalChosenCutoffCrosses :
-      Intermediate.DirectPoleQuotientOffIntermediateAllowanceInput.CrossingCutoff input
-        (Intermediate.DirectPoleQuotientOffIntermediateAllowanceInput.chosenCutoff input)
-
     cutoffBridgeReference : String
 
 open SelectedDirectFinalOffCutoffBridge public
 
 ------------------------------------------------------------------------
--- The final crossing receipt is reused directly. The bridge does not select a
--- new J and does not infer a crossing from the selected-window preservation Set.
+-- Crossing is already a field of the final intermediate-Off input. The bridge
+-- must not ask the caller to pay it a second time.
 ------------------------------------------------------------------------
 
 compiledFinalChosenCutoffCrossing :
@@ -66,7 +62,8 @@ compiledFinalChosenCutoffCrossing :
     space formula orbit selected direct weld S input →
   Intermediate.DirectPoleQuotientOffIntermediateAllowanceInput.CrossingCutoff input
     (Intermediate.DirectPoleQuotientOffIntermediateAllowanceInput.chosenCutoff input)
-compiledFinalChosenCutoffCrossing bridge = finalChosenCutoffCrosses bridge
+compiledFinalChosenCutoffCrossing {input = input} bridge =
+  Intermediate.DirectPoleQuotientOffIntermediateAllowanceInput.chosenCutoffCrosses input
 
 record SelectedDirectFinalOffCutoffBoundary : Set where
   constructor selected-direct-final-off-cutoff-boundary
@@ -86,6 +83,10 @@ record SelectedDirectFinalOffCutoffBoundary : Set where
     finalCutoffIdentityStillNeedsTypedTransport : Bool
     finalCutoffIdentityStillNeedsTypedTransportIsTrue :
       finalCutoffIdentityStillNeedsTypedTransport ≡ true
+
+    crossingReceiptAlreadyOwnedByFinalInput : Bool
+    crossingReceiptAlreadyOwnedByFinalInputIsTrue :
+      crossingReceiptAlreadyOwnedByFinalInput ≡ true
 
     farTailMayChooseDifferentIndependentFinalCutoff : Bool
     farTailMayChooseDifferentIndependentFinalCutoffIsFalse :
@@ -108,7 +109,8 @@ canonicalSelectedDirectFinalOffCutoffBoundary =
     true refl
     true refl
     true refl
+    true refl
     false refl
     false refl
     false refl
-    "Do not add a second selected-window cutoff field. DirectFinitePoleNearProducer already has a typed cutoff, and SelectedDirectFiniteWeld already carries a proof-bearing same-selected-cutoff receipt. Identify the direct scalar/cutoff carrier with the final Off Cutoff type and prove that the direct cutoff casts to the final chosen crossing cutoff. This is same-object representation work, not a new zero estimate. Far-tail decay still cannot choose a different final J independently, and RH remains open."
+    "Do not add a second selected-window cutoff field. DirectFinitePoleNearProducer already has a typed cutoff, and SelectedDirectFiniteWeld already carries a proof-bearing same-selected-cutoff receipt. Identify the direct scalar/cutoff carrier with the final Off Cutoff type and prove that the direct cutoff casts to the final chosen cutoff. The final input already carries the crossing receipt, so do not pay it again. This is same-object representation work, not a new zero estimate. Far-tail decay still cannot choose a different final J independently, and RH remains open."
