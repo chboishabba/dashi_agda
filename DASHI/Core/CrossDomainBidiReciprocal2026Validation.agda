@@ -29,3 +29,7 @@ import DASHI.Core.QueryFibreAddedCoordinateProducerBidiExact
 import DASHI.Core.PromotionResidualSelectiveReopeningBidiExact
 import DASHI.Core.TemporalStrandProvenanceBidiExact
 import DASHI.Core.FibreRefinementExperimentSelectionBidiExact
+
+-- Plural epistemic-progress methodology across planning, biology, governance,
+-- SensibLaw and runtime/provenance.
+import DASHI.Core.PluralEpistemicProgressCrossDomainEverything
