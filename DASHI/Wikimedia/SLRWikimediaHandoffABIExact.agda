@@ -11,20 +11,26 @@ import DASHI.Wikimedia.SensibLawBoundaryArtifactMorphismExact as Morph
 ------------------------------------------------------------------------
 -- SLR / RUST CONSUMER ABI
 --
--- Inspected source surface:
+-- Inspected source surfaces:
 --   chboishabba/slr main README.md blob
 --   169995cdf939198345e0832ea0ec92f23376057b
--- on 7 Sep 2026.
+-- and the active implementation counterpart:
+--   chboishabba/slr PR #10
+--   agent/source-unit-wikimedia-handoff
+--   stacked on PR #7 / agent/legal-counterfactual-worlds.
 --
--- Contract: sensiblaw-core owns revision-scoped spans/promotion receipt types;
--- sensiblaw-stream consumes parser observations/residuals; parser sidecars do
--- not own canonical semantic state; Rust owns deterministic compilation and
--- publication boundaries.
+-- Contract: parser/source consumers do not own canonical semantic state;
+-- deterministic compilation/publication boundaries remain separate from source
+-- authority and semantic promotion.
 ------------------------------------------------------------------------
 
 slrMainReference : String
 slrMainReference =
   "chboishabba/slr README.md blob 169995cdf939198345e0832ea0ec92f23376057b inspected 2026-09-07"
+
+slrSourceHandoffImplementationReference : String
+slrSourceHandoffImplementationReference =
+  "chboishabba/slr PR #10 agent/source-unit-wikimedia-handoff"
 
 handoffToSlr : Handoff.SensibLawReviewPacket → Handoff.RuntimeHandoffReceipt
 handoffToSlr packet =
@@ -32,7 +38,7 @@ handoffToSlr packet =
     Handoff.slrRustRuntime
     (Handoff.sourceUnitId (Handoff.sourceUnit packet))
     (Handoff.packetId packet)
-    slrMainReference
+    slrSourceHandoffImplementationReference
     true refl
     true refl
     false refl
@@ -76,7 +82,7 @@ observationToSlr receipt =
     receipt
     (Morph.observationId (Morph.payload receipt))
     (Handoff.sourceUnitId (Morph.sourceUnit (Morph.payload receipt)))
-    slrMainReference
+    slrSourceHandoffImplementationReference
     true refl
     true refl
     false refl
