@@ -8,16 +8,15 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ActionSpectroscopyStage : Set where
-  ionGeneration
-  massSelection
-  cryogenicCooling
-  messengerAttachment
-  infraredExcitation
-  tagPredissociation
-  fragmentDetection
-  actionSpectrum
-  structuralAssignment
-  : ActionSpectroscopyStage
+  ionGeneration : ActionSpectroscopyStage
+  massSelection : ActionSpectroscopyStage
+  cryogenicCooling : ActionSpectroscopyStage
+  messengerAttachment : ActionSpectroscopyStage
+  infraredExcitation : ActionSpectroscopyStage
+  tagPredissociation : ActionSpectroscopyStage
+  fragmentDetection : ActionSpectroscopyStage
+  actionSpectrum : ActionSpectroscopyStage
+  structuralAssignment : ActionSpectroscopyStage
 
 record MessengerTagProtocol : Set where
   constructor messenger-tag-protocol
@@ -77,6 +76,8 @@ record ActionSpectroscopyBoundary : Set where
     DFTMatchMeansExperimentalGroundTruth : Bool
     DFTMatchMeansExperimentalGroundTruthIsFalse : DFTMatchMeansExperimentalGroundTruth ≡ false
 
+open ActionSpectroscopyBoundary public
+
 canonicalActionSpectroscopyBoundary : ActionSpectroscopyBoundary
 canonicalActionSpectroscopyBoundary = action-spectroscopy-boundary
   false refl
@@ -86,10 +87,9 @@ canonicalActionSpectroscopyBoundary = action-spectroscopy-boundary
   false refl
 
 data ActionSpectroscopyReverseTarget : Set where
-  needTagPerturbationStudy
-  needConformerCoverage
-  needComputedMethodUncertainty
-  needIsomerMixtureTests
-  needSensitivitySpecificity
-  needMatrixInterferenceTests
-  : ActionSpectroscopyReverseTarget
+  needTagPerturbationStudy : ActionSpectroscopyReverseTarget
+  needConformerCoverage : ActionSpectroscopyReverseTarget
+  needComputedMethodUncertainty : ActionSpectroscopyReverseTarget
+  needIsomerMixtureTests : ActionSpectroscopyReverseTarget
+  needSensitivitySpecificity : ActionSpectroscopyReverseTarget
+  needMatrixInterferenceTests : ActionSpectroscopyReverseTarget

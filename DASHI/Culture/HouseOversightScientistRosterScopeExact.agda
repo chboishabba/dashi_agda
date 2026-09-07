@@ -26,11 +26,11 @@ import DASHI.Core.ScientificWorkAttributionExact as Attribution
 ------------------------------------------------------------------------
 
 data CommitteeNamingStatus : Set where
-  explicitlyNamedByCommittee
-  categoryOnlyInCommitteeLetter
-  suppliedByLaterReporting
-  notInCommitteeLetter
-  : CommitteeNamingStatus
+  explicitlyNamedByCommittee : CommitteeNamingStatus
+  categoryOnlyInCommitteeLetter : CommitteeNamingStatus
+  suppliedByLaterReporting : CommitteeNamingStatus
+  notInCommitteeLetter : CommitteeNamingStatus
+
 
 record CommitteeRosterEntry : Set where
   constructor committee-roster-entry

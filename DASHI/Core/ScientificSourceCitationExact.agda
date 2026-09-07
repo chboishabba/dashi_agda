@@ -31,18 +31,17 @@ data StableIdentifier : Set where
   institutionalDocumentId : String → StableIdentifier
   canonicalURL : String → StableIdentifier
   bibliographicFallback : String → StableIdentifier
-  : StableIdentifier
 
 data CitationRole : Set where
-  authorshipSource
-  inventorshipSource
-  projectRoleSource
-  institutionalRoleSource
-  researchAreaSource
-  relationshipClaimSource
-  rosterScopeSource
-  identityCandidateSource
-  : CitationRole
+  authorshipSource : CitationRole
+  inventorshipSource : CitationRole
+  projectRoleSource : CitationRole
+  institutionalRoleSource : CitationRole
+  researchAreaSource : CitationRole
+  relationshipClaimSource : CitationRole
+  rosterScopeSource : CitationRole
+  identityCandidateSource : CitationRole
+
 
 record ScientificCitation : Set where
   constructor scientific-citation
@@ -88,6 +87,8 @@ record ScientificCitationBoundary : Set where
     citationTransfersDASHITheoremAuthorship : Bool
     citationTransfersDASHITheoremAuthorshipIsFalse :
       citationTransfersDASHITheoremAuthorship ≡ false
+
+open ScientificCitationBoundary public
 
 canonicalScientificCitationBoundary : ScientificCitationBoundary
 canonicalScientificCitationBoundary =

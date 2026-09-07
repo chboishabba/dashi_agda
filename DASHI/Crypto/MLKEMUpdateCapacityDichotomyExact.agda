@@ -99,7 +99,8 @@ boundedRadiusUpdateConstraint certificate radius withinRadius =
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; cong; trans)
+import Data.Nat.Properties as NatP
 
 fullRankUpdateConstraint :
   (certificate : UpdateCapacityCertificate) →
@@ -107,9 +108,10 @@ fullRankUpdateConstraint :
   128 ≤ sourceSupport certificate * touches certificate
 fullRankUpdateConstraint certificate fullRank =
   subst
-    (λ sigma →
-      128 ≤ sourceSupport certificate * (touches certificate + sigma))
-    fullRank
+    (128 ≤_)
+    (cong (sourceSupport certificate *_)
+      (trans (cong (touches certificate +_) fullRank)
+             (NatP.+-identityʳ (touches certificate))))
     (uncertaintyUpdateBound certificate)
 
 ------------------------------------------------------------------------

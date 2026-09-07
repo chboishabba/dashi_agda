@@ -23,9 +23,9 @@ import DASHI.Moonshine.Base369Ternary27StratifiedFibreHolonomyExact as Base369St
 ------------------------------------------------------------------------
 
 data StabiliserFineState : Set where
-  baselineReflectionFibre
-  reviewedReflectionFibre
-  : StabiliserFineState
+  baselineReflectionFibre : StabiliserFineState
+  reviewedReflectionFibre : StabiliserFineState
+
 
 data CoarseSemanticStratum : Set where
   comparisonReflectionSemanticStratum : CoarseSemanticStratum
@@ -37,15 +37,15 @@ data GovernanceGateCode : Set where
   authorityPending authorityOpen : GovernanceGateCode
 
 data StabiliserNextMove : Set where
-  inspectAuthorityResidual
-  rankEligibleReflection
-  enactAuthorisedReflection
-  : StabiliserNextMove
+  inspectAuthorityResidual : StabiliserNextMove
+  rankEligibleReflection : StabiliserNextMove
+  enactAuthorisedReflection : StabiliserNextMove
+
 
 data StabiliserFutureCone : Set where
-  investigationCone
-  eligibleRankingCone
-  : StabiliserFutureCone
+  investigationCone : StabiliserFutureCone
+  eligibleRankingCone : StabiliserFutureCone
+
 
 coarseSemanticStratum : StabiliserFineState → CoarseSemanticStratum
 coarseSemanticStratum _ = comparisonReflectionSemanticStratum

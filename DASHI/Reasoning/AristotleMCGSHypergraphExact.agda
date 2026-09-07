@@ -53,6 +53,9 @@ sym≡ refl = refl
 trans≡ : ∀ {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
 trans≡ refl refl = refl
 
+subst≡ : ∀ {A : Set} (P : A → Set) {x y : A} → x ≡ y → P x → P y
+subst≡ P refl p = p
+
 ------------------------------------------------------------------------
 -- Search hypergraph.
 --
@@ -101,7 +104,7 @@ mutual
 terminalActionProved : ∀ (G : SearchHypergraph) (a : Action G)
                      → targets G a ≡ []
                      → ActionProved G a
-terminalActionProved G a refl = allTargets all[]
+terminalActionProved G a eq = allTargets (subst≡ (All (StateProved G)) (sym≡ eq) all[])
 
 -- A one-step terminal action proves its source state.
 terminalSourceProved : ∀ (G : SearchHypergraph) (a : Action G)
@@ -181,7 +184,8 @@ fibreProofTransport : ∀ {G : SearchHypergraph} {O : StateObserver G}
                         (x y : Fibre O o)
                     → StateProved G (fst x)
                     → StateProved G (fst y)
-fibreProofTransport Q x y = transportProof Q (sameFibre⇒equivalent x y)
+fibreProofTransport {G} {O} Q {o} x y px =
+  transportProof Q {s = fst x} {t = fst y} (sameFibre⇒equivalent {G} {O} {o} x y) px
 
 ------------------------------------------------------------------------
 -- Action equivalence induced by observable transitions.

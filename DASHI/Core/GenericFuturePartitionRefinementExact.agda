@@ -1,6 +1,7 @@
 module DASHI.Core.GenericFuturePartitionRefinementExact where
 
 open import DASHI.Core.Prelude
+open import Data.List.Base using (length)
 
 RefinesToDepth :
   ∀ {State Action Observation : Set} →
@@ -9,7 +10,7 @@ RefinesToDepth :
   (Action → State → State) →
   State → State → Set
 RefinesToDepth zero observe step left right = observe left ≡ observe right
-RefinesToDepth (suc depth) observe step left right =
+RefinesToDepth {Action = Action} (suc depth) observe step left right =
   (observe left ≡ observe right)
   × ((action : Action) →
       RefinesToDepth depth observe step (step action left) (step action right))
@@ -49,7 +50,7 @@ stableAtNext :
     {step : Action → State → State} →
   StableAt depth observe step →
   StableAt (suc depth) observe step
-stableAtNext {depth = depth} stable = stableAt nextForward refinementMonotone
+stableAtNext {depth = depth} {observe = observe} {step = step} stable = stableAt nextForward refinementMonotone
   where
     nextForward :
       ∀ {left right} →

@@ -255,6 +255,8 @@ record HistoryConditionedChoiceBoundary : Set where
     historySensitiveChoiceRequiresUniqueMicroscopicHistoryIsFalse :
       historySensitiveChoiceRequiresUniqueMicroscopicHistory ≡ false
 
+open HistoryConditionedChoiceBoundary public
+
 canonicalHistoryConditionedChoiceBoundary : HistoryConditionedChoiceBoundary
 canonicalHistoryConditionedChoiceBoundary =
   historyConditionedChoiceBoundary

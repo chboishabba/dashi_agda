@@ -9,19 +9,18 @@ open import Agda.Builtin.String using (String)
 -- NASA, "NASA 40 kW Fission Surface Power", NTRS 20250008475 (2025).
 
 data QualificationAxis : Set where
-  neutronFluence
-  gammaDose
-  temperatureRange
-  missionLifetime
-  measurementIntegrity
-  probabilityOfFailure
-  acceleratedLifeTest
-  physicsOfFailureModel
-  autonomousFaultDetection
-  autonomousControlResponse
-  communicationReliability
-  calibrationDrift
-  : QualificationAxis
+  neutronFluence : QualificationAxis
+  gammaDose : QualificationAxis
+  temperatureRange : QualificationAxis
+  missionLifetime : QualificationAxis
+  measurementIntegrity : QualificationAxis
+  probabilityOfFailure : QualificationAxis
+  acceleratedLifeTest : QualificationAxis
+  physicsOfFailureModel : QualificationAxis
+  autonomousFaultDetection : QualificationAxis
+  autonomousControlResponse : QualificationAxis
+  communicationReliability : QualificationAxis
+  calibrationDrift : QualificationAxis
 
 record QualificationEnvelope : Set where
   constructor qualification-envelope
@@ -73,16 +72,17 @@ record QualificationBoundary : Set where
     componentReliabilityImpliesClosedLoopFaultTolerance : Bool
     componentReliabilityImpliesClosedLoopFaultToleranceIsFalse : componentReliabilityImpliesClosedLoopFaultTolerance ≡ false
 
+open QualificationBoundary public
+
 canonicalQualificationBoundary : QualificationBoundary
 canonicalQualificationBoundary = qualification-boundary false refl false refl false refl false refl
 
 data QualificationReverseTarget : Set where
-  acquireComponentSpecificDoseTemperatureEnvelope
-  acquireCalibrationDriftCurve
-  acquireAcceleratedLifeModel
-  acquirePhysicsOfFailureParameters
-  acquireCombinedEnvironmentTest
-  acquireFaultInjectionResults
-  acquireSystemLevelFailureProbability
-  acquireAutonomousRecoveryDemonstration
-  : QualificationReverseTarget
+  acquireComponentSpecificDoseTemperatureEnvelope : QualificationReverseTarget
+  acquireCalibrationDriftCurve : QualificationReverseTarget
+  acquireAcceleratedLifeModel : QualificationReverseTarget
+  acquirePhysicsOfFailureParameters : QualificationReverseTarget
+  acquireCombinedEnvironmentTest : QualificationReverseTarget
+  acquireFaultInjectionResults : QualificationReverseTarget
+  acquireSystemLevelFailureProbability : QualificationReverseTarget
+  acquireAutonomousRecoveryDemonstration : QualificationReverseTarget

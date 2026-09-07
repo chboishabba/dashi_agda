@@ -12,9 +12,9 @@ record StreamObservation : Set where
   constructor stream-observation
   field
     candidate : StreamCandidate
-    distanceKpcApprox : ℕ
-    angularLengthDegMin angularLengthDegMax : ℕ
-    physicalWidthPcMin physicalWidthPcMax : ℕ
+    distanceKpcApprox : Nat
+    angularLengthDegMin angularLengthDegMax : Nat
+    physicalWidthPcMin physicalWidthPcMax : Nat
     sourceReference : String
 
 open StreamObservation public
@@ -34,6 +34,8 @@ record StellarStreamBoundary : Set where
     similarTracksProveCommonProgenitorIsFalse : similarTracksProveCommonProgenitor ≡ false
     streamGeometryCanConstrainGalacticPotential : Bool
     streamGeometryCanConstrainGalacticPotentialIsTrue : streamGeometryCanConstrainGalacticPotential ≡ true
+
+open StellarStreamBoundary public
 
 canonicalStellarStreamBoundary : StellarStreamBoundary
 canonicalStellarStreamBoundary = stellar-stream-boundary false refl false refl false refl true refl

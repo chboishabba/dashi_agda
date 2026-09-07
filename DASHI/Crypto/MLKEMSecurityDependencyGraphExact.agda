@@ -29,22 +29,22 @@ import DASHI.Crypto.PublicSecretFactorisationAttackExact as Attack
 ------------------------------------------------------------------------
 
 data SecurityNode : Set where
-  keyGenerationCorrect
-  encapsulationCorrect
-  decapsulationCorrect
-  generatedKeyAgreement
-  mlweSearchHard
-  mlweDecisionHard
-  parameterEstimatesAdequate
-  hashXofAssumptionsHold
-  ccaTransformSound
-  implicitRejectionRouteHidden
-  noExactPublicSecretRecovery
-  noProtectedPredicateLeak
-  challengeKeyIndistinguishable
-  keyOwnershipBound
-  transcriptIntegrityBound
-  keyConfirmationPasses
+  keyGenerationCorrect : SecurityNode
+  encapsulationCorrect : SecurityNode
+  decapsulationCorrect : SecurityNode
+  generatedKeyAgreement : SecurityNode
+  mlweSearchHard : SecurityNode
+  mlweDecisionHard : SecurityNode
+  parameterEstimatesAdequate : SecurityNode
+  hashXofAssumptionsHold : SecurityNode
+  ccaTransformSound : SecurityNode
+  implicitRejectionRouteHidden : SecurityNode
+  noExactPublicSecretRecovery : SecurityNode
+  noProtectedPredicateLeak : SecurityNode
+  challengeKeyIndistinguishable : SecurityNode
+  keyOwnershipBound : SecurityNode
+  transcriptIntegrityBound : SecurityNode
+  keyConfirmationPasses : SecurityNode
   applicationKeyEstablished : SecurityNode
 
 data DependsOn : SecurityNode → SecurityNode → Set where

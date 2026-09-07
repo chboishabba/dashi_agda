@@ -12,25 +12,25 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ScientificEvidenceKind : Set where
-  establishedBackgroundLaw
-  constitutiveOrEngineeringMechanism
-  sourceProposedMechanism
-  mathematicalReformulation
-  numericalMethod
-  benchmarkOrValidationTest
-  experimentalObservation
-  sourceInterpretation
-  preliminaryConsistencyClaim
-  unresolvedMechanism
-  : ScientificEvidenceKind
+  establishedBackgroundLaw : ScientificEvidenceKind
+  constitutiveOrEngineeringMechanism : ScientificEvidenceKind
+  sourceProposedMechanism : ScientificEvidenceKind
+  mathematicalReformulation : ScientificEvidenceKind
+  numericalMethod : ScientificEvidenceKind
+  benchmarkOrValidationTest : ScientificEvidenceKind
+  experimentalObservation : ScientificEvidenceKind
+  sourceInterpretation : ScientificEvidenceKind
+  preliminaryConsistencyClaim : ScientificEvidenceKind
+  unresolvedMechanism : ScientificEvidenceKind
+
 
 data ScientificStatus : Set where
-  established
-  sourceBacked
-  preliminary
-  unresolved
-  contradicted
-  : ScientificStatus
+  established : ScientificStatus
+  sourceBacked : ScientificStatus
+  preliminary : ScientificStatus
+  unresolved : ScientificStatus
+  contradicted : ScientificStatus
+
 
 record ScientificMechanismReceipt : Set where
   constructor scientific-mechanism-receipt
@@ -76,15 +76,15 @@ canonicalMechanismBoundary = mechanism-boundary
   false refl
 
 data ScientificReverseTarget : Set where
-  governingEquationReceipt
-  constitutiveParameterReceipt
-  numericalSchemeReceipt
-  benchmarkReceipt
-  experimentalProtocolReceipt
-  independentReplicationReceipt
-  uncertaintyReceipt
-  mechanismToObservationWeld
-  : ScientificReverseTarget
+  governingEquationReceipt : ScientificReverseTarget
+  constitutiveParameterReceipt : ScientificReverseTarget
+  numericalSchemeReceipt : ScientificReverseTarget
+  benchmarkReceipt : ScientificReverseTarget
+  experimentalProtocolReceipt : ScientificReverseTarget
+  independentReplicationReceipt : ScientificReverseTarget
+  uncertaintyReceipt : ScientificReverseTarget
+  mechanismToObservationWeld : ScientificReverseTarget
+
 
 record ScientificReverseObligation : Set where
   constructor scientific-reverse-obligation

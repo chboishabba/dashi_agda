@@ -13,25 +13,23 @@ open import Agda.Builtin.String using (String)
 -- DOI 10.1021/acs.jpca.4c03552.
 
 data TagCoordinate : Set where
-  tagSpecies
-  tagBindingEnergy
-  tagNumber
-  tagSite
-  trappingTemperature
-  dissociationThreshold
-  photonEnergy
-  actionYield
-  : TagCoordinate
+  tagSpecies : TagCoordinate
+  tagBindingEnergy : TagCoordinate
+  tagNumber : TagCoordinate
+  tagSite : TagCoordinate
+  trappingTemperature : TagCoordinate
+  dissociationThreshold : TagCoordinate
+  photonEnergy : TagCoordinate
+  actionYield : TagCoordinate
 
 data AssignmentCoordinate : Set where
-  conformerPopulation
-  candidateGeometry
-  harmonicFrequencyModel
-  anharmonicCorrection
-  intensityModel
-  tagPerturbationModel
-  holeBurningSeparation
-  : AssignmentCoordinate
+  conformerPopulation : AssignmentCoordinate
+  candidateGeometry : AssignmentCoordinate
+  harmonicFrequencyModel : AssignmentCoordinate
+  anharmonicCorrection : AssignmentCoordinate
+  intensityModel : AssignmentCoordinate
+  tagPerturbationModel : AssignmentCoordinate
+  holeBurningSeparation : AssignmentCoordinate
 
 record TagPerturbationProfile : Set where
   constructor tag-perturbation-profile
@@ -62,16 +60,17 @@ record ActionResponseBoundary : Set where
     weakTagCanStillPerturbMeasuredResponse : Bool
     weakTagCanStillPerturbMeasuredResponseIsTrue : weakTagCanStillPerturbMeasuredResponse ≡ true
 
+open ActionResponseBoundary public
+
 canonicalActionResponseBoundary : ActionResponseBoundary
 canonicalActionResponseBoundary = action-response-boundary false refl false refl false refl true refl
 
 data TagAssignmentReverseTarget : Set where
-  acquireTagBindingEnergy
-  acquireTagSiteDistribution
-  acquireTagNumberDependence
-  acquireTemperatureDependence
-  acquireIntensityResponseModel
-  acquireConformerSelectiveSpectrum
-  acquireAnharmonicCalculation
-  acquireCrossTagReplication
-  : TagAssignmentReverseTarget
+  acquireTagBindingEnergy : TagAssignmentReverseTarget
+  acquireTagSiteDistribution : TagAssignmentReverseTarget
+  acquireTagNumberDependence : TagAssignmentReverseTarget
+  acquireTemperatureDependence : TagAssignmentReverseTarget
+  acquireIntensityResponseModel : TagAssignmentReverseTarget
+  acquireConformerSelectiveSpectrum : TagAssignmentReverseTarget
+  acquireAnharmonicCalculation : TagAssignmentReverseTarget
+  acquireCrossTagReplication : TagAssignmentReverseTarget

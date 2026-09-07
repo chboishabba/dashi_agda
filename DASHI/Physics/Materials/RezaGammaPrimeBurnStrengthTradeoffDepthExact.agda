@@ -87,15 +87,16 @@ record RezaTradeoffBoundary : Set where
     processingHistoryMayAffectPropertyRealisation : Bool
     processingHistoryMayAffectPropertyRealisationIsTrue : processingHistoryMayAffectPropertyRealisation ≡ true
 
+open RezaTradeoffBoundary public
+
 canonicalRezaTradeoffBoundary : RezaTradeoffBoundary
 canonicalRezaTradeoffBoundary = reza-tradeoff-boundary false refl false refl false refl true refl
 
 data RezaReverseTarget : Set where
-  acquireGammaPrimeFraction
-  acquireHeatTreatment
-  acquireMicrostructure
-  acquireTensileProtocol
-  acquireOxygenBurnProtocol
-  acquireProcessingHistory
-  acquireComparativeAlloyBaseline
-  : RezaReverseTarget
+  acquireGammaPrimeFraction : RezaReverseTarget
+  acquireHeatTreatment : RezaReverseTarget
+  acquireMicrostructure : RezaReverseTarget
+  acquireTensileProtocol : RezaReverseTarget
+  acquireOxygenBurnProtocol : RezaReverseTarget
+  acquireProcessingHistory : RezaReverseTarget
+  acquireComparativeAlloyBaseline : RezaReverseTarget

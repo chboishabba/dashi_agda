@@ -12,28 +12,25 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ViewpointAxis : Set where
-  uapDisclosureSupport
-  suppressedOrExoticPropulsionBelief
-  transformativeFusionEnergyExpectation
-  secrecyOrClassificationCritique
-  willingSensitiveTechnicalDisclosure
-  hiddenMajorCapabilityBelief
-  : ViewpointAxis
+  uapDisclosureSupport : ViewpointAxis
+  suppressedOrExoticPropulsionBelief : ViewpointAxis
+  transformativeFusionEnergyExpectation : ViewpointAxis
+  secrecyOrClassificationCritique : ViewpointAxis
+  willingSensitiveTechnicalDisclosure : ViewpointAxis
+  hiddenMajorCapabilityBelief : ViewpointAxis
 
 data ViewpointProvenance : Set where
-  selfStated
-  contemporaneousDirectWitness
-  contemporaneousDocumentedParticipation
-  laterAttribution
-  mediaProjection
-  : ViewpointProvenance
+  selfStated : ViewpointProvenance
+  contemporaneousDirectWitness : ViewpointProvenance
+  contemporaneousDocumentedParticipation : ViewpointProvenance
+  laterAttribution : ViewpointProvenance
+  mediaProjection : ViewpointProvenance
 
 data ViewpointStatus : Set where
-  positive
-  negative
-  unknown
-  contradicted
-  : ViewpointStatus
+  positive : ViewpointStatus
+  negative : ViewpointStatus
+  unknown : ViewpointStatus
+  contradicted : ViewpointStatus
 
 record ViewpointReceipt : Set where
   constructor viewpoint-receipt

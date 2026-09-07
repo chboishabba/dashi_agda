@@ -27,7 +27,7 @@ record PublicMap : Set₁ where
 open PublicMap public
 
 ExactFibre : (system : PublicMap) → Public system → Hidden system → Set
-ExactFibre system public hidden = publish system hidden ≡ public
+ExactFibre system pub hidden = publish system hidden ≡ pub
 
 record InjectivePublicMap (system : PublicMap) : Set₁ where
   constructor injectivePublicMap

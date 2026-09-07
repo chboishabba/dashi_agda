@@ -16,28 +16,28 @@ import DASHI.Physics.ExoticGravity.SuperconductingGravityExperimentDesignProofSe
 ------------------------------------------------------------------------
 
 data SearchState : Set where
-  sourceNormalisedConstitutiveFinding
-  sourceCurrentLeaf
-  sourceStressEnergyLeaf
-  geometryLeaf
-  transitionLockLeaf
-  externalProbeLeaf
-  backgroundClosureLeaf
-  replicationLeaf
-  constitutiveResidualLeaf
-  : SearchState
+  sourceNormalisedConstitutiveFinding : SearchState
+  sourceCurrentLeaf : SearchState
+  sourceStressEnergyLeaf : SearchState
+  geometryLeaf : SearchState
+  transitionLockLeaf : SearchState
+  externalProbeLeaf : SearchState
+  backgroundClosureLeaf : SearchState
+  replicationLeaf : SearchState
+  constitutiveResidualLeaf : SearchState
+
 
 data SearchAction : Set where
-  assembleConstitutiveFinding
-  inspectSourceCurrent
-  inspectSourceStressEnergy
-  inspectGeometry
-  inspectTransitionLock
-  inspectExternalProbe
-  inspectBackgroundClosure
-  inspectReplication
-  inspectConstitutiveResidual
-  : SearchAction
+  assembleConstitutiveFinding : SearchAction
+  inspectSourceCurrent : SearchAction
+  inspectSourceStressEnergy : SearchAction
+  inspectGeometry : SearchAction
+  inspectTransitionLock : SearchAction
+  inspectExternalProbe : SearchAction
+  inspectBackgroundClosure : SearchAction
+  inspectReplication : SearchAction
+  inspectConstitutiveResidual : SearchAction
+
 
 actionSource : SearchAction → SearchState
 actionSource assembleConstitutiveFinding = sourceNormalisedConstitutiveFinding
@@ -89,13 +89,13 @@ constitutiveFindingRequiresEightLeaves = refl
 ------------------------------------------------------------------------
 
 data SearchModality : Set where
-  repositoryProofReuse
-  publicSourceReconstruction
-  calibrationExperiment
-  physicalMeasurement
-  perturbAndMeasure
-  independentReplication
-  : SearchModality
+  repositoryProofReuse : SearchModality
+  publicSourceReconstruction : SearchModality
+  calibrationExperiment : SearchModality
+  physicalMeasurement : SearchModality
+  perturbAndMeasure : SearchModality
+  independentReplication : SearchModality
+
 
 routeDisposition : SearchModality → Least.RouteDisposition
 routeDisposition repositoryProofReuse = Least.redirectedReuse
@@ -191,6 +191,8 @@ record ExperimentSearchHypergraphBoundary : Set where
     designBundleRemainsCanonicalDiscriminator : Bool
     designBundleRemainsCanonicalDiscriminatorIsTrue :
       designBundleRemainsCanonicalDiscriminator ≡ true
+
+open ExperimentSearchHypergraphBoundary public
 
 canonicalExperimentSearchHypergraphBoundary : ExperimentSearchHypergraphBoundary
 canonicalExperimentSearchHypergraphBoundary =

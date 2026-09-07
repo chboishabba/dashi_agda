@@ -23,7 +23,7 @@ data FoodPractice : Set where
 data LivityStrength : Set where
   associatedPractice strictItal : LivityStrength
 
-record ItalLivityProfile : Set where
+record ItalLivityProfile : Set₁ where
   constructor italLivityProfile
   field
     dimension : ItalDimension → Set
@@ -106,6 +106,8 @@ record ItalAttributionBoundary : Set where
 
     sourceSupportsPracticeVariation : Bool
     sourceSupportsPracticeVariationIsTrue : sourceSupportsPracticeVariation ≡ true
+
+open ItalAttributionBoundary public
 
 canonicalItalAttributionBoundary : ItalAttributionBoundary
 canonicalItalAttributionBoundary =

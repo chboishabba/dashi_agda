@@ -22,9 +22,9 @@ import DASHI.Culture.IntellectualReceptionCertificateRelativeDivergenceDepthExac
 ------------------------------------------------------------------------
 
 data ObservationDemandCode : Set where
-  exposedByStage2
-  beyondCurrentFiltration
-  : ObservationDemandCode
+  exposedByStage2 : ObservationDemandCode
+  beyondCurrentFiltration : ObservationDemandCode
+
 
 demandCode : Reuse.CertificateSupport → ObservationDemandCode
 demandCode Reuse.presentFutureSupport = beyondCurrentFiltration

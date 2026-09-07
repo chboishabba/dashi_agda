@@ -20,11 +20,11 @@ import DASHI.Culture.IntellectualReceptionSupportPartitionRetainReopenExact as P
 ------------------------------------------------------------------------
 
 data ObserverValue : Set where
-  presentValue
-  movementFutureValue
-  authorityEnabledValue
-  authorityDisabledValue
-  : ObserverValue
+  presentValue : ObserverValue
+  movementFutureValue : ObserverValue
+  authorityEnabledValue : ObserverValue
+  authorityDisabledValue : ObserverValue
+
 
 observeAtT1 :
   Temporal.TemporalReceptionHistory →

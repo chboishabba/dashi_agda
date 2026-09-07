@@ -25,23 +25,23 @@ data MobilityClass : Set where
   immobile restricted mobile volatile : MobilityClass
 
 data TransitionKind : Set where
-  chemicalReaction
-  phaseTransition
-  bindingTransition
-  transportTransition
-  opticalTransition
+  chemicalReaction : TransitionKind
+  phaseTransition : TransitionKind
+  bindingTransition : TransitionKind
+  transportTransition : TransitionKind
+  opticalTransition : TransitionKind
   mechanicalEvent : TransitionKind
 
 data Reversibility : Set where
   irreversible reversible conditionallyReversible : Reversibility
 
 data EvidenceStatus : Set where
-  literatureEstablished
-  patentDisclosed
-  directlyMeasured
-  inferredFromOutput
-  fitted
-  assumed
+  literatureEstablished : EvidenceStatus
+  patentDisclosed : EvidenceStatus
+  directlyMeasured : EvidenceStatus
+  inferredFromOutput : EvidenceStatus
+  fitted : EvidenceStatus
+  assumed : EvidenceStatus
   unresolved : EvidenceStatus
 
 data ParameterStatus : Set where
@@ -88,12 +88,12 @@ open StoichiometricTerm public
 -- Rate-law hierarchy.  Quantitative semantics are supplied externally.
 
 data RateLawKind : Set where
-  massAction
-  michaelisMenten
-  hill
-  arrhenius
-  empirical
-  intervalBounded
+  massAction : RateLawKind
+  michaelisMenten : RateLawKind
+  hill : RateLawKind
+  arrhenius : RateLawKind
+  empirical : RateLawKind
+  intervalBounded : RateLawKind
   unknownRateLaw : RateLawKind
 
 record RateLaw : Set where
@@ -224,11 +224,11 @@ record ChemicalEvent : Set where
 open ChemicalEvent public
 
 data ObligationKind : Set where
-  mustNeutralise
-  mustImmobilise
-  mustConsume
-  mustSealInterface
-  mustDischargeCharge
+  mustNeutralise : ObligationKind
+  mustImmobilise : ObligationKind
+  mustConsume : ObligationKind
+  mustSealInterface : ObligationKind
+  mustDischargeCharge : ObligationKind
   customObligation : ObligationKind
 
 record TransitionObligation : Set where

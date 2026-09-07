@@ -15,34 +15,34 @@ data ⊥ : Set where
 ¬ A = A → ⊥
 
 data FallacyAxis : Set where
-  formalForm
-  propositional
-  quantification
-  syllogistic
-  premiseGrounding
-  generalisation
-  causal
-  statistical
-  relevance
-  relevanceDiversion
-  semantic
-  scopeProjection
-  modal
-  temporal
-  authority
-  emotional
-  evidential
-  contradiction
-  pragmatic
-  normative
-  probabilistic
-  historical
-  agency
-  comparison
-  classification
-  resourceAccounting
-  optimisation
-  : FallacyAxis
+  formalForm : FallacyAxis
+  propositional : FallacyAxis
+  quantification : FallacyAxis
+  syllogistic : FallacyAxis
+  premiseGrounding : FallacyAxis
+  generalisation : FallacyAxis
+  causal : FallacyAxis
+  statistical : FallacyAxis
+  relevance : FallacyAxis
+  relevanceDiversion : FallacyAxis
+  semantic : FallacyAxis
+  scopeProjection : FallacyAxis
+  modal : FallacyAxis
+  temporal : FallacyAxis
+  authority : FallacyAxis
+  emotional : FallacyAxis
+  evidential : FallacyAxis
+  contradiction : FallacyAxis
+  pragmatic : FallacyAxis
+  normative : FallacyAxis
+  probabilistic : FallacyAxis
+  historical : FallacyAxis
+  agency : FallacyAxis
+  comparison : FallacyAxis
+  classification : FallacyAxis
+  resourceAccounting : FallacyAxis
+  optimisation : FallacyAxis
+
 
 record ArgumentCore : Set₁ where
   constructor argumentCore

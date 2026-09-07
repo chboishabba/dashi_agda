@@ -1,6 +1,7 @@
 module DASHI.Core.InverseProblemIdentifiabilityBidiExact where
 
 open import DASHI.Core.Prelude
+open import Relation.Binary.PropositionalEquality using (_≢_)
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
@@ -105,6 +106,8 @@ record InverseProblemBoundary : Set where
     addingIndependentChannelCanReduceDegeneracyIsTrue : addingIndependentChannelCanReduceDegeneracy ≡ true
     modelIdentifiabilityNeedsProof : Bool
     modelIdentifiabilityNeedsProofIsTrue : modelIdentifiabilityNeedsProof ≡ true
+
+open InverseProblemBoundary public
 
 canonicalInverseProblemBoundary : InverseProblemBoundary
 canonicalInverseProblemBoundary = inverse-problem-boundary

@@ -124,13 +124,13 @@ lateAcquireOccursInComposedPath =
 ------------------------------------------------------------------------
 
 data StructuralFibreCertificateArtifact : Set where
-  earlyAcquireEdgeArtifact
-  lateAcquireEdgeArtifact
-  earlyPathCertificate
-  latePathCertificate
-  earlyFutureCertificate
-  lateFutureCertificate
-  : StructuralFibreCertificateArtifact
+  earlyAcquireEdgeArtifact : StructuralFibreCertificateArtifact
+  lateAcquireEdgeArtifact : StructuralFibreCertificateArtifact
+  earlyPathCertificate : StructuralFibreCertificateArtifact
+  latePathCertificate : StructuralFibreCertificateArtifact
+  earlyFutureCertificate : StructuralFibreCertificateArtifact
+  lateFutureCertificate : StructuralFibreCertificateArtifact
+
 
 data StructuralDepends :
   StructuralFibreCertificateArtifact →

@@ -17,16 +17,14 @@ import DASHI.Physics.Plasma.MagneticTopologyHyperfabricExact as Plasma
 ------------------------------------------------------------------------
 
 data PlasmaEvolutionRegime : Set where
-  idealMHD
-  resistiveMHD
-  hallOrTwoFluid
-  collisionlessKinetic
-  : PlasmaEvolutionRegime
+  idealMHD : PlasmaEvolutionRegime
+  resistiveMHD : PlasmaEvolutionRegime
+  hallOrTwoFluid : PlasmaEvolutionRegime
+  collisionlessKinetic : PlasmaEvolutionRegime
 
 data TopologyMove : Set where
-  advectFrozenFlux
-  reconnectFieldLines
-  : TopologyMove
+  advectFrozenFlux : TopologyMove
+  reconnectFieldLines : TopologyMove
 
 record ReconnectionState : Set₁ where
   constructor reconnection-state
@@ -40,7 +38,7 @@ open ReconnectionState public
 
 record ReconnectionEnablement
     (regime : PlasmaEvolutionRegime)
-    (state : ReconnectionState) : Set where
+    (state : ReconnectionState) : Set₁ where
   constructor reconnection-enablement
   field
     NonIdealTermPresent : Set
@@ -52,7 +50,7 @@ open ReconnectionEnablement public
 
 record ReconnectionReceipt
     (regime : PlasmaEvolutionRegime)
-    (state : ReconnectionState) : Set where
+    (state : ReconnectionState) : Set₁ where
   constructor reconnection-receipt
   field
     enablement : ReconnectionEnablement regime state
@@ -121,6 +119,8 @@ record ReconnectionBidiBoundary : Set where
 
     reconnectionIsFRC : Bool
     reconnectionIsFRCIsFalse : reconnectionIsFRC ≡ false
+
+open ReconnectionBidiBoundary public
 
 canonicalReconnectionBidiBoundary : ReconnectionBidiBoundary
 canonicalReconnectionBidiBoundary =

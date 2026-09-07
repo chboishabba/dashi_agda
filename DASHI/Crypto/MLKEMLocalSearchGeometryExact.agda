@@ -50,11 +50,11 @@ record MLWESearchCollapseCertificate
     enumerate₀ : MLWE.Public state → LocalWitness₀
     enumerate₁ : MLWE.Public state → LocalWitness₁
     Reconciled : LocalWitness₀ → LocalWitness₁ → Set
-    reconcile : ∀ public → Reconciled (enumerate₀ public) (enumerate₁ public)
+    reconcile : ∀ pub → Reconciled (enumerate₀ pub) (enumerate₁ pub)
     recoverSecret : LocalWitness₀ → LocalWitness₁ → MLWE.Secret state
-    recoveredCandidatePlausible : ∀ public →
-      MLWE.CandidatePlausible state public
-        (recoverSecret (enumerate₀ public) (enumerate₁ public))
+    recoveredCandidatePlausible : ∀ pub →
+      MLWE.CandidatePlausible state pub
+        (recoverSecret (enumerate₀ pub) (enumerate₁ pub))
 
 open MLWESearchCollapseCertificate public
 
@@ -65,8 +65,8 @@ collapseCertificateGivesCandidateSearch :
   MLWE.CandidateSearch state
 collapseCertificateGivesCandidateSearch certificate =
   MLWE.candidateSearch
-    (λ public → recoverSecret certificate
-      (enumerate₀ certificate public) (enumerate₁ certificate public))
+    (λ pub → recoverSecret certificate
+      (enumerate₀ certificate pub) (enumerate₁ certificate pub))
     (recoveredCandidatePlausible certificate)
 
 -- CandidateSearch returns a plausible secret only. Exact identification still

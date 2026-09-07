@@ -24,31 +24,31 @@ import DASHI.Culture.RastafariItalLivityExact as Ital
 ------------------------------------------------------------------------
 
 data PracticeHistory : Set where
-  rastafariItalHistory
-  indigenousKnowledgeHistory
-  scientificManagementHistory
-  : PracticeHistory
+  rastafariItalHistory : PracticeHistory
+  indigenousKnowledgeHistory : PracticeHistory
+  scientificManagementHistory : PracticeHistory
+
 
 data SharedPracticeSurface : Set where
   ecologicalCareSurface : SharedPracticeSurface
 
 data AuthorityPosition : Set where
-  communityCustodialAuthority
-  householdPracticeAuthority
-  institutionalTechnicalAuthority
-  : AuthorityPosition
+  communityCustodialAuthority : AuthorityPosition
+  householdPracticeAuthority : AuthorityPosition
+  institutionalTechnicalAuthority : AuthorityPosition
+
 
 data PermissionPosition : Set where
-  communityGovernedPermission
-  practitionerPermission
-  institutionalPermission
-  : PermissionPosition
+  communityGovernedPermission : PermissionPosition
+  practitionerPermission : PermissionPosition
+  institutionalPermission : PermissionPosition
+
 
 data ObligationPosition : Set where
-  reciprocalCareObligation
-  livityPracticeObligation
-  reportingComplianceObligation
-  : ObligationPosition
+  reciprocalCareObligation : ObligationPosition
+  livityPracticeObligation : ObligationPosition
+  reportingComplianceObligation : ObligationPosition
+
 
 data PowerPosition : Set where
   lowInstitutionalPower highInstitutionalPower : PowerPosition
@@ -259,3 +259,5 @@ canonicalItalIndigenousIntersectionalBoundary =
     false refl
     false refl
     true refl
+
+open ItalIndigenousIntersectionalBoundary public

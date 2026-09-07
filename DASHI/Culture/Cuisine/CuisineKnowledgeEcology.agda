@@ -148,7 +148,7 @@ record CuisineKnowledgeEcology : Set₁ where
     sourceAtlas : Source.AttributedSourceAtlas
     processBoundary : Process.MoleProcessArchitectureBoundary
     situatedBoundary : Situated.SituatedMoleWorldBoundary
-    controlledSuccessBoundary : Success.ControlledSuccessBoundary
+    successBoundary : Success.ControlledSuccessBoundary
     archive : Disclosure.FullArchive String
     projectionPolicy : Disclosure.ProjectionPolicy String
     publicArtifact : Disclosure.PublicArtifact String

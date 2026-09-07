@@ -42,8 +42,8 @@ encodeInjective {transform} {x} {y} sameEncoded =
 exactTransformPreservesDistinctness :
   ∀ {transform : ExactCoordinateTransform} {x y : Carrier transform} →
   (x ≡ y → ⊥) → encode transform x ≡ encode transform y → ⊥
-exactTransformPreservesDistinctness different sameEncoded =
-  different (encodeInjective sameEncoded)
+exactTransformPreservesDistinctness {transform = transform} different sameEncoded =
+  different (encodeInjective {transform = transform} sameEncoded)
 
 decodeInjective :
   ∀ {transform : ExactCoordinateTransform} {x y : Coordinates transform} →

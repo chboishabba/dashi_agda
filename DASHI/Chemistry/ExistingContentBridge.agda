@@ -18,14 +18,14 @@ import DASHI.Chemistry.TransitionKernel as Kernel
 -- the existing quantitative-law, wet-lab, or authority boundaries.
 
 data ExistingChemistryContent : Set where
-  stoichiometryMoleculeCount
-  lawOfMassAction
-  beerLambertOptics
-  nernstElectrochemistry
-  spectroscopyObservable
-  bondingPreservation
-  wetLabReplication
-  chemistryBiologyObligationIndex
+  stoichiometryMoleculeCount : ExistingChemistryContent
+  lawOfMassAction : ExistingChemistryContent
+  beerLambertOptics : ExistingChemistryContent
+  nernstElectrochemistry : ExistingChemistryContent
+  spectroscopyObservable : ExistingChemistryContent
+  bondingPreservation : ExistingChemistryContent
+  wetLabReplication : ExistingChemistryContent
+  chemistryBiologyObligationIndex : ExistingChemistryContent
   neurochemicalAtomicCandidateSurface : ExistingChemistryContent
 
 record ExistingContentReference : Set where

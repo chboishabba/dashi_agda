@@ -34,10 +34,10 @@ import DASHI.Core.TernaryRoleCarrierExact as Ternary
 ------------------------------------------------------------------------
 
 data LacanFregeRole : Set where
-  zeroOfInexistence
-  unaryTraitS1
-  retroactiveSecondS2
-  : LacanFregeRole
+  zeroOfInexistence : LacanFregeRole
+  unaryTraitS1 : LacanFregeRole
+  retroactiveSecondS2 : LacanFregeRole
+
 
 -- Preferred clarified alias: this value is a Frege/genesis second-count role.
 fregeRetroactiveSecondCount : LacanFregeRole
@@ -56,10 +56,10 @@ lacanFregeChart = Ternary.role-chart lacanFregeRole
 ------------------------------------------------------------------------
 
 data LacanianComparisonRole : Set where
-  lackPosition
-  phallicOnePosition
-  secondSignifierPosition
-  : LacanianComparisonRole
+  lackPosition : LacanianComparisonRole
+  phallicOnePosition : LacanianComparisonRole
+  secondSignifierPosition : LacanianComparisonRole
+
 
 lacanianComparisonRole :
   Ternary.TernaryRoleCode → LacanianComparisonRole

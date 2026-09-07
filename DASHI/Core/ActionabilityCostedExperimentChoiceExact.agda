@@ -15,11 +15,11 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data InformationMoveKind : Set where
-  takeMeasurement
-  increaseFidelity
-  perturbAndMeasure
-  replicateMeasurement
-  : InformationMoveKind
+  takeMeasurement : InformationMoveKind
+  increaseFidelity : InformationMoveKind
+  perturbAndMeasure : InformationMoveKind
+  replicateMeasurement : InformationMoveKind
+
 
 record InformationMove : Set where
   constructor informationMove

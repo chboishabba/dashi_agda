@@ -32,13 +32,13 @@ import DASHI.Core.ZeroValueFibreNontrivialityExact as ZeroFibre
 ------------------------------------------------------------------------
 
 data ZeroLikeRole : Set where
-  lacanianInexistenceRole
-  irigarayanNeitherRole
-  anzalduanBorderRole
-  bhabhaThirdSpaceRole
-  badiouVoidRole
-  coarseObserverZeroRole
-  : ZeroLikeRole
+  lacanianInexistenceRole : ZeroLikeRole
+  irigarayanNeitherRole : ZeroLikeRole
+  anzalduanBorderRole : ZeroLikeRole
+  bhabhaThirdSpaceRole : ZeroLikeRole
+  badiouVoidRole : ZeroLikeRole
+  coarseObserverZeroRole : ZeroLikeRole
+
 
 lacanZero≠irigarayNeither :
   lacanianInexistenceRole ≡ irigarayanNeitherRole → ⊥

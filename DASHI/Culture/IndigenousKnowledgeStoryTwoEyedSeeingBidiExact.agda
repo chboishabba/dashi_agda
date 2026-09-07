@@ -60,31 +60,44 @@ import DASHI.Environment.LESSituatedObservationInteractionExact as Situated
 ------------------------------------------------------------------------
 
 data KnowledgeContent : Set where
-  medicinalPlantHelps seasonalIndicator repairWillHold : KnowledgeContent
+  medicinalPlantHelps : KnowledgeContent
+  seasonalIndicator : KnowledgeContent
+  repairWillHold : KnowledgeContent
 
 data PlaceContext : Set where
-  countryPlace laboratoryPlace : PlaceContext
+  countryPlace : PlaceContext
+  laboratoryPlace : PlaceContext
 
 data PeopleRelation : Set where
-  custodialRelation investigatorRelation : PeopleRelation
+  custodialRelation : PeopleRelation
+  investigatorRelation : PeopleRelation
 
 data PracticeContext : Set where
-  livedPractice controlledExperiment : PracticeContext
+  livedPractice : PracticeContext
+  controlledExperiment : PracticeContext
 
 data TimeContext : Set where
-  seasonalTime assayTime : TimeContext
+  seasonalTime : TimeContext
+  assayTime : TimeContext
 
 data AuthorityStatus : Set where
-  custodialAuthority researchAuthority : AuthorityStatus
+  custodialAuthority : AuthorityStatus
+  researchAuthority : AuthorityStatus
 
 data PermissionStatus : Set where
-  restrictedPermission openResearchPermission : PermissionStatus
+  restrictedPermission : PermissionStatus
+  openResearchPermission : PermissionStatus
 
 data ObligationStatus : Set where
-  reciprocalCare replicationReporting : ObligationStatus
+  reciprocalCare : ObligationStatus
+  replicationReporting : ObligationStatus
 
 data TransmissionMode : Set where
-  story song demonstration directInstruction paper : TransmissionMode
+  story : TransmissionMode
+  song : TransmissionMode
+  demonstration : TransmissionMode
+  directInstruction : TransmissionMode
+  paper : TransmissionMode
 
 record KnowledgeCarrier : Set where
   constructor knowledgeCarrier
@@ -163,10 +176,12 @@ data StorySurface : Set where
   samePublicStory : StorySurface
 
 data InterpretationLayer : Set where
-  publicInterpretation restrictedInterpretation : InterpretationLayer
+  publicInterpretation : InterpretationLayer
+  restrictedInterpretation : InterpretationLayer
 
 data ListenerStanding : Set where
-  publicListener authorisedCustodian : ListenerStanding
+  publicListener : ListenerStanding
+  authorisedCustodian : ListenerStanding
 
 heardStory : ListenerStanding -> StorySurface
 heardStory _ = samePublicStory
@@ -183,8 +198,11 @@ hearingStoryCannotRecoverPermittedInterpretation =
       publicListener authorisedCustodian refl (λ ()))
 
 data NarrativeRole : Set where
-  memoryCarrier transmissionCarrier interpretationCarrier governanceCarrier
-  : NarrativeRole
+  memoryCarrier : NarrativeRole
+  transmissionCarrier : NarrativeRole
+  interpretationCarrier : NarrativeRole
+  governanceCarrier : NarrativeRole
+
 
 narrativeCalibrationReuse : String
 narrativeCalibrationReuse = Narrative.narrativeCalibrationReading
@@ -229,17 +247,31 @@ sharedObservationStillCannotRecoverProvenance =
 ------------------------------------------------------------------------
 
 data TranslationStage : Set where
-  situatedKnowledgeStage extractedClaimStage assayStage mechanismStage
-  clinicalEvidenceStage manufacturedMedicineStage : TranslationStage
+  situatedKnowledgeStage : TranslationStage
+  extractedClaimStage : TranslationStage
+  assayStage : TranslationStage
+  mechanismStage : TranslationStage
+  clinicalEvidenceStage : TranslationStage
+  manufacturedMedicineStage : TranslationStage
 
 data TranslationEffect : Set where
-  preservesCoordinate addsCoordinate erasesCoordinate unresolvedCoordinate
-  : TranslationEffect
+  preservesCoordinate : TranslationEffect
+  addsCoordinate : TranslationEffect
+  erasesCoordinate : TranslationEffect
+  unresolvedCoordinate : TranslationEffect
+
 
 data KnowledgeCoordinate : Set where
-  contentCoordinate placeCoordinate relationCoordinate provenanceCoordinate
-  authorityCoordinate permissionCoordinate obligationCoordinate
-  mechanismCoordinate doseCoordinate toxicityCoordinate : KnowledgeCoordinate
+  contentCoordinate : KnowledgeCoordinate
+  placeCoordinate : KnowledgeCoordinate
+  relationCoordinate : KnowledgeCoordinate
+  provenanceCoordinate : KnowledgeCoordinate
+  authorityCoordinate : KnowledgeCoordinate
+  permissionCoordinate : KnowledgeCoordinate
+  obligationCoordinate : KnowledgeCoordinate
+  mechanismCoordinate : KnowledgeCoordinate
+  doseCoordinate : KnowledgeCoordinate
+  toxicityCoordinate : KnowledgeCoordinate
 
 selectedTranslationEffect : TranslationStage -> KnowledgeCoordinate -> TranslationEffect
 selectedTranslationEffect situatedKnowledgeStage contentCoordinate = preservesCoordinate
@@ -321,18 +353,26 @@ manufacturedDrugDoesNotByItselfRestoreProvenance = refl
 ------------------------------------------------------------------------
 
 data MedicinalTranslation : Set where
-  situatedUseToCandidate candidateToAssay assayToMechanism mechanismToClinical
+  situatedUseToCandidate : MedicinalTranslation
+  candidateToAssay : MedicinalTranslation
+  assayToMechanism : MedicinalTranslation
+  mechanismToClinical : MedicinalTranslation
   clinicalToManufactured : MedicinalTranslation
 
 data AccessStatus : Set where
-  noAccessReceipt priorInformedConsentReceipt : AccessStatus
+  noAccessReceipt : AccessStatus
+  priorInformedConsentReceipt : AccessStatus
 
 data BenefitSharingStatus : Set where
-  noBenefitSharingReceipt mutuallyAgreedBenefitSharingReceipt : BenefitSharingStatus
+  noBenefitSharingReceipt : BenefitSharingStatus
+  mutuallyAgreedBenefitSharingReceipt : BenefitSharingStatus
 
 data ScientificResultStatus : Set where
-  candidateOnly activeCompoundFound mechanismCharacterised clinicalSupport
-  : ScientificResultStatus
+  candidateOnly : ScientificResultStatus
+  activeCompoundFound : ScientificResultStatus
+  mechanismCharacterised : ScientificResultStatus
+  clinicalSupport : ScientificResultStatus
+
 
 record MedicinalKnowledgeTranslationReceipt : Set where
   constructor medicinalKnowledgeTranslationReceipt
@@ -384,12 +424,16 @@ record NagoyaStylePromotionGate
 ------------------------------------------------------------------------
 
 data AspirinHistoryStage : Set where
-  ancientWillowUse salicinIsolation salicylicAcidChemistry
-  acetylsalicylicAcidManufacture mechanismElucidation : AspirinHistoryStage
+  ancientWillowUse : AspirinHistoryStage
+  salicinIsolation : AspirinHistoryStage
+  salicylicAcidChemistry : AspirinHistoryStage
+  acetylsalicylicAcidManufacture : AspirinHistoryStage
+  mechanismElucidation : AspirinHistoryStage
 
 data AspirinHistoricalReading : Set where
-  longTraditionalPlantUseLineage singleIndigenousDiscoveryLineage
-  : AspirinHistoricalReading
+  longTraditionalPlantUseLineage : AspirinHistoricalReading
+  singleIndigenousDiscoveryLineage : AspirinHistoricalReading
+
 
 aspirinBoundedReading : AspirinHistoricalReading
 aspirinBoundedReading = longTraditionalPlantUseLineage
@@ -404,20 +448,29 @@ singleIndigenousDiscoveryIsNotBoundedAspirinReading ()
 ------------------------------------------------------------------------
 
 data ProblemKnowledgeDimension : Set where
-  knowledgeThat knowledgeHow knowledgeWhen knowledgeWhere : ProblemKnowledgeDimension
+  knowledgeThat : ProblemKnowledgeDimension
+  knowledgeHow : ProblemKnowledgeDimension
+  knowledgeWhen : ProblemKnowledgeDimension
+  knowledgeWhere : ProblemKnowledgeDimension
 
 data ProblemResource : Set where
-  countryKnowledge modernTechnology embodiedSkill availableMaterial
-  socialCoordination storyMemory : ProblemResource
+  countryKnowledge : ProblemResource
+  modernTechnology : ProblemResource
+  embodiedSkill : ProblemResource
+  availableMaterial : ProblemResource
+  socialCoordination : ProblemResource
+  storyMemory : ProblemResource
 
 data RepairContext : Set where
-  remoteCountryRepair workshopRepair : RepairContext
+  remoteCountryRepair : RepairContext
+  workshopRepair : RepairContext
 
 data RepairOutcome : Set where
   workingRepair : RepairOutcome
 
 data RepairMethodSignature : Set where
-  situatedImprovisedMethod canonicalWorkshopMethod : RepairMethodSignature
+  situatedImprovisedMethod : RepairMethodSignature
+  canonicalWorkshopMethod : RepairMethodSignature
 
 repairOutcome : RepairContext -> RepairOutcome
 repairOutcome _ = workingRepair
@@ -530,3 +583,5 @@ canonicalIndigenousKnowledgeStoryTwoEyedBoundary =
   indigenousKnowledgeStoryTwoEyedBoundary
     false refl false refl false refl false refl false refl false refl false refl
     false refl false refl false refl false refl false refl false refl false refl
+
+open IndigenousKnowledgeStoryTwoEyedBoundary public

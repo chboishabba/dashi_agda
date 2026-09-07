@@ -37,34 +37,34 @@ import DASHI.Culture.WittgensteinUsePracticeSourceBridgeExact as Wittgenstein
 ------------------------------------------------------------------------
 
 data ReceptionState : Set where
-  sourceOccurrence
-  interpretedReception
-  institutionalReception
-  interpretationAfterInstitution
-  institutionAfterInterpretation
-  : ReceptionState
+  sourceOccurrence : ReceptionState
+  interpretedReception : ReceptionState
+  institutionalReception : ReceptionState
+  interpretationAfterInstitution : ReceptionState
+  institutionAfterInterpretation : ReceptionState
+
 
 data ReceptionStratum : Set where
-  sourceStratum
-  publicInterpretationStratum
-  institutionalReceptionStratum
-  transmittedInstitutionalStratum
-  : ReceptionStratum
+  sourceStratum : ReceptionStratum
+  publicInterpretationStratum : ReceptionStratum
+  institutionalReceptionStratum : ReceptionStratum
+  transmittedInstitutionalStratum : ReceptionStratum
+
 
 data ReceptionMeaningCode : Set where
-  sourceMeaning
-  interpretedMeaning
-  institutionalMeaning
-  interpretationAfterInstitutionMeaning
-  institutionAfterInterpretationMeaning
-  : ReceptionMeaningCode
+  sourceMeaning : ReceptionMeaningCode
+  interpretedMeaning : ReceptionMeaningCode
+  institutionalMeaning : ReceptionMeaningCode
+  interpretationAfterInstitutionMeaning : ReceptionMeaningCode
+  institutionAfterInterpretationMeaning : ReceptionMeaningCode
+
 
 data AttributionAuthorityCode : Set where
-  sourceAuthority
-  interpretiveAuthority
-  institutionalAuthority
-  mixedLaterAuthority
-  : AttributionAuthorityCode
+  sourceAuthority : AttributionAuthorityCode
+  interpretiveAuthority : AttributionAuthorityCode
+  institutionalAuthority : AttributionAuthorityCode
+  mixedLaterAuthority : AttributionAuthorityCode
+
 
 receptionStratum : ReceptionState → ReceptionStratum
 receptionStratum sourceOccurrence = sourceStratum
@@ -126,17 +126,17 @@ orderedEndpointsDifferInMeaning ()
 ------------------------------------------------------------------------
 
 data ReceptionOrder : Set where
-  interpretThenInstitutionalise
-  institutionaliseThenInterpret
-  : ReceptionOrder
+  interpretThenInstitutionalise : ReceptionOrder
+  institutionaliseThenInterpret : ReceptionOrder
+
 
 data CoarseReceptionOrderSurface : Set where
   sameTransmittedInstitutionalSurface : CoarseReceptionOrderSurface
 
 data FineReceptionOrderEndpoint : Set where
-  interpretationAfterInstitutionEndpoint
-  institutionAfterInterpretationEndpoint
-  : FineReceptionOrderEndpoint
+  interpretationAfterInstitutionEndpoint : FineReceptionOrderEndpoint
+  institutionAfterInterpretationEndpoint : FineReceptionOrderEndpoint
+
 
 coarseOrderSurface : ReceptionOrder → CoarseReceptionOrderSurface
 coarseOrderSurface _ = sameTransmittedInstitutionalSurface

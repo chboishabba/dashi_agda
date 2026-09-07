@@ -104,12 +104,12 @@ structuredAuthorityResidualReconstructs =
 ------------------------------------------------------------------------
 
 data AuthorityProbe : Set where
-  recoverAuthoritySource
-  recoverAuthorityScope
-  checkAuthorityAdmissibility
-  recoverAuthorityProvenance
-  authorityResidualClosed
-  : AuthorityProbe
+  recoverAuthoritySource : AuthorityProbe
+  recoverAuthorityScope : AuthorityProbe
+  checkAuthorityAdmissibility : AuthorityProbe
+  recoverAuthorityProvenance : AuthorityProbe
+  authorityResidualClosed : AuthorityProbe
+
 
 nextAuthorityProbe : AuthorityResidual → AuthorityProbe
 nextAuthorityProbe
@@ -153,15 +153,15 @@ allRecoveredClosesResidualSearch = refl
 ------------------------------------------------------------------------
 
 data AuthorityArtifact : Set where
-  sourceResidualArtifact
-  scopeResidualArtifact
-  admissibilityResidualArtifact
-  provenanceResidualArtifact
-  authorityCertificateArtifact
-  eligibilityCertificateArtifact
-  actionConeCertificateArtifact
-  semanticLawfulnessCertificateArtifact
-  : AuthorityArtifact
+  sourceResidualArtifact : AuthorityArtifact
+  scopeResidualArtifact : AuthorityArtifact
+  admissibilityResidualArtifact : AuthorityArtifact
+  provenanceResidualArtifact : AuthorityArtifact
+  authorityCertificateArtifact : AuthorityArtifact
+  eligibilityCertificateArtifact : AuthorityArtifact
+  actionConeCertificateArtifact : AuthorityArtifact
+  semanticLawfulnessCertificateArtifact : AuthorityArtifact
+
 
 data AuthorityDepends : AuthorityArtifact → AuthorityArtifact → Set where
   sourceFeedsAuthority :

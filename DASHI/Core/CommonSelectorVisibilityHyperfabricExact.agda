@@ -19,25 +19,25 @@ import DASHI.Core.ScientificSourceCitationExact as Citation
 ------------------------------------------------------------------------
 
 data VisibilityAxis : Set where
-  publicScientificWork
-  publicInstitutionalRole
-  programmeOrContractVisibility
-  personnelSystemVisibility
-  facilityAccessVisibility
-  securityOrClearanceVisibility
-  professionalNetworkVisibility
-  conferenceOrPublicationVisibility
-  publicMediaVisibility
-  unresolvedVisibilityAxis
-  : VisibilityAxis
+  publicScientificWork : VisibilityAxis
+  publicInstitutionalRole : VisibilityAxis
+  programmeOrContractVisibility : VisibilityAxis
+  personnelSystemVisibility : VisibilityAxis
+  facilityAccessVisibility : VisibilityAxis
+  securityOrClearanceVisibility : VisibilityAxis
+  professionalNetworkVisibility : VisibilityAxis
+  conferenceOrPublicationVisibility : VisibilityAxis
+  publicMediaVisibility : VisibilityAxis
+  unresolvedVisibilityAxis : VisibilityAxis
+
 
 data VisibilityStrength : Set where
-  primaryPublicReceipt
-  primaryInstitutionalReceipt
-  primaryProgrammeReceipt
-  boundedSecondaryReceipt
-  unresolvedReceipt
-  : VisibilityStrength
+  primaryPublicReceipt : VisibilityStrength
+  primaryInstitutionalReceipt : VisibilityStrength
+  primaryProgrammeReceipt : VisibilityStrength
+  boundedSecondaryReceipt : VisibilityStrength
+  unresolvedReceipt : VisibilityStrength
+
 
 record VisibilityReceipt : Set where
   constructor visibility-receipt
@@ -56,18 +56,18 @@ open VisibilityReceipt public
 ------------------------------------------------------------------------
 
 data SelectorClass : Set where
-  publicInternetObserver
-  institutionalPersonnelObserver
-  programmeManagementObserver
-  contractorOrProcurementObserver
-  facilityAccessObserver
-  securityAdministrationObserver
-  professionalNetworkObserver
-  intelligenceCollectionObserver
-  unresolvedSelectorClass
-  : SelectorClass
+  publicInternetObserver : SelectorClass
+  institutionalPersonnelObserver : SelectorClass
+  programmeManagementObserver : SelectorClass
+  contractorOrProcurementObserver : SelectorClass
+  facilityAccessObserver : SelectorClass
+  securityAdministrationObserver : SelectorClass
+  professionalNetworkObserver : SelectorClass
+  intelligenceCollectionObserver : SelectorClass
+  unresolvedSelectorClass : SelectorClass
 
-record SelectorCapability : Set where
+
+record SelectorCapability : Set₁ where
   constructor selector-capability
   field
     selectorClass : SelectorClass
@@ -193,6 +193,8 @@ record CommonSelectorBoundary : Set where
     selectorMustBeOneNaturalPerson : Bool
     selectorMustBeOneNaturalPersonIsFalse :
       selectorMustBeOneNaturalPerson ≡ false
+
+open CommonSelectorBoundary public
 
 canonicalCommonSelectorBoundary : CommonSelectorBoundary
 canonicalCommonSelectorBoundary =

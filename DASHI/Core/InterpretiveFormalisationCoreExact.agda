@@ -13,26 +13,26 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 data TranslationRole : Set where
-  directEncoding
-  boundedInterpretation
-  retrospectiveAnalogy
-  conceptualCalibration
-  : TranslationRole
+  directEncoding : TranslationRole
+  boundedInterpretation : TranslationRole
+  retrospectiveAnalogy : TranslationRole
+  conceptualCalibration : TranslationRole
+
 
 data ClaimScope : Set where
-  formalOnly
-  sourceInterpretive
-  empiricalCandidate
-  normativeCandidate
-  : ClaimScope
+  formalOnly : ClaimScope
+  sourceInterpretive : ClaimScope
+  empiricalCandidate : ClaimScope
+  normativeCandidate : ClaimScope
+
 
 data FormalisationCompatibility : Set where
-  compatibleBySource
-  boundedInterpretiveUse
-  methodologicalTension
-  contested
-  unknown
-  : FormalisationCompatibility
+  compatibleBySource : FormalisationCompatibility
+  boundedInterpretiveUse : FormalisationCompatibility
+  methodologicalTension : FormalisationCompatibility
+  contested : FormalisationCompatibility
+  unknown : FormalisationCompatibility
+
 
 record InterpretiveFormalisation : Set₁ where
   constructor interpretive-formalisation

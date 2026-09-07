@@ -25,7 +25,8 @@ module DASHI.Crypto.MLKEMProtectedLabelReadoutFactorisationExact where
 -- values.  Cardinality/bit accounting can be layered on afterwards.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong; trans; sym)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
 record ProtectedReadoutFactorisation : Set₁ where
   constructor protected-readout-factorisation

@@ -14,12 +14,12 @@ import DASHI.Culture.CulturalColdWarSourceAtlasExact as Atlas
 ------------------------------------------------------------------------
 
 data HistoricalActor : Set where
-  cia
-  congressForCulturalFreedom
-  rockefellerBrothersFund
-  museumOfModernArt
-  momaInternationalProgram
-  : HistoricalActor
+  cia : HistoricalActor
+  congressForCulturalFreedom : HistoricalActor
+  rockefellerBrothersFund : HistoricalActor
+  museumOfModernArt : HistoricalActor
+  momaInternationalProgram : HistoricalActor
+
 
 data HistoricalExhibition : Set where
   newAmericanPainting1958to1959 : HistoricalExhibition
@@ -118,9 +118,13 @@ canonicalSourcedAbstractExpressionismCirculationReceipt =
 -- Exact non-derivability in this admitted graph.
 ------------------------------------------------------------------------
 
+noEdgeFromCCF : ∀ {target} → DocumentedFundingEdge congressForCulturalFreedom target → ⊥
+noEdgeFromCCF ()
+
 ccfCannotReachInternationalProgramInDeclaredFundingGraph :
   DocumentedFundingPath congressForCulturalFreedom momaInternationalProgram → ⊥
-ccfCannotReachInternationalProgramInDeclaredFundingGraph ()
+ccfCannotReachInternationalProgramInDeclaredFundingGraph (edge then rest) =
+  noEdgeFromCCF edge
 
 ciaCannotReachInternationalProgramInDeclaredFundingGraph :
   DocumentedFundingPath cia momaInternationalProgram → ⊥
@@ -131,7 +135,8 @@ ciaCannotReachInternationalProgramInDeclaredFundingGraph
 ciaCannotReachMoMAInDeclaredFundingGraph :
   DocumentedFundingPath cia museumOfModernArt → ⊥
 ciaCannotReachMoMAInDeclaredFundingGraph
-  (ciaFundsCCF then ())
+  (ciaFundsCCF then (edge then rest)) =
+  noEdgeFromCCF edge
 
 ------------------------------------------------------------------------
 -- No-promotion claims: graph adjacency does not manufacture missing edges.
@@ -164,6 +169,8 @@ record CulturalColdWarDocumentedFundingGraphBoundary : Set where
     ciaToMoMAPathDerivableHere : Bool
     missingEdgeMayBeCreatedBySharedContext : Bool
     nonDerivabilityIsUniversalHistoricalImpossibilityClaim : Bool
+
+open CulturalColdWarDocumentedFundingGraphBoundary public
 
 canonicalCulturalColdWarDocumentedFundingGraphBoundary :
   CulturalColdWarDocumentedFundingGraphBoundary

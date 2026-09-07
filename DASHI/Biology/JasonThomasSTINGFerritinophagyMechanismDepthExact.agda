@@ -7,25 +7,23 @@ open import Agda.Builtin.String using (String)
 -- and Dowdle et al. 2014 VPS34/NCOA4 ferritinophagy work.
 
 data STINGStage : Set where
-  stimulus
-  STINGPathway
-  IRF3Translocation
-  NFkBTranslocation
-  downstreamCytokineReadout
-  kinaseTargetDeconvolution
-  chemicalProteomics
-  geneticValidation
-  : STINGStage
+  stimulus : STINGStage
+  STINGPathway : STINGStage
+  IRF3Translocation : STINGStage
+  NFkBTranslocation : STINGStage
+  downstreamCytokineReadout : STINGStage
+  kinaseTargetDeconvolution : STINGStage
+  chemicalProteomics : STINGStage
+  geneticValidation : STINGStage
 
 data FerritinophagyStage : Set where
-  VPS34Activity
-  autophagosomeFormation
-  NCOA4CargoRecognition
-  ferritinDelivery
-  lysosomalDegradation
-  ironRelease
-  ironHomeostasis
-  : FerritinophagyStage
+  VPS34Activity : FerritinophagyStage
+  autophagosomeFormation : FerritinophagyStage
+  NCOA4CargoRecognition : FerritinophagyStage
+  ferritinDelivery : FerritinophagyStage
+  lysosomalDegradation : FerritinophagyStage
+  ironRelease : FerritinophagyStage
+  ironHomeostasis : FerritinophagyStage
 
 record STINGAssayLogic : Set where
   constructor sting-assay-logic
@@ -79,17 +77,18 @@ record ThomasMechanismDepthBoundary : Set where
     NCOA4FerritinPathwaySupportsFerritinIronReleaseMechanism : Bool
     NCOA4FerritinPathwaySupportsFerritinIronReleaseMechanismIsTrue : NCOA4FerritinPathwaySupportsFerritinIronReleaseMechanism ≡ true
 
+open ThomasMechanismDepthBoundary public
+
 canonicalThomasMechanismDepthBoundary : ThomasMechanismDepthBoundary
 canonicalThomasMechanismDepthBoundary = thomas-mechanism-depth-boundary false refl false refl false refl true refl
 
 data ThomasReverseTarget : Set where
-  acquirePrimaryImageThresholds
-  acquireDownstreamCytokineAssay
-  acquireKinaseSelectivityPanel
-  acquireChemicalProteomicsCompetition
-  acquireGeneticPerturbation
-  acquireVPS34SelectivityReceipt
-  acquireNCOA4FerritinBindingReceipt
-  acquireLysosomalDeliveryReceipt
-  acquireIronAvailabilityReadout
-  : ThomasReverseTarget
+  acquirePrimaryImageThresholds : ThomasReverseTarget
+  acquireDownstreamCytokineAssay : ThomasReverseTarget
+  acquireKinaseSelectivityPanel : ThomasReverseTarget
+  acquireChemicalProteomicsCompetition : ThomasReverseTarget
+  acquireGeneticPerturbation : ThomasReverseTarget
+  acquireVPS34SelectivityReceipt : ThomasReverseTarget
+  acquireNCOA4FerritinBindingReceipt : ThomasReverseTarget
+  acquireLysosomalDeliveryReceipt : ThomasReverseTarget
+  acquireIronAvailabilityReadout : ThomasReverseTarget

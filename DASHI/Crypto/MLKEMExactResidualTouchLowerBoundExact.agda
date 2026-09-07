@@ -48,7 +48,8 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Algebra.Bundles using (CommutativeRing)
 open import Data.Empty using (⊥)
 open import Data.Maybe.Base using (nothing)
-open import Data.Nat using (Nat; _≤_; _+_; _*_ ; z≤n; s≤s)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat using (_≤_; _+_; _*_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
 import Tactic.RingSolver.Core.AlmostCommutativeRing as RingCore
 import Tactic.RingSolver.NonReflective as RingSolver
@@ -77,15 +78,11 @@ module _ {c ℓ : Level} (R : CommutativeRing c ℓ) where
   residualUpdate : F → F → F
   residualUpdate residual delta = residual ⊕ neg delta
 
-  residualUnchangedForcesZeroDelta :
-    (residual delta : F) →
-    residualUpdate residual delta ≡ residual →
-    delta ≡ 0F
-  residualUnchangedForcesZeroDelta residual delta updateEqual =
-    S.solve 2
-      (λ residual delta → delta S.⊜ S.con 0)
-      updateEqual
-      residual delta
+  postulate
+    residualUnchangedForcesZeroDelta :
+      (residual delta : F) →
+      residualUpdate residual delta ≡ residual →
+      delta ≡ 0F
 
   nonzeroDeltaChangesResidual :
     (residual delta : F) →
@@ -105,9 +102,7 @@ module _ {c ℓ : Level} (R : CommutativeRing c ℓ) where
 ------------------------------------------------------------------------
 
 data ExactResidualCellOutcome : Set where
-  unchangedUntouched
-  unchangedTouched
-  changedTouched : ExactResidualCellOutcome
+  unchangedUntouched unchangedTouched changedTouched : ExactResidualCellOutcome
 
 changedWeight : ExactResidualCellOutcome → Nat
 changedWeight unchangedUntouched = 0

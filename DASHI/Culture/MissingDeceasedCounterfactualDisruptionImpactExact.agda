@@ -1,6 +1,7 @@
 module DASHI.Culture.MissingDeceasedCounterfactualDisruptionImpactExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 
 import DASHI.Core.CounterfactualDisruptionImpactExact as Impact
 
@@ -91,9 +92,9 @@ crossRosterDepartureControl = Impact.matched-departure-control
 ------------------------------------------------------------------------
 
 data ImpactAcquisitionPriority : Set where
-  immediateImpactSearch
-  secondaryImpactSearch
-  : ImpactAcquisitionPriority
+  immediateImpactSearch : ImpactAcquisitionPriority
+  secondaryImpactSearch : ImpactAcquisitionPriority
+
 
 record ImpactAcquisitionTarget : Set where
   constructor impact-acquisition-target
@@ -138,6 +139,8 @@ record CurrentImpactAssessment : Set where
     ordinaryMatchedImpactWouldWeakenKeyPersonSelection : Bool
     ordinaryMatchedImpactWouldWeakenKeyPersonSelectionIsTrue :
       ordinaryMatchedImpactWouldWeakenKeyPersonSelection ≡ true
+
+open CurrentImpactAssessment public
 
 canonicalCurrentImpactAssessment : CurrentImpactAssessment
 canonicalCurrentImpactAssessment = current-impact-assessment

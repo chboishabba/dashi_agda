@@ -2,6 +2,8 @@ module Ontology.DNA.ChemistrySheetTransport where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_)
+open import Relation.Binary.PropositionalEquality using (sym)
+open import Data.Nat.Properties using (+-assoc; +-identityʳ)
 
 open import Ontology.DNA.Supervoxel4Adic using (FlatDNA256)
 open import Ontology.DNA.ChemistryConcrete using
@@ -34,7 +36,7 @@ towerTransportEnergy xs =
 chemistryTransportExact : ∀ xs →
   towerTransportEnergy xs ≡ chemistryHamiltonian xs
 chemistryTransportExact xs with sheetCoordinatesOf xs
-... | sh = refl
+... | sh = sym (+-assoc (localMotifEnergy xs) (sheetBandEnergy sh) (crossBandEnergy sh))
 
 record ChemistryTransportLedger : Set where
   constructor transportLedger
@@ -51,7 +53,7 @@ chemistryTransportLedger xs = transportLedger
   (signedSheetProxyEnergy (towerAnalysis xs))
   0
   (towerTransportEnergy xs)
-  refl
+  (sym (+-identityʳ (towerTransportEnergy xs)))
 
 -- The present transport is exact because it retains the local motif residual
 -- explicitly.  Promotion to a purely band-local Hamiltonian requires a

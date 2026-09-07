@@ -19,11 +19,10 @@ data BeamCandidateSite : Set where
   siteA siteB siteC siteD siteE : BeamCandidateSite
 
 data FiniteFailure : Set where
-  nominal
-  failA
-  failB
-  failC
-  : FiniteFailure
+  nominal : FiniteFailure
+  failA : FiniteFailure
+  failB : FiniteFailure
+  failC : FiniteFailure
 
 record FinitePlacementScore : Set where
   constructor finite-placement-score
@@ -78,6 +77,8 @@ record HistoricalBeamPlacementAcquisition : Set where
     numericPlacementTableLocatedIsFalse : numericPlacementTableLocated ≡ false
     requiredNextReceipt : String
 
+open HistoricalBeamPlacementAcquisition public
+
 mccaslandHistoricalBeamFrontier : HistoricalBeamPlacementAcquisition
 mccaslandHistoricalBeamFrontier =
   historical-beam-placement-acquisition
@@ -100,6 +101,8 @@ record McCaslandFiniteEngineBoundary : Set where
     sourceTableRequiredForHistoricalPlacementClaim : Bool
     sourceTableRequiredForHistoricalPlacementClaimIsTrue :
       sourceTableRequiredForHistoricalPlacementClaim ≡ true
+
+open McCaslandFiniteEngineBoundary public
 
 canonicalMcCaslandFiniteEngineBoundary : McCaslandFiniteEngineBoundary
 canonicalMcCaslandFiniteEngineBoundary =

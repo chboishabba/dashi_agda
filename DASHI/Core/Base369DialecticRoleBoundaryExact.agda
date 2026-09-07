@@ -26,12 +26,12 @@ import DASHI.Reasoning.DialecticMotifKernel as Motif
 ------------------------------------------------------------------------
 
 data ThreeSixNineRole : Set where
-  arithmeticCarrierRole
-  historicalDialecticRole
-  stageIndexRole
-  operationalMotifRole
-  traversalControlRole
-  : ThreeSixNineRole
+  arithmeticCarrierRole : ThreeSixNineRole
+  historicalDialecticRole : ThreeSixNineRole
+  stageIndexRole : ThreeSixNineRole
+  operationalMotifRole : ThreeSixNineRole
+  traversalControlRole : ThreeSixNineRole
+
 
 arithmetic≠dialectic : arithmeticCarrierRole ≡ historicalDialecticRole → ⊥
 arithmetic≠dialectic ()

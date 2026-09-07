@@ -39,20 +39,20 @@ import DASHI.Mathematics.NumberTheory.RiemannXiSymmetryExact as RH
 ------------------------------------------------------------------------
 
 data NumberRole : Set where
-  dyadicScreenCut
-  historicalDecimalComparison
-  decimalTenPercentPowerupRole
-  branchingCriticalAvailability
-  logisticFoldCriticalPoint
-  riemannCriticalRealPart
-  historicalAffineRefinementFixedPoint
-  threeAdicMinusHalfRole
-  tenAdicTwoFiveHistoryRole
-  jCoarseFineFrequencyRole
-  decimalStratificationRole
-  decimalJRetentionRole
-  triadicJDepthRole
-  : NumberRole
+  dyadicScreenCut : NumberRole
+  historicalDecimalComparison : NumberRole
+  decimalTenPercentPowerupRole : NumberRole
+  branchingCriticalAvailability : NumberRole
+  logisticFoldCriticalPoint : NumberRole
+  riemannCriticalRealPart : NumberRole
+  historicalAffineRefinementFixedPoint : NumberRole
+  threeAdicMinusHalfRole : NumberRole
+  tenAdicTwoFiveHistoryRole : NumberRole
+  jCoarseFineFrequencyRole : NumberRole
+  decimalStratificationRole : NumberRole
+  decimalJRetentionRole : NumberRole
+  triadicJDepthRole : NumberRole
+
 
 halfBranchingRoleDistinctFromLogisticRole :
   branchingCriticalAvailability ≡ logisticFoldCriticalPoint → ⊥
@@ -116,11 +116,11 @@ nineDecimalDepthTwo = Decimal.nineDepthTwo
 ------------------------------------------------------------------------
 
 data EvidenceRelation : Set where
-  exactTheorem
-  historicalSourceMeaning
-  retrospectiveAnalogy
-  currentRepoOwner
-  : EvidenceRelation
+  exactTheorem : EvidenceRelation
+  historicalSourceMeaning : EvidenceRelation
+  retrospectiveAnalogy : EvidenceRelation
+  currentRepoOwner : EvidenceRelation
+
 
 record NumberProvenanceEntry : Set where
   constructor number-provenance-entry

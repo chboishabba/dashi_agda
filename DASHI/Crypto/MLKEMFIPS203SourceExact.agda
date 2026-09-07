@@ -108,9 +108,7 @@ failure1024 = refl
 ------------------------------------------------------------------------
 
 data FIPS203Algorithm : Set where
-  kPkeKeyGen kPkeEncrypt kPkeDecrypt
-  mlKemKeyGenInternal mlKemEncapsInternal mlKemDecapsInternal
-  mlKemKeyGen mlKemEncaps mlKemDecaps : FIPS203Algorithm
+  kPkeKeyGen kPkeEncrypt kPkeDecrypt mlKemKeyGenInternal mlKemEncapsInternal mlKemDecapsInternal mlKemKeyGen mlKemEncaps mlKemDecaps : FIPS203Algorithm
 
 algorithm13IsKPKEKeyGen : FIPS203Algorithm
 algorithm13IsKPKEKeyGen = kPkeKeyGen

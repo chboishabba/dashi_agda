@@ -80,18 +80,19 @@ record LoureiroTearingBoundary : Set where
     tearingCanModifyInertialRangeCascadeBeforeDissipation : Bool
     tearingCanModifyInertialRangeCascadeBeforeDissipationIsTrue : tearingCanModifyInertialRangeCascadeBeforeDissipation ≡ true
 
+open LoureiroTearingBoundary public
+
 canonicalLoureiroTearingBoundary : LoureiroTearingBoundary
 canonicalLoureiroTearingBoundary = loureiro-tearing-boundary false refl false refl false refl false refl true refl
 
 data TearingReverseTarget : Set where
-  acquireOuterScaleLundquist
-  acquireSheetAspectRatio
-  acquireTearingDispersionRelation
-  acquireNonlinearTurnoverRate
-  acquireCriticalScaleComparison
-  acquireSpectrumClosure
-  acquireDissipationModel
-  : TearingReverseTarget
+  acquireOuterScaleLundquist : TearingReverseTarget
+  acquireSheetAspectRatio : TearingReverseTarget
+  acquireTearingDispersionRelation : TearingReverseTarget
+  acquireNonlinearTurnoverRate : TearingReverseTarget
+  acquireCriticalScaleComparison : TearingReverseTarget
+  acquireSpectrumClosure : TearingReverseTarget
+  acquireDissipationModel : TearingReverseTarget
 
 record TearingReverseObligation : Set where
   constructor tearing-reverse-obligation

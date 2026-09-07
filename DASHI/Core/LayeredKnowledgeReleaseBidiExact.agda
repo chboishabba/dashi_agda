@@ -12,23 +12,23 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ReleaseLayer : Set where
-  governanceRestriction
-  publicTechnicalReport
-  underlyingData
-  physicalHardware
-  implementationKnowHow
-  derivedPrivateResults
-  : ReleaseLayer
+  governanceRestriction : ReleaseLayer
+  publicTechnicalReport : ReleaseLayer
+  underlyingData : ReleaseLayer
+  physicalHardware : ReleaseLayer
+  implementationKnowHow : ReleaseLayer
+  derivedPrivateResults : ReleaseLayer
+
 
 data LayerState : Set where
-  bounded
-  reviewOrApprovalRequired
-  public
-  privateCustody
-  publicCustody
-  endedRestriction
-  unknown
-  : LayerState
+  bounded : LayerState
+  reviewOrApprovalRequired : LayerState
+  publicState : LayerState
+  privateCustody : LayerState
+  publicCustody : LayerState
+  endedRestriction : LayerState
+  unknown : LayerState
+
 
 record LayerReceipt : Set where
   constructor layer-receipt
@@ -47,7 +47,7 @@ record LayeredReleaseProfile : Set where
     programmeName : String
     governance : LayerReceipt
     report : LayerReceipt
-    data : LayerReceipt
+    dataLayer : LayerReceipt
     hardware : LayerReceipt
     knowHow : LayerReceipt
     derivatives : LayerReceipt
@@ -64,11 +64,11 @@ open LayeredReleaseProfile public
 record PartialReleaseWitness (profile : LayeredReleaseProfile) : Set where
   constructor partial-release-witness
   field
-    reportPublic : state (report profile) ≡ public
+    reportPublic : state (report profile) ≡ publicState
     underlyingNotAllPublic :
-      (state (data profile) ≡ privateCustody) ⊎
-      (state (data profile) ≡ bounded) ⊎
-      (state (data profile) ≡ unknown) ⊎
+      (state (dataLayer profile) ≡ privateCustody) ⊎
+      (state (dataLayer profile) ≡ bounded) ⊎
+      (state (dataLayer profile) ≡ unknown) ⊎
       (state (hardware profile) ≡ privateCustody) ⊎
       (state (hardware profile) ≡ bounded) ⊎
       (state (hardware profile) ≡ unknown) ⊎
@@ -88,10 +88,10 @@ open PartialReleaseWitness public
 record DocumentedPartialReleaseWitness (profile : LayeredReleaseProfile) : Set where
   constructor documented-partial-release-witness
   field
-    reportPublic : state (report profile) ≡ public
+    reportPublic : state (report profile) ≡ publicState
     documentedUnderlyingBoundary :
-      (state (data profile) ≡ privateCustody) ⊎
-      (state (data profile) ≡ bounded) ⊎
+      (state (dataLayer profile) ≡ privateCustody) ⊎
+      (state (dataLayer profile) ≡ bounded) ⊎
       (state (hardware profile) ≡ privateCustody) ⊎
       (state (hardware profile) ≡ bounded) ⊎
       (state (knowHow profile) ≡ privateCustody) ⊎
@@ -115,14 +115,14 @@ open GovernanceRelaxationWitness public
 ------------------------------------------------------------------------
 
 data LayeredReleaseAcquisitionTarget : Set where
-  governanceStateReceipt
-  reportReleaseReceipt
-  dataReleaseReceipt
-  hardwareAccessReceipt
-  knowHowReleaseReceipt
-  derivativeReleaseReceipt
-  sameLayerSameObjectWeld
-  : LayeredReleaseAcquisitionTarget
+  governanceStateReceipt : LayeredReleaseAcquisitionTarget
+  reportReleaseReceipt : LayeredReleaseAcquisitionTarget
+  dataReleaseReceipt : LayeredReleaseAcquisitionTarget
+  hardwareAccessReceipt : LayeredReleaseAcquisitionTarget
+  knowHowReleaseReceipt : LayeredReleaseAcquisitionTarget
+  derivativeReleaseReceipt : LayeredReleaseAcquisitionTarget
+  sameLayerSameObjectWeld : LayeredReleaseAcquisitionTarget
+
 
 record LayeredReleaseReverseObligation : Set where
   constructor layered-release-reverse-obligation

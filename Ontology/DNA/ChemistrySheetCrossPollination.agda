@@ -94,6 +94,7 @@ record ChemistryCoordinateEnergySpine : Set₁ where
     encodeExact : Raw → ExactCoordinates
     decodeExact : ExactCoordinates → Raw
     feature : Raw → Feature
+    encodeFeature : Raw → Feature
     signedCoordinates : Raw → SignedCoordinates
     localThermoEnergy : Raw → Nat
     aggregateChemistryEnergy : Raw → Nat
@@ -101,7 +102,7 @@ record ChemistryCoordinateEnergySpine : Set₁ where
 
     exactRoundTrip : (x : Raw) → decodeExact (encodeExact x) ≡ x
     featureCompatibility :
-      (x : Raw) → feature x ≡ encodeFeature256 x
+      (x : Raw) → feature x ≡ encodeFeature x
 
 chemistryCoordinateEnergySpine : ChemistryCoordinateEnergySpine
 chemistryCoordinateEnergySpine = record
@@ -112,6 +113,7 @@ chemistryCoordinateEnergySpine = record
   ; encodeExact = encodeUV
   ; decodeExact = decodeUV
   ; feature = featureMapConcrete
+  ; encodeFeature = encodeFeature256
   ; signedCoordinates = sheetCoordinatesOf
   ; localThermoEnergy = thermoKernelConcrete
   ; aggregateChemistryEnergy = chemistryHamiltonian

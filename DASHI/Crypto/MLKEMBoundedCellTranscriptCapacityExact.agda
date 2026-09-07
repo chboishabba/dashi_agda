@@ -17,6 +17,7 @@ module DASHI.Crypto.MLKEMBoundedCellTranscriptCapacityExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat using (_≤_; _*_; _^_)
 import Data.Nat.Properties as NatP
 

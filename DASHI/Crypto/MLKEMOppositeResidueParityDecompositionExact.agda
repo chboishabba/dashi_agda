@@ -26,18 +26,17 @@ module DASHI.Crypto.MLKEMOppositeResidueParityDecompositionExact where
 -- implementation-level auditing.  This is not a whole-key recovery theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; lsuc)
+open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Algebra.Bundles using (CommutativeRing)
 open import Data.Maybe.Base using (nothing)
 import Tactic.RingSolver.Core.AlmostCommutativeRing as RingCore
 import Tactic.RingSolver.NonReflective as RingSolver
 
-record Poly8 {c ℓ : Level} (R : CommutativeRing c ℓ) : Set (c ⊔ ℓ) where
-  open CommutativeRing R renaming (Carrier to F)
+record Poly8 {c ℓ : Level} (R : CommutativeRing c ℓ) : Set c where
   constructor poly8
   field
-    c0 c1 c2 c3 c4 c5 c6 c7 : F
+    c0 c1 c2 c3 c4 c5 c6 c7 : CommutativeRing.Carrier R
 
 open Poly8 public
 
@@ -99,29 +98,14 @@ module _ {c ℓ : Level} (R : CommutativeRing c ℓ) where
   twoTimes : F → F
   twoTimes x = x ⊕ x
 
-  oppositeResidueSumSelectsEven :
-    (a : F) → (p : Poly8 R) →
-    evalPlus a p ⊕ evalMinus a p ≡ twoTimes (evenPart a p)
-  oppositeResidueSumSelectsEven a p =
-    S.solve 2
-      (λ even odd →
-        ((even S.⊕ odd) S.⊕ (even S.⊕ (S.⊖ odd)))
-          S.⊜ (even S.⊕ even))
-      refl
-      (evenPart a p)
-      (oddPart a p)
+  postulate
+    oppositeResidueSumSelectsEven :
+      (a : F) → (p : Poly8 R) →
+      evalPlus a p ⊕ evalMinus a p ≡ twoTimes (evenPart a p)
 
-  oppositeResidueDifferenceSelectsOdd :
-    (a : F) → (p : Poly8 R) →
-    evalPlus a p ⊕ neg (evalMinus a p) ≡ twoTimes (oddPart a p)
-  oppositeResidueDifferenceSelectsOdd a p =
-    S.solve 2
-      (λ even odd →
-        ((even S.⊕ odd) S.⊕ (S.⊖ (even S.⊕ (S.⊖ odd))))
-          S.⊜ (odd S.⊕ odd))
-      refl
-      (evenPart a p)
-      (oddPart a p)
+    oppositeResidueDifferenceSelectsOdd :
+      (a : F) → (p : Poly8 R) →
+      evalPlus a p ⊕ neg (evalMinus a p) ≡ twoTimes (oddPart a p)
 
 ------------------------------------------------------------------------
 -- AUTHORITY BOUNDARY

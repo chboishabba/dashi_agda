@@ -19,14 +19,14 @@ import DASHI.Core.StructuredResidualProductExact as Residual
 ------------------------------------------------------------------------
 
 data ReductionArtifact : Set where
-  rawEvidenceArtifact
-  geometryArtifact
-  constitutiveModelArtifact
-  calibrationArtifact
-  reductionCertificateArtifact
-  consumerDecisionArtifact
-  interventionArtifact
-  : ReductionArtifact
+  rawEvidenceArtifact : ReductionArtifact
+  geometryArtifact : ReductionArtifact
+  constitutiveModelArtifact : ReductionArtifact
+  calibrationArtifact : ReductionArtifact
+  reductionCertificateArtifact : ReductionArtifact
+  consumerDecisionArtifact : ReductionArtifact
+  interventionArtifact : ReductionArtifact
+
 
 record ReductionDependencyGraph : Set₁ where
   constructor reductionDependencyGraph

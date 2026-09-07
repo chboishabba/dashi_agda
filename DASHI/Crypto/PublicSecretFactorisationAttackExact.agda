@@ -93,7 +93,7 @@ fullInversionImpliesSecretRecovery :
   ExactPublicSecretRecovery system
 fullInversionImpliesSecretRecovery {system} inversion =
   exactPublicSecretRecovery
-    (λ public → secretLabel system (invert inversion public))
+    (λ pub → secretLabel system (invert inversion pub))
     (λ fine → cong (secretLabel system) (inverseOnImage inversion fine))
 
 ------------------------------------------------------------------------
@@ -119,7 +119,7 @@ exactRecoveryLeaksEveryPredicate :
   PublicPredicateLeak system predicate
 exactRecoveryLeaksEveryPredicate {system} recovery predicate =
   publicPredicateLeak
-    (λ public → predicate (recover recovery public))
+    (λ pub → predicate (recover recovery pub))
     (λ fine → cong predicate (factors recovery fine))
 
 ------------------------------------------------------------------------
@@ -146,7 +146,7 @@ factorisationImpliesExactRecovery :
   ExactPublicSecretRecovery system
 factorisationImpliesExactRecovery factorisation =
   exactPublicSecretRecovery
-    (λ public → decode factorisation (quotient factorisation public))
+    (λ pub → decode factorisation (quotient factorisation pub))
     (factorLaw factorisation)
 
 fibreSplitRefutesPublicSecretFactorisation :

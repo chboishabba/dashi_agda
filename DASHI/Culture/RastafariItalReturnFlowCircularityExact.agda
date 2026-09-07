@@ -195,3 +195,5 @@ canonicalItalReturnFlowBoundary =
     false refl
     true refl
     true refl
+
+open ItalReturnFlowBoundary public

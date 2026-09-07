@@ -12,10 +12,10 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data SourceRole : Set where
-  institutionalHistoryRole
-  archivalExhibitionRole
-  intelligenceHistoryRole
-  : SourceRole
+  institutionalHistoryRole : SourceRole
+  archivalExhibitionRole : SourceRole
+  intelligenceHistoryRole : SourceRole
+
 
 record HistoricalSourceClaim : Set where
   constructor historical-source-claim

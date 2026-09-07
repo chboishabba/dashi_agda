@@ -62,7 +62,7 @@ record SearchFactorisation : Set₁ where
     enumerateLeft : Public → LeftWitness
     enumerateRight : Public → RightWitness
     Compatible : LeftWitness → RightWitness → Set
-    compatible : ∀ public → Compatible (enumerateLeft public) (enumerateRight public)
+    compatible : ∀ pub → Compatible (enumerateLeft pub) (enumerateRight pub)
     assemble : LeftWitness → RightWitness → Hidden
 open SearchFactorisation public
 

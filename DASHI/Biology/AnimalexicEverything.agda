@@ -15,6 +15,7 @@ open import DASHI.Biology.DrosophilaRealBenchmarkAuthorityExact
 open import DASHI.Biology.DrosophilaMaleCNSTier1ReceiptsExact
 open import DASHI.Biology.DrosophilaGautheyCompactArchiveReceiptExact
 open import DASHI.Biology.DrosophilaGautheyRegistrationStagingExact
+open import DASHI.Biology.DrosophilaGautheyROIAlignmentBoundaryExact
 open import DASHI.Core.SufficientSupportFamilyInvalidationExact
 open import DASHI.Core.ProvenanceClosureIndependenceExact
 open import DASHI.Core.ExperimentLanguageEquivalenceExact

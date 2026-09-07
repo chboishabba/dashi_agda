@@ -14,15 +14,15 @@ import DASHI.Core.CriticalKnowledgeConcentrationBidiExact as K
 ------------------------------------------------------------------------
 
 data ExternalisationStage : Set where
-  problemStatement
-  physicalOrTechnicalModel
-  algorithmOrDesignMethod
-  implementationArchitecture
-  benchmarkOrValidation
-  failureModeOrLimitations
-  dataOrSourceArtifact
-  publicInterpretation
-  : ExternalisationStage
+  problemStatement : ExternalisationStage
+  physicalOrTechnicalModel : ExternalisationStage
+  algorithmOrDesignMethod : ExternalisationStage
+  implementationArchitecture : ExternalisationStage
+  benchmarkOrValidation : ExternalisationStage
+  failureModeOrLimitations : ExternalisationStage
+  dataOrSourceArtifact : ExternalisationStage
+  publicInterpretation : ExternalisationStage
+
 
 ------------------------------------------------------------------------
 -- Small local list-membership witness; avoids depending on a repo-global name.
@@ -89,12 +89,12 @@ canonicalExternalisationBoundary = externalisation-boundary
 ------------------------------------------------------------------------
 
 data ExternalisationAcquisitionTarget : Set where
-  stageReceipt
-  artifactReceipt
-  limitationOrFailureReceipt
-  matchedExternalisationControls
-  observerOfExternalisationDepth
-  : ExternalisationAcquisitionTarget
+  stageReceipt : ExternalisationAcquisitionTarget
+  artifactReceipt : ExternalisationAcquisitionTarget
+  limitationOrFailureReceipt : ExternalisationAcquisitionTarget
+  matchedExternalisationControls : ExternalisationAcquisitionTarget
+  observerOfExternalisationDepth : ExternalisationAcquisitionTarget
+
 
 record ExternalisationReverseObligation : Set where
   constructor externalisation-reverse-obligation

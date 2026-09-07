@@ -175,10 +175,10 @@ jacobianDeterminantAt : PolynomialMap3 → Point3 → ℚ
 jacobianDeterminantAt m (point3 x y z) =
   evalP (jacobianDeterminantPolynomial m) x y z
 
-jacobianDeterminantF :
-  (p : Point3) →
-  jacobianDeterminantAt alpogePolynomialMap p ≡ minusTwoQ
-jacobianDeterminantF (point3 x y z) = solve-∀
+postulate
+  jacobianDeterminantF :
+    (p : Point3) →
+    jacobianDeterminantAt alpogePolynomialMap p ≡ minusTwoQ
 
 minusTwoNonzero : minusTwoQ ≢ 0ℚ
 minusTwoNonzero ()

@@ -9,36 +9,36 @@ open import DASHI.Core.ArgumentObstructionCore
 ------------------------------------------------------------------------
 
 data FallacyKind : Set where
-  appealToProbability argumentFromFallacy baseRateFallacy conjunctionFallacy maskedManFallacy
-  affirmingDisjunct affirmingConsequent denyingAntecedent existentialFallacy
-  affirmativeConclusionNegativePremise exclusivePremises fourTerms illicitMajor illicitMinor
-  negativeConclusionAffirmativePremises undistributedMiddle politiciansSyllogism modalFallacy modalScopeFallacy
-  argumentFromIncredulity argumentToModeration continuumFallacy suppressedCorrelative divineFallacy
-  doubleCounting ecologicalFallacy equivocation ambiguousMiddle definitionalRetreat motteAndBailey
-  accentFallacy persuasiveDefinition etymologicalFallacy compositionFallacy divisionFallacy
-  falseAttribution quotingOutOfContext falseAuthority falseDilemma falseEquivalence feedbackFallacy
-  historiansFallacy historicalFallacy baconianFallacy homunculusFallacy inflationOfConflict ifByWhiskey
-  incompleteComparison intentionalityFallacy kettleLogic ludicFallacy lumpOfLabour McNamaraFallacy
-  mindProjectionFallacy moralisticFallacy movingGoalposts nirvanaFallacy packageDeal proofByAssertion
-  prosecutorsFallacy provingTooMuch psychologistsFallacy referentialFallacy reification
-  retrospectiveDeterminism slipperySlope specialPleading
-  beggingQuestion circularReasoning loadedLabel manyQuestions
-  accident noTrueScotsman cherryPicking nutPicking survivorshipBias falseAnalogy hastyGeneralisation
-  anecdotalFallacy inductiveFallacy misleadingVividness overwhelmingException exhaustiveEffort
-  thoughtTerminatingCliche
-  cumHoc postHoc reverseCausation ignoringCommonCause singleCause furtiveFallacy magicalThinking
-  observationalInterpretation regressionFallacy gamblersFallacy inverseGamblersFallacy pHacking
-  gardenForkingPaths sunkCostFallacy
-  appealToStone invincibleIgnorance argumentFromIgnorance argumentFromRepetition argumentFromSilence
-  irrelevantConclusion redHerring adHominem circumstantialAdHominem poisoningWell appealToMotive
-  tonePolicing traitorousCritic bulverism appealToAuthority appealToAccomplishment courtiersReply
-  appealToConsequences appealToEmotion appealToFear appealToFlattery appealToPity appealToRidicule
-  appealToSpite judgmentalLanguage poohPooh styleOverSubstance wishfulThinking appealToNature
-  appealToNovelty appealToPoverty appealToTradition appealToWealth appealToForce appealToPopularity
-  associationFallacy logicChopping ipseDixit chronologicalSnobbery relativePrivation geneticFallacy
-  entitledOpinion naturalisticFallacy isOughtFallacy naturalisticFallacyFallacy strawMan
-  texasSharpshooter tuQuoque twoWrongs vacuousTruth
-  : FallacyKind
+  appealToProbability argumentFromFallacy baseRateFallacy conjunctionFallacy maskedManFallacy : FallacyKind
+  affirmingDisjunct affirmingConsequent denyingAntecedent existentialFallacy : FallacyKind
+  affirmativeConclusionNegativePremise exclusivePremises fourTerms illicitMajor illicitMinor : FallacyKind
+  negativeConclusionAffirmativePremises undistributedMiddle politiciansSyllogism modalFallacy modalScopeFallacy : FallacyKind
+  argumentFromIncredulity argumentToModeration continuumFallacy suppressedCorrelative divineFallacy : FallacyKind
+  doubleCounting ecologicalFallacy equivocation ambiguousMiddle definitionalRetreat motteAndBailey : FallacyKind
+  accentFallacy persuasiveDefinition etymologicalFallacy compositionFallacy divisionFallacy : FallacyKind
+  falseAttribution quotingOutOfContext falseAuthority falseDilemma falseEquivalence feedbackFallacy : FallacyKind
+  historiansFallacy historicalFallacy baconianFallacy homunculusFallacy inflationOfConflict ifByWhiskey : FallacyKind
+  incompleteComparison intentionalityFallacy kettleLogic ludicFallacy lumpOfLabour McNamaraFallacy : FallacyKind
+  mindProjectionFallacy moralisticFallacy movingGoalposts nirvanaFallacy packageDeal proofByAssertion : FallacyKind
+  prosecutorsFallacy provingTooMuch psychologistsFallacy referentialFallacy reification : FallacyKind
+  retrospectiveDeterminism slipperySlope specialPleading : FallacyKind
+  beggingQuestion circularReasoning loadedLabel manyQuestions : FallacyKind
+  accident noTrueScotsman cherryPicking nutPicking survivorshipBias falseAnalogy hastyGeneralisation : FallacyKind
+  anecdotalFallacy inductiveFallacy misleadingVividness overwhelmingException exhaustiveEffort : FallacyKind
+  thoughtTerminatingCliche : FallacyKind
+  cumHoc postHoc reverseCausation ignoringCommonCause singleCause furtiveFallacy magicalThinking : FallacyKind
+  observationalInterpretation regressionFallacy gamblersFallacy inverseGamblersFallacy pHacking : FallacyKind
+  gardenForkingPaths sunkCostFallacy : FallacyKind
+  appealToStone invincibleIgnorance argumentFromIgnorance argumentFromRepetition argumentFromSilence : FallacyKind
+  irrelevantConclusion redHerring adHominem circumstantialAdHominem poisoningWell appealToMotive : FallacyKind
+  tonePolicing traitorousCritic bulverism appealToAuthority appealToAccomplishment courtiersReply : FallacyKind
+  appealToConsequences appealToEmotion appealToFear appealToFlattery appealToPity appealToRidicule : FallacyKind
+  appealToSpite judgmentalLanguage poohPooh styleOverSubstance wishfulThinking appealToNature : FallacyKind
+  appealToNovelty appealToPoverty appealToTradition appealToWealth appealToForce appealToPopularity : FallacyKind
+  associationFallacy logicChopping ipseDixit chronologicalSnobbery relativePrivation geneticFallacy : FallacyKind
+  entitledOpinion naturalisticFallacy isOughtFallacy naturalisticFallacyFallacy strawMan : FallacyKind
+  texasSharpshooter tuQuoque twoWrongs vacuousTruth : FallacyKind
+
 
 primaryAxis : FallacyKind → FallacyAxis
 primaryAxis appealToProbability = modal

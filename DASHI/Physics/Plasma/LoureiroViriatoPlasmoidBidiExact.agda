@@ -28,36 +28,32 @@ import DASHI.Physics.Plasma.IdealMHDReconnectionBidiExact as Reconnection
 ------------------------------------------------------------------------
 
 data ViriatoEquationFamily : Set where
-  KREHM
-  KRMHD
-  reducedMHDLimit
-  : ViriatoEquationFamily
+  KREHM : ViriatoEquationFamily
+  KRMHD : ViriatoEquationFamily
+  reducedMHDLimit : ViriatoEquationFamily
 
 data ViriatoDirection : Set where
-  parallelToGuideField
-  perpendicularToGuideField
-  parallelVelocitySpace
-  : ViriatoDirection
+  parallelToGuideField : ViriatoDirection
+  perpendicularToGuideField : ViriatoDirection
+  parallelVelocitySpace : ViriatoDirection
 
 data ViriatoNumericalMethod : Set where
-  StrangSplitting
-  GodunovSplitting
-  MacCormackSecondOrder
-  TVDRK3
-  upwindSeventhOrder
-  perpendicularPseudoSpectral
-  iterativePredictorCorrector
-  HermiteVelocityRepresentation
-  : ViriatoNumericalMethod
+  StrangSplitting : ViriatoNumericalMethod
+  GodunovSplitting : ViriatoNumericalMethod
+  MacCormackSecondOrder : ViriatoNumericalMethod
+  TVDRK3 : ViriatoNumericalMethod
+  upwindSeventhOrder : ViriatoNumericalMethod
+  perpendicularPseudoSpectral : ViriatoNumericalMethod
+  iterativePredictorCorrector : ViriatoNumericalMethod
+  HermiteVelocityRepresentation : ViriatoNumericalMethod
 
 data ViriatoBenchmark : Set where
-  linearBenchmarks
-  nonlinearBenchmarks
-  OrszagTang2D
-  OrszagTang3D
-  fluidRegime
-  kineticRegime
-  : ViriatoBenchmark
+  linearBenchmarks : ViriatoBenchmark
+  nonlinearBenchmarks : ViriatoBenchmark
+  OrszagTang2D : ViriatoBenchmark
+  OrszagTang3D : ViriatoBenchmark
+  fluidRegime : ViriatoBenchmark
+  kineticRegime : ViriatoBenchmark
 
 record ViriatoScientificKernel : Set where
   constructor viriato-scientific-kernel
@@ -103,11 +99,10 @@ canonicalViriatoScientificKernel =
 ------------------------------------------------------------------------
 
 data HermiteRepresentationState : Set where
-  kineticDistributionRepresentation
-  infiniteHermiteMomentHierarchy
-  finiteTruncatedHierarchy
-  closedFiniteHierarchy
-  : HermiteRepresentationState
+  kineticDistributionRepresentation : HermiteRepresentationState
+  infiniteHermiteMomentHierarchy : HermiteRepresentationState
+  finiteTruncatedHierarchy : HermiteRepresentationState
+  closedFiniteHierarchy : HermiteRepresentationState
 
 record HermiteBidiBoundary : Set where
   constructor hermite-bidi-boundary
@@ -124,6 +119,8 @@ record HermiteBidiBoundary : Set where
     finiteTruncationIsAutomaticallyExactAtAnyMomentCountIsFalse :
       finiteTruncationIsAutomaticallyExactAtAnyMomentCount ≡ false
 
+open HermiteBidiBoundary public
+
 canonicalHermiteBidiBoundary : HermiteBidiBoundary
 canonicalHermiteBidiBoundary =
   hermite-bidi-boundary false refl true refl false refl
@@ -137,10 +134,9 @@ canonicalHermiteBidiBoundary =
 ------------------------------------------------------------------------
 
 data FreeEnergyCoordinate : Set where
-  totalFreeEnergy
-  fluidElectromagneticFreeEnergy
-  electronDistributionFreeEnergy
-  : FreeEnergyCoordinate
+  totalFreeEnergy : FreeEnergyCoordinate
+  fluidElectromagneticFreeEnergy : FreeEnergyCoordinate
+  electronDistributionFreeEnergy : FreeEnergyCoordinate
 
 record FreeEnergyDecompositionReceipt : Set where
   constructor free-energy-decomposition-receipt
@@ -189,9 +185,8 @@ threeEighths : RationalExponent
 threeEighths = rational-exponent 3 8
 
 data PlasmoidObservable : Set where
-  fastestGrowthRate
-  plasmoidChainNumber
-  : PlasmoidObservable
+  fastestGrowthRate : PlasmoidObservable
+  plasmoidChainNumber : PlasmoidObservable
 
 record PlasmoidScalingClaim : Set where
   constructor plasmoid-scaling-claim
@@ -232,17 +227,16 @@ plasmoidNumberScaling =
 ------------------------------------------------------------------------
 
 data LoureiroReverseTarget : Set where
-  acquireEquationFamily
-  acquireHermiteClosure
-  acquireParallelNumerics
-  acquirePerpendicularNumerics
-  acquireFreeEnergyInvariant
-  acquireLundquistDefinition
-  acquireGrowthScaling
-  acquireNumberScaling
-  acquireNonIdealReconnectionProducer
-  acquireBenchmarkConfiguration
-  : LoureiroReverseTarget
+  acquireEquationFamily : LoureiroReverseTarget
+  acquireHermiteClosure : LoureiroReverseTarget
+  acquireParallelNumerics : LoureiroReverseTarget
+  acquirePerpendicularNumerics : LoureiroReverseTarget
+  acquireFreeEnergyInvariant : LoureiroReverseTarget
+  acquireLundquistDefinition : LoureiroReverseTarget
+  acquireGrowthScaling : LoureiroReverseTarget
+  acquireNumberScaling : LoureiroReverseTarget
+  acquireNonIdealReconnectionProducer : LoureiroReverseTarget
+  acquireBenchmarkConfiguration : LoureiroReverseTarget
 
 record LoureiroReverseObligation : Set where
   constructor loureiro-reverse-obligation
@@ -272,6 +266,8 @@ record LoureiroBidiBoundary : Set where
     reducedModelIsFullSixDimensionalKineticPlasma : Bool
     reducedModelIsFullSixDimensionalKineticPlasmaIsFalse :
       reducedModelIsFullSixDimensionalKineticPlasma ≡ false
+
+open LoureiroBidiBoundary public
 
 canonicalLoureiroBidiBoundary : LoureiroBidiBoundary
 canonicalLoureiroBidiBoundary =

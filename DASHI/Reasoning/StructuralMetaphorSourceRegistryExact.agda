@@ -21,13 +21,12 @@ data SourceKind : Set where
   peerReviewedArticle bookChapter book : SourceKind
 
 data SourceRole : Set where
-  metaphorNetworkStructure
-  metaphorUnderstandingRepresentationChange
-  twoEyedSeeingMathematics
-  kimmererBraidingRelationalEpistemology
-  boundedStructuralAnalogy
-  methodologicalTransferLimit
-  : SourceRole
+  metaphorNetworkStructure : SourceRole
+  metaphorUnderstandingRepresentationChange : SourceRole
+  twoEyedSeeingMathematics : SourceRole
+  kimmererBraidingRelationalEpistemology : SourceRole
+  boundedStructuralAnalogy : SourceRole
+  methodologicalTransferLimit : SourceRole
 
 record SourceReference : Set where
   constructor sourceReference
@@ -138,6 +137,8 @@ record StructuralMetaphorAttributionBoundary : Set where
     dashiStructuralMetaphorFormalisationIsOriginalInterpretiveExtension : Bool
     dashiStructuralMetaphorFormalisationIsOriginalInterpretiveExtensionIsTrue :
       dashiStructuralMetaphorFormalisationIsOriginalInterpretiveExtension ≡ true
+
+open StructuralMetaphorAttributionBoundary public
 
 canonicalStructuralMetaphorAttributionBoundary :
   StructuralMetaphorAttributionBoundary

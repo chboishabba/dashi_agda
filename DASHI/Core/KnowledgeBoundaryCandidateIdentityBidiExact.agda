@@ -12,20 +12,18 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data IdentityGrade : Set where
-  unresolvedIdentity
-  compatibleCandidate
-  strongCandidate
-  exactIdentity
-  : IdentityGrade
+  unresolvedIdentity : IdentityGrade
+  compatibleCandidate : IdentityGrade
+  strongCandidate : IdentityGrade
+  exactIdentity : IdentityGrade
 
 data IdentitySignal : Set where
-  topicOverlap
-  authorOrTeamOverlap
-  institutionalOverlap
-  timelineCompatibility
-  laterWitnessLinkage
-  primaryInstitutionalIdentifierMatch
-  : IdentitySignal
+  topicOverlap : IdentitySignal
+  authorOrTeamOverlap : IdentitySignal
+  institutionalOverlap : IdentitySignal
+  timelineCompatibility : IdentitySignal
+  laterWitnessLinkage : IdentitySignal
+  primaryInstitutionalIdentifierMatch : IdentitySignal
 
 record CandidateObjectIdentity : Set where
   constructor candidate-object-identity

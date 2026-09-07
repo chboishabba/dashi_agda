@@ -43,21 +43,18 @@ import DASHI.Physics.Units.SI as SI
 ------------------------------------------------------------------------
 
 data RootWaterPathway : Set where
-  apoplasticWaterPathway
-  cellularWaterPathway
-  compositeRadialWaterPathway
-  : RootWaterPathway
+  apoplasticWaterPathway : RootWaterPathway
+  cellularWaterPathway : RootWaterPathway
+  compositeRadialWaterPathway : RootWaterPathway
 
 data RootNutrientPathway : Set where
-  apoplasticNutrientPathway
-  symplasticNutrientPathway
-  transCellularNutrientPathway
-  : RootNutrientPathway
+  apoplasticNutrientPathway : RootNutrientPathway
+  symplasticNutrientPathway : RootNutrientPathway
+  transCellularNutrientPathway : RootNutrientPathway
 
 data PlantNutrientAcquisitionPathway : Set where
-  directRootPathway
-  mycorrhizalPathway
-  : PlantNutrientAcquisitionPathway
+  directRootPathway : PlantNutrientAcquisitionPathway
+  mycorrhizalPathway : PlantNutrientAcquisitionPathway
 
 directAndMycorrhizalPathwaysDistinct :
   directRootPathway ≡ mycorrhizalPathway → ⊥
@@ -279,6 +276,8 @@ record RootSoilFungalPhysiologyBoundary : Set where
     stage7PromotionStillNeedsExperimentsAndValidation : Bool
     stage7PromotionStillNeedsExperimentsAndValidationIsTrue :
       stage7PromotionStillNeedsExperimentsAndValidation ≡ true
+
+open RootSoilFungalPhysiologyBoundary public
 
 canonicalRootSoilFungalPhysiologyBoundary : RootSoilFungalPhysiologyBoundary
 canonicalRootSoilFungalPhysiologyBoundary =

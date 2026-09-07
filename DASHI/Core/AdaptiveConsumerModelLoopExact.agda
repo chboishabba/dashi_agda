@@ -31,7 +31,7 @@ data ConsumerAssessment
     ConsumerAssessment candidate
 
 exactAssessmentExcludesCounterexample :
-  ∀ {Fine Action Observation Decision}
+  ∀ {Fine Action Observation : Set}
     {fineStep : Action → Fine → Fine}
     {observe : Fine → Observation}
     {candidate : Search.ReductionCandidate
@@ -44,7 +44,7 @@ exactAssessmentExcludesCounterexample =
   Search.certificationExcludesCounterexample
 
 approximateAssessmentPreservesDeclaredDecision :
-  ∀ {Fine Action Observation Decision}
+  ∀ {Fine Action Observation Decision : Set}
     {model : Approx.ApproximateTraceReduction Fine Action Observation}
     {decide : Observation → Decision} →
   Approx.ApproximateDecisionCertificate model decide →
@@ -82,7 +82,7 @@ LiveDeclared : ∀ {Evidence Fine} → LiveEvidenceFibre Evidence Fine → Fine 
 LiveDeclared fibre = compatible fibre (evidence fibre)
 
 record AuthorityGate (Intervention : Set) : Set₁ where
-  constructor authorityGate
+  constructor mkAuthorityGate
   field
     authority : Intervention → Governed.AuthorityDecision
     authorityReference : String
@@ -160,6 +160,8 @@ record AdaptiveConsumerLoopBoundary : Set where
     evidenceUpdateRequiresEveryCertificateToReopen : Bool
     evidenceUpdateRequiresEveryCertificateToReopenIsFalse : evidenceUpdateRequiresEveryCertificateToReopen ≡ false
     dependencyAffectedCertificatesMustBeReconsidered : Bool
+
+open AdaptiveConsumerLoopBoundary public
 
 canonicalAdaptiveConsumerLoopBoundary : AdaptiveConsumerLoopBoundary
 canonicalAdaptiveConsumerLoopBoundary =

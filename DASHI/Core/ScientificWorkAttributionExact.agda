@@ -24,32 +24,32 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data AttributionRole : Set where
-  namedAuthor
-  namedInventor
-  namedPrincipalInvestigator
-  namedTeamMember
-  namedTechnicalLead
-  institutionalResearchRole
-  institutionalLeadershipRole
-  affiliationOnly
-  reportedRelationshipOnly
-  : AttributionRole
+  namedAuthor : AttributionRole
+  namedInventor : AttributionRole
+  namedPrincipalInvestigator : AttributionRole
+  namedTeamMember : AttributionRole
+  namedTechnicalLead : AttributionRole
+  institutionalResearchRole : AttributionRole
+  institutionalLeadershipRole : AttributionRole
+  affiliationOnly : AttributionRole
+  reportedRelationshipOnly : AttributionRole
+
 
 data SourceStrength : Set where
-  primaryPatentRecord
-  primaryPublicationRecord
-  primaryInstitutionalRecord
-  officialDocumentRepeatingPublicReporting
-  secondaryReportingOnly
-  unresolvedSourceStrength
-  : SourceStrength
+  primaryPatentRecord : SourceStrength
+  primaryPublicationRecord : SourceStrength
+  primaryInstitutionalRecord : SourceStrength
+  officialDocumentRepeatingPublicReporting : SourceStrength
+  secondaryReportingOnly : SourceStrength
+  unresolvedSourceStrength : SourceStrength
+
 
 data ClaimOwner : Set where
-  externalSourceOwner
-  dashiFormalisationOwner
-  dashiInferenceOwner
-  unresolvedClaimOwner
-  : ClaimOwner
+  externalSourceOwner : ClaimOwner
+  dashiFormalisationOwner : ClaimOwner
+  dashiInferenceOwner : ClaimOwner
+  unresolvedClaimOwner : ClaimOwner
+
 
 record ScientificWorkAttribution : Set where
   constructor scientific-work-attribution

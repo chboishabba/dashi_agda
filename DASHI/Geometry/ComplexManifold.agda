@@ -142,9 +142,9 @@ record HolomorphicTransitionLaws
       Holomorphic (λ z → g (f z))
 
     transitionHolomorphic :
-      ∀ {i j x} →
-      Overlap i j x →
-      Holomorphic (transition i j)
+      ∀ {i j : ChartIndex charts} {x : Point} →
+      Overlap charts i j x →
+      Holomorphic (transition charts i j)
 
 open HolomorphicTransitionLaws public
 
@@ -162,13 +162,13 @@ record ComplexManifoldAuthority (Point Coordinate : Set) : Set₁ where
 open ComplexManifoldAuthority public
 
 inverseTransitionHolomorphic :
-  ∀ {Point Coordinate : Set}
-    (M : ComplexManifoldAuthority Point Coordinate)
-    {i j x} →
-    Overlap (complexCharts M) i j x →
-    Holomorphic (holomorphicTransitions M)
-      (transition (complexCharts M) j i)
-inverseTransitionHolomorphic M overlap =
+  ∀ {Point Coordinate : Set} →
+  (M : ComplexManifoldAuthority Point Coordinate) →
+  ∀ {i j : ChartIndex (complexCharts M)} {x : Point} →
+  Overlap (complexCharts M) i j x →
+  Holomorphic (holomorphicTransitions M)
+    (transition (complexCharts M) j i)
+inverseTransitionHolomorphic M ov =
   transitionHolomorphic
     (holomorphicTransitions M)
-    (overlapSymmetric (complexCharts M) overlap)
+    (overlapSymmetric (complexCharts M) ov)

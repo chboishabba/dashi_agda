@@ -21,37 +21,37 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data KnowledgeDomain : Set where
-  highEnergyPlasmaPhysics
-  fusionPhysics
-  fissionPowerAndPropulsion
-  extremeEnvironmentMaterials
-  acceleratorRadiographyDiagnostics
-  spacecraftSystemsEngineering
-  navigationGuidanceAndTracking
-  highPowerPayloadIntegration
-  planetaryDefenseAndNEOScience
-  planetaryMassSpectrometryAndBiosignatures
-  astronomicalRemoteSensing
-  chemicalBiologyAndLifeScience
-  : KnowledgeDomain
+  highEnergyPlasmaPhysics : KnowledgeDomain
+  fusionPhysics : KnowledgeDomain
+  fissionPowerAndPropulsion : KnowledgeDomain
+  extremeEnvironmentMaterials : KnowledgeDomain
+  acceleratorRadiographyDiagnostics : KnowledgeDomain
+  spacecraftSystemsEngineering : KnowledgeDomain
+  navigationGuidanceAndTracking : KnowledgeDomain
+  highPowerPayloadIntegration : KnowledgeDomain
+  planetaryDefenseAndNEOScience : KnowledgeDomain
+  planetaryMassSpectrometryAndBiosignatures : KnowledgeDomain
+  astronomicalRemoteSensing : KnowledgeDomain
+  chemicalBiologyAndLifeScience : KnowledgeDomain
+
 
 data CapabilityClass : Set where
-  deepSpaceHighPowerTransport
-  fusionOrNuclearElectricSpacecraft
-  autonomousPlanetaryInterceptor
-  longDurationSciencePlatform
-  highEnergyTestAndDiagnosticsEcosystem
-  extremeEnvironmentSpacePlatform
-  multiMissionStrategicSpaceArchitecture
-  unresolvedCapabilityClass
-  : CapabilityClass
+  deepSpaceHighPowerTransport : CapabilityClass
+  fusionOrNuclearElectricSpacecraft : CapabilityClass
+  autonomousPlanetaryInterceptor : CapabilityClass
+  longDurationSciencePlatform : CapabilityClass
+  highEnergyTestAndDiagnosticsEcosystem : CapabilityClass
+  extremeEnvironmentSpacePlatform : CapabilityClass
+  multiMissionStrategicSpaceArchitecture : CapabilityClass
+  unresolvedCapabilityClass : CapabilityClass
+
 
 data SynthesisStrength : Set where
-  documentedEngineeringInterface
-  documentedProgrammeConcept
-  crossDomainEngineeringInference
-  speculativeExtrapolation
-  : SynthesisStrength
+  documentedEngineeringInterface : SynthesisStrength
+  documentedProgrammeConcept : SynthesisStrength
+  crossDomainEngineeringInference : SynthesisStrength
+  speculativeExtrapolation : SynthesisStrength
+
 
 record CapabilitySynthesis : Set where
   constructor capability-synthesis

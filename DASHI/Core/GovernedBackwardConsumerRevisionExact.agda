@@ -99,6 +99,8 @@ record GovernedBackwardConsumerBoundary : Set where
     approximateSurrogateEqualsExactConsumerOutputIsFalse : approximateSurrogateEqualsExactConsumerOutput ≡ false
     reading : String
 
+open GovernedBackwardConsumerBoundary public
+
 canonicalGovernedBackwardConsumerBoundary : GovernedBackwardConsumerBoundary
 canonicalGovernedBackwardConsumerBoundary =
   governed-backward-consumer-boundary

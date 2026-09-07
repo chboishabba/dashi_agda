@@ -10,7 +10,7 @@ import DASHI.Core.FiniteObservationClosureBidiExact as Closure
 
 data ScorpiusStage : Set where pulsedPower electronBeam xRayProduction radiographicFrame materialStateInference : ScorpiusStage
 
-record ScorpiusArchitecture : Set where
+record ScorpiusArchitecture : Set₁ where
   constructor scorpius-architecture
   field
     linearInductionAccelerator : Set
@@ -32,6 +32,8 @@ record ScorpiusBoundary : Set where
     engineerDesignContributionImpliesSoleAcceleratorAuthorshipIsFalse : engineerDesignContributionImpliesSoleAcceleratorAuthorship ≡ false
     multipleFramesSupportTimeResolvedMaterialInference : Bool
     multipleFramesSupportTimeResolvedMaterialInferenceIsTrue : multipleFramesSupportTimeResolvedMaterialInference ≡ true
+
+open ScorpiusBoundary public
 
 canonicalScorpiusBoundary : ScorpiusBoundary
 canonicalScorpiusBoundary = scorpius-boundary false refl false refl false refl true refl

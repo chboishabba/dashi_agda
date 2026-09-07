@@ -13,7 +13,8 @@ import DASHI.Culture.IndigenousKnowledgeStoryTwoEyedSeeingBidiExact as IK
 import DASHI.Culture.KimmererTwoEyedSeeingInterpretationBoundaryExact as TwoEyed
 
 data EpistemicStatus : Set where
-  situatedEpistemicHistory scientificEpistemicHistory : EpistemicStatus
+  situatedEpistemicHistory : EpistemicStatus
+  scientificEpistemicHistory : EpistemicStatus
 
 carrierEpistemicStatus : IK.KnowledgeCarrier → EpistemicStatus
 carrierEpistemicStatus carrier with IK.knowledgeHistory carrier
@@ -293,3 +294,5 @@ canonicalIndigenousGovernedProofSearchExperimentBoundary =
   indigenousGovernedProofSearchExperimentBoundary
     false refl false refl false refl false refl true refl true refl
     "Post-merge cross-pollination: a detached proposition may be scientifically useful while remaining insufficient for provenance, authority, permission or obligation; erase-then-add does not restore inherited lineage; proof-search admission and experimental discrimination do not manufacture custodial permission; sequential experiment closure is indexed by the actual downstream consumer."
+
+open IndigenousGovernedProofSearchExperimentBoundary public

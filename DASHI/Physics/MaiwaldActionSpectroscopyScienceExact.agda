@@ -10,18 +10,18 @@ import DASHI.Core.ScientificMechanismEvidenceBidiExact as S
 ------------------------------------------------------------------------
 
 data ActionSpectroscopyStage : Set where
-  electrosprayIonisation
-  ionGuiding
-  cryogenicTrapping
-  bufferGasCooling
-  messengerTagging
-  massSelection
-  tunableIRExcitation
-  photodissociation
-  fragmentMassDetection
-  spectrumReconstruction
-  structureAssignment
-  : ActionSpectroscopyStage
+  electrosprayIonisation : ActionSpectroscopyStage
+  ionGuiding : ActionSpectroscopyStage
+  cryogenicTrapping : ActionSpectroscopyStage
+  bufferGasCooling : ActionSpectroscopyStage
+  messengerTagging : ActionSpectroscopyStage
+  massSelection : ActionSpectroscopyStage
+  tunableIRExcitation : ActionSpectroscopyStage
+  photodissociation : ActionSpectroscopyStage
+  fragmentMassDetection : ActionSpectroscopyStage
+  spectrumReconstruction : ActionSpectroscopyStage
+  structureAssignment : ActionSpectroscopyStage
+
 
 record ActionSpectroscopyChain : Set where
   constructor action-spectroscopy-chain
@@ -102,6 +102,8 @@ record CurrentMaiwaldScienceAssessment : Set where
     isomerDiscriminationOwnedIsTrue : isomerDiscriminationOwned ≡ true
     missionMixtureValidationClosed : Bool
     missionMixtureValidationClosedIsFalse : missionMixtureValidationClosed ≡ false
+
+open CurrentMaiwaldScienceAssessment public
 
 canonicalCurrentMaiwaldScienceAssessment : CurrentMaiwaldScienceAssessment
 canonicalCurrentMaiwaldScienceAssessment = current-maiwald-science-assessment

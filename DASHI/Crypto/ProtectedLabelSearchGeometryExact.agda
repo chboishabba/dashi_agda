@@ -25,28 +25,28 @@ record ProtectedLabelSearchGeometry : Set₁ where
     SearchEdge : Public → Hidden → Hidden → Set
     encode : Hidden → Code
     edgeUpdateCost :
-      ∀ {public left right} → SearchEdge public left right → Nat
+      ∀ {pub left right} → SearchEdge pub left right → Nat
 
 open ProtectedLabelSearchGeometry public
 
 record SearchStep
     (geometry : ProtectedLabelSearchGeometry)
-    (public : Public geometry) : Set₁ where
+    (pub : Public geometry) : Set₁ where
   constructor searchStep
   field
     from to : Hidden geometry
-    fromCandidate : Candidate geometry public from
-    toCandidate : Candidate geometry public to
-    edge : SearchEdge geometry public from to
+    fromCandidate : Candidate geometry pub from
+    toCandidate : Candidate geometry pub to
+    edge : SearchEdge geometry pub from to
 
 open SearchStep public
 
 stepCost :
-  ∀ {geometry public} → SearchStep geometry public → Nat
+  ∀ {geometry pub} → SearchStep geometry pub → Nat
 stepCost {geometry} step = edgeUpdateCost geometry (edge step)
 
 pathCost :
-  ∀ {geometry public} → List (SearchStep geometry public) → Nat
+  ∀ {geometry pub} → List (SearchStep geometry pub) → Nat
 pathCost [] = 0
 pathCost (step ∷ steps) = stepCost step + pathCost steps
 
@@ -93,13 +93,13 @@ open GeometryImprovement public
 ------------------------------------------------------------------------
 
 beneficialGeometryUpdate : GeometricObservationUpdate
-beneficialGeometryUpdate = geometricObservationUpdate 8 7 20 8 8 2
+beneficialGeometryUpdate = geometricObservationUpdate 8 7 20 8 8 2 3
 
 beneficialGeometryGain : GeometryImprovement beneficialGeometryUpdate
 beneficialGeometryGain = geometryImprovement 15 refl
 
 sameCountBadGeometry : GeometricObservationUpdate
-sameCountBadGeometry = geometricObservationUpdate 8 7 4 15 0 0
+sameCountBadGeometry = geometricObservationUpdate 8 7 4 15 0 0 0
 
 sameCandidateShrinkDifferentGeometry :
   candidatesBefore beneficialGeometryUpdate ≡ candidatesBefore sameCountBadGeometry

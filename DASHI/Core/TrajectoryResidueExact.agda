@@ -129,11 +129,11 @@ coarseCollisionAcrossResidueGivesStrictRefinement :
 coarseCollisionAcrossResidueGivesStrictRefinement coarse residue x y coarseSame xAbsent yPresent =
   Observer.strictPairRefinement coarse residue x y coarseSame residuesDiffer
   where
-    residuesDiffer : residue x ≡ residue y → ⊥
-    residuesDiffer same = residueAbsentNotPresent (trans (sym xAbsent) (trans same yPresent))
-
     residueAbsentNotPresent : ¬ (residueAbsent ≡ residuePresent)
     residueAbsentNotPresent ()
+
+    residuesDiffer : residue x ≡ residue y → ⊥
+    residuesDiffer same = residueAbsentNotPresent (trans (sym xAbsent) (trans same yPresent))
 
 ResidueDescendsThrough :
   ∀ {State Coarse : Set} →
@@ -154,7 +154,7 @@ coarseCollisionAcrossResidueBlocksDescent :
   residue y ≡ residuePresent →
   ResidueDescendsThrough coarse residue →
   ⊥
-coarseCollisionAcrossResidueBlocksDescent coarseSame xAbsent yPresent descent =
+coarseCollisionAcrossResidueBlocksDescent {x = x} {y = y} coarseSame xAbsent yPresent descent =
   residueAbsentNotPresent
     (trans
       (sym xAbsent)
