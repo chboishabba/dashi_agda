@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Cognition.PNF.SensibLawCountryTwoEyedOperationalEpistemicEverything as Country
 import DASHI.Cognition.PNF.SensibLawCountryPluralEpistemicOperationalAuditExact as Audit
 import DASHI.Cognition.PNF.SensibLawCountryCommunityAuthorityFirstCorrectionExact as Correction
+import DASHI.Cognition.PNF.SensibLawTerraNulliusOperationalJuridicalNonHumanityExact as Terra
 import DASHI.Core.PluralEpistemicOperationalClosureExact as Operational
 import DASHI.Core.PluralOperationalEvidenceBraidBidiExact as Braid
 import DASHI.Core.PluralOperationalResidualActionLoopExact as Adaptive
@@ -68,6 +69,33 @@ preventionMustBeObserved :
   Correction.preventionMustBeObserved
     Correction.canonicalCommunityAuthorityFirstPlan ≡ true
 preventionMustBeObserved = refl
+
+------------------------------------------------------------------------
+-- Terra nullius operational history remains visible inside the same adaptive
+-- surface: juridical non-humanity was an operative relation, Mabo was a real
+-- doctrinal correction, and current material/community closure remains open.
+------------------------------------------------------------------------
+
+terraNulliusTreatedNoConstitutivePeopleAsPresent :
+  DASHI.Cognition.PNF.SensibLawTerraNulliusFoundationalJuridicalPersonhoodExact.treatedAsIfNoJuridicallyConstitutivePeopleWerePresent
+    Terra.foundationalNonHumanityReceipt ≡ true
+terraNulliusTreatedNoConstitutivePeopleAsPresent = refl
+
+terraNulliusClassificationIsJuridicalNotBiological :
+  DASHI.Cognition.PNF.SensibLawTerraNulliusFoundationalJuridicalPersonhoodExact.classificationIsBiologicalTaxonomy
+    Terra.foundationalNonHumanityReceipt ≡ false
+terraNulliusClassificationIsJuridicalNotBiological = refl
+
+laterCorrectionDoesNotDeletePriorOperation :
+  Terra.laterCorrectionRetroactivelyDeletesPriorOperation
+    Terra.currentTerraNulliusOperationalHistory ≡ false
+laterCorrectionDoesNotDeletePriorOperation = refl
+
+currentCommunityAuthorityStillOpenAfterMabo :
+  Operational.stateFor Audit.currentCountryOperationalSnapshot
+    Operational.communityAuthorityCoordinate
+  ≡ Operational.coordinateOpen
+currentCommunityAuthorityStillOpenAfterMabo = refl
 
 ------------------------------------------------------------------------
 -- System-realisation discrepancy: State report does not get meta-observer
