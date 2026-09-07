@@ -6,22 +6,28 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119RecoveredShortestSourceCut
 --
 -- Physical side 13 uses historical periodic index 12.  The repaired Path13
 -- realization, signed perturbation projection, local scalar action, two-carrier
--- selected-bond Eq.(119), and generic field assembly are already constructed.
+-- selected-bond Eq.(119), and positive-bond field assembly are constructed.
 --
--- This round further removes the opaque "global/local perturbation semantics"
--- seam.  The repository now has a direct Path13 family compiler that constructs
--- from narrow inputs:
+-- The current shortest source route also removes two formerly pointwise
+-- families of authority:
 --
---   realization -> erased literal relative contour -> principal Y_x
---   -> outer Y -> Federbush g/Jminus/Ad -> selected-bond Eq.(119)
---   -> positive-bond field derivative.
+--   * one independently selected radius-six embedding per coarse bond;
+--   * one independently supplied principal-image proof per bond/fine point.
 --
--- Its surviving input frontier is exactly five independently typed payments:
+-- Bond-centred embeddings are generated from ONE radius-six centred-torus
+-- walk-agreement certificate.  Principal-image admission is generated from ONE
+-- global selected-cut/operator-defect weld by the literal erased 74-link
+-- relative-contour telescope.
+--
+-- Therefore the surviving source-facing frontier is now exactly:
+--
 --   1. selected variational/physical Path13 background;
---   2. rational-real ring embedding;
---   3. an ExistingFederbushConventionFamily inhabitant;
---   4. radius-six minus embedding centred for every selected positive bond;
---   5. principal-image admission of each erased literal relative contour.
+--   2. one radius-six centred-torus walk-agreement certificate;
+--   3. one rational-real ring embedding;
+--   4. one ExistingFederbushConventionFamily inhabitant;
+--   5. one global Path13 selected-cut/defect representation weld.
+--
+-- These are still uninhabited here.  Full physical Eq.(119) remains open.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -37,6 +43,10 @@ import DASHI.Physics.YangMills.BalabanCMP98Equation119TwoCarrierSelectedBondExac
 import DASHI.Physics.YangMills.BalabanRationalUnitQuaternionRealLieAdjointExact as UnitAdjoint
 import DASHI.Physics.YangMills.BalabanCMP98Equation119GeometryRelativeContourExact as Geometry
 import DASHI.Physics.YangMills.BalabanCMP98Path13TwoCarrierSourceFamilyExact as Path13Family
+import DASHI.Physics.YangMills.BalabanPath13CanonicalBondCenteredEmbeddingExact as BondEmbedding
+import DASHI.Physics.YangMills.BalabanCMP98Path13ReducedFamilyGeometryExact as ReducedGeometry
+import DASHI.Physics.YangMills.BalabanCMP98Path13RelativeContourPrincipalImageExact as PrincipalImage
+import DASHI.Physics.YangMills.BalabanCMP98Path13ReducedTwoCarrierSourceFamilyExact as ReducedFamily
 
 Path13SelectedPhysicalBackgroundProducer : Set → Set → Set₁
 Path13SelectedPhysicalBackgroundProducer =
@@ -68,13 +78,22 @@ record RecoveredEq119ShortestSourceStatus : Set where
     path13TwoCarrierSourceFamilyCompilerClosed : Bool
     path13TwoCarrierFieldDerivativeCompilerClosed : Bool
 
+    path13CanonicalBondCenteredEmbeddingCompilerClosed : Bool
+    path13PerBondEmbeddingReceiptPruned : Bool
+    path13ReducedFamilyGeometryCompilerClosed : Bool
+    path13RawRelative74TelescopeClosed : Bool
+    path13ClosedPathSameObjectClosed : Bool
+    path13RelativeContourPrincipalImageCompilerClosed : Bool
+    path13PointwisePrincipalImageReceiptPruned : Bool
+    path13ReducedSourceFamilyAdapterClosed : Bool
+    path13ReducedFieldDerivativeCompilerClosed : Bool
+
     path13SelectedPhysicalBackground13Constructed : Bool
+    path13RadiusSixWalkAgreementConstructed : Bool
     rationalRealRingEmbeddingConstructed : Bool
     federbushConventionFamilyConstructed : Bool
-    path13BondCenteredMinusEmbeddingsConstructed : Bool
-    path13RelativeContoursPrincipalImageAdmitted : Bool
-    path13TwoCarrierSourceFamilyInputsConstructed : Bool
-    path13GlobalLocalPerturbationSemanticsConstructed : Bool
+    path13SelectedCutDefectWeldConstructed : Bool
+    path13ReducedSourceFamilyInputsConstructed : Bool
     recoveredShortestPhysicalEq119SourceClosed : Bool
 
     pointwiseSemanticFallbackCompilerClosedIsTrue : pointwiseSemanticFallbackCompilerClosed ≡ true
@@ -95,14 +114,22 @@ record RecoveredEq119ShortestSourceStatus : Set where
     path13OuterYCompilerClosedIsTrue : path13OuterYCompilerClosed ≡ true
     path13TwoCarrierSourceFamilyCompilerClosedIsTrue : path13TwoCarrierSourceFamilyCompilerClosed ≡ true
     path13TwoCarrierFieldDerivativeCompilerClosedIsTrue : path13TwoCarrierFieldDerivativeCompilerClosed ≡ true
+    path13CanonicalBondCenteredEmbeddingCompilerClosedIsTrue : path13CanonicalBondCenteredEmbeddingCompilerClosed ≡ true
+    path13PerBondEmbeddingReceiptPrunedIsTrue : path13PerBondEmbeddingReceiptPruned ≡ true
+    path13ReducedFamilyGeometryCompilerClosedIsTrue : path13ReducedFamilyGeometryCompilerClosed ≡ true
+    path13RawRelative74TelescopeClosedIsTrue : path13RawRelative74TelescopeClosed ≡ true
+    path13ClosedPathSameObjectClosedIsTrue : path13ClosedPathSameObjectClosed ≡ true
+    path13RelativeContourPrincipalImageCompilerClosedIsTrue : path13RelativeContourPrincipalImageCompilerClosed ≡ true
+    path13PointwisePrincipalImageReceiptPrunedIsTrue : path13PointwisePrincipalImageReceiptPruned ≡ true
+    path13ReducedSourceFamilyAdapterClosedIsTrue : path13ReducedSourceFamilyAdapterClosed ≡ true
+    path13ReducedFieldDerivativeCompilerClosedIsTrue : path13ReducedFieldDerivativeCompilerClosed ≡ true
 
     path13SelectedPhysicalBackground13ConstructedIsFalse : path13SelectedPhysicalBackground13Constructed ≡ false
+    path13RadiusSixWalkAgreementConstructedIsFalse : path13RadiusSixWalkAgreementConstructed ≡ false
     rationalRealRingEmbeddingConstructedIsFalse : rationalRealRingEmbeddingConstructed ≡ false
     federbushConventionFamilyConstructedIsFalse : federbushConventionFamilyConstructed ≡ false
-    path13BondCenteredMinusEmbeddingsConstructedIsFalse : path13BondCenteredMinusEmbeddingsConstructed ≡ false
-    path13RelativeContoursPrincipalImageAdmittedIsFalse : path13RelativeContoursPrincipalImageAdmitted ≡ false
-    path13TwoCarrierSourceFamilyInputsConstructedIsFalse : path13TwoCarrierSourceFamilyInputsConstructed ≡ false
-    path13GlobalLocalPerturbationSemanticsConstructedIsFalse : path13GlobalLocalPerturbationSemanticsConstructed ≡ false
+    path13SelectedCutDefectWeldConstructedIsFalse : path13SelectedCutDefectWeldConstructed ≡ false
+    path13ReducedSourceFamilyInputsConstructedIsFalse : path13ReducedSourceFamilyInputsConstructed ≡ false
     recoveredShortestPhysicalEq119SourceClosedIsFalse : recoveredShortestPhysicalEq119SourceClosed ≡ false
 
 open RecoveredEq119ShortestSourceStatus public
@@ -129,13 +156,21 @@ canonicalRecoveredEq119ShortestSourceStatus = record
   ; path13OuterYCompilerClosed = true
   ; path13TwoCarrierSourceFamilyCompilerClosed = true
   ; path13TwoCarrierFieldDerivativeCompilerClosed = true
+  ; path13CanonicalBondCenteredEmbeddingCompilerClosed = true
+  ; path13PerBondEmbeddingReceiptPruned = true
+  ; path13ReducedFamilyGeometryCompilerClosed = true
+  ; path13RawRelative74TelescopeClosed = true
+  ; path13ClosedPathSameObjectClosed = true
+  ; path13RelativeContourPrincipalImageCompilerClosed = true
+  ; path13PointwisePrincipalImageReceiptPruned = true
+  ; path13ReducedSourceFamilyAdapterClosed = true
+  ; path13ReducedFieldDerivativeCompilerClosed = true
   ; path13SelectedPhysicalBackground13Constructed = false
+  ; path13RadiusSixWalkAgreementConstructed = false
   ; rationalRealRingEmbeddingConstructed = false
   ; federbushConventionFamilyConstructed = false
-  ; path13BondCenteredMinusEmbeddingsConstructed = false
-  ; path13RelativeContoursPrincipalImageAdmitted = false
-  ; path13TwoCarrierSourceFamilyInputsConstructed = false
-  ; path13GlobalLocalPerturbationSemanticsConstructed = false
+  ; path13SelectedCutDefectWeldConstructed = false
+  ; path13ReducedSourceFamilyInputsConstructed = false
   ; recoveredShortestPhysicalEq119SourceClosed = false
   ; pointwiseSemanticFallbackCompilerClosedIsTrue =
       Eq119Cut.pointwiseSemanticSelectedCutCompilerClosedIsTrue
@@ -157,13 +192,21 @@ canonicalRecoveredEq119ShortestSourceStatus = record
   ; path13OuterYCompilerClosedIsTrue = refl
   ; path13TwoCarrierSourceFamilyCompilerClosedIsTrue = refl
   ; path13TwoCarrierFieldDerivativeCompilerClosedIsTrue = refl
+  ; path13CanonicalBondCenteredEmbeddingCompilerClosedIsTrue = refl
+  ; path13PerBondEmbeddingReceiptPrunedIsTrue = refl
+  ; path13ReducedFamilyGeometryCompilerClosedIsTrue = refl
+  ; path13RawRelative74TelescopeClosedIsTrue = refl
+  ; path13ClosedPathSameObjectClosedIsTrue = refl
+  ; path13RelativeContourPrincipalImageCompilerClosedIsTrue = refl
+  ; path13PointwisePrincipalImageReceiptPrunedIsTrue = refl
+  ; path13ReducedSourceFamilyAdapterClosedIsTrue = refl
+  ; path13ReducedFieldDerivativeCompilerClosedIsTrue = refl
   ; path13SelectedPhysicalBackground13ConstructedIsFalse = refl
+  ; path13RadiusSixWalkAgreementConstructedIsFalse = refl
   ; rationalRealRingEmbeddingConstructedIsFalse = refl
   ; federbushConventionFamilyConstructedIsFalse = refl
-  ; path13BondCenteredMinusEmbeddingsConstructedIsFalse = refl
-  ; path13RelativeContoursPrincipalImageAdmittedIsFalse = refl
-  ; path13TwoCarrierSourceFamilyInputsConstructedIsFalse = refl
-  ; path13GlobalLocalPerturbationSemanticsConstructedIsFalse = refl
+  ; path13SelectedCutDefectWeldConstructedIsFalse = refl
+  ; path13ReducedSourceFamilyInputsConstructedIsFalse = refl
   ; recoveredShortestPhysicalEq119SourceClosedIsFalse = refl
   }
 
@@ -174,14 +217,6 @@ path13BackgroundIsSelectedPhysicalBackgroundClosedIsFalse :
   path13BackgroundIsSelectedPhysicalBackgroundClosed canonicalRecoveredEq119ShortestSourceStatus ≡ false
 path13BackgroundIsSelectedPhysicalBackgroundClosedIsFalse =
   path13SelectedPhysicalBackground13ConstructedIsFalse canonicalRecoveredEq119ShortestSourceStatus
-
-perturbationCoordinateSemanticsClosed : RecoveredEq119ShortestSourceStatus → Bool
-perturbationCoordinateSemanticsClosed = path13GlobalLocalPerturbationSemanticsConstructed
-
-perturbationCoordinateSemanticsClosedIsFalse :
-  perturbationCoordinateSemanticsClosed canonicalRecoveredEq119ShortestSourceStatus ≡ false
-perturbationCoordinateSemanticsClosedIsFalse =
-  path13GlobalLocalPerturbationSemanticsConstructedIsFalse canonicalRecoveredEq119ShortestSourceStatus
 
 principalYFederbushIndexPruningLevel : ProofLevel
 principalYFederbushIndexPruningLevel = R218.cmp98PrincipalYFrontierPrunedRound218Level
@@ -234,8 +269,35 @@ path13TwoCarrierSourceFamilyCompilerLevel = Path13Family.cmp98Path13TwoCarrierSo
 path13TwoCarrierFieldDerivativeCompilerLevel : ProofLevel
 path13TwoCarrierFieldDerivativeCompilerLevel = Path13Family.cmp98Path13TwoCarrierFieldDerivativeCompilerLevel
 
+path13CanonicalBondCenteredEmbeddingCompilerLevel : ProofLevel
+path13CanonicalBondCenteredEmbeddingCompilerLevel = BondEmbedding.path13CanonicalBondCenteredEmbeddingLevel
+
+path13ReducedFamilyGeometryCompilerLevel : ProofLevel
+path13ReducedFamilyGeometryCompilerLevel = ReducedGeometry.cmp98Path13ReducedFamilyGeometryCompilerLevel
+
+path13RawRelative74TelescopeLevel : ProofLevel
+path13RawRelative74TelescopeLevel = PrincipalImage.cmp98Path13RawRelative74TelescopeLevel
+
+path13ClosedPathSameObjectLevel : ProofLevel
+path13ClosedPathSameObjectLevel = PrincipalImage.cmp98Path13ClosedPathSameObjectLevel
+
+path13RelativeContourPrincipalImageCompilerLevel : ProofLevel
+path13RelativeContourPrincipalImageCompilerLevel = PrincipalImage.cmp98Path13RelativeContourPrincipalImageCompilerLevel
+
+path13ReducedSourceFamilyAdapterLevel : ProofLevel
+path13ReducedSourceFamilyAdapterLevel = ReducedFamily.cmp98Path13ReducedSourceFamilyAdapterLevel
+
+path13ReducedFieldDerivativeCompilerLevel : ProofLevel
+path13ReducedFieldDerivativeCompilerLevel = ReducedFamily.cmp98Path13ReducedFieldDerivativeCompilerLevel
+
 literalCMP98RecoveredPath13BackgroundSameObjectLevel : ProofLevel
 literalCMP98RecoveredPath13BackgroundSameObjectLevel = Path13Target.literalCMP98Path13SelectedPhysicalBackgroundProducerLevel
 
-literalCMP98RecoveredPerturbationCoordinateSemanticsLevel : ProofLevel
-literalCMP98RecoveredPerturbationCoordinateSemanticsLevel = Path13Family.literalCMP98Path13TwoCarrierSourceFamilyInputsLevel
+literalCMP98Path13RadiusSixWalkAgreementLevel : ProofLevel
+literalCMP98Path13RadiusSixWalkAgreementLevel = ReducedGeometry.literalCMP98Path13RadiusSixWalkAgreementLevel
+
+literalCMP98Path13SelectedCutDefectWeldLevel : ProofLevel
+literalCMP98Path13SelectedCutDefectWeldLevel = PrincipalImage.literalCMP98Path13SelectedCutDefectWeldLevel
+
+literalCMP98RecoveredShortestSourceInputsLevel : ProofLevel
+literalCMP98RecoveredShortestSourceInputsLevel = ReducedFamily.literalCMP98Path13ReducedSourceFamilyInputsLevel
