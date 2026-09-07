@@ -13,7 +13,7 @@ module DASHI.Physics.YangMills.BalabanPath13SelectedBackgroundOperatorChartExact
 --   selected defect = standard rational-SU(2) operator defect.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (_≤_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
@@ -111,7 +111,7 @@ preferredSelectedPhysicalExact :
     (inputs : SelectedPath13VariationalOperatorRepresentation CoarseField) →
   selectedPhysical (asSelectedPath13OperatorChartRepresentation inputs)
   ≡ preferredSelectedPhysical inputs
-preferredSelectedPhysicalExact inputs = Agda.Builtin.Equality.refl
+preferredSelectedPhysicalExact inputs = refl
 
 selectedCutDefectIsOperatorDefect :
   ∀ {CoarseField}
