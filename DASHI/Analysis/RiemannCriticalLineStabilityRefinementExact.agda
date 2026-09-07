@@ -68,11 +68,6 @@ compileCriticalLineStable {analytic} refinement s nnAbstract =
   refinedImpliesAbstract refinement s
     (refinedCriticalStable refinement s nnRefined)
   where
-  abstractCritical : Set
-  abstractCritical =
-    Analytic.CompletedRiemannZeta.criticalLine
-      (Analytic.AnalyticSubstrate.completed analytic) s
-
   refinedCritical : Set
   refinedCritical = RefinedCritical refinement s
 
@@ -124,7 +119,8 @@ record DecidableCriticalLinePredicateRefinement
 
     refinementReference : String
 
-open DecidableCriticalLinePredicateRefinement public
+-- Keep these projections qualified so opening the ordinary refinement above
+-- remains unambiguous for downstream consumers.
 
 fromDecidableRefinement :
   forall {analytic} ->
