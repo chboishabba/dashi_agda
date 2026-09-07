@@ -9,6 +9,7 @@ on:
       - 'DASHI/Culture/FoucaultFourfoldRetreatPrimarySourceBoundaryExact.agda'
       - 'DASHI/Culture/DerridaFourfoldRetreatPrimarySourceBoundaryExact.agda'
       - 'DASHI/Culture/FoucaultDerridaFourfoldRetreatAxisCrossPollinationExact.agda'
+      - 'DASHI/Culture/FourfoldRetreatIndigenousPluralAuthorityCrossPollinationExact.agda'
       - 'DASHI/Culture/Everything.agda'
       - '.github/workflows/fourfold-retreat-poststructuralism.yml'
 
@@ -37,6 +38,7 @@ jobs:
             DASHI/Culture/FoucaultFourfoldRetreatPrimarySourceBoundaryExact.agda
             DASHI/Culture/DerridaFourfoldRetreatPrimarySourceBoundaryExact.agda
             DASHI/Culture/FoucaultDerridaFourfoldRetreatAxisCrossPollinationExact.agda
+            DASHI/Culture/FourfoldRetreatIndigenousPluralAuthorityCrossPollinationExact.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
@@ -70,6 +72,11 @@ jobs:
         run: |
           agda -i . -l standard-library \
             DASHI/Culture/FoucaultDerridaFourfoldRetreatAxisCrossPollinationExact.agda
+
+      - name: Kernel-check Indigenous plural-authority cross-pollination
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Culture/FourfoldRetreatIndigenousPluralAuthorityCrossPollinationExact.agda
 
       - name: Kernel-check Culture aggregate
         run: |
