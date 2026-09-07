@@ -12,29 +12,18 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalNormalizedAntiParallelComplementRo
 --   * R464 square calibration;
 --   * the existing MHD reciprocal-radius law.
 --
--- For p+q=k, with
---
---   P = p / r_p,  Q = q / r_q,
---
--- we prove exactly
+-- For p+q=k, with P=p/r_p and Q=q/r_q, we prove exactly
 --
 --   (r_p-r_q)^2 + r_p r_q ||P+Q||^2 = r_k^2.
 --
--- Hence, because the radial-gap square is nonnegative,
---
---   r_p r_q ||P+Q||^2 <= r_k^2.
---
--- This is precisely the previously uninhabited normalized-defect geometry
--- required by R431 and the complement field required by R177.  No square root,
--- scalar cancellation from a vector equality, angle partition, or external
--- Waleffe-coordinate formula is used here.
+-- Hence the normalized anti-parallel defect is paid by the low output square.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
@@ -44,10 +33,8 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3AlgebraLaws as Algebra
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
-import DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation as Separation
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNCriticalSlotQuadraticKernelRound167Exact as R167
-import DASHI.Physics.Closure.NSTriadKNHHAntiParallelQuadraticKernelNormRound174Exact as R174
 import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramRound179Exact as R179
 import DASHI.Physics.Closure.NSTriadKNPhysicalOrderedTransferSquaredMajorantRound96Exact as R96
 import DASHI.Physics.Closure.NSTriadKNRationalNormalizedDirectionUnitRound455Exact as R455
@@ -222,20 +209,44 @@ physicalNormalizedComplementIdentity {E} {I} {S} {p} {q} {k} D =
 
     angular = normalizedDefectPolarization D
 
+    regroupProduct :
+      (rp * rq) * (two + two * (ip * iq * dot))
+      ≡ two * (rp * rq) + two * ((rp * ip) * (rq * iq) * dot)
+    regroupProduct = solve (rp ∷ rq ∷ ip ∷ iq ∷ dot ∷ [])
+
+    cancelP :
+      two * ((rp * ip) * (rq * iq) * dot)
+      ≡ two * (1ℚ * (rq * iq) * dot)
+    cancelP =
+      cong
+        (λ x → two * (x * (rq * iq) * dot))
+        (MHD.radiusInverse (reciprocalP D))
+
+    cancelQ :
+      two * (1ℚ * (rq * iq) * dot)
+      ≡ two * (1ℚ * 1ℚ * dot)
+    cancelQ =
+      cong
+        (λ x → two * (1ℚ * x * dot))
+        (MHD.radiusInverse (reciprocalQ D))
+
+    normalizeCancelled :
+      two * (1ℚ * 1ℚ * dot) ≡ two * dot
+    normalizeCancelled = solve (dot ∷ [])
+
     cancelProduct :
-      (rp * rq)
-        * (two + two * (ip * iq * dot))
+      (rp * rq) * (two + two * (ip * iq * dot))
       ≡ two * (rp * rq) + two * dot
-    cancelProduct
-      rewrite MHD.radiusInverse (reciprocalP D)
-            | MHD.radiusInverse (reciprocalQ D) =
-      solve (rp ∷ rq ∷ ip ∷ iq ∷ dot ∷ [])
+    cancelProduct =
+      trans regroupProduct
+        (cong
+          (two * (rp * rq) +_)
+          (trans cancelP (trans cancelQ normalizeCancelled)))
 
     rawCosine = resonantRawNormPolarization D
 
     radiiToRaw :
-      square rk
-      ≡ square rp + square rq + two * dot
+      square rk ≡ square rp + square rq + two * dot
     radiiToRaw =
       trans
         (R464.modeNormSquareMeaning (squareK D))
@@ -267,15 +278,15 @@ scaledNormalizedDefectBelowOutputSquare :
           (R167.normalizedDirection E S p)
           (R167.normalizedDirection E S q))
   ≤ square (Helical.modeNorm S k)
-scaledNormalizedDefectBelowOutputSquare {S = S} {p = p} {q = q} D =
+scaledNormalizedDefectBelowOutputSquare {E = E} {S = S} {p = p} {q = q} D =
   let
     rp = Helical.modeNorm S p
     rq = Helical.modeNorm S q
     radial = square (rp - rq)
     angular = (rp * rq) * norm
       (C3.complex3Add
-        (R167.normalizedDirection _ S p)
-        (R167.normalizedDirection _ S q))
+        (R167.normalizedDirection E S p)
+        (R167.normalizedDirection E S q))
     radialNN : 0ℚ ≤ radial
     radialNN = Rational.squareNonnegative (rp - rq)
     raised : angular ≤ radial + angular
@@ -301,8 +312,7 @@ outputRadiusSquareNonnegative :
   ∀ {E I S p q k} →
   (D : PhysicalNormalizedComplementData E I S p q k) →
   0ℚ ≤ square (Helical.modeNorm S k)
-outputRadiusSquareNonnegative D =
-  Rational.squareNonnegative _
+outputRadiusSquareNonnegative D = Rational.squareNonnegative _
 
 round467LiteralNormalizedComplementIdentityClosed : Bool
 round467LiteralNormalizedComplementIdentityClosed = true
