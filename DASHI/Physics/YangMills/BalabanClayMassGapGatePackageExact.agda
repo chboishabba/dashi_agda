@@ -21,6 +21,13 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 --     self-adjoint operator together;
 --   the selected common invariant operator core remains a separate payment.
 --
+-- The finite P33 lane now separately owns a literal projected operator
+-- H_P = PMP whose projector-image domain is invariant, whose matrix
+-- representative is symmetric whenever M is symmetric, and whose physical
+-- projector image inherits the exact 1/32 P33 quadratic floor whenever the
+-- supplied literal physical Hessian carries the existing matrix-coercivity
+-- certificate. This is a genuine finite precursor, not continuum M7b/M7c.
+--
 -- The gauge-invariant L2 subspace is the selected carrier route.  A separate
 -- quotient of configuration space by gauge orbits is not a mandatory M7
 -- payment on this route.
@@ -32,6 +39,7 @@ import DASHI.Physics.YangMills.BalabanClayObservableGapEdgeExact
 import DASHI.Physics.YangMills.BalabanClaySpectralUVCompatibilityExact
 import DASHI.Physics.YangMills.YMOperatorDomainContinuumFrontier2026Exact as Frontier
 import DASHI.Physics.YangMills.YMKatoClosedFormHamiltonianExact as Kato
+import DASHI.Physics.YangMills.BalabanP33ProjectedHamiltonianDomainExact as P33Projected
 
 infixr 4 _or_
 data _or_ (A B : Set) : Set where
@@ -151,6 +159,38 @@ finiteSelectedHodgeVariationPairingClosed :
   Frontier.finiteSelectedHodgeVariationPairingClosed
     Frontier.canonicalYMOperatorContinuumFrontier ≡ true
 finiteSelectedHodgeVariationPairingClosed = refl
+
+------------------------------------------------------------------------
+-- New finite P33 operator/domain precursor.
+------------------------------------------------------------------------
+
+p33FiniteProjectedHamiltonianInvariantDomainLevel : ProofLevel
+p33FiniteProjectedHamiltonianInvariantDomainLevel =
+  P33Projected.p33ProjectedHamiltonianInvariantDomainLevel
+
+p33FiniteProjectedHamiltonianMatrixRepresentationLevel : ProofLevel
+p33FiniteProjectedHamiltonianMatrixRepresentationLevel =
+  P33Projected.p33ProjectedHamiltonianMatrixRepresentationLevel
+
+p33FiniteProjectedHamiltonianSymmetryLevel : ProofLevel
+p33FiniteProjectedHamiltonianSymmetryLevel =
+  P33Projected.p33ProjectedHamiltonianFiniteSymmetryLevel
+
+p33FiniteProjectedHamiltonianPhysicalFloorLevel : ProofLevel
+p33FiniteProjectedHamiltonianPhysicalFloorLevel =
+  P33Projected.p33ProjectedHamiltonianPhysicalFloorLevel
+
+p33FiniteProjectedHamiltonianCoerciveClosureLevel : ProofLevel
+p33FiniteProjectedHamiltonianCoerciveClosureLevel =
+  P33Projected.p33ProjectedHamiltonianCoerciveClosureLevel
+
+-- Scheduling consequence:
+-- the finite P33 carrier no longer needs separate proofs that the projected
+-- operator preserves the projector-image physical domain, that its literal
+-- PMP representative is symmetric, or that an already-coercive literal
+-- physical Hessian keeps its 1/32 floor after restricting to im(P). Those are
+-- now one compiler package. The remaining M7 work is continuum/analytic and
+-- the actual concrete PhysicalSU2MatrixHessian producer.
 
 ------------------------------------------------------------------------
 -- Preferred Kato M7b/M7c compiler.

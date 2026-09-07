@@ -94,6 +94,11 @@ import DASHI.Physics.YangMills.BalabanCMP98Path13PreferredR171AlignedPrintedSour
 -- Newest canonical status surface for the source-correct preferred route.
 import DASHI.Physics.YangMills.BalabanCMP98Path13CurrentPreferredSourceFrontierExact
 
+-- Finite P33 M7 precursor: H_P = P M P has projector-image invariant domain,
+-- literal matrix representation and symmetry transport on the exact rational
+-- 3072-coordinate carrier. This is not continuum self-adjointness.
+import DASHI.Physics.YangMills.BalabanP33ProjectedHamiltonianDomainExact
+
 -- Preferred M7 operator route: Kato closed semibounded form representation.
 import DASHI.Physics.YangMills.YMKatoClosedFormHamiltonianExact
 
