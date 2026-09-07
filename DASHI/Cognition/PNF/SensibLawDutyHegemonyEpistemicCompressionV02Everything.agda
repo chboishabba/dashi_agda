@@ -2,16 +2,6 @@ module DASHI.Cognition.PNF.SensibLawDutyHegemonyEpistemicCompressionV02Everythin
 
 ------------------------------------------------------------------------
 -- DUTY / HEGEMONY / EPISTEMIC COMPRESSION / UNIVERSAL LAW V02
---
--- Preferred current-master capstone. It composes, but does not identify:
---   * doctrinal/legal derivability,
---   * observer adequacy,
---   * distributional/hegemony audit,
---   * relational/community authority,
---   * realised remedy.
---
--- No external claim is introduced here; source attribution remains in imported
--- owners (including Cullen [2026] HCA 19 and the Mabo/Pabai/Billy fixtures).
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -23,6 +13,12 @@ import DASHI.Cognition.PNF.SensibLawUniversalLegalReopeningEverything as LegalRe
 import DASHI.Cognition.PNF.SensibLawLegalObserverResidualRefinementBidiExact as Residual
 import DASHI.Cognition.PNF.SensibLawLegalGraphRefinementReopeningExact as Refinement
 import DASHI.Cognition.PNF.SensibLawCullenPublicAuthorityDutyCalibrationExact as Cullen
+import DASHI.Cognition.PNF.SensibLawCullenClimateDistinguishingPromotionExact as CullenDistinction
+import DASHI.Cognition.PNF.SensibLawPabaiTransformationPromotionExact as PabaiTransform
+import DASHI.Cognition.PNF.SensibLawPrecedentApplicabilityDistinguishingExact as Precedent
+import DASHI.Cognition.PNF.SensibLawFiniteExecutableLegalSearchExact as Search
+import DASHI.Cognition.PNF.SensibLawFiniteLegalSearchRegressionExact as Regression
+import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact as Negligence
 import DASHI.Cognition.PNF.SensibLawClimateDutyRouteSearchExact as Climate
 import DASHI.Cognition.PNF.SensibLawDoctrinalGateInterventionDistributionExact as Gate
 import DASHI.Cognition.PNF.SensibLawRemedyUniversalLegalAlgebraBridgeExact as Remedy
@@ -58,6 +54,39 @@ publicAuthorityResidualNeedsReasonInspection :
     (Residual.dutyResidualKind Climate.publicAuthorityFunction)
   ≡ Residual.inspectJudicialReasons
 publicAuthorityResidualNeedsReasonInspection = refl
+
+------------------------------------------------------------------------
+-- The executable mismatch has now crossed into a proof-relevant distinction,
+-- but only relative to an explicit material-correspondence policy.
+------------------------------------------------------------------------
+
+cullenClimateDistinctionIsPolicyProofRelevant :
+  Precedent.PolicyMinimalDistinguishingSet
+    CullenDistinction.cullenClimatePolicy
+cullenClimateDistinctionIsPolicyProofRelevant =
+  CullenDistinction.cullenClimateMinimalDistinguishingSet
+
+cullenClimatePolicyStillNotBindingLaw :
+  CullenDistinction.FixtureCorrespondencePolicyIsBindingHighCourtLaw → ⊥
+cullenClimatePolicyStillNotBindingLaw =
+  CullenDistinction.fixturePolicyDoesNotBecomeBindingLaw
+
+------------------------------------------------------------------------
+-- Pabai's executable repair candidate has crossed into a typed transformation
+-- and transformed proof, but the controlling-authority availability leaf remains
+-- deliberately open.
+------------------------------------------------------------------------
+
+pabaiTypedTransformationReopensCandidateGraph :
+  Search.TransformationPromotion
+    1 Negligence.dutyProposition Regression.pabaiReformulationCandidate
+pabaiTypedTransformationReopensCandidateGraph =
+  PabaiTransform.pabaiTransformationPromotion
+
+pabaiTransformationAuthorityStillOpen :
+  PabaiTransform.PabaiTransformationAvailableUnderControllingAuthorities → ⊥
+pabaiTransformationAuthorityStillOpen =
+  PabaiTransform.pabaiLegalAvailabilityStillOpen
 
 ------------------------------------------------------------------------
 -- Observer collision becomes a legal residual, not a rhetorical relabel.
