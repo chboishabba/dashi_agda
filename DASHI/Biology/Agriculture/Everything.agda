@@ -1,7 +1,9 @@
 module DASHI.Biology.Agriculture.Everything where
 
 import DASHI.Biology.Agriculture.HungriaBiologicalNitrogenFixationSourceAtlas
+import DASHI.Biology.Agriculture.HungriaSourceAttributionPromotionBoundaryExact
 import DASHI.Biology.Agriculture.HungriaSoybeanBNFExact
 import DASHI.Biology.Agriculture.HungriaEconomicEmissionModel2023Exact
 import DASHI.Biology.Agriculture.NitrogenaseChemistryCrossPollinationExact
+import DASHI.Biology.Agriculture.BNFMechanismToFieldPromotionBidiExact
 import DASHI.Biology.Agriculture.Hungria2024HeadlineLineageWeldExact
