@@ -93,7 +93,8 @@ observationChannelForClaim Anti.engineeredMetricResponse = Obs.clockOrRedshift
 -- Observation-theory comparison hierarchy.
 --
 -- GR and alternative predictions must independently carry attribution/proof
--- lineage and must independently weld to the exact observation coordinate.
+-- lineage, independently weld to the exact observation coordinate, and bind
+-- the DASHI-derived comparison to the exact consumed inputs.
 ------------------------------------------------------------------------
 
 data ObservationTheoryStatus : Set where
@@ -116,6 +117,9 @@ record ObservationTheoryComparison : Set where
       Pred.PredictionObservationWeld
         (Attr.prediction modifiedGravityPrediction)
         observation
+    comparisonLineage :
+      Attr.PairedPredictionComparisonLineage
+        ordinaryGRPrediction modifiedGravityPrediction observation
     ordinaryResidualClosed : Bool
     modifiedResidualSmaller : Bool
     status : ObservationTheoryStatus
@@ -127,6 +131,7 @@ record AntigravityUnificationBoundary : Set where
   field
     gravitationalObservationIsEmpiricalComparator : Bool
     predictionAttributionRequiredBeforeComparison : Bool
+    comparisonLineageMustBindExactConsumedInputs : Bool
     grIsDirectPhysicsLane : Bool
     ymCanConstrainHighFieldSourceModels : Bool
     nsCanCloseOrdinaryMomentumConfounders : Bool
@@ -143,7 +148,7 @@ record AntigravityUnificationBoundary : Set where
 canonicalAntigravityUnificationBoundary : AntigravityUnificationBoundary
 canonicalAntigravityUnificationBoundary =
   antigravity-unification-boundary
-    true true true true true false false false false false false false false true
+    true true true true true true false false false false false false false false true
 
 ------------------------------------------------------------------------
 -- Existing fail-closed theorem/program/observation boundaries are imported by
