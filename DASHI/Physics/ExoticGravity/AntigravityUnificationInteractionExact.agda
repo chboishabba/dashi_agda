@@ -72,13 +72,61 @@ primaryCrossDomainDemand Anti.alteredInertialResponse = requireGaugeSourceAndOrd
 primaryCrossDomainDemand Anti.persistentPropulsiveImpulse = requireFluidPlasmaMomentumClosure
 primaryCrossDomainDemand Anti.engineeredMetricResponse = requireGravitationalObservationComparator
 
-observationChannelForClaim : Anti.AntigravityClaim → Obs.GravitationalObservationChannel
-observationChannelForClaim Anti.reducedPassiveWeight = Obs.staticLoadOrWeight
-observationChannelForClaim Anti.changedFreeFallResponse = Obs.freeFallEquivalence
-observationChannelForClaim Anti.remoteRepulsiveField = Obs.localTestMassAcceleration
-observationChannelForClaim Anti.alteredInertialResponse = Obs.freeFallEquivalence
-observationChannelForClaim Anti.persistentPropulsiveImpulse = Obs.localTestMassAcceleration
-observationChannelForClaim Anti.engineeredMetricResponse = Obs.clockOrRedshift
+------------------------------------------------------------------------
+-- Introspective repair: not every antigravity-labelled claim belongs to a GR
+-- observation channel.  Inertial response and propulsive impulse are routed to
+-- their own consumers rather than being coerced into free-fall/local gravity.
+------------------------------------------------------------------------
+
+data ClaimObservationRoute : Set where
+  gravitationalObservationRoute :
+    Obs.GravitationalObservationChannel → ClaimObservationRoute
+  inertialComparisonRoute : ClaimObservationRoute
+  ordinaryMomentumClosureRoute : ClaimObservationRoute
+
+observationRouteForClaim : Anti.AntigravityClaim → ClaimObservationRoute
+observationRouteForClaim Anti.reducedPassiveWeight =
+  gravitationalObservationRoute Obs.staticLoadOrWeight
+observationRouteForClaim Anti.changedFreeFallResponse =
+  gravitationalObservationRoute Obs.freeFallEquivalence
+observationRouteForClaim Anti.remoteRepulsiveField =
+  gravitationalObservationRoute Obs.localTestMassAcceleration
+observationRouteForClaim Anti.alteredInertialResponse =
+  inertialComparisonRoute
+observationRouteForClaim Anti.persistentPropulsiveImpulse =
+  ordinaryMomentumClosureRoute
+observationRouteForClaim Anti.engineeredMetricResponse =
+  gravitationalObservationRoute Obs.clockOrRedshift
+
+record GravitationalClaimRoute (claim : Anti.AntigravityClaim) : Set where
+  constructor gravitational-claim-route
+  field
+    channel : Obs.GravitationalObservationChannel
+    routeMatches : observationRouteForClaim claim ≡ gravitationalObservationRoute channel
+
+open GravitationalClaimRoute public
+
+reducedPassiveWeightGravityRoute : GravitationalClaimRoute Anti.reducedPassiveWeight
+reducedPassiveWeightGravityRoute = gravitational-claim-route Obs.staticLoadOrWeight refl
+
+changedFreeFallGravityRoute : GravitationalClaimRoute Anti.changedFreeFallResponse
+changedFreeFallGravityRoute = gravitational-claim-route Obs.freeFallEquivalence refl
+
+remoteFieldGravityRoute : GravitationalClaimRoute Anti.remoteRepulsiveField
+remoteFieldGravityRoute = gravitational-claim-route Obs.localTestMassAcceleration refl
+
+metricResponseGravityRoute : GravitationalClaimRoute Anti.engineeredMetricResponse
+metricResponseGravityRoute = gravitational-claim-route Obs.clockOrRedshift refl
+
+inertialResponseIsNotFreeFallRoute :
+  observationRouteForClaim Anti.alteredInertialResponse
+    ≡ gravitationalObservationRoute Obs.freeFallEquivalence → ⊥
+inertialResponseIsNotFreeFallRoute ()
+
+propulsiveImpulseIsNotLocalGravityRoute :
+  observationRouteForClaim Anti.persistentPropulsiveImpulse
+    ≡ gravitationalObservationRoute Obs.localTestMassAcceleration → ⊥
+propulsiveImpulseIsNotLocalGravityRoute ()
 
 data ObservationTheoryStatus : Set where
   calibratedObservationNeeded : ObservationTheoryStatus
@@ -114,6 +162,9 @@ record AntigravityUnificationBoundary : Set where
   field
     gravitationalObservationIsEmpiricalComparator : Bool
     staticWeightIsDistinctFromFreeFall : Bool
+    everyAntigravityClaimIsGravitationalObservation : Bool
+    inertialResponseRequiresInertialComparison : Bool
+    propulsiveImpulseRequiresMomentumClosure : Bool
     predictionAttributionRequiredBeforeComparison : Bool
     comparisonLineageMustBindExactConsumedInputs : Bool
     grIsDirectPhysicsLane : Bool
@@ -132,7 +183,7 @@ record AntigravityUnificationBoundary : Set where
 canonicalAntigravityUnificationBoundary : AntigravityUnificationBoundary
 canonicalAntigravityUnificationBoundary =
   antigravity-unification-boundary
-    true true true true true true true false false false false false false false false true
+    true true false true true true true true true true false false false false false false false false true
 
 existingCoreTheoremInterfaces : Core.CoreTheoremInterfaces
 existingCoreTheoremInterfaces = Core.canonicalCoreTheoremInterfaces
