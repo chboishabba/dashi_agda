@@ -80,9 +80,12 @@ open import DASHI.Core.Prelude
 -- discovery is pruned. Exact 8889 producer identity remains mandatory only on
 -- the historical precision-repair route, before attributing/localising a loss
 -- inside that producer. It is NOT a prerequisite for a fresh theorem proving
--- the same final Gamma allowance directly on the literal g_pole. The final
--- consumer is theorem-interface driven, while historical attribution remains
--- provenance driven.
+-- the same final Gamma allowance directly on the literal g_pole.
+--
+-- The fresh route is now an explicit compiler too: a theorem-bearing envelope
+-- GammaResponse(g_pole) <= B_Gamma(g_pole) constructs the final Gamma target,
+-- and B_Gamma(g_pole) <= A_Gamma then constructs the final Gamma allowance
+-- payment. Historical identity is absent from that interface by construction.
 --
 -- Existing representation machinery is reused rather than re-searched.
 -- Uninhabited adapter records remain infrastructure obligations, not fabricated
@@ -132,6 +135,8 @@ import DASHI.Analysis.RiemannG2GammaCandidateSourceLineageRecoveryExact
 import DASHI.Analysis.RiemannG2GammaLineageHighestAlphaReconciliationExact
 import DASHI.Analysis.RiemannG2PoleQuotientGammaAllowanceDirectCompilerExact
 import DASHI.Analysis.RiemannG2FinalGammaRouteSchedulerRegression
+import DASHI.Analysis.RiemannG2FreshSameTaperGammaEnvelopeCompilerExact
+import DASHI.Analysis.RiemannG2FreshSameTaperGammaEnvelopeRegression
 import DASHI.Analysis.RiemannG2FinalSplitComplementAllowanceAssemblyExact
 import DASHI.Analysis.RiemannG2FinalSplitComplementOrderTransportCompilerExact
 import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact
