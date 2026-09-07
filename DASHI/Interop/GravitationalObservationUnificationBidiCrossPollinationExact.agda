@@ -85,6 +85,8 @@ laneForWaveResidual Wave.residualConsistentWithZero = unificationConsumerLane
 laneForWaveResidual Wave.residualRequiresFurtherModelComparison = unificationConsumerLane
 
 laneForMultiScaleResidual : Multi.MultiScaleResidual → CrossPollinationLane
+laneForMultiScaleResidual Multi.missingObservationScaleContext = observationEvidenceLane
+laneForMultiScaleResidual Multi.missingExactScaleSlotReceipt = observationEvidenceLane
 laneForMultiScaleResidual Multi.missingSameTheoryIdentityReceipt = grTheoryLane
 laneForMultiScaleResidual Multi.missingSameTheoryFamilyReceipt = grTheoryLane
 laneForMultiScaleResidual Multi.missingLaboratoryFreeFallComparison = observationEvidenceLane
@@ -97,6 +99,8 @@ laneForMultiScaleResidual Multi.inconsistentCrossScalePrediction = unificationCo
 laneForMultiScaleResidual Multi.unresolvedCrossScaleSystematics = observationEvidenceLane
 
 producerForMultiScaleResidual : Multi.MultiScaleResidual → Search.ProducerClass
+producerForMultiScaleResidual Multi.missingObservationScaleContext = Search.discriminatorProducer
+producerForMultiScaleResidual Multi.missingExactScaleSlotReceipt = Search.identityProducer
 producerForMultiScaleResidual Multi.missingSameTheoryIdentityReceipt = Search.identityProducer
 producerForMultiScaleResidual Multi.missingSameTheoryFamilyReceipt = Search.identityProducer
 producerForMultiScaleResidual Multi.missingLaboratoryFreeFallComparison = Search.empiricalEvidenceProducer
