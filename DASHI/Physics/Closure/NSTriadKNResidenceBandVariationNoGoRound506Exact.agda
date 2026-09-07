@@ -12,12 +12,12 @@ module DASHI.Physics.Closure.NSTriadKNResidenceBandVariationNoGoRound506Exact wh
 --
 -- The published residence-time mechanism is structurally relevant to the
 -- repo's same-scale HH frontier, but one must not infer a total-variation or
--- residence bound merely from membership in a low-drift band.  Such an
+-- residence bound merely from membership in a low-drift band. Such an
 -- inference needs additional monotonicity / bounded-variation authority on the
--- selected component.  This module records that logical firewall exactly.
+-- selected component. This module records that logical firewall exactly.
 --
 -- This is NOT a criticism theorem about the paper as a whole and does not
--- import any external theorem.  It states only the least-privilege fact needed
+-- import any external theorem. It states only the least-privilege fact needed
 -- by DASHI proof search: a band-control receipt and a variation-control receipt
 -- are distinct capabilities.
 ------------------------------------------------------------------------
@@ -29,7 +29,6 @@ open import Agda.Builtin.Unit using (⊤; tt)
 import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact as R504
 import DASHI.Physics.Closure.NSTriadKNInageHighHighComparatorAudit as Inage
 
--- Empty countermodel carrier used only to prove logical non-implication.
 data Empty : Set where
 
 record ResidenceCapabilityModel : Set₁ where
@@ -39,9 +38,6 @@ record ResidenceCapabilityModel : Set₁ where
 
 open ResidenceCapabilityModel public
 
--- A model can have low-drift/band authority while carrying no variation
--- authority at all.  Therefore there is no structure-free compiler from one
--- capability to the other.
 bandWithoutVariation : ResidenceCapabilityModel
 bandWithoutVariation = record
   { LowDriftBandReceipt = ⊤
@@ -58,7 +54,12 @@ bandControlDoesNotCreateVariationAuthority :
 bandControlDoesNotCreateVariationAuthority promote =
   promote bandWithoutVariation tt
 
--- Source/proof-search status.
+round506CurrentFirstResidualIsLiteralR406SignedCross :
+  R504.firstTerminalResidual R504.currentTerminalStatus
+  ≡ R504.missingLiteralR406SignedCrossPayment
+round506CurrentFirstResidualIsLiteralR406SignedCross =
+  R504.currentFirstTerminalResidual
+
 round506PublishedInageSourceAlreadyRecorded : Bool
 round506PublishedInageSourceAlreadyRecorded =
   Inage.independentHighHighShellComparatorRecorded
@@ -73,12 +74,11 @@ round506ResidenceMechanismRemainsStructuralComparator : Bool
 round506ResidenceMechanismRemainsStructuralComparator = true
 
 round506CurrentR406FirstAnalyticLeafStillSignedCross : Bool
-round506CurrentR406FirstAnalyticLeafStillSignedCross =
-  R504.round504FirstMissingIsLiteralR406SignedCrossPayment
+round506CurrentR406FirstAnalyticLeafStillSignedCross = true
 
-round506CurrentR406CriticalProductionLeafStillOpen : Bool
-round506CurrentR406CriticalProductionLeafStillOpen =
-  R504.round504PhaseSensitiveCriticalProductionSliceClosed
+round506CurrentR406CriticalProductionSliceClosed : Bool
+round506CurrentR406CriticalProductionSliceClosed =
+  R504.round504CriticalProductionSliceClosed
 
 round506ClayPromotion : Bool
 round506ClayPromotion = false
@@ -99,6 +99,10 @@ round506ResidenceCompressionAcceptedAsDASHITheoremDependencyIsFalse = refl
 round506ResidenceMechanismRemainsStructuralComparatorIsTrue :
   round506ResidenceMechanismRemainsStructuralComparator ≡ true
 round506ResidenceMechanismRemainsStructuralComparatorIsTrue = refl
+
+round506CurrentR406CriticalProductionSliceClosedIsFalse :
+  round506CurrentR406CriticalProductionSliceClosed ≡ false
+round506CurrentR406CriticalProductionSliceClosedIsFalse = refl
 
 round506ClayPromotionIsFalse : round506ClayPromotion ≡ false
 round506ClayPromotionIsFalse = refl
