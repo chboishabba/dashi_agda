@@ -20,3 +20,5 @@ import DASHI.Physics.Semiconductor.Device.TwoCellResidualSecantWeldExact
 import DASHI.Physics.Semiconductor.Device.FiniteScharfetterGummelFluxExact
 import DASHI.Physics.Semiconductor.Device.ComputedFluxTwoCellContinuityExact
 import DASHI.Physics.Semiconductor.Device.ComputedFluxResidualSecantWeldExact
+import DASHI.Physics.Semiconductor.Device.BishopBernoulliScharfetterGummelBridgeExact
+import DASHI.Physics.Semiconductor.Device.BishopScharfetterGummelFaceFluxExact
