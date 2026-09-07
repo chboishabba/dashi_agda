@@ -31,20 +31,19 @@ import DASHI.Biology.DrosophilaTemporalDiagnosisHistoryBidiExact
 import DASHI.Core.TemporalDiagnosisDependencyLineageBidiExact
 import DASHI.Core.IncrementalDiagnosisTruthMaintenanceBidiExact
 
--- Selective invalidation + N-dimensional recursive-Pareto compatibility.
 import DASHI.Core.SelectiveInvalidationParetoFrontierBidiExact
 import DASHI.Core.RecursiveSelectiveInvalidationParetoTruthMaintenanceBidiExact
 
--- Uploaded Aristotle Lean methodology bridge + exact recompute worklist:
--- conservative frontier extension, no-loss/no-dup grouping, proof-gated repair,
--- provenance/source separation, and least-upper-bound merge are retained only
--- as source-attributed methodology; Lean proofs are not silently transported.
+-- Uploaded Aristotle Lean methodology bridge + exact recompute worklist.
 import DASHI.Core.AristotleFrontierWorklistTruthMaintenanceBridgeExact
 import DASHI.Core.SelectiveInvalidationWorklistBidiExact
 
--- Remaining manual invalidation seam removed: changed artifact + proof-bearing
--- dependency reachability + application-declared axis ownership derive the least
--- invalidation set. The recursive compiler consumes that derived set directly.
+-- Conservative ontology-gap frontiers and non-monotone diagnosis frontiers are
+-- kept distinct: evidence extension may retain old entailments while the current
+-- diagnosis projection can still expand through reactivation.
+import DASHI.Core.ConservativeEvidenceFrontierDiagnosisNonMonotonicityBidiExact
+
+-- Dependency-derived least invalidation + recursive compiler.
 import DASHI.Core.DependencyDerivedMinimalInvalidationBidiExact
 import DASHI.Core.DependencyDerivedRecursiveParetoTruthMaintenanceBidiExact
 
