@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.ExperimentalOutcomeOrientationBackpropagationBidiExact as Outcome
+import DASHI.Core.DiagnosisExperimentPortfolioBidiExact as Portfolio
 import DASHI.Core.AppendOnlyEvidenceResidualRevisionExact as AppendOnly
 
 ------------------------------------------------------------------------
@@ -11,7 +12,7 @@ import DASHI.Core.AppendOnlyEvidenceResidualRevisionExact as AppendOnly
 --
 -- A diagnosis is not represented only by its current live/dead bit.  Every
 -- activation, elimination and reactivation is an append-only event carrying
--- its time, trigger, observation/debug move and provenance rationale.
+-- its time, a typed result/debug-move trigger, and provenance rationale.
 ------------------------------------------------------------------------
 
 data DiagnosisTransition : Set where
@@ -20,13 +21,17 @@ data DiagnosisTransition : Set where
 data CurrentDiagnosisStatus : Set where
   currentlyLive currentlyEliminated : CurrentDiagnosisStatus
 
+data DiagnosisEventTrigger : Set where
+  resultTrigger : Outcome.ExperimentalOutcome → DiagnosisEventTrigger
+  debugMoveTrigger : Portfolio.DebugMoveKind → DiagnosisEventTrigger
+
 record DiagnosisEvent (diagnosis : Outcome.OutcomeDiagnosis) : Set where
   constructor diagnosis-event
   field
     transition : DiagnosisTransition
     time : Nat
-    triggeringResultReference : String
-    debugMoveReference : String
+    trigger : DiagnosisEventTrigger
+    triggerReference : String
     rationaleReference : String
     provenanceReference : String
 
@@ -71,26 +76,38 @@ currentStatus (event ∷ rest) with transition event
 frameActivated : DiagnosisEvent Outcome.frameConflict
 frameActivated =
   diagnosis-event activated 1
-    "initial adverse/indeterminate result"
-    "no debug move yet"
+    (resultTrigger Outcome.adverse)
+    "initial adverse result activates a live frame-conflict diagnosis"
     "frame conflict remains compatible with the initial result"
     "initial diagnosis-fibre construction receipt"
 
 frameEliminated : DiagnosisEvent Outcome.frameConflict
 frameEliminated =
   diagnosis-event eliminated 2
-    "small frame control"
-    "frame-orientation debug observation"
+    (debugMoveTrigger Portfolio.frameControl)
+    "frame-control debugging move"
     "frame control makes frame conflict incompatible with the then-current debugging observation"
     "diagnosis narrowing receipt"
 
 frameReactivated : DiagnosisEvent Outcome.frameConflict
 frameReactivated =
   diagnosis-event reactivated 3
-    "later result under changed representation/context"
-    "later frame-sensitive debug observation"
+    (resultTrigger Outcome.indeterminate)
+    "later indeterminate result under changed representation/context"
     "new evidence makes frame conflict compatible again without deleting its prior elimination"
     "append-only reactivation receipt"
+
+frameActivationWasResultTriggered :
+  trigger frameActivated ≡ resultTrigger Outcome.adverse
+frameActivationWasResultTriggered = refl
+
+frameEliminationWasDebugMoveTriggered :
+  trigger frameEliminated ≡ debugMoveTrigger Portfolio.frameControl
+frameEliminationWasDebugMoveTriggered = refl
+
+frameReactivationWasLaterResultTriggered :
+  trigger frameReactivated ≡ resultTrigger Outcome.indeterminate
+frameReactivationWasLaterResultTriggered = refl
 
 frameHistoryAtActivation : DiagnosisTrace Outcome.frameConflict
 frameHistoryAtActivation = frameActivated ∷ []
@@ -147,6 +164,8 @@ data EliminatedOnceMeansForeverFalse : Set where
 data ReactivatedMeansPreviouslyEliminatedWasWrong : Set where
 data CurrentStatusErasesHistory : Set where
 
+data TriggerReferenceCreatesWorldTruth : Set where
+
 reactivationDoesNotDeleteElimination : ReactivationDeletesElimination → ⊥
 reactivationDoesNotDeleteElimination ()
 
@@ -160,15 +179,19 @@ reactivationDoesNotRetroactivelyRefutePriorElimination ()
 currentProjectionDoesNotEraseDiagnosisHistory : CurrentStatusErasesHistory → ⊥
 currentProjectionDoesNotEraseDiagnosisHistory ()
 
+typedTriggerDoesNotCreateWorldTruth : TriggerReferenceCreatesWorldTruth → ⊥
+typedTriggerDoesNotCreateWorldTruth ()
+
 record TemporalDiagnosisHistoryBoundary : Set where
   constructor temporal-diagnosis-history-boundary
   field
     historyAppendOnly : Bool
     currentStatusMayBeNonMonotone : Bool
     eliminatedDiagnosisMayReactivate : Bool
+    eventTriggerIsTyped : Bool
     reactivationDeletesPriorElimination : Bool
     currentStatusIsWholeHistory : Bool
 
 canonicalTemporalDiagnosisHistoryBoundary : TemporalDiagnosisHistoryBoundary
 canonicalTemporalDiagnosisHistoryBoundary =
-  temporal-diagnosis-history-boundary true true true false false
+  temporal-diagnosis-history-boundary true true true true false false
