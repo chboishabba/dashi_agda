@@ -1,4 +1,4 @@
-name: NS Round478-479 direct resolved Gram consumer
+name: NS Round478-480 resolved terminal minimization
 
 on:
   pull_request:
@@ -6,6 +6,7 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedGramOperatorRound477Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedDirectConsumerRound478Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedSignedResidualRound479Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedPhysicalSnapshotRound480Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedTerminalEverythingRound479Exact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - 'DASHI/Core/ClayCrossDomainLiteralFrontierExact.agda'
@@ -16,7 +17,7 @@ permissions:
   contents: read
 
 jobs:
-  round478-479:
+  round478-480:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -28,7 +29,7 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v3
 
-      - name: Type-check Round478 weakest direct resolved consumer
+      - name: Type-check Round478 direct all-coefficient resolved producer
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNCauchyResolvedDirectConsumerRound478Exact.agda
@@ -38,7 +39,12 @@ jobs:
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNCauchyResolvedSignedResidualRound479Exact.agda
 
-      - name: Type-check focused Round479 terminal aggregate
+      - name: Type-check Round480 actual physical snapshot consumer
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNCauchyResolvedPhysicalSnapshotRound480Exact.agda
+
+      - name: Type-check focused terminal aggregate
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNCauchyResolvedTerminalEverythingRound479Exact.agda
