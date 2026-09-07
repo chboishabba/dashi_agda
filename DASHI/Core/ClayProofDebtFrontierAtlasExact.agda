@@ -64,6 +64,34 @@ lane ymContinuumClustering = yangMillsLane
 lane exactHeadAgdaValidation = yangMillsLane
 
 ------------------------------------------------------------------------
+-- Source identities already pinned by repository source atlases.
+------------------------------------------------------------------------
+
+rhLowVerifiedHeightSource : SourceIdentity
+rhLowVerifiedHeightSource = source-identity
+  "Dave Platt; Tim Trudgian"
+  "The Riemann hypothesis is true up to 3·10^12"
+  "DOI 10.1112/blms.12460"
+  "Bulletin of the London Mathematical Society 53(3), 792-797 (2021)"
+  "repository source atlas inspected 2026-09-08"
+
+osReconstructionSourceI : SourceIdentity
+osReconstructionSourceI = source-identity
+  "Konrad Osterwalder; Robert Schrader"
+  "Axioms for Euclidean Green's Functions"
+  "DOI 10.1007/BF01645738"
+  "Communications in Mathematical Physics 31 (1973), 83-112"
+  "repository verified-literature atlas inspected 2026-09-08"
+
+osReconstructionSourceII : SourceIdentity
+osReconstructionSourceII = source-identity
+  "Konrad Osterwalder; Robert Schrader"
+  "Axioms for Euclidean Green's Functions II"
+  "DOI 10.1007/BF01608978"
+  "Communications in Mathematical Physics 42 (1975), 281-305"
+  "repository verified-literature atlas inspected 2026-09-08"
+
+------------------------------------------------------------------------
 -- Canonical routed status for each currently distinguished coordinate.
 ------------------------------------------------------------------------
 
@@ -184,7 +212,37 @@ cutClass ymSelectedPhysicalCoerciveCompactContainment = mathematicallyOpen
 cutClass ymContinuumClustering = mathematicallyOpen
 cutClass exactHeadAgdaValidation = localAgdaCertificationOpen
 
+------------------------------------------------------------------------
+-- 32 GB workstation schedule for the live coordinates.
+------------------------------------------------------------------------
+
+constrainedAction : ClayCoordinate → SchedulerAction
+constrainedAction coordinate =
+  scheduleAction
+    (routedDebt (coordinateRoute coordinate))
+    (statementStatus (coordinateRoute coordinate))
+    constrained32GB
+    (workload coordinate)
+  where
+  workload : ClayCoordinate → ProofWorkload
+  workload rhFinalNearLiteralPhaseRealisation = tinyGlue
+  workload rhUniformHighJointComplementMargin = heavyReplay
+  workload rhLowPublishedHeightCarrierTransport = tinyGlue
+  workload rhCriticalLinePredicateRefinement = tinyGlue
+  workload nsUniformDyadicHOneHalfEquivalence = moderateReplay
+  workload nsUniformDyadicHThreeHalfEquivalence = moderateReplay
+  workload nsLiteralR406SignedCrossEstimate = heavyReplay
+  workload nsExternalCrossTriadSignedForcing = heavyReplay
+  workload ymSelectedExpectationProbabilitySemantics = tinyGlue
+  workload ymStandardOSReconstruction = heavyReplay
+  workload ymSelectedPhysicalCoerciveCompactContainment = heavyReplay
+  workload ymContinuumClustering = heavyReplay
+  workload exactHeadAgdaValidation = tinyGlue
+
+------------------------------------------------------------------------
 -- Regression pins: these coordinates must not drift back into the wrong queue.
+------------------------------------------------------------------------
+
 rhLowIsNotMathematicalDebt :
   routedDebt (coordinateRoute rhLowPublishedHeightCarrierTransport) ≡ transcriptionDebt
 rhLowIsNotMathematicalDebt = refl
@@ -212,3 +270,30 @@ ymClusteringRemainsMathematical = refl
 exactHeadValidationIsCertificationDebt :
   routedDebt (coordinateRoute exactHeadAgdaValidation) ≡ certificationDebt
 exactHeadValidationIsCertificationDebt = refl
+
+-- Because these leaves are still unaligned, the scheduler refuses to send them
+-- to a proof backend yet.  Alignment is the first task.
+rhLowFirstActionIsAlignment :
+  constrainedAction rhLowPublishedHeightCarrierTransport ≡ auditTranscription
+rhLowFirstActionIsAlignment = refl
+
+nsDyadicFirstActionIsAlignment :
+  constrainedAction nsUniformDyadicHOneHalfEquivalence ≡ auditTranscription
+nsDyadicFirstActionIsAlignment = refl
+
+ymOSFirstActionIsAlignment :
+  constrainedAction ymStandardOSReconstruction ≡ auditTranscription
+ymOSFirstActionIsAlignment = refl
+
+-- Novel leaves remain research tasks even on a constrained machine.
+rhHighFirstActionIsResearch :
+  constrainedAction rhUniformHighJointComplementMargin ≡ researchMathematics
+rhHighFirstActionIsResearch = refl
+
+nsR406FirstActionIsResearch :
+  constrainedAction nsLiteralR406SignedCrossEstimate ≡ researchMathematics
+nsR406FirstActionIsResearch = refl
+
+ymClusteringFirstActionIsResearch :
+  constrainedAction ymContinuumClustering ≡ researchMathematics
+ymClusteringFirstActionIsResearch = refl
