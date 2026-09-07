@@ -75,7 +75,7 @@ uninspectedNoRowsRemainUnresolved = refl
 data NoStatementObservedImpliesNativeNoValue : Set where
 data NativeNoValueImpliesNoStatementRow : Set where
 data PartialNonObservationImpliesNativeNoValue : Set where
-\data NativeSnakCreatesMigrationAuthority : Set where
+data NativeSnakCreatesMigrationAuthority : Set where
 
 noStatementObservedDoesNotCreateNativeNoValue :
   NoStatementObservedImpliesNativeNoValue → ⊥
