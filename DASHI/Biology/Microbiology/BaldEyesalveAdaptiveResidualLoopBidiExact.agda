@@ -8,6 +8,7 @@ import DASHI.Core.ResidualActionPolicyExact as Action
 import DASHI.Core.ResidualActionAdaptiveLoopExact as Loop
 import DASHI.Biology.Microbiology.BaldEyesalveResidualActionPolicyBidiExact as Policy
 import DASHI.Biology.Microbiology.BaldEyesalveMechanismExperimentSelectionExact as Experiments
+import DASHI.Biology.Microbiology.BaldEyesalveEvidenceRevisionBidiExact as Revision
 
 ------------------------------------------------------------------------
 -- BALD'S EYESALVE ADAPTIVE RESIDUAL LOOP
@@ -15,6 +16,8 @@ import DASHI.Biology.Microbiology.BaldEyesalveMechanismExperimentSelectionExact 
 -- Each next-action template now carries the observation required to feed back
 -- into the mechanism residual.  The wet-lab programme therefore has an explicit
 -- measure/perturb -> observe -> update -> selectively reopen/stop cycle.
+-- Evidence is retained append-only even when the favoured interpretation or
+-- next action changes.
 ------------------------------------------------------------------------
 
 record EyesalveFeedbackRoute : Set where
@@ -111,13 +114,20 @@ record BaldEyesalveAdaptiveResidualBoundary : Set where
     causalPromotionNeedsSameObjectPostActionEvidence : Bool
     causalPromotionNeedsSameObjectPostActionEvidenceIsTrue :
       causalPromotionNeedsSameObjectPostActionEvidence ≡ true
+    retainedEvidenceMaySupportRevisedMechanismDisposition : Bool
+    retainedEvidenceMaySupportRevisedMechanismDispositionIsTrue :
+      retainedEvidenceMaySupportRevisedMechanismDisposition ≡ true
 
 canonicalBaldEyesalveAdaptiveResidualBoundary : BaldEyesalveAdaptiveResidualBoundary
 canonicalBaldEyesalveAdaptiveResidualBoundary =
-  baldEyesalveAdaptiveResidualBoundary false refl false refl true refl true refl true refl
+  baldEyesalveAdaptiveResidualBoundary
+    false refl false refl true refl true refl true refl true refl
 
 existingLoopBoundary : Loop.ResidualActionAdaptiveLoopBoundary
 existingLoopBoundary = Loop.canonicalResidualActionAdaptiveLoopBoundary
 
 existingExperimentSelection : Experiments.TK.ExperimentSelection
 existingExperimentSelection = Experiments.canonicalMechanismExperimentSelection
+
+existingEvidenceRevisionBoundary : Revision.BaldEyesalveEvidenceRevisionBoundary
+existingEvidenceRevisionBoundary = Revision.canonicalBaldEyesalveEvidenceRevisionBoundary
