@@ -9,42 +9,21 @@ import DASHI.Physics.GR.GravitationalObservationSourceAtlasExact as Sources
 import DASHI.Physics.GR.GravitationalPredictionObservationBidiExact as Pred
 import DASHI.Physics.GR.GravitationalPredictionAttributionBidiExact as Attr
 
-------------------------------------------------------------------------
--- GRAVITATIONAL-WAVE THEORY TESTS
---
--- A detected strain/timing signal is separated from the inference layer used to
--- test GR or alternatives.  Theory comparators are attributed predictions welded
--- to the exact calibrated observation, not free String labels.
-------------------------------------------------------------------------
-
 data WaveTestFamily : Set where
-  inspiralPhaseConsistency : WaveTestFamily
-  mergerRingdownConsistency : WaveTestFamily
-  dispersionPropagation : WaveTestFamily
-  polarizationContent : WaveTestFamily
-  remnantConsistency : WaveTestFamily
-  stochasticCorrelationShape : WaveTestFamily
-  cosmologicalPropagation : WaveTestFamily
+  inspiralPhaseConsistency mergerRingdownConsistency dispersionPropagation
+    polarizationContent remnantConsistency stochasticCorrelationShape
+    cosmologicalPropagation : WaveTestFamily
 
 data WaveTestResidual : Set where
-  missingCalibratedData : WaveTestResidual
-  missingGRWaveformComparator : WaveTestResidual
-  missingAlternativeComparator : WaveTestResidual
-  missingDetectorResponse : WaveTestResidual
-  missingPropagationModel : WaveTestResidual
-  missingPopulationModel : WaveTestResidual
-  missingSystematicErrorBudget : WaveTestResidual
-  residualConsistentWithZero : WaveTestResidual
-  residualRequiresFurtherModelComparison : WaveTestResidual
+  missingCalibratedData missingGRWaveformComparator missingAlternativeComparator
+    missingDetectorResponse missingPropagationModel missingPopulationModel
+    missingSystematicErrorBudget residualConsistentWithZero
+    residualRequiresFurtherModelComparison : WaveTestResidual
 
 data TestObservable : Set where
-  phaseEvolution : TestObservable
-  ringdownSpectrum : TestObservable
-  frequencyDependentArrival : TestObservable
-  networkPolarizationResponse : TestObservable
-  inspiralVsRemnantParameters : TestObservable
-  angularTimingCorrelation : TestObservable
-  distanceRedshiftRelation : TestObservable
+  phaseEvolution ringdownSpectrum frequencyDependentArrival
+    networkPolarizationResponse inspiralVsRemnantParameters angularTimingCorrelation
+    distanceRedshiftRelation : TestObservable
 
 testObservable : WaveTestFamily → TestObservable
 testObservable inspiralPhaseConsistency = phaseEvolution
@@ -65,29 +44,14 @@ record WaveTheoryTestReceipt : Set where
     testProjectionCarrier : String
     grPrediction : Attr.AttributedGravitationalPrediction
     alternativePrediction : Attr.AttributedGravitationalPrediction
-    grPredictionIsGR :
-      Pred.theoryFamily (Attr.prediction grPrediction)
-        ≡ Pred.generalRelativityTheory
-    grWeld :
-      Pred.PredictionObservationWeld
-        (Attr.prediction grPrediction)
-        observation
-    alternativeWeld :
-      Pred.PredictionObservationWeld
-        (Attr.prediction alternativePrediction)
-        observation
+    grPredictionIsGR : Pred.theoryFamily (Attr.prediction grPrediction) ≡ Pred.generalRelativityTheory
+    grWeld : Pred.PredictionObservationWeld (Attr.prediction grPrediction) observation
+    alternativeWeld : Pred.PredictionObservationWeld (Attr.prediction alternativePrediction) observation
     systematicBudget : String
     resultCarrier : Sources.ObservationAttributedSource
-    comparisonLineage :
-      Attr.PairedPredictionComparisonLineage
-        grPrediction alternativePrediction observation
+    comparisonLineage : Attr.PairedPredictionComparisonLineage grPrediction alternativePrediction observation
     deviationDetected : Bool
-
 open WaveTheoryTestReceipt public
-
-------------------------------------------------------------------------
--- Reverse test design.
-------------------------------------------------------------------------
 
 record WaveTheoryReverseCutset : Set where
   constructor wave-theory-reverse-cutset
@@ -104,14 +68,7 @@ record WaveTheoryReverseCutset : Set where
     residualAlonePromotesAlternativeGravity : Bool
 
 cutsetFor : WaveTestFamily → WaveTheoryReverseCutset
-cutsetFor family =
-  wave-theory-reverse-cutset family
-    true true true true true true true true false
-
-------------------------------------------------------------------------
--- Introspective firewall: a comparator label alone cannot inhabit either
--- attributed prediction, its same-observation weld, or the bound lineage.
-------------------------------------------------------------------------
+cutsetFor family = wave-theory-reverse-cutset family true true true true true true true true false
 
 record WaveComparatorAttributionBoundary : Set where
   constructor wave-comparator-attribution-boundary
@@ -127,26 +84,28 @@ canonicalWaveComparatorAttributionBoundary =
   wave-comparator-attribution-boundary false false false false false
 
 ------------------------------------------------------------------------
--- Current source-backed GR-test status.
+-- Positive current-status propositions are exact source-entitled claims.  The
+-- uniqueness conclusion remains a DASHI boundary judgment and stays false.
 ------------------------------------------------------------------------
 
 record CurrentGWTheoryTestStatus : Set where
   constructor current-gw-theory-test-status
   field
-    source : Sources.ObservationAttributedSource
-    currentLVKSuiteTestsGR : Bool
-    currentLVKSuiteDetectsRequiredDeviationFromGR : Bool
-    tighterDeviationBoundsReported : Bool
+    currentLVKSuiteTestsGR :
+      Sources.SourceEntitledObservationClaim Sources.lvkCurrentGRTestSuiteClaim
+    currentLVKSuiteNoRequiredDeviation :
+      Sources.SourceEntitledObservationClaim Sources.lvkNoRequiredDeviationClaim
+    tighterDeviationBoundsReported :
+      Sources.SourceEntitledObservationClaim Sources.lvkTighterDeviationBoundsClaim
     noDeviationMeansGRUniquelyEstablished : Bool
 
 canonicalCurrentGWTheoryTestStatus : CurrentGWTheoryTestStatus
 canonicalCurrentGWTheoryTestStatus =
   current-gw-theory-test-status
-    Sources.lvkGRTests2026 true false true false
-
-------------------------------------------------------------------------
--- Cross-scale observation firewall.
-------------------------------------------------------------------------
+    (Sources.canonicalSourceEntitledClaim Sources.lvkCurrentGRTestSuiteClaim)
+    (Sources.canonicalSourceEntitledClaim Sources.lvkNoRequiredDeviationClaim)
+    (Sources.canonicalSourceEntitledClaim Sources.lvkTighterDeviationBoundsClaim)
+    false
 
 record GravitationalWaveCrossScaleBoundary : Set where
   constructor gravitational-wave-cross-scale-boundary
