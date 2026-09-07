@@ -4,22 +4,20 @@ module DASHI.Physics.YangMills.BalabanCMP98Path13ReducedTwoCarrierSourceFamilyEx
 ------------------------------------------------------------------------
 -- PATH13 EQ. (119): REDUCED SHORTEST SOURCE FAMILY
 --
--- The compatibility-facing family still accepts one embedding per bond and one
--- principal-image proof per bond/point.  Both are now generated.  Radius-six
--- walk agreement is also constructed internally.
+-- Geometry and pointwise principal-image receipts are generated internally.
+-- Two four-input source routes are retained:
 --
--- Two source routes are retained:
+--   A. compact historical route:
+--      selected background + scalar embedding + Federbush family
+--      + one mixed selected-cut/operator-defect weld;
 --
---   A. the compact four-input historical cut/defect weld;
---   B. a provenance-separated native-radius route in which the selected Path13
---      background and its `SelectedInverseLinkRadius13` receipt inhabit one
---      dependent same-object fibre; standard SU(2) operator representation is
---      source-independent; and only three selected-chart recognition facts
---      remain at the cut.
+--   B. provenance-separated radius-native route:
+--      selected background/radius/operator-chart representation fibre
+--      + scalar embedding + Federbush family
+--      + the single cut-specific scalar receipt 1/24 <= r_cut.
 --
--- Route B is not claimed to have fewer fields.  Its gain is typed ownership:
--- physical selection/radius, standard representation and chart recognition can
--- no longer be conflated into one opaque weld.
+-- Route B does not assert new existence.  It makes physical smallness, standard
+-- representation and cut authority live at their proper typed owners.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -27,17 +25,20 @@ open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPath13SelectedPhysicalBackgroundTargetExact as PathTarget
-import DASHI.Physics.YangMills.BalabanPath13BackgroundGaugeAdjointDefectExact as Background
 import DASHI.Physics.YangMills.BalabanPath13SelectedBackgroundRadiusFibreExact as BackgroundRadius
+import DASHI.Physics.YangMills.BalabanPath13SelectedBackgroundOperatorChartExact as OperatorChart
 import DASHI.Physics.YangMills.BalabanCMP98Path13ReducedFamilyGeometryExact as Geometry
 import DASHI.Physics.YangMills.BalabanCMP98Path13RelativeContourPrincipalImageExact as Principal
-import DASHI.Physics.YangMills.BalabanPath13RadiusOperatorDefectRouteExact as RadiusOperator
 import DASHI.Physics.YangMills.BalabanPath13RadiusPrincipalImageRouteExact as RadiusPrincipal
 import DASHI.Physics.YangMills.BalabanCMP98Path13TwoCarrierSourceFamilyExact as Family
 import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as R208
 import DASHI.Physics.YangMills.BalabanCMP98Equation119FederbushCalculusReuseRound177Exact as R177
 import DASHI.Physics.YangMills.BalabanCMP98Path13PerturbationCarrierWeldExact as Perturbation
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as Lie
+
+------------------------------------------------------------------------
+-- Compatibility reduced input.
+------------------------------------------------------------------------
 
 record ReducedPath13TwoCarrierSourceFamilyInputs
     (CoarseField : Set) : Set₁ where
@@ -85,6 +86,10 @@ reducedPath13Equation119QPrimeAtBondExact :
       (asFullPath13TwoCarrierSourceFamilyInputs inputs)
       step perturbation bond
 reducedPath13Equation119QPrimeAtBondExact inputs step perturbation bond = refl
+
+------------------------------------------------------------------------
+-- Compact four-input route.
+------------------------------------------------------------------------
 
 record CanonicalPath13TwoCarrierSourceFamilyInputs
     (CoarseField : Set) : Set₁ where
@@ -147,24 +152,30 @@ canonicalSourceGeometryBackgroundExact :
   ≡ selectedPhysical inputs
 canonicalSourceGeometryBackgroundExact inputs = refl
 
+------------------------------------------------------------------------
+-- Preferred four-input radius-native route.
+------------------------------------------------------------------------
+
 record RadiusNativePath13TwoCarrierSourceFamilyInputs
     (CoarseField : Set) : Set₁ where
   field
-    selectedBackgroundRadius :
-      BackgroundRadius.SelectedPath13BackgroundWithRadius CoarseField
+    selectedOperatorChart :
+      OperatorChart.SelectedPath13OperatorChartRepresentation CoarseField
 
     scalarEmbeddingRadius : R208.RationalRealRingEmbedding
     federbushConventionRadius : R177.ExistingFederbushConventionFamily
 
-    operatorRepresentation :
-      RadiusOperator.ExactRationalSU2OperatorDefectRepresentation
-
-    cutRecognition :
-      RadiusPrincipal.Path13RadiusCutRecognition
-        (BackgroundRadius.selectedPhysical selectedBackgroundRadius)
-        operatorRepresentation
+    cutThreshold :
+      RadiusPrincipal.Path13RadiusCutThreshold selectedOperatorChart
 
 open RadiusNativePath13TwoCarrierSourceFamilyInputs public
+
+selectedBackgroundRadius :
+  ∀ {CoarseField} →
+  RadiusNativePath13TwoCarrierSourceFamilyInputs CoarseField →
+  BackgroundRadius.SelectedPath13BackgroundWithRadius CoarseField
+selectedBackgroundRadius inputs =
+  OperatorChart.backgroundRadius (selectedOperatorChart inputs)
 
 selectedPhysicalRadius :
   ∀ {CoarseField} →
@@ -172,15 +183,7 @@ selectedPhysicalRadius :
   PathTarget.SelectedPhysicalBackground13Instantiation
     CoarseField Lie.SU2LieAlgebra
 selectedPhysicalRadius inputs =
-  BackgroundRadius.selectedPhysical (selectedBackgroundRadius inputs)
-
-nativeInverseLinkRadius :
-  ∀ {CoarseField}
-    (inputs : RadiusNativePath13TwoCarrierSourceFamilyInputs CoarseField) →
-  Background.SelectedInverseLinkRadius13
-    (PathTarget.path13Background (selectedPhysicalRadius inputs))
-nativeInverseLinkRadius inputs =
-  BackgroundRadius.nativeInverseLinkRadius (selectedBackgroundRadius inputs)
+  OperatorChart.selectedPhysical (selectedOperatorChart inputs)
 
 radiusNativeReducedGeometry :
   ∀ {CoarseField} →
@@ -202,11 +205,9 @@ asRadiusNativeFullPath13TwoCarrierSourceFamilyInputs inputs = record
   ; Family.Path13TwoCarrierSourceFamilyInputs.federbushConvention =
       federbushConventionRadius inputs
   ; Family.Path13TwoCarrierSourceFamilyInputs.relativeContourInPrincipalImage =
-      RadiusPrincipal.path13RelativeContourInPrincipalImageFromRadius
-        (radiusNativeReducedGeometry inputs)
-        (nativeInverseLinkRadius inputs)
-        (operatorRepresentation inputs)
-        (cutRecognition inputs)
+      RadiusPrincipal.path13RelativeContourInPrincipalImageFromOperatorChart
+        (selectedOperatorChart inputs)
+        (cutThreshold inputs)
   }
 
 radiusNativePath13Equation119QPrime :
@@ -232,7 +233,7 @@ radiusNativeBackgroundSameObject :
   ∀ {CoarseField}
     (inputs : RadiusNativePath13TwoCarrierSourceFamilyInputs CoarseField) →
   Geometry.selectedPhysical (radiusNativeReducedGeometry inputs)
-  ≡ BackgroundRadius.selectedPhysical (selectedBackgroundRadius inputs)
+  ≡ OperatorChart.selectedPhysical (selectedOperatorChart inputs)
 radiusNativeBackgroundSameObject inputs = refl
 
 cmp98Path13ReducedSourceFamilyAdapterLevel : ProofLevel
@@ -259,6 +260,14 @@ cmp98Path13RadiusNativeFieldDerivativeLevel = machineChecked
 cmp98Path13RadiusNativeSameObjectOwnershipLevel : ProofLevel
 cmp98Path13RadiusNativeSameObjectOwnershipLevel =
   BackgroundRadius.cmp98Path13SelectedBackgroundRadiusFibreLevel
+
+cmp98Path13RadiusNativeOperatorChartOwnershipLevel : ProofLevel
+cmp98Path13RadiusNativeOperatorChartOwnershipLevel =
+  OperatorChart.cmp98Path13SelectedOperatorChartRepresentationLevel
+
+cmp98Path13RadiusNativeOneScalarCutResidualLevel : ProofLevel
+cmp98Path13RadiusNativeOneScalarCutResidualLevel =
+  RadiusPrincipal.cmp98Path13OperatorChartCutThresholdAdapterLevel
 
 literalCMP98Path13ReducedSourceFamilyInputsLevel : ProofLevel
 literalCMP98Path13ReducedSourceFamilyInputsLevel = conditional
