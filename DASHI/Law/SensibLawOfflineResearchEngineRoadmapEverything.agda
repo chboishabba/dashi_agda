@@ -20,6 +20,7 @@ import DASHI.Law.SensibLawOfficialAcquisitionResearchHandoffExact as OfficialHan
 import DASHI.Law.SensibLawOfficialHCALiveAcquisitionReceipt9c3007Exact as HCALive
 import DASHI.Law.SensibLawOfficialJudgmentResourceDiscoveryExact as JudgmentResource
 import DASHI.Law.SensibLawOfficialJudgmentCanonicalTextMaterializationExact as CanonicalText
+import DASHI.Law.SensibLawOfficialJudgmentCanonicalTextPnfHandoffExact as JudgmentPnf
 
 ------------------------------------------------------------------------
 -- OFFLINE / GOVERNED-ONLINE RESEARCH ENGINE CAPSTONE
@@ -34,7 +35,8 @@ import DASHI.Law.SensibLawOfficialJudgmentCanonicalTextMaterializationExact as C
 --   -> bounded full-judgment DOCX fetch
 --   -> immutable source revision
 --   -> deterministic canonical text materialization
---   -> PNF + proposition-level citation/reasoning/condition extraction
+--   -> existing evidential/PNF bridge ABI
+--   -> reviewed proposition/citation/reasoning/condition extraction
 --   -> append-only world/research memory
 --   -> frontier delta
 --   -> next search
@@ -42,11 +44,10 @@ import DASHI.Law.SensibLawOfficialJudgmentCanonicalTextMaterializationExact as C
 -- HCALive pins the observed successful HCA landing acquisition: first network=1,
 -- SHA256-bound local ingestion, replay=0. JudgmentResource mirrors reuse of those
 -- local landing bytes to discover DOCX/PDF with zero network and prefer DOCX.
--- CanonicalText mirrors the current Rust carrier transformation: DOCX bytes and
--- canonical text retain separate hashes; word/document.xml is materialized
--- locally with deterministic paragraph/newline structure. The current Rust head
--- and the full-DOCX live receipt remain explicitly unvalidated until local CI and
--- the one-request opt-in run succeed.
+-- CanonicalText mirrors DOCX -> canonical text with distinct carrier/text hashes.
+-- JudgmentPnf then reuses the existing fail-closed EvidentialBridgeReceipt rather
+-- than introducing a second semantic bridge. Current Rust head validation and the
+-- one-request full-DOCX live receipt remain open coordinates.
 ------------------------------------------------------------------------
 
 record OfflineResearchEngineBoundary : Set where
@@ -79,6 +80,9 @@ record OfflineResearchEngineBoundary : Set where
     canonicalDocxTextMaterializationImplemented : Bool
     canonicalDocxTextMaterializationImplementedIsTrue :
       canonicalDocxTextMaterializationImplemented ≡ true
+    canonicalJudgmentTextPnfHandoffImplemented : Bool
+    canonicalJudgmentTextPnfHandoffImplementedIsTrue :
+      canonicalJudgmentTextPnfHandoffImplemented ≡ true
     fullJudgmentLiveAcquisitionObserved : Bool
     fullJudgmentLiveAcquisitionObservedIsFalse :
       fullJudgmentLiveAcquisitionObserved ≡ false
@@ -96,6 +100,7 @@ record OfflineResearchEngineBoundary : Set where
 canonicalOfflineResearchEngineBoundary : OfflineResearchEngineBoundary
 canonicalOfflineResearchEngineBoundary =
   offlineResearchEngineBoundary
+    true refl
     true refl
     true refl
     true refl
@@ -183,6 +188,11 @@ selectedOfficialJudgmentResourceDiscoveryBoundary =
 
 selectedCanonicalJudgmentTextBoundary : CanonicalText.CanonicalJudgmentTextBoundary
 selectedCanonicalJudgmentTextBoundary = CanonicalText.canonicalCanonicalJudgmentTextBoundary
+
+selectedCanonicalJudgmentPnfHandoffBoundary :
+  JudgmentPnf.CanonicalJudgmentPnfHandoffBoundary
+selectedCanonicalJudgmentPnfHandoffBoundary =
+  JudgmentPnf.canonicalCanonicalJudgmentPnfHandoffBoundary
 
 ------------------------------------------------------------------------
 -- Capstone firewalls.
