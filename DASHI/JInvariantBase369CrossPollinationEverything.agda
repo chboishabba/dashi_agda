@@ -18,6 +18,11 @@ import DASHI.Moonshine.JInvariantColourWheelPolyphaseSpectralBidiExact
 import DASHI.Moonshine.JInvariantColourWheelCyclotomicBidiAdvanceExact
 import DASHI.Moonshine.JInvariantColourWheelWaveSignedValidation
 
+-- Full-turn rainbow carrier: exact rational 360-degree partitions for
+-- 3/6/9/27, tied to the existing C3-C9-C27 phase tower and kept semantically
+-- distinct from the 27-hypervoxel/Monster layers until an actual bridge pays it.
+import DASHI.Moonshine.JInvariantRainbowFullTurnHyperformExact
+
 -- Existing exact in-repo carriers consumed by the bridge.
 import DASHI.Foundations.Base369MobiusTransport
 import DASHI.Foundations.Base369WaveContinuousSymbolicCodingExact
