@@ -111,16 +111,20 @@ import DASHI.Physics.YangMills.BalabanClayT5PreferredContinuumOSGapExact
 -- candidate from the expectation producer, eliminating a post-hoc identity leaf.
 import DASHI.Physics.YangMills.BalabanClayT5PreferredOSGramFromExpectationExact
 
--- Quantitative T5 -> broad continuum closure compiler.  The finite diagonal
+-- Quantitative T5 -> broad continuum closure compiler. The finite diagonal
 -- measure sequence, continuum candidate and complete Gram carrier are reused
--- from the mature quantitative package; only the remaining analytic closure
--- laws survive as primitive producers.
+-- from the mature quantitative package; only analytic closure laws survive.
 import DASHI.Physics.YangMills.BalabanClayT5QuantitativeContinuumClosureCompilerExact
+
+-- Standard compact-unique topology route upgrading literal subsequential
+-- compactness + unique cluster point to full selected-sequence convergence.
+import DASHI.Physics.YangMills.BalabanClayT5CompactUniqueFullSequenceExact
 
 -- Current terminal schedulers after Eq. (119), Kato-M7 and T5 minimization.
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound191Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound192Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound193Exact
+import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound194Exact
 
 import DASHI.Physics.YangMills.BalabanPath13Eq119SourceRouteProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119BishopBridgeProvenanceExact
