@@ -34,8 +34,16 @@ module DASHI.Analysis.RiemannAristotleCurrentFrontierExact where
 -- Source-order transport is downstream proof engineering and is compiled once
 -- per source relation rather than by re-proving every transported inequality.
 --
--- Low-ordinate/global coverage and RH remain separate. No theorem here derives
--- RH.
+-- The live analytic-core owner now compiles the two theorem-bearing high-
+-- ordinate cores, their representation attachments, and the already-owned
+-- final same-object/order/cluster attachment directly to contradiction.
+-- Therefore no further downstream high-ordinate theorem is on the research cut.
+--
+-- Low ordinates are independent.  The Platt--Trudgian published verified-zero
+-- source is recovered in-repo, but no proof term/import has been promoted into
+-- Agda.  Source recovery and Agda theorem attachment remain distinct.
+--
+-- No theorem here derives RH.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -45,6 +53,8 @@ import DASHI.Analysis.RiemannG2PoleQuotientProducerAllowanceTargetExact as Allow
 import DASHI.Analysis.RiemannG2PoleQuotientOffAllowanceDirectCompilerExact as OffDirect
 import DASHI.Analysis.RiemannG2PoleQuotientGammaAllowanceDirectCompilerExact as GammaDirect
 import DASHI.Analysis.RiemannG2FinalSplitComplementOrderTransportCompilerExact as OrderTransport
+import DASHI.Analysis.RiemannG2FinalPoleQuotientAnalyticCoreExact as AnalyticCore
+import DASHI.Analysis.DeBruijnNewman2026SourceWeldExact as DBN
 
 record AristotleCurrentFrontier : Set where
   constructor aristotle-current-frontier
@@ -216,7 +226,7 @@ canonicalAristotleCurrentFrontier =
     false refl
     false refl
     false refl
-    "The §35 clustering inequality and M2_delta are obstruction diagnostics, not forward RH payments. The determinant DirectSignedConsumerPayment remains a G2d scalarization theorem but does not automatically transport to the final universal pole-quotient taper. The authoritative terminal payments are PoleQuotientOffAllowancePayment and PoleQuotientGammaAllowancePayment. Off must use one common quarter-period crossing cutoff J with B_near(J)+B_far(J)<=A_off; Gamma must satisfy B_Gamma(g_pole)<=A_Gamma on the same universal taper. Quantitative cluster-margin mathematics is owned in the 8889 checked-Lean return, while same-object/order attachment is downstream. Channel allowance composition, transported channel inequalities and the final split-complement contradiction are compiler output. Low-ordinate/global coverage and RH remain open."
+    "The §35 clustering inequality and M2_delta are obstruction diagnostics, not forward RH payments. The determinant DirectSignedConsumerPayment remains a G2d scalarization theorem but does not automatically transport to the final universal pole-quotient taper. The authoritative high-ordinate mathematical cores are OffAnalyticCore and GammaAnalyticCore; once inhabited, their representation attachments plus the final same-object/order/cluster attachment compile directly to contradiction. Off must use one common quarter-period crossing cutoff J with B_near(J)+B_far(J)<=A_off; Gamma must satisfy B_Gamma(g_pole)<=A_Gamma on the same universal taper. Quantitative cluster-margin mathematics is owned in the 8889 checked-Lean return, while same-object/order attachment is downstream. Low-ordinate source coverage is recovered from Platt--Trudgian but its theorem/import is not promoted into Agda. RH remains open."
 
 ------------------------------------------------------------------------
 -- Corrected high-level scheduler interpretation, kept outside the compatibility
@@ -328,3 +338,35 @@ finalOrderTransportCompilesContradiction :
   OrderTransport.FinalOrderTransportBoundary.orderTransportPackageCompilesContradiction
     OrderTransport.canonicalFinalOrderTransportBoundary ≡ true
 finalOrderTransportCompilesContradiction = refl
+
+------------------------------------------------------------------------
+-- Exact current three-leaf global cut.
+------------------------------------------------------------------------
+
+highOrdinateAnalyticCoreCompilerOwned : Bool
+highOrdinateAnalyticCoreCompilerOwned = true
+
+highOrdinateAnalyticCoreCompilerOwnedIsTrue :
+  highOrdinateAnalyticCoreCompilerOwned ≡ true
+highOrdinateAnalyticCoreCompilerOwnedIsTrue = refl
+
+highOrdinateCompletionTheorem : Set₁
+highOrdinateCompletionTheorem =
+  (cores : AnalyticCore.FinalPoleQuotientTwoAnalyticCores) ->
+  (attachments : AnalyticCore.FinalPoleQuotientAnalyticCoreAttachments cores) ->
+  AnalyticCore.FinalPoleQuotientAnalyticCompletion cores attachments ->
+  ⊥
+
+plattTrudgianLowOrdinateSourceRecovered : Bool
+plattTrudgianLowOrdinateSourceRecovered = DBN.plattTrudgianSourceRecovered
+
+plattTrudgianLowOrdinateSourceRecoveredIsTrue :
+  plattTrudgianLowOrdinateSourceRecovered ≡ true
+plattTrudgianLowOrdinateSourceRecoveredIsTrue = refl
+
+plattTrudgianLowOrdinateTheoremImportedIntoAgda : Bool
+plattTrudgianLowOrdinateTheoremImportedIntoAgda = false
+
+plattTrudgianLowOrdinateTheoremImportedIntoAgdaIsFalse :
+  plattTrudgianLowOrdinateTheoremImportedIntoAgda ≡ false
+plattTrudgianLowOrdinateTheoremImportedIntoAgdaIsFalse = refl
