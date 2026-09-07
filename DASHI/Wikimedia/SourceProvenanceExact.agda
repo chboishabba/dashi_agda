@@ -28,28 +28,28 @@ record SourceReceipt : Set where
     sourceReference : String
     stableIdentifier : String
     versionReference : String
-    contentHash : String
+    sourceContentHash : String
     sourceBoundary : String
 open SourceReceipt public
 
 record WikipediaRevisionReceipt : Set where
   constructor wikipediaRevisionReceipt
   field
-    site : String
-    pageTitle : String
-    pageId : String
-    revisionId : String
-    permanentReference : String
-    contentHash : String
+    wikipediaSite : String
+    wikipediaPageTitle : String
+    wikipediaPageId : String
+    wikipediaRevisionId : String
+    wikipediaPermanentReference : String
+    wikipediaContentHash : String
 open WikipediaRevisionReceipt public
 
 record WikidataSnapshotReceipt : Set where
   constructor wikidataSnapshotReceipt
   field
-    entityId : String
-    revisionReference : String
-    retrievalReference : String
-    contentHash : String
+    wikidataEntityId : String
+    wikidataRevisionReference : String
+    wikidataRetrievalReference : String
+    wikidataContentHash : String
 open WikidataSnapshotReceipt public
 
 -- P143/imported-from style provenance is intentionally not authority.
