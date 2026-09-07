@@ -35,6 +35,28 @@ open import DASHI.Core.Prelude
 -- into one source-order transport per Off/Gamma/Cluster carrier; after those
 -- transports, the channel inequalities and allowance fits compile automatically.
 --
+-- FINAL ANALYTIC CORE SPLIT
+--
+-- The historical producer-payment records bundle mathematics with representation
+-- receipts. The authoritative analytic-core owner now separates these exactly:
+--
+--   Off analytic core:
+--     final Off target + assigned A_off + B_off <= A_off
+--
+--   Off representation attachment:
+--     crossing-cutoff identity + same final pole taper
+--
+--   Gamma analytic core:
+--     final Gamma target + assigned A_Gamma + B_Gamma <= A_Gamma
+--
+--   Gamma representation attachment:
+--     same final pole taper.
+--
+-- The cores plus representation attachments compile the existing two historical
+-- payment records, so downstream APIs are unchanged. This is the smallest
+-- terminal mathematical interface currently owned by the repository; same-object
+-- receipts are no longer counted as fresh analysis.
+--
 -- FINAL OFF, CURRENT MINIMAL CUT
 --
 -- The old direct input over-quantified the source as
@@ -107,6 +129,11 @@ open import DASHI.Core.Prelude
 -- classification of the remaining high-ordinate coordinates: analytic,
 -- cross-prover/representation, downstream, or pruned.
 --
+-- RiemannG2FinalPoleQuotientTwoPaymentCutExact compresses the terminal consumer
+-- to Off/Gamma payments. RiemannG2FinalPoleQuotientAnalyticCoreExact goes one
+-- level deeper and removes representation receipts from the mathematical search
+-- target while compiling back to those same payment records.
+--
 -- Existing representation machinery is reused rather than re-searched.
 -- Uninhabited adapter/transport records remain obligations, not fabricated proof
 -- terms. Low-ordinate/global coverage and RH remain open. No theorem here derives
@@ -168,6 +195,10 @@ import DASHI.Analysis.RiemannG2FreshSameTaperGammaEnvelopeRegression
 import DASHI.Analysis.RiemannG2FinalSplitComplementAllowanceAssemblyExact
 import DASHI.Analysis.RiemannG2FinalSplitComplementOrderTransportCompilerExact
 import DASHI.Analysis.RiemannG2FinalPoleQuotientMinimalAnalyticCutExact
+import DASHI.Analysis.RiemannG2FinalPoleQuotientTwoPaymentCutExact
+import DASHI.Analysis.RiemannG2FinalPoleQuotientTwoPaymentCutRegression
+import DASHI.Analysis.RiemannG2FinalPoleQuotientAnalyticCoreExact
+import DASHI.Analysis.RiemannG2FinalPoleQuotientAnalyticCoreRegression
 import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact
 import DASHI.Analysis.RiemannAristotleRHFinalAllowanceLeafSchedulerExact
 import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerExact
