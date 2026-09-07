@@ -4,13 +4,12 @@ module DASHI.Physics.YangMills.BalabanClayT1PhysicalMeaningRound211Exact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound210Exact as Current
 import DASHI.Physics.YangMills.BalabanClayT5SelectedMomentCompactContainmentExact as SelectedMoment
 
 ------------------------------------------------------------------------
 -- ROUND211 / PHYSICAL MEANING OF THE PREFERRED GLOBAL T1 WALL
 --
--- The preferred route is now stated on the literal selected diagonal measure
+-- The preferred route is stated on the literal selected diagonal measure
 -- sequence.  No total limit operator is needed here.
 --
 -- Physical meaning:
@@ -20,6 +19,10 @@ import DASHI.Physics.YangMills.BalabanClayT5SelectedMomentCompactContainmentExac
 --     admissible compact region captures essentially all of EVERY cutoff measure;
 --   * the missing theorem is therefore geometry-of-escape on the selected
 --     physical carrier, not another abstract moment estimate.
+--
+-- This physical-meaning owner deliberately does not import the current scheduler.
+-- That keeps explanatory status downstream of the selected mathematical carrier
+-- and lets the canonical scheduler import this layer without an import cycle.
 ------------------------------------------------------------------------
 
 data PhysicalQuestion211 : Set where
@@ -48,12 +51,6 @@ routeDisposition finiteMomentBoundAlone = insufficientWithoutBridge
 
 currentPhysicalQuestion211 : PhysicalQuestion211
 currentPhysicalQuestion211 = oneCompactRegionCapturesAllSelectedCutoffs
-
--- Cross-check the current canonical scheduler rather than an older compatibility
--- carrier: the first selected-convergence T1 wall is still global containment.
-currentT1WallStillGlobalContainment :
-  Current.preferredCurrentT1Status210 ≡ Current.missingGlobalMomentCompactContainment
-currentT1WallStillGlobalContainment = refl
 
 -- The selected compiler already removes the old convergence-carrier inflation.
 -- Its remaining physical input is exactly the selected compact-complement
