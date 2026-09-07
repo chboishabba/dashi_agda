@@ -6,13 +6,16 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.GR.GravitationalObservationBidiExact as Obs
 import DASHI.Physics.GR.GravitationalObservationSourceAtlasExact as Sources
+import DASHI.Physics.GR.GravitationalPredictionObservationBidiExact as Pred
+import DASHI.Physics.GR.GravitationalPredictionAttributionBidiExact as Attr
+import DASHI.Physics.GR.GravitationalEpistemicLineageExact as Lineage
 
 ------------------------------------------------------------------------
 -- GRAVITATIONAL-WAVE THEORY TESTS
 --
 -- A detected strain/timing signal is separated from the inference layer used to
--- test GR or alternatives.  Each test family asks for a same-observable
--- comparator rather than treating any residual as "new gravity" by default.
+-- test GR or alternatives.  Theory comparators are attributed predictions welded
+-- to the exact calibrated observation, not free String labels.
 ------------------------------------------------------------------------
 
 data WaveTestFamily : Set where
@@ -60,10 +63,23 @@ record WaveTheoryTestReceipt : Set where
     testFamily : WaveTestFamily
     testedObservable : TestObservable
     testedObservableMatches : testObservable testFamily ≡ testedObservable
-    grComparator : String
-    alternativeComparator : String
+    testProjectionCarrier : String
+    grPrediction : Attr.AttributedGravitationalPrediction
+    alternativePrediction : Attr.AttributedGravitationalPrediction
+    grPredictionIsGR :
+      Pred.theoryFamily (Attr.prediction grPrediction)
+        ≡ Pred.generalRelativityTheory
+    grWeld :
+      Pred.PredictionObservationWeld
+        (Attr.prediction grPrediction)
+        observation
+    alternativeWeld :
+      Pred.PredictionObservationWeld
+        (Attr.prediction alternativePrediction)
+        observation
     systematicBudget : String
     resultCarrier : Sources.ObservationAttributedSource
+    derivedComparisonLineage : Lineage.DASHIDerivedComparisonLineage
     deviationDetected : Bool
 
 open WaveTheoryTestReceipt public
@@ -77,14 +93,35 @@ record WaveTheoryReverseCutset : Set where
   field
     testFamily : WaveTestFamily
     requiresCalibratedObservation : Bool
+    requiresAttributedGRPrediction : Bool
+    requiresAttributedAlternativePrediction : Bool
     requiresSameObservableGRPrediction : Bool
+    requiresSameObservableAlternativePrediction : Bool
     requiresDetectorResponseModel : Bool
     requiresSystematicBudget : Bool
     residualAlonePromotesAlternativeGravity : Bool
 
 cutsetFor : WaveTestFamily → WaveTheoryReverseCutset
 cutsetFor family =
-  wave-theory-reverse-cutset family true true true true false
+  wave-theory-reverse-cutset family
+    true true true true true true true false
+
+------------------------------------------------------------------------
+-- Introspective firewall: a comparator label alone cannot inhabit either
+-- attributed prediction or its same-observation weld.
+------------------------------------------------------------------------
+
+record WaveComparatorAttributionBoundary : Set where
+  constructor wave-comparator-attribution-boundary
+  field
+    comparatorStringCountsAsAttributedPrediction : Bool
+    sameTheoryCarrierCountsAsSupportedClaimScope : Bool
+    attributedPredictionAloneCountsAsObservationMatch : Bool
+    derivedComparisonCountsAsExternalSourceStatement : Bool
+
+canonicalWaveComparatorAttributionBoundary : WaveComparatorAttributionBoundary
+canonicalWaveComparatorAttributionBoundary =
+  wave-comparator-attribution-boundary false false false false
 
 ------------------------------------------------------------------------
 -- Current source-backed GR-test status.
