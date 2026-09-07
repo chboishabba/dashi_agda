@@ -3,27 +3,11 @@ module DASHI.Physics.YangMills.BalabanPath13DirectRelative74CutExact where
 
 ------------------------------------------------------------------------
 -- PATH13: DIRECT 74-LINK BUDGET -> SELECTED PRINCIPAL IMAGE
---
--- The historical preferred cut paid
---
---   sourceDefectThreshold = 1/24 <= r_cut.
---
--- But the literal relative-contour telescope already proves the sharper actual
--- bound
---
---   relativeLinkBudget = 74/2048 = 37/1024.
---
--- The Eq. (119) consumer therefore needs only
---
---   relativeLinkBudget <= r_cut.
---
--- This owner exposes that intermediate theorem and admits the literal erased
--- relative contour directly from it.  The stronger 1/24 threshold remains a
--- compatibility producer, not a primitive payment.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (_≤_)
+import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -143,7 +127,7 @@ directRelative74InPrincipalImage representation threshold bond step point =
       Op.defect (Radius.operatorKernel (Split.standardOperatorRepresentation representation)) value
       ≤ Path.chartRadius cut
     operatorBound =
-      ℚ.≤-trans
+      ℚP.≤-trans
         (relativeContourDefectBelowRelative74Budget representation bond step point)
         (relative74BudgetInsideSelectedCut threshold)
 
@@ -178,7 +162,5 @@ directRelative74InPrincipalImage representation threshold bond step point =
 relative74DirectCutCompilerLevel : ProofLevel
 relative74DirectCutCompilerLevel = machineChecked
 
--- This is strictly weaker than the historical 1/24 cut payment.  It remains an
--- input until the selected chart radius is concretely identified.
 literalRelative74CutThresholdLevel : ProofLevel
 literalRelative74CutThresholdLevel = conditional
