@@ -7,6 +7,11 @@ module DASHI.Cognition.PNF.SensibLawPrecedentApplicabilityDistinguishingExact wh
 -- roles: ratio, dictum, factual finding, concurrence, dissent, policy reason,
 -- submission, etc. Applicability to a later case requires proof-bearing fit;
 -- textual similarity does not establish precedent application.
+--
+-- This version makes the material-correspondence theory explicit. A consumer
+-- cannot manufacture applicability by choosing an arbitrary private `mapsFeature`
+-- relation inside the applicability proof itself. Conversely, this module does
+-- not impose StableId equality as a universal legal-materiality criterion.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -92,27 +97,49 @@ record CurrentCase : Set where
 open CurrentCase public
 
 ------------------------------------------------------------------------
--- Material factual/doctrinal correspondence is explicit.
+-- Material factual/doctrinal correspondence is consumer/source-theory indexed.
+--
+-- Examples of correspondence theories may demand literal identity, a recognised
+-- doctrinal analogue, or a source-backed mapping. The theory is fixed *before*
+-- an applicability witness is supplied.
 ------------------------------------------------------------------------
 
-record FeatureMap (p : PrecedentProposition) (c : CurrentCase) : Set where
+record ApplicabilityTheory
+  (p : PrecedentProposition)
+  (c : CurrentCase) : Set where
+  constructor applicability-theory
+  field
+    corresponds : Algebra.LegalProposition → Algebra.LegalProposition → Set
+    criterionLabel : String
+    criterionAuthority : Algebra.LegalSourceRef
+    criterionItselfRequiresLegalJustification : Bool
+
+open ApplicabilityTheory public
+
+record FeatureMap
+  {p : PrecedentProposition}
+  {c : CurrentCase}
+  (theory : ApplicabilityTheory p c) : Set where
   constructor feature-map
   field
-    mapsFeature : Algebra.LegalProposition → Algebra.LegalProposition → Set
     everyMaterialPrecedentFeatureMapped :
       ∀ {f} → Algebra._∈_ f (materialFeatures p) →
       Σ Algebra.LegalProposition (λ g →
-        Algebra._∈_ g (factsAndFeatures c) × mapsFeature f g)
+        Algebra._∈_ g (factsAndFeatures c) ×
+        ApplicabilityTheory.corresponds theory f g)
 
 open FeatureMap public
 
-record PrecedentApplicable (p : PrecedentProposition) (c : CurrentCase) : Set where
+record PrecedentApplicable
+  {p : PrecedentProposition}
+  {c : CurrentCase}
+  (theory : ApplicabilityTheory p c) : Set where
   constructor precedent-applicable
   field
     jurisdictionCompatible : String
     issueIdentity : issueReference p ≡ issueReference c
     roleCanCarryRule : Set
-    featureMap : FeatureMap p c
+    featureMap : FeatureMap theory
     notOverruledForThisProposition : Set
 
 open PrecedentApplicable public
@@ -143,16 +170,20 @@ record DistinguishingSet (p : PrecedentProposition) (c : CurrentCase) : Set wher
 open DistinguishingSet public
 
 ------------------------------------------------------------------------
--- A minimal distinguishing set is not just the shortest prose explanation: it
--- must be sufficient to block the claimed application and each retained
--- difference must be necessary relative to the encoded application proof.
+-- A minimal distinguishing set is relative to an explicit applicability theory.
+-- This prevents two opposite errors:
+--   * executable mismatch -> universal doctrinal distinction;
+--   * arbitrary correspondence relation -> automatic applicability.
 ------------------------------------------------------------------------
 
-record MinimalDistinguishingSet (p : PrecedentProposition) (c : CurrentCase) : Set where
+record MinimalDistinguishingSet
+  {p : PrecedentProposition}
+  {c : CurrentCase}
+  (theory : ApplicabilityTheory p c) : Set where
   constructor minimal-distinguishing-set
   field
     distinguishing : DistinguishingSet p c
-    sufficientAgainstApplication : PrecedentApplicable p c → ⊥
+    sufficientAgainstApplication : PrecedentApplicable theory → ⊥
     eachDifferenceNecessary :
       ∀ {d} →
       Algebra._∈_ d (DistinguishingSet.differences distinguishing) → Set
@@ -183,6 +214,9 @@ data SameCaseMeansSameAuthorityRole : Set where
 data SimilarFactsAutomaticallyApplyPrecedent : Set where
 data DistinctionAutomaticallyOverrulesPrecedent : Set where
 data DissentIsBindingRatioBySourceContainer : Set where
+data ApplicabilityMayChoosePrivateCorrespondenceTheory : Set where
+
+data OneCorrespondenceTheoryIsUniversalMateriality : Set where
 
 sameCaseDoesNotFlattenRoles : SameCaseMeansSameAuthorityRole → ⊥
 sameCaseDoesNotFlattenRoles ()
@@ -195,3 +229,10 @@ distinguishingDoesNotOverrule ()
 
 dissentDoesNotBecomeBindingRatio : DissentIsBindingRatioBySourceContainer → ⊥
 dissentDoesNotBecomeBindingRatio ()
+
+applicabilityUsesSuppliedTheory : ApplicabilityMayChoosePrivateCorrespondenceTheory → ⊥
+applicabilityUsesSuppliedTheory ()
+
+correspondenceTheoryDoesNotBecomeUniversalLaw :
+  OneCorrespondenceTheoryIsUniversalMateriality → ⊥
+correspondenceTheoryDoesNotBecomeUniversalLaw ()
