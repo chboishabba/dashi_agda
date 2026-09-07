@@ -65,6 +65,12 @@ import DASHI.Physics.YangMills.BalabanCMP98Path13T3SelectedPrintedSemanticsExact
 import DASHI.Physics.YangMills.BalabanCMP98Path13PreferredT3PrintedRoleSourceFamilyExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119T3PrintedRoleProvenanceExact
 
+-- Preferred T3 scalar boundary: Eq. (119) consumes only the rational->legacy
+-- ring embedding. Bishop completeness/convergence remains a compatibility
+-- producer, not a primitive Path13 source payment.
+import DASHI.Physics.YangMills.BalabanCMP98Path13PreferredT3MinimalScalarSourceFamilyExact
+import DASHI.Physics.YangMills.BalabanPath13Eq119T3MinimalScalarProvenanceExact
+
 import DASHI.Physics.YangMills.BalabanPath13Eq119SourceRouteProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119BishopBridgeProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119DirectCalculusProvenanceExact
