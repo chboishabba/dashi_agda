@@ -30,6 +30,7 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramLedgerRound180Exact as R180
 import DASHI.Physics.Closure.NSTriadKNGramDebtPairExpansionRound383Exact as R383
@@ -73,7 +74,7 @@ PhysicalSignedGramOperatorBound cells A =
 weightedPhysicalGramLedger :
   (cells : List (C3.Complex3 F)) →
   (coefficients : List ℚ) →
-  Rational.complex3NormSquared (weightedCellSum cells coefficients)
+  L2.complex3NormSquared (weightedCellSum cells coefficients)
   ≡ weightedCellMass cells coefficients
       + weightedSignedGram cells coefficients
 weightedPhysicalGramLedger cells coefficients =
@@ -89,7 +90,7 @@ weightedPhysicalFibreBoundFromGramOperator :
   (A : ℚ) →
   PhysicalSignedGramOperatorBound cells A →
   (coefficients : List ℚ) →
-  Rational.complex3NormSquared (weightedCellSum cells coefficients)
+  L2.complex3NormSquared (weightedCellSum cells coefficients)
   ≤ (1ℚ + A) * weightedCellMass cells coefficients
 weightedPhysicalFibreBoundFromGramOperator cells A B coefficients =
   let
