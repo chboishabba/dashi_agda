@@ -14,6 +14,7 @@ import DASHI.Law.SensibLawProviderNeutralLegalQueryAlgebraExact as Query
 import DASHI.Law.SensibLawProofSearchParetoSaturationExact as Pareto
 import DASHI.Law.SensibLawGovernedLegalNetworkStrategyExact as Network
 import DASHI.Law.SensibLawOfflineResearchEngineRustReceiptsF93740fExact as RustValidated
+import DASHI.Law.SensibLawGovernedOnlineR6ParityExact as OnlineR6
 
 ------------------------------------------------------------------------
 -- OFFLINE RESEARCH ENGINE ROADMAP CAPSTONE
@@ -30,7 +31,9 @@ import DASHI.Law.SensibLawOfflineResearchEngineRustReceiptsF93740fExact as RustV
 --
 -- Governed live legal access remains a separately authorised strategy.
 -- The validated Rust f93740f receipts are pinned as bounded runtime evidence,
--- never as Agda/kernel certification or legal/semantic authority.
+-- never as Agda/kernel certification or legal/semantic authority.  OnlineR6
+-- mirrors the newer Rust provider implementation while retaining its live
+-- receipt as unvalidated until the explicit bounded smoke is actually run.
 ------------------------------------------------------------------------
 
 record OfflineResearchEngineBoundary : Set where
@@ -113,6 +116,9 @@ selectedValidatedRustV02 = RustValidated.canonicalOfflineCompoundingIterationV02
 selectedValidatedRustLocalAttestation : RustValidated.LocalRustValidationAttestation
 selectedValidatedRustLocalAttestation =
   RustValidated.canonicalLocalRustValidationAttestationF93740f
+
+selectedGovernedOnlineR6Boundary : OnlineR6.GovernedOnlineR6Boundary
+selectedGovernedOnlineR6Boundary = OnlineR6.canonicalGovernedOnlineR6Boundary
 
 ------------------------------------------------------------------------
 -- Capstone firewalls.
