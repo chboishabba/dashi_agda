@@ -7,7 +7,9 @@ import DASHI.Wikimedia.ScientificReferenceEntityAtlasExact as Atlas
 import DASHI.Wikimedia.ScientificCitationQidBindingsExact as Citation
 import DASHI.Physics.YangMills.SourceEntityQidBindingsExact as YM
 import DASHI.Physics.Closure.NavierStokesSourceEntityQidBindingsExact as NS
+import DASHI.Physics.Closure.NavierStokesCitationIdentityAuditExact as NSAudit
 import DASHI.Analysis.RiemannSourceEntityQidBindingsExact as RH
+import DASHI.Analysis.RiemannExtendedSourceEntityQidBindingsExact as RHExtended
 
 atlasTreatsQidsAsMetadata :
   Atlas.ScientificReferenceEntityAtlasBoundary.qidIsExternalIdentityMetadata
@@ -39,12 +41,20 @@ rhQidDoesNotCreateProof :
     RH.canonicalRiemannReferenceEntityBoundary ≡ false
 rhQidDoesNotCreateProof = refl
 
--- Import-level witnesses that each domain reaches the canonical citation layer.
-ymCKNSeparationWitness : Citation.CitationDomain
-ymCKNSeparationWitness = Citation.domain Citation.faddeevPopov1967
+cknQidCannotRepairWrongDoi :
+  NSAudit.NavierStokesCitationIdentityAuditBoundary.qidCanReplaceDoiCorrection
+    NSAudit.canonicalNavierStokesCitationIdentityAuditBoundary ≡ false
+cknQidCannotRepairWrongDoi = refl
 
-nsCKNDomainWitness : Citation.CitationDomain
-nsCKNDomainWitness = Citation.domain Citation.ckn
+-- Import-level witnesses that each domain reaches the canonical citation layer.
+ymSourceDomainWitness : Citation.CitationDomain
+ymSourceDomainWitness = Citation.domain Citation.faddeevPopov1967
+
+nsSourceDomainWitness : Citation.CitationDomain
+nsSourceDomainWitness = Citation.domain Citation.ckn
 
 rhPolymathDomainWitness : Citation.CitationDomain
 rhPolymathDomainWitness = Citation.domain Citation.polymath2019
+
+rhExtendedBindingWitness : RHExtended.ExtendedRiemannSourceBinding
+rhExtendedBindingWitness = RHExtended.bombieriClayRH
