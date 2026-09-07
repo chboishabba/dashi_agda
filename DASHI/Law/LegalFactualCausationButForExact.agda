@@ -7,6 +7,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.CounterfactualModelContractExact as Counterfactual
+import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 
 ------------------------------------------------------------------------
 -- LEGAL FACTUAL CAUSATION / "BUT FOR" TEST
@@ -52,10 +53,6 @@ open LegalButForQuestion public
 
 ------------------------------------------------------------------------
 -- Ordinary necessary-condition route.
---
--- The negative counterfactual is proposition-valued rather than a Boolean:
--- the ordinary route owns a proof that the particular harm cannot be shown to
--- occur in the admissible no-breach counterfactual represented by the question.
 ------------------------------------------------------------------------
 
 record NecessaryConditionReceipt (q : LegalButForQuestion) : Set₁ where
@@ -69,11 +66,7 @@ record NecessaryConditionReceipt (q : LegalButForQuestion) : Set₁ where
 open NecessaryConditionReceipt public
 
 ------------------------------------------------------------------------
--- Exceptional route.
---
--- This is intentionally not a disguised necessary-condition proof.  A legal
--- system may expose an exceptional established-principles route; admission of
--- that route requires its own authority and responsibility receipts.
+-- Exceptional route remains constructor-distinct from ordinary but-for.
 ------------------------------------------------------------------------
 
 record ExceptionalCausationReceipt (q : LegalButForQuestion) : Set₁ where
@@ -120,11 +113,8 @@ record ScopeOfLiabilityReceipt
 open ScopeOfLiabilityReceipt public
 
 ------------------------------------------------------------------------
--- Counterfactual fibres.
---
--- A legal counterfactual may be underidentified.  Rather than silently select
--- a favourable world, applications can retain all admissible no-breach worlds
--- and separately prove robust absence, selected-world absence, or ambiguity.
+-- Counterfactual fibres retain underidentification rather than selecting a
+-- favourable world silently.
 ------------------------------------------------------------------------
 
 record NoBreachCounterfactualFibre : Set₁ where
@@ -174,22 +164,16 @@ record CounterfactualUnderidentificationReceipt
 open CounterfactualUnderidentificationReceipt public
 
 ------------------------------------------------------------------------
--- Adjudicative proof is not causal probability.
+-- Adjudicative proof is not causal probability.  Reuse SensibLaw's existing
+-- StandardOfProof carrier rather than introducing a parallel legal standard.
 ------------------------------------------------------------------------
-
-data LegalProofStandard : Set where
-  balanceOfProbabilities
-  beyondReasonableDoubt
-  clearAndConvincing
-  proofStandardUnresolved
-  : LegalProofStandard
 
 record CausationProofReceipt {q : LegalButForQuestion}
     (factual : FactualCausationReceipt q) : Set₁ where
   constructor causationProofReceipt
   field
     bearerReference : String
-    standard : LegalProofStandard
+    standard : Status.StandardOfProof
     evidenceReferences : List String
     satisfiesStandardReceipt : Set
     proofReference : String
