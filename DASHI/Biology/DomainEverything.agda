@@ -60,3 +60,4 @@ import DASHI.Biology.EmbodiedSocialEcologyRelationalHistoryObligationExact
 -- Same-trial multimodal diagnosis/debugging return.
 import DASHI.Biology.DrosophilaPluralEpistemicProgressBidiExact
 import DASHI.Biology.DrosophilaDiagnosisRepairSchedulerBidiExact
+import DASHI.Biology.DrosophilaTemporalDiagnosisHistoryBidiExact
