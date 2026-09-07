@@ -13,6 +13,7 @@ import DASHI.Law.SensibLawResearchCompoundingLoopExact as Compounding
 import DASHI.Law.SensibLawProviderNeutralLegalQueryAlgebraExact as Query
 import DASHI.Law.SensibLawProofSearchParetoSaturationExact as Pareto
 import DASHI.Law.SensibLawGovernedLegalNetworkStrategyExact as Network
+import DASHI.Law.SensibLawOfflineResearchEngineRustReceiptsF93740fExact as RustValidated
 
 ------------------------------------------------------------------------
 -- OFFLINE RESEARCH ENGINE ROADMAP CAPSTONE
@@ -28,6 +29,8 @@ import DASHI.Law.SensibLawGovernedLegalNetworkStrategyExact as Network
 --   -> next search
 --
 -- Governed live legal access remains a separately authorised strategy.
+-- The validated Rust f93740f receipts are pinned as bounded runtime evidence,
+-- never as Agda/kernel certification or legal/semantic authority.
 ------------------------------------------------------------------------
 
 record OfflineResearchEngineBoundary : Set where
@@ -47,10 +50,17 @@ record OfflineResearchEngineBoundary : Set where
       runtimeIterationsHaveDeterministicReceiptABI ≡ true
     parsedResultsMayImproveNextSearch : Bool
     parsedResultsMayImproveNextSearchIsTrue : parsedResultsMayImproveNextSearch ≡ true
+    validatedRustReceiptBundlePinned : Bool
+    validatedRustReceiptBundlePinnedIsTrue : validatedRustReceiptBundlePinned ≡ true
+    validatedRustExecutionWasNetworkFree : Bool
+    validatedRustExecutionWasNetworkFreeIsTrue : validatedRustExecutionWasNetworkFree ≡ true
     liveNetworkExecutionImplicit : Bool
     liveNetworkExecutionImplicitIsFalse : liveNetworkExecutionImplicit ≡ false
     accumulatedResearchAutomaticallyTruth : Bool
     accumulatedResearchAutomaticallyTruthIsFalse : accumulatedResearchAutomaticallyTruth ≡ false
+    localRustValidationEqualsAgdaKernelCertification : Bool
+    localRustValidationEqualsAgdaKernelCertificationIsFalse :
+      localRustValidationEqualsAgdaKernelCertification ≡ false
 
 canonicalOfflineResearchEngineBoundary : OfflineResearchEngineBoundary
 canonicalOfflineResearchEngineBoundary =
@@ -61,6 +71,9 @@ canonicalOfflineResearchEngineBoundary =
     true refl
     true refl
     true refl
+    true refl
+    true refl
+    false refl
     false refl
     false refl
 
@@ -88,6 +101,19 @@ selectedParetoBoundary = Pareto.canonicalSearchParetoRefinementBoundary
 selectedNetworkBoundary : Network.GovernedLegalNetworkBoundary
 selectedNetworkBoundary = Network.canonicalGovernedLegalNetworkBoundary
 
+selectedValidatedRustReceiptBoundary : RustValidated.RustReceiptBundleBoundary
+selectedValidatedRustReceiptBoundary = RustValidated.canonicalRustReceiptBundleBoundary
+
+selectedValidatedRustV01 : RustValidated.OfflinePabaiLoopReceiptV01F93740f
+selectedValidatedRustV01 = RustValidated.canonicalOfflinePabaiLoopReceiptV01F93740f
+
+selectedValidatedRustV02 : RustValidated.OfflineCompoundingIterationV02F93740f
+selectedValidatedRustV02 = RustValidated.canonicalOfflineCompoundingIterationV02F93740f
+
+selectedValidatedRustLocalAttestation : RustValidated.LocalRustValidationAttestation
+selectedValidatedRustLocalAttestation =
+  RustValidated.canonicalLocalRustValidationAttestationF93740f
+
 ------------------------------------------------------------------------
 -- Capstone firewalls.
 ------------------------------------------------------------------------
@@ -97,6 +123,7 @@ data CitationGraphAutomaticallyCurrentAuthority : Set where
 data ConditionsAutomaticallyApplicability : Set where
 data ResearchMemoryAutomaticallyMonotoneConclusion : Set where
 data RuntimeReceiptAutomaticallyAgdaProof : Set where
+data LocalRustCIAutomaticallyAgdaKernelReceipt : Set where
 
 moreParsedCasesDoNotAutomaticallyCloseProof :
   MoreParsedCasesAutomaticallyCloseProof → ⊥
@@ -116,3 +143,7 @@ researchMemoryDoesNotForceMonotoneConclusion ()
 
 runtimeReceiptDoesNotBecomeAgdaProof : RuntimeReceiptAutomaticallyAgdaProof → ⊥
 runtimeReceiptDoesNotBecomeAgdaProof ()
+
+localRustCIDoesNotBecomeAgdaKernelReceipt :
+  LocalRustCIAutomaticallyAgdaKernelReceipt → ⊥
+localRustCIDoesNotBecomeAgdaKernelReceipt ()
