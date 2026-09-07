@@ -16,19 +16,15 @@ module DASHI.Physics.Closure.NSTriadKNSelectedPairPhysicalTriadRoutingRound469Ex
 --
 --   chi_N(p,q) = outputInCutoff_N(p+q) AND chi(p,q).
 --
--- Then
---
---   R109.selectedOrderedPairSum M chi_N modes modes
---
--- is exactly the scalar fold of the R109 pair kernel over the selected literal
--- physical triads.  R39 may therefore regroup this fold by output fibres with
--- no cardinality factor and no caller-supplied partition equality.
+-- Then R109's selected pair sum is exactly the scalar fold over the selected
+-- literal physical triads. R39 may regroup that fold by output fibres with no
+-- cardinality factor and no caller-supplied global partition equality.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (map)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
 import Data.Rational.Properties as ℚP
@@ -46,10 +42,9 @@ outputFilteredSelect :
   (Z3.FourierMode → Z3.FourierMode → Bool) →
   Z3.FourierMode → Z3.FourierMode → Bool
 outputFilteredSelect cutoff select left right =
-  Physical.modeWithinCutoff cutoff (Z3.addMode left right)
-    Physical.&& select left right
-  where
-  open import Agda.Builtin.Nat using (Nat)
+  Physical._&&_
+    (Physical.modeWithinCutoff cutoff (Z3.addMode left right))
+    (select left right)
 
 selectedTriadValue :
   R109.ModalEnergyDissipation Z3.FourierMode →
@@ -144,8 +139,7 @@ pairFoldIsEnumeratedTriadFold M cutoff select (pair ∷ pairs)
     (Z3.addMode (Cube.first pair) (Cube.second pair))
 ... | false =
   trans
-    (ℚP.+-identityˡ
-      (pairFold (pairValue M cutoff select) pairs))
+    (ℚP.+-identityˡ (pairFold (pairValue M cutoff select) pairs))
     (pairFoldIsEnumeratedTriadFold M cutoff select pairs)
 ... | true with select (Cube.first pair) (Cube.second pair)
 ...   | true =
@@ -153,8 +147,7 @@ pairFoldIsEnumeratedTriadFold M cutoff select (pair ∷ pairs)
     (pairFoldIsEnumeratedTriadFold M cutoff select pairs)
 ...   | false =
   trans
-    (ℚP.+-identityˡ
-      (pairFold (pairValue M cutoff select) pairs))
+    (ℚP.+-identityˡ (pairFold (pairValue M cutoff select) pairs))
     (pairFoldIsEnumeratedTriadFold M cutoff select pairs)
 
 selectedPairsEqualPhysicalTriadFold :
