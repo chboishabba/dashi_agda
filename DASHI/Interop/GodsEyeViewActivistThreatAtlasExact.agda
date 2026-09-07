@@ -3,49 +3,29 @@ module DASHI.Interop.GodsEyeViewActivistThreatAtlasExact where
 ------------------------------------------------------------------------
 -- GOD'S EYE VIEW x PUBLIC-INTEREST ACTIVIST THREAT ATLAS
 --
--- This owner cross-pollinates the proof-carrying world residual with existing
--- DASHI crisis/climate, Amalek/Herzog, Zizek, Iran/energy and dashiTRADE lanes.
--- It is deliberately source-bounded: the atlas may organise observations,
--- causal candidates, ideological narratives and action residuals, but it does
--- not turn political theology, activist framing, market movement or a visual
--- world-state rollup into empirical truth or coercive authority.
+-- Purpose: organise evidence-led public-interest investigations across climate,
+-- extraction/infrastructure, detention/border, war/civilian-protection,
+-- information-integrity and political-theology cases without turning an
+-- activist concern, ideology reading, market signal, religious role or map
+-- visibility into empirical truth, targeting authority or coercive authority.
 --
--- CURRENT SOURCE CALIBRATION (accessed 2026-09-08)
+-- SOURCE CALIBRATION (accessed 2026-09-08)
+-- Climate: IPCC AR6 Synthesis/WGIII; UNEP Emissions Gap Report 2025; UN/UNEP
+-- methane material.  These support driver families, not a timeless ordinal
+-- "top threats" leaderboard and not local source attribution without local
+-- observations.
 --
--- Climate:
---   IPCC AR6 Synthesis Report / WGIII: anthropogenic warming is unequivocal;
---   fossil-fuel combustion is the largest source of CO2 emissions, with land
---   use/agriculture, methane, industrial processes, waste and fluorinated gases
---   remaining material sectors/forcings.
---   https://www.ipcc.ch/report/ar6/syr/
---   https://www.ipcc.ch/report/ar6/wg3/chapter/chapter-1/
+-- Political theology: Nilay Saiya, "The varieties of American Christian
+-- nationalism", Politics and Religion (2025), DOI 10.1017/S1755048325000069;
+-- Sean Durbin, "Christian Zionism in the United States, 1930-2020" (2023),
+-- DOI 10.1093/acrefore/9780199340378.013.1205; Motti Inbari and Kirill Bumin,
+-- Christian Zionism in the Twenty-First Century, OUP,
+-- DOI 10.1093/oso/9780197649305.001.0001.  These calibrate documented rhetoric,
+-- movement belief and scholarly interpretation.  DASHI makes no supernatural
+-- truth claim from them.
 --
---   UNEP Emissions Gap Report 2025: current policies remain far from 1.5 C;
---   https://www.unep.org/resources/emissions-gap-report-2025
---
---   United Nations methane issue page: methane is the second-largest cause of
---   warming after CO2; major anthropogenic sectors are agriculture, fossil
---   fuels and waste.
---   https://www.un.org/en/climatechange/science/climate-issues/methane
---
--- Political theology / Christian nationalism / Christian Zionism:
---   Nilay Saiya, "The varieties of American Christian nationalism",
---   Politics and Religion (2025), DOI 10.1017/S1755048325000069.
---   The source documents Trump-as-messianic/Cyrus rhetoric in some charismatic
---   dominionist circles; it does NOT establish a supernatural identity.
---
---   Sean Durbin, "Christian Zionism in the United States, 1930-2020",
---   Oxford Research Encyclopedia of Religion (2023),
---   DOI 10.1093/acrefore/9780199340378.013.1205.
---   This supports an eschatology/foreign-policy relationship in parts of
---   Christian Zionism, not a single motive for all evangelicals or Israelis.
---
---   Motti Inbari and Kirill Bumin, Christian Zionism in the Twenty-First
---   Century, OUP (2023/2024), DOI 10.1093/oso/9780197649305.001.0001.
---   Their survey work explicitly shows theological and demographic plurality.
---
--- Repo source boundaries remain authoritative for Amalek, Herzog, Zizek, Iran,
--- climate-conflict comparison, market/statistical and dashiTRADE semantics.
+-- Existing DASHI Amalek/Herzog, comparative crisis/climate, Zizek, Iran/energy,
+-- market/statistical and dashiTRADE owners remain separate authority fibres.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -55,17 +35,17 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Interop.GodsEyeViewPublicInterestWorldResidualExact as Public
-import DASHI.Governance.ComparativeCrisisClimateAtlas as Crisis
-import DASHI.Governance.AmalekProvenanceRoleBinding as Amalek
-import DASHI.Law.HerzogFascismAntifascistAmalekCrossPollinationExact as Herzog
-import DASHI.Reasoning.ZizekPNFSourceAtlas as Zizek
-import DASHI.Governance.TrumpEnergyCrackSpreadCrossPollinationExact as Energy
-import DASHI.Finance.DashiTradeFibreBridgeExact as DashiTrade
-import DASHI.Finance.DeepStatArbFibrePipelineExact as Statistics
-import DASHI.Economics.MarketTransitionGrammarCyberneticsExact as Market
+import DASHI.Governance.ComparativeCrisisClimateAtlas
+import DASHI.Governance.AmalekProvenanceRoleBinding
+import DASHI.Law.HerzogFascismAntifascistAmalekCrossPollinationExact
+import DASHI.Reasoning.ZizekPNFSourceAtlas
+import DASHI.Governance.TrumpEnergyCrackSpreadCrossPollinationExact
+import DASHI.Finance.DashiTradeFibreBridgeExact
+import DASHI.Finance.DeepStatArbFibrePipelineExact
+import DASHI.Economics.MarketTransitionGrammarCyberneticsExact
 
 ------------------------------------------------------------------------
--- 1. Public-interest case families are not one equivalence class.
+-- 1. Case families.  Named cases remain containers until separately sourced.
 ------------------------------------------------------------------------
 
 data ActivistCaseKind : Set where
@@ -102,10 +82,7 @@ record ActivistCase : Set where
 open ActivistCase public
 
 ------------------------------------------------------------------------
--- 2. UN/IPCC-calibrated climate driver surface.
---
--- "Top threat" is not represented as a timeless ordinal leaderboard.  The
--- sources instead support material driver families and sector contributions.
+-- 2. Source-backed climate driver families.
 ------------------------------------------------------------------------
 
 data ClimateDriver : Set where
@@ -134,46 +111,34 @@ record ClimateDriverReceipt : Set where
   constructor climate-driver-receipt
   field
     driver : ClimateDriver
-    authority : String
+    authorityReference : String
     sourceReference : String
     boundedClaim : String
-    measurementOrAssessmentReference : String
-    currentObservationRequiredForLocalAttribution : Bool
-
-open ClimateDriverReceipt public
+    localAttributionReference : String
+    localAttributionStillRequired : Bool
 
 fossilCombustionReceipt : ClimateDriverReceipt
 fossilCombustionReceipt =
   climate-driver-receipt
     fossilFuelCombustionCO2
     "IPCC AR6 WGIII"
-    "AR6 WGIII Chapter 1 FAQ 1.2"
-    "fossil-fuel combustion is the largest source of anthropogenic CO2 emissions; this does not identify the cause of an individual local plume"
-    "IPCC sector emissions assessment"
+    "AR6 WGIII Chapter 1 / synthesis"
+    "fossil-fuel combustion is the largest source of anthropogenic CO2 emissions"
+    "a global/sector assessment does not identify the cause of an individual local observation"
     true
 
 methaneReceipt : ClimateDriverReceipt
 methaneReceipt =
   climate-driver-receipt
     fossilFuelMethane
-    "United Nations climate issue page / UNEP methane programme"
-    "Methane: From Super Pollutant to Climate Solution"
-    "methane is a major near-term warming driver and fossil fuels are a major anthropogenic methane sector; local attribution remains observation-specific"
-    "satellite/inventory/source-specific methane measurement"
-    true
-
-landUseReceipt : ClimateDriverReceipt
-landUseReceipt =
-  climate-driver-receipt
-    landUseAndDeforestation
-    "IPCC AR6"
-    "AR6 WGIII AFOLU / AR6 Synthesis Report"
-    "land-use change, agriculture and deforestation materially contribute to greenhouse-gas emissions and climate risk"
-    "land-cover, carbon-flux and activity-data assessment"
+    "United Nations / UNEP methane programme"
+    "UN climate methane issue material"
+    "methane is a major near-term warming driver; fossil fuels are one major anthropogenic sector"
+    "facility or event attribution requires source-specific observation"
     true
 
 ------------------------------------------------------------------------
--- 3. Climate activism follows the same observation least-privilege path.
+-- 3. Climate accountability is a residual, not accusation-by-category.
 ------------------------------------------------------------------------
 
 record ClimateAccountabilityResidual : Set where
@@ -190,10 +155,9 @@ record ClimateAccountabilityResidual : Set where
     missingCausalPrerequisiteReference : String
     mitigationOrRemedyReference : String
 
-open ClimateAccountabilityResidual public
-
 ------------------------------------------------------------------------
--- 4. Infrastructure/extraction/resource cases preserve incidence.
+-- 4. Infrastructure/extraction/resource cases preserve who benefits and who
+-- bears the burden instead of flattening everything to one environmental score.
 ------------------------------------------------------------------------
 
 data ResourceBurden : Set where
@@ -222,11 +186,10 @@ record InfrastructureBurdenFibre : Set where
     temporalReference : String
     remedyReference : String
 
-open InfrastructureBurdenFibre public
-
 ------------------------------------------------------------------------
--- 5. Detention, border and coercive-state cases require protection against
--- activist tooling becoming a targeting database.
+-- 5. Publication safety: an accountability tool must not become a targeting
+-- database for migrants, detainees, witnesses, activists or other vulnerable
+-- people.
 ------------------------------------------------------------------------
 
 data PublicationSensitivity : Set where
@@ -247,14 +210,12 @@ record ActivistPublicationGate : Set where
     minimisationReference : String
     redactionAggregationReference : String
     retaliationRiskReference : String
-    informedConsentReference : String
+    consentOrProtectiveBasisReference : String
     publicationAuthorityReference : String
     downstreamTargetingBlockedReference : String
 
-open ActivistPublicationGate public
-
 ------------------------------------------------------------------------
--- 6. Political theology is an interpretive/rhetorical observation fibre.
+-- 6. Political theology is evidence ABOUT narratives and mobilisation.
 ------------------------------------------------------------------------
 
 data PoliticalTheologyNarrative : Set where
@@ -268,8 +229,6 @@ data PoliticalTheologyNarrative : Set where
   secularApocalypticNarrative : PoliticalTheologyNarrative
   namedPoliticalTheologyNarrative : String → PoliticalTheologyNarrative
 
--- These statuses classify evidence ABOUT a narrative; none promotes the
--- narrative's supernatural content to world-state truth.
 data NarrativeEvidenceStatus : Set where
   documentedSpeakerUtterance : NarrativeEvidenceStatus
   documentedMovementBelief : NarrativeEvidenceStatus
@@ -290,18 +249,16 @@ record PoliticalTheologyReceipt : Set where
     causalTransportEvidenceReference : String
     supernaturalTruthClaimedByDASHI : Bool
 
-open PoliticalTheologyReceipt public
-
 trumpCyrusScholarshipReceipt : PoliticalTheologyReceipt
 trumpCyrusScholarshipReceipt =
   political-theology-receipt
     trumpAsCyrusNarrative
     documentedMovementBelief
     "selected charismatic dominionist / evangelical circles"
-    "Saiya 2025, Politics and Religion, DOI 10.1017/S1755048325000069; Hughes et al. 2025, Christian America and the Kingdom of God"
-    "Trump has been framed by some supporters through a Cyrus/messianic analogy"
-    "American Christian nationalism and charismatic dominionism"
-    "possible legitimation/mobilisation relationship; policy effect must be separately established"
+    "Saiya 2025 DOI 10.1017/S1755048325000069"
+    "some supporters frame Trump through Cyrus or messianic analogy"
+    "American Christian nationalism / charismatic dominionism"
+    "possible rhetoric, legitimation or mobilisation link; policy effect requires separate evidence"
     "no unique causal transport inferred from narrative presence"
     false
 
@@ -310,10 +267,10 @@ christianZionismEschatologyReceipt =
   political-theology-receipt
     christianZionistProphecyNarrative
     scholarlyInterpretation
-    "parts of the American Christian Zionist movement"
-    "Durbin 2023 DOI 10.1093/acrefore/9780199340378.013.1205; Inbari and Bumin 2023 DOI 10.1093/oso/9780197649305.001.0001"
-    "eschatological beliefs can form one component of Christian-Zionist support for Israel, with substantial internal variation"
-    "US evangelical religion, Christian Zionism, Israel and foreign-policy politics"
+    "parts of American Christian Zionism"
+    "Durbin 2023 DOI 10.1093/acrefore/9780199340378.013.1205; Inbari/Bumin DOI 10.1093/oso/9780197649305.001.0001"
+    "eschatological belief can be one strand of Christian-Zionist support for Israel, with substantial internal variation"
+    "US evangelical religion, Israel and foreign-policy politics"
     "policy association is empirical and heterogeneous"
     "no Netanyahu-to-Trump or end-times causal chain inferred without separate evidence"
     false
@@ -323,55 +280,32 @@ trumpAntichristReceipt =
   political-theology-receipt
     trumpAsAntichristNarrative
     contestedInterpretation
-    "commentators/theological interpreters who use Antichrist language"
-    "interpretive claim requiring speaker-specific source; not established by the Christian-nationalism literature as a supernatural fact"
-    "Trump is compared by some interpreters with biblical Antichrist motifs"
-    "Christian apocalyptic interpretation and contemporary political rhetoric"
-    "may be studied as rhetoric, reception or political theology"
+    "speaker-specific commentators or theological interpreters"
+    "interpretive source required per speaker; not established as supernatural fact by the cited scholarship"
+    "Trump may be compared with biblical Antichrist motifs as political theology or rhetoric"
+    "Christian apocalyptic interpretation and contemporary politics"
+    "possible reception/mobilisation effect must be separately evidenced"
     "no empirical or supernatural identity transport"
     false
 
 ------------------------------------------------------------------------
--- 7. No person/population may be classified by a supernatural role merely from
--- political conduct, identity, ethnicity, religion or narrative association.
+-- 7. Sacred enemy roles cannot be inferred from political/religious identity.
 ------------------------------------------------------------------------
 
 data PoliticalConductProvesAntichristIdentity : Set where
-
 politicalConductDoesNotProveAntichristIdentity :
   PoliticalConductProvesAntichristIdentity → ⊥
 politicalConductDoesNotProveAntichristIdentity ()
 
-
 data ReligiousIdentityProvesEnemyRole : Set where
-
 religiousIdentityDoesNotProveEnemyRole : ReligiousIdentityProvesEnemyRole → ⊥
 religiousIdentityDoesNotProveEnemyRole ()
 
 ------------------------------------------------------------------------
--- 8. Existing Amalek/Herzog boundaries are inherited, not weakened.
+-- 8. Zizek/parallax-style ideology audit stays interpretive: an ideological
+-- reading can expose contradiction/surplus/institutional reproduction without
+-- becoming privileged access to an actor's motive.
 ------------------------------------------------------------------------
-
-amalekBoundary : Amalek.AmalekBoundary
-amalekBoundary = Amalek.canonicalAmalekBoundary
-
-herzogAmalekBoundary : Herzog.GenocideAmalekBoundary
-herzogAmalekBoundary = Herzog.canonicalGenocideAmalekBoundary
-
-amalekRoleDoesNotEqualIdentity :
-  Amalek.roleBindingEqualsIdentity amalekBoundary ≡ false
-amalekRoleDoesNotEqualIdentity = refl
-
-amalekCommandNeedsSeparateEvidence :
-  Amalek.commandTransportRequiresSeparateEvidence amalekBoundary ≡ true
-amalekCommandNeedsSeparateEvidence = refl
-
-------------------------------------------------------------------------
--- 9. Zizek is an ideology/parallax calibration lane, not motive authority.
-------------------------------------------------------------------------
-
-zizekSources : Zizek.Source.AttributedSourceAtlas
-zizekSources = Zizek.zizekPNFSourceAtlas
 
 record IdeologyAudit : Set where
   constructor ideology-audit
@@ -385,24 +319,21 @@ record IdeologyAudit : Set where
     sourceEvidenceReference : String
     ideologyReadingDeterminesActorMotive : Bool
 
-open IdeologyAudit public
+canonicalIdeologyNonAuthority : IdeologyAudit
+canonicalIdeologyNonAuthority =
+  ideology-audit
+    "interpretive narrative"
+    "material-interest evidence kept separately"
+    "institutional-reproduction evidence kept separately"
+    "parallax/contradiction reading"
+    "surplus/externality reading"
+    "affected group remains explicitly situated"
+    "attributed source receipts remain required"
+    false
 
 ------------------------------------------------------------------------
--- 10. Market and dashiTRADE lanes can consume public-interest observations,
--- but activism, market inference and trading permission remain different uses.
+-- 9. Activism, market inference and dashiTRADE permission are different uses.
 ------------------------------------------------------------------------
-
-energyBoundary : Energy.TrumpEnergyCrackSpreadBoundary
-energyBoundary = Energy.canonicalTrumpEnergyCrackSpreadBoundary
-
-statisticsBoundary : Statistics.SharpeAuthorityBoundary
-statisticsBoundary = Statistics.canonicalSharpeAuthorityBoundary
-
-dashiTradeBoundary : DashiTrade.ResidualToTradeAuthorityBoundary
-dashiTradeBoundary = DashiTrade.canonicalResidualToTradeAuthorityBoundary
-
-marketBoundary : Market.MarketTransitionGrammarBoundary
-marketBoundary = Market.canonicalMarketTransitionGrammarBoundary
 
 record ActivismMarketSeparation : Set where
   constructor activism-market-separation
@@ -416,8 +347,6 @@ record ActivismMarketSeparation : Set where
     marketProfitCreatesMoralAuthority : Bool
     profitableTradeProvesActivistClaimTrue : Bool
 
-open ActivismMarketSeparation public
-
 canonicalActivismMarketSeparation : ActivismMarketSeparation
 canonicalActivismMarketSeparation =
   activism-market-separation
@@ -429,8 +358,8 @@ canonicalActivismMarketSeparation =
     false false false
 
 ------------------------------------------------------------------------
--- 11. Activist proof search: concern -> proposition -> evidence residual ->
--- least-intrusive observation -> publication/remedy; not concern -> target.
+-- 10. Activist proof search: concern -> proposition -> evidence residual ->
+-- least-intrusive observation -> publication/remedy; never concern -> target.
 ------------------------------------------------------------------------
 
 record ActivistProofSearchRoute : Set where
@@ -448,22 +377,8 @@ record ActivistProofSearchRoute : Set where
     remedyOrAccountabilityReference : String
     targetSelectionFromIdentityAlone : Bool
 
-open ActivistProofSearchRoute public
-
 ------------------------------------------------------------------------
--- 12. Crisis/climate atlas anchor keeps comparative cases non-equated.
-------------------------------------------------------------------------
-
-crisisBoundary : Crisis.ComparativeCrisisClimateAtlasBoundary
-crisisBoundary = Crisis.canonicalComparativeCrisisClimateAtlasBoundary
-
-climateNotSoleCause :
-  Crisis.climateDoesNotActAsSoleCause crisisBoundary
-  ≡ refl
-climateNotSoleCause = refl
-
-------------------------------------------------------------------------
--- 13. Canonical public-interest threat-atlas boundary.
+-- 11. Canonical boundary.
 ------------------------------------------------------------------------
 
 record ActivistThreatAtlasBoundary : Set where
@@ -471,37 +386,26 @@ record ActivistThreatAtlasBoundary : Set where
   field
     climateDriverListIsLocalCausalFinding : Bool
     climateDriverListIsLocalCausalFindingIsFalse : climateDriverListIsLocalCausalFinding ≡ false
-
     activistConcernCreatesTargetingAuthority : Bool
     activistConcernCreatesTargetingAuthorityIsFalse : activistConcernCreatesTargetingAuthority ≡ false
-
     vulnerablePersonLocationShouldBeMaximallyExposed : Bool
     vulnerablePersonLocationShouldBeMaximallyExposedIsFalse : vulnerablePersonLocationShouldBeMaximallyExposed ≡ false
-
     politicalTheologyNarrativeIsSupernaturalFact : Bool
     politicalTheologyNarrativeIsSupernaturalFactIsFalse : politicalTheologyNarrativeIsSupernaturalFact ≡ false
-
     trumpCanBeFormallyProvedAntichristFromPoliticalEvidence : Bool
     trumpCanBeFormallyProvedAntichristFromPoliticalEvidenceIsFalse : trumpCanBeFormallyProvedAntichristFromPoliticalEvidence ≡ false
-
     christianZionismIsSingleUniformEndTimesDoctrine : Bool
     christianZionismIsSingleUniformEndTimesDoctrineIsFalse : christianZionismIsSingleUniformEndTimesDoctrine ≡ false
-
     islamMayBeCollapsedToSinglePoliticalActor : Bool
     islamMayBeCollapsedToSinglePoliticalActorIsFalse : islamMayBeCollapsedToSinglePoliticalActor ≡ false
-
     amalekRoleBindingCreatesPopulationIdentity : Bool
     amalekRoleBindingCreatesPopulationIdentityIsFalse : amalekRoleBindingCreatesPopulationIdentity ≡ false
-
     climatePressureErasesPoliticalResponsibility : Bool
     climatePressureErasesPoliticalResponsibilityIsFalse : climatePressureErasesPoliticalResponsibility ≡ false
-
     marketProfitCreatesPublicInterestAuthority : Bool
     marketProfitCreatesPublicInterestAuthorityIsFalse : marketProfitCreatesPublicInterestAuthority ≡ false
-
     publicInterestObservationMustPreserveContestability : Bool
     publicInterestObservationMustPreserveContestabilityIsTrue : publicInterestObservationMustPreserveContestability ≡ true
-
     powerHolderAccountabilityAndVulnerablePersonExposureAreDistinct : Bool
     powerHolderAccountabilityAndVulnerablePersonExposureAreDistinctIsTrue : powerHolderAccountabilityAndVulnerablePersonExposureAreDistinct ≡ true
 
