@@ -60,12 +60,12 @@ hoeMathLevelsSource : Source.AttributedSource
 hoeMathLevelsSource =
   Source.mkNoDOISource
     "hoe_math"
-    "LEVELS [1: INTRODUCTION] / Levels chart"
+    "LEVELS [1: INTRODUCTION]"
     "itishoemath.com"
-    "2025-2026 web publication; chart lineage originally circulated earlier"
+    "2025-2026 web publication; model circulated earlier in video/chart form"
     "https://itishoemath.com/levels-1-introduction/"
     Source.practitionerSource
-    "presenter-owned simplification/interpretation of staged psychological-development models; not treated as an original scientific discovery or universal empirical law"
+    "presenter-owned explanation and simplification of staged psychological-development material; the presenter explicitly describes the model as theoretical and based on multiple researchers"
     Source.publicAttribution
 
 hoeMathLevelsChartSource : Source.AttributedSource
@@ -77,7 +77,7 @@ hoeMathLevelsChartSource =
     "2025-2026"
     "https://itishoemath.com/free-levels-chart/"
     Source.practitionerSource
-    "chart explicitly distinguishes Spiral Dynamics, developmental-level and AQAL-derived materials; source traditions retain their own authorship and the assembled chart remains hoe_math's presentation"
+    "assembled pedagogical chart with separately labelled Spiral Dynamics, developmental-level and AQAL components; underlying named traditions retain their own source authorship"
     Source.publicAttribution
 
 magrittePipeSource : Source.AttributedSource
@@ -89,7 +89,7 @@ magrittePipeSource =
     "1929"
     "https://collections.lacma.org/object/31931"
     Source.institutionalSource
-    "museum carrier for Magritte's work; bounded relevance is separation of represented object, image and linguistic inscription"
+    "museum carrier for Magritte's work; bounded relevance is separation of represented object, image and linguistic inscription; museum interpretation is not silently promoted to artist-authored prose"
     Source.publicAttribution
 
 duchampFountainSource : Source.AttributedSource
@@ -97,11 +97,11 @@ duchampFountainSource =
   Source.mkNoDOISource
     "Marcel Duchamp"
     "Fountain"
-    "1917 readymade; museum documentation via MoMA/SFMOMA"
+    "1917 readymade; museum documentation via SFMOMA/MoMA"
     "1917"
     "https://www.sfmoma.org/artwork/98.291"
     Source.institutionalSource
-    "museum carrier for Duchamp's readymade challenge to object/art-status and artist-selection relations; later replicas do not change original 1917 attribution"
+    "museum carrier for Duchamp's readymade challenge to object/art-status and artist-selection relations; later replicas/reconstructions retain their own object dates without replacing the 1917 work's historical attribution"
     Source.publicAttribution
 
 kosuthChairSource : Source.AttributedSource
@@ -125,7 +125,7 @@ rauschenbergErasureSource =
     "1953"
     "https://www.sfmoma.org/artwork/98.298/"
     Source.institutionalSource
-    "museum carrier for an artwork whose meaning depends on provenance, erasure event and label/history; not reducible to the visible residual surface"
+    "museum carrier for an artwork whose meaning depends on provenance, erasure event and label/history; authorship of component acts remains distributed rather than collapsed into one name"
     Source.publicAttribution
 
 foucaultPipeSource : Source.AttributedSource
