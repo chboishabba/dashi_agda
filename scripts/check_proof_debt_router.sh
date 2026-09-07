@@ -29,6 +29,9 @@ grep -q '^scheduleAction :' DASHI/Core/ProofDebtRouterExact.agda
 grep -q '^constrainedHeavyEstablishedReplayGoesToAristotle :' DASHI/Core/ProofDebtRouterExact.agda
 grep -q '^constrainedMachineCannotReclassifyNovelMathematics :' DASHI/Core/ProofDebtRouterExact.agda
 grep -q '^unAlignedCertificationCannotBeDelegatedAsProofReplay :' DASHI/Core/ProofDebtRouterExact.agda
+grep -q '^record ExternalCertificationDemand' DASHI/Core/ProofDebtRouterExact.agda
+grep -q '^scheduleExternalCertification :' DASHI/Core/ProofDebtRouterExact.agda
+grep -q '^heavyAlignedDemandUsesAristotle :' DASHI/Core/ProofDebtRouterExact.agda
 
 grep -q '^rhLowVerifiedHeightSource :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
 grep -q '^osReconstructionSourceI :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
