@@ -17,3 +17,6 @@ import DASHI.Physics.Semiconductor.Device.SpatialContinuityRecombinationExact
 import DASHI.Physics.Semiconductor.Device.SpatialResidualSecantWeldExact
 import DASHI.Physics.Semiconductor.Device.TwoCellContinuityAssemblyExact
 import DASHI.Physics.Semiconductor.Device.TwoCellResidualSecantWeldExact
+import DASHI.Physics.Semiconductor.Device.FiniteScharfetterGummelFluxExact
+import DASHI.Physics.Semiconductor.Device.ComputedFluxTwoCellContinuityExact
+import DASHI.Physics.Semiconductor.Device.ComputedFluxResidualSecantWeldExact
