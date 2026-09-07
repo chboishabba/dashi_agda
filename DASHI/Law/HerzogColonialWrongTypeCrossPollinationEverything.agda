@@ -11,6 +11,7 @@ import DASHI.Law.HerzogColonialWrongTypeCrossSystemBridgeExact as Cross
 import DASHI.Law.HerzogColonialWrongTypeElementRequirementExact as Element
 import DASHI.Law.HerzogColonialWrongTypeLiveSchedulerExact as Live
 import DASHI.Law.HerzogColonialWrongTypeRequirementSalienceExact as Salience
+import DASHI.Law.HerzogColonialWrongTypeGenericParetoFrontierBridgeExact as GenericPareto
 import DASHI.Law.AustralianColonialWrongTypeAuthorityReclassificationExact as ColonialWrong
 import DASHI.Law.ColonialSemanticPrerequisiteWrongTypeCrossPollinationExact as ColonialPrereq
 import DASHI.Cognition.PNF.SensibLawUniversalLegalRuleAlgebraExact as Algebra
@@ -18,6 +19,7 @@ import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExa
 import DASHI.Cognition.PNF.SensibLawWrongTypeLegalElementAlgebraExact as Elements
 import DASHI.Cognition.PNF.SensibLawWrongTypeLiveResidualSchedulerExact as Scheduler
 import DASHI.Cognition.PNF.SensibLawWrongTypeRequirementSalienceFrontierExact as Frontier
+import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierExact as Pareto
 import DASHI.Cognition.PNF.SensibLawFiniteExecutableLegalSearchExact as Search
 
 ------------------------------------------------------------------------
@@ -97,6 +99,33 @@ powerPrerequisiteBecomesSalientAfterFibreUpdate :
 powerPrerequisiteBecomesSalientAfterFibreUpdate =
   Salience.powerPrerequisiteBecomesSalientAfterAuthorityClosure
 
+------------------------------------------------------------------------
+-- Generic finite Pareto-frontier pins.
+------------------------------------------------------------------------
+
+currentGenericParetoFrontierIsAuthorityMeaning :
+  Pareto.paretoFrontier GenericPareto.currentPortfolio
+  ≡ GenericPareto.currentAuthorityCell ∷ []
+currentGenericParetoFrontierIsAuthorityMeaning =
+  GenericPareto.currentParetoFrontierIsAuthorityOnly
+
+powerRemainsRequiredWhileOffCurrentParetoFrontier :
+  Pareto.requiredForConsumer GenericPareto.currentPowerCell ≡ true
+powerRemainsRequiredWhileOffCurrentParetoFrontier =
+  GenericPareto.currentPowerStillRequired
+
+afterAuthorityGenericParetoFrontierIsPower :
+  Pareto.paretoFrontier GenericPareto.afterAuthorityPortfolio
+  ≡ GenericPareto.afterAuthorityPowerCell ∷ []
+afterAuthorityGenericParetoFrontierIsPower =
+  GenericPareto.afterAuthorityParetoFrontierIsPowerOnly
+
+afterPowerGenericParetoFrontierIsIncident :
+  Pareto.paretoFrontier GenericPareto.afterPowerPortfolio
+  ≡ GenericPareto.afterPowerIncidentCell ∷ []
+afterPowerGenericParetoFrontierIsIncident =
+  GenericPareto.afterPowerParetoFrontierIsIncidentOnly
+
 analyticalWrongTypeStillDoesNotAutoApply :
   Wrong.WrongTypeInterpretationAutomaticallyApplicable → ⊥
 analyticalWrongTypeStillDoesNotAutoApply = Wrong.wrongTypeInterpretationDoesNotAutoApply
@@ -135,6 +164,8 @@ data RequiredRequirementIsAutomaticallyNextQuestion : Set where
 
 data ZeroDiscriminationDeletesRequirement : Set where
 
+data ParetoFrontierCreatesEntailment : Set where
+
 repetitionDoesNotCreateWrong : RepeatedThreatLanguageCreatesColonialWrong → ⊥
 repetitionDoesNotCreateWrong ()
 
@@ -161,6 +192,9 @@ requiredDoesNotMeanSalientNow ()
 
 zeroDiscriminationDoesNotDeleteRequirement : ZeroDiscriminationDeletesRequirement → ⊥
 zeroDiscriminationDoesNotDeleteRequirement ()
+
+paretoOrderDoesNotCreateLegalEntailment : ParetoFrontierCreatesEntailment → ⊥
+paretoOrderDoesNotCreateLegalEntailment ()
 
 data HerzogColonialAggregateMeansKernelValidated : Set where
 aggregateDoesNotClaimKernelValidation : HerzogColonialAggregateMeansKernelValidated → ⊥
