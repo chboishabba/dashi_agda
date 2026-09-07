@@ -96,7 +96,20 @@ bishopHoleFaceFlux q face =
 -- cross-multiplied law is tied to the actual finite nodal potential difference.
 ------------------------------------------------------------------------
 
+electronFaceThermalNormalization :
+  (q : Cell.SourceCharge) →
+  (face : FiniteSG.SGFace) →
+  BishopReal._≃_
+    (BishopReal._*_ Thermal.normalizedDrop Thermal.thermalVoltage)
+    (Thermal.potentialDrop q face)
 electronFaceThermalNormalization = Thermal.thermalNormalization
+
+holeFaceThermalNormalization :
+  (q : Cell.SourceCharge) →
+  (face : FiniteSG.SGFace) →
+  BishopReal._≃_
+    (BishopReal._*_ Thermal.normalizedDrop Thermal.thermalVoltage)
+    (Thermal.potentialDrop q face)
 holeFaceThermalNormalization = Thermal.thermalNormalization
 
 ------------------------------------------------------------------------
