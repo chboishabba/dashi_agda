@@ -3,6 +3,7 @@ module DASHI.Cognition.PNF.SensibLawGenocideEnforcementMeansBidiExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Cognition.PNF.SensibLawGenocideConventionEnforcementSourceAtlasExact as Sources
 
 ------------------------------------------------------------------------
@@ -289,7 +290,7 @@ canonicalNoTeethDecomposition = no-teeth-decomposition
 ------------------------------------------------------------------------
 
 sourceAtlasDoesNotCreateAuthority :
-  Sources.Source.atlasCreatesAuthority Sources.genocideEnforcementAtlas ≡ false
+  Source.atlasCreatesAuthority Sources.genocideEnforcementAtlas ≡ false
 sourceAtlasDoesNotCreateAuthority = refl
 
 ------------------------------------------------------------------------
