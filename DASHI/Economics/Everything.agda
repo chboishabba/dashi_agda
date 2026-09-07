@@ -1,5 +1,7 @@
 module DASHI.Economics.Everything where
 
+import DASHI.Core.SituatedFibreDynamicsEverything
+
 import DASHI.Economics.ReflexiveFlowValidationExact
 import DASHI.Economics.UnitEconomicsMarginExact
 import DASHI.Economics.CommonFactorStructuredFinanceExact
@@ -12,6 +14,7 @@ import DASHI.Economics.AIEconomicUsefulWorkSourceAdmissionExact
 import DASHI.Economics.AITrainingServingEconomicTimeSeriesCrossPollinationExact
 import DASHI.Economics.DashiTradeAIInfrastructureMarketCrossPollinationExact
 import DASHI.Economics.ClimateAIInfrastructureTransitionRiskCrossPollinationExact
+import DASHI.Economics.AIInfrastructureGenericFibreAdaptersExact
 
 import DASHI.Economics.AIFinancingReflexivityExact
 import DASHI.Economics.AITerminalPayerEconomicValidationExact
