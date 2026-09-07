@@ -13,29 +13,20 @@ import DASHI.Wikimedia.AristotleNativeModelSourceExact as Aristotle
 ------------------------------------------------------------------------
 -- NATIVE WIKIDATA REFERENCE-SNAK SEMANTICS
 --
--- Source donors:
---   * SensibLaw source-attribution/review discipline;
---   * RequestProject.Provenance.RefKind.reliable from the rechecked archive.
---
 -- P248 / stated in and P854 / reference URL can identify source candidates.
--- P143 / imported from Wikimedia project is provenance-only.  None of these
--- properties creates source authority/admissibility by itself.
+-- P143 / imported from Wikimedia project is provenance-only.  None creates
+-- source authority, admissibility or truth by itself.
 ------------------------------------------------------------------------
 
 p248 : Id.PropertyId
 p248 = Id.propertyId "P248"
-
 p854 : Id.PropertyId
 p854 = Id.propertyId "P854"
-
 p143 : Id.PropertyId
 p143 = Id.propertyId "P143"
 
 data NativeReferenceKind : Set where
-  statedInReference
-  referenceUrlReference
-  importedFromReference
-  otherReference
+  statedInReference referenceUrlReference importedFromReference otherReference
   : NativeReferenceKind
 
 propertyForReferenceKind : NativeReferenceKind → Id.PropertyId
@@ -45,10 +36,7 @@ propertyForReferenceKind importedFromReference = p143
 propertyForReferenceKind otherReference = Id.propertyId "OTHER"
 
 data ReferenceSourceRole : Set where
-  sourceCandidate
-  provenanceOnly
-  unresolvedReferenceRole
-  : ReferenceSourceRole
+  sourceCandidate provenanceOnly unresolvedReferenceRole : ReferenceSourceRole
 
 sourceRole : NativeReferenceKind → ReferenceSourceRole
 sourceRole statedInReference = sourceCandidate
@@ -73,7 +61,7 @@ p248SourceCandidate :
   ClassifiedReferenceSnak
 p248SourceCandidate snak refl =
   classified-reference-snak snak statedInReference refl sourceCandidate refl
-    "P248/stated-in classified as source candidate; authority remains downstream"
+    "P248/stated-in classified as external referenced-source candidate; authority remains downstream"
 
 p854SourceCandidate :
   (snak : WD.ReferenceSnak) →
@@ -81,7 +69,7 @@ p854SourceCandidate :
   ClassifiedReferenceSnak
 p854SourceCandidate snak refl =
   classified-reference-snak snak referenceUrlReference refl sourceCandidate refl
-    "P854/reference-URL classified as source candidate; content must still be inspected"
+    "P854/reference-URL classified as external referenced-source candidate; content still requires inspection"
 
 p143ProvenanceOnly :
   (snak : WD.ReferenceSnak) →
@@ -100,11 +88,21 @@ record ReferenceSourceCandidate : Set where
     classified : ClassifiedReferenceSnak
     candidateReceipt : Source.SourceReceipt
     roleIsSourceCandidate : role classified ≡ sourceCandidate
+    candidateReceiptIsExternalReferencedSource :
+      Source.layer candidateReceipt ≡ Source.externalReferencedSourceLayer
     candidateReference : String
 open ReferenceSourceCandidate public
 
--- A source candidate is still not authority, truth, admissibility, or verified
--- support for the containing Wikidata statement.
+externalSourceCandidate :
+  (classified : ClassifiedReferenceSnak) →
+  role classified ≡ sourceCandidate →
+  (receipt : Source.SourceReceipt) →
+  Source.layer receipt ≡ Source.externalReferencedSourceLayer →
+  String →
+  ReferenceSourceCandidate
+externalSourceCandidate classified roleProof receipt layerProof ref =
+  reference-source-candidate classified receipt roleProof layerProof ref
+
 data ReferenceCandidateCreatesAuthority : Set where
 data ImportedFromCreatesAuthority : Set where
 data ReferenceUrlVerifiesItsContent : Set where
@@ -112,13 +110,10 @@ data StatedInMakesContainingStatementTrue : Set where
 
 aReferenceCandidateDoesNotCreateAuthority : ReferenceCandidateCreatesAuthority → ⊥
 aReferenceCandidateDoesNotCreateAuthority ()
-
 importedFromDoesNotCreateAuthority : ImportedFromCreatesAuthority → ⊥
 importedFromDoesNotCreateAuthority ()
-
 referenceUrlDoesNotVerifyContent : ReferenceUrlVerifiesItsContent → ⊥
 referenceUrlDoesNotVerifyContent ()
-
 statedInDoesNotMakeStatementTrue : StatedInMakesContainingStatementTrue → ⊥
 statedInDoesNotMakeStatementTrue ()
 
@@ -128,9 +123,10 @@ record NativeReferenceBoundary : Set where
     p248CanIdentifySourceCandidate : Bool
     p854CanIdentifySourceCandidate : Bool
     p143IsProvenanceOnly : Bool
+    sourceCandidateRequiresExternalSourceReceipt : Bool
     sourceCandidateCreatesAuthority : Bool
     importedFromCreatesAuthority : Bool
 
 canonicalNativeReferenceBoundary : NativeReferenceBoundary
 canonicalNativeReferenceBoundary =
-  native-reference-boundary true true true false false
+  native-reference-boundary true true true true false false
