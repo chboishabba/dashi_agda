@@ -10,5 +10,6 @@ import DASHI.Cognition.VisualPatternModeGeometryEverything
 import DASHI.Cognition.PNF.SensibLawCountryUniversalLegalAlgebraEverything
 import DASHI.Cognition.PNF.SensibLawCountryJuridicalHumanityOperationalRemedyEverything
 
--- Plural epistemic-progress / remedy methodology.
+-- Plural epistemic-progress / remedy methodology and result-sensitive diagnosis.
 import DASHI.Cognition.PNF.SensibLawPluralEpistemicRepairMethodologyBidiExact
+import DASHI.Cognition.PNF.SensibLawDiagnosisRepairSchedulerBidiExact
